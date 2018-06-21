@@ -77,19 +77,15 @@ This sample application shows how to create a hello world application in C# usin
 
     ```shell
     kubectl get ing
-    ```
 
-This will return a list of ingress points and their hostnames:
-
-    ```
     NAME                        HOSTS                                                                                   ADDRESS        PORTS     AGE
     helloworld-csharp-ingress   helloworld-csharp.default.demo-domain.com,*.helloworld-csharp.default.demo-domain.com   35.232.134.1   80        1m
     ```
 
-1. Now you can make a request to your app to see the result:
+1. Now you can make a request to your app to see the result. Replace `{IP_ADDRESS}` with the address you see returned in the previous step.
 
     ```shell
-    curl -H "Host: helloworld-csharp.default.demo-domain.com" http://35.232.134.1
+    curl -H "Host: helloworld-csharp.default.demo-domain.com" http://{IP_ADDRESS}
     Hello World!
     ```
 
