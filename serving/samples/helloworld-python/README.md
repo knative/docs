@@ -5,7 +5,7 @@ When called, this application reads an env variable 'TARGET'
 and prints "Hello World: ${TARGET}!".
 If TARGET is not specified, it will use "NOT SPECIFIED" as the TARGET.
 
-## Assumptions
+## Prerequisites
 
 * You have a Kubernetes cluster with Knative installed. Follow the [installation instructions](https://github.com/knative/install/) if you need to do this. 
 * You have installed and initialized [Google Cloud SDK](https://cloud.google.com/sdk/docs/) and have created a project in Google Cloud.
