@@ -29,6 +29,16 @@ While you can clone all of the code from this directory, hello world apps are ge
             .UseStartup<Startup>().UseUrls("http://0.0.0.0:8080");
     ```
 
+1. Update the `app.Run(...)` statement in `Startup.cs` to read and return the TARGET environment variable:
+
+    ```csharp
+    app.Run(async (context) =>
+    {
+        var target = Environment.GetEnvironmentVariable("TARGET") ?? "NOT SPECIFIED";
+        await context.Response.WriteAsync($"Hello World: {target}");
+    });
+    ```
+
 1. In your project directory, create a file named `Dockerfile` and copy the code block below into it. For detailed instructions on dockerizing a .NET core app, see [dockerizing a .NET core app](https://docs.microsoft.com/en-us/dotnet/core/docker/docker-basics-dotnet-core#dockerize-the-net-core-application).
 
     ```docker
