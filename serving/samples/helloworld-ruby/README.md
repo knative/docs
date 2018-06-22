@@ -10,7 +10,6 @@ If TARGET is not specified, it will use "NOT SPECIFIED" as the TARGET.
 * You have a Kubernetes cluster with Knative installed. Follow the [installation instructions](https://github.com/knative/install/) if you need to do this. 
 * You have installed and initialized [Google Cloud SDK](https://cloud.google.com/sdk/docs/) and have created a project in Google Cloud.
 * You have `kubectl` configured to connect to the Kubernetes cluster running Knative.
-* You have installed [Ruby](https://www.ruby-lang.org/en/downloads/).
 
 ## Steps to recreate the sample code
 
