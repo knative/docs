@@ -1,6 +1,6 @@
 # Hello World - Python sample
 
-This sample application shows how to create a hello world application in Python 3.
+This sample application shows how to create a hello world application in Python.
 When called, this application reads an env variable 'TARGET' 
 and prints "Hello World: ${TARGET}!".
 If TARGET is not specified, it will use "NOT SPECIFIED" as the TARGET.
