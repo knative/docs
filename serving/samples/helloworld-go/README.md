@@ -69,7 +69,7 @@ following instructions recreate the source files from this folder.
     EXPOSE 8080
     ```
 
-1. Create a new file, `app.yaml` and copy the following service definition into the file. Make sure to replace `{PROJECT_ID}` with the ID of your Google Cloud project. If you are using docker or another container registry instead, replace the entire image path.
+1. Create a new file, `service.yaml` and copy the following service definition into the file. Make sure to replace `{PROJECT_ID}` with the ID of your Google Cloud project. If you are using docker or another container registry instead, replace the entire image path.
 
     ```yaml
     apiVersion: serving.knative.dev/v1alpha1
@@ -99,10 +99,10 @@ Once you have recreated the sample code files (or used the files in the sample f
     gcloud container builds submit --tag gcr.io/${PROJECT_ID}/helloworld-go
     ```
 
-1. After the build has completed, you can deploy the app into your cluster. Ensure that the container image value in `app.yaml` matches the container you build in the previous step. Apply the configuration using kubectl:
+1. After the build has completed, you can deploy the app into your cluster. Ensure that the container image value in `service.yaml` matches the container you build in the previous step. Apply the configuration using kubectl:
 
     ```shell
-    kubectl apply -f app.yaml
+    kubectl apply -f service.yaml
     ```
 
 1. Now that your service is created, Knative will perform the following steps:
@@ -125,11 +125,11 @@ Once you have recreated the sample code files (or used the files in the sample f
     curl -H "Host: helloworld-go.default.demo-domain.com" http://{IP_ADDRESS}
     Hello World: NOT SPECIFIED
     ```
-    
+
 ## Remove the sample app deployment
 
 To remove the sample app from your cluster, delete the service record:
 
 ```shell
-kubectl delete -f app.yaml
+kubectl delete -f service.yaml
 ```
