@@ -7,13 +7,17 @@ If TARGET is not specified, it will use "NOT SPECIFIED" as the TARGET.
 
 ## Prerequisites
 
-* You have a Kubernetes cluster with Knative installed. Follow the [installation instructions](https://github.com/knative/install/) if you need to do this. 
-* You have installed and initialized [Google Cloud SDK](https://cloud.google.com/sdk/docs/) and have created a project in Google Cloud.
+* You have a Kubernetes cluster with Knative installed. 
+Follow the [installation instructions](https://github.com/knative/install/) if you need to do this. 
+* You have installed and initialized [Google Cloud SDK](https://cloud.google.com/sdk/docs/) 
+and have created a project in Google Cloud.
 * You have `kubectl` configured to connect to the Kubernetes cluster running Knative.
 
 ## Steps to recreate the sample code
 
-While you can clone all of the code from this directory, hello world apps are generally more useful if you build them step-by-step. The following instructions recreate the source files from this folder.
+While you can clone all of the code from this directory, hello world apps are 
+generally more useful if you build them step-by-step. 
+The following instructions recreate the source files from this folder.
 
 1. Create a new directory and cd into it:
     ````shell
@@ -29,14 +33,15 @@ While you can clone all of the code from this directory, hello world apps are ge
 
     get '/' do
       target = ENV['TARGET'] || 'NOT SPECIFIED'
-      "Hello World: %s!\n" % [target]
+      "Hello World: #{target}!\n"
     end
     ```
 
-1. Create a file named `Dockerfile` and copy the code block below into it. See [official Ruby docker image](https://hub.docker.com/_/ruby/) for more details.
+1. Create a file named `Dockerfile` and copy the code block below into it. 
+See [official Ruby docker image](https://hub.docker.com/_/ruby/) for more details.
 
     ```docker
-    FROM ruby:2.5
+    FROM ruby
 
     RUN bundle config --global frozen 1
 
@@ -57,39 +62,20 @@ While you can clone all of the code from this directory, hello world apps are ge
     ```
     source 'https://rubygems.org'
 
-    gem 'rack'
     gem 'sinatra'
     ```
 
-1. Create a file named `Gemfile.lock` and copy the text block below into it.
+1. Run:
 
-    ```
-    GEM
-    remote: https://rubygems.org/
-    specs:
-        mustermann (1.0.2)
-        rack (2.0.5)
-        rack-protection (2.0.3)
-        rack
-        sinatra (2.0.3)
-        mustermann (~> 1.0)
-        rack (~> 2.0)
-        rack-protection (= 2.0.3)
-        tilt (~> 2.0)
-        tilt (2.0.8)
-
-    PLATFORMS
-    ruby
-
-    DEPENDENCIES
-    rack
-    sinatra
-
-    BUNDLED WITH
-    1.16.2
+    ```shell
+    bundle install
     ```
 
-1. Create a file named `app.yaml` and copy the following service definition into the file. Make sure to replace `{PROJECT_ID}` with the ID of your Google Cloud project. If you are using docker or another container registry instead, replace the entire image path.
+    If you don't have bundler installed, copy the [Gemfile.lock](./Gemfile.lock) to your working directory.
+
+1. Create a file named `service.yaml` and copy the following service definition into the file. 
+Make sure to replace `{PROJECT_ID}` with the ID of your Google Cloud project. 
+If you are using docker or another container registry instead, replace the entire image path.
 
     ```yaml
     apiVersion: serving.knative.dev/v1alpha1
@@ -103,7 +89,7 @@ While you can clone all of the code from this directory, hello world apps are ge
           revisionTemplate:
             spec:
               container:
-                image: gcr.io/mdemirhantestproject/helloworld-ruby
+                image: gcr.io/{PROJECT_ID}/helloworld-ruby
                 env:
                 - name: TARGET
                   value: "Ruby Sample v1"
@@ -111,18 +97,23 @@ While you can clone all of the code from this directory, hello world apps are ge
 
 ## Build and deploy this sample
 
-Once you have recreated the sample code files (or used the files in the sample folder) you're ready to build and deploy the sample app.
+Once you have recreated the sample code files (or used the files in the sample folder) 
+you're ready to build and deploy the sample app.
 
-1. For this example, we'll use Google Cloud Container Builder to build the sample into a container. To use container builder, execute the following gcloud command. Make sure to replace `${PROJECT_ID}` with the ID of your Google Cloud project.
+1. For this example, we'll use Google Cloud Container Builder to build the sample into a container. 
+To use container builder, execute the following gcloud command. Make sure to replace `${PROJECT_ID}` 
+with the ID of your Google Cloud project.
 
     ```shell
     gcloud container builds submit --tag gcr.io/${PROJECT_ID}/helloworld-ruby
     ```
 
-1. After the build has completed, you can deploy the app into your cluster. Ensure that the container image value in `app.yaml` matches the container you build in the previous step. Apply the configuration using kubectl:
+1. After the build has completed, you can deploy the app into your cluster. 
+Ensure that the container image value in `service.yaml` matches the container you build in the previous step. 
+Apply the configuration using kubectl:
 
     ```shell
-    kubectl apply -f app.yaml
+    kubectl apply -f service.yaml
     ```
 
 1. Now that your service is created, Knative will perform the following steps:
@@ -139,7 +130,8 @@ Once you have recreated the sample code files (or used the files in the sample f
     helloworld-ruby-ingress   helloworld-ruby.default.demo-domain.com,*.helloworld-ruby.default.demo-domain.com   35.232.134.1   80        1m
     ```
 
-1. Now you can make a request to your app to see the result. Replace `{IP_ADDRESS}` with the address you see returned in the previous step.
+1. Now you can make a request to your app to see the result. Replace `{IP_ADDRESS}` 
+with the address you see returned in the previous step.
 
     ```shell
     curl -H "Host: helloworld-ruby.default.demo-domain.com" http://{IP_ADDRESS}
@@ -151,5 +143,5 @@ Once you have recreated the sample code files (or used the files in the sample f
 To remove the sample app from your cluster, delete the service record:
 
 ```shell
-kubectl delete -f app.yaml
+kubectl delete -f service.yaml
 ```

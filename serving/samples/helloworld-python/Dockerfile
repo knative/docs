@@ -1,4 +1,4 @@
-FROM python:3
+FROM python
 
 ENV APP_HOME /app
 COPY . $APP_HOME
