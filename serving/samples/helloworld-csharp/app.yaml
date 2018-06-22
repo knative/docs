@@ -1,0 +1,15 @@
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: helloworld-python
+  namespace: default
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            image: gcr.io/{PROJECT_ID}/helloworld-csharp
+            env:
+            - name: TARGET
+              value: "C# Sample v1"

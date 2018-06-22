@@ -1,10 +1,12 @@
 # Hello World - .NET Core sample
 
-This sample application shows how to create a hello world application in C# using .NET Core 2.0.
+This sample application shows how to create a hello world application in C# using .NET Core 2.1.
+It reads in an env variable 'TARGET' and prints "Hello World: ${TARGET}!" if
+TARGET is not specified, it will use "NOT SPECIFIED" as the TARGET.
 
-## Assumptions
+## Prerequisites
 
-* You have a Kubernetes cluster with Knative installed. Follow the [installation instructions](https://github.com/knative/install/) if you need to do this. 
+* You have a Kubernetes cluster with Knative installed. Follow the [installation instructions](https://github.com/knative/install/) if you need to do this.
 * You have installed and initalized [Google Cloud SDK](https://cloud.google.com/sdk/docs/) and have created a project in Google Cloud.
 * You have `kubectl` configured to connect to the Kubernetes cluster running Knative.
 * You have installed [.NET Core SDK 2.1](https://www.microsoft.com/net/core).
@@ -48,8 +50,9 @@ While you can clone all of the code from this directory, hello world apps are ge
     ```yaml
     apiVersion: serving.knative.dev/v1alpha1
     kind: Service
-    name: csharp-demo
-    namespace: default
+    metadata:
+      name: helloworld-python
+      namespace: default
     spec:
       runLatest:
         configuration:
@@ -57,6 +60,9 @@ While you can clone all of the code from this directory, hello world apps are ge
             spec:
               container:
                 image: gcr.io/{PROJECT_ID}/helloworld-csharp
+                env:
+                - name: TARGET
+                  value: "C# Sample v1"
     ```
 
 ## Build and deploy this sample
@@ -85,8 +91,8 @@ Once you have recreated the sample code files (or used the files in the sample f
     ```shell
     kubectl get ing
 
-    NAME                        HOSTS                                                                                   ADDRESS        PORTS     AGE
-    helloworld-csharp-ingress   helloworld-csharp.default.demo-domain.com,*.helloworld-csharp.default.demo-domain.com   35.232.134.1   80        1m
+    NAME                        HOSTS                                       ADDRESS        PORTS     AGE
+    helloworld-csharp-ingress   helloworld-csharp.default.demo-domain.com   35.232.134.1   80        1m
     ```
 
 1. Now you can make a request to your app to see the result. Replace `{IP_ADDRESS}` with the address you see returned in the previous step.
