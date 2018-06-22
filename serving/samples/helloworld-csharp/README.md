@@ -1,4 +1,4 @@
-# .NET Core Hello World sample
+# Hello World - .NET Core sample
 
 This sample application shows how to create a hello world application in C# using .NET Core 2.0.
 
@@ -11,7 +11,7 @@ This sample application shows how to create a hello world application in C# usin
 
 ## Steps to recreate the sample code
 
-While you can clone all of the code from this directory, hello world apps are generally more useful if you build them step-by-step. The following structions recreate the source files in this folder.
+While you can clone all of the code from this directory, hello world apps are generally more useful if you build them step-by-step. The following instructions recreate the source files from this folder.
 
 1. From the console, create a new empty web project using the dotnet command:
 
