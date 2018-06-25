@@ -12,7 +12,7 @@ You can find [guides for other platforms here](README.md).
 
 > If you already have `gcloud` installed, you can skip this section.
 
-1. Download and install the `gcloud` command line tool from https://cloud.google.com/sdk/
+1. [Install the Google Cloud SDK](https://cloud.google.com/sdk/).
 1. Authorize `gcloud` to use your Google account:
 
 ```shell
@@ -72,13 +72,14 @@ gcloud services enable \
 
 ## Step 1: Create a Kubernetes Cluster
 
-Create a Kubernetes cluster on GKE (large enough to host all the Knative components).
-The recommended configuration for a cluster is:
+Create a Kubernetes cluster on GKE (large enough to host all the Knative
+components). The recommended configuration for a cluster is:
 
 * Kubernetes version 1.10 or later
 * 4 vCPU nodes (`n1-standard-4`)
 * Node autoscaling, up to 10 nodes
-* API scopes for `cloud-platform`, `logging-write`, `monitoring-write`, and `pubsub` (if those features will be used)
+* API scopes for `cloud-platform`, `logging-write`, `monitoring-write`, and
+  `pubsub` (if those features will be used)
 
 To create a cluster matching these requriements:
 
@@ -93,7 +94,8 @@ gcloud container clusters create $CLUSTER_NAME \
 ```  
 
 After the cluster is created, grant `cluster-admin` permissions to the current
-user. These permissions are required to create the necessary [RBAC rules for Istio](https://istio.io/docs/concepts/security/rbac/).
+user. These permissions are required to create the necessary
+[RBAC rules for Istio](https://istio.io/docs/concepts/security/rbac/).
 
 ```shell
 kubectl create clusterrolebinding cluster-admin-binding \
@@ -113,7 +115,8 @@ kubectl apply -f https://storage.googleapis.com/knative-releases/latest/istio.ya
 kubectl label namespace default istio-injection=enabled
 ```
 
-Monitor the Istio components, until all of the components report `Running` or `Completed`:
+Monitor the Istio components, until all of the components report `Running` or
+`Completed`:
 
 ```shell
 kubectl get pods -n istio-system --watch
@@ -144,13 +147,14 @@ newly created Knative cluster.
 ## Step 4: Run Hello World
 
 Now that your cluster is running the Knative components, follow the insturctions
-for one of the [sample apps](../serving/samples/README.MD) to deploy your first app.
+for one of the [sample apps](../serving/samples/README.MD) to deploy your first
+app.
 
 ## Cleanup (optional)
 
 Running a cluster in Kubernetes Engine will cost you money, so if you aren't
-using it you may wish to delete the cluster when you're done.
-Deleting the cluster will also remove Knative, Istio, and any apps you've deployed.
+using it you may wish to delete the cluster when you're done. Deleting the
+cluster will also remove Knative, Istio, and any apps you've deployed.
 
 ```shell
 gcloud container clusters delete $CLUSTER_NAME --zone $CLUSTER_ZONE
