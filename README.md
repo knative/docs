@@ -1,2 +1,73 @@
-# docs
-Documentation for Knative developer
+# Documentation for Knative developer
+
+Knative (pronounced /ˈnā-tiv/) extends Kubernetes to provide the
+missing middleware that developers need to create modern,
+source-centric, container-based, cloud-native applications.
+
+Each of the components under the Knative project attempt to identify
+common patterns and codify the best practices shared by successful
+real-world Kubernetes-based frameworks and applications, such as:
+
+- orchestrating source-to-container workflows
+- routing and managing traffic during deployment
+- scaling and sizing resources based on demand
+- binding running services to eventing ecosystems
+
+Knative focuses on the "boring but difficult" parts that everyone
+needs, but no one benefits from doing over again on their own. This in
+turn frees application developers to spend more time writing
+interesting code, not worrying about how they are going to build,
+deploy, monitor, and debug it.
+
+## What are the Knative components?
+
+Currently, Knative consists of the following top-level repositories:
+
+- [build](https://github.com/knative/build) and
+    [build-templates](https://github.com/knative/build-templates) —
+    automatic, repeatable server-side container builds
+- [serving](https://github.com/knative/serving) — scale to zero,
+  request-driven compute
+- [eventing](https://github.com/knative/eventing) — management and
+  delivery of events
+
+We expect this list to grow as more areas are identified.
+
+## How do I use Knative
+
+You can choose to install individual Knative components following the
+instructions in each repo, or install a pre-built suite of components
+by following the instructions for your platform:
+
+- [Google Kubernetes Engine](install/install-on-gke.md)
+- [MiniKube](install/install-on-minikube.md)
+
+## Who is Knative for
+
+Knative is being created with several [personas](./docs/product/personas.md) in mind.
+
+### Developers
+
+Knative components offer Kubernetes-native APIs for deploying
+functions, applications, and containers to an auto-scaling runtime.
+
+To get started as a developer, [pick a Kubernetes cluster of your
+choice](https://kubernetes.io/docs/setup/pick-right-solution/) and
+follow the [Knative installation
+instructions](https://github.com/knative/install) to get the system up
+and running and [run some sample code](./sample/README.md). The
+install instructions also include a [sample
+application](https://github.com/knative/install#test-app) which
+demonstrates some of the key features of Knative.
+
+To join the conversation, head over to
+https://groups.google.com/d/forum/knative-users.
+
+### Operators
+
+Knative components are intended to be integrated into more polished
+products that cloud service providers or in-house teams in large
+enterprises can then operate.
+
+Any enterprise or cloud provider can adopt Knative components into
+their own systems and pass the benefits along to their customers.
