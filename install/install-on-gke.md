@@ -1,19 +1,39 @@
-# Knative the easy way
+# Knative the easy way (on Google Kubernetes Engine)
 
-This guide walks you through the installation of the latest version of [Knative](https://github.com/knative/serving) using pre-built images and demonstrates deployment of a sample app onto the newly created Knative cluster.
+This guide walks you through the installation of the latest version of
+[Knative serving](https://github.com/knative/serving) using pre-built images on
+a Google Kubernetes Engine cluster.
+
+You can find [guides for other platforms here](README.md).
 
 ## Prerequisites
 
-Knative requires a Kubernetes cluster (v1.10 or newer). If you don't have one, you can create one on Google Cloud Platform.
-You can also use Minikube; see the [Knative the easy way with Minikube](Knative-with-Minikube.md) guide for instructions.
+### Install gcloud SDK
 
-First, define a few environment variables. If you already have a default project set in `gcloud`, enter:
+> If you already have `gcloud` installed, you can skip this section.
+
+1. Download and install the `gcloud` command line tool from https://cloud.google.com/sdk/
+1. Authorize `gcloud` to use your Google account:
+
+```shell
+gcloud auth login
+```
+
+### Define environment variables
+
+To simply the command lines for this walkthrough, we need to define a few
+environment variables.
+
+If you already have a default project set in `gcloud`, enter:
 
 ```shell
 export PROJECT_ID=$(gcloud config get-value project)
 ```
 
-Or, if you don't have an existing GCP project you'd like to use, replace `my-knative-project` with your desired project ID. This variable will be used later to create your new GCP project. The project ID must be globally unique across all GCP projects.
+Or, if you don't have an existing GCP project you'd like to use,
+replace `my-knative-project` with your desired project ID. This variable will
+be used later to create your new GCP project. The project ID must be globally
+unique across all GCP projects.
 
 ```shell
 export PROJECT_ID=my-knative-project
@@ -26,147 +46,112 @@ export CLUSTER_NAME=knative
 export CLUSTER_ZONE=us-west1-c
 ```
 
-## Setup
+### Register a Google Cloud Platform Project
 
-### gcloud CLI
+If you already have a GCP project configured, make sure your project is set
+as your `gcloud` default:
 
-> If you already have `gcloud` installed, you can skip this section. 
-
-Download and install the `gcloud` command line tool:
-
-   https://cloud.google.com/sdk/
-
-Authorize `gcloud`:
-
-```
-gcloud auth login
-```
-
-### Google Cloud Platform Project
-
-If you already have a GCP project configured, make sure your project is set as your `gcloud` default:
-
-```
+```shell
 gcloud config set project $PROJECT_ID
 ```
 
 If you don't already have a GCP project configured, create a new project:
 
-```
+```shell
 gcloud projects create $PROJECT_ID --set-as-default
 ```
 
-Enable the necessary APIs:
+Enable the necessary APIs in this project:
 
-```
+```shell
 gcloud services enable \
   cloudapis.googleapis.com \
   container.googleapis.com \
   containerregistry.googleapis.com
 ```
 
-## Kubernetes
+## Step 1: Create a Kubernetes Cluster
 
-Create a Kubernetes cluster on GKE (large enough to host all the Knative and Istio components):
+Create a Kubernetes cluster on GKE (large enough to host all the Knative components).
+The recommended configuration for a cluster is:
 
-```
+* Kubernetes version 1.10 or later
+* 4 vCPU nodes (`n1-standard-4`)
+* Node autoscaling, up to 10 nodes
+* API scopes for `cloud-platform`, `logging-write`, `monitoring-write`, and `pubsub` (if those features will be used)
+
+To create a cluster matching these requriements:
+
+```shell
 gcloud container clusters create $CLUSTER_NAME \
   --zone=$CLUSTER_ZONE \
-  --cluster-version 1.10.2-gke.3 \
+  --cluster-version latest \
   --machine-type n1-standard-4 \
   --enable-autoscaling --min-nodes=1 --max-nodes=10 \
   --scopes=cloud-platform,logging-write,monitoring-write,pubsub \
-  --num-nodes 3 \
-  --image-type ubuntu
+  --num-nodes 3
 ```  
 
-Grant cluster-admin permissions to the current user: 
+After the cluster is created, grant `cluster-admin` permissions to the current
+user. These permissions are required to create the necessary [RBAC rules for Istio](https://istio.io/docs/concepts/security/rbac/).
 
-```bash
+```shell
 kubectl create clusterrolebinding cluster-admin-binding \
   --clusterrole=cluster-admin \
   --user=$(gcloud config get-value core/account)
 ```
 
-Admin permissions are required to create the necessary [RBAC rules for Istio](https://istio.io/docs/concepts/security/rbac/).
+## Step 2: Install Istio
 
-## Istio
+Knative depends on Istio, which must be installed first:
 
-Knative depends on Istio. Install Istio:
-
-```bash
+```shell
+# Install from pre-compiled images
 kubectl apply -f https://storage.googleapis.com/knative-releases/latest/istio.yaml
 
 # Label the default namespace with istio-injection=enabled.
 kubectl label namespace default istio-injection=enabled
 ```
 
-Wait until each Istio component is ready (STATUS column shows 'Running' or 'Completed'):
+Monitor the Istio components, until all of the components report `Running` or `Completed`:
 
-```bash
+```shell
 kubectl get pods -n istio-system --watch
 ```
+
 CTRL+C when it's done.
 
-## Knative
+## Step 3: Install Knative Serving
 
-Next, we will install [Knative](https://github.com/knative/serving):
+Next, we will install [Knative Serving](https://github.com/knative/serving) and
+its dependencies:
 
-```bash
+```shell
 kubectl apply -f https://storage.googleapis.com/knative-releases/latest/release.yaml
 ```
 
-Wait until each Knative component is running (STATUS column shows 'Running'):
+Monitor the Knative components, until all of the components report `Running`:
 
-```bash
-kubectl get pods -n knative-serving-system --watch
-```
-CTRL+C when it's done.
- 
-Now you can deploy your app or function to your newly created Knative cluster.
-
-## Test App 
-
-The following instructions will deploy the `Primer` sample app onto your new Knative cluster.
-
-> Note, you will be deploying using a pre-built image so no need to clone the Primer repo or install anything locally. If you want to run the `Primer` app locally, see the [Primer Readme](https://github.com/mchmarny/primer) for instructions. 
-
-
-```bash
-kubectl apply -f https://storage.googleapis.com/knative-samples/primer.yaml
+```shell
+kubectl get pods -n knative-serving --watch
 ```
 
-Wait for the ingress to obtain a public IP. This may take a few seconds. You can check by running:
-
-```bash
-kubectl get ing --watch
-```
 CTRL+C when it's done.
 
-Capture the IP and host name in environment variables by running these commands:
+You are now ready to deploy apps Now you can deploy your app or function to your
+newly created Knative cluster.
 
-```bash
-export SERVICE_IP=$(kubectl get ing primer-ingress \
-  -o jsonpath="{.status.loadBalancer.ingress[0]['ip']}")
-  
-export SERVICE_HOST=$(kubectl get ing primer-ingress \
-  -o jsonpath="{.spec.rules[0]['host']}")
-``` 
+## Step 4: Run Hello World
 
-> Alternatively, you can create an entry in your DNS server to point your subdomain to the IP.
+Now that your cluster is running the Knative components, follow the insturctions
+for one of the [sample apps](../serving/samples/README.MD) to deploy your first app.
 
-Run the Primer app:
+## Cleanup (optional)
 
-```bash
-curl -H "Host: ${SERVICE_HOST}" http://$SERVICE_IP/5000000
-```
+Running a cluster in Kubernetes Engine will cost you money, so if you aren't
+using it you may wish to delete the cluster when you're done.
+Deleting the cluster will also remove Knative, Istio, and any apps you've deployed.
 
-The higher the number, the longer it will run.
-
-## Cleanup
-
-Delete the Kubernetes cluster, which deletes Knative, Istio, and the Primer sample app:
-
-```
+```shell
 gcloud container clusters delete $CLUSTER_NAME --zone $CLUSTER_ZONE
 ```

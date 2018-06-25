@@ -1,4 +1,4 @@
-# Knative the easy way with Minikube
+# Knative the easy way (with Minikube)
 
 This how-to will guide you through installation of the latest version of [Knative](https://github.com/knative/serving) using pre-built images and demonstrate deployment of a sample app onto the newly created Knative cluster.
 
