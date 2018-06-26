@@ -12,7 +12,7 @@ propose changes to this document in a pull request.
 
 Knative follows the [Knative Code of Conduct](code-of-conduct.md). By
 participating, you are expected to uphold this code. Please report unacceptable
-behavior to ...
+behavior to knative-code-of-conduct@googlegroups.com.
 
 ## Contributing to Documentation
 
