@@ -1,7 +1,7 @@
 # Hello World - Go
 
 A simple web app written in Go that you can use for testing.
-It reads in an env variable `TARGET` and prints "Hello World: ${TARGET}!" if
+It reads in an env variable `TARGET` and prints "Hello World: ${TARGET}!". If
 TARGET is not specified, it will use "NOT SPECIFIED" as the TARGET.
 
 ## Prerequisites
