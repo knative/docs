@@ -27,7 +27,7 @@ data:
 
 ```
 NAME                    HOSTS                                                                       ADDRESS        PORTS     AGE
-route-example-ingress   route-example.default.foo.com,*.route-example.default.foo.com   35.237.28.44   80        2m
+helloworld-go-ingress   helloworld-go.default.foo.com,*.helloworld-go.default.foo.com   35.237.28.44   80        2m
 ```
 
 4. Update DNS to point HOSTS to IP address.
