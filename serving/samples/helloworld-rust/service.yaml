@@ -12,4 +12,4 @@ spec:
             image: gcr.io/{PROJECT_ID}/helloworld-rust
             env:
             - name: TARGET
-              value: "Node.js Sample v1"
+              value: "Rust Sample v1"
