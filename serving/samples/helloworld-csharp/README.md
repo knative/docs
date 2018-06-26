@@ -10,9 +10,9 @@ TARGET is not specified, it will use "NOT SPECIFIED" as the TARGET.
 [installation instructions](https://github.com/knative/install/) if you need to create one.
 * The [Google Cloud SDK](https://cloud.google.com/sdk/docs/) is installed and initalized.
 * You have `kubectl` configured to connect to the Kubernetes cluster running Knative. If you created your cluster using the Google Cloud SDK, this has already be done. If you created your cluster from the Google Cloud Console, run the following command, replacing `CLUSTER_NAME` with the name of your cluster:
-```bash
-gcloud containers clusters get-credentials CLUSTER_NAME
-```
+    ```bash
+    gcloud containers clusters get-credentials CLUSTER_NAME
+    ```
 * You have installed [.NET Core SDK 2.1](https://www.microsoft.com/net/core).
 
 ## Recreating the sample code

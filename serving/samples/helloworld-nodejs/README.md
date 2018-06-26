@@ -13,9 +13,9 @@ TARGET is not specified, it will use "NOT SPECIFIED" as the TARGET.
   If you created your cluster using the Google Cloud SDK, this has already be done. If you
   created your cluster from the Google Cloud Console, run the following command, replacing
   `CLUSTER_NAME` with the name of your cluster:
-```bash
-gcloud containers clusters get-credentials CLUSTER_NAME
-```
+  ```bash
+  gcloud containers clusters get-credentials CLUSTER_NAME
+  ```
 * [Node.js](https://nodejs.org/en/) installed and configured.
 
 ## Recreating the sample code
