@@ -6,5 +6,5 @@ sure how to get started with Kubernetes, see [Picking the Right Solution](https:
 This repo includes step-by-step guides setuping up Kubernetes, installing Knative
 components, and running a sample app on the following platforms:
 
-- [Google Kubernetes Engine](install-on-gke.md)
-- [Minikube](install-on-minikube.md)
+- [Google Kubernetes Engine](Knative-with-GKE.md)
+- [Minikube](Knative-with-Minikube.md)
