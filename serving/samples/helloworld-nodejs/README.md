@@ -1,7 +1,7 @@
 # Hello World - Node.js
 
-A simple web app in Node that you can use for testing.
-It reads in an env variable 'TARGET' and prints "Hello World: ${TARGET}!" if
+A simple web app written in Node.js that you can use for testing.
+It reads in an env variable `TARGET` and prints "Hello World: ${TARGET}!" if
 TARGET is not specified, it will use "NOT SPECIFIED" as the TARGET.
 
 ## Prerequisites

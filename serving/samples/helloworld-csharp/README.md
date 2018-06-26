@@ -1,6 +1,6 @@
 # Hello World - .NET Core sample
 
-This sample application shows how to create a hello world application in C# using .NET Core 2.1.
+A simple web app written in C# using .NET Core 2.1 that you can use for testing.
 It reads in an env variable `TARGET` and prints "Hello World: ${TARGET}!" if
 TARGET is not specified, it will use "NOT SPECIFIED" as the TARGET.
 
