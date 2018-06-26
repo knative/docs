@@ -1,23 +1,25 @@
-# Hello World - PHP sample
+# Hello World - PHP
 
-This sample application shows how to create a hello world application in PHP.
-When called, this application reads an env variable 'TARGET' 
-and prints "Hello World: ${TARGET}!".
-If TARGET is not specified, it will use "NOT SPECIFIED" as the TARGET.
+A simple web app written in PHP that you can use for testing.application in PHP.
+It reads in an env variable `TARGET` and prints "Hello World: ${TARGET}". If
+TARGET is not specified, it will use "NOT SPECIFIED" as the TARGET.
 
 ## Prerequisites
 
-* You have a Kubernetes cluster with Knative installed. 
-Follow the [installation instructions](https://github.com/knative/install/) if you need to do this. 
-* You have installed and initialized [Google Cloud SDK](https://cloud.google.com/sdk/docs/) 
-and have created a project in Google Cloud.
-* You have `kubectl` configured to connect to the Kubernetes cluster running Knative.
+* A Kubernetes Engine cluster with Knative installed. Follow the
+[installation instructions](https://github.com/knative/install/) if you need to create one.
+* The [Google Cloud SDK](https://cloud.google.com/sdk/docs/) is installed and initalized.
+* You have `kubectl` configured to connect to the Kubernetes cluster running Knative. If you created your cluster using the Google Cloud SDK, this has already be done. If you created your cluster from the Google Cloud Console, run the following command, replacing `CLUSTER_NAME` with the name of your cluster:
 
-## Steps to recreate the sample code
+    ```bash
+    gcloud containers clusters get-credentials CLUSTER_NAME
+    ```
 
-While you can clone all of the code from this directory, hello world apps are
-generally more useful if you build them step-by-step. 
-The following instructions recreate the source files from this folder.
+## Recreating the sample code
+
+While you can clone all of the code from this directory, hello world
+apps are generally more useful if you build them step-by-step. The 
+following instructions recreate the source files from this folder.
 
 1. Create a new directory and cd into it:
     ````shell
@@ -67,22 +69,21 @@ If you are using docker or another container registry instead, replace the entir
                   value: "PHP Sample v1"
     ```
 
-## Build and deploy this sample
+## Building and deploying the sample
 
 Once you have recreated the sample code files (or used the files in the sample folder) 
 you're ready to build and deploy the sample app.
 
 1. For this example, we'll use Google Cloud Container Builder to build the sample into a container. 
-To use container builder, execute the following gcloud command. Make sure to replace `${PROJECT_ID}` 
-with the ID of your Google Cloud project.
+To use container builder, execute the following gcloud command:
 
     ```shell
     gcloud container builds submit --tag gcr.io/${PROJECT_ID}/helloworld-php
     ```
 
 1. After the build has completed, you can deploy the app into your cluster. 
-Ensure that the container image value in `service.yaml` matches the container you build in the previous step. 
-Apply the configuration using kubectl:
+Ensure that the container image value in `service.yaml` matches the container
+you build in the previous step. Apply the configuration using kubectl:
 
     ```shell
     kubectl apply -f service.yaml
@@ -110,7 +111,7 @@ with the address you see returned in the previous step.
     Hello World: PHP Sample v1!
     ```
 
-## Remove the sample app deployment
+## Removing the sample app deployment
 
 To remove the sample app from your cluster, delete the service record:
 
