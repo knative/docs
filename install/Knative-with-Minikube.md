@@ -1,4 +1,4 @@
-# Knative the easy way with Minikube
+# Knative the easy way (with Minikube)
 
 This how-to will guide you through installation of the latest version of [Knative](https://github.com/knative/serving) using pre-built images and demonstrate deployment of a sample app onto the newly created Knative cluster.
 
@@ -44,7 +44,7 @@ minikube start --memory=8192 --cpus=4 \
 
 Knative depends on Istio. Run the following to install Istio. (We are changing `LoadBalancer` to `NodePort` for the `istio-ingress` service)
 
-```bash
+```shell
 wget -O - https://storage.googleapis.com/knative-releases/latest/istio.yaml \
   | sed 's/LoadBalancer/NodePort/' \
   | kubectl apply -f -
@@ -55,51 +55,55 @@ kubectl label namespace default istio-injection=enabled
 
 Wait until each Istio component is running or completed (STATUS column shows 'Running' or 'Completed'):
 
-```bash
+```shell
 kubectl get pods -n istio-system --watch
 ```
+
 CTRL+C when it's done.
 
 ## Knative
 
 Next, we will install [Knative](https://github.com/knative/serving):
 
-We are using the https://storage.googleapis.com/elafros-releases/latest/release-lite.yaml file which omits some of the monitoring components to reduce the memory used by the Knative components since you do have limited resources available. To use the provided `release-lite.yaml` release run:
-```bash
+We are using the `https://storage.googleapis.com/elafros-releases/latest/release-lite.yaml` file which omits some of the monitoring components to reduce the memory used by the Knative components since you do have limited resources available. To use the provided `release-lite.yaml` release run:
+
+```shell
 kubectl apply -f https://storage.googleapis.com/knative-releases/latest/release-lite.yaml
 ```
 
 Wait until all Knative components are running (STATUS column shows 'Running'):
 
-```bash
+```shell
 kubectl get pods -n knative-serving-system --watch
 ```
+
 CTRL+C when it's done.
- 
+
 Now you can deploy your app/function to your newly created Knative cluster.
 
 ## Test App
 
 The following instruction will deploy the `Primer` sample app onto your new Knative cluster.
 
-> Note, you will be deploying using pre-build image so no need to clone the Primer repo or install anything locally. If you want to run the `Primer` app locally see the [Primer Readme](https://github.com/mchmarny/primer) for instructions. 
+> Note, you will be deploying using pre-build image so no need to clone the Primer repo or install anything locally. If you want to run the `Primer` app locally see the [Primer Readme](https://github.com/mchmarny/primer) for instructions.
 
-```bash
+```shell
 kubectl apply -f https://storage.googleapis.com/knative-samples/primer.yaml
 ```
 
 Wait for the ingress to gety created. This may take a few seconds. You can check by running:
 
-```bash
+```shell
 kubectl get ing --watch
 ```
+
 CTRL+C when it's done.
 
 Capture the IP and host name by running these commands:
 
-> Note that we changed the `istio-ingress` service to use a `NodePort` since `LoadBalancer` is not supported on Minikube. Here we look up the IP of the Minikube node as well as the actual port used for the ingress. 
+> Note that we changed the `istio-ingress` service to use a `NodePort` since `LoadBalancer` is not supported on Minikube. Here we look up the IP of the Minikube node as well as the actual port used for the ingress.
 
-```bash
+```shell
 export SERVICE_IP=$(minikube ip):$(kubectl get svc istio-ingress -n istio-system \
   -o 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
 
@@ -111,7 +115,7 @@ export SERVICE_HOST=`kubectl get ing primer-ingress \
 
 Run the Primer app. The higher the number, the longer it will run.
 
-```bash
+```shell
 curl -H "Host: ${SERVICE_HOST}" http://$SERVICE_IP/5000000
 ```
 
@@ -119,6 +123,6 @@ curl -H "Host: ${SERVICE_HOST}" http://$SERVICE_IP/5000000
 
 Delete the Kubernetes cluster along with Knative, Istio and Primer sample app
 
-```
+```shell
 minikube delete
 ```
