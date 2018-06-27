@@ -72,13 +72,13 @@ You can also apply an updated domain configuration config-map:
       # Although it will match all routes, it is the least-specific rule so it
       # will only be used if no other domain matches.
       demo-domain.com: |
-```
+    ```
 
 2. Apply updated domain configuration to your cluster:
 
-  ```shell
-  kubectl apply -f config-domain.yaml
-  ```
+    ```shell
+    kubectl apply -f config-domain.yaml
+    ```
 
 ## Deploy an application
 
