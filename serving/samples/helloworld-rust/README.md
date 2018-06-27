@@ -10,7 +10,103 @@ TARGET is not specified, it will use "NOT SPECIFIED" as the TARGET.
 * You have installed and initalized [Google Cloud SDK](https://cloud.google.com/sdk/docs/) and have created a project in Google Cloud.
 * You have `kubectl` configured to connect to the Kubernetes cluster running Knative.
 
+## Steps to recreate the sample code
+
+While you can clone all of the code from this directory, hello world
+apps are generally more useful if you build them step-by-step. The
+following instructions recreate the source files from this folder.
+
+1. Create a new file named `Cargo.toml` and paste the following code. This code 
+
+    ```toml
+    [package]
+    name = "hellorust"
+    version = "0.0.0"
+    publish = false
+
+    [dependencies]
+    hyper = "0.12.3"
+    pretty_env_logger = "0.2.3"
+    ```
+
+1. In an `src` folder, Create a new file named `main.rs` and paste the following code. This code creates a basic web server which listens on port 8080:
+
+    ```rust
+    #![deny(warnings)]
+    extern crate hyper;
+    extern crate pretty_env_logger;
+
+    use hyper::{Body, Response, Server};
+    use hyper::service::service_fn_ok;
+    use hyper::rt::{self, Future};
+    use std::env;
+
+    fn main() {
+        pretty_env_logger::init();
+
+        let addr = ([0, 0, 0, 0], 8080).into();
+
+        let new_service = || {
+            service_fn_ok(|_| {
+
+                let mut hello = "Hello world: ".to_string();
+                match env::var("TARGET") {
+                    Ok(target) => {hello.push_str(&target);},
+                    Err(_e) => {hello.push_str("NOT SPECIFIED")},
+                };
+
+                Response::new(Body::from(hello))
+            })
+        };
+
+        let server = Server::bind(&addr)
+            .serve(new_service)
+            .map_err(|e| eprintln!("server error: {}", e));
+
+        println!("Listening on http://{}", addr);
+
+        rt::run(server);
+    }
+    ```
+
+1. In your project directory, create a file named `Dockerfile`.
+
+    ```docker
+    FROM rust:1.27.0
+
+    WORKDIR /usr/src/app
+    COPY . .
+
+    RUN cargo install
+
+    EXPOSE 8080
+
+    CMD ["hellorust"]
+    ```
+
+1. Create a new file, `service.yaml` and copy the following service definition into the file. Make sure to replace `{PROJECT_ID}` with the ID of your Google Cloud project. If you are using docker or another container registry instead, replace the entire image path.
+
+    ```yaml
+    apiVersion: serving.knative.dev/v1alpha1
+    kind: Service
+    metadata:
+    name: helloworld-rust
+    namespace: default
+    spec:
+    runLatest:
+        configuration:
+        revisionTemplate:
+            spec:
+            container:
+                image: gcr.io/{PROJECT_ID}/helloworld-rust
+                env:
+                - name: TARGET
+                value: "Rust Sample v1"
+    ```
+
 ## Build and deploy this sample
+
+Once you have recreated the sample code files (or used the files in the sample folder) you're ready to build and deploy the sample app.
 
 1. Clone this repository and navigate into the `serving/samples/helloworld-rust` directory.
 
