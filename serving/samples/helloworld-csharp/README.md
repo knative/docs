@@ -7,12 +7,19 @@ TARGET is not specified, it will use "NOT SPECIFIED" as the TARGET.
 ## Prerequisites
 
 * A Kubernetes Engine cluster with Knative installed. Follow the
-[installation instructions](https://github.com/knative/install/) if you need to create one.
-* The [Google Cloud SDK](https://cloud.google.com/sdk/docs/) is installed and initalized.
-* You have `kubectl` configured to connect to the Kubernetes cluster running Knative. If you created your cluster using the Google Cloud SDK, this has already be done. If you created your cluster from the Google Cloud Console, run the following command, replacing `CLUSTER_NAME` with the name of your cluster:
+  [installation instructions](https://github.com/knative/install/) if you need to create one.
+* [Docker](https://www.docker.com) installed and running on your local machine,
+  and a Docker Hub account configured (we'll use it for a container registry).
+* You have `kubectl` configured to connect to the Kubernetes cluster running
+  Knative. If you created your cluster using the Google Cloud SDK, this has
+  already be done. If you created your cluster from the Google Cloud Console,
+  run the following command, replacing `CLUSTER_NAME` with the name of your 
+  cluster:
+
     ```bash
     gcloud containers clusters get-credentials CLUSTER_NAME
     ```
+
 * You have installed [.NET Core SDK 2.1](https://www.microsoft.com/net/core).
 
 ## Recreating the sample code
@@ -28,7 +35,7 @@ recreate the source files from this folder.
     ```
 
 1. Update the `CreateWebHostBuilder` definition in `Program.cs` by adding
-`.UseUrls("http://0.0.0.0:8080")` to define the serving port:
+   `.UseUrls("http://0.0.0.0:8080")` to define the serving port:
 
     ```csharp
     public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -36,7 +43,8 @@ recreate the source files from this folder.
             .UseStartup<Startup>().UseUrls("http://0.0.0.0:8080");
     ```
 
-1. Update the `app.Run(...)` statement in `Startup.cs` to read and return the TARGET environment variable:
+1. Update the `app.Run(...)` statement in `Startup.cs` to read and return the
+   TARGET environment variable:
 
     ```csharp
     app.Run(async (context) =>
@@ -47,8 +55,8 @@ recreate the source files from this folder.
     ```
 
 1. In your project directory, create a file named `Dockerfile` and copy the code
-block below into it. For detailed instructions on dockerizing a .NET core app,
-see [dockerizing a .NET core app](https://docs.microsoft.com/en-us/dotnet/core/docker/docker-basics-dotnet-core#dockerize-the-net-core-application).
+   block below into it. For detailed instructions on dockerizing a .NET core app,
+   see [dockerizing a .NET core app](https://docs.microsoft.com/en-us/dotnet/core/docker/docker-basics-dotnet-core#dockerize-the-net-core-application).
 
     ```docker
     FROM microsoft/dotnet:2.1-sdk
@@ -65,9 +73,7 @@ see [dockerizing a .NET core app](https://docs.microsoft.com/en-us/dotnet/core/d
     ```
 
 1. Create a new file, `service.yaml` and copy the following service definition
-into the file. Make sure to replace `{PROJECT_ID}` with the ID of your Google
-Cloud project. If you are using docker or another container registry instead,
-replace the entire image path.
+   into the file. Make sure to replace `{username}` with your Docker Hub username.
 
     ```yaml
     apiVersion: serving.knative.dev/v1alpha1
@@ -81,7 +87,7 @@ replace the entire image path.
           revisionTemplate:
             spec:
               container:
-                image: gcr.io/{PROJECT_ID}/helloworld-csharp
+                image: docker.io/{username}/helloworld-csharp
                 env:
                 - name: TARGET
                   value: "C# Sample v1"
@@ -92,17 +98,22 @@ replace the entire image path.
 Once you have recreated the sample code files (or used the files in the sample
 folder) you're ready to build and deploy the sample app.
 
-1. For this example, we'll use Google Cloud Container Builder to build the
-sample into a container. To use container builder, execute the following gcloud
-command:
+1. Use Docker, or another container builder, to build the sample code into a
+   container. To build and push with Docker Hub, run these commands replacing
+   `{username}` with your Docker Hub username:
 
     ```shell
-    gcloud container builds submit --tag gcr.io/${PROJECT_ID}/helloworld-csharp
+    # Build the container on your local machine
+    docker build -t {username}/helloworld-csharp .
+
+    # Push the container to docker registry
+    docker push {username}/helloworld-csharp
     ```
 
-1. After the build has completed, you can deploy the app into your cluster. Ensure
-that the container image value in `service.yaml` matches the container you built in
-the previous step. Apply the configuration using `kubectl`:
+1. After the build has completed and the container is pushed to docker hub, you
+   can deploy the app into your cluster. Ensure that the container image value
+   in `service.yaml` matches the container you built in
+   the previous step. Apply the configuration using `kubectl`:
 
     ```shell
     kubectl apply -f service.yaml
@@ -114,8 +125,8 @@ the previous step. Apply the configuration using `kubectl`:
    * Automatically scale your pods up and down (including to zero active pods).
 
 1. To find the URL and IP address for your service, use `kubectl get ing` to
-list the ingress points in the cluster. It may take a few seconds for the
-ingress point to be created.
+   list the ingress points in the cluster. It may take a few seconds for the
+   ingress point to be created.
 
     ```shell
     kubectl get ing
@@ -125,7 +136,7 @@ ingress point to be created.
     ```
 
 1. Now you can make a request to your app to see the result. Replace
-`{IP_ADDRESS}` with the address you see returned in the previous step.
+   `{IP_ADDRESS}` with the address you see returned in the previous step.
 
     ```shell
     curl -H "Host: helloworld-csharp.default.demo-domain.com" http://{IP_ADDRESS}
