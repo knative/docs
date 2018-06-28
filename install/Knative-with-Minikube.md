@@ -74,7 +74,7 @@ kubectl apply -f https://storage.googleapis.com/knative-releases/latest/release-
 Wait until all Knative components are running (STATUS column shows 'Running'):
 
 ```shell
-kubectl get pods -n knative-serving-system --watch
+kubectl get pods -n knative-serving --watch
 ```
 
 CTRL+C when it's done.
@@ -91,7 +91,7 @@ The following instruction will deploy the `Primer` sample app onto your new Knat
 kubectl apply -f https://storage.googleapis.com/knative-samples/primer.yaml
 ```
 
-Wait for the ingress to gety created. This may take a few seconds. You can check by running:
+Wait for the ingress to get created. This may take a few seconds. You can check by running:
 
 ```shell
 kubectl get ing --watch
