@@ -1,4 +1,4 @@
-# Hello World - Go
+# Hello World - Go sample
 
 A simple web app written in Go that you can use for testing.
 It reads in an env variable `TARGET` and prints "Hello World: ${TARGET}!". If
@@ -6,7 +6,7 @@ TARGET is not specified, it will use "NOT SPECIFIED" as the TARGET.
 
 ## Prerequisites
 
-* A Kubernetes Engine cluster with Knative installed. Follow the
+* A Kubernetes cluster with Knative installed. Follow the
   [installation instructions](https://github.com/knative/install/) if you need
   to create one.
 * [Docker](https://www.docker.com) installed and running on your local machine,
@@ -101,7 +101,7 @@ Once you have recreated the sample code files (or used the files in the sample
 folder) you're ready to build and deploy the sample app.
 
 1. Use Docker to build the sample code into a container. To build and push with
-   Docker Hub, run these commands replacing `{username}` with your 
+   Docker Hub, run these commands replacing `{username}` with your
    Docker Hub username:
 
     ```shell
