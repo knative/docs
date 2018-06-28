@@ -22,18 +22,18 @@ deploy, monitor, and debug it.
 ## Getting started with Knative
 
 To get started using Knative, [pick a Kubernetes cluster of your choice](https://kubernetes.io/docs/setup/pick-right-solution/)
-and follow the [Knative installation instructions](/install/install-on-gke.md)
+and follow the [Knative installation instructions](/install/Knative-with-GKE.md)
 to get the system up.
 
-There are a [number of samples](serving/samples/README.md) to help you get acquanted you can build
+There are a [number of samples](serving/samples/README.md) to help you get acquainted you can build
 and run on your cluster once it's set up.
 
 You can choose to install individual Knative components following the
 instructions in each repo, or install a pre-built suite of components
 by following the instructions for your platform:
 
-- [Google Kubernetes Engine](install/install-on-gke.md)
-- [MiniKube](install/install-on-minikube.md)
+- [Google Kubernetes Engine](install/Knative-with-GKE.md)
+- [MiniKube](install/Knative-with-Minikube.md)
 
 ## Who is Knative for
 
@@ -88,4 +88,3 @@ Currently, Knative consists of the following top-level repositories:
   request-driven compute
 
 We expect this list to grow as more areas are identified.
-
