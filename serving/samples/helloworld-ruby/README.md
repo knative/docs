@@ -131,14 +131,14 @@ you're ready to build and deploy the sample app.
     kubectl get ing
 
     NAME                        HOSTS                                                                                   ADDRESS        PORTS     AGE
-    helloworld-ruby-ingress   helloworld-ruby.default.demo-domain.com,*.helloworld-ruby.default.demo-domain.com   35.232.134.1   80        1m
+    helloworld-ruby-ingress   helloworld-ruby.default.example.com,*.helloworld-ruby.default.example.com   35.232.134.1   80        1m
     ```
 
 1. Now you can make a request to your app to see the result. Replace `{IP_ADDRESS}` 
    with the address you see returned in the previous step.
 
     ```shell
-    curl -H "Host: helloworld-ruby.default.demo-domain.com" http://{IP_ADDRESS}
+    curl -H "Host: helloworld-ruby.default.example.com" http://{IP_ADDRESS}
     Hello World: Ruby Sample v1!
     ```
 

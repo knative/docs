@@ -46,7 +46,7 @@ To access this service via `curl`, we first need to determine its ingress addres
 ```shell
 $ watch kubectl get ing
 NAME                             HOSTS                                        ADDRESS    PORTS     AGE
-steren-sample-app-ingress    steren-sample-app.default.demo-domain.net               80        3m
+steren-sample-app-ingress    steren-sample-app.default.example.net               80        3m
 ```
 
 Once the `ADDRESS` gets assigned to the cluster, you can run:

@@ -56,14 +56,14 @@ You should see 2 Ingress objects:
 
 ```
 NAME                                 HOSTS                                                                                         ADDRESS        PORTS
-login-service-ela-ingress     login-service.default.demo-domain.com,*.login-service.default.demo-domain.com    35.237.65.249      80
-search-service-ela-ingress    search-service.default.demo-domain.com,*.search-service.default.demo-domain.com   35.237.65.249      80
+login-service-ela-ingress     login-service.default.example.com,*.login-service.default.example.com    35.237.65.249      80
+search-service-ela-ingress    search-service.default.example.com,*.search-service.default.example.com   35.237.65.249      80
 ```
 The login-service-ela-ingress and search-service-ela-ingress are Ingresses corresponding to "Login" service and "Search" service.
 
 You can directly access "Search" service by running
 ```shell
-curl http://35.237.65.249 --header "Host:search-service.default.demo-domain.com"
+curl http://35.237.65.249 --header "Host:search-service.default.example.com"
 ```
 You should see
 ```
