@@ -9,7 +9,7 @@ spec:
       revisionTemplate:
         spec:
           container:
-            image: gcr.io/{PROJECT_ID}/helloworld-ruby
+            image: docker.io/{username}/helloworld-ruby
             env:
             - name: TARGET
               value: "Ruby Sample v1"

@@ -28,7 +28,7 @@ namespace helloworld_csharp
             app.Run(async (context) =>
             {
                 var target = Environment.GetEnvironmentVariable("TARGET") ?? "NOT SPECIFIED";
-                await context.Response.WriteAsync($"Hello World: {target}");
+                await context.Response.WriteAsync($"Hello World: {target}\n");
             });
         }
     }

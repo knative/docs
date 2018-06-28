@@ -9,7 +9,7 @@ spec:
       revisionTemplate:
         spec:
           container:
-            image: gcr.io/{PROJECT_ID}/helloworld-rust
+            image: docker.io/{username}/helloworld-rust
             env:
             - name: TARGET
               value: "Rust Sample v1"

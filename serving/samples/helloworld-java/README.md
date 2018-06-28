@@ -1,18 +1,16 @@
 # Hello World - Spring Boot Java sample
 
-A simple web app written in Java using Spring Boot 2.0 that you can use for testing Knative.
+A simple web app written in Java using Spring Boot 2.0 that you can use for testing.
 It reads in an env variable `TARGET` and prints "Hello World: ${TARGET}!". If
 TARGET is not specified, it will use "NOT SPECIFIED" as the TARGET.
 
 ## Prerequisites
 
-* A Kubernetes Engine cluster with Knative installed. Follow the
-[installation instructions](https://github.com/knative/docs/tree/master/install) if you need to create one.
-* The [Google Cloud SDK](https://cloud.google.com/sdk/docs/) is installed and initalized.
-* You have `kubectl` configured to connect to the Kubernetes cluster running Knative. If you created your cluster using the Google Cloud SDK, this has already be done. If you created your cluster from the Google Cloud Console, run the following command, replacing `CLUSTER_NAME` with the name of your cluster:
-    ```bash
-    gcloud containers clusters get-credentials CLUSTER_NAME
-    ```
+* A Kubernetes cluster with Knative installed. Follow the
+  [installation instructions](https://github.com/knative/install/) if you need
+  to create one.
+* [Docker](https://www.docker.com) installed and running on your local machine,
+  and a Docker Hub account configured (we'll use it for a container registry).
 * You have installed [Java SE 8 or later JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
 
 ## Recreating the sample code
@@ -54,28 +52,28 @@ recreate the source files from this folder.
     @SpringBootApplication
     public class HelloworldApplication {
 
-    	@Value("${TARGET:NOT SPECIFIED}")
-    	String target;
+        @Value("${TARGET:NOT SPECIFIED}")
+        String target;
 
-    	@RestController
-    	class HelloworldController {
-    		@GetMapping("/")
-    		String hello() {
-    			return "Hello World: " + target;
-    		}
-    	}
+        @RestController
+        class HelloworldController {
+            @GetMapping("/")
+            String hello() {
+                return "Hello World: " + target;
+            }
+        }
 
-    	public static void main(String[] args) {
-    		SpringApplication.run(HelloworldApplication.class, args);
-    	}
+        public static void main(String[] args) {
+            SpringApplication.run(HelloworldApplication.class, args);
+        }
     }
     ```
 
 1. In your project directory, create a file named `Dockerfile` and copy the code
-block below into it. For detailed instructions on dockerizing a Spring Boot app,
-see [Spring Boot with Docker](https://spring.io/guides/gs/spring-boot-docker/).
-For additional information on multi-stage docker builds for Java see
-[Creating Smaller Java Image using Docker Multi-stage Build](http://blog.arungupta.me/smaller-java-image-docker-multi-stage-build/).
+   block below into it. For detailed instructions on dockerizing a Spring Boot app,
+   see [Spring Boot with Docker](https://spring.io/guides/gs/spring-boot-docker/).
+   For additional information on multi-stage docker builds for Java see
+   [Creating Smaller Java Image using Docker Multi-stage Build](http://blog.arungupta.me/smaller-java-image-docker-multi-stage-build/).
 
     ```docker
     FROM maven:3.5-jdk-8-alpine as build
@@ -90,9 +88,7 @@ For additional information on multi-stage docker builds for Java see
     ```
 
 1. Create a new file, `service.yaml` and copy the following service definition
-into the file. Make sure to replace `{PROJECT_ID}` with the ID of your Google
-Cloud project. If you are using docker or another container registry instead,
-replace the entire image path.
+   into the file. Make sure to replace `{username}` with your Docker Hub username.
 
     ```yaml
     apiVersion: serving.knative.dev/v1alpha1
@@ -106,7 +102,7 @@ replace the entire image path.
           revisionTemplate:
             spec:
               container:
-                image: gcr.io/{PROJECT_ID}/helloworld-java
+                image: docker.io/{username}/helloworld-java
                 env:
                 - name: TARGET
                   value: "Spring Boot Sample v1"
@@ -117,17 +113,22 @@ replace the entire image path.
 Once you have recreated the sample code files (or used the files in the sample
 folder) you're ready to build and deploy the sample app.
 
-1. For this example, we'll use Google Cloud Container Builder to build the
-sample into a container. To use container builder, execute the following gcloud
-command:
+1. Use Docker to build the sample code into a container. To build and push with
+   Docker Hub, run these commands replacing `{username}` with your
+   Docker Hub username:
 
     ```shell
-    gcloud container builds submit --tag gcr.io/${PROJECT_ID}/helloworld-java
+    # Build the container on your local machine
+    docker build -t {username}/helloworld-java .
+
+    # Push the container to docker registry
+    docker push {username}/helloworld-java
     ```
 
-1. After the build has completed, you can deploy the app into your cluster. Ensure
-that the container image value in `service.yaml` matches the container you built in
-the previous step. Apply the configuration using `kubectl`:
+1. After the build has completed and the container is pushed to docker hub, you
+   can deploy the app into your cluster. Ensure that the container image value
+   in `service.yaml` matches the container you built in
+   the previous step. Apply the configuration using `kubectl`:
 
     ```shell
     kubectl apply -f service.yaml
@@ -139,8 +140,8 @@ the previous step. Apply the configuration using `kubectl`:
    * Automatically scale your pods up and down (including to zero active pods).
 
 1. To find the URL and IP address for your service, use `kubectl get ing` to
-list the ingress points in the cluster. It may take a few seconds for the
-ingress point to be created.
+   list the ingress points in the cluster. It may take a few seconds for the
+   ingress point to be created.
 
     ```shell
     kubectl get ing
@@ -150,7 +151,7 @@ ingress point to be created.
     ```
 
 1. Now you can make a request to your app to see the result. Replace
-`{IP_ADDRESS}` with the address you see returned in the previous step.
+   `{IP_ADDRESS}` with the address you see returned in the previous step.
 
     ```shell
     curl -H "Host: helloworld-java.default.demo-domain.com" http://{IP_ADDRESS}

@@ -1,17 +1,16 @@
 # Hello World - Python sample
 
-This sample application shows how to create a hello world application in Python.
-When called, this application reads an env variable 'TARGET' 
-and prints "Hello World: ${TARGET}!".
-If TARGET is not specified, it will use "NOT SPECIFIED" as the TARGET.
+A simple web app written in Python that you can use for testing.
+It reads in an env variable `TARGET` and prints "Hello World: ${TARGET}!". If
+TARGET is not specified, it will use "NOT SPECIFIED" as the TARGET.
 
 ## Prerequisites
 
-* You have a Kubernetes cluster with Knative installed. 
-Follow the [installation instructions](https://github.com/knative/install/) if you need to do this. 
-* You have installed and initialized [Google Cloud SDK](https://cloud.google.com/sdk/docs/) 
-and have created a project in Google Cloud.
-* You have `kubectl` configured to connect to the Kubernetes cluster running Knative.
+* A Kubernetes cluster with Knative installed. Follow the
+  [installation instructions](https://github.com/knative/install/) if you need
+  to create one.
+* [Docker](https://www.docker.com) installed and running on your local machine,
+  and a Docker Hub account configured (we'll use it for a container registry).
 
 ## Steps to recreate the sample code
 
@@ -20,6 +19,7 @@ generally more useful if you build them step-by-step.
 The following instructions recreate the source files from this folder.
 
 1. Create a new directory and cd into it:
+
     ````shell
     mkdir app
     cd app
@@ -42,8 +42,8 @@ The following instructions recreate the source files from this folder.
         app.run(debug=True,host='0.0.0.0',port=8080)
     ```
 
-1. Create a file named `Dockerfile` and copy the code block below into it. 
-See [official Python docker image](https://hub.docker.com/_/python/) for more details.
+1. Create a file named `Dockerfile` and copy the code block below into it.
+   See [official Python docker image](https://hub.docker.com/_/python/) for more details.
 
     ```docker
     FROM python
@@ -58,9 +58,8 @@ See [official Python docker image](https://hub.docker.com/_/python/) for more de
     CMD ["app.py"]
     ```
 
-1. Create a file named `service.yaml` and copy the following service definition into the file. 
-Make sure to replace `{PROJECT_ID}` with the ID of your Google Cloud project. 
-If you are using docker or another container registry instead, replace the entire image path.
+1. Create a new file, `service.yaml` and copy the following service definition
+   into the file. Make sure to replace `{username}` with your Docker Hub username.
 
     ```yaml
     apiVersion: serving.knative.dev/v1alpha1
@@ -74,7 +73,7 @@ If you are using docker or another container registry instead, replace the entir
           revisionTemplate:
             spec:
               container:
-                image: gcr.io/{PROJECT_ID}/helloworld-python
+                image: docker.io/{username}/helloworld-python
                 env:
                 - name: TARGET
                   value: "Python Sample v1"
@@ -82,20 +81,25 @@ If you are using docker or another container registry instead, replace the entir
 
 ## Build and deploy this sample
 
-Once you have recreated the sample code files (or used the files in the sample folder) 
-you're ready to build and deploy the sample app.
+Once you have recreated the sample code files (or used the files in the sample
+folder) you're ready to build and deploy the sample app.
 
-1. For this example, we'll use Google Cloud Container Builder to build the sample into a container. 
-To use container builder, execute the following gcloud command. Make sure to replace `${PROJECT_ID}` 
-with the ID of your Google Cloud project.
+1. Use Docker to build the sample code into a container. To build and push with
+   Docker Hub, run these commands replacing `{username}` with your
+   Docker Hub username:
 
     ```shell
-    gcloud container builds submit --tag gcr.io/${PROJECT_ID}/helloworld-python
+    # Build the container on your local machine
+    docker build -t {username}/helloworld-python .
+
+    # Push the container to docker registry
+    docker push {username}/helloworld-python
     ```
 
-1. After the build has completed, you can deploy the app into your cluster. 
-Ensure that the container image value in `service.yaml` matches the container you build in the previous step. 
-Apply the configuration using kubectl:
+1. After the build has completed and the container is pushed to docker hub, you
+   can deploy the app into your cluster. Ensure that the container image value
+   in `service.yaml` matches the container you built in
+   the previous step. Apply the configuration using `kubectl`:
 
     ```shell
     kubectl apply -f service.yaml
@@ -116,7 +120,7 @@ Apply the configuration using kubectl:
     ```
 
 1. Now you can make a request to your app to see the result. Replace `{IP_ADDRESS}` 
-with the address you see returned in the previous step.
+   with the address you see returned in the previous step.
 
     ```shell
     curl -H "Host: helloworld-python.default.demo-domain.com" http://{IP_ADDRESS}

@@ -9,7 +9,7 @@ spec:
       revisionTemplate:
         spec:
           container:
-            image: gcr.io/{PROJECT_ID}/helloworld-python
+            image: docker.io/{username}/helloworld-python
             env:
             - name: TARGET
               value: "Python Sample v1"

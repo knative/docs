@@ -9,7 +9,7 @@ spec:
       revisionTemplate:
         spec:
           container:
-            image: gcr.io/{PROJECT_ID}/helloworld-go
+            image: docker.io/{username}/helloworld-go
             env:
             - name: TARGET
               value: "Go Sample v1"
