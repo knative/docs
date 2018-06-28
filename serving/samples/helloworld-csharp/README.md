@@ -41,7 +41,7 @@ recreate the source files from this folder.
     app.Run(async (context) =>
     {
         var target = Environment.GetEnvironmentVariable("TARGET") ?? "NOT SPECIFIED";
-        await context.Response.WriteAsync($"Hello World: {target}");
+        await context.Response.WriteAsync($"Hello World: {target}\n");
     });
     ```
 
@@ -89,9 +89,9 @@ recreate the source files from this folder.
 Once you have recreated the sample code files (or used the files in the sample
 folder) you're ready to build and deploy the sample app.
 
-1. Use Docker, or another container builder, to build the sample code into a
-   container. To build and push with Docker Hub, run these commands replacing
-   `{username}` with your Docker Hub username:
+1. Use Docker to build the sample code into a container. To build and push with
+   Docker Hub, run these commands replacing `{username}` with your 
+   Docker Hub username:
 
     ```shell
     # Build the container on your local machine
