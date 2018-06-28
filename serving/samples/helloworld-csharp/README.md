@@ -90,7 +90,7 @@ Once you have recreated the sample code files (or used the files in the sample
 folder) you're ready to build and deploy the sample app.
 
 1. Use Docker to build the sample code into a container. To build and push with
-   Docker Hub, run these commands replacing `{username}` with your 
+   Docker Hub, run these commands replacing `{username}` with your
    Docker Hub username:
 
     ```shell
