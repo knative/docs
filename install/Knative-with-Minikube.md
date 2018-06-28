@@ -65,7 +65,7 @@ CTRL+C when it's done.
 
 Next, we will install [Knative](https://github.com/knative/serving):
 
-We are using the `https://storage.googleapis.com/elafros-releases/latest/release-lite.yaml` file which omits some of the monitoring components to reduce the memory used by the Knative components since you do have limited resources available. To use the provided `release-lite.yaml` release run:
+We are using the `https://storage.googleapis.com/knative-releases/latest/release-lite.yaml` file which omits some of the monitoring components to reduce the memory used by the Knative components since you do have limited resources available. To use the provided `release-lite.yaml` release run:
 
 ```shell
 kubectl apply -f https://storage.googleapis.com/knative-releases/latest/release-lite.yaml
@@ -74,7 +74,7 @@ kubectl apply -f https://storage.googleapis.com/knative-releases/latest/release-
 Wait until all Knative components are running (STATUS column shows 'Running'):
 
 ```shell
-kubectl get pods -n knative-serving-system --watch
+kubectl get pods -n knative-serving --watch
 ```
 
 CTRL+C when it's done.
