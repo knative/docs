@@ -72,8 +72,10 @@ recreate the source files from this folder.
     ```
 
 1. In your project directory, create a file named `Dockerfile` and copy the code
-block below into it. For detailed instructions on dockerizing a .NET core app,
-see [dockerizing a .NET core app](https://docs.microsoft.com/en-us/dotnet/core/docker/docker-basics-dotnet-core#dockerize-the-net-core-application).
+block below into it. For detailed instructions on dockerizing a Spring Boot app,
+see [Spring Boot with Docker](https://spring.io/guides/gs/spring-boot-docker/).
+For additional information on multi-stage docker builds for Java see
+[Creating Smaller Java Image using Docker Multi-stage Build](http://blog.arungupta.me/smaller-java-image-docker-multi-stage-build/).
 
     ```docker
     FROM maven:3.5-jdk-8-alpine as build
