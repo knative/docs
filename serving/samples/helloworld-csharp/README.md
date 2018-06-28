@@ -7,7 +7,7 @@ TARGET is not specified, it will use "NOT SPECIFIED" as the TARGET.
 ## Prerequisites
 
 * A Kubernetes Engine cluster with Knative installed. Follow the
-  [installation instructions](https://github.com/knative/install/) if you need 
+  [installation instructions](https://github.com/knative/install/) if you need
   to create one.
 * [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
