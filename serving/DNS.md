@@ -28,24 +28,20 @@ data:
   # Default value for domain, for routes that does not have app=prod labels.
   # Although it will match all routes, it is the least-specific rule so it
   # will only be used if no other domain matches.
-  demo-domain.com: |
+  demo-domain.com: ""
+kind: ConfigMap
+[...]
 ```
 
 Edit the file to replace `demo-domain.com` with the new domain you wish to use 
-and save your changes:
+and save your changes. In this example, we configure `example.com` for all routes: 
 
 ```yaml
 apiVersion: v1
 data:
-  # These are example settings of domain.
-  knative.app: |
-    selector:
-      app: prod
-
-  # Default value for domain, for routes that does not have app=prod labels.
-  # Although it will match all routes, it is the least-specific rule so it
-  # will only be used if no other domain matches.
-  knative.dev: |
+  example.com: ""
+kind: ConfigMap
+[...]
 ```
 
 ## Apply from a file
@@ -71,7 +67,7 @@ You can also apply an updated domain configuration config-map:
       # Default value for domain, for routes that does not have app=prod labels.
       # Although it will match all routes, it is the least-specific rule so it
       # will only be used if no other domain matches.
-      demo-domain.com: |
+      demo-domain.com: ""
     ```
 
 2. Apply updated domain configuration to your cluster:
@@ -96,7 +92,7 @@ assigned IP address:
 $ kubectl get ingress
 
 NAME                    HOSTS                                                                   ADDRESS        PORTS     AGE
-helloworld-go-ingress   helloworld-go.default.knative.dev,*.helloworld-go.default.knative.dev   35.237.28.44   80        2m
+helloworld-go-ingress   helloworld-go.default.example.com,*.helloworld-go.default.example.com   35.237.28.44   80        2m
 ```
 
 ## Update your DNS records
@@ -124,6 +120,6 @@ If you are using Google Cloud DNS, you can find step-by-step instructions
 in the [Cloud DNS quickstart](https://cloud.google.com/dns/quickstart).
 
 
-Once the domain update has propigated, you can then access your app using 
+Once the domain update has propagated, you can then access your app using 
 the fully qualified domain name of the deployed route, for example
 `http://helloworld-go.default.knative.dev`
