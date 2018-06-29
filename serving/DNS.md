@@ -1,13 +1,13 @@
 # Use a Custom Domain
 
-By default, Knative Serving routes use `demo-domain.com` as the default domain.
+By default, Knative Serving routes use `example.com` as the default domain.
 The fully qualified domain name for a route by default is `{route}.{namespace}.{default-domain}`.
 
 To change the {default-domain} value there are a few steps involved:
 
 ## Edit using kubectl
 
-1. Edit the domain configuration config-map to replace `demo-domain.com` 
+1. Edit the domain configuration config-map to replace `example.com` 
    with your own customer domain, for example `knative.dev`:
 
 ```shell
@@ -20,26 +20,26 @@ This will open your default text editor and allow you to edit the config map.
 apiVersion: v1
 data:
   # These are example settings of domain.
-  # prod-domain.com will be used for routes having app=prod.
-  prod-domain.com: |
+  # example.org will be used for routes having app=prod.
+  example.org: |
     selector:
       app: prod
 
   # Default value for domain, for routes that does not have app=prod labels.
   # Although it will match all routes, it is the least-specific rule so it
   # will only be used if no other domain matches.
-  demo-domain.com: ""
+  example.com: ""
 kind: ConfigMap
 [...]
 ```
 
-Edit the file to replace `demo-domain.com` with the new domain you wish to use 
-and save your changes. In this example, we configure `example.com` for all routes: 
+Edit the file to replace `example.org` with the new domain you wish to use 
+and save your changes. In this example, we configure `knative.dev` for all routes: 
 
 ```yaml
 apiVersion: v1
 data:
-  example.com: ""
+  knative.dev: ""
 kind: ConfigMap
 [...]
 ```
@@ -60,14 +60,14 @@ You can also apply an updated domain configuration config-map:
       namespace: knative-serving
     data:
       # These are example settings of domain.
-      # prod-domain.com will be used for routes having app=prod.
-      prod-domain.com: |
+      # example.org will be used for routes having app=prod.
+      example.org: |
         selector:
           app: prod
       # Default value for domain, for routes that does not have app=prod labels.
       # Although it will match all routes, it is the least-specific rule so it
       # will only be used if no other domain matches.
-      demo-domain.com: ""
+      example.com: ""
     ```
 
 2. Apply updated domain configuration to your cluster:
@@ -92,7 +92,7 @@ assigned IP address:
 $ kubectl get ingress
 
 NAME                    HOSTS                                                                   ADDRESS        PORTS     AGE
-helloworld-go-ingress   helloworld-go.default.example.com,*.helloworld-go.default.example.com   35.237.28.44   80        2m
+helloworld-go-ingress   helloworld-go.default.knative.dev,*.helloworld-go.default.knative.dev   35.237.28.44   80        2m
 ```
 
 ## Update your DNS records
