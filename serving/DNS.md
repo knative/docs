@@ -1,7 +1,7 @@
 # Use a Custom Domain
 
 By default, Knative Serving routes use `demo-domain.com` as the default domain.
-The FDQN for a route by default is `{route}.{namespace}.{default-domain}`.
+The fully qualified domain name for a route by default is `{route}.{namespace}.{default-domain}`.
 
 To change the {default-domain} value there are a few steps involved:
 
@@ -104,7 +104,7 @@ helloworld-go-ingress   helloworld-go.default.knative.dev,*.helloworld-go.defaul
 To enable the new custom domain to work in a browser, you need to update your
 DNS provider to point to the IP address for your service ingress.
 
-* Create an A record to point from the FDQN (shown as HOSTS in the ingress 
+* Create an A record to point from the fully qualified domain name (shown as HOSTS in the ingress 
   output) to the IP address listed:
   
     ```dns
@@ -125,5 +125,5 @@ in the [Cloud DNS quickstart](https://cloud.google.com/dns/quickstart).
 
 
 Once the domain update has propigated, you can then access your app using 
-the FQDN of the deployed route, for example
+the fully qualified domain name of the deployed route, for example
 `http://helloworld-go.default.knative.dev`
