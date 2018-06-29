@@ -100,10 +100,15 @@ helloworld-go-ingress   helloworld-go.default.knative.dev,*.helloworld-go.defaul
 ```
 
 ## Local DNS setup
-You can map the domain to the Ingress IP address in your local machine by 
-adding the following record into file "/etc/hosts":
-```
-<your-ingress-ip-address>   <your-domain-name>
+You can map the domain to the Ingress IP address in your local machine with:
+```shell
+export INGRESS_IP=`kubectl get ingress <your-ingress-name> -o jsonpath="{.status.loadBalancer.ingress[*]['ip']}"`
+
+export DOMAIN_NAME=<your-custom-domain>
+
+# Add the map of Ingress IP and domain name into file "/etc/hosts"
+echo -e "$INGRESS_IP\t$DOMAIN_NAME" | sudo tee -a /etc/hosts
+
 ```
 By this way, you can access your domain from the browser in your machine and
  do some quick checks.
