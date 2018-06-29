@@ -142,7 +142,7 @@ folder) you're ready to build and deploy the sample app.
 
     ```shell
     curl -H "Host: helloworld-go.default.demo-domain.com" http://{IP_ADDRESS}
-    Hello World: NOT SPECIFIED
+    Hello World: Go Sample v1!
     ```
 
 ## Removing the sample app deployment
