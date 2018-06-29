@@ -106,7 +106,7 @@ export INGRESS_IP=`kubectl get ingress <your-ingress-name> -o jsonpath="{.status
 
 export DOMAIN_NAME=<your-custom-domain>
 
-# Add the map of Ingress IP and domain name into file "/etc/hosts"
+# Add the record of Ingress IP and domain name into file "/etc/hosts"
 echo -e "$INGRESS_IP\t$DOMAIN_NAME" | sudo tee -a /etc/hosts
 
 ```
