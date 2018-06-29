@@ -110,7 +110,7 @@ By this way, you can access your domain from the browser in your machine and
 
 ## Publish your Domain
 
-Follow below steps to make your domain publicly accessible.
+Follow the below steps to make your domain publicly accessible.
 
 ### Set static IP for Ingresses
 You may want to set static IP for your Ingresses so that the Ingress IP will
