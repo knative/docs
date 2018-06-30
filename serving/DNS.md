@@ -1,13 +1,13 @@
 # Use a Custom Domain
 
-By default, Knative Serving routes use `demo-domain.com` as the default domain.
-The FDQN for a route by default is `{route}.{namespace}.{default-domain}`.
+By default, Knative Serving routes use `example.com` as the default domain.
+The fully qualified domain name for a route by default is `{route}.{namespace}.{default-domain}`.
 
 To change the {default-domain} value there are a few steps involved:
 
 ## Edit using kubectl
 
-1. Edit the domain configuration config-map to replace `demo-domain.com` 
+1. Edit the domain configuration config-map to replace `example.com` 
    with your own customer domain, for example `knative.dev`:
 
 ```shell
@@ -20,32 +20,28 @@ This will open your default text editor and allow you to edit the config map.
 apiVersion: v1
 data:
   # These are example settings of domain.
-  # prod-domain.com will be used for routes having app=prod.
-  prod-domain.com: |
+  # example.org will be used for routes having app=prod.
+  example.org: |
     selector:
       app: prod
 
   # Default value for domain, for routes that does not have app=prod labels.
   # Although it will match all routes, it is the least-specific rule so it
   # will only be used if no other domain matches.
-  demo-domain.com: |
+  example.com: ""
+kind: ConfigMap
+[...]
 ```
 
-Edit the file to replace `demo-domain.com` with the new domain you wish to use 
-and save your changes:
+Edit the file to replace `example.org` with the new domain you wish to use 
+and save your changes. In this example, we configure `knative.dev` for all routes: 
 
 ```yaml
 apiVersion: v1
 data:
-  # These are example settings of domain.
-  knative.app: |
-    selector:
-      app: prod
-
-  # Default value for domain, for routes that does not have app=prod labels.
-  # Although it will match all routes, it is the least-specific rule so it
-  # will only be used if no other domain matches.
-  knative.dev: |
+  knative.dev: ""
+kind: ConfigMap
+[...]
 ```
 
 ## Apply from a file
@@ -64,14 +60,14 @@ You can also apply an updated domain configuration config-map:
       namespace: knative-serving
     data:
       # These are example settings of domain.
-      # prod-domain.com will be used for routes having app=prod.
-      prod-domain.com: |
+      # example.org will be used for routes having app=prod.
+      example.org: |
         selector:
           app: prod
       # Default value for domain, for routes that does not have app=prod labels.
       # Although it will match all routes, it is the least-specific rule so it
       # will only be used if no other domain matches.
-      demo-domain.com: |
+      example.com: ""
     ```
 
 2. Apply updated domain configuration to your cluster:
@@ -127,7 +123,7 @@ Follow the [instructions](https://github.com/knative/serving/blob/master/docs/se
 To publish your domain, you need to update your DNS provider to point to the 
 IP address for your service ingress.
 
-* Create an A record to point from the FDQN (shown as HOSTS in the ingress 
+* Create an A record to point from the fully qualified domain name (shown as HOSTS in the ingress 
   output) to the IP address listed:
   
     ```dns
@@ -147,6 +143,6 @@ If you are using Google Cloud DNS, you can find step-by-step instructions
 in the [Cloud DNS quickstart](https://cloud.google.com/dns/quickstart).
 
 
-Once the domain update has propigated, you can then access your app using 
-the FQDN of the deployed route, for example
+Once the domain update has propagated, you can then access your app using 
+the fully qualified domain name of the deployed route, for example
 `http://helloworld-go.default.knative.dev`
