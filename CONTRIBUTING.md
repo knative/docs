@@ -30,6 +30,14 @@ see a documentation issue, submit an issue using the following steps:
 Note that code issues should be filed against the individual Knative repositories,
 while documentation issues should go in the `docs` repository.
 
+### Put your docs in the right place
+
+Knative uses the `docs` repository for all general documentation for Knative
+components. However, formal specifications or documentation most relevant to
+contributors of a component should be placed in the `docs` folder within a
+given component's repository. An example of this is the [spec](https://github.com/knative/serving/tree/master/docs/spec)
+folder within the Serving component.
+
 ### Submitting Documentation Pull Requests
 
 If you're fixing an issue in the existing documentation, you should submit a
