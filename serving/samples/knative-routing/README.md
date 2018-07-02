@@ -1,16 +1,15 @@
 # Routing across Knative Services
 
 This example shows how to map multiple Knative services to different paths 
-under a single domain name using the Istio Ingress and RouteRule concepts. 
+under a single domain name using the Istio VirtualSerivce concept. 
 Since Istio is a general-purpose reverse proxy, these directions can also be 
 used to configure routing based on other request data such as headers, or even 
 to map Knative and external resources under the same domain name.
 
 In this sample, we set up two web services: "Search" service and "Login" 
 service, which simply read in an env variable 'SERVICE_NAME' and prints 
-"${SERVICE_NAME} is called". We'll then create an Ingress with host 
-"example.com", and routing rules so that example.com/search maps to the Search 
-service, and example.com/login maps to the Login service.
+"${SERVICE_NAME} is called". We'll then create a VirtualSerivce with host 
+"example.com", and define routing rules in the VirtualService so that example.com/search maps to the Search service, and example.com/login maps to the Login service.
 
 ## Prerequisites
 
@@ -43,99 +42,87 @@ kubectl apply -f sample/knative-routing/sample.yaml
 ```
 
 ## Exploring
-Once deployed, you can inspect Knative services with
-```shell
-kubectl get service.knative.dev
-```
-You should see 2 Knative services: Search and Login.
-And you can inspect the corresponding Ingress with
-```shell
-kubectl get Ingress
-```
-You should see 2 Ingress objects:
 
+A shared Gateway "knative-shared-gateway" is used within Knative service mesh for serving all incoming traffic. You can inspect it and its corresponding k8s service with
+```shell
+# Check shared Gateway
+kubectl get Gateway -n knative-serving -oyaml
+
+# Check the corresponding k8s service for the shared gateway
+kubectl get svc knative-ingressgateway -n istio-system -oyaml
 ```
-NAME                                 HOSTS                                                                                         ADDRESS        PORTS
-login-service-ela-ingress     login-service.default.example.com,*.login-service.default.example.com    35.237.65.249      80
-search-service-ela-ingress    search-service.default.example.com,*.search-service.default.example.com   35.237.65.249      80
+
+And you can inspect the deployed Knative services with
+```shell
+kubectl get service.serving.knative.dev
 ```
-The login-service-ela-ingress and search-service-ela-ingress are Ingresses corresponding to "Login" service and "Search" service.
+You should see 2 Knative services: search-service and login-service.
 
 You can directly access "Search" service by running
 ```shell
-curl http://35.237.65.249 --header "Host:search-service.default.example.com"
+# Get the ingress IP.
+export GATEWAY_IP=`kubectl get svc knative-ingressgateway -n istio-system -o jsonpath="{.status.loadBalancer.ingress[*]['ip']}"`
+
+export SERVICE_HOST=`kubectl get route search-service -o jsonpath="{.status.domain}"`
+
+curl http://${GATEWAY_IP} --header "Host:${SERVICE_HOST}"
 ```
 You should see
 ```
 Search Service is called !
 ```
-Similarly, you can also directly access "Login" service.
+Similarly, you can also directly access "Login" service with
+```shell
+# Get the ingress IP.
+export GATEWAY_IP=`kubectl get svc knative-ingressgateway -n istio-system -o jsonpath="{.status.loadBalancer.ingress[*]['ip']}"`
+
+export SERVICE_HOST=`kubectl get route login-service -o jsonpath="{.status.domain}"`
+
+curl http://${GATEWAY_IP} --header "Host:${SERVICE_HOST}"
+```
 
 ## Apply Custom Routing Rule
+
 You can apply the custom routing rule defined in "routing.yaml" file with
 ```shell
 kubectl apply -f sample/knative-routing/routing.yaml
 ```
-The routing.yaml file will generate a new Ingress "entry-ingress" for domain 
-"example.com". You can see it by running
+The routing.yaml file will generate a new VirtualService "entry-route" for 
+domain "example.com". You can see it by running
 ```shell
-kubectl get Ingress
+kubectl get VirtualService entry-route -o yaml
 ```
-And you should see "entry-ingress" is added into the Ingress results:
-```
-NAME            HOSTS         ADDRESS         PORTS     AGE
-entry-ingress   example.com   35.237.65.249   80        4h
-```
+
 Now you can send request to "Search" service and "Login" service by using 
 different URI.
 
 ```shell
+# Get the ingress IP.
+export GATEWAY_IP=`kubectl get svc knative-ingressgateway -n istio-system -o jsonpath="{.status.loadBalancer.ingress[*]['ip']}"`
+
 # send request to Search service
-curl http://35.237.65.249/search --header "Host:example.com"
+curl http://${GATEWAY_IP}/search --header "Host:example.com"
 
 # send request to Login service
-curl http://35.237.65.249/login --header "Host:example.com"
+curl http://${GATEWAY_IP}/login --header "Host:example.com"
 ```
 You should get the same results as you directly access these services.
 
-## Exploring Custom Routing Rule
-Besides "entry-ingress" Ingress, there are another 3 objects that are 
-generated: 
-"entry-service" Service, "entry-route-search" RouteRule and 
-"entry-route-login" RouteRule.
-
-You can inspect the details of each objects by running:
-```shell
-# Check details of entry-service Service:
-kubectl get Service entry-service -o yaml
-
-# Check details of entry-route-search RouteRule
-kubectl get RouteRule entry-route-search -o yaml
-
-# Check details of entry-route-login RouteRule
-kubectl get RouteRule entry-route-login -o yaml
-```
 
 ## How It Works
+
 This is the traffic flow of this sample:
 ![Object model](images/knative-routing-sample-flow.png)
 
-4 components are defined in order to implement the routing.
-1. Ingress "entry-ingress": a new Ingress entry for routing traffic.
-2. Service "entry-service": a placeholder service needed for setting up Ingress and RouteRule
-3. RouteRule "entry-route-search": a RouteRule that checks if request has URI "
-/search", and forwards the request to "Search" service.
-4. RouteRule "entry-route-login": a RouteRule that checks if request has URI "
-/login", and forwards the request to "Login" service.
 
-When an external request reaches "entry-ingress" Ingress, the Ingress proxy 
-will check if it has "/search" or "/login" URI. If it has, then the host of 
+When an external request with host "example.com" reaches 
+"knative-shared-gateway" Gateway, the "entry-route" VirtualService will check 
+if it has "/search" or "/login" URI. If it has, then the host of 
 request will be rewritten into the host of "Search" service or "Login" service 
 correspondingly, which actually resets the final destination of the request. 
-The host rewriting is defined in RouteRule ""entry-route-search" and "entry-route-login".
-The request with updated host will be forwarded to Ingress proxy again. The 
-Ingress proxy checks the updated host, and forwards it to "Search" or "Login" 
-service according to its host setting.
+The request with updated host will be forwarded to "knative-shared-gateway" 
+Gateway again. The Gateway proxy checks the updated host, and forwards it to 
+"Search" or "Login" service according to its host setting.
 
 ## Cleaning up
 
