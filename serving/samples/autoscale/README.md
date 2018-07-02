@@ -29,14 +29,14 @@ kubectl apply -f sample/autoscale/sample.yaml
 
 ```
 
-Export your Ingress IP as SERVICE_IP.
+Export your ingress IP as SERVICE_IP.
 
 ```shell
-# Put the Ingress Host name into an environment variable.
+# Put the ingress Host name into an environment variable.
 export SERVICE_HOST=`kubectl get route autoscale-route -o jsonpath="{.status.domain}"`
 
-# Put the Ingress IP into an environment variable.
-export SERVICE_IP=`kubectl get ingress autoscale-route-ingress -o jsonpath="{.status.loadBalancer.ingress[*]['ip']}"`
+# Put the ingress IP into an environment variable.
+export SERVICE_IP=`kubectl get svc knative-ingressgateway -n istio-system -o jsonpath="{.status.loadBalancer.ingress[*].ip}"`
 ```
 
 Request the largest prime less than 40,000,000 from the autoscale app.  Note that it consumes about 1 cpu/sec.

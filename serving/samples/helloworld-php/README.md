@@ -69,7 +69,7 @@ following instructions recreate the source files from this folder.
 
 ## Building and deploying the sample
 
-Once you have recreated the sample code files (or used the files in the sample folder) 
+Once you have recreated the sample code files (or used the files in the sample folder)
 you're ready to build and deploy the sample app.
 
 1. Use Docker to build the sample code into a container. To build and push with
@@ -98,13 +98,17 @@ you're ready to build and deploy the sample app.
    * Network programming to create a route, ingress, service, and load balance for your app.
    * Automatically scale your pods up and down (including to zero active pods).
 
-1. To find the URL and IP address for your service, use kubectl to list the ingress points in the cluster:
+1. To find the URL and IP address for your service, use
+   `kubectl get svc knative-ingressgateway -n istio-system` to get the ingress IP for your
+   cluster. If your cluster is new, it may take sometime for the service to get asssigned
+   an external IP address.
 
     ```shell
-    kubectl get ing
+    kubectl get svc knative-ingressgateway -n istio-system
 
-    NAME                        HOSTS                                                                                   ADDRESS        PORTS     AGE
-    helloworld-php-ingress   helloworld-php.default.example.com,*.helloworld-php.default.example.com   35.232.134.1   80        1m
+    NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
+    knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
+
     ```
 
 1. Now you can make a request to your app to see the result. Replace
