@@ -1,17 +1,17 @@
 # Routing across Knative Services
 
 This example shows how to map multiple Knative services to different paths 
-under a single domain name using the Istio VirtualSerivce concept. 
+under a single domain name using the Istio VirtualService concept. 
 Since Istio is a general-purpose reverse proxy, these directions can also be 
 used to configure routing based on other request data such as headers, or even 
 to map Knative and external resources under the same domain name.
 
 In this sample, we set up two web services: "Search" service and "Login" 
 service, which simply read in an env variable 'SERVICE_NAME' and prints 
-"${SERVICE_NAME} is called". We'll then create a VirtualSerivce with host 
+"${SERVICE_NAME} is called". We'll then create a VirtualService with host 
 "example.com", and define routing rules in the VirtualService so that 
-example.com/search maps to the Search service, and example.com/login maps to 
-the Login service.
+"example.com/search" maps to the Search service, and "example.com/login" maps 
+to the Login service.
 
 ## Prerequisites
 
