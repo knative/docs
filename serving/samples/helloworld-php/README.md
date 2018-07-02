@@ -98,7 +98,7 @@ you're ready to build and deploy the sample app.
    * Network programming to create a route, ingress, service, and load balance for your app.
    * Automatically scale your pods up and down (including to zero active pods).
 
-1. To find the URL and IP address for your service, use
+1. To find the IP address for your service, use
    `kubectl get svc knative-ingressgateway -n istio-system` to get the ingress IP for your
    cluster. If your cluster is new, it may take sometime for the service to get asssigned
    an external IP address.
@@ -109,6 +109,13 @@ you're ready to build and deploy the sample app.
     NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
     knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
 
+    ```
+
+1. To find the URL for your service, use
+    ```
+    kubectl get services.serving.knative.dev helloworld-php  -o=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+    NAME                DOMAIN
+    helloworld-php      helloworld-php.default.example.com
     ```
 
 1. Now you can make a request to your app to see the result. Replace
