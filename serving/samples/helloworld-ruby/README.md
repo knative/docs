@@ -14,8 +14,8 @@ TARGET is not specified, it will use "NOT SPECIFIED" as the TARGET.
 
 ## Steps to recreate the sample code
 
-While you can clone all of the code from this directory, hello world apps are 
-generally more useful if you build them step-by-step. 
+While you can clone all of the code from this directory, hello world apps are
+generally more useful if you build them step-by-step.
 The following instructions recreate the source files from this folder.
 
 1. Create a new directory and cd into it:
@@ -38,7 +38,7 @@ The following instructions recreate the source files from this folder.
     end
     ```
 
-1. Create a file named `Dockerfile` and copy the code block below into it. 
+1. Create a file named `Dockerfile` and copy the code block below into it.
    See [official Ruby docker image](https://hub.docker.com/_/ruby/) for more details.
 
     ```docker
@@ -66,7 +66,7 @@ The following instructions recreate the source files from this folder.
     gem 'sinatra'
     ```
 
-1. Run bundle. If you don't have bundler installed, copy the 
+1. Run bundle. If you don't have bundler installed, copy the
    [Gemfile.lock](./Gemfile.lock) to your working directory.
 
     ```shell
@@ -96,7 +96,7 @@ The following instructions recreate the source files from this folder.
 
 ## Build and deploy this sample
 
-Once you have recreated the sample code files (or used the files in the sample folder) 
+Once you have recreated the sample code files (or used the files in the sample folder)
 you're ready to build and deploy the sample app.
 
 1. Use Docker to build the sample code into a container. To build and push with
@@ -125,16 +125,27 @@ you're ready to build and deploy the sample app.
    * Network programming to create a route, ingress, service, and load balance for your app.
    * Automatically scale your pods up and down (including to zero active pods).
 
-1. To find the URL and IP address for your service, use kubectl to list the ingress points in the cluster:
+1. To find the IP address for your service, use
+   `kubectl get svc knative-ingressgateway -n istio-system` to get the ingress IP for your
+   cluster. If your cluster is new, it may take sometime for the service to get asssigned
+   an external IP address.
 
     ```shell
-    kubectl get ing
+    kubectl get svc knative-ingressgateway -n istio-system
 
-    NAME                        HOSTS                                                                                   ADDRESS        PORTS     AGE
-    helloworld-ruby-ingress   helloworld-ruby.default.example.com,*.helloworld-ruby.default.example.com   35.232.134.1   80        1m
+    NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
+    knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
+
     ```
 
-1. Now you can make a request to your app to see the result. Replace `{IP_ADDRESS}` 
+1. To find the URL for your service, use
+    ```
+    kubectl get services.serving.knative.dev helloworld-ruby  -o=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+    NAME                DOMAIN
+    helloworld-ruby     helloworld-ruby.default.example.com
+    ```
+
+1. Now you can make a request to your app to see the result. Replace `{IP_ADDRESS}`
    with the address you see returned in the previous step.
 
     ```shell
