@@ -9,7 +9,9 @@ to map Knative and external resources under the same domain name.
 In this sample, we set up two web services: "Search" service and "Login" 
 service, which simply read in an env variable 'SERVICE_NAME' and prints 
 "${SERVICE_NAME} is called". We'll then create a VirtualSerivce with host 
-"example.com", and define routing rules in the VirtualService so that example.com/search maps to the Search service, and example.com/login maps to the Login service.
+"example.com", and define routing rules in the VirtualService so that 
+example.com/search maps to the Search service, and example.com/login maps to 
+the Login service.
 
 ## Prerequisites
 
@@ -43,7 +45,9 @@ kubectl apply -f sample/knative-routing/sample.yaml
 
 ## Exploring
 
-A shared Gateway "knative-shared-gateway" is used within Knative service mesh for serving all incoming traffic. You can inspect it and its corresponding k8s service with
+A shared Gateway "knative-shared-gateway" is used within Knative service mesh 
+for serving all incoming traffic. You can inspect it and its corresponding k8s 
+service with
 ```shell
 # Check shared Gateway
 kubectl get Gateway -n knative-serving -oyaml
@@ -80,10 +84,14 @@ export SERVICE_HOST=`kubectl get route login-service -o jsonpath="{.status.domai
 
 curl http://${GATEWAY_IP} --header "Host:${SERVICE_HOST}"
 ```
+You should see
+```
+Login Service is called !
+```
 
 ## Apply Custom Routing Rule
 
-You can apply the custom routing rule defined in "routing.yaml" file with
+You can apply the custom routing rules defined in "routing.yaml" file with
 ```shell
 kubectl apply -f sample/knative-routing/routing.yaml
 ```
