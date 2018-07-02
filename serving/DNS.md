@@ -95,10 +95,33 @@ NAME                    HOSTS                                                   
 helloworld-go-ingress   helloworld-go.default.knative.dev,*.helloworld-go.default.knative.dev   35.237.28.44   80        2m
 ```
 
-## Update your DNS records
+## Local DNS setup
+You can map the domain to the Ingress IP address in your local machine with:
+```shell
+export INGRESS_IP=`kubectl get ingress <your-ingress-name> -o jsonpath="{.status.loadBalancer.ingress[*]['ip']}"`
 
-To enable the new custom domain to work in a browser, you need to update your
-DNS provider to point to the IP address for your service ingress.
+export DOMAIN_NAME=<your-custom-domain>
+
+# Add the record of Ingress IP and domain name into file "/etc/hosts"
+echo -e "$INGRESS_IP\t$DOMAIN_NAME" | sudo tee -a /etc/hosts
+
+```
+By this way, you can access your domain from the browser in your machine and
+ do some quick checks.
+
+## Publish your Domain
+
+Follow the below steps to make your domain publicly accessible.
+
+### Set static IP for Ingresses
+You may want to set static IP for your Ingresses so that the Ingress IP will
+ not be changed after restarting your cluster.
+Follow the [instructions](https://github.com/knative/serving/blob/master/docs/setting-up-ingress-static-ip.md) to set static IP for Ingresses.
+
+### Update your DNS records
+
+To publish your domain, you need to update your DNS provider to point to the 
+IP address for your service ingress.
 
 * Create an A record to point from the fully qualified domain name (shown as HOSTS in the ingress 
   output) to the IP address listed:
