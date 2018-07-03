@@ -53,6 +53,9 @@ For more information on the resources and their interactions, see the
 [Resource Types Overview](https://github.com/knative/serving/blob/master/docs/spec/overview.md)
 in the Knative Serving repo.
 
+To serve workloads from a custom domain, see [Use a custom domain](DNS.md) for details on how to override
+the default `example.com` domain.
+
 ## Known Issues
 
 See the [Knative Serving Issues](https://github.com/knative/serving/issues) for a full list of
