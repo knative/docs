@@ -118,11 +118,12 @@ if (( IS_PROW )) || [[ -n ${PROJECT_ID} ]]; then
   kubectl apply -f ${SERVING_RELEASE}
   exit_if_test_failed "could not install Knative Serving"
 
+  wait_until_pods_running knative-serving
   wait_until_pods_running build-system
 fi
 
-header "Running tests"
 # TODO(#30): Add tests.
+header "TODO(#30): Write integration tests"
 
 # kubetest teardown might fail and thus incorrectly report failure of the
 # script, even if the tests pass.
