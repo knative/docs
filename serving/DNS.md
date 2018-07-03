@@ -7,8 +7,8 @@ To change the {default-domain} value there are a few steps involved:
 
 ## Edit using kubectl
 
-1. Edit the domain configuration config-map to replace `example.com` 
-   with your own customer domain, for example `knative-example.com`:
+1. Edit the domain configuration config-map to replace `example.com`
+   with your own customer domain, for example `mydomain.com`:
 
 ```shell
 kubectl edit cm config-domain -n knative-serving
@@ -34,13 +34,12 @@ kind: ConfigMap
 ```
 
 Edit the file to replace `example.com` and `example.org` with the new domains
-you wish to use and save your changes. In this example, we configure `
-knative-example.com` for all routes: 
+you wish to use and save your changes. In this example, we configure `mydomain.com.com` for all routes: 
 
 ```yaml
 apiVersion: v1
 data:
-  knative-example.com: ""
+  mydomain.com: ""
 kind: ConfigMap
 [...]
 ```
@@ -90,8 +89,7 @@ Knative Route "helloworld-go" with
 ```shell
 kubectl get route helloworld-go -o jsonpath="{.status.domain}"
 ```
-You should see the full customized domain is `
-helloworld-go.default.knative-example.com`.
+You should see the full customized domain is `helloworld-go.default.mydomain.com`.
 
 And you can check the IP address of Knative gateway with
 ```shell
@@ -134,7 +132,7 @@ IP address for your service ingress.
 * Create an A record to point from the fully qualified domain name to the IP address of Knative Gateway.
   
     ```dns
-    helloworld-go.default.knative-example.com        59     IN     A   35.237.28.44
+    helloworld-go.default.mydomain.com        59     IN     A   35.237.28.44
     ```
 
 * Create a [wildcard record](https://support.google.com/domains/answer/4633759)
@@ -142,7 +140,7 @@ IP address for your service ingress.
   creating additional DNS entries.
 
     ```dns
-    *.default.knative-example.com                   59     IN     A   35.237.28.44
+    *.default.mydomain.com                   59     IN     A   35.237.28.44
     ```
 
 If you are using Google Cloud DNS, you can find step-by-step instructions
@@ -151,4 +149,4 @@ in the [Cloud DNS quickstart](https://cloud.google.com/dns/quickstart).
 
 Once the domain update has propagated, you can then access your app using 
 the fully qualified domain name of the deployed route, for example
-`http://helloworld-go.default.knative-example.com`
+`http://helloworld-go.default.mydomain.com`
