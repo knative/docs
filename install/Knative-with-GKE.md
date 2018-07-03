@@ -147,7 +147,7 @@ newly created Knative cluster.
 ## Step 4: Run Hello World
 
 Now that your cluster is running the Knative components, follow the insturctions
-for one of the [sample apps](../serving/samples/README.MD) to deploy your first
+for one of the [sample apps](../serving/samples/README.md) to deploy your first
 app.
 
 ## Cleanup (optional)
