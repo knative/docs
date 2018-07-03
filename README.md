@@ -76,16 +76,8 @@ friction logs from new developers are especially welcome.
 
 ## What are the Knative components
 
-Currently, Knative consists of the following top-level repositories:
+The following Knative components are currently available:
 
-- [build](https://github.com/knative/build) and
-  [build-templates](https://github.com/knative/build-templates) —
-  automatic, repeatable server-side container builds
-- [docs](https://github.com/knative/docs) - documentation for developers and
-  operators using Knative components.
-- [eventing](https://github.com/knative/eventing) — management and
-  delivery of events
-- [serving](https://github.com/knative/serving) — scale to zero,
-  request-driven compute
-
-We expect this list to grow as more areas are identified.
+- [Build](build/README.md) - Source to container build orchestration
+- [Events](events/README.md) - Management and delivery of events
+- [Serving](serving/README.md) - Scale to zero, request-driven compute
