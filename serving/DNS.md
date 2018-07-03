@@ -33,7 +33,7 @@ kind: ConfigMap
 [...]
 ```
 
-Edit the file to replace `example.org` with the new domain you wish to use 
+Edit the file to replace `example.com` with the new domain you wish to use 
 and save your changes. In this example, we configure `knative.dev` for all routes: 
 
 ```yaml
@@ -49,7 +49,7 @@ kind: ConfigMap
 You can also apply an updated domain configuration config-map:
 
 1. Create a new file, `config-domain.yaml` and paste the following text,
-   replacing the `prod-domain.com` and `demo-domain.com` values with the new
+   replacing the `example.org` and `example.com` values with the new
    domain you want to use:
 
     ```yaml
@@ -83,27 +83,32 @@ You can also apply an updated domain configuration config-map:
 > services and routes.
 
 
-Deploy an app to your cluster as normal. For example, if you use the 
-[`helloworld-go`](./samples/helloworld-go/README.md) sample app, when the 
-ingress is ready, you'll see customized domain in HOSTS field together with 
-assigned IP address:
-
+Deploy an app, for example, [`helloworld-go`](./samples/helloworld-go/README.md
+) sample, to your cluster as normal. You can check the customized domain in 
+Knative Route "helloworld-go" with
 ```shell
-$ kubectl get ingress
+kubectl get route helloworld-go -o jsonpath="{.status.domain}"
+```
+You should see the full customized domain is `helloworld-go.default.knative.dev`.
 
-NAME                    HOSTS                                                                   ADDRESS        PORTS     AGE
-helloworld-go-ingress   helloworld-go.default.knative.dev,*.helloworld-go.default.knative.dev   35.237.28.44   80        2m
+And you can check the IP address of Knative gateway with
+```shell
+kubectl get svc knative-ingressgateway -n istio-system -o jsonpath="{.status.loadBalancer.ingress[*]['ip']}"
 ```
 
 ## Local DNS setup
-You can map the domain to the Ingress IP address in your local machine with:
+
+You can map the domain to the IP address of Knative Gateway in your local 
+machine with:
 ```shell
-export INGRESS_IP=`kubectl get ingress <your-ingress-name> -o jsonpath="{.status.loadBalancer.ingress[*]['ip']}"`
+export GATEWAY_IP=`kubectl get svc knative-ingressgateway -n istio-system -o jsonpath="{.status.loadBalancer.ingress[*]['ip']}"`
 
-export DOMAIN_NAME=<your-custom-domain>
+# helloworld-go is the generated Knative Route of "helloworld-go" sample.
+# You need to replace it with your own Route in your project.
+export DOMAIN_NAME=`kubectl get route helloworld-go -o jsonpath="{.status.domain}"`
 
-# Add the record of Ingress IP and domain name into file "/etc/hosts"
-echo -e "$INGRESS_IP\t$DOMAIN_NAME" | sudo tee -a /etc/hosts
+# Add the record of Gateway IP and domain name into file "/etc/hosts"
+echo -e "$GATEWAY_IP\t$DOMAIN_NAME" | sudo tee -a /etc/hosts
 
 ```
 By this way, you can access your domain from the browser in your machine and
@@ -113,30 +118,29 @@ By this way, you can access your domain from the browser in your machine and
 
 Follow the below steps to make your domain publicly accessible.
 
-### Set static IP for Ingresses
-You may want to set static IP for your Ingresses so that the Ingress IP will
- not be changed after restarting your cluster.
-Follow the [instructions](https://github.com/knative/serving/blob/master/docs/setting-up-ingress-static-ip.md) to set static IP for Ingresses.
+### Set static IP for Knative Gateway
+
+You may want to set static IP for your Knative Gateway so that the Gateway IP 
+will not be changed after restarting your cluster.
+Follow the [instructions](https://github.com/knative/serving/blob/master/docs/setting-up-ingress-static-ip.md) to set static IP for Knative Gateway.
 
 ### Update your DNS records
 
 To publish your domain, you need to update your DNS provider to point to the 
 IP address for your service ingress.
 
-* Create an A record to point from the fully qualified domain name (shown as HOSTS in the ingress 
-  output) to the IP address listed:
+* Create an A record to point from the fully qualified domain name to the IP address of Knative Gateway.
   
     ```dns
-    helloworld-go.default.         59     IN     A   35.237.28.44
+    helloworld-go.default.knative.dev        59     IN     A   35.237.28.44
     ```
 
 * Create a [wildcard record](https://support.google.com/domains/answer/4633759)
-  for the namespace and custom domain to the ingress IP Address. This will 
-  enable hostnames for multiple services in the same namespace to work without
+  for the namespace and custom domain to the ingress IP Address. This will enable hostnames for multiple services in the same namespace to work without
   creating additional DNS entries.
 
     ```dns
-    *.default.                   59     IN     A   35.237.28.44
+    *.default.knative.dev                   59     IN     A   35.237.28.44
     ```
 
 If you are using Google Cloud DNS, you can find step-by-step instructions
