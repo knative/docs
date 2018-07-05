@@ -34,7 +34,7 @@ kind: ConfigMap
 ```
 
 Edit the file to replace `example.com` and `example.org` with the new domains
-you wish to use and save your changes. In this example, we configure `mydomain.com.com` for all routes: 
+you wish to use and save your changes. In this example, we configure `mydomain.com` for all routes: 
 
 ```yaml
 apiVersion: v1
@@ -83,8 +83,7 @@ You can also apply an updated domain configuration config-map:
 > services and routes.
 
 
-Deploy an app, for example, [`helloworld-go`](./samples/helloworld-go/README.md
-) sample, to your cluster as normal. You can check the customized domain in 
+Deploy an app (for example, [`helloworld-go`](./samples/helloworld-go/README.md)), to your cluster as normal. You can check the customized domain in 
 Knative Route "helloworld-go" with
 ```shell
 kubectl get route helloworld-go -o jsonpath="{.status.domain}"
@@ -129,18 +128,20 @@ Follow the [instructions](https://github.com/knative/serving/blob/master/docs/se
 To publish your domain, you need to update your DNS provider to point to the 
 IP address for your service ingress.
 
-* Create an A record to point from the fully qualified domain name to the IP address of Knative Gateway.
-  
-    ```dns
-    helloworld-go.default.mydomain.com        59     IN     A   35.237.28.44
-    ```
-
 * Create a [wildcard record](https://support.google.com/domains/answer/4633759)
   for the namespace and custom domain to the ingress IP Address. This will enable hostnames for multiple services in the same namespace to work without
   creating additional DNS entries.
 
     ```dns
     *.default.mydomain.com                   59     IN     A   35.237.28.44
+    ```
+
+* Create an A record to point from the fully qualified domain name to the IP 
+address of Knative Gateway. This needs to be done for each Knative Service or 
+Route created.
+  
+    ```dns
+    helloworld-go.default.mydomain.com        59     IN     A   35.237.28.44
     ```
 
 If you are using Google Cloud DNS, you can find step-by-step instructions
