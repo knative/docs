@@ -81,7 +81,7 @@ components). The recommended configuration for a cluster is:
 * API scopes for `cloud-platform`, `logging-write`, `monitoring-write`, and
   `pubsub` (if those features will be used)
 
-To create a cluster matching these requriements:
+To create a cluster matching these requirements:
 
 ```shell
 gcloud container clusters create $CLUSTER_NAME \
