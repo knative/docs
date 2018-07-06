@@ -14,24 +14,24 @@ The Knative Serving project provides middleware primitives that enable:
 
 ## Serving resources
 
-Knative Serving defines a set of principals objects as Kubernetes 
+Knative Serving defines a set of principled objects as Kubernetes
 Custom Resource Definitions (CRDs). These objects are used to define and control
 how your serverless workload behaves on the cluster:
 
-* [Service](https://github.com/knative/serving/blob/master/docs/spec/spec.md#service): 
+* [Service](https://github.com/knative/serving/blob/master/docs/spec/spec.md#service):
   The `service.serving.knative.dev` resource manages the whole
-  lifecycle of your workload automatically. It manages creating the other
+  lifecycle of your workload automatically. It controls the creation of other
   objects to ensure your app has a route, configuration, and a new revision
   for each update of the service. Service can be defined to always route traffic to the
   latest revision or to a pinned revision.
 * [Route](https://github.com/knative/serving/blob/master/docs/spec/spec.md#route):
   The `route.serving.knative.dev` resource maps a network endpoint to a one or
   more revisions. You can manage the traffic in several ways, including fractional
-  traffic or named routes.
-* [Configuration](https://github.com/knative/serving/blob/master/docs/spec/spec.md#configuration): 
+  traffic and named routes.
+* [Configuration](https://github.com/knative/serving/blob/master/docs/spec/spec.md#configuration):
   The `configuration.serving.knative.dev` resource maintains
   the desired state for your deployment. It provides a clean separation between
-  code and configuration, following the 12 factor app methodology. Modifying a configuration
+  code and configuration, following the Twelve-Factor App methodology. Modifying a configuration
   will create a new revision.
 * [Revision](https://github.com/knative/serving/blob/master/docs/spec/spec.md#revision):
   The `revision.serving.knative.dev` resource is a point in time snapshot
@@ -43,7 +43,7 @@ how your serverless workload behaves on the cluster:
 ## Getting Started
 
 To get started with Serving, check out one of the [hello world](samples/) sample projects.
-These projects use the `Service` resource, which manage all the details for you.
+These projects use the `Service` resource, which manages all the details for you.
 
 With the `Service` resource, a deployed service will automatically have a matching route
 and configuration created. Each time the `Service` is updated, a new revision will be
