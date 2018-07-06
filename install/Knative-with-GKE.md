@@ -81,7 +81,7 @@ components). The recommended configuration for a cluster is:
 * API scopes for `cloud-platform`, `logging-write`, `monitoring-write`, and
   `pubsub` (if those features will be used)
 
-To create a cluster matching these requriements:
+To create a cluster matching these requirements:
 
 ```shell
 gcloud container clusters create $CLUSTER_NAME \
@@ -146,7 +146,7 @@ newly created Knative cluster.
 
 ## Step 4: Run Hello World
 
-Now that your cluster is running the Knative components, follow the insturctions
+Now that your cluster is running the Knative components, follow the instructions
 for one of the [sample apps](../serving/samples/README.md) to deploy your first
 app.
 
