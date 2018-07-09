@@ -16,11 +16,14 @@ you can create one using [Minikube](https://github.com/kubernetes/minikube).
 
 1. [Install the kubectl CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl).
 
-1. [Install and configure minikube](https://github.com/kubernetes/minikube#installation) with a [VM driver](https://github.com/kubernetes/minikube#requirements), e.g. `kvm2` on Linux or `hyperkit` on macOS.
+1. [Install and configure minikube](https://github.com/kubernetes/minikube#installation)
+    with a [VM driver](https://github.com/kubernetes/minikube#requirements), e.g.
+    `kvm2` on Linux or `hyperkit` on macOS.
 
 ## Creating a Kubernetes cluster
 
-Once kubectl and  Minikube are installed, create a cluster with version 1.10 or greater and your chosen VM driver:
+Once kubectl and  Minikube are installed, create a cluster with version 1.10 or
+greater and your chosen VM driver:
 
 For Linux use:
 
@@ -48,7 +51,8 @@ minikube start --memory=8192 --cpus=4 \
 
 ## Installing Istio
 
-Knative depends on Istio. Run the following to install Istio. (We are changing `LoadBalancer` to `NodePort` for the `istio-ingress` service)
+Knative depends on Istio. Run the following to install Istio. (We are changing
+`LoadBalancer` to `NodePort` for the `istio-ingress` service).
 
 ```shell
 wget -O - https://storage.googleapis.com/knative-releases/latest/istio.yaml \
@@ -59,7 +63,8 @@ wget -O - https://storage.googleapis.com/knative-releases/latest/istio.yaml \
 kubectl label namespace default istio-injection=enabled
 ```
 
-Wait until each Istio component is running or completed (STATUS column shows 'Running' or 'Completed'):
+Wait until each Istio component is running or completed (STATUS column shows
+'Running' or 'Completed'):
 
 ```shell
 kubectl get pods -n istio-system --watch
@@ -71,7 +76,10 @@ CTRL+C when it's done.
 
 Next, we will install [Knative Serving](https://github.com/knative/serving):
 
-We are using the `https://storage.googleapis.com/knative-releases/latest/release-lite.yaml` file which omits some of the monitoring components to reduce the memory used by the Knative components since you do have limited resources available. To use the provided `release-lite.yaml` release run:
+We are using the `https://storage.googleapis.com/knative-releases/latest/release-lite.yaml`
+file which omits some of the monitoring components to reduce the memory used by
+the Knative components since you do have limited resources available. To use the
+provided `release-lite.yaml` release run:
 
 ```shell
 kubectl apply -f https://storage.googleapis.com/knative-releases/latest/release-lite.yaml
@@ -89,15 +97,20 @@ Now you can deploy your app/function to your newly created Knative cluster.
 
 ## Deploying an app
 
-The following instructions will deploy the `Primer` sample app onto your new Knative cluster.
+The following instructions will deploy the `Primer` sample app onto your new
+Knative cluster.
 
-> Note, you will be deploying using pre-build image so no need to clone the Primer repo or install anything locally. If you want to run the `Primer` app locally see the [Primer Readme](https://github.com/mchmarny/primer) for instructions.
+> Note, you will be deploying using pre-build image so no need to clone the
+Primer repo or install anything locally. If you want to run the `Primer` app
+locally see the [Primer Readme](https://github.com/mchmarny/primer) for
+instructions.
 
 ```shell
 kubectl apply -f https://storage.googleapis.com/knative-samples/primer.yaml
 ```
 
-Wait for the ingress to get created. This may take a few seconds. You can check by running:
+Wait for the ingress to get created. This may take a few seconds. You can check
+by running:
 
 ```shell
 kubectl get ing --watch
@@ -107,7 +120,9 @@ CTRL+C when it's done.
 
 Capture the IP and host name by running these commands:
 
-> Note that we changed the `istio-ingress` service to use a `NodePort` since `LoadBalancer` is not supported on Minikube. Here we look up the IP of the Minikube node as well as the actual port used for the ingress.
+> Note that we changed the `istio-ingress` service to use a `NodePort` since
+`LoadBalancer` is not supported on Minikube. Here we look up the IP of the
+Minikube node as well as the actual port used for the ingress.
 
 ```shell
 export SERVICE_IP=$(minikube ip):$(kubectl get svc istio-ingress -n istio-system \
@@ -117,7 +132,8 @@ export SERVICE_HOST=`kubectl get ing primer-ingress \
   -o jsonpath="{.spec.rules[0]['host']}"`
 ```
 
-> Alternatively, you can create an entry in your DNS server to point your subdomain to the IP.
+> Alternatively, you can create an entry in your DNS server to point your
+  subdomain to the IP.
 
 Run the Primer app. The higher the number, the longer it will run.
 
