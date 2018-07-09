@@ -109,6 +109,13 @@ instructions.
 kubectl apply -f https://storage.googleapis.com/knative-samples/primer.yaml
 ```
 
+Wait until your route get assigned a domain
+
+```shell
+kubectl get route primer  -o=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain --watch
+```
+CTRL+C when it's done.
+
 Capture the IP and host name by running these commands:
 
 ```shell
