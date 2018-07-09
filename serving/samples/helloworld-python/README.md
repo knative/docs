@@ -46,7 +46,7 @@ The following instructions recreate the source files from this folder.
    See [official Python docker image](https://hub.docker.com/_/python/) for more details.
 
     ```docker
-    FROM python
+    FROM python:alpine
 
     ENV APP_HOME /app
     COPY . $APP_HOME
