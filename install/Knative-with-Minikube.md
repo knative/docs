@@ -109,27 +109,13 @@ instructions.
 kubectl apply -f https://storage.googleapis.com/knative-samples/primer.yaml
 ```
 
-Wait for the ingress to get created. This may take a few seconds. You can check
-by running:
-
-```shell
-kubectl get ing --watch
-```
-
-CTRL+C when it's done.
-
 Capture the IP and host name by running these commands:
 
-> Note that we changed the `istio-ingress` service to use a `NodePort` since
-`LoadBalancer` is not supported on Minikube. Here we look up the IP of the
-Minikube node as well as the actual port used for the ingress.
-
 ```shell
-export SERVICE_IP=$(minikube ip):$(kubectl get svc istio-ingress -n istio-system \
+export SERVICE_IP=$(minikube ip):$(kubectl get svc knative-ingressgateway -n istio-system \
   -o 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
 
-export SERVICE_HOST=`kubectl get ing primer-ingress \
-  -o jsonpath="{.spec.rules[0]['host']}"`
+export SERVICE_HOST=`kubectl get route primer -o jsonpath="{.status.domain}"`
 ```
 
 > Alternatively, you can create an entry in your DNS server to point your
