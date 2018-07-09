@@ -153,11 +153,13 @@ Now that your cluster is running the Knative components, follow the instructions
 for one of the [sample apps](../serving/samples/README.MD) to deploy your first
 app.
 
-## Cleaning up (optional)
+## Cleaning up
 
 Running a cluster in Kubernetes Engine costs money, so you might want to delete
 the cluster when you're done if you're not using it. Deleting the cluster will
 also remove Knative, Istio, and any apps you've deployed.
+
+To delete the cluster, enter the following command:
 
 ```bash
 gcloud container clusters delete $CLUSTER_NAME --zone $CLUSTER_ZONE
