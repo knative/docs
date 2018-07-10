@@ -1,9 +1,7 @@
-# Getting Started with Knative on Google Kubernetes Engine
+# Easy Install on Google Kubernetes Engine
 
 This guide walks you through the installation of the latest version of
-[Knative](https://github.com/knative/serving) using pre-built images and
-demonstrates creating and deploying an image of a sample "hello world" app onto
-the newly created Knative cluster.
+[Knative Serving](https://github.com/knative/serving) using pre-built images.
 
 You can find [guides for other platforms here](README.md).
 
@@ -11,12 +9,12 @@ You can find [guides for other platforms here](README.md).
 
 Knative requires a Kubernetes cluster v1.10 or newer. If you don't have one,
 you can create one on Google Cloud Platform. You can also use Minikube; see the
-[Knative the easy way with Minikube](Knative-with-Minikube.md) guide for
+[Easy Install on Minikube](Knative-with-Minikube.md) guide for
 instructions. This guide uses Google Kubernetes Engine to create a Kubernetes
 cluster.
 
-This guide assumes you are using bash in a Linux environment; some commands will
-need to be adjusted for use in a Windows environment.
+This guide assumes you are using bash in a Mac or Linux environment; some
+commands will need to be adjusted for use in a Windows environment.
 
 ### Installing the Google Cloud SDK
 
@@ -132,8 +130,8 @@ CTRL+C when it's done.
 
 ## Installing Knative Serving
 
-1. Next, we will install [Knative Serving](https://github.com/knative/serving) and
-its dependencies:
+1. Next, we will install [Knative Serving](https://github.com/knative/serving)
+and its dependencies:
     ```bash
     kubectl apply -f https://storage.googleapis.com/knative-releases/latest/release.yaml
     ```
@@ -149,9 +147,16 @@ You are now ready to deploy an app to your new Knative cluster.
 
 ## Deploying an app
 
-Now that your cluster is running the Knative components, follow the instructions
-for one of the [sample apps](../serving/samples/README.MD) to deploy your first
-app.
+Now that your cluster has Knative installed, you're ready to deploy an app.
+
+You have two options for deploying your first app:
+
+* You can follow the step-by-step
+  [Getting Started with Knative App Deployment](getting-started-knative-app.md)
+  guide.
+
+* You can view the available [sample apps](../serving/samples/README.md) and
+  deploy one of your choosing.
 
 ## Cleaning up
 
