@@ -17,7 +17,7 @@ git clone git@github.com:mchmarny/rester-tester.git
 cd rester-tester
 ```
 
-The `rester-tester` application uses [godep](https://github.com/tools/godep)` to manage its own dependencies. Go get it and restore the app dependencies
+The `rester-tester` application uses [godep](https://github.com/tools/godep) to manage its own dependencies. Go get it and restore the app dependencies
 
 ```
 go get github.com/tools/godep
