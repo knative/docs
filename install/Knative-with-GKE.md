@@ -21,11 +21,9 @@ commands will need to be adjusted for use in a Windows environment.
 > If you already have `gcloud` installed, you can skip these steps. 
 
 1. Download and install the `gcloud` command line tool:
-
    https://cloud.google.com/sdk/
-
+   
 1. Authorize `gcloud`:
-
     ```
     gcloud auth login
     ```
@@ -36,45 +34,45 @@ To simplify the command lines for this walkthrough, we need to define a few
 environment variables.
 
 1. Set a `PROJECT_ID` variable.
-      * If you already have a default project set in `gcloud`, enter:
-        ```bash
-        export PROJECT_ID=$(gcloud config get-value project)
-        ```
-      * Or, if you don't have an existing GCP project you'd like to use, replace
-      `my-knative-project` with your desired project ID. This variable will be
-      used later to create your new GCP project. The project ID must be globally
-      unique across all GCP projects.
-        ```bash
-        export PROJECT_ID=my-knative-project
-        ```
+   * If you already have a default project set in `gcloud`, enter:
+      ```bash
+      export PROJECT_ID=$(gcloud config get-value project)
+      ```
+   * Or, if you don't have an existing GCP project you'd like to use, replace
+    `my-knative-project` with your desired project ID. This variable will be
+    used later to create your new GCP project. The project ID must be globally
+    unique across all GCP projects.
+      ```bash
+      export PROJECT_ID=my-knative-project
+      ```
 1. Set `CLUSTER_NAME` and `CLUSTER_ZONE` variables as desired:
-  ```bash
-  export CLUSTER_NAME=knative
-  export CLUSTER_ZONE=us-west1-c
-  ```
+   ```bash
+   export CLUSTER_NAME=knative
+   export CLUSTER_ZONE=us-west1-c
+   ```
 
 ### Setting up a Google Cloud Platform project
 
 You need a Google Cloud Platform project to create a Kubernetes Engine cluster.
 
 1. Create a new GCP project and set it as your `gcloud` default, or set an
-  existing GCP as your `gcloud` default.
+   existing GCP as your `gcloud` default.
     * If you already have a GCP project, make sure your project is set as your
     `gcloud` default:
-      ```bash
-      gcloud config set project $PROJECT_ID
-      ```
+     ```bash
+     gcloud config set project $PROJECT_ID
+     ```
     * If you don't already have a GCP project configured, create a new project:
-      ```bash
-      gcloud projects create $PROJECT_ID --set-as-default
-      ```
+     ```bash
+     gcloud projects create $PROJECT_ID --set-as-default
+     ```
 1. Enable the necessary APIs:
-    ```
-    gcloud services enable \
-      cloudapis.googleapis.com \
-      container.googleapis.com \
-      containerregistry.googleapis.com
-    ```
+   ```
+   gcloud services enable \
+     cloudapis.googleapis.com \
+     container.googleapis.com \
+     containerregistry.googleapis.com
+   ```
 
 ## Creating a Kubernetes cluster
 
