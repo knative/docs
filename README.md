@@ -8,10 +8,10 @@ Each of the components under the Knative project attempt to identify
 common patterns and codify the best practices shared by successful
 real-world Kubernetes-based frameworks and applications, such as:
 
-- orchestrating source-to-container workflows
-- routing and managing traffic during deployment
-- scaling and sizing resources based on demand
-- binding running services to eventing ecosystems
+- [orchestrating source-to-container workflows](build/README.md)
+- [scaling and sizing resources based on demand](serving/README.md)
+- [routing and managing traffic during deployment](serving/knative-routing/README.md)
+- [binding running services to events ecosystems](events/README.md)
 
 Knative focuses on the "boring but difficult" parts that everyone
 needs, but no one benefits from doing over again on their own. This in
