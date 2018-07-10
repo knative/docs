@@ -62,8 +62,8 @@ https://github.com/GoogleCloudPlatform/runtimes-common/tree/master/ftl#ftl).
 Builders should expect a Build to implement the following conventions:
  * `/workspace`: The default working directory will be `/workspace`, which is
  a volume that is filled by the `source:` step and shared across build `steps:`.
- 
+
  * `/builder/home`: This volume is exposed to steps via `$HOME`.
- 
+
  * Credentials attached to the Build's service account may be exposed as Git or
- Docker credentials as outlined [here](./cmd/creds-init/README.md).
+ Docker credentials as outlined [here](./auth.md).

@@ -3,7 +3,7 @@
 This document serves to define "Build Templates", and their capabilities.
 
 A set of curated and supported build templates is available in the
-[`build-templates`](https://github.com/elafros/build-templates) repo.
+[`build-templates`](https://github.com/knative/build-templates) repo.
 
 ## What is a Build Template?
 

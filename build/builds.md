@@ -64,7 +64,7 @@ Volumes can be used in a wide variety of ways, just as in Kubernetes itself.
 Common examples include:
 
  * Mounting in Kubernetes secrets (a manual alternative to [our service account
- model](./cmd/creds-init/README.md)).
+ model](./auth.md)).
 
  * Creating an extra `emptyDir` volume to act as a multi-step cache (maybe even
  a persistent volume for inter-build caching).
@@ -165,4 +165,4 @@ spec:
 #### Lots 'o trivial examples
 
 For a variety of additional (mostly trivial) examples, see also our [tests
-directory](./tests).
+directory](https://github.com/knative/build/tree/master/tests).
