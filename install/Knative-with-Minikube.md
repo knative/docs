@@ -1,7 +1,7 @@
-# Getting Started with Knative on Minikube
+# Easy Install on Minikube
 
 This guide walks you through the installation of the latest version of
-[Knative](https://github.com/knative/serving) using pre-built images and
+[Knative Serving](https://github.com/knative/serving) using pre-built images and
 demonstrates creating and deploying an image of a sample "hello world" app onto
 the newly created Knative cluster.
 
@@ -97,42 +97,15 @@ Now you can deploy your app/function to your newly created Knative cluster.
 
 ## Deploying an app
 
-The following instructions will deploy the `Primer` sample app onto your new
-Knative cluster.
+Now that your cluster has Knative installed, you're ready to deploy an app.
 
-> Note, you will be deploying using a pre-built image, so there is no need to clone the
-Primer repo or install anything locally. If you want to run the `Primer` app
-locally see the [Primer Readme](https://github.com/mchmarny/primer) for
-instructions.
+If you'd like to follow a step-by-step guide for deploying your first app on
+Knative, check out the
+[Getting Started with Knative App Deployment](getting-started-knative-app.md)
+guide.
 
-```shell
-kubectl apply -f https://storage.googleapis.com/knative-samples/primer.yaml
-```
-
-Wait until your route gets assigned a domain,
-
-```shell
-kubectl get route primer -o=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain --watch
-```
-CTRL+C when it's done.
-
-Capture the IP and host name by running these commands:
-
-```shell
-export SERVICE_IP=$(minikube ip):$(kubectl get svc knative-ingressgateway -n istio-system \
-  -o 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
-
-export SERVICE_HOST=`kubectl get route primer -o jsonpath="{.status.domain}"`
-```
-
-> Alternatively, you can create an entry in your DNS server to point your
-  subdomain to the IP.
-
-Run the Primer app. The higher the number, the longer it will run.
-
-```shell
-curl -H "Host: ${SERVICE_HOST}" http://$SERVICE_IP/5000000
-```
+If you'd like to view the available sample apps and deploy one of your choosing,
+head to the [sample apps](../serving/samples/README.md) repo.
 
 ## Cleaning up
 
