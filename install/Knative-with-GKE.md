@@ -150,7 +150,7 @@ You are now ready to deploy an app to your new Knative cluster.
 ## Deploying an app
 
 Now that your cluster is running the Knative components, follow the instructions
-for one of the [sample apps](../serving/samples/README.MD) to deploy your first
+for one of the [sample apps](../serving/samples/README.md) to deploy your first
 app.
 
 ## Cleaning up
