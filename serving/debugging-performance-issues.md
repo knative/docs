@@ -15,6 +15,7 @@ from the menu on top left of the page. You will see a page like below:
 ![Knative Serving - Revision HTTP Requests](./images/request_dash1.png)
 
 This dashboard gives visibility into the following for each revision:
+
 * Request volume
 * Request volume per HTTP response code
 * Response time
@@ -26,6 +27,7 @@ If, for example, a revision's latency is higher than others revisions, then
 focus your investigation on the offending revision through the rest of this guide.
 
 ## Request traces
+
 Next, look into request traces to find out where the time is spent for a single request.
 To access request traces, open Zipkin UI as described in [Accessing Traces](./accessing-traces.md).
 Select your revision from the "Service Name" drop down and click on "Find Traces" button.
@@ -46,6 +48,7 @@ Grafana URL is taking the most time and investigation should focus on why
 that URL is taking that long.
 
 ## Autoscaler metrics
+
 If request metrics or traces do not show any obvious hot spots, or if they show
 that most of the time is spent in your own code, autoscaler metrics should be
 looked next. To open autoscaler dashboard, open Grafana UI and select 
@@ -54,6 +57,7 @@ looked next. To open autoscaler dashboard, open Grafana UI and select
 ![Knative Serving - Autoscaler](./images/autoscaler_dash1.png)
 
 This view shows four key metrics from Knative Serving autoscaler:
+
 * Actual pod count: # of pods that are running a given revision
 * Desired pod count: # of pods that autoscaler thinks that should serve the
   revision
@@ -74,6 +78,7 @@ In the example above, autoscaler requested 18 pods to optimally serve the traffi
 but was only granted 8 pods because the cluster is out of resources.
 
 ## CPU and memory usage
+
 You can access total CPU and memory usage of your revision from 
 "Knative Serving - Revision CPU and Memory Usage" dashboard. Opening this will bring up a 
 view that looks like below:
@@ -83,6 +88,7 @@ view that looks like below:
 The first chart shows rate of the CPU usage across all pods serving the revision.
 The second chart shows total memory consumed across all pods serving the revision.
 Both of these metrics are further divided into per container usage.
+
 * user-container: This container runs the user code (application, function or container).
 * [istio-proxy](https://github.com/istio/proxy): Sidecar container to form an 
 [Istio](https://istio.io/docs/concepts/what-is-istio/overview.html) mesh.
@@ -91,4 +97,5 @@ Both of these metrics are further divided into per container usage.
 * fluentd-proxy: Sidecar container to collect logs from /var/log.
 
 ## Profiling
+
 ...To be filled...

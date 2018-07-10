@@ -1,4 +1,5 @@
-### Accessing request traces
+# Accessing request traces
+
 If logging and monitoring components are not installed yet, go through the 
 [installation instructions](./installing-logging-metrics-traces.md) to setup the 
 necessary components first.

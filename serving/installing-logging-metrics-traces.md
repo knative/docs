@@ -1,8 +1,11 @@
 # Monitoring, Logging and Tracing Installation
+
 Knative Serving offers two different monitoring setups: One that uses Elasticsearch, Kibana, Prometheus and Grafana and another that uses Stackdriver, Prometheus and Grafana. See below for installation instructions for these two setups. You can install only one of these two setups and side-by-side installation of these two are not supported.
 
 ## Elasticsearch, Kibana, Prometheus & Grafana Setup
+
 First run:
+
 ```shell
 kubectl apply -R -f config/monitoring/100-common \
     -f config/monitoring/150-elasticsearch-prod \
@@ -17,6 +20,7 @@ Monitor logging & monitoring components, until all of the components report Runn
 ```shell
 kubectl get pods -n monitoring --watch
 ```
+
 CTRL+C when it's done.
 
 We will create two indexes in ElasticSearch - one for application logs and one for request traces. 
@@ -33,6 +37,7 @@ Enter `zipkin*` to `Index pattern` and select `timestamp_millis` from `Time Filt
 and click on `Create` button.
 
 Next, visit instructions below to access to logs, metrics and traces:
+
 * [Accessing Logs](./accessing-logs.md)
 * [Accessing Metrics](./accessing-metrics.md)
 * [Accessing Traces](./accessing-traces.md)

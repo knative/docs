@@ -1,8 +1,10 @@
 # Debugging Issues with Your Application
+
 You deployed your app to Knative Serving, but it isn't working as expected.
 Go through this step by step guide to understand what failed.
 
 ## Check command line output
+
 Check your deploy command output to see whether it succeeded or not. If your
 deployment process was terminated, there should be an error message showing up
 in the output that describes the reason why the deployment failed.
@@ -21,10 +23,12 @@ ERROR: Non-zero return code '1' from command: Process exited with status 1
 ```
 
 ## Check application logs
+
 Knative Serving provides default out-of-the-box logs for your application.
 Access your application logs using [Accessing Logs](./accessing-logs.md) page.
 
 ## Check Route status
+
 Run the following command to get the `status` of the `Route` object with which
 you deployed your application:
 
@@ -38,6 +42,7 @@ details, see Knative
 are not implemented yet).
 
 ## Check Revision status
+
 If you configure your `Route` with `Configuration`, run the following
 command to get the name of the `Revision` created for you deployment
 (look up the configuration name in the `Route` .yaml file):
@@ -66,20 +71,21 @@ conditions:
 
 If you see this condition, check the following to continue debugging:
 
-  * [Check Pod status](#check-pod-status)
-  * [Check application logs](#check-application-logs)
-  * [Check Istio routing](#check-istio-routing)
+* [Check Pod status](#check-pod-status)
+* [Check application logs](#check-application-logs)
+* [Check Istio routing](#check-istio-routing)
 
 If you see other conditions, to debug further:
 
-  * Look up the meaning of the conditions in Knative
+* Look up the meaning of the conditions in Knative
      [Error Conditions and Reporting](../spec/errors.md). Note: some of them
      are not implemented yet. An alternative is to
      [check Pod status](#check-pod-status).
-  * If you are using `BUILD` to deploy and the `BuidComplete` condition is not
+* If you are using `BUILD` to deploy and the `BuidComplete` condition is not
      `True`, [check BUILD status](#check-build-status).
 
 ## Check Pod status
+
 To get the `Pod`s for all your deployments:
 
 ```shell
@@ -88,7 +94,7 @@ kubectl get pods
 
 This should list all `Pod`s with brief status. For example:
 
-```
+```text
 NAME                                                      READY     STATUS             RESTARTS   AGE
 configuration-example-00001-deployment-659747ff99-9bvr4   2/2       Running            0          3h
 configuration-example-00002-deployment-5f475b7849-gxcht   1/2       CrashLoopBackOff   2          36s
@@ -105,6 +111,7 @@ kubectl get pod <pod-name> -o yaml
 If you see issues with "user-container" container in the containerStatuses, check your application logs as described below.
 
 ## Check Build status
+
 If you are using Build to deploy, run the following command to get the Build for
 your `Revision`:
 
