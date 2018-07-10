@@ -100,7 +100,7 @@ Now you can deploy your app/function to your newly created Knative cluster.
 The following instructions will deploy the `Primer` sample app onto your new
 Knative cluster.
 
-> Note, you will be deploying using pre-build image so no need to clone the
+> Note, you will be deploying using a pre-built image, so there is no need to clone the
 Primer repo or install anything locally. If you want to run the `Primer` app
 locally see the [Primer Readme](https://github.com/mchmarny/primer) for
 instructions.
