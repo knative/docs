@@ -38,7 +38,7 @@ environment variables.
       ```bash
       export PROJECT_ID=$(gcloud config get-value project)
       ```
-   * Or, if you don't have an existing GCP project you'd like to use, replace
+   * Or, if you don't have an existing GCP project that you'd like to use, replace
     `my-knative-project` with your desired project ID. This variable will be
     used later to create your new GCP project. The project ID must be globally
     unique across all GCP projects.
@@ -53,7 +53,7 @@ environment variables.
 
 ### Setting up a Google Cloud Platform project
 
-You need a Google Cloud Platform project to create a Kubernetes Engine cluster.
+You need a GCP project to create a Kubernetes Engine cluster.
 
 1. Create a new GCP project and set it as your `gcloud` default, or set an
    existing GCP as your `gcloud` default.

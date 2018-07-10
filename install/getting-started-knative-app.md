@@ -4,13 +4,13 @@ This guide shows you how to deploy an app using Knative Serving.
 
 ## Before you begin
 
-You'll need a Kubernetes cluster with Knative Serving installed.
+You need a Kubernetes cluster with Knative Serving installed.
 
 For installation instructions, see one of the following install guides:
 * [Easy Install on Google Kubernetes Engine](Knative-with-GKE.md)
 * [Easy Install on Minikube](Knative-with-Minikube.md)
 
-You'll also need an image of the app you'd like to deploy available on an
+You also need an image of the app that you'd like to deploy available on an
 image hosting platform like Google Container Registry or Docker Hub. An image of
 the sample application used in this guide is available on GCR.
 
@@ -28,7 +28,7 @@ isn't defined, it will print "NOT SPECIFIED".
 
 ## Configuring your deployment
 
-To deploy an app using Knative Serving, you'll need a configuration .yaml file
+To deploy an app using Knative Serving, you need a configuration .yaml file
 that defines a Service. For more information about the Service object, see the
 [Resource Types documentation](https://github.com/knative/serving/blob/master/docs/spec/overview.md#service).
 
@@ -38,7 +38,7 @@ configured. For more information about what configuration options are available,
 see the
 [Serving spec documentation](https://github.com/knative/serving/blob/master/docs/spec/spec.md).
 
-Create a new file named `service.yaml`, then copy and paste the following into it:
+Create a new file named `service.yaml`, then copy and paste the following content into it:
 
 ```yaml
 apiVersion: serving.knative.dev/v1alpha1 # Current version of Knative
@@ -73,15 +73,15 @@ Now that your service is created, Knative will perform the following steps:
    * Create a new immutable revision for this version of the app.
    * Perform network programming to create a route, ingress, service, and load
      balance for your app.
-   * Automatically scale your pods up and down, including to zero active pods,
-     based on traffic.
+   * Automatically scale your pods up and down based on traffic, including to
+     zero active pods.
 
-To see if the new app has been deployed succesfully, you'll need the HOST and
+To see if the new app has been deployed succesfully, you need the HOST and
 IP_ADDRESS created by Knative.
 
 1. To find the IP address for your service, enter
    `kubectl get svc knative-ingressgateway -n istio-system`. If your cluster is
-   new, it may take sometime for the service to get asssigned an external IP address.
+   new, it can take sometime for the service to get asssigned an external IP address.
 
     ```shell
     kubectl get svc knative-ingressgateway -n istio-system
@@ -113,7 +113,7 @@ IP_ADDRESS created by Knative.
     curl -H "Host: helloworld-go.default.example.com" http://IP_ADDRESS
     Hello World: Go Sample v1!
     ```
-    It may take a few tries for Knative to scale up your application and return
+    It can take a few seconds for Knative to scale up your application and return
     a response.
 
 You've deployed your first application using Knative!
