@@ -2,11 +2,11 @@
 
 If you are running Knative on Google Kubernetes Engine and want to use a 
 [custom domain](./using-a-custom-domain.md) with your apps, you need to configure a 
-static IP address to ensure your custom domain mapping doesn't break.
+static IP address to ensure that your custom domain mapping doesn't break.
 
-Knative uses a shared Gateway to serve all incoming traffic within Knative 
-service mesh, which is the "knative-shared-gateway" Gateway under 
-`knative-serving` namespace. The IP address to access the gateway is the 
+Knative uses the shared `knative-shared-gateway` Gateway under the
+`knative-serving` namespace, to serve all incoming traffic within the
+Knative service mesh. The IP address to access the gateway is the 
 external IP address of the "knative-ingressgateway" service under the 
 `istio-system` namespace. Therefore, in order to set a static IP for the 
 Knative shared gateway `knative-shared-gateway`, you must to set the 
@@ -39,7 +39,7 @@ Run the following command to ensure that the external IP of the "knative-ingress
 ```shell
 kubectl get svc knative-ingressgateway -n istio-system
 ```
-The result should be something like
+The result should be something like the following:
 ```
 NAME                     TYPE           CLUSTER-IP      EXTERNAL-IP     PORT(S)                                      AGE
 knative-ingressgateway   LoadBalancer   12.34.567.890   98.765.43.210   80:32380/TCP,443:32390/TCP,32400:32400/TCP   5m
