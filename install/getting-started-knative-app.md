@@ -6,9 +6,7 @@ This guide shows you how to deploy an app using Knative Serving.
 
 You need a Kubernetes cluster with Knative Serving installed.
 
-For installation instructions, see one of the following install guides:
-* [Easy Install on Google Kubernetes Engine](Knative-with-GKE.md)
-* [Easy Install on Minikube](Knative-with-Minikube.md)
+For installation instructions, see [Installing Knative](./README.md).
 
 You also need an image of the app that you'd like to deploy available on an
 image hosting platform like Google Container Registry or Docker Hub. An image of
