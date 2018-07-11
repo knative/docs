@@ -1,4 +1,4 @@
-# Use a Custom Domain
+# Setting up a Custom Domain
 
 By default, Knative Serving routes use `example.com` as the default domain.
 The fully qualified domain name for a route by default is `{route}.{namespace}.{default-domain}`.
