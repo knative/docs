@@ -14,7 +14,7 @@ We provide information for installing Knative on
 
 ## Installing Knative
 
-Follow the step-by-step guides for setting up Kubernetes and installing
+Follow these step-by-step guides for setting up Kubernetes and installing
 Knative components on the following platforms:
 
 * [Easy Install on Google Kubernetes Engine](Knative-with-GKE.md)
