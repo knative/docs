@@ -159,7 +159,7 @@ You have two options for deploying your first app:
 * You can view the available [sample apps](../serving/samples/README.md) and
   deploy one of your choosing.
   
-## Post installation
+## Configuring Knative Serving
 
 After your Knative installation is running, you can set up a custom domain with 
 a static IP address to be able to use Knative for publicly available services:
