@@ -18,11 +18,15 @@ commands will need to be adjusted for use in a Windows environment.
 
 ### Installing the Google Cloud SDK
 
-> If you already have `gcloud` installed, you can skip these steps. 
+> If you already have `gcloud` installed with the `kubectl` component, you can skip these steps. 
 
 1. Download and install the `gcloud` command line tool:
-   https://cloud.google.com/sdk/
+   https://cloud.google.com/sdk/install
    
+1. Install the `kubectl` component:
+    ```
+    gcloud components install kubectl
+    ```
 1. Authorize `gcloud`:
     ```
     gcloud auth login
@@ -38,9 +42,11 @@ environment variables.
       ```bash
       export PROJECT_ID=$(gcloud config get-value project)
       ```
-   * Or, if you don't have an existing GCP project that you'd like to use, replace
-    `my-knative-project` with your desired project ID. This variable will be
-    used later to create your new GCP project. The project ID must be globally
+      Tip: Run `gcloud config get-value project` to view the ID of your default GCP project.
+      
+   * If you don't have an existing GCP project that you'd like to use, replace
+    `my-knative-project` in the following command with your desired project ID. This variable
+    is used later to create your new project ID in GCP. The project ID must be globally
     unique across all GCP projects.
       ```bash
       export PROJECT_ID=my-knative-project
