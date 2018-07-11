@@ -23,7 +23,7 @@ deploy, monitor, and debug it.
 ## Getting started with Knative
 
 To get started using Knative, [pick a Kubernetes cluster of your choice](https://kubernetes.io/docs/setup/pick-right-solution/) and follow the
-[Knative installation instructions](/install/Knative-with-GKE.md) to get the system up.
+[Knative installation instructions](/install/README.md) to get the system up.
 
 There are a [number of samples](serving/samples/README.md) that you can build and
 run on your cluster once it's set up to help you get acquainted.
