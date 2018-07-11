@@ -20,7 +20,7 @@ Knative components on the following platforms:
 * [Easy Install on Google Kubernetes Engine](Knative-with-GKE.md)
 * [Easy Install on Minikube](Knative-with-Minikube.md)
 
-## Configuring Knative
+## Configuring Knative Serving
 
 After your Knative installation is running, you can set up a custom domain with 
 a static IP address to be able to use Knative for publicly available services:
