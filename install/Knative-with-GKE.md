@@ -146,6 +146,14 @@ CTRL+C when it's done.
 
 You are now ready to deploy an app to your new Knative cluster.
 
+## Configuring Knative Serving
+
+After your Knative installation is running, you can set up a custom domain with 
+a static IP address to be able to use Knative for publicly available services:
+
+- [Assign a static IP address](../serving/gke-assigning-static-ip-address.md)
+- [Configure a custom domain](../serving/using-a-custom-domain.md)
+
 ## Deploying an app
 
 Now that your cluster has Knative installed, you're ready to deploy an app.
@@ -158,14 +166,6 @@ You have two options for deploying your first app:
 
 * You can view the available [sample apps](../serving/samples/README.md) and
   deploy one of your choosing.
-  
-## Configuring Knative Serving
-
-After your Knative installation is running, you can set up a custom domain with 
-a static IP address to be able to use Knative for publicly available services:
-
-- [Assign a static IP address](../serving/gke-assigning-static-ip-address.md)
-- [Configure a custom domain](../serving/using-a-custom-domain.md)
 
 ## Cleaning up
 
