@@ -95,9 +95,9 @@ Istio components, the recommended configuration for a cluster is:
       --cluster-version=latest \
       --machine-type=n1-standard-4 \
       --enable-autoscaling --min-nodes=1 --max-nodes=10 \
-      --scopes=cloud-platform,logging-write,monitoring-write,pubsub \
-      --num-nodes=3 \
-      --image-type=ubuntu
+      --enable-autorepair \
+      --scopes=service-control,service-management,compute-rw,storage-ro,cloud-platform,logging-write,monitoring-write,pubsub \
+      --num-nodes=3
     ```  
 1. Grant cluster-admin permissions to the current user: 
     ```bash
