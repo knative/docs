@@ -2,7 +2,7 @@
 
 This guide demonstrates how to update a live application that is serving
 traffic. With Knative, it's easy to reroute traffic from one version of an
-application to another.
+application to another by changing the routing configuration.
 
 ## Before you begin
 
