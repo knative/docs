@@ -117,7 +117,7 @@ spec:
             image: *image
             imagePullPolicy: Always
             env:
-            - name: TARGET
+            - name: SIMPLE_MSG
               value: "Hello sample app!"
 ```
 
