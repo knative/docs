@@ -33,8 +33,8 @@ API [resources](../pkg/apis/serving), [validation](../pkg/webhook), and [semanti
 Artifact                   | Link
 -------------------------- | ----
 Forum                      | [knative-dev@](https://groups.google.com/forum/#!forum/knative-dev)
-Community Meeting VC       | [TODO](TODO)
-Community Meeting Calendar | [Calendar Invitation](TODO)
+Community Meeting VC       | [https://meet.google.com/bzx-bjqa-rha](https://meet.google.com/bzx-bjqa-rha) <br>Or dial in:<br>(US) +1 262-448-6367<br>PIN: 923 539#
+Community Meeting Calendar | Wednesdays 10:30a-11:00a PST <br>[Calendar Invitation](https://calendar.google.com/event?action=TEMPLATE&tmeid=MW81NXJkaXBxbzllY2JtdTk4aXMxNGk2N2NfMjAxODA3MTFUMTczMDAwWiBtYXR0bW9vckBnb29nbGUuY29t&tmsrc=mattmoor%40google.com&scp=ALL)
 Meeting Notes              | [Notes](https://docs.google.com/document/d/1NC4klOdNaU-N-PsKLyXBqDKgNSHtxCDep29Ta2b5FK0/edit)
 Document Folder            | [Folder](https://drive.google.com/corp/drive/folders/1fpBW7VyiBISsKuVdgn1MrgFdtx_JGoC5)
 Slack Channel              | [#api](https://knative.slack.com)
@@ -50,8 +50,8 @@ Slack Channel              | [#api](https://knative.slack.com)
 Artifact                   | Link
 -------------------------- | ----
 Forum                      | [knative-dev@](https://groups.google.com/forum/#!forum/knative-dev)
-Community Meeting VC       | [TODO](TODO)
-Community Meeting Calendar | [Calendar Invitation](TODO)
+Community Meeting VC       | [build-crd](https://hangouts.google.com/hangouts/_/google.com/build-crd)
+Community Meeting Calendar | Wednesdays 10:00a-10:30a PST <br>[Calendar Invitation](https://calendar.google.com/event?action=TEMPLATE&tmeid=MTBkb3MwYnVrbDd0djE0a2kzcmpmbjZndm9fMjAxODA3MTFUMTcwMDAwWiBtYXR0bW9vckBnb29nbGUuY29t&tmsrc=mattmoor%40google.com)
 Meeting Notes              | [Notes](https://docs.google.com/document/d/1e7gMVFlJfkFdTcaWj2qETeRD9kSBG2Vh8mASPmQMYC0/edit)
 Document Folder            | [Folder](https://drive.google.com/corp/drive/folders/1ov16HvPam-v_FXAGEaUdHok6_hUAoIoe)
 Slack Channel              | [#build-crd](https://knative.slack.com)
