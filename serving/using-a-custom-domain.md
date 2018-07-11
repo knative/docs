@@ -8,13 +8,13 @@ To change the {default-domain} value there are a few steps involved:
 ## Edit using kubectl
 
 1. Edit the domain configuration config-map to replace `example.com`
-   with your own customer domain, for example `mydomain.com`:
+   with your own domain, for example `mydomain.com`:
 
 ```shell
 kubectl edit cm config-domain -n knative-serving
 ```
 
-This will open your default text editor and allow you to edit the config map. 
+This command opens your default text editor and allows you to edit the config map. 
 
 ```yaml
 apiVersion: v1
@@ -33,7 +33,7 @@ kind: ConfigMap
 [...]
 ```
 
-Edit the file to replace `example.com` and `example.org` with the new domains
+2. Edit the file to replace `example.com` and `example.org` with the new domains that
 you wish to use and save your changes. In this example, we configure `mydomain.com` for all routes: 
 
 ```yaml
@@ -79,25 +79,26 @@ You can also apply an updated domain configuration config-map:
 ## Deploy an application
 
 > If you have an existing deployment, Knative will reconcile the change made to
-> the configuration map and automatically update the host name for all deployed
+> the configuration map and automatically update the host name for all of the deployed
 > services and routes.
 
 
-Deploy an app (for example, [`helloworld-go`](./samples/helloworld-go/README.md)), to your cluster as normal. You can check the customized domain in 
-Knative Route "helloworld-go" with
+Deploy an app (for example, [`helloworld-go`](./samples/helloworld-go/README.md)), to 
+your cluster as normal. You can check the customized domain in  Knative Route "helloworld-go" with
+the following command:
 ```shell
 kubectl get route helloworld-go -o jsonpath="{.status.domain}"
 ```
-You should see the full customized domain is `helloworld-go.default.mydomain.com`.
+You should see the full customized domain: `helloworld-go.default.mydomain.com`.
 
-And you can check the IP address of Knative gateway with
+And you can check the IP address of your Knative gateway by running:
 ```shell
 kubectl get svc knative-ingressgateway -n istio-system -o jsonpath="{.status.loadBalancer.ingress[*]['ip']}"
 ```
 
 ## Local DNS setup
 
-You can map the domain to the IP address of Knative Gateway in your local 
+You can map the domain to the IP address of your Knative gateway in your local 
 machine with:
 ```shell
 export GATEWAY_IP=`kubectl get svc knative-ingressgateway -n istio-system -o jsonpath="{.status.loadBalancer.ingress[*]['ip']}"`
@@ -110,18 +111,16 @@ export DOMAIN_NAME=`kubectl get route helloworld-go -o jsonpath="{.status.domain
 echo -e "$GATEWAY_IP\t$DOMAIN_NAME" | sudo tee -a /etc/hosts
 
 ```
-By this way, you can access your domain from the browser in your machine and
- do some quick checks.
+You can now access your domain from the browser in your machine and do some quick checks.
 
 ## Publish your Domain
 
-Follow the below steps to make your domain publicly accessible.
+Follow these steps to make your domain publicly accessible:
 
 ### Set static IP for Knative Gateway
 
-You may want to set static IP for your Knative Gateway so that the Gateway IP 
-will not be changed after restarting your cluster.
-Follow the [instructions](https://github.com/knative/serving/blob/master/docs/setting-up-ingress-static-ip.md) to set static IP for Knative Gateway.
+You might want to [set a static IP for your Knative gateway](gke-assigning-static-ip-address.md), 
+so that the gateway IP does not change each time your cluster is restarted.
 
 ### Update your DNS records
 
@@ -129,16 +128,17 @@ To publish your domain, you need to update your DNS provider to point to the
 IP address for your service ingress.
 
 * Create a [wildcard record](https://support.google.com/domains/answer/4633759)
-  for the namespace and custom domain to the ingress IP Address. This will enable hostnames for multiple services in the same namespace to work without
-  creating additional DNS entries.
+  for the namespace and custom domain to the ingress IP Address, which would enable 
+  hostnames for multiple services in the same namespace to work without creating 
+  additional DNS entries.
 
     ```dns
     *.default.mydomain.com                   59     IN     A   35.237.28.44
     ```
 
 * Create an A record to point from the fully qualified domain name to the IP 
-address of Knative Gateway. This needs to be done for each Knative Service or 
-Route created.
+  address of your Knative gateway. This step needs to be done for each Knative Service or 
+  Route created.
   
     ```dns
     helloworld-go.default.mydomain.com        59     IN     A   35.237.28.44
@@ -148,6 +148,6 @@ If you are using Google Cloud DNS, you can find step-by-step instructions
 in the [Cloud DNS quickstart](https://cloud.google.com/dns/quickstart).
 
 
-Once the domain update has propagated, you can then access your app using 
+Once the domain update has propagated, you can access your app using 
 the fully qualified domain name of the deployed route, for example
 `http://helloworld-go.default.mydomain.com`
