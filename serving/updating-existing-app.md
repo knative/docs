@@ -1,8 +1,13 @@
 # Updating an Existing App
 
-This guide demonstrates how to update a live application that is serving
-traffic. With Knative, it's easy to reroute traffic from one version of an
-application to another by changing the routing configuration.
+This guide demonstrates how to update an application that is serving
+traffic to a new version. With Knative, it's easy to reroute traffic
+from one version of an application to another by changing the routing
+configuration. 
+
+A sample app is used to demonstrate the flow of updating an
+application, but the same principles can be applied to your own Knative
+application.
 
 ## Before you begin
 
@@ -105,8 +110,8 @@ This deploys an image of a demo application that displays the text
 
 This will only stage v2. That means:
 
-* No traffic will be routed to the `v2` of the app at http://route-demo.default.YOUR_CUSTOM_DOMAIN.com
-* A new route named `v2` is created for testing the newly deployed version at http://v2.route-demo.default.YOUR_CUSTOM_DOMAIN.com
+* No traffic will be routed to the v2 of the app at http://route-demo.default.YOUR_CUSTOM_DOMAIN.com
+* Knative creates a new route named v2 for testing the newly deployed version at http://v2.route-demo.default.YOUR_CUSTOM_DOMAIN.com
 
 
 ## Migrating traffic to the new version
@@ -135,13 +140,13 @@ kubectl apply -f stage3.yaml
 ```
 
 Refresh the original route (http://route-demo.default.YOUR_CUSTOM_DOMAIN.com) a
-few times to show that now some traffic goes to v2 of our app
+few times to show that some traffic now goes to v2 of the app.
 
 > Note, this sample shows a 50/50 split to assure you don't have to refresh too much,
   but it's recommended to start with 1-2% in a production environment
 
 
-## Reoute all traffic to the new version
+## Reouting all traffic to the new version
 
 Create a new file called `stage4.yaml` and copy this into it:
 
@@ -169,5 +174,5 @@ kubectl apply -f stage4.yaml
 Refresh the original route (http://route-demo.default.YOUR_CUSTOM_DOMAIN.com) a
 few times to verify that no traffic is being routed to v1 of the app.
 
-We added a name to the first version of the app, so you can now access it at 
+We added a named route to v1 of the app, so you can now access it at 
 http://v1.route-demo.default.YOUR_CUSTOM_DOMAIN.com.
