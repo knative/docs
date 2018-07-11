@@ -4,7 +4,10 @@ Knative Serving offers two different monitoring setups: One that uses Elasticsea
 
 ## Elasticsearch, Kibana, Prometheus & Grafana Setup
 
-First run:
+*If you installed Knative Serving using [Easy Install](../install/README.md#Installing-Knative), skip this step and continue to [Create Elasticsearch Indices](#Create-Elasticsearch-Indices)*
+
+
+Run:
 
 ```shell
 kubectl apply -R -f config/monitoring/100-common \
@@ -23,6 +26,7 @@ kubectl get pods -n monitoring --watch
 
 CTRL+C when it's done.
 
+### Create Elasticsearch Indices
 We will create two indexes in ElasticSearch - one for application logs and one for request traces. 
 To create the indexes, open Kibana Index Management UI at this [link](http://localhost:8001/api/v1/namespaces/monitoring/services/kibana-logging/proxy/app/kibana#/management/kibana/index)
 (*it might take a couple of minutes for the proxy to work the first time after the installation*).
