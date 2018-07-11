@@ -14,13 +14,18 @@ You also need an image of the app that you'd like to deploy available on an
 image hosting platform like Google Container Registry or Docker Hub. An image of
 the sample application used in this guide is available on GCR.
 
+More information about hosting container images:
+
+* [Google Container Registry](https://cloud.google.com/container-registry/docs/pushing-and-pulling)
+* [Docker Hub](https://docs.docker.com/docker-hub/repos/)
+
 ## Sample application
 
 This guides uses the
 [Hello World sample app in Go](../serving/samples/helloworld-go) to demonstrate
 the basic workflow for deploying an app, but these steps can be adapted for your
 own application if you have an image of it available on Google Container
-Registry, Docker Hub, or another image hosting platform.
+Registry, Docker Hub, or another container image registry.
 
 The Hello World sample app reads in an `env` variable, `TARGET`, from the
 configuration `.yaml` file, then prints "Hello World: ${TARGET}!". If `TARGET`
