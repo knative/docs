@@ -73,7 +73,6 @@ If you see this condition, check the following to continue debugging:
 
 * [Check Pod status](#check-pod-status)
 * [Check application logs](#check-application-logs)
-* [Check Istio routing](#check-istio-routing)
 
 If you see other conditions, to debug further:
 
