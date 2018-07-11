@@ -9,7 +9,7 @@ common patterns and codify the best practices shared by successful
 real-world Kubernetes-based frameworks and applications, such as:
 
 - [Orchestrating source-to-container workflows on Kubernetes](build/README.md)
-- [Deploy an container to Knative](install/getting-started-knative-app.md)
+- [Deploying a container to Knative](install/getting-started-knative-app.md)
 - [Updating your application on day 2 without an outage](serving/updating-an-existing-app.md)
 - [Automatic scaling and sizing applications based on demand](serving/auto-scaling-with-knative.md)
 - [Binding events to functions, apps, and containers with Knative](events/binding-events-with-knative.md)
