@@ -106,7 +106,14 @@ IP_ADDRESS created by Knative.
 1. Now you can make a request to your app to see the results. Replace
    `IP_ADDRESS` with the `EXTERNAL-IP` you wrote down, and replace
    `helloworld-go.default.example.com` with the domain returned in the previous
-   step. If you deployed your own app, you may want to customize this curl
+   step.
+
+   Note, if you use minikube or a baremetal cluster that has no external load balacner, `EXTERNAL-IP` field is shown as `<pending>`. You need to use `NodeIP` and `NodePort` as the following:
+   ```shell
+   export IP_ADDRESS=$(kubectl get node  -o 'jsonpath={.items[0].status.addresses[0].address}'):$(kubectl get svc knative-ingressgateway -n istio-system   -o 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
+   ```
+
+   If you deployed your own app, you may want to customize this curl
    request to interact with your application.
 
     ```shell
