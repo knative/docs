@@ -1,6 +1,6 @@
-# Knative Serving Install
+# Knative Install
 
-To get started with Knative Serving, you need a Kubernetes cluster. If you aren't
+To get started with Knative, you need a Kubernetes cluster. If you aren't
 sure what Kubernetes platform is right for you, see
 [Picking the Right Solution](https://kubernetes.io/docs/setup/pick-right-solution/).
 We provide information for installing Knative on
