@@ -8,10 +8,10 @@ Each of the components under the Knative project attempt to identify
 common patterns and codify the best practices shared by successful
 real-world Kubernetes-based frameworks and applications, such as:
 
-- orchestrating source-to-container workflows
-- routing and managing traffic during deployment
-- scaling and sizing resources based on demand
-- binding running services to eventing ecosystems
+- [orchestrating source-to-container workflows](build/README.md)
+- [scaling and sizing resources based on demand](serving/README.md)
+- [routing and managing traffic during deployment](serving/knative-routing/README.md)
+- [binding running services to events ecosystems](events/README.md)
 
 Knative focuses on the "boring but difficult" parts that everyone
 needs, but no one benefits from doing over again on their own. This in
@@ -21,12 +21,11 @@ deploy, monitor, and debug it.
 
 ## Getting started with Knative
 
-To get started using Knative, [pick a Kubernetes cluster of your choice](https://kubernetes.io/docs/setup/pick-right-solution/)
-and follow the [Knative installation instructions](/install/Knative-with-GKE.md)
-to get the system up.
+To get started using Knative, [pick a Kubernetes cluster of your choice](https://kubernetes.io/docs/setup/pick-right-solution/) and follow the
+[Knative installation instructions](/install/Knative-with-GKE.md) to get the system up.
 
-There are a [number of samples](serving/samples/README.md) to help you get acquainted you can build
-and run on your cluster once it's set up.
+There are a [number of samples](serving/samples/README.md) that you can build and
+run on your cluster once it's set up to help you get acquainted.
 
 You can choose to install individual Knative components following the
 instructions in each repo, or install a pre-built suite of components
@@ -34,6 +33,9 @@ by following the instructions for your platform:
 
 - [Google Kubernetes Engine](install/Knative-with-GKE.md)
 - [MiniKube](install/Knative-with-Minikube.md)
+
+To deploy an app with Knative Serving, check out the
+[Getting Started with Knative App Deployment guide](install/getting-started-knative-app.md).
 
 ## Who is Knative for
 
@@ -63,11 +65,10 @@ With a clear project scope, lightweight governance model and clean
 lines of separation between pluggable components, the Knative project
 establishes an efficient contributor workflow.
 
-Knative is a diverse, open, and inclusive community. To get involved,
-see
+Knative is a diverse, open, and inclusive community. To get involved, see
 [CONTRIBUTING.md](https://github.com/knative/docs/blob/master/community/CONTRIBUTING.md)
-and join the
-[#community](https://knative.slack.com/messages/C92U2C59P/) Slack channel.
+and join the [#community](https://knative.slack.com/messages/C92U2C59P/)
+Slack channel.
 
 Your own path to becoming a Knative contributor can
 [begin anywhere](https://github.com/knative/serving/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22).

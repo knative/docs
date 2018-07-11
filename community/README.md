@@ -32,7 +32,7 @@ Other Documents
 ## Introduction
 
 Knative is an open source specification and implementation of a serverless
-container platform.
+container platform. See [Knative docs](https://github.com/knative/docs) for in-depth information about using Knative.
 
 <!-- TODO Visit [knative.dev](https://knative.dev) for in-depth information about using
 Knative. -->
@@ -70,9 +70,9 @@ look for GitHub issues marked with the Help Wanted label:
 *   [Primary Knative
     repo](https://github.com/knative/serving/issues?q=is%3Aopen+is%3Aissue+label%3A%22community%2Fhelp+wanted%22)
 *   [Documentation
-    repo](https://github.com/knative/serving.dev/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22)
+    repo](https://github.com/knative/docs/issues?q=is%3Aopen+is%3Aissue+label%3A%22community%2Fhelp+wanted%22)
 
-Of course, even if there's not an issue opened for it, we can always use more
+Even if there's not an issue opened for it, we can always use more
 testing throughout the platform. Similarly, we can always use more docs, richer
 docs, insightful docs. Or maybe a cool blog post? And if you're a web developer,
 we could use your help in spiffing up our public-facing web site.
