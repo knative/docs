@@ -79,7 +79,7 @@ specifications.  For examples of Builds leveraging templates, see [the build
 template documentation](./build-templates.md).
 
 
-#### With `git` by `branch`
+#### With `git` by branch, tag, commit or ref
 
 ```yaml
 spec:
@@ -91,6 +91,10 @@ spec:
   - image: ubuntu
     args: ["cat", "README.md"]
 ```
+
+The `revision` field accepts a branch name, tag name, commit SHA, or any ref.
+See https://git-scm.com/docs/gitrevisions#_specifying_revisions for more
+information.
 
 #### With a `gcs` source
 
