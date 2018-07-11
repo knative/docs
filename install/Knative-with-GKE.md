@@ -161,12 +161,11 @@ You have two options for deploying your first app:
   
 ## Post installation
 
-After your Knative installation is running, there are some additional steps
-that you might want to complete to be able to use Knative for publicly available
-services.
+After your Knative installation is running, you can set up a custom domain with 
+a static IP address to be able to use Knative for publicly available services:
 
-- [Assign a static IP address](gke-assign-static-ip-address.md)
-- [Configure a custom domain](../serving/DNS.md)
+- [Assign a static IP address](../serving/gke-assigning-static-ip-address.md)
+- [Configure a custom domain](../serving/using-a-custom-domain.md)
 
 ## Cleaning up
 
