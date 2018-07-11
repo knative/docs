@@ -1,7 +1,7 @@
 # Knative Install on Google Kubernetes Engine
 
 This guide walks you through the installation of the latest version of
-[Knative Serving](https://github.com/knative/serving) using pre-built images.
+Knative using pre-built images.
 
 You can find [guides for other platforms here](README.md).
 
