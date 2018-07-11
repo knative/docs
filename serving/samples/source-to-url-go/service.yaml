@@ -15,12 +15,12 @@ spec:
           name: kaniko
           arguments:
           - name: IMAGE
-            value: &image rgreggwa/app-from-source:latest
+            value: &image docker.io/{DOCKER_USERNAME}/app-from-source:latest
       revisionTemplate:
         spec:
           container:
             image: *image
             imagePullPolicy: Always
             env:
-            - name: TARGET
-              value: "Hello sample app!"
+            - name: SIMPLE_MSG
+              value: "Hello from the sample app!"
