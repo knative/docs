@@ -1,7 +1,7 @@
 # Assigning a static IP address to the Knative gateway
 
 If you are running Knative on Google Kubernetes Engine and want to deploy 
-apps on a [custom domain](/using-a-custom-domain.md), you need to configure a 
+apps on a [custom domain](./using-a-custom-domain.md), you need to configure a 
 static IP address to ensure your custom domain mapping doesn't break.
 
 Knative uses a shared gateway to serve all incoming traffic within Knative 
