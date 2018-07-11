@@ -39,7 +39,7 @@ Run the following command to ensure that the external IP of the "knative-ingress
 ```shell
 kubectl get svc knative-ingressgateway -n istio-system
 ```
-The outpu should show the assigned address under the EXTERNAL-IP column:
+The output should show the assigned address under the EXTERNAL-IP column:
 ```
 NAME                     TYPE           CLUSTER-IP      EXTERNAL-IP     PORT(S)                                      AGE
 knative-ingressgateway   LoadBalancer   12.34.567.890   98.765.43.210   80:32380/TCP,443:32390/TCP,32400:32400/TCP   5m
