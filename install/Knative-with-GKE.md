@@ -162,7 +162,7 @@ You have two options for deploying your first app:
 ## Post installation
 
 After your Knative installation is running, there are some additional steps
-that you may want to complete to be able to use Knative for publicly available
+that you might want to complete to be able to use Knative for publicly available
 services.
 
 - [Assign a static IP address](gke-assign-static-ip-address.md)
