@@ -3,14 +3,14 @@
 This sample runs a simple web server that makes calls to other in-cluster services
 and responds to requests with "Hello World!".
 The purpose of this sample is to show generating metrics, logs and distributed traces
-(see [Logs and Metrics](../../docs/telemetry.md) for more information).
+(see [Logs](../../accessing-logs.md), [Metrics](../../accessing-metrics.md), and [Traces](../../accessing-traces.md) for more information).
 This sample also creates a dedicated Prometheus instances rather than using the one
 that is installed by default as a showcase of installing dedicated Prometheus instances.
 
 ## Prerequisites
 
-1. [Install Knative Serving](https://github.com/knative/install/blob/master/README.md)
-2. [Install Knative monitoring component](docs/telemetry.md)
+1. [Install Knative Serving](https://github.com/knative/docs/blob/master/install/README.md)
+2. [Install Knative monitoring component](../installing-logging-metrics-traces.md)
 3. Install [docker](https://www.docker.com/)
 
 
@@ -79,10 +79,10 @@ Sending logs done.
 ```
 
 ## Accessing logs
-You can access to the logs from Kibana UI - see [Logs and Metrics](../../docs/telemetry.md) for more information.
+You can access to the logs from Kibana UI - see [Logs](../../accessing-logs.md) for more information.
 
 ## Accessing per request traces
-You can access to per request traces from Zipkin UI - see [Logs and Metrics](../../docs/telemetry.md) for more information.
+You can access to per request traces from Zipkin UI - see [Traces](../../accessing-traces.md) for more information.
 
 ## Accessing custom metrics
 You can see published metrics using Prometheus UI. To access to the UI, forward the Prometheus server to your machine:
