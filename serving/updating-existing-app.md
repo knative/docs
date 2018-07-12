@@ -71,18 +71,18 @@ Create a new file called `stage2.yaml` and copy this into it:
 apiVersion: serving.knative.dev/v1alpha1
 kind: Route
 metadata:
-  name: route-demo
+  name: route-demo # Route name is unchanged, since we're updating an existing Route
   namespace: default
 spec:
   traffic:
   - configurationName: route-demo-config-v1
-    percent: 100
+    percent: 100 # All traffic still going to the first version
   - configurationName: route-demo-config-v2
     percent: 0
     name: v2
 ---
 apiVersion: serving.knative.dev/v1alpha1
-kind: Configuration
+kind: Configuration # Adding a new Configuration for the second app version
 metadata:
   name: route-demo-config-v2
   namespace: default
@@ -93,25 +93,31 @@ spec:
         knative.dev/type: container
     spec:
       container:
-        image: gcr.io/knative-samples/knative-route-demo:green
+        image: gcr.io/knative-samples/knative-route-demo:green # URL to the second version of the app
         imagePullPolicy: Always
         env:
           - name: T_VERSION
             value: "green"
 ```
 
+This updates the existing Route's configuration to add the second configuration, and adds
+the configuration for the second version of the app. We start with the percentage of traffic
+going to the new version at zero.
+
+Version 2 of the demo application displays the text "App v2" on a green background.
+
 Save the file, then deploy the application to your cluster:
 ```bash
 kubectl apply -f stage2.yaml
 ```
 
-This deploys an image of a demo application that displays the text
-"App v2" on a green background.
+Version 2 of the app is staged at this point. That means:
 
-This will only stage v2. That means:
-
-* No traffic will be routed to the v2 of the app at http://route-demo.default.YOUR_CUSTOM_DOMAIN.com
+* No traffic will be routed version 2 at the main URL, http://route-demo.default.YOUR_CUSTOM_DOMAIN.com
 * Knative creates a new route named v2 for testing the newly deployed version at http://v2.route-demo.default.YOUR_CUSTOM_DOMAIN.com
+
+This allows you to validate that the new version of the app is behaving as expected before switching
+any traffic over to it.
 
 
 ## Migrating traffic to the new version
@@ -122,14 +128,14 @@ Create a new file called `stage3.yaml` and copy this into it:
 apiVersion: serving.knative.dev/v1alpha1
 kind: Route
 metadata:
-  name: route-demo
+  name: route-demo # Updating our existing route
   namespace: default
 spec:
   traffic:
   - configurationName: route-demo-config-v1
-    percent: 50
+    percent: 50 # Updating the percentage from 100 to 50
   - configurationName: route-demo-config-v2
-    percent: 50
+    percent: 50 # Updating the percentage from 0 to 50
     name: v2
 ```
 
@@ -140,13 +146,13 @@ kubectl apply -f stage3.yaml
 ```
 
 Refresh the original route (http://route-demo.default.YOUR_CUSTOM_DOMAIN.com) a
-few times to show that some traffic now goes to v2 of the app.
+few times to see that some traffic now goes to version 2 of the app.
 
 > Note, this sample shows a 50/50 split to assure you don't have to refresh too much,
-  but it's recommended to start with 1-2% in a production environment
+  but it's recommended to start with 1-2% of traffic in a production environment
 
 
-## Reouting all traffic to the new version
+## Rerouting all traffic to the new version
 
 Create a new file called `stage4.yaml` and copy this into it:
 
@@ -154,15 +160,16 @@ Create a new file called `stage4.yaml` and copy this into it:
 apiVersion: serving.knative.dev/v1alpha1
 kind: Route
 metadata:
-  name: route-demo
+  name: route-demo # Updating our existing route
   namespace: default
 spec:
   traffic:
   - configurationName: route-demo-config-v1
     percent: 0
-    name: v1
+    name: v1 # Adding a new named route for v1
   - configurationName: route-demo-config-v2
     percent: 100
+    # Named route for v2 has been removed, since we don't need it anymore
 ```
 
 Save the file, then deploy the updated routing configuration to your cluster:
