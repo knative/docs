@@ -1,7 +1,7 @@
 # Updating an Existing App
 
 This guide demonstrates how to update an application that is serving
-traffic to a new version. With Knative, it's easy to reroute traffic
+traffic to a new version. With Knative, you can reroute traffic
 from one version of an application to another by changing the routing
 configuration. 
 
@@ -11,10 +11,9 @@ application.
 
 ## Before you begin
 
-We assume you have:
-
-* [Installed Knative](../install/README.md) on a Kubernetes cluster
-* [Configured a custom domain](../serving/using-a-custom-domain.md) for use with Knative
+You need:
+* A Kubernetes cluster with [Knative installed](../install/README.md).
+* (Optional) [A custom domain configured](../serving/using-a-custom-domain.md) for use with Knative.
 
 ## Deploying the first version
 
@@ -62,6 +61,9 @@ You'll now be able to view the sample app at
 http://route-demo.default.YOUR_CUSTOM_DOMAIN.com (replace `YOUR_CUSTOM_DOMAIN`)
 with the [custom domain](../serving/using-a-custom-domain.md) you configured for
 use with Knative.
+
+> Note: If you don't have a custom domain configured for use with Knative, you can interact
+  with your app using cURL requests instead. See [Interacting with your app](../install/getting-started-knative-app.md#interacting-with-your-app) for more information.
 
 ## Deploying the second version
 
