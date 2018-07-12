@@ -8,8 +8,8 @@ using cURL requests.
 You need:
 * A Kubernetes cluster with [Knative installed](./README.md).
 * An image of the app that you'd like to deploy available on a
-  container registry. An image of the sample application used in
-  this guide is available on GCR.
+  container registry. The image of the sample app used in
+  this guide is available on Google Container Registry.
 
 ## Sample application
 
@@ -74,8 +74,8 @@ Now that your service is created, Knative will perform the following steps:
 
 ### Interacting with your app
 
-To see if your app has been deployed succesfully, you need the HOST and
-IP_ADDRESS created by Knative.
+To see if your app has been deployed succesfully, you need the host URL and
+IP address created by Knative.
 
 1. To find the IP address for your service, enter
    `kubectl get svc knative-ingressgateway -n istio-system`. If your cluster is
@@ -98,7 +98,7 @@ IP_ADDRESS created by Knative.
      export IP_ADDRESS=$(kubectl get node  -o 'jsonpath={.items[0].status.addresses[0].address}'):$(kubectl get svc knative-ingressgateway -n istio-system   -o 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
       ```
 
-1. To find the HOST URL for your service, enter:
+1. To find the host URL for your service, enter:
 
     ```shell
     kubectl get services.serving.knative.dev helloworld-go  -o=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
