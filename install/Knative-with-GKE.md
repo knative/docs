@@ -153,6 +153,7 @@ a static IP address to be able to use Knative for publicly available services:
 
 - [Assign a static IP address](../serving/gke-assigning-static-ip-address.md)
 - [Configure a custom domain](../serving/using-a-custom-domain.md)
+- [Configure outbound network access](../serving/outbound-network-access.md)
 
 ## Deploying an app
 
