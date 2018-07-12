@@ -96,7 +96,7 @@ Istio components, the recommended configuration for a cluster is:
       --machine-type=n1-standard-4 \
       --enable-autoscaling --min-nodes=1 --max-nodes=10 \
       --enable-autorepair \
-      --scopes=service-control,service-management,compute-rw,storage-ro,cloud-platform,logging-write,monitoring-write,pubsub \
+      --scopes=service-control,service-management,compute-rw,storage-ro,cloud-platform,logging-write,monitoring-write,pubsub,datastore \
       --num-nodes=3
     ```  
 1. Grant cluster-admin permissions to the current user: 
@@ -153,7 +153,10 @@ a static IP address to be able to use Knative for publicly available services:
 
 - [Assign a static IP address](../serving/gke-assigning-static-ip-address.md)
 - [Configure a custom domain](../serving/using-a-custom-domain.md)
-- [Configure outbound network access](../serving/outbound-network-access.md)
+
+> Note: by default, Kantive blocks all outbound traffic. To enable outbound access (e.g. connecting to Cloud Storage API) you will also need to change the proxy scope. 
+
+[Configure outbound network access](../serving/outbound-network-access.md)
 
 ## Deploying an app
 
