@@ -31,7 +31,7 @@ isn't defined, it will print "NOT SPECIFIED".
 
 ## Configuring your deployment
 
-To deploy an app using Knative Serving, you need a configuration .yaml file
+To deploy an app using Knative Serving, you need a configuration `.yaml` file
 that defines a Service. For more information about the Service object, see the
 [Resource Types documentation](https://github.com/knative/serving/blob/master/docs/spec/overview.md#service).
 
