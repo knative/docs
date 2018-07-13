@@ -24,7 +24,7 @@ kind: ConfigMap
 [...]
 ```
 
-2. Edit the file to replace `example.com` the new domain that you wish to use and save your changes.
+2. Edit the file to replace `example.com` with the domain you'd like to use and save your changes.
 In this example, we configure `mydomain.com` for all routes: 
 
 ```yaml
