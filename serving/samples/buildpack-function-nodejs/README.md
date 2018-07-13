@@ -8,7 +8,7 @@ sample function for riff.
 
 ## Prerequisites
 
-[Install Knative Serving](https://github.com/knative/install/blob/master/README.md)
+[Install Knative Serving](https://github.com/knative/docs/blob/master/install/README.md)
 
 ## Running
 

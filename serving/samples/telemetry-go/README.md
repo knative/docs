@@ -9,7 +9,7 @@ that is installed by default as a showcase of installing dedicated Prometheus in
 
 ## Prerequisites
 
-1. [Install Knative Serving](https://github.com/knative/install/blob/master/README.md)
+1. [Install Knative Serving](https://github.com/knative/docs/blob/master/install/README.md)
 2. [Install Knative monitoring component](docs/telemetry.md)
 3. Install [docker](https://www.docker.com/)
 
