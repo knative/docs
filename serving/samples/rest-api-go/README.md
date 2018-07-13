@@ -24,7 +24,7 @@ docker build \
 docker push "${REPO}/sample/stock-rest-app"
 
 # Replace the image reference with our published image.
-perl -pi -e "s@github.com/knative/serving/sample/stock-rest-app@${REPO}/sample/stock-rest-app@g" sample/stock-rest-app/*.yaml
+perl -pi -e "s@github.com/knative/docs/serving/samples/rest-api-go@${REPO}/sample/stock-rest-app@g" sample/stock-rest-app/*.yaml
 
 # Deploy the Knative Serving sample
 kubectl apply -f sample/stock-rest-app/sample.yaml

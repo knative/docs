@@ -37,7 +37,7 @@ docker build \
 docker push "${REPO}/sample/knative-routing"
 
 # Replace the image reference with our published image.
-perl -pi -e "s@github.com/knative/serving/sample/knative-routing@${REPO}/sample/knative-routing@g" sample/knative-routing/*.yaml
+perl -pi -e "s@github.com/knative/docs/serving/samples/knative-routing-go@${REPO}/sample/knative-routing@g" sample/knative-routing/*.yaml
 
 # Deploy the "Search" and "Login" services.
 kubectl apply -f sample/knative-routing/sample.yaml
