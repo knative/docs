@@ -40,7 +40,7 @@ To deploy an app with Knative Serving, check out the
 
 ## Who is Knative for
 
-Knative was created with several personas in mind:
+Knative is designed for different personas:
 
 ### Developers
 
