@@ -29,7 +29,7 @@ docker build \
 docker push "${REPO}/sample/telemetrysample"
 
 # Replace the image reference with our published image.
-perl -pi -e "s@github.com/knative/serving/sample/telemetrysample@${REPO}/sample/telemetrysample@g" sample/telemetrysample/*.yaml
+perl -pi -e "s@github.com/knative/docs/serving/samples/telemetry-go@${REPO}/sample/telemetrysample@g" sample/telemetrysample/*.yaml
 
 # Deploy the Knative Serving sample
 kubectl apply -f sample/telemetrysample/
