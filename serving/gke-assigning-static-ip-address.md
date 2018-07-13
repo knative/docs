@@ -5,7 +5,7 @@ If you are running Knative on Google Kubernetes Engine and want to use a
 static IP address to ensure that your custom domain mapping doesn't break.
 
 Knative uses the shared `knative-shared-gateway` Gateway under the
-`knative-serving` namespace, to serve all incoming traffic within the
+`knative-serving` namespace to serve all incoming traffic within the
 Knative service mesh. The IP address to access the gateway is the 
 external IP address of the "knative-ingressgateway" service under the 
 `istio-system` namespace. Therefore, in order to set a static IP for the 
