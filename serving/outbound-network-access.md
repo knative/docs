@@ -1,7 +1,9 @@
 # Configuring outbound network access
 
+This guides walks you through enabling outbound network access for a Knative app.
+
 Knative blocks all outbound traffic by default. To enable outbound access (when you want to connect 
-to Cloud Storage API, for example), you need to change the scope of the proxy IP range by editing
+to the Cloud Storage API, for example), you need to change the scope of the proxy IP range by editing
 the `config-network` map.
 
 ## Determining the IP scope of your cluster
@@ -9,9 +11,10 @@ the `config-network` map.
 To set the correct scope, you need to determine the IP ranges of your cluster. The scope varies 
 depending on your platform:
 
-* For Google Container Engine (GKE) run the following command to determine the scope: 
+* For Google Container Engine (GKE) run the following command to determine the scope (insert the 
+  appropriate value for `your-cluster-id` and change the `--zone` parameter as necessary): 
   ```shell
-  gcloud container clusters describe XXXXXXX --zone=XXXXXX | grep -e clusterIpv4Cidr -e servicesIpv4Cidr
+  gcloud container clusters describe your-cluster-id --zone=us-west1-c | grep -e clusterIpv4Cidr -e servicesIpv4Cidr
   ```
 * For IBM Cloud Private run the following command: 
   ```shell
