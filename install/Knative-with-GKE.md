@@ -7,8 +7,8 @@ You can find [guides for other platforms here](README.md).
 
 ## Before you begin
 
-Knative requires a Kubernetes cluster v1.10 or newer. If you don't have one,
-you can create one on Google Cloud Platform.
+Knative requires a Kubernetes cluster v1.10 or newer. This guide walks you
+through creating a cluster with the correct specifications for Knative on Google Cloud Platform.
 
 This guide assumes you are using bash in a Mac or Linux environment; some
 commands will need to be adjusted for use in a Windows environment.
