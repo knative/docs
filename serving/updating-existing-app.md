@@ -158,7 +158,7 @@ kubectl apply -f stage3.yaml
 Refresh the original route (http://route-demo.default.YOUR_CUSTOM_DOMAIN.com) a
 few times to see that some traffic now goes to version 2 of the app.
 
-> Note, this sample shows a 50/50 split to assure you don't have to refresh too much,
+> Note: This sample shows a 50/50 split to assure you don't have to refresh too much,
   but it's recommended to start with 1-2% of traffic in a production environment
 
 
