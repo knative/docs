@@ -28,6 +28,9 @@ a static IP address to be able to use Knative for publicly available services:
 - [Assign a static IP address](../serving/gke-assigning-static-ip-address.md)
 - [Configure a custom domain](../serving/using-a-custom-domain.md)
 
+Knative Serving blocks all outbound traffic by default. To enable outbound access (when you want 
+to connect to Cloud Storage API, for example), you need to change the proxy scope by [configuring outbound network access](../serving/outbound-network-access.md).
+
 ## Deploying an app
 
 Now you're ready to deploy an app:
