@@ -82,5 +82,5 @@ To clean up the sample service:
 # Clean up the serving resources
 kubectl delete -f serving/samples/buildpack-app-dotnet/sample.yaml
 # Clean up the build template
-kubectl apply -f buildpack.yaml
+kubectl delete -f buildpack.yaml
 ```
