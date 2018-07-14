@@ -23,16 +23,15 @@ REPO="gcr.io/<your-project-here>"
 
 # Build and publish the container, run from the root directory.
 docker build \
-  --build-arg SAMPLE=telemetrysample \
-  --tag "${REPO}/sample/telemetrysample" \
-  --file=sample/Dockerfile.golang .
-docker push "${REPO}/sample/telemetrysample"
+  --tag "${REPO}/serving/samples/telemetry-go" \
+  --file=serving/samples/telemetry-go/Dockerfile .
+docker push "${REPO}/serving/samples/telemetry-go"
 
 # Replace the image reference with our published image.
-perl -pi -e "s@github.com/knative/docs/serving/samples/telemetry-go@${REPO}/sample/telemetrysample@g" sample/telemetrysample/*.yaml
+perl -pi -e "s@github.com/knative/docs/serving/samples/telemetry-go@${REPO}/serving/samples/telemetry-go@g" serving/samples/telemetry-go/*.yaml
 
 # Deploy the Knative Serving sample
-kubectl apply -f sample/telemetrysample/
+kubectl apply -f serving/samples/telemetry-go/
 ```
 
 ## Exploring
@@ -98,5 +97,5 @@ Then browse to http://localhost:9090.
 To clean up the sample service:
 
 ```shell
-kubectl delete -f sample/telemetrysample/
+kubectl delete -f serving/samples/telemetrysample-go/
 ```
