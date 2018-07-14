@@ -169,4 +169,4 @@ spec:
 #### Lots 'o trivial examples
 
 For a variety of additional (mostly trivial) examples, see also our [tests
-directory](https://github.com/knative/build/tree/master/tests).
+directory](https://github.com/knative/build/tree/master/test).
