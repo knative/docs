@@ -4,7 +4,7 @@ A demonstration of the autoscaling capabilities of an Knative Serving Revision.
 
 ## Prerequisites
 
-1. [Install Knative Serving](https://github.com/knative/install/blob/master/README.md)
+1. [Install Knative Serving](https://github.com/knative/docs/blob/master/install/README.md)
 1. Install [docker](https://www.docker.com/)
 
 ## Setup

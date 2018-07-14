@@ -6,7 +6,7 @@ This sample is dependent on [this issue](https://github.com/knative/serving/issu
 
 ## Prerequisites
 
-1. [Install Knative](https://github.com/knative/install/blob/master/README.md)
+1. [Install Knative](https://github.com/knative/docs/blob/master/install/README.md)
 1. Install [docker](https://www.docker.com/)
 
 ## Build and run the gRPC server

@@ -6,7 +6,7 @@ name from environment defined in configuration.
 
 ## Prerequisites
 
-1. [Install Knative Serving](https://github.com/knative/install/blob/master/README.md)
+1. [Install Knative Serving](https://github.com/knative/docs/blob/master/install/README.md)
 1. Install [docker](https://www.docker.com/)
 
 ## Setup

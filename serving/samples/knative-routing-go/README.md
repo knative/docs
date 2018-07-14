@@ -15,7 +15,7 @@ to the Login service.
 
 ## Prerequisites
 
-1. [Install Knative](https://github.com/knative/install/blob/master/README.md)
+1. [Install Knative](https://github.com/knative/docs/blob/master/install/README.md)
 1. Install [docker](https://www.docker.com/)
 1. Acquire a domain name. In this example, we use example.com. If you don't 
 have a domain name, you can modify your hosts file (on Mac or Linux) to map 
