@@ -13,21 +13,18 @@
 # limitations under the License.
 
 FROM golang AS builder
-ARG SAMPLE
-ARG BUILDTAG
 
 # Get the dependencies from GitHub
 RUN go get google.golang.org/grpc
 
-WORKDIR /go/src/github.com/knative/serving
-ADD . /go/src/github.com/knative/serving
+WORKDIR /go/src/github.com/knative/docs/
+ADD . /go/src/github.com/knative/docs/
 
-RUN CGO_ENABLED=0 go build -tags=${BUILDTAG} ./sample/${SAMPLE}
+RUN CGO_ENABLED=0 go build -tags=grpcping ./serving/samples/grpc-ping-go/
 
 FROM gcr.io/distroless/base
-ARG SAMPLE
 
 EXPOSE 8080
-COPY --from=builder /go/src/github.com/knative/serving/${SAMPLE} /sample
+COPY --from=builder /go/src/github.com/knative/docs/grpc-ping-go /sample
 
 ENTRYPOINT ["/sample"]

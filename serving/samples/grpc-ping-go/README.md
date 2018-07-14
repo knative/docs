@@ -18,17 +18,15 @@ REPO="gcr.io/<your-project-here>"
 
 # Build and publish the container, run from the root directory.
 docker build \
-  --build-arg SAMPLE=grpc-ping \
-  --build-arg BUILDTAG=grpcping \
-  --tag "${REPO}/sample/grpc-ping" \
-  --file=sample/grpc-ping/Dockerfile .
-docker push "${REPO}/sample/grpc-ping"
+  --tag "${REPO}/serving/samples/grpc-ping-go" \
+  --file=serving/samples/grpc-ping-go/Dockerfile .
+docker push "${REPO}/serving/samples/grpc-ping-go"
 
 # Replace the image reference with our published image.
-perl -pi -e "s@github.com/knative/docs/serving/samples/grpc-ping-go@${REPO}/sample/grpc-ping@g" sample/grpc-ping/*.yaml
+perl -pi -e "s@github.com/knative/docs/serving/samples/grpc-ping-go@${REPO}/serving/samples/grpc-ping-go@g" serving/samples/grpc-ping-go/*.yaml
 
 # Deploy the Knative sample
-kubectl apply -f sample/grpc-ping/sample.yaml
+kubectl apply -f serving/samples/grpc-ping-go/sample.yaml
 
 ```
 
@@ -47,5 +45,5 @@ export SERVICE_IP=`kubectl get svc knative-ingressgateway -n istio-system -o jso
 1. Use the client to send message streams to the gRPC server
 
 ```
-go run -tags=grpcping sample/grpc-ping/client/client.go -server_addr="$SERVICE_IP:80" -server_host_override="$SERVICE_HOST"
+go run -tags=grpcping ./serving/samples/grpc-ping-go/client/client.go -server_addr="$SERVICE_IP:80" -server_host_override="$SERVICE_HOST"
 ```

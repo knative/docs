@@ -27,9 +27,9 @@ Then you can deploy this to Knative Serving from the root directory via:
 ```shell
 # Replace the token string with a suitable registry
 REPO="gcr.io/<your-project-here>"
-perl -pi -e "s@DOCKER_REPO_OVERRIDE@$REPO@g" sample/buildpack-function/sample.yaml
+perl -pi -e "s@DOCKER_REPO_OVERRIDE@$REPO@g" serving/samples/buildpack-function-nodejs/sample.yaml
 
-kubectl apply -f sample/buildpack-function/sample.yaml
+kubectl apply -f serving/samples/buildpack-function-nodejs/sample.yaml
 ```
 
 Once deployed, you will see that it first builds:
@@ -79,5 +79,5 @@ $ curl http://${SERVICE_IP}/ -H "Host: $SERVICE_HOST" -H "Content-Type: applicat
 To clean up the sample service:
 
 ```shell
-kubectl delete -f sample/buildpack-function/sample.yaml
+kubectl delete -f serving/samples/buildpack-function-nodejs/sample.yaml
 ```
