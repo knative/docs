@@ -16,16 +16,15 @@ REPO="gcr.io/<your-project-here>"
 
 # Build and publish the container, run from the root directory.
 docker build \
-  --build-arg SAMPLE=autoscale \
-  --tag "${REPO}/sample/autoscale" \
-  --file=sample/Dockerfile.golang .
-docker push "${REPO}/sample/autoscale"
+  --tag "${REPO}/serving/samples/autoscale-go" \
+  --file=serving/samples/autoscale-go/Dockerfile .
+docker push "${REPO}/serving/samples/autoscale-go"
 
 # Replace the image reference with our published image.
-perl -pi -e "s@github.com/knative/docs/serving/samples/autoscale-go@${REPO}/sample/autoscale@g" sample/autoscale/sample.yaml
+perl -pi -e "s@github.com/knative/docs/serving/samples/autoscale-go@${REPO}/serving/samples/autoscale-go@g" serving/samples/autoscale-go/sample.yaml
 
 # Deploy the Knative Serving sample
-kubectl apply -f sample/autoscale/sample.yaml
+kubectl apply -f serving/samples/autoscale-go/sample.yaml
 
 ```
 
@@ -76,5 +75,5 @@ for i in `seq 4 4 120`; do kubectl -n hey logs hey-$i ; done | less
 
 ```shell
 kubectl delete namespace hey
-kubectl delete -f sample/autoscale/sample.yaml
+kubectl delete -f serving/samples/autoscale-go/sample.yaml
 ```
