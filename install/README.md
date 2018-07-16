@@ -39,4 +39,4 @@ and set up an Istio IP range for outbound network access:
 
 * [Assign a static IP address](../serving/gke-assigning-static-ip-address.md)
 * [Configure a custom domain](../serving/using-a-custom-domain.md)
-* [Configure outbound network access](../serving/outbound-network-access.md).
+* [Configure outbound network access](../serving/outbound-network-access.md)
