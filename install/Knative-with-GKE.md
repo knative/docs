@@ -7,7 +7,6 @@ You can find [guides for other platforms here](README.md).
 
 ## Before you begin
 
-
 Knative requires a Kubernetes cluster v1.10 or newer. `kubectl` v1.10 is also
 required.  This guide walks you through creating a cluster with the correct
 specifications for Knative on Google Cloud Platform.
@@ -19,7 +18,8 @@ commands will need to be adjusted for use in a Windows environment.
 
 1. If you already have `kubectl`, run `kubectl version` to check your client version.
 
-> If you already have `gcloud` installed with the `kubectl` component later than v1.10, you can skip these steps.
+1. If you already have `gcloud` installed with the `kubectl` component later than
+   v1.10, you can skip these steps.
 
 1. Download and install the `gcloud` command line tool:
    https://cloud.google.com/sdk/install
