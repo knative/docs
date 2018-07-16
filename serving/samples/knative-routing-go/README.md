@@ -15,7 +15,7 @@ to the Login service.
 
 ## Prerequisites
 
-1. [Install Knative](https://github.com/knative/install/blob/master/README.md)
+1. [Install Knative](https://github.com/knative/docs/blob/master/install/README.md)
 1. Install [docker](https://www.docker.com/)
 1. Acquire a domain name. In this example, we use example.com. If you don't 
 have a domain name, you can modify your hosts file (on Mac or Linux) to map 
@@ -30,17 +30,15 @@ REPO="gcr.io/<your-project-here>"
 
 # Build and publish the container, run from the root directory.
 docker build \
-  --build-arg SAMPLE=knative-routing \
-  --tag "${REPO}/sample/knative-routing" \
-  --file=sample/Dockerfile.golang .
-
-docker push "${REPO}/sample/knative-routing"
+  --tag "${REPO}/serving/samples/knative-routing-go" \
+  --file=serving/samples/knative-routing-go/Dockerfile .
+docker push "${REPO}/serving/samples/knative-routing-go"
 
 # Replace the image reference with our published image.
-perl -pi -e "s@github.com/knative/serving/sample/knative-routing@${REPO}/sample/knative-routing@g" sample/knative-routing/*.yaml
+perl -pi -e "s@github.com/knative/docs/serving/samples/knative-routing-go@${REPO}/serving/samples/knative-routing-go@g" serving/samples/knative-routing-go/*.yaml
 
-# Deploy the "Search" and "Login" services.
-kubectl apply -f sample/knative-routing/sample.yaml
+# Deploy the Knative Serving sample
+kubectl apply -f serving/samples/knative-routing-go/sample.yaml
 ```
 
 ## Exploring
@@ -93,7 +91,7 @@ Login Service is called !
 
 You can apply the custom routing rules defined in "routing.yaml" file with
 ```shell
-kubectl apply -f sample/knative-routing/routing.yaml
+kubectl apply -f serving/samples/knative-routing-go/routing.yaml
 ```
 The routing.yaml file will generate a new VirtualService "entry-route" for 
 domain "example.com". You can see it by running
@@ -137,7 +135,7 @@ Gateway again. The Gateway proxy checks the updated host, and forwards it to
 To clean up the sample resources:
 
 ```shell
-kubectl delete -f sample/knative-routing/sample.yaml
+kubectl delete -f serving/samples/knative-routing-go/sample.yaml
 
-kubectl delete -f sample/knative-routing/routing.yaml
+kubectl delete -f serving/samples/knative-routing-go/routing.yaml
 ```

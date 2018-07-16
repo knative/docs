@@ -11,17 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-apiVersion: serving.knative.dev/v1alpha1
-kind: Route
-metadata:
-  name: stock-route-example
-  namespace: default
-spec:
-  traffic:
-  - configurationName: stock-configuration-example
-    percent: 100
----
 apiVersion: serving.knative.dev/v1alpha1
 kind: Configuration
 metadata:
@@ -36,7 +25,7 @@ spec:
       container:
         # This is the Go import path for the binary to containerize
         # and substitute here.
-        image: github.com/knative/serving/sample/stock-rest-app
+        image: github.com/knative/docs/serving/samples/rest-api-go
         env:
           - name: RESOURCE
             value: stock
@@ -45,3 +34,13 @@ spec:
             path: /
           initialDelaySeconds: 3
           periodSeconds: 3
+---
+apiVersion: serving.knative.dev/v1alpha1
+kind: Route
+metadata:
+  name: stock-route-example
+  namespace: default
+spec:
+  traffic:
+  - configurationName: stock-configuration-example
+    percent: 100

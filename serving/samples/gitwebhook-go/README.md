@@ -6,7 +6,7 @@ github.
 
 ## Prerequisites
 
-1. [Install Knative Serving](https://github.com/knative/install/blob/master/README.md)
+1. [Install Knative Serving](https://github.com/knative/docs/blob/master/install/README.md)
 1. Install [docker](https://www.docker.com/)
 
 ## Setup
@@ -18,16 +18,15 @@ REPO="gcr.io/<your-project-here>"
 
 # Build and publish the container, run from the root directory.
 docker build \
-  --build-arg SAMPLE=gitwebhook \
-  --tag "${REPO}/sample/gitwebhook" \
-  --file=sample/Dockerfile.golang .
-docker push "${REPO}/sample/gitwebhook"
+  --tag "${REPO}/serving/samples/gitwebhook-go" \
+  --file=serving/samples/gitwebhook-go/Dockerfile .
+docker push "${REPO}/serving/samples/gitwebhook-go"
 
 # Replace the image reference with our published image.
-perl -pi -e "s@github.com/knative/serving/sample/gitwebhook@${REPO}/sample/gitwebhook@g" sample/gitwebhook/*.yaml
+perl -pi -e "s@github.com/knative/docs/serving/samples/gitwebhook-go@${REPO}/serving/samples/gitwebhook-go@g" serving/samples/gitwebhook-go/*.yaml
 
 # Deploy the Knative Serving sample
-kubectl apply -f sample/gitwebhook/sample.yaml
+kubectl apply -f serving/samples/gitwebhook-go/sample.yaml
 ```
 
 ## Exploring
@@ -81,5 +80,5 @@ will be modified with the suffix '(looks pretty legit)'
 To clean up the sample service:
 
 ```shell
-kubectl delete -f sample/gitwebhook/sample.yaml
+kubectl delete -f serving/samples/gitwebhook-go/sample.yaml
 ```

@@ -9,7 +9,7 @@ components of Knative to orchestrate an end-to-end deployment.
 ## Prerequisites
 
 * A Kubernetes cluster with Knative installed. Follow the
-  [installation instructions](https://github.com/knative/install/) if you need
+  [installation instructions](https://github.com/knative/docs/blob/master/install/README.md) if you need
   to create one.
 * Go installed and configured (optional, if you want to run the sample app
   locally).

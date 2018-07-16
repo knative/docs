@@ -6,7 +6,7 @@ name from environment defined in configuration.
 
 ## Prerequisites
 
-1. [Install Knative Serving](https://github.com/knative/install/blob/master/README.md)
+1. [Install Knative Serving](https://github.com/knative/docs/blob/master/install/README.md)
 1. Install [docker](https://www.docker.com/)
 
 ## Setup
@@ -18,16 +18,15 @@ REPO="gcr.io/<your-project-here>"
 
 # Build and publish the container, run from the root directory.
 docker build \
-  --build-arg SAMPLE=stock-rest-app \
-  --tag "${REPO}/sample/stock-rest-app" \
-  --file=sample/Dockerfile.golang .
-docker push "${REPO}/sample/stock-rest-app"
+  --tag "${REPO}/serving/samples/rest-api-go" \
+  --file=serving/samples/rest-api-go/Dockerfile .
+docker push "${REPO}/serving/samples/rest-api-go"
 
 # Replace the image reference with our published image.
-perl -pi -e "s@github.com/knative/serving/sample/stock-rest-app@${REPO}/sample/stock-rest-app@g" sample/stock-rest-app/*.yaml
+perl -pi -e "s@github.com/knative/docs/serving/samples/rest-api-go@${REPO}/serving/samples/rest-api-go@g" serving/samples/rest-api-go/*.yaml
 
 # Deploy the Knative Serving sample
-kubectl apply -f sample/stock-rest-app/sample.yaml
+kubectl apply -f serving/samples/rest-api-go/sample.yaml
 ```
 
 ## Exploring
@@ -100,7 +99,7 @@ curl --header "Host:$SERVICE_HOST" http://${SERVICE_IP}/stock/<ticker>
 
 You can update this to a new version. For example, update it with a new configuration.yaml via:
 ```shell
-kubectl apply -f sample/stock-rest-app/updated_configuration.yaml
+kubectl apply -f serving/samples/rest-api-go/updated_configuration.yaml
 ```
 
 Once deployed, traffic will shift to the new revision automatically. You can verify the new version
@@ -141,7 +140,7 @@ stock-configuration-example-00001   11m
 stock-configuration-example-00002   4m
 ```
 
-Update `traffic` part in [sample/stock-rest-app/sample.yaml](./sample.yaml) as:
+Update `traffic` part in [serving/samples/rest-api-go/sample.yaml](./sample.yaml) as:
 ```yaml
 traffic:
   - revisionName: <YOUR_FIRST_REVISION_NAME>
@@ -152,7 +151,7 @@ traffic:
 
 Then update your change via:
 ```shell
-kubectl apply -f sample/stock-rest-app/sample.yaml
+kubectl apply -f serving/samples/rest-api-go/sample.yaml
 ```
 
 Once updated, you can verify the traffic splitting by looking at route status and/or curling
@@ -163,5 +162,5 @@ the service.
 To clean up the sample service:
 
 ```shell
-kubectl delete -f sample/stock-rest-app/sample.yaml
+kubectl delete -f serving/samples/rest-api-go/sample.yaml
 ```

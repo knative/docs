@@ -17,16 +17,8 @@ We provide information for installing Knative on
 Follow these step-by-step guides for setting up Kubernetes and installing
 Knative components on the following platforms:
 
-* [Easy Install on Google Kubernetes Engine](Knative-with-GKE.md)
-* [Easy Install on Minikube](Knative-with-Minikube.md)
-
-## Configuring Knative Serving
-
-After your Knative installation is running, you can set up a custom domain with 
-a static IP address to be able to use Knative for publicly available services:
-
-- [Assign a static IP address](../serving/gke-assigning-static-ip-address.md)
-- [Configure a custom domain](../serving/using-a-custom-domain.md)
+* [Knative Install on Google Kubernetes Engine](Knative-with-GKE.md)
+* [Knative Install on Minikube](Knative-with-Minikube.md)
 
 ## Deploying an app
 
@@ -38,3 +30,13 @@ Now you're ready to deploy an app:
 
 * You can view the available [sample apps](../serving/samples/README.md) and
   deploy one of your choosing.
+
+## Configuring Knative Serving
+
+After your Knative installation is running, you can set up a custom domain with
+a static IP address to be able to use Knative for publicly available services
+and set up an Istio IP range for outbound network access:
+
+* [Assign a static IP address](../serving/gke-assigning-static-ip-address.md)
+* [Configure a custom domain](../serving/using-a-custom-domain.md)
+* [Configure outbound network access](../serving/outbound-network-access.md).

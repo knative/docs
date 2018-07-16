@@ -7,8 +7,8 @@ You can find [guides for other platforms here](README.md).
 
 ## Before you begin
 
-Knative requires a Kubernetes cluster v1.10 or newer. If you don't have one,
-you can create one on Google Cloud Platform.
+Knative requires a Kubernetes cluster v1.10 or newer. This guide walks you
+through creating a cluster with the correct specifications for Knative on Google Cloud Platform.
 
 This guide assumes you are using bash in a Mac or Linux environment; some
 commands will need to be adjusted for use in a Windows environment.
@@ -35,40 +35,45 @@ To simplify the command lines for this walkthrough, we need to define a few
 environment variables.
 
 1. Set a `PROJECT_ID` variable.
+   * If you don't have an existing GCP project that you'd like to use, replace
+     `my-knative-project` in the following command with the project ID you'd like to use. This variable
+     is used later to create your new GCP project. The project ID must be globally
+     unique across all GCP projects.
+     ```bash
+     export PROJECT_ID=my-knative-project
+     ```
    * If you already have a default project set in `gcloud`, enter:
       ```bash
       export PROJECT_ID=$(gcloud config get-value project)
       ```
-      Tip: Run `gcloud config get-value project` to view the ID of your default GCP project.
-      
-   * If you don't have an existing GCP project that you'd like to use, replace
-    `my-knative-project` in the following command with your desired project ID. This variable
-    is used later to create your new project ID in GCP. The project ID must be globally
-    unique across all GCP projects.
-      ```bash
-      export PROJECT_ID=my-knative-project
-      ```
-1. Set `CLUSTER_NAME` and `CLUSTER_ZONE` variables as desired:
+      Tip: Enter `gcloud config get-value project` to view the ID of your default GCP project.
+1. Set `CLUSTER_NAME` and `CLUSTER_ZONE` variables:
    ```bash
    export CLUSTER_NAME=knative
    export CLUSTER_ZONE=us-west1-c
    ```
+   The CLUSTER_NAME needs to be lowercase and unique among any other Kubernetes
+   clusters in your GCP project. The zone can be
+   [any compute zone available on GCP](https://cloud.google.com/compute/docs/regions-zones/#available).
+   These variables are used later to create a Kubernetes cluster.
 
 ### Setting up a Google Cloud Platform project
 
-You need a GCP project to create a Kubernetes Engine cluster.
+You need a GCP project to create a Google Kubernetes Engine cluster.
 
 1. Create a new GCP project and set it as your `gcloud` default, or set an
-   existing GCP as your `gcloud` default.
+   existing GCP as your `gcloud` default:
+    * If you don't already have a GCP project created, create a new project in `gcloud`:
+      ```bash
+      gcloud projects create $PROJECT_ID --set-as-default
+      ```
+      You also need to [enable billing](https://cloud.google.com/billing/docs/how-to/manage-billing-account)
+      for your new project.
     * If you already have a GCP project, make sure your project is set as your
-    `gcloud` default:
-     ```bash
-     gcloud config set project $PROJECT_ID
-     ```
-    * If you don't already have a GCP project configured, create a new project:
-     ```bash
-     gcloud projects create $PROJECT_ID --set-as-default
-     ```
+      `gcloud` default:
+      ```bash
+      gcloud config set project $PROJECT_ID
+      ```
 1. Enable the necessary APIs:
    ```
    gcloud services enable \
@@ -121,13 +126,17 @@ Knative depends on Istio.
     ```bash
     kubectl label namespace default istio-injection=enabled
     ```
-1. Monitor the Istio components, until all of the components show a `STATUS` of
+1. Monitor the Istio components until all of the components show a `STATUS` of
 `Running` or `Completed`:
     ```bash
-    kubectl get pods -n istio-system --watch
+    kubectl get pods -n istio-system
     ```
 
-CTRL+C when it's done.
+It will take a few minutes for all the components to be up and running; you can
+rerun the command to see the current status.
+
+> Note: Instead of rerunning the command, you can add `--watch` to the above
+  command to view the component's status updates in real time. Use CTRL + C to exit watch mode.
 
 ## Installing Knative Serving
 
@@ -139,24 +148,16 @@ and its dependencies:
 1. Monitor the Knative components, until all of the components show a `STATUS` of
 `Running`:
     ```bash
-    kubectl get pods -n knative-serving --watch
+    kubectl get pods -n knative-serving
     ```
 
-CTRL+C when it's done.
+Just as with the Istio components, it will take a few seconds for the Knative
+components to be up and running; you can rerun the command to see the current status.
+
+> Note: Instead of rerunning the command, you can add `--watch` to the above
+  command to view the component's status updates in real time. Use CTRL + C to exit watch mode.
 
 You are now ready to deploy an app to your new Knative cluster.
-
-## Configuring Knative Serving
-
-After your Knative installation is running, you can set up a custom domain with 
-a static IP address to be able to use Knative for publicly available services:
-
-- [Assign a static IP address](../serving/gke-assigning-static-ip-address.md)
-- [Configure a custom domain](../serving/using-a-custom-domain.md)
-
-> Note: by default, Kantive blocks all outbound traffic. To enable outbound access (e.g. connecting to Cloud Storage API) you will also need to change the proxy scope. 
-
-[Configure outbound network access](../serving/outbound-network-access.md)
 
 ## Deploying an app
 

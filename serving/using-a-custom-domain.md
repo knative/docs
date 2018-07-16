@@ -19,22 +19,13 @@ This command opens your default text editor and allows you to edit the config ma
 ```yaml
 apiVersion: v1
 data:
-  # These are example settings of domain.
-  # example.org will be used for routes having app=prod.
-  example.org: |
-    selector:
-      app: prod
-
-  # Default value for domain, for routes that does not have app=prod labels.
-  # Although it will match all routes, it is the least-specific rule so it
-  # will only be used if no other domain matches.
   example.com: ""
 kind: ConfigMap
 [...]
 ```
 
-2. Edit the file to replace `example.com` and `example.org` with the new domains that
-you wish to use and save your changes. In this example, we configure `mydomain.com` for all routes: 
+2. Edit the file to replace `example.com` with the domain you'd like to use and save your changes.
+In this example, we configure `mydomain.com` for all routes: 
 
 ```yaml
 apiVersion: v1

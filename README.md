@@ -10,7 +10,7 @@ real-world Kubernetes-based frameworks and applications, such as:
 
 - [Orchestrating source-to-container workflows on Kubernetes](build/README.md)
 - [Deploying a container to Knative](install/getting-started-knative-app.md)
-- [Updating your application on day 2 without an outage](serving/updating-existing-app.md)
+- [Updating your application without downtime](serving/updating-existing-app.md)
 - [Automatic scaling and sizing applications based on demand](serving/auto-scaling-with-knative.md)
 - [Binding events to functions, apps, and containers with Knative](events/binding-events-with-knative.md)
 
@@ -22,25 +22,19 @@ deploy, monitor, and debug it.
 
 ## Getting started with Knative
 
-To get started using Knative, [pick a Kubernetes cluster of your choice](https://kubernetes.io/docs/setup/pick-right-solution/) and follow the
-[Knative installation instructions](/install/README.md) to get the system up.
+1. Follow the [Knative installation instructions](/install/README.md) to get
+Knative installed on a Kubernetes cluster.
 
-There are a [number of samples](serving/samples/README.md) that you can build and
-run on your cluster once it's set up to help you get acquainted.
-
-You can choose to install individual Knative components following the
-instructions in each repo, or install a pre-built suite of components
-by following the instructions for your platform:
-
-- [Google Kubernetes Engine](install/Knative-with-GKE.md)
-- [MiniKube](install/Knative-with-Minikube.md)
-
-To deploy an app with Knative Serving, check out the
+2. To deploy your first app with Knative, check out the
 [Getting Started with Knative App Deployment guide](install/getting-started-knative-app.md).
 
-## Who is Knative for
+3. After you've run your first app, take a look at the available
+[sample applications](serving/samples/README.md) that you can build and
+run to help you get more familiar with Knative.
 
-Knative was created with several personas in mind:
+## Who Knative is for
+
+Knative is designed for different personas:
 
 ### Developers
 
@@ -76,7 +70,7 @@ Your own path to becoming a Knative contributor can
 [Bug reports](https://github.com/knative/serving/issues/new) and
 friction logs from new developers are especially welcome.
 
-## What are the Knative components
+## Available Knative components
 
 The following Knative components are currently available:
 
