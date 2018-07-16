@@ -15,8 +15,8 @@ real-world Kubernetes-based frameworks and applications, such as:
 - [Binding events to functions, apps, and containers with Knative](events/binding-events-with-knative.md)
 
 Knative focuses on the "boring but difficult" parts that everyone
-needs, but no one benefits from doing over again on their own. This in
-turn frees application developers to spend more time writing
+needs, but that no one benefits from doing over again on their own. This
+in turn frees application developers to spend more time writing
 interesting code, not worrying about how they are going to build,
 deploy, monitor, and debug it.
 
@@ -56,7 +56,7 @@ their own systems and pass the benefits along to their customers.
 
 ### Contributors
 
-With a clear project scope, lightweight governance model and clean
+With a clear project scope, lightweight governance model, and clean
 lines of separation between pluggable components, the Knative project
 establishes an efficient contributor workflow.
 
