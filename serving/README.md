@@ -8,13 +8,13 @@ and scales to support advanced scenarios.
 The Knative Serving project provides middleware primitives that enable:
 
 * Rapid deployment of serverless containers
-* Automatic scale up and down to zero
+* Automatic scaling up and down to zero
 * Routing and network programming for Istio components
-* Point in time snapshots of deployed code and configurations
+* Point-in-time snapshots of deployed code and configurations
 
 ## Serving resources
 
-Knative Serving defines a set of principled objects as Kubernetes
+Knative Serving defines a set of objects as Kubernetes
 Custom Resource Definitions (CRDs). These objects are used to define and control
 how your serverless workload behaves on the cluster:
 
@@ -31,8 +31,8 @@ how your serverless workload behaves on the cluster:
 * [Configuration](https://github.com/knative/serving/blob/master/docs/spec/spec.md#configuration):
   The `configuration.serving.knative.dev` resource maintains
   the desired state for your deployment. It provides a clean separation between
-  code and configuration, following the Twelve-Factor App methodology. Modifying a configuration
-  will create a new revision.
+  code and configuration and follows the Twelve-Factor App methodology. Modifying a configuration
+  creates a new revision.
 * [Revision](https://github.com/knative/serving/blob/master/docs/spec/spec.md#revision):
   The `revision.serving.knative.dev` resource is a point in time snapshot
   of the code and configuration for each modification made to the workload. Revisions
@@ -43,22 +43,21 @@ how your serverless workload behaves on the cluster:
 ## Getting Started
 
 To get started with Serving, check out one of the [hello world](samples/) sample projects.
-These projects use the `Service` resource, which manages all the details for you.
+These projects use the `Service` resource, which manages all of the details for you.
 
 With the `Service` resource, a deployed service will automatically have a matching route
-and configuration created. Each time the `Service` is updated, a new revision will be
+and configuration created. Each time the `Service` is updated, a new revision is
 created.
 
 For more information on the resources and their interactions, see the
 [Resource Types Overview](https://github.com/knative/serving/blob/master/docs/spec/overview.md)
-in the Knative Serving repo.
+in the Knative Serving repository.
 
-To serve workloads from a custom domain, see [Use a custom domain](DNS.md) for details on how to override
-the default `example.com` domain.
+To serve workloads from a custom domain, see [Use a custom domain](DNS.md).
 
 ## Known Issues
 
-See the [Knative Serving Issues](https://github.com/knative/serving/issues) for a full list of
+See the [Knative Serving Issues](https://github.com/knative/serving/issues) page for a full list of
 known issues.
 
 * **No support for TLS** - Currently the Knative Serving components do not support TLS connections for
