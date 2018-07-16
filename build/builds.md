@@ -1,12 +1,12 @@
 # Builds
 
-This document serves to define what "Builds" are, and their capabilities.
+This document defines what "Builds" are and their capabilities.
 
 
 ## What is a Build?
 
 A `Build` is the main custom resource introduced by this project.
-Builds are a "run to completion" resource, which start evaluating upon
+Builds are a "run to completion" resource. They start evaluating upon
 creation and run until they are `Complete` (or until the first failing
 step, resulting in a `Failed` status).
 
@@ -19,17 +19,17 @@ step, resulting in a `Failed` status).
 
 #### Source
 
-Builds may define a `source:` that describes the context with which to seed the
-build.  This context is put into `/workspace`, a volume that is mounted into
-the `source:` and all of the `steps:`.
+Builds may define a `source:`. A `source:` describes the context with which to 
+seed the build.  This context is put into `/workspace`, a volume that is
+mounted into the `source:` and all of the `steps:`.
 
 Currently, the following types of source are supported:
- * `git:` which can specify a `url:` and a `revision:`.
+ * `git:` can specify a `url:` and a `revision:`.
 
- * `custom:` which can specify an arbitrary container specification, similar to
+ * `custom:` can specify an arbitrary container specification, similar to
  steps (see below).
 
-* `gcs:` which can specify an archive stored at Google Cloud Storage (GCS).
+* `gcs:` can specify an archive stored at Cloud Storage.
 
 
 #### Steps or Template
@@ -38,26 +38,27 @@ The body of a build is defined through either a set of inlined `steps:` or by
 instantiating a [build template](./build-templates.md).
 
 `steps:` is a series of Kubernetes container references adhering to the [builder
-contract](./builder-contract.md).  These containers are evaluated in order,
+contract](./builder-contract.md). These containers are evaluated in order,
 until the first failure (or the last container completes successfully).
 
 
 #### Service Account
 
-Builds (like Pods) run as a particular service account.  If none is specified, it
+Builds (like Pods) run as a particular service account. If none is specified, it
 is run as the "default" service account in the namespace of the Build.
 
-A custom service account may be specified via `serviceAccountName: build-bot`. Note, service account names other than `build-bot` are acceptable.
+A custom service account can be specified via `serviceAccountName: build-bot`.
+Service account names other than `build-bot` are acceptable.
 
-Service accounts may be used to project certain types of credentials into the
-context of a Build automagically.  For more information on how this process is
+Service accounts can be used to project certain types of credentials into the
+context of a Build automagically. For more information on how this process is
 configured and how it works, see the [credential](./auth.md).
 
 
 #### Volumes
 
 Builds can specify a collection of volumes to make available to their build
-steps.  These complement the volumes that are implicitly created as part of
+steps. These complement the volumes that are implicitly created as part of
 the [builder contract](./builder-contract.md).
 
 Volumes can be used in a wide variety of ways, just as in Kubernetes itself.
@@ -74,8 +75,8 @@ Common examples include:
 
 ### Example Builds
 
-Here we will outline a number of simple illustrative builds with fully inlined
-specifications.  For examples of Builds leveraging templates, see [the build
+This section outlines a number of simple illustrative builds with fully inlined
+specifications. For examples of Builds that leverage templates, see [the build
 template documentation](./build-templates.md).
 
 
@@ -153,8 +154,8 @@ spec:
   # with `type: kubernetes.io/basic-auth`.  The username and password are
   # specified per usual, and there is an additional annotation on the Secret
   # of the form: `build.knative.dev/git-0: https://github.com`, which
-  # directs us to configure this basic authentication for use with github
-  # via Git.
+  # directs us to configure this basic authentication for use with GitHub
+  # through Git.
   serviceAccountName: build-bot
 
   source:
@@ -166,7 +167,7 @@ spec:
     args: ["cat", "SECRETS.md"]
 ```
 
-#### Lots 'o trivial examples
+#### Lots of trivial examples
 
 For a variety of additional (mostly trivial) examples, see also our [tests
 directory](https://github.com/knative/build/tree/master/test).
