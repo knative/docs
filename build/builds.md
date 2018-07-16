@@ -19,7 +19,7 @@ step, resulting in a `Failed` status).
 
 #### Source
 
-Builds may define a `source:` A `source:` describes the context with which to 
+Builds may define a `source:`. A `source:` describes the context with which to 
 seed the build.  This context is put into `/workspace`, a volume that is
 mounted into the `source:` and all of the `steps:`.
 
