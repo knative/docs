@@ -60,7 +60,7 @@ Istio components, the recommended configuration for a cluster is:
     ```
 1. Create a Kubernetes cluster on IKS with the required specifications:
     ```bash
-    bx cs cluster-create --name=$CLUSTER_NAME \
+    ibmcloud cs cluster-create --name=$CLUSTER_NAME \
       --zone=CLUSTER_ZONE \
       --kube-version=1.10.3 \
       --machine-type=b2c.4x16 \
@@ -70,7 +70,7 @@ Istio components, the recommended configuration for a cluster is:
     If you're starting in a fresh account with no public and private VLANs, they will be created automatically for you. If you already have VLANs configured in your account, get them via `ibmcloud cs vlans --zone $CLUSTER_LOCATION` and include the public/private VLAN in the `cluster-create` command like
 
     ```bash
-    bx cs cluster-create --name=$CLUSTER_NAME \
+    ibmcloud cs cluster-create --name=$CLUSTER_NAME \
       --zone=CLUSTER_ZONE \
       --kube-version=1.10.3 \
       --machine-type=b2c.4x16 \
