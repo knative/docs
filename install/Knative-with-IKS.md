@@ -12,7 +12,7 @@ through creating a cluster with the correct specifications for Knative on IBM
 Cloud Kubernetes Service.
 
 This guide assumes you are using bash in a Mac or Linux environment; some
-commands will need to be adjusted for use in a Windows environment.
+commands need to be adjusted for use in a Windows environment.
 
 ### Installing the IBM Cloud developer tools
 
@@ -33,7 +33,7 @@ commands will need to be adjusted for use in a Windows environment.
 
 ### Setting environment variables
 
-To simplify the command lines for this walkthrough, we need to define a few
+To simplify the command lines for this walkthrough, you need to define a few
 environment variables.
 
 1.  Set `CLUSTER_NAME`, `CLUSTER_REGION` and `CLUSTER_ZONE` variables:
@@ -80,9 +80,9 @@ components, the recommended configuration for a cluster is:
     ```
 
     If you're starting in a fresh account with no public and private VLANs, they
-    will be created automatically for you. If you already have VLANs configured
+    are created automatically for you. If you already have VLANs configured
     in your account, get them via `ibmcloud cs vlans --zone $CLUSTER_ZONE` and
-    include the public/private VLAN in the `cluster-create` command like
+    include the public/private VLAN in the `cluster-create` command:
 
     ```bash
     ibmcloud cs cluster-create --name=$CLUSTER_NAME \
@@ -100,7 +100,7 @@ components, the recommended configuration for a cluster is:
     ibmcloud cs clusters | grep $CLUSTER_NAME
     ```
 
-    It will take a while for your cluster to be deployed. Repeat the above
+    It can take a while for your cluster to be deployed. Repeat the above
     command until the state of your cluster is "normal".
 
 1.  Point `kubectl` to the cluster:
@@ -109,7 +109,7 @@ components, the recommended configuration for a cluster is:
     ibmcloud cs cluster-config $CLUSTER_NAME
     ```
 
-    Follow the instructions on screen to `EXPORT` the correct `KUBECONFIG` value
+    Follow the instructions on the screen to `EXPORT` the correct `KUBECONFIG` value
     to point to the created cluster.
 
 1.  Make sure all nodes are up:
@@ -118,7 +118,7 @@ components, the recommended configuration for a cluster is:
     kubectl get nodes
     ```
 
-    Make sure all nodes are in `Ready` state. You are now ready to install Istio
+    Make sure all the nodes are in `Ready` state. You are now ready to install Istio
     into your cluster.
 
 ## Installing Istio
@@ -152,10 +152,10 @@ rerun the command to see the current status.
     of `Running`: `bash kubectl get pods -n knative-serving`
 
 Just as with the Istio components, it will take a few seconds for the Knative
-components to be up and running; you can rerun the command to see the current
+components to be up and running; you can re-run the command to see the current
 status.
 
-> Note: Instead of rerunning the command, you can add `--watch` to the above
+> Note: Instead of re-running the command, you can add `--watch` to the above
 > command to view the component's status updates in real time. Use CTRL + C to
 > exit watch mode.
 
@@ -171,7 +171,7 @@ You have two options for deploying your first app:
   [Getting Started with Knative App Deployment](getting-started-knative-app.md)
   guide.
 
-- You can view the available [sample apps](../serving/samples/README.md) and
+- You can view the available [sample apps](../serving/samples) and
   deploy one of your choosing.
 
 ## Cleaning up
