@@ -72,8 +72,8 @@ following steps:
 *   Discuss your idea with the appropriate [working groups](WORKING-GROUPS.md)
     on the working group's mailing list.
 
-*   Once there is general agreement that the feature is useful, create a GitHub
-    issue to track the discussion. The issue should include information about
+*   Once there is general agreement that the feature is useful, [create a GitHub
+    issue](https://github.com/knative/docs/issues/new) to track the discussion. The issue should include information about
     the requirements and use cases that it is trying to address. Include a
     discussion of the proposed design and technical details of the
     implementation in the issue.
