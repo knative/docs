@@ -61,7 +61,7 @@ Istio components, the recommended configuration for a cluster is:
 1. Create a Kubernetes cluster on IKS with the required specifications:
     ```bash
     ibmcloud cs cluster-create --name=$CLUSTER_NAME \
-      --zone=CLUSTER_ZONE \
+      --zone=$CLUSTER_ZONE \
       --kube-version=1.10.3 \
       --machine-type=b2c.4x16 \
       --workers=3
@@ -71,7 +71,7 @@ Istio components, the recommended configuration for a cluster is:
 
     ```bash
     ibmcloud cs cluster-create --name=$CLUSTER_NAME \
-      --zone=CLUSTER_ZONE \
+      --zone=$CLUSTER_ZONE \
       --kube-version=1.10.3 \
       --machine-type=b2c.4x16 \
       --workers=3 \
