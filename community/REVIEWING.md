@@ -19,7 +19,7 @@ This document provides guidelines for how the project's
 
 First and foremost: as a potential contributor, your changes and ideas are
 welcome at any hour of the day or night, weekdays, weekends, and holidays.
-Please do not ever hesitate to ask a question or send a PR.
+Please do not ever hesitate to ask a question or submit a PR.
 
 ## Code of Conduct
 
