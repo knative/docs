@@ -1,30 +1,32 @@
 # Knative Install on IBM Cloud Kubernetes Service (IKS)
 
-This guide walks you through the installation of the latest version of
-Knative using pre-built images.
+This guide walks you through the installation of the latest version of Knative
+using pre-built images.
 
 You can find [guides for other platforms here](README.md).
 
 ## Before you begin
 
 Knative requires a Kubernetes cluster v1.10 or newer. This guide walks you
-through creating a cluster with the correct specifications for Knative on IBM Cloud Kubernetes Service.
+through creating a cluster with the correct specifications for Knative on IBM
+Cloud Kubernetes Service.
 
 This guide assumes you are using bash in a Mac or Linux environment; some
 commands will need to be adjusted for use in a Windows environment.
 
 ### Installing the IBM Cloud developer tools
 
-> If you already have `ibmcloud` installed with the `ibmcloud cs` plugin, you can skip these steps. 
+> If you already have `ibmcloud` installed with the `ibmcloud cs` plugin, you
+> can skip these steps.
 
-1. Download and install the `ibmcloud` command line tool:
-   https://console.bluemix.net/docs/cli/index.html#overview
-   
-1. Install the `cs` (container-service) plugin:
+1.  Download and install the `ibmcloud` command line tool:
+    https://console.bluemix.net/docs/cli/index.html#overview
+
+1.  Install the `cs` (container-service) plugin:
     ```bash
     ibmcloud plugin install container-service -r Bluemix
     ```
-1. Authorize `ibmcloud`:
+1.  Authorize `ibmcloud`:
     ```bash
     ibmcloud login
     ```
@@ -34,30 +36,41 @@ commands will need to be adjusted for use in a Windows environment.
 To simplify the command lines for this walkthrough, we need to define a few
 environment variables.
 
-1. Set `CLUSTER_NAME`, `CLUSTER_REGION` and `CLUSTER_ZONE` variables:
-   ```bash
-   export CLUSTER_NAME=knative
-   export CLUSTER_REGION=us-south
-   export CLUSTER_ZONE=dal13
-   ```
+1.  Set `CLUSTER_NAME`, `CLUSTER_REGION` and `CLUSTER_ZONE` variables:
 
-   - `CLUSTER_NAME` needs to be lowercase and unique among any other Kubernetes clusters in this IBM Cloud region.
-   - `CLUSTER_REGION` can be any region where IKS is available. You can get a list of all available regions via the [IBM Cloud documentation](https://console.bluemix.net/docs/containers/cs_regions.html#regions-and-zones) or via `ibmcloud cs regions`.
-   - `CLUSTER_ZONE` can be any availability-zone that is available in the specified region above. You can get a list of all avaible locations via the [IBM Cloud documentation](https://console.bluemix.net/docs/containers/cs_regions.html#zones) or via `ibmcloud cs zones` after you set the region via `ibmcloud cs region-set $CLUSTER_REGION`.
+    ```bash
+    export CLUSTER_NAME=knative
+    export CLUSTER_REGION=us-south
+    export CLUSTER_ZONE=dal13
+    ```
+
+    - `CLUSTER_NAME` needs to be lowercase and unique among any other Kubernetes
+      clusters in this IBM Cloud region.
+    - `CLUSTER_REGION` can be any region where IKS is available. You can get a
+      list of all available regions via the
+      [IBM Cloud documentation](https://console.bluemix.net/docs/containers/cs_regions.html#regions-and-zones)
+      or via `ibmcloud cs regions`.
+    - `CLUSTER_ZONE` can be any availability-zone that is available in the
+      specified region above. You can get a list of all avaible locations via
+      the
+      [IBM Cloud documentation](https://console.bluemix.net/docs/containers/cs_regions.html#zones)
+      or via `ibmcloud cs zones` after you set the region via
+      `ibmcloud cs region-set $CLUSTER_REGION`.
 
 ## Creating a Kubernetes cluster
 
-To make sure the cluster is large enough to host all the Knative and
-Istio components, the recommended configuration for a cluster is:
+To make sure the cluster is large enough to host all the Knative and Istio
+components, the recommended configuration for a cluster is:
 
-* Kubernetes version 1.10 or later
-* 4 vCPU nodes with 16GB memory (`b2c.4x16`)
+- Kubernetes version 1.10 or later
+- 4 vCPU nodes with 16GB memory (`b2c.4x16`)
 
-1. Set `ibmcloud` to the appropriate region:
+1.  Set `ibmcloud` to the appropriate region:
     ```bash
     ibmcloud cs region-set $CLUSTER_REGION
     ```
-1. Create a Kubernetes cluster on IKS with the required specifications:
+1.  Create a Kubernetes cluster on IKS with the required specifications:
+
     ```bash
     ibmcloud cs cluster-create --name=$CLUSTER_NAME \
       --zone=$CLUSTER_ZONE \
@@ -66,7 +79,10 @@ Istio components, the recommended configuration for a cluster is:
       --workers=3
     ```
 
-    If you're starting in a fresh account with no public and private VLANs, they will be created automatically for you. If you already have VLANs configured in your account, get them via `ibmcloud cs vlans --zone $CLUSTER_ZONE` and include the public/private VLAN in the `cluster-create` command like
+    If you're starting in a fresh account with no public and private VLANs, they
+    will be created automatically for you. If you already have VLANs configured
+    in your account, get them via `ibmcloud cs vlans --zone $CLUSTER_ZONE` and
+    include the public/private VLAN in the `cluster-create` command like
 
     ```bash
     ibmcloud cs cluster-create --name=$CLUSTER_NAME \
@@ -77,69 +93,71 @@ Istio components, the recommended configuration for a cluster is:
       --private-vlan $PRIVATE_VLAN_ID \
       --public-vlan $PUBLIC_VLAN_ID
     ```
-1. Wait until your Kubernetes cluster is deployed:
+
+1.  Wait until your Kubernetes cluster is deployed:
+
     ```bash
     ibmcloud cs clusters | grep $CLUSTER_NAME
     ```
 
-    It will take a while for your cluster to be deployed. Repeat the above command until the state of your cluster is "normal".
+    It will take a while for your cluster to be deployed. Repeat the above
+    command until the state of your cluster is "normal".
 
-1. Point `kubectl` to the cluster:
+1.  Point `kubectl` to the cluster:
+
     ```bash
     ibmcloud cs cluster-config $CLUSTER_NAME
     ```
 
-    Follow the instructions on screen to `EXPORT` the correct `KUBECONFIG` value to point to the created cluster.
+    Follow the instructions on screen to `EXPORT` the correct `KUBECONFIG` value
+    to point to the created cluster.
 
-1. Make sure all nodes are up:
+1.  Make sure all nodes are up:
+
     ```
     kubectl get nodes
     ```
 
-    Make sure all nodes are in `Ready` state. You are now ready to install Istio into your cluster.
+    Make sure all nodes are in `Ready` state. You are now ready to install Istio
+    into your cluster.
 
 ## Installing Istio
 
 Knative depends on Istio.
 
-1. Install Istio:
+1.  Install Istio:
     ```bash
     kubectl apply -f https://storage.googleapis.com/knative-releases/latest/istio.yaml
     ```
-1. Label the default namespace with `istio-injection=enabled`:
+1.  Label the default namespace with `istio-injection=enabled`:
     ```bash
     kubectl label namespace default istio-injection=enabled
     ```
-1. Monitor the Istio components until all of the components show a `STATUS` of
-`Running` or `Completed`:
-    ```bash
-    kubectl get pods -n istio-system
-    ```
+1.  Monitor the Istio components until all of the components show a `STATUS` of
+    `Running` or `Completed`: `bash kubectl get pods -n istio-system`
 
 It will take a few minutes for all the components to be up and running; you can
 rerun the command to see the current status.
 
 > Note: Instead of rerunning the command, you can add `--watch` to the above
-  command to view the component's status updates in real time. Use CTRL + C to exit watch mode.
+> command to view the component's status updates in real time. Use CTRL + C to
+> exit watch mode.
 
 ## Installing Knative Serving
 
-1. Next, we will install [Knative Serving](https://github.com/knative/serving)
-and its dependencies:
-    ```bash
-    kubectl apply -f https://storage.googleapis.com/knative-releases/latest/release.yaml
-    ```
-1. Monitor the Knative components, until all of the components show a `STATUS` of
-`Running`:
-    ```bash
-    kubectl get pods -n knative-serving
-    ```
+1.  Next, we will install [Knative Serving](https://github.com/knative/serving)
+    and its dependencies:
+    `bash kubectl apply -f https://storage.googleapis.com/knative-releases/latest/release.yaml`
+1.  Monitor the Knative components, until all of the components show a `STATUS`
+    of `Running`: `bash kubectl get pods -n knative-serving`
 
 Just as with the Istio components, it will take a few seconds for the Knative
-components to be up and running; you can rerun the command to see the current status.
+components to be up and running; you can rerun the command to see the current
+status.
 
 > Note: Instead of rerunning the command, you can add `--watch` to the above
-  command to view the component's status updates in real time. Use CTRL + C to exit watch mode.
+> command to view the component's status updates in real time. Use CTRL + C to
+> exit watch mode.
 
 You are now ready to deploy an app to your new Knative cluster.
 
@@ -149,18 +167,18 @@ Now that your cluster has Knative installed, you're ready to deploy an app.
 
 You have two options for deploying your first app:
 
-* You can follow the step-by-step
+- You can follow the step-by-step
   [Getting Started with Knative App Deployment](getting-started-knative-app.md)
   guide.
 
-* You can view the available [sample apps](../serving/samples/README.md) and
+- You can view the available [sample apps](../serving/samples/README.md) and
   deploy one of your choosing.
 
 ## Cleaning up
 
-Running a cluster in IKS costs money, so you might want to delete
-the cluster when you're done if you're not using it. Deleting the cluster will
-also remove Knative, Istio, and any apps you've deployed.
+Running a cluster in IKS costs money, so you might want to delete the cluster
+when you're done if you're not using it. Deleting the cluster will also remove
+Knative, Istio, and any apps you've deployed.
 
 To delete the cluster, enter the following command:
 
