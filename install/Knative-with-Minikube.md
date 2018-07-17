@@ -119,11 +119,13 @@ guide.
 If you'd like to view the available sample apps and deploy one of your choosing,
 head to the [sample apps](../serving/samples/README.md) repo.
 
-*NOTE:* When looking up the IP address to use for accessing your app you need to look up the NodePort for the `knative-ingressgateway` as well as the IP address used for Minikube. 
-You can use the following to look up the value to use for the {IP_ADDRESS} placeholder used in the samples:
-```shell
-echo $(minikube ip):$(kubectl get svc knative-ingressgateway -n istio-system -o 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
-```
+> Note: When looking up the IP address to use for accessing your app, you need to look up
+  the NodePort for the `knative-ingressgateway` as well as the IP address used for Minikube.
+  You can use the following command to look up the value to use for the {IP_ADDRESS} placeholder
+  used in the samples:
+  ```shell
+  echo $(minikube ip):$(kubectl get svc knative-ingressgateway -n istio-system -o 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
+  ```
 
 ## Cleaning up
 
