@@ -67,7 +67,7 @@ Istio components, the recommended configuration for a cluster is:
       --workers=3
     ```
 
-    If you're starting in a fresh account with no public and private VLANs, they will be created automatically for you. If you already have VLANs configured in your account, get them via `ibmcloud cs vlans --zone $CLUSTER_LOCATION` and include the public/private VLAN in the `cluster-create` command like
+    If you're starting in a fresh account with no public and private VLANs, they will be created automatically for you. If you already have VLANs configured in your account, get them via `ibmcloud cs vlans --zone $CLUSTER_ZONE` and include the public/private VLAN in the `cluster-create` command like
 
     ```bash
     ibmcloud cs cluster-create --name=$CLUSTER_NAME \
