@@ -1,13 +1,13 @@
-# knative Personas
+# Knative Personas
 
 When discussing user actions, it is often helpful to [define specific
 user roles](https://en.wikipedia.org/wiki/Persona_(user_experience)) who
 might want to do the action.
 
 
-## knative Build
+## Knative Build
 
-We expect the build components of knative to be useful on their own,
+We expect the build components of Knative to be useful on their own,
 as well as in conjunction with the compute components. 
 
 ### Developer
