@@ -41,10 +41,9 @@ environment variables.
    export CLUSTER_ZONE=dal13
    ```
 
-   The `CLUSTER_NAME` needs to be lowercase and unique among any other Kubernetes
-   clusters in this IBM Cloud region.
-   The `CLUSTER_REGION` can be any region where IKS is available. You can get a list of all available regions via the [IBM Cloud documentation](https://console.bluemix.net/docs/containers/cs_regions.html#regions-and-zones) or via `ibmcloud cs regions`.
-   The `CLUSTER_ZONE` can be any availability-zone that is available in the specified region above. You can get a list of all avaible locations via the [IBM Cloud documentation](https://console.bluemix.net/docs/containers/cs_regions.html#zones) or via `ibmcloud cs zones` after you set the region via `ibmcloud cs region-set $CLUSTER_REGION`.
+   - `CLUSTER_NAME` needs to be lowercase and unique among any other Kubernetes clusters in this IBM Cloud region.
+   - `CLUSTER_REGION` can be any region where IKS is available. You can get a list of all available regions via the [IBM Cloud documentation](https://console.bluemix.net/docs/containers/cs_regions.html#regions-and-zones) or via `ibmcloud cs regions`.
+   - `CLUSTER_ZONE` can be any availability-zone that is available in the specified region above. You can get a list of all avaible locations via the [IBM Cloud documentation](https://console.bluemix.net/docs/containers/cs_regions.html#zones) or via `ibmcloud cs zones` after you set the region via `ibmcloud cs region-set $CLUSTER_REGION`.
 
 ## Creating a Kubernetes cluster
 
