@@ -5,7 +5,7 @@ Follow this guide to install Knative components on a platform of your choice.
 ## Choosing a Kubernetes cluster
 
 To get started with Knative, you need a Kubernetes cluster. If you aren't
-sure what Kubernetes platform is right for you, see
+sure which Kubernetes platform is right for you, see
 [Picking the Right Solution](https://kubernetes.io/docs/setup/pick-right-solution/).
 
 We provide information for installing Knative on
@@ -25,12 +25,12 @@ Knative components on the following platforms:
 
 Now you're ready to deploy an app:
 
-* You can follow the step-by-step
+* Follow the step-by-step
   [Getting Started with Knative App Deployment](getting-started-knative-app.md)
   guide.
 
-* You can view the available [sample apps](../serving/samples) and
-  deploy one of your choosing.
+* View the available [sample apps](../serving/samples) and deploy one of your
+  choosing.
 
 ## Configuring Knative Serving
 
