@@ -34,7 +34,7 @@ commands will need to be adjusted for use in a Windows environment.
 To simplify the command lines for this walkthrough, we need to define a few
 environment variables.
 
-1. Set `CLUSTER_NAME`, `CLUSTER_REGION` and `CLUSTER_LOCATION` variables:
+1. Set `CLUSTER_NAME`, `CLUSTER_REGION` and `CLUSTER_ZONE` variables:
    ```bash
    export CLUSTER_NAME=knative
    export CLUSTER_REGION=us-south
