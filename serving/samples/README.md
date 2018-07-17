@@ -1,13 +1,21 @@
-# Samples for knative/serving project
+# Knative Serving Sample Applications
 
-* Hello World - Quick introduction that highlights how to deploy an app using
-  Knative Serving.
-  * [C#](helloworld-csharp/README.md)
-  * [Go](helloworld-go/README.md)
-  * [Java](helloworld-java/README.md)
-  * [Node.js](helloworld-nodejs/README.md)
-  * [PHP](helloworld-php/README.md)
-  * [Python](helloworld-python/README.md)
-  * [Ruby](helloworld-ruby/README.md)
-  * [Rust](helloworld-rust/README.md)
+This directory contains sample applications, developed on Knative, to illustrate
+different use-cases and resources. See [Knative Serving](https://github.com/knative/docs/tree/master/serving)
+to learn more about Knative Custom Resource Definitions.
 
+
+| Name | Description | Languages |
+| ---- | ----------- |:---------:|
+| Autoscale | A demonstration of the autoscaling capabilities of an Knative Serving Revision. | [Go](autoscale-go/README.md) |
+| Private Repo Build | An example of deploying a Knative Serving Service using a Github deploy-key and a DockerHub image pull secret. | [Go](build-private-repo-go/README.md) |
+| Buildpack for Applications | A sample app that demonstrates usage of Cloud Foundry buildpacks on Knative Serving. | [.NET](buildpack-app-dotnet/README.md) |
+| Buildpack for Functions | A sample function that demonstrates usage of Cloud Foundry buildpacks on Knative Serving. | [Node.js](buildpack-function-nodej/README.md) |
+| Github Webhook | A simple webhook handler that demonstrates interacting with Github. | [Go](gitwebhook-go/README.md) |
+| gRPC | A simple gRPC server. | [Go](grpc-ping-go/README.md) |
+| Hello World | A quick introduction that highlights how to deploy an app using Knative Serving | [C#](helloworld-csharp/README.md), [Go](helloworld-go/README.md), [Java](helloworld-java/README.md), [Node.js](helloworld-nodejs/README.md), [PHP](helloworld-php/README.md), [Python](helloworld-python/README.md), [Ruby](helloworld-ruby/README.md), [Rust](helloworld-rust/README.md) |
+| Knative Routing | An example of mapping multiple Knative services to different paths under a single domain name using the Istio VirtualService concept. | [Go](knative-routing-go/README.md) |
+| Rest API | A simple Restful service that exposes an endpoint defined by an environment variable described in the Knative Configuration. | [Go](rest-api-go/README.md) |
+| Source to URL | A sample that shows how to use Knative to go from source code in a git repository to a running application with a URL. | [Go](source-to-url/README.md) |
+| Telemetry | This sample runs a simple web server that makes calls to other in-cluster services and responds to requests with "Hello World!". The purpose of this sample is to show generating metrics, logs and distributed traces. | [Go](telemtry-go/README.md) |
+| Thumbnailer | An example of deploying a 'dockerized' application to Knative Serving which takes video URL as an input and generates its thumbnail image. | [Go](thumbnailer-go/README.md) |
