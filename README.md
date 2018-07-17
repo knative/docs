@@ -1,6 +1,6 @@
 # Welcome, Knative
 
-Knative (pronounced /ˈnā-tiv/) extends Kubernetes to provide the
+Knative (pronounced kay-nay-tiv) extends Kubernetes to provide the
 missing middleware that developers need to create modern,
 source-centric, container-based, cloud-native applications.
 
