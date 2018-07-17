@@ -12,7 +12,7 @@ real-world Kubernetes-based frameworks and applications, such as:
 - [Deploying a container to Knative](install/getting-started-knative-app.md)
 - [Updating your application without downtime](serving/updating-existing-app.md)
 - [Automatic scaling and sizing applications based on demand](serving/auto-scaling-with-knative.md)
-- [Binding events to functions, apps, and containers with Knative](events/binding-events-with-knative.md)
+- [Binding events to functions, apps, and containers with Knative](events/)
 
 Knative focuses on the "boring but difficult" parts that everyone
 needs, but that no one benefits from doing over again on their own. This
