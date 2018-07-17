@@ -19,6 +19,7 @@ Knative components on the following platforms:
 
 * [Knative Install on Google Kubernetes Engine](Knative-with-GKE.md)
 * [Knative Install on Minikube](Knative-with-Minikube.md)
+* [Knative Install on IBM Cloud Kubernetes Service](Knative-with-IKS.md)
 
 ## Deploying an app
 
@@ -28,7 +29,7 @@ Now you're ready to deploy an app:
   [Getting Started with Knative App Deployment](getting-started-knative-app.md)
   guide.
 
-* You can view the available [sample apps](../serving/samples/README.md) and
+* You can view the available [sample apps](../serving/samples) and
   deploy one of your choosing.
 
 ## Configuring Knative Serving
