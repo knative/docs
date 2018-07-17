@@ -29,24 +29,24 @@ For Linux use:
 
 ```shell
 minikube start --memory=8192 --cpus=4 \
-  --kubernetes-version=v1.10.4 \
+  --kubernetes-version=v1.10.5 \
   --vm-driver=kvm2 \
   --bootstrapper=kubeadm \
   --extra-config=controller-manager.cluster-signing-cert-file="/var/lib/localkube/certs/ca.crt" \
   --extra-config=controller-manager.cluster-signing-key-file="/var/lib/localkube/certs/ca.key" \
-  --extra-config=apiserver.admission-control="DenyEscalatingExec,LimitRanger,NamespaceExists,NamespaceLifecycle,ResourceQuota,ServiceAccount,DefaultStorageClass,MutatingAdmissionWebhook"
+  --extra-config=apiserver.admission-control="LimitRanger,NamespaceExists,NamespaceLifecycle,ResourceQuota,ServiceAccount,DefaultStorageClass,MutatingAdmissionWebhook"
 ```
 
 For macOS use:
 
 ```shell
 minikube start --memory=8192 --cpus=4 \
-  --kubernetes-version=v1.10.4 \
+  --kubernetes-version=v1.10.5 \
   --vm-driver=hyperkit \
   --bootstrapper=kubeadm \
   --extra-config=controller-manager.cluster-signing-cert-file="/var/lib/localkube/certs/ca.crt" \
   --extra-config=controller-manager.cluster-signing-key-file="/var/lib/localkube/certs/ca.key" \
-  --extra-config=apiserver.admission-control="DenyEscalatingExec,LimitRanger,NamespaceExists,NamespaceLifecycle,ResourceQuota,ServiceAccount,DefaultStorageClass,MutatingAdmissionWebhook"
+  --extra-config=apiserver.admission-control="LimitRanger,NamespaceExists,NamespaceLifecycle,ResourceQuota,ServiceAccount,DefaultStorageClass,MutatingAdmissionWebhook"
 ```
 
 ## Installing Istio
@@ -83,10 +83,13 @@ Next, we will install [Knative Serving](https://github.com/knative/serving):
 We are using the `https://storage.googleapis.com/knative-releases/latest/release-lite.yaml`
 file which omits some of the monitoring components to reduce the memory used by
 the Knative components since you do have limited resources available. To use the
-provided `release-lite.yaml` release run:
+provided `release-lite.yaml` release run (We are changing
+`LoadBalancer` to `NodePort` for the `knative-ingress` service):
 
 ```shell
-kubectl apply -f https://storage.googleapis.com/knative-releases/latest/release-lite.yaml
+curl -L https://storage.googleapis.com/knative-releases/latest/release-lite.yaml \
+  | sed 's/LoadBalancer/NodePort/' \
+  | kubectl apply -f -
 ```
 
 Monitor the Knative components, until all of the components show a `STATUS` of
@@ -115,6 +118,14 @@ guide.
 
 If you'd like to view the available sample apps and deploy one of your choosing,
 head to the [sample apps](../serving/samples/README.md) repo.
+
+> Note: When looking up the IP address to use for accessing your app, you need to look up
+  the NodePort for the `knative-ingressgateway` as well as the IP address used for Minikube.
+  You can use the following command to look up the value to use for the {IP_ADDRESS} placeholder
+  used in the samples:
+  ```shell
+  echo $(minikube ip):$(kubectl get svc knative-ingressgateway -n istio-system -o 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
+  ```
 
 ## Cleaning up
 
