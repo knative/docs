@@ -16,7 +16,6 @@ To create the secret, run the following command.
 ```shell
 # Replace <cert.pk> and <cert.pem> in the following command with the correct
 # name of your certificate and private key file.
-
 kubectl create -n istio-system secret tls istio-ingressgateway-certs \
     --key cert.pk \
     --cert cert.pem
@@ -28,8 +27,7 @@ Run this,
 ```shell
 kubectl edit gateway knative-shared-gateway -n knative-serving
 ```
-then update your Gateway spec to look like
-
+then update your Gateway spec to look like this
 ```
   spec:
     selector:
