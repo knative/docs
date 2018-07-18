@@ -58,7 +58,7 @@ in the Knative Serving repository.
 * [Autoscaling with Knative Serving](./samples/autoscale-go/README.md)
 * [Source-to-URL with Knative Serving](./samples/source-to-url-go/README.md)
 * [Telemetry with Knative Serving](./samples/telemetry-go/README.md)
-* [REST API sample](./samples/rest-ap-go/README.md)
+* [REST API sample](./samples/rest-api-go/README.md)
 
 ## Setting up Logging and Metrics 
 
