@@ -50,7 +50,7 @@ The following example is a configuration file for a build that includes multiple
 
 ### Learn more 
 
-See the following reference topics for more inforamation about the components of a Knative build:
+See the following reference topics for more information about the components of a Knative build:
 
 * [Builds](https://github.com/knative/docs/blob/master/build/builds.md)
 * [Build Templates](https://github.com/knative/docs/blob/master/build/build-templates.md)
