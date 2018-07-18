@@ -17,8 +17,8 @@ behavior to knative-code-of-conduct@googlegroups.com.
 ### Style guide
 
 Knative documentation follows the
-[Google Developer Documentation Style Guide](https://developers.google.com/style/)
-; use it as a reference for writing style questions.
+[Google Developer Documentation Style Guide](https://developers.google.com/style/);
+use it as a reference for writing style questions.
 
 ## Contributing to Documentation
 
