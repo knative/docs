@@ -17,8 +17,9 @@ This document provides guidelines for how the project's
 
 ## Pull requests welcome
 
-As a potential contributor, your changes and ideas are always welcome.
-Don't hesitate to ask a question or send a PR.
+First and foremost: as a potential contributor, your changes and ideas are
+welcome at any hour of the day or night, weekdays, weekends, and holidays.
+Please do not ever hesitate to ask a question or submit a PR.
 
 ## Code of Conduct
 
