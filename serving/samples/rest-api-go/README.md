@@ -1,7 +1,7 @@
 # Stock
 
-A simple Restful service for testing purpose. It expose an endpoint, which takes
-a stock ticker (stock symbol) and output the stock price. It uses the the REST resource
+A simple RESTful service for testing purposes. It exposes an endpoint, which takes
+a stock ticker (stock symbol), then outputs the stock price. It uses the the REST resource
 name from environment defined in configuration.
 
 ## Prerequisites
