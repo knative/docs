@@ -40,11 +40,11 @@ deploy, monitor, and debug it.
 
 ### Networking
 
-* [Using a custom domain](./serving/using-a-custom-domain.md)
+* [Using a Custom Domain with Knative](./serving/using-a-custom-domain.md)
 
 ### Configuration
 
-* [Setting up a docker registry](./serving/setting-up-a-docker-registry.md)
+* [Setting up a Docker Registry](./serving/setting-up-a-docker-registry.md)
 
 ## Who Knative is for
 
