@@ -79,6 +79,6 @@ known issues.
 
 ## Configuration
 
-* [Setting up a docker registry)(./setting-up-a-docker-registry.md)
+* [Setting up a docker registry](./setting-up-a-docker-registry.md)
 
 
