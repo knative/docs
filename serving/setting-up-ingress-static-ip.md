@@ -36,6 +36,8 @@ kubectl patch svc knative-ingressgateway -n istio-system \
 
 ### Step 2: Verify static IP address of knative-ingressgateway service
 
+**It may take several minutes before the ingress gateway picks up the new assigned static IP address.**
+
 You can check the external IP of the "knative-ingressgateway" service with:
 ```shell
 kubectl get svc knative-ingressgateway -n istio-system
@@ -45,5 +47,3 @@ The result should be something like
 NAME                     TYPE           CLUSTER-IP      EXTERNAL-IP     PORT(S)                                      AGE
 knative-ingressgateway   LoadBalancer   10.50.250.120   35.210.48.100   80:32380/TCP,443:32390/TCP,32400:32400/TCP   5h
 ```
-The external IP will be eventually set to the static IP. This process could 
-take several minutes.
