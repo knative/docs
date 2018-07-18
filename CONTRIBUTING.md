@@ -10,9 +10,15 @@ propose changes to this document in a pull request.
 
 ### Code of Conduct
 
-Knative follows the [Knative Code of Conduct](code-of-conduct.md). By
+Knative follows the [Knative Code of Conduct](community/CODE-OF-CONDUCT.md). By
 participating, you are expected to uphold this code. Please report unacceptable
 behavior to knative-code-of-conduct@googlegroups.com.
+
+### Style guide
+
+Knative documentation follows the
+[Google Developer Documentation Style Guide](https://developers.google.com/style/)
+; use it as a reference for writing style questions.
 
 ## Contributing to Documentation
 
