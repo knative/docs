@@ -37,7 +37,8 @@ productivity and inter-personal interactions.
 ## Contributor license agreements
 
 We'd love to accept your patches! But before we can take them, you will have to
-fill out the [Google CLA](https://cla.developers.google.com).
+fill out the [Google CLA](https://cla.developers.google.com). (Make sure to fill
+out the CLA with the same email address you used to register for Github.)
 
 Once you are CLA'ed, we'll be able to accept your pull requests. This is
 necessary because you own the copyright to your changes, even after your
@@ -73,10 +74,10 @@ following steps:
     on the working group's mailing list.
 
 *   Once there is general agreement that the feature is useful, [create a GitHub
-    issue](https://github.com/knative/docs/issues/new) to track the discussion. The issue should include information about
-    the requirements and use cases that it is trying to address. Include a
-    discussion of the proposed design and technical details of the
-    implementation in the issue.
+    issue](https://github.com/knative/docs/issues/new) to track the discussion.
+    The issue should include information about the requirements and use cases
+    that it is trying to address. Include a discussion of the proposed design
+    and technical details of the implementation in the issue.
 
 *   If the feature is substantial enough:
 
@@ -93,10 +94,12 @@ following steps:
         note with the design decision and the general execution plan to the
         working group's mailing list and on the feature's issue.
 
-*   Submit PRs to knative/serving with your code changes.
+*   Submit PRs to [knative/serving](https://github.com/knative/serving/pulls)
+    with your code changes.
 
 *   Submit PRs to knative/serving with user documentation for your feature,
-    including usage examples when possible.
+    including usage examples when possible. Add documentation to
+    [knative/docs/serving](https://github.com/knative/docs/tree/master/serving).
     <!-- TODO: switch to knative/serving.dev) -->
 
 *Note that we prefer bite-sized PRs instead of giant monster PRs. It's therefore
