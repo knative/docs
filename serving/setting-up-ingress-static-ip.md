@@ -10,7 +10,7 @@ gateway, you just need to set the external IP address of the
 
 Platforms:
 
-* [Google Kubernetes Engine](#google-kubernetes-engine--gke-)
+* [Google Kubernetes Engine](#google-kubernetes-engine-gke)
 
 
 ## Prerequisites
