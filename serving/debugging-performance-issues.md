@@ -8,7 +8,7 @@ help investigate such issues. This document reviews these dashboards and tools.
 
 Start your investigation with the "Revision - HTTP Requests" dashboard. 
 
-1.  To open this dashboard, open Grafana UI as described in
+1.  To open this dashboard, open the Grafana UI as described in
     [Accessing Metrics](./accessing-metrics.md) and navigate to 
     "Knative Serving - Revision HTTP Requests".
 
@@ -77,7 +77,7 @@ resources fast enough, or that the Kubernetes cluster is out of requested
 resources.
 
 A large gap between the requested pod count and the desired pod count indicates that
-the Knative Serving autoscaler is unable to communicate with Kubernetes master to make
+the Knative Serving autoscaler is unable to communicate with the Kubernetes master to make
 the request.
 
 In the preceding example, the autoscaler requested 18 pods to optimally serve the traffic
