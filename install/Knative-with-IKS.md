@@ -36,7 +36,7 @@ commands need to be adjusted for use in a Windows environment.
 To simplify the command lines for this walkthrough, you need to define a few
 environment variables.
 
-1.  Set `CLUSTER_NAME`, `CLUSTER_REGION` and `CLUSTER_ZONE` variables:
+1.  Set `CLUSTER_NAME`, `CLUSTER_REGION`, and `CLUSTER_ZONE` variables:
 
     ```bash
     export CLUSTER_NAME=knative
@@ -44,17 +44,16 @@ environment variables.
     export CLUSTER_ZONE=dal13
     ```
 
-    - `CLUSTER_NAME` needs to be lowercase and unique among any other Kubernetes
+    - `CLUSTER_NAME` must be lowercase and unique among any other Kubernetes
       clusters in this IBM Cloud region.
     - `CLUSTER_REGION` can be any region where IKS is available. You can get a
       list of all available regions via the
       [IBM Cloud documentation](https://console.bluemix.net/docs/containers/cs_regions.html#regions-and-zones)
       or via `ibmcloud cs regions`.
-    - `CLUSTER_ZONE` can be any availability-zone that is available in the
-      specified region above. You can get a list of all avaible locations via
-      the
+    - `CLUSTER_ZONE` can be any zone that is available in the specified region
+      above. You can get a list of all avaible locations from the
       [IBM Cloud documentation](https://console.bluemix.net/docs/containers/cs_regions.html#zones)
-      or via `ibmcloud cs zones` after you set the region via
+      or by using `ibmcloud cs zones` after you set the region by using
       `ibmcloud cs region-set $CLUSTER_REGION`.
 
 ## Creating a Kubernetes cluster
@@ -140,7 +139,7 @@ It will take a few minutes for all the components to be up and running; you can
 rerun the command to see the current status.
 
 > Note: Instead of rerunning the command, you can add `--watch` to the above
-> command to view the component's status updates in real time. Use CTRL + C to
+> command to view the component's status updates in real time. Use CTRL+C to
 > exit watch mode.
 
 ## Installing Knative Serving
@@ -148,15 +147,15 @@ rerun the command to see the current status.
 1.  Next, we will install [Knative Serving](https://github.com/knative/serving)
     and its dependencies:
     `bash kubectl apply -f https://storage.googleapis.com/knative-releases/latest/release.yaml`
-1.  Monitor the Knative components, until all of the components show a `STATUS`
+1.  Monitor the Knative components until all of the components show a `STATUS`
     of `Running`: `bash kubectl get pods -n knative-serving`
 
 Just as with the Istio components, it will take a few seconds for the Knative
-components to be up and running; you can re-run the command to see the current
+components to be up and running; you can rerun the command to see the current
 status.
 
 > Note: Instead of re-running the command, you can add `--watch` to the above
-> command to view the component's status updates in real time. Use CTRL + C to
+> command to view the component's status updates in real time. Use CTRL+C to
 > exit watch mode.
 
 You are now ready to deploy an app to your new Knative cluster.
@@ -167,17 +166,17 @@ Now that your cluster has Knative installed, you're ready to deploy an app.
 
 You have two options for deploying your first app:
 
-- You can follow the step-by-step
+- Follow the step-by-step
   [Getting Started with Knative App Deployment](getting-started-knative-app.md)
   guide.
 
-- You can view the available [sample apps](../serving/samples) and
-  deploy one of your choosing.
+- View the available [sample apps](../serving/samples) and deploy one of your
+  choosing.
 
 ## Cleaning up
 
-Running a cluster in IKS costs money, so you might want to delete the cluster
-when you're done if you're not using it. Deleting the cluster will also remove
+Running a cluster in IKS costs money, so if you're not using it, you might
+want to delete the cluster when you're done. Deleting the cluster also removes
 Knative, Istio, and any apps you've deployed.
 
 To delete the cluster, enter the following command:

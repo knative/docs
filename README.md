@@ -1,6 +1,6 @@
 # Welcome, Knative
 
-Knative (pronounced /ˈnā-tiv/) extends Kubernetes to provide the
+Knative (pronounced kay-nay-tiv) extends Kubernetes to provide the
 missing middleware that developers need to create modern,
 source-centric, container-based, cloud-native applications.
 
@@ -10,7 +10,7 @@ real-world Kubernetes-based frameworks and applications, such as:
 
 - [Orchestrating source-to-container workflows on Kubernetes](build/README.md)
 - [Deploying a container to Knative](install/getting-started-knative-app.md)
-- [Updating your application without downtime](serving/updating-existing-app.md)
+- [Updating your application without downtime](serving/samples/blue-green-deployment.md)
 - [Automatic scaling and sizing applications based on demand](serving/auto-scaling-with-knative.md)
 - [Binding events to functions, apps, and containers with Knative](events/)
 
