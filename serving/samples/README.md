@@ -15,7 +15,7 @@ Some of the available samples:
   * [Ruby](helloworld-ruby/README.md)
   * [Rust](helloworld-rust/README.md)
 * More advanced samples using Knative Serving:
-  * [Autoscaling with Knative Serving](./samples/autoscale-go/README.md)
-  * [Source-to-URL with Knative Serving](./samples/source-to-url-go/README.md)
-  * [Telemetry with Knative Serving](./samples/telemetry-go/README.md)
-  * [REST API sample](./samples/rest-ap-go/README.md)
+  * [Autoscaling with Knative Serving](./autoscale-go/README.md)
+  * [Source-to-URL with Knative Serving](./source-to-url-go/README.md)
+  * [Telemetry with Knative Serving](./telemetry-go/README.md)
+  * [REST API sample](./rest-api-go/README.md)
