@@ -8,25 +8,20 @@ external IP address of the "knative-ingressgateway" service under the
 gateway, you just need to set the external IP address of the 
 "knative-ingressgateway" service to the static IP you need.
 
+Platforms:
+
+* [Google Kubernetes Engine](#google-kubernetes-engine--gke-)
+
+
 ## Prerequisites
 
 ### Prerequisite 1: Reserve a static IP
 
-#### Knative on GKE
+#### Google Kubernetes Engine (GKE)
 
 If you are running Knative cluster on GKE, you can follow the [instructions](https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address#reserve_new_static) to reserve a REGIONAL 
 IP address. The region of the IP address should be the region your Knative
  cluster is running in (e.g. us-east1, us-central1, etc.).
-
-TODO: add documentation on reserving static IP in other cloud platforms.
-
-### Prerequisite 2: Deploy Istio And Knative Serving
-
-Follow the [instructions](https://github.com/knative/serving/blob/master/DEVELOPMENT.md) 
-to deploy Istio and Knative Serving into your cluster.
-
-Once you reach this point, you can start to set up static IP for Knative 
-gateway.
 
 ## Set Up Static IP for Knative Gateway
 
@@ -35,7 +30,8 @@ gateway.
 Run following command to reset the external IP for the 
 "knative-ingressgateway" service to the static IP you reserved.
 ```shell
-kubectl patch svc knative-ingressgateway -n istio-system --patch '{"spec": { "loadBalancerIP": "<your-reserved-static-ip>" }}'
+kubectl patch svc knative-ingressgateway -n istio-system \
+ --patch '{"spec": { "loadBalancerIP": "<your-reserved-static-ip>" }}'
 ```
 
 ### Step 2: Verify static IP address of knative-ingressgateway service
