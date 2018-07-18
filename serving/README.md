@@ -63,7 +63,7 @@ known issues.
 * **No support for TLS** - Currently the Knative Serving components do not support TLS connections for
   inbound HTTPS traffic. See [#537](https://github.com/knative/serving/issues/537) for more details.
 
-## Observability
+## Logging, Metrics, and Debugging 
 
 * [Installing Logging, Metrics and Traces](./installing-logging-metrics-traces.md)
 * [Accessing Logs](./accessing-logs.md)
