@@ -20,7 +20,15 @@ in turn frees application developers to spend more time writing
 interesting code, not worrying about how they are going to build,
 deploy, monitor, and debug it.
 
-## Documentation
+## Available Knative components
+
+The following Knative components are currently available:
+
+* [Build](https://github.com/knative/build) - Source to container build orchestration
+* [Events](https://github.com/knative/eventing) - Management and delivery of events
+* [Serving](https://github.com/knative/serving) - Scale to zero, request-driven compute
+
+## Knative documentation
 
 ### Getting started with Knative
 
@@ -82,11 +90,3 @@ Your own path to becoming a Knative contributor can
 [begin anywhere](https://github.com/knative/serving/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22).
 [Bug reports](https://github.com/knative/serving/issues/new) and
 friction logs from new developers are especially welcome.
-
-## Available Knative components
-
-The following Knative components are currently available:
-
-- [Build](https://github.com/knative/build) - Source to container build orchestration
-- [Events](https://github.com/knative/eventing) - Management and delivery of events
-- [Serving](https://github.com/knative/serving) - Scale to zero, request-driven compute
