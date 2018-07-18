@@ -64,7 +64,7 @@ require a rebase are not considered active PRs.
 ### Holds
 
 Any [Approver](ROLES.md#approver) who wants to review a PR but does not have
-time immediately may put a hold on a PR. If you need more time, say so on the
+time immediately can put a hold on a PR. If you need more time, say so on the
 PR discussion and offer an ETA measured in single-digit days at most. Any PR
 that has a hold will not be merged until the person who requested the hold
 acks the review, withdraws their hold, or is overruled by a majority of
