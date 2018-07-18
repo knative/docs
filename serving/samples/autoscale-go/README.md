@@ -41,7 +41,9 @@ docker push "${REPO}/serving/samples/autoscale-go"
 
 1. Replace the image reference with our published image:
 ```
-perl -pi -e "s@github.com/knative/docs/serving/samples/autoscale-go@${REPO}/serving/samples/autoscale-go@g" sample.yaml
+perl -pi -e \
+"s@github.com/knative/docs/serving/samples/autoscale-go@${REPO}/serving/samples/autoscale-go@g" \
+serving/samples/autoscale-go/sample.yaml
 ```
 
 ## Deploy the Service
