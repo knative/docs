@@ -53,7 +53,31 @@ For more information on the resources and their interactions, see the
 [Resource Types Overview](https://github.com/knative/serving/blob/master/docs/spec/overview.md)
 in the Knative Serving repository.
 
-To serve workloads from a custom domain, see [Use a custom domain](DNS.md).
+## More samples and demos
+
+* [Autoscaling with Knative Serving](./samples/autoscale-go/README.md)
+* [Source-to-URL with Knative Serving](./samples/source-to-url-go/README.md)
+* [Telemetry with Knative Serving](./samples/telemetry-go/README.md)
+* [REST API sample](./samples/rest-ap-go/README.md)
+
+## Setting up Logging and Metrics 
+
+* [Installing Logging, Metrics and Traces](./installing-logging-metrics-traces.md)
+* [Accessing Logs](./accessing-logs.md)
+* [Accessing Metrics](./accessing-metrics.md)
+* [Accessing Traces](./accessing-traces.md)
+* [Setting up a logging plugin](./setting-up-a-logging-plugin.md)
+
+## Debugging Knative Serving issues 
+
+* [Debugging Application Issues](./debugging-application-issues.md)
+* [Debugging Performance Issues](./debugging-performance-issues.md)
+
+## Configuration and Networking
+
+* [Setting up a docker registry](./setting-up-a-docker-registry.md)
+* [Using a custom domain](./using-a-custom-domain.md)
+* [Assigning a static IP address for Knative on Google Kubernetes Engine](./gke-assigning-static-ip-address.md)
 
 ## Known Issues
 
@@ -62,23 +86,4 @@ known issues.
 
 * **No support for TLS** - Currently the Knative Serving components do not support TLS connections for
   inbound HTTPS traffic. See [#537](https://github.com/knative/serving/issues/537) for more details.
-
-## Logging, Metrics, and Debugging 
-
-* [Installing Logging, Metrics and Traces](./installing-logging-metrics-traces.md)
-* [Accessing Logs](./accessing-logs.md)
-* [Accessing Metrics](./accessing-metrics.md)
-* [Accessing Traces](./accessing-traces.md)
-* [Debugging Application Issues](./debugging-application-issues.md)
-* [Debugging Performance Issues](./debugging-performance-issues.md)
-* [Setting up a logging plugin](./setting-up-a-logging-plugin.md)
-
-## Networking
-
-* [Using a custom domain](./using-a-custom-domain.md)
-
-## Configuration
-
-* [Setting up a docker registry](./setting-up-a-docker-registry.md)
-
 
