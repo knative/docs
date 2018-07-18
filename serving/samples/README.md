@@ -1,6 +1,6 @@
 # Knative Serving Samples
 
-This directoy contains a variety of samples that use [Knative Serving](https://github.com/knative/serving).
+This directory contains a variety of samples that use [Knative Serving](https://github.com/knative/serving).
 
 Some of the available samples:
 
