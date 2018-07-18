@@ -6,12 +6,10 @@ process that runs to completion and provides status, for example `Complete`  or 
 A Knative `build` is an implementation of a 
 [Kubernetes Custom Resource Definition (CRD)](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) that runs on-cluster.
 
-## Defining a Knative build
-
 Given a `builder` or container image that you have created to perform a task 
 or action, you can define a Knative `build` through a single configuration file.
 
-### Key features of Knative builds
+## Key features of Knative builds
 
 * A `build-template` can be used to defined to reusable templates.
 * A `build` can include multiple `steps` where each step specifies a `builder`.
