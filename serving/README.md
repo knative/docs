@@ -71,7 +71,14 @@ known issues.
 * [Accessing Traces](./accessing-traces.md)
 * [Debugging Application Issues](./debugging-application-issues.md)
 * [Debugging Performance Issues](./debugging-performance-issues.md)
+* [Setting up a logging plugin](./setting-up-a-logging-plugin.md)
 
 ## Networking
 
-* [Setting up DNS](./DNS.md)
+* [Using a custom domain](./using-a-custom-domain.md)
+
+## Configuration
+
+* [Setting up a docker registry)(./setting-up-a-docker-registry.md)
+
+
