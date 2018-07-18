@@ -20,7 +20,7 @@ Google Cloud Platform console.
 Using the Google Cloud SDK:
    1. Enter the following command, replacing IP_NAME and REGION with appropriate
       values. For example, select the `us-west1` region if you deployed your
-      cluster to the `us-west1-c` zone.
+      cluster to the `us-west1-c` zone:
    	  ```shell
       gcloud beta compute addresses create IP_NAME --region=REGION
    	  ```
