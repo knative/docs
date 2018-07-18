@@ -27,7 +27,7 @@ or action, you can define a Knative `build` through a single configuration file.
 
 ### Simple `build` configuration example
 
-The follow example is a configuration file for a build that includes multiple steps and uses multiple repositories: 
+The following example is a configuration file for a build that includes multiple steps and uses multiple repositories: 
 
     apiVersion: build.knative.dev/v1alpha1
     kind: Build
