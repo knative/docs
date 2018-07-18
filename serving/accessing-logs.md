@@ -1,7 +1,7 @@
 # Accessing logs
 
-If logging and monitoring components are not installed yet, go through the 
-[installation instructions](./installing-logging-metrics-traces.md) to setup the 
+If you have not yet installed the logging and monitoring components, go through the 
+[installation instructions](./installing-logging-metrics-traces.md) to set up the 
 necessary components first.
 
 ## Kibana and Elasticsearch
@@ -13,11 +13,12 @@ enter the following command:
 kubectl proxy
 ```
 
-This starts a local proxy of Kibana on port 8001. The Kibana UI is only exposed within
-the cluster for security reasons.
+This command starts a local proxy of Kibana on port 8001. For security reasons, the 
+Kibana UI is exposed only within the cluster.
 
-Navigate to the [Kibana UI](http://localhost:8001/api/v1/namespaces/monitoring/services/kibana-logging/proxy/app/kibana)
-(*It might take a couple of minutes for the proxy to work*).
+Navigate to the
+[Kibana UI](http://localhost:8001/api/v1/namespaces/monitoring/services/kibana-logging/proxy/app/kibana)
+ (*It might take a couple of minutes for the proxy to work*).
 
 The Discover tab of the Kibana UI looks like this:
 
@@ -111,5 +112,5 @@ See [Accessing Traces](./accessing-traces.md) page for details.
 
 ## Stackdriver
 
-Go to the [Google Cloud Console logging page](https://console.cloud.google.com/logs/viewer) for
-your GCP project which stores your logs via Stackdriver.
+Go to the [GCP Console logging page](https://console.cloud.google.com/logs/viewer) for
+your GCP project, which stores your logs via Stackdriver.
