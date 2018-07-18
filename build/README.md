@@ -2,7 +2,7 @@
 
 A `Build` is a custom resource in Knative that allows you to define an process that runs
 to completion and can provide status. For example, fetch, build, and package your 
-code by using a Knative `Build` that sends status messages like `Complete`  or  `Failed`.
+code by using a Knative `Build` that communicates whether the process succeeds.
 
 A Knative `Build` runs on-cluster and is implemented by a 
 [Kubernetes Custom Resource Definition (CRD)](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
@@ -21,8 +21,7 @@ More information about this use case is demonstrated in
 * A `Builder` is a container image that you create to accomplish any task, whether 
     that's a single step in a process, or the whole process itself.
 * A `BuildTemplate` can be used to defined reusable templates.
-* The  `source` in a  `Build` can be defined to mount data to a Kubernetes Volume.
-* A `Build` can connect to:
+* The  `source` in a  `Build` can be defined to mount data to a Kubernetes Volume, and supports:
      * `git` repositories
      * Google Cloud Storage
      * An arbitrary container image
