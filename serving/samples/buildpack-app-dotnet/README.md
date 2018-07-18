@@ -8,7 +8,7 @@ sample app for Cloud Foundry.
 
 ## Prerequisites
 
-[Install Knative Serving](https://github.com/knative/install/blob/master/README.md)
+[Install Knative Serving](https://github.com/knative/docs/blob/master/install/README.md)
 
 ## Running
 
@@ -27,10 +27,10 @@ Then you can deploy this to Knative Serving from the root directory via:
 ```shell
 # Replace the token string with a suitable registry
 REPO="gcr.io/<your-project-here>"
-perl -pi -e "s@DOCKER_REPO_OVERRIDE@$REPO@g" sample/buildpack-app/sample.yaml
+perl -pi -e "s@DOCKER_REPO_OVERRIDE@$REPO@g" serving/samples/buildpack-app-dotnet/sample.yaml
 
 # Create the Kubernetes resources
-kubectl apply -f sample/buildpack-app/sample.yaml
+kubectl apply -f serving/samples/buildpack-app-dotnet/sample.yaml
 ```
 
 Once deployed, you will see that it first builds:
@@ -70,7 +70,7 @@ export SERVICE_HOST=`kubectl get route buildpack-sample-app -o jsonpath="{.statu
 export SERVICE_IP=`kubectl get svc knative-ingressgateway -n istio-system -o jsonpath="{.status.loadBalancer.ingress[*].ip}"`
 
 # Curl the ingress IP "as-if" DNS were properly configured.
-$ curl --header "Host: $SERVICE_HOST" http://${SERVICE_IP}/
+curl --header "Host: $SERVICE_HOST" http://${SERVICE_IP}/
 [response]
 ```
 
@@ -79,5 +79,8 @@ $ curl --header "Host: $SERVICE_HOST" http://${SERVICE_IP}/
 To clean up the sample service:
 
 ```shell
-kubectl delete -f sample/templates/buildpack.yaml -f sample/buildpack-app/sample.yaml
+# Clean up the serving resources
+kubectl delete -f serving/samples/buildpack-app-dotnet/sample.yaml
+# Clean up the build template
+kubectl delete -f buildpack.yaml
 ```

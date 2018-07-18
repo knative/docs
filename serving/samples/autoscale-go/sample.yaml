@@ -12,16 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 apiVersion: serving.knative.dev/v1alpha1
-kind: Route
-metadata:
-  name: autoscale-route
-  namespace: default
-spec:
-  traffic:
-  - configurationName: autoscale-configuration
-    percent: 100
----
-apiVersion: serving.knative.dev/v1alpha1
 kind: Configuration
 metadata:
   name: autoscale-configuration
@@ -35,7 +25,7 @@ spec:
       container:
         # This is the Go import path for the binary to containerize
         # and substitute here.
-        image: github.com/knative/serving/sample/autoscale
+        image: github.com/knative/docs/serving/samples/autoscale-go
         # When scaling up Knative controller doesn't have a way to
         # know if the user container is good for serving.  Having a
         # readiness probe prevents traffic to be routed to a pod
@@ -44,3 +34,13 @@ spec:
           httpGet:
             path: "primes/4"
           periodSeconds: 2
+---
+apiVersion: serving.knative.dev/v1alpha1
+kind: Route
+metadata:
+  name: autoscale-route
+  namespace: default
+spec:
+  traffic:
+  - configurationName: autoscale-configuration
+    percent: 100

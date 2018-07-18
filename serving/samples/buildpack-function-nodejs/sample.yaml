@@ -1,14 +1,4 @@
 apiVersion: serving.knative.dev/v1alpha1
-kind: Route
-metadata:
-  name: buildpack-function
-  namespace: default
-spec:
-  traffic:
-  - configurationName: buildpack-function
-    percent: 100
----
-apiVersion: serving.knative.dev/v1alpha1
 kind: Configuration
 metadata:
   name: buildpack-function
@@ -42,3 +32,13 @@ spec:
     spec:
       container:
         image: *image
+---
+apiVersion: serving.knative.dev/v1alpha1
+kind: Route
+metadata:
+  name: buildpack-function
+  namespace: default
+spec:
+  traffic:
+  - configurationName: buildpack-function
+    percent: 100
