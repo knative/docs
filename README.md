@@ -20,17 +20,31 @@ in turn frees application developers to spend more time writing
 interesting code, not worrying about how they are going to build,
 deploy, monitor, and debug it.
 
-## Getting started with Knative
+## Documentation
 
-1. Follow the [Knative installation instructions](/install/README.md) to get
-Knative installed on a Kubernetes cluster.
+### Getting started with Knative
 
-2. To deploy your first app with Knative, check out the
-[Getting Started with Knative App Deployment guide](install/getting-started-knative-app.md).
+* [Installing Knative](/install/README.md)
+* [Getting Started with Knative App Deployment](install/getting-started-knative-app.md)
+* [Knative Sample Applications](serving/samples/README.md)
 
-3. After you've run your first app, take a look at the available
-[sample applications](serving/samples/README.md) that you can build and
-run to help you get more familiar with Knative.
+### Logging, Metrics, and Debugging 
+
+* [Installing Logging, Metrics and Traces](./serving/installing-logging-metrics-traces.md)
+* [Accessing Logs](./serving/accessing-logs.md)
+* [Accessing Metrics](./serving/accessing-metrics.md)
+* [Accessing Traces](./serving/accessing-traces.md)
+* [Debugging Application Issues](./serving/debugging-application-issues.md)
+* [Debugging Performance Issues](./serving/debugging-performance-issues.md)
+* [Setting up a logging plugin](./serving/setting-up-a-logging-plugin.md)
+
+### Networking
+
+* [Using a custom domain](./serving/using-a-custom-domain.md)
+
+### Configuration
+
+* [Setting up a docker registry](./serving/setting-up-a-docker-registry.md)
 
 ## Who Knative is for
 
