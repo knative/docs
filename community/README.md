@@ -47,7 +47,7 @@ Real-time Knative discussion is available at [knative.slack.com](https://knative
 We also have public and recorded bi-weekly community meetings.
 
 Each project has one or more [working groups](WORKING-GROUPS.md) driving
-the project, and Knative as a single [technical oversite community](TECH-OVERSIGHT-COMMITTEE.md)
+the project, and Knative as a single [technical oversight community](TECH-OVERSIGHT-COMMITTEE.md)
 monitoring the overall project.
 
 ## How can I help
