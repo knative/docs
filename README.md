@@ -74,6 +74,6 @@ friction logs from new developers are especially welcome.
 
 The following Knative components are currently available:
 
-- [Build](build/README.md) - Source to container build orchestration
-- [Events](events/README.md) - Management and delivery of events
-- [Serving](serving/README.md) - Scale to zero, request-driven compute
+- [Build](https://github.com/knative/build) - Source to container build orchestration
+- [Events](https://github.com/knative/eventing) - Management and delivery of events
+- [Serving](https://github.com/knative/serving) - Scale to zero, request-driven compute
