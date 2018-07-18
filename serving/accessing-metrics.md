@@ -24,4 +24,4 @@ The following dashboards are pre-installed with Knative Serving:
 * **Kubernetes:** Dashboards giving insights into cluster health, deployments, and capacity usage
 
 To sign in as an administrator and modify or add dashboards, sign in with username `admin` and password `admin`.
-Before you expose Grafana UI to outside the cluster, make sure to change the password.
+Before you expose the Grafana UI outside the cluster, make sure to change the password.
