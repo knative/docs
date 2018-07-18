@@ -19,9 +19,9 @@ Custom Resource Definitions (CRDs). These objects are used to define and control
 how your serverless workload behaves on the cluster:
 
 * [Service](https://github.com/knative/serving/blob/master/docs/spec/spec.md#service):
-  The `service.serving.knative.dev` resource manages the whole
-  lifecycle of your workload automatically. It controls the creation of other
-  objects to ensure your app has a route, configuration, and a new revision
+  The `service.serving.knative.dev` resource automatically manages the whole
+  lifecycle of your workload. It controls the creation of other
+  objects to ensure that your app has a route, a configuration, and a new revision
   for each update of the service. Service can be defined to always route traffic to the
   latest revision or to a pinned revision.
 * [Route](https://github.com/knative/serving/blob/master/docs/spec/spec.md#route):
@@ -34,11 +34,11 @@ how your serverless workload behaves on the cluster:
   code and configuration and follows the Twelve-Factor App methodology. Modifying a configuration
   creates a new revision.
 * [Revision](https://github.com/knative/serving/blob/master/docs/spec/spec.md#revision):
-  The `revision.serving.knative.dev` resource is a point in time snapshot
+  The `revision.serving.knative.dev` resource is a point-in-time snapshot
   of the code and configuration for each modification made to the workload. Revisions
   are immutable objects and can be retained for as long as useful.
 
-![Diagram displaying the way the Serving resources coordinate with each other.](https://github.com/knative/serving/raw/master/docs/spec/images/object_model.png)
+![Diagram that displays how the Serving resources coordinate with each other.](https://github.com/knative/serving/raw/master/docs/spec/images/object_model.png)
 
 ## Getting Started
 
