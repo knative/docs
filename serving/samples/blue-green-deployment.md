@@ -1,4 +1,4 @@
-# Advanced deploy (aka blue/green)
+# Splitting traffic with blue/green deployment
 
 This sample demonstrates updating an application to a new version using a
 blue/green traffic routing pattern. With Knative, you can safely reroute traffic
