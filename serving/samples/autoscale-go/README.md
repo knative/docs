@@ -84,7 +84,8 @@ Build the application container and publish it to a container registry:
    ```
    kubectl get deploy --watch
    ```
-
+   > Note: Use CTRL+C to exit watch mode.
+   
 1. Watch the pod traffic ramp up.
    ```
    kubectl get pods -n hey --show-all --watch
