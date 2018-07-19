@@ -74,15 +74,15 @@ Follow the links in this section to learn more about Knative.
 * [Installing Knative](./install/README.md)
 * [Getting started with Knative app deployment](./install/getting-started-knative-app.md)
 * [Knative samples](./serving/samples/)
-* [Getting started with Knative Serving](./serving)
-* [Getting started with Knative Builds](./build)
-* [Getting started with Knative Eventing](./eventing)
+* [Getting started with Knative serving](./serving)
+* [Getting started with Knative builds](./build)
+* [Getting started with Knative eventing](./eventing)
 
 ### More samples and demos
 
-* [Autoscaling with Knative Serving](serving/samples/autoscale-go/README.md)
-* [Source-to-URL with Knative Serving](serving/samples/source-to-url-go/README.md)
-* [Telemetry with Knative Serving](serving/samples/telemetry-go/README.md)
+* [Autoscaling with Knative serving](serving/samples/autoscale-go/README.md)
+* [Source-to-URL with Knative serving](serving/samples/source-to-url-go/README.md)
+* [Telemetry with Knative serving](serving/samples/telemetry-go/README.md)
 * [REST API sample](serving/samples/rest-api-go/README.md)
 
 ### Setting up Logging and Metrics 
