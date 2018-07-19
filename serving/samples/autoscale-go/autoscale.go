@@ -16,6 +16,7 @@ limitations under the License.
 package main
 
 import (
+	"log"
 	"math"
 	"net/http"
 	"strconv"
@@ -76,61 +77,76 @@ func bloat(mb int) {
 	b := make([]byte, mb*1024*1024)
 	b[0] = 1
 	b[len(b)-1] = 1
+	log.Printf("Allocated %v Mb of memory.", mb)
 }
 
 func prime(max int) {
 	p := allPrimes(max)
+	if len(p) > 0 {
+		log.Printf("The largest prime less than %v is %v.", max, p[len(p)-1])
+	} else {
+		log.Printf("There are no primes smaller than %v.", max)
+	}
 }
 
 func sleep(ms int) {
+	start := time.Now().UnixNano()
 	time.Sleep(time.Duration(ms) * time.Millisecond)
+	end := time.Now().UnixNano()
+	log.Printf("Slept for %.2f milliseconds.", float64(end-start)/1000000)
 }
 
-func run(wg sync.WaitGroup, value string, fn func(int)) error {
-	i, err := strconv.Atoi(value)
-	if err != nil {
-		return err
-	}
-	go func() {
-		wg.Add(1)
-		defer wg.Done()
-		fn(i)
-	}()
-	return nil
-}
-
-func parseInt(r *http.Request, param string) (int, ok, error) {
-	if value, ok := r.URL.Query()[param]; ok {
-
+func parseIntParam(r *http.Request, param string) (int, bool, error) {
+	if value := r.URL.Query().Get(param); value != "" {
+		i, err := strconv.Atoi(value)
+		if err != nil {
+			return 0, false, err
+		}
+		return i, true, nil
 	}
 	return 0, false, nil
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	values := r.URL.Query()
+	// Validate inputs.
+	ms, hasMs, err := parseIntParam(r, "sleep")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	max, hasMax, err := parseIntParam(r, "prime")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	mb, hasMb, err := parseIntParam(r, "bloat")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	// Consume time, cpu and memory in parallel.
 	var wg sync.WaitGroup
 	defer wg.Wait()
-	ms,
-
-
-
-	if ms, ok := values["sleep"]; ok {
-		if err := run(wg, ms, sleep); err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
-			return
-		}
+	if hasMs {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			sleep(ms)
+		}()
 	}
-	if max, ok := values["prime"]; ok {
-		if err := run(wg, max, prime); err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
-			return
-		}
+	if hasMax {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			prime(max)
+		}()
 	}
-	if mb, ok := values["bloat"]; ok {
-		if err := run(wg, mb, bloat); err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
-			return
-		}
+	if hasMb {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			bloat(mb)
+		}()
 	}
 }
 
