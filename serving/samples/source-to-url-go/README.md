@@ -36,7 +36,8 @@ kubectl apply -f https://raw.githubusercontent.com/knative/build-templates/maste
 ### Register secrets for Docker Hub
 
 In order to push the container built from source to Docker Hub, we need to
-register a secret in Kubernetes for authentication with Docker Hub.
+create a secret in Kubernetes for authentication with Docker Hub and associate
+that secret to a Kubernetes service account that the build will utilize.
 
 There are [detailed instructions](https://github.com/knative/docs/blob/master/build/auth.md#basic-authentication-docker)
 available, but these are the key steps.
@@ -48,7 +49,7 @@ credentials. Save this file as `docker-secret.yaml`.
 apiVersion: v1
 kind: Secret
 metadata:
-  name: basic-user-pass
+  name: docker-user-pass
   annotations:
     build.knative.dev/docker-0: https://index.docker.io/v1/
 type: kubernetes.io/basic-auth
@@ -74,7 +75,26 @@ After you have created the manifest file, apply it to your cluster with kubectl:
 
 ```shell
 $ kubectl apply -f docker-secret.yaml
-secret "basic-user-pass" created
+secret "docker-user-pass" created
+```
+
+To associate this secret with a new service account, Create a new ServiceAccount
+manifest. Save this file as `build-bot.yaml`.
+
+```yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: build-bot
+secrets:
+- name: docker-user-pass
+```
+
+After you have created the manifest file, apply it to your cluster with kubectl:
+
+```shell
+$ kubectl apply -f build-bot.yaml
+serviceaccount "build-bot" created
 ```
 
 ## Deploying the sample
@@ -102,6 +122,7 @@ spec:
   runLatest:
     configuration:
       build:
+        serviceAccountName: build-bot
         source:
           git:
             url: https://github.com/mchmarny/simple-app.git
