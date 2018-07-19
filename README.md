@@ -65,10 +65,6 @@ Your own path to becoming a Knative contributor can
 [Bug reports](https://github.com/knative/serving/issues/new) and
 friction logs from new developers are especially welcome.
 
-### Users and Systems (IoT)
-
-End users will use applications that have been developed and deployed by developers and hosted by operators.
-
 ## Knative documentation
 
 Follow the links in this section to learn more about Knative.
