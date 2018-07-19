@@ -68,3 +68,10 @@ we could use your help in spiffing up our public-facing web site.
 If you're a developer, operator, or contributor trying to use Knative, head to
 [knative-dev@](https://groups.google.com/forum/#!forum/knative-dev) or
 [knative.slack.com](https://knative.slack.com) for help.
+
+---
+
+Except as otherwise noted, the content of this page is licensed under the
+[Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),
+and code samples are licensed under the
+[Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).

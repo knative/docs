@@ -56,3 +56,10 @@ periodically reviewed to ensure proper recognition.
 <img width="30px" src="https://github.com/dewitt.png">   | DeWitt Clinton | Google  | [@dewitt](https://github.com/dewitt)
 <img width="30px" src="https://github.com/mchmarny.png"> | Mark Chmarny   | Google  | [@mchmarny](https://github.com/mchmarny)
 <img width="30px" src="https://github.com/isdal.png">    | Tomas Isdal    | Google  | [@isdal](https://github.com/isdal)
+
+---
+
+Except as otherwise noted, the content of this page is licensed under the
+[Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),
+and code samples are licensed under the
+[Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).
