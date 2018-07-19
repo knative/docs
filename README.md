@@ -79,7 +79,7 @@ Follow the links in this section to learn more about Knative.
 * [Getting Started with Knative App Deployment](./install/getting-started-knative-app.md)
 * [Knative Sample Applications](./serving/samples/)
 * [Getting started with Knative Serving](./serving)
-* [Getting started with Knative Builds](./builds)
+* [Getting started with Knative Builds](./build)
 * [Getting started with Knative Eventing](./eventing)
 
 ### More samples and demos
