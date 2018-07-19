@@ -84,9 +84,6 @@ in the Knative Serving repository.
 See the [Knative Serving Issues](https://github.com/knative/serving/issues) page for a full list of
 known issues.
 
-* **No support for TLS** - Currently the Knative Serving components do not support TLS connections for
-  inbound HTTPS traffic. See [#537](https://github.com/knative/serving/issues/537) for more details.
-
 ---
 
 Except as otherwise noted, the content of this page is licensed under the
