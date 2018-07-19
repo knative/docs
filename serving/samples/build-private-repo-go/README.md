@@ -137,7 +137,7 @@ template](https://github.com/knative/build-templates/blob/master/kaniko/kaniko.y
 in the [build-templates](https://github.com/knative/build-templates/) repo.
 
 ```shell
-kubectl apply -f kaniko.yaml
+kubectl apply -f https://raw.githubusercontent.com/knative/build-templates/master/kaniko/kaniko.yaml
 ```
 
 ### Using this in Configuration.
