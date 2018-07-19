@@ -118,7 +118,7 @@ IP address created by Knative.
    request to interact with your application.
 
     ```shell
-    curl -H "Host: helloworld-go.default.example.com" http://IP_ADDRESS
+    curl -H "Host: helloworld-go.default.example.com" http://${IP_ADDRESS}
     Hello World: Go Sample v1!
     ```
     It can take a few seconds for Knative to scale up your application and return
