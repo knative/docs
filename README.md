@@ -76,8 +76,8 @@ Follow the links in this section to learn more about Knative.
 ### Getting started with Knative
 
 * [Installing Knative](./install/README.md)
-* [Getting Started with Knative App Deployment](./install/getting-started-knative-app.md)
-* [Knative Sample Applications](./serving/samples/)
+* [Getting started with Knative app deployment](./install/getting-started-knative-app.md)
+* [Knative samples](./serving/samples/)
 * [Getting started with Knative Serving](./serving)
 * [Getting started with Knative Builds](./build)
 * [Getting started with Knative Eventing](./eventing)
@@ -91,16 +91,16 @@ Follow the links in this section to learn more about Knative.
 
 ### Setting up Logging and Metrics 
 
-* [Installing Logging, Metrics and Traces](./serving/installing-logging-metrics-traces.md)
-* [Accessing Logs](./serving/accessing-logs.md)
-* [Accessing Metrics](./serving/accessing-metrics.md)
-* [Accessing Traces](./serving/accessing-traces.md)
+* [Installing logging, metrics and traces](./serving/installing-logging-metrics-traces.md)
+* [Accessing logs](./serving/accessing-logs.md)
+* [Accessing metrics](./serving/accessing-metrics.md)
+* [Accessing traces](./serving/accessing-traces.md)
 * [Setting up a logging plugin](./serving/setting-up-a-logging-plugin.md)
 
 ### Debugging Knative Serving issues 
 
-* [Debugging Application Issues](./serving/debugging-application-issues.md)
-* [Debugging Performance Issues](./serving/debugging-performance-issues.md)
+* [Debugging application issues](./serving/debugging-application-issues.md)
+* [Debugging performance issues](./serving/debugging-performance-issues.md)
 
 ### Configuration and Networking
 
