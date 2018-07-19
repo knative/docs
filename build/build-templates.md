@@ -1,23 +1,23 @@
 # Build Templates
 
-This document serves to define "Build Templates", and their capabilities.
+This document defines "Build Templates" and their capabilities.
 
 A set of curated and supported build templates is available in the
 [`build-templates`](https://github.com/knative/build-templates) repo.
 
 ## What is a Build Template?
 
-A `BuildTemplate` serves to encapsulate a shareable [build](./builds.md)
+A `BuildTemplate` encapsulates a shareable [build](./builds.md)
 process with some limited paramaterization capabilities.
 
-### Example Template
+### Example template
 
 For example, a `BuildTemplate` to encapsulate a `Dockerfile` build might look
 something like this:
 
-**NB:** Building a container image using `docker build` on-cluster is _very
+**Note:** Building a container image using `docker build` on-cluster is _very
 unsafe_. Use [kaniko](https://github.com/GoogleContainerTools/kaniko) instead.
-This is only used for the purposes of demonstration.
+This is used only for the purposes of demonstration.
 
 ```yaml
 spec:
@@ -26,7 +26,7 @@ spec:
   - name: IMAGE
     description: Where to publish the resulting image.
 
-  # These may be overriden, but provide sensible defaults.
+  # These may be overridden, but provide sensible defaults.
   - name: DIRECTORY
     description: The directory containing the build context.
     default: /workspace
@@ -64,11 +64,12 @@ spec:
 In this example, `parameters` describes the formal arguments for the template.
 The `description` is used for diagnostic messages during validation (and maybe
 in the future for UI). The `default` value enables a template to have a
-graduated complexity, where options are only overridden when the user strays
+graduated complexity, where options are overridden only when the user strays
 from some set of sane defaults.
 
-`steps` and `volumes` are just like in a [`Build`(./builds.md) resource, but
-may contain references to parameters in the form: `${PARAMETER_NAME}`.
+The `steps` and `volumes` parameters are just like in a [`Build`](./builds.md)
+resource, but might contain references to parameters in the form:
+`${PARAMETER_NAME}`.
 
 The `steps` of a template replace those of its Build. The `volumes` of a
 template augment those of its Build.
@@ -127,3 +128,10 @@ spec:
     - name: DOCKERFILE_NAME
       value: Dockerfile-17.06.1
 ```
+
+---
+
+Except as otherwise noted, the content of this page is licensed under the
+[Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),
+and code samples are licensed under the
+[Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).

@@ -7,19 +7,23 @@ You can find [guides for other platforms here](README.md).
 
 ## Before you begin
 
-Knative requires a Kubernetes cluster v1.10 or newer. This guide walks you
-through creating a cluster with the correct specifications for Knative on Google Cloud Platform.
+Knative requires a Kubernetes cluster v1.10 or newer. `kubectl` v1.10 is also
+required.  This guide walks you through creating a cluster with the correct
+specifications for Knative on Google Cloud Platform.
 
 This guide assumes you are using bash in a Mac or Linux environment; some
 commands will need to be adjusted for use in a Windows environment.
 
 ### Installing the Google Cloud SDK
 
-> If you already have `gcloud` installed with the `kubectl` component, you can skip these steps. 
+1. If you already have `kubectl`, run `kubectl version` to check your client version.
+
+1. If you already have `gcloud` installed with the `kubectl` component later than
+   v1.10, you can skip these steps.
 
 1. Download and install the `gcloud` command line tool:
    https://cloud.google.com/sdk/install
-   
+
 1. Install the `kubectl` component:
     ```
     gcloud components install kubectl
@@ -103,8 +107,8 @@ Istio components, the recommended configuration for a cluster is:
       --enable-autorepair \
       --scopes=service-control,service-management,compute-rw,storage-ro,cloud-platform,logging-write,monitoring-write,pubsub,datastore \
       --num-nodes=3
-    ```  
-1. Grant cluster-admin permissions to the current user: 
+    ```
+1. Grant cluster-admin permissions to the current user:
     ```bash
     kubectl create clusterrolebinding cluster-admin-binding \
     --clusterrole=cluster-admin \
@@ -183,3 +187,10 @@ To delete the cluster, enter the following command:
 ```bash
 gcloud container clusters delete $CLUSTER_NAME --zone $CLUSTER_ZONE
 ```
+
+---
+
+Except as otherwise noted, the content of this page is licensed under the
+[Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),
+and code samples are licensed under the
+[Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).

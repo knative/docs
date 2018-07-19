@@ -26,3 +26,10 @@ will create a GKE cluster, install Knative, run the end-to-end tests and delete 
 If you already have a cluster set, ensure that `$PROJECT_ID` is empty and call the script with the
 `--run-tests` argument. Note that this requires you to have Knative Build installed and configured
 to your particular configuration setup.
+
+---
+
+Except as otherwise noted, the content of this page is licensed under the
+[Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),
+and code samples are licensed under the
+[Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).

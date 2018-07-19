@@ -14,6 +14,10 @@ you can create one using [Minikube](https://github.com/kubernetes/minikube).
 
 ### Install kubectl and Minikube
 
+1. If you already have `kubectl` CLI, run `kubectl version` to check the
+   version.  You need v1.10 or newer.  If your `kubectl` is older, follow
+   the next step to install a newer version.
+
 1. [Install the kubectl CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl).
 
 1. [Install and configure minikube](https://github.com/kubernetes/minikube#installation)
@@ -22,31 +26,31 @@ you can create one using [Minikube](https://github.com/kubernetes/minikube).
 
 ## Creating a Kubernetes cluster
 
-Once kubectl and Minikube are installed, create a cluster with version 1.10 or
+After kubectl and Minikube are installed, create a cluster with version 1.10 or
 greater and your chosen VM driver:
 
 For Linux use:
 
 ```shell
 minikube start --memory=8192 --cpus=4 \
-  --kubernetes-version=v1.10.4 \
+  --kubernetes-version=v1.10.5 \
   --vm-driver=kvm2 \
   --bootstrapper=kubeadm \
   --extra-config=controller-manager.cluster-signing-cert-file="/var/lib/localkube/certs/ca.crt" \
   --extra-config=controller-manager.cluster-signing-key-file="/var/lib/localkube/certs/ca.key" \
-  --extra-config=apiserver.admission-control="DenyEscalatingExec,LimitRanger,NamespaceExists,NamespaceLifecycle,ResourceQuota,ServiceAccount,DefaultStorageClass,MutatingAdmissionWebhook"
+  --extra-config=apiserver.admission-control="LimitRanger,NamespaceExists,NamespaceLifecycle,ResourceQuota,ServiceAccount,DefaultStorageClass,MutatingAdmissionWebhook"
 ```
 
 For macOS use:
 
 ```shell
 minikube start --memory=8192 --cpus=4 \
-  --kubernetes-version=v1.10.4 \
+  --kubernetes-version=v1.10.5 \
   --vm-driver=hyperkit \
   --bootstrapper=kubeadm \
   --extra-config=controller-manager.cluster-signing-cert-file="/var/lib/localkube/certs/ca.crt" \
   --extra-config=controller-manager.cluster-signing-key-file="/var/lib/localkube/certs/ca.key" \
-  --extra-config=apiserver.admission-control="DenyEscalatingExec,LimitRanger,NamespaceExists,NamespaceLifecycle,ResourceQuota,ServiceAccount,DefaultStorageClass,MutatingAdmissionWebhook"
+  --extra-config=apiserver.admission-control="LimitRanger,NamespaceExists,NamespaceLifecycle,ResourceQuota,ServiceAccount,DefaultStorageClass,MutatingAdmissionWebhook"
 ```
 
 ## Installing Istio
@@ -74,22 +78,24 @@ It will take a few minutes for all the components to be up and running; you can
 rerun the command to see the current status.
 
 > Note: Instead of rerunning the command, you can add `--watch` to the above
-  command to view the component's status updates in real time. Use CTRL + C to exit watch mode.
+  command to view the component's status updates in real time. Use CTRL+C to exit watch mode.
 
 ## Installing Knative Serving
 
-Next, we will install [Knative Serving](https://github.com/knative/serving):
+Next, install [Knative Serving](https://github.com/knative/serving):
 
-We are using the `https://storage.googleapis.com/knative-releases/latest/release-lite.yaml`
-file which omits some of the monitoring components to reduce the memory used by
-the Knative components since you do have limited resources available. To use the
-provided `release-lite.yaml` release run:
+Because you have limited resources available, use the
+`https://storage.googleapis.com/knative-releases/latest/release-lite.yaml`
+file, which omits some of the monitoring components to reduce the memory used by
+the Knative components. To use the provided `release-lite.yaml` release, run:
 
 ```shell
-kubectl apply -f https://storage.googleapis.com/knative-releases/latest/release-lite.yaml
+curl -L https://storage.googleapis.com/knative-releases/latest/release-lite.yaml \
+  | sed 's/LoadBalancer/NodePort/' \
+  | kubectl apply -f -
 ```
 
-Monitor the Knative components, until all of the components show a `STATUS` of
+Monitor the Knative components until all of the components show a `STATUS` of
 `Running`:
 
 ```shell
@@ -100,7 +106,7 @@ Just as with the Istio components, it will take a few seconds for the Knative
 components to be up and running; you can rerun the command to see the current status.
 
 > Note: Instead of rerunning the command, you can add `--watch` to the above
-  command to view the component's status updates in real time. Use CTRL + C to exit watch mode.
+  command to view the component's status updates in real time. Use CTRL+C to exit watch mode.
 
 Now you can deploy an app to your newly created Knative cluster.
 
@@ -116,6 +122,14 @@ guide.
 If you'd like to view the available sample apps and deploy one of your choosing,
 head to the [sample apps](../serving/samples/README.md) repo.
 
+> Note: When looking up the IP address to use for accessing your app, you need to look up
+  the NodePort for the `knative-ingressgateway` as well as the IP address used for Minikube.
+  You can use the following command to look up the value to use for the {IP_ADDRESS} placeholder
+  used in the samples:
+  ```shell
+  echo $(minikube ip):$(kubectl get svc knative-ingressgateway -n istio-system -o 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
+  ```
+
 ## Cleaning up
 
 Delete the Kubernetes cluster along with Knative, Istio, and any deployed apps:
@@ -123,3 +137,10 @@ Delete the Kubernetes cluster along with Knative, Istio, and any deployed apps:
 ```shell
 minikube delete
 ```
+
+---
+
+Except as otherwise noted, the content of this page is licensed under the
+[Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),
+and code samples are licensed under the
+[Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).

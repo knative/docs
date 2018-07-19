@@ -14,10 +14,12 @@ grants.
 
 ## Role Summary
 
-Here is the set of roles we use within the Knative community, the general
-responsibilities expected by individuals in each role, the requirements
-necessary to join or stay in a given role, and the concrete manifestation of the
-role in terms of permissions and privileges.
+The following table lists the roles we use within the Knative community. The
+table describes:
+
+*   General responsibilities expected by individuals in each role
+*   Requirements necessary to join or stay in a given role
+*   How the role manifests in terms of permissions and privileges.
 
 <table>
   <thead>
@@ -104,8 +106,8 @@ role in terms of permissions and privileges.
 ## Collaborator
 
 Individuals may be added as an outside collaborator (with READ access) to a repo
-in the Knative GitHub organization without becoming a member. This allows them
-to be assigned issues and PRs until they become a member, but will not allow
+in the Knative GitHub organization without becoming a member. This role allows
+them to be assigned issues and PRs until they become a member, but will not allow
 tests to be run against their PRs automatically nor allow them to interact with
 the PR bot.
 
@@ -175,7 +177,7 @@ in.
 
 Code approvers are able to both review and approve code contributions. While
 code review is focused on code quality and correctness, approval is focused on
-holistic acceptance of a contribution including: backwards / forwards
+holistic acceptance of a contribution including: backward / forward
 compatibility, adhering to API and flag conventions, subtle performance and
 correctness issues, interactions with other parts of the system, etc. Approver
 status is scoped to a part of the codebase.
@@ -210,7 +212,7 @@ approver in an OWNERS file:
 *   Responsible for project quality control via [code reviews](REVIEWING.md)
 
     *   Focus on holistic acceptance of contribution such as dependencies with
-        other features, backwards / forwards compatibility, API and flag
+        other features, backward / forward compatibility, API and flag
         definitions, etc
 
 *   Expected to be responsive to review requests as per [community
@@ -230,7 +232,7 @@ and approve design decisions for their area of ownership.
 
 Getting to be a lead of an existing working group:
 
-*   Recognized as having expertise in the group’s subject matter.
+*   Recognized as having expertise in the group’s subject matter
 
 *   Approver for some part of the codebase for at least 3 months
 
@@ -301,3 +303,10 @@ Administrators are responsible for the bureaucratic aspects of the project.
     <!-- TODO SLA for admin response -->
 
 <!-- * TODO Manage the Google Search Console settings for knative.dev -->
+
+---
+
+Except as otherwise noted, the content of this page is licensed under the
+[Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),
+and code samples are licensed under the
+[Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).
