@@ -98,7 +98,8 @@ You should see 2 Knative services: search-service and login-service.
 
 1. Find the shared Gateway IP and export as an environment variable:  
 ```
-export GATEWAY_IP=`kubectl get svc knative-ingressgateway -n istio-system -o jsonpath="{.status.loadBalancer.ingress[*]['ip']}"`
+export GATEWAY_IP=`kubectl get svc knative-ingressgateway -n istio-system \
+-o jsonpath="{.status.loadBalancer.ingress[*]['ip']}"`
 ```
 
 2. Find the "Search" service route and export as an environment variable:  
