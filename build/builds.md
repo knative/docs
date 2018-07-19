@@ -1,86 +1,188 @@
-# Builds
+# Knative `Build` resources
 
-This document defines what "Builds" are and their capabilities.
+Use the `Build` resource object to create and run on-cluster processes to
+completion.
+
+To create a build in Knative, you must define a configuration file, in which
+specifies one or more container images that you have implemented to perform
+and complete a task.
+
+A build runs until all `steps` have completed or until a failure occurs.
+
+---
+
+* [Syntax](#syntax)
+  * [Steps](#steps)
+  * [Template](#template)
+  * [Source](#source)
+  * [Service Account](#service-account)
+  * [Volumes](#volumes)
+* [Examples](#examples)
+
+---
+
+### Syntax
+
+To define a configuration file for a `Build` resource, you can specify the
+following fields:
+
+* Required:
+  * [`apiVersion`][kubernetes-overview] - Specifies the API version, for example
+    `build.knative.dev/v1alpha1`.
+  * [`kind`][kubernetes-overview] - Specify the `Build` resource object.
+  * [`metadata`][kubernetes-overview] - Specifies data to uniquely identify the
+    `Build` resource object, for example a `name`.
+  * [`spec`][kubernetes-overview] - Specifies the configuration information for
+    your `Build` resource object. Build steps must be defined through either of
+    the following fields:
+    * [`steps`](#steps) - Specifies one or more container images that you want
+      to run in your build.
+    * [`template`](#template) - Specifies a reusable build template that
+      includes one or more `steps`.
+* Optional:
+  * [`source`](#source) - Specifies a container image that provides information
+    to your build.
+  * [`serviceAccountName`](#service-account) - Specifies a `ServiceAccount`
+    resource object that enables your build to run with the defined
+    authentication information.
+  * [`volumes`](#volumes) - Specifies one or more volumes that you want to make
+    available to your build.
+
+[kubernetes-overview]: https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/#required-fields
+
+The following example is a non-working sample where most of the possible
+configuration fields are used:
+
+```yaml
+apiVersion: build.knative.dev/v1alpha1
+kind: Build
+metadata:
+  name: example-build-name
+spec:
+  serviceAccountName: build-auth-example
+  source:
+    git:
+      url: https://github.com/example/build-example.git
+      revision: master
+  steps:
+  - name: ubuntu-example
+    image: ubuntu
+    args: ["ubuntu-build-example", "SECRETS-example.md"]
+  steps:
+  - image: gcr.io/example-builders/build-example
+    args: ['echo', 'hello-example', 'build']
+  steps:
+  - name: dockerfile-pushexample
+    image: gcr.io/example-builders/push-example
+    args: ["push", "${IMAGE}"]
+    volumeMounts:
+    - name: docker-socket-example
+      mountPath: /var/run/docker.sock
+  volumes:
+  - name: example-volume
+    emptyDir: {}
+```
+
+#### Steps
+
+The `steps` field is required if the `template` field is not defined. You
+define one or more `steps` fields to define the body of a build.
+
+Each `steps` in a build must specify a `Builder`, or type of container image that
+adheres to the [Knative builder contract](./builder-contract.md). For each of
+the of the `steps` fields, or container images that you define:
+
+* The `Builder`-type container images are run and evaluated in order, starting
+  from the top of the configuration file.
+* Each container image runs until completion or until the first failure is
+  detected.
+
+For details about how to ensure that you implement each step to align with the
+"builder contract", see the [`Builder`](./builder-contract.md) reference topic.
 
 
-## What is a Build?
+#### Template
 
-A `Build` is the main custom resource introduced by this project.
-Builds are a "run to completion" resource. They start evaluating upon
-creation and run until they are `Complete` (or until the first failing
-step, resulting in a `Failed` status).
+The `template` field is a required if no `steps` are defined. Specifies a
+[`BuildTemplate`](./build-templates.md) resource object, in which includes
+repeatable or sharable build `steps`.
 
-### Elements of a Build
+For examples and more information about build templates, see the
+[`BuildTemplate`](./build-templates.md) reference topic.
 
-* [Source](#source)
-* [Steps or Template](#steps-or-template)
-* [Service Account](#service-account)
-* [Volumes](#volumes)
 
 #### Source
 
-Builds may define a `source:`. A `source:` describes the context with which to 
-seed the build.  This context is put into `/workspace`, a volume that is
-mounted into the `source:` and all of the `steps:`.
+Optional. Specifies a container image. Use the `source` field to provide your
+build with data or context that is needed by your build. The data is placed into
+the `/workspace` directory within a mounted
+[volume](https://kubernetes.io/docs/concepts/storage/volumes/) and is available
+to all `steps` of your build.
 
-Currently, the following types of source are supported:
- * `git:` can specify a `url:` and a `revision:`.
+The currently supported types of sources include:
 
- * `custom:` can specify an arbitrary container specification, similar to
- steps (see below).
+ * `git` - A Git based repository. Specify the `url` field to define the
+   location of the container image. Specify a `revision` field to define a
+   branch name, tag name, commit SHA, or any ref. [Learn more about revisions in
+   Git](https://git-scm.com/docs/gitrevisions#_specifying_revisions).
 
-* `gcs:` can specify an archive stored at Cloud Storage.
+ * `gcs` - An archive that is located in Google Cloud Storage.
 
-
-#### Steps or Template
-
-The body of a build is defined through either a set of inlined `steps:` or by
-instantiating a [build template](./build-templates.md).
-
-`steps:` is a series of Kubernetes container references adhering to the [builder
-contract](./builder-contract.md). These containers are evaluated in order,
-until the first failure (or the last container completes successfully).
+ * `custom` - An arbitrary container image.
 
 
 #### Service Account
 
-Builds (like Pods) run as a particular service account. If none is specified, it
-is run as the "default" service account in the namespace of the Build.
+Optional. Specifies the `name` of a `ServiceAccount` resource object. Use the
+`serviceAccountName` field to run your build with the privileges of the
+specified service account. If no `serviceAccountName` field is specified,
+your build runs using the
+[`default` service account](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#use-the-default-service-account-to-access-the-api-server)
+that is in the
+[namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
+of the `Build` resource object.
 
-A custom service account can be specified via `serviceAccountName: build-bot`.
-Service account names other than `build-bot` are acceptable.
-
-Service accounts can be used to project certain types of credentials into the
-context of a Build automagically. For more information on how this process is
-configured and how it works, see the [credential](./auth.md).
+For examples and more information about specifying service accounts,
+see the [`ServiceAccount`](./auth.md) reference topic.
 
 
 #### Volumes
 
-Builds can specify a collection of volumes to make available to their build
-steps. These complement the volumes that are implicitly created as part of
-the [builder contract](./builder-contract.md).
+Optional. Specifies one or more
+[volumes](https://kubernetes.io/docs/concepts/storage/volumes/) that you want
+to make available to your build, including all the build steps. Add volumes to
+complement the volumes that are implicitly
+[created during a build step](./builder-contract.md).
 
-Volumes can be used in a wide variety of ways, just as in Kubernetes itself.
-Common examples include:
+For example, use volumes to accomplish one of the following common tasks:
 
- * Mounting in Kubernetes secrets (a manual alternative to [our service account
- model](./auth.md)).
+ * [Mount a Kubernetes secrets(./auth.md).
 
- * Creating an extra `emptyDir` volume to act as a multi-step cache (maybe even
- a persistent volume for inter-build caching).
+ * Creat an `emptyDir` volume to act as a cache for use across multiple build
+   steps. Consider using a persistent volume for inter-build caching.
 
- * Mounting in the host's Docker socket to perform Dockerfile builds.
-
-
-### Example Builds
-
-This section outlines a number of simple illustrative builds with fully inlined
-specifications. For examples of Builds that leverage templates, see [the build
-template documentation](./build-templates.md).
+ * Mount a host's Docker socket to use a `Dockerfile` for container image
+   builds.
 
 
-#### With `git` by branch, tag, commit or ref
+### Examples
+
+Use these code snippets to help you understand how to define your Knative builds.
+
+Tip: See the collection of simple
+[test builds](https://github.com/knative/build/tree/master/test) for
+additional code samples, including working copies of the following snippets:
+
+* [`git` as `source`](#using-git)
+* [`gcs` as `source`](#using-gcs)
+* [`custom` as `source`](#using-custom)
+* [Mounting extra volumes](#using-an-extra-volume)
+* [Pushing an image](#using-steps-to-push-images)
+* [Authenticating with `ServiceAccount`](#using-a-serviceaccount)
+
+#### Using `git`
+
+Specifying `git` as your `source`:
 
 ```yaml
 spec:
@@ -93,11 +195,9 @@ spec:
     args: ["cat", "README.md"]
 ```
 
-The `revision` field accepts a branch name, tag name, commit SHA, or any ref.
-See https://git-scm.com/docs/gitrevisions#_specifying_revisions for more
-information.
+#### Using `git`
 
-#### With a `gcs` source
+Specifying `gcs` as your `source`:
 
 ```yaml
 spec:
@@ -111,7 +211,9 @@ spec:
     args: ["ls"]
 ```
 
-#### With a `custom` source
+#### Using `custom`
+
+Specifying `custom` as your `source`:
 
 ```yaml
 spec:
@@ -124,7 +226,9 @@ spec:
     args: ["cat", "README.md"]
 ```
 
-#### With an extra volume
+#### Using an extra volume
+
+Mounting multiple volumes:
 
 ```yaml
 spec:
@@ -147,31 +251,85 @@ spec:
     emptyDir: {}
 ```
 
-#### With a private `git` repo via a custom service-account
+#### Using `steps` to push images
+
+Defining a `steps` to push a container image to a repository.
 
 ```yaml
 spec:
-  # Here build-bot is a ServiceAccount that's had an extra Secret attached
-  # with `type: kubernetes.io/basic-auth`.  The username and password are
-  # specified per usual, and there is an additional annotation on the Secret
-  # of the form: `build.knative.dev/git-0: https://github.com`, which
-  # directs us to configure this basic authentication for use with GitHub
-  # through Git.
-  serviceAccountName: build-bot
-
-  source:
-    git:
-      url: https://github.com/google/secret-sauce.git
-      revision: master
+  parameters:
+  - name: IMAGE
+    description: The name of the image to push
+  - name: DOCKERFILE
+    description: Path to the Dockerfile to build.
+    default: /workspace/Dockerfile
   steps:
-  - image: ubuntu
-    args: ["cat", "SECRETS.md"]
+  - name: build-and-push
+    image: gcr.io/kaniko-project/executor
+    args:
+    - --dockerfile=${DOCKERFILE}
+    - --destination=${IMAGE}
 ```
 
-#### Lots of trivial examples
+#### Using a `ServiceAccount`
 
-For a variety of additional (mostly trivial) examples, see also our [tests
-directory](https://github.com/knative/build/tree/master/test).
+Specifying a `ServiceAccount` to access a private `git` repository:
+
+```yaml
+apiVersion: build.knative.dev/v1alpha1
+kind: Build
+metadata:
+  name: test-build-with-serviceaccount-git-ssh
+  labels:
+    expect: succeeded
+spec:
+  serviceAccountName: test-build-robot-git-ssh
+  source:
+    git:
+      url: git@github.com:knative/build.git
+      revision: master
+
+  steps:
+  - name: config
+    image: ubuntu
+    command: ["/bin/bash"]
+    args: ["-c", "cat README.md"]
+```
+
+Where `serviceAccountName: test-build-robot-git-ssh` references the following
+`ServiceAccount`:
+
+```yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: test-build-robot-git-ssh
+secrets:
+- name: test-git-ssh
+```
+
+And `name: test-git-ssh`, references the following `Secret`:
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: test-git-ssh
+  annotations:
+    build.knative.dev/git-0: github.com
+type: kubernetes.io/ssh-auth
+data:
+  # Generated by:
+  # cat id_rsa | base64 -w 1000000
+  ssh-privatekey: LS0tLS1CRUdJTiBSU0EgUFJJVk.....[example]
+  # Generated by:
+  # ssh-keyscan github.com | base64 -w 100000
+  known_hosts: Z2l0aHViLmNvbSBzc2g.....[example]
+```
+
+Note: For a working copy of this `ServiceAccount` example, see the
+[build/test/git-ssh](https://github.com/knative/build/tree/master/test/git-ssh)
+code sample.
 
 ---
 
