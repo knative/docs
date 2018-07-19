@@ -16,16 +16,17 @@ limitations under the License.
 package main
 
 import (
-	"encoding/json"
 	"math"
 	"net/http"
 	"strconv"
+	"sync"
+	"time"
 )
 
 // Algorithm from https://stackoverflow.com/a/21854246
 
 // Only primes less than or equal to N will be generated
-func primes(N int) []int {
+func allPrimes(N int) []int {
 
 	var x, y, n int
 	nsqrt := math.Sqrt(float64(N))
@@ -71,22 +72,69 @@ func primes(N int) []int {
 	return primes
 }
 
-const primesPath = "/primes/"
+func bloat(mb int) {
+	b := make([]byte, mb*1024*1024)
+	b[0] = 1
+	b[len(b)-1] = 1
+}
+
+func prime(max int) {
+	p := allPrimes(max)
+}
+
+func sleep(ms int) {
+	time.Sleep(time.Duration(ms) * time.Millisecond)
+}
+
+func run(wg sync.WaitGroup, value string, fn func(int)) error {
+	i, err := strconv.Atoi(value)
+	if err != nil {
+		return err
+	}
+	go func() {
+		wg.Add(1)
+		defer wg.Done()
+		fn(i)
+	}()
+	return nil
+}
+
+func parseInt(r *http.Request, param string) (int, ok, error) {
+	if value, ok := r.URL.Query()[param]; ok {
+
+	}
+	return 0, false, nil
+}
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	param := r.URL.Path[len(primesPath):]
-	n, err := strconv.Atoi(param)
-	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-	} else {
-		w.WriteHeader(http.StatusOK)
-		p := primes(n)
-		json.NewEncoder(w).Encode(p[len(p)-1:])
+	values := r.URL.Query()
+	var wg sync.WaitGroup
+	defer wg.Wait()
+	ms,
+
+
+
+	if ms, ok := values["sleep"]; ok {
+		if err := run(wg, ms, sleep); err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+	}
+	if max, ok := values["prime"]; ok {
+		if err := run(wg, max, prime); err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+	}
+	if mb, ok := values["bloat"]; ok {
+		if err := run(wg, mb, bloat); err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
 	}
 }
 
 func main() {
-	http.HandleFunc(primesPath, handler)
+	http.HandleFunc("/", handler)
 	http.ListenAndServe(":8080", nil)
 }
