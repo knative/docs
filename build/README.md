@@ -18,8 +18,9 @@ More information about this use case is demonstrated in
 ## Key features of Knative builds
 
 * A `Build` can include multiple `steps` where each step specifies a `Builder`.
-* A `Builder` is a container image that you create to accomplish any task, whether 
+* A `Builder` is a type of container image that you create to accomplish any task, whether 
     that's a single step in a process, or the whole process itself.
+* The `steps` in a `Build` can push to a repository.
 * A `BuildTemplate` can be used to defined reusable templates.
 * The  `source` in a  `Build` can be defined to mount data to a Kubernetes Volume, and supports:
      * `git` repositories
@@ -73,15 +74,15 @@ Use the following samples to learn how to configure your Knative builds to perfo
 
 Tip: Review and reference multiple samples to piece together more complex builds.
 
-### Simple build samples
+#### Simple build samples
 
 * [Collection of simple test builds](https://github.com/knative/build/tree/master/test).
 
-### Build templates
+#### Build templates
  
  * [Repository of sample build templates](https://github.com/knative/build-templates).
  
- ### Complex samples
+ #### Complex samples
  
  * [Use Knative to build apps from source code and then run those containers](https://github.com/knative/docs/blob/master/serving/samples/source-to-url-go).
  
