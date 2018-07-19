@@ -75,7 +75,7 @@ in the Knative Serving repository.
 
 ## Configuration and Networking
 
-* [Setting up a docker registry](./setting-up-a-docker-registry.md)
+* [Configuring outbound network access](./outbound-network-access.md)
 * [Using a custom domain](./using-a-custom-domain.md)
 * [Assigning a static IP address for Knative on Google Kubernetes Engine](./gke-assigning-static-ip-address.md)
 
