@@ -82,14 +82,14 @@ Follow the links in this section to learn more about Knative.
 * [Getting started with Knative Builds](https://github.com/knative/docs/builds)
 * [Getting started with Knative Eventing](https://github.com/knative/docs/eventing)
 
-## More samples and demos
+### More samples and demos
 
 * [Autoscaling with Knative Serving](serving/samples/autoscale-go/README.md)
 * [Source-to-URL with Knative Serving](serving/samples/source-to-url-go/README.md)
 * [Telemetry with Knative Serving](serving/samples/telemetry-go/README.md)
 * [REST API sample](serving/samples/rest-api-go/README.md)
 
-## Setting up Logging and Metrics 
+### Setting up Logging and Metrics 
 
 * [Installing Logging, Metrics and Traces](./serving/installing-logging-metrics-traces.md)
 * [Accessing Logs](./serving/accessing-logs.md)
@@ -97,12 +97,12 @@ Follow the links in this section to learn more about Knative.
 * [Accessing Traces](./serving/accessing-traces.md)
 * [Setting up a logging plugin](./serving/setting-up-a-logging-plugin.md)
 
-## Debugging Knative Serving issues 
+### Debugging Knative Serving issues 
 
 * [Debugging Application Issues](./serving/debugging-application-issues.md)
 * [Debugging Performance Issues](./serving/debugging-performance-issues.md)
 
-## Configuration and Networking
+### Configuration and Networking
 
 * [Setting up a docker registry](./serving/setting-up-a-docker-registry.md)
 * [Using a custom domain](./serving/using-a-custom-domain.md)
