@@ -47,7 +47,7 @@ section along with the [reference files](#learn-more) above for more information
 The following example demonstrates a build that uses authentication and includes multiple `steps` and
 multiple repositories:
 
-```
+```yaml
 apiVersion: build.knative.dev/v1alpha1
 kind: Build
 metadata:
