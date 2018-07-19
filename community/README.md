@@ -50,7 +50,7 @@ industry-leading companies. For a current list of the authors, see [Authors](htt
 
 ## Meetings and work groups
 
-Real-time Knative discussion is available at [knative.slack.com](https://knative.slack.com).
+Real-time Knative discussion is available at [knative-community.slack.com](https://knative-community.slack.com).
 
 We also have public and recorded bi-weekly community meetings.
 
