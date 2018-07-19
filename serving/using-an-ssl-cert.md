@@ -68,6 +68,26 @@ spec:
       serverCertificate: /etc/istio/ingressgateway-certs/tls.crt
 ```
 
+Once the change has been made, you can now use the HTTPS protocol to access
+your deployed services.
+
+
+## Obtaining an SSL/TLS certificate using LetsEncrypt
+
+If you don't have an existing SSL/TLS certificate, you can use [LetsEncrypt](https://letsencrypt.org)
+to obtain a certificate manually.
+
+1. Install the `certbot-auto` script from the [Certbot website](https://certbot.eff.org/docs/install.html#certbot-auto).
+1. Use the certbot to request a certificate, using DNS validation. The certbot tool will walk
+   you through validating your domain ownership by creating TXT records in your domain.
+
+    ```shell
+    ./certbot-auto certonly --manual --preferred-challenges dns -d '*.default.yourdomain.com'
+    ```
+
+1. When certbot is complete, you will have two output files, `privkey.pem` and `fullchain.pem`. These files
+   map to the `cert.pk` and `cert.pem` files used above.
+
 ---
 
 Except as otherwise noted, the content of this page is licensed under the
