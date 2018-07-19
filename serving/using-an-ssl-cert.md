@@ -1,52 +1,70 @@
-# Setting up an SSL cert
+# Configuring HTTPS with a custom certificate
 
-If you already have an SSL cert for your domain, follow these steps to use it
-for your cluster.  See instructions [here](./using-a-custom-domain.md) to set
-up a domain for your cluster.
+If you already have an SSL/TLS certificate for your domain you can
+follow the steps below to configure Knative to use your certificate
+and enable HTTPS connections.
 
-Note that due to Istio limitation we can only use one certificate for our
-cluster -- as a result you will need to make sure that your certificate is
-signed for all of your cluster's domain names.
+Before you begin, you will need to 
+[configure Knative to use your custom domain](./using-a-custom-domain.md).
+
+**Note:** due to limitations in Istio, Knative only supports a single 
+certificate per cluster. If you will serve multiple domains in the same
+cluster, make sure the certificate is signed for all the domains.
 
 ## Add the Certificate and Private Key into a secret
 
-Istio requires that the secret must be name `istio-ingressgateway-certs`.
-To create the secret, run the following command.
+Assuming you have two files, `cert.pk` which contains your certificate private
+key, and `cert.pem` which contains the public certificate, you can use the 
+following command to create a secret that stores the certificate. Note the
+name of the secret, `istio-ingressgateway-certs` is required.
 
 ```shell
-# Replace <cert.pk> and <cert.pem> in the following command with the correct
-# name of your certificate and private key file.
 kubectl create -n istio-system secret tls istio-ingressgateway-certs \
-    --key cert.pk \
-    --cert cert.pem
+  --key cert.pk \
+  --cert cert.pem
 ```
 
 ## Configure the Knative shared Gateway to use the new secret
 
-Run this,
+Once you have created a secret that contains the certificate,
+you need to update the Gateway spec to use the HTTPS.
+
+To edit the shared gateway, run:
+
 ```shell
 kubectl edit gateway knative-shared-gateway -n knative-serving
 ```
-then update your Gateway spec to look like this
+
+Change the Gateway spec to include the `tls:` section as shown below, then
+save the changes.
+
+```yaml
+# Please edit the object below. Lines beginning with a '#' will be ignored.
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  # ... skipped ...
+spec:
+  selector:
+    knative: ingressgateway
+  servers:
+  - hosts:
+    - '*'
+    port:
+      name: http
+      number: 80
+      protocol: HTTP
+  - hosts:
+    - '*'
+    port:
+      name: https
+      number: 443
+      protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      privateKey: /etc/istio/ingressgateway-certs/tls.key
+      serverCertificate: /etc/istio/ingressgateway-certs/tls.crt
 ```
-  spec:
-    selector:
-      knative: ingressgateway
-    servers:
-    - hosts:
-      - '*'
-      port:
-        name: http
-        number: 80
-        protocol: HTTP
-    - hosts:
-      - '*'
-      port:
-        name: https
-        number: 443
-        protocol: HTTPS
-      tls:
-        mode: SIMPLE
-        privateKey: /etc/istio/ingressgateway-certs/tls.key
-        serverCertificate: /etc/istio/ingressgateway-certs/tls.crt
-```
+
