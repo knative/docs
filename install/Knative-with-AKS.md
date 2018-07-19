@@ -56,16 +56,6 @@ environment variables. First determine which region you'd like to run AKS in, al
    az group create --name $RESOURCE_GROUP --location $LOCATION
    ```
 
-### Create a service principal
-
-This creates an identity for Open Service Broker for Azure to use when provisioning
-resources on your account on behalf of Kubernetes.
-
-1. Create a service principal with RBAC enabled:
-    ```bash
-    az ad sp create-for-rbac --name knative -o table
-    ```
-
 ### Create a Kubernetes cluster using AKS
 
 Next we will create a managed Kubernetes cluster using AKS. To make sure the cluster is large enough to host all the Knative and Istio components, the recommended configuration for a cluster is:
