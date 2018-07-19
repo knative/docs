@@ -18,12 +18,11 @@ commands will need to be adjusted for use in a Windows environment.
 
 1. If you already have `azure cli` version `2.0.41` or later installed, you can skip to the next section and install `kubectl`
 
-
 ### Installing kubectl
 
 1. If you already have `kubectl`, run `kubectl version` to check your client version. If you have `kubectl` v1.10 installed, you can skip to the next section and create an AKS cluster
 
-```console
+```bash
 az aks install-cli
 ```
 
@@ -37,25 +36,13 @@ First let's identify your Azure subscription and save it for use later.
 
 1. Run `az login` and follow the instructions in the command output to authorize `az` to use your account
 1. List your Azure subscriptions:
-    ```console
+    ```bash
     az account list -o table
     ```
-1. Copy your subscription ID and save it in an environment variable:
-
-    **Bash**
-    ```console
-    export AZURE_SUBSCRIPTION_ID="<SubscriptionId>"
-    ```
-
-    **PowerShell**
-    ```console
-    $env:AZURE_SUBSCRIPTION_ID = "<SubscriptionId>"
-    ```
-
 ### Create a Resource Group for AKS
 
  To simplify the command lines for this walkthrough, we need to define a few
-environment variables. First determine which region you'd like to run AKS in, along with the resource group you'd like to use. 
+environment variables. First determine which region you'd like to run AKS in, along with the resource group you'd like to use.
 
 1. Set `RESOURCE_GROUP` and `LOCATION` variables:
    ```bash
@@ -75,15 +62,9 @@ This creates an identity for Open Service Broker for Azure to use when provision
 resources on your account on behalf of Kubernetes.
 
 1. Create a service principal with RBAC enabled:
-    ```console
+    ```bash
     az ad sp create-for-rbac --name knative -o table
     ```
-1. Save the values from the command output in environment variables:
-   ```bash
-   export AZURE_TENANT_ID=<Tenant>
-   export AZURE_CLIENT_ID=<AppId>
-   export AZURE_CLIENT_SECRET=<Password>
-   ```
 
 ### Create a Kubernetes cluster using AKS
 
@@ -95,28 +76,26 @@ Next we will create a managed Kubernetes cluster using AKS. To make sure the clu
 * RBAC enabled
 
 1. Enable AKS in your subscription, use the following command with the az cli:
-    ```console
+    ```bash
     az provider register -n Microsoft.ContainerService
     ```
-
 You should also ensure that the `Microsoft.Compute` and `Microsoft.Network` providers are registered in your subscription. If you need to enable them:
-    ```console
+    ```bash
     az provider register -n Microsoft.Compute
     az provider register -n Microsoft.Network
     ```
-
 1. Create the AKS cluster!
-    ```console
+    ```bash
     az aks create --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME --generate-ssh-keys --kubernetes-version 1.10.5 --enable-rbac --node-vm-size Standard_DS3_v2
     ```
 
 1. Configure kubectl to use the new cluster. You'll initially want to use the cluster admin user to configure more components.
-    ```console
+    ```bash
     az aks get-credentials --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME --admin
     ```
 
 1. Verify your cluster is up and running
-    ```console
+    ```bash
     kubectl get nodes
     ```
 
@@ -186,7 +165,6 @@ you're not using it. Deleting the cluster will also remove Knative, Istio,
 and any apps you've deployed.
 
 To delete the cluster, enter the following command:
-
 ```bash
 az aks delete --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME --yes --no-wait
 ```
