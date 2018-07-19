@@ -25,3 +25,10 @@ The following dashboards are pre-installed with Knative Serving:
 
 To sign in as an administrator and modify or add dashboards, sign in with username `admin` and password `admin`.
 Before you expose the Grafana UI outside the cluster, make sure to change the password.
+
+---
+
+Except as otherwise noted, the content of this page is licensed under the
+[Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),
+and code samples are licensed under the
+[Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).
