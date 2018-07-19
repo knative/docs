@@ -1,58 +1,40 @@
 # Welcome, Knative
 
-Knative (pronounced kay-nay-tiv) extends Kubernetes to provide the
-missing middleware that developers need to create modern,
-source-centric, container-based, cloud-native applications.
+Knative (pronounced kay-nay-tiv) extends Kubernetes to provide a set of middleware 
+components that are essential to build modern, source-centric, and container-based 
+applications that can run anywhere: on premises, in the cloud, or even in a third-party 
+data center. 
 
-Each of the components under the Knative project attempt to identify
-common patterns and codify the best practices shared by successful
-real-world Kubernetes-based frameworks and applications, such as:
+Each of the components under the Knative project attempt to identify common patterns and 
+codify the best practices that are shared by successful real-world Kubernetes-based frameworks and 
+applications. Knative components focus on solving many mundane but difficult tasks such as:
 
-- [Orchestrating source-to-container workflows on Kubernetes](build/README.md)
-- [Deploying a container to Knative](install/getting-started-knative-app.md)
-- [Updating your application without downtime](serving/samples/blue-green-deployment.md)
-- [Automatic scaling and sizing applications based on demand](serving/auto-scaling-with-knative.md)
-- [Binding events to functions, apps, and containers with Knative](events/)
+- [Deploying a container](install/getting-started-knative-app.md)
+- [Orchestrating source-to-URL workflows on Kubernetes](serving/samples/source-to-url-go/)
+- [Routing and managing traffic with blue/green deployment](serving/samples/blue-green-deployment.md)
+- [Automatic scaling and sizing workloads based on demand](serving/samples/autoscale-go)
+- [Binding running services to eventing ecosystems](eventing/README.md)
 
-Knative focuses on the "boring but difficult" parts that everyone
-needs, but that no one benefits from doing over again on their own. This
-in turn frees application developers to spend more time writing
-interesting code, not worrying about how they are going to build,
-deploy, monitor, and debug it.
+Developers on Knative can use familiar idioms, languages, and frameworks to deploy any workload: 
+functions, applications, or containers.
 
-## Documentation
+## Knative components
 
-### Getting started with Knative
+The following Knative components are currently available:
 
-* [Installing Knative](/install/README.md)
-* [Getting Started with Knative App Deployment](install/getting-started-knative-app.md)
-* [Knative Sample Applications](serving/samples/README.md)
+* [Build](https://github.com/knative/build) - Source-to-container build orchestration
+* [Eventing](https://github.com/knative/eventing) - Management and delivery of events
+* [Serving](https://github.com/knative/serving) - Request-driven compute that can scale to zero
 
-### Logging, Metrics, and Debugging 
+## Knative audience
 
-* [Installing Logging, Metrics and Traces](./serving/installing-logging-metrics-traces.md)
-* [Accessing Logs](./serving/accessing-logs.md)
-* [Accessing Metrics](./serving/accessing-metrics.md)
-* [Accessing Traces](./serving/accessing-traces.md)
-* [Debugging Application Issues](./serving/debugging-application-issues.md)
-* [Debugging Performance Issues](./serving/debugging-performance-issues.md)
-* [Setting up a logging plugin](./serving/setting-up-a-logging-plugin.md)
+Knative is designed with different personas in mind:
 
-### Networking
-
-* [Using a Custom Domain with Knative](./serving/using-a-custom-domain.md)
-
-### Configuration
-
-* [Setting up a Docker Registry](./serving/setting-up-a-docker-registry.md)
-
-## Who Knative is for
-
-Knative is designed for different personas:
+![Diagram that displays different Audiences for Knative](./images/knative-audience.svg)
 
 ### Developers
 
-Knative components offer Kubernetes-native APIs for deploying
+Knative components offer developers Kubernetes-native APIs for deploying
 serverless-style functions, applications, and containers to an auto-scaling
 runtime.
 
@@ -83,10 +65,45 @@ Your own path to becoming a Knative contributor can
 [Bug reports](https://github.com/knative/serving/issues/new) and
 friction logs from new developers are especially welcome.
 
-## Available Knative components
+### Users and Systems (IoT)
 
-The following Knative components are currently available:
+End users will use applications that have been developed and deployed by developers and hosted by operators.
 
-- [Build](https://github.com/knative/build) - Source to container build orchestration
-- [Events](https://github.com/knative/eventing) - Management and delivery of events
-- [Serving](https://github.com/knative/serving) - Scale to zero, request-driven compute
+## Knative documentation
+
+Follow the links in this section to learn more about Knative.
+
+### Getting started with Knative
+
+* [Installing Knative](/install/README.md)
+* [Getting Started with Knative App Deployment](install/getting-started-knative-app.md)
+* [Knative Sample Applications](serving/samples/)
+* [Getting started with Knative Serving](https://github.com/knative/docs/serving)
+* [Getting started with Knative Builds](https://github.com/knative/docs/builds)
+* [Getting started with Knative Eventing](https://github.com/knative/docs/eventing)
+
+### More samples and demos
+
+* [Autoscaling with Knative Serving](serving/samples/autoscale-go/README.md)
+* [Source-to-URL with Knative Serving](serving/samples/source-to-url-go/README.md)
+* [Telemetry with Knative Serving](serving/samples/telemetry-go/README.md)
+* [REST API sample](serving/samples/rest-api-go/README.md)
+
+### Setting up Logging and Metrics 
+
+* [Installing Logging, Metrics and Traces](./serving/installing-logging-metrics-traces.md)
+* [Accessing Logs](./serving/accessing-logs.md)
+* [Accessing Metrics](./serving/accessing-metrics.md)
+* [Accessing Traces](./serving/accessing-traces.md)
+* [Setting up a logging plugin](./serving/setting-up-a-logging-plugin.md)
+
+### Debugging Knative Serving issues 
+
+* [Debugging Application Issues](./serving/debugging-application-issues.md)
+* [Debugging Performance Issues](./serving/debugging-performance-issues.md)
+
+### Configuration and Networking
+
+* [Setting up a docker registry](./serving/setting-up-a-docker-registry.md)
+* [Using a custom domain](./serving/using-a-custom-domain.md)
+* [Assigning a static IP address for Knative on Google Kubernetes Engine](./serving/gke-assigning-static-ip-address.md)
