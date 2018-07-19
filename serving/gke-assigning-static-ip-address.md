@@ -14,16 +14,34 @@ external IP address of the `knative-ingressgateway` service to a static IP.
 
 ## Step 1: Reserve a static IP address
 
-Reserve a regional static IP address using the Google Cloud Platform console:
+You can reserve a regional static IP address using the Google Cloud SDK or the
+Google Cloud Platform console.
 
-1. Follow the [Kubernetes Engine instructions](https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address#reserve_new_static) to reserve a new static IP address.
-1. In the Cloud Platform console:
-   1. Select the **Regional** Type.
-   1. In the **Region** menu, specify the region where your Knative cluster is running. 
+Using the Google Cloud SDK:
+   1. Enter the following command, replacing IP_NAME and REGION with appropriate
+      values. For example, select the `us-west1` region if you deployed your
+      cluster to the `us-west1-c` zone:
+   	  ```shell
+      gcloud beta compute addresses create IP_NAME --region=REGION
+   	  ```
+   	  For example:
+   	  ```shell
+      gcloud beta compute addresses create knative-ip --region=us-west1
+   	  ```
+   1. Enter the following command to get the newly created static IP address:
+   	  ```shell
+   	  gcloud beta compute addresses list
+   	  ```
+
+In the [GCP console](https://console.cloud.google.com/networking/addresses/add?_ga=2.97521754.-475089713.1523374982):
+   1. Enter a name for your static address.
+   1. For **IP version**, choose IPv4.
+   1. For **Type**, choose **Regional**.
+   1. From the **Region** drop-down, choose the region where your Knative cluster is running. 
    
-      For example, select the `us-west1` region if your deployed your cluster to the `us-west1-c` zone.
-      
-1. Copy the **External Address** of the static IP you created.
+      For example, select the `us-west1` region if you deployed your cluster to the `us-west1-c` zone.
+   1. Copy the **External Address** of the static IP you created.
+
 
 ## Step 2: Update the external IP of the `knative-ingressgateway` service
 
@@ -31,6 +49,7 @@ Run following command to configure the external IP of the
 `knative-ingressgateway` service to the static IP that you reserved:
 ```shell
 kubectl patch svc knative-ingressgateway -n istio-system --patch '{"spec": { "loadBalancerIP": "<your-reserved-static-ip>" }}'
+service "knative-ingressgateway" patched
 ```
 
 ## Step 3: Verify the static IP address of `knative-ingressgateway` service
@@ -39,9 +58,9 @@ Run the following command to ensure that the external IP of the "knative-ingress
 ```shell
 kubectl get svc knative-ingressgateway -n istio-system
 ```
-The output should show the assigned address under the EXTERNAL-IP column:
+The output should show the assigned static IP address under the EXTERNAL-IP column:
 ```
 NAME                     TYPE           CLUSTER-IP      EXTERNAL-IP     PORT(S)                                      AGE
 knative-ingressgateway   LoadBalancer   12.34.567.890   98.765.43.210   80:32380/TCP,443:32390/TCP,32400:32400/TCP   5m
 ```
-Note that the process of updating the external IP address can take several minutes.
+> Note: Updating the external IP address can take several minutes.

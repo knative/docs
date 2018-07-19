@@ -1,13 +1,13 @@
-# Stock
+# Creating a RESTful service
 
-A simple Restful service for testing purpose. It expose an endpoint, which takes
-a stock ticker (stock symbol) and output the stock price. It uses the the REST resource
+A simple RESTful service for testing purposes. It exposes an endpoint, which takes
+a stock ticker (stock symbol), then outputs the stock price. It uses the the REST resource
 name from environment defined in configuration.
 
 ## Prerequisites
 
 1. [Install Knative Serving](https://github.com/knative/docs/blob/master/install/README.md)
-1. Install [docker](https://www.docker.com/)
+1. Install [Docker](https://www.docker.com/)
 
 ## Setup
 
@@ -31,7 +31,7 @@ kubectl apply -f serving/samples/rest-api-go/sample.yaml
 
 ## Exploring
 
-Once deployed, you can inspect the created resources with `kubectl` commands:
+Once deployed, you can inspect the create resources with the `kubectl` commands:
 
 ```shell
 # This will show the route that we created:
@@ -49,7 +49,8 @@ kubectl get revisions -o yaml
 
 ```
 
-To access this service via `curl`, we first need to determine its ingress address:
+To access this service via `curl`, you need to determine its ingress address:
+
 ```shell
 watch get svc knative-ingressgateway -n istio-system
 ```
@@ -78,7 +79,7 @@ your services will never get an external IP address. In that case, use the istio
 export SERVICE_IP=$(kubectl get po -l knative=ingressgateway -n istio-system -o 'jsonpath={.items[0].status.hostIP}'):$(kubectl get svc knative-ingressgateway -n istio-system -o 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
 ```
 
-Now curl the service IP as if DNS were properly configured:
+Now use curl with the service IP as if DNS were properly configured:
 
 ```shell
 curl --header "Host:$SERVICE_HOST" http://${SERVICE_IP}
@@ -97,19 +98,21 @@ curl --header "Host:$SERVICE_HOST" http://${SERVICE_IP}/stock/<ticker>
 
 ## Updating
 
-You can update this to a new version. For example, update it with a new configuration.yaml via:
+You can update this app to a new version. For example, update it with a new `configuration.yaml` via:
+
 ```shell
 kubectl apply -f serving/samples/rest-api-go/updated_configuration.yaml
 ```
 
 Once deployed, traffic will shift to the new revision automatically. You can verify the new version
-by checking route status:
+by checking the route status:
+
 ```shell
 # This will show the route that we created:
 kubectl get route -o yaml
 ```
 
-Or curling the service:
+Or, you run the curl command with the service host and IP:
 
 ```shell
 curl --header "Host:$SERVICE_HOST" http://${SERVICE_IP}
@@ -129,6 +132,7 @@ curl --header "Host:$SERVICE_HOST" http://${SERVICE_IP}/share/<ticker>
 ## Manual traffic splitting
 
 You can manually split traffic to specific revisions. Get your revisions names via:
+
 ```shell
 
 kubectl get revisions
@@ -141,6 +145,7 @@ stock-configuration-example-00002   4m
 ```
 
 Update `traffic` part in [serving/samples/rest-api-go/sample.yaml](./sample.yaml) as:
+
 ```yaml
 traffic:
   - revisionName: <YOUR_FIRST_REVISION_NAME>
@@ -149,13 +154,14 @@ traffic:
     percent: 50
 ```
 
-Then update your change via:
+Then, update your change via:
+
 ```shell
 kubectl apply -f serving/samples/rest-api-go/sample.yaml
 ```
 
-Once updated, you can verify the traffic splitting by looking at route status and/or curling
-the service.
+Once updated, you can verify the traffic splitting by looking at the route status or running 
+the curl command as before.
 
 ## Cleaning up
 

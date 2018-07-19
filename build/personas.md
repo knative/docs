@@ -1,20 +1,20 @@
-# knative Personas
+# Knative Personas
 
 When discussing user actions, it is often helpful to [define specific
 user roles](https://en.wikipedia.org/wiki/Persona_(user_experience)) who
 might want to do the action.
 
 
-## knative Build
+## Knative Build
 
-We expect the build components of knative to be useful on their own,
+We expect the build components of Knative to be useful on their own,
 as well as in conjunction with the compute components. 
 
 ### Developer
 
 The developer personas for build are broader than the serverless
 workloads that the knative compute product focuses on. Developers
-expect to have build tools which integrate with their native language
+expect to have build tools that integrate with their native language
 tooling for managing dependencies and even detecting language and
 runtime dependencies.
 
@@ -25,7 +25,7 @@ User stories:
 ### Language operator / contributor
 
 The language operators perform the work of integrating language
-tooling into the knative build system. This role may work either
+tooling into the knative build system. This role can work either
 within a particular organization, or on behalf of a particular
 language runtime.
 
@@ -36,10 +36,11 @@ User stories:
 
 ## Contributors
 
-Contributors are an important part of the knative project. As such, we
-will also consider how various infrastructure encourages and enables
-contributors to the project, as well as the impact on end-users.
+Contributors are an important part of the knative project. We
+always consider how infrastructure changes encourage and enable
+contributors to the project, as well as the impact on users.
 
+Types of users:
 * Hobbyist or newcomer
 * Motivated user
 * Corporate (employed) maintainer

@@ -70,7 +70,7 @@ recreate the source files from this folder.
     apiVersion: serving.knative.dev/v1alpha1
     kind: Service
     metadata:
-      name: helloworld-python
+      name: helloworld-csharp
       namespace: default
     spec:
       runLatest:

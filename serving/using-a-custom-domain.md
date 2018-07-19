@@ -1,4 +1,4 @@
-# Setting up a Custom Domain
+# Setting up a custom domain
 
 By default, Knative Serving routes use `example.com` as the default domain.
 The fully qualified domain name for a route by default is `{route}.{namespace}.{default-domain}`.
@@ -10,34 +10,34 @@ To change the {default-domain} value there are a few steps involved:
 1. Edit the domain configuration config-map to replace `example.com`
    with your own domain, for example `mydomain.com`:
 
-```shell
-kubectl edit cm config-domain -n knative-serving
-```
+   ```shell
+   kubectl edit cm config-domain -n knative-serving
+   ```
 
-This command opens your default text editor and allows you to edit the config map. 
+   This command opens your default text editor and allows you to edit the config map. 
 
-```yaml
-apiVersion: v1
-data:
-  example.com: ""
-kind: ConfigMap
-[...]
-```
+   ```yaml
+   apiVersion: v1
+   data:
+     example.com: ""
+   kind: ConfigMap
+   [...]
+   ```
 
-2. Edit the file to replace `example.com` with the domain you'd like to use and save your changes.
-In this example, we configure `mydomain.com` for all routes: 
+1. Edit the file to replace `example.com` with the domain you'd like to use and save your changes.
+   In this example, we configure `mydomain.com` for all routes: 
 
-```yaml
-apiVersion: v1
-data:
-  mydomain.com: ""
-kind: ConfigMap
-[...]
-```
+   ```yaml
+   apiVersion: v1
+   data:
+     mydomain.com: ""
+   kind: ConfigMap
+   [...]
+   ```
 
 ## Apply from a file
 
-You can also apply an updated domain configuration config-map:
+You can also apply an updated domain configuration:
 
 1. Create a new file, `config-domain.yaml` and paste the following text,
    replacing the `example.org` and `example.com` values with the new
@@ -61,7 +61,7 @@ You can also apply an updated domain configuration config-map:
       example.com: ""
     ```
 
-2. Apply updated domain configuration to your cluster:
+1. Apply updated domain configuration to your cluster:
 
     ```shell
     kubectl apply -f config-domain.yaml
@@ -91,6 +91,7 @@ kubectl get svc knative-ingressgateway -n istio-system -o jsonpath="{.status.loa
 
 You can map the domain to the IP address of your Knative gateway in your local 
 machine with:
+
 ```shell
 export GATEWAY_IP=`kubectl get svc knative-ingressgateway -n istio-system -o jsonpath="{.status.loadBalancer.ingress[*]['ip']}"`
 

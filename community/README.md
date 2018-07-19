@@ -7,8 +7,8 @@ improving docs, giving talks, etc.
 
 *   [Introduction](#introduction)
 *   [Knative authors](#knative-authors)
-*   [Slack team](#slack-team)
-*   [How can I help?](#how-can-i-help-)
+*   [Meetings and work groups](#meetings-and-work-groups)
+*   [How can I help?](#how-can-i-help)
 *   [Questions and issues](#questions-and-issues)
 
 Other Documents
@@ -31,46 +31,32 @@ Other Documents
 
 ## Introduction
 
-Knative is an open source specification and implementation of a serverless
-container platform. See [Knative docs](https://github.com/knative/docs) for in-depth information about using Knative.
-
-<!-- TODO Visit [knative.dev](https://knative.dev) for in-depth information about using
-Knative. -->
+Knative is a Kubernetes-based platform to build, deploy, and manage modern serverless workloads.
+See [Knative docs](https://github.com/knative/docs) for in-depth information about using Knative.
 
 ## Knative authors
 
-Knative is an open source project with an active development community. The
-project was started by Google.
+Knative is an open source project with an active development community. 
+The project was started by Google but has contriubtions from a growing number of
+industry-leading companies. For a current list of the authors, see [Authors](https://github.com/knative/serving/blob/master/AUTHORS).
 
-## Slack team
+## Meetings and work groups
 
-Real-time Knative discussion is available at https://knative.slack.com.
+Real-time Knative discussion is available at [knative.slack.com](https://knative.slack.com).
 
-<!-- TODO ## Community meeting
+We also have public and recorded bi-weekly community meetings.
 
-We have [PUBLIC](TODO) and [RECORDED](TODO) bi-weekly community meetings every
-other TODO. Meeting agendas and notes can be accessed in the [working
-doc](TODO).
+Each project has one or more [working groups](WORKING-GROUPS.md) driving
+the project, and Knative as a single [technical oversight community](TECH-OVERSIGHT-COMMITTEE.md)
+monitoring the overall project.
 
-Map that to your local time with this [timezone
-table](https://www.google.com/search?q=TODO). -->
-
-## How can I help ?
-
-<!-- TODO See our [community page](https://knative.dev/community) for ways to get involved
-in our community. -->
-
-<!-- TODO To dig deeper, check the
-[architecture](https://knative.dev/docs/concepts/what-is-knative/overview.html#architecture)
-and read some [design docs](./CONTRIBUTING.md#design-documents). -->
+## How can I help
 
 If you're looking for something to do to get your feet wet working on Knative,
 look for GitHub issues marked with the Help Wanted label:
 
-*   [Primary Knative
-    repo](https://github.com/knative/serving/issues?q=is%3Aopen+is%3Aissue+label%3A%22community%2Fhelp+wanted%22)
-*   [Documentation
-    repo](https://github.com/knative/docs/issues?q=is%3Aopen+is%3Aissue+label%3A%22community%2Fhelp+wanted%22)
+*   [Serving issues](https://github.com/knative/serving/issues?q=is%3Aopen+is%3Aissue+label%3A%22community%2Fhelp+wanted%22)
+*   [Documentation repo](https://github.com/knative/docs/issues?q=is%3Aopen+is%3Aissue+label%3A%22community%2Fhelp+wanted%22)
 
 Even if there's not an issue opened for it, we can always use more
 testing throughout the platform. Similarly, we can always use more docs, richer
@@ -79,9 +65,6 @@ we could use your help in spiffing up our public-facing web site.
 
 ## Questions and issues
 
-<!-- TODO If you've got questions or issues with using Knative, checkout our [help
-page](https://knative.dev/help). -->
-
-If you're a developer trying to hack on or use the Knative code, head to
-[knative-dev@](https://groups.google.com/forum/#!forum/knative-dev) or [Knative
-Slack](https://knative.slack.com) for help.
+If you're a developer, operator, or contributor trying to use Knative, head to
+[knative-dev@](https://groups.google.com/forum/#!forum/knative-dev) or
+[knative.slack.com](https://knative.slack.com) for help.

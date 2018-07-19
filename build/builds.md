@@ -130,7 +130,8 @@ spec:
 spec:
   steps:
   - image: ubuntu
-    args: ["curl https://foo.com > /var/my-volume"]
+    entrypoint: ["bash"]
+    args: ["-c", "curl https://foo.com > /var/my-volume"]
     volumeMounts:
     - name: my-volume
       mountPath: /var/my-volume

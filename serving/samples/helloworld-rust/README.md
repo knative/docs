@@ -116,7 +116,7 @@ Once you have recreated the sample code files (or used the files in the sample
 folder) you're ready to build and deploy the sample app.
 
 1. Use Docker to build the sample code into a container. To build and push with
-   Docker Hub, run these commands replacing `{username}` with your
+   Docker Hub, enter these commands replacing `{username}` with your
    Docker Hub username:
 
     ```shell
@@ -127,7 +127,7 @@ folder) you're ready to build and deploy the sample app.
     docker push {username}/helloworld-rust
     ```
 
-1. After the build has completed and the container is pushed to docker hub, you
+1. After the build has completed and the container is pushed to Docker Hub, you
    can deploy the app into your cluster. Ensure that the container image value
    in `service.yaml` matches the container you built in
    the previous step. Apply the configuration using `kubectl`:
@@ -135,13 +135,13 @@ folder) you're ready to build and deploy the sample app.
     ```shell
     kubectl apply -f service.yaml
     ```
-
+    
 1. Now that your service is created, Knative will perform the following steps:
    * Create a new immutable revision for this version of the app.
    * Network programming to create a route, ingress, service, and load balance for your app.
    * Automatically scale your pods up and down (including to zero active pods).
 
-1. To find the IP address for your service, use
+1. To find the IP address for your service, enter
    `kubectl get svc knative-ingressgateway -n istio-system` to get the ingress IP for your
    cluster. If your cluster is new, it may take sometime for the service to get asssigned
    an external IP address.
@@ -154,14 +154,14 @@ folder) you're ready to build and deploy the sample app.
 
     ```
 
-1. To find the URL for your service, use
+1. To find the URL for your service, enter:
     ```
     kubectl get services.serving.knative.dev helloworld-rust  -o=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
     NAME                DOMAIN
     helloworld-rust     helloworld-rust.default.example.com
     ```
 
-1. Now you can make a request to your app to see the result. Replace
+1. Now you can make a request to your app and see the result. Replace
    `{IP_ADDRESS}` with the address you see returned in the previous step.
 
     ```shell

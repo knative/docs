@@ -1,21 +1,24 @@
 # Accessing request traces
 
-If logging and monitoring components are not installed yet, go through the 
-[installation instructions](./installing-logging-metrics-traces.md) to setup the 
-necessary components first.
+If you have not yet installed the logging and monitoring components, go through the 
+[installation instructions](./installing-logging-metrics-traces.md) to set up the 
+necessary components.
 
-To open the Zipkin UI (the visualization tool for request traces), enter the following command:
+In order to access request traces, you use the Zipkin visualization tool. 
 
-```shell
-kubectl proxy
-```
+1.  To open the Zipkin UI, enter the following command:
 
-This starts a local proxy of Zipkin on port 8001. The Zipkin UI is only exposed within
-the cluster for security reasons.
+    ```shell
+    kubectl proxy
+    ```
 
-Navigate to the [Zipkin UI](http://localhost:8001/api/v1/namespaces/istio-system/services/zipkin:9411/proxy/zipkin/).
-Click on "Find Traces" to see the latest traces. You can search for a trace ID
-or look at traces of a specific application. Click on a trace to see a detailed
-view of a specific call.
+    This command starts a local proxy of Zipkin on port 8001. For security reasons, the
+    Zipkin UI is exposed only within the cluster.
+
+1.  Navigate to the [Zipkin UI](http://localhost:8001/api/v1/namespaces/istio-system/services/zipkin:9411/proxy/zipkin/).
+
+1.  Click "Find Traces" to see the latest traces. You can search for a trace ID
+    or look at traces of a specific application. Click on a trace to see a detailed
+    view of a specific call.
 
 <!--TODO: Consider adding a video here. -->

@@ -1,2 +1,0 @@
-# Knative Events
-

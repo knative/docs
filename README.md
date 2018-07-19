@@ -1,6 +1,6 @@
 # Welcome, Knative
 
-Knative (pronounced /ˈnā-tiv/) extends Kubernetes to provide the
+Knative (pronounced kay-nay-tiv) extends Kubernetes to provide the
 missing middleware that developers need to create modern,
 source-centric, container-based, cloud-native applications.
 
@@ -10,7 +10,7 @@ real-world Kubernetes-based frameworks and applications, such as:
 
 - [Orchestrating source-to-container workflows on Kubernetes](build/README.md)
 - [Deploying a container to Knative](install/getting-started-knative-app.md)
-- [Updating your application without downtime](serving/updating-existing-app.md)
+- [Updating your application without downtime](serving/samples/blue-green-deployment.md)
 - [Automatic scaling and sizing applications based on demand](serving/auto-scaling-with-knative.md)
 - [Binding events to functions, apps, and containers with Knative](events/)
 
@@ -20,17 +20,31 @@ in turn frees application developers to spend more time writing
 interesting code, not worrying about how they are going to build,
 deploy, monitor, and debug it.
 
-## Getting started with Knative
+## Documentation
 
-1. Follow the [Knative installation instructions](/install/README.md) to get
-Knative installed on a Kubernetes cluster.
+### Getting started with Knative
 
-2. To deploy your first app with Knative, check out the
-[Getting Started with Knative App Deployment guide](install/getting-started-knative-app.md).
+* [Installing Knative](/install/README.md)
+* [Getting Started with Knative App Deployment](install/getting-started-knative-app.md)
+* [Knative Sample Applications](serving/samples/README.md)
 
-3. After you've run your first app, take a look at the available
-[sample applications](serving/samples/README.md) that you can build and
-run to help you get more familiar with Knative.
+### Logging, Metrics, and Debugging 
+
+* [Installing Logging, Metrics and Traces](./serving/installing-logging-metrics-traces.md)
+* [Accessing Logs](./serving/accessing-logs.md)
+* [Accessing Metrics](./serving/accessing-metrics.md)
+* [Accessing Traces](./serving/accessing-traces.md)
+* [Debugging Application Issues](./serving/debugging-application-issues.md)
+* [Debugging Performance Issues](./serving/debugging-performance-issues.md)
+* [Setting up a logging plugin](./serving/setting-up-a-logging-plugin.md)
+
+### Networking
+
+* [Using a Custom Domain with Knative](./serving/using-a-custom-domain.md)
+
+### Configuration
+
+* [Setting up a Docker Registry](./serving/setting-up-a-docker-registry.md)
 
 ## Who Knative is for
 
@@ -61,9 +75,8 @@ lines of separation between pluggable components, the Knative project
 establishes an efficient contributor workflow.
 
 Knative is a diverse, open, and inclusive community. To get involved, see
-[CONTRIBUTING.md](https://github.com/knative/docs/blob/master/community/CONTRIBUTING.md)
-and join the [#community](https://knative.slack.com/messages/C92U2C59P/)
-Slack channel.
+[CONTRIBUTING.md](community/CONTRIBUTING.md)
+and join the [Knative community](community/README.md).
 
 Your own path to becoming a Knative contributor can
 [begin anywhere](https://github.com/knative/serving/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22).
@@ -74,6 +87,6 @@ friction logs from new developers are especially welcome.
 
 The following Knative components are currently available:
 
-- [Build](build/README.md) - Source to container build orchestration
-- [Events](events/README.md) - Management and delivery of events
-- [Serving](serving/README.md) - Scale to zero, request-driven compute
+- [Build](https://github.com/knative/build) - Source to container build orchestration
+- [Events](https://github.com/knative/eventing) - Management and delivery of events
+- [Serving](https://github.com/knative/serving) - Scale to zero, request-driven compute
