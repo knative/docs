@@ -8,7 +8,7 @@ to learn more about Knative Serving resources.
 | ---- | ----------- |:---------:|
 | Hello World | A quick introduction that highlights how to deploy an app using Knative Serving. | [C#](helloworld-csharp/README.md), [Go](helloworld-go/README.md), [Java](helloworld-java/README.md), [Node.js](helloworld-nodejs/README.md), [PHP](helloworld-php/README.md), [Python](helloworld-python/README.md), [Ruby](helloworld-ruby/README.md), [Rust](helloworld-rust/README.md) |
 | Advanced Deployment | Simple blue/green-like application deployment pattern illustrating the process of updating a live application without dropping any traffic. | [YAML](blue-green-deployment.md) |
-| Autoscale | A demonstration of the autoscaling capabilities of an Knative Serving Revision. | [Go](autoscale-go/README.md) |
+| Autoscale | A demonstration of the autoscaling capabilities of Knative. | [Go](autoscale-go/README.md) |
 | Private Repo Build | An example of deploying a Knative Serving Service using a Github deploy-key and a DockerHub image pull secret. | [Go](build-private-repo-go/README.md) |
 | Buildpack for Applications | A sample app that demonstrates using Cloud Foundry buildpacks on Knative Serving. | [.NET](buildpack-app-dotnet/README.md) |
 | Buildpack for Functions | A sample function that demonstrates using Cloud Foundry buildpacks on Knative Serving. | [Node.js](buildpack-function-nodej/README.md) |
