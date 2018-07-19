@@ -75,12 +75,12 @@ Follow the links in this section to learn more about Knative.
 
 ### Getting started with Knative
 
-* [Installing Knative](/install/README.md)
-* [Getting Started with Knative App Deployment](install/getting-started-knative-app.md)
-* [Knative Sample Applications](serving/samples/)
-* [Getting started with Knative Serving](https://github.com/knative/docs/serving)
-* [Getting started with Knative Builds](https://github.com/knative/docs/builds)
-* [Getting started with Knative Eventing](https://github.com/knative/docs/eventing)
+* [Installing Knative](./install/README.md)
+* [Getting Started with Knative App Deployment](./install/getting-started-knative-app.md)
+* [Knative Sample Applications](./serving/samples/)
+* [Getting started with Knative Serving](./serving)
+* [Getting started with Knative Builds](./builds)
+* [Getting started with Knative Eventing](./eventing)
 
 ### More samples and demos
 
@@ -104,6 +104,6 @@ Follow the links in this section to learn more about Knative.
 
 ### Configuration and Networking
 
-* [Setting up a docker registry](./serving/setting-up-a-docker-registry.md)
+* [Configuring outbound network access](./serving/outbound-network-access.md)
 * [Using a custom domain](./serving/using-a-custom-domain.md)
 * [Assigning a static IP address for Knative on Google Kubernetes Engine](./serving/gke-assigning-static-ip-address.md)
