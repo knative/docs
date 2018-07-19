@@ -14,9 +14,32 @@ specifications for Knative on Azure Kubernetes Service (AKS).
 This guide assumes you are using bash in a Mac or Linux environment; some
 commands will need to be adjusted for use in a Windows environment.
 
-### Installing the Azure CLI 
+### Installing the Azure CLI
 
 1. If you already have `azure cli` version `2.0.41` or later installed, you can skip to the next section and install `kubectl`
+
+Install `az` by following the instructions for your operating system.
+See the [full installation instructions](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest) if yours isn't listed below. You will need az cli version 2.0.37 or greater.
+
+#### MacOS
+
+```console
+brew install azure-cli
+```
+
+#### Ubuntu 64-bit
+
+1. Add the azure-cli repo to your sources:
+    ```console
+    echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ wheezy main" | \
+         sudo tee /etc/apt/sources.list.d/azure-cli.list
+    ```
+1. Run the following commands to install the Azure CLI and its dependencies:
+    ```console
+    sudo apt-key adv --keyserver packages.microsoft.com --recv-keys 52E16F86FEE04B979B07E28DB02C46DF417A0893    
+    sudo apt-get install apt-transport-https
+    sudo apt-get update && sudo apt-get install azure-cli
+    ```
 
 ### Installing kubectl
 
