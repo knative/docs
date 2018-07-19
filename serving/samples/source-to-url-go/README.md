@@ -13,7 +13,7 @@ You need:
 * A Kubernetes cluster with Knative installed. Follow the
   [installation instructions](https://github.com/knative/docs/blob/master/install/README.md) if you need
   to create one.
-* Go installed and configured. This is optional, if you want to run the sample app
+* Go installed and configured. This is optional, and only required if you want to run the sample app
   locally.
 
 ## Configuring Knative
