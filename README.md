@@ -77,6 +77,12 @@ Follow the links in this section to learn more about Knative.
 * [Getting started with builds](./build)
 * [Getting started with eventing](./eventing)
 
+### Configuration and networking
+
+* [Configuring outbound network access](./serving/outbound-network-access.md)
+* [Using a custom domain](./serving/using-a-custom-domain.md)
+* [Assigning a static IP address for Knative on Google Kubernetes Engine](./serving/gke-assigning-static-ip-address.md)
+
 ### Samples and demos
 
 * [Autoscaling](./serving/samples/autoscale-go/README.md)
@@ -87,7 +93,7 @@ Follow the links in this section to learn more about Knative.
 * [All samples for serving](./serving/samples/)
 * [All samples for eventing](./eventing/samples/)
 
-### Setting up logging and metrics 
+### Logging and metrics 
 
 * [Installing logging, metrics and traces](./serving/installing-logging-metrics-traces.md)
 * [Accessing logs](./serving/accessing-logs.md)
@@ -95,13 +101,7 @@ Follow the links in this section to learn more about Knative.
 * [Accessing traces](./serving/accessing-traces.md)
 * [Setting up a logging plugin](./serving/setting-up-a-logging-plugin.md)
 
-### Debugging Knative serving issues 
+### Debugging
 
 * [Debugging application issues](./serving/debugging-application-issues.md)
 * [Debugging performance issues](./serving/debugging-performance-issues.md)
-
-### Configuration and networking
-
-* [Configuring outbound network access](./serving/outbound-network-access.md)
-* [Using a custom domain](./serving/using-a-custom-domain.md)
-* [Assigning a static IP address for Knative on Google Kubernetes Engine](./serving/gke-assigning-static-ip-address.md)
