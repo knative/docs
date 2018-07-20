@@ -46,11 +46,7 @@ environment variables.
      ```bash
      export PROJECT_ID=my-knative-project
      ```
-   * If you already have a default project set in `gcloud`, enter:
-      ```bash
-      export PROJECT_ID=$(gcloud config get-value project)
-      ```
-      Tip: Enter `gcloud config get-value project` to view the ID of your default GCP project.
+     Tip: Enter `gcloud config get-value project` to view the ID of your default GCP project.
 1. Set `CLUSTER_NAME` and `CLUSTER_ZONE` variables:
    ```bash
    export CLUSTER_NAME=knative
