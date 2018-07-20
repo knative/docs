@@ -41,8 +41,7 @@ We are going to add to this an image pull Secret.
    ```
 
    To learn more about Kubernetes pull Secrets, see
-   [Creating a Secret in the cluster that holds your authorization token]
-   (https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#create-a-secret-in-the-cluster-that-holds-your-authorization-token).
+   [Creating a Secret in the cluster that holds your authorization token](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#create-a-secret-in-the-cluster-that-holds-your-authorization-token).
    
 2. Add the newly created `imagePullSecret` to your default service account by entering:
    ```shell
