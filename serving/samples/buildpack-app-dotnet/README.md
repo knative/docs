@@ -1,7 +1,7 @@
 # Buildpack Sample App
 
-A sample app that demonstrates using Cloud Foundry buildpacks on Knative Serving,
-using the [packs Docker images](https://github.com/sclevine/packs).
+A sample app that demonstrates using [Cloud Foundry](https://www.cloudfoundry.org/)
+buildpacks on Knative Serving, using the [packs Docker images](https://github.com/sclevine/packs).
 
 This deploys the [.NET Core Hello World](https://github.com/cloudfoundry-samples/dotnet-core-hello-world)
 sample app for Cloud Foundry.
@@ -15,8 +15,7 @@ sample app for Cloud Foundry.
 This sample uses the [Buildpack build
 template](https://github.com/knative/build-templates/blob/master/buildpack/buildpack.yaml)
 in the [build-templates](https://github.com/knative/build-templates/) repo.
-
-First, install the Buildpack build template from that repo:
+Save a copy of `buildpack.yaml`, then install it:
 
 ```shell
 kubectl apply -f buildpack.yaml
@@ -29,10 +28,10 @@ by entering the following commands:
 # Replace <your-project-here> with your own registry
 export REPO="gcr.io/<your-project-here>"
 
-perl -pi -e "s@DOCKER_REPO_OVERRIDE@$REPO@g" serving/samples/buildpack-app-dotnet/sample.yaml
+perl -pi -e "s@DOCKER_REPO_OVERRIDE@$REPO@g" sample.yaml
 
 # Create the Kubernetes resources
-kubectl apply -f serving/samples/buildpack-app-dotnet/sample.yaml
+kubectl apply -f sample.yaml
 ```
 
 Once deployed, you will see that it first builds:
