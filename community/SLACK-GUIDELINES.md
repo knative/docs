@@ -17,13 +17,10 @@ The Knative [Code of Conduct](./CODE-OF-CONDUCT.md) applies throughout the
 project, and includes all communication mediums.
 
 ## Admins
-(by Slack ID and timezone)
 
-| Slack ID  | Timezone |
-|-----------|----------|
-| @mchmarny | PST      |
-| @isdal    | PST      |
-| @dewitt   | PST      |
+* @mchmarny
+* @isdal
+* @dewitt
 
 Slack admins should make sure to mention this in the “What I do” section of 
 their Slack profile, as well as for which time zone.
