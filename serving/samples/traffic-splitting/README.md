@@ -33,7 +33,14 @@ kubectl apply -f serving/samples/traffic-splitting/updated_configuration.yaml
 kubectl get route -o yaml
 ```
 
-4. When the new route is ready, you can access the new endpoints:
+4. When the new route is ready, you can access the new endpoints:  
+  The hostname and IP address can be found in the same manner as the [Creating a RESTful Service](../rest-api-go) sample:  
+  ```
+  export SERVICE_HOST=`kubectl get route stock-route-example -o jsonpath="{.status.domain}"`
+  export SERVICE_IP=`kubectl get svc knative-ingressgateway -n istio-system \
+  -o jsonpath="{.status.loadBalancer.ingress[*].ip}"`
+  ```
+
   * Make a request to the index endpoint:
   ```
   curl --header "Host:$SERVICE_HOST" http://${SERVICE_IP}
