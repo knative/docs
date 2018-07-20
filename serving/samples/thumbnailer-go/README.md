@@ -79,8 +79,8 @@ curl -X POST -H "Content-Type: application/json" http://localhost:8080/image \
 
 ## Deploying the app to Knative
 
-From this point, you can either build the app yourself and then deploy it,
-or you can deploy a prebuilt image of the app.
+From this point, you can either deploy a prebuilt image of the app, or build
+the app locally and then deploy it.
 
 ### Deploying a prebuilt image
 
