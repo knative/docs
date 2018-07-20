@@ -38,8 +38,8 @@ attaching an event (or filtered event stream via a "trigger) to an action.
 # Getting Started
 
 * [Setup Knative Serving](https://github.com/knative/serving)
-* [Setup Knative Eventing](./DEVELOPMENT.md)
-* [Run samples](./sample/README.md)
+* [Setup Knative Eventing](https://github.com/knative/eventing/blob/master/DEVELOPMENT.md)
+* [Run samples](https://github.com/knative/eventing/blob/master/sample/README.md)
 
 
 # Kubernetes Extensions
