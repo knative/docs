@@ -74,10 +74,10 @@ we could use your help in spiffing up our public-facing web site.
 If you're a developer, operator, or contributor trying to use Knative, the
 following resources are available for you:
 
-* Mailing lists
-  * [Knative Developers](https://groups.google.com/forum/#!forum/knative-dev)
-  * [Knative Users](https://groups.google.com/forum/#!forum/knative-users)
-* [Knative Community on Slack](https://knative-community.slack.com)
+* [Knative Users](https://groups.google.com/forum/#!forum/knative-users)
+* [Knative Developers](https://groups.google.com/forum/#!forum/knative-dev)
+
+For contributors to Knative, we also have [Knative Slack](https://knative.slack.com)
 
 ---
 
