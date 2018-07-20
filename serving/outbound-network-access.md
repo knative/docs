@@ -14,7 +14,8 @@ depending on your platform:
 * For Google Container Engine (GKE) run the following command to determine the scope (insert the 
   appropriate value for `your-cluster-id` and change the `--zone` parameter as necessary): 
   ```shell
-  gcloud container clusters describe your-cluster-id --zone=us-west1-c | grep -e clusterIpv4Cidr -e servicesIpv4Cidr
+  gcloud container clusters describe your-cluster-id \ 
+    --zone=us-west1-c | grep -e clusterIpv4Cidr -e servicesIpv4Cidr
   ```
 * For IBM Cloud Private run the following command: 
   ```shell
