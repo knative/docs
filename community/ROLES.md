@@ -52,7 +52,7 @@ table describes:
     </td>
     <td>
         <p>Member of the GitHub Knative org</p>
-        <p>Member of the Knative-Community Slack workspace</p>
+        <p>Member of the Knative Slack workspace</p>
         <p>Edit permission on the Knative Team drive</p>
     </td>
     <td>GitHub Organization</td>
@@ -90,7 +90,7 @@ table describes:
     <td>Sponsored by the technical oversight committee</td>
     <td>
         <p>Admin privileges on the GitHub Knative org and all its repos</p>
-        <p>Admin privileges on the Knative-Community Slack workspace</p>
+        <p>Admin privileges on the Knative Slack workspace</p>
         <p>Admin privileges on the Knative Team Drive</p>
         <p>Admin privileges on the Google Search Console for knative.dev</p>
         <p>Admin privilege to the Knative email lists.</p>
@@ -293,7 +293,7 @@ Administrators are responsible for the bureaucratic aspects of the project.
 *   Manage the Knative GitHub repo, including granting membership and
     controlling repo read/write permissions
 
-*   Manage the Knative-Community Slack team
+*   Manage the Knative Slack team
 
 *   Manage the Knative Google group forum
 
