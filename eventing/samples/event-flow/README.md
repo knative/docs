@@ -1,4 +1,4 @@
-# Demo: Binding running services to an IoT core (PubSub)
+# Sample: Binding running services to an IoT core (PubSub)
 
 > For the ease of the demo, a few variables here are hard-coded.
 
