@@ -1,18 +1,22 @@
-# Private Repos Demo
+# Deploying to Knative from a Private Github Repo
 
-This demo is a walk-through example that:
-* Pulls from a private Github repository using a deploy-key
-* Pushes to a private DockerHub repository using a username / password
-* Deploys to Knative Serving using image pull secrets.
+This sample demonstrates:
+* Pulling from a private Github repository using a deploy-key
+* Pushing to a private DockerHub repository using a username / password
+* Deploying to Knative Serving using image pull secrets
 
-> In this demo we will assume access to existing Knative Serving service. If not, consult [README.md](https://github.com/knative/serving/blob/master/README.md) on how to deploy one.
+> In this sample, we will assume access to existing Knative Serving service. If not, consult [README.md](https://github.com/knative/serving/blob/master/README.md) on how to deploy one.
 
-## The resources involved.
+## Before you begin
 
-### Setting up the default service account (one-time)
+* [Install Knative Serving](https://github.com/knative/docs/blob/master/install/README.md)
 
-Knative Serving will run pods as the "default" service account in whichever namespace
-you create resources.  You can see it's body via:
+## Setup
+
+### Setting up the default service account
+
+Knative Serving will run pods as the default service account in the namespace where
+you created your resources.  You can see its body by entering the following command:
 
 ```shell
 $ kubectl get serviceaccount default -o yaml
@@ -26,40 +30,36 @@ secrets:
 - name: default-token-zd84v
 ```
 
-We are going to add to this an "image pull secret", created below.
+We are going to add to this an image pull Secret.
 
-#### Creating an "image pull secret"
-
-To learn more about Kubernetes pull secrets, see [here](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#create-a-secret-that-holds-your-authorization-token).
-
-This can be created via:
-
-```shell
-kubectl create secret docker-registry dockerhub-pull-secret \
+1. Create your image pull Secret with the following command, replacing values as neccesary:
+   ```shell
+   kubectl create secret docker-registry dockerhub-pull-secret \
    --docker-server=https://index.docker.io/v1/ --docker-email=not@val.id \
    --docker-username=<your-name> --docker-password=<your-pword>
-```
+   ```
 
-#### Updating the service account
+   To learn more about Kubernetes pull Secrets, see
+   [Creating a Secret in the cluster that holds your authorization token]
+   (https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#create-a-secret-in-the-cluster-that-holds-your-authorization-token).
+   
+2. Add the newly created `imagePullSecret` to your default service account by entering:
+   ```shell
+   kubectl edit serviceaccount default
+   ```
 
-You can add this `imagePullSecret` to your default service account by running:
+   This will open the resource in your default text editor. Under `secrets:`, add:
 
-```shell
-kubectl edit serviceaccount default
-```
-
-This will open the resource in your configured `EDITOR`, and under `secrets:` you should add:
-
-```yaml
-secrets:
-- name: default-token-zd84v
-# This is the secret we just created:
-imagePullSecrets:
-- name: dockerhub-pull-secret
-```
+   ```yaml
+   secrets:
+   - name: default-token-zd84v
+   # This is the secret we just created:
+   imagePullSecrets:
+   - name: dockerhub-pull-secret
+   ```
 
 
-### Setting up our "Build" service account (one-time)
+### Setting up our Build service account
 
 To separate our Build's credentials from our applications credentials, we will
 have our Build run as its own service account defined via:
@@ -76,7 +76,7 @@ secrets:
 
 The objects in this section are all defined in `build-bot.yaml`, and the fields that
 need to be populated say `REPLACE_ME`.  Once these have been replaced as outlined,
-the "build bot" can be set up by running:
+the "build bot" can be set up by entering the following command:
 
 ```shell
 kubectl create -f build-bot.yaml
@@ -84,10 +84,10 @@ kubectl create -f build-bot.yaml
 
 #### Creating a deploy key
 
-You can set up a "deploy key" for your private Github repository following
+You can set up a deploy key for your private Github repository following
 [these](https://developer.github.com/v3/guides/managing-deploy-keys/)
-instructions.  The deploy key in this sample is *real* you do not need to
-change it for the sample to work.
+instructions.  The deploy key in the `build-bot.yaml` file in this folder is *real*;
+you do not need to change it for the sample to work.
 
 ```yaml
 apiVersion: v1
@@ -130,7 +130,7 @@ data:
   password: REPLACE_ME
 ```
 
-### Installing Build Templates (one-time)
+### 3. Installing Build Templates
 
 This sample uses the [Kaniko build
 template](https://github.com/knative/build-templates/blob/master/kaniko/kaniko.yaml)
@@ -140,7 +140,7 @@ in the [build-templates](https://github.com/knative/build-templates/) repo.
 kubectl apply -f kaniko.yaml
 ```
 
-### Using this in Configuration.
+## Deploying
 
 At this point, basically everything has been setup and you simply need to deploy
 your application.  There is one remaining substitution to be made in
@@ -153,7 +153,7 @@ Then you can run:
 kubectl create -f manifest.yaml
 ```
 
-As with the other demos, you can confirm that things work by capturing the IP
+As with the other samples, you can confirm that everything works by capturing the IP
 of the ingress endpoint:
 
 ```
@@ -164,8 +164,8 @@ export SERVICE_HOST=`kubectl get route private-repos \
 export SERVICE_IP=`kubectl get svc knative-ingressgateway -n istio-system -o jsonpath="{.status.loadBalancer.ingress[*].ip}"`
 ```
 
-If your cluster is running outside a cloud provider (for example on Minikube),
-your services will never get an external IP address. In that case, use the istio `hostIP` and `nodePort` as the service IP:
+If your cluster is running outside a cloud provider (for example, on Minikube),
+your services will never get an external IP address. In that case, use the Istio `hostIP` and `nodePort` as the service IP:
 
 ```shell
 export SERVICE_IP=$(kubectl get po -l knative=ingressgateway -n istio-system -o 'jsonpath={.items[0].status.hostIP}'):$(kubectl get svc knative-ingressgateway -n istio-system -o 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
