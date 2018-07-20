@@ -32,10 +32,10 @@ import (
 
 const (
 	// Secret given to github. Used for verifying the incoming objects.
-	personalAccessTokenKey = "WEBHOOK_SECRET"
+	personalAccessTokenKey = "GITHUB_PERSONAL_TOKEN"
 	// Personal Access Token created in github that allows us to make
 	// calls into github.
-	webhookSecretKey = "GITHUB_PERSONAL_TOKEN"
+	webhookSecretKey = "WEBHOOK_SECRET"
 	// this is what we tack onto each PR title if not there already
 	titleSuffix = "looks pretty legit"
 )
