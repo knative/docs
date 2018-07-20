@@ -1,6 +1,6 @@
 # Creating a RESTful Service
 
-This sample demonstrates creating a simple RESTful service. The exposed endpoint takes a stock ticker (i.e. stock symbol), then outputs the stock price. The endpoint resource name is defined by an environment variable set in the configuration file. 
+This sample demonstrates creating a simple RESTful service. The exposed endpoint takes a stock ticker (i.e. stock symbol), then outputs the stock price. The endpoint resource name is defined by an environment variable set in the configuration file.
 
 ## Prerequisites
 
@@ -49,7 +49,7 @@ docker push "${REPO}/serving/samples/rest-api-go"
 
    * Use run this command:  
     ```
-    perl -pi -e "s@github.com/knative/docs@${REPO}@g" serving/samples/rest-api-go/*.yaml
+    perl -pi -e "s@github.com/knative/docs@${REPO}@g" serving/samples/rest-api-go/sample.yaml
     ```
 
 ## Deploy the Configuration
