@@ -30,7 +30,7 @@ The following Knative components are currently available:
 
 Knative is designed with different personas in mind:
 
-![Diagram that displays different Audiences for Knative](./images/knative-audience.png)
+![Diagram that displays different Audiences for Knative](./images/knative-audience.svg)
 
 ### Developers
 
