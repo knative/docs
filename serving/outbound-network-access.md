@@ -41,8 +41,16 @@ Then, use an editor of your choice to change the `istio.sidecar.includeOutboundI
 from `*` to the IP range you need. Separate multiple IP entries with a comma. For example: 
 
 ```
+# Please edit the object below. Lines beginning with a '#' will be ignored,
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+#
+apiVersion: v1
 data:
   istio.sidecar.includeOutboundIPRanges: '10.16.0.0/14,10.19.240.0/20'
+kind: ConfigMap
+metadata:
+  ...
 ```
 
 By default, the `istio.sidecar.includeOutboundIPRanges` parameter is set to `*`, 
@@ -59,6 +67,25 @@ parameter that is provided at Istio deployment time. In the default Knative Serv
 deployment, `global.proxy.includeIPRanges` value is set to `*`.
 
 If an invalid value is passed, `''` is used instead.
+
+If you are still having trouble making off-cluster calls, you can verify that the policy was
+applied to the pod running your service by checking the metadata on the pod.
+Verify that the `traffic.sidecar.istio.io/includeOutboundIPRanges` annotation matches the
+expected value from the config-map.
+
+```shell
+$ kubectl get pod ${POD_NAME} -o yaml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    serving.knative.dev/configurationGeneration: "2"
+    sidecar.istio.io/inject: "true"
+    ...
+    traffic.sidecar.istio.io/includeOutboundIPRanges: 10.16.0.0/14,10.19.240.0/20
+...
+```
 
 ---
 
