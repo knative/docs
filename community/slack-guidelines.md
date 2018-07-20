@@ -55,8 +55,8 @@ community topics, and related programs/projects.
 
 Channels are not:
 
-* company specific; cloud providers are ok with product names as the channel.
-  Discourse will be about Kubernetes-related topics and not proprietary
+* company specific; e.g. a channel named for a cloud provider must be used for
+  conversation about Knative-related topics on that cloud, and not proprietary
   information of the provider.
 * private unless there is an exception: code of conduct matters, mentoring, 
   security/vulnerabilities, or steering committee.
@@ -75,8 +75,8 @@ documented, please take a screenshot to include in your message.
 ### What if you have a problem with an admin
 
 Send a DM to another listed Admin and describe the situation, or if it’s a code
-of conduct issue, please send an email to steering-private@kubernetes.io and 
-describe the situation
+of conduct issue, please send an email to knative-code-of-conduct@googlegroups.com
+and describe the situation.
 
 ## Bots, Tokens, and Webhooks
 
