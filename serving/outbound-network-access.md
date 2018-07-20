@@ -11,11 +11,11 @@ the `config-network` map.
 To set the correct scope, you need to determine the IP ranges of your cluster. The scope varies 
 depending on your platform:
 
-* For Google Container Engine (GKE) run the following command to determine the scope (insert the 
-  appropriate value for `your-cluster-id` and change the `--zone` parameter as necessary): 
+* For Google Container Engine (GKE) run the following command to determine the scope. Make sure
+to replace the variables or export these values first.
   ```shell
-  gcloud container clusters describe your-cluster-id \ 
-    --zone=us-west1-c | grep -e clusterIpv4Cidr -e servicesIpv4Cidr
+  gcloud container clusters describe ${CLUSTER_ID} \ 
+    --zone=${GCP_ZONE} | grep -e clusterIpv4Cidr -e servicesIpv4Cidr
   ```
 * For IBM Cloud Private run the following command: 
   ```shell
