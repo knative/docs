@@ -25,8 +25,9 @@ kubectl apply -f buildpack.yaml
 Then you can deploy this to Knative Serving from the root directory via:
 
 ```shell
-# Replace the token string with a suitable registry
-REPO="gcr.io/<your-project-here>"
+# Replace <your-project-here> with your own registry
+export REPO="gcr.io/<your-project-here>"
+
 perl -pi -e "s@DOCKER_REPO_OVERRIDE@$REPO@g" serving/samples/buildpack-function-nodejs/sample.yaml
 
 kubectl apply -f serving/samples/buildpack-function-nodejs/sample.yaml
