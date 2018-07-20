@@ -17,12 +17,12 @@ We provide information for installing Knative on
 Follow these step-by-step guides for setting up Kubernetes and installing
 Knative components on the following platforms:
 
+* [Knative Install on Azure Kubernetes Service](Knative-with-AKS.md)
 * [Knative Install on Gardener](Knative-with-Gardener.md)
 * [Knative Install on Google Kubernetes Engine](Knative-with-GKE.md)
-* [Knative Install on Pivotal Container Service](Knative-with-PKS.md)
 * [Knative Install on IBM Cloud Kubernetes Service](Knative-with-IKS.md)
-* [Knative Install on Azure Kubernetes Service](Knative-with-AKS.md)
 * [Knative Install on Minikube](Knative-with-Minikube.md)
+* [Knative Install on Pivotal Container Service](Knative-with-PKS.md)
 
 ## Deploying an app
 
