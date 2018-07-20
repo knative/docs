@@ -1,23 +1,32 @@
 # Thumbnailer Demo
 
-Thumbnailer demo is a walk-through example on how to deploy a 'dockerized' application to the Knative Serving service. In this demo we will use a sample `golang` application that takes video URL as an input and generates its thumbnail image.
+This is a walk-through example that demonstrates deploying a dockerized
+application to the Knative Serving service. In this demo we will use a sample
+`golang` application that takes a video URL as an input and generates its thumbnail image.
 
-> In this demo we will assume access to existing Knative Serving service. If not, consult [README.md](https://github.com/knative/serving/blob/master/README.md) on how to deploy one.
+## Before you begin
 
-## Sample Code
+* [Install Knative Serving](../../../install/README.md)
+* [Install Go](https://golang.org/doc/install) (if you want to run and test the sample app locally)
 
-In this demo we are going to use a simple `golang` REST app called [rester-tester](https://github.com/mchmarny/rester-tester). It's important to point out that this application doesn't use any 'special' Knative Serving components nor does it have any Knative Serving SDK dependencies.
+## Sample code
 
-### App code
+In this demo we are going to use a simple `golang` REST app called
+[rester-tester](https://github.com/mchmarny/rester-tester). It's important
+to point out that this application doesn't use any special Knative Serving
+components, nor does it have any Knative Serving SDK dependencies.
 
-Let's start by cloning the public `rester-tester` repository
+### Cloning the sample code
+
+Let's start by cloning the public `rester-tester` repository:
 
 ```
 git clone git@github.com:mchmarny/rester-tester.git
 cd rester-tester
 ```
 
-The `rester-tester` application uses [godep](https://github.com/tools/godep) to manage its own dependencies. Go get it and restore the app dependencies
+The `rester-tester` application uses [godep](https://github.com/tools/godep)
+to manage its own dependencies. Download `godep` and restore the app dependencies:
 
 ```
 go get github.com/tools/godep
@@ -26,7 +35,7 @@ godep restore
 
 ### Test
 
-To quickly make sure the application is ready, execute the integrated tests
+To make sure the application is ready, run the integrated tests:
 
 ```
 go test ./...
@@ -34,11 +43,13 @@ go test ./...
 
 ### Run
 
-You can now run the `rester-tester` application locally in `go` or using Docker
+You can now run the `rester-tester` application locally in `go` or using Docker.
 
 **Local**
 
-> Note: to run the application locally in `go` you will need [FFmpeg](https://www.ffmpeg.org/) in your path.
+> Note: To run the application locally in `go` you will need [FFmpeg](https://www.ffmpeg.org/) in your path.
+
+To run the app:
 
 ```
 go build
@@ -47,7 +58,10 @@ go build
 
 **Docker**
 
-When running the application locally in docker, you do not need to install `ffmpeg`, Docker will install it for you 'inside' of the Docker image
+When running the application locally using Docker, you do not need to install `ffmpeg`;
+Docker will install it for you 'inside' of the Docker image.
+
+To run the app:
 
 ```
 docker build -t rester-tester:latest .
@@ -56,26 +70,28 @@ docker run -p 8080:8080 rester-tester:latest
 
 ### Test
 
-To test the thumbnailing service use `curl` to submit `src` video URL.
+To test the thumbnailing service, use `curl` to submit the `src`, a video URL:
 
 ```
 curl -X POST -H "Content-Type: application/json" http://localhost:8080/image \
      -d '{"src":"https://www.youtube.com/watch?v=DjByja9ejTQ"}'
 ```
 
-## Deploy (Prebuilt)
+## Deploy a prebuilt version of the app
 
-You can now deploy the `rester-tester` app to the Knative Serving service using `kubectl` using the included `sample-prebuilt.yaml`.
+You can now deploy the `rester-tester` app to the Knative Serving service using
+`kubectl` and the included `sample-prebuilt.yaml` file.
 
 ```
-# From inside this directory
+# From inside the thumbnailer-go directory
 kubectl apply -f sample-prebuilt.yaml
 ```
 
-If you would like to publish your own copy of the container image, you can update the image reference in this file.
+If you would like to publish your own copy of the container image,
+you can update the image reference in `sample-prebuilt.yaml` file.
 
 
-## Deploy (with Build)
+## Build and deploy a version of the app
 
 You can also build the image as part of deployment. This sample uses the
 [Kaniko build
@@ -122,13 +138,16 @@ NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S) 
 knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
 ```
 
-Sometimes the newly deployed app may take few seconds to initialize. You can check its status like this
+The newly deployed app may take few seconds to initialize. You can check its status
+by entering the following command:
 
 ```
 kubectl -n default get pods
 ```
 
-The Knative Serving ingress service will automatically be assigned an IP so let's capture that IP so we can use it in subsequent `curl` commands
+The Knative Serving ingress service will automatically be assigned an IP,
+so let's capture the IP and Host URL in variables so that we can use them
+in `curl` commands:
 
 ```
 # Put the Host name into an environment variable.
@@ -149,7 +168,7 @@ export SERVICE_IP=$(kubectl get po -l knative=ingressgateway -n istio-system -o 
 
 ### Ping
 
-Let's start with a simple `ping` service
+Let's start with a simple `ping`:
 
 ```
 curl -H "Content-Type: application/json" -H "Host: $SERVICE_HOST" \
@@ -165,7 +184,8 @@ curl -X POST -H "Content-Type: application/json" -H "Host: $SERVICE_HOST" \
   http://$SERVICE_IP/image -d '{"src":"https://www.youtube.com/watch?v=DjByja9ejTQ"}'  | jq '.'
 ```
 
-You can then download the newly created thumbnail. Make sure to replace the image name with the one returned by the previous service
+You can then download the newly created thumbnail. Make sure to replace the image file name
+with the one returned by the previous curl request:
 
 ```
 curl -H "Host: $SERVICE_HOST" \
@@ -174,4 +194,6 @@ curl -H "Host: $SERVICE_HOST" \
 
 ## Final Thoughts
 
-While we used in this demo an external application, the Knative Serving deployment steps would be similar for any 'dockerized' app you may already have... just copy the `thumbnailer.yaml` and change a few variables.
+Although this demo uses an external application, the Knative Serving deployment
+steps would be similar for any 'dockerized' app you may already have.
+Just copy the `thumbnailer.yaml` and change a few variables.
