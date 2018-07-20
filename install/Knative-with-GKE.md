@@ -38,42 +38,39 @@ commands will need to be adjusted for use in a Windows environment.
 To simplify the command lines for this walkthrough, we need to define a few
 environment variables.
 
-1. Set a `PROJECT_ID` variable.
-   * If you don't have an existing GCP project that you'd like to use, replace
-     `my-knative-project` in the following command with the project ID you'd like to use. This variable
-     is used later to create your new GCP project. The project ID must be globally
-     unique across all GCP projects.
-     ```bash
-     export PROJECT_ID=my-knative-project
-     ```
-     Tip: Enter `gcloud config get-value project` to view the ID of your default GCP project.
-1. Set `CLUSTER_NAME` and `CLUSTER_ZONE` variables:
-   ```bash
-   export CLUSTER_NAME=knative
-   export CLUSTER_ZONE=us-west1-c
-   ```
-   The CLUSTER_NAME needs to be lowercase and unique among any other Kubernetes
-   clusters in your GCP project. The zone can be
-   [any compute zone available on GCP](https://cloud.google.com/compute/docs/regions-zones/#available).
-   These variables are used later to create a Kubernetes cluster.
+Set `CLUSTER_NAME` and `CLUSTER_ZONE` variables:
+
+```bash
+export CLUSTER_NAME=knative
+export CLUSTER_ZONE=us-west1-c
+```
+The CLUSTER_NAME needs to be lowercase and unique among any other Kubernetes
+clusters in your GCP project. The zone can be
+[any compute zone available on GCP](https://cloud.google.com/compute/docs/regions-zones/#available).
+These variables are used later to create a Kubernetes cluster.
 
 ### Setting up a Google Cloud Platform project
 
 You need a GCP project to create a Google Kubernetes Engine cluster.
 
 1. Create a new GCP project and set it as your `gcloud` default, or set an
-   existing GCP as your `gcloud` default:
+   existing GCP project as your `gcloud` default:
     * If you don't already have a GCP project created, create a new project in `gcloud`:
       ```bash
-      gcloud projects create $PROJECT_ID --set-as-default
+      gcloud projects create my-knative-project --set-as-default
       ```
+      Replace `my-knative-project` with the name you'd like to use for your GCP project.
+      
       You also need to [enable billing](https://cloud.google.com/billing/docs/how-to/manage-billing-account)
       for your new project.
+      
     * If you already have a GCP project, make sure your project is set as your
       `gcloud` default:
       ```bash
-      gcloud config set project $PROJECT_ID
+      gcloud config set project my-knative-project
       ```
+      
+      > Tip: Enter `gcloud config get-value project` to view the ID of your default GCP project.
 1. Enable the necessary APIs:
    ```
    gcloud services enable \
