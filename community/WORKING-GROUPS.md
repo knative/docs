@@ -121,8 +121,8 @@ Load balancing, routing, domain names, SSL, Istio
 Artifact                   | Link
 -------------------------- | ----
 Forum                      | [knative-dev@](https://groups.google.com/forum/#!forum/knative-dev)
-Community Meeting VC       | [TODO](TODO)
-Community Meeting Calendar | [Calendar Invitation](TODO)
+Community Meeting VC       | Coming soon
+Community Meeting Calendar | Coming soon
 Meeting Notes              | [Notes](https://drive.google.com/open?id=1EE1t5mTfnTir2lEasdTMRNtuPEYuPqQCZbU3NC9mHOI)
 Document Folder            | [Folder](https://drive.google.com/corp/drive/folders/1oVDYbcEDdQ9EpUmkK6gE4C7aZ8u6ujsN)
 Slack Channel              | [#networking](https://knative.slack.com)
