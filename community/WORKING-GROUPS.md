@@ -81,7 +81,8 @@ Slack Channel              | [#eventing](https://knative.slack.com/messages/C9JP
 
 ## Networking
 
-Load balancing, routing, domain names, SSL, Istio
+Inbound and outbound network connectivity for [serving](https://github.com/knative/serving) workloads.
+Specific areas of interest include: load balancing, routing, DNS configuration and TLS support.
 
 Artifact                   | Link
 -------------------------- | ----
@@ -104,7 +105,7 @@ Logging, monitoring & tracing infrastructure
 Artifact                   | Link
 -------------------------- | ----
 Forum                      | [knative-dev@](https://groups.google.com/forum/#!forum/knative-dev)
-Community Meeting VC       | [meet.google.com/kik-btis-sqz](https://meet.google.com/kik-btis-sqz) <br> Or dial in: <br> (US) +1 515-705-3725 <br>PIN: 704 774#
+Community Meeting VC       | https://meet.google.com/kik-btis-sqz <br> Or dial in: <br> (US) +1 515-705-3725 <br>PIN: 704 774#
 Community Meeting Calendar | [Calendar Invitation](https://calendar.google.com/event?action=TEMPLATE&tmeid=MDc4ZnRkZjFtbzZhZzBmdDMxYXBrM3B1YTVfMjAxODA4MDJUMTczMDAwWiBtZGVtaXJoYW5AZ29vZ2xlLmNvbQ&tmsrc=mdemirhan%40google.com&scp=ALL)
 Meeting Notes              | [Notes](https://drive.google.com/open?id=1vWEpjf093Jsih3mKkpIvmWWbUQPxFkcyDxzNH15rQgE)
 Document Folder            | [Folder](https://drive.google.com/corp/drive/folders/10HcpZlI1PbFyzinO6HjfHbzCkBXrqXMy)
@@ -116,7 +117,8 @@ Slack Channel              | [#observability](https://knative.slack.com)
 
 ## Scaling
 
-Autoscaling
+Automatic performance tuning of [serving](https://github.com/knative/serving) application workloads. 
+This includes micro (freeze) and macro (horizontal and vertical pod scaling) options.
 
 Artifact                   | Link
 -------------------------- | ----
