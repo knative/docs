@@ -127,7 +127,7 @@ topics and community.
 
 Proprietary conversations should occur in your company communication platforms.
 As with all communication, please be mindful of appropriateness, professionalism,
-and applicability to the Kubernetes community.
+and applicability to the Knative community.
 
 ---
 
