@@ -14,14 +14,22 @@
 
 FROM golang AS builder
 
-WORKDIR /go/src/github.com/knative/docs/
-ADD . /go/src/github.com/knative/docs/
+# copy the source
+ADD .   /go/src/github.com/knative/docs/serving/samples/gitwebhook-go
+WORKDIR /go/src/github.com/knative/docs/serving/samples/gitwebhook-go
 
-RUN CGO_ENABLED=0 go build ./serving/samples/gitwebhook-go/
+# install dependencies
+RUN go get github.com/google/go-github/github
+RUN go get golang.org/x/oauth2
+RUN go get gopkg.in/go-playground/webhooks.v3
+RUN go get gopkg.in/go-playground/webhooks.v3/github
 
-FROM gcr.io/distroless/base
+# build the sample
+RUN CGO_ENABLED=0 go build -o /go/bin/webhook-sample .
+
+FROM golang:alpine
 
 EXPOSE 8080
-COPY --from=builder /go/src/github.com/knative/docs/gitwebhook-go /sample
+COPY --from=builder /go/bin/webhook-sample /app/webhook-sample
 
-ENTRYPOINT ["/sample"]
+ENTRYPOINT ["/app/webhook-sample"]

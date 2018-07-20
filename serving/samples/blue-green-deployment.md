@@ -205,8 +205,8 @@ http://v1.route-demo.default.YOUR_CUSTOM_DOMAIN.com.
 To delete the sample app, enter the following commands:
 
 ```
-kubectl delete -f stage4.yaml
-kubectl delete -f stage3.yaml
-kubectl delete -f stage2.yaml
-kubectl delete -f stage1.yaml
+kubectl delete -f stage4.yaml --ignore-not-found=true
+kubectl delete -f stage3.yaml --ignore-not-found=true
+kubectl delete -f stage2.yaml --ignore-not-found=true
+kubectl delete -f stage1.yaml --ignore-not-found=true
 ```

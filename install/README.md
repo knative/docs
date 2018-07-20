@@ -9,7 +9,7 @@ sure which Kubernetes platform is right for you, see
 [Picking the Right Solution](https://kubernetes.io/docs/setup/pick-right-solution/).
 
 We provide information for installing Knative on
-[Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine/docs/) and
+[Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine/docs/), [IBM Cloud Kubernetes Service](https://www.ibm.com/cloud/container-service), [Azure Kubernetes Service](https://docs.microsoft.com/en-us/azure/aks/) and 
 [Minikube](https://kubernetes.io/docs/setup/minikube/) clusters.
 
 ## Installing Knative
@@ -19,7 +19,9 @@ Knative components on the following platforms:
 
 * [Knative Install on Gardener](Knative-with-Gardener.md)
 * [Knative Install on Google Kubernetes Engine](Knative-with-GKE.md)
+* [Knative Install on Pivotal Container Service](Knative-with-PKS.md)
 * [Knative Install on IBM Cloud Kubernetes Service](Knative-with-IKS.md)
+* [Knative Install on Azure Kubernetes Service](Knative-with-AKS.md)
 * [Knative Install on Minikube](Knative-with-Minikube.md)
 
 ## Deploying an app
@@ -42,6 +44,7 @@ and set up an Istio IP range for outbound network access:
 * [Assign a static IP address](../serving/gke-assigning-static-ip-address.md)
 * [Configure a custom domain](../serving/using-a-custom-domain.md)
 * [Configure outbound network access](../serving/outbound-network-access.md)
+* [Configuring HTTPS with a custom certificate](../serving/using-an-ssl-cert.md)
 
 ---
 

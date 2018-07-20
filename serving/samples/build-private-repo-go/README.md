@@ -139,13 +139,12 @@ kubectl create -f build-bot.yaml
 ```
 
 ### 3. Installing a Build template and updating `manifest.yaml`
-1. Download the
+1. Install the
    [Kaniko build template](https://github.com/knative/build-templates/blob/master/kaniko/kaniko.yaml)
-   from the [build-templates](https://github.com/knative/build-templates/) repo,
-   then apply it using the following command:
+   by entering the following command:
 
    ```shell
-   kubectl apply -f kaniko.yaml
+   kubectl apply -f https://raw.githubusercontent.com/knative/build-templates/master/kaniko/kaniko.yaml
    ```
    
 1. Open `manifest.yaml` and substitute your private DockerHub repository name for
