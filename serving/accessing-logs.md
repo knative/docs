@@ -38,7 +38,7 @@ fields.
 To access the logs for a configuration, enter the following search query in Kibana:
 
 ```text
-kubernetes.labels.knative_dev\/configuration: "configuration-example"
+kubernetes.labels.serving_knative_dev\/configuration: "configuration-example"
 ```
 
 Replace `configuration-example` with your configuration's name. Enter the following
@@ -51,7 +51,7 @@ kubectl get configurations
 To access logs for a revision, enter the following search query in Kibana:
 
 ```text
-kubernetes.labels.knative_dev\/revision: "configuration-example-00001"
+kubernetes.labels.serving_knative_dev\/revision: "configuration-example-00001"
 ```
 
 Replace `configuration-example-00001` with your revision's name.
@@ -114,3 +114,10 @@ See [Accessing Traces](./accessing-traces.md) page for details.
 
 Go to the [GCP Console logging page](https://console.cloud.google.com/logs/viewer) for
 your GCP project, which stores your logs via Stackdriver.
+
+---
+
+Except as otherwise noted, the content of this page is licensed under the
+[Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),
+and code samples are licensed under the
+[Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).

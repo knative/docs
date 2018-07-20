@@ -65,3 +65,10 @@ Builders should expect a Build to implement the following conventions:
 
  * Credentials attached to the Build's service account may be exposed as Git or
  Docker credentials as outlined [here](./auth.md).
+
+---
+
+Except as otherwise noted, the content of this page is licensed under the
+[Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),
+and code samples are licensed under the
+[Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).

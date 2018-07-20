@@ -75,7 +75,7 @@ in the Knative Serving repository.
 
 ## Configuration and Networking
 
-* [Setting up a docker registry](./setting-up-a-docker-registry.md)
+* [Configuring outbound network access](./outbound-network-access.md)
 * [Using a custom domain](./using-a-custom-domain.md)
 * [Assigning a static IP address for Knative on Google Kubernetes Engine](./gke-assigning-static-ip-address.md)
 
@@ -84,6 +84,9 @@ in the Knative Serving repository.
 See the [Knative Serving Issues](https://github.com/knative/serving/issues) page for a full list of
 known issues.
 
-* **No support for TLS** - Currently the Knative Serving components do not support TLS connections for
-  inbound HTTPS traffic. See [#537](https://github.com/knative/serving/issues/537) for more details.
+---
 
+Except as otherwise noted, the content of this page is licensed under the
+[Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),
+and code samples are licensed under the
+[Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).

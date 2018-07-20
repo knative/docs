@@ -13,38 +13,15 @@
 # limitations under the License.
 
 apiVersion: serving.knative.dev/v1alpha1
-kind: Route
-metadata:
-  name: git-webhook
-  namespace: default
-spec:
-  traffic:
-  - configurationName: git-webhook
-    percent: 100
----
-apiVersion: serving.knative.dev/v1alpha1
 kind: Configuration
 metadata:
-  name: git-webhook
+  name: iot-function
   namespace: default
 spec:
   revisionTemplate:
     metadata:
       labels:
-        knative.dev/type: app
+        knative.dev/type: container
     spec:
       container:
-        # This is the Go import path for the binary to containerize
-        # and substitute here.
-        image: github.com/knative/docs/serving/samples/gitwebhook-go
-        env:
-          - name: SECRET_TOKEN
-            valueFrom:
-              secretKeyRef:
-                name: githubsecret
-                key: secretToken
-          - name: ACCESS_TOKEN
-            valueFrom:
-              secretKeyRef:
-                name: githubsecret
-                key: accessToken
+        image: github.com/mchmarny/next18/event-flow

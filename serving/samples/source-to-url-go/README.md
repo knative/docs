@@ -75,6 +75,7 @@ available, but these are the key steps:
    secret "basic-user-pass" created
    ```
 
+
 ## Deploying the sample
 
 Now that you've configured your cluster accordingly, you are ready to deploy the

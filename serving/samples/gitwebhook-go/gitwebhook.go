@@ -24,19 +24,18 @@ import (
 	"os"
 	"strings"
 
+	ghclient "github.com/google/go-github/github"
 	"golang.org/x/oauth2"
 	webhooks "gopkg.in/go-playground/webhooks.v3"
 	"gopkg.in/go-playground/webhooks.v3/github"
-
-	ghclient "github.com/google/go-github/github"
 )
 
 const (
 	// Secret given to github. Used for verifying the incoming objects.
-	accessTokenKey = "ACCESS_TOKEN"
+	personalAccessTokenKey = "GITHUB_PERSONAL_TOKEN"
 	// Personal Access Token created in github that allows us to make
 	// calls into github.
-	secretTokenKey = "SECRET_TOKEN"
+	webhookSecretKey = "WEBHOOK_SECRET"
 	// this is what we tack onto each PR title if not there already
 	titleSuffix = "looks pretty legit"
 )
@@ -82,15 +81,15 @@ func (handler *GithubHandler) HandlePullRequest(payload interface{}, header webh
 func main() {
 	flag.Parse()
 	log.Print("gitwebhook sample started.")
-	accessToken := os.Getenv(accessTokenKey)
-	secretToken := os.Getenv(secretTokenKey)
+	personalAccessToken := os.Getenv(personalAccessTokenKey)
+	secretToken := os.Getenv(webhookSecretKey)
 
 	// Set up the auth for being able to talk to Github. It's
 	// odd that you have to also pass context around for the
 	// calls even after giving it to client. But, whatever.
 	ctx := context.Background()
 	ts := oauth2.StaticTokenSource(
-		&oauth2.Token{AccessToken: accessToken},
+		&oauth2.Token{AccessToken: personalAccessToken},
 	)
 	tc := oauth2.NewClient(ctx, ts)
 

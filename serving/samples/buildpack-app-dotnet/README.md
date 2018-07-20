@@ -19,7 +19,7 @@ in the [build-templates](https://github.com/knative/build-templates/) repo.
 First, install the Buildpack build template from that repo:
 
 ```shell
-kubectl apply -f buildpack.yaml
+kubectl apply -f https://raw.githubusercontent.com/knative/build-templates/master/buildpack/buildpack.yaml
 ```
 
 Then you can deploy this to Knative Serving from the root directory via:
@@ -82,5 +82,5 @@ To clean up the sample service:
 # Clean up the serving resources
 kubectl delete -f serving/samples/buildpack-app-dotnet/sample.yaml
 # Clean up the build template
-kubectl delete -f buildpack.yaml
+kubectl delete buildtemplate buildpack
 ```

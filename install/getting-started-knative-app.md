@@ -118,7 +118,7 @@ IP address created by Knative.
    request to interact with your application.
 
     ```shell
-    curl -H "Host: helloworld-go.default.example.com" http://IP_ADDRESS
+    curl -H "Host: helloworld-go.default.example.com" http://${IP_ADDRESS}
     Hello World: Go Sample v1!
     ```
     It can take a few seconds for Knative to scale up your application and return
@@ -133,3 +133,10 @@ To remove the sample app from your cluster, delete the service record:
 ```shell
 kubectl delete -f service.yaml
 ```
+
+---
+
+Except as otherwise noted, the content of this page is licensed under the
+[Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),
+and code samples are licensed under the
+[Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).

@@ -1,5 +1,13 @@
 # Knative Community
 
+*Important*. Before proceeding, please review the Knative community [Code of
+Conduct](CODE-OF-CONDUCT.md).
+
+If you any have questions or concerns, please contact the authors at
+knative-code-of-conduct@googlegroups.com.
+
+## Welcome!
+
 Welcome to the Knative community!
 
 This is the starting point for becoming a contributor - improving code,
@@ -42,9 +50,7 @@ industry-leading companies. For a current list of the authors, see [Authors](htt
 
 ## Meetings and work groups
 
-Real-time Knative discussion is available at [knative.slack.com](https://knative.slack.com).
-
-We also have public and recorded bi-weekly community meetings.
+Knative has public and recorded bi-weekly community meetings.
 
 Each project has one or more [working groups](WORKING-GROUPS.md) driving
 the project, and Knative as a single [technical oversight community](TECH-OVERSIGHT-COMMITTEE.md)
@@ -65,6 +71,17 @@ we could use your help in spiffing up our public-facing web site.
 
 ## Questions and issues
 
-If you're a developer, operator, or contributor trying to use Knative, head to
-[knative-dev@](https://groups.google.com/forum/#!forum/knative-dev) or
-[knative.slack.com](https://knative.slack.com) for help.
+If you're a developer, operator, or contributor trying to use Knative, the
+following resources are available for you:
+
+* [Knative Users](https://groups.google.com/forum/#!forum/knative-users)
+* [Knative Developers](https://groups.google.com/forum/#!forum/knative-dev)
+
+For contributors to Knative, we also have [Knative Slack](https://knative.slack.com)
+
+---
+
+Except as otherwise noted, the content of this page is licensed under the
+[Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),
+and code samples are licensed under the
+[Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).
