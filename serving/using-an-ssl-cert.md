@@ -13,6 +13,8 @@ cluster, make sure the certificate is signed for all the domains.
 
 ## Add the Certificate and Private Key into a secret
 
+> Note, if you don't have a certificate, you can find instructions on obtaining an SSL/TLS certificate using LetsEncrypt at the bottom of this page.
+
 Assuming you have two files, `cert.pk` which contains your certificate private
 key, and `cert.pem` which contains the public certificate, you can use the 
 following command to create a secret that stores the certificate. Note the
