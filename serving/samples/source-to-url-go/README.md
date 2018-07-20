@@ -1,4 +1,4 @@
-# Orchestrating a source-to-URL deployement on Kubernetes   
+# Orchestrating a source-to-URL deployment on Kubernetes   
 
 A Go sample that shows how to use Knative to go from source code in a git
 repository to a running application with a URL.
@@ -42,31 +42,31 @@ available, but these are the key steps:
 1. Create a new `Secret` manifest, which is used to store your Docker Hub
    credentials. Save this file as `docker-secret.yaml`:
 
-```yaml
-apiVersion: v1
-kind: Secret
-metadata:
-  name: basic-user-pass
-  annotations:
-    build.knative.dev/docker-0: https://index.docker.io/v1/
-type: kubernetes.io/basic-auth
-data:
-  # Use 'echo -n "username" | base64' to generate this string
-  username: BASE64_ENCODED_USERNAME
-  # Use 'echo -n "password" | base64' to generate this string
-  password: BASE64_ENCODED_PASSWORD
-```
+   ```yaml
+   apiVersion: v1
+   kind: Secret
+   metadata:
+     name: basic-user-pass
+     annotations:
+       build.knative.dev/docker-0: https://index.docker.io/v1/
+   type: kubernetes.io/basic-auth
+   data:
+     # Use 'echo -n "username" | base64' to generate this string
+     username: BASE64_ENCODED_USERNAME
+     # Use 'echo -n "password" | base64' to generate this string
+     password: BASE64_ENCODED_PASSWORD
+   ```
 
 1. On Mac or Linux computers, use the following command to generate the base64 encoded 
    values required for the manifest:
 
-```shell
-$ echo -n "username" | base64
-dXNlcm5hbWU=
+   ```shell
+   $ echo -n "username" | base64
+   dXNlcm5hbWU=
 
-$ echo -n "password" | base64
-cGFzc3dvcmQ=
-```
+   $ echo -n "password" | base64
+   cGFzc3dvcmQ=
+   ```
 
 1. After you have created the manifest file, apply it to your cluster with `kubectl`:
 
@@ -121,25 +121,25 @@ container for the application.
 
 1. Apply this manifest using `kubectl`, and watch the results:
    
-```shell
-# Apply the manifest
-$ kubectl apply -f service.yaml
-service "app-from-source" created
+   ```shell
+   # Apply the manifest
+   $ kubectl apply -f service.yaml
+   service "app-from-source" created
 
-# Watch the pods for build and serving
-$ kubectl get pods --watch
-NAME                          READY     STATUS       RESTARTS   AGE
-app-from-source-00001-zhddx   0/1       Init:2/3     0          7s
-app-from-source-00001-zhddx   0/1       PodInitializing   0         37s
-app-from-source-00001-zhddx   0/1       Completed   0         38s
-app-from-source-00001-deployment-6d6ff665f9-xfhm5   0/3       Pending   0         0s
-app-from-source-00001-deployment-6d6ff665f9-xfhm5   0/3       Pending   0         0s
-app-from-source-00001-deployment-6d6ff665f9-xfhm5   0/3       Init:0/1   0         0s
-app-from-source-00001-deployment-6d6ff665f9-xfhm5   0/3       Init:0/1   0         2s
-app-from-source-00001-deployment-6d6ff665f9-xfhm5   0/3       PodInitializing   0         3s
-app-from-source-00001-deployment-6d6ff665f9-xfhm5   2/3       Running   0         6s
-app-from-source-00001-deployment-6d6ff665f9-xfhm5   3/3       Running   0         11s
-```
+   # Watch the pods for build and serving
+   $ kubectl get pods --watch
+   NAME                          READY     STATUS       RESTARTS   AGE
+   app-from-source-00001-zhddx   0/1       Init:2/3     0          7s
+   app-from-source-00001-zhddx   0/1       PodInitializing   0         37s
+   app-from-source-00001-zhddx   0/1       Completed   0         38s
+   app-from-source-00001-deployment-6d6ff665f9-xfhm5   0/3       Pending   0         0s
+   app-from-source-00001-deployment-6d6ff665f9-xfhm5   0/3       Pending   0         0s
+   app-from-source-00001-deployment-6d6ff665f9-xfhm5   0/3       Init:0/1   0         0s
+   app-from-source-00001-deployment-6d6ff665f9-xfhm5   0/3       Init:0/1   0         2s
+   app-from-source-00001-deployment-6d6ff665f9-xfhm5   0/3       PodInitializing   0         3s
+   app-from-source-00001-deployment-6d6ff665f9-xfhm5   2/3       Running   0         6s
+   app-from-source-00001-deployment-6d6ff665f9-xfhm5   3/3       Running   0         11s
+   ```
 
 1. Once you see the deployment pod switch to the running state, press Ctrl+C to
    escape the watch. Your container is now built and deployed!
