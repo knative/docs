@@ -85,7 +85,7 @@ Follow the links in this section to learn more about Knative.
 * [Telemetry with Knative serving](serving/samples/telemetry-go/README.md)
 * [REST API sample](serving/samples/rest-api-go/README.md)
 
-### Setting up Logging and Metrics 
+### Setting up logging and metrics 
 
 * [Installing logging, metrics and traces](./serving/installing-logging-metrics-traces.md)
 * [Accessing logs](./serving/accessing-logs.md)
@@ -93,12 +93,12 @@ Follow the links in this section to learn more about Knative.
 * [Accessing traces](./serving/accessing-traces.md)
 * [Setting up a logging plugin](./serving/setting-up-a-logging-plugin.md)
 
-### Debugging Knative Serving issues 
+### Debugging Knative serving issues 
 
 * [Debugging application issues](./serving/debugging-application-issues.md)
 * [Debugging performance issues](./serving/debugging-performance-issues.md)
 
-### Configuration and Networking
+### Configuration and networking
 
 * [Configuring outbound network access](./serving/outbound-network-access.md)
 * [Using a custom domain](./serving/using-a-custom-domain.md)
