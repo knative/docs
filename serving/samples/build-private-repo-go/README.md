@@ -65,13 +65,8 @@ The objects in this section are all defined in `build-bot.yaml`, and the fields 
 need to be changed say `REPLACE_ME`. Open the `build-bot.yaml` file and make the
 necessary replacements.
 
-When finished, set up the build bot by entering the following command:
-
-```shell
-kubectl create -f build-bot.yaml
-```
-
-The following sections explain the different pieces of the `build-bot.yaml` file.
+The following sections explain the different configurations in the `build-bot.yaml` file,
+as well as the necessary changes for each section.
 
 #### Setting up our Build service account
 To separate our Build's credentials from our applications credentials, the
@@ -89,9 +84,9 @@ secrets:
 
 #### Creating a deploy key
 
-You can set up a deploy key for your private Github repository following
+You can set up a deploy key for a private Github repository following
 [these](https://developer.github.com/v3/guides/managing-deploy-keys/)
-instructions.  The deploy key in the `build-bot.yaml` file in this folder is *real*;
+instructions. The deploy key in the `build-bot.yaml` file in this folder is *real*;
 you do not need to change it for the sample to work.
 
 ```yaml
@@ -116,7 +111,7 @@ data:
 
 #### Creating a DockerHub push credential
 
-Substitute your DockerHub credentials as instructed in the comments below:
+Create a new Secret for your DockerHub credentials. Replace the necessary values:
 
 ```yaml
 apiVersion: v1
@@ -135,11 +130,19 @@ data:
   password: REPLACE_ME
 ```
 
-### 3. Installing Build template and updating `manifest.yaml`
-1. Apply the [Kaniko build template]
-   (https://github.com/knative/build-templates/blob/master/kaniko/kaniko.yaml)
-   from the [build-templates](https://github.com/knative/build-templates/) repo.
-   Download it, then apply it using the following command:
+#### Creating the build bot
+
+When finished with the replacements, create the build bot by entering the following command:
+
+```shell
+kubectl create -f build-bot.yaml
+```
+
+### 3. Installing a Build template and updating `manifest.yaml`
+1. Download the
+   [Kaniko build template](https://github.com/knative/build-templates/blob/master/kaniko/kaniko.yaml)
+   from the [build-templates](https://github.com/knative/build-templates/) repo,
+   then apply it using the following command:
 
    ```shell
    kubectl apply -f kaniko.yaml
