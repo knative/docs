@@ -1,6 +1,8 @@
-# Sample: Binding running services to an IoT core (PubSub)
+# Sample: Binding running services to an IoT core
 
-> For the ease of the demo, a few variables here are hard-coded.
+This sample shows how to bind a running service to an IoT core using PubSub as the event source.
+
+> For the ease of the demonstration, a few variables here are hard-coded.
 
 ## Setup
 
@@ -15,7 +17,7 @@ export IOTCORE_TOPIC_DATA="iot-demo"
 export IOTCORE_TOPIC_DEVICE="iot-demo-device"
 ```
 
-## Creating a device registry
+## Create a device registry
 
 Run the following command to create a device registry:
 
@@ -27,7 +29,7 @@ gcloud iot registries create $IOTCORE_REG \
     --state-pubsub-topic=$IOTCORE_TOPIC_DEVICE
 ```
 
-## Creating device certificates
+## Create device certificates
 
 Create certificates to connect the device to the IoT Core gateway:
 
@@ -36,7 +38,7 @@ openssl genrsa -out rsa_private.pem 2048
 openssl rsa -in rsa_private.pem -pubout -out rsa_public.pem
 ```
 
-## Registering the IoT device
+## Register the IoT device
 
 Once created, add the public key to the IoT core registry:
 
@@ -48,7 +50,7 @@ gcloud iot devices create $IOTCORE_DEVICE \
   --public-key path=./rsa_public.pem,type=rs256
 ```
 
-## Generating Data
+## Generate data
 
 To mimic an IoT device sending data to the IoT gateway, run the provided
 Node.js client with the following parameters:
