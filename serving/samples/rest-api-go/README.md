@@ -1,8 +1,6 @@
-# Creating a RESTful service
+# Creating a RESTful Service
 
-A simple RESTful service for testing purposes. It exposes an endpoint, which takes
-a stock ticker (stock symbol), then outputs the stock price. It uses the the REST resource
-name from environment defined in configuration.
+This sample demonstrates creating a simple RESTful service. The exposed endpoint takes a stock ticker (i.e. stock symbol), then outputs the stock price. The endpoint resource name is defined by an environment variable set in the configuration file. 
 
 ## Prerequisites
 
@@ -43,7 +41,7 @@ docker build \
 docker push "${REPO}/serving/samples/rest-api-go"
 ```
 
-5. Replace the image reference path with our published image path in the configuration files (`serving/samples/rest-api-go/sample.yaml` and `serving/samples/rest-api-go/updated_configuration.yaml`):  
+5. Replace the image reference path with our published image path in the configuration files (`serving/samples/rest-api-go/sample.yaml`:  
    * Manually replace:  
     `image: github.com/knative/docs/serving/samples/rest-api-go` with `image: <YOUR_CONTAINER_REGISTRY>/serving/samples/rest-api-go`  
 
@@ -130,78 +128,10 @@ To access this service via `curl`, you need to determine its ingress address.
   ```
   Response body: `stock price for ticker <ticker>  is  <price>`
 
-## Updating the Service
-
-This section describes how to update your service using an additional configuration file.
-
-1. Deploy the new configuration to update the `RESOURCE` environment variable
-from `stock` to `share`:
-```
-kubectl apply -f serving/samples/rest-api-go/updated_configuration.yaml
-```
-
-2. Once deployed, traffic will shift to the new revision automatically. Verify the deployment by checking the route status:
-```
-kubectl get route -o yaml
-```
-
-3. When the new route is ready, you can access the new endpoints:
-  * Make a request to the index endpoint:
-  ```
-  curl --header "Host:$SERVICE_HOST" http://${SERVICE_IP}
-  ```
-  Response body: `Welcome to the share app!`
-
-  * Make a request to the `/share` endpoint:
-  ```
-  curl --header "Host:$SERVICE_HOST" http://${SERVICE_IP}/share
-  ```
-  Response body: `share ticker not found!, require /share/{ticker}`
-
-  * Make a request to the `/share` endpoint with a `ticker` parameter:
-  ```
-  curl --header "Host:$SERVICE_HOST" http://${SERVICE_IP}/share/<ticker>
-  ```
-  Response body: `share price for ticker <ticker>  is  <price>`
-
-## Manual Traffic Splitting
-
-This section describes how to manually split traffic to specific revisions.
-
-1. Get your revisions names via:
-```
-kubectl get revisions
-```
-```
-NAME                                AGE
-stock-configuration-example-00001   11m
-stock-configuration-example-00002   4m
-```
-
-2. Update the `traffic` list in `serving/samples/rest-api-go/sample.yaml` as:
-```yaml
-traffic:
-  - revisionName: <YOUR_FIRST_REVISION_NAME>
-    percent: 50
-  - revisionName: <YOUR_SECOND_REVISION_NAME>
-    percent: 50
-```
-
-3. Deploy your traffic revision:
-```
-kubectl apply -f serving/samples/rest-api-go/sample.yaml
-```
-
-4. Verify the deployment by checking the route status:
-```
-kubectl get route -o yaml
-```
-Once updated, you can make `curl` requests to the API endpoints as before.
 
 ## Clean Up
 
 To clean up the sample service:
-
 ```
 kubectl delete -f serving/samples/rest-api-go/sample.yaml
 ```
