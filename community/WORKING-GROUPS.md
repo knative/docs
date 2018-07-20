@@ -78,6 +78,25 @@ Slack Channel              | [#eventing](https://knative.slack.com/messages/C9JP
 ------------------------------------------------------------- | ----------- | ------- | -------
 <img width="30px" src="https://github.com/vaikas-google.png"> | Ville Aikas | Google  | [vaikas-google](https://github.com/vaikas-google)
 
+## Observability
+
+Logging, monitoring & tracing infrastructure
+
+Artifact                   | Link
+-------------------------- | ----
+Forum                      | [knative-dev@](https://groups.google.com/forum/#!forum/knative-dev)
+Community Meeting VC       | [meet.google.com/kik-btis-sqz](https://meet.google.com/kik-btis-sqz) <br> Or dial in: <br> (US) +1 515-705-3725 <br>PIN: 704 774#
+Community Meeting Calendar | [Calendar Invitation](https://calendar.google.com/event?action=TEMPLATE&tmeid=MDc4ZnRkZjFtbzZhZzBmdDMxYXBrM3B1YTVfMjAxODA4MDJUMTczMDAwWiBtZGVtaXJoYW5AZ29vZ2xlLmNvbQ&tmsrc=mdemirhan%40google.com&scp=ALL)
+Meeting Notes              | [Notes](https://drive.google.com/open?id=1vWEpjf093Jsih3mKkpIvmWWbUQPxFkcyDxzNH15rQgE)
+Document Folder            | [Folder](https://drive.google.com/corp/drive/folders/10HcpZlI1PbFyzinO6HjfHbzCkBXrqXMy)
+Slack Channel              | [#observability](https://knative.slack.com)
+
+&nbsp;                                                    | Leads            | Company | Profile
+--------------------------------------------------------- | ---------------- | ------- | -------
+<img width="30px" src="https://github.com/mdemirhan.png"> | Mustafa Demirhan | Google  | [mdemirhan](https://github.com/mdemirhan)
+
+---
+
 ## Scaling
 
 Autoscaling
@@ -95,22 +114,22 @@ Slack Channel              | [#autoscaling](https://knative.slack.com)
 ------------------------------------------------------------- | -------------- | ------- | -------
 <img width="30px" src="https://github.com/josephburnett.png"> | Joseph Burnett | Google  | [josephburnett](https://github.com/josephburnett)
 
-## Serving
+## Networking
 
-Logging infra, Monitoring infra, Trace, Load balancing/Istio, Domain names,
-Routing, Observability
+Load balancing, routing, domain names, SSL, Istio
 
 Artifact                   | Link
 -------------------------- | ----
 Forum                      | [knative-dev@](https://groups.google.com/forum/#!forum/knative-dev)
 Community Meeting VC       | [TODO](TODO)
 Community Meeting Calendar | [Calendar Invitation](TODO)
-Meeting Notes              | [Notes](TODO)
-Document Folder            | [Folder](https://drive.google.com/corp/drive/folders/1pfcc6z8oQl6S7bOl1MnfZJ2o32FtgvRB)
-Slack Channel              | [#metrics](https://knative.slack.com)
+Meeting Notes              | [Notes](https://drive.google.com/open?id=1EE1t5mTfnTir2lEasdTMRNtuPEYuPqQCZbU3NC9mHOI)
+Document Folder            | [Folder](https://drive.google.com/corp/drive/folders/1oVDYbcEDdQ9EpUmkK6gE4C7aZ8u6ujsN)
+Slack Channel              | [#networking](https://knative.slack.com)
 
 &nbsp;                                                    | Leads            | Company | Profile
 --------------------------------------------------------- | ---------------- | ------- | -------
+<img width="30px" src="https://github.com/tcnghia.png"> | Nghia Tran | Google  | [tcnghia](https://github.com/tcnghia)
 <img width="30px" src="https://github.com/mdemirhan.png"> | Mustafa Demirhan | Google  | [mdemirhan](https://github.com/mdemirhan)
 
 ---
