@@ -1,6 +1,6 @@
 # Buildpack Sample App
 
-A sample app that demonstrates usage of Cloud Foundry buildpacks on Knative Serving,
+A sample app that demonstrates using Cloud Foundry buildpacks on Knative Serving,
 using the [packs Docker images](https://github.com/sclevine/packs).
 
 This deploys the [.NET Core Hello World](https://github.com/cloudfoundry-samples/dotnet-core-hello-world)
@@ -8,7 +8,7 @@ sample app for Cloud Foundry.
 
 ## Prerequisites
 
-[Install Knative Serving](https://github.com/knative/docs/blob/master/install/README.md)
+* [Install Knative Serving](../../../install/README.md)
 
 ## Running
 
@@ -22,7 +22,8 @@ First, install the Buildpack build template from that repo:
 kubectl apply -f buildpack.yaml
 ```
 
-Then you can deploy this to Knative Serving from the root directory via:
+Then you can deploy this to Knative Serving from the root directory
+by entering the following commands:
 
 ```shell
 # Replace the token string with a suitable registry
@@ -50,7 +51,7 @@ items:
 ...
 ```
 
-Once the `BuildComplete` status becomes `True` the resources will start getting created.
+Once the `BuildComplete` status is `True`, resource creation begins.
 
 
 To access this service via `curl`, we first need to determine its ingress address:
