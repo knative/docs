@@ -75,8 +75,8 @@ export SERVICE_IP=`kubectl get svc knative-ingressgateway -n istio-system -o jso
 
 Now curl the service IP to make sure the deployment succeeded:
 
-```
-# Curl the ingress IP "as-if" DNS were properly configured.
+```shell
+# Curl the ingress IP as if DNS were properly configured
 curl --header "Host: $SERVICE_HOST" http://${SERVICE_IP}/
 [response]
 ```
