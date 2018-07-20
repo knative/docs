@@ -102,12 +102,16 @@ func parseIntParam(r *http.Request, param string) (int, bool, error) {
 		if err != nil {
 			return 0, false, err
 		}
+		if i == 0 {
+			return i, false, nil
+		}
 		return i, true, nil
 	}
 	return 0, false, nil
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
+	log.Println("Serving request")
 	// Validate inputs.
 	ms, hasMs, err := parseIntParam(r, "sleep")
 	if err != nil {

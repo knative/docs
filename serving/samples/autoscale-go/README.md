@@ -64,7 +64,7 @@ Build the application container and publish it to a container registry:
 
 1. Request the largest prime less than 40,000,000 from the autoscale app.  Note that it consumes about 1 cpu/sec.
    ```
-   time curl --header "Host:$SERVICE_HOST" http://${SERVICE_IP?}/primes/40000000
+   time curl --header "Host: autoscale-go.default.example.com" http://${IP_ADDRESS?}/primes/40000000
    ```
 
 1. Ramp up traffic on the autoscale app (about 300 QPS):
