@@ -76,16 +76,16 @@ Follow the links in this section to learn more about Knative.
 * [Getting started with serving](./serving)
 * [Getting started with builds](./build)
 * [Getting started with eventing](./eventing)
-* [Samples for serving](./serving/samples/)
-* [Samples for eventing](./eventing/samples/)
 
-### More samples and demos
+### Samples and demos
 
 * [Autoscaling](./serving/samples/autoscale-go/README.md)
 * [Source-to-URL deployment](./serving/samples/source-to-url-go/README.md)
 * [Binding running services to eventing ecosystems](./eventing/samples/event-flow/README.md)
 * [Telemetry](./serving/samples/telemetry-go/README.md)
 * [REST API sample](./serving/samples/rest-api-go/README.md)
+* [All samples for serving](./serving/samples/)
+* [All samples for eventing](./eventing/samples/)
 
 ### Setting up logging and metrics 
 
