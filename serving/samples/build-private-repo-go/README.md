@@ -1,15 +1,13 @@
-# Deploying to Knative from a Private Github Repo
+# Deploying to Knative from a Private GitHub Repo
 
 This sample demonstrates:
-* Pulling from a private Github repository using a deploy-key
-* Pushing to a private DockerHub repository using a username / password
+* Pulling source code from a private Github repository using a deploy-key
+* Pushing a Docker container to a private DockerHub repository using a username / password
 * Deploying to Knative Serving using image pull secrets
-
-> In this sample, we will assume access to existing Knative Serving service. If not, consult [README.md](https://github.com/knative/serving/blob/master/README.md) on how to deploy one.
 
 ## Before you begin
 
-* [Install Knative Serving](https://github.com/knative/docs/blob/master/install/README.md)
+* [Install Knative Serving](../../../install/README.md)
 * Create a local folder for this sample and download the files in this directory into it.
 
 ## Setup
