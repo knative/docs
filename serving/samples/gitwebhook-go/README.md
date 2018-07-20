@@ -112,6 +112,7 @@ service "gitwebhook" created
     1. Browse on GitHub to the repository where you want to create a webhook.
     1. Click **Settings**, then **Webhooks**, then **Add webhook**.
     1. Enter the **Payload URL** as `http://{DOMAIN}`, with the value of DOMAIN listed above.
+    1. Set the **Content type** to `application/json`. 
     1. Enter the **Secret** value to be the same as the original base used for
        `webhookSecret` above (the original value, not the base64 encoded value).
     1. Select **Disable** under SSL Validation, unless you've [enabled SSL](https://github.com/knative/docs/blob/master/serving/using-an-ssl-cert.md).
