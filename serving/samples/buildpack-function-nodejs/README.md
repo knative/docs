@@ -1,7 +1,7 @@
 # Buildpack Sample Function
 
-A sample function that demonstrates using Cloud Foundry buildpacks on
-Knative Serving, using the [packs Docker images](https://github.com/sclevine/packs).
+A sample function that demonstrates using [Cloud Foundry](https://www.cloudfoundry.org/)
+buildpacks on Knative Serving, using the [packs Docker images](https://github.com/sclevine/packs).
 
 This deploys the [riff square](https://github.com/scothis/riff-square-buildpack)
 sample function for riff.
@@ -16,7 +16,7 @@ This sample uses the [Buildpack build
 template](https://github.com/knative/build-templates/blob/master/buildpack/buildpack.yaml)
 from the [build-templates](https://github.com/knative/build-templates/) repo.
 
-First, install the Buildpack build template from that repo:
+Save a copy of `buildpack.yaml`, then install it:
 
 ```shell
 kubectl apply -f buildpack.yaml
@@ -28,9 +28,9 @@ Then you can deploy this to Knative Serving from the root directory via:
 # Replace <your-project-here> with your own registry
 export REPO="gcr.io/<your-project-here>"
 
-perl -pi -e "s@DOCKER_REPO_OVERRIDE@$REPO@g" serving/samples/buildpack-function-nodejs/sample.yaml
+perl -pi -e "s@DOCKER_REPO_OVERRIDE@$REPO@g" sample.yaml
 
-kubectl apply -f serving/samples/buildpack-function-nodejs/sample.yaml
+kubectl apply -f sample.yaml
 ```
 
 Once deployed, you will see that it first builds:
