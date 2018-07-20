@@ -50,9 +50,7 @@ industry-leading companies. For a current list of the authors, see [Authors](htt
 
 ## Meetings and work groups
 
-Real-time Knative discussion is available at [knative.slack.com](https://knative.slack.com).
-
-We also have public and recorded bi-weekly community meetings.
+Knative has public and recorded bi-weekly community meetings.
 
 Each project has one or more [working groups](WORKING-GROUPS.md) driving
 the project, and Knative as a single [technical oversight community](TECH-OVERSIGHT-COMMITTEE.md)
@@ -73,9 +71,13 @@ we could use your help in spiffing up our public-facing web site.
 
 ## Questions and issues
 
-If you're a developer, operator, or contributor trying to use Knative, head to
-[knative-dev@](https://groups.google.com/forum/#!forum/knative-dev) or
-[knative.slack.com](https://knative.slack.com) for help.
+If you're a developer, operator, or contributor trying to use Knative, the
+following resources are available for you:
+
+* Mailing lists
+  * [Knative Developers](https://groups.google.com/forum/#!forum/knative-dev)
+  * [Knative Users](https://groups.google.com/forum/#!forum/knative-users)
+* [Knative Community on Slack](https://knative-community.slack.com)
 
 ---
 
