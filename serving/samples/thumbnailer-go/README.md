@@ -140,6 +140,8 @@ NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S) 
 knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
 ```
 
+> Note: It can take a few seconds for the service to show an `EXTERNAL-IP`.
+
 The newly deployed app may take few seconds to initialize. You can check its status
 by entering the following command:
 
