@@ -73,10 +73,11 @@ Follow the links in this section to learn more about Knative.
 
 * [Installing Knative](./install/README.md)
 * [Getting started with app deployment](./install/getting-started-knative-app.md)
-* [Samples](./serving/samples/)
 * [Getting started with serving](./serving)
 * [Getting started with builds](./build)
 * [Getting started with eventing](./eventing)
+* [Samples for serving](./serving/samples/)
+* [Samples for eventing](./eventing/samples/)
 
 ### More samples and demos
 
