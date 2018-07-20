@@ -9,16 +9,16 @@ Each of the components under the Knative project attempt to identify common patt
 codify the best practices that are shared by successful real-world Kubernetes-based frameworks and 
 applications. Knative components focus on solving many mundane but difficult tasks such as:
 
-- [Deploying a container](install/getting-started-knative-app.md)
-- [Orchestrating source-to-URL workflows on Kubernetes](serving/samples/source-to-url-go/)
-- [Routing and managing traffic with blue/green deployment](serving/samples/blue-green-deployment.md)
-- [Automatic scaling and sizing workloads based on demand](serving/samples/autoscale-go)
-- [Binding running services to eventing ecosystems](eventing/README.md)
+* [Deploying a container](./install/getting-started-knative-app.md)
+* [Orchestrating source-to-URL workflows on Kubernetes](./serving/samples/source-to-url-go/)
+* [Routing and managing traffic with blue/green deployment](./serving/samples/blue-green-deployment.md)
+* [Automatic scaling and sizing workloads based on demand](./serving/samples/autoscale-go)
+* [Binding running services to eventing ecosystems](./eventing/samples/event-flow/README.md)
 
 Developers on Knative can use familiar idioms, languages, and frameworks to deploy any workload: 
 functions, applications, or containers.
 
-## Knative components
+## Components
 
 The following Knative components are currently available:
 
@@ -26,7 +26,7 @@ The following Knative components are currently available:
 * [Eventing](https://github.com/knative/eventing) - Management and delivery of events
 * [Serving](https://github.com/knative/serving) - Request-driven compute that can scale to zero
 
-## Knative audience
+## Audience
 
 Knative is designed with different personas in mind:
 
@@ -39,7 +39,7 @@ serverless-style functions, applications, and containers to an auto-scaling
 runtime.
 
 To join the conversation, head over to the
-[Knative Users](https://groups.google.com/d/forum/knative-users) Google group.
+[Knative users](https://groups.google.com/d/forum/knative-users) Google group.
 
 ### Operators
 
@@ -57,33 +57,34 @@ lines of separation between pluggable components, the Knative project
 establishes an efficient contributor workflow.
 
 Knative is a diverse, open, and inclusive community. To get involved, see
-[CONTRIBUTING.md](community/CONTRIBUTING.md)
-and join the [Knative community](community/README.md).
+[CONTRIBUTING.md](./community/CONTRIBUTING.md)
+and join the [Knative community](./community/README.md).
 
 Your own path to becoming a Knative contributor can
 [begin anywhere](https://github.com/knative/serving/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22).
 [Bug reports](https://github.com/knative/serving/issues/new) and
 friction logs from new developers are especially welcome.
 
-## Knative documentation
+## Documentation
 
 Follow the links in this section to learn more about Knative.
 
-### Getting started with Knative
+### Getting started
 
 * [Installing Knative](./install/README.md)
-* [Getting started with Knative app deployment](./install/getting-started-knative-app.md)
-* [Knative samples](./serving/samples/)
-* [Getting started with Knative serving](./serving)
-* [Getting started with Knative builds](./build)
-* [Getting started with Knative eventing](./eventing)
+* [Getting started with app deployment](./install/getting-started-knative-app.md)
+* [Samples](./serving/samples/)
+* [Getting started with serving](./serving)
+* [Getting started with builds](./build)
+* [Getting started with eventing](./eventing)
 
 ### More samples and demos
 
-* [Autoscaling with Knative serving](serving/samples/autoscale-go/README.md)
-* [Source-to-URL with Knative serving](serving/samples/source-to-url-go/README.md)
-* [Telemetry with Knative serving](serving/samples/telemetry-go/README.md)
-* [REST API sample](serving/samples/rest-api-go/README.md)
+* [Autoscaling](./serving/samples/autoscale-go/README.md)
+* [Source-to-URL deployment](./serving/samples/source-to-url-go/README.md)
+* [Binding running services to eventing ecosystems](./eventing/samples/event-flow/README.md)
+* [Telemetry](./serving/samples/telemetry-go/README.md)
+* [REST API sample](./serving/samples/rest-api-go/README.md)
 
 ### Setting up logging and metrics 
 
