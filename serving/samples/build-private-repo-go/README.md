@@ -10,10 +10,11 @@ This sample demonstrates:
 ## Before you begin
 
 * [Install Knative Serving](https://github.com/knative/docs/blob/master/install/README.md)
+* Create a local folder for this sample and download the files in this directory into it.
 
 ## Setup
 
-### Setting up the default service account
+### 1. Setting up the default service account
 
 Knative Serving will run pods as the default service account in the namespace where
 you created your resources.  You can see its body by entering the following command:
@@ -59,10 +60,23 @@ We are going to add to this an image pull Secret.
    ```
 
 
-### Setting up our Build service account
+### 2. Configuring the build
 
-To separate our Build's credentials from our applications credentials, we will
-have our Build run as its own service account defined via:
+The objects in this section are all defined in `build-bot.yaml`, and the fields that
+need to be changed say `REPLACE_ME`. Open the `build-bot.yaml` file and make the
+necessary replacements.
+
+When finished, set up the build bot by entering the following command:
+
+```shell
+kubectl create -f build-bot.yaml
+```
+
+The following sections explain the different pieces of the `build-bot.yaml` file.
+
+#### Setting up our Build service account
+To separate our Build's credentials from our applications credentials, the
+Build runs as its own service account:
 
 ```yaml
 apiVersion: v1
@@ -72,14 +86,6 @@ metadata:
 secrets:
 - name: deploy-key
 - name: dockerhub-push-secrets
-```
-
-The objects in this section are all defined in `build-bot.yaml`, and the fields that
-need to be populated say `REPLACE_ME`.  Once these have been replaced as outlined,
-the "build bot" can be set up by entering the following command:
-
-```shell
-kubectl create -f build-bot.yaml
 ```
 
 #### Creating a deploy key
@@ -130,31 +136,28 @@ data:
   password: REPLACE_ME
 ```
 
-### 3. Installing Build Templates
+### 3. Installing Build template and updating `manifest.yaml`
+1. Apply the [Kaniko build template]
+   (https://github.com/knative/build-templates/blob/master/kaniko/kaniko.yaml)
+   from the [build-templates](https://github.com/knative/build-templates/) repo.
+   Download it, then apply it using the following command:
 
-This sample uses the [Kaniko build
-template](https://github.com/knative/build-templates/blob/master/kaniko/kaniko.yaml)
-in the [build-templates](https://github.com/knative/build-templates/) repo.
+   ```shell
+   kubectl apply -f kaniko.yaml
+   ```
+   
+1. Open `manifest.yaml` and substitute your private DockerHub repository name for
+   `REPLACE_ME`.
 
-```shell
-kubectl apply -f kaniko.yaml
-```
+## Deploying your application
 
-## Deploying
-
-At this point, basically everything has been setup and you simply need to deploy
-your application.  There is one remaining substitution to be made in
-`manifest.yaml`.  Substitute your private DockerHub repository name for
-`REPLACE_ME`.
-
-Then you can run:
+At this point, you're ready to deploy your application:
 
 ```shell
 kubectl create -f manifest.yaml
 ```
 
-As with the other samples, you can confirm that everything works by capturing the IP
-of the ingress endpoint:
+You can confirm that everything works by capturing the IP of the ingress endpoint:
 
 ```
 # Put the Host name into an environment variable.
@@ -165,13 +168,14 @@ export SERVICE_IP=`kubectl get svc knative-ingressgateway -n istio-system -o jso
 ```
 
 If your cluster is running outside a cloud provider (for example, on Minikube),
-your services will never get an external IP address. In that case, use the Istio `hostIP` and `nodePort` as the service IP:
+your services will never get an external IP address. In that case, use the Istio
+`hostIP` and `nodePort` as the service IP:
 
 ```shell
 export SERVICE_IP=$(kubectl get po -l knative=ingressgateway -n istio-system -o 'jsonpath={.items[0].status.hostIP}'):$(kubectl get svc knative-ingressgateway -n istio-system -o 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
 ```
 
-Now curl the service IP as if DNS were properly configured:
+Now curl the service IP to make sure the deployment succeeded:
 
 ```
 curl -H "Host: $SERVICE_HOST" http://$SERVICE_IP
@@ -183,38 +187,38 @@ curl -H "Host: $SERVICE_HOST" http://$SERVICE_IP
 The sample code is in a private Github repository consisting of two files.
 
 1. `Dockerfile`
-```Dockerfile
-FROM golang
+   ```Dockerfile
+   FROM golang
 
-ENV GOPATH /go
+   ENV GOPATH /go
 
-ADD . /go/src/github.com/dewitt/knative-build
+   ADD . /go/src/github.com/dewitt/knative-build
 
-RUN CGO_ENABLED=0 go build github.com/dewitt/knative-build
+   RUN CGO_ENABLED=0 go build github.com/dewitt/knative-build
 
-ENTRYPOINT ["knative-build"]
-```
+   ENTRYPOINT ["knative-build"]
+   ```
 
 1. `main.go`
 
-```go
-package main
+   ```go
+   package main
 
-import (
-	"fmt"
-	"net/http"
-)
+   import (
+	   "fmt"
+	   "net/http"
+   )
 
-const (
-	port = ":8080"
-)
+   const (
+   	   port = ":8080"
+   )
 
-func helloWorld(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello World.")
-}
+   func helloWorld(w http.ResponseWriter, r *http.Request) {
+	   fmt.Fprintf(w, "Hello World.")
+   }
 
-func main() {
-	http.HandleFunc("/", helloWorld)
-	http.ListenAndServe(port, nil)
-}
-```
+   func main() {
+	   http.HandleFunc("/", helloWorld)
+	   http.ListenAndServe(port, nil)
+   }
+   ```
