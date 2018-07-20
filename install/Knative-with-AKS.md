@@ -99,7 +99,12 @@ You should also ensure that the `Microsoft.Compute` and `Microsoft.Network` prov
     ```
 1. Create the AKS cluster!
     ```bash
-    az aks create --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME --generate-ssh-keys --kubernetes-version 1.10.5 --enable-rbac --node-vm-size Standard_DS3_v2
+    az aks create --resource-group $RESOURCE_GROUP \
+    --name $CLUSTER_NAME \
+    --generate-ssh-keys \
+    --kubernetes-version 1.10.5 \
+    --enable-rbac \
+    --node-vm-size Standard_DS3_v2
     ```
 
 1. Configure kubectl to use the new cluster.
