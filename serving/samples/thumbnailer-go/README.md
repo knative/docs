@@ -33,7 +33,7 @@ go get github.com/tools/godep
 godep restore
 ```
 
-### Test
+### Run tests
 
 To make sure the application is ready, run the integrated tests:
 
@@ -41,13 +41,13 @@ To make sure the application is ready, run the integrated tests:
 go test ./...
 ```
 
-### Run
+### Run the app
 
 You can now run the `rester-tester` application locally in `go` or using Docker.
 
 **Local**
 
-> Note: To run the application locally in `go` you will need [FFmpeg](https://www.ffmpeg.org/) in your path.
+> Note: To run the application locally in `go`, you will need [FFmpeg](https://www.ffmpeg.org/) in your path.
 
 To run the app:
 
@@ -77,26 +77,27 @@ curl -X POST -H "Content-Type: application/json" http://localhost:8080/image \
      -d '{"src":"https://www.youtube.com/watch?v=DjByja9ejTQ"}'
 ```
 
-## Deploy a prebuilt version of the app
+## Deploying the app to Knative
 
-You can now deploy the `rester-tester` app to the Knative Serving service using
-`kubectl` and the included `sample-prebuilt.yaml` file.
+From this point, you can either build the app yourself and then deploy it,
+or you can deploy a prebuilt image of the app.
+
+### Deploying a prebuilt image
+
+You can deploy a prebuilt image of the `rester-tester` app to the Knative Serving service using
+`kubectl` and the included `sample-prebuilt.yaml` file:
 
 ```
 # From inside the thumbnailer-go directory
 kubectl apply -f sample-prebuilt.yaml
 ```
 
-If you would like to publish your own copy of the container image,
-you can update the image reference in `sample-prebuilt.yaml` file.
+### Building and deploying a version of the app
 
-
-## Build and deploy a version of the app
-
-You can also build the image as part of deployment. This sample uses the
+If you want to build the image yourself, follow these instructions. This sample uses the
 [Kaniko build
 template](https://github.com/knative/build-templates/blob/master/kaniko/kaniko.yaml)
-in the [build-templates](https://github.com/knative/build-templates/) repo.
+from the [build-templates](https://github.com/knative/build-templates/) repo.
 
 ```shell
 # Replace the token string with a suitable registry
@@ -125,12 +126,13 @@ items:
 ...
 ```
 
-Once `BuildComplete` has a `status: "True"`, the revision will get deployed as in the "prebuilt" case above.
+Once `BuildComplete` has a `status: "True"`, the revision will be deployed.
 
 
-## Demo
+## Using the app
 
-To confirm that the app deployed, you can check for the Knative Serving service using `kubectl`. First, is there an ingress service:
+To confirm that the app deployed, you can check for the Knative Serving service using `kubectl`.
+First, is there an ingress service, and does it have an `EXTERNAL-IP`:
 
 ```
 kubectl get svc knative-ingressgateway -n istio-system
@@ -145,12 +147,12 @@ by entering the following command:
 kubectl -n default get pods
 ```
 
-The Knative Serving ingress service will automatically be assigned an IP,
+The Knative Serving ingress service will automatically be assigned an external IP,
 so let's capture the IP and Host URL in variables so that we can use them
 in `curl` commands:
 
 ```
-# Put the Host name into an environment variable.
+# Put the Host URL into an environment variable.
 export SERVICE_HOST=`kubectl get route thumb -o jsonpath="{.status.domain}"`
 
 # Put the ingress IP into an environment variable.
@@ -158,17 +160,20 @@ export SERVICE_IP=`kubectl get svc knative-ingressgateway -n istio-system -o jso
 ```
 
 If your cluster is running outside a cloud provider (for example on Minikube),
-your services will never get an external IP address. In that case, use the istio `hostIP` and `nodePort` as the service IP:
+your services will never get an external IP address. In that case, use the istio
+`hostIP` and `nodePort` as the service IP:
 
 ```shell
 export SERVICE_IP=$(kubectl get po -l knative=ingressgateway -n istio-system -o 'jsonpath={.items[0].status.hostIP}'):$(kubectl get svc knative-ingressgateway -n istio-system -o 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
 ```
 
-> To make the JSON service responses more readable consider installing [jq](https://stedolan.github.io/jq/), makes JSON pretty
+> To make the JSON service responses more readable, this guide uses
+  [jq](https://stedolan.github.io/jq/). If you don't want to install
+  it, remove `| jq '.'` from the following commands.
 
 ### Ping
 
-Let's start with a simple `ping`:
+Let's start with a simple `ping` to make sure the app is deployed:
 
 ```
 curl -H "Content-Type: application/json" -H "Host: $SERVICE_HOST" \
@@ -177,15 +182,15 @@ curl -H "Content-Type: application/json" -H "Host: $SERVICE_HOST" \
 
 ### Video Thumbnail
 
-Now the video thumbnail.
+Now, supply the video URL and generate a video thumbnail:
 
 ```
 curl -X POST -H "Content-Type: application/json" -H "Host: $SERVICE_HOST" \
   http://$SERVICE_IP/image -d '{"src":"https://www.youtube.com/watch?v=DjByja9ejTQ"}'  | jq '.'
 ```
 
-You can then download the newly created thumbnail. Make sure to replace the image file name
-with the one returned by the previous curl request:
+You can then download the newly created thumbnail. Make sure to replace the
+image file name with the one returned by the previous curl request:
 
 ```
 curl -H "Host: $SERVICE_HOST" \
