@@ -33,12 +33,10 @@
 
 initialize $@
 
-# Fail fast during setup.
-set -o errexit
-set -o pipefail
-
 # Install Knative Serving if not using an existing cluster
-(( ! USING_EXISTING_CLUSTER )) && start_latest_knative_serving
+if (( ! USING_EXISTING_CLUSTER )); then
+  start_latest_knative_serving || fail_test
+fi
 
 # TODO(#30): Add tests.
 header "TODO(#30): Write integration tests"
