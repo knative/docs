@@ -56,15 +56,15 @@ spec:
   serviceAccountName: build-auth-example
   source:
     git:
-      url: https://github.com/sample/build-sample.git
+      url: https://github.com/example/build-example.git
       revision: master
-    steps:
-    - name: ubuntu-example
-      image: ubuntu
-      args: ["ubuntu-build-example", "SECRETS.md"]
-    steps:
-    - image: gcr.io/sample-builders/build-sample
-      args: ['echo', 'hello', 'build']
+  steps:
+  - name: ubuntu-example
+    image: ubuntu
+    args: ["ubuntu-build-example", "SECRETS-example.md"]
+  steps:
+  - image: gcr.io/example-builders/build-example
+    args: ['echo', 'hello-example', 'build']
 ```
 
 
