@@ -24,7 +24,8 @@ spec:
         knative.dev/type: container
     spec:
       container:
-        image: github.com/knative/eventing/sample/k8s_events_function
+        # Replace this image with your {username}/k8s-events container
+        image: github.com/knative/docs/eventing/sample/k8s-events
 
 ---
 apiVersion: serving.knative.dev/v1alpha1
