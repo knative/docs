@@ -39,7 +39,7 @@ Kubernetes resources. In a production environment, you might want to limit the
 access of this service account to only specific namespaces.
 
 ```shell
-kubectl apply -f sample/k8s_events_function/serviceaccount.yaml
+kubectl apply -f serviceaccount.yaml
 ```
 
 ## Build and deploy the sample
@@ -53,7 +53,7 @@ kubectl apply -f sample/k8s_events_function/serviceaccount.yaml
     docker build -t {username}/k8s-events .
 
     # Push the container to docker registry
-    docker pushd {username}/k8s-events
+    docker push {username}/k8s-events
     ```
 
 1.  After the build has completed and the container is pushed to Docker Hub, you
@@ -61,9 +61,9 @@ kubectl apply -f sample/k8s_events_function/serviceaccount.yaml
     value in function.yaml matches the container you built in the previous step.
     Apply the configuration using `kubectl`:
 
-```shell
-kubectl apply -f function.yaml
-```
+    ```shell
+    kubectl apply -f function.yaml
+    ```
 
 1.  Check that your service is running using:
 
