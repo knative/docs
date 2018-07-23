@@ -1,15 +1,17 @@
-# Thumbnailer Demo
+# Thumbnailer External Dependencies Demo
 
 This is a walk-through example that demonstrates deploying a dockerized
-application to Knative Serving. In this demo we will use a sample `golang`
-application that takes a video URL as an input and generates its thumbnail image.
+application that accesses external dependencies to Knative Serving. In this demo
+we will use a sample `golang` application that takes a video URL as an input and
+generates its thumbnail image using the `ffmpeg` framework.
 
 ## Before you begin
 
 * [Install Knative Serving](../../../install/README.md)
-And if you want to run the app locally:
+
+If you want to test and run the app locally:
 * [Install Go](https://golang.org/doc/install)
-* [Install `ffmpeg`](https://www.ffmpeg.org/) 
+* [Download `ffmpeg`](https://www.ffmpeg.org/download.html)
 
 ## Sample code
 
