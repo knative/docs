@@ -6,8 +6,7 @@ This sample demonstrates creating a simple RESTful service. The exposed endpoint
 
 1. A Kubernetes cluster with [Knative Serving](https://github.com/knative/docs/blob/master/install/README.md) installed.
 2. Install [Docker](https://docs.docker.com/get-started/#prepare-your-docker-environment).
-3. This application makes an external API request, therefore you will need to
-[configuring outbound network access](https://github.com/knative/docs/blob/master/serving/outbound-network-access.md).
+3. You need to [configure outbound network access](https://github.com/knative/docs/blob/master/serving/outbound-network-access.md) because this application makes an external API request.
 4. Check out the code:
 ```
 go get -d github.com/knative/docs/serving/samples/rest-api-go
@@ -26,7 +25,7 @@ cd $GOPATH/src/github.com/knative/docs
 ```
 export REPO="gcr.io/<YOUR_PROJECT_ID>"
 ```
-   This example shows how to use Google Container Registry (GCR). You will need a Google Cloud Project and to enable the [Google Container Registry
+   To run the sample, you need to have a Google Cloud Platform project, and you also need to enable the [Google Container Registry
 API](https://console.cloud.google.com/apis/library/containerregistry.googleapis.com).  
 
 3. Use Docker to build your application container:  
