@@ -57,8 +57,8 @@ kubectl apply -f serviceaccount.yaml
     ```
 
 1.  After the build has completed and the container is pushed to Docker Hub, you
-    can deploy the function into your cluster. Ensure that the container image
-    value in function.yaml matches the container you built in the previous step.
+    can deploy the function into your cluster. **Ensure that the container image
+    value in function.yaml matches the container you built in the previous step.**
     Apply the configuration using `kubectl`:
 
     ```shell

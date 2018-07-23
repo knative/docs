@@ -13,27 +13,15 @@
 # limitations under the License.
 
 apiVersion: serving.knative.dev/v1alpha1
-kind: Configuration
+kind: Service
 metadata:
   name: k8s-events
   namespace: default
 spec:
-  revisionTemplate:
-    metadata:
-      labels:
-        knative.dev/type: container
-    spec:
-      container:
-        # Replace this image with your {username}/k8s-events container
-        image: github.com/knative/docs/eventing/sample/k8s-events
-
----
-apiVersion: serving.knative.dev/v1alpha1
-kind: Route
-metadata:
-  name: k8s-events
-  namespace: default
-spec:
-  traffic:
-  - configurationName: k8s-events
-    percent: 100
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            # Replace this image with your {username}/k8s-events container
+            image: github.com/knative/eventing/sample/k8s_events_function
