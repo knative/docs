@@ -24,4 +24,4 @@ spec:
         spec:
           container:
             # Replace this image with your {username}/k8s-events container
-            image: github.com/knative/eventing/sample/k8s_events_function
+            image: github.com/knative/docs/eventing/sample/k8s_events_function
