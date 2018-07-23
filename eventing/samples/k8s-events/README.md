@@ -46,11 +46,11 @@ kubectl apply -f serviceaccount.yaml
 
 1.  Use Docker to build the sample code into a container. To build and push with
     Docker Hub, run these commands replacing {username} with your Docker Hub
-    username.
+    username. Run the following from the _root_ of the `knative/docs` repo:
 
     ```shell
     # Build the container on your local machine
-    docker build -t {username}/k8s-events .
+    docker build -t {username}/k8s-events --file=eventing/samples/k8s-events/Dockerfile .
 
     # Push the container to docker registry
     docker push {username}/k8s-events
@@ -62,7 +62,7 @@ kubectl apply -f serviceaccount.yaml
     Apply the configuration using `kubectl`:
 
     ```shell
-    kubectl apply -f function.yaml
+    kubectl apply -f eventing/samples/k8s-events/function.yaml
     ```
 
 1.  Check that your service is running using:
@@ -76,10 +76,10 @@ kubectl apply -f serviceaccount.yaml
 1.  Create the flow sending Kubernetes Events to the service:
 
     ```shell
-    kubectl apply -f flow.yaml
+    kubectl apply -f eventing/samples/k8s-events/flow.yaml
     ```
 
-1.  You can read the funciton logs using Kibana. To access kibana, you need to
+1.  You can read the function logs using Kibana. To access Kibana, you need to
     run `kubectl proxy` to start a local proxy to access the logging stack:
 
     ```
