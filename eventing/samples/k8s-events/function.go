@@ -33,5 +33,6 @@ func handler(ctx context.Context, e *corev1.Event) {
 }
 
 func main() {
+	log.Print("Ready and listening on port 8080")
 	log.Fatal(http.ListenAndServe(":8080", event.Handler(handler)))
 }
