@@ -43,6 +43,12 @@ CTRL+C when it's done.
 
 We will create two indexes in ElasticSearch - one for application logs and one for request traces.
 
+* To open the Kibana UI (the visualization tool for [Elasticsearch](https://info.elastic.co),
+enter the following command:
+```
+kubectl proxy
+```
+
 * To create the indexes, open [Kibana Index Management UI](http://localhost:8001/api/v1/namespaces/monitoring/services/kibana-logging/proxy/app/kibana#/management/kibana/index). *It might take a couple of minutes for the proxy to work the first time after the installation*.
 
 * Within the "Configure an index pattern" page, enter `logstash-*` to `Index pattern` and select `@timestamp` from `Time Filter field name` and click on `Create` button.
@@ -61,9 +67,9 @@ Enter `zipkin*` to `Index pattern` and select `timestamp_millis` from `Time Filt
 
 If your Knative Serving is not built on a Google Cloud Platform (GCP) based cluster or you want to send logs to another GCP project, you need to build your own Fluentd image and modify the configuration first. See
 
-1. [Fluentd image on Knative Serving](/image/fluentd/README.md)
-2. [Setting up a logging plugin](setting-up-a-logging-plugin.md)
-3. Install monitoring components:  
+1. Install [Fluentd image on Knative Serving](https://github.com/knative/serving/blob/master/image/fluentd/README.md).
+2. [Set up a logging plugin](setting-up-a-logging-plugin.md).
+3. Install Knative monitoring components:  
   ```
   kubectl apply -R -f config/monitoring/100-common \
       -f config/monitoring/150-stackdriver-prod \
