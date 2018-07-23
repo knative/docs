@@ -233,7 +233,7 @@ func logHandler(client *http.Client) http.HandlerFunc {
 			"foo":  "bar",
 			"time": timestamp.String(),
 			// Cluster operator can configure which field is used as time key and what
-			// the format is. For example, in config/monitoring/150-elasticsearch-dev/100-fluentd-configmap.yaml,
+			// the format is. For example, in config/monitoring/150-elasticsearch/100-fluentd-configmap.yaml,
 			// fluentd-time is the reserved key to tell fluentd the logging time. It
 			// must be in the format of RFC3339Nano, i.e. %Y-%m-%dT%H:%M:%S.%NZ.
 			// Without this, fluentd uses the time when it collect the log as an
