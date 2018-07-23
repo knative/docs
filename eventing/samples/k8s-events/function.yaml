@@ -15,7 +15,7 @@
 apiVersion: serving.knative.dev/v1alpha1
 kind: Service
 metadata:
-  name: k8s-events
+  name: read-k8s-events
   namespace: default
 spec:
   runLatest:
