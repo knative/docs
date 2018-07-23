@@ -32,7 +32,7 @@ spec:
         # before the user container is ready.
         readinessProbe:
           httpGet:
-            path: "primes/4"
+            path: "/"
           periodSeconds: 2
 ---
 apiVersion: serving.knative.dev/v1alpha1
