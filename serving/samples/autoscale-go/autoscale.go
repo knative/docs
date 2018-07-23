@@ -16,7 +16,6 @@ limitations under the License.
 package main
 
 import (
-	"log"
 	"math"
 	"net/http"
 	"strconv"
@@ -77,23 +76,23 @@ func bloat(mb int) {
 	b := make([]byte, mb*1024*1024)
 	b[0] = 1
 	b[len(b)-1] = 1
-	log.Printf("Allocated %v Mb of memory.", mb)
+	// log.Printf("Allocated %v Mb of memory.", mb)
 }
 
 func prime(max int) {
 	p := allPrimes(max)
 	if len(p) > 0 {
-		log.Printf("The largest prime less than %v is %v.", max, p[len(p)-1])
+		// log.Printf("The largest prime less than %v is %v.", max, p[len(p)-1])
 	} else {
-		log.Printf("There are no primes smaller than %v.", max)
+		// log.Printf("There are no primes smaller than %v.", max)
 	}
 }
 
 func sleep(ms int) {
-	start := time.Now().UnixNano()
+	// start := time.Now().UnixNano()
 	time.Sleep(time.Duration(ms) * time.Millisecond)
-	end := time.Now().UnixNano()
-	log.Printf("Slept for %.2f milliseconds.", float64(end-start)/1000000)
+	// end := time.Now().UnixNano()
+	// log.Printf("Slept for %.2f milliseconds.", float64(end-start)/1000000)
 }
 
 func parseIntParam(r *http.Request, param string) (int, bool, error) {
@@ -111,7 +110,6 @@ func parseIntParam(r *http.Request, param string) (int, bool, error) {
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	log.Println("Serving request")
 	// Validate inputs.
 	ms, hasMs, err := parseIntParam(r, "sleep")
 	if err != nil {
