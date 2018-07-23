@@ -1,13 +1,15 @@
 # Thumbnailer Demo
 
 This is a walk-through example that demonstrates deploying a dockerized
-application to the Knative Serving service. In this demo we will use a sample
-`golang` application that takes a video URL as an input and generates its thumbnail image.
+application to Knative Serving. In this demo we will use a sample `golang`
+application that takes a video URL as an input and generates its thumbnail image.
 
 ## Before you begin
 
 * [Install Knative Serving](../../../install/README.md)
-* [Install Go](https://golang.org/doc/install) (if you want to run and test the sample app locally)
+And if you want to run the app locally:
+* [Install Go](https://golang.org/doc/install)
+* [Install `ffmpeg`](https://www.ffmpeg.org/) 
 
 ## Sample code
 
@@ -46,8 +48,6 @@ go test ./...
 You can now run the `rester-tester` application locally in `go` or using Docker.
 
 **Local**
-
-> Note: To run the application locally in `go`, you will need [FFmpeg](https://www.ffmpeg.org/) in your path.
 
 To run the app:
 
