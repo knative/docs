@@ -1,18 +1,27 @@
-# Start from a Debian image with the latest version of Go installed
-# and a workspace (GOPATH) configured at /go.
-FROM golang
+# Copyright 2018 The Knative Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
-# Copy the local package files to the container's workspace.
-ADD . /go/src/k8s-events
+FROM golang AS builder
 
-# Build the event processing function command inside the container.
-# (You may fetch or manage dependencies here,
-# either manually or with a tool like "godep".)
-RUN go get k8s.io/api/core/v1 github.com/knative/eventing/pkg/event
-RUN go install k8s-events
+WORKDIR /go/src/github.com/knative/docs/
+ADD . /go/src/github.com/knative/docs/
 
-# Run the helloworld command by default when the container starts.
-ENTRYPOINT /go/bin/k8s-events
+RUN CGO_ENABLED=0 go build ./eventing/samples/k8s-events
 
-# Document that the service listens on port 8080.
+FROM gcr.io/distroless/base
+
+COPY --from=builder /go/src/github.com/knative/docs/k8s-events /sample
+
+ENTRYPOINT ["/sample"]
 EXPOSE 8080
