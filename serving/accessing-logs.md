@@ -16,8 +16,7 @@ enter the following command:
   Kibana UI is exposed only within the cluster.
 
 * Navigate to the
-[Kibana UI](http://localhost:8001/api/v1/namespaces/monitoring/services/kibana-logging/proxy/app/kibana)
- (*It might take a couple of minutes for the proxy to work*).
+[Kibana UI](http://localhost:8001/api/v1/namespaces/monitoring/services/kibana-logging/proxy/app/kibana). *It might take a couple of minutes for the proxy to work*.
 
   The Discover tab of the Kibana UI looks like this:
 
@@ -25,6 +24,17 @@ enter the following command:
 
   You can change the time frame of logs Kibana displays in the upper right corner
   of the screen. The main search bar is across the top of the Discover page.
+
+### Create Elasticsearch Indices
+
+We will create two indexes in ElasticSearch - one for application logs and one for request traces.
+
+* Within the "Configure an index pattern" page, enter `logstash-*` to `Index pattern` and select `@timestamp` from `Time Filter field name` and click on `Create` button.
+
+![Create logstash-* index](images/kibana-landing-page-configure-index.png)
+
+* To create the second index, select `Create Index Pattern` button on top left of the page.
+Enter `zipkin*` to `Index pattern` and select `timestamp_millis` from `Time Filter field name` and click on `Create` button.
 
 * As more logs are ingested, new fields will be discovered. To have them indexed,
 go to Management > Index Patterns > Refresh button (on top right) > Refresh
