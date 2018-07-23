@@ -137,11 +137,11 @@ spec:
 And of course create the respectve `ConfigMaps`:
 
 ```
-curl https://storage.googleapis.com/knative-releases/serving/latest/istio.yaml -o istio.yaml
+curl https://storage.googleapis.com/knative-releases/serving/latest/istio.yaml
 kubectl create configmap istio-chart-080 --from-file=istio.yaml
 
-curl https://storage.googleapis.com/knative-releases/serving/latest/release.yaml -o knative.yaml
-kubectl create configmap knative-chart-001 --from-file=knative.yaml
+curl https://storage.googleapis.com/knative-releases/serving/latest/release.yaml
+kubectl create configmap knative-chart-001 --from-file=release.yaml
 ```
 
 With this preparation, your team can just activate Knative in the "Addons" tab
