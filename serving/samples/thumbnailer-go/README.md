@@ -84,7 +84,7 @@ the app locally and then deploy it.
 
 ### Deploying a prebuilt image
 
-You can deploy a prebuilt image of the `rester-tester` app to the Knative Serving service using
+You can deploy a prebuilt image of the `rester-tester` app to Knative Serving using
 `kubectl` and the included `sample-prebuilt.yaml` file:
 
 ```
@@ -169,17 +169,13 @@ your services will never get an external IP address. In that case, use the istio
 export SERVICE_IP=$(kubectl get po -l knative=ingressgateway -n istio-system -o 'jsonpath={.items[0].status.hostIP}'):$(kubectl get svc knative-ingressgateway -n istio-system -o 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
 ```
 
-> To make the JSON service responses more readable, this guide uses
-  [jq](https://stedolan.github.io/jq/). If you don't want to install
-  it, remove `| jq '.'` from the following commands.
-
 ### Ping
 
 Let's start with a simple `ping` to make sure the app is deployed:
 
 ```
 curl -H "Content-Type: application/json" -H "Host: $SERVICE_HOST" \
-  http://$SERVICE_IP/ping | jq '.'
+  http://$SERVICE_IP/ping
 ```
 
 ### Video Thumbnail
@@ -188,7 +184,7 @@ Now, supply the video URL and generate a video thumbnail:
 
 ```
 curl -X POST -H "Content-Type: application/json" -H "Host: $SERVICE_HOST" \
-  http://$SERVICE_IP/image -d '{"src":"https://www.youtube.com/watch?v=DjByja9ejTQ"}'  | jq '.'
+  http://$SERVICE_IP/image -d '{"src":"https://www.youtube.com/watch?v=DjByja9ejTQ"}'
 ```
 
 You can then download the newly created thumbnail. Make sure to replace the
