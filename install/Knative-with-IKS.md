@@ -152,7 +152,6 @@ rerun the command to see the current status.
     ```bash
     kubectl apply -f https://storage.googleapis.com/knative-releases/serving/latest/release.yaml
     ```
-
 1.  Monitor the Knative components until all of the components show a `STATUS`
     of `Running`:
     ```bash
