@@ -16,7 +16,7 @@ Run:
 
 ```shell
 kubectl apply -R -f config/monitoring/100-common \
-    -f config/monitoring/150-elasticsearch-prod \
+    -f config/monitoring/150-elasticsearch \
     -f third_party/config/monitoring/common \
     -f third_party/config/monitoring/elasticsearch \
     -f config/monitoring/200-common \
@@ -62,7 +62,7 @@ configuration first. See
 
 ```shell
 kubectl apply -R -f config/monitoring/100-common \
-    -f config/monitoring/150-stackdriver-prod \
+    -f config/monitoring/150-stackdriver \
     -f third_party/config/monitoring/common \
     -f config/monitoring/200-common \
     -f config/monitoring/200-common/100-istio.yaml
