@@ -62,7 +62,7 @@ func get(url string, client *http.Client, report chan *result) {
 	result.success = true
 }
 
-func reporter(report chan *result, inflight *int64) {
+func reporter(stopCh <-chan time.Time, report chan *result, inflight *int64) {
 	tickerCh := time.NewTicker(time.Second).C
 	var (
 		total       int64
@@ -73,8 +73,10 @@ func reporter(report chan *result, inflight *int64) {
 	fmt.Println("REQUEST STATS:")
 	for {
 		select {
+		case <-stopCh:
+			return
 		case <-tickerCh:
-			fmt.Printf("Total: %v\tInflight: %v\tDone: %v", total, atomic.LoadInt64(inflight), count)
+			fmt.Printf("Total: %v\tInflight: %v\tDone: %v ", total, atomic.LoadInt64(inflight), count)
 			if count > 0 {
 				fmt.Printf("\tSuccess Rate: %.2f%%\tAvg Latency: %.4f sec\n", float64(successful)/float64(count)*100, float64(nanoseconds)/float64(count)/(1000000000))
 			} else {
@@ -107,19 +109,26 @@ func main() {
 		"http://%v:%v?sleep=%v&prime=%v&bloat=%v",
 		*ip, *port, *sleep, *prime, *bloat)
 	client := &http.Client{}
+
+	stopCh := time.After(*duration)
 	report := make(chan *result, 10000)
 	var inflight int64
-	go reporter(report, &inflight)
+
+	go reporter(stopCh, report, &inflight)
 
 	qpsCh := time.NewTicker(time.Duration(time.Second.Nanoseconds() / int64(*qps))).C
 	for {
-		<-qpsCh
-		if atomic.LoadInt64(&inflight) < int64(*concurrency) {
-			atomic.AddInt64(&inflight, 1)
-			go func() {
-				get(url, client, report)
-				atomic.AddInt64(&inflight, -1)
-			}()
+		select {
+		case <-stopCh:
+			return
+		case <-qpsCh:
+			if atomic.LoadInt64(&inflight) < int64(*concurrency) {
+				atomic.AddInt64(&inflight, 1)
+				go func() {
+					get(url, client, report)
+					atomic.AddInt64(&inflight, -1)
+				}()
+			}
 		}
 	}
 }
