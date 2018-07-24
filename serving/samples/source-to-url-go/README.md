@@ -163,7 +163,7 @@ container for the application.
      - lastTransitionTime: 2018-07-11T20:50:56Z
        status: "True"
        type: Ready
-     domain: app-from-source.default.dibble.cloud
+     domain: app-from-source.default.example.com
      latestCreatedRevisionName: app-from-source-00007
      latestReadyRevisionName: app-from-source-00007
      observedGeneration: 10
