@@ -95,7 +95,11 @@ Build the application container and publish it to a container registry:
 
 ## Analysis
 
-You can view the autoscaler debugging dashboard at ... DASHBOARD LINK GOES HERE WITH SCREENSHOT
+View the Knative Serving Scaling and Request dashboards.
+
+![scale dashboard](scale-dashboard.png)
+
+![request dashboard](request-dashboard.png)
 
 ### Algorithm
 
