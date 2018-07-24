@@ -7,7 +7,6 @@ grants.
 *   [Role Summary](#role-summary)
 *   [Collaborator](#collaborator)
 *   [Member](#member)
-*   [Reviewer](#reviewer)
 *   [Approver](#approver)
 *   [Lead](#lead)
 *   [Administrator](#administrator)
