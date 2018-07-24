@@ -82,13 +82,9 @@ IP address created by Knative.
    new, it can take sometime for the service to get asssigned an external IP address.
 
     ```shell
-    kubectl get svc knative-ingressgateway -n istio-system
-
-    NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
-    knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
+    export IP_ADDRESS=$(kubectl get svc knative-ingressgateway -n istio-system -o 'jsonpath={.status.loadBalancer.ingress[0].ip}')
 
     ```
-    Take note of the `EXTERNAL-IP` address.
     
     
    > Note: if you use minikube or a baremetal cluster that has no external load balancer, the
@@ -101,10 +97,9 @@ IP address created by Knative.
 1. To find the host URL for your service, enter:
 
     ```shell
-    kubectl get services.serving.knative.dev helloworld-go  -o=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
-    NAME                DOMAIN
-    helloworld-go       helloworld-go.default.example.com
+    export HOST_URL=$(kubectl get services.serving.knative.dev helloworld-go  -o jsonpath='{.status.domain}')
     ```
+
     If you changed the name from `helloworld-go` to something else when creating
     the the `.yaml` file, replace `helloworld-go` in the above command with the
     name you entered.
@@ -118,9 +113,10 @@ IP address created by Knative.
    request to interact with your application.
 
     ```shell
-    curl -H "Host: helloworld-go.default.example.com" http://${IP_ADDRESS}
+    curl -H "Host: ${HOST_URL}" http://${IP_ADDRESS}
     Hello World: Go Sample v1!
     ```
+
     It can take a few seconds for Knative to scale up your application and return
     a response.
 
