@@ -71,7 +71,7 @@ Knative depends on Istio.
 
 1.  Install Istio:
     ```bash
-    kubectl apply -f https://storage.googleapis.com/knative-releases/latest/istio.yaml
+    kubectl apply -f https://storage.googleapis.com/knative-releases/serving/latest/istio.yaml
     ```
 2.  Label the default namespace with `istio-injection=enabled`:
     ```bash
@@ -91,7 +91,7 @@ rerun the command to see the current status.
 
 1.  Next, we will install [Knative Serving](https://github.com/knative/serving)
     and its dependencies:
-    `bash kubectl apply -f https://storage.googleapis.com/knative-releases/latest/release.yaml`
+    `bash kubectl apply -f https://storage.googleapis.com/knative-releases/serving/latest/release.yaml`
 1.  Monitor the Knative components, until all of the components show a `STATUS`
     of `Running`: `bash kubectl get pods -n knative-serving`
 
@@ -137,11 +137,11 @@ spec:
 And of course create the respectve `ConfigMaps`:
 
 ```
-curl https://storage.googleapis.com/knative-releases/latest/istio.yaml -o istio.yaml
+curl https://storage.googleapis.com/knative-releases/serving/latest/istio.yaml
 kubectl create configmap istio-chart-080 --from-file=istio.yaml
 
-curl https://storage.googleapis.com/knative-releases/latest/release.yaml -o knative.yaml
-kubectl create configmap knative-chart-001 --from-file=knative.yaml
+curl https://storage.googleapis.com/knative-releases/serving/latest/release.yaml
+kubectl create configmap knative-chart-001 --from-file=release.yaml
 ```
 
 With this preparation, your team can just activate Knative in the "Addons" tab
