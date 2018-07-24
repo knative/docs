@@ -14,9 +14,9 @@ native development:
       producer
 
 The above concerns are consistent with the
-[design goals](https://github.com/cloudevents/spec/blob/master/spec.md#design-goals)
-of CloudEvents, a common specification for cross-service interoperability being
-developed by the CNCF Serverless WG.
+[design goals of CloudEvents](https://github.com/cloudevents/spec/blob/master/spec.md#design-goals),
+a common specification for cross-service interoperability being developed by the
+CNCF Serverless WG.
 
 > **Note**: The Eventing repo is very much a work-in-progress. See the
 > [list of Known Issues](https://github.com/knative/eventing/issues?q=is%3Aissue+is%3Aopen+label%3A%22Known+Issue%22)
