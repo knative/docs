@@ -1,6 +1,6 @@
 # Autoscale Sample
 
-A demonstration of the autoscaling capabilities of an Knative Serving Revision.
+A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 
 ## Prerequisites
 
@@ -56,7 +56,7 @@ Build the application container and publish it to a container registry:
 
 1. Find the ingress hostname and IP and export as an environment variable:
    ```
-   export SERVICE_IP=`kubectl get svc knative-ingressgateway -n istio-system -o jsonpath="{.status.loadBalancer.ingress[*].ip}"`
+   export IP_ADDRESS=`kubectl get svc knative-ingressgateway -n istio-system -o jsonpath="{.status.loadBalancer.ingress[*].ip}"`
    ```
 
 ## View the Autoscaling Capabilities
@@ -83,7 +83,9 @@ Build the application container and publish it to a container registry:
    Total: 108      Inflight: 10    Done: 39        Success Rate: 100.00%   Avg Latency: 0.2598 sec
    Total: 148      Inflight: 10    Done: 40        Success Rate: 100.00%   Avg Latency: 0.2565 sec
    Total: 185      Inflight: 10    Done: 37        Success Rate: 100.00%   Avg Latency: 0.2624 sec
+   ...
    ```
+   > Note: Use CTRL+C to exit the load test.
 
 1. Watch the Knative Serving deployment pod count increase.
    ```
