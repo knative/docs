@@ -24,6 +24,11 @@ Knative components on the following platforms:
 * [Knative Install on Minikube](Knative-with-Minikube.md)
 * [Knative Install on Pivotal Container Service](Knative-with-PKS.md)
 
+If you already have a Kubernetes cluster you're comfortable installing
+*alpha* software on, use the following instructions:
+
+* [Knative Install on any Kubernetes](Knative-with-any-k8s.md)
+
 ## Deploying an app
 
 Now you're ready to deploy an app:
