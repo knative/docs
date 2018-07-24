@@ -103,7 +103,14 @@ View the Knative Serving Scaling and Request dashboards.
 
 ### Algorithm
 
-Knative Serving autoscaling is based on the average number of in-flight requests per pod (concurrency). The system has a default target concurency of 1.0. For example, if there are 100 clients making requests at any given time, each of which takes 100 ms to complete, the system will determine that at least 10 pods are required to serve the request load.
+Knative Serving autoscaling is based on the average number of in-flight requests per pod (concurrency). The system has a default [target concurency of 1.0](https://github.com/knative/serving/blob/5441a18b360805d261528b2ac8ac13124e826946/config/config-autoscaler.yaml#L27).
+
+For example, if a Revision is receiving 35 requests per second, each of which takes about about .25 seconds, Knative Serving will determine the Revision needs about 9 pods
+
+```
+35 * .25 = 8.75
+ceil(8.75) = 9
+```
 
 ### Other Experiments
 
@@ -117,12 +124,20 @@ Knative Serving autoscaling is based on the average number of in-flight requests
    go run serving/samples/autoscale-go/test/test.go -qps 100 -concurrency 9999
    ```
 
-
 1. Maintain 100 qps with slow requests.
    ```
    go run serving/samples/autoscale-go/test/test.go -qps 100 -concurrency 9999 -sleep 500
    ```
 
+1. Heavy CPU usage.
+   ```
+   go run serving/samples/autoscale-go/test/test.go -qps 9999 -concurrency 10 -prime 40000000
+   ```
+
+1. Heavy memory usage.
+   ```
+   go run serving/samples/autoscale-go/test/test.go -qps 9999 -concurrency 5 -bloat 1000
+   ```
 
 ## Cleanup
 
