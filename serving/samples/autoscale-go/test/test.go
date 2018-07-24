@@ -74,7 +74,7 @@ func reporter(report chan *result, inflight *int64) {
 	for {
 		select {
 		case <-tickerCh:
-			fmt.Printf("Total: %v\tInflight: %v\tCount: %v", total, atomic.LoadInt64(inflight), count)
+			fmt.Printf("Total: %v\tInflight: %v\tDone: %v", total, atomic.LoadInt64(inflight), count)
 			if count > 0 {
 				fmt.Printf("\tSuccess Rate: %.2f%%\tAvg Latency: %.4f sec\n", float64(successful)/float64(count)*100, float64(nanoseconds)/float64(count)/(1000000000))
 			} else {

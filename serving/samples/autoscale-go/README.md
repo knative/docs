@@ -51,7 +51,7 @@ Build the application container and publish it to a container registry:
 
 1. Deploy the Knative Serving sample:
    ```
-   kubectl apply -f serving/samples/autoscale-go/sample.yaml
+   kubectl apply -f serving/samples/autoscale-go/service.yaml
    ```
 
 1. Find the ingress hostname and IP and export as an environment variable:
@@ -61,22 +61,28 @@ Build the application container and publish it to a container registry:
 
 ## View the Autoscaling Capabilities
 
-1. Request the largest prime less than 40,000,000 from the autoscale app.  Note that it consumes about 1 cpu/sec.
+1. Make a request to the autoscale app to see it consume some resources.
    ```
-   time curl --header "Host: autoscale-go.default.example.com" http://${IP_ADDRESS?}/primes/40000000
+   curl --header "Host: autoscale-go.default.example.com" "http://${IP_ADDRESS?}?sleep=100&prime=1000000&bloat=50"
+   ```
+   ```
+   Allocated 50 Mb of memory.
+   The largest prime less than 1000000 is 999983.
+   Slept for 100.13 milliseconds.
    ```
 
-1. Ramp up traffic on the autoscale app (about 300 QPS):
+1. Ramp up traffic to maintain 10 in-flight requests.
+
    ```
-   kubectl delete namespace hey --ignore-not-found && kubectl create namespace hey
+   go run serving/samples/autoscale-go/test/test.go -sleep 100 -prime 1000000 -bloat 50 -qps 9999 -concurrency 10
    ```
    ```
-   for i in `seq 2 2 60`; do
-       kubectl -n hey run hey-$i --image josephburnett/hey --restart Never -- \
-         -n 999999 -c $i -z 2m -host $SERVICE_HOST \
-         "http://${SERVICE_IP?}/primes/40000000"
-       sleep 1
-   done
+   REQUEST STATS:
+   Total: 34       Inflight: 10    Done: 34        Success Rate: 100.00%   Avg Latency: 0.2584 sec
+   Total: 69       Inflight: 10    Done: 35        Success Rate: 100.00%   Avg Latency: 0.2750 sec
+   Total: 108      Inflight: 10    Done: 39        Success Rate: 100.00%   Avg Latency: 0.2598 sec
+   Total: 148      Inflight: 10    Done: 40        Success Rate: 100.00%   Avg Latency: 0.2565 sec
+   Total: 185      Inflight: 10    Done: 37        Success Rate: 100.00%   Avg Latency: 0.2624 sec
    ```
 
 1. Watch the Knative Serving deployment pod count increase.
@@ -84,20 +90,40 @@ Build the application container and publish it to a container registry:
    kubectl get deploy --watch
    ```
    > Note: Use CTRL+C to exit watch mode.
-   
-1. Watch the pod traffic ramp up.
+
+## Analysis
+
+You can view the autoscaler debugging dashboard at ... DASHBOARD LINK GOES HERE WITH SCREENSHOT
+
+### Algorithm
+
+Knative Serving autoscaling is based on the average number of in-flight requests per pod (concurrency). The system has a default target concurency of 1.0. For example, if there are 100 clients making requests at any given time, each of which takes 100 ms to complete, the system will determine that at least 10 pods are required to serve the request load.
+
+### Other Experiments
+
+1. Maintain 100 concurrent requests.
    ```
-   kubectl get pods -n hey --show-all --watch
+   go run serving/samples/autoscale-go/test/test.go -qps 9999 -concurrency 100
    ```
 
-1. Look at the latency, requests/sec and success rate of each pod.
+1. Maintain 100 qps with fast requests.
    ```
-   for i in `seq 2 2 60`; do kubectl -n hey logs hey-$i ; done
+   go run serving/samples/autoscale-go/test/test.go -qps 100 -concurrency 9999
    ```
+
+
+1. Maintain 100 qps with slow requests.
+   ```
+   go run serving/samples/autoscale-go/test/test.go -qps 100 -concurrency 9999 -sleep 500
+   ```
+
 
 ## Cleanup
 
 ```
-kubectl delete namespace hey
 kubectl delete -f serving/samples/autoscale-go/sample.yaml
 ```
+
+## Further reading
+
+1. [Autoscaling Developer Documentation](https://github.com/knative/serving/blob/master/docs/scaling/DEVELOPMENT.md)
