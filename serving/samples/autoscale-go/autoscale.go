@@ -16,16 +16,18 @@ limitations under the License.
 package main
 
 import (
-	"encoding/json"
+	"fmt"
 	"math"
 	"net/http"
 	"strconv"
+	"sync"
+	"time"
 )
 
 // Algorithm from https://stackoverflow.com/a/21854246
 
 // Only primes less than or equal to N will be generated
-func primes(N int) []int {
+func allPrimes(N int) []int {
 
 	var x, y, n int
 	nsqrt := math.Sqrt(float64(N))
@@ -71,22 +73,87 @@ func primes(N int) []int {
 	return primes
 }
 
-const primesPath = "/primes/"
+func bloat(mb int) string {
+	b := make([]byte, mb*1024*1024)
+	b[0] = 1
+	b[len(b)-1] = 1
+	return fmt.Sprintf("Allocated %v Mb of memory.\n", mb)
+}
+
+func prime(max int) string {
+	p := allPrimes(max)
+	if len(p) > 0 {
+		return fmt.Sprintf("The largest prime less than %v is %v.\n", max, p[len(p)-1])
+	} else {
+		return fmt.Sprintf("There are no primes smaller than %v.\n", max)
+	}
+}
+
+func sleep(ms int) string {
+	start := time.Now().UnixNano()
+	time.Sleep(time.Duration(ms) * time.Millisecond)
+	end := time.Now().UnixNano()
+	return fmt.Sprintf("Slept for %.2f milliseconds.\n", float64(end-start)/1000000)
+}
+
+func parseIntParam(r *http.Request, param string) (int, bool, error) {
+	if value := r.URL.Query().Get(param); value != "" {
+		i, err := strconv.Atoi(value)
+		if err != nil {
+			return 0, false, err
+		}
+		if i == 0 {
+			return i, false, nil
+		}
+		return i, true, nil
+	}
+	return 0, false, nil
+}
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	param := r.URL.Path[len(primesPath):]
-	n, err := strconv.Atoi(param)
+	// Validate inputs.
+	ms, hasMs, err := parseIntParam(r, "sleep")
 	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-	} else {
-		w.WriteHeader(http.StatusOK)
-		p := primes(n)
-		json.NewEncoder(w).Encode(p[len(p)-1:])
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	max, hasMax, err := parseIntParam(r, "prime")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	mb, hasMb, err := parseIntParam(r, "bloat")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	// Consume time, cpu and memory in parallel.
+	var wg sync.WaitGroup
+	defer wg.Wait()
+	if hasMs {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			fmt.Fprint(w, sleep(ms))
+		}()
+	}
+	if hasMax {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			fmt.Fprint(w, prime(max))
+		}()
+	}
+	if hasMb {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			fmt.Fprint(w, bloat(mb))
+		}()
 	}
 }
 
 func main() {
-	http.HandleFunc(primesPath, handler)
+	http.HandleFunc("/", handler)
 	http.ListenAndServe(":8080", nil)
 }
