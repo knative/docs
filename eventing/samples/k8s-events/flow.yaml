@@ -21,12 +21,6 @@ spec:
   serviceAccountName: feed-sa
   trigger:
     eventType: dev.knative.k8s.event
-    # This is kind of superfluous due to parameters, but the current
-    # feed model still requires a resource
-    # Future revisions may opt to have a meaningful resource string
-    # that allows users to scope which objects they choose based on
-    # a templatized self-link. E.g. Configurations across all namespaces:
-    # /apis/serving.knative.dev/v1alpha1/namespaces/{namespace}/configurations/{config}
     resource: k8sevents/dev.knative.k8s.event
     service: k8sevents
     parameters:

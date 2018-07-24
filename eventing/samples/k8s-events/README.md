@@ -14,7 +14,7 @@ Knative serving service, so it scales automatically as event traffic increases.
   and a Docker Hub account configured (you'll use it for a container registry).
 - The core Knative eventing tools installed. You can install them with:
   ```shell
-  kubectl apply -f https://storage.googleapis.com/knative-releases/latest/release-eventing.yaml
+  kubectl apply -f https://storage.googleapis.com/knative-releases/eventing/latest/release.yaml
   ```
 
 ## Configuring Knative
@@ -23,8 +23,8 @@ To use this sample, you'll need to install the `stub` ClusterBus and the
 `k8sevents` EventSource.
 
 ```shell
-kubectl apply -f https://storage.googleapis.com/knative-releases/latest/release-eventing-clusterbus-stub.yaml
-kubectl apply -f https://storage.googleapis.com/knative-releases/latest/release-eventing-source-k8sevents.yaml
+kubectl apply -f https://storage.googleapis.com/knative-releases/eventing/latest/release-clusterbus-stub.yaml
+kubectl apply -f https://storage.googleapis.com/knative-releases/eventing/latest/release-source-k8sevents.yaml
 ```
 
 ## Granting permissions
@@ -45,7 +45,7 @@ kubectl apply -f serviceaccount.yaml
 ## Build and deploy the sample
 
 1.  Use Docker to build the sample code into a container. To build and push with
-    Docker Hub, run these commands replacing {username} with your Docker Hub
+    Docker Hub, run these commands replacing `{username}` with your Docker Hub
     username. Run the following from the _root_ of the `knative/docs` repo:
 
     ```shell
@@ -58,8 +58,8 @@ kubectl apply -f serviceaccount.yaml
 
 1.  After the build has completed and the container is pushed to Docker Hub, you
     can deploy the function into your cluster. **Ensure that the container image
-    value in function.yaml matches the container you built in the previous step.**
-    Apply the configuration using `kubectl`:
+    value in `function.yaml` matches the container you built in the previous
+    step.** Apply the configuration using `kubectl`:
 
     ```shell
     kubectl apply -f eventing/samples/k8s-events/function.yaml
@@ -79,8 +79,10 @@ kubectl apply -f serviceaccount.yaml
     kubectl apply -f eventing/samples/k8s-events/flow.yaml
     ```
 
-1.  You can read the function logs using Kibana. To access Kibana, you need to
-    run `kubectl proxy` to start a local proxy to access the logging stack:
+1.  If you have the full knative install, you can read the function logs using
+    Kibana (see below if you are using a `lite` or `no-mon` install). To access
+    Kibana, you need to run `kubectl proxy` to start a local proxy to access the
+    logging stack:
 
     ```
     kubectl proxy
@@ -90,11 +92,20 @@ kubectl apply -f serviceaccount.yaml
     Then visit the
     [Kibana interface](http://localhost:8001/api/v1/namespaces/monitoring/services/kibana-logging/proxy/app/kibana#/discover%3F_g%3D%28%29%26_a%3D%28columns%3A%21%28log%29%2Cindex%3AAWSnR1TW-6k0tY2-zd9_%2Cinterval%3Aauto%2Cquery%3A%28query_string%3A%28query%3A%27kubernetes.container_name%3Auser-container+kubernetes.labels.serving_knative_dev%255C%252Fconfiguration%3Aread-k8s-events%27%29%29%2Csort%3A%21%28%27@timestamp%27%2Cdesc%29%29)
     and search for the following string (or use the link above):
+
     ```
     kubernetes.container_name:user-container kubernetes.labels.serving_knative_dev\/configuration:read-k8s-events
     ```
 
     ![Kibana log screenshot](Kibana.png)
+
+    If you are running a `lite` or `no-mon` install, you can use `kubectl logs` to read the logs from the pod:
+
+    ```shell
+    kubectl get pods
+    # Find a pod with read-k8s-events prefix
+    kubectl logs read-k8s-events-....
+    ```
 
 ## Understanding what happened
 
