@@ -68,11 +68,26 @@ available, but these are the key steps:
    cGFzc3dvcmQ=
    ```
 
+1. Create a new `Service Account` manifest which is used to link the build process to the secret.
+   Save this file as `service-account.yaml`:
+
+
+   ```yaml
+    apiVersion: v1
+    kind: ServiceAccount
+    metadata:
+      name: build-bot
+    secrets:
+    - name: basic-user-pass
+   ```
+
 1. After you have created the manifest file, apply it to your cluster with `kubectl`:
 
    ```shell
    $ kubectl apply -f docker-secret.yaml
    secret "basic-user-pass" created
+   $ kubectl apply -f service-account.yaml
+   serviceaccount "build-bot" created
    ```
 
 
@@ -101,6 +116,7 @@ container for the application.
      runLatest:
        configuration:
          build:
+           serviceAccountName: build-bot
            source:
              git:
                url: https://github.com/mchmarny/simple-app.git
@@ -121,7 +137,7 @@ container for the application.
    ```
 
 1. Apply this manifest using `kubectl`, and watch the results:
-   
+
    ```shell
    # Apply the manifest
    $ kubectl apply -f service.yaml
