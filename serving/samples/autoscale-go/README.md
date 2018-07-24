@@ -32,7 +32,7 @@ Build the application container and publish it to a container registry:
 1. Use Docker to build your application container:
    ```
    docker build \
-     --tag "${REPO}/serving/samples/autoscale-go" \
+     --tag "${REPO}/docs/serving/samples/autoscale-go" \
      --file=serving/samples/autoscale-go/Dockerfile .
    ```
 
@@ -44,7 +44,7 @@ Build the application container and publish it to a container registry:
 1. Replace the image reference with our published image:
    ```
    perl -pi -e \
-   "s@github.com/knative/docs/serving/samples/autoscale-go@${REPO}/serving/samples/autoscale-go@g" \
+   "s@github.com/knative/docs/serving/samples/autoscale-go@${REPO}/docs/serving/samples/autoscale-go@g" \
    serving/samples/autoscale-go/sample.yaml
    ```
 
