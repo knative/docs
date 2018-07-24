@@ -56,7 +56,6 @@ Build the application container and publish it to a container registry:
 
 1. Find the ingress hostname and IP and export as an environment variable:
    ```
-   export SERVICE_HOST=`kubectl get route autoscale-route -o jsonpath="{.status.domain}"`
    export SERVICE_IP=`kubectl get svc knative-ingressgateway -n istio-system -o jsonpath="{.status.loadBalancer.ingress[*].ip}"`
    ```
 

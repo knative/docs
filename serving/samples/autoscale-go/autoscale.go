@@ -16,6 +16,7 @@ limitations under the License.
 package main
 
 import (
+	"fmt"
 	"math"
 	"net/http"
 	"strconv"
@@ -72,27 +73,27 @@ func allPrimes(N int) []int {
 	return primes
 }
 
-func bloat(mb int) {
+func bloat(mb int) string {
 	b := make([]byte, mb*1024*1024)
 	b[0] = 1
 	b[len(b)-1] = 1
-	// log.Printf("Allocated %v Mb of memory.", mb)
+	return fmt.Sprintf("Allocated %v Mb of memory.\n", mb)
 }
 
-func prime(max int) {
+func prime(max int) string {
 	p := allPrimes(max)
 	if len(p) > 0 {
-		// log.Printf("The largest prime less than %v is %v.", max, p[len(p)-1])
+		return fmt.Sprintf("The largest prime less than %v is %v.\n", max, p[len(p)-1])
 	} else {
-		// log.Printf("There are no primes smaller than %v.", max)
+		return fmt.Sprintf("There are no primes smaller than %v.\n", max)
 	}
 }
 
-func sleep(ms int) {
-	// start := time.Now().UnixNano()
+func sleep(ms int) string {
+	start := time.Now().UnixNano()
 	time.Sleep(time.Duration(ms) * time.Millisecond)
-	// end := time.Now().UnixNano()
-	// log.Printf("Slept for %.2f milliseconds.", float64(end-start)/1000000)
+	end := time.Now().UnixNano()
+	return fmt.Sprintf("Slept for %.2f milliseconds.\n", float64(end-start)/1000000)
 }
 
 func parseIntParam(r *http.Request, param string) (int, bool, error) {
@@ -133,21 +134,21 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
-			sleep(ms)
+			fmt.Fprint(w, sleep(ms))
 		}()
 	}
 	if hasMax {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
-			prime(max)
+			fmt.Fprint(w, prime(max))
 		}()
 	}
 	if hasMb {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
-			bloat(mb)
+			fmt.Fprint(w, bloat(mb))
 		}()
 	}
 }
