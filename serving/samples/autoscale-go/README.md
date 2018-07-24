@@ -5,6 +5,7 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 ## Prerequisites
 
 1. A Kubernetes cluster with [Knative Serving](https://github.com/knative/docs/blob/master/install/README.md) installed.
+1. A [metrics installation](https://github.com/knative/docs/blob/master/serving/installing-logging-metrics-traces.md) for viewing scaling graphs (optional).
 1. Install [Docker](https://docs.docker.com/get-started/#prepare-your-docker-environment).
 1. Check out the code:
 ```
@@ -95,12 +96,6 @@ Build the application container and publish it to a container registry:
 
 ## Analysis
 
-View the Knative Serving Scaling and Request dashboards.
-
-![scale dashboard](scale-dashboard.png)
-
-![request dashboard](request-dashboard.png)
-
 ### Algorithm
 
 Knative Serving autoscaling is based on the average number of in-flight requests per pod (concurrency). The system has a default [target concurency of 1.0](https://github.com/knative/serving/blob/5441a18b360805d261528b2ac8ac13124e826946/config/config-autoscaler.yaml#L27).
@@ -111,6 +106,18 @@ For example, if a Revision is receiving 35 requests per second, each of which ta
 35 * .25 = 8.75
 ceil(8.75) = 9
 ```
+
+### Dashboards
+
+View the Knative Serving Scaling and Request dashboards (if configured).
+
+```
+kubectl port-forward -n monitoring $(kubectl get pods -n monitoring --selector=app=grafana --output=jsonpath="{.items..metadata.name}") 3000
+```
+
+![scale dashboard](scale-dashboard.png)
+
+![request dashboard](request-dashboard.png)
 
 ### Other Experiments
 
