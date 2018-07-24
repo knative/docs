@@ -33,8 +33,7 @@ EventSources.
 
 ## Installation
 
-You can install the Flows definition and the core controllers for Knative
-Eventing with the following command:
+You can install Knative Eventing with the following command:
 
 ```bash
 kubectl apply -f kubectl apply -f https://storage.googleapis.com/knative-releases/eventing/latest/release.yaml
@@ -58,9 +57,10 @@ three abstractions:
 
 ### Buses
 
-Buses provide a k8s-native abstraction over message buses like NATS or Kafka. At
-this level, the abstraction is basically publish-subscribe; events are published
-to a Channel, and Subscriptions route that Channel to interested parties.
+Buses provide a k8s-native abstraction over message buses like
+[NATS](https://nats.io) or [Kafka](https://kafka.apache.org/). At this level,
+the abstraction is basically publish-subscribe; events are published to a
+Channel, and Subscriptions route that Channel to interested parties.
 
 - **Channel** is a network endpoint which receives (and optionally persists)
   events using a Bus-specific implementation.
@@ -101,7 +101,8 @@ endpoint). Right now, we only have a few generic Sources, but we plan to add
 more interesting and specific Sources over time.
 
 - **Feed** is a primitive object defining a connection between an EventType and
-  the action (as an CloudEvents compatible HTTP endpoint).
+  the action (as an
+  [CloudEvents compatible HTTP endpoint](https://github.com/cloudevents/spec/blob/master/http-transport-binding.md)).
 - **EventType** and **ClusterEventType** descibe a specific set of events with a
   common schema which are emitted by an EventSource. EventType is
   namespace-scoped, while ClusterEventTypes are installed by an adminastrator
@@ -136,11 +137,11 @@ Lastly, we have a higher-level abstraction called a Flow which bundles up the
 specification from the Source to the endpoint, optionally allowing you to choose
 the Channel and Bus which the event is routed over. (Otherwise, there is a
 default Bus used to provision a Channel.)
+
 - **Flow** is the top-level user-facing concept in Eventing; it describes the
   desired path from an external Source of events to a destination that will
-  react to the events.
-There is only a single type of Flow, which is installed by the core Knative
-Eventing install.
+  react to the events. There is only a single type of Flow, which is installed
+  by the core Knative Eventing install.
 
 ## Supporting Libraries
 
@@ -151,9 +152,9 @@ delivered over HTTP. You can look at several of the samples for usage examples.
 
 ## Getting Started
 
-- [Setup Knative Serving](https://github.com/knative/docs/blob/master/install/README.md)
+- [Setup Knative Serving](../install/README.md)
 - [Install Eventing components](#installation)
-- [Run samples](https://github.com/knative/docs/tree/master/samples)
+- [Run samples](samples)
 
 ---
 
