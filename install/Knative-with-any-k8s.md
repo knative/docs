@@ -1,4 +1,4 @@
-# Knative Install on your own k8s cluster
+# Knative Install on a Kubernetes Cluster
 
 This guide walks you through the installation of the latest version of Knative
 using pre-built images.
