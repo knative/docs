@@ -37,6 +37,22 @@ See the following reference topics for information about each of the build compo
 * [ `Builder`](https://github.com/knative/docs/blob/master/build/builder-contract.md)
 * [`ServiceAccount`](https://github.com/knative/docs/blob/master/build/auth.md)
 
+## Install the Knative build component
+
+You have the option to install and use only the build component of Knative. Not
+every component of Knative is required to be installed if you do not need that
+functionality, for example Knative serving is not required to create and run
+builds.
+
+Before you can run a Knative build, you must install the Knative build
+component in your Kubernetes cluster:
+
+* For details about installing a new instance of Knative in your Kubernetes
+  cluster, see [Installing Knative](../install/README.md).
+
+* If you have a component of Knative installed and running, you can easily
+  [add and install the Knative build component](installing-build-component.md).
+
 ## Configuration syntax example
 
 Use the following example to understand the syntax and structure of the various components of a
