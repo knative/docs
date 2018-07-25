@@ -39,10 +39,9 @@ See the following reference topics for information about each of the build compo
 
 ## Install the Knative build component
 
-You have the option to install and use only the build component of Knative. Not
-every component of Knative is required to be installed if you do not need that
-functionality, for example Knative serving is not required to create and run
-builds.
+You have the option to install and use only the build component of Knative. You
+can install only the component of Knative if you need that functionality, for
+example Knative serving is not required to create and run builds.
 
 Before you can run a Knative build, you must install the Knative build
 component in your Kubernetes cluster:
