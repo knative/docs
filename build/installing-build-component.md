@@ -17,20 +17,24 @@ Knative build component, see [Installing Knative](../install/README.md).
 
 To add only the Knative build component to an existing installation:
 
-1. Run the `kubectl apply` command to install
+1. Run the
+   [`kubectl apply`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#apply)
+   command to install
    [Knative Build](https://github.com/knative/build) and its dependencies:
     ```bash
     kubectl apply -f https://storage.googleapis.com/knative-releases/build/latest/release.yaml
     ```
-1. Monitor the Knative build components until all of the components show a
-   `STATUS` of `Running`:
+1. Run the
+   [`kubectl get`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#get)
+   command to monitor the Knative build components until all of the components
+   show a `STATUS` of `Running`:
     ```bash
     kubectl get pods -n knative-build
     ```
 
     Tip: Instead of running the `kubectl get` command multiple times, you can
-    add `--watch` to view the component's status updates in real time.
-    Use CTRL + C to exit watch mode.
+    append the `--watch` flag to view the component's status updates in real
+    time. Use CTRL + C to exit watch mode.
 
 You are now ready to create and run Knative builds, see
 [Creating a simple Knative build](../build/creating-builds.md) to get started.

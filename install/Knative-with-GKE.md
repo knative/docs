@@ -183,7 +183,7 @@ cluster.
 Now that your cluster has Knative installed, you're ready to deploy an app or
 create a build.
 
-Depending on which Knative component you have installed, there are few options
+Depending on which Knative component you have installed, there are a few options
 for getting started:
 
 * You can follow the step-by-step
