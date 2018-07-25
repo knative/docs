@@ -134,7 +134,7 @@ spec:
   - revisionName: blue-green-demo-00001
     percent: 100 # All traffic still going to the first revision
   - revisionName: blue-green-demo-00002
-    percent: 0 # 50% of traffic routed to the second revision
+    percent: 0 # 0% of traffic routed to the second revision
     name: v2 # A named route
 ```
 
