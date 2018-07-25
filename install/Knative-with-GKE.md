@@ -60,16 +60,16 @@ You need a GCP project to create a Google Kubernetes Engine cluster.
       gcloud projects create my-knative-project --set-as-default
       ```
       Replace `my-knative-project` with the name you'd like to use for your GCP project.
-      
+
       You also need to [enable billing](https://cloud.google.com/billing/docs/how-to/manage-billing-account)
       for your new project.
-      
+
     * If you already have a GCP project, make sure your project is set as your
       `gcloud` default:
       ```bash
       gcloud config set project my-knative-project
       ```
-      
+
       > Tip: Enter `gcloud config get-value project` to view the ID of your default GCP project.
 1. Enable the necessary APIs:
    ```
@@ -135,32 +135,55 @@ rerun the command to see the current status.
 > Note: Instead of rerunning the command, you can add `--watch` to the above
   command to view the component's status updates in real time. Use CTRL + C to exit watch mode.
 
-## Installing Knative Serving
+## Installing Knative components
 
-1. Next, we will install [Knative Serving](https://github.com/knative/serving)
-and its dependencies:
+You have the option to install and use only the Knative components that you
+want. You can install only the component of Knative if you need that
+functionality, for example Knative serving is not required to create and run
+builds.
+
+### Installing Knative Serving
+
+1. Run the `kubectl apply` command to install
+   [Knative Serving](https://github.com/knative/serving) and its dependencies:
     ```bash
     kubectl apply -f https://storage.googleapis.com/knative-releases/serving/latest/release.yaml
     ```
-1. Monitor the Knative components, until all of the components show a `STATUS` of
-`Running`:
+1. Monitor the Knative serving components until all of the components show a
+   `STATUS` of `Running`:
     ```bash
     kubectl get pods -n knative-serving
     ```
 
+### Installing Knative build
+
+1. Run the `kubectl apply` command to install
+   [Knative Build](https://github.com/knative/build) and its dependencies:
+    ```bash
+    kubectl apply -f https://storage.googleapis.com/knative-releases/build/latest/release.yaml
+    ```
+1. Monitor the Knative build components until all of the components show a
+   `STATUS` of `Running`:
+    ```bash
+    kubectl get pods -n knative-build
+
 Just as with the Istio components, it will take a few seconds for the Knative
-components to be up and running; you can rerun the command to see the current status.
+components to be up and running; you can rerun the `kubectl get` command to see
+the current status.
 
 > Note: Instead of rerunning the command, you can add `--watch` to the above
-  command to view the component's status updates in real time. Use CTRL + C to exit watch mode.
+  command to view the component's status updates in real time. Use CTRL + C to
+  exit watch mode.
 
-You are now ready to deploy an app to your new Knative cluster.
+You are now ready to deploy an app or create build in your new Knative cluster.
 
-## Deploying an app
+## Deploying apps or builds
 
-Now that your cluster has Knative installed, you're ready to deploy an app.
+Now that your cluster has Knative installed, you're ready to deploy an app or
+create a build.
 
-You have two options for deploying your first app:
+Depending on which Knative component you have installed, there are few options
+for getting started:
 
 * You can follow the step-by-step
   [Getting Started with Knative App Deployment](getting-started-knative-app.md)
@@ -168,6 +191,9 @@ You have two options for deploying your first app:
 
 * You can view the available [sample apps](../serving/samples/README.md) and
   deploy one of your choosing.
+
+* To get started by creating a build, see
+  (Creating a simple Knative build)[../build/creating-builds.md]
 
 ## Cleaning up
 
