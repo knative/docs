@@ -1,7 +1,7 @@
-# Creating a simple Knative build
+# Creating a simple Knative Build
 
 Use this page to learn how to create and then run a simple build in Knative. In
-this topic, you create a Knative build configuration file for a simple app,
+this topic, you create a Knative Build configuration file for a simple app,
 deploy that build to Knative, and then test that the build completes.
 
 The following demonstrates the process of deploying and then testing that
@@ -16,14 +16,14 @@ images, authentication, and include multiple steps.
 
 ## Before you begin
 
-Before you can run a Knative build, you must have Knative installed in your
-Kubernetes cluster, and it must include the Knative build component:
+Before you can run a Knative Build, you must have Knative installed in your
+Kubernetes cluster, and it must include the Knative Build component:
 
 * For details about installing a new instance of Knative in your Kubernetes
   cluster, see [Installing Knative](../install/README.md).
 
 * If you have a component of Knative installed and running, you must [ensure
-  that the Knative build component is also installed](installing-build-component.md).
+  that the Knative Build component is also installed](installing-build-component.md).
 
 ## Creating and running a build
 
@@ -160,8 +160,8 @@ To learn more about the objects and commands used in this topic, see:
 * [Kubernetes Init containers](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/)
 * [Kubernetes kubectl CLI](https://kubernetes.io/docs/reference/kubectl/kubectl/)
 
-For information about contributing to the Knative build project, see the
-[Knative build code repo](https://github.com/knative/build/).
+For information about contributing to the Knative Build project, see the
+[Knative Build code repo](https://github.com/knative/build/).
 
 ---
 
