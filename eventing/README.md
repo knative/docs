@@ -36,7 +36,7 @@ EventSources.
 You can install Knative Eventing with the following command:
 
 ```bash
-kubectl apply -f kubectl apply -f https://storage.googleapis.com/knative-releases/eventing/latest/release.yaml
+kubectl apply -f https://storage.googleapis.com/knative-releases/eventing/latest/release.yaml
 ```
 
 In addition to the core definitions, you'll need to install at least one
