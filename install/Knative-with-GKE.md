@@ -175,7 +175,8 @@ the current status.
   command to view the component's status updates in real time. Use CTRL + C to
   exit watch mode.
 
-You are now ready to deploy an app or create build in your new Knative cluster.
+You are now ready to deploy an app or create a build in your new Knative
+cluster.
 
 ## Deploying apps or builds
 
