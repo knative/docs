@@ -1,7 +1,7 @@
-# Installing the Knative build component
+# Installing the Knative Build component
 
-Before you can run a Knative build, you must install the Knative build
-component in your Kubernetes cluster. Use this page to add the Knative build
+Before you can run a Knative Build, you must install the Knative Build
+component in your Kubernetes cluster. Use this page to add the Knative Build
 component to an existing Knative installation.
 
 You have the option to install and use only the components of Knative that you
@@ -11,11 +11,11 @@ want, for example Knative serving is not required to create and run builds.
 
 You must have a component of Knative installed and running in your Kubernetes
 cluster. For complete installation instructions, including how to install the
-Knative build component, see [Installing Knative](../install/README.md).
+Knative Build component, see [Installing Knative](../install/README.md).
 
-## Adding the Knative build component
+## Adding the Knative Build component
 
-To add only the Knative build component to an existing installation:
+To add only the Knative Build component to an existing installation:
 
 1. Run the
    [`kubectl apply`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#apply)
@@ -26,7 +26,7 @@ To add only the Knative build component to an existing installation:
     ```
 1. Run the
    [`kubectl get`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#get)
-   command to monitor the Knative build components until all of the components
+   command to monitor the Knative Build components until all of the components
    show a `STATUS` of `Running`:
     ```bash
     kubectl get pods -n knative-build
@@ -36,8 +36,8 @@ To add only the Knative build component to an existing installation:
     append the `--watch` flag to view the component's status updates in real
     time. Use CTRL + C to exit watch mode.
 
-You are now ready to create and run Knative builds, see
-[Creating a simple Knative build](../build/creating-builds.md) to get started.
+You are now ready to create and run Knative Builds, see
+[Creating a simple Knative Build](../build/creating-builds.md) to get started.
 
 ---
 
