@@ -16,11 +16,10 @@ commands will need to be adjusted for use in a Windows environment.
 
 ### Installing the Google Cloud SDK
 
-1. If you already have `kubectl`, run `kubectl version` to check your client
-   version.
+1. If you already have `kubectl`, run `kubectl version` to check your client version.
 
-1. If you already have `gcloud` installed with the `kubectl` component later
-   than v1.10, you can skip these steps.
+1. If you already have `gcloud` installed with the `kubectl` component later than
+   v1.10, you can skip these steps.
 
 1. Download and install the `gcloud` command line tool:
    https://cloud.google.com/sdk/install
@@ -56,16 +55,13 @@ You need a GCP project to create a Google Kubernetes Engine cluster.
 
 1. Create a new GCP project and set it as your `gcloud` default, or set an
    existing GCP project as your `gcloud` default:
-    * If you don't already have a GCP project created, create a new project in
-    `gcloud`:
+    * If you don't already have a GCP project created, create a new project in `gcloud`:
       ```bash
       gcloud projects create my-knative-project --set-as-default
       ```
-      Replace `my-knative-project` with the name you'd like to use for your GCP
-      project.
+      Replace `my-knative-project` with the name you'd like to use for your GCP project.
 
-      You also need to
-      [enable billing](https://cloud.google.com/billing/docs/how-to/manage-billing-account)
+      You also need to [enable billing](https://cloud.google.com/billing/docs/how-to/manage-billing-account)
       for your new project.
 
     * If you already have a GCP project, make sure your project is set as your
@@ -74,9 +70,7 @@ You need a GCP project to create a Google Kubernetes Engine cluster.
       gcloud config set project my-knative-project
       ```
 
-      > Tip: Enter `gcloud config get-value project` to view the ID of your
-        default GCP project.
-
+      > Tip: Enter `gcloud config get-value project` to view the ID of your default GCP project.
 1. Enable the necessary APIs:
    ```
    gcloud services enable \
@@ -139,8 +133,7 @@ It will take a few minutes for all the components to be up and running; you can
 rerun the command to see the current status.
 
 > Note: Instead of rerunning the command, you can add `--watch` to the above
-  command to view the component's status updates in real time. Use CTRL + C to
-  exit watch mode.
+  command to view the component's status updates in real time. Use CTRL + C to exit watch mode.
 
 ## Installing Knative components
 
