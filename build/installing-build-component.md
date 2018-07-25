@@ -1,15 +1,21 @@
 # Installing the Knative build component
 
 Before you can run a Knative build, you must install the Knative build
-component in your Kubernetes cluster.
+component in your Kubernetes cluster. Use this page to add the Knative build
+component to an existing Knative installation.
 
 You have the option to install and use only the components of Knative that you
 want, for example Knative serving is not required to create and run builds.
 
-For details about installing a new instance of Knative in your Kubernetes
-cluster, see [Installing Knative](../install/README.md).
+## Before you begin
 
-To install only the Knative build component:
+You must have a component of Knative installed and running in your Kubernetes
+cluster. For complete installation instructions, including how to install the
+Knative build component, see [Installing Knative](../install/README.md).
+
+## Adding the Knative build component
+
+To add only the Knative build component to an existing installation:
 
 1. Run the `kubectl apply` command to install
    [Knative Build](https://github.com/knative/build) and its dependencies:
@@ -22,12 +28,12 @@ To install only the Knative build component:
     kubectl get pods -n knative-build
     ```
 
-    Tip: Instead of the `kubectl get` command multiple times, you can add
-    `--watch` to view the component's status updates in real time.
+    Tip: Instead of running the `kubectl get` command multiple times, you can
+    add `--watch` to view the component's status updates in real time.
     Use CTRL + C to exit watch mode.
 
 You are now ready to create and run Knative builds, see
-(Creating a simple Knative build)[../build/creating-builds.md] to get started.
+[Creating a simple Knative build](../build/creating-builds.md) to get started.
 
 ---
 
