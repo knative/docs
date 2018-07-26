@@ -15,8 +15,7 @@ Also consider using a Knative `Build` to build the source code of your apps into
 container images, which you can then run on
 [Knative `serving`](https://github.com/knative/docs/blob/master/serving/README.md).
 More information about this use case is demonstrated in
-[this sample](https://github.com/knative/docs/blob/master/serving/samples/source-to-
-url-go).
+[this sample](https://github.com/knative/docs/blob/master/serving/samples/source-to-url-go).
 
 ## Key features of Knative Builds
 
