@@ -45,7 +45,7 @@ Build the application container and publish it to a container registry:
    ```
    perl -pi -e \
    "s@github.com/knative/docs/serving/samples/autoscale-go@${REPO}/serving/samples/autoscale-go@g" \
-   serving/samples/autoscale-go/sample.yaml
+   serving/samples/autoscale-go/service.yaml
    ```
 
 ## Deploy the Service
