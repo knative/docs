@@ -195,7 +195,7 @@ spec:
     args: ["cat", "README.md"]
 ```
 
-#### Using `git`
+#### Using `gcs`
 
 Specifying `gcs` as your `source`:
 
