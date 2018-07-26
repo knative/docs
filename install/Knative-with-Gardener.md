@@ -129,7 +129,7 @@ cluster.
 
 ## Alternative way to enable Knative with Gardener
 
-Ask your Gardener administrator to configure the Gardener Bouqet addon manager
+Ask your Gardener administrator to configure the Gardener Bouquet addon manager
 with the following CRDs:
 
 ```
@@ -156,7 +156,7 @@ spec:
     istio: "0.8.0"
 ```
 
-And of course create the respectve `ConfigMaps`:
+And of course create the respective `ConfigMaps`:
 
 ```
 curl https://raw.githubusercontent.com/knative/serving/v0.1.1/third_party/istio-0.8.0/istio.yaml
