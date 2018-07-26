@@ -14,20 +14,21 @@ We provide information for installing Knative on
 
 ## Installing Knative
 
-Follow these step-by-step guides for setting up Kubernetes and installing
-Knative components on the following platforms:
+To install Knative, you'll need a Kubernetes clusters that meets the specifications
+for Knative on your platform of choice.
 
-* [Knative Install on Azure Kubernetes Service](Knative-with-AKS.md)
-* [Knative Install on Gardener](Knative-with-Gardener.md)
-* [Knative Install on Google Kubernetes Engine](Knative-with-GKE.md)
-* [Knative Install on IBM Cloud Kubernetes Service](Knative-with-IKS.md)
-* [Knative Install on Minikube](Knative-with-Minikube.md)
-* [Knative Install on Pivotal Container Service](Knative-with-PKS.md)
+To install Knative, complete these two steps:
 
-If you already have a Kubernetes cluster you're comfortable installing
-*alpha* software on, use the following instructions:
+  1. Create a Kubernetes cluster on your chosen platform:
+     * [Knative on Azure Kubernetes Service](Knative-with-AKS.md)
+     * [Knative on Gardener](Knative-with-Gardener.md)
+     * [Knative on Google Kubernetes Engine](Knative-with-GKE.md)
+     * [Knative on IBM Cloud Kubernetes Service](Knative-with-IKS.md)
+     * [Knative on Minikube](Knative-with-Minikube.md)
+     * [Knative on Pivotal Container Service](Knative-with-PKS.md)
 
-* [Knative Install on any Kubernetes](Knative-with-any-k8s.md)
+  2. Install Knative onto your Kubernetes cluster:
+     * [Install Knative](Knative-with-any-k8s.md)
 
 ## Deploying an app
 
