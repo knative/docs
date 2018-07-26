@@ -149,7 +149,7 @@ kubectl port-forward -n monitoring $(kubectl get pods -n monitoring --selector=a
 ## Cleanup
 
 ```
-kubectl delete -f serving/samples/autoscale-go/sample.yaml
+kubectl delete -f serving/samples/autoscale-go/service.yaml
 ```
 
 ## Further reading
