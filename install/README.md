@@ -8,13 +8,12 @@ To get started with Knative, you need a Kubernetes cluster. If you aren't
 sure which Kubernetes platform is right for you, see
 [Picking the Right Solution](https://kubernetes.io/docs/setup/pick-right-solution/).
 
-We provide information for installing Knative on
-[Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine/docs/), [IBM Cloud Kubernetes Service](https://www.ibm.com/cloud/container-service), [Azure Kubernetes Service](https://docs.microsoft.com/en-us/azure/aks/) and 
-[Minikube](https://kubernetes.io/docs/setup/minikube/) clusters.
+You'll find documentation for installing Knative on multiple cloud platforms
+as well as [Minikube](https://kubernetes.io/docs/setup/minikube/).
 
 ## Installing Knative
 
-To install Knative, you'll need a Kubernetes clusters that meets the specifications
+To install Knative, you'll need a Kubernetes cluster that meets the specifications
 for Knative on your platform of choice.
 
 To install Knative, complete these two steps:
