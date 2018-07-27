@@ -13,7 +13,7 @@ You need:
 
 ## Sample application
 
-This guides uses the
+This guide uses the
 [Hello World sample app in Go](../serving/samples/helloworld-go) to demonstrate
 the basic workflow for deploying an app, but these steps can be adapted for your
 own application if you have an image of it available on [Docker Hub](https://docs.docker.com/docker-hub/repos/), [Google Container Registry](https://cloud.google.com/container-registry/docs/pushing-and-pulling), or another container image registry.
