@@ -11,7 +11,7 @@ to learn more about Knative Serving resources.
 | Autoscale | A demonstration of the autoscaling capabilities of Knative. | [Go](autoscale-go/README.md) |
 | Private Repo Build | An example of deploying a Knative Serving Service using a Github deploy-key and a DockerHub image pull secret. | [Go](build-private-repo-go/README.md) |
 | Buildpack for Applications | A sample app that demonstrates using Cloud Foundry buildpacks on Knative Serving. | [.NET](buildpack-app-dotnet/README.md) |
-| Buildpack for Functions | A sample function that demonstrates using Cloud Foundry buildpacks on Knative Serving. | [Node.js](buildpack-function-nodej/README.md) |
+| Buildpack for Functions | A sample function that demonstrates using Cloud Foundry buildpacks on Knative Serving. | [Node.js](buildpack-function-nodejs/README.md) |
 | Github Webhook | A simple webhook handler that demonstrates interacting with Github. | [Go](gitwebhook-go/README.md) |
 | gRPC | A simple gRPC server. | [Go](grpc-ping-go/README.md) |
 | Knative Routing | An example of mapping multiple Knative services to different paths under a single domain name using the Istio VirtualService concept. | [Go](knative-routing-go/README.md) |
