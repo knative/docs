@@ -21,8 +21,8 @@ you can create one using [Minikube](https://github.com/kubernetes/minikube).
 1. [Install the kubectl CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl).
 
 1. [Install and configure minikube](https://github.com/kubernetes/minikube#installation)
-    with a [VM driver](https://github.com/kubernetes/minikube#requirements), e.g.
-    `kvm2` on Linux or `hyperkit` on macOS.
+    version v0.28.1 or later with a [VM driver](https://github.com/kubernetes/minikube#requirements),
+     e.g. `kvm2` on Linux or `hyperkit` on macOS.
 
 ## Creating a Kubernetes cluster
 
@@ -33,7 +33,7 @@ For Linux use:
 
 ```shell
 minikube start --memory=8192 --cpus=4 \
-  --kubernetes-version=v1.10.5 \
+  --kubernetes-version=v1.11.1 \
   --vm-driver=kvm2 \
   --bootstrapper=kubeadm \
   --extra-config=controller-manager.cluster-signing-cert-file="/var/lib/localkube/certs/ca.crt" \
@@ -45,7 +45,7 @@ For macOS use:
 
 ```shell
 minikube start --memory=8192 --cpus=4 \
-  --kubernetes-version=v1.10.5 \
+  --kubernetes-version=v1.11.1 \
   --vm-driver=hyperkit \
   --bootstrapper=kubeadm \
   --extra-config=controller-manager.cluster-signing-cert-file="/var/lib/localkube/certs/ca.crt" \
