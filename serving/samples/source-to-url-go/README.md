@@ -81,7 +81,7 @@ available, but these are the key steps:
     - name: basic-user-pass
    ```
 
-1. After you have created the manifest file, apply it to your cluster with `kubectl`:
+1. After you have created the manifest files, apply them to your cluster with `kubectl`:
 
    ```shell
    $ kubectl apply -f docker-secret.yaml
