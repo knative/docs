@@ -8,26 +8,26 @@ To get started with Knative, you need a Kubernetes cluster. If you aren't
 sure which Kubernetes platform is right for you, see
 [Picking the Right Solution](https://kubernetes.io/docs/setup/pick-right-solution/).
 
-We provide information for installing Knative on
-[Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine/docs/), [IBM Cloud Kubernetes Service](https://www.ibm.com/cloud/container-service), [Azure Kubernetes Service](https://docs.microsoft.com/en-us/azure/aks/) and 
-[Minikube](https://kubernetes.io/docs/setup/minikube/) clusters.
+You'll find documentation for installing Knative on multiple cloud platforms
+as well as [Minikube](https://kubernetes.io/docs/setup/minikube/).
 
 ## Installing Knative
 
-Follow these step-by-step guides for setting up Kubernetes and installing
-Knative components on the following platforms:
+To install Knative, you'll need a Kubernetes cluster that meets the specifications
+for Knative on your platform of choice.
 
-* [Knative Install on Azure Kubernetes Service](Knative-with-AKS.md)
-* [Knative Install on Gardener](Knative-with-Gardener.md)
-* [Knative Install on Google Kubernetes Engine](Knative-with-GKE.md)
-* [Knative Install on IBM Cloud Kubernetes Service](Knative-with-IKS.md)
-* [Knative Install on Minikube](Knative-with-Minikube.md)
-* [Knative Install on Pivotal Container Service](Knative-with-PKS.md)
+To install Knative, complete these two steps:
 
-If you already have a Kubernetes cluster you're comfortable installing
-*alpha* software on, use the following instructions:
+  1. Create a Kubernetes cluster on your chosen platform:
+     * [Knative on Azure Kubernetes Service](Knative-with-AKS.md)
+     * [Knative on Gardener](Knative-with-Gardener.md)
+     * [Knative on Google Kubernetes Engine](Knative-with-GKE.md)
+     * [Knative on IBM Cloud Kubernetes Service](Knative-with-IKS.md)
+     * [Knative on Minikube](Knative-with-Minikube.md)
+     * [Knative on Pivotal Container Service](Knative-with-PKS.md)
 
-* [Knative Install on any Kubernetes](Knative-with-any-k8s.md)
+  2. Install Knative onto your Kubernetes cluster:
+     * [Install Knative](Knative-with-any-k8s.md)
 
 ## Deploying an app
 
