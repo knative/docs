@@ -69,7 +69,7 @@ To access this service, you need to determine its ingress address:
 kubectl get svc knative-ingressgateway -n istio-system
 ```
 
-When the service is ready, you'll see an IP address in the EXTERNAL-IP field:
+When the service is ready, you'll see an IP address in the `EXTERNAL-IP` field:
 
 ```
 NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
@@ -150,5 +150,5 @@ services outside of the cluster, you'll have to
 [configure outbound network access](https://github.com/knative/docs/blob/master/serving/outbound-network-access.md).
 
 Whichever way you go, you can use the guestbook container to test your Redis
-deployment -- just change the `REDIS_HOST` environment variable in
+deployment. Just change the `REDIS_HOST` environment variable in
 `guestbook.yaml` to the correct host name.
