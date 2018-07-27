@@ -1,10 +1,10 @@
-# Guestbook - Go sample
+# Deploying Redis alongside a Knative Service
 
-A simple web app written in Go that demonstrates how to to use vanilla
-Kubernetes `Deployment`s/`Service`s (Redis in this case) with a Knative
-application. The Guestbook application shows a page with a form that allows
-users to leave a message under a name of their choosing. Names and messages map
-to keys and values in Redis, so only one message per user is saved at a time.
+A simple web app written in Go that demonstrates how to deploy Redis (using
+vanilla Kubernetes components) alongside with a Knative Service that relies on
+it. The guestbook application shows a page with a form that allows users to
+leave a message under a name of their choosing. Names and messages map to keys
+and values in Redis, so only one message per user is saved at a time.
 
 ## Prerequisites
 
@@ -13,26 +13,24 @@ to keys and values in Redis, so only one message per user is saved at a time.
 
 ## Deploy Redis
 
-Although the configuration in this sample is intentionally very simple, [Redis]
+Although the configuration in this sample is intentionally very simple, Redis
 can require relatively complex configuration that Knative does not support.
 Luckily, Knative allows you to mix and match Knative components with vanilla
 Kubernetes components.
 
 There are two files containing Redis configuration:
+- `redis-deployment.yaml`: contains a minimal configuration for a single Redis
+instance, named `redis-master`.
+- `redis-service.yaml`: contains a Kubernetes `Service` that finds `redis-master`
+by its name and role labels and routes requests to it. The `REDIS_HOST`
+environment variable in `guestbook.yaml` refers to the name of the `Service`,
+also named `redis-master`, not the name of the `Deployment`.
 
-`redis-deployment.yaml`
-:  contains a minimal configuration for a single Redis instance, named
-`redis-master`.
-
-`redis-service`
-:  contains a Kubernetes `Service` that finds `redis-master` by its name and
-role labels and routes requests to it.
-
-Don't confuse a Kubernetes `Service` with a Knative `Service`. A Knative
-`Service` handles the deployment, scaling, and routing for a container. A
+Note: Don't confuse a Kubernetes `Service` with a Knative `Service`. A Knative
+`Service` handles the deployment, scaling, and routing for a workload. A
 Kubernetes `Service` routes requests to an existing deployment.
 
-Apply them both with `kubectl`:
+Apply both configurations with `kubectl`:
 
 ```shell
 kubectl apply -f serving/samples/guestbook-redis-go/redis-deployment.yaml
@@ -54,7 +52,7 @@ docker push "${REPO}/serving/samples/guestbook-redis-go"
 # Replace the image reference with our published image.
 perl -pi -e "s@github.com/knative/docs/serving/samples/guestbook-redis-go@${REPO}/serving/samples/guestbook-redis-go@g" serving/samples/guestbook-redis-go/guestbook.yaml
 
-# Deploy the Guestbook Service
+# Deploy the guestbook Service
 kubectl apply -f serving/samples/guestbook-redis-go/guestbook.yaml
 ```
 
@@ -63,7 +61,7 @@ kubectl apply -f serving/samples/guestbook-redis-go/guestbook.yaml
 Note: the following example uses `curl` to make requests to the application. You
 can also use your browser by following the steps in the
 [routing sample](https://github.com/knative/docs/tree/master/serving/samples/knative-routing-go)
-to route requests from `/` to the Guestbook `Service`.
+to route requests to `/` to the guestbook `Service`.
 
 To access this service, you need to determine its ingress address:
 
@@ -78,7 +76,7 @@ NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S) 
 knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
 ```
 
-Once the `ADDRESS` gets assigned to the cluster, you can run:
+Once the `EXTERNAL-IP` gets assigned to the cluster, you can run:
 
 ```shell
 # Put the host name into an environment variable.
@@ -147,6 +145,10 @@ Redis, but you can use `redis-service.yaml` since it selects on the same name
 and role labels.
 
 Alternatively, you may prefer to use a managed solution from your cloud provider
-(e.g. [Cloud Memorystore](https://cloud.google.com/memorystore/). To access
+(e.g. [Cloud Memorystore](https://cloud.google.com/memorystore/)). To access
 services outside of the cluster, you'll have to
 [configure outbound network access](https://github.com/knative/docs/blob/master/serving/outbound-network-access.md).
+
+Whichever way you go, you can use the guestbook container to test your Redis
+deployment -- just change the `REDIS_HOST` environment variable in
+`guestbook.yaml` to the correct host name.
