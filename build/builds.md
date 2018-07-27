@@ -90,7 +90,7 @@ define one or more `steps` fields to define the body of a build.
 
 Each `steps` in a build must specify a `Builder`, or type of container image that
 adheres to the [Knative builder contract](./builder-contract.md). For each of
-the of the `steps` fields, or container images that you define:
+the `steps` fields, or container images that you define:
 
 * The `Builder`-type container images are run and evaluated in order, starting
   from the top of the configuration file.
