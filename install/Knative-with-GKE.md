@@ -194,7 +194,7 @@ for getting started:
   deploy one of your choosing.
 
 * To get started by creating a build, see
-  (Creating a simple Knative Build)[../build/creating-builds.md]
+  [Creating a simple Knative Build](../build/creating-builds.md)
 
 ## Cleaning up
 
