@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+	<title>Knative Guestbook</title>
+</head>
+<body>
+<h1>Knative Guestbook</h1>
+
+<form action="/" method="post">
+  <div>Name: <input name="name"></div>
+  <div>Message: <input name="message"></div>
+  <input type="submit">
+</form>
+
+<h2>Posts</h2>
+<ul>
+	{{ range $name, $message := . }}
+	<li><strong>{{ $name }}</strong>: {{ $message }}</li>
+	{{ end }}
+</ul>
+</body>
+</html>
