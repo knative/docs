@@ -35,7 +35,7 @@ recreate the source files from this folder.
     and add the `Web` dependency. Then click `Generate Project`, download and unzip the
     sample archive.
 
-1. Update the `@SpringBootApplication` class in
+1. Update the `SpringBootApplication` class in
    `src/main/java/com/example/helloworld/HelloworldApplication.java` by adding
    a `@RestController` to handle the "/" mapping and also add a `@Value` field to
    provide the TARGET environment variable:
@@ -136,7 +136,7 @@ folder) you're ready to build and deploy the sample app.
 
 1. Now that your service is created, Knative will perform the following steps:
    * Create a new immutable revision for this version of the app.
-   * Network programming to create a route, ingress, service, and load balance for your app.
+   * Network programming to create a route, ingress, service, and load balancer for your app.
    * Automatically scale your pods up and down (including to zero active pods).
 
 1. To find the IP address for your service, use
