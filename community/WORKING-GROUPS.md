@@ -22,8 +22,9 @@ The current working groups are:
 *   [API Core](#api-core)
 *   [Build](#build)
 *   [Events](#events)
+*   [Networking](#networking)
+*   [Observability](#observability)
 *   [Scaling](#scaling)
-*   [Serving](#serving)
 <!-- TODO add charters for each group -->
 
 ## API Core
@@ -78,9 +79,46 @@ Slack Channel              | [#eventing](https://knative.slack.com/messages/C9JP
 ------------------------------------------------------------- | ----------- | ------- | -------
 <img width="30px" src="https://github.com/vaikas-google.png"> | Ville Aikas | Google  | [vaikas-google](https://github.com/vaikas-google)
 
+## Networking
+
+Inbound and outbound network connectivity for [serving](https://github.com/knative/serving) workloads.
+Specific areas of interest include: load balancing, routing, DNS configuration and TLS support.
+
+Artifact                   | Link
+-------------------------- | ----
+Forum                      | [knative-dev@](https://groups.google.com/forum/#!forum/knative-dev)
+Community Meeting VC       | Coming soon
+Community Meeting Calendar | Coming soon
+Meeting Notes              | [Notes](https://drive.google.com/open?id=1EE1t5mTfnTir2lEasdTMRNtuPEYuPqQCZbU3NC9mHOI)
+Document Folder            | [Folder](https://drive.google.com/corp/drive/folders/1oVDYbcEDdQ9EpUmkK6gE4C7aZ8u6ujsN)
+Slack Channel              | [#networking](https://knative.slack.com)
+
+&nbsp;                                                    | Leads            | Company | Profile
+--------------------------------------------------------- | ---------------- | ------- | -------
+<img width="30px" src="https://github.com/tcnghia.png"> | Nghia Tran | Google  | [tcnghia](https://github.com/tcnghia)
+<img width="30px" src="https://github.com/mdemirhan.png"> | Mustafa Demirhan | Google  | [mdemirhan](https://github.com/mdemirhan)
+
+## Observability
+
+Logging, monitoring & tracing infrastructure
+
+Artifact                   | Link
+-------------------------- | ----
+Forum                      | [knative-dev@](https://groups.google.com/forum/#!forum/knative-dev)
+Community Meeting VC       | https://meet.google.com/kik-btis-sqz <br> Or dial in: <br> (US) +1 515-705-3725 <br>PIN: 704 774#
+Community Meeting Calendar | [Calendar Invitation](https://calendar.google.com/event?action=TEMPLATE&tmeid=MDc4ZnRkZjFtbzZhZzBmdDMxYXBrM3B1YTVfMjAxODA4MDJUMTczMDAwWiBtZGVtaXJoYW5AZ29vZ2xlLmNvbQ&tmsrc=mdemirhan%40google.com&scp=ALL)
+Meeting Notes              | [Notes](https://drive.google.com/open?id=1vWEpjf093Jsih3mKkpIvmWWbUQPxFkcyDxzNH15rQgE)
+Document Folder            | [Folder](https://drive.google.com/corp/drive/folders/10HcpZlI1PbFyzinO6HjfHbzCkBXrqXMy)
+Slack Channel              | [#observability](https://knative.slack.com)
+
+&nbsp;                                                    | Leads            | Company | Profile
+--------------------------------------------------------- | ---------------- | ------- | -------
+<img width="30px" src="https://github.com/mdemirhan.png"> | Mustafa Demirhan | Google  | [mdemirhan](https://github.com/mdemirhan)
+
 ## Scaling
 
-Autoscaling
+Automatic performance tuning of [serving](https://github.com/knative/serving) application workloads. 
+This includes micro (freeze) and macro (horizontal and vertical pod scaling) options.
 
 Artifact                   | Link
 -------------------------- | ----
@@ -94,24 +132,6 @@ Slack Channel              | [#autoscaling](https://knative.slack.com)
 &nbsp;                                                        | Leads          | Company | Profile
 ------------------------------------------------------------- | -------------- | ------- | -------
 <img width="30px" src="https://github.com/josephburnett.png"> | Joseph Burnett | Google  | [josephburnett](https://github.com/josephburnett)
-
-## Serving
-
-Logging infra, Monitoring infra, Trace, Load balancing/Istio, Domain names,
-Routing, Observability
-
-Artifact                   | Link
--------------------------- | ----
-Forum                      | [knative-dev@](https://groups.google.com/forum/#!forum/knative-dev)
-Community Meeting VC       | [TODO](TODO)
-Community Meeting Calendar | [Calendar Invitation](TODO)
-Meeting Notes              | [Notes](TODO)
-Document Folder            | [Folder](https://drive.google.com/corp/drive/folders/1pfcc6z8oQl6S7bOl1MnfZJ2o32FtgvRB)
-Slack Channel              | [#metrics](https://knative.slack.com)
-
-&nbsp;                                                    | Leads            | Company | Profile
---------------------------------------------------------- | ---------------- | ------- | -------
-<img width="30px" src="https://github.com/mdemirhan.png"> | Mustafa Demirhan | Google  | [mdemirhan](https://github.com/mdemirhan)
 
 ---
 
