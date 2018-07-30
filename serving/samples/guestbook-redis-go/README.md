@@ -1,14 +1,14 @@
 # Deploying Redis alongside a Knative Service
 
 A simple web app written in Go that demonstrates how to deploy Redis (using
-vanilla Kubernetes components) alongside with a Knative Service that relies on
+vanilla Kubernetes components) alongside a Knative Service that relies on
 it. The guestbook application shows a page with a form that allows users to
 leave a message under a name of their choosing. Names and messages map to keys
 and values in Redis, so only one message per user is saved at a time.
 
 ## Prerequisites
 
-1. [Install Knative Serving](https://github.com/knative/docs/blob/master/install/README.md)
+1. [Install Knative Serving](/install/README.md)
 1. Install [Docker](https://www.docker.com/)
 
 ## Deploy Redis
@@ -60,7 +60,7 @@ kubectl apply -f serving/samples/guestbook-redis-go/guestbook.yaml
 
 Note: the following example uses `curl` to make requests to the application. You
 can also use your browser by following the steps in the
-[routing sample](https://github.com/knative/docs/tree/master/serving/samples/knative-routing-go)
+[routing sample](/serving/samples/knative-routing-go)
 to route requests to `/` to the guestbook `Service`.
 
 To access this service, you need to determine its ingress address:
@@ -147,7 +147,7 @@ and role labels.
 Alternatively, you may prefer to use a managed solution from your cloud provider
 (e.g. [Cloud Memorystore](https://cloud.google.com/memorystore/)). To access
 services outside of the cluster, you'll have to
-[configure outbound network access](https://github.com/knative/docs/blob/master/serving/outbound-network-access.md).
+[configure outbound network access](/serving/outbound-network-access.md).
 
 Whichever way you go, you can use the guestbook container to test your Redis
 deployment. Just change the `REDIS_HOST` environment variable in
