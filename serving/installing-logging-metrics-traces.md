@@ -39,6 +39,28 @@ prometheus-system-1                   1/1       Running   0          2d
 ```
 CTRL+C when it's done.
 
+### Create Elasticsearch Indices
+
+We will create two indexes in ElasticSearch - one for application logs and one for request traces.
+
+* To open the Kibana UI (the visualization tool for [Elasticsearch](https://info.elastic.co)), start a local proxy with the following command:
+  ```shell
+  kubectl proxy
+  ```
+
+  This command starts a local proxy of Kibana on port 8001. For security reasons, the
+  Kibana UI is exposed only within the cluster.
+
+* Navigate to the
+[Kibana UI](http://localhost:8001/api/v1/namespaces/monitoring/services/kibana-logging/proxy/app/kibana). *It might take a couple of minutes for the proxy to work*.
+
+* Within the "Configure an index pattern" page, enter `logstash-*` to `Index pattern` and select `@timestamp` from `Time Filter field name` and click on `Create` button.
+
+![Create logstash-* index](images/kibana-landing-page-configure-index.png)
+
+* To create the second index, select `Create Index Pattern` button on top left of the page.
+Enter `zipkin*` to `Index pattern` and select `timestamp_millis` from `Time Filter field name` and click on `Create` button.
+
 ## Stackdriver, Prometheus & Grafana Setup
 
 If your Knative Serving is not built on a Google Cloud Platform (GCP) based cluster or you want to send logs to another GCP project, you need to build your own Fluentd image and modify the configuration first. See
