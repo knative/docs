@@ -15,7 +15,7 @@ to learn more about Knative Serving resources.
 | Github Webhook | A simple webhook handler that demonstrates interacting with Github. | [Go](gitwebhook-go/README.md) |
 | gRPC | A simple gRPC server. | [Go](grpc-ping-go/README.md) |
 | Knative Routing | An example of mapping multiple Knative services to different paths under a single domain name using the Istio VirtualService concept. | [Go](knative-routing-go/README.md) |
-| Redis Guestbook | A sample that shows how to deploy Redis alongside a Knative Serving Service. | [Go](guestbook-redis-go/README.md) |
+| Redis Guestbook | A sample that deploys Redis alongside a Knative Serving Service. | [Go](guestbook-redis-go/README.md) |
 | REST API | A simple Restful service that exposes an endpoint defined by an environment variable described in the Knative Configuration. | [Go](rest-api-go/README.md) |
 | Source to URL | A sample that shows how to use Knative to go from source code in a git repository to a running application with a URL. | [Go](source-to-url-go/README.md) |
 | Telemetry | This sample runs a simple web server that makes calls to other in-cluster services and responds to requests with "Hello World!". The purpose of this sample is to show generating metrics, logs, and distributed traces. | [Go](telemetry-go/README.md) |
