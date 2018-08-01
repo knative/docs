@@ -9,8 +9,7 @@ sure which Kubernetes platform is right for you, see
 [Picking the Right Solution](https://kubernetes.io/docs/setup/pick-right-solution/).
 
 We provide information for installing Knative on
-[Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine/docs/), [IBM Cloud Kubernetes Service](https://www.ibm.com/cloud/container-service), [Azure Kubernetes Service](https://docs.microsoft.com/en-us/azure/aks/) and 
-[Minikube](https://kubernetes.io/docs/setup/minikube/) clusters.
+[Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine/docs/), [IBM Cloud Kubernetes Service](https://www.ibm.com/cloud/container-service), [Azure Kubernetes Service](https://docs.microsoft.com/en-us/azure/aks/), [Minikube](https://kubernetes.io/docs/setup/minikube/) and [Pivotal Container Service](https://pivotal.io/platform/pivotal-container-service) clusters.
 
 ## Installing Knative
 
