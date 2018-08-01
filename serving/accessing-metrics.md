@@ -1,7 +1,7 @@
 # Accessing metrics
 
-You access metrics through the [Grafana](https://grafana.com/) UI. Grafana is the visualization tool
-for [Prometheus](https://prometheus.io/).
+You access metrics through the [Grafana](https://grafana.com/) UI. Grafana is
+the visualization tool for [Prometheus](https://prometheus.io/).
 
 1. To open Grafana, enter the following command:
 ```

@@ -6,16 +6,18 @@ necessary components first.
 
 ## Kibana and Elasticsearch
 
-* To open the Kibana UI (the visualization tool for [Elasticsearch](https://info.elastic.co), start a local proxy with the following command:
+* To open the Kibana UI (the visualization tool for [Elasticsearch](https://info.elastic.co)),
+start a local proxy with the following command:
   ```shell
   kubectl proxy
   ```
 
-  This command starts a local proxy of Kibana on port 8001. For security reasons, the
-  Kibana UI is exposed only within the cluster.
+  This command starts a local proxy of Kibana on port 8001. For security reasons,
+  the Kibana UI is exposed only within the cluster.
 
 * Navigate to the
-[Kibana UI](http://localhost:8001/api/v1/namespaces/monitoring/services/kibana-logging/proxy/app/kibana). *It might take a couple of minutes for the proxy to work*.
+[Kibana UI](http://localhost:8001/api/v1/namespaces/monitoring/services/kibana-logging/proxy/app/kibana).
+*It might take a couple of minutes for the proxy to work*.
 
   The Discover tab of the Kibana UI looks like this:
 
@@ -25,55 +27,67 @@ necessary components first.
   of the screen. The main search bar is across the top of the Discover page.
 
 * As more logs are ingested, new fields will be discovered. To have them indexed,
-go to Management > Index Patterns > Refresh button (on top right) > Refresh
-fields.
+go to "Management" > "Index Patterns" > Refresh button (on top right) > "Refresh
+fields".
 
 <!-- TODO: create a video walkthrough of the Kibana UI -->
 
 ### Accessing configuration and revision logs
 
-* To access the logs for a configuration, enter the following search query in Kibana:
-```
-kubernetes.labels.serving_knative_dev\/configuration: "configuration-example"
-```
+To access the logs for a configuration:
 
-* Replace `configuration-example` with your configuration's name. Enter the following
-command to get your configuration's name:
+* Find the configuration's name with the following command:
 ```
 kubectl get configurations
 ```
 
-* To access logs for a revision, enter the following search query in Kibana:
+* Replace `<CONFIGURATION_NAME>` and enter the following search query in Kibana:
 ```
-kubernetes.labels.serving_knative_dev\/revision: "configuration-example-00001"
+kubernetes.labels.serving_knative_dev\/configuration: <CONFIGURATION_NAME>
 ```
 
-  Replace `configuration-example-00001` with your revision's name.
+To access logs for a revision:
+* Find the revision's name with the following command:
+```
+kubectl get revisions
+```
+
+* Replace `<REVISION_NAME>` and enter the following search query in Kibana:
+```
+kubernetes.labels.serving_knative_dev\/revision: <REVISION_NAME>
+```
 
 ### Accessing build logs
 
-* To access the logs for a build, enter the following search query in Kibana:
-```
-kubernetes.labels.build\-name: "test-build"
-```
+To access logs for a [Knative Build](../build/README.md):
 
-  Replace `test-build` with your build's name. The build name is specified in the `.yaml` file as follows:
-
+* Find the build's name in the specified in the `.yaml` file:
   ```yaml
   apiVersion: build.knative.dev/v1alpha1
   kind: Build
   metadata:
-    name: test-build
+    name: <BUILD_NAME>
   ```
+  Or find build names with the following command:
+  ```
+  kubectl get builds
+  ```
+
+* Replace `<BUILD_NAME>` and enter the following search query in Kibana:
+```
+kubernetes.labels.build\-name: <BUILD_NAME>
+```
 
 ### Accessing request logs
 
-* To access to request logs, enter the following search in Kibana:
+To access to request logs:
+* Enter the following search in Kibana:
 ```
 tag: "requestlog.logentry.istio-system"
 ```
 
-  Request logs contain details about requests served by the revision. Below is a sample request log:
+  Request logs contain details about requests served by the revision. Below is
+  a sample request log:
 
   ```text
   @timestamp                   July 10th 2018, 10:09:28.000

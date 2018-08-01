@@ -1,14 +1,21 @@
 # Monitoring, Logging and Tracing Installation
 
 Knative Serving offers two different monitoring setups:
-[Elasticsearch, Kibana, Prometheus and Grafana](#Elasticsearch,-Kibana,-Prometheus-&-Grafana-Setup) or [Stackdriver, Prometheus and Grafana](#Stackdriver,-Prometheus-&-Grafana-Setup). You can install only one of these two setups and side-by-side installation of these two are not supported.
+[Elasticsearch, Kibana, Prometheus and Grafana](#Elasticsearch,-Kibana,-Prometheus-&-Grafana-Setup)
+or
+[Stackdriver, Prometheus and Grafana](#Stackdriver,-Prometheus-&-Grafana-Setup).
+You can install only one of these two setups and side-by-side installation of
+these two are not supported.
 
 ## Elasticsearch, Kibana, Prometheus & Grafana Setup
 
-If you installed the [latest Knative Serving components](../install/README.md#Installing-Knative),
-skip this step and continue to [Create Elasticsearch Indices](#Create-Elasticsearch-Indices)
+If you installed the
+[latest Knative Serving components](../install/README.md#Installing-Knative),
+skip this step and continue to
+[Create Elasticsearch Indices](#Create-Elasticsearch-Indices)
 
-* Install Knative monitoring components:
+- Install Knative monitoring components:
+
 ```
 kubectl apply -R -f config/monitoring/100-common \
     -f config/monitoring/150-elasticsearch \
@@ -17,10 +24,14 @@ kubectl apply -R -f config/monitoring/100-common \
     -f config/monitoring/200-common \
     -f config/monitoring/200-common/100-istio.yaml
 ```
-* The installation is complete when logging & monitoring components are all reported `Running` or `Completed`:
+
+- The installation is complete when logging & monitoring components are all
+  reported `Running` or `Completed`:
+
 ```
 kubectl get pods -n monitoring --watch
 ```
+
 ```
 NAME                                  READY     STATUS    RESTARTS   AGE
 elasticsearch-logging-0               1/1       Running   0          2d
@@ -37,51 +48,66 @@ node-exporter-rhzr7                   2/2       Running   0          2d
 prometheus-system-0                   1/1       Running   0          2d
 prometheus-system-1                   1/1       Running   0          2d
 ```
+
 CTRL+C when it's done.
 
 ### Create Elasticsearch Indices
 
-We will create two indexes in ElasticSearch - one for application logs and one for request traces.
+To visualize logs with Kibana, you need to set which Elasticsearch indices to explore. We will create two indices in Elasticsearch using `Logstash` for application logs and `Zipkin`
+for request traces.
 
-* To open the Kibana UI (the visualization tool for [Elasticsearch](https://info.elastic.co)), start a local proxy with the following command:
+- To open the Kibana UI (the visualization tool for
+  [Elasticsearch](https://info.elastic.co)), start a local proxy with the
+  following command:
+
   ```shell
   kubectl proxy
   ```
 
-  This command starts a local proxy of Kibana on port 8001. For security reasons, the
-  Kibana UI is exposed only within the cluster.
+  This command starts a local proxy of Kibana on port 8001. For security
+  reasons, the Kibana UI is exposed only within the cluster.
 
-* Navigate to the
-[Kibana UI](http://localhost:8001/api/v1/namespaces/monitoring/services/kibana-logging/proxy/app/kibana). *It might take a couple of minutes for the proxy to work*.
+- Navigate to the
+  [Kibana UI](http://localhost:8001/api/v1/namespaces/monitoring/services/kibana-logging/proxy/app/kibana).
+  _It might take a couple of minutes for the proxy to work_.
 
-* Within the "Configure an index pattern" page, enter `logstash-*` to `Index pattern` and select `@timestamp` from `Time Filter field name` and click on `Create` button.
+- Within the "Configure an index pattern" page, enter `logstash-*` to
+  `Index pattern` and select `@timestamp` from `Time Filter field name` and
+  click on `Create` button.
 
 ![Create logstash-* index](images/kibana-landing-page-configure-index.png)
 
-* To create the second index, select `Create Index Pattern` button on top left of the page.
-Enter `zipkin*` to `Index pattern` and select `timestamp_millis` from `Time Filter field name` and click on `Create` button.
+- To create the second index, select `Create Index Pattern` button on top left
+  of the page. Enter `zipkin*` to `Index pattern` and select `timestamp_millis`
+  from `Time Filter field name` and click on `Create` button.
+
 
 ## Stackdriver, Prometheus & Grafana Setup
 
-If your Knative Serving is not built on a Google Cloud Platform (GCP) based cluster or you want to send logs to another GCP project, you need to build your own Fluentd image and modify the configuration first. See
+If your Knative Serving is not built on a Google Cloud Platform (GCP) based
+cluster or you want to send logs to another GCP project, you need to build your
+own Fluentd image and modify the configuration first. See
 
-1. Install [Fluentd image on Knative Serving](https://github.com/knative/serving/blob/master/image/fluentd/README.md).
+1. Install
+   [Fluentd image on Knative Serving](https://github.com/knative/serving/blob/master/image/fluentd/README.md).
 2. [Set up a logging plugin](setting-up-a-logging-plugin.md).
-3. Install Knative monitoring components:  
-  ```
-  kubectl apply -R -f config/monitoring/100-common \
-      -f config/monitoring/150-stackdriver-prod \
-      -f third_party/config/monitoring/common \
-      -f config/monitoring/200-common \
-      -f config/monitoring/200-common/100-istio.yaml
-  ```
+3. Install Knative monitoring components:
+
+```
+kubectl apply -R -f config/monitoring/100-common \
+    -f config/monitoring/150-stackdriver-prod \
+    -f third_party/config/monitoring/common \
+    -f config/monitoring/200-common \
+    -f config/monitoring/200-common/100-istio.yaml
+```
 
 ## Learn More
 
-* Learn more about accessing logs, metrics, and traces:
-  * [Accessing Logs](./accessing-logs.md)
-  * [Accessing Metrics](./accessing-metrics.md)
-  * [Accessing Traces](./accessing-traces.md)
+- Learn more about accessing logs, metrics, and traces:
+  - [Accessing Logs](./accessing-logs.md)
+  - [Accessing Metrics](./accessing-metrics.md)
+  - [Accessing Traces](./accessing-traces.md)
+
 ---
 
 Except as otherwise noted, the content of this page is licensed under the
