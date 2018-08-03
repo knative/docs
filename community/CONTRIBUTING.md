@@ -85,21 +85,21 @@ following steps:
 
 *   If the feature is substantial enough:
 
-  *   Working group leads will ask for a design document as outlined in
-      [design documents](#design-documents). Create the design document and
-      add a link to it in the GitHub issue. Don't forget to send a note to the
-      working group to let everyone know your document is ready for review.
+    *   Working group leads will ask for a design document as outlined in
+        [design documents](#design-documents). Create the design document and
+        add a link to it in the GitHub issue. Don't forget to send a note to the
+        working group to let everyone know your document is ready for review.
 
-  *   Depending on the breadth of the design and how contentious it is, the
-      working group leads may decide the feature needs to be discussed in one
-      or more working group meetings before being approved.
+    *   Depending on the breadth of the design and how contentious it is, the
+        working group leads may decide the feature needs to be discussed in one
+        or more working group meetings before being approved.
 
-  *   Once the major technical issues are resolved and agreed upon, post a
-      note with the design decision and the general execution plan to the
-      working group's mailing list and on the feature's issue.
+    *   Once the major technical issues are resolved and agreed upon, post a
+        note with the design decision and the general execution plan to the
+        working group's mailing list and on the feature's issue.
 
-*   Submit PRs to [knative/serving](https://github.com/knative/serving/pulls) with
-    your code changes.
+*   Submit PRs to [knative/serving](https://github.com/knative/serving/pulls)
+    with your code changes.
 
 *   Submit PRs to knative/serving with user documentation for your feature,
     including usage examples when possible. Add documentation to
@@ -168,44 +168,39 @@ When reporting a bug please include the following key pieces of information:
     hundreds of lines long.
 
 ## Third-party code
-
 * All third-party code must be placed in `vendor/` or `third_party/` folders.
 * `vendor/` folder is managed by [dep](https://github.com/golang/dep) and stores
-the source code of third-party Go dependencies. `vendor/` folder should not be
+the source code of third-party Go dependencies. `vendor/` folder should not be 
 modified manually.
 * Other third-party code belongs in `third_party/` folder.
 * Third-party code must include licenses.
 
-A non-exclusive list of code that must be places in `vendor/` and
-`third_party/`:
-
+A non-exclusive list of code that must be places in `vendor/` and `third_party/`:
 * Open source, free software, or commercially-licensed code.
 * Tools or libraries or protocols that are open source, free software, or commercially licensed.
 * Derivative works of third-party code.
 * Excerpts from third-party code.
 
 ### Adding a new third-party dependency to `third_party/` folder
-
 * Create a sub-folder under `third_party/` for each component.
 * In each sub-folder, make sure there is a file called LICENSE which contains the appropriate
  license text for the dependency. If one doesn't exist then create it. More details on this below.
-* Check in a pristine copy of the code with LICENSE and METADATA files.
+* Check in a pristine copy of the code with LICENSE and METADATA files. 
  You do not have to include unused files, and you can move or rename files if necessary,
-  but do not modify the contents of any files yet.
+ but do not modify the contents of any files yet.
 * Once the pristine copy is merged into master, you may modify the code.
 
 ### LICENSE
-
 The license for the code must be in a file named LICENSE. If it was distributed like that,
-you're good. If not, you need to make LICENSE be a file containing the full text of the license.
-If there's another file in the distribution with the license in it, rename it to LICENSE
-(e.g., rename a LICENSE.txt or COPYING file to LICENSE). If the license is only available in
+you're good. If not, you need to make LICENSE be a file containing the full text of the license. 
+If there's another file in the distribution with the license in it, rename it to LICENSE 
+(e.g., rename a LICENSE.txt or COPYING file to LICENSE). If the license is only available in 
 the comments or at a URL, extract and copy the text of the license into LICENSE.
 
-You may optionally document the generation of the LICENSE file in the local_modifications
+You may optionally document the generation of the LICENSE file in the local_modifications 
 field of the METADATA file.
 
-If there are multiple licenses for the code, put the text of all the licenses into LICENSE
+If there are multiple licenses for the code, put the text of all the licenses into LICENSE 
 along with separators and comments as to the applications.
 
 ---
