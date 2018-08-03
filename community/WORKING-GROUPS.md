@@ -80,7 +80,7 @@ Slack Channel              | [#eventing](https://knative.slack.com/messages/C9JP
 
 ## Scaling
 
-Autoscaling
+Autoscaling, Performance
 
 Artifact                   | Link
 -------------------------- | ----
