@@ -95,10 +95,10 @@ Inspect the created resources with the `kubectl` commands:
 To access this service via `curl`, you need to determine its ingress address.
 
 1. To determine if your service is ready:  
-Check the status of your Knative gateway:
-```
-kubectl get svc knative-ingressgateway -n istio-system --watch
-```
+  Check the status of your Knative gateway:
+  ```
+  kubectl get svc knative-ingressgateway -n istio-system --watch
+  ```
 
   When the service is ready, you'll see an IP address in the `EXTERNAL-IP` field:
   ```
@@ -119,7 +119,7 @@ kubectl get svc knative-ingressgateway -n istio-system --watch
       status: "True"
       type: Ready
       domain: telemetrysample-route.default.example.com
-      ```
+  ```
 
 2. Export the ingress hostname and IP as environment
 variables:

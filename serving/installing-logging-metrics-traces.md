@@ -10,46 +10,46 @@ these two are not supported.
 ## Elasticsearch, Kibana, Prometheus & Grafana Setup
 
 If you installed the
-[latest Knative Serving components](../install/README.md#Installing-Knative),
+[full Knative release](../install/README.md#Installing-Knative),
 skip this step and continue to
 [Create Elasticsearch Indices](#Create-Elasticsearch-Indices)
 
 - Install Knative monitoring components:
 
-```
-kubectl apply -R -f config/monitoring/100-common \
-    -f config/monitoring/150-elasticsearch \
-    -f third_party/config/monitoring/common \
-    -f third_party/config/monitoring/elasticsearch \
-    -f config/monitoring/200-common \
-    -f config/monitoring/200-common/100-istio.yaml
-```
+  ```shell
+  kubectl apply -R -f config/monitoring/100-common \
+      -f config/monitoring/150-elasticsearch \
+      -f third_party/config/monitoring/common \
+      -f third_party/config/monitoring/elasticsearch \
+      -f config/monitoring/200-common \
+      -f config/monitoring/200-common/100-istio.yaml
+  ```
 
 - The installation is complete when logging & monitoring components are all
   reported `Running` or `Completed`:
 
-```
-kubectl get pods -n monitoring --watch
-```
+  ```shell
+  kubectl get pods -n monitoring --watch
+  ```
 
-```
-NAME                                  READY     STATUS    RESTARTS   AGE
-elasticsearch-logging-0               1/1       Running   0          2d
-elasticsearch-logging-1               1/1       Running   0          2d
-fluentd-ds-5kc85                      1/1       Running   0          2d
-fluentd-ds-vhrcq                      1/1       Running   0          2d
-fluentd-ds-xghk9                      1/1       Running   0          2d
-grafana-798cf569ff-v4q74              1/1       Running   0          2d
-kibana-logging-7d474fbb45-6qb8x       1/1       Running   0          2d
-kube-state-metrics-75bd4f5b8b-8t2h2   4/4       Running   0          2d
-node-exporter-cr6bh                   2/2       Running   0          2d
-node-exporter-mf6k7                   2/2       Running   0          2d
-node-exporter-rhzr7                   2/2       Running   0          2d
-prometheus-system-0                   1/1       Running   0          2d
-prometheus-system-1                   1/1       Running   0          2d
-```
+  ```
+  NAME                                  READY     STATUS    RESTARTS   AGE
+  elasticsearch-logging-0               1/1       Running   0          2d
+  elasticsearch-logging-1               1/1       Running   0          2d
+  fluentd-ds-5kc85                      1/1       Running   0          2d
+  fluentd-ds-vhrcq                      1/1       Running   0          2d
+  fluentd-ds-xghk9                      1/1       Running   0          2d
+  grafana-798cf569ff-v4q74              1/1       Running   0          2d
+  kibana-logging-7d474fbb45-6qb8x       1/1       Running   0          2d
+  kube-state-metrics-75bd4f5b8b-8t2h2   4/4       Running   0          2d
+  node-exporter-cr6bh                   2/2       Running   0          2d
+  node-exporter-mf6k7                   2/2       Running   0          2d
+  node-exporter-rhzr7                   2/2       Running   0          2d
+  prometheus-system-0                   1/1       Running   0          2d
+  prometheus-system-1                   1/1       Running   0          2d
+  ```
 
-CTRL+C when it's done.
+  CTRL+C to exit watch.
 
 ### Create Elasticsearch Indices
 
@@ -93,13 +93,13 @@ own Fluentd image and modify the configuration first. See
 2. [Set up a logging plugin](setting-up-a-logging-plugin.md).
 3. Install Knative monitoring components:
 
-```
-kubectl apply -R -f config/monitoring/100-common \
-    -f config/monitoring/150-stackdriver-prod \
-    -f third_party/config/monitoring/common \
-    -f config/monitoring/200-common \
-    -f config/monitoring/200-common/100-istio.yaml
-```
+  ```shell
+  kubectl apply -R -f config/monitoring/100-common \
+      -f config/monitoring/150-stackdriver-prod \
+      -f third_party/config/monitoring/common \
+      -f config/monitoring/200-common \
+      -f config/monitoring/200-common/100-istio.yaml
+  ```
 
 ## Learn More
 
