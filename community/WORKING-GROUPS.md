@@ -13,9 +13,10 @@ procedures.
 The working groups generate design docs which are kept in a
 [shared drive](https://drive.google.com/corp/drive/folders/0APnJ_hRs30R2Uk9PVA)
 and are available for anyone to read and comment on. The shared drive
-currently grants edit and comment access to the
-[knative-dev@](https://groups.google.com/forum/#!forum/knative-dev)
-Google group.
+currently grants read access to
+[knative-users@](https://groups.google.com/forum/#!forum/knative-users) and edit
+and comment access to the
+[knative-dev@](https://groups.google.com/forum/#!forum/knative-dev) Google group.
 
 The current working groups are:
 
