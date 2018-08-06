@@ -125,10 +125,10 @@ directions above.
 
    ```shell
     # Build the container on your local machine
-    docker build -t {username}/helloworld-go .
+    docker build -t {username}/helloworld-elixir .
 
     # Push the container to docker registry
-    docker push {username}/helloworld-go
+    docker push {username}/helloworld-elixir
     ```
 
 1. After the build has completed and the container is pushed to docker hub, you
