@@ -156,7 +156,7 @@ complement the volumes that are implicitly
 
 For example, use volumes to accomplish one of the following common tasks:
 
- * [Mount a Kubernetes secrets(./auth.md).
+ * [Mount a Kubernetes secret](./auth.md).
 
  * Creat an `emptyDir` volume to act as a cache for use across multiple build
    steps. Consider using a persistent volume for inter-build caching.
