@@ -9,6 +9,7 @@ erl_crash.dump
 
 # Generated on crash by NPM
 npm-debug.log
+/assets/package-lock.json
 
 # Static artifacts
 /assets/node_modules
