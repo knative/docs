@@ -80,7 +80,17 @@ IP address created by Knative.
 1. To find the IP address for your service, enter
    `kubectl get svc knative-ingressgateway -n istio-system`. If your cluster is
    new, it can take sometime for the service to get asssigned an external IP address.
-   You can also export the IP address as a variable with the following command:
+   
+   ```shell
+    kubectl get svc knative-ingressgateway -n istio-system
+
+    NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
+    knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
+
+    ```
+    Take note of the `EXTERNAL-IP` address.
+   
+    You can also export the IP address as a variable with the following command:
 
     ```shell
     export IP_ADDRESS=$(kubectl get svc knative-ingressgateway -n istio-system -o 'jsonpath={.status.loadBalancer.ingress[0].ip}')
