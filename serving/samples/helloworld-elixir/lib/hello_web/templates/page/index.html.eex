@@ -1,0 +1,12 @@
+<div class="jumbotron">
+  <h2><%= @greeting %></h2>
+
+  <p>$TARGET = <%= @target %></p>
+</div>
+
+  <h3>Environment</h3>
+  <ul>
+  <%= for key <- Enum.sort(Map.keys(@env)) do %>
+    <li><%= key %> = <%= Map.get(@env, key) %></li>
+  <% end %>
+  </ul>
