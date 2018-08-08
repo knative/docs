@@ -1,6 +1,6 @@
 # Resources
 
-This page contains informations about various tools and technologies
+This page contains information about various tools and technologies
 that are useful to anyone developing on Knative.
 
 ## Community Resources
@@ -10,8 +10,7 @@ Knative community specifically for use with Knative.
 
 ### [`knctl`](https://github.com/cppforlife/knctl)
 
-`knctl` is an under-development command line tool for working with
-Knative.
+`knctl` is an under-development CLI for working with Knative. 
 
 ## Other Resources
 
