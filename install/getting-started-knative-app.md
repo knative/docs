@@ -77,9 +77,10 @@ Now that your service is created, Knative will perform the following steps:
 To see if your app has been deployed succesfully, you need the host URL and
 IP address created by Knative.
 
-1. To find the IP address for your service, enter
-   `kubectl get svc knative-ingressgateway -n istio-system`. If your cluster is
-   new, it can take sometime for the service to get asssigned an external IP address.
+Note: If your cluster is new, it can take some time before the service is
+asssigned an external IP address.
+
+1. To find the IP address for your service, enter:
    
    ```shell
     kubectl get svc knative-ingressgateway -n istio-system
@@ -139,7 +140,7 @@ IP address created by Knative.
     Hello World: Go Sample v1!
     ```
     
-    If you deployed your own app, you may want to customize this cURL
+    If you deployed your own app, you might want to customize this cURL
     request to interact with your application.
 
     It can take a few seconds for Knative to scale up your application and return
