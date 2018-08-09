@@ -16,7 +16,7 @@ to test-drive knative.
 
 ## Install `oc` (openshift cli)
 
-You can install the latest version of `oc`, the openshift CLI into your local
+You can install the latest version of `oc`, the OpenShift CLI, into your local
 directory by downloading the right release tarball for your OS from the
 [releases page](https://github.com/openshift/origin/releases/tag/v3.10.0).
 
