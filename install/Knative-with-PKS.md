@@ -32,7 +32,7 @@ Knative depends on Istio. Istio workloads require privileged mode for Init Conta
 
 1. Install Istio:
     ```bash
-    kubectl apply -f https://storage.googleapis.com/knative-releases/latest/istio.yaml
+    kubectl apply -f https://storage.googleapis.com/knative-releases/serving/latest/istio.yaml
     ```
 1. Label the default namespace with `istio-injection=enabled`:
     ```bash
@@ -55,7 +55,7 @@ rerun the command to see the current status.
 1. Next, we will install [Knative Serving](https://github.com/knative/serving)
 and its dependencies:
     ```bash
-    kubectl apply -f https://storage.googleapis.com/knative-releases/latest/release.yaml
+    kubectl apply -f https://storage.googleapis.com/knative-releases/serving/latest/release.yaml
     ```
 1. Monitor the Knative components, until all of the components show a `STATUS` of
 `Running`:

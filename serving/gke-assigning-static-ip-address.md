@@ -40,6 +40,7 @@ In the [GCP console](https://console.cloud.google.com/networking/addresses/add?_
    1. From the **Region** drop-down, choose the region where your Knative cluster is running. 
    
       For example, select the `us-west1` region if you deployed your cluster to the `us-west1-c` zone.
+   1. Leave the **Attached To** field set to `None` since we'll attach the IP address through a config-map later.
    1. Copy the **External Address** of the static IP you created.
 
 
