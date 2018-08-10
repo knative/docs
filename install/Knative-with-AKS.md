@@ -69,7 +69,7 @@ environment variables. First determine which region you'd like to run AKS in, al
 
 1. Set `RESOURCE_GROUP` and `LOCATION` variables:
    ```bash
-   export LOCATION=east-us
+   export LOCATION=eastus
    export RESOURCE_GROUP=knative-group
    export CLUSTER_NAME=knative-cluster
    ```
