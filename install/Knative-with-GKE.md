@@ -154,7 +154,7 @@ You can install the Knative Serving and Build components together, or Build on i
     kubectl get pods -n knative-build
     ```
 
-### Installing Knative Build
+### Installing Knative Build only
 
 1. Run the `kubectl apply` command to install
    [Knative Build](https://github.com/knative/build) and its dependencies:
