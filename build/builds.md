@@ -90,7 +90,7 @@ define one or more `steps` fields to define the body of a build.
 
 Each `steps` in a build must specify a `Builder`, or type of container image that
 adheres to the [Knative builder contract](./builder-contract.md). For each of
-the of the `steps` fields, or container images that you define:
+the `steps` fields, or container images that you define:
 
 * The `Builder`-type container images are run and evaluated in order, starting
   from the top of the configuration file.
@@ -156,7 +156,7 @@ complement the volumes that are implicitly
 
 For example, use volumes to accomplish one of the following common tasks:
 
- * [Mount a Kubernetes secrets(./auth.md).
+ * [Mount a Kubernetes secret](./auth.md).
 
  * Creat an `emptyDir` volume to act as a cache for use across multiple build
    steps. Consider using a persistent volume for inter-build caching.

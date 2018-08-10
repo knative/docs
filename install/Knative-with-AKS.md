@@ -69,7 +69,7 @@ environment variables. First determine which region you'd like to run AKS in, al
 
 1. Set `RESOURCE_GROUP` and `LOCATION` variables:
    ```bash
-   export LOCATION=east-us
+   export LOCATION=eastus
    export RESOURCE_GROUP=knative-group
    export CLUSTER_NAME=knative-cluster
    ```
@@ -123,7 +123,7 @@ Knative depends on Istio.
 
 1. Install Istio:
     ```bash
-    kubectl apply -f https://storage.googleapis.com/knative-releases/serving/latest/istio.yaml
+    kubectl apply -f https://raw.githubusercontent.com/knative/serving/v0.1.0/third_party/istio-0.8.0/istio.yaml
     ```
 1. Label the default namespace with `istio-injection=enabled`:
     ```bash
@@ -147,7 +147,7 @@ rerun the command to see the current status.
 1. Next, we will install [Knative Serving](https://github.com/knative/serving)
 and its dependencies:
     ```bash
-    kubectl apply -f https://storage.googleapis.com/knative-releases/serving/latest/release.yaml
+    kubectl apply -f https://github.com/knative/serving/releases/download/v0.1.0/release.yaml
     ```
 1. Monitor the Knative components, until all of the components show a `STATUS` of
 `Running`:

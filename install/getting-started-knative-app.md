@@ -77,11 +77,12 @@ Now that your service is created, Knative will perform the following steps:
 To see if your app has been deployed succesfully, you need the host URL and
 IP address created by Knative.
 
-1. To find the IP address for your service, enter
-   `kubectl get svc knative-ingressgateway -n istio-system`. If your cluster is
-   new, it can take sometime for the service to get asssigned an external IP address.
+Note: If your cluster is new, it can take some time before the service is
+asssigned an external IP address.
 
-    ```shell
+1. To find the IP address for your service, enter:
+   
+   ```shell
     kubectl get svc knative-ingressgateway -n istio-system
 
     NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
@@ -89,8 +90,13 @@ IP address created by Knative.
 
     ```
     Take note of the `EXTERNAL-IP` address.
-    
-    
+   
+    You can also export the IP address as a variable with the following command:
+
+    ```shell
+    export IP_ADDRESS=$(kubectl get svc knative-ingressgateway -n istio-system -o 'jsonpath={.status.loadBalancer.ingress[0].ip}')
+
+    ```
    > Note: if you use minikube or a baremetal cluster that has no external load balancer, the
      `EXTERNAL-IP` field is shown as `<pending>`. You need to use `NodeIP` and `NodePort` to
      interact your app instead. To get your app's `NodeIP` and `NodePort`, enter the following command:
@@ -105,22 +111,38 @@ IP address created by Knative.
     NAME                DOMAIN
     helloworld-go       helloworld-go.default.example.com
     ```
+
+    You can also export the host URL as a variable using the following command:
+    
+    ```shell
+    export HOST_URL=$(kubectl get services.serving.knative.dev helloworld-go  -o jsonpath='{.status.domain}')
+    ```
+
     If you changed the name from `helloworld-go` to something else when creating
-    the the `.yaml` file, replace `helloworld-go` in the above command with the
+    the `.yaml` file, replace `helloworld-go` in the above commands with the
     name you entered.
 
-1. Now you can make a request to your app to see the results. Replace
+1. Now you can make a request to your app and see the results. Replace
    `IP_ADDRESS` with the `EXTERNAL-IP` you wrote down, and replace
    `helloworld-go.default.example.com` with the domain returned in the previous
    step.
-
-   If you deployed your own app, you may want to customize this cURL
-   request to interact with your application.
-
+   
     ```shell
-    curl -H "Host: helloworld-go.default.example.com" http://${IP_ADDRESS}
+    curl -H "Host: helloworld-go.default.example.com" http://IP_ADDRESS
     Hello World: Go Sample v1!
     ```
+   
+   If you exported the host URL And IP address as variables in the previous steps, you
+   can use those variables to simplify your cURL request:
+
+    ```shell
+    curl -H "Host: ${HOST_URL}" http://${IP_ADDRESS}
+    Hello World: Go Sample v1!
+    ```
+    
+    If you deployed your own app, you might want to customize this cURL
+    request to interact with your application.
+
     It can take a few seconds for Knative to scale up your application and return
     a response.
 
