@@ -75,7 +75,7 @@ metadata:
 
 ### Accessing request logs
 
-To access to request logs, enter the following search in Kibana:
+To access the request logs, enter the following search in Kibana:
 
 ```text
 tag: "requestlog.logentry.istio-system"
