@@ -14,7 +14,7 @@ If you installed the
 skip this step and continue to
 [Create Elasticsearch Indices](#Create-Elasticsearch-Indices)
 
-- Install Knative monitoring components from the root of the serving repository:
+- Install Knative monitoring components from the root of the [Serving repository](https://github.com/knative/serving):
 
   ```shell
   kubectl apply -R -f config/monitoring/100-common \
