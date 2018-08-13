@@ -80,9 +80,9 @@ kubernetes.labels.build\-name: <BUILD_NAME>
 
 ### Accessing request logs
 
-To access to request logs:
-* Enter the following search in Kibana:
-```
+To access the request logs, enter the following search in Kibana:
+
+```text
 tag: "requestlog.logentry.istio-system"
 ```
 
