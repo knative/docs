@@ -205,4 +205,4 @@ curl -H "Host: $SERVICE_HOST" \
 
 Although this demo uses an external application, the Knative Serving deployment
 steps would be similar for any 'dockerized' app you may already have.
-Just copy the `thumbnailer.yaml` and change a few variables.
+Just copy the `sample.yaml` and change a few variables.
