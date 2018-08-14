@@ -31,8 +31,10 @@ Skip this step if you already have a zone for managing DNS records of your
 custom domain.
 
 A DNS zone which will contain the managed DNS records needs to be created.
-Assume your custom domain is `external-dns-test.my-org.do`. You can use the 
-following command to create a DNS zone if you are using Google Cloud DNS.
+Assume your custom domain is `external-dns-test.my-org.do`.
+
+#### Google Cloud Platform
+You can use the following command to create a DNS zone if you are using Google Cloud DNS.
 ```shell
 gcloud dns managed-zones create "external-dns-zone" \
     --dns-name "external-dns-test.my-org.do." \
@@ -66,70 +68,11 @@ gcloud dns record-sets transaction execute --zone "my-org-do"
 ```
 
 ### Deploy ExternalDNS
-Apply the following manifest to install ExternalDNS. Note that you need to set 
-the argument `domain-filter` to your custom domain. 
-```
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: external-dns
----
-apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: ClusterRole
-metadata:
-  name: external-dns
-rules:
-- apiGroups: [""]
-  resources: ["services"]
-  verbs: ["get","watch","list"]
-- apiGroups: [""]
-  resources: ["pods"]
-  verbs: ["get","watch","list"]
-- apiGroups: ["extensions"] 
-  resources: ["ingresses"] 
-  verbs: ["get","watch","list"]
-- apiGroups: [""]
-  resources: ["nodes"]
-  verbs: ["list"]
----
-apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: ClusterRoleBinding
-metadata:
-  name: external-dns-viewer
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: external-dns
-subjects:
-- kind: ServiceAccount
-  name: external-dns
-  namespace: default
----
-apiVersion: extensions/v1beta1
-kind: Deployment
-metadata:
-  name: external-dns
-spec:
-  strategy:
-    type: Recreate
-  template:
-    metadata:
-      labels:
-        app: external-dns
-    spec:
-      serviceAccountName: external-dns
-      containers:
-      - name: external-dns
-        image: registry.opensource.zalan.do/teapot/external-dns:latest
-        args:
-        - --source=service
-        - --source=ingress
-        - --domain-filter=external-dns-test.my-org.do # will make ExternalDNS see only the hosted zones matching provided domain, omit to process all available hosted zones
-        - --provider=google
-        - --policy=upsert-only # would prevent ExternalDNS from deleting any records, omit to enable full synchronization
-        - --registry=txt
-        - --txt-owner-id=my-identifier
-```
+
+#### Google Cloud Platform
+Apply the [manifest](https://github.com/kubernetes-incubator/external-dns/blob/master/docs/tutorials/gke.md#manifest-for-clusters-without-rbac-enabled) to 
+install ExternalDNS. Note that you need to set the argument `domain-filter` to 
+your custom domain.
 
 You should see ExternalDNS is installed by running
 ```shell
@@ -150,6 +93,9 @@ This command opens your default text editor and allows you to edit the
 
 After roughly two minutes check that a corresponding DNS record for your 
 service was created.
+
+#### Google Cloud Platform
+
 ```shell
 gcloud dns record-sets list     --zone "external-dns-zone"     --name "*.external-dns-test.my-org.do."
 ```
@@ -159,6 +105,9 @@ NAME                            TYPE  TTL  DATA
 *.external-dns-test.my-org.do.  A     300  35.231.248.30
 *.external-dns-test.my-org.do.  TXT   300  "heritage=external-dns,external-dns/owner=my-identifier,external-dns/resource=service/istio-system/knative-ingressgateway"
 ```
+
+### Verify domain has been published
+
 You can check if the domain has been published to the Internet with
 ```shell
 host test.external-dns-test.my-org.do
