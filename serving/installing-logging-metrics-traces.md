@@ -1,9 +1,9 @@
 # Monitoring, Logging and Tracing Installation
 
 Knative Serving offers two different monitoring setups:
-[Elasticsearch, Kibana, Prometheus and Grafana](#Elasticsearch,-Kibana,-Prometheus-&-Grafana-Setup)
+[Elasticsearch, Kibana, Prometheus and Grafana](#elasticsearch-kibana-prometheus--grafana-setup)
 or
-[Stackdriver, Prometheus and Grafana](#Stackdriver,-Prometheus-&-Grafana-Setup).
+[Stackdriver, Prometheus and Grafana](#stackdriver-prometheus--grafana-setup).
 You can install only one of these two setups and side-by-side installation of
 these two are not supported.
 
@@ -12,7 +12,7 @@ these two are not supported.
 If you installed the
 [full Knative release](../install/README.md#Installing-Knative),
 skip this step and continue to
-[Create Elasticsearch Indices](#Create-Elasticsearch-Indices)
+[Create Elasticsearch Indices](#create-elasticsearch-indices)
 
 - Install Knative monitoring components from the root of the [Serving repository](https://github.com/knative/serving):
 
@@ -55,6 +55,29 @@ skip this step and continue to
 
 To visualize logs with Kibana, you need to set which Elasticsearch indices to explore. We will create two indices in Elasticsearch using `Logstash` for application logs and `Zipkin`
 for request traces.
+
+- Ensure your Kubernetes node(s) are labeled with
+  `beta.kubernetes.io/fluentd-ds-ready="true"` so that the Fluentd
+  DaemonSet runs on each node:
+
+  ```shell
+  kubectl label nodes --all beta.kubernetes.io/fluentd-ds-ready="true"
+  ```
+
+  Some platforms come with this label set by default, so if you see an
+  error like below you can safely ignore it:
+
+  ```shell
+  error: 'beta.kubernetes.io/fluentd-ds-ready' already has a value (true), and --overwrite is false
+  ```
+
+  Wait for the Fluentd DaemonSet to be ready on at least one Node
+  before proceeding to create the Elasticsearch indices. You can check
+  the status with:
+
+  ```shell
+  kubectl get daemonset fluentd-ds -n monitoring
+  ```
 
 - To open the Kibana UI (the visualization tool for
   [Elasticsearch](https://info.elastic.co)), start a local proxy with the
