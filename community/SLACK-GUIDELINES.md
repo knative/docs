@@ -126,6 +126,10 @@ Proprietary conversations should occur in your company communication platforms.
 As with all communication, please be mindful of appropriateness, professionalism,
 and applicability to the Knative community.
 
+## Access
+
+You can access and enroll in the [Knative Slack](https://slack.knative.dev) instance at https://slack.knative.dev
+
 ---
 
 Except as otherwise noted, the content of this page is licensed under the
