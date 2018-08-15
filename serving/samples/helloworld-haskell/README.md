@@ -155,7 +155,7 @@ folder) you're ready to build and deploy the sample app.
 
 1. To find the IP address for your service, enter
    `kubectl get svc knative-ingressgateway -n istio-system` to get the ingress IP for your
-   cluster. If your cluster is new, it may take sometime for the service to get asssigned
+   cluster. If your cluster is new, it may take some time for the service to get assigned
    an external IP address.
 
     ```shell
