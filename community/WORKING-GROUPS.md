@@ -52,8 +52,8 @@ Slack Channel              | [#api](https://knative.slack.com)
 Artifact                   | Link
 -------------------------- | ----
 Forum                      | [knative-dev@](https://groups.google.com/forum/#!forum/knative-dev)
-Community Meeting VC       | [build-crd](https://hangouts.google.com/hangouts/_/google.com/build-crd)
-Community Meeting Calendar | Wednesdays 10:00a-10:30a PST <br>[Calendar Invitation](https://calendar.google.com/event?action=TEMPLATE&tmeid=MTBkb3MwYnVrbDd0djE0a2kzcmpmbjZndm9fMjAxODA3MTFUMTcwMDAwWiBtYXR0bW9vckBnb29nbGUuY29t&tmsrc=mattmoor%40google.com)
+Community Meeting VC       | [meet.google.com/hau-nwak-tgm](https://meet.google.com/hau-nwak-tgm) <br>Or dial in:<br>(US) +1 219-778-6103‬ PIN: ‪573 000‬#
+Community Meeting Calendar | Wednesdays 10:00a-10:30a PST <br>[Calendar Invitation](https://calendar.google.com/event?action=TEMPLATE&tmeid=MTBkb3MwYnVrbDd0djE0a2kzcmpmbjZndm9fMjAxODA4MTVUMTcwMDAwWiBqYXNvbmhhbGxAZ29vZ2xlLmNvbQ&tmsrc=jasonhall%40google.com&scp=ALL)
 Meeting Notes              | [Notes](https://docs.google.com/document/d/1e7gMVFlJfkFdTcaWj2qETeRD9kSBG2Vh8mASPmQMYC0/edit)
 Document Folder            | [Folder](https://drive.google.com/corp/drive/folders/1ov16HvPam-v_FXAGEaUdHok6_hUAoIoe)
 Slack Channel              | [#build-crd](https://knative.slack.com)
