@@ -25,9 +25,3 @@ COPY --from=builder /go/src/github.com/knative/docs/github-events /sample
 
 ENTRYPOINT ["/sample"]
 EXPOSE 8080
-
-
-# TODO: FIX IN DOCS REPO:
-# Dockerfile pathing is relative to the dockerfile itself which causes two issues here:
-# this github-events directory's contents gets placed under /go/src/github.com/knative/docs/ which results in an unable to find eventing/samples/github-events error when compiling. This can be fixed by changing the above command to ADD . /go/src/github.com/knative/docs/eventing/samples/github-events
-# Because we are only copying the github-events dir we lack the deps for this example (which are in docs/vendor). ISTM we can either add them with go get or add dep to the docker image along with a Gopkg config and then run dep ensure.
