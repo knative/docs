@@ -11,18 +11,19 @@ In response to a pull request event, the sample app _legit_ Service will add
 
 ## Prerequisites
 
-- A Kubernetes cluster with Knative installed. Follow the
+- A Kubernetes cluster with Knative serving installed. Follow the
   [installation instructions](https://github.com/knative/docs/blob/master/install/README.md)
   if you need to create one.
 - [Docker](https://www.docker.com/) installed and running on your local machine,
   and a Docker Hub account configured (you'll use it for a container registry).
-- The core Knative eventing tools installed. You can install them with:
+- The core Knative eventing core installed. You can install with:
   ```shell
   kubectl apply -f https://storage.googleapis.com/knative-releases/eventing/latest/release.yaml
   ```
-- A custom domain is setup to allow for GitHub to be able to call into the cluster:
+- A domain name that allows GitHub to call into the cluster: Follow the
   [configure a custom domain](https://github.com/knative/docs/blob/master/serving/using-a-custom-domain.md) and 
-  [assign a static IP address](https://github.com/knative/docs/blob/master/serving/gke-assigning-static-ip-address.md).
+  [assign a static IP address](https://github.com/knative/docs/blob/master/serving/gke-assigning-static-ip-address.md)
+  instructions.
 
 ## Configuring Knative
 
@@ -36,9 +37,8 @@ kubectl apply -f https://storage.googleapis.com/knative-releases/eventing/latest
 
 ## Granting permissions
 
-Because the `github` EventSource needs to create a
-`Service.serving.knative.dev`, you'll need to provision a special
-ServiceAccount with the necessary permissions.
+Because the `github` EventSource needs to create a Knative Service, you'll need
+to provision a special ServiceAccount with the necessary permissions.
 
 The `eventing/samples/github-events/auth.yaml` file provisions a service
 account, and creates a role which can create a Knative Service in the `default`
@@ -88,7 +88,7 @@ kubectl apply -f eventing/samples/github-events/auth.yaml
     The token can be named anything you find convenient. This sample requires
     full `repo` control to be able update the title of the _Pull Request_.
     The Source requires `admin:repo_hook`, this allows it to create webhooks
-    into repos that your account is allowed to do so. Copy and save this token,
+    into repos that your account is allowed to do so. Copy and save this token;
     GitHub will force you to generate it again if misplaced.
 
     Here I named my token "EventingSample" and have selected the recommended
