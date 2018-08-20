@@ -25,7 +25,7 @@ spec:
             knative.dev/type: function
         spec:
           container:
-            image: github.com/knative/eventing/sample/github
+            image: docker.io/{username}/github-events # TODO: fill username out
             env:
             - name: GITHUB_SECRET
               valueFrom:

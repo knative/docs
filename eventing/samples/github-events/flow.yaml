@@ -20,8 +20,8 @@ metadata:
 spec:
   serviceAccountName: feed-sa
   trigger:
-    eventType: pullrequest
-    resource: <org>/<repo> # TODO: Fill this out
+    eventType: dev.knative.github.pullrequest
+    resource: n3wscott/kopond
     service: github
     parameters:
       secretName: githubsecret
