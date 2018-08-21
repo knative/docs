@@ -3,8 +3,8 @@
 [ExternalDNS](https://github.com/kubernetes-incubator/external-dns) is a tool 
 that synchronizes exposed Kubernetes Services and Ingresses with DNS providers.
 
-This doc explains how to set up ExternalDNS within a Knative cluster to 
-automate the process of publishing the domain used in Knative.
+This doc explains how to set up ExternalDNS within a Knative cluster using
+Google Cloud DNS to automate the process of publishing the Knative domain.
 
 ## Prerequisite
 
@@ -90,8 +90,6 @@ gcloud dns record-sets transaction execute --zone "my-org-do"
 
 ### Deploy ExternalDNS
 
-#### Google Cloud DNS
-
 Use the following command to apply the [manifest](https://github.com/kubernetes-incubator/external-dns/blob/master/docs/tutorials/gke.md#manifest-for-clusters-without-rbac-enabled) to install ExternalDNS 
 ```shell
 cat <<EOF | kubectl apply -f -
@@ -114,8 +112,8 @@ needs to be added into Knative gateway service:
 kubectl edit svc knative-ingressgateway -n istio-system
 ```
 This command opens your default text editor and allows you to add the 
-annotation to `knative-ingressgateway` service. Below is an example to show 
-where to add the annotation
+annotation to `knative-ingressgateway` service. After you've added your
+annotation, your file may look similar to this:
 ```
 apiVersion: v1
 kind: Service
