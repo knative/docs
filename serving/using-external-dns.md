@@ -10,7 +10,29 @@ automate the process of publishing the domain used in Knative.
 
 1. A Kubernetes cluster with [Knative Serving](https://github.com/knative/docs/blob/master/install/README.md) installed.
 1. A public domain that will be used in Knative.
-1. Follow the steps at [Setting up a custom domain](https://github.com/knative/docs/blob/master/serving/using-a-custom-domain.md#edit-using-kubectl) in the "Edit with kubectl" section to make Knative use your domain.
+1. Configure Knative to use your custom domain.
+```shell
+kubectl edit cm config-domain -n knative-serving
+```
+This command opens your default text editor and allows you to edit the config 
+map.
+```
+apiVersion: v1
+data:
+  example.com: ""
+kind: ConfigMap
+[...]
+```
+Edit the file to replace `example.com` with the domain you'd like to use and 
+save your changes. In this example, we use domain `external-dns-test.my-org.do`
+ for all routes:
+```
+apiVersion: v1
+data:
+  external-dns-test.my-org.do: ""
+kind: ConfigMap
+[...]
+```
 
 ## Setup steps
 
@@ -69,8 +91,14 @@ gcloud dns record-sets transaction execute --zone "my-org-do"
 ### Deploy ExternalDNS
 
 #### Google Cloud DNS
-Apply the [manifest](https://github.com/kubernetes-incubator/external-dns/blob/master/docs/tutorials/gke.md#manifest-for-clusters-without-rbac-enabled) to install ExternalDNS. Note that you need
-to set the argument `domain-filter` to your custom domain.
+
+Use the following command to apply the [manifest](https://github.com/kubernetes-incubator/external-dns/blob/master/docs/tutorials/gke.md#manifest-for-clusters-without-rbac-enabled) to install ExternalDNS 
+```shell
+cat <<EOF | kubectl apply -f -
+<the-content-of-manifest-with-custom-domain-filter>
+EOF
+```
+Note that you need to set the argument `domain-filter` to your custom domain.
 
 You should see ExternalDNS is installed by running:
 ```shell
@@ -85,8 +113,17 @@ needs to be added into Knative gateway service:
 ```shell
 kubectl edit svc knative-ingressgateway -n istio-system
 ```
-This command opens your default text editor and allows you to edit the 
-`knative-ingressgateway` service.
+This command opens your default text editor and allows you to add the 
+annotation to `knative-ingressgateway` service. Below is an example to show 
+where to add the annotation
+```
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: '*.external-dns-test.my-org.do'
+    ...
+```
 
 ### Verify ExternalDNS works
 
