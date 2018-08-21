@@ -4,7 +4,8 @@
 that synchronizes exposed Kubernetes Services and Ingresses with DNS providers.
 
 This doc explains how to set up ExternalDNS within a Knative cluster using
-Google Cloud DNS to automate the process of publishing the Knative domain.
+[Google Cloud DNS](https://cloud.google.com/dns/) to automate the process
+of publishing the Knative domain.
 
 ## Prerequisite
 
