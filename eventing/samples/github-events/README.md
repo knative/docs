@@ -16,7 +16,8 @@ In response to a pull request event, the sample app _legit_ Service will add
   if you need to create one.
 - [Docker](https://www.docker.com/) installed and running on your local machine,
   and a Docker Hub account configured (you'll use it for a container registry).
-- The core Knative eventing core installed. You can install with:
+- The Kubernetes cluster also has Knative eventing core installed. You can
+  install with:
   ```shell
   kubectl apply -f https://storage.googleapis.com/knative-releases/eventing/latest/release.yaml
   ```
