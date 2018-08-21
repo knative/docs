@@ -12,6 +12,9 @@ video recording or in another public space. Please be courteous to others.
 from these commands and we are a global project - please be kind. 
 Note: `@all` is only to be used by admins.
 
+You can join the [Knative Slack](https://slack.knative.dev) instance at
+https://slack.knative.dev.
+
 ## Code of Conduct
 The Knative [Code of Conduct](./CODE-OF-CONDUCT.md) applies throughout the 
 project, and includes all communication mediums.
