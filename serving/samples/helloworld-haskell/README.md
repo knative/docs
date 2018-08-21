@@ -12,7 +12,7 @@ TARGET is not specified, it will use "NOT SPECIFIED" as the TARGET.
 * [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
 
-## Steps to recreate the sample code
+## Recreating the sample code
 
 While you can clone all of the code from this directory, hello world
 apps are generally more useful if you build them step-by-step. The
@@ -104,23 +104,23 @@ following instructions recreate the source files from this folder.
 1. Create a new file, `service.yaml` and copy the following service definition
    into the file. Make sure to replace `{username}` with your Docker Hub username.
 
-    ```yaml
-    apiVersion: serving.knative.dev/v1alpha1
-    kind: Service
-    metadata:
-    name: helloworld-haskell
-    namespace: default
-    spec:
-    runLatest:
-        configuration:
-        revisionTemplate:
-            spec:
-            container:
-                image: docker.io/{username}/helloworld-haskell
-                env:
-                - name: TARGET
-                value: "Haskell Sample v1"
-    ```
+```yaml
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: helloworld-haskell
+  namespace: default
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            image: docker.io/{username}/helloworld-haskell
+            env:
+            - name: TARGET
+              value: "Haskell Sample v1"
+```
 
 ## Build and deploy this sample
 
