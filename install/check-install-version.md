@@ -30,4 +30,4 @@ If you aren't already signed in, you'll need to sign in a to a Google account be
 On the container details page, you'll see a section titled "Container classification," and in that section is a list of tags. The versions of Knative you have installed
 will appear in the list as `v0.1.1`, or whatever verion you have installed:
 
-![../images/knative-version.png]
+![Shows list of tags on container details page; v0.1.1 is the Knative version and is the first tag.](../images/knative-version.png)
