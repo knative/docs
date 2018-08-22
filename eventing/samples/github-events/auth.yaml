@@ -17,15 +17,27 @@ metadata:
   name: feed-sa
   namespace: default
 ---
-apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
 metadata:
-  name: feed-admin
+  name: create-knative-service
+  namespace: default
+rules:
+- apiGroups: ["serving.knative.dev"]
+  resources: ["services"]
+  verbs: ["get", "list", "watch", "create", "update", "delete", "patch"]
+---
+# This enables the feed-sa to deploy the receive adapter.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: feed-sa-deploy
+  namespace: default
 subjects:
   - kind: ServiceAccount
     name: feed-sa
     namespace: default
 roleRef:
-  kind: ClusterRole
-  name: cluster-admin
+  kind: Role
+  name: create-knative-service
   apiGroup: rbac.authorization.k8s.io

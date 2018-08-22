@@ -88,9 +88,7 @@ func main() {
 		return
 	}
 
-	// Set up the auth for being able to talk to Github. It's
-	// odd that you have to also pass context around for the
-	// calls even after giving it to client. But, whatever.
+	// Set up the auth for being able to talk to Github.
 	ctx := context.Background()
 	ts := oauth2.StaticTokenSource(
 		&oauth2.Token{AccessToken: credentials.AccessToken},

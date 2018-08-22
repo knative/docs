@@ -1,4 +1,7 @@
-# GitHub Flow
+# Reacting to GitHub Events
+
+In response to a pull request event, the sample app _legit_ Service will add 
+`(looks pretty legit)` to the PR title.
 
 A GitHub webhook will be created on a repository and a Knative `Service` will be 
 deployed to receive the webhook's event deliveries and forward them into a 
@@ -6,33 +9,35 @@ deployed to receive the webhook's event deliveries and forward them into a
 `Flow` resource takes care of provisioning the webhook, the `Service`, the 
 `Channel`, and the `Subscription`.
 
-In response to a pull request event, the sample app _legit_ Service will add 
-`(looks pretty legit)` to the PR title.
-
 ## Prerequisites
+
+You will need:
 
 - A Kubernetes cluster with Knative serving installed. Follow the
   [installation instructions](https://github.com/knative/docs/blob/master/install/README.md)
   if you need to create one.
 - [Docker](https://www.docker.com/) installed and running on your local machine,
   and a Docker Hub account configured (you'll use it for a container registry).
-- The Kubernetes cluster also has Knative eventing core installed. You can
-  install with:
+- Knative eventing core installed on your Kubernetes cluster. You can install
+  with:
   ```shell
   kubectl apply -f https://storage.googleapis.com/knative-releases/eventing/latest/release.yaml
   ```
 - A domain name that allows GitHub to call into the cluster: Follow the
-  [configure a custom domain](https://github.com/knative/docs/blob/master/serving/using-a-custom-domain.md) and 
   [assign a static IP address](https://github.com/knative/docs/blob/master/serving/gke-assigning-static-ip-address.md)
+  and
+  [configure a custom domain](https://github.com/knative/docs/blob/master/serving/using-a-custom-domain.md)
   instructions.
 
 ## Configuring Knative
 
 To use this sample, you'll need to install the `stub` ClusterBus and the 
-`github` EventSource.
+`github` EventSource:
 
 ```shell
+# Installs ClusterBus
 kubectl apply -f https://storage.googleapis.com/knative-releases/eventing/latest/release-clusterbus-stub.yaml
+# Installs EventSource
 kubectl apply -f https://storage.googleapis.com/knative-releases/eventing/latest/release-source-github.yaml
 ```
 
@@ -50,11 +55,12 @@ this service account to only specific namespaces.
 kubectl apply -f eventing/samples/github-events/auth.yaml
 ```
 
-## Build and deploy the sample
+## Building and deploying the sample
 
 1.  Use Docker to build the sample code into a container. To build and push with
-    Docker Hub, run these commands replacing `{username}` with your Docker Hub
-    username. Run the following from the _root_ of the `knative/docs` repo:
+    Docker Hub, run the following commands, replacing `{username}` with your
+    Docker Hub username. Run these commands, r following from the _root_ of the
+    `knative/docs` repo:
 
     ```shell
     # Build the container on your local machine
@@ -128,7 +134,11 @@ kubectl apply -f eventing/samples/github-events/auth.yaml
     kubectl apply -f eventing/samples/github-events/githubsecret.yaml
     ```
 
-1.  Create the flow sending GitHub Events to the service:
+1.  Update the resource inside `eventing/samples/github-events/flow.yaml` to the
+    org/repo of your choosing. Note that the personal access token must be valid
+    for the chosen org/repo. 
+
+    Then create the flow sending GitHub Events to the service:
 
     ```shell
     kubectl apply -f eventing/samples/github-events/flow.yaml

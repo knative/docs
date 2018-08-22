@@ -21,7 +21,7 @@ spec:
   serviceAccountName: feed-sa
   trigger:
     eventType: dev.knative.github.pullrequest
-    resource: n3wscott/kopond
+    resource: <org>/<repo> # TODO: update this
     service: github
     parameters:
       secretName: githubsecret
@@ -32,6 +32,6 @@ spec:
           key: githubCredentials
   action:
     target:
-      kind: Route
+      kind: Service
       apiVersion: serving.knative.dev/v1alpha1
       name: legit
