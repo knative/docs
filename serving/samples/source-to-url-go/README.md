@@ -189,16 +189,6 @@ container for the application.
        revisionName: app-from-source-00007
    ```
 
-
-1. After the build has completed and the container is pushed to Docker Hub, you
-   can deploy the app into your cluster. Ensure that the container image value
-   in `service.yaml` matches the container you built in
-   the previous step. Apply the configuration using `kubectl`:
-
-    ```shell
-    kubectl apply -f service.yaml
-    ```
-
 1. Now that your service is created, Knative will perform the following steps:
    * Fetch the revision specified from GitHub and build it into a container
    * Push the container to Docker Hub
