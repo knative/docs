@@ -90,30 +90,30 @@ to obtain a certificate manually.
 1. When certbot is complete, you will have two output files, `privkey.pem` and `fullchain.pem`. These files
    map to the `cert.pk` and `cert.pem` files used above.
 
-## Obtaining an SSL/TLS certificate using LetsEncrypt through CertManager
+## Obtaining an SSL/TLS certificate using LetsEncrypt with cert-manager
 
-Because CertManager HTTP01 ACME challenge resolver doesn't work with Istio
-Gateway yet, we show here how to use the DNS01 challenge.  While this limits the
-set of DNS providers to just [a handful](
-http://docs.cert-manager.io/en/latest/reference/issuers/acme/dns01.html?highlight=DNS#supported-dns01-providers),
-it adds the benefit of getting wildcard certificates.
+You can also use [cert-manager](https://github.com/jetstack/cert-manager)
+to automate the steps required to generate a TLS certificate using LetsEncrypt.
 
-### Install CertManager
+### Install cert-manager
 
-Run
+To install cert-manager into your cluster, use kubectl to apply the cert-manager manifest:
+
 ```
 kubectl apply -f https://raw.githubusercontent.com/jetstack/cert-manager/master/contrib/manifests/cert-manager/with-rbac.yaml
 ```
-or see [CertManager doc](https://cert-manager.readthedocs.io/en/latest/getting-started/) for more ways to install and customize.
+or see the [cert-manager docs](https://cert-manager.readthedocs.io/en/latest/getting-started/) for more ways to install and customize.
 
-### Platform specific steps
+### Configure cert-manager for your DNS provider
 
-The DNS01 ACME challenge asks the domain owner to add a record to their zone to
-prove ownership.  That means we will need to provide some service account to
-CertManager so that it can perform the challenge for us.
+Once you have installed cert-manager, you'll need to configure it for your DNS 
+hosting provider. 
 
-Since service accounts instruction are platform specific, please find instruction
-for your platforms below:
+Knative currently only works with the `DNS01` challenge type for LetsEncrypt, which
+is only supported by a [small number of DNS providers through cert-manager](http://docs.cert-manager.io/en/latest/reference/issuers/acme/dns01.html?highlight=DNS#supported-dns01-providers).
+
+Instructions for configuring cert-manager are provided for the following DNS hosts:
+
 * [Google Cloud DNS](using-cert-manager-on-gcp.md)
 
 
