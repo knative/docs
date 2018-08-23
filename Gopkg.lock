@@ -71,6 +71,14 @@
   revision = "2b0383b8e4d67ffac446b17a7922bf7e5d9f5362"
 
 [[projects]]
+  branch = "master"
+  digest = "1:d6415e6b744ec877c21fe734067636b9ee149af77276b08a3d33dd8698abf947"
+  name = "github.com/knative/test-infra"
+  packages = ["."]
+  pruneopts = "T"
+  revision = "4a4a682ee1fd31f33e450406393c3553b9ec5c2a"
+
+[[projects]]
   name = "github.com/matttproud/golang_protobuf_extensions"
   packages = ["pbutil"]
   revision = "c12348ce28de40eed0136aa2b644d0ee0650e56c"
