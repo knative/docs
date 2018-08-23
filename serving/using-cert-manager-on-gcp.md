@@ -95,7 +95,7 @@ kubectl get clusterissuer -n cert-manager letsencrypt-issuer -o yaml
 ```
 and confirm that its conditions have `Ready=True`.  For an example:
 
-```shell
+```yaml
 status:
   acme:
     uri: https://acme-v02.api.letsencrypt.org/acme/acct/40759665
@@ -156,7 +156,7 @@ kubectl get certificate -n istio-system my-certificate -o yaml
 ```
 and verify that its `Status.Conditions` have `Ready=True`.  For an example
 
-```shell
+```yaml
 status:
   acme:
     order:
