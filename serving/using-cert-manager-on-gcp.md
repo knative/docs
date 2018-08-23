@@ -1,10 +1,17 @@
-# Specify a service account to perform the DNS01 ACME challenge
+# Configure Knative and cert-manager for Google Cloud DNS
 
-The DNS01 ACME challenge asks the domain owner to add a record to their zone to
-prove ownership.  That means we will need to provide some service account to
-CertManager so that it can perform the challenge for us.
+These instructions assuming you have already setup a Knative cluster and installed
+cert-manager into your cluster. For more information, see [using an SSL certificate](using-an-ssl-cert.md).
 
-As an example, Cloud DNS user can create a service account with the project role `dns.admin`:
+To automate the generation of a certificate with cert-manager and LetsEncrypt, 
+we will use a `DNS01` challenge type, which requires the domain owner to add a TXT record
+to their zone to prove ownership. Other challenge types are not currently supported by
+Knative.
+
+To be able to add the TXT record, we need to configure Knative with a service account
+that can be used by cert-manager to create and update this DNS record.
+
+To begin, we create a new service account with the project role `dns.admin`:
 
 ```
 # Set this to your GCP project ID
@@ -44,8 +51,7 @@ rm ~/key.json
 
 ```
 
-
-# Configure CertManager to use your DNS admin service account
+## Configure CertManager to use your DNS admin service account
 
 ## Specify a certificate issuer which is a set of ACME challenge solvers
 
