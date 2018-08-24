@@ -46,7 +46,7 @@ table describes:
     <td>Member</td>
     <td>Regular active contributor in the community</td>
     <td>
-        <p>Sponsored by 2 approvers</p>
+        <p>Sponsored by two members</p>
         <p>Has made multiple contributions to the project</p>
     </td>
     <td>
