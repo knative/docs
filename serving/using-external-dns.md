@@ -15,9 +15,9 @@ You can create a GKE cluster with Cloud DNS scope by running
 gcloud container clusters create "external-dns" \
     --scopes "https://www.googleapis.com/auth/ndev.clouddns.readwrite"
 ```
-1. [Knative Serving](https://github.com/knative/docs/blob/master/install/README.md).
-1. A public domain that will be used in Knative.
-1. Configure Knative to use your custom domain.
+2. [Knative Serving](https://github.com/knative/docs/blob/master/install/README.md).
+3. A public domain that will be used in Knative.
+4. Configure Knative to use your custom domain.
 ```shell
 kubectl edit cm config-domain -n knative-serving
 ```
