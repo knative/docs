@@ -25,6 +25,7 @@ The current working groups are:
 *   [Events](#events)
 *   [Networking](#networking)
 *   [Observability](#observability)
+*   [Productivity](#productivity)
 *   [Scaling](#scaling)
 <!-- TODO add charters for each group -->
 
@@ -132,6 +133,24 @@ Slack Channel              | [#autoscaling](https://knative.slack.com)
 &nbsp;                                                        | Leads          | Company | Profile
 ------------------------------------------------------------- | -------------- | ------- | -------
 <img width="30px" src="https://github.com/josephburnett.png"> | Joseph Burnett | Google  | [josephburnett](https://github.com/josephburnett)
+
+## Productivity
+
+Project health, test framework, continuous integration & deployment, release, performance/scale/load testing infrastructure 
+
+Artifact                   | Link
+-------------------------- | ----
+Forum                      | [knative-dev@](https://groups.google.com/forum/#!forum/knative-dev)
+Community Meeting VC       | [Hangouts](https://meet.google.com/sps-vbhg-rfx)
+Community Meeting Calendar | [Calendar Invitation](https://calendar.google.com/event?action=TEMPLATE&tmeid=NW5zM21rbHVwZWgyNHFoMGpyY2JhMjB2bHRfMjAxODA4MzBUMjEwMDAwWiBnb29nbGUuY29tXzE4dW40ZnVoNnJva3FmOGhtZmZ0bTVvcXE0QGc&tmsrc=google.com_18un4fuh6rokqf8hmfftm5oqq4%40group.calendar.google.com&scp=ALL)
+Meeting Notes              | [Notes](https://docs.google.com/document/d/1aPRwYGD4XscRIqlBzbNsSB886PJ0G-vZYUAAUjoydko)
+Document Folder            | [Folder](https://drive.google.com/corp/drive/folders/1oMYB4LQHjySuMChmcWYCyhH7-CSkz2r_)
+Slack Channel              | [#productivity](https://knative.slack.com)
+
+&nbsp;                                                    | Leads          | Company | Profile
+--------------------------------------------------------- | -------------- | ------- | -------
+<img width="30px" src="https://github.com/jessiezcc.png"> | Jessie Zhu     | Google  | [jessiezcc](https://github.com/jessiezcc)
+<img width="30px" src="https://github.com/adrcunha.png">  | Adriano Cunha | Google  | [adrcunhua](https://github.com/adrcunha)
 
 ---
 
