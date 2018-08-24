@@ -1,4 +1,4 @@
-## Configure Knative and cert-manager for Google Cloud DNS
+# Configure Knative and cert-manager for Google Cloud DNS
 
 These instructions assuming you have already setup a Knative cluster and
 installed cert-manager into your cluster. For more information, see [using an
@@ -11,7 +11,7 @@ we will use a `DNS01` challenge type, which requires the domain owner to add a T
 to their zone to prove ownership. Other challenge types are not currently supported by
 Knative.
 
-### Create a Cloud DNS service account
+## Create a Cloud DNS service account
 To be able to add the TXT record, we need to configure Knative with a service account
 that can be used by cert-manager to create and update this DNS record.
 
@@ -55,9 +55,19 @@ rm ~/key.json
 
 ```
 
-### Configure CertManager to use your DNS admin service account
+## Configure CertManager to use your DNS admin service account
 
-#### Specify a certificate issuer which is a set of ACME challenge solvers
+Next, we'll configure cert-manager to request new certificates and 
+verify the challenges using DNS.
+
+### Specify a certificate issuer
+
+For this example, we're going to configure cert-manager to use 
+LetsEncrypt, however you can use any certificate provider that
+supports the ACME protocol.
+
+Here we configure to use the `dns01` challenge type, which will
+enable certificate generation and wildcard certificates.
 
 ```shell
 kubectl apply -f - <<EOF
@@ -93,6 +103,7 @@ To check if your ClusterIssuer is valid, run
 ```shell
 kubectl get clusterissuer -n cert-manager letsencrypt-issuer -o yaml
 ```
+
 and confirm that its conditions have `Ready=True`.  For an example:
 
 ```yaml
@@ -107,7 +118,10 @@ status:
     type: Ready
 ```
 
-#### Specifying our certificate: which issuer it should use, and which secret to publish the cert.
+### Specifying our certificate
+
+Next we need to configure which certificate issuer to use
+and which secret we'll publish the certificate into.
 
 ```shell
 # Change this value to the domain you want to use.
@@ -154,6 +168,7 @@ To check that your certificate setting is valid, run
 ```shell
 kubectl get certificate -n istio-system my-certificate -o yaml
 ```
+
 and verify that its `Status.Conditions` have `Ready=True`.  For an example
 
 ```yaml
@@ -169,7 +184,13 @@ status:
     type: Ready
 ```
 
-### Configure our Gateway `knative-shared-gateway` to use the certificate.
+### Configure our Gateway 
+
+In the last step, we configure the knative-shared-gateway to use the certificate
+that is generated and stored automatically by cert-manager.
+
+The key edit here is adding the `tls:` section to the end of the HTTPS port
+configuration.
 
 ```shell
 kubectl apply -f - <<EOF
@@ -200,3 +221,8 @@ spec:
       serverCertificate: /etc/istio/ingressgateway-certs/tls.crt
 EOF
 ```
+
+Now you should be able to access your services via HTTPS and
+cert-manager will keep your certificates up-to-date so they
+are replaced before the certificate expires.
+
