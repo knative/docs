@@ -1,6 +1,10 @@
 # Refer to https://github.com/golang/dep/blob/master/docs/Gopkg.toml.md
 # for detailed Gopkg.toml documentation.
 
+required = [
+  "github.com/knative/test-infra",
+]
+
 ignored = [
   "github.com/knative/docs/serving/samples/grpc-ping-go*",
 ]
@@ -9,3 +13,8 @@ ignored = [
   go-tests = true
   unused-packages = true
   non-go = true
+
+[[prune.project]]
+  name = "github.com/knative/test-infra"
+  unused-packages = false
+  non-go = false

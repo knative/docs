@@ -14,22 +14,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This script runs the presubmit tests, in the right order.
-# It is started by prow for each PR.
-# For convenience, it can also be executed manually.
+source $(dirname $0)/../vendor/github.com/knative/test-infra/scripts/library.sh
 
-source $(dirname $0)/../vendor/github.com/knative/test-infra/scripts/presubmit-tests.sh
+set -o errexit
+set -o nounset
+set -o pipefail
 
-function build_tests() {
-  header "TODO(#67): Write build tests"
-}
+cd ${REPO_ROOT_DIR}
 
-function unit_tests() {
-  header "TODO(#66): Write unit tests"
-}
+# Ensure we have everything we need under vendor/
+dep ensure
 
-function integration_tests() {
-  ./test/e2e-tests.sh
-}
-
-main $@
+# Keep the only dir in knative/test-infra we're interested in
+find vendor/github.com/knative/test-infra -mindepth 1 -maxdepth 1 ! -name scripts -exec rm -fr {} \;
