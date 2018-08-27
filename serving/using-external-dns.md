@@ -9,15 +9,15 @@ of publishing the Knative domain.
 
 ## Prerequisite
 
-1. A GKE cluster with Cloud DNS scope.
-You can create a GKE cluster with Cloud DNS scope by running
-```shell
-gcloud container clusters create "external-dns" \
-    --scopes "https://www.googleapis.com/auth/ndev.clouddns.readwrite"
-```
-2. [Knative Serving](https://github.com/knative/docs/blob/master/install/README.md).
-3. A public domain that will be used in Knative.
-4. Configure Knative to use your custom domain.
+1. A Google Kubernetes Engine cluster with Cloud DNS scope.
+   You can create a GKE cluster with Cloud DNS scope by entering the following command:
+   ```shell
+   gcloud container clusters create "external-dns" \
+       --scopes "https://www.googleapis.com/auth/ndev.clouddns.readwrite"
+   ```
+1. [Knative Serving](https://github.com/knative/docs/blob/master/install/README.md) installed on your cluster.
+1. A public domain that will be used in Knative.
+1. Knative configured to use your custom domain.
 ```shell
 kubectl edit cm config-domain -n knative-serving
 ```
