@@ -150,6 +150,8 @@ kubectl apply -f eventing/samples/github-events/auth.yaml
 
 ## Understanding what happened
 
+`TODO: similar to k8s-events.`
+
 <!--TODO:
 explain the resources and communication channels, as well as where the secret
 is used. In particular include a note to look at
