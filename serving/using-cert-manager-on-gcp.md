@@ -2,8 +2,8 @@
 
 These instructions assuming you have already setup a Knative cluster and
 installed cert-manager into your cluster. For more information, see [using an
-SSL certificate](using-an-ssl-cert.md). Another assumption is that you already
-setup your managed zone with Cloud DNS, as part of configuring the domain to
+SSL certificate](using-an-ssl-cert.md#install-cert-manager). Another assumption is that you already
+set up your managed zone with Cloud DNS as part of configuring the domain to
 map to your IP address.
 
 To automate the generation of a certificate with cert-manager and LetsEncrypt,
@@ -25,12 +25,12 @@ export PROJECT_ID=<your-project-id>
 export CLOUD_DNS_SA=cert-manager-cloud-dns-admin
 gcloud --project $PROJECT_ID iam service-accounts \
   create $CLOUD_DNS_SA \
-  --display-name "Service Account to perform ACME DNS-01 challenge."
+  --display-name "Service Account to support ACME DNS-01 challenge."
 
 # Fully-qualified service account name also has project-id information.
 export CLOUD_DNS_SA=$CLOUD_DNS_SA@$PROJECT_ID.iam.gserviceaccount.com
 
-# Bind the role dns.admin to this service account, so it can be used to perform
+# Bind the role dns.admin to this service account, so it can be used to support
 # the ACME DNS01 challenge.
 gcloud projects add-iam-policy-binding $PROJECT_ID \
   --member serviceAccount:$CLOUD_DNS_SA \
@@ -79,6 +79,8 @@ metadata:
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
+    # This will register an issuer with LetsEncrypt.  Replace
+    # with your admin email address.
     email: myemail@gmail.com
     privateKeySecretRef:
       # Set privateKeySecretRef to any unused secret name.
@@ -121,7 +123,9 @@ status:
 ### Specifying our certificate
 
 Next we need to configure which certificate issuer to use
-and which secret we'll publish the certificate into.
+and which secret we'll publish the certificate into.  We will need
+to use the Secret `istio-ingressgateway-certs`.  The following steps
+will overwrite such Secret if it already existed.
 
 ```shell
 # Change this value to the domain you want to use.
@@ -140,20 +144,22 @@ spec:
   secretName: istio-ingressgateway-certs
   acme:
     config:
-    # Each certificate could comprise of different ACME challenge
+    # Each certificate could rely on different ACME challenge
     # solver.  In this example we are using one provider for all
     # the domains.
     - dns01:
         provider: cloud-dns-provider
       domains:
       # Since certificate wildcards only allow one level, we will
-      # need to one for every namespace.  We don't need to use
-      # wildcard here, fully-qualified domains will work fine too.
+      # need to one for every namespace that Knative is used in.
+      # We don't need to use wildcard here, fully-qualified domains
+      # will work fine too.
       - "*.default.$DOMAIN"
       - "*.other-namespace.$DOMAIN"
   # The certificate common name, use one from your domains.
   commonName: "*.default.$DOMAIN"
   dnsNames:
+  # Provide same list as `domains` section.
   - "*.default.$DOMAIN"
   - "*.other-namespace.$DOMAIN"
   # Reference to the ClusterIssuer we created in the previous step.
@@ -170,7 +176,6 @@ kubectl get certificate -n istio-system my-certificate -o yaml
 ```
 
 and verify that its `Status.Conditions` have `Ready=True`.  For an example
-
 ```yaml
 status:
   acme:
@@ -183,6 +188,8 @@ status:
     status: "True"
     type: Ready
 ```
+A condition with `Ready=False` is a failure to obtain certificate, and such
+condition usually has an error message to indicate the reason of failure.
 
 ### Configure our Gateway 
 
@@ -216,6 +223,7 @@ spec:
     hosts:
     - "*"
     tls:
+      httpsRedirect: true # sends 301 redirect for http requests.
       mode: SIMPLE
       privateKey: /etc/istio/ingressgateway-certs/tls.key
       serverCertificate: /etc/istio/ingressgateway-certs/tls.crt
