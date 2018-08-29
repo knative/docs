@@ -100,7 +100,7 @@ to automate the steps required to generate a TLS certificate using LetsEncrypt.
 To install cert-manager into your cluster, use kubectl to apply the cert-manager manifest:
 
 ```
-kubectl apply -f https://raw.githubusercontent.com/jetstack/cert-manager/master/contrib/manifests/cert-manager/with-rbac.yaml
+kubectl apply -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.5/contrib/manifests/cert-manager/with-rbac.yaml
 ```
 or see the [cert-manager docs](https://cert-manager.readthedocs.io/en/latest/getting-started/) for more ways to install and customize.
 
