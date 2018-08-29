@@ -46,25 +46,25 @@ kubectl apply -f https://storage.googleapis.com/knative-releases/eventing/latest
 Because the `github` EventSource needs to create a Knative Service, you'll need
 to provision a special ServiceAccount with the necessary permissions.
 
-The `eventing/samples/github-events/auth.yaml` file provisions a service
+The `auth.yaml` file provisions a service
 account, and creates a role which can create a Knative Service in the `default`
 namespace. In a production environment, you might want to limit the access of
 this service account to only specific namespaces.
 
 ```shell
-kubectl apply -f eventing/samples/github-events/auth.yaml
+kubectl apply -f auth.yaml
 ```
 
 ## Building and deploying the sample
 
 1.  Use Docker to build the sample code into a container. To build and push with
     Docker Hub, run the following commands, replacing `{username}` with your
-    Docker Hub username. Run these commands, r following from the _root_ of the
-    `knative/docs` repo:
+    Docker Hub username:
 
     ```shell
     # Build the container on your local machine
-    docker build -t {username}/github-events --file=eventing/samples/github-events/Dockerfile .
+    # Note: The relative path points to the _root_ of the `knative/docs` repo
+    docker build -t {username}/github-events --file=Dockerfile ../../../
 
     # Push the container to docker registry
     docker push {username}/github-events
@@ -76,7 +76,7 @@ kubectl apply -f eventing/samples/github-events/auth.yaml
     step.** Apply the configuration using `kubectl`:
 
     ```shell
-    kubectl apply -f eventing/samples/github-events/function.yaml
+    kubectl apply -f function.yaml
     ```
 
 1.  Check that your service is running using:
@@ -103,10 +103,10 @@ kubectl apply -f eventing/samples/github-events/auth.yaml
 
     ![GitHub UI](personal_access_token.png "GitHub personal access token screenshot")
 
-    Update `eventing/samples/github-events/githubsecret.yaml` with those
+    Update `githubsecret.yaml` with those
     values. If  your generated access token is `'asdfasfdsaf'` and you choose
     your *secretToken* as `'personal_access_token_value'`, you'd modify
-    `eventing/samples/github-events/githubsecret.yaml` like so:
+    `githubsecret.yaml` like so:
 
     ```yaml
     apiVersion: v1
@@ -131,17 +131,17 @@ kubectl apply -f eventing/samples/github-events/auth.yaml
     Then, apply the githubsecret using `kubectl`:
     
     ```shell
-    kubectl apply -f eventing/samples/github-events/githubsecret.yaml
+    kubectl apply -f githubsecret.yaml
     ```
 
-1.  Update the resource inside `eventing/samples/github-events/flow.yaml` to the
+1.  Update the resource inside `flow.yaml` to the
     org/repo of your choosing. Note that the personal access token must be valid
     for the chosen org/repo. 
 
     Then create the flow sending GitHub Events to the service:
 
     ```shell
-    kubectl apply -f eventing/samples/github-events/flow.yaml
+    kubectl apply -f flow.yaml
     ```
 
 1.  Create a PR for the repo you configured the webhook for, and you'll see that
@@ -164,10 +164,10 @@ and then deleted.
 To clean up the function, `Flow`, auth, and secret:
 
 ```shell
-kubectl delete -f eventing/samples/github-events/function.yaml
-kubectl delete -f eventing/samples/github-events/flow.yaml
-kubectl delete -f eventing/samples/github-events/auth.yaml
-kubectl delete -f eventing/samples/github-events/githubsecret.yaml
+kubectl delete -f function.yaml
+kubectl delete -f flow.yaml
+kubectl delete -f auth.yaml
+kubectl delete -f githubsecret.yaml
 ```
 
 And then delete the [personal access token](https://github.com/settings/tokens)
