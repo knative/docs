@@ -38,7 +38,7 @@ kubectl get route <route-name> -o yaml
 
 The `conditions` in `status` provide the reason if there is any failure. For
 details, see Knative
-[Error Conditions and Reporting](../spec/errors.md)(currently some of them
+[Error Conditions and Reporting](https://github.com/knative/serving/blob/master/docs/spec/errors.md)(currently some of them
 are not implemented yet).
 
 ## Check Revision status
@@ -77,7 +77,7 @@ If you see this condition, check the following to continue debugging:
 If you see other conditions, to debug further:
 
 * Look up the meaning of the conditions in Knative
-     [Error Conditions and Reporting](../spec/errors.md). Note: some of them
+     [Error Conditions and Reporting](https://github.com/knative/serving/blob/master/docs/spec/errors.md). Note: some of them
      are not implemented yet. An alternative is to
      [check Pod status](#check-pod-status).
 * If you are using `BUILD` to deploy and the `BuidComplete` condition is not
