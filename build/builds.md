@@ -48,7 +48,7 @@ following fields:
     authentication information.
   * [`volumes`](#volumes) - Specifies one or more volumes that you want to make
     available to your build.
-  * [`timeout`] - Specifies timeout after which the build will be failed.
+  * [`timeout`](#timeout) - Specifies timeout after which the build will fail.
 
 [kubernetes-overview]: https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/#required-fields
 
@@ -171,7 +171,7 @@ For example, use volumes to accomplish one of the following common tasks:
 Optional. Specifies timeout for the build. Includes time required for allocating resources and execution of build.
 
 * Defaults to 10 minutes.
-* Refer Go's ParseDuration documentation for expected format: https://golang.org/pkg/time/#ParseDuration
+* Refer to [Go's ParseDuration documentation](https://golang.org/pkg/time/#ParseDuration) for expected format.
 
 ### Examples
 
