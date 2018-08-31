@@ -51,9 +51,9 @@ and set up an Istio IP range for outbound network access:
 * [Configure outbound network access](../serving/outbound-network-access.md)
 * [Configuring HTTPS with a custom certificate](../serving/using-an-ssl-cert.md)
 
-## Checking Your Installed Version of Knative
+## Checking the Version of Your Knative Serving Installation
 
-* [Checking Your Installed Version of Knative](check-install-version.md)
+* [Checking the version of your Knative Serving installation](check-install-version.md)
 
 ---
 

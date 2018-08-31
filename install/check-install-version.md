@@ -1,4 +1,4 @@
-# Checking Knative Installation Version
+# Checking the Version of Your Knative Serving Installation
 
 If you want to check what version of Knative serving you have installed,
 enter the following command:
@@ -24,10 +24,14 @@ Pod Template:
 ```
 
 Copy the full `gcr.io` link to the container and paste it into your browser.
-If you are already signed in to a Google account, you'll be taken to the Google Container Registry page for that container in the Google Cloud Platform console.
-If you aren't already signed in, you'll need to sign in a to a Google account before you can view the container details.
+If you are already signed in to a Google account, you'll be taken to the Google
+Container Registry page for that container in the Google Cloud Platform console.
+If you aren't already signed in, you'll need to sign in a to a Google account
+before you can view the container details.
 
-On the container details page, you'll see a section titled "Container classification," and in that section is a list of tags. The versions of Knative you have installed
-will appear in the list as `v0.1.1`, or whatever verion you have installed:
+On the container details page, you'll see a section titled
+"Container classification," and in that section is a list of tags. The versions
+of Knative you have installed will appear in the list as `v0.1.1`, or whatever
+verion you have installed:
 
 ![Shows list of tags on container details page; v0.1.1 is the Knative version and is the first tag.](../images/knative-version.png)
