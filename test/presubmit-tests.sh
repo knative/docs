@@ -18,11 +18,7 @@
 # It is started by prow for each PR.
 # For convenience, it can also be executed manually.
 
-# Load github.com/knative/test-infra/images/prow-tests/scripts/presubmit-tests.sh
-[ -f /workspace/presubmit-tests.sh ] \
-  && source /workspace/presubmit-tests.sh \
-  || eval "$(docker run --entrypoint sh gcr.io/knative-tests/test-infra/prow-tests -c 'cat presubmit-tests.sh')"
-[ -v KNATIVE_TEST_INFRA ] || exit 1
+source $(dirname $0)/../vendor/github.com/knative/test-infra/scripts/presubmit-tests.sh
 
 function build_tests() {
   header "TODO(#67): Write build tests"

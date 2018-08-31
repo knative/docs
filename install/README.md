@@ -9,7 +9,7 @@ sure which Kubernetes platform is right for you, see
 [Picking the Right Solution](https://kubernetes.io/docs/setup/pick-right-solution/).
 
 We provide information for installing Knative on
-[Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine/docs/), [IBM Cloud Kubernetes Service](https://www.ibm.com/cloud/container-service), [Azure Kubernetes Service](https://docs.microsoft.com/en-us/azure/aks/), [Minikube](https://kubernetes.io/docs/setup/minikube/) and [Pivotal Container Service](https://pivotal.io/platform/pivotal-container-service) clusters.
+[Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine/docs/), [IBM Cloud Kubernetes Service](https://www.ibm.com/cloud/container-service), [Azure Kubernetes Service](https://docs.microsoft.com/en-us/azure/aks/), [Minikube](https://kubernetes.io/docs/setup/minikube/), [OpenShift](https://github.com/openshift/origin) and [Pivotal Container Service](https://pivotal.io/platform/pivotal-container-service) clusters.
 
 ## Installing Knative
 
@@ -21,6 +21,7 @@ Knative components on the following platforms:
 * [Knative Install on Google Kubernetes Engine](Knative-with-GKE.md)
 * [Knative Install on IBM Cloud Kubernetes Service](Knative-with-IKS.md)
 * [Knative Install on Minikube](Knative-with-Minikube.md)
+* [Knative Install on OpenShift](Knative-with-OpenShift.md)
 * [Knative Install on Pivotal Container Service](Knative-with-PKS.md)
 
 If you already have a Kubernetes cluster you're comfortable installing
@@ -49,6 +50,10 @@ and set up an Istio IP range for outbound network access:
 * [Configure a custom domain](../serving/using-a-custom-domain.md)
 * [Configure outbound network access](../serving/outbound-network-access.md)
 * [Configuring HTTPS with a custom certificate](../serving/using-an-ssl-cert.md)
+
+## Checking the Version of Your Knative Serving Installation
+
+* [Checking the version of your Knative Serving installation](check-install-version.md)
 
 ---
 

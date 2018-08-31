@@ -46,11 +46,12 @@ kubectl apply -f serviceaccount.yaml
 
 1.  Use Docker to build the sample code into a container. To build and push with
     Docker Hub, run these commands replacing `{username}` with your Docker Hub
-    username. Run the following from the _root_ of the `knative/docs` repo:
+    username:
 
     ```shell
     # Build the container on your local machine
-    docker build -t {username}/k8s-events --file=eventing/samples/k8s-events/Dockerfile .
+    # Note: The relative path points to the _root_ of the `knative/docs` repo
+    docker build -t {username}/k8s-events --file Dockerfile ../../../
 
     # Push the container to docker registry
     docker push {username}/k8s-events
@@ -62,21 +63,26 @@ kubectl apply -f serviceaccount.yaml
     step.** Apply the configuration using `kubectl`:
 
     ```shell
-    kubectl apply -f eventing/samples/k8s-events/function.yaml
+    kubectl apply -f function.yaml
     ```
 
 1.  Check that your service is running using:
 
     ```shell
-    kubectl get services.serving.knative.dev -o "custom-columns=NAME:.metadata.name,READY:.status.conditions[2].status,REASON:.status.conditions[2].message"
+    kubectl get ksvc -o "custom-columns=NAME:.metadata.name,READY:.status.conditions[2].status,REASON:.status.conditions[2].message"
     NAME              READY     REASON
     read-k8s-events   True      <none>
     ```
+    > Note: `ksvc` is an alias for `services.serving.knative.dev`. If you have
+      an older version (version 0.1.0) of Knative installed, you'll need to use
+      the long name until you upgrade to version 0.1.1 or higher. See
+      [Checking Knative Installation Version](../../../install/check-install-version.md)
+      to learn how to see what version you have installed.
 
 1.  Create the flow sending Kubernetes Events to the service:
 
     ```shell
-    kubectl apply -f eventing/samples/k8s-events/flow.yaml
+    kubectl apply -f flow.yaml
     ```
 
 1.  If you have the full knative install, you can read the function logs using

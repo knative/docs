@@ -109,7 +109,11 @@ perl -pi -e "s@DOCKER_REPO_OVERRIDE@$REPO@g" sample.yaml
 # Install the Kaniko build template used to build this sample (in the
 # build-templates repo).
 kubectl apply -f https://raw.githubusercontent.com/knative/build-templates/master/kaniko/kaniko.yaml
+
+# Create the Knative route and configuration for the application
+kubectl apply -f sample.yaml
 ```
+
 
 Now, if you look at the `status` of the revision, you will see that a build is in progress:
 
@@ -201,4 +205,4 @@ curl -H "Host: $SERVICE_HOST" \
 
 Although this demo uses an external application, the Knative Serving deployment
 steps would be similar for any 'dockerized' app you may already have.
-Just copy the `thumbnailer.yaml` and change a few variables.
+Just copy the `sample.yaml` and change a few variables.

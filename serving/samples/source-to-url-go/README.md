@@ -189,16 +189,6 @@ container for the application.
        revisionName: app-from-source-00007
    ```
 
-
-1. After the build has completed and the container is pushed to Docker Hub, you
-   can deploy the app into your cluster. Ensure that the container image value
-   in `service.yaml` matches the container you built in
-   the previous step. Apply the configuration using `kubectl`:
-
-    ```shell
-    kubectl apply -f service.yaml
-    ```
-
 1. Now that your service is created, Knative will perform the following steps:
    * Fetch the revision specified from GitHub and build it into a container
    * Push the container to Docker Hub
@@ -220,10 +210,16 @@ container for the application.
 1. To find the URL for your service, type:
 
     ```shell
-    $ kubectl get services.serving.knative.dev app-from-source  -o=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+    $ kubectl get ksvc app-from-source  -o=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
     NAME                DOMAIN
     app-from-source     app-from-source.default.example.com
     ```
+
+    > Note: `ksvc` is an alias for `services.serving.knative.dev`. If you have
+      an older version (version 0.1.0) of Knative installed, you'll need to use
+      the long name until you upgrade to version 0.1.1 or higher. See
+      [Checking Knative Installation Version](../../../install/check-install-version.md)
+      to learn how to see what version you have installed.
 
 1. Now you can make a request to your app to see the result. Replace
    `{IP_ADDRESS}` with the address that you got in the previous step:
