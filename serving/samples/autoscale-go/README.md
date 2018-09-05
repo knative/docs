@@ -52,12 +52,12 @@ Build the application container and publish it to a container registry:
 
 1. Deploy the Knative Serving sample:
    ```
-   kubectl apply -f serving/samples/autoscale-go/service.yaml
+   kubectl apply --filename serving/samples/autoscale-go/service.yaml
    ```
 
 1. Find the ingress hostname and IP and export as an environment variable:
    ```
-   export IP_ADDRESS=`kubectl get svc knative-ingressgateway -n istio-system -o jsonpath="{.status.loadBalancer.ingress[*].ip}"`
+   export IP_ADDRESS=`kubectl get svc knative-ingressgateway --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
    ```
 
 ## View the Autoscaling Capabilities
@@ -112,7 +112,7 @@ ceil(8.75) = 9
 View the Knative Serving Scaling and Request dashboards (if configured).
 
 ```
-kubectl port-forward -n monitoring $(kubectl get pods -n monitoring --selector=app=grafana --output=jsonpath="{.items..metadata.name}") 3000
+kubectl port-forward --namespace monitoring $(kubectl get pods --namespace monitoring --selector=app=grafana --output=jsonpath="{.items..metadata.name}") 3000
 ```
 
 ![scale dashboard](scale-dashboard.png)
@@ -149,7 +149,7 @@ kubectl port-forward -n monitoring $(kubectl get pods -n monitoring --selector=a
 ## Cleanup
 
 ```
-kubectl delete -f serving/samples/autoscale-go/service.yaml
+kubectl delete --filename serving/samples/autoscale-go/service.yaml
 ```
 
 ## Further reading

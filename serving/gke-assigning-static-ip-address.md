@@ -49,7 +49,7 @@ In the [GCP console](https://console.cloud.google.com/networking/addresses/add?_
 Run following command to configure the external IP of the 
 `knative-ingressgateway` service to the static IP that you reserved:
 ```shell
-kubectl patch svc knative-ingressgateway -n istio-system --patch '{"spec": { "loadBalancerIP": "<your-reserved-static-ip>" }}'
+kubectl patch svc knative-ingressgateway --namespace istio-system --patch '{"spec": { "loadBalancerIP": "<your-reserved-static-ip>" }}'
 service "knative-ingressgateway" patched
 ```
 
@@ -57,7 +57,7 @@ service "knative-ingressgateway" patched
 
 Run the following command to ensure that the external IP of the "knative-ingressgateway" service has been updated:
 ```shell
-kubectl get svc knative-ingressgateway -n istio-system
+kubectl get svc knative-ingressgateway --namespace istio-system
 ```
 The output should show the assigned static IP address under the EXTERNAL-IP column:
 ```

@@ -61,7 +61,7 @@ Knative depends on Istio. Run the following to install Istio. (We are changing
 ```shell
 curl -L https://raw.githubusercontent.com/knative/serving/v0.1.1/third_party/istio-0.8.0/istio.yaml \
   | sed 's/LoadBalancer/NodePort/' \
-  | kubectl apply -f -
+  | kubectl apply --filename -
 
 # Label the default namespace with istio-injection=enabled.
 kubectl label namespace default istio-injection=enabled
@@ -71,7 +71,7 @@ Monitor the Istio components until all of the components show a `STATUS` of
 `Running` or `Completed`:
 
 ```shell
-kubectl get pods -n istio-system
+kubectl get pods --namespace istio-system
 ```
 
 It will take a few minutes for all the components to be up and running; you can
@@ -92,14 +92,14 @@ the Knative components. To use the provided `release-lite.yaml` release, run:
 ```shell
 curl -L https://github.com/knative/serving/releases/download/v0.1.1/release-lite.yaml \
   | sed 's/LoadBalancer/NodePort/' \
-  | kubectl apply -f -
+  | kubectl apply --filename -
 ```
 
 Monitor the Knative components until all of the components show a `STATUS` of
 `Running`:
 
 ```shell
-kubectl get pods -n knative-serving
+kubectl get pods --namespace knative-serving
 ```
 
 Just as with the Istio components, it will take a few seconds for the Knative
@@ -127,7 +127,7 @@ head to the [sample apps](../serving/samples/README.md) repo.
   You can use the following command to look up the value to use for the {IP_ADDRESS} placeholder
   used in the samples:
   ```shell
-  echo $(minikube ip):$(kubectl get svc knative-ingressgateway -n istio-system -o 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
+  echo $(minikube ip):$(kubectl get svc knative-ingressgateway --namespace istio-system --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
   ```
 
 ## Cleaning up
