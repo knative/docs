@@ -40,7 +40,7 @@ spec:
     workingdir: "${DIRECTORY}"
     args: ["build", "--no-cache",
            "--tag", "${IMAGE}",
-           "--file", "${DOCKERFILE_NAME}"
+           "--file", "${DOCKERFILE_NAME}",
            "."]
     volumeMounts:
     - name: docker-socket
