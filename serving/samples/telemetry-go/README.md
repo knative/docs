@@ -26,43 +26,44 @@ go get -d github.com/knative/docs/serving/samples/telemetry-go
 
 Build the application container and publish it to a container registry:
 
-1. Move into the sample directory:  
+1. Move into the sample directory:
 ```
 cd $GOPATH/src/github.com/knative/docs
 ```
 
-2. Set your preferred container registry:  
+2. Set your preferred container registry:
 ```
 export REPO="gcr.io/<YOUR_PROJECT_ID>"
 ```
    This example shows how to use Google Container Registry (GCR). You will need
    a Google Cloud Project and to enable the [Google Container Registry
-API](https://console.cloud.google.com/apis/library/containerregistry.googleapis.com).  
+API](https://console.cloud.google.com/apis/library/containerregistry.googleapis.com).
 
-3. Use Docker to build your application container:  
+3. Use Docker to build your application container:
 ```
 docker build \
   --tag "${REPO}/serving/samples/telemetry-go" \
   --file=serving/samples/telemetry-go/Dockerfile .
 ```
 
-4. Push your container to a container registry:  
-```  
+4. Push your container to a container registry:
+```
 docker push "${REPO}/serving/samples/telemetry-go"
 ```
 
 5. Replace the image reference path with our published image path in the
-configuration file (`serving/samples/telemetry-go/sample.yaml`):  
-   * Manually replace:  
-    `image: github.com/knative/docs/serving/samples/telemetry-go` with
-    `image: <YOUR_CONTAINER_REGISTRY>/serving/samples/telemetry-go`  
+configuration file (`serving/samples/telemetry-go/sample.yaml`):
+   * Manually replace:
 
-    Or
+     `image: github.com/knative/docs/serving/samples/telemetry-go` with
+     `image: <YOUR_CONTAINER_REGISTRY>/serving/samples/telemetry-go`
 
-   * Use run this command:  
-    ```
-    perl -pi -e "s@github.com/knative/docs@${REPO}@g" serving/samples/telemetry-go/sample.yaml
-    ```
+   Or
+
+   * Run this command:
+     ```
+     perl -pi -e "s@github.com/knative/docs@${REPO}@g" serving/samples/telemetry-go/sample.yaml
+     ```
 
 ## Deploy the Service
 
@@ -94,7 +95,7 @@ Inspect the created resources with the `kubectl` commands:
 
 To access this service via `curl`, you need to determine its ingress address.
 
-1. To determine if your service is ready:  
+1. To determine if your service is ready:
   Check the status of your Knative gateway:
   ```
   kubectl get svc knative-ingressgateway -n istio-system --watch

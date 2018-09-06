@@ -11,16 +11,17 @@ to illustrate applying a revision, then using that revision for manual traffic s
 
 This section describes how to create an revision by deploying a new configuration.
 
-1. Replace the image reference path with our published image path in the configuration files (`serving/samples/traffic-splitting/updated_configuration.yaml`:  
-    * Manually replace:  
-     `image: github.com/knative/docs/serving/samples/rest-api-go` with `image: <YOUR_CONTAINER_REGISTRY>/serving/samples/rest-api-go`  
+1. Replace the image reference path with our published image path in the configuration files (`serving/samples/traffic-splitting/updated_configuration.yaml`:
+    * Manually replace:
+
+      `image: github.com/knative/docs/serving/samples/rest-api-go` with `image: <YOUR_CONTAINER_REGISTRY>/serving/samples/rest-api-go`
 
      Or
 
-    * Use run this command:  
-     ```
-     perl -pi -e "s@github.com/knative/docs@${REPO}@g" serving/samples/rest-api-go/updated_configuration.yaml
-     ```
+    * Use run this command:
+      ```
+      perl -pi -e "s@github.com/knative/docs@${REPO}@g" serving/samples/rest-api-go/updated_configuration.yaml
+      ```
 
 2. Deploy the new configuration to update the `RESOURCE` environment variable
 from `stock` to `share`:
@@ -33,8 +34,8 @@ kubectl apply -f serving/samples/traffic-splitting/updated_configuration.yaml
 kubectl get route -o yaml
 ```
 
-4. When the new route is ready, you can access the new endpoints:  
-  The hostname and IP address can be found in the same manner as the [Creating a RESTful Service](../rest-api-go) sample:  
+4. When the new route is ready, you can access the new endpoints:
+  The hostname and IP address can be found in the same manner as the [Creating a RESTful Service](../rest-api-go) sample:
   ```
   export SERVICE_HOST=`kubectl get route stock-route-example -o jsonpath="{.status.domain}"`
   export SERVICE_IP=`kubectl get svc knative-ingressgateway -n istio-system \

@@ -13,22 +13,33 @@ This sample is dependent on [this issue](https://github.com/knative/serving/issu
 
 Build and run the gRPC server. This command will build the server and use `kubectl` to apply the configuration.
 
-```
-REPO="gcr.io/<your-project-here>"
+1. Build and push the image:
+   ```
+   REPO="gcr.io/<your-project-here>"
 
-# Build and publish the container, run from the root directory.
-docker build \
-  --tag "${REPO}/serving/samples/grpc-ping-go" \
-  --file=serving/samples/grpc-ping-go/Dockerfile .
-docker push "${REPO}/serving/samples/grpc-ping-go"
+   # Build and publish the container, run from the root directory.
+   docker build \
+     --tag "${REPO}/serving/samples/grpc-ping-go" \
+     --file=serving/samples/grpc-ping-go/Dockerfile .
+   docker push "${REPO}/serving/samples/grpc-ping-go"
+   ```
+2. Replace the image references in `serving/samples/grpc-ping-go/sample.yaml`
+   with our published image:
+   * Manually replace:
 
-# Replace the image reference with our published image.
-perl -pi -e "s@github.com/knative/docs/serving/samples/grpc-ping-go@${REPO}/serving/samples/grpc-ping-go@g" serving/samples/grpc-ping-go/*.yaml
+     `image: github.com/knative/docs/serving/samples/grpc-ping-go` with `image: <YOUR_CONTAINER_REGISTRY>/serving/samples/grpc-ping-go`
 
-# Deploy the Knative sample
-kubectl apply -f serving/samples/grpc-ping-go/sample.yaml
+    Or
 
-```
+   * Run this command:
+     ```
+     perl -pi -e "s@github.com/knative/docs@${REPO}@g" serving/samples/grpc-ping-go/sample.yaml
+     ```
+
+3. Deploy the Knative sample
+   ```
+   kubectl apply -f serving/samples/grpc-ping-go/sample.yaml
+   ```
 
 ## Use the client to stream messages to the gRPC server
 

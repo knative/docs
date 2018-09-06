@@ -101,10 +101,16 @@ If you want to build the image yourself, follow these instructions. This sample 
 template](https://github.com/knative/build-templates/blob/master/kaniko/kaniko.yaml)
 from the [build-templates](https://github.com/knative/build-templates/) repo.
 
+First, either Manually substitute `DOCKER_REPO_OVERRIDE` in `sample.yaml` with a suitable registry,
+or run the following command:
 ```shell
 # Replace the token string with a suitable registry
 REPO="gcr.io/<your-project-here>"
 perl -pi -e "s@DOCKER_REPO_OVERRIDE@$REPO@g" sample.yaml
+```
+
+Next, build and deploy:
+```shell
 
 # Install the Kaniko build template used to build this sample (in the
 # build-templates repo).

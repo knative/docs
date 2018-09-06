@@ -27,7 +27,7 @@ Build the application container and publish it to a container registry:
    ```
    * This example shows how to use Google Container Registry (GCR). You will need a
    Google Cloud Project and to enable the
-   [Google Container Registry API](https://console.cloud.google.com/apis/library/containerregistry.googleapis.com).  
+   [Google Container Registry API](https://console.cloud.google.com/apis/library/containerregistry.googleapis.com).
 
 1. Use Docker to build your application container:
    ```
@@ -37,16 +37,21 @@ Build the application container and publish it to a container registry:
    ```
 
 1. Push your container to a container registry:
-   ```  
+   ```
    docker push "${REPO}/serving/samples/autoscale-go"
    ```
 
-1. Replace the image reference with our published image:
-   ```
-   perl -pi -e \
-   "s@github.com/knative/docs/serving/samples/autoscale-go@${REPO}/serving/samples/autoscale-go@g" \
-   serving/samples/autoscale-go/service.yaml
-   ```
+1. Replace the image reference path with our published image path in the configuration files (`serving/samples/autoscale-go/service.yaml`:
+   * Manually replace:
+
+     `image: github.com/knative/docs/serving/samples/autoscale-go` with `image: <YOUR_CONTAINER_REGISTRY>/serving/samples/autoscale-go`
+
+    Or
+
+   * Run this command:
+     ```
+     perl -pi -e "s@github.com/knative/docs@${REPO}@g" serving/samples/autoscale-go/service.yaml
+     ```
 
 ## Deploy the Service
 

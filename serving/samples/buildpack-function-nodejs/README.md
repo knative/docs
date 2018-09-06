@@ -22,14 +22,26 @@ Save a copy of `buildpack.yaml`, then install it:
 kubectl apply -f https://raw.githubusercontent.com/knative/build-templates/master/buildpack/buildpack.yaml
 ```
 
-Then you can deploy this to Knative Serving from the root directory via:
+Before you can deploy this to Knative Serving, the image reference paths need to be replaced with the published image.  From the root directory:
 
-```shell
-# Replace <your-project-here> with your own registry
-export REPO="gcr.io/<your-project-here>"
+* Manually replace in `sample.yaml`:
 
-perl -pi -e "s@DOCKER_REPO_OVERRIDE@$REPO@g" sample.yaml
+  `DOCKER_REPO_OVERRIDE` with `<YOUR_CONTAINER_REGISTRY>`
 
+  Or
+
+* Run this command
+  ```shell
+  # Replace <your-project-here> with your own registry
+  export REPO="gcr.io/<your-project-here>"
+
+  perl -pi -e "s@DOCKER_REPO_OVERRIDE@$REPO@g" sample.yaml
+  ```
+
+Then deploy:
+
+```
+# Create the Kubernetes resources
 kubectl apply -f sample.yaml
 ```
 

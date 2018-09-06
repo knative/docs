@@ -16,40 +16,41 @@ go get -d github.com/knative/docs/serving/samples/rest-api-go
 
 Build the application container and publish it to a container registry:
 
-1. Move into the sample directory:  
+1. Move into the sample directory:
 ```
 cd $GOPATH/src/github.com/knative/docs
 ```
 
-2. Set your preferred container registry:  
+2. Set your preferred container registry:
 ```
 export REPO="gcr.io/<YOUR_PROJECT_ID>"
 ```
    To run the sample, you need to have a Google Cloud Platform project, and you also need to enable the [Google Container Registry
-API](https://console.cloud.google.com/apis/library/containerregistry.googleapis.com).  
+API](https://console.cloud.google.com/apis/library/containerregistry.googleapis.com).
 
-3. Use Docker to build your application container:  
+3. Use Docker to build your application container:
 ```
 docker build \
   --tag "${REPO}/serving/samples/rest-api-go" \
   --file serving/samples/rest-api-go/Dockerfile .
 ```
 
-4. Push your container to a container registry:  
-```  
+4. Push your container to a container registry:
+```
 docker push "${REPO}/serving/samples/rest-api-go"
 ```
 
-5. Replace the image reference path with our published image path in the configuration files (`serving/samples/rest-api-go/sample.yaml`:  
-   * Manually replace:  
-    `image: github.com/knative/docs/serving/samples/rest-api-go` with `image: <YOUR_CONTAINER_REGISTRY>/serving/samples/rest-api-go`  
+5. Replace the image reference path with our published image path in the configuration files (`serving/samples/rest-api-go/sample.yaml`:
+   * Manually replace:
+
+     `image: github.com/knative/docs/serving/samples/rest-api-go` with `image: <YOUR_CONTAINER_REGISTRY>/serving/samples/rest-api-go`
 
     Or
 
-   * Use run this command:  
-    ```
-    perl -pi -e "s@github.com/knative/docs@${REPO}@g" serving/samples/rest-api-go/sample.yaml
-    ```
+   * Run this command:
+     ```
+     perl -pi -e "s@github.com/knative/docs@${REPO}@g" serving/samples/rest-api-go/sample.yaml
+     ```
 
 ## Deploy the Configuration
 
