@@ -1,0 +1,28 @@
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: jib-sample-app
+  namespace: default
+spec:
+  runLatest:
+    configuration:
+      build:
+        serviceAccountName: riff-build
+        source:
+          git:
+            url: https://github.com/knative/docs.git
+            revision: master
+        template:
+          name: jib-maven
+          arguments:
+          - name: IMAGE
+            value: &image DOCKER_REPO_OVERRIDE/helloworld-java
+          - name: DIRECTORY
+            value: serving/samples/helloworld-java
+      revisionTemplate:
+        spec:
+          container:
+            image: *image
+            env:
+            - name: TARGET
+              value: "Built from Jib!"
