@@ -107,7 +107,7 @@ kubectl apply -f auth.yaml
 1.  Use Docker to build the sample code into a container. To build and push with
     Docker Hub, run the following commands, replacing `{username}` with your
     Docker Hub username. Run the following commands from the _root_ directory of
-    the `knative/docs` repo::
+    the `knative/docs` repo:
 
     ```shell
     # Build the container on your local machine
