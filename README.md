@@ -61,7 +61,7 @@ Knative is a diverse, open, and inclusive community. To get involved, see
 and join the [Knative community](./community/README.md).
 
 Your own path to becoming a Knative contributor can
-[begin anywhere](https://github.com/knative/serving/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22).
+[begin anywhere](https://github.com/knative/serving/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Akind%2Fgood-first-issue).
 [Bug reports](https://github.com/knative/serving/issues/new) and
 friction logs from new developers are especially welcome.
 
