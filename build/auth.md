@@ -3,7 +3,7 @@
 This document defines how authentication is provided during execution
 of a build.
 
-The build system supports two types of authentication, using Kuberernetes'
+The build system supports two types of authentication, using Kubernetes'
 first-class `Secret` types:
 
 * `kubernetes.io/basic-auth`
