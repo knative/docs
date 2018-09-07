@@ -160,7 +160,7 @@ For example, use volumes to accomplish one of the following common tasks:
 
  * [Mount a Kubernetes secret](./auth.md).
 
- * Creat an `emptyDir` volume to act as a cache for use across multiple build
+ * Create an `emptyDir` volume to act as a cache for use across multiple build
    steps. Consider using a persistent volume for inter-build caching.
 
  * Mount a host's Docker socket to use a `Dockerfile` for container image
