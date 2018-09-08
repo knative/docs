@@ -210,7 +210,7 @@ container for the application.
 1. To find the URL for your service, type:
 
     ```shell
-    $ kubectl get ksvc app-from-source  -o=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+    $ kubectl get service.serving.knative.dev app-from-source  -o=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
     NAME                DOMAIN
     app-from-source     app-from-source.default.example.com
     ```
