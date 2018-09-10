@@ -103,9 +103,9 @@ more interesting and specific Sources over time.
 - **Feed** is a primitive object defining a connection between an EventType and
   the action (as an
   [CloudEvents compatible HTTP endpoint](https://github.com/cloudevents/spec/blob/master/http-transport-binding.md)).
-- **EventType** and **ClusterEventType** descibe a specific set of events with a
+- **EventType** and **ClusterEventType** describe a specific set of events with a
   common schema which are emitted by an EventSource. EventType is
-  namespace-scoped, while ClusterEventTypes are installed by an adminastrator
+  namespace-scoped, while ClusterEventTypes are installed by an administrator
   and available in all namespaces in your cluster.
 - **EventSource** and **ClusterEventSource** describe an external system which
   may produce one or more EventTypes.

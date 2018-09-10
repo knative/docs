@@ -57,42 +57,6 @@ kubectl apply --filename auth.yaml
 
 ## Building and deploying the sample
 
-1.  Use Docker to build the sample code into a container. To build and push with
-    Docker Hub, run the following commands, replacing `{username}` with your
-    Docker Hub username:
-
-    ```shell
-    # Build the container on your local machine
-    # Note: The relative path points to the _root_ of the `knative/docs` repo
-    docker build -t {username}/github-events --file=Dockerfile ../../../
-
-    # Push the container to docker registry
-    docker push {username}/github-events
-    ```
-
-1.  After the build has completed and the container is pushed to Docker Hub, you
-    can deploy the function into your cluster. **Ensure that the container image
-    value in `function.yaml` matches the container you built in the previous
-    step.** Apply the configuration using `kubectl`:
-
-    ```shell
-    kubectl apply --filename function.yaml
-    ```
-
-1.  Check that your service is running using:
-
-    ```shell
-    kubectl get ksvc --output "custom-columns=NAME:.metadata.name,READY:.status.conditions[2].status,REASON:.status.conditions[2].message"
-    NAME              READY     REASON
-    legit             True      <none>
-    ```
-
-    > Note: `ksvc` is an alias for `services.serving.knative.dev`. If you have
-      an older version (version 0.1.0) of Knative installed, you'll need to use
-      the long name until you upgrade to version 0.1.1 or higher. See
-      [Checking Knative Installation Version](../../../install/check-install-version.md)
-      to learn how to see what version you have installed.
-
 1.  Create a [personal access token](https://github.com/settings/tokens) to 
     GitHub repo that the GitHub source can use to register webhooks with the 
     GitHub API. Also decide on a token that your code will use to authenticate
@@ -139,6 +103,43 @@ kubectl apply --filename auth.yaml
     ```shell
     kubectl apply --filename githubsecret.yaml
     ```
+
+1.  Use Docker to build the sample code into a container. To build and push with
+    Docker Hub, run the following commands, replacing `{username}` with your
+    Docker Hub username. Run the following commands from the _root_ directory of
+    the `knative/docs` repo:
+
+    ```shell
+    # Build the container on your local machine
+    # Note: The relative path points to the _root_ of the `knative/docs` repo
+    docker build -t {username}/github-events --file=Dockerfile ../../../
+
+    # Push the container to docker registry
+    docker push {username}/github-events
+    ```
+
+1.  After the build has completed and the container is pushed to Docker Hub, you
+    can deploy the function into your cluster. **Ensure that the container image
+    value in `function.yaml` matches the container you built in the previous
+    step.** Apply the configuration using `kubectl`:
+
+    ```shell
+    kubectl apply -f function.yaml
+    ```
+
+1.  Check that your service is running using:
+
+    ```shell
+    kubectl get ksvc -o "custom-columns=NAME:.metadata.name,READY:.status.conditions[2].status,REASON:.status.conditions[2].message"
+    NAME              READY     REASON
+    legit             True      <none>
+    ```
+
+    > Note: `ksvc` is an alias for `services.serving.knative.dev`. If you have
+      an older version (version 0.1.0) of Knative installed, you'll need to use
+      the long name until you upgrade to version 0.1.1 or higher. See
+      [Checking Knative Installation Version](../../../install/check-install-version.md)
+      to learn how to see what version you have installed.
 
 1.  Update the resource inside `flow.yaml` to the
     org/repo of your choosing. Note that the personal access token must be valid
