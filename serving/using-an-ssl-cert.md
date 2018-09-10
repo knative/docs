@@ -74,10 +74,12 @@ Once the change has been made, you can now use the HTTPS protocol to access
 your deployed services.
 
 
-## Obtaining an SSL/TLS certificate using LetsEncrypt
+## Obtaining an SSL/TLS certificate using Let’s Encrypt
 
-If you don't have an existing SSL/TLS certificate, you can use [LetsEncrypt](https://letsencrypt.org)
-to obtain a certificate manually.
+If you don't have an existing SSL/TLS certificate, you can use [Let's
+Encrypt][le] to obtain a certificate manually.
+
+[le]: https://letsencrypt.org/
 
 1. Install the `certbot-auto` script from the [Certbot website](https://certbot.eff.org/docs/install.html#certbot-auto).
 1. Use the certbot to request a certificate, using DNS validation. The certbot tool will walk
@@ -89,6 +91,10 @@ to obtain a certificate manually.
 
 1. When certbot is complete, you will have two output files, `privkey.pem` and `fullchain.pem`. These files
    map to the `cert.pk` and `cert.pem` files used above.
+
+> **Warning:** Certificates issued by [Let's Encrypt][le] are only valid for
+> [90 days](https://letsencrypt.org/docs/faq/). You must renew your certificate
+> with certbot tool again.
 
 ---
 
