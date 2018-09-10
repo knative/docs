@@ -68,8 +68,8 @@ available, but these are the key steps:
    cGFzc3dvcmQ=
    ```
 
-   > **Note:** base64 command on macOS may fail with error "invalid option -w".
-   > In this case, use command `base64 -b 0`.
+   > **Note:** If you receive the "invalid option -w" error on macOS,
+   > try using the `base64 -b 0` command.
 
 1. Create a new `Service Account` manifest which is used to link the build process to the secret.
    Save this file as `service-account.yaml`:
