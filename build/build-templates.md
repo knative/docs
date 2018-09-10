@@ -37,7 +37,7 @@ spec:
   steps:
   - name: dockerfile-build
     image: gcr.io/cloud-builders/docker
-    workingdir: "${DIRECTORY}"
+    workingDir: "${DIRECTORY}"
     args: ["build", "--no-cache",
            "--tag", "${IMAGE}",
            "--file", "${DOCKERFILE_NAME}",
