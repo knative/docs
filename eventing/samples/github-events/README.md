@@ -124,7 +124,7 @@ kubectl apply --filename auth.yaml
     step.** Apply the configuration using `kubectl`:
 
     ```shell
-    kubectl apply -f function.yaml
+    kubectl apply --filename function.yaml
     ```
 
 1.  Check that your service is running using:
