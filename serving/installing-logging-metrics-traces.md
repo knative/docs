@@ -95,10 +95,10 @@ own Fluentd image and modify the configuration first. See
 
   ```shell
   kubectl apply --recursive --filename config/monitoring/100-common \
-      -f config/monitoring/150-stackdriver-prod \
-      -f third_party/config/monitoring/common \
-      -f config/monitoring/200-common \
-      -f config/monitoring/200-common/100-istio.yaml
+      --filename config/monitoring/150-stackdriver-prod \
+      --filename third_party/config/monitoring/common \
+      --filename config/monitoring/200-common \
+      --filename config/monitoring/200-common/100-istio.yaml
   ```
 
 ## Learn More
