@@ -1,18 +1,18 @@
 # Monitoring, Logging and Tracing Installation
 
 Knative Serving offers two different monitoring setups:
-[Elasticsearch, Kibana, Prometheus and Grafana](#Elasticsearch,-Kibana,-Prometheus-&-Grafana-Setup)
+[Elasticsearch, Kibana, Prometheus and Grafana](#elasticsearch-kibana-prometheus--grafana-setup)
 or
-[Stackdriver, Prometheus and Grafana](#Stackdriver,-Prometheus-&-Grafana-Setup).
+[Stackdriver, Prometheus and Grafana](#stackdriver-prometheus--grafana-setup)
 You can install only one of these two setups and side-by-side installation of
 these two are not supported.
 
 ## Elasticsearch, Kibana, Prometheus & Grafana Setup
 
 If you installed the
-[full Knative release](../install/README.md#Installing-Knative),
+[full Knative release](../install/README.md#installing-knative),
 skip this step and continue to
-[Create Elasticsearch Indices](#Create-Elasticsearch-Indices)
+[Create Elasticsearch Indices](#create-elasticsearch-indices)
 
 - Install Knative monitoring components from the root of the [Serving repository](https://github.com/knative/serving):
 
