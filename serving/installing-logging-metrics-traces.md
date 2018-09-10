@@ -93,13 +93,23 @@ own Fluentd image and modify the configuration first. See
 2. [Set up a logging plugin](setting-up-a-logging-plugin.md).
 3. Install Knative monitoring components:
 
-  ```shell
-  kubectl apply -R -f config/monitoring/100-common \
-      -f config/monitoring/150-stackdriver-prod \
-      -f third_party/config/monitoring/common \
-      -f config/monitoring/200-common \
-      -f config/monitoring/200-common/100-istio.yaml
-  ```
+    a. Clone the Knative Serving repository:
+
+      ```shell
+      git clone https://github.com/knative/serving knative-serving
+      cd knative-serving
+      git checkout v0.1.1
+      ```
+
+    b. Apply the monitoring manifests:
+
+      ```shell
+      kubectl apply -R -f config/monitoring/100-common \
+          -f config/monitoring/150-stackdriver-prod \
+          -f third_party/config/monitoring/common \
+          -f config/monitoring/200-common \
+          -f config/monitoring/200-common/100-istio.yaml
+      ```
 
 ## Learn More
 
