@@ -57,16 +57,19 @@ available, but these are the key steps:
      password: BASE64_ENCODED_PASSWORD
    ```
 
-1. On Mac or Linux computers, use the following command to generate the base64 encoded 
-   values required for the manifest:
+1. On macOS or Linux computers, use the following command to generate the
+   base64-encoded values required for the manifest:
 
    ```shell
-   $ echo -n "username" | base64
+   $ echo -n "username" | base64 -w 0
    dXNlcm5hbWU=
 
-   $ echo -n "password" | base64
+   $ echo -n "password" | base64 -w 0
    cGFzc3dvcmQ=
    ```
+
+   > **Note:** If you receive the "invalid option -w" error on macOS,
+   > try using the `base64 -b 0` command.
 
 1. Create a new `Service Account` manifest which is used to link the build process to the secret.
    Save this file as `service-account.yaml`:
