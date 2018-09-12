@@ -139,7 +139,7 @@ corresponding URIs. You should get the same results as directly accessing these 
     * Get the ingress IP:  
     ```
     export GATEWAY_IP=`kubectl get svc knative-ingressgateway --namespace istio-system \
-    -o jsonpath="{.status.loadBalancer.ingress[*]['ip']}"`
+    --output jsonpath="{.status.loadBalancer.ingress[*]['ip']}"`
     ```
 
     * Send a request to the Search service:  
