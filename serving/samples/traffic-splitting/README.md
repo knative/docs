@@ -25,20 +25,20 @@ This section describes how to create an revision by deploying a new configuratio
 2. Deploy the new configuration to update the `RESOURCE` environment variable
 from `stock` to `share`:
 ```
-kubectl apply -f serving/samples/traffic-splitting/updated_configuration.yaml
+kubectl apply --filename serving/samples/traffic-splitting/updated_configuration.yaml
 ```
 
 3. Once deployed, traffic will shift to the new revision automatically. Verify the deployment by checking the route status:
 ```
-kubectl get route -o yaml
+kubectl get route --output yaml
 ```
 
 4. When the new route is ready, you can access the new endpoints:  
   The hostname and IP address can be found in the same manner as the [Creating a RESTful Service](../rest-api-go) sample:  
   ```
-  export SERVICE_HOST=`kubectl get route stock-route-example -o jsonpath="{.status.domain}"`
-  export SERVICE_IP=`kubectl get svc knative-ingressgateway -n istio-system \
-  -o jsonpath="{.status.loadBalancer.ingress[*].ip}"`
+  export SERVICE_HOST=`kubectl get route stock-route-example --output jsonpath="{.status.domain}"`
+  export SERVICE_IP=`kubectl get svc knative-ingressgateway --namespace istio-system \
+  --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
   ```
 
   * Make a request to the index endpoint:
@@ -84,12 +84,12 @@ traffic:
 
 3. Deploy your traffic revision:
 ```
-kubectl apply -f serving/samples/rest-api-go/sample.yaml
+kubectl apply --filename serving/samples/rest-api-go/sample.yaml
 ```
 
 4. Verify the deployment by checking the route status:
 ```
-kubectl get route -o yaml
+kubectl get route --output yaml
 ```
 Once updated, you can make `curl` requests to the API using either `stock` or `share`
 endpoints.
@@ -99,5 +99,5 @@ endpoints.
 To clean up the sample service:
 
 ```
-kubectl delete -f serving/samples/traffic-splitting/updated_configuration.yaml
+kubectl delete --filename serving/samples/traffic-splitting/updated_configuration.yaml
 ```

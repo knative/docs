@@ -22,14 +22,14 @@ To add only the Knative Build component to an existing installation:
    command to install
    [Knative Build](https://github.com/knative/build) and its dependencies:
     ```bash
-    kubectl apply -f https://storage.googleapis.com/knative-releases/build/latest/release.yaml
+    kubectl apply --filename https://storage.googleapis.com/knative-releases/build/latest/release.yaml
     ```
 1. Run the
    [`kubectl get`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#get)
    command to monitor the Knative Build components until all of the components
    show a `STATUS` of `Running`:
     ```bash
-    kubectl get pods -n knative-build
+    kubectl get pods --namespace knative-build
     ```
 
     Tip: Instead of running the `kubectl get` command multiple times, you can

@@ -28,7 +28,7 @@ to perform a source-to-container build on your Kubernetes cluster.
 Use kubectl to install the kaniko manifest:
 
 ```shell
-kubectl apply -f https://raw.githubusercontent.com/knative/build-templates/master/kaniko/kaniko.yaml
+kubectl apply --filename https://raw.githubusercontent.com/knative/build-templates/master/kaniko/kaniko.yaml
 ```
 
 ### Register secrets for Docker Hub
@@ -57,16 +57,19 @@ available, but these are the key steps:
      password: BASE64_ENCODED_PASSWORD
    ```
 
-1. On Mac or Linux computers, use the following command to generate the base64 encoded 
-   values required for the manifest:
+1. On macOS or Linux computers, use the following command to generate the
+   base64-encoded values required for the manifest:
 
    ```shell
-   $ echo -n "username" | base64
+   $ echo -n "username" | base64 -w 0
    dXNlcm5hbWU=
 
-   $ echo -n "password" | base64
+   $ echo -n "password" | base64 -w 0
    cGFzc3dvcmQ=
    ```
+
+   > **Note:** If you receive the "invalid option -w" error on macOS,
+   > try using the `base64 -b 0` command.
 
 1. Create a new `Service Account` manifest which is used to link the build process to the secret.
    Save this file as `service-account.yaml`:
@@ -84,9 +87,9 @@ available, but these are the key steps:
 1. After you have created the manifest files, apply them to your cluster with `kubectl`:
 
    ```shell
-   $ kubectl apply -f docker-secret.yaml
+   $ kubectl apply --filename docker-secret.yaml
    secret "basic-user-pass" created
-   $ kubectl apply -f service-account.yaml
+   $ kubectl apply --filename service-account.yaml
    serviceaccount "build-bot" created
    ```
 
@@ -140,7 +143,7 @@ container for the application.
 
    ```shell
    # Apply the manifest
-   $ kubectl apply -f service.yaml
+   $ kubectl apply --filename service.yaml
    service "app-from-source" created
 
    # Watch the pods for build and serving
@@ -165,7 +168,7 @@ container for the application.
    status block:
 
    ```shell
-   $ kubectl get service.serving.knative.dev app-from-source -o yaml
+   $ kubectl get service.serving.knative.dev app-from-source --output yaml
 
    [...]
    status:
@@ -200,7 +203,7 @@ container for the application.
    it can take some time for the service to get an external IP address:
 
     ```shell
-    $ kubectl get svc knative-ingressgateway -n istio-system
+    $ kubectl get svc knative-ingressgateway --namespace istio-system
 
     NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
     knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
@@ -210,7 +213,7 @@ container for the application.
 1. To find the URL for your service, type:
 
     ```shell
-    $ kubectl get ksvc app-from-source  -o=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+    $ kubectl get ksvc app-from-source  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
     NAME                DOMAIN
     app-from-source     app-from-source.default.example.com
     ```
@@ -234,7 +237,7 @@ container for the application.
 To remove the sample app from your cluster, delete the service record:
 
 ```shell
-kubectl delete -f service.yaml
+kubectl delete --filename service.yaml
 ```
 
 ---

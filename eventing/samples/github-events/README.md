@@ -21,7 +21,7 @@ You will need:
 - Knative eventing core installed on your Kubernetes cluster. You can install
   with:
   ```shell
-  kubectl apply -f https://storage.googleapis.com/knative-releases/eventing/latest/release.yaml
+  kubectl apply --filename https://storage.googleapis.com/knative-releases/eventing/latest/release.yaml
   ```
 - A domain name that allows GitHub to call into the cluster: Follow the
   [assign a static IP address](https://github.com/knative/docs/blob/master/serving/gke-assigning-static-ip-address.md)
@@ -36,9 +36,9 @@ To use this sample, you'll need to install the `stub` ClusterBus and the
 
 ```shell
 # Installs ClusterBus
-kubectl apply -f https://storage.googleapis.com/knative-releases/eventing/latest/release-clusterbus-stub.yaml
+kubectl apply --filename https://storage.googleapis.com/knative-releases/eventing/latest/release-clusterbus-stub.yaml
 # Installs EventSource
-kubectl apply -f https://storage.googleapis.com/knative-releases/eventing/latest/release-source-github.yaml
+kubectl apply --filename https://storage.googleapis.com/knative-releases/eventing/latest/release-source-github.yaml
 ```
 
 ## Granting permissions
@@ -52,7 +52,7 @@ namespace. In a production environment, you might want to limit the access of
 this service account to only specific namespaces.
 
 ```shell
-kubectl apply -f auth.yaml
+kubectl apply --filename auth.yaml
 ```
 
 ## Building and deploying the sample
@@ -101,7 +101,7 @@ kubectl apply -f auth.yaml
     Then, apply the githubsecret using `kubectl`:
     
     ```shell
-    kubectl apply -f githubsecret.yaml
+    kubectl apply --filename githubsecret.yaml
     ```
 
 1.  Use Docker to build the sample code into a container. To build and push with
@@ -124,13 +124,13 @@ kubectl apply -f auth.yaml
     step.** Apply the configuration using `kubectl`:
 
     ```shell
-    kubectl apply -f function.yaml
+    kubectl apply --filename function.yaml
     ```
 
 1.  Check that your service is running using:
 
     ```shell
-    kubectl get ksvc -o "custom-columns=NAME:.metadata.name,READY:.status.conditions[2].status,REASON:.status.conditions[2].message"
+    kubectl get ksvc --output "custom-columns=NAME:.metadata.name,READY:.status.conditions[2].status,REASON:.status.conditions[2].message"
     NAME              READY     REASON
     legit             True      <none>
     ```
@@ -148,7 +148,7 @@ kubectl apply -f auth.yaml
     Then create the flow sending GitHub Events to the service:
 
     ```shell
-    kubectl apply -f flow.yaml
+    kubectl apply --filename flow.yaml
     ```
 
 1.  Create a PR for the repo you configured the webhook for, and you'll see that
@@ -171,10 +171,10 @@ and then deleted.
 To clean up the function, `Flow`, auth, and secret:
 
 ```shell
-kubectl delete -f function.yaml
-kubectl delete -f flow.yaml
-kubectl delete -f auth.yaml
-kubectl delete -f githubsecret.yaml
+kubectl delete --filename function.yaml
+kubectl delete --filename flow.yaml
+kubectl delete --filename auth.yaml
+kubectl delete --filename githubsecret.yaml
 ```
 
 And then delete the [personal access token](https://github.com/settings/tokens)

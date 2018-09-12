@@ -40,7 +40,7 @@ spec:
 
 Save the file, then deploy the configuration to your cluster:
 ```bash
-kubectl apply -f blue-green-demo-config.yaml
+kubectl apply --filename blue-green-demo-config.yaml
 
 configuration "blue-green-demo" configured
 ```
@@ -63,7 +63,7 @@ spec:
 
 Save the file, then apply the route to your cluster:
 ```bash
-kubectl apply -f blue-green-demo-route.yaml
+kubectl apply --filename blue-green-demo-route.yaml
 
 route "blue-green-demo" configured
 ```
@@ -112,7 +112,7 @@ spec:
 
 Save the file, then apply the updated configuration to your cluster:
 ```bash
-kubectl apply -f blue-green-demo-config.yaml
+kubectl apply --filename blue-green-demo-config.yaml
 
 configuration "blue-green-demo" configured
 ```
@@ -140,7 +140,7 @@ spec:
 
 Save the file, then apply the updated route to your cluster:
 ```bash
-kubectl apply -f blue-green-demo-route.yaml
+kubectl apply --filename blue-green-demo-route.yaml
 
 route "blue-green-demo" configured
 ```
@@ -175,7 +175,7 @@ spec:
 
 Save the file, then apply the updated route to your cluster:
 ```bash
-kubectl apply -f blue-green-demo-route.yaml
+kubectl apply --filename blue-green-demo-route.yaml
 
 route "blue-green-demo" configured
 ```
@@ -210,7 +210,7 @@ spec:
 
 Save the file, then apply the updated route to your cluster:
 ```bash
-kubectl apply -f blue-green-demo-route.yaml
+kubectl apply --filename blue-green-demo-route.yaml
 
 route "blue-green-demo" configured
 ```

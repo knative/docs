@@ -17,19 +17,19 @@ skip this step and continue to
 - Install Knative monitoring components from the root of the [Serving repository](https://github.com/knative/serving):
 
   ```shell
-  kubectl apply -R -f config/monitoring/100-common \
-      -f config/monitoring/150-elasticsearch \
-      -f third_party/config/monitoring/common \
-      -f third_party/config/monitoring/elasticsearch \
-      -f config/monitoring/200-common \
-      -f config/monitoring/200-common/100-istio.yaml
+  kubectl apply --recursive --filename config/monitoring/100-common \
+      --filename config/monitoring/150-elasticsearch \
+      --filename third_party/config/monitoring/common \
+      --filename third_party/config/monitoring/elasticsearch \
+      --filename config/monitoring/200-common \
+      --filename config/monitoring/200-common/100-istio.yaml
   ```
 
 - The installation is complete when logging & monitoring components are all
   reported `Running` or `Completed`:
 
   ```shell
-  kubectl get pods -n monitoring --watch
+  kubectl get pods --namespace monitoring --watch
   ```
 
   ```
@@ -104,11 +104,11 @@ own Fluentd image and modify the configuration first. See
     b. Apply the monitoring manifests:
 
       ```shell
-      kubectl apply -R -f config/monitoring/100-common \
-          -f config/monitoring/150-stackdriver-prod \
-          -f third_party/config/monitoring/common \
-          -f config/monitoring/200-common \
-          -f config/monitoring/200-common/100-istio.yaml
+      kubectl apply --recursive --filename config/monitoring/100-common \
+        --filename config/monitoring/150-stackdriver-prod \
+        --filename third_party/config/monitoring/common \
+        --filename config/monitoring/200-common \
+        --filename config/monitoring/200-common/100-istio.yaml
       ```
 
 ## Learn More
