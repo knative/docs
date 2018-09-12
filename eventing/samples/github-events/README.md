@@ -130,7 +130,7 @@ kubectl apply --filename auth.yaml
 1.  Check that your service is running using:
 
     ```shell
-    kubectl get ksvc -o "custom-columns=NAME:.metadata.name,READY:.status.conditions[2].status,REASON:.status.conditions[2].message"
+    kubectl get ksvc --output "custom-columns=NAME:.metadata.name,READY:.status.conditions[2].status,REASON:.status.conditions[2].message"
     NAME              READY     REASON
     legit             True      <none>
     ```
