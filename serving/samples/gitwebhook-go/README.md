@@ -103,7 +103,7 @@ service "gitwebhook" created
 
         ```shell
         $ kubectl get ksvc gitwebhook \
-           -o=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+           --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
 
         NAME                DOMAIN
         gitwebhook          gitwebhook.default.example.com

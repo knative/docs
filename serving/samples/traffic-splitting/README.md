@@ -38,7 +38,7 @@ kubectl get route --output yaml
   ```
   export SERVICE_HOST=`kubectl get route stock-route-example --output jsonpath="{.status.domain}"`
   export SERVICE_IP=`kubectl get svc knative-ingressgateway --namespace istio-system \
-  -o jsonpath="{.status.loadBalancer.ingress[*].ip}"`
+  --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
   ```
 
   * Make a request to the index endpoint:
