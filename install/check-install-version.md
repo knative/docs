@@ -4,7 +4,7 @@ If you want to check what version of Knative serving you have installed,
 enter the following command:
 
 ```bash
-kubectl describe deploy controller -n knative-serving
+kubectl describe deploy controller --namespace knative-serving
 ```
 
 This will return the description for the `knative-serving` controller; this

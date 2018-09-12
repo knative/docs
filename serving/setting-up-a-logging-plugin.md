@@ -56,15 +56,15 @@ Operators need to deploy Knative components after the configuring:
 # In case there is no change with the controller code
 bazel run config:controller.delete
 # Deploy the configuration for sidecar
-kubectl apply -f config/config-observability.yaml
+kubectl apply --filename config/config-observability.yaml
 # Deploy the controller to make configuration for sidecar take effect
 bazel run config:controller.apply
 
 # Deploy the DaemonSet to make configuration for DaemonSet take effect
-kubectl apply -f <the-fluentd-config-for-daemonset> \
-    -f third_party/config/monitoring/common/kubernetes/fluentd/fluentd-ds.yaml \
-    -f config/monitoring/200-common/100-fluentd.yaml
-    -f config/monitoring/200-common/100-istio.yaml
+kubectl apply --filename <the-fluentd-config-for-daemonset> \
+    --filename third_party/config/monitoring/common/kubernetes/fluentd/fluentd-ds.yaml \
+    --filename config/monitoring/200-common/100-fluentd.yaml
+    --filename config/monitoring/200-common/100-istio.yaml
 ```
 
 In the commands above, replace `<the-fluentd-config-for-daemonset>` with the
@@ -75,7 +75,7 @@ backends. For example, if they desire Elasticsearch&Kibana, they have to deploy
 the Elasticsearch and Kibana services. Knative provides this sample:
 
 ```shell
-kubectl apply -R -f third_party/config/monitoring/elasticsearch
+kubectl apply --recursive --filename third_party/config/monitoring/elasticsearch
 ```
 
 See [here](/config/monitoring/README.md) for deploying the whole Knative
