@@ -88,8 +88,8 @@ is a random number 1-10.
 Now we want to consume these IoT events, so let's create the function to handle the events:
 
 ```shell
-kubectl apply -f route.yaml
-kubectl apply -f configuration.yaml
+kubectl apply --filename route.yaml
+kubectl apply --filename configuration.yaml
 ```
 
 ## Create an event source
@@ -103,10 +103,10 @@ in Pull mode to poll for the events from this topic.
 Then let's create a GCP PubSub as an event source that we can bind to.
 
 ```shell
-kubectl apply -f serviceaccount.yaml
-kubectl apply -f serviceaccountbinding.yaml
-kubectl apply -f eventsource.yaml
-kubectl apply -f eventtype.yaml
+kubectl apply --filename serviceaccount.yaml
+kubectl apply --filename serviceaccountbinding.yaml
+kubectl apply --filename eventsource.yaml
+kubectl apply --filename eventtype.yaml
 ```
 
 ## Bind IoT events to our function
@@ -115,5 +115,5 @@ We have now created a function that we want to consume our IoT events, and we ha
 source that's sending events via GCP PubSub, so let's wire the two together:
 
 ```shell
-kubectl apply -f flow.yaml
+kubectl apply --filename flow.yaml
 ```
