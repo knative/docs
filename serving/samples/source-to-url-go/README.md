@@ -128,11 +128,11 @@ container for the application.
              name: kaniko
              arguments:
              - name: IMAGE
-               value: &image docker.io/{DOCKER_USERNAME}/app-from-source:latest
+               value: docker.io/{DOCKER_USERNAME}/app-from-source:latest
          revisionTemplate:
            spec:
              container:
-               image: *image
+               image: docker.io/{DOCKER_USERNAME}/app-from-source:latest 
                imagePullPolicy: Always
                env:
                - name: SIMPLE_MSG
