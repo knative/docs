@@ -9,7 +9,7 @@ only one of these two setups and side-by-side installation of these two are not 
 ## Elasticsearch, Kibana, Prometheus & Grafana Setup
 
 *If you installed Knative Serving using [Easy Install](../install/README.md#Installing-Knative) guide,
-skip this step and continue to [Create Elasticsearch Indices](#Create-Elasticsearch-Indices)*
+skip this step and continue to [Create Elasticsearch Indices](#create-elasticsearch-indices)*
 
 1. Choose a container image that meets the basic
    [requirements](fluentd/README.md#requirements). For example, you can use the

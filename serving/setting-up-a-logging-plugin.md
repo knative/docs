@@ -23,15 +23,14 @@ Operators can do the following steps to configure the Fluentd DaemonSet for
 collecting `stdout/stderr` logs from the containers:
 
 1. Replace `900.output.conf` part in
-   [fluentd-configmap.yaml](https://github.com/knative/serving/config/monitoring/fluentd-configmap.yaml) with the
-   desired output configuration. Knative provides samples for sending logs to
-   Elasticsearch or Stackdriver. Developers can simply choose one of `150-*`
-   from [/config/monitoring](https://github.com/knative/serving/config/monitoring) or override any with other
-   configuration.
+   [100-fluentd-configmap.yaml](https://https://github.com/knative/serving/blob/master/config/monitoring/150-elasticsearch/100-fluentd-configmap.yaml) with the
+   desired output configuration. Knative provides a sample for sending logs to
+   Elasticsearch or Stackdriver. Developers can simply use `100-fluentd-configmap.yaml`
+   or override any with other configuration.
 2. Replace the `image` field of `fluentd-ds` container
-   in [fluentd-ds.yaml](https://github.com/knative/serving/third_party/config/monitoring/common/fluentd/fluentd-ds.yaml)
+   in [fluentd-ds.yaml](https://github.com/knative/serving/blob/master/third_party/config/monitoring/common/kubernetes/fluentd/fluentd-ds.yaml)
    with the Fluentd image including the desired Fluentd output plugin.
-   See [here](/image/fluentd/README.md) for the requirements of Flunetd image
+   See [here](image/fluentd/README.md) for the requirements of Flunetd image
    on Knative.
 
 ### Configure the Sidecar for log files under /var/log
@@ -42,15 +41,15 @@ collecting log files under `/var/log`. An
 is in process to get rid of the sidecar. The steps to configure are:
 
 1. Replace `logging.fluentd-sidecar-output-config` flag in
-   [config-observability](https://github.com/knative/serving/config/config-observability.yaml)  with the
+   [config-observability](https://github.com/knative/serving/blob/master/config/config-observability.yaml)  with the
    desired output configuration. **NOTE**: The Fluentd DaemonSet is in
    `monitoring` namespace while the Fluentd sidecar is in the namespace same with
    the app. There may be small differences between the configuration for DaemonSet
    and sidecar even though the desired backends are the same.
 1. Replace `logging.fluentd-sidecar-image` flag in
-   [config-observability](https://github.com/knative/serving/config/config-observability.yaml) with the Fluentd image including the
-   desired Fluentd output plugin. In theory, this is the same
-   with the one for Fluentd DaemonSet.
+   [config-observability](https://github.com/knative/serving/blob/master/config/config-observability.yaml)
+   with the Fluentd image including the desired Fluentd output plugin. In theory,
+   this is the same with the one for Fluentd DaemonSet.
 
 ## Deploying
 
