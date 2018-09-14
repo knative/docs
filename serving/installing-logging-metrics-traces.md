@@ -11,17 +11,25 @@ only one of these two setups and side-by-side installation of these two are not 
 *If you installed Knative Serving using [Easy Install](../install/README.md#Installing-Knative) guide,
 skip this step and continue to [Create Elasticsearch Indices](#Create-Elasticsearch-Indices)*
 
+1. Choose a container image that meets the basic
+   [requirements](fluentd/README.md#requirements). For example, you can use the
+   public image [k8s.gcr.io/fluentd-elasticsearch:v2.0.4](https://github.com/kubernetes/kubernetes/tree/master/cluster/addons/fluentd-elasticsearch/fluentd-es-image).
+   Or you can create a custom one and upload the image to a container registry
+   which your cluster has read access to.
+1. Follow the instructions in
+   ["Setting up a logging plugin"](setting-up-a-logging-plugin.md#Configuring)
+   to configure the Elasticsearch components settings.
+1. From the root directory of [knative/serving](https://github.com/knative/serving)
+   repository, run:
 
-Run:
-
-```shell
-kubectl apply -R -f config/monitoring/100-common \
-    -f config/monitoring/150-elasticsearch-prod \
-    -f third_party/config/monitoring/common \
-    -f third_party/config/monitoring/elasticsearch \
-    -f config/monitoring/200-common \
-    -f config/monitoring/200-common/100-istio.yaml
-```
+   ```shell
+   kubectl apply -R -f config/monitoring/100-common \
+       -f config/monitoring/150-elasticsearch-prod \
+       -f third_party/config/monitoring/common \
+       -f third_party/config/monitoring/elasticsearch \
+       -f config/monitoring/200-common \
+       -f config/monitoring/200-common/100-istio.yaml
+   ```
 
 Monitor logging & monitoring components, until all of the components report Running or Completed:
 
@@ -32,6 +40,7 @@ kubectl get pods -n monitoring --watch
 CTRL+C when it's done.
 
 ### Create Elasticsearch Indices
+
 We will create two indexes in ElasticSearch - one for application logs and one for request traces.
 To create the indexes, open Kibana Index Management UI at this [link](http://localhost:8001/api/v1/namespaces/monitoring/services/kibana-logging/proxy/app/kibana#/management/kibana/index)
 (*it might take a couple of minutes for the proxy to work the first time after the installation*).
@@ -53,20 +62,23 @@ Next, visit instructions below to access to logs, metrics and traces:
 
 ## Stackdriver(logs), Prometheus & Grafana Setup
 
-If your Knative Serving is not built on a GCP based cluster or you want to send logs to
-another GCP project, you need to build your own Fluentd image and modify the
-configuration first. See
+1. Choose a container image that meets the basic
+   [requirements](fluentd/README.md#requirements). For example, you can use a
+   public image. Or you can create a custom one and upload the image to a
+   container registry which your cluster has read access to.
+2. Follow the instructions in
+   ["Setting up a logging plugin"](setting-up-a-logging-plugin.md#Configuring)
+   to configure the stackdriver components settings.
+3. From the root directory of [knative/serving](https://github.com/knative/serving)
+   repository, run:
 
-1. [Fluentd image on Knative Serving](fluentd/README.md)
-2. [Setting up a logging plugin](setting-up-a-logging-plugin.md)
-
-```shell
-kubectl apply -R -f config/monitoring/100-common \
-    -f config/monitoring/150-stackdriver-prod \
-    -f third_party/config/monitoring/common \
-    -f config/monitoring/200-common \
-    -f config/monitoring/200-common/100-istio.yaml
-```
+   ```shell
+   kubectl apply -R -f config/monitoring/100-common \
+       -f config/monitoring/150-stackdriver-prod \
+       -f third_party/config/monitoring/common \
+       -f config/monitoring/200-common \
+       -f config/monitoring/200-common/100-istio.yaml
+   ```
 
 ---
 
