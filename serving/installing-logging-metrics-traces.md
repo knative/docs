@@ -7,23 +7,36 @@ or
 You can install only one of these two setups and side-by-side installation of
 these two are not supported.
 
+## Before you begin
+
+The following instructions assume that you cloned the Knative Serving repository.
+To clone the repository, run the following commands:
+
+   ```shell
+   git clone https://github.com/knative/serving knative-serving
+   cd knative-serving
+   git checkout v0.1.1
+   ```
+
 ## Elasticsearch, Kibana, Prometheus & Grafana Setup
 
 If you installed the
 [full Knative release](../install/README.md#installing-knative),
-skip this step and continue to
-[Create Elasticsearch Indices](#create-elasticsearch-indices)
+the monitoring component is already installed and you can skip down to the
+[Create Elasticsearch Indices](#create-elasticsearch-indices) section.
 
-1. Choose a container image that meets the basic
-   [requirements](fluentd/README.md#requirements). For example, you can use the
+To configure and setup monitoring:
+
+1. Choose a container image that meets the 
+   [Fluentd image requirements](fluentd/README.md#requirements). For example, you can use the
    public image [k8s.gcr.io/fluentd-elasticsearch:v2.0.4](https://github.com/kubernetes/kubernetes/tree/master/cluster/addons/fluentd-elasticsearch/fluentd-es-image).
    Or you can create a custom one and upload the image to a container registry
    which your cluster has read access to.
 1. Follow the instructions in
    ["Setting up a logging plugin"](setting-up-a-logging-plugin.md#Configuring)
    to configure the Elasticsearch components settings.
-1. From the root directory of [knative/serving](https://github.com/knative/serving)
-   repository, run:
+1. Install Knative monitoring components by running the following command from the root directory of 
+   [knative/serving](https://github.com/knative/serving) repository:
 
    ```shell
    kubectl apply --recursive --filename config/monitoring/100-common \
@@ -34,29 +47,29 @@ skip this step and continue to
       --filename config/monitoring/200-common/100-istio.yaml
    ```
 
-- The installation is complete when logging & monitoring components are all
-  reported `Running` or `Completed`:
+   The installation is complete when logging & monitoring components are all
+   reported `Running` or `Completed`:
 
-  ```shell
-  kubectl get pods --namespace monitoring --watch
-  ```
+     ```shell
+     kubectl get pods --namespace monitoring --watch
+     ```
 
-  ```
-  NAME                                  READY     STATUS    RESTARTS   AGE
-  elasticsearch-logging-0               1/1       Running   0          2d
-  elasticsearch-logging-1               1/1       Running   0          2d
-  fluentd-ds-5kc85                      1/1       Running   0          2d
-  fluentd-ds-vhrcq                      1/1       Running   0          2d
-  fluentd-ds-xghk9                      1/1       Running   0          2d
-  grafana-798cf569ff-v4q74              1/1       Running   0          2d
-  kibana-logging-7d474fbb45-6qb8x       1/1       Running   0          2d
-  kube-state-metrics-75bd4f5b8b-8t2h2   4/4       Running   0          2d
-  node-exporter-cr6bh                   2/2       Running   0          2d
-  node-exporter-mf6k7                   2/2       Running   0          2d
-  node-exporter-rhzr7                   2/2       Running   0          2d
-  prometheus-system-0                   1/1       Running   0          2d
-  prometheus-system-1                   1/1       Running   0          2d
-  ```
+     ```
+     NAME                                  READY     STATUS    RESTARTS   AGE
+     elasticsearch-logging-0               1/1       Running   0          2d
+     elasticsearch-logging-1               1/1       Running   0          2d
+     fluentd-ds-5kc85                      1/1       Running   0          2d
+     fluentd-ds-vhrcq                      1/1       Running   0          2d
+     fluentd-ds-xghk9                      1/1       Running   0          2d
+     grafana-798cf569ff-v4q74              1/1       Running   0          2d
+     kibana-logging-7d474fbb45-6qb8x       1/1       Running   0          2d
+     kube-state-metrics-75bd4f5b8b-8t2h2   4/4       Running   0          2d
+     node-exporter-cr6bh                   2/2       Running   0          2d
+     node-exporter-mf6k7                   2/2       Running   0          2d
+     node-exporter-rhzr7                   2/2       Running   0          2d
+     prometheus-system-0                   1/1       Running   0          2d
+     prometheus-system-1                   1/1       Running   0          2d
+     ```
 
   CTRL+C to exit watch.
 
@@ -93,34 +106,22 @@ for request traces.
 
 ## Stackdriver, Prometheus & Grafana Setup
 
-If your Knative Serving is not built on a Google Cloud Platform (GCP) based
-cluster or you want to send logs to another GCP project, you need to build your
-own Fluentd image and modify the configuration first. See
+You must configure and build your own Fluentd image if either of the following are true:
 
-1. Install
-   [Fluentd image on Knative Serving](https://github.com/knative/serving/blob/master/image/fluentd/README.md).
-2. [Set up a logging plugin](setting-up-a-logging-plugin.md).
-3. Install Knative monitoring components:
+ * Your Knative Serving component is not hosted on a Google Cloud Platform (GCP) based cluster. 
+ * You want to send logs to another GCP project.
 
-    a. Clone the Knative Serving repository:
+To configure and setup monitoring:
 
-      ```shell
-      git clone https://github.com/knative/serving knative-serving
-      cd knative-serving
-      git checkout v0.1.1
-      ```
-
-    b. Apply the monitoring manifests:
-
-1. Choose a container image that meets the basic
-   [requirements](fluentd/README.md#requirements). For example, you can use a
+1. Choose a container image that meets the
+   [Fluentd image requirements](fluentd/README.md#requirements). For example, you can use a
    public image. Or you can create a custom one and upload the image to a
    container registry which your cluster has read access to.
 2. Follow the instructions in
    ["Setting up a logging plugin"](setting-up-a-logging-plugin.md#Configuring)
    to configure the stackdriver components settings.
-3. From the root directory of [knative/serving](https://github.com/knative/serving)
-   repository, run:
+3. Install Knative monitoring components by running the following command from the root directory of 
+   [knative/serving](https://github.com/knative/serving) repository:
    
       ```shell
       kubectl apply --recursive --filename config/monitoring/100-common \
@@ -130,6 +131,31 @@ own Fluentd image and modify the configuration first. See
         --filename config/monitoring/200-common/100-istio.yaml
       ```
 
+   The installation is complete when logging & monitoring components are all
+   reported `Running` or `Completed`:
+
+     ```shell
+     kubectl get pods --namespace monitoring --watch
+     ```
+
+     ```
+     NAME                                  READY     STATUS    RESTARTS   AGE
+     elasticsearch-logging-0               1/1       Running   0          2d
+     elasticsearch-logging-1               1/1       Running   0          2d
+     fluentd-ds-5kc85                      1/1       Running   0          2d
+     fluentd-ds-vhrcq                      1/1       Running   0          2d
+     fluentd-ds-xghk9                      1/1       Running   0          2d
+     grafana-798cf569ff-v4q74              1/1       Running   0          2d
+     kibana-logging-7d474fbb45-6qb8x       1/1       Running   0          2d
+     kube-state-metrics-75bd4f5b8b-8t2h2   4/4       Running   0          2d
+     node-exporter-cr6bh                   2/2       Running   0          2d
+     node-exporter-mf6k7                   2/2       Running   0          2d
+     node-exporter-rhzr7                   2/2       Running   0          2d
+     prometheus-system-0                   1/1       Running   0          2d
+     prometheus-system-1                   1/1       Running   0          2d
+     ```
+
+  CTRL+C to exit watch.
 ## Learn More
 
 - Learn more about accessing logs, metrics, and traces:
