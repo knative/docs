@@ -2,100 +2,163 @@
 
 This sample runs a simple web server that makes calls to other in-cluster services
 and responds to requests with "Hello World!".
-The purpose of this sample is to show generating metrics, logs and distributed traces
-(see [Logs](../../accessing-logs.md), [Metrics](../../accessing-metrics.md), and [Traces](../../accessing-traces.md) for more information).
-This sample also creates a dedicated Prometheus instances rather than using the one
-that is installed by default as a showcase of installing dedicated Prometheus instances.
+The purpose of this sample is to show generating [metrics](../../accessing-metrics.md),
+[logs](../../accessing-logs.md) and distributed [traces](../../accessing-traces.md).
+This sample also shows how to create a dedicated Prometheus instance rather than
+using the default installation.
 
 ## Prerequisites
 
-1. [Install Knative Serving](https://github.com/knative/docs/blob/master/install/README.md)
-2. [Install Knative monitoring component](../../installing-logging-metrics-traces.md)
-3. Install [docker](https://www.docker.com/)
-
+1. A Kubernetes cluster with [Knative Serving](https://github.com/knative/docs/blob/master/install/README.md)
+installed.
+2. Check if Knative monitoring components are installed:
+```
+kubectl get pods --namespace monitoring
+```
+  * If pods aren't found, install [Knative monitoring component](../../installing-logging-metrics-traces.md).
+3. Install [Docker](https://docs.docker.com/get-started/#prepare-your-docker-environment).
+4. Check out the code:
+```
+go get -d github.com/knative/docs/serving/samples/telemetry-go
+```
 
 ## Setup
 
-Build the app container and publish it to your registry of choice:
+Build the application container and publish it to a container registry:
 
-```shell
-REPO="gcr.io/<your-project-here>"
+1. Move into the sample directory:  
+```
+cd $GOPATH/src/github.com/knative/docs
+```
 
-# Build and publish the container, run from the root directory.
+2. Set your preferred container registry:  
+```
+export REPO="gcr.io/<YOUR_PROJECT_ID>"
+```
+   This example shows how to use Google Container Registry (GCR). You will need
+   a Google Cloud Project and to enable the [Google Container Registry
+API](https://console.cloud.google.com/apis/library/containerregistry.googleapis.com).  
+
+3. Use Docker to build your application container:  
+```
 docker build \
   --tag "${REPO}/serving/samples/telemetry-go" \
   --file=serving/samples/telemetry-go/Dockerfile .
+```
+
+4. Push your container to a container registry:  
+```  
 docker push "${REPO}/serving/samples/telemetry-go"
-
-# Replace the image reference with our published image.
-perl -pi -e "s@github.com/knative/docs/serving/samples/telemetry-go@${REPO}/serving/samples/telemetry-go@g" serving/samples/telemetry-go/*.yaml
-
-# Deploy the Knative Serving sample
-kubectl apply -f serving/samples/telemetry-go/
 ```
 
-## Exploring
+5. Replace the image reference path with our published image path in the
+configuration file (`serving/samples/telemetry-go/sample.yaml`):  
+   * Manually replace:  
+    `image: github.com/knative/docs/serving/samples/telemetry-go` with
+    `image: <YOUR_CONTAINER_REGISTRY>/serving/samples/telemetry-go`  
 
-Once deployed, you can inspect the created resources with `kubectl` commands:
+    Or
 
-```shell
-# This will show the route that we created:
-kubectl get route -o yaml
+   * Use run this command:  
+    ```
+    perl -pi -e "s@github.com/knative/docs@${REPO}@g" serving/samples/telemetry-go/sample.yaml
+    ```
 
-# This will show the configuration that we created:
-kubectl get configurations -o yaml
+## Deploy the Service
 
-# This will show the Revision that was created by our configuration:
-kubectl get revisions -o yaml
+Deploy this application to Knative Serving:
+```
+kubectl apply --filename serving/samples/telemetry-go/
 ```
 
-To access this service via `curl`, we first need to determine its ingress address:
-```shell
-watch kubectl get svc knative-ingressgateway -n istio-system
-NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
-knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
+## Explore the Service
+
+Inspect the created resources with the `kubectl` commands:
+
+ * View the created Route resource:
+ ```
+ kubectl get route --output yaml
+ ```
+
+ * View the created Configuration resource:
+ ```
+ kubectl get configurations --output yaml
+ ```
+
+ * View the Revision that was created by the Configuration:
+ ```
+ kubectl get revisions --output yaml
+ ```
+
+## Access the Service
+
+To access this service via `curl`, you need to determine its ingress address.
+
+1. To determine if your service is ready:  
+  Check the status of your Knative gateway:
+  ```
+  kubectl get svc knative-ingressgateway --namespace istio-system --watch
+  ```
+
+  When the service is ready, you'll see an IP address in the `EXTERNAL-IP` field:
+  ```
+  NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
+  knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
+  ```
+  CTRL+C to end watch.
+
+  Check the status of your route:
+  ```
+  kubectl get route --output yaml
+  ```
+  When the route is ready, you'll see the following fields reported as:
+  ```YAML
+  status:
+    conditions:
+      ...
+      status: "True"
+      type: Ready
+      domain: telemetrysample-route.default.example.com
+  ```
+
+2. Export the ingress hostname and IP as environment
+variables:
+```
+export SERVICE_HOST=`kubectl get route telemetrysample-route --output jsonpath="{.status.domain}"`
+export SERVICE_IP=`kubectl get svc knative-ingressgateway --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
 ```
 
-Once the `EXTERNAL-IP` gets assigned to the cluster, you can run:
-
-```shell
-# Put the Host name into an environment variable.
-export SERVICE_HOST=`kubectl get route telemetrysample-route -o jsonpath="{.status.domain}"`
-
-# Put the ingress IP into an environment variable.
-export SERVICE_IP=`kubectl get svc knative-ingressgateway -n istio-system -o jsonpath="{.status.loadBalancer.ingress[*].ip}"`
-
-# Curl the ingress IP "as-if" DNS were properly configured.
+3. Make a request to the service to see the `Hello World!` message:
+```
 curl --header "Host:$SERVICE_HOST" http://${SERVICE_IP}
-Hello World!
 ```
 
-Generate some logs to STDOUT and files under `/var/log` in `Json` or plain text formats.
-
-```shell
+4. Make a request to the `/log` endpoint to generate logs to the `stdout` file
+and generate files under `/var/log` in both `JSON` and plain text formats:
+```
 curl --header "Host:$SERVICE_HOST" http://${SERVICE_IP}/log
-Sending logs done.
 ```
 
-## Accessing logs
-You can access to the logs from Kibana UI - see [Logs](../../accessing-logs.md) for more information.
+## Access Logs
+You can access to the logs from Kibana UI - see [Logs](../../accessing-logs.md)
+for more information.
 
-## Accessing per request traces
-You can access to per request traces from Zipkin UI - see [Traces](../../accessing-traces.md) for more information.
+## Access per Request Traces
+You can access to per request traces from Zipkin UI - see [Traces](../../accessing-traces.md)
+for more information.
 
-## Accessing custom metrics
-You can see published metrics using Prometheus UI. To access to the UI, forward the Prometheus server to your machine:
-
-```bash
+## Accessing Custom Metrics
+You can see published metrics using Prometheus UI. To access to the UI, forward
+the Prometheus server to your machine:
+```
 kubectl port-forward $(kubectl get pods --selector=app=prometheus,prometheus=test --output=jsonpath="{.items[0].metadata.name}") 9090
 ```
 
 Then browse to http://localhost:9090.
 
-## Cleaning up
+## Clean up
 
 To clean up the sample service:
-
-```shell
-kubectl delete -f serving/samples/telemetrysample-go/
+```
+kubectl delete --filename serving/samples/telemetry-go/
 ```

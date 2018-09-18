@@ -23,11 +23,7 @@
 # Calling this script without arguments will create a new cluster in
 # project $PROJECT_ID, run the tests and delete the cluster.
 
-# Load github.com/knative/test-infra/images/prow-tests/scripts/e2e-tests.sh
-[ -f /workspace/e2e-tests.sh ] \
-  && source /workspace/e2e-tests.sh \
-  || eval "$(docker run --entrypoint sh gcr.io/knative-tests/test-infra/prow-tests -c 'cat e2e-tests.sh')"
-[ -v KNATIVE_TEST_INFRA ] || exit 1
+source $(dirname $0)/../vendor/github.com/knative/test-infra/scripts/e2e-tests.sh
 
 # Script entry point.
 

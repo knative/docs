@@ -35,7 +35,7 @@ recreate the source files from this folder.
     and add the `Web` dependency. Then click `Generate Project`, download and unzip the
     sample archive.
 
-1. Update the `@SpringBootApplication` class in
+1. Update the `SpringBootApplication` class in
    `src/main/java/com/example/helloworld/HelloworldApplication.java` by adding
    a `@RestController` to handle the "/" mapping and also add a `@Value` field to
    provide the TARGET environment variable:
@@ -131,12 +131,12 @@ folder) you're ready to build and deploy the sample app.
    the previous step. Apply the configuration using `kubectl`:
 
     ```shell
-    kubectl apply -f service.yaml
+    kubectl apply --filename service.yaml
     ```
 
 1. Now that your service is created, Knative will perform the following steps:
    * Create a new immutable revision for this version of the app.
-   * Network programming to create a route, ingress, service, and load balance for your app.
+   * Network programming to create a route, ingress, service, and load balancer for your app.
    * Automatically scale your pods up and down (including to zero active pods).
 
 1. To find the IP address for your service, use
@@ -145,7 +145,7 @@ folder) you're ready to build and deploy the sample app.
    an external IP address.
 
     ```shell
-    kubectl get svc knative-ingressgateway -n istio-system
+    kubectl get svc knative-ingressgateway --namespace istio-system
 
     NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
     knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
@@ -154,10 +154,16 @@ folder) you're ready to build and deploy the sample app.
 
 1. To find the URL for your service, use
     ```
-    kubectl get services.serving.knative.dev helloworld-java  -o=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+    kubectl get ksvc helloworld-java  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
     NAME                DOMAIN
     helloworld-java     helloworld-java.default.example.com
     ```
+
+    > Note: `ksvc` is an alias for `services.serving.knative.dev`. If you have
+      an older version (version 0.1.0) of Knative installed, you'll need to use
+      the long name until you upgrade to version 0.1.1 or higher. See
+      [Checking Knative Installation Version](../../../install/check-install-version.md)
+      to learn how to see what version you have installed.
 
 1. Now you can make a request to your app to see the result. Replace
    `{IP_ADDRESS}` with the address you see returned in the previous step.
@@ -172,5 +178,5 @@ folder) you're ready to build and deploy the sample app.
 To remove the sample app from your cluster, delete the service record:
 
 ```shell
-kubectl delete -f service.yaml
+kubectl delete --filename service.yaml
 ```

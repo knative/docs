@@ -21,7 +21,7 @@ following command to create a secret that stores the certificate. Note the
 name of the secret, `istio-ingressgateway-certs` is required.
 
 ```shell
-kubectl create -n istio-system secret tls istio-ingressgateway-certs \
+kubectl create --namespace istio-system secret tls istio-ingressgateway-certs \
   --key cert.pk \
   --cert cert.pem
 ```
@@ -34,7 +34,7 @@ you need to update the Gateway spec to use the HTTPS.
 To edit the shared gateway, run:
 
 ```shell
-kubectl edit gateway knative-shared-gateway -n knative-serving
+kubectl edit gateway knative-shared-gateway --namespace knative-serving
 ```
 
 Change the Gateway spec to include the `tls:` section as shown below, then

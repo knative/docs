@@ -45,7 +45,7 @@ See [Knative docs](https://github.com/knative/docs) for in-depth information abo
 ## Knative authors
 
 Knative is an open source project with an active development community. 
-The project was started by Google but has contriubtions from a growing number of
+The project was started by Google but has contributions from a growing number of
 industry-leading companies. For a current list of the authors, see [Authors](https://github.com/knative/serving/blob/master/AUTHORS).
 
 ## Meetings and work groups

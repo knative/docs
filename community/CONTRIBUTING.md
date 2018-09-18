@@ -58,12 +58,16 @@ to be a [member](ROLES.md#member) of the Knative organization.
 We do not yet have a common design document template(TODO).
 
 The team drive is shared with the
+[knative-users@](https://groups.google.com/forum/#!forum/knative-users) and
 [knative-dev@](https://groups.google.com/forum/#!forum/knative-dev) Google
-group for editing and commenting. If you're not part of that group, the
-first time you try to access the team drive or a specific doc, you'll be
-asked to request permission. This permission will always be granted and we
-do our best to grant access as fast as we can, but there is a human involved
-there, so please forgive any delays.
+groups for reading and editing, respectively. Access to
+[knative-users@](https://groups.google.com/forum/#!forum/knative-users) is
+unlimited, while
+[knative-dev@](https://groups.google.com/forum/#!forum/knative-dev) requires
+human review. If you're not part of one of those groups, the first time you try
+to access the team drive or a specific doc, you'll be asked to request
+permission. Please join one of the above groups (you can join knative-users and
+later join knative-dev if you want immediate access).
 
 ## Contributing a feature
 
@@ -100,7 +104,6 @@ following steps:
 *   Submit PRs to knative/serving with user documentation for your feature,
     including usage examples when possible. Add documentation to
     [knative/docs/serving](https://github.com/knative/docs/tree/master/serving).
-    <!-- TODO: switch to knative/serving.dev) -->
 
 *Note that we prefer bite-sized PRs instead of giant monster PRs. It's therefore
 preferable if you can introduce large features in small, individually-reviewable

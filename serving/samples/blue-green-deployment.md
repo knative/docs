@@ -8,8 +8,8 @@ configuration.
 ## Before you begin
 
 You need:
-* A Kubernetes cluster with [Knative installed](../install/README.md).
-* (Optional) [A custom domain configured](../serving/using-a-custom-domain.md) for use with Knative.
+* A Kubernetes cluster with [Knative installed](../../install/README.md).
+* (Optional) [A custom domain configured](../../serving/using-a-custom-domain.md) for use with Knative.
 
 ## Deploying Revision 1 (Blue)
 
@@ -40,7 +40,7 @@ spec:
 
 Save the file, then deploy the configuration to your cluster:
 ```bash
-kubectl apply -f blue-green-demo-config.yaml
+kubectl apply --filename blue-green-demo-config.yaml
 
 configuration "blue-green-demo" configured
 ```
@@ -63,14 +63,14 @@ spec:
 
 Save the file, then apply the route to your cluster:
 ```bash
-kubectl apply -f blue-green-demo-route.yaml
+kubectl apply --filename blue-green-demo-route.yaml
 
 route "blue-green-demo" configured
 ```
 
 You'll now be able to view the sample app at 
 http://blue-green-demo.default.YOUR_CUSTOM_DOMAIN.com (replace `YOUR_CUSTOM_DOMAIN`)
-with the [custom domain](../serving/using-a-custom-domain.md) you configured for
+with the [custom domain](../../serving/using-a-custom-domain.md) you configured for
 use with Knative.
 
 > Note: If you don't have a custom domain configured for use with Knative, you can interact
@@ -81,7 +81,7 @@ use with Knative.
    For example, `[route-name].[namespace].example.com`.
    You can get the IP address by entering `kubectl get svc knative-ingressgateway -n istio-system`
    and copying the `EXTERNAL-IP` returned by that command.
-   See [Interacting with your app](../install/getting-started-knative-app.md#interacting-with-your-app)
+   See [Interacting with your app](../../install/getting-started-knative-app.md#interacting-with-your-app)
    for more information.
 
 ## Deploying Revision 2 (Green)
@@ -112,7 +112,7 @@ spec:
 
 Save the file, then apply the updated configuration to your cluster:
 ```bash
-kubectl apply -f blue-green-demo-config.yaml
+kubectl apply --filename blue-green-demo-config.yaml
 
 configuration "blue-green-demo" configured
 ```
@@ -134,13 +134,13 @@ spec:
   - revisionName: blue-green-demo-00001
     percent: 100 # All traffic still going to the first revision
   - revisionName: blue-green-demo-00002
-    percent: 0 # 50% of traffic routed to the second revision
+    percent: 0 # 0% of traffic routed to the second revision
     name: v2 # A named route
 ```
 
 Save the file, then apply the updated route to your cluster:
 ```bash
-kubectl apply -f blue-green-demo-route.yaml
+kubectl apply --filename blue-green-demo-route.yaml
 
 route "blue-green-demo" configured
 ```
@@ -175,7 +175,7 @@ spec:
 
 Save the file, then apply the updated route to your cluster:
 ```bash
-kubectl apply -f blue-green-demo-route.yaml
+kubectl apply --filename blue-green-demo-route.yaml
 
 route "blue-green-demo" configured
 ```
@@ -210,7 +210,7 @@ spec:
 
 Save the file, then apply the updated route to your cluster:
 ```bash
-kubectl apply -f blue-green-demo-route.yaml
+kubectl apply --filename blue-green-demo-route.yaml
 
 route "blue-green-demo" configured
 ```

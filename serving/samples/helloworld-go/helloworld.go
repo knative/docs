@@ -17,7 +17,6 @@ limitations under the License.
 package main
 
 import (
-	"flag"
 	"fmt"
 	"log"
 	"net/http"
@@ -34,7 +33,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	flag.Parse()
 	log.Print("Hello world sample started.")
 
 	http.HandleFunc("/", handler)

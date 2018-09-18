@@ -46,7 +46,7 @@ Make sure the namespace matches that of your project. Then just apply the
 prepared so-called "shoot" cluster crd with kubectl:
 
 ```
-kubectl apply -f my-cluster.yaml
+kubectl apply --filename my-cluster.yaml
 ```
 
 The easier alternative is to create the cluster following the cluster creation
@@ -59,7 +59,7 @@ You can now download the kubeconfig for your freshly created cluster in the
 Gardener dashboard or via cli as follows:
 
 ```
-kubectl --namespace shoot--my-project--my-cluster get secret kubecfg -o jsonpath={.data.kubeconfig} | base64 --decode > my-cluster.yaml
+kubectl --namespace shoot--my-project--my-cluster get secret kubecfg --output jsonpath={.data.kubeconfig} | base64 --decode > my-cluster.yaml
 ```
 
 This kubeconfig file has full administrators access to you cluster. For the rest
@@ -71,14 +71,14 @@ Knative depends on Istio.
 
 1.  Install Istio:
     ```bash
-    kubectl apply -f https://storage.googleapis.com/knative-releases/latest/istio.yaml
+    kubectl apply --filename https://raw.githubusercontent.com/knative/serving/v0.1.1/third_party/istio-0.8.0/istio.yaml
     ```
 2.  Label the default namespace with `istio-injection=enabled`:
     ```bash
     kubectl label namespace default istio-injection=enabled
     ```
 3.  Monitor the Istio components until all of the components show a `STATUS` of
-    `Running` or `Completed`: `bash kubectl get pods -n istio-system`
+    `Running` or `Completed`: `bash kubectl get pods --namespace istio-system`
 
 It will take a few minutes for all the components to be up and running; you can
 rerun the command to see the current status.
@@ -87,27 +87,49 @@ rerun the command to see the current status.
 > command to view the component's status updates in real time. Use CTRL + C to
 > exit watch mode.
 
-## Installing Knative Serving
+## Installing Knative components
 
-1.  Next, we will install [Knative Serving](https://github.com/knative/serving)
-    and its dependencies:
-    `bash kubectl apply -f https://storage.googleapis.com/knative-releases/latest/release.yaml`
-1.  Monitor the Knative components, until all of the components show a `STATUS`
-    of `Running`: `bash kubectl get pods -n knative-serving`
+You can install the Knative Serving and Build components together, or Build on its own.
+
+### Installing Knative Serving and Build components
+
+1. Run the `kubectl apply` command to install Knative and its dependencies:
+    ```bash
+    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.1.1/release.yaml
+    ```
+1. Monitor the Knative components until all of the components show a
+   `STATUS` of `Running`:
+    ```bash
+    kubectl get pods --namespace knative-serving
+    kubectl get pods --namespace knative-build
+    ```
+
+### Installing Knative Build only
+
+1. Run the `kubectl apply` command to install
+   [Knative Build](https://github.com/knative/build) and its dependencies:
+    ```bash
+    kubectl apply --filename https://raw.githubusercontent.com/knative/serving/v0.1.1/third_party/config/build/release.yaml
+    ```
+1. Monitor the Knative Build components until all of the components show a
+   `STATUS` of `Running`:
+    ```bash
+    kubectl get pods --namespace knative-build
 
 Just as with the Istio components, it will take a few seconds for the Knative
-components to be up and running; you can rerun the command to see the current
-status.
+components to be up and running; you can rerun the `kubectl get` command to see
+the current status.
 
 > Note: Instead of rerunning the command, you can add `--watch` to the above
-> command to view the component's status updates in real time. Use CTRL + C to
-> exit watch mode.
+  command to view the component's status updates in real time. Use CTRL + C to
+  exit watch mode.
 
-You are now ready to deploy an app to your new Knative cluster.
+You are now ready to deploy an app or create a build in your new Knative
+cluster.
 
 ## Alternative way to enable Knative with Gardener
 
-Ask your Gardener administrator to configure the Gardener Bouqet addon manager
+Ask your Gardener administrator to configure the Gardener Bouquet addon manager
 with the following CRDs:
 
 ```
@@ -134,14 +156,14 @@ spec:
     istio: "0.8.0"
 ```
 
-And of course create the respectve `ConfigMaps`:
+And of course create the respective `ConfigMaps`:
 
 ```
-curl https://storage.googleapis.com/knative-releases/latest/istio.yaml -o istio.yaml
+curl https://raw.githubusercontent.com/knative/serving/v0.1.1/third_party/istio-0.8.0/istio.yaml
 kubectl create configmap istio-chart-080 --from-file=istio.yaml
 
-curl https://storage.googleapis.com/knative-releases/latest/release.yaml -o knative.yaml
-kubectl create configmap knative-chart-001 --from-file=knative.yaml
+curl https://github.com/knative/serving/releases/download/v0.1.1/release.yaml
+kubectl create configmap knative-chart-001 --from-file=release.yaml
 ```
 
 With this preparation, your team can just activate Knative in the "Addons" tab
@@ -170,7 +192,7 @@ knative-ingressgateway   LoadBalancer   100.70.219.81   35.233.41.212   80:32380
 3.  Adapt your knative config-domain (set your domain in the data field)
 
 ```
-kubectl --namespace knative-serving get configmaps config-domain -o yaml
+kubectl --namespace knative-serving get configmaps config-domain --output yaml
 apiVersion: v1
 data:
   knative.<my domain>: ""

@@ -3,7 +3,7 @@
 This document defines how authentication is provided during execution
 of a build.
 
-The build system supports two types of authentication, using Kuberernetes'
+The build system supports two types of authentication, using Kubernetes'
 first-class `Secret` types:
 
 * `kubernetes.io/basic-auth`
@@ -74,7 +74,7 @@ into their respective files in `$HOME`.
 1.  Execute the build:
 
     ```shell
-    kubectl apply -f secret.yaml serviceaccount.yaml build.yaml
+    kubectl apply --filename secret.yaml serviceaccount.yaml build.yaml
     ```
 
 When the build executes, before steps execute, a `~/.ssh/config` will be
@@ -83,8 +83,8 @@ used to authenticate with the Git service.
 
 ## Basic authentication (Git)
 
-1.  Define a `Secret` containing the base64-encoded username and password
-    that the build should use to authenticate to a Git repository:
+1.  Define a `Secret` containing the username and password that the build should
+    use to authenticate to a Git repository:
 
     ```yaml
     apiVersion: v1
@@ -94,9 +94,9 @@ used to authenticate with the Git service.
       annotations:
         build.knative.dev/git-0: https://github.com  # Described below
     type: kubernetes.io/basic-auth
-    data:
-      username: <base64 encoded>
-      password: <base64 encoded>
+    stringData:
+      username: <username>
+      password: <password>
     ```
 
 1.  Next, direct a `ServiceAccount` to use this `Secret`:
@@ -126,7 +126,7 @@ used to authenticate with the Git service.
 1.  Execute the build:
 
     ```shell
-    kubectl apply -f secret.yaml serviceaccount.yaml build.yaml
+    kubectl apply --filename secret.yaml serviceaccount.yaml build.yaml
     ```
 
 When this build executes, before steps execute, a `~/.gitconfig` will be
@@ -135,8 +135,8 @@ credentials are then used to authenticate with the Git repository.
 
 ## Basic authentication (Docker)
 
-1.  Define a `Secret` containing the base64-encoded username and password
-    that the build should use to authenticate to a Docker registry:
+1.  Define a `Secret` containing the username and password that the build should
+    use to authenticate to a Docker registry:
 
     ```yaml
     apiVersion: v1
@@ -146,9 +146,9 @@ credentials are then used to authenticate with the Git repository.
       annotations:
         build.knative.dev/docker-0: https://gcr.io  # Described below
     type: kubernetes.io/basic-auth
-    data:
-      username: <base64 encoded>
-      password: <base64 encoded>
+    stringData:
+      username: <username>
+      password: <password>
     ```
 
 1.  Direct a `ServiceAccount` to use this `Secret`:
@@ -178,7 +178,7 @@ credentials are then used to authenticate with the Git repository.
 1.  Execute the build:
 
     ```shell
-    kubectl apply -f secret.yaml serviceaccount.yaml build.yaml
+    kubectl apply --filename secret.yaml serviceaccount.yaml build.yaml
     ```
 
 When this build executes, before steps execute, a `~/.docker/config.json` will
