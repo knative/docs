@@ -27,7 +27,7 @@ the monitoring component is already installed and you can skip down to the
 
 To configure and setup monitoring:
 
-1. Choose a container image that meets the 
+1. Choose a container image that meets the
    [Fluentd image requirements](fluentd/README.md#requirements). For example, you can use the
    public image [k8s.gcr.io/fluentd-elasticsearch:v2.0.4](https://github.com/kubernetes/kubernetes/tree/master/cluster/addons/fluentd-elasticsearch/fluentd-es-image).
    Or you can create a custom one and upload the image to a container registry
@@ -35,7 +35,7 @@ To configure and setup monitoring:
 1. Follow the instructions in
    ["Setting up a logging plugin"](setting-up-a-logging-plugin.md#Configuring)
    to configure the Elasticsearch components settings.
-1. Install Knative monitoring components by running the following command from the root directory of 
+1. Install Knative monitoring components by running the following command from the root directory of
    [knative/serving](https://github.com/knative/serving) repository:
 
    ```shell
@@ -108,7 +108,7 @@ for request traces.
 
 You must configure and build your own Fluentd image if either of the following are true:
 
- * Your Knative Serving component is not hosted on a Google Cloud Platform (GCP) based cluster. 
+ * Your Knative Serving component is not hosted on a Google Cloud Platform (GCP) based cluster.
  * You want to send logs to another GCP project.
 
 To configure and setup monitoring:
@@ -120,9 +120,9 @@ To configure and setup monitoring:
 2. Follow the instructions in
    ["Setting up a logging plugin"](setting-up-a-logging-plugin.md#Configuring)
    to configure the stackdriver components settings.
-3. Install Knative monitoring components by running the following command from the root directory of 
+3. Install Knative monitoring components by running the following command from the root directory of
    [knative/serving](https://github.com/knative/serving) repository:
-   
+
       ```shell
       kubectl apply --recursive --filename config/monitoring/100-common \
         --filename config/monitoring/150-stackdriver \
@@ -140,13 +140,10 @@ To configure and setup monitoring:
 
      ```
      NAME                                  READY     STATUS    RESTARTS   AGE
-     elasticsearch-logging-0               1/1       Running   0          2d
-     elasticsearch-logging-1               1/1       Running   0          2d
      fluentd-ds-5kc85                      1/1       Running   0          2d
      fluentd-ds-vhrcq                      1/1       Running   0          2d
      fluentd-ds-xghk9                      1/1       Running   0          2d
      grafana-798cf569ff-v4q74              1/1       Running   0          2d
-     kibana-logging-7d474fbb45-6qb8x       1/1       Running   0          2d
      kube-state-metrics-75bd4f5b8b-8t2h2   4/4       Running   0          2d
      node-exporter-cr6bh                   2/2       Running   0          2d
      node-exporter-mf6k7                   2/2       Running   0          2d
