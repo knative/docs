@@ -22,6 +22,7 @@ The current working groups are:
 
 *   [API Core](#api-core)
 *   [Build](#build)
+*   [Documentation](#documentation)
 *   [Events](#events)
 *   [Networking](#networking)
 *   [Observability](#observability)
