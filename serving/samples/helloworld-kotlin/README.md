@@ -20,10 +20,10 @@ The following instructions recreate the source files from this folder.
 
 1. Create a new directory and cd into it:
 
-    ````shell
+    ```shell
     mkdir hello
     cd hello
-    ````
+    ```
 2. Create a file named `Main.kt` at `src/main/kotlin/com/example/hello` and copy the code block below into it:
 
     ```shell
@@ -50,8 +50,9 @@ The following instructions recreate the source files from this folder.
         }.start(wait = true)
     }
     ```
+3. Switch back to `hello` directory
 
-3. Create a new file, `build.gradle` and copy the following setting
+4. Create a new file, `build.gradle` and copy the following setting
 
    ```groovy
    buildscript {
@@ -100,7 +101,7 @@ The following instructions recreate the source files from this folder.
    }
    ```
 
-4. Create a file named `Dockerfile` and copy the code block below into it.
+5. Create a file named `Dockerfile` and copy the code block below into it.
 
     ```docker
     FROM openjdk:8-jdk-alpine
@@ -151,7 +152,7 @@ The following instructions recreate the source files from this folder.
     ENTRYPOINT ["java","-jar","-Djava.security.egd=file:/dev/./urandom","/home/gradle/build/libs/gradle.jar"]
     ```
 
-5. Create a new file, `service.yaml` and copy the following service definition
+6. Create a new file, `service.yaml` and copy the following service definition
    into the file. Make sure to replace `{username}` with your Docker Hub username.
 
     ```yaml
@@ -205,19 +206,22 @@ folder) you're ready to build and deploy the sample app.
 
 4. To find the IP address for your service, use
    `kubectl get svc knative-ingressgateway -n istio-system` to get the ingress IP for your
-   cluster. If your cluster is new, it may take sometime for the service to get asssigned
+   cluster. If your cluster is new, it may take sometime for the service to get assigned
    an external IP address.
 
     ```shell
     kubectl get svc knative-ingressgateway -n istio-system
-
+    ```
+    ```shell
     NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
     knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
     ```
 
 5. To find the URL for your service, use
-    ```
+    ```shell
     kubectl get ksvc helloworld-kotlin  -o=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+    ```
+    ```shell
     NAME                DOMAIN
     helloworld-kotlin   helloworld-kotlin.default.example.com
     ```
@@ -233,6 +237,8 @@ folder) you're ready to build and deploy the sample app.
 
     ```shell
     curl -H "Host: helloworld-kotlin.default.example.com" http://{IP_ADDRESS}
+    ```
+    ```shell
     Hello World: Kotlin Sample v1
     ```
 
