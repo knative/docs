@@ -57,11 +57,11 @@ Operators need to deploy Knative components after the configuring:
 
 ```shell
 # In case there is no change with the controller code
-bazel run config:controller.delete
+ko delete --filename config/controller.yaml
 # Deploy the configuration for sidecar
 kubectl apply --filename config/config-observability.yaml
 # Deploy the controller to make configuration for sidecar take effect
-bazel run config:controller.apply
+ko apply --filename config/controller.yaml
 
 # Deploy the DaemonSet to make configuration for DaemonSet take effect
 kubectl apply --filename <the-fluentd-config-for-daemonset> \
