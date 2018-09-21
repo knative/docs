@@ -125,7 +125,7 @@ To configure and setup monitoring:
    
       ```shell
       kubectl apply --recursive --filename config/monitoring/100-common \
-        --filename config/monitoring/150-stackdriver-prod \
+        --filename config/monitoring/150-stackdriver \
         --filename third_party/config/monitoring/common \
         --filename config/monitoring/200-common \
         --filename config/monitoring/200-common/100-istio.yaml
