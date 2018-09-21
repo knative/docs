@@ -73,8 +73,8 @@ Artifact                   | Link
 -------------------------- | ----
 Forum                      | [knative-docs@](https://groups.google.com/forum/#!forum/knative-docs)
 Community Meeting VC       | [meet.google.com/gke-rjdr-ted](https://meet.google.com/gke-rjdr-ted) <br>Or dial in:<br>(US) +1 252-662-0152<br>PIN: 156 914#‬
-Community Meeting Calendar | Wednesdays 9:00a-9:30a PST<br>[Calendar Invitation](https://calendar.google.com/calendar/embed?src=google.com_5pce19kpifu8avnj0eo74sg84c%40group.calendar.google.com&ctz=America%2FLos_Angeles)
-Meeting Notes              | [Notes](https://docs.google.com/document/d/1Y7rug0XshcQPdKzptdWbQLQjcjgpFdLeEgP1nfkDAe4/edit#)
+Community Meeting Calendar | Thursdays 9:00a-9:30a PST<br>[Calendar Invitation](https://calendar.google.com/event?action=TEMPLATE&tmeid=NGFmdjN0dms4OG0yM3B2NTFiYTZva3U2Mm1fMjAxODA5MjZUMTYwMDAwWiBvZGVsbHNAZ29vZ2xlLmNvbQ&tmsrc=odells%40google.com&scp=ALL)
+Meeting Notes              | [Notes](https://docs.google.com/document/d/1Y7rug0XshcQPdKzptdWbQLQjcjgpFdLeEgP1nfkDAe4/edit)
 Document Folder            | [Folder](https://drive.google.com/corp/drive/folders/1K5cM9m-b93ySI5WGKalJKbBq_cfjyi-y)
 Slack Channel              | [#docs](https://knative.slack.com/messages/C9CV04DNJ/)
 
