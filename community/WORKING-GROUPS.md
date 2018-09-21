@@ -119,7 +119,7 @@ Slack Channel              | [#observability](https://knative.slack.com)
 
 ## Scaling
 
-Autoscaling
+Autoscaling, Performance
 
 Artifact                   | Link
 -------------------------- | ----
