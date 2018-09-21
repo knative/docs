@@ -64,6 +64,23 @@ Slack Channel              | [#build-crd](https://knative.slack.com)
 <img width="30px" src="https://github.com/ImJasonH.png"> | Jason Hall | Google  | [ImJasonH](https://github.com/ImJasonH)
 <img width="30px" src="https://github.com/mattmoor.png"> | Matt Moore | Google  | [mattmoor](https://github.com/mattmoor)
 
+## Documentation
+
+Knative documentation, especially the [Docs](https://github.com/knative/docs) repo. 
+
+Artifact                   | Link
+-------------------------- | ----
+Forum                      | [knative-docs@](https://groups.google.com/forum/#!forum/knative-docs)
+Community Meeting VC       | [meet.google.com/gke-rjdr-ted](https://meet.google.com/gke-rjdr-ted) <br>Or dial in:<br>(US) +1 252-662-0152<br>PIN: 156 914#‬
+Community Meeting Calendar | Wednesdays 9:00a-9:30a PST<br>[Calendar Invitation](https://calendar.google.com/calendar/embed?src=google.com_5pce19kpifu8avnj0eo74sg84c%40group.calendar.google.com&ctz=America%2FLos_Angeles)
+Meeting Notes              | [Notes](https://docs.google.com/document/d/1Y7rug0XshcQPdKzptdWbQLQjcjgpFdLeEgP1nfkDAe4/edit#)
+Document Folder            | [Folder](https://drive.google.com/corp/drive/folders/1K5cM9m-b93ySI5WGKalJKbBq_cfjyi-y)
+Slack Channel              | [#docs](https://knative.slack.com/messages/C9CV04DNJ/)
+
+&nbsp;                                                        | Leads       | Company | Profile
+------------------------------------------------------------- | ----------- | ------- | -------
+<img width="30px" src="https://github.com/samodell.png"> | Sam O'Dell | Google  | [samodell](https://github.com/samodell)
+
 ## Events
 
 Event sources, bindings, FaaS framework, and orchestration
