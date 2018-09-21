@@ -91,7 +91,7 @@ You can deploy a prebuilt image of the `rester-tester` app to Knative Serving us
 
 ```
 # From inside the thumbnailer-go directory
-kubectl apply -f sample-prebuilt.yaml
+kubectl apply --filename sample-prebuilt.yaml
 ```
 
 ### Building and deploying a version of the app
@@ -108,17 +108,17 @@ perl -pi -e "s@DOCKER_REPO_OVERRIDE@$REPO@g" sample.yaml
 
 # Install the Kaniko build template used to build this sample (in the
 # build-templates repo).
-kubectl apply -f https://raw.githubusercontent.com/knative/build-templates/master/kaniko/kaniko.yaml
+kubectl apply --filename https://raw.githubusercontent.com/knative/build-templates/master/kaniko/kaniko.yaml
 
 # Create the Knative route and configuration for the application
-kubectl apply -f sample.yaml
+kubectl apply --filename sample.yaml
 ```
 
 
 Now, if you look at the `status` of the revision, you will see that a build is in progress:
 
 ```shell
-$ kubectl get revisions -o yaml
+$ kubectl get revisions --output yaml
 apiVersion: v1
 items:
 - apiVersion: serving.knative.dev/v1alpha1
@@ -141,7 +141,7 @@ To confirm that the app deployed, you can check for the Knative Serving service 
 First, is there an ingress service, and does it have an `EXTERNAL-IP`:
 
 ```
-kubectl get svc knative-ingressgateway -n istio-system
+kubectl get svc knative-ingressgateway --namespace istio-system
 NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
 knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
 ```
@@ -152,7 +152,7 @@ The newly deployed app may take few seconds to initialize. You can check its sta
 by entering the following command:
 
 ```
-kubectl -n default get pods
+kubectl --namespace default get pods
 ```
 
 The Knative Serving ingress service will automatically be assigned an external IP,
@@ -161,10 +161,10 @@ in `curl` commands:
 
 ```
 # Put the Host URL into an environment variable.
-export SERVICE_HOST=`kubectl get route thumb -o jsonpath="{.status.domain}"`
+export SERVICE_HOST=`kubectl get route thumb --output jsonpath="{.status.domain}"`
 
 # Put the ingress IP into an environment variable.
-export SERVICE_IP=`kubectl get svc knative-ingressgateway -n istio-system -o jsonpath="{.status.loadBalancer.ingress[*].ip}"`
+export SERVICE_IP=`kubectl get svc knative-ingressgateway --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
 ```
 
 If your cluster is running outside a cloud provider (for example on Minikube),
@@ -172,7 +172,7 @@ your services will never get an external IP address. In that case, use the istio
 `hostIP` and `nodePort` as the service IP:
 
 ```shell
-export SERVICE_IP=$(kubectl get po -l knative=ingressgateway -n istio-system -o 'jsonpath={.items[0].status.hostIP}'):$(kubectl get svc knative-ingressgateway -n istio-system -o 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
+export SERVICE_IP=$(kubectl get po --selector knative=ingressgateway --namespace istio-system --output 'jsonpath={.items[0].status.hostIP}'):$(kubectl get svc knative-ingressgateway --namespace istio-system --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
 ```
 
 ### Ping

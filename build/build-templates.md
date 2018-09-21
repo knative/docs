@@ -8,7 +8,7 @@ A set of curated and supported build templates is available in the
 ## What is a Build Template?
 
 A `BuildTemplate` encapsulates a shareable [build](./builds.md)
-process with some limited paramaterization capabilities.
+process with some limited parameterization capabilities.
 
 ### Example template
 
@@ -37,10 +37,10 @@ spec:
   steps:
   - name: dockerfile-build
     image: gcr.io/cloud-builders/docker
-    workingdir: "${DIRECTORY}"
+    workingDir: "${DIRECTORY}"
     args: ["build", "--no-cache",
            "--tag", "${IMAGE}",
-           "--file", "${DOCKERFILE_NAME}"
+           "--file", "${DOCKERFILE_NAME}",
            "."]
     volumeMounts:
     - name: docker-socket

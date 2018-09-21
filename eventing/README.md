@@ -36,7 +36,7 @@ EventSources.
 You can install Knative Eventing with the following command:
 
 ```bash
-kubectl apply -f https://storage.googleapis.com/knative-releases/eventing/latest/release.yaml
+kubectl apply --filename https://storage.googleapis.com/knative-releases/eventing/latest/release.yaml
 ```
 
 In addition to the core definitions, you'll need to install at least one
@@ -76,20 +76,20 @@ We currently have 3 buses implemented:
 - [Stub](https://github.com/knative/eventing/tree/master/pkg/buses/stub)
   provides a zero-dependency in-memory transport.
   ```bash
-  kubectl apply -f https://storage.googleapis.com/knative-releases/eventing/latest/release-bus-stub.yaml
-  kubectl apply -f https://storage.googleapis.com/knative-releases/eventing/latest/release-clusterbus-stub.yaml
+  kubectl apply --filename https://storage.googleapis.com/knative-releases/eventing/latest/release-bus-stub.yaml
+  kubectl apply --filename https://storage.googleapis.com/knative-releases/eventing/latest/release-clusterbus-stub.yaml
   ```
 - [Kafka](https://github.com/knative/eventing/tree/master/pkg/buses/kafka) uses
   an existing (user-provided) Kafka cluster for persistence.
   ```bash
-  kubectl apply -f https://storage.googleapis.com/knative-releases/eventing/latest/release-bus-kafka.yaml
-  kubectl apply -f https://storage.googleapis.com/knative-releases/eventing/latest/release-clusterbus-kafka.yaml
+  kubectl apply --filename https://storage.googleapis.com/knative-releases/eventing/latest/release-bus-kafka.yaml
+  kubectl apply --filename https://storage.googleapis.com/knative-releases/eventing/latest/release-clusterbus-kafka.yaml
   ```
 - [GCP PubSub](https://github.com/knative/eventing/tree/master/pkg/buses/gcppubsub)
   uses Google Cloud PubSub for message persistence.
   ```bash
-  kubectl apply -f https://storage.googleapis.com/knative-releases/eventing/latest/release-bus-gcppubsub.yaml
-  kubectl apply -f https://storage.googleapis.com/knative-releases/eventing/latest/release-clusterbus-gcppubsub.yaml
+  kubectl apply --filename https://storage.googleapis.com/knative-releases/eventing/latest/release-bus-gcppubsub.yaml
+  kubectl apply --filename https://storage.googleapis.com/knative-releases/eventing/latest/release-clusterbus-gcppubsub.yaml
   ```
 
 ### Sources
@@ -103,9 +103,9 @@ more interesting and specific Sources over time.
 - **Feed** is a primitive object defining a connection between an EventType and
   the action (as an
   [CloudEvents compatible HTTP endpoint](https://github.com/cloudevents/spec/blob/master/http-transport-binding.md)).
-- **EventType** and **ClusterEventType** descibe a specific set of events with a
+- **EventType** and **ClusterEventType** describe a specific set of events with a
   common schema which are emitted by an EventSource. EventType is
-  namespace-scoped, while ClusterEventTypes are installed by an adminastrator
+  namespace-scoped, while ClusterEventTypes are installed by an administrator
   and available in all namespaces in your cluster.
 - **EventSource** and **ClusterEventSource** describe an external system which
   may produce one or more EventTypes.
@@ -117,18 +117,18 @@ We currently have 3 sources implemented:
   [Kubernetes Events](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.10/#event-v1-core)
   and presents them as CloudEvents.
   ```bash
-  kubectl apply -f https://storage.googleapis.com/knative-releases/eventing/latest/release-source-k8sevents.yaml
+  kubectl apply --filename https://storage.googleapis.com/knative-releases/eventing/latest/release-source-k8sevents.yaml
   ```
 - [GitHub](https://github.com/knative/eventing/tree/master/pkg/sources/github)
   collects pull request notifications and presents them as CloudEvents.
   ```bash
-  kubectl apply -f https://storage.googleapis.com/knative-releases/eventing/latest/release-source-github.yaml
+  kubectl apply --filename https://storage.googleapis.com/knative-releases/eventing/latest/release-source-github.yaml
   ```
 - [GCP PubSub](https://github.com/knative/eventing/tree/master/pkg/sources/gcppubsub)
   collects events published to a GCP PubSub topic and presents them as
   CloudEvents.
   ```bash
-  kubectl apply -f https://storage.googleapis.com/knative-releases/eventing/latest/release-source-gcppubsub.yaml
+  kubectl apply --filename https://storage.googleapis.com/knative-releases/eventing/latest/release-source-gcppubsub.yaml
   ```
 
 ### Flows

@@ -12,7 +12,7 @@ This document provides guidelines for how the project's
 *   [Code reviewers](#code-reviewers)
 *   [Reviewing changes](#reviewing-changes)
     *   [Holds](#holds)
-*   [Project maintainers](#project-maintainers)
+*   [Approvers](#approvers)
 *   [Merging PRs](#merging-prs)
 
 ## Pull requests welcome

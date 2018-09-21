@@ -18,7 +18,7 @@ in the [build-templates](https://github.com/knative/build-templates/) repo.
 Save a copy of `buildpack.yaml`, then install it:
 
 ```shell
-kubectl apply -f https://raw.githubusercontent.com/knative/build-templates/master/buildpack/buildpack.yaml
+kubectl apply --filename https://raw.githubusercontent.com/knative/build-templates/master/buildpack/buildpack.yaml
 ```
 
 Then you can deploy this to Knative Serving from the root directory
@@ -31,13 +31,13 @@ export REPO="gcr.io/<your-project-here>"
 perl -pi -e "s@DOCKER_REPO_OVERRIDE@$REPO@g" sample.yaml
 
 # Create the Kubernetes resources
-kubectl apply -f sample.yaml
+kubectl apply --filename sample.yaml
 ```
 
 Once deployed, you will see that it first builds:
 
 ```shell
-$ kubectl get revision -o yaml
+$ kubectl get revision --output yaml
 apiVersion: v1
 items:
 - apiVersion: serving.knative.dev/v1alpha1
@@ -56,7 +56,7 @@ Once the `BuildComplete` status is `True`, resource creation begins.
 To access this service using `curl`, we first need to determine its ingress address:
 
 ```shell
-$ watch kubectl get svc knative-ingressgateway -n istio-system
+$ watch kubectl get svc knative-ingressgateway --namespace istio-system
 NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
 knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
 ```
@@ -66,10 +66,10 @@ the host URL and the IP of the ingress endpoint in environment variables:
 
 ```shell
 # Put the Host name into an environment variable.
-export SERVICE_HOST=`kubectl get route buildpack-sample-app -o jsonpath="{.status.domain}"`
+export SERVICE_HOST=`kubectl get route buildpack-sample-app --output jsonpath="{.status.domain}"`
 
 # Put the ingress IP into an environment variable.
-export SERVICE_IP=`kubectl get svc knative-ingressgateway -n istio-system -o jsonpath="{.status.loadBalancer.ingress[*].ip}"`
+export SERVICE_IP=`kubectl get svc knative-ingressgateway --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
 ```
 
 Now curl the service IP to make sure the deployment succeeded:
@@ -86,7 +86,7 @@ To clean up the sample service:
 
 ```shell
 # Clean up the serving resources
-kubectl delete -f serving/samples/buildpack-app-dotnet/sample.yaml
+kubectl delete --filename serving/samples/buildpack-app-dotnet/sample.yaml
 # Clean up the build template
 kubectl delete buildtemplate buildpack
 ```
