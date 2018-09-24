@@ -64,26 +64,26 @@ Build the application container and publish it to a container registry:
 
 1. Make a request to the autoscale app to see it consume some resources.
    ```
-   curl --header "Host: autoscale-go.default.example.com" "http://${IP_ADDRESS?}?sleep=100&prime=1000000&bloat=50"
+   curl --header "Host: autoscale-go.default.example.com" "http://${IP_ADDRESS?}?sleep=100&prime=10000&bloat=5"
    ```
    ```
-   Allocated 50 Mb of memory.
-   The largest prime less than 1000000 is 999983.
+   Allocated 5 Mb of memory.
+   The largest prime less than 10000 is 9973.
    Slept for 100.13 milliseconds.
    ```
 
 1. Ramp up traffic to maintain 10 in-flight requests.
 
    ```
-   go run serving/samples/autoscale-go/test/test.go -sleep 100 -prime 1000000 -bloat 50 -qps 9999 -concurrency 10
+   go run serving/samples/autoscale-go/test/test.go -sleep 100 -prime 10000 -bloat 5 -qps 9999 -concurrency 300
    ```
    ```
    REQUEST STATS:
-   Total: 34       Inflight: 10    Done: 34        Success Rate: 100.00%   Avg Latency: 0.2584 sec
-   Total: 69       Inflight: 10    Done: 35        Success Rate: 100.00%   Avg Latency: 0.2750 sec
-   Total: 108      Inflight: 10    Done: 39        Success Rate: 100.00%   Avg Latency: 0.2598 sec
-   Total: 148      Inflight: 10    Done: 40        Success Rate: 100.00%   Avg Latency: 0.2565 sec
-   Total: 185      Inflight: 10    Done: 37        Success Rate: 100.00%   Avg Latency: 0.2624 sec
+   Total: 439      Inflight: 299   Done: 439       Success Rate: 100.00%   Avg Latency: 0.4655 sec
+   Total: 1151     Inflight: 245   Done: 712       Success Rate: 100.00%   Avg Latency: 0.4178 sec
+   Total: 1706     Inflight: 300   Done: 555       Success Rate: 100.00%   Avg Latency: 0.4794 sec
+   Total: 2334     Inflight: 264   Done: 628       Success Rate: 100.00%   Avg Latency: 0.5207 sec
+   Total: 2911     Inflight: 300   Done: 577       Success Rate: 100.00%   Avg Latency: 0.4401 sec
    ...
    ```
    > Note: Use CTRL+C to exit the load test.
@@ -98,14 +98,19 @@ Build the application container and publish it to a container registry:
 
 ### Algorithm
 
-Knative Serving autoscaling is based on the average number of in-flight requests per pod (concurrency). The system has a default [target concurency of 1.0](https://github.com/knative/serving/blob/5441a18b360805d261528b2ac8ac13124e826946/config/config-autoscaler.yaml#L27).
+Knative Serving autoscaling is based on the average number of in-flight requests per pod (concurrency). The system has a default [target concurency of 100.0](https://github.com/knative/serving/blob/3f00c39e289ed4bfb84019131651c2e4ea660ab5/config/config-autoscaler.yaml#L35).
 
-For example, if a Revision is receiving 35 requests per second, each of which takes about about .25 seconds, Knative Serving will determine the Revision needs about 9 pods
+For example, if a Revision is receiving 350 requests per second, each of which takes about about .5 seconds, Knative Serving will determine the Revision needs about 2 pods
 
 ```
-35 * .25 = 8.75
-ceil(8.75) = 9
+350 * .5 = 175
+175 / 100 = 1.75
+ceil(1.75) = 2 pods
 ```
+
+#### Tuning
+
+By default Knative Serving does not limit concurrency in Revision containers.  A limit can be set per-Configuration using the [`ContainerConcurrency`](https://github.com/knative/serving/blob/3f00c39e289ed4bfb84019131651c2e4ea660ab5/pkg/apis/serving/v1alpha1/revision_types.go#L149) field.  The autoscaler will target a percentage of `ContainerConcurrency` instead of the default `100.0`.
 
 ### Dashboards
 
@@ -121,9 +126,9 @@ kubectl port-forward --namespace monitoring $(kubectl get pods --namespace monit
 
 ### Other Experiments
 
-1. Maintain 100 concurrent requests.
+1. Maintain 1000 concurrent requests.
    ```
-   go run serving/samples/autoscale-go/test/test.go -qps 9999 -concurrency 100
+   go run serving/samples/autoscale-go/test/test.go -qps 9999 -concurrency 1000
    ```
 
 1. Maintain 100 qps with fast requests.
