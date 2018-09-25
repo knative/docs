@@ -54,7 +54,7 @@ To be able to deploy and run serverless Knative applications, its required that 
 Run the following command to make OpenShift (run via minishift) to be configured for [Admission Controller Webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/):
 
 ```shell
-minishift openshift config set --patch '{
+minishift openshift config set --target=kube --patch '{
     "admissionConfig": {
         "pluginConfig": {
             "ValidatingAdmissionWebhook": {
