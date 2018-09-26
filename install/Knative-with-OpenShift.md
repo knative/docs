@@ -16,7 +16,7 @@ to test-drive Knative.
 
 ## Configure and start minishift
 
-The following details the bare minimum configuration required to setup minishift fro running Knative:
+The following details the bare minimum configuration required to setup minishift for running Knative:
 
 ```shell
 minishift profile set knative
@@ -40,7 +40,7 @@ The command `minishift profile set knative` is required every time you start and
 
 ## Configuring `oc` (openshift cli)
 
-Running the following command make sure that we have right version of `oc` and configured the DOCKER daemon to be connected to minishift Docker.
+Running the following command make sure that you have right version of `oc` and have configured the DOCKER daemon to be connected to minishift Docker.
 
 ```shell
 eval $(minishift docker-env) && eval $(minishift oc-env)
@@ -49,7 +49,7 @@ eval $(minishift docker-env) && eval $(minishift oc-env)
 ## Preparing Knative Deployment
 
 ### Enable Admission Controller Webhook
-To be able to deploy and run serverless Knative applications, its required that we enable the [Admission Controller Webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/).  
+To be able to deploy and run serverless Knative applications, its required that you must enable the [Admission Controller Webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/).  
 
 Run the following command to make OpenShift (run via minishift) to be configured for [Admission Controller Webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/):
 
@@ -80,7 +80,7 @@ Please allow few minutes for the OpenShift to be restarted.
 
 ### Configuring a OpenShift project
 
-1. Since there was a `admin` is added via `admin-user` addon during minishift configuration, its now possible to login with the user like:
+1. Since there was an `admin` addon added during minishift configuration, its now possible to login with the `admin` user. For example:
 
     ```shell
     oc login -u admin -p admin
@@ -126,7 +126,7 @@ bash <(curl -s https://raw.githubusercontent.com/knative/docs/master/install/scr
 
 The following section details on deploying [Knative Serving](https://github.com/knative/serving) to OpenShift.
 
-The [knative-openshift-policies.sh](scripts/knative-openshift-policies.sh) does run the required commands to configure necessary [privileges] to the service accounts used by Knative.
+The [knative-openshift-policies.sh](scripts/knative-openshift-policies.sh) runs the required commands to configure necessary [privileges] to the service accounts used by Knative.
 
 ```shell
 bash <(curl -s https://raw.githubusercontent.com/knative/docs/master/install/scripts/knative-openshift-policies.sh)
@@ -142,7 +142,7 @@ kubectl get cm istio-sidecar-injector -n istio-system -oyaml  \
 | kubectl replace -f -
 ```
 
-1. Install Knative serving
+1. Install Knative serving:
 
     ```shell
     curl -L https://storage.googleapis.com/knative-releases/serving/latest/release-lite.yaml \
