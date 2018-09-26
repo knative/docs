@@ -122,6 +122,18 @@ bash <(curl -s https://raw.githubusercontent.com/knative/docs/master/install/scr
 
 > **NOTE:** It will take a few minutes for all the components to be up and running. Use CTRL+C to exit watch mode
 
+**IMPORTANT:** Istio v1.0.1 change
+
+> The Istio v1.0.1 release automatic sidecar injection has removed `privileged:true` from init contianers,this will cause the Pods with istio proxies automatic inject to crash. Run the following command to update the **istio-sidecar-injector** ConfigMap.
+
+The following command ensures that the `privileged:true` is added to the **istio-sidecar-injector** ConfigMap:
+
+```shell
+oc get cm istio-sidecar-injector -n istio-system -oyaml  \
+| sed -e 's/securityContext:/securityContext:\\n      privileged: true/' \
+| oc replace -f -
+```
+
 ## Install Knative Serving
 
 The following section details on deploying [Knative Serving](https://github.com/knative/serving) to OpenShift.
@@ -130,16 +142,6 @@ The [knative-openshift-policies.sh](scripts/knative-openshift-policies.sh) runs 
 
 ```shell
 bash <(curl -s https://raw.githubusercontent.com/knative/docs/master/install/scripts/knative-openshift-policies.sh)
-```
-
-> **IMPORTANT:** The Istio v1.0.1 release automatic sidecar injection has removed `privileged:true` from init contianers,this will cause the Pods with istio proxies automatic inject to crash. Run the following command to update the **istio-sidecar-injector** ConfigMap.
-
-The following command ensures that the `privileged:true` is added to the **istio-sidecar-injector** ConfigMap:
-
-```shell
-kubectl get cm istio-sidecar-injector -n istio-system -oyaml  \
-| sed -e 's/securityContext:/securityContext:\\n      privileged: true/' \
-| kubectl replace -f -
 ```
 
 1. Install Knative serving:
