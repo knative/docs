@@ -116,7 +116,7 @@ When the flow is created, it provisions the following resources:
     bus:
 
     ```shell
-    kubectl get --output yaml feed k8s-event-flow
+    kubectl get --output yaml feed k8s-event-flow-....
     ```
 
     ```yaml
