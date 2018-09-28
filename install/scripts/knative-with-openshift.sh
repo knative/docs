@@ -79,8 +79,20 @@ oc get cm istio-sidecar-injector -n istio-system -oyaml  \
 | sed -e 's/securityContext:/securityContext:\\n      privileged: true/' \
 | oc replace -f -
 
-header_text "Restarting sidecar injector pod"
-oc delete pod -n istio-system -l istio=sidecar-injector 
+
+header_text "Check if SELinux is enabled in order to restart the sidecar-injector pod"
+os="$(uname -s)"
+if [ "$os" = "Linux" ]
+then
+    sel="$(getenforce | grep Disabled | wc -l)"
+    if [ "$sel" = "1" ]
+    then
+        header_text "SELinux is disabled, no need to restart the pod"
+    else
+        header_text "SELinux is enabled, restarting sidecar-injector pod"
+        oc delete pod -n istio-system -l istio=sidecar-injector
+    fi
+fi
 
 header_text "Setting up security policy for knative"
 oc adm policy add-scc-to-user anyuid -z build-controller -n knative-build
