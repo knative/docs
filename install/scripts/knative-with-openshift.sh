@@ -84,11 +84,13 @@ oc adm policy add-scc-to-user anyuid -z prometheus-system -n monitoring
 oc adm policy add-cluster-role-to-user cluster-admin -z build-controller -n knative-build
 oc adm policy add-cluster-role-to-user cluster-admin -z controller -n knative-serving
 
-header_text "Installing Knative"
-curl -L https://storage.googleapis.com/knative-releases/serving/latest/release-lite.yaml \
+header_text "Installing Knative-serving and Knative-build components"
+curl -L https://github.com/knative/serving/releases/download/v0.1.1/release.yaml \
   | sed 's/LoadBalancer/NodePort/' \
   | oc apply -f -
 
-header_text "Waiting for Knative to become ready"
+header_text "Waiting for Knative-serving to become ready"
 sleep 5; while echo && oc get pods -n knative-serving | grep -v -E "(Running|Completed|STATUS)"; do sleep 5; done
 
+header_text "Waiting for Knative-build to become ready"
+sleep 5; while echo && oc get pods -n knative-build | grep -v -E "(Running|Completed|STATUS)"; do sleep 5; done
