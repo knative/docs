@@ -52,6 +52,7 @@ func get(url string, client *http.Client, report chan *result) {
 		}
 		return
 	}
+	defer res.Body.Close()
 	result.statusCode = res.StatusCode
 	if result.statusCode != http.StatusOK {
 		if *verbose {
