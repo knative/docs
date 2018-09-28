@@ -78,17 +78,19 @@ header_text "Setting up security policy for knative"
 oc adm policy add-scc-to-user anyuid -z build-controller -n knative-build
 oc adm policy add-scc-to-user anyuid -z controller -n knative-serving
 oc adm policy add-scc-to-user anyuid -z autoscaler -n knative-serving
-oc adm policy add-scc-to-user anyuid -z kube-state-metrics -n monitoring
-oc adm policy add-scc-to-user anyuid -z node-exporter -n monitoring
-oc adm policy add-scc-to-user anyuid -z prometheus-system -n monitoring
+oc adm policy add-scc-to-user anyuid -z kube-state-metrics -n knative-monitoring
+oc adm policy add-scc-to-user anyuid -z node-exporter -n knative-monitoring
+oc adm policy add-scc-to-user anyuid -z prometheus-system -n knative-monitoring
 oc adm policy add-cluster-role-to-user cluster-admin -z build-controller -n knative-build
 oc adm policy add-cluster-role-to-user cluster-admin -z controller -n knative-serving
 
-header_text "Installing Knative"
+header_text "Installing Knative-serving and Knative-build"
 curl -L https://storage.googleapis.com/knative-releases/serving/latest/release-lite.yaml \
   | sed 's/LoadBalancer/NodePort/' \
   | oc apply -f -
 
-header_text "Waiting for Knative to become ready"
+header_text "Waiting for Knative-serving to become ready"
 sleep 5; while echo && oc get pods -n knative-serving | grep -v -E "(Running|Completed|STATUS)"; do sleep 5; done
 
+header_text "Waiting for Knative-build to become ready"
+sleep 5; while echo && oc get pods -n knative-build | grep -v -E "(Running|Completed|STATUS)"; do sleep 5; done
