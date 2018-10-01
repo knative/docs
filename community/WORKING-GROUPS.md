@@ -89,8 +89,8 @@ Specific areas of interest include: load balancing, routing, DNS configuration a
 Artifact                   | Link
 -------------------------- | ----
 Forum                      | [knative-dev@](https://groups.google.com/forum/#!forum/knative-dev)
-Community Meeting VC       | Coming soon
-Community Meeting Calendar | Coming soon
+Community Meeting VC       | [meet.google.com/cet-jepr-gtx](https://meet.google.com/cet-jepr-gtx) <br>Or dial in:<br>(US) +1 570-865-1288<br>PIN: 741 211#
+Community Meeting Calendar | Thursday 9:00a-9:30a PST<br>[Calendar Invitation](https://calendar.google.com/calendar/embed?src=google.com_18un4fuh6rokqf8hmfftm5oqq4%40group.calendar.google.com)
 Meeting Notes              | [Notes](https://drive.google.com/open?id=1EE1t5mTfnTir2lEasdTMRNtuPEYuPqQCZbU3NC9mHOI)
 Document Folder            | [Folder](https://drive.google.com/corp/drive/folders/1oVDYbcEDdQ9EpUmkK6gE4C7aZ8u6ujsN)
 Slack Channel              | [#networking](https://knative.slack.com)
@@ -136,13 +136,13 @@ Slack Channel              | [#autoscaling](https://knative.slack.com)
 
 ## Productivity
 
-Project health, test framework, continuous integration & deployment, release, performance/scale/load testing infrastructure 
+Project health, test framework, continuous integration & deployment, release, performance/scale/load testing infrastructure
 
 Artifact                   | Link
 -------------------------- | ----
 Forum                      | [knative-dev@](https://groups.google.com/forum/#!forum/knative-dev)
 Community Meeting VC       | [Hangouts](https://meet.google.com/sps-vbhg-rfx)
-Community Meeting Calendar | Every other Thursday at 2PM Pacific: [Calendar Invitation](https://calendar.google.com/calendar/event?eid=NW5zM21rbHVwZWgyNHFoMGpyY2JhMjB2bHRfMjAxODA5MTNUMjEwMDAwWiBnb29nbGUuY29tXzE4dW40ZnVoNnJva3FmOGhtZmZ0bTVvcXE0QGc)
+Community Meeting Calendar | Every other Thursday at 2PM Pacific: [Calendar Invitation](https://calendar.google.com/calendar/embed?src=google.com_18un4fuh6rokqf8hmfftm5oqq4%40group.calendar.google.com)
 Meeting Notes              | [Notes](https://docs.google.com/document/d/1aPRwYGD4XscRIqlBzbNsSB886PJ0G-vZYUAAUjoydko)
 Document Folder            | [Folder](https://drive.google.com/corp/drive/folders/1oMYB4LQHjySuMChmcWYCyhH7-CSkz2r_)
 Slack Channel              | [#productivity](https://knative.slack.com)
