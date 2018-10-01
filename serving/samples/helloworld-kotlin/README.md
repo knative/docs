@@ -104,44 +104,37 @@ The following instructions recreate the source files from this folder.
 5. Create a file named `Dockerfile` and copy the code block below into it.
 
     ```docker
-    FROM openjdk:8-jdk-alpine
+    FROM openjdk:8-jdk
+
     CMD ["gradle"]
 
     ENV GRADLE_HOME /opt/gradle
-    ENV GRADLE_VERSION 4.10
+    ENV GRADLE_VERSION 4.10.2
 
-    ARG GRADLE_DOWNLOAD_SHA256=248cfd92104ce12c5431ddb8309cf713fe58de8e330c63176543320022f59f18
+    ARG GRADLE_DOWNLOAD_SHA256=b49c6da1b2cb67a0caf6c7480630b51c70a11ca2016ff2f555eaeda863143a29
     RUN set -o errexit -o nounset \
-        && echo "Installing build dependencies" \
-        && apk add --no-cache --virtual .build-deps \
-        ca-certificates \
-        openssl \
-        unzip \
-        \
         && echo "Downloading Gradle" \
-        && wget -O gradle.zip "https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip" \
+        && wget --no-verbose --output-document=gradle.zip "https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip" \
         \
         && echo "Checking download hash" \
-        && echo "${GRADLE_DOWNLOAD_SHA256} *gradle.zip" | sha256sum -c - \
+        && echo "${GRADLE_DOWNLOAD_SHA256} *gradle.zip" | sha256sum --check - \
         \
         && echo "Installing Gradle" \
         && unzip gradle.zip \
         && rm gradle.zip \
-        && mkdir /opt \
         && mv "gradle-${GRADLE_VERSION}" "${GRADLE_HOME}/" \
-        && ln -s "${GRADLE_HOME}/bin/gradle" /usr/bin/gradle \
-        \
-        && apk del .build-deps \
+        && ln --symbolic "${GRADLE_HOME}/bin/gradle" /usr/bin/gradle \
         \
         && echo "Adding gradle user and group" \
-        && addgroup -S -g 1000 gradle \
-        && adduser -D -S -G gradle -u 1000 -s /bin/ash gradle \
+        && groupadd --system --gid 1000 gradle \
+        && useradd --system --gid gradle --uid 1000 --shell /bin/bash --create-home gradle \
         && mkdir /home/gradle/.gradle \
-        && chown -R gradle:gradle /home/gradle \
+        && chown --recursive gradle:gradle /home/gradle \
         \
         && echo "Symlinking root Gradle cache to gradle Gradle cache" \
         && ln -s /home/gradle/.gradle /root/.gradle
-        
+
+    # Create Gradle volume
     USER gradle
     VOLUME "/home/gradle/.gradle"
     WORKDIR /home/gradle
