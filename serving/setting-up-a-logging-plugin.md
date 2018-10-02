@@ -69,6 +69,10 @@ kubectl apply --filename <the-fluentd-config-for-daemonset> \
 In the commands above, replace `<the-fluentd-config-for-daemonset>` with the
 Fluentd DaemonSet configuration file, e.g. `config/monitoring/150-stackdriver`.
 
+**NOTE**: The deployment above will not affect the fluentd sidecar of existing
+pods. Developers need to redeploy their app to get the newest configuration for
+the fluentd sidecar used to send logs to `/var/log`.
+
 **NOTE**: Operators sometimes need to deploy extra services as the logging
 backends. For example, if they desire Elasticsearch&Kibana, they have to deploy
 the Elasticsearch and Kibana services. Knative provides this sample:
