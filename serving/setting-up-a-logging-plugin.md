@@ -56,12 +56,8 @@ is in process to get rid of the sidecar. The steps to configure are:
 Operators need to deploy Knative components after the configuring:
 
 ```shell
-# In case there is no change with the controller code
-ko delete --filename config/controller.yaml
 # Deploy the configuration for sidecar
 kubectl apply --filename config/config-observability.yaml
-# Deploy the controller to make configuration for sidecar take effect
-ko apply --filename config/controller.yaml
 
 # Deploy the DaemonSet to make configuration for DaemonSet take effect
 kubectl apply --filename <the-fluentd-config-for-daemonset> \
