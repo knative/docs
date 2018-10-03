@@ -185,6 +185,9 @@ When this build executes, before steps execute, a `~/.docker/config.json` will
 be generated containing the credentials configured in the `Secret`, and these
 credentials are then used to authenticate with the Docker registry.
 
+NOTE: https://github.com/knative/build-templates provides helper scripts for
+creating `Secret` for several managed Docker registry services such as GCR and ECR.
+
 ### Guiding credential selection
 
 A build might require many different types of authentication. For instance, a
