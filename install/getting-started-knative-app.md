@@ -107,21 +107,15 @@ asssigned an external IP address.
 1. To find the host URL for your service, enter:
 
     ```shell
-    kubectl get ksvc helloworld-go  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+    kubectl get services.serving.knative.dev helloworld-go  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
     NAME                DOMAIN
     helloworld-go       helloworld-go.default.example.com
     ```
 
-    > Note: `ksvc` is an alias for `services.serving.knative.dev`. If you have
-      an older version (version 0.1.0) of Knative installed, you'll need to use
-      the long name until you upgrade to version 0.1.1 or higher. See
-      [Checking Knative Installation Version](check-install-version.md)
-      to learn how to see what version you have installed.
-
     You can also export the host URL as a variable using the following command:
     
     ```shell
-    export HOST_URL=$(kubectl get ksvc helloworld-go  --output jsonpath='{.status.domain}')
+    export HOST_URL=$(kubectl get services.serving.knative.dev helloworld-go  --output jsonpath='{.status.domain}')
     ```
 
     If you changed the name from `helloworld-go` to something else when creating
