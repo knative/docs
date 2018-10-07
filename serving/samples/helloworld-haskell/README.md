@@ -64,14 +64,14 @@ following instructions recreate the source files from this folder.
 
 	main :: IO ()
 	main = do
-      t <- fromMaybe "NOT SPECIFIED" <$> lookupEnv "TARGET"
+      t <- fromMaybe "World" <$> lookupEnv "TARGET"
       scotty 8080 (route t)
 
 	route :: String -> ScottyM()
 	route t = get "/" $ hello t
 
 	hello :: String -> ActionM()
-	hello t = text $ pack ("Hello world: " ++ t)
+	hello t = text $ pack ("Hello " ++ t)
     ```
 
 1. In your project directory, create a file named `Dockerfile` and copy the code
