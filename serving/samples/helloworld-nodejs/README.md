@@ -93,7 +93,7 @@ recreate the source files from this folder.
     # where available (npm@5+)
     COPY package*.json ./
 
-    RUN npm install --production
+    RUN npm install --only=production
 
     # Bundle app source
     COPY . .
