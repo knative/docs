@@ -40,8 +40,8 @@ recreate the source files from this folder.
     ```csharp
     app.Run(async (context) =>
     {
-        var target = Environment.GetEnvironmentVariable("TARGET") ?? "NOT SPECIFIED";
-        await context.Response.WriteAsync($"Hello World: {target}\n");
+        var target = Environment.GetEnvironmentVariable("TARGET") ?? "World";
+        await context.Response.WriteAsync($"Hello {target}\n");
     });
     ```
 
