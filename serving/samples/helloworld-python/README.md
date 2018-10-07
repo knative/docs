@@ -35,8 +35,8 @@ The following instructions recreate the source files from this folder.
 
     @app.route('/')
     def hello_world():
-        target = os.environ.get('TARGET', 'NOT SPECIFIED')
-        return 'Hello World: {}!\n'.format(target)
+        target = os.environ.get('TARGET', 'World')
+        return 'Hello {}!\n'.format(target)
 
     if __name__ == "__main__":
         app.run(debug=True,host='0.0.0.0',port=int(os.environ.get('PORT', 8080)))
