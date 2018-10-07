@@ -52,8 +52,8 @@ recreate the source files from this folder.
     app.get('/', function (req, res) {
       console.log('Hello world received a request.');
 
-      var target = process.env.TARGET || 'NOT SPECIFIED';
-      res.send('Hello world: ' + target);
+      var target = process.env.TARGET || 'World';
+      res.send('Hello ' + target);
     });
 
     var port = 8080;
@@ -71,8 +71,7 @@ recreate the source files from this folder.
       "description": "",
       "main": "app.js",
       "scripts": {
-        "start": "node app.js",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "start": "node app.js"
       },
       "author": "",
       "license": "Apache-2.0"
@@ -94,9 +93,7 @@ recreate the source files from this folder.
     # where available (npm@5+)
     COPY package*.json ./
 
-    RUN npm install
-    # If you are building your code for production
-    # RUN npm install --only=production
+    RUN npm install --production
 
     # Bundle app source
     COPY . .

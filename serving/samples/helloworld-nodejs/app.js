@@ -20,8 +20,8 @@ const app = express();
 app.get('/', function (req, res) {
   console.log('Hello world received a request.');
 
-  var target = process.env.TARGET || 'NOT SPECIFIED';
-  res.send('Hello world: ' + target);
+  var target = process.env.TARGET || 'World';
+  res.send('Hello ' + target);
 });
 
 var port = 8080;
