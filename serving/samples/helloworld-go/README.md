@@ -36,9 +36,9 @@ following instructions recreate the source files from this folder.
       log.Print("Hello world received a request.")
       target := os.Getenv("TARGET")
       if target == "" {
-        target = "NOT SPECIFIED"
+        target = "World"
       }
-      fmt.Fprintf(w, "Hello World: %s!\n", target)
+      fmt.Fprintf(w, "Hello %s!\n", target)
     }
 
     func main() {

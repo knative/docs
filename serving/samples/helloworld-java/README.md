@@ -52,14 +52,14 @@ recreate the source files from this folder.
     @SpringBootApplication
     public class HelloworldApplication {
 
-        @Value("${TARGET:NOT SPECIFIED}")
+        @Value("${TARGET:World}")
         String target;
 
         @RestController
         class HelloworldController {
             @GetMapping("/")
             String hello() {
-                return "Hello World: " + target;
+                return "Hello " + target;
             }
         }
 

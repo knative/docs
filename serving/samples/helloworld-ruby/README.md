@@ -33,8 +33,8 @@ The following instructions recreate the source files from this folder.
     set :bind, '0.0.0.0'
 
     get '/' do
-      target = ENV['TARGET'] || 'NOT SPECIFIED'
-      "Hello World: #{target}!\n"
+      target = ENV['TARGET'] || 'World'
+      "Hello #{target}!\n"
     end
     ```
 
