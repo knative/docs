@@ -1,23 +1,26 @@
 # Jib Sample App
 
-A sample app that demonstrates using [Jib](https://github.com/GoogleContainerTools/jib) to build Java applications
+A sample app that demonstrates using
+[Jib](https://github.com/GoogleContainerTools/jib) to build Java applications
 and running with Knative Serving.
 
-Jib can package any Java application without using the Dockerfile.
+Jib can package any Java application without needing a Dockerfile nor Docker
+installed.
 
-This deploys the [Helloworld Java](https://github.com/knative/docs/tree/master/serving/samples/helloworld-java)
-sample app for Knative, and builds without using its Dockerfile.
-
+This builds the
+[Helloworld Java](https://github.com/knative/docs/tree/master/serving/samples/helloworld-java)
+sample app, creates a container image, and deploys it into Knative using the
+[Knative Jib Build Template](https://github.com/knative/build-templates/tree/master/jib).
 
 ## Prerequisites
 
-* [Install Knative Serving](../../../install/README.md)
-* [Configure Image Push Credentials](../../../build/auth.md#basic-authentication-docker)
+- [Install Knative Serving](../../../install/README.md)
+- [Configure Image Push Credentials](../../../build/auth.md#basic-authentication-docker)
 
 ## Running
 
-This sample uses the [Jib build
-template](https://github.com/knative/build-templates/tree/master/jib)
+This sample uses the
+[Jib build template](https://github.com/knative/build-templates/tree/master/jib)
 in the [build-templates](https://github.com/knative/build-templates/) repo.
 
 Install the Jib Maven build template:
@@ -26,8 +29,8 @@ Install the Jib Maven build template:
 kubectl apply -f https://raw.githubusercontent.com/knative/build-templates/master/jib/jib-maven.yaml
 ```
 
-Then you can deploy this to Knative Serving from the root directory
-by entering the following commands:
+Then you can deploy this to Knative Serving from the root directory by entering
+the following commands:
 
 ```shell
 export REPO="your/registry"
@@ -60,7 +63,8 @@ items:
 
 Once the `BuildComplete` status is `True`, resource creation begins.
 
-To access this service using `curl`, we first need to determine its ingress address:
+To access this service using `curl`, we first need to determine its ingress
+address:
 
 ```shell
 $ watch kubectl get svc knative-ingressgateway -n istio-system
@@ -68,8 +72,9 @@ NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S) 
 knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
 ```
 
-Once the `EXTERNAL-IP` gets assigned to the cluster, enter the follow commands to capture
-the host URL and the IP of the ingress endpoint in environment variables:
+Once the `EXTERNAL-IP` gets assigned to the cluster, enter the follow commands
+to capture the host URL and the IP of the ingress endpoint in environment
+variables:
 
 ```shell
 # Put the Host name into an environment variable.
