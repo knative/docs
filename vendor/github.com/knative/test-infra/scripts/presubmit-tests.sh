@@ -46,6 +46,10 @@ function exit_if_presubmit_not_required() {
   if [[ -n "${PULL_PULL_SHA}" ]]; then
     # On a presubmit job
     local changes="$(/workspace/githubhelper -list-changed-files)"
+    if [[ -z "${changes}" ]]; then
+      header "NO CHANGED FILES REPORTED, ASSUMING IT'S AN ERROR AND RUNNING TESTS ANYWAY"
+      return
+    fi
     local no_presubmit_pattern="${NO_PRESUBMIT_FILES[*]}"
     local no_presubmit_pattern="\(${no_presubmit_pattern// /\\|}\)$"
     echo -e "Changed files in commit ${PULL_PULL_SHA}:\n${changes}"
@@ -60,6 +64,19 @@ function exit_if_presubmit_not_required() {
 # Process flags and run tests accordingly.
 function main() {
   exit_if_presubmit_not_required
+
+  # Show the version of the tools we're using
+  if (( IS_PROW )); then
+    # Disable gcloud update notifications
+    gcloud config set component_manager/disable_update_check true
+    header "Current test setup"
+    echo ">> gcloud SDK version"
+    gcloud version
+    echo ">> kubectl version"
+    kubectl version
+    echo ">> go version"
+    go version
+  fi
 
   local all_parameters=$@
   [[ -z $1 ]] && all_parameters="--all-tests"
