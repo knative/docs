@@ -1,0 +1,14 @@
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: helloworld-vertx
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            image: docker.io/{username}/helloworld-vertx
+            env:
+            - name: TARGET
+              value: "Eclipse Vert.x Sample v1"
