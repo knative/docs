@@ -51,7 +51,7 @@ To configure and setup monitoring:
    reported `Running` or `Completed`:
 
      ```shell
-     kubectl get pods --namespace monitoring --watch
+     kubectl get pods --namespace knative-monitoring --watch
      ```
 
      ```
@@ -90,7 +90,7 @@ for request traces.
   reasons, the Kibana UI is exposed only within the cluster.
 
 - Navigate to the
-  [Kibana UI](http://localhost:8001/api/v1/namespaces/monitoring/services/kibana-logging/proxy/app/kibana).
+  [Kibana UI](http://localhost:8001/api/v1/namespaces/knative-monitoring/services/kibana-logging/proxy/app/kibana).
   _It might take a couple of minutes for the proxy to work_.
 
 - Within the "Configure an index pattern" page, enter `logstash-*` to
@@ -135,7 +135,7 @@ To configure and setup monitoring:
    reported `Running` or `Completed`:
 
      ```shell
-     kubectl get pods --namespace monitoring --watch
+     kubectl get pods --namespace knative-monitoring --watch
      ```
 
      ```
