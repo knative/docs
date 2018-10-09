@@ -5,7 +5,11 @@
 (defn handler [request]
   {:status 200
    :headers {"Content-Type" "text/html"}
-   :body "Hello World"})
+   :body (str "Hello World: "
+              (if-let [target (System/getenv "TARGET")]
+                target
+                "NOT SPECIFIED")
+              "!\n")})
 
 (defn -main [& args]
   (run-jetty handler {:port 8080}))
