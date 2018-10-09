@@ -29,7 +29,11 @@ following instructions recreate the source files from this folder.
     (defn handler [request]
       {:status 200
        :headers {"Content-Type" "text/html"}
-       :body "Hello World"})
+       :body (str "Hello World: "
+                  (if-let [target (System/getenv "TARGET")]
+                    target
+                    "NOT SPECIFIED")
+                  "!\n")})
 
     (defn -main [& args]
       (run-jetty handler {:port 8080}))
@@ -150,7 +154,7 @@ folder) you're ready to build and deploy the sample app.
    `{IP_ADDRESS}` with the address you see returned in the previous step.
 
     ```shell
-    curl -H "Host: helloworld-clojure.default.example.com" http://{IP_ADDRESS}
+    curl -H "Host: helloworld-clojure.default.example.com" http://{$IP_ADDRESS}
     Hello World: Clojure Sample v1!
     ```
 
