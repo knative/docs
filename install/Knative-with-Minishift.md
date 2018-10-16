@@ -8,18 +8,11 @@ the newly created Knative cluster.
 
 You can find [guides for other platforms here](README.md).
 
-## Before you begin
-
-These instructions will run an OpenShift 3.11 (Kubernetes 1.11) cluster on your
-local machine using [minishift](https://docs.okd.io/latest/minishift/getting-started/index.html)
-to test-drive Knative.
-
 ## Minishift setup
 
-- [Prepare virtualization environment](https://docs.okd.io/latest/minishift/getting-started/setting-up-virtualization-environment.html) to be used with Minishift
-- Download the archive for your operating system from the [Minishift v1.25.0](https://github.com/minishift/minishift/releases/tag/v1.25.0) Release page and extract its contents
-- Copy the `minishift` binary from extracted directory to your preferred location like /usr/local/bin
-- Ensure `minishift` is in your PATH by running the command:
+- Setup minishift based instructions from https://docs.okd.io/latest/minishift/getting-started/index.html
+
+- Ensure `minishift` is setup correctly by running the command:
 
 ```shell
 # returns minishift v1.25.0+90fb23e
@@ -44,8 +37,8 @@ minishift config set memory 8GB
 # the minimum required vCpus for the minishift vm
 minishift config set cpus 4
 
-# extra disk size for the vm, default is 20g
-minishift config set disk-size 50g
+# extra disk size for the vm, default is 20GB
+minishift config set disk-size 50GB
 
 # caching the images that will be downloaded during app deployments
 minishift config set image-caching true
@@ -73,7 +66,7 @@ Running the following command make sure that you have right version of `oc` and 
 ```shell
 # configures the host talk to DOCKER daemon of minishift
 minishift docker-env
-# configures the right openshift cli
+# Adds the right version of openshift cli binary to $PATH
 minishift oc-env
 ```
 
@@ -122,25 +115,24 @@ until oc login -u admin -p admin; do sleep 5; done;
     oc adm policy add-scc-to-user privileged -z default
     oc label namespace myproject istio-injection=enabled
     ```
-    The `oc adm policy` adds the **privileged** [Security Context Constraints(SCCs)](https://docs.okd.io/3.10/admin_guide/manage_scc.html) to the **default** Service Account. The SCCs are the precursor to the PSP (Pod Security Policy) mechanism in Kubernetes.
+    The `oc adm policy` adds the **privileged** [Security Context Constraints(SCCs)](https://docs.okd.io/3.10/admin_guide/manage_scc.html) to the **default** Service Account. The SCCs are the precursor to the PSP (Pod Security Policy) mechanism in Kubernetes, as  isito-sidecars required to be run with **privileged** permissions you need set that here.
 
-    Its is also ensured that the project myproject is labelled for Istio automatic sidecar injection, with this `istio-injection=enabled` label to **myproject** each of the Knative applications that will be deployed in **myproject** will have Istio sidecars injected automatically. 
+    Its is also ensured that the project myproject is labelled for Istio automatic sidecar injection, with this `istio-injection=enabled` label to **myproject** each of the Knative applications that will be deployed in **myproject** will have Istio sidecars injected automatically.
 
-  > **IMPORTANT:** Avoid using `default` project in OpenShift for deploying Knative applications. As OpenShift deploys few of its mission critical applications in `default` project, its safe not to touch to avoid any crash to the OpenShift.
+  > **IMPORTANT:** Avoid using `default` project in OpenShift for deploying Knative applications. As OpenShift deploys few of its mission critical applications in `default` project, it's safer not to touch it to avoid any instabilities in OpenShift.
 
 ### Installing Istio
 
 Knative depends on Istio. The [istio-openshift-policies.sh](scripts/istio-openshift-policies.sh) does run the required commands to configure necessary [privileges](https://istio.io/docs/setup/kubernetes/platform-setup/openshift/) to the service accounts used by Istio.
 
 ```shell
-bash <(curl -s https://raw.githubusercontent.com/knative/docs/master/install/scripts/istio-openshift-policies.sh)
+curl -s https://raw.githubusercontent.com/knative/docs/master/install/scripts/istio-openshift-policies.sh | bash 
 ```
 
 1. Run the following to install Istio:
 
     ```shell
-    curl -L https://storage.googleapis.com/knative-releases/serving/latest/istio.yaml \
-    | oc apply -f -
+    oc apply -f https://storage.googleapis.com/knative-releases/serving/latest/istio.yaml
     ```
     > **NOTE:** If you get a lot of errors after running the above command like:  __unable to recognize "STDIN": no matches for kind "Gateway" in version "networking.istio.io/v1alpha3"__, just run the command above again, it's idempotent and hence objects will be created only once.
 
@@ -152,7 +144,7 @@ bash <(curl -s https://raw.githubusercontent.com/knative/docs/master/install/scr
     ```shell
     while oc get pods -n istio-system | grep -v -E "(Running|Completed|STATUS)"; do sleep 5; done
     ```
-> **NOTE:** It will take a few minutes for all the components to be up and running. Use CTRL+C to exit watch mode
+> **NOTE:** It will take a few minutes for all the components to be up and running.
 
 ## Install Knative Serving
 
@@ -161,7 +153,7 @@ The following section details on deploying [Knative Serving](https://github.com/
 The [knative-openshift-policies.sh](scripts/knative-openshift-policies.sh) runs the required commands to configure necessary privileges to the service accounts used by Knative.
 
 ```shell
-bash <(curl -s https://raw.githubusercontent.com/knative/docs/master/install/scripts/knative-openshift-policies.sh)
+curl -s https://raw.githubusercontent.com/knative/docs/master/install/scripts/knative-openshift-policies.sh | bash
 ```
 
 >You can safely ignore the warnings:
@@ -182,6 +174,8 @@ bash <(curl -s https://raw.githubusercontent.com/knative/docs/master/install/scr
     ```
     The first command watches for all pod status in `knative-build` and the second command will watch for all pod status in `knative-serving`.
 
+    > **NOTE:** It will take a few minutes for all the components to be up and running. 
+
 3. Set route to access the  OpenShift ingress CIDR, so that services can be accessed via LoadBalancerIP
     ```shell
     # Only for macOS
@@ -189,7 +183,6 @@ bash <(curl -s https://raw.githubusercontent.com/knative/docs/master/install/scr
     # Only for Linux
     sudo ip route add $(minishift openshift config view | grep ingressIPNetworkCIDR | sed 's/\r$//' | awk '{print $NF}') via $(minishift ip)
     ```
-> **NOTE:** It will take a few minutes for all the components to be up and running. Use CTRL+C to exit watch mode.
 
 ## Deploying an app
 
