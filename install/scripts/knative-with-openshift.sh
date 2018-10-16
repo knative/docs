@@ -74,6 +74,26 @@ curl -L https://storage.googleapis.com/knative-releases/serving/latest/istio.yam
 header_text "Waiting for istio to become ready"
 sleep 5; while echo && oc get pods -n istio-system | grep -v -E "(Running|Completed|STATUS)"; do sleep 5; done
 
+header_text "Updating sidecar injector priviledged to true"
+oc get cm istio-sidecar-injector -n istio-system -oyaml  \
+| sed -e 's/securityContext:/securityContext:\\n      privileged: true/' \
+| oc replace -f -
+
+
+header_text "Check if SELinux is enabled in order to restart the sidecar-injector pod"
+os="$(uname -s)"
+if [ "$os" = "Linux" ]
+then
+    sel="$(getenforce | grep Disabled | wc -l)"
+    if [ "$sel" = "1" ]
+    then
+        header_text "SELinux is disabled, no need to restart the pod"
+    else
+        header_text "SELinux is enabled, restarting sidecar-injector pod"
+        oc delete pod -n istio-system -l istio=sidecar-injector
+    fi
+fi
+
 header_text "Setting up security policy for knative"
 oc adm policy add-scc-to-user anyuid -z build-controller -n knative-build
 oc adm policy add-scc-to-user anyuid -z controller -n knative-serving
