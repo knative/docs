@@ -1,8 +1,8 @@
 # Hello World - Go sample
 
 A simple web app written in Go that you can use for testing.
-It reads in an env variable `TARGET` and prints "Hello World: ${TARGET}!". If
-TARGET is not specified, it will use "NOT SPECIFIED" as the TARGET.
+It reads in an env variable `TARGET` and prints "Hello ${TARGET}!". If
+TARGET is not specified, it will use "World" as the TARGET.
 
 ## Prerequisites
 
@@ -42,11 +42,16 @@ following instructions recreate the source files from this folder.
     }
 
     func main() {
-      flag.Parse()
       log.Print("Hello world sample started.")
 
       http.HandleFunc("/", handler)
-      http.ListenAndServe(":8080", nil)
+
+      port := os.Getenv("PORT")
+      if port == "" {
+        port = "8080"
+      }
+
+      log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
     }
     ```
 
