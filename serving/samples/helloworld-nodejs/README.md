@@ -1,8 +1,8 @@
 # Hello World - Node.js sample
 
 A simple web app written in Node.js that you can use for testing.
-It reads in an env variable `TARGET` and prints "Hello World: ${TARGET}!". If
-TARGET is not specified, it will use "NOT SPECIFIED" as the TARGET.
+It reads in an env variable `TARGET` and prints "Hello ${TARGET}!". If
+TARGET is not specified, it will use "World" as the TARGET.
 
 ## Prerequisites
 
@@ -52,13 +52,13 @@ recreate the source files from this folder.
     app.get('/', function (req, res) {
       console.log('Hello world received a request.');
 
-      var target = process.env.TARGET || 'World';
-      res.send('Hello ' + target);
+      const target = process.env.TARGET || 'World';
+      res.send('Hello ' + target + '!');
     });
 
-    var port = 8080;
+    const port = process.env.PORT || 8080;
     app.listen(port, function () {
-      console.log('Hello world listening on port',  port);
+      console.log('Hello world listening on port', port);
     });
     ```
 
