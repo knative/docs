@@ -14,7 +14,7 @@ Knative serving service, so it scales automatically as event traffic increases.
   and a Docker Hub account configured (you'll use it for a container registry).
 - The core Knative eventing tools installed. You can install them with:
   ```shell
-  kubectl apply -f https://storage.googleapis.com/knative-releases/eventing/latest/release.yaml
+  kubectl apply --filename https://storage.googleapis.com/knative-releases/eventing/latest/release.yaml
   ```
 
 ## Configuring Knative
@@ -23,8 +23,8 @@ To use this sample, you'll need to install the `stub` ClusterBus and the
 `k8sevents` EventSource.
 
 ```shell
-kubectl apply -f https://storage.googleapis.com/knative-releases/eventing/latest/release-clusterbus-stub.yaml
-kubectl apply -f https://storage.googleapis.com/knative-releases/eventing/latest/release-source-k8sevents.yaml
+kubectl apply --filename https://storage.googleapis.com/knative-releases/eventing/latest/release-clusterbus-stub.yaml
+kubectl apply --filename https://storage.googleapis.com/knative-releases/eventing/latest/release-source-k8sevents.yaml
 ```
 
 ## Granting permissions
@@ -39,18 +39,19 @@ Kubernetes resources. In a production environment, you might want to limit the
 access of this service account to only specific namespaces.
 
 ```shell
-kubectl apply -f serviceaccount.yaml
+kubectl apply --filename serviceaccount.yaml
 ```
 
 ## Build and deploy the sample
 
 1.  Use Docker to build the sample code into a container. To build and push with
     Docker Hub, run these commands replacing `{username}` with your Docker Hub
-    username. Run the following from the _root_ of the `knative/docs` repo:
+    username:
 
     ```shell
     # Build the container on your local machine
-    docker build -t {username}/k8s-events --file=eventing/samples/k8s-events/Dockerfile .
+    # Note: The relative path points to the _root_ of the `knative/docs` repo
+    docker build -t {username}/k8s-events --file Dockerfile ../../../
 
     # Push the container to docker registry
     docker push {username}/k8s-events
@@ -62,13 +63,13 @@ kubectl apply -f serviceaccount.yaml
     step.** Apply the configuration using `kubectl`:
 
     ```shell
-    kubectl apply -f eventing/samples/k8s-events/function.yaml
+    kubectl apply --filename function.yaml
     ```
 
 1.  Check that your service is running using:
 
     ```shell
-    kubectl get services.serving.knative.dev -o "custom-columns=NAME:.metadata.name,READY:.status.conditions[2].status,REASON:.status.conditions[2].message"
+    kubectl get services.serving.knative.dev --output "custom-columns=NAME:.metadata.name,READY:.status.conditions[2].status,REASON:.status.conditions[2].message"
     NAME              READY     REASON
     read-k8s-events   True      <none>
     ```
@@ -76,7 +77,7 @@ kubectl apply -f serviceaccount.yaml
 1.  Create the flow sending Kubernetes Events to the service:
 
     ```shell
-    kubectl apply -f eventing/samples/k8s-events/flow.yaml
+    kubectl apply --filename flow.yaml
     ```
 
 1.  If you have the full knative install, you can read the function logs using
@@ -115,7 +116,7 @@ When the flow is created, it provisions the following resources:
     bus:
 
     ```shell
-    kubectl get -o yaml feed k8s-event-flow
+    kubectl get --output yaml feed k8s-event-flow-....
     ```
 
     ```yaml
@@ -140,7 +141,7 @@ When the flow is created, it provisions the following resources:
     some parameters to that EventType:
 
     ```shell
-    kubectl get -o yaml eventtype dev.knative.k8s.event
+    kubectl get --output yaml eventtype dev.knative.k8s.event
     ```
 
     ```yaml
@@ -161,7 +162,7 @@ When the flow is created, it provisions the following resources:
     sorts of object watches will be supported in the future.
 
     ```shell
-    kubectl get -o yaml eventsource k8sevents
+    kubectl get --output yaml eventsource k8sevents
     ```
 
     ```yaml
@@ -183,7 +184,7 @@ When the flow is created, it provisions the following resources:
     channel object by examining the `ownerReferences` on the Service:
 
     ```shell
-    kubectl get -o yaml svc k8s-event-flow-channel
+    kubectl get --output yaml svc k8s-event-flow-channel
     ```
 
     ```yaml
@@ -210,7 +211,7 @@ When the flow is created, it provisions the following resources:
     persistence. Each Channel is associated with either a Bus or a ClusterBus:
 
     ```shell
-    kubectl get -o yaml channel k8s-event-flow
+    kubectl get --output yaml channel k8s-event-flow
     ```
 
     ```yaml
@@ -234,7 +235,7 @@ When the flow is created, it provisions the following resources:
     but will not durably store messages if the connected endpoints are down.
 
     ```shell
-    kubectl get -o yaml clusterbus stub
+    kubectl get --output yaml clusterbus stub
     ```
 
     ```yaml
@@ -259,7 +260,7 @@ When the flow is created, it provisions the following resources:
     Subscription:
 
     ```shell
-    kubectl get -o yaml subscription k8s-event-flow
+    kubectl get --output yaml subscription k8s-event-flow
     ```
 
     ```yaml

@@ -54,7 +54,7 @@ through a webhook.
    1. Apply the secret to your cluster:
 
        ```shell
-       kubectl apply -f github-secret.yaml
+       kubectl apply --filename github-secret.yaml
        ```
 
 1. Next, update the `service.yaml` file in the project to reference the tagged
@@ -90,7 +90,7 @@ through a webhook.
 1. Use `kubectl` to apply the `service.yaml` file.
 
 ```shell
-$ kubectl apply -f service.yaml
+$ kubectl apply --filename service.yaml
 service "gitwebhook" created
 ```
 
@@ -103,7 +103,7 @@ service "gitwebhook" created
 
         ```shell
         $ kubectl get services.serving.knative.dev gitwebhook \
-           -o=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+           --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
 
         NAME                DOMAIN
         gitwebhook          gitwebhook.default.example.com
@@ -124,16 +124,16 @@ Once deployed, you can inspect the created resources with `kubectl` commands:
 
 ```shell
 # This will show the Knative service that we created:
-kubectl get service.serving.knative.dev -o yaml
+kubectl get service.serving.knative.dev --output yaml
 
 # This will show the Route, created by the service:
-kubectl get route -o yaml
+kubectl get route --output yaml
 
 # This will show the Configuration, created by the service:
-kubectl get configurations -o yaml
+kubectl get configurations --output yaml
 
 # This will show the Revision, created by the Configuration:
-kubectl get revisions -o yaml
+kubectl get revisions --output yaml
 ```
 
 ## Testing the service
@@ -148,6 +148,6 @@ right, you'll see the title of the PR will be modified, with the text
 To clean up the sample service:
 
 ```shell
-kubectl delete -f service.yaml
+kubectl delete --filename service.yaml
 ```
 

@@ -26,7 +26,7 @@ docker push "${REPO}/serving/samples/grpc-ping-go"
 perl -pi -e "s@github.com/knative/docs/serving/samples/grpc-ping-go@${REPO}/serving/samples/grpc-ping-go@g" serving/samples/grpc-ping-go/*.yaml
 
 # Deploy the Knative sample
-kubectl apply -f serving/samples/grpc-ping-go/sample.yaml
+kubectl apply --filename serving/samples/grpc-ping-go/sample.yaml
 
 ```
 
@@ -36,10 +36,10 @@ kubectl apply -f serving/samples/grpc-ping-go/sample.yaml
 
 ```
 # Put the Host name into an environment variable.
-export SERVICE_HOST=`kubectl get route grpc-ping -o jsonpath="{.status.domain}"`
+export SERVICE_HOST=`kubectl get route grpc-ping --output jsonpath="{.status.domain}"`
 
 # Put the ingress IP into an environment variable.
-export SERVICE_IP=`kubectl get svc knative-ingressgateway -n istio-system -o jsonpath="{.status.loadBalancer.ingress[*].ip}"`
+export SERVICE_IP=`kubectl get svc knative-ingressgateway --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
 ```
 
 1. Use the client to send message streams to the gRPC server

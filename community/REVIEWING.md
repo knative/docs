@@ -12,7 +12,7 @@ This document provides guidelines for how the project's
 *   [Code reviewers](#code-reviewers)
 *   [Reviewing changes](#reviewing-changes)
     *   [Holds](#holds)
-*   [Project maintainers](#project-maintainers)
+*   [Approvers](#approvers)
 *   [Merging PRs](#merging-prs)
 
 ## Pull requests welcome
@@ -92,34 +92,13 @@ A PR can be merged only after the following criteria are met:
 
 This project uses
 [Prow](https://github.com/kubernetes/test-infra/tree/master/prow) to
-automatically run tests for every PR. PRs with failing tests might not b
-e merged. If necessary, you can rerun the tests by simply adding the comment
+automatically run tests for every PR. PRs with failing tests might not be
+merged. If necessary, you can rerun the tests by simply adding the comment
 `/retest` to your PR.
 
 Prow has several other features that make PR management easier, like running the
 go linter or assigning labels. For a full list of commands understood by Prow,
-see the [command help
-page](https://prow-internal.gcpnode.com/command-help?repo=knative%2Fknative).
-
-### Viewing test logs
-
-The Prow instance is internal to Google, which means that only Google
-employees can access the "Details" link of the test job (provided by
-Prow in the PR thread). However, if you're a Knative team member outside
-Google, and you are a member of the
-[knative-dev@](https://groups.google.com/forum/#!forum/knative-dev)
-Google group, you can see the test logs by following these instructions:
-
-1. Wait for Prow to finish the test execution. Note the PR number.
-
-2. Open the URL http://gcsweb.k8s.io/gcs/knative-prow/pr-logs/pull/knative_serving/###/pull-knative-serving-@@@-tests/
-where ### is the PR number and @@@ is the test type (_build_, _unit_ or _integration_).
-
-3. You'll see one or more numbered directories. The highest number is the latest
-test execution (called "build" by Prow).
-
-4. The raw test log is the text file named `build-log.txt` inside each numbered
-directory.
+see the [command help page](https://prow.knative.dev/command-help).
 
 ---
 

@@ -15,10 +15,10 @@ fn main() {
     let new_service = || {
         service_fn_ok(|_| {
 
-            let mut hello = "Hello world: ".to_string();
+            let mut hello = "Hello ".to_string();
             match env::var("TARGET") {
                 Ok(target) => {hello.push_str(&target);},
-                Err(_e) => {hello.push_str("NOT SPECIFIED")},
+                Err(_e) => {hello.push_str("World")},
             };
 
             Response::new(Body::from(hello))

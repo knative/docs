@@ -33,12 +33,12 @@ Run the following command to get the `status` of the `Route` object with which
 you deployed your application:
 
 ```shell
-kubectl get route <route-name> -o yaml
+kubectl get route <route-name> --output yaml
 ```
 
 The `conditions` in `status` provide the reason if there is any failure. For
 details, see Knative
-[Error Conditions and Reporting](../spec/errors.md)(currently some of them
+[Error Conditions and Reporting](https://github.com/knative/serving/blob/master/docs/spec/errors.md)(currently some of them
 are not implemented yet).
 
 ## Check Revision status
@@ -48,7 +48,7 @@ command to get the name of the `Revision` created for you deployment
 (look up the configuration name in the `Route` .yaml file):
 
 ```shell
-kubectl get configuration <configuration-name> -o jsonpath="{.status.latestCreatedRevisionName}"
+kubectl get configuration <configuration-name> --output jsonpath="{.status.latestCreatedRevisionName}"
 ```
 
 If you configure your `Route` with `Revision` directly, look up the revision
@@ -57,7 +57,7 @@ name in the `Route` yaml file.
 Then run the following command:
 
 ```shell
-kubectl get revision <revision-name> -o yaml
+kubectl get revision <revision-name> --output yaml
 ```
 
 A ready `Revision` should have the following condition in `status`:
@@ -77,7 +77,7 @@ If you see this condition, check the following to continue debugging:
 If you see other conditions, to debug further:
 
 * Look up the meaning of the conditions in Knative
-     [Error Conditions and Reporting](../spec/errors.md). Note: some of them
+     [Error Conditions and Reporting](https://github.com/knative/serving/blob/master/docs/spec/errors.md). Note: some of them
      are not implemented yet. An alternative is to
      [check Pod status](#check-pod-status).
 * If you are using `BUILD` to deploy and the `BuidComplete` condition is not
@@ -103,7 +103,7 @@ Choose one and use the following command to see detailed information for its
 `status`. Some useful fields are `conditions` and `containerStatuses`:
 
 ```shell
-kubectl get pod <pod-name> -o yaml
+kubectl get pod <pod-name> --output yaml
 
 ```
 
@@ -115,7 +115,7 @@ If you are using Build to deploy, run the following command to get the Build for
 your `Revision`:
 
 ```shell
-kubectl get build $(kubectl get revision <revision-name> -o jsonpath="{.spec.buildName}") -o yaml
+kubectl get build $(kubectl get revision <revision-name> --output jsonpath="{.spec.buildName}") --output yaml
 ```
 
 If there is any failure, the `conditions` in `status` provide the reason. To

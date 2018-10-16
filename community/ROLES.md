@@ -34,7 +34,7 @@ table describes:
   <tr>
     <td>Collaborator</td>
     <td>Casual contributor to the project</td>
-    <td>n/a</td>
+    <td>Join [knative-users@](https://groups.google.com/forum/#!forum/knative-users) to get access to the team drive.</td>
     <td>
         <p>Can submit PRs</p>
         <p>Commenting permission on the Knative Team drive</p>
@@ -46,7 +46,7 @@ table describes:
     <td>Member</td>
     <td>Regular active contributor in the community</td>
     <td>
-        <p>Sponsored by 2 reviewers</p>
+        <p>Sponsored by two members</p>
         <p>Has made multiple contributions to the project</p>
     </td>
     <td>
@@ -115,7 +115,9 @@ the PR bot.
 *   Working on some contribution to the project that would benefit from the
     ability to have PRs or Issues to be assigned to the contributor
 
-*   Sponsored by 1 member
+*   Join [knative-users@](https://groups.google.com/forum/#!forum/knative-users)
+    unrestricted join permissions; this grants read access to documents in the
+    Team Drive
 
 ## Member
 

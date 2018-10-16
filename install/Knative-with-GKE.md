@@ -14,12 +14,14 @@ specifications for Knative on Google Cloud Platform.
 This guide assumes you are using bash in a Mac or Linux environment; some
 commands will need to be adjusted for use in a Windows environment.
 
-### Installing the Google Cloud SDK
+### Installing the Google Cloud SDK and `kubectl`
 
-1. If you already have `kubectl`, run `kubectl version` to check your client version.
-
-1. If you already have `gcloud` installed with the `kubectl` component later than
-   v1.10, you can skip these steps.
+1. If you already have `gcloud` installed with `kubectl` version 1.10 or newer,
+   you can skip these steps.
+   > Tip: To check which version of `kubectl` you have installed, enter:
+     ```
+     kubectl version
+     ```
 
 1. Download and install the `gcloud` command line tool:
    https://cloud.google.com/sdk/install
@@ -117,7 +119,7 @@ Knative depends on Istio.
 
 1. Install Istio:
     ```bash
-    kubectl apply -f https://raw.githubusercontent.com/knative/serving/v0.1.0/third_party/istio-0.8.0/istio.yaml
+    kubectl apply --filename https://raw.githubusercontent.com/knative/serving/v0.1.1/third_party/istio-0.8.0/istio.yaml
     ```
 1. Label the default namespace with `istio-injection=enabled`:
     ```bash
@@ -126,7 +128,7 @@ Knative depends on Istio.
 1. Monitor the Istio components until all of the components show a `STATUS` of
 `Running` or `Completed`:
     ```bash
-    kubectl get pods -n istio-system
+    kubectl get pods --namespace istio-system
     ```
 
 It will take a few minutes for all the components to be up and running; you can
@@ -137,35 +139,32 @@ rerun the command to see the current status.
 
 ## Installing Knative components
 
-You have the option to install and use only the Knative components that you
-want. You can install only the component of Knative if you need that
-functionality, for example Knative serving is not required to create and run
-builds.
+You can install the Knative Serving and Build components together, or Build on its own.
 
-### Installing Knative Serving
+### Installing Knative Serving and Build components
 
-1. Run the `kubectl apply` command to install
-   [Knative Serving](https://github.com/knative/serving) and its dependencies:
+1. Run the `kubectl apply` command to install Knative and its dependencies:
     ```bash
-    kubectl apply -f https://github.com/knative/serving/releases/download/v0.1.0/release.yaml
+    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.1.1/release.yaml
     ```
-1. Monitor the Knative serving components until all of the components show a
+1. Monitor the Knative components until all of the components show a
    `STATUS` of `Running`:
     ```bash
-    kubectl get pods -n knative-serving
+    kubectl get pods --namespace knative-serving
+    kubectl get pods --namespace knative-build
     ```
 
-### Installing Knative Build
+### Installing Knative Build only
 
 1. Run the `kubectl apply` command to install
    [Knative Build](https://github.com/knative/build) and its dependencies:
     ```bash
-    kubectl apply -f https://raw.githubusercontent.com/knative/serving/v0.1.0/third_party/config/build/release.yaml
+    kubectl apply --filename https://raw.githubusercontent.com/knative/serving/v0.1.1/third_party/config/build/release.yaml
     ```
 1. Monitor the Knative Build components until all of the components show a
    `STATUS` of `Running`:
     ```bash
-    kubectl get pods -n knative-build
+    kubectl get pods --namespace knative-build
 
 Just as with the Istio components, it will take a few seconds for the Knative
 components to be up and running; you can rerun the `kubectl get` command to see
@@ -178,7 +177,7 @@ the current status.
 You are now ready to deploy an app or create a build in your new Knative
 cluster.
 
-## Deploying apps or builds
+## What's next
 
 Now that your cluster has Knative installed, you're ready to deploy an app or
 create a build.
@@ -193,8 +192,8 @@ for getting started:
 * You can view the available [sample apps](../serving/samples/README.md) and
   deploy one of your choosing.
 
-* To get started by creating a build, see
-  (Creating a simple Knative Build)[../build/creating-builds.md]
+* You can follow the step-by-step
+  [Creating a simple Knative Build](../build/creating-builds.md) guide.
 
 ## Cleaning up
 

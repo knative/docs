@@ -17,6 +17,7 @@ A build runs until all `steps` have completed or until a failure occurs.
   * [Source](#source)
   * [Service Account](#service-account)
   * [Volumes](#volumes)
+  * [Timeout](#timeout)
 * [Examples](#examples)
 
 ---
@@ -47,6 +48,7 @@ following fields:
     authentication information.
   * [`volumes`](#volumes) - Specifies one or more volumes that you want to make
     available to your build.
+  * [`timeout`](#timeout) - Specifies timeout after which the build will fail.
 
 [kubernetes-overview]: https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/#required-fields
 
@@ -156,14 +158,20 @@ complement the volumes that are implicitly
 
 For example, use volumes to accomplish one of the following common tasks:
 
- * [Mount a Kubernetes secrets(./auth.md).
+ * [Mount a Kubernetes secret](./auth.md).
 
- * Creat an `emptyDir` volume to act as a cache for use across multiple build
+ * Create an `emptyDir` volume to act as a cache for use across multiple build
    steps. Consider using a persistent volume for inter-build caching.
 
  * Mount a host's Docker socket to use a `Dockerfile` for container image
    builds.
 
+#### Timeout
+
+Optional. Specifies timeout for the build. Includes time required for allocating resources and execution of build.
+
+* Defaults to 10 minutes.
+* Refer to [Go's ParseDuration documentation](https://golang.org/pkg/time/#ParseDuration) for expected format.
 
 ### Examples
 
@@ -179,6 +187,7 @@ additional code samples, including working copies of the following snippets:
 * [Mounting extra volumes](#using-an-extra-volume)
 * [Pushing an image](#using-steps-to-push-images)
 * [Authenticating with `ServiceAccount`](#using-a-serviceaccount)
+* [Timeout](#using-timeout)
 
 #### Using `git`
 
@@ -330,6 +339,22 @@ data:
 Note: For a working copy of this `ServiceAccount` example, see the
 [build/test/git-ssh](https://github.com/knative/build/tree/master/test/git-ssh)
 code sample.
+
+#### Using `timeout`
+
+Specifying `timeout` for your `build`:
+
+```yaml
+spec:
+  timeout: 20m
+  source:
+    git:
+      url: https://github.com/knative/build.git
+      revision: master
+  steps:
+  - image: ubuntu
+    args: ["cat", "README.md"]
+```
 
 ---
 

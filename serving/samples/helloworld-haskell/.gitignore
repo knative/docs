@@ -1,0 +1,6 @@
+.stack-work/
+*.cabal
+*~
+/.idea/
+/dist/
+/out/
