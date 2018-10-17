@@ -133,9 +133,9 @@ rerun the command to see the current status.
 > Note: Instead of rerunning the command, you can add `--watch` to the above
   command to view the component's status updates in real time. Use CTRL+C to exit watch mode.
 
-## Installing Knative Serving
+## Installing Knative Serving and Build components
 
-Next, we'll install [Knative Serving](https://github.com/knative/serving).
+Next, we'll install [Knative Serving](https://github.com/knative/serving) and [Knative Build](https://github.com/knative/build)
 
 First, run the following to grant the necessary privileges to the service
 accounts istio will use:
@@ -154,7 +154,7 @@ oc adm policy add-cluster-role-to-user cluster-admin -z controller -n knative-se
 Next, install Knative:
 
 ```shell
-curl -L https://storage.googleapis.com/knative-releases/serving/latest/release-lite.yaml \
+curl -L https://github.com/knative/serving/releases/download/v0.1.1/release.yaml \
   | sed 's/LoadBalancer/NodePort/' \
   | oc apply -f -
 ```
@@ -164,6 +164,7 @@ Monitor the Knative components until all of the components show a `STATUS` of
 
 ```shell
 oc get pods -n knative-serving
+oc get pods -n knative-build
 ```
 
 Just as with the Istio components, it will take a few seconds for the Knative
