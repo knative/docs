@@ -1,8 +1,8 @@
 # Hello World - Rust sample
 
 A simple web app written in Rust that you can use for testing.
-It reads in an env variable `TARGET` and prints "Hello World: ${TARGET}!". If
-TARGET is not specified, it will use "NOT SPECIFIED" as the TARGET.
+It reads in an env variable `TARGET` and prints "Hello ${TARGET}". If
+TARGET is not specified, it will use "World" as the TARGET.
 
 ## Prerequisites
 
@@ -48,7 +48,17 @@ following instructions recreate the source files from this folder.
     fn main() {
         pretty_env_logger::init();
 
-        let addr = ([0, 0, 0, 0], 8080).into();
+        let mut port: u16 = 8080;
+        match env::var("PORT") {
+            Ok(p) => {
+                match p.parse::<u16>() {
+                    Ok(n) => {port = n;},
+                    Err(_e) => {},
+                };
+            }
+            Err(_e) => {},
+        };
+        let addr = ([0, 0, 0, 0], port).into();
 
         let new_service = || {
             service_fn_ok(|_| {
