@@ -1,8 +1,8 @@
 # Hello World - .NET Core sample
 
 A simple web app written in C# using .NET Core 2.1 that you can use for testing.
-It reads in an env variable `TARGET` and prints "Hello World: ${TARGET}!". If
-TARGET is not specified, it will use "NOT SPECIFIED" as the TARGET.
+It reads in an env variable `TARGET` and prints "Hello ${TARGET}!". If
+TARGET is not specified, it will use "World" as the TARGET.
 
 ## Prerequisites
 
@@ -26,12 +26,17 @@ recreate the source files from this folder.
     ```
 
 1. Update the `CreateWebHostBuilder` definition in `Program.cs` by adding
-   `.UseUrls("http://0.0.0.0:8080")` to define the serving port:
+   `.UseUrls()` to define the serving port:
 
     ```csharp
-    public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-        WebHost.CreateDefaultBuilder(args)
-            .UseStartup<Startup>().UseUrls("http://0.0.0.0:8080");
+    public static IWebHostBuilder CreateWebHostBuilder(string[] args)
+    {
+        string port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+        string url = String.Concat("http://0.0.0.0:", port);
+
+        return WebHost.CreateDefaultBuilder(args)
+            .UseStartup<Startup>().UseUrls(url);
+    }
     ```
 
 1. Update the `app.Run(...)` statement in `Startup.cs` to read and return the
