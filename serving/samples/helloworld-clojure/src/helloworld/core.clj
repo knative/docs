@@ -5,10 +5,10 @@
 (defn handler [request]
   {:status 200
    :headers {"Content-Type" "text/html"}
-   :body (str "Hello World: "
+   :body (str "Hello "
               (if-let [target (System/getenv "TARGET")]
                 target
-                "NOT SPECIFIED")
+                "World")
               "!\n")})
 
 (defn -main [& args]
