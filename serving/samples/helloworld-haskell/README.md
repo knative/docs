@@ -1,8 +1,8 @@
 # Hello World - Haskell sample
 
 A simple web app written in Haskell that you can use for testing.
-It reads in an env variable `TARGET` and prints "Hello World: ${TARGET}!". If
-TARGET is not specified, it will use "NOT SPECIFIED" as the TARGET.
+It reads in an env variable `TARGET` and prints "Hello ${TARGET}!". If
+TARGET is not specified, it will use "World" as the TARGET.
 
 ## Prerequisites
 
@@ -63,9 +63,11 @@ following instructions recreate the source files from this folder.
 	import           Web.Scotty.Trans
 
 	main :: IO ()
-	main = do
-      t <- fromMaybe "World" <$> lookupEnv "TARGET"
-      scotty 8080 (route t)
+  main = do
+    t <- fromMaybe "World" <$> lookupEnv "TARGET"
+    pStr <- fromMaybe "8080" <$> lookupEnv "PORT"
+    let p = read pStr :: Int
+    scotty p (route t)
 
 	route :: String -> ScottyM()
 	route t = get "/" $ hello t
