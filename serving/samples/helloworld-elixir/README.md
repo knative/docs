@@ -38,7 +38,8 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
    ```docker
    # Start from a base image for elixir
-   FROM elixir:alpine
+   # Phoenix works best on pre 1.7 at the moment.
+   FROM elixir:1.6.6-alpine
 
    # Set up Elixir and Phoenix
    ARG APP_NAME=hello
@@ -46,7 +47,7 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
    ENV MIX_ENV=prod REPLACE_OS_VARS=true TERM=xterm
    WORKDIR /opt/app
 
-   # Compile assets.
+   # Update nodejs, rebar, and hex.
    RUN apk update \
        && apk --no-cache --update add nodejs nodejs-npm \
        && mix local.rebar --force \
@@ -69,10 +70,19 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
    # Prepare final layer
    FROM alpine:latest
    RUN apk update && apk --no-cache --update add bash openssl-dev
-   ENV PORT=8080 MIX_ENV=prod REPLACE_OS_VARS=true
-   WORKDIR /opt/app
+
+   # Add a user so the server will run as a non-root user.
+   RUN addgroup -g 1000 appuser && \
+       adduser -S -u 1000 -G appuser appuser
+   # Pre-create necessary temp directory for erlang and set permissions.
+   RUN mkdir -p /opt/app/var
+   RUN chown appuser /opt/app/var
+   # Run everything else as 'appuser'
+   USER appuser
 
    # Document that the service listens on port 8080.
+   ENV PORT=8080 MIX_ENV=prod REPLACE_OS_VARS=true
+   WORKDIR /opt/app
    EXPOSE 8080
    COPY --from=0 /opt/release .
    ENV RUNNER_LOG_DIR /var/log
