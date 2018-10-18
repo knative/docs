@@ -20,9 +20,18 @@ To install Pivotal Container Service (PKS), follow the documentation at https://
 
 ## Creating a Kubernetes cluster
 
-> NOTE: Knative uses Istio sidecar injection and this requires privileged mode for init containers. To enable this, open the Pivotal Container Service tile in PCF Ops Manager, check the "Enable Privileged Containers - Use with caution" and the "Disable DenyEscalatingExec" boxes for the plan configuration you intend to use and save the changes. Once this is done, review and apply the changes in PCF Ops Manager. Then create your cluster using the plan that you just modified.
+> NOTE: Knative uses Istio sidecar injection and requires privileged mode for your init containers.
 
-To create a cluster, follow the documentation at https://docs.pivotal.io/runtimes/pks/1-1/create-cluster.html
+To enable privileged mode and create a cluster:
+
+1. Enable privileged mode:
+   1. Open the Pivotal Container Service tile in PCF Ops Manager.
+   1. In the plan configuration that you want to use, enable both of the following:
+      * Enable Privileged Containers - Use with caution
+      * Disable DenyEscalatingExec 
+   1. Save your changes. 
+   1. In the PCF Ops Manager, review and then apply your changes.
+1. [Create a cluster](https://docs.pivotal.io/runtimes/pks/1-1/create-cluster.html).
 
 ## Access the cluster
 
