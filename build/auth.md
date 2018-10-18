@@ -41,6 +41,10 @@ into their respective files in `$HOME`.
       # This is non-standard, but its use is encouraged to make this more secure.
       known_hosts: <base64 encoded>
     ```
+    `build.knative.dev/git-0` in the example above specifies which web address
+    these credentials belong to. See
+    [Guiding Credential Selection](#guiding-credential-selection) below for
+    more information.
 
 1.  Generate the value of `ssh-privatekey` by copying the value of (for example)
     `cat id_rsa | base64`.
@@ -98,6 +102,10 @@ used to authenticate with the Git service.
       username: <username>
       password: <password>
     ```
+    `build.knative.dev/git-0` in the example above specifies which web address
+    these credentials belong to. See
+    [Guiding Credential Selection](#guiding-credential-selection) below for
+    more information.
 
 1.  Next, direct a `ServiceAccount` to use this `Secret`:
 
@@ -150,6 +158,10 @@ credentials are then used to authenticate with the Git repository.
       username: <username>
       password: <password>
     ```
+    `build.knative.dev/docker-0` in the example above specifies which web
+    address these credentials belong to. See
+    [Guiding Credential Selection](#guiding-credential-selection) below for
+    more information.
 
 1.  Direct a `ServiceAccount` to use this `Secret`:
 
