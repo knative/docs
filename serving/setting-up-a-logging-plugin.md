@@ -43,7 +43,7 @@ is in process to get rid of the sidecar. The steps to configure are:
 1. Replace `logging.fluentd-sidecar-output-config` flag in
    [config-observability](https://github.com/knative/serving/blob/master/config/config-observability.yaml)  with the
    desired output configuration. **NOTE**: The Fluentd DaemonSet is in
-   `monitoring` namespace while the Fluentd sidecar is in the namespace same with
+   `knative-monitoring` namespace while the Fluentd sidecar is in the namespace same with
    the app. There may be small differences between the configuration for DaemonSet
    and sidecar even though the desired backends are the same.
 1. Replace `logging.fluentd-sidecar-image` flag in
@@ -65,9 +65,9 @@ bazel run config:controller.apply
 
 # Deploy the DaemonSet to make configuration for DaemonSet take effect
 kubectl apply --filename <the-fluentd-config-for-daemonset> \
-    --filename third_party/config/monitoring/common/kubernetes/fluentd/fluentd-ds.yaml \
-    --filename config/monitoring/200-common/100-fluentd.yaml
-    --filename config/monitoring/200-common/100-istio.yaml
+	--filename third_party/config/monitoring/common/kubernetes/fluentd/fluentd-ds.yaml \
+	--filename config/monitoring/200-common/100-fluentd.yaml
+	--filename config/monitoring/200-common/100-istio.yaml
 ```
 
 In the commands above, replace `<the-fluentd-config-for-daemonset>` with the
@@ -90,9 +90,9 @@ To uninstall a logging plugin, run:
 
 ```shell
 kubectl delete -f <the-fluentd-config-for-daemonset> \
-    -f third_party/config/monitoring/common/kubernetes/fluentd/fluentd-ds.yaml \
-    -f config/monitoring/200-common/100-fluentd.yaml
-    -f config/monitoring/200-common/100-istio.yaml
+	-f third_party/config/monitoring/common/kubernetes/fluentd/fluentd-ds.yaml \
+	-f config/monitoring/200-common/100-fluentd.yaml
+	-f config/monitoring/200-common/100-istio.yaml
 ```
 
 ---

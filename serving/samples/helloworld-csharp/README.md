@@ -40,8 +40,8 @@ recreate the source files from this folder.
     ```csharp
     app.Run(async (context) =>
     {
-        var target = Environment.GetEnvironmentVariable("TARGET") ?? "NOT SPECIFIED";
-        await context.Response.WriteAsync($"Hello World: {target}\n");
+        var target = Environment.GetEnvironmentVariable("TARGET") ?? "World";
+        await context.Response.WriteAsync($"Hello {target}\n");
     });
     ```
 
@@ -130,16 +130,10 @@ folder) you're ready to build and deploy the sample app.
 
 1. To find the URL for your service, use
     ```
-    kubectl get ksvc helloworld-csharp  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+    kubectl get services.serving.knative.dev helloworld-csharp  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
     NAME                DOMAIN
     helloworld-csharp   helloworld-csharp.default.example.com
     ```
-
-    > Note: `ksvc` is an alias for `services.serving.knative.dev`. If you have
-      an older version (version 0.1.0) of Knative installed, you'll need to use
-      the long name until you upgrade to version 0.1.1 or higher. See
-      [Checking Knative Installation Version](../../../install/check-install-version.md)
-      to learn how to see what version you have installed.
 
 1. Now you can make a request to your app to see the result. Replace
    `{IP_ADDRESS}` with the address you see returned in the previous step.

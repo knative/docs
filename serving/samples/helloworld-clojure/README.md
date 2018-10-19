@@ -1,6 +1,6 @@
-# Hello World - Go sample
+# Hello World - Clojure sample
 
-A simple web app written in Go that you can use for testing.
+A simple web app written in Clojure that you can use for testing.
 It reads in an env variable `TARGET` and prints "Hello World: ${TARGET}!". If
 TARGET is not specified, it will use "NOT SPECIFIED" as the TARGET.
 
@@ -18,57 +18,61 @@ While you can clone all of the code from this directory, hello world
 apps are generally more useful if you build them step-by-step. The
 following instructions recreate the source files from this folder.
 
-1. Create a new file named `helloworld.go` and paste the following code. This
+1. Create a new file named `src/helloworld/core.clj` and paste the following code. This
    code creates a basic web server which listens on port 8080:
 
-    ```go
-    package main
+    ```clojure
+    (ns helloworld.core
+      (:use ring.adapter.jetty)
+      (:gen-class))
 
-    import (
-      "flag"
-      "fmt"
-      "log"
-      "net/http"
-      "os"
-    )
+    (defn handler [request]
+      {:status 200
+       :headers {"Content-Type" "text/html"}
+       :body (str "Hello World: "
+                  (if-let [target (System/getenv "TARGET")]
+                    target
+                    "NOT SPECIFIED")
+                  "!\n")})
 
-    func handler(w http.ResponseWriter, r *http.Request) {
-      log.Print("Hello world received a request.")
-      target := os.Getenv("TARGET")
-      if target == "" {
-        target = "World"
-      }
-      fmt.Fprintf(w, "Hello %s!\n", target)
-    }
-
-    func main() {
-      flag.Parse()
-      log.Print("Hello world sample started.")
-
-      http.HandleFunc("/", handler)
-      http.ListenAndServe(":8080", nil)
-    }
+    (defn -main [& args]
+      (run-jetty handler {:port 8080}))
     ```
+    
+1. In your project directory, create a file named `project.clj` and copy the code
+   below into it. This code defines the project's dependencies and entrypoint.
+   
+   ```clojure
+   (defproject helloworld "1.0.0-SNAPSHOT"
+     :description "Hello World - Clojure sample"
+     :dependencies [[org.clojure/clojure "1.9.0"]
+                    [ring/ring-core "1.6.3"]
+                    [ring/ring-jetty-adapter "1.6.3"]]
+     :main helloworld.core)
+   ```
 
 1. In your project directory, create a file named `Dockerfile` and copy the code
-   block below into it. For detailed instructions on dockerizing a Go app, see
-   [Deploying Go servers with Docker](https://blog.golang.org/docker).
+   block below into it. For detailed instructions on dockerizing a Clojure app, see
+   [the clojure image documentation](https://github.com/docker-library/docs/tree/master/clojure).
 
     ```docker
-    # Start from a Debian image with the latest version of Go installed
-    # and a workspace (GOPATH) configured at /go.
-    FROM golang
+    # Start from a Debian image with the latest version of Clojure installed.
+    FROM clojure
 
-    # Copy the local package files to the container's workspace.
-    ADD . /go/src/github.com/knative/docs/helloworld
+    # Create the project and download dependencies.
+    RUN mkdir -p /usr/src/app
+    WORKDIR /usr/src/app
+    COPY project.clj /usr/src/app/
+    RUN lein deps
 
-    # Build the helloworld command inside the container.
-    # (You may fetch or manage dependencies here,
-    # either manually or with a tool like "godep".)
-    RUN go install github.com/knative/docs/helloworld
+    # Copy the local package files inside the container.
+    COPY . /usr/src/app
 
-    # Run the helloworld command by default when the container starts.
-    ENTRYPOINT /go/bin/helloworld
+    # Build the app as an uberjar.
+    RUN mv "$(lein uberjar | sed -n 's/^Created \(.*standalone\.jar\)/\1/p')" app-standalone.jar
+
+    # Run the app by default when the container starts.
+    CMD ["java", "-jar", "app-standalone.jar"]
 
     # Document that the service listens on port 8080.
     EXPOSE 8080
@@ -81,7 +85,7 @@ following instructions recreate the source files from this folder.
     apiVersion: serving.knative.dev/v1alpha1
     kind: Service
     metadata:
-      name: helloworld-go
+      name: helloworld-clojure
       namespace: default
     spec:
       runLatest:
@@ -89,10 +93,10 @@ following instructions recreate the source files from this folder.
           revisionTemplate:
             spec:
               container:
-                image: docker.io/{username}/helloworld-go
+                image: docker.io/{username}/helloworld-clojure
                 env:
                 - name: TARGET
-                  value: "Go Sample v1"
+                  value: "Clojure Sample v1"
     ```
 
 ## Building and deploying the sample
@@ -106,10 +110,10 @@ folder) you're ready to build and deploy the sample app.
 
     ```shell
     # Build the container on your local machine
-    docker build -t {username}/helloworld-go .
+    docker build -t {username}/helloworld-clojure .
 
     # Push the container to docker registry
-    docker push {username}/helloworld-go
+    docker push {username}/helloworld-clojure
     ```
 
 1. After the build has completed and the container is pushed to docker hub, you
@@ -141,17 +145,17 @@ folder) you're ready to build and deploy the sample app.
 
 1. To find the URL for your service, use
     ```
-    kubectl get services.serving.knative.dev helloworld-go  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+    kubectl get services.serving.knative.dev helloworld-clojure --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
     NAME                DOMAIN
-    helloworld-go       helloworld-go.default.example.com
+    helloworld-clojure  helloworld-clojure.default.example.com
     ```
 
 1. Now you can make a request to your app to see the results. Replace
    `{IP_ADDRESS}` with the address you see returned in the previous step.
 
     ```shell
-    curl -H "Host: helloworld-go.default.example.com" http://{IP_ADDRESS}
-    Hello World: Go Sample v1!
+    curl -H "Host: helloworld-clojure.default.example.com" http://{$IP_ADDRESS}
+    Hello World: Clojure Sample v1!
     ```
 
 ## Removing the sample app deployment

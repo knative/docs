@@ -69,15 +69,10 @@ kubectl apply --filename serviceaccount.yaml
 1.  Check that your service is running using:
 
     ```shell
-    kubectl get ksvc --output "custom-columns=NAME:.metadata.name,READY:.status.conditions[2].status,REASON:.status.conditions[2].message"
+    kubectl get services.serving.knative.dev --output "custom-columns=NAME:.metadata.name,READY:.status.conditions[2].status,REASON:.status.conditions[2].message"
     NAME              READY     REASON
     read-k8s-events   True      <none>
     ```
-    > Note: `ksvc` is an alias for `services.serving.knative.dev`. If you have
-      an older version (version 0.1.0) of Knative installed, you'll need to use
-      the long name until you upgrade to version 0.1.1 or higher. See
-      [Checking Knative Installation Version](../../../install/check-install-version.md)
-      to learn how to see what version you have installed.
 
 1.  Create the flow sending Kubernetes Events to the service:
 
@@ -121,7 +116,7 @@ When the flow is created, it provisions the following resources:
     bus:
 
     ```shell
-    kubectl get --output yaml feed k8s-event-flow
+    kubectl get --output yaml feed k8s-event-flow-....
     ```
 
     ```yaml
