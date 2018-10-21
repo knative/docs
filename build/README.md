@@ -1,6 +1,6 @@
 # Knative Build
 
-A `Build` is a custom resource in Knative that allows you to define an process
+A `Build` is a custom resource in Knative that allows you to define a process
 that runs to completion and can provide status. For example, fetch, build, and
 package your code by using a Knative `Build` that communicates whether the
 process succeeds.
