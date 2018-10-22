@@ -52,7 +52,6 @@ minishift start
 
 - The above configuration ensures that Knative gets created in its own [minishift profile](https://docs.okd.io/latest/minishift/using/profiles.html) called `knative` with 8GB of RAM, 4 vCpus and 50GB of hard disk. The image-caching helps in re-starting up the cluster faster every time.  
 - The [addon](https://docs.okd.io/latest/minishift/using/addons.html) **admin-user** creates a user called  `admin` with password  `admin` having the role of cluster-admin.  The user gets created only after the addon is applied, that is usually after successful start of Minishift
-- The  [addon](https://docs.okd.io/latest/minishift/using/addons.html) **anyuid** allows the `default` service account to run the application with uid `0`
 
 - The command `minishift profile set knative` is required every time you start and stop minishift to make sure that you are on right `knative` minishift profile that was configured above.
 
