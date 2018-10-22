@@ -1,8 +1,8 @@
 # Hello World - Clojure sample
 
 A simple web app written in Clojure that you can use for testing.
-It reads in an env variable `TARGET` and prints "Hello World: ${TARGET}!". If
-TARGET is not specified, it will use "NOT SPECIFIED" as the TARGET.
+It reads in an env variable `TARGET` and prints "Hello ${TARGET}!". If
+TARGET is not specified, it will use "World" as the TARGET.
 
 ## Prerequisites
 
@@ -29,10 +29,10 @@ following instructions recreate the source files from this folder.
     (defn handler [request]
       {:status 200
        :headers {"Content-Type" "text/html"}
-       :body (str "Hello World: "
+       :body (str "Hello "
                   (if-let [target (System/getenv "TARGET")]
                     target
-                    "NOT SPECIFIED")
+                    "World")
                   "!\n")})
 
     (defn -main [& args]
