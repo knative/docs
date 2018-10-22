@@ -46,9 +46,6 @@ minishift config set image-caching true
 # Add new user called admin with password admin having role cluster-admin
 minishift addons enable admin-user
 
-# Allow the containers to be run with uid 0
-minishift addons enable anyuid
-
 # start minishift
 minishift start
 ```
