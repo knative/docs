@@ -27,7 +27,9 @@ Containers.
     kubectl label namespace default istio-injection=enabled
     ```
 1.  Monitor the Istio components until all of the components show a `STATUS` of
-    `Running` or `Completed`: `bash kubectl get pods --namespace istio-system`
+    `Running` or `Completed`:
+    ```bash kubectl get pods --namespace istio-system
+    ```
 
 It will take a few minutes for all the components to be up and running; you can
 rerun the command to see the current status.
