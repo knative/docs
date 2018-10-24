@@ -73,7 +73,7 @@ Artifact                   | Link
 -------------------------- | ----
 Forum                      | [knative-docs@](https://groups.google.com/forum/#!forum/knative-docs)
 Community Meeting VC       | [meet.google.com/mku-npuv-cjs](https://meet.google.com/mku-npuv-cjs) <br>Or dial in:<br>(US) +1 260-277-0211<br>PIN: 956 724#‬‬
-Community Meeting Calendar | Tuesdays 9:00a-9:30a PST<br>[Calendar Invitation](https://calendar.google.com/event?action=TEMPLATE&tmeid=N3MxamZhdm45NXR1NG43MG5vaWxhNjV2aGRfMjAxODEwMjNUMTYwMDAwWiBnb29nbGUuY29tXzE4dW40ZnVoNnJva3FmOGhtZmZ0bTVvcXE0QGc&tmsrc=google.com_18un4fuh6rokqf8hmfftm5oqq4%40group.calendar.google.com&scp=ALL)
+Community Meeting Calendar | Every other Tuesday, 9:00a-9:30a PST<br>[Calendar Invitation](https://calendar.google.com/event?action=TEMPLATE&tmeid=N3MxamZhdm45NXR1NG43MG5vaWxhNjV2aGRfMjAxODEwMjNUMTYwMDAwWiBnb29nbGUuY29tXzE4dW40ZnVoNnJva3FmOGhtZmZ0bTVvcXE0QGc&tmsrc=google.com_18un4fuh6rokqf8hmfftm5oqq4%40group.calendar.google.com&scp=ALL)
 Meeting Notes              | [Notes](https://docs.google.com/document/d/1Y7rug0XshcQPdKzptdWbQLQjcjgpFdLeEgP1nfkDAe4/edit)
 Document Folder            | [Folder](https://drive.google.com/corp/drive/folders/1K5cM9m-b93ySI5WGKalJKbBq_cfjyi-y)
 Slack Channel              | [#docs](https://knative.slack.com/messages/docs)
