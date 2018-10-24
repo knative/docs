@@ -36,7 +36,9 @@ following instructions recreate the source files from this folder.
                   "!\n")})
 
     (defn -main [& args]
-      (run-jetty handler {:port 8080}))
+      (run-jetty handler {:port (if-let [port (System/getenv "PORT")]
+                                  (Integer/parseInt port)
+                                  8080)}))
     ```
     
 1. In your project directory, create a file named `project.clj` and copy the code
