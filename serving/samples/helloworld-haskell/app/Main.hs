@@ -11,7 +11,9 @@ import           Web.Scotty.Trans
 main :: IO ()
 main = do
   t <- fromMaybe "World" <$> lookupEnv "TARGET"
-  scotty 8080 (route t)
+  pStr <- fromMaybe "8080" <$> lookupEnv "PORT"
+  let p = read pStr :: Int
+  scotty p (route t)
 
 route :: String -> ScottyM()
 route t = get "/" $ hello t
