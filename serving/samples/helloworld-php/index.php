@@ -1,4 +1,3 @@
 <?php
-  $target = getenv('TARGET', true) ?: "World";
-  echo sprintf("Hello %s!\n", $target);
-?>
+$target = getenv('TARGET', true) ?: 'World';
+echo sprintf('Hello %s!\n', $target);

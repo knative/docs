@@ -29,9 +29,8 @@ following instructions recreate the source files from this folder.
 
     ```php
     <?php
-      $target = getenv('TARGET', true) ?: "World";
-      echo sprintf("Hello %s!\n", $target);
-    ?>
+    $target = getenv('TARGET', true) ?: "World";
+    echo sprintf("Hello %s!\n", $target);
     ```
 
 1. Create a file named `Dockerfile` and copy the code block below into it.
@@ -42,8 +41,10 @@ following instructions recreate the source files from this folder.
 
     COPY index.php /var/www/html/
 
-    # Run on port 8080 rather than 80
-    RUN sed -i 's/80/8080/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
+    ENV PORT 8080
+
+    RUN sed -i 's/80/${PORT}/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
+
     ```
 
 1. Create a new file, `service.yaml` and copy the following service definition
