@@ -10,7 +10,17 @@ use std::env;
 fn main() {
     pretty_env_logger::init();
 
-    let addr = ([0, 0, 0, 0], 8080).into();
+    let mut port: u16 = 8080;
+    match env::var("PORT") {
+        Ok(p) => {
+            match p.parse::<u16>() {
+                Ok(n) => {port = n;},
+                Err(_e) => {},
+            };
+        }
+        Err(_e) => {},
+    };
+    let addr = ([0, 0, 0, 0], port).into();
 
     let new_service = || {
         service_fn_ok(|_| {
