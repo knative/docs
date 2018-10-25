@@ -167,12 +167,12 @@ folder) you're ready to build and deploy the sample app.
    * Automatically scale your pods up and down (including to zero active pods).
 
 4. To find the IP address for your service, use
-   `kubectl get svc knative-ingressgateway -n istio-system` to get the ingress IP for your
+   `kubectl get service knative-ingressgateway -n istio-system` to get the ingress IP for your
    cluster. If your cluster is new, it may take sometime for the service to get assigned
    an external IP address.
 
     ```shell
-    kubectl get svc knative-ingressgateway -n istio-system
+    kubectl get service knative-ingressgateway -n istio-system
     ```
     ```shell
     NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
