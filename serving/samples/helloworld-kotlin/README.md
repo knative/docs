@@ -1,8 +1,8 @@
 # Hello World - Kotlin sample
 
-A simple web app written in Kotlin using Ktor that you can use for testing.
+A simple web app written in Kotlin using [Ktor](https://ktor.io/) that you can use for testing.
 It reads in an env variable `TARGET` and prints "Hello ${TARGET}". If
-TARGET is not specified, it will use "World" as the TARGET.
+TARGET is not specified, it will use "World" as the TARGET. 
 
 ## Prerequisites
 
@@ -181,18 +181,12 @@ folder) you're ready to build and deploy the sample app.
 
 5. To find the URL for your service, use
     ```shell
-    kubectl get ksvc helloworld-kotlin  -o=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+    kubectl get services.serving.knative.dev helloworld-kotlin  -o=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
     ```
     ```shell
     NAME                DOMAIN
     helloworld-kotlin   helloworld-kotlin.default.example.com
     ```
-
-    > Note: `ksvc` is an alias for `services.serving.knative.dev`. If you have
-      an older version (version 0.1.0) of Knative installed, you'll need to use
-      the long name until you upgrade to version 0.1.1 or higher. See
-      [Checking Knative Installation Version](../../../install/check-install-version.md)
-      to learn how to see what version you have installed.
 
 6. Now you can make a request to your app to see the result. Replace `{IP_ADDRESS}`
    with the address you see returned in the previous step.
@@ -201,7 +195,7 @@ folder) you're ready to build and deploy the sample app.
     curl -H "Host: helloworld-kotlin.default.example.com" http://{IP_ADDRESS}
     ```
     ```shell
-    Hello World: Kotlin Sample v1
+    Hello Kotlin Sample v1
     ```
 
 ## Remove the sample app deployment
