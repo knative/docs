@@ -8,11 +8,12 @@ import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 
 fun main(args: Array<String>) {
-    val target = System.getenv("TARGET") ?: "NOT SPECIFIED"
-    embeddedServer(Netty, 8080) {
+    val target = System.getenv("TARGET") ?: "World"
+    val port = System.getenv("PORT") ?: "8080"
+    embeddedServer(Netty, port.toInt()) {
         routing {
             get("/") {
-                call.respondText("Hello World: $target", ContentType.Text.Html)
+                call.respondText("Hello $target", ContentType.Text.Html)
             }
         }
     }.start(wait = true)

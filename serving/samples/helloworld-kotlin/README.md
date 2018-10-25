@@ -1,8 +1,8 @@
 # Hello World - Kotlin sample
 
 A simple web app written in Kotlin using Ktor that you can use for testing.
-It reads in an env variable `TARGET` and prints "Hello World: ${TARGET}". If
-TARGET is not specified, it will use "NOT SPECIFIED" as the TARGET.
+It reads in an env variable `TARGET` and prints "Hello ${TARGET}". If
+TARGET is not specified, it will use "World" as the TARGET.
 
 ## Prerequisites
 
@@ -32,6 +32,7 @@ The following instructions recreate the source files from this folder.
 	
     ```kotlin
     package com.example.hello
+
     import io.ktor.application.*
     import io.ktor.http.*
     import io.ktor.response.*
@@ -40,11 +41,12 @@ The following instructions recreate the source files from this folder.
     import io.ktor.server.netty.*
 
     fun main(args: Array<String>) {
-        val target = System.getenv("TARGET") ?: "NOT SPECIFIED"
-        embeddedServer(Netty, 8080) {
+        val target = System.getenv("TARGET") ?: "World"
+        val port = System.getenv("PORT") ?: "8080"
+        embeddedServer(Netty, port.toInt()) {
             routing {
                 get("/") {
-                    call.respondText("Hello World: $target", ContentType.Text.Html)
+                    call.respondText("Hello $target", ContentType.Text.Html)
                 }
             }
         }.start(wait = true)
