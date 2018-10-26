@@ -7,11 +7,12 @@ that you can use for testing. It reads in the env variable `TARGET` and prints
 ## Prerequisites
 
 * A Kubernetes cluster with Knative installed. Follow the
-  [installation instructions](https://github.com/knative/docs/blob/master/install/README.md) if you need
-  to create one.
+  [installation instructions](https://github.com/knative/docs/blob/master/install/README.md)
+  if you need to create one.
 * [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
-* [dart-sdk](https://www.dartlang.org/tools/sdk#install) installed and configured.
+* [dart-sdk](https://www.dartlang.org/tools/sdk#install) installed and configured
+  if you want to run the program locally.
 
 ## Recreating the sample code
 
@@ -32,7 +33,8 @@ created using the following instructions.
       sdk: '>=2.0.0 <3.0.0'
     ```
 
-2. Install dependencies
+2. If you want to run locally, install dependencies. If you only want to run in
+   Docker or Knative, you can skip this step.
 
     ```shell
     pub get
