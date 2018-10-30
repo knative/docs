@@ -25,7 +25,6 @@ following instructions recreate the source files from this folder.
     package main
 
     import (
-      "flag"
       "fmt"
       "log"
       "net/http"
