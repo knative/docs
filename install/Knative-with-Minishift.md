@@ -15,7 +15,7 @@ You can find [guides for other platforms here](README.md).
 - Ensure `minishift` is setup correctly by running the command:
 
 ```shell
-# returns minishift v1.25.0+90fb23e
+# returns minishift v1.26.1+1e20f27
 minishift version
 ```
 
@@ -27,9 +27,6 @@ The following details the bare minimum configuration required to setup minishift
 
 # make sure you have  a profile is set correctly, e.g. knative
 minishift profile set knative
-
-# Pinning to the right needed OpenShift version, anything >= v3.11.0
-minishift config set openshift-version v3.11.0
 
 # minimum memory required for the minishift VM
 minishift config set memory 8GB
