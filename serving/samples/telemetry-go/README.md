@@ -13,7 +13,7 @@ using the default installation.
 installed.
 2. Check if Knative monitoring components are installed:
 ```
-kubectl get pods --namespace monitoring
+kubectl get pods --namespace knative-monitoring
 ```
   * If pods aren't found, install [Knative monitoring component](../../installing-logging-metrics-traces.md).
 3. Install [Docker](https://docs.docker.com/get-started/#prepare-your-docker-environment).

@@ -91,7 +91,7 @@ kubectl apply --filename serviceaccount.yaml
     ```
 
     Then visit the
-    [Kibana interface](http://localhost:8001/api/v1/namespaces/monitoring/services/kibana-logging/proxy/app/kibana#/discover%3F_g%3D%28%29%26_a%3D%28columns%3A%21%28log%29%2Cindex%3AAWSnR1TW-6k0tY2-zd9_%2Cinterval%3Aauto%2Cquery%3A%28query_string%3A%28query%3A%27kubernetes.container_name%3Auser-container+kubernetes.labels.serving_knative_dev%255C%252Fconfiguration%3Aread-k8s-events%27%29%29%2Csort%3A%21%28%27@timestamp%27%2Cdesc%29%29)
+    [Kibana interface](http://localhost:8001/api/v1/namespaces/knative-monitoring/services/kibana-logging/proxy/app/kibana#/discover%3F_g%3D%28%29%26_a%3D%28columns%3A%21%28log%29%2Cindex%3AAWSnR1TW-6k0tY2-zd9_%2Cinterval%3Aauto%2Cquery%3A%28query_string%3A%28query%3A%27kubernetes.container_name%3Auser-container+kubernetes.labels.serving_knative_dev%255C%252Fconfiguration%3Aread-k8s-events%27%29%29%2Csort%3A%21%28%27@timestamp%27%2Cdesc%29%29)
     and search for the following string (or use the link above):
 
     ```

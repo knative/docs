@@ -117,7 +117,7 @@ By default Knative Serving does not limit concurrency in Revision containers.  A
 View the Knative Serving Scaling and Request dashboards (if configured).
 
 ```
-kubectl port-forward --namespace monitoring $(kubectl get pods --namespace monitoring --selector=app=grafana --output=jsonpath="{.items..metadata.name}") 3000
+kubectl port-forward --namespace knative-monitoring $(kubectl get pods --namespace knative-monitoring --selector=app=grafana --output=jsonpath="{.items..metadata.name}") 3000
 ```
 
 ![scale dashboard](scale-dashboard.png)
