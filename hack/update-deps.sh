@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Copyright 2018 The Knative Authors
 #
@@ -27,3 +27,6 @@ dep ensure
 
 # Keep the only dir in knative/test-infra we're interested in
 find vendor/github.com/knative/test-infra -mindepth 1 -maxdepth 1 ! -name scripts -exec rm -fr {} \;
+
+# Remove the cmd dir from eventing.
+rm -rf vendor/github.com/knative/eventing/cmd/
