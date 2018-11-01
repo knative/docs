@@ -59,7 +59,7 @@ recreate the source files from this folder.
         class HelloworldController {
             @GetMapping("/")
             String hello() {
-                return "Hello " + target;
+                return "Hello " + target + "!";
             }
         }
 
