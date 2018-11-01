@@ -68,6 +68,13 @@ recreate the source files from this folder.
         }
     }
     ```
+1. Run the application locally:
+
+   ```shell
+   ./mvnw package && java -jar target/gs-spring-boot-docker-0.1.0.jar
+   ```
+
+   Go to `http://localhost:8080/` to see your `Hello World!` message.
 
 1. In your project directory, create a file named `Dockerfile` and copy the code
    block below into it. For detailed instructions on dockerizing a Spring Boot app,
@@ -83,7 +90,6 @@ recreate the source files from this folder.
 
     FROM openjdk:8-jre-alpine
     COPY --from=build /target/helloworld-*.jar /helloworld.jar
-    VOLUME /tmp
     ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/helloworld.jar"]
     ```
 
@@ -139,9 +145,7 @@ folder) you're ready to build and deploy the sample app.
    * Network programming to create a route, ingress, service, and load balancer for your app.
    * Automatically scale your pods up and down (including to zero active pods).
 
-1. To find the IP address for your service, use
-   `kubectl get svc knative-ingressgateway -n istio-system` to get the ingress IP for your
-   cluster. If your cluster is new, it may take sometime for the service to get asssigned
+1. To find the IP address for your service, use. If your cluster is new, it may take sometime for the service to get asssigned
    an external IP address.
 
     ```shell
@@ -149,12 +153,14 @@ folder) you're ready to build and deploy the sample app.
 
     NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
     knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
-
     ```
 
 1. To find the URL for your service, use
-    ```
-    kubectl get services.serving.knative.dev helloworld-java  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+
+    ```shell
+    kubectl get services.serving.knative.dev helloworld-java \
+        --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+
     NAME                DOMAIN
     helloworld-java     helloworld-java.default.example.com
     ```
@@ -164,6 +170,7 @@ folder) you're ready to build and deploy the sample app.
 
     ```shell
     curl -H "Host: helloworld-java.default.example.com" http://{IP_ADDRESS}
+
     Hello World: Spring Boot Sample v1
     ```
 
