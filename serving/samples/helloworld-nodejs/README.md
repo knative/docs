@@ -82,7 +82,7 @@ recreate the source files from this folder.
    block below into it. For detailed instructions on dockerizing a Node.js app,
    see [Dockerizing a Node.js web app](https://nodejs.org/en/docs/guides/nodejs-docker-webapp/).
 
-    ```docker
+    ```Dockerfile
     FROM node:8
 
     # Create app directory
