@@ -158,7 +158,7 @@ folder) you're ready to build and deploy the sample app.
 1. To find the URL for your service, use
 
     ```shell
-    kubectl get services.serving.knative.dev helloworld-java \
+    kubectl get ksvc helloworld-java \
         --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
 
     NAME                DOMAIN
