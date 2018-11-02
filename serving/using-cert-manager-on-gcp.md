@@ -69,7 +69,7 @@ This example uses the `dns01` challenge type, which will
 enable certificate generation and wildcard certificates.
 
 ```shell
-kubectl apply -f - <<EOF
+kubectl apply --filename - <<EOF
 apiVersion: certmanager.k8s.io/v1alpha1
 kind: ClusterIssuer
 metadata:
@@ -129,7 +129,7 @@ The following steps will overwrite this Secret if it already exists.
 # Change this value to the domain you want to use.
 export DOMAIN=your-domain.com
 
-kubectl apply -f - <<EOF
+kubectl apply --filename - <<EOF
 apiVersion: certmanager.k8s.io/v1alpha1
 kind: Certificate
 metadata:
@@ -198,7 +198,7 @@ The key edit here is adding the `tls:` section to the end of the HTTPS port
 configuration.
 
 ```shell
-kubectl apply -f - <<EOF
+kubectl apply --filename - <<EOF
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
