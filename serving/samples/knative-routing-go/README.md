@@ -90,7 +90,7 @@ kubectl get svc knative-ingressgateway --namespace istio-system --output yaml
 
 * Inspect the deployed Knative services with:
 ```
-kubectl get service.serving.knative.dev
+kubectl get ksvc
 ```
 You should see 2 Knative services: search-service and login-service.
 

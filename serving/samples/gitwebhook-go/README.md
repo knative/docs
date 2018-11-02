@@ -102,7 +102,7 @@ service "gitwebhook" created
     1. Retrieve the hostname for this service, using the following command:
 
         ```shell
-        $ kubectl get services.serving.knative.dev gitwebhook \
+        $ kubectl get ksvc gitwebhook \
            --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
 
         NAME                DOMAIN
@@ -124,7 +124,7 @@ Once deployed, you can inspect the created resources with `kubectl` commands:
 
 ```shell
 # This will show the Knative service that we created:
-kubectl get service.serving.knative.dev --output yaml
+kubectl get ksvc --output yaml
 
 # This will show the Route, created by the service:
 kubectl get route --output yaml
