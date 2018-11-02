@@ -15,7 +15,7 @@ To clone the repository, run the following commands:
    ```shell
    git clone https://github.com/knative/serving knative-serving
    cd knative-serving
-   git checkout v0.1.1
+   git checkout v0.2.0
    ```
 
 ## Elasticsearch, Kibana, Prometheus & Grafana Setup
