@@ -47,7 +47,7 @@ choose a different name.
 
 ```shell
 # Upload that as a secret in your Kubernetes cluster.
-kubectl create secret -n cert-manager generic cloud-dns-key \
+kubectl create secret --namespace cert-manager generic cloud-dns-key \
   --from-file=key.json=$HOME/key.json
 
 # Delete the local secret
@@ -69,7 +69,7 @@ This example uses the `dns01` challenge type, which will
 enable certificate generation and wildcard certificates.
 
 ```shell
-kubectl apply -f - <<EOF
+kubectl apply --filename - <<EOF
 apiVersion: certmanager.k8s.io/v1alpha1
 kind: ClusterIssuer
 metadata:
@@ -102,7 +102,7 @@ EOF
 To check if your ClusterIssuer is valid, enter:
 
 ```shell
-kubectl get clusterissuer -n cert-manager letsencrypt-issuer -o yaml
+kubectl get clusterissuer --namespace cert-manager letsencrypt-issuer --output yaml
 ```
 
 Then confirm that its conditions have `Ready=True`.  For example:
@@ -129,7 +129,7 @@ The following steps will overwrite this Secret if it already exists.
 # Change this value to the domain you want to use.
 export DOMAIN=your-domain.com
 
-kubectl apply -f - <<EOF
+kubectl apply --filename - <<EOF
 apiVersion: certmanager.k8s.io/v1alpha1
 kind: Certificate
 metadata:
@@ -170,7 +170,7 @@ EOF
 To check that your certificate setting is valid, enter:
 
 ```shell
-kubectl get certificate -n istio-system my-certificate -o yaml
+kubectl get certificate --namespace istio-system my-certificate --output yaml
 ```
 
 Verify that its `Status.Conditions` have `Ready=True`.  For example:
@@ -198,7 +198,7 @@ The key edit here is adding the `tls:` section to the end of the HTTPS port
 configuration.
 
 ```shell
-kubectl apply -f - <<EOF
+kubectl apply --filename - <<EOF
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:

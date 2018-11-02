@@ -153,7 +153,7 @@ folder) you're ready to build and deploy the sample app.
    * Automatically scale your pods up and down (including to zero active pods).
 
 1. To find the IP address for your service, enter
-   `kubectl get svc knative-ingressgateway -n istio-system` to get the ingress IP for your
+   `kubectl get svc knative-ingressgateway --namespace istio-system` to get the ingress IP for your
    cluster. If your cluster is new, it may take sometime for the service to get asssigned
    an external IP address.
 
@@ -167,7 +167,7 @@ folder) you're ready to build and deploy the sample app.
 
 1. To find the URL for your service, enter:
     ```
-    kubectl get services.serving.knative.dev helloworld-rust  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+    kubectl get ksvc helloworld-rust  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
     NAME                DOMAIN
     helloworld-rust     helloworld-rust.default.example.com
     ```

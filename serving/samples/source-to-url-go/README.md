@@ -168,7 +168,7 @@ container for the application.
    status block:
 
    ```shell
-   $ kubectl get service.serving.knative.dev app-from-source --output yaml
+   $ kubectl get ksvc app-from-source --output yaml
 
    [...]
    status:
@@ -213,7 +213,7 @@ container for the application.
 1. To find the URL for your service, type:
 
     ```shell
-    $ kubectl get services.serving.knative.dev app-from-source  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+    $ kubectl get ksvc app-from-source  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
     NAME                DOMAIN
     app-from-source     app-from-source.default.example.com
     ```

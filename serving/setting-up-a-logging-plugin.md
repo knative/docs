@@ -89,7 +89,7 @@ monitoring components.
 To uninstall a logging plugin, run:
 
 ```shell
-kubectl delete -f <the-fluentd-config-for-daemonset> \
+kubectl delete --filename <the-fluentd-config-for-daemonset> \
 	-f third_party/config/monitoring/common/kubernetes/fluentd/fluentd-ds.yaml \
 	-f config/monitoring/200-common/100-fluentd.yaml
 	-f config/monitoring/200-common/100-istio.yaml
