@@ -43,7 +43,7 @@ Knative depends on Istio. Istio workloads require privileged mode for Init Conta
 
 1. Install Istio:
     ```bash
-    kubectl apply --filename https://raw.githubusercontent.com/knative/serving/v0.2.0/third_party/istio-1.0.8/istio.yaml
+    kubectl apply --filename https://raw.githubusercontent.com/knative/serving/v0.2.0/third_party/istio-1.0.2/istio.yaml
     ```
 1. Label the default namespace with `istio-injection=enabled`:
     ```bash
