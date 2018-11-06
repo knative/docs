@@ -1,20 +1,21 @@
-# Start from a Debian image with the latest version of Clojure installed.
+# Use the official Clojure image.
+# https://hub.docker.com/_/clojure
 FROM clojure
 
 # Create the project and download dependencies.
-RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
-COPY project.clj /usr/src/app/
+COPY project.clj .
 RUN lein deps
 
-# Copy the local package files inside the container.
-COPY . /usr/src/app
+# Copy local code to the container image.
+COPY . .
 
-# Build the app as an uberjar.
+# Build an uberjar release artifact.
 RUN mv "$(lein uberjar | sed -n 's/^Created \(.*standalone\.jar\)/\1/p')" app-standalone.jar
 
-# Run the app by default when the container starts.
-CMD ["java", "-jar", "app-standalone.jar"]
+# Configure and document the service HTTP port.
+ENV PORT 8080
+EXPOSE $PORT
 
-# Document that the service listens on port 8080.
-EXPOSE 8080
+# Run the web service on container startup.
+CMD ["java", "-jar", "app-standalone.jar"]
