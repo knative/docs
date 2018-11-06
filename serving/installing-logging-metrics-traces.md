@@ -39,12 +39,7 @@ To configure and setup monitoring:
    [knative/serving](https://github.com/knative/serving) repository:
 
    ```shell
-   kubectl apply --recursive --filename config/monitoring/100-common \
-      --filename config/monitoring/150-elasticsearch \
-      --filename third_party/config/monitoring/common \
-      --filename third_party/config/monitoring/elasticsearch \
-      --filename config/monitoring/200-common \
-      --filename config/monitoring/200-common/100-istio.yaml
+      kubectl create -R -f config/monitoring/ -R -f third_party/config/monitoring/
    ```
 
    The installation is complete when logging & monitoring components are all
