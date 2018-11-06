@@ -7,6 +7,7 @@ spec:
   runLatest:
     configuration:
       build:
+        serviceAccountName: build-bot
         source:
           git:
             url: https://github.com/mchmarny/simple-app.git
