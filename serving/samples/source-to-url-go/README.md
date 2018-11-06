@@ -136,7 +136,7 @@ container for the application.
                imagePullPolicy: Always
                env:
                - name: SIMPLE_MSG
-                 value: "Hello sample app!"
+                 value: "Hello from the sample app!"
    ```
 
 1. Apply this manifest using `kubectl`, and watch the results:
@@ -223,7 +223,7 @@ container for the application.
 
     ```shell
     curl -H "Host: app-from-source.default.example.com" http://{IP_ADDRESS}
-    Hello World!
+    Hello from the sample app!"
     ```
 
 ## Removing the sample app deployment
