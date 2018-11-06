@@ -42,19 +42,24 @@ The following instructions recreate the source files from this folder.
    See [official Ruby docker image](https://hub.docker.com/_/ruby/) for more details.
 
     ```docker
-    FROM ruby
+    # Use the official Ruby image.
+    # https://hub.docker.com/_/ruby
+    FROM ruby:2.5
 
-    RUN bundle config --global frozen 1
-
+    # Install production dependencies.
     WORKDIR /usr/src/app
     COPY Gemfile Gemfile.lock ./
+    ENV BUNDLE_FROZEN=true
     RUN bundle install
 
+    # Copy local code to the container image.
     COPY . .
 
+    # Configure and document the service HTTP port.
     ENV PORT 8080
-    EXPOSE 8080
+    EXPOSE $PORT
 
+    # Run the web service on container startup.
     CMD ["ruby", "./app.rb"]
     ```
 
