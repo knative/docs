@@ -171,8 +171,8 @@ When Knative is deployed to GKE, you can choose to send both logging and metrics
     </pre>
 2. To have Istio mesh metrics including request count, request latencies, use Istio OSS 1.0.4 or Istio addon 1.0.3.
 3. To have Knative system metrics, 
-   a) Update *metrics.backend-destination* to be stackdriver in [config-observability.yaml](https://github.com/knative/serving/blob/388f98a0a4bb6799ecf174aafc768098890e6cba/config/config-observability.yaml#L92).
-   b) Run:
+   1. Update *metrics.backend-destination* to be stackdriver in [config-observability.yaml](https://github.com/knative/serving/blob/388f98a0a4bb6799ecf174aafc768098890e6cba/config/config-observability.yaml#L92).
+   2. Run:
     ```
     kubectl apply -R -f config/monitoring/100-namespace.yaml \
     -f config/config-observability.yaml \
