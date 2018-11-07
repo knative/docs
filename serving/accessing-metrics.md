@@ -1,5 +1,7 @@
 # Accessing metrics
+Depending on the way you [installed the monitoring components](./installing-logging-metrics-traces.md), the metrics are uploaded to different backend.
 
+## Accessing metrics in Grafana
 You access metrics through the [Grafana](https://grafana.com/) UI. Grafana is
 the visualization tool for [Prometheus](https://prometheus.io/).
 
@@ -26,9 +28,17 @@ kubectl port-forward --namespace knative-monitoring $(kubectl get pods --namespa
 
 4. Set up an administrator account to modify or add dashboards by signing in with username: `admin` and password: `admin`.  
   * Before you expose the Grafana UI outside the cluster, make sure to change the password.
+  
+## Accessing metrics in Stackdriver
+ You can access metrics in  Stackdriver UI:
+ ```
+ https://app.google.stackdriver.com/metrics-explorer?project=<your stackdriver project id>
+ ```
+
+If you created [single project workspace](https://cloud.google.com/monitoring/workspaces/guide#single-project-ws), the stackdriver project id is usually the same as the GCP project id. In Metrics Explorer, you can search for Knative system metrics like *serving.knative.dev* (screenshot below):
+![Stackdriver Metrics Explorer](./images/stackdriver1.png)
 
 ---
-
 Except as otherwise noted, the content of this page is licensed under the
 [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),
 and code samples are licensed under the

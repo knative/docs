@@ -1,11 +1,9 @@
 # Monitoring, Logging and Tracing Installation
 
-Knative Serving offers two different monitoring setups:
-[Elasticsearch, Kibana, Prometheus and Grafana](#elasticsearch-kibana-prometheus--grafana-setup)
-or
-[Stackdriver, Prometheus and Grafana](#stackdriver-prometheus--grafana-setup)
-You can install only one of these two setups and side-by-side installation of
-these two are not supported.
+Knative Serving offers three different monitoring setups:
+[Elasticsearch and Kibana for logging, Prometheus and Grafana for metrics Setup](#elasticsearch-and-kibana-for-logging--prometheus-and-grafana-for-metrics-setup), [Stackdriver for logging, Prometheus & Grafana for metrics Setup](#stackdriver-for-logging--prometheus--grafana-for-metrics-setup), or [Stackdriver for both logging and metrics](#stackdriver-for-both-logging-and-metrics).
+
+You can install only one of these three setups and side-by-side installation of these three are not supported.
 
 ## Before you begin
 
@@ -18,7 +16,7 @@ To clone the repository, run the following commands:
    git checkout v0.2.0
    ```
 
-## Elasticsearch, Kibana, Prometheus & Grafana Setup
+## Elasticsearch and Kibana for logging, Prometheus and Grafana for metrics Setup
 
 If you installed the
 [full Knative release](../install/README.md#installing-knative),
@@ -32,10 +30,10 @@ To configure and setup monitoring:
    public image [k8s.gcr.io/fluentd-elasticsearch:v2.0.4](https://github.com/kubernetes/kubernetes/tree/master/cluster/addons/fluentd-elasticsearch/fluentd-es-image).
    Or you can create a custom one and upload the image to a container registry
    which your cluster has read access to.
-1. Follow the instructions in
+2. Follow the instructions in
    ["Setting up a logging plugin"](setting-up-a-logging-plugin.md#Configuring)
    to configure the Elasticsearch components settings.
-1. Install Knative monitoring components by running the following command from the root directory of
+3. Install Knative monitoring components by running the following command from the root directory of
    [knative/serving](https://github.com/knative/serving) repository:
 
    ```shell
@@ -104,7 +102,7 @@ for request traces.
   from `Time Filter field name` and click on `Create` button.
 
 
-## Stackdriver, Prometheus & Grafana Setup
+## Stackdriver for logging, Prometheus & Grafana for metrics Setup
 
 You must configure and build your own Fluentd image if either of the following are true:
 
@@ -153,6 +151,35 @@ To configure and setup monitoring:
      ```
 
   CTRL+C to exit watch.
+
+## Stackdriver for both logging and metrics in GKE
+
+You can enable Stackdriver in the GCP project by following [this](https://cloud.google.com/monitoring/workspaces/guide#single-project-ws).
+When Knative is deployed to GKE, you can choose to send both logging and metrics to Stackdriver backend. To have a complete monitoring experience, follow these steps:
+
+1. To have [Kubernetes metrics](https://cloud.google.com/monitoring/api/metrics_other#other-kubernetes.io), create a Kubernetes cluster on GKE with [Stackdriver Kubernetes Monitoring](https://cloud.google.com/kubernetes-monitoring/) feature:
+    <pre>
+    gcloud <b>beta</b> container clusters create $CLUSTER_NAME \
+      --zone=$CLUSTER_ZONE \
+      --cluster-version=latest \
+      --machine-type=n1-standard-4 \
+      --enable-autoscaling --min-nodes=1 --max-nodes=10 \
+      --enable-autorepair \
+      <b>--enable-stackdriver-kubernetes \</b>
+      --scopes=service-control,service-management,compute-rw,storage-ro,cloud-platform,logging-write,monitoring-write,pubsub,datastore \
+      --num-nodes=3
+    </pre>
+2. To have Istio mesh metrics including request count, request latencies, use Istio OSS 1.0.4 or Istio addon 1.0.3.
+3. To have Knative system metrics, 
+   a) Update *metrics.backend-destination* to be stackdriver in [config-observability.yaml](https://github.com/knative/serving/blob/388f98a0a4bb6799ecf174aafc768098890e6cba/config/config-observability.yaml#L92).
+   b) Run:
+    ```
+    kubectl apply -R -f config/monitoring/100-namespace.yaml \
+    -f config/config-observability.yaml \
+    -f config/monitoring/metrics/stackdriver \
+    -f config/monitoring/tracing/zipkin
+    ```   
+
 ## Learn More
 
 - Learn more about accessing logs, metrics, and traces:
