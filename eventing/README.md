@@ -112,23 +112,18 @@ more interesting and specific Sources over time.
 
 We currently have 3 sources implemented:
 
-- [K8sevents](https://github.com/knative/eventing/tree/master/pkg/sources/k8sevents)
+- [K8sevents](https://github.com/knative/eventing-sources/tree/master/cmd/kuberneteseventsource)
   collects
   [Kubernetes Events](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.10/#event-v1-core)
   and presents them as CloudEvents.
   ```bash
-  kubectl apply --filename https://storage.googleapis.com/knative-releases/eventing/latest/release-source-k8sevents.yaml
+  kubectl apply --filename https://storage.googleapis.com/knative-releases/eventing-sources/latest/release.yaml 
   ```
-- [GitHub](https://github.com/knative/eventing/tree/master/pkg/sources/github)
-  collects pull request notifications and presents them as CloudEvents.
-  ```bash
-  kubectl apply --filename https://storage.googleapis.com/knative-releases/eventing/latest/release-source-github.yaml
-  ```
-- [GCP PubSub](https://github.com/knative/eventing/tree/master/pkg/sources/gcppubsub)
+- [GCP PubSub](https://github.com/knative/eventing-sources/tree/master/cmd/gcppubsub_receive_adapter)
   collects events published to a GCP PubSub topic and presents them as
   CloudEvents.
   ```bash
-  kubectl apply --filename https://storage.googleapis.com/knative-releases/eventing/latest/release-source-gcppubsub.yaml
+  kubectl apply --filename https://storage.googleapis.com/knative-releases/eventing-sources/latest/release-with-gcppubsub.yaml
   ```
 
 ### Flows
