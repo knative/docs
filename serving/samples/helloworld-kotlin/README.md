@@ -106,12 +106,31 @@ The following instructions recreate the source files from this folder.
 5. Create a file named `Dockerfile` and copy the code block below into it.
 
     ```docker
-    FROM gradle
+    # Use the official gradle image to create a build artifact.
+    # https://hub.docker.com/_/gradle
+    FROM gradle as builder
 
-    ADD build.gradle ./build.gradle
-    ADD src ./src
-    RUN gradle clean build
-    ENTRYPOINT ["java","-jar","-Djava.security.egd=file:/dev/./urandom","/home/gradle/build/libs/gradle.jar"]
+    # Copy local code to the container image.
+    COPY build.gradle .
+    COPY src ./src
+
+    # Build a release artifact.
+    RUN gradle clean build --no-daemon
+
+    # Use the Official OpenJDK image for a lean production stage of our multi-stage build.
+    # https://hub.docker.com/_/openjdk
+    # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
+    FROM openjdk:8-jre-alpine
+
+    # Copy the jar to the production image from the builder stage.
+    COPY --from=builder /home/gradle/build/libs/gradle.jar /helloworld.jar
+
+    # Configure and document the service HTTP port.
+    ENV PORT 8080
+    EXPOSE $PORT
+
+    # Run the web service on container startup.
+    CMD [ "java", "-jar", "-Djava.security.egd=file:/dev/./urandom", "/helloworld.jar" ]
     ```
 
 6. Create a new file, `service.yaml` and copy the following service definition
