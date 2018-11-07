@@ -50,10 +50,21 @@ export IOTCORE_TOPIC_DEVICE="iot-demo-device-pubsub-topic"
 
 1.  Create a
     [Google Cloud Project](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
+
+1.  Have [gcloud](https://cloud.google.com/sdk/gcloud/) installed and pointing
+    at that project.
+
 1.  Enable the 'Cloud Pub/Sub API' on that project.
 
     ```shell
     gcloud services enable pubsub.googleapis.com
+    ```
+
+1.  Create the two GCP PubSub `topic`s.
+
+    ```shell
+    gcloud pubsub topics create $IOTCORE_TOPIC_DATA
+    gcloud pubsub topics create $IOTCORE_TOPIC_DEVICE
     ```
 
 1.  Setup
@@ -114,8 +125,6 @@ export IOTCORE_TOPIC_DEVICE="iot-demo-device-pubsub-topic"
     kubectl apply -f -
     ```
 
-The `topic` does not yet exist, so this will be in a non-`ready` state.
-
 #### Subscription
 
 Even though the `Source` isn't completely ready yet, we can setup the
@@ -140,7 +149,7 @@ Core.
 1.  Create a device registry:
 
     ```shell
-    gcloud iot registries create $IOTCORE_REG \
+    gcloud iot registries create $IOTCORE_REGISTRY \
         --project=$IOTCORE_PROJECT \
         --region=$IOTCORE_REGION \
         --event-notification-config=topic=$IOTCORE_TOPIC_DATA \
@@ -164,9 +173,9 @@ Core.
     gcloud iot devices create $IOTCORE_DEVICE \
       --project=$IOTCORE_PROJECT \
       --region=$IOTCORE_REGION \
-      --registry=$IOTCORE_REG \
+      --registry=$IOTCORE_REGISTRY \
       --public-key path=./device.crt.pem,type=rsa-x509-pem
-    ````
+    ```
 
 ### Running
 
@@ -183,14 +192,13 @@ see them in the subscriber.
 1.  In a separate terminal, run the following program to generate events.
 
     ```shell
-    go run github.com/knative/docs/eventing/samples/iot-core/generate -- \
-        --project $IOTCORE_PROJECT \
-        --region $IOTCORE_REGION \
-        --registry $IOTCORE_REGISTRY \
-        --device $IOTCORE_DEVICE \
-        --ca root-ca.pem \
-        --key device.key.pem \
-        --topic $IOTCORE_TOPIC \
-        --src "iot-core demo" \
-        --events 10
+    go run github.com/knative/docs/eventing/samples/iot-core/generator \
+        -project $IOTCORE_PROJECT \
+        -region $IOTCORE_REGION \
+        -registry $IOTCORE_REGISTRY \
+        -device $IOTCORE_DEVICE \
+        -ca "$PWD/root-ca.pem" \
+        -key "$PWD/device.key.pem" \
+        -src "iot-core demo" \
+        -events 10
     ```

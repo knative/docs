@@ -27,9 +27,9 @@ import (
 	"math/rand"
 	"time"
 
-	jwt "github.com/dgrijalva/jwt-go"
+	"github.com/dgrijalva/jwt-go"
 	MQTT "github.com/eclipse/paho.mqtt.golang"
-	uuid "github.com/satori/go.uuid"
+	"github.com/satori/go.uuid"
 )
 
 const (
@@ -43,7 +43,6 @@ var (
 	projectID  = flag.String("project", "", "GCP Project ID")
 	registryID = flag.String("registry", "", "Cloud IoT Registry ID (short form)")
 	region     = flag.String("region", "us-central1", "GCP Region")
-	topic      = flag.String("topic", "iot-demo", "Event topic to which data will be published")
 	numEvents  = flag.Int("events", 10, "Number of events to sent")
 	eventSrc   = flag.String("src", "", "Event source")
 	certsCA    = flag.String("ca", "root-ca.pem", "Download https://pki.google.com/roots.pem")
@@ -51,7 +50,6 @@ var (
 )
 
 func main() {
-
 	flag.Parse()
 
 	log.Println("Loading Google's roots...")
@@ -126,16 +124,20 @@ func main() {
 		log.Fatal(token.Error())
 	}
 
+	topic := fmt.Sprintf("/devices/%s/events", *deviceID)
 	log.Println("Publishing messages...")
 	for i := 0; i < *numEvents; i++ {
 		data := makeEvent()
-		log.Printf("Publishing: %v", data)
+		log.Printf("Publishing to topic '%s': %v", topic, data)
 		token := client.Publish(
-			*topic,
+			topic,
 			0,
 			false,
 			data)
 		token.WaitTimeout(5 * time.Second)
+		if token.Error() != nil {
+			log.Printf("Error publishing: %s", token.Error())
+		}
 	}
 
 	log.Println("Disconnecting...")
