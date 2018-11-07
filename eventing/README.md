@@ -110,7 +110,7 @@ more interesting and specific Sources over time.
 - **EventSource** and **ClusterEventSource** describe an external system which
   may produce one or more EventTypes.
 
-We currently have 3 sources implemented:
+We currently have 2 sources implemented:
 
 - [K8sevents](https://github.com/knative/eventing-sources/tree/master/cmd/kuberneteseventsource)
   collects
