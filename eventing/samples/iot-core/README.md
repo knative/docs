@@ -39,7 +39,7 @@ export IOTCORE_TOPIC_DEVICE="iot-demo-device-pubsub-topic"
 #### Local
 
 1.  Clone
-    [Knative Eventing Sources](https://github.com/knative/docs/tree/master/eventing-sources)
+    [Knative Eventing Sources](https://github.com/knative/eventing-sources)
     locally.
 
 #### Kubernetes
@@ -79,7 +79,7 @@ export IOTCORE_TOPIC_DEVICE="iot-demo-device-pubsub-topic"
 
         ```shell
         kubectl -n knative-sources create secret generic gcppubsub-source-key --from-file=key.json=PATH_TO_KEY_FILE.json
-         kubectl -n default create secret generic google-cloud-key --from-file=key.json=PATH_TO_KEY_FILE.json
+        kubectl -n default create secret generic google-cloud-key --from-file=key.json=PATH_TO_KEY_FILE.json
         ```
 
 1.  Deploy the `GcpPubSubSource` controller as part of eventing-source's
@@ -87,7 +87,7 @@ export IOTCORE_TOPIC_DEVICE="iot-demo-device-pubsub-topic"
 
     ```shell
     pushd $HOME/go/src/github.com/knative/eventing-sources
-    ko -n default apply -f config/default-gcppubsub.yaml
+    ko apply -f config/default-gcppubsub.yaml
     popd
     ```
 
@@ -159,9 +159,6 @@ Core.
     ```
 
 1.  Register a device using the generated certificates.
-
-    ````shell
-    Once created, add the public key to the IoT core registry:
 
     ```shell
     gcloud iot devices create $IOTCORE_DEVICE \
