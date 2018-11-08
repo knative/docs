@@ -5,7 +5,7 @@ the visualization tool for [Prometheus](https://prometheus.io/).
 
 1. To open Grafana, enter the following command:
 ```
-kubectl port-forward --namespae monitoring $(kubectl get pods --namespace monitoring --selector=app=grafana --output=jsonpath="{.items..metadata.name}") 3000
+kubectl port-forward --namespace knative-monitoring $(kubectl get pods --namespace knative-monitoring --selector=app=grafana --output=jsonpath="{.items..metadata.name}") 3000
 ```
 
   * This starts a local proxy of Grafana on port 3000. For security reasons, the Grafana UI is exposed only within the cluster.

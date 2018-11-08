@@ -11,7 +11,7 @@ ADD . /go/src/github.com/knative/docs/helloworld
 RUN go install github.com/knative/docs/helloworld
 
 # Run the outyet command by default when the container starts.
-ENTRYPOINT /go/bin/helloworld
+ENTRYPOINT ["/go/bin/helloworld"]
 
 # Document that the service listens on port 8080.
 EXPOSE 8080

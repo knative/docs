@@ -188,7 +188,7 @@ func rootHandler(client *http.Client) http.HandlerFunc {
 		// In sequence, call three different other services. For each call, we will create a new span
 		// to track that call in the call graph. See http://opentracing.io/documentation/ for more information
 		// on these concepts.
-		res, err := getWithContext("http://prometheus-system-np.monitoring.svc.cluster.local:8080")
+		res, err := getWithContext("http://prometheus-system-np.knative-monitoring.svc.cluster.local:8080")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -197,7 +197,7 @@ func rootHandler(client *http.Client) http.HandlerFunc {
 		// end of this function. This applies to the remaining res.Body().Close calls below.
 		res.Body.Close()
 
-		res, err = getWithContext("http://grafana.monitoring.svc.cluster.local:30802")
+		res, err = getWithContext("http://grafana.knative-monitoring.svc.cluster.local:30802")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return

@@ -80,7 +80,7 @@ If you see other conditions, to debug further:
      [Error Conditions and Reporting](https://github.com/knative/serving/blob/master/docs/spec/errors.md). Note: some of them
      are not implemented yet. An alternative is to
      [check Pod status](#check-pod-status).
-* If you are using `BUILD` to deploy and the `BuidComplete` condition is not
+* If you are using `BUILD` to deploy and the `BuildComplete` condition is not
      `True`, [check BUILD status](#check-build-status).
 
 ## Check Pod status
@@ -119,7 +119,7 @@ kubectl get build $(kubectl get revision <revision-name> --output jsonpath="{.sp
 ```
 
 If there is any failure, the `conditions` in `status` provide the reason. To
-access build logs, first execute `kubectl proxy` and then open [Kibana UI](http://localhost:8001/api/v1/namespaces/monitoring/services/kibana-logging/proxy/app/kibana).
+access build logs, first execute `kubectl proxy` and then open [Kibana UI](http://localhost:8001/api/v1/namespaces/knative-monitoring/services/kibana-logging/proxy/app/kibana).
 Use any of the following filters within Kibana UI to
 see build logs. _(See [telemetry guide](../telemetry.md) for more information on
 logging and monitoring features of Knative Serving.)_

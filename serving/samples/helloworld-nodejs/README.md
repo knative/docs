@@ -1,8 +1,8 @@
 # Hello World - Node.js sample
 
 A simple web app written in Node.js that you can use for testing.
-It reads in an env variable `TARGET` and prints "Hello World: ${TARGET}!". If
-TARGET is not specified, it will use "NOT SPECIFIED" as the TARGET.
+It reads in an env variable `TARGET` and prints "Hello ${TARGET}!". If
+TARGET is not specified, it will use "World" as the TARGET.
 
 ## Prerequisites
 
@@ -52,13 +52,13 @@ recreate the source files from this folder.
     app.get('/', function (req, res) {
       console.log('Hello world received a request.');
 
-      var target = process.env.TARGET || 'NOT SPECIFIED';
-      res.send('Hello world: ' + target);
+      const target = process.env.TARGET || 'World';
+      res.send('Hello ' + target + '!');
     });
 
-    var port = 8080;
+    const port = process.env.PORT || 8080;
     app.listen(port, function () {
-      console.log('Hello world listening on port',  port);
+      console.log('Hello world listening on port', port);
     });
     ```
 
@@ -71,8 +71,7 @@ recreate the source files from this folder.
       "description": "",
       "main": "app.js",
       "scripts": {
-        "start": "node app.js",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "start": "node app.js"
       },
       "author": "",
       "license": "Apache-2.0"
@@ -83,7 +82,7 @@ recreate the source files from this folder.
    block below into it. For detailed instructions on dockerizing a Node.js app,
    see [Dockerizing a Node.js web app](https://nodejs.org/en/docs/guides/nodejs-docker-webapp/).
 
-    ```docker
+    ```Dockerfile
     FROM node:8
 
     # Create app directory
@@ -94,9 +93,7 @@ recreate the source files from this folder.
     # where available (npm@5+)
     COPY package*.json ./
 
-    RUN npm install
-    # If you are building your code for production
-    # RUN npm install --only=production
+    RUN npm install --only=production
 
     # Bundle app source
     COPY . .
@@ -158,7 +155,7 @@ folder) you're ready to build and deploy the sample app.
    * Automatically scale your pods up and down (including to zero active pods).
 
 1. To find the IP address for your service, use
-   `kubectl get svc knative-ingressgateway -n istio-system` to get the ingress IP for your
+   `kubectl get svc knative-ingressgateway --namespace istio-system` to get the ingress IP for your
    cluster. If your cluster is new, it may take sometime for the service to get asssigned
    an external IP address.
 
@@ -176,12 +173,6 @@ folder) you're ready to build and deploy the sample app.
     NAME                DOMAIN
     helloworld-nodejs   helloworld-nodejs.default.example.com
     ```
-
-    > Note: `ksvc` is an alias for `services.serving.knative.dev`. If you have
-      an older version (version 0.1.0) of Knative installed, you'll need to use
-      the long name until you upgrade to version 0.1.1 or higher. See
-      [Checking Knative Installation Version](../../../install/check-install-version.md)
-      to learn how to see what version you have installed.
 
 1. Now you can make a request to your app to see the result. Replace
    `{IP_ADDRESS}` with the address you see returned in the previous step.

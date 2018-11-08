@@ -21,8 +21,8 @@ you can create one using [Minikube](https://github.com/kubernetes/minikube).
 1. [Install the kubectl CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl).
 
 1. [Install and configure minikube](https://github.com/kubernetes/minikube#installation)
-    with a [VM driver](https://github.com/kubernetes/minikube#requirements), e.g.
-    `kvm2` on Linux or `hyperkit` on macOS.
+    version v0.28.1 or later with a [VM driver](https://github.com/kubernetes/minikube#requirements),
+     e.g. `kvm2` on Linux or `hyperkit` on macOS.
 
 ## Creating a Kubernetes cluster
 
@@ -33,24 +33,20 @@ For Linux use:
 
 ```shell
 minikube start --memory=8192 --cpus=4 \
-  --kubernetes-version=v1.10.5 \
+  --kubernetes-version=v1.11.3 \
   --vm-driver=kvm2 \
   --bootstrapper=kubeadm \
-  --extra-config=controller-manager.cluster-signing-cert-file="/var/lib/localkube/certs/ca.crt" \
-  --extra-config=controller-manager.cluster-signing-key-file="/var/lib/localkube/certs/ca.key" \
-  --extra-config=apiserver.admission-control="LimitRanger,NamespaceExists,NamespaceLifecycle,ResourceQuota,ServiceAccount,DefaultStorageClass,MutatingAdmissionWebhook"
+  --extra-config=apiserver.enable-admission-plugins="LimitRanger,NamespaceExists,NamespaceLifecycle,ResourceQuota,ServiceAccount,DefaultStorageClass,MutatingAdmissionWebhook"
 ```
 
 For macOS use:
 
 ```shell
 minikube start --memory=8192 --cpus=4 \
-  --kubernetes-version=v1.10.5 \
+  --kubernetes-version=v1.11.3 \
   --vm-driver=hyperkit \
   --bootstrapper=kubeadm \
-  --extra-config=controller-manager.cluster-signing-cert-file="/var/lib/localkube/certs/ca.crt" \
-  --extra-config=controller-manager.cluster-signing-key-file="/var/lib/localkube/certs/ca.key" \
-  --extra-config=apiserver.admission-control="LimitRanger,NamespaceExists,NamespaceLifecycle,ResourceQuota,ServiceAccount,DefaultStorageClass,MutatingAdmissionWebhook"
+  --extra-config=apiserver.enable-admission-plugins="LimitRanger,NamespaceExists,NamespaceLifecycle,ResourceQuota,ServiceAccount,DefaultStorageClass,MutatingAdmissionWebhook"
 ```
 
 ## Installing Istio
@@ -59,7 +55,7 @@ Knative depends on Istio. Run the following to install Istio. (We are changing
 `LoadBalancer` to `NodePort` for the `istio-ingress` service).
 
 ```shell
-curl -L https://raw.githubusercontent.com/knative/serving/v0.1.1/third_party/istio-0.8.0/istio.yaml \
+curl -L https://raw.githubusercontent.com/knative/serving/v0.2.0/third_party/istio-1.0.2/istio.yaml \
   | sed 's/LoadBalancer/NodePort/' \
   | kubectl apply --filename -
 
@@ -85,12 +81,12 @@ rerun the command to see the current status.
 Next, install [Knative Serving](https://github.com/knative/serving):
 
 Because you have limited resources available, use the
-`https://github.com/knative/serving/releases/download/v0.1.1/release-lite.yaml`
+`https://github.com/knative/serving/releases/download/v0.2.0/release-lite.yaml`
 file, which omits some of the monitoring components to reduce the memory used by
 the Knative components. To use the provided `release-lite.yaml` release, run:
 
 ```shell
-curl -L https://github.com/knative/serving/releases/download/v0.1.1/release-lite.yaml \
+curl -L https://github.com/knative/serving/releases/download/v0.2.0/release-lite.yaml \
   | sed 's/LoadBalancer/NodePort/' \
   | kubectl apply --filename -
 ```

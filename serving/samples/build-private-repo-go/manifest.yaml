@@ -36,11 +36,11 @@ spec:
       name: kaniko
       arguments:
       - name: IMAGE
-        value: &image REPLACE_ME
+        value: REPLACE_ME
   revisionTemplate:
     metadata:
       labels:
         knative.dev/type: app
     spec:
       container:
-        image: *image
+        image: REPLACE_ME 

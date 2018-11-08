@@ -1,8 +1,8 @@
 # Hello World - Haskell sample
 
 A simple web app written in Haskell that you can use for testing.
-It reads in an env variable `TARGET` and prints "Hello World: ${TARGET}!". If
-TARGET is not specified, it will use "NOT SPECIFIED" as the TARGET.
+It reads in an env variable `TARGET` and prints "Hello ${TARGET}!". If
+TARGET is not specified, it will use "World" as the TARGET.
 
 ## Prerequisites
 
@@ -63,15 +63,17 @@ following instructions recreate the source files from this folder.
 	import           Web.Scotty.Trans
 
 	main :: IO ()
-	main = do
-      t <- fromMaybe "NOT SPECIFIED" <$> lookupEnv "TARGET"
-      scotty 8080 (route t)
+  main = do
+    t <- fromMaybe "World" <$> lookupEnv "TARGET"
+    pStr <- fromMaybe "8080" <$> lookupEnv "PORT"
+    let p = read pStr :: Int
+    scotty p (route t)
 
 	route :: String -> ScottyM()
 	route t = get "/" $ hello t
 
 	hello :: String -> ActionM()
-	hello t = text $ pack ("Hello world: " ++ t)
+	hello t = text $ pack ("Hello " ++ t)
     ```
 
 1. In your project directory, create a file named `Dockerfile` and copy the code
@@ -154,7 +156,7 @@ folder) you're ready to build and deploy the sample app.
    * Automatically scale your pods up and down (including to zero active pods).
 
 1. To find the IP address for your service, enter
-   `kubectl get svc knative-ingressgateway -n istio-system` to get the ingress IP for your
+   `kubectl get svc knative-ingressgateway --namespace istio-system` to get the ingress IP for your
    cluster. If your cluster is new, it may take some time for the service to get assigned
    an external IP address.
 
@@ -179,12 +181,6 @@ folder) you're ready to build and deploy the sample app.
     NAME                   DOMAIN
     helloworld-haskell     helloworld-haskell.default.example.com
     ```
-
-    > Note: `ksvc` is an alias for `services.serving.knative.dev`. If you have
-      an older version (version 0.1.0) of Knative installed, you'll need to use
-      the long name until you upgrade to version 0.1.1 or higher. See
-      [Checking Knative Installation Version](../../../install/check-install-version.md)
-      to learn how to see what version you have installed.
 
 1. Now you can make a request to your app and see the result. Replace
    `{IP_ADDRESS}` with the address you see returned in the previous step.

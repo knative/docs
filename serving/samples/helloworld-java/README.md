@@ -1,8 +1,8 @@
 # Hello World - Spring Boot Java sample
 
 A simple web app written in Java using Spring Boot 2.0 that you can use for testing.
-It reads in an env variable `TARGET` and prints "Hello World: ${TARGET}!". If
-TARGET is not specified, it will use "NOT SPECIFIED" as the TARGET.
+It reads in an env variable `TARGET` and prints "Hello ${TARGET}!". If
+TARGET is not specified, it will use "World" as the TARGET.
 
 ## Prerequisites
 
@@ -52,14 +52,14 @@ recreate the source files from this folder.
     @SpringBootApplication
     public class HelloworldApplication {
 
-        @Value("${TARGET:NOT SPECIFIED}")
+        @Value("${TARGET:World}")
         String target;
 
         @RestController
         class HelloworldController {
             @GetMapping("/")
             String hello() {
-                return "Hello World: " + target;
+                return "Hello " + target + "!";
             }
         }
 
@@ -68,6 +68,13 @@ recreate the source files from this folder.
         }
     }
     ```
+1. Run the application locally:
+
+   ```shell
+   ./mvnw package && java -jar target/gs-spring-boot-docker-0.1.0.jar
+   ```
+
+   Go to `http://localhost:8080/` to see your `Hello World!` message.
 
 1. In your project directory, create a file named `Dockerfile` and copy the code
    block below into it. For detailed instructions on dockerizing a Spring Boot app,
@@ -83,7 +90,6 @@ recreate the source files from this folder.
 
     FROM openjdk:8-jre-alpine
     COPY --from=build /target/helloworld-*.jar /helloworld.jar
-    VOLUME /tmp
     ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/helloworld.jar"]
     ```
 
@@ -139,9 +145,7 @@ folder) you're ready to build and deploy the sample app.
    * Network programming to create a route, ingress, service, and load balancer for your app.
    * Automatically scale your pods up and down (including to zero active pods).
 
-1. To find the IP address for your service, use
-   `kubectl get svc knative-ingressgateway -n istio-system` to get the ingress IP for your
-   cluster. If your cluster is new, it may take sometime for the service to get asssigned
+1. To find the IP address for your service, use. If your cluster is new, it may take sometime for the service to get asssigned
    an external IP address.
 
     ```shell
@@ -149,27 +153,24 @@ folder) you're ready to build and deploy the sample app.
 
     NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
     knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
-
     ```
 
 1. To find the URL for your service, use
-    ```
-    kubectl get ksvc helloworld-java  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+
+    ```shell
+    kubectl get ksvc helloworld-java \
+        --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+
     NAME                DOMAIN
     helloworld-java     helloworld-java.default.example.com
     ```
-
-    > Note: `ksvc` is an alias for `services.serving.knative.dev`. If you have
-      an older version (version 0.1.0) of Knative installed, you'll need to use
-      the long name until you upgrade to version 0.1.1 or higher. See
-      [Checking Knative Installation Version](../../../install/check-install-version.md)
-      to learn how to see what version you have installed.
 
 1. Now you can make a request to your app to see the result. Replace
    `{IP_ADDRESS}` with the address you see returned in the previous step.
 
     ```shell
     curl -H "Host: helloworld-java.default.example.com" http://{IP_ADDRESS}
+
     Hello World: Spring Boot Sample v1
     ```
 

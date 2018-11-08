@@ -128,11 +128,11 @@ container for the application.
              name: kaniko
              arguments:
              - name: IMAGE
-               value: &image docker.io/{DOCKER_USERNAME}/app-from-source:latest
+               value: docker.io/{DOCKER_USERNAME}/app-from-source:latest
          revisionTemplate:
            spec:
              container:
-               image: *image
+               image: docker.io/{DOCKER_USERNAME}/app-from-source:latest 
                imagePullPolicy: Always
                env:
                - name: SIMPLE_MSG
@@ -168,7 +168,7 @@ container for the application.
    status block:
 
    ```shell
-   $ kubectl get service.serving.knative.dev app-from-source --output yaml
+   $ kubectl get ksvc app-from-source --output yaml
 
    [...]
    status:
@@ -217,12 +217,6 @@ container for the application.
     NAME                DOMAIN
     app-from-source     app-from-source.default.example.com
     ```
-
-    > Note: `ksvc` is an alias for `services.serving.knative.dev`. If you have
-      an older version (version 0.1.0) of Knative installed, you'll need to use
-      the long name until you upgrade to version 0.1.1 or higher. See
-      [Checking Knative Installation Version](../../../install/check-install-version.md)
-      to learn how to see what version you have installed.
 
 1. Now you can make a request to your app to see the result. Replace
    `{IP_ADDRESS}` with the address that you got in the previous step:

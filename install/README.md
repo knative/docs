@@ -22,6 +22,7 @@ Knative components on the following platforms:
 * [Knative Install on IBM Cloud Kubernetes Service](Knative-with-IKS.md)
 * [Knative Install on Minikube](Knative-with-Minikube.md)
 * [Knative Install on OpenShift](Knative-with-OpenShift.md)
+* [Knative Install on Minishift](Knative-with-Minishift.md)
 * [Knative Install on Pivotal Container Service](Knative-with-PKS.md)
 
 If you already have a Kubernetes cluster you're comfortable installing

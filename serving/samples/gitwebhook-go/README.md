@@ -109,12 +109,6 @@ service "gitwebhook" created
         gitwebhook          gitwebhook.default.example.com
         ```
 
-    > Note: `ksvc` is an alias for `services.serving.knative.dev`. If you have
-      an older version (version 0.1.0) of Knative installed, you'll need to use
-      the long name until you upgrade to version 0.1.1 or higher. See
-      [Checking Knative Installation Version](../../../install/check-install-version.md)
-      to learn how to see what version you have installed.
-
     1. Browse on GitHub to the repository where you want to create a webhook.
     1. Click **Settings**, then **Webhooks**, then **Add webhook**.
     1. Enter the **Payload URL** as `http://{DOMAIN}`, with the value of DOMAIN listed above.
@@ -130,7 +124,7 @@ Once deployed, you can inspect the created resources with `kubectl` commands:
 
 ```shell
 # This will show the Knative service that we created:
-kubectl get service.serving.knative.dev --output yaml
+kubectl get ksvc --output yaml
 
 # This will show the Route, created by the service:
 kubectl get route --output yaml

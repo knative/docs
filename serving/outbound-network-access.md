@@ -11,7 +11,7 @@ the `config-network` map.
 To set the correct scope, you need to determine the IP ranges of your cluster. The scope varies 
 depending on your platform:
 
-* For Google Container Engine (GKE) run the following command to determine the scope. Make sure
+* For Google Kubernetes Engine (GKE) run the following command to determine the scope. Make sure
 to replace the variables or export these values first.
   ```shell
   gcloud container clusters describe ${CLUSTER_ID} \
