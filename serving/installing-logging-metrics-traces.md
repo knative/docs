@@ -7,21 +7,11 @@ You can install only one of these three setups and side-by-side installation of 
 
 ## Before you begin
 
-The following instructions assume that you cloned the Knative Serving repository.
-To clone the repository, run the following commands:
-
-   ```shell
-   git clone https://github.com/knative/serving knative-serving
-   cd knative-serving
-   git checkout v0.2.0
-   ```
+The following instructions assume that you [installed Knative Serving](../install/README.md).
 
 ## Elasticsearch and Kibana for logging, Prometheus and Grafana for metrics Setup
 
-If you installed the
-[full Knative release](../install/README.md#installing-knative),
-the monitoring component is already installed and you can skip down to the
-[Create Elasticsearch Indices](#create-elasticsearch-indices) section.
+If you installed the [full Knative release](../install/README.md#installing-knative), the monitoring component is already installed and you can skip down to the [Create Elasticsearch Indices](#create-elasticsearch-indices) section.
 
 To configure and setup monitoring:
 
@@ -37,12 +27,12 @@ To configure and setup monitoring:
    [knative/serving](https://github.com/knative/serving) repository:
 
    ```shell
-   kubectl apply --recursive --filename config/monitoring/100-common \
-      --filename config/monitoring/150-elasticsearch \
-      --filename third_party/config/monitoring/common \
-      --filename third_party/config/monitoring/elasticsearch \
-      --filename config/monitoring/200-common \
-      --filename config/monitoring/200-common/100-istio.yaml
+    kubectl apply -R -f config/monitoring/100-namespace.yaml \
+      -f third_party/config/monitoring/logging/elasticsearch \
+      -f config/monitoring/logging/elasticsearch \
+      -f third_party/config/monitoring/metrics/prometheus \
+      -f config/monitoring/metrics/prometheus \
+      -f config/monitoring/tracing/zipkin
    ```
 
    The installation is complete when logging & monitoring components are all
@@ -121,19 +111,19 @@ To configure and setup monitoring:
 3. Install Knative monitoring components by running the following command from the root directory of
    [knative/serving](https://github.com/knative/serving) repository:
 
-      ```shell
-      kubectl apply --recursive --filename config/monitoring/100-common \
-        --filename config/monitoring/150-stackdriver \
-        --filename third_party/config/monitoring/common \
-        --filename config/monitoring/200-common \
-        --filename config/monitoring/200-common/100-istio.yaml
-      ```
+   ```shell
+    kubectl apply -R -f config/monitoring/100-namespace.yaml \
+      -f config/monitoring/logging/stackdriver \
+      -f third_party/config/monitoring/metrics/prometheus \
+      -f config/monitoring/metrics/prometheus \
+      -f config/monitoring/tracing/zipkin
+   ```   
 
    The installation is complete when logging & monitoring components are all
    reported `Running` or `Completed`:
 
      ```shell
-     kubectl get pods --namespace monitoring --watch
+     kubectl get pods -n knative-monitoring --watch
      ```
 
      ```
@@ -152,12 +142,23 @@ To configure and setup monitoring:
 
   CTRL+C to exit watch.
 
-## Stackdriver for both logging and metrics in GKE
+## Stackdriver for both logging and metrics
 
-You can enable Stackdriver in the GCP project by following [this](https://cloud.google.com/monitoring/workspaces/guide#single-project-ws).
-When Knative is deployed to GKE, you can choose to send both logging and metrics to Stackdriver backend. To have a complete monitoring experience, follow these steps:
+You need to apply the same first two steps to deploy Fluentd image as in [Stackdriver for logging, Prometheus & Grafana for metrics Setup](#stackdriver-for-logging--prometheus--grafana-for-metrics-setup). In the third step, do the following to send the **Knative system metrics** to stackdriver:
+3. Install Knative monitoring components by running the following command from the root directory of
+   [knative/serving](https://github.com/knative/serving) repository:
+   1. Update *metrics.backend-destination* to be stackdriver in [config-observability.yaml](https://github.com/knative/serving/blob/388f98a0a4bb6799ecf174aafc768098890e6cba/config/config-observability.yaml#L92).
+   2. Run:
+    ```shell
+    kubectl apply -R -f config/monitoring/100-namespace.yaml \
+    -f config/config-observability.yaml \
+    -f config/monitoring/logging/stackdriver \
+    -f config/monitoring/metrics/stackdriver \
+    -f config/monitoring/tracing/zipkin
+    ```
 
-1. To have [Kubernetes metrics](https://cloud.google.com/monitoring/api/metrics_other#other-kubernetes.io), create a Kubernetes cluster on GKE with [Stackdriver Kubernetes Monitoring](https://cloud.google.com/kubernetes-monitoring/) feature:
+To include **Istio metrics**, such as request count and request latency, you'll need to install Istio 1.0.4 or later.
+To include **[Kubernetes metrics](https://cloud.google.com/monitoring/api/metrics_other#other-kubernetes.io)** if Knative is deployed to GKE, create a Kubernetes cluster on GKE with [Stackdriver Kubernetes Monitoring](https://cloud.google.com/kubernetes-monitoring/) feature:
     <pre>
     gcloud <b>beta</b> container clusters create $CLUSTER_NAME \
       --zone=$CLUSTER_ZONE \
@@ -169,16 +170,6 @@ When Knative is deployed to GKE, you can choose to send both logging and metrics
       --scopes=service-control,service-management,compute-rw,storage-ro,cloud-platform,logging-write,monitoring-write,pubsub,datastore \
       --num-nodes=3
     </pre>
-2. To have Istio mesh metrics including request count, request latencies, use Istio OSS 1.0.4 or Istio addon 1.0.3.
-3. To have Knative system metrics, 
-   1. Update *metrics.backend-destination* to be stackdriver in [config-observability.yaml](https://github.com/knative/serving/blob/388f98a0a4bb6799ecf174aafc768098890e6cba/config/config-observability.yaml#L92).
-   2. Run:
-    ```
-    kubectl apply -R -f config/monitoring/100-namespace.yaml \
-    -f config/config-observability.yaml \
-    -f config/monitoring/metrics/stackdriver \
-    -f config/monitoring/tracing/zipkin
-    ```   
 
 ## Learn More
 
