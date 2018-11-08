@@ -72,17 +72,17 @@ stringData:
   secretToken: personal_access_token_value
 ```
 
-    Hint: you can makeup a random *accessToken* with:
+Hint: you can makeup a random *accessToken* with:
     
-    ```shell
-    head -c 8 /dev/urandom | base64
-    ```
+```shell
+head -c 8 /dev/urandom | base64
+```
 
-    Then, apply the githubsecret using `kubectl`:
+Then, apply the githubsecret using `kubectl`:
     
-    ```shell
-    kubectl -n default apply -f eventing/samples/github-source/githubsecret.yaml
-    ```
+```shell
+kubectl -n default apply -f eventing/samples/github-source/githubsecret.yaml
+```
 
 ### Create Event Source for GitHub Events
 
