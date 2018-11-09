@@ -162,7 +162,7 @@ To include **Istio metrics**, such as request count and request latency, you'll 
 
 To include **[Kubernetes metrics](https://cloud.google.com/monitoring/api/metrics_other#other-kubernetes.io)** if Knative is deployed to GKE, create a Kubernetes cluster on GKE with [Stackdriver Kubernetes Monitoring](https://cloud.google.com/kubernetes-monitoring/) feature:
 
-    <pre>
+<pre>
     gcloud <b>beta</b> container clusters create $CLUSTER_NAME \
       --zone=$CLUSTER_ZONE \
       --cluster-version=latest \
@@ -172,7 +172,7 @@ To include **[Kubernetes metrics](https://cloud.google.com/monitoring/api/metric
       <b>--enable-stackdriver-kubernetes \</b>
       --scopes=service-control,service-management,compute-rw,storage-ro,cloud-platform,logging-write,monitoring-write,pubsub,datastore \
       --num-nodes=3
-    </pre>
+</pre>
 
 ## Learn More
 
