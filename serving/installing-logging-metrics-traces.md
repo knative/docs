@@ -145,10 +145,11 @@ To configure and setup monitoring:
 ## Stackdriver for both logging and metrics
 
 You need to apply the same first two steps to deploy Fluentd image as in [Stackdriver for logging, Prometheus & Grafana for metrics Setup](#stackdriver-for-logging--prometheus--grafana-for-metrics-setup). In the third step, do the following to send the **Knative system metrics** to stackdriver:
-3. Install Knative monitoring components by running the following command from the root directory of
-   [knative/serving](https://github.com/knative/serving) repository:
+
+3. Install Knative monitoring components by running the following command from the root directory of [knative/serving](https://github.com/knative/serving) repository:
    1. Update *metrics.backend-destination* to be stackdriver in [config-observability.yaml](https://github.com/knative/serving/blob/388f98a0a4bb6799ecf174aafc768098890e6cba/config/config-observability.yaml#L92).
    2. Run:
+
     ```shell
     kubectl apply -R -f config/monitoring/100-namespace.yaml \
     -f config/config-observability.yaml \
@@ -158,7 +159,9 @@ You need to apply the same first two steps to deploy Fluentd image as in [Stackd
     ```
 
 To include **Istio metrics**, such as request count and request latency, you'll need to install Istio 1.0.4 or later.
+
 To include **[Kubernetes metrics](https://cloud.google.com/monitoring/api/metrics_other#other-kubernetes.io)** if Knative is deployed to GKE, create a Kubernetes cluster on GKE with [Stackdriver Kubernetes Monitoring](https://cloud.google.com/kubernetes-monitoring/) feature:
+
     <pre>
     gcloud <b>beta</b> container clusters create $CLUSTER_NAME \
       --zone=$CLUSTER_ZONE \
