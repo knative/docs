@@ -32,11 +32,16 @@ generic interfaces which multiple Kubernetes resources can implement:
    external event source are processed.
 
 Knative Eventing also defines a single event forwarding and persistence layer,
-called a **Channel**. Messaging implementations may provide implementations of
-Channels via the ClusterChannelProvisioner object. This allows message delivery
-in a cluster to vary based on requirements, so that some events might be handled
-by an in-memory implementation while others would be persisted using Kafka or
-NATS Streaming.
+called a
+[**Channel**](https://github.com/knative/eventing/blob/master/pkg/apis/eventing/v1alpha1/channel_types.go#L36).
+Messaging implementations may provide implementations of Channels via the
+[ClusterChannelProvisioner](https://github.com/knative/eventing/blob/master/pkg/apis/eventing/v1alpha1/cluster_channel_provisioner_types.go#L35)
+object. Events are delivered to Services or forwarded to other channels
+(possibly of a different type) using
+[Subscriptions](https://github.com/knative/eventing/blob/master/pkg/apis/eventing/v1alpha1/subscription_types.go#L35).
+This allows message delivery in a cluster to vary based on requirements, so that
+some events might be handled by an in-memory implementation while others would
+be persisted using Kafka or NATS Streaming.
 
 The focus for the next Eventing release will be to enable easy implementation of
 event sources. Sources manage registration and delivery of events from external
@@ -71,13 +76,18 @@ definitions and an associated controller) and channels
 
 The eventing infrastructure supports two forms of event delivery at the moment:
 
-1. Direct delivery from a source to a single Service. In this case, the Source
-   is responsible for retrying or queueing events if the destination Service is
-   not available.
+1. Direct delivery from a source to a single Service (an Addressable endpoint,
+   including a Knative Service or a core Kubernetes Service). In this case, the
+   Source is responsible for retrying or queueing events if the destination
+   Service is not available.
 2. Fan-out delivery from a source or Service response to multiple endpoints
-   using Channels and Subscriptions. In this case, the Channel implementation
-   ensures that messages are delivered to the requested destinations and should
-   buffer the events if the destination Service is unavailable.
+   using
+   [Channels](https://github.com/knative/eventing/blob/master/pkg/apis/eventing/v1alpha1/channel_types.go#L36)
+   and
+   [Subscriptions](https://github.com/knative/eventing/blob/master/pkg/apis/eventing/v1alpha1/subscription_types.go#L35).
+   In this case, the Channel implementation ensures that messages are delivered
+   to the requested destinations and should buffer the events if the destination
+   Service is unavailable.
 
 ![Control plane object model](control-plane.png)
 
@@ -97,7 +107,7 @@ Knative Eventing defines the following Sources in the
 `sources.eventing.knative.dev` API group. Types below are declared in golang
 format, but may be expressed as simple lists, etc in YAML. All Sources should be
 part of the `sources` category, so you can list all existing Sources with
-`kubectl get sources`.
+`kubectl get sources`. The currently-implemented Sources are described below:
 
 ### KubernetesEventSource
 
