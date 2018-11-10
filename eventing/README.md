@@ -65,7 +65,7 @@ In addition to the core sources, you can also use GCP PubSub as a source with
 the following yaml:
 
 ```bash
-kubectl apply --filename https://storage.googleapis.com/knative-releases/eventing-sources/latest/release-with-gcppubsub.yaml.yaml
+kubectl apply --filename https://storage.googleapis.com/knative-releases/eventing-sources/latest/release-with-gcppubsub.yaml
 ```
 
 This document will be updated as additional sources (which are custom resource
