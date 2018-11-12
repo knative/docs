@@ -8,10 +8,10 @@ consumption by a function that has been implemented as a Knative Service.
 ### Prerequisites
 
 1. Setup [Knative Eventing](https://github.com/knative/docs/tree/master/eventing).
-1. Install [Knative Eventing Sources](https://github.com/knative/docs/tree/master/eventing-sources).
-    - You can just install the default release without gcp-pubsub for this example.
-1. Install the [in-memory `ClusterChannelProvisioner`](https://github.com/knative/eventing/tree/master/config/provisioners/in-memory-channel).
-    - Note that you can skip this if you choose to use a different type of `Channel`. If so, you will need to modify `channel.yaml` before deploying it.
+
+
+### Channel
+
 1. Create a `Channel`. You can use your own `Channel` or use the provided sample, which creates a channel called `testchannel`. If you use your own `Channel` with a different name, then you will need to alter other commands later.
 
 ```shell
