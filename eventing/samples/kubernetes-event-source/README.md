@@ -7,6 +7,7 @@ consumption by a function that has been implemented as a Knative Service.
 
 ### Prerequisites
 
+1. Setup [Knative Serving](https://github.com/knative/docs/tree/master/serving).
 1. Setup [Knative Eventing](https://github.com/knative/docs/tree/master/eventing).
 
 
@@ -38,7 +39,6 @@ kubectl apply -f eventing/samples/kubernetes-event-source/k8s-events.yaml
 
 In order to check the `KubernetesEventSource` is fully working, we will create a simple Knative Service that dumps incoming messages to its log and create a `Subscription` from the `Channel` to that Knative Service.
 
-1. Setup [Knative Serving](https://github.com/knative/docs/tree/master/serving).
 1. If the deployed `KubernetesEventSource` is pointing at a `Channel` other than `testchannel`, modify `subscription.yaml` by replacing `testchannel` with that `Channel`'s name.
 1. Deploy `subscription.yaml`.
 
