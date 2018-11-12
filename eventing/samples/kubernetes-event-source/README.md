@@ -58,7 +58,7 @@ kubectl run -i --tty busybox --image=busybox --restart=Never -- sh
 Once the shell comes up, just exit it and kill the pod.
 
 ```shell
-kubectl delete pods busybox
+kubectl delete pod busybox
 ```
 
 
@@ -68,7 +68,7 @@ We will verify that the kubernetes events were sent into the Knative eventing sy
 
 ```shell
 kubectl get pods
-kubectl logs message-dumper-XXXX user-container
+kubectl logs -l serving.knative.dev/service=message-dumper -c user-container
 ```
 
 You should see log lines similar to:
