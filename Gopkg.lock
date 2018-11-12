@@ -10,31 +10,23 @@
   revision = "3a771d992973f24aa725d07868b467d1ddfceafb"
 
 [[projects]]
-  digest = "1:a2c1d0e43bd3baaa071d1b9ed72c27d78169b2b269f71c105ac4ba34b1be4a39"
-  name = "github.com/davecgh/go-spew"
-  packages = ["spew"]
-  pruneopts = "NUT"
-  revision = "346938d642f2ec3594ed81d874461961cd0faa76"
-  version = "v1.1.0"
-
-[[projects]]
-  digest = "1:8679b8a64f3613e9749c5640c3535c83399b8e69f67ce54d91dc73f6d77373af"
-  name = "github.com/gogo/protobuf"
-  packages = [
-    "proto",
-    "sortkeys",
-  ]
-  pruneopts = "NUT"
-  revision = "636bf0302bc95575d69441b25a2603156ffdddf1"
-  version = "v1.1.1"
-
-[[projects]]
-  branch = "master"
-  digest = "1:e2b86e41f3d669fc36b50d31d32d22c8ac656c75aa5ea89717ce7177e134ff2a"
-  name = "github.com/golang/glog"
+  digest = "1:7a6852b35eb5bbc184561443762d225116ae630c26a7c4d90546619f1e7d2ad2"
+  name = "github.com/dgrijalva/jwt-go"
   packages = ["."]
   pruneopts = "NUT"
-  revision = "23def4e6c14b4da8ac2ed8007337bc5eb5007998"
+  revision = "06ea1031745cb8b3dab3f6a236daf2b0aa468b7e"
+  version = "v3.2.0"
+
+[[projects]]
+  digest = "1:aba48b6c6600a43db48da14ae43338220b2cfc262a0e064b29085fbf75ed5b68"
+  name = "github.com/eclipse/paho.mqtt.golang"
+  packages = [
+    ".",
+    "packets",
+  ]
+  pruneopts = "NUT"
+  revision = "36d01c2b4cbeb3d2a12063e4880ce30800af9560"
+  version = "v1.1.1"
 
 [[projects]]
   digest = "1:15042ad3498153684d09f393bbaec6b216c8eec6d61f63dff711de7d64ed8861"
@@ -61,14 +53,6 @@
   revision = "53e6ce116135b80d037921a7fdd5138cf32d7a8a"
 
 [[projects]]
-  branch = "master"
-  digest = "1:52c5834e2bebac9030c97cc0798ac11c3aa8a39f098aeb419f142533da6cd3cc"
-  name = "github.com/google/gofuzz"
-  packages = ["."]
-  pruneopts = "NUT"
-  revision = "24818f796faf91cd76ec7bddd72458fbced7a6c1"
-
-[[projects]]
   digest = "1:c01767916c59f084bb7c41a7d5877c0f3099b1595cfa066e84ec6ad6b084dd89"
   name = "github.com/gorilla/context"
   packages = ["."]
@@ -83,14 +67,6 @@
   pruneopts = "NUT"
   revision = "e3702bed27f0d39777b0b37b664b6280e8ef8fbf"
   version = "v1.6.2"
-
-[[projects]]
-  branch = "master"
-  digest = "1:93345670566b1c84a83d5f7b0e6b9229d72fbe88a86003849e7dcb44664b567a"
-  name = "github.com/knative/eventing"
-  packages = ["pkg/event"]
-  pruneopts = "NUT"
-  revision = "2b0383b8e4d67ffac446b17a7922bf7e5d9f5362"
 
 [[projects]]
   branch = "master"
@@ -168,6 +144,14 @@
   revision = "ae68e2d4c00fed4943b5f6698d504a5fe083da8a"
 
 [[projects]]
+  digest = "1:6bc0652ea6e39e22ccd522458b8bdd8665bf23bdc5a20eec90056e4dc7e273ca"
+  name = "github.com/satori/go.uuid"
+  packages = ["."]
+  pruneopts = "NUT"
+  revision = "f58768cc1a7a7e77a3bd49e98cdd21419399b6a3"
+  version = "v1.2.0"
+
+[[projects]]
   digest = "1:bb38c0571e5ffeb394f2a7e4056fa5a7a6ea1acabb7fe71976340719fd104d02"
   name = "go.opencensus.io"
   packages = [
@@ -192,15 +176,14 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:8aa99dcd40ebdb7ff01d2ebcc6057794a155c0e5f1fcb9e42f0dcf9bedb14040"
+  digest = "1:9ab73c6afa8b3245d321adfe5232df92f404389733e69962e78204322daec8ee"
   name = "golang.org/x/net"
   packages = [
     "context",
     "context/ctxhttp",
-    "http/httpguts",
-    "http2",
-    "http2/hpack",
-    "idna",
+    "internal/socks",
+    "proxy",
+    "websocket",
   ]
   pruneopts = "NUT"
   revision = "d0887baf81f4598189d4e12a37c6da86f0bba4d0"
@@ -215,29 +198,6 @@
   ]
   pruneopts = "NUT"
   revision = "ef147856a6ddbb60760db74283d2424e98c87bff"
-
-[[projects]]
-  digest = "1:e7071ed636b5422cc51c0e3a6cebc229d6c9fffc528814b519a980641422d619"
-  name = "golang.org/x/text"
-  packages = [
-    "collate",
-    "collate/build",
-    "internal/colltab",
-    "internal/gen",
-    "internal/tag",
-    "internal/triegen",
-    "internal/ucd",
-    "language",
-    "secure/bidirule",
-    "transform",
-    "unicode/bidi",
-    "unicode/cldr",
-    "unicode/norm",
-    "unicode/rangetable",
-  ]
-  pruneopts = "NUT"
-  revision = "f21a4dfb5e38f5895301dc265a8def02365cc3d0"
-  version = "v0.3.0"
 
 [[projects]]
   digest = "1:af71cb57ffcbc389c2f8af1e6a763c0d2e6f08d2ceb64140c0fd4c57fdbc2898"
@@ -266,63 +226,18 @@
   revision = "8ffb2ffc32b7af2c7e940944eccba4dcd66c692a"
   version = "v3.13.0"
 
-[[projects]]
-  digest = "1:2d1fbdc6777e5408cabeb02bf336305e724b925ff4546ded0fa8715a7267922a"
-  name = "gopkg.in/inf.v0"
-  packages = ["."]
-  pruneopts = "NUT"
-  revision = "d2d2541c53f18d2a059457998ce2876cc8e67cbf"
-  version = "v0.9.1"
-
-[[projects]]
-  branch = "master"
-  digest = "1:f015c6307cf0c922ed22368ee73bf2c1382e0bd9ca3440074dc5b6a24aebb794"
-  name = "k8s.io/api"
-  packages = ["core/v1"]
-  pruneopts = "NUT"
-  revision = "183f3326a9353bd6d41430fc80f96259331d029c"
-
-[[projects]]
-  branch = "master"
-  digest = "1:c2f92b644e2da297333df386fcd7ebdc19e8e0235dcc6bddb872c01161ea03d6"
-  name = "k8s.io/apimachinery"
-  packages = [
-    "pkg/api/resource",
-    "pkg/apis/meta/v1",
-    "pkg/conversion",
-    "pkg/conversion/queryparams",
-    "pkg/fields",
-    "pkg/labels",
-    "pkg/runtime",
-    "pkg/runtime/schema",
-    "pkg/selection",
-    "pkg/types",
-    "pkg/util/errors",
-    "pkg/util/intstr",
-    "pkg/util/json",
-    "pkg/util/naming",
-    "pkg/util/net",
-    "pkg/util/runtime",
-    "pkg/util/sets",
-    "pkg/util/validation",
-    "pkg/util/validation/field",
-    "pkg/util/wait",
-    "pkg/watch",
-    "third_party/forked/golang/reflect",
-  ]
-  pruneopts = "NUT"
-  revision = "121e72c8f836456b467f84d37a82b7b830b6f5e6"
-
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
+    "github.com/dgrijalva/jwt-go",
+    "github.com/eclipse/paho.mqtt.golang",
     "github.com/google/go-github/github",
     "github.com/gorilla/mux",
-    "github.com/knative/eventing/pkg/event",
     "github.com/knative/test-infra",
     "github.com/openzipkin/zipkin-go",
     "github.com/openzipkin/zipkin-go/reporter/http",
+    "github.com/satori/go.uuid",
     "go.opencensus.io/exporter/prometheus",
     "go.opencensus.io/exporter/zipkin",
     "go.opencensus.io/plugin/ochttp",
@@ -334,7 +249,6 @@
     "golang.org/x/oauth2",
     "gopkg.in/go-playground/webhooks.v3",
     "gopkg.in/go-playground/webhooks.v3/github",
-    "k8s.io/api/core/v1",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1
