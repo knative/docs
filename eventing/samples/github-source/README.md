@@ -114,7 +114,9 @@ Create a Pull Request in your GitHub repository.
 Verify the GitHub webhook was created by looking at the list of
 webhooks under the Settings tab in your GitHub repository. A hook
 should be listed that points to your Knative cluster with a green
-check mark to the left of the hook URL.
+check mark to the left of the hook URL, as shown below.
+
+![GitHub Webhook](webhook_created.png "GitHub webhook screenshot")
 
 We will verify that the GitHub events were sent into the Knative
 eventing system by looking at our message dumper function logs. If you
