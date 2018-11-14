@@ -13,10 +13,10 @@ You will need:
   installed. Follow the [installation
   instructions](https://github.com/knative/docs/blob/master/install/README.md)
   if you need to create one.
-  - Ensure Knative Serving is [configured with a domain
+  1. Ensure Knative Serving is [configured with a domain
     name](https://github.com/knative/docs/blob/master/serving/using-a-custom-domain.md)
     that allows GitHub to call into the cluster.
-  - If you're using GKE, you'll also want to [assign a static IP address](https://github.com/knative/docs/blob/master/serving/gke-assigning-static-ip-address.md).
+  1. If you're using GKE, you'll also want to [assign a static IP address](https://github.com/knative/docs/blob/master/serving/gke-assigning-static-ip-address.md).
 1. Install [Knative
   Eventing](https://github.com/knative/docs/tree/master/eventing).
 1. Create a `Channel`. You can use your own `Channel` or use the
@@ -25,7 +25,7 @@ You will need:
    need to alter other commands later.
 
 ```shell
-kubectl -n default apply -f eventing/samples/github-source/channel.yaml
+kubectl --namespace default apply --filename eventing/samples/github-source/channel.yaml
 ```
 
 ### Deploy Event Sources
@@ -34,7 +34,7 @@ kubectl -n default apply -f eventing/samples/github-source/channel.yaml
    controller. This makes GitHub events available for subscriptions.
 
 ```shell
-kubectl apply -f https://knative-releases.storage.googleapis.com/eventing-sources/latest/release.yaml
+kubectl apply --filename https://knative-releases.storage.googleapis.com/eventing-sources/latest/release.yaml
 ```
 
 ### Create GitHub Tokens
@@ -81,7 +81,7 @@ head -c 8 /dev/urandom | base64
 Then, apply the githubsecret using `kubectl`:
     
 ```shell
-kubectl -n default apply -f eventing/samples/github-source/githubsecret.yaml
+kubectl --namespace default apply --filename eventing/samples/github-source/githubsecret.yaml
 ```
 
 ### Create Event Source for GitHub Events
@@ -93,7 +93,7 @@ kubectl -n default apply -f eventing/samples/github-source/githubsecret.yaml
    name, `Channel`, or `Service Account`, modify the yaml accordingly.
 
 ```shell
-kubectl -n default apply -f eventing/samples/github-source/github-source.yaml
+kubectl --namespace default apply --filename eventing/samples/github-source/github-source.yaml
 ```
 
 ### Subscription
@@ -108,7 +108,7 @@ Service that dumps incoming messages to its log and create a
 1. Deploy `subscription.yaml`.
 
 ```shell
-ko apply -f eventing/samples/github-source/subscription.yaml
+ko apply --filename eventing/samples/github-source/subscription.yaml
 ```
 
 ### Create Events
@@ -128,8 +128,8 @@ deployed the [Subscription](#subscription), then continue using this
 section. If not, then you will need to look downstream yourself.
 
 ```shell
-kubectl -n default get pods
-kubectl -n default logs github-message-dumper-XXXX user-container
+kubectl --namespace default get pods
+kubectl --namespace default logs github-message-dumper-XXXX user-container
 ```
 
 You should log lines similar to:
