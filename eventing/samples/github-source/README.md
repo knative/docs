@@ -32,27 +32,26 @@ kubectl --namespace default apply --filename eventing/samples/github-source/chan
 
 ### Create GitHub Tokens
 
-1.  Create a [personal access
-    token](https://github.com/settings/tokens) for GitHub that the
-    GitHub source can use to register webhooks with the GitHub
-    API. Also decide on a secret token that your code will use to
-    authenticate the incoming webhooks from GitHub (*secretToken*).
+Create a [personal access token](https://github.com/settings/tokens)
+for GitHub that the GitHub source can use to register webhooks with
+the GitHub API. Also decide on a secret token that your code will use
+to authenticate the incoming webhooks from GitHub (*secretToken*).
     
-    The token can be named anything you find convenient. The Source
-    requires `repo:public_repo` and `admin:repo_hook`, to let it fire
-    events from your public repositories and to create webhooks for
-    those repositories. Copy and save this token; GitHub will force
-    you to generate it again if misplaced.
+The token can be named anything you find convenient. The Source
+requires `repo:public_repo` and `admin:repo_hook`, to let it fire
+events from your public repositories and to create webhooks for those
+repositories. Copy and save this token; GitHub will force you to
+generate it again if misplaced.
 
-    Here's an example for a token named "GitHubSource Sample" with the
-    the recommended scopes:
+Here's an example for a token named "GitHubSource Sample" with the the
+recommended scopes:
 
-    ![GitHub UI](personal_access_token.png "GitHub personal access token screenshot")
+![GitHub UI](personal_access_token.png "GitHub personal access token screenshot")
 
-    Update `githubsecret.yaml` with those
-    values. If  your generated access token is `'asdfasfdsaf'` and you choose
-    your *secretToken* as `'personal_access_token_value'`, you'd modify
-    `githubsecret.yaml` like so:
+Update `githubsecret.yaml` with those values. If your generated access
+token is `'asdfasfdsaf'` and you choose your *secretToken* as
+`'personal_access_token_value'`, you'd modify `githubsecret.yaml` like
+so:
 
 ```yaml
 apiVersion: v1
@@ -79,11 +78,11 @@ kubectl --namespace default apply --filename eventing/samples/github-source/gith
 
 ### Create Event Source for GitHub Events
 
-1. In order to receive GitHub events, you have to create a concrete
-   Event Source for a specific namespace. Be sure to replace the
-   `ownerAndRepository` value with a valid GitHub public repository
-   owned by your GitHub user. If you are using a different `Secret`
-   name, `Channel`, or `Service Account`, modify the yaml accordingly.
+In order to receive GitHub events, you have to create a concrete Event
+Source for a specific namespace. Be sure to replace the
+`ownerAndRepository` value with a valid GitHub public repository owned
+by your GitHub user. If you are using a different `Secret` name,
+`Channel`, or `Service Account`, modify the yaml accordingly.
 
 ```shell
 kubectl --namespace default apply --filename eventing/samples/github-source/github-source.yaml
