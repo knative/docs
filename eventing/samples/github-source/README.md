@@ -18,7 +18,9 @@ You will need:
     that allows GitHub to call into the cluster.
   1. If you're using GKE, you'll also want to [assign a static IP address](https://github.com/knative/docs/blob/master/serving/gke-assigning-static-ip-address.md).
 1. Install [Knative
-  Eventing](https://github.com/knative/docs/tree/master/eventing).
+  Eventing](https://github.com/knative/docs/tree/master/eventing). Those
+  instructions also install the default eventing sources, including
+  the `GitHubSource` we'll use.
 1. Create a `Channel`. You can use your own `Channel` or use the
    provided sample, which creates a channel called `githubchannel`. If
    you use your own `Channel` with a different name, then you will
@@ -26,15 +28,6 @@ You will need:
 
 ```shell
 kubectl --namespace default apply --filename eventing/samples/github-source/channel.yaml
-```
-
-### Deploy Event Sources
-
-1. Deploy the `GitHubSource` controller as part of eventing-source's
-   controller. This makes GitHub events available for subscriptions.
-
-```shell
-kubectl apply --filename https://knative-releases.storage.googleapis.com/eventing-sources/latest/release.yaml
 ```
 
 ### Create GitHub Tokens
