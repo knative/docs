@@ -92,13 +92,14 @@ kubectl --namespace default apply --filename eventing/samples/github-source/gith
 ### Subscription
 
 To verify the `GitHubSource` is fully working, create a simple Knative
-Service that dumps incoming messages to its log and create a
-`Subscription` from the `Channel` to that Knative Service.
+`Service` that dumps incoming messages to its log and create a
+`Subscription` from the `Channel` to that Knative `Service`.
 
 1. If the deployed `GitHubEventSource` is pointing at a `Channel`
    other than `githubchannel`, modify `subscription.yaml` by replacing
    `githubchannel` with that `Channel`'s name.
-1. Deploy `subscription.yaml`.
+1. Deploy `subscription.yaml`, which defines both the `Service` and
+   `Subscription`.
 
 ```shell
 ko apply --filename eventing/samples/github-source/subscription.yaml
