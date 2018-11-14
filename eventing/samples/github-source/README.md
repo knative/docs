@@ -81,8 +81,34 @@ kubectl --namespace default apply --filename eventing/samples/github-source/gith
 In order to receive GitHub events, you have to create a concrete Event
 Source for a specific namespace. Be sure to replace the
 `ownerAndRepository` value with a valid GitHub public repository owned
-by your GitHub user. If you are using a different `Secret` name,
-`Channel`, or `Service Account`, modify the yaml accordingly.
+by your GitHub user. If you are using a different `Secret` name or
+`Channel`, modify the yaml accordingly.
+
+```yaml
+apiVersion: sources.eventing.knative.dev/v1alpha1
+kind: GitHubSource
+metadata:
+  name: githubsourcesample
+spec:
+  eventTypes:
+  - pull_request
+  ownerAndRepository: <YOUR USER>/<YOUR REPO>
+  accessToken:
+    secretKeyRef:
+      name: githubsecret
+      key: accessToken
+  secretToken:
+    secretKeyRef:
+      name: githubsecret
+      key: secretToken
+  sink:
+    apiVersion: eventing.knative.dev/v1alpha1
+    kind: Channel
+    name: githubchannel
+
+```
+
+Then, apply that yaml using `kubectl`:
 
 ```shell
 kubectl --namespace default apply --filename eventing/samples/github-source/github-source.yaml
@@ -94,11 +120,47 @@ To verify the `GitHubSource` is fully working, create a simple Knative
 `Service` that dumps incoming messages to its log and create a
 `Subscription` from the `Channel` to that Knative `Service`.
 
-1. If the deployed `GitHubEventSource` is pointing at a `Channel`
-   other than `githubchannel`, modify `subscription.yaml` by replacing
-   `githubchannel` with that `Channel`'s name.
-1. Deploy `subscription.yaml`, which defines both the `Service` and
-   `Subscription`.
+If the deployed `GitHubEventSource` is pointing at a `Channel` other
+than `githubchannel`, modify `subscription.yaml` by replacing
+`githubchannel` with that `Channel`'s name.
+
+```yaml
+apiVersion: eventing.knative.dev/v1alpha1
+kind: Subscription
+metadata:
+  name: github-source-sample
+  namespace: knative-demo
+spec:
+  channel:
+    apiVersion: eventing.knative.dev/v1alpha1
+    kind: Channel
+    name: githubchannel
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1alpha1
+      kind: Service
+      name: github-message-dumper
+
+---
+# This is a very simple Knative Service that writes the input request to its log.
+
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: github-message-dumper
+  namespace: knative-demo
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            image: github.com/knative/eventing-sources/cmd/message_dumper
+
+```
+   
+Then, deploy `subscription.yaml`, creating both the `Service` and
+`Subscription`.
 
 ```shell
 ko apply --filename eventing/samples/github-source/subscription.yaml
