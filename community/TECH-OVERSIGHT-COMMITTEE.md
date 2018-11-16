@@ -52,7 +52,8 @@ product and design decisions.
 The TOC’s work includes:
 
 *   Regular committee meetings to discuss hot topics, resulting in a set of
-    published [meeting notes](TODO).
+    published [meeting
+    notes](https://docs.google.com/document/d/1hR5ijJQjz65QkLrgEhWjv3Q86tWVxYj_9xdhQ6Y5D8Q/edit#).
 
 *   Create, review, approve and publish technical project governance documents.
 
@@ -73,10 +74,10 @@ during the community feedback period at the end of each meeting.
 Artifact                   | Link
 -------------------------- | ----
 Google Group               | [knative-tech-oversight@googlegroups.com](https://groups.google.com/forum/#!forum/knative-tech-oversight)
-Community Meeting VC       | [TODO](TODO)
-Community Meeting Calendar | [Calendar Invitation](TODO)
-Meeting Notes              | [Notes](TODO)
-Document Folder            | [Folder](TODO)
+Community Meeting VC       | [meet.google.com/ffc-rypd-kih](https://meet.google.com/ffc-rypd-kih) <br>or dial in:<br>(US) +1 240-630-1102  PIN: 316262#
+Community Meeting Calendar | Thursdays at 11:30a-12p <br>[Calendar](https://calendar.google.com/calendar/embed?src=google.com_18un4fuh6rokqf8hmfftm5oqq4%40group.calendar.google.com)
+Meeting Notes              | [Notes](https://docs.google.com/document/d/1hR5ijJQjz65QkLrgEhWjv3Q86tWVxYj_9xdhQ6Y5D8Q/edit#heading=h.g47ptr8u5cov)
+Document Folder            | [Folder](https://drive.google.com/drive/folders/1_OHttsYLCVtX202aXNmJJrAHJ7BaXcu6)
 
 ## Committee Members
 
