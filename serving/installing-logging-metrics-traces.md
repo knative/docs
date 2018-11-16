@@ -160,19 +160,7 @@ You need to apply the same first two steps to deploy Fluentd image as in [Stackd
 
 To include **Istio metrics**, such as request count and request latency, you'll need to install Istio 1.0.4 or later.
 
-To include **[Kubernetes metrics](https://cloud.google.com/monitoring/api/metrics_other#other-kubernetes.io)** if Knative is deployed to GKE, create a Kubernetes cluster on GKE with [Stackdriver Kubernetes Monitoring](https://cloud.google.com/kubernetes-monitoring/) feature:
-
-<pre>
-    gcloud <b>beta</b> container clusters create $CLUSTER_NAME \
-      --zone=$CLUSTER_ZONE \
-      --cluster-version=latest \
-      --machine-type=n1-standard-4 \
-      --enable-autoscaling --min-nodes=1 --max-nodes=10 \
-      --enable-autorepair \
-      <b>--enable-stackdriver-kubernetes \</b>
-      --scopes=service-control,service-management,compute-rw,storage-ro,cloud-platform,logging-write,monitoring-write,pubsub,datastore \
-      --num-nodes=3
-</pre>
+To include **[Kubernetes metrics](https://cloud.google.com/monitoring/api/metrics_other#other-kubernetes.io)** if Knative is deployed to GKE, create a Kubernetes cluster on GKE with [Stackdriver Kubernetes Monitoring](https://cloud.google.com/kubernetes-monitoring/) feature with flag *--enable-stackdriver-kubernetes*, which is a **beta** feature as of November 2018. This could change when the feature goes to GA in December 2018. For the accurate flag to enable the feature, refer to [this](https://cloud.google.com/kubernetes-monitoring/).
 
 ## Learn More
 

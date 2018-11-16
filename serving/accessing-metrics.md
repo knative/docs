@@ -35,7 +35,7 @@ kubectl port-forward --namespace knative-monitoring $(kubectl get pods --namespa
  https://app.google.stackdriver.com/metrics-explorer?project=<your stackdriver project id>
  ```
 
-If you created [single project workspace](https://cloud.google.com/monitoring/workspaces/guide#single-project-ws), the stackdriver project id is usually the same as the GCP project id. In Metrics Explorer, you can search for Knative system metrics like *serving.knative.dev* (screenshot below):
+If you created [single project workspace](https://cloud.google.com/monitoring/workspaces/guide#single-project-ws), the stackdriver project id is usually the same as the GCP project id. In Metrics Explorer, you can search for Knative system metrics like *knative.dev/serving* (screenshot below):
 ![Stackdriver Metrics Explorer](./images/stackdriver1.png)
 
 ---
