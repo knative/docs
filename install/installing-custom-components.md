@@ -1,11 +1,11 @@
 # Installing Individual Knative Components
 
-Use this guide to perform custom installations of the Knative components on
-your existing Kubernetes clusters. Utilizes Knative's pluggable ability to
-install only what you want and in the clusters you choose.
+Use this guide to perform custom installations of Knative on your existing
+Kubernetes clusters. Knative's pluggable components allow you to
+install only what you want in each of your clusters.
 
-The steps covered in the guide are for advanced operators who want to take full
-control over the installation experience. Installing individual Knative components
+The steps covered in the guide are for advanced operators who want to
+customize each Knative installation. Installing individual Knative components
 requires that you to run multiple and separate installation commands.
 
 ## Before you begin
@@ -16,8 +16,8 @@ requires that you to run multiple and separate installation commands.
   least effort. Installing a default package also ensures that you can run all the
   [Knative Serving Samples](https://github.com/knative/docs/blob/master/serving/samples/README.md).
 
-* This guide supports `bash` in a MacOS or Linux environment. A Windows environment is
-  not documented here but it is possible for you to run corresponding commands.
+* The following steps use `bash` for a MacOS or Linux environment; for Windows,
+  some commands might need adjustment.
 
 * This installation guide assumes that you have an existing Kubernetes cluster,
   on which you're comfortable installing and running _alpha_ level software.
@@ -44,7 +44,7 @@ You should install the default package if you are just getting started with Knat
 Alternatively, you can choose to install Istio with manual sidecar injection or with support for
 [Custom Resource Definitions (CRD)](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
 
-### Choosing a Istio installation package
+### Choosing an Istio installation package
 
 You can choose from the following installation packages to install the Istio
 service mesh on you cluster:
@@ -61,7 +61,7 @@ service mesh on you cluster:
 
 ### Installing Istio installation packages
 
-1. Install a Istio package with the `kubectl apply` command by specifying the
+1. Install an Istio package with the `kubectl apply` command by specifying the
    package filename:
     ```bash
     kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.1/[FILENAME].yaml
@@ -86,18 +86,13 @@ service mesh on you cluster:
 
 ## Installing Knative components
 
-You can choose to separately install only the individual Knative components
-that you want. You can also later add a pre-configured observability plugin to enable
-monitoring, logging, and tracing in your cluster.
-
-Installing individual Knative components excludes other features like
-observabitliy plugins. Therefore, you must separately install and run the
-`kubectl apply` command for each component or plugin that you want installed.
+You can install each Knative component independently or use the default packages
+to install multiple components. The individual component packages exclude
+an observability plugin but you have the option to install one later.
 
 ### Choosing Knative installation packages
 
-The following section describes all the Knative installation packages from which
-you can choose.
+The following Knative installation packages are available.
 
 This installation method is suggested for experienced operators. If you are new to
 Knative, you should [install the default package](./README.md) to help you get up
@@ -141,18 +136,47 @@ section of each Knative component's release page:
 **Tip**: From the table above, you can copy and paste the URL and filename of
 the installation package that you want to install.
 
-1. To install a specific component, run the `kubectl apply` command and specify the
-   installation package filename:
+1. To install an installation package, run the `kubectl apply` command
+   and specify the package path and filename:
 
-    ```bash
-    kubectl apply --filename https://github.com/knative/[COMPONENT]/releases/download/[VERSION]/[FILENAME].yaml
-    ```
+   * To install an individual package:
+      ```bash
+      kubectl apply --filename [INSTALL_PACKAGE]
+      ```
 
-    where `[COMPONENT]`, `[VERSION]`, and `[FILENAME]` are the Knative component, release version, and filename of the installable resource. Examples:
+   * To install multiple packages, you can append additional `--filename [INSTALL_PACKAGE]`
+     flags to the `kubectl apply` command:
+      ```bash
+      kubectl apply --filename [INSTALL_PACKAGE] --filename [INSTALL_PACKAGE] \
+        --filename [INSTALL_PACKAGE]
+      ```
+
+    Where [`INSTALL_PACKAGE`] is the URL path and filename of the a Knative installation package:
+
+    `https://github.com/knative/[COMPONENT]/releases/download/[VERSION]/[FILENAME].yaml`
+
+    And `[COMPONENT]`, `[VERSION]`, and `[FILENAME]` are the Knative component, release version, and filename of the installable resource. For example:
     * `https://github.com/knative/build/releases/download/v0.2.0/release.yaml`
     * `https://github.com/knative/eventing/releases/download/v0.2.0/eventing.yaml`
     * `https://github.com/knative/eventing-sources/releases/download/v0.2.0/release.yaml`
     * `https://github.com/knative/serving/releases/download/v0.2.1/serving.yaml`
+
+
+    **Example install commands:**
+
+     * To install the default package that includes both Knative Serving and Build:
+
+       ```bash
+       kubectl apply -f https://github.com/knative/serving/releases/download/v0.2.1/release.yaml
+       ```
+
+    * To install all three Knative components without an observibility plugin:
+
+      ```bash
+      kubectl apply -f https://github.com/knative/serving/releases/download/v0.2.1/serving.yaml \
+        -f https://github.com/knative/build/releases/download/v0.2.0/release.yaml \
+        -f https://github.com/knative/eventing/releases/download/v0.2.0/eventing.yaml
+      ```
 
 1. Depending on what you choose to install, you view the status of your
    installation by running one or more of the following commands. It
@@ -169,9 +193,8 @@ the installation package that you want to install.
     > Tip: You can append the `--watch` flag to the `kubectl get` commands to
       view the pod status in realtime. You use `CTRL + C` to exit watch mode.
 
-1. If you installed one of the installation packages that include an observability
-   plugin, you can run the following command to ensure that the `knative-monitoriing`
-   pods show a `STATUS` of `Running`:
+1. If you installed an observability plugin, run the following command to ensure
+   that the `knative-monitoring` pods show a `STATUS` of `Running`:
 
     ```bash
     kubectl get pods --namespace knative-monitoring
@@ -182,8 +205,8 @@ events in your Knative cluster.
 
 ## What's next
 
-Depending on which of the Knative components that you chose to install, you can
-use one of the following documents to help get you started in Knative:
+Depending on the Knative components you installed, the following guides can help
+you get started with Knative:
 
 * [Getting Started with Knative App Deployment](./getting-started-knative-app.md).
 
