@@ -58,13 +58,12 @@ First let's identify your Giant Swarm installation and save it for use later.
     gsctl ping
     ```
 
-### Create a Kubernetes cluster using AKS
+### Create a Kubernetes cluster with Giant Swarm
 
 Next we will create a managed Kubernetes cluster in your Giant Swarm organisation. To make sure the cluster is large enough to host all the Knative and Istio components, the recommended configuration for a cluster is:
 
 * Kubernetes version 1.10 or later
 * Three or more nodes
-* Standard_DS3_v2 nodes
 * RBAC is enabled by default
 
 1. Create the Giant Swarm cluster
@@ -72,7 +71,6 @@ Next we will create a managed Kubernetes cluster in your Giant Swarm organisatio
     gsctl create cluster \
         --name 'Knative cluster' \
         --owner my-organisation \
-        --azure-vm-size Standard_DS3_v2 \ 
         --num-workers 3
     ```
 
