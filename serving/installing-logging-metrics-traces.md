@@ -7,7 +7,15 @@ You can install only one of these three setups and side-by-side installation of 
 
 ## Before you begin
 
+<<<<<<< HEAD
 The following instructions assume that you [installed Knative Serving](../install/README.md).
+=======
+   ```shell
+   git clone https://github.com/knative/serving knative-serving
+   cd knative-serving
+   git checkout v0.2.1
+   ```
+>>>>>>> upstream/master
 
 ## Elasticsearch and Kibana for logging, Prometheus and Grafana for metrics Setup
 
