@@ -1,0 +1,31 @@
+apiVersion: eventing.knative.dev/v1alpha1
+kind: Subscription
+metadata:
+  name: github-source-sample
+  namespace: knative-demo
+spec:
+  channel:
+    apiVersion: eventing.knative.dev/v1alpha1
+    kind: Channel
+    name: githubchannel
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1alpha1
+      kind: Service
+      name: github-message-dumper
+
+---
+# This is a very simple Knative Service that writes the input request to its log.
+
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: github-message-dumper
+  namespace: knative-demo
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            image: github.com/knative/eventing-sources/cmd/message_dumper
