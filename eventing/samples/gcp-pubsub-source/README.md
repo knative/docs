@@ -80,7 +80,7 @@ In order to check the `GcpPubSubSource` is fully working, we will create a simpl
 1. Deploy `subscriber.yaml`.
 
     ```shell
-    ko -n default apply -f eventing/samples/gcp-pubsub-source/subscriber.yaml
+    ko apply -f eventing/samples/gcp-pubsub-source/subscriber.yaml
     ```
 
 ### Publish
