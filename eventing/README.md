@@ -57,15 +57,15 @@ and "Container" Sources) with the following commands:
 <!-- TODO(evankanderson): Switch to a numbered release when available. -->
 
 ```bash
-kubectl apply --filename https://storage.googleapis.com/knative-releases/eventing/latest/release.yaml
-kubectl apply --filename https://storage.googleapis.com/knative-releases/eventing-sources/latest/release.yaml
+kubectl apply --filename https://github.com/knative/eventing/releases/download/v0.2.0/release.yaml
+kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.2.0/release.yaml
 ```
 
 In addition to the core sources, you can also use GCP PubSub as a source with
 the following yaml:
 
 ```bash
-kubectl apply --filename https://storage.googleapis.com/knative-releases/eventing-sources/latest/release-with-gcppubsub.yaml
+kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.2.0/release-with-gcppubsub.yaml
 ```
 
 This document will be updated as additional sources (which are custom resource
