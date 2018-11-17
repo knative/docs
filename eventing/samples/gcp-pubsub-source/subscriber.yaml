@@ -6,12 +6,12 @@ metadata:
   name: gcppubsub-source-sample
   namespace: default
 spec:
-  from:
+  channel:
     apiVersion: eventing.knative.dev/v1alpha1
     kind: Channel
     name: qux-1
-  call:
-    targetRef:
+  subscriber:
+    ref:
       apiVersion: serving.knative.dev/v1alpha1
       kind: Service
       name: message-dumper
