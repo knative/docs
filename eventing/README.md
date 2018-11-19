@@ -1,25 +1,28 @@
 # Knative Eventing
 
-Knative Eventing is a system which is designed to address a common need for
-cloud native development:
+Knative Eventing is a system that is designed to address a common need for cloud native development and 
+provides composable primitives to enable late-binding event sources and event consumers.
 
-1. Services are loosely coupled during development and deployed independently on
-   a variety of platforms (Kubernetes, VMs, SaaS or FaaS).
-1. A producer can generate events before a consumer is listening, and a consumer
-   can express an interest in an event or class of events that is not yet being
-   produced.
-1. Services can be connected to create new applications
-   - without modifying producer or consumer.
-   - with the ability to select a specific subset of events from a particular
-     producer
+## Design overview
 
-The above concerns are consistent with the
-[design goals of CloudEvents](https://github.com/cloudevents/spec/blob/master/spec.md#design-goals),
-a common specification for cross-service interoperability being developed by the
-CNCF Serverless WG.
+Knative Eventing is designed around the following goals:
+
+1. Knative Eventing services are loosely coupled. These services can be developed and deployed independently on,
+   and across a variety of platforms (for example Kubernetes, VMs, SaaS or FaaS).
+1. Event producers and event sources are independent. Any producer (or source), can generate events 
+   before there are active event consumers that are listening. Any event consumer can express interest in an 
+   event or class of events, before there are producers that are creating those events.
+1. Other services can be connected to the Eventing system. These services can perform the following functions:
+   - Create new applications without modifying the event producer or event consumer. 
+   - Select and target specific subsets of the events from thier producers.
+1. Ensure cross-service interoperability. Knative Eventing is consistent with the 
+   [CloudEvents](https://github.com/cloudevents/spec/blob/master/spec.md#design-goals)
+   specification that is developed by the [CNCF Serverless WG](https://lists.cncf.io/g/cncf-wg-serverless).
+
+### Event consumers
 
 To enable delivery to multiple types of Services, Knative Eventing defines two
-generic interfaces which multiple Kubernetes resources can implement:
+generic interfaces that can be implemented by multiple Kubernetes resources:
 
 1. **Addressable** objects are able to receive and acknowledge an event
    delivered over HTTP to an address defined in their `status.address.hostname`
@@ -30,6 +33,8 @@ generic interfaces which multiple Kubernetes resources can implement:
    transform the event, returning 0 or 1 new events in the HTTP response. These
    returned events may be further processed in the same way that events from an
    external event source are processed.
+
+### Event channels and subscriptions
 
 Knative Eventing also defines a single event forwarding and persistence layer,
 called a
@@ -43,10 +48,13 @@ This allows message delivery in a cluster to vary based on requirements, so that
 some events might be handled by an in-memory implementation while others would
 be persisted using Kafka or NATS Streaming.
 
+### Future design goals
+
 The focus for the next Eventing release will be to enable easy implementation of
 event sources. Sources manage registration and delivery of events from external
 systems using Kubernetes
 [Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
+Learn more about Eventing development in the [Events work group](https://github.com/knative/docs/blob/master/community/WORKING-GROUPS.md#events).
 
 ## Installation
 
