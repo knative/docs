@@ -30,7 +30,7 @@ kubectl port-forward --namespace knative-monitoring $(kubectl get pods --namespa
   * Before you expose the Grafana UI outside the cluster, make sure to change the password.
   
 ## Accessing metrics in Stackdriver
- You can access metrics in  Stackdriver UI:
+ You can access metrics in Stackdriver UI:
  ```
  https://app.google.stackdriver.com/metrics-explorer?project=<your stackdriver project id>
  ```
