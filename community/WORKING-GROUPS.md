@@ -30,7 +30,7 @@ The current working groups are:
 *   [API Core](#api-core)
 *   [Build](#build)
 *   [Documentation](#documentation)
-*   [Events](#events)
+*   [Eventing](#eventing)
 *   [Networking](#networking)
 *   [Observability](#observability)
 *   [Productivity](#productivity)
@@ -89,7 +89,7 @@ Slack Channel              | [#docs](https://knative.slack.com/messages/docs)
 ------------------------------------------------------------- | ----------- | ------- | -------
 <img width="30px" src="https://github.com/samodell.png"> | Sam O'Dell | Google  | [samodell](https://github.com/samodell)
 
-## Events
+## Eventing
 
 Event sources, bindings, FaaS framework, and orchestration
 
