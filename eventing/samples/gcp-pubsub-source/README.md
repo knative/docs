@@ -1,109 +1,160 @@
 # GCP Cloud Pub/Sub - Source
 
-## Deployment Steps
+This sample shows how to configure the GCP PubSub event source. This event
+source is most useful as a bridge from other GCP services, such as
+[Cloud Storage](https://cloud.google.com/storage/docs/pubsub-notifications),
+[IoT Core](https://cloud.google.com/iot/docs/how-tos/devices) and
+[Cloud Scheduler](https://cloud.google.com/scheduler/docs/creating#).
 
-### Prerequisites
+## Prerequisites
 
-1. Create a [Google Cloud Project](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
-1. Enable the 'Cloud Pub/Sub API' on that project.
+1. Create a
+   [Google Cloud project](https://cloud.google.com/resource-manager/docs/creating-managing-projects)
+   and install the `gcloud` CLI and run `gcloud auth login`. This sample will
+   use a mix of `gcloud` and `kubectl` commands. The rest of the sample assumes
+   that you've set the `$PROJECT_ID` environment variable to your Google Cloud
+   project id, and also set your project ID as default using
+   `gcloud config set project $PROJECT_ID`.
 
-    ```shell
-    gcloud services enable pubsub.googleapis.com
-    ```
+1. Setup [Knative Serving](https://github.com/knative/docs/blob/master/install)
 
-1. Setup [Knative Eventing](https://github.com/knative/docs/tree/master/eventing).
-1. Install the [in-memory `ClusterChannelProvisioner`](https://github.com/knative/eventing/tree/master/config/provisioners/in-memory-channel).
-    - Note that you can skip this if you choose to use a different type of `Channel`. If so, you will need to modify `channel.yaml` before deploying it.
-1. Create a `Channel`. You can use your own `Channel` or use the provided sample, which creates `qux-1`. If you use your own `Channel` with a different name, then you will need to alter other commands later.
+1. Setup
+   [Knative Eventing](https://github.com/knative/docs/tree/master/eventing)
+   using the `release-with-gcppubsub.yaml` file. Start by creating a dummy
+   `gcppubsub-source-key` (as directed), and we will replace it later.
 
-    ```shell
-    kubectl -n default apply -f eventing/samples/gcp-pubsub-source/channel.yaml
-    ```
+1. Enable the 'Cloud Pub/Sub API' on your project.
 
-1. Create GCP [Service Account(s)](https://console.cloud.google.com/iam-admin/serviceaccounts/project). You can either create one with both permissions or two different ones for least privilege. If you create only one, then use the permissions for the `Source`'s Service Account (which is a superset of the Receive Adapter's permission) and provide the same key in both secrets.
-    - The `Source`'s Service Account.
-        1. Determine the Service Account to use, or create a new one.
-        1. Give that Service Account the 'Pub/Sub Editor' role on your GCP project.
-        1. Download a new JSON private key for that Service Account.
-        1. Create a secret for the downloaded key:
-            
-            ```shell
-            kubectl -n knative-sources create secret generic gcppubsub-source-key --from-file=key.json=PATH_TO_KEY_FILE.json
-            ```
-            
-            - Note that you can change the secret's name and the secret's key, but will need to modify `default-gcppubsub.yaml` in a later step with the updated values (they are environment variables on the `StatefulSet`).
-    - The Receive Adapter's Service Account.
-        1. Determine the Service Account to use, or create a new one.
-        1. Give that Service Account the 'Pub/Sub Subscriber' role on your GCP project.
-        1. Download a new JSON private key for that Service Account.
-        1. Create a secret for the downloaded key in the namespace that the `Source` will be created in:
-            
-            ```shell
-            kubectl -n default create secret generic google-cloud-key --from-file=key.json=PATH_TO_KEY_FILE.json
-            ```
-            
-            - Note that you can change the secret's name and the secret's key, but will need to modify `gcp-pubsub-source.yaml`'s `spec.gcpCredsSecret` in a later step with the updated values.
-1. Create a GCP PubSub Topic. Replace `TOPIC-NAME` with your desired topic name.
+   ```shell
+   gcloud services enable pubsub.googleapis.com
+   ```
 
-    ```shell
-    gcloud pubsub topics create TOPIC-NAME
-    ```
+1. Create a
+   [GCP Service Account](https://console.cloud.google.com/iam-admin/serviceaccounts/project).
+   This sample creates one service account for both registration and receiving
+   messages, but you can also create a separate service account for receiving
+   messages if you want additional privilege separation.
 
-### Deployment
+   1. Create a new service account named `knative-source` with the following
+      command:
+      ```shell
+      gcloud iam service-accounts create knative-source
+      ```
+   1. Give that Service Account the 'Pub/Sub Editor' role on your GCP project:
+      ```shell
+      gcloud projects add-iam-policy-binding $PROJECT_ID \
+        --member=serviceAccount:knative-source@$PROJECT_ID.iam.gserviceaccount.com \
+        --role roles/pubsub.editor
+      ```
+   1. Download a new JSON private key for that Service Account. **Be sure not to
+      check this key into source control!**
+      ```shell
+      gcloud iam service-accounts keys create knative-source.json \
+        --iam-account=knative-source@$PROJECT_ID.iam.gserviceaccount.com
+      ```
+   1. Create a secret on the kubernetes cluster for the downloaded key. You need
+      to store this key in `key.json` in a secret named `gcppubsub-source-key`
 
-1. Deploy the `GcpPubSubSource` controller as part of eventing-source's controller.
+      ```shell
+      kubectl -n knative-sources create secret generic gcppubsub-source-key --from-file=key.json=knative-source.json
+      ```
 
-    ```shell
-    kubectl apply -f https://knative-releases.storage.googleapis.com/eventing-sources/latest/release-with-gcppubsub.yaml
-    ```
-    
-    - Note that if the `Source` Service Account secret is in a non-default location, you will need to update the YAML first.
-    
-1. Replace the place holders in `gcp-pubsub-source.yaml`.
-    - `MY_GCP_PROJECT` should be replaced with your [Google Cloud Project](https://cloud.google.com/resource-manager/docs/creating-managing-projects)'s ID.
-    - `TOPIC_NAME` should be replaced with your GCP PubSub Topic's name. It should be the unique portion within the project. E.g. `laconia`, not `projects/my-gcp-project/topics/laconia`.
-    - `qux-1` should be replaced with the name of the `Channel` you want messages sent to. If you deployed an unaltered `channel.yaml`, then you can leave it as `qux-1`.
-    - `gcpCredsSecret` should be replaced if you are using a non-default secret or key name for the receive adapter's credentials.
-    
-1. Deploy `gcp-pubsub-source.yaml`.
+      The name `gcppubsub-source-key` and `key.json` are pre-configured values
+      in the `controller-manager` StatefulSet which manages your Eventing
+      sources.
 
-    ```shell
-    kubectl -n default apply -f eventing/samples/gcp-pubsub-source/gcp-pubsub-source.yaml
-    ```
-    
-### Subscriber
+## Deployment
 
-In order to check the `GcpPubSubSource` is fully working, we will create a simple Knative Service that dumps incoming messages to its log and create a `Subscription` from the `Channel` to that Knative Service.
+1. Create a Channel. This example creates a Channel called `pubsub-test` which
+   uses the in-memory provisioner, with the following definition:
 
-1. Setup [Knative Serving](https://github.com/knative/docs/tree/master/serving).
-1. If the deployed `GcpPubSubSource` is pointing at a `Channel` other than `qux-1`, modify `subscriber.yaml` by replacing `qux-1` with that `Channel`'s name.
-1. Deploy `subscriber.yaml`.
+   ```yaml
+   apiVersion: eventing.knative.dev/v1alpha1
+   kind: Channel
+   metadata:
+     name: pubsub-test
+   spec:
+     provisioner:
+       apiVersion: eventing.knative.dev/v1alpha1
+       kind: ClusterChannelProvisioner
+       name: in-memory-channel
+   ```
 
-    ```shell
-    ko -n default apply -f eventing/samples/gcp-pubsub-source/subscriber.yaml
-    ```
+   If you're in the samples directory, you can also apply the `channel.yaml`
+   file:
 
-### Publish
+   ```shell
+   kubectl apply --filename channel.yaml
+   ```
+
+1. Create a GCP PubSub Topic. If you change this, you also need to update the
+   `topic` in the `gcp-pubsub-source.yaml` file.
+
+   ```shell
+   gcloud pubsub topics create testing
+   ```
+
+1. Replace the
+   [`MY_GCP_PROJECT` placeholder](https://cloud.google.com/resource-manager/docs/creating-managing-projects)
+   in `gcp-pubsub-source.yaml`. You should end up with a file which looks like
+   this:
+
+   ```yaml
+   apiVersion: sources.eventing.knative.dev/v1alpha1
+   kind: GcpPubSubSource
+   metadata:
+   name: testing-source
+   spec:
+     gcpCredsSecret: # A secret in the knative-sources namespace
+       name: google-cloud-key
+       key: key.json
+     googleCloudProject: MY_GCP_PROJECT # Replace this with $PROJECT_ID
+     topic: testing
+     sink:
+       apiVersion: eventing.knative.dev/v1alpha1
+       kind: Channel
+       name: pubsub-test
+   ```
+
+   You can now create the PubSub Source:
+
+   ```shell
+   kubectl apply --filename gcp-pubsub-source.yaml
+   ```
+
+1. Create a function and subscribe it to the `pubsub-test` channel. For this,
+   you currently need the
+   [`ko` tool](https://github.com/google/go-containerregistry/tree/master/cmd/ko),
+   but this will be replaced with a pre-built image shortly:
+
+   ```shell
+   ko apply --filename subscriber.yaml
+   ```
+
+## Publish
 
 Publish messages to your GCP PubSub Topic.
 
 ```shell
-gcloud pubsub topics publish TOPIC-NAME --message="Hello World!"
+gcloud pubsub topics publish testing --message="Hello World!"
 ```
 
-### Verify
+## Verify
 
-We will verify that the published message was sent into the Knative eventing system by looking at what is downstream of the `GcpPubSubSource`. If you deployed the [Subscriber](#subscriber), then continue using this section. If not, then you will need to look downstream yourself.
+We will verify that the published message was sent into the Knative eventing
+system by looking at what is downstream of the `GcpPubSubSource`. If you
+deployed the [Subscriber](#subscriber), then continue using this section. If
+not, then you will need to look downstream yourself.
 
 1. Use [`kail`](https://github.com/boz/kail) to tail the logs of the subscriber.
 
-    ```shell
-    kail -d message-dumper -c user-container --since=10m
-    ```
+   ```shell
+   kail -d message-dumper -c user-container --since=10m
+   ```
 
 You should see log lines similar to:
 
-```
+```json
 {"ID":"284375451531353","Data":"SGVsbG8gV29ybGQh","Attributes":null,"PublishTime":"2018-10-31T00:00:00.00Z"}
 
 ```

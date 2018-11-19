@@ -1,30 +1,9 @@
-# Subscription from the GcpPubSubSource's output Channel to the Knative Service below.
-
-apiVersion: eventing.knative.dev/v1alpha1
-kind: Subscription
-metadata:
-  name: gcppubsub-source-sample
-  namespace: default
-spec:
-  from:
-    apiVersion: eventing.knative.dev/v1alpha1
-    kind: Channel
-    name: qux-1
-  call:
-    targetRef:
-      apiVersion: serving.knative.dev/v1alpha1
-      kind: Service
-      name: message-dumper
-
----
-
 # This is a very simple Knative Service that writes the input request to its log.
 
 apiVersion: serving.knative.dev/v1alpha1
 kind: Service
 metadata:
   name: message-dumper
-  namespace: default
 spec:
   runLatest:
     configuration:
@@ -32,3 +11,20 @@ spec:
         spec:
           container:
             image: github.com/knative/eventing-sources/cmd/message_dumper
+---
+# Subscription from the GcpPubSubSource's output Channel to the Knative Service below.
+
+apiVersion: eventing.knative.dev/v1alpha1
+kind: Subscription
+metadata:
+  name: gcppubsub-source-sample
+spec:
+  channel:
+    apiVersion: eventing.knative.dev/v1alpha1
+    kind: Channel
+    name: pubsub-test
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1alpha1
+      kind: Service
+      name: message-dumper
