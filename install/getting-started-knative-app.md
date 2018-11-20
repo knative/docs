@@ -128,7 +128,7 @@ asssigned an external IP address.
    step.
    
     ```shell
-    curl -H "Host: helloworld-go.default.example.com" http://IP_ADDRESS
+    curl -H "Host: helloworld-go.default.example.com" http://${IP_ADDRESS}
     Hello World: Go Sample v1!
     ```
    
