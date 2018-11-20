@@ -133,7 +133,7 @@ rerun the command to see the current status.
 > Note: Instead of rerunning the command, you can add `--watch` to the above
   command to view the component's status updates in real time. Use CTRL+C to exit watch mode.
   
-Update sidecar injector priviledged to true
+Set `priviledged` to `true` for the `istio-sidecar-injector`:
 
 ```shell
 oc get cm istio-sidecar-injector -n istio-system -oyaml  \
@@ -141,7 +141,7 @@ oc get cm istio-sidecar-injector -n istio-system -oyaml  \
 | oc replace -f -
 ```
 
-Check if SELinux is enabled in order to restart the sidecar-injector pod
+Restart the `sidecar-injector` pod if `SELinux` is enabled:
 
 ```shell
 if getenforce | grep -q Disabled
