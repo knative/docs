@@ -132,6 +132,26 @@ rerun the command to see the current status.
 
 > Note: Instead of rerunning the command, you can add `--watch` to the above
   command to view the component's status updates in real time. Use CTRL+C to exit watch mode.
+  
+Set `priviledged` to `true` for the `istio-sidecar-injector`:
+
+```shell
+oc get cm istio-sidecar-injector -n istio-system -oyaml  \
+| sed -e 's/securityContext:/securityContext:\\n      privileged: true/' \
+| oc replace -f -
+```
+
+Restart the `sidecar-injector` pod if `SELinux` is enabled:
+
+```shell
+if getenforce | grep -q Disabled
+then
+    echo "SELinux is disabled, no need to restart the pod"
+else
+    echo "SELinux is enabled, restarting sidecar-injector pod"
+    oc delete pod -n istio-system -l istio=sidecar-injector
+fi
+```
 
 ## Installing Knative Serving
 
