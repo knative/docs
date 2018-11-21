@@ -1,4 +1,4 @@
-# Installing Individual Knative Components
+# Performing a Custom Knative Installation
 
 Use this guide to perform custom installations of Knative on your existing
 Kubernetes clusters. Knative's pluggable components allow you to
