@@ -1,7 +1,7 @@
 # Knative Install on Google Kubernetes Engine
 
-This guide walks you through the installation of the latest version of Knative
-using pre-built images.
+This guide walks you through the installation of the latest version of all
+Knative components using pre-built images.
 
 You can find [guides for other platforms here](README.md).
 
@@ -158,36 +158,25 @@ rerun the command to see the current status.
 > command to view the component's status updates in real time. Use CTRL + C to
 > exit watch mode.
 
-## Installing Knative components
+## Installing Knative
 
-You can install the Knative Serving and Build components together, or Build on
-its own.
-
-### Installing Knative Serving and Build components
+The following commands install all available Knative components. To customize
+your Knative installation, see [Performing a Custom Knative Installation](Knative-custom-install.md).
 
 1. Run the `kubectl apply` command to install Knative and its dependencies:
-   ```bash
-   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.2/release.yaml
-   ```
-1. Monitor the Knative components until all of the components show a `STATUS` of
-   `Running`:
-   ```bash
-   kubectl get pods --namespace knative-serving
-   kubectl get pods --namespace knative-build
-   ```
-
-### Installing Knative Build only
-
-1. Run the `kubectl apply` command to install
-   [Knative Build](https://github.com/knative/build) and its dependencies:
-   ```bash
-   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.2/build.yaml
-   ```
-1. Monitor the Knative Build components until all of the components show a
+    ```bash
+    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.1/release.yaml /
+    --filename https://github.com/knative/eventing/releases/download/v0.2.0/eventing.yaml /
+    ```
+1. Monitor the Knative components until all of the components show a
    `STATUS` of `Running`:
-   ```bash
-   kubectl get pods --namespace knative-build
-   ```
+    ```bash
+    kubectl get pods --namespace knative-serving
+    kubectl get pods --namespace knative-build
+    kubectl get pods --namespace knative-eventing
+    kubectl get pods --namespace knative-sources
+    kubectl get pods --namespace knative-monitoring
+    ```
 
 Just as with the Istio components, it will take a few seconds for the Knative
 components to be up and running; you can rerun the `kubectl get` command to see
