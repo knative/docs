@@ -1,25 +1,35 @@
 # Hello World - Eclipse Vert.x sample
 
-A simple web app written in Java using Eclipse Vertx. that you can use for testing.
-It reads in an env variable `TARGET` and prints "Hello World: ${TARGET}!". If
-TARGET is not specified, it will use "NOT SPECIFIED" as the TARGET.
+Learn how to deploy a simple web app that is written in Java and uses Eclipse Vert.x.
+This samples uses Docker to build locally. The app reads in a `TARGET` env variable and then 
+prints "Hello World: ${TARGET}!". If a value for `TARGET` is not specified, 
+the "NOT SPECIFIED" default value is used.
 
-## Prerequisites
+Use this sample to walk you through the steps of creating and modifying the sample app, building and pushing your
+container image to a registry, and then deploying your app to your Knative cluster.
 
-* A Kubernetes cluster with Knative installed. Follow the
-  [installation instructions](https://github.com/knative/docs/blob/master/install/README.md) if you need
-  to create one.
-* [Docker](https://www.docker.com) installed and running on your local machine,
-  and a Docker Hub account configured (we'll use it for a container registry).
-* You have installed [Java SE 8 or later JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
+## Before you begin
 
-## Recreating the sample code
+You must meet the following requirements to complete this sample:
 
-While you can clone all of the code from this directory, hello world apps are
-generally more useful if you build them step-by-step. The following instructions
-recreate the source files from this folder.
+* A version of the Knative Serving component installed and running on your Kubernetes cluster. Follow the
+  [Knative installation instructions](https://github.com/knative/docs/blob/master/install/README.md) if you need
+  to create a Knative cluster.
+* The following software downloaded and install on your loacal machine: 
+  * [Java SE 8 or later JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
+  * [Eclipse Vert.x v3.5.4](https://vertx.io/).
+  * [Docker](https://www.docker.com) for building and pushing your container image.
+  * [curl](https://curl.haxx.se/) to test the sample app after deployment.
+* A [Docker Hub](https://hub.docker.com/) account where you can push your container image.
 
-1. Create a new file named `pom.xml` and paste the following code:
+**Tip**: You can clone the [Knatve/docs repo](https://github.com/knative/docs) and then modify the source files.
+Alternatively, learn more by manually creating the files youself.
+
+## Creating and configuring the sample code
+
+To create and configure the source files in the root of your working directory:
+
+1. Create the `pom.xml` file:
 
     ```xml
     <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -88,9 +98,8 @@ recreate the source files from this folder.
     </project>
     ```
 
-1. Create a `src/main/java/com/example/helloworld` folder, then create a new file named `HelloWorld.java` in that folder
-   and paste the following code. This code creates a basic web server which
-   listens on port 8080:
+1. Create the `HelloWorld.java` file in the `src/main/java/com/example/helloworld` directory. The 
+   `[ROOT]/src/main/java/com/example/helloworld/HelloWorld.java` file creates a basic web server that listens on port `8080`.
 
    ```java
     package com.example.helloworld;
@@ -125,8 +134,7 @@ recreate the source files from this folder.
     }
    ```
 
-1. In your project directory, create a file named `Dockerfile` and copy the code
-   block below into it:
+1. Create the `Dockerfile` file:
 
     ```docker
     FROM fabric8/s2i-java:2.0
@@ -135,8 +143,8 @@ recreate the source files from this folder.
     COPY target/helloworld-1.0.0-SNAPSHOT.jar /deployments/
     ```
 
-1. Create a new file, `service.yaml` and copy the following service definition
-   into the file. Make sure to replace `{username}` with your Docker Hub username.
+1. Create the `service.yaml` file. You must specify your Docker Hub username in `{username}`. You can also
+   configure the `TARGET`, for example you can modify the `Eclipse Vert.x Sample v1` value.
 
     ```yaml
     apiVersion: serving.knative.dev/v1alpha1
@@ -158,12 +166,10 @@ recreate the source files from this folder.
 
 ## Building and deploying the sample
 
-Once you have recreated the sample code files (or used the files in the sample
-folder) you're ready to build and deploy the sample app.
+To build a container image, push your image to the registry, and then deploy your sample app to your cluster:
 
-1. Use Docker to build the sample code into a container. To build and push with
-   Docker Hub, run these commands replacing `{username}` with your
-   Docker Hub username:
+1. Use Docker to build your container image and then push that image to your Docker Hub registry.
+   You must replace the `{username}` variables in the following commands with your Docker Hub username.
 
     ```shell
     # Build the container on your local machine
@@ -173,51 +179,71 @@ folder) you're ready to build and deploy the sample app.
     docker push {username}/helloworld-vertx
     ```
 
-1. After the build has completed and the container is pushed to docker hub, you
-   can deploy the app into your cluster. Ensure that the container image value
-   in `service.yaml` matches the container you built in
-   the previous step. Apply the configuration using `kubectl`:
+1. Now that your container image is in the registry, you can deploy it to your Knative cluster by
+   running the `kubectl apply` command:
 
     ```shell
     kubectl apply --filename service.yaml
     ```
 
-1. Now that your service is created, Knative will perform the following steps:
-   * Create a new immutable revision for this version of the app.
-   * Network programming to create a route, ingress, service, and load balancer for your app.
-   * Automatically scale your pods up and down (including to zero active pods).
+    Result: A service name `helloworld-vertx` is created in your cluster along with the following resources:
+     * A new immutable revision for the version of the app that you just deployed.
+     * The following networking resources are created for your app:
+       * route
+       * ingress
+       * service
+       * load balancer
+     * Auto scaling is enable to allow your pods to scale up to meet traffic, and also back down to zero when there is no traffic.
 
-1. To find the IP address for your service, use
-   `kubectl get svc knative-ingressgateway -n istio-system` to get the ingress IP for your
-   cluster. If your cluster is new, it may take sometime for the service to get asssigned
-   an external IP address.
+## Testing the sample app
 
-    ```shell
-    kubectl get svc knative-ingressgateway --namespace istio-system
+To verify that your sample app has been successfully deployed:
 
-    NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
-    knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
+1. View your the ingress IP address of your service by running the following 
+`kubectl get` command. Note that it may take sometime for the new service to get asssigned
+an external IP address, especially if your cluster was newly created.
 
-    ```
+```shell
+kubectl get svc knative-ingressgateway --namespace istio-system
+```
 
-1. To find the URL for your service, use
-    ```
-    kubectl get services.serving.knative.dev helloworld-vertx  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
-    NAME                DOMAIN
-    helloworld-vertx     helloworld-vertx.default.example.com
-    ```
+Example result:
 
-1. Now you can make a request to your app to see the result. Replace
-   `{IP_ADDRESS}` with the address you see returned in the previous step.
+```shell
+NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
+knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
+```
+
+1. Retrieve the URL for your service, by running the following `kubectl get` command:
+   ```shell
+   kubectl get services.serving.knative.dev helloworld-vertx  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+   ```
+
+   Example result:
+
+   ```shell
+   NAME                DOMAIN
+   helloworld-vertx     helloworld-vertx.default.example.com
+   ```
+
+1. Run the following `curl` command to test your deployed sample app. You must replace the
+   `{IP_ADDRESS}` variable the URL that your retrieve in the previous step.
 
     ```shell
     curl -H "Host: helloworld-vertx.default.example.com" http://{IP_ADDRESS}
+   ```
+
+   Example result:
+
+   ```shell
     Hello World: Eclipse Vert.x Sample v1
     ```
 
+Congtratualations on deploying your sample Java app to Knative! 
+
 ## Removing the sample app deployment
 
-To remove the sample app from your cluster, delete the service record:
+To remove the sample app from your cluster, run the following `kubectl delete` command:
 
 ```shell
 kubectl delete --filename service.yaml
