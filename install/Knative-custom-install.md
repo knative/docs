@@ -131,12 +131,12 @@ section of each Knative component's release page:
 * [Build v0.2.0](https://github.com/knative/build/releases/tag/v0.2.0)
 * [Eventing v0.2.0](https://github.com/knative/eventing/releases/tag/v0.2.0)
 
-### Installing individual Knative components
+### Installing Knative packages
 
 **Tip**: From the table above, you can copy and paste the URL and filename of
 the installation package that you want to install.
 
-1. To install an installation package, run the `kubectl apply` command
+1. To install a Knative package, run the `kubectl apply` command
    and specify the package path and filename:
 
    * To install an individual package:
