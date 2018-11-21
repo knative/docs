@@ -103,7 +103,7 @@ and running with the least effort.
 | Default: [`release.yaml`][1] ([knative/serving repo][1.1]) | Included | Included | -     | [ELK stack][2] |
 | [`release-no-mon.yaml`][3] | Included        | Included        | -                  | -                 |
 | [`release-lite.yaml`][4] | Included          | Included        | -                  | Includes support for a [`fluentd` based observability plugin][5] that you provide. |
-| [`build.yaml`][6] ([`release.yaml` from knative/build repo][6.1]) | -               | Included        | -                  | -                 |
+| [`build.yaml`][6] ([knative/serving repo][1.1]) <br/> Or [`release.yaml`][6.1] from knative/build repo][6.2]) | -               | Included        | -                  | -                 |
 | [`eventing.yaml`][7]     | -                 | -               | Included           | -                 |
 | [`release.yaml`][8] ([knative/eventing-sources repo][8.1]) | - | - | Included       | -                 |
 | [`serving.yaml`][9]      | Included          | -               | -           | -                 |
@@ -118,18 +118,20 @@ tracing to your cluster.
 [3]: https://github.com/knative/serving/releases/download/v0.2.1/release-no-mon.yaml
 [4]: https://github.com/knative/serving/releases/download/v0.2.1/release-lite.yaml
 [5]: ../serving/setting-up-a-logging-plugin.md
-[6]: https://github.com/knative/build/releases/tag/v0.2.0
-[6.1]: https://github.com/knative/eventing/releases/tag/v0.2.0
+[6]: https://github.com/knative/serving/releases/download/v0.2.1/build.yaml
+[6.1]: https://github.com/knative/build/releases/download/v0.2.0/release.yaml
+[6.2]: https://github.com/knative/build/releases/tag/v0.2.0
 [7]: https://github.com/knative/eventing/releases/download/v0.2.0/eventing.yaml
+[7.1]: https://github.com/knative/eventing/releases/tag/v0.2.0
 [8]: https://github.com/knative/eventing-sources/releases/download/v0.2.0/release.yaml
 [8.1]: https://github.com/knative/eventing-sources/releases/tag/v0.2.0
 [9]: https://github.com/knative/serving/releases/download/v0.2.1/serving.yaml
 
 Note: Each of the installable Knative resources are also listed in the Assets
 section of each Knative component's release page:
-* [Serving v0.2.1](https://github.com/knative/serving/releases/tag/v0.2.1)
-* [Build v0.2.0](https://github.com/knative/build/releases/tag/v0.2.0)
-* [Eventing v0.2.0](https://github.com/knative/eventing/releases/tag/v0.2.0)
+* [Serving v0.2.1][1.1]
+* [Build v0.2.0][6.2]
+* [Eventing v0.2.0][7.1]
 
 ### Installing Knative packages
 
