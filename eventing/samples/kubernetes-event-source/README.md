@@ -43,7 +43,7 @@ In order to check the `KubernetesEventSource` is fully working, we will create a
 1. Deploy `subscription.yaml`.
 
 ```shell
-ko apply -f eventing/samples/kubernetes-event-source/subscription.yaml
+kubectl apply -f eventing/samples/kubernetes-event-source/subscription.yaml
 ```
 
 
