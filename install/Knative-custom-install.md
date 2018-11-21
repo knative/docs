@@ -55,20 +55,20 @@ service mesh on you cluster:
 | [`istio-crds.yaml`][b]        | Support for Custom Resource Definitions. **Q: This have to do with "Pilot"? Why choose this?** |
 | [`istio-lean.yaml`][c]        | Configured for Manual Sidecar Injection. **Q: When or why should users choose this?** |
 
-[a]: https://github.com/knative/serving/releases/download/v0.2.1/istio.yaml
-[b]: https://github.com/knative/serving/releases/download/v0.2.1/istio-crds.yaml
-[c]: https://github.com/knative/serving/releases/download/v0.2.1/istio-lean.yaml
+[a]: https://github.com/knative/serving/releases/download/v0.2.2/istio.yaml
+[b]: https://github.com/knative/serving/releases/download/v0.2.2/istio-crds.yaml
+[c]: https://github.com/knative/serving/releases/download/v0.2.2/istio-lean.yaml
 
 ### Installing Istio installation packages
 
 1. Install an Istio package with the `kubectl apply` command by specifying the
    package filename:
     ```bash
-    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.1/[FILENAME].yaml
+    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.2/[FILENAME].yaml
     ```
 
     where `[FILENAME]` is the name of the Istio package that you want to install. Example:
-    `https://github.com/knative/serving/releases/download/v0.2.1/istio.yaml
+    `https://github.com/knative/serving/releases/download/v0.2.2/istio.yaml
     `
 1. Label the default namespace with `istio-injection=enabled`: **Q: For which install package is this needed? Or is this needed for all Istio installs?**
     ```bash
@@ -103,7 +103,7 @@ and running with the least effort.
 | Default: [`release.yaml`][1] ([knative/serving repo][1.1]) | Included | Included | -     | [ELK stack][2] |
 | [`release-no-mon.yaml`][3] | Included        | Included        | -                  | -                 |
 | [`release-lite.yaml`][4] | Included          | Included        | -                  | Includes support for a [`fluentd` based observability plugin][5] that you provide. |
-| [`build.yaml`][6] ([knative/serving repo][1.1]) <br/> Or [`release.yaml`][6.1] from knative/build repo][6.2]) | -               | Included        | -                  | -                 |
+| [`build.yaml`][6] ([knative/serving repo][1.1]) <br/> Or [`release.yaml`][6.1] ([knative/build repo][6.2]) | -               | Included        | -                  | -                 |
 | [`eventing.yaml`][7]     | -                 | -               | Included           | -                 |
 | [`release.yaml`][8] ([knative/eventing-sources repo][8.1]) | - | - | Included       | -                 |
 | [`serving.yaml`][9]      | Included          | -               | -           | -                 |
@@ -112,24 +112,24 @@ _*_ See [Installing observability plugins](../serving/installing-logging-metrics
 for details about the supported plugins and how to add monitoring, logging, and
 tracing to your cluster.
 
-[1]: https://github.com/knative/serving/releases/download/v0.2.1/release.yaml
-[1.1]: https://github.com/knative/serving/releases/tag/v0.2.1
+[1]: https://github.com/knative/serving/releases/download/v0.2.2/release.yaml
+[1.1]: https://github.com/knative/serving/releases/tag/v0.2.2
 [2]: https://www.elastic.co/elk-stack
-[3]: https://github.com/knative/serving/releases/download/v0.2.1/release-no-mon.yaml
-[4]: https://github.com/knative/serving/releases/download/v0.2.1/release-lite.yaml
+[3]: https://github.com/knative/serving/releases/download/v0.2.2/release-no-mon.yaml
+[4]: https://github.com/knative/serving/releases/download/v0.2.2/release-lite.yaml
 [5]: ../serving/setting-up-a-logging-plugin.md
-[6]: https://github.com/knative/serving/releases/download/v0.2.1/build.yaml
+[6]: https://github.com/knative/serving/releases/download/v0.2.2/build.yaml
 [6.1]: https://github.com/knative/build/releases/download/v0.2.0/release.yaml
 [6.2]: https://github.com/knative/build/releases/tag/v0.2.0
 [7]: https://github.com/knative/eventing/releases/download/v0.2.0/eventing.yaml
 [7.1]: https://github.com/knative/eventing/releases/tag/v0.2.0
 [8]: https://github.com/knative/eventing-sources/releases/download/v0.2.0/release.yaml
 [8.1]: https://github.com/knative/eventing-sources/releases/tag/v0.2.0
-[9]: https://github.com/knative/serving/releases/download/v0.2.1/serving.yaml
+[9]: https://github.com/knative/serving/releases/download/v0.2.2/serving.yaml
 
 Note: Each of the installable Knative resources are also listed in the Assets
 section of each Knative component's release page:
-* [Serving v0.2.1][1.1]
+* [Serving v0.2.2][1.1]
 * [Build v0.2.0][6.2]
 * [Eventing v0.2.0][7.1]
 
@@ -161,7 +161,7 @@ the installation package that you want to install.
     * `https://github.com/knative/build/releases/download/v0.2.0/release.yaml`
     * `https://github.com/knative/eventing/releases/download/v0.2.0/eventing.yaml`
     * `https://github.com/knative/eventing-sources/releases/download/v0.2.0/release.yaml`
-    * `https://github.com/knative/serving/releases/download/v0.2.1/serving.yaml`
+    * `https://github.com/knative/serving/releases/download/v0.2.2/serving.yaml`
 
 
     **Example install commands:**
@@ -169,13 +169,13 @@ the installation package that you want to install.
      * To install the default package that includes both Knative Serving and Build:
 
        ```bash
-       kubectl apply -f https://github.com/knative/serving/releases/download/v0.2.1/release.yaml
+       kubectl apply -f https://github.com/knative/serving/releases/download/v0.2.2/release.yaml
        ```
 
     * To install all three Knative components without an observibility plugin:
 
       ```bash
-      kubectl apply -f https://github.com/knative/serving/releases/download/v0.2.1/serving.yaml \
+      kubectl apply -f https://github.com/knative/serving/releases/download/v0.2.2/serving.yaml \
         -f https://github.com/knative/build/releases/download/v0.2.0/release.yaml \
         -f https://github.com/knative/eventing/releases/download/v0.2.0/eventing.yaml
       ```
@@ -216,7 +216,7 @@ you get started with Knative:
 
 * [Creating a simple Knative Build](../build/creating-builds.md).
 
-  * [Knative Build templates](../build-templates)
+  * [Knative Build templates](https://github.com/knative/build-templates).
 
 * [Knative Eventing overview](../eventing/README.md).
 
