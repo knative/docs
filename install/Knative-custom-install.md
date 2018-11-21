@@ -188,7 +188,6 @@ the installation package that you want to install.
     ```bash
     kubectl get pods --namespace knative-build
     kubectl get pods --namespace knative-eventing
-    kubectl get pods --namespace knative-eventing-sources
     kubectl get pods --namespace knative-serving
     ```
 
