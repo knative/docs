@@ -82,7 +82,6 @@ and loading the released source yaml (the `-with-gcppubsub` release includes all
 the above sources, and adds GCP PubSub, which requires the listed secret):
 
 ```bash
-kubectl create namespace knative-sources
 kubectl --namespace knative-sources create secret generic gcppubsub-source-key --from-literal=key.json=''
 kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.2.0/release-with-gcppubsub.yaml
 ```
