@@ -1,8 +1,8 @@
 # Hello World - Go sample
 
 A simple web app written in Go that you can use for testing.
-It reads in an env variable `TARGET` and prints "Hello ${TARGET}!". If
-TARGET is not specified, it will use "World" as the TARGET.
+It reads in an env variable `TARGET` and prints `Hello ${TARGET}!`. If
+`TARGET` is not specified, it will use `World` as the `TARGET`.
 
 ## Prerequisites
 
@@ -159,7 +159,8 @@ folder) you're ready to build and deploy the sample app.
     ```
 
 1. Now you can make a request to your app to see the results. Replace
-   `{IP_ADDRESS}` with the address you see returned in the previous step.
+   `{IP_ADDRESS}` with the `EXTERNAL-IP` address you see returned in the
+   previous step.
 
     ```shell
     curl -H "Host: helloworld-go.default.example.com" http://{IP_ADDRESS}
