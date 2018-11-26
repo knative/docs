@@ -61,7 +61,7 @@ environment variables.
 To make sure the cluster is large enough to host all the Knative and Istio
 components, the recommended configuration for a cluster is:
 
-- Kubernetes version 1.10 or later
+- Kubernetes version  or later
 - 4 vCPU nodes with 16GB memory (`b2c.4x16`)
 
 1.  Set `ibmcloud` to the appropriate region:
@@ -71,6 +71,7 @@ components, the recommended configuration for a cluster is:
 1.  Select a Kubernetes version:
     ```bash
     ibmcloud cs kube-versions
+    export CLUSTER_K8S_VERSION=[a version from the list, must be >1.10]
     ```
 1.  Create a Kubernetes cluster on IKS with the required specifications:
 
