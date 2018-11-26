@@ -155,15 +155,16 @@ kubectl create --filename manifest.yaml
 To make sure everything works, capture the host URL and the IP of the ingress endpoint
 in environment variables:
 
-```
+```shell
 # Put the Host URL into an environment variable.
-export SERVICE_HOST=`kubectl get route private-repos \
-  --output jsonpath="{.status.domain}"`
+export SERVICE_HOST=$(kubectl get route private-repos \
+  --output jsonpath="{.status.domain}")
 ```
 
-```
+```shell
 # Put the IP address into an environment variable
-export SERVICE_IP=`kubectl get svc knative-ingressgateway --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
+export SERVICE_IP=$(kubectl get svc knative-ingressgateway --namespace istio-system \
+  --output jsonpath="{.status.loadBalancer.ingress[*].ip}")
 ```
 
 > Note: If your cluster is running outside a cloud provider (for example, on Minikube),
@@ -171,12 +172,14 @@ export SERVICE_IP=`kubectl get svc knative-ingressgateway --namespace istio-syst
   `hostIP` and `nodePort` as the service IP:
 
    ```shell
-   export SERVICE_IP=$(kubectl get po --selector knative=ingressgateway --namespace istio-system --output 'jsonpath= .  {.items[0].status.hostIP}'):$(kubectl get svc knative-ingressgateway --namespace istio-system --output 'jsonpath={.spec.ports[? (@.port==80)].nodePort}')
+   export SERVICE_IP=$(kubectl get po --selector knative=ingressgateway --namespace istio-system \
+     --output 'jsonpath= .  {.items[0].status.hostIP}'):$(kubectl get svc knative-ingressgateway \
+     --namespace istio-system --output 'jsonpath={.spec.ports[? (@.port==80)].nodePort}')
    ```
 
 Now curl the service IP to make sure the deployment succeeded:
 
-```
+```shell
 curl -H "Host: $SERVICE_HOST" http://$SERVICE_IP
 ```
 
