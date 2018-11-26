@@ -80,27 +80,32 @@ following instructions recreate the source files from this folder.
    block below into it.
 
     ```docker
-	# Use the existing Haskell image as our base
-	FROM haskell:8.2.2 as builder
+    # Use the official Haskell image to create a build artifact.
+    # https://hub.docker.com/_/haskell/
+    FROM haskell:8.2.2 as builder
 
-	# Checkout our code onto the Docker container
-	WORKDIR /app
-	ADD . /app
+    # Copy local code to the container image.
+    WORKDIR /app
+    COPY . .
 
-	# Build and test our code, then install the “helloworld-haskell-exe” executable
-	RUN stack setup
-	RUN stack build --copy-bins
+    # Build and test our code, then build the “helloworld-haskell-exe” executable.
+    RUN stack setup
+    RUN stack build --copy-bins
 
-	# Copy the "helloworld-haskell-exe" executable to the image using docker multi stage build
-	FROM fpco/haskell-scratch:integer-gmp
-	WORKDIR /root/
-	COPY --from=builder /root/.local/bin/helloworld-haskell-exe .
+    # Use a Docker multi-stage build to create a lean production image.
+    # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
+    FROM fpco/haskell-scratch:integer-gmp
 
-	# Expose a port to run our application
-	EXPOSE 8080
+    # Copy the "helloworld-haskell-exe" executable from the builder stage to the production image.
+    WORKDIR /root/
+    COPY --from=builder /root/.local/bin/helloworld-haskell-exe .
 
-	# Run the server command
-	CMD ["./helloworld-haskell-exe"]
+    # Configure and document the service HTTP port.
+    ENV PORT 8080
+    EXPOSE $PORT
+
+    # Run the web service on container startup.
+    CMD ["./helloworld-haskell-exe"]
     ```
 
 1. Create a new file, `service.yaml` and copy the following service definition
