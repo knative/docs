@@ -16,7 +16,7 @@ through a webhook.
 ## Build the sample code
 
 1. Use Docker to build a container image for this service. Replace 
-   `{username}` with your Docker Hub username in the following commands.
+   `username` with your Docker Hub username in the following commands.
 
   ```shell
   export DOCKER_HUB_USERNAME=username
@@ -33,7 +33,7 @@ through a webhook.
    incoming requests.
 
    1. Follow the GitHub instructions to [create a personal access token](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/).
-      Ensure to grant the `repo` permission to give read/write access to the
+      Ensure to grant the `repo` permission to give `read/write` access to the
       personal access token.
    1. Base64 encode the access token:
 
@@ -104,7 +104,6 @@ service "gitwebhook" created
         ```shell
         $ kubectl get ksvc gitwebhook \
            --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
-
         NAME                DOMAIN
         gitwebhook          gitwebhook.default.example.com
         ```
