@@ -73,12 +73,17 @@ components, the recommended configuration for a cluster is:
     ```bash
     ibmcloud cs region-set $CLUSTER_REGION
     ```
+1.  Select a Kubernetes version:
+    ```bash
+    ibmcloud cs kube-versions
+    export CLUSTER_K8S_VERSION=[a version from the list, must be >1.10]
+    ```
 1.  Create a Kubernetes cluster on IKS with the required specifications:
 
     ```bash
     ibmcloud cs cluster-create --name=$CLUSTER_NAME \
       --zone=$CLUSTER_ZONE \
-      --kube-version=1.10.3 \
+      --kube-version=$CLUSTER_K8S_VERSION \
       --machine-type=b2c.4x16 \
       --workers=3
     ```
@@ -91,7 +96,7 @@ components, the recommended configuration for a cluster is:
     ```bash
     ibmcloud cs cluster-create --name=$CLUSTER_NAME \
       --zone=$CLUSTER_ZONE \
-      --kube-version=1.10.3 \
+      --kube-version=$CLUSTER_K8S_VERSION \
       --machine-type=b2c.4x16 \
       --workers=3 \
       --private-vlan $PRIVATE_VLAN_ID \
