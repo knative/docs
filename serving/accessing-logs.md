@@ -16,7 +16,7 @@ start a local proxy with the following command:
   the Kibana UI is exposed only within the cluster.
 
 * Navigate to the
-[Kibana UI](http://localhost:8001/api/v1/namespaces/monitoring/services/kibana-logging/proxy/app/kibana).
+[Kibana UI](http://localhost:8001/api/v1/namespaces/knative-monitoring/services/kibana-logging/proxy/app/kibana).
 *It might take a couple of minutes for the proxy to work*.
 
   The Discover tab of the Kibana UI looks like this:

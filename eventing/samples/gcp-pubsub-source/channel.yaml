@@ -1,8 +1,7 @@
 apiVersion: eventing.knative.dev/v1alpha1
 kind: Channel
 metadata:
-  name: qux-1
-  namespace: default
+  name: pubsub-test
 spec:
   provisioner:
     apiVersion: eventing.knative.dev/v1alpha1

@@ -119,16 +119,19 @@ container for the application.
      runLatest:
        configuration:
          build:
-           serviceAccountName: build-bot
-           source:
-             git:
-               url: https://github.com/mchmarny/simple-app.git
-               revision: master
-           template:
-             name: kaniko
-             arguments:
-             - name: IMAGE
-               value: docker.io/{DOCKER_USERNAME}/app-from-source:latest
+           apiVersion: build.knative.dev/v1alpha1
+           kind: Build
+           spec:
+             serviceAccountName: build-bot
+             source:
+               git:
+                 url: https://github.com/mchmarny/simple-app.git
+                 revision: master
+             template:
+               name: kaniko
+               arguments:
+               - name: IMAGE
+                 value: docker.io/{DOCKER_USERNAME}/app-from-source:latest
          revisionTemplate:
            spec:
              container:
@@ -136,7 +139,7 @@ container for the application.
                imagePullPolicy: Always
                env:
                - name: SIMPLE_MSG
-                 value: "Hello sample app!"
+                 value: "Hello from the sample app!"
    ```
 
 1. Apply this manifest using `kubectl`, and watch the results:
@@ -223,7 +226,7 @@ container for the application.
 
     ```shell
     curl -H "Host: app-from-source.default.example.com" http://{IP_ADDRESS}
-    Hello World!
+    Hello from the sample app!"
     ```
 
 ## Removing the sample app deployment

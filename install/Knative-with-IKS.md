@@ -1,7 +1,12 @@
 # Knative Install on IBM Cloud Kubernetes Service (IKS)
 
 This guide walks you through the installation of the latest version of Knative
-using pre-built images.
+using pre-built images.  
+
+You may also have it all installed for you by clicking the button below:  
+[![Deploy to IBM Cloud](https://bluemix.net/deploy/button_x2.png)](https://console.bluemix.net/devops/setup/deploy?repository=https://git.ng.bluemix.net/start-with-knative/toolchain.git)  
+
+More [instructions on the deploy button here](https://git.ng.bluemix.net/start-with-knative/toolchain/blob/master/README.md).
 
 You can find [guides for other platforms here](README.md).
 
@@ -126,7 +131,7 @@ Knative depends on Istio.
 
 1.  Install Istio:
     ```bash
-    kubectl apply --filename https://raw.githubusercontent.com/knative/serving/v0.2.0/third_party/istio-1.0.2/istio.yaml
+    kubectl apply --filename https://raw.githubusercontent.com/knative/serving/v0.2.1/third_party/istio-1.0.2/istio.yaml
     ```
 1.  Label the default namespace with `istio-injection=enabled`:
     ```bash
@@ -153,7 +158,7 @@ You can install the Knative Serving and Build components together, or Build on i
 
 1. Run the `kubectl apply` command to install Knative and its dependencies:
     ```bash
-    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.0/release.yaml
+    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.1/release.yaml
     ```
 1. Monitor the Knative components until all of the components show a
    `STATUS` of `Running`:
@@ -167,7 +172,7 @@ You can install the Knative Serving and Build components together, or Build on i
 1. Run the `kubectl apply` command to install
    [Knative Build](https://github.com/knative/build) and its dependencies:
     ```bash
-    kubectl apply --filename https://raw.githubusercontent.com/knative/serving/v0.2.0/third_party/config/build/release.yaml
+    kubectl apply --filename https://raw.githubusercontent.com/knative/serving/v0.2.1/third_party/config/build/release.yaml
     ```
 1. Monitor the Knative Build components until all of the components show a
    `STATUS` of `Running`:

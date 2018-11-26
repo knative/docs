@@ -128,7 +128,7 @@ asssigned an external IP address.
    step.
    
     ```shell
-    curl -H "Host: helloworld-go.default.example.com" http://IP_ADDRESS
+    curl -H "Host: helloworld-go.default.example.com" http://${IP_ADDRESS}
     Hello World: Go Sample v1!
     ```
    
@@ -145,6 +145,8 @@ asssigned an external IP address.
 
     It can take a few seconds for Knative to scale up your application and return
     a response.
+
+    > Note: Add `-v` option to get more detail if the `curl` command failed.
 
 You've successfully deployed your first application using Knative!
 
