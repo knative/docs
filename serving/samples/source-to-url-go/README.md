@@ -76,12 +76,12 @@ available, but these are the key steps:
 
 
    ```yaml
-    apiVersion: v1
-    kind: ServiceAccount
-    metadata:
-      name: build-bot
-    secrets:
-    - name: basic-user-pass
+   apiVersion: v1
+   kind: ServiceAccount
+   metadata:
+     name: build-bot
+   secrets:
+   - name: basic-user-pass
    ```
 
 1. After you have created the manifest files, apply them to your cluster with `kubectl`:
