@@ -66,7 +66,7 @@ following instructions recreate the source files from this folder.
     # Copy local code to the container image.
     COPY . /go/src/github.com/knative/docs/helloworld
 
-    # Build the outyet command inside the container.
+    # Build the helloworld command inside the container.
     # (You may fetch or manage dependencies here,
     # either manually or with a tool like "godep".)
     RUN go install github.com/knative/docs/helloworld
