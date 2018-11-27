@@ -63,11 +63,11 @@ following instructions recreate the source files from this folder.
 	import           Web.Scotty.Trans
 
 	main :: IO ()
-	  main = do
-	    t <- fromMaybe "World" <$> lookupEnv "TARGET"
-	    pStr <- fromMaybe "8080" <$> lookupEnv "PORT"
-	    let p = read pStr :: Int
-	    scotty p (route t)
+	main = do
+	  t <- fromMaybe "World" <$> lookupEnv "TARGET"
+	  pStr <- fromMaybe "8080" <$> lookupEnv "PORT"
+	  let p = read pStr :: Int
+	  scotty p (route t)
 
 	route :: String -> ScottyM()
 	route t = get "/" $ hello t
