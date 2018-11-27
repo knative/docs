@@ -1,19 +1,24 @@
+# Use the official Node 8 image.
+# https://hub.docker.com/_/node
 FROM node:8
 
-# Create app directory
+# Create and change to the app directory.
 WORKDIR /usr/src/app
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
+# Copy application dependency manifests to the container image.
+# A wildcard is used to ensure both package.json AND package-lock.json are copied.
+# Copying this separately prevents re-running npm install on every code change.
 COPY package*.json ./
 
+# Install production dependencies.
 RUN npm install --only=production
-# If you are building your code for production
-# RUN npm install --only=production
 
-# Bundle app source
+# Copy local code to the container image.
 COPY . .
 
-EXPOSE 8080
+# Configure and document the service HTTP port.
+ENV PORT 8080
+EXPOSE $PORT
+
+# Run the web service on container startup.
 CMD [ "npm", "start" ]

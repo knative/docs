@@ -13,7 +13,7 @@ spec:
       name: buildpack
       arguments:
       - name: IMAGE
-        value: &image DOCKER_REPO_OVERRIDE/buildpack-function
+        value: DOCKER_REPO_OVERRIDE/buildpack-function
       - name: BUILDPACK_ORDER
         value: https://github.com/projectriff/node-function-invoker.git#buildpack
       - name: SKIP_DETECT
@@ -31,7 +31,7 @@ spec:
         knative.dev/type: function
     spec:
       container:
-        image: *image
+        image: DOCKER_REPO_OVERRIDE/buildpack-function 
 ---
 apiVersion: serving.knative.dev/v1alpha1
 kind: Route

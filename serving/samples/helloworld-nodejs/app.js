@@ -20,11 +20,11 @@ const app = express();
 app.get('/', function (req, res) {
   console.log('Hello world received a request.');
 
-  var target = process.env.TARGET || 'NOT SPECIFIED';
-  res.send('Hello world: ' + target);
+  const target = process.env.TARGET || 'World';
+  res.send('Hello ' + target + '!');
 });
 
-var port = 8080;
+const port = process.env.PORT || 8080;
 app.listen(port, function () {
-  console.log('Hello world listening on port',  port);
+  console.log('Hello world listening on port', port);
 });

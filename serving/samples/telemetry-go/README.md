@@ -13,7 +13,7 @@ using the default installation.
 installed.
 2. Check if Knative monitoring components are installed:
 ```
-kubectl get pods -n monitoring
+kubectl get pods --namespace knative-monitoring
 ```
   * If pods aren't found, install [Knative monitoring component](../../installing-logging-metrics-traces.md).
 3. Install [Docker](https://docs.docker.com/get-started/#prepare-your-docker-environment).
@@ -68,7 +68,7 @@ configuration file (`serving/samples/telemetry-go/sample.yaml`):
 
 Deploy this application to Knative Serving:
 ```
-kubectl apply -f serving/samples/telemetry-go/
+kubectl apply --filename serving/samples/telemetry-go/
 ```
 
 ## Explore the Service
@@ -77,17 +77,17 @@ Inspect the created resources with the `kubectl` commands:
 
  * View the created Route resource:
  ```
- kubectl get route -o yaml
+ kubectl get route --output yaml
  ```
 
  * View the created Configuration resource:
  ```
- kubectl get configurations -o yaml
+ kubectl get configurations --output yaml
  ```
 
  * View the Revision that was created by the Configuration:
  ```
- kubectl get revisions -o yaml
+ kubectl get revisions --output yaml
  ```
 
 ## Access the Service
@@ -97,7 +97,7 @@ To access this service via `curl`, you need to determine its ingress address.
 1. To determine if your service is ready:  
   Check the status of your Knative gateway:
   ```
-  kubectl get svc knative-ingressgateway -n istio-system --watch
+  kubectl get svc knative-ingressgateway --namespace istio-system --watch
   ```
 
   When the service is ready, you'll see an IP address in the `EXTERNAL-IP` field:
@@ -109,7 +109,7 @@ To access this service via `curl`, you need to determine its ingress address.
 
   Check the status of your route:
   ```
-  kubectl get route -o yaml
+  kubectl get route --output yaml
   ```
   When the route is ready, you'll see the following fields reported as:
   ```YAML
@@ -124,8 +124,8 @@ To access this service via `curl`, you need to determine its ingress address.
 2. Export the ingress hostname and IP as environment
 variables:
 ```
-export SERVICE_HOST=`kubectl get route telemetrysample-route -o jsonpath="{.status.domain}"`
-export SERVICE_IP=`kubectl get svc knative-ingressgateway -n istio-system -o jsonpath="{.status.loadBalancer.ingress[*].ip}"`
+export SERVICE_HOST=`kubectl get route telemetrysample-route --output jsonpath="{.status.domain}"`
+export SERVICE_IP=`kubectl get svc knative-ingressgateway --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
 ```
 
 3. Make a request to the service to see the `Hello World!` message:
@@ -160,5 +160,5 @@ Then browse to http://localhost:9090.
 
 To clean up the sample service:
 ```
-kubectl delete -f serving/samples/telemetry-go/
+kubectl delete --filename serving/samples/telemetry-go/
 ```

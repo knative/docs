@@ -1,8 +1,9 @@
 # Hello World - Rust sample
 
 A simple web app written in Rust that you can use for testing.
-It reads in an env variable `TARGET` and prints "Hello World: ${TARGET}!". If
-TARGET is not specified, it will use "NOT SPECIFIED" as the TARGET.
+It reads in an env variable `TARGET` and prints "Hello ${TARGET}!". If
+
+TARGET is not specified, it will use "World" as the TARGET.
 
 ## Prerequisites
 
@@ -48,15 +49,25 @@ following instructions recreate the source files from this folder.
     fn main() {
         pretty_env_logger::init();
 
-        let addr = ([0, 0, 0, 0], 8080).into();
+        let mut port: u16 = 8080;
+        match env::var("PORT") {
+            Ok(p) => {
+                match p.parse::<u16>() {
+                    Ok(n) => {port = n;},
+                    Err(_e) => {},
+                };
+            }
+            Err(_e) => {},
+        };
+        let addr = ([0, 0, 0, 0], port).into();
 
         let new_service = || {
             service_fn_ok(|_| {
 
-                let mut hello = "Hello world: ".to_string();
+                let mut hello = "Hello ".to_string();
                 match env::var("TARGET") {
                     Ok(target) => {hello.push_str(&target);},
-                    Err(_e) => {hello.push_str("NOT SPECIFIED")},
+                    Err(_e) => {hello.push_str("World")},
                 };
 
                 Response::new(Body::from(hello))
@@ -77,15 +88,22 @@ following instructions recreate the source files from this folder.
    block below into it.
 
     ```docker
+    # Use the official Rust image.
+    # https://hub.docker.com/_/rust
     FROM rust:1.27.0
 
+    # Copy local code to the container image.
     WORKDIR /usr/src/app
     COPY . .
 
+    # Install production dependencies and build a release artifact.
     RUN cargo install
 
-    EXPOSE 8080
+    # Configure and document the service HTTP port.
+    ENV PORT 8080
+    EXPOSE $PORT
 
+    # Run the web service on container startup.
     CMD ["hellorust"]
     ```
 
@@ -133,7 +151,7 @@ folder) you're ready to build and deploy the sample app.
    the previous step. Apply the configuration using `kubectl`:
 
     ```shell
-    kubectl apply -f service.yaml
+    kubectl apply --filename service.yaml
     ```
     
 1. Now that your service is created, Knative will perform the following steps:
@@ -142,12 +160,12 @@ folder) you're ready to build and deploy the sample app.
    * Automatically scale your pods up and down (including to zero active pods).
 
 1. To find the IP address for your service, enter
-   `kubectl get svc knative-ingressgateway -n istio-system` to get the ingress IP for your
+   `kubectl get svc knative-ingressgateway --namespace istio-system` to get the ingress IP for your
    cluster. If your cluster is new, it may take sometime for the service to get asssigned
    an external IP address.
 
     ```shell
-    kubectl get svc knative-ingressgateway -n istio-system
+    kubectl get svc knative-ingressgateway --namespace istio-system
 
     NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
     knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
@@ -156,16 +174,10 @@ folder) you're ready to build and deploy the sample app.
 
 1. To find the URL for your service, enter:
     ```
-    kubectl get ksvc helloworld-rust  -o=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+    kubectl get ksvc helloworld-rust  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
     NAME                DOMAIN
     helloworld-rust     helloworld-rust.default.example.com
     ```
-
-    > Note: `ksvc` is an alias for `services.serving.knative.dev`. If you have
-      an older version (version 0.1.0) of Knative installed, you'll need to use
-      the long name until you upgrade to version 0.1.1 or higher. See
-      [Checking Knative Installation Version](../../../install/check-install-version.md)
-      to learn how to see what version you have installed.
 
 1. Now you can make a request to your app and see the result. Replace
    `{IP_ADDRESS}` with the address you see returned in the previous step.
@@ -180,5 +192,5 @@ folder) you're ready to build and deploy the sample app.
 To remove the sample app from your cluster, delete the service record:
 
 ```shell
-kubectl delete -f service.yaml
+kubectl delete --filename service.yaml
 ```

@@ -22,6 +22,7 @@ Knative components on the following platforms:
 * [Knative Install on IBM Cloud Kubernetes Service](Knative-with-IKS.md)
 * [Knative Install on Minikube](Knative-with-Minikube.md)
 * [Knative Install on OpenShift](Knative-with-OpenShift.md)
+* [Knative Install on Minishift](Knative-with-Minishift.md)
 * [Knative Install on Pivotal Container Service](Knative-with-PKS.md)
 
 If you already have a Kubernetes cluster you're comfortable installing
@@ -51,7 +52,7 @@ and set up an Istio IP range for outbound network access:
 * [Configure outbound network access](../serving/outbound-network-access.md)
 * [Configuring HTTPS with a custom certificate](../serving/using-an-ssl-cert.md)
 
-## Checking the Version of Your Knative Serving Installation
+## Checking the version of your Knative Serving installation
 
 * [Checking the version of your Knative Serving installation](check-install-version.md)
 

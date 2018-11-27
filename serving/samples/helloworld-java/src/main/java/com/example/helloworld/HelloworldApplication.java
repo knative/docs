@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 public class HelloworldApplication {
 
-	@Value("${TARGET:NOT SPECIFIED}")
+	@Value("${TARGET:World}")
 	String message;
 
 	@RestController
 	class HelloworldController {
 		@GetMapping("/")
 		String hello() {
-			return "Hello World: " + message;
+			return "Hello " + message + "!";
 		}
 	}
 

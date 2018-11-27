@@ -20,7 +20,18 @@ To install Pivotal Container Service (PKS), follow the documentation at https://
 
 ## Creating a Kubernetes cluster
 
-To create a cluster, follow the documentation at https://docs.pivotal.io/runtimes/pks/1-1/create-cluster.html
+> NOTE: Knative uses Istio sidecar injection and requires privileged mode for your init containers.
+
+To enable privileged mode and create a cluster:
+
+1. Enable privileged mode:
+   1. Open the Pivotal Container Service tile in PCF Ops Manager.
+   1. In the plan configuration that you want to use, enable both of the following:
+      * Enable Privileged Containers - Use with caution
+      * Disable DenyEscalatingExec 
+   1. Save your changes. 
+   1. In the PCF Ops Manager, review and then apply your changes.
+1. [Create a cluster](https://docs.pivotal.io/runtimes/pks/1-1/create-cluster.html).
 
 ## Access the cluster
 
@@ -32,7 +43,7 @@ Knative depends on Istio. Istio workloads require privileged mode for Init Conta
 
 1. Install Istio:
     ```bash
-    kubectl apply -f https://raw.githubusercontent.com/knative/serving/v0.1.1/third_party/istio-0.8.0/istio.yaml
+    kubectl apply --filename https://raw.githubusercontent.com/knative/serving/v0.2.1/third_party/istio-1.0.2/istio.yaml
     ```
 1. Label the default namespace with `istio-injection=enabled`:
     ```bash
@@ -41,7 +52,7 @@ Knative depends on Istio. Istio workloads require privileged mode for Init Conta
 1. Monitor the Istio components until all of the components show a `STATUS` of
 `Running` or `Completed`:
     ```bash
-    kubectl get pods -n istio-system
+    kubectl get pods --namespace istio-system
     ```
 
 It will take a few minutes for all the components to be up and running; you can
@@ -58,13 +69,13 @@ You can install the Knative Serving and Build components together, or Build on i
 
 1. Run the `kubectl apply` command to install Knative and its dependencies:
     ```bash
-    kubectl apply -f https://github.com/knative/serving/releases/download/v0.1.1/release.yaml
+    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.1/release.yaml
     ```
 1. Monitor the Knative components until all of the components show a
    `STATUS` of `Running`:
     ```bash
-    kubectl get pods -n knative-serving
-    kubectl get pods -n knative-build
+    kubectl get pods --namespace knative-serving
+    kubectl get pods --namespace knative-build
     ```
 
 ### Installing Knative Build only
@@ -72,12 +83,12 @@ You can install the Knative Serving and Build components together, or Build on i
 1. Run the `kubectl apply` command to install
    [Knative Build](https://github.com/knative/build) and its dependencies:
     ```bash
-    kubectl apply -f https://raw.githubusercontent.com/knative/serving/v0.1.1/third_party/config/build/release.yaml
+    kubectl apply --filename https://raw.githubusercontent.com/knative/serving/v0.2.1/third_party/config/build/release.yaml
     ```
 1. Monitor the Knative Build components until all of the components show a
    `STATUS` of `Running`:
     ```bash
-    kubectl get pods -n knative-build
+    kubectl get pods --namespace knative-build
 
 Just as with the Istio components, it will take a few seconds for the Knative
 components to be up and running; you can rerun the `kubectl get` command to see

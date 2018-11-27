@@ -6,7 +6,7 @@ to learn more about Knative Serving resources.
 
 | Name | Description | Languages |
 | ---- | ----------- |:---------:|
-| Hello World | A quick introduction that highlights how to deploy an app using Knative Serving. | [C#](helloworld-csharp/README.md), [Go](helloworld-go/README.md), [Java](helloworld-java/README.md), [Node.js](helloworld-nodejs/README.md), [PHP](helloworld-php/README.md), [Python](helloworld-python/README.md), [Ruby](helloworld-ruby/README.md), [Rust](helloworld-rust/README.md) |
+| Hello World | A quick introduction that highlights how to deploy an app using Knative Serving. | [C#](helloworld-csharp/README.md), [Clojure](helloworld-clojure/README.md), [Eclipse Vert.x](helloworld-vertx/README.md), [Go](helloworld-go/README.md), [Java](helloworld-java/README.md), [Kotlin](helloworld-kotlin/README.md), [Node.js](helloworld-nodejs/README.md), [PHP](helloworld-php/README.md), [Python](helloworld-python/README.md), [Ruby](helloworld-ruby/README.md), [Rust](helloworld-rust/README.md) |
 | Advanced Deployment | Simple blue/green-like application deployment pattern illustrating the process of updating a live application without dropping any traffic. | [YAML](blue-green-deployment.md) |
 | Autoscale | A demonstration of the autoscaling capabilities of Knative. | [Go](autoscale-go/README.md) |
 | Private Repo Build | An example of deploying a Knative Serving Service using a Github deploy-key and a DockerHub image pull secret. | [Go](build-private-repo-go/README.md) |
@@ -19,4 +19,4 @@ to learn more about Knative Serving resources.
 | Source to URL | A sample that shows how to use Knative to go from source code in a git repository to a running application with a URL. | [Go](source-to-url-go/README.md) |
 | Telemetry | This sample runs a simple web server that makes calls to other in-cluster services and responds to requests with "Hello World!". The purpose of this sample is to show generating metrics, logs, and distributed traces. | [Go](telemetry-go/README.md) |
 | Thumbnailer | An example of deploying a "dockerized" application to Knative Serving which takes video URL as an input and generates its thumbnail image. | [Go](thumbnailer-go/README.md) |
-| Traffic Splitting | This samples builds off the [Creating a RESTful Service](../rest-api-go) sample to illustrate applying a revision, then using that revision for manual traffic splitting. | [YAML](traffic-splitting/README.md) |
+| Traffic Splitting | This samples builds off the [Creating a RESTful Service](./rest-api-go) sample to illustrate applying a revision, then using that revision for manual traffic splitting. | [YAML](traffic-splitting/README.md) |

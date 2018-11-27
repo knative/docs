@@ -19,7 +19,7 @@ of publishing the Knative domain.
 1. A public domain that will be used in Knative.
 1. Knative configured to use your custom domain.
 ```shell
-kubectl edit cm config-domain -n knative-serving
+kubectl edit cm config-domain --namespace knative-serving
 ```
 This command opens your default text editor and allows you to edit the config 
 map.
@@ -99,7 +99,7 @@ gcloud dns record-sets transaction execute --zone "my-org-do"
 
 Use the following command to apply the [manifest](https://github.com/kubernetes-incubator/external-dns/blob/master/docs/tutorials/gke.md#manifest-for-clusters-without-rbac-enabled) to install ExternalDNS 
 ```shell
-cat <<EOF | kubectl apply -f -
+cat <<EOF | kubectl apply --filename -
 <the-content-of-manifest-with-custom-domain-filter>
 EOF
 ```
@@ -116,7 +116,7 @@ In order to publish the Knative Gateway service, the annotation
 `external-dns.alpha.kubernetes.io/hostname: '*.external-dns-test.my-org.do'`
 needs to be added into Knative gateway service:
 ```shell
-kubectl edit svc knative-ingressgateway -n istio-system
+kubectl edit svc knative-ingressgateway --namespace istio-system
 ```
 This command opens your default text editor and allows you to add the 
 annotation to `knative-ingressgateway` service. After you've added your

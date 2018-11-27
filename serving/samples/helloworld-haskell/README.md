@@ -1,8 +1,8 @@
 # Hello World - Haskell sample
 
 A simple web app written in Haskell that you can use for testing.
-It reads in an env variable `TARGET` and prints "Hello World: ${TARGET}!". If
-TARGET is not specified, it will use "NOT SPECIFIED" as the TARGET.
+It reads in an env variable `TARGET` and prints "Hello ${TARGET}!". If
+TARGET is not specified, it will use "World" as the TARGET.
 
 ## Prerequisites
 
@@ -63,42 +63,49 @@ following instructions recreate the source files from this folder.
 	import           Web.Scotty.Trans
 
 	main :: IO ()
-	main = do
-      t <- fromMaybe "NOT SPECIFIED" <$> lookupEnv "TARGET"
-      scotty 8080 (route t)
+  main = do
+    t <- fromMaybe "World" <$> lookupEnv "TARGET"
+    pStr <- fromMaybe "8080" <$> lookupEnv "PORT"
+    let p = read pStr :: Int
+    scotty p (route t)
 
 	route :: String -> ScottyM()
 	route t = get "/" $ hello t
 
 	hello :: String -> ActionM()
-	hello t = text $ pack ("Hello world: " ++ t)
+	hello t = text $ pack ("Hello " ++ t)
     ```
 
 1. In your project directory, create a file named `Dockerfile` and copy the code
    block below into it.
 
     ```docker
-	# Use the existing Haskell image as our base
-	FROM haskell:8.2.2 as builder
+    # Use the official Haskell image to create a build artifact.
+    # https://hub.docker.com/_/haskell/
+    FROM haskell:8.2.2 as builder
 
-	# Checkout our code onto the Docker container
-	WORKDIR /app
-	ADD . /app
+    # Copy local code to the container image.
+    WORKDIR /app
+    COPY . .
 
-	# Build and test our code, then install the “helloworld-haskell-exe” executable
-	RUN stack setup
-	RUN stack build --copy-bins
+    # Build and test our code, then build the “helloworld-haskell-exe” executable.
+    RUN stack setup
+    RUN stack build --copy-bins
 
-	# Copy the "helloworld-haskell-exe" executable to the image using docker multi stage build
-	FROM fpco/haskell-scratch:integer-gmp
-	WORKDIR /root/
-	COPY --from=builder /root/.local/bin/helloworld-haskell-exe .
+    # Use a Docker multi-stage build to create a lean production image.
+    # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
+    FROM fpco/haskell-scratch:integer-gmp
 
-	# Expose a port to run our application
-	EXPOSE 8080
+    # Copy the "helloworld-haskell-exe" executable from the builder stage to the production image.
+    WORKDIR /root/
+    COPY --from=builder /root/.local/bin/helloworld-haskell-exe .
 
-	# Run the server command
-	CMD ["./helloworld-haskell-exe"]
+    # Configure and document the service HTTP port.
+    ENV PORT 8080
+    EXPOSE $PORT
+
+    # Run the web service on container startup.
+    CMD ["./helloworld-haskell-exe"]
     ```
 
 1. Create a new file, `service.yaml` and copy the following service definition
@@ -145,7 +152,7 @@ folder) you're ready to build and deploy the sample app.
    the previous step. Apply the configuration using `kubectl`:
 
     ```shell
-    kubectl apply -f service.yaml
+    kubectl apply --filename service.yaml
     ```
 
 1. Now that your service is created, Knative will perform the following steps:
@@ -154,12 +161,12 @@ folder) you're ready to build and deploy the sample app.
    * Automatically scale your pods up and down (including to zero active pods).
 
 1. To find the IP address for your service, enter
-   `kubectl get svc knative-ingressgateway -n istio-system` to get the ingress IP for your
+   `kubectl get svc knative-ingressgateway --namespace istio-system` to get the ingress IP for your
    cluster. If your cluster is new, it may take some time for the service to get assigned
    an external IP address.
 
     ```shell
-    kubectl get svc knative-ingressgateway -n istio-system
+    kubectl get svc knative-ingressgateway --namespace istio-system
 
     NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
     knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
@@ -169,22 +176,16 @@ folder) you're ready to build and deploy the sample app.
     For minikube or bare-metal, get IP_ADDRESS by running the following command
 
     ```shell
-    echo $(kubectl get node  -o 'jsonpath={.items[0].status.addresses[0].address}'):$(kubectl get svc knative-ingressgateway -n istio-system   -o 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
+    echo $(kubectl get node  --output 'jsonpath={.items[0].status.addresses[0].address}'):$(kubectl get svc knative-ingressgateway --namespace istio-system   --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
 
     ```
 
 1. To find the URL for your service, enter:
 	```
-    kubectl get ksvc helloworld-haskell  -o=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+    kubectl get ksvc helloworld-haskell  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
     NAME                   DOMAIN
     helloworld-haskell     helloworld-haskell.default.example.com
     ```
-
-    > Note: `ksvc` is an alias for `services.serving.knative.dev`. If you have
-      an older version (version 0.1.0) of Knative installed, you'll need to use
-      the long name until you upgrade to version 0.1.1 or higher. See
-      [Checking Knative Installation Version](../../../install/check-install-version.md)
-      to learn how to see what version you have installed.
 
 1. Now you can make a request to your app and see the result. Replace
    `{IP_ADDRESS}` with the address you see returned in the previous step.
@@ -199,6 +200,6 @@ folder) you're ready to build and deploy the sample app.
 To remove the sample app from your cluster, delete the service record:
 
 ```shell
-kubectl delete -f service.yaml
+kubectl delete --filename service.yaml
 ```
 

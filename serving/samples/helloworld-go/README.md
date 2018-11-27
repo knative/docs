@@ -1,8 +1,8 @@
 # Hello World - Go sample
 
 A simple web app written in Go that you can use for testing.
-It reads in an env variable `TARGET` and prints "Hello World: ${TARGET}!". If
-TARGET is not specified, it will use "NOT SPECIFIED" as the TARGET.
+It reads in an env variable `TARGET` and prints "Hello ${TARGET}!". If
+TARGET is not specified, it will use "World" as the TARGET.
 
 ## Prerequisites
 
@@ -25,7 +25,6 @@ following instructions recreate the source files from this folder.
     package main
 
     import (
-      "flag"
       "fmt"
       "log"
       "net/http"
@@ -36,17 +35,22 @@ following instructions recreate the source files from this folder.
       log.Print("Hello world received a request.")
       target := os.Getenv("TARGET")
       if target == "" {
-        target = "NOT SPECIFIED"
+        target = "World"
       }
-      fmt.Fprintf(w, "Hello World: %s!\n", target)
+      fmt.Fprintf(w, "Hello %s!\n", target)
     }
 
     func main() {
-      flag.Parse()
       log.Print("Hello world sample started.")
 
       http.HandleFunc("/", handler)
-      http.ListenAndServe(":8080", nil)
+
+      port := os.Getenv("PORT")
+      if port == "" {
+        port = "8080"
+      }
+
+      log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
     }
     ```
 
@@ -55,23 +59,31 @@ following instructions recreate the source files from this folder.
    [Deploying Go servers with Docker](https://blog.golang.org/docker).
 
     ```docker
-    # Start from a Debian image with the latest version of Go installed
-    # and a workspace (GOPATH) configured at /go.
-    FROM golang
+    # Use the offical Golang image to create a build artifact.
+    # This is based on Debian and sets the GOPATH to /go.
+    FROM golang as builder
 
-    # Copy the local package files to the container's workspace.
-    ADD . /go/src/github.com/knative/docs/helloworld
+    # Copy local code to the container image.
+    COPY . /go/src/github.com/knative/docs/helloworld
 
-    # Build the helloworld command inside the container.
+    # Build the outyet command inside the container.
     # (You may fetch or manage dependencies here,
     # either manually or with a tool like "godep".)
     RUN go install github.com/knative/docs/helloworld
 
-    # Run the helloworld command by default when the container starts.
-    ENTRYPOINT /go/bin/helloworld
+    # Use a Docker multi-stage build to create a lean production image.
+    # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
+    FROM alpine
 
-    # Document that the service listens on port 8080.
-    EXPOSE 8080
+    # Copy the binary to the production image from the builder stage.
+    COPY --from=builder /go/bin/helloworld /helloworld
+
+    # Configure and document the service HTTP port.
+    ENV PORT 8080
+    EXPOSE $PORT
+
+    # Run the web service on container startup.
+    CMD ["/helloworld"]
     ```
 
 1. Create a new file, `service.yaml` and copy the following service definition
@@ -118,7 +130,7 @@ folder) you're ready to build and deploy the sample app.
    the previous step. Apply the configuration using `kubectl`:
 
     ```shell
-    kubectl apply -f service.yaml
+    kubectl apply --filename service.yaml
     ```
 
 1. Now that your service is created, Knative will perform the following steps:
@@ -127,12 +139,12 @@ folder) you're ready to build and deploy the sample app.
    * Automatically scale your pods up and down (including to zero active pods).
 
 1. To find the IP address for your service, use
-   `kubectl get svc knative-ingressgateway -n istio-system` to get the ingress IP for your
+   `kubectl get svc knative-ingressgateway --namespace istio-system` to get the ingress IP for your
    cluster. If your cluster is new, it may take sometime for the service to get asssigned
    an external IP address.
 
     ```shell
-    kubectl get svc knative-ingressgateway -n istio-system
+    kubectl get svc knative-ingressgateway --namespace istio-system
 
     NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
     knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
@@ -141,16 +153,10 @@ folder) you're ready to build and deploy the sample app.
 
 1. To find the URL for your service, use
     ```
-    kubectl get ksvc helloworld-go  -o=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+    kubectl get ksvc helloworld-go  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
     NAME                DOMAIN
     helloworld-go       helloworld-go.default.example.com
     ```
-
-    > Note: `ksvc` is an alias for `services.serving.knative.dev`. If you have
-      an older version (version 0.1.0) of Knative installed, you'll need to use
-      the long name until you upgrade to version 0.1.1 or higher. See
-      [Checking Knative Installation Version](../../../install/check-install-version.md)
-      to learn how to see what version you have installed.
 
 1. Now you can make a request to your app to see the results. Replace
    `{IP_ADDRESS}` with the address you see returned in the previous step.
@@ -160,10 +166,12 @@ folder) you're ready to build and deploy the sample app.
     Hello World: Go Sample v1!
     ```
 
+    > Note: Add `-v` option to get more detail if the `curl` command failed.
+
 ## Removing the sample app deployment
 
 To remove the sample app from your cluster, delete the service record:
 
 ```shell
-kubectl delete -f service.yaml
+kubectl delete --filename service.yaml
 ```

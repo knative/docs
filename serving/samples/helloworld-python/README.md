@@ -1,8 +1,8 @@
 # Hello World - Python sample
 
 A simple web app written in Python that you can use for testing.
-It reads in an env variable `TARGET` and prints "Hello World: ${TARGET}!". If
-TARGET is not specified, it will use "NOT SPECIFIED" as the TARGET.
+It reads in an env variable `TARGET` and prints "Hello ${TARGET}!". If
+TARGET is not specified, it will use "World" as the TARGET.
 
 ## Prerequisites
 
@@ -35,27 +35,35 @@ The following instructions recreate the source files from this folder.
 
     @app.route('/')
     def hello_world():
-        target = os.environ.get('TARGET', 'NOT SPECIFIED')
-        return 'Hello World: {}!\n'.format(target)
+        target = os.environ.get('TARGET', 'World')
+        return 'Hello {}!\n'.format(target)
 
     if __name__ == "__main__":
-        app.run(debug=True,host='0.0.0.0',port=8080)
+        app.run(debug=True,host='0.0.0.0',port=int(os.environ.get('PORT', 8080)))
     ```
 
 1. Create a file named `Dockerfile` and copy the code block below into it.
    See [official Python docker image](https://hub.docker.com/_/python/) for more details.
 
     ```docker
-    FROM python:alpine
+    # Use the official Python image.
+    # https://hub.docker.com/_/python
+    FROM python
 
+    # Copy local code to the container image.
     ENV APP_HOME /app
-    COPY . $APP_HOME
     WORKDIR $APP_HOME
+    COPY . .
 
+    # Install production dependencies.
     RUN pip install Flask
 
-    ENTRYPOINT ["python"]
-    CMD ["app.py"]
+    # Configure and document the service HTTP port.
+    ENV PORT 8080
+    EXPOSE $PORT
+
+    # Run the web service on container startup.
+    CMD ["python", "app.py"]
     ```
 
 1. Create a new file, `service.yaml` and copy the following service definition
@@ -102,7 +110,7 @@ folder) you're ready to build and deploy the sample app.
    the previous step. Apply the configuration using `kubectl`:
 
     ```shell
-    kubectl apply -f service.yaml
+    kubectl apply --filename service.yaml
     ```
 
 1. Now that your service is created, Knative will perform the following steps:
@@ -111,12 +119,12 @@ folder) you're ready to build and deploy the sample app.
    * Automatically scale your pods up and down (including to zero active pods).
 
 1. To find the IP address for your service, use
-   `kubectl get svc knative-ingressgateway -n istio-system` to get the ingress IP for your
+   `kubectl get svc knative-ingressgateway --namespace istio-system` to get the ingress IP for your
    cluster. If your cluster is new, it may take sometime for the service to get asssigned
    an external IP address.
 
     ```shell
-    kubectl get svc knative-ingressgateway -n istio-system
+    kubectl get svc knative-ingressgateway --namespace istio-system
 
     NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
     knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
@@ -125,16 +133,10 @@ folder) you're ready to build and deploy the sample app.
 
 1. To find the URL for your service, use
     ```
-    kubectl get ksvc helloworld-python  -o=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+    kubectl get ksvc helloworld-python  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
     NAME                DOMAIN
     helloworld-python   helloworld-python.default.example.com
     ```
-
-    > Note: `ksvc` is an alias for `services.serving.knative.dev`. If you have
-      an older version (version 0.1.0) of Knative installed, you'll need to use
-      the long name until you upgrade to version 0.1.1 or higher. See
-      [Checking Knative Installation Version](../../../install/check-install-version.md)
-      to learn how to see what version you have installed.
 
 1. Now you can make a request to your app to see the result. Replace `{IP_ADDRESS}`
    with the address you see returned in the previous step.
@@ -149,5 +151,5 @@ folder) you're ready to build and deploy the sample app.
 To remove the sample app from your cluster, delete the service record:
 
 ```shell
-kubectl delete -f service.yaml
+kubectl delete --filename service.yaml
 ```

@@ -1,21 +1,26 @@
-# Use the existing Haskell image as our base
+# Use the official Haskell image to create a build artifact.
+# https://hub.docker.com/_/haskell/
 FROM haskell:8.2.2 as builder
 
-# Checkout our code onto the Docker container
+# Copy local code to the container image.
 WORKDIR /app
-ADD . /app
+COPY . .
 
-# Build and test our code, then install the “helloworld-haskell-exe” executable
+# Build and test our code, then build the “helloworld-haskell-exe” executable.
 RUN stack setup
 RUN stack build --copy-bins
 
-# Copy the "helloworld-haskell-exe" executable to the image using docker multi stage build
+# Use a Docker multi-stage build to create a lean production image.
+# https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
 FROM fpco/haskell-scratch:integer-gmp
+
+# Copy the "helloworld-haskell-exe" executable from the builder stage to the production image.
 WORKDIR /root/
 COPY --from=builder /root/.local/bin/helloworld-haskell-exe .
 
-# Expose a port to run our application
-EXPOSE 8080
+# Configure and document the service HTTP port.
+ENV PORT 8080
+EXPOSE $PORT
 
-# Run the server command
+# Run the web service on container startup.
 CMD ["./helloworld-haskell-exe"]

@@ -1,0 +1,20 @@
+apiVersion: sources.eventing.knative.dev/v1alpha1
+kind: GitHubSource
+metadata:
+  name: githubsourcesample
+spec:
+  eventTypes:
+  - pull_request
+  ownerAndRepository: <YOUR USER>/<YOUR REPO>
+  accessToken:
+    secretKeyRef:
+      name: githubsecret
+      key: accessToken
+  secretToken:
+    secretKeyRef:
+      name: githubsecret
+      key: secretToken
+  sink:
+    apiVersion: eventing.knative.dev/v1alpha1
+    kind: Channel
+    name: githubchannel
