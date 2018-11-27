@@ -50,7 +50,6 @@ Run following command to configure the external IP of the
 `knative-ingressgateway` service to the static IP that you reserved:
 ```shell
 kubectl patch svc knative-ingressgateway --namespace istio-system --patch '{"spec": { "loadBalancerIP": "<your-reserved-static-ip>" }}'
-service "knative-ingressgateway" patched
 ```
 
 ## Step 3: Verify the static IP address of `knative-ingressgateway` service
