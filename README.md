@@ -13,7 +13,7 @@ applications. Knative components focus on solving many mundane but difficult tas
 * [Orchestrating source-to-URL workflows on Kubernetes](./serving/samples/source-to-url-go/)
 * [Routing and managing traffic with blue/green deployment](./serving/samples/blue-green-deployment.md)
 * [Automatic scaling and sizing workloads based on demand](./serving/samples/autoscale-go)
-* [Binding running services to eventing ecosystems](./eventing/samples/event-flow/README.md)
+* [Binding running services to eventing ecosystems](./eventing/samples/kubernetes-event-source)
 
 Developers on Knative can use familiar idioms, languages, and frameworks to deploy any workload: 
 functions, applications, or containers.
