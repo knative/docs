@@ -121,12 +121,12 @@ following instructions recreate the source files from this folder.
       runLatest:
         configuration:
           revisionTemplate:
-    	spec:
-    	  container:
-    	    image: docker.io/{username}/helloworld-haskell
-    	    env:
-    	    - name: TARGET
-    	      value: "Haskell Sample v1"
+            spec:
+              container:
+               image: docker.io/{username}/helloworld-haskell
+               env:
+               - name: TARGET
+                 value: "Haskell Sample v1"
     ```
 
 ## Build and deploy this sample
