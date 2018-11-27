@@ -89,8 +89,8 @@ export IOTCORE_TOPIC_DEVICE="iot-demo-device-pubsub-topic"
         the Receive Adapter):
 
         ```shell
-        kubectl -n knative-sources create secret generic gcppubsub-source-key --from-file=key.json=PATH_TO_KEY_FILE.json
-        kubectl -n default create secret generic google-cloud-key --from-file=key.json=PATH_TO_KEY_FILE.json
+        kubectl -n knative-sources create secret generic gcppubsub-source-key --from-file=PATH_TO_KEY_FILE.json
+        kubectl -n default create secret generic google-cloud-key --from-file=PATH_TO_KEY_FILE.json
         ```
 
 1.  Deploy the `GcpPubSubSource` controller as part of eventing-source's
