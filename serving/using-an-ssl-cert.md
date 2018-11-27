@@ -80,7 +80,7 @@ Encrypt][le] to obtain a certificate manually.
 
 > **Warning:** Certificates issued by [Let's Encrypt][le] are only valid for
 > [90 days](https://letsencrypt.org/docs/faq/). You must renew your certificate
-> with certbot tool again.
+> with the certbot tool again every 90 days.
 
 [le]: https://letsencrypt.org/
 
