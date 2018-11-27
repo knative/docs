@@ -79,6 +79,10 @@ your deployed services.
 If you don't have an existing SSL/TLS certificate, you can use [Let's
 Encrypt][le] to obtain a certificate manually.
 
+> **Warning:** Certificates issued by [Let's Encrypt][le] are only valid for
+> [90 days](https://letsencrypt.org/docs/faq/). You must renew your certificate
+> with certbot tool again.
+
 [le]: https://letsencrypt.org/
 
 1. Install the `certbot-auto` script from the [Certbot website](https://certbot.eff.org/docs/install.html#certbot-auto).
@@ -91,10 +95,6 @@ Encrypt][le] to obtain a certificate manually.
 
 1. When certbot is complete, you will have two output files, `privkey.pem` and `fullchain.pem`. These files
    map to the `cert.pk` and `cert.pem` files used above.
-
-> **Warning:** Certificates issued by [Let's Encrypt][le] are only valid for
-> [90 days](https://letsencrypt.org/docs/faq/). You must renew your certificate
-> with certbot tool again.
 
 ---
 
