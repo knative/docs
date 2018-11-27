@@ -63,11 +63,11 @@ following instructions recreate the source files from this folder.
 	import           Web.Scotty.Trans
 
 	main :: IO ()
-  main = do
-    t <- fromMaybe "World" <$> lookupEnv "TARGET"
-    pStr <- fromMaybe "8080" <$> lookupEnv "PORT"
-    let p = read pStr :: Int
-    scotty p (route t)
+	  main = do
+	    t <- fromMaybe "World" <$> lookupEnv "TARGET"
+	    pStr <- fromMaybe "8080" <$> lookupEnv "PORT"
+	    let p = read pStr :: Int
+	    scotty p (route t)
 
 	route :: String -> ScottyM()
 	route t = get "/" $ hello t
@@ -111,23 +111,23 @@ following instructions recreate the source files from this folder.
 1. Create a new file, `service.yaml` and copy the following service definition
    into the file. Make sure to replace `{username}` with your Docker Hub username.
 
-```yaml
-apiVersion: serving.knative.dev/v1alpha1
-kind: Service
-metadata:
-  name: helloworld-haskell
-  namespace: default
-spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        spec:
-          container:
-            image: docker.io/{username}/helloworld-haskell
-            env:
-            - name: TARGET
-              value: "Haskell Sample v1"
-```
+    ```yaml
+    apiVersion: serving.knative.dev/v1alpha1
+    kind: Service
+    metadata:
+      name: helloworld-haskell
+      namespace: default
+    spec:
+      runLatest:
+        configuration:
+          revisionTemplate:
+    	spec:
+    	  container:
+    	    image: docker.io/{username}/helloworld-haskell
+    	    env:
+    	    - name: TARGET
+    	      value: "Haskell Sample v1"
+    ```
 
 ## Build and deploy this sample
 
