@@ -1,8 +1,8 @@
 # Hello World - Go sample
 
 A simple web app written in Go that you can use for testing.
-It reads in an env variable `TARGET` and prints "Hello ${TARGET}!". If
-TARGET is not specified, it will use "World" as the TARGET.
+It reads in an env variable `TARGET` and prints `Hello ${TARGET}!`. If
+`TARGET` is not specified, it will use `World` as the `TARGET`.
 
 ## Prerequisites
 
@@ -138,31 +138,43 @@ folder) you're ready to build and deploy the sample app.
    * Network programming to create a route, ingress, service, and load balance for your app.
    * Automatically scale your pods up and down (including to zero active pods).
 
-1. To find the IP address for your service, use
-   `kubectl get svc knative-ingressgateway --namespace istio-system` to get the ingress IP for your
-   cluster. If your cluster is new, it may take sometime for the service to get asssigned
-   an external IP address.
+1. Run the following command to find the external IP address for your service. The ingress IP for your
+   cluster is returned. If you just created your cluster, you might need to wait and rerun the command until
+   your service gets asssigned an external IP address.
 
     ```shell
     kubectl get svc knative-ingressgateway --namespace istio-system
-
+    ```
+    
+    Example:
+    ```shell
     NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
     knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
 
     ```
 
-1. To find the URL for your service, use
-    ```
+1. Run the following command to find the domain URL for your service:
+    ```shell
     kubectl get ksvc helloworld-go  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+    ```
+    
+    Example:
+    ```shell
     NAME                DOMAIN
     helloworld-go       helloworld-go.default.example.com
     ```
 
-1. Now you can make a request to your app to see the results. Replace
-   `{IP_ADDRESS}` with the address you see returned in the previous step.
+1. Test your app by sending it a request. Use the following
+   `curl` command with the domain URL `helloworld-go.default.example.com` and `EXTERNAL-IP` address that you retrieved 
+   in the previous steps:
 
     ```shell
-    curl -H "Host: helloworld-go.default.example.com" http://{IP_ADDRESS}
+    curl -H "Host: helloworld-go.default.example.com" http://{EXTERNAL_IP_ADDRESS}
+    ```
+    
+    Example:
+    ```shell
+    curl -H "Host: helloworld-go.default.example.com" http://35.203.155.229
     Hello World: Go Sample v1!
     ```
 
