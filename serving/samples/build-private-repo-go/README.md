@@ -190,7 +190,10 @@ The sample code is in a private Github repository consisting of two files.
 
 1. `Dockerfile`
    ```Dockerfile
-   FROM golang
+   # Use golang:alpine to optimize the image size.
+   # See https://hub.docker.com/_/golang/ for more information
+   # about the difference between golang and golang:alpine.
+   FROM golang:alpine
 
    ENV GOPATH /go
 
