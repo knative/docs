@@ -142,7 +142,7 @@ check mark to the left of the hook URL, as shown below.
 
 ### Create Events
 
-Create a Pull Request in your GitHub repository. We will verify 
+Create a pull request in your GitHub repository. We will verify 
 that the GitHub events were sent into the Knative eventing system
 by looking at our message dumper function logs.
 
