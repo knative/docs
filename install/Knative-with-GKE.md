@@ -40,16 +40,18 @@ commands will need to be adjusted for use in a Windows environment.
 To simplify the command lines for this walkthrough, we need to define a few
 environment variables.
 
-Set `CLUSTER_NAME` and `CLUSTER_ZONE` variables:
+Set `CLUSTER_NAME` and `CLUSTER_ZONE` variables, you can replace `knative` and
+`us-west1-c` with cluster name and zone of your choosing.
+
+The `CLUSTER_NAME` needs to be lowercase and unique among any other Kubernetes
+clusters in your GCP project. The zone can be
+[any compute zone available on GCP](https://cloud.google.com/compute/docs/regions-zones/#available).
+These variables are used later to create a Kubernetes cluster.
 
 ```bash
 export CLUSTER_NAME=knative
 export CLUSTER_ZONE=us-west1-c
 ```
-The CLUSTER_NAME needs to be lowercase and unique among any other Kubernetes
-clusters in your GCP project. The zone can be
-[any compute zone available on GCP](https://cloud.google.com/compute/docs/regions-zones/#available).
-These variables are used later to create a Kubernetes cluster.
 
 ### Setting up a Google Cloud Platform project
 
@@ -59,7 +61,8 @@ You need a GCP project to create a Google Kubernetes Engine cluster.
    existing GCP project as your `gcloud` default:
     * If you don't already have a GCP project created, create a new project in `gcloud`:
       ```bash
-      gcloud projects create my-knative-project --set-as-default
+      export PROJECT=my-knative-project
+      gcloud projects create $PROJECT --set-as-default
       ```
       Replace `my-knative-project` with the name you'd like to use for your GCP project.
 
@@ -69,12 +72,12 @@ You need a GCP project to create a Google Kubernetes Engine cluster.
     * If you already have a GCP project, make sure your project is set as your
       `gcloud` default:
       ```bash
-      gcloud config set project my-knative-project
+      gcloud config set project $PROJECT
       ```
 
       > Tip: Enter `gcloud config get-value project` to view the ID of your default GCP project.
 1. Enable the necessary APIs:
-   ```
+   ```bash
    gcloud services enable \
      cloudapis.googleapis.com \
      container.googleapis.com \
@@ -93,7 +96,7 @@ Istio components, the recommended configuration for a cluster is:
   `pubsub` (if those features will be used)
 
 1. Create a Kubernetes cluster on GKE with the required specifications:
-    ```
+    ```bash
     gcloud container clusters create $CLUSTER_NAME \
       --zone=$CLUSTER_ZONE \
       --cluster-version=latest \
@@ -213,3 +216,4 @@ Except as otherwise noted, the content of this page is licensed under the
 [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),
 and code samples are licensed under the
 [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).
+
