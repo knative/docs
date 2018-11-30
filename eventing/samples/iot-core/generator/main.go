@@ -27,9 +27,7 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/dgrijalva/jwt-go"
 	MQTT "github.com/eclipse/paho.mqtt.golang"
-	"github.com/satori/go.uuid"
 )
 
 const (
