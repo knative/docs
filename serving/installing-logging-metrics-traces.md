@@ -143,34 +143,34 @@ To configure and setup monitoring:
 1. Install Knative monitoring components by running the following command from the root directory of
    [knative/serving](https://github.com/knative/serving) repository:
 
-      ```shell
-      kubectl apply --recursive --filename config/monitoring/100-common \
-        --filename config/monitoring/150-stackdriver \
-        --filename third_party/config/monitoring/common \
-        --filename config/monitoring/200-common \
-        --filename config/monitoring/200-common/100-istio.yaml
-      ```
+   ```shell
+   kubectl apply --recursive --filename config/monitoring/100-common \
+     --filename config/monitoring/150-stackdriver \
+     --filename third_party/config/monitoring/common \
+     --filename config/monitoring/200-common \
+     --filename config/monitoring/200-common/100-istio.yaml
+   ```
 
      The installation is complete when logging & monitoring components are all
      reported `Running` or `Completed`:
 
-       ```shell
-       kubectl get pods --namespace monitoring --watch
-       ```
+    ```shell
+    kubectl get pods --namespace monitoring --watch
+    ```
 
-       ```
-       NAME                                  READY     STATUS    RESTARTS   AGE
-       fluentd-ds-5kc85                      1/1       Running   0          2d
-       fluentd-ds-vhrcq                      1/1       Running   0          2d
-       fluentd-ds-xghk9                      1/1       Running   0          2d
-       grafana-798cf569ff-v4q74              1/1       Running   0          2d
-       kube-state-metrics-75bd4f5b8b-8t2h2   4/4       Running   0          2d
-       node-exporter-cr6bh                   2/2       Running   0          2d
-       node-exporter-mf6k7                   2/2       Running   0          2d
-       node-exporter-rhzr7                   2/2       Running   0          2d
-       prometheus-system-0                   1/1       Running   0          2d
-       prometheus-system-1                   1/1       Running   0          2d
-       ```
+    ```
+    NAME                                  READY     STATUS    RESTARTS   AGE
+    fluentd-ds-5kc85                      1/1       Running   0          2d
+    fluentd-ds-vhrcq                      1/1       Running   0          2d
+    fluentd-ds-xghk9                      1/1       Running   0          2d
+    grafana-798cf569ff-v4q74              1/1       Running   0          2d
+    kube-state-metrics-75bd4f5b8b-8t2h2   4/4       Running   0          2d
+    node-exporter-cr6bh                   2/2       Running   0          2d
+    node-exporter-mf6k7                   2/2       Running   0          2d
+    node-exporter-rhzr7                   2/2       Running   0          2d
+    prometheus-system-0                   1/1       Running   0          2d
+    prometheus-system-1                   1/1       Running   0          2d
+    ```
 
     CTRL+C to exit watch.
     
@@ -184,15 +184,15 @@ To configure and setup monitoring:
 
      1. Run the following command to ensure that the Fluentd DaemonSet runs on all your nodes:
    
-       ```shell
-       kubectl label nodes --all beta.kubernetes.io/fluentd-ds-ready="true"
-       ```
+        ```shell
+        kubectl label nodes --all beta.kubernetes.io/fluentd-ds-ready="true"
+        ```
 
      1. Run the following command to ensure that the `fluentd-ds` daemonset is ready on at least one node:
 
-       ```shell
-       kubectl get daemonset fluentd-ds --namespace knative-monitoring
-       ```
+        ```shell
+        kubectl get daemonset fluentd-ds --namespace knative-monitoring
+        ```
 
 ## Learn More
 
