@@ -1,160 +1,216 @@
-# Knative Events
+# Knative Eventing
 
-Knative Events is a system which is designed to address a common need for cloud
-native development:
+Knative Eventing is a system that is designed to address a common need for cloud native development and 
+provides composable primitives to enable late-binding event sources and event consumers.
 
-1.  Services are loosely coupled during development and deployed independently
-    on a variety of platforms (Kubernetes, VMs, SaaS or FaaS).
-1.  A producer can generate events before a consumer is listening, and a
-    consumer can express an interest in an event or class of events that is not
-    yet being produced.
-1.  Services can be connected to create new applications
-    - without modifying producer or consumer.
-    - with the ability to select a specific subset of events from a particular
-      producer
+## Design overview
 
-The above concerns are consistent with the
-[design goals of CloudEvents](https://github.com/cloudevents/spec/blob/master/spec.md#design-goals),
-a common specification for cross-service interoperability being developed by the
-CNCF Serverless WG.
+Knative Eventing is designed around the following goals:
 
-> **Note**: The Eventing repo is very much a work-in-progress. See the
-> [list of Known Issues](https://github.com/knative/eventing/issues?q=is%3Aissue+is%3Aopen+label%3A%22Known+Issue%22)
-> with the current state, but feel free to report additional issues. Expect to
-> see changes in all of the following areas in the next months:
->
-> 1.  The API model and terminology is still evolving.
-> 1.  The controller model for Buses and Sources are still being refined.
-> 1.  Test coverage is not up to snuff.
-> 1.  The release packaging is still being determined.
+1. Knative Eventing services are loosely coupled. These services can be developed and deployed independently on,
+   and across a variety of platforms (for example Kubernetes, VMs, SaaS or FaaS).
+1. Event producers and event sources are independent. Any producer (or source), can generate events 
+   before there are active event consumers that are listening. Any event consumer can express interest in an 
+   event or class of events, before there are producers that are creating those events.
+1. Other services can be connected to the Eventing system. These services can perform the following functions:
+   - Create new applications without modifying the event producer or event consumer. 
+   - Select and target specific subsets of the events from their producers.
+1. Ensure cross-service interoperability. Knative Eventing is consistent with the 
+   [CloudEvents](https://github.com/cloudevents/spec/blob/master/spec.md#design-goals)
+   specification that is developed by the [CNCF Serverless WG](https://lists.cncf.io/g/cncf-wg-serverless).
 
-Once these concerns are resolved, we expect to work on creating a wider array of
-EventSources.
+### Event consumers
+
+To enable delivery to multiple types of Services, Knative Eventing defines two
+generic interfaces that can be implemented by multiple Kubernetes resources:
+
+1. **Addressable** objects are able to receive and acknowledge an event
+   delivered over HTTP to an address defined in their `status.address.hostname`
+   field. As a special case, the core
+   [Kubernetes Service object](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#service-v1-core)
+   also fulfils the Addressable interface.
+2. **Callable** objects are able to receive an event delivered over HTTP and
+   transform the event, returning 0 or 1 new events in the HTTP response. These
+   returned events may be further processed in the same way that events from an
+   external event source are processed.
+
+### Event channels and subscriptions
+
+Knative Eventing also defines a single event forwarding and persistence layer,
+called a
+[**Channel**](https://github.com/knative/eventing/blob/master/pkg/apis/eventing/v1alpha1/channel_types.go#L36).
+Messaging implementations may provide implementations of Channels via the
+[ClusterChannelProvisioner](https://github.com/knative/eventing/blob/master/pkg/apis/eventing/v1alpha1/cluster_channel_provisioner_types.go#L35)
+object. Events are delivered to Services or forwarded to other channels
+(possibly of a different type) using
+[Subscriptions](https://github.com/knative/eventing/blob/master/pkg/apis/eventing/v1alpha1/subscription_types.go#L35).
+This allows message delivery in a cluster to vary based on requirements, so that
+some events might be handled by an in-memory implementation while others would
+be persisted using Kafka or NATS Streaming.
+
+### Future design goals
+
+The focus for the next Eventing release will be to enable easy implementation of
+event sources. Sources manage registration and delivery of events from external
+systems using Kubernetes
+[Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
+Learn more about Eventing development in the [Eventing work group](https://github.com/knative/docs/blob/master/community/WORKING-GROUPS.md#events).
 
 ## Installation
 
-You can install Knative Eventing with the following command:
+Knative Eventing currently requires Knative Serving and Istio version 1.0 or
+later installed. Use this command to install the version of Istio which is
+tested with Knative:
 
-```bash
-kubectl apply -f https://storage.googleapis.com/knative-releases/eventing/latest/release.yaml
+```shell
+kubectl apply --filename https://raw.githubusercontent.com/knative/serving/v0.2.2/third_party/istio-1.0.2/istio.yaml
+kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.2/release.yaml
 ```
 
-In addition to the core definitions, you'll need to install at least one
-EventSource and one Bus to have a useful cluster. See below for more information
-on how to install different versions of these components.
+You can install the core Knative Eventing (which provides an in-memory
+ChannelProvisioner) and the core sources (which provides the Kubernetes Events,
+GitHub, and "Container" Sources) with the following commands:
 
-> A note on naming: We track the
-> [CloudEvents nomenclature](https://github.com/cloudevents/spec/blob/master/spec.md)
-> where possible. Much of the naming in this area is in flux, however and many
-> of the needed terms are outside of the current scope of the specification.
+```bash
+kubectl apply --filename https://github.com/knative/eventing/releases/download/v0.2.0/release.yaml
+kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.2.0/release.yaml
+```
+
+In addition to the core sources, you can also use GCP PubSub as a source by
+creating a secret with the name `gcppubsub-source-key` with a `key.json` value
+and loading the released source yaml (the `-with-gcppubsub` release includes all
+the above sources, and adds GCP PubSub, which requires the listed secret):
+
+```bash
+kubectl --namespace knative-sources create secret generic gcppubsub-source-key --from-literal=key.json=''
+kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.2.0/release-with-gcppubsub.yaml
+```
+
+This document will be updated as additional sources (which are custom resource
+definitions and an associated controller) and channels
+(ClusterChannelProvisioners and controllers) become available.
 
 ## Architecture
 
-In order to subdivide the problem, we have split the server-side components into
-three abstractions:
+The eventing infrastructure supports two forms of event delivery at the moment:
 
-![Concept Diagram](concepts.png)
+1. Direct delivery from a source to a single Service (an Addressable endpoint,
+   including a Knative Service or a core Kubernetes Service). In this case, the
+   Source is responsible for retrying or queueing events if the destination
+   Service is not available.
+2. Fan-out delivery from a source or Service response to multiple endpoints
+   using
+   [Channels](https://github.com/knative/eventing/blob/master/pkg/apis/eventing/v1alpha1/channel_types.go#L36)
+   and
+   [Subscriptions](https://github.com/knative/eventing/blob/master/pkg/apis/eventing/v1alpha1/subscription_types.go#L35).
+   In this case, the Channel implementation ensures that messages are delivered
+   to the requested destinations and should buffer the events if the destination
+   Service is unavailable.
 
-### Buses
+![Control plane object model](control-plane.png)
 
-Buses provide a k8s-native abstraction over message buses like
-[NATS](https://nats.io) or [Kafka](https://kafka.apache.org/). At this level,
-the abstraction is basically publish-subscribe; events are published to a
-Channel, and Subscriptions route that Channel to interested parties.
+The actual message forwarding is implemented by multiple data plane components
+which provide observability, persistence, and translation between different
+messaging protocols.
 
-- **Channel** is a network endpoint which receives (and optionally persists)
-  events using a Bus-specific implementation.
-- **Subscription** connects events received on a Channel to an interested
-  `target`, represented as a DNS name. There may be multiple Subscriptions on a
-  single channel.
-- **Bus** defines the adaptation layers needed to implement channels and
-  subscriptions using a specific persistence strategy (such as delivery of
-  events to a Kafka topic).
+![Data plane implementation](data-plane.png)
 
-We currently have 3 buses implemented:
+<!-- TODO(evankanderson): add documentation for Kafka bus once it is available. -->
 
-- [Stub](https://github.com/knative/eventing/tree/master/pkg/buses/stub)
-  provides a zero-dependency in-memory transport.
-  ```bash
-  kubectl apply -f https://storage.googleapis.com/knative-releases/eventing/latest/release-bus-stub.yaml
-  kubectl apply -f https://storage.googleapis.com/knative-releases/eventing/latest/release-clusterbus-stub.yaml
-  ```
-- [Kafka](https://github.com/knative/eventing/tree/master/pkg/buses/kafka) uses
-  an existing (user-provided) Kafka cluster for persistence.
-  ```bash
-  kubectl apply -f https://storage.googleapis.com/knative-releases/eventing/latest/release-bus-kafka.yaml
-  kubectl apply -f https://storage.googleapis.com/knative-releases/eventing/latest/release-clusterbus-kafka.yaml
-  ```
-- [GCP PubSub](https://github.com/knative/eventing/tree/master/pkg/buses/gcppubsub)
-  uses Google Cloud PubSub for message persistence.
-  ```bash
-  kubectl apply -f https://storage.googleapis.com/knative-releases/eventing/latest/release-bus-gcppubsub.yaml
-  kubectl apply -f https://storage.googleapis.com/knative-releases/eventing/latest/release-clusterbus-gcppubsub.yaml
-  ```
+## Sources
 
-### Sources
+Each source is a separate Kubernetes custom resource. This allows each type of
+Source to define the arguments and parameters needed to instantiate a source.
+Knative Eventing defines the following Sources in the
+`sources.eventing.knative.dev` API group. Types below are declared in golang
+format, but may be expressed as simple lists, etc in YAML. All Sources should be
+part of the `sources` category, so you can list all existing Sources with
+`kubectl get sources`. The currently-implemented Sources are described below:
 
-Sources provide a similar abstraction layer for provisioning data sources from
-outside Kubernetes and routing them to the cluster, expressed as a Feed
-(typically, to a Channel on a Bus, but could also be directly to another
-endpoint). Right now, we only have a few generic Sources, but we plan to add
-more interesting and specific Sources over time.
+### KubernetesEventSource
 
-- **Feed** is a primitive object defining a connection between an EventType and
-  the action (as an
-  [CloudEvents compatible HTTP endpoint](https://github.com/cloudevents/spec/blob/master/http-transport-binding.md)).
-- **EventType** and **ClusterEventType** descibe a specific set of events with a
-  common schema which are emitted by an EventSource. EventType is
-  namespace-scoped, while ClusterEventTypes are installed by an adminastrator
-  and available in all namespaces in your cluster.
-- **EventSource** and **ClusterEventSource** describe an external system which
-  may produce one or more EventTypes.
+The KubernetesEventSource fires a new event each time a
+[Kubernetes Event](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#event-v1-core)
+is created or updated.
 
-We currently have 3 sources implemented:
+**Spec fields**:
 
-- [K8sevents](https://github.com/knative/eventing/tree/master/pkg/sources/k8sevents)
-  collects
-  [Kubernetes Events](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.10/#event-v1-core)
-  and presents them as CloudEvents.
-  ```bash
-  kubectl apply -f https://storage.googleapis.com/knative-releases/eventing/latest/release-source-k8sevents.yaml
-  ```
-- [GitHub](https://github.com/knative/eventing/tree/master/pkg/sources/github)
-  collects pull request notifications and presents them as CloudEvents.
-  ```bash
-  kubectl apply -f https://storage.googleapis.com/knative-releases/eventing/latest/release-source-github.yaml
-  ```
-- [GCP PubSub](https://github.com/knative/eventing/tree/master/pkg/sources/gcppubsub)
-  collects events published to a GCP PubSub topic and presents them as
-  CloudEvents.
-  ```bash
-  kubectl apply -f https://storage.googleapis.com/knative-releases/eventing/latest/release-source-gcppubsub.yaml
-  ```
+- `namespace`: `string` The namespace to watch for events.
+- `serviceAccountname`: `string` The name of the ServiceAccount used to connect
+  to the Kubernetes apiserver.
+- `sink`:
+  [ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#objectreference-v1-core)
+  A reference to the object that should receive events.
 
-### Flows
+### GitHubSource
 
-Lastly, we have a higher-level abstraction called a Flow which bundles up the
-specification from the Source to the endpoint, optionally allowing you to choose
-the Channel and Bus which the event is routed over. (Otherwise, there is a
-default Bus used to provision a Channel.)
+The GitHubSource fires a new event for selected
+[GitHub event types](https://developer.github.com/v3/activity/events/types/).
 
-- **Flow** is the top-level user-facing concept in Eventing; it describes the
-  desired path from an external Source of events to a destination that will
-  react to the events. There is only a single type of Flow, which is installed
-  by the core Knative Eventing install.
+**Spec fields**:
 
-## Supporting Libraries
+- `ownerAndRepository`: `string` The GitHub owner/org and repository to receive
+  events from. The repository may be left off to receive events from an entire
+  organization.
+- `eventTypes`: `[]string` A list of
+  [event types](https://developer.github.com/v3/activity/events/types/)in
+  "Webhook event name" format (lower_case).
+- `accessToken.secretKeyRef`:
+  [SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#secretkeyselector-v1-core)
+  containing a GitHub access token for configuring a GitHub webhook. One of this
+  or `secretToken` must be set.
+- `secretToken.secretKeyRef`:
+  [SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#secretkeyselector-v1-core)
+  containing a GitHub secret token for configuring a GitHub webhook. One of this
+  or `accessToken` must be set.
+- `serviceAccountName`: `string` The name of the ServiceAccount used to access
+  the `gcpCredsSecret`.
+- `sink`:
+  [ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#objectreference-v1-core)
+  A reference to the object that should receive events.
 
-In addition to the above, there is a golang library at
-[`pkg/event`](https://github.com/knative/eventing/tree/master/pkg/event) for
-handling CloudEvents and easily creating a container which processes CloudEvents
-delivered over HTTP. You can look at several of the samples for usage examples.
+### GcpPubSubSource
+
+The GcpPubSubSource fires a new event each time a message is published on a
+[Google Cloud Platform PubSub topic](https://cloud.google.com/pubsub/).
+
+**Spec fields**:
+
+- `googleCloudProject`: `string` The GCP project ID that owns the topic.
+- `topic`: `string` The name of the PubSub topic.
+- `serviceAccountName`: `string` The name of the ServiceAccount used to access
+  the `gcpCredsSecret`.
+- `gcpCredsSecret`:
+  [ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#objectreference-v1-core)
+  A reference to a Secret which contains a GCP refresh token for talking to
+  PubSub.
+- `sink`:
+  [ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#objectreference-v1-core)
+  A reference to the object that should receive events.
+
+### ContainerSource
+
+The ContainerSource will instantiate a container image which can generate events
+until the ContainerSource is deleted. This may be used (for example) to poll an
+FTP server for new files or generate events at a set time interval.
+
+**Spec fields**:
+
+- `image` (**required**): `string` A docker image of the container to be run.
+- `args`: `[]string` Command-line arguments. Any `--sink=` argument will be
+  filled in with the DNS address of the `sink` object.
+- `env`: `map[string]string` Environment variables to be set in the container.
+- `serviceAccountName`: `string` The name of the ServiceAccount to run the
+  container as.
+- `sink`:
+  [ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#objectreference-v1-core)
+  A reference to the object that should receive events.
 
 ## Getting Started
 
 - [Setup Knative Serving](../install/README.md)
 - [Install Eventing components](#installation)
-- [Run samples](samples)
+- [Run samples](samples/)
 
 ---
 

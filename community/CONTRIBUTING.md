@@ -125,6 +125,10 @@ environment](https://github.com/knative/serving/blob/master/DEVELOPMENT.md).
 
 ## Pull requests
 
+We have a [gubernator](https://gubernator.knative.dev) instance that provides a
+[pull request dashboard](https://gubernator.knative.dev/pr) so you can see which
+PRs you need to take action on.
+
 If you're working on an existing issue, simply respond to the issue and express
 interest in working on it. This helps other people know that the issue is
 active, and hopefully prevents duplicated efforts.

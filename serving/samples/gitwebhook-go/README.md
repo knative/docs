@@ -16,7 +16,7 @@ through a webhook.
 ## Build the sample code
 
 1. Use Docker to build a container image for this service. Replace 
-   `{username}` with your Docker Hub username in the following commands.
+   `username` with your Docker Hub username in the following commands.
 
   ```shell
   export DOCKER_HUB_USERNAME=username
@@ -33,7 +33,7 @@ through a webhook.
    incoming requests.
 
    1. Follow the GitHub instructions to [create a personal access token](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/).
-      Ensure to grant the `repo` permission to give read/write access to the
+      Ensure to grant the `repo` permission to give `read/write` access to the
       personal access token.
    1. Base64 encode the access token:
 
@@ -54,7 +54,7 @@ through a webhook.
    1. Apply the secret to your cluster:
 
        ```shell
-       kubectl apply -f github-secret.yaml
+       kubectl apply --filename github-secret.yaml
        ```
 
 1. Next, update the `service.yaml` file in the project to reference the tagged
@@ -90,7 +90,7 @@ through a webhook.
 1. Use `kubectl` to apply the `service.yaml` file.
 
 ```shell
-$ kubectl apply -f service.yaml
+$ kubectl apply --filename service.yaml
 service "gitwebhook" created
 ```
 
@@ -102,9 +102,8 @@ service "gitwebhook" created
     1. Retrieve the hostname for this service, using the following command:
 
         ```shell
-        $ kubectl get services.serving.knative.dev gitwebhook \
-           -o=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
-
+        $ kubectl get ksvc gitwebhook \
+           --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
         NAME                DOMAIN
         gitwebhook          gitwebhook.default.example.com
         ```
@@ -124,16 +123,16 @@ Once deployed, you can inspect the created resources with `kubectl` commands:
 
 ```shell
 # This will show the Knative service that we created:
-kubectl get service.serving.knative.dev -o yaml
+kubectl get ksvc --output yaml
 
 # This will show the Route, created by the service:
-kubectl get route -o yaml
+kubectl get route --output yaml
 
 # This will show the Configuration, created by the service:
-kubectl get configurations -o yaml
+kubectl get configurations --output yaml
 
 # This will show the Revision, created by the Configuration:
-kubectl get revisions -o yaml
+kubectl get revisions --output yaml
 ```
 
 ## Testing the service
@@ -148,6 +147,6 @@ right, you'll see the title of the PR will be modified, with the text
 To clean up the sample service:
 
 ```shell
-kubectl delete -f service.yaml
+kubectl delete --filename service.yaml
 ```
 

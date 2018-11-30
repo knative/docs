@@ -1,8 +1,8 @@
 # Hello World - .NET Core sample
 
 A simple web app written in C# using .NET Core 2.1 that you can use for testing.
-It reads in an env variable `TARGET` and prints "Hello World: ${TARGET}!". If
-TARGET is not specified, it will use "NOT SPECIFIED" as the TARGET.
+It reads in an env variable `TARGET` and prints "Hello ${TARGET}!". If
+TARGET is not specified, it will use "World" as the TARGET.
 
 ## Prerequisites
 
@@ -26,12 +26,17 @@ recreate the source files from this folder.
     ```
 
 1. Update the `CreateWebHostBuilder` definition in `Program.cs` by adding
-   `.UseUrls("http://0.0.0.0:8080")` to define the serving port:
+   `.UseUrls()` to define the serving port:
 
     ```csharp
-    public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-        WebHost.CreateDefaultBuilder(args)
-            .UseStartup<Startup>().UseUrls("http://0.0.0.0:8080");
+    public static IWebHostBuilder CreateWebHostBuilder(string[] args)
+    {
+        string port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+        string url = String.Concat("http://0.0.0.0:", port);
+
+        return WebHost.CreateDefaultBuilder(args)
+            .UseStartup<Startup>().UseUrls(url);
+    }
     ```
 
 1. Update the `app.Run(...)` statement in `Startup.cs` to read and return the
@@ -40,8 +45,8 @@ recreate the source files from this folder.
     ```csharp
     app.Run(async (context) =>
     {
-        var target = Environment.GetEnvironmentVariable("TARGET") ?? "NOT SPECIFIED";
-        await context.Response.WriteAsync($"Hello World: {target}\n");
+        var target = Environment.GetEnvironmentVariable("TARGET") ?? "World";
+        await context.Response.WriteAsync($"Hello {target}\n");
     });
     ```
 
@@ -50,17 +55,28 @@ recreate the source files from this folder.
    see [dockerizing a .NET core app](https://docs.microsoft.com/en-us/dotnet/core/docker/docker-basics-dotnet-core#dockerize-the-net-core-application).
 
     ```docker
+    # Use Microsoft's official .NET image.
+    # https://hub.docker.com/r/microsoft/dotnet
     FROM microsoft/dotnet:2.1-sdk
-    WORKDIR /app
 
-    # copy csproj and restore as distinct layers
-    COPY *.csproj ./
+    # Install production dependencies.
+    # Copy csproj and restore as distinct layers.
+    WORKDIR /app
+    COPY *.csproj .
     RUN dotnet restore
 
-    # copy and build everything else
-    COPY . ./
+    # Copy local code to the container image.
+    COPY . .
+
+    # Build a release artifact.
     RUN dotnet publish -c Release -o out
-    ENTRYPOINT ["dotnet", "out/helloworld-csharp.dll"]
+
+    # Configure and document the service HTTP port.
+    ENV PORT 8080
+    EXPOSE $PORT
+
+    # Run the web service on container startup.
+    CMD ["dotnet", "out/helloworld-csharp.dll"]
     ```
 
 1. Create a new file, `service.yaml` and copy the following service definition
@@ -107,7 +123,7 @@ folder) you're ready to build and deploy the sample app.
    the previous step. Apply the configuration using `kubectl`:
 
     ```shell
-    kubectl apply -f service.yaml
+    kubectl apply --filename service.yaml
     ```
 
 1. Now that your service is created, Knative will perform the following steps:
@@ -116,12 +132,12 @@ folder) you're ready to build and deploy the sample app.
    * Automatically scale your pods up and down (including to zero active pods).
 
 1. To find the IP address for your service, use
-   `kubectl get svc knative-ingressgateway -n istio-system` to get the ingress IP for your
+   `kubectl get svc knative-ingressgateway --namespace istio-system` to get the ingress IP for your
    cluster. If your cluster is new, it may take sometime for the service to get asssigned
    an external IP address.
 
     ```shell
-    kubectl get svc knative-ingressgateway -n istio-system
+    kubectl get svc knative-ingressgateway --namespace istio-system
 
     NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
     knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
@@ -130,7 +146,7 @@ folder) you're ready to build and deploy the sample app.
 
 1. To find the URL for your service, use
     ```
-    kubectl get services.serving.knative.dev helloworld-csharp  -o=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+    kubectl get ksvc helloworld-csharp  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
     NAME                DOMAIN
     helloworld-csharp   helloworld-csharp.default.example.com
     ```
@@ -148,5 +164,5 @@ folder) you're ready to build and deploy the sample app.
 To remove the sample app from your cluster, delete the service record:
 
 ```shell
-kubectl delete -f service.yaml
+kubectl delete --filename service.yaml
 ```

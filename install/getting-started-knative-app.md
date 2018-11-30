@@ -13,7 +13,7 @@ You need:
 
 ## Sample application
 
-This guides uses the
+This guide uses the
 [Hello World sample app in Go](../serving/samples/helloworld-go) to demonstrate
 the basic workflow for deploying an app, but these steps can be adapted for your
 own application if you have an image of it available on [Docker Hub](https://docs.docker.com/docker-hub/repos/), [Google Container Registry](https://cloud.google.com/container-registry/docs/pushing-and-pulling), or another container image registry.
@@ -62,7 +62,7 @@ the image accordingly.
 
 From the directory where the new `service.yaml` file was created, apply the configuration:
 ```bash
-kubectl apply -f service.yaml
+kubectl apply --filename service.yaml
 ```
 
 Now that your service is created, Knative will perform the following steps:
@@ -83,7 +83,7 @@ asssigned an external IP address.
 1. To find the IP address for your service, enter:
    
    ```shell
-    kubectl get svc knative-ingressgateway -n istio-system
+    kubectl get svc knative-ingressgateway --namespace istio-system
 
     NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
     knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
@@ -94,20 +94,20 @@ asssigned an external IP address.
     You can also export the IP address as a variable with the following command:
 
     ```shell
-    export IP_ADDRESS=$(kubectl get svc knative-ingressgateway -n istio-system -o 'jsonpath={.status.loadBalancer.ingress[0].ip}')
+    export IP_ADDRESS=$(kubectl get svc knative-ingressgateway --namespace istio-system --output 'jsonpath={.status.loadBalancer.ingress[0].ip}')
 
     ```
    > Note: if you use minikube or a baremetal cluster that has no external load balancer, the
      `EXTERNAL-IP` field is shown as `<pending>`. You need to use `NodeIP` and `NodePort` to
      interact your app instead. To get your app's `NodeIP` and `NodePort`, enter the following command:
      ```shell
-     export IP_ADDRESS=$(kubectl get node  -o 'jsonpath={.items[0].status.addresses[0].address}'):$(kubectl get svc knative-ingressgateway -n istio-system   -o 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
+     export IP_ADDRESS=$(kubectl get node  --output 'jsonpath={.items[0].status.addresses[0].address}'):$(kubectl get svc knative-ingressgateway --namespace istio-system   --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
       ```
 
 1. To find the host URL for your service, enter:
 
     ```shell
-    kubectl get services.serving.knative.dev helloworld-go  -o=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+    kubectl get ksvc helloworld-go  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
     NAME                DOMAIN
     helloworld-go       helloworld-go.default.example.com
     ```
@@ -115,7 +115,7 @@ asssigned an external IP address.
     You can also export the host URL as a variable using the following command:
     
     ```shell
-    export HOST_URL=$(kubectl get services.serving.knative.dev helloworld-go  -o jsonpath='{.status.domain}')
+    export HOST_URL=$(kubectl get ksvc helloworld-go  --output jsonpath='{.status.domain}')
     ```
 
     If you changed the name from `helloworld-go` to something else when creating
@@ -128,7 +128,7 @@ asssigned an external IP address.
    step.
    
     ```shell
-    curl -H "Host: helloworld-go.default.example.com" http://IP_ADDRESS
+    curl -H "Host: helloworld-go.default.example.com" http://${IP_ADDRESS}
     Hello World: Go Sample v1!
     ```
    
@@ -146,14 +146,16 @@ asssigned an external IP address.
     It can take a few seconds for Knative to scale up your application and return
     a response.
 
-You've succesfully deployed your first application using Knative!
+    > Note: Add `-v` option to get more detail if the `curl` command failed.
+
+You've successfully deployed your first application using Knative!
 
 ## Cleaning up
 
 To remove the sample app from your cluster, delete the service record:
 
 ```shell
-kubectl delete -f service.yaml
+kubectl delete --filename service.yaml
 ```
 
 ---

@@ -11,7 +11,7 @@ the `config-network` map.
 To set the correct scope, you need to determine the IP ranges of your cluster. The scope varies 
 depending on your platform:
 
-* For Google Container Engine (GKE) run the following command to determine the scope. Make sure
+* For Google Kubernetes Engine (GKE) run the following command to determine the scope. Make sure
 to replace the variables or export these values first.
   ```shell
   gcloud container clusters describe ${CLUSTER_ID} \
@@ -34,7 +34,7 @@ value with the IP ranges of your cluster.
 Run the following command to edit the `config-network` map:
 
 ```shell
-kubectl edit configmap config-network -n knative-serving
+kubectl edit configmap config-network --namespace knative-serving
 ```
 
 Then, use an editor of your choice to change the `istio.sidecar.includeOutboundIPRanges` parameter value
@@ -74,7 +74,7 @@ Verify that the `traffic.sidecar.istio.io/includeOutboundIPRanges` annotation ma
 expected value from the config-map.
 
 ```shell
-$ kubectl get pod ${POD_NAME} -o yaml
+$ kubectl get pod ${POD_NAME} --output yaml
 
 apiVersion: v1
 kind: Pod

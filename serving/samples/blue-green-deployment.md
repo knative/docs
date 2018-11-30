@@ -40,7 +40,7 @@ spec:
 
 Save the file, then deploy the configuration to your cluster:
 ```bash
-kubectl apply -f blue-green-demo-config.yaml
+kubectl apply --filename blue-green-demo-config.yaml
 
 configuration "blue-green-demo" configured
 ```
@@ -63,7 +63,7 @@ spec:
 
 Save the file, then apply the route to your cluster:
 ```bash
-kubectl apply -f blue-green-demo-route.yaml
+kubectl apply --filename blue-green-demo-route.yaml
 
 route "blue-green-demo" configured
 ```
@@ -79,7 +79,7 @@ use with Knative.
    Knative creates the host URL by combining the name of your Route object,
    the namespace, and `example.com`, if you haven't configured a custom domain.
    For example, `[route-name].[namespace].example.com`.
-   You can get the IP address by entering `kubectl get svc knative-ingressgateway -n istio-system`
+   You can get the IP address by entering `kubectl get svc knative-ingressgateway --namespace istio-system`
    and copying the `EXTERNAL-IP` returned by that command.
    See [Interacting with your app](../../install/getting-started-knative-app.md#interacting-with-your-app)
    for more information.
@@ -112,7 +112,7 @@ spec:
 
 Save the file, then apply the updated configuration to your cluster:
 ```bash
-kubectl apply -f blue-green-demo-config.yaml
+kubectl apply --filename blue-green-demo-config.yaml
 
 configuration "blue-green-demo" configured
 ```
@@ -140,7 +140,7 @@ spec:
 
 Save the file, then apply the updated route to your cluster:
 ```bash
-kubectl apply -f blue-green-demo-route.yaml
+kubectl apply --filename blue-green-demo-route.yaml
 
 route "blue-green-demo" configured
 ```
@@ -175,7 +175,7 @@ spec:
 
 Save the file, then apply the updated route to your cluster:
 ```bash
-kubectl apply -f blue-green-demo-route.yaml
+kubectl apply --filename blue-green-demo-route.yaml
 
 route "blue-green-demo" configured
 ```
@@ -210,7 +210,7 @@ spec:
 
 Save the file, then apply the updated route to your cluster:
 ```bash
-kubectl apply -f blue-green-demo-route.yaml
+kubectl apply --filename blue-green-demo-route.yaml
 
 route "blue-green-demo" configured
 ```

@@ -6,11 +6,11 @@ Istio is a general-purpose reverse proxy, therefore these directions can also be
 used to configure routing based on other request data such as headers, or even
 to map Knative and external resources under the same domain name.
 
-In this sample, we set up two web services: "Search" service and "Login"
-service, which simply read in an env variable 'SERVICE_NAME' and prints
+In this sample, we set up two web services: `Search` service and `Login`
+service, which simply read in an env variable `SERVICE_NAME` and prints
 `"${SERVICE_NAME} is called"`. We'll then create a VirtualService with host
-"example.com", and define routing rules in the VirtualService so that
-"example.com/search" maps to the Search service, and "example.com/login" maps
+`example.com`, and define routing rules in the VirtualService so that
+`example.com/search` maps to the Search service, and `example.com/login` maps
 to the Login service.
 
 ## Prerequisites
@@ -18,8 +18,8 @@ to the Login service.
 1. A Kubernetes cluster with [Knative Serving](https://github.com/knative/docs/blob/master/install/README.md) installed.
 2. Install [Docker](https://docs.docker.com/get-started/#prepare-your-docker-environment).
 3. Acquire a domain name.
-    - In this example, we use example.com. If you don't have a domain name,
-you can modify your hosts file (on Mac or Linux) to map example.com to your
+   - In this example, we use `example.com`. If you don't have a domain name,
+you can modify your hosts file (on Mac or Linux) to map `example.com` to your
 cluster's ingress IP.
 4. Check out the code:
 ```
@@ -31,12 +31,12 @@ go get -d github.com/knative/docs/serving/samples/knative-routing-go
 Build the application container and publish it to a container registry:
 
 1. Move into the sample directory:  
-```
+```shell
 cd $GOPATH/src/github.com/knative/docs
 ```
 
 2. Set your preferred container registry:  
-```
+```shell
 export REPO="gcr.io/<YOUR_PROJECT_ID>"
 ```
    This example shows how to use Google Container Registry (GCR). You will need a Google Cloud Project and to enable the [Google Container Registry
@@ -54,13 +54,13 @@ docker build \
 docker push "${REPO}/serving/samples/knative-routing-go"
 ```
 
-5. Replace the image reference path with our published image path in the configuration file (`serving/samples/knative-routing-go/sample.yaml`):  
+5. Replace the image reference path with our published image path in the configuration file `serving/samples/knative-routing-go/sample.yaml`:  
    * Manually replace:  
     `image: github.com/knative/docs/serving/samples/knative-routing-go` with `image: <YOUR_CONTAINER_REGISTRY>/serving/samples/knative-routing-go`  
 
     Or
 
-   * Use run this command:  
+   * Run this command:  
     ```
     perl -pi -e "s@github.com/knative/docs@${REPO}@g" serving/samples/knative-routing-go/sample.yaml
     ```
@@ -69,7 +69,7 @@ docker push "${REPO}/serving/samples/knative-routing-go"
 
 Deploy the Knative Serving sample:
 ```
-kubectl apply -f serving/samples/knative-routing-go/sample.yaml
+kubectl apply --filename serving/samples/knative-routing-go/sample.yaml
 ```
 
 ## Exploring the Routes
@@ -80,88 +80,92 @@ service with:
 
 * Check the shared Gateway:
 ```
-kubectl get Gateway -n knative-serving -oyaml
+kubectl get Gateway --namespace knative-serving --output yaml
 ```
 
 * Check the corresponding Kubernetes service for the shared Gateway:
 ```
-kubectl get svc knative-ingressgateway -n istio-system -oyaml
+kubectl get svc knative-ingressgateway --namespace istio-system --output yaml
 ```
 
 * Inspect the deployed Knative services with:
 ```
-kubectl get service.serving.knative.dev
+kubectl get ksvc
 ```
-You should see 2 Knative services: search-service and login-service.
+You should see 2 Knative services: `search-service` and `login-service`.
 
 ### Access the Services  
 
 1. Find the shared Gateway IP and export as an environment variable:  
-```
-export GATEWAY_IP=`kubectl get svc knative-ingressgateway -n istio-system \
--o jsonpath="{.status.loadBalancer.ingress[*]['ip']}"`
+```shell
+export GATEWAY_IP=`kubectl get svc knative-ingressgateway --namespace istio-system \
+  --output jsonpath="{.status.loadBalancer.ingress[*]['ip']}"`
 ```
 
-2. Find the "Search" service route and export as an environment variable:  
+2. Find the `Search` service route and export as an environment variable:  
+```shell
+export SERVICE_HOST=`kubectl get route search-service --output jsonpath="{.status.domain}"`
 ```
-export SERVICE_HOST=`kubectl get route search-service -o jsonpath="{.status.domain}"`
-```
+
 3. Make a curl request to the service:  
-```
+```shell
 curl http://${GATEWAY_IP} --header "Host:${SERVICE_HOST}"
 ```
+
 You should see: `Search Service is called !`
 
 4. Similarly, you can also directly access "Login" service with:  
+```shell
+export SERVICE_HOST=`kubectl get route login-service --output jsonpath="{.status.domain}"`
 ```
-export SERVICE_HOST=`kubectl get route login-service -o jsonpath="{.status.domain}"`
-```
-```
+
+```shell
 curl http://${GATEWAY_IP} --header "Host:${SERVICE_HOST}"
 ```
+
 You should see: `Login Service is called !`
 
 ## Apply Custom Routing Rule
 
 1. Apply the custom routing rules defined in `routing.yaml` file with:  
 ```
-kubectl apply -f serving/samples/knative-routing-go/routing.yaml
+kubectl apply --filename serving/samples/knative-routing-go/routing.yaml
 ```
 
-2. The `routing.yaml` file will generate a new VirtualService "entry-route" for
-domain "example.com". View the VirtualService:  
+2. The `routing.yaml` file will generate a new VirtualService `entry-route` for
+domain `example.com`. View the VirtualService:  
 ```
-kubectl get VirtualService entry-route -oyaml
+kubectl get VirtualService entry-route --output yaml
 ```
 
-3. Send a request to the "Search" service and the "Login" service by using
+3. Send a request to the `Search` service and the `Login` service by using
 corresponding URIs. You should get the same results as directly accessing these services.  
     * Get the ingress IP:  
-    ```
-    export GATEWAY_IP=`kubectl get svc knative-ingressgateway -n istio-system \
-    -o jsonpath="{.status.loadBalancer.ingress[*]['ip']}"`
+    ```shell
+    export GATEWAY_IP=`kubectl get svc knative-ingressgateway --namespace istio-system \
+    --output jsonpath="{.status.loadBalancer.ingress[*]['ip']}"`
     ```
 
     * Send a request to the Search service:  
-    ```
+    ```shell
     curl http://${GATEWAY_IP}/search --header "Host:example.com"
     ```
 
     * Send a request to the Login service:  
-    ```
+    ```shell
     curl http://${GATEWAY_IP}/login --header "Host:example.com"
     ```
 
 ## How It Works
 
-When an external request with host "example.com" reaches
-"knative-shared-gateway" Gateway, the "entry-route" VirtualService will check
+When an external request with host `example.com` reaches
+`knative-shared-gateway` Gateway, the `entry-route` VirtualService will check
 if it has `/search` or `/login` URI. If the URI matches, then the host of
-request will be rewritten into the host of "Search" service or "Login" service
+request will be rewritten into the host of `Search` service or `Login` service
 correspondingly. This resets the final destination of the request.
-The request with updated host will be forwarded to "knative-shared-gateway"
+The request with updated host will be forwarded to `knative-shared-gateway`
 Gateway again. The Gateway proxy checks the updated host, and forwards it to
-"Search" or "Login" service according to its host setting.
+`Search` or `Login` service according to its host setting.
 
 ![Object model](images/knative-routing-sample-flow.png)
 
@@ -170,6 +174,6 @@ Gateway again. The Gateway proxy checks the updated host, and forwards it to
 
 To clean up the sample resources:
 ```
-kubectl delete -f serving/samples/knative-routing-go/sample.yaml
-kubectl delete -f serving/samples/knative-routing-go/routing.yaml
+kubectl delete --filename serving/samples/knative-routing-go/sample.yaml
+kubectl delete --filename serving/samples/knative-routing-go/routing.yaml
 ```

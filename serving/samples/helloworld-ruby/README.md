@@ -1,8 +1,8 @@
 # Hello World - Ruby sample
 
-A simple wenb app written in Ruby that you can use for testing.
-It reads in an env variable `TARGET` and prints "Hello World: ${TARGET}!". If
-TARGET is not specified, it will use "NOT SPECIFIED" as the TARGET.
+A simple web app written in Ruby that you can use for testing.
+It reads in an env variable `TARGET` and prints "Hello ${TARGET}!". If
+TARGET is not specified, it will use "World" as the TARGET.
 
 ## Prerequisites
 
@@ -33,8 +33,8 @@ The following instructions recreate the source files from this folder.
     set :bind, '0.0.0.0'
 
     get '/' do
-      target = ENV['TARGET'] || 'NOT SPECIFIED'
-      "Hello World: #{target}!\n"
+      target = ENV['TARGET'] || 'World'
+      "Hello #{target}!\n"
     end
     ```
 
@@ -42,19 +42,24 @@ The following instructions recreate the source files from this folder.
    See [official Ruby docker image](https://hub.docker.com/_/ruby/) for more details.
 
     ```docker
-    FROM ruby
+    # Use the official Ruby image.
+    # https://hub.docker.com/_/ruby
+    FROM ruby:2.5
 
-    RUN bundle config --global frozen 1
-
+    # Install production dependencies.
     WORKDIR /usr/src/app
     COPY Gemfile Gemfile.lock ./
+    ENV BUNDLE_FROZEN=true
     RUN bundle install
 
+    # Copy local code to the container image.
     COPY . .
 
+    # Configure and document the service HTTP port.
     ENV PORT 8080
-    EXPOSE 8080
+    EXPOSE $PORT
 
+    # Run the web service on container startup.
     CMD ["ruby", "./app.rb"]
     ```
 
@@ -117,7 +122,7 @@ you're ready to build and deploy the sample app.
    the previous step. Apply the configuration using `kubectl`:
 
     ```shell
-    kubectl apply -f service.yaml
+    kubectl apply --filename service.yaml
     ```
 
 1. Now that your service is created, Knative will perform the following steps:
@@ -126,12 +131,12 @@ you're ready to build and deploy the sample app.
    * Automatically scale your pods up and down (including to zero active pods).
 
 1. To find the IP address for your service, use
-   `kubectl get svc knative-ingressgateway -n istio-system` to get the ingress IP for your
+   `kubectl get svc knative-ingressgateway --namespace istio-system` to get the ingress IP for your
    cluster. If your cluster is new, it may take sometime for the service to get asssigned
    an external IP address.
 
     ```shell
-    kubectl get svc knative-ingressgateway -n istio-system
+    kubectl get svc knative-ingressgateway --namespace istio-system
 
     NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
     knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
@@ -140,7 +145,7 @@ you're ready to build and deploy the sample app.
 
 1. To find the URL for your service, use
     ```
-    kubectl get services.serving.knative.dev helloworld-ruby  -o=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+    kubectl get ksvc helloworld-ruby  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
     NAME                DOMAIN
     helloworld-ruby     helloworld-ruby.default.example.com
     ```
@@ -158,5 +163,5 @@ you're ready to build and deploy the sample app.
 To remove the sample app from your cluster, delete the service record:
 
 ```shell
-kubectl delete -f service.yaml
+kubectl delete --filename service.yaml
 ```

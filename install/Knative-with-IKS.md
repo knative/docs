@@ -1,7 +1,12 @@
 # Knative Install on IBM Cloud Kubernetes Service (IKS)
 
 This guide walks you through the installation of the latest version of Knative
-using pre-built images.
+using pre-built images.  
+
+You may also have it all installed for you by clicking the button below:  
+[![Deploy to IBM Cloud](https://bluemix.net/deploy/button_x2.png)](https://console.bluemix.net/devops/setup/deploy?repository=https://git.ng.bluemix.net/start-with-knative/toolchain.git)  
+
+More [instructions on the deploy button here](https://git.ng.bluemix.net/start-with-knative/toolchain/blob/master/README.md).
 
 You can find [guides for other platforms here](README.md).
 
@@ -68,12 +73,17 @@ components, the recommended configuration for a cluster is:
     ```bash
     ibmcloud cs region-set $CLUSTER_REGION
     ```
+1.  Select a Kubernetes version:
+    ```bash
+    ibmcloud cs kube-versions
+    export CLUSTER_K8S_VERSION=[a version from the list, must be >1.10]
+    ```
 1.  Create a Kubernetes cluster on IKS with the required specifications:
 
     ```bash
     ibmcloud cs cluster-create --name=$CLUSTER_NAME \
       --zone=$CLUSTER_ZONE \
-      --kube-version=1.10.3 \
+      --kube-version=$CLUSTER_K8S_VERSION \
       --machine-type=b2c.4x16 \
       --workers=3
     ```
@@ -86,7 +96,7 @@ components, the recommended configuration for a cluster is:
     ```bash
     ibmcloud cs cluster-create --name=$CLUSTER_NAME \
       --zone=$CLUSTER_ZONE \
-      --kube-version=1.10.3 \
+      --kube-version=$CLUSTER_K8S_VERSION \
       --machine-type=b2c.4x16 \
       --workers=3 \
       --private-vlan $PRIVATE_VLAN_ID \
@@ -126,7 +136,7 @@ Knative depends on Istio.
 
 1.  Install Istio:
     ```bash
-    kubectl apply -f https://raw.githubusercontent.com/knative/serving/v0.1.0/third_party/istio-0.8.0/istio.yaml
+    kubectl apply --filename https://raw.githubusercontent.com/knative/serving/v0.2.1/third_party/istio-1.0.2/istio.yaml
     ```
 1.  Label the default namespace with `istio-injection=enabled`:
     ```bash
@@ -135,7 +145,7 @@ Knative depends on Istio.
 1.  Monitor the Istio components until all of the components show a `STATUS` of
     `Running` or `Completed`:
     ```bash
-    kubectl get pods -n istio-system
+    kubectl get pods --namespace istio-system
     ```
 
 It will take a few minutes for all the components to be up and running; you can
@@ -153,13 +163,13 @@ You can install the Knative Serving and Build components together, or Build on i
 
 1. Run the `kubectl apply` command to install Knative and its dependencies:
     ```bash
-    kubectl apply -f https://github.com/knative/serving/releases/download/v0.1.0/release.yaml
+    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.1/release.yaml
     ```
 1. Monitor the Knative components until all of the components show a
    `STATUS` of `Running`:
     ```bash
-    kubectl get pods -n knative-serving
-    kubectl get pods -n knative-build
+    kubectl get pods --namespace knative-serving
+    kubectl get pods --namespace knative-build
     ```
 
 ### Installing Knative Build only
@@ -167,12 +177,12 @@ You can install the Knative Serving and Build components together, or Build on i
 1. Run the `kubectl apply` command to install
    [Knative Build](https://github.com/knative/build) and its dependencies:
     ```bash
-    kubectl apply -f https://raw.githubusercontent.com/knative/serving/v0.1.0/third_party/config/build/release.yaml
+    kubectl apply --filename https://raw.githubusercontent.com/knative/serving/v0.2.1/third_party/config/build/release.yaml
     ```
 1. Monitor the Knative Build components until all of the components show a
    `STATUS` of `Running`:
     ```bash
-    kubectl get pods -n knative-build
+    kubectl get pods --namespace knative-build
 
 Just as with the Istio components, it will take a few seconds for the Knative
 components to be up and running; you can rerun the `kubectl get` command to see
