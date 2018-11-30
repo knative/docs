@@ -57,25 +57,26 @@ export CLUSTER_ZONE=us-west1-c
 
 You need a GCP project to create a Google Kubernetes Engine cluster.
 
-1. Create a new GCP project and set it as your `gcloud` default, or set an
-   existing GCP project as your `gcloud` default:
-    * If you don't already have a GCP project created, create a new project in `gcloud`:
-      ```bash
-      export PROJECT=my-knative-project
-      gcloud projects create $PROJECT --set-as-default
-      ```
-      Replace `my-knative-project` with the name you'd like to use for your GCP project.
+1. Set `PROJECT` environment variable, replace `my-knative-project` with the
+   desired name of your GCP project. If you don't have one, we'll create one in
+   the next step.
+   ```bash
+   export PROJECT=my-knative-project
+   ```
+1. If you don't have a GCP project, create and set it as your `gcloud` default:
+   ```bash
+   gcloud projects create $PROJECT --set-as-default
+   ```
 
-      You also need to [enable billing](https://cloud.google.com/billing/docs/how-to/manage-billing-account)
-      for your new project.
+   You also need to [enable billing](https://cloud.google.com/billing/docs/how-to/manage-billing-account)
+   for your new project.
 
-    * If you already have a GCP project, make sure your project is set as your
-      `gcloud` default:
-      ```bash
-      gcloud config set project $PROJECT
-      ```
+1. If you already have a GCP project, make sure your project is set as your `gcloud` default:
+   ```bash
+   gcloud config set project $PROJECT
+   ```
 
-      > Tip: Enter `gcloud config get-value project` to view the ID of your default GCP project.
+   > Tip: Enter `gcloud config get-value project` to view the ID of your default GCP project.
 1. Enable the necessary APIs:
    ```bash
    gcloud services enable \
