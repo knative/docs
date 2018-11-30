@@ -57,9 +57,9 @@ export CLUSTER_ZONE=us-west1-c
 
 You need a GCP project to create a Google Kubernetes Engine cluster.
 
-1. Set `PROJECT` environment variable, replace `my-knative-project` with the
-   desired name of your GCP project. If you don't have one, we'll create one in
-   the next step.
+1. Set `PROJECT` environment variable, you can replace `my-knative-project` with
+   the desired name of your GCP project. If you don't have one, we'll create one
+   in the next step.
    ```bash
    export PROJECT=my-knative-project
    ```
@@ -73,7 +73,7 @@ You need a GCP project to create a Google Kubernetes Engine cluster.
 
 1. If you already have a GCP project, make sure your project is set as your `gcloud` default:
    ```bash
-   gcloud config set project $PROJECT
+   gcloud config set core/project $PROJECT
    ```
 
    > Tip: Enter `gcloud config get-value project` to view the ID of your default GCP project.
