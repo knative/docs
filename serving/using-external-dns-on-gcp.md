@@ -173,7 +173,7 @@ gcloud dns record-sets transaction execute --zone "my-org-do"
 
 ### Deploy ExternalDNS
 
-Firstly, Choose the manifest of ExternalDNS.
+Firstly, choose the manifest of ExternalDNS.
 
 Use below manifest if you set up your cluster with [CloudDNS scope](#cluster-with-cloud-dns-scope).
 ```
