@@ -14,84 +14,81 @@ If you installed the
 skip this step and continue to
 [Create Elasticsearch Indices](#create-elasticsearch-indices)
 
-- Install Knative monitoring components from the root of the [Serving repository](https://github.com/knative/serving):
+1. Install Knative monitoring components from the root of the [Serving repository](https://github.com/knative/serving):
 
-  ```shell
-  kubectl apply -R -f config/monitoring/100-common \
+   ```shell
+   kubectl apply -R -f config/monitoring/100-common \
       -f config/monitoring/150-elasticsearch \
       -f third_party/config/monitoring/common \
       -f third_party/config/monitoring/elasticsearch \
       -f config/monitoring/200-common \
       -f config/monitoring/200-common/100-istio.yaml
-  ```
+   ```
 
-- The installation is complete when logging & monitoring components are all
+1. The installation is complete when logging & monitoring components are all
   reported `Running` or `Completed`:
 
-  ```shell
-  kubectl get pods -n monitoring --watch
-  ```
+   ```shell
+   kubectl get pods --namespace knative-monitoring --watch
+   ```
 
-  ```
-  NAME                                  READY     STATUS    RESTARTS   AGE
-  elasticsearch-logging-0               1/1       Running   0          2d
-  elasticsearch-logging-1               1/1       Running   0          2d
-  fluentd-ds-5kc85                      1/1       Running   0          2d
-  fluentd-ds-vhrcq                      1/1       Running   0          2d
-  fluentd-ds-xghk9                      1/1       Running   0          2d
-  grafana-798cf569ff-v4q74              1/1       Running   0          2d
-  kibana-logging-7d474fbb45-6qb8x       1/1       Running   0          2d
-  kube-state-metrics-75bd4f5b8b-8t2h2   4/4       Running   0          2d
-  node-exporter-cr6bh                   2/2       Running   0          2d
-  node-exporter-mf6k7                   2/2       Running   0          2d
-  node-exporter-rhzr7                   2/2       Running   0          2d
-  prometheus-system-0                   1/1       Running   0          2d
-  prometheus-system-1                   1/1       Running   0          2d
-  ```
+   ```shell
+   NAME                                  READY     STATUS    RESTARTS   AGE
+   elasticsearch-logging-0               1/1       Running   0          2d
+   elasticsearch-logging-1               1/1       Running   0          2d
+   fluentd-ds-5kc85                      1/1       Running   0          2d
+   fluentd-ds-vhrcq                      1/1       Running   0          2d
+   fluentd-ds-xghk9                      1/1       Running   0          2d
+   grafana-798cf569ff-v4q74              1/1       Running   0          2d
+   kibana-logging-7d474fbb45-6qb8x       1/1       Running   0          2d
+   kube-state-metrics-75bd4f5b8b-8t2h2   4/4       Running   0          2d
+   node-exporter-cr6bh                   2/2       Running   0          2d
+   node-exporter-mf6k7                   2/2       Running   0          2d
+   node-exporter-rhzr7                   2/2       Running   0          2d
+   prometheus-system-0                   1/1       Running   0          2d
+   prometheus-system-1                   1/1       Running   0          2d
+   ```
 
-  CTRL+C to exit watch.
+   CTRL+C to exit watch.
+
+1. Verify that each of your nodes have the `beta.kubernetes.io/fluentd-ds-ready=true` label:
+
+   ```shell
+   kubectl get nodes --selector beta.kubernetes.io/fluentd-ds-ready=true
+   ```
+
+1. If you receive the `No Resources Found` response:
+
+     1. Run the following command to ensure that the Fluentd DaemonSet runs on all your nodes:
+     
+        ```shell
+        kubectl label nodes --all beta.kubernetes.io/fluentd-ds-ready="true"
+        ```
+
+     1. Run the following command to ensure that the `fluentd-ds` daemonset is ready on at least one node:
+
+        ```shell
+        kubectl get daemonset fluentd-ds --namespace knative-monitoring
+        ```
 
 ### Create Elasticsearch Indices
 
 To visualize logs with Kibana, you need to set which Elasticsearch indices to explore. We will create two indices in Elasticsearch using `Logstash` for application logs and `Zipkin`
 for request traces.
 
-- Ensure your Kubernetes node(s) are labeled with
-  `beta.kubernetes.io/fluentd-ds-ready="true"` so that the Fluentd
-  DaemonSet runs on each node:
-
-  ```shell
-  kubectl label nodes --all beta.kubernetes.io/fluentd-ds-ready="true"
-  ```
-
-  Some platforms come with this label set by default, so if you see an
-  error like below you can safely ignore it:
-
-  ```shell
-  error: 'beta.kubernetes.io/fluentd-ds-ready' already has a value (true), and --overwrite is false
-  ```
-
-  Wait for the Fluentd DaemonSet to be ready on at least one Node
-  before proceeding to create the Elasticsearch indices. You can check
-  the status with:
-
-  ```shell
-  kubectl get daemonset fluentd-ds -n monitoring
-  ```
-
 - To open the Kibana UI (the visualization tool for
   [Elasticsearch](https://info.elastic.co)), start a local proxy with the
   following command:
 
-  ```shell
-  kubectl proxy
-  ```
+   ```shell
+   kubectl proxy
+   ```
 
   This command starts a local proxy of Kibana on port 8001. For security
   reasons, the Kibana UI is exposed only within the cluster.
 
 - Navigate to the
-  [Kibana UI](http://localhost:8001/api/v1/namespaces/monitoring/services/kibana-logging/proxy/app/kibana).
+  [Kibana UI](http://localhost:8001/api/v1/namespaces/knative-monitoring/services/kibana-logging/proxy/app/kibana).
   _It might take a couple of minutes for the proxy to work_.
 
 - Within the "Configure an index pattern" page, enter `logstash-*` to
@@ -111,19 +108,36 @@ If your Knative Serving is not built on a Google Cloud Platform (GCP) based
 cluster or you want to send logs to another GCP project, you need to build your
 own Fluentd image and modify the configuration first. See
 
-1. Install
-   [Fluentd image on Knative Serving](https://github.com/knative/serving/blob/master/image/fluentd/README.md).
-2. [Set up a logging plugin](setting-up-a-logging-plugin.md).
-3. Install Knative monitoring components:
+1. Install Knative monitoring components:
 
-  ```shell
-  kubectl apply -R -f config/monitoring/100-common \
+   ```shell
+   kubectl apply -R -f config/monitoring/100-common \
       -f config/monitoring/150-stackdriver-prod \
       -f third_party/config/monitoring/common \
       -f config/monitoring/200-common \
       -f config/monitoring/200-common/100-istio.yaml
-  ```
+   ```
+  
+1. Verify that each of your nodes have the `beta.kubernetes.io/fluentd-ds-ready=true` label:
 
+   ```shell
+   kubectl get nodes --selector beta.kubernetes.io/fluentd-ds-ready=true
+   ```
+
+1. If you receive the `No Resources Found` response:
+
+     1. Run the following command to ensure that the Fluentd DaemonSet runs on all your nodes:
+   
+       ```shell
+       kubectl label nodes --all beta.kubernetes.io/fluentd-ds-ready="true"
+       ```
+
+     1. Run the following command to ensure that the `fluentd-ds` daemonset is ready on at least one node:
+
+       ```shell
+       kubectl get daemonset fluentd-ds --namespace knative-monitoring
+       ```
+     
 ## Learn More
 
 - Learn more about accessing logs, metrics, and traces:
