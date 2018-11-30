@@ -16,6 +16,8 @@ export PROJECT_NAME=<your-google-cloud-project-name>
 export CUSTOM_DOMAIN=<your-custom-domain-used-in-knative>
 
 export CLUSTER_NAME=<knative-cluster-name>
+
+export CLUSTER_ZONE=<knative-cluster-zone>
 ```
 
 ## Set up Kubernetes Engine cluster with CloudDNS read/write permissions
@@ -29,18 +31,31 @@ You can create a GKE cluster with Cloud DNS scope by entering the following
 command:
 ```shell
 gcloud container clusters create $CLUSTER_NAME \
-    --scopes "https://www.googleapis.com/auth/ndev.clouddns.readwrite"
+    --zone=$CLUSTER_ZONE \
+    --cluster-version=latest \
+    --machine-type=n1-standard-4 \
+    --enable-autoscaling --min-nodes=1 --max-nodes=10 \
+    --enable-autorepair \
+    --scopes=service-control,service-management,compute-rw,storage-ro,cloud-platform,logging-write,monitoring-write,pubsub,datastore,"https://www.googleapis.com/auth/ndev.clouddns.readwrite" \
+    --num-nodes=3
 ```
 Note that by using this way, any pod within the cluster will have permissions to read/write CloudDNS.
 
 ### Cluster with Cloud DNS Admin Service Account credential
 
-To begin, create a GKE cluster without Cloud DNS scope by entering the following command:
+1. Create a GKE cluster without Cloud DNS scope by entering the following command:
 ```shell
-gcloud container clusters create $CLUSTER_NAME
+gcloud container clusters create $CLUSTER_NAME \
+    --zone=$CLUSTER_ZONE \
+    --cluster-version=latest \
+    --machine-type=n1-standard-4 \
+    --enable-autoscaling --min-nodes=1 --max-nodes=10 \
+    --enable-autorepair \
+    --scopes=service-control,service-management,compute-rw,storage-ro,cloud-platform,logging-write,monitoring-write,pubsub,datastore \
+    --num-nodes=3
 ```
 
-Next, create a new service account with the project role `dns.admin`:
+2. Create a new service account with the project role `dns.admin`:
 ```shell
 # Name of the service account you want to create.
 export CLOUD_DNS_SA=cloud-dns-admin
@@ -63,7 +78,7 @@ gcloud iam service-accounts keys create ~/key.json \
     --iam-account=$CLOUD_DNS_SA
 ```
 
-After obtaining the service account credential, upload it to your cluster.
+3. Upload the service account credential to your cluster.
 This command uses the secret name `cloud-dns-key`, but you can
 choose a different name.
 ```shell
@@ -81,6 +96,7 @@ credentail secret within your cluster, so that only the pods that have the
 permission to get the credential secret can access your Cloud DNS.
 
 ## Set up Knative
+
 1. Follow the [instruction](https://github.com/knative/docs/blob/master/install/README.md) to install Knative on your cluster.
 1. Configure Knative to use your custom domain.
 ```shell
@@ -157,7 +173,9 @@ gcloud dns record-sets transaction execute --zone "my-org-do"
 
 ### Deploy ExternalDNS
 
-1. Use below manifest if you set up your cluster with CloudDNS scope (by following [the instruction](#cluster-with-cloud-dns-scope)).
+Firstly, Choose the manifest of ExternalDNS.
+
+Use below manifest if you set up your cluster with [CloudDNS scope](#cluster-with-cloud-dns-scope).
 ```
 apiVersion: v1
 kind: ServiceAccount
@@ -221,7 +239,7 @@ spec:
         - --txt-owner-id=my-identifier
 ```
 
-2. Or use below manifest if you set up your cluster with with CloudDNS service account credential (by following [the instruction](#cluster-with-cloud-dns-admin-service-account-credential)).
+Or use below manifest if you set up your cluster with [CloudDNS service account credential](#cluster-with-cloud-dns-admin-service-account-credential).
 ```
 apiVersion: v1
 kind: ServiceAccount
@@ -295,7 +313,7 @@ spec:
         - --txt-owner-id=my-identifier
 ```
 
-Use the following command to apply the manifest you choose to install 
+Then use the following command to apply the manifest you chose to install 
 ExternalDNS 
 ```shell
 cat <<EOF | kubectl apply --filename -
