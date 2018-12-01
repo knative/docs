@@ -71,7 +71,27 @@ To configure and setup monitoring:
      prometheus-system-1                   1/1       Running   0          2d
      ```
 
-  CTRL+C to exit watch.
+    CTRL+C to exit watch.
+  
+1. Verify that each of your nodes have the `beta.kubernetes.io/fluentd-ds-ready=true` label:
+
+   ```shell
+   kubectl get nodes --selector beta.kubernetes.io/fluentd-ds-ready=true
+   ```
+
+1. If you receive the `No Resources Found` response:
+
+     1. Run the following command to ensure that the Fluentd DaemonSet runs on all your nodes:
+     
+        ```shell
+        kubectl label nodes --all beta.kubernetes.io/fluentd-ds-ready="true"
+        ```
+
+     1. Run the following command to ensure that the `fluentd-ds` daemonset is ready on at least one node:
+
+        ```shell
+        kubectl get daemonset fluentd-ds --namespace knative-monitoring
+        ```
 
 ### Create Elasticsearch Indices
 
@@ -82,15 +102,15 @@ for request traces.
 - To open the Kibana UI (the visualization tool for [Elasticsearch](https://info.elastic.co)),
   you must start a local proxy by running the following command:
 
-  ```shell
-  kubectl proxy
-  ```
+   ```shell
+   kubectl proxy
+   ```
 
   This command starts a local proxy of Kibana on port 8001. For security
   reasons, the Kibana UI is exposed only within the cluster.
 
 - Navigate to the
-  [Kibana UI](http://localhost:8001/api/v1/namespaces/monitoring/services/kibana-logging/proxy/app/kibana).
+  [Kibana UI](http://localhost:8001/api/v1/namespaces/knative-monitoring/services/kibana-logging/proxy/app/kibana).
   _It might take a couple of minutes for the proxy to work_.
 
 - Within the "Configure an index pattern" page, enter `logstash-*` to
@@ -117,42 +137,63 @@ To configure and setup monitoring:
    [Fluentd image requirements](fluentd/README.md#requirements). For example, you can use a
    public image. Or you can create a custom one and upload the image to a
    container registry which your cluster has read access to.
-2. Follow the instructions in
+1. Follow the instructions in
    ["Setting up a logging plugin"](setting-up-a-logging-plugin.md#Configuring)
    to configure the stackdriver components settings.
-3. Install Knative monitoring components by running the following command from the root directory of
+1. Install Knative monitoring components by running the following command from the root directory of
    [knative/serving](https://github.com/knative/serving) repository:
 
-      ```shell
-      kubectl apply --recursive --filename config/monitoring/100-common \
-        --filename config/monitoring/150-stackdriver \
-        --filename third_party/config/monitoring/common \
-        --filename config/monitoring/200-common \
-        --filename config/monitoring/200-common/100-istio.yaml
-      ```
+   ```shell
+   kubectl apply --recursive --filename config/monitoring/100-common \
+     --filename config/monitoring/150-stackdriver \
+     --filename third_party/config/monitoring/common \
+     --filename config/monitoring/200-common \
+     --filename config/monitoring/200-common/100-istio.yaml
+   ```
 
-   The installation is complete when logging & monitoring components are all
-   reported `Running` or `Completed`:
+     The installation is complete when logging & monitoring components are all
+     reported `Running` or `Completed`:
 
-     ```shell
-     kubectl get pods --namespace monitoring --watch
-     ```
+    ```shell
+    kubectl get pods --namespace monitoring --watch
+    ```
 
-     ```
-     NAME                                  READY     STATUS    RESTARTS   AGE
-     fluentd-ds-5kc85                      1/1       Running   0          2d
-     fluentd-ds-vhrcq                      1/1       Running   0          2d
-     fluentd-ds-xghk9                      1/1       Running   0          2d
-     grafana-798cf569ff-v4q74              1/1       Running   0          2d
-     kube-state-metrics-75bd4f5b8b-8t2h2   4/4       Running   0          2d
-     node-exporter-cr6bh                   2/2       Running   0          2d
-     node-exporter-mf6k7                   2/2       Running   0          2d
-     node-exporter-rhzr7                   2/2       Running   0          2d
-     prometheus-system-0                   1/1       Running   0          2d
-     prometheus-system-1                   1/1       Running   0          2d
-     ```
+    ```
+    NAME                                  READY     STATUS    RESTARTS   AGE
+    fluentd-ds-5kc85                      1/1       Running   0          2d
+    fluentd-ds-vhrcq                      1/1       Running   0          2d
+    fluentd-ds-xghk9                      1/1       Running   0          2d
+    grafana-798cf569ff-v4q74              1/1       Running   0          2d
+    kube-state-metrics-75bd4f5b8b-8t2h2   4/4       Running   0          2d
+    node-exporter-cr6bh                   2/2       Running   0          2d
+    node-exporter-mf6k7                   2/2       Running   0          2d
+    node-exporter-rhzr7                   2/2       Running   0          2d
+    prometheus-system-0                   1/1       Running   0          2d
+    prometheus-system-1                   1/1       Running   0          2d
+    ```
 
-  CTRL+C to exit watch.
+    CTRL+C to exit watch.
+    
+1. Verify that each of your nodes have the `beta.kubernetes.io/fluentd-ds-ready=true` label:
+
+   ```shell
+   kubectl get nodes --selector beta.kubernetes.io/fluentd-ds-ready=true
+   ```
+
+1. If you receive the `No Resources Found` response:
+
+     1. Run the following command to ensure that the Fluentd DaemonSet runs on all your nodes:
+   
+        ```shell
+        kubectl label nodes --all beta.kubernetes.io/fluentd-ds-ready="true"
+        ```
+
+     1. Run the following command to ensure that the `fluentd-ds` daemonset is ready on at least one node:
+
+        ```shell
+        kubectl get daemonset fluentd-ds --namespace knative-monitoring
+        ```
+
 ## Learn More
 
 - Learn more about accessing logs, metrics, and traces:
