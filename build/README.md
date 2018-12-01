@@ -19,27 +19,27 @@ More information about this use case is demonstrated in
 
 ## Key features of Knative Builds
 
-* A `Build` can include multiple `steps` where each step specifies a `Builder`.
-* A `Builder` is a type of container image that you create to accomplish any
+- A `Build` can include multiple `steps` where each step specifies a `Builder`.
+- A `Builder` is a type of container image that you create to accomplish any
   task, whether that's a single step in a process, or the whole process itself.
-* The `steps` in a `Build` can push to a repository.
-* A `BuildTemplate` can be used to defined reusable templates.
-* The  `source` in a  `Build` can be defined to mount data to a Kubernetes
+- The `steps` in a `Build` can push to a repository.
+- A `BuildTemplate` can be used to defined reusable templates.
+- The `source` in a `Build` can be defined to mount data to a Kubernetes
   Volume, and supports:
-     * `git` repositories
-     * Google Cloud Storage
-     * An arbitrary container image
-* Authenticate with `ServiceAccount` using Kubernetes Secrets.
+  - `git` repositories
+  - Google Cloud Storage
+  - An arbitrary container image
+- Authenticate with `ServiceAccount` using Kubernetes Secrets.
 
 ### Learn more
 
 See the following reference topics for information about each of the build
 components:
 
-* [`Build`](https://github.com/knative/docs/blob/master/build/builds.md)
-* [`BuildTemplate`](https://github.com/knative/docs/blob/master/build/build-templates.md)
-* [ `Builder`](https://github.com/knative/docs/blob/master/build/builder-contract.md)
-* [`ServiceAccount`](https://github.com/knative/docs/blob/master/build/auth.md)
+- [`Build`](https://github.com/knative/docs/blob/master/build/builds.md)
+- [`BuildTemplate`](https://github.com/knative/docs/blob/master/build/build-templates.md)
+- [ `Builder`](https://github.com/knative/docs/blob/master/build/builder-contract.md)
+- [`ServiceAccount`](https://github.com/knative/docs/blob/master/build/auth.md)
 
 ## Install the Knative Build component
 
@@ -49,10 +49,10 @@ install. Knative Serving is not required to create and run builds.
 Before you can run a Knative Build, you must install the Knative Build
 component in your Kubernetes cluster:
 
-* For details about installing a new instance of Knative in your Kubernetes
+- For details about installing a new instance of Knative in your Kubernetes
   cluster, see [Installing Knative](../install/README.md).
 
-* If you have a component of Knative installed and running, you can
+- If you have a component of Knative installed and running, you can
   [add and install the Knative Build component](installing-build-component.md).
 
 ## Configuration syntax example
@@ -86,7 +86,6 @@ spec:
     args: ['echo', 'hello-example', 'build']
 ```
 
-
 ## Get started with Knative Build samples
 
 Use the following samples to learn how to configure your Knative Builds to
@@ -96,21 +95,20 @@ Tip: Review and reference multiple samples to piece together more complex builds
 
 #### Simple build samples
 
-* [Collection of simple test builds](https://github.com/knative/build/tree/master/test).
+- [Collection of simple test builds](https://github.com/knative/build/tree/master/test).
 
 #### Build templates
 
- * [Repository of sample build templates](https://github.com/knative/build-templates).
+- [Repository of sample build templates](https://github.com/knative/build-templates).
 
- #### Complex samples
+#### Complex samples
 
- * [Use Knative to build apps from source code and then run those containers](https://github.com/knative/docs/blob/master/serving/samples/source-to-url-go).
+- [Use Knative to build apps from source code and then run those containers](https://github.com/knative/docs/blob/master/serving/samples/source-to-url-go).
 
+## Related info
 
- ## Related info
-
- If you are interested in contributing to the Knative Build project, see the
- [Knative Build code repository](https://github.com/knative/build).
+If you are interested in contributing to the Knative Build project, see the
+[Knative Build code repository](https://github.com/knative/build).
 
 ---
 

@@ -7,11 +7,12 @@ generates its thumbnail image using the `ffmpeg` framework.
 
 ## Before you begin
 
-* [Install Knative Serving](../../../install/README.md)
+- [Install Knative Serving](../../../install/README.md)
 
 If you want to test and run the app locally:
-* [Install Go](https://golang.org/doc/install)
-* [Download `ffmpeg`](https://www.ffmpeg.org/download.html)
+
+- [Install Go](https://golang.org/doc/install)
+- [Download `ffmpeg`](https://www.ffmpeg.org/download.html)
 
 ## Sample code
 
@@ -114,7 +115,6 @@ kubectl apply --filename https://raw.githubusercontent.com/knative/build-templat
 kubectl apply --filename sample.yaml
 ```
 
-
 Now, if you look at the `status` of the revision, you will see that a build is in progress:
 
 ```shell
@@ -133,7 +133,6 @@ items:
 ```
 
 Once `BuildComplete` has a `status: "True"`, the revision will be deployed.
-
 
 ## Using the app
 

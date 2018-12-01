@@ -10,22 +10,22 @@ by a Knative Service.
 You will need:
 
 1. An internet-accessible Kubernetes cluster with Knative Serving
-  installed. Follow the [installation
-  instructions](https://github.com/knative/docs/blob/master/install/README.md)
-  if you need to create one.
+   installed. Follow the [installation
+   instructions](https://github.com/knative/docs/blob/master/install/README.md)
+   if you need to create one.
 1. Ensure Knative Serving is [configured with a domain
-    name](https://github.com/knative/docs/blob/master/serving/using-a-custom-domain.md)
-    that allows GitHub to call into the cluster.
+   name](https://github.com/knative/docs/blob/master/serving/using-a-custom-domain.md)
+   that allows GitHub to call into the cluster.
 1. If you're using GKE, you'll also want to [assign a static IP address](https://github.com/knative/docs/blob/master/serving/gke-assigning-static-ip-address.md).
 1. Install [Knative
-  Eventing](https://github.com/knative/docs/tree/master/eventing). Those
-  instructions also install the default eventing sources, including
-  the `GitHubSource` we'll use.
+   Eventing](https://github.com/knative/docs/tree/master/eventing). Those
+   instructions also install the default eventing sources, including
+   the `GitHubSource` we'll use.
 
 ### Create a Knative Service
 
 To verify the `GitHubSource` is working, we will create a simple Knative
-`Service` that dumps incoming messages to its log.  The `service.yaml` file
+`Service` that dumps incoming messages to its log. The `service.yaml` file
 defines this basic service.
 
 ```yaml
@@ -44,7 +44,6 @@ spec:
 
 Enter the following command to create the service from `service.yaml`:
 
-
 ```shell
 kubectl --namespace default apply --filename eventing/samples/github-source/service.yaml
 ```
@@ -54,8 +53,8 @@ kubectl --namespace default apply --filename eventing/samples/github-source/serv
 Create a [personal access token](https://github.com/settings/tokens)
 for GitHub that the GitHub source can use to register webhooks with
 the GitHub API. Also decide on a secret token that your code will use
-to authenticate the incoming webhooks from GitHub (*secretToken*).
-    
+to authenticate the incoming webhooks from GitHub (_secretToken_).
+  
 The token can be named anything you find convenient. The Source
 requires `repo:public_repo` and `admin:repo_hook`, to let it fire
 events from your public repositories and to create webhooks for those
@@ -68,7 +67,7 @@ recommended scopes:
 ![GitHub UI](personal_access_token.png "GitHub personal access token screenshot")
 
 Update `githubsecret.yaml` with those values. If your generated access
-token is `'personal_access_token_value'` and you choose your *secretToken*
+token is `'personal_access_token_value'` and you choose your _secretToken_
 as `'asdfasfdsaf'`, you'd modify `githubsecret.yaml` like so:
 
 ```yaml
@@ -82,14 +81,14 @@ stringData:
   secretToken: asdfasfdsaf
 ```
 
-Hint: you can makeup a random *secretToken* with:
-    
+Hint: you can makeup a random _secretToken_ with:
+
 ```shell
 head -c 8 /dev/urandom | base64
 ```
 
 Then, apply the githubsecret using `kubectl`:
-    
+
 ```shell
 kubectl --namespace default apply --filename eventing/samples/github-source/githubsecret.yaml
 ```
@@ -108,7 +107,7 @@ metadata:
   name: githubsourcesample
 spec:
   eventTypes:
-  - pull_request
+    - pull_request
   ownerAndRepository: <YOUR USER>/<YOUR REPO>
   accessToken:
     secretKeyRef:
@@ -122,7 +121,6 @@ spec:
     apiVersion: serving.knative.dev/v1alpha1
     kind: Service
     name: github-message-dumper
-
 ```
 
 Then, apply that yaml using `kubectl`:
@@ -142,10 +140,9 @@ check mark to the left of the hook URL, as shown below.
 
 ### Create Events
 
-Create a pull request in your GitHub repository. We will verify 
+Create a pull request in your GitHub repository. We will verify
 that the GitHub events were sent into the Knative eventing system
 by looking at our message dumper function logs.
-
 
 ```shell
 kubectl --namespace default get pods

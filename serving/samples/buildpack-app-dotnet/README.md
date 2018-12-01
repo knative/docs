@@ -8,7 +8,7 @@ sample app for Cloud Foundry.
 
 ## Prerequisites
 
-* [Install Knative Serving](../../../install/README.md)
+- [Install Knative Serving](../../../install/README.md)
 
 ## Running
 

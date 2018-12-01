@@ -8,7 +8,7 @@ sample function for riff.
 
 ## Prerequisites
 
-* [Install Knative Serving](../../../install/README.md)
+- [Install Knative Serving](../../../install/README.md)
 
 ## Running
 
@@ -53,6 +53,7 @@ items:
 Once the `BuildComplete` status is `True`, resource creation begins.
 
 To access this service using `curl`, we first need to determine its ingress address:
+
 ```shell
 watch kubectl get svc knative-ingressgateway --namespace istio-system
 NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE

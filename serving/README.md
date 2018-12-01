@@ -1,4 +1,3 @@
-
 # Knative Serving
 
 Knative Serving builds on Kubernetes and Istio to support deploying and serving
@@ -7,10 +6,10 @@ and scales to support advanced scenarios.
 
 The Knative Serving project provides middleware primitives that enable:
 
-* Rapid deployment of serverless containers
-* Automatic scaling up and down to zero
-* Routing and network programming for Istio components
-* Point-in-time snapshots of deployed code and configurations
+- Rapid deployment of serverless containers
+- Automatic scaling up and down to zero
+- Routing and network programming for Istio components
+- Point-in-time snapshots of deployed code and configurations
 
 ## Serving resources
 
@@ -18,22 +17,22 @@ Knative Serving defines a set of objects as Kubernetes
 Custom Resource Definitions (CRDs). These objects are used to define and control
 how your serverless workload behaves on the cluster:
 
-* [Service](https://github.com/knative/serving/blob/master/docs/spec/spec.md#service):
+- [Service](https://github.com/knative/serving/blob/master/docs/spec/spec.md#service):
   The `service.serving.knative.dev` resource automatically manages the whole
   lifecycle of your workload. It controls the creation of other
   objects to ensure that your app has a route, a configuration, and a new revision
   for each update of the service. Service can be defined to always route traffic to the
   latest revision or to a pinned revision.
-* [Route](https://github.com/knative/serving/blob/master/docs/spec/spec.md#route):
+- [Route](https://github.com/knative/serving/blob/master/docs/spec/spec.md#route):
   The `route.serving.knative.dev` resource maps a network endpoint to a one or
   more revisions. You can manage the traffic in several ways, including fractional
   traffic and named routes.
-* [Configuration](https://github.com/knative/serving/blob/master/docs/spec/spec.md#configuration):
+- [Configuration](https://github.com/knative/serving/blob/master/docs/spec/spec.md#configuration):
   The `configuration.serving.knative.dev` resource maintains
   the desired state for your deployment. It provides a clean separation between
   code and configuration and follows the Twelve-Factor App methodology. Modifying a configuration
   creates a new revision.
-* [Revision](https://github.com/knative/serving/blob/master/docs/spec/spec.md#revision):
+- [Revision](https://github.com/knative/serving/blob/master/docs/spec/spec.md#revision):
   The `revision.serving.knative.dev` resource is a point-in-time snapshot
   of the code and configuration for each modification made to the workload. Revisions
   are immutable objects and can be retained for as long as useful.
@@ -55,29 +54,29 @@ in the Knative Serving repository.
 
 ## More samples and demos
 
-* [Autoscaling with Knative Serving](./samples/autoscale-go/README.md)
-* [Source-to-URL with Knative Serving](./samples/source-to-url-go/README.md)
-* [Telemetry with Knative Serving](./samples/telemetry-go/README.md)
-* [REST API sample](./samples/rest-api-go/README.md)
+- [Autoscaling with Knative Serving](./samples/autoscale-go/README.md)
+- [Source-to-URL with Knative Serving](./samples/source-to-url-go/README.md)
+- [Telemetry with Knative Serving](./samples/telemetry-go/README.md)
+- [REST API sample](./samples/rest-api-go/README.md)
 
-## Setting up Logging and Metrics 
+## Setting up Logging and Metrics
 
-* [Installing Logging, Metrics and Traces](./installing-logging-metrics-traces.md)
-* [Accessing Logs](./accessing-logs.md)
-* [Accessing Metrics](./accessing-metrics.md)
-* [Accessing Traces](./accessing-traces.md)
-* [Setting up a logging plugin](./setting-up-a-logging-plugin.md)
+- [Installing Logging, Metrics and Traces](./installing-logging-metrics-traces.md)
+- [Accessing Logs](./accessing-logs.md)
+- [Accessing Metrics](./accessing-metrics.md)
+- [Accessing Traces](./accessing-traces.md)
+- [Setting up a logging plugin](./setting-up-a-logging-plugin.md)
 
-## Debugging Knative Serving issues 
+## Debugging Knative Serving issues
 
-* [Debugging Application Issues](./debugging-application-issues.md)
-* [Debugging Performance Issues](./debugging-performance-issues.md)
+- [Debugging Application Issues](./debugging-application-issues.md)
+- [Debugging Performance Issues](./debugging-performance-issues.md)
 
 ## Configuration and Networking
 
-* [Configuring outbound network access](./outbound-network-access.md)
-* [Using a custom domain](./using-a-custom-domain.md)
-* [Assigning a static IP address for Knative on Google Kubernetes Engine](./gke-assigning-static-ip-address.md)
+- [Configuring outbound network access](./outbound-network-access.md)
+- [Using a custom domain](./using-a-custom-domain.md)
+- [Assigning a static IP address for Knative on Google Kubernetes Engine](./gke-assigning-static-ip-address.md)
 
 ## Known Issues
 

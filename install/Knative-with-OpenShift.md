@@ -131,8 +131,8 @@ It will take a few minutes for all the components to be up and running; you can
 rerun the command to see the current status.
 
 > Note: Instead of rerunning the command, you can add `--watch` to the above
-  command to view the component's status updates in real time. Use CTRL+C to exit watch mode.
-  
+> command to view the component's status updates in real time. Use CTRL+C to exit watch mode.
+
 Set `priviledged` to `true` for the `istio-sidecar-injector`:
 
 ```shell
@@ -190,7 +190,7 @@ Just as with the Istio components, it will take a few seconds for the Knative
 components to be up and running; you can rerun the command to see the current status.
 
 > Note: Instead of rerunning the command, you can add `--watch` to the above
-  command to view the component's status updates in real time. Use CTRL+C to exit watch mode.
+> command to view the component's status updates in real time. Use CTRL+C to exit watch mode.
 
 Now you can deploy an app to your newly created Knative cluster.
 
@@ -207,13 +207,13 @@ If you'd like to view the available sample apps and deploy one of your choosing,
 head to the [sample apps](../serving/samples/README.md) repo.
 
 > Note: When looking up the IP address to use for accessing your app, you need to look up
-  the NodePort for the `knative-ingressgateway` as well as the IP address used for OpenShift.
-  You can use the following command to look up the value to use for the {IP_ADDRESS} placeholder
-  used in the samples:
+> the NodePort for the `knative-ingressgateway` as well as the IP address used for OpenShift.
+> You can use the following command to look up the value to use for the {IP_ADDRESS} placeholder
+> used in the samples:
 
-  ```shell
-  export IP_ADDRESS=$(oc get node  -o 'jsonpath={.items[0].status.addresses[0].address}'):$(oc get svc knative-ingressgateway -n istio-system -o 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
-  ```
+```shell
+export IP_ADDRESS=$(oc get node  -o 'jsonpath={.items[0].status.addresses[0].address}'):$(oc get svc knative-ingressgateway -n istio-system -o 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
+```
 
 ## Cleaning up
 

@@ -7,15 +7,15 @@ repositories go through. All changes, regardless of whether they are from
 newcomers to the community or from the core team follow the same process and
 are given the same level of review.
 
-*   [Working groups](#working-groups)
-*   [Code of conduct](#code-of-conduct)
-*   [Team values](#team-values)
-*   [Contributor license agreements](#contributor-license-agreements)
-*   [Design documents](#design-documents)
-*   [Contributing a feature](#contributing-a-feature)
-*   [Setting up to contribute to Knative](#setting-up-to-contribute-to-knative)
-*   [Pull requests](#pull-requests)
-*   [Issues](#issues)
+- [Working groups](#working-groups)
+- [Code of conduct](#code-of-conduct)
+- [Team values](#team-values)
+- [Contributor license agreements](#contributor-license-agreements)
+- [Design documents](#design-documents)
+- [Contributing a feature](#contributing-a-feature)
+- [Setting up to contribute to Knative](#setting-up-to-contribute-to-knative)
+- [Pull requests](#pull-requests)
+- [Issues](#issues)
 
 ## Working groups
 
@@ -74,40 +74,40 @@ later join knative-dev if you want immediate access).
 In order to contribute a feature to Knative you'll need to go through the
 following steps:
 
-*   Discuss your idea with the appropriate [working groups](WORKING-GROUPS.md)
-    on the working group's mailing list.
+- Discuss your idea with the appropriate [working groups](WORKING-GROUPS.md)
+  on the working group's mailing list.
 
-*   Once there is general agreement that the feature is useful, [create a GitHub
-    issue](https://github.com/knative/docs/issues/new) to track the discussion.
-    The issue should include information about the requirements and use cases
-    that it is trying to address. Include a discussion of the proposed design
-    and technical details of the implementation in the issue.
+- Once there is general agreement that the feature is useful, [create a GitHub
+  issue](https://github.com/knative/docs/issues/new) to track the discussion.
+  The issue should include information about the requirements and use cases
+  that it is trying to address. Include a discussion of the proposed design
+  and technical details of the implementation in the issue.
 
-*   If the feature is substantial enough:
+- If the feature is substantial enough:
 
-    *   Working group leads will ask for a design document as outlined in
-        [design documents](#design-documents). Create the design document and
-        add a link to it in the GitHub issue. Don't forget to send a note to the
-        working group to let everyone know your document is ready for review.
+  - Working group leads will ask for a design document as outlined in
+    [design documents](#design-documents). Create the design document and
+    add a link to it in the GitHub issue. Don't forget to send a note to the
+    working group to let everyone know your document is ready for review.
 
-    *   Depending on the breadth of the design and how contentious it is, the
-        working group leads may decide the feature needs to be discussed in one
-        or more working group meetings before being approved.
+  - Depending on the breadth of the design and how contentious it is, the
+    working group leads may decide the feature needs to be discussed in one
+    or more working group meetings before being approved.
 
-    *   Once the major technical issues are resolved and agreed upon, post a
-        note with the design decision and the general execution plan to the
-        working group's mailing list and on the feature's issue.
+  - Once the major technical issues are resolved and agreed upon, post a
+    note with the design decision and the general execution plan to the
+    working group's mailing list and on the feature's issue.
 
-*   Submit PRs to [knative/serving](https://github.com/knative/serving/pulls)
-    with your code changes.
+- Submit PRs to [knative/serving](https://github.com/knative/serving/pulls)
+  with your code changes.
 
-*   Submit PRs to knative/serving with user documentation for your feature,
-    including usage examples when possible. Add documentation to
-    [knative/docs/serving](https://github.com/knative/docs/tree/master/serving).
+- Submit PRs to knative/serving with user documentation for your feature,
+  including usage examples when possible. Add documentation to
+  [knative/docs/serving](https://github.com/knative/docs/tree/master/serving).
 
-*Note that we prefer bite-sized PRs instead of giant monster PRs. It's therefore
+_Note that we prefer bite-sized PRs instead of giant monster PRs. It's therefore
 preferable if you can introduce large features in small, individually-reviewable
-PRs that build on top of one another.*
+PRs that build on top of one another._
 
 If you would like to skip the process of submitting an issue and instead would
 prefer to just submit a pull request with your desired code changes then that's
@@ -135,14 +135,14 @@ active, and hopefully prevents duplicated efforts.
 
 To submit a proposed change:
 
-*   Fork the affected repository.
-*   Create a new branch for your changes.
-*   Develop the code/fix.
-*   Add new test cases. In the case of a bug fix, the tests should fail without
-    your code changes. For new features try to cover as many variants as
-    reasonably possible.
-*   Modify the documentation as necessary.
-*   Verify all CI status checks pass, and work to make them pass if failing.
+- Fork the affected repository.
+- Create a new branch for your changes.
+- Develop the code/fix.
+- Add new test cases. In the case of a bug fix, the tests should fail without
+  your code changes. For new features try to cover as many variants as
+  reasonably possible.
+- Modify the documentation as necessary.
+- Verify all CI status checks pass, and work to make them pass if failing.
 
 The general rule is that all PRs should be 100% complete - meaning they should
 include all test cases and documentation changes related to the change. A
@@ -165,46 +165,50 @@ GitHub issues can be used to report bugs or submit feature requests.
 
 When reporting a bug please include the following key pieces of information:
 
-*   The version of the project you were using (version number, git commit, etc)
-*   Operating system you are using
-*   The exact, minimal, steps needed to reproduce the issue. Submitting a 5 line
-    script will get a much faster response from the team than one that's
-    hundreds of lines long.
+- The version of the project you were using (version number, git commit, etc)
+- Operating system you are using
+- The exact, minimal, steps needed to reproduce the issue. Submitting a 5 line
+  script will get a much faster response from the team than one that's
+  hundreds of lines long.
 
 ## Third-party code
-* All third-party code must be placed in `vendor/` or `third_party/` folders.
-* `vendor/` folder is managed by [dep](https://github.com/golang/dep) and stores
-the source code of third-party Go dependencies. `vendor/` folder should not be 
-modified manually.
-* Other third-party code belongs in `third_party/` folder.
-* Third-party code must include licenses.
+
+- All third-party code must be placed in `vendor/` or `third_party/` folders.
+- `vendor/` folder is managed by [dep](https://github.com/golang/dep) and stores
+  the source code of third-party Go dependencies. `vendor/` folder should not be
+  modified manually.
+- Other third-party code belongs in `third_party/` folder.
+- Third-party code must include licenses.
 
 A non-exclusive list of code that must be places in `vendor/` and `third_party/`:
-* Open source, free software, or commercially-licensed code.
-* Tools or libraries or protocols that are open source, free software, or commercially licensed.
-* Derivative works of third-party code.
-* Excerpts from third-party code.
+
+- Open source, free software, or commercially-licensed code.
+- Tools or libraries or protocols that are open source, free software, or commercially licensed.
+- Derivative works of third-party code.
+- Excerpts from third-party code.
 
 ### Adding a new third-party dependency to `third_party/` folder
-* Create a sub-folder under `third_party/` for each component.
-* In each sub-folder, make sure there is a file called LICENSE which contains the appropriate
- license text for the dependency. If one doesn't exist then create it. More details on this below.
-* Check in a pristine copy of the code with LICENSE and METADATA files. 
- You do not have to include unused files, and you can move or rename files if necessary,
- but do not modify the contents of any files yet.
-* Once the pristine copy is merged into master, you may modify the code.
+
+- Create a sub-folder under `third_party/` for each component.
+- In each sub-folder, make sure there is a file called LICENSE which contains the appropriate
+  license text for the dependency. If one doesn't exist then create it. More details on this below.
+- Check in a pristine copy of the code with LICENSE and METADATA files.
+  You do not have to include unused files, and you can move or rename files if necessary,
+  but do not modify the contents of any files yet.
+- Once the pristine copy is merged into master, you may modify the code.
 
 ### LICENSE
+
 The license for the code must be in a file named LICENSE. If it was distributed like that,
-you're good. If not, you need to make LICENSE be a file containing the full text of the license. 
-If there's another file in the distribution with the license in it, rename it to LICENSE 
-(e.g., rename a LICENSE.txt or COPYING file to LICENSE). If the license is only available in 
+you're good. If not, you need to make LICENSE be a file containing the full text of the license.
+If there's another file in the distribution with the license in it, rename it to LICENSE
+(e.g., rename a LICENSE.txt or COPYING file to LICENSE). If the license is only available in
 the comments or at a URL, extract and copy the text of the license into LICENSE.
 
-You may optionally document the generation of the LICENSE file in the local_modifications 
+You may optionally document the generation of the LICENSE file in the local_modifications
 field of the METADATA file.
 
-If there are multiple licenses for the code, put the text of all the licenses into LICENSE 
+If there are multiple licenses for the code, put the text of all the licenses into LICENSE
 along with separators and comments as to the applications.
 
 ---

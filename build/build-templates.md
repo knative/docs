@@ -22,43 +22,49 @@ This is used only for the purposes of demonstration.
 ```yaml
 spec:
   parameters:
-  # This has no default, and is therefore required.
-  - name: IMAGE
-    description: Where to publish the resulting image.
+    # This has no default, and is therefore required.
+    - name: IMAGE
+      description: Where to publish the resulting image.
 
-  # These may be overridden, but provide sensible defaults.
-  - name: DIRECTORY
-    description: The directory containing the build context.
-    default: /workspace
-  - name: DOCKERFILE_NAME
-    description: The name of the Dockerfile
-    default: Dockerfile
+    # These may be overridden, but provide sensible defaults.
+    - name: DIRECTORY
+      description: The directory containing the build context.
+      default: /workspace
+    - name: DOCKERFILE_NAME
+      description: The name of the Dockerfile
+      default: Dockerfile
 
   steps:
-  - name: dockerfile-build
-    image: gcr.io/cloud-builders/docker
-    workingDir: "${DIRECTORY}"
-    args: ["build", "--no-cache",
-           "--tag", "${IMAGE}",
-           "--file", "${DOCKERFILE_NAME}",
-           "."]
-    volumeMounts:
-    - name: docker-socket
-      mountPath: /var/run/docker.sock
+    - name: dockerfile-build
+      image: gcr.io/cloud-builders/docker
+      workingDir: "${DIRECTORY}"
+      args:
+        [
+          "build",
+          "--no-cache",
+          "--tag",
+          "${IMAGE}",
+          "--file",
+          "${DOCKERFILE_NAME}",
+          ".",
+        ]
+      volumeMounts:
+        - name: docker-socket
+          mountPath: /var/run/docker.sock
 
-  - name: dockerfile-push
-    image: gcr.io/cloud-builders/docker
-    args: ["push", "${IMAGE}"]
-    volumeMounts:
-    - name: docker-socket
-      mountPath: /var/run/docker.sock
+    - name: dockerfile-push
+      image: gcr.io/cloud-builders/docker
+      args: ["push", "${IMAGE}"]
+      volumeMounts:
+        - name: docker-socket
+          mountPath: /var/run/docker.sock
 
   # As an implementation detail, this template mounts the host's daemon socket.
   volumes:
-  - name: docker-socket
-    hostPath:
-      path: /var/run/docker.sock
-      type: Socket
+    - name: docker-socket
+      hostPath:
+        path: /var/run/docker.sock
+        type: Socket
 ```
 
 In this example, `parameters` describes the formal arguments for the template.
@@ -80,6 +86,7 @@ For the sake of illustrating re-use, here are several example Builds
 instantiating the `BuildTemplate` above (`dockerfile-build-and-push`).
 
 Build `mchmarny/rester-tester`:
+
 ```yaml
 spec:
   source:
@@ -89,11 +96,12 @@ spec:
   template:
     name: dockerfile-build-and-push
     arguments:
-    - name: IMAGE
-      value: gcr.io/my-project/rester-tester
+      - name: IMAGE
+        value: gcr.io/my-project/rester-tester
 ```
 
 Build `googlecloudplatform/cloud-builder`'s `wget` builder:
+
 ```yaml
 spec:
   source:
@@ -103,14 +111,15 @@ spec:
   template:
     name: dockerfile-build-and-push
     arguments:
-    - name: IMAGE
-      value: gcr.io/my-project/wget
-    # Optional override to specify the subdirectory containing the Dockerfile
-    - name: DIRECTORY
-      value: /workspace/wget
+      - name: IMAGE
+        value: gcr.io/my-project/wget
+      # Optional override to specify the subdirectory containing the Dockerfile
+      - name: DIRECTORY
+        value: /workspace/wget
 ```
 
 Build `googlecloudplatform/cloud-builder`'s `docker` builder with `17.06.1`:
+
 ```yaml
 spec:
   source:
@@ -120,13 +129,13 @@ spec:
   template:
     name: dockerfile-build-and-push
     arguments:
-    - name: IMAGE
-      value: gcr.io/my-project/docker
-    # Optional overrides
-    - name: DIRECTORY
-      value: /workspace/docker
-    - name: DOCKERFILE_NAME
-      value: Dockerfile-17.06.1
+      - name: IMAGE
+        value: gcr.io/my-project/docker
+      # Optional overrides
+      - name: DIRECTORY
+        value: /workspace/docker
+      - name: DOCKERFILE_NAME
+        value: Dockerfile-17.06.1
 ```
 
 ---

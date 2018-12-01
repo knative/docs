@@ -1,31 +1,32 @@
 # Slack Usage Guidelines
 
-Slack is the main communication platform for Knative outside of our mailing 
+Slack is the main communication platform for Knative outside of our mailing
 lists. It’s important that conversation stays on topic in each channel, and that
-everyone abides by the Code of Conduct. Community members should all expect to 
+everyone abides by the Code of Conduct. Community members should all expect to
 have a positive experience.
 
 Chat is searchable and public. Do not make comments that you would not say on a
 video recording or in another public space. Please be courteous to others.
 
 `@here` and `@channel` should be used rarely. Members will receive notifications
-from these commands and we are a global project - please be kind. 
+from these commands and we are a global project - please be kind.
 Note: `@all` is only to be used by admins.
 
 You can join the [Knative Slack](https://slack.knative.dev) instance at
 https://slack.knative.dev.
 
 ## Code of Conduct
-The Knative [Code of Conduct](./CODE-OF-CONDUCT.md) applies throughout the 
+
+The Knative [Code of Conduct](./CODE-OF-CONDUCT.md) applies throughout the
 project, and includes all communication mediums.
 
 ## Admins
 
-* @mchmarny
-* @isdal
-* @dewitt
+- @mchmarny
+- @isdal
+- @dewitt
 
-Slack admins should make sure to mention this in the “What I do” section of 
+Slack admins should make sure to mention this in the “What I do” section of
 their Slack profile, as well as for which time zone.
 
 To connect: please reach out in the #slack-admins channel, mention one of us
@@ -34,16 +35,16 @@ of us privately.
 
 ### Admin Expectations and Guidelines
 
-* Adhere to Code of Conduct
-* Take care of spam as soon as possible, which may mean taking action by making 
+- Adhere to Code of Conduct
+- Take care of spam as soon as possible, which may mean taking action by making
   members inactive
-* Moderating and fostering a safe environment for conversations
-* Bring Code of Conduct issues to the Steering Committee
-* Create relevant channels and list Code of Conduct in new channel welcome 
+- Moderating and fostering a safe environment for conversations
+- Bring Code of Conduct issues to the Steering Committee
+- Create relevant channels and list Code of Conduct in new channel welcome
   message
-* Help troubleshoot Slack issues
-* Review bot, token, and webhook requests
-* Be helpful!
+- Help troubleshoot Slack issues
+- Review bot, token, and webhook requests
+- Be helpful!
 
 ## Creating Channels
 
@@ -51,14 +52,14 @@ Please reach out to the #slack-admins group with your request to create a new
 channel.
 
 Channels are dedicated to [Working Groups](./WORKING-GROUPS.md), sub-projects,
-community topics, and related programs/projects.  
+community topics, and related programs/projects.
 
 Channels are not:
 
-* company specific; e.g. a channel named for a cloud provider must be used for
+- company specific; e.g. a channel named for a cloud provider must be used for
   conversation about Knative-related topics on that cloud, and not proprietary
   information of the provider.
-* private unless there is an exception: code of conduct matters, mentoring, 
+- private unless there is an exception: code of conduct matters, mentoring,
   security/vulnerabilities, or steering committee.
 
 All channels need a documented purpose. Use this space to welcome the targeted
@@ -80,16 +81,16 @@ and describe the situation.
 
 ## Bots, Tokens, and Webhooks
 
-Bots, tokens, and webhooks are reviewed on a case-by-case basis. Expect most 
-requests will be rejected due to security, privacy, and usability concerns. 
+Bots, tokens, and webhooks are reviewed on a case-by-case basis. Expect most
+requests will be rejected due to security, privacy, and usability concerns.
 Bots and the like tend to make a lot of noise in channels.
 
-Please join #slack-admins and have a discussion about your request before 
+Please join #slack-admins and have a discussion about your request before
 requesting the access.
 
 ## Admin Moderation
 
-Be mindful of how you handle communication during stressful interactions. 
+Be mindful of how you handle communication during stressful interactions.
 Administrators act as direct representatives of the project, and need to
 maintain a very high level of professionalism at all times. If you feel too
 involved in the situation to maintain impartiality or professionalism, that’s a
@@ -100,19 +101,19 @@ chat. Please document these interactions for other Slack admins to review.
 
 Content will be automatically removed if it violates code of conduct or is a
 sales pitch. Admins will take a screenshot of such behavior in order to document
-the situation.  Google takes such violations extremely seriously, and
+the situation. Google takes such violations extremely seriously, and
 they will be handled swiftly.
 
 ## Inactivating Accounts
 
 For reasons listed below, admins may inactivate individual Slack accounts.
 Due to Slack’s framework, it does not allow for an account to be banned or
-suspended in the traditional sense. 
+suspended in the traditional sense.
 [Read Slack’s policy on this.](https://get.Slack.help/hc/en-us/articles/204475027-Deactivate-a-member-s-account)
 
-* Spreading spam content in DMs and/or channels
-* Not adhering to the code of conduct set forth in DMs and/or channels
-* Overtly selling products, related or unrelated to Knative
+- Spreading spam content in DMs and/or channels
+- Not adhering to the code of conduct set forth in DMs and/or channels
+- Overtly selling products, related or unrelated to Knative
 
 ## Specific Channel Rules
 
@@ -123,7 +124,7 @@ in the purpose or pinned docs of that channel.
 
 Please do not engage in proprietary company specific conversations in the Knative
 Slack instance. This is meant for conversations related to Knative open source
-topics and community. 
+topics and community.
 
 Proprietary conversations should occur in your company communication platforms.
 As with all communication, please be mindful of appropriateness, professionalism,
