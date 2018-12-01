@@ -2,6 +2,7 @@ FROM dyalog/dyalog:17.1
 
 RUN apt-get update
 RUN apt-get install dos2unix
+RUN apt-get install --assume-yes git
 
 ADD init /init
 RUN find /init -type f -print0 | xargs -0 dos2unix
