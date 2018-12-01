@@ -15,14 +15,14 @@ you can create one using [Minikube](https://github.com/kubernetes/minikube).
 ### Install kubectl and Minikube
 
 1. If you already have `kubectl` CLI, run `kubectl version` to check the
-   version.  You need v1.10 or newer.  If your `kubectl` is older, follow
+   version. You need v1.10 or newer. If your `kubectl` is older, follow
    the next step to install a newer version.
 
 1. [Install the kubectl CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl).
 
 1. [Install and configure minikube](https://github.com/kubernetes/minikube#installation)
-    version v0.28.1 or later with a [VM driver](https://github.com/kubernetes/minikube#requirements),
-     e.g. `kvm2` on Linux or `hyperkit` on macOS.
+   version v0.28.1 or later with a [VM driver](https://github.com/kubernetes/minikube#requirements),
+   e.g. `kvm2` on Linux or `hyperkit` on macOS.
 
 ## Creating a Kubernetes cluster
 
@@ -74,7 +74,7 @@ It will take a few minutes for all the components to be up and running; you can
 rerun the command to see the current status.
 
 > Note: Instead of rerunning the command, you can add `--watch` to the above
-  command to view the component's status updates in real time. Use CTRL+C to exit watch mode.
+> command to view the component's status updates in real time. Use CTRL+C to exit watch mode.
 
 ## Installing Knative Serving
 
@@ -102,7 +102,7 @@ Just as with the Istio components, it will take a few seconds for the Knative
 components to be up and running; you can rerun the command to see the current status.
 
 > Note: Instead of rerunning the command, you can add `--watch` to the above
-  command to view the component's status updates in real time. Use CTRL+C to exit watch mode.
+> command to view the component's status updates in real time. Use CTRL+C to exit watch mode.
 
 Now you can deploy an app to your newly created Knative cluster.
 
@@ -119,12 +119,13 @@ If you'd like to view the available sample apps and deploy one of your choosing,
 head to the [sample apps](../serving/samples/README.md) repo.
 
 > Note: When looking up the IP address to use for accessing your app, you need to look up
-  the NodePort for the `knative-ingressgateway` as well as the IP address used for Minikube.
-  You can use the following command to look up the value to use for the {IP_ADDRESS} placeholder
-  used in the samples:
-  ```shell
-  echo $(minikube ip):$(kubectl get svc knative-ingressgateway --namespace istio-system --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
-  ```
+> the NodePort for the `knative-ingressgateway` as well as the IP address used for Minikube.
+> You can use the following command to look up the value to use for the {IP_ADDRESS} placeholder
+> used in the samples:
+
+```shell
+echo $(minikube ip):$(kubectl get svc knative-ingressgateway --namespace istio-system --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
+```
 
 ## Cleaning up
 

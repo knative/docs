@@ -1,14 +1,13 @@
 # Knative Personas
 
 When discussing user actions, it is often helpful to [define specific
-user roles](https://en.wikipedia.org/wiki/Persona_(user_experience)) who
+user roles](<https://en.wikipedia.org/wiki/Persona_(user_experience)>) who
 might want to do the action.
-
 
 ## Knative Build
 
 We expect the build components of Knative to be useful on their own,
-as well as in conjunction with the compute components. 
+as well as in conjunction with the compute components.
 
 ### Developer
 
@@ -19,8 +18,9 @@ tooling for managing dependencies and even detecting language and
 runtime dependencies.
 
 User stories:
-* Start a build
-* Read build logs
+
+- Start a build
+- Read build logs
 
 ### Language operator / contributor
 
@@ -30,9 +30,9 @@ within a particular organization, or on behalf of a particular
 language runtime.
 
 User stories:
-* Create a build image / build pack
-* Enable build signing / provenance
 
+- Create a build image / build pack
+- Enable build signing / provenance
 
 ## Contributors
 
@@ -41,17 +41,19 @@ always consider how infrastructure changes encourage and enable
 contributors to the project, as well as the impact on users.
 
 Types of users:
-* Hobbyist or newcomer
-* Motivated user
-* Corporate (employed) maintainer
-* Consultant
+
+- Hobbyist or newcomer
+- Motivated user
+- Corporate (employed) maintainer
+- Consultant
 
 User stories:
-* Check out the code
-* Build and run the code
-* Run tests
-* View test status
-* Run performance tests
+
+- Check out the code
+- Build and run the code
+- Run tests
+- View test status
+- Run performance tests
 
 ---
 

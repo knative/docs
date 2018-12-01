@@ -6,8 +6,8 @@ of a build.
 The build system supports two types of authentication, using Kubernetes'
 first-class `Secret` types:
 
-* `kubernetes.io/basic-auth`
-* `kubernetes.io/ssh-auth`
+- `kubernetes.io/basic-auth`
+- `kubernetes.io/ssh-auth`
 
 Secrets of these types can be made available to the `Build` by attaching them
 to the `ServiceAccount` as which it runs.
@@ -34,7 +34,7 @@ into their respective files in `$HOME`.
     metadata:
       name: ssh-key
       annotations:
-        build.knative.dev/git-0: https://github.com  # Described below
+        build.knative.dev/git-0: https://github.com # Described below
     type: kubernetes.io/ssh-auth
     data:
       ssh-privatekey: <base64 encoded>
@@ -55,7 +55,7 @@ into their respective files in `$HOME`.
     metadata:
       name: build-bot
     secrets:
-    - name: ssh-key
+      - name: ssh-key
     ```
 
 1.  Then use that `ServiceAccount` in your `Build`:
@@ -92,7 +92,7 @@ used to authenticate with the Git service.
     metadata:
       name: basic-user-pass
       annotations:
-        build.knative.dev/git-0: https://github.com  # Described below
+        build.knative.dev/git-0: https://github.com # Described below
     type: kubernetes.io/basic-auth
     stringData:
       username: <username>
@@ -107,7 +107,7 @@ used to authenticate with the Git service.
     metadata:
       name: build-bot
     secrets:
-    - name: basic-user-pass
+      - name: basic-user-pass
     ```
 
 1.  Use that `ServiceAccount` in your `Build`:
@@ -144,7 +144,7 @@ credentials are then used to authenticate with the Git repository.
     metadata:
       name: basic-user-pass
       annotations:
-        build.knative.dev/docker-0: https://gcr.io  # Described below
+        build.knative.dev/docker-0: https://gcr.io # Described below
     type: kubernetes.io/basic-auth
     stringData:
       username: <username>
@@ -159,7 +159,7 @@ credentials are then used to authenticate with the Git repository.
     metadata:
       name: build-bot
     secrets:
-    - name: basic-user-pass
+      - name: basic-user-pass
     ```
 
 1.  Use that `ServiceAccount` in your `Build`:
@@ -264,6 +264,7 @@ are ignored.
 
 Given URLs, usernames, and passwords of the form: `https://url{n}.com`,
 `user{n}`, and `pass{n}`, generate the following for Git:
+
 ```
 === ~/.gitconfig ===
 [credential]
@@ -283,6 +284,7 @@ https://user2:pass2@url2.com
 
 Given hostnames, private keys, and `known_hosts` of the form: `url{n}.com`,
 `key{n}`, and `known_hosts{n}`, generate the following for Git:
+
 ```
 === ~/.ssh/id_key1 ===
 {contents of key1}
@@ -305,14 +307,14 @@ Host url2.com
 
 Note: Because `known_hosts` is a non-standard extension of
 `kubernetes.io/ssh-auth`, when it is not present this will be generated
-through `ssh-keygen url{n}.com ` instead.
+through `ssh-keygen url{n}.com` instead.
 
 ### Least privilege
 
 The secrets as outlined here will be stored into `$HOME` (by convention the
 volume: `/builder/home`), and will be available to `Source` and all `Steps`.
 
-For sensitive credentials that should not be made available to some steps, 
+For sensitive credentials that should not be made available to some steps,
 do not use the mechanisms outlined here. Instead, the user should declare an
 explicit `Volume` from the `Secret` and manually `VolumeMount` it into the
 `Step`.

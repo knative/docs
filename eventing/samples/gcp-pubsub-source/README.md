@@ -155,6 +155,10 @@ not, then you will need to look downstream yourself.
 You should see log lines similar to:
 
 ```json
-{"ID":"284375451531353","Data":"SGVsbG8gV29ybGQh","Attributes":null,"PublishTime":"2018-10-31T00:00:00.00Z"}
-
+{
+  "ID": "284375451531353",
+  "Data": "SGVsbG8gV29ybGQh",
+  "Attributes": null,
+  "PublishTime": "2018-10-31T00:00:00.00Z"
+}
 ```

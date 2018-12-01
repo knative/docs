@@ -23,7 +23,7 @@ spec:
 ### Typical Builders
 
 A Builder is typically a purpose-built container whose entrypoint is a tool that
-performs some action and exits with a zero status on success. These entrypoints 
+performs some action and exits with a zero status on success. These entrypoints
 are often command-line tools, for example, `git`, `docker`, `mvn`, and so on.
 
 Typical builders set their `command:` (aka `ENTRYPOINT`) to be the command they
@@ -40,31 +40,30 @@ overriding `command:` and `args:` for example:
 
 ```yaml
 steps:
-- image: ubuntu
-  command: ['/bin/bash']
-  args: ['-c', 'echo hello $FOO']
-  env:
-  - name: 'FOO'
-    value: 'world'
+  - image: ubuntu
+    command: ["/bin/bash"]
+    args: ["-c", "echo hello $FOO"]
+    env:
+      - name: "FOO"
+        value: "world"
 ```
 
 ### Specialized Builders
 
 It is also possible for advanced users to create purpose-built builders.
-One example of this are the ["FTL" builders](
-https://github.com/GoogleCloudPlatform/runtimes-common/tree/master/ftl#ftl).
-
+One example of this are the ["FTL" builders](https://github.com/GoogleCloudPlatform/runtimes-common/tree/master/ftl#ftl).
 
 ## What are the Builder conventions?
 
 Builders should expect a Build to implement the following conventions:
- * `/workspace`: The default working directory will be `/workspace`, which is
- a volume that is filled by the `source:` step and shared across build `steps:`.
 
- * `/builder/home`: This volume is exposed to steps via `$HOME`.
+- `/workspace`: The default working directory will be `/workspace`, which is
+  a volume that is filled by the `source:` step and shared across build `steps:`.
 
- * Credentials attached to the Build's service account may be exposed as Git or
- Docker credentials as outlined [here](./auth.md).
+- `/builder/home`: This volume is exposed to steps via `$HOME`.
+
+- Credentials attached to the Build's service account may be exposed as Git or
+  Docker credentials as outlined [here](./auth.md).
 
 ---
 
