@@ -7,13 +7,13 @@ in turn produces high quality software.
 This document provides guidelines for how the project's
 [Members](ROLES.md#member) review issues and merge pull requests (PRs).
 
-*   [Pull requests welcome](#pull-requests-welcome)
-*   [Code of Conduct](#code-of-conduct)
-*   [Code reviewers](#code-reviewers)
-*   [Reviewing changes](#reviewing-changes)
-    *   [Holds](#holds)
-*   [Approvers](#approvers)
-*   [Merging PRs](#merging-prs)
+- [Pull requests welcome](#pull-requests-welcome)
+- [Code of Conduct](#code-of-conduct)
+- [Code reviewers](#code-reviewers)
+- [Reviewing changes](#reviewing-changes)
+  - [Holds](#holds)
+- [Approvers](#approvers)
+- [Merging PRs](#merging-prs)
 
 ## Pull requests welcome
 
@@ -55,9 +55,9 @@ are not in favor of the change. If a PR gets a "request changes" vote, the
 group discusses the issue to resolve their differences.
 
 Reviewers are expected to respond in a timely fashion to PRs that are assigned
-to them. Reviewers are expected to respond to *active* PRs with reasonable
+to them. Reviewers are expected to respond to _active_ PRs with reasonable
 latency. If reviewers fail to respond, those PRs may be assigned to other
-reviewers. *Active* PRs are those that have a proper CLA (`cla:yes`) label, are
+reviewers. _Active_ PRs are those that have a proper CLA (`cla:yes`) label, are
 not works in progress (WIP), are passing tests, and do not need rebase to be
 merged. PRs that do not have a proper CLA, are WIP, do not pass tests, or
 require a rebase are not considered active PRs.
