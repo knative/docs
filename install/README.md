@@ -22,15 +22,15 @@ clusters.
 Follow these step-by-step guides for setting up Kubernetes and installing
 Knative components on the following platforms:
 
-- [Knative Install on Azure Kubernetes Service](Knative-with-AKS.md)
-- [Knative Install on Gardener](Knative-with-Gardener.md)
-- [Knative Install on Google Kubernetes Engine](Knative-with-GKE.md)
-- [Knative Install on IBM Cloud Kubernetes Service](Knative-with-IKS.md)
-- [Knative Install on Minikube](Knative-with-Minikube.md)
-- [Knative Install on OpenShift](Knative-with-OpenShift.md)
-- [Knative Install on Minishift](Knative-with-Minishift.md)
-- [Knative Install on Pivotal Container Service](Knative-with-PKS.md)
-- [Knative Install on Docker for Mac](Knative-with-Docker-for-Mac.md)
+* [Knative Install on Azure Kubernetes Service](Knative-with-AKS.md)
+* [Knative Install on Gardener](Knative-with-Gardener.md)
+* [Knative Install on Google Kubernetes Engine](Knative-with-GKE.md)
+* [Knative Install on IBM Cloud Kubernetes Service](Knative-with-IKS.md)
+* [Knative Install on IBM Cloud Private](Knative-with-ICP.md)
+* [Knative Install on Minikube](Knative-with-Minikube.md)
+* [Knative Install on OpenShift](Knative-with-OpenShift.md)
+* [Knative Install on Minishift](Knative-with-Minishift.md)
+* [Knative Install on Pivotal Container Service](Knative-with-PKS.md)
 
 If you already have a Kubernetes cluster you're comfortable installing _alpha_
 software on, use the following instructions:
