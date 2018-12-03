@@ -1,30 +1,30 @@
 # Welcome, Knative
 
-Knative (pronounced kay-nay-tiv) extends Kubernetes to provide a set of middleware 
-components that are essential to build modern, source-centric, and container-based 
-applications that can run anywhere: on premises, in the cloud, or even in a third-party 
-data center. 
+Knative (pronounced kay-nay-tiv) extends Kubernetes to provide a set of middleware
+components that are essential to build modern, source-centric, and container-based
+applications that can run anywhere: on premises, in the cloud, or even in a third-party
+data center.
 
-Each of the components under the Knative project attempt to identify common patterns and 
-codify the best practices that are shared by successful real-world Kubernetes-based frameworks and 
+Each of the components under the Knative project attempt to identify common patterns and
+codify the best practices that are shared by successful real-world Kubernetes-based frameworks and
 applications. Knative components focus on solving many mundane but difficult tasks such as:
 
-* [Deploying a container](./install/getting-started-knative-app.md)
-* [Orchestrating source-to-URL workflows on Kubernetes](./serving/samples/source-to-url-go/)
-* [Routing and managing traffic with blue/green deployment](./serving/samples/blue-green-deployment.md)
-* [Automatic scaling and sizing workloads based on demand](./serving/samples/autoscale-go)
-* [Binding running services to eventing ecosystems](./eventing/samples/kubernetes-event-source)
+- [Deploying a container](./install/getting-started-knative-app.md)
+- [Orchestrating source-to-URL workflows on Kubernetes](./serving/samples/source-to-url-go/)
+- [Routing and managing traffic with blue/green deployment](./serving/samples/blue-green-deployment.md)
+- [Automatic scaling and sizing workloads based on demand](./serving/samples/autoscale-go)
+- [Binding running services to eventing ecosystems](./eventing/samples/kubernetes-event-source)
 
-Developers on Knative can use familiar idioms, languages, and frameworks to deploy any workload: 
+Developers on Knative can use familiar idioms, languages, and frameworks to deploy any workload:
 functions, applications, or containers.
 
 ## Components
 
 The following Knative components are currently available:
 
-* [Build](https://github.com/knative/build) - Source-to-container build orchestration
-* [Eventing](https://github.com/knative/eventing) - Management and delivery of events
-* [Serving](https://github.com/knative/serving) - Request-driven compute that can scale to zero
+- [Build](https://github.com/knative/build) - Source-to-container build orchestration
+- [Eventing](https://github.com/knative/eventing) - Management and delivery of events
+- [Serving](https://github.com/knative/serving) - Request-driven compute that can scale to zero
 
 ## Audience
 
@@ -71,41 +71,41 @@ Follow the links in this section to learn more about Knative.
 
 ### Getting started
 
-* [Installing Knative](./install/README.md)
-* [Getting started with app deployment](./install/getting-started-knative-app.md)
-* [Getting started with serving](./serving)
-* [Getting started with builds](./build)
-* [Getting started with eventing](./eventing)
+- [Installing Knative](./install/README.md)
+- [Getting started with app deployment](./install/getting-started-knative-app.md)
+- [Getting started with serving](./serving)
+- [Getting started with builds](./build)
+- [Getting started with eventing](./eventing)
 
 ### Configuration and networking
 
-* [Configuring outbound network access](./serving/outbound-network-access.md)
-* [Using a custom domain](./serving/using-a-custom-domain.md)
-* [Assigning a static IP address for Knative on Google Kubernetes Engine](./serving/gke-assigning-static-ip-address.md)
-* [Configuring HTTPS with a custom certificate](./serving/using-an-ssl-cert.md)
+- [Configuring outbound network access](./serving/outbound-network-access.md)
+- [Using a custom domain](./serving/using-a-custom-domain.md)
+- [Assigning a static IP address for Knative on Google Kubernetes Engine](./serving/gke-assigning-static-ip-address.md)
+- [Configuring HTTPS with a custom certificate](./serving/using-an-ssl-cert.md)
 
 ### Samples and demos
 
-* [Autoscaling](./serving/samples/autoscale-go/README.md)
-* [Source-to-URL deployment](./serving/samples/source-to-url-go/README.md)
-* [Binding running services to eventing ecosystems](./eventing/samples/event-flow/README.md)
-* [Telemetry](./serving/samples/telemetry-go/README.md)
-* [REST API sample](./serving/samples/rest-api-go/README.md)
-* [All samples for serving](./serving/samples/)
-* [All samples for eventing](./eventing/samples/)
+- [Autoscaling](./serving/samples/autoscale-go/README.md)
+- [Source-to-URL deployment](./serving/samples/source-to-url-go/README.md)
+- [Binding running services to eventing ecosystems](./eventing/samples/event-flow/README.md)
+- [Telemetry](./serving/samples/telemetry-go/README.md)
+- [REST API sample](./serving/samples/rest-api-go/README.md)
+- [All samples for serving](./serving/samples/)
+- [All samples for eventing](./eventing/samples/)
 
-### Logging and metrics 
+### Logging and metrics
 
-* [Installing logging, metrics and traces](./serving/installing-logging-metrics-traces.md)
-* [Accessing logs](./serving/accessing-logs.md)
-* [Accessing metrics](./serving/accessing-metrics.md)
-* [Accessing traces](./serving/accessing-traces.md)
-* [Setting up a logging plugin](./serving/setting-up-a-logging-plugin.md)
+- [Installing logging, metrics and traces](./serving/installing-logging-metrics-traces.md)
+- [Accessing logs](./serving/accessing-logs.md)
+- [Accessing metrics](./serving/accessing-metrics.md)
+- [Accessing traces](./serving/accessing-traces.md)
+- [Setting up a logging plugin](./serving/setting-up-a-logging-plugin.md)
 
 ### Debugging
 
-* [Debugging application issues](./serving/debugging-application-issues.md)
-* [Debugging performance issues](./serving/debugging-performance-issues.md)
+- [Debugging application issues](./serving/debugging-application-issues.md)
+- [Debugging performance issues](./serving/debugging-performance-issues.md)
 
 ---
 

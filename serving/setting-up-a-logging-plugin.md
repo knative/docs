@@ -41,7 +41,7 @@ collecting log files under `/var/log`. An
 is in process to get rid of the sidecar. The steps to configure are:
 
 1. Replace `logging.fluentd-sidecar-output-config` flag in
-   [config-observability](https://github.com/knative/serving/blob/master/config/config-observability.yaml)  with the
+   [config-observability](https://github.com/knative/serving/blob/master/config/config-observability.yaml) with the
    desired output configuration. **NOTE**: The Fluentd DaemonSet is in
    `monitoring` namespace while the Fluentd sidecar is in the namespace same with
    the app. There may be small differences between the configuration for DaemonSet
