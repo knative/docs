@@ -100,32 +100,39 @@ and running with the least effort.
 
 | Knative Package Filename | Serving Component | Build Component | Eventing Component | Observability Plugin* |
 | ------------------------ | ----------------- | --------------- | ------------------ | ----------------- |
-| Default: [`release.yaml`][1] ([knative/serving repo][1.1]) | Included | Included | -     | [ELK stack][2] |
-| [`release-no-mon.yaml`][3] | Included        | Included        | -                  | -                 |
-| [`release-lite.yaml`][4] | Included          | Included        | -                  | Includes support for a [`fluentd` based observability plugin][5] that you provide. |
-| [`build.yaml`][6] ([knative/serving repo][1.1]) <br/> Or [`release.yaml`][6.1] ([knative/build repo][6.2]) | -               | Included        | -                  | -                 |
-| [`eventing.yaml`][7]     | -                 | -               | Included           | -                 |
-| [`release.yaml`][8] ([knative/eventing-sources repo][8.1]) | - | - | Included       | -                 |
-| [`serving.yaml`][9]      | Included          | -               | -           | -                 |
+| [**knative/serving**][1] |  |  |  |  |
+| Default: [`release.yaml`][1.1] | Included    | Included        | -                  | [ELK stack][2] with Prometheus and Grafana |
+| [`release-no-mon.yaml`][1.2] | Included      | Included        | -                  | -                 |
+| [`release-lite.yaml`][1.3] | Included        | Included        | -                  | Prometheus and Grafana |
+| [`serving.yaml`][1.4]    | Included          | -               | -                  | -                 |
+| [**knative/build**][6] |  |  |  |  |
+| [`release.yaml`][6.1] | -         | Included        | -                  | -                 |
+| [`build.yaml`][1.5] (from [knative/serving][1]) | - | Included | -                | -                 |
+| [**knative/eventing**][7] |  |  |  |  |
+| [`eventing.yaml`][7.1]     | -                 | -               | Included           | -                 |
+| [**knative/eventing-sources**][8] |  |  |  |  |
+| [`release.yaml`][8.1] | - | - | Included       | -                 |
+| [`release-with-gcppubsub.yaml`][8.2] | - | - | Included       | -                 |
 
 _*_ See [Installing observability plugins](../serving/installing-logging-metrics-traces.md)
 for details about the supported plugins and how to add monitoring, logging, and
 tracing to your cluster.
 
-[1]: https://github.com/knative/serving/releases/download/v0.2.2/release.yaml
-[1.1]: https://github.com/knative/serving/releases/tag/v0.2.2
+[1]: https://github.com/knative/serving/releases/tag/v0.2.2
+[1.1]: https://github.com/knative/serving/releases/download/v0.2.2/release.yaml
+[1.2]: https://github.com/knative/serving/releases/download/v0.2.2/release-no-mon.yaml
+[1.3]: https://github.com/knative/serving/releases/download/v0.2.2/release-lite.yaml
+[1.4]: https://github.com/knative/serving/releases/download/v0.2.2/serving.yaml
+[1.5]: https://github.com/knative/serving/releases/download/v0.2.2/build.yaml
 [2]: https://www.elastic.co/elk-stack
-[3]: https://github.com/knative/serving/releases/download/v0.2.2/release-no-mon.yaml
-[4]: https://github.com/knative/serving/releases/download/v0.2.2/release-lite.yaml
 [5]: ../serving/setting-up-a-logging-plugin.md
-[6]: https://github.com/knative/serving/releases/download/v0.2.2/build.yaml
+[6]: https://github.com/knative/build/releases/tag/v0.2.0
 [6.1]: https://github.com/knative/build/releases/download/v0.2.0/release.yaml
-[6.2]: https://github.com/knative/build/releases/tag/v0.2.0
-[7]: https://github.com/knative/eventing/releases/download/v0.2.0/eventing.yaml
-[7.1]: https://github.com/knative/eventing/releases/tag/v0.2.0
-[8]: https://github.com/knative/eventing-sources/releases/download/v0.2.0/release.yaml
-[8.1]: https://github.com/knative/eventing-sources/releases/tag/v0.2.0
-[9]: https://github.com/knative/serving/releases/download/v0.2.2/serving.yaml
+[7]: https://github.com/knative/eventing/releases/tag/v0.2.0
+[7.1]: https://github.com/knative/eventing/releases/download/v0.2.0/eventing.yaml
+[8]: https://github.com/knative/eventing-sources/releases/tag/v0.2.0
+[8.1]: https://github.com/knative/eventing-sources/releases/download/v0.2.0/release.yaml
+[8.2]: https://github.com/knative/eventing-sources/releases/download/v0.2.0/release-with-gcppubsub.yaml
 
 Note: Each of the installable Knative resources are also listed in the Assets
 section of each Knative component's release page:
@@ -188,6 +195,7 @@ the installation package that you want to install.
     ```bash
     kubectl get pods --namespace knative-build
     kubectl get pods --namespace knative-eventing
+    kubectl get pods --namespace knative-sources
     kubectl get pods --namespace knative-serving
     ```
 
