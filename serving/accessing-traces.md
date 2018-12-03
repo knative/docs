@@ -1,10 +1,10 @@
 # Accessing request traces
 
-If you have not yet installed the logging and monitoring components, go through the 
-[installation instructions](./installing-logging-metrics-traces.md) to set up the 
+If you have not yet installed the logging and monitoring components, go through the
+[installation instructions](./installing-logging-metrics-traces.md) to set up the
 necessary components.
 
-In order to access request traces, you use the Zipkin visualization tool. 
+In order to access request traces, you use the Zipkin visualization tool.
 
 1.  To open the Zipkin UI, enter the following command:
 

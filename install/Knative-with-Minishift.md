@@ -53,9 +53,9 @@ minishift addons enable anyuid
 minishift start
 ```
 
-- The above configuration ensures that Knative gets created in its own [minishift profile](https://docs.okd.io/latest/minishift/using/profiles.html) called `knative` with 8GB of RAM, 4 vCpus and 50GB of hard disk. The image-caching helps in re-starting up the cluster faster every time.  
-- The [addon](https://docs.okd.io/latest/minishift/using/addons.html) **admin-user** creates a user called  `admin` with password  `admin` having the role of cluster-admin.  The user gets created only after the addon is applied, that is usually after successful start of Minishift
-- The  [addon](https://docs.okd.io/latest/minishift/using/addons.html) **anyuid** allows the `default` service account to run the application with uid `0`
+- The above configuration ensures that Knative gets created in its own [minishift profile](https://docs.okd.io/latest/minishift/using/profiles.html) called `knative` with 8GB of RAM, 4 vCpus and 50GB of hard disk. The image-caching helps in re-starting up the cluster faster every time.
+- The [addon](https://docs.okd.io/latest/minishift/using/addons.html) **admin-user** creates a user called `admin` with password `admin` having the role of cluster-admin. The user gets created only after the addon is applied, that is usually after successful start of Minishift
+- The [addon](https://docs.okd.io/latest/minishift/using/addons.html) **anyuid** allows the `default` service account to run the application with uid `0`
 
 - The command `minishift profile set knative` is required every time you start and stop minishift to make sure that you are on right `knative` minishift profile that was configured above.
 
@@ -73,7 +73,8 @@ minishift oc-env
 ## Preparing Knative Deployment
 
 ### Enable Admission Controller Webhook
-To be able to deploy and run serverless Knative applications, its required that you must enable the [Admission Controller Webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/).  
+
+To be able to deploy and run serverless Knative applications, its required that you must enable the [Admission Controller Webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/).
 
 Run the following command to make OpenShift (run via minishift) to be configured for [Admission Controller Webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/):
 
@@ -110,41 +111,41 @@ until oc login -u admin -p admin; do sleep 5; done;
 
 1. Set up the project **myproject** for use with Knative applications.
 
-    ```shell
-    oc project myproject
-    oc adm policy add-scc-to-user privileged -z default
-    oc label namespace myproject istio-injection=enabled
-    ```
-    The `oc adm policy` adds the **privileged** [Security Context Constraints(SCCs)](https://docs.okd.io/3.10/admin_guide/manage_scc.html) to the **default** Service Account. The SCCs are the precursor to the PSP (Pod Security Policy) mechanism in Kubernetes, as  isito-sidecars required to be run with **privileged** permissions you need set that here.
+   ```shell
+   oc project myproject
+   oc adm policy add-scc-to-user privileged -z default
+   oc label namespace myproject istio-injection=enabled
+   ```
 
-    Its is also ensured that the project myproject is labelled for Istio automatic sidecar injection, with this `istio-injection=enabled` label to **myproject** each of the Knative applications that will be deployed in **myproject** will have Istio sidecars injected automatically.
+   The `oc adm policy` adds the **privileged** [Security Context Constraints(SCCs)](https://docs.okd.io/3.10/admin_guide/manage_scc.html) to the **default** Service Account. The SCCs are the precursor to the PSP (Pod Security Policy) mechanism in Kubernetes, as isito-sidecars required to be run with **privileged** permissions you need set that here.
 
-  > **IMPORTANT:** Avoid using `default` project in OpenShift for deploying Knative applications. As OpenShift deploys few of its mission critical applications in `default` project, it's safer not to touch it to avoid any instabilities in OpenShift.
+   Its is also ensured that the project myproject is labelled for Istio automatic sidecar injection, with this `istio-injection=enabled` label to **myproject** each of the Knative applications that will be deployed in **myproject** will have Istio sidecars injected automatically.
+
+> **IMPORTANT:** Avoid using `default` project in OpenShift for deploying Knative applications. As OpenShift deploys few of its mission critical applications in `default` project, it's safer not to touch it to avoid any instabilities in OpenShift.
 
 ### Installing Istio
 
 Knative depends on Istio. The [istio-openshift-policies.sh](scripts/istio-openshift-policies.sh) does run the required commands to configure necessary [privileges](https://istio.io/docs/setup/kubernetes/platform-setup/openshift/) to the service accounts used by Istio.
 
 ```shell
-curl -s https://raw.githubusercontent.com/knative/docs/master/install/scripts/istio-openshift-policies.sh | bash 
+curl -s https://raw.githubusercontent.com/knative/docs/master/install/scripts/istio-openshift-policies.sh | bash
 ```
 
 1. Run the following to install Istio:
 
-    ```shell
-    oc apply -f https://storage.googleapis.com/knative-releases/serving/latest/istio.yaml
-    ```
-    > **NOTE:** If you get a lot of errors after running the above command like:  __unable to recognize "STDIN": no matches for kind "Gateway" in version "networking.istio.io/v1alpha3"__, just run the command above again, it's idempotent and hence objects will be created only once.
+   ```shell
+   oc apply -f https://storage.googleapis.com/knative-releases/serving/latest/istio.yaml
+   ```
+
+   > **NOTE:** If you get a lot of errors after running the above command like: **unable to recognize "STDIN": no matches for kind "Gateway" in version "networking.istio.io/v1alpha3"**, just run the command above again, it's idempotent and hence objects will be created only once.
 
 2. Ensure the istio-sidecar-injector pods runs as provileged:
-    ```shell
-    oc get cm istio-sidecar-injector -n istio-system -oyaml | sed -e 's/securityContext:/securityContext:\\n      privileged: true/' | oc replace -f -
-    ```
+   ```shell
+   oc get cm istio-sidecar-injector -n istio-system -oyaml | sed -e 's/securityContext:/securityContext:\\n      privileged: true/' | oc replace -f -
+   ```
 3. Monitor the Istio components until all of the components show a `STATUS` of `Running` or `Completed`:
-    ```shell
-    while oc get pods -n istio-system | grep -v -E "(Running|Completed|STATUS)"; do sleep 5; done
-    ```
-> **NOTE:** It will take a few minutes for all the components to be up and running.
+   `shell while oc get pods -n istio-system | grep -v -E "(Running|Completed|STATUS)"; do sleep 5; done`
+   > **NOTE:** It will take a few minutes for all the components to be up and running.
 
 ## Install Knative Serving
 
@@ -156,33 +157,35 @@ The [knative-openshift-policies.sh](scripts/knative-openshift-policies.sh) runs 
 curl -s https://raw.githubusercontent.com/knative/docs/master/install/scripts/knative-openshift-policies.sh | bash
 ```
 
->You can safely ignore the warnings:
+> You can safely ignore the warnings:
+
 - Warning: ServiceAccount 'build-controller' not found cluster role "cluster-admin" added: "build-controller"
 - Warning: ServiceAccount 'controller' not found cluster role "cluster-admin" added: "controller"
 
 1. Install Knative serving:
 
-    ```shell
-    oc apply -f https://storage.googleapis.com/knative-releases/serving/latest/release-no-mon.yaml
-    ```
+   ```shell
+   oc apply -f https://storage.googleapis.com/knative-releases/serving/latest/release-no-mon.yaml
+   ```
 
 2. Monitor the Knative components until all of the components show a `STATUS` of `Running` or `Completed`:
 
-    ```shell
-    while oc get pods -n knative-build | grep -v -E "(Running|Completed|STATUS)"; do sleep 5; done
-    while oc get pods -n knative-serving | grep -v -E "(Running|Completed|STATUS)"; do sleep 5; done
-    ```
-    The first command watches for all pod status in `knative-build` and the second command will watch for all pod status in `knative-serving`.
+   ```shell
+   while oc get pods -n knative-build | grep -v -E "(Running|Completed|STATUS)"; do sleep 5; done
+   while oc get pods -n knative-serving | grep -v -E "(Running|Completed|STATUS)"; do sleep 5; done
+   ```
 
-    > **NOTE:** It will take a few minutes for all the components to be up and running. 
+   The first command watches for all pod status in `knative-build` and the second command will watch for all pod status in `knative-serving`.
 
-3. Set route to access the  OpenShift ingress CIDR, so that services can be accessed via LoadBalancerIP
-    ```shell
-    # Only for macOS
-    sudo route -n add -net $(minishift openshift config view | grep ingressIPNetworkCIDR | awk '{print $NF}') $(minishift ip)
-    # Only for Linux
-    sudo ip route add $(minishift openshift config view | grep ingressIPNetworkCIDR | sed 's/\r$//' | awk '{print $NF}') via $(minishift ip)
-    ```
+   > **NOTE:** It will take a few minutes for all the components to be up and running.
+
+3. Set route to access the OpenShift ingress CIDR, so that services can be accessed via LoadBalancerIP
+   ```shell
+   # Only for macOS
+   sudo route -n add -net $(minishift openshift config view | grep ingressIPNetworkCIDR | awk '{print $NF}') $(minishift ip)
+   # Only for Linux
+   sudo ip route add $(minishift openshift config view | grep ingressIPNetworkCIDR | sed 's/\r$//' | awk '{print $NF}') via $(minishift ip)
+   ```
 
 ## Deploying an app
 
@@ -210,7 +213,7 @@ spec:
 ' | oc create -f -
 # Wait for the hello pod to enter its `Running` state
 oc get pod --watch
-# Call the service 
+# Call the service
 export IP_ADDRESS=$(oc get svc knative-ingressgateway -n istio-system -o 'jsonpath={.status.loadBalancer.ingress[0].ip}')
 # This should output 'Hello World: Go Sample v1!'
 curl -H "Host: helloworld-go.myproject.example.com" http://$IP_ADDRESS
@@ -237,10 +240,11 @@ There are two ways to clean up, either deleting the entire minishift profile or 
 
 2. Delete your test cluster by running:
 
-    ```shell
-    minishift stop
-    minishift profile delete knative
-    ```
+   ```shell
+   minishift stop
+   minishift profile delete knative
+   ```
+
 ---
 
 Except as otherwise noted, the content of this page is licensed under the

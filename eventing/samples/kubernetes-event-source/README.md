@@ -10,7 +10,6 @@ consumption by a function that has been implemented as a Knative Service.
 1. Setup [Knative Serving](https://github.com/knative/docs/tree/master/serving).
 1. Setup [Knative Eventing](https://github.com/knative/docs/tree/master/eventing).
 
-
 ### Channel
 
 1. Create a `Channel`. You can use your own `Channel` or use the provided sample, which creates a channel called `testchannel`. If you use your own `Channel` with a different name, then you will need to alter other commands later.
@@ -21,7 +20,7 @@ kubectl -n default apply -f eventing/samples/kubernetes-event-source/channel.yam
 
 ### Service Account
 
-1. Create a Service Account that the `Receive Adapter` runs as. The `Receive Adapater` watches for Kubernetes events and forwards them to the Knative Eventing Framework. If you want to re-use an existing Service Account with the appropriate permissions, you need to modify the 
+1. Create a Service Account that the `Receive Adapter` runs as. The `Receive Adapater` watches for Kubernetes events and forwards them to the Knative Eventing Framework. If you want to re-use an existing Service Account with the appropriate permissions, you need to modify the
 
 ```shell
 kubectl apply -f eventing/samples/kubernetes-event-source/serviceaccount.yaml
@@ -46,7 +45,6 @@ In order to check the `KubernetesEventSource` is fully working, we will create a
 kubectl apply -f eventing/samples/kubernetes-event-source/subscription.yaml
 ```
 
-
 ### Create Events
 
 Create events by launching a pod in the default namespace. Create a busybox container
@@ -61,7 +59,6 @@ Once the shell comes up, just exit it and kill the pod.
 kubectl delete pod busybox
 ```
 
-
 ### Verify
 
 We will verify that the kubernetes events were sent into the Knative eventing system by looking at our message dumper function logsIf you deployed the [Subscriber](#subscriber), then continue using this section. If not, then you will need to look downstream yourself.
@@ -72,11 +69,10 @@ kubectl logs -l serving.knative.dev/service=message-dumper -c user-container
 ```
 
 You should see log lines similar to:
+
 ```
 {"metadata":{"name":"busybox.15644359eaa4d8e7","namespace":"default","selfLink":"/api/v1/namespaces/default/events/busybox.15644359eaa4d8e7","uid":"daf8d3ca-e10d-11e8-bf3c-42010a8a017d","resourceVersion":"7840","creationTimestamp":"2018-11-05T15:17:05Z"},"involvedObject":{"kind":"Pod","namespace":"default","name":"busybox","uid":"daf645df-e10d-11e8-bf3c-42010a8a017d","apiVersion":"v1","resourceVersion":"681388"},"reason":"Scheduled","message":"Successfully assigned busybox to gke-knative-eventing-e2e-default-pool-575bcad9-vz55","source":{"component":"default-scheduler"},"firstTimestamp":"2018-11-05T15:17:05Z","lastTimestamp":"2018-11-05T15:17:05Z","count":1,"type":"Normal","eventTime":null,"reportingComponent":"","reportingInstance":""}
 Ce-Source: /apis/v1/namespaces/default/pods/busybox
 {"metadata":{"name":"busybox.15644359f59f72f2","namespace":"default","selfLink":"/api/v1/namespaces/default/events/busybox.15644359f59f72f2","uid":"db14ff23-e10d-11e8-bf3c-42010a8a017d","resourceVersion":"7841","creationTimestamp":"2018-11-05T15:17:06Z"},"involvedObject":{"kind":"Pod","namespace":"default","name":"busybox","uid":"daf645df-e10d-11e8-bf3c-42010a8a017d","apiVersion":"v1","resourceVersion":"681389"},"reason":"SuccessfulMountVolume","message":"MountVolume.SetUp succeeded for volume \"default-token-pzr6x\" ","source":{"component":"kubelet","host":"gke-knative-eventing-e2e-default-pool-575bcad9-vz55"},"firstTimestamp":"2018-11-05T15:17:06Z","lastTimestamp":"2018-11-05T15:17:06Z","count":1,"type":"Normal","eventTime":null,"reportingComponent":"","reportingInstance":""}
 Ce-Source: /apis/v1/namespaces/default/pods/busybox
 ```
-
-

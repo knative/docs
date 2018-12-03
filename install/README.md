@@ -1,6 +1,6 @@
 # Installing Knative
 
-Follow this guide to install Knative components on a platform of your choice. 
+Follow this guide to install Knative components on a platform of your choice.
 
 ## Choosing a Kubernetes cluster
 
@@ -16,29 +16,29 @@ We provide information for installing Knative on
 Follow these step-by-step guides for setting up Kubernetes and installing
 Knative components on the following platforms:
 
-* [Knative Install on Azure Kubernetes Service](Knative-with-AKS.md)
-* [Knative Install on Gardener](Knative-with-Gardener.md)
-* [Knative Install on Google Kubernetes Engine](Knative-with-GKE.md)
-* [Knative Install on IBM Cloud Kubernetes Service](Knative-with-IKS.md)
-* [Knative Install on Minikube](Knative-with-Minikube.md)
-* [Knative Install on OpenShift](Knative-with-OpenShift.md)
-* [Knative Install on Minishift](Knative-with-Minishift.md)
-* [Knative Install on Pivotal Container Service](Knative-with-PKS.md)
+- [Knative Install on Azure Kubernetes Service](Knative-with-AKS.md)
+- [Knative Install on Gardener](Knative-with-Gardener.md)
+- [Knative Install on Google Kubernetes Engine](Knative-with-GKE.md)
+- [Knative Install on IBM Cloud Kubernetes Service](Knative-with-IKS.md)
+- [Knative Install on Minikube](Knative-with-Minikube.md)
+- [Knative Install on OpenShift](Knative-with-OpenShift.md)
+- [Knative Install on Minishift](Knative-with-Minishift.md)
+- [Knative Install on Pivotal Container Service](Knative-with-PKS.md)
 
 If you already have a Kubernetes cluster you're comfortable installing
-*alpha* software on, use the following instructions:
+_alpha_ software on, use the following instructions:
 
-* [Knative Install on any Kubernetes](Knative-with-any-k8s.md)
+- [Knative Install on any Kubernetes](Knative-with-any-k8s.md)
 
 ## Deploying an app
 
 Now you're ready to deploy an app:
 
-* Follow the step-by-step
+- Follow the step-by-step
   [Getting Started with Knative App Deployment](getting-started-knative-app.md)
   guide.
 
-* View the available [sample apps](../serving/samples) and deploy one of your
+- View the available [sample apps](../serving/samples) and deploy one of your
   choosing.
 
 ## Configuring Knative Serving
@@ -47,14 +47,14 @@ After your Knative installation is running, you can set up a custom domain with
 a static IP address to be able to use Knative for publicly available services
 and set up an Istio IP range for outbound network access:
 
-* [Assign a static IP address](../serving/gke-assigning-static-ip-address.md)
-* [Configure a custom domain](../serving/using-a-custom-domain.md)
-* [Configure outbound network access](../serving/outbound-network-access.md)
-* [Configuring HTTPS with a custom certificate](../serving/using-an-ssl-cert.md)
+- [Assign a static IP address](../serving/gke-assigning-static-ip-address.md)
+- [Configure a custom domain](../serving/using-a-custom-domain.md)
+- [Configure outbound network access](../serving/outbound-network-access.md)
+- [Configuring HTTPS with a custom certificate](../serving/using-an-ssl-cert.md)
 
 ## Checking the version of your Knative Serving installation
 
-* [Checking the version of your Knative Serving installation](check-install-version.md)
+- [Checking the version of your Knative Serving installation](check-install-version.md)
 
 ---
 
