@@ -13,9 +13,10 @@
  ⎕←'FUNC_HANDLER:'fnname
  port←_getenv'FUNC_PORT'
  timeout←_getenv'FUNC_TIMEOUT'
+ ⎕←'FUNC_TIMEOUT:'timeout
 
  :If ∨/lx←empty¨empty port
-    (lx/empty port)←'8080' '180'
+    (lx/empty port)←'8080' '80'
  :EndIf
 
  port timeout←⍎¨port timeout
@@ -57,5 +58,5 @@
 
  server.Start
  
- ⎕←'Stoped server'
+ ⎕←'Stopped server'
 
