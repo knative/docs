@@ -98,7 +98,7 @@ Build the application container and publish it to a container registry:
 
 ### Algorithm
 
-Knative Serving autoscaling is based on the average number of in-flight requests per pod (concurrency). The system has a default [target concurency of 100.0](https://github.com/knative/serving/blob/3f00c39e289ed4bfb84019131651c2e4ea660ab5/config/config-autoscaler.yaml#L35).
+Knative Serving autoscaling is based on the average number of in-flight requests per pod (concurrency). The system has a default [target concurrency of 100.0](https://github.com/knative/serving/blob/3f00c39e289ed4bfb84019131651c2e4ea660ab5/config/config-autoscaler.yaml#L35).
 
 For example, if a Revision is receiving 350 requests per second, each of which takes about about .5 seconds, Knative Serving will determine the Revision needs about 2 pods
 
