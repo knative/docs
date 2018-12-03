@@ -9,9 +9,9 @@ You can find [guides for other platforms here](README.md).
 
 Knative requires a Kubernetes cluster v1.10 or newer. `kubectl` v1.10 is also
 required.  This guide walks you through creating a cluster with the correct
-specifications for Knative on Google Cloud Platform.
+specifications for Knative on Google Cloud Platform (GCP).
 
-This guide assumes you are using bash in a Mac or Linux environment; some
+This guide assumes you are using `bash` in a Mac or Linux environment; some
 commands will need to be adjusted for use in a Windows environment.
 
 ### Installing the Google Cloud SDK and `kubectl`
@@ -40,41 +40,45 @@ commands will need to be adjusted for use in a Windows environment.
 To simplify the command lines for this walkthrough, we need to define a few
 environment variables.
 
-Set `CLUSTER_NAME` and `CLUSTER_ZONE` variables:
+Set `CLUSTER_NAME` and `CLUSTER_ZONE` variables, you can replace `knative` and
+`us-west1-c` with cluster name and zone of your choosing.
+
+The `CLUSTER_NAME` needs to be lowercase and unique among any other Kubernetes
+clusters in your GCP project. The zone can be
+[any compute zone available on GCP](https://cloud.google.com/compute/docs/regions-zones/#available).
+These variables are used later to create a Kubernetes cluster.
 
 ```bash
 export CLUSTER_NAME=knative
 export CLUSTER_ZONE=us-west1-c
 ```
-The CLUSTER_NAME needs to be lowercase and unique among any other Kubernetes
-clusters in your GCP project. The zone can be
-[any compute zone available on GCP](https://cloud.google.com/compute/docs/regions-zones/#available).
-These variables are used later to create a Kubernetes cluster.
 
 ### Setting up a Google Cloud Platform project
 
-You need a GCP project to create a Google Kubernetes Engine cluster.
+You need a Google Cloud Platform (GCP)  project to create a Google Kubernetes Engine cluster.
 
-1. Create a new GCP project and set it as your `gcloud` default, or set an
-   existing GCP project as your `gcloud` default:
-    * If you don't already have a GCP project created, create a new project in `gcloud`:
-      ```bash
-      gcloud projects create my-knative-project --set-as-default
-      ```
-      Replace `my-knative-project` with the name you'd like to use for your GCP project.
-
-      You also need to [enable billing](https://cloud.google.com/billing/docs/how-to/manage-billing-account)
-      for your new project.
-
-    * If you already have a GCP project, make sure your project is set as your
-      `gcloud` default:
-      ```bash
-      gcloud config set project my-knative-project
-      ```
-
-      > Tip: Enter `gcloud config get-value project` to view the ID of your default GCP project.
-1. Enable the necessary APIs:
+1. Set `PROJECT` environment variable, you can replace `my-knative-project` with
+   the desired name of your GCP project. If you don't have one, we'll create one
+   in the next step.
+   ```bash
+   export PROJECT=my-knative-project
    ```
+1. If you don't have a GCP project, create and set it as your `gcloud` default:
+   ```bash
+   gcloud projects create $PROJECT --set-as-default
+   ```
+
+   You also need to [enable billing](https://cloud.google.com/billing/docs/how-to/manage-billing-account)
+   for your new project.
+
+1. If you already have a GCP project, make sure your project is set as your `gcloud` default:
+   ```bash
+   gcloud config set core/project $PROJECT
+   ```
+
+   > Tip: Enter `gcloud config get-value project` to view the ID of your default GCP project.
+1. Enable the necessary APIs:
+   ```bash
    gcloud services enable \
      cloudapis.googleapis.com \
      container.googleapis.com \
@@ -93,7 +97,7 @@ Istio components, the recommended configuration for a cluster is:
   `pubsub` (if those features will be used)
 
 1. Create a Kubernetes cluster on GKE with the required specifications:
-    ```
+    ```bash
     gcloud container clusters create $CLUSTER_NAME \
       --zone=$CLUSTER_ZONE \
       --cluster-version=latest \
@@ -213,3 +217,4 @@ Except as otherwise noted, the content of this page is licensed under the
 [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),
 and code samples are licensed under the
 [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).
+
