@@ -9,9 +9,9 @@ You can find [guides for other platforms here](README.md).
 
 Knative requires a Kubernetes cluster v1.10 or newer. `kubectl` v1.10 is also
 required.  This guide walks you through creating a cluster with the correct
-specifications for Knative on Google Cloud Platform.
+specifications for Knative on Google Cloud Platform (GCP).
 
-This guide assumes you are using bash in a Mac or Linux environment; some
+This guide assumes you are using `bash` in a Mac or Linux environment; some
 commands will need to be adjusted for use in a Windows environment.
 
 ### Installing the Google Cloud SDK and `kubectl`
@@ -55,7 +55,7 @@ export CLUSTER_ZONE=us-west1-c
 
 ### Setting up a Google Cloud Platform project
 
-You need a GCP project to create a Google Kubernetes Engine cluster.
+You need a Google Cloud Platform (GCP)  project to create a Google Kubernetes Engine cluster.
 
 1. Set `PROJECT` environment variable, you can replace `my-knative-project` with
    the desired name of your GCP project. If you don't have one, we'll create one
