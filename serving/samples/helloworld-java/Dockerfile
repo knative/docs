@@ -23,4 +23,5 @@ ENV PORT 8080
 EXPOSE $PORT
 
 # Run the web service on container startup.
-CMD [ "java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/helloworld.jar" ]
+CMD ["java","-Djava.security.egd=file:/dev/./urandom","-Dserver.port=${PORT}","-jar","/helloworld.jar"]
+

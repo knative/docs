@@ -186,7 +186,7 @@ folder) you're ready to build and deploy the sample app.
 
     ```shell
     curl -H "Host: helloworld-nodejs.default.example.com" http://{IP_ADDRESS}
-    Hello World: NOT SPECIFIED
+    Hello Node.js Sample v1!
     ```
 
 ## Removing the sample app deployment

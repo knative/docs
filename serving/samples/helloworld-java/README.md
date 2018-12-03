@@ -71,7 +71,7 @@ recreate the source files from this folder.
 1. Run the application locally:
 
    ```shell
-   ./mvnw package && java -jar target/gs-spring-boot-docker-0.1.0.jar
+   ./mvnw package && java -jar target/helloworld-0.0.1-SNAPSHOT.jar
    ```
 
    Go to `http://localhost:8080/` to see your `Hello World!` message.
@@ -108,7 +108,7 @@ recreate the source files from this folder.
     EXPOSE $PORT
 
     # Run the web service on container startup.
-    CMD [ "java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/helloworld.jar" ]
+    CMD ["java","-Djava.security.egd=file:/dev/./urandom","-Dserver.port=${PORT}","-jar","/helloworld.jar"]
     ```
 
 1. Create a new file, `service.yaml` and copy the following service definition

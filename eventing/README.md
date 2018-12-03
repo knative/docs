@@ -14,7 +14,7 @@ Knative Eventing is designed around the following goals:
    event or class of events, before there are producers that are creating those events.
 1. Other services can be connected to the Eventing system. These services can perform the following functions:
    - Create new applications without modifying the event producer or event consumer. 
-   - Select and target specific subsets of the events from thier producers.
+   - Select and target specific subsets of the events from their producers.
 1. Ensure cross-service interoperability. Knative Eventing is consistent with the 
    [CloudEvents](https://github.com/cloudevents/spec/blob/master/spec.md#design-goals)
    specification that is developed by the [CNCF Serverless WG](https://lists.cncf.io/g/cncf-wg-serverless).
@@ -82,7 +82,6 @@ and loading the released source yaml (the `-with-gcppubsub` release includes all
 the above sources, and adds GCP PubSub, which requires the listed secret):
 
 ```bash
-kubectl create namespace knative-sources
 kubectl --namespace knative-sources create secret generic gcppubsub-source-key --from-literal=key.json=''
 kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.2.0/release-with-gcppubsub.yaml
 ```
