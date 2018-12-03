@@ -16,6 +16,6 @@ spec:
             - name: FUNC_HANDLER
               value: "halloWorld"
             - name: FUNC_PORT
-              value: 8080
+              value: "8080"
             - name: FUNC_TIMEOUT
-              value: 300
+              value: "300"
