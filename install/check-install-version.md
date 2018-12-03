@@ -11,16 +11,16 @@ This will return the description for the `knative-serving` controller; this
 information contains the link to the container that was used to install Knative:
 
 ```yaml
-...
+
+---
 Pod Template:
-  Labels:           app=controller
-  Annotations:      sidecar.istio.io/inject=false
-  Service Account:  controller
+  Labels: app=controller
+  Annotations: sidecar.istio.io/inject=false
+  Service Account: controller
   Containers:
-   controller:
-   # Link to container used for Knative install
-    Image:        gcr.io/knative-releases/github.com/knative/serving/cmd/controller@sha256:59abc8765d4396a3fc7cac27a932a9cc151ee66343fa5338fb7146b607c6e306
-...
+    controller:
+      # Link to container used for Knative install
+      Image: gcr.io/knative-releases/github.com/knative/serving/cmd/controller@sha256:59abc8765d4396a3fc7cac27a932a9cc151ee66343fa5338fb7146b607c6e306
 ```
 
 Copy the full `gcr.io` link to the container and paste it into your browser.
