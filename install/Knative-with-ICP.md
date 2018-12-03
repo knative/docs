@@ -2,14 +2,14 @@
 
 This guide walks you through the installation of the latest version of
 [Knative Serving](https://github.com/knative/serving) using pre-built images and
-demonstrates creating and deploying an image of a sample "hello world" app onto
+demonstrates creating and deploying an image of a sample `hello world` app onto
 the newly created Knative cluster.
 
 You can find [guides for other platforms here](README.md).
 
 ## Before you begin
 
-Knative requires a [IBM Cloud Private](https://www.ibm.com/cloud/private) cluster v2.1.0.3 or newer. The install step you can find on the IBM Knowledge Center, [Installing IBM Cloud Private Cloud Native, Enterprise, and Community editions](https://www-03preprod.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/installing/install_containers.html)
+Knative requires a [IBM Cloud Private](https://www.ibm.com/cloud/private) cluster v2.1.0.3 or newer. The install step you can find on the IBM Knowledge Center, [Installing IBM Cloud Private Cloud Native, Enterprise, and Community editions](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/installing/install_containers.html)
 
 
 ## Installing Istio
@@ -25,8 +25,9 @@ curl -L https://github.com/knative/serving/releases/download/v0.2.2/release-lite
   | sed 's/LoadBalancer/NodePort/' \
   | kubectl apply --filename -
 ```
+> Note: If the `image-security-enforcement` enabled when you install [IBM Cloud Private](https://www.ibm.com/cloud/private). You need to update the [image security policy](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/manage_images/image_security.html).
 
-Put the namespaces ``knative-serving``, ``knative-build``, ``knative-monitoring`` and ``knative-eventing`` into pod security policy ``ibm-privileged-psp`` as follows.
+Put the namespaces `knative-serving`, `knative-build`, `knative-monitoring` and `knative-eventing` into pod security policy `ibm-privileged-psp` as follows.
 
 The pod security policy in [IBM Cloud Private](https://www.ibm.com/cloud/private) as follows:
 ```
@@ -41,10 +42,8 @@ ibm-restricted-psp          false                                               
 
 Create a cluster role for the pod security policy resource. The resourceNames for this role must be the name of the pod security policy that was created previous. Here we use ``ibm-privileged-psp``.
 Create a YAML file for the cluster role.
-```
-vim knative-clusterrole.yaml
-```
-```
+```shell
+ cat <<EOF | kubectl apply -f -
  apiVersion: rbac.authorization.k8s.io/v1
  kind: ClusterRole
  metadata:
@@ -59,10 +58,7 @@ vim knative-clusterrole.yaml
       - podsecuritypolicies
     verbs:
       - use
-```
-Create the role.
-```
-kubectl create -f knative-clusterrole.yaml
+ EOF
 ```
 The output resembles the following code:
 ```
@@ -70,10 +66,8 @@ clusterrole "knative-role" created
 ```
 
 Set up cluster role binding for the service account in knative namespace. By using this role binding, you can set the service accounts in the namespace to use the pod security policy that you created.
-```
-vim knative-clusterrolebinding.yaml
-```
-```
+```shell
+ cat <<EOF | kubectl apply -f - 
  apiVersion: rbac.authorization.k8s.io/v1
  kind: ClusterRoleBinding
  metadata:
@@ -87,11 +81,10 @@ vim knative-clusterrolebinding.yaml
     apiGroup: rbac.authorization.k8s.io
     kind: Group
     name: "system:serviceaccounts:knative-serving"
+ EOF
 ```
-```
- kubectl create -f knative-clusterrolebinding.yaml
-```
-You can use the same mothed add the other knative namespaces to ``ibm-privileged-psp`` pod security policy.
+
+You can use the same mothed add the other knative namespaces to `ibm-privileged-psp` pod security policy.
 
 Monitor the Knative components until all of the components show a `STATUS` of
 `Running`:
@@ -132,7 +125,7 @@ head to the [sample apps](../serving/samples/README.md) repo.
 
 Delete the Knative on [IBM Cloud Private](https://www.ibm.com/cloud/private):
 
-```
+```shell
 curl -L https://github.com/knative/serving/releases/download/v0.2.2/release-lite.yaml \
   | sed 's/LoadBalancer/NodePort/' \
   | kubectl delete --filename -
