@@ -9,8 +9,7 @@ You can find [guides for other platforms here](README.md).
 
 ## Before you begin
 
-Knative requires a [IBM Cloud Private](https://www.ibm.com/cloud/private) cluster v2.1.0.3 or newer. The install step you can find on the IBM Knowledge Center, [Installing IBM Cloud Private Cloud Native, Enterprise, and Community editions](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/installing/install_containers.html)
-
+Knative requires an [IBM Cloud Private](https://www.ibm.com/cloud/private) cluster v3.1.1. The install step you can find on the IBM Knowledge Center, [Installing IBM Cloud Private Cloud Native, Enterprise, and Community editions](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/installing/install_containers.html)
 
 ## Installing Istio
 
@@ -25,7 +24,26 @@ curl -L https://github.com/knative/serving/releases/download/v0.2.2/release-lite
   | sed 's/LoadBalancer/NodePort/' \
   | kubectl apply --filename -
 ```
-> Note: If the `image-security-enforcement` enabled when you install [IBM Cloud Private](https://www.ibm.com/cloud/private). You need to update the [image security policy](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/manage_images/image_security.html).
+
+If the `image-security-enforcement` enabled when you install [IBM Cloud Private](https://www.ibm.com/cloud/private). You need to update the [image security policy](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/manage_images/image_security.html) allow to pull the knative image.
+Using the following commend get the image security policy.
+```
+# kubectl get clusterimagepolicies
+NAME                                    AGE
+ibmcloud-default-cluster-image-policy   27m
+```
+
+Then edit the image security policy.
+```
+# kubectl edit clusterimagepolicies ibmcloud-default-cluster-image-policy
+```
+
+Update spec.repositories by adding `gcr.io/knative-releases/*`
+```
+spec:
+  repositories:
+  - name: "gcr.io/knative-releases/*"
+```
 
 Put the namespaces `knative-serving`, `knative-build`, `knative-monitoring` and `knative-eventing` into pod security policy `ibm-privileged-psp` as follows.
 
@@ -43,22 +61,22 @@ ibm-restricted-psp          false                                               
 Create a cluster role for the pod security policy resource. The resourceNames for this role must be the name of the pod security policy that was created previous. Here we use ``ibm-privileged-psp``.
 Create a YAML file for the cluster role.
 ```shell
- cat <<EOF | kubectl apply -f -
- apiVersion: rbac.authorization.k8s.io/v1
- kind: ClusterRole
- metadata:
-  name: knative-role
- rules:
-  -
-    apiGroups:
-      - extensions
-    resourceNames:
-      - ibm-privileged-psp
-    resources:
-      - podsecuritypolicies
-    verbs:
-      - use
- EOF
+cat <<EOF | kubectl apply -f -
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+ name: knative-role
+rules:
+ -
+   apiGroups:
+     - extensions
+   resourceNames:
+     - ibm-privileged-psp
+   resources:
+     - podsecuritypolicies
+   verbs:
+     - use
+EOF
 ```
 The output resembles the following code:
 ```
@@ -67,21 +85,21 @@ clusterrole "knative-role" created
 
 Set up cluster role binding for the service account in knative namespace. By using this role binding, you can set the service accounts in the namespace to use the pod security policy that you created.
 ```shell
- cat <<EOF | kubectl apply -f - 
- apiVersion: rbac.authorization.k8s.io/v1
- kind: ClusterRoleBinding
- metadata:
-  name: knative-serving-psp-users
- roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: knative-role
- subjects:
-  -
-    apiGroup: rbac.authorization.k8s.io
-    kind: Group
-    name: "system:serviceaccounts:knative-serving"
- EOF
+cat <<EOF | kubectl apply -f - 
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+ name: knative-serving-psp-users
+roleRef:
+ apiGroup: rbac.authorization.k8s.io
+ kind: ClusterRole
+ name: knative-role
+subjects:
+ -
+   apiGroup: rbac.authorization.k8s.io
+   kind: Group
+   name: "system:serviceaccounts:knative-serving"
+EOF
 ```
 
 You can use the same mothed add the other knative namespaces to `ibm-privileged-psp` pod security policy.
