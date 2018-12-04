@@ -1,14 +1,15 @@
 # Hello World - Elixir Sample
 
 A simple web application written in [Elixir](https://elixir-lang.org/) using the
-[Phoenix Framework](https://phoenixframework.org/).
-The application prints all environment variables to the main page.
+[Phoenix Framework](https://phoenixframework.org/). The application prints all
+environment variables to the main page.
 
 # Set up Elixir and Phoenix Locally
 
-Following the [Phoenix Installation Guide](https://hexdocs.pm/phoenix/installation.html)
-is the best way to get your computer set up for developing,
-building, running, and packaging Elixir Web applications.
+Following the
+[Phoenix Installation Guide](https://hexdocs.pm/phoenix/installation.html) is
+the best way to get your computer set up for developing, building, running, and
+packaging Elixir Web applications.
 
 # Running Locally
 
@@ -30,11 +31,11 @@ mix phoenix.new helloelixir
 
 When asked, if you want to `Fetch and install dependencies? [Yn]` select `y`
 
-1. Follow the direction in the output to change directories into
-   start your local server with `mix phoenix.server`
+1. Follow the direction in the output to change directories into start your
+   local server with `mix phoenix.server`
 
-1. In the new directory, create a new Dockerfile for packaging
-   your application for deployment
+1. In the new directory, create a new Dockerfile for packaging your application
+   for deployment
 
    ```docker
    # Start from a base image for elixir
@@ -91,9 +92,9 @@ When asked, if you want to `Fetch and install dependencies? [Yn]` select `y`
    CMD ["/opt/app/bin/start_server", "foreground", "boot_var=/tmp"]
    ```
 
-1. Create a new file, `service.yaml` and copy the following Service
-   definition into the file. Make sure to replace `{username}` with
-   your Docker Hub username.
+1. Create a new file, `service.yaml` and copy the following Service definition
+   into the file. Make sure to replace `{username}` with your Docker Hub
+   username.
 
    ```yaml
    apiVersion: serving.knative.dev/v1alpha1
@@ -115,9 +116,9 @@ When asked, if you want to `Fetch and install dependencies? [Yn]` select `y`
 
 # Building and deploying the sample
 
-The sample in this directory is ready to build and deploy without changes.
-You can deploy the sample as is, or use you created version following the
-directions above.
+The sample in this directory is ready to build and deploy without changes. You
+can deploy the sample as is, or use you created version following the directions
+above.
 
 1.  Generate a new `secret_key_base` in the `config/prod.secret.exs` file.
     Phoenix applications use a secrets file on production deployments and, by
@@ -130,9 +131,9 @@ directions above.
     sed "s|SECRET+KEY+BASE|$SECRET_KEY_BASE|" config/prod.secret.exs.sample >config/prod.secret.exs
     ```
 
-1.  Use Docker to build the sample code into a container. To build and push
-    with Docker Hub, run these commands replacing `{username}` with your Docker
-    Hub username:
+1.  Use Docker to build the sample code into a container. To build and push with
+    Docker Hub, run these commands replacing `{username}` with your Docker Hub
+    username:
 
     ```shell
      # Build the container on your local machine
@@ -144,8 +145,8 @@ directions above.
 
 1.  After the build has completed and the container is pushed to docker hub, you
     can deploy the app into your cluster. Ensure that the container image value
-    in `service.yaml` matches the container you built in
-    the previous step. Apply the configuration using `kubectl`:
+    in `service.yaml` matches the container you built in the previous step.
+    Apply the configuration using `kubectl`:
 
     ```shell
     kubectl apply --filename service.yaml
@@ -154,20 +155,25 @@ directions above.
 1.  Now that your service is created, Knative will perform the following steps:
 
     - Create a new immutable revision for this version of the app.
-    - Network programming to create a route, ingress, service, and load balance for your app.
+    - Network programming to create a route, ingress, service, and load balance
+      for your app.
     - Automatically scale your pods up and down (including to zero active pods).
 
 1.  To find the IP address for your service, use
-    `kubectl get svc knative-ingressgateway --namespace istio-system` to get the ingress IP for your
-    cluster. If your cluster is new, it may take sometime for the service to get asssigned
-    an external IP address.
+    `kubectl get svc knative-ingressgateway --namespace istio-system` to get the
+    ingress IP for your cluster. If your cluster is new, it may take sometime
+    for the service to get asssigned an external IP address.
 
         ```
         kubectl get svc knative-ingressgateway --namespace istio-system
 
         NAME                     TYPE           CLUSTER-IP      EXTERNAL-IP     PORT(S)                                      AGE
 
-    knative-ingressgateway LoadBalancer 10.35.254.218 35.225.171.32 80:32380/TCP,443:32390/TCP,32400:32400/TCP 1h
+    knative-ingressgateway LoadBalancer 10.35.254.218 35.225.171.32
+    80:32380/TCP,443:32390/TCP,32400:32400/TCP 1h
+
+    ```
+
     ```
 
 1.  To find the URL for your service, use

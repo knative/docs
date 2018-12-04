@@ -8,11 +8,15 @@ consumption by a function that has been implemented as a Knative Service.
 ### Prerequisites
 
 1. Setup [Knative Serving](https://github.com/knative/docs/tree/master/serving).
-1. Setup [Knative Eventing](https://github.com/knative/docs/tree/master/eventing).
+1. Setup
+   [Knative Eventing](https://github.com/knative/docs/tree/master/eventing).
 
 ### Channel
 
-1. Create a `Channel`. You can use your own `Channel` or use the provided sample, which creates a channel called `testchannel`. If you use your own `Channel` with a different name, then you will need to alter other commands later.
+1. Create a `Channel`. You can use your own `Channel` or use the provided
+   sample, which creates a channel called `testchannel`. If you use your own
+   `Channel` with a different name, then you will need to alter other commands
+   later.
 
 ```shell
 kubectl -n default apply -f eventing/samples/kubernetes-event-source/channel.yaml
@@ -20,7 +24,10 @@ kubectl -n default apply -f eventing/samples/kubernetes-event-source/channel.yam
 
 ### Service Account
 
-1. Create a Service Account that the `Receive Adapter` runs as. The `Receive Adapater` watches for Kubernetes events and forwards them to the Knative Eventing Framework. If you want to re-use an existing Service Account with the appropriate permissions, you need to modify the
+1. Create a Service Account that the `Receive Adapter` runs as. The
+   `Receive Adapater` watches for Kubernetes events and forwards them to the
+   Knative Eventing Framework. If you want to re-use an existing Service Account
+   with the appropriate permissions, you need to modify the
 
 ```shell
 kubectl apply -f eventing/samples/kubernetes-event-source/serviceaccount.yaml
@@ -28,7 +35,10 @@ kubectl apply -f eventing/samples/kubernetes-event-source/serviceaccount.yaml
 
 ### Create Event Source for Kubernetes Events
 
-1. In order to receive events, you have to create a concrete Event Source for a specific namespace. If you are wanting to consume events from a differenet namespace or using a different `Service Account`, you need to modify the yaml accordingly.
+1. In order to receive events, you have to create a concrete Event Source for a
+   specific namespace. If you are wanting to consume events from a differenet
+   namespace or using a different `Service Account`, you need to modify the yaml
+   accordingly.
 
 ```shell
 kubectl apply -f eventing/samples/kubernetes-event-source/k8s-events.yaml
@@ -36,9 +46,13 @@ kubectl apply -f eventing/samples/kubernetes-event-source/k8s-events.yaml
 
 ### Subscriber
 
-In order to check the `KubernetesEventSource` is fully working, we will create a simple Knative Service that dumps incoming messages to its log and create a `Subscription` from the `Channel` to that Knative Service.
+In order to check the `KubernetesEventSource` is fully working, we will create a
+simple Knative Service that dumps incoming messages to its log and create a
+`Subscription` from the `Channel` to that Knative Service.
 
-1. If the deployed `KubernetesEventSource` is pointing at a `Channel` other than `testchannel`, modify `subscription.yaml` by replacing `testchannel` with that `Channel`'s name.
+1. If the deployed `KubernetesEventSource` is pointing at a `Channel` other than
+   `testchannel`, modify `subscription.yaml` by replacing `testchannel` with
+   that `Channel`'s name.
 1. Deploy `subscription.yaml`.
 
 ```shell
@@ -47,7 +61,8 @@ kubectl apply -f eventing/samples/kubernetes-event-source/subscription.yaml
 
 ### Create Events
 
-Create events by launching a pod in the default namespace. Create a busybox container
+Create events by launching a pod in the default namespace. Create a busybox
+container
 
 ```shell
 kubectl run -i --tty busybox --image=busybox --restart=Never -- sh
@@ -61,7 +76,10 @@ kubectl delete pod busybox
 
 ### Verify
 
-We will verify that the kubernetes events were sent into the Knative eventing system by looking at our message dumper function logsIf you deployed the [Subscriber](#subscriber), then continue using this section. If not, then you will need to look downstream yourself.
+We will verify that the kubernetes events were sent into the Knative eventing
+system by looking at our message dumper function logsIf you deployed the
+[Subscriber](#subscriber), then continue using this section. If not, then you
+will need to look downstream yourself.
 
 ```shell
 kubectl get pods

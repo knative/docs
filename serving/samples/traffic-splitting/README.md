@@ -1,7 +1,8 @@
 # Simple Traffic Splitting Between Revisions
 
 This samples builds off the [Creating a RESTful Service](../rest-api-go) sample
-to illustrate applying a revision, then using that revision for manual traffic splitting.
+to illustrate applying a revision, then using that revision for manual traffic
+splitting.
 
 ## Prerequisites
 
@@ -9,12 +10,16 @@ to illustrate applying a revision, then using that revision for manual traffic s
 
 ## Updating the Service
 
-This section describes how to create an revision by deploying a new configuration.
+This section describes how to create an revision by deploying a new
+configuration.
 
-1. Replace the image reference path with our published image path in the configuration files (`serving/samples/traffic-splitting/updated_configuration.yaml`:
+1. Replace the image reference path with our published image path in the
+   configuration files
+   (`serving/samples/traffic-splitting/updated_configuration.yaml`:
 
    - Manually replace:  
-     `image: github.com/knative/docs/serving/samples/rest-api-go` with `image: <YOUR_CONTAINER_REGISTRY>/serving/samples/rest-api-go`
+     `image: github.com/knative/docs/serving/samples/rest-api-go` with
+     `image: <YOUR_CONTAINER_REGISTRY>/serving/samples/rest-api-go`
 
    Or
 
@@ -31,14 +36,16 @@ This section describes how to create an revision by deploying a new configuratio
 kubectl apply --filename serving/samples/traffic-splitting/updated_configuration.yaml
 ```
 
-3. Once deployed, traffic will shift to the new revision automatically. Verify the deployment by checking the route status:
+3. Once deployed, traffic will shift to the new revision automatically. Verify
+   the deployment by checking the route status:
 
 ```
 kubectl get route --output yaml
 ```
 
 4. When the new route is ready, you can access the new endpoints:  
-   The hostname and IP address can be found in the same manner as the [Creating a RESTful Service](../rest-api-go) sample:
+   The hostname and IP address can be found in the same manner as the
+   [Creating a RESTful Service](../rest-api-go) sample:
 
 ```
 export SERVICE_HOST=`kubectl get route stock-route-example --output jsonpath="{.status.domain}"`
@@ -108,8 +115,8 @@ kubectl apply --filename serving/samples/rest-api-go/sample.yaml
 kubectl get route --output yaml
 ```
 
-Once updated, you can make `curl` requests to the API using either `stock` or `share`
-endpoints.
+Once updated, you can make `curl` requests to the API using either `stock` or
+`share` endpoints.
 
 ## Clean Up
 

@@ -48,8 +48,8 @@ new working group. To do so, you need to:
   - The scope of the working group (topics, subsystems, code repos, areas of
     responsibility)
 
-- **Nominate an initial set of leads**. The leads set the agenda for the
-  working group and serve as final arbiters on any technical decision. See
+- **Nominate an initial set of leads**. The leads set the agenda for the working
+  group and serve as final arbiters on any technical decision. See
   [below](#leads) for information on the responsibilities of leads and
   requirements for nominating them.
 
@@ -58,11 +58,11 @@ new working group. To do so, you need to:
 
 - **Send an Email**. Write up an email with your charter, nominated leads, and
   roadmap, and send it to
-  [knative-tech-oversight@](mailto:knative-tech-oversight@googlegroups.com).
-  The technical oversight committee will evaluate the request and decide
-  whether the working group should be formed, whether it should be merely a
-  subgroup of an existing working group, or whether it should be subsumed by
-  an existing working group.
+  [knative-tech-oversight@](mailto:knative-tech-oversight@googlegroups.com). The
+  technical oversight committee will evaluate the request and decide whether the
+  working group should be formed, whether it should be merely a subgroup of an
+  existing working group, or whether it should be subsumed by an existing
+  working group.
 
 ## Setting up a working group
 
@@ -70,22 +70,21 @@ Once approval has been granted by the technical oversight committee to form a
 working group, the working group leads need to take a few steps to establish the
 working group:
 
-- **Create a Google Drive Folder**. Create a folder to hold your
-  working group documents within this parent
-  [folder](https://drive.google.com/corp/drive/folders/0APnJ_hRs30R2Uk9PVA). Call
-  your folder "GROUP_NAME".
+- **Create a Google Drive Folder**. Create a folder to hold your working group
+  documents within this parent
+  [folder](https://drive.google.com/corp/drive/folders/0APnJ_hRs30R2Uk9PVA).
+  Call your folder "GROUP_NAME".
 
 - **Create a Meeting Notes Document**. Create a blank document in the above
   folder and call it "GROUP_NAME Group Meeting Notes".
 
-- **Create a Roadmap Document**. Create a document in the above folder and
-  call it "GROUP_NAME Group Roadmap". Put your initial roadmap in the
-  document.
+- **Create a Roadmap Document**. Create a document in the above folder and call
+  it "GROUP_NAME Group Roadmap". Put your initial roadmap in the document.
 
 - **Create a Wiki**. Create a wiki page on
   [GitHub](https://github.com/knative/serving) titled "GROUP_NAME Design
-  Decisions". This page will be used to track important design decisions made
-  by the working group.
+  Decisions". This page will be used to track important design decisions made by
+  the working group.
 
 - **Create a Public Google Group**. Call the group "knative-_group_name_" (all
   in lowercase, dashes for spaces). This mailing list must be open to all.
@@ -93,8 +92,8 @@ working group:
 - **Schedule a Recurring Meeting**. Create a recurring meeting (weekly or
   bi-weekly, 30 or 60 minutes) and call the meeting GROUP_NAME Group Sync-Up".
   Attach the meeting notes document to the calendar event. Generally schedule
-  these meetings between 9:00AM to 2:59PM Pacific Time. Invite the public
-  Google group to the meeting.
+  these meetings between 9:00AM to 2:59PM Pacific Time. Invite the public Google
+  group to the meeting.
 
 - **Register the Working Group**. Go to
   [WORKING-GROUPS.md](https://github.com/knative/serving/blob/master/community/WORKING-GROUPS.md)
@@ -104,8 +103,8 @@ working group:
 - **Announce your Working Group**. Send a note to
   [knative-dev@](mailto:knative-dev@googlegroups.com) and
   [knative-tech-oversight@](mailto:knative-tech-oversight@googlegroups.com) to
-  announce your new working group. Include your charter in the email and
-  provide links to the meeting invitation.
+  announce your new working group. Include your charter in the email and provide
+  links to the meeting invitation.
 
 Congratulations, you now have a fully formed working group!
 
@@ -144,16 +143,15 @@ few activities:
   the recorded meeting in the notes. The lead may delegate note-taking duties.
 
 - **Wiki**. Ensure that significant design decisions are captured in the Wiki.
-  In the Wiki, include links to useful design documents, any interesting
-  GitHub issues or PRs, posts to the mailing lists, etc. The wiki should
-  provide a good feel for where the mind of the working group is at and where
-  things are headed.
+  In the Wiki, include links to useful design documents, any interesting GitHub
+  issues or PRs, posts to the mailing lists, etc. The wiki should provide a good
+  feel for where the mind of the working group is at and where things are
+  headed.
 
 - **Roadmap**. Establish **and maintain** a roadmap for the working group
   outlining the areas of focus for the working group over the next 3 months.
 
-- **Report**. Report current status to the main community meeting every 6
-  weeks.
+- **Report**. Report current status to the main community meeting every 6 weeks.
 
 ### Be open
 
@@ -185,10 +183,10 @@ Sometimes, different working groups can have conflicting goals or requirements.
 Leads from all affected working groups generally work together and come to an
 agreeable conclusion.
 
-In all cases, remaining blocking issues can be raised to the [technical
-oversight committee](TECH-OVERSIGHT-COMMITTEE.md) to help resolve the situation.
-To trigger an escalation, create an issue in the `knative/serving` repo and
-assign it to the **@knative/tech-oversight-committee** team.
+In all cases, remaining blocking issues can be raised to the
+[technical oversight committee](TECH-OVERSIGHT-COMMITTEE.md) to help resolve the
+situation. To trigger an escalation, create an issue in the `knative/serving`
+repo and assign it to the **@knative/tech-oversight-committee** team.
 
 ---
 

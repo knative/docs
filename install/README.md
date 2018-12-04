@@ -4,12 +4,18 @@ Follow this guide to install Knative components on a platform of your choice.
 
 ## Choosing a Kubernetes cluster
 
-To get started with Knative, you need a Kubernetes cluster. If you aren't
-sure which Kubernetes platform is right for you, see
+To get started with Knative, you need a Kubernetes cluster. If you aren't sure
+which Kubernetes platform is right for you, see
 [Picking the Right Solution](https://kubernetes.io/docs/setup/pick-right-solution/).
 
 We provide information for installing Knative on
-[Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine/docs/), [IBM Cloud Kubernetes Service](https://www.ibm.com/cloud/container-service), [Azure Kubernetes Service](https://docs.microsoft.com/en-us/azure/aks/), [Minikube](https://kubernetes.io/docs/setup/minikube/), [OpenShift](https://github.com/openshift/origin) and [Pivotal Container Service](https://pivotal.io/platform/pivotal-container-service) clusters.
+[Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine/docs/),
+[IBM Cloud Kubernetes Service](https://www.ibm.com/cloud/container-service),
+[Azure Kubernetes Service](https://docs.microsoft.com/en-us/azure/aks/),
+[Minikube](https://kubernetes.io/docs/setup/minikube/),
+[OpenShift](https://github.com/openshift/origin) and
+[Pivotal Container Service](https://pivotal.io/platform/pivotal-container-service)
+clusters.
 
 ## Installing Knative
 
@@ -25,8 +31,8 @@ Knative components on the following platforms:
 - [Knative Install on Minishift](Knative-with-Minishift.md)
 - [Knative Install on Pivotal Container Service](Knative-with-PKS.md)
 
-If you already have a Kubernetes cluster you're comfortable installing
-_alpha_ software on, use the following instructions:
+If you already have a Kubernetes cluster you're comfortable installing _alpha_
+software on, use the following instructions:
 
 - [Knative Install on any Kubernetes](Knative-with-any-k8s.md)
 

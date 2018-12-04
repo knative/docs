@@ -4,9 +4,14 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 
 ## Prerequisites
 
-1. A Kubernetes cluster with [Knative Serving](https://github.com/knative/docs/blob/master/install/README.md) installed.
-1. A [metrics installation](https://github.com/knative/docs/blob/master/serving/installing-logging-metrics-traces.md) for viewing scaling graphs (optional).
-1. Install [Docker](https://docs.docker.com/get-started/#prepare-your-docker-environment).
+1. A Kubernetes cluster with
+   [Knative Serving](https://github.com/knative/docs/blob/master/install/README.md)
+   installed.
+1. A
+   [metrics installation](https://github.com/knative/docs/blob/master/serving/installing-logging-metrics-traces.md)
+   for viewing scaling graphs (optional).
+1. Install
+   [Docker](https://docs.docker.com/get-started/#prepare-your-docker-environment).
 1. Check out the code:
 
 ```
@@ -29,8 +34,8 @@ Build the application container and publish it to a container registry:
    export REPO="gcr.io/<YOUR_PROJECT_ID>"
    ```
 
-   - This example shows how to use Google Container Registry (GCR). You will need a
-     Google Cloud Project and to enable the
+   - This example shows how to use Google Container Registry (GCR). You will
+     need a Google Cloud Project and to enable the
      [Google Container Registry API](https://console.cloud.google.com/apis/library/containerregistry.googleapis.com).
 
 1. Use Docker to build your application container:
@@ -109,9 +114,13 @@ Build the application container and publish it to a container registry:
 
 ### Algorithm
 
-Knative Serving autoscaling is based on the average number of in-flight requests per pod (concurrency). The system has a default [target concurency of 100.0](https://github.com/knative/serving/blob/3f00c39e289ed4bfb84019131651c2e4ea660ab5/config/config-autoscaler.yaml#L35).
+Knative Serving autoscaling is based on the average number of in-flight requests
+per pod (concurrency). The system has a default
+[target concurency of 100.0](https://github.com/knative/serving/blob/3f00c39e289ed4bfb84019131651c2e4ea660ab5/config/config-autoscaler.yaml#L35).
 
-For example, if a Revision is receiving 350 requests per second, each of which takes about about .5 seconds, Knative Serving will determine the Revision needs about 2 pods
+For example, if a Revision is receiving 350 requests per second, each of which
+takes about about .5 seconds, Knative Serving will determine the Revision needs
+about 2 pods
 
 ```
 350 * .5 = 175
@@ -121,7 +130,11 @@ ceil(1.75) = 2 pods
 
 #### Tuning
 
-By default Knative Serving does not limit concurrency in Revision containers. A limit can be set per-Configuration using the [`ContainerConcurrency`](https://github.com/knative/serving/blob/3f00c39e289ed4bfb84019131651c2e4ea660ab5/pkg/apis/serving/v1alpha1/revision_types.go#L149) field. The autoscaler will target a percentage of `ContainerConcurrency` instead of the default `100.0`.
+By default Knative Serving does not limit concurrency in Revision containers. A
+limit can be set per-Configuration using the
+[`ContainerConcurrency`](https://github.com/knative/serving/blob/3f00c39e289ed4bfb84019131651c2e4ea660ab5/pkg/apis/serving/v1alpha1/revision_types.go#L149)
+field. The autoscaler will target a percentage of `ContainerConcurrency` instead
+of the default `100.0`.
 
 ### Dashboards
 
