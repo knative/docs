@@ -8,16 +8,19 @@ using cURL requests.
 You need:
 
 - A Kubernetes cluster with [Knative installed](./README.md).
-- An image of the app that you'd like to deploy available on a
-  container registry. The image of the sample app used in
-  this guide is available on Google Container Registry.
+- An image of the app that you'd like to deploy available on a container
+  registry. The image of the sample app used in this guide is available on
+  Google Container Registry.
 
 ## Sample application
 
 This guide uses the
 [Hello World sample app in Go](../serving/samples/helloworld-go) to demonstrate
 the basic workflow for deploying an app, but these steps can be adapted for your
-own application if you have an image of it available on [Docker Hub](https://docs.docker.com/docker-hub/repos/), [Google Container Registry](https://cloud.google.com/container-registry/docs/pushing-and-pulling), or another container image registry.
+own application if you have an image of it available on
+[Docker Hub](https://docs.docker.com/docker-hub/repos/),
+[Google Container Registry](https://cloud.google.com/container-registry/docs/pushing-and-pulling),
+or another container image registry.
 
 The Hello World sample app reads in an `env` variable, `TARGET`, from the
 configuration `.yaml` file, then prints "Hello World: \${TARGET}!". If `TARGET`
@@ -25,8 +28,8 @@ isn't defined, it will print "NOT SPECIFIED".
 
 ## Configuring your deployment
 
-To deploy an app using Knative, you need a configuration `.yaml` file
-that defines a Service. For more information about the Service object, see the
+To deploy an app using Knative, you need a configuration `.yaml` file that
+defines a Service. For more information about the Service object, see the
 [Resource Types documentation](https://github.com/knative/serving/blob/master/docs/spec/overview.md#service).
 
 This configuration file specifies metadata about the application, points to the
@@ -35,7 +38,8 @@ configured. For more information about what configuration options are available,
 see the
 [Serving spec documentation](https://github.com/knative/serving/blob/master/docs/spec/spec.md).
 
-Create a new file named `service.yaml`, then copy and paste the following content into it:
+Create a new file named `service.yaml`, then copy and paste the following
+content into it:
 
 ```yaml
 apiVersion: serving.knative.dev/v1alpha1 # Current version of Knative
@@ -61,7 +65,8 @@ the image accordingly.
 
 ## Deploying your app
 
-From the directory where the new `service.yaml` file was created, apply the configuration:
+From the directory where the new `service.yaml` file was created, apply the
+configuration:
 
 ```bash
 kubectl apply --filename service.yaml
@@ -72,13 +77,13 @@ Now that your service is created, Knative will perform the following steps:
 - Create a new immutable revision for this version of the app.
 - Perform network programming to create a route, ingress, service, and load
   balancer for your app.
-- Automatically scale your pods up and down based on traffic, including to
-  zero active pods.
+- Automatically scale your pods up and down based on traffic, including to zero
+  active pods.
 
 ### Interacting with your app
 
-To see if your app has been deployed succesfully, you need the host URL and
-IP address created by Knative.
+To see if your app has been deployed succesfully, you need the host URL and IP
+address created by Knative.
 
 Note: If your cluster is new, it can take some time before the service is
 asssigned an external IP address.
@@ -102,9 +107,10 @@ asssigned an external IP address.
 
    ```
 
-   > Note: if you use minikube or a baremetal cluster that has no external load balancer, the
-   > `EXTERNAL-IP` field is shown as `<pending>`. You need to use `NodeIP` and `NodePort` to
-   > interact your app instead. To get your app's `NodeIP` and `NodePort`, enter the following command:
+   > Note: if you use minikube or a baremetal cluster that has no external load
+   > balancer, the `EXTERNAL-IP` field is shown as `<pending>`. You need to use
+   > `NodeIP` and `NodePort` to interact your app instead. To get your app's
+   > `NodeIP` and `NodePort`, enter the following command:
 
    ```shell
    export IP_ADDRESS=$(kubectl get node  --output 'jsonpath={.items[0].status.addresses[0].address}'):$(kubectl get svc knative-ingressgateway --namespace istio-system   --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
@@ -125,8 +131,8 @@ asssigned an external IP address.
    ```
 
    If you changed the name from `helloworld-go` to something else when creating
-   the `.yaml` file, replace `helloworld-go` in the above commands with the
-   name you entered.
+   the `.yaml` file, replace `helloworld-go` in the above commands with the name
+   you entered.
 
 1. Now you can make a request to your app and see the results. Replace
    `IP_ADDRESS` with the `EXTERNAL-IP` you wrote down, and replace
@@ -138,16 +144,16 @@ asssigned an external IP address.
    Hello World: Go Sample v1!
    ```
 
-   If you exported the host URL And IP address as variables in the previous steps, you
-   can use those variables to simplify your cURL request:
+   If you exported the host URL And IP address as variables in the previous
+   steps, you can use those variables to simplify your cURL request:
 
    ```shell
    curl -H "Host: ${HOST_URL}" http://${IP_ADDRESS}
    Hello World: Go Sample v1!
    ```
 
-   If you deployed your own app, you might want to customize this cURL
-   request to interact with your application.
+   If you deployed your own app, you might want to customize this cURL request
+   to interact with your application.
 
    It can take a few seconds for Knative to scale up your application and return
    a response.

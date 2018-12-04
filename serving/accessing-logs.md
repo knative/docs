@@ -1,20 +1,21 @@
 # Accessing logs
 
-If you have not yet installed the logging and monitoring components, go through the
-[installation instructions](./installing-logging-metrics-traces.md) to set up the
-necessary components first.
+If you have not yet installed the logging and monitoring components, go through
+the [installation instructions](./installing-logging-metrics-traces.md) to set
+up the necessary components first.
 
 ## Kibana and Elasticsearch
 
-- To open the Kibana UI (the visualization tool for [Elasticsearch](https://info.elastic.co)),
-  start a local proxy with the following command:
+- To open the Kibana UI (the visualization tool for
+  [Elasticsearch](https://info.elastic.co)), start a local proxy with the
+  following command:
 
   ```shell
   kubectl proxy
   ```
 
-  This command starts a local proxy of Kibana on port 8001. For security reasons,
-  the Kibana UI is exposed only within the cluster.
+  This command starts a local proxy of Kibana on port 8001. For security
+  reasons, the Kibana UI is exposed only within the cluster.
 
 - Navigate to the
   [Kibana UI](http://localhost:8001/api/v1/namespaces/knative-monitoring/services/kibana-logging/proxy/app/kibana).
@@ -24,12 +25,13 @@ necessary components first.
 
   ![Kibana UI Discover tab](./images/kibana-discover-tab-annotated.png)
 
-  You can change the time frame of logs Kibana displays in the upper right corner
-  of the screen. The main search bar is across the top of the Discover page.
+  You can change the time frame of logs Kibana displays in the upper right
+  corner of the screen. The main search bar is across the top of the Discover
+  page.
 
-- As more logs are ingested, new fields will be discovered. To have them indexed,
-  go to "Management" > "Index Patterns" > Refresh button (on top right) > "Refresh
-  fields".
+- As more logs are ingested, new fields will be discovered. To have them
+  indexed, go to "Management" > "Index Patterns" > Refresh button (on top
+  right) > "Refresh fields".
 
 <!-- TODO: create a video walkthrough of the Kibana UI -->
 
@@ -96,8 +98,8 @@ To access the request logs, enter the following search in Kibana:
 tag: "requestlog.logentry.istio-system"
 ```
 
-Request logs contain details about requests served by the revision. Below is
-a sample request log:
+Request logs contain details about requests served by the revision. Below is a
+sample request log:
 
 ```text
 @timestamp                   July 10th 2018, 10:09:28.000
@@ -128,7 +130,8 @@ See [Accessing Traces](./accessing-traces.md) page for details.
 
 ## Stackdriver
 
-Go to the [GCP Console logging page](https://console.cloud.google.com/logs/viewer) for
+Go to the
+[GCP Console logging page](https://console.cloud.google.com/logs/viewer) for
 your GCP project, which stores your logs via Stackdriver.
 
 ---

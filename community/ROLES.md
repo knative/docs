@@ -106,9 +106,9 @@ table describes:
 
 Individuals may be added as an outside collaborator (with READ access) to a repo
 in the Knative GitHub organization without becoming a member. This role allows
-them to be assigned issues and PRs until they become a member, but will not allow
-tests to be run against their PRs automatically nor allow them to interact with
-the PR bot.
+them to be assigned issues and PRs until they become a member, but will not
+allow tests to be run against their PRs automatically nor allow them to interact
+with the PR bot.
 
 ### Requirements
 
@@ -139,8 +139,8 @@ this is not a requirement.
 
 ### Requirements
 
-- Has made multiple contributions to the project or community. Contributions
-  may include, but are not limited to:
+- Has made multiple contributions to the project or community. Contributions may
+  include, but are not limited to:
 
   - Authoring or reviewing PRs on GitHub
 
@@ -212,12 +212,11 @@ approver in an OWNERS file:
 
 - Responsible for project quality control via [code reviews](REVIEWING.md)
 
-  - Focus on holistic acceptance of contribution such as dependencies with
-    other features, backward / forward compatibility, API and flag
-    definitions, etc
+  - Focus on holistic acceptance of contribution such as dependencies with other
+    features, backward / forward compatibility, API and flag definitions, etc
 
-- Expected to be responsive to review requests as per [community
-  expectations](REVIEWING.md)
+- Expected to be responsive to review requests as per
+  [community expectations](REVIEWING.md)
 
 - Mentor members and contributors
 
@@ -255,8 +254,8 @@ Additional requirements for leads of a new working group:
 
 The following apply to the area / component for which one would be an owner.
 
-- Run their working group as explained in the [Working Group
-  Processes](WORKING-GROUP-PROCESSES.md).
+- Run their working group as explained in the
+  [Working Group Processes](WORKING-GROUP-PROCESSES.md).
 
 - Design/proposal approval authority over the area / component, though
   escalation to the technical oversight committee is possible.
@@ -270,8 +269,8 @@ The following apply to the area / component for which one would be an owner.
 
 - Capable of directly applying lgtm + approve labels for any PR
 
-  - Expected to respect OWNERS files approvals and use [standard
-    procedure for merging code](REVIEWING.md#merging-prs).
+  - Expected to respect OWNERS files approvals and use
+    [standard procedure for merging code](REVIEWING.md#merging-prs).
 
 - Expected to work to holistically maintain the health of the project through:
 
@@ -291,8 +290,8 @@ Administrators are responsible for the bureaucratic aspects of the project.
 
 ### Responsibilities and privileges
 
-- Manage the Knative GitHub repo, including granting membership and
-  controlling repo read/write permissions
+- Manage the Knative GitHub repo, including granting membership and controlling
+  repo read/write permissions
 
 - Manage the Knative Slack team
 

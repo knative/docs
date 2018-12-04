@@ -1,8 +1,9 @@
 # Knative serving sample applications
 
 This directory contains sample applications, developed on Knative, to illustrate
-different use-cases and resources. See [Knative serving](https://github.com/knative/docs/tree/master/serving)
-to learn more about Knative Serving resources.
+different use-cases and resources. See
+[Knative serving](https://github.com/knative/docs/tree/master/serving) to learn
+more about Knative Serving resources.
 
 | Name                       | Description                                                                                                                                                                                                              |                                                                                                                                                                                                        Languages                                                                                                                                                                                                        |
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |

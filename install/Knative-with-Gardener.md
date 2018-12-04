@@ -89,7 +89,8 @@ rerun the command to see the current status.
 
 ## Installing Knative components
 
-You can install the Knative Serving and Build components together, or Build on its own.
+You can install the Knative Serving and Build components together, or Build on
+its own.
 
 ### Installing Knative Serving and Build components
 
@@ -97,8 +98,8 @@ You can install the Knative Serving and Build components together, or Build on i
    ```bash
    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.1/release.yaml
    ```
-1. Monitor the Knative components until all of the components show a
-   `STATUS` of `Running`:
+1. Monitor the Knative components until all of the components show a `STATUS` of
+   `Running`:
    ```bash
    kubectl get pods --namespace knative-serving
    kubectl get pods --namespace knative-build
