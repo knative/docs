@@ -6,9 +6,10 @@ using pre-built images.
 ## Before you begin
 
 Knative requires a Kubernetes cluster v1.10 or newer with the
-[MutatingAdmissionWebhook admission controller](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#how-do-i-turn-on-an-admission-controller) enabled.
-`kubectl` v1.10 is also required. This guide assumes that you've already created a
-Kubernetes cluster which you're comfortable installing _alpha_ software on.
+[MutatingAdmissionWebhook admission controller](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#how-do-i-turn-on-an-admission-controller)
+enabled. `kubectl` v1.10 is also required. This guide assumes that you've
+already created a Kubernetes cluster which you're comfortable installing _alpha_
+software on.
 
 This guide assumes you are using bash in a Mac or Linux environment; some
 commands will need to be adjusted for use in a Windows environment.
@@ -41,7 +42,8 @@ rerun the command to see the current status.
 
 ## Installing Knative components
 
-You can install the Knative Serving and Build components together, or Build on its own.
+You can install the Knative Serving and Build components together, or Build on
+its own.
 
 ### Installing Knative Serving and Build components
 
@@ -49,8 +51,8 @@ You can install the Knative Serving and Build components together, or Build on i
    ```bash
    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.2/release.yaml
    ```
-1. Monitor the Knative components until all of the components show a
-   `STATUS` of `Running`:
+1. Monitor the Knative components until all of the components show a `STATUS` of
+   `Running`:
    ```bash
    kubectl get pods --namespace knative-serving
    kubectl get pods --namespace knative-build

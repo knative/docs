@@ -8,8 +8,8 @@ process succeeds.
 A Knative `Build` runs on-cluster and is implemented by a
 [Kubernetes Custom Resource Definition (CRD)](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
 
-Given a `Builder`, or container image that you have created to perform a task
-or action, you can define a Knative `Build` through a single configuration file.
+Given a `Builder`, or container image that you have created to perform a task or
+action, you can define a Knative `Build` through a single configuration file.
 
 Also consider using a Knative `Build` to build the source code of your apps into
 container images, which you can then run on
@@ -24,8 +24,8 @@ More information about this use case is demonstrated in
   task, whether that's a single step in a process, or the whole process itself.
 - The `steps` in a `Build` can push to a repository.
 - A `BuildTemplate` can be used to defined reusable templates.
-- The `source` in a `Build` can be defined to mount data to a Kubernetes
-  Volume, and supports:
+- The `source` in a `Build` can be defined to mount data to a Kubernetes Volume,
+  and supports:
   - `git` repositories
   - Google Cloud Storage
   - An arbitrary container image
@@ -46,8 +46,8 @@ components:
 Because all Knative components stand alone, you can decide which components to
 install. Knative Serving is not required to create and run builds.
 
-Before you can run a Knative Build, you must install the Knative Build
-component in your Kubernetes cluster:
+Before you can run a Knative Build, you must install the Knative Build component
+in your Kubernetes cluster:
 
 - For details about installing a new instance of Knative in your Kubernetes
   cluster, see [Installing Knative](../install/README.md).
@@ -91,7 +91,8 @@ spec:
 Use the following samples to learn how to configure your Knative Builds to
 perform simple tasks.
 
-Tip: Review and reference multiple samples to piece together more complex builds.
+Tip: Review and reference multiple samples to piece together more complex
+builds.
 
 #### Simple build samples
 

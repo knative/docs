@@ -1,7 +1,7 @@
 # Builders
 
-This document defines `Builder` images and the
-conventions to which they are expected to adhere.
+This document defines `Builder` images and the conventions to which they are
+expected to adhere.
 
 ## What is a Builder?
 
@@ -50,15 +50,16 @@ steps:
 
 ### Specialized Builders
 
-It is also possible for advanced users to create purpose-built builders.
-One example of this are the ["FTL" builders](https://github.com/GoogleCloudPlatform/runtimes-common/tree/master/ftl#ftl).
+It is also possible for advanced users to create purpose-built builders. One
+example of this are the
+["FTL" builders](https://github.com/GoogleCloudPlatform/runtimes-common/tree/master/ftl#ftl).
 
 ## What are the Builder conventions?
 
 Builders should expect a Build to implement the following conventions:
 
-- `/workspace`: The default working directory will be `/workspace`, which is
-  a volume that is filled by the `source:` step and shared across build `steps:`.
+- `/workspace`: The default working directory will be `/workspace`, which is a
+  volume that is filled by the `source:` step and shared across build `steps:`.
 
 - `/builder/home`: This volume is exposed to steps via `$HOME`.
 

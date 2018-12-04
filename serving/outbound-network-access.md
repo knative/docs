@@ -1,18 +1,19 @@
 # Configuring outbound network access
 
-This guides walks you through enabling outbound network access for a Knative app.
+This guides walks you through enabling outbound network access for a Knative
+app.
 
-Knative blocks all outbound traffic by default. To enable outbound access (when you want to connect
-to the Cloud Storage API, for example), you need to change the scope of the proxy IP range by editing
-the `config-network` map.
+Knative blocks all outbound traffic by default. To enable outbound access (when
+you want to connect to the Cloud Storage API, for example), you need to change
+the scope of the proxy IP range by editing the `config-network` map.
 
 ## Determining the IP scope of your cluster
 
-To set the correct scope, you need to determine the IP ranges of your cluster. The scope varies
-depending on your platform:
+To set the correct scope, you need to determine the IP ranges of your cluster.
+The scope varies depending on your platform:
 
-- For Google Kubernetes Engine (GKE) run the following command to determine the scope. Make sure
-  to replace the variables or export these values first.
+- For Google Kubernetes Engine (GKE) run the following command to determine the
+  scope. Make sure to replace the variables or export these values first.
   ```shell
   gcloud container clusters describe ${CLUSTER_ID} \
     --zone=${GCP_ZONE} | grep -e clusterIpv4Cidr -e servicesIpv4Cidr
@@ -21,14 +22,16 @@ depending on your platform:
   ```shell
   cat cluster/config.yaml | grep service_cluster_ip_range
   ```
-- For IBM Cloud Kubernetes Service use `172.30.0.0/16,172.20.0.0/16,10.10.10.0/24`
+- For IBM Cloud Kubernetes Service use
+  `172.30.0.0/16,172.20.0.0/16,10.10.10.0/24`
 - For Azure Container Service (ACS) use `10.244.0.0/16,10.240.0.0/16`
 - For Minikube use `10.0.0.1/24`
 
 ## Setting the IP scope
 
-The `istio.sidecar.includeOutboundIPRanges` parameter in the `config-network` map specifies
-the IP ranges that Istio sidecar intercepts. To allow outbound access, replace the default parameter  
+The `istio.sidecar.includeOutboundIPRanges` parameter in the `config-network`
+map specifies the IP ranges that Istio sidecar intercepts. To allow outbound
+access, replace the default parameter  
 value with the IP ranges of your cluster.
 
 Run the following command to edit the `config-network` map:
@@ -37,8 +40,9 @@ Run the following command to edit the `config-network` map:
 kubectl edit configmap config-network --namespace knative-serving
 ```
 
-Then, use an editor of your choice to change the `istio.sidecar.includeOutboundIPRanges` parameter value
-from `*` to the IP range you need. Separate multiple IP entries with a comma. For example:
+Then, use an editor of your choice to change the
+`istio.sidecar.includeOutboundIPRanges` parameter value from `*` to the IP range
+you need. Separate multiple IP entries with a comma. For example:
 
 ```
 # Please edit the object below. Lines beginning with a '#' will be ignored,
@@ -54,24 +58,25 @@ metadata:
 ```
 
 By default, the `istio.sidecar.includeOutboundIPRanges` parameter is set to `*`,
-which means that Istio intercepts all traffic within the cluster as well as all traffic that is going
-outside the cluster. Istio blocks all traffic that is going outside the cluster unless
-you create the necessary egress rules.
+which means that Istio intercepts all traffic within the cluster as well as all
+traffic that is going outside the cluster. Istio blocks all traffic that is
+going outside the cluster unless you create the necessary egress rules.
 
-When you set the parameter to a valid set of IP address ranges, Istio will no longer intercept
-traffic that is going to the IP addresses outside the provided ranges, and you don't need to specify
-any egress rules.
+When you set the parameter to a valid set of IP address ranges, Istio will no
+longer intercept traffic that is going to the IP addresses outside the provided
+ranges, and you don't need to specify any egress rules.
 
-If you omit the parameter or set it to `''`, Knative uses the value of the `global.proxy.includeIPRanges`
-parameter that is provided at Istio deployment time. In the default Knative Serving
-deployment, `global.proxy.includeIPRanges` value is set to `*`.
+If you omit the parameter or set it to `''`, Knative uses the value of the
+`global.proxy.includeIPRanges` parameter that is provided at Istio deployment
+time. In the default Knative Serving deployment, `global.proxy.includeIPRanges`
+value is set to `*`.
 
 If an invalid value is passed, `''` is used instead.
 
-If you are still having trouble making off-cluster calls, you can verify that the policy was
-applied to the pod running your service by checking the metadata on the pod.
-Verify that the `traffic.sidecar.istio.io/includeOutboundIPRanges` annotation matches the
-expected value from the config-map.
+If you are still having trouble making off-cluster calls, you can verify that
+the policy was applied to the pod running your service by checking the metadata
+on the pod. Verify that the `traffic.sidecar.istio.io/includeOutboundIPRanges`
+annotation matches the expected value from the config-map.
 
 ```shell
 $ kubectl get pod ${POD_NAME} --output yaml

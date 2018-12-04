@@ -3,26 +3,29 @@
 A Go sample that shows how to use Knative to go from source code in a git
 repository to a running application with a URL.
 
-This sample uses the [Build](../../../build/README.md) and [Serving](../../README.md)
-components of Knative to orchestrate an end-to-end deployment.
+This sample uses the [Build](../../../build/README.md) and
+[Serving](../../README.md) components of Knative to orchestrate an end-to-end
+deployment.
 
 ## Prerequisites
 
 You need:
 
 - A Kubernetes cluster with Knative installed. Follow the
-  [installation instructions](https://github.com/knative/docs/blob/master/install/README.md) if you need
-  to create one.
-- Go installed and configured. This is optional, and only required if you want to run the sample app
-  locally.
+  [installation instructions](https://github.com/knative/docs/blob/master/install/README.md)
+  if you need to create one.
+- Go installed and configured. This is optional, and only required if you want
+  to run the sample app locally.
 
 ## Configuring Knative
 
-To use this sample, you need to install a build template and register a secret for Docker Hub.
+To use this sample, you need to install a build template and register a secret
+for Docker Hub.
 
 ### Install the kaniko build template
 
-This sample leverages the [kaniko build template](https://github.com/knative/build-templates/tree/master/kaniko)
+This sample leverages the
+[kaniko build template](https://github.com/knative/build-templates/tree/master/kaniko)
 to perform a source-to-container build on your Kubernetes cluster.
 
 Use kubectl to install the kaniko manifest:
@@ -33,10 +36,11 @@ kubectl apply --filename https://raw.githubusercontent.com/knative/build-templat
 
 ### Register secrets for Docker Hub
 
-In order to push the container that is built from source to Docker Hub, register a secret in
-Kubernetes for authentication with Docker Hub.
+In order to push the container that is built from source to Docker Hub, register
+a secret in Kubernetes for authentication with Docker Hub.
 
-There are [detailed instructions](https://github.com/knative/docs/blob/master/build/auth.md#basic-authentication-docker)
+There are
+[detailed instructions](https://github.com/knative/docs/blob/master/build/auth.md#basic-authentication-docker)
 available, but these are the key steps:
 
 1. Create a new `Secret` manifest, which is used to store your Docker Hub
@@ -68,11 +72,11 @@ available, but these are the key steps:
    cGFzc3dvcmQ=
    ```
 
-   > **Note:** If you receive the "invalid option -w" error on macOS,
-   > try using the `base64 -b 0` command.
+   > **Note:** If you receive the "invalid option -w" error on macOS, try using
+   > the `base64 -b 0` command.
 
-1. Create a new `Service Account` manifest which is used to link the build process to the secret.
-   Save this file as `service-account.yaml`:
+1. Create a new `Service Account` manifest which is used to link the build
+   process to the secret. Save this file as `service-account.yaml`:
 
 ```yaml
 apiVersion: v1
@@ -83,7 +87,8 @@ secrets:
   - name: basic-user-pass
 ```
 
-1. After you have created the manifest files, apply them to your cluster with `kubectl`:
+1. After you have created the manifest files, apply them to your cluster with
+   `kubectl`:
 
    ```shell
    $ kubectl apply --filename docker-secret.yaml
@@ -102,10 +107,10 @@ you could replace this GitHub repo with your own. The only requirements are that
 the repo must contain a `Dockerfile` with the instructions for how to build a
 container for the application.
 
-1. You need to create a service manifest which defines the service to deploy, including where
-   the source code is and which build-template to use. Create a file named
-   `service.yaml` and copy the following definition. Make sure to replace
-   `{DOCKER_USERNAME}` with your own Docker Hub username:
+1. You need to create a service manifest which defines the service to deploy,
+   including where the source code is and which build-template to use. Create a
+   file named `service.yaml` and copy the following definition. Make sure to
+   replace `{DOCKER_USERNAME}` with your own Docker Hub username:
 
    ```yaml
    apiVersion: serving.knative.dev/v1alpha1
@@ -198,11 +203,13 @@ container for the application.
    - Fetch the revision specified from GitHub and build it into a container
    - Push the container to Docker Hub
    - Create a new immutable revision for this version of the app.
-   - Network programming to create a route, ingress, service, and load balance for your app.
+   - Network programming to create a route, ingress, service, and load balance
+     for your app.
    - Automatically scale your pods up and down (including to zero active pods).
 
-1. To get the ingress IP for your cluster, use the following command. If your cluster is new,
-   it can take some time for the service to get an external IP address:
+1. To get the ingress IP for your cluster, use the following command. If your
+   cluster is new, it can take some time for the service to get an external IP
+   address:
 
    ```shell
    $ kubectl get svc knative-ingressgateway --namespace istio-system
