@@ -9,32 +9,32 @@ some or all of the observability features are installed. For example, if you ins
 
 1. Run the following command to install Prometheus and Grafana:
 
-  ```shell
-  kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.2/monitoring-metrics-prometheus.yaml
-  ```
+   ```shell
+   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.2/monitoring-metrics-prometheus.yaml
+   ```
 
 1. Ensure that the `grafana-*`, `kibana-logging-*`, `kube-state-metrics-*`, `node-exporter-*` and `prometheus-system-*` 
    pods all report a `Running` status:
 
-  ```shell
-  kubectl get pods --namespace knative-monitoring --watch
-  ```
+   ```shell
+   kubectl get pods --namespace knative-monitoring --watch
+   ```
 
-  For example:
+   For example:
 
-  ```text
-  NAME                                  READY     STATUS    RESTARTS   AGE
-  grafana-798cf569ff-v4q74              1/1       Running   0          2d
-  kibana-logging-7d474fbb45-6qb8x       1/1       Running   0          2d
-  kube-state-metrics-75bd4f5b8b-8t2h2   4/4       Running   0          2d
-  node-exporter-cr6bh                   2/2       Running   0          2d
-  node-exporter-mf6k7                   2/2       Running   0          2d
-  node-exporter-rhzr7                   2/2       Running   0          2d
-  prometheus-system-0                   1/1       Running   0          2d
-  prometheus-system-1                   1/1       Running   0          2d
-  ```
+   ```text
+   NAME                                  READY     STATUS    RESTARTS   AGE
+   grafana-798cf569ff-v4q74              1/1       Running   0          2d
+   kibana-logging-7d474fbb45-6qb8x       1/1       Running   0          2d
+   kube-state-metrics-75bd4f5b8b-8t2h2   4/4       Running   0          2d
+   node-exporter-cr6bh                   2/2       Running   0          2d
+   node-exporter-mf6k7                   2/2       Running   0          2d
+   node-exporter-rhzr7                   2/2       Running   0          2d
+   prometheus-system-0                   1/1       Running   0          2d
+   prometheus-system-1                   1/1       Running   0          2d
+   ```
 
-  Tip: Hit CTRL+C to exit watch mode.
+   Tip: Hit CTRL+C to exit watch mode.
 
 [Accessing Metrics](./accessing-metrics.md) for more infromation about metrics in Knative.
 
@@ -172,7 +172,7 @@ To configure and setup monitoring:
      fluentd-ds-xghk9                      1/1       Running   0          2d
      ```
 
-   Tip: Hit CTRL+C to exit watch mode.
+     Tip: Hit CTRL+C to exit watch mode.
   
 1. Verify that each of your nodes have the `beta.kubernetes.io/fluentd-ds-ready=true` label:
 
