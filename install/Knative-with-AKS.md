@@ -1,7 +1,7 @@
 # Knative Install on Azure Kubernetes Service (AKS)
 
-This guide walks you through the installation of the latest version of
-Knative using pre-built images.
+This guide walks you through the installation of the latest version of Knative
+using pre-built images.
 
 You can find [guides for other platforms here](README.md).
 
@@ -16,10 +16,12 @@ commands will need to be adjusted for use in a Windows environment.
 
 ### Installing the Azure CLI
 
-1. If you already have `azure cli` version `2.0.41` or later installed, you can skip to the next section and install `kubectl`
+1. If you already have `azure cli` version `2.0.41` or later installed, you can
+   skip to the next section and install `kubectl`
 
-Install `az` by following the instructions for your operating system.
-See the [full installation instructions](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest) if yours isn't listed below. You will need az cli version 2.0.37 or greater.
+Install `az` by following the instructions for your operating system. See the
+[full installation instructions](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
+if yours isn't listed below. You will need az cli version 2.0.37 or greater.
 
 #### MacOS
 
@@ -43,7 +45,9 @@ brew install azure-cli
 
 ### Installing kubectl
 
-1. If you already have `kubectl`, run `kubectl version` to check your client version. If you have `kubectl` v1.10 installed, you can skip to the next section and create an AKS cluster
+1. If you already have `kubectl`, run `kubectl version` to check your client
+   version. If you have `kubectl` v1.10 installed, you can skip to the next
+   section and create an AKS cluster
 
 ```bash
 az aks install-cli
@@ -57,7 +61,8 @@ Now that we have all the tools, we need a Kubernetes cluster to install Knative.
 
 First let's identify your Azure subscription and save it for use later.
 
-1. Run `az login` and follow the instructions in the command output to authorize `az` to use your account
+1. Run `az login` and follow the instructions in the command output to authorize
+   `az` to use your account
 1. List your Azure subscriptions:
    ```bash
    az account list -o table
@@ -66,7 +71,8 @@ First let's identify your Azure subscription and save it for use later.
 ### Create a Resource Group for AKS
 
 To simplify the command lines for this walkthrough, we need to define a few
-environment variables. First determine which region you'd like to run AKS in, along with the resource group you'd like to use.
+environment variables. First determine which region you'd like to run AKS in,
+along with the resource group you'd like to use.
 
 1. Set `RESOURCE_GROUP` and `LOCATION` variables:
 
@@ -76,14 +82,17 @@ environment variables. First determine which region you'd like to run AKS in, al
    export CLUSTER_NAME=knative-cluster
    ```
 
-2. Create a resource group with the az cli using the following command if you are using a new resource group.
+2. Create a resource group with the az cli using the following command if you
+   are using a new resource group.
    ```bash
    az group create --name $RESOURCE_GROUP --location $LOCATION
    ```
 
 ### Create a Kubernetes cluster using AKS
 
-Next we will create a managed Kubernetes cluster using AKS. To make sure the cluster is large enough to host all the Knative and Istio components, the recommended configuration for a cluster is:
+Next we will create a managed Kubernetes cluster using AKS. To make sure the
+cluster is large enough to host all the Knative and Istio components, the
+recommended configuration for a cluster is:
 
 - Kubernetes version 1.10 or later
 - Three or more nodes
@@ -91,8 +100,9 @@ Next we will create a managed Kubernetes cluster using AKS. To make sure the clu
 - RBAC enabled
 
 1. Enable AKS in your subscription, use the following command with the az cli:
-   `bash az provider register -n Microsoft.ContainerService`
-   You should also ensure that the `Microsoft.Compute` and `Microsoft.Network` providers are registered in your subscription. If you need to enable them:
+   `bash az provider register -n Microsoft.ContainerService` You should also
+   ensure that the `Microsoft.Compute` and `Microsoft.Network` providers are
+   registered in your subscription. If you need to enable them:
    `bash az provider register -n Microsoft.Compute az provider register -n Microsoft.Network`
 1. Create the AKS cluster!
 
@@ -131,18 +141,19 @@ Knative depends on Istio.
    ```
 
 1. Monitor the Istio components until all of the components show a `STATUS` of
-   `Running` or `Completed`:
-   `bash kubectl get pods --namespace istio-system`
+   `Running` or `Completed`: `bash kubectl get pods --namespace istio-system`
 
 It will take a few minutes for all the components to be up and running; you can
 rerun the command to see the current status.
 
 > Note: Instead of rerunning the command, you can add `--watch` to the above
-> command to view the component's status updates in real time. Use CTRL + C to exit watch mode.
+> command to view the component's status updates in real time. Use CTRL + C to
+> exit watch mode.
 
 ## Installing Knative components
 
-You can install the Knative Serving and Build components together, or Build on its own.
+You can install the Knative Serving and Build components together, or Build on
+its own.
 
 ### Installing Knative Serving and Build components
 
@@ -150,8 +161,8 @@ You can install the Knative Serving and Build components together, or Build on i
    ```bash
    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.1/release.yaml
    ```
-1. Monitor the Knative components until all of the components show a
-   `STATUS` of `Running`:
+1. Monitor the Knative components until all of the components show a `STATUS` of
+   `Running`:
    ```bash
    kubectl get pods --namespace knative-serving
    kubectl get pods --namespace knative-build
@@ -196,9 +207,9 @@ You have two options for deploying your first app:
 
 ## Cleaning up
 
-Running a cluster costs money, so you might want to delete the cluster when you're done if
-you're not using it. Deleting the cluster will also remove Knative, Istio,
-and any apps you've deployed.
+Running a cluster costs money, so you might want to delete the cluster when
+you're done if you're not using it. Deleting the cluster will also remove
+Knative, Istio, and any apps you've deployed.
 
 To delete the cluster, enter the following command:
 

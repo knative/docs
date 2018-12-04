@@ -1,20 +1,20 @@
 # Configuring Knative and CertManager for Google Cloud DNS
 
-These instructions assume you have already setup a Knative cluster and
-installed cert-manager into your cluster. For more information, see [using an
-SSL certificate](using-an-ssl-cert.md#install-cert-manager). They also assume
-you have already set up your managed zone with Cloud DNS as part of
+These instructions assume you have already setup a Knative cluster and installed
+cert-manager into your cluster. For more information, see
+[using an SSL certificate](using-an-ssl-cert.md#install-cert-manager). They also
+assume you have already set up your managed zone with Cloud DNS as part of
 configuring the domain to map to your IP address.
 
 To automate the generation of a certificate with cert-manager and LetsEncrypt,
-we will use a `DNS01` challenge type, which requires the domain owner to add a TXT record
-to their zone to prove ownership. Other challenge types are not currently supported by
-Knative.
+we will use a `DNS01` challenge type, which requires the domain owner to add a
+TXT record to their zone to prove ownership. Other challenge types are not
+currently supported by Knative.
 
 ## Creating a Cloud DNS service account
 
-To add the TXT record, configure Knative with a service account
-that can be used by cert-manager to create and update the DNS record.
+To add the TXT record, configure Knative with a service account that can be used
+by cert-manager to create and update the DNS record.
 
 To begin, create a new service account with the project role `dns.admin`:
 
@@ -42,9 +42,9 @@ gcloud iam service-accounts keys create ~/key.json \
   --iam-account=$CLOUD_DNS_SA
 ```
 
-After obtaining the service account secret, publish it to your cluster.
-This command uses the secret name `cloud-dns-key`, but you can
-choose a different name.
+After obtaining the service account secret, publish it to your cluster. This
+command uses the secret name `cloud-dns-key`, but you can choose a different
+name.
 
 ```shell
 # Upload that as a secret in your Kubernetes cluster.
@@ -58,16 +58,16 @@ rm ~/key.json
 
 ## Configuring CertManager to use your DNS admin service account
 
-Next, configure cert-manager to request new certificates and
-verify the challenges using DNS.
+Next, configure cert-manager to request new certificates and verify the
+challenges using DNS.
 
 ### Specifying a certificate issuer
 
-This example configures cert-manager to use LetsEncrypt, but you can
-use any certificate provider that supports the ACME protocol.
+This example configures cert-manager to use LetsEncrypt, but you can use any
+certificate provider that supports the ACME protocol.
 
-This example uses the `dns01` challenge type, which will
-enable certificate generation and wildcard certificates.
+This example uses the `dns01` challenge type, which will enable certificate
+generation and wildcard certificates.
 
 ```shell
 kubectl apply --filename - <<EOF
@@ -122,9 +122,9 @@ status:
 
 ### Specifying the certificate
 
-Next, configure which certificate issuer to use
-and which secret you will publish the certificate into. Use the Secret `istio-ingressgateway-certs`.
-The following steps will overwrite this Secret if it already exists.
+Next, configure which certificate issuer to use and which secret you will
+publish the certificate into. Use the Secret `istio-ingressgateway-certs`. The
+following steps will overwrite this Secret if it already exists.
 
 ```shell
 # Change this value to the domain you want to use.
@@ -231,5 +231,5 @@ spec:
 EOF
 ```
 
-Now you can access your services via HTTPS; cert-manager will keep your certificates
-up-to-date, replacing them before the certificate expires.
+Now you can access your services via HTTPS; cert-manager will keep your
+certificates up-to-date, replacing them before the certificate expires.

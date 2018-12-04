@@ -6,7 +6,8 @@ using pre-built images.
 You may also have it all installed for you by clicking the button below:  
 [![Deploy to IBM Cloud](https://bluemix.net/deploy/button_x2.png)](https://console.bluemix.net/devops/setup/deploy?repository=https://git.ng.bluemix.net/start-with-knative/toolchain.git)
 
-More [instructions on the deploy button here](https://git.ng.bluemix.net/start-with-knative/toolchain/blob/master/README.md).
+More
+[instructions on the deploy button here](https://git.ng.bluemix.net/start-with-knative/toolchain/blob/master/README.md).
 
 You can find [guides for other platforms here](README.md).
 
@@ -89,8 +90,8 @@ components, the recommended configuration for a cluster is:
     ```
 
     If you're starting in a fresh account with no public and private VLANs, they
-    are created automatically for you. If you already have VLANs configured
-    in your account, get them via `ibmcloud cs vlans --zone $CLUSTER_ZONE` and
+    are created automatically for you. If you already have VLANs configured in
+    your account, get them via `ibmcloud cs vlans --zone $CLUSTER_ZONE` and
     include the public/private VLAN in the `cluster-create` command:
 
     ```bash
@@ -118,8 +119,8 @@ components, the recommended configuration for a cluster is:
     ibmcloud cs cluster-config $CLUSTER_NAME
     ```
 
-    Follow the instructions on the screen to `EXPORT` the correct `KUBECONFIG` value
-    to point to the created cluster.
+    Follow the instructions on the screen to `EXPORT` the correct `KUBECONFIG`
+    value to point to the created cluster.
 
 1.  Make sure all nodes are up:
 
@@ -127,8 +128,8 @@ components, the recommended configuration for a cluster is:
     kubectl get nodes
     ```
 
-    Make sure all the nodes are in `Ready` state. You are now ready to install Istio
-    into your cluster.
+    Make sure all the nodes are in `Ready` state. You are now ready to install
+    Istio into your cluster.
 
 ## Installing Istio
 
@@ -157,7 +158,8 @@ rerun the command to see the current status.
 
 ## Installing Knative components
 
-You can install the Knative Serving and Build components together, or Build on its own.
+You can install the Knative Serving and Build components together, or Build on
+its own.
 
 ### Installing Knative Serving and Build components
 
@@ -165,8 +167,8 @@ You can install the Knative Serving and Build components together, or Build on i
    ```bash
    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.1/release.yaml
    ```
-1. Monitor the Knative components until all of the components show a
-   `STATUS` of `Running`:
+1. Monitor the Knative components until all of the components show a `STATUS` of
+   `Running`:
    ```bash
    kubectl get pods --namespace knative-serving
    kubectl get pods --namespace knative-build
@@ -211,8 +213,8 @@ You have two options for deploying your first app:
 
 ## Cleaning up
 
-Running a cluster in IKS costs money, so if you're not using it, you might
-want to delete the cluster when you're done. Deleting the cluster also removes
+Running a cluster in IKS costs money, so if you're not using it, you might want
+to delete the cluster when you're done. Deleting the cluster also removes
 Knative, Istio, and any apps you've deployed.
 
 To delete the cluster, enter the following command:

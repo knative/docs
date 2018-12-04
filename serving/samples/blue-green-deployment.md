@@ -10,14 +10,17 @@ configuration.
 You need:
 
 - A Kubernetes cluster with [Knative installed](../../install/README.md).
-- (Optional) [A custom domain configured](../../serving/using-a-custom-domain.md) for use with Knative.
+- (Optional)
+  [A custom domain configured](../../serving/using-a-custom-domain.md) for use
+  with Knative.
 
 ## Deploying Revision 1 (Blue)
 
-We'll be deploying an image of a sample application that displays the text
-"App v1" on a blue background.
+We'll be deploying an image of a sample application that displays the text "App
+v1" on a blue background.
 
-First, create a new file called `blue-green-demo-config.yaml`and copy this into it:
+First, create a new file called `blue-green-demo-config.yaml`and copy this into
+it:
 
 ```yaml
 apiVersion: serving.knative.dev/v1alpha1
@@ -72,25 +75,25 @@ route "blue-green-demo" configured
 ```
 
 You'll now be able to view the sample app at
-http://blue-green-demo.default.YOUR_CUSTOM_DOMAIN.com (replace `YOUR_CUSTOM_DOMAIN`)
-with the [custom domain](../../serving/using-a-custom-domain.md) you configured for
-use with Knative.
+http://blue-green-demo.default.YOUR_CUSTOM_DOMAIN.com (replace
+`YOUR_CUSTOM_DOMAIN`) with the
+[custom domain](../../serving/using-a-custom-domain.md) you configured for use
+with Knative.
 
-> Note: If you don't have a custom domain configured for use with Knative, you can interact
-> with your app using cURL requests if you have the host URL and IP address:
+> Note: If you don't have a custom domain configured for use with Knative, you
+> can interact with your app using cURL requests if you have the host URL and IP
+> address:
 > `curl -H "Host: blue-green-demo.default.example.com" http://IP_ADDRESS`  
->  Knative creates the host URL by combining the name of your Route object,
-> the namespace, and `example.com`, if you haven't configured a custom domain.
-> For example, `[route-name].[namespace].example.com`.
+>  Knative creates the host URL by combining the name of your Route object, the namespace,
+> and `example.com`, if you haven't configured a custom domain. For example, `[route-name].[namespace].example.com`.
 > You can get the IP address by entering `kubectl get svc knative-ingressgateway --namespace istio-system`
-> and copying the `EXTERNAL-IP` returned by that command.
-> See [Interacting with your app](../../install/getting-started-knative-app.md#interacting-with-your-app)
+> and copying the `EXTERNAL-IP` returned by that command. See [Interacting with your app](../../install/getting-started-knative-app.md#interacting-with-your-app)
 > for more information.
 
 ## Deploying Revision 2 (Green)
 
-Revision 2 of the sample application will display the text "App v2" on a green background.
-To create the new revision, we'll edit our existing configuration in
+Revision 2 of the sample application will display the text "App v2" on a green
+background. To create the new revision, we'll edit our existing configuration in
 `blue-green-demo-config.yaml` with an updated image and environment variables:
 
 ```yaml
@@ -152,11 +155,13 @@ route "blue-green-demo" configured
 
 Revision 2 of the app is staged at this point. That means:
 
-- No traffic will be routed to revision 2 at the main URL, http://blue-green-demo.default.YOUR_CUSTOM_DOMAIN.com
-- Knative creates a new route named v2 for testing the newly deployed version at http://v2.blue-green-demo.default.YOUR_CUSTOM_DOMAIN.com
+- No traffic will be routed to revision 2 at the main URL,
+  http://blue-green-demo.default.YOUR_CUSTOM_DOMAIN.com
+- Knative creates a new route named v2 for testing the newly deployed version at
+  http://v2.blue-green-demo.default.YOUR_CUSTOM_DOMAIN.com
 
-This allows you to validate that the new version of the app is behaving as expected before switching
-any traffic over to it.
+This allows you to validate that the new version of the app is behaving as
+expected before switching any traffic over to it.
 
 ## Migrating traffic to the new revision
 
@@ -186,11 +191,13 @@ kubectl apply --filename blue-green-demo-route.yaml
 route "blue-green-demo" configured
 ```
 
-Refresh the original route (http://blue-green-demo.default.YOUR_CUSTOM_DOMAIN.com) a
-few times to see that some traffic now goes to version 2 of the app.
+Refresh the original route
+(http://blue-green-demo.default.YOUR_CUSTOM_DOMAIN.com) a few times to see that
+some traffic now goes to version 2 of the app.
 
-> Note: This sample shows a 50/50 split to assure you don't have to refresh too much,
-> but it's recommended to start with 1-2% of traffic in a production environment
+> Note: This sample shows a 50/50 split to assure you don't have to refresh too
+> much, but it's recommended to start with 1-2% of traffic in a production
+> environment
 
 ## Rerouting all traffic to the new version
 
@@ -221,8 +228,9 @@ kubectl apply --filename blue-green-demo-route.yaml
 route "blue-green-demo" configured
 ```
 
-Refresh the original route (http://blue-green-demo.default.YOUR_CUSTOM_DOMAIN.com) a
-few times to verify that no traffic is being routed to v1 of the app.
+Refresh the original route
+(http://blue-green-demo.default.YOUR_CUSTOM_DOMAIN.com) a few times to verify
+that no traffic is being routed to v1 of the app.
 
 We added a named route to v1 of the app, so you can now access it at
 http://v1.blue-green-demo.default.YOUR_CUSTOM_DOMAIN.com.

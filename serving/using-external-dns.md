@@ -4,18 +4,19 @@
 that synchronizes exposed Kubernetes Services and Ingresses with DNS providers.
 
 This doc explains how to set up ExternalDNS within a Knative cluster using
-[Google Cloud DNS](https://cloud.google.com/dns/) to automate the process
-of publishing the Knative domain.
+[Google Cloud DNS](https://cloud.google.com/dns/) to automate the process of
+publishing the Knative domain.
 
 ## Prerequisite
 
-1. A Google Kubernetes Engine cluster with Cloud DNS scope.
-   You can create a GKE cluster with Cloud DNS scope by entering the following command:
+1. A Google Kubernetes Engine cluster with Cloud DNS scope. You can create a GKE
+   cluster with Cloud DNS scope by entering the following command:
    ```shell
    gcloud container clusters create "external-dns" \
        --scopes "https://www.googleapis.com/auth/ndev.clouddns.readwrite"
    ```
-1. [Knative Serving](https://github.com/knative/docs/blob/master/install/README.md) installed on your cluster.
+1. [Knative Serving](https://github.com/knative/docs/blob/master/install/README.md)
+   installed on your cluster.
 1. A public domain that will be used in Knative.
 1. Knative configured to use your custom domain.
 
@@ -56,7 +57,8 @@ ExternalDNS. You can find detailed instructions for other cloud providers in the
 
 Skip this step if you already have a DNS provider for your domain.
 
-Here is a [list](https://github.com/kubernetes-incubator/external-dns#the-latest-release-v05)
+Here is a
+[list](https://github.com/kubernetes-incubator/external-dns#the-latest-release-v05)
 of DNS providers supported by ExternalDNS. Choose a DNS provider from the list.
 
 ### Create a DNS zone for managing DNS records
@@ -67,7 +69,8 @@ custom domain.
 A DNS zone which will contain the managed DNS records needs to be created.
 Assume your custom domain is `external-dns-test.my-org.do`.
 
-Use the following command to create a DNS zone with [Google Cloud DNS](https://cloud.google.com/dns/):
+Use the following command to create a DNS zone with
+[Google Cloud DNS](https://cloud.google.com/dns/):
 
 ```shell
 gcloud dns managed-zones create "external-dns-zone" \
@@ -95,10 +98,10 @@ In this case, the DNS nameservers are `ns-cloud-{e1-e4}.googledomains.com`.
 Yours could differ slightly, e.g. {a1-a4}, {b1-b4} etc.
 
 If this zone has the parent zone, you need to add NS records of this zone into
-the parent zone so that this zone can be found from the parent.
-Assuming the parent zone is `my-org-do` and the parent domain is `my-org.do`,
-and the parent zone is also hosted at Google Cloud DNS, you can follow these
-steps to add the NS records of this zone into the parent zone:
+the parent zone so that this zone can be found from the parent. Assuming the
+parent zone is `my-org-do` and the parent domain is `my-org.do`, and the parent
+zone is also hosted at Google Cloud DNS, you can follow these steps to add the
+NS records of this zone into the parent zone:
 
 ```shell
 gcloud dns record-sets transaction start --zone "my-org-do"
@@ -109,7 +112,9 @@ gcloud dns record-sets transaction execute --zone "my-org-do"
 
 ### Deploy ExternalDNS
 
-Use the following command to apply the [manifest](https://github.com/kubernetes-incubator/external-dns/blob/master/docs/tutorials/gke.md#manifest-for-clusters-without-rbac-enabled) to install ExternalDNS
+Use the following command to apply the
+[manifest](https://github.com/kubernetes-incubator/external-dns/blob/master/docs/tutorials/gke.md#manifest-for-clusters-without-rbac-enabled)
+to install ExternalDNS
 
 ```shell
 cat <<EOF | kubectl apply --filename -
@@ -135,9 +140,9 @@ needs to be added into Knative gateway service:
 kubectl edit svc knative-ingressgateway --namespace istio-system
 ```
 
-This command opens your default text editor and allows you to add the
-annotation to `knative-ingressgateway` service. After you've added your
-annotation, your file may look similar to this:
+This command opens your default text editor and allows you to add the annotation
+to `knative-ingressgateway` service. After you've added your annotation, your
+file may look similar to this:
 
 ```
 apiVersion: v1
@@ -167,8 +172,8 @@ NAME                            TYPE  TTL  DATA
 
 ### Verify domain has been published
 
-You can check if the domain has been published to the Internet be entering
-the following command:
+You can check if the domain has been published to the Internet be entering the
+following command:
 
 ```shell
 host test.external-dns-test.my-org.do
