@@ -2,9 +2,8 @@
 
 This directory contains tests and testing docs.
 
-* [Unit tests](#running-unit-tests) currently reside in the codebase alongside the code they test
-* [End-to-end tests](#running-end-to-end-tests)
-
+- [Unit tests](#running-unit-tests) currently reside in the codebase alongside the code they test
+- [End-to-end tests](#running-end-to-end-tests)
 
 ## Running unit tests
 

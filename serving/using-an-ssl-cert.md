@@ -52,22 +52,22 @@ spec:
   selector:
     knative: ingressgateway
   servers:
-  - hosts:
-    - '*'
-    port:
-      name: http
-      number: 80
-      protocol: HTTP
-  - hosts:
-    - '*'
-    port:
-      name: https
-      number: 443
-      protocol: HTTPS
-    tls:
-      mode: SIMPLE
-      privateKey: /etc/istio/ingressgateway-certs/tls.key
-      serverCertificate: /etc/istio/ingressgateway-certs/tls.crt
+    - hosts:
+        - "*"
+      port:
+        name: http
+        number: 80
+        protocol: HTTP
+    - hosts:
+        - "*"
+      port:
+        name: https
+        number: 443
+        protocol: HTTPS
+      tls:
+        mode: SIMPLE
+        privateKey: /etc/istio/ingressgateway-certs/tls.key
+        serverCertificate: /etc/istio/ingressgateway-certs/tls.crt
 ```
 
 Once the change has been made, you can now use the HTTPS protocol to access
@@ -88,9 +88,9 @@ Encrypt][le] to obtain a certificate manually.
 1. Use the certbot to request a certificate, using DNS validation. The certbot tool will walk
    you through validating your domain ownership by creating TXT records in your domain.
 
-    ```shell
-    ./certbot-auto certonly --manual --preferred-challenges dns -d '*.default.yourdomain.com'
-    ```
+   ```shell
+   ./certbot-auto certonly --manual --preferred-challenges dns -d '*.default.yourdomain.com'
+   ```
 
 1. When certbot is complete, you will have two output files, `privkey.pem` and `fullchain.pem`. These files
    map to the `cert.pk` and `cert.pem` files used above.
@@ -107,20 +107,20 @@ To install cert-manager into your cluster, use kubectl to apply the cert-manager
 ```
 kubectl apply --filename https://raw.githubusercontent.com/jetstack/cert-manager/release-0.5/contrib/manifests/cert-manager/with-rbac.yaml
 ```
+
 or see the [cert-manager docs](https://cert-manager.readthedocs.io/en/latest/getting-started/) for more ways to install and customize.
 
 ### Configure cert-manager for your DNS provider
 
-Once you have installed cert-manager, you'll need to configure it for your DNS 
-hosting provider. 
+Once you have installed cert-manager, you'll need to configure it for your DNS
+hosting provider.
 
 Knative currently only works with the `DNS01` challenge type for LetsEncrypt, which
 is only supported by a [small number of DNS providers through cert-manager](http://docs.cert-manager.io/en/latest/reference/issuers/acme/dns01.html?highlight=DNS#supported-dns01-providers).
 
 Instructions for configuring cert-manager are provided for the following DNS hosts:
 
-* [Google Cloud DNS](using-cert-manager-on-gcp.md)
-
+- [Google Cloud DNS](using-cert-manager-on-gcp.md)
 
 ---
 

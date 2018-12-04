@@ -1,37 +1,42 @@
 # Installing Logging, Metrics and Traces
 
-If you installed the [full Knative release](../install/README.md#installing-knative),
-the monitoring components are already installed and you can skip down to the
+If you installed one of the [Knative install bundles](../install/README.md#installing-knative),
+some or all of the observability features are installed. For example, if you install the `release.yaml` package from the
+`knative/serving` repo, then an ELK stack is installed by default and you can skip down to the
 [Create Elasticsearch Indices](#create-elasticsearch-indices) section.
 
 ## Metrics
 
-Run:
+1. Run the following command to install Prometheus and Grafana:
 
-```shell
-kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.2/monitoring-metrics-prometheus.yaml
-```
+  ```shell
+  kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.2/monitoring-metrics-prometheus.yaml
+  ```
 
-The installation is complete when logging & monitoring components are all
-reported `Running` or `Completed`:
+1. Ensure that the `grafana-*`, `kibana-logging-*`, `kube-state-metrics-*`, `node-exporter-*` and `prometheus-system-*` 
+   pods all report a `Running` status:
 
-```shell
-kubectl get pods --namespace monitoring --watch
-```
+  ```shell
+  kubectl get pods --namespace knative-monitoring --watch
+  ```
 
-```text
-NAME                                  READY     STATUS    RESTARTS   AGE
-grafana-798cf569ff-v4q74              1/1       Running   0          2d
-kibana-logging-7d474fbb45-6qb8x       1/1       Running   0          2d
-kube-state-metrics-75bd4f5b8b-8t2h2   4/4       Running   0          2d
-node-exporter-cr6bh                   2/2       Running   0          2d
-node-exporter-mf6k7                   2/2       Running   0          2d
-node-exporter-rhzr7                   2/2       Running   0          2d
-prometheus-system-0                   1/1       Running   0          2d
-prometheus-system-1                   1/1       Running   0          2d
-```
+  For example:
 
-Hit CTRL+C to exit watch and visit [Accessing Metrics](./accessing-metrics.md) to learn more about metrics.
+  ```text
+  NAME                                  READY     STATUS    RESTARTS   AGE
+  grafana-798cf569ff-v4q74              1/1       Running   0          2d
+  kibana-logging-7d474fbb45-6qb8x       1/1       Running   0          2d
+  kube-state-metrics-75bd4f5b8b-8t2h2   4/4       Running   0          2d
+  node-exporter-cr6bh                   2/2       Running   0          2d
+  node-exporter-mf6k7                   2/2       Running   0          2d
+  node-exporter-rhzr7                   2/2       Running   0          2d
+  prometheus-system-0                   1/1       Running   0          2d
+  prometheus-system-1                   1/1       Running   0          2d
+  ```
+
+  Tip: Hit CTRL+C to exit watch mode.
+
+[Accessing Metrics](./accessing-metrics.md) for more infromation about metrics in Knative.
 
 ## Logs
 
@@ -43,30 +48,55 @@ Knative offers three different setups for collecting logs:
 
 ### Elasticsearch and Kibana
 
-Run:
+1. Run the following command to install an ELK stack:
 
-```shell
-kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.2/monitoring-logs-elasticsearch.yaml
-```
+   ```shell
+   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.2/monitoring-logs-elasticsearch.yaml
+   ```
 
-The installation is complete when logging & monitoring components are all
-reported `Running` or `Completed`:
+1. Ensure that the `elasticsearch-logging-*`, `fluentd-ds-*`, and `kibana-logging-*` pods all report a `Running` status:
 
-```shell
-kubectl get pods --namespace monitoring --watch
-```
+   ```shell
+   kubectl get pods --namespace knative-monitoring --watch
+   ```
+   For example:
 
-```text
-NAME                                  READY     STATUS    RESTARTS   AGE
-elasticsearch-logging-0               1/1       Running   0          2d
-elasticsearch-logging-1               1/1       Running   0          2d
-fluentd-ds-5kc85                      1/1       Running   0          2d
-fluentd-ds-vhrcq                      1/1       Running   0          2d
-fluentd-ds-xghk9                      1/1       Running   0          2d
-kibana-logging-7d474fbb45-6qb8x       1/1       Running   0          2d
-```
+   ```text
+   NAME                                  READY     STATUS    RESTARTS   AGE
+   elasticsearch-logging-0               1/1       Running   0          2d
+   elasticsearch-logging-1               1/1       Running   0          2d
+   fluentd-ds-5kc85                      1/1       Running   0          2d
+   fluentd-ds-vhrcq                      1/1       Running   0          2d
+   fluentd-ds-xghk9                      1/1       Running   0          2d
+   kibana-logging-7d474fbb45-6qb8x       1/1       Running   0          2d
+   ```
+   
+   Tip: Hit CTRL+C to exit watch mode.
 
-Hit CTRL+C to exit watch and continue to [Create Elasticsearch Indices](#create-elasticsearch-indices) section.
+1. Verify that each of your nodes have the `beta.kubernetes.io/fluentd-ds-ready=true` label:
+
+   ```shell
+   kubectl get nodes --selector beta.kubernetes.io/fluentd-ds-ready=true
+   ```
+
+1. If you receive the `No Resources Found` response:
+
+   1. Run the following command to ensure that the Fluentd DaemonSet runs on all your nodes:
+
+      ```shell
+      kubectl label nodes --all beta.kubernetes.io/fluentd-ds-ready="true"
+      ```
+
+   1. Run the following command to ensure that the `fluentd-ds` daemonset is ready on at least one node:
+
+      ```shell
+      kubectl get daemonset fluentd-ds --namespace knative-monitoring --watch
+      ```
+   
+      Tip: Hit CTRL+C to exit watch mode.
+
+1. When the installation is complete and all the resources are running, you can continue to the next section 
+   and begin creating your Elasticsearch indicies. 
 
 #### Create Elasticsearch Indices
 
@@ -92,7 +122,7 @@ To visualize logs with Kibana, you need to set which Elasticsearch indices to ex
 
 ![Create logstash-* index](images/kibana-landing-page-configure-index.png)
 
-Visit [Accessing Logs](./accessing-logs.md) to learn more about logs.
+See [Accessing Logs](./accessing-logs.md) for more infromation about logs in Knative.
 
 ### Stackdriver
 
@@ -103,13 +133,14 @@ To configure and setup monitoring:
     ```shell
     git clone https://github.com/knative/serving knative-serving
     cd knative-serving
-    git checkout v0.2.1
+    git checkout v0.2.2
     ```
 
 1. Choose a container image that meets the
    [Fluentd image requirements](fluentd/README.md#requirements). For example, you can use a
    public image. Or you can create a custom one and upload the image to a
    container registry which your cluster has read access to.
+
    You must configure and build your own Fluentd image if either of the following are true:
     - Your Knative Serving component is not hosted on a Google Cloud Platform (GCP) based cluster.
     - You want to send logs to another GCP project.
@@ -126,13 +157,14 @@ To configure and setup monitoring:
             --filename third_party/config/monitoring/logging/stackdriver
       ```
 
-   The installation is complete when logging & monitoring components are all
-   reported `Running` or `Completed`:
+ 1. Ensure that the `fluentd-ds-*` pods all report a `Running` status:
 
      ```shell
-     kubectl get pods --namespace monitoring --watch
+     kubectl get pods --namespace knative-monitoring --watch
      ```
-
+     
+     For example:
+     
      ```text
      NAME                                  READY     STATUS    RESTARTS   AGE
      fluentd-ds-5kc85                      1/1       Running   0          2d
@@ -140,7 +172,28 @@ To configure and setup monitoring:
      fluentd-ds-xghk9                      1/1       Running   0          2d
      ```
 
-  Hit CTRL+C to exit watch and visit [Accessing Logs](./accessing-logs.md) to learn more about logs.
+   Tip: Hit CTRL+C to exit watch mode.
+  
+1. Verify that each of your nodes have the `beta.kubernetes.io/fluentd-ds-ready=true` label:
+
+   ```shell
+   kubectl get nodes --selector beta.kubernetes.io/fluentd-ds-ready=true
+   ```
+
+1. If you receive the `No Resources Found` response:
+
+   1. Run the following command to ensure that the Fluentd DaemonSet runs on all your nodes:
+
+      ```shell
+      kubectl label nodes --all beta.kubernetes.io/fluentd-ds-ready="true"
+      ```
+
+   1. Run the following command to ensure that the `fluentd-ds` daemonset is ready on at least one node:
+
+      ```shell
+      kubectl get daemonset fluentd-ds --namespace knative-monitoring
+      ```
+See [Accessing Logs](./accessing-logs.md) for more infromation about logs in Knative.
 
 ## End to end traces
 

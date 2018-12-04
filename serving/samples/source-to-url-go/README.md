@@ -1,4 +1,4 @@
-# Orchestrating a source-to-URL deployment on Kubernetes   
+# Orchestrating a source-to-URL deployment on Kubernetes
 
 A Go sample that shows how to use Knative to go from source code in a git
 repository to a running application with a URL.
@@ -10,10 +10,10 @@ components of Knative to orchestrate an end-to-end deployment.
 
 You need:
 
-* A Kubernetes cluster with Knative installed. Follow the
+- A Kubernetes cluster with Knative installed. Follow the
   [installation instructions](https://github.com/knative/docs/blob/master/install/README.md) if you need
   to create one.
-* Go installed and configured. This is optional, and only required if you want to run the sample app
+- Go installed and configured. This is optional, and only required if you want to run the sample app
   locally.
 
 ## Configuring Knative
@@ -33,7 +33,7 @@ kubectl apply --filename https://raw.githubusercontent.com/knative/build-templat
 
 ### Register secrets for Docker Hub
 
-In order to push the container that is built from source to Docker Hub, register a secret in 
+In order to push the container that is built from source to Docker Hub, register a secret in
 Kubernetes for authentication with Docker Hub.
 
 There are [detailed instructions](https://github.com/knative/docs/blob/master/build/auth.md#basic-authentication-docker)
@@ -74,15 +74,14 @@ available, but these are the key steps:
 1. Create a new `Service Account` manifest which is used to link the build process to the secret.
    Save this file as `service-account.yaml`:
 
-
-   ```yaml
-   apiVersion: v1
-   kind: ServiceAccount
-   metadata:
-     name: build-bot
-   secrets:
-   - name: basic-user-pass
-   ```
+```yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: build-bot
+secrets:
+  - name: basic-user-pass
+```
 
 1. After you have created the manifest files, apply them to your cluster with `kubectl`:
 
@@ -92,7 +91,6 @@ available, but these are the key steps:
    $ kubectl apply --filename service-account.yaml
    serviceaccount "build-bot" created
    ```
-
 
 ## Deploying the sample
 
@@ -130,16 +128,16 @@ container for the application.
              template:
                name: kaniko
                arguments:
-               - name: IMAGE
-                 value: docker.io/{DOCKER_USERNAME}/app-from-source:latest
+                 - name: IMAGE
+                   value: docker.io/{DOCKER_USERNAME}/app-from-source:latest
          revisionTemplate:
            spec:
              container:
-               image: docker.io/{DOCKER_USERNAME}/app-from-source:latest 
+               image: docker.io/{DOCKER_USERNAME}/app-from-source:latest
                imagePullPolicy: Always
                env:
-               - name: SIMPLE_MSG
-                 value: "Hello from the sample app!"
+                 - name: SIMPLE_MSG
+                   value: "Hello from the sample app!"
    ```
 
 1. Apply this manifest using `kubectl`, and watch the results:
@@ -167,7 +165,7 @@ container for the application.
 1. Once you see the deployment pod switch to the running state, press Ctrl+C to
    escape the watch. Your container is now built and deployed!
 
-1. To check on the state of the service, get the service object and examine the 
+1. To check on the state of the service, get the service object and examine the
    status block:
 
    ```shell
@@ -196,38 +194,39 @@ container for the application.
    ```
 
 1. Now that your service is created, Knative will perform the following steps:
-   * Fetch the revision specified from GitHub and build it into a container
-   * Push the container to Docker Hub
-   * Create a new immutable revision for this version of the app.
-   * Network programming to create a route, ingress, service, and load balance for your app.
-   * Automatically scale your pods up and down (including to zero active pods).
 
-1. To get the ingress IP for your cluster, use the following command. If your cluster is new, 
+   - Fetch the revision specified from GitHub and build it into a container
+   - Push the container to Docker Hub
+   - Create a new immutable revision for this version of the app.
+   - Network programming to create a route, ingress, service, and load balance for your app.
+   - Automatically scale your pods up and down (including to zero active pods).
+
+1. To get the ingress IP for your cluster, use the following command. If your cluster is new,
    it can take some time for the service to get an external IP address:
 
-    ```shell
-    $ kubectl get svc knative-ingressgateway --namespace istio-system
+   ```shell
+   $ kubectl get svc knative-ingressgateway --namespace istio-system
 
-    NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
-    knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
+   NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
+   knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
 
-    ```
+   ```
 
 1. To find the URL for your service, type:
 
-    ```shell
-    $ kubectl get ksvc app-from-source  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
-    NAME                DOMAIN
-    app-from-source     app-from-source.default.example.com
-    ```
+   ```shell
+   $ kubectl get ksvc app-from-source  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+   NAME                DOMAIN
+   app-from-source     app-from-source.default.example.com
+   ```
 
 1. Now you can make a request to your app to see the result. Replace
    `{IP_ADDRESS}` with the address that you got in the previous step:
 
-    ```shell
-    curl -H "Host: app-from-source.default.example.com" http://{IP_ADDRESS}
-    Hello from the sample app!"
-    ```
+   ```shell
+   curl -H "Host: app-from-source.default.example.com" http://{IP_ADDRESS}
+   Hello from the sample app!"
+   ```
 
 ## Removing the sample app deployment
 
