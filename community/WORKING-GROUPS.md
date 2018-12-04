@@ -6,21 +6,22 @@ Working groups follow the [contributing](CONTRIBUTING.md) guidelines although
 each of these groups may operate a little differently depending on their needs
 and workflow.
 
-When the need arises, a new working group can be created. See the [working group
-processes](WORKING-GROUP-PROCESSES.md) for working group proposal and creation
-procedures.
+When the need arises, a new working group can be created. See the
+[working group processes](WORKING-GROUP-PROCESSES.md) for working group proposal
+and creation procedures.
 
 The working groups generate design docs which are kept in a
 [shared drive](https://drive.google.com/corp/drive/folders/0APnJ_hRs30R2Uk9PVA)
-and are available for anyone to read and comment on. The shared drive
-currently grants read access to
+and are available for anyone to read and comment on. The shared drive currently
+grants read access to
 [knative-users@](https://groups.google.com/forum/#!forum/knative-users) and edit
 and comment access to the
-[knative-dev@](https://groups.google.com/forum/#!forum/knative-dev) Google group.
+[knative-dev@](https://groups.google.com/forum/#!forum/knative-dev) Google
+group.
 
 Additionally, all working groups should hold regular meetings, which should be
-added to the [shared knative
-calendar](https://calendar.google.com/calendar/embed?src=google.com_18un4fuh6rokqf8hmfftm5oqq4%40group.calendar.google.com)
+added to the
+[shared knative calendar](https://calendar.google.com/calendar/embed?src=google.com_18un4fuh6rokqf8hmfftm5oqq4%40group.calendar.google.com)
 WG leads should have access to be able to create and update events on this
 calendar, and should invite knative-dev@googlegroups.com to working group
 meetings.
@@ -39,7 +40,8 @@ The current working groups are:
 
 ## API Core
 
-API [resources](../pkg/apis/serving), [validation](../pkg/webhook), and [semantics](../pkg/controller).
+API [resources](../pkg/apis/serving), [validation](../pkg/webhook), and
+[semantics](../pkg/controller).
 
 | Artifact                   | Link                                                                                                                                                          |
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -74,7 +76,8 @@ API [resources](../pkg/apis/serving), [validation](../pkg/webhook), and [semanti
 
 ## Documentation
 
-Knative documentation, especially the [Docs](https://github.com/knative/docs) repo.
+Knative documentation, especially the [Docs](https://github.com/knative/docs)
+repo.
 
 | Artifact                   | Link                                                                                                                                                                 |
 | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -108,8 +111,9 @@ Event sources, bindings, FaaS framework, and orchestration
 
 ## Networking
 
-Inbound and outbound network connectivity for [serving](https://github.com/knative/serving) workloads.
-Specific areas of interest include: load balancing, routing, DNS configuration and TLS support.
+Inbound and outbound network connectivity for
+[serving](https://github.com/knative/serving) workloads. Specific areas of
+interest include: load balancing, routing, DNS configuration and TLS support.
 
 | Artifact                   | Link                                                                                                                                                         |
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -161,7 +165,8 @@ Autoscaling
 
 ## Productivity
 
-Project health, test framework, continuous integration & deployment, release, performance/scale/load testing infrastructure
+Project health, test framework, continuous integration & deployment, release,
+performance/scale/load testing infrastructure
 
 | Artifact                   | Link                                                                                                                                                         |
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |

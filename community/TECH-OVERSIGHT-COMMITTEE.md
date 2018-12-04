@@ -14,8 +14,8 @@ product and design decisions.
 
   - Set the overall technical direction and roadmap of the project.
 
-  - Resolve technical issues, technical disagreements and escalations within
-    the project.
+  - Resolve technical issues, technical disagreements and escalations within the
+    project.
 
   - Set the priorities of individual releases to ensure coherency and proper
     sequencing.
@@ -33,37 +33,37 @@ product and design decisions.
 
 - Happy Healthy Community
 
-  - Establish and maintain the overall technical governance guidelines for
-    the project.
+  - Establish and maintain the overall technical governance guidelines for the
+    project.
 
   - Decide which sub-projects are part of the Knative project, including
     accepting new sub-projects and pruning existing sub-projects to maintain
     community focus
 
-  - Ensure the team adheres to our [code of
-    conduct](CONTRIBUTING.md#code-of-conduct) and respects our
+  - Ensure the team adheres to our
+    [code of conduct](CONTRIBUTING.md#code-of-conduct) and respects our
     [values](VALUES.md).
 
-  - Foster an environment for a healthy and happy community of developers
-    and contributors.
+  - Foster an environment for a healthy and happy community of developers and
+    contributors.
 
 ## Committee Mechanics
 
 The TOC’s work includes:
 
 - Regular committee meetings to discuss hot topics, resulting in a set of
-  published [meeting
-  notes](https://docs.google.com/document/d/1hR5ijJQjz65QkLrgEhWjv3Q86tWVxYj_9xdhQ6Y5D8Q/edit#).
+  published
+  [meeting notes](https://docs.google.com/document/d/1hR5ijJQjz65QkLrgEhWjv3Q86tWVxYj_9xdhQ6Y5D8Q/edit#).
 
 - Create, review, approve and publish technical project governance documents.
 
-- Create proposals for consideration by individual working groups to help
-  steer their work towards a common project-wide objective.
+- Create proposals for consideration by individual working groups to help steer
+  their work towards a common project-wide objective.
 
 - Review/address/comment on project issues.
 
-- Act as a high-level sounding board for technical questions or designs
-  bubbled up by the working groups.
+- Act as a high-level sounding board for technical questions or designs bubbled
+  up by the working groups.
 
 ## Committee Meeting
 

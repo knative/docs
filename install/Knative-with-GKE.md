@@ -1,7 +1,7 @@
 # Knative Install on Google Kubernetes Engine
 
-This guide walks you through the installation of the latest version of
-Knative using pre-built images.
+This guide walks you through the installation of the latest version of Knative
+using pre-built images.
 
 You can find [guides for other platforms here](README.md).
 
@@ -57,7 +57,8 @@ export CLUSTER_ZONE=us-west1-c
 
 ### Setting up a Google Cloud Platform project
 
-You need a Google Cloud Platform (GCP) project to create a Google Kubernetes Engine cluster.
+You need a Google Cloud Platform (GCP) project to create a Google Kubernetes
+Engine cluster.
 
 1. Set `PROJECT` environment variable, you can replace `my-knative-project` with
    the desired name of your GCP project. If you don't have one, we'll create one
@@ -71,16 +72,19 @@ You need a Google Cloud Platform (GCP) project to create a Google Kubernetes Eng
    gcloud projects create $PROJECT --set-as-default
    ```
 
-   You also need to [enable billing](https://cloud.google.com/billing/docs/how-to/manage-billing-account)
+   You also need to
+   [enable billing](https://cloud.google.com/billing/docs/how-to/manage-billing-account)
    for your new project.
 
-1. If you already have a GCP project, make sure your project is set as your `gcloud` default:
+1. If you already have a GCP project, make sure your project is set as your
+   `gcloud` default:
 
    ```bash
    gcloud config set core/project $PROJECT
    ```
 
-   > Tip: Enter `gcloud config get-value project` to view the ID of your default GCP project.
+   > Tip: Enter `gcloud config get-value project` to view the ID of your default
+   > GCP project.
 
 1. Enable the necessary APIs:
    ```bash
@@ -92,8 +96,8 @@ You need a Google Cloud Platform (GCP) project to create a Google Kubernetes Eng
 
 ## Creating a Kubernetes cluster
 
-To make sure the cluster is large enough to host all the Knative and
-Istio components, the recommended configuration for a cluster is:
+To make sure the cluster is large enough to host all the Knative and Istio
+components, the recommended configuration for a cluster is:
 
 - Kubernetes version 1.10 or later
 - 4 vCPU nodes (`n1-standard-4`)
@@ -135,18 +139,19 @@ Knative depends on Istio.
    kubectl label namespace default istio-injection=enabled
    ```
 1. Monitor the Istio components until all of the components show a `STATUS` of
-   `Running` or `Completed`:
-   `bash kubectl get pods --namespace istio-system`
+   `Running` or `Completed`: `bash kubectl get pods --namespace istio-system`
 
 It will take a few minutes for all the components to be up and running; you can
 rerun the command to see the current status.
 
 > Note: Instead of rerunning the command, you can add `--watch` to the above
-> command to view the component's status updates in real time. Use CTRL + C to exit watch mode.
+> command to view the component's status updates in real time. Use CTRL + C to
+> exit watch mode.
 
 ## Installing Knative components
 
-You can install the Knative Serving and Build components together, or Build on its own.
+You can install the Knative Serving and Build components together, or Build on
+its own.
 
 ### Installing Knative Serving and Build components
 
@@ -154,8 +159,8 @@ You can install the Knative Serving and Build components together, or Build on i
    ```bash
    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.1/release.yaml
    ```
-1. Monitor the Knative components until all of the components show a
-   `STATUS` of `Running`:
+1. Monitor the Knative components until all of the components show a `STATUS` of
+   `Running`:
    ```bash
    kubectl get pods --namespace knative-serving
    kubectl get pods --namespace knative-build

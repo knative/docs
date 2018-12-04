@@ -1,7 +1,7 @@
 # Authentication
 
-This document defines how authentication is provided during execution
-of a build.
+This document defines how authentication is provided during execution of a
+build.
 
 The build system supports two types of authentication, using Kubernetes'
 first-class `Secret` types:
@@ -9,16 +9,16 @@ first-class `Secret` types:
 - `kubernetes.io/basic-auth`
 - `kubernetes.io/ssh-auth`
 
-Secrets of these types can be made available to the `Build` by attaching them
-to the `ServiceAccount` as which it runs.
+Secrets of these types can be made available to the `Build` by attaching them to
+the `ServiceAccount` as which it runs.
 
 ### Exposing credentials to the build
 
 In their native form, these secrets are unsuitable for consumption by Git and
 Docker. For Git, they need to be turned into (some form of) `.gitconfig`. For
-Docker, they need to be turned into a `~/.docker/config.json` file. Also,
-while each of these supports has multiple credentials for multiple domains,
-those credentials typically need to be blended into a single canonical keyring.
+Docker, they need to be turned into a `~/.docker/config.json` file. Also, while
+each of these supports has multiple credentials for multiple domains, those
+credentials typically need to be blended into a single canonical keyring.
 
 To solve this, before the `Source` step, all builds execute a credential
 initialization process that accesses each of its secrets and aggregates them
@@ -45,7 +45,8 @@ into their respective files in `$HOME`.
 1.  Generate the value of `ssh-privatekey` by copying the value of (for example)
     `cat id_rsa | base64`.
 
-1.  Copy the value of `cat ~/.ssh/known_hosts | base64` to the `known_hosts` field.
+1.  Copy the value of `cat ~/.ssh/known_hosts | base64` to the `known_hosts`
+    field.
 
 1.  Next, direct a `ServiceAccount` to use this `Secret`:
 
@@ -78,8 +79,8 @@ into their respective files in `$HOME`.
     ```
 
 When the build executes, before steps execute, a `~/.ssh/config` will be
-generated containing the key configured in the `Secret`. This key is then
-used to authenticate with the Git service.
+generated containing the key configured in the `Secret`. This key is then used
+to authenticate with the Git service.
 
 ## Basic authentication (Git)
 
@@ -206,9 +207,9 @@ stringData:
   password: <cleartext non-encoded>
 ```
 
-This describes a "Basic Auth" (username and password) secret that should be
-used to access Git repos at github.com and gitlab.com, as well as Docker
-repositories at gcr.io.
+This describes a "Basic Auth" (username and password) secret that should be used
+to access Git repos at github.com and gitlab.com, as well as Docker repositories
+at gcr.io.
 
 Similarly, for SSH:
 
@@ -230,8 +231,8 @@ This describes an SSH key secret that should be used to access Git repos at
 github.com only.
 
 Credential annotation keys must begin with `build.knative.dev/docker-` or
-`build.knative.dev/git-`, and the value describes the URL of the host with
-which to use the credential.
+`build.knative.dev/git-`, and the value describes the URL of the host with which
+to use the credential.
 
 ## Implementation detail
 
@@ -306,16 +307,16 @@ Host url2.com
 ```
 
 Note: Because `known_hosts` is a non-standard extension of
-`kubernetes.io/ssh-auth`, when it is not present this will be generated
-through `ssh-keygen url{n}.com` instead.
+`kubernetes.io/ssh-auth`, when it is not present this will be generated through
+`ssh-keygen url{n}.com` instead.
 
 ### Least privilege
 
 The secrets as outlined here will be stored into `$HOME` (by convention the
 volume: `/builder/home`), and will be available to `Source` and all `Steps`.
 
-For sensitive credentials that should not be made available to some steps,
-do not use the mechanisms outlined here. Instead, the user should declare an
+For sensitive credentials that should not be made available to some steps, do
+not use the mechanisms outlined here. Instead, the user should declare an
 explicit `Volume` from the `Secret` and manually `VolumeMount` it into the
 `Step`.
 

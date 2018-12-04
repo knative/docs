@@ -28,11 +28,11 @@ work-in-progress._
   - Guided by the TOC for normal business.
 
   - Control and delegate access to and establish processes regarding other
-    project resources/assets not covered by the above, including web sites
-    and their domains, blogs, social-media accounts, etc.
+    project resources/assets not covered by the above, including web sites and
+    their domains, blogs, social-media accounts, etc.
 
-  - Manage the Knative brand to decide which things can be called “Knative”
-    and how that mark can be used in relation to other efforts or vendors.
+  - Manage the Knative brand to decide which things can be called “Knative” and
+    how that mark can be used in relation to other efforts or vendors.
 
 ## Committee Mechanics
 

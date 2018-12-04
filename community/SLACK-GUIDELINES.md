@@ -9,8 +9,8 @@ Chat is searchable and public. Do not make comments that you would not say on a
 video recording or in another public space. Please be courteous to others.
 
 `@here` and `@channel` should be used rarely. Members will receive notifications
-from these commands and we are a global project - please be kind.
-Note: `@all` is only to be used by admins.
+from these commands and we are a global project - please be kind. Note: `@all`
+is only to be used by admins.
 
 You can join the [Knative Slack](https://slack.knative.dev) instance at
 https://slack.knative.dev.
@@ -29,9 +29,9 @@ project, and includes all communication mediums.
 Slack admins should make sure to mention this in the “What I do” section of
 their Slack profile, as well as for which time zone.
 
-To connect: please reach out in the #slack-admins channel, mention one of us
-in the specific channel where you have a question, or DM (Direct Message) one
-of us privately.
+To connect: please reach out in the #slack-admins channel, mention one of us in
+the specific channel where you have a question, or DM (Direct Message) one of us
+privately.
 
 ### Admin Expectations and Guidelines
 
@@ -76,14 +76,14 @@ documented, please take a screenshot to include in your message.
 ### What if you have a problem with an admin
 
 Send a DM to another listed Admin and describe the situation, or if it’s a code
-of conduct issue, please send an email to knative-code-of-conduct@googlegroups.com
-and describe the situation.
+of conduct issue, please send an email to
+knative-code-of-conduct@googlegroups.com and describe the situation.
 
 ## Bots, Tokens, and Webhooks
 
 Bots, tokens, and webhooks are reviewed on a case-by-case basis. Expect most
-requests will be rejected due to security, privacy, and usability concerns.
-Bots and the like tend to make a lot of noise in channels.
+requests will be rejected due to security, privacy, and usability concerns. Bots
+and the like tend to make a lot of noise in channels.
 
 Please join #slack-admins and have a discussion about your request before
 requesting the access.
@@ -101,14 +101,14 @@ chat. Please document these interactions for other Slack admins to review.
 
 Content will be automatically removed if it violates code of conduct or is a
 sales pitch. Admins will take a screenshot of such behavior in order to document
-the situation. Google takes such violations extremely seriously, and
-they will be handled swiftly.
+the situation. Google takes such violations extremely seriously, and they will
+be handled swiftly.
 
 ## Inactivating Accounts
 
-For reasons listed below, admins may inactivate individual Slack accounts.
-Due to Slack’s framework, it does not allow for an account to be banned or
-suspended in the traditional sense.
+For reasons listed below, admins may inactivate individual Slack accounts. Due
+to Slack’s framework, it does not allow for an account to be banned or suspended
+in the traditional sense.
 [Read Slack’s policy on this.](https://get.Slack.help/hc/en-us/articles/204475027-Deactivate-a-member-s-account)
 
 - Spreading spam content in DMs and/or channels
@@ -122,13 +122,13 @@ in the purpose or pinned docs of that channel.
 
 ## DM (Direct Message) Conversations
 
-Please do not engage in proprietary company specific conversations in the Knative
-Slack instance. This is meant for conversations related to Knative open source
-topics and community.
+Please do not engage in proprietary company specific conversations in the
+Knative Slack instance. This is meant for conversations related to Knative open
+source topics and community.
 
 Proprietary conversations should occur in your company communication platforms.
-As with all communication, please be mindful of appropriateness, professionalism,
-and applicability to the Knative community.
+As with all communication, please be mindful of appropriateness,
+professionalism, and applicability to the Knative community.
 
 ---
 

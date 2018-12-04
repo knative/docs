@@ -74,8 +74,8 @@ export IOTCORE_TOPIC_DEVICE="iot-demo-device-pubsub-topic"
     [in-memory `ClusterChannelProvisioner`](https://github.com/knative/eventing/tree/master/config/provisioners/in-memory-channel).
 
     - Note that you can skip this if you choose to use a different type of
-      `Channel`. If so, you will need to modify `channel.yaml` before
-      deploying it.
+      `Channel`. If so, you will need to modify `channel.yaml` before deploying
+      it.
 
 #### GCP PubSub Source
 

@@ -1,12 +1,20 @@
 # Creating a RESTful Service
 
-This sample demonstrates creating a simple RESTful service. The exposed endpoint takes a stock ticker (i.e. stock symbol), then outputs the stock price. The endpoint resource name is defined by an environment variable set in the configuration file.
+This sample demonstrates creating a simple RESTful service. The exposed endpoint
+takes a stock ticker (i.e. stock symbol), then outputs the stock price. The
+endpoint resource name is defined by an environment variable set in the
+configuration file.
 
 ## Prerequisites
 
-1. A Kubernetes cluster with [Knative Serving](https://github.com/knative/docs/blob/master/install/README.md) installed.
-2. Install [Docker](https://docs.docker.com/get-started/#prepare-your-docker-environment).
-3. You need to [configure outbound network access](https://github.com/knative/docs/blob/master/serving/outbound-network-access.md) because this application makes an external API request.
+1. A Kubernetes cluster with
+   [Knative Serving](https://github.com/knative/docs/blob/master/install/README.md)
+   installed.
+2. Install
+   [Docker](https://docs.docker.com/get-started/#prepare-your-docker-environment).
+3. You need to
+   [configure outbound network access](https://github.com/knative/docs/blob/master/serving/outbound-network-access.md)
+   because this application makes an external API request.
 4. Check out the code:
 
 ```
@@ -29,8 +37,9 @@ cd $GOPATH/src/github.com/knative/docs
 export REPO="gcr.io/<YOUR_PROJECT_ID>"
 ```
 
-To run the sample, you need to have a Google Cloud Platform project, and you also need to enable the [Google Container Registry
-API](https://console.cloud.google.com/apis/library/containerregistry.googleapis.com).
+To run the sample, you need to have a Google Cloud Platform project, and you
+also need to enable the
+[Google Container Registry API](https://console.cloud.google.com/apis/library/containerregistry.googleapis.com).
 
 3. Use Docker to build your application container:
 
@@ -46,10 +55,12 @@ docker build \
 docker push "${REPO}/serving/samples/rest-api-go"
 ```
 
-5. Replace the image reference path with our published image path in the configuration files (`serving/samples/rest-api-go/sample.yaml`:
+5. Replace the image reference path with our published image path in the
+   configuration files (`serving/samples/rest-api-go/sample.yaml`:
 
    - Manually replace:  
-     `image: github.com/knative/docs/serving/samples/rest-api-go` with `image: <YOUR_CONTAINER_REGISTRY>/serving/samples/rest-api-go`
+     `image: github.com/knative/docs/serving/samples/rest-api-go` with
+     `image: <YOUR_CONTAINER_REGISTRY>/serving/samples/rest-api-go`
 
    Or
 
@@ -106,7 +117,8 @@ NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S) 
 knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
 ```
 
-2. When the service is ready, export the ingress hostname and IP as environment variables:
+2. When the service is ready, export the ingress hostname and IP as environment
+   variables:
 
 ```
 export SERVICE_HOST=`kubectl get route stock-route-example --output jsonpath="{.status.domain}"`
@@ -115,7 +127,8 @@ export SERVICE_IP=`kubectl get svc knative-ingressgateway --namespace istio-syst
 ```
 
 - If your cluster is running outside a cloud provider (for example on Minikube),
-  your services will never get an external IP address. In that case, use the istio `hostIP` and `nodePort` as the service IP:
+  your services will never get an external IP address. In that case, use the
+  istio `hostIP` and `nodePort` as the service IP:
 
 ```
 export SERVICE_IP=$(kubectl get po --selector knative=ingressgateway --namespace istio-system \

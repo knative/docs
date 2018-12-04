@@ -4,8 +4,8 @@ Use the `Build` resource object to create and run on-cluster processes to
 completion.
 
 To create a build in Knative, you must define a configuration file, in which
-specifies one or more container images that you have implemented to perform
-and complete a task.
+specifies one or more container images that you have implemented to perform and
+complete a task.
 
 A build runs until all `steps` have completed or until a failure occurs.
 
@@ -50,7 +50,8 @@ following fields:
     available to your build.
   - [`timeout`](#timeout) - Specifies timeout after which the build will fail.
 
-[kubernetes-overview]: https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/#required-fields
+[kubernetes-overview]:
+  https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/#required-fields
 
 The following example is a non-working sample where most of the possible
 configuration fields are used:
@@ -87,12 +88,12 @@ spec:
 
 #### Steps
 
-The `steps` field is required if the `template` field is not defined. You
-define one or more `steps` fields to define the body of a build.
+The `steps` field is required if the `template` field is not defined. You define
+one or more `steps` fields to define the body of a build.
 
-Each `steps` in a build must specify a `Builder`, or type of container image that
-adheres to the [Knative builder contract](./builder-contract.md). For each of
-the `steps` fields, or container images that you define:
+Each `steps` in a build must specify a `Builder`, or type of container image
+that adheres to the [Knative builder contract](./builder-contract.md). For each
+of the `steps` fields, or container images that you define:
 
 - The `Builder`-type container images are run and evaluated in order, starting
   from the top of the configuration file.
@@ -121,10 +122,10 @@ to all `steps` of your build.
 
 The currently supported types of sources include:
 
-- `git` - A Git based repository. Specify the `url` field to define the
-  location of the container image. Specify a `revision` field to define a
-  branch name, tag name, commit SHA, or any ref. [Learn more about revisions in
-  Git](https://git-scm.com/docs/gitrevisions#_specifying_revisions).
+- `git` - A Git based repository. Specify the `url` field to define the location
+  of the container image. Specify a `revision` field to define a branch name,
+  tag name, commit SHA, or any ref.
+  [Learn more about revisions in Git](https://git-scm.com/docs/gitrevisions#_specifying_revisions).
 
 - `gcs` - An archive that is located in Google Cloud Storage.
 
@@ -134,21 +135,21 @@ The currently supported types of sources include:
 
 Optional. Specifies the `name` of a `ServiceAccount` resource object. Use the
 `serviceAccountName` field to run your build with the privileges of the
-specified service account. If no `serviceAccountName` field is specified,
-your build runs using the
+specified service account. If no `serviceAccountName` field is specified, your
+build runs using the
 [`default` service account](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#use-the-default-service-account-to-access-the-api-server)
 that is in the
 [namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
 of the `Build` resource object.
 
-For examples and more information about specifying service accounts,
-see the [`ServiceAccount`](./auth.md) reference topic.
+For examples and more information about specifying service accounts, see the
+[`ServiceAccount`](./auth.md) reference topic.
 
 #### Volumes
 
 Optional. Specifies one or more
-[volumes](https://kubernetes.io/docs/concepts/storage/volumes/) that you want
-to make available to your build, including all the build steps. Add volumes to
+[volumes](https://kubernetes.io/docs/concepts/storage/volumes/) that you want to
+make available to your build, including all the build steps. Add volumes to
 complement the volumes that are implicitly
 [created during a build step](./builder-contract.md).
 
@@ -159,23 +160,26 @@ For example, use volumes to accomplish one of the following common tasks:
 - Create an `emptyDir` volume to act as a cache for use across multiple build
   steps. Consider using a persistent volume for inter-build caching.
 
-- Mount a host's Docker socket to use a `Dockerfile` for container image
-  builds.
+- Mount a host's Docker socket to use a `Dockerfile` for container image builds.
 
 #### Timeout
 
-Optional. Specifies timeout for the build. Includes time required for allocating resources and execution of build.
+Optional. Specifies timeout for the build. Includes time required for allocating
+resources and execution of build.
 
 - Defaults to 10 minutes.
-- Refer to [Go's ParseDuration documentation](https://golang.org/pkg/time/#ParseDuration) for expected format.
+- Refer to
+  [Go's ParseDuration documentation](https://golang.org/pkg/time/#ParseDuration)
+  for expected format.
 
 ### Examples
 
-Use these code snippets to help you understand how to define your Knative builds.
+Use these code snippets to help you understand how to define your Knative
+builds.
 
 Tip: See the collection of simple
-[test builds](https://github.com/knative/build/tree/master/test) for
-additional code samples, including working copies of the following snippets:
+[test builds](https://github.com/knative/build/tree/master/test) for additional
+code samples, including working copies of the following snippets:
 
 - [`git` as `source`](#using-git)
 - [`gcs` as `source`](#using-gcs)

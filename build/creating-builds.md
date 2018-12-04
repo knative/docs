@@ -4,14 +4,14 @@ Use this page to learn how to create and then run a simple build in Knative. In
 this topic, you create a Knative Build configuration file for a simple app,
 deploy that build to Knative, and then test that the build completes.
 
-The following demonstrates the process of deploying and then testing that
-the build completed successfully. This sample build uses a hello-world-type app
-that uses [busybox](https://docs.docker.com/samples/library/busybox/) to simply
-print "_hello build_".
+The following demonstrates the process of deploying and then testing that the
+build completed successfully. This sample build uses a hello-world-type app that
+uses [busybox](https://docs.docker.com/samples/library/busybox/) to simply print
+"_hello build_".
 
 Tip: See the
-[build code samples](builds.md#get-started-with-knative-build-samples)
-for examples of more complex builds, including code samples that use container
+[build code samples](builds.md#get-started-with-knative-build-samples) for
+examples of more complex builds, including code samples that use container
 images, authentication, and include multiple steps.
 
 ## Before you begin
@@ -22,8 +22,8 @@ Kubernetes cluster, and it must include the Knative Build component:
 - For details about installing a new instance of Knative in your Kubernetes
   cluster, see [Installing Knative](../install/README.md).
 
-- If you have a component of Knative installed and running, you must [ensure
-  that the Knative Build component is also installed](installing-build-component.md).
+- If you have a component of Knative installed and running, you must
+  [ensure that the Knative Build component is also installed](installing-build-component.md).
 
 ## Creating and running a build
 
@@ -45,9 +45,9 @@ Kubernetes cluster, and it must include the Knative Build component:
          args: ["echo", "hello", "build"]
    ```
 
-   Notice that this definition specifies `kind` as a `Build`, and that
-   the name of this `Build` resource is `hello-build`.
-   For more information about defining build configuration files, See the
+   Notice that this definition specifies `kind` as a `Build`, and that the name
+   of this `Build` resource is `hello-build`. For more information about
+   defining build configuration files, See the
    [`Build` reference topic](builds.md).
 
 1. Deploy the `build.yaml` configuration file and run the `hello-build` build on
@@ -112,8 +112,8 @@ Kubernetes cluster, and it must include the Knative Build component:
          reason: Completed
    ```
 
-   Notice that the values of `completed` indicate that the build was
-   successful, and that `hello-build-jx4ql` is the pod where the build ran.
+   Notice that the values of `completed` indicate that the build was successful,
+   and that `hello-build-jx4ql` is the pod where the build ran.
 
    Tip: You can also retrieve the `podName` by running the following command:
 
@@ -123,26 +123,25 @@ Kubernetes cluster, and it must include the Knative Build component:
 
 1. Optional: Run the following
    [`kubectl get`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#get)
-   command to retrieve details about the `hello-build-[ID]` pod, including
-   the name of the
+   command to retrieve details about the `hello-build-[ID]` pod, including the
+   name of the
    [Init container](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/):
 
    ```shell
    kubectl get pod hello-build-[ID] --output yaml
    ```
 
-   where `[ID]` is the suffix of your pod name, for example
-   `hello-build-jx4ql`.
+   where `[ID]` is the suffix of your pod name, for example `hello-build-jx4ql`.
 
-   The response of this command includes a lot of detail, as well as
-   the `build-step-hello` name of the Init container.
+   The response of this command includes a lot of detail, as well as the
+   `build-step-hello` name of the Init container.
 
    Tip: The name of the Init container is determined by the `name` that is
-   specified in the `steps` field of the build configuration file, for
-   example `build-step-[ID]`.
+   specified in the `steps` field of the build configuration file, for example
+   `build-step-[ID]`.
 
-1. To verify that your build performed the single task of printing
-   "_hello build_", you can run the
+1. To verify that your build performed the single task of printing "_hello
+   build_", you can run the
    [`kubectl logs`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#logs)
    command to retrieve the log files from the `build-step-hello` Init container
    in the `hello-build-[ID]` pod:
