@@ -12,13 +12,13 @@ You can find [guides for other platforms here](README.md).
 Knative requires a Kubernetes cluster v1.10 or newer. If you don't have one, you
 can create one using [Docker for Mac](https://docs.docker.com/docker-for-mac/).
 If you haven't already,
-[install Docker for Mac](https://docs.docker.com/docker-for-mac/install/) to
-continue with these instructions.
+[install Docker for Mac](https://docs.docker.com/docker-for-mac/install/) before
+continuing.
 
 ## Creating a Kubernetes cluster
 
-1. After Docker for Mac is installed, make sure to configure it to provide
-   enough ressources to the daemon it runs on. You can do that via the
+1. After Docker for Mac is installed, configure it with sufficient resources.
+   You can do that via the
    [_Advanced_ menu](https://docs.docker.com/docker-for-mac/#advanced) in Docker
    for Mac's preferences. Set **CPUs** to at least **4** and **Memory** to at
    least **8.0 GiB**.
@@ -28,7 +28,7 @@ continue with these instructions.
 
 ## Installing Istio
 
-Knative depends on Istio. Run the following to install Istio. (We are changing
+Knative depends on Istio. Run the following to install Istio. (This changes
 `LoadBalancer` to `NodePort` for the `istio-ingress` service).
 
 ```shell
@@ -56,7 +56,7 @@ rerun the command to see the current status.
 
 ## Installing Knative Serving
 
-Next, install [Knative Serving](https://github.com/knative/serving):
+Next, install [Knative Serving](https://github.com/knative/serving).
 
 Because you have limited resources available, use the
 `https://github.com/knative/serving/releases/download/v0.2.1/release-lite.yaml`
@@ -108,7 +108,7 @@ head to the [sample apps](../serving/samples/README.md) repo.
 Docker for Mac supports several levels of resetting its state and thus cleaning
 up.
 
-To only reset the Kubernetes cluster to a fresh one, click "Reset Kubernetes
+To reset only the Kubernetes cluster to a fresh one, click "Reset Kubernetes
 cluster" in the
 [_Reset_ preferences](https://docs.docker.com/docker-for-mac/#reset).
 
