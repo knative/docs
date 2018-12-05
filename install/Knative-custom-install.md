@@ -19,30 +19,33 @@ requires that you to run multiple and separate installation commands.
 * The following steps use `bash` for a MacOS or Linux environment; for Windows,
   some commands might need adjustment.
 
-* This installation guide assumes that you have an existing Kubernetes cluster,
+* This guide assumes that you have an existing Kubernetes cluster,
   on which you're comfortable installing and running _alpha_ level software.
 
 * Kubernetes requirements:
 
-  * Knative requires that the version of your Kubernetes cluster is v1.10 or newer.
+  * Your Kubernetes cluster version must be v1.10 or newer.
 
-  * Your Kubernetes cluster must also have the
+  * The
     [MutatingAdmissionWebhook admission controller](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#how-do-i-turn-on-an-admission-controller)
-    enabled.
+    must be enabled on your Kubernetes cluster.
 
-  * The version of your
+  * Your version of the
     [`kubectl` CLI tool](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
     must be v1.10 or newer.
 
 ## Installing Istio
 
 Knative depends on [Istio](https://istio.io/docs/concepts/what-is-istio/) for
-the service mesh. You can choose the default package to install the Istio service mesh with
-[automatic sidecar injection](https://istio.io/docs/setup/kubernetes/sidecar-injection).
-You should install the default package if you are just getting started with Knative.
+the service mesh.
 
-Alternatively, you can choose to install Istio with manual sidecar injection or with support for
-[Custom Resource Definitions (CRD)](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
+You should first install the `istio-crds.yaml` package to ensure that the
+[Custom Resource Definitions (CRD)](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) are created before installing the Istio packages.
+
+You can install the Istio service mesh with
+[automatic sidecar injection](https://istio.io/docs/setup/kubernetes/sidecar-injection).
+If you are just getting started with Knative, install this package. Alternatively, you
+can choose to install Istio with manual sidecar injection.
 
 ### Choosing an Istio installation package
 
@@ -51,18 +54,24 @@ service mesh on you cluster:
 
 | Istio Package Filename | Description       |
 | ---------------------- | ----------------- |
-| [`istio.yaml`][a]             | Default: Configured for Automatic Sidecar Injection. |
-| [`istio-crds.yaml`][b]        | Support for Custom Resource Definitions. **Q: This have to do with "Pilot"? Why choose this?** |
-| [`istio-lean.yaml`][c]        | Configured for Manual Sidecar Injection. **Q: When or why should users choose this?** |
+| [`istio-crds.yaml`][a] | Initially create CRDs before installing Istio.  |
+| [`istio.yaml`][b]      | Install Istio with Automatic Sidecar Injection. |
+| [`istio-lean.yaml`][c] | Install Istio with Manual Sidecar Injection.    |
 
-[a]: https://github.com/knative/serving/releases/download/v0.2.2/istio.yaml
-[b]: https://github.com/knative/serving/releases/download/v0.2.2/istio-crds.yaml
+[a]: https://github.com/knative/serving/releases/download/v0.2.2/istio-crds.yaml
+[b]: https://github.com/knative/serving/releases/download/v0.2.2/istio.yaml
 [c]: https://github.com/knative/serving/releases/download/v0.2.2/istio-lean.yaml
+
+
 
 ### Installing Istio installation packages
 
-1. Install an Istio package with the `kubectl apply` command by specifying the
-   package filename:
+1. Create the Istio CRDs on your cluster:
+   ```bash
+   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.2/istio-crds.yaml
+   ```
+
+1. Install Istio by specifying the package's path and filename in the `kubectl apply` command:
     ```bash
     kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.2/[FILENAME].yaml
     ```
@@ -70,7 +79,7 @@ service mesh on you cluster:
     where `[FILENAME]` is the name of the Istio package that you want to install. Example:
     `https://github.com/knative/serving/releases/download/v0.2.2/istio.yaml
     `
-1. Label the default namespace with `istio-injection=enabled`: **Q: For which install package is this needed? Or is this needed for all Istio installs?**
+1. Label the default namespace with `istio-injection=enabled`:
     ```bash
     kubectl label namespace default istio-injection=enabled
     ```
@@ -92,27 +101,49 @@ an observability plugin but you have the option to install one later.
 
 ### Choosing Knative installation packages
 
-The following Knative installation packages are available.
+The following Knative installation packages are available:
 
-This installation method is suggested for experienced operators. If you are new to
-Knative, you should [install the default package](./README.md) to help you get up
-and running with the least effort.
+* **Multiple Component Bundle**:
+  * https://github.com/knative/serving/releases/download/v0.2.2/release.yaml
+  * https://github.com/knative/serving/releases/download/v0.2.2/release-no-mon.yaml
+  * https://github.com/knative/serving/releases/download/v0.2.2/release-lite.yaml
 
-| Knative Package Filename | Serving Component | Build Component | Eventing Component | Observability Plugin* |
-| ------------------------ | ----------------- | --------------- | ------------------ | ----------------- |
-| [**knative/serving**][1] |  |  |  |  |
-| Default: [`release.yaml`][1.1] | Included    | Included        | -                  | [ELK stack][2] with Prometheus and Grafana |
-| [`release-no-mon.yaml`][1.2] | Included      | Included        | -                  | -                 |
-| [`release-lite.yaml`][1.3] | Included        | Included        | -                  | Prometheus and Grafana |
-| [`serving.yaml`][1.4]    | Included          | -               | -                  | -                 |
-| [**knative/build**][6] |  |  |  |  |
-| [`release.yaml`][6.1] | -         | Included        | -                  | -                 |
-| [`build.yaml`][1.5] (from [knative/serving][1]) | - | Included | -                | -                 |
-| [**knative/eventing**][7] |  |  |  |  |
-| [`eventing.yaml`][7.1]     | -                 | -               | Included           | -                 |
-| [**knative/eventing-sources**][8] |  |  |  |  |
-| [`release.yaml`][8.1] | - | - | Included       | -                 |
-| [`release-with-gcppubsub.yaml`][8.2] | - | - | Included       | -                 |
+    If you are new to Knative, you should install a bundle to get started. More
+    information about installing a bundle are in the [install guides](./README.md).
+
+* **Build Component**:
+  * https://github.com/knative/build/releases/download/v0.2.0/release.yaml
+* **Eventing Component**:
+  * https://github.com/knative/eventing/releases/download/v0.2.1/release.yaml
+  * https://github.com/knative/eventing/releases/download/v0.2.1/eventing.yaml
+  * https://github.com/knative/eventing-sources/releases/download/v0.2.1/release.yaml
+  * https://github.com/knative/eventing-sources/releases/download/v0.2.1/release-with-gcppubsub.yaml
+* **Serving Component**:
+  * https://github.com/knative/serving/releases/download/v0.2.2/serving.yaml
+
+#### Install package details and options
+
+The following table includes details of each Knative installation package, including other install options:
+
+| Knative Package Filename | Serving Component | Observability Plugin* |Build Component | Eventing Component | Eventing Notes |
+| ------------------------ | ----------------- | --------------------- | --------------- | ------------------ | ---------------- |
+| [**knative/serving**][1]                                                                                                    ||||||
+| [`release.yaml`][1.1] | Included | [ELK stack][2] with [Prometheus][2.1] and [Grafana][2.2] | Included | -  | -                |
+| [`release-no-mon.yaml`][1.2] | Included      | -                      |Included        | -                  | -                |
+| [`release-lite.yaml`][1.3] | Included          | [Prometheus][2.1] and [Grafana][2.2] | Included | -         |                  |
+| [`serving.yaml`][1.4]    | Included          | -                      | -              | -                 | -                 |
+| [`build.yaml`][1.5] (copied from [knative/build][3]) | -  | -          | Included      | -                  | -                |
+| [**knative/build**][3]                                                                                                    ||||||
+|[`release.yaml`][3.1]     | -                 | -                      | Included       | -                  | -                |
+| [**knative/eventing**][4]                                                                                                    ||||||
+| [`release.yaml`][4.1]    | *Required*        | -                      | -              | Included          | Includes the in-memory channel provisioner. |
+| [`eventing.yaml`][4.2]   | *Required*        | -                      | -              | Included          | No channel provisioner. |
+|[`in-memory-channel.yaml`][4.3] | *Required*  | -                      | -              | *Required*         | Only the in-memory channel provisioner. |
+| [`kafka.yaml`][4.4]      | *Required*        | -                      | -              | *Required*         | Only the Kafka channel provisioner. |
+| [**knative/eventing-sources**][5]                                                                                                    ||||||
+|[`release.yaml`][5.1]     | *Required*        | -                      | -              | *Required*          | Source types: [Kubernetes][6], [GitHub][6.1], [Container image][6.3] |
+| [`release-with-gcppubsub.yaml`][5.2] | *Required* | -                 | -              | *Required*          | Source types: [Kubernetes][6], [GitHub][6.1], [Container image][6.3], [PubSub][6.4] |
+| [`message-dumper.yaml`][5.3] | *Required*     | -                      | -              | *Required*       | Event logging service for debugging. |
 
 _*_ See [Installing observability plugins](../serving/installing-logging-metrics-traces.md)
 for details about the supported plugins and how to add monitoring, logging, and
@@ -124,67 +155,82 @@ tracing to your cluster.
 [1.3]: https://github.com/knative/serving/releases/download/v0.2.2/release-lite.yaml
 [1.4]: https://github.com/knative/serving/releases/download/v0.2.2/serving.yaml
 [1.5]: https://github.com/knative/serving/releases/download/v0.2.2/build.yaml
-[2]: https://www.elastic.co/elk-stack
-[5]: ../serving/setting-up-a-logging-plugin.md
-[6]: https://github.com/knative/build/releases/tag/v0.2.0
-[6.1]: https://github.com/knative/build/releases/download/v0.2.0/release.yaml
-[7]: https://github.com/knative/eventing/releases/tag/v0.2.0
-[7.1]: https://github.com/knative/eventing/releases/download/v0.2.0/eventing.yaml
-[8]: https://github.com/knative/eventing-sources/releases/tag/v0.2.0
-[8.1]: https://github.com/knative/eventing-sources/releases/download/v0.2.0/release.yaml
-[8.2]: https://github.com/knative/eventing-sources/releases/download/v0.2.0/release-with-gcppubsub.yaml
 
-Note: Each of the installable Knative resources are also listed in the Assets
-section of each Knative component's release page:
-* [Serving v0.2.2][1.1]
-* [Build v0.2.0][6.2]
-* [Eventing v0.2.0][7.1]
+[2]: https://www.elastic.co/elk-stack
+[2.1]: https://prometheus.io
+[2.2]: https://grafana.com
+
+[3]: https://github.com/knative/build/releases/tag/v0.2.0
+[3.1]: https://github.com/knative/build/releases/download/v0.2.0/release.yaml
+
+[4]: https://github.com/knative/eventing/releases/tag/v0.2.1
+[4.1]: https://github.com/knative/eventing/releases/download/v0.2.1/release.yaml
+[4.2]: https://github.com/knative/eventing/releases/download/v0.2.1/eventing.yaml
+[4.3]: https://github.com/knative/eventing/releases/download/v0.2.1/in-memory-channel.yaml
+[4.4]: https://github.com/knative/eventing/releases/download/v0.2.1/kafka.yaml
+
+[5]: https://github.com/knative/eventing-sources/releases/tag/v0.2.1
+[5.1]: https://github.com/knative/eventing-sources/releases/download/v0.2.1/release.yaml
+[5.2]: https://github.com/knative/eventing-sources/releases/download/v0.2.1/release-with-gcppubsub.yaml
+[5.3]: https://github.com/knative/eventing-sources/releases/download/v0.2.1/message-dumper.yaml
+
+[6]: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#event-v1-core
+[6.1]: https://developer.github.com/v3/activity/events/types/
+[6.3]: https://github.com/knative/docs/tree/master/eventing#containersource
+[6.4]: https://cloud.google.com/pubsub/
+
+Note: Each of the installable Knative packages are also listed in the Assets
+section of each Knative component's Releases page:
+* [Serving v0.2.2][1]
+* [Build v0.2.0][3]
+* [Eventing v0.2.1][4]
+* [Eventing Sources v0.2.1][5]
 
 ### Installing Knative packages
 
 **Tip**: From the table above, you can copy and paste the URL and filename of
 the installation package that you want to install.
 
-1. To install a Knative package, run the `kubectl apply` command
-   and specify the package path and filename:
+1. To install a Knative package by specifying the package's path and filename
+   in the `kubectl apply` command:
 
    * To install an individual package:
       ```bash
       kubectl apply --filename [INSTALL_PACKAGE]
       ```
 
-   * To install multiple packages, you can append additional `--filename [INSTALL_PACKAGE]`
+   * To install multiple packages, append additional `--filename [INSTALL_PACKAGE]`
      flags to the `kubectl apply` command:
       ```bash
       kubectl apply --filename [INSTALL_PACKAGE] --filename [INSTALL_PACKAGE] \
         --filename [INSTALL_PACKAGE]
       ```
 
-    Where [`INSTALL_PACKAGE`] is the URL path and filename of the a Knative installation package:
+    where [`INSTALL_PACKAGE`] is the URL path and filename of the a Knative installation package:
 
     `https://github.com/knative/[COMPONENT]/releases/download/[VERSION]/[FILENAME].yaml`
 
-    And `[COMPONENT]`, `[VERSION]`, and `[FILENAME]` are the Knative component, release version, and filename of the installable resource. For example:
+    And `[COMPONENT]`, `[VERSION]`, and `[FILENAME]` are the Knative component, release version, and filename of the installable resource. Examples:
     * `https://github.com/knative/build/releases/download/v0.2.0/release.yaml`
-    * `https://github.com/knative/eventing/releases/download/v0.2.0/eventing.yaml`
-    * `https://github.com/knative/eventing-sources/releases/download/v0.2.0/release.yaml`
+    * `https://github.com/knative/eventing/releases/download/v0.2.1/eventing.yaml`
+    * `https://github.com/knative/eventing-sources/releases/download/v0.2.1/release.yaml`
     * `https://github.com/knative/serving/releases/download/v0.2.2/serving.yaml`
 
 
     **Example install commands:**
 
-     * To install the default package that includes both Knative Serving and Build:
+     * To install the Knative Serving and Build bundle:
 
        ```bash
-       kubectl apply -f https://github.com/knative/serving/releases/download/v0.2.2/release.yaml
+       kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.2/release.yaml
        ```
 
     * To install all three Knative components without an observibility plugin:
 
       ```bash
-      kubectl apply -f https://github.com/knative/serving/releases/download/v0.2.2/serving.yaml \
-        -f https://github.com/knative/build/releases/download/v0.2.0/release.yaml \
-        -f https://github.com/knative/eventing/releases/download/v0.2.0/eventing.yaml
+      kubectl apply --filename https://github.com/knative/build/releases/download/v0.2.0/release.yaml \
+        --filename https://github.com/knative/eventing/releases/download/v0.2.1/eventing.yaml \
+        --filename https://github.com/knative/serving/releases/download/v0.2.2/serving.yaml
       ```
 
 1. Depending on what you choose to install, you view the status of your
@@ -202,8 +248,8 @@ the installation package that you want to install.
     > Tip: You can append the `--watch` flag to the `kubectl get` commands to
       view the pod status in realtime. You use `CTRL + C` to exit watch mode.
 
-1. If you installed an observability plugin, run the following command to ensure
-   that the `knative-monitoring` pods show a `STATUS` of `Running`:
+1. If you installed a package that includes an observability plugin, run the following
+   command to ensure that the `knative-monitoring` pods show a `STATUS` of `Running`:
 
     ```bash
     kubectl get pods --namespace knative-monitoring
