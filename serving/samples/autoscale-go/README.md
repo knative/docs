@@ -12,56 +12,17 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
    for viewing scaling graphs (optional).
 1. Install
    [Docker](https://docs.docker.com/get-started/#prepare-your-docker-environment).
-1. Check out the code:
-
-```
-go get -d github.com/knative/docs/serving/samples/autoscale-go
-```
-
-## Setup
-
-Build the application container and publish it to a container registry:
-
-1. Move into the sample directory:
+1. Clone this repository, and move into the sample directory:
 
    ```
-   cd $GOPATH/src/github.com/knative/docs
-   ```
-
-1. Set your preferred container registry:
-
-   ```
-   export REPO="gcr.io/<YOUR_PROJECT_ID>"
-   ```
-
-   - This example shows how to use Google Container Registry (GCR). You will
-     need a Google Cloud Project and to enable the
-     [Google Container Registry API](https://console.cloud.google.com/apis/library/containerregistry.googleapis.com).
-
-1. Use Docker to build your application container:
-
-   ```
-   docker build \
-     --tag "${REPO}/serving/samples/autoscale-go" \
-     --file=serving/samples/autoscale-go/Dockerfile .
-   ```
-
-1. Push your container to a container registry:
-
-   ```
-   docker push "${REPO}/serving/samples/autoscale-go"
-   ```
-
-1. Replace the image reference with our published image:
-   ```
-   perl -pi -e \
-   "s@github.com/knative/docs/serving/samples/autoscale-go@${REPO}/serving/samples/autoscale-go@g" \
-   serving/samples/autoscale-go/service.yaml
+   git clone https://github.com/knative/docs knative-docs
+   cd knative-docs
    ```
 
 ## Deploy the Service
 
-1. Deploy the Knative Serving sample:
+
+1. Deploy the [sample](./service.yaml) Knative Service:
 
    ```
    kubectl apply --filename serving/samples/autoscale-go/service.yaml
