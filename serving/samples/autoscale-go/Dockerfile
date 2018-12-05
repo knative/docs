@@ -17,8 +17,10 @@ FROM golang AS builder
 WORKDIR /go/src/app
 COPY . /go/src/app
 RUN CGO_ENABLED=0 go build -o /bin/autoscale-go .
+RUN CGO_ENABLED=0 go build -o /bin/load-generator ./test
 
 FROM gcr.io/distroless/base
 EXPOSE 8080
 COPY --from=builder /bin/autoscale-go /sample
+COPY --from=builder /bin/load-generator /load-generator
 ENTRYPOINT ["/sample"]

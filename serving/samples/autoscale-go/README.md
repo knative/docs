@@ -50,7 +50,9 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 1. Ramp up traffic to maintain 10 in-flight requests.
 
    ```
-   go run serving/samples/autoscale-go/test/test.go -sleep 100 -prime 10000 -bloat 5 -qps 9999 -concurrency 300
+   docker run --rm -i -t --entrypoint /load-generator -e IP_ADDRESS="${IP_ADDRESS}" \
+     gcr.io/knative-samples/autoscale-go:0.1 \
+     -sleep 100 -prime 10000 -bloat 5 -qps 9999 -concurrency 300
    ```
 
    ```
@@ -114,30 +116,40 @@ kubectl port-forward --namespace knative-monitoring $(kubectl get pods --namespa
 1. Maintain 1000 concurrent requests.
 
    ```
-   go run serving/samples/autoscale-go/test/test.go -qps 9999 -concurrency 1000
+   docker run --rm -i -t --entrypoint /load-generator -e IP_ADDRESS="${IP_ADDRESS}" \
+     gcr.io/knative-samples/autoscale-go:0.1 \
+     -qps 9999 -concurrency 1000
    ```
 
 1. Maintain 100 qps with fast requests.
 
    ```
-   go run serving/samples/autoscale-go/test/test.go -qps 100 -concurrency 9999
+   docker run --rm -i -t --entrypoint /load-generator -e IP_ADDRESS="${IP_ADDRESS}" \
+     gcr.io/knative-samples/autoscale-go:0.1 \
+     -qps 100 -concurrency 9999
    ```
 
 1. Maintain 100 qps with slow requests.
 
    ```
-   go run serving/samples/autoscale-go/test/test.go -qps 100 -concurrency 9999 -sleep 500
+   docker run --rm -i -t --entrypoint /load-generator -e IP_ADDRESS="${IP_ADDRESS}" \
+     gcr.io/knative-samples/autoscale-go:0.1 \
+     -qps 100 -concurrency 9999 -sleep 500
    ```
 
 1. Heavy CPU usage.
 
    ```
-   go run serving/samples/autoscale-go/test/test.go -qps 9999 -concurrency 10 -prime 40000000
+   docker run --rm -i -t --entrypoint /load-generator -e IP_ADDRESS="${IP_ADDRESS}" \
+     gcr.io/knative-samples/autoscale-go:0.1 \
+     -qps 9999 -concurrency 10 -prime 40000000
    ```
 
 1. Heavy memory usage.
    ```
-   go run serving/samples/autoscale-go/test/test.go -qps 9999 -concurrency 5 -bloat 1000
+   docker run --rm -i -t --entrypoint /load-generator -e IP_ADDRESS="${IP_ADDRESS}" \
+     gcr.io/knative-samples/autoscale-go:0.1 \
+     -qps 9999 -concurrency 5 -bloat 1000
    ```
 
 ## Cleanup
