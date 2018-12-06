@@ -132,7 +132,7 @@ Knative depends on Istio.
 
 1. Install Istio:
    ```bash
-   kubectl apply --filename https://raw.githubusercontent.com/knative/serving/v0.2.1/third_party/istio-1.0.2/istio.yaml
+   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.2/istio.yaml
    ```
 1. Label the default namespace with `istio-injection=enabled`:
 
@@ -159,7 +159,7 @@ its own.
 
 1. Run the `kubectl apply` command to install Knative and its dependencies:
    ```bash
-   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.1/release.yaml
+   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.2/release.yaml
    ```
 1. Monitor the Knative components until all of the components show a `STATUS` of
    `Running`:
@@ -173,7 +173,7 @@ its own.
 1. Run the `kubectl apply` command to install
    [Knative Build](https://github.com/knative/build) and its dependencies:
    ```bash
-   kubectl apply --filename https://raw.githubusercontent.com/knative/serving/v0.2.1/third_party/config/build/release.yaml
+   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.2/build.yaml
    ```
 1. Monitor the Knative Build components until all of the components show a
    `STATUS` of `Running`:

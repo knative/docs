@@ -67,15 +67,10 @@ Learn more about Eventing development in the
 ## Installation
 
 Knative Eventing currently requires Knative Serving and Istio version 1.0 or
-later installed. Use this command to install the version of Istio which is
-tested with Knative:
+later installed. [Follow the instructions to install on the platform of your
+choice](../install/README.md).
 
-```shell
-kubectl apply --filename https://raw.githubusercontent.com/knative/serving/v0.2.2/third_party/istio-1.0.2/istio.yaml
-kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.2/release.yaml
-```
-
-You can install the core Knative Eventing (which provides an in-memory
+Install the core Knative Eventing (which provides an in-memory
 ChannelProvisioner) and the core sources (which provides the Kubernetes Events,
 GitHub, and "Container" Sources) with the following commands:
 
