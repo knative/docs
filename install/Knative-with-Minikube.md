@@ -36,7 +36,7 @@ For Linux use:
 minikube start --memory=8192 --cpus=4 \
   --kubernetes-version=v1.11.3 \
   --vm-driver=kvm2 \
-  --bootstrapper=kubeadm \
+  --disk-size=30g \
   --extra-config=apiserver.enable-admission-plugins="LimitRanger,NamespaceExists,NamespaceLifecycle,ResourceQuota,ServiceAccount,DefaultStorageClass,MutatingAdmissionWebhook"
 ```
 
@@ -46,7 +46,7 @@ For macOS use:
 minikube start --memory=8192 --cpus=4 \
   --kubernetes-version=v1.11.3 \
   --vm-driver=hyperkit \
-  --bootstrapper=kubeadm \
+  --disk-size=30g \
   --extra-config=apiserver.enable-admission-plugins="LimitRanger,NamespaceExists,NamespaceLifecycle,ResourceQuota,ServiceAccount,DefaultStorageClass,MutatingAdmissionWebhook"
 ```
 
