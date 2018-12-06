@@ -73,7 +73,7 @@ its own.
 
 1. Run the `kubectl apply` command to install Knative and its dependencies:
    ```bash
-   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.1/release.yaml
+   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.2/release.yaml
    ```
 1. Monitor the Knative components until all of the components show a `STATUS` of
    `Running`:

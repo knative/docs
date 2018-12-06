@@ -83,12 +83,12 @@ rerun the command to see the current status.
 Next, install [Knative Serving](https://github.com/knative/serving):
 
 Because you have limited resources available, use the
-`https://github.com/knative/serving/releases/download/v0.2.1/release-lite.yaml`
+`https://github.com/knative/serving/releases/download/v0.2.2/release-lite.yaml`
 file, which omits some of the monitoring components to reduce the memory used by
 the Knative components. To use the provided `release-lite.yaml` release, run:
 
 ```shell
-curl -L https://github.com/knative/serving/releases/download/v0.2.1/release-lite.yaml \
+curl -L https://github.com/knative/serving/releases/download/v0.2.2/release-lite.yaml \
   | sed 's/LoadBalancer/NodePort/' \
   | kubectl apply --filename -
 ```
