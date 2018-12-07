@@ -12,56 +12,17 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
    for viewing scaling graphs (optional).
 1. Install
    [Docker](https://docs.docker.com/get-started/#prepare-your-docker-environment).
-1. Check out the code:
-
-```
-go get -d github.com/knative/docs/serving/samples/autoscale-go
-```
-
-## Setup
-
-Build the application container and publish it to a container registry:
-
-1. Move into the sample directory:
+1. Clone this repository, and move into the sample directory:
 
    ```
-   cd $GOPATH/src/github.com/knative/docs
-   ```
-
-1. Set your preferred container registry:
-
-   ```
-   export REPO="gcr.io/<YOUR_PROJECT_ID>"
-   ```
-
-   - This example shows how to use Google Container Registry (GCR). You will
-     need a Google Cloud Project and to enable the
-     [Google Container Registry API](https://console.cloud.google.com/apis/library/containerregistry.googleapis.com).
-
-1. Use Docker to build your application container:
-
-   ```
-   docker build \
-     --tag "${REPO}/serving/samples/autoscale-go" \
-     --file=serving/samples/autoscale-go/Dockerfile .
-   ```
-
-1. Push your container to a container registry:
-
-   ```
-   docker push "${REPO}/serving/samples/autoscale-go"
-   ```
-
-1. Replace the image reference with our published image:
-   ```
-   perl -pi -e \
-   "s@github.com/knative/docs/serving/samples/autoscale-go@${REPO}/serving/samples/autoscale-go@g" \
-   serving/samples/autoscale-go/service.yaml
+   git clone https://github.com/knative/docs knative-docs
+   cd knative-docs
    ```
 
 ## Deploy the Service
 
-1. Deploy the Knative Serving sample:
+
+1. Deploy the [sample](./service.yaml) Knative Service:
 
    ```
    kubectl apply --filename serving/samples/autoscale-go/service.yaml
@@ -89,7 +50,9 @@ Build the application container and publish it to a container registry:
 1. Ramp up traffic to maintain 10 in-flight requests.
 
    ```
-   go run serving/samples/autoscale-go/test/test.go -sleep 100 -prime 10000 -bloat 5 -qps 9999 -concurrency 300
+   docker run --rm -i -t --entrypoint /load-generator -e IP_ADDRESS="${IP_ADDRESS}" \
+     gcr.io/knative-samples/autoscale-go:0.1 \
+     -sleep 100 -prime 10000 -bloat 5 -qps 9999 -concurrency 300
    ```
 
    ```
@@ -153,30 +116,40 @@ kubectl port-forward --namespace knative-monitoring $(kubectl get pods --namespa
 1. Maintain 1000 concurrent requests.
 
    ```
-   go run serving/samples/autoscale-go/test/test.go -qps 9999 -concurrency 1000
+   docker run --rm -i -t --entrypoint /load-generator -e IP_ADDRESS="${IP_ADDRESS}" \
+     gcr.io/knative-samples/autoscale-go:0.1 \
+     -qps 9999 -concurrency 1000
    ```
 
 1. Maintain 100 qps with fast requests.
 
    ```
-   go run serving/samples/autoscale-go/test/test.go -qps 100 -concurrency 9999
+   docker run --rm -i -t --entrypoint /load-generator -e IP_ADDRESS="${IP_ADDRESS}" \
+     gcr.io/knative-samples/autoscale-go:0.1 \
+     -qps 100 -concurrency 9999
    ```
 
 1. Maintain 100 qps with slow requests.
 
    ```
-   go run serving/samples/autoscale-go/test/test.go -qps 100 -concurrency 9999 -sleep 500
+   docker run --rm -i -t --entrypoint /load-generator -e IP_ADDRESS="${IP_ADDRESS}" \
+     gcr.io/knative-samples/autoscale-go:0.1 \
+     -qps 100 -concurrency 9999 -sleep 500
    ```
 
 1. Heavy CPU usage.
 
    ```
-   go run serving/samples/autoscale-go/test/test.go -qps 9999 -concurrency 10 -prime 40000000
+   docker run --rm -i -t --entrypoint /load-generator -e IP_ADDRESS="${IP_ADDRESS}" \
+     gcr.io/knative-samples/autoscale-go:0.1 \
+     -qps 9999 -concurrency 10 -prime 40000000
    ```
 
 1. Heavy memory usage.
    ```
-   go run serving/samples/autoscale-go/test/test.go -qps 9999 -concurrency 5 -bloat 1000
+   docker run --rm -i -t --entrypoint /load-generator -e IP_ADDRESS="${IP_ADDRESS}" \
+     gcr.io/knative-samples/autoscale-go:0.1 \
+     -qps 9999 -concurrency 5 -bloat 1000
    ```
 
 ## Cleanup
