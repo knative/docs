@@ -22,4 +22,4 @@
 
 ## Additional Info
 
-<!-- You may also assign an issue using /assign @user -->
+<!-- You may also assign an issue using /assign @[user] -->
