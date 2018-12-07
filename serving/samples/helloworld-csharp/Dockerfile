@@ -14,9 +14,8 @@ COPY . .
 # Build a release artifact.
 RUN dotnet publish -c Release -o out
 
-# Configure and document the service HTTP port.
+# Configure the service HTTP port.
 ENV PORT 8080
-EXPOSE $PORT
 
 # Run the web service on container startup.
 CMD ["dotnet", "out/helloworld-csharp.dll"]

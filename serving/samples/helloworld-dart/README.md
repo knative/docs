@@ -78,7 +78,6 @@ be created using the following instructions.
 
    # Configure and document the service HTTP port.
    ENV PORT 8080
-   EXPOSE $PORT
    ```
 
 5. Create a new file, `service.yaml` and copy the following service definition

@@ -18,9 +18,8 @@ FROM openjdk:8-jre-alpine
 # Copy the jar to the production image from the builder stage.
 COPY --from=builder /app/target/helloworld-*.jar /helloworld.jar
 
-# Configure and document the service HTTP port.
+# Configure the service HTTP port.
 ENV PORT 8080
-EXPOSE $PORT
 
 # Run the web service on container startup.
 CMD ["java","-Djava.security.egd=file:/dev/./urandom","-Dserver.port=${PORT}","-jar","/helloworld.jar"]

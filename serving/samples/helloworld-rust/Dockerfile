@@ -9,9 +9,8 @@ COPY . .
 # Install production dependencies and build a release artifact.
 RUN cargo install
 
-# Configure and document the service HTTP port.
+# Configure the service HTTP port.
 ENV PORT 8080
-EXPOSE $PORT
 
 # Run the web service on container startup.
 CMD ["hellorust"]

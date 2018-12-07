@@ -33,7 +33,6 @@ USER appuser
 
 ENV PORT=8080 MIX_ENV=prod REPLACE_OS_VARS=true
 WORKDIR /opt/app
-EXPOSE 8080
 COPY --from=0 /opt/release .
 ENV RUNNER_LOG_DIR /var/log
 CMD ["/opt/app/bin/start_server", "foreground", "boot_var=/tmp"]

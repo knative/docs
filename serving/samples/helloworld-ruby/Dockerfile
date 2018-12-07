@@ -11,9 +11,8 @@ RUN bundle install
 # Copy local code to the container image.
 COPY . .
 
-# Configure and document the service HTTP port.
+# Configure the service HTTP port.
 ENV PORT 8080
-EXPOSE $PORT
 
 # Run the web service on container startup.
 CMD ["ruby", "./app.rb"]

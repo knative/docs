@@ -58,7 +58,6 @@ recreate the source files from this folder.
 
    # Configure and document the service HTTP port.
    ENV PORT 8080
-   EXPOSE $PORT
 
    # Run the web service on container startup.
    CMD ["ruby", "./app.rb"]
