@@ -28,14 +28,14 @@ curl -L https://github.com/knative/serving/releases/download/v0.2.2/release-lite
 If the `image-security-enforcement` enabled when you install [IBM Cloud Private](https://www.ibm.com/cloud/private). You need to update the [image security policy](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/manage_images/image_security.html) allow to pull the knative image.
 Using the following commend get the image security policy.
 ```
-# kubectl get clusterimagepolicies
+kubectl get clusterimagepolicies
 NAME                                    AGE
 ibmcloud-default-cluster-image-policy   27m
 ```
 
 Then edit the image security policy.
 ```
-# kubectl edit clusterimagepolicies ibmcloud-default-cluster-image-policy
+kubectl edit clusterimagepolicies ibmcloud-default-cluster-image-policy
 ```
 
 Update spec.repositories by adding `gcr.io/knative-releases/*`
@@ -49,7 +49,7 @@ Put the namespaces `knative-serving`, `knative-build`, `knative-monitoring` and 
 
 The pod security policy in [IBM Cloud Private](https://www.ibm.com/cloud/private) as follows:
 ```
-# kubectl get psp
+kubectl get psp
 NAME                        PRIV      CAPS                                                                                                                  SELINUX    RUNASUSER          FSGROUP     SUPGROUP    READONLYROOTFS   VOLUMES
 ibm-anyuid-hostaccess-psp   false     SETPCAP,AUDIT_WRITE,CHOWN,NET_RAW,DAC_OVERRIDE,FOWNER,FSETID,KILL,SETUID,SETGID,NET_BIND_SERVICE,SYS_CHROOT,SETFCAP   RunAsAny   RunAsAny           RunAsAny    RunAsAny    false            *
 ibm-anyuid-hostpath-psp     false     SETPCAP,AUDIT_WRITE,CHOWN,NET_RAW,DAC_OVERRIDE,FOWNER,FSETID,KILL,SETUID,SETGID,NET_BIND_SERVICE,SYS_CHROOT,SETFCAP   RunAsAny   RunAsAny           RunAsAny    RunAsAny    false            *
@@ -136,7 +136,8 @@ head to the [sample apps](../serving/samples/README.md) repo.
   You can use the following command to look up the value to use for the {IP_ADDRESS} placeholder
   used in the samples:
   ```shell
-  echo $(ICP cluster ip):$(kubectl get svc knative-ingressgateway --namespace istio-system --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
+  echo $(ICP cluster ip):$(kubectl get svc knative-ingressgateway --namespace istio-system \
+  --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
   ```
 
 ## Cleaning up
