@@ -1,13 +1,13 @@
 # Debugging Issues with Your Application
 
-You deployed your app to Knative Serving, but it isn't working as expected.
-Go through this step-by-step guide to understand what failed.
+You deployed your app to Knative Serving, but it isn't working as expected. Go
+through this step-by-step guide to understand what failed.
 
 ## Check command-line output
 
 Check your deploy command output to see whether it succeeded or not. If your
-deployment process was terminated, you should see an error message
-in the output that describes the reason why the deployment failed.
+deployment process was terminated, you should see an error message in the output
+that describes the reason why the deployment failed.
 
 This kind of failure is most likely due to either a misconfigured manifest or
 wrong command. For example, the following output says that you must configure
@@ -38,14 +38,14 @@ kubectl get route <route-name> --output yaml
 
 The `conditions` in `status` provide the reason if there is any failure. For
 details, see Knative
-[Error Conditions and Reporting](https://github.com/knative/serving/blob/master/docs/spec/errors.md)(currently some of them
-are not implemented yet).
+[Error Conditions and Reporting](https://github.com/knative/serving/blob/master/docs/spec/errors.md)(currently
+some of them are not implemented yet).
 
 ## Check Revision status
 
-If you configure your `Route` with `Configuration`, run the following
-command to get the name of the `Revision` created for you deployment
-(look up the configuration name in the `Route` .yaml file):
+If you configure your `Route` with `Configuration`, run the following command to
+get the name of the `Revision` created for you deployment (look up the
+configuration name in the `Route` .yaml file):
 
 ```shell
 kubectl get configuration <configuration-name> --output jsonpath="{.status.latestCreatedRevisionName}"
@@ -71,17 +71,17 @@ conditions:
 
 If you see this condition, check the following to continue debugging:
 
-* [Check Pod status](#check-pod-status)
-* [Check application logs](#check-application-logs)
+- [Check Pod status](#check-pod-status)
+- [Check application logs](#check-application-logs)
 
 If you see other conditions, to debug further:
 
-* Look up the meaning of the conditions in Knative
-     [Error Conditions and Reporting](https://github.com/knative/serving/blob/master/docs/spec/errors.md). Note: some of them
-     are not implemented yet. An alternative is to
-     [check Pod status](#check-pod-status).
-* If you are using `BUILD` to deploy and the `BuildComplete` condition is not
-     `True`, [check BUILD status](#check-build-status).
+- Look up the meaning of the conditions in Knative
+  [Error Conditions and Reporting](https://github.com/knative/serving/blob/master/docs/spec/errors.md).
+  Note: some of them are not implemented yet. An alternative is to
+  [check Pod status](#check-pod-status).
+- If you are using `BUILD` to deploy and the `BuildComplete` condition is not
+  `True`, [check BUILD status](#check-build-status).
 
 ## Check Pod status
 
@@ -107,7 +107,8 @@ kubectl get pod <pod-name> --output yaml
 
 ```
 
-If you see issues with "user-container" container in the containerStatuses, check your application logs as described below.
+If you see issues with "user-container" container in the containerStatuses,
+check your application logs as described below.
 
 ## Check Build status
 
@@ -119,14 +120,16 @@ kubectl get build $(kubectl get revision <revision-name> --output jsonpath="{.sp
 ```
 
 If there is any failure, the `conditions` in `status` provide the reason. To
-access build logs, first execute `kubectl proxy` and then open [Kibana UI](http://localhost:8001/api/v1/namespaces/knative-monitoring/services/kibana-logging/proxy/app/kibana).
-Use any of the following filters within Kibana UI to
-see build logs. _(See [telemetry guide](../telemetry.md) for more information on
-logging and monitoring features of Knative Serving.)_
+access build logs, first execute `kubectl proxy` and then open
+[Kibana UI](http://localhost:8001/api/v1/namespaces/knative-monitoring/services/kibana-logging/proxy/app/kibana).
+Use any of the following filters within Kibana UI to see build logs. _(See
+[telemetry guide](../telemetry.md) for more information on logging and
+monitoring features of Knative Serving.)_
 
-* All build logs: `_exists_:"kubernetes.labels.build-name"`
-* Build logs for a specific build: `kubernetes.labels.build-name:"<BUILD NAME>"`
-* Build logs for a specific build and step: `kubernetes.labels.build-name:"<BUILD NAME>" AND kubernetes.container_name:"build-step-<BUILD STEP NAME>"`
+- All build logs: `_exists_:"kubernetes.labels.build-name"`
+- Build logs for a specific build: `kubernetes.labels.build-name:"<BUILD NAME>"`
+- Build logs for a specific build and step:
+  `kubernetes.labels.build-name:"<BUILD NAME>" AND kubernetes.container_name:"build-step-<BUILD STEP NAME>"`
 
 ---
 
