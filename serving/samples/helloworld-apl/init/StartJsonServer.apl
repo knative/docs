@@ -10,7 +10,7 @@
 
  fnname←_getenv'FUNC_HANDLER'
  _log'FUNC_HANDLER:'fnname
- port←_getenv'FUNC_PORT'
+ port←_getenv'PORT'
  timeout←_getenv'FUNC_TIMEOUT'
  _log'FUNC_TIMEOUT:'timeout
  :If ∨/lx←_empty¨port timeout

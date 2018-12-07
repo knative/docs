@@ -11,4 +11,8 @@ COPY . $APP_HOME
 RUN find $APP_HOME -type f  \( -name '*.sh' -o -name '*.apl' -o -name '*.dyalog' \) -print0 | xargs -0 dos2unix
 WORKDIR $APP_HOME
 
+# Configure and document the service HTTP port.
+ENV PORT 8080
+EXPOSE $PORT
+
 ENTRYPOINT ["sh","init.sh"]
