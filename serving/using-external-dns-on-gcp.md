@@ -55,7 +55,7 @@ gcloud container clusters create $CLUSTER_NAME \
     --num-nodes=3
 ```
 
-2. Create a new service account with the project role `dns.admin`:
+2. Create a new service account for Cloud DNS admin role.
 ```shell
 # Name of the service account you want to create.
 export CLOUD_DNS_SA=cloud-dns-admin
@@ -63,30 +63,34 @@ export CLOUD_DNS_SA=cloud-dns-admin
 gcloud --project $PROJECT_NAME iam service-accounts \
     create $CLOUD_DNS_SA \
     --display-name "Service Account to support ACME DNS-01 challenge."
+```
 
+3. Bind the role `dns.admin` to the newly created service account.
+```shell
 # Fully-qualified service account name also has project-id information.
 export CLOUD_DNS_SA=$CLOUD_DNS_SA@$PROJECT_NAME.iam.gserviceaccount.com
 
-# Bind the role dns.admin to this service account, so it can be used to support
-# the ACME DNS01 challenge.
 gcloud projects add-iam-policy-binding $PROJECT_NAME \
     --member serviceAccount:$CLOUD_DNS_SA \
     --role roles/dns.admin
+```
 
-# Download the secret key file for your service account.
+4. Download the secret key file for your service account.
+```shell
 gcloud iam service-accounts keys create ~/key.json \
     --iam-account=$CLOUD_DNS_SA
 ```
 
-3. Upload the service account credential to your cluster.
+5. Upload the service account credential to your cluster.
 This command uses the secret name `cloud-dns-key`, but you can
 choose a different name.
 ```shell
-# Upload that as a secret in your Kubernetes cluster.
 kubectl create secret generic cloud-dns-key \
     --from-file=key.json=$HOME/key.json
+```
 
-# Delete the local secret
+6. Delete the local secret
+```shell
 rm ~/key.json
 ```
 
@@ -176,7 +180,7 @@ gcloud dns record-sets transaction execute --zone "my-org-do"
 Firstly, choose the manifest of ExternalDNS.
 
 Use below manifest if you set up your cluster with [CloudDNS scope](#cluster-with-cloud-dns-scope).
-```
+```yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -240,7 +244,7 @@ spec:
 ```
 
 Or use below manifest if you set up your cluster with [CloudDNS service account credential](#cluster-with-cloud-dns-admin-service-account-credential).
-```
+```yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
