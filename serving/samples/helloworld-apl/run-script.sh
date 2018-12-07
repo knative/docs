@@ -1,21 +1,29 @@
 #!/bin/bash
-echo "Start APL run-script.sh"
 
-export Port=8080
-export CodeLocation=/aplcode
-export Threaded=0
-export AllowHttpGet=1
-export Logging=1
-echo "Start APL interpreter"
+## This file replaces the Dyalog mapl script
+echo " _______     __      _      ____   _____ "
+echo "|  __ \ \   / //\   | |    / __ \ / ____|"
+echo "|_|  | \ \_/ //  \  | |   | |  | | |     "
+echo "     | |\   // /\ \ | |   | |  | | |   _ "
+echo " ____| | | |/ /  \ \| |___| |__| | |__| |"
+echo "|_____/  |_/_/    \_\______\____/ \_____|"
+echo ""
+echo "https://www.dyalog.com"
+echo ""
+echo "*************************************************************************************"
+echo "*               This software is for non-commercial evaluation ONLY                 *"
+echo "* https://www.dyalog.com/uploads/documents/Private_Personal_Educational_Licence.pdf *"
+echo "*************************************************************************************"
+echo ""
 
-echo "Print ev. variables:"
-echo "APP_HOME: ${$APP_HOME}"
+export MAXWS=${MAXWS-256M}
 
-echo "What is at /aplcode folder"
-ls -la /aplcode
+export DYALOG=/opt/mdyalog/17.1/64/unicode/
+export WSPATH=/opt/mdyalog/17.1/64/unicode/ws
+export TERM=xterm
+export APL_TEXTINAPLCORE=${APL_TEXTINAPLCORE-1}
+export TRACE_ON_ERROR=0
+export SESSION_FILE="${SESSION_FILE-$DYALOG/default.dse}"
 
-echo "Ready to go:"
-
-/run </init/init.apl
-
-exit 0
+#$DYALOG/dyalog -s $@
+$DYALOG/dyalog +s <$@ # Needed SALT in JSON server.
