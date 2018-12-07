@@ -26,4 +26,4 @@ export TRACE_ON_ERROR=0
 export SESSION_FILE="${SESSION_FILE-$DYALOG/default.dse}"
 
 #$DYALOG/dyalog -s $@
-$DYALOG/dyalog +s <$@ # Needed SALT in JSON server.
+$DYALOG/dyalog +s <$@ 0<&- # Needed SALT in JSON server.
