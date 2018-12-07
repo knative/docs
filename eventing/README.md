@@ -67,8 +67,8 @@ Learn more about Eventing development in the
 ## Installation
 
 Knative Eventing currently requires Knative Serving and Istio version 1.0 or
-later installed. [Follow the instructions to install on the platform of your
-choice](../install/README.md).
+later installed.
+[Follow the instructions to install on the platform of your choice](../install/README.md).
 
 Install the core Knative Eventing (which provides an in-memory
 ChannelProvisioner) and the core sources (which provides the Kubernetes Events,
