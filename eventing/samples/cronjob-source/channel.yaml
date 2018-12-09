@@ -1,0 +1,10 @@
+apiVersion: eventing.knative.dev/v1alpha1
+kind: Channel
+metadata:
+  name: cronjob-test
+  namespace: default
+spec:
+  provisioner:
+    apiVersion: eventing.knative.dev/v1alpha1
+    kind: ClusterChannelProvisioner
+    name: in-memory-channel

@@ -209,6 +209,19 @@ FTP server for new files or generate events at a set time interval.
   [ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#objectreference-v1-core)
   A reference to the object that should receive events.
 
+### CronJobSource
+
+The CronJobSource fires events based on given [Cron](https://en.wikipedia.org/wiki/Cron) schedule.
+
+**Spec fields**:
+
+- `schedule` (**required**): `string` A [Cron](https://en.wikipedia.org/wiki/Cron) format string, such as `0 * * * *` or `@hourly`.
+- `data`: `string` Optional data sent to downstream receiver.
+- `serviceAccountName`: `string` The name of the ServiceAccount to run the container as.
+- `sink`:
+  [ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#objectreference-v1-core)
+  A reference to the object that should receive events.
+
 ## Getting Started
 
 - [Setup Knative Serving](../install/README.md)
