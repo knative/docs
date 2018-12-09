@@ -15,4 +15,5 @@ WORKDIR $APP_HOME
 ENV PORT 8080
 EXPOSE $PORT
 
-ENTRYPOINT ["sh","init.sh"]
+# Run the web service on container startup.
+CMD ["sh","init.sh"]
