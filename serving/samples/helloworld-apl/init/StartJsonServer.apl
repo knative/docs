@@ -37,7 +37,7 @@
  server.Threaded←0
  server.AllowHttpGet←1
  server.Logging←1
- server.Handler←wrrapername
+ server.Handler←'helloWorld' ⍝ wrrapername
  server.HtmlInterface←0
  server.AccessControlAllowOrigin←''
  server.ContentType←'text/html; charset=utf-8' ⍝ or application/json; charset=utf-8
