@@ -23,7 +23,7 @@ spec:
         spec:
           container:
             # Replace {DOCKER_HUB_USERNAME} with your actual docker hub username
-            image: docker.io/{DOCKER_HUB_USERNAME}/gitwebhook:latest
+            image: docker.io/{DOCKER_HUB_USERNAME}/gitwebhook-go:latest
             env:
             - name: GITHUB_PERSONAL_TOKEN
               valueFrom:
