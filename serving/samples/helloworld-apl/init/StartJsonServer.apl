@@ -39,6 +39,8 @@
  server.Logging←1
  server.Handler←wrrapername
  server.HtmlInterface←0
+ server.AccessControlAllowOrigin←''
+ server.ContentType←'text/html; charset=utf-8' ⍝ or application/json; charset=utf-8
 
  _log'JSONServer argumnets:'
  _log'server.Port'server.Port
@@ -49,6 +51,8 @@
  _log'server.Logging'server.Logging
  _log'server.Handler'server.Handler
  _log'server.HtmlInterface'server.HtmlInterface
+ _log'server.AccessControlAllowOrigin'server.AccessControlAllowOrigin
+ _log'server.ContentType'server.ContentType
 
  _log'Starting server'
 
