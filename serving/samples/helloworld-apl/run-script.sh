@@ -25,5 +25,6 @@ export APL_TEXTINAPLCORE=${APL_TEXTINAPLCORE-1}
 export TRACE_ON_ERROR=0
 export SESSION_FILE="${SESSION_FILE-$DYALOG/default.dse}"
 
-#$DYALOG/dyalog -s $@
-$DYALOG/dyalog +s <$@ 0<&- # Needed SALT in JSON server.
+echo "Start up script at $@"
+
+$DYALOG/dyalog +s <$@ # Used +s as SALT is needed in JSON server to load files.

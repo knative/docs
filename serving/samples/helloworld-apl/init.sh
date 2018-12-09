@@ -13,7 +13,7 @@ ls -la $APP_HOME
 echo "What is at $APP_HOME/aplcode folder"
 ls -la $APP_HOME/aplcode
 
-echo "Ready to go:"
+echo "Ready to go at $APP_HOME/init/init.apl"
 
 $APP_HOME/run-script.sh $APP_HOME/init/init.apl
 
