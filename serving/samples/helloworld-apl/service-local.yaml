@@ -9,7 +9,7 @@ spec:
       revisionTemplate:
         spec:
           container:
-            image: dev.local/helloworld-apl:0.2.2
+            image: dev.local/helloworld-apl:0.0.1
             env:
             - name: TARGET
               value: "APL Sample v1"
