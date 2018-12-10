@@ -1,8 +1,7 @@
 FROM dyalog/dyalog:17.1
+ENTRYPOINT []
 
-RUN apt-get update
-RUN apt-get install dos2unix
-RUN apt-get install --assume-yes git
+RUN apt-get update && apt-get install dos2unix && apt-get install --assume-yes git
 
 RUN git clone https://github.com/mvranic/JSONServer.git /JSONServer # Markos JSON Server with thread control.
 
