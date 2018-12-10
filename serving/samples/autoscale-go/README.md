@@ -21,7 +21,6 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 
 ## Deploy the Service
 
-
 1. Deploy the [sample](./service.yaml) Knative Service:
 
    ```
