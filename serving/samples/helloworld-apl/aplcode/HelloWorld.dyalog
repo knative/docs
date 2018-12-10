@@ -6,6 +6,6 @@ res←helloWorld arg;sink;target
  _getenv←{2 ⎕NQ'.' 'GetEnvironment'⍵}
  target←_getenv'TARGET'
 
- res←'Hallo world ',target
+ res←'Hello world ',target
 
  ⎕←'End helloWorld fn.'
