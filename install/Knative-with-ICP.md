@@ -42,13 +42,14 @@ The boot node is the node that is used for installation of your cluster. The boo
     ```
 
 5. Extract the configuration files from the installer image.
-        For Linux® 64-bit, run this command:
+
+   For Linux® 64-bit, run this command:
         ```
         sudo docker run -v $(pwd):/data -e LICENSE=accept \
         ibmcom/icp-inception-amd64:3.1.1-ee \
         cp -r cluster /data
         ```
-        For Linux® on Power® (ppc64le), run this command:
+   For Linux® on Power® (ppc64le), run this command:
         ```
         sudo docker run -v $(pwd):/data -e LICENSE=accept \
         ibmcom/icp-inception-ppc64le:3.1.1-ee \
@@ -56,11 +57,12 @@ The boot node is the node that is used for installation of your cluster. The boo
         ```
 
 6. (Optional) You can view the license file for IBM Cloud Private.
-        For Linux® 64-bit, run this command:
+
+    For Linux® 64-bit, run this command:
         ```
         sudo docker run -e LICENSE=view -e LANG=$LANG ibmcom/icp-inception-amd64:3.1.1-ee
         ```
-        For Linux® on Power® (ppc64le), run this command:
+    For Linux® on Power® (ppc64le), run this command:
         ```
         sudo docker run -e LICENSE=view -e LANG=$LANG ibmcom/icp-inception-ppc64le:3.1.1-ee
         ```
@@ -107,6 +109,7 @@ In these command, path_to_installation_file is the path to the images file.
 2. You can also set a variety of optional cluster customizations that are available in the /<installation_directory>/cluster/config.yaml file. See [Customizing the cluster with the config.yaml file](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/installing/config_yaml.html). For additional customizations, you can also review [Customizing your installation](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/installing/custom_install.html).
 
 3. In an environment that has multiple network interfaces (NICs), such as OpenStack and AWS, you must add the following code to the config.yaml file:
+
         For IBM Cloud Private:
         ```
         cluster_lb_address: <external address>
@@ -116,7 +119,8 @@ In these command, path_to_installation_file is the path to the images file.
         ```
         cluster_lb_address: <external IP address>
         ```
-    The <external address> value is the IP address, fully-qualified domain name, or OpenStack floating IP address that manages communication to external services. Setting the proxy_lb_address parameter is required for proxy HA environments only.
+
+    The \<external address\> value is the IP address, fully-qualified domain name, or OpenStack floating IP address that manages communication to external services. Setting the proxy_lb_address parameter is required for proxy HA environments only.
     For HA environments, see HA settings.
 
 ### Step 4: Set up Docker for your cluster nodes
@@ -134,9 +138,8 @@ Cluster nodes are the master, worker, proxy, and management nodes. See, [Archite
 
 For IBM Cloud Private only: If you had specified the offline_pkg_copy_path parameter in the config.yaml file. In the deployment command, add the -e ANSIBLE_REMOTE_TEMP=<offline_pkg_copy_path> option, where <offline_pkg_copy_path> is the value of the offline_pkg_copy_path parameter that you set in the config.yaml file.
 
-By default, the command to deploy your environment is set to deploy 15 nodes at a time. If your cluster has more than 15 nodes, the deployment might take a longer time to finish. If you want to speed up the deployment, you can specify a higher number of nodes to be deployed at a time. Use the argument -f <number of nodes to deploy> with the command.
-
-    To deploy your environment:
+By default, the command to deploy your environment is set to deploy 15 nodes at a time. If your cluster has more than 15 nodes, the deployment might take a longer time to finish. If you want to speed up the deployment, you can specify a higher number of nodes to be deployed at a time. Use the argument -f \<number of nodes to deploy\> with the command.
+To deploy your environment:
 
     For Linux® 64-bit, run this command:
     ```
