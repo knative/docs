@@ -75,15 +75,15 @@ The boot node is the node that is used for installation of your cluster. The boo
 
     > Note: For IBM Cloud Private: Worker nodes can support mixed architectures. You can add worker nodes into a single cluster that run on Linux® 64-bit, Linux® on Power® (ppc64le) and IBM® Z platforms.
   
-  For IBM Cloud Private-CE: Worker and proxy nodes can support mixed architectures. You do not need to download or pull any platform specific packages to set up a mixed architecture worker or proxy environment for IBM Cloud Private-CE. To add worker or proxy nodes into a cluster that contains Linux® 64-bit, Linux® on Power® (ppc64le) and IBM® Z platforms, you need to add the IP address of these nodes to the /<installation_directory>/cluster/hosts file only.
+   For IBM Cloud Private-CE: Worker and proxy nodes can support mixed architectures. You do not need to download or pull any platform specific packages to set up a mixed architecture worker or proxy environment for IBM Cloud Private-CE. To add worker or proxy nodes into a cluster that contains Linux® 64-bit, Linux® on Power® (ppc64le) and IBM® Z platforms, you need to add the IP address of these nodes to the /<installation_directory>/cluster/hosts file only.
 
 9. If you use SSH keys to secure your cluster, in the /<installation_directory>/cluster folder, replace the ssh_key file with the private key file that is used to communicate with the other cluster nodes. See [Sharing SSH keys among cluster nodes](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/installing/ssh_keys.html). Run this command:
 
-  ```
-  sudo cp ~/.ssh/id_rsa ./cluster/ssh_key
-  ```
+   ```
+   sudo cp ~/.ssh/id_rsa ./cluster/ssh_key
+   ```
   
-  In this example, ~/.ssh/id_rsa is the location and name of the private key file.
+   In this example, ~/.ssh/id_rsa is the location and name of the private key file.
 
 10. For IBM Cloud Private only: Move the image files for your cluster to the /<installation_directory>/cluster/images folder.
 
@@ -142,13 +142,17 @@ Cluster nodes are the master, worker, proxy, and management nodes. See, [Archite
 
    For Linux® 64-bit, run this command:
 
+    ```
     sudo docker run --net=host -t -e LICENSE=accept \
     -v "$(pwd)":/installer/cluster ibmcom/icp-inception-amd64:3.1.1-ee install
-    
+    ```
+
    For Linux® on Power® (ppc64le), run this command:
 
+    ```
     sudo docker run --net=host -t -e LICENSE=accept \
     -v "$(pwd)":/installer/cluster ibmcom/icp-inception-ppc64le:3.1.1-ee install
+    ```
 
 ## Installing Istio
 
