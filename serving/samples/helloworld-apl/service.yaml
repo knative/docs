@@ -15,7 +15,3 @@ spec:
               value: "APL Sample v1"
             - name: FUNC_HANDLER
               value: "halloWorld"
-            - name: FUNC_PORT
-              value: "8080"
-            - name: FUNC_TIMEOUT
-              value: "300"
