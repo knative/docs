@@ -14,4 +14,4 @@ spec:
             - name: TARGET
               value: "APL Sample v1"
             - name: FUNC_HANDLER
-              value: "halloWorld"
+              value: "helloWorld"
