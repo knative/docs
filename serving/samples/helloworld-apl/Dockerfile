@@ -20,4 +20,4 @@ ENV PORT 8080
 EXPOSE $PORT
 
 # Run the web service on container startup.
-CMD ["sh","init.sh"]
+CMD ./init.sh
