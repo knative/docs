@@ -7,6 +7,7 @@ RUN git clone https://github.com/mvranic/JSONServer.git /JSONServer # Markos JSO
 
 ENV APP_HOME /apphome
 COPY . $APP_HOME
+RUN chmod -R 777 $APP_HOME
 RUN find $APP_HOME -type f  \( -name '*.sh' -o -name '*.apl' -o -name '*.dyalog' \) -print0 | xargs -0 dos2unix
 WORKDIR $APP_HOME
 
