@@ -22,9 +22,7 @@
  nr←⍬
  nr,←⊂' res←',wrrapername,' arg'
  nr,←⊂' ⍝ Handler wrapper.'
- ⍝ nr,←⊂' ⎕←''Start execution handler wrapper for "',fnname,'".'''
  nr,←⊂' res←(⍎''',fnname,''')arg'
- ⍝ nr,←⊂' ⎕←''Finished execution handler wrapper for "',fnname,'".'''
  _log¨nr
  (⊂nr)⎕NPUT folder,'/',wrrapername,'.dyalog'
 
