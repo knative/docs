@@ -8,9 +8,8 @@ RUN git clone https://github.com/mvranic/JSONServer.git /JSONServer # Markos JSO
 
 ENV APP_HOME /apphome
 COPY . $APP_HOME
-#RUN echo "AppHome is $APP_HOME"
-#RUN chmod -R 777 $APP_HOME
-RUN find $APP_HOME -type f  \( -name '*.sh' -o -name '*.apl' -o -name '*.dyalog' \) -print0 | xargs -0 dos2unix
+RUN find $APP_HOME -type f -iname "*.sh" -exec chmod +x {} \;
+RUN find $APP_HOME -type f  \( -iname '*.sh' -o -iname '*.apl' -o -iname '*.dyalog' \) -print0 | xargs -0 dos2unix
 ## Temporary Dyalog APL files.
 #RUN mkdir /.dyalog
 #RUN chmod -R 777 /.dyalog
