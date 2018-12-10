@@ -31,6 +31,10 @@ Knative components on the following platforms:
 * [Knative Install on OpenShift](Knative-with-OpenShift.md)
 * [Knative Install on Minishift](Knative-with-Minishift.md)
 * [Knative Install on Pivotal Container Service](Knative-with-PKS.md)
+<<<<<<< HEAD
+=======
+
+>>>>>>> update doc according to the review comments
 
 If you already have a Kubernetes cluster you're comfortable installing _alpha_
 software on, use the following instructions:
