@@ -10,4 +10,4 @@ Docker image can be tested with:
 docker run -it -p 8080:8080 --rm --env FUNC_HANDLER=helloWorld --env TARGET=FromAPL  simple-apl:0.1
 ````
 
-Then use curl example from [Build and deploy this sample](README.md).
+Then use curl example from [Hello World - APL sample](README.md).
