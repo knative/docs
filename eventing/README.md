@@ -1,23 +1,30 @@
 # Knative Eventing
 
-Knative Eventing is a system that is designed to address a common need for cloud native development and 
-provides composable primitives to enable late-binding event sources and event consumers.
+Knative Eventing is a system that is designed to address a common need for cloud
+native development and provides composable primitives to enable late-binding
+event sources and event consumers.
 
 ## Design overview
 
 Knative Eventing is designed around the following goals:
 
-1. Knative Eventing services are loosely coupled. These services can be developed and deployed independently on,
-   and across a variety of platforms (for example Kubernetes, VMs, SaaS or FaaS).
-1. Event producers and event sources are independent. Any producer (or source), can generate events 
-   before there are active event consumers that are listening. Any event consumer can express interest in an 
-   event or class of events, before there are producers that are creating those events.
-1. Other services can be connected to the Eventing system. These services can perform the following functions:
-   - Create new applications without modifying the event producer or event consumer. 
+1. Knative Eventing services are loosely coupled. These services can be
+   developed and deployed independently on, and across a variety of platforms
+   (for example Kubernetes, VMs, SaaS or FaaS).
+1. Event producers and event sources are independent. Any producer (or source),
+   can generate events before there are active event consumers that are
+   listening. Any event consumer can express interest in an event or class of
+   events, before there are producers that are creating those events.
+1. Other services can be connected to the Eventing system. These services can
+   perform the following functions:
+   - Create new applications without modifying the event producer or event
+     consumer.
    - Select and target specific subsets of the events from their producers.
-1. Ensure cross-service interoperability. Knative Eventing is consistent with the 
+1. Ensure cross-service interoperability. Knative Eventing is consistent with
+   the
    [CloudEvents](https://github.com/cloudevents/spec/blob/master/spec.md#design-goals)
-   specification that is developed by the [CNCF Serverless WG](https://lists.cncf.io/g/cncf-wg-serverless).
+   specification that is developed by the
+   [CNCF Serverless WG](https://lists.cncf.io/g/cncf-wg-serverless).
 
 ### Event consumers
 
@@ -54,26 +61,22 @@ The focus for the next Eventing release will be to enable easy implementation of
 event sources. Sources manage registration and delivery of events from external
 systems using Kubernetes
 [Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
-Learn more about Eventing development in the [Eventing work group](https://github.com/knative/docs/blob/master/community/WORKING-GROUPS.md#events).
+Learn more about Eventing development in the
+[Eventing work group](https://github.com/knative/docs/blob/master/community/WORKING-GROUPS.md#events).
 
 ## Installation
 
 Knative Eventing currently requires Knative Serving and Istio version 1.0 or
-later installed. Use this command to install the version of Istio which is
-tested with Knative:
+later installed.
+[Follow the instructions to install on the platform of your choice](../install/README.md).
 
-```shell
-kubectl apply --filename https://raw.githubusercontent.com/knative/serving/v0.2.2/third_party/istio-1.0.2/istio.yaml
-kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.2/release.yaml
-```
-
-You can install the core Knative Eventing (which provides an in-memory
+Install the core Knative Eventing (which provides an in-memory
 ChannelProvisioner) and the core sources (which provides the Kubernetes Events,
 GitHub, and "Container" Sources) with the following commands:
 
 ```bash
-kubectl apply --filename https://github.com/knative/eventing/releases/download/v0.2.0/release.yaml
-kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.2.0/release.yaml
+kubectl apply --filename https://github.com/knative/eventing/releases/download/v0.2.1/release.yaml
+kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.2.1/release.yaml
 ```
 
 In addition to the core sources, you can also use GCP PubSub as a source by
@@ -83,7 +86,7 @@ the above sources, and adds GCP PubSub, which requires the listed secret):
 
 ```bash
 kubectl --namespace knative-sources create secret generic gcppubsub-source-key --from-literal=key.json=''
-kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.2.0/release-with-gcppubsub.yaml
+kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.2.1/release-with-gcppubsub.yaml
 ```
 
 This document will be updated as additional sources (which are custom resource

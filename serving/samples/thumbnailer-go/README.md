@@ -7,17 +7,18 @@ generates its thumbnail image using the `ffmpeg` framework.
 
 ## Before you begin
 
-* [Install Knative Serving](../../../install/README.md)
+- [Install Knative Serving](../../../install/README.md)
 
 If you want to test and run the app locally:
-* [Install Go](https://golang.org/doc/install)
-* [Download `ffmpeg`](https://www.ffmpeg.org/download.html)
+
+- [Install Go](https://golang.org/doc/install)
+- [Download `ffmpeg`](https://www.ffmpeg.org/download.html)
 
 ## Sample code
 
 In this demo we are going to use a simple `golang` REST app called
-[rester-tester](https://github.com/mchmarny/rester-tester). It's important
-to point out that this application doesn't use any special Knative Serving
+[rester-tester](https://github.com/mchmarny/rester-tester). It's important to
+point out that this application doesn't use any special Knative Serving
 components, nor does it have any Knative Serving SDK dependencies.
 
 ### Cloning the sample code
@@ -29,8 +30,8 @@ git clone git@github.com:mchmarny/rester-tester.git
 cd rester-tester
 ```
 
-The `rester-tester` application uses [godep](https://github.com/tools/godep)
-to manage its own dependencies. Download `godep` and restore the app dependencies:
+The `rester-tester` application uses [godep](https://github.com/tools/godep) to
+manage its own dependencies. Download `godep` and restore the app dependencies:
 
 ```
 go get github.com/tools/godep
@@ -60,8 +61,8 @@ go build
 
 **Docker**
 
-When running the application locally using Docker, you do not need to install `ffmpeg`;
-Docker will install it for you 'inside' of the Docker image.
+When running the application locally using Docker, you do not need to install
+`ffmpeg`; Docker will install it for you 'inside' of the Docker image.
 
 To run the app:
 
@@ -81,13 +82,13 @@ curl -X POST -H "Content-Type: application/json" http://localhost:8080/image \
 
 ## Deploying the app to Knative
 
-From this point, you can either deploy a prebuilt image of the app, or build
-the app locally and then deploy it.
+From this point, you can either deploy a prebuilt image of the app, or build the
+app locally and then deploy it.
 
 ### Deploying a prebuilt image
 
-You can deploy a prebuilt image of the `rester-tester` app to Knative Serving using
-`kubectl` and the included `sample-prebuilt.yaml` file:
+You can deploy a prebuilt image of the `rester-tester` app to Knative Serving
+using `kubectl` and the included `sample-prebuilt.yaml` file:
 
 ```
 # From inside the thumbnailer-go directory
@@ -96,9 +97,9 @@ kubectl apply --filename sample-prebuilt.yaml
 
 ### Building and deploying a version of the app
 
-If you want to build the image yourself, follow these instructions. This sample uses the
-[Kaniko build
-template](https://github.com/knative/build-templates/blob/master/kaniko/kaniko.yaml)
+If you want to build the image yourself, follow these instructions. This sample
+uses the
+[Kaniko build template](https://github.com/knative/build-templates/blob/master/kaniko/kaniko.yaml)
 from the [build-templates](https://github.com/knative/build-templates/) repo.
 
 ```shell
@@ -114,8 +115,8 @@ kubectl apply --filename https://raw.githubusercontent.com/knative/build-templat
 kubectl apply --filename sample.yaml
 ```
 
-
-Now, if you look at the `status` of the revision, you will see that a build is in progress:
+Now, if you look at the `status` of the revision, you will see that a build is
+in progress:
 
 ```shell
 $ kubectl get revisions --output yaml
@@ -134,11 +135,11 @@ items:
 
 Once `BuildComplete` has a `status: "True"`, the revision will be deployed.
 
-
 ## Using the app
 
-To confirm that the app deployed, you can check for the Knative Serving service using `kubectl`.
-First, is there an ingress service, and does it have an `EXTERNAL-IP`:
+To confirm that the app deployed, you can check for the Knative Serving service
+using `kubectl`. First, is there an ingress service, and does it have an
+`EXTERNAL-IP`:
 
 ```
 kubectl get svc knative-ingressgateway --namespace istio-system
@@ -148,16 +149,16 @@ knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380
 
 > Note: It can take a few seconds for the service to show an `EXTERNAL-IP`.
 
-The newly deployed app may take few seconds to initialize. You can check its status
-by entering the following command:
+The newly deployed app may take few seconds to initialize. You can check its
+status by entering the following command:
 
 ```
 kubectl --namespace default get pods
 ```
 
-The Knative Serving ingress service will automatically be assigned an external IP,
-so let's capture the IP and Host URL in variables so that we can use them
-in `curl` commands:
+The Knative Serving ingress service will automatically be assigned an external
+IP, so let's capture the IP and Host URL in variables so that we can use them in
+`curl` commands:
 
 ```
 # Put the Host URL into an environment variable.
@@ -204,5 +205,5 @@ curl -H "Host: $SERVICE_HOST" \
 ## Final Thoughts
 
 Although this demo uses an external application, the Knative Serving deployment
-steps would be similar for any 'dockerized' app you may already have.
-Just copy the `sample.yaml` and change a few variables.
+steps would be similar for any 'dockerized' app you may already have. Just copy
+the `sample.yaml` and change a few variables.

@@ -4,21 +4,21 @@ This document describes the set of roles individuals may have within the Knative
 community, the requirements of each role, and the privileges that each role
 grants.
 
-*   [Role Summary](#role-summary)
-*   [Collaborator](#collaborator)
-*   [Member](#member)
-*   [Approver](#approver)
-*   [Lead](#lead)
-*   [Administrator](#administrator)
+- [Role Summary](#role-summary)
+- [Collaborator](#collaborator)
+- [Member](#member)
+- [Approver](#approver)
+- [Lead](#lead)
+- [Administrator](#administrator)
 
 ## Role Summary
 
 The following table lists the roles we use within the Knative community. The
 table describes:
 
-*   General responsibilities expected by individuals in each role
-*   Requirements necessary to join or stay in a given role
-*   How the role manifests in terms of permissions and privileges.
+- General responsibilities expected by individuals in each role
+- Requirements necessary to join or stay in a given role
+- How the role manifests in terms of permissions and privileges.
 
 <table>
   <thead>
@@ -106,18 +106,18 @@ table describes:
 
 Individuals may be added as an outside collaborator (with READ access) to a repo
 in the Knative GitHub organization without becoming a member. This role allows
-them to be assigned issues and PRs until they become a member, but will not allow
-tests to be run against their PRs automatically nor allow them to interact with
-the PR bot.
+them to be assigned issues and PRs until they become a member, but will not
+allow tests to be run against their PRs automatically nor allow them to interact
+with the PR bot.
 
 ### Requirements
 
-*   Working on some contribution to the project that would benefit from the
-    ability to have PRs or Issues to be assigned to the contributor
+- Working on some contribution to the project that would benefit from the
+  ability to have PRs or Issues to be assigned to the contributor
 
-*   Join [knative-users@](https://groups.google.com/forum/#!forum/knative-users)
-    unrestricted join permissions; this grants read access to documents in the
-    Team Drive
+- Join [knative-users@](https://groups.google.com/forum/#!forum/knative-users)
+  unrestricted join permissions; this grants read access to documents in the
+  Team Drive
 
 ## Member
 
@@ -139,36 +139,36 @@ this is not a requirement.
 
 ### Requirements
 
-*   Has made multiple contributions to the project or community. Contributions
-    may include, but are not limited to:
+- Has made multiple contributions to the project or community. Contributions may
+  include, but are not limited to:
 
-    *   Authoring or reviewing PRs on GitHub
+  - Authoring or reviewing PRs on GitHub
 
-    *   Filing or commenting on issues on GitHub
+  - Filing or commenting on issues on GitHub
 
-    *   Contributing to working group or community discussions
+  - Contributing to working group or community discussions
 
-*   Subscribed to
-    [knative-dev@googlegroups.com](https://groups.google.com/forum/#!forum/knative-dev)
+- Subscribed to
+  [knative-dev@googlegroups.com](https://groups.google.com/forum/#!forum/knative-dev)
 
-*   Actively contributing to 1 or more areas.
+- Actively contributing to 1 or more areas.
 
-*   Sponsored by 1 approver.
+- Sponsored by 1 approver.
 
-    *   Done by adding GitHub user to Knative organization
+  - Done by adding GitHub user to Knative organization
 
 ### Responsibilities and privileges
 
-*   Responsive to issues and PRs assigned to them
+- Responsive to issues and PRs assigned to them
 
-*   Active owner of code they have contributed (unless ownership is explicitly
-    transferred)
+- Active owner of code they have contributed (unless ownership is explicitly
+  transferred)
 
-    *   Code is well tested
+  - Code is well tested
 
-    *   Tests consistently pass
+  - Tests consistently pass
 
-    *   Addresses bugs or issues discovered after code is accepted
+  - Addresses bugs or issues discovered after code is accepted
 
 Members who frequently contribute code are expected to proactively perform code
 reviews and work towards becoming an approver for the area that they are active
@@ -188,40 +188,39 @@ status is scoped to a part of the codebase.
 The following apply to the part of the codebase for which one would be an
 approver in an OWNERS file:
 
-*   Reviewer of the codebase for at least 3 months or 50% of project lifetime,
-    whichever is shorter
+- Reviewer of the codebase for at least 3 months or 50% of project lifetime,
+  whichever is shorter
 
-*   Primary reviewer for at least 10 substantial PRs to the codebase
+- Primary reviewer for at least 10 substantial PRs to the codebase
 
-*   Reviewed or merged at least 30 PRs to the codebase
+- Reviewed or merged at least 30 PRs to the codebase
 
-*   Nominated by an area lead
+- Nominated by an area lead
 
-    *   With no objections from other leads
+  - With no objections from other leads
 
-    *   Done through PR to update an OWNERS file
+  - Done through PR to update an OWNERS file
 
 ### Responsibilities and privileges
 
 The following apply to the part of the codebase for which one would be an
 approver in an OWNERS file:
 
-*   Approver status may be a precondition to accepting large code contributions
+- Approver status may be a precondition to accepting large code contributions
 
-*   Demonstrate sound technical judgement
+- Demonstrate sound technical judgement
 
-*   Responsible for project quality control via [code reviews](REVIEWING.md)
+- Responsible for project quality control via [code reviews](REVIEWING.md)
 
-    *   Focus on holistic acceptance of contribution such as dependencies with
-        other features, backward / forward compatibility, API and flag
-        definitions, etc
+  - Focus on holistic acceptance of contribution such as dependencies with other
+    features, backward / forward compatibility, API and flag definitions, etc
 
-*   Expected to be responsive to review requests as per [community
-    expectations](REVIEWING.md)
+- Expected to be responsive to review requests as per
+  [community expectations](REVIEWING.md)
 
-*   Mentor members and contributors
+- Mentor members and contributors
 
-*   May approve code contributions for acceptance
+- May approve code contributions for acceptance
 
 ## Lead
 
@@ -233,53 +232,53 @@ and approve design decisions for their area of ownership.
 
 Getting to be a lead of an existing working group:
 
-*   Recognized as having expertise in the group’s subject matter
+- Recognized as having expertise in the group’s subject matter
 
-*   Approver for some part of the codebase for at least 3 months
+- Approver for some part of the codebase for at least 3 months
 
-*   Member for at least 1 year or 50% of project lifetime, whichever is shorter
+- Member for at least 1 year or 50% of project lifetime, whichever is shorter
 
-*   Primary reviewer for 20 substantial PRs
+- Primary reviewer for 20 substantial PRs
 
-*   Reviewed or merged at least 50 PRs
+- Reviewed or merged at least 50 PRs
 
-*   Sponsored by the technical oversight committee
+- Sponsored by the technical oversight committee
 
 Additional requirements for leads of a new working group:
 
-*   Originally authored or contributed major functionality to the group's area
+- Originally authored or contributed major functionality to the group's area
 
-*   An approver in the OWNERS file for the group’s code
+- An approver in the OWNERS file for the group’s code
 
 ### Responsibilities and privileges
 
 The following apply to the area / component for which one would be an owner.
 
-*   Run their working group as explained in the [Working Group
-    Processes](WORKING-GROUP-PROCESSES.md).
+- Run their working group as explained in the
+  [Working Group Processes](WORKING-GROUP-PROCESSES.md).
 
-*   Design/proposal approval authority over the area / component, though
-    escalation to the technical oversight committee is possible.
+- Design/proposal approval authority over the area / component, though
+  escalation to the technical oversight committee is possible.
 
-*   Perform issue triage on GitHub.
+- Perform issue triage on GitHub.
 
-*   Apply/remove/create/delete GitHub labels and milestones
+- Apply/remove/create/delete GitHub labels and milestones
 
-*   Write access to repo (assign issues/PRs, add/remove labels and milestones,
-    edit issues and PRs, edit wiki, create/delete labels and milestones)
+- Write access to repo (assign issues/PRs, add/remove labels and milestones,
+  edit issues and PRs, edit wiki, create/delete labels and milestones)
 
-*   Capable of directly applying lgtm + approve labels for any PR
+- Capable of directly applying lgtm + approve labels for any PR
 
-    *   Expected to respect OWNERS files approvals and use [standard
-        procedure for merging code](REVIEWING.md#merging-prs).
+  - Expected to respect OWNERS files approvals and use
+    [standard procedure for merging code](REVIEWING.md#merging-prs).
 
-*   Expected to work to holistically maintain the health of the project through:
+- Expected to work to holistically maintain the health of the project through:
 
-    *   Reviewing PRs
+  - Reviewing PRs
 
-    *   Fixing bugs
+  - Fixing bugs
 
-    *   Mentoring and guiding approvers, members, and contributors
+  - Mentoring and guiding approvers, members, and contributors
 
 ## Administrator
 
@@ -287,21 +286,21 @@ Administrators are responsible for the bureaucratic aspects of the project.
 
 ### Requirements
 
-*   Assigned by technical oversight committee.
+- Assigned by technical oversight committee.
 
 ### Responsibilities and privileges
 
-*   Manage the Knative GitHub repo, including granting membership and
-    controlling repo read/write permissions
+- Manage the Knative GitHub repo, including granting membership and controlling
+  repo read/write permissions
 
-*   Manage the Knative Slack team
+- Manage the Knative Slack team
 
-*   Manage the Knative Google group forum
+- Manage the Knative Google group forum
 
-*   Manage any additional Knative technical collaboration assets
+- Manage any additional Knative technical collaboration assets
 
-*   Expected to be responsive to membership and permission change requests
-    <!-- TODO SLA for admin response -->
+- Expected to be responsive to membership and permission change requests
+  <!-- TODO SLA for admin response -->
 
 <!-- * TODO Manage the Google Search Console settings for knative.dev -->
 

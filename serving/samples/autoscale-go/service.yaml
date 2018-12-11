@@ -22,4 +22,4 @@ spec:
       revisionTemplate:
         spec:
           container:
-            image: github.com/knative/docs/serving/samples/autoscale-go
+            image: gcr.io/knative-samples/autoscale-go:0.1

@@ -1,22 +1,23 @@
 # Hello World - Elixir Sample
 
 A simple web application written in [Elixir](https://elixir-lang.org/) using the
-[Phoenix Framework](https://phoenixframework.org/).
-The application prints all environment variables to the main page.
+[Phoenix Framework](https://phoenixframework.org/). The application prints all
+environment variables to the main page.
 
 # Set up Elixir and Phoenix Locally
 
-Following the [Phoenix Installation Guide](https://hexdocs.pm/phoenix/installation.html)
-is the best way to get your computer set up for developing,
-building, running, and packaging Elixir Web applications.
+Following the
+[Phoenix Installation Guide](https://hexdocs.pm/phoenix/installation.html) is
+the best way to get your computer set up for developing, building, running, and
+packaging Elixir Web applications.
 
 # Running Locally
 
 To start your Phoenix server:
 
-  * Install dependencies with `mix deps.get`
-  * Install Node.js dependencies with `cd assets && npm install`
-  * Start Phoenix endpoint with `mix phx.server`
+- Install dependencies with `mix deps.get`
+- Install Node.js dependencies with `cd assets && npm install`
+- Start Phoenix endpoint with `mix phx.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
@@ -24,17 +25,17 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 1. Generate a new project.
 
-  ```shell
-  mix phoenix.new helloelixir
-  ```
+```shell
+mix phoenix.new helloelixir
+```
 
-  When asked, if you want to `Fetch and install dependencies? [Yn]` select `y`
+When asked, if you want to `Fetch and install dependencies? [Yn]` select `y`
 
-1. Follow the direction in the output to change directories into
-   start your local server with `mix phoenix.server`
+1. Follow the direction in the output to change directories into start your
+   local server with `mix phoenix.server`
 
-1. In the new directory, create a new Dockerfile for packaging
-   your application for deployment
+1. In the new directory, create a new Dockerfile for packaging your application
+   for deployment
 
    ```docker
    # Start from a base image for elixir
@@ -91,9 +92,9 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
    CMD ["/opt/app/bin/start_server", "foreground", "boot_var=/tmp"]
    ```
 
-1. Create a new file, `service.yaml` and copy the following Service
-   definition into the file. Make sure to replace `{username}` with
-   your Docker Hub username.
+1. Create a new file, `service.yaml` and copy the following Service definition
+   into the file. Make sure to replace `{username}` with your Docker Hub
+   username.
 
    ```yaml
    apiVersion: serving.knative.dev/v1alpha1
@@ -109,66 +110,73 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
              container:
                image: docker.io/{username}/helloworld-elixir
                env:
-               - name: TARGET
-                 value: "elixir Sample v1"
-    ```
+                 - name: TARGET
+                   value: "elixir Sample v1"
+   ```
 
 # Building and deploying the sample
 
-The sample in this directory is ready to build and deploy without changes.
-You can deploy the sample as is, or use you created version following the
-directions above.
+The sample in this directory is ready to build and deploy without changes. You
+can deploy the sample as is, or use you created version following the directions
+above.
 
-1. Generate a new `secret_key_base` in the `config/prod.secret.exs` file.
-   Phoenix applications use a secrets file on production deployments and, by
-   default, that file is not checked into source control. We have provides
-   shell of an example on `config/prod.secret.exs.sample` and you can use the
-   following command to generate a new prod secrets file.
+1.  Generate a new `secret_key_base` in the `config/prod.secret.exs` file.
+    Phoenix applications use a secrets file on production deployments and, by
+    default, that file is not checked into source control. We have provides
+    shell of an example on `config/prod.secret.exs.sample` and you can use the
+    following command to generate a new prod secrets file.
 
-   ```shell
-   SECRET_KEY_BASE=$(elixir -e ":crypto.strong_rand_bytes(48) |> Base.encode64 |> IO.puts")
-   sed "s|SECRET+KEY+BASE|$SECRET_KEY_BASE|" config/prod.secret.exs.sample >config/prod.secret.exs
-   ```
-
-1. Use Docker to build the sample code into a container. To build and push
-   with Docker Hub, run these commands replacing `{username}` with your Docker
-   Hub username:
-
-   ```shell
-    # Build the container on your local machine
-    docker build -t {username}/helloworld-elixir .
-
-    # Push the container to docker registry
-    docker push {username}/helloworld-elixir
+    ```shell
+    SECRET_KEY_BASE=$(elixir -e ":crypto.strong_rand_bytes(48) |> Base.encode64 |> IO.puts")
+    sed "s|SECRET+KEY+BASE|$SECRET_KEY_BASE|" config/prod.secret.exs.sample >config/prod.secret.exs
     ```
 
-1. After the build has completed and the container is pushed to docker hub, you
-   can deploy the app into your cluster. Ensure that the container image value
-   in `service.yaml` matches the container you built in
-   the previous step. Apply the configuration using `kubectl`:
+1.  Use Docker to build the sample code into a container. To build and push with
+    Docker Hub, run these commands replacing `{username}` with your Docker Hub
+    username:
+
+    ```shell
+     # Build the container on your local machine
+     docker build -t {username}/helloworld-elixir .
+
+     # Push the container to docker registry
+     docker push {username}/helloworld-elixir
+    ```
+
+1.  After the build has completed and the container is pushed to docker hub, you
+    can deploy the app into your cluster. Ensure that the container image value
+    in `service.yaml` matches the container you built in the previous step.
+    Apply the configuration using `kubectl`:
 
     ```shell
     kubectl apply --filename service.yaml
     ```
 
-1. Now that your service is created, Knative will perform the following steps:
-   * Create a new immutable revision for this version of the app.
-   * Network programming to create a route, ingress, service, and load balance for your app.
-   * Automatically scale your pods up and down (including to zero active pods).
+1.  Now that your service is created, Knative will perform the following steps:
 
-1. To find the IP address for your service, use
-   `kubectl get svc knative-ingressgateway --namespace istio-system` to get the ingress IP for your
-   cluster. If your cluster is new, it may take sometime for the service to get asssigned
-   an external IP address.
+    - Create a new immutable revision for this version of the app.
+    - Network programming to create a route, ingress, service, and load balance
+      for your app.
+    - Automatically scale your pods up and down (including to zero active pods).
+
+1.  To find the IP address for your service, use
+    `kubectl get svc knative-ingressgateway --namespace istio-system` to get the
+    ingress IP for your cluster. If your cluster is new, it may take sometime
+    for the service to get asssigned an external IP address.
+
+        ```
+        kubectl get svc knative-ingressgateway --namespace istio-system
+
+        NAME                     TYPE           CLUSTER-IP      EXTERNAL-IP     PORT(S)                                      AGE
+
+    knative-ingressgateway LoadBalancer 10.35.254.218 35.225.171.32
+    80:32380/TCP,443:32390/TCP,32400:32400/TCP 1h
 
     ```
-    kubectl get svc knative-ingressgateway --namespace istio-system
 
-    NAME                     TYPE           CLUSTER-IP      EXTERNAL-IP     PORT(S)                                      AGE
-knative-ingressgateway   LoadBalancer   10.35.254.218   35.225.171.32   80:32380/TCP,443:32390/TCP,32400:32400/TCP   1h
     ```
 
-1. To find the URL for your service, use
+1.  To find the URL for your service, use
 
     ```
     kubectl get ksvc helloworld-elixir --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
@@ -177,31 +185,32 @@ knative-ingressgateway   LoadBalancer   10.35.254.218   35.225.171.32   80:32380
     helloworld-elixir   helloworld-elixir.default.example.com
     ```
 
-1. Now you can make a request to your app to see the results. Replace
-   `{IP_ADDRESS}` with the address you see returned in the previous step.
+1.  Now you can make a request to your app to see the results. Replace
+    `{IP_ADDRESS}` with the address you see returned in the previous step.
 
-    ```shell
-    curl -H "Host: helloworld-elixir.default.example.com" http://{IP_ADDRESS}
+        ```shell
+        curl -H "Host: helloworld-elixir.default.example.com" http://{IP_ADDRESS}
 
-    ...
-    # HTML from your application is returned.
+        ...
+        # HTML from your application is returned.
+        ```
+
+    Here is the HTML returned from our deployed sample application:
+
+    ```HTML
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+     <meta charset="utf-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+     <meta name="description" content="">
+     <meta name="author" content="">
+
+     <title>Hello Knative</title>
+     <link rel="stylesheet" type="text/css" href="/css/app-833cc7e8eeed7a7953c5a02e28130dbd.css?vsn=d">
+    </head>
     ```
-
-   Here is the HTML returned from our deployed sample application:
-
-   ```HTML
-   <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Hello Knative</title>
-    <link rel="stylesheet" type="text/css" href="/css/app-833cc7e8eeed7a7953c5a02e28130dbd.css?vsn=d">
-  </head>
 
   <body>
     <div class="container">
@@ -215,6 +224,7 @@ knative-ingressgateway   LoadBalancer   10.35.254.218   35.225.171.32   80:32380
       <p class="alert alert-danger" role="alert"></p>
 
       <main role="main">
+
 <div class="jumbotron">
   <h2>Welcome to Knative and Elixir</h2>
 
@@ -291,6 +301,7 @@ knative-ingressgateway   LoadBalancer   10.35.254.218   35.225.171.32   80:32380
 
     </div> <!-- /container -->
     <script src="/js/app-930ab1950e10d7b5ab5083423c28f06e.js?vsn=d"></script>
+
   </body>
 </html>
    ```

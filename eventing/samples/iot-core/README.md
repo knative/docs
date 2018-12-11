@@ -73,9 +73,9 @@ export IOTCORE_TOPIC_DEVICE="iot-demo-device-pubsub-topic"
 1.  Install the
     [in-memory `ClusterChannelProvisioner`](https://github.com/knative/eventing/tree/master/config/provisioners/in-memory-channel).
 
-    -   Note that you can skip this if you choose to use a different type of
-        `Channel`. If so, you will need to modify `channel.yaml` before
-        deploying it.
+    - Note that you can skip this if you choose to use a different type of
+      `Channel`. If so, you will need to modify `channel.yaml` before deploying
+      it.
 
 #### GCP PubSub Source
 
@@ -138,8 +138,8 @@ Even though the `Source` isn't completely ready yet, we can setup the
     ko apply -f -
     ```
 
-    -   This uses a very simple Knative Service to see that events are flowing.
-        Feel free to replace it.
+    - This uses a very simple Knative Service to see that events are flowing.
+      Feel free to replace it.
 
 #### IoT Core
 
