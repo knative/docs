@@ -61,7 +61,7 @@ events from your public repositories and to create webhooks for those
 repositories. Copy and save this token; GitHub will force you to
 generate it again if misplaced.
 
-Here's an example for a token named "GitHubSource Sample" with the the
+Here's an example for a token named "GitHubSource Sample" with the
 recommended scopes:
 
 ![GitHub UI](personal_access_token.png "GitHub personal access token screenshot")
