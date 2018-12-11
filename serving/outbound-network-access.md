@@ -25,8 +25,7 @@ The scope varies depending on your platform:
 - For IBM Cloud Kubernetes Service use
   `172.30.0.0/16,172.20.0.0/16,10.10.10.0/24`
 - For Azure Container Service (ACS) use `10.244.0.0/16,10.240.0.0/16`
-- For Pivotal Container Service (PKS) on GCP use
-  `10.200.0.0/16,10.100.200.0/24`
+- For Pivotal Container Service (PKS) on GCP use `10.200.0.0/16,10.100.200.0/24`
 - For Minikube use `10.0.0.1/24`
 
 ## Setting the IP scope
