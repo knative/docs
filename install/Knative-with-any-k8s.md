@@ -56,6 +56,7 @@ your Knative installation, see [Performing a Custom Knative Installation](Knativ
     ```bash
     kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.1/release.yaml /
     --filename https://github.com/knative/eventing/releases/download/v0.2.0/eventing.yaml /
+    --filename --filename https://github.com/knative/eventing-sources/releases/download/v0.2.0/release.yaml
     ```
 1. Monitor the Knative components until all of the components show a
    `STATUS` of `Running`:
@@ -67,15 +68,17 @@ your Knative installation, see [Performing a Custom Knative Installation](Knativ
     kubectl get pods --namespace knative-monitoring
     ```
 
-## Deploying an app
+## What's next
 
-Now that your cluster has Knative installed, you're ready to deploy an app.
+Now that your cluster has Knative installed, you can see what Knative has to
+offer.
 
-You have two options for deploying your first app:
+To deploy your first app with Knative, follow the step-by-step
+[Getting Started with Knative App Deployment](getting-started-knative-app.md)
+guide.
 
-- You can follow the step-by-step
-  [Getting Started with Knative App Deployment](getting-started-knative-app.md)
-  guide.
+To get started with Knative Eventing, pick one of the
+[Eventing Samples](../eventing/samples/) to walk through.
 
-- You can view the available [sample apps](../serving/samples/README.md) and
-  deploy one of your choosing.
+To get started with Knative Build, read the
+[Build README](../build/README.md), then choose a sample to walk through.

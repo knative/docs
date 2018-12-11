@@ -188,17 +188,20 @@ kind: ConfigMap
   namespace: knative-serving
 ```
 
-## Deploying an app
+## What's next
 
-Now that your cluster has Knative installed, you're ready to deploy an app.
+Now that your cluster has Knative installed, you can see what Knative has to
+offer.
 
-If you'd like to follow a step-by-step guide for deploying your first app on
-Knative, check out the
+To deploy your first app with Knative, follow the step-by-step
 [Getting Started with Knative App Deployment](getting-started-knative-app.md)
 guide.
 
-If you'd like to view the available sample apps and deploy one of your choosing,
-head to the [sample apps](../serving/samples/README.md) repo.
+To get started with Knative Eventing, pick one of the
+[Eventing Samples](../eventing/samples/) to walk through.
+
+To get started with Knative Build, read the
+[Build README](../build/README.md), then choose a sample to walk through.
 
 ## Cleaning up
 
