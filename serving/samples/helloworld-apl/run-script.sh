@@ -26,5 +26,5 @@ export TRACE_ON_ERROR=0
 export SESSION_FILE="${SESSION_FILE-$DYALOG/default.dse}"
 
 echo "Start up script at $@"
-
-$DYALOG/dyalog +s <$@ # Used +s as SALT is needed in JSON server to load files.
+# Used +s as SALT is needed in JSON server to load files.
+$DYALOG/dyalog +s <$@  # Add "<" to start APL script.
