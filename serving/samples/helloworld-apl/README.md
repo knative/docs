@@ -24,39 +24,207 @@ The following instructions recreate the source files from this folder.
     mkdir app
     cd app
     ````
-1. Create a file named `app.py` and copy the code block below into it:
+1. Create a new sub-directory for APL function and cd into it:
+
+    ````shell
+    mkdir aplcode
+    cd app
+    ````
+1. Create a file named `HelloWorld.dyalog` and copy the code block below into it:
 
     ```apl
-    res←halloWorld;empty;getenv;modename;_getenv;folder;aplfile;fnname;timeout;port;lx;server;nr
-    ⎕←'Start halloWorld fn.'
-    empty←0∊⍴
+    res←helloWorld arg;sink;target
+    ⎕←'Start helloWorld fn.'
+    ⎕←'arg:'arg
+    sink←arg
+ 
+    _getenv←{2 ⎕NQ'.' 'GetEnvironment'⍵}
+    target←_getenv'TARGET'
+
+    :If 0=⊃⍴target
+        target←'World'
+    :EndIf
+
+    res←'Hello ',target
+
+    ⎕←'End helloWorld fn.'
+    ```
+
+1. Create a new sub-directory APL webservice start-up code and cd into it:
+
+    ````shell
+    cd .. # cd back to app at app directory
+    mkdir init
+    cd init
+    ````
+
+1. Create a file named `init.apl` which is the  APL script started by APL intereter and copy the code block below into it:
+
+    ```apl
+    ⎕←'Starting knative APL runtime...'
+
     _getenv←{2 ⎕NQ'.' 'GetEnvironment'⍵}
 
-    target←_getenv'TARGET'
-    res←'Hallo world ',target
- 
-    ⎕←'Stop halloWorld fn.'
+    apphome←_getenv'APP_HOME'
+    ⎕←'APP_HOME:'apphome
+
+    sink←⎕FX⊃⎕NGET (apphome,'/init/StartJsonServer.apl')1
+    startJsonServer
+
+    ⎕←'Closing knative APL runtime.'
     ```
+
+1. Create a file named `StartJsonServer.apl` which starts JSNON server and copy the code block below into it:
+
+    ```apl
+    startJsonServer;_empty;_getenv;_log;apphome;fnname;folder;lx;nr;port;server;timeout
+    _empty←{0∊⍴⍵}
+    _getenv←{2 ⎕NQ'.' 'GetEnvironment'⍵}
+    _log←{⎕←⍵}
+    _log 'Start init. of JSON Server.'
+ 
+    apphome←_getenv'APP_HOME'
+    folder←apphome,'/aplcode'
+    _log'Folder with apl code:'folder
+
+    fnname←_getenv'FUNC_HANDLER'
+    _log'FUNC_HANDLER:'fnname
+    port←_getenv'PORT'
+    timeout←_getenv'FUNC_TIMEOUT'
+    _log'FUNC_TIMEOUT:'timeout
+    :If ∨/lx←_empty¨port timeout
+       (lx/(port timeout))←lx/'8080' '300'
+    :EndIf
+    port timeout←⍎¨port timeout
+    wrrapername←'HandlerWrapper'
+    _log'Making ',wrrapername,':'
+    nr←⍬
+    nr,←⊂' res←',wrrapername,' arg'
+    nr,←⊂' ⍝ Handler wrapper.'
+    nr,←⊂' res←(⍎''',fnname,''')arg'
+    _log¨nr
+    (⊂nr)⎕NPUT folder,'/',wrrapername,'.dyalog'
+
+    ⎕CY'/JSONServer/Distribution/JSONServer.dws'
+
+    server←⎕NEW #.JSONServer
+    server.Port←port
+    server.Timeout←timeout
+    server.CodeLocation←folder
+    server.Threaded←0
+    server.AllowHttpGet←1
+    server.Logging←1
+    server.Handler←wrrapername
+    server.HtmlInterface←0
+    server.AccessControlAllowOrigin←''
+    server.ContentType←'text/html; charset=utf-8' ⍝ or application/json; charset=utf-8
+
+    _log'JSONServer argumnets:'
+    _log'server.Port'server.Port
+    _log'server.Timeout'server.Timeout
+    _log'server.CodeLocation'server.CodeLocation
+    _log'server.Threaded'server.Threaded
+    _log'server.AllowHttpGet'server.AllowHttpGet
+    _log'server.Logging'server.Logging
+    _log'server.Handler'server.Handler
+    _log'server.HtmlInterface'server.HtmlInterface
+    _log'server.AccessControlAllowOrigin'server.AccessControlAllowOrigin
+    _log'server.ContentType'server.ContentType
+
+    _log'Starting server'
+
+    server.Start
+
+    _log'Stopped server'
+    ```
+
+1. Cd back to app at app directory:
+
+    ````shell
+    cd .. # cd back to app at app directory
+    ````
 
 1. Create a file named `Dockerfile` and copy the code block below into it.
    See [official Dyalog APL docker image](https://hub.docker.com/r/dyalog/dyalog/) for more details.
 
     ```docker 
-    ADD init /init
-    RUN find /init -type f -print0 | xargs -0 dos2unix
+    FROM dyalog/dyalog:17.1
+    # Adjusting Dyalog image:
+    # RRR: "run" is standard Linux folder!
+    RUN rm /run
+    # Entry point is not needed in Dyalog image.
+    ENTRYPOINT []
 
-    ADD run-script.sh /run-script.sh
-    RUN dos2unix /run-script.sh
+    # Install dos2unix and git:
+    RUN apt-get update
+    RUN apt-get install dos2unix && apt-get install --assume-yes git
 
-    ENV APP_HOME /aplcode
+    # Markos JSON Server with thread control:
+    RUN git clone https://github.com/mvranic/JSONServer.git /JSONServer 
+
+    # Coping APL code and startup shell scripts to image:
+    ENV APP_HOME /apphome
     COPY . $APP_HOME
-    RUN find /aplcode -type f  \( -name '*.apl' -o -name '*.dyalog' \) -print0 | xargs -0 dos2unix
+    # Change mode for shell scripts:
+    RUN find $APP_HOME -type f -iname "*.sh" -exec chmod +x {} \;
+    # Format the text files:
+    RUN find $APP_HOME -type f  \( -iname '*.sh' -o -iname '*.apl' -o -iname '*.dyalog' \) -print0 | xargs -0 dos2unix
+
+    # Standard knative settings:
     WORKDIR $APP_HOME
 
-    RUN git clone https://github.com/mvranic/JSONServer.git /JSONServer # Markos JSON Server with thread control.
+    # Configure and document the service HTTP port.
+    ENV PORT 8080
+    EXPOSE $PORT
 
-    ENTRYPOINT ["sh","/run-script.sh"]
+    # Run the web service on container startup.
+    CMD ./init.sh
     ```
+
+1. Create a new file `init.sh` shell script and which start `run-script.sh`.
+   ```bash
+    #!/bin/bash
+    echo "Starts Dyalog APL image run(-script).sh"
+
+    export CodeLocation=$APP_HOME/aplcode
+
+    # Start updated Dyalog (with APL script support) image startup shell script:
+    $APP_HOME/run-script.sh $APP_HOME/init/init.apl
+   ```
+
+1. Create a new file `run-script.sh`.
+   ```bash
+   #!/bin/bash
+
+   ## This file replaces the Dyalog mapl script
+   echo " _______     __      _      ____   _____ "
+   echo "|  __ \ \   / //\   | |    / __ \ / ____|"
+   echo "|_|  | \ \_/ //  \  | |   | |  | | |     "
+   echo "     | |\   // /\ \ | |   | |  | | |   _ "
+   echo " ____| | | |/ /  \ \| |___| |__| | |__| |"
+   echo "|_____/  |_/_/    \_\______\____/ \_____|"
+   echo ""
+   echo "https://www.dyalog.com"
+   echo ""
+   echo "*************************************************************************************"
+   echo "*               This software is for non-commercial evaluation ONLY                 *"
+   echo "* https://www.dyalog.com/uploads/documents/Private_Personal_Educational_Licence.pdf *"
+   echo "*************************************************************************************"
+   echo ""
+
+   export MAXWS=${MAXWS-256M}
+
+   export DYALOG=/opt/mdyalog/17.1/64/unicode/
+   export WSPATH=/opt/mdyalog/17.1/64/unicode/ws
+   export TERM=xterm
+   export APL_TEXTINAPLCORE=${APL_TEXTINAPLCORE-1}
+   export TRACE_ON_ERROR=0
+   export SESSION_FILE="${SESSION_FILE-$DYALOG/default.dse}"
+
+   echo "Start up script at $@"
+   # Used +s as SALT is needed in JSON server to load files.
+   $DYALOG/dyalog +s <$@  # Add "<" to start APL script.
+   ```
 
 1. Create a new file, `service.yaml` and copy the following service definition
    into the file. Make sure to replace `{username}` with your Docker Hub username.
@@ -77,6 +245,8 @@ The following instructions recreate the source files from this folder.
                 env:
                 - name: TARGET
                   value: "APL Sample v1"
+                - name: FUNC_HANDLER
+                  value: "helloWorld"
     ```
 
 ## Build and deploy this sample
