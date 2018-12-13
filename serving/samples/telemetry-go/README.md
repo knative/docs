@@ -183,7 +183,7 @@ You can see published metrics using Prometheus UI. To access to the UI, forward
 the Prometheus server to your machine:
 
 ```
-kubectl port-forward $(kubectl get pods --selector=app=prometheus,prometheus=test --output=jsonpath="{.items[0].metadata.name}") 9090
+kubectl port-forward $(kubectl get pods --selector=app=prometheus-test --output=jsonpath="{.items[0].metadata.name}") 9090
 ```
 
 Then browse to http://localhost:9090.
