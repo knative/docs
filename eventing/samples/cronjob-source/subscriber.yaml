@@ -31,5 +31,3 @@ spec:
       apiVersion: serving.knative.dev/v1alpha1
       kind: Service
       name: message-dumper
-
-

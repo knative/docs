@@ -15,7 +15,7 @@ Cron Job Source example shows how to configure Cron Job as event source for func
 1. Create a `Channel`. You can use your own `Channel` or use the provided sample, which creates a channel called `cronjob-test`. If you use your own `Channel` with a different name, then you will need to alter other commands later.
 
 ```shell
-kubectl -n default apply -f channel.yaml
+kubectl apply -f channel.yaml
 ```
 
 ### Create Cron Job Event Source
@@ -23,7 +23,7 @@ kubectl -n default apply -f channel.yaml
 1. In order to receive events, you need to create a concrete Event Source for a specific namespace. If you want to consume events from a differenet namespace or using a different `Service Account`, you need to modify the yaml accordingly.
 
 ```shell
-kubectl -n default apply -f cronjob-source.yaml
+kubectl apply -f cronjob-source.yaml
 ```
 
 ### Subscriber
@@ -34,7 +34,7 @@ In order to check the `CronJobSource` is fully working, we will create a simple 
 1. Deploy `subscriber.yaml`.
 
 ```shell
-kubectl -n default apply -f subscriber.yaml
+kubectl apply -f subscriber.yaml
 ```
 
 ### Verify
