@@ -100,7 +100,7 @@ Event sources, bindings, FaaS framework, and orchestration
 | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Forum                      | [knative-dev@](https://groups.google.com/forum/#!forum/knative-dev)                                                                                        |
 | Community Meeting VC       | [meet.google.com/uea-zcwt-drt](https://meet.google.com/uea-zcwt-drt) <br>Or dial in:<br>(US) +1 919 525 1825<br>PIN: 356 842#                              |
-| Community Meeting Calendar | Wednesdays 9:00a-9:30a PST<br>[Calendar](https://calendar.google.com/calendar/embed?src=google.com_5pce19kpifu8avnj0eo74sg84c%40group.calendar.google.com) |
+| Community Meeting Calendar | Wednesdays 9:00a-9:30a PST<br>[Calendar](https://calendar.google.com/calendar/embed?src=google.com_18un4fuh6rokqf8hmfftm5oqq4%40group.calendar.google.com) |
 | Meeting Notes              | [Notes](https://docs.google.com/document/d/1uGDehQu493N_XCAT5H4XEw5T9IWlPN1o19ULOWKuPnY/edit)                                                              |
 | Document Folder            | [Folder](https://drive.google.com/corp/drive/folders/1S22YmGl6B1ppYApwa1j5j9Nc6rEChlPo)                                                                    |
 | Slack Channel              | [#eventing](https://knative.slack.com/messages/eventing)                                                                                                   |
