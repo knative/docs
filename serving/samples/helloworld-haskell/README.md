@@ -53,28 +53,28 @@ recreate the source files from this folder.
    listens on port 8080:
 
    ```haskell
-   }
+   {-# LANGUAGE OverloadedStrings #-}
 
-   e
-   )
-   )
-   y
-   )
-   )
-   s
+   import           Data.Maybe
+   import           Data.Monoid        ((<>))
+   import           Data.Text.Lazy     (Text)
+   import           Data.Text.Lazy
+   import           System.Environment (lookupEnv)
+   import           Web.Scotty         (ActionM, ScottyM, scotty)
+   import           Web.Scotty.Trans
 
-   )
-   o
-   "
-   "
-   t
-   )
+   main :: IO ()
+   main = do
+     t <- fromMaybe "World" <$> lookupEnv "TARGET"
+     pStr <- fromMaybe "8080" <$> lookupEnv "PORT"
+     let p = read pStr :: Int
+     scotty p (route t)
 
-   )
-   t
+   route :: String -> ScottyM()
+   route t = get "/" $ hello t
 
-   )
-   )
+   hello :: String -> ActionM()
+   hello t = text $ pack ("Hello " ++ t)
    ```
 
 1. In your project directory, create a file named `Dockerfile` and copy the code
