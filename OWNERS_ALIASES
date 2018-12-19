@@ -1,15 +1,12 @@
 aliases:
-  docs-approvers:
-  - carieshmarie
-  - samodell
-  - richieescarez
+  eng-approvers:
   - evankanderson
   - mattmoor
   - vaikas-google
   - rgregg
   - mchmarny
   - averikitsch
-  docs-reviewers:
+  docs-approvers:
   - carieshmarie
   - samodell
   - richieescarez
