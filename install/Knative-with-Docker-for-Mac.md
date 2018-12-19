@@ -1,4 +1,4 @@
-# Knative Install on Minikube
+# Knative Install on Docker for Mac
 
 This guide walks you through the installation of the latest version of
 [Knative Serving](https://github.com/knative/serving) using pre-built images and
@@ -10,53 +10,29 @@ You can find [guides for other platforms here](README.md).
 ## Before you begin
 
 Knative requires a Kubernetes cluster v1.10 or newer. If you don't have one, you
-can create one using [Minikube](https://github.com/kubernetes/minikube).
-
-### Install kubectl and Minikube
-
-1. If you already have `kubectl` CLI, run `kubectl version` to check the
-   version. You need v1.10 or newer. If your `kubectl` is older, follow the next
-   step to install a newer version.
-
-1. [Install the kubectl CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl).
-
-1. [Install and configure minikube](https://github.com/kubernetes/minikube#installation)
-   version v0.28.1 or later with a
-   [VM driver](https://github.com/kubernetes/minikube#requirements), e.g. `kvm2`
-   on Linux or `hyperkit` on macOS.
+can create one using [Docker for Mac](https://docs.docker.com/docker-for-mac/).
+If you haven't already,
+[install Docker for Mac](https://docs.docker.com/docker-for-mac/install/) before
+continuing.
 
 ## Creating a Kubernetes cluster
 
-After kubectl and Minikube are installed, create a cluster with version 1.10 or
-greater and your chosen VM driver:
-
-For Linux use:
-
-```shell
-minikube start --memory=8192 --cpus=4 \
-  --kubernetes-version=v1.11.3 \
-  --vm-driver=kvm2 \
-  --bootstrapper=kubeadm \
-  --extra-config=apiserver.enable-admission-plugins="LimitRanger,NamespaceExists,NamespaceLifecycle,ResourceQuota,ServiceAccount,DefaultStorageClass,MutatingAdmissionWebhook"
-```
-
-For macOS use:
-
-```shell
-minikube start --memory=8192 --cpus=4 \
-  --kubernetes-version=v1.11.3 \
-  --vm-driver=hyperkit \
-  --bootstrapper=kubeadm \
-  --extra-config=apiserver.enable-admission-plugins="LimitRanger,NamespaceExists,NamespaceLifecycle,ResourceQuota,ServiceAccount,DefaultStorageClass,MutatingAdmissionWebhook"
-```
+1. After Docker for Mac is installed, configure it with sufficient resources.
+   You can do that via the
+   [_Advanced_ menu](https://docs.docker.com/docker-for-mac/#advanced) in Docker
+   for Mac's preferences. Set **CPUs** to at least **4** and **Memory** to at
+   least **8.0 GiB**.
+1. Now enable Docker for Mac's
+   [Kubernetes capabilities](https://docs.docker.com/docker-for-mac/#kubernetes)
+   and wait for the cluster to start up.
 
 ## Installing Istio
 
-Knative depends on Istio. Run the following to install Istio. (We are changing
+Knative depends on Istio. Run the following to install Istio. (This changes
 `LoadBalancer` to `NodePort` for the `istio-ingress` service).
 
 ```shell
-curl -L https://github.com/knative/serving/releases/download/v0.2.2/istio.yaml \
+curl -L https://raw.githubusercontent.com/knative/serving/v0.2.1/third_party/istio-1.0.2/istio.yaml \
   | sed 's/LoadBalancer/NodePort/' \
   | kubectl apply --filename -
 
@@ -80,18 +56,20 @@ rerun the command to see the current status.
 
 ## Installing Knative Serving
 
-Next, install [Knative Serving](https://github.com/knative/serving):
+Next, install [Knative Serving](https://github.com/knative/serving).
 
 Because you have limited resources available, use the
-`https://github.com/knative/serving/releases/download/v0.2.2/release-lite.yaml`
+`https://github.com/knative/serving/releases/download/v0.2.1/release-lite.yaml`
 file, which omits some of the monitoring components to reduce the memory used by
 the Knative components. To use the provided `release-lite.yaml` release, run:
 
 ```shell
-curl -L https://github.com/knative/serving/releases/download/v0.2.2/release-lite.yaml \
-  | sed 's/LoadBalancer/NodePort/' \
-  | kubectl apply --filename -
+curl -L https://github.com/knative/serving/releases/download/v0.2.1/release-lite.yaml
 ```
+
+> Note: Unlike minikube, we're not changing the LoadBalancer to a NodePort here.
+> Docker for Mac will assign `localhost` as the host for that LoadBalancer,
+> making the applications available easily.
 
 Monitor the Knative components until all of the components show a `STATUS` of
 `Running`:
@@ -122,22 +100,17 @@ guide.
 If you'd like to view the available sample apps and deploy one of your choosing,
 head to the [sample apps](../serving/samples/README.md) repo.
 
-> Note: When looking up the IP address to use for accessing your app, you need
-> to look up the NodePort for the `knative-ingressgateway` as well as the IP
-> address used for Minikube. You can use the following command to look up the
-> value to use for the {IP_ADDRESS} placeholder used in the samples:
-
-```shell
-echo $(minikube ip):$(kubectl get svc knative-ingressgateway --namespace istio-system --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
-```
+> Note: You can replace the {IP_ADDRESS} placeholder used in the samples with
+> `localhost` as mentioned above.
 
 ## Cleaning up
 
-Delete the Kubernetes cluster along with Knative, Istio, and any deployed apps:
+Docker for Mac supports several levels of resetting its state and thus cleaning
+up.
 
-```shell
-minikube delete
-```
+To reset only the Kubernetes cluster to a fresh one, click "Reset Kubernetes
+cluster" in the
+[_Reset_ preferences](https://docs.docker.com/docker-for-mac/#reset).
 
 ---
 

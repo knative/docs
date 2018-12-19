@@ -1,19 +1,20 @@
 # Buildpack Sample Function
 
-A sample function that demonstrates using [Cloud Foundry](https://www.cloudfoundry.org/)
-buildpacks on Knative Serving, using the [packs Docker images](https://github.com/sclevine/packs).
+A sample function that demonstrates using
+[Cloud Foundry](https://www.cloudfoundry.org/) buildpacks on Knative Serving,
+using the [packs Docker images](https://github.com/sclevine/packs).
 
 This deploys the [riff square](https://github.com/scothis/riff-square-buildpack)
 sample function for riff.
 
 ## Prerequisites
 
-* [Install Knative Serving](../../../install/README.md)
+- [Install Knative Serving](../../../install/README.md)
 
 ## Running
 
-This sample uses the [Buildpack build
-template](https://github.com/knative/build-templates/blob/master/buildpack/buildpack.yaml)
+This sample uses the
+[Buildpack build template](https://github.com/knative/build-templates/blob/master/buildpack/buildpack.yaml)
 from the [build-templates](https://github.com/knative/build-templates/) repo.
 
 Save a copy of `buildpack.yaml`, then install it:
@@ -52,15 +53,18 @@ items:
 
 Once the `BuildComplete` status is `True`, resource creation begins.
 
-To access this service using `curl`, we first need to determine its ingress address:
+To access this service using `curl`, we first need to determine its ingress
+address:
+
 ```shell
 watch kubectl get svc knative-ingressgateway --namespace istio-system
 NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
 knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
 ```
 
-Once the `EXTERNAL-IP` gets assigned to the cluster, enter the follow commands to capture
-the host URL and the IP of the ingress endpoint in environment variables:
+Once the `EXTERNAL-IP` gets assigned to the cluster, enter the follow commands
+to capture the host URL and the IP of the ingress endpoint in environment
+variables:
 
 ```shell
 # Put the Host name into an environment variable.

@@ -2,7 +2,8 @@
 
 A simple gRPC server written in Go that you can use for testing.
 
-This sample is dependent on [this issue](https://github.com/knative/serving/issues/1047) to be complete.
+This sample is dependent on
+[this issue](https://github.com/knative/serving/issues/1047) to be complete.
 
 ## Prerequisites
 
@@ -11,7 +12,8 @@ This sample is dependent on [this issue](https://github.com/knative/serving/issu
 
 ## Build and run the gRPC server
 
-Build and run the gRPC server. This command will build the server and use `kubectl` to apply the configuration.
+Build and run the gRPC server. This command will build the server and use
+`kubectl` to apply the configuration.
 
 ```shell
 REPO="gcr.io/<your-project-here>"

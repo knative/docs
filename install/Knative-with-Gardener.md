@@ -71,7 +71,7 @@ Knative depends on Istio.
 
 1.  Install Istio:
     ```bash
-    kubectl apply --filename https://raw.githubusercontent.com/knative/serving/v0.2.1/third_party/istio-1.0.2/istio.yaml
+    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.2/istio.yaml
     ```
 2.  Label the default namespace with `istio-injection=enabled`:
     ```bash
@@ -89,40 +89,42 @@ rerun the command to see the current status.
 
 ## Installing Knative components
 
-You can install the Knative Serving and Build components together, or Build on its own.
+You can install the Knative Serving and Build components together, or Build on
+its own.
 
 ### Installing Knative Serving and Build components
 
 1. Run the `kubectl apply` command to install Knative and its dependencies:
-    ```bash
-    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.1/release.yaml
-    ```
-1. Monitor the Knative components until all of the components show a
-   `STATUS` of `Running`:
-    ```bash
-    kubectl get pods --namespace knative-serving
-    kubectl get pods --namespace knative-build
-    ```
+   ```bash
+   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.2/release.yaml
+   ```
+1. Monitor the Knative components until all of the components show a `STATUS` of
+   `Running`:
+   ```bash
+   kubectl get pods --namespace knative-serving
+   kubectl get pods --namespace knative-build
+   ```
 
 ### Installing Knative Build only
 
 1. Run the `kubectl apply` command to install
    [Knative Build](https://github.com/knative/build) and its dependencies:
-    ```bash
-    kubectl apply --filename https://raw.githubusercontent.com/knative/serving/v0.2.1/third_party/config/build/release.yaml
-    ```
+   ```bash
+   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.2/build.yaml
+   ```
 1. Monitor the Knative Build components until all of the components show a
    `STATUS` of `Running`:
-    ```bash
-    kubectl get pods --namespace knative-build
+   ```bash
+   kubectl get pods --namespace knative-build
+   ```
 
 Just as with the Istio components, it will take a few seconds for the Knative
 components to be up and running; you can rerun the `kubectl get` command to see
 the current status.
 
 > Note: Instead of rerunning the command, you can add `--watch` to the above
-  command to view the component's status updates in real time. Use CTRL + C to
-  exit watch mode.
+> command to view the component's status updates in real time. Use CTRL + C to
+> exit watch mode.
 
 You are now ready to deploy an app or create a build in your new Knative
 cluster.
@@ -159,10 +161,10 @@ spec:
 And of course create the respective `ConfigMaps`:
 
 ```
-curl https://raw.githubusercontent.com/knative/serving/v0.2.1/third_party/istio-1.0.2/istio.yaml
+curl https://github.com/knative/serving/releases/download/v0.2.2/istio.yaml
 kubectl create configmap istio-chart-080 --from-file=istio.yaml
 
-curl https://github.com/knative/serving/releases/download/v0.2.1/release.yaml
+curl https://github.com/knative/serving/releases/download/v0.2.2/release.yaml
 kubectl create configmap knative-chart-001 --from-file=release.yaml
 ```
 
