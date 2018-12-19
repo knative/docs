@@ -1,15 +1,15 @@
 # Builders
 
-This document defines `Builder` images and the conventions to which they are
+This document defines builder images and the conventions to which they are
 expected to adhere.
 
-## What is a Builder?
+## What is a builder?
 
-A `Builder` image is a special classification for images that run as a part of
+A builder image is a special classification for images that run as a part of
 the Build CRD's `steps:`.
 
 For example, in the following Build the images, `gcr.io/cloud-builders/gcloud`
-and `gcr.io/cloud-builders/docker` are "Builders".:
+and `gcr.io/cloud-builders/docker` are "builders".:
 
 ```yaml
 spec:
@@ -20,9 +20,9 @@ spec:
     ...
 ```
 
-### Typical Builders
+### Typical builders
 
-A Builder is typically a purpose-built container whose entrypoint is a tool that
+A builder is typically a purpose-built container whose entrypoint is a tool that
 performs some action and exits with a zero status on success. These entrypoints
 are often command-line tools, for example, `git`, `docker`, `mvn`, and so on.
 
@@ -33,9 +33,9 @@ See [here](https://github.com/googlecloudplatform/cloud-builders) and
 [here](https://github.com/googlecloudplatform/cloud-builders-community) for more
 builders.
 
-### Atypical Builders
+### Atypical builders
 
-It it possible, although less typical to implement the Builder convention by
+It it possible, although less typical to implement the builder convention by
 overriding `command:` and `args:` for example:
 
 ```yaml
@@ -48,13 +48,13 @@ steps:
         value: "world"
 ```
 
-### Specialized Builders
+### Specialized builders
 
 It is also possible for advanced users to create purpose-built builders. One
 example of this are the
 ["FTL" builders](https://github.com/GoogleCloudPlatform/runtimes-common/tree/master/ftl#ftl).
 
-## What are the Builder conventions?
+## What are the builder conventions?
 
 Builders should expect a Build to implement the following conventions:
 
