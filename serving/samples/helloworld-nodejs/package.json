@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/knative/serving#readme",
   "dependencies": {
-    "express": "^4.16.3"
+    "express": "^4.16.4"
   }
 }
