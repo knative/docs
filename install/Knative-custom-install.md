@@ -227,15 +227,15 @@ the commands below.
         --filename [INSTALL_PACKAGE]
       ```
 
-    where [`INSTALL_PACKAGE`] is the URL path and filename of the a Knative installation package:
+      where [`INSTALL_PACKAGE`] is the URL path and filename of the a Knative installation package:
 
-    `https://github.com/knative/[COMPONENT]/releases/download/[VERSION]/[FILENAME].yaml`
+      `https://github.com/knative/[COMPONENT]/releases/download/[VERSION]/[FILENAME].yaml`
 
-    And `[COMPONENT]`, `[VERSION]`, and `[FILENAME]` are the Knative component, release version, and filename of the installable resource. Examples:
-    * `https://github.com/knative/build/releases/download/v0.2.0/release.yaml`
-    * `https://github.com/knative/eventing/releases/download/v0.2.1/eventing.yaml`
-    * `https://github.com/knative/eventing-sources/releases/download/v0.2.1/release.yaml`
-    * `https://github.com/knative/serving/releases/download/v0.2.3/serving.yaml`
+      and `[COMPONENT]`, `[VERSION]`, and `[FILENAME]` are the Knative component, release version, and filename of the installable resource. Examples:
+      * `https://github.com/knative/build/releases/download/v0.2.0/release.yaml`
+      * `https://github.com/knative/eventing/releases/download/v0.2.1/eventing.yaml`
+      * `https://github.com/knative/eventing-sources/releases/download/v0.2.1/release.yaml`
+      * `https://github.com/knative/serving/releases/download/v0.2.3/serving.yaml`
 
 
     **Example install commands:**
