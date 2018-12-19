@@ -5,8 +5,8 @@ expected to adhere.
 
 ## What is a builder?
 
-A builder image is a special classification for images that run as a part of
-the Build CRD's `steps:`.
+A builder image is a special classification for images that run as a part of the
+Build CRD's `steps:`.
 
 For example, in the following Build the images, `gcr.io/cloud-builders/gcloud`
 and `gcr.io/cloud-builders/docker` are "builders".:

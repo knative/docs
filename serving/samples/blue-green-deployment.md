@@ -13,8 +13,9 @@ You need:
 - (Optional)
   [A custom domain configured](../../serving/using-a-custom-domain.md) for use
   with Knative.
-  
-Note: The source code for the gcr.io/knative-samples/knative-route-demo image that is used in this sample, is located at 
+
+Note: The source code for the gcr.io/knative-samples/knative-route-demo image
+that is used in this sample, is located at
 https://github.com/mchmarny/knative-route-demo.
 
 ## Deploying Revision 1 (Blue)
