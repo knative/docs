@@ -8,7 +8,7 @@ process succeeds.
 A Knative `Build` runs on-cluster and is implemented by a
 [Kubernetes Custom Resource Definition (CRD)](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
 
-Given a `Builder`, or container image that you have created to perform a task or
+Given a *builder*, or container image that you have created to perform a task or
 action, you can define a Knative `Build` through a single configuration file.
 
 Also consider using a Knative `Build` to build the source code of your apps into
@@ -20,7 +20,7 @@ More information about this use case is demonstrated in
 ## Key features of Knative Builds
 
 - A `Build` can include multiple `steps` where each step specifies a `Builder`.
-- A `Builder` is a type of container image that you create to accomplish any
+- A *builder* is a type of container image that you create to accomplish any
   task, whether that's a single step in a process, or the whole process itself.
 - The `steps` in a `Build` can push to a repository.
 - A `BuildTemplate` can be used to defined reusable templates.
@@ -38,7 +38,7 @@ components:
 
 - [`Build`](https://github.com/knative/docs/blob/master/build/builds.md)
 - [`BuildTemplate`](https://github.com/knative/docs/blob/master/build/build-templates.md)
-- [ `Builder`](https://github.com/knative/docs/blob/master/build/builder-contract.md)
+- [Builder](https://github.com/knative/docs/blob/master/build/builder-contract.md)
 - [`ServiceAccount`](https://github.com/knative/docs/blob/master/build/auth.md)
 
 ## Install the Knative Build component
