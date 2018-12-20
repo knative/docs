@@ -83,7 +83,7 @@ Artifact                   | Link
 -------------------------- | ----
 Forum                      | [knative-dev@](https://groups.google.com/forum/#!forum/knative-dev)
 Community Meeting VC       | [meet.google.com/spi-umby-dmw](https://meet.google.com/spi-umby-dmw) <br>Or dial in:<br>(US) +1 929-445-2235<br>PIN: 824 001#
-Community Meeting Calendar | Tuesdays 10:30a-11:00a Pacific <br>[Calendar Invitation](https://calendar.google.com/event?action=TEMPLATE&tmeid=MjNlNGNscDRmMTAwbDh1ZGZiYWdqMWUya2VfMjAxOTAxMDhUMTgzMDAwWiBnb29nbGUuY29tXzE4dW40ZnVoNnJva3FmOGhtZmZ0bTVvcXE0QGc&tmsrc=google.com_18un4fuh6rokqf8hmfftm5oqq4%40group.calendar.google.com&scp=ALL)
+Community Meeting Calendar | Tuesdays 10:30a-11:00a Pacific <br>[Calendar Invitation](https://calendar.google.com/calendar/embed?src=google.com_18un4fuh6rokqf8hmfftm5oqq4%40group.calendar.google.com)
 Meeting Notes              | [Notes](https://docs.google.com/document/d/1Uh7jTWQruBBmic-WmTvtc9cMF95kQrKb5lsqWhNuikM/edit)
 Document Folder            | [Folder](https://drive.google.com/corp/drive/folders/1QF-job3rCEqCpJLm8nHkC4mBIi4XANE1)
 Slack Channel              | [#cli](https://knative.slack.com)
