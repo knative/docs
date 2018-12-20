@@ -137,6 +137,16 @@ system by looking at what is downstream of the `GcpPubSubSource`. If you
 deployed the [Subscriber](#subscriber), then continue using this section. If
 not, then you will need to look downstream yourself.
 
+1. We need to wait for the downstream pods to get started and receive our event, wait 60 seconds.
+
+    - You can check the status of the downstream pods with:
+
+      ```shell
+      kubectl get pods --selector serving.knative.dev/service=message-dumper
+      ```
+
+      You should see at least one.
+
 1. Inspect the logs of the subscriber.
 
    ```shell
