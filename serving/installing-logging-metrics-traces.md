@@ -52,10 +52,10 @@ To configure and setup monitoring:
    reported `Running` or `Completed`:
 
    ```shell
-   kubectl get pods --namespace monitoring --watch
+   kubectl get pods --namespace knative-monitoring --watch
    ```
 
-   ```
+   ```shell
    NAME                                  READY     STATUS    RESTARTS   AGE
    elasticsearch-logging-0               1/1       Running   0          2d
    elasticsearch-logging-1               1/1       Running   0          2d
@@ -162,10 +162,10 @@ To configure and setup monitoring:
    reported `Running` or `Completed`:
 
    ```shell
-   kubectl get pods --namespace monitoring --watch
+   kubectl get pods --namespace knative-monitoring --watch
    ```
 
-   ```
+   ```shell
    NAME                                  READY     STATUS    RESTARTS   AGE
    fluentd-ds-5kc85                      1/1       Running   0          2d
    fluentd-ds-vhrcq                      1/1       Running   0          2d
