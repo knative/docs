@@ -23,7 +23,7 @@ source is most useful as a bridge from other GCP services, such as
    using the `release-with-gcppubsub.yaml` file. Start by creating a dummy
    `gcppubsub-source-key` (as directed), and we will replace it later.
 
-1. Enable the 'Cloud Pub/Sub API' on your project.
+1. Enable the 'Cloud Pub/Sub API' on your project:
 
    ```shell
    gcloud services enable pubsub.googleapis.com
@@ -52,7 +52,7 @@ source is most useful as a bridge from other GCP services, such as
       gcloud iam service-accounts keys create knative-source.json \
         --iam-account=knative-source@$PROJECT_ID.iam.gserviceaccount.com
       ```
-   1. Create two secrets on the kubernetes cluster with the downloaded key.
+   1. Create two secrets on the kubernetes cluster with the downloaded key:
       ```shell
       # Note that the first secret may already have been created when installing
       # Knative Eventing. The following command will overwrite it. If you don't
@@ -93,7 +93,7 @@ source is most useful as a bridge from other GCP services, such as
    ```
 
 1. Create a GCP PubSub Topic. If you change its name (`testing`), you also need to update the
-   `topic` in the [`gcp-pubsub-source.yaml`](./gcp-pubsub-source.yaml) file.
+   `topic` in the [`gcp-pubsub-source.yaml`](./gcp-pubsub-source.yaml) file:
 
    ```shell
    gcloud pubsub topics create testing
@@ -103,20 +103,20 @@ source is most useful as a bridge from other GCP services, such as
    [`MY_GCP_PROJECT` placeholder](https://cloud.google.com/resource-manager/docs/creating-managing-projects)
    in [`gcp-pubsub-source.yaml`](./gcp-pubsub-source.yaml) and apply it.
 
-   If you're in the samples directory, you can replace and apply in one command.
+   If you're in the samples directory, you can replace and apply in one command:
 
    ```shell
     sed "s/MY_GCP_PROJECT/$PROJECT_ID/g" gcp-pubsub-source.yaml | \
         kubectl apply --filename -
    ```
 
-   If you are replacing it manually, do so, then apply the resulting YAML.
+   If you are replacing it manually, do so, then apply the resulting YAML:
 
    ```shell
    kubectl apply --filename gcp-pubsub-source.yaml
    ```
 
-1. Create a function and subscribe it to the `pubsub-test` channel.
+1. Create a function and subscribe it to the `pubsub-test` channel:
 
    ```shell
    kubectl apply --filename subscriber.yaml
@@ -124,7 +124,7 @@ source is most useful as a bridge from other GCP services, such as
 
 ## Publish
 
-Publish messages to your GCP PubSub Topic.
+Publish messages to your GCP PubSub Topic:
 
 ```shell
 gcloud pubsub topics publish testing --message="Hello World!"
@@ -147,7 +147,7 @@ not, then you will need to look downstream yourself.
 
       You should see at least one.
 
-1. Inspect the logs of the subscriber.
+1. Inspect the logs of the subscriber:
 
    ```shell
    kubectl logs --selector serving.knative.dev/service=message-dumper -c user-container
