@@ -132,10 +132,10 @@ system by looking at what is downstream of the `GcpPubSubSource`. If you
 deployed the [Subscriber](#subscriber), then continue using this section. If
 not, then you will need to look downstream yourself.
 
-1. Use [`kail`](https://github.com/boz/kail) to tail the logs of the subscriber.
+1. Inspect the logs of the subscriber.
 
    ```shell
-   kail -d message-dumper -c user-container --since=10m
+   kubectl logs --selector serving.knative.dev/service=message-dumper -c user-container
    ```
 
 You should see log lines similar to:
@@ -158,3 +158,4 @@ echo "SGVsbG8gV29ybGQh" | base64 --decode
 Results in: `Hello World!".
 
 See the [PubsubMessage documentation](https://cloud.google.com/pubsub/docs/reference/rest/v1/PubsubMessage) for more information about the format of the message.
+
