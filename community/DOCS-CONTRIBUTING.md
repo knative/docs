@@ -1,4 +1,4 @@
-# Contributing to Knative Documentation
+# Contributing to the Knative Documentation
 
 **First off, thanks for taking the time to contribute!**
 

@@ -12,6 +12,7 @@ given the same level of review.
 - [Team values](#team-values)
 - [Contributor license agreements](#contributor-license-agreements)
 - [Design documents](#design-documents)
+- [Contributing documentation](#contributing-documentation)
 - [Contributing a feature](#contributing-a-feature)
 - [Setting up to contribute to Knative](#setting-up-to-contribute-to-knative)
 - [Pull requests](#pull-requests)
@@ -68,6 +69,12 @@ human review. If you're not part of one of those groups, the first time you try
 to access the team drive or a specific doc, you'll be asked to request
 permission. Please join one of the above groups (you can join knative-users and
 later join knative-dev if you want immediate access).
+
+## Contributing documentation
+
+For more information about contributing to the Knative documentation, see
+[DOCS-CONTRIBUTING.md](DOCS-CONTRIBUTING.md). A lot of the information on this
+page still applies, but you'll find the specifics about the docs process there.
 
 ## Contributing a feature
 
