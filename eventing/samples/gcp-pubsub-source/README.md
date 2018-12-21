@@ -63,11 +63,11 @@ source is most useful as a bridge from other GCP services, such as
       kubectl -n default create secret generic google-cloud-key --from-file=key.json=knative-source.json
       ```
 
-      The name `gcppubsub-source-key` and `key.json` are pre-configured values
+      `gcppubsub-source-key` and `key.json` are pre-configured values
       in the `controller-manager` StatefulSet which manages your Eventing
       sources.
 
-      The name `google-cloud-key` and `key.json` are pre-configured values in [`gcp-pubsub-source.yaml`](./gcp-pubsub-source.yaml).
+      `google-cloud-key` and `key.json` are pre-configured values in [`gcp-pubsub-source.yaml`](./gcp-pubsub-source.yaml).
 
 ## Deployment
 
@@ -103,14 +103,14 @@ source is most useful as a bridge from other GCP services, such as
    [`MY_GCP_PROJECT` placeholder](https://cloud.google.com/resource-manager/docs/creating-managing-projects)
    in [`gcp-pubsub-source.yaml`](./gcp-pubsub-source.yaml) and apply it.
 
-   If you're in the samples directory, you can replace and apply in one command:
+   If you're in the samples directory, you can replace `MY_GCP_PROJECT` and apply in one command:
 
    ```shell
     sed "s/MY_GCP_PROJECT/$PROJECT_ID/g" gcp-pubsub-source.yaml | \
         kubectl apply --filename -
    ```
 
-   If you are replacing it manually, do so, then apply the resulting YAML:
+   If you are replacing `MY_GCP_PROJECT` manually, then make sure you apply the resulting YAML:
 
    ```shell
    kubectl apply --filename gcp-pubsub-source.yaml
@@ -164,7 +164,7 @@ You should see log lines similar to:
 }
 ```
 
-The log message is a dump of the message sent by `GCP PubSub`. In particular, if you [base-64 decode](https://www.base64decode.org/) the `Data` field, you should see the message we sent:
+The log message is a dump of the message sent by `GCP PubSub`. In particular, if you [base-64 decode](https://www.base64decode.org/) the `Data` field, you should see the sent message:
 
 ```shell
 echo "SGVsbG8gV29ybGQh" | base64 --decode
@@ -172,5 +172,5 @@ echo "SGVsbG8gV29ybGQh" | base64 --decode
 
 Results in: `Hello World!".
 
-See the [PubsubMessage documentation](https://cloud.google.com/pubsub/docs/reference/rest/v1/PubsubMessage) for more information about the format of the message.
+For more information about the format of the message, see the [PubsubMessage documentation](https://cloud.google.com/pubsub/docs/reference/rest/v1/PubsubMessage).
 
