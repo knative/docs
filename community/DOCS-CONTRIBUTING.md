@@ -30,7 +30,7 @@ see a problem with the documentation, submit an issue using the following steps:
 2. Use the
    [correct template](https://github.com/knative/docs/issues/new) for your new
    issue. There are two templates available:
-   * Bug report:
+    * **Bug report**:
    If you're reporting an error in the existing documentation, use this
    template. This could be anything from broken samples to typos. When you
    create a bug report, include as many details as possible and include
