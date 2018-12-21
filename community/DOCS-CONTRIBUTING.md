@@ -89,7 +89,7 @@ general documentation for Knative components. However, formal specifications or
 documentation most relevant to contributors of a component should be placed in
 the `docs` folder in a given component's repository. An example of this is
 the [spec](https://github.com/knative/serving/tree/master/docs/spec) folder
-within the Serving component.
+in the Serving component.
 
 Code samples follow a similar strategy, where most code samples should be
 located in the `docs` repository. If there are code samples used for
