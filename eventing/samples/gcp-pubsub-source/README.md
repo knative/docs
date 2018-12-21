@@ -53,6 +53,7 @@ source is most useful as a bridge from other GCP services, such as
         --iam-account=knative-source@$PROJECT_ID.iam.gserviceaccount.com
       ```
    1. Create two secrets on the kubernetes cluster with the downloaded key:
+
       ```shell
       # Note that the first secret may already have been created when installing
       # Knative Eventing. The following command will overwrite it. If you don't
@@ -63,11 +64,11 @@ source is most useful as a bridge from other GCP services, such as
       kubectl -n default create secret generic google-cloud-key --from-file=key.json=knative-source.json
       ```
 
-      `gcppubsub-source-key` and `key.json` are pre-configured values
-      in the `controller-manager` StatefulSet which manages your Eventing
-      sources.
+      `gcppubsub-source-key` and `key.json` are pre-configured values in the
+      `controller-manager` StatefulSet which manages your Eventing sources.
 
-      `google-cloud-key` and `key.json` are pre-configured values in [`gcp-pubsub-source.yaml`](./gcp-pubsub-source.yaml).
+      `google-cloud-key` and `key.json` are pre-configured values in
+      [`gcp-pubsub-source.yaml`](./gcp-pubsub-source.yaml).
 
 ## Deployment
 
@@ -92,8 +93,9 @@ source is most useful as a bridge from other GCP services, such as
    kubectl apply --filename channel.yaml
    ```
 
-1. Create a GCP PubSub Topic. If you change its name (`testing`), you also need to update the
-   `topic` in the [`gcp-pubsub-source.yaml`](./gcp-pubsub-source.yaml) file:
+1. Create a GCP PubSub Topic. If you change its name (`testing`), you also need
+   to update the `topic` in the
+   [`gcp-pubsub-source.yaml`](./gcp-pubsub-source.yaml) file:
 
    ```shell
    gcloud pubsub topics create testing
@@ -103,14 +105,16 @@ source is most useful as a bridge from other GCP services, such as
    [`MY_GCP_PROJECT` placeholder](https://cloud.google.com/resource-manager/docs/creating-managing-projects)
    in [`gcp-pubsub-source.yaml`](./gcp-pubsub-source.yaml) and apply it.
 
-   If you're in the samples directory, you can replace `MY_GCP_PROJECT` and apply in one command:
+   If you're in the samples directory, you can replace `MY_GCP_PROJECT` and
+   apply in one command:
 
    ```shell
     sed "s/MY_GCP_PROJECT/$PROJECT_ID/g" gcp-pubsub-source.yaml | \
         kubectl apply --filename -
    ```
 
-   If you are replacing `MY_GCP_PROJECT` manually, then make sure you apply the resulting YAML:
+   If you are replacing `MY_GCP_PROJECT` manually, then make sure you apply the
+   resulting YAML:
 
    ```shell
    kubectl apply --filename gcp-pubsub-source.yaml
@@ -137,15 +141,16 @@ system by looking at what is downstream of the `GcpPubSubSource`. If you
 deployed the [Subscriber](#subscriber), then continue using this section. If
 not, then you will need to look downstream yourself.
 
-1. We need to wait for the downstream pods to get started and receive our event, wait 60 seconds.
+1. We need to wait for the downstream pods to get started and receive our event,
+   wait 60 seconds.
 
-    - You can check the status of the downstream pods with:
+   - You can check the status of the downstream pods with:
 
-      ```shell
-      kubectl get pods --selector serving.knative.dev/service=message-dumper
-      ```
+     ```shell
+     kubectl get pods --selector serving.knative.dev/service=message-dumper
+     ```
 
-      You should see at least one.
+     You should see at least one.
 
 1. Inspect the logs of the subscriber:
 
@@ -164,7 +169,9 @@ You should see log lines similar to:
 }
 ```
 
-The log message is a dump of the message sent by `GCP PubSub`. In particular, if you [base-64 decode](https://www.base64decode.org/) the `Data` field, you should see the sent message:
+The log message is a dump of the message sent by `GCP PubSub`. In particular, if
+you [base-64 decode](https://www.base64decode.org/) the `Data` field, you should
+see the sent message:
 
 ```shell
 echo "SGVsbG8gV29ybGQh" | base64 --decode
@@ -172,5 +179,5 @@ echo "SGVsbG8gV29ybGQh" | base64 --decode
 
 Results in: `Hello World!".
 
-For more information about the format of the message, see the [PubsubMessage documentation](https://cloud.google.com/pubsub/docs/reference/rest/v1/PubsubMessage).
-
+For more information about the format of the message, see the
+[PubsubMessage documentation](https://cloud.google.com/pubsub/docs/reference/rest/v1/PubsubMessage).
