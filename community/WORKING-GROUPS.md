@@ -40,8 +40,8 @@ The current working groups are:
 
 ## API Core
 
-API [resources](../pkg/apis/serving), [validation](../pkg/webhook), and
-[semantics](../pkg/controller).
+API [resources](https://github.com/knative/serving/tree/master/pkg/apis/serving), [validation](https://github.com/knative/pkg/tree/master/webhook), and
+[semantics](https://github.com/knative/pkg/tree/master/controller).
 
 | Artifact                   | Link                                                                                                                                                          |
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
