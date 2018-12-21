@@ -87,7 +87,7 @@ against the master branch.
 Knative uses the [docs repository](https://github.com/knative/docs) for all
 general documentation for Knative components. However, formal specifications or
 documentation most relevant to contributors of a component should be placed in
-the `docs` folder within a given component's repository. An example of this is
+the `docs` folder in a given component's repository. An example of this is
 the [spec](https://github.com/knative/serving/tree/master/docs/spec) folder
 within the Serving component.
 
