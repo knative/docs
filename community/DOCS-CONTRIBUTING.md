@@ -41,8 +41,9 @@ see a problem with the documentation, submit an issue using the following steps:
    For upcoming changes to the documentation or requests for more
    information on a particular subject.
 
-Note that code issues should be filed against the individual Knative
-repositories, while documentation issues should go in the `docs` repository.
+Note that code issues should be filed against the
+[individual Knative repositories](http://github.com/knative),
+while documentation issues should go in the `docs` repository.
 
 ## Contributing to the documentation
 
