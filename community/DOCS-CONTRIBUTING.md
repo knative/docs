@@ -35,7 +35,7 @@ see a problem with the documentation, submit an issue using the following steps:
    template. This could be anything from broken samples to typos. When you
    create a bug report, include as many details as possible and include
    suggested fixes to the issue.
-   * Feature request:
+    * **Feature request**:
    For upcoming changes to the documentation or requests for more
    information on a particular subject.
 
