@@ -50,7 +50,7 @@ while documentation issues should go in the `docs` repository.
 ### Working group
 
 The [Knative Documentation Working Group](./WORKING-GROUPS.md#documentation) meets weekly on
-Tuesdays and alternates between a 9am PT and a 4:30pm PT time to accomdate
+Tuesdays and alternates between a 9am PT and a 4:30pm PT time to accommodate
 contributors in both the EMEA and APAC timezones. [Click here](https://calendar.google.com/calendar/embed?src=google.com_18un4fuh6rokqf8hmfftm5oqq4%40group.calendar.google.com)
 to see the exact dates on the Knative working group calendar. If you're interested
 in becoming more involved in Knative's documentation, start attending the working
@@ -65,7 +65,7 @@ There are a couple different ways to jump in to the Knative doc set:
 * Run through the [install guide](../install/README.md) for the platform of your
   choice, as well as the [Getting Started with Knative App Deployment](../install/getting-started-knative-app.md) guide, and keep a [friction log](https://devrel.net/developer-experience/an-introduction-to-friction-logging) of the experience.
   What was hard for you? Then open a PR with a few improvements you could make
-  from the friciton log you kept. How can you make the documentation better so
+  from the friction log you kept. How can you make the documentation better so
   that others don't run into the same issues you did? 
 
 ### Submitting documentation PRs - what to expect
