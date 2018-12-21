@@ -10,7 +10,7 @@ propose changes to this document in a pull request.
 
 ### Code of conduct
 
-Knative follows the [Knative Code of Conduct](community/CODE-OF-CONDUCT.md). By
+Knative follows the [Knative Code of Conduct](./CODE-OF-CONDUCT.md). By
 participating, you are expected to uphold this code. Please report unacceptable
 behavior to knative-code-of-conduct@googlegroups.com.
 
@@ -46,7 +46,7 @@ repositories, while documentation issues should go in the `docs` repository.
 
 ### Working group
 
-The [Knative Documentation Working Group](./community/WORKING-GROUPS.md#documentation) meets weekly on
+The [Knative Documentation Working Group](./WORKING-GROUPS.md#documentation) meets weekly on
 Tuesdays and alternates between a 9am PT and a 4:30pm PT time to accomdate
 contributors in both the EMEA and APAC timezones. If you're interested in
 becoming more involved in Knative's documentation, start attending the working
@@ -58,8 +58,8 @@ efforts, who are happy to help you get started.
 There are a couple different ways to jump in to the Knative doc set:
 
 * Look at issues in the Docs repo labled [Good First Issue](https://github.com/knative/docs/labels/kind%2Fgood-first-issue).
-* Run through the [install guide](./install/README.md) for the platform of your
-  choice, as well as the [Getting Started with Knative App Deployment](./install/getting-started-knative-app.md) guide, and keep a [friction log](https://devrel.net/developer-experience/an-introduction-to-friction-logging) of the experience.
+* Run through the [install guide](../install/README.md) for the platform of your
+  choice, as well as the [Getting Started with Knative App Deployment](../install/getting-started-knative-app.md) guide, and keep a [friction log](https://devrel.net/developer-experience/an-introduction-to-friction-logging) of the experience.
   What was hard for you? Then open a PR with a few improvements you could make
   from the friciton log you kept. How can you make the documentation better so
   that others don't run into the same issues you did? 
