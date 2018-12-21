@@ -34,7 +34,9 @@ see a problem with the documentation, submit an issue using the following steps:
    If you're reporting an error in the existing documentation, use this
    template. This could be anything from broken samples to typos. When you
    create a bug report, include as many details as possible and include
-   suggested fixes to the issue.
+   suggested fixes to the issue. If you know which Knative component your
+   bug is related to, you can assign the appropriate
+   [Working Group Lead](./WORKING-GROUPS.md).
     * **Feature request**:
    For upcoming changes to the documentation or requests for more
    information on a particular subject.
