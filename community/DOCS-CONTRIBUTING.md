@@ -51,8 +51,9 @@ while documentation issues should go in the `docs` repository.
 
 The [Knative Documentation Working Group](./WORKING-GROUPS.md#documentation) meets weekly on
 Tuesdays and alternates between a 9am PT and a 4:30pm PT time to accomdate
-contributors in both the EMEA and APAC timezones. If you're interested in
-becoming more involved in Knative's documentation, start attending the working
+contributors in both the EMEA and APAC timezones. [Click here](https://calendar.google.com/calendar/embed?src=google.com_18un4fuh6rokqf8hmfftm5oqq4%40group.calendar.google.com)
+to see the exact dates on the Knative working group calendar. If you're interested
+in becoming more involved in Knative's documentation, start attending the working
 group meetings. You'll meet the writers currently steering our documentation
 efforts, who are happy to help you get started.
 
