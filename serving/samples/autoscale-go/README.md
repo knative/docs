@@ -142,7 +142,7 @@ The autoscaler supports customization through annotations.  There are two autosc
 1. `kpa.autoscaling.knative.dev` which is the concurrency-based autoscaler described above (the default), and
 2. `hpa.autoscaling.knative.dev` which delegates to the Kubernetes HPA which autoscales on CPU usage.
 
-E.g.
+Example of a Service scaled on CPU:
 
 ```
 apiVersion: serving.knative.dev/v1alpha1
@@ -157,15 +157,14 @@ spec:
         metadata:
           annotations:
             # Standard Kubernetes CPU-based autoscaling.
-            autoscaling.knative.dev/class: hpa.autoscaling.knative.dev
+            autoscaling.knative.dev/class:  hpa.autoscaling.knative.dev
+            autoscaling.knative.dev/metric: cpu
         spec:
           container:
             image: gcr.io/knative-samples/autoscale-go:0.1
 ```
 
-Additionally the autoscaler targets and scaling bounds can be specified in annotations:
-
-E.g.
+Additionally the autoscaler targets and scaling bounds can be specified in annotations.  Example of a Service with custom targets and scale bounds:
 
 ```
 apiVersion: serving.knative.dev/v1alpha1
@@ -179,8 +178,9 @@ spec:
       revisionTemplate:
         metadata:
           annotations:
-            # Knative concurrency-based autoscaling.
-            autoscaling.knative.dev/class: kpa.autoscaling.knative.dev
+            # Knative concurrency-based autoscaling (default).
+            autoscaling.knative.dev/class:  kpa.autoscaling.knative.dev
+            autoscaling.knative.dev/metric: concurrency
             # Target 10 requests in-flight per pod.
             autoscaling.knative.dev/target: "10"
             # Disable scale to zero with a minScale of 1.
