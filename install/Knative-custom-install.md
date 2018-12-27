@@ -60,8 +60,8 @@ If you are just getting started with Knative, you should choose automatic
 sidecar injection and enable the Istio service mesh.
 
 Due to current dependencies, some installable Knative options require the Istio
-service mesh. You must install the `istio.yaml` package to enable automatic
-sidecar injection to install the following options:
+service mesh. If you install any of the following options, you must install the
+`istio.yaml` package so that automatic sidecar injection is enabled:
 
 - [Knative Eventing](https://github.com/knative/eventing)
 - [Knative Eventing Sources](https://github.com/knative/eventing-sources)
