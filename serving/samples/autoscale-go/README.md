@@ -31,7 +31,7 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
    export IP_ADDRESS=`kubectl get svc knative-ingressgateway --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
    ```
 
-## Send Load to the Service
+## Load the Service
 
 1. Make a request to the autoscale app to see it consume some resources.
 
@@ -114,16 +114,25 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 
 Knative Serving autoscaling is based on the average number of in-flight requests
 per pod (concurrency). The system has a default
-[target concurrency of 100.0](https://github.com/knative/serving/blob/3f00c39e289ed4bfb84019131651c2e4ea660ab5/config/config-autoscaler.yaml#L35).
+[target concurrency of 100.0](https://github.com/knative/serving/blob/3f00c39e289ed4bfb84019131651c2e4ea660ab5/config/config-autoscaler.yaml#L35) but [we used 10](service.yaml#L26) for our service.  We loaded the service with 50 concurrent requests so the autoscaler created 5 pods (`50 concurrent requests / target of 10 = 5 pods`)
 
-For example, if a Revision is receiving 350 requests per second, each of which
-takes about .5 seconds, Knative Serving will determine the Revision needs about
-2 pods
+#### Panic
+
+The autoscaler calculates average concurrency over a 60 second window so it takes a minute for the system to stablize at the desired level of concurrency.  However the autoscaler also calculates a 6 second "panic" window and will enter panic mode if that window reached 2x the target concurrency.  In panic mode the autoscaler operates on the shorter, more sensitive panic window.  Once the panic conditions are no longer met for 60 seconds, the autoscaler will return to the initial 60 second "stable" mode.
 
 ```
-350 * .5 = 175
-175 / 100 = 1.75
-ceil(1.75) = 2 pods
+                                                       |
+                                  Panic Target--->  +--| 20
+                                                    |  |
+                                                    | <------Panic Window
+                                                    |  |
+       Stable Target--->  +-------------------------|--| 10   CONCURRENCY
+                          |                         |  |
+                          |                      <-----------Stable Window
+                          |                         |  |
+--------------------------+-------------------------+--+ 0
+120                       60                           0
+                     TIME
 ```
 
 #### Tuning
