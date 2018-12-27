@@ -194,6 +194,10 @@ spec:
 
 Note: for an `hpa.autoscaling.knative.dev` class service, the `autoscaling.knative.dev/target` specifies the CPU percentage target (default `"80"`).
 
+#### Demo
+
+View the [Kubecon Demo](https://youtu.be/OPSIPr-Cybs) of Knative autoscaler customization (32 minutes).
+
 ### Dashboards
 
 View the Knative Serving Scaling and Request dashboards (if configured).
