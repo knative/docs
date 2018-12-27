@@ -212,43 +212,43 @@ kubectl port-forward --namespace knative-monitoring $(kubectl get pods --namespa
 
 ### Other Experiments
 
-1. Maintain 1000 concurrent requests.
+1. Maintain 100 concurrent requests.
 
    ```
-   docker run --rm -i -t --entrypoint /load-generator -e IP_ADDRESS="${IP_ADDRESS}" \
-     gcr.io/knative-samples/autoscale-go:0.1 \
-     -qps 9999 -concurrency 1000
+   hey -z 60s -c 100 \
+     -host "autoscale-go.default.example.com" \
+     "http://${IP_ADDRESS?}?sleep=100&prime=10000&bloat=5"
    ```
 
-1. Maintain 100 qps with fast requests.
+1. Maintain 100 qps with short requests (10 ms).
 
    ```
-   docker run --rm -i -t --entrypoint /load-generator -e IP_ADDRESS="${IP_ADDRESS}" \
-     gcr.io/knative-samples/autoscale-go:0.1 \
-     -qps 100 -concurrency 9999
+   hey -z 60s -q 100 \
+     -host "autoscale-go.default.example.com" \
+     "http://${IP_ADDRESS?}?sleep=10"
    ```
 
-1. Maintain 100 qps with slow requests.
+1. Maintain 100 qps with long requests (1 sec).
 
    ```
-   docker run --rm -i -t --entrypoint /load-generator -e IP_ADDRESS="${IP_ADDRESS}" \
-     gcr.io/knative-samples/autoscale-go:0.1 \
-     -qps 100 -concurrency 9999 -sleep 500
+   hey -z 60s -q 100 \
+     -host "autoscale-go.default.example.com" \
+     "http://${IP_ADDRESS?}?sleep=1000"
    ```
 
-1. Heavy CPU usage.
+1. Heavy CPU usage (~1 cpu/sec).
 
    ```
-   docker run --rm -i -t --entrypoint /load-generator -e IP_ADDRESS="${IP_ADDRESS}" \
-     gcr.io/knative-samples/autoscale-go:0.1 \
-     -qps 9999 -concurrency 10 -prime 40000000
+   hey -z 60s -q 100 \
+     -host "autoscale-go.default.example.com" \
+     "http://${IP_ADDRESS?}?prime=40000000"
    ```
 
-1. Heavy memory usage.
+1. Heavy memory usage (1 gb/req).
    ```
-   docker run --rm -i -t --entrypoint /load-generator -e IP_ADDRESS="${IP_ADDRESS}" \
-     gcr.io/knative-samples/autoscale-go:0.1 \
-     -qps 9999 -concurrency 5 -bloat 1000
+   hey -z 60s -c 5 \
+     -host "autoscale-go.default.example.com" \
+     "http://${IP_ADDRESS?}?bloat=1000"
    ```
 
 ## Cleanup
