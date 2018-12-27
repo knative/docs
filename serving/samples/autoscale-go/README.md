@@ -118,7 +118,7 @@ per pod (concurrency). The system has a default
 
 #### Panic
 
-The autoscaler calculates average concurrency over a 60 second window so it takes a minute for the system to stablize at the desired level of concurrency.  However the autoscaler also calculates a 6 second "panic" window and will enter panic mode if that window reached 2x the target concurrency.  In panic mode the autoscaler operates on the shorter, more sensitive panic window.  Once the panic conditions are no longer met for 60 seconds, the autoscaler will return to the initial 60 second "stable" mode.
+The autoscaler calculates average concurrency over a 60 second window so it takes a minute for the system to stablize at the desired level of concurrency.  However the autoscaler also calculates a 6 second "panic" window and will enter panic mode if that window reached 2x the target concurrency.  In panic mode the autoscaler operates on the shorter, more sensitive panic window.  Once the panic conditions are no longer met for 60 seconds, the autoscaler will return to the initial 60 second "stable" window.
 
 ```
                                                        |
@@ -135,13 +135,64 @@ The autoscaler calculates average concurrency over a 60 second window so it take
                      TIME
 ```
 
-#### Tuning
+#### Customization
 
-By default Knative Serving does not limit concurrency in Revision containers. A
-limit can be set per-Configuration using the
-[`ContainerConcurrency`](https://github.com/knative/serving/blob/3f00c39e289ed4bfb84019131651c2e4ea660ab5/pkg/apis/serving/v1alpha1/revision_types.go#L149)
-field. The autoscaler will target a percentage of `ContainerConcurrency` instead
-of the default `100.0`.
+The autoscaler supports customization through annotations.  There are two autoscaler classes built into Knative:
+
+1. `kpa.autoscaling.knative.dev` which is the concurrency-based autoscaler described above (the default), and
+2. `hpa.autoscaling.knative.dev` which delegates to the Kubernetes HPA which autoscales on CPU usage.
+
+E.g.
+
+```
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: autoscale-go
+  namespace: default
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        metadata:
+          annotations:
+            # Standard Kubernetes CPU-based autoscaling.
+            autoscaling.knative.dev/class: hpa.autoscaling.knative.dev
+        spec:
+          container:
+            image: gcr.io/knative-samples/autoscale-go:0.1
+```
+
+Additionally the autoscaler targets and scaling bounds can be specified in annotations:
+
+E.g.
+
+```
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: autoscale-go
+  namespace: default
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        metadata:
+          annotations:
+            # Knative concurrency-based autoscaling.
+            autoscaling.knative.dev/class: kpa.autoscaling.knative.dev
+            # Target 10 requests in-flight per pod.
+            autoscaling.knative.dev/target: "10"
+            # Disable scale to zero with a minScale of 1.
+            autoscaling.knative.dev/minScale: "1"
+            # Limit scaling to 100 pods.
+            autoscaling.knative.dev/maxScale: "100"
+        spec:
+          container:
+            image: gcr.io/knative-samples/autoscale-go:0.1
+```
+
+Note: for an `hpa.autoscaling.knative.dev` class service, the `autoscaling.knative.dev/target` specifies the CPU percentage target (default `"80"`).
 
 ### Dashboards
 
