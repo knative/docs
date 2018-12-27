@@ -10,8 +10,7 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 1. A
    [metrics installation](https://github.com/knative/docs/blob/master/serving/installing-logging-metrics-traces.md)
    for viewing scaling graphs (optional).
-1. Install
-   [Docker](https://docs.docker.com/get-started/#prepare-your-docker-environment).
+1. The `hey` load generator installed (`go get -u github.com/rakyll/hey`).
 1. Clone this repository, and move into the sample directory:
 
    ```
@@ -32,7 +31,7 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
    export IP_ADDRESS=`kubectl get svc knative-ingressgateway --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
    ```
 
-## View the Autoscaling Capabilities
+## Send Load to the Service
 
 1. Make a request to the autoscale app to see it consume some resources.
 
@@ -46,31 +45,68 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
    Slept for 100.13 milliseconds.
    ```
 
-1. Ramp up traffic to maintain 10 in-flight requests.
+1. Send 30 seconds of traffic maintaining 50 in-flight requests.
 
    ```
-   docker run --rm -i -t --entrypoint /load-generator -e IP_ADDRESS="${IP_ADDRESS}" \
-     gcr.io/knative-samples/autoscale-go:0.1 \
-     -sleep 100 -prime 10000 -bloat 5 -qps 9999 -concurrency 300
+   hey -z 30s -c 50 \
+     -host "autoscale-go.default.example.com" \
+     "http://${IP_ADDRESS?}?sleep=100&prime=10000&bloat=5" \
+     && kubectl get pods
    ```
 
    ```
-   REQUEST STATS:
-   Total: 439      Inflight: 299   Done: 439       Success Rate: 100.00%   Avg Latency: 0.4655 sec
-   Total: 1151     Inflight: 245   Done: 712       Success Rate: 100.00%   Avg Latency: 0.4178 sec
-   Total: 1706     Inflight: 300   Done: 555       Success Rate: 100.00%   Avg Latency: 0.4794 sec
-   Total: 2334     Inflight: 264   Done: 628       Success Rate: 100.00%   Avg Latency: 0.5207 sec
-   Total: 2911     Inflight: 300   Done: 577       Success Rate: 100.00%   Avg Latency: 0.4401 sec
-   ...
-   ```
+   Summary:
+     Total:        30.3379 secs
+     Slowest:      0.7433 secs
+     Fastest:      0.1672 secs
+     Average:      0.2778 secs
+     Requests/sec: 178.7861
 
-   > Note: Use CTRL+C to exit the load test.
+     Total data:   542038 bytes
+     Size/request: 99 bytes
 
-1. Watch the Knative Serving deployment pod count increase.
+   Response time histogram:
+     0.167 [1]     |
+     0.225 [1462]  |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+     0.282 [1303]  |■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+     0.340 [1894]  |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+     0.398 [471]   |■■■■■■■■■■
+     0.455 [159]   |■■■
+     0.513 [68]    |■
+     0.570 [18]    |
+     0.628 [14]    |
+     0.686 [21]    |
+     0.743 [13]    |
+
+
+   Latency distribution:
+     10% in 0.1805 secs
+     25% in 0.2197 secs
+     50% in 0.2801 secs
+     75% in 0.3129 secs
+     90% in 0.3596 secs
+     95% in 0.4020 secs
+     99% in 0.5457 secs
+
+   Details (average, fastest, slowest):
+     DNS+dialup:   0.0007 secs, 0.1672 secs, 0.7433 secs
+     DNS-lookup:   0.0000 secs, 0.0000 secs, 0.0000 secs
+     req write:    0.0001 secs, 0.0000 secs, 0.0045 secs
+     resp wait:    0.2766 secs, 0.1669 secs, 0.6633 secs
+     resp read:    0.0002 secs, 0.0000 secs, 0.0065 secs
+
+   Status code distribution:
+     [200] 5424 responses
+
+
+
+   NAME                                             READY   STATUS    RESTARTS   AGE
+   autoscale-go-00001-deployment-78cdc67bf4-2w4sk   3/3     Running   0          26s
+   autoscale-go-00001-deployment-78cdc67bf4-dd2zb   3/3     Running   0          24s
+   autoscale-go-00001-deployment-78cdc67bf4-pg55p   3/3     Running   0          18s
+   autoscale-go-00001-deployment-78cdc67bf4-q8bf9   3/3     Running   0          1m
+   autoscale-go-00001-deployment-78cdc67bf4-thjbq   3/3     Running   0          26s
    ```
-   kubectl get deploy --watch
-   ```
-   > Note: Use CTRL+C to exit watch mode.
 
 ## Analysis
 
