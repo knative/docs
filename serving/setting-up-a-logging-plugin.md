@@ -23,7 +23,7 @@ Operators can do the following steps to configure the Fluentd DaemonSet for
 collecting `stdout/stderr` logs from the containers:
 
 1. Replace `900.output.conf` part in
-   [100-fluentd-configmap.yaml](https://https://github.com/knative/serving/blob/master/config/monitoring/150-elasticsearch/100-fluentd-configmap.yaml)
+   [100-fluentd-configmap.yaml](https://github.com/knative/serving/blob/master/config/monitoring/logging/elasticsearch/100-fluentd-configmap.yaml)
    with the desired output configuration. Knative provides a sample for sending
    logs to Elasticsearch or Stackdriver. Developers can simply use
    `100-fluentd-configmap.yaml` or override any with other configuration.
