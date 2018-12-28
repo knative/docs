@@ -212,7 +212,7 @@ kubectl port-forward --namespace knative-monitoring $(kubectl get pods --namespa
 
 ### Other Experiments
 
-1. Maintain 100 concurrent requests.
+1. Send 60 seconds of traffic maintaining 100 concurrent requests.
 
    ```
    hey -z 60s -c 100 \
@@ -220,7 +220,7 @@ kubectl port-forward --namespace knative-monitoring $(kubectl get pods --namespa
      "http://${IP_ADDRESS?}?sleep=100&prime=10000&bloat=5"
    ```
 
-1. Maintain 100 qps with short requests (10 ms).
+1. Send 60 seconds of traffic maintaining 100 qps with short requests (10 ms).
 
    ```
    hey -z 60s -q 100 \
@@ -228,7 +228,7 @@ kubectl port-forward --namespace knative-monitoring $(kubectl get pods --namespa
      "http://${IP_ADDRESS?}?sleep=10"
    ```
 
-1. Maintain 100 qps with long requests (1 sec).
+1. Send 60 seconds of traffic maintaining 100 qps with long requests (1 sec).
 
    ```
    hey -z 60s -q 100 \
@@ -236,7 +236,7 @@ kubectl port-forward --namespace knative-monitoring $(kubectl get pods --namespa
      "http://${IP_ADDRESS?}?sleep=1000"
    ```
 
-1. Heavy CPU usage (~1 cpu/sec).
+1. Send 60 seconds of traffic with heavy CPU usage (~1 cpu/sec/request, total 100 cpus).
 
    ```
    hey -z 60s -q 100 \
@@ -244,7 +244,7 @@ kubectl port-forward --namespace knative-monitoring $(kubectl get pods --namespa
      "http://${IP_ADDRESS?}?prime=40000000"
    ```
 
-1. Heavy memory usage (1 gb/req).
+1. Send 60 seconds of traffic with heavy memory usage (1 gb/request, total 5 gb).
    ```
    hey -z 60s -c 5 \
      -host "autoscale-go.default.example.com" \
