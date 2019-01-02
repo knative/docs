@@ -1,4 +1,4 @@
-# Welcome, Knative
+# Welcome to Knative
 
 Knative (pronounced kay-nay-tiv) extends Kubernetes to provide a set of
 middleware components that are essential to build modern, source-centric, and
@@ -6,22 +6,22 @@ container-based applications that can run anywhere: on premises, in the cloud,
 or even in a third-party data center.
 
 Each of the components under the Knative project attempt to identify common
-patterns and codify the best practices that are shared by successful real-world
+patterns and codify the best practices that are shared by successful, real-world,
 Kubernetes-based frameworks and applications. Knative components focus on
-solving many mundane but difficult tasks such as:
+solving mundane but difficult tasks such as:
 
 - [Deploying a container](./install/getting-started-knative-app.md)
 - [Orchestrating source-to-URL workflows on Kubernetes](./serving/samples/source-to-url-go/)
 - [Routing and managing traffic with blue/green deployment](./serving/samples/blue-green-deployment.md)
-- [Automatic scaling and sizing workloads based on demand](./serving/samples/autoscale-go)
+- [Scaling automatically and sizing workloads based on demand](./serving/samples/autoscale-go)
 - [Binding running services to eventing ecosystems](./eventing/samples/kubernetes-event-source)
 
 Developers on Knative can use familiar idioms, languages, and frameworks to
-deploy any workload: functions, applications, or containers.
+deploy functions, applications, or containers workloads.
 
 ## Components
 
-The following Knative components are currently available:
+The following Knative components are available:
 
 - [Build](https://github.com/knative/build) - Source-to-container build
   orchestration
@@ -32,7 +32,7 @@ The following Knative components are currently available:
 
 ## Audience
 
-Knative is designed with different personas in mind:
+Knative is designed for different personas:
 
 ![Diagram that displays different Audiences for Knative](./images/knative-audience.svg)
 
@@ -71,7 +71,7 @@ from new developers are especially welcome.
 
 ## Documentation
 
-Follow the links in this section to learn more about Knative.
+Follow the links below to learn more about Knative.
 
 ### Getting started
 
