@@ -86,7 +86,7 @@ To see if your app has been deployed succesfully, you need the host URL and IP
 address created by Knative.
 
 Note: If your cluster is new, it can take some time before the service is
-asssigned an external IP address.
+assigned an external IP address.
 
 1. To find the IP address for your service, enter:
 
