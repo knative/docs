@@ -1,6 +1,7 @@
 # Cron Job Source example
 
-Cron Job Source example shows how to configure Cron Job as event source for functions.
+Cron Job Source example shows how to configure Cron Job as event source for
+functions.
 
 ## Deployment Steps
 
@@ -10,36 +11,62 @@ Cron Job Source example shows how to configure Cron Job as event source for func
 1. Setup
    [Knative Eventing](https://github.com/knative/docs/tree/master/eventing).
 
-### Channel
+### Create a Knative Service
 
-1. Create a `Channel`. You can use your own `Channel` or use the provided sample, which creates a channel called `cronjob-test`. If you use your own `Channel` with a different name, then you will need to alter other commands later.
+In order to verify `CronJobSource` is working, we will create a simple Knative
+Service that dumps incoming messages to its log.
+
+```yaml
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: message-dumper
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            image: github.com/knative/eventing-sources/cmd/message_dumper
+```
+
+Use following command to create the service from `service.yaml`:
 
 ```shell
-kubectl apply -f channel.yaml
+kubectl apply -f service.yaml
 ```
 
 ### Create Cron Job Event Source
 
-1. In order to receive events, you need to create a concrete Event Source for a specific namespace. If you want to consume events from a differenet namespace or using a different `Service Account`, you need to modify the yaml accordingly.
+For each set of cron events you want to request, you need to create an Event
+Source in the same namespace as the destiantion. If you need a different
+ServiceAccount to create the Deployment, modify the entry accordingly in the
+yaml.
+
+```yaml
+apiVersion: sources.eventing.knative.dev/v1alpha1
+kind: CronJobSource
+metadata:
+  name: test-cronjob-source
+spec:
+  schedule: "*/2 * * * *"
+  data: '{"message": "Hello world!"}'
+  sink:
+    apiVersion: serving.knative.dev/v1alpha1
+    kind: Service
+    name: message-dumper
+```
+
+Use following command to create the event source from `cronjob-source.yaml`:
 
 ```shell
 kubectl apply -f cronjob-source.yaml
 ```
 
-### Subscriber
-
-In order to check the `CronJobSource` is fully working, we will create a simple Knative Service that dumps incoming messages to its log and create a `Subscription` from the `Channel` to that Knative Service.
-
-1. If the deployed `CronJobSource` is pointing at a `Channel` other than `cronjob-test`, modify `subscriber.yaml` by replacing `cronjob-test` with that `Channel`'s name.
-1. Deploy `subscriber.yaml`.
-
-```shell
-kubectl apply -f subscriber.yaml
-```
-
 ### Verify
 
-We will verify that the message was sent to the Knative eventing system by looking at message dumper logs.
+We will verify that the message was sent to the Knative eventing system by
+looking at message dumper logs.
 
 1. Use [`kail`](https://github.com/boz/kail) to tail the logs of the subscriber.
 
