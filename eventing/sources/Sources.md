@@ -1,5 +1,3 @@
-
-
 # Knative Event Sources
 
 This is a non-exhaustive list of Event sources for Knative. Inclusion in this list **does not**
