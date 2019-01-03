@@ -3,6 +3,8 @@
 This is a non-exhaustive list of Event sources for Knative. Inclusion in this list **does not**
 imply an endorsement, nor does it imply any level of support.
 
+This is a generated file and should not be changed manually. All changes should follow the procedure
+outlined in the [read me](README.md#updating-sourcesmd).
 
 ## Sources
 
