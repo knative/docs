@@ -66,7 +66,7 @@ docker push "${REPO}/serving/samples/telemetry-go"
 5.  Replace the image reference path with our published image path in the
     configuration file (`serving/samples/telemetry-go/sample.yaml`):
 
-    - Manually replace:  
+    - Manually replace:
       `image: github.com/knative/docs/serving/samples/telemetry-go` with
       `image: <YOUR_CONTAINER_REGISTRY>/serving/samples/telemetry-go`
 
@@ -114,18 +114,28 @@ kubectl get revisions --output yaml
 
 To access this service via `curl`, you need to determine its ingress address.
 
-1. To determine if your service is ready:  
+1. To determine if your service is ready:
    Check the status of your Knative gateway:
 
 ```
-kubectl get svc knative-ingressgateway --namespace istio-system --watch
+# In Knative 0.2.x or prior versions, we use `knative-ingressgateway`.
+INGRESSGATEWAY=knative-ingressgateway
+
+# In Knative 0.3.x the use of `knative-ingressgateway` is deprecated.
+# We should use `istio-ingressgateway` since `knative-ingressgateway`
+# will be removed in 0.4.
+if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
+    INGRESSGATEWAY=istio-ingressgateway
+fi
+
+kubectl get svc $INGRESSGATEWAY --namespace istio-system --watch
 ```
 
 When the service is ready, you'll see an IP address in the `EXTERNAL-IP` field:
 
 ```
 NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
-knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
+xxxxxxx-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
 ```
 
 CTRL+C to end watch.
@@ -151,7 +161,18 @@ status:
 
 ```
 export SERVICE_HOST=`kubectl get route telemetrysample-route --output jsonpath="{.status.domain}"`
-export SERVICE_IP=`kubectl get svc knative-ingressgateway --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
+
+# In Knative 0.2.x or prior versions, we use `knative-ingressgateway`.
+INGRESSGATEWAY=knative-ingressgateway
+
+# In Knative 0.3.x the use of `knative-ingressgateway` is deprecated.
+# We should use `istio-ingressgateway` since `knative-ingressgateway`
+# will be removed in 0.4.
+if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
+    INGRESSGATEWAY=istio-ingressgateway
+fi
+
+export SERVICE_IP=`kubectl get svc $INGRESSGATEWAY --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
 ```
 
 3. Make a request to the service to see the `Hello World!` message:

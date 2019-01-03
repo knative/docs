@@ -368,7 +368,17 @@ In order to publish the Knative Gateway service, the annotation
 into Knative gateway service:
 
 ```shell
-kubectl edit svc knative-ingressgateway --namespace istio-system
+# In Knative 0.2.x or prior versions, we use `knative-ingressgateway`.
+INGRESSGATEWAY=knative-ingressgateway
+
+# In Knative 0.3.x the use of `knative-ingressgateway` is deprecated.
+# We should use `istio-ingressgateway` since `knative-ingressgateway`
+# will be removed in 0.4.
+if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
+    INGRESSGATEWAY=istio-ingressgateway
+fi
+
+kubectl edit svc $INGRESSGATEWAY --namespace istio-system
 ```
 
 This command opens your default text editor and allows you to add the annotation

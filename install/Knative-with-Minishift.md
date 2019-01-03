@@ -257,8 +257,19 @@ spec:
 ' | oc create -f -
 # Wait for the hello pod to enter its `Running` state
 oc get pod --watch
+
+# In Knative 0.2.x or prior versions, we use `knative-ingressgateway`.
+INGRESSGATEWAY=knative-ingressgateway
+
+# In Knative 0.3.x the use of `knative-ingressgateway` is deprecated.
+# We should use `istio-ingressgateway` since `knative-ingressgateway`
+# will be removed in 0.4.
+if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
+    INGRESSGATEWAY=istio-ingressgateway
+fi
+
 # Call the service
-export IP_ADDRESS=$(oc get svc knative-ingressgateway -n istio-system -o 'jsonpath={.status.loadBalancer.ingress[0].ip}')
+export IP_ADDRESS=$(oc get svc $INGRESSGATEWAY -n istio-system -o 'jsonpath={.status.loadBalancer.ingress[0].ip}')
 # This should output 'Hello World: Go Sample v1!'
 curl -H "Host: helloworld-go.myproject.example.com" http://$IP_ADDRESS
 ```

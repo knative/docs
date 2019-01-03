@@ -218,14 +218,24 @@ To verify that your sample app has been successfully deployed:
    created.
 
    ```shell
-   kubectl get svc knative-ingressgateway --namespace istio-system
+   # In Knative 0.2.x or prior versions, we use `knative-ingressgateway`.
+   INGRESSGATEWAY=knative-ingressgateway
+
+   # In Knative 0.3.x the use of `knative-ingressgateway` is deprecated.
+   # We should use `istio-ingressgateway` since `knative-ingressgateway`
+   # will be removed in 0.4.
+   if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
+       INGRESSGATEWAY=istio-ingressgateway
+   fi
+
+   kubectl get svc $INGRESSGATEWAY --namespace istio-system
    ```
 
    Example result:
 
    ```shell
    NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
-   knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
+   xxxxxxx-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
    ```
 
 1. Retrieve the URL for your service, by running the following `kubectl get`

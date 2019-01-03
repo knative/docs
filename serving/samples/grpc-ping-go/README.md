@@ -39,8 +39,18 @@ kubectl apply --filename serving/samples/grpc-ping-go/sample.yaml
 # Put the Host name into an environment variable.
 export SERVICE_HOST=`kubectl get route grpc-ping --output jsonpath="{.status.domain}"`
 
+# In Knative 0.2.x or prior versions, we use `knative-ingressgateway`.
+INGRESSGATEWAY=knative-ingressgateway
+
+# In Knative 0.3.x the use of `knative-ingressgateway` is deprecated.
+# We should use `istio-ingressgateway` since `knative-ingressgateway`
+# will be removed in 0.4.
+if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
+    INGRESSGATEWAY=istio-ingressgateway
+fi
+
 # Put the ingress IP into an environment variable.
-export SERVICE_IP=`kubectl get svc knative-ingressgateway --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
+export SERVICE_IP=`kubectl get svc $INGRESSGATEWAY --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
 ```
 
 1. Use the client to send message streams to the gRPC server.

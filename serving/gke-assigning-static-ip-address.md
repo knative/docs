@@ -51,22 +51,31 @@ In the
     address through a config-map later.
 1.  Copy the **External Address** of the static IP you created.
 
-## Step 2: Update the external IP of the `knative-ingressgateway` service
+## Step 2: Update the external IP of `istio-ingressgateway` service
 
 Run following command to configure the external IP of the
-`knative-ingressgateway` service to the static IP that you reserved:
+`istio-ingressgateway` service to the static IP that you reserved:
 
 ```shell
-kubectl patch svc knative-ingressgateway --namespace istio-system --patch '{"spec": { "loadBalancerIP": "<your-reserved-static-ip>" }}'
+# In Knative 0.2.x or prior versions, we use `knative-ingressgateway`.
+INGRESSGATEWAY=knative-ingressgateway
+
+# In Knative 0.3.x the use of `knative-ingressgateway` is deprecated.
+# We should use `istio-ingressgateway` since `knative-ingressgateway`
+# will be removed in 0.4.
+if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
+    INGRESSGATEWAY=istio-ingressgateway
+fi
+
+kubectl patch svc $INGRESSGATEWAY --namespace istio-system --patch '{"spec": { "loadBalancerIP": "<your-reserved-static-ip>" }}'
 ```
 
-## Step 3: Verify the static IP address of `knative-ingressgateway` service
+## Step 3: Verify the static IP address of `istio-ingressgateway` service
 
-Run the following command to ensure that the external IP of the
-"knative-ingressgateway" service has been updated:
+Run the following command to ensure that the external IP of the ingressgateway service has been updated:
 
 ```shell
-kubectl get svc knative-ingressgateway --namespace istio-system
+kubectl get svc $INGRESSGATEWAY --namespace istio-system
 ```
 
 The output should show the assigned static IP address under the EXTERNAL-IP
@@ -74,7 +83,7 @@ column:
 
 ```
 NAME                     TYPE           CLUSTER-IP      EXTERNAL-IP     PORT(S)                                      AGE
-knative-ingressgateway   LoadBalancer   12.34.567.890   98.765.43.210   80:32380/TCP,443:32390/TCP,32400:32400/TCP   5m
+xxxxxxx-ingressgateway   LoadBalancer   12.34.567.890   98.765.43.210   80:32380/TCP,443:32390/TCP,32400:32400/TCP   5m
 ```
 
 > Note: Updating the external IP address can take several minutes.

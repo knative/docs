@@ -28,7 +28,17 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 
 1. Find the ingress hostname and IP and export as an environment variable:
    ```
-   export IP_ADDRESS=`kubectl get svc knative-ingressgateway --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
+   # In Knative 0.2.x or prior versions, we use `knative-ingressgateway`.
+   INGRESSGATEWAY=knative-ingressgateway
+
+   # In Knative 0.3.x the use of `knative-ingressgateway` is deprecated.
+   # We should use `istio-ingressgateway` since `knative-ingressgateway`
+   # will be removed in 0.4.
+   if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
+       INGRESSGATEWAY=istio-ingressgateway
+   fi
+
+   export IP_ADDRESS=`kubectl get svc $INGRESSGATEWAY --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
    ```
 
 ## Load the Service

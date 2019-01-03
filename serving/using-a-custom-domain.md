@@ -90,7 +90,17 @@ You should see the full customized domain: `helloworld-go.default.mydomain.com`.
 And you can check the IP address of your Knative gateway by running:
 
 ```shell
-kubectl get svc knative-ingressgateway --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*]['ip']}"
+# In Knative 0.2.x or prior versions, we use `knative-ingressgateway`.
+export INGRESSGATEWAY=knative-ingressgateway
+
+# In Knative 0.3.x the use of `knative-ingressgateway` is deprecated.
+# We should use `istio-ingressgateway` since `knative-ingressgateway`
+# will be removed in 0.4.
+if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
+    export INGRESSGATEWAY=istio-ingressgateway
+fi
+
+kubectl get svc $INGRESSGATEWAY --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*]['ip']}"
 ```
 
 ## Local DNS setup
@@ -99,7 +109,17 @@ You can map the domain to the IP address of your Knative gateway in your local
 machine with:
 
 ```shell
-export GATEWAY_IP=`kubectl get svc knative-ingressgateway --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*]['ip']}"`
+# In Knative 0.2.x or prior versions, we use `knative-ingressgateway`.
+INGRESSGATEWAY=knative-ingressgateway
+
+# In Knative 0.3.x the use of `knative-ingressgateway` is deprecated.
+# We should use `istio-ingressgateway` since `knative-ingressgateway`
+# will be removed in 0.4.
+if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
+    INGRESSGATEWAY=istio-ingressgateway
+fi
+
+export GATEWAY_IP=`kubectl get svc $INGRESSGATEWAY --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*]['ip']}"`
 
 # helloworld-go is the generated Knative Route of "helloworld-go" sample.
 # You need to replace it with your own Route in your project.

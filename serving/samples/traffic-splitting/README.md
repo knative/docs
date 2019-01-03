@@ -17,7 +17,7 @@ configuration.
    configuration files
    (`serving/samples/traffic-splitting/updated_configuration.yaml`:
 
-   - Manually replace:  
+   - Manually replace:
      `image: github.com/knative/docs/serving/samples/rest-api-go` with
      `image: <YOUR_CONTAINER_REGISTRY>/serving/samples/rest-api-go`
 
@@ -43,14 +43,25 @@ kubectl apply --filename serving/samples/traffic-splitting/updated_configuration
 kubectl get route --output yaml
 ```
 
-4. When the new route is ready, you can access the new endpoints:  
+4. When the new route is ready, you can access the new endpoints:
    The hostname and IP address can be found in the same manner as the
    [Creating a RESTful Service](../rest-api-go) sample:
 
 ```
 export SERVICE_HOST=`kubectl get route stock-route-example --output jsonpath="{.status.domain}"`
-export SERVICE_IP=`kubectl get svc knative-ingressgateway --namespace istio-system \
---output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
+
+# In Knative 0.2.x or prior versions, we use `knative-ingressgateway`.
+INGRESSGATEWAY=knative-ingressgateway
+
+# In Knative 0.3.x the use of `knative-ingressgateway` is deprecated.
+# We should use `istio-ingressgateway` since `knative-ingressgateway`
+# will be removed in 0.4.
+if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
+    INGRESSGATEWAY=istio-ingressgateway
+fi
+
+export SERVICE_IP=`kubectl get svc $INGRESSGATEWAY --namespace istio-system \
+    --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
 ```
 
 - Make a request to the index endpoint:
