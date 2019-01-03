@@ -77,36 +77,25 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
      0.628 [14]    |
      0.686 [21]    |
      0.743 [13]    |
-
-
-   Latency distribution:
-     10% in 0.1805 secs
-     25% in 0.2197 secs
-     50% in 0.2801 secs
-     75% in 0.3129 secs
-     90% in 0.3596 secs
-     95% in 0.4020 secs
-     99% in 0.5457 secs
-
-   Details (average, fastest, slowest):
-     DNS+dialup:   0.0007 secs, 0.1672 secs, 0.7433 secs
-     DNS-lookup:   0.0000 secs, 0.0000 secs, 0.0000 secs
-     req write:    0.0001 secs, 0.0000 secs, 0.0045 secs
-     resp wait:    0.2766 secs, 0.1669 secs, 0.6633 secs
-     resp read:    0.0002 secs, 0.0000 secs, 0.0065 secs
-
-   Status code distribution:
-     [200] 5424 responses
-
-
-
-   NAME                                             READY   STATUS    RESTARTS   AGE
-   autoscale-go-00001-deployment-78cdc67bf4-2w4sk   3/3     Running   0          26s
-   autoscale-go-00001-deployment-78cdc67bf4-dd2zb   3/3     Running   0          24s
-   autoscale-go-00001-deployment-78cdc67bf4-pg55p   3/3     Running   0          18s
-   autoscale-go-00001-deployment-78cdc67bf4-q8bf9   3/3     Running   0          1m
-   autoscale-go-00001-deployment-78cdc67bf4-thjbq   3/3     Running   0          26s
    ```
+
+Latency distribution: 10% in 0.1805 secs 25% in 0.2197 secs 50% in 0.2801 secs
+75% in 0.3129 secs 90% in 0.3596 secs 95% in 0.4020 secs 99% in 0.5457 secs
+
+Details (average, fastest, slowest): DNS+dialup: 0.0007 secs, 0.1672 secs,
+0.7433 secs DNS-lookup: 0.0000 secs, 0.0000 secs, 0.0000 secs req write: 0.0001
+secs, 0.0000 secs, 0.0045 secs resp wait: 0.2766 secs, 0.1669 secs, 0.6633 secs
+resp read: 0.0002 secs, 0.0000 secs, 0.0065 secs
+
+Status code distribution: [200] 5424 responses
+
+NAME READY STATUS RESTARTS AGE autoscale-go-00001-deployment-78cdc67bf4-2w4sk
+3/3 Running 0 26s autoscale-go-00001-deployment-78cdc67bf4-dd2zb 3/3 Running 0
+24s autoscale-go-00001-deployment-78cdc67bf4-pg55p 3/3 Running 0 18s
+autoscale-go-00001-deployment-78cdc67bf4-q8bf9 3/3 Running 0 1m
+autoscale-go-00001-deployment-78cdc67bf4-thjbq 3/3 Running 0 26s
+
+```
 
 ## Analysis
 
@@ -121,6 +110,7 @@ per pod (concurrency). The system has a default
 The autoscaler calculates average concurrency over a 60 second window so it takes a minute for the system to stablize at the desired level of concurrency.  However the autoscaler also calculates a 6 second "panic" window and will enter panic mode if that window reached 2x the target concurrency.  In panic mode the autoscaler operates on the shorter, more sensitive panic window.  Once the panic conditions are no longer met for 60 seconds, the autoscaler will return to the initial 60 second "stable" window.
 
 ```
+
                                                        |
                                   Panic Target--->  +--| 20
                                                     |  |
@@ -130,9 +120,9 @@ The autoscaler calculates average concurrency over a 60 second window so it take
                           |                         |  |
                           |                      <-----------Stable Window
                           |                         |  |
---------------------------+-------------------------+--+ 0
-120                       60                           0
-                     TIME
+
+--------------------------+-------------------------+--+ 0 120 60 0 TIME
+
 ```
 
 #### Customization
@@ -145,51 +135,30 @@ The autoscaler supports customization through annotations.  There are two autosc
 Example of a Service scaled on CPU:
 
 ```
-apiVersion: serving.knative.dev/v1alpha1
-kind: Service
-metadata:
-  name: autoscale-go
-  namespace: default
-spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        metadata:
-          annotations:
-            # Standard Kubernetes CPU-based autoscaling.
-            autoscaling.knative.dev/class:  hpa.autoscaling.knative.dev
-            autoscaling.knative.dev/metric: cpu
-        spec:
-          container:
-            image: gcr.io/knative-samples/autoscale-go:0.1
+
+apiVersion: serving.knative.dev/v1alpha1 kind: Service metadata: name:
+autoscale-go namespace: default spec: runLatest: configuration:
+revisionTemplate: metadata: annotations: # Standard Kubernetes CPU-based
+autoscaling. autoscaling.knative.dev/class: hpa.autoscaling.knative.dev
+autoscaling.knative.dev/metric: cpu spec: container: image:
+gcr.io/knative-samples/autoscale-go:0.1
+
 ```
 
 Additionally the autoscaler targets and scaling bounds can be specified in annotations.  Example of a Service with custom targets and scale bounds:
 
 ```
-apiVersion: serving.knative.dev/v1alpha1
-kind: Service
-metadata:
-  name: autoscale-go
-  namespace: default
-spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        metadata:
-          annotations:
-            # Knative concurrency-based autoscaling (default).
-            autoscaling.knative.dev/class:  kpa.autoscaling.knative.dev
-            autoscaling.knative.dev/metric: concurrency
-            # Target 10 requests in-flight per pod.
-            autoscaling.knative.dev/target: "10"
-            # Disable scale to zero with a minScale of 1.
-            autoscaling.knative.dev/minScale: "1"
-            # Limit scaling to 100 pods.
-            autoscaling.knative.dev/maxScale: "100"
-        spec:
-          container:
-            image: gcr.io/knative-samples/autoscale-go:0.1
+
+apiVersion: serving.knative.dev/v1alpha1 kind: Service metadata: name:
+autoscale-go namespace: default spec: runLatest: configuration:
+revisionTemplate: metadata: annotations: # Knative concurrency-based autoscaling
+(default). autoscaling.knative.dev/class: kpa.autoscaling.knative.dev
+autoscaling.knative.dev/metric: concurrency # Target 10 requests in-flight per
+pod. autoscaling.knative.dev/target: "10" # Disable scale to zero with a
+minScale of 1. autoscaling.knative.dev/minScale: "1" # Limit scaling to 100
+pods. autoscaling.knative.dev/maxScale: "100" spec: container: image:
+gcr.io/knative-samples/autoscale-go:0.1
+
 ```
 
 Note: for an `hpa.autoscaling.knative.dev` class service, the `autoscaling.knative.dev/target` specifies the CPU percentage target (default `"80"`).
@@ -203,7 +172,11 @@ View the [Kubecon Demo](https://youtu.be/OPSIPr-Cybs) of Knative autoscaler cust
 View the Knative Serving Scaling and Request dashboards (if configured).
 
 ```
-kubectl port-forward --namespace knative-monitoring $(kubectl get pods --namespace knative-monitoring --selector=app=grafana --output=jsonpath="{.items..metadata.name}") 3000
+
+kubectl port-forward --namespace knative-monitoring \$(kubectl get pods
+--namespace knative-monitoring --selector=app=grafana
+--output=jsonpath="{.items..metadata.name}") 3000
+
 ```
 
 ![scale dashboard](scale-dashboard.png)
@@ -214,49 +187,62 @@ kubectl port-forward --namespace knative-monitoring $(kubectl get pods --namespa
 
 1. Send 60 seconds of traffic maintaining 100 concurrent requests.
 
-   ```
-   hey -z 60s -c 100 \
-     -host "autoscale-go.default.example.com" \
-     "http://${IP_ADDRESS?}?sleep=100&prime=10000&bloat=5"
-   ```
+```
+
+hey -z 60s -c 100 \
+ -host "autoscale-go.default.example.com" \
+ "http://${IP_ADDRESS?}?sleep=100&prime=10000&bloat=5"
+
+```
 
 1. Send 60 seconds of traffic maintaining 100 qps with short requests (10 ms).
 
-   ```
-   hey -z 60s -q 100 \
-     -host "autoscale-go.default.example.com" \
-     "http://${IP_ADDRESS?}?sleep=10"
-   ```
+```
+
+hey -z 60s -q 100 \
+ -host "autoscale-go.default.example.com" \
+ "http://${IP_ADDRESS?}?sleep=10"
+
+```
 
 1. Send 60 seconds of traffic maintaining 100 qps with long requests (1 sec).
 
-   ```
-   hey -z 60s -q 100 \
-     -host "autoscale-go.default.example.com" \
-     "http://${IP_ADDRESS?}?sleep=1000"
-   ```
+```
+
+hey -z 60s -q 100 \
+ -host "autoscale-go.default.example.com" \
+ "http://${IP_ADDRESS?}?sleep=1000"
+
+```
 
 1. Send 60 seconds of traffic with heavy CPU usage (~1 cpu/sec/request, total 100 cpus).
 
-   ```
-   hey -z 60s -q 100 \
-     -host "autoscale-go.default.example.com" \
-     "http://${IP_ADDRESS?}?prime=40000000"
-   ```
+```
+
+hey -z 60s -q 100 \
+ -host "autoscale-go.default.example.com" \
+ "http://${IP_ADDRESS?}?prime=40000000"
+
+```
 
 1. Send 60 seconds of traffic with heavy memory usage (1 gb/request, total 5 gb).
-   ```
-   hey -z 60s -c 5 \
-     -host "autoscale-go.default.example.com" \
-     "http://${IP_ADDRESS?}?bloat=1000"
-   ```
+```
+
+hey -z 60s -c 5 \
+ -host "autoscale-go.default.example.com" \
+ "http://${IP_ADDRESS?}?bloat=1000"
+
+```
 
 ## Cleanup
 
 ```
+
 kubectl delete --filename serving/samples/autoscale-go/service.yaml
+
 ```
 
 ## Further reading
 
 1. [Autoscaling Developer Documentation](https://github.com/knative/serving/blob/master/docs/scaling/DEVELOPMENT.md)
+```
