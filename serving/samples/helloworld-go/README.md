@@ -58,33 +58,34 @@ recreate the source files from this folder.
    block below into it. For detailed instructions on dockerizing a Go app, see
    [Deploying Go servers with Docker](https://blog.golang.org/docker).
 
-   ```docker
-   # Use the offical Golang image to create a build artifact.
-   # This is based on Debian and sets the GOPATH to /go.
-   FROM golang as builder
+    ```docker
+    # Use the offical Golang image to create a build artifact.
+    # This is based on Debian and sets the GOPATH to /go.
+    FROM golang as builder
 
-   # Copy local code to the container image.
-   WORKDIR /go/src/github.com/knative/docs/helloworld
-   COPY . .
+    # Copy local code to the container image.
+    WORKDIR /go/src/github.com/knative/docs/helloworld
+    COPY . .
 
-   # Build the helloworld command inside the container.
-   # (You may fetch or manage dependencies here,
-   # either manually or with a tool like "godep".)
-   RUN CGO_ENABLED=0 GOOS=linux go build -v -o helloworld
+    # Build the outyet command inside the container.
+    # (You may fetch or manage dependencies here,
+    # either manually or with a tool like "godep".)
+    RUN CGO_ENABLED=0 GOOS=linux go build -v -o helloworld
 
-   # Use a Docker multi-stage build to create a lean production image.
-   # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
-   FROM alpine
+    # Use a Docker multi-stage build to create a lean production image.
+    # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
+    FROM alpine
 
-   # Copy the binary to the production image from the builder stage.
-   COPY --from=builder /go/src/github.com/knative/docs/helloworld/helloworld /helloworld
+    # Copy the binary to the production image from the builder stage.
+    COPY --from=builder /go/src/github.com/knative/docs/helloworld/helloworld /helloworld
 
-   # Configure and document the service HTTP port.
-   ENV PORT 8080
+    # Service must listen to $PORT environment variable.
+    # This default value facilitates local development.
+    ENV PORT 8080
 
-   # Run the web service on container startup.
-   CMD ["/helloworld"]
-   ```
+    # Run the web service on container startup.
+    CMD ["/helloworld"]
+    ```
 
 1. Create a new file, `service.yaml` and copy the following service definition
    into the file. Make sure to replace `{username}` with your Docker Hub

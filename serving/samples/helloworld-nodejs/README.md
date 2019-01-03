@@ -83,31 +83,32 @@ recreate the source files from this folder.
    see
    [Dockerizing a Node.js web app](https://nodejs.org/en/docs/guides/nodejs-docker-webapp/).
 
-   ```Dockerfile
-   # Use the official Node 8 image.
-   # https://hub.docker.com/_/node
-   FROM node:8
+    ```Dockerfile
+    # Use the official Node 8 image.
+    # https://hub.docker.com/_/node
+    FROM node:10
 
-   # Create and change to the app directory.
-   WORKDIR /usr/src/app
+    # Create and change to the app directory.
+    WORKDIR /usr/src/app
 
-   # Copy application dependency manifests to the container image.
-   # A wildcard is used to ensure both package.json AND package-lock.json are copied.
-   # Copying this separately prevents re-running npm install on every code change.
-   COPY package*.json ./
+    # Copy application dependency manifests to the container image.
+    # A wildcard is used to ensure both package.json AND package-lock.json are copied.
+    # Copying this separately prevents re-running npm install on every code change.
+    COPY package*.json ./
 
-   # Install production dependencies.
-   RUN npm install --only=production
+    # Install production dependencies.
+    RUN npm install --only=production
 
-   # Copy local code to the container image.
-   COPY . .
+    # Copy local code to the container image.
+    COPY . .
 
-   # Configure and document the service HTTP port.
-   ENV PORT 8080
+    # Service must listen to $PORT environment variable.
+    # This default value facilitates local development.
+    ENV PORT 8080
 
-   # Run the web service on container startup.
-   CMD [ "npm", "start" ]
-   ```
+    # Run the web service on container startup.
+    CMD [ "npm", "start" ]
+    ```
 
 1. Create a new file, `service.yaml` and copy the following service definition
    into the file. Make sure to replace `{username}` with your Docker Hub

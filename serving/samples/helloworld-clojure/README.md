@@ -59,28 +59,29 @@ recreate the source files from this folder.
    see
    [the clojure image documentation](https://github.com/docker-library/docs/tree/master/clojure).
 
-   ```docker
-   # Use the official Clojure image.
-   # https://hub.docker.com/_/clojure
-   FROM clojure
+    ```docker
+    # Use the official Clojure image.
+    # https://hub.docker.com/_/clojure
+    FROM clojure
 
-   # Create the project and download dependencies.
-   WORKDIR /usr/src/app
-   COPY project.clj .
-   RUN lein deps
+    # Create the project and download dependencies.
+    WORKDIR /usr/src/app
+    COPY project.clj .
+    RUN lein deps
 
-   # Copy local code to the container image.
-   COPY . .
+    # Copy local code to the container image.
+    COPY . .
 
-   # Build an uberjar release artifact.
-   RUN mv "$(lein uberjar | sed -n 's/^Created \(.*standalone\.jar\)/\1/p')" app-standalone.jar
+    # Build an uberjar release artifact.
+    RUN mv "$(lein uberjar | sed -n 's/^Created \(.*standalone\.jar\)/\1/p')" app-standalone.jar
 
-   # Configure the service HTTP port.
-   ENV PORT 8080
+    # Service must listen to $PORT environment variable.
+    # This default value facilitates local development.
+    ENV PORT 8080
 
-   # Run the web service on container startup.
-   CMD ["java", "-jar", "app-standalone.jar"]
-   ```
+    # Run the web service on container startup.
+    CMD ["java", "-jar", "app-standalone.jar"]
+    ```
 
 1. Create a new file, `service.yaml` and copy the following service definition
    into the file. Make sure to replace `{username}` with your Docker Hub

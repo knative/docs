@@ -87,24 +87,25 @@ recreate the source files from this folder.
 1. In your project directory, create a file named `Dockerfile` and copy the code
    block below into it.
 
-   ```docker
-   # Use the official Rust image.
-   # https://hub.docker.com/_/rust
-   FROM rust:1.27.0
+    ```docker
+    # Use the official Rust image.
+    # https://hub.docker.com/_/rust
+    FROM rust:1.27.0
 
-   # Copy local code to the container image.
-   WORKDIR /usr/src/app
-   COPY . .
+    # Copy local code to the container image.
+    WORKDIR /usr/src/app
+    COPY . .
 
-   # Install production dependencies and build a release artifact.
-   RUN cargo install
+    # Install production dependencies and build a release artifact.
+    RUN cargo install
 
-   # Configure and document the service HTTP port.
-   ENV PORT 8080
+    # Service must listen to $PORT environment variable.
+    # This default value facilitates local development.
+    ENV PORT 8080
 
-   # Run the web service on container startup.
-   CMD ["hellorust"]
-   ```
+    # Run the web service on container startup.
+    CMD ["hellorust"]
+    ```
 
 1. Create a new file, `service.yaml` and copy the following service definition
    into the file. Make sure to replace `{username}` with your Docker Hub
