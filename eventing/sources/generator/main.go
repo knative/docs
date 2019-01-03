@@ -58,6 +58,7 @@ type yamlSources struct {
 	Sources     []source `yaml:"sources"`
 	Containers  []source `yaml:"containers"`
 }
+
 type source struct {
 	Name        string `yaml:"name"`
 	Url         string `yaml:"url"`
