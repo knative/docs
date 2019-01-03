@@ -14,7 +14,8 @@ COPY . .
 # Build a release artifact.
 RUN dotnet publish -c Release -o out
 
-# Configure the service HTTP port.
+# Service must listen to $PORT environment variable.
+# This default value facilitates local development.
 ENV PORT 8080
 
 # Run the web service on container startup.

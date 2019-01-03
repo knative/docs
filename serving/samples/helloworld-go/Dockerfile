@@ -18,7 +18,8 @@ FROM alpine
 # Copy the binary to the production image from the builder stage.
 COPY --from=builder /go/src/github.com/knative/docs/helloworld/helloworld /helloworld
 
-# Configure the service HTTP port.
+# Service must listen to $PORT environment variable.
+# This default value facilitates local development.
 ENV PORT 8080
 
 # Run the web service on container startup.
