@@ -226,6 +226,14 @@
   revision = "8ffb2ffc32b7af2c7e940944eccba4dcd66c692a"
   version = "v3.13.0"
 
+[[projects]]
+  digest = "1:18108594151654e9e696b27b181b953f9a90b16bf14d253dd1b397b025a1487f"
+  name = "gopkg.in/yaml.v2"
+  packages = ["."]
+  pruneopts = "NUT"
+  revision = "51d6538a90f86fe93ac480b35f37b2be17fef232"
+  version = "v2.2.2"
+
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
@@ -249,6 +257,7 @@
     "golang.org/x/oauth2",
     "gopkg.in/go-playground/webhooks.v3",
     "gopkg.in/go-playground/webhooks.v3/github",
+    "gopkg.in/yaml.v2",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1
