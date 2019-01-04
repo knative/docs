@@ -9,8 +9,9 @@ a class of events from a particular software system. Since different event sourc
 by different Custom Resources, this page provides an index of the available source resource types as
 well as links to installation instructions.
 
-This is a non-exhaustive list of Event sources for Knative. Inclusion in this list **does not**
-imply an endorsement, nor does it imply any level of support.
+This is a non-exhaustive list of Event sources for Knative.
+
+## Inclusion in this list **does not** imply an endorsement, nor does it imply any level of support.
 
 
 ## Sources

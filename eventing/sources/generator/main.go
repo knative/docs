@@ -28,7 +28,7 @@ import (
 
 var (
 	yamlFile     = flag.String("yaml", "eventing/sources/sources.yaml", "The YAML file to parse to generate the mark down.")
-	templateFile = flag.String("template", "eventing/sources/generator/SourcesTemplate.gomd", "The template file to fill in.")
+	templateFile = flag.String("template", "eventing/sources/generator/ReadmeTemplate.gomd", "The template file to fill in.")
 	mdFile       = flag.String("md", "eventing/sources/README.md", "The mark down file to write to. Any existing file will be overwritten.")
 )
 
