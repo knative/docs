@@ -1,6 +1,14 @@
-This is a generated file and should not be changed manually. All changes should follow the procedure
-outlined in [maintenance.md](maintenance.md).
+<!--
+This is a generated file and should not be changed manually. All changes should follow the
+procedure:
 
+1. Update the information in [`sources.yaml`](sources.yaml).
+
+2. Run the generator tool:
+    ```shell
+    go run eventing/sources/generator/main.go
+    ```
+-->
 
 # Knative Event Sources
 
