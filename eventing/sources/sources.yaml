@@ -66,6 +66,13 @@ sources:
     description: >
       Create, update, and delete [Google Cloud Scheduler](https://cloud.google.com/scheduler/)
       Jobs. When those jobs are triggered, receive the event inside Knative.
+  - name: Google Cloud Storage
+    url: https://github.com/vaikas-google/gcs
+    status: Active Development
+    support: None
+    description: >
+      Registers for events of the specified types on the specified Google Cloud Storage bucket and
+      optional object prefix. Brings those events into Knative.
 
 # These are containers intended to be used with ContainerSource, but are not CRDs.
 containers:
@@ -82,3 +89,17 @@ containers:
     description: >
       Opens a WebSocket to the specified source and packages each received message as a Knative
       event.
+  - name: K8s
+    url: https://github.com/Harwayne/auto-container-source/tree/master/k8s-event-source
+    status: Proof of Concept
+    support: None
+    description: >
+      Brings Kubernetes cluster events into Knative. Uses AutoContainerSource for underlying
+      infrastructure.
+  - name: Heartbeat
+    url: https://github.com/Harwayne/auto-container-source/tree/master/heartbeat-source
+    status: Proof of Concept
+    support: None
+    description: >
+      Uses an in-memory timer to produce events as the specified interval. Uses AutoContainerSource
+      for underlying infrastructure.

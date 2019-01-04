@@ -22,13 +22,14 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"sort"
 	"text/template"
 )
 
 var (
 	yamlFile     = flag.String("yaml", "eventing/sources/sources.yaml", "The YAML file to parse to generate the mark down.")
 	templateFile = flag.String("template", "eventing/sources/generator/SourcesTemplate.gomd", "The template file to fill in.")
-	mdFile       = flag.String("md", "eventing/sources/Sources.md", "The mark down file to write to. Any existing file will be overwritten.")
+	mdFile       = flag.String("md", "eventing/sources/README.md", "The mark down file to write to. Any existing file will be overwritten.")
 )
 
 func main() {
@@ -50,7 +51,20 @@ func parseYaml() *yamlSources {
 	if err != nil {
 		log.Fatalf("Unable to unmarshal the YAML file '%s': %v", *yamlFile, err)
 	}
+
+	// Sort the three lists.
+	sortAlphabetically(sources.MetaSources)
+	sortAlphabetically(sources.Sources)
+	sortAlphabetically(sources.Containers)
+
 	return sources
+}
+
+func sortAlphabetically(slice []source) {
+	sortByName := func(i, j int) bool {
+		return slice[i].Name < slice[j].Name
+	}
+	sort.SliceStable(slice, sortByName)
 }
 
 type yamlSources struct {
