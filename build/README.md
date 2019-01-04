@@ -38,7 +38,7 @@ components:
 
 - [`Build`](https://github.com/knative/docs/blob/master/build/builds.md)
 - [`BuildTemplate`](https://github.com/knative/docs/blob/master/build/build-templates.md)
-- [Builder](https://github.com/knative/docs/blob/master/build/builder-contract.md)
+- [`Builder`](https://github.com/knative/docs/blob/master/build/builder-contract.md)
 - [`ServiceAccount`](https://github.com/knative/docs/blob/master/build/auth.md)
 
 ## Install the Knative Build component
