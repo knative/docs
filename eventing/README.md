@@ -191,6 +191,21 @@ The GcpPubSubSource fires a new event each time a message is published on a
   [ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#objectreference-v1-core)
   A reference to the object that should receive events.
 
+### AwsSqsSource
+
+The AwsSqsSource fires a new event each time an event is published on an
+[AWS SQS topic](https://aws.amazon.com/sqs/).
+
+**Spec fields**:
+
+- `queueURL`: URL of the SQS queue to pull events from.
+- `awsCredsSecret`: credential to use to poll the AWS SQS queue.
+- `sink`:
+  [ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#objectreference-v1-core)
+  A reference to the object that should receive events.
+- `serviceAccountName`: `string` The name of the ServiceAccount used to
+  access the `awsCredsSecret`.
+
 ### ContainerSource
 
 The ContainerSource will instantiate a container image which can generate events
