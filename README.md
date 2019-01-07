@@ -6,9 +6,9 @@ container-based applications that can run anywhere: on premises, in the cloud,
 or even in a third-party data center.
 
 Each of the components under the Knative project attempt to identify common
-patterns and codify the best practices that are shared by successful, real-world,
-Kubernetes-based frameworks and applications. Knative components focus on
-solving mundane but difficult tasks such as:
+patterns and codify the best practices that are shared by successful,
+real-world, Kubernetes-based frameworks and applications. Knative components
+focus on solving mundane but difficult tasks such as:
 
 - [Deploying a container](./install/getting-started-knative-app.md)
 - [Orchestrating source-to-URL workflows on Kubernetes](./serving/samples/source-to-url-go/)
