@@ -24,7 +24,7 @@ There are several options when installing Knative:
 * **Comprehensive install** -- Comes with the default versions of all Knative
   components. Quickest option for setup.
 
-* **Limited install** -- Installs a subset of Knative components.
+* **Limited install** -- Installs a subset of Knative features.
 
 * **Custom install** -- Takes longer, but allows you to choose exactly which
   components to install.
@@ -54,7 +54,8 @@ software on, use the following guide to install all Knative components:
 
 **Limited install guides**
 The guides below install some of the available Knative components, sometimes
-without all available observability plugins, to minimize disk use.
+without all available capabilities, to minimize the disk space used for install.
+* [Knative Install on Docker for Mac](Knative-with-Docker-for-Mac.md)
 * [Knative Install on Minikube](Knative-with-Minikube.md)
 * [Knative Install on Minishift](Knative-with-Minishift.md)
 * [Knative Install on OpenShift](Knative-with-OpenShift.md)
