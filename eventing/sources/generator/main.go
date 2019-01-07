@@ -18,12 +18,13 @@ package main
 
 import (
 	"flag"
-	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"log"
 	"os"
 	"sort"
 	"text/template"
+
+	yaml "gopkg.in/yaml.v2"
 )
 
 var (
