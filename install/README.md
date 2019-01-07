@@ -26,6 +26,7 @@ Knative components on the following platforms:
 - [Knative Install on Gardener](Knative-with-Gardener.md)
 - [Knative Install on Google Kubernetes Engine](Knative-with-GKE.md)
 - [Knative Install on IBM Cloud Kubernetes Service](Knative-with-IKS.md)
+- [Knative Install on IBM Cloud Private](Knative-with-ICP.md)
 - [Knative Install on Minikube](Knative-with-Minikube.md)
 - [Knative Install on OpenShift](Knative-with-OpenShift.md)
 - [Knative Install on Minishift](Knative-with-Minishift.md)
