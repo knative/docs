@@ -164,8 +164,8 @@ folder) you're ready to build and deploy the sample app.
    `{IP_ADDRESS}` with the address you see returned in the previous step.
 
    ```shell
-   curl -H "Host: helloworld-nodejs.default.example.com" http://{IP_ADDRESS}
-   Hello Node.js Sample v1!
+   curl -H "Host: helloworld-swift.default.example.com" http://{IP_ADDRESS}
+   Hello Swift
    ```
 
 ## Removing the sample app deployment
