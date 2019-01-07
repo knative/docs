@@ -9,6 +9,8 @@ You can find [guides for other platforms here](README.md).
 
 ## Before you begin
 
+### Install IBM Cloud Private
+
 Knative requires a v3.1.1 standard [IBM Cloud Private](https://www.ibm.com/cloud/private) cluster. Before you can install Knative, you must first complete all the steps that are provided in the [IBM Cloud Private standard cluster installation instructions](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/installing/install_containers.html).
 
 1. Install Docker for your boot node only
@@ -23,43 +25,6 @@ Knative requires a v3.1.1 standard [IBM Cloud Private](https://www.ibm.com/cloud
 
 6. Verify the status of your installation
 
-## Installing Istio
-
-[Follow the instructions to install and run Istio in IBM Cloud Private](https://istio.io/docs/setup/kubernetes/quick-start-ibm/#ibm-cloud-private).
-
-## Installing Knative components
-
-You can install the Knative Serving and Build components together, or individually.
-
-### Installing Knative Serving and Build components
-
-Run the following command to deploy [Knative Serving](https://github.com/knative/serving) and [Knative Build](https://github.com/knative/build)
-
-```shell
-curl -L https://github.com/knative/serving/releases/download/v0.2.2/release-lite.yaml \
-  | sed 's/LoadBalancer/NodePort/' \
-  | kubectl apply --filename -
-```
-
-### Installing Knative Serving only
-
-Replace `release-lite.yaml` to `serving.yaml` file, the other steps are all the same as above.
-
-```shell
-curl -L https://github.com/knative/serving/releases/download/v0.2.2/serving.yaml \
-  | sed 's/LoadBalancer/NodePort/' \
-  | kubectl apply --filename -
-```
-
-### Installing Knative Build only
-
-Replace `release-lite.yaml` to `build.yaml` file, the other steps are all the same as above.
-
-```shell
-curl -L https://github.com/knative/serving/releases/download/v0.2.2/build.yaml \
-  | sed 's/LoadBalancer/NodePort/' \
-  | kubectl apply --filename -
-```
 
 ### Update the image security policy
 You need to update the [image security policy](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.1/manage_images/image_security.html) to allow the cluster to pull the Knative image when you enable the `image-security-enforcement` at the time of [IBM Cloud Private](https://www.ibm.com/cloud/private) installation.
@@ -77,7 +42,7 @@ You need to update the [image security policy](https://www.ibm.com/support/knowl
     ```
 
 ### Update pod security policy
-Configure the namespaces `knative-serving`, `knative-build`, `knative-monitoring` and `knative-eventing` into pod security policy `ibm-privileged-psp`. The step as follows:
+Configure the namespaces `knative-serving` into pod security policy `ibm-privileged-psp`. The step as follows:
 
 1. Create a cluster role for the pod security policy resource. The resourceNames for this role must be the name of the pod security policy that was created previous. Here we use `ibm-privileged-psp`. Run the following command:
     ```shell
@@ -118,9 +83,47 @@ Configure the namespaces `knative-serving`, `knative-build`, `knative-monitoring
     EOF
     ```
 
-3. Use the same method to add `knative-build` and `knative-eventing` namespaces to the `ibm-privileged-psp` pod security policy.
+3. If you have the `knative-build` and `knative-monitoring` namespaces, use the same method to add the namespaces to the `ibm-privileged-psp` pod security policy.
 
-4. Ensure that the installation was successful by running the following commands until both of the Knative components show a `STATUS` of `Running`:
+## Installing Istio
+
+[Follow the instructions to install and run Istio in IBM Cloud Private](https://istio.io/docs/setup/kubernetes/quick-start-ibm/#ibm-cloud-private).
+
+## Installing Knative components
+
+You can install the Knative Serving, Knative Build and Knative Monitoring components together, or individually.
+
+### Installing Knative Serving, Knative Build and Knative Monitoring components
+
+Run the following command to deploy [Knative Serving](https://github.com/knative/serving) and [Knative Build](https://github.com/knative/build)
+
+```shell
+curl -L https://github.com/knative/serving/releases/download/v0.2.2/release-lite.yaml \
+  | sed 's/LoadBalancer/NodePort/' \
+  | kubectl apply --filename -
+```
+
+### Installing Knative Serving only
+
+Replace `release-lite.yaml` to `serving.yaml` file, the other steps are all the same as above.
+
+```shell
+curl -L https://github.com/knative/serving/releases/download/v0.2.2/serving.yaml \
+  | sed 's/LoadBalancer/NodePort/' \
+  | kubectl apply --filename -
+```
+
+### Installing Knative Build only
+
+Replace `release-lite.yaml` to `build.yaml` file, the other steps are all the same as above.
+
+```shell
+curl -L https://github.com/knative/serving/releases/download/v0.2.2/build.yaml \
+  | sed 's/LoadBalancer/NodePort/' \
+  | kubectl apply --filename -
+```
+
+Ensure that the installation was successful by running the following commands until both of the Knative components show a `STATUS` of `Running`:
 
     ```
     kubectl get pods --namespace knative-serving
@@ -159,8 +162,23 @@ head to the [sample apps](../serving/samples/README.md) repo.
 
 Delete the cluster on [IBM Cloud Private](https://www.ibm.com/cloud/private):
 
+If you use the `release-lite.yaml` to install. The clean command as follows:
 ```shell
 curl -L https://github.com/knative/serving/releases/download/v0.2.2/release-lite.yaml \
+  | sed 's/LoadBalancer/NodePort/' \
+  | kubectl delete --filename -
+```
+
+If you use the `serving.yaml` to install. The clean command as follows:
+```shell
+curl -L https://github.com/knative/serving/releases/download/v0.2.2/serving.yaml \
+  | sed 's/LoadBalancer/NodePort/' \
+  | kubectl delete --filename -
+```
+
+If you use the `build.yaml` to install. The clean command as follows:
+```shell
+curl -L https://github.com/knative/serving/releases/download/v0.2.2/build.yaml \
   | sed 's/LoadBalancer/NodePort/' \
   | kubectl delete --filename -
 ```
