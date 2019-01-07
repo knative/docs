@@ -79,21 +79,22 @@ API
 
 ## Client
 
-[Client](https://github.com/knative/client), CLI, client libraries, and client conventions
+[Client](https://github.com/knative/client), CLI, client libraries, and client
+conventions
 
-Artifact                   | Link
--------------------------- | ----
-Forum                      | [knative-dev@](https://groups.google.com/forum/#!forum/knative-dev)
-Community Meeting VC       | [meet.google.com/spi-umby-dmw](https://meet.google.com/spi-umby-dmw) <br>Or dial in:<br>(US) +1 929-445-2235<br>PIN: 824 001#
-Community Meeting Calendar | Tuesdays 10:30a-11:00a Pacific <br>[Calendar Invitation](https://calendar.google.com/calendar/embed?src=google.com_18un4fuh6rokqf8hmfftm5oqq4%40group.calendar.google.com)
-Meeting Notes              | [Notes](https://docs.google.com/document/d/1Uh7jTWQruBBmic-WmTvtc9cMF95kQrKb5lsqWhNuikM/edit)
-Document Folder            | [Folder](https://drive.google.com/corp/drive/folders/1QF-job3rCEqCpJLm8nHkC4mBIi4XANE1)
-Slack Channel              | [#cli](https://knative.slack.com)
+| Artifact                   | Link                                                                                                                                                                       |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Forum                      | [knative-dev@](https://groups.google.com/forum/#!forum/knative-dev)                                                                                                        |
+| Community Meeting VC       | [meet.google.com/spi-umby-dmw](https://meet.google.com/spi-umby-dmw) <br>Or dial in:<br>(US) +1 929-445-2235<br>PIN: 824 001#                                              |
+| Community Meeting Calendar | Tuesdays 10:30a-11:00a Pacific <br>[Calendar Invitation](https://calendar.google.com/calendar/embed?src=google.com_18un4fuh6rokqf8hmfftm5oqq4%40group.calendar.google.com) |
+| Meeting Notes              | [Notes](https://docs.google.com/document/d/1Uh7jTWQruBBmic-WmTvtc9cMF95kQrKb5lsqWhNuikM/edit)                                                                              |
+| Document Folder            | [Folder](https://drive.google.com/corp/drive/folders/1QF-job3rCEqCpJLm8nHkC4mBIi4XANE1)                                                                                    |
+| Slack Channel              | [#cli](https://knative.slack.com)                                                                                                                                          |
 
-&nbsp;                                                      | Leads           | Company | Profile
------------------------------------------------------------ | --------------- | ------- | -------
-<img width="30px" src="https://github.com/sixolet.png">     | Naomi Seyfer    | Google  | [sixolet](https://github.com/sixolet)
-<img width="30px" src="https://github.com/cppforlife.png">  | Dmitriy Kalinin | Pivotal | [cppforlife](https://github.com/cppforlife)
+| &nbsp;                                                     | Leads           | Company | Profile                                     |
+| ---------------------------------------------------------- | --------------- | ------- | ------------------------------------------- |
+| <img width="30px" src="https://github.com/sixolet.png">    | Naomi Seyfer    | Google  | [sixolet](https://github.com/sixolet)       |
+| <img width="30px" src="https://github.com/cppforlife.png"> | Dmitriy Kalinin | Pivotal | [cppforlife](https://github.com/cppforlife) |
 
 ## Documentation
 
