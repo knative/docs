@@ -230,6 +230,9 @@ FTP server for new files or generate events at a set time interval.
 - [Install Eventing components](#installation)
 - [Run samples](samples/)
 
+## Configuration
+- [Default Channels](default-channels.md)
+
 ---
 
 Except as otherwise noted, the content of this page is licensed under the
