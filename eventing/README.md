@@ -203,8 +203,8 @@ The AwsSqsSource fires a new event each time an event is published on an
 - `sink`:
   [ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#objectreference-v1-core)
   A reference to the object that should receive events.
-- `serviceAccountName`: `string` The name of the ServiceAccount used to
-  access the `awsCredsSecret`.
+- `serviceAccountName`: `string` The name of the ServiceAccount used to access
+  the `awsCredsSecret`.
 
 ### ContainerSource
 
