@@ -38,11 +38,6 @@ software on, use the following instructions:
 
 - [Knative Install on any Kubernetes](Knative-with-any-k8s.md)
 
-If you want to customize your Knative installation, use the following 
-instructions:
-
-- [Custom Knative Install on any Kubernetes](Knative-custom-install.md)
-
 ## Deploying an app
 
 Now you're ready to deploy an app:
