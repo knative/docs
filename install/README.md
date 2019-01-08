@@ -38,6 +38,11 @@ software on, use the following instructions:
 
 - [Knative Install on any Kubernetes](Knative-with-any-k8s.md)
 
+If you want to customize your Knative installation, use the following 
+instructions:
+
+- [Custom Knative Install on any Kubernetes](Knative-custom-install.md)
+
 ## Deploying an app
 
 Now you're ready to deploy an app:
@@ -48,6 +53,9 @@ Now you're ready to deploy an app:
 
 - View the available [sample apps](../serving/samples) and deploy one of your
   choosing.
+  
+- Walk through a Google codelab: 
+  [Using Knative to deploy serverless applications to Kubernetes](https://codelabs.developers.google.com/codelabs/knative-intro/#0)
 
 ## Configuring Knative Serving
 
