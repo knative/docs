@@ -140,14 +140,11 @@ Knative depends on Istio.
     kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.2/istio-crds.yaml && \
     kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.2/istio.yaml
     ```
-	Note: the resources (CRDs) defined in `istio-crds.yaml` are technically
-	also included in the `istio.yaml` file. They are pulled out and processed
-	separately because sometimes when they are created as part of the same
-	yaml file as the rest of the Istio resources, the CRD definitions
-	themselves are not created quickly enough and then resources of those types
-	fail to be created with an error complaining about an unknown type.
-	If for some reason you still see this type of error try rerunning the
-	second `kubectl apply` command again and then it should work.
+	Note: the resources (CRDs) defined in the `istio-crds.yaml`file are
+	also included in the `istio.yaml` file, but they are pulled out so that
+	the CRD definitions are created first. If you see an error when creating
+	resources about an unknown type, run the second `kubectl apply` command
+	again.
 
 1.  Label the default namespace with `istio-injection=enabled`:
     ```bash
