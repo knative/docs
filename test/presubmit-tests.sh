@@ -20,16 +20,9 @@
 
 source $(dirname $0)/../vendor/github.com/knative/test-infra/scripts/presubmit-tests.sh
 
-function build_tests() {
-  header "TODO(#67): Write build tests"
-}
+# We use the default build, unit and integration test runners.
 
-function unit_tests() {
-  header "TODO(#66): Write unit tests"
-}
-
-function integration_tests() {
-  ./test/e2e-tests.sh
-}
+# TODO(#67): Add more build tests.
+# TODO(#66): Add more unit tests.
 
 main $@
