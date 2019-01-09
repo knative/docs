@@ -37,11 +37,14 @@ Update the [image security policy (`image-security-enforcement`)](https://www.ib
     kubectl edit clusterimagepolicies ibmcloud-default-cluster-image-policy
     ```
 
-2. Update `spec.repositories` by adding `"gcr.io/knative-releases/*"`, for example:
+2. Update `spec.repositories` by adding the following entries, for example:
     ```yaml
     spec:
       repositories:
-      - name: "gcr.io/knative-releases/*"
+      - name: gcr.io/knative-releases/*
+      - name: k8s.gcr.io/*
+      - name: quay.io/*
+      
     ```
 
 #### Update pod security policy
