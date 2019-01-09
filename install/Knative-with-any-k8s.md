@@ -21,8 +21,15 @@ Containers.
 
 1.  Install Istio:
     ```bash
+	kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.2/istio-crds.yaml && \
     kubectl apply --filename https://raw.githubusercontent.com/knative/serving/v0.2.2/third_party/istio-1.0.2/istio.yaml
     ```
+    Note: the resources (CRDs) defined in the `istio-crds.yaml`file are
+    also included in the `istio.yaml` file, but they are pulled out so that
+    the CRD definitions are created first. If you see an error when creating
+    resources about an unknown type, run the second `kubectl apply` command
+    again.
+
 1.  Label the default namespace with `istio-injection=enabled`:
     ```bash
     kubectl label namespace default istio-injection=enabled
