@@ -54,7 +54,7 @@ software on, use the following guide to install all Knative components:
 
 **Limited install guides**
 The guides below install some of the available Knative components, sometimes
-without all available capabilities, to minimize the disk space used for install.
+without all available observability plugins, to minimize the disk space used for install.
 * [Knative Install on Docker for Mac](Knative-with-Docker-for-Mac.md)
 * [Knative Install on Minikube](Knative-with-Minikube.md)
 * [Knative Install on Minishift](Knative-with-Minishift.md)
@@ -70,6 +70,12 @@ follow the custom install guide:
   specifications to run Knative, you can follow any of the install
   instructions through the creation of the cluster, then follow the
   [Perfoming a Custom Knative Installation](knative-custom-install.md) guide.
+
+**Observability install guide**
+Follow this guide to install the available observability plugins on a Knative
+cluster.
+
+* [Monitoring, Logging and Tracing Installation](../serving/installing-logging-metrics-traces.md)  
 
 ## Deploying an app
 
