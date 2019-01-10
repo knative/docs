@@ -7,9 +7,9 @@ You can find [guides for other platforms here](README.md).
 
 ## Before you begin
 
-Knative requires a Kubernetes cluster v1.10 or newer. `kubectl` v1.10 is also
-required. This guide walks you through creating a cluster with the correct
-specifications for Knative on Pivotal Container Service.
+Knative requires a Kubernetes cluster v1.11 or newer. `kubectl` v1.10 or newer
+is also required. This guide walks you through creating a cluster with the
+correct specifications for Knative on Pivotal Container Service.
 
 This guide assumes you are using bash in a Mac or Linux environment; some
 commands will need to be adjusted for use in a Windows environment.

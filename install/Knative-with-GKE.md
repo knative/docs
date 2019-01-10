@@ -7,9 +7,9 @@ You can find [guides for other platforms here](README.md).
 
 ## Before you begin
 
-Knative requires a Kubernetes cluster v1.10 or newer. `kubectl` v1.10 is also
-required. This guide walks you through creating a cluster with the correct
-specifications for Knative on Google Cloud Platform (GCP).
+Knative requires a Kubernetes cluster v1.11 or newer. `kubectl` v1.10 or newer
+is also required. This guide walks you through creating a cluster with the
+correct specifications for Knative on Google Cloud Platform (GCP).
 
 This guide assumes you are using `bash` in a Mac or Linux environment; some
 commands will need to be adjusted for use in a Windows environment.
@@ -99,7 +99,7 @@ Engine cluster.
 To make sure the cluster is large enough to host all the Knative and Istio
 components, the recommended configuration for a cluster is:
 
-- Kubernetes version 1.10 or later
+- Kubernetes version 1.11 or later
 - 4 vCPU nodes (`n1-standard-4`)
 - Node autoscaling, up to 10 nodes
 - API scopes for `cloud-platform`, `logging-write`, `monitoring-write`, and
