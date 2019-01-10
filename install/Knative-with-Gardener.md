@@ -71,8 +71,8 @@ Knative depends on Istio.
 
 1.  Install Istio:
     ```bash
-	kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.2/istio-crds.yaml && \
-    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.2/istio.yaml
+	kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.3/istio-crds.yaml && \
+    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.3/istio.yaml
     ```
     Note: the resources (CRDs) defined in the `istio-crds.yaml`file are
     also included in the `istio.yaml` file, but they are pulled out so that
@@ -101,7 +101,7 @@ your Knative installation, see [Performing a Custom Knative Installation](Knativ
 
 1. Run the `kubectl apply` command to install Knative and its dependencies:
     ```bash
-    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.2/release.yaml /
+    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.3/release.yaml /
     --filename https://github.com/knative/eventing/releases/download/v0.2.1/eventing.yaml /
     --filename --filename https://github.com/knative/eventing-sources/releases/download/v0.2.1/release.yaml
     ```
@@ -147,10 +147,10 @@ spec:
 And of course create the respective `ConfigMaps`:
 
 ```
-curl https://github.com/knative/serving/releases/download/v0.2.2/istio.yaml
+curl https://github.com/knative/serving/releases/download/v0.2.3/istio.yaml
 kubectl create configmap istio-chart-080 --from-file=istio.yaml
 
-curl https://github.com/knative/serving/releases/download/v0.2.2/release.yaml
+curl https://github.com/knative/serving/releases/download/v0.2.3/release.yaml
 kubectl create configmap knative-chart-001 --from-file=release.yaml
 ```
 
