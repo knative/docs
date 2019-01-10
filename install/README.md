@@ -19,24 +19,63 @@ clusters.
 
 ## Installing Knative
 
+There are several options when installing Knative:
+
+* **Comprehensive install** -- Comes with the default versions of all Knative
+  components. Quickest option for setup.
+
+* **Limited install** -- Installs a subset of Knative features.
+
+* **Custom install** -- Takes longer, but allows you to choose exactly which
+  components to install.
+
+For new users, we recommend the comprehensive install to get you up and running
+quickly.
+
+### Install guides
+
 Follow these step-by-step guides for setting up Kubernetes and installing
-Knative components on the following platforms:
+Knative components.
 
-- [Knative Install on Azure Kubernetes Service](Knative-with-AKS.md)
-- [Knative Install on Gardener](Knative-with-Gardener.md)
-- [Knative Install on Google Kubernetes Engine](Knative-with-GKE.md)
-- [Knative Install on IBM Cloud Kubernetes Service](Knative-with-IKS.md)
-- [Knative Install on IBM Cloud Private](Knative-with-ICP.md)
-- [Knative Install on Minikube](Knative-with-Minikube.md)
-- [Knative Install on OpenShift](Knative-with-OpenShift.md)
-- [Knative Install on Minishift](Knative-with-Minishift.md)
-- [Knative Install on Pivotal Container Service](Knative-with-PKS.md)
-- [Knative Install on Docker for Mac](Knative-with-Docker-for-Mac.md)
+**Comprehensive install guides**
+The guides below show you how to create a Kubernetes cluster with the right
+specs for Knative on your platform of choice, then walk through installing all
+available Knative components.
+* [Knative Install on Azure Kubernetes Service](Knative-with-AKS.md)
+* [Knative Install on Gardener](Knative-with-Gardener.md)
+* [Knative Install on Google Kubernetes Engine](Knative-with-GKE.md)
+* [Knative Install on IBM Cloud Kubernetes Service](Knative-with-IKS.md)
+* [Knative Install on Pivotal Container Service](Knative-with-PKS.md)
 
-If you already have a Kubernetes cluster you're comfortable installing _alpha_
-software on, use the following instructions:
+If you already have a Kubernetes cluster you're comfortable installing *alpha*
+software on, use the following guide to install all Knative components:
 
 - [Knative Install on any Kubernetes](Knative-with-any-k8s.md)
+
+**Limited install guides**
+The guides below install some of the available Knative components, sometimes
+without all available observability plugins, to minimize the disk space used for install.
+* [Knative Install on Docker for Mac](Knative-with-Docker-for-Mac.md)
+* [Knative Install on Minikube](Knative-with-Minikube.md)
+* [Knative Install on Minishift](Knative-with-Minishift.md)
+* [Knative Install on OpenShift](Knative-with-OpenShift.md)
+
+**Custom install guide**
+To choose which components and which versions of each component to install,
+follow the custom install guide:
+
+* [Perfoming a Custom Knative Installation](Knative-custom-install.md)
+
+> **Note**: If need to set up a Kubernetes cluster with the correct
+  specifications to run Knative, you can follow any of the install
+  instructions through the creation of the cluster, then follow the
+  [Perfoming a Custom Knative Installation](knative-custom-install.md) guide.
+
+**Observability install guide**
+Follow this guide to install the available observability plugins on a Knative
+cluster.
+
+* [Monitoring, Logging and Tracing Installation](../serving/installing-logging-metrics-traces.md)  
 
 ## Deploying an app
 
