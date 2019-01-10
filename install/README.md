@@ -48,8 +48,8 @@ Now you're ready to deploy an app:
 
 - View the available [sample apps](../serving/samples) and deploy one of your
   choosing.
-  
-- Walk through the Google codelab, 
+
+- Walk through the Google codelab,
   [Using Knative to deploy serverless applications to Kubernetes](https://codelabs.developers.google.com/codelabs/knative-intro/#0).
 
 ## Configuring Knative Serving
