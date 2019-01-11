@@ -178,4 +178,4 @@ kubectl get pods -n sample-source-system
 Now you can use the verification procedure outlined above in
 [Create a sample source](#create-a-sample-source).
 
-Next: [Dispatching Events](06-dispatching-events.md)
+Next: Dispatching Events

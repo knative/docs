@@ -5,13 +5,30 @@ boilerplate and scaffolding. Check out the
 [Kubebuilder book](https://book.kubebuilder.io/) to learn more about
 Kubebuilder.
 
-## Create the Kubebuilder Project
+## Create a git repo
+
+Create a git repo locally in the proper GOPATH location . For the reference
+project, that's `$GOPATH/src/github.com/grantr/sample-source`.
+
+```sh
+cd $GOPATH/src/github.com/grantr
+git init sample-source
+```
+
+Create an empty initial commit.
+
+```sh
+git commit -m "Initial commit" --allow-empty
+```
+
+## Create a Kubebuilder project
 
 _When in doubt, the
 [Kubebuilder Quick Start docs](https://book.kubebuilder.io/quick_start.html) are
 likely more current than these instructions._
 
-Use the `kubebuilder init` command to create the basic project structure.
+Use the `kubebuilder init` command in the repo root directory to create the
+basic project structure.
 
 You'll need to choose the following:
 
@@ -33,4 +50,4 @@ your project's vendor directory.
 The result of this command in the reference project can be viewed at
 https://github.com/grantr/sample-source/pull/1.
 
-Next: [Define The Source Resource](03-define-source.md)
+Next: [Define The Source Resource](02-define-source.md)

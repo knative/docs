@@ -14,6 +14,28 @@ https://github.com/grantr/sample-source.
 The target audience is already familiar with Kubernetes and wants to develop a
 new event source in Golang for use with Knative Eventing.
 
+## Before you begin
+
+You'll need these tools installed:
+
+*   git
+*   golang
+*   make
+*   [dep](https://github.com/golang/dep)
+*   [kubebuilder](https://github.com/kubernetes-sigs/kubebuilder)
+*   [kustomize](https://github.com/kubernetes-sigs/kustomize)
+*   [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+    (optional)
+*   [minikube](https://github.com/kubernetes/minikube) (optional)
+
+## Steps
+
+*   [Bootstrap Project](01-bootstrap.md)
+*   [Define The Source Resource](02-define-source.md)
+*   [Reconcile Sources](03-reconcile-sources.md)
+*   [Publish to Cluster](04-publish-to-cluster.md)
+*   Dispatching Events
+
 ## Alternatives
 
 Kubebuilder not your thing? Prefer the easy way? Check out these alternatives.
@@ -29,12 +51,3 @@ Kubebuilder not your thing? Prefer the easy way? Check out these alternatives.
     Python Kubernetes client library.
 *   The [Cloud Scheduler source](https://github.com/vaikas-google/csr) uses the
     standard Kubernetes Golang client library instead of Kubebuilder.
-
-## Labs
-
-*   [Prerequisites](01-prerequisites.md)
-*   [Bootstrap Project](02-bootstrap.md)
-*   [Define The Source Resource](03-define-source.md)
-*   [Reconcile Sources](04-reconcile-sources.md)
-*   [Publish to Cluster](05-publish-to-cluster.md)
-*   [Dispatching Events](06-dispatching-events.md)
