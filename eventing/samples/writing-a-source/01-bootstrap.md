@@ -7,7 +7,7 @@ Kubebuilder.
 
 ## Create a git repo
 
-Create a git repo locally in the proper GOPATH location . For the reference
+Create a git repo locally in the proper GOPATH location. For the reference
 project, that's `$GOPATH/src/github.com/grantr/sample-source`.
 
 ```sh
