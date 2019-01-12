@@ -1,6 +1,6 @@
 # Hello World - Shell sample
 
-A simple web app that executes a shell script. 
+A simple web app that executes a shell script.
 The shell script reads an env variable `TARGET` and prints `Hello ${TARGET}!`.
 If `TARGET` is not specified, it will use `World` as the `TARGET`.
 
@@ -24,9 +24,8 @@ recreate the source files from this folder.
     #!/bin/sh
     echo Hello ${TARGET:=World}
     ```
-  
 
-1. Create a new file named `invoke.go` and paste the following code. 
+1. Create a new file named `invoke.go` and paste the following code.
    We use a basic web server written in Go to execute the shell script:
 
     ```go
@@ -67,9 +66,9 @@ recreate the source files from this folder.
 
    WORKDIR /go/src/invoke
    COPY . .
-   
+
    RUN go install -v
-   
+
    CMD ["invoke"]
    ```
 
@@ -123,10 +122,9 @@ folder) you're ready to build and deploy the sample app.
 
 1. Now that your service is created, Knative will perform the following steps:
 
-   - Create a new immutable revision for this version of the app.
-   - Network programming to create a route, ingress, service, and load balance
-     for your app.
-   - Automatically scale your pods up and down (including to zero active pods).
+    - Create a new immutable revision for this version of the app.
+    - Network programming to create a route, ingress, service, and load balance for your app.
+    - Automatically scale your pods up and down (including to zero active pods).
 
 1. Run the following command to find the external IP address for your service.
    The ingress IP for your cluster is returned. If you just created your
