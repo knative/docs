@@ -1,0 +1,15 @@
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+name: rest-api-rust
+namespace: default
+spec:
+runLatest:
+  configuration:
+  revisionTemplate:
+    spec:
+    container:
+      image: docker.io/{username}/rest-api-rust:latest
+      env:
+        - name: TARGET
+      value: "Rest API Rust Sample v1"

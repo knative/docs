@@ -1,0 +1,25 @@
+# ---------- Dependencies Container ----------
+# This image uses rust nightly with the 
+# x86_64-unknown-linux-musl target, and it
+# includes some necessary C libraries that
+# we can statically link against.
+#
+# The point of this is to build and cache
+# our dependencies, so we don't need to
+# rebuild them every time we make small
+# changes to our app.
+FROM clux/muslrust AS deps
+
+# Set working directory.
+WORKDIR /
+
+# Create a new empty shell project.
+RUN USER=root cargo init --bin --name rest-api-rust
+
+# Copy over the manifests.
+COPY Cargo* ./
+
+# Build and cache the dependencies, then remove 
+# hello world file.
+RUN cargo build --release && \
+  rm src/*.rs
