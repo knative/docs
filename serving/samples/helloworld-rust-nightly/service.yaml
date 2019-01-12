@@ -1,0 +1,15 @@
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+name: helloworld-rust-nightly
+namespace: default
+spec:
+runLatest:
+  configuration:
+  revisionTemplate:
+    spec:
+    container:
+      image: docker.io/{username}/helloworld-rust-nightly:latest
+      env:
+        - name: TARGET
+      value: "Rust Nightly Sample v1"

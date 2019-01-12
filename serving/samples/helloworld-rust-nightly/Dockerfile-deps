@@ -1,0 +1,20 @@
+# ---------- Dependencies Container ----------
+# This container uses rust nightly with the 
+# x86_64-unknown-linux-musl target, and it
+# includes some necessary C libraries that
+# we can statically link against.
+FROM clux/muslrust AS deps
+
+# Set working directory.
+WORKDIR /
+
+# Create a new empty shell project.
+RUN USER=root cargo init --bin --name helloworld-rust-nightly
+
+# Copy over the manifests.
+COPY Cargo* ./
+
+# Build and cache the dependencies, then remove 
+# hello world file.
+RUN cargo build --release && \
+  rm src/*.rs

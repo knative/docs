@@ -1,0 +1,8 @@
+[package]
+name = "helloworld-rust-nightly"
+version = "0.1.0"
+authors = ["Your Name <your@email.com>"]
+edition = "2018"
+
+[dependencies]
+rocket = "0.4"
