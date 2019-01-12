@@ -18,7 +18,7 @@ While you can clone all of the code from this directory, hello world apps are
 generally more useful if you build them step-by-step. The following instructions
 recreate the source files from this folder.
 
-1. Create a new file named `script.sh` and copy the code block below into it.
+1. Create a new file named `script.sh` and paste the following script:
 
     ```sh
     #!/bin/sh
