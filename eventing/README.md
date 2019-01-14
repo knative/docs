@@ -70,7 +70,7 @@ Knative Eventing currently requires Knative Serving and Istio version 1.0 or
 later installed.
 [Follow the instructions to install on the platform of your choice](../install/README.md).
 
-** Most of the eventing samples require configuring outbound network access **
+**Most of the eventing samples require configuring outbound network access**
 Many of the sources require making outbound connections to create the event subscription,
 and if you have any functions that make use of any external (to cluster) services, you
 must enable it also for them to work.
