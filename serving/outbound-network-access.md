@@ -15,8 +15,8 @@ The scope varies depending on your platform:
 - For Google Kubernetes Engine (GKE) run the following command to determine the
   scope. Make sure to replace the variables or export these values first.
   ```shell
-  gcloud container clusters describe ${CLUSTER_ID} \
-    --zone=${GCP_ZONE} | grep -e clusterIpv4Cidr -e servicesIpv4Cidr
+  gcloud container clusters describe ${CLUSTER_NAME} \
+    --zone=${CLUSTER_ZONE} | grep -e clusterIpv4Cidr -e servicesIpv4Cidr
   ```
 - For IBM Cloud Private run the following command:
   ```shell
