@@ -14,14 +14,18 @@ The scope varies depending on your platform:
 
 - For Google Kubernetes Engine (GKE) run the following command to determine the
   scope. Make sure to replace the variables or export these values first.
+
   ```shell
   gcloud container clusters describe ${CLUSTER_NAME} \
     --zone=${CLUSTER_ZONE} | grep -e clusterIpv4Cidr -e servicesIpv4Cidr
   ```
+
 - For IBM Cloud Private run the following command:
+
   ```shell
   cat cluster/config.yaml | grep service_cluster_ip_range
   ```
+
 - For IBM Cloud Kubernetes Service use
   `172.30.0.0/16,172.20.0.0/16,10.10.10.0/24`
 - For Azure Container Service (ACS) use `10.244.0.0/16,10.240.0.0/16`
@@ -32,8 +36,7 @@ The scope varies depending on your platform:
 
 The `istio.sidecar.includeOutboundIPRanges` parameter in the `config-network`
 map specifies the IP ranges that Istio sidecar intercepts. To allow outbound
-access, replace the default parameter  
-value with the IP ranges of your cluster.
+access, replace the default parameter value with the IP ranges of your cluster.
 
 Run the following command to edit the `config-network` map:
 
