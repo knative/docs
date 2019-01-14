@@ -103,13 +103,16 @@ func (r *ReconcileSampleSource) reconcile(ctx context.Context, instance *sources
 }
 ```
 
-Write the `resolveSinkRef` function. The example below is one example, but there
-are many possibilities. For example, resolving the sink URI of a Kubernetes
-Service would be a useful addition.
+Write the `resolveSinkRef` function. This will take the sink reference from the
+Source spec, get the referenced object, and return its Addressable hostname as a
+string.
+
+_After completing this tutorial, consider replacing the code below with existing
+sink resolution helpers provided by Knative: `AddressableType` from
+`github.com/knative/pkg/apis/duck/v1alpha1` and `GetSinkURI` from
+`github.com/knative/eventing-sources/pkg/controller/sinks`._
 
 ```go
-// TODO(user): This is here to improve clarity and reduce the number of vendored
-// libraries. Consider using AddressableType from github.com/knative/pkg instead.
 type addressableType struct {
   Status struct {
     Address *struct {

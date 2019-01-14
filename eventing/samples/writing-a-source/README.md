@@ -11,8 +11,8 @@ https://github.com/grantr/sample-source.
 
 ## Target Audience
 
-The target audience is already familiar with Kubernetes and wants to develop a
-new event source in Golang for use with Knative Eventing.
+The target audience is already familiar with Kubernetes and Go development and
+wants to develop a new event source for use with Knative Eventing.
 
 ## Before you begin
 
