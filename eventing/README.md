@@ -36,7 +36,7 @@ generic interfaces that can be implemented by multiple Kubernetes resources:
    field. As a special case, the core
    [Kubernetes Service object](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#service-v1-core)
    also fulfils the Addressable interface.
-2. **Callable** objects are able to receive an event delivered over HTTP and
+1. **Callable** objects are able to receive an event delivered over HTTP and
    transform the event, returning 0 or 1 new events in the HTTP response. These
    returned events may be further processed in the same way that events from an
    external event source are processed.
@@ -70,7 +70,7 @@ Knative Eventing currently requires Knative Serving and Istio version 1.0 or
 later installed.
 [Follow the instructions to install on the platform of your choice](../install/README.md).
 
-**Most of the eventing samples require configuring outbound network access**
+### Configuring outbound network access
 
 Many of the sources require making outbound connections to create the event subscription,
 and if you have any functions that make use of any external (to cluster) services, you
@@ -108,7 +108,7 @@ The eventing infrastructure supports two forms of event delivery at the moment:
    including a Knative Service or a core Kubernetes Service). In this case, the
    Source is responsible for retrying or queueing events if the destination
    Service is not available.
-2. Fan-out delivery from a source or Service response to multiple endpoints
+1. Fan-out delivery from a source or Service response to multiple endpoints
    using
    [Channels](https://github.com/knative/eventing/blob/master/pkg/apis/eventing/v1alpha1/channel_types.go#L36)
    and
