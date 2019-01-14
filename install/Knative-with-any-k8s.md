@@ -56,7 +56,7 @@ your Knative installation, see [Performing a Custom Knative Installation](Knativ
     ```bash
     kubectl apply --filename https://github.com/knative/serving/releases/download/v0.3.0/serving.yaml \
     --filename https://github.com/knative/build/releases/download/v0.3.0/release.yaml \
-    --filename https://github.com/knative/eventing/releases/download/v0.3.0/eventing.yaml \
+    --filename https://github.com/knative/eventing/releases/download/v0.3.0/release.yaml \
     --filename https://github.com/knative/eventing-sources/releases/download/v0.3.0/release.yaml
     ```
 1. Monitor the Knative components until all of the components show a
