@@ -167,7 +167,7 @@ The following Knative installation packages are available:
   - https://github.com/knative/build/releases/download/v0.2.0/release.yaml
 - **Eventing Component**:
   - https://github.com/knative/eventing/releases/download/v0.2.1/release.yaml
-  - https://github.com/knative/eventing/releases/download/v0.2.1/eventing.yaml
+  - https://github.com/knative/eventing/releases/download/v0.2.1/release.yaml
   - https://github.com/knative/eventing-sources/releases/download/v0.2.1/release.yaml
   - https://github.com/knative/eventing-sources/releases/download/v0.2.1/release-with-gcppubsub.yaml
 - **Serving Component**:
@@ -195,7 +195,6 @@ packages from the Knative repositories:
 | [`release.yaml`][3.1]                                | -                 | -                                                          | Included        | -                  | -                                                                                   |
 | **knative/eventing**                                 |                   |                                                            |                 |                    |                                                                                     |
 | [`release.yaml`][4.1]                                | _Required_        | -                                                          | -               | Included           | Includes the in-memory channel provisioner.                                         |
-| [`eventing.yaml`][4.2]                               | _Required_        | -                                                          | -               | Included           | No channel provisioner.                                                             |
 | [`in-memory-channel.yaml`][4.3]                      | _Required_        | -                                                          | -               | _Required_         | Only the in-memory channel provisioner.                                             |
 | [`kafka.yaml`][4.4]                                  | _Required_        | -                                                          | -               | _Required_         | Only the Kafka channel provisioner.                                                 |
 | **knative/eventing-sources**                         |                   |                                                            |                 |                    |                                                                                     |
@@ -224,7 +223,7 @@ tracing to your cluster.
 [4]: https://github.com/knative/eventing/releases/tag/v0.2.1
 [4.1]: https://github.com/knative/eventing/releases/download/v0.2.1/release.yaml
 [4.2]:
-  https://github.com/knative/eventing/releases/download/v0.2.1/eventing.yaml
+  https://github.com/knative/eventing/releases/download/v0.2.1/release.yaml
 [4.3]:
   https://github.com/knative/eventing/releases/download/v0.2.1/in-memory-channel.yaml
 [4.4]: https://github.com/knative/eventing/releases/download/v0.2.1/kafka.yaml
@@ -272,7 +271,7 @@ the commands below.
      release version, and filename of the installable resource. Examples:
 
      - `https://github.com/knative/build/releases/download/v0.2.0/release.yaml`
-     - `https://github.com/knative/eventing/releases/download/v0.2.1/eventing.yaml`
+     - `https://github.com/knative/eventing/releases/download/v0.2.1/release.yaml`
      - `https://github.com/knative/eventing-sources/releases/download/v0.2.1/release.yaml`
      - `https://github.com/knative/serving/releases/download/v0.2.3/serving.yaml`
 
@@ -289,7 +288,7 @@ the commands below.
 
       ```bash
       kubectl apply --filename https://github.com/knative/build/releases/download/v0.2.0/release.yaml \
-        --filename https://github.com/knative/eventing/releases/download/v0.2.1/eventing.yaml \
+        --filename https://github.com/knative/eventing/releases/download/v0.2.1/release.yaml \
         --filename https://github.com/knative/serving/releases/download/v0.2.3/serving.yaml
       ```
 
