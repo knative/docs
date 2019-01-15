@@ -18,6 +18,9 @@
 # It is started by prow for each PR.
 # For convenience, it can also be executed manually.
 
+# markdown linting is too picky for our docs; disabling it for now.
+DISABLE_MD_LINTING=1
+
 source $(dirname $0)/../vendor/github.com/knative/test-infra/scripts/presubmit-tests.sh
 
 # We use the default build, unit and integration test runners.

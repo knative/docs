@@ -11,10 +11,23 @@ This is a helper script to run the presubmit tests. To use it:
 
 1. [optional] Define the function `build_tests()`. If you don't define this
    function, the default action for running the build tests is to:
-   - lint and link check markdown files
+
+   - check markdown files
    - run `go build` on the entire repo
    - run `/hack/verify-codegen.sh` (if it exists)
-   - check licenses in `/cmd` (if it exists)
+   - check licenses in all go packages
+
+   The markdown link checker tools doesn't check `localhost` links by default.
+   Its configuration file, `markdown-link-check-config.json`, lives in the
+   `test-infra/scripts` directory. To override it, create a file with the same
+   name, containing the custom config in the `/test` directory.
+
+1. [optional] Customize the default build test runner, if you're using it. Set
+   the following environment variables if the default values don't fit your needs:
+
+   - `DISABLE_MD_LINTING`: Disable linting markdown files, defaults to 0 (false).
+   - `DISABLE_MD_LINK_CHECK`: Disable checking links in markdown files, defaults
+     to 0 (false).
 
 1. [optional] Define the functions `pre_build_tests()` and/or
    `post_build_tests()`. These functions will be called before or after the
@@ -84,6 +97,18 @@ main $@
 
 This is a helper script for Knative E2E test scripts. To use it:
 
+1. [optional] Customize the test cluster. Set the following environment variables
+   if the default values don't fit your needs:
+
+   - `E2E_CLUSTER_REGION`: Cluster region, defaults to `us-central1`.
+   - `E2E_CLUSTER_ZONE`: Cluster zone (e.g., `a`), defaults to none (i.e. use a regional
+     cluster).
+   - `E2E_CLUSTER_MACHINE`: Cluster node machine type, defaults to `n1-standard-4}`.
+   - `E2E_MIN_CLUSTER_NODES`: Minimum number of nodes in the cluster when autoscaling,
+     defaults to 1.
+   - `E2E_MAX_CLUSTER_NODES`: Maximum number of nodes in the cluster when autoscaling,
+     defaults to 3.
+
 1. Source the script.
 
 1. [optional] Write the `teardown()` function, which will tear down your test
@@ -130,9 +155,14 @@ This is a helper script for Knative E2E test scripts. To use it:
 
 This script will test that the latest Knative Serving nightly release works. It
 defines a special flag (`--no-knative-wait`) that causes the script not to
-wait for Knative Serving to be up before running the tests.
+wait for Knative Serving to be up before running the tests. It also requires that
+the test cluster is created in a specific region, `us-west2`.
 
 ```bash
+
+# This test requires a cluster in LA
+E2E_CLUSTER_REGION=us-west2
+
 source vendor/github.com/knative/test-infra/scripts/e2e-tests.sh
 
 function teardown() {

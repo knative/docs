@@ -194,7 +194,8 @@ function parse_flags() {
         case ${parameter} in
           --github-token)
             [[ ! -f "$1" ]] && abort "file $1 doesn't exist"
-            GITHUB_TOKEN="$(cat $1)"
+            # Remove any trailing newline/space from token
+            GITHUB_TOKEN="$(echo -n $(cat $1))"
             [[ -n "${GITHUB_TOKEN}" ]] || abort "file $1 is empty"
             ;;
           --release-gcr)

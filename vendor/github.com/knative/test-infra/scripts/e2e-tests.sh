@@ -36,17 +36,23 @@ function build_resource_name() {
 }
 
 # Test cluster parameters
-readonly E2E_BASE_NAME="k${REPO_NAME}"
-readonly E2E_CLUSTER_NAME=$(build_resource_name e2e-cls)
-readonly E2E_NETWORK_NAME=$(build_resource_name e2e-net)
-readonly E2E_CLUSTER_REGION=us-central1
-readonly E2E_CLUSTER_MACHINE=n1-standard-4
-readonly TEST_RESULT_FILE=/tmp/${E2E_BASE_NAME}-e2e-result
+
+# Configurable parameters
+readonly E2E_CLUSTER_REGION=${E2E_CLUSTER_REGION:-us-central1}
+# By default we use regional clusters.
+readonly E2E_CLUSTER_ZONE=${E2E_CLUSTER_ZONE:-}
+readonly E2E_CLUSTER_MACHINE=${E2E_CLUSTER_MACHINE:-n1-standard-4}
+
 # Each knative repository may have a different cluster size requirement here,
 # so we allow calling code to set these parameters.  If they are not set we
 # use some sane defaults.
 readonly E2E_MIN_CLUSTER_NODES=${E2E_MIN_CLUSTER_NODES:-1}
 readonly E2E_MAX_CLUSTER_NODES=${E2E_MAX_CLUSTER_NODES:-3}
+
+readonly E2E_BASE_NAME="k${REPO_NAME}"
+readonly E2E_CLUSTER_NAME=$(build_resource_name e2e-cls)
+readonly E2E_NETWORK_NAME=$(build_resource_name e2e-net)
+readonly TEST_RESULT_FILE=/tmp/${E2E_BASE_NAME}-e2e-result
 
 # Flag whether test is using a boskos GCP project
 IS_BOSKOS=0
@@ -148,13 +154,15 @@ function create_test_cluster() {
   echo "Cluster will have a minimum of ${E2E_MIN_CLUSTER_NODES} and a maximum of ${E2E_MAX_CLUSTER_NODES} nodes."
 
   # Smallest cluster required to run the end-to-end-tests
+  local geoflag="--gcp-region=${E2E_CLUSTER_REGION}"
+  [[ -n "${E2E_CLUSTER_ZONE}" ]] && geoflag="--gcp-zone=${E2E_CLUSTER_REGION}-${E2E_CLUSTER_ZONE}"
   local CLUSTER_CREATION_ARGS=(
     --gke-create-args="--enable-autoscaling --min-nodes=${E2E_MIN_CLUSTER_NODES} --max-nodes=${E2E_MAX_CLUSTER_NODES} --scopes=cloud-platform --enable-basic-auth --no-issue-client-certificate"
     --gke-shape={\"default\":{\"Nodes\":${E2E_MIN_CLUSTER_NODES}\,\"MachineType\":\"${E2E_CLUSTER_MACHINE}\"}}
     --provider=gke
     --deployment=gke
     --cluster="${E2E_CLUSTER_NAME}"
-    --gcp-region="${E2E_CLUSTER_REGION}"
+    ${geoflag}
     --gcp-network="${E2E_NETWORK_NAME}"
     --gke-environment=prod
   )
@@ -237,10 +245,10 @@ function setup_test_cluster() {
   if [[ -z ${K8S_CLUSTER_OVERRIDE} ]]; then
     USING_EXISTING_CLUSTER=0
     export K8S_CLUSTER_OVERRIDE=$(kubectl config current-context)
-    acquire_cluster_admin_role ${K8S_USER_OVERRIDE} ${E2E_CLUSTER_NAME} ${E2E_CLUSTER_REGION}
+    acquire_cluster_admin_role ${K8S_USER_OVERRIDE} ${E2E_CLUSTER_NAME} ${E2E_CLUSTER_REGION} ${E2E_CLUSTER_ZONE}
     # Make sure we're in the default namespace. Currently kubetest switches to
     # test-pods namespace when creating the cluster.
-    kubectl config set-context $K8S_CLUSTER_OVERRIDE --namespace=default
+    kubectl config set-context ${K8S_CLUSTER_OVERRIDE} --namespace=default
   fi
   readonly USING_EXISTING_CLUSTER
 
@@ -308,12 +316,7 @@ E2E_CLUSTER_VERSION=""
 
 # Parse flags and initialize the test cluster.
 function initialize() {
-  # Normalize calling script path; we can't use readlink because it's not available everywhere
-  E2E_SCRIPT=$0
-  [[ ${E2E_SCRIPT} =~ ^[\./].* ]] || E2E_SCRIPT="./$0"
-  E2E_SCRIPT="$(cd ${E2E_SCRIPT%/*} && echo $PWD/${E2E_SCRIPT##*/})"
-  readonly E2E_SCRIPT
-
+  E2E_SCRIPT="$(get_canonical_path $0)"
   E2E_CLUSTER_VERSION="${SERVING_GKE_VERSION}"
 
   cd ${REPO_ROOT_DIR}
