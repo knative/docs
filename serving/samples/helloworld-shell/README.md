@@ -42,9 +42,9 @@ recreate the source files from this folder.
     func handler(w http.ResponseWriter, r *http.Request) {
       out, err := exec.Command("/bin/sh", "script.sh").Output()
       if err != nil {
-        log.Fatal(err)
+        w.WriteHeader(500)
       }
-      fmt.Fprintf(w, "%s\n", out)
+      w.Write(out)
     }
 
     func main() {
