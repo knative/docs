@@ -13,12 +13,12 @@ You can find [guides for other platforms here](README.md).
 
 ## Before you begin
 
-Knative requires a Kubernetes cluster v1.10 or newer.
+Knative requires a Kubernetes cluster v1.11 or newer.
 
 ### Install and configure kubectl
 
 1.  If you already have `kubectl` CLI, run `kubectl version --short` to check
-    the version. You need v1.10 or newer. If your `kubectl` is older, follow the
+    the version. You need v1.11 or newer. If your `kubectl` is older, follow the
     next step to install a newer version.
 
 2.  [Install the kubectl CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl).

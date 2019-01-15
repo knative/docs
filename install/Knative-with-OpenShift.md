@@ -10,7 +10,7 @@ You can find [guides for other platforms here](README.md).
 
 ## Before you begin
 
-These instructions will run an OpenShift 3.10 (Kubernetes 1.10) cluster on your
+These instructions will run an OpenShift 3.10 (Kubernetes 1.11) cluster on your
 local machine using
 [`oc cluster up`](https://docs.openshift.org/latest/getting_started/administrators.html#running-in-a-docker-container)
 to test-drive knative.

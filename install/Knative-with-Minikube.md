@@ -9,13 +9,13 @@ You can find [guides for other platforms here](README.md).
 
 ## Before you begin
 
-Knative requires a Kubernetes cluster v1.10 or newer. If you don't have one, you
+Knative requires a Kubernetes cluster v1.11 or newer. If you don't have one, you
 can create one using [Minikube](https://github.com/kubernetes/minikube).
 
 ### Install kubectl and Minikube
 
 1. If you already have `kubectl` CLI, run `kubectl version` to check the
-   version. You need v1.10 or newer. If your `kubectl` is older, follow the next
+   version. You need v1.11 or newer. If your `kubectl` is older, follow the next
    step to install a newer version.
 
 1. [Install the kubectl CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl).
@@ -27,7 +27,7 @@ can create one using [Minikube](https://github.com/kubernetes/minikube).
 
 ## Creating a Kubernetes cluster
 
-After kubectl and Minikube are installed, create a cluster with version 1.10 or
+After kubectl and Minikube are installed, create a cluster with version 1.11 or
 greater and your chosen VM driver:
 
 For Linux use:

@@ -25,11 +25,11 @@ that you to run multiple and separate installation commands.
 
 - Kubernetes requirements:
 
-  - Your Kubernetes cluster version must be v1.10 or newer.
+  - Your Kubernetes cluster version must be v1.11 or newer.
 
   - Your version of the
     [`kubectl` CLI tool](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
-    must be v1.10 or newer.
+    must be v1.11 or newer.
 
 ## Installing Istio
 
@@ -83,7 +83,7 @@ service mesh. If you install any of the following options, you must install the
 
 1. If you choose to install the Istio service mesh with automatic sidecar
    injection, you must ensure that the
-   [`MutatingAdmissionWebhook` admission controller](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.10/#mutatingwebhookconfiguration-v1beta1-admissionregistration-k8s-io)
+   [`MutatingAdmissionWebhook` admission controller](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.11/#mutatingwebhookconfiguration-v1beta1-admissionregistration-k8s-io)
    is enabled on your cluster by running the following command:
 
    ```bash
