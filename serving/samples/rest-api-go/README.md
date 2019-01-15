@@ -107,7 +107,7 @@ To access this service via `curl`, you need to determine its ingress address.
 1. To determine if your service is ready:
 
 ```
-# In Knative 0.2.x or prior versions, we use `knative-ingressgateway`.
+# In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
 INGRESSGATEWAY=knative-ingressgateway
 INGRESSGATEWAY_LABEL=knative
 

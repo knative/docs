@@ -174,7 +174,7 @@ export SERVICE_HOST=$(kubectl get route private-repos \
 ```
 
 ```shell
-# In Knative 0.2.x or prior versions, we use `knative-ingressgateway`.
+# In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
 INGRESSGATEWAY=knative-ingressgateway
 INGRESSGATEWAY_LABEL=knative
 

@@ -142,7 +142,7 @@ using `kubectl`. First, is there an ingress service, and does it have an
 `EXTERNAL-IP`:
 
 ```
-# In Knative 0.2.x or prior versions, we use `knative-ingressgateway`.
+# In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
 INGRESSGATEWAY=knative-ingressgateway
 
 # The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
@@ -174,7 +174,7 @@ IP, so let's capture the IP and Host URL in variables so that we can use them in
 # Put the Host URL into an environment variable.
 export SERVICE_HOST=`kubectl get route thumb --output jsonpath="{.status.domain}"`
 
-# In Knative 0.2.x or prior versions, we use `knative-ingressgateway`.
+# In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
 INGRESSGATEWAY=knative-ingressgateway
 INGRESSGATEWAY_LABEL=knative
 
