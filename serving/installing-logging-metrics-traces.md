@@ -40,7 +40,7 @@ some or all of the observability features are installed. For example, if you ins
 
 ## Logs
 
-Knative offers three different setups for collecting logs:
+Knative offers three different setups for collecting logs. Choose one to install:
 
 1. [Elasticsearch and Kibana](#elasticsearch-and-kibana)
 1. [Stackdriver](#stackdriver)
