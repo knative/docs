@@ -131,9 +131,9 @@ head to the [sample apps](../serving/samples/README.md) repo.
 # In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
 INGRESSGATEWAY=knative-ingressgateway
 
-# In Knative 0.3.x the use of `knative-ingressgateway` is deprecated.
-# We should use `istio-ingressgateway` since `knative-ingressgateway`
-# will be removed in 0.4.
+# The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
+# Use `istio-ingressgateway` instead, since `knative-ingressgateway`
+# will be removed in Knative v0.4.
 if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
     INGRESSGATEWAY=istio-ingressgateway
 fi
