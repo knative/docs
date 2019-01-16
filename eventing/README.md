@@ -231,7 +231,7 @@ FTP server for new files or generate events at a set time interval.
 - [Run samples](samples/)
 
 ## Configuration
-- [Default Channels](default-channels.md)
+- [Default Channels](default-channels.md) provide a way to choose the persistence strategy for Channels across the cluster.
 
 ---
 
