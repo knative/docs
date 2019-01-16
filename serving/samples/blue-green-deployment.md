@@ -87,10 +87,11 @@ with Knative.
 > Note: If you don't have a custom domain configured for use with Knative, you
 > can interact with your app using cURL requests if you have the host URL and IP
 > address:
-> `curl -H "Host: blue-green-demo.default.example.com" http://IP_ADDRESS`  
+> `curl -H "Host: blue-green-demo.default.example.com" http://IP_ADDRESS`
 >  Knative creates the host URL by combining the name of your Route object, the namespace,
 > and `example.com`, if you haven't configured a custom domain. For example, `[route-name].[namespace].example.com`.
-> You can get the IP address by entering `kubectl get svc knative-ingressgateway --namespace istio-system`
+> You can get the IP address by entering `kubectl get svc istio-ingressgateway --namespace istio-system` (or
+> `kubectl get svc istio-ingressgateway --namespace istio-system` if using Knative 0.2.x or prior versions)
 > and copying the `EXTERNAL-IP` returned by that command. See [Interacting with your app](../../install/getting-started-knative-app.md#interacting-with-your-app)
 > for more information.
 

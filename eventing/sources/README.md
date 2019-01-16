@@ -31,7 +31,7 @@ Name | Status | Support | Description
 --- | --- | --- | ---
 [AWS SQS](https://github.com/knative/eventing-sources/blob/master/pkg/apis/sources/v1alpha1/aws_sqs_types.go) | Proof of Concept | None | Brings [AWS Simple Quele Service](https://aws.amazon.com/sqs/) messages into Knative.
 [Cron Job](https://github.com/knative/eventing-sources/blob/master/pkg/apis/sources/v1alpha1/cron_job_types.go) | Proof of Concept | None | Uses an in-memory timer to produce events on the specified Cron schedule.
-[GCP PubSub](https://github.com/knative/eventing-sources/blob/master/pkg/apis/sources/v1alpha1/gcp_pubsub_types.go) | Proof of Concept | None | Brings [GCP PubSub](https://cloud.google.com/pubsub/) messages into Knative.
+[GCP PubSub](https://github.com/knative/eventing-sources/blob/master/contrib/gcppubsub/pkg/apis/sources/v1alpha1/gcp_pubsub_types.go) | Proof of Concept | None | Brings [GCP PubSub](https://cloud.google.com/pubsub/) messages into Knative.
 [GitHub](https://github.com/knative/eventing-sources/blob/master/pkg/apis/sources/v1alpha1/githubsource_types.go) | Proof of Concept | None | Registers for events of the specified types on the specified GitHub organization/repository. Brings those events into Knative.
 [GitLab](https://gitlab.com/triggermesh/gitlabsource) | Proof of Concept | None | Registers for events of the specified types on the specified GitLab repository. Brings those events into Knative.
 [Google Cloud Scheduler](https://github.com/vaikas-google/csr) | Active Development | None | Create, update, and delete [Google Cloud Scheduler](https://cloud.google.com/scheduler/) Jobs. When those jobs are triggered, receive the event inside Knative.

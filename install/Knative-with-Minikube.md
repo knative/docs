@@ -9,7 +9,7 @@ You can find [guides for other platforms here](README.md).
 
 ## Before you begin
 
-Knative requires a Kubernetes cluster v1.10 or newer. If you don't have one, you
+Knative requires a Kubernetes cluster v1.11 or newer. If you don't have one, you
 can create one using [Minikube](https://github.com/kubernetes/minikube).
 
 ### Install kubectl and Minikube
@@ -27,14 +27,14 @@ can create one using [Minikube](https://github.com/kubernetes/minikube).
 
 ## Creating a Kubernetes cluster
 
-After kubectl and Minikube are installed, create a cluster with version 1.10 or
+After kubectl and Minikube are installed, create a cluster with version 1.11 or
 greater and your chosen VM driver:
 
 For Linux use:
 
 ```shell
 minikube start --memory=8192 --cpus=4 \
-  --kubernetes-version=v1.11.3 \
+  --kubernetes-version=v1.11.5 \
   --vm-driver=kvm2 \
   --disk-size=30g \
   --extra-config=apiserver.enable-admission-plugins="LimitRanger,NamespaceExists,NamespaceLifecycle,ResourceQuota,ServiceAccount,DefaultStorageClass,MutatingAdmissionWebhook"
@@ -44,7 +44,7 @@ For macOS use:
 
 ```shell
 minikube start --memory=8192 --cpus=4 \
-  --kubernetes-version=v1.11.3 \
+  --kubernetes-version=v1.11.5 \
   --vm-driver=hyperkit \
   --disk-size=30g \
   --extra-config=apiserver.enable-admission-plugins="LimitRanger,NamespaceExists,NamespaceLifecycle,ResourceQuota,ServiceAccount,DefaultStorageClass,MutatingAdmissionWebhook"
@@ -123,12 +123,22 @@ If you'd like to view the available sample apps and deploy one of your choosing,
 head to the [sample apps](../serving/samples/README.md) repo.
 
 > Note: When looking up the IP address to use for accessing your app, you need
-> to look up the NodePort for the `knative-ingressgateway` as well as the IP
+> to look up the NodePort for the `istio-ingressgateway` well as the IP
 > address used for Minikube. You can use the following command to look up the
 > value to use for the {IP_ADDRESS} placeholder used in the samples:
 
 ```shell
-echo $(minikube ip):$(kubectl get svc knative-ingressgateway --namespace istio-system --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
+# In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
+INGRESSGATEWAY=knative-ingressgateway
+
+# The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
+# Use `istio-ingressgateway` instead, since `knative-ingressgateway`
+# will be removed in Knative v0.4.
+if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
+    INGRESSGATEWAY=istio-ingressgateway
+fi
+
+echo $(minikube ip):$(kubectl get svc $INGRESSGATEWAY --namespace istio-system --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
 ```
 
 ## Cleaning up

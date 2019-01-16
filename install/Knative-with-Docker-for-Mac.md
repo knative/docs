@@ -9,7 +9,7 @@ You can find [guides for other platforms here](README.md).
 
 ## Before you begin
 
-Knative requires a Kubernetes cluster v1.10 or newer. If you don't have one, you
+Knative requires a Kubernetes cluster v1.11 or newer. If you don't have one, you
 can create one using [Docker for Mac](https://docs.docker.com/docker-for-mac/).
 If you haven't already,
 [install Docker for Mac](https://docs.docker.com/docker-for-mac/install/) before

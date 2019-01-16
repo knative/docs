@@ -61,6 +61,7 @@ recreate the source files from this folder.
    ```docker
    # Use the offical Golang image to create a build artifact.
    # This is based on Debian and sets the GOPATH to /go.
+   # https://hub.docker.com/_/golang
    FROM golang as builder
 
    # Copy local code to the container image.
@@ -136,11 +137,10 @@ folder) you're ready to build and deploy the sample app.
    ```
 
 1. Now that your service is created, Knative will perform the following steps:
-
-   - Create a new immutable revision for this version of the app.
-   - Network programming to create a route, ingress, service, and load balance
-     for your app.
-   - Automatically scale your pods up and down (including to zero active pods).
+    - Create a new immutable revision for this version of the app.
+    - Network programming to create a route, ingress, service, and load balance
+    for your app.
+    - Automatically scale your pods up and down (including to zero active pods).
 
 1. Run the following command to find the external IP address for your service.
    The ingress IP for your cluster is returned. If you just created your
@@ -148,15 +148,24 @@ folder) you're ready to build and deploy the sample app.
    asssigned an external IP address.
 
    ```shell
-   kubectl get svc knative-ingressgateway --namespace istio-system
+   # In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
+   INGRESSGATEWAY=knative-ingressgateway
+
+   # The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
+   # Use `istio-ingressgateway` instead, since `knative-ingressgateway`
+   # will be removed in Knative v0.4.
+   if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
+       INGRESSGATEWAY=istio-ingressgateway
+   fi
+
+   kubectl get svc $INGRESSGATEWAY --namespace istio-system
    ```
 
    Example:
 
    ```shell
    NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
-   knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
-
+   xxxxxxx-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
    ```
 
 1. Run the following command to find the domain URL for your service:
