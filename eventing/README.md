@@ -80,8 +80,8 @@ ChannelProvisioner) and the core sources (which provides the Kubernetes Events,
 GitHub, and "Container" Sources) with the following commands:
 
 ```bash
-kubectl apply --filename https://github.com/knative/eventing/releases/download/v0.2.1/release.yaml
-kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.2.1/release.yaml
+kubectl apply --filename https://github.com/knative/eventing/releases/download/v0.3.0/release.yaml
+kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.3.0/release.yaml
 ```
 
 In addition to the core sources, you can also use GCP PubSub as a source by
@@ -91,7 +91,7 @@ the above sources, and adds GCP PubSub, which requires the listed secret):
 
 ```bash
 kubectl --namespace knative-sources create secret generic gcppubsub-source-key --from-literal=key.json=''
-kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.2.1/release-with-gcppubsub.yaml
+kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.3.0/release-gcppubsub.yaml
 ```
 
 This document will be updated as additional sources (which are custom resource
