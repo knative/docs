@@ -164,8 +164,8 @@ curl -s https://raw.githubusercontent.com/knative/docs/master/install/scripts/is
 1. Run the following to install Istio:
 
    ```shell
-   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.2/istio-crds.yaml && \
-   oc apply -f https://storage.googleapis.com/knative-releases/serving/latest/istio.yaml
+   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.3.0/istio-crds.yaml && \
+   oc apply -f https://github.com/knative/serving/releases/download/v0.3.0/istio.yaml
    ```
    Note: the resources (CRDs) defined in the `istio-crds.yaml`file are
    also included in the `istio.yaml` file, but they are pulled out so that
@@ -206,7 +206,8 @@ curl -s https://raw.githubusercontent.com/knative/docs/master/install/scripts/kn
 1. Install Knative serving:
 
    ```shell
-   oc apply -f https://storage.googleapis.com/knative-releases/serving/latest/release-no-mon.yaml
+   oc apply -f https://github.com/knative/serving/releases/download/v0.3.0/serving.yaml \
+   oc apply -f https://github.com/knative/build/releases/download/v0.3.0/build.yaml
    ```
 
 2. Monitor the Knative components until all of the components show a `STATUS` of

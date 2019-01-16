@@ -148,11 +148,11 @@ spec:
 And of course create the respective `ConfigMaps`:
 
 ```
-curl https://github.com/knative/serving/releases/download/v0.2.3/istio.yaml
+curl https://github.com/knative/serving/releases/download/v0.3.0/istio.yaml
 kubectl create configmap istio-chart-080 --from-file=istio.yaml
 
-curl https://github.com/knative/serving/releases/download/v0.2.3/release.yaml
-kubectl create configmap knative-chart-001 --from-file=release.yaml
+curl https://github.com/knative/serving/releases/download/v0.3.0/serving.yaml
+kubectl create configmap knative-chart-001 --from-file=serving.yaml
 ```
 
 With this preparation, your team can just activate Knative in the "Addons" tab

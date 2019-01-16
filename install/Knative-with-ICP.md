@@ -126,36 +126,45 @@ components together, or individually.
 
 1. Run one of the following commands to install Knative:
 
-   - Specify `release-lite.yaml` to install the
-     [Knative Serving](https://github.com/knative/serving) and
+   - To install the [Knative Serving](https://github.com/knative/serving) and
      [Knative Build](https://github.com/knative/build) components with metrics
-     monitoring:
+     and monitoring, enter the following commands:
 
      ```shell
-     curl -L https://github.com/knative/serving/releases/download/v0.2.3/release-lite.yaml \
+     curl -L https://github.com/knative/serving/releases/download/v0.3.0/serving.yaml \
+       | sed 's/LoadBalancer/NodePort/' \
+       | kubectl apply --filename -
+
+     curl -L https://github.com/knative/build/releases/download/v0.3.0/build.yaml \
+       | sed 's/LoadBalancer/NodePort/' \
+       | kubectl apply --filename -
+
+     curl -L https://github.com/knative/serving/releases/download/v0.3.0/monitoring.yaml \
+       | sed 's/LoadBalancer/NodePort/' \
+       | kubectl apply --filename -
+     ```
+     See [Installing logging, metrics, and traces](../serving/installing-logging-metrics-traces.md)
+     for details about installing the various supported observability plug-ins.
+
+   - To install only [Knative Serving](https://github.com/knative/serving),
+     enter the following command:
+
+     ```shell
+     curl -L https://github.com/knative/serving/releases/download/v0.3.0/serving.yaml \
        | sed 's/LoadBalancer/NodePort/' \
        | kubectl apply --filename -
      ```
 
-   - Specify `serving.yaml` to install only
-     [Knative Serving](https://github.com/knative/serving):
+   - To install only [Knative Build](https://github.com/knative/build),
+     enter the following command:
 
      ```shell
-     curl -L https://github.com/knative/serving/releases/download/v0.2.3/serving.yaml \
+     curl -L https://github.com/knative/build/releases/download/v0.3.0/build.yaml \
        | sed 's/LoadBalancer/NodePort/' \
        | kubectl apply --filename -
      ```
 
-   - Specify `build.yaml` to install only
-     [Knative Serving](https://github.com/knative/build):
-
-     ```shell
-     curl -L https://github.com/knative/serving/releases/download/v0.2.3/build.yaml \
-       | sed 's/LoadBalancer/NodePort/' \
-       | kubectl apply --filename -
-     ```
-
-1. Depending on the Knative that you chose to install, ensure that the
+1. Depending on which Knative components you chose to install, ensure that the
    installation is successful by running the following commands until the
    namespace shows a `STATUS` of `Running`:
 
@@ -198,25 +207,24 @@ echo $(ICP cluster ip):$(kubectl get svc knative-ingressgateway --namespace isti
 To remove Knative from your IBM Cloud Private cluster by running one of the
 following commands:
 
-- If you installed `release-lite.yaml`, run:
+- If you installed the Knative Serving, run:
 
   ```shell
-  curl -L https://github.com/knative/serving/releases/download/v0.2.3/release-lite.yaml \
+  curl -L https://github.com/knative/serving/releases/download/v0.3.0/serving.yaml \
     | sed 's/LoadBalancer/NodePort/' \
     | kubectl delete --filename -
   ```
 
-- If you installed `serving.yaml`, run:
-
+- If you installed Knative Build, run:
   ```shell
-  curl -L https://github.com/knative/serving/releases/download/v0.2.3/serving.yaml \
+  curl -L https://github.com/knative/build/releases/download/v0.3.0/build.yaml \
     | sed 's/LoadBalancer/NodePort/' \
     | kubectl delete --filename -
   ```
 
-- If you installed `build.yaml`, run:
+- If you installed Knative monitoring and metrics, run:
   ```shell
-  curl -L https://github.com/knative/serving/releases/download/v0.2.3/build.yaml \
+  curl -L https://github.com/knative/serving/releases/download/v0.3.0/monitoring.yaml \
     | sed 's/LoadBalancer/NodePort/' \
     | kubectl delete --filename -
   ```
