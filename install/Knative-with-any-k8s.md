@@ -5,7 +5,7 @@ using pre-built images.
 
 ## Before you begin
 
-Knative requires a Kubernetes cluster v1.10 or newer with the
+Knative requires a Kubernetes cluster v1.11 or newer with the
 [MutatingAdmissionWebhook admission controller](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#how-do-i-turn-on-an-admission-controller)
 enabled. `kubectl` v1.10 is also required. This guide assumes that you've
 already created a Kubernetes cluster which you're comfortable installing _alpha_

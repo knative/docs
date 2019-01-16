@@ -13,7 +13,7 @@ You can find [guides for other platforms here](README.md).
 
 ## Before you begin
 
-Knative requires a Kubernetes cluster v1.10 or newer.
+Knative requires a Kubernetes cluster v1.11 or newer.
 
 ### Install and configure kubectl
 
