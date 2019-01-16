@@ -29,7 +29,7 @@ that you to run multiple and separate installation commands.
 
   - Your version of the
     [`kubectl` CLI tool](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
-    must be v1.11 or newer.
+    must be v1.10 or newer.
 
 ## Installing Istio
 

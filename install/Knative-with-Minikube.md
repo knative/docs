@@ -15,7 +15,7 @@ can create one using [Minikube](https://github.com/kubernetes/minikube).
 ### Install kubectl and Minikube
 
 1. If you already have `kubectl` CLI, run `kubectl version` to check the
-   version. You need v1.11 or newer. If your `kubectl` is older, follow the next
+   version. You need v1.10 or newer. If your `kubectl` is older, follow the next
    step to install a newer version.
 
 1. [Install the kubectl CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl).
@@ -34,7 +34,7 @@ For Linux use:
 
 ```shell
 minikube start --memory=8192 --cpus=4 \
-  --kubernetes-version=v1.11.3 \
+  --kubernetes-version=v1.11.5 \
   --vm-driver=kvm2 \
   --disk-size=30g \
   --extra-config=apiserver.enable-admission-plugins="LimitRanger,NamespaceExists,NamespaceLifecycle,ResourceQuota,ServiceAccount,DefaultStorageClass,MutatingAdmissionWebhook"
@@ -44,7 +44,7 @@ For macOS use:
 
 ```shell
 minikube start --memory=8192 --cpus=4 \
-  --kubernetes-version=v1.11.3 \
+  --kubernetes-version=v1.11.5 \
   --vm-driver=hyperkit \
   --disk-size=30g \
   --extra-config=apiserver.enable-admission-plugins="LimitRanger,NamespaceExists,NamespaceLifecycle,ResourceQuota,ServiceAccount,DefaultStorageClass,MutatingAdmissionWebhook"

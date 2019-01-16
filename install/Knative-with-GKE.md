@@ -7,7 +7,7 @@ You can find [guides for other platforms here](README.md).
 
 ## Before you begin
 
-Knative requires a Kubernetes cluster v1.11 or newer. `kubectl` v1.11 is also
+Knative requires a Kubernetes cluster v1.11 or newer. `kubectl` v1.10 is also
 required. This guide walks you through creating a cluster with the correct
 specifications for Knative on Google Cloud Platform (GCP).
 
@@ -16,7 +16,7 @@ commands will need to be adjusted for use in a Windows environment.
 
 ### Installing the Google Cloud SDK and `kubectl`
 
-1. If you already have `gcloud` installed with `kubectl` version 1.11 or newer,
+1. If you already have `gcloud` installed with `kubectl` version 1.10 or newer,
    you can skip these steps.
 
    > Tip: To check which version of `kubectl` you have installed, enter:
