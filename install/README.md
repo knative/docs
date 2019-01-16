@@ -11,6 +11,7 @@ which Kubernetes platform is right for you, see
 We provide information for installing Knative on
 [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine/docs/),
 [IBM Cloud Kubernetes Service](https://www.ibm.com/cloud/container-service),
+[IBM Cloud Private](https://www.ibm.com/cloud/private),
 [Azure Kubernetes Service](https://docs.microsoft.com/en-us/azure/aks/),
 [Minikube](https://kubernetes.io/docs/setup/minikube/),
 [OpenShift](https://github.com/openshift/origin) and
@@ -45,6 +46,7 @@ available Knative components.
 * [Knative Install on Gardener](Knative-with-Gardener.md)
 * [Knative Install on Google Kubernetes Engine](Knative-with-GKE.md)
 * [Knative Install on IBM Cloud Kubernetes Service](Knative-with-IKS.md)
+* [Knative Install on IBM Cloud Private](Knative-with-ICP.md)
 * [Knative Install on Pivotal Container Service](Knative-with-PKS.md)
 
 If you already have a Kubernetes cluster you're comfortable installing *alpha*
