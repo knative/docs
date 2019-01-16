@@ -47,15 +47,16 @@ Knative depends on Istio. Istio workloads require privileged mode for Init
 Containers
 
 1. Install Istio:
+
    ```bash
    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.3.0/istio-crds.yaml && \
    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.3.0/istio.yaml
    ```
-   Note: the resources (CRDs) defined in the `istio-crds.yaml`file are
-   also included in the `istio.yaml` file, but they are pulled out so that
-   the CRD definitions are created first. If you see an error when creating
-   resources about an unknown type, run the second `kubectl apply` command
-   again.
+
+   Note: the resources (CRDs) defined in the `istio-crds.yaml`file are also
+   included in the `istio.yaml` file, but they are pulled out so that the CRD
+   definitions are created first. If you see an error when creating resources
+   about an unknown type, run the second `kubectl apply` command again.
 
 1. Label the default namespace with `istio-injection=enabled`:
    ```bash
@@ -74,24 +75,25 @@ rerun the command to see the current status.
 ## Installing Knative
 
 The following commands install all available Knative components. To customize
-your Knative installation, see [Performing a Custom Knative Installation](Knative-custom-install.md).
+your Knative installation, see
+[Performing a Custom Knative Installation](Knative-custom-install.md).
 
 1. Run the `kubectl apply` command to install Knative and its dependencies:
-    ```bash
-    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.3.0/serving.yaml \
-    --filename https://github.com/knative/build/releases/download/v0.3.0/release.yaml \
-    --filename https://github.com/knative/eventing/releases/download/v0.3.0/release.yaml \
-    --filename https://github.com/knative/eventing-sources/releases/download/v0.3.0/release.yaml
-    ```
-1. Monitor the Knative components until all of the components show a
-   `STATUS` of `Running`:
-    ```bash
-    kubectl get pods --namespace knative-serving
-    kubectl get pods --namespace knative-build
-    kubectl get pods --namespace knative-eventing
-    kubectl get pods --namespace knative-sources
-    kubectl get pods --namespace knative-monitoring
-    ```
+   ```bash
+   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.3.0/serving.yaml \
+   --filename https://github.com/knative/build/releases/download/v0.3.0/release.yaml \
+   --filename https://github.com/knative/eventing/releases/download/v0.3.0/release.yaml \
+   --filename https://github.com/knative/eventing-sources/releases/download/v0.3.0/release.yaml
+   ```
+1. Monitor the Knative components until all of the components show a `STATUS` of
+   `Running`:
+   ```bash
+   kubectl get pods --namespace knative-serving
+   kubectl get pods --namespace knative-build
+   kubectl get pods --namespace knative-eventing
+   kubectl get pods --namespace knative-sources
+   kubectl get pods --namespace knative-monitoring
+   ```
 
 ## What's next
 
@@ -105,8 +107,8 @@ guide.
 To get started with Knative Eventing, pick one of the
 [Eventing Samples](../eventing/samples/) to walk through.
 
-To get started with Knative Build, read the
-[Build README](../build/README.md), then choose a sample to walk through.
+To get started with Knative Build, read the [Build README](../build/README.md),
+then choose a sample to walk through.
 
 ## Cleaning up
 

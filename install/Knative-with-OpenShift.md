@@ -212,9 +212,9 @@ If you'd like to view the available sample apps and deploy one of your choosing,
 head to the [sample apps](../serving/samples/README.md) repo.
 
 > Note: When looking up the IP address to use for accessing your app, you need
-> to look up the NodePort for the `istio-ingressgateway` well as the IP
-> address used for OpenShift. You can use the following command to look up the
-> value to use for the {IP_ADDRESS} placeholder used in the samples:
+> to look up the NodePort for the `istio-ingressgateway` well as the IP address
+> used for OpenShift. You can use the following command to look up the value to
+> use for the {IP_ADDRESS} placeholder used in the samples:
 
 ```shell
 # In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
