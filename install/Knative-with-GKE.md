@@ -1,80 +1,93 @@
 # Knative Install on Google Kubernetes Engine
 
-This guide walks you through the installation of the latest version of
-Knative using pre-built images.
+This guide walks you through the installation of the latest version of all
+Knative components using pre-built images.
 
 You can find [guides for other platforms here](README.md).
 
 ## Before you begin
 
-Knative requires a Kubernetes cluster v1.10 or newer. `kubectl` v1.10 is also
-required.  This guide walks you through creating a cluster with the correct
-specifications for Knative on Google Cloud Platform.
+Knative requires a Kubernetes cluster v1.11 or newer. `kubectl` v1.10 is also
+required. This guide walks you through creating a cluster with the correct
+specifications for Knative on Google Cloud Platform (GCP).
 
-This guide assumes you are using bash in a Mac or Linux environment; some
+This guide assumes you are using `bash` in a Mac or Linux environment; some
 commands will need to be adjusted for use in a Windows environment.
 
 ### Installing the Google Cloud SDK and `kubectl`
 
 1. If you already have `gcloud` installed with `kubectl` version 1.10 or newer,
    you can skip these steps.
+
    > Tip: To check which version of `kubectl` you have installed, enter:
-     ```
-     kubectl version
-     ```
+
+   ```
+   kubectl version
+   ```
 
 1. Download and install the `gcloud` command line tool:
    https://cloud.google.com/sdk/install
 
 1. Install the `kubectl` component:
-    ```
-    gcloud components install kubectl
-    ```
+   ```
+   gcloud components install kubectl
+   ```
 1. Authorize `gcloud`:
-    ```
-    gcloud auth login
-    ```
+   ```
+   gcloud auth login
+   ```
 
 ### Setting environment variables
 
 To simplify the command lines for this walkthrough, we need to define a few
 environment variables.
 
-Set `CLUSTER_NAME` and `CLUSTER_ZONE` variables:
+Set `CLUSTER_NAME` and `CLUSTER_ZONE` variables, you can replace `knative` and
+`us-west1-c` with cluster name and zone of your choosing.
+
+The `CLUSTER_NAME` needs to be lowercase and unique among any other Kubernetes
+clusters in your GCP project. The zone can be
+[any compute zone available on GCP](https://cloud.google.com/compute/docs/regions-zones/#available).
+These variables are used later to create a Kubernetes cluster.
 
 ```bash
 export CLUSTER_NAME=knative
 export CLUSTER_ZONE=us-west1-c
 ```
-The CLUSTER_NAME needs to be lowercase and unique among any other Kubernetes
-clusters in your GCP project. The zone can be
-[any compute zone available on GCP](https://cloud.google.com/compute/docs/regions-zones/#available).
-These variables are used later to create a Kubernetes cluster.
 
 ### Setting up a Google Cloud Platform project
 
-You need a GCP project to create a Google Kubernetes Engine cluster.
+You need a Google Cloud Platform (GCP) project to create a Google Kubernetes
+Engine cluster.
 
-1. Create a new GCP project and set it as your `gcloud` default, or set an
-   existing GCP project as your `gcloud` default:
-    * If you don't already have a GCP project created, create a new project in `gcloud`:
-      ```bash
-      gcloud projects create my-knative-project --set-as-default
-      ```
-      Replace `my-knative-project` with the name you'd like to use for your GCP project.
-
-      You also need to [enable billing](https://cloud.google.com/billing/docs/how-to/manage-billing-account)
-      for your new project.
-
-    * If you already have a GCP project, make sure your project is set as your
-      `gcloud` default:
-      ```bash
-      gcloud config set project my-knative-project
-      ```
-
-      > Tip: Enter `gcloud config get-value project` to view the ID of your default GCP project.
-1. Enable the necessary APIs:
+1. Set `PROJECT` environment variable, you can replace `my-knative-project` with
+   the desired name of your GCP project. If you don't have one, we'll create one
+   in the next step.
+   ```bash
+   export PROJECT=my-knative-project
    ```
+1. If you don't have a GCP project, create and set it as your `gcloud` default:
+
+   ```bash
+   gcloud projects create $PROJECT --set-as-default
+   ```
+
+   You also need to
+   [enable billing](https://cloud.google.com/billing/docs/how-to/manage-billing-account)
+   for your new project.
+
+1. If you already have a GCP project, make sure your project is set as your
+   `gcloud` default:
+
+   ```bash
+   gcloud config set core/project $PROJECT
+   ```
+
+   > Tip: Enter `gcloud config get-value project` to view the ID of your default
+   > GCP project.
+
+1. Enable the necessary APIs:
+   ```bash
    gcloud services enable \
      cloudapis.googleapis.com \
      container.googleapis.com \
@@ -83,32 +96,32 @@ You need a GCP project to create a Google Kubernetes Engine cluster.
 
 ## Creating a Kubernetes cluster
 
-To make sure the cluster is large enough to host all the Knative and
-Istio components, the recommended configuration for a cluster is:
+To make sure the cluster is large enough to host all the Knative and Istio
+components, the recommended configuration for a cluster is:
 
-* Kubernetes version 1.10 or later
-* 4 vCPU nodes (`n1-standard-4`)
-* Node autoscaling, up to 10 nodes
-* API scopes for `cloud-platform`, `logging-write`, `monitoring-write`, and
+- Kubernetes version 1.11 or later
+- 4 vCPU nodes (`n1-standard-4`)
+- Node autoscaling, up to 10 nodes
+- API scopes for `cloud-platform`, `logging-write`, `monitoring-write`, and
   `pubsub` (if those features will be used)
 
 1. Create a Kubernetes cluster on GKE with the required specifications:
-    ```
-    gcloud container clusters create $CLUSTER_NAME \
-      --zone=$CLUSTER_ZONE \
-      --cluster-version=latest \
-      --machine-type=n1-standard-4 \
-      --enable-autoscaling --min-nodes=1 --max-nodes=10 \
-      --enable-autorepair \
-      --scopes=service-control,service-management,compute-rw,storage-ro,cloud-platform,logging-write,monitoring-write,pubsub,datastore \
-      --num-nodes=3
-    ```
+   ```bash
+   gcloud container clusters create $CLUSTER_NAME \
+     --zone=$CLUSTER_ZONE \
+     --cluster-version=latest \
+     --machine-type=n1-standard-4 \
+     --enable-autoscaling --min-nodes=1 --max-nodes=10 \
+     --enable-autorepair \
+     --scopes=service-control,service-management,compute-rw,storage-ro,cloud-platform,logging-write,monitoring-write,pubsub,datastore \
+     --num-nodes=3
+   ```
 1. Grant cluster-admin permissions to the current user:
-    ```bash
-    kubectl create clusterrolebinding cluster-admin-binding \
-    --clusterrole=cluster-admin \
-    --user=$(gcloud config get-value core/account)
-    ```
+   ```bash
+   kubectl create clusterrolebinding cluster-admin-binding \
+   --clusterrole=cluster-admin \
+   --user=$(gcloud config get-value core/account)
+   ```
 
 Admin permissions are required to create the necessary
 [RBAC rules for Istio](https://istio.io/docs/concepts/security/rbac/).
@@ -118,82 +131,69 @@ Admin permissions are required to create the necessary
 Knative depends on Istio.
 
 1. Install Istio:
-    ```bash
-    kubectl apply --filename https://raw.githubusercontent.com/knative/serving/v0.1.1/third_party/istio-0.8.0/istio.yaml
-    ```
+   ```bash
+   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.3.0/istio-crds.yaml && \
+   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.3.0/istio.yaml
+   ```
+   Note: the resources (CRDs) defined in the `istio-crds.yaml`file are
+   also included in the `istio.yaml` file, but they are pulled out so that
+   the CRD definitions are created first. If you see an error when creating
+   resources about an unknown type, run the second `kubectl apply` command
+   again.
+
 1. Label the default namespace with `istio-injection=enabled`:
-    ```bash
-    kubectl label namespace default istio-injection=enabled
-    ```
+   ```bash
+   kubectl label namespace default istio-injection=enabled
+   ```
 1. Monitor the Istio components until all of the components show a `STATUS` of
-`Running` or `Completed`:
-    ```bash
-    kubectl get pods --namespace istio-system
-    ```
+   `Running` or `Completed`:
+   ```bash
+   kubectl get pods --namespace istio-system
+   ```
 
 It will take a few minutes for all the components to be up and running; you can
 rerun the command to see the current status.
 
 > Note: Instead of rerunning the command, you can add `--watch` to the above
-  command to view the component's status updates in real time. Use CTRL + C to exit watch mode.
+> command to view the component's status updates in real time. Use CTRL + C to
+> exit watch mode.
 
-## Installing Knative components
+## Installing Knative
 
-You can install the Knative Serving and Build components together, or Build on its own.
-
-### Installing Knative Serving and Build components
+The following commands install all available Knative components. To customize
+your Knative installation, see [Performing a Custom Knative Installation](Knative-custom-install.md).
 
 1. Run the `kubectl apply` command to install Knative and its dependencies:
     ```bash
-    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.1.1/release.yaml
+    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.3.0/serving.yaml \
+    --filename https://github.com/knative/build/releases/download/v0.3.0/release.yaml \
+    --filename https://github.com/knative/eventing/releases/download/v0.3.0/release.yaml \
+    --filename https://github.com/knative/eventing-sources/releases/download/v0.3.0/release.yaml
     ```
 1. Monitor the Knative components until all of the components show a
    `STATUS` of `Running`:
     ```bash
     kubectl get pods --namespace knative-serving
     kubectl get pods --namespace knative-build
+    kubectl get pods --namespace knative-eventing
+    kubectl get pods --namespace knative-sources
+    kubectl get pods --namespace knative-monitoring
     ```
-
-### Installing Knative Build only
-
-1. Run the `kubectl apply` command to install
-   [Knative Build](https://github.com/knative/build) and its dependencies:
-    ```bash
-    kubectl apply --filename https://raw.githubusercontent.com/knative/serving/v0.1.1/third_party/config/build/release.yaml
-    ```
-1. Monitor the Knative Build components until all of the components show a
-   `STATUS` of `Running`:
-    ```bash
-    kubectl get pods --namespace knative-build
-
-Just as with the Istio components, it will take a few seconds for the Knative
-components to be up and running; you can rerun the `kubectl get` command to see
-the current status.
-
-> Note: Instead of rerunning the command, you can add `--watch` to the above
-  command to view the component's status updates in real time. Use CTRL + C to
-  exit watch mode.
-
-You are now ready to deploy an app or create a build in your new Knative
-cluster.
 
 ## What's next
 
-Now that your cluster has Knative installed, you're ready to deploy an app or
-create a build.
+Now that your cluster has Knative installed, you can see what Knative has to
+offer.
 
-Depending on which Knative component you have installed, there are a few options
-for getting started:
+To deploy your first app with Knative, follow the step-by-step
+[Getting Started with Knative App Deployment](getting-started-knative-app.md)
+guide.
 
-* You can follow the step-by-step
-  [Getting Started with Knative App Deployment](getting-started-knative-app.md)
-  guide.
+To get started with Knative Eventing, pick one of the
+[Eventing Samples](../eventing/samples/) to walk through.
 
-* You can view the available [sample apps](../serving/samples/README.md) and
-  deploy one of your choosing.
-
-* You can follow the step-by-step
-  [Creating a simple Knative Build](../build/creating-builds.md) guide.
+To get started with Knative Build, read the
+[Build README](../build/README.md), then choose a sample to walk through.
 
 ## Cleaning up
 

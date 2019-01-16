@@ -20,6 +20,10 @@ spec:
   runLatest:
     configuration:
       revisionTemplate:
+        metadata:
+          annotations:
+            # Target 10 in-flight-requests per pod.
+            autoscaling.knative.dev/target: "10"
         spec:
           container:
-            image: github.com/knative/docs/serving/samples/autoscale-go
+            image: gcr.io/knative-samples/autoscale-go:0.1

@@ -1,17 +1,27 @@
-# Start from a Debian image with the latest version of Go installed
-# and a workspace (GOPATH) configured at /go.
-FROM golang
+# Use the offical Golang image to create a build artifact.
+# This is based on Debian and sets the GOPATH to /go.
+# https://hub.docker.com/_/golang
+FROM golang as builder
 
-# Copy the local package files to the container's workspace.
-ADD . /go/src/github.com/knative/docs/helloworld
+# Copy local code to the container image.
+WORKDIR /go/src/github.com/knative/docs/helloworld
+COPY . .
 
 # Build the outyet command inside the container.
 # (You may fetch or manage dependencies here,
 # either manually or with a tool like "godep".)
-RUN go install github.com/knative/docs/helloworld
+RUN CGO_ENABLED=0 GOOS=linux go build -v -o helloworld
 
-# Run the outyet command by default when the container starts.
-ENTRYPOINT /go/bin/helloworld
+# Use a Docker multi-stage build to create a lean production image.
+# https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
+FROM alpine
 
-# Document that the service listens on port 8080.
-EXPOSE 8080
+# Copy the binary to the production image from the builder stage.
+COPY --from=builder /go/src/github.com/knative/docs/helloworld/helloworld /helloworld
+
+# Configure and document the service HTTP port.
+ENV PORT 8080
+EXPOSE $PORT
+
+# Run the web service on container startup.
+CMD ["/helloworld"]

@@ -1,0 +1,35 @@
+# This is a very simple Knative Service that writes the input request to its log.
+
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: message-dumper
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            # This corresponds to
+            # https://github.com/knative/eventing-sources/blob/v0.2.1/cmd/message_dumper/dumper.go.
+            image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/message_dumper@sha256:ab5391755f11a5821e7263686564b3c3cd5348522f5b31509963afb269ddcd63
+
+---
+
+# Subscription from the GcpPubSubSource's output Channel to the Knative Service below.
+
+apiVersion: eventing.knative.dev/v1alpha1
+kind: Subscription
+metadata:
+  name: gcppubsub-source-sample
+spec:
+  channel:
+    apiVersion: eventing.knative.dev/v1alpha1
+    kind: Channel
+    name: pubsub-test
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1alpha1
+      kind: Service
+      name: message-dumper
+
