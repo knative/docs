@@ -1,4 +1,4 @@
-# Making your Routes local to the cluster.
+# Making your Routes local to the cluster
 
 In Knative 0.3.x or later, all Routes with a domain suffix of
 `svc.cluster.local` will only be visible inside the cluster.
