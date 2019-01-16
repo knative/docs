@@ -91,11 +91,20 @@ assigned an external IP address.
 1. To find the IP address for your service, enter:
 
    ```shell
-    kubectl get svc knative-ingressgateway --namespace istio-system
+   # In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
+   INGRESSGATEWAY=knative-ingressgateway
 
-    NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
-    knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
+   # The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
+   # Use `istio-ingressgateway` instead, since `knative-ingressgateway`
+   # will be removed in Knative v0.4.
+   if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
+       INGRESSGATEWAY=istio-ingressgateway
+   fi
 
+   kubectl get svc $INGRESSGATEWAY --namespace istio-system
+
+   NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
+   istio-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
    ```
 
    Take note of the `EXTERNAL-IP` address.
@@ -103,8 +112,7 @@ assigned an external IP address.
    You can also export the IP address as a variable with the following command:
 
    ```shell
-   export IP_ADDRESS=$(kubectl get svc knative-ingressgateway --namespace istio-system --output 'jsonpath={.status.loadBalancer.ingress[0].ip}')
-
+   export IP_ADDRESS=$(kubectl get svc $INGRESSGATEWAY --namespace istio-system --output 'jsonpath={.status.loadBalancer.ingress[0].ip}')
    ```
 
    > Note: if you use minikube or a baremetal cluster that has no external load
@@ -113,7 +121,7 @@ assigned an external IP address.
    > `NodeIP` and `NodePort`, enter the following command:
 
    ```shell
-   export IP_ADDRESS=$(kubectl get node  --output 'jsonpath={.items[0].status.addresses[0].address}'):$(kubectl get svc knative-ingressgateway --namespace istio-system   --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
+   export IP_ADDRESS=$(kubectl get node  --output 'jsonpath={.items[0].status.addresses[0].address}'):$(kubectl get svc $INGRESSGATEWAY --namespace istio-system   --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
    ```
 
 1. To find the host URL for your service, enter:
