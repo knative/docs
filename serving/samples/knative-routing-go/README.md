@@ -89,7 +89,7 @@ kubectl apply --filename serving/samples/knative-routing-go/sample.yaml
 
 ## Exploring the Routes
 
-A shared Gateway "knative-shared-gateway" is used within Knative service mesh
+A shared Gateway `knative-ingress-gateway` is used within Knative service mesh
 for serving all incoming traffic. You can inspect it and its corresponding
 Kubernetes service with:
 
@@ -216,11 +216,11 @@ kubectl get VirtualService entry-route --output yaml
 ## How It Works
 
 When an external request with host `example.com` reaches
-`knative-shared-gateway` Gateway, the `entry-route` VirtualService will check if
+`knative-ingress-gateway` Gateway, the `entry-route` VirtualService will check if
 it has `/search` or `/login` URI. If the URI matches, then the host of request
 will be rewritten into the host of `Search` service or `Login` service
 correspondingly. This resets the final destination of the request. The request
-with updated host will be forwarded to `knative-shared-gateway` Gateway again.
+with updated host will be forwarded to `knative-ingress-gateway` Gateway again.
 The Gateway proxy checks the updated host, and forwards it to `Search` or
 `Login` service according to its host setting.
 
