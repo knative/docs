@@ -48,6 +48,7 @@ Name | Status | Support | Description
 --- | --- | --- | ---
 [Auto Container Source](https://github.com/Harwayne/auto-container-source) | Proof of Concept | None | AutoContainerSource is a controller that allows the Source CRDs _without_ needing a controller. It notices CRDs with a specific label and starts controlling resources of that type. It utilizes Container Source as underlying infrastructure.
 [Container Source](https://github.com/knative/eventing-sources/blob/master/pkg/apis/sources/v1alpha1/containersource_types.go) | Active Development | Knative | Container Source is a generic controller. Given an Image URL, it will keep a single `Pod` running with the specified image, environment, and arguments. It is used by multiple other Sources as underlying infrastructure.
+[Sample Source](https://github.com/grantr/sample-source) | Proof of Concept | None | SampleSource is a reference implementation supporting the [Writing an Event Source the Hard Way tutorial](../samples/writing-a-source).
 
 
 

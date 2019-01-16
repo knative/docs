@@ -135,6 +135,8 @@ format, but may be expressed as simple lists, etc in YAML. All Sources should be
 part of the `sources` category, so you can list all existing Sources with
 `kubectl get sources`. The currently-implemented Sources are described below:
 
+_Want to implement your own source? Check out [the tutorial](samples/writing-a-source/README.md)._
+
 ### KubernetesEventSource
 
 The KubernetesEventSource fires a new event each time a
