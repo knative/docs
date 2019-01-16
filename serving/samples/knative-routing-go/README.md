@@ -89,7 +89,7 @@ kubectl apply --filename serving/samples/knative-routing-go/sample.yaml
 
 ## Exploring the Routes
 
-A shared Gateway "knative-ingress-gateway" is used within Knative service mesh
+A shared Gateway `knative-ingress-gateway` is used within Knative service mesh
 for serving all incoming traffic. You can inspect it and its corresponding
 Kubernetes service with:
 
