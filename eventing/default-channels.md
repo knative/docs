@@ -7,9 +7,8 @@ ConfigMap.
 
 ## Creating a default channel
 
-To create a default channel, use the same procedure as for creating a normal
-channel, but leave the `spec.provisioner` property blank. The `spec` property
-must be provided, but should be empty.
+To create a default channel, leave the `spec.provisioner` property blank. The
+`spec` property must be provided, but should be empty.
 
 _The content of `spec.arguments` will be cleared for default channels._
 
@@ -46,7 +45,9 @@ spec:
 
 #### Arguments cannot be specified by default channels
 
-If `spec.arguments` is set when creating a default channel, it will be cleared.
+Currently (v0.3), default channels do not support specifying arguments. If
+`spec.arguments` is set when creating a default channel, it will be cleared.
+Arguments for default channels may be supported in future versions.
 
 For example:
 
@@ -86,8 +87,9 @@ channel provisioners.
 _The namespace-specific defaults override the cluster default for channels
 created in the specified namespace._
 
-_Currently default channel arguments cannot be specified. All default channels
-will have empty arguments._
+_Currently (v0.3) default channel arguments cannot be specified, so all default
+channels will have empty arguments. Arguments may be supported in future
+versions._
 
 The default options are specified like this:
 
