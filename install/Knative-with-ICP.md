@@ -184,7 +184,7 @@ guide.
 
 > **Note**: When looking up the IP address to use for accessing your app, you need
   the address used for ICP. The following command looks up the value to
-  use for the {IP_ADDRESS} placeholder used in the samples:
+  use for the {IP_ADDRESS} placeholder in the samples:
 
   ```shell
   echo $(ICP cluster ip):$(kubectl get svc istio-ingressgateway --namespace istio-system \
