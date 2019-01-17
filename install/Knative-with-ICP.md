@@ -191,7 +191,7 @@ guide.
   --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
   ```
 
-To get started with Knative Eventing, pick one of the
+To get started with Knative Eventing, walk through one of the
 [Eventing Samples](../eventing/samples/).
 
 To get started with Knative Build, read the
