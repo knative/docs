@@ -6,7 +6,7 @@ This is an evolving document on how to debug a non-working Knative Eventing setu
 This document is intended for people that are familiar with [Knative Eventing](../README.md)'s object model. You don't need to be an expert, but do need to know roughly how things fit together.
 
 ## Version
-This document is works with [Eventing 0.3](https://github.com/knative/eventing/releases/tag/v0.3.0) and [Eventing Sources 0.3](https://github.com/knative/eventing-sources/releases/tag/v0.3.0).
+This document works with [Eventing 0.3](https://github.com/knative/eventing/releases/tag/v0.3.0) and [Eventing Sources 0.3](https://github.com/knative/eventing-sources/releases/tag/v0.3.0).
 
 ## Prerequisites
 
@@ -19,7 +19,11 @@ This guide uses an example consisting of an Event Source sending events to a fun
 
 ![src -> chan -> sub -> svc -> fn](ExampleModel.png)
 
-See [example.yaml](example.yaml) for the entire YAML.
+See [example.yaml](example.yaml) for the entire YAML. For any commands in this guide to work, you must apply [example.yaml](example.yaml):
+
+```shell
+kubectl apply -f example.yaml
+```
 
 ## Triggering Events
 
@@ -63,7 +67,7 @@ We will first check the control plane, to ensure everything should be working pr
 
 The first thing to check are all the created resources, do their statuses contain `ready` true?
 
-we will attempt to determine why from the most basic pieces out:
+We will attempt to determine why from the most basic pieces out:
 
 1. `fn` - The `Deployment` has no dependencies inside Knative.
 1. `svc` - The `Service` has no dependencies inside Knative.
@@ -74,10 +78,16 @@ we will attempt to determine why from the most basic pieces out:
 ##### `fn`
 
 ```shell
+kubectl -n knative-debug get deployment fn -o jsonpath='{.status.availableReplicas}'
+```
+
+We want to see '1'. If you don't, then you need to debug the `Deployment`. Is there anything obviously wrong mentioned in the `status`?
+
+```shell
 kubectl -n knative-debug get deployment fn -o yaml
 ```
 
-We want to see `status.availableReplicas` set to 1. If you don't then, you need to debug the `Deployment`, which is out of scope of this document.
+If it is not obvious what is wrong, then you need to debug the `Deployment`, which is out of scope of this document.
 
 Verify that the `Pod` is `Ready`:
 
@@ -91,10 +101,10 @@ This should return `True`. If it doesn't, then try to debug the `Deployment`, wh
 ##### `svc`
 
 ```shell
-kubectl -n knative-debug get service svc -o yaml
+kubectl -n knative-debug get service svc
 ```
 
-We just want to ensure this exists with the correct name.
+We just want to ensure this exists and has the correct name. If it doesn't exist, then you probably need to re-apply [example.yaml](example.yaml).
 
 Verify it points at the expected pod.
 
@@ -341,6 +351,13 @@ containerSourceName=$(kubectl -n knative-debug get containersource -o jsonpath="
 kubectl -n knative-debug logs -l source=$containerSourceName -c source
 ```
 
+Note that a few log lines within the first ~15 seconds of the `Pod` starting like the following are fine. They represent the time waiting for the Istio proxy to start. If you see these more than a few seconds after the `Pod` starts, then something is wrong.
+
+```shell
+E0116 23:59:40.033667       1 reflector.go:205] github.com/knative/eventing-sources/pkg/adapter/kubernetesevents/adapter.go:73: Failed to list *v1.Event: Get https://10.51.240.1:443/api/v1/namespaces/kna tive-debug/events?limit=500&resourceVersion=0: dial tcp 10.51.240.1:443: connect: connection refused
+E0116 23:59:41.034572       1 reflector.go:205] github.com/knative/eventing-sources/pkg/adapter/kubernetesevents/adapter.go:73: Failed to list *v1.Event: Get https://10.51.240.1:443/api/v1/namespaces/kna tive-debug/events?limit=500&resourceVersion=0: dial tcp 10.51.240.1:443: connect: connection refused
+```
+
 The success message is `debug` level, so we don't expect to see anything. If you see lines with a logging level of `error`, look at their `msg`. For example:
 
 ```shell
@@ -429,7 +446,7 @@ However if we see something like:
 
 Then we know there was a problem posting to `http://svc.knative-debug.svc.cluster.local/`.
 
-TODO Finish this section.
+TODO Finish this section. Especially after the Channel Dispatcher emits K8s events about failures.
 
 #### `fn`
 
