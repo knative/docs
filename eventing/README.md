@@ -90,6 +90,9 @@ This document will be updated as additional sources (which are custom resource
 definitions and an associated controller) and channels
 (ClusterChannelProvisioners and controllers) become available.
 
+Check out the [Configuration](#configuration) section to learn more about
+operating Knative Eventing.
+
 ## Architecture
 
 The eventing infrastructure supports two forms of event delivery at the moment:
@@ -228,6 +231,10 @@ FTP server for new files or generate events at a set time interval.
 - [Setup Knative Serving](../install/README.md)
 - [Install Eventing components](#installation)
 - [Run samples](samples/)
+
+## Configuration
+- [Default Channels](default-channels.md) provide a way to choose the
+persistence strategy for Channels across the cluster.
 
 ---
 
