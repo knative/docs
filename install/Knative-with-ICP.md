@@ -192,7 +192,7 @@ guide.
   ```
 
 To get started with Knative Eventing, pick one of the
-[Eventing Samples](../eventing/samples/) to walk through.
+[Eventing Samples](../eventing/samples/).
 
 To get started with Knative Build, read the
 [Build README](../build/README.md), then choose a sample to walk through.
