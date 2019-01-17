@@ -39,6 +39,7 @@ Follow these step-by-step guides for setting up Kubernetes and installing
 Knative components.
 
 **Comprehensive install guides**
+
 The guides below show you how to create a Kubernetes cluster with the right
 specs for Knative on your platform of choice, then walk through installing all
 available Knative components.
@@ -55,6 +56,7 @@ software on, use the following guide to install all Knative components:
 - [Knative Install on any Kubernetes](Knative-with-any-k8s.md)
 
 **Limited install guides**
+
 The guides below install some of the available Knative components, sometimes
 without all available observability plugins, to minimize the disk space used for install.
 * [Knative Install on Docker for Mac](Knative-with-Docker-for-Mac.md)
@@ -63,6 +65,7 @@ without all available observability plugins, to minimize the disk space used for
 * [Knative Install on OpenShift](Knative-with-OpenShift.md)
 
 **Custom install guide**
+
 To choose which components and which versions of each component to install,
 follow the custom install guide:
 
@@ -74,6 +77,7 @@ follow the custom install guide:
   [Perfoming a Custom Knative Installation](knative-custom-install.md) guide.
 
 **Observability install guide**
+
 Follow this guide to install the available observability plugins on a Knative
 cluster.
 
