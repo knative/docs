@@ -152,7 +152,7 @@ assigned an external IP address.
    Hello World: Go Sample v1!
    ```
 
-   If you exported the host URL And IP address as variables in the previous
+   If you exported the host URL and IP address as variables in the previous
    steps, you can use those variables to simplify your cURL request:
 
    ```shell
