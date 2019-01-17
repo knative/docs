@@ -84,9 +84,9 @@ recreate the source files from this folder.
    [Dockerizing a Node.js web app](https://nodejs.org/en/docs/guides/nodejs-docker-webapp/).
 
    ```Dockerfile
-   # Use the official Node 8 image.
+   # Use the official Node.js 10 image.
    # https://hub.docker.com/_/node
-   FROM node:8
+   FROM node:10
 
    # Create and change to the app directory.
    WORKDIR /usr/src/app
