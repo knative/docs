@@ -32,67 +32,71 @@ recreate the source files from this folder.
     package main
 
     import (
-      "fmt"
-      "log"
-      "net/http"
-      "os"
-      "os/exec"
+        "fmt"
+        "log"
+        "net/http"
+        "os"
+        "os/exec"
     )
 
     func handler(w http.ResponseWriter, r *http.Request) {
-      out, err := exec.Command("/bin/sh", "script.sh").Output()
-      if err != nil {
-        w.WriteHeader(500)
-      }
-      w.Write(out)
+        cmd := exec.Command("/bin/sh", "script.sh")
+        cmd.Stderr = os.Stderr
+        out, err := cmd.Output()
+        if err != nil {
+            w.WriteHeader(500)
+        }
+        w.Write(out)
     }
 
     func main() {
-      http.HandleFunc("/", handler)
+        http.HandleFunc("/", handler)
 
-      port := os.Getenv("PORT")
-      if port == "" {
-        port = "8080"
-      }
+        port := os.Getenv("PORT")
+        if port == "" {
+            port = "8080"
+        }
 
-      log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
+        log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
     }
     ```
 
 1. Create a new file named `Dockerfile` and copy the code block below into it.
 
-   ```docker
-   FROM golang:1.11
+    ```docker
+    FROM golang:1.11
 
-   WORKDIR /go/src/invoke
-   COPY . .
+    WORKDIR /go/src/invoke
 
-   RUN go install -v
+    COPY invoke.go .
+    RUN go install -v
 
-   CMD ["invoke"]
-   ```
+    COPY . .
+
+    CMD ["invoke"]
+    ```
 
 1. Create a new file, `service.yaml` and copy the following service definition
    into the file. Make sure to replace `{username}` with your Docker Hub
    username.
 
-   ```yaml
-   apiVersion: serving.knative.dev/v1alpha1
-   kind: Service
-   metadata:
-     name: helloworld-shell
-     namespace: default
-   spec:
-     runLatest:
-       configuration:
-         revisionTemplate:
-           spec:
-             container:
-               image: docker.io/{username}/helloworld-shell
-               env:
-                 - name: TARGET
-                   value: "Shell"
-   ```
+    ```yaml
+    apiVersion: serving.knative.dev/v1alpha1
+    kind: Service
+    metadata:
+        name: helloworld-shell
+        namespace: default
+    spec:
+        runLatest:
+        configuration:
+            revisionTemplate:
+            spec:
+                container:
+                image: docker.io/{username}/helloworld-shell
+                env:
+                    - name: TARGET
+                    value: "Shell"
+    ```
 
 ## Building and deploying the sample
 
