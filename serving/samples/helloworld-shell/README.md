@@ -124,7 +124,7 @@ folder) you're ready to build and deploy the sample app.
    kubectl apply --filename service.yaml
    ```
 
-1. Now that your service is created, Knative will perform the following steps:
+1. Now that your service is created, Knative performs the following steps:
 
     - Create a new immutable revision for this version of the app.
     - Network programming to create a route, ingress, service, and load balance for your app.
