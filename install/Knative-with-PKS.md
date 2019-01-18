@@ -73,8 +73,9 @@ rerun the command to see the current status.
 
 ## Installing Knative
 
-The following commands install all available Knative components. To customize
-your Knative installation, see [Performing a Custom Knative Installation](Knative-custom-install.md).
+The following commands install all available Knative components as well as the
+standard set of observability plugins. To customize your Knative installation,
+see [Performing a Custom Knative Installation](Knative-custom-install.md).
 
 1. Run the `kubectl apply` command to install Knative and its dependencies:
     ```bash

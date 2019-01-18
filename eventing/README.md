@@ -80,23 +80,18 @@ ChannelProvisioner) and the core sources (which provides the Kubernetes Events,
 GitHub, and "Container" Sources) with the following commands:
 
 ```bash
-kubectl apply --filename https://github.com/knative/eventing/releases/download/v0.2.1/release.yaml
-kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.2.1/release.yaml
+kubectl apply --filename https://github.com/knative/eventing/releases/download/v0.3.0/release.yaml
+kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.3.0/release.yaml
 ```
 
-In addition to the core sources, you can also use GCP PubSub as a source by
-creating a secret with the name `gcppubsub-source-key` with a `key.json` value
-and loading the released source yaml (the `-with-gcppubsub` release includes all
-the above sources, and adds GCP PubSub, which requires the listed secret):
-
-```bash
-kubectl --namespace knative-sources create secret generic gcppubsub-source-key --from-literal=key.json=''
-kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.2.1/release-with-gcppubsub.yaml
-```
+In addition to the core sources, there are [other sources](./sources/README.md) that you can install.
 
 This document will be updated as additional sources (which are custom resource
 definitions and an associated controller) and channels
 (ClusterChannelProvisioners and controllers) become available.
+
+Check out the [Configuration](#configuration) section to learn more about
+operating Knative Eventing.
 
 ## Architecture
 
@@ -236,6 +231,10 @@ FTP server for new files or generate events at a set time interval.
 - [Setup Knative Serving](../install/README.md)
 - [Install Eventing components](#installation)
 - [Run samples](samples/)
+
+## Configuration
+- [Default Channels](default-channels.md) provide a way to choose the
+persistence strategy for Channels across the cluster.
 
 ---
 

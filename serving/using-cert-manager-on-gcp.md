@@ -194,8 +194,9 @@ condition usually has an error message to indicate the reason of failure.
 
 ### Configuring the gateway
 
-In the last step, configure the knative-shared-gateway to use the certificate
-that is generated and stored automatically by cert-manager.
+In the last step, configure the `knative-ingress-gateway` (or
+`knative-shared-gateway` if using Knative Serving 0.2.x or prior version) to use
+the certificate that is generated and stored automatically by cert-manager.
 
 The key edit here is adding the `tls:` section to the end of the HTTPS port
 configuration.
@@ -205,7 +206,7 @@ kubectl apply --filename - <<EOF
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: knative-shared-gateway
+  name: knative-ingress-gateway
   namespace: knative-serving
 spec:
   selector:

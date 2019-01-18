@@ -1,9 +1,14 @@
-# Installing Logging, Metrics and Traces
+# Installing Logging, Metrics, and Traces
 
-If you installed one of the [Knative install bundles](../install/README.md#installing-knative),
-some or all of the observability features are installed. For example, if you install the `release.yaml` package from the
-`knative/serving` repo, then an ELK stack is installed by default and you can skip down to the
+If you followed one of the
+[comprehensive install guides](../install/README.md#install-guides) or you
+performed a custom installation and included the `monitoring.yaml` file in your
+installation, all of the observability features are already installed and you
+can skip down to the
 [Create Elasticsearch Indices](#create-elasticsearch-indices) section.
+
+If you have not yet installed any observability plugins, continue to the next
+sections to do so now.
 
 ## Metrics
 
