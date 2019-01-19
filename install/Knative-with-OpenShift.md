@@ -10,7 +10,7 @@ You can find [guides for other platforms here](README.md).
 
 ## Before you begin
 
-These instructions will run an OpenShift 3.10 (Kubernetes 1.10) cluster on your
+These instructions will run an OpenShift 3.10 (Kubernetes 1.11) cluster on your
 local machine using
 [`oc cluster up`](https://docs.openshift.org/latest/getting_started/administrators.html#running-in-a-docker-container)
 to test-drive knative.
@@ -111,6 +111,7 @@ oc adm policy add-scc-to-user anyuid -z istio-mixer-service-account -n istio-sys
 oc adm policy add-scc-to-user anyuid -z istio-pilot-service-account -n istio-system
 oc adm policy add-scc-to-user anyuid -z istio-sidecar-injector-service-account -n istio-system
 oc adm policy add-cluster-role-to-user cluster-admin -z istio-galley-service-account -n istio-system
+oc adm policy add-scc-to-user anyuid -z cluster-local-gateway-service-account -n istio-system
 ```
 
 Run the following to install Istio:
@@ -211,12 +212,22 @@ If you'd like to view the available sample apps and deploy one of your choosing,
 head to the [sample apps](../serving/samples/README.md) repo.
 
 > Note: When looking up the IP address to use for accessing your app, you need
-> to look up the NodePort for the `knative-ingressgateway` as well as the IP
+> to look up the NodePort for the `istio-ingressgateway` well as the IP
 > address used for OpenShift. You can use the following command to look up the
 > value to use for the {IP_ADDRESS} placeholder used in the samples:
 
 ```shell
-export IP_ADDRESS=$(oc get node  -o 'jsonpath={.items[0].status.addresses[0].address}'):$(oc get svc knative-ingressgateway -n istio-system -o 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
+# In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
+INGRESSGATEWAY=knative-ingressgateway
+
+# The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
+# Use `istio-ingressgateway` instead, since `knative-ingressgateway`
+# will be removed in Knative v0.4.
+if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
+    INGRESSGATEWAY=istio-ingressgateway
+fi
+
+export IP_ADDRESS=$(oc get node  -o 'jsonpath={.items[0].status.addresses[0].address}'):$(oc get svc $INGRESSGATEWAY -n istio-system -o 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
 ```
 
 ## Cleaning up

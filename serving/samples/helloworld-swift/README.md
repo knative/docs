@@ -1,25 +1,28 @@
 # Hello World - Swift sample
 
-A simple web app written in Swift that you can use for testing. The app reads in an
-env variable `TARGET` and prints "Hello \${TARGET}!". If TARGET is not
+A simple web app written in Swift that you can use for testing. The app reads in
+an env variable `TARGET` and prints "Hello \${TARGET}!". If TARGET is not
 specified, the app uses "World" as the TARGET.
 
 ## Prerequisites
 
-- You must have a Kubernetes cluster with Knative installed. If you need to create a cluster, 
-  follow the [installation instructions](https://github.com/knative/docs/blob/master/install/README.md).
-- You must have [Docker](https://www.docker.com) installed and running on your local machine,
-  and a Docker Hub account configured (used for container registry).
+- You must have a Kubernetes cluster with Knative installed. If you need to
+  create a cluster, follow the
+  [installation instructions](https://github.com/knative/docs/blob/master/install/README.md).
+- You must have [Docker](https://www.docker.com) installed and running on your
+  local machine, and a Docker Hub account configured (used for container
+  registry).
 
 ## Recreating the sample code
 
-While you can clone all of the code from this directory, it might be more
-useful if you build this app step-by-step. The following instructions
-recreate the source files from this folder.
+While you can clone all of the code from this directory, it might be more useful
+if you build this app step-by-step. The following instructions recreate the
+source files from this folder.
 
 1. Create a the `Package.swift` to declare your package and its dependencies.
-   This app uses [Swifter](https://github.com/httpswift/swifter), a tiny http server engine for Swift.
-   
+   This app uses [Swifter](https://github.com/httpswift/swifter), a tiny http
+   server engine for Swift.
+
    ```swift
     // swift-tools-version:4.0
 
@@ -39,7 +42,8 @@ recreate the source files from this folder.
     )
    ```
 
-1. Add the web server code to a file named `main.swift` in a `Sources/HelloSwift/` folder:
+1. Add the web server code to a file named `main.swift` in a
+   `Sources/HelloSwift/` folder:
 
    ```swift
     import Swifter
@@ -47,7 +51,7 @@ recreate the source files from this folder.
     import Foundation
 
     let server = HttpServer()
-    server["/"] = { r in  
+    server["/"] = { r in
         let target = ProcessInfo.processInfo.environment["TARGET"] ?? "World"
         return HttpResponse.ok(.html("Hello \(target)"))
     }
@@ -87,21 +91,21 @@ recreate the source files from this folder.
    into the file. Replace `{username}` with your Docker Hub username.
 
    ```yaml
-    apiVersion: serving.knative.dev/v1alpha1
-    kind: Service
-    metadata:
-    name: helloworld-swift
-    namespace: default
-    spec:
-    runLatest:
-        configuration:
-        revisionTemplate:
-            spec:
-            container:
-                image: docker.io/{username}/helloworld-swift
-                env:
-                - name: TARGET
-                value: "Swift"
+   apiVersion: serving.knative.dev/v1alpha1
+   kind: Service
+   metadata:
+   name: helloworld-swift
+   namespace: default
+   spec:
+   runLatest:
+     configuration:
+     revisionTemplate:
+       spec:
+       container:
+         image: docker.io/{username}/helloworld-swift
+         env:
+           - name: TARGET
+         value: "Swift"
    ```
 
 ## Building and deploying the sample
@@ -123,8 +127,8 @@ folder) you're ready to build and deploy the sample app.
 
 1. After the build has completed and the container is pushed to Docker Hub, you
    can deploy the app into your cluster. Ensure that the container image value
-   in the `service.yaml` file matches the container you built in the previous step.
-   Apply the configuration using the `kubectl` command:
+   in the `service.yaml` file matches the container you built in the previous
+   step. Apply the configuration using the `kubectl` command:
 
    ```shell
    kubectl apply --filename service.yaml
@@ -139,8 +143,8 @@ folder) you're ready to build and deploy the sample app.
 
 1. To find the IP address for your service, use
    `kubectl get svc knative-ingressgateway --namespace istio-system` to get the
-   ingress IP for your cluster. If your cluster is new, it might take sometime for
-   the service to get asssigned an external IP address.
+   ingress IP for your cluster. If your cluster is new, it might take sometime
+   for the service to get asssigned an external IP address.
 
    ```shell
    kubectl get svc knative-ingressgateway --namespace istio-system

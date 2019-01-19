@@ -67,7 +67,7 @@ docker push "${REPO}/serving/samples/knative-routing-go"
 5. Replace the image reference path with our published image path in the
    configuration file `serving/samples/knative-routing-go/sample.yaml`:
 
-   - Manually replace:  
+   - Manually replace:
      `image: github.com/knative/docs/serving/samples/knative-routing-go` with
      `image: <YOUR_CONTAINER_REGISTRY>/serving/samples/knative-routing-go`
 
@@ -89,7 +89,7 @@ kubectl apply --filename serving/samples/knative-routing-go/sample.yaml
 
 ## Exploring the Routes
 
-A shared Gateway "knative-shared-gateway" is used within Knative service mesh
+A shared Gateway `knative-ingress-gateway` is used within Knative service mesh
 for serving all incoming traffic. You can inspect it and its corresponding
 Kubernetes service with:
 
@@ -102,7 +102,17 @@ kubectl get Gateway --namespace knative-serving --output yaml
 - Check the corresponding Kubernetes service for the shared Gateway:
 
 ```
-kubectl get svc knative-ingressgateway --namespace istio-system --output yaml
+# In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
+INGRESSGATEWAY=knative-ingressgateway
+
+# The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
+# Use `istio-ingressgateway` instead, since `knative-ingressgateway`
+# will be removed in Knative v0.4.
+if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
+    INGRESSGATEWAY=istio-ingressgateway
+fi
+
+kubectl get svc $INGRESSGATEWAY --namespace istio-system --output yaml
 ```
 
 - Inspect the deployed Knative services with:
@@ -118,8 +128,18 @@ You should see 2 Knative services: `search-service` and `login-service`.
 1. Find the shared Gateway IP and export as an environment variable:
 
 ```shell
-export GATEWAY_IP=`kubectl get svc knative-ingressgateway --namespace istio-system \
-  --output jsonpath="{.status.loadBalancer.ingress[*]['ip']}"`
+# In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
+INGRESSGATEWAY=knative-ingressgateway
+
+# The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
+# Use `istio-ingressgateway` instead, since `knative-ingressgateway`
+# will be removed in Knative v0.4.
+if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
+    INGRESSGATEWAY=istio-ingressgateway
+fi
+
+export GATEWAY_IP=`kubectl get svc $INGRESSGATEWAY --namespace istio-system \
+    --output jsonpath="{.status.loadBalancer.ingress[*]['ip']}"`
 ```
 
 2. Find the `Search` service route and export as an environment variable:
@@ -165,12 +185,22 @@ kubectl get VirtualService entry-route --output yaml
 
 3.  Send a request to the `Search` service and the `Login` service by using
     corresponding URIs. You should get the same results as directly accessing
-    these services.  
+    these services.
      \_ Get the ingress IP:
 
     ```shell
-    export GATEWAY_IP=`kubectl get svc knative-ingressgateway --namespace istio-system \
-    --output jsonpath="{.status.loadBalancer.ingress[_]['ip']}"`
+    # In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
+    INGRESSGATEWAY=knative-ingressgateway
+
+    # The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
+    # Use `istio-ingressgateway` instead, since `knative-ingressgateway`
+    # will be removed in Knative v0.4.
+    if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
+        INGRESSGATEWAY=istio-ingressgateway
+    fi
+
+    export GATEWAY_IP=`kubectl get svc $INGRESSGATEWAY --namespace istio-system \
+        --output jsonpath="{.status.loadBalancer.ingress[_]['ip']}"`
     ```
 
         * Send a request to the Search service:
@@ -186,11 +216,11 @@ kubectl get VirtualService entry-route --output yaml
 ## How It Works
 
 When an external request with host `example.com` reaches
-`knative-shared-gateway` Gateway, the `entry-route` VirtualService will check if
+`knative-ingress-gateway` Gateway, the `entry-route` VirtualService will check if
 it has `/search` or `/login` URI. If the URI matches, then the host of request
 will be rewritten into the host of `Search` service or `Login` service
 correspondingly. This resets the final destination of the request. The request
-with updated host will be forwarded to `knative-shared-gateway` Gateway again.
+with updated host will be forwarded to `knative-ingress-gateway` Gateway again.
 The Gateway proxy checks the updated host, and forwards it to `Search` or
 `Login` service according to its host setting.
 

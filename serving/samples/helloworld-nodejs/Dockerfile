@@ -1,4 +1,4 @@
-# Use the official Node 8 image.
+# Use the official Node.js 10 image.
 # https://hub.docker.com/_/node
 FROM node:10
 

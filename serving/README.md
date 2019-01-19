@@ -76,6 +76,7 @@ in the Knative Serving repository.
 ## Configuration and Networking
 
 - [Configuring outbound network access](./outbound-network-access.md)
+- [Configuring cluster local routes](./cluster-local-route.md)
 - [Using a custom domain](./using-a-custom-domain.md)
 - [Assigning a static IP address for Knative on Google Kubernetes Engine](./gke-assigning-static-ip-address.md)
 
