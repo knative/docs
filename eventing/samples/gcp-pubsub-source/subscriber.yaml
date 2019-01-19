@@ -12,7 +12,7 @@ spec:
           container:
             # This corresponds to
             # https://github.com/knative/eventing-sources/blob/release-0.3/cmd/message_dumper/dumper.go
-            gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/message_dumper@sha256:8423232db7a7b4010c0cfbfaef95745efe962631af9b7456903825801a7893f7
+            image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/message_dumper@sha256:8423232db7a7b4010c0cfbfaef95745efe962631af9b7456903825801a7893f7
 
 ---
 
