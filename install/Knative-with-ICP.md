@@ -44,8 +44,10 @@ in IBM Cloud Private to allow the access to the Knative image:
 
 1. Edit the image security policy:
 
-`kubectl edit clusterimagepolicies ibmcloud-default-cluster-image-policy`
-   
+   ```
+   kubectl edit clusterimagepolicies ibmcloud-default-cluster-image-policy
+   ```
+
 2. Update `spec.repositories` by adding the following entries, for example:
     ```yaml
     spec:
