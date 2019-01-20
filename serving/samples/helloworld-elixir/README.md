@@ -180,8 +180,7 @@ above.
     xxxxxxx-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
     ```
 
-
-1.  To find the URL for your service, use
+1)  To find the URL for your service, use
 
     ```
     kubectl get ksvc helloworld-elixir --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
@@ -190,7 +189,7 @@ above.
     helloworld-elixir   helloworld-elixir.default.example.com
     ```
 
-1.  Now you can make a request to your app to see the results. Replace
+1)  Now you can make a request to your app to see the results. Replace
     `{IP_ADDRESS}` with the address you see returned in the previous step.
 
         ```shell

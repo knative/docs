@@ -70,9 +70,9 @@ Knative Eventing currently requires Knative Serving and Istio version 1.0 or
 later installed.
 [Follow the instructions to install on the platform of your choice](../install/README.md).
 
-Many of the sources require making outbound connections to create the event subscription,
-and if you have any functions that make use of any external (to cluster) services, you
-must enable it also for them to work.
+Many of the sources require making outbound connections to create the event
+subscription, and if you have any functions that make use of any external (to
+cluster) services, you must enable it also for them to work.
 [Follow the instructions to configure outbound network access](../serving/outbound-network-access.md).
 
 Install the core Knative Eventing (which provides an in-memory
@@ -84,7 +84,8 @@ kubectl apply --filename https://github.com/knative/eventing/releases/download/v
 kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.3.0/release.yaml
 ```
 
-In addition to the core sources, there are [other sources](./sources/README.md) that you can install.
+In addition to the core sources, there are [other sources](./sources/README.md)
+that you can install.
 
 This document will be updated as additional sources (which are custom resource
 definitions and an associated controller) and channels
@@ -130,7 +131,8 @@ format, but may be expressed as simple lists, etc in YAML. All Sources should be
 part of the `sources` category, so you can list all existing Sources with
 `kubectl get sources`. The currently-implemented Sources are described below:
 
-_Want to implement your own source? Check out [the tutorial](samples/writing-a-source/README.md)._
+_Want to implement your own source? Check out
+[the tutorial](samples/writing-a-source/README.md)._
 
 ### KubernetesEventSource
 
@@ -233,8 +235,9 @@ FTP server for new files or generate events at a set time interval.
 - [Run samples](samples/)
 
 ## Configuration
+
 - [Default Channels](default-channels.md) provide a way to choose the
-persistence strategy for Channels across the cluster.
+  persistence strategy for Channels across the cluster.
 
 ---
 
