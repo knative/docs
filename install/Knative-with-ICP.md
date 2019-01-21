@@ -157,15 +157,16 @@ see [Performing a Custom Knative Installation](Knative-custom-install.md).
      | kubectl apply --filename -
    ```
 
-1. Monitor the Knative components until all of the components show a
-   `STATUS` of `Running`:
-    ```bash
-    kubectl get pods --namespace knative-serving
-    kubectl get pods --namespace knative-build
-    kubectl get pods --namespace knative-eventing
-    kubectl get pods --namespace knative-sources
-    kubectl get pods --namespace knative-monitoring
-    ```
+1. Monitor the Knative components until all of the components show a `STATUS` of
+   `Running`:
+
+   ```bash
+   kubectl get pods --namespace knative-serving
+   kubectl get pods --namespace knative-build
+   kubectl get pods --namespace knative-eventing
+   kubectl get pods --namespace knative-sources
+   kubectl get pods --namespace knative-monitoring
+   ```
 
    > Note: Instead of rerunning the command, you can add `--watch` to the above
    > command to view the component's status updates in real time. Use CTRL+C to
@@ -182,24 +183,24 @@ To deploy your first app with Knative, follow the step-by-step
 [Getting Started with Knative App Deployment](getting-started-knative-app.md)
 guide.
 
-> **Note**: When looking up the IP address to use for accessing your app, you need
-  the address used for ICP. The following command looks up the value to
-  use for the {IP_ADDRESS} placeholder in the samples:
+> **Note**: When looking up the IP address to use for accessing your app, you
+> need the address used for ICP. The following command looks up the value to use
+> for the {IP_ADDRESS} placeholder in the samples:
 
-  ```shell
-  echo $(ICP cluster ip):$(kubectl get svc istio-ingressgateway --namespace istio-system \
-  --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
-  ```
+```shell
+echo $(ICP cluster ip):$(kubectl get svc istio-ingressgateway --namespace istio-system \
+--output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
+```
 
 To get started with Knative Eventing, walk through one of the
 [Eventing Samples](../eventing/samples/).
 
-To get started with Knative Build, read the
-[Build README](../build/README.md), then choose a sample to walk through.
+To get started with Knative Build, read the [Build README](../build/README.md),
+then choose a sample to walk through.
 
 ## Cleaning up
 
-To remove Knative from your IBM Cloud Private cluster, run the following 
+To remove Knative from your IBM Cloud Private cluster, run the following
 commands:
 
 ```shell
