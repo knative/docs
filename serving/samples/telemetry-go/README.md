@@ -114,8 +114,8 @@ kubectl get revisions --output yaml
 
 To access this service via `curl`, you need to determine its ingress address.
 
-1. To determine if your service is ready:
-   Check the status of your Knative gateway:
+1. To determine if your service is ready: Check the status of your Knative
+   gateway:
 
 ```
 # In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.

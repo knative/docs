@@ -52,8 +52,8 @@ In the
 
 ## Step 2: Update the external IP of `istio-ingressgateway` service
 
-Run following command to configure the external IP of the
-`istio-ingressgateway` service to the static IP that you reserved:
+Run following command to configure the external IP of the `istio-ingressgateway`
+service to the static IP that you reserved:
 
 ```shell
 # In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
@@ -71,7 +71,8 @@ kubectl patch svc $INGRESSGATEWAY --namespace istio-system --patch '{"spec": { "
 
 ## Step 3: Verify the static IP address of `istio-ingressgateway` service
 
-Run the following command to ensure that the external IP of the ingressgateway service has been updated:
+Run the following command to ensure that the external IP of the ingressgateway
+service has been updated:
 
 ```shell
 kubectl get svc $INGRESSGATEWAY --namespace istio-system
