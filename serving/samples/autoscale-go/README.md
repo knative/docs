@@ -27,6 +27,7 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
    ```
 
 1. Find the ingress hostname and IP and export as an environment variable:
+
    ```
    # In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
    INGRESSGATEWAY=knative-ingressgateway
