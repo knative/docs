@@ -15,17 +15,17 @@ CRD and a controller to reconcile it.
 
 You'll need to choose the following:
 
-*   **A group name.** This is the resource group that will contain the resource.
-    It's prepended to the domain name chosen earlier to produce the
-    fully-qualified resource name. The reference project uses `sources`.
-*   **A version name.** This is the initial version string for the CRD. It's
-    usually `v1alpha1` for new resources. The reference project uses `v1alpha1`.
-*   **A kind name.** This is the unqualified type name of the resource. The
-    reference project uses `SampleSource`.
+- **A group name.** This is the resource group that will contain the resource.
+  It's prepended to the domain name chosen earlier to produce the
+  fully-qualified resource name. The reference project uses `sources`.
+- **A version name.** This is the initial version string for the CRD. It's
+  usually `v1alpha1` for new resources. The reference project uses `v1alpha1`.
+- **A kind name.** This is the unqualified type name of the resource. The
+  reference project uses `SampleSource`.
 
-    The fully-qualified name of the reference resource is
-    `samplesources.sources.knative.dev`, and its `apiVersion` is
-    `sources.knative.dev/v1alpha1`.
+  The fully-qualified name of the reference resource is
+  `samplesources.sources.knative.dev`, and its `apiVersion` is
+  `sources.knative.dev/v1alpha1`.
 
 ```sh
 kubebuilder create api --group sources --version v1alpha1 --kind SampleSource

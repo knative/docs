@@ -164,11 +164,11 @@ curl -s https://raw.githubusercontent.com/knative/docs/master/install/scripts/is
    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.2/istio-crds.yaml && \
    oc apply -f https://storage.googleapis.com/knative-releases/serving/latest/istio.yaml
    ```
-   Note: the resources (CRDs) defined in the `istio-crds.yaml`file are
-   also included in the `istio.yaml` file, but they are pulled out so that
-   the CRD definitions are created first. If you see an error when creating
-   resources about an unknown type, run the second `kubectl apply` command
-   again.
+
+   Note: the resources (CRDs) defined in the `istio-crds.yaml`file are also
+   included in the `istio.yaml` file, but they are pulled out so that the CRD
+   definitions are created first. If you see an error when creating resources
+   about an unknown type, run the second `kubectl apply` command again.
 
 2. Ensure the istio-sidecar-injector pods runs as provileged:
    ```shell
