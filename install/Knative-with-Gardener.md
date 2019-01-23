@@ -118,49 +118,6 @@ see [Performing a Custom Knative Installation](Knative-custom-install.md).
     kubectl get pods --namespace knative-monitoring
     ```
 
-## Alternative way to enable Knative with Gardener
-
-Ask your Gardener administrator to configure the Gardener Bouquet addon manager
-with the following CRDs:
-
-```
-apiVersion: "garden.sapcloud.io/v1alpha1"
-kind: "AddonManifest"
-metadata:
-  name: "istio-1.0.2"
-  finalizers:
-    - "bouquet"
-spec:
-  configMap: "istio-chart-080"
-```
-
-```
-apiVersion: "garden.sapcloud.io/v1alpha1"
-kind: "AddonManifest"
-metadata:
-  name: "knative-0.0.1"
-  finalizers:
-    - "bouquet"
-spec:
-  configMap: "knative-chart-001"
-  dependencies:
-    istio: "1.0.2"
-```
-
-And of course create the respective `ConfigMaps`:
-
-```
-curl https://github.com/knative/serving/releases/download/v0.3.0/istio.yaml
-kubectl create configmap istio-chart-080 --from-file=istio.yaml
-
-curl https://github.com/knative/serving/releases/download/v0.3.0/serving.yaml
-kubectl create configmap knative-chart-001 --from-file=serving.yaml
-```
-
-With this preparation, your team can just activate Knative in the "Addons" tab
-when creating a new cluster:
-![alt text](images/gardener_addon_checkboxes.png "Addon Checkboxes")
-
 ## Set your custom domain
 
 1.  Fetch the external IP or CNAME of the knative-ingressgateway
