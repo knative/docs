@@ -9,8 +9,8 @@ import (
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
-    cmd := exec.CommandContext(r.Context(), "/bin/sh", "script.sh")
-    cmd.Stderr = os.Stderr
+	cmd := exec.CommandContext(r.Context(), "/bin/sh", "script.sh")
+	cmd.Stderr = os.Stderr
 	out, err := cmd.Output()
 	if err != nil {
 		w.WriteHeader(500)
