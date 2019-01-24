@@ -1,6 +1,6 @@
 # Hello World - .NET Core sample
 
-A simple web app written in C# using .NET Core 2.1 that you can use for testing.
+A simple web app written in C# using .NET Core 2.2 that you can use for testing.
 It reads in an env variable `TARGET` and prints "Hello \${TARGET}!". If TARGET
 is not specified, it will use "World" as the TARGET.
 
@@ -11,7 +11,7 @@ is not specified, it will use "World" as the TARGET.
   if you need to create one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
-- You have installed [.NET Core SDK 2.1](https://www.microsoft.com/net/core).
+- You have installed [.NET Core SDK 2.2](https://www.microsoft.com/net/core).
 
 ## Recreating the sample code
 
@@ -58,7 +58,7 @@ recreate the source files from this folder.
     ```docker
     # Use Microsoft's official .NET image.
     # https://hub.docker.com/r/microsoft/dotnet
-    FROM microsoft/dotnet:2.1-sdk
+    FROM microsoft/dotnet:2.2-sdk
 
     # Install production dependencies.
     # Copy csproj and restore as distinct layers.
