@@ -185,8 +185,7 @@ kubectl get VirtualService entry-route --output yaml
 
 3.  Send a request to the `Search` service and the `Login` service by using
     corresponding URIs. You should get the same results as directly accessing
-    these services.
-     \_ Get the ingress IP:
+    these services. \_ Get the ingress IP:
 
     ```shell
     # In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
@@ -216,9 +215,9 @@ kubectl get VirtualService entry-route --output yaml
 ## How It Works
 
 When an external request with host `example.com` reaches
-`knative-ingress-gateway` Gateway, the `entry-route` VirtualService will check if
-it has `/search` or `/login` URI. If the URI matches, then the host of request
-will be rewritten into the host of `Search` service or `Login` service
+`knative-ingress-gateway` Gateway, the `entry-route` VirtualService will check
+if it has `/search` or `/login` URI. If the URI matches, then the host of
+request will be rewritten into the host of `Search` service or `Login` service
 correspondingly. This resets the final destination of the request. The request
 with updated host will be forwarded to `knative-ingress-gateway` Gateway again.
 The Gateway proxy checks the updated host, and forwards it to `Search` or
