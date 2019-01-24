@@ -47,26 +47,26 @@ recreate the source files from this folder.
    [official Python docker image](https://hub.docker.com/_/python/) for more
    details.
 
-   ```docker
-   # Use the official Python image.
-   # https://hub.docker.com/_/python
-   FROM python
+    ```docker
+    # Use the official Python image.
+    # https://hub.docker.com/_/python
+    FROM python
 
-   # Copy local code to the container image.
-   ENV APP_HOME /app
-   WORKDIR $APP_HOME
-   COPY . .
+    # Copy local code to the container image.
+    ENV APP_HOME /app
+    WORKDIR $APP_HOME
+    COPY . .
 
-   # Install production dependencies.
-   RUN pip install Flask
+    # Install production dependencies.
+    RUN pip install Flask
 
-   # Configure and document the service HTTP port.
-   ENV PORT 8080
-   EXPOSE $PORT
+    # Service must listen to $PORT environment variable.
+    # This default value facilitates local development.
+    ENV PORT 8080
 
-   # Run the web service on container startup.
-   CMD ["python", "app.py"]
-   ```
+    # Run the web service on container startup.
+    CMD ["python", "app.py"]
+    ```
 
 1. Create a new file, `service.yaml` and copy the following service definition
    into the file. Make sure to replace `{username}` with your Docker Hub

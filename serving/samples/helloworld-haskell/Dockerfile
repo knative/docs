@@ -18,9 +18,9 @@ FROM fpco/haskell-scratch:integer-gmp
 WORKDIR /root/
 COPY --from=builder /root/.local/bin/helloworld-haskell-exe .
 
-# Configure and document the service HTTP port.
+# Service must listen to $PORT environment variable.
+# This default value facilitates local development.
 ENV PORT 8080
-EXPOSE $PORT
 
 # Run the web service on container startup.
 CMD ["./helloworld-haskell-exe"]

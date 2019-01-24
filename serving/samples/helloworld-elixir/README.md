@@ -84,7 +84,6 @@ When asked, if you want to `Fetch and install dependencies? [Yn]` select `y`
    # Document that the service listens on port 8080.
    ENV PORT=8080 MIX_ENV=prod REPLACE_OS_VARS=true
    WORKDIR /opt/app
-   EXPOSE 8080
    COPY --from=0 /opt/release .
    ENV RUNNER_LOG_DIR /var/log
 

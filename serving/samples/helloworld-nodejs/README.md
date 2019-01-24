@@ -83,11 +83,12 @@ recreate the source files from this folder.
    see
    [Dockerizing a Node.js web app](https://nodejs.org/en/docs/guides/nodejs-docker-webapp/).
 
+
    ```Dockerfile
    # Use the official Node.js 10 image.
    # https://hub.docker.com/_/node
    FROM node:10
-
+   
    # Create and change to the app directory.
    WORKDIR /usr/src/app
 
@@ -102,9 +103,9 @@ recreate the source files from this folder.
    # Copy local code to the container image.
    COPY . .
 
-   # Configure and document the service HTTP port.
+   # Service must listen to $PORT environment variable.
+   # This default value facilitates local development.
    ENV PORT 8080
-   EXPOSE $PORT
 
    # Run the web service on container startup.
    CMD [ "npm", "start" ]

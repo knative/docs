@@ -17,9 +17,9 @@ FROM openjdk:8-jre-alpine
 # Copy the jar to the production image from the builder stage.
 COPY --from=builder /home/gradle/build/libs/gradle.jar /helloworld.jar
 
-# Configure and document the service HTTP port.
+# Service must listen to $PORT environment variable.
+# This default value facilitates local development.
 ENV PORT 8080
-EXPOSE $PORT
 
 # Run the web service on container startup.
 CMD [ "java", "-jar", "-Djava.security.egd=file:/dev/./urandom", "/helloworld.jar" ]

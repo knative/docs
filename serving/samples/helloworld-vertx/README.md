@@ -143,12 +143,19 @@ To create and configure the source files in the root of your working directory:
 
 1. Create the `Dockerfile` file:
 
-   ```docker
-   FROM fabric8/s2i-java:2.0
-   ENV JAVA_APP_DIR=/deployments
-   EXPOSE 8080
-   COPY target/helloworld-1.0.0-SNAPSHOT.jar /deployments/
-   ```
+    ```docker
+    # Use fabric8's s2i Builder image.
+    # https://hub.docker.com/r/fabric8/s2i-java
+    FROM fabric8/s2i-java:2.0
+
+    # Service must listen to $PORT environment variable.
+    # This default value facilitates local development.
+    ENV PORT 8080
+
+    # Copy the JAR file to the deployment directory.
+    ENV JAVA_APP_DIR=/deployments
+    COPY target/helloworld-1.0.0-SNAPSHOT.jar /deployments/
+    ```
 
 1. Create the `service.yaml` file. You must specify your Docker Hub username in
    `{username}`. You can also configure the `TARGET`, for example you can modify
