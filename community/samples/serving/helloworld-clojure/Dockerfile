@@ -13,9 +13,9 @@ COPY . .
 # Build an uberjar release artifact.
 RUN mv "$(lein uberjar | sed -n 's/^Created \(.*standalone\.jar\)/\1/p')" app-standalone.jar
 
-# Configure and document the service HTTP port.
+# Service must listen to $PORT environment variable.
+# This default value facilitates local development.
 ENV PORT 8080
-EXPOSE $PORT
 
 # Run the web service on container startup.
 CMD ["java", "-jar", "app-standalone.jar"]
