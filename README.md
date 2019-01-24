@@ -6,9 +6,9 @@ container-based applications that can run anywhere: on premises, in the cloud,
 or even in a third-party data center.
 
 Each of the components under the Knative project attempt to identify common
-patterns and codify the best practices that are shared by successful, real-world,
-Kubernetes-based frameworks and applications. Knative components focus on
-solving mundane but difficult tasks such as:
+patterns and codify the best practices that are shared by successful,
+real-world, Kubernetes-based frameworks and applications. Knative components
+focus on solving mundane but difficult tasks such as:
 
 - [Deploying a container](./install/getting-started-knative-app.md)
 - [Orchestrating source-to-URL workflows on Kubernetes](./serving/samples/source-to-url-go/)
@@ -92,7 +92,7 @@ Follow the links below to learn more about Knative.
 
 - [Autoscaling](./serving/samples/autoscale-go/README.md)
 - [Source-to-URL deployment](./serving/samples/source-to-url-go/README.md)
-- [Binding running services to eventing ecosystems](./eventing/samples/event-flow/README.md)
+- [Binding running services to eventing ecosystems](./eventing/samples/kubernetes-event-source)
 - [Telemetry](./serving/samples/telemetry-go/README.md)
 - [REST API sample](./serving/samples/rest-api-go/README.md)
 - [All samples for serving](./serving/samples/)

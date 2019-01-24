@@ -22,7 +22,7 @@ More information about this use case is demonstrated in
 - A `Build` can include multiple `steps` where each step specifies a `Builder`.
 - A _builder_ is a type of container image that you create to accomplish any
   task, whether that's a single step in a process, or the whole process itself.
-- The `steps` in a `Build` can push to a repository.
+- The `steps` in a `Build` can push to a registry.
 - A `BuildTemplate` can be used to defined reusable templates.
 - The `source` in a `Build` can be defined to mount data to a Kubernetes Volume,
   and supports:
@@ -38,7 +38,7 @@ components:
 
 - [`Build`](https://github.com/knative/docs/blob/master/build/builds.md)
 - [`BuildTemplate`](https://github.com/knative/docs/blob/master/build/build-templates.md)
-- [Builder](https://github.com/knative/docs/blob/master/build/builder-contract.md)
+- [`Builder`](https://github.com/knative/docs/blob/master/build/builder-contract.md)
 - [`ServiceAccount`](https://github.com/knative/docs/blob/master/build/auth.md)
 
 ## Install the Knative Build component

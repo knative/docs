@@ -49,15 +49,15 @@ recreate the source files from this folder.
    const express = require("express");
    const app = express();
 
-   app.get("/", function(req, res) {
+   app.get("/", (req, res) => {
      console.log("Hello world received a request.");
 
      const target = process.env.TARGET || "World";
-     res.send("Hello " + target + "!");
+     res.send(`Hello ${target}!`);
    });
 
    const port = process.env.PORT || 8080;
-   app.listen(port, function() {
+   app.listen(port, () => {
      console.log("Hello world listening on port", port);
    });
    ```
@@ -83,32 +83,33 @@ recreate the source files from this folder.
    see
    [Dockerizing a Node.js web app](https://nodejs.org/en/docs/guides/nodejs-docker-webapp/).
 
-    ```Dockerfile
-    # Use the official Node 8 image.
-    # https://hub.docker.com/_/node
-    FROM node:10
 
-    # Create and change to the app directory.
-    WORKDIR /usr/src/app
+   ```Dockerfile
+   # Use the official Node.js 10 image.
+   # https://hub.docker.com/_/node
+   FROM node:10
+   
+   # Create and change to the app directory.
+   WORKDIR /usr/src/app
 
-    # Copy application dependency manifests to the container image.
-    # A wildcard is used to ensure both package.json AND package-lock.json are copied.
-    # Copying this separately prevents re-running npm install on every code change.
-    COPY package*.json ./
+   # Copy application dependency manifests to the container image.
+   # A wildcard is used to ensure both package.json AND package-lock.json are copied.
+   # Copying this separately prevents re-running npm install on every code change.
+   COPY package*.json ./
 
-    # Install production dependencies.
-    RUN npm install --only=production
+   # Install production dependencies.
+   RUN npm install --only=production
 
-    # Copy local code to the container image.
-    COPY . .
+   # Copy local code to the container image.
+   COPY . .
 
-    # Service must listen to $PORT environment variable.
-    # This default value facilitates local development.
-    ENV PORT 8080
+   # Service must listen to $PORT environment variable.
+   # This default value facilitates local development.
+   ENV PORT 8080
 
-    # Run the web service on container startup.
-    CMD [ "npm", "start" ]
-    ```
+   # Run the web service on container startup.
+   CMD [ "npm", "start" ]
+   ```
 
 1. Create a new file, `service.yaml` and copy the following service definition
    into the file. Make sure to replace `{username}` with your Docker Hub
@@ -165,17 +166,25 @@ folder) you're ready to build and deploy the sample app.
      for your app.
    - Automatically scale your pods up and down (including to zero active pods).
 
-1. To find the IP address for your service, use
-   `kubectl get svc knative-ingressgateway --namespace istio-system` to get the
+1. To find the IP address for your service, use these commands to get the
    ingress IP for your cluster. If your cluster is new, it may take sometime for
    the service to get asssigned an external IP address.
 
    ```shell
-   kubectl get svc knative-ingressgateway --namespace istio-system
+   # In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
+   INGRESSGATEWAY=knative-ingressgateway
+
+   # The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
+   # Use `istio-ingressgateway` instead, since `knative-ingressgateway`
+   # will be removed in Knative v0.4.
+   if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
+       INGRESSGATEWAY=istio-ingressgateway
+   fi
+
+   kubectl get svc $INGRESSGATEWAY --namespace istio-system
 
    NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
-   knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
-
+   xxxxxxx-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
    ```
 
 1. To find the URL for your service, use

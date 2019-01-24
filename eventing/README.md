@@ -36,7 +36,7 @@ generic interfaces that can be implemented by multiple Kubernetes resources:
    field. As a special case, the core
    [Kubernetes Service object](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#service-v1-core)
    also fulfils the Addressable interface.
-2. **Callable** objects are able to receive an event delivered over HTTP and
+1. **Callable** objects are able to receive an event delivered over HTTP and
    transform the event, returning 0 or 1 new events in the HTTP response. These
    returned events may be further processed in the same way that events from an
    external event source are processed.
@@ -70,28 +70,28 @@ Knative Eventing currently requires Knative Serving and Istio version 1.0 or
 later installed.
 [Follow the instructions to install on the platform of your choice](../install/README.md).
 
+Many of the sources require making outbound connections to create the event subscription,
+and if you have any functions that make use of any external (to cluster) services, you
+must enable it also for them to work.
+[Follow the instructions to configure outbound network access](../serving/outbound-network-access.md).
+
 Install the core Knative Eventing (which provides an in-memory
 ChannelProvisioner) and the core sources (which provides the Kubernetes Events,
 GitHub, and "Container" Sources) with the following commands:
 
 ```bash
-kubectl apply --filename https://github.com/knative/eventing/releases/download/v0.2.1/release.yaml
-kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.2.1/release.yaml
+kubectl apply --filename https://github.com/knative/eventing/releases/download/v0.3.0/release.yaml
+kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.3.0/release.yaml
 ```
 
-In addition to the core sources, you can also use GCP PubSub as a source by
-creating a secret with the name `gcppubsub-source-key` with a `key.json` value
-and loading the released source yaml (the `-with-gcppubsub` release includes all
-the above sources, and adds GCP PubSub, which requires the listed secret):
-
-```bash
-kubectl --namespace knative-sources create secret generic gcppubsub-source-key --from-literal=key.json=''
-kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.2.1/release-with-gcppubsub.yaml
-```
+In addition to the core sources, there are [other sources](./sources/README.md) that you can install.
 
 This document will be updated as additional sources (which are custom resource
 definitions and an associated controller) and channels
 (ClusterChannelProvisioners and controllers) become available.
+
+Check out the [Configuration](#configuration) section to learn more about
+operating Knative Eventing.
 
 ## Architecture
 
@@ -101,7 +101,7 @@ The eventing infrastructure supports two forms of event delivery at the moment:
    including a Knative Service or a core Kubernetes Service). In this case, the
    Source is responsible for retrying or queueing events if the destination
    Service is not available.
-2. Fan-out delivery from a source or Service response to multiple endpoints
+1. Fan-out delivery from a source or Service response to multiple endpoints
    using
    [Channels](https://github.com/knative/eventing/blob/master/pkg/apis/eventing/v1alpha1/channel_types.go#L36)
    and
@@ -129,6 +129,8 @@ Knative Eventing defines the following Sources in the
 format, but may be expressed as simple lists, etc in YAML. All Sources should be
 part of the `sources` category, so you can list all existing Sources with
 `kubectl get sources`. The currently-implemented Sources are described below:
+
+_Want to implement your own source? Check out [the tutorial](samples/writing-a-source/README.md)._
 
 ### KubernetesEventSource
 
@@ -191,6 +193,21 @@ The GcpPubSubSource fires a new event each time a message is published on a
   [ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#objectreference-v1-core)
   A reference to the object that should receive events.
 
+### AwsSqsSource
+
+The AwsSqsSource fires a new event each time an event is published on an
+[AWS SQS topic](https://aws.amazon.com/sqs/).
+
+**Spec fields**:
+
+- `queueURL`: URL of the SQS queue to pull events from.
+- `awsCredsSecret`: credential to use to poll the AWS SQS queue.
+- `sink`:
+  [ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#objectreference-v1-core)
+  A reference to the object that should receive events.
+- `serviceAccountName`: `string` The name of the ServiceAccount used to access
+  the `awsCredsSecret`.
+
 ### ContainerSource
 
 The ContainerSource will instantiate a container image which can generate events
@@ -214,6 +231,10 @@ FTP server for new files or generate events at a set time interval.
 - [Setup Knative Serving](../install/README.md)
 - [Install Eventing components](#installation)
 - [Run samples](samples/)
+
+## Configuration
+- [Default Channels](default-channels.md) provide a way to choose the
+persistence strategy for Channels across the cluster.
 
 ---
 

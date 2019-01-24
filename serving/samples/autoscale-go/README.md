@@ -28,7 +28,17 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 
 1. Find the ingress hostname and IP and export as an environment variable:
    ```
-   export IP_ADDRESS=`kubectl get svc knative-ingressgateway --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
+   # In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
+   INGRESSGATEWAY=knative-ingressgateway
+
+   # The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
+   # Use `istio-ingressgateway` instead, since `knative-ingressgateway`
+   # will be removed in Knative v0.4.
+   if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
+       INGRESSGATEWAY=istio-ingressgateway
+   fi
+
+   export IP_ADDRESS=`kubectl get svc $INGRESSGATEWAY --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
    ```
 
 ## Load the Service
@@ -78,7 +88,6 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
      0.686 [21]    |
      0.743 [13]    |
 
-
    Latency distribution:
      10% in 0.1805 secs
      25% in 0.2197 secs
@@ -97,9 +106,9 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 
    Status code distribution:
      [200] 5424 responses
+   ```
 
-
-
+   ```
    NAME                                             READY   STATUS    RESTARTS   AGE
    autoscale-go-00001-deployment-78cdc67bf4-2w4sk   3/3     Running   0          26s
    autoscale-go-00001-deployment-78cdc67bf4-dd2zb   3/3     Running   0          24s
@@ -114,11 +123,20 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 
 Knative Serving autoscaling is based on the average number of in-flight requests
 per pod (concurrency). The system has a default
-[target concurrency of 100.0](https://github.com/knative/serving/blob/3f00c39e289ed4bfb84019131651c2e4ea660ab5/config/config-autoscaler.yaml#L35) but [we used 10](service.yaml#L26) for our service.  We loaded the service with 50 concurrent requests so the autoscaler created 5 pods (`50 concurrent requests / target of 10 = 5 pods`)
+[target concurrency of 100.0](https://github.com/knative/serving/blob/3f00c39e289ed4bfb84019131651c2e4ea660ab5/config/config-autoscaler.yaml#L35)
+but [we used 10](service.yaml#L26) for our service. We loaded the service with
+50 concurrent requests so the autoscaler created 5 pods
+(`50 concurrent requests / target of 10 = 5 pods`)
 
 #### Panic
 
-The autoscaler calculates average concurrency over a 60 second window so it takes a minute for the system to stablize at the desired level of concurrency.  However the autoscaler also calculates a 6 second "panic" window and will enter panic mode if that window reached 2x the target concurrency.  In panic mode the autoscaler operates on the shorter, more sensitive panic window.  Once the panic conditions are no longer met for 60 seconds, the autoscaler will return to the initial 60 second "stable" window.
+The autoscaler calculates average concurrency over a 60 second window so it
+takes a minute for the system to stablize at the desired level of concurrency.
+However the autoscaler also calculates a 6 second "panic" window and will enter
+panic mode if that window reached 2x the target concurrency. In panic mode the
+autoscaler operates on the shorter, more sensitive panic window. Once the panic
+conditions are no longer met for 60 seconds, the autoscaler will return to the
+initial 60 second "stable" window.
 
 ```
                                                        |
@@ -137,10 +155,13 @@ The autoscaler calculates average concurrency over a 60 second window so it take
 
 #### Customization
 
-The autoscaler supports customization through annotations.  There are two autoscaler classes built into Knative:
+The autoscaler supports customization through annotations. There are two
+autoscaler classes built into Knative:
 
-1. `kpa.autoscaling.knative.dev` which is the concurrency-based autoscaler described above (the default), and
-2. `hpa.autoscaling.knative.dev` which delegates to the Kubernetes HPA which autoscales on CPU usage.
+1. `kpa.autoscaling.knative.dev` which is the concurrency-based autoscaler
+   described above (the default), and
+2. `hpa.autoscaling.knative.dev` which delegates to the Kubernetes HPA which
+   autoscales on CPU usage.
 
 Example of a Service scaled on CPU:
 
@@ -164,7 +185,8 @@ spec:
             image: gcr.io/knative-samples/autoscale-go:0.1
 ```
 
-Additionally the autoscaler targets and scaling bounds can be specified in annotations.  Example of a Service with custom targets and scale bounds:
+Additionally the autoscaler targets and scaling bounds can be specified in
+annotations. Example of a Service with custom targets and scale bounds:
 
 ```
 apiVersion: serving.knative.dev/v1alpha1
@@ -192,11 +214,14 @@ spec:
             image: gcr.io/knative-samples/autoscale-go:0.1
 ```
 
-Note: for an `hpa.autoscaling.knative.dev` class service, the `autoscaling.knative.dev/target` specifies the CPU percentage target (default `"80"`).
+Note: for an `hpa.autoscaling.knative.dev` class service, the
+`autoscaling.knative.dev/target` specifies the CPU percentage target (default
+`"80"`).
 
 #### Demo
 
-View the [Kubecon Demo](https://youtu.be/OPSIPr-Cybs) of Knative autoscaler customization (32 minutes).
+View the [Kubecon Demo](https://youtu.be/OPSIPr-Cybs) of Knative autoscaler
+customization (32 minutes).
 
 ### Dashboards
 
@@ -236,7 +261,8 @@ kubectl port-forward --namespace knative-monitoring $(kubectl get pods --namespa
      "http://${IP_ADDRESS?}?sleep=1000"
    ```
 
-1. Send 60 seconds of traffic with heavy CPU usage (~1 cpu/sec/request, total 100 cpus).
+1. Send 60 seconds of traffic with heavy CPU usage (~1 cpu/sec/request, total
+   100 cpus).
 
    ```
    hey -z 60s -q 100 \
@@ -244,7 +270,8 @@ kubectl port-forward --namespace knative-monitoring $(kubectl get pods --namespa
      "http://${IP_ADDRESS?}?prime=40000000"
    ```
 
-1. Send 60 seconds of traffic with heavy memory usage (1 gb/request, total 5 gb).
+1. Send 60 seconds of traffic with heavy memory usage (1 gb/request, total 5
+   gb).
    ```
    hey -z 60s -c 5 \
      -host "autoscale-go.default.example.com" \

@@ -16,7 +16,7 @@ You can find [guides for other platforms here](README.md).
 - Ensure `minishift` is setup correctly by running the command:
 
 ```shell
-# returns minishift v1.25.0+90fb23e
+# returns minishift v1.26.1+1e20f27
 minishift version
 ```
 
@@ -29,9 +29,6 @@ for running Knative:
 
 # make sure you have  a profile is set correctly, e.g. knative
 minishift profile set knative
-
-# Pinning to the right needed OpenShift version, anything >= v3.11.0
-minishift config set openshift-version v3.11.0
 
 # minimum memory required for the minishift VM
 minishift config set memory 8GB
@@ -164,13 +161,14 @@ curl -s https://raw.githubusercontent.com/knative/docs/master/install/scripts/is
 1. Run the following to install Istio:
 
    ```shell
-   oc apply -f https://storage.googleapis.com/knative-releases/serving/latest/istio.yaml
+   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.3.0/istio-crds.yaml && \
+   oc apply -f https://github.com/knative/serving/releases/download/v0.3.0/istio.yaml
    ```
-
-   > **NOTE:** If you get a lot of errors after running the above command like:
-   > **unable to recognize "STDIN": no matches for kind "Gateway" in version
-   > "networking.istio.io/v1alpha3"**, just run the command above again, it's
-   > idempotent and hence objects will be created only once.
+   Note: the resources (CRDs) defined in the `istio-crds.yaml`file are
+   also included in the `istio.yaml` file, but they are pulled out so that
+   the CRD definitions are created first. If you see an error when creating
+   resources about an unknown type, run the second `kubectl apply` command
+   again.
 
 2. Ensure the istio-sidecar-injector pods runs as provileged:
    ```shell
@@ -205,7 +203,8 @@ curl -s https://raw.githubusercontent.com/knative/docs/master/install/scripts/kn
 1. Install Knative serving:
 
    ```shell
-   oc apply -f https://storage.googleapis.com/knative-releases/serving/latest/release-no-mon.yaml
+   oc apply -f https://github.com/knative/serving/releases/download/v0.3.0/serving.yaml \
+   oc apply -f https://github.com/knative/build/releases/download/v0.3.0/build.yaml
    ```
 
 2. Monitor the Knative components until all of the components show a `STATUS` of
@@ -257,8 +256,19 @@ spec:
 ' | oc create -f -
 # Wait for the hello pod to enter its `Running` state
 oc get pod --watch
+
+# In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
+INGRESSGATEWAY=knative-ingressgateway
+
+# The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
+# Use `istio-ingressgateway` instead, since `knative-ingressgateway`
+# will be removed in Knative v0.4.
+if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
+    INGRESSGATEWAY=istio-ingressgateway
+fi
+
 # Call the service
-export IP_ADDRESS=$(oc get svc knative-ingressgateway -n istio-system -o 'jsonpath={.status.loadBalancer.ingress[0].ip}')
+export IP_ADDRESS=$(oc get svc $INGRESSGATEWAY -n istio-system -o 'jsonpath={.status.loadBalancer.ingress[0].ip}')
 # This should output 'Hello World: Go Sample v1!'
 curl -H "Host: helloworld-go.myproject.example.com" http://$IP_ADDRESS
 ```

@@ -35,7 +35,7 @@ the Gateway spec to use the HTTPS.
 To edit the shared gateway, run:
 
 ```shell
-kubectl edit gateway knative-shared-gateway --namespace knative-serving
+kubectl edit gateway knative-ingress-gateway --namespace knative-serving
 ```
 
 Change the Gateway spec to include the `tls:` section as shown below, then save

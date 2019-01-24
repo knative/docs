@@ -5,7 +5,7 @@ import 'package:shelf/shelf_io.dart';
 
 void main() {
   // Find port to listen on from environment variable.
-  var port = int.tryParse(Platform.environment['PORT']);
+  var port = int.tryParse(Platform.environment['PORT']) ?? 8080;
   
   // Read $TARGET from environment variable.
   var target = Platform.environment['TARGET'] ?? 'World';

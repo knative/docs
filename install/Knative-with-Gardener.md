@@ -13,7 +13,7 @@ You can find [guides for other platforms here](README.md).
 
 ## Before you begin
 
-Knative requires a Kubernetes cluster v1.10 or newer.
+Knative requires a Kubernetes cluster v1.11 or newer.
 
 ### Install and configure kubectl
 
@@ -71,8 +71,15 @@ Knative depends on Istio.
 
 1.  Install Istio:
     ```bash
-    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.2/istio.yaml
+	kubectl apply --filename https://github.com/knative/serving/releases/download/v0.3.0/istio-crds.yaml && \
+    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.3.0/istio.yaml
     ```
+    Note: the resources (CRDs) defined in the `istio-crds.yaml`file are
+    also included in the `istio.yaml` file, but they are pulled out so that
+    the CRD definitions are created first. If you see an error when creating
+    resources about an unknown type, run the second `kubectl apply` command
+    again.
+
 2.  Label the default namespace with `istio-injection=enabled`:
     ```bash
     kubectl label namespace default istio-injection=enabled
@@ -87,90 +94,29 @@ rerun the command to see the current status.
 > command to view the component's status updates in real time. Use CTRL + C to
 > exit watch mode.
 
-## Installing Knative components
+## Installing Knative
 
-You can install the Knative Serving and Build components together, or Build on
-its own.
-
-### Installing Knative Serving and Build components
+The following commands install all available Knative components as well as the
+standard set of observability plugins. To customize your Knative installation,
+see [Performing a Custom Knative Installation](Knative-custom-install.md).
 
 1. Run the `kubectl apply` command to install Knative and its dependencies:
-   ```bash
-   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.2/release.yaml
-   ```
-1. Monitor the Knative components until all of the components show a `STATUS` of
-   `Running`:
-   ```bash
-   kubectl get pods --namespace knative-serving
-   kubectl get pods --namespace knative-build
-   ```
-
-### Installing Knative Build only
-
-1. Run the `kubectl apply` command to install
-   [Knative Build](https://github.com/knative/build) and its dependencies:
-   ```bash
-   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.2.2/build.yaml
-   ```
-1. Monitor the Knative Build components until all of the components show a
+    ```bash
+    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.3.0/serving.yaml \
+    --filename https://github.com/knative/build/releases/download/v0.3.0/release.yaml \
+    --filename https://github.com/knative/eventing/releases/download/v0.3.0/release.yaml \
+    --filename https://github.com/knative/eventing-sources/releases/download/v0.3.0/release.yaml \
+    --filename https://github.com/knative/serving/releases/download/v0.3.0/monitoring.yaml
+    ```
+1. Monitor the Knative components until all of the components show a
    `STATUS` of `Running`:
-   ```bash
-   kubectl get pods --namespace knative-build
-   ```
-
-Just as with the Istio components, it will take a few seconds for the Knative
-components to be up and running; you can rerun the `kubectl get` command to see
-the current status.
-
-> Note: Instead of rerunning the command, you can add `--watch` to the above
-> command to view the component's status updates in real time. Use CTRL + C to
-> exit watch mode.
-
-You are now ready to deploy an app or create a build in your new Knative
-cluster.
-
-## Alternative way to enable Knative with Gardener
-
-Ask your Gardener administrator to configure the Gardener Bouquet addon manager
-with the following CRDs:
-
-```
-apiVersion: "garden.sapcloud.io/v1alpha1"
-kind: "AddonManifest"
-metadata:
-  name: "istio-1.0.2"
-  finalizers:
-    - "bouquet"
-spec:
-  configMap: "istio-chart-080"
-```
-
-```
-apiVersion: "garden.sapcloud.io/v1alpha1"
-kind: "AddonManifest"
-metadata:
-  name: "knative-0.0.1"
-  finalizers:
-    - "bouquet"
-spec:
-  configMap: "knative-chart-001"
-  dependencies:
-    istio: "1.0.2"
-```
-
-And of course create the respective `ConfigMaps`:
-
-```
-curl https://github.com/knative/serving/releases/download/v0.2.2/istio.yaml
-kubectl create configmap istio-chart-080 --from-file=istio.yaml
-
-curl https://github.com/knative/serving/releases/download/v0.2.2/release.yaml
-kubectl create configmap knative-chart-001 --from-file=release.yaml
-```
-
-With this preparation, your team can just activate Knative in the "Addons" tab
-when creating a new cluster:
-![alt text](images/gardener_addon_checkboxes.png "Addon Checkboxes")
+    ```bash
+    kubectl get pods --namespace knative-serving
+    kubectl get pods --namespace knative-build
+    kubectl get pods --namespace knative-eventing
+    kubectl get pods --namespace knative-sources
+    kubectl get pods --namespace knative-monitoring
+    ```
 
 ## Set your custom domain
 
@@ -203,17 +149,20 @@ kind: ConfigMap
   namespace: knative-serving
 ```
 
-## Deploying an app
+## What's next
 
-Now that your cluster has Knative installed, you're ready to deploy an app.
+Now that your cluster has Knative installed, you can see what Knative has to
+offer.
 
-If you'd like to follow a step-by-step guide for deploying your first app on
-Knative, check out the
+To deploy your first app with Knative, follow the step-by-step
 [Getting Started with Knative App Deployment](getting-started-knative-app.md)
 guide.
 
-If you'd like to view the available sample apps and deploy one of your choosing,
-head to the [sample apps](../serving/samples/README.md) repo.
+To get started with Knative Eventing, pick one of the
+[Eventing Samples](../eventing/samples/) to walk through.
+
+To get started with Knative Build, read the
+[Build README](../build/README.md), then choose a sample to walk through.
 
 ## Cleaning up
 

@@ -20,7 +20,7 @@ metadata:
 spec:
   # This is the gateway shared in knative service mesh.
   gateways:
-  - knative-shared-gateway.knative-serving.svc.cluster.local
+  - knative-ingress-gateway.knative-serving.svc.cluster.local
   # Set host to the domain name that you own.
   hosts:
   - example.com
@@ -33,10 +33,10 @@ spec:
       # in order to redirect requests to Search service.
       authority: search-service.default.example.com
     route:
-      # knative-ingressgateway is the k8s service created by Knative as the 
+      # knative-ingressgateway is the k8s service created by Knative as the
       # shared gateway of all traffic incoming to the cluster.
-      # Basically here we redirect the request to the cluster entry again with 
-      # updated header "search-service.default.example.com" so the request will 
+      # Basically here we redirect the request to the cluster entry again with
+      # updated header "search-service.default.example.com" so the request will
       # eventually be directed to Search service.
       - destination:
           host: knative-ingressgateway.istio-system.svc.cluster.local
@@ -49,8 +49,8 @@ spec:
       # in order to redirect requests to Search service.
       authority: login-service.default.example.com
     route:
-      # Basically here we redirect the request to the cluster entry again with 
-      # updated header "login-service.default.example.com" so the request will 
+      # Basically here we redirect the request to the cluster entry again with
+      # updated header "login-service.default.example.com" so the request will
       # eventually be directed to LOgin service.
       - destination:
           host: knative-ingressgateway.istio-system.svc.cluster.local
