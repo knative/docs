@@ -56,7 +56,7 @@ Knative depends on Istio. Run the following to install Istio. (We are changing
 `LoadBalancer` to `NodePort` for the `istio-ingress` service).
 
 ```shell
-curl -L https://github.com/knative/serving/releases/download/v0.2.2/istio.yaml \
+curl -L https://github.com/knative/serving/releases/download/v0.3.0/istio.yaml \
   | sed 's/LoadBalancer/NodePort/' \
   | kubectl apply --filename -
 
@@ -82,13 +82,14 @@ rerun the command to see the current status.
 
 Next, install [Knative Serving](https://github.com/knative/serving):
 
-Because you have limited resources available, use the
-`https://github.com/knative/serving/releases/download/v0.2.2/release-lite.yaml`
-file, which omits some of the monitoring components to reduce the memory used by
-the Knative components. To use the provided `release-lite.yaml` release, run:
+Because you have limited resources available, install only the Knative Serving
+component, omitting the other Knative components as well as the observability
+and monitoring plugins.
+
+Enter the following command:
 
 ```shell
-curl -L https://github.com/knative/serving/releases/download/v0.2.2/release-lite.yaml \
+curl -L https://github.com/knative/serving/releases/download/v0.3.0/serving.yaml \
   | sed 's/LoadBalancer/NodePort/' \
   | kubectl apply --filename -
 ```
