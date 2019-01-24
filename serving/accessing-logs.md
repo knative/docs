@@ -35,6 +35,23 @@ up the necessary components first.
 
 <!-- TODO: create a video walkthrough of the Kibana UI -->
 
+### Accessing stdout/stderr logs
+
+To find the logs sent to `stdout/stderr` from your application in the Kibana UI:
+
+1. Click `Discover` on the left side bar.
+1. Choose `logstash-*` index pattern on the left top.
+1. Input `tag: kubernetes*` in the top search bar then search.
+
+### Accessing request logs
+
+To find the request logs of your application in the Kibana UI :
+
+1. Click `Discover` on the left side bar.
+1. Choose `logstash-*` index pattern on the left top.
+1. Input `tag: "requestlog.logentry.istio-system"` in the top search bar then
+   search.
+
 ### Accessing configuration and revision logs
 
 To access the logs for a configuration:
