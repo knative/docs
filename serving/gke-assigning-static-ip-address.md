@@ -12,6 +12,10 @@ the "istio-ingressgateway" service under the `istio-system` namespace.
 Therefore, in order to set a static IP for the gateway you must to set the
 external IP address of the `istio-ingressgateway` service to a static IP.
 
+If you have configured a [custom ingress
+gateway](setting-up-custom-ingress-gateway.md) you will use the name of your
+gateway service in the steps below instead of `istio-ingressgateway`.
+
 ## Step 1: Reserve a static IP address
 
 You can reserve a regional static IP address using the Google Cloud SDK or the
