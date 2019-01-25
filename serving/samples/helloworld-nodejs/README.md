@@ -97,7 +97,8 @@ recreate the source files from this folder.
 
    # Install production dependencies but discard the node_modules 
    # copied from your dev environment
-   RUN npm ci --only=production
+   RUN rm node_modules
+   RUN npm install --only=production
 
    # Service must listen to $PORT environment variable.
    # This default value facilitates local development.
