@@ -31,7 +31,7 @@ ibmcloud cr token-add --description "token description" --non-expiring --readwri
 ibmcloud cr token-list
 ```
 
-# Provide Container Registry Credentials to Knative
+## Provide Container Registry Credentials to Knative
 You will use the credentials you obtained in the previous section to authenticate to your private container registry. First, you'll need to create a secret to store the credentials for this registry. This secret will be used to push the built image to the container registry.
 
 A Secret is a Kubernetes object containing sensitive data such as a password, a token, or a key. You can also read more about [Secrets](https://kubernetes.io/docs/concepts/configuration/secret/).
@@ -79,7 +79,7 @@ imagePullSecrets:
 - name: ibm-cr-secret
 ```
 
-# Deploy to Knative using the credentials you just set up.
+## Deploy to Knative using the credentials you just set up.
 To build our application from the source on github, and push the resulting image to the IBM Container Registry, we will use the Kaniko build template.
 
 1. Install the Kaniko build template
