@@ -53,7 +53,7 @@ industry-leading companies. For a current list of the authors, see
 ### Authoring samples
 
 Beyond the official documentation there are endless possibilities for combining
-tools, platforms, languages and products. By submitting a tutorial you can
+tools, platforms, languages, and products. By submitting a tutorial you can
 share your experience and help others who are solving similar problems.
 
 Community tutorials are stored in Markdown files on
