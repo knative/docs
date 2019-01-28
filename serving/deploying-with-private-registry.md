@@ -42,7 +42,7 @@ A Secret is a Kubernetes object containing sensitive data such as a password, a 
 apiVersion: v1
 kind: Secret
 metadata:
-  name: basic-user-pass
+  name: registry-push-secret
   annotations:
     build.knative.dev/docker-0: registry.ng.bluemix.net
 type: kubernetes.io/basic-auth
@@ -83,6 +83,65 @@ imagePullSecrets:
 To build our application from the source on github, and push the resulting image to the IBM Container Registry, we will use the Kaniko build template.
 
 1. Install the Kaniko build template
+
 ```
 kubectl apply -f https://raw.githubusercontent.com/knative/build-templates/master/kaniko/kaniko.yaml
+```
+
+1. You need to create a service manifest which defines the service to deploy, including where the source code is and which build-template to use. Create a file named service.yaml and copy the following definition. Make sure to replace {NAMESPACE} with your own namespace you created earlier:
+
+```
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: app-from-source
+  namespace: default
+spec:
+  runLatest:
+    configuration:
+      build:
+        apiVersion: build.knative.dev/v1alpha1
+        kind: Build
+        spec:
+          serviceAccountName: build-bot
+          source:
+            git:
+              url: https://github.com/mchmarny/simple-app.git
+              revision: master
+          template:
+            name: kaniko
+            arguments:
+            - name: IMAGE
+              value: registry.ng.bluemix.net/{NAMESPACE}/app-from-source:latest
+      revisionTemplate:
+        spec:
+          container:
+            image: registry.ng.bluemix.net/{NAMESPACE}/app-from-source:latest 
+            imagePullPolicy: Always
+            env:
+            - name: SIMPLE_MSG
+              value: "Hello from the sample app!"
+```
+
+1. Apply the configuration using `kubectl`. Applying this service definition will enable a number of events to happen:
+- Fetch the revision specified from GitHub and build it into a container, using the Kaniko build template.
+- the latest image will be pushed to the private registry using the registry-push-secret
+- the latest image will be pulled down from the private registry using the ibm-cr-secret.
+- the service will start, and your app will be running.
+
+```
+kubectl apply -f service.yaml
+```
+
+1. You can run `kubectl get pods --watch` to see the pods initializing.
+
+1. Once all the pods are initialized, you can see that your container image was built and pushed to the IBM Container Registry:
+
+```
+ ibmcloud cr image-list
+```
+
+1. To find the URL for your service, use the `ksvc` command:
+```
+kubectl get ksvc app-from-source  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
 ```
