@@ -13,7 +13,8 @@ Therefore, in order to set a static IP for the gateway you must to set the
 external IP address of the `istio-ingressgateway` service to a static IP.
 
 If you have configured a [custom ingress
-gateway](setting-up-custom-ingress-gateway.md) you will use the name of your
+gateway](setting-up-custom-ingress-gateway.md), replace `istio-ingressgateway` with the name of your
+gateway service in the steps below.
 gateway service in the steps below instead of `istio-ingressgateway`.
 
 ## Step 1: Reserve a static IP address
