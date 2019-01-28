@@ -27,7 +27,7 @@ spec:
       revisionTemplate:
         spec:
           container:
-            image: github.com/knative/eventing-sources/cmd/message_dumper
+            image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/message_dumper@sha256:73a95b05b5b937544af7c514c3116479fa5b6acf7771604b313cfc1587bf0940
 ```
 
 Use following command to create the service from `service.yaml`:
