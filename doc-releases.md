@@ -1,7 +1,7 @@
 # Documentation Releases
 
 The following list shows the available versions of Knative documentation.
-version of Knative cluster that you installed.
+Select the version that matches your installed version of Knative.
 
 ## Released versions
 
