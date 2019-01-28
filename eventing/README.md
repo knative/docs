@@ -168,8 +168,8 @@ The GitHubSource fires a new event for selected
   [SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#secretkeyselector-v1-core)
   containing a GitHub secret token for configuring a GitHub webhook. One of this
   or `accessToken` must be set.
-- `serviceAccountName`: `string` The name of the ServiceAccount running as the
-  container.
+- `serviceAccountName`: `string` The name of the ServiceAccount to run the
+  container as.
 - `sink`:
   [ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#objectreference-v1-core)
   A reference to the object that should receive events.
