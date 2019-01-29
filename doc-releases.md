@@ -3,10 +3,6 @@
 The following list shows the available versions of Knative documentation.
 Select the version that matches your installed version of Knative.
 
-## Documentation website
-
-* `https://knative.dev` ([Coming soon!](https://github.com/knative/docs/projects/5))
-
 ## `knative/docs` repositories
 
 ### Released versions
@@ -17,3 +13,7 @@ Select the version that matches your installed version of Knative.
 ### In development (pre-release) version
 
 * [Branch: **`master`**](https://github.com/knative/docs/tree/master)
+
+## Documentation website
+
+* `https://knative.dev` ([Coming soon!](https://github.com/knative/docs/projects/5))
