@@ -1,4 +1,8 @@
-# Knative Install on [Gardener](https://github.com/gardener)
+---
+title: "Install on Gardener"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+weight: 10
+---
 
 This guide walks you through the installation of the latest version of Knative
 using pre-built images on a [Gardener](https://gardener.cloud) created cluster
