@@ -49,7 +49,16 @@ reference project, that error looks like this:
 _Stacktraces in log messages have been elided for clarity._
 
 ```json
-{"level":"error","ts":1546896989.0428371,"logger":"kubebuilder.controller","msg":"Reconciler error","controller":"samplesource-controller","request":"default/samplesource-sample","error":"Failed to get sink URI: sink reference is nil","stacktrace":"..."}
+{
+  "level": "error",
+  "ts": 1546896989.0428371,
+  "logger": "kubebuilder.controller",
+  "msg": "Reconciler error",
+  "controller": "samplesource-controller",
+  "request": "default/samplesource-sample",
+  "error": "Failed to get sink URI: sink reference is nil",
+  "stacktrace": "..."
+}
 ```
 
 Create a TestSink CRD to use as an Addressable.
@@ -99,11 +108,17 @@ spec:
     namespace: default" | kubectl apply -f -
 ```
 
-Check the controller logs in the first terminal. You should see an `Updated
-Status` log line. In the reference project, that line looks like this:
+Check the controller logs in the first terminal. You should see an
+`Updated Status` log line. In the reference project, that line looks like this:
 
 ```json
-{"level":"info","ts":1546898070.4645903,"logger":"controller","msg":"Updating Status","request":{"namespace":"default","name":"samplesource-sample"}}
+{
+  "level": "info",
+  "ts": 1546898070.4645903,
+  "logger": "controller",
+  "msg": "Updating Status",
+  "request": { "namespace": "default", "name": "samplesource-sample" }
+}
 ```
 
 Verify that the source's SinkURI was updated by the controller. In the reference
@@ -131,9 +146,9 @@ status:
 Normally controllers run inside the Kubernetes cluster. This requires publishing
 a container image and creating several Kubernetes objects:
 
-*   Namespace to run the controller pod in
-*   StatefulSet or Deployment to manage the controller pod
-*   RBAC rules granting permissions to manipulate Kubernetes resources
+- Namespace to run the controller pod in
+- StatefulSet or Deployment to manage the controller pod
+- RBAC rules granting permissions to manipulate Kubernetes resources
 
 Export the `IMG` environment variable with a value equal to the desired
 container image URL. This URL will be different depending on your container
