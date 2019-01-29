@@ -1,4 +1,8 @@
-# Debugging Knative Eventing
+---
+title: "Debugging Knative Eventing"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+weight: 10
+---
 
 This is an evolving document on how to debug a non-working Knative Eventing setup.
 ## Audience
