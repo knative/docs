@@ -1,4 +1,8 @@
-# Contributing to Knative
+---
+title: "Knative Contributor Guidelines"
+linkTitle: "Contributing to Knative"
+weight: 15
+---
 
 So, you want to hack on Knative? Yay!
 
@@ -20,7 +24,7 @@ given the same level of review.
 
 ## Working groups
 
-The Knative community is organized into a set of
+The Knative contributors community is organized into a set of
 [working groups](WORKING-GROUPS.md). Any contribution to Knative should be
 started by first engaging with the appropriate working group.
 

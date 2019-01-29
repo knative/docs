@@ -1,4 +1,8 @@
-# Knative Steering Committee
+---
+title: "Knative Steering Committee"
+linkTitle: "Steering Committee"
+weight: 35
+---
 
 The Knative Steering Committee (SC) defines, evolves, and defends the vision,
 values, mission, and scope of the project. _The Steering Committee is a

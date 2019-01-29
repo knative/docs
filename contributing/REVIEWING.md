@@ -1,4 +1,8 @@
-# Reviewing and Merging Pull Requests for Knative
+---
+title: "Reviewing and Merging Knative Pull Requests"
+linkTitle: "Pull Request Guidelines"
+weight: 55
+---
 
 As a community, we believe in the value of code reviews for all contributions.
 Code reviews increase both the quality and readability of our code base, which

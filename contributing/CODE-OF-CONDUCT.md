@@ -1,4 +1,8 @@
-# Contributor Covenant Code of Conduct
+---
+title: "Contributor Covenant Code of Conduct"
+linkTitle: "Code of Conduct"
+weight: 10
+---
 
 ## Our Pledge
 

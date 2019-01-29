@@ -1,4 +1,8 @@
-# Knative Working Groups
+---
+title: "Knative Working Group"
+linkTitle: "Join Working Groups"
+weight: 25
+---
 
 Most community activity is organized into _working groups_.
 
