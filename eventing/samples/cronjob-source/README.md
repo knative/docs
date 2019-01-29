@@ -71,10 +71,10 @@ looking at message dumper logs.
 1. Use [`kail`](https://github.com/boz/kail) to tail the logs of the subscriber.
 
    ```shell
-   kail -d message-dumper -c user-container --since=10m
+   kail -l serving.knative.dev/service=message-dumper -c user-container --since=10m
    ```
 
-You should see log lines similar to:
+You should see log lines showing the request headers and body from the source:
 
 ```json
 {
