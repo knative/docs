@@ -20,7 +20,8 @@ source is most useful as a bridge from other GCP services, such as
 
 1. Setup
    [Knative Eventing](https://github.com/knative/docs/tree/master/eventing)
-   using the `release-with-gcppubsub.yaml` file. Start by creating a dummy
+   using the `release-gcppubsub.yaml` file instead of
+   (`eventing-sources/release.yaml`). Start by creating a dummy
    `gcppubsub-source-key` (as directed), and we will replace it later.
 
 1. Enable the 'Cloud Pub/Sub API' on your project:
