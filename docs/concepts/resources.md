@@ -1,4 +1,7 @@
-# Resources
+---
+title: "Resources"
+weight: 10
+---
 
 This page contains information about various tools and technologies that are
 useful to anyone developing on Knative.

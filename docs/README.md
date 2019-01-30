@@ -1,4 +1,3 @@
-# Welcome to Knative
 
 Knative (pronounced kay-nay-tiv) extends Kubernetes to provide a set of
 middleware components that are essential to build modern, source-centric, and
