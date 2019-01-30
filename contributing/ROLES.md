@@ -1,4 +1,8 @@
-# Knative Community Roles
+---
+title: "Knative community roles"
+linkTitle: "Community roles"
+weight: 55
+---
 
 This document describes the set of roles individuals might have within the Knative
 community, the requirements of each role, and the privileges that each role
