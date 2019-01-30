@@ -1,5 +1,5 @@
 ---
-title: "Knative Releases"
+title: "Knative releases"
 linkTitle: "Releases"
 weight: 20
 ---

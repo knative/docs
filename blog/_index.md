@@ -1,5 +1,5 @@
 ---
-title: "Knative Blog"
+title: "Knative blog"
 linkTitle: "Blog"
 menu:
   main:
