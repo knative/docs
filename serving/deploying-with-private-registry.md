@@ -44,7 +44,7 @@ kind: Secret
 metadata:
   name: registry-push-secret
   annotations:
-    build.knative.dev/docker-0: registry.ng.bluemix.net
+    build.knative.dev/docker-0: https://registry.ng.bluemix.net
 type: kubernetes.io/basic-auth
 stringData:
   username: token
@@ -74,7 +74,7 @@ kind: ServiceAccount
 metadata:
   name: build-bot
 secrets:
-- name: basic-user-pass
+- name: registry-push-secret
 imagePullSecrets:
 - name: ibm-cr-secret
 ```
@@ -139,9 +139,4 @@ kubectl apply -f service.yaml
 
 ```
  ibmcloud cr image-list
-```
-
-1. To find the URL for your service, use the `ksvc` command:
-```
-kubectl get ksvc app-from-source  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
 ```
