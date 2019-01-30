@@ -1,4 +1,3 @@
-# Debugging Knative Eventing
 
 This is an evolving document on how to debug a non-working Knative Eventing setup.
 ## Audience

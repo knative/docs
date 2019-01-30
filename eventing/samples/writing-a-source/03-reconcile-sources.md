@@ -1,4 +1,7 @@
-# Reconcile Sources
+---
+title: "Reconcile sources"
+weight: 30
+---
 
 Now that we have a Source CRD defined with Sink and SinkURI fields, we'll need
 to use those fields in the Source controller to resolve Sink references and set
