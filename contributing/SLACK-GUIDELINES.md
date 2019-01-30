@@ -1,7 +1,7 @@
 ---
 title: "Slack usage guidelines"
 linkTitle: "Slack guidelines"
-weight: 40
+weight: 45
 ---
 
 Slack is the main communication platform for Knative outside of our mailing

@@ -1,7 +1,7 @@
 ---
 title: "Reviewing and merging Knative pull requests"
 linkTitle: "Pull request guidelines"
-weight: 55
+weight: 60
 ---
 
 As a community, we believe in the value of code reviews for all contributions.

@@ -1,7 +1,7 @@
 ---
 title: "Knative community roles"
 linkTitle: "Community roles"
-weight: 50
+weight: 55
 ---
 
 This document describes the set of roles individuals may have within the Knative

@@ -1,7 +1,7 @@
 ---
 title: "Knative working group processes and guidelines"
 linkTitle: "Working group guidelines"
-weight: 25
+weight: 30
 ---
 
 This document describes the processes we use to manage the Knative working

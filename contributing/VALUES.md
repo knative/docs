@@ -1,7 +1,7 @@
 ---
 title: "Knative team values"
 linkTitle: "Team values"
-weight: 45
+weight: 50
 ---
 
 We want to make sure every member has a shared understanding of the goals and

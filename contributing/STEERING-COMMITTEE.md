@@ -1,7 +1,7 @@
 ---
 title: "Knative steering committee"
 linkTitle: "Steering committee"
-weight: 35
+weight: 40
 ---
 
 The Knative Steering Committee (SC) defines, evolves, and defends the vision,
