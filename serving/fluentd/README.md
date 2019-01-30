@@ -1,4 +1,3 @@
-# Fluentd Docker Image on Knative Serving
 
 Knative Serving uses a [Fluentd](https://www.fluentd.org/) docker image to
 collect logs. Operators can customize their own Fluentd docker image and
