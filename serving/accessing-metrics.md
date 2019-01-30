@@ -1,4 +1,8 @@
-# Accessing metrics
+---
+title: "Accessing metrics"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+weight: 10
+---
 
 You access metrics through the [Grafana](https://grafana.com/) UI. Grafana is
 the visualization tool for [Prometheus](https://prometheus.io/).
