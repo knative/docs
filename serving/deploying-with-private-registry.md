@@ -55,73 +55,74 @@ stringData:
 
 1. Apply the secret to your cluster.
 
-```
-kubectl apply --filename registry-push-secret.yaml
-```
+  ```
+  kubectl apply --filename registry-push-secret.yaml
+  ```
 
 1. You will also need a secret for the knative-serving component to pull down an image from the private container registry. This secret will be a `docker-registry` type secret. You can create this via the commandline. For username, simply use the string `token`. For <token_value>, use the token you made note of earlier.
 
-```
-kubectl create secret docker-registry ibm-cr-secret --docker-server=https://registry.ng.bluemix.net --docker-username=token --docker-password=<token_value>
-```
+  ```
+  kubectl create secret docker-registry ibm-cr-secret --docker-server=https://registry.ng.bluemix.net --docker-username=token --docker-password=<token_value>
+  ```
 
 A Service Account provides an identity for processes that run in a Pod. This Service Account will be used to link the build process for Knative to the Secrets you just created.
 
 1. Create a file named service-account.yaml containing the following .yaml.
-```
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: build-bot
-secrets:
-- name: registry-push-secret
-imagePullSecrets:
-- name: ibm-cr-secret
-```
+
+  ```
+  apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    name: build-bot
+  secrets:
+  - name: registry-push-secret
+  imagePullSecrets:
+  - name: ibm-cr-secret
+  ```
 
 ## Deploy to Knative using the credentials
 To build our application from the source on github, and push the resulting image to the IBM Container Registry, we will use the Kaniko build template.
 
 1. Install the Kaniko build template
 
-```
-kubectl apply -f https://raw.githubusercontent.com/knative/build-templates/master/kaniko/kaniko.yaml
-```
+  ```
+  kubectl apply -f https://raw.githubusercontent.com/knative/build-templates/master/kaniko/kaniko.yaml
+  ```
 
 1. You need to create a service manifest which defines the service to deploy, including where the source code is and which build-template to use. Create a file named service.yaml and copy the following definition. Make sure to replace {NAMESPACE} with your own namespace you created earlier:
 
-```
-apiVersion: serving.knative.dev/v1alpha1
-kind: Service
-metadata:
-  name: app-from-source
-  namespace: default
-spec:
-  runLatest:
-    configuration:
-      build:
-        apiVersion: build.knative.dev/v1alpha1
-        kind: Build
-        spec:
-          serviceAccountName: build-bot
-          source:
-            git:
-              url: https://github.com/mchmarny/simple-app.git
-              revision: master
-          template:
-            name: kaniko
-            arguments:
-            - name: IMAGE
-              value: registry.ng.bluemix.net/{NAMESPACE}/app-from-source:latest
-      revisionTemplate:
-        spec:
-          container:
-            image: registry.ng.bluemix.net/{NAMESPACE}/app-from-source:latest 
-            imagePullPolicy: Always
-            env:
-            - name: SIMPLE_MSG
-              value: "Hello from the sample app!"
-```
+  ```
+  apiVersion: serving.knative.dev/v1alpha1
+  kind: Service
+  metadata:
+    name: app-from-source
+    namespace: default
+  spec:
+    runLatest:
+      configuration:
+        build:
+          apiVersion: build.knative.dev/v1alpha1
+          kind: Build
+          spec:
+            serviceAccountName: build-bot
+            source:
+              git:
+                url: https://github.com/mchmarny/simple-app.git
+                revision: master
+            template:
+              name: kaniko
+              arguments:
+              - name: IMAGE
+                value: registry.ng.bluemix.net/{NAMESPACE}/app-from-source:latest
+        revisionTemplate:
+          spec:
+            container:
+              image: registry.ng.bluemix.net/{NAMESPACE}/app-from-source:latest 
+              imagePullPolicy: Always
+              env:
+              - name: SIMPLE_MSG
+                value: "Hello from the sample app!"
+  ```
 
 1. Apply the configuration using `kubectl`. Applying this service definition will enable a number of events to happen:
 - Fetch the revision specified from GitHub and build it into a container, using the Kaniko build template.
@@ -129,14 +130,14 @@ spec:
 - the latest image will be pulled down from the private registry using the ibm-cr-secret.
 - the service will start, and your app will be running.
 
-```
-kubectl apply -f service.yaml
-```
+  ```
+  kubectl apply -f service.yaml
+  ```
 
 1. You can run `kubectl get pods --watch` to see the pods initializing.
 
 1. Once all the pods are initialized, you can see that your container image was built and pushed to the IBM Container Registry:
 
-```
- ibmcloud cr image-list
-```
+  ```
+  ibmcloud cr image-list
+  ```
