@@ -1,4 +1,8 @@
-# Contributing to the Knative Documentation
+---
+title: "Contributing to the Knative documentation"
+linkTitle: "Contributing to docs"
+weight: 20
+---
 
 **First off, thanks for taking the time to contribute!**
 
