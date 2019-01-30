@@ -1,5 +1,5 @@
 ---
-title: "Creating a simple Knative Build"
+title: "Creating a simple Knative build"
 #linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
 weight: 30
 ---
