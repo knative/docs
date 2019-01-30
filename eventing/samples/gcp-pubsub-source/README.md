@@ -132,7 +132,7 @@ source is most useful as a bridge from other GCP services, such as
 Publish messages to your GCP PubSub Topic:
 
 ```shell
-gcloud pubsub topics publish testing --message="Hello, world"
+gcloud pubsub topics publish testing --message="Hello world"
 ```
 
 ## Verify
@@ -178,7 +178,7 @@ see the sent message:
 echo "SGVsbG8sIHdvcmxk" | base64 --decode
 ```
 
-Results in: `Hello, world"
+Results in: "Hello world"
 
 For more information about the format of the message, see the
 [PubsubMessage documentation](https://cloud.google.com/pubsub/docs/reference/rest/v1/PubsubMessage).
