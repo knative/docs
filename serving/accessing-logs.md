@@ -1,4 +1,8 @@
-# Accessing logs
+---
+title: "Accessing logs"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+weight: 5
+---
 
 If you have not yet installed the logging and monitoring components, go through
 the [installation instructions](./installing-logging-metrics-traces.md) to set

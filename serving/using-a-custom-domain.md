@@ -1,4 +1,8 @@
-# Setting up a custom domain
+---
+title: "Setting up a custom domain"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+weight: 55
+---
 
 By default, Knative Serving routes use `example.com` as the default domain. The
 fully qualified domain name for a route by default is
