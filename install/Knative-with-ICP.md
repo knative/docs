@@ -1,4 +1,8 @@
-# Knative Install on IBM Cloud Private
+---
+title: "Install on IBM Cloud Private"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+weight: 15
+---
 
 This guide walks you through the installation of the latest version of
 [Knative Serving](https://github.com/knative/serving) and

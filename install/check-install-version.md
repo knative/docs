@@ -1,4 +1,8 @@
-# Checking the Version of Your Knative Serving Installation
+---
+title: "Checking the Version of Your Knative Serving Installation"
+#linkTitle: "Checking your install version"
+weight: 20
+---
 
 If you want to check what version of Knative serving you have installed, enter
 the following command:
