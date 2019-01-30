@@ -1,4 +1,8 @@
-# Installing Logging, Metrics, and Traces
+---
+title: "Installing logging, metrics, and traces"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+weight: 40
+---
 
 If you followed one of the
 [comprehensive install guides](../install/README.md#install-guides) or you
