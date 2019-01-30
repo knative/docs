@@ -1,4 +1,7 @@
-# Bootstrap the Project
+---
+title: "Bootstrap the project"
+weight: 10
+---
 
 We'll use Kubebuilder to bootstrap the project and provide common controller
 boilerplate and scaffolding. Check out the

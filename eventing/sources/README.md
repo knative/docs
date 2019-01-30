@@ -10,7 +10,6 @@ procedure:
     ```
 -->
 
-# Knative Event Sources
 
 Event Sources are Kubernetes Custom Resources which provide a mechanism for
 registering interest in a class of events from a particular software system.

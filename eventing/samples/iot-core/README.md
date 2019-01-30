@@ -1,4 +1,3 @@
-# Sample: Binding running services to an IoT core
 
 This sample shows how to bind a running service to an
 [IoT core](https://cloud.google.com/iot-core/) using

@@ -1,4 +1,3 @@
-# Cron Job Source example
 
 Cron Job Source example shows how to configure Cron Job as event source for
 functions.

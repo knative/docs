@@ -1,4 +1,3 @@
-# GitHub Source example
 
 GitHub Source example shows how to wire GitHub events for consumption
 by a Knative Service.
@@ -54,7 +53,7 @@ Create a [personal access token](https://github.com/settings/tokens)
 for GitHub that the GitHub source can use to register webhooks with
 the GitHub API. Also decide on a secret token that your code will use
 to authenticate the incoming webhooks from GitHub (_secretToken_).
-  
+
 The token can be named anything you find convenient. The Source
 requires `repo:public_repo` and `admin:repo_hook`, to let it fire
 events from your public repositories and to create webhooks for those

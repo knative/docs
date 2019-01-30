@@ -1,4 +1,3 @@
-# Kubernetes Event Source example
 
 Kubernetes Event Source example shows how to wire kubernetes cluster events for
 consumption by a function that has been implemented as a Knative Service.
