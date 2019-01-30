@@ -1,5 +1,5 @@
 ---
-title: "Knative Personas"
+title: "Knative personas"
 #linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
 weight: 20
 ---
