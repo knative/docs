@@ -1,4 +1,7 @@
-# Define The Source Resource
+---
+title: "Define the source resource"
+weight: 20
+---
 
 We'll use Kubebuilder to generate a new Kubernetes Custom Resource for our
 source. Check out the [Kubebuilder book](https://book.kubebuilder.io/) to learn
