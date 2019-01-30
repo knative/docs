@@ -48,12 +48,13 @@ in IBM Cloud Private to allow the access to the Knative image:
    kubectl edit clusterimagepolicies ibmcloud-default-cluster-image-policy
    ```
 
-2. Update `spec.repositories` by adding `"gcr.io/knative-releases/*"`, for
-   example:
-   ```yaml
-   spec:
-     repositories:
-       - name: "gcr.io/knative-releases/*"
+2. Update `spec.repositories` by adding the following entries, for example:
+    ```yaml
+    spec:
+      repositories:
+      - name: gcr.io/knative-releases/*
+      - name: k8s.gcr.io/*
+      - name: quay.io/*
    ```
 
 #### Update pod security policy
