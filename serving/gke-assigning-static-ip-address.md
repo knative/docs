@@ -1,4 +1,8 @@
-# Assigning a static IP address for Knative on Kubernetes Engine
+---
+title: "Assigning a static IP address for Knative on Kubernetes Engine"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+weight: 35
+---
 
 If you are running Knative on Google Kubernetes Engine and want to use a
 [custom domain](./using-a-custom-domain.md) with your apps, you need to

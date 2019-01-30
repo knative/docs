@@ -1,4 +1,8 @@
-# Configuring HTTPS with a custom certificate
+---
+title: "Configuring HTTPS with a custom certificate"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+weight: 60
+---
 
 If you already have an SSL/TLS certificate for your domain you can follow the
 steps below to configure Knative to use your certificate and enable HTTPS

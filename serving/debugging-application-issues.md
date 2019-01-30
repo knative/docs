@@ -1,4 +1,8 @@
-# Debugging Issues with Your Application
+---
+title: "Debugging issues with your application"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+weight: 25
+---
 
 You deployed your app to Knative Serving, but it isn't working as expected. Go
 through this step-by-step guide to understand what failed.
