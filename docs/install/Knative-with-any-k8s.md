@@ -1,4 +1,8 @@
-# Knative Install on a Kubernetes Cluster
+---
+title: "Install on a Kubernetes Cluster"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+weight: 15
+---
 
 This guide walks you through the installation of the latest version of Knative
 using pre-built images.

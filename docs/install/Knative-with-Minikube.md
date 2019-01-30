@@ -1,4 +1,8 @@
-# Knative Install on Minikube
+---
+title: "Install on Minikube"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+weight: 10
+---
 
 This guide walks you through the installation of the latest version of
 [Knative Serving](https://github.com/knative/serving) using pre-built images and

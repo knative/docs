@@ -1,4 +1,8 @@
-# Knative Install on OpenShift (via `oc cluster up`)
+---
+title: "Install on OpenShift"
+linkTitle: "OpenShift"
+weight: 15
+---
 
 This guide walks you through the installation of the latest version of
 [Knative Serving](https://github.com/knative/serving) on an
@@ -23,7 +27,7 @@ directory by downloading the right release tarball for your OS from the
 
 ```shell
 wget https://github.com/openshift/origin/releases/download/v3.11.0/openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit.tar.gz -o oc.tar.gz
-tar xzvf openshift*tar.gz 
+tar xzvf openshift*tar.gz
 mv openshift-origin-client-tools-*/oc .
 mv openshift-origin-client-tools-*/kubectl .
 rm -rf openshift-origin-client-tools-*/

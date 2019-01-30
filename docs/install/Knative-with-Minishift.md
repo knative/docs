@@ -1,4 +1,8 @@
-# Knative Install on Minishift
+---
+title: "Install on Minishift"
+linkTitle: "Minishift"
+weight: 10
+---
 
 This guide walks you through the installation of the latest version of
 [Knative Serving](https://github.com/knative/serving) on an

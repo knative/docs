@@ -1,4 +1,8 @@
-# Knative Install on IBM Cloud Kubernetes Service (IKS)
+---
+title: "Install on IBM Cloud Kubernetes Service (IKS)"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+weight: 10
+---
 
 This guide walks you through the installation of the latest version of Knative
 using pre-built images.
