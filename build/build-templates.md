@@ -1,5 +1,5 @@
 ---
-title: "Build Templates"
+title: "Build templates"
 #linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
 weight: 35
 ---
