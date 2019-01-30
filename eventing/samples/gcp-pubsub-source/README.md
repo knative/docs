@@ -1,4 +1,3 @@
-# GCP Cloud Pub/Sub - Source
 
 This sample shows how to configure the GCP PubSub event source. This event
 source is most useful as a bridge from other GCP services, such as
