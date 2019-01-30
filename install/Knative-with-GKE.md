@@ -1,4 +1,8 @@
-# Knative Install on Google Kubernetes Engine
+---
+title: "Install on Google Kubernetes Engine"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+weight: 15
+---
 
 This guide walks you through the installation of the latest version of all
 Knative components using pre-built images.

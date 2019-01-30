@@ -1,4 +1,8 @@
-# Knative Install on OpenShift
+---
+title: "Install on OpenShift"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+weight: 10
+---
 
 This guide walks you through the installation of the latest version of
 [Knative Serving](https://github.com/knative/serving) on an
