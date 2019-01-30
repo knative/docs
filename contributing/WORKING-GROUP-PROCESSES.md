@@ -1,6 +1,6 @@
 ---
-title: "Knative Working Group Processes and Guidelines"
-linkTitle: "Working Group Guidelines"
+title: "Knative working group processes and guidelines"
+linkTitle: "Working group guidelines"
 weight: 25
 ---
 

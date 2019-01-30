@@ -1,6 +1,6 @@
 ---
-title: "Knative Team Values"
-linkTitle: "Team Values"
+title: "Knative team values"
+linkTitle: "Team values"
 weight: 45
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: "Knative Steering Committee"
-linkTitle: "Steering Committee"
+title: "Knative steering committee"
+linkTitle: "Steering committee"
 weight: 35
 ---
 

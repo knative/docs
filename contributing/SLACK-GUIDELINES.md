@@ -1,6 +1,6 @@
 ---
-title: "Slack Usage Guidelines"
-linkTitle: "Slack Guidelines"
+title: "Slack usage guidelines"
+linkTitle: "Slack guidelines"
 weight: 40
 ---
 

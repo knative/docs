@@ -1,6 +1,6 @@
 
 ---
-title: "Knative Contribution Guidelines"
+title: "Knative contribution guidelines"
 linkTitle: "Contributing"
 weight: 20
 type: "docs"

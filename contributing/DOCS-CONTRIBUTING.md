@@ -1,6 +1,6 @@
 ---
-title: "Contributing to the Knative Documentation"
-linkTitle: "Contributing to Docs"
+title: "Contributing to the Knative documentation"
+linkTitle: "Contributing to docs"
 weight: 20
 ---
 

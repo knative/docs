@@ -1,6 +1,6 @@
 ---
-title: "Knative Community Roles"
-linkTitle: "Community Roles"
+title: "Knative community roles"
+linkTitle: "Community roles"
 weight: 50
 ---
 

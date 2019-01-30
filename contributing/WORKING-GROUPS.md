@@ -1,6 +1,6 @@
 ---
-title: "Knative Working Group"
-linkTitle: "Join Working Groups"
+title: "Knative working group"
+linkTitle: "Join working groups"
 weight: 25
 ---
 

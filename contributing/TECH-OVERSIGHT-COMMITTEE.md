@@ -1,6 +1,6 @@
 ---
-title: "Knative Technical Oversight Committee"
-linkTitle: "Technical Oversight Committee"
+title: "Knative technical oversight committee"
+linkTitle: "Technical oversight committee"
 weight: 30
 ---
 

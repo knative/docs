@@ -1,6 +1,6 @@
 ---
-title: "Reviewing and Merging Knative Pull Requests"
-linkTitle: "Pull Request Guidelines"
+title: "Reviewing and merging Knative pull requests"
+linkTitle: "Pull request guidelines"
 weight: 55
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: "Knative Contributor Guidelines"
+title: "Knative contributor guidelines"
 linkTitle: "Contributing to Knative"
 weight: 15
 ---
