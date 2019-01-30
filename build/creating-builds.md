@@ -1,4 +1,8 @@
-# Creating a simple Knative Build
+---
+title: "Creating a simple Knative build"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+weight: 30
+---
 
 Use this page to learn how to create and then run a simple build in Knative. In
 this topic, you create a Knative Build configuration file for a simple app,

@@ -1,4 +1,8 @@
-# Authentication
+---
+title: "Authentication"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+weight: 25
+---
 
 This document defines how authentication is provided during execution of a
 build.
