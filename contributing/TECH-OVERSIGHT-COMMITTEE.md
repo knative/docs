@@ -1,4 +1,8 @@
-# Knative Technical Oversight Committee
+---
+title: "Knative technical oversight committee"
+linkTitle: "Technical oversight committee"
+weight: 35
+---
 
 The Knative Technical Oversight Committee (TOC) is responsible for cross-cutting
 product and design decisions.

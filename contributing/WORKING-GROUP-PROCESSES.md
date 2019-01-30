@@ -1,4 +1,8 @@
-# Knative Working Group Processes
+---
+title: "Knative working group processes and guidelines"
+linkTitle: "Working group guidelines"
+weight: 30
+---
 
 This document describes the processes we use to manage the Knative working
 groups. This includes how they are formed, how leads are established, how they
