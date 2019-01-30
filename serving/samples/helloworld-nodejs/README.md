@@ -74,7 +74,10 @@ recreate the source files from this folder.
        "start": "node app.js"
      },
      "author": "",
-     "license": "Apache-2.0"
+     "license": "Apache-2.0",
+     "dependencies": {
+       "express": "^4.16.4"
+     }
    }
    ```
 

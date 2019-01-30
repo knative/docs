@@ -6,16 +6,8 @@
   "scripts": {
     "start": "node app.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/knative/docs.git"
-  },
   "author": "",
   "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/knative/serving/issues"
-  },
-  "homepage": "https://github.com/knative/serving#readme",
   "dependencies": {
     "express": "^4.16.4"
   }
