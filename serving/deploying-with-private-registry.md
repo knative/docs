@@ -13,7 +13,7 @@ If you do not want your container image to be publicly available, you may want t
 ibmcloud plugin install container-registry
 ```
 
-1. Choose a name for your first namespace, and create it. A namespace represents the spot within a registry that holds your images. You can set up multiple namespaces as well as control access to your namespaces by using IAM policies.
+1. Choose a name for your first namespace, and then create it. A namespace represents the spot within a registry that holds your images. You can set up multiple namespaces as well as control access to your namespaces by using IAM policies.
 
 ```
 ibmcloud cr namespace-add <my_namespace>
