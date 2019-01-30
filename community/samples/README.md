@@ -1,4 +1,4 @@
-### Sample apps
+## Sample apps
 
 | Sample Name   | Knative Component | Description                | Language(s)       |
 | --------------| ----------------- | -------------------------- | ----------------- |
