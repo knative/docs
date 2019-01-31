@@ -11,27 +11,29 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 apiVersion: serving.knative.dev/v1alpha1
-kind: Configuration
+kind: Service
 metadata:
-  name: stock-configuration-example
+  name: stock-service-example
   namespace: default
 spec:
-  revisionTemplate:
-    metadata:
-      labels:
-        knative.dev/type: container
-    spec:
-      container:
-        # This is the Go import path for the binary to containerize
-        # and substitute here.
-        image: github.com/knative/docs/serving/samples/rest-api-go
-        env:
-          - name: RESOURCE
-            value: share
-        readinessProbe:
-          httpGet:
-            path: /
-          initialDelaySeconds: 3
-          periodSeconds: 3
+  runLatest:
+    configuration:
+      revisionTemplate:
+        metadata:
+          labels:
+            knative.dev/type: container
+        spec:
+          container:
+            # This is the Go import path for the binary to containerize
+            # and substitute here.
+            image: github.com/knative/docs/serving/samples/rest-api-go
+            env:
+              - name: RESOURCE
+                value: stock
+            readinessProbe:
+              httpGet:
+                path: /
+              initialDelaySeconds: 0
+              periodSeconds: 3
+

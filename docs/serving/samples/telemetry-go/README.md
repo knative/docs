@@ -26,7 +26,7 @@ kubectl get pods --namespace knative-monitoring
 4. Check out the code:
 
 ```
-go get -d github.com/knative/docs/serving/samples/telemetry-go
+go get -d github.com/knative/docs/docs/serving/samples/telemetry-go
 ```
 
 ## Setup
@@ -67,7 +67,7 @@ docker push "${REPO}/serving/samples/telemetry-go"
     configuration file (`serving/samples/telemetry-go/sample.yaml`):
 
     - Manually replace:
-      `image: github.com/knative/docs/serving/samples/telemetry-go` with
+      `image: github.com/knative/docs/docs/serving/samples/telemetry-go` with
       `image: <YOUR_CONTAINER_REGISTRY>/serving/samples/telemetry-go`
 
 

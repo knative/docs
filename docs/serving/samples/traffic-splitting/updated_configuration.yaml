@@ -15,17 +15,23 @@
 apiVersion: serving.knative.dev/v1alpha1
 kind: Configuration
 metadata:
-  name: telemetrysample-configuration
+  name: stock-configuration-example
   namespace: default
-  labels:
-    app: telemetrysample
 spec:
   revisionTemplate:
     metadata:
       labels:
-        knative.dev/type: app
+        knative.dev/type: container
     spec:
       container:
         # This is the Go import path for the binary to containerize
         # and substitute here.
-        image: github.com/knative/docs/serving/samples/telemetry-go
+        image: github.com/knative/docs/docs/serving/samples/rest-api-go
+        env:
+          - name: RESOURCE
+            value: share
+        readinessProbe:
+          httpGet:
+            path: /
+          initialDelaySeconds: 3
+          periodSeconds: 3

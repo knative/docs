@@ -18,7 +18,7 @@ configuration.
    (`serving/samples/traffic-splitting/updated_configuration.yaml`:
 
    - Manually replace:
-     `image: github.com/knative/docs/serving/samples/rest-api-go` with
+     `image: github.com/knative/docs/docs/serving/samples/rest-api-go` with
      `image: <YOUR_CONTAINER_REGISTRY>/serving/samples/rest-api-go`
 
    Or
