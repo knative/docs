@@ -2,7 +2,7 @@
   "name": "knative-serving-helloworld",
   "version": "1.0.0",
   "description": "Simple hello world sample in Node",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
