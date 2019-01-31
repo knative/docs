@@ -18,9 +18,7 @@ While you can clone all of the code from this directory, hello world apps are
 generally more useful if you build them step-by-step. The following instructions
 recreate the source files from this folder.
 
-1. Create a new directory and initalize `npm`. You can accept the defaults, but
-   change the entry point to `app.js` to be consistent with the sample code
-   here.
+1. Create a new directory and initalize `npm`. 
 
    ```shell
    npm init
@@ -28,7 +26,7 @@ recreate the source files from this folder.
    package name: (helloworld-nodejs)
    version: (1.0.0)
    description:
-   entry point: (index.js) app.js
+   entry point: (index.js)
    test command:
    git repository:
    keywords:
@@ -42,7 +40,7 @@ recreate the source files from this folder.
    npm install express --save
    ```
 
-1. Create a new file named `app.js` and paste the following code:
+1. Create a new file named `index.js` and paste the following code:
 
    ```js
    const express = require("express");
@@ -68,9 +66,9 @@ recreate the source files from this folder.
      "name": "knative-serving-helloworld",
      "version": "1.0.0",
      "description": "",
-     "main": "app.js",
+     "main": "index.js",
      "scripts": {
-       "start": "node app.js"
+       "start": "node index.js"
      },
      "author": "",
      "license": "Apache-2.0",
