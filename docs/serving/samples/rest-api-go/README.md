@@ -19,7 +19,7 @@ then outputs the stock price.
    [Homebrew](https://brew.sh/) on OS X.
 
 ```shell
-go get -d github.com/knative/docs/serving/samples/rest-api-go
+go get -d github.com/knative/docs/docs/serving/samples/rest-api-go
 ```
 
 ## Setup
@@ -70,7 +70,7 @@ registry specific instructions for both setup and authorizing the image push.
 ```shell
 docker build \
   --tag "${REPO}/rest-api-go" \
-  --file serving/samples/rest-api-go/Dockerfile .
+  --file docs/serving/samples/rest-api-go/Dockerfile .
 ```
 
 5. Push your container to a container registry:
@@ -81,11 +81,11 @@ docker push "${REPO}/rest-api-go"
 
 6. Substitute the image reference path in the template with our published image
    path. The command below substitutes using the ${REPO} variable into a new
-   file called `serving/samples/rest-api-go/sample.yaml`.
+   file called `docs/serving/samples/rest-api-go/sample.yaml`.
 
    ```shell
-   envsubst < serving/samples/rest-api-go/sample-template.yaml > \
-   serving/samples/rest-api-go/sample.yaml
+   envsubst < docs/serving/samples/rest-api-go/sample-template.yaml > \
+   docs/serving/samples/rest-api-go/sample.yaml
    ```
 
 ## Deploy the Service
@@ -94,7 +94,7 @@ Now that our image is available from the container registry, we can deploy the
 Knative Serving sample:
 
 ```shell
-kubectl apply --filename serving/samples/rest-api-go/sample.yaml
+kubectl apply --filename docs/serving/samples/rest-api-go/sample.yaml
 ```
 
 The above command creates a Knative Service within your Kubernetes cluster in
@@ -243,5 +243,5 @@ between multiple Revisions.
 To clean up the sample Service:
 
 ```shell
-kubectl delete --filename serving/samples/rest-api-go/sample.yaml
+kubectl delete --filename docs/serving/samples/rest-api-go/sample.yaml
 ```

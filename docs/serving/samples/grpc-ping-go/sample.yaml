@@ -14,4 +14,3 @@ spec:
               - name: h2c
                 containerPort: 8080
 
-    

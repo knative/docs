@@ -1,4 +1,4 @@
-# Copyright 2019 The Knative Authors
+# Copyright 2018 The Knative Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,23 +13,25 @@
 # limitations under the License.
 
 apiVersion: serving.knative.dev/v1alpha1
-kind: Service
+kind: Configuration
 metadata:
-  name: stock-service-example
+  name: stock-configuration-example
   namespace: default
 spec:
- release:
-  revisions: ["${CURRENT}"]
-  configuration:
-    revisionTemplate:
-      spec:
-        container:
-          image: ${REPO}/rest-api-go
-          env:
-            - name: RESOURCE
-              value: stock
-          readinessProbe:
-            httpGet:
-              path: /
-            initialDelaySeconds: 0
-            periodSeconds: 3
+  revisionTemplate:
+    metadata:
+      labels:
+        knative.dev/type: container
+    spec:
+      container:
+        # This is the Go import path for the binary to containerize
+        # and substitute here.
+        image: github.com/knative/docs/docs/serving/samples/rest-api-go
+        env:
+          - name: RESOURCE
+            value: share
+        readinessProbe:
+          httpGet:
+            path: /
+          initialDelaySeconds: 3
+          periodSeconds: 3
