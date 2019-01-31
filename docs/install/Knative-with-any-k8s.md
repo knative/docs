@@ -59,22 +59,22 @@ your Knative installation, see
 [Performing a Custom Knative Installation](Knative-custom-install.md).
 
 1. Run the `kubectl apply` command to install Knative and its dependencies:
-   ```bash
-   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.3.0/serving.yaml \
-   --filename https://github.com/knative/build/releases/download/v0.3.0/release.yaml \
-   --filename https://github.com/knative/eventing/releases/download/v0.3.0/release.yaml \
-   --filename https://github.com/knative/eventing-sources/releases/download/v0.3.0/release.yaml \
-   --filename https://github.com/knative/serving/releases/download/v0.3.0/monitoring.yaml
-   ```
-1. Monitor the Knative components until all of the components show a `STATUS` of
-   `Running`:
-   ```bash
-   kubectl get pods --namespace knative-serving
-   kubectl get pods --namespace knative-build
-   kubectl get pods --namespace knative-eventing
-   kubectl get pods --namespace knative-sources
-   kubectl get pods --namespace knative-monitoring
-   ```
+    ```bash
+    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.3.0/serving.yaml \
+    --filename https://github.com/knative/build/releases/download/v0.3.0/release.yaml \
+    --filename https://github.com/knative/eventing/releases/download/v0.3.0/release.yaml \
+    --filename https://github.com/knative/eventing-sources/releases/download/v0.3.0/release.yaml \
+    --filename https://github.com/knative/serving/releases/download/v0.3.0/monitoring.yaml
+    ```
+1. Monitor the Knative components until all of the components show a
+   `STATUS` of `Running`:
+    ```bash
+    kubectl get pods --namespace knative-serving
+    kubectl get pods --namespace knative-build
+    kubectl get pods --namespace knative-eventing
+    kubectl get pods --namespace knative-sources
+    kubectl get pods --namespace knative-monitoring
+    ```
 
 ## What's next
 
