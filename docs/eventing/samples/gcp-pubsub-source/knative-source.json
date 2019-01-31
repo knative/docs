@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "ahmetb-samples-playground",
+  "private_key_id": "91e188465329cc6fa00b002f8f1e7dadb57bcac6",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC+1eAHIW3RTFfb\nTBzFiVebiIG8qmwiCFQ1SVdG+JBUXSpyrzZtxJnEHm6oiHK/Fn+TYuJwBuqbqjeC\nz6fjYjIH3fqESJvA2HLlobUBXEhVugdC+FxVFzUQXrZ5UPo1p3nUPcRpP/Hd6QUs\nHvxvZm5P666ilgxVE+/YhYgwi/EFy5jV/GN2O3SBNK9gdyuyuu0AV5PE35G6Vqdr\n1nlFOlhlSAeOVDsgX62rD4yF/tLyfF3931vHoxmX4kdoDNdueD4AtwYulxOX1cV4\n2Vb67WIOia2dkxZ4T25l6Hg5ZAeTKIaN1f9NN3poMvXpU0mDNgHwfa+3MCU74A1f\nQu2DsP8VAgMBAAECggEAEg+W0MXyqUTS6c/Vx0I81tz//lWYv03Pfm2PA4oByuI4\nYrs/aPsa3GtO6MdlKL2d3FqW+KhG6u2crFYv2v7Polv5WiyvBPzXPvFjepn7xJVD\nG6z6vBjirkZweaHW1F4h0xr3bEifgPONSEQ0euyUUx8Im52c1C57XCAjKAkOihA1\nRq6TPgrPomB05K0OWR8hBMq9z3ALSZxn9HJiJaDt+EQgPqBPcDEqde/Mdf70a9FL\nBsiu3TZsElv/kqdP2Xrd5FXf++HlNoWLn58dqGx6QsTsEPF6SKqIiYJlb96uIUBG\nbUUPGseElGApE3s/qIJcEixiIxqbn4Uu4tKKzzyskQKBgQDySPT4DB0m7suYMG/A\nSv8DFXOg97l5qxY+IUTMXUUWOrqE+t84oro77I+abCdOtETeVaDRbTU3WxxR4UAJ\nxKedqI0Z22Hg17pMqU80Q3ysg53dPMndINPKAV1HdDJ7fN9gtUQfgArNDQQs8vxK\nBmKBTRN+trvw43Bn6aT9+Wi+GQKBgQDJo1fymgOnUFPdYNubRn0xTbrrDh6dOQM4\naJ96Q0XcpUFmpNoGPyILElYpC3DaCi62u9c0pxqaNAU2u5K7LmsZL3T3VaCWotqv\n156N9u8qAb2S2DWpRR+tDvcqJ8/qEe9uoViiADRRkWLFbXE4voMzhGD+xbDTfdFD\nL8OiPmFwXQKBgDdSGT0Z5v4gwDP7u0h410lo+IHkjmENg4KkLgVLtp6gwj3i2l0g\nKs3L8e4ci80YtDDf9FxdRy1gjFLVz71rPapt9enVgb/JAizG6+LPFgR9+OmvG5h2\nCmWxcg8CpRQ1Kvv155wZrF2tfyqUQK7WTl+frbfdGYSjKeNQIfArppLhAoGBALsQ\nTwdC2yDd5O/8a8AiJQMYmdB3yO8TdWlfppRG1QleRs5zIdGpwGuFF2n8szWVPMFK\ngtzWKlfk6vFcE0SUS8eRv3G2fsVBUKDR6MbL0BWoh7cz3pSrDDgBKkxxovIEsZxx\nE0k351HFD10Zq3B5Tj79EP9LaEDM+Nbb+SMLvFoBAoGBAKh1FNESvVFTYbNcxxiR\npZF1XAIDqh3IwE+aPt01SsGtgDhsf7ngyGM+cLvFKUKMSEZNQeN1kBjGVeOEND2r\nNeiB15zV8DD94dLSc5ocoopeEuzqcUbACSHyDCy58J99ZFm+av5mpimrdanZQo10\nZqNmH4rLxpJXP61IMWjIcY7R\n-----END PRIVATE KEY-----\n",
+  "client_email": "knative-source@ahmetb-samples-playground.iam.gserviceaccount.com",
+  "client_id": "102872070865401401945",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/knative-source%40ahmetb-samples-playground.iam.gserviceaccount.com"
+}

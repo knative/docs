@@ -1,4 +1,3 @@
-
 ---
 title: "Knative contribution guidelines"
 linkTitle: "Contributing"

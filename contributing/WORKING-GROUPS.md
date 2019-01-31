@@ -2,6 +2,7 @@
 title: "Knative working group"
 linkTitle: "Join working groups"
 weight: 25
+type:
 ---
 
 Most community activity is organized into _working groups_.
