@@ -18,7 +18,7 @@ configuration file.
 4. Check out the code:
 
 ```
-go get -d github.com/knative/docs/serving/samples/rest-api-go
+go get -d github.com/knative/docs/docs/serving/samples/rest-api-go
 ```
 
 ## Setup
@@ -59,7 +59,7 @@ docker push "${REPO}/serving/samples/rest-api-go"
    configuration files (`serving/samples/rest-api-go/sample.yaml`:
 
    - Manually replace:
-     `image: github.com/knative/docs/serving/samples/rest-api-go` with
+     `image: github.com/knative/docs/docs/serving/samples/rest-api-go` with
      `image: <YOUR_CONTAINER_REGISTRY>/serving/samples/rest-api-go`
 
    Or

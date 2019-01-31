@@ -27,7 +27,7 @@ the Login service.
 4. Check out the code:
 
 ```
-go get -d github.com/knative/docs/serving/samples/knative-routing-go
+go get -d github.com/knative/docs/docs/serving/samples/knative-routing-go
 ```
 
 ## Setup
@@ -68,7 +68,7 @@ docker push "${REPO}/serving/samples/knative-routing-go"
    configuration file `serving/samples/knative-routing-go/sample.yaml`:
 
    - Manually replace:
-     `image: github.com/knative/docs/serving/samples/knative-routing-go` with
+     `image: github.com/knative/docs/docs/serving/samples/knative-routing-go` with
      `image: <YOUR_CONTAINER_REGISTRY>/serving/samples/knative-routing-go`
 
    Or

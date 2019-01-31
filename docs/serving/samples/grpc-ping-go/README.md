@@ -25,7 +25,7 @@ docker build \
 docker push "${REPO}/serving/samples/grpc-ping-go"
 
 # Replace the image reference with our published image.
-perl -pi -e "s@github.com/knative/docs/serving/samples/grpc-ping-go@${REPO}/serving/samples/grpc-ping-go@g" serving/samples/grpc-ping-go/*.yaml
+perl -pi -e "s@github.com/knative/docs/docs/serving/samples/grpc-ping-go@${REPO}/serving/samples/grpc-ping-go@g" serving/samples/grpc-ping-go/*.yaml
 
 # Deploy the Knative sample.
 kubectl apply --filename serving/samples/grpc-ping-go/sample.yaml
