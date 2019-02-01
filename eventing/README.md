@@ -246,7 +246,7 @@ The CronJobSource fires events based on given [Cron](https://en.wikipedia.org/wi
 - [Run samples](samples/)
 
 ## Configuration
-- [Default Channels](default-channels.md) provide a way to choose the
+- [Default Channels](channels/default-channels.md) provide a way to choose the
 persistence strategy for Channels across the cluster.
 
 ---

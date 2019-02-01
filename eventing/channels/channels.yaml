@@ -11,7 +11,7 @@ channels:
     status: Proof of Concept
     support: None
     description: >
-      Channels are backed by [Apache Kafka](http://kafka.apache.org/) topics
+      Channels are backed by [Apache Kafka](http://kafka.apache.org/) topics.
   - name: GCP PubSub
     url: https://github.com/knative/eventing/tree/master/contrib/gcppubsub/config
     status: Proof of Concept
