@@ -1,6 +1,6 @@
 ---
 title: "Knative Eventing samples"
 linkTitle: "Sample apps"
-weight: 30
+weight: 60
 type: "docs"
 ---
