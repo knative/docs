@@ -1,4 +1,3 @@
-# Installing Knative
 
 Follow this guide to install Knative components on a platform of your choice.
 
@@ -82,7 +81,7 @@ follow the custom install guide:
 Follow this guide to install and set up the available observability
 plugins on a Knative cluster.
 
-* [Monitoring, Logging and Tracing Installation](../serving/installing-logging-metrics-traces.md)  
+* [Monitoring, Logging and Tracing Installation](../serving/installing-logging-metrics-traces.md)
 
 ## Deploying an app
 
@@ -94,8 +93,8 @@ Now you're ready to deploy an app:
 
 - View the available [sample apps](../serving/samples) and deploy one of your
   choosing.
-  
-- Walk through the Google codelab, 
+
+- Walk through the Google codelab,
   [Using Knative to deploy serverless applications to Kubernetes](https://codelabs.developers.google.com/codelabs/knative-intro/#0).
 
 ## Configuring Knative Serving

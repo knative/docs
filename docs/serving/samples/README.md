@@ -1,4 +1,3 @@
-# Knative serving sample applications
 
 This directory contains sample applications, developed on Knative, to illustrate
 different use-cases and resources. See

@@ -1,4 +1,3 @@
-
 ---
 title: "Knative contribution guidelines"
 linkTitle: "Contributing"
@@ -16,4 +15,4 @@ Learn how to join the community of Knative contributors.
 Also see our [Community page](community) for links to Knative chats, discussions, or Q&A.
 
 
-{{% readfile file="docs/contributing/README.md" markdown="true" %}}
+{{% readfile file="contributing/README.md" markdown="true" %}}

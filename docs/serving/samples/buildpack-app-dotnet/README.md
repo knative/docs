@@ -1,4 +1,3 @@
-# Buildpack Sample App
 
 A sample app that demonstrates using
 [Cloud Foundry](https://www.cloudfoundry.org/) buildpacks on Knative Serving,

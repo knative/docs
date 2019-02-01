@@ -1,4 +1,3 @@
-# Orchestrating a source-to-URL deployment on Kubernetes
 
 A Go sample that shows how to use Knative to go from source code in a git
 repository to a running application with a URL.

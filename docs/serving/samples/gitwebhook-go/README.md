@@ -1,4 +1,3 @@
-# GitHub Webhook - Go sample
 
 A handler written in Go that demonstrates interacting with GitHub through a
 webhook.

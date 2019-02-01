@@ -1,4 +1,3 @@
-# Creating a RESTful Service
 
 This sample demonstrates creating a simple RESTful service. The exposed endpoint
 takes a stock ticker (i.e. stock symbol), then outputs the stock price. The

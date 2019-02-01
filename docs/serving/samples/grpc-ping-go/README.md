@@ -1,4 +1,3 @@
-# gRPC Ping
 
 A simple gRPC server written in Go that you can use for testing.
 
