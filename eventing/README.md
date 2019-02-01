@@ -217,8 +217,8 @@ FTP server for new files or generate events at a set time interval.
 **Spec fields**:
 
 - `image` (**required**): `string` A docker image of the container to be run.
-- `args`: `[]string` Command-line arguments. Any `--sink=` argument will be
-  filled in with the DNS address of the `sink` object.
+- `args`: `[]string` Command-line arguments. If no `--sink` flag is provided, 
+   one will be added and filled in with the DNS address of the `sink` object.
 - `env`: `map[string]string` Environment variables to be set in the container.
 - `serviceAccountName`: `string` The name of the ServiceAccount to run the
   container as.
