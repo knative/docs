@@ -52,7 +52,7 @@ object. Events are delivered to Services or forwarded to other channels
 [Subscriptions](https://github.com/knative/eventing/blob/master/pkg/apis/eventing/v1alpha1/subscription_types.go#L35).
 This allows message delivery in a cluster to vary based on requirements, so that
 some events might be handled by an in-memory implementation while others would
-be persisted using Kafka or NATS Streaming.
+be persisted using Apache Kafka or NATS Streaming.
 
 ### Future design goals
 
@@ -245,7 +245,7 @@ The CronJobSource fires events based on given [Cron](https://en.wikipedia.org/wi
 - [Run samples](samples/)
 
 ## Configuration
-- [Default Channels](default-channels.md) provide a way to choose the
+- [Default Channels](channels/default-channels.md) provide a way to choose the
 persistence strategy for Channels across the cluster.
 
 ---
