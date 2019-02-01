@@ -1,7 +1,4 @@
----
-title: "Default channels"
-weight: 2
----
+# Default Channels
 
 The default channel configuration allows channels to be created without
 specifying a provisioner. This leaves the selection of channel provisioner and
