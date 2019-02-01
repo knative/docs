@@ -1,7 +1,7 @@
 ---
-title: "Knative Serving Sample Applications"
-linkTitle: "Sample Apps"
+title: "Routing across multiple Knative services - Go"
+linkTitle: "Routing services - Go"
 weight: 1
 ---
 
-{{% readfile file="docs/serving/samples/README.md" markdown="true" %}}
+{{% readfile file="docs/serving/samples/knative-routing-go/README.md" markdown="true" %}}

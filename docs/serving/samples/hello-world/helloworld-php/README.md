@@ -1,8 +1,7 @@
-# Hello World - Python sample
 
-A simple web app written in Python that you can use for testing. It reads in an
-env variable `TARGET` and prints "Hello \${TARGET}!". If TARGET is not
-specified, it will use "World" as the TARGET.
+A simple web app written in PHP that you can use for testing. It reads in an env
+variable `TARGET` and prints "Hello \${TARGET}!". If TARGET is not specified, it
+will use "World" as the TARGET.
 
 ## Prerequisites
 
@@ -12,7 +11,7 @@ specified, it will use "World" as the TARGET.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
 
-## Steps to recreate the sample code
+## Recreating the sample code
 
 While you can clone all of the code from this directory, hello world apps are
 generally more useful if you build them step-by-step. The following instructions
@@ -25,47 +24,37 @@ recreate the source files from this folder.
    cd app
    ```
 
-1. Create a file named `app.py` and copy the code block below into it:
+1. Create a file named `index.php` and copy the code block below into it:
 
-   ```python
-   import os
-
-   from flask import Flask
-
-   app = Flask(__name__)
-
-   @app.route('/')
-   def hello_world():
-       target = os.environ.get('TARGET', 'World')
-       return 'Hello {}!\n'.format(target)
-
-   if __name__ == "__main__":
-       app.run(debug=True,host='0.0.0.0',port=int(os.environ.get('PORT', 8080)))
+   ```php
+   <?php
+   $target = getenv('TARGET', true) ?: "World";
+   echo sprintf("Hello %s!\n", $target);
    ```
 
 1. Create a file named `Dockerfile` and copy the code block below into it. See
-   [official Python docker image](https://hub.docker.com/_/python/) for more
-   details.
+   [official PHP docker image](https://hub.docker.com/_/php/) for more details.
 
     ```docker
-    # Use the official Python image.
-    # https://hub.docker.com/_/python
-    FROM python
+    # Use the official PHP 7.2 image.
+    # https://hub.docker.com/_/php
+    FROM php:7.2.6-apache
 
     # Copy local code to the container image.
-    ENV APP_HOME /app
-    WORKDIR $APP_HOME
-    COPY . .
+    COPY index.php /var/www/html/
 
-    # Install production dependencies.
-    RUN pip install Flask
+    # Use the PORT environment variable in Apache configuration files.
+    RUN sed -i 's/80/${PORT}/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
+
+    # Configure PHP for development.
+    # Switch to the production php.ini for production operations.
+    # RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
+    # https://hub.docker.com/_/php#configuration
+    RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
     # Service must listen to $PORT environment variable.
     # This default value facilitates local development.
     ENV PORT 8080
-
-    # Run the web service on container startup.
-    CMD ["python", "app.py"]
     ```
 
 1. Create a new file, `service.yaml` and copy the following service definition
@@ -76,7 +65,7 @@ recreate the source files from this folder.
    apiVersion: serving.knative.dev/v1alpha1
    kind: Service
    metadata:
-     name: helloworld-python
+     name: helloworld-php
      namespace: default
    spec:
      runLatest:
@@ -84,13 +73,13 @@ recreate the source files from this folder.
          revisionTemplate:
            spec:
              container:
-               image: docker.io/{username}/helloworld-python
+               image: docker.io/{username}/helloworld-php
                env:
                  - name: TARGET
-                   value: "Python Sample v1"
+                   value: "PHP Sample v1"
    ```
 
-## Build and deploy this sample
+## Building and deploying the sample
 
 Once you have recreated the sample code files (or used the files in the sample
 folder) you're ready to build and deploy the sample app.
@@ -101,10 +90,10 @@ folder) you're ready to build and deploy the sample app.
 
    ```shell
    # Build the container on your local machine
-   docker build -t {username}/helloworld-python .
+   docker build -t {username}/helloworld-php .
 
    # Push the container to docker registry
-   docker push {username}/helloworld-python
+   docker push {username}/helloworld-php
    ```
 
 1. After the build has completed and the container is pushed to docker hub, you
@@ -142,25 +131,26 @@ folder) you're ready to build and deploy the sample app.
 
    NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
    xxxxxxx-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
+
    ```
 
 1. To find the URL for your service, use
 
    ```
-   kubectl get ksvc helloworld-python  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+   kubectl get ksvc helloworld-php  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
    NAME                DOMAIN
-   helloworld-python   helloworld-python.default.example.com
+   helloworld-php      helloworld-php.default.example.com
    ```
 
 1. Now you can make a request to your app to see the result. Replace
    `{IP_ADDRESS}` with the address you see returned in the previous step.
 
    ```shell
-   curl -H "Host: helloworld-python.default.example.com" http://{IP_ADDRESS}
-   Hello World: Python Sample v1!
+   curl -H "Host: helloworld-php.default.example.com" http://{IP_ADDRESS}
+   Hello World: PHP Sample v1!
    ```
 
-## Remove the sample app deployment
+## Removing the sample app deployment
 
 To remove the sample app from your cluster, delete the service record:
 

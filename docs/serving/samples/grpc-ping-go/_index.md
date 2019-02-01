@@ -1,7 +1,7 @@
 ---
-title: "Knative Serving Sample Applications"
-linkTitle: "Sample Apps"
+title: "gRPC server - Go"
+#linkTitle: ""
 weight: 1
 ---
 
-{{% readfile file="docs/serving/samples/README.md" markdown="true" %}}
+{{% readfile file="docs/serving/samples/grpc-ping-go/README.md" markdown="true" %}}

@@ -1,7 +1,7 @@
 ---
-title: "Knative Serving Sample Applications"
-linkTitle: "Sample Apps"
+title: "Simple Traffic Splitting Between Revisions"
+linkTitle: "Traffic splitting"
 weight: 1
 ---
 
-{{% readfile file="docs/serving/samples/README.md" markdown="true" %}}
+{{% readfile file="docs/serving/samples/traffic-splitting/README.md" markdown="true" %}}

@@ -1,7 +1,7 @@
 ---
-title: "Knative Serving Sample Applications"
-linkTitle: "Sample Apps"
+title: "Creating a RESTful Service - Go"
+linkTitle: "RESTful service - Go"
 weight: 1
 ---
 
-{{% readfile file="docs/serving/samples/README.md" markdown="true" %}}
+{{% readfile file="docs/serving/samples/rest-api-go/README.md" markdown="true" %}}

@@ -1,7 +1,7 @@
 ---
-title: "Knative Serving Sample Applications"
-linkTitle: "Sample Apps"
+title: "GitHub webhook sample - Go"
+linkTitle: "GitHub Webhook - Go"
 weight: 1
 ---
 
-{{% readfile file="docs/serving/samples/README.md" markdown="true" %}}
+{{% readfile file="docs/serving/samples/gitwebhook-go/README.md" markdown="true" %}}

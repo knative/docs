@@ -1,7 +1,7 @@
 ---
-title: "Knative Serving Sample Applications"
-linkTitle: "Sample Apps"
+title: "Thumbnailer External Dependencies Demo - Go"
+linkTitle: "Deploy, build, and serve - Go"
 weight: 1
 ---
 
-{{% readfile file="docs/serving/samples/README.md" markdown="true" %}}
+{{% readfile file="docs/serving/samples/thumbnailer-go/README.md" markdown="true" %}}

@@ -1,4 +1,3 @@
-# Hello World - Ruby sample
 
 A simple web app written in Ruby that you can use for testing. It reads in an
 env variable `TARGET` and prints "Hello \${TARGET}!". If TARGET is not
