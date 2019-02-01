@@ -5,4 +5,4 @@ weight: 50
 type: "docs"
 ---
 
-{{% readfile file="/docs/reference/serving.md" %}}
+{{% readfile file="docs/reference/serving.md" %}}

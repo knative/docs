@@ -1,4 +1,3 @@
-# Autoscale Sample
 
 A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 

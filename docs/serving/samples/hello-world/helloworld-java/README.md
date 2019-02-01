@@ -1,4 +1,3 @@
-# Hello World - Spring Boot Java sample
 
 A simple web app written in Java using Spring Boot 2.0 that you can use for
 testing. It reads in an env variable `TARGET` and prints "Hello \${TARGET}!". If

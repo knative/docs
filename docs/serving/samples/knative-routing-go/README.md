@@ -1,4 +1,3 @@
-# Routing across Knative Services
 
 This example shows how to map multiple Knative services to different paths under
 a single domain name using the Istio VirtualService concept. Istio is a

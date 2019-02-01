@@ -1,4 +1,3 @@
-# Telemetry Sample
 
 This sample runs a simple web server that makes calls to other in-cluster
 services and responds to requests with "Hello World!". The purpose of this

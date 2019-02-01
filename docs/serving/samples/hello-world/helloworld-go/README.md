@@ -1,8 +1,7 @@
-# Hello World - .NET Core sample
 
-A simple web app written in C# using .NET Core 2.2 that you can use for testing.
-It reads in an env variable `TARGET` and prints "Hello \${TARGET}!". If TARGET
-is not specified, it will use "World" as the TARGET.
+A simple web app written in Go that you can use for testing. It reads in an env
+variable `TARGET` and prints `Hello ${TARGET}!`. If `TARGET` is not specified,
+it will use `World` as the `TARGET`.
 
 ## Prerequisites
 
@@ -11,7 +10,6 @@ is not specified, it will use "World" as the TARGET.
   if you need to create one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
-- You have installed [.NET Core SDK 2.2](https://www.microsoft.com/net/core).
 
 ## Recreating the sample code
 
@@ -19,72 +17,74 @@ While you can clone all of the code from this directory, hello world apps are
 generally more useful if you build them step-by-step. The following instructions
 recreate the source files from this folder.
 
-1. First, make sure you have [.NET Core SDK 2.2](https://www.microsoft.com/net/core) installed:
+1. Create a new file named `helloworld.go` and paste the following code. This
+   code creates a basic web server which listens on port 8080:
 
-   ```shell
-   dotnet --version
-   2.2.102
-   ```
+   ```go
+   package main
 
-1. From the console, create a new empty web project using the dotnet command:
+   import (
+     "fmt"
+     "log"
+     "net/http"
+     "os"
+   )
 
-   ```shell
-   dotnet new web -o helloworld-csharp
-   ```
+   func handler(w http.ResponseWriter, r *http.Request) {
+     log.Print("Hello world received a request.")
+     target := os.Getenv("TARGET")
+     if target == "" {
+       target = "World"
+     }
+     fmt.Fprintf(w, "Hello %s!\n", target)
+   }
 
-1. Update the `CreateWebHostBuilder` definition in `Program.cs` by adding
-   `.UseUrls()` to define the serving port:
+   func main() {
+     log.Print("Hello world sample started.")
 
-   ```csharp
-   public static IWebHostBuilder CreateWebHostBuilder(string[] args)
-   {
-       string port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-       string url = String.Concat("http://0.0.0.0:", port);
+     http.HandleFunc("/", handler)
 
-       return WebHost.CreateDefaultBuilder(args)
-           .UseStartup<Startup>().UseUrls(url);
+     port := os.Getenv("PORT")
+     if port == "" {
+       port = "8080"
+     }
+
+     log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
    }
    ```
 
-1. Update the `app.Run(...)` statement in `Startup.cs` to read and return the
-   TARGET environment variable:
-
-   ```csharp
-   app.Run(async (context) =>
-   {
-       var target = Environment.GetEnvironmentVariable("TARGET") ?? "World";
-       await context.Response.WriteAsync($"Hello {target}\n");
-   });
-   ```
-
 1. In your project directory, create a file named `Dockerfile` and copy the code
-   block below into it. For detailed instructions on dockerizing a .NET core
-   app, see
-   [dockerizing a .NET core app](https://docs.microsoft.com/en-us/dotnet/core/docker/docker-basics-dotnet-core#dockerize-the-net-core-application).
+   block below into it. For detailed instructions on dockerizing a Go app, see
+   [Deploying Go servers with Docker](https://blog.golang.org/docker).
 
    ```docker
-   # Use Microsoft's official .NET image.
-   # https://hub.docker.com/r/microsoft/dotnet
-   FROM microsoft/dotnet:2.2-sdk
-
-   # Install production dependencies.
-   # Copy csproj and restore as distinct layers.
-   WORKDIR /app
-   COPY *.csproj .
-   RUN dotnet restore
+   # Use the offical Golang image to create a build artifact.
+   # This is based on Debian and sets the GOPATH to /go.
+   # https://hub.docker.com/_/golang
+   FROM golang as builder
 
    # Copy local code to the container image.
+   WORKDIR /go/src/github.com/knative/docs/helloworld
    COPY . .
 
-   # Build a release artifact.
-   RUN dotnet publish -c Release -o out
+   # Build the helloworld command inside the container.
+   # (You may fetch or manage dependencies here,
+   # either manually or with a tool like "godep".)
+   RUN CGO_ENABLED=0 GOOS=linux go build -v -o helloworld
+
+   # Use a Docker multi-stage build to create a lean production image.
+   # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
+   FROM alpine
+
+   # Copy the binary to the production image from the builder stage.
+   COPY --from=builder /go/src/github.com/knative/docs/helloworld/helloworld /helloworld
 
    # Service must listen to $PORT environment variable.
    # This default value facilitates local development.
    ENV PORT 8080
 
    # Run the web service on container startup.
-   CMD ["dotnet", "out/helloworld-csharp.dll"]
+   CMD ["/helloworld"]
    ```
 
 1. Create a new file, `service.yaml` and copy the following service definition
@@ -95,7 +95,7 @@ recreate the source files from this folder.
    apiVersion: serving.knative.dev/v1alpha1
    kind: Service
    metadata:
-     name: helloworld-csharp
+     name: helloworld-go
      namespace: default
    spec:
      runLatest:
@@ -103,10 +103,10 @@ recreate the source files from this folder.
          revisionTemplate:
            spec:
              container:
-               image: docker.io/{username}/helloworld-csharp
+               image: docker.io/{username}/helloworld-go
                env:
                  - name: TARGET
-                   value: "C# Sample v1"
+                   value: "Go Sample v1"
    ```
 
 ## Building and deploying the sample
@@ -120,10 +120,10 @@ folder) you're ready to build and deploy the sample app.
 
    ```shell
    # Build the container on your local machine
-   docker build -t {username}/helloworld-csharp .
+   docker build -t {username}/helloworld-go .
 
    # Push the container to docker registry
-   docker push {username}/helloworld-csharp
+   docker push {username}/helloworld-go
    ```
 
 1. After the build has completed and the container is pushed to docker hub, you
@@ -142,9 +142,10 @@ folder) you're ready to build and deploy the sample app.
      for your app.
    - Automatically scale your pods up and down (including to zero active pods).
 
-1. To find the IP address for your service, use these commands to get the
-   ingress IP for your cluster. If your cluster is new, it may take sometime for
-   the service to get asssigned an external IP address.
+1. Run the following command to find the external IP address for your service.
+   The ingress IP for your cluster is returned. If you just created your
+   cluster, you might need to wait and rerun the command until your service gets
+   asssigned an external IP address.
 
    ```shell
    # In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
@@ -158,26 +159,44 @@ folder) you're ready to build and deploy the sample app.
    fi
 
    kubectl get svc $INGRESSGATEWAY --namespace istio-system
+   ```
 
+   Example:
+
+   ```shell
    NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
    xxxxxxx-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
    ```
 
-1. To find the URL for your service, use
-
-   ```
-   kubectl get ksvc helloworld-csharp  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
-   NAME                DOMAIN
-   helloworld-csharp   helloworld-csharp.default.example.com
-   ```
-
-1. Now you can make a request to your app to see the result. Replace
-   `{IP_ADDRESS}` with the address you see returned in the previous step.
+1. Run the following command to find the domain URL for your service:
 
    ```shell
-   curl -H "Host: helloworld-csharp.default.example.com" http://{IP_ADDRESS}
-   Hello World!
+   kubectl get ksvc helloworld-go  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
    ```
+
+   Example:
+
+   ```shell
+   NAME                DOMAIN
+   helloworld-go       helloworld-go.default.example.com
+   ```
+
+1. Test your app by sending it a request. Use the following `curl` command with
+   the domain URL `helloworld-go.default.example.com` and `EXTERNAL-IP` address
+   that you retrieved in the previous steps:
+
+   ```shell
+   curl -H "Host: helloworld-go.default.example.com" http://{EXTERNAL_IP_ADDRESS}
+   ```
+
+   Example:
+
+   ```shell
+   curl -H "Host: helloworld-go.default.example.com" http://35.203.155.229
+   Hello World: Go Sample v1!
+   ```
+
+   > Note: Add `-v` option to get more detail if the `curl` command failed.
 
 ## Removing the sample app deployment
 

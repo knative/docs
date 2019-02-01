@@ -1,4 +1,3 @@
-# Creating a RESTful Service
 
 This sample demonstrates creating and running a simple RESTful service on
 Knative Serving. The exposed endpoint takes a stock ticker (i.e. stock symbol),
