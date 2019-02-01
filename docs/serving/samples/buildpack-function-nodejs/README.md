@@ -1,4 +1,3 @@
-# Buildpack Sample Function
 
 A sample function that demonstrates using
 [Cloud Foundry](https://www.cloudfoundry.org/) buildpacks on Knative Serving,

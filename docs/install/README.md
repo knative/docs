@@ -1,4 +1,3 @@
-# Installing Knative
 
 Follow this guide to install Knative components on a platform of your choice.
 

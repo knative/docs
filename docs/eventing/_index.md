@@ -1,5 +1,5 @@
 ---
-title: "Knative Eventing Component"
+title: "Knative Eventing"
 linkTitle: "Eventing Component"
 weight: 60
 type: "docs"

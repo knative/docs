@@ -1,4 +1,8 @@
-# Routing and managing traffic with blue/green deployment
+---
+title: "Routing and managing traffic with blue/green deployment"
+linkTitle: "Routing and managing traffic"
+weight:
+---
 
 This sample demonstrates updating an application to a new version using a
 blue/green traffic routing pattern. With Knative, you can safely reroute traffic

@@ -1,4 +1,3 @@
-# Simple Traffic Splitting Between Revisions
 
 This samples builds off the [Creating a RESTful Service](../rest-api-go) sample
 to illustrate applying a revision, then using that revision for manual traffic
