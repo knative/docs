@@ -68,7 +68,7 @@ Builders should expect a Build to implement the following conventions:
 - `/builder/home`: This volume is exposed to steps via `$HOME`.
 
 - Credentials attached to the Build's service account may be exposed as Git or
-  Docker credentials as outlined [here](./auth/).
+  Docker credentials as outlined [here](auth/).
 
 ---
 
