@@ -4,4 +4,4 @@ linkTitle: "Build Component"
 weight: 20
 ---
 
-{{% readfile file="docs/build/" markdown="true" %}}
+{{% readfile file="docs/build/README.md" markdown="true" %}}
