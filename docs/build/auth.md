@@ -32,19 +32,21 @@ into their respective files in `$HOME`.
 
 1.  Define a `Secret` containing your SSH private key:
 
-    ```yaml
-    apiVersion: v1
-    kind: Secret
-    metadata:
-      name: ssh-key
-      annotations:
-        build.knative.dev/git-0: https://github.com # Described below
-    type: kubernetes.io/ssh-auth
-    data:
-      ssh-privatekey: <base64 encoded>
-      # This is non-standard, but its use is encouraged to make this more secure.
-      known_hosts: <base64 encoded>
-    ```
+     ```
+     yaml
+     apiVersion: v1
+     kind: Secret
+     metadata:
+       name: ssh-key
+       annotations:
+         build.knative.dev/git-0: https://github.com # Described below
+     type: kubernetes.io/ssh-auth
+     data:
+       ssh-privatekey: <base64 encoded>
+       # This is non-standard, but its use is encouraged to make this more secure.
+       known_hosts: <base64 encoded>
+     ```
+     
     `build.knative.dev/git-0` in the example above specifies which web address
     these credentials belong to. See
     [Guiding Credential Selection](#guiding-credential-selection) below for
@@ -58,33 +60,36 @@ into their respective files in `$HOME`.
 
 1.  Next, direct a `ServiceAccount` to use this `Secret`:
 
-    ```yaml
-    apiVersion: v1
-    kind: ServiceAccount
-    metadata:
-      name: build-bot
-    secrets:
-      - name: ssh-key
-    ```
+     ```
+     yaml
+     apiVersion: v1
+     kind: ServiceAccount
+     metadata:
+       name: build-bot
+     secrets:
+       - name: ssh-key
+     ```
 
 1.  Then use that `ServiceAccount` in your `Build`:
 
-    ```yaml
-    apiVersion: build.knative.dev/v1alpha1
-    kind: Build
-    metadata:
-      name: build-with-ssh-auth
-    spec:
-      serviceAccountName: build-bot
-      steps:
-      ...
-    ```
+     ```
+     yaml
+     apiVersion: build.knative.dev/v1alpha1
+     kind: Build
+     metadata:
+       name: build-with-ssh-auth
+     spec:
+       serviceAccountName: build-bot
+       steps:
+       ...
+     ```
 
 1.  Execute the build:
 
-    ```shell
-    kubectl apply --filename secret.yaml serviceaccount.yaml build.yaml
-    ```
+     ```
+     shell
+     kubectl apply --filename secret.yaml serviceaccount.yaml build.yaml
+     ```
 
 When the build executes, before steps execute, a `~/.ssh/config` will be
 generated containing the key configured in the `Secret`. This key is then used
@@ -95,52 +100,56 @@ to authenticate with the Git service.
 1.  Define a `Secret` containing the username and password that the build should
     use to authenticate to a Git repository:
 
-    ```yaml
-    apiVersion: v1
-    kind: Secret
-    metadata:
-      name: basic-user-pass
-      annotations:
-        build.knative.dev/git-0: https://github.com # Described below
-    type: kubernetes.io/basic-auth
-    stringData:
-      username: <username>
-      password: <password>
     ```
-    `build.knative.dev/git-0` in the example above specifies which web address
-    these credentials belong to. See
-    [Guiding Credential Selection](#guiding-credential-selection) below for
-    more information.
+     yaml
+     apiVersion: v1
+     kind: Secret
+     metadata:
+       name: basic-user-pass
+       annotations:
+         build.knative.dev/git-0: https://github.com # Described below
+     type: kubernetes.io/basic-auth
+     stringData:
+       username: <username>
+       password: <password>
+     ```
+     `build.knative.dev/git-0` in the example above specifies which web address
+     these credentials belong to. See
+     [Guiding Credential Selection](#guiding-credential-selection) below for
+     more information.
 
 1.  Next, direct a `ServiceAccount` to use this `Secret`:
 
-    ```yaml
-    apiVersion: v1
-    kind: ServiceAccount
-    metadata:
-      name: build-bot
-    secrets:
-      - name: basic-user-pass
-    ```
+     ```
+     yaml
+     apiVersion: v1
+     kind: ServiceAccount
+     metadata:
+       name: build-bot
+     secrets:
+       - name: basic-user-pass
+     ```
 
 1.  Use that `ServiceAccount` in your `Build`:
 
-    ```yaml
-    apiVersion: build.knative.dev/v1alpha1
-    kind: Build
-    metadata:
-      name: build-with-basic-auth
-    spec:
-      serviceAccountName: build-bot
-      steps:
-      ...
-    ```
+     ```
+     yaml
+     apiVersion: build.knative.dev/v1alpha1
+     kind: Build
+     metadata:
+       name: build-with-basic-auth
+     spec:
+       serviceAccountName: build-bot
+       steps:
+       ...
+     ```
 
 1.  Execute the build:
 
-    ```shell
-    kubectl apply --filename secret.yaml serviceaccount.yaml build.yaml
-    ```
+     ```
+     shell
+     kubectl apply --filename secret.yaml serviceaccount.yaml build.yaml
+     ```
 
 When this build executes, before steps execute, a `~/.gitconfig` will be
 generated containing the credentials configured in the `Secret`, and these
@@ -151,18 +160,20 @@ credentials are then used to authenticate with the Git repository.
 1.  Define a `Secret` containing the username and password that the build should
     use to authenticate to a Docker registry:
 
-    ```yaml
-    apiVersion: v1
-    kind: Secret
-    metadata:
-      name: basic-user-pass
-      annotations:
-        build.knative.dev/docker-0: https://gcr.io # Described below
-    type: kubernetes.io/basic-auth
-    stringData:
-      username: <username>
-      password: <password>
-    ```
+     ```
+     yaml
+     apiVersion: v1
+     kind: Secret
+     metadata:
+       name: basic-user-pass
+       annotations:
+         build.knative.dev/docker-0: https://gcr.io # Described below
+     type: kubernetes.io/basic-auth
+     stringData:
+       username: <username>
+       password: <password>
+     ```
+    
     `build.knative.dev/docker-0` in the example above specifies which web
     address these credentials belong to. See
     [Guiding Credential Selection](#guiding-credential-selection) below for
@@ -170,33 +181,36 @@ credentials are then used to authenticate with the Git repository.
 
 1.  Direct a `ServiceAccount` to use this `Secret`:
 
-    ```yaml
-    apiVersion: v1
-    kind: ServiceAccount
-    metadata:
-      name: build-bot
-    secrets:
-      - name: basic-user-pass
-    ```
+     ```
+     yaml
+     apiVersion: v1
+     kind: ServiceAccount
+     metadata:
+       name: build-bot
+     secrets:
+       - name: basic-user-pass
+     ```
 
 1.  Use that `ServiceAccount` in your `Build`:
 
-    ```yaml
-    apiVersion: build.knative.dev/v1alpha1
-    kind: Build
-    metadata:
-      name: build-with-basic-auth
-    spec:
-      serviceAccountName: build-bot
-      steps:
-      ...
-    ```
+     ```
+     yaml
+     apiVersion: build.knative.dev/v1alpha1
+     kind: Build
+     metadata:
+       name: build-with-basic-auth
+     spec:
+       serviceAccountName: build-bot
+       steps:
+       ...
+     ```
 
 1.  Execute the build:
 
-    ```shell
-    kubectl apply --filename secret.yaml serviceaccount.yaml build.yaml
-    ```
+     ```
+     shell
+     kubectl apply --filename secret.yaml serviceaccount.yaml build.yaml
+     ```
 
 When this build executes, before steps execute, a `~/.docker/config.json` will
 be generated containing the credentials configured in the `Secret`, and these
