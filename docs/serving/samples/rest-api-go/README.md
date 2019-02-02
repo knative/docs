@@ -7,12 +7,12 @@ configuration file.
 ## Prerequisites
 
 1. A Kubernetes cluster with
-   [Knative Serving](https://github.com/knative/docs/blob/master/install/)
+   [Knative Serving](../../../install/)
    installed.
 2. Install
    [Docker](https://docs.docker.com/get-started/#prepare-your-docker-environment).
 3. You need to
-   [configure outbound network access](https://github.com/knative/docs/blob/master/serving/outbound-network-access.md)
+   [configure outbound network access](../../outbound-network-access/)
    because this application makes an external API request.
 4. Check out the code:
 

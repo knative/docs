@@ -45,7 +45,7 @@ sections to do so now.
 
    Tip: Hit CTRL+C to exit watch mode.
 
-[Accessing Metrics](./accessing-metrics.md) for more information about metrics in Knative.
+[Accessing Metrics](./accessing-metrics/) for more information about metrics in Knative.
 
 ## Logs
 
@@ -53,7 +53,7 @@ Knative offers three different setups for collecting logs. Choose one to install
 
 1. [Elasticsearch and Kibana](#elasticsearch-and-kibana)
 1. [Stackdriver](#stackdriver)
-1. [Custom logging plugin](setting-up-a-logging-plugin.md)
+1. [Custom logging plugin](setting-up-a-logging-plugin/)
 
 ### Elasticsearch and Kibana
 
@@ -131,7 +131,7 @@ To visualize logs with Kibana, you need to set which Elasticsearch indices to ex
 
 ![Create logstash-* index](images/kibana-landing-page-configure-index.png)
 
-See [Accessing Logs](./accessing-logs.md) for more information about logs in Knative.
+See [Accessing Logs](./accessing-logs/) for more information about logs in Knative.
 
 ### Stackdriver
 
@@ -155,7 +155,7 @@ To configure and setup monitoring:
     - You want to send logs to another GCP project.
 
 1. Follow the instructions in
-   ["Setting up a logging plugin"](setting-up-a-logging-plugin.md#Configuring)
+   ["Setting up a logging plugin"](setting-up-a-logging-plugin/#Configuring)
    to configure the stackdriver components settings.
 
 1. Install Knative Stackdriver components by running the following command from the root directory of
@@ -202,7 +202,7 @@ To configure and setup monitoring:
       ```shell
       kubectl get daemonset fluentd-ds --namespace knative-monitoring
       ```
-See [Accessing Logs](./accessing-logs.md) for more information about logs in Knative.
+See [Accessing Logs](./accessing-logs/) for more information about logs in Knative.
 
 ## End to end traces
 
@@ -225,14 +225,14 @@ See [Accessing Logs](./accessing-logs.md) for more information about logs in Kna
     Enter `zipkin*` to `Index pattern` and select `timestamp_millis`
     from `Time Filter field name` and click on `Create` button.
 
-Visit [Accessing Traces](./accessing-traces.md) for more information on end to end traces.
+Visit [Accessing Traces](./accessing-traces/) for more information on end to end traces.
 
 ## Learn More
 
 - Learn more about accessing logs, metrics, and traces:
-  - [Accessing Logs](./accessing-logs.md)
-  - [Accessing Metrics](./accessing-metrics.md)
-  - [Accessing Traces](./accessing-traces.md)
+  - [Accessing Logs](./accessing-logs/)
+  - [Accessing Metrics](./accessing-metrics/)
+  - [Accessing Traces](./accessing-traces/)
 
 ---
 
