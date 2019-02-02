@@ -14,7 +14,7 @@ and tools.
 Start your investigation with the "Revision - HTTP Requests" dashboard.
 
 1.  To open this dashboard, open the Grafana UI as described in
-    [Accessing Metrics](./accessing-metrics.md) and navigate to "Knative
+    [Accessing Metrics](./accessing-metrics/) and navigate to "Knative
     Serving - Revision HTTP Requests".
 
 1.  Select your configuration and revision from the menu on top left of the
@@ -41,7 +41,7 @@ Next, look into request traces to find out where the time is spent for a single
 request.
 
 1.  To access request traces, open the Zipkin UI as described in
-    [Accessing Traces](./accessing-traces.md).
+    [Accessing Traces](./accessing-traces/).
 
 1.  Select your revision from the "Service Name" dropdown, and then click the
     "Find Traces" button. You'll get a view that looks like this:

@@ -15,7 +15,7 @@ You need:
 
 - A Kubernetes cluster with [Knative installed](../../install/).
 - (Optional)
-  [A custom domain configured](../../serving/using-a-custom-domain.md) for use
+  [A custom domain configured](../../serving/using-a-custom-domain/) for use
   with Knative.
 
 Note: The source code for the gcr.io/knative-samples/knative-route-demo image
@@ -85,7 +85,7 @@ route "blue-green-demo" configured
 You'll now be able to view the sample app at
 http://blue-green-demo.default.YOUR_CUSTOM_DOMAIN.com (replace
 `YOUR_CUSTOM_DOMAIN`) with the
-[custom domain](../../serving/using-a-custom-domain.md) you configured for use
+[custom domain](../using-a-custom-domain/) you configured for use
 with Knative.
 
 > Note: If you don't have a custom domain configured for use with Knative, you
