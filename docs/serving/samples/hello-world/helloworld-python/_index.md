@@ -4,4 +4,4 @@ linkTitle: "Python"
 weight: 1
 ---
 
-{{% readfile file="docs/serving/samples/hello-world/helloworld-python/" markdown="true" %}}
+{{% readfile file="docs/serving/samples/hello-world/helloworld-python/README.md" markdown="true" %}}
