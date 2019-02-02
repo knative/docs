@@ -15,7 +15,7 @@ you to run multiple installation commands.
 ## Before you begin
 
 - If you are new to Knative, you should instead
-  [follow one of the platform-specific installation guides](./README.md) to help
+  [follow one of the platform-specific installation guides](./) to help
   you get up and running quickly.
 
 - The steps in this guide use `bash` for the MacOS or Linux environment; for
@@ -236,7 +236,7 @@ for details about installing the various supported observability plug-ins.
 [6]: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#event-v1-core
 [6.1]: https://developer.github.com/v3/activity/events/types/
 [6.2]: https://github.com/knative/docs/tree/master/eventing#containersource
-[6.3]: https://github.com/knative/eventing-sources/blob/master/samples/cronjob-source/README.md
+[6.3]: https://github.com/knative/eventing-sources/blob/master/samples/cronjob-source/
 [6.4]: https://cloud.google.com/pubsub/
 
 ### Installing Knative
@@ -328,12 +328,12 @@ guides to help you get started with Knative:
 
 - [Getting Started with Knative App Deployment](./getting-started-knative-app.md)
 
-  - [Knative Serving sample apps](../serving/samples/README.md)
+  - [Knative Serving sample apps](../serving/samples/)
 
 - [Creating a simple Knative Build](../build/creating-builds.md)
 
   - [Knative Build templates](https://github.com/knative/build-templates)
 
-- [Knative Eventing overview](../eventing/README.md)
+- [Knative Eventing overview](../eventing/)
 
   - [Knative Eventing code samples](../eventing/samples)

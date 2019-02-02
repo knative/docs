@@ -61,7 +61,7 @@ efficient contributor workflow.
 
 Knative is a diverse, open, and inclusive community. To get involved, see
 [CONTRIBUTING.md](./community/CONTRIBUTING.md) and join the
-[Knative community](./community/README.md).
+[Knative community](./community/).
 
 Your own path to becoming a Knative contributor can
 [begin anywhere](https://github.com/knative/serving/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Akind%2Fgood-first-issue).
@@ -74,7 +74,7 @@ Follow the links below to learn more about Knative.
 
 ### Getting started
 
-- [Installing Knative](./install/README.md)
+- [Installing Knative](./install/)
 - [Getting started with app deployment](./install/getting-started-knative-app.md)
 - [Getting started with serving](./serving)
 - [Getting started with builds](./build)
@@ -89,11 +89,11 @@ Follow the links below to learn more about Knative.
 
 ### Samples and demos
 
-- [Autoscaling](./serving/samples/autoscale-go/README.md)
-- [Source-to-URL deployment](./serving/samples/source-to-url-go/README.md)
+- [Autoscaling](./serving/samples/autoscale-go/)
+- [Source-to-URL deployment](./serving/samples/source-to-url-go/)
 - [Binding running services to eventing ecosystems](./eventing/samples/kubernetes-event-source)
-- [Telemetry](./serving/samples/telemetry-go/README.md)
-- [REST API sample](./serving/samples/rest-api-go/README.md)
+- [Telemetry](./serving/samples/telemetry-go/)
+- [REST API sample](./serving/samples/rest-api-go/)
 - [All samples for serving](./serving/samples/)
 - [All samples for eventing](./eventing/samples/)
 
