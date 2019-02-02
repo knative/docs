@@ -2,6 +2,7 @@
 title: "Knative team values"
 linkTitle: "Team values"
 weight: 50
+type: "docs"
 ---
 
 We want to make sure every member has a shared understanding of the goals and
@@ -28,14 +29,14 @@ values we hold as a team:
     applicability of Knative). Empathize with our users. Focus on the specific
     issue at hand, and remember that we all care about the project, first and
     foremost.
-  - Emails to the [mailing lists](CONTRIBUTING.md#contributing-a-feature),
+  - Emails to the [mailing lists](CONTRIBUTING/#contributing-a-feature),
     document comments, or meetings are often better and higher bandwidth ways to
     communicate complex and nuanced design issues, as opposed to protracted
     heated live chats.
   - Be mindful of the terminology you are using, it may not be the same as
     someone else and cause misunderstanding. To promote clear and precise
     communication, define the terms you are using in context.
-  - See also the [Code of Conduct](CODE-OF-CONDUCT.md), which everyone must
+  - See also the [Code of Conduct](CODE-OF-CONDUCT/), which everyone must
     abide by.
 
 - Raising issues is great, suggesting solutions is even better
