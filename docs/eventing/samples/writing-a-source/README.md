@@ -29,7 +29,7 @@ You'll need these tools installed:
 
 ## Steps
 
-1.   [Bootstrap Project](01-bootstrap/)
+1.  [Bootstrap Project](01-bootstrap/)
 1.  [Define The Source Resource](02-define-source/)
 1.  [Reconcile Sources](03-reconcile-sources/)
 1.  [Publish to Cluster](04-publish-to-cluster/)
