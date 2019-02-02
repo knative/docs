@@ -15,7 +15,7 @@ You will need:
 1. Ensure Knative Serving is [configured with a domain
    name](https://github.com/knative/docs/blob/master/serving/using-a-custom-domain.md)
    that allows GitHub to call into the cluster.
-1. If you're using GKE, you'll also want to [assign a static IP address](https://github.com/knative/docs/blob/master/serving/gke-assigning-static-ip-address.md).
+1. If you're using GKE, you'll also want to [assign a static IP address](../../../serving/gke-assigning-static-ip-address.).
 1. Install [Knative
    Eventing](https://github.com/knative/docs/tree/master/eventing). Those
    instructions also install the default eventing sources, including
