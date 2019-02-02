@@ -2,6 +2,7 @@
 title: "Knative working group processes and guidelines"
 linkTitle: "Working group guidelines"
 weight: 30
+type: "docs"
 ---
 
 This document describes the processes we use to manage the Knative working
@@ -100,7 +101,7 @@ working group:
   group to the meeting.
 
 - **Register the Working Group**. Go to
-  [WORKING-GROUPS.md](https://github.com/knative/serving/blob/master/community/WORKING-GROUPS.md)
+  [WORKING-GROUPS/](WORKING-GROUPS/)
   and add your working group name, the names of the leads, the working group
   charter, and a link to the meeting you created.
 
@@ -132,7 +133,7 @@ representatives from multiple organizations as both leads and members. Working
 group leads must be Members of the Knative project (that is, have made multiple
 contributions to the project in the form of code, design, or documentation).
 
-Please see the [Community Roles](ROLES.md) document for a description of a
+Please see the [Community Roles](ROLES/) document for a description of a
 lead’s role and requirements.
 
 ## Running a working group
@@ -188,7 +189,7 @@ Leads from all affected working groups generally work together and come to an
 agreeable conclusion.
 
 In all cases, remaining blocking issues can be raised to the
-[technical oversight committee](TECH-OVERSIGHT-COMMITTEE.md) to help resolve the
+[technical oversight committee](TECH-OVERSIGHT-COMMITTEE/) to help resolve the
 situation. To trigger an escalation, create an issue in the `knative/serving`
 repo and assign it to the **@knative/tech-oversight-committee** team.
 

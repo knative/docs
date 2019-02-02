@@ -2,6 +2,7 @@
 title: "Knative community roles"
 linkTitle: "Community roles"
 weight: 55
+type: "docs"
 ---
 
 This document describes the set of roles individuals might have within the Knative
@@ -215,15 +216,15 @@ approver in an OWNERS file:
 
 - Approver status can be a precondition to accepting large code contributions.
 
-- Demonstrate sound technical judgement.
+- Demonstrate sound technical judgment.
 
-- Responsible for project quality control via [code reviews](REVIEWING.md).
+- Responsible for project quality control via [code reviews](./REVIEWING.md).
 
   - Focus on holistic acceptance of contribution such as dependencies with other
     features, backward / forward compatibility, API and flag definitions, etc.
 
 - Expected to be responsive to review requests as per
-  [community expectations](REVIEWING.md).
+  [community expectations](./REVIEWING.md).
 
 - Mentor members and contributors.
 
@@ -262,7 +263,7 @@ Additional requirements for leads of a new working group:
 The following apply to the area / component for which one would be an owner.
 
 - Run their working group as explained in the
-  [Working Group Processes](WORKING-GROUP-PROCESSES.md).
+  [Working Group Processes](./WORKING-GROUP-PROCESSES.md).
 
 - Design/proposal approval authority over the area / component, though
   escalation to the technical oversight committee is possible.
@@ -277,7 +278,7 @@ The following apply to the area / component for which one would be an owner.
 - Capable of directly applying lgtm + approve labels for any PR.
 
   - Expected to respect OWNERS files approvals and use
-    [standard procedure for merging code](REVIEWING.md#merging-prs).
+    [standard procedure for merging code](./REVIEWING.md#merging-prs).
 
 - Expected to work to holistically maintain the health of the project through:
 
