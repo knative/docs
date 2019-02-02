@@ -4,4 +4,4 @@ linkTitle: "PHP"
 weight: 1
 ---
 
-{{% readfile file="docs/serving/samples/hello-world/helloworld-php/" markdown="true" %}}
+{{% readfile file="docs/serving/samples/hello-world/helloworld-php/README.md" markdown="true" %}}

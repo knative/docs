@@ -4,4 +4,4 @@ linkTitle: "GitHub Webhook - Go"
 weight: 1
 ---
 
-{{% readfile file="docs/serving/samples/gitwebhook-go/" markdown="true" %}}
+{{% readfile file="docs/serving/samples/gitwebhook-go/README.md" markdown="true" %}}

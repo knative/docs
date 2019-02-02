@@ -6,4 +6,4 @@ weight: 10
 
 
 
-{{% readfile file="docs/serving/fluentd/" markdown="true" %}}
+{{% readfile file="docs/serving/fluentd/README.md" markdown="true" %}}

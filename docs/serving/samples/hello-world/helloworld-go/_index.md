@@ -4,4 +4,4 @@ linkTitle: "Go"
 weight: 1
 ---
 
-{{% readfile file="docs/serving/samples/hello-world/helloworld-go/" markdown="true" %}}
+{{% readfile file="docs/serving/samples/hello-world/helloworld-go/README.md" markdown="true" %}}

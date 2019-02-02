@@ -5,4 +5,4 @@ weight: 50
 type: "docs"
 ---
 
-{{% readfile file="docs/eventing/samples/kubernetes-event-source/" markdown="true" %}}
+{{% readfile file="docs/eventing/samples/kubernetes-event-source/README.md" markdown="true" %}}

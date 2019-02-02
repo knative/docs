@@ -4,4 +4,4 @@ title: "Installing Knative"
 weight: 20
 ---
 
-{{% readfile file="docs/install/" markdown="true" %}}
+{{% readfile file="docs/install/README.md" markdown="true" %}}
