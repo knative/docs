@@ -11,7 +11,7 @@ A set of curated and supported build templates is available in the
 
 ## What is a Build Template?
 
-A `BuildTemplate` and `ClusterBuildTemplate` encapsulates a shareable [build](./builds.md)
+A `BuildTemplate` and `ClusterBuildTemplate` encapsulates a shareable [build](./builds/)
 process with some limited parameterization capabilities.
 
 A `BuildTemplate` is available within a namespace, and `ClusterBuildTemplate` is available across entire Kubernetes cluster.
@@ -81,7 +81,7 @@ in the future for UI). The `default` value enables a template to have a
 graduated complexity, where options are overridden only when the user strays
 from some set of sane defaults.
 
-The `steps` and `volumes` parameters are just like in a [`Build`](./builds.md)
+The `steps` and `volumes` parameters are just like in a [`Build`](./builds/)
 resource, but might contain references to parameters in the form:
 `${PARAMETER_NAME}`.
 
