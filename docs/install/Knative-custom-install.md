@@ -15,7 +15,7 @@ to run multiple installation commands.
 ## Before you begin
 
 - If you are new to Knative, you should instead
-  [follow one of the platform-specific installation guides](./README.md) to help
+  [follow one of the platform-specific installation guides](./) to help
   you get up and running quickly.
 
 - The steps in this guide use `bash` for the MacOS or Linux environment; for
@@ -344,12 +344,12 @@ guides to help you get started with Knative:
 
 - [Getting Started with Knative App Deployment](./getting-started-knative-app.md)
 
-  - [Knative Serving sample apps](../serving/samples/README.md)
+  - [Knative Serving sample apps](../serving/samples/)
 
 - [Creating a simple Knative Build](../build/creating-builds.md)
 
   - [Knative Build templates](https://github.com/knative/build-templates)
 
-- [Knative Eventing overview](../eventing/README.md)
+- [Knative Eventing overview](../eventing/)
 
   - [Knative Eventing code samples](../eventing/samples)

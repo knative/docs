@@ -4,4 +4,4 @@ linkTitle: "Sample Apps"
 weight: 1
 ---
 
-{{% readfile file="docs/serving/samples/README.md" markdown="true" %}}
+{{% readfile file="docs/serving/samples/" markdown="true" %}}

@@ -67,7 +67,7 @@ Learn more about Eventing development in the
 
 Knative Eventing currently requires Knative Serving and Istio version 1.0 or
 later installed.
-[Follow the instructions to install on the platform of your choice](../install/README.md).
+[Follow the instructions to install on the platform of your choice](../install/).
 
 Many of the sources require making outbound connections to create the event
 subscription, and if you have any functions that make use of any external (to
@@ -132,6 +132,7 @@ part of the `sources` category, so you can list all existing Sources with
 
 _Want to implement your own source? Check out
 [the tutorial](samples/writing-a-source/README.md)._
+
 
 ### KubernetesEventSource
 
@@ -246,7 +247,7 @@ The CronJobSource fires events based on given
 
 ## Getting Started
 
-- [Setup Knative Serving](../install/README.md)
+- [Setup Knative Serving](../install/)
 - [Install Eventing components](#installation)
 - [Run samples](samples/)
 

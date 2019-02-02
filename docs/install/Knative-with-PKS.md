@@ -7,7 +7,7 @@ weight: 10
 This guide walks you through the installation of the latest version of Knative
 using pre-built images.
 
-You can find [guides for other platforms here](README.md).
+You can find [guides for other platforms here](../).
 
 ## Before you begin
 
