@@ -166,7 +166,7 @@ rerun the command to see the current status.
 
 The following commands install all available Knative components as well as the
 standard set of observability plugins. To customize your Knative installation,
-see [Performing a Custom Knative Installation](Knative-custom-install.md).
+see [Performing a Custom Knative Installation](Knative-custom-install/).
 
 1. Run the `kubectl apply` command to install Knative and its dependencies:
     ```bash
@@ -192,7 +192,7 @@ Now that your cluster has Knative installed, you can see what Knative has to
 offer.
 
 To deploy your first app with Knative, follow the step-by-step
-[Getting Started with Knative App Deployment](getting-started-knative-app.md)
+[Getting Started with Knative App Deployment](getting-started-knative-app/)
 guide.
 
 To get started with Knative Eventing, pick one of the
