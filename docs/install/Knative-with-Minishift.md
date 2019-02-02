@@ -278,7 +278,7 @@ curl -H "Host: helloworld-go.myproject.example.com" http://$IP_ADDRESS
 ```
 
 If you'd like to view the available sample apps and deploy one of your choosing,
-head to the [sample apps](../serving/samples/) repository.
+head to the [sample apps](../../serving/samples/) repository.
 
 ## Cleaning up
 

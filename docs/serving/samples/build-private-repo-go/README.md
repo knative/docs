@@ -8,7 +8,7 @@ This sample demonstrates:
 
 ## Before you begin
 
-- [Install Knative Serving](../../../install/)
+- [Install Knative Serving](../../../../install/)
 - Create a local folder for this sample and download the files in this directory
   into it.
 

@@ -5,7 +5,7 @@ weight: 40
 ---
 
 If you followed one of the
-[comprehensive install guides](../install/#install-guides) or you
+[comprehensive install guides](../../install/#install-guides) or you
 performed a custom installation and included the `monitoring.yaml` file in your
 installation, all of the observability features are already installed and you
 can skip down to the
@@ -45,7 +45,7 @@ sections to do so now.
 
    Tip: Hit CTRL+C to exit watch mode.
 
-[Accessing Metrics](./accessing-metrics/) for more information about metrics in Knative.
+[Accessing Metrics](../accessing-metrics/) for more information about metrics in Knative.
 
 ## Logs
 
@@ -131,7 +131,7 @@ To visualize logs with Kibana, you need to set which Elasticsearch indices to ex
 
 ![Create logstash-* index](images/kibana-landing-page-configure-index.png)
 
-See [Accessing Logs](./accessing-logs/) for more information about logs in Knative.
+See [Accessing Logs](../accessing-logs/) for more information about logs in Knative.
 
 ### Stackdriver
 
@@ -202,7 +202,7 @@ To configure and setup monitoring:
       ```shell
       kubectl get daemonset fluentd-ds --namespace knative-monitoring
       ```
-See [Accessing Logs](./accessing-logs/) for more information about logs in Knative.
+See [Accessing Logs](../accessing-logs/) for more information about logs in Knative.
 
 ## End to end traces
 
@@ -225,14 +225,14 @@ See [Accessing Logs](./accessing-logs/) for more information about logs in Knati
     Enter `zipkin*` to `Index pattern` and select `timestamp_millis`
     from `Time Filter field name` and click on `Create` button.
 
-Visit [Accessing Traces](./accessing-traces/) for more information on end to end traces.
+Visit [Accessing Traces](../accessing-traces/) for more information on end to end traces.
 
 ## Learn More
 
 - Learn more about accessing logs, metrics, and traces:
-  - [Accessing Logs](./accessing-logs/)
-  - [Accessing Metrics](./accessing-metrics/)
-  - [Accessing Traces](./accessing-traces/)
+  - [Accessing Logs](../accessing-logs/)
+  - [Accessing Metrics](../accessing-metrics/)
+  - [Accessing Traces](../accessing-traces/)
 
 ---
 

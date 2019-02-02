@@ -5,7 +5,7 @@ weight: 15
 ---
 
 If you have not yet installed the logging and monitoring components, go through
-the [installation instructions](./installing-logging-metrics-traces/) to set
+the [installation instructions](../installing-logging-metrics-traces/) to set
 up the necessary components.
 
 In order to access request traces, you use the Zipkin visualization tool.

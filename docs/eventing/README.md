@@ -61,18 +61,18 @@ event sources. Sources manage registration and delivery of events from external
 systems using Kubernetes
 [Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
 Learn more about Eventing development in the
-[Eventing work group](../../contributing/WORKING-GROUPS.md#events).
+[Eventing work group](../../contributing/WORKING-GROUPS/#events).
 
 ## Installation
 
 Knative Eventing currently requires Knative Serving and Istio version 1.0 or
 later installed.
-[Follow the instructions to install on the platform of your choice](../install/).
+[Follow the instructions to install on the platform of your choice](../../install/).
 
 Many of the sources require making outbound connections to create the event subscription,
 and if you have any functions that make use of any external (to cluster) services, you
 must enable it also for them to work.
-[Follow the instructions to configure outbound network access](../serving/outbound-network-access.md).
+[Follow the instructions to configure outbound network access](../../serving/outbound-network-access/).
 
 Install the core Knative Eventing (which provides an in-memory
 ChannelProvisioner) and the core sources (which provides the Kubernetes Events,
@@ -83,7 +83,7 @@ kubectl apply --filename https://github.com/knative/eventing/releases/download/v
 kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.3.0/release.yaml
 ```
 
-In addition to the core sources, there are [other sources](./sources/) that you can install.
+In addition to the core sources, there are [other sources](sources/) that you can install.
 
 This document will be updated as additional sources (which are custom resource
 definitions and an associated controller) and channels
@@ -240,7 +240,7 @@ The CronJobSource fires events based on given [Cron](https://en.wikipedia.org/wi
 
 ## Getting Started
 
-- [Setup Knative Serving](../install/)
+- [Setup Knative Serving](../../install/)
 - [Install Eventing components](#installation)
 - [Run samples](samples/)
 

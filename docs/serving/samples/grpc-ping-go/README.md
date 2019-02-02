@@ -6,7 +6,7 @@ This sample is dependent on
 
 ## Prerequisites
 
-1. [Install Knative](../../../install/)
+1. [Install Knative](../../../../install/)
 1. Install [docker](https://www.docker.com/)
 
 ## Build and run the gRPC server

@@ -56,13 +56,13 @@ tools, platforms, languages, and products. By submitting a tutorial you can
 share your experience and help others who are solving similar problems.
 
 Community tutorials are stored in Markdown files on
-[GitHub](../community/samples/) where they can be reviewed and edited by the
+[GitHub](../../community/samples/) where they can be reviewed and edited by the
 community.
 
 Please submit a Pull Request to the community sample directory under the
 Knative component that your tutorial highlights -
-[Serving](./samples/serving/), [Eventing](./samples/eventing/),
-or [Build](./samples/build/). A reviewer will be assigned to review your
+[Serving](../../community/samples/serving/), [Eventing](../../community/samples/eventing/),
+or [Build](../../community/samples/build/). A reviewer will be assigned to review your
 submission. They'll work with you to ensure your submission meets the
 [style guide](DOCS-CONTRIBUTING/), but it helps if you follow it as you
 write your tutorial.

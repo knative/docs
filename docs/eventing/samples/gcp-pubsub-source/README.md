@@ -15,7 +15,7 @@ source is most useful as a bridge from other GCP services, such as
    project id, and also set your project ID as default using
    `gcloud config set project $PROJECT_ID`.
 
-1. Setup [Knative Serving](../../../install)
+1. Setup [Knative Serving](../../../../install)
 
 1. Setup
    [Knative Eventing](https://github.com/knative/docs/tree/master/eventing).
@@ -68,7 +68,7 @@ source is most useful as a bridge from other GCP services, such as
       `controller-manager` StatefulSet which manages your Eventing sources.
 
       `google-cloud-key` and `key.json` are pre-configured values in
-      [`gcp-pubsub-source.yaml`](./gcp-pubsub-source.yaml).
+      [`gcp-pubsub-source.yaml`](../gcp-pubsub-source.yaml).
 
 ## Deployment
 
@@ -95,7 +95,7 @@ source is most useful as a bridge from other GCP services, such as
 
 1. Create a GCP PubSub Topic. If you change its name (`testing`), you also need
    to update the `topic` in the
-   [`gcp-pubsub-source.yaml`](./gcp-pubsub-source.yaml) file:
+   [`gcp-pubsub-source.yaml`](../gcp-pubsub-source.yaml) file:
 
    ```shell
    gcloud pubsub topics create testing
@@ -103,7 +103,7 @@ source is most useful as a bridge from other GCP services, such as
 
 1. Replace the
    [`MY_GCP_PROJECT` placeholder](https://cloud.google.com/resource-manager/docs/creating-managing-projects)
-   in [`gcp-pubsub-source.yaml`](./gcp-pubsub-source.yaml) and apply it.
+   in [`gcp-pubsub-source.yaml`](../gcp-pubsub-source.yaml) and apply it.
 
    If you're in the samples directory, you can replace `MY_GCP_PROJECT` and
    apply in one command:

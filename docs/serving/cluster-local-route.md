@@ -8,7 +8,7 @@ In Knative 0.3.x or later, all Routes with a domain suffix of
 `svc.cluster.local` will only be visible inside the cluster.
 
 This can be done by changing the `config-domain` config map as instructed
-[here](./using-a-custom-domain/).
+[here](../using-a-custom-domain/).
 
 You can also set the label
 `serving.knative.dev/visibility=cluster-local` on your Route or KService to

@@ -81,7 +81,7 @@ follow the custom install guide:
 Follow this guide to install and set up the available observability
 plugins on a Knative cluster.
 
-* [Monitoring, Logging and Tracing Installation](../serving/installing-logging-metrics-traces/)
+* [Monitoring, Logging and Tracing Installation](../../serving/installing-logging-metrics-traces/)
 
 ## Deploying an app
 
@@ -91,7 +91,7 @@ Now you're ready to deploy an app:
   [Getting Started with Knative App Deployment](getting-started-knative-app/)
   guide.
 
-- View the available [sample apps](../serving/samples) and deploy one of your
+- View the available [sample apps](../../serving/samples) and deploy one of your
   choosing.
 
 - Walk through the Google codelab,
@@ -103,10 +103,10 @@ After your Knative installation is running, you can set up a custom domain with
 a static IP address to be able to use Knative for publicly available services
 and set up an Istio IP range for outbound network access:
 
-- [Assign a static IP address](../serving/gke-assigning-static-ip-address/)
-- [Configure a custom domain](../serving/using-a-custom-domain/)
-- [Configure outbound network access](../serving/outbound-network-access/)
-- [Configuring HTTPS with a custom certificate](../serving/using-an-ssl-cert/)
+- [Assign a static IP address](../../serving/gke-assigning-static-ip-address/)
+- [Configure a custom domain](../../serving/using-a-custom-domain/)
+- [Configure outbound network access](../../serving/outbound-network-access/)
+- [Configuring HTTPS with a custom certificate](../../serving/using-an-ssl-cert/)
 
 ## Checking the version of your Knative Serving installation
 

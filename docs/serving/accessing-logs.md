@@ -5,7 +5,7 @@ weight: 5
 ---
 
 If you have not yet installed the logging and monitoring components, go through
-the [installation instructions](./installing-logging-metrics-traces/) to set
+the [installation instructions](../../installing-logging-metrics-traces/) to set
 up the necessary components first.
 
 ## Kibana and Elasticsearch
@@ -27,7 +27,7 @@ up the necessary components first.
 
   The Discover tab of the Kibana UI looks like this:
 
-  ![Kibana UI Discover tab](./images/kibana-discover-tab-annotated.png)
+  ![Kibana UI Discover tab](../images/kibana-discover-tab-annotated.png)
 
   You can change the time frame of logs Kibana displays in the upper right
   corner of the screen. The main search bar is across the top of the Discover
@@ -88,7 +88,7 @@ kubernetes.labels.serving_knative_dev\/revision: <REVISION_NAME>
 
 ### Accessing build logs
 
-To access logs for a [Knative Build](../build/):
+To access logs for a [Knative Build](../../build/):
 
 - Find the build's name in the specified in the `.yaml` file:
 
@@ -147,7 +147,7 @@ userAgent                    curl/7.60.0
 
 ### Accessing end to end request traces
 
-See [Accessing Traces](./accessing-traces/) page for details.
+See [Accessing Traces](../accessing-traces/) page for details.
 
 ## Stackdriver
 

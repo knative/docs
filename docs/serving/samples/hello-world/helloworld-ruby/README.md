@@ -72,7 +72,7 @@ recreate the source files from this folder.
    ```
 
 1. Run bundle. If you don't have bundler installed, copy the
-   [Gemfile.lock](./Gemfile.lock) to your working directory.
+   [Gemfile.lock](../Gemfile.lock) to your working directory.
 
    ```shell
    bundle install

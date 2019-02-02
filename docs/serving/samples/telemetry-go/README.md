@@ -9,7 +9,7 @@ dedicated Prometheus instance rather than using the default installation.
 ## Prerequisites
 
 1. A Kubernetes cluster with
-   [Knative Serving](../../../install/)
+   [Knative Serving](../../../../install/)
    installed.
 2. Check if Knative monitoring components are installed:
 
@@ -18,7 +18,7 @@ kubectl get pods --namespace knative-monitoring
 ```
 
 - If pods aren't found, install
-  [Knative monitoring component](../../installing-logging-metrics-traces/).
+  [Knative monitoring component](../../../installing-logging-metrics-traces/).
 
 3. Install
    [Docker](https://docs.docker.com/get-started/#prepare-your-docker-environment).

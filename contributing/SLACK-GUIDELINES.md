@@ -22,7 +22,7 @@ https://slack.knative.dev.
 
 ## Code of Conduct
 
-The Knative [Code of Conduct](./CODE-OF-CONDUCT/) applies throughout the
+The Knative [Code of Conduct](../CODE-OF-CONDUCT/) applies throughout the
 project, and includes all communication mediums.
 
 ## Admins
@@ -56,7 +56,7 @@ privately.
 Please reach out to the #slack-admins group with your request to create a new
 channel.
 
-Channels are dedicated to [Working Groups](./WORKING-GROUPS/), sub-projects,
+Channels are dedicated to [Working Groups](../WORKING-GROUPS/), sub-projects,
 community topics, and related programs/projects.
 
 Channels are not:

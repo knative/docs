@@ -9,7 +9,7 @@ sample app for Cloud Foundry.
 
 ## Prerequisites
 
-- [Install Knative Serving](../../../install/)
+- [Install Knative Serving](../../../../install/)
 
 ## Running
 

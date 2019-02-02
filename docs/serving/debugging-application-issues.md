@@ -29,7 +29,7 @@ ERROR: Non-zero return code '1' from command: Process exited with status 1
 ## Check application logs
 
 Knative Serving provides default out-of-the-box logs for your application.
-Access your application logs using [Accessing Logs](./accessing-logs/) page.
+Access your application logs using [Accessing Logs](../accessing-logs/) page.
 
 ## Check Route status
 

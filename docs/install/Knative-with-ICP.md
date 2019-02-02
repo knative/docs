@@ -162,7 +162,7 @@ see [Performing a Custom Knative Installation](Knative-custom-install/).
      | kubectl apply --filename -
    ```
    
-   See [Installing logging, metrics, and traces](../serving/installing-logging-metrics-traces/)
+   See [Installing logging, metrics, and traces](../../serving/installing-logging-metrics-traces/)
    for details about installing the various supported observability plug-ins.
    
 
@@ -201,10 +201,10 @@ guide.
   ```
 
 To get started with Knative Eventing, walk through one of the
-[Eventing Samples](../eventing/samples/).
+[Eventing Samples](../../eventing/samples/).
 
 To get started with Knative Build, read the
-[Build README](../build/), then choose a sample to walk through.
+[Build README](../../build/), then choose a sample to walk through.
 
 ## Cleaning up
 

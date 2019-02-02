@@ -125,7 +125,7 @@ Knative, check out the
 guide.
 
 If you'd like to view the available sample apps and deploy one of your choosing,
-head to the [sample apps](../serving/samples/) repo.
+head to the [sample apps](../../serving/samples/) repo.
 
 > Note: When looking up the IP address to use for accessing your app, you need
 > to look up the NodePort for the `istio-ingressgateway` well as the IP

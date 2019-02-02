@@ -20,7 +20,7 @@ kubectl port-forward --namespace knative-monitoring $(kubectl get pods --namespa
 
 3. Select the **Home** button on the top of the page to see the list of
    pre-installed dashboards (screenshot below):
-   ![Knative Dashboards](./images/grafana1.png)
+   ![Knative Dashboards](../images/grafana1.png)
 
 The following dashboards are pre-installed with Knative Serving:
 
