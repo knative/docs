@@ -169,7 +169,7 @@ To learn more about the objects and commands used in this topic, see:
 - [Kubernetes kubectl CLI](https://kubernetes.io/docs/reference/kubectl/kubectl/)
 
 For information about contributing to the Knative Build project, see the
-[Knative Build code repo](../../).
+[Knative Build code repo](https://github.com/knative/build).
 
 ---
 
