@@ -4,4 +4,4 @@ linkTitle: "Serving Component"
 weight: 20
 ---
 
-{{% readfile file="docs/serving/" markdown="true" %}}
+{{% readfile file="docs/serving/README.md" markdown="true" %}}

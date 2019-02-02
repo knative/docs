@@ -4,4 +4,4 @@ linkTitle: "Deploy, build, and serve - Go"
 weight: 1
 ---
 
-{{% readfile file="docs/serving/samples/thumbnailer-go/" markdown="true" %}}
+{{% readfile file="docs/serving/samples/thumbnailer-go/README.md" markdown="true" %}}
