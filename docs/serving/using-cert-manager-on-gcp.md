@@ -6,7 +6,7 @@ weight: 65
 
 These instructions assume you have already setup a Knative cluster and installed
 cert-manager into your cluster. For more information, see
-[using an SSL certificate](using-an-ssl-cert.md#install-cert-manager). They also
+[using an SSL certificate](using-an-ssl-cert/#install-cert-manager). They also
 assume you have already set up your managed zone with Cloud DNS as part of
 configuring the domain to map to your IP address.
 

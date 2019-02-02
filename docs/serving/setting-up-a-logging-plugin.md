@@ -83,7 +83,7 @@ the Elasticsearch and Kibana services. Knative provides this sample:
 kubectl apply --recursive --filename third_party/config/monitoring/logging/elasticsearch
 ```
 
-See [here](/serving/installing-logging-metrics-traces.md) for deploying the
+See [here](/serving/installing-logging-metrics-traces/) for deploying the
 whole Knative monitoring components.
 
 ## Uninstalling

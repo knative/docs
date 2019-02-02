@@ -144,7 +144,7 @@ Follow these steps to make your domain publicly accessible:
 ### Set static IP for Knative Gateway
 
 You might want to
-[set a static IP for your Knative gateway](gke-assigning-static-ip-address.md),
+[set a static IP for your Knative gateway](gke-assigning-static-ip-address/),
 so that the gateway IP does not change each time your cluster is restarted.
 
 ### Update your DNS records
