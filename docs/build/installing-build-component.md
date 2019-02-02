@@ -42,7 +42,7 @@ To add only the Knative Build component to an existing installation:
    time. Use CTRL + C to exit watch mode.
 
 You are now ready to create and run Knative Builds, see
-[Creating a simple Knative Build](../build/creating-builds.md) to get started.
+[Creating a simple Knative Build](../build/creating-builds/) to get started.
 
 ---
 
