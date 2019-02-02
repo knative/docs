@@ -12,9 +12,9 @@ action, you can define a Knative `Build` through a single configuration file.
 
 Also consider using a Knative `Build` to build the source code of your apps into
 container images, which you can then run on
-[Knative `serving`](https://github.com/knative/docs/blob/master/serving/).
+[Knative `serving`](../serving/).
 More information about this use case is demonstrated in
-[this sample](https://github.com/knative/docs/blob/master/serving/samples/source-to-url-go).
+[this sample](../serving/samples/source-to-url-go).
 
 ## Key features of Knative Builds
 
@@ -103,7 +103,7 @@ builds.
 
 #### Complex samples
 
-- [Use Knative to build apps from source code and then run those containers](https://github.com/knative/docs/blob/master/serving/samples/source-to-url-go).
+- [Use Knative to build apps from source code and then run those containers](../serving/samples/source-to-url-go).
 
 ## Related info
 
