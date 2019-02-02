@@ -8,7 +8,7 @@ sample function for riff.
 
 ## Prerequisites
 
-- [Install Knative Serving](../../../install/README.md)
+- [Install Knative Serving](../../../install/)
 
 ## Running
 

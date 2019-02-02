@@ -5,4 +5,4 @@ weight: 60
 type: "docs"
 ---
 
-{{% readfile file="docs/eventing/samples/writing-a-source/README.md" markdown="true" %}}
+{{% readfile file="docs/eventing/samples/writing-a-source/" markdown="true" %}}

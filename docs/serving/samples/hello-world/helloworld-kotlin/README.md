@@ -6,7 +6,7 @@ use for testing. It reads in an env variable `TARGET` and prints "Hello
 ## Prerequisites
 
 - A Kubernetes cluster with Knative installed. Follow the
-  [installation instructions](https://github.com/knative/docs/blob/master/install/README.md)
+  [installation instructions](https://github.com/knative/docs/blob/master/install/)
   if you need to create one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).

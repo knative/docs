@@ -2,8 +2,8 @@
 A Go sample that shows how to use Knative to go from source code in a git
 repository to a running application with a URL.
 
-This sample uses the [Build](../../../build/README.md) and
-[Serving](../../README.md) components of Knative to orchestrate an end-to-end
+This sample uses the [Build](../../../build/) and
+[Serving](../../) components of Knative to orchestrate an end-to-end
 deployment.
 
 ## Prerequisites
@@ -11,7 +11,7 @@ deployment.
 You need:
 
 - A Kubernetes cluster with Knative installed. Follow the
-  [installation instructions](https://github.com/knative/docs/blob/master/install/README.md)
+  [installation instructions](https://github.com/knative/docs/blob/master/install/)
   if you need to create one.
 - Go installed and configured. This is optional, and only required if you want
   to run the sample app locally.

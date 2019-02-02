@@ -7,4 +7,4 @@ menu:
     weight: 20
 ---
 
-{{% readfile file="docs/README.md" markdown="true" %}}
+{{% readfile file="docs/" markdown="true" %}}

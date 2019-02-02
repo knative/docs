@@ -55,10 +55,10 @@ in the Knative Serving repository.
 
 ## More samples and demos
 
-- [Autoscaling with Knative Serving](./samples/autoscale-go/README.md)
-- [Source-to-URL with Knative Serving](./samples/source-to-url-go/README.md)
-- [Telemetry with Knative Serving](./samples/telemetry-go/README.md)
-- [REST API sample](./samples/rest-api-go/README.md)
+- [Autoscaling with Knative Serving](./samples/autoscale-go/)
+- [Source-to-URL with Knative Serving](./samples/source-to-url-go/)
+- [Telemetry with Knative Serving](./samples/telemetry-go/)
+- [REST API sample](./samples/rest-api-go/)
 
 ## Setting up Logging and Metrics
 
