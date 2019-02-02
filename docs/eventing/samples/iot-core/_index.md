@@ -5,4 +5,4 @@ weight: 40
 type: "docs"
 ---
 
-{{% readfile file="docs/eventing/samples/iot-core/README.md" markdown="true" %}}
+{{% readfile file="docs/eventing/samples/iot-core/" markdown="true" %}}

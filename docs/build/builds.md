@@ -205,7 +205,7 @@ spec:
       revision: master
   steps:
     - image: ubuntu
-      args: ["cat", "README.md"]
+      args: ["cat", ""]
 ```
 
 #### Using `gcs`
@@ -236,7 +236,7 @@ spec:
       args: ["rsync", "gs://some-bucket", "."]
   steps:
     - image: ubuntu
-      args: ["cat", "README.md"]
+      args: ["cat", ""]
 ```
 
 #### Using an extra volume
@@ -306,7 +306,7 @@ spec:
     - name: config
       image: ubuntu
       command: ["/bin/bash"]
-      args: ["-c", "cat README.md"]
+      args: ["-c", "cat "]
 ```
 
 Where `serviceAccountName: test-build-robot-git-ssh` references the following
@@ -357,7 +357,7 @@ spec:
       revision: master
   steps:
     - image: ubuntu
-      args: ["cat", "README.md"]
+      args: ["cat", ""]
 ```
 
 ---

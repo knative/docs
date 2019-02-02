@@ -4,4 +4,4 @@ linkTitle: "Autoscaling - Go"
 weight: 1
 ---
 
-{{% readfile file="docs/serving/samples/autoscale-go/README.md" markdown="true" %}}
+{{% readfile file="docs/serving/samples/autoscale-go/" markdown="true" %}}

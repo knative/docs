@@ -11,7 +11,7 @@ demonstrates creating and deploying an image of a sample `hello world` app onto
 the newly created Knative cluster on
 [IBM Cloud Private](https://www.ibm.com/cloud/private).
 
-You can find [guides for other platforms here](README.md).
+You can find [guides for other platforms here]().
 
 ## Before you begin
 
@@ -204,7 +204,7 @@ To get started with Knative Eventing, walk through one of the
 [Eventing Samples](../eventing/samples/).
 
 To get started with Knative Build, read the
-[Build README](../build/README.md), then choose a sample to walk through.
+[Build README](../build/), then choose a sample to walk through.
 
 ## Cleaning up
 

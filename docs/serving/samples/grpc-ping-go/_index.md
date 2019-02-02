@@ -4,4 +4,4 @@ title: "gRPC server - Go"
 weight: 1
 ---
 
-{{% readfile file="docs/serving/samples/grpc-ping-go/README.md" markdown="true" %}}
+{{% readfile file="docs/serving/samples/grpc-ping-go/" markdown="true" %}}

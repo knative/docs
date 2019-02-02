@@ -4,4 +4,4 @@ linkTitle: "Traffic splitting"
 weight: 1
 ---
 
-{{% readfile file="docs/serving/samples/traffic-splitting/README.md" markdown="true" %}}
+{{% readfile file="docs/serving/samples/traffic-splitting/" markdown="true" %}}

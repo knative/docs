@@ -11,9 +11,9 @@ You may also have it all installed for you by clicking the button below:
 [![Deploy to IBM Cloud](https://bluemix.net/deploy/button_x2.png)](https://console.bluemix.net/devops/setup/deploy?repository=https://git.ng.bluemix.net/start-with-knative/toolchain.git)
 
 More
-[instructions on the deploy button here](https://git.ng.bluemix.net/start-with-knative/toolchain/blob/master/README.md).
+[instructions on the deploy button here](https://git.ng.bluemix.net/start-with-knative/toolchain/blob/master/).
 
-You can find [guides for other platforms here](README.md).
+You can find [guides for other platforms here]().
 
 ## Before you begin
 
@@ -198,7 +198,7 @@ To get started with Knative Eventing, pick one of the
 [Eventing Samples](../eventing/samples/) to walk through.
 
 To get started with Knative Build, read the
-[Build README](../build/README.md), then choose a sample to walk through.
+[Build README](../build/), then choose a sample to walk through.
 
 ## Cleaning up
 
