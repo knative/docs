@@ -2,6 +2,7 @@
 title: "Knative technical oversight committee"
 linkTitle: "Technical oversight committee"
 weight: 35
+type: "docs"
 ---
 
 The Knative Technical Oversight Committee (TOC) is responsible for cross-cutting
@@ -45,8 +46,8 @@ product and design decisions.
     community focus
 
   - Ensure the team adheres to our
-    [code of conduct](CONTRIBUTING.md#code-of-conduct) and respects our
-    [values](VALUES.md).
+    [code of conduct](CONTRIBUTING/#code-of-conduct) and respects our
+    [values](VALUES/).
 
   - Foster an environment for a healthy and happy community of developers and
     contributors.
@@ -86,7 +87,7 @@ during the community feedback period at the end of each meeting.
 ## Committee Members
 
 The members of the TOC are shown below. Membership in the TOC is determined by
-the [Steering committee](STEERING-COMMITTEE.md).
+the [Steering committee](STEERING-COMMITTEE/).
 
 | &nbsp;                                                        | Member        | Company | Profile                                            |
 | ------------------------------------------------------------- | ------------- | ------- | -------------------------------------------------- |

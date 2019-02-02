@@ -2,6 +2,7 @@
 title: "Contributor covenant code of conduct"
 linkTitle: "Code of conduct"
 weight: 10
+type: "docs"
 ---
 
 ## Our Pledge

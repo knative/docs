@@ -2,6 +2,7 @@
 title: "Reviewing and merging Knative pull requests"
 linkTitle: "Pull request guidelines"
 weight: 60
+type: "docs"
 ---
 
 As a community, we believe in the value of code reviews for all contributions.
@@ -9,7 +10,7 @@ Code reviews increase both the quality and readability of our code base, which
 in turn produces high quality software.
 
 This document provides guidelines for how the project's
-[Members](ROLES.md#member) review issues and merge pull requests (PRs).
+[Members](ROLES/#member) review issues and merge pull requests (PRs).
 
 - [Pull requests welcome](#pull-requests-welcome)
 - [Code of Conduct](#code-of-conduct)
@@ -29,7 +30,7 @@ Please do not ever hesitate to ask a question or submit a PR.
 
 Reviewers are often the first points of contact between new members of the
 community and are important in shaping the community. We encourage reviewers to
-read the [code of conduct](community/CODE-OF-CONDUCT.md) and to go above and
+read the [code of conduct](CODE-OF-CONDUCT/) and to go above and
 beyond the code of conduct to promote a collaborative and respectful community.
 
 ## Code reviewers
@@ -68,7 +69,7 @@ require a rebase are not considered active PRs.
 
 ### Holds
 
-Any [Approver](ROLES.md#approver) who wants to review a PR but does not have
+Any [Approver](ROLES/#approver) who wants to review a PR but does not have
 time immediately can put a hold on a PR. If you need more time, say so on the PR
 discussion and offer an ETA measured in single-digit days at most. Any PR that
 has a hold will not be merged until the person who requested the hold acks the
@@ -76,10 +77,10 @@ review, withdraws their hold, or is overruled by a majority of approvers.
 
 ## Approvers
 
-Merging of PRs is done by [Approvers](ROLES.md#approver).
+Merging of PRs is done by [Approvers](ROLES/#approver).
 
 As is the case with many open source projects, becoming an Approver is based on
-contributions to the project. See our [community roles](ROLES.md) document for
+contributions to the project. See our [community roles](ROLES/) document for
 information on how this is done.
 
 ## Merging PRs
