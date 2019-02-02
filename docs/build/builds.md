@@ -343,7 +343,7 @@ data:
 ```
 
 Note: For a working copy of this `ServiceAccount` example, see the
-[build/test/git-ssh](../../test/git-ssh)
+[build/test/git-ssh](https://github.com/knative/build/tree/master/test/git-ssh)
 code sample.
 
 #### Using `timeout`
