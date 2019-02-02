@@ -11,7 +11,7 @@ using cURL requests.
 
 You need:
 
-- A Kubernetes cluster with [Knative installed](./).
+- A Kubernetes cluster with [Knative installed](../).
 - An image of the app that you'd like to deploy available on a container
   registry. The image of the sample app used in this guide is available on
   Google Container Registry.
@@ -19,7 +19,7 @@ You need:
 ## Sample application
 
 This guide uses the
-[Hello World sample app in Go](../serving/samples/helloworld-go) to demonstrate
+[Hello World sample app in Go](../../serving/samples/helloworld-go) to demonstrate
 the basic workflow for deploying an app, but these steps can be adapted for your
 own application if you have an image of it available on
 [Docker Hub](https://docs.docker.com/docker-hub/repos/),

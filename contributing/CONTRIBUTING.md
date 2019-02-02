@@ -172,7 +172,7 @@ reviewers to the PR, set labels, run tests automatically, and so forth.
 
 See [Reviewing and Merging Pull Requests](REVIEWING/) for the PR review and
 merge process used for Knative and for more information about
-[Prow](./REVIEWING/#prow).
+[Prow](../REVIEWING/#prow).
 
 ## Issues
 

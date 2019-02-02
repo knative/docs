@@ -70,7 +70,6 @@ Builders should expect a Build to implement the following conventions:
 - Credentials attached to the Build's service account may be exposed as Git or
   Docker credentials as outlined [here](../auth/).
 
-
 ---
 
 Except as otherwise noted, the content of this page is licensed under the

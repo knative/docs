@@ -11,7 +11,7 @@ deployment.
 You need:
 
 - A Kubernetes cluster with Knative installed. Follow the
-  [installation instructions](../../../install/)
+  [installation instructions](../../../../install/)
   if you need to create one.
 - Go installed and configured. This is optional, and only required if you want
   to run the sample app locally.

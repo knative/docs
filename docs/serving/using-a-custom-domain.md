@@ -81,7 +81,7 @@ You can also apply an updated domain configuration:
 > deployed services and routes.
 
 Deploy an app (for example,
-[`helloworld-go`](./samples/helloworld-go/)), to your cluster as
+[`helloworld-go`](../samples/helloworld-go/)), to your cluster as
 normal. You can check the customized domain in Knative Route "helloworld-go"
 with the following command:
 
