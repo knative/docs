@@ -196,7 +196,7 @@ Now that your cluster has Knative installed, you can see what Knative has to
 offer.
 
 To deploy your first app with Knative, follow the step-by-step
-[Getting Started with Knative App Deployment](getting-started-knative-app.md)
+[Getting Started with Knative App Deployment](getting-started-knative-app/)
 guide.
 
 To get started with Knative Eventing, pick one of the

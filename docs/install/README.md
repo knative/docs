@@ -75,7 +75,7 @@ available Knative components and a set of observability plugins.
 If you already have a Kubernetes cluster you're comfortable installing _alpha_
 software on, use the following guide to install all Knative components:
 
-- [Knative Install on any Kubernetes](Knative-with-any-k8s.md)
+- [Knative Install on any Kubernetes](Knative-with-any-k8s/)
 
 **Limited install guides**
 
@@ -111,7 +111,7 @@ Knative cluster.
 Now you're ready to deploy an app:
 
 - Follow the step-by-step
-  [Getting Started with Knative App Deployment](getting-started-knative-app.md)
+  [Getting Started with Knative App Deployment](getting-started-knative-app/)
   guide.
 
 - View the available [sample apps](../serving/samples) and deploy one of your
@@ -126,14 +126,14 @@ After your Knative installation is running, you can set up a custom domain with
 a static IP address to be able to use Knative for publicly available services
 and set up an Istio IP range for outbound network access:
 
-- [Assign a static IP address](../serving/gke-assigning-static-ip-address.md)
-- [Configure a custom domain](../serving/using-a-custom-domain.md)
-- [Configure outbound network access](../serving/outbound-network-access.md)
-- [Configuring HTTPS with a custom certificate](../serving/using-an-ssl-cert.md)
+- [Assign a static IP address](../serving/gke-assigning-static-ip-address/)
+- [Configure a custom domain](../serving/using-a-custom-domain/)
+- [Configure outbound network access](../serving/outbound-network-access/)
+- [Configuring HTTPS with a custom certificate](../serving/using-an-ssl-cert/)
 
 ## Checking the version of your Knative Serving installation
 
-- [Checking the version of your Knative Serving installation](check-install-version.md)
+- [Checking the version of your Knative Serving installation](check-install-version/)
 
 ---
 
