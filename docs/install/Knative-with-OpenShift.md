@@ -10,7 +10,7 @@ This guide walks you through the installation of the latest version of
 demonstrates creating and deploying an image of a sample "hello world" app onto
 the newly created Knative cluster.
 
-You can find [guides for other platforms here](../install/).
+You can find [guides for other platforms here](../).
 
 ## Before you begin
 

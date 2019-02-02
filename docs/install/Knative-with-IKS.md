@@ -13,7 +13,7 @@ You may also have it all installed for you by clicking the button below:
 More
 [instructions on the deploy button here](https://git.ng.bluemix.net/start-with-knative/toolchain/blob/master/).
 
-You can find [guides for other platforms here](../install/).
+You can find [guides for other platforms here](../).
 
 ## Before you begin
 

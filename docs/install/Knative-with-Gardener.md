@@ -13,7 +13,7 @@ or have a look at the
 project. To learn more about this open source project, read the
 [blog on kubernetes.io](https://kubernetes.io/blog/2018/05/17/gardener/).
 
-You can find [guides for other platforms here](../install/).
+You can find [guides for other platforms here](../).
 
 ## Before you begin
 
