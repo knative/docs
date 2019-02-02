@@ -7,13 +7,13 @@ weight: 10
 This guide walks you through the installation of the latest version of Knative
 using pre-built images on a [Gardener](https://gardener.cloud) created cluster
 environment. To set up your own Gardener, see the
-[documentation](https://github.com/gardener/gardener/blob/master/docs/README.md)
+[documentation](https://github.com/gardener/gardener/blob/master/docs/)
 or have a look at the
 [landscape-setup-template](https://github.com/gardener/landscape-setup-template)
 project. To learn more about this open source project, read the
 [blog on kubernetes.io](https://kubernetes.io/blog/2018/05/17/gardener/).
 
-You can find [guides for other platforms here](README.md).
+You can find [guides for other platforms here](../).
 
 ## Before you begin
 
@@ -166,7 +166,7 @@ To get started with Knative Eventing, pick one of the
 [Eventing Samples](../eventing/samples/) to walk through.
 
 To get started with Knative Build, read the
-[Build README](../build/README.md), then choose a sample to walk through.
+[Build README](../build/), then choose a sample to walk through.
 
 ## Cleaning up
 

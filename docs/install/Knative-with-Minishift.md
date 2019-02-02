@@ -10,7 +10,7 @@ This guide walks you through the installation of the latest version of
 demonstrates creating and deploying an image of a sample "hello world" app onto
 the newly created Knative cluster.
 
-You can find [guides for other platforms here](README.md).
+You can find [guides for other platforms here](../).
 
 ## Minishift setup
 
@@ -278,7 +278,7 @@ curl -H "Host: helloworld-go.myproject.example.com" http://$IP_ADDRESS
 ```
 
 If you'd like to view the available sample apps and deploy one of your choosing,
-head to the [sample apps](../serving/samples/README.md) repository.
+head to the [sample apps](../serving/samples/) repository.
 
 ## Cleaning up
 

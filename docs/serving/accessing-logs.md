@@ -88,7 +88,7 @@ kubernetes.labels.serving_knative_dev\/revision: <REVISION_NAME>
 
 ### Accessing build logs
 
-To access logs for a [Knative Build](../build/README.md):
+To access logs for a [Knative Build](../build/):
 
 - Find the build's name in the specified in the `.yaml` file:
 

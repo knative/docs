@@ -15,7 +15,7 @@ want, for example Knative serving is not required to create and run builds.
 
 You must have a component of Knative installed and running in your Kubernetes
 cluster. For complete installation instructions, including how to install the
-Knative Build component, see [Installing Knative](../install/README/).
+Knative Build component, see [Installing Knative](../install/).
 
 ## Adding the Knative Build component
 

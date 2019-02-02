@@ -4,4 +4,4 @@ linkTitle: "RESTful service - Go"
 weight: 1
 ---
 
-{{% readfile file="docs/serving/samples/rest-api-go/README.md" markdown="true" %}}
+{{% readfile file="docs/serving/samples/rest-api-go/" markdown="true" %}}

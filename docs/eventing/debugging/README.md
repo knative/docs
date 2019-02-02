@@ -3,7 +3,7 @@ This is an evolving document on how to debug a non-working Knative Eventing setu
 
 ## Audience
 
-This document is intended for people that are familiar with [Knative Eventing](../README.md)'s object model. You don't need to be an expert, but do need to know roughly how things fit together.
+This document is intended for people that are familiar with [Knative Eventing](../)'s object model. You don't need to be an expert, but do need to know roughly how things fit together.
 
 ## Version
 This document works with [Eventing 0.3](https://github.com/knative/eventing/releases/tag/v0.3.0) and [Eventing Sources 0.3](https://github.com/knative/eventing-sources/releases/tag/v0.3.0).
@@ -11,7 +11,7 @@ This document works with [Eventing 0.3](https://github.com/knative/eventing/rele
 ## Prerequisites
 
 1. Setup
-   [Knative Eventing and Eventing-Sources](../README.md).
+   [Knative Eventing and Eventing-Sources](../).
 
 ## Example
 

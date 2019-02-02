@@ -6,7 +6,7 @@ generates its thumbnail image using the `ffmpeg` framework.
 
 ## Before you begin
 
-- [Install Knative Serving](../../../install/README.md)
+- [Install Knative Serving](../../../install/)
 
 If you want to test and run the app locally:
 

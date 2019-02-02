@@ -7,7 +7,7 @@ weight: 15
 This guide walks you through the installation of the latest version of all
 Knative components using pre-built images.
 
-You can find [guides for other platforms here](README.md).
+You can find [guides for other platforms here](../).
 
 ## Before you begin
 
@@ -199,7 +199,7 @@ To get started with Knative Eventing, pick one of the
 [Eventing Samples](../eventing/samples/) to walk through.
 
 To get started with Knative Build, read the
-[Build README](../build/README.md), then choose a sample to walk through.
+[Build README](../build/), then choose a sample to walk through.
 
 ## Cleaning up
 

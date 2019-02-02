@@ -5,7 +5,7 @@ weight: 40
 ---
 
 If you followed one of the
-[comprehensive install guides](../install/README.md#install-guides) or you
+[comprehensive install guides](../install/#install-guides) or you
 performed a custom installation and included the `monitoring.yaml` file in your
 installation, all of the observability features are already installed and you
 can skip down to the
@@ -146,7 +146,7 @@ To configure and setup monitoring:
     ```
 
 1. Choose a container image that meets the
-   [Fluentd image requirements](fluentd/README.md#requirements). For example, you can use a
+   [Fluentd image requirements](fluentd/#requirements). For example, you can use a
    public image. Or you can create a custom one and upload the image to a
    container registry which your cluster has read access to.
 
