@@ -15,7 +15,7 @@ source is most useful as a bridge from other GCP services, such as
    project id, and also set your project ID as default using
    `gcloud config set project $PROJECT_ID`.
 
-1. Setup [Knative Serving](https://github.com/knative/docs/blob/master/install)
+1. Setup [Knative Serving](../../../install)
 
 1. Setup
    [Knative Eventing](https://github.com/knative/docs/tree/master/eventing). In

@@ -10,10 +10,10 @@ You will need:
 
 1. An internet-accessible Kubernetes cluster with Knative Serving
    installed. Follow the [installation
-   instructions](https://github.com/knative/docs/blob/master/install/)
+   instructions](../../../install/)
    if you need to create one.
 1. Ensure Knative Serving is [configured with a domain
-   name](https://github.com/knative/docs/blob/master/serving/using-a-custom-domain.md)
+   name](../../../serving/using-a-custom-domain.md)
    that allows GitHub to call into the cluster.
 1. If you're using GKE, you'll also want to [assign a static IP address](../../../serving/gke-assigning-static-ip-address.).
 1. Install [Knative
