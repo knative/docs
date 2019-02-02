@@ -23,7 +23,7 @@ To add only the Knative Build component to an existing installation:
 
 1. Run the
    [`kubectl apply`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#apply)
-   command to install [Knative Build](https://github.com/knative/build) and its
+   command to install [Knative Build](../) and its
    dependencies:
    ```bash
    kubectl apply --filename https://storage.googleapis.com/knative-releases/build/latest/release.yaml
@@ -42,7 +42,7 @@ To add only the Knative Build component to an existing installation:
    time. Use CTRL + C to exit watch mode.
 
 You are now ready to create and run Knative Builds, see
-[Creating a simple Knative Build](creating-builds/) to get started.
+[Creating a simple Knative Build](../creating-builds/) to get started.
 
 ---
 
