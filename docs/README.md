@@ -9,9 +9,9 @@ patterns and codify the best practices that are shared by successful,
 real-world, Kubernetes-based frameworks and applications. Knative components
 focus on solving mundane but difficult tasks such as:
 
-- [Deploying a container](./install/getting-started-knative-app.md)
+- [Deploying a container](./install/getting-started-knative-app)
 - [Orchestrating source-to-URL workflows on Kubernetes](./serving/samples/source-to-url-go/)
-- [Routing and managing traffic with blue/green deployment](./serving/samples/blue-green-deployment.md)
+- [Routing and managing traffic with blue/green deployment](./serving/samples/blue-green-deployment)
 - [Scaling automatically and sizing workloads based on demand](./serving/samples/autoscale-go)
 - [Binding running services to eventing ecosystems](./eventing/samples/kubernetes-event-source)
 
@@ -75,17 +75,17 @@ Follow the links below to learn more about Knative.
 ### Getting started
 
 - [Installing Knative](./install/)
-- [Getting started with app deployment](./install/getting-started-knative-app.md)
+- [Getting started with app deployment](./install/getting-started-knative-app)
 - [Getting started with serving](./serving)
 - [Getting started with builds](./build)
 - [Getting started with eventing](./eventing)
 
 ### Configuration and networking
 
-- [Configuring outbound network access](./serving/outbound-network-access.md)
-- [Using a custom domain](./serving/using-a-custom-domain.md)
-- [Assigning a static IP address for Knative on Google Kubernetes Engine](./serving/gke-assigning-static-ip-address.md)
-- [Configuring HTTPS with a custom certificate](./serving/using-an-ssl-cert.md)
+- [Configuring outbound network access](./serving/outbound-network-access)
+- [Using a custom domain](./serving/using-a-custom-domain)
+- [Assigning a static IP address for Knative on Google Kubernetes Engine](./serving/gke-assigning-static-ip-address)
+- [Configuring HTTPS with a custom certificate](./serving/using-an-ssl-cert)
 
 ### Samples and demos
 
@@ -99,16 +99,16 @@ Follow the links below to learn more about Knative.
 
 ### Logging and metrics
 
-- [Installing logging, metrics and traces](./serving/installing-logging-metrics-traces.md)
-- [Accessing logs](./serving/accessing-logs.md)
-- [Accessing metrics](./serving/accessing-metrics.md)
-- [Accessing traces](./serving/accessing-traces.md)
-- [Setting up a logging plugin](./serving/setting-up-a-logging-plugin.md)
+- [Installing logging, metrics and traces](./serving/installing-logging-metrics-traces)
+- [Accessing logs](./serving/accessing-logs)
+- [Accessing metrics](./serving/accessing-metrics)
+- [Accessing traces](./serving/accessing-traces)
+- [Setting up a logging plugin](./serving/setting-up-a-logging-plugin)
 
 ### Debugging
 
-- [Debugging application issues](./serving/debugging-application-issues.md)
-- [Debugging performance issues](./serving/debugging-performance-issues.md)
+- [Debugging application issues](./serving/debugging-application-issues)
+- [Debugging performance issues](./serving/debugging-performance-issues)
 
 ---
 
