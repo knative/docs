@@ -70,7 +70,7 @@ service mesh. If you install any of the following options, you must install
 
 - [Knative Eventing](https://github.com/knative/eventing)
 - [Knative Eventing Sources](https://github.com/knative/eventing-sources)
-- [Observability plugins](../serving/installing-logging-metrics-traces.md)
+- [Observability plugins](../serving/installing-logging-metrics-traces/)
 
 #### Istio installation options
 
@@ -215,7 +215,7 @@ files from the Knative repositories:
 | [`clusterrole.yaml`][7]†                       | Enables the Build and Serving components to interact.                                                  | Serving component, Build component                                |
 
 _\*_ See
-[Installing logging, metrics, and traces](../serving/installing-logging-metrics-traces.md)
+[Installing logging, metrics, and traces](../serving/installing-logging-metrics-traces/)
 for details about installing the various supported observability plug-ins.
 
 † These are the recommended standard install files suitable for most use cases.
@@ -347,6 +347,7 @@ commands below.
    kubectl get pods --namespace knative-monitoring
    ```
 
+
    See
    [Installing logging, metrics, and traces](../serving/installing-logging-metrics-traces.md)
    for details about setting up the various supported observability plug-ins.
@@ -359,11 +360,11 @@ events in your Knative cluster.
 Depending on the Knative components you installed, you can use the following
 guides to help you get started with Knative:
 
-- [Getting Started with Knative App Deployment](./getting-started-knative-app.md)
+- [Getting Started with Knative App Deployment](./getting-started-knative-app/)
 
   - [Knative Serving sample apps](../serving/samples/)
 
-- [Creating a simple Knative Build](../build/creating-builds.md)
+- [Creating a simple Knative Build](../build/creating-builds/)
 
   - [Knative Build templates](https://github.com/knative/build-templates)
 
