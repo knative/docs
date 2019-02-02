@@ -14,7 +14,7 @@ uses [busybox](https://docs.docker.com/samples/library/busybox/) to simply print
 "_hello build_".
 
 Tip: See the
-[build code samples](builds/#get-started-with-knative-build-samples) for
+[build code samples](../builds/#get-started-with-knative-build-samples) for
 examples of more complex builds, including code samples that use container
 images, authentication, and include multiple steps.
 
@@ -24,7 +24,7 @@ Before you can run a Knative Build, you must have Knative installed in your
 Kubernetes cluster, and it must include the Knative Build component:
 
 - For details about installing a new instance of Knative in your Kubernetes
-  cluster, see [Installing Knative](../install/).
+  cluster, see [Installing Knative](../../install/).
 
 - If you have a component of Knative installed and running, you must
   [ensure that the Knative Build component is also installed](../installing-build-component/).
