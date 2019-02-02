@@ -15,7 +15,7 @@ propose changes to this document in a pull request.
 
 ### Code of conduct
 
-Knative follows the [Knative Code of Conduct](./CODE-OF-CONDUCT/). By
+Knative follows the [Knative Code of Conduct](../CODE-OF-CONDUCT/). By
 participating, you are expected to uphold this code. Please report unacceptable
 behavior to knative-code-of-conduct@googlegroups.com.
 
@@ -39,7 +39,7 @@ see a problem with the documentation, submit an issue using the following steps:
      When you create a bug report, include as many details as possible and
      include suggested fixes to the issue. If you know which Knative component
      your bug is related to, you can assign the appropriate
-     [Working Group Lead](./WORKING-GROUPS/).
+     [Working Group Lead](../WORKING-GROUPS/).
    - **Feature request**: For upcoming changes to the documentation or requests
      for more information on a particular subject.
 
@@ -51,7 +51,7 @@ documentation issues should go in the `docs` repository.
 
 ### Working group
 
-The [Knative Documentation Working Group](./WORKING-GROUPS/#documentation)
+The [Knative Documentation Working Group](../WORKING-GROUPS/#documentation)
 meets weekly on Tuesdays and alternates between a 9am PT and a 4:30pm PT time to
 accommodate contributors in both the EMEA and APAC timezones.
 [Click here](https://calendar.google.com/calendar/embed?src=google.com_18un4fuh6rokqf8hmfftm5oqq4%40group.calendar.google.com)
@@ -66,9 +66,9 @@ There are a couple different ways to jump in to the Knative doc set:
 
 - Look at issues in the Docs repo labled
   [Good First Issue](https://github.com/knative/docs/labels/kind%2Fgood-first-issue).
-- Run through the [install guide](../install/README.md) for the platform of your
+- Run through the [install guide](../../install/docs/README.md) for the platform of your
   choice, as well as the
-  [Getting Started with Knative App Deployment](../install/getting-started-knative-app/)
+  [Getting Started with Knative App Deployment](../../install/docs/getting-started-knative-app/)
   guide, and keep a
   [friction log](https://devrel.net/developer-experience/an-introduction-to-friction-logging)
   of the experience. What was hard for you? Then open a PR with a few

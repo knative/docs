@@ -54,30 +54,30 @@ in the Knative Serving repository.
 
 ## More samples and demos
 
-- [Autoscaling with Knative Serving](./samples/autoscale-go/)
-- [Source-to-URL with Knative Serving](./samples/source-to-url-go/)
-- [Telemetry with Knative Serving](./samples/telemetry-go/)
-- [REST API sample](./samples/rest-api-go/)
+- [Autoscaling with Knative Serving](samples/autoscale-go/)
+- [Source-to-URL with Knative Serving](samples/source-to-url-go/)
+- [Telemetry with Knative Serving](samples/telemetry-go/)
+- [REST API sample](samples/rest-api-go/)
 
 ## Setting up Logging and Metrics
 
-- [Installing Logging, Metrics and Traces](./installing-logging-metrics-traces/)
-- [Accessing Logs](./accessing-logs/)
-- [Accessing Metrics](./accessing-metrics/)
-- [Accessing Traces](./accessing-traces/)
-- [Setting up a logging plugin](./setting-up-a-logging-plugin/)
+- [Installing Logging, Metrics and Traces](../installing-logging-metrics-traces/)
+- [Accessing Logs](../accessing-logs/)
+- [Accessing Metrics](../accessing-metrics/)
+- [Accessing Traces](../accessing-traces/)
+- [Setting up a logging plugin](../setting-up-a-logging-plugin/)
 
 ## Debugging Knative Serving issues
 
-- [Debugging Application Issues](./debugging-application-issues/)
-- [Debugging Performance Issues](./debugging-performance-issues/)
+- [Debugging Application Issues](../debugging-application-issues/)
+- [Debugging Performance Issues](../debugging-performance-issues/)
 
 ## Configuration and Networking
 
-- [Configuring outbound network access](./outbound-network-access/)
-- [Configuring cluster local routes](./cluster-local-route/)
-- [Using a custom domain](./using-a-custom-domain/)
-- [Assigning a static IP address for Knative on Google Kubernetes Engine](./gke-assigning-static-ip-address/)
+- [Configuring outbound network access](../outbound-network-access/)
+- [Configuring cluster local routes](../cluster-local-route/)
+- [Using a custom domain](../using-a-custom-domain/)
+- [Assigning a static IP address for Knative on Google Kubernetes Engine](../gke-assigning-static-ip-address/)
 
 ## Known Issues
 

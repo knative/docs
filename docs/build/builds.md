@@ -107,7 +107,6 @@ of the `steps` fields, or container images that you define:
 For details about how to ensure that you implement each step to align with the
 "builder contract", see the [`Builder`](../builder-contract/) reference topic.
 
-
 #### Template
 
 The `template` field is a required if no `steps` are defined. Specifies a
@@ -149,7 +148,6 @@ of the `Build` resource object.
 
 For examples and more information about specifying service accounts, see the
 [`ServiceAccount`](../auth/) reference topic.
-
 
 #### Volumes
 

@@ -5,7 +5,7 @@ weight: 35
 ---
 
 If you are running Knative on Google Kubernetes Engine and want to use a
-[custom domain](./using-a-custom-domain/) with your apps, you need to
+[custom domain](../using-a-custom-domain/) with your apps, you need to
 configure a static IP address to ensure that your custom domain mapping doesn't
 break.
 

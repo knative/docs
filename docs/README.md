@@ -9,11 +9,11 @@ patterns and codify the best practices that are shared by successful,
 real-world, Kubernetes-based frameworks and applications. Knative components
 focus on solving mundane but difficult tasks such as:
 
-- [Deploying a container](./install/getting-started-knative-app)
-- [Orchestrating source-to-URL workflows on Kubernetes](./serving/samples/source-to-url-go/)
-- [Routing and managing traffic with blue/green deployment](./serving/samples/blue-green-deployment)
-- [Scaling automatically and sizing workloads based on demand](./serving/samples/autoscale-go)
-- [Binding running services to eventing ecosystems](./eventing/samples/kubernetes-event-source)
+- [Deploying a container](install/getting-started-knative-app)
+- [Orchestrating source-to-URL workflows on Kubernetes](serving/samples/source-to-url-go/)
+- [Routing and managing traffic with blue/green deployment](serving/samples/blue-green-deployment)
+- [Scaling automatically and sizing workloads based on demand](serving/samples/autoscale-go)
+- [Binding running services to eventing ecosystems](eventing/samples/kubernetes-event-source)
 
 Developers on Knative can use familiar idioms, languages, and frameworks to
 deploy functions, applications, or containers workloads.
@@ -33,7 +33,7 @@ The following Knative components are available:
 
 Knative is designed for different personas:
 
-![Diagram that displays different Audiences for Knative](./images/knative-audience.svg)
+![Diagram that displays different Audiences for Knative](images/knative-audience.svg)
 
 ### Developers
 
@@ -60,8 +60,8 @@ separation between pluggable components, the Knative project establishes an
 efficient contributor workflow.
 
 Knative is a diverse, open, and inclusive community. To get involved, see
-[CONTRIBUTING.md](./contributing/CONTRIBUTING) and join the
-[Knative community](./community/).
+[CONTRIBUTING.md](../../contributing/CONTRIBUTING/) and join the
+[Knative community](../../community/).
 
 Your own path to becoming a Knative contributor can
 [begin anywhere](https://github.com/knative/serving/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Akind%2Fgood-first-issue).
@@ -74,41 +74,41 @@ Follow the links below to learn more about Knative.
 
 ### Getting started
 
-- [Installing Knative](./install/)
-- [Getting started with app deployment](./install/getting-started-knative-app)
-- [Getting started with serving](./serving)
-- [Getting started with builds](./build)
-- [Getting started with eventing](./eventing)
+- [Installing Knative](install/)
+- [Getting started with app deployment](install/getting-started-knative-app)
+- [Getting started with serving](serving)
+- [Getting started with builds](build)
+- [Getting started with eventing](eventing)
 
 ### Configuration and networking
 
-- [Configuring outbound network access](./serving/outbound-network-access)
-- [Using a custom domain](./serving/using-a-custom-domain)
-- [Assigning a static IP address for Knative on Google Kubernetes Engine](./serving/gke-assigning-static-ip-address)
-- [Configuring HTTPS with a custom certificate](./serving/using-an-ssl-cert)
+- [Configuring outbound network access](serving/outbound-network-access)
+- [Using a custom domain](serving/using-a-custom-domain)
+- [Assigning a static IP address for Knative on Google Kubernetes Engine](serving/gke-assigning-static-ip-address)
+- [Configuring HTTPS with a custom certificate](serving/using-an-ssl-cert)
 
 ### Samples and demos
 
-- [Autoscaling](./serving/samples/autoscale-go/)
-- [Source-to-URL deployment](./serving/samples/source-to-url-go/)
-- [Binding running services to eventing ecosystems](./eventing/samples/kubernetes-event-source)
-- [Telemetry](./serving/samples/telemetry-go/)
-- [REST API sample](./serving/samples/rest-api-go/)
-- [All samples for serving](./serving/samples/)
-- [All samples for eventing](./eventing/samples/)
+- [Autoscaling](serving/samples/autoscale-go/)
+- [Source-to-URL deployment](serving/samples/source-to-url-go/)
+- [Binding running services to eventing ecosystems](eventing/samples/kubernetes-event-source)
+- [Telemetry](serving/samples/telemetry-go/)
+- [REST API sample](serving/samples/rest-api-go/)
+- [All samples for serving](serving/samples/)
+- [All samples for eventing](eventing/samples/)
 
 ### Logging and metrics
 
-- [Installing logging, metrics and traces](./serving/installing-logging-metrics-traces)
-- [Accessing logs](./serving/accessing-logs)
-- [Accessing metrics](./serving/accessing-metrics)
-- [Accessing traces](./serving/accessing-traces)
-- [Setting up a logging plugin](./serving/setting-up-a-logging-plugin)
+- [Installing logging, metrics and traces](serving/installing-logging-metrics-traces)
+- [Accessing logs](serving/accessing-logs)
+- [Accessing metrics](serving/accessing-metrics)
+- [Accessing traces](serving/accessing-traces)
+- [Setting up a logging plugin](serving/setting-up-a-logging-plugin)
 
 ### Debugging
 
-- [Debugging application issues](./serving/debugging-application-issues)
-- [Debugging performance issues](./serving/debugging-performance-issues)
+- [Debugging application issues](serving/debugging-application-issues)
+- [Debugging performance issues](serving/debugging-performance-issues)
 
 ---
 

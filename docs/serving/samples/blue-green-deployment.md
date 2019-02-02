@@ -13,9 +13,9 @@ configuration.
 
 You need:
 
-- A Kubernetes cluster with [Knative installed](../../install/).
+- A Kubernetes cluster with [Knative installed](../../../install/).
 - (Optional)
-  [A custom domain configured](../../serving/using-a-custom-domain/) for use
+  [A custom domain configured](../../../serving/using-a-custom-domain/) for use
   with Knative.
 
 Note: The source code for the gcr.io/knative-samples/knative-route-demo image

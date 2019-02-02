@@ -200,7 +200,7 @@ To deploy your first app with Knative, follow the step-by-step
 guide.
 
 To get started with Knative Eventing, pick one of the
-[Eventing Samples](../eventing/samples/) to walk through.
+[Eventing Samples](../../eventing/samples/) to walk through.
 
 To get started with Knative Build, read the [Build README](../build/README.md),
 then choose a sample to walk through.
