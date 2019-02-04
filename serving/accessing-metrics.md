@@ -8,7 +8,10 @@ the visualization tool for [Prometheus](https://prometheus.io/).
 1. To open Grafana, enter the following command:
 
 ```shell
-kubectl port-forward --namespace knative-monitoring $(kubectl get pods --namespace knative-monitoring --selector=app=grafana --output=jsonpath="{.items..metadata.name}") 3000
+kubectl port-forward --namespace knative-monitoring \
+$(kubectl get pods --namespace knative-monitoring \
+--selector=app=grafana --output=jsonpath="{.items..metadata.name}") \
+3000
 ```
 
 - This starts a local proxy of Grafana on port 3000. For security reasons, the
@@ -36,7 +39,9 @@ The following dashboards are pre-installed with Knative Serving:
    with username: `admin` and password: `admin`.
 
   - Before you expose the Grafana UI outside the cluster, make sure to change the
-  password.
+  password. You will be prompted to set a password on first login, and it can
+  later be changed at
+  [http://localhost:3000/org/users](http://localhost:3000/org/users).
 
 
 ## Prometheus
@@ -46,7 +51,10 @@ However, it can often times be useful to access Prometheus for debugging.
 
 1. To open Prometheus, enter the following command:
 ```shell
-kubectl port-forward -n knative-monitoring $(kubectl get pods -n knative-monitoring --selector=app=prometheus --output=jsonpath="{.items[0].metadata.name}") 9090
+kubectl port-forward -n knative-monitoring \
+$(kubectl get pods -n knative-monitoring \
+--selector=app=prometheus --output=jsonpath="{.items[0].metadata.name}") \
+9090
 ```
 
   - This starts a local proxy of Prometheus on port 9090. For security reasons,

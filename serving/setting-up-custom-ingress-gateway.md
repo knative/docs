@@ -14,7 +14,7 @@ template in [Istio release](https://github.com/istio/istio/releases).
 
 Here is an example:
 
-```
+```yaml
 apiVersion: v1
 kind: Service
 metadata:
