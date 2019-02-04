@@ -33,9 +33,9 @@ To add only the Knative Build component to an existing installation:
    command to monitor the Knative Build components until all of the components
    show a `STATUS` of `Running`:
 
-   ```bash
-   kubectl get pods --namespace knative-build
-   ```
+    ```bash
+    kubectl get pods --namespace knative-build
+    ```
 
    Tip: Instead of running the `kubectl get` command multiple times, you can
    append the `--watch` flag to view the component's status updates in real
