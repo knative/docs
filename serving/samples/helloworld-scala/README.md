@@ -132,5 +132,5 @@ curl -v -H "Host: helloworld-scala.default.example.com" http://$SERVING_GATEWAY
 ## Cleanup
 
 ```shell
-kubetl delete --filename helloworld-scala.yaml
+kubectl delete --filename helloworld-scala.yaml
 ```
