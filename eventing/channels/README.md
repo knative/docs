@@ -29,7 +29,7 @@ These are the channels `CRD`s.
 
 Name | Status | Support | Description
 --- | --- | --- | ---
-[Apache Kafka](https://github.com/knative/eventing/tree/master/contrib/kafka/config) | Proof of Concept | None | Channels are backed by [Apache Kafka](http://kafka.apache.org/) topics
+[Apache Kafka](https://github.com/knative/eventing/tree/master/contrib/kafka/config) | Proof of Concept | None | Channels are backed by [Apache Kafka](http://kafka.apache.org/) topics.
 [GCP PubSub](https://github.com/knative/eventing/tree/master/contrib/gcppubsub/config) | Proof of Concept | None | Channels are backed by [GCP PubSub](https://cloud.google.com/pubsub/).
 [In-Memory](https://github.com/knative/eventing/tree/master/config/provisioners/in-memory-channel) | Proof of Concept | None | In-memory channels are a best effort Channel. They should NOT be used in Production. They are useful for development.
 [Natss](https://github.com/knative/eventing/tree/master/contrib/natss/config) | Proof of Concept | None | Channels are backed by [NATS Streaming](https://github.com/nats-io/nats-streaming-server#configuring).
