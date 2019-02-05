@@ -1,5 +1,8 @@
 # Setting Up Custom Ingress Gateway
 
+[TODO: Update instructions using
+Helm](https://github.com/knative/docs/issues/875)
+
 Knative uses a shared ingress Gateway to serve all incoming traffic within Knative
 service mesh, which is the `knative-ingress-gateway` Gateway under
 `knative-serving` namespace. By default, we use Istio gateway service
