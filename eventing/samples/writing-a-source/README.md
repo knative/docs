@@ -47,7 +47,5 @@ Kubebuilder not your thing? Prefer the easy way? Check out these alternatives.
     without writing any controller code. It requires Metacontroller.
 *   [Metacontroller](https://metacontroller.app) can be used to write
     controllers as webhooks in any language.
-*   The [GitLab source](https://gitlab.com/triggermesh/gitlabsource) uses the
-    Python Kubernetes client library.
 *   The [Cloud Scheduler source](https://github.com/vaikas-google/csr) uses the
     standard Kubernetes Golang client library instead of Kubebuilder.
