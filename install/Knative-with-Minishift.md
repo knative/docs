@@ -204,7 +204,7 @@ curl -s https://raw.githubusercontent.com/knative/docs/master/install/scripts/kn
 
    ```shell
    oc apply -f https://github.com/knative/serving/releases/download/v0.3.0/serving.yaml \
-   oc apply -f https://github.com/knative/build/releases/download/v0.3.0/build.yaml
+   oc apply -f https://github.com/knative/build/releases/download/v0.3.0/release.yaml
    ```
 
 2. Monitor the Knative components until all of the components show a `STATUS` of
