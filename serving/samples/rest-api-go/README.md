@@ -112,6 +112,7 @@ You can inspect the created resources with the following `kubectl` commands:
 
 ```
 kubectl get ksvc stock-service-example -o yaml
+```
 
 - View the created Route resource:
 
