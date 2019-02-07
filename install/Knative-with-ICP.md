@@ -162,7 +162,7 @@ see [Performing a Custom Knative Installation](Knative-custom-install.md).
    [Installing logging, metrics, and traces](../serving/installing-logging-metrics-traces.md)
    for details about installing the various supported observability plug-ins.
 
-1) Monitor the Knative components until all of the components show a `STATUS` of
+1. Monitor the Knative components until all of the components show a `STATUS` of
    `Running`:
 
    ```bash

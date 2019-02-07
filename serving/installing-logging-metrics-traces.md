@@ -201,24 +201,22 @@ To configure and setup monitoring:
     kubectl get nodes --selector beta.kubernetes.io/fluentd-ds-ready=true
     ```
 
-1.  If you receive the `No Resources Found` response:
+1. If you receive the `No Resources Found` response:
 
-    1.  Run the following command to ensure that the Fluentd DaemonSet runs on
-        all your nodes:
+   1. Run the following command to ensure that the Fluentd DaemonSet runs on all your nodes:
 
-        ```shell
-        kubectl label nodes --all beta.kubernetes.io/fluentd-ds-ready="true"
-        ```
+      ```shell
+      kubectl label nodes --all beta.kubernetes.io/fluentd-ds-ready="true"
+      ```
 
-    1.  Run the following command to ensure that the `fluentd-ds` daemonset is
-        ready on at least one node:
+   1. Run the following command to ensure that the `fluentd-ds` daemonset is ready on at least one node:
 
-              ```shell
-              kubectl get daemonset fluentd-ds --namespace knative-monitoring
-              ```
+      ```shell
+      kubectl get daemonset fluentd-ds --namespace knative-monitoring
+      ```
 
-        See [Accessing Logs](./accessing-logs.md) for more information about
-        logs in Knative.
+See [Accessing Logs](./accessing-logs.md) for more information about
+logs in Knative.
 
 ## End to end traces
 
