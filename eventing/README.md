@@ -70,9 +70,9 @@ Knative Eventing currently requires Knative Serving and Istio version 1.0 or
 later installed.
 [Follow the instructions to install on the platform of your choice](../install/README.md).
 
-Many of the sources require making outbound connections to create the event subscription,
-and if you have any functions that make use of any external (to cluster) services, you
-must enable it also for them to work.
+Many of the sources require making outbound connections to create the event
+subscription, and if you have any functions that make use of any external (to
+cluster) services, you must enable it also for them to work.
 [Follow the instructions to configure outbound network access](../serving/outbound-network-access.md).
 
 Install the core Knative Eventing (which provides an in-memory
@@ -84,7 +84,8 @@ kubectl apply --filename https://github.com/knative/eventing/releases/download/v
 kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.3.0/release.yaml
 ```
 
-In addition to the core sources, there are [other sources](./sources/README.md) that you can install.
+In addition to the core sources, there are [other sources](./sources/README.md)
+that you can install.
 
 This document will be updated as additional sources (which are custom resource
 definitions and an associated controller) and channels
@@ -130,7 +131,8 @@ format, but may be expressed as simple lists, etc in YAML. All Sources should be
 part of the `sources` category, so you can list all existing Sources with
 `kubectl get sources`. The currently-implemented Sources are described below:
 
-_Want to implement your own source? Check out [the tutorial](samples/writing-a-source/README.md)._
+_Want to implement your own source? Check out
+[the tutorial](samples/writing-a-source/README.md)._
 
 ### KubernetesEventSource
 
@@ -217,8 +219,8 @@ FTP server for new files or generate events at a set time interval.
 **Spec fields**:
 
 - `image` (**required**): `string` A docker image of the container to be run.
-- `args`: `[]string` Command-line arguments. If no `--sink` flag is provided, 
-   one will be added and filled in with the DNS address of the `sink` object.
+- `args`: `[]string` Command-line arguments. If no `--sink` flag is provided,
+  one will be added and filled in with the DNS address of the `sink` object.
 - `env`: `map[string]string` Environment variables to be set in the container.
 - `serviceAccountName`: `string` The name of the ServiceAccount to run the
   container as.
@@ -228,13 +230,17 @@ FTP server for new files or generate events at a set time interval.
 
 ### CronJobSource
 
-The CronJobSource fires events based on given [Cron](https://en.wikipedia.org/wiki/Cron) schedule.
+The CronJobSource fires events based on given
+[Cron](https://en.wikipedia.org/wiki/Cron) schedule.
 
 **Spec fields**:
 
-- `schedule` (**required**): `string` A [Cron](https://en.wikipedia.org/wiki/Cron) format string, such as `0 * * * *` or `@hourly`.
+- `schedule` (**required**): `string` A
+  [Cron](https://en.wikipedia.org/wiki/Cron) format string, such as `0 * * * *`
+  or `@hourly`.
 - `data`: `string` Optional data sent to downstream receiver.
-- `serviceAccountName`: `string` The name of the ServiceAccount to run the container as.
+- `serviceAccountName`: `string` The name of the ServiceAccount to run the
+  container as.
 - `sink`:
   [ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#objectreference-v1-core)
   A reference to the object that should receive events.
@@ -246,8 +252,9 @@ The CronJobSource fires events based on given [Cron](https://en.wikipedia.org/wi
 - [Run samples](samples/)
 
 ## Configuration
+
 - [Default Channels](channels/default-channels.md) provide a way to choose the
-persistence strategy for Channels across the cluster.
+  persistence strategy for Channels across the cluster.
 
 ---
 

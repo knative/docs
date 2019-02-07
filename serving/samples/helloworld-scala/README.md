@@ -1,17 +1,28 @@
 # Hello World - Scala using Akka HTTP sample
 
-A microservice which demonstrates how to get set up and running with Knative Serving when using [Scala](https://scala-lang.org/) and [Akka](https://akka.io/) [HTTP](https://doc.akka.io/docs/akka-http/current/). It will respond to a HTTP request with a text specified as an `ENV` variable named `MESSAGE`, defaulting to `"Hello World!"`.
+A microservice which demonstrates how to get set up and running with Knative
+Serving when using [Scala](https://scala-lang.org/) and [Akka](https://akka.io/)
+[HTTP](https://doc.akka.io/docs/akka-http/current/). It will respond to a HTTP
+request with a text specified as an `ENV` variable named `MESSAGE`, defaulting
+to `"Hello World!"`.
 
 ## Prerequisites
 
-* A Kubernetes cluster [installation](https://github.com/knative/docs/blob/master/install/README.md) with Knative Serving up and running.
-* [Docker](https://www.docker.com) installed locally, and running, optionally a Docker Hub account configured or some other Docker Repository installed locally.
-* [Java JDK8 or later](https://adoptopenjdk.net/installation.html) installed locally.
-* [Scala's](https://scala-lang.org/) standard build tool [sbt](https://www.scala-sbt.org/) installed locally.
+- A Kubernetes cluster
+  [installation](https://github.com/knative/docs/blob/master/install/README.md)
+  with Knative Serving up and running.
+- [Docker](https://www.docker.com) installed locally, and running, optionally a
+  Docker Hub account configured or some other Docker Repository installed
+  locally.
+- [Java JDK8 or later](https://adoptopenjdk.net/installation.html) installed
+  locally.
+- [Scala's](https://scala-lang.org/) standard build tool
+  [sbt](https://www.scala-sbt.org/) installed locally.
 
 ## Configuring the sbt build
 
-If you want to use your Docker Hub repository, set the repository to "docker.io/yourusername/yourreponame".
+If you want to use your Docker Hub repository, set the repository to
+"docker.io/yourusername/yourreponame".
 
 If you use Minikube, you first need to run:
 
@@ -19,13 +30,16 @@ If you use Minikube, you first need to run:
 eval $(minikube docker-env)
 ```
 
-If want to use the Docker Repository inside Minikube, either set this to "dev.local" or if you want to use another repository name, then you need to run the following command after `docker:publishLocal`:
+If want to use the Docker Repository inside Minikube, either set this to
+"dev.local" or if you want to use another repository name, then you need to run
+the following command after `docker:publishLocal`:
 
 ```shell
 docker tag yourreponame/helloworld-scala:<version> dev.local/helloworld-scala:<version>
 ```
 
-Otherwise Knative Serving won't be able to resolve this image from the Minikube Docker Repository.
+Otherwise Knative Serving won't be able to resolve this image from the Minikube
+Docker Repository.
 
 You specify the repository in [build.sbt](build.sbt):
 
@@ -33,11 +47,14 @@ You specify the repository in [build.sbt](build.sbt):
 dockerRepository := Some("your_repository_name")
 ```
 
-You can learn more about the build configuration syntax [here](https://www.scala-sbt.org/1.x/docs/Basic-Def.html).
+You can learn more about the build configuration syntax
+[here](https://www.scala-sbt.org/1.x/docs/Basic-Def.html).
 
 ## Configuring the Service descriptor
 
-Importantly, in [helloworld-scala.yaml](helloworld-scala.yaml) **change the image reference to match up with the repository**, name, and version specified in the [build.sbt](build.sbt) in the previous section.
+Importantly, in [helloworld-scala.yaml](helloworld-scala.yaml) **change the
+image reference to match up with the repository**, name, and version specified
+in the [build.sbt](build.sbt) in the previous section.
 
 ```yaml
 apiVersion: serving.knative.dev/v1alpha1
@@ -58,7 +75,6 @@ spec:
                 value: "Scala & Akka on Knative says hello!"
               - name: HOST
                 value: "localhost"
-
 ```
 
 ## Publishing to Docker
@@ -75,7 +91,8 @@ or
 sbt docker:publish
 ```
 
-Which of them to use is depending on whether you are publishing to a remote or a local Docker Repository.
+Which of them to use is depending on whether you are publishing to a remote or a
+local Docker Repository.
 
 ## Deploying to Knative Serving
 
