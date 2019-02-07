@@ -32,13 +32,13 @@ basic project structure.
 
 You'll need to choose the following:
 
-*   **A license.** The reference project uses Apache 2.
-*   **A domain name.** This is the unique domain used to identify your project's
-    resources. The reference project uses `knative.dev`, but you should choose
-    one unique to you or your organization.
-*   **An author name.** This is the copyright owner listed in the copyright
-    notice at the top of each source file. The reference project uses `The
-    Knative Authors.`
+- **A license.** The reference project uses Apache 2.
+- **A domain name.** This is the unique domain used to identify your project's
+  resources. The reference project uses `knative.dev`, but you should choose one
+  unique to you or your organization.
+- **An author name.** This is the copyright owner listed in the copyright notice
+  at the top of each source file. The reference project uses
+  `The Knative Authors.`
 
 ```sh
 kubebuilder init --domain knative.dev --license apache2 --owner "The Knative Authors"

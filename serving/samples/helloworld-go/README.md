@@ -137,10 +137,11 @@ folder) you're ready to build and deploy the sample app.
    ```
 
 1. Now that your service is created, Knative will perform the following steps:
-    - Create a new immutable revision for this version of the app.
-    - Network programming to create a route, ingress, service, and load balance
-    for your app.
-    - Automatically scale your pods up and down (including to zero active pods).
+
+   - Create a new immutable revision for this version of the app.
+   - Network programming to create a route, ingress, service, and load balance
+     for your app.
+   - Automatically scale your pods up and down (including to zero active pods).
 
 1. Run the following command to find the external IP address for your service.
    The ingress IP for your cluster is returned. If you just created your
