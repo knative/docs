@@ -19,7 +19,7 @@ While you can clone all of the code from this directory, hello world apps are
 generally more useful if you build them step-by-step. The following instructions
 recreate the source files from this folder.
 
-1. Create a new directory and initalize `npm`. 
+1. Create a new directory and initalize `npm`.
 
    ```shell
    npm init
@@ -84,12 +84,11 @@ recreate the source files from this folder.
    see
    [Dockerizing a Node.js web app](https://nodejs.org/en/docs/guides/nodejs-docker-webapp/).
 
-
    ```Dockerfile
    # Use the official Node.js 10 image.
    # https://hub.docker.com/_/node
    FROM node:10
-   
+
    # Create and change to the app directory.
    WORKDIR /usr/src/app
 

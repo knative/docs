@@ -71,15 +71,15 @@ be created using the following instructions.
 4. Create a new file named `Dockerfile`, this file defines instructions for
    dockerizing your applications, for dart apps this can be done as follows:
 
-    ```Dockerfile
-    # Use Google's official Dart image.
-    # https://hub.docker.com/r/google/dart-runtime/
-    FROM google/dart-runtime
+   ```Dockerfile
+   # Use Google's official Dart image.
+   # https://hub.docker.com/r/google/dart-runtime/
+   FROM google/dart-runtime
 
-    # Service must listen to $PORT environment variable.
-    # This default value facilitates local development.
-    ENV PORT 8080
-    ```
+   # Service must listen to $PORT environment variable.
+   # This default value facilitates local development.
+   ENV PORT 8080
+   ```
 
 5. Create a new file, `service.yaml` and copy the following service definition
    into the file. Make sure to replace `{username}` with your Docker Hub

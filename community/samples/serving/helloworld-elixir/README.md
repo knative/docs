@@ -179,7 +179,6 @@ above.
     xxxxxxx-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
     ```
 
-
 1.  To find the URL for your service, use
 
     ```

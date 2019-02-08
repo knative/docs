@@ -7,12 +7,15 @@ A set of curated and supported build templates is available in the
 
 ## What is a Build Template?
 
-A `BuildTemplate` and `ClusterBuildTemplate` encapsulates a shareable [build](./builds.md)
-process with some limited parameterization capabilities.
+A `BuildTemplate` and `ClusterBuildTemplate` encapsulates a shareable
+[build](./builds.md) process with some limited parameterization capabilities.
 
-A `BuildTemplate` is available within a namespace, and `ClusterBuildTemplate` is available across entire Kubernetes cluster.
+A `BuildTemplate` is available within a namespace, and `ClusterBuildTemplate` is
+available across entire Kubernetes cluster.
 
-A `BuildTemplate` functions exactly like a `ClusterBuildTemplate`, and as such all references to `BuildTemplate` below are also describing `ClusterBuildTemplate`.
+A `BuildTemplate` functions exactly like a `ClusterBuildTemplate`, and as such
+all references to `BuildTemplate` below are also describing
+`ClusterBuildTemplate`.
 
 ### Example template
 
@@ -145,7 +148,8 @@ spec:
         value: Dockerfile-17.06.1
 ```
 
-The `spec.template.kind` is optional and defaults to `BuildTemplate`. Alternately it could have value `ClusterBuildTemplate`.
+The `spec.template.kind` is optional and defaults to `BuildTemplate`.
+Alternately it could have value `ClusterBuildTemplate`.
 
 ---
 
