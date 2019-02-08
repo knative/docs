@@ -8,8 +8,7 @@ WORKDIR $APP_HOME
 COPY . .
 
 # Install production dependencies.
-RUN pip install Flask
-RUN pip install gunicorn
+RUN pip install Flask gunicorn
 
 # Service must listen to $PORT environment variable.
 # This default value facilitates local development.
@@ -17,4 +16,4 @@ ENV PORT 8080
 
 # Run the web service on container startup. Here we use the gunicorn
 # webserver, with one worker process and 8 threads.
-CMD exec gunicorn -b :$PORT -w 1 -t 8 app:app
+CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 app:app
