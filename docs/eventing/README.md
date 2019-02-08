@@ -133,7 +133,6 @@ part of the `sources` category, so you can list all existing Sources with
 _Want to implement your own source? Check out
 [the tutorial](samples/writing-a-source/README.md)._
 
-
 ### KubernetesEventSource
 
 The KubernetesEventSource fires a new event each time a
