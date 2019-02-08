@@ -1,4 +1,3 @@
-# Hello World - Scala using Akka HTTP sample
 
 A microservice which demonstrates how to get set up and running with Knative
 Serving when using [Scala](https://scala-lang.org/) and [Akka](https://akka.io/)
@@ -150,4 +149,8 @@ curl -v -H "Host: helloworld-scala.default.example.com" http://$SERVING_GATEWAY
 
 ```shell
 kubectl delete --filename helloworld-scala.yaml
+```
+
+```
+kubetl delete --filename helloworld-scala.yaml
 ```

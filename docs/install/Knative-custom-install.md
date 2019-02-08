@@ -250,7 +250,7 @@ for details about installing the various supported observability plug-ins.
 [6]:
   https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#event-v1-core
 [6.1]: https://developer.github.com/v3/activity/events/types/
-[6.2]: https://github.com/knative/docs/tree/master/eventing#containersource
+[6.2]: ../eventing#containersource
 [6.3]:
   https://github.com/knative/eventing-sources/blob/master/samples/cronjob-source/README.md
 [6.4]: https://cloud.google.com/pubsub/
@@ -353,3 +353,10 @@ guides to help you get started with Knative:
 - [Knative Eventing overview](../../eventing/)
 
   - [Knative Eventing code samples](../../eventing/samples)
+
+---
+
+Except as otherwise noted, the content of this page is licensed under the
+[Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),
+and code samples are licensed under the
+[Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).
