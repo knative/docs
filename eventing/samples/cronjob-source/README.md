@@ -68,11 +68,9 @@ kubectl apply -f cronjob-source.yaml
 We will verify that the message was sent to the Knative eventing system by
 looking at message dumper logs.
 
-1. Use [`kail`](https://github.com/boz/kail) to tail the logs of the subscriber.
-
-   ```shell
-   kail -l serving.knative.dev/service=message-dumper -c user-container --since=10m
-   ```
+```shell
+kubectl logs -l serving.knative.dev/service=message-dumper -c user-container --since=10m
+```
 
 You should see log lines showing the request headers and body from the source:
 
@@ -83,3 +81,11 @@ You should see log lines showing the request headers and body from the source:
   "Body": "{\"message\": \"Hello world!\"}"
 }
 ```
+
+You can also use [`kail`](https://github.com/boz/kail) instead of `kubectl logs` to tail the logs of the subscriber.
+
+   ```shell
+   kail -l serving.knative.dev/service=message-dumper -c user-container --since=10m
+   ```
+
+
