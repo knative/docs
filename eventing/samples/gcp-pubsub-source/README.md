@@ -22,8 +22,10 @@ source is most useful as a bridge from other GCP services, such as
    [Knative Eventing](https://github.com/knative/docs/tree/master/eventing). In
    addition, install the GCP PubSub event source from `release-gcppubsub.yaml`:
 
-   kubectl apply --filename kubectl apply --filename
+   ```shell
+   kubectl apply --filename \
    https://github.com/knative/eventing-sources/releases/download/v0.3.0/release-gcppubsub.yaml
+   ```
 
 1. Enable the 'Cloud Pub/Sub API' on your project:
 
