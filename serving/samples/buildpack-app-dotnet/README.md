@@ -30,7 +30,7 @@ the following commands:
 # Replace <your-project-here> with your own registry
 export REPO="gcr.io/<your-project-here>"
 
-perl -pi -e "s@DOCKER_REPO_OVERRIDE@$REPO@g" sample.yaml
+perl -pi -e "s@KO_DOCKER_REPO@$REPO@g" sample.yaml
 
 # Create the Kubernetes resources
 kubectl apply --filename sample.yaml

@@ -105,7 +105,7 @@ from the [build-templates](https://github.com/knative/build-templates/) repo.
 ```shell
 # Replace the token string with a suitable registry
 REPO="gcr.io/<your-project-here>"
-perl -pi -e "s@DOCKER_REPO_OVERRIDE@$REPO@g" sample.yaml
+perl -pi -e "s@KO_DOCKER_REPO@$REPO@g" sample.yaml
 
 # Install the Kaniko build template used to build this sample (in the
 # build-templates repo).

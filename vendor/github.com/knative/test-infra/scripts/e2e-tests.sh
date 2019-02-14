@@ -175,7 +175,7 @@ function create_test_cluster() {
   touch $HOME/.ssh/google_compute_engine.pub
   touch $HOME/.ssh/google_compute_engine
   # Clear user and cluster variables, so they'll be set to the test cluster.
-  # DOCKER_REPO_OVERRIDE is not touched because when running locally it must
+  # KO_DOCKER_REPO is not touched because when running locally it must
   # be a writeable docker repo.
   export K8S_USER_OVERRIDE=
   export K8S_CLUSTER_OVERRIDE=
@@ -252,15 +252,14 @@ function setup_test_cluster() {
   fi
   readonly USING_EXISTING_CLUSTER
 
-  if [[ -z ${DOCKER_REPO_OVERRIDE} ]]; then
-    export DOCKER_REPO_OVERRIDE=gcr.io/$(gcloud config get-value project)/${E2E_BASE_NAME}-e2e-img
+  if [[ -z ${KO_DOCKER_REPO} ]]; then
+    export KO_DOCKER_REPO=gcr.io/$(gcloud config get-value project)/${E2E_BASE_NAME}-e2e-img
   fi
 
   echo "- Cluster is ${K8S_CLUSTER_OVERRIDE}"
   echo "- User is ${K8S_USER_OVERRIDE}"
-  echo "- Docker is ${DOCKER_REPO_OVERRIDE}"
+  echo "- Docker is ${KO_DOCKER_REPO}"
 
-  export KO_DOCKER_REPO="${DOCKER_REPO_OVERRIDE}"
   export KO_DATA_PATH="${REPO_ROOT_DIR}/.git"
 
   trap teardown_test_resources EXIT
@@ -272,7 +271,7 @@ function setup_test_cluster() {
 
   readonly K8S_CLUSTER_OVERRIDE
   readonly K8S_USER_OVERRIDE
-  readonly DOCKER_REPO_OVERRIDE
+  readonly KO_DOCKER_REPO
 
   # Handle failures ourselves, so we can dump useful info.
   set +o errexit
@@ -367,8 +366,8 @@ function initialize() {
   (( IS_PROW )) && [[ -z "${GCP_PROJECT}" ]] && IS_BOSKOS=1
 
   # Safety checks
-  is_protected_gcr ${DOCKER_REPO_OVERRIDE} && \
-    abort "\$DOCKER_REPO_OVERRIDE set to ${DOCKER_REPO_OVERRIDE}, which is forbidden"
+  is_protected_gcr ${KO_DOCKER_REPO} && \
+    abort "\$KO_DOCKER_REPO set to ${KO_DOCKER_REPO}, which is forbidden"
 
   readonly RUN_TESTS
   readonly EMIT_METRICS

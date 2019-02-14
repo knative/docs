@@ -37,14 +37,14 @@ spec:
       name: kaniko
       arguments:
       - name: IMAGE
-        value: DOCKER_REPO_OVERRIDE/rester-tester
+        value: KO_DOCKER_REPO/rester-tester
   revisionTemplate:
     metadata:
       labels:
         knative.dev/type: app
     spec:
       container:
-        image: DOCKER_REPO_OVERRIDE/rester-tester 
+        image: KO_DOCKER_REPO/rester-tester 
         env:
           - name: TARGET
             value: thumb_v1
