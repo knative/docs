@@ -82,10 +82,9 @@ You should see log lines showing the request headers and body from the source:
 }
 ```
 
-You can also use [`kail`](https://github.com/boz/kail) instead of `kubectl logs` to tail the logs of the subscriber.
+You can also use [`kail`](https://github.com/boz/kail) instead of `kubectl logs`
+to tail the logs of the subscriber.
 
-   ```shell
-   kail -l serving.knative.dev/service=message-dumper -c user-container --since=10m
-   ```
-
-
+```shell
+kail -l serving.knative.dev/service=message-dumper -c user-container --since=10m
+```
