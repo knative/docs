@@ -170,7 +170,7 @@ curl -s https://raw.githubusercontent.com/knative/docs/master/install/scripts/is
    definitions are created first. If you see an error when creating resources
    about an unknown type, run the second `kubectl apply` command again.
 
-2. Ensure the istio-sidecar-injector pods runs as provileged:
+2. Ensure the istio-sidecar-injector pods runs as privileged:
    ```shell
    oc get cm istio-sidecar-injector -n istio-system -oyaml | sed -e 's/securityContext:/securityContext:\\n      privileged: true/' | oc replace -f -
    ```
