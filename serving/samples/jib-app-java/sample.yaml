@@ -10,19 +10,17 @@ spec:
         serviceAccountName: riff-build
         source:
           git:
-            url: https://github.com/knative/docs.git
-            revision: master
+            url: https://github.com/spring-projects/spring-boot.git
+            revision: v2.1.2.RELEASE
         template:
           name: jib-maven
           arguments:
           - name: IMAGE
-            value: &image DOCKER_REPO_OVERRIDE/helloworld-java
+#            value: &image DOCKER_REPO_OVERRIDE/helloworld-java
+            value: &image gcr.io/knative-riff-demo/helloworld-java
           - name: DIRECTORY
-            value: serving/samples/helloworld-java
+            value: spring-boot-samples/spring-boot-sample-webflux
       revisionTemplate:
         spec:
           container:
             image: *image
-            env:
-            - name: TARGET
-              value: "Built from Jib!"
