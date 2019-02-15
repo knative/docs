@@ -65,6 +65,7 @@ the Knative components. To use the provided `release-lite.yaml` release, run:
 
 ```shell
 curl -L https://github.com/knative/serving/releases/download/v0.2.2/release-lite.yaml \
+  | sed 's/LoadBalancer/NodePort/' \
   | kubectl apply --filename -
 ```
 
