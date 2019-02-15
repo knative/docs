@@ -54,7 +54,7 @@ export IOTCORE_TOPIC_DEVICE="iot-demo-device-pubsub-topic"
 1.  Have [gcloud](https://cloud.google.com/sdk/gcloud/) installed and pointing
     at that project.
 
-1.  Enable the 'Cloud Pub/Sub API' on that project.
+1.  Enable the `Cloud Pub/Sub API` on that project.
 
     ```shell
     gcloud services enable pubsub.googleapis.com
@@ -109,7 +109,7 @@ export IOTCORE_TOPIC_DEVICE="iot-demo-device-pubsub-topic"
 1.  Create a `Channel`.
 
     ```shell
-    sed "s/CHANNEL_NAME/$CHANNEL_NAME/" eventing/samples/iot-core/channel.yaml |
+    sed "s/CHANNEL_NAME/$CHANNEL_NAME/" channel.yaml |
     kubectl -n default apply -f -
     ```
 
@@ -121,7 +121,7 @@ export IOTCORE_TOPIC_DEVICE="iot-demo-device-pubsub-topic"
     sed -e "s/MY_GCP_PROJECT/$IOTCORE_PROJECT/" \
         -e "s/TOPIC_NAME/$IOTCORE_TOPIC_DATA/" \
         -e "s/CHANNEL_NAME/$CHANNEL_NAME/" \
-        eventing/samples/iot-core/gcp-pubsub-source.yaml |
+        gcp-pubsub-source.yaml |
     kubectl apply -f -
     ```
 
@@ -133,8 +133,7 @@ Even though the `Source` isn't completely ready yet, we can setup the
 1.  Deploy `subscription.yaml`.
 
     ```shell
-    sed "s/CHANNEL_NAME/$CHANNEL_NAME/" \
-        eventing/samples/iot-core/subscription.yaml |
+    sed "s/CHANNEL_NAME/$CHANNEL_NAME/" subscription.yaml |
     ko apply -f -
     ```
 
