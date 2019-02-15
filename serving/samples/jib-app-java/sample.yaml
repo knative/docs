@@ -7,7 +7,6 @@ spec:
   runLatest:
     configuration:
       build:
-        serviceAccountName: riff-build
         source:
           git:
             url: https://github.com/spring-projects/spring-boot.git
@@ -16,8 +15,7 @@ spec:
           name: jib-maven
           arguments:
           - name: IMAGE
-#            value: &image DOCKER_REPO_OVERRIDE/helloworld-java
-            value: &image gcr.io/knative-riff-demo/helloworld-java
+            value: &image DOCKER_REPO_OVERRIDE/helloworld-java
           - name: DIRECTORY
             value: spring-boot-samples/spring-boot-sample-webflux
       revisionTemplate:
