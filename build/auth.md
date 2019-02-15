@@ -1,24 +1,24 @@
 # Authentication
 
-This document defines how authentication is provided during execution
-of a build.
+This document defines how authentication is provided during execution of a
+build.
 
-The build system supports two types of authentication, using Kuberernetes'
+The build system supports two types of authentication, using Kubernetes'
 first-class `Secret` types:
 
-* `kubernetes.io/basic-auth`
-* `kubernetes.io/ssh-auth`
+- `kubernetes.io/basic-auth`
+- `kubernetes.io/ssh-auth`
 
-Secrets of these types can be made available to the `Build` by attaching them
-to the `ServiceAccount` as which it runs.
+Secrets of these types can be made available to the `Build` by attaching them to
+the `ServiceAccount` as which it runs.
 
 ### Exposing credentials to the build
 
 In their native form, these secrets are unsuitable for consumption by Git and
 Docker. For Git, they need to be turned into (some form of) `.gitconfig`. For
-Docker, they need to be turned into a `~/.docker/config.json` file. Also,
-while each of these supports has multiple credentials for multiple domains,
-those credentials typically need to be blended into a single canonical keyring.
+Docker, they need to be turned into a `~/.docker/config.json` file. Also, while
+each of these supports has multiple credentials for multiple domains, those
+credentials typically need to be blended into a single canonical keyring.
 
 To solve this, before the `Source` step, all builds execute a credential
 initialization process that accesses each of its secrets and aggregates them
@@ -34,7 +34,7 @@ into their respective files in `$HOME`.
     metadata:
       name: ssh-key
       annotations:
-        build.knative.dev/git-0: https://github.com  # Described below
+        build.knative.dev/git-0: https://github.com # Described below
     type: kubernetes.io/ssh-auth
     data:
       ssh-privatekey: <base64 encoded>
@@ -42,10 +42,16 @@ into their respective files in `$HOME`.
       known_hosts: <base64 encoded>
     ```
 
-1.  Generate the value of `ssh-privatekey` by copying the value of (for example)
-    `cat id_rsa | base64`.
+    `build.knative.dev/git-0` in the example above specifies which web address
+    these credentials belong to. See
+    [Guiding Credential Selection](#guiding-credential-selection) below for more
+    information.
 
-1.  Copy the value of `cat ~/.ssh/known_hosts | base64` to the `known_hosts` field.
+1.  Generate the value of `ssh-privatekey` by copying the value of (for example)
+    `cat ~/.ssh/id_rsa | base64`.
+
+1.  Copy the value of `cat ~/.ssh/known_hosts | base64` to the `known_hosts`
+    field.
 
 1.  Next, direct a `ServiceAccount` to use this `Secret`:
 
@@ -55,7 +61,7 @@ into their respective files in `$HOME`.
     metadata:
       name: build-bot
     secrets:
-    - name: ssh-key
+      - name: ssh-key
     ```
 
 1.  Then use that `ServiceAccount` in your `Build`:
@@ -74,12 +80,12 @@ into their respective files in `$HOME`.
 1.  Execute the build:
 
     ```shell
-    kubectl apply -f secret.yaml serviceaccount.yaml build.yaml
+    kubectl apply --filename secret.yaml serviceaccount.yaml build.yaml
     ```
 
 When the build executes, before steps execute, a `~/.ssh/config` will be
-generated containing the key configured in the `Secret`. This key is then
-used to authenticate with the Git service.
+generated containing the key configured in the `Secret`. This key is then used
+to authenticate with the Git service.
 
 ## Basic authentication (Git)
 
@@ -92,12 +98,17 @@ used to authenticate with the Git service.
     metadata:
       name: basic-user-pass
       annotations:
-        build.knative.dev/git-0: https://github.com  # Described below
+        build.knative.dev/git-0: https://github.com # Described below
     type: kubernetes.io/basic-auth
     stringData:
       username: <username>
       password: <password>
     ```
+
+    `build.knative.dev/git-0` in the example above specifies which web address
+    these credentials belong to. See
+    [Guiding Credential Selection](#guiding-credential-selection) below for more
+    information.
 
 1.  Next, direct a `ServiceAccount` to use this `Secret`:
 
@@ -107,7 +118,7 @@ used to authenticate with the Git service.
     metadata:
       name: build-bot
     secrets:
-    - name: basic-user-pass
+      - name: basic-user-pass
     ```
 
 1.  Use that `ServiceAccount` in your `Build`:
@@ -126,7 +137,7 @@ used to authenticate with the Git service.
 1.  Execute the build:
 
     ```shell
-    kubectl apply -f secret.yaml serviceaccount.yaml build.yaml
+    kubectl apply --filename secret.yaml serviceaccount.yaml build.yaml
     ```
 
 When this build executes, before steps execute, a `~/.gitconfig` will be
@@ -144,12 +155,17 @@ credentials are then used to authenticate with the Git repository.
     metadata:
       name: basic-user-pass
       annotations:
-        build.knative.dev/docker-0: https://gcr.io  # Described below
+        build.knative.dev/docker-0: https://gcr.io # Described below
     type: kubernetes.io/basic-auth
     stringData:
       username: <username>
       password: <password>
     ```
+
+    `build.knative.dev/docker-0` in the example above specifies which web
+    address these credentials belong to. See
+    [Guiding Credential Selection](#guiding-credential-selection) below for more
+    information.
 
 1.  Direct a `ServiceAccount` to use this `Secret`:
 
@@ -159,7 +175,7 @@ credentials are then used to authenticate with the Git repository.
     metadata:
       name: build-bot
     secrets:
-    - name: basic-user-pass
+      - name: basic-user-pass
     ```
 
 1.  Use that `ServiceAccount` in your `Build`:
@@ -178,7 +194,7 @@ credentials are then used to authenticate with the Git repository.
 1.  Execute the build:
 
     ```shell
-    kubectl apply -f secret.yaml serviceaccount.yaml build.yaml
+    kubectl apply --filename secret.yaml serviceaccount.yaml build.yaml
     ```
 
 When this build executes, before steps execute, a `~/.docker/config.json` will
@@ -206,9 +222,9 @@ stringData:
   password: <cleartext non-encoded>
 ```
 
-This describes a "Basic Auth" (username and password) secret that should be
-used to access Git repos at github.com and gitlab.com, as well as Docker
-repositories at gcr.io.
+This describes a "Basic Auth" (username and password) secret that should be used
+to access Git repos at github.com and gitlab.com, as well as Docker repositories
+at gcr.io.
 
 Similarly, for SSH:
 
@@ -230,8 +246,8 @@ This describes an SSH key secret that should be used to access Git repos at
 github.com only.
 
 Credential annotation keys must begin with `build.knative.dev/docker-` or
-`build.knative.dev/git-`, and the value describes the URL of the host with
-which to use the credential.
+`build.knative.dev/git-`, and the value describes the URL of the host with which
+to use the credential.
 
 ## Implementation detail
 
@@ -264,6 +280,7 @@ are ignored.
 
 Given URLs, usernames, and passwords of the form: `https://url{n}.com`,
 `user{n}`, and `pass{n}`, generate the following for Git:
+
 ```
 === ~/.gitconfig ===
 [credential]
@@ -283,6 +300,7 @@ https://user2:pass2@url2.com
 
 Given hostnames, private keys, and `known_hosts` of the form: `url{n}.com`,
 `key{n}`, and `known_hosts{n}`, generate the following for Git:
+
 ```
 === ~/.ssh/id_key1 ===
 {contents of key1}
@@ -304,16 +322,16 @@ Host url2.com
 ```
 
 Note: Because `known_hosts` is a non-standard extension of
-`kubernetes.io/ssh-auth`, when it is not present this will be generated
-through `ssh-keygen url{n}.com ` instead.
+`kubernetes.io/ssh-auth`, when it is not present this will be generated through
+`ssh-keygen url{n}.com` instead.
 
 ### Least privilege
 
 The secrets as outlined here will be stored into `$HOME` (by convention the
 volume: `/builder/home`), and will be available to `Source` and all `Steps`.
 
-For sensitive credentials that should not be made available to some steps, 
-do not use the mechanisms outlined here. Instead, the user should declare an
+For sensitive credentials that should not be made available to some steps, do
+not use the mechanisms outlined here. Instead, the user should declare an
 explicit `Volume` from the `Secret` and manually `VolumeMount` it into the
 `Step`.
 

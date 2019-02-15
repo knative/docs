@@ -1,7 +1,7 @@
 # Knative Install on OpenShift
 
-This guide walks you through the installation of the latest version of [Knative
-Serving](https://github.com/knative/serving) on an
+This guide walks you through the installation of the latest version of
+[Knative Serving](https://github.com/knative/serving) on an
 [OpenShift](https://github.com/openshift/origin) using pre-built images and
 demonstrates creating and deploying an image of a sample "hello world" app onto
 the newly created Knative cluster.
@@ -10,8 +10,9 @@ You can find [guides for other platforms here](README.md).
 
 ## Before you begin
 
-These instructions will run an OpenShift 3.10 (Kubernetes 1.10) cluster on your
-local machine using [`oc cluster up`](https://docs.openshift.org/latest/getting_started/administrators.html#running-in-a-docker-container)
+These instructions will run an OpenShift 3.10 (Kubernetes 1.11) cluster on your
+local machine using
+[`oc cluster up`](https://docs.openshift.org/latest/getting_started/administrators.html#running-in-a-docker-container)
 to test-drive knative.
 
 ## Install `oc` (openshift cli)
@@ -110,6 +111,7 @@ oc adm policy add-scc-to-user anyuid -z istio-mixer-service-account -n istio-sys
 oc adm policy add-scc-to-user anyuid -z istio-pilot-service-account -n istio-system
 oc adm policy add-scc-to-user anyuid -z istio-sidecar-injector-service-account -n istio-system
 oc adm policy add-cluster-role-to-user cluster-admin -z istio-galley-service-account -n istio-system
+oc adm policy add-scc-to-user anyuid -z cluster-local-gateway-service-account -n istio-system
 ```
 
 Run the following to install Istio:
@@ -131,7 +133,28 @@ It will take a few minutes for all the components to be up and running; you can
 rerun the command to see the current status.
 
 > Note: Instead of rerunning the command, you can add `--watch` to the above
-  command to view the component's status updates in real time. Use CTRL+C to exit watch mode.
+> command to view the component's status updates in real time. Use CTRL+C to
+> exit watch mode.
+
+Set `priviledged` to `true` for the `istio-sidecar-injector`:
+
+```shell
+oc get cm istio-sidecar-injector -n istio-system -oyaml  \
+| sed -e 's/securityContext:/securityContext:\\n      privileged: true/' \
+| oc replace -f -
+```
+
+Restart the `sidecar-injector` pod if `SELinux` is enabled:
+
+```shell
+if getenforce | grep -q Disabled
+then
+    echo "SELinux is disabled, no need to restart the pod"
+else
+    echo "SELinux is enabled, restarting sidecar-injector pod"
+    oc delete pod -n istio-system -l istio=sidecar-injector
+fi
+```
 
 ## Installing Knative Serving
 
@@ -144,9 +167,9 @@ accounts istio will use:
 oc adm policy add-scc-to-user anyuid -z build-controller -n knative-build
 oc adm policy add-scc-to-user anyuid -z controller -n knative-serving
 oc adm policy add-scc-to-user anyuid -z autoscaler -n knative-serving
-oc adm policy add-scc-to-user anyuid -z kube-state-metrics -n monitoring
-oc adm policy add-scc-to-user anyuid -z node-exporter -n monitoring
-oc adm policy add-scc-to-user anyuid -z prometheus-system -n monitoring
+oc adm policy add-scc-to-user anyuid -z kube-state-metrics -n knative-monitoring
+oc adm policy add-scc-to-user anyuid -z node-exporter -n knative-monitoring
+oc adm policy add-scc-to-user anyuid -z prometheus-system -n knative-monitoring
 oc adm policy add-cluster-role-to-user cluster-admin -z build-controller -n knative-build
 oc adm policy add-cluster-role-to-user cluster-admin -z controller -n knative-serving
 ```
@@ -167,10 +190,12 @@ oc get pods -n knative-serving
 ```
 
 Just as with the Istio components, it will take a few seconds for the Knative
-components to be up and running; you can rerun the command to see the current status.
+components to be up and running; you can rerun the command to see the current
+status.
 
 > Note: Instead of rerunning the command, you can add `--watch` to the above
-  command to view the component's status updates in real time. Use CTRL+C to exit watch mode.
+> command to view the component's status updates in real time. Use CTRL+C to
+> exit watch mode.
 
 Now you can deploy an app to your newly created Knative cluster.
 
@@ -186,14 +211,24 @@ guide.
 If you'd like to view the available sample apps and deploy one of your choosing,
 head to the [sample apps](../serving/samples/README.md) repo.
 
-> Note: When looking up the IP address to use for accessing your app, you need to look up
-  the NodePort for the `knative-ingressgateway` as well as the IP address used for OpenShift.
-  You can use the following command to look up the value to use for the {IP_ADDRESS} placeholder
-  used in the samples:
+> Note: When looking up the IP address to use for accessing your app, you need
+> to look up the NodePort for the `istio-ingressgateway` well as the IP address
+> used for OpenShift. You can use the following command to look up the value to
+> use for the {IP_ADDRESS} placeholder used in the samples:
 
-  ```shell
-  export IP_ADDRESS=$(oc get node  -o 'jsonpath={.items[0].status.addresses[0].address}'):$(oc get svc knative-ingressgateway -n istio-system -o 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
-  ```
+```shell
+# In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
+INGRESSGATEWAY=knative-ingressgateway
+
+# The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
+# Use `istio-ingressgateway` instead, since `knative-ingressgateway`
+# will be removed in Knative v0.4.
+if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
+    INGRESSGATEWAY=istio-ingressgateway
+fi
+
+export IP_ADDRESS=$(oc get node  -o 'jsonpath={.items[0].status.addresses[0].address}'):$(oc get svc $INGRESSGATEWAY -n istio-system -o 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
+```
 
 ## Cleaning up
 

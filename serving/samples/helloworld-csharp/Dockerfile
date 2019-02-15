@@ -1,14 +1,22 @@
+# Use Microsoft's official .NET image.
+# https://hub.docker.com/r/microsoft/dotnet
 FROM microsoft/dotnet:2.1-sdk
-WORKDIR /app
 
-# copy csproj and restore as distinct layers
-COPY *.csproj ./
+# Install production dependencies.
+# Copy csproj and restore as distinct layers.
+WORKDIR /app
+COPY *.csproj .
 RUN dotnet restore
 
-# copy and build everything else
-COPY . ./
+# Copy local code to the container image.
+COPY . .
+
+# Build a release artifact.
 RUN dotnet publish -c Release -o out
 
-EXPOSE 8080
+# Service must listen to $PORT environment variable.
+# This default value facilitates local development.
+ENV PORT 8080
 
-ENTRYPOINT ["dotnet", "out/helloworld-csharp.dll"]
+# Run the web service on container startup.
+CMD ["dotnet", "out/helloworld-csharp.dll"]

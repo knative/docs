@@ -1,21 +1,21 @@
 # Resources
 
-This page contains information about various tools and technologies
-that are useful to anyone developing on Knative.
+This page contains information about various tools and technologies that are
+useful to anyone developing on Knative.
 
 ## Community Resources
 
-This section contains tools and technologies developed by members of the
-Knative community specifically for use with Knative.
+This section contains tools and technologies developed by members of the Knative
+community specifically for use with Knative.
 
 ### [`knctl`](https://github.com/cppforlife/knctl)
 
-`knctl` is an under-development CLI for working with Knative. 
+`knctl` is an under-development CLI for working with Knative.
 
 ## Other Resources
 
-This section contains other tools and technologies that are useful when
-working with Knative.
+This section contains other tools and technologies that are useful when working
+with Knative.
 
 ### [`go-containerregistry`](https://github.com/google/go-containerregistry/)
 
@@ -36,8 +36,8 @@ which can be used to interact with and inspect images in a registry.
 efficiently builds container images from Java source, without a Dockerfile,
 without requiring access to the Docker daemon.
 
-Like `ko`, when `jib` is invoked, it builds your Java source and pushes an
-image with that built source atop a
+Like `ko`, when `jib` is invoked, it builds your Java source and pushes an image
+with that built source atop a
 [distroless](https://github.com/GoogleContainerTools/distroless) base image to
 produce small images that support fast incremental image builds.
 
@@ -48,10 +48,10 @@ The build templates take no parameters.
 
 ### [`kaniko`](https://github.com/GoogleContainerTools/kaniko)
 
-`kaniko` is a tool that enables building a container image from source using
-the Dockerfile format, without requiring access to a Docker daemon. Removing
-this requirement means that `kaniko` is [safe to run on a Kubernetes
-cluster](https://github.com/kubernetes/kubernetes/issues/1806).
+`kaniko` is a tool that enables building a container image from source using the
+Dockerfile format, without requiring access to a Docker daemon. Removing this
+requirement means that `kaniko` is
+[safe to run on a Kubernetes cluster](https://github.com/kubernetes/kubernetes/issues/1806).
 
 By contrast, building an image using `docker build` necessarily requires the
 Docker daemon, which would give the build complete access to your entire
@@ -78,10 +78,10 @@ packages by their [import paths](https://golang.org/doc/code.html#ImportPaths)
 (e.g., `github.com/kaniko/serving/cmd/controller`)
 
 The typical usage is `ko apply -f config.yaml`, which reads in the config YAML,
-and looks for Go import paths representing runnable commands (i.e., `package
-main`). When it finds a matching import path, `ko` builds the package using `go
-build` then pushes a container image containing that binary on top of a base
-image (by default, `gcr.io/distroless/base`) to
+and looks for Go import paths representing runnable commands (i.e.,
+`package main`). When it finds a matching import path, `ko` builds the package
+using `go build` then pushes a container image containing that binary on top of
+a base image (by default, `gcr.io/distroless/base`) to
 `$KO_DOCKER_REPO/unique-string`. After pushing those images, `ko` replaces
 instances of matched import paths with fully-qualified references to the images
 it pushed.
@@ -89,17 +89,15 @@ it pushed.
 So if `ko apply` was passed this config:
 
 ```yaml
-...
+---
 image: github.com/my/repo/cmd/foo
-...
 ```
 
 ...it would produce YAML like:
 
 ```yaml
-...
+---
 image: gcr.io/my-docker-repo/foo-zyxwvut@sha256:abcdef # image by digest
-...
 ```
 
 (This assumes that you have set the environment variable
@@ -108,10 +106,11 @@ image: gcr.io/my-docker-repo/foo-zyxwvut@sha256:abcdef # image by digest
 `ko apply` then passes this generated YAML config to `kubectl apply`.
 
 `ko` also supports:
-* `ko publish` to simply push images and not produce configs.
-* `ko resolve` to push images and output the generated configs, but not
-`kubectl apply` them.
-* `ko delete` to simply passthrough to `kubectl delete` for convenience.
+
+- `ko publish` to simply push images and not produce configs.
+- `ko resolve` to push images and output the generated configs, but not
+  `kubectl apply` them.
+- `ko delete` to simply passthrough to `kubectl delete` for convenience.
 
 `ko` is used during development and release of Knative components, but is not
 intended to be required for _users_ of Knative -- they should only need to
@@ -120,11 +119,11 @@ intended to be required for _users_ of Knative -- they should only need to
 ### [`skaffold`](https://github.com/GoogleContainerTools/skaffold)
 
 `skaffold` is a CLI tool to aid in iterative development for Kubernetes.
-Typically, you would write a [YAML
-config](https://github.com/GoogleContainerTools/skaffold/blob/master/examples/annotated-skaffold.yaml)
-describing to Skaffold how to build and deploy your app, then run `skaffold
-dev`, which will watch your local source tree for changes and continuously
-builds and deploys based on your config when changes are detected.
+Typically, you would write a
+[YAML config](https://github.com/GoogleContainerTools/skaffold/blob/master/examples/annotated-skaffold.yaml)
+describing to Skaffold how to build and deploy your app, then run
+`skaffold dev`, which will watch your local source tree for changes and
+continuously builds and deploys based on your config when changes are detected.
 
 Skaffold supports many pluggable implementations for building and deploying.
 Skaffold contributors are working on support for Knative Build as a build

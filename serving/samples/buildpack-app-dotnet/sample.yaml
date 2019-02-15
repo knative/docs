@@ -13,7 +13,7 @@ spec:
       name: buildpack
       arguments:
       - name: IMAGE
-        value: &image DOCKER_REPO_OVERRIDE/buildpack-sample-app
+        value: DOCKER_REPO_OVERRIDE/buildpack-sample-app
     # - name: CACHE
     #   value: buildpack-sample-app-cache
     # volumes:
@@ -27,7 +27,7 @@ spec:
         knative.dev/type: app
     spec:
       container:
-        image: *image
+        image: DOCKER_REPO_OVERRIDE/buildpack-sample-app 
 ---
 apiVersion: serving.knative.dev/v1alpha1
 kind: Route

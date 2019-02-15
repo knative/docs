@@ -1,0 +1,12 @@
+aliases:
+  eng-approvers:
+  - evankanderson
+  - mattmoor
+  - vaikas-google
+  - rgregg
+  - mchmarny
+  - averikitsch
+  docs-approvers:
+  - carieshmarie
+  - samodell
+  - richieescarez

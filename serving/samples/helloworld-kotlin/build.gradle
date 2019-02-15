@@ -1,0 +1,44 @@
+buildscript {
+    ext.kotlin_version = '1.2.61'
+    ext.ktor_version = '0.9.4'
+
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'kotlin'
+apply plugin: 'application'
+
+sourceCompatibility = 1.8
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+repositories {
+    jcenter()
+    maven { url "https://dl.bintray.com/kotlin/ktor" }
+}
+
+mainClassName = 'com.example.hello.MainKt'
+
+jar {
+    manifest {
+        attributes 'Main-Class': mainClassName
+        
+    }
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    compile "io.ktor:ktor-server-netty:$ktor_version"
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}

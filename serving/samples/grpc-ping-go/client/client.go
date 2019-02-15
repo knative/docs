@@ -9,7 +9,7 @@ import (
 	"log"
 	"time"
 
-	pb "github.com/knative/serving/sample/grpc-ping/proto"
+	pb "github.com/knative/docs/serving/samples/grpc-ping-go/proto"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 )
@@ -27,7 +27,6 @@ func main() {
 	if *insecure {
 		opts = append(opts, grpc.WithInsecure())
 	}
-	grpc.With
 
 	conn, err := grpc.Dial(*serverAddr, opts...)
 	if err != nil {
