@@ -54,6 +54,15 @@ The following commands install all available Knative components. To customize
 your Knative installation, see
 [Performing a Custom Knative Installation](Knative-custom-install.md).
 
+1. If you are upgrading from Knative 0.3.x: Update your domain and static IP
+   address to be associated with the LoadBalancer `istio-ingressgateway` instead
+   of `knative-ingressgateway`.  Then run the following to clean up leftover
+   resources:
+   ```
+   kubectl delete svc knative-ingressgateway -n istio-system
+   kubectl delete deploy knative-ingressgateway -n istio-system
+   ```
+
 1. Run the `kubectl apply` command to install Knative and its dependencies:
    ```bash
    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.3.0/serving.yaml \
