@@ -46,8 +46,8 @@ The following dashboards are pre-installed with Knative Serving:
 
 ## Prometheus
 
-Grafana provides a richer set of graphing functionality than Prometheus.
-However, it can often times be useful to access Prometheus for debugging.
+Although Grafana provides a richer set of graphing functionality, Prometheus can
+still be useful for debugging.
 
 1. To open Prometheus, enter the following command:
 ```shell
