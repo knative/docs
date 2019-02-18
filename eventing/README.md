@@ -149,6 +149,8 @@ is created or updated.
   [ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#objectreference-v1-core)
   A reference to the object that should receive events.
 
+See the [Kubernetes Event Source](samples/kubernetes-event-source) example.
+
 ### GitHubSource
 
 The GitHubSource fires a new event for selected
@@ -176,6 +178,8 @@ The GitHubSource fires a new event for selected
   [ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#objectreference-v1-core)
   A reference to the object that should receive events.
 
+See the [GitHub Source](samples/github-source) example.
+
 ### GcpPubSubSource
 
 The GcpPubSubSource fires a new event each time a message is published on a
@@ -194,6 +198,8 @@ The GcpPubSubSource fires a new event each time a message is published on a
 - `sink`:
   [ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#objectreference-v1-core)
   A reference to the object that should receive events.
+
+See the [GCP PubSub Source](samples/gcp-pubsub-source) example.
 
 ### AwsSqsSource
 
@@ -244,6 +250,8 @@ The CronJobSource fires events based on given
 - `sink`:
   [ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#objectreference-v1-core)
   A reference to the object that should receive events.
+
+See the [Cronjob Source](samples/cronjob-source) example.
 
 ## Getting Started
 
