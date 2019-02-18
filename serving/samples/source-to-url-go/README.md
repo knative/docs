@@ -1,3 +1,17 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Orchestrating a source-to-URL deployment on Kubernetes](#orchestrating-a-source-to-url-deployment-on-kubernetes)
+  - [Prerequisites](#prerequisites)
+  - [Configuring Knative](#configuring-knative)
+    - [Install the kaniko build template](#install-the-kaniko-build-template)
+    - [Register secrets for Docker Hub](#register-secrets-for-docker-hub)
+  - [Deploying the sample](#deploying-the-sample)
+  - [Removing the sample app deployment](#removing-the-sample-app-deployment)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Orchestrating a source-to-URL deployment on Kubernetes
 
 A Go sample that shows how to use Knative to go from source code in a git

@@ -1,3 +1,13 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Configuring outbound network access](#configuring-outbound-network-access)
+  - [Determining the IP scope of your cluster](#determining-the-ip-scope-of-your-cluster)
+  - [Setting the IP scope](#setting-the-ip-scope)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Configuring outbound network access
 
 This guides walks you through enabling outbound network access for a Knative

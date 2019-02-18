@@ -1,3 +1,18 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Knative Serving](#knative-serving)
+  - [Serving resources](#serving-resources)
+  - [Getting Started](#getting-started)
+  - [More samples and demos](#more-samples-and-demos)
+  - [Setting up Logging and Metrics](#setting-up-logging-and-metrics)
+  - [Debugging Knative Serving issues](#debugging-knative-serving-issues)
+  - [Configuration and Networking](#configuration-and-networking)
+  - [Known Issues](#known-issues)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Knative Serving
 
 Knative Serving builds on Kubernetes and Istio to support deploying and serving

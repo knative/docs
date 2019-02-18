@@ -1,3 +1,26 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Sample: Binding running services to an IoT core](#sample-binding-running-services-to-an-iot-core)
+  - [Deployment Steps](#deployment-steps)
+    - [Environment Variables](#environment-variables)
+      - [Variables you must Change](#variables-you-must-change)
+      - [Variables you may Change](#variables-you-may-change)
+    - [Prerequisites](#prerequisites)
+      - [Local](#local)
+      - [Kubernetes](#kubernetes)
+      - [GCP](#gcp)
+      - [GCP PubSub Source](#gcp-pubsub-source)
+    - [Deploying](#deploying)
+      - [Channel](#channel)
+      - [GCP PubSub Source](#gcp-pubsub-source-1)
+      - [Subscription](#subscription)
+      - [IoT Core](#iot-core)
+    - [Running](#running)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Sample: Binding running services to an IoT core
 
 This sample shows how to bind a running service to an

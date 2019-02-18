@@ -1,3 +1,16 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Configuring Knative and CertManager for Google Cloud DNS](#configuring-knative-and-certmanager-for-google-cloud-dns)
+  - [Creating a Cloud DNS service account](#creating-a-cloud-dns-service-account)
+  - [Configuring CertManager to use your DNS admin service account](#configuring-certmanager-to-use-your-dns-admin-service-account)
+    - [Specifying a certificate issuer](#specifying-a-certificate-issuer)
+    - [Specifying the certificate](#specifying-the-certificate)
+    - [Configuring the gateway](#configuring-the-gateway)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Configuring Knative and CertManager for Google Cloud DNS
 
 These instructions assume you have already setup a Knative cluster and installed

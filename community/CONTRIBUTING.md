@@ -1,3 +1,24 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Contributing to Knative](#contributing-to-knative)
+  - [Working groups](#working-groups)
+  - [Code of conduct](#code-of-conduct)
+  - [Team values](#team-values)
+  - [Contributor license agreements](#contributor-license-agreements)
+  - [Design documents](#design-documents)
+  - [Contributing documentation](#contributing-documentation)
+  - [Contributing a feature](#contributing-a-feature)
+  - [Setting up to contribute to Knative](#setting-up-to-contribute-to-knative)
+  - [Pull requests](#pull-requests)
+  - [Issues](#issues)
+  - [Third-party code](#third-party-code)
+    - [Adding a new third-party dependency to `third_party/` folder](#adding-a-new-third-party-dependency-to-third_party-folder)
+    - [LICENSE](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Contributing to Knative
 
 So, you want to hack on Knative? Yay!

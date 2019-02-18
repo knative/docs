@@ -1,3 +1,20 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Telemetry Sample](#telemetry-sample)
+  - [Prerequisites](#prerequisites)
+  - [Setup](#setup)
+  - [Deploy the Service](#deploy-the-service)
+  - [Explore the Service](#explore-the-service)
+  - [Access the Service](#access-the-service)
+  - [Access Logs](#access-logs)
+  - [Access per Request Traces](#access-per-request-traces)
+  - [Accessing Custom Metrics](#accessing-custom-metrics)
+  - [Clean up](#clean-up)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Telemetry Sample
 
 This sample runs a simple web server that makes calls to other in-cluster

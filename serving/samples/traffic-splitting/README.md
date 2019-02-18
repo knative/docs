@@ -1,3 +1,15 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Simple Traffic Splitting Between Revisions](#simple-traffic-splitting-between-revisions)
+  - [Prerequisites](#prerequisites)
+  - [Updating the Service](#updating-the-service)
+  - [Manual Traffic Splitting](#manual-traffic-splitting)
+  - [Clean Up](#clean-up)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Simple Traffic Splitting Between Revisions
 
 This samples builds off the [Creating a RESTful Service](../rest-api-go) sample

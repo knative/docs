@@ -1,3 +1,19 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Kubernetes Event Source example](#kubernetes-event-source-example)
+  - [Deployment Steps](#deployment-steps)
+    - [Prerequisites](#prerequisites)
+    - [Channel](#channel)
+    - [Service Account](#service-account)
+    - [Create Event Source for Kubernetes Events](#create-event-source-for-kubernetes-events)
+    - [Subscriber](#subscriber)
+    - [Create Events](#create-events)
+    - [Verify](#verify)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Kubernetes Event Source example
 
 Kubernetes Event Source example shows how to wire kubernetes cluster events for

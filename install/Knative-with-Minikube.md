@@ -1,3 +1,18 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Knative Install on Minikube](#knative-install-on-minikube)
+  - [Before you begin](#before-you-begin)
+    - [Install kubectl and Minikube](#install-kubectl-and-minikube)
+  - [Creating a Kubernetes cluster](#creating-a-kubernetes-cluster)
+  - [Installing Istio](#installing-istio)
+  - [Installing Knative Serving](#installing-knative-serving)
+  - [Deploying an app](#deploying-an-app)
+  - [Cleaning up](#cleaning-up)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Knative Install on Minikube
 
 This guide walks you through the installation of the latest version of

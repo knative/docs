@@ -1,3 +1,26 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Knative Community Roles](#knative-community-roles)
+  - [Role Summary](#role-summary)
+  - [Collaborator](#collaborator)
+    - [Requirements](#requirements)
+  - [Member](#member)
+    - [Requirements](#requirements-1)
+    - [Responsibilities and privileges](#responsibilities-and-privileges)
+  - [Approver](#approver)
+    - [Requirements](#requirements-2)
+    - [Responsibilities and privileges](#responsibilities-and-privileges-1)
+  - [Lead](#lead)
+    - [Requirements](#requirements-3)
+    - [Responsibilities and privileges](#responsibilities-and-privileges-2)
+  - [Administrator](#administrator)
+    - [Requirements](#requirements-4)
+    - [Responsibilities and privileges](#responsibilities-and-privileges-3)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Knative Community Roles
 
 This document describes the set of roles individuals may have within the Knative

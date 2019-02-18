@@ -1,3 +1,19 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Knative Install on IBM Cloud Kubernetes Service (IKS)](#knative-install-on-ibm-cloud-kubernetes-service-iks)
+  - [Before you begin](#before-you-begin)
+    - [Installing the IBM Cloud developer tools](#installing-the-ibm-cloud-developer-tools)
+    - [Setting environment variables](#setting-environment-variables)
+  - [Creating a Kubernetes cluster](#creating-a-kubernetes-cluster)
+  - [Installing Istio](#installing-istio)
+  - [Installing Knative](#installing-knative)
+  - [What's next](#whats-next)
+  - [Cleaning up](#cleaning-up)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Knative Install on IBM Cloud Kubernetes Service (IKS)
 
 This guide walks you through the installation of the latest version of Knative

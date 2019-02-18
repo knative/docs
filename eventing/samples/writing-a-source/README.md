@@ -1,3 +1,15 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Writing an Event Source the Hard Way](#writing-an-event-source-the-hard-way)
+  - [Target Audience](#target-audience)
+  - [Before you begin](#before-you-begin)
+  - [Steps](#steps)
+  - [Alternatives](#alternatives)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Writing an Event Source the Hard Way
 
 This tutorial walks you through creating an event source for Knative Eventing

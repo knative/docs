@@ -1,3 +1,16 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Cron Job Source example](#cron-job-source-example)
+  - [Deployment Steps](#deployment-steps)
+    - [Prerequisites](#prerequisites)
+    - [Create a Knative Service](#create-a-knative-service)
+    - [Create Cron Job Event Source](#create-cron-job-event-source)
+    - [Verify](#verify)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Cron Job Source example
 
 Cron Job Source example shows how to configure Cron Job as event source for

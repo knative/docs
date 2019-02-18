@@ -1,3 +1,21 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Knative Install on OpenShift](#knative-install-on-openshift)
+  - [Minishift setup](#minishift-setup)
+  - [Configure and start minishift](#configure-and-start-minishift)
+  - [Configuring `oc` (openshift cli)](#configuring-oc-openshift-cli)
+  - [Preparing Knative Deployment](#preparing-knative-deployment)
+    - [Enable Admission Controller Webhook](#enable-admission-controller-webhook)
+    - [Configuring a OpenShift project](#configuring-a-openshift-project)
+    - [Installing Istio](#installing-istio)
+  - [Install Knative Serving](#install-knative-serving)
+  - [Deploying an app](#deploying-an-app)
+  - [Cleaning up](#cleaning-up)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Knative Install on OpenShift
 
 This guide walks you through the installation of the latest version of

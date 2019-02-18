@@ -1,3 +1,17 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Getting Started with Knative App Deployment](#getting-started-with-knative-app-deployment)
+  - [Before you begin](#before-you-begin)
+  - [Sample application](#sample-application)
+  - [Configuring your deployment](#configuring-your-deployment)
+  - [Deploying your app](#deploying-your-app)
+    - [Interacting with your app](#interacting-with-your-app)
+  - [Cleaning up](#cleaning-up)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Getting Started with Knative App Deployment
 
 This guide shows you how to deploy an app using Knative, then interact with it

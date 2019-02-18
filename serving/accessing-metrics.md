@@ -1,3 +1,14 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Accessing metrics](#accessing-metrics)
+  - [Grafana](#grafana)
+  - [Prometheus](#prometheus)
+    - [Metrics Troubleshooting](#metrics-troubleshooting)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Accessing metrics
 
 You access metrics through the [Grafana](https://grafana.com/) UI. Grafana is

@@ -1,3 +1,22 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Welcome to Knative](#welcome-to-knative)
+  - [Components](#components)
+  - [Audience](#audience)
+    - [Developers](#developers)
+    - [Operators](#operators)
+    - [Contributors](#contributors)
+  - [Documentation](#documentation)
+    - [Getting started](#getting-started)
+    - [Configuration and networking](#configuration-and-networking)
+    - [Samples and demos](#samples-and-demos)
+    - [Logging and metrics](#logging-and-metrics)
+    - [Debugging](#debugging)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Welcome to Knative
 
 Knative (pronounced kay-nay-tiv) extends Kubernetes to provide a set of

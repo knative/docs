@@ -1,3 +1,18 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Creating a RESTful Service](#creating-a-restful-service)
+  - [Prerequisites](#prerequisites)
+  - [Setup](#setup)
+  - [Deploy the Service](#deploy-the-service)
+  - [Explore the Service](#explore-the-service)
+  - [Access the Service](#access-the-service)
+  - [Next Steps](#next-steps)
+  - [Clean Up](#clean-up)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Creating a RESTful Service
 
 This sample demonstrates creating and running a simple RESTful service on Knative Serving.

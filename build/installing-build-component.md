@@ -1,3 +1,13 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Installing the Knative Build component](#installing-the-knative-build-component)
+  - [Before you begin](#before-you-begin)
+  - [Adding the Knative Build component](#adding-the-knative-build-component)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Installing the Knative Build component
 
 Before you can run a Knative Build, you must install the Knative Build component

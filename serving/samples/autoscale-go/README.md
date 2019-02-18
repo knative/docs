@@ -1,3 +1,23 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Autoscale Sample](#autoscale-sample)
+  - [Prerequisites](#prerequisites)
+  - [Deploy the Service](#deploy-the-service)
+  - [Load the Service](#load-the-service)
+  - [Analysis](#analysis)
+    - [Algorithm](#algorithm)
+      - [Panic](#panic)
+      - [Customization](#customization)
+      - [Demo](#demo)
+    - [Dashboards](#dashboards)
+    - [Other Experiments](#other-experiments)
+  - [Cleanup](#cleanup)
+  - [Further reading](#further-reading)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Autoscale Sample
 
 A demonstration of the autoscaling capabilities of a Knative Serving Revision.

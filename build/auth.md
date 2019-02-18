@@ -1,3 +1,21 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Authentication](#authentication)
+    - [Exposing credentials to the build](#exposing-credentials-to-the-build)
+  - [SSH authentication (Git)](#ssh-authentication-git)
+  - [Basic authentication (Git)](#basic-authentication-git)
+  - [Basic authentication (Docker)](#basic-authentication-docker)
+    - [Guiding credential selection](#guiding-credential-selection)
+  - [Implementation detail](#implementation-detail)
+    - [Docker `basic-auth`](#docker-basic-auth)
+    - [Git `basic-auth`](#git-basic-auth)
+    - [Git `ssh-auth`](#git-ssh-auth)
+    - [Least privilege](#least-privilege)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Authentication
 
 This document defines how authentication is provided during execution of a

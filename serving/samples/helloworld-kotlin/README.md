@@ -1,3 +1,15 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Hello World - Kotlin sample](#hello-world---kotlin-sample)
+  - [Prerequisites](#prerequisites)
+  - [Steps to recreate the sample code](#steps-to-recreate-the-sample-code)
+  - [Build and deploy this sample](#build-and-deploy-this-sample)
+  - [Remove the sample app deployment](#remove-the-sample-app-deployment)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Hello World - Kotlin sample
 
 A simple web app written in Kotlin using [Ktor](https://ktor.io/) that you can

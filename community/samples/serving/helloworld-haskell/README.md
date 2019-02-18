@@ -1,3 +1,15 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Hello World - Haskell sample](#hello-world---haskell-sample)
+  - [Prerequisites](#prerequisites)
+  - [Recreating the sample code](#recreating-the-sample-code)
+  - [Build and deploy this sample](#build-and-deploy-this-sample)
+  - [Removing the sample app deployment](#removing-the-sample-app-deployment)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Hello World - Haskell sample
 
 A simple web app written in Haskell that you can use for testing. It reads in an

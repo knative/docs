@@ -1,3 +1,15 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Documentation Releases](#documentation-releases)
+  - [`knative/docs` repositories](#knativedocs-repositories)
+    - [Released versions](#released-versions)
+    - [In development (pre-release) version](#in-development-pre-release-version)
+  - [Documentation website](#documentation-website)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Documentation Releases
 
 The following list shows the available versions of Knative documentation. Select

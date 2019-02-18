@@ -1,3 +1,14 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Assigning a static IP address for Knative on Kubernetes Engine](#assigning-a-static-ip-address-for-knative-on-kubernetes-engine)
+  - [Step 1: Reserve a static IP address](#step-1-reserve-a-static-ip-address)
+  - [Step 2: Update the external IP of `istio-ingressgateway` service](#step-2-update-the-external-ip-of-istio-ingressgateway-service)
+  - [Step 3: Verify the static IP address of `istio-ingressgateway` service](#step-3-verify-the-static-ip-address-of-istio-ingressgateway-service)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Assigning a static IP address for Knative on Kubernetes Engine
 
 If you are running Knative on Google Kubernetes Engine and want to use a

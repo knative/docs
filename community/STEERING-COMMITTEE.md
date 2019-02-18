@@ -1,3 +1,14 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Knative Steering Committee](#knative-steering-committee)
+  - [Charter](#charter)
+  - [Committee Mechanics](#committee-mechanics)
+  - [Committee Members](#committee-members)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Knative Steering Committee
 
 The Knative Steering Committee (SC) defines, evolves, and defends the vision,

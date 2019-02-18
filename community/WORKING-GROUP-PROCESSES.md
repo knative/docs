@@ -1,3 +1,21 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Knative Working Group Processes](#knative-working-group-processes)
+  - [Why working groups?](#why-working-groups)
+  - [Proposing a new working group](#proposing-a-new-working-group)
+  - [Setting up a working group](#setting-up-a-working-group)
+    - [Dissolving a working group](#dissolving-a-working-group)
+  - [Leads](#leads)
+  - [Running a working group](#running-a-working-group)
+    - [Be open](#be-open)
+    - [Making decisions](#making-decisions)
+    - [Subgroups](#subgroups)
+    - [Escalations](#escalations)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Knative Working Group Processes
 
 This document describes the processes we use to manage the Knative working

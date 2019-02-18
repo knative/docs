@@ -1,3 +1,17 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Routing and managing traffic with blue/green deployment](#routing-and-managing-traffic-with-bluegreen-deployment)
+  - [Before you begin](#before-you-begin)
+  - [Deploying Revision 1 (Blue)](#deploying-revision-1-blue)
+  - [Deploying Revision 2 (Green)](#deploying-revision-2-green)
+  - [Migrating traffic to the new revision](#migrating-traffic-to-the-new-revision)
+  - [Rerouting all traffic to the new version](#rerouting-all-traffic-to-the-new-version)
+  - [Cleaning up](#cleaning-up)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Routing and managing traffic with blue/green deployment
 
 This sample demonstrates updating an application to a new version using a

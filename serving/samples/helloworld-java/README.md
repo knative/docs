@@ -1,3 +1,15 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Hello World - Spring Boot Java sample](#hello-world---spring-boot-java-sample)
+  - [Prerequisites](#prerequisites)
+  - [Recreating the sample code](#recreating-the-sample-code)
+  - [Building and deploying the sample](#building-and-deploying-the-sample)
+  - [Removing the sample app deployment](#removing-the-sample-app-deployment)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Hello World - Spring Boot Java sample
 
 A simple web app written in Java using Spring Boot 2.0 that you can use for

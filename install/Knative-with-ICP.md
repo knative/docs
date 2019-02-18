@@ -1,3 +1,20 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Knative Install on IBM Cloud Private](#knative-install-on-ibm-cloud-private)
+  - [Before you begin](#before-you-begin)
+    - [Install IBM Cloud Private](#install-ibm-cloud-private)
+    - [Configure IBM Cloud Private security policies](#configure-ibm-cloud-private-security-policies)
+      - [Update the image security policy](#update-the-image-security-policy)
+      - [Update pod security policy](#update-pod-security-policy)
+  - [Installing Istio](#installing-istio)
+  - [Installing Knative](#installing-knative)
+  - [What's next](#whats-next)
+  - [Cleaning up](#cleaning-up)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Knative Install on IBM Cloud Private
 
 This guide walks you through the installation of the latest version of

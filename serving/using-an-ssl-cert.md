@@ -1,3 +1,17 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Configuring HTTPS with a custom certificate](#configuring-https-with-a-custom-certificate)
+  - [Add the Certificate and Private Key into a secret](#add-the-certificate-and-private-key-into-a-secret)
+  - [Configure the Knative shared Gateway to use the new secret](#configure-the-knative-shared-gateway-to-use-the-new-secret)
+  - [Obtaining an SSL/TLS certificate using Let’s Encrypt through CertBot](#obtaining-an-ssltls-certificate-using-lets-encrypt-through-certbot)
+  - [Obtaining an SSL/TLS certificate using LetsEncrypt with cert-manager](#obtaining-an-ssltls-certificate-using-letsencrypt-with-cert-manager)
+    - [Install cert-manager](#install-cert-manager)
+    - [Configure cert-manager for your DNS provider](#configure-cert-manager-for-your-dns-provider)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Configuring HTTPS with a custom certificate
 
 If you already have an SSL/TLS certificate for your domain you can follow the

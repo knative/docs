@@ -1,3 +1,14 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [gRPC Ping](#grpc-ping)
+  - [Prerequisites](#prerequisites)
+  - [Build and run the gRPC server](#build-and-run-the-grpc-server)
+  - [Use the client to stream messages to the gRPC server](#use-the-client-to-stream-messages-to-the-grpc-server)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # gRPC Ping
 
 A simple gRPC server written in Go that you can use for testing.

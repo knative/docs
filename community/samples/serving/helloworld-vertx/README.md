@@ -1,3 +1,16 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Hello World - Eclipse Vert.x sample](#hello-world---eclipse-vertx-sample)
+  - [Before you begin](#before-you-begin)
+  - [Creating and configuring the sample code](#creating-and-configuring-the-sample-code)
+  - [Building and deploying the sample](#building-and-deploying-the-sample)
+  - [Testing the sample app](#testing-the-sample-app)
+  - [Removing the sample app deployment](#removing-the-sample-app-deployment)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Hello World - Eclipse Vert.x sample
 
 Learn how to deploy a simple web app that is written in Java and uses Eclipse

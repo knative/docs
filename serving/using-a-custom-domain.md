@@ -1,3 +1,18 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Setting up a custom domain](#setting-up-a-custom-domain)
+  - [Edit using kubectl](#edit-using-kubectl)
+  - [Apply from a file](#apply-from-a-file)
+  - [Deploy an application](#deploy-an-application)
+  - [Local DNS setup](#local-dns-setup)
+  - [Publish your Domain](#publish-your-domain)
+    - [Set static IP for Knative Gateway](#set-static-ip-for-knative-gateway)
+    - [Update your DNS records](#update-your-dns-records)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Setting up a custom domain
 
 By default, Knative Serving routes use `example.com` as the default domain. The

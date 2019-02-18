@@ -1,3 +1,15 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Knative Install on a Kubernetes Cluster](#knative-install-on-a-kubernetes-cluster)
+  - [Before you begin](#before-you-begin)
+  - [Installing Istio](#installing-istio)
+  - [Installing Knative](#installing-knative)
+  - [What's next](#whats-next)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Knative Install on a Kubernetes Cluster
 
 This guide walks you through the installation of the latest version of Knative

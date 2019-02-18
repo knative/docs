@@ -1,3 +1,20 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Knative Working Groups](#knative-working-groups)
+  - [API Core](#api-core)
+  - [Build](#build)
+  - [Client](#client)
+  - [Documentation](#documentation)
+  - [Eventing](#eventing)
+  - [Networking](#networking)
+  - [Observability](#observability)
+  - [Scaling](#scaling)
+  - [Productivity](#productivity)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Knative Working Groups
 
 Most community activity is organized into _working groups_.

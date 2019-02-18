@@ -1,3 +1,16 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Investigating Performance Issues](#investigating-performance-issues)
+  - [Request metrics](#request-metrics)
+  - [Request traces](#request-traces)
+  - [Autoscaler metrics](#autoscaler-metrics)
+  - [CPU and memory usage](#cpu-and-memory-usage)
+  - [Profiling](#profiling)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Investigating Performance Issues
 
 You deployed your application or function to Knative Serving but its performance

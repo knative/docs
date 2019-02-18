@@ -1,3 +1,18 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Default Channels](#default-channels)
+  - [Creating a default channel](#creating-a-default-channel)
+    - [Caveats](#caveats)
+      - [Arguments cannot be specified by default channels](#arguments-cannot-be-specified-by-default-channels)
+  - [Setting the default channel configuration](#setting-the-default-channel-configuration)
+    - [Caveats](#caveats-1)
+      - [Defaults only apply on channel creation](#defaults-only-apply-on-channel-creation)
+      - [Default channel arguments cannot be specified](#default-channel-arguments-cannot-be-specified)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Default Channels
 
 The default channel configuration allows channels to be created without

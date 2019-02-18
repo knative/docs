@@ -1,3 +1,19 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Accessing logs](#accessing-logs)
+  - [Kibana and Elasticsearch](#kibana-and-elasticsearch)
+    - [Accessing stdout/stderr logs](#accessing-stdoutstderr-logs)
+    - [Accessing request logs](#accessing-request-logs)
+    - [Accessing configuration and revision logs](#accessing-configuration-and-revision-logs)
+    - [Accessing build logs](#accessing-build-logs)
+    - [Accessing request logs](#accessing-request-logs-1)
+    - [Accessing end to end request traces](#accessing-end-to-end-request-traces)
+  - [Stackdriver](#stackdriver)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Accessing logs
 
 If you have not yet installed the logging and monitoring components, go through

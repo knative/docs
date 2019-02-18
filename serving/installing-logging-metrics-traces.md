@@ -1,3 +1,18 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Installing Logging, Metrics, and Traces](#installing-logging-metrics-and-traces)
+  - [Metrics](#metrics)
+  - [Logs](#logs)
+    - [Elasticsearch and Kibana](#elasticsearch-and-kibana)
+      - [Create Elasticsearch Indices](#create-elasticsearch-indices)
+    - [Stackdriver](#stackdriver)
+  - [End to end traces](#end-to-end-traces)
+  - [Learn More](#learn-more)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Installing Logging, Metrics, and Traces
 
 If you followed one of the

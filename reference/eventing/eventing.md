@@ -1,3 +1,46 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [duck.knative.dev](#duckknativedev)
+  - [Channel
+](#channel)
+  - [ChannelSpec
+](#channelspec)
+  - [ChannelSubscriberSpec
+](#channelsubscriberspec)
+  - [Subscribable
+](#subscribable)
+- [eventing.knative.dev](#eventingknativedev)
+  - [Channel
+](#channel-1)
+  - [ClusterChannelProvisioner
+](#clusterchannelprovisioner)
+  - [Subscription
+](#subscription)
+  - [ChannelProvisionerDefaulter
+](#channelprovisionerdefaulter)
+  - [ChannelSpec
+](#channelspec-1)
+  - [ChannelStatus
+](#channelstatus)
+  - [ClusterChannelProvisionerSpec
+](#clusterchannelprovisionerspec)
+  - [ClusterChannelProvisionerStatus
+](#clusterchannelprovisionerstatus)
+  - [ReplyStrategy
+](#replystrategy)
+  - [SubscriberSpec
+](#subscriberspec)
+  - [SubscriptionSpec
+](#subscriptionspec)
+  - [SubscriptionStatus
+](#subscriptionstatus)
+  - [SubscriptionStatusPhysicalSubscription
+](#subscriptionstatusphysicalsubscription)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 <p>Packages:</p>
 <ul>
 <li>

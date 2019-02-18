@@ -1,3 +1,20 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Contributing to the Knative Documentation](#contributing-to-the-knative-documentation)
+  - [Before you begin](#before-you-begin)
+    - [Code of conduct](#code-of-conduct)
+    - [Style guide](#style-guide)
+  - [Reporting documentation issues](#reporting-documentation-issues)
+  - [Contributing to the documentation](#contributing-to-the-documentation)
+    - [Working group](#working-group)
+    - [Getting started](#getting-started)
+    - [Submitting documentation PRs - what to expect](#submitting-documentation-prs---what-to-expect)
+    - [Putting your docs in the right place](#putting-your-docs-in-the-right-place)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Contributing to the Knative Documentation
 
 **First off, thanks for taking the time to contribute!**

@@ -1,3 +1,15 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [GCP Cloud Pub/Sub - Source](#gcp-cloud-pubsub---source)
+  - [Prerequisites](#prerequisites)
+  - [Deployment](#deployment)
+  - [Publish](#publish)
+  - [Verify](#verify)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # GCP Cloud Pub/Sub - Source
 
 This sample shows how to configure the GCP PubSub event source. This event

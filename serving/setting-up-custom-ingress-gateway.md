@@ -1,3 +1,14 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Setting Up Custom Ingress Gateway](#setting-up-custom-ingress-gateway)
+  - [Step 1: Create Gateway Service and Deployment Instance](#step-1-create-gateway-service-and-deployment-instance)
+  - [Step 2: Update Knative Gateway](#step-2-update-knative-gateway)
+  - [Step 3: Update Gateway Configmap](#step-3-update-gateway-configmap)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Setting Up Custom Ingress Gateway
 
 Knative uses a shared ingress Gateway to serve all incoming traffic within Knative

@@ -1,3 +1,15 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Knative Technical Oversight Committee](#knative-technical-oversight-committee)
+  - [Charter](#charter)
+  - [Committee Mechanics](#committee-mechanics)
+  - [Committee Meeting](#committee-meeting)
+  - [Committee Members](#committee-members)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Knative Technical Oversight Committee
 
 The Knative Technical Oversight Committee (TOC) is responsible for cross-cutting

@@ -1,3 +1,22 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Using ExternalDNS on Google Cloud Platform to automate DNS setup](#using-externaldns-on-google-cloud-platform-to-automate-dns-setup)
+  - [Set up environtment variables](#set-up-environtment-variables)
+  - [Set up Kubernetes Engine cluster with CloudDNS read/write permissions](#set-up-kubernetes-engine-cluster-with-clouddns-readwrite-permissions)
+    - [Cluster with Cloud DNS scope](#cluster-with-cloud-dns-scope)
+    - [Cluster with Cloud DNS Admin Service Account credential](#cluster-with-cloud-dns-admin-service-account-credential)
+  - [Set up Knative](#set-up-knative)
+  - [Set up ExternalDNS](#set-up-externaldns)
+    - [Create a DNS zone for managing DNS records](#create-a-dns-zone-for-managing-dns-records)
+    - [Deploy ExternalDNS](#deploy-externaldns)
+    - [Configuring Knative Gateway service](#configuring-knative-gateway-service)
+    - [Verify ExternalDNS works](#verify-externaldns-works)
+    - [Verify domain has been published](#verify-domain-has-been-published)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Using ExternalDNS on Google Cloud Platform to automate DNS setup
 
 [ExternalDNS](https://github.com/kubernetes-incubator/external-dns) is a tool

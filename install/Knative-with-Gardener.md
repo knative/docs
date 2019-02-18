@@ -1,3 +1,21 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Knative Install on Gardener](#knative-install-on-gardener)
+  - [Before you begin](#before-you-begin)
+    - [Install and configure kubectl](#install-and-configure-kubectl)
+    - [Access Gardener](#access-gardener)
+    - [Creating a Kubernetes cluster](#creating-a-kubernetes-cluster)
+    - [Configure kubectl for your cluster](#configure-kubectl-for-your-cluster)
+  - [Installing Istio](#installing-istio)
+  - [Installing Knative](#installing-knative)
+  - [Set your custom domain](#set-your-custom-domain)
+  - [What's next](#whats-next)
+  - [Cleaning up](#cleaning-up)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Knative Install on [Gardener](https://github.com/gardener)
 
 This guide walks you through the installation of the latest version of Knative

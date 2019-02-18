@@ -1,3 +1,26 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Knative `Build` resources](#knative-build-resources)
+    - [Syntax](#syntax)
+      - [Steps](#steps)
+      - [Template](#template)
+      - [Source](#source)
+      - [Service Account](#service-account)
+      - [Volumes](#volumes)
+      - [Timeout](#timeout)
+    - [Examples](#examples)
+      - [Using `git`](#using-git)
+      - [Using `gcs`](#using-gcs)
+      - [Using `custom`](#using-custom)
+      - [Using an extra volume](#using-an-extra-volume)
+      - [Using `steps` to push images](#using-steps-to-push-images)
+      - [Using a `ServiceAccount`](#using-a-serviceaccount)
+      - [Using `timeout`](#using-timeout)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Knative `Build` resources
 
 Use the `Build` resource object to create and run on-cluster processes to

@@ -1,3 +1,16 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Define The Source Resource](#define-the-source-resource)
+  - [Create the Source CRD Skeleton](#create-the-source-crd-skeleton)
+  - [Add Fields to Source Type Definition](#add-fields-to-source-type-definition)
+  - [Update type tests](#update-type-tests)
+  - [Enable the Status subresource](#enable-the-status-subresource)
+  - [Update tests to use the Status subresource](#update-tests-to-use-the-status-subresource)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Define The Source Resource
 
 We'll use Kubebuilder to generate a new Kubernetes Custom Resource for our

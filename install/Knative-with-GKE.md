@@ -1,3 +1,20 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Knative Install on Google Kubernetes Engine](#knative-install-on-google-kubernetes-engine)
+  - [Before you begin](#before-you-begin)
+    - [Installing the Google Cloud SDK and `kubectl`](#installing-the-google-cloud-sdk-and-kubectl)
+    - [Setting environment variables](#setting-environment-variables)
+    - [Setting up a Google Cloud Platform project](#setting-up-a-google-cloud-platform-project)
+  - [Creating a Kubernetes cluster](#creating-a-kubernetes-cluster)
+  - [Installing Istio](#installing-istio)
+  - [Installing Knative](#installing-knative)
+  - [What's next](#whats-next)
+  - [Cleaning up](#cleaning-up)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Knative Install on Google Kubernetes Engine
 
 This guide walks you through the installation of the latest version of all

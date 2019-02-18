@@ -1,3 +1,19 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Routing across Knative Services](#routing-across-knative-services)
+  - [Prerequisites](#prerequisites)
+  - [Setup](#setup)
+  - [Deploy the Service](#deploy-the-service)
+  - [Exploring the Routes](#exploring-the-routes)
+    - [Access the Services](#access-the-services)
+  - [Apply Custom Routing Rule](#apply-custom-routing-rule)
+  - [How It Works](#how-it-works)
+  - [Clean Up](#clean-up)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Routing across Knative Services
 
 This example shows how to map multiple Knative services to different paths under

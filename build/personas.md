@@ -1,3 +1,15 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Knative Personas](#knative-personas)
+  - [Knative Build](#knative-build)
+    - [Developer](#developer)
+    - [Language operator / contributor](#language-operator--contributor)
+  - [Contributors](#contributors)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Knative Personas
 
 When discussing user actions, it is often helpful to

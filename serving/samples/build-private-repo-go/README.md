@@ -1,3 +1,22 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Deploying to Knative from a Private GitHub Repo](#deploying-to-knative-from-a-private-github-repo)
+  - [Before you begin](#before-you-begin)
+  - [Setup](#setup)
+    - [1. Setting up the default service account](#1-setting-up-the-default-service-account)
+    - [2. Configuring the build](#2-configuring-the-build)
+      - [Setting up our Build service account](#setting-up-our-build-service-account)
+      - [Creating a deploy key](#creating-a-deploy-key)
+      - [Creating a DockerHub push credential](#creating-a-dockerhub-push-credential)
+      - [Creating the build bot](#creating-the-build-bot)
+    - [3. Installing a Build template and updating `manifest.yaml`](#3-installing-a-build-template-and-updating-manifestyaml)
+  - [Deploying your application](#deploying-your-application)
+  - [Appendix: Sample Code](#appendix-sample-code)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Deploying to Knative from a Private GitHub Repo
 
 This sample demonstrates:

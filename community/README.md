@@ -1,3 +1,18 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Knative Community](#knative-community)
+  - [Welcome!](#welcome)
+  - [Introduction](#introduction)
+  - [Knative authors](#knative-authors)
+    - [Authoring samples](#authoring-samples)
+  - [Meetings and work groups](#meetings-and-work-groups)
+  - [How can I help](#how-can-i-help)
+  - [Questions and issues](#questions-and-issues)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Knative Community
 
 _Important_. Before proceeding, please review the Knative community

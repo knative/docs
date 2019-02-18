@@ -1,3 +1,39 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Debugging Knative Eventing](#debugging-knative-eventing)
+  - [Audience](#audience)
+  - [Version](#version)
+  - [Prerequisites](#prerequisites)
+  - [Example](#example)
+  - [Triggering Events](#triggering-events)
+  - [Where are my events?](#where-are-my-events)
+    - [Control Plane](#control-plane)
+      - [Resources](#resources)
+        - [`fn`](#fn)
+        - [`svc`](#svc)
+        - [`chan`](#chan)
+          - [`Service`](#service)
+          - [`VirtualService`](#virtualservice)
+        - [`src`](#src)
+        - [ContainerSource](#containersource)
+      - [`sub`](#sub)
+      - [Controllers](#controllers)
+        - [Deployment Controller](#deployment-controller)
+        - [Service Controller](#service-controller)
+        - [Channel Controller](#channel-controller)
+        - [Source Controller](#source-controller)
+          - [ContainerSource Controller](#containersource-controller)
+        - [Subscription Controller](#subscription-controller)
+    - [Data Plane](#data-plane)
+      - [`src`](#src-1)
+      - [Channel Dispatcher](#channel-dispatcher)
+      - [`fn`](#fn-1)
+- [TODO Finish the guide.](#todo-finish-the-guide)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Debugging Knative Eventing
 
 This is an evolving document on how to debug a non-working Knative Eventing

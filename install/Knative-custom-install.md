@@ -1,3 +1,21 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Performing a Custom Knative Installation](#performing-a-custom-knative-installation)
+  - [Before you begin](#before-you-begin)
+  - [Installing Istio](#installing-istio)
+    - [Choosing an Istio installation](#choosing-an-istio-installation)
+      - [Istio installation options](#istio-installation-options)
+    - [Installing Istio](#installing-istio-1)
+  - [Installing Knative components](#installing-knative-components)
+    - [Choosing Knative installation files](#choosing-knative-installation-files)
+      - [Install details and options](#install-details-and-options)
+    - [Installing Knative](#installing-knative)
+  - [What's next](#whats-next)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Performing a Custom Knative Installation
 
 Use this guide to perform a custom installation of Knative on an existing

@@ -1,3 +1,17 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Hello World - Scala using Akka HTTP sample](#hello-world---scala-using-akka-http-sample)
+  - [Prerequisites](#prerequisites)
+  - [Configuring the sbt build](#configuring-the-sbt-build)
+  - [Configuring the Service descriptor](#configuring-the-service-descriptor)
+  - [Publishing to Docker](#publishing-to-docker)
+  - [Deploying to Knative Serving](#deploying-to-knative-serving)
+  - [Cleanup](#cleanup)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Hello World - Scala using Akka HTTP sample
 
 A microservice which demonstrates how to get set up and running with Knative

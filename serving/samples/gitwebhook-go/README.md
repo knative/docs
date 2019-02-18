@@ -1,3 +1,16 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [GitHub Webhook - Go sample](#github-webhook---go-sample)
+  - [Prerequisites](#prerequisites)
+  - [Build the sample code](#build-the-sample-code)
+  - [Exploring](#exploring)
+  - [Testing the service](#testing-the-service)
+  - [Cleaning up](#cleaning-up)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # GitHub Webhook - Go sample
 
 A handler written in Go that demonstrates interacting with GitHub through a

@@ -1,3 +1,11 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Knative Community Samples](#knative-community-samples)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Knative Community Samples
 
 This directory contains Knative sample applications submitted from the

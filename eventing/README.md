@@ -1,3 +1,26 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Knative Eventing](#knative-eventing)
+  - [Design overview](#design-overview)
+    - [Event consumers](#event-consumers)
+    - [Event channels and subscriptions](#event-channels-and-subscriptions)
+    - [Future design goals](#future-design-goals)
+  - [Installation](#installation)
+  - [Architecture](#architecture)
+  - [Sources](#sources)
+    - [KubernetesEventSource](#kuberneteseventsource)
+    - [GitHubSource](#githubsource)
+    - [GcpPubSubSource](#gcppubsubsource)
+    - [AwsSqsSource](#awssqssource)
+    - [ContainerSource](#containersource)
+    - [CronJobSource](#cronjobsource)
+  - [Getting Started](#getting-started)
+  - [Configuration](#configuration)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Knative Eventing
 
 Knative Eventing is a system that is designed to address a common need for cloud

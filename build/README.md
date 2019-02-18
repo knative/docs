@@ -1,3 +1,20 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Knative Build](#knative-build)
+  - [Key features of Knative Builds](#key-features-of-knative-builds)
+    - [Learn more](#learn-more)
+  - [Install the Knative Build component](#install-the-knative-build-component)
+  - [Configuration syntax example](#configuration-syntax-example)
+  - [Get started with Knative Build samples](#get-started-with-knative-build-samples)
+      - [Simple build samples](#simple-build-samples)
+      - [Build templates](#build-templates)
+      - [Complex samples](#complex-samples)
+  - [Related info](#related-info)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Knative Build
 
 A `Build` is a custom resource in Knative that allows you to define a process

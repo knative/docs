@@ -1,3 +1,19 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Reviewing and Merging Pull Requests for Knative](#reviewing-and-merging-pull-requests-for-knative)
+  - [Pull requests welcome](#pull-requests-welcome)
+  - [Code of Conduct](#code-of-conduct)
+  - [Code reviewers](#code-reviewers)
+  - [Reviewing changes](#reviewing-changes)
+    - [Holds](#holds)
+  - [Approvers](#approvers)
+  - [Merging PRs](#merging-prs)
+  - [Prow](#prow)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Reviewing and Merging Pull Requests for Knative
 
 As a community, we believe in the value of code reviews for all contributions.

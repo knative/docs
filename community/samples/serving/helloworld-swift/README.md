@@ -1,3 +1,15 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Hello World - Swift sample](#hello-world---swift-sample)
+  - [Prerequisites](#prerequisites)
+  - [Recreating the sample code](#recreating-the-sample-code)
+  - [Building and deploying the sample](#building-and-deploying-the-sample)
+  - [Removing the sample app deployment](#removing-the-sample-app-deployment)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Hello World - Swift sample
 
 A simple web app written in Swift that you can use for testing. The app reads in

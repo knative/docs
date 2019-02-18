@@ -1,3 +1,24 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Thumbnailer External Dependencies Demo](#thumbnailer-external-dependencies-demo)
+  - [Before you begin](#before-you-begin)
+  - [Sample code](#sample-code)
+    - [Cloning the sample code](#cloning-the-sample-code)
+    - [Run tests](#run-tests)
+    - [Run the app](#run-the-app)
+    - [Test](#test)
+  - [Deploying the app to Knative](#deploying-the-app-to-knative)
+    - [Deploying a prebuilt image](#deploying-a-prebuilt-image)
+    - [Building and deploying a version of the app](#building-and-deploying-a-version-of-the-app)
+  - [Using the app](#using-the-app)
+    - [Ping](#ping)
+    - [Video Thumbnail](#video-thumbnail)
+  - [Final Thoughts](#final-thoughts)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Thumbnailer External Dependencies Demo
 
 This is a walk-through example that demonstrates deploying a dockerized

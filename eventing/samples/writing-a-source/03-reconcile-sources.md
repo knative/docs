@@ -1,3 +1,15 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Reconcile Sources](#reconcile-sources)
+  - [Remove Deployment creation from the Reconcile function](#remove-deployment-creation-from-the-reconcile-function)
+  - [Update Source Status in Reconcile function](#update-source-status-in-reconcile-function)
+  - [Resolve SinkURI from the source's Sink reference](#resolve-sinkuri-from-the-sources-sink-reference)
+  - [Add test to verify SinkURI resolution](#add-test-to-verify-sinkuri-resolution)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Reconcile Sources
 
 Now that we have a Source CRD defined with Sink and SinkURI fields, we'll need

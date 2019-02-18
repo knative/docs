@@ -1,3 +1,11 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Accessing request traces](#accessing-request-traces)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Accessing request traces
 
 If you have not yet installed the logging and monitoring components, go through

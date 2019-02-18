@@ -1,3 +1,19 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Knative Install on OpenShift](#knative-install-on-openshift)
+  - [Before you begin](#before-you-begin)
+  - [Install `oc` (openshift cli)](#install-oc-openshift-cli)
+  - [Scripted cluster setup and installation](#scripted-cluster-setup-and-installation)
+  - [Creating a new OpenShift cluster](#creating-a-new-openshift-cluster)
+  - [Installing Istio](#installing-istio)
+  - [Installing Knative Serving](#installing-knative-serving)
+  - [Deploying an app](#deploying-an-app)
+  - [Cleaning up](#cleaning-up)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Knative Install on OpenShift
 
 This guide walks you through the installation of the latest version of

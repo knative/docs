@@ -1,3 +1,16 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Setting Up A Logging Plugin](#setting-up-a-logging-plugin)
+  - [Configuring](#configuring)
+    - [Configure the DaemonSet for stdout/stderr logs](#configure-the-daemonset-for-stdoutstderr-logs)
+    - [Configure the Sidecar for log files under /var/log](#configure-the-sidecar-for-log-files-under-varlog)
+  - [Deploying](#deploying)
+  - [Uninstalling](#uninstalling)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Setting Up A Logging Plugin
 
 Knative allows cluster operators to use different backends for their logging

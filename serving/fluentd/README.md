@@ -1,3 +1,15 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Fluentd Docker Image on Knative Serving](#fluentd-docker-image-on-knative-serving)
+  - [Requirements](#requirements)
+  - [Sample images](#sample-images)
+    - [Send logs to Elasticsearch](#send-logs-to-elasticsearch)
+    - [Send logs to Stackdriver](#send-logs-to-stackdriver)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Fluentd Docker Image on Knative Serving
 
 Knative Serving uses a [Fluentd](https://www.fluentd.org/) docker image to

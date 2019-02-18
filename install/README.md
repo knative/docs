@@ -1,3 +1,17 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Installing Knative](#installing-knative)
+  - [Choosing a Kubernetes cluster](#choosing-a-kubernetes-cluster)
+  - [Installing Knative](#installing-knative-1)
+    - [Install guides](#install-guides)
+  - [Deploying an app](#deploying-an-app)
+  - [Configuring Knative Serving](#configuring-knative-serving)
+  - [Checking the version of your Knative Serving installation](#checking-the-version-of-your-knative-serving-installation)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Installing Knative
 
 Follow this guide to install Knative components on a platform of your choice.

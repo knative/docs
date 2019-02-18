@@ -1,3 +1,22 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Slack Usage Guidelines](#slack-usage-guidelines)
+  - [Code of Conduct](#code-of-conduct)
+  - [Admins](#admins)
+    - [Admin Expectations and Guidelines](#admin-expectations-and-guidelines)
+  - [Creating Channels](#creating-channels)
+  - [Escalating and/or Reporting a Problem](#escalating-andor-reporting-a-problem)
+    - [What if you have a problem with an admin](#what-if-you-have-a-problem-with-an-admin)
+  - [Bots, Tokens, and Webhooks](#bots-tokens-and-webhooks)
+  - [Admin Moderation](#admin-moderation)
+  - [Inactivating Accounts](#inactivating-accounts)
+  - [Specific Channel Rules](#specific-channel-rules)
+  - [DM (Direct Message) Conversations](#dm-direct-message-conversations)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Slack Usage Guidelines
 
 Slack is the main communication platform for Knative outside of our mailing

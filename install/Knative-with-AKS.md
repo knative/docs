@@ -1,3 +1,24 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Knative Install on Azure Kubernetes Service (AKS)](#knative-install-on-azure-kubernetes-service-aks)
+  - [Before you begin](#before-you-begin)
+    - [Installing the Azure CLI](#installing-the-azure-cli)
+      - [MacOS](#macos)
+      - [Ubuntu 64-bit](#ubuntu-64-bit)
+    - [Installing kubectl](#installing-kubectl)
+  - [Cluster Setup](#cluster-setup)
+    - [Configure your Azure account](#configure-your-azure-account)
+    - [Create a Resource Group for AKS](#create-a-resource-group-for-aks)
+    - [Create a Kubernetes cluster using AKS](#create-a-kubernetes-cluster-using-aks)
+  - [Installing Istio](#installing-istio)
+  - [Installing Knative](#installing-knative)
+  - [What's next](#whats-next)
+  - [Cleaning up](#cleaning-up)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Knative Install on Azure Kubernetes Service (AKS)
 
 This guide walks you through the installation of the latest version of Knative
