@@ -41,7 +41,7 @@ access, replace the default parameter value with the IP ranges of your cluster.
 Run the following command to edit the `config-network` map:
 
 ```shell
-kubectl edit configmap config-network --namespace knative-serving
+kubectl edit configmap config-network -n knative-serving
 ```
 
 Then, use an editor of your choice to change the
@@ -83,7 +83,7 @@ on the pod. Verify that the `traffic.sidecar.istio.io/includeOutboundIPRanges`
 annotation matches the expected value from the config-map.
 
 ```shell
-$ kubectl get pod ${POD_NAME} --output yaml
+$ kubectl get pod ${POD_NAME} -o yaml
 
 apiVersion: v1
 kind: Pod

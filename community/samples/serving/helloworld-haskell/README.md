@@ -154,7 +154,7 @@ folder) you're ready to build and deploy the sample app.
    the configuration using `kubectl`:
 
    ```shell
-   kubectl apply --filename service.yaml
+   kubectl apply -f service.yaml
    ```
 
 1. Now that your service is created, Knative will perform the following steps:
@@ -179,7 +179,7 @@ folder) you're ready to build and deploy the sample app.
        INGRESSGATEWAY=istio-ingressgateway
    fi
 
-   kubectl get svc $INGRESSGATEWAY --namespace istio-system
+   kubectl get svc $INGRESSGATEWAY -n istio-system
 
    NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
    xxxxxxx-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
@@ -189,14 +189,14 @@ folder) you're ready to build and deploy the sample app.
    For minikube or bare-metal, get IP_ADDRESS by running the following command
 
    ```shell
-   echo $(kubectl get node  --output 'jsonpath={.items[0].status.addresses[0].address}'):$(kubectl get svc $INGRESSGATEWAY --namespace istio-system   --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
+   echo $(kubectl get node  -o 'jsonpath={.items[0].status.addresses[0].address}'):$(kubectl get svc $INGRESSGATEWAY -n istio-system   -o 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
 
    ```
 
 1. To find the URL for your service, enter:
 
    ```
-   kubectl get ksvc helloworld-haskell  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+   kubectl get ksvc helloworld-haskell  -o=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
    NAME                   DOMAIN
    helloworld-haskell     helloworld-haskell.default.example.com
    ```
@@ -214,5 +214,5 @@ folder) you're ready to build and deploy the sample app.
 To remove the sample app from your cluster, delete the service record:
 
 ```shell
-kubectl delete --filename service.yaml
+kubectl delete -f service.yaml
 ```

@@ -148,7 +148,7 @@ above.
     Apply the configuration using `kubectl`:
 
     ```shell
-    kubectl apply --filename service.yaml
+    kubectl apply -f service.yaml
     ```
 
 1.  Now that your service is created, Knative will perform the following steps:
@@ -173,7 +173,7 @@ above.
         INGRESSGATEWAY=istio-ingressgateway
     fi
 
-    kubectl get svc $INGRESSGATEWAY --namespace istio-system
+    kubectl get svc $INGRESSGATEWAY -n istio-system
 
     NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
     xxxxxxx-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
@@ -182,7 +182,7 @@ above.
 1.  To find the URL for your service, use
 
     ```
-    kubectl get ksvc helloworld-elixir --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+    kubectl get ksvc helloworld-elixir -o=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
 
     NAME                DOMAIN
     helloworld-elixir   helloworld-elixir.default.example.com
@@ -314,5 +314,5 @@ above.
 To remove the sample app from your cluster, delete the service record:
 
 ```shell
-kubectl delete --filename service.yaml
+kubectl delete -f service.yaml
 ```

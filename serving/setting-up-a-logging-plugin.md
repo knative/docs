@@ -57,11 +57,11 @@ Operators need to deploy Knative components after the configuring:
 
 ```shell
 # Deploy the configuration for sidecar
-kubectl apply --filename config/config-observability.yaml
+kubectl apply -f config/config-observability.yaml
 
 # Deploy the DaemonSet to make configuration for DaemonSet take effect
-kubectl apply --recursive --filename config/monitoring/100-namespace.yaml \
-    --filename <path-of-fluentd-daemonset-config>
+kubectl apply --recursive -f config/monitoring/100-namespace.yaml \
+    -f <path-of-fluentd-daemonset-config>
 ```
 
 In the commands above, replace `<path-of-fluentd-daemonset-config>` with the
@@ -76,7 +76,7 @@ backends. For example, if they desire Elasticsearch&Kibana, they have to deploy
 the Elasticsearch and Kibana services. Knative provides this sample:
 
 ```shell
-kubectl apply --recursive --filename third_party/config/monitoring/elasticsearch
+kubectl apply --recursive -f third_party/config/monitoring/elasticsearch
 ```
 
 See [here](/serving/installing-logging-metrics-traces.md) for deploying the
@@ -87,7 +87,7 @@ whole Knative monitoring components.
 To uninstall a logging plugin, run:
 
 ```shell
-kubectl delete --recursive --filename <path-of-fluentd-daemonset-config>
+kubectl delete --recursive -f <path-of-fluentd-daemonset-config>
 ```
 
 ---

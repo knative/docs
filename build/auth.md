@@ -80,7 +80,7 @@ into their respective files in `$HOME`.
 1.  Execute the build:
 
     ```shell
-    kubectl apply --filename secret.yaml serviceaccount.yaml build.yaml
+    kubectl apply -f secret.yaml serviceaccount.yaml build.yaml
     ```
 
 When the build executes, before steps execute, a `~/.ssh/config` will be
@@ -137,7 +137,7 @@ to authenticate with the Git service.
 1.  Execute the build:
 
     ```shell
-    kubectl apply --filename secret.yaml serviceaccount.yaml build.yaml
+    kubectl apply -f secret.yaml serviceaccount.yaml build.yaml
     ```
 
 When this build executes, before steps execute, a `~/.gitconfig` will be
@@ -194,7 +194,7 @@ credentials are then used to authenticate with the Git repository.
 1.  Execute the build:
 
     ```shell
-    kubectl apply --filename secret.yaml serviceaccount.yaml build.yaml
+    kubectl apply -f secret.yaml serviceaccount.yaml build.yaml
     ```
 
 When this build executes, before steps execute, a `~/.docker/config.json` will

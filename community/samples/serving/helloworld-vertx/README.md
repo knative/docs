@@ -200,7 +200,7 @@ your sample app to your cluster:
    Knative cluster by running the `kubectl apply` command:
 
    ```shell
-   kubectl apply --filename service.yaml
+   kubectl apply -f service.yaml
    ```
 
    Result: A service name `helloworld-vertx` is created in your cluster along
@@ -235,7 +235,7 @@ To verify that your sample app has been successfully deployed:
        INGRESSGATEWAY=istio-ingressgateway
    fi
 
-   kubectl get svc $INGRESSGATEWAY --namespace istio-system
+   kubectl get svc $INGRESSGATEWAY -n istio-system
    ```
 
    Example result:
@@ -249,7 +249,7 @@ To verify that your sample app has been successfully deployed:
    command:
 
    ```shell
-   kubectl get services.serving.knative.dev helloworld-vertx  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+   kubectl get services.serving.knative.dev helloworld-vertx  -o=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
    ```
 
    Example result:
@@ -281,5 +281,5 @@ To remove the sample app from your cluster, run the following `kubectl delete`
 command:
 
 ```shell
-kubectl delete --filename service.yaml
+kubectl delete -f service.yaml
 ```

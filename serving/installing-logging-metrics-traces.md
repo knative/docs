@@ -15,7 +15,7 @@ sections to do so now.
 1. Run the following command to install Prometheus and Grafana:
 
    ```shell
-   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.3.0/monitoring-metrics-prometheus.yaml
+   kubectl apply -f https://github.com/knative/serving/releases/download/v0.3.0/monitoring-metrics-prometheus.yaml
    ```
 
 1. Ensure that the `grafana-*`, `kibana-logging-*`, `kube-state-metrics-*`,
@@ -23,7 +23,7 @@ sections to do so now.
    status:
 
    ```shell
-   kubectl get pods --namespace knative-monitoring --watch
+   kubectl get pods -n knative-monitoring --watch
    ```
 
    For example:
@@ -59,14 +59,14 @@ install:
 1. Run the following command to install an ELK stack:
 
    ```shell
-   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.3.0/monitoring-logs-elasticsearch.yaml
+   kubectl apply -f https://github.com/knative/serving/releases/download/v0.3.0/monitoring-logs-elasticsearch.yaml
    ```
 
 1. Ensure that the `elasticsearch-logging-*`, `fluentd-ds-*`, and
    `kibana-logging-*` pods all report a `Running` status:
 
    ```shell
-   kubectl get pods --namespace knative-monitoring --watch
+   kubectl get pods -n knative-monitoring --watch
    ```
 
    For example:
@@ -87,7 +87,7 @@ install:
    `beta.kubernetes.io/fluentd-ds-ready=true` label:
 
    ```shell
-   kubectl get nodes --selector beta.kubernetes.io/fluentd-ds-ready=true
+   kubectl get nodes -l beta.kubernetes.io/fluentd-ds-ready=true
    ```
 
 1. If you receive the `No Resources Found` response:
@@ -103,7 +103,7 @@ install:
       ready on at least one node:
 
       ```shell
-      kubectl get daemonset fluentd-ds --namespace knative-monitoring --watch
+      kubectl get daemonset fluentd-ds -n knative-monitoring --watch
       ```
 
       Tip: Hit CTRL+C to exit watch mode.
@@ -173,14 +173,14 @@ To configure and setup monitoring:
     repository:
 
     ```shell
-      kubectl apply --recursive --filename config/monitoring/100-namespace.yaml \
-          --filename third_party/config/monitoring/logging/stackdriver
+      kubectl apply --recursive -f config/monitoring/100-namespace.yaml \
+          -f third_party/config/monitoring/logging/stackdriver
     ```
 
 1.  Ensure that the `fluentd-ds-*` pods all report a `Running` status:
 
     ```shell
-    kubectl get pods --namespace knative-monitoring --watch
+    kubectl get pods -n knative-monitoring --watch
     ```
 
     For example:
@@ -198,7 +198,7 @@ To configure and setup monitoring:
     `beta.kubernetes.io/fluentd-ds-ready=true` label:
 
     ```shell
-    kubectl get nodes --selector beta.kubernetes.io/fluentd-ds-ready=true
+    kubectl get nodes -l beta.kubernetes.io/fluentd-ds-ready=true
     ```
 
 1.  If you receive the `No Resources Found` response:
@@ -214,7 +214,7 @@ To configure and setup monitoring:
         ready on at least one node:
 
         ```shell
-        kubectl get daemonset fluentd-ds --namespace knative-monitoring
+        kubectl get daemonset fluentd-ds -n knative-monitoring
         ```
 
 See [Accessing Logs](./accessing-logs.md) for more information about logs in
@@ -226,14 +226,14 @@ Knative.
   traces, run:
 
   ```shell
-  kubectl apply --filename https://github.com/knative/serving/releases/download/v0.3.0/monitoring-tracing-zipkin-in-mem.yaml
+  kubectl apply -f https://github.com/knative/serving/releases/download/v0.3.0/monitoring-tracing-zipkin-in-mem.yaml
   ```
 
 - If Elasticsearch is installed and you want to persist end to end traces, first
   run:
 
   ```shell
-  kubectl apply --filename https://github.com/knative/serving/releases/download/v0.3.0/monitoring-tracing-zipkin.yaml
+  kubectl apply -f https://github.com/knative/serving/releases/download/v0.3.0/monitoring-tracing-zipkin.yaml
   ```
 
   Next, create an Elasticsearch index for end to end traces:

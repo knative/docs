@@ -8,9 +8,9 @@ the visualization tool for [Prometheus](https://prometheus.io/).
 1. To open Grafana, enter the following command:
 
 ```shell
-kubectl port-forward --namespace knative-monitoring \
-$(kubectl get pods --namespace knative-monitoring \
---selector=app=grafana --output=jsonpath="{.items..metadata.name}") \
+kubectl port-forward -n knative-monitoring \
+$(kubectl get pods -n knative-monitoring \
+-l=app=grafana -o=jsonpath="{.items..metadata.name}") \
 3000
 ```
 
@@ -53,7 +53,7 @@ still be useful for debugging.
 ```shell
 kubectl port-forward -n knative-monitoring \
 $(kubectl get pods -n knative-monitoring \
---selector=app=prometheus --output=jsonpath="{.items[0].metadata.name}") \
+-l=app=prometheus -o=jsonpath="{.items[0].metadata.name}") \
 9090
 ```
 

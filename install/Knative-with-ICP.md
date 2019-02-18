@@ -131,31 +131,31 @@ see [Performing a Custom Knative Installation](Knative-custom-install.md).
    ```shell
    curl -L https://github.com/knative/serving/releases/download/v0.3.0/serving.yaml \
      | sed 's/LoadBalancer/NodePort/' \
-     | kubectl apply --filename -
+     | kubectl apply -f -
    ```
 
    ```shell
    curl -L https://github.com/knative/build/releases/download/v0.3.0/release.yaml \
      | sed 's/LoadBalancer/NodePort/' \
-     | kubectl apply --filename -
+     | kubectl apply -f -
    ```
 
    ```shell
    curl -L https://github.com/knative/eventing/releases/download/v0.3.0/release.yaml \
      | sed 's/LoadBalancer/NodePort/' \
-     | kubectl apply --filename -
+     | kubectl apply -f -
    ```
 
    ```shell
    curl -L https://github.com/knative/eventing-sources/releases/download/v0.3.0/release.yaml \
      | sed 's/LoadBalancer/NodePort/' \
-     | kubectl apply --filename -
+     | kubectl apply -f -
    ```
 
    ```shell
    curl -L https://github.com/knative/serving/releases/download/v0.3.0/monitoring.yaml \
      | sed 's/LoadBalancer/NodePort/' \
-     | kubectl apply --filename -
+     | kubectl apply -f -
    ```
 
    See
@@ -166,11 +166,11 @@ see [Performing a Custom Knative Installation](Knative-custom-install.md).
    `Running`:
 
    ```bash
-   kubectl get pods --namespace knative-serving
-   kubectl get pods --namespace knative-build
-   kubectl get pods --namespace knative-eventing
-   kubectl get pods --namespace knative-sources
-   kubectl get pods --namespace knative-monitoring
+   kubectl get pods -n knative-serving
+   kubectl get pods -n knative-build
+   kubectl get pods -n knative-eventing
+   kubectl get pods -n knative-sources
+   kubectl get pods -n knative-monitoring
    ```
 
    > Note: Instead of rerunning the command, you can add `--watch` to the above
@@ -193,8 +193,8 @@ guide.
 > for the {IP_ADDRESS} placeholder in the samples:
 
 ```shell
-echo $(ICP cluster ip):$(kubectl get svc istio-ingressgateway --namespace istio-system \
---output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
+echo $(ICP cluster ip):$(kubectl get svc istio-ingressgateway -n istio-system \
+-o 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
 ```
 
 To get started with Knative Eventing, walk through one of the
@@ -211,31 +211,31 @@ commands:
 ```shell
 curl -L https://github.com/knative/serving/releases/download/v0.3.0/serving.yaml \
  | sed 's/LoadBalancer/NodePort/' \
- | kubectl delete --filename -
+ | kubectl delete -f -
 ```
 
 ```shell
 curl -L https://github.com/knative/build/releases/download/v0.3.0/release.yaml \
  | sed 's/LoadBalancer/NodePort/' \
- | kubectl delete --filename -
+ | kubectl delete -f -
 ```
 
 ```shell
 curl -L https://github.com/knative/eventing/releases/download/v0.3.0/release.yaml \
  | sed 's/LoadBalancer/NodePort/' \
- | kubectl delete --filename -
+ | kubectl delete -f -
 ```
 
 ```shell
 curl -L https://github.com/knative/eventing-sources/releases/download/v0.3.0/release.yaml \
  | sed 's/LoadBalancer/NodePort/' \
- | kubectl delete --filename -
+ | kubectl delete -f -
 ```
 
 ```shell
 curl -L https://github.com/knative/serving/releases/download/v0.3.0/monitoring.yaml \
  | sed 's/LoadBalancer/NodePort/' \
- | kubectl delete --filename -
+ | kubectl delete -f -
 ```
 
 ---

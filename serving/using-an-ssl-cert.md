@@ -22,7 +22,7 @@ following command to create a secret that stores the certificate. Note the name
 of the secret, `istio-ingressgateway-certs` is required.
 
 ```shell
-kubectl create --namespace istio-system secret tls istio-ingressgateway-certs \
+kubectl create -n istio-system secret tls istio-ingressgateway-certs \
   --key cert.pk \
   --cert cert.pem
 ```
@@ -35,7 +35,7 @@ the Gateway spec to use the HTTPS.
 To edit the shared gateway, run:
 
 ```shell
-kubectl edit gateway knative-ingress-gateway --namespace knative-serving
+kubectl edit gateway knative-ingress-gateway -n knative-serving
 ```
 
 Change the Gateway spec to include the `tls:` section as shown below, then save
@@ -110,7 +110,7 @@ To install cert-manager into your cluster, use kubectl to apply the cert-manager
 manifest:
 
 ```
-kubectl apply --filename https://raw.githubusercontent.com/jetstack/cert-manager/release-0.5/contrib/manifests/cert-manager/with-rbac.yaml
+kubectl apply -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.5/contrib/manifests/cert-manager/with-rbac.yaml
 ```
 
 or see the

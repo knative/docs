@@ -108,13 +108,13 @@ service mesh. If you install any of the following options, you must install
 1. Create the Istio CRDs on your cluster:
 
    ```bash
-   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.3.0/istio-crds.yaml
+   kubectl apply -f https://github.com/knative/serving/releases/download/v0.3.0/istio-crds.yaml
    ```
 
 1. Install Istio by specifying the filename in the `kubectl apply` command:
 
    ```bash
-   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.3.0/[FILENAME].yaml
+   kubectl apply -f https://github.com/knative/serving/releases/download/v0.3.0/[FILENAME].yaml
    ```
 
    where `[FILENAME]` is the name of the Istio file that you want to install.
@@ -139,7 +139,7 @@ service mesh. If you install any of the following options, you must install
    `Running` or `Completed`:
 
    ```bash
-   kubectl get pods --namespace istio-system
+   kubectl get pods -n istio-system
    ```
 
    > Tip: You can append the `--watch` flag to the `kubectl get` commands to
@@ -262,15 +262,15 @@ commands below.
    - To install an individual component or plgugin
 
      ```bash
-     kubectl apply --filename [FILE_URL]
+     kubectl apply -f [FILE_URL]
      ```
 
    - To install multiple components or plugins, append additional
-     `--filename [FILENAME]` flags to the `kubectl apply` command:
+     `-f [FILENAME]` flags to the `kubectl apply` command:
 
      ```bash
-     kubectl apply --filename [FILE_URL] --filename [FILE_URL] \
-       --filename [FILE_URL]
+     kubectl apply -f [FILE_URL] -f [FILE_URL] \
+       -f [FILE_URL]
      ```
 
      where [`FILE_URL`] is the URL path of the desired Knative release:
@@ -291,17 +291,17 @@ commands below.
      * To install the Knative Serving component with the set of observability plug-ins:
 
        ```bash
-       kubectl apply --filename https://github.com/knative/serving/releases/download/v0.3.0/serving.yaml \
-       --filename https://github.com/knative/serving/releases/download/v0.3.0/monitoring.yaml
+       kubectl apply -f https://github.com/knative/serving/releases/download/v0.3.0/serving.yaml \
+       -f https://github.com/knative/serving/releases/download/v0.3.0/monitoring.yaml
        ```
 
     * To install all three Knative components and the set of Eventing sources without an observability plugin:
 
       ```bash
-      kubectl apply --filename https://github.com/knative/serving/releases/download/v0.3.0/serving.yaml \
-      --filename https://github.com/knative/build/releases/download/v0.3.0/release.yaml \
-      --filename https://github.com/knative/eventing/releases/download/v0.3.0/release.yaml \
-      --filename https://github.com/knative/eventing-sources/releases/download/v0.3.0/release.yaml
+      kubectl apply -f https://github.com/knative/serving/releases/download/v0.3.0/serving.yaml \
+      -f https://github.com/knative/build/releases/download/v0.3.0/release.yaml \
+      -f https://github.com/knative/eventing/releases/download/v0.3.0/release.yaml \
+      -f https://github.com/knative/eventing-sources/releases/download/v0.3.0/release.yaml
       ```
 
 1. Depending on what you chose to install, view the status of your installation
@@ -310,10 +310,10 @@ commands below.
    `Running`:
 
    ```bash
-   kubectl get pods --namespace knative-serving
-   kubectl get pods --namespace knative-build
-   kubectl get pods --namespace knative-eventing
-   kubectl get pods --namespace knative-sources
+   kubectl get pods -n knative-serving
+   kubectl get pods -n knative-build
+   kubectl get pods -n knative-eventing
+   kubectl get pods -n knative-sources
    ```
 
    > Tip: You can append the `--watch` flag to the `kubectl get` commands to
@@ -323,7 +323,7 @@ commands below.
    that the necessary `knative-monitoring` pods show a `STATUS` of `Running`:
 
    ```bash
-   kubectl get pods --namespace knative-monitoring
+   kubectl get pods -n knative-monitoring
    ```
 
    See

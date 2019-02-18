@@ -15,7 +15,7 @@ dedicated Prometheus instance rather than using the default installation.
 2. Check if Knative monitoring components are installed:
 
 ```
-kubectl get pods --namespace knative-monitoring
+kubectl get pods -n knative-monitoring
 ```
 
 - If pods aren't found, install
@@ -85,7 +85,7 @@ docker push "${REPO}/serving/samples/telemetry-go"
 Deploy this application to Knative Serving:
 
 ```
-kubectl apply --filename serving/samples/telemetry-go/
+kubectl apply -f serving/samples/telemetry-go/
 ```
 
 ## Explore the Service
@@ -95,19 +95,19 @@ Inspect the created resources with the `kubectl` commands:
 - View the created Route resource:
 
 ```
-kubectl get route --output yaml
+kubectl get route -o yaml
 ```
 
 - View the created Configuration resource:
 
 ```
-kubectl get configurations --output yaml
+kubectl get configurations -o yaml
 ```
 
 - View the Revision that was created by the Configuration:
 
 ```
-kubectl get revisions --output yaml
+kubectl get revisions -o yaml
 ```
 
 ## Access the Service
@@ -128,7 +128,7 @@ if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
     INGRESSGATEWAY=istio-ingressgateway
 fi
 
-kubectl get svc $INGRESSGATEWAY --namespace istio-system --watch
+kubectl get svc $INGRESSGATEWAY -n istio-system --watch
 ```
 
 When the service is ready, you'll see an IP address in the `EXTERNAL-IP` field:
@@ -143,7 +143,7 @@ CTRL+C to end watch.
 Check the status of your route:
 
 ```
-kubectl get route --output yaml
+kubectl get route -o yaml
 ```
 
 When the route is ready, you'll see the following fields reported as:
@@ -160,7 +160,7 @@ status:
 2. Export the ingress hostname and IP as environment variables:
 
 ```
-export SERVICE_HOST=`kubectl get route telemetrysample-route --output jsonpath="{.status.domain}"`
+export SERVICE_HOST=`kubectl get route telemetrysample-route -o jsonpath="{.status.domain}"`
 
 # In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
 INGRESSGATEWAY=knative-ingressgateway
@@ -172,7 +172,7 @@ if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
     INGRESSGATEWAY=istio-ingressgateway
 fi
 
-export SERVICE_IP=`kubectl get svc $INGRESSGATEWAY --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
+export SERVICE_IP=`kubectl get svc $INGRESSGATEWAY -n istio-system -o jsonpath="{.status.loadBalancer.ingress[*].ip}"`
 ```
 
 3. Make a request to the service to see the `Hello World!` message:
@@ -204,7 +204,7 @@ You can see published metrics using Prometheus UI. To access to the UI, forward
 the Prometheus server to your machine:
 
 ```
-kubectl port-forward $(kubectl get pods --selector=app=prometheus-test --output=jsonpath="{.items[0].metadata.name}") 9090
+kubectl port-forward $(kubectl get pods -l=app=prometheus-test -o=jsonpath="{.items[0].metadata.name}") 9090
 ```
 
 Then browse to http://localhost:9090.
@@ -214,5 +214,5 @@ Then browse to http://localhost:9090.
 To clean up the sample service:
 
 ```
-kubectl delete --filename serving/samples/telemetry-go/
+kubectl delete -f serving/samples/telemetry-go/
 ```

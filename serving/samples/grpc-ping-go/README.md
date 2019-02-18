@@ -25,7 +25,7 @@ Next, replace `{username}` in `sample.yaml` with your DockerHub username, and
 apply the yaml.
 
 ```shell
-kubectl apply --filename serving/samples/grpc-ping-go/sample.yaml
+kubectl apply -f serving/samples/grpc-ping-go/sample.yaml
 ```
 
 ## Use the client to stream messages to the gRPC server
@@ -34,10 +34,10 @@ kubectl apply --filename serving/samples/grpc-ping-go/sample.yaml
 
 ```shell
 # Put the Host name into an environment variable.
-export SERVICE_HOST=`kubectl get route grpc-ping --output jsonpath="{.status.domain}"`
+export SERVICE_HOST=`kubectl get route grpc-ping -o jsonpath="{.status.domain}"`
 
 # Put the ingress IP into an environment variable.
-export SERVICE_IP=`kubectl get svc istio-ingressgateway --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
+export SERVICE_IP=`kubectl get svc istio-ingressgateway -n istio-system -o jsonpath="{.status.loadBalancer.ingress[*].ip}"`
 ```
 
 1. Use the client to send message streams to the gRPC server (replacing `{username}`)

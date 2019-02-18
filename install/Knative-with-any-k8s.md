@@ -22,8 +22,8 @@ Containers.
 1.  Install Istio:
 
     ```bash
-    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.3.0/istio-crds.yaml && \
-    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.3.0/istio.yaml
+    kubectl apply -f https://github.com/knative/serving/releases/download/v0.3.0/istio-crds.yaml && \
+    kubectl apply -f https://github.com/knative/serving/releases/download/v0.3.0/istio.yaml
     ```
 
     Note: the resources (CRDs) defined in the `istio-crds.yaml`file are also
@@ -38,7 +38,7 @@ Containers.
 1.  Monitor the Istio components until all of the components show a `STATUS` of
     `Running` or `Completed`:
     ```bash
-    kubectl get pods --namespace istio-system
+    kubectl get pods -n istio-system
     ```
 
 It will take a few minutes for all the components to be up and running; you can
@@ -56,20 +56,20 @@ your Knative installation, see
 
 1. Run the `kubectl apply` command to install Knative and its dependencies:
    ```bash
-   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.3.0/serving.yaml \
-   --filename https://github.com/knative/build/releases/download/v0.3.0/release.yaml \
-   --filename https://github.com/knative/eventing/releases/download/v0.3.0/release.yaml \
-   --filename https://github.com/knative/eventing-sources/releases/download/v0.3.0/release.yaml \
-   --filename https://github.com/knative/serving/releases/download/v0.3.0/monitoring.yaml
+   kubectl apply -f https://github.com/knative/serving/releases/download/v0.3.0/serving.yaml \
+   -f https://github.com/knative/build/releases/download/v0.3.0/release.yaml \
+   -f https://github.com/knative/eventing/releases/download/v0.3.0/release.yaml \
+   -f https://github.com/knative/eventing-sources/releases/download/v0.3.0/release.yaml \
+   -f https://github.com/knative/serving/releases/download/v0.3.0/monitoring.yaml
    ```
 1. Monitor the Knative components until all of the components show a `STATUS` of
    `Running`:
    ```bash
-   kubectl get pods --namespace knative-serving
-   kubectl get pods --namespace knative-build
-   kubectl get pods --namespace knative-eventing
-   kubectl get pods --namespace knative-sources
-   kubectl get pods --namespace knative-monitoring
+   kubectl get pods -n knative-serving
+   kubectl get pods -n knative-build
+   kubectl get pods -n knative-eventing
+   kubectl get pods -n knative-sources
+   kubectl get pods -n knative-monitoring
    ```
 
 ## What's next

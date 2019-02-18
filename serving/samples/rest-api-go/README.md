@@ -97,7 +97,7 @@ Now that our image is available from the container registry, we can deploy the
 Knative Serving sample:
 
 ```
-kubectl apply --filename serving/samples/rest-api-go/sample.yaml
+kubectl apply -f serving/samples/rest-api-go/sample.yaml
 ```
 
 The above command creates a Knative Service within your Kubernetes cluster in
@@ -169,8 +169,8 @@ variables below.
 INGRESSGATEWAY=istio-ingressgateway
 INGRESSGATEWAY_LABEL=istio
 
-export INGRESS_IP=`kubectl get svc $INGRESSGATEWAY --namespace istio-system \
---output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
+export INGRESS_IP=`kubectl get svc $INGRESSGATEWAY -n istio-system \
+-o jsonpath="{.status.loadBalancer.ingress[*].ip}"`
 echo $INGRESS_IP
 ```
 
@@ -180,16 +180,16 @@ echo $INGRESS_IP
   IP:
 
 ```
-export INGRESS_IP=$(kubectl get po --selector $INGRESSGATEWAY_LABEL=ingressgateway --namespace istio-system \
-  --output 'jsonpath={.items[0].status.hostIP}'):$(kubectl get svc $INGRESSGATEWAY --namespace istio-system \
-  --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
+export INGRESS_IP=$(kubectl get po -l $INGRESSGATEWAY_LABEL=ingressgateway -n istio-system \
+  -o 'jsonpath={.items[0].status.hostIP}'):$(kubectl get svc $INGRESSGATEWAY -n istio-system \
+  -o 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
 echo $INGRESS_IP
 ```
 
 2. To get the hostname of the Service:
 
 ```
-export SERVICE_HOSTNAME=`kubectl get ksvc stock-service-example --output jsonpath="{.status.domain}"`
+export SERVICE_HOSTNAME=`kubectl get ksvc stock-service-example -o jsonpath="{.status.domain}"`
 echo $SERVICE_HOSTNAME
 ```
 
@@ -236,5 +236,5 @@ between multiple Revisions.
 To clean up the sample Service:
 
 ```
-kubectl delete --filename serving/samples/rest-api-go/sample.yaml
+kubectl delete -f serving/samples/rest-api-go/sample.yaml
 ```

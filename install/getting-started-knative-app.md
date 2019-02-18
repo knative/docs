@@ -69,7 +69,7 @@ From the directory where the new `service.yaml` file was created, apply the
 configuration:
 
 ```bash
-kubectl apply --filename service.yaml
+kubectl apply -f service.yaml
 ```
 
 Now that your service is created, Knative will perform the following steps:
@@ -101,7 +101,7 @@ assigned an external IP address.
        INGRESSGATEWAY=istio-ingressgateway
    fi
 
-   kubectl get svc $INGRESSGATEWAY --namespace istio-system
+   kubectl get svc $INGRESSGATEWAY -n istio-system
 
    NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
    istio-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
@@ -112,7 +112,7 @@ assigned an external IP address.
    You can also export the IP address as a variable with the following command:
 
    ```shell
-   export IP_ADDRESS=$(kubectl get svc $INGRESSGATEWAY --namespace istio-system --output 'jsonpath={.status.loadBalancer.ingress[0].ip}')
+   export IP_ADDRESS=$(kubectl get svc $INGRESSGATEWAY -n istio-system -o 'jsonpath={.status.loadBalancer.ingress[0].ip}')
    ```
 
    > Note: if you use minikube or a baremetal cluster that has no external load
@@ -121,13 +121,13 @@ assigned an external IP address.
    > `NodeIP` and `NodePort`, enter the following command:
 
    ```shell
-   export IP_ADDRESS=$(kubectl get node  --output 'jsonpath={.items[0].status.addresses[0].address}'):$(kubectl get svc $INGRESSGATEWAY --namespace istio-system   --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
+   export IP_ADDRESS=$(kubectl get node  -o 'jsonpath={.items[0].status.addresses[0].address}'):$(kubectl get svc $INGRESSGATEWAY -n istio-system   -o 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
    ```
 
 1. To find the host URL for your service, enter:
 
    ```shell
-   kubectl get ksvc helloworld-go  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+   kubectl get ksvc helloworld-go  -o=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
    NAME                DOMAIN
    helloworld-go       helloworld-go.default.example.com
    ```
@@ -135,7 +135,7 @@ assigned an external IP address.
    You can also export the host URL as a variable using the following command:
 
    ```shell
-   export HOST_URL=$(kubectl get ksvc helloworld-go  --output jsonpath='{.status.domain}')
+   export HOST_URL=$(kubectl get ksvc helloworld-go  -o jsonpath='{.status.domain}')
    ```
 
    If you changed the name from `helloworld-go` to something else when creating
@@ -175,7 +175,7 @@ You've successfully deployed your first application using Knative!
 To remove the sample app from your cluster, delete the service record:
 
 ```shell
-kubectl delete --filename service.yaml
+kubectl delete -f service.yaml
 ```
 
 ---

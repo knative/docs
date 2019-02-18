@@ -34,7 +34,7 @@ Knative depends on Istio. Run the following to install Istio. (This changes
 ```shell
 curl -L https://github.com/knative/serving/releases/download/v0.2.2/istio.yaml \
   | sed 's/LoadBalancer/NodePort/' \
-  | kubectl apply --filename -
+  | kubectl apply -f -
 
 # Label the default namespace with istio-injection=enabled.
 kubectl label namespace default istio-injection=enabled
@@ -44,7 +44,7 @@ Monitor the Istio components until all of the components show a `STATUS` of
 `Running` or `Completed`:
 
 ```shell
-kubectl get pods --namespace istio-system
+kubectl get pods -n istio-system
 ```
 
 It will take a few minutes for all the components to be up and running; you can
@@ -65,7 +65,7 @@ the Knative components. To use the provided `release-lite.yaml` release, run:
 
 ```shell
 curl -L https://github.com/knative/serving/releases/download/v0.2.2/release-lite.yaml \
-  | kubectl apply --filename -
+  | kubectl apply -f -
 ```
 
 > Note: Unlike minikube, we're not changing the LoadBalancer to a NodePort here.
@@ -76,7 +76,7 @@ Monitor the Knative components until all of the components show a `STATUS` of
 `Running`:
 
 ```shell
-kubectl get pods --namespace knative-serving
+kubectl get pods -n knative-serving
 ```
 
 Just as with the Istio components, it will take a few seconds for the Knative

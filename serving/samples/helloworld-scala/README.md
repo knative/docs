@@ -101,7 +101,7 @@ Locate the Knative Serving gateway address:
 ```shell
 # In Knative 0.2.x and prior versions, `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
 
-kubectl get svc istio-ingressgateway --namespace istio-system
+kubectl get svc istio-ingressgateway -n istio-system
 ```
 
 Example output, see the address under **EXTERNAL-IP**:
@@ -120,20 +120,20 @@ export SERVING_GATEWAY=<replace this with the address obtained>
 If you use Minikube, then you will likely have to do the following instead:
 
 ```shell
-export SERVING_GATEWAY=$(minikube ip):$(kubectl get svc istio-ingressgateway --namespace istio-system --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
+export SERVING_GATEWAY=$(minikube ip):$(kubectl get svc istio-ingressgateway -n istio-system -o 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
 ```
 
 Apply the [Service yaml definition](helloworld-scala.yaml):
 
 ```shell
-kubectl apply --filename helloworld-scala.yaml
+kubectl apply -f helloworld-scala.yaml
 ```
 
 Then find the service host:
 
 ```shell
 kubectl get ksvc helloworld-scala \
-    --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+    -o=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
 
 # It will print something like this, the DOMAIN is what you're going to use as HTTP Host header:
 # NAME                DOMAIN
@@ -149,5 +149,5 @@ curl -v -H "Host: helloworld-scala.default.example.com" http://$SERVING_GATEWAY
 ## Cleanup
 
 ```shell
-kubectl delete --filename helloworld-scala.yaml
+kubectl delete -f helloworld-scala.yaml
 ```

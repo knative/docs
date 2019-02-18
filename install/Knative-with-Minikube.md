@@ -62,7 +62,7 @@ Knative depends on Istio. Run the following to install Istio. (We are changing
 ```shell
 curl -L https://github.com/knative/serving/releases/download/v0.3.0/istio.yaml \
   | sed 's/LoadBalancer/NodePort/' \
-  | kubectl apply --filename -
+  | kubectl apply -f -
 
 # Label the default namespace with istio-injection=enabled.
 kubectl label namespace default istio-injection=enabled
@@ -72,7 +72,7 @@ Monitor the Istio components until all of the components show a `STATUS` of
 `Running` or `Completed`:
 
 ```shell
-kubectl get pods --namespace istio-system
+kubectl get pods -n istio-system
 ```
 
 It will take a few minutes for all the components to be up and running; you can
@@ -95,14 +95,14 @@ Enter the following command:
 ```shell
 curl -L https://github.com/knative/serving/releases/download/v0.3.0/serving.yaml \
   | sed 's/LoadBalancer/NodePort/' \
-  | kubectl apply --filename -
+  | kubectl apply -f -
 ```
 
 Monitor the Knative components until all of the components show a `STATUS` of
 `Running`:
 
 ```shell
-kubectl get pods --namespace knative-serving
+kubectl get pods -n knative-serving
 ```
 
 Just as with the Istio components, it will take a few seconds for the Knative
@@ -143,7 +143,7 @@ if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
     INGRESSGATEWAY=istio-ingressgateway
 fi
 
-echo $(minikube ip):$(kubectl get svc $INGRESSGATEWAY --namespace istio-system --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
+echo $(minikube ip):$(kubectl get svc $INGRESSGATEWAY -n istio-system -o 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
 ```
 
 ## Cleaning up

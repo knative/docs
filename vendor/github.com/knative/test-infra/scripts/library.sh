@@ -192,7 +192,7 @@ function get_app_pod() {
 function get_app_pods() {
   local namespace=""
   [[ -n $2 ]] && namespace="-n $2"
-  kubectl get pods ${namespace} --selector=app=$1 --output=jsonpath="{.items[*].metadata.name}"
+  kubectl get pods ${namespace} -l=app=$1 -o=jsonpath="{.items[*].metadata.name}"
 }
 
 # Sets the given user as cluster admin.

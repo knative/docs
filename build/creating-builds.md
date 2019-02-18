@@ -56,7 +56,7 @@ Kubernetes cluster, and it must include the Knative Build component:
    command:
 
    ```shell
-   kubectl apply --filename build.yaml
+   kubectl apply -f build.yaml
    ```
 
    Response:
@@ -86,7 +86,7 @@ Kubernetes cluster, and it must include the Knative Build component:
    which cluster and pod the build is running:
 
    ```shell
-   kubectl get build hello-build --output yaml
+   kubectl get build hello-build -o yaml
    ```
 
    Response:
@@ -118,7 +118,7 @@ Kubernetes cluster, and it must include the Knative Build component:
    Tip: You can also retrieve the `podName` by running the following command:
 
    ```shell
-   kubectl get build hello-build --output jsonpath={.status.cluster.podName}
+   kubectl get build hello-build -o jsonpath={.status.cluster.podName}
    ```
 
 1. Optional: Run the following
@@ -128,7 +128,7 @@ Kubernetes cluster, and it must include the Knative Build component:
    [Init container](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/):
 
    ```shell
-   kubectl get pod hello-build-[ID] --output yaml
+   kubectl get pod hello-build-[ID] -o yaml
    ```
 
    where `[ID]` is the suffix of your pod name, for example `hello-build-jx4ql`.
@@ -147,7 +147,7 @@ Kubernetes cluster, and it must include the Knative Build component:
    in the `hello-build-[ID]` pod:
 
    ```shell
-   kubectl logs $(kubectl get build hello-build --output jsonpath={.status.cluster.podName}) --container build-step-hello
+   kubectl logs $(kubectl get build hello-build -o jsonpath={.status.cluster.podName}) --container build-step-hello
    ```
 
    Response:

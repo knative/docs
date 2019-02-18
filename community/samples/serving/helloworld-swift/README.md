@@ -131,7 +131,7 @@ folder) you're ready to build and deploy the sample app.
    step. Apply the configuration using the `kubectl` command:
 
    ```shell
-   kubectl apply --filename service.yaml
+   kubectl apply -f service.yaml
    ```
 
 1. Now that your service is created, Knative performs the following steps:
@@ -142,12 +142,12 @@ folder) you're ready to build and deploy the sample app.
    - Automatically scales your pods up and down (including to zero active pods).
 
 1. To find the IP address for your service, use
-   `kubectl get svc knative-ingressgateway --namespace istio-system` to get the
+   `kubectl get svc knative-ingressgateway -n istio-system` to get the
    ingress IP for your cluster. If your cluster is new, it might take sometime
    for the service to get asssigned an external IP address.
 
    ```shell
-   kubectl get svc knative-ingressgateway --namespace istio-system
+   kubectl get svc knative-ingressgateway -n istio-system
 
    NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
    knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
@@ -157,7 +157,7 @@ folder) you're ready to build and deploy the sample app.
 1. To find the URL for your service, use the following command:
 
    ```
-   kubectl get ksvc helloworld-swift  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+   kubectl get ksvc helloworld-swift  -o=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
    NAME                DOMAIN
    helloworld-swift   helloworld-swift.default.example.com
    ```
@@ -175,5 +175,5 @@ folder) you're ready to build and deploy the sample app.
 To remove the sample app from your cluster, delete the service record:
 
 ```shell
-kubectl delete --filename service.yaml
+kubectl delete -f service.yaml
 ```

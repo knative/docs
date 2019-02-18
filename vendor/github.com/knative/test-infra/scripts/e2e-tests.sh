@@ -248,7 +248,7 @@ function setup_test_cluster() {
     acquire_cluster_admin_role ${K8S_USER_OVERRIDE} ${E2E_CLUSTER_NAME} ${E2E_CLUSTER_REGION} ${E2E_CLUSTER_ZONE}
     # Make sure we're in the default namespace. Currently kubetest switches to
     # test-pods namespace when creating the cluster.
-    kubectl config set-context ${K8S_CLUSTER_OVERRIDE} --namespace=default
+    kubectl config set-context ${K8S_CLUSTER_OVERRIDE} -n=default
   fi
   readonly USING_EXISTING_CLUSTER
 

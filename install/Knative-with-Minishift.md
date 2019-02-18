@@ -161,7 +161,7 @@ curl -s https://raw.githubusercontent.com/knative/docs/master/install/scripts/is
 1. Run the following to install Istio:
 
    ```shell
-   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.3.0/istio-crds.yaml && \
+   kubectl apply -f https://github.com/knative/serving/releases/download/v0.3.0/istio-crds.yaml && \
    oc apply -f https://github.com/knative/serving/releases/download/v0.3.0/istio.yaml
    ```
 

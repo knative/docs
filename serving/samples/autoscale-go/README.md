@@ -23,7 +23,7 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 1. Deploy the [sample](./service.yaml) Knative Service:
 
    ```
-   kubectl apply --filename serving/samples/autoscale-go/service.yaml
+   kubectl apply -f serving/samples/autoscale-go/service.yaml
    ```
 
 1. Find the ingress hostname and IP and export as an environment variable:
@@ -39,7 +39,7 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
        INGRESSGATEWAY=istio-ingressgateway
    fi
 
-   export IP_ADDRESS=`kubectl get svc $INGRESSGATEWAY --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
+   export IP_ADDRESS=`kubectl get svc $INGRESSGATEWAY -n istio-system -o jsonpath="{.status.loadBalancer.ingress[*].ip}"`
    ```
 
 ## Load the Service
@@ -229,7 +229,7 @@ customization (32 minutes).
 View the Knative Serving Scaling and Request dashboards (if configured).
 
 ```
-kubectl port-forward --namespace knative-monitoring $(kubectl get pods --namespace knative-monitoring --selector=app=grafana --output=jsonpath="{.items..metadata.name}") 3000
+kubectl port-forward -n knative-monitoring $(kubectl get pods -n knative-monitoring -l=app=grafana -o=jsonpath="{.items..metadata.name}") 3000
 ```
 
 ![scale dashboard](scale-dashboard.png)
@@ -282,7 +282,7 @@ kubectl port-forward --namespace knative-monitoring $(kubectl get pods --namespa
 ## Cleanup
 
 ```
-kubectl delete --filename serving/samples/autoscale-go/service.yaml
+kubectl delete -f serving/samples/autoscale-go/service.yaml
 ```
 
 ## Further reading

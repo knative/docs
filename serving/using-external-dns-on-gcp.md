@@ -117,7 +117,7 @@ permission to get the credential secret can access your Cloud DNS.
 1. Configure Knative to use your custom domain.
 
 ```shell
-kubectl edit cm config-domain --namespace knative-serving
+kubectl edit cm config-domain -n knative-serving
 ```
 
 This command opens your default text editor and allows you to edit the config
@@ -350,7 +350,7 @@ Then use the following command to apply the manifest you chose to install
 ExternalDNS
 
 ```shell
-cat <<EOF | kubectl apply --filename -
+cat <<EOF | kubectl apply -f -
 <your-chosen-manifest>
 EOF
 ```
@@ -378,7 +378,7 @@ if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
     INGRESSGATEWAY=istio-ingressgateway
 fi
 
-kubectl edit svc $INGRESSGATEWAY --namespace istio-system
+kubectl edit svc $INGRESSGATEWAY -n istio-system
 ```
 
 This command opens your default text editor and allows you to add the annotation

@@ -70,7 +70,7 @@ if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
     INGRESSGATEWAY=istio-ingressgateway
 fi
 
-kubectl patch svc $INGRESSGATEWAY --namespace istio-system --patch '{"spec": { "loadBalancerIP": "<your-reserved-static-ip>" }}'
+kubectl patch svc $INGRESSGATEWAY -n istio-system --patch '{"spec": { "loadBalancerIP": "<your-reserved-static-ip>" }}'
 ```
 
 ## Step 3: Verify the static IP address of `istio-ingressgateway` service
@@ -79,7 +79,7 @@ Run the following command to ensure that the external IP of the ingressgateway
 service has been updated:
 
 ```shell
-kubectl get svc $INGRESSGATEWAY --namespace istio-system
+kubectl get svc $INGRESSGATEWAY -n istio-system
 ```
 
 The output should show the assigned static IP address under the EXTERNAL-IP

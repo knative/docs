@@ -12,7 +12,7 @@ To change the {default-domain} value there are a few steps involved:
    own domain, for example `mydomain.com`:
 
    ```shell
-   kubectl edit cm config-domain --namespace knative-serving
+   kubectl edit cm config-domain -n knative-serving
    ```
 
    This command opens your default text editor and allows you to edit the config
@@ -67,7 +67,7 @@ You can also apply an updated domain configuration:
 1. Apply updated domain configuration to your cluster:
 
    ```shell
-   kubectl apply --filename config-domain.yaml
+   kubectl apply -f config-domain.yaml
    ```
 
 ## Deploy an application
@@ -82,7 +82,7 @@ normal. You can check the customized domain in Knative Route "helloworld-go"
 with the following command:
 
 ```shell
-kubectl get route helloworld-go --output jsonpath="{.status.domain}"
+kubectl get route helloworld-go -o jsonpath="{.status.domain}"
 ```
 
 You should see the full customized domain: `helloworld-go.default.mydomain.com`.
@@ -100,7 +100,7 @@ if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
     export INGRESSGATEWAY=istio-ingressgateway
 fi
 
-kubectl get svc $INGRESSGATEWAY --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*]['ip']}"
+kubectl get svc $INGRESSGATEWAY -n istio-system -o jsonpath="{.status.loadBalancer.ingress[*]['ip']}"
 ```
 
 ## Local DNS setup
@@ -119,11 +119,11 @@ if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
     INGRESSGATEWAY=istio-ingressgateway
 fi
 
-export GATEWAY_IP=`kubectl get svc $INGRESSGATEWAY --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*]['ip']}"`
+export GATEWAY_IP=`kubectl get svc $INGRESSGATEWAY -n istio-system -o jsonpath="{.status.loadBalancer.ingress[*]['ip']}"`
 
 # helloworld-go is the generated Knative Route of "helloworld-go" sample.
 # You need to replace it with your own Route in your project.
-export DOMAIN_NAME=`kubectl get route helloworld-go --output jsonpath="{.status.domain}"`
+export DOMAIN_NAME=`kubectl get route helloworld-go -o jsonpath="{.status.domain}"`
 
 # Add the record of Gateway IP and domain name into file "/etc/hosts"
 echo -e "$GATEWAY_IP\t$DOMAIN_NAME" | sudo tee -a /etc/hosts

@@ -49,7 +49,7 @@ spec:
 Save the file, then deploy the configuration to your cluster:
 
 ```bash
-kubectl apply --filename blue-green-demo-config.yaml
+kubectl apply -f blue-green-demo-config.yaml
 
 configuration "blue-green-demo" configured
 ```
@@ -73,7 +73,7 @@ spec:
 Save the file, then apply the route to your cluster:
 
 ```bash
-kubectl apply --filename blue-green-demo-route.yaml
+kubectl apply -f blue-green-demo-route.yaml
 
 route "blue-green-demo" configured
 ```
@@ -91,8 +91,8 @@ with Knative.
 > Knative creates the host URL by combining the name of your Route object, the
 > namespace, and `example.com`, if you haven't configured a custom domain. For
 > example, `[route-name].[namespace].example.com`. You can get the IP address by
-> entering `kubectl get svc istio-ingressgateway --namespace istio-system` (or
-> `kubectl get svc istio-ingressgateway --namespace istio-system` if using
+> entering `kubectl get svc istio-ingressgateway -n istio-system` (or
+> `kubectl get svc istio-ingressgateway -n istio-system` if using
 > Knative 0.2.x or prior versions) and copying the `EXTERNAL-IP` returned by
 > that command. See
 > [Interacting with your app](../../install/getting-started-knative-app.md#interacting-with-your-app)
@@ -127,7 +127,7 @@ spec:
 Save the file, then apply the updated configuration to your cluster:
 
 ```bash
-kubectl apply --filename blue-green-demo-config.yaml
+kubectl apply -f blue-green-demo-config.yaml
 
 configuration "blue-green-demo" configured
 ```
@@ -156,7 +156,7 @@ spec:
 Save the file, then apply the updated route to your cluster:
 
 ```bash
-kubectl apply --filename blue-green-demo-route.yaml
+kubectl apply -f blue-green-demo-route.yaml
 
 route "blue-green-demo" configured
 ```
@@ -194,7 +194,7 @@ spec:
 Save the file, then apply the updated route to your cluster:
 
 ```bash
-kubectl apply --filename blue-green-demo-route.yaml
+kubectl apply -f blue-green-demo-route.yaml
 
 route "blue-green-demo" configured
 ```
@@ -231,7 +231,7 @@ spec:
 Save the file, then apply the updated route to your cluster:
 
 ```bash
-kubectl apply --filename blue-green-demo-route.yaml
+kubectl apply -f blue-green-demo-route.yaml
 
 route "blue-green-demo" configured
 ```

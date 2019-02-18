@@ -45,7 +45,7 @@ spec:
 Enter the following command to create the service from `service.yaml`:
 
 ```shell
-kubectl --namespace default apply --filename service.yaml
+kubectl -n default apply -f service.yaml
 ```
 
 ### Create GitHub Tokens
@@ -90,7 +90,7 @@ head -c 8 /dev/urandom | base64
 Then, apply the githubsecret using `kubectl`:
 
 ```shell
-kubectl --namespace default apply --filename githubsecret.yaml
+kubectl -n default apply -f githubsecret.yaml
 ```
 
 ### Create Event Source for GitHub Events
@@ -126,7 +126,7 @@ spec:
 Then, apply that yaml using `kubectl`:
 
 ```shell
-kubectl --namespace default apply --filename github-source.yaml
+kubectl -n default apply -f github-source.yaml
 ```
 
 ### Verify
@@ -145,8 +145,8 @@ that the GitHub events were sent into the Knative eventing system
 by looking at our message dumper function logs.
 
 ```shell
-kubectl --namespace default get pods
-kubectl --namespace default logs github-message-dumper-XXXX user-container
+kubectl -n default get pods
+kubectl -n default logs github-message-dumper-XXXX user-container
 ```
 
 You should log lines similar to:
@@ -181,13 +181,13 @@ X-Request-Id: 8a2201af-5075-9447-b593-ec3a243aff52
 You can remove the Github webhook by deleting the Github source:
 
 ```shell
-kubectl --namespace default delete --filename github-source.yaml
+kubectl -n default delete -f github-source.yaml
 ```
 
 Similarly, you can remove the Service and Secret via:
 
 ```shell
-kubectl --namespace default delete --filename service.yaml
-kubectl --namespace default delete --filename githubsecret.yaml
+kubectl -n default delete -f service.yaml
+kubectl -n default delete -f githubsecret.yaml
 
 ```

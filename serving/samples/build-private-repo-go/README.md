@@ -22,7 +22,7 @@ where you created your resources. You can see its body by entering the following
 command:
 
 ```shell
-$ kubectl get serviceaccount default --output yaml
+$ kubectl get serviceaccount default -o yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -140,7 +140,7 @@ When finished with the replacements, create the build bot by entering the
 following command:
 
 ```shell
-kubectl create --filename build-bot.yaml
+kubectl create -f build-bot.yaml
 ```
 
 ### 3. Installing a Build template and updating `manifest.yaml`
@@ -150,7 +150,7 @@ kubectl create --filename build-bot.yaml
    by entering the following command:
 
    ```shell
-   kubectl apply --filename https://raw.githubusercontent.com/knative/build-templates/master/kaniko/kaniko.yaml
+   kubectl apply -f https://raw.githubusercontent.com/knative/build-templates/master/kaniko/kaniko.yaml
    ```
 
 1. Open `manifest.yaml` and substitute your private DockerHub repository name
@@ -161,7 +161,7 @@ kubectl create --filename build-bot.yaml
 At this point, you're ready to deploy your application:
 
 ```shell
-kubectl create --filename manifest.yaml
+kubectl create -f manifest.yaml
 ```
 
 To make sure everything works, capture the host URL and the IP of the ingress
@@ -170,7 +170,7 @@ endpoint in environment variables:
 ```shell
 # Put the Host URL into an environment variable.
 export SERVICE_HOST=$(kubectl get route private-repos \
-  --output jsonpath="{.status.domain}")
+  -o jsonpath="{.status.domain}")
 ```
 
 ```shell
@@ -187,8 +187,8 @@ if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
 fi
 
 # Put the IP address into an environment variable
-export SERVICE_IP=$(kubectl get svc $INGRESSGATEWAY --namespace istio-system \
-    --output jsonpath="{.status.loadBalancer.ingress[*].ip}")
+export SERVICE_IP=$(kubectl get svc $INGRESSGATEWAY -n istio-system \
+    -o jsonpath="{.status.loadBalancer.ingress[*].ip}")
 ```
 
 > Note: If your cluster is running outside a cloud provider (for example, on
@@ -196,9 +196,9 @@ export SERVICE_IP=$(kubectl get svc $INGRESSGATEWAY --namespace istio-system \
 > use the Istio `hostIP` and `nodePort` as the service IP:
 
 ```shell
-export SERVICE_IP=$(kubectl get po --selector $INGRESSGATEWAY_LABEL=ingressgateway --namespace istio-system \
-  --output 'jsonpath= .  {.items[0].status.hostIP}'):$(kubectl get svc $INGRESSGATEWAY \
-  --namespace istio-system --output 'jsonpath={.spec.ports[? (@.port==80)].nodePort}')
+export SERVICE_IP=$(kubectl get po -l $INGRESSGATEWAY_LABEL=ingressgateway -n istio-system \
+  -o 'jsonpath= .  {.items[0].status.hostIP}'):$(kubectl get svc $INGRESSGATEWAY \
+  -n istio-system -o 'jsonpath={.spec.ports[? (@.port==80)].nodePort}')
 ```
 
 Now curl the service IP to make sure the deployment succeeded:

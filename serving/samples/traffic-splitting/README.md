@@ -33,14 +33,14 @@ configuration.
    from `stock` to `share`:
 
 ```
-kubectl apply --filename serving/samples/traffic-splitting/updated_configuration.yaml
+kubectl apply -f serving/samples/traffic-splitting/updated_configuration.yaml
 ```
 
 3. Once deployed, traffic will shift to the new revision automatically. Verify
    the deployment by checking the route status:
 
 ```
-kubectl get route --output yaml
+kubectl get route -o yaml
 ```
 
 4. When the new route is ready, you can access the new endpoints: The hostname
@@ -48,7 +48,7 @@ kubectl get route --output yaml
    [Creating a RESTful Service](../rest-api-go) sample:
 
 ```
-export SERVICE_HOST=`kubectl get route stock-route-example --output jsonpath="{.status.domain}"`
+export SERVICE_HOST=`kubectl get route stock-route-example -o jsonpath="{.status.domain}"`
 
 # In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
 INGRESSGATEWAY=knative-ingressgateway
@@ -60,8 +60,8 @@ if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
     INGRESSGATEWAY=istio-ingressgateway
 fi
 
-export SERVICE_IP=`kubectl get svc $INGRESSGATEWAY --namespace istio-system \
-    --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
+export SERVICE_IP=`kubectl get svc $INGRESSGATEWAY -n istio-system \
+    -o jsonpath="{.status.loadBalancer.ingress[*].ip}"`
 ```
 
 - Make a request to the index endpoint:
@@ -117,13 +117,13 @@ traffic:
 3. Deploy your traffic revision:
 
 ```
-kubectl apply --filename serving/samples/rest-api-go/sample.yaml
+kubectl apply -f serving/samples/rest-api-go/sample.yaml
 ```
 
 4. Verify the deployment by checking the route status:
 
 ```
-kubectl get route --output yaml
+kubectl get route -o yaml
 ```
 
 Once updated, you can make `curl` requests to the API using either `stock` or
@@ -134,5 +134,5 @@ Once updated, you can make `curl` requests to the API using either `stock` or
 To clean up the sample service:
 
 ```
-kubectl delete --filename serving/samples/traffic-splitting/updated_configuration.yaml
+kubectl delete -f serving/samples/traffic-splitting/updated_configuration.yaml
 ```
