@@ -23,7 +23,7 @@ clusters.
 Knative depends on an Ingress/Gateway which is capable of routing requests to Knative Services.
 
 Currently, two options exist which provide this functionality: 
-[Istio](https://istio.io/), the Envoy-based Service Mesh, and [Gloo](https://gloo.solo.io/), the Envoy-based API Gateway created by [Solo.io](www.solo.io).
+[Istio](https://istio.io/), the Envoy-based Service Mesh, and [Gloo](https://gloo.solo.io/), the Envoy-based API Gateway.
 
 [Install with Gloo](Knative-with-Gloo.md): Gloo functions as a lightweight gateway for Knative. Choose this option if you don't require service  mesh in your cluster and want a lighter-weight alternative to Istio. Note that *Knative-Eventing* 
 is not supported by Gloo at this time.
