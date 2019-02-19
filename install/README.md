@@ -25,11 +25,11 @@ Knative depends on an Ingress/Gateway which is capable of routing requests to Kn
 Currently, two options exist which provide this functionality: 
 [Istio](https://istio.io/), the Envoy-based Service Mesh, and [Gloo](https://gloo.solo.io/), the Envoy-based API Gateway.
 
-[Install with Gloo](Knative-with-Gloo.md): Gloo functions as a lightweight gateway for Knative. Choose this option if you don't require service  mesh in your cluster and want a lighter-weight alternative to Istio. Note that *Knative-Eventing* 
+[Install with Gloo](Knative-with-Gloo.md): Gloo functions as a lightweight gateway for Knative. Choose this option if you don't require service  mesh in your cluster and want a lighter-weight alternative to Istio. Note that *the Knative Eventing component* 
 is not supported by Gloo at this time.
 
-[Install with Istio](#Installing-Knative-with-Istio) Istio is a popular service mesh that includes a Knative-compatible
-ingress. Choose this option if you wish to use Istio service mesh features. You will also need to choose this installation option if you wish to use Knative-Eventing, which currently depends on Istio.
+[Install with Istio](#Installing-Knative-with-Istio) Istio is a popular service mesh that includes a Knative-compatiblle
+ingress. Choose this option if you wish to use Istio service mesh features. You will also need to choose this installation option if you wish to use the Knative Eventing component, which currently depends on Istio.
 
 ## Installing Knative with Istio
 
