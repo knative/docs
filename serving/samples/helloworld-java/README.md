@@ -170,8 +170,14 @@ folder) you're ready to build and deploy the sample app.
      for your app.
    - Automatically scale your pods up and down (including to zero active pods).
 
-1. To find the IP address for your service, use. If your cluster is new, it may
+1. To find the IP address for your service, use. 
+   
+   **Note**
+   If your cluster is new, it may
    take sometime for the service to get asssigned an external IP address.
+   Instead of rerunning the command, you can add `--watch` to the 
+   command below to view the component's status updates in real time. Use CTRL+C to
+   exit watch mode. 
 
    ```shell
    # In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
