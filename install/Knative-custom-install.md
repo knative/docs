@@ -30,6 +30,11 @@ to run multiple installation commands.
 
 ## Installing Istio
 
+> Note: [Gloo](https://gloo.solo.io/) now provides an alternative installation option
+> for those wishing to install Knative without Istio. Note that Knative-Eventing
+> is not supported by Gloo at this time. [Click here](Knative-with-Gloo.md) to follow the
+> Gloo-based install instructions for Knative.
+
 Knative depends on [Istio](https://istio.io/docs/concepts/what-is-istio/) for
 traffic routing and ingress. You have the option of injecting Istio sidecars and
 enabling the Istio service mesh, but it's not required for all Knative

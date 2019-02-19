@@ -52,6 +52,11 @@ minikube start --memory=8192 --cpus=4 \
 
 ## Installing Istio
 
+> Note: [Gloo](https://gloo.solo.io/) now provides an alternative installation option
+> for those wishing to install Knative without Istio. Note that Knative-Eventing
+> is not supported by Gloo at this time. [Click here](Knative-with-Gloo.md) to follow the
+> Gloo-based install instructions for Knative.
+
 Knative depends on Istio. Run the following to install Istio. (We are changing
 `LoadBalancer` to `NodePort` for the `istio-ingress` service).
 
