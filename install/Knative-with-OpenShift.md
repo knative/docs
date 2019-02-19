@@ -97,8 +97,7 @@ oc label namespace default istio-injection=enabled
 
 > Note: [Gloo](https://gloo.solo.io/) is available as an alternative to Istio.
 > Gloo is not currently compatible with the Knative Eventing component.
-> [Click here](Knative-with-Gloo.md) to follow the
-> Gloo-based install instructions for Knative.
+> [Click here](Knative-with-Gloo.md) to install Knative with Gloo.
 
 Knative depends on Istio. First, run the following to grant the necessary
 privileges to the service accounts istio will use:

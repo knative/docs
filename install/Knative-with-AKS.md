@@ -130,8 +130,7 @@ recommended configuration for a cluster is:
 
 > Note: [Gloo](https://gloo.solo.io/) is available as an alternative to Istio.
 > Gloo is not currently compatible with the Knative Eventing component.
-> [Click here](Knative-with-Gloo.md) to follow the
-> Gloo-based install instructions for Knative.
+> [Click here](Knative-with-Gloo.md) to install Knative with Gloo.
 
 Knative depends on Istio.
 
