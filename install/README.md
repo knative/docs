@@ -28,7 +28,7 @@ Currently, two options exist which provide this functionality:
 [Install with Gloo](Knative-with-Gloo.md): Gloo functions as a lightweight gateway for Knative. Choose this option if you don't require service  mesh in your cluster and want a lighter-weight alternative to Istio. Note that *Knative-Eventing* 
 is not supported by Gloo at this time.
 
-[Install with Istio](#Installing-Knative-with-Istio) Istio is a popular service mesh that includes a Knative-compatiblle
+[Install with Istio](#Installing-Knative-with-Istio) Istio is a popular service mesh that includes a Knative-compatible
 ingress. Choose this option if you wish to use Istio service mesh features. You will also need to choose this installation option if you wish to use Knative-Eventing, which currently depends on Istio.
 
 ## Installing Knative with Istio
