@@ -29,15 +29,13 @@ Install the Jib Maven build template:
 kubectl apply -f https://raw.githubusercontent.com/knative/build-templates/master/jib/jib-maven.yaml
 ```
 
+First, in `sample.yaml`, replace `DOCKER_REPO_OVERRIDE` with your Docker repository prefix.
+For example, `gcr.io/<your-project-id>`.
+
 Then you can deploy this to Knative Serving from the root directory by entering
 the following commands:
 
 ```shell
-# Replace <your-project-here> with your own registry
-export REPO="gcr.io/<your-project-here>"
-
-perl -pi -e "s@DOCKER_REPO_OVERRIDE@$REPO@g" sample.yaml
-
 # Create the Kubernetes resources
 kubectl apply -f sample.yaml
 ```
@@ -54,22 +52,16 @@ To access this service using `curl`, we first need to determine its ingress
 address:
 
 ```shell
-# In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
-INGRESSGATEWAY=knative-ingressgateway
-
-# The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
-# Use `istio-ingressgateway` instead, since `knative-ingressgateway`
-# will be removed in Knative v0.4.
 if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
     INGRESSGATEWAY=istio-ingressgateway
 fi
 
-watch kubectl get svc $INGRESSGATEWAY --namespace istio-system
+kubectl get svc istio-ingressgateway --namespace istio-system
 NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
 xxxxxxx-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
 ```
 
-Once the `EXTERNAL-IP` gets assigned to the cluster, enter the follow commands
+Confirm that the `EXTERNAL-IP` gets assigned to the cluster, enter the follow commands
 to capture the host URL and the IP of the ingress endpoint in environment
 variables:
 
