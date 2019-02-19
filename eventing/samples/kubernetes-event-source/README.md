@@ -27,7 +27,8 @@ kubectl -n default apply -f channel.yaml
 1. Create a Service Account that the `Receive Adapter` runs as. The
    `Receive Adapater` watches for Kubernetes events and forwards them to the
    Knative Eventing Framework. If you want to re-use an existing Service Account
-   with the appropriate permissions, you need to modify the `serviceaccount.yaml`.
+   with the appropriate permissions, you need to modify the
+   `serviceaccount.yaml`.
 
 ```shell
 kubectl apply -f serviceaccount.yaml
