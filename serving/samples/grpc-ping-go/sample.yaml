@@ -1,23 +1,17 @@
 apiVersion: serving.knative.dev/v1alpha1
-kind: Configuration
+kind: Service
 metadata:
   name: grpc-ping
   namespace: default
 spec:
-  revisionTemplate:
-    metadata:
-      labels:
-        knative.dev/type: app
-    spec:
-      container:
-        image: github.com/knative/docs/serving/samples/grpc-ping-go
----
-apiVersion: serving.knative.dev/v1alpha1
-kind: Route
-metadata:
-  name: grpc-ping
-  namespace: default
-spec:
-  traffic:
-  - configurationName: grpc-ping
-    percent: 100
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            image: docker.io/{username}/grpc-ping-go
+            ports:
+              - name: h2c
+                containerPort: 8080
+
+    
