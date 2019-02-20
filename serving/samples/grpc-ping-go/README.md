@@ -40,7 +40,8 @@ export SERVICE_HOST=`kubectl get route grpc-ping --output jsonpath="{.status.dom
 export SERVICE_IP=`kubectl get svc istio-ingressgateway --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
 ```
 
-1. Use the client to send message streams to the gRPC server (replacing `{username}`)
+1. Use the client to send message streams to the gRPC server (replacing
+   `{username}`)
 
 ```shell
 docker run -ti --entrypoint=/client docker.io/{username}/grpc-ping-go \

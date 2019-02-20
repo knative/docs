@@ -1,9 +1,9 @@
 # Knative Secrets - Go sample
 
-A simple web app written in Go that you can use for testing. It demonstrates
-how to use a Kubernetes secret as a Volume with Knative. We will create a new
-Google Service Account and place it into a Kubernetes secret, then we will
-mount it into a container as a Volume.
+A simple web app written in Go that you can use for testing. It demonstrates how
+to use a Kubernetes secret as a Volume with Knative. We will create a new Google
+Service Account and place it into a Kubernetes secret, then we will mount it
+into a container as a Volume.
 
 ## Prerequisites
 
@@ -13,13 +13,12 @@ mount it into a container as a Volume.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
 - Create a
-   [Google Cloud project](https://cloud.google.com/resource-manager/docs/creating-managing-projects)
-   and install the `gcloud` CLI and run `gcloud auth login`. This sample will
-   use a mix of `gcloud` and `kubectl` commands. The rest of the sample assumes
-   that you've set the `$PROJECT_ID` environment variable to your Google Cloud
-   project id, and also set your project ID as default using
-   `gcloud config set project $PROJECT_ID`.
-
+  [Google Cloud project](https://cloud.google.com/resource-manager/docs/creating-managing-projects)
+  and install the `gcloud` CLI and run `gcloud auth login`. This sample will use
+  a mix of `gcloud` and `kubectl` commands. The rest of the sample assumes that
+  you've set the `$PROJECT_ID` environment variable to your Google Cloud project
+  id, and also set your project ID as default using
+  `gcloud config set project $PROJECT_ID`.
 
 ## Recreating the sample code
 
@@ -27,8 +26,8 @@ While you can clone all of the code from this directory, simple apps are
 generally more useful if you build them step-by-step. The following instructions
 recreate the source files from this folder.
 
-1. Create a new file named `secrets.go` and paste the following code. This
-   code creates a basic web server which listens on port 8080:
+1. Create a new file named `secrets.go` and paste the following code. This code
+   creates a basic web server which listens on port 8080:
 
    ```go
    package main
@@ -39,13 +38,13 @@ recreate the source files from this folder.
    	"log"
    	"net/http"
    	"os"
-   
+
    	"cloud.google.com/go/storage"
    )
-   
+
    func main() {
    	log.Print("Secrets sample started.")
-   
+
    	// This sets up the standard GCS storage client, which will pull
    	// credentials from GOOGLE_APPLICATION_DEFAULT if specified.
    	ctx := context.Background()
@@ -53,13 +52,13 @@ recreate the source files from this folder.
    	if err != nil {
    		log.Fatalf("Unable to initialize storage client: %v", err)
    	}
-   
+
    	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
    		// This GCS bucket has been configured so that any authenticated
    		// user can access it (Read Only), so any Service Account can
    		// run this sample.
    		bkt := client.Bucket("knative-secrets-sample")
-   
+
    		// Access the attributes of this GCS bucket, and write it back to the
    		// user.  On failure, return a 500 and the error message.
    		attrs, err := bkt.Attrs(ctx)
@@ -70,14 +69,14 @@ recreate the source files from this folder.
    		fmt.Fprintln(w,
    			fmt.Sprintf("bucket %s, created at %s, is located in %s with storage class %s\n",
    				attrs.Name, attrs.Created, attrs.Location, attrs.StorageClass))
-   
+
    	})
-   
+
    	port := os.Getenv("PORT")
    	if port == "" {
    		port = "8080"
    	}
-   
+
    	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
    }
    ```
@@ -124,10 +123,9 @@ recreate the source files from this folder.
    CMD ["/hellosecrets"]
    ```
 
-1. [Create a new Google Service Account](
-https://cloud.google.com/iam/docs/creating-managing-service-accounts). This Service
-Account doesn't need any privileges, the GCS bucket has been configured so that any
-authenticated identity may read it.
+1. [Create a new Google Service Account](https://cloud.google.com/iam/docs/creating-managing-service-accounts).
+   This Service Account doesn't need any privileges, the GCS bucket has been
+   configured so that any authenticated identity may read it.
 
    ```shell
    gcloud iam service-accounts create knative-secrets
@@ -170,29 +168,29 @@ authenticated identity may read it.
                image: docker.io/{username}/secrets-go
 
                env:
-               # This directs the Google Cloud SDK to use the identity and project
-               # defined by the Service Account (aka robot) in the JSON file at
-               # this path.
-               #  - `/var/secret` is determined by the `volumeMounts[0].mountPath`
-               #   below. This can be changed if both places are changed.
-               #  - `robot.json` is determined by the "key" that is used to hold the
-               #   secret content in the Kubernetes secret.  This can be changed
-               #   if both places are changed.
-               - name: GOOGLE_APPLICATION_DEFAULT
-                 value: /var/secret/robot.json
+                 # This directs the Google Cloud SDK to use the identity and project
+                 # defined by the Service Account (aka robot) in the JSON file at
+                 # this path.
+                 #  - `/var/secret` is determined by the `volumeMounts[0].mountPath`
+                 #   below. This can be changed if both places are changed.
+                 #  - `robot.json` is determined by the "key" that is used to hold the
+                 #   secret content in the Kubernetes secret.  This can be changed
+                 #   if both places are changed.
+                 - name: GOOGLE_APPLICATION_DEFAULT
+                   value: /var/secret/robot.json
 
                # This section specified where in the container we want the
                # volume containing our secret to be mounted.
                volumeMounts:
-               - name: robot-secret
-                 mountPath: /var/secret
+                 - name: robot-secret
+                   mountPath: /var/secret
 
              # This section attaches the secret "google-robot-secret" to
              # the Pod holding the user container.
              volumes:
-             - name: robot-secret
-               secret:
-                 secretName: google-robot-secret
+               - name: robot-secret
+                 secret:
+                   secretName: google-robot-secret
    ```
 
 ## Building and deploying the sample
@@ -222,10 +220,11 @@ folder) you're ready to build and deploy the sample app.
    ```
 
 1. Now that your service is created, Knative will perform the following steps:
-    - Create a new immutable revision for this version of the app.
-    - Network programming to create a route, ingress, service, and load balance
-    for your app.
-    - Automatically scale your pods up and down (including to zero active pods).
+
+   - Create a new immutable revision for this version of the app.
+   - Network programming to create a route, ingress, service, and load balance
+     for your app.
+   - Automatically scale your pods up and down (including to zero active pods).
 
 1. Run the following command to find the external IP address for your service.
    The ingress IP for your cluster is returned. If you just created your
