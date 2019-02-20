@@ -13,17 +13,21 @@ If you do not want your container image to be publicly available, you may want t
     ibmcloud plugin install container-registry
     ```
 
-1. Choose a name for your first namespace, and then create it. A namespace represents the spot within a registry that holds your images. You can set up multiple namespaces as well as control access to your namespaces by using IAM policies.
+1. Choose a name for your first namespace, and then create it: 
 
     ```
     ibmcloud cr namespace-add <my_namespace>
     ```
+    
+    A namespace represents the spot within a registry that holds your images. You can set up multiple namespaces as well as control access to your namespaces by using IAM policies.
 
-1. Create a token. The automated build processes you'll be setting up will use this token to access your images.
+1. Create a token:
 
     ```
     ibmcloud cr token-add --description "token description" --non-expiring --readwrite
     ```
+    
+    The automated build processes you'll be setting up will use this token to access your images.
 
 1. The CLI output should include a token identifier and the token. Make note of the token. You can verify that the token was created by listing all tokens:
 
@@ -124,15 +128,18 @@ To build our application from the source on GitHub, and push the resulting image
                   value: "Hello from the sample app!"
     ```
 
-1. Apply the configuration using `kubectl`. Applying this service definition will kick off a series of events:
-- Fetch the revision specified from GitHub and build it into a container, using the Kaniko build template.
-- the latest image will be pushed to the private registry using the registry-push-secret
-- the latest image will be pulled down from the private registry using the ibm-cr-secret.
-- the service will start, and your app will be running.
-
+1. Apply the configuration using `kubectl`:
+    
     ```
     kubectl apply -f service.yaml
     ```
+
+    Applying this service definition will kick off a series of events:
+    - Fetches the revision specified from GitHub and builds it into a container, using the Kaniko build template.
+    - Pushes the latest image to the private registry using the registry-push-secret
+    - Pulls down the latest image from the private registry using the ibm-cr-secret.
+    - Starts the service, and your app will be live.
+
 
 1. You can run `kubectl get pods --watch` to see the pods initializing.
 
