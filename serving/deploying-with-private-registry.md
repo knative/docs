@@ -93,7 +93,7 @@ To build our application from the source on GitHub, and push the resulting image
     kubectl apply -f https://raw.githubusercontent.com/knative/build-templates/master/kaniko/kaniko.yaml
     ```
 
-1. You need to create a service manifest which defines the service to deploy, including where the source code is and which build-template to use. Create a file named service.yaml and copy the following definition. Make sure to replace {NAMESPACE} with your own namespace you created earlier:
+1. You need to create a service manifest which defines the service to deploy, including where the source code is and which build-template to use. Create a file named `service.yaml` and copy the following definition. Make sure to replace {NAMESPACE} with your own namespace you created earlier:
 
     ```
     apiVersion: serving.knative.dev/v1alpha1
