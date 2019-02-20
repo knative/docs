@@ -25,7 +25,7 @@ If you do not want your container image to be publicly available, you may want t
     ibmcloud cr token-add --description "token description" --non-expiring --readwrite
     ```
 
-1. The CLI output should include a token identifier and the token. Make note of the token. You can verify that the token was created by listing all tokens.
+1. The CLI output should include a token identifier and the token. Make note of the token. You can verify that the token was created by listing all tokens:
 
     ```
     ibmcloud cr token-list
