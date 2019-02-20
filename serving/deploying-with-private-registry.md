@@ -55,7 +55,7 @@ A Secret is a Kubernetes object containing sensitive data such as a password, a 
       password: <token_value>
     ```
 
-1. Update the "password" with your token_value>. Note that username will be the string `token`. Save the file.
+1. Update the "password" with your <token_value>. Note that username will be the string `token`. Save the file.
 
 1. Apply the secret to your cluster.
 
