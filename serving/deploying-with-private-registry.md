@@ -1,5 +1,5 @@
 # Deploying to Knative using a private container registry
-This guide walks you through deploying an application to Knative from source code in a git repository using a private container registry for the container image. The source code should contain a dockerfile. For this guide, we'll use this [simple app](https://github.com/mchmarny/simple-app), but you could use your own.
+This guide walks you through deploying an application to Knative from source code in a git repository using a private container registry for the container image. The source code should contain a dockerfile. For this guide, we'll use this [helloworld app](https://github.com/knative/docs/tree/master/serving/samples/helloworld-go), but you could use your own.
 
 
 ## Set up a private container registry and obtain credentials
@@ -84,6 +84,12 @@ A Service Account provides an identity for processes that run in a Pod. This Ser
     - name: ibm-cr-secret
     ```
 
+1. Apply the service account to your cluster:
+
+    ```
+    kubectl apply -f service-account.yaml
+    ```
+
 ## Deploy to Knative
 To build our application from the source on GitHub, and push the resulting image to the IBM Container Registry, we will use the Kaniko build template.
 
@@ -99,7 +105,7 @@ To build our application from the source on GitHub, and push the resulting image
     apiVersion: serving.knative.dev/v1alpha1
     kind: Service
     metadata:
-      name: app-from-source
+      name: helloworld-go
       namespace: default
     spec:
       runLatest:
@@ -111,21 +117,23 @@ To build our application from the source on GitHub, and push the resulting image
               serviceAccountName: build-bot
               source:
                 git:
-                  url: https://github.com/mchmarny/simple-app.git
+                  url: https://github.com/knative/docs
                   revision: master
+                subPath: serving/samples/helloworld-go
               template:
                 name: kaniko
                 arguments:
                 - name: IMAGE
-                  value: registry.ng.bluemix.net/{NAMESPACE}/app-from-source:latest
+                  value: registry.ng.bluemix.net/{NAMESPACE}/helloworld-go:latest
           revisionTemplate:
             spec:
+              serviceAccountName: build-bot
               container:
-                image: registry.ng.bluemix.net/{NAMESPACE}/app-from-source:latest 
+                image: registry.ng.bluemix.net/{NAMESPACE}/helloworld-go:latest 
                 imagePullPolicy: Always
                 env:
-                - name: SIMPLE_MSG
-                  value: "Hello from the sample app!"
+                  - name: TARGET
+                    value: "Go Sample v1"
     ```
 
 1. Apply the configuration using `kubectl`:
