@@ -156,3 +156,56 @@ To build our application from the source on GitHub, and push the resulting image
     ```
     ibmcloud cr image-list
     ```
+
+## Test Application Behavior
+1. Run the following command to find the external IP address for your service:
+
+   ```shell
+   INGRESSGATEWAY=istio-ingressgateway
+   kubectl get svc $INGRESSGATEWAY --namespace istio-system
+   ```
+
+   Example:
+
+   ```shell
+   NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
+   xxxxxxx-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
+   ```
+
+1. Run the following command to find the domain URL for your service:
+
+   ```shell
+   kubectl get ksvc helloworld-go  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+   ```
+
+   Example:
+
+   ```shell
+   NAME                DOMAIN
+   helloworld-go       helloworld-go.default.example.com
+   ```
+
+1. Test your app by sending it a request. Use the following `curl` command with
+   the domain URL `helloworld-go.default.example.com` and `EXTERNAL-IP` address
+   that you retrieved in the previous steps:
+
+   ```shell
+   curl -H "Host: helloworld-go.default.example.com" http://{EXTERNAL_IP_ADDRESS}
+   ```
+
+   Example:
+
+   ```shell
+   curl -H "Host: helloworld-go.default.example.com" http://35.203.155.229
+   Hello World: Go Sample v1!
+   ```
+
+   > Note: Add `-v` option to get more detail if the `curl` command failed.
+
+## Removing the sample app deployment
+
+To remove the sample app from your cluster, delete the service record:
+
+```shell
+kubectl delete --filename service.yaml
+```
