@@ -2,7 +2,7 @@
 This guide walks you through deploying an application to Knative from source code in a git repository using a private container registry for the container image. The source code should contain a dockerfile. For this guide, we'll use this [simple app](https://github.com/mchmarny/simple-app), but you could use your own.
 
 
-## Set up a private container registry and obtain credentials.
+## Set up a private container registry and obtain credentials
 If you do not want your container image to be publicly available, you may want to use a private container registry. In this example, we'll use IBM Container Registry, but most of these concepts will be similar for other clouds.
 
 1. Ensure you have the [IBM Cloud CLI](https://cloud.ibm.com/docs/cli/reference/ibmcloud/download_cli.html#install_use) installed.  
