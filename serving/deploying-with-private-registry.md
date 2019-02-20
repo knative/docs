@@ -124,7 +124,7 @@ To build our application from the source on github, and push the resulting image
                   value: "Hello from the sample app!"
     ```
 
-1. Apply the configuration using `kubectl`. Applying this service definition will enable a number of events to happen:
+1. Apply the configuration using `kubectl`. Applying this service definition will kick off a series of events:
 - Fetch the revision specified from GitHub and build it into a container, using the Kaniko build template.
 - the latest image will be pushed to the private registry using the registry-push-secret
 - the latest image will be pulled down from the private registry using the ibm-cr-secret.
