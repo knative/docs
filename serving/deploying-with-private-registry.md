@@ -81,7 +81,7 @@ A Service Account provides an identity for processes that run in a Pod. This Ser
     ```
 
 ## Deploy to Knative
-To build our application from the source on github, and push the resulting image to the IBM Container Registry, we will use the Kaniko build template.
+To build our application from the source on GitHub, and push the resulting image to the IBM Container Registry, we will use the Kaniko build template.
 
 1. Install the Kaniko build template
 
