@@ -60,7 +60,7 @@ Knative depends on Istio. Run the following to install Istio. (We are changing
 `LoadBalancer` to `NodePort` for the `istio-ingress` service).
 
 ```shell
-curl -L https://github.com/knative/serving/releases/download/v0.3.0/istio.yaml \
+curl -L https://github.com/knative/serving/releases/download/v0.4.0/istio.yaml \
   | sed 's/LoadBalancer/NodePort/' \
   | kubectl apply --filename -
 
@@ -93,7 +93,7 @@ and monitoring plugins.
 Enter the following command:
 
 ```shell
-curl -L https://github.com/knative/serving/releases/download/v0.3.0/serving.yaml \
+curl -L https://github.com/knative/serving/releases/download/v0.4.0/serving.yaml \
   | sed 's/LoadBalancer/NodePort/' \
   | kubectl apply --filename -
 ```
