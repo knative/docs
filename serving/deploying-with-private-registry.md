@@ -197,7 +197,7 @@ To build our application from the source on GitHub, and push the resulting image
 
    ```shell
    curl -H "Host: helloworld-go.default.example.com" http://35.203.155.229
-   Hello World: Go Sample v1!
+   Hello Go Sample v1!
    ```
 
    > Note: Add `-v` option to get more detail if the `curl` command failed.
