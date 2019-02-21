@@ -16,15 +16,15 @@ commands will need to be adjusted for use in a Windows environment.
 
 ## Installing Glooctl
 
-This installation method for Knative depends on Gloo. Run the following 
-to install `glooctl`, the Gloo command line. 
+This installation method for Knative depends on Gloo. Run the following to
+install `glooctl`, the Gloo command line.
 
 ```shell
 curl -sL https://run.solo.io/gloo/install | sh
 ```
 
-Alternatively, you can download the Gloo CLI directly via 
-[the github releases](https://github.com/solo-io/gloo/releases) page. 
+Alternatively, you can download the Gloo CLI directly via
+[the github releases](https://github.com/solo-io/gloo/releases) page.
 
 Next, add `glooctl` to your path with:
 
@@ -46,10 +46,9 @@ Finally, install Gloo and Knative in a single command with `glooctl`:
 glooctl install knative
 ```
 
-> Note: To see the content of the kubernetes manifest glooctl installs, run 
-> `glooctl install knative --dry-run`.
-Monitor the Gloo components until all of the components show a `STATUS` of
-`Running` or `Completed`:
+> Note: To see the content of the kubernetes manifest glooctl installs, run
+> `glooctl install knative --dry-run`. Monitor the Gloo components until all of
+> the components show a `STATUS` of `Running` or `Completed`:
 
 ```shell
 kubectl get pods --namespace gloo-system
@@ -74,10 +73,10 @@ To deploy your first app with Knative, follow the step-by-step
 [Getting Started with Knative App Deployment](getting-started-knative-app.md)
 guide.
 
-Note that when you've finished deploying the app, you'll need to connect to the Gloo 
-Gateway rather than the Istio Gateway.
+Note that when you've finished deploying the app, you'll need to connect to the
+Gloo Gateway rather than the Istio Gateway.
 
-To get the URL of the Gloo Gateway, run 
+To get the URL of the Gloo Gateway, run
 
 ```bash
 export GATEWAY_URL=$(glooctl proxy url --name clusteringress-proxy)
@@ -94,13 +93,14 @@ export GATEWAY_URL=$(glooctl proxy url --name clusteringress-proxy)
 curl -H "Host: helloworld-go.myproject.example.com" $GATEWAY_URL
 ```
 
-The full instructions for the [Go Hello-World Sample](../serving/samples/helloworld-go) with 
-this substitution are published bellow:
-
+The full instructions for the
+[Go Hello-World Sample](../serving/samples/helloworld-go) with this substitution
+are published bellow:
 
 ### Deploy the Hello-World Go App:
 
-Create a new file named `helloworld.go` and paste the following code. This code creates a basic web server which listens on port 8080:
+Create a new file named `helloworld.go` and paste the following code. This code
+creates a basic web server which listens on port 8080:
 
 ```go
 package main
@@ -133,8 +133,8 @@ func main() {
 
     log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
 }
-```              
-      
+```
+
 In your project directory, create a file named `Dockerfile` and copy the code
 block below into it. For detailed instructions on dockerizing a Go app, see
 [Deploying Go servers with Docker](https://blog.golang.org/docker).
@@ -167,11 +167,10 @@ ENV PORT 8080
 
 # Run the web service on container startup.
 CMD ["/helloworld"]
-```      
+```
 
-Create a new file, `service.yaml` and copy the following service definition
-into the file. Make sure to replace `{username}` with your Docker Hub
-username.
+Create a new file, `service.yaml` and copy the following service definition into
+the file. Make sure to replace `{username}` with your Docker Hub username.
 
 ```yaml
 apiVersion: serving.knative.dev/v1alpha1
@@ -189,7 +188,7 @@ spec:
             env:
               - name: TARGET
                 value: "Go Sample v1"
-```      
+```
 
 Once the sample code has been created, we'll build and deploy it
 
@@ -203,26 +202,27 @@ docker build -t {username}/helloworld-go .
 
 # Push the container to docker registry
 docker push {username}/helloworld-go
-```    
-       
+```
 
-After the build has completed and the container is pushed to docker hub, you
-can deploy the app into your cluster. Ensure that the container image value
-in `service.yaml` matches the container you built in the previous step. Apply
-the configuration using `kubectl`:
+After the build has completed and the container is pushed to docker hub, you can
+deploy the app into your cluster. Ensure that the container image value in
+`service.yaml` matches the container you built in the previous step. Apply the
+configuration using `kubectl`:
 
 ```bash
 kubectl apply --filename service.yaml
-```    
+```
 
 Now that your service is created, Knative will perform the following steps:
-  - Create a new immutable revision for this version of the app.
-  - Network programming to create a route, ingress, service, and load balance
-  for your app.
-  - Automatically scale your pods up and down (including to zero active pods).
- 
-- Run the following command to find the external IP address for the Gloo cluster ingress.
- 
+
+- Create a new immutable revision for this version of the app.
+- Network programming to create a route, ingress, service, and load balance for
+  your app.
+- Automatically scale your pods up and down (including to zero active pods).
+
+- Run the following command to find the external IP address for the Gloo cluster
+  ingress.
+
 ```bash
 CLUSTERINGRESS_URL=$(glooctl proxy url --name clusteringress-proxy)
 echo $CLUSTERINGRESS_URL
@@ -233,7 +233,7 @@ Run the following command to find the domain URL for your service:
 
 ```bash
 kubectl get ksvc helloworld-go -n default  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
-````
+```
 
 Example:
 
@@ -242,22 +242,23 @@ NAME                DOMAIN
 helloworld-go       helloworld-go.default.example.com
 ```
 
-Test your app by sending it a request. Use the following `curl` command with
-the domain URL `helloworld-go.default.example.com` and `EXTERNAL-IP` address
-that you retrieved in the previous steps:
+Test your app by sending it a request. Use the following `curl` command with the
+domain URL `helloworld-go.default.example.com` and `EXTERNAL-IP` address that
+you retrieved in the previous steps:
 
 ```bash
 curl -H "Host: helloworld-go.default.example.com" ${CLUSTERINGRESS_URL}
 Hello Go Sample v1!
-````
+```
 
 > Note: Add `-v` option to get more detail if the `curl` command failed.
 
-Removing the sample app deployment      
+Removing the sample app deployment  
 To remove the sample app from your cluster, delete the service record:
 
 ```bash
 kubectl delete --filename service.yaml
 ```
 
-Great! our Knative ingress is up and running. See https://github.com/knative/docs for more information on using Knative.
+Great! our Knative ingress is up and running. See
+https://github.com/knative/docs for more information on using Knative.
