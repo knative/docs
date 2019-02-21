@@ -264,6 +264,15 @@ for details about installing the various supported observability plug-ins.
 **Tip**: From the table above, copy and paste the URL and filename into the
 commands below.
 
+1. If you are upgrading from Knative 0.3.x: Update your domain and static IP
+   address to be associated with the LoadBalancer `istio-ingressgateway` instead
+   of `knative-ingressgateway`.  Then run the following to clean up leftover
+   resources:
+   ```
+   kubectl delete svc knative-ingressgateway -n istio-system
+   kubectl delete deploy knative-ingressgateway -n istio-system
+   ```
+
 1. To install Knative components or plugins, specify the filenames in the
    `kubectl apply` command:
 

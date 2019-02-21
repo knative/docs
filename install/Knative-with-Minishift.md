@@ -200,6 +200,15 @@ curl -s https://raw.githubusercontent.com/knative/docs/master/install/scripts/kn
 - Warning: ServiceAccount 'controller' not found cluster role "cluster-admin"
   added: "controller"
 
+1. If you are upgrading from Knative 0.3.x: Update your domain and static IP
+   address to be associated with the LoadBalancer `istio-ingressgateway` instead
+   of `knative-ingressgateway`.  Then run the following to clean up leftover
+   resources:
+   ```
+   oc delete svc knative-ingressgateway -n istio-system
+   oc delete deploy knative-ingressgateway -n istio-system
+   ```
+
 1. Install Knative serving:
 
    ```shell
@@ -209,7 +218,8 @@ curl -s https://raw.githubusercontent.com/knative/docs/master/install/scripts/kn
    ```
    > **Note**: For the v0.4.0 release and newer, the `clusterrole.yaml` file is
    > required to enable the Build and Serving components to interact with each other.
-2. Monitor the Knative components until all of the components show a `STATUS` of
+
+1. Monitor the Knative components until all of the components show a `STATUS` of
    `Running` or `Completed`:
 
    ```shell
@@ -223,7 +233,7 @@ curl -s https://raw.githubusercontent.com/knative/docs/master/install/scripts/kn
    > **NOTE:** It will take a few minutes for all the components to be up and
    > running.
 
-3. Set route to access the OpenShift ingress CIDR, so that services can be
+1. Set route to access the OpenShift ingress CIDR, so that services can be
    accessed via LoadBalancerIP
    ```shell
    # Only for macOS
