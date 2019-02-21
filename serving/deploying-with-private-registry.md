@@ -40,7 +40,7 @@ You will use the credentials you obtained in the previous section to authenticat
 
 A Secret is a Kubernetes object containing sensitive data such as a password, a token, or a key. You can also read more about [Secrets](https://kubernetes.io/docs/concepts/configuration/secret/).
 
-1. Create a file named registry-push-secret.yaml containing the following .yaml.
+1. Create a file named `registry-push-secret.yaml` containing the following:
 
     ```
     apiVersion: v1
