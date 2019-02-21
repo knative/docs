@@ -79,6 +79,9 @@ in the Knative Serving repository.
 - [Using a custom domain](./using-a-custom-domain.md)
 - [Assigning a static IP address for Knative on Google Kubernetes Engine](./gke-assigning-static-ip-address.md)
 
+## Private Container Registry
+- [Deploying to Knative using a Private Container Registry](./deploying-with-private-registry.md)
+
 ## Known Issues
 
 See the [Knative Serving Issues](https://github.com/knative/serving/issues) page
