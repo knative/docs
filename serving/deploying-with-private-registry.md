@@ -101,7 +101,7 @@ To build our application from the source on GitHub, and push the resulting image
 
 1. You need to create a service manifest which defines the service to deploy, including where the source code is and which build-template to use. Create a file named `service.yaml` and copy the following definition. Make sure to replace {NAMESPACE} with your own namespace you created earlier:
 
-    ```
+    ```yaml
     apiVersion: serving.knative.dev/v1alpha1
     kind: Service
     metadata:
