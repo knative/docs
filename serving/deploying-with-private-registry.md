@@ -73,7 +73,7 @@ A Service Account provides an identity for processes that run in a Pod. This Ser
 
 1. Create a file named service-account.yaml containing the following .yaml.
 
-    ```
+    ```yaml
     apiVersion: v1
     kind: ServiceAccount
     metadata:
