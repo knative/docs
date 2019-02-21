@@ -59,7 +59,7 @@ spec:
       port: 15031
       targetPort: 15031
 ---
-# This is the corresponding Deployment to back the gateway service
+# This is the corresponding deployment to back the gateway service
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
