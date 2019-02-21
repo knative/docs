@@ -42,7 +42,7 @@ A Secret is a Kubernetes object containing sensitive data such as a password, a 
 
 1. Create a file named `registry-push-secret.yaml` containing the following:
 
-    ```
+    ```yaml
     apiVersion: v1
     kind: Secret
     metadata:
