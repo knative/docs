@@ -59,7 +59,7 @@ spec:
       port: 15031
       targetPort: 15031
 ---
-# This is the corresponding Deployment to backed the aforementioned Service.
+# This is the corresponding Deployment to back the gateway service
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -215,20 +215,20 @@ namespace:
 kubectl edit gateway knative-ingress-gateway -n knative-serving
 ```
 
-Replace its label selector with the label of your service:
+Replace the label selector with the label of your service:
 
 ```
 istio: ingressgateway
 ```
 
-For the service above, it should be updated to
+For the service above, it should be updated to:
 
 ```
 custom: ingressgateway
 ```
 
 If there is a change in service ports (compared with that of
-`istio-ingressgateway`), update the port info in gateway accordingly.
+`istio-ingressgateway`), update the port info in the gateway accordingly.
 
 ## Step 3: Update Gateway Configmap
 
@@ -239,9 +239,7 @@ namespace:
 kubectl edit configmap config-ingressgateway -n knative-serving
 ```
 
-Replace the `ingress-gateway` field with fully qualified url of your service:
-
-For the service above, it should be updated to
+Replace the `ingress-gateway` field with the fully qualified url of your service. For the service above, it should be updated to:
 
 ```
 custom-ingressgateway.istio-system.svc.cluster.local
