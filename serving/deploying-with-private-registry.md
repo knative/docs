@@ -71,7 +71,7 @@ A Secret is a Kubernetes object containing sensitive data such as a password, a 
 
 A Service Account provides an identity for processes that run in a Pod. This Service Account will be used to link the build process for Knative to the Secrets you just created.
 
-1. Create a file named service-account.yaml containing the following .yaml.
+1. Create a file named `service-account.yaml` containing the following:
 
     ```yaml
     apiVersion: v1
