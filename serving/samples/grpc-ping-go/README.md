@@ -18,7 +18,7 @@ First, build and publish the gRPC server to DockerHub (replacing `{username}`):
 docker build \
   --tag "docker.io/{username}/grpc-ping-go" \
   --file=serving/samples/grpc-ping-go/Dockerfile .
-docker push "${REPO}/serving/samples/grpc-ping-go"
+docker push "docker.io/{username}/grpc-ping-go"
 ```
 
 Next, replace `{username}` in `sample.yaml` with your DockerHub username, and
