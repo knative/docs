@@ -9,11 +9,11 @@ patterns and codify the best practices that are shared by successful,
 real-world, Kubernetes-based frameworks and applications. Knative components
 focus on solving mundane but difficult tasks such as:
 
-- [Deploying a container](./install/getting-started-knative-app)
+- [Deploying a container](./install/getting-started-knative-app.md)
 - [Orchestrating source-to-URL workflows on Kubernetes](./serving/samples/source-to-url-go/)
-- [Routing and managing traffic with blue/green deployment](./serving/samples/blue-green-deployment)
-- [Scaling automatically and sizing workloads based on demand](./serving/samples/autoscale-go)
-- [Binding running services to eventing ecosystems](./eventing/samples/kubernetes-event-source)
+- [Routing and managing traffic with blue/green deployment](./serving/samples/blue-green-deployment.md)
+- [Scaling automatically and sizing workloads based on demand](./serving/samples/autoscale-go/)
+- [Binding running services to eventing ecosystems](./eventing/samples/kubernetes-event-source/)
 
 Developers on Knative can use familiar idioms, languages, and frameworks to
 deploy functions, applications, or containers workloads.
@@ -61,7 +61,7 @@ efficient contributor workflow.
 
 Knative is a diverse, open, and inclusive community. To get involved, see
 [CONTRIBUTING.md](./contributing/CONTRIBUTING.md) and join the
-[Knative community](./community/README.md).
+[Knative community](./community/).
 
 Your own path to becoming a Knative contributor can
 [begin anywhere](https://github.com/knative/serving/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Akind%2Fgood-first-issue).
@@ -91,7 +91,7 @@ Follow the links below to learn more about Knative.
 
 - [Autoscaling](./serving/samples/autoscale-go/README.md)
 - [Source-to-URL deployment](./serving/samples/source-to-url-go/README.md)
-- [Binding running services to eventing ecosystems](./eventing/samples/kubernetes-event-source)
+- [Binding running services to eventing ecosystems](./eventing/samples/kubernetes-event-source/)
 - [Telemetry](./serving/samples/telemetry-go/README.md)
 - [REST API sample](./serving/samples/rest-api-go/README.md)
 - [All samples for serving](./serving/samples/)
@@ -99,16 +99,16 @@ Follow the links below to learn more about Knative.
 
 ### Logging and metrics
 
-- [Installing logging, metrics and traces](./serving/installing-logging-metrics-traces)
-- [Accessing logs](./serving/accessing-logs)
-- [Accessing metrics](./serving/accessing-metrics)
-- [Accessing traces](./serving/accessing-traces)
-- [Setting up a logging plugin](./serving/setting-up-a-logging-plugin)
+- [Installing logging, metrics and traces](./serving/installing-logging-metrics-traces.md)
+- [Accessing logs](./serving/accessing-logs.md)
+- [Accessing metrics](./serving/accessing-metrics.md)
+- [Accessing traces](./serving/accessing-traces.md)
+- [Setting up a logging plugin](./serving/setting-up-a-logging-plugin.md)
 
 ### Debugging
 
-- [Debugging application issues](./serving/debugging-application-issues)
-- [Debugging performance issues](./serving/debugging-performance-issues)
+- [Debugging application issues](./serving/debugging-application-issues.md)
+- [Debugging performance issues](./serving/debugging-performance-issues.md)
 
 ---
 
