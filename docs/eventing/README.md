@@ -61,13 +61,13 @@ event sources. Sources manage registration and delivery of events from external
 systems using Kubernetes
 [Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
 Learn more about Eventing development in the
-[Eventing work group](../../contributing/WORKING-GROUPS/#events).
+[Eventing work group](../contributing/WORKING-GROUPS.md#events).
 
 ## Installation
 
 Knative Eventing currently requires Knative Serving and Istio version 1.0 or
 later installed.
-[Follow the instructions to install on the platform of your choice](../../install/).
+[Follow the instructions to install on the platform of your choice](../install/README.md).
 
 Many of the sources require making outbound connections to create the event
 subscription, and if you have any functions that make use of any external (to
@@ -255,7 +255,7 @@ See the [Cronjob Source](samples/cronjob-source) example.
 
 ## Getting Started
 
-- [Setup Knative Serving](../../install/)
+- [Setup Knative Serving](../install/README.md)
 - [Install Eventing components](#installation)
 - [Run samples](samples/)
 

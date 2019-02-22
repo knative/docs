@@ -5,7 +5,7 @@ weight: 40
 ---
 
 If you followed one of the
-[comprehensive install guides](../../install/#install-guides) or you
+[comprehensive install guides](../install/README.md#install-guides) or you
 performed a custom installation and included the `monitoring.yaml` file in your
 installation, all of the observability features are already installed and you
 can skip down to the
@@ -56,7 +56,7 @@ install:
 
 1. [Elasticsearch and Kibana](#elasticsearch-and-kibana)
 1. [Stackdriver](#stackdriver)
-1. [Custom logging plugin](setting-up-a-logging-plugin/)
+1. [Custom logging plugin](setting-up-a-logging-plugin.md)
 
 ### Elasticsearch and Kibana
 
@@ -254,9 +254,9 @@ end traces.
 ## Learn More
 
 - Learn more about accessing logs, metrics, and traces:
-  - [Accessing Logs](../accessing-logs/)
-  - [Accessing Metrics](../accessing-metrics/)
-  - [Accessing Traces](../accessing-traces/)
+  - [Accessing Logs](./accessing-logs.md)
+  - [Accessing Metrics](./accessing-metrics.md)
+  - [Accessing Traces](./accessing-traces.md)
 
 ---
 

@@ -6,7 +6,7 @@ specified, it will use "World" as the TARGET.
 ## Prerequisites
 
 - A Kubernetes cluster with Knative installed. Follow the
-  [installation instructions](../../../../install/)
+  [installation instructions](../../../../install/README.md)
   if you need to create one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
@@ -17,6 +17,7 @@ specified, it will use "World" as the TARGET.
 While you can clone all of the code from this directory, hello world apps are
 generally more useful if you build them step-by-step. The following instructions
 recreate the source files from this folder.
+
 
 1. Create a new directory and initialize `npm`:
 

@@ -67,7 +67,7 @@ export IOTCORE_TOPIC_DEVICE="iot-demo-device-pubsub-topic"
     ```
 
 1.  Setup
-    [Knative Eventing](https://github.com/knative/docs/tree/master/eventing).
+    [Knative Eventing](../../../eventing).
 
 1.  Install the
     [in-memory `ClusterChannelProvisioner`](https://github.com/knative/eventing/tree/master/config/provisioners/in-memory-channel).

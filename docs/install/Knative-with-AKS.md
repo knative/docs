@@ -7,7 +7,7 @@ weight: 15
 This guide walks you through the installation of the latest version of Knative
 using pre-built images.
 
-You can find [guides for other platforms here](../).
+You can find [guides for other platforms here](README.md).
 
 ## Before you begin
 
@@ -208,11 +208,11 @@ Now that your cluster has Knative installed, you can see what Knative has to
 offer.
 
 To deploy your first app with Knative, follow the step-by-step
-[Getting Started with Knative App Deployment](getting-started-knative-app/)
+[Getting Started with Knative App Deployment](getting-started-knative-app.md)
 guide.
 
 To get started with Knative Eventing, pick one of the
-[Eventing Samples](../../eventing/samples/) to walk through.
+[Eventing Samples](../eventing/samples/) to walk through.
 
 To get started with Knative Build, read the [Build README](../build/README.md),
 then choose a sample to walk through.

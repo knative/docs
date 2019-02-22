@@ -7,13 +7,13 @@ weight: 10
 This guide walks you through the installation of the latest version of Knative
 using pre-built images on a [Gardener](https://gardener.cloud) created cluster
 environment. To set up your own Gardener, see the
-[documentation](https://github.com/gardener/gardener/blob/master/docs/)
+[documentation](https://github.com/gardener/gardener/blob/master/docs/README.md)
 or have a look at the
 [landscape-setup-template](https://github.com/gardener/landscape-setup-template)
 project. To learn more about this open source project, read the
 [blog on kubernetes.io](https://kubernetes.io/blog/2018/05/17/gardener/).
 
-You can find [guides for other platforms here](../).
+You can find [guides for other platforms here](README.md).
 
 ## Before you begin
 
@@ -106,7 +106,7 @@ rerun the command to see the current status.
 
 The following commands install all available Knative components as well as the
 standard set of observability plugins. To customize your Knative installation,
-see [Performing a Custom Knative Installation](Knative-custom-install/).
+see [Performing a Custom Knative Installation](Knative-custom-install.md).
 
 1. If you are upgrading from Knative 0.3.x: Update your domain and static IP
    address to be associated with the LoadBalancer `istio-ingressgateway` instead
@@ -175,7 +175,7 @@ Now that your cluster has Knative installed, you can see what Knative has to
 offer.
 
 To deploy your first app with Knative, follow the step-by-step
-[Getting Started with Knative App Deployment](getting-started-knative-app/)
+[Getting Started with Knative App Deployment](getting-started-knative-app.md)
 guide.
 
 To get started with Knative Eventing, pick one of the

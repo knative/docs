@@ -6,9 +6,9 @@ consumption by a function that has been implemented as a Knative Service.
 
 ### Prerequisites
 
-1. Setup [Knative Serving](https://github.com/knative/docs/tree/master/serving).
+1. Setup [Knative Serving](../../../serving).
 1. Setup
-   [Knative Eventing](https://github.com/knative/docs/tree/master/eventing).
+   [Knative Eventing](../../../eventing).
 
 ### Channel
 
