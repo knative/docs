@@ -96,7 +96,7 @@ The `steps` field is required if the `template` field is not defined. You define
 one or more `steps` fields to define the body of a build.
 
 Each `steps` in a build must specify a `Builder`, or type of container image
-that adheres to the [Knative builder contract](../builder-contract/). For each
+that adheres to the [Knative builder contract](./builder-contract.md). For each
 of the `steps` fields, or container images that you define:
 
 - The `Builder`-type container images are run and evaluated in order, starting
@@ -105,17 +105,16 @@ of the `steps` fields, or container images that you define:
   detected.
 
 For details about how to ensure that you implement each step to align with the
-"builder contract", see the [`Builder`](../builder-contract/) reference topic.
-
+"builder contract", see the [`Builder`](./builder-contract.md) reference topic.
 
 #### Template
 
 The `template` field is a required if no `steps` are defined. Specifies a
-[`BuildTemplate`](../build-templates/) resource object, in which includes
+[`BuildTemplate`](./build-templates.md) resource object, in which includes
 repeatable or sharable build `steps`.
 
 For examples and more information about build templates, see the
-[`BuildTemplate`](../build-templates/) reference topic.
+[`BuildTemplate`](./build-templates.md) reference topic.
 
 #### Source
 
@@ -148,8 +147,7 @@ that is in the
 of the `Build` resource object.
 
 For examples and more information about specifying service accounts, see the
-[`ServiceAccount`](../auth/) reference topic.
-
+[`ServiceAccount`](./auth.md) reference topic.
 
 #### Volumes
 
@@ -157,11 +155,11 @@ Optional. Specifies one or more
 [volumes](https://kubernetes.io/docs/concepts/storage/volumes/) that you want to
 make available to your build, including all the build steps. Add volumes to
 complement the volumes that are implicitly
-[created during a build step](../builder-contract/).
+[created during a build step](./builder-contract.md).
 
 For example, use volumes to accomplish one of the following common tasks:
 
-- [Mount a Kubernetes secret](../auth/).
+- [Mount a Kubernetes secret](./auth.md).
 
 - Create an `emptyDir` volume to act as a cache for use across multiple build
   steps. Consider using a persistent volume for inter-build caching.
