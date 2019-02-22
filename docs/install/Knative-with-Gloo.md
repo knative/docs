@@ -261,4 +261,4 @@ kubectl delete --filename service.yaml
 ```
 
 Great! our Knative ingress is up and running. See
-https://github.com/knative/docs for more information on using Knative.
+[Knative documentation](../README.md) for more information on using Knative.
