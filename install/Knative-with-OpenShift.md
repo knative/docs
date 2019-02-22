@@ -181,7 +181,7 @@ oc adm policy add-cluster-role-to-user cluster-admin -z controller -n knative-se
 Next, install Knative:
 
 ```shell
-curl -L https://storage.googleapis.com/knative-releases/serving/latest/release-lite.yaml \
+curl -L https://storage.googleapis.com/knative-releases/serving/latest/serving.yaml \
   | sed 's/LoadBalancer/NodePort/' \
   | oc apply -f -
 ```
