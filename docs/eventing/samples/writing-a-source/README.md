@@ -38,9 +38,9 @@ You'll need these tools installed:
 
 Kubebuilder not your thing? Prefer the easy way? Check out these alternatives.
 
-- [ContainerSource](https://github.com/knative/docs/tree/master/eventing/sources#meta-sources)
+- [ContainerSource](../../../eventing/sources/README.md#meta-sources)
   is an easy way to turn any dispatcher container into an Event Source.
-- [Auto ContainerSource](https://github.com/knative/docs/tree/master/eventing/sources#meta-sources)
+- [Auto ContainerSource](../../../eventing/sources/README.md#meta-sources)
   is an even easier way to turn any dispatcher container into an Event Source
   without writing any controller code. It requires Metacontroller.
 - [Metacontroller](https://metacontroller.app) can be used to write controllers

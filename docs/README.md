@@ -60,7 +60,7 @@ separation between pluggable components, the Knative project establishes an
 efficient contributor workflow.
 
 Knative is a diverse, open, and inclusive community. To get involved, see
-[CONTRIBUTING.md](./contributing/CONTRIBUTING) and join the
+[CONTRIBUTING.md](./community/CONTRIBUTING.md) and join the
 [Knative community](./community/).
 
 Your own path to becoming a Knative contributor can

@@ -10,7 +10,7 @@ then outputs the stock price.
    v0.3 or higher installed.
 1. [Docker](https://docs.docker.com/get-started/#prepare-your-docker-environment)
    installed locally.
-1. [Outbound network access](https://github.com/knative/docs/blob/master/serving/outbound-network-access.md)
+1. [Outbound network access](../../../serving/outbound-network-access.md)
    enabled for this Service to amke external API requests.
 1. The code checked out locally.
 
@@ -26,7 +26,7 @@ image can be accomplished locally using
 [Docker](https://docs.docker.com/get-started) or
 [ko](https://github.com/google/go-containerregistry/tree/master/cmd/ko) as well
 as remotely using
-[Knative Build](https://github.com/knative/docs/tree/master/build).
+[Knative Build](../../../build).
 
 This sample uses Docker for both building and pushing.
 
@@ -226,7 +226,7 @@ Response body: `stock price for ticker <ticker> is <price>`
 ## Next Steps
 
 The
-[traffic splitting example](https://github.com/knative/docs/tree/master/serving/samples/traffic-splitting)
+[traffic splitting example](../traffic-splitting)
 continues from here to walk through creating new Revisions and splitting traffic
 between multiple Revisions.
 

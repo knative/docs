@@ -18,7 +18,7 @@ source is most useful as a bridge from other GCP services, such as
 1. Setup [Knative Serving](../../../install)
 
 1. Setup
-   [Knative Eventing](https://github.com/knative/docs/tree/master/eventing). In
+   [Knative Eventing](../../../eventing). In
    addition, install the GCP PubSub event source from `release-gcppubsub.yaml`:
 
    ```shell

@@ -8,7 +8,7 @@ to `"Hello World!"`.
 ## Prerequisites
 
 - A Kubernetes cluster
-  [installation](https://github.com/knative/docs/blob/master/install/README.md)
+  [installation](../../../../install/README.md)
   with Knative Serving up and running.
 - [Docker](https://www.docker.com) installed locally, and running, optionally a
   Docker Hub account configured or some other Docker Repository installed
