@@ -1,15 +1,15 @@
 
 This sample runs a simple web server that makes calls to other in-cluster
 services and responds to requests with "Hello World!". The purpose of this
-sample is to show generating [metrics](../../accessing-metrics/),
-[logs](../../accessing-logs/) and distributed
-[traces](../../accessing-traces/). This sample also shows how to create a
+sample is to show generating [metrics](../../accessing-metrics.md),
+[logs](../../accessing-logs.md) and distributed
+[traces](../../accessing-traces.md). This sample also shows how to create a
 dedicated Prometheus instance rather than using the default installation.
 
 ## Prerequisites
 
 1. A Kubernetes cluster with
-   [Knative Serving](../../../../install/)
+   [Knative Serving](../../../install/README.md)
    installed.
 2. Check if Knative monitoring components are installed:
 
@@ -18,7 +18,7 @@ kubectl get pods --namespace knative-monitoring
 ```
 
 - If pods aren't found, install
-  [Knative monitoring component](../../../installing-logging-metrics-traces/).
+  [Knative monitoring component](../../installing-logging-metrics-traces.md).
 
 3. Install
    [Docker](https://docs.docker.com/get-started/#prepare-your-docker-environment).
@@ -189,13 +189,13 @@ curl --header "Host:$SERVICE_HOST" http://${SERVICE_IP}/log
 
 ## Access Logs
 
-You can access to the logs from Kibana UI - see [Logs](../../accessing-logs/)
+You can access to the logs from Kibana UI - see [Logs](../../accessing-logs.md)
 for more information.
 
 ## Access per Request Traces
 
 You can access to per request traces from Zipkin UI - see
-[Traces](../../accessing-traces/) for more information.
+[Traces](../../accessing-traces.md) for more information.
 
 ## Accessing Custom Metrics
 

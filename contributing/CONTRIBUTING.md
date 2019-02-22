@@ -26,18 +26,18 @@ given the same level of review.
 ## Working groups
 
 The Knative contributors community is organized into a set of
-[working groups](WORKING-GROUPS/). Any contribution to Knative should be
+[working groups](WORKING-GROUPS.md). Any contribution to Knative should be
 started by first engaging with the appropriate working group.
 
 ## Code of conduct
 
 All members of the Knative community must abide by the
-[Code of Conduct](CODE-OF-CONDUCT/). Only by respecting each other can we
+[Code of Conduct](CODE-OF-CONDUCT.md). Only by respecting each other can we
 develop a productive, collaborative community.
 
 ## Team values
 
-We promote and encourage a set of [shared values](VALUES/) to improve our
+We promote and encourage a set of [shared values](VALUES.md) to improve our
 productivity and inter-personal interactions.
 
 ## Contributor license agreements
@@ -59,7 +59,7 @@ our
 [Team Drive](https://drive.google.com/corp/drive/folders/0APnJ_hRs30R2Uk9PVA)
 and sending an email to the appropriate working group's mailing list to let
 people know the doc is there. To get write access to the drive, you'll need to
-be a [member](ROLES/#member) of the Knative organization.
+be a [member](ROLES.md#member) of the Knative organization.
 
 We do not yet have a common design document template(TODO).
 
@@ -78,7 +78,7 @@ later join knative-dev if you want immediate access).
 ## Contributing documentation
 
 For more information about contributing to the Knative documentation, see
-[DOCS-CONTRIBUTING](DOCS-CONTRIBUTING/). A lot of the information on this
+[DOCS-CONTRIBUTING.md](DOCS-CONTRIBUTING.md). A lot of the information on this
 page still applies, but you'll find the specifics about the docs process there.
 
 ## Contributing a feature
@@ -86,7 +86,7 @@ page still applies, but you'll find the specifics about the docs process there.
 In order to contribute a feature to Knative you'll need to go through the
 following steps:
 
-- Discuss your idea with the appropriate [working groups](WORKING-GROUPS/) on
+- Discuss your idea with the appropriate [working groups](WORKING-GROUPS.md) on
   the working group's mailing list.
 
 - Once there is general agreement that the feature is useful,
@@ -115,7 +115,7 @@ following steps:
 
 - Submit PRs to knative/serving with user documentation for your feature,
   including usage examples when possible. Add documentation to
-  [knative/docs/serving](https://github.com/knative/docs/tree/master/serving).
+  [knative/docs/serving](../serving).
 
 _Note that we prefer bite-sized PRs instead of giant monster PRs. It's therefore
 preferable if you can introduce large features in small, individually-reviewable
@@ -170,9 +170,9 @@ This project uses
 [Prow](https://github.com/kubernetes/test-infra/tree/master/prow) to assign
 reviewers to the PR, set labels, run tests automatically, and so forth.
 
-See [Reviewing and Merging Pull Requests](REVIEWING/) for the PR review and
+See [Reviewing and Merging Pull Requests](REVIEWING.md) for the PR review and
 merge process used for Knative and for more information about
-[Prow](../REVIEWING/#prow).
+[Prow](./REVIEWING.md#prow).
 
 ## Issues
 

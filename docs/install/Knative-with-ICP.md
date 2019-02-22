@@ -11,7 +11,7 @@ demonstrates creating and deploying an image of a sample `hello world` app onto
 the newly created Knative cluster on
 [IBM Cloud Private](https://www.ibm.com/cloud/private).
 
-You can find [guides for other platforms here](../).
+You can find [guides for other platforms here](README.md).
 
 ## Before you begin
 
@@ -128,7 +128,7 @@ the`knative-build` and `knative-monitoring` namespaces.
 
 The following commands install all available Knative components as well as the
 standard set of observability plugins. To customize your Knative installation,
-see [Performing a Custom Knative Installation](Knative-custom-install/).
+see [Performing a Custom Knative Installation](Knative-custom-install.md).
 
 1. Run the following commands to install Knative:
 
@@ -189,7 +189,7 @@ Now that your cluster has Knative installed, you can see what Knative has to
 offer.
 
 To deploy your first app with Knative, follow the step-by-step
-[Getting Started with Knative App Deployment](getting-started-knative-app/)
+[Getting Started with Knative App Deployment](getting-started-knative-app.md)
 guide.
 
 > **Note**: When looking up the IP address to use for accessing your app, you

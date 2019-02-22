@@ -6,7 +6,7 @@ specified, it will use "World" as the TARGET.
 ## Prerequisites
 
 - A Kubernetes cluster with Knative installed. Follow the
-  [installation instructions](../../../../install/)
+  [installation instructions](../../../../install/README.md)
   if you need to create one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
@@ -72,7 +72,7 @@ recreate the source files from this folder.
    ```
 
 1. Run bundle. If you don't have bundler installed, copy the
-   [Gemfile.lock](../Gemfile.lock) to your working directory.
+   [Gemfile.lock](./Gemfile.lock) to your working directory.
 
    ```shell
    bundle install

@@ -94,7 +94,7 @@ curl -H "Host: helloworld-go.myproject.example.com" $GATEWAY_URL
 ```
 
 The full instructions for the
-[Go Hello-World Sample](../serving/samples/helloworld-go) with this substitution
+[Go Hello-World Sample](../serving/samples/hello-world/helloworld-go) with this substitution
 are published bellow:
 
 ### Deploy the Hello-World Go App:
@@ -261,4 +261,4 @@ kubectl delete --filename service.yaml
 ```
 
 Great! our Knative ingress is up and running. See
-https://github.com/knative/docs for more information on using Knative.
+[Knative documentation](../README.md) for more information on using Knative.
