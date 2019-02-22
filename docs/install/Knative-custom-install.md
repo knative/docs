@@ -15,7 +15,7 @@ to run multiple installation commands.
 ## Before you begin
 
 - If you are new to Knative, you should instead
-  [follow one of the platform-specific installation guides](../) to help
+  [follow one of the platform-specific installation guides](./) to help
   you get up and running quickly.
 
 - The steps in this guide use `bash` for the MacOS or Linux environment; for
@@ -70,7 +70,7 @@ service mesh. If you install any of the following options, you must install
 
 - [Knative Eventing](https://github.com/knative/eventing)
 - [Knative Eventing Sources](https://github.com/knative/eventing-sources)
-- [Observability plugins](../../serving/installing-logging-metrics-traces/)
+- [Observability plugins](../serving/installing-logging-metrics-traces/)
 
 #### Istio installation options
 
@@ -210,7 +210,7 @@ files from the Knative repositories:
 | [`message-dumper.yaml`][5.3]                   | Installs an Event logging service for debugging.                                                       | Serving component, Eventing component                             |
 
 _\*_ See
-[Installing logging, metrics, and traces](../../serving/installing-logging-metrics-traces/)
+[Installing logging, metrics, and traces](../serving/installing-logging-metrics-traces/)
 for details about installing the various supported observability plug-ins.
 
 † These are the recommended standard install files suitable for most use cases.
@@ -330,6 +330,7 @@ commands below.
    kubectl get pods --namespace knative-monitoring
    ```
 
+
    See
    [Installing logging, metrics, and traces](../serving/installing-logging-metrics-traces.md)
    for details about setting up the various supported observability plug-ins.
@@ -342,17 +343,17 @@ events in your Knative cluster.
 Depending on the Knative components you installed, you can use the following
 guides to help you get started with Knative:
 
-- [Getting Started with Knative App Deployment](../getting-started-knative-app/)
+- [Getting Started with Knative App Deployment](./getting-started-knative-app.md)
 
-  - [Knative Serving sample apps](../../serving/samples/)
+  - [Knative Serving sample apps](../serving/samples/)
 
-- [Creating a simple Knative Build](../../build/creating-builds/)
+- [Creating a simple Knative Build](../build/creating-builds/)
 
   - [Knative Build templates](https://github.com/knative/build-templates)
 
-- [Knative Eventing overview](../../eventing/)
+- [Knative Eventing overview](../eventing/)
 
-  - [Knative Eventing code samples](../../eventing/samples)
+  - [Knative Eventing code samples](../eventing/samples/)
 
 ---
 
@@ -360,3 +361,4 @@ Except as otherwise noted, the content of this page is licensed under the
 [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),
 and code samples are licensed under the
 [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).
+

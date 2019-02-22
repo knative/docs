@@ -133,7 +133,7 @@ and set up an Istio IP range for outbound network access:
 
 ## Checking the version of your Knative Serving installation
 
-- [Checking the version of your Knative Serving installation](./check-install-version/)
+- [Checking the version of your Knative Serving installation](check-install-version/)
 
 ---
 

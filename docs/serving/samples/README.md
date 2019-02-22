@@ -1,7 +1,6 @@
 
 This directory contains sample applications, developed on Knative, to illustrate
-different use-cases and resources. See
-[Knative serving](https://github.com/knative/docs/tree/master/serving) to learn
+different use-cases and resources. See [Knative serving](../serving/) to learn
 more about Knative Serving resources.
 
 | Name                       | Description                                                                                                                                                                                                              |                                                                                                                                                             Languages                                                                                                                                                              |
@@ -20,5 +19,3 @@ more about Knative Serving resources.
 | Telemetry                  | This sample runs a simple web server that makes calls to other in-cluster services and responds to requests with "Hello World!". The purpose of this sample is to show generating metrics, logs, and distributed traces. |                                                                                                                                                    [Go](telemetry-go/README.md)                                                                                                                                                    |
 | Thumbnailer                | An example of deploying a "dockerized" application to Knative Serving which takes video URL as an input and generates its thumbnail image.                                                                               |                                                                                                                                                   [Go](thumbnailer-go/README.md)                                                                                                                                                   |
 | Traffic Splitting          | This samples builds off the [Creating a RESTful Service](./rest-api-go) sample to illustrate applying a revision, then using that revision for manual traffic splitting.                                                 |                                                                                                                                                [YAML](traffic-splitting/README.md)                                                                                                                                                 |
-
-

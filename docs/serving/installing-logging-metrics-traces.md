@@ -5,7 +5,7 @@ weight: 40
 ---
 
 If you followed one of the
-[comprehensive install guides](../../install/#install-guides) or you
+[comprehensive install guides](../install/#install-guides) or you
 performed a custom installation and included the `monitoring.yaml` file in your
 installation, all of the observability features are already installed and you
 can skip down to the
@@ -254,9 +254,9 @@ end traces.
 ## Learn More
 
 - Learn more about accessing logs, metrics, and traces:
-  - [Accessing Logs](../accessing-logs/)
-  - [Accessing Metrics](../accessing-metrics/)
-  - [Accessing Traces](../accessing-traces/)
+  - [Accessing Logs](./accessing-logs/)
+  - [Accessing Metrics](./accessing-metrics/)
+  - [Accessing Traces](./accessing-traces/)
 
 ---
 
