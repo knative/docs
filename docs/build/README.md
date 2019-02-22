@@ -35,10 +35,10 @@ More information about this use case is demonstrated in
 See the following reference topics for information about each of the build
 components:
 
-- [`Build`](builds/)
-- [`BuildTemplate`](build-templates/)
-- [`Builder`](builder-contract/)
-- [`ServiceAccount`](auth/)
+- [`Build`](./builds.md)
+- [`BuildTemplate`](./build-templates.md)
+- [`Builder`](./builder-contract.md)
+- [`ServiceAccount`](./auth.md)
 
 ## Install the Knative Build component
 
@@ -52,7 +52,7 @@ in your Kubernetes cluster:
   cluster, see [Installing Knative](../install/).
 
 - If you have a component of Knative installed and running, you can
-  [add and install the Knative Build component](installing-build-component/).
+  [add and install the Knative Build component](installing-build-component.md).
 
 ## Configuration syntax example
 

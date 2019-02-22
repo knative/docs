@@ -84,7 +84,7 @@ in the future for UI). The `default` value enables a template to have a
 graduated complexity, where options are overridden only when the user strays
 from some set of sane defaults.
 
-The `steps` and `volumes` parameters are just like in a [`Build`](../builds/)
+The `steps` and `volumes` parameters are just like in a [`Build`](./builds.md)
 resource, but might contain references to parameters in the form:
 `${PARAMETER_NAME}`.
 
