@@ -11,7 +11,7 @@ demonstrates creating and deploying an image of a sample `hello world` app onto
 the newly created Knative cluster on
 [IBM Cloud Private](https://www.ibm.com/cloud/private).
 
-You can find [guides for other platforms here](../).
+You can find [guides for other platforms here](README.md).
 
 ## Before you begin
 

@@ -9,7 +9,7 @@ dedicated Prometheus instance rather than using the default installation.
 ## Prerequisites
 
 1. A Kubernetes cluster with
-   [Knative Serving](../../../install/)
+   [Knative Serving](../../../install/README.md)
    installed.
 2. Check if Knative monitoring components are installed:
 

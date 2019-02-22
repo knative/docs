@@ -12,7 +12,7 @@ action, you can define a Knative `Build` through a single configuration file.
 
 Also consider using a Knative `Build` to build the source code of your apps into
 container images, which you can then run on
-[Knative `serving`](../serving/).
+[Knative `serving`](../serving/README.md).
 More information about this use case is demonstrated in
 [this sample](../serving/samples/source-to-url-go).
 
@@ -49,7 +49,7 @@ Before you can run a Knative Build, you must install the Knative Build component
 in your Kubernetes cluster:
 
 - For details about installing a new instance of Knative in your Kubernetes
-  cluster, see [Installing Knative](../install/).
+  cluster, see [Installing Knative](../install/README.md).
 
 - If you have a component of Knative installed and running, you can
   [add and install the Knative Build component](installing-build-component.md).

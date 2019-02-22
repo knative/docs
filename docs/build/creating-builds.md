@@ -24,7 +24,7 @@ Before you can run a Knative Build, you must have Knative installed in your
 Kubernetes cluster, and it must include the Knative Build component:
 
 - For details about installing a new instance of Knative in your Kubernetes
-  cluster, see [Installing Knative](../../install/).
+  cluster, see [Installing Knative](../install/README.md).
 
 - If you have a component of Knative installed and running, you must
   [ensure that the Knative Build component is also installed](./installing-build-component.md).

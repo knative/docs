@@ -3,8 +3,7 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 
 ## Prerequisites
 
-1. A Kubernetes cluster with
-   [Knative Serving](../../../install/)
+1. A Kubernetes cluster with [Knative Serving](../../../install/README.md)
    installed.
 1. A
    [metrics installation](../../serving/installing-logging-metrics-traces.md)

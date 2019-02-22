@@ -5,7 +5,7 @@ weight: 40
 ---
 
 If you followed one of the
-[comprehensive install guides](../install/#install-guides) or you
+[comprehensive install guides](../install/README.md#install-guides) or you
 performed a custom installation and included the `monitoring.yaml` file in your
 installation, all of the observability features are already installed and you
 can skip down to the

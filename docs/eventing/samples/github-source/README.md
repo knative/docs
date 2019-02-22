@@ -9,8 +9,7 @@ by a Knative Service.
 You will need:
 
 1. An internet-accessible Kubernetes cluster with Knative Serving
-   installed. Follow the [installation
-   instructions](../../../install/)
+   installed. Follow the [installation instructions](../../../install/README.md)
    if you need to create one.
 1. Ensure Knative Serving is [configured with a domain
    name](../../../serving/using-a-custom-domain.md)

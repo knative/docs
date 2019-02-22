@@ -94,7 +94,7 @@ curl -H "Host: helloworld-go.myproject.example.com" $GATEWAY_URL
 ```
 
 The full instructions for the
-[Go Hello-World Sample](../serving/samples/helloworld-go) with this substitution
+[Go Hello-World Sample](../serving/samples/hello-world/helloworld-go) with this substitution
 are published bellow:
 
 ### Deploy the Hello-World Go App:

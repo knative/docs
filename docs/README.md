@@ -61,7 +61,7 @@ efficient contributor workflow.
 
 Knative is a diverse, open, and inclusive community. To get involved, see
 [CONTRIBUTING.md](./contributing/CONTRIBUTING.md) and join the
-[Knative community](./community/).
+[Knative community](./community/README.md).
 
 Your own path to becoming a Knative contributor can
 [begin anywhere](https://github.com/knative/serving/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Akind%2Fgood-first-issue).
@@ -74,26 +74,26 @@ Follow the links below to learn more about Knative.
 
 ### Getting started
 
-- [Installing Knative](./install/)
-- [Getting started with app deployment](./install/getting-started-knative-app)
+- [Installing Knative](./install/README.md)
+- [Getting started with app deployment](./install/getting-started-knative-app.md)
 - [Getting started with serving](./serving)
 - [Getting started with builds](./build)
 - [Getting started with eventing](./eventing)
 
 ### Configuration and networking
 
-- [Configuring outbound network access](./serving/outbound-network-access)
-- [Using a custom domain](./serving/using-a-custom-domain)
-- [Assigning a static IP address for Knative on Google Kubernetes Engine](./serving/gke-assigning-static-ip-address)
-- [Configuring HTTPS with a custom certificate](./serving/using-an-ssl-cert)
+- [Configuring outbound network access](./serving/outbound-network-access.md)
+- [Using a custom domain](./serving/using-a-custom-domain.md)
+- [Assigning a static IP address for Knative on Google Kubernetes Engine](./serving/gke-assigning-static-ip-address.md)
+- [Configuring HTTPS with a custom certificate](./serving/using-an-ssl-cert.md)
 
 ### Samples and demos
 
-- [Autoscaling](./serving/samples/autoscale-go/)
-- [Source-to-URL deployment](./serving/samples/source-to-url-go/)
+- [Autoscaling](./serving/samples/autoscale-go/README.md)
+- [Source-to-URL deployment](./serving/samples/source-to-url-go/README.md)
 - [Binding running services to eventing ecosystems](./eventing/samples/kubernetes-event-source)
-- [Telemetry](./serving/samples/telemetry-go/)
-- [REST API sample](./serving/samples/rest-api-go/)
+- [Telemetry](./serving/samples/telemetry-go/README.md)
+- [REST API sample](./serving/samples/rest-api-go/README.md)
 - [All samples for serving](./serving/samples/)
 - [All samples for eventing](./eventing/samples/)
 

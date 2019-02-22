@@ -13,7 +13,7 @@ configuration.
 
 You need:
 
-- A Kubernetes cluster with [Knative installed](../../install/).
+- A Kubernetes cluster with [Knative installed](../../install/README.md).
 - (Optional)
   [A custom domain configured](../../serving/using-a-custom-domain.md) for use
   with Knative.
