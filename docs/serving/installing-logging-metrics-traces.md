@@ -56,7 +56,7 @@ install:
 
 1. [Elasticsearch and Kibana](#elasticsearch-and-kibana)
 1. [Stackdriver](#stackdriver)
-1. [Custom logging plugin](setting-up-a-logging-plugin/)
+1. [Custom logging plugin](setting-up-a-logging-plugin.md)
 
 ### Elasticsearch and Kibana
 
@@ -254,9 +254,9 @@ end traces.
 ## Learn More
 
 - Learn more about accessing logs, metrics, and traces:
-  - [Accessing Logs](./accessing-logs/)
-  - [Accessing Metrics](./accessing-metrics/)
-  - [Accessing Traces](./accessing-traces/)
+  - [Accessing Logs](./accessing-logs.md)
+  - [Accessing Metrics](./accessing-metrics.md)
+  - [Accessing Traces](./accessing-traces.md)
 
 ---
 

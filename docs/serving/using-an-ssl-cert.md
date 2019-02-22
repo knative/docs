@@ -9,7 +9,7 @@ steps below to configure Knative to use your certificate and enable HTTPS
 connections.
 
 Before you begin, you will need to
-[configure Knative to use your custom domain](./using-a-custom-domain/).
+[configure Knative to use your custom domain](./using-a-custom-domain.md).
 
 **Note:** due to limitations in Istio, Knative only supports a single
 certificate per cluster. If you will serve multiple domains in the same cluster,
@@ -133,7 +133,7 @@ which is only supported by a
 Instructions for configuring cert-manager are provided for the following DNS
 hosts:
 
-- [Google Cloud DNS](using-cert-manager-on-gcp/)
+- [Google Cloud DNS](using-cert-manager-on-gcp.md)
 
 ---
 

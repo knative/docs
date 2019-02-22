@@ -116,7 +116,7 @@ permission to get the credential secret can access your Cloud DNS.
 ## Set up Knative
 
 1. Follow the
-   [instruction](../../install/)
+   [instruction](../install/)
    to install Knative on your cluster.
 1. Configure Knative to use your custom domain.
 

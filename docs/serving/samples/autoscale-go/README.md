@@ -7,7 +7,7 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
    [Knative Serving](../../../install/)
    installed.
 1. A
-   [metrics installation](../../installing-logging-metrics-traces/)
+   [metrics installation](../../serving/installing-logging-metrics-traces.md)
    for viewing scaling graphs (optional).
 1. The `hey` load generator installed (`go get -u github.com/rakyll/hey`).
 1. Clone this repository, and move into the sample directory:
@@ -287,4 +287,4 @@ View the Knative Serving Scaling and Request dashboards (if configured).
 
 ## Further reading
 
-[Autoscaling Developer Documentation](https://github.com/knative/serving/blob/master/docs/scaling/DEVELOPMENT/)
+[Autoscaling Developer Documentation](https://github.com/knative/serving/blob/master/docs/scaling/DEVELOPMENT.md)

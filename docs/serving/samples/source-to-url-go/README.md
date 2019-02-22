@@ -39,7 +39,7 @@ In order to push the container that is built from source to Docker Hub, register
 a secret in Kubernetes for authentication with Docker Hub.
 
 There are
-[detailed instructions](../../../build/auth/#basic-authentication-docker)
+[detailed instructions](../../../build/auth.md#basic-authentication-docker)
 available, but these are the key steps:
 
 1. Create a new `Secret` manifest, which is used to store your Docker Hub

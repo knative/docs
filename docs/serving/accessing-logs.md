@@ -5,7 +5,7 @@ weight: 5
 ---
 
 If you have not yet installed the logging and monitoring components, go through
-the [installation instructions](./installing-logging-metrics-traces/) to set
+the [installation instructions](./installing-logging-metrics-traces.md) to set
 up the necessary components first.
 
 ## Kibana and Elasticsearch
@@ -147,7 +147,7 @@ userAgent                    curl/7.60.0
 
 ### Accessing end to end request traces
 
-See [Accessing Traces](./accessing-traces/) page for details.
+See [Accessing Traces](./accessing-traces.md) page for details.
 
 ## Stackdriver
 

@@ -61,23 +61,23 @@ in the Knative Serving repository.
 
 ## Setting up Logging and Metrics
 
-- [Installing Logging, Metrics and Traces](./installing-logging-metrics-traces/)
-- [Accessing Logs](./accessing-logs/)
-- [Accessing Metrics](./accessing-metrics/)
-- [Accessing Traces](./accessing-traces/)
-- [Setting up a logging plugin](./setting-up-a-logging-plugin/)
+- [Installing Logging, Metrics and Traces](./installing-logging-metrics-traces.md)
+- [Accessing Logs](./accessing-logs.md)
+- [Accessing Metrics](./accessing-metrics.md)
+- [Accessing Traces](./accessing-traces.md)
+- [Setting up a logging plugin](./setting-up-a-logging-plugin.md)
 
 ## Debugging Knative Serving issues
 
-- [Debugging Application Issues](./debugging-application-issues/)
-- [Debugging Performance Issues](./debugging-performance-issues/)
+- [Debugging Application Issues](./debugging-application-issues.md)
+- [Debugging Performance Issues](./debugging-performance-issues.md)
 
 ## Configuration and Networking
 
-- [Configuring outbound network access](./outbound-network-access/)
-- [Configuring cluster local routes](./cluster-local-route/)
-- [Using a custom domain](./using-a-custom-domain/)
-- [Assigning a static IP address for Knative on Google Kubernetes Engine](./gke-assigning-static-ip-address/)
+- [Configuring outbound network access](./outbound-network-access.md)
+- [Configuring cluster local routes](./cluster-local-route.md)
+- [Using a custom domain](./using-a-custom-domain.md)
+- [Assigning a static IP address for Knative on Google Kubernetes Engine](./gke-assigning-static-ip-address.md)
 
 ## Known Issues
 
