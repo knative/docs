@@ -170,14 +170,7 @@ folder) you're ready to build and deploy the sample app.
      for your app.
    - Automatically scale your pods up and down (including to zero active pods).
 
-1. To find the IP address for your service, use. 
-   
-   **Note**
-   If your cluster is new, it may
-   take sometime for the service to get asssigned an external IP address.
-   Instead of rerunning the command, you can add `--watch` to the 
-   command below to view the component's status updates in real time. Use CTRL+C to
-   exit watch mode. 
+1. To find the IP address of your service, use: 
 
    ```shell
    # In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
@@ -196,7 +189,10 @@ folder) you're ready to build and deploy the sample app.
    xxxxxxx-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
    ```
 
-1. To find the URL for your service, use
+   **Note**
+   If your cluster is new, it may take sometime for the service to get asssigned an external IP address. Instead of rerunning the command, you can add `--watch` to the command below to view the component's status updates in real time. Use CTRL+C to exit watch mode. 
+   
+1. To find the URL of your service, use:
 
    ```shell
    kubectl get ksvc helloworld-java \
@@ -206,18 +202,19 @@ folder) you're ready to build and deploy the sample app.
    helloworld-java     helloworld-java.default.example.com
    ```
 
-1. Now you can make a request to your app to see the result. Replace
-   `{IP_ADDRESS}` with the address you see returned in the previous step.
+1. To make a request to your app and see the result, use: 
 
    ```shell
    curl -H "Host: helloworld-java.default.example.com" http://{IP_ADDRESS}
 
    Hello World: Spring Boot Sample v1
    ```
-
+**Note**
+Replace `{IP_ADDRESS}` with the address you saw returned in the previous step.
 ## Removing the sample app deployment
 
-To remove the sample app from your cluster, delete the service record:
+## Removing the sample
+1. To remove the sample app from your cluster, use:
 
 ```shell
 kubectl delete --filename service.yaml
