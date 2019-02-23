@@ -23,7 +23,7 @@ source is most useful as a bridge from other GCP services, such as
    addition, install the GCP PubSub event source from `release-gcppubsub.yaml`:
 
    ```shell
-   kubectl apply --filename kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.3.0/release-gcppubsub.yaml
+   kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.3.0/release-gcppubsub.yaml
    ```
 
 1. Enable the `Cloud Pub/Sub API` on your project:
