@@ -80,8 +80,8 @@ ChannelProvisioner) and the core sources (which provides the Kubernetes Events,
 GitHub, and "Container" Sources) with the following commands:
 
 ```bash
-kubectl apply --filename https://github.com/knative/eventing/releases/download/v0.3.0/release.yaml
-kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.3.0/release.yaml
+kubectl apply --filename https://github.com/knative/eventing/releases/download/v0.4.0/release.yaml
+kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.4.0/release.yaml
 ```
 
 In addition to the core sources, there are [other sources](./sources/README.md)
