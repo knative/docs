@@ -210,10 +210,8 @@ folder) you're ready to build and deploy the sample app.
    Hello World: Spring Boot Sample v1
    ```
 **Note**
-Replace `{IP_ADDRESS}` with the address you saw returned in the previous step.
+Replace `{IP_ADDRESS}` with the address you saw returned in the previous step. i.e. `EXTERNAL-IP`
 ## Removing the sample app deployment
-
-## Removing the sample
 1. To remove the sample app from your cluster, use:
 
 ```shell
