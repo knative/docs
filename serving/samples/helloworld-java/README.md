@@ -208,9 +208,9 @@ folder) you're ready to build and deploy the sample app.
    helloworld-java     helloworld-java.default.example.com
    ```
 
-1. Now you can make a request to your app to see the result. Presuming the
-   the address you see returned in the previous step is in `IP_ADDRESS` env
-   variable:
+1. Now you can make a request to your app to see the result. Presuming,
+   the IP address you got in the step above is in the `${IP_ADDRESS}`
+   env variable:
 
    ```shell
    curl -H "Host: helloworld-java.default.example.com" http://${IP_ADDRESS}

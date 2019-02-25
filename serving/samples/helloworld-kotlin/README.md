@@ -175,7 +175,7 @@ folder) you're ready to build and deploy the sample app.
    docker push {username}/helloworld-kotlin
    ```
 
-2. After the build has completed and the container is pushed to docker hub, you
+1. After the build has completed and the container is pushed to docker hub, you
    can deploy the app into your cluster. Ensure that the container image value
    in `service.yaml` matches the container you built in the previous step. Apply
    the configuration using `kubectl`:
@@ -184,46 +184,51 @@ folder) you're ready to build and deploy the sample app.
    kubectl apply --filename service.yaml
    ```
 
-3. Now that your service is created, Knative will perform the following steps:
+1. Now that your service is created, Knative will perform the following steps:
 
    - Create a new immutable revision for this version of the app.
    - Network programming to create a route, ingress, service, and load balance
      for your app.
    - Automatically scale your pods up and down (including to zero active pods).
 
-4. To find the IP address for your service, use
+1. To find the IP address for your service, use
    `kubectl get service knative-ingressgateway --namespace istio-system` to get
    the ingress IP for your cluster. If your cluster is new, it may take sometime
    for the service to get assigned an external IP address.
 
    ```shell
    kubectl get service knative-ingressgateway --namespace istio-system
-   ```
 
-   ```shell
    NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
    knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
+
+   # Now you can assign the external IP address to the env variable.
+   export IP_ADDRESS=<EXTERNAL-IP column from the command above>
+
+   # Or just execute:
+   export IP_ADDRESS=$(kubectl get svc $INGRESSGATEWAY \
+     --namespace istio-system \
+     --output jsonpath="{.status.loadBalancer.ingress[*].ip}")
    ```
 
-5. To find the URL for your service, use
+1. To find the URL for your service, use
 
    ```shell
    kubectl get ksvc helloworld-kotlin  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
-   ```
 
-   ```shell
    NAME                DOMAIN
    helloworld-kotlin   helloworld-kotlin.default.example.com
    ```
 
-6. Now you can make a request to your app to see the result. Replace
-   `{IP_ADDRESS}` with the address you see returned in the previous step.
+1. Now you can make a request to your app to see the result. Presuming,
+   the IP address you got in the step above is in the `${IP_ADDRESS}`
+   env variable:
 
    ```shell
-   curl -H "Host: helloworld-kotlin.default.example.com" http://{IP_ADDRESS}
+   curl -H "Host: helloworld-kotlin.default.example.com" http://${IP_ADDRESS}
    ```
 
-   ```shell
+   ```terminal
    Hello Kotlin Sample v1
    ```
 
