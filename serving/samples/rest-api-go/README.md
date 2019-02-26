@@ -12,7 +12,7 @@ then outputs the stock price.
 1. [Docker](https://docs.docker.com/get-started/#prepare-your-docker-environment)
    installed locally.
 1. [Outbound network access](https://github.com/knative/docs/blob/master/serving/outbound-network-access.md)
-   enabled for this Service to amke external API requests.
+   enabled for this Service to make external API requests.
 1. The code checked out locally.
 
 ```
