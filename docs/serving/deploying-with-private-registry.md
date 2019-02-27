@@ -1,4 +1,8 @@
-# Deploying to Knative using a private container registry
+---
+title: "Deploying to Knative using a private container registry"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+weight: 10
+---
 This guide walks you through deploying an application to Knative from source code in a git repository using a private container registry for the container image. The source code should contain a dockerfile. For this guide, we'll use this [helloworld app](https://github.com/knative/docs/tree/master/serving/samples/helloworld-go), but you could use your own.
 
 
