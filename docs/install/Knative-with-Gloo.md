@@ -1,4 +1,8 @@
-# Knative Install using Gloo on a Kubernetes Cluster
+---
+title: "Knative Install using Gloo on a Kubernetes Cluster"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+weight: 10
+---
 
 This guide walks you through the installation of the latest version of Knative
 using pre-built images.
