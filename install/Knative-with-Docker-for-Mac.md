@@ -64,6 +64,7 @@ file, which installs only Knative Serving:
 
 ```shell
 curl -L https://github.com/knative/serving/releases/download/v0.4.0/serving.yaml \
+  | sed 's/LoadBalancer/NodePort/' \
   | kubectl apply --filename -
 ```
 
