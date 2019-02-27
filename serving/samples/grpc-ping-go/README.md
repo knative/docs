@@ -45,7 +45,7 @@ export SERVICE_IP=`kubectl get svc istio-ingressgateway --namespace istio-system
 
 ```shell
 docker run -ti --entrypoint=/client docker.io/{username}/grpc-ping-go \
-  -server_addr="$SERVICE_IP:80" \
-  -server_host_override="$SERVICE_HOST" \
+  -server_addr="${SERVICE_IP}:80" \
+  -server_host_override="${SERVICE_HOST}" \
   -insecure
 ```
