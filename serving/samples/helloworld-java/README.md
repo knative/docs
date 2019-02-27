@@ -206,6 +206,10 @@ folder) you're ready to build and deploy the sample app.
 
    NAME                DOMAIN
    helloworld-java     helloworld-java.default.example.com
+
+   # Or simply:
+   export DOMAIN_NAME=$(kubectl get ksvc helloworld-java \
+     --output jsonpath={.status.domain}
    ```
 
 1. Now you can make a request to your app to see the result. Presuming,
@@ -213,7 +217,7 @@ folder) you're ready to build and deploy the sample app.
    env variable:
 
    ```shell
-   curl -H "Host: helloworld-java.default.example.com" http://${IP_ADDRESS}
+   curl -H "Host: ${DOMAIN_NAME}" http://${IP_ADDRESS}
 
    Hello World: Spring Boot Sample v1
    ```
