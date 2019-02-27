@@ -95,6 +95,10 @@ oc label namespace default istio-injection=enabled
 
 ## Installing Istio
 
+> Note: [Gloo](https://gloo.solo.io/) is available as an alternative to Istio.
+> Gloo is not currently compatible with the Knative Eventing component.
+> [Click here](Knative-with-Gloo.md) to install Knative with Gloo.
+
 Knative depends on Istio. First, run the following to grant the necessary
 privileges to the service accounts istio will use:
 
@@ -177,7 +181,7 @@ oc adm policy add-cluster-role-to-user cluster-admin -z controller -n knative-se
 Next, install Knative:
 
 ```shell
-curl -L https://storage.googleapis.com/knative-releases/serving/latest/release-lite.yaml \
+curl -L https://storage.googleapis.com/knative-releases/serving/latest/serving.yaml \
   | sed 's/LoadBalancer/NodePort/' \
   | oc apply -f -
 ```
