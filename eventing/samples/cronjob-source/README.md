@@ -33,7 +33,7 @@ spec:
 Use following command to create the service from `service.yaml`:
 
 ```shell
-kubectl apply -f service.yaml
+kubectl apply --filename service.yaml
 ```
 
 ### Create Cron Job Event Source
@@ -60,7 +60,7 @@ spec:
 Use following command to create the event source from `cronjob-source.yaml`:
 
 ```shell
-kubectl apply -f cronjob-source.yaml
+kubectl apply --filename cronjob-source.yaml
 ```
 
 ### Verify

@@ -40,7 +40,7 @@ In the reference project, this produces log output like this:
 In a different terminal, use `kubectl apply` to create a source.
 
 ```sh
-kubectl apply -f config/samples
+kubectl apply --filename config/samples
 ```
 
 The controller should log an error saying that the sink reference is nil. In the
@@ -77,7 +77,7 @@ spec:
     kind: TestSink
     plural: testsinks
   scope: Namespaced
-  version: v1alpha1" | kubectl apply -f -
+  version: v1alpha1" | kubectl apply --filename -
 ```
 
 Create a TestSink object with an Addressable status.
@@ -89,7 +89,7 @@ metadata:
   name: foosink
 status:
   address:
-    hostname: example.com" | kubectl apply -f -
+    hostname: example.com" | kubectl apply --filename -
 ```
 
 Update the source to include a reference to the sink. In the reference project,
@@ -105,7 +105,7 @@ spec:
     apiVersion: sources.knative.dev/v1alpha1
     kind: TestSink
     name: foosink
-    namespace: default" | kubectl apply -f -
+    namespace: default" | kubectl apply --filename -
 ```
 
 Check the controller logs in the first terminal. You should see an

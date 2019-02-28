@@ -162,7 +162,7 @@ curl -s https://raw.githubusercontent.com/knative/docs/master/install/scripts/is
 
    ```shell
    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.4.0/istio-crds.yaml && \
-   oc apply -f https://github.com/knative/serving/releases/download/v0.4.0/istio.yaml
+   oc apply --filename https://github.com/knative/serving/releases/download/v0.4.0/istio.yaml
    ```
 
    Note: the resources (CRDs) defined in the `istio-crds.yaml`file are also
@@ -212,9 +212,9 @@ curl -s https://raw.githubusercontent.com/knative/docs/master/install/scripts/kn
 1. Install Knative serving:
 
    ```shell
-   oc apply -f https://github.com/knative/serving/releases/download/v0.4.0/serving.yaml \
-   oc apply -f https://github.com/knative/build/releases/download/v0.4.0/build.yaml \
-   oc apply -f https://raw.githubusercontent.com/knative/serving/v0.4.0/third_party/config/build/clusterrole.yaml
+   oc apply --filename https://github.com/knative/serving/releases/download/v0.4.0/serving.yaml \
+   oc apply --filename https://github.com/knative/build/releases/download/v0.4.0/build.yaml \
+   oc apply --filename https://raw.githubusercontent.com/knative/serving/v0.4.0/third_party/config/build/clusterrole.yaml
    ```
    > **Note**: For the v0.4.0 release and newer, the `clusterrole.yaml` file is
    > required to enable the Build and Serving components to interact with each other.

@@ -69,7 +69,7 @@ oc adm policy add-cluster-role-to-user cluster-admin -z istio-galley-service-acc
 header_text "Installing istio"
 curl -L https://storage.googleapis.com/knative-releases/serving/latest/istio.yaml \
   | sed 's/LoadBalancer/NodePort/' \
-  | oc apply -f -
+  | oc apply --filename -
 
 header_text "Waiting for istio to become ready"
 sleep 5; while echo && oc get pods -n istio-system | grep -v -E "(Running|Completed|STATUS)"; do sleep 5; done
@@ -87,7 +87,7 @@ oc adm policy add-cluster-role-to-user cluster-admin -z controller -n knative-se
 header_text "Installing Knative"
 curl -L https://storage.googleapis.com/knative-releases/serving/latest/release-lite.yaml \
   | sed 's/LoadBalancer/NodePort/' \
-  | oc apply -f -
+  | oc apply --filename -
 
 header_text "Waiting for Knative to become ready"
 sleep 5; while echo && oc get pods -n knative-serving | grep -v -E "(Running|Completed|STATUS)"; do sleep 5; done

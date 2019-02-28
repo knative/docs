@@ -123,7 +123,7 @@ Run the following to install Istio:
 ```shell
 curl -L https://storage.googleapis.com/knative-releases/serving/latest/istio.yaml \
   | sed 's/LoadBalancer/NodePort/' \
-  | oc apply -f -
+  | oc apply --filename -
 ```
 
 Monitor the Istio components until all of the components show a `STATUS` of
@@ -183,7 +183,7 @@ Next, install Knative:
 ```shell
 curl -L https://storage.googleapis.com/knative-releases/serving/latest/serving.yaml \
   | sed 's/LoadBalancer/NodePort/' \
-  | oc apply -f -
+  | oc apply --filename -
 ```
 
 Monitor the Knative components until all of the components show a `STATUS` of

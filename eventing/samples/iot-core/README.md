@@ -89,8 +89,8 @@ export IOTCORE_TOPIC_DEVICE="iot-demo-device-pubsub-topic"
         the Receive Adapter):
 
         ```shell
-        kubectl -n knative-sources create secret generic gcppubsub-source-key --from-file=key.json=PATH_TO_KEY_FILE.json
-        kubectl -n default create secret generic google-cloud-key --from-file=key.json=PATH_TO_KEY_FILE.json
+        kubectl --namespace knative-sources create secret generic gcppubsub-source-key --from-file=key.json=PATH_TO_KEY_FILE.json
+        kubectl --namespace default create secret generic google-cloud-key --from-file=key.json=PATH_TO_KEY_FILE.json
         ```
 
 1.  Deploy the `GcpPubSubSource` controller as part of eventing-source's
@@ -98,7 +98,7 @@ export IOTCORE_TOPIC_DEVICE="iot-demo-device-pubsub-topic"
 
     ```shell
     pushd $HOME/go/src/github.com/knative/eventing-sources
-    ko apply -f config/default-gcppubsub.yaml
+    ko apply --filename config/default-gcppubsub.yaml
     popd
     ```
 
@@ -110,7 +110,7 @@ export IOTCORE_TOPIC_DEVICE="iot-demo-device-pubsub-topic"
 
     ```shell
     sed "s/CHANNEL_NAME/$CHANNEL_NAME/" channel.yaml |
-    kubectl -n default apply -f -
+    kubectl --namespace default apply --filename -
     ```
 
 #### GCP PubSub Source
@@ -122,7 +122,7 @@ export IOTCORE_TOPIC_DEVICE="iot-demo-device-pubsub-topic"
         -e "s/TOPIC_NAME/$IOTCORE_TOPIC_DATA/" \
         -e "s/CHANNEL_NAME/$CHANNEL_NAME/" \
         gcp-pubsub-source.yaml |
-    kubectl apply -f -
+    kubectl apply --filename -
     ```
 
 #### Subscription
@@ -134,7 +134,7 @@ Even though the `Source` isn't completely ready yet, we can setup the
 
     ```shell
     sed "s/CHANNEL_NAME/$CHANNEL_NAME/" subscription.yaml |
-    ko apply -f -
+    ko apply --filename -
     ```
 
     - This uses a very simple Knative Service to see that events are flowing.
