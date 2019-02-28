@@ -1,6 +1,6 @@
 # Use Microsoft's official .NET image.
 # https://hub.docker.com/r/microsoft/dotnet
-FROM microsoft/dotnet:2.1-sdk
+FROM microsoft/dotnet:2.2-sdk
 
 # Install production dependencies.
 # Copy csproj and restore as distinct layers.
