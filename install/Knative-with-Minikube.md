@@ -52,11 +52,16 @@ minikube start --memory=8192 --cpus=4 \
 
 ## Installing Istio
 
+> Note: [Gloo](https://gloo.solo.io/) is available as an alternative to Istio.
+> Gloo is not currently compatible with the Knative Eventing component.
+> [Click here](Knative-with-Gloo.md) to install Knative with Gloo.
+
 Knative depends on Istio. Run the following to install Istio. (We are changing
 `LoadBalancer` to `NodePort` for the `istio-ingress` service).
 
 ```shell
-curl -L https://github.com/knative/serving/releases/download/v0.3.0/istio.yaml \
+kubectl apply --filename https://github.com/knative/serving/releases/download/v0.4.0/istio-crds.yaml &&
+curl -L https://github.com/knative/serving/releases/download/v0.4.0/istio.yaml \
   | sed 's/LoadBalancer/NodePort/' \
   | kubectl apply --filename -
 
@@ -86,10 +91,20 @@ Because you have limited resources available, install only the Knative Serving
 component, omitting the other Knative components as well as the observability
 and monitoring plugins.
 
+If you are upgrading from Knative 0.3.x: Update your domain and static IP
+address to be associated with the LoadBalancer `istio-ingressgateway` instead
+of `knative-ingressgateway`.  Then run the following to clean up leftover
+resources:
+
+```shell
+kubectl delete svc knative-ingressgateway -n istio-system
+kubectl delete deploy knative-ingressgateway -n istio-system
+```
+
 Enter the following command:
 
 ```shell
-curl -L https://github.com/knative/serving/releases/download/v0.3.0/serving.yaml \
+curl -L https://github.com/knative/serving/releases/download/v0.4.0/serving.yaml \
   | sed 's/LoadBalancer/NodePort/' \
   | kubectl apply --filename -
 ```

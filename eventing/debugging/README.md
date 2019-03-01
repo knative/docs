@@ -96,7 +96,7 @@ We will attempt to determine why from the most basic pieces out:
 kubectl -n knative-debug get deployment fn -o jsonpath='{.status.availableReplicas}'
 ```
 
-We want to see '1'. If you don't, then you need to debug the `Deployment`. Is
+We want to see `1`. If you don't, then you need to debug the `Deployment`. Is
 there anything obviously wrong mentioned in the `status`?
 
 ```shell
@@ -112,8 +112,7 @@ Verify that the `Pod` is `Ready`:
 kubectl -n knative-debug get pod -l app=fn -o jsonpath='{.items[*].status.conditions[?(@.type == "Ready")].status}'
 ```
 
-This should return `True`. If it doesn't, then try to debug the `Deployment`,
-which is out of scope of this document.
+This should return `True`. If it doesn't, then try to debug the `Deployment` using the [Kubernetes Application Debugging](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-application-introspection/) guide.
 
 ##### `svc`
 
@@ -191,10 +190,10 @@ kubectl -n knative-debug get virtualservice -l provisioner=in-memory-channel,cha
 
 Verify that
 
-1. 'HOST' is the same as the hostname returned by in `chan`'s
+1. `HOST` is the same as the hostname returned by in `chan`'s
    `status.address.hostname`.
-1. 'DESTINATION' is
-   'in-memory-channel-dispatcher.knative-eventing.svc.cluster.local'.
+1. `DESTINATION` is
+   `in-memory-channel-dispatcher.knative-eventing.svc.cluster.local`.
 
 If either of those is not accurate, then it implies that something went wrong
 during `chan` reconciliation. See [Channel Controller](#channel-controller).

@@ -1,15 +1,18 @@
 # Creating a RESTful Service
 
-This sample demonstrates creating and running a simple RESTful service on Knative Serving.
-The exposed endpoint takes a stock ticker (i.e. stock symbol), then outputs the stock price.
+This sample demonstrates creating and running a simple RESTful service on
+Knative Serving. The exposed endpoint takes a stock ticker (i.e. stock symbol),
+then outputs the stock price.
 
 ## Prerequisites
 
 1. A Kubernetes cluster with
-   [Knative Serving](https://github.com/knative/docs/blob/master/install/README.md) v0.3 or higher installed.
-1. [Docker](https://docs.docker.com/get-started/#prepare-your-docker-environment) installed locally.
-1. [Outbound network access](https://github.com/knative/docs/blob/master/serving/outbound-network-access.md) enabled for
-   this Service to amke external API requests.
+   [Knative Serving](https://github.com/knative/docs/blob/master/install/README.md)
+   v0.3 or higher installed.
+1. [Docker](https://docs.docker.com/get-started/#prepare-your-docker-environment)
+   installed locally.
+1. [Outbound network access](https://github.com/knative/docs/blob/master/serving/outbound-network-access.md)
+   enabled for this Service to amke external API requests.
 1. The code checked out locally.
 
 ```
@@ -20,9 +23,11 @@ go get -d github.com/knative/docs/serving/samples/rest-api-go
 
 In order to run an application on Knative Serving a container image must be
 available to fetch from a container registry. Building and pushing a container
-image can be accomplished locally using [Docker](https://docs.docker.com/get-started) or
-[ko](https://github.com/google/go-containerregistry/tree/master/cmd/ko) as well as
-remotely using [Knative Build](https://github.com/knative/docs/tree/master/build).
+image can be accomplished locally using
+[Docker](https://docs.docker.com/get-started) or
+[ko](https://github.com/google/go-containerregistry/tree/master/cmd/ko) as well
+as remotely using
+[Knative Build](https://github.com/knative/docs/tree/master/build).
 
 This sample uses Docker for both building and pushing.
 
@@ -34,8 +39,9 @@ To build and push to a container registry using Docker:
 cd $GOPATH/src/github.com/knative/docs
 ```
 
-2. Set your preferred container registry endpoint as an environment variable. This sample uses [Google Container
-   Registry (GCR)](https://cloud.google.com/container-registry/):
+2. Set your preferred container registry endpoint as an environment variable.
+   This sample uses
+   [Google Container Registry (GCR)](https://cloud.google.com/container-registry/):
 
 ```
 export REPO="gcr.io/<YOUR_PROJECT_ID>"
@@ -45,16 +51,16 @@ export REPO="gcr.io/<YOUR_PROJECT_ID>"
 
 To push to GCR, you need to:
 
-* Create a [Google Cloud Platform
-  project](https://cloud.google.com/resource-manager/docs/creating-managing-projects#creating_a_project).
-* Enable the [Google Container Registry API](https://console.cloud.google.com/apis/library/containerregistry.googleapis.com).
-* Setup an [auth
-  helper](https://cloud.google.com/container-registry/docs/advanced-authentication#gcloud_as_a_docker_credential_helper)
+- Create a
+  [Google Cloud Platform project](https://cloud.google.com/resource-manager/docs/creating-managing-projects#creating_a_project).
+- Enable the
+  [Google Container Registry API](https://console.cloud.google.com/apis/library/containerregistry.googleapis.com).
+- Setup an
+  [auth helper](https://cloud.google.com/container-registry/docs/advanced-authentication#gcloud_as_a_docker_credential_helper)
   to give the Docker client the permissions it needs to push.
 
 If you are using a different container registry, you will want to follow the
-registry specific instructions for both setup and authorizing the image
-push.
+registry specific instructions for both setup and authorizing the image push.
 
 4. Use Docker to build your application container:
 
@@ -87,7 +93,8 @@ docker push "${REPO}/serving/samples/rest-api-go"
 
 ## Deploy the Service
 
-Now that our image is available from the container registry, we can deploy the Knative Serving sample:
+Now that our image is available from the container registry, we can deploy the
+Knative Serving sample:
 
 ```
 kubectl apply --filename serving/samples/rest-api-go/sample.yaml
@@ -100,11 +107,11 @@ the default namespace.
 
 The Knative Service creates the following child resources:
 
-* Knative Route
-* Knative Configuration
-* Knative Revision
-* Kubernetes Deployment
-* Kuberentes Service
+- Knative Route
+- Knative Configuration
+- Knative Revision
+- Kubernetes Deployment
+- Kuberentes Service
 
 You can inspect the created resources with the following `kubectl` commands:
 
@@ -149,12 +156,12 @@ kubectl get deployment -l
 "serving.knative.dev/service=stock-service-example" -o yaml
 ```
 
-
 ## Access the Service
 
 To access this service via `curl`, you need to determine its ingress address.
-This example assumes you are using the default Ingress Gateway setup for Knative. If you
-customized your gateway, you will want to adjust the enviornment variables below.
+This example assumes you are using the default Ingress Gateway setup for
+Knative. If you customized your gateway, you will want to adjust the enviornment
+variables below.
 
 1. To get the IP address of your Ingress Gateway:
 
@@ -169,7 +176,8 @@ echo $INGRESS_IP
 
 - If your cluster is running outside a cloud provider (for example on Minikube),
   your services will never get an external IP address, and your INGRESS_IP will
-  be empty. In that case, use the istio `hostIP` and `nodePort` as the ingress IP:
+  be empty. In that case, use the istio `hostIP` and `nodePort` as the ingress
+  IP:
 
 ```
 export INGRESS_IP=$(kubectl get po --selector $INGRESSGATEWAY_LABEL=ingressgateway --namespace istio-system \
@@ -218,8 +226,8 @@ Response body: `stock price for ticker <ticker> is <price>`
 
 ## Next Steps
 
-The [traffic splitting
-example](https://github.com/knative/docs/tree/master/serving/samples/traffic-splitting)
+The
+[traffic splitting example](https://github.com/knative/docs/tree/master/serving/samples/traffic-splitting)
 continues from here to walk through creating new Revisions and splitting traffic
 between multiple Revisions.
 

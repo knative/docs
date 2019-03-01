@@ -187,6 +187,14 @@ folder) you're ready to build and deploy the sample app.
 
    NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
    xxxxxxx-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
+
+   # Now you can assign the external IP address to the env variable.
+   export IP_ADDRESS=<EXTERNAL-IP column from the command above>
+
+   # Or just execute:
+   export IP_ADDRESS=$(kubectl get svc $INGRESSGATEWAY \
+     --namespace istio-system \
+     --output jsonpath="{.status.loadBalancer.ingress[*].ip}")
    ```
 
    **Note**
@@ -200,12 +208,16 @@ folder) you're ready to build and deploy the sample app.
 
    NAME                DOMAIN
    helloworld-java     helloworld-java.default.example.com
+
+   # Or simply:
+   export DOMAIN_NAME=$(kubectl get ksvc helloworld-java \
+     --output jsonpath={.status.domain}
    ```
 
 1. To make a request to your app and see the result, use: 
 
    ```shell
-   curl -H "Host: helloworld-java.default.example.com" http://{IP_ADDRESS}
+   curl -H "Host: ${DOMAIN_NAME}" http://${IP_ADDRESS}
 
    Hello World: Spring Boot Sample v1
    ```

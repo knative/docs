@@ -110,3 +110,39 @@ containers:
     description: >
       Uses an in-memory timer to produce events as the specified interval. Uses AutoContainerSource
       for underlying infrastructure.
+  - name: AWS CodeCommit
+    url: https://github.com/triggermesh/knative-lambda-sources/tree/master/awscodecommit
+    status: Active Development
+    support: TriggerMesh
+    description: >
+      Registers for events of the specified types on the specified AWS CodeCommit repository. Brings those events into Knative.
+  - name: AWS Cognito
+    url: https://github.com/triggermesh/knative-lambda-sources/tree/master/awscognito
+    status: Active Development
+    support: TriggerMesh
+    description: >
+      Registers for AWS Cognito events. Brings those events into Knative.
+  - name: AWS DynamoDB
+    url: https://github.com/triggermesh/knative-lambda-sources/tree/master/awsdynamodb
+    status: Active Development
+    support: TriggerMesh
+    description: >
+      Registers for events of on the specified AWS DynamoDB table. Brings those events into Knative.
+  - name: AWS Kinesis
+    url: https://github.com/triggermesh/knative-lambda-sources/tree/master/awskinesis
+    status: Active Development
+    support: TriggerMesh
+    description: >
+      Registers for events on the specified AWS Kinesis stream. Brings those events into Knative.
+  - name: AWS SQS
+    url: https://github.com/triggermesh/knative-lambda-sources/tree/master/awssqs
+    status: Active Development
+    support: TriggerMesh
+    description: >
+      Registers for events of the specified AWS SQS queue. Brings those events into Knative.
+  - name: AWS SNS
+    url: https://github.com/triggermesh/knative-lambda-sources/tree/master/awssns
+    status: Active Development
+    support: TriggerMesh
+    description: >
+      Registers for events of the specified AWS SNS endpoint. Brings those events into Knative.

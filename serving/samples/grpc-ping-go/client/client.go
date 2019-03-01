@@ -33,10 +33,21 @@ func main() {
 		log.Fatalf("fail to dial: %v", err)
 	}
 	defer conn.Close()
+
 	client := pb.NewPingServiceClient(conn)
 
 	ping(client, "hello")
 	pingStream(client, "hello")
+}
+
+func ping(client pb.PingServiceClient, msg string) {
+	ctx, cancel := context.WithTimeout(context.Background(), 120*time.Second)
+	defer cancel()
+	rep, err := client.Ping(ctx, &pb.Request{Msg: msg})
+	if err != nil {
+		log.Fatalf("%v.Ping failed %v: ", client, err)
+	}
+	log.Printf("Ping got %v\n", rep.GetMsg())
 }
 
 func pingStream(client pb.PingServiceClient, msg string) {
@@ -73,14 +84,4 @@ func pingStream(client pb.PingServiceClient, msg string) {
 	stream.CloseSend()
 	<-waitc
 
-}
-
-func ping(client pb.PingServiceClient, msg string) {
-	ctx, cancel := context.WithTimeout(context.Background(), 120*time.Second)
-	defer cancel()
-	rep, err := client.Ping(ctx, &pb.Request{Msg: msg})
-	if err != nil {
-		log.Fatalf("%v.Ping failed %v: ", client, err)
-	}
-	log.Printf("Ping got %v\n", rep.GetMsg())
 }

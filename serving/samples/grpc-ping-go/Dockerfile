@@ -21,10 +21,12 @@ WORKDIR /go/src/github.com/knative/docs/
 ADD . /go/src/github.com/knative/docs/
 
 RUN CGO_ENABLED=0 go build -tags=grpcping ./serving/samples/grpc-ping-go/
+RUN CGO_ENABLED=0 go build -tags=grpcping ./serving/samples/grpc-ping-go/client
 
-FROM gcr.io/distroless/base
+FROM gcr.io/distroless/static
 
 EXPOSE 8080
-COPY --from=builder /go/src/github.com/knative/docs/grpc-ping-go /sample
+COPY --from=builder /go/src/github.com/knative/docs/grpc-ping-go /server
+COPY --from=builder /go/src/github.com/knative/docs/client /client
 
-ENTRYPOINT ["/sample"]
+ENTRYPOINT ["/server"]
