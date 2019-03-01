@@ -77,7 +77,7 @@ available, but these are the key steps:
 
 1. Create a new `Service Account` manifest which is used to link the build
    process to the secret. Save this file as `service-account.yaml`:
-   
+
    ```yaml
    apiVersion: v1
    kind: ServiceAccount
@@ -87,7 +87,8 @@ available, but these are the key steps:
      - name: basic-user-pass
    ```
 
-1. After you have created the manifest files, apply them to your cluster with `kubectl`:
+1. After you have created the manifest files, apply them to your cluster with
+   `kubectl`:
 
    ```shell
    $ kubectl apply --filename docker-secret.yaml

@@ -257,7 +257,8 @@ for details about installing the various supported observability plug-ins.
 [6.3]:
   https://github.com/knative/eventing-sources/blob/master/samples/cronjob-source/README.md
 [6.4]: https://cloud.google.com/pubsub/
-[7]: https://raw.githubusercontent.com/knative/serving/v0.4.0/third_party/config/build/clusterrole.yaml
+[7]:
+  https://raw.githubusercontent.com/knative/serving/v0.4.0/third_party/config/build/clusterrole.yaml
 
 ### Installing Knative
 
@@ -266,8 +267,9 @@ commands below.
 
 1. If you are upgrading from Knative 0.3.x: Update your domain and static IP
    address to be associated with the LoadBalancer `istio-ingressgateway` instead
-   of `knative-ingressgateway`.  Then run the following to clean up leftover
+   of `knative-ingressgateway`. Then run the following to clean up leftover
    resources:
+
    ```
    kubectl delete svc knative-ingressgateway -n istio-system
    kubectl delete deploy knative-ingressgateway -n istio-system
@@ -302,24 +304,26 @@ commands below.
      - `https://github.com/knative/eventing/releases/download/v0.4.0/release.yaml`
      - `https://github.com/knative/eventing-sources/releases/download/v0.4.0/release.yaml`
 
-    **Example install commands:**
+     **Example install commands:**
 
-     * To install the Knative Serving component with the set of observability plug-ins:
+     - To install the Knative Serving component with the set of observability
+       plug-ins:
 
        ```bash
        kubectl apply --filename https://github.com/knative/serving/releases/download/v0.4.0/serving.yaml \
        --filename https://github.com/knative/serving/releases/download/v0.4.0/monitoring.yaml
        ```
 
-    * To install all three Knative components and the set of Eventing sources without an observability plugin:
+   * To install all three Knative components and the set of Eventing sources
+     without an observability plugin:
 
-      ```bash
-      kubectl apply --filename https://github.com/knative/serving/releases/download/v0.4.0/serving.yaml \
-      --filename https://github.com/knative/build/releases/download/v0.4.0/build.yaml \
-      --filename https://github.com/knative/eventing/releases/download/v0.4.0/release.yaml \
-      --filename https://github.com/knative/eventing-sources/releases/download/v0.4.0/release.yaml \
-      --filename https://raw.githubusercontent.com/knative/serving/v0.4.0/third_party/config/build/clusterrole.yaml
-      ```
+     ```bash
+     kubectl apply --filename https://github.com/knative/serving/releases/download/v0.4.0/serving.yaml \
+     --filename https://github.com/knative/build/releases/download/v0.4.0/build.yaml \
+     --filename https://github.com/knative/eventing/releases/download/v0.4.0/release.yaml \
+     --filename https://github.com/knative/eventing-sources/releases/download/v0.4.0/release.yaml \
+     --filename https://raw.githubusercontent.com/knative/serving/v0.4.0/third_party/config/build/clusterrole.yaml
+     ```
 
 1. Depending on what you chose to install, view the status of your installation
    by running one or more of the following commands. It might take a few
