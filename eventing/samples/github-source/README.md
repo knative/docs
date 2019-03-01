@@ -45,7 +45,7 @@ spec:
 Enter the following command to create the service from `service.yaml`:
 
 ```shell
-kubectl --namespace default apply --filename eventing/samples/github-source/service.yaml
+kubectl --namespace default apply --filename service.yaml
 ```
 
 ### Create GitHub Tokens
@@ -90,7 +90,7 @@ head -c 8 /dev/urandom | base64
 Then, apply the githubsecret using `kubectl`:
 
 ```shell
-kubectl --namespace default apply --filename eventing/samples/github-source/githubsecret.yaml
+kubectl --namespace default apply --filename githubsecret.yaml
 ```
 
 ### Create Event Source for GitHub Events
@@ -126,7 +126,7 @@ spec:
 Then, apply that yaml using `kubectl`:
 
 ```shell
-kubectl --namespace default apply --filename eventing/samples/github-source/github-source.yaml
+kubectl --namespace default apply --filename github-source.yaml
 ```
 
 ### Verify
@@ -181,13 +181,13 @@ X-Request-Id: 8a2201af-5075-9447-b593-ec3a243aff52
 You can remove the Github webhook by deleting the Github source:
 
 ```shell
-kubectl --namespace default delete --filename eventing/samples/github-source/github-source.yaml
+kubectl --namespace default delete --filename github-source.yaml
 ```
 
 Similarly, you can remove the Service and Secret via:
 
 ```shell
-kubectl --namespace default delete --filename eventing/samples/github-source/service.yaml
-kubectl --namespace default delete --filename eventing/samples/github-source/githubsecret.yaml
+kubectl --namespace default delete --filename service.yaml
+kubectl --namespace default delete --filename githubsecret.yaml
 
 ```

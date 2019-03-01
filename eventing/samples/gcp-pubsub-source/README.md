@@ -22,10 +22,11 @@ source is most useful as a bridge from other GCP services, such as
    [Knative Eventing](https://github.com/knative/docs/tree/master/eventing). In
    addition, install the GCP PubSub event source from `release-gcppubsub.yaml`:
 
-   kubectl apply --filename kubectl apply --filename
-   https://github.com/knative/eventing-sources/releases/download/v0.3.0/release-gcppubsub.yaml
+   ```shell
+   kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.3.0/release-gcppubsub.yaml
+   ```
 
-1. Enable the 'Cloud Pub/Sub API' on your project:
+1. Enable the `Cloud Pub/Sub API` on your project:
 
    ```shell
    gcloud services enable pubsub.googleapis.com
@@ -42,7 +43,7 @@ source is most useful as a bridge from other GCP services, such as
       ```shell
       gcloud iam service-accounts create knative-source
       ```
-   1. Give that Service Account the 'Pub/Sub Editor' role on your GCP project:
+   1. Give that Service Account the `Pub/Sub Editor` role on your GCP project:
       ```shell
       gcloud projects add-iam-policy-binding $PROJECT_ID \
         --member=serviceAccount:knative-source@$PROJECT_ID.iam.gserviceaccount.com \

@@ -19,7 +19,7 @@ consumption by a function that has been implemented as a Knative Service.
    later.
 
 ```shell
-kubectl -n default apply -f eventing/samples/kubernetes-event-source/channel.yaml
+kubectl -n default apply -f channel.yaml
 ```
 
 ### Service Account
@@ -28,9 +28,10 @@ kubectl -n default apply -f eventing/samples/kubernetes-event-source/channel.yam
    `Receive Adapater` watches for Kubernetes events and forwards them to the
    Knative Eventing Framework. If you want to re-use an existing Service Account
    with the appropriate permissions, you need to modify the
+   `serviceaccount.yaml`.
 
 ```shell
-kubectl apply -f eventing/samples/kubernetes-event-source/serviceaccount.yaml
+kubectl apply -f serviceaccount.yaml
 ```
 
 ### Create Event Source for Kubernetes Events
@@ -41,7 +42,7 @@ kubectl apply -f eventing/samples/kubernetes-event-source/serviceaccount.yaml
    accordingly.
 
 ```shell
-kubectl apply -f eventing/samples/kubernetes-event-source/k8s-events.yaml
+kubectl apply -f k8s-events.yaml
 ```
 
 ### Subscriber
@@ -56,7 +57,7 @@ simple Knative Service that dumps incoming messages to its log and create a
 1. Deploy `subscription.yaml`.
 
 ```shell
-kubectl apply -f eventing/samples/kubernetes-event-source/subscription.yaml
+kubectl apply -f subscription.yaml
 ```
 
 ### Create Events

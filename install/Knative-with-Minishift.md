@@ -161,8 +161,8 @@ curl -s https://raw.githubusercontent.com/knative/docs/master/install/scripts/is
 1. Run the following to install Istio:
 
    ```shell
-   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.3.0/istio-crds.yaml && \
-   oc apply -f https://github.com/knative/serving/releases/download/v0.3.0/istio.yaml
+   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.4.0/istio-crds.yaml && \
+   oc apply -f https://github.com/knative/serving/releases/download/v0.4.0/istio.yaml
    ```
 
    Note: the resources (CRDs) defined in the `istio-crds.yaml`file are also
@@ -170,7 +170,7 @@ curl -s https://raw.githubusercontent.com/knative/docs/master/install/scripts/is
    definitions are created first. If you see an error when creating resources
    about an unknown type, run the second `kubectl apply` command again.
 
-2. Ensure the istio-sidecar-injector pods runs as provileged:
+2. Ensure the istio-sidecar-injector pods runs as privileged:
    ```shell
    oc get cm istio-sidecar-injector -n istio-system -oyaml | sed -e 's/securityContext:/securityContext:\\n      privileged: true/' | oc replace -f -
    ```
@@ -200,14 +200,26 @@ curl -s https://raw.githubusercontent.com/knative/docs/master/install/scripts/kn
 - Warning: ServiceAccount 'controller' not found cluster role "cluster-admin"
   added: "controller"
 
+1. If you are upgrading from Knative 0.3.x: Update your domain and static IP
+   address to be associated with the LoadBalancer `istio-ingressgateway` instead
+   of `knative-ingressgateway`.  Then run the following to clean up leftover
+   resources:
+   ```
+   oc delete svc knative-ingressgateway -n istio-system
+   oc delete deploy knative-ingressgateway -n istio-system
+   ```
+
 1. Install Knative serving:
 
    ```shell
-   oc apply -f https://github.com/knative/serving/releases/download/v0.3.0/serving.yaml \
-   oc apply -f https://github.com/knative/build/releases/download/v0.3.0/release.yaml
+   oc apply -f https://github.com/knative/serving/releases/download/v0.4.0/serving.yaml \
+   oc apply -f https://github.com/knative/build/releases/download/v0.4.0/build.yaml \
+   oc apply -f https://raw.githubusercontent.com/knative/serving/v0.4.0/third_party/config/build/clusterrole.yaml
    ```
+   > **Note**: For the v0.4.0 release and newer, the `clusterrole.yaml` file is
+   > required to enable the Build and Serving components to interact with each other.
 
-2. Monitor the Knative components until all of the components show a `STATUS` of
+1. Monitor the Knative components until all of the components show a `STATUS` of
    `Running` or `Completed`:
 
    ```shell
@@ -221,7 +233,7 @@ curl -s https://raw.githubusercontent.com/knative/docs/master/install/scripts/kn
    > **NOTE:** It will take a few minutes for all the components to be up and
    > running.
 
-3. Set route to access the OpenShift ingress CIDR, so that services can be
+1. Set route to access the OpenShift ingress CIDR, so that services can be
    accessed via LoadBalancerIP
    ```shell
    # Only for macOS
