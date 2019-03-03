@@ -35,7 +35,7 @@ builders.
 
 ### Atypical builders
 
-It it possible, although less typical to implement the builder convention by
+It is possible, although less typical to implement the builder convention by
 overriding `command:` and `args:` for example:
 
 ```yaml
