@@ -18,5 +18,8 @@ RUN dotnet publish -c Release -o out
 # This default value facilitates local development.
 ENV PORT 8080
 
+# Make sure the app binds to $PORT
+ENV ASPNETCORE_URLS http://*:${PORT}
+
 # Run the web service on container startup.
 CMD ["dotnet", "out/helloworld-csharp.dll"]
