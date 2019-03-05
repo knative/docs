@@ -1,5 +1,9 @@
 # Contributing to the Knative Documentation
 
+- [Before you begin](#before-you-begin)
+- [Contributing to the documentation](#contributing-to-the-documentation)
+- [Docs contributor roles](#docs-contributor-roles)
+
 **First off, thanks for taking the time to contribute!**
 
 The following are guidelines for contributing to the Knative documentation.
@@ -20,7 +24,9 @@ Knative documentation follows the
 [Google Developer Documentation Style Guide](https://developers.google.com/style/);
 use it as a reference for writing style questions.
 
-## Reporting documentation issues
+## Contributing to the documentation
+
+### Reporting documentation issues
 
 Knative uses Github issues to track documentation issues and requests. If you
 see a problem with the documentation, submit an issue using the following steps:
@@ -42,7 +48,6 @@ Note that code issues should be filed against the
 [individual Knative repositories](http://github.com/knative), while
 documentation issues should go in the `docs` repository.
 
-## Contributing to the documentation
 
 ### Working group
 
@@ -98,3 +103,101 @@ Code samples follow a similar strategy, where most code samples should be
 located in the `docs` repository. If there are code samples used for testing
 that are only expected to be used by contributors, those samples are put in the
 `samples` folder within the component repo.
+
+## Docs contributor roles
+
+Because contributing to the documentation requires a different skill set than
+contributing to the Knative code base, we've defined the roles of
+documentation contributors seperately from the roles of code contributors.
+
+If you're looking for code contributor roles, see [ROLES](./ROLES.md).
+
+### Member
+
+Established contributor to the Knative docs.
+
+Members are continuously active contributors in the community. They can have
+issues and PRs assigned to them, may participate in working group meetings, and
+pre-submit tests are automatically run for their PRs. Members are expected to
+remain active contributors to the Knative documentation.
+
+All members are encouraged to help with PR reviews, although each PR
+must be reviewed by an official [Approver](#approver). In their review,
+Members should be looking for correctness of the documentation, adherence to the style guide,
+good spelling and grammar (writing quality), intuitive organization, and strong documentation usability.
+Members should be proficient in at least one of these review areas.
+
+### Requirements
+
+- Has made multiple contributions to the project or community. Contributions may
+  include, but are not limited to:
+
+  - Authoring or reviewing PRs on GitHub in Knative/Docs or Knative/Website
+
+  - Filing or commenting on issues on GitHub
+
+  - Contributing to working group or community discussions
+
+- Subscribed to
+  [knative-dev@googlegroups.com](https://groups.google.com/forum/#!forum/knative-dev)
+
+- Actively contributing to 1 or more areas.
+
+- Sponsored by 1 approver.
+
+  - Done by adding GitHub user to Knative organization
+
+### Responsibilities and privileges
+
+- Responsive to issues and PRs assigned to them
+
+- Active owner of documents they have contributed (unless ownership is explicitly
+  transferred)
+  
+  - Addresses bugs or issues in their documentation in a timely manner
+  
+## Approver
+
+Docs approvers are able to both review and approve documentation contributions. While
+documentation review is focused on writing quality and correctness, approval is focused on
+holistic acceptance of a contribution including: long-term maintainability, adhering to style
+guide conventions, overall information architecture, and usability from an engineering standpoint.
+Docs approvers will enlist help from engineers for reviewing code-heavy contributions to the
+Docs repo.
+
+### Requirements
+
+- Reviewer of the Docs repo for at least 3 months or 50% of project lifetime,
+  whichever is shorter
+  
+  - Proficient in reviewing for all aspects of writing quality, including grammar and
+    spelling (writing quality), adherence to style guide convetions, organization,
+    and usability. Can coach newer writers to improve their contributions in all of these areas.
+  
+- Primary reviewer for at least 10 substantial PRs to the docs, showing substantial
+  ability to coach for writing development.
+
+- Reviewed or merged at least 30 PRs to the docs
+
+- Nominated by an area lead
+
+  - With no objections from other leads
+
+  - Done through PR to update an OWNERS file
+
+### Responsibilities and privileges
+
+- Responsible for documentation quality control via PR reviews
+
+  - Focus on long-term maintainability, adhering to style
+    guide conventions, overall information architecture, and usability from
+    an engineering standpoint.
+
+- Expected to be responsive to review requests as per
+  [community expectations](REVIEWING.md)
+
+- Mentor members and contributors to improve their writing
+
+- May approve documentation contributions for acceptance, but will ask for
+  engineering review for code-heavy contributions
+
