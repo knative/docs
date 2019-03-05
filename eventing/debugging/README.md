@@ -112,7 +112,10 @@ Verify that the `Pod` is `Ready`:
 kubectl -n knative-debug get pod -l app=fn -o jsonpath='{.items[*].status.conditions[?(@.type == "Ready")].status}'
 ```
 
-This should return `True`. If it doesn't, then try to debug the `Deployment` using the [Kubernetes Application Debugging](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-application-introspection/) guide.
+This should return `True`. If it doesn't, then try to debug the `Deployment`
+using the
+[Kubernetes Application Debugging](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-application-introspection/)
+guide.
 
 ##### `svc`
 
