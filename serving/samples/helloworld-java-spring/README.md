@@ -1,19 +1,14 @@
-<<<<<<< HEAD:docs/serving/samples/hello-world/helloworld-java/README.md
+# Hello World - Spring Boot Java sample
+
 A simple web app written in Java using Spring Boot 2.0 that you can use for
 testing. It reads in an env variable `TARGET` and prints "Hello \${TARGET}!". If
 TARGET is not specified, it will use "World" as the TARGET.
-=======
-# Hello World - Spring Boot Java sample
-
-A simple web app written in Java using Spark Java Framework that you can use for
-testing.  
->>>>>>> Added Hello World Java using Spark Java Framework:serving/samples/helloworld-java/README.md
 
 ## Prerequisites
 
 - A Kubernetes cluster with Knative installed. Follow the
-  [installation instructions](../../../../install/README.md) if you need to
-  create one.
+  [installation instructions](https://github.com/knative/docs/blob/master/install/README.md)
+  if you need to create one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
 - You have installed
@@ -25,17 +20,61 @@ While you can clone all of the code from this directory, hello world apps are
 generally more useful if you build them step-by-step. The following instructions
 recreate the source files from this folder.
 
-1. From the console, unzip the helloworld.zip  using the unzip command:
+1. From the console, create a new empty web project using the curl and unzip
+   commands:
 
    ```shell
+   curl https://start.spring.io/starter.zip \
+       -d dependencies=web \
+       -d name=helloworld \
+       -d artifactId=helloworld \
+       -o helloworld.zip
    unzip helloworld.zip
    ```
 
+   If you don't have curl installed, you can accomplish the same by visiting the
+   [Spring Initializr](https://start.spring.io/) page. Specify Artifact as
+   `helloworld` and add the `Web` dependency. Then click `Generate Project`,
+   download and unzip the sample archive.
+
+1. Update the `SpringBootApplication` class in
+   `src/main/java/com/example/helloworld/HelloworldApplication.java` by adding a
+   `@RestController` to handle the "/" mapping and also add a `@Value` field to
+   provide the TARGET environment variable:
+
+   ```java
+   package com.example.helloworld;
+
+   import org.springframework.beans.factory.annotation.Value;
+   import org.springframework.boot.SpringApplication;
+   import org.springframework.boot.autoconfigure.SpringBootApplication;
+   import org.springframework.web.bind.annotation.GetMapping;
+   import org.springframework.web.bind.annotation.RestController;
+
+   @SpringBootApplication
+   public class HelloworldApplication {
+
+       @Value("${TARGET:World}")
+       String target;
+
+       @RestController
+       class HelloworldController {
+           @GetMapping("/")
+           String hello() {
+               return "Hello " + target + "!";
+           }
+       }
+
+       public static void main(String[] args) {
+           SpringApplication.run(HelloworldApplication.class, args);
+       }
+   }
+   ```
 
 1. Run the application locally:
 
    ```shell
-   ./mvnw package && java -jar target/helloworld-0.0.1-SNAPSHOT-jar-with-dependencies.jar 
+   ./mvnw package && java -jar target/helloworld-0.0.1-SNAPSHOT.jar
    ```
 
    Go to `http://localhost:8080/` to see your `Hello World!` message.
@@ -43,12 +82,11 @@ recreate the source files from this folder.
 1. In your project directory, create a file named `Dockerfile` and copy the code
    block below into it. For detailed instructions on dockerizing a Spring Boot
    app, see
-   [Spark with Docker](http://sparkjava.com/tutorials/docker).
+   [Spring Boot with Docker](https://spring.io/guides/gs/spring-boot-docker/).
    For additional information on multi-stage docker builds for Java see
    [Creating Smaller Java Image using Docker Multi-stage Build](http://blog.arungupta.me/smaller-java-image-docker-multi-stage-build/).
 
    ```docker
-<<<<<<< HEAD:docs/serving/samples/hello-world/helloworld-java/README.md
    # Use the official maven/Java 8 image to create a build artifact.
    # https://hub.docker.com/_/maven
    FROM maven:3.5-jdk-8-alpine as builder
@@ -69,36 +107,12 @@ recreate the source files from this folder.
    # Copy the jar to the production image from the builder stage.
    COPY --from=builder /app/target/helloworld-*.jar /helloworld.jar
 
+   # Service must listen to $PORT environment variable.
+   # This default value facilitates local development.
+   ENV PORT 8080
+
    # Run the web service on container startup.
    CMD ["java","-Djava.security.egd=file:/dev/./urandom","-Dserver.port=${PORT}","-jar","/helloworld.jar"]
-=======
-    # Use the official maven/Java 8 image to create a build artifact.
-    # https://hub.docker.com/_/maven
-    FROM maven:3.5-jdk-8-alpine as builder
-    
-    # Copy local code to the container image.
-    WORKDIR /app
-    COPY pom.xml .
-    COPY src ./src
-    
-    # Build a release artifact.
-    RUN mvn package -DskipTests
-    
-    # Use the Official OpenJDK image for a lean production stage of our multi-stage build.
-    # https://hub.docker.com/_/openjdk
-    # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
-    FROM openjdk:8-jre-alpine
-    
-    # Copy the jar to the production image from the builder stage.
-    COPY --from=builder /app/target/helloworld-0.0.1-SNAPSHOT-jar-with-dependencies.jar /helloworld.jar
-    
-    # Service must listen to $PORT environment variable.
-    # This default value facilitates local development.
-    ENV PORT 8080
-    
-    # Run the web service on container startup.
-    CMD ["java","-Dserver.port=${PORT}","-jar","/helloworld.jar"] 
->>>>>>> Added Hello World Java using Spark Java Framework:serving/samples/helloworld-java/README.md
    ```
 
 1. Create a new file, `service.yaml` and copy the following service definition
@@ -118,6 +132,9 @@ recreate the source files from this folder.
            spec:
              container:
                image: docker.io/{username}/helloworld-java
+               env:
+                 - name: TARGET
+                   value: "Spring Boot Sample v1"
    ```
 
 ## Building and deploying the sample
@@ -192,19 +209,17 @@ folder) you're ready to build and deploy the sample app.
 
    # Or simply:
    export DOMAIN_NAME=$(kubectl get ksvc helloworld-java \
-     --output jsonpath={.status.domain})
+     --output jsonpath={.status.domain}
    ```
 
-1. Now you can make a request to your app to see the result. Presuming, the IP
-   address you got in the step above is in the `${IP_ADDRESS}` env variable:
+1. Now you can make a request to your app to see the result. Presuming,
+   the IP address you got in the step above is in the `${IP_ADDRESS}`
+   env variable:
 
    ```shell
    curl -H "Host: ${DOMAIN_NAME}" http://${IP_ADDRESS}
-<<<<<<< HEAD:docs/serving/samples/hello-world/helloworld-java/README.md
 
-   Hello Spring Boot Sample v1!
-=======
->>>>>>> Added Hello World Java using Spark Java Framework:serving/samples/helloworld-java/README.md
+   Hello World: Spring Boot Sample v1
    ```
 
 ## Removing the sample app deployment
