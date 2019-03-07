@@ -24,7 +24,7 @@ spec:
     revisionTemplate:
       spec:
         container:
-          image: ${REPO}/serving/samples/rest-api-go
+          image: ${REPO}/rest-api-go
           env:
             - name: RESOURCE
               value: share

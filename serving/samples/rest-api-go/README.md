@@ -66,29 +66,23 @@ registry specific instructions for both setup and authorizing the image push.
 
 ```shell
 docker build \
-  --tag "${REPO}/serving/samples/rest-api-go" \
+  --tag "${REPO}/rest-api-go" \
   --file serving/samples/rest-api-go/Dockerfile .
 ```
 
 5. Push your container to a container registry:
 
 ```shell
-docker push "${REPO}/serving/samples/rest-api-go"
+docker push "${REPO}/rest-api-go"
 ```
 
-6. Replace the image reference path with our published image path in the
-   configuration files (`serving/samples/rest-api-go/sample.yaml`:
-
-   - Manually replace:
-     `image: github.com/knative/docs/serving/samples/rest-api-go` with
-     `image: <YOUR_CONTAINER_REGISTRY>/serving/samples/rest-api-go`
-
-   Or
-
-   - Use run this command:
+6. Substitute the image reference path in the template with our published image
+   path. The command below substitutes using the ${REPO} variable into a new
+   file called `serving/samples/rest-api-go/sample.yaml`.
 
    ```shell
-   perl -pi -e "s@github.com/knative/docs@${REPO}@g" serving/samples/rest-api-go/sample.yaml
+   envsubst < serving/samples/rest-api-go/sample-template.yaml > \
+   serving/samples/rest-api-go/sample.yaml
    ```
 
 ## Deploy the Service
