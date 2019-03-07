@@ -87,7 +87,7 @@ A Service Account provides an identity for processes that run in a Pod. This Ser
 1. Apply the service account to your cluster:
 
     ```
-    kubectl apply -f service-account.yaml
+    kubectl apply --filename service-account.yaml
     ```
 
 ## Deploy to Knative
@@ -96,7 +96,7 @@ To build our application from the source on GitHub, and push the resulting image
 1. Install the Kaniko build template
 
     ```
-    kubectl apply -f https://raw.githubusercontent.com/knative/build-templates/master/kaniko/kaniko.yaml
+    kubectl apply --filename https://raw.githubusercontent.com/knative/build-templates/master/kaniko/kaniko.yaml
     ```
 
 1. You need to create a service manifest which defines the service to deploy, including where the source code is and which build-template to use. Create a file named `service.yaml` and copy the following definition. Make sure to replace {NAMESPACE} with your own namespace you created earlier:
@@ -139,7 +139,7 @@ To build our application from the source on GitHub, and push the resulting image
 1. Apply the configuration using `kubectl`:
     
     ```
-    kubectl apply -f service.yaml
+    kubectl apply --filename service.yaml
     ```
 
     Applying this service definition will kick off a series of events:

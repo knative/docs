@@ -19,7 +19,7 @@ consumption by a function that has been implemented as a Knative Service.
    later.
 
 ```shell
-kubectl -n default apply -f channel.yaml
+kubectl --namespace default apply --filename channel.yaml
 ```
 
 ### Service Account
@@ -31,7 +31,7 @@ kubectl -n default apply -f channel.yaml
    `serviceaccount.yaml`.
 
 ```shell
-kubectl apply -f serviceaccount.yaml
+kubectl apply --filename serviceaccount.yaml
 ```
 
 ### Create Event Source for Kubernetes Events
@@ -42,7 +42,7 @@ kubectl apply -f serviceaccount.yaml
    accordingly.
 
 ```shell
-kubectl apply -f k8s-events.yaml
+kubectl apply --filename k8s-events.yaml
 ```
 
 ### Subscriber
@@ -57,7 +57,7 @@ simple Knative Service that dumps incoming messages to its log and create a
 1. Deploy `subscription.yaml`.
 
 ```shell
-kubectl apply -f subscription.yaml
+kubectl apply --filename subscription.yaml
 ```
 
 ### Create Events
