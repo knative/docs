@@ -68,7 +68,8 @@ change will result in a new Revision.
 For comparison, you can diff the `release_sample.yaml` with the `updated_sample.yaml`.
 
 ```shell
-diff release_sample.yaml updated_sample.yaml
+diff serving/samples/traffic-splitting/release_sample.yaml \
+serving/samples/traffic-splitting/updated_sample.yaml
 ```
 
 1.  Execute the command below to update the environment variable in the Service
