@@ -134,7 +134,7 @@ container for the application.
                arguments:
                  - name: IMAGE
                    value: docker.io/{DOCKER_USERNAME}/app-from-source:latest
-              timeout: 10m
+             timeout: 10m
          revisionTemplate:
            spec:
              container:
