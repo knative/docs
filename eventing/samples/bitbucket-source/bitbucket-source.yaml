@@ -5,6 +5,7 @@ metadata:
 spec:
   eventTypes:
     - repo:push
+    - repo:commit_status_created
   ownerAndRepository: <YOUR USER>/<YOUR REPO>
   consumerKey:
     secretKeyRef:

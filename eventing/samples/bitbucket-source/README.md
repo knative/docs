@@ -59,13 +59,19 @@ requires `Webhooks Read and Write`, `Repositories Read`, and `Issues Read` to le
 events from your public repositories and to create webhooks for those
 repositories.
 
-Here's an example for an OAuth Consumer named "knative-test" with the
+Here's an example of how to create an OAuth Consumer named "knative-test" with the
 recommended scopes:
 
-![BitBucket UI](oauth_consumer.png "BitBucket OAuth Consumer Screenshot")
+![BitBucket OAuth Consumer](oauth_credentials.png "BitBucket OAuth Consumer Screenshot")
+
+Note that in the Callback URL you should add your cluster domain, e.g., http://default.company.com.
+Upon successful creation, you will be able to see the generated key and secret for that OAuth Consumer. 
+
+![BitBucket OAuth Credentials](oauth_credentials.png "BitBucket OAuth Credentials Screenshot")
+
 
 Update `bitbucket-secret.yaml` with those values. If the generated OAuth
-consumer key is `'oauth_consumer_key_value'` and the generated secret is `'oauth_consumer_secret_value'`, 
+Consumer key is `'oauth_consumer_key_value'` and the generated secret is `'oauth_consumer_secret_value'`, 
 you'd modify `bitbucket-secret.yaml` as follows:
 
 ```yaml
@@ -100,6 +106,7 @@ metadata:
 spec:
   eventTypes:
     - repo:push
+    - repo:commit_status_created
   ownerAndRepository: <YOUR USER>/<YOUR REPO>
   consumerKey:
     secretKeyRef:
@@ -125,9 +132,11 @@ kubectl --namespace default apply --filename bitbucket-source.yaml
 
 Verify that the BitBucket webhook was created by looking at the list of
 webhooks under the Settings tab in your BitBucket repository. A hook
-should be listed that points to your Knative cluster, as shown below.
+should be listed that points to your Knative cluster. If you edit it, you can see 
+ its details. Note that this particular webhook is listening for `Push` and `Commit comment created` 
+ events, as defined in the `bitbucket-source.yaml`.
 
-![BitBucket Webhook](webhook_created.png "BitBucket Webhook Screenshot")
+![BitBucket Webhook](webhook.png "BitBucket Webhook")
 
 ### Create Events
 
