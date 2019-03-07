@@ -30,14 +30,19 @@ Using the Google Cloud SDK:
 1.  Enter the following command, replacing IP_NAME and REGION with appropriate
     values. For example, select the `us-west1` region if you deployed your
     cluster to the `us-west1-c` zone:
+    
     ```shell
     gcloud beta compute addresses create IP_NAME --region=REGION
     ```
+    
     For example:
+    
     ```shell
     gcloud beta compute addresses create knative-ip --region=us-west1
     ```
+    
 1.  Enter the following command to get the newly created static IP address:
+
     ```shell
     gcloud beta compute addresses list
     ```
