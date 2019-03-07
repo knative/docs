@@ -180,6 +180,34 @@ The GitHubSource fires a new event for selected
 
 See the [GitHub Source](samples/github-source) example.
 
+### BitBucketSource
+
+The BitBucketSource fires a new event for selected
+[BitBucket event types](https://confluence.atlassian.com/bitbucket/event-payloads-740262817.html#EventPayloads-Repositoryevents).
+
+**Spec fields**:
+
+- `ownerAndRepository`: `string` The BitBucket owner/team and repository to receive
+  events from. The repository may be left off to receive events from an entire
+  team.
+- `eventTypes`: `[]string` A list of
+  [event types](https://confluence.atlassian.com/bitbucket/event-payloads-740262817.html#EventPayloads-Repositoryevents) in
+  "event key" format.
+- `consumerKey.secretKeyRef`:
+  [SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#secretkeyselector-v1-core)
+  containing a BitBucket consumer key for configuring a BitBucket OAuth client. Must be set.
+- `consumerSecret.secretKeyRef`:
+  [SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#secretkeyselector-v1-core)
+  containing a BitBucket consumer secret for configuring a BitBucket OAuth client. Must be set.
+- `serviceAccountName`: `string` The name of the ServiceAccount to run the
+  container as.
+- `sink`:
+  [ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#objectreference-v1-core)
+  A reference to the object that should receive events.
+
+See the [BitBucket Source](samples/bitbucket-source) example.
+
+
 ### GcpPubSubSource
 
 The GcpPubSubSource fires a new event each time a message is published on a

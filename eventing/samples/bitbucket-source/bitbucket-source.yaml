@@ -1,0 +1,20 @@
+apiVersion: sources.eventing.knative.dev/v1alpha1
+kind: BitBucketSource
+metadata:
+  name: bitbucket-source-sample
+spec:
+  eventTypes:
+    - repo:push
+  ownerAndRepository: <YOUR USER>/<YOUR REPO>
+  consumerKey:
+    secretKeyRef:
+      name: bitbucket-secret
+      key: consumerKey
+  consumerSecret:
+    secretKeyRef:
+      name: bitbucket-secret
+      key: consumerSecret
+  sink:
+    apiVersion: serving.knative.dev/v1alpha1
+    kind: Service
+    name: bitbucket-message-dumper

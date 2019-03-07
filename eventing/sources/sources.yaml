@@ -59,6 +59,13 @@ sources:
     description: >
       Registers for events of the specified types on the specified GitLab repository. Brings those
       events into Knative.
+  - name: BitBucket
+    url: https://github.com/knative/eventing-sources/blob/master/pkg/apis/sources/v1alpha1/bitbucketsource_types.go
+    status: Proof of Concept
+    support: None
+    description: >
+      Registers for events of the specified types on the specified BitBucket organization/repository.
+      Brings those events into Knative.
   - name: Kubernetes
     url: https://github.com/knative/eventing-sources/blob/master/pkg/apis/sources/v1alpha1/kuberneteseventsource_types.go
     status: Active Development
