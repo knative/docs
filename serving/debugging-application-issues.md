@@ -61,7 +61,7 @@ Otherwise, run the following command to look at the ClusterIngress created for
 your Route
 
 ```
-kubectl get clusteringress <CLUSTERINGRESS_NAME> -o yaml
+kubectl get clusteringress <CLUSTERINGRESS_NAME> --output yaml
 ```
 
 particularly, look at the `status:` section. If the ClusterIngress is working
@@ -72,7 +72,7 @@ Now, if ClusterIngress shows status Ready, there must be a corresponding
 VirtualService. Run the following command:
 
 ```shell
-kubectl get virtualservice <CLUSTERINGRESS_NAME> -n knative-serving -o yaml
+kubectl get virtualservice <CLUSTERINGRESS_NAME> -n knative-serving --output yaml
 ```
 
 the network configuration in VirtualService must match that of ClusterIngress

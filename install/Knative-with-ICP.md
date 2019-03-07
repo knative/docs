@@ -67,7 +67,7 @@ Configure the namespaces `knative-serving` into pod security policy
    previous. Here we use `ibm-privileged-psp`. Run the following command:
 
    ```shell
-   cat <<EOF | kubectl apply -f -
+   cat <<EOF | kubectl apply --filename -
    apiVersion: rbac.authorization.k8s.io/v1
    kind: ClusterRole
    metadata:
@@ -95,7 +95,7 @@ Configure the namespaces `knative-serving` into pod security policy
    the following command:
 
    ```shell
-   cat <<EOF | kubectl apply -f -
+   cat <<EOF | kubectl apply --filename -
    apiVersion: rbac.authorization.k8s.io/v1
    kind: ClusterRoleBinding
    metadata:
