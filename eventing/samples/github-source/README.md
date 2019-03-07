@@ -102,7 +102,7 @@ by your GitHub user.
 
 If using GitHub enterprise you will need to add an additional githubAPIURL
 field to the spec specifying your GitHub enterprise API endpoint, see 
-[here](https://github.com/knative/docs/tree/master/eventing#githubsource)
+[here](../../README.md#githubsource)
 
 ```yaml
 apiVersion: sources.eventing.knative.dev/v1alpha1
