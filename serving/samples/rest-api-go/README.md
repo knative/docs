@@ -14,6 +14,9 @@ then outputs the stock price.
 1. [Outbound network access](https://github.com/knative/docs/blob/master/serving/outbound-network-access.md)
    enabled for this Service to make external API requests.
 1. The code checked out locally.
+1. `envsubst` installed locally. This is installed by the `gettext` package. If
+   not installed it can be installed by a Linux package manager, or by
+   [Homebrew](https://brew.sh/) on OS X.
 
 ```shell
 go get -d github.com/knative/docs/serving/samples/rest-api-go
