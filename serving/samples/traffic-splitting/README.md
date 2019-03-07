@@ -46,14 +46,14 @@ command below will update the Service to release mode with the queried Revision 
 ```shell
 CURRENT=${REVISIONS[0]} \
 envsubst < serving/samples/traffic-splitting/release_sample.yaml \
-| kubectl apply -f -
+| kubectl apply --filename -
 ```
 
 3. The `spec` of the Service should now show `release` with the Revision name
 retrieved above.
 
 ```shell
-kubectl get ksvc stock-service-example -oyaml
+kubectl get ksvc stock-service-example --output yaml
 ```
 
 ## Updating the Service
@@ -77,7 +77,7 @@ diff release_sample.yaml updated_sample.yaml
 ```shell
 CURRENT=${REVISIONS[0]} \
 envsubst < serving/samples/traffic-splitting/updated_sample.yaml \
-| kubectl apply -f -
+| kubectl apply --filename -
 ```
 
 2. Since we are using a `release` service, traffic will _not_ shift to the new
@@ -117,7 +117,7 @@ second Revision.
 1. Get the latest list of revisions by executing the command below:
 
 ```shell
-REVISIONS=($(kubectl get revision -l "serving.knative.dev/service=stock-service-example" -o \
+REVISIONS=($(kubectl get revision -l "serving.knative.dev/service=stock-service-example" --output \
 jsonpath="{.items[*].metadata.name}"))
 echo ${REVISIONS[*]}
 ```
@@ -131,7 +131,7 @@ echo ${REVISIONS[*]}
 ```shell
 CURRENT=${REVISIONS[0]} CANDIDATE=${REVISIONS[1]} \
 envsubst < serving/samples/traffic-splitting/split_sample.yaml \
-| kubectl apply -f -
+| kubectl apply --filename -
 ```
 
 3. Verify the deployment by checking the service status:

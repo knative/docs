@@ -112,42 +112,42 @@ You can inspect the created resources with the following `kubectl` commands:
 - View the created Service resource:
 
 ```shell
-kubectl get ksvc stock-service-example -o yaml
+kubectl get ksvc stock-service-example --output yaml
 ```
 
 - View the created Route resource:
 
 ```shell
 kubectl get route -l \
-"serving.knative.dev/service=stock-service-example" -o yaml
+"serving.knative.dev/service=stock-service-example" --output yaml
 ```
 
 - View the Kubernetes Service created by the Route
 
 ```shell
 kubectl get service -l \
-"serving.knative.dev/service=stock-service-example" -o yaml
+"serving.knative.dev/service=stock-service-example" --output yaml
 ```
 
 - View the created Configuration resource:
 
 ```shell
 kubectl get configuration -l \
-"serving.knative.dev/service=stock-service-example" -o yaml
+"serving.knative.dev/service=stock-service-example" --output yaml
 ```
 
 - View the Revision that was created by our Configuration:
 
 ```shell
 kubectl get revision -l \
-"serving.knative.dev/service=stock-service-example" -o yaml
+"serving.knative.dev/service=stock-service-example" --output yaml
 ```
 
 - View the Deployment created by our Revision
 
 ```shell
 kubectl get deployment -l \
-"serving.knative.dev/service=stock-service-example" -o yaml
+"serving.knative.dev/service=stock-service-example" --output yaml
 ```
 
 ## Access the Service
