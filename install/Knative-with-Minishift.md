@@ -20,7 +20,14 @@ You can find [guides for other platforms here](README.md).
 minishift version
 ```
 
-## Configure and start minishift
+## Run automated set-up script
+
+Once you have `minishift` present on your machine and in your `PATH`,
+you can [run a script](scripts/knative-with-minishift.sh) that automates the steps on this page.
+
+## Manually configure and start minishift
+
+Here are the manual steps which the above script automates for you in case you prefer doing this yourself:
 
 The following details the bare minimum configuration required to setup minishift
 for running Knative:
