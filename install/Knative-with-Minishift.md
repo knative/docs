@@ -23,7 +23,16 @@ minishift version
 ## Automatic Set Up
 
 Once you have `minishift` present on your machine and in your `PATH`,
-you can [run a script](scripts/knative-with-minishift.sh) that automates the steps on this page.
+you can either follow the manual set up steps below,  or you can run the convenient
+scripts from [the openshift-cloud-functions/knative-operators project](https://github.com/openshift-cloud-functions/knative-operators), 
+which do something similiar, like this:
+
+    git clone https://github.com/openshift-cloud-functions/knative-operators
+    cd knative-operators
+    ./etc/scripts/install-on-minishift.sh 
+
+The `myproject` this created is now ready for Knative!  (If you use `oc new-project yourproject`
+to create additional projects, make sure that you apply the x2 `oc adm policy ...` commands from below.)
 
 ## Manually Set Up
 
