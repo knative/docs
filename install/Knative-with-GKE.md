@@ -171,8 +171,9 @@ see [Performing a Custom Knative Installation](Knative-custom-install.md).
 
 1. If you are upgrading from Knative 0.3.x: Update your domain and static IP
    address to be associated with the LoadBalancer `istio-ingressgateway` instead
-   of `knative-ingressgateway`.  Then run the following to clean up leftover
+   of `knative-ingressgateway`. Then run the following to clean up leftover
    resources:
+
    ```
    kubectl delete svc knative-ingressgateway -n istio-system
    kubectl delete deploy knative-ingressgateway -n istio-system
@@ -189,7 +190,8 @@ see [Performing a Custom Knative Installation](Knative-custom-install.md).
    --filename https://raw.githubusercontent.com/knative/serving/v0.4.0/third_party/config/build/clusterrole.yaml
    ```
    > **Note**: For the v0.4.0 release and newer, the `clusterrole.yaml` file is
-   > required to enable the Build and Serving components to interact with each other.
+   > required to enable the Build and Serving components to interact with each
+   > other.
 1. Monitor the Knative components until all of the components show a `STATUS` of
    `Running`:
    ```bash

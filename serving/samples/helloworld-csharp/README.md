@@ -19,7 +19,8 @@ While you can clone all of the code from this directory, hello world apps are
 generally more useful if you build them step-by-step. The following instructions
 recreate the source files from this folder.
 
-1. First, make sure you have [.NET Core SDK 2.2](https://www.microsoft.com/net/core) installed:
+1. First, make sure you have
+   [.NET Core SDK 2.2](https://www.microsoft.com/net/core) installed:
 
    ```shell
    dotnet --version
