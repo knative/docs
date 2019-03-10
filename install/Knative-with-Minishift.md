@@ -20,12 +20,14 @@ You can find [guides for other platforms here](README.md).
 minishift version
 ```
 
-## Run automated set-up script
+## Automatic Set Up
 
 Once you have `minishift` present on your machine and in your `PATH`,
 you can [run a script](scripts/knative-with-minishift.sh) that automates the steps on this page.
 
-## Manually configure and start minishift
+## Manually Set Up
+
+### Manually configure and start minishift
 
 Here are the manual steps which the above script automates for you in case you prefer doing this yourself:
 
@@ -74,7 +76,7 @@ minishift start
   and stop minishift to make sure that you are on right `knative` minishift
   profile that was configured above.
 
-## Configuring `oc` (openshift cli)
+### Configuring `oc` (openshift cli)
 
 Running the following command make sure that you have right version of `oc` and
 have configured the DOCKER daemon to be connected to minishift docker.
@@ -86,9 +88,9 @@ minishift docker-env
 minishift oc-env
 ```
 
-## Preparing Knative Deployment
+### Preparing Knative Deployment
 
-### Enable Admission Controller Webhook
+#### Enable Admission Controller Webhook
 
 To be able to deploy and run serverless Knative applications, its required that
 you must enable the
@@ -127,7 +129,7 @@ minishift openshift config set --target=kube --patch '{
 until oc login -u admin -p admin; do sleep 5; done;
 ```
 
-### Configuring a OpenShift project
+#### Configuring a OpenShift project
 
 1. Set up the project **myproject** for use with Knative applications.
 
@@ -153,7 +155,7 @@ until oc login -u admin -p admin; do sleep 5; done;
 > applications in `default` project, it's safer not to touch it to avoid any
 > instabilities in OpenShift.
 
-### Installing Istio
+#### Installing Istio
 
 Knative depends on Istio. The
 [istio-openshift-policies.sh](scripts/istio-openshift-policies.sh) does run the
@@ -187,7 +189,7 @@ curl -s https://raw.githubusercontent.com/knative/docs/master/install/scripts/is
    > **NOTE:** It will take a few minutes for all the components to be up and
    > running.
 
-## Install Knative Serving
+### Install Knative Serving
 
 The following section details on deploying
 [Knative Serving](https://github.com/knative/serving) to OpenShift.
