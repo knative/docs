@@ -81,6 +81,7 @@ in the Knative Serving repository.
 - [Assigning a static IP address for Knative on Google Kubernetes Engine](./gke-assigning-static-ip-address.md)
 
 ## Private Container Registry
+
 - [Deploying to Knative using a Private Container Registry](./deploying-with-private-registry.md)
 
 ## Known Issues
