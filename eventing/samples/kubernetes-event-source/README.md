@@ -37,7 +37,7 @@ kubectl apply --filename serviceaccount.yaml
 ### Create Event Source for Kubernetes Events
 
 1. In order to receive events, you have to create a concrete Event Source for a
-   specific namespace. If you are wanting to consume events from a differenet
+   specific namespace. If you are wanting to consume events from a different
    namespace or using a different `Service Account`, you need to modify the yaml
    accordingly.
 
