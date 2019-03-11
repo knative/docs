@@ -184,9 +184,9 @@ to the IBM Container Registry, we will use the Kaniko build template.
      ibm-cr-secret.
    - Starts the service, and your app will be live.
 
-1) You can run `kubectl get pods --watch` to see the pods initializing.
+1. You can run `kubectl get pods --watch` to see the pods initializing.
 
-1) Once all the pods are initialized, you can see that your container image was
+1. Once all the pods are initialized, you can see that your container image was
    built and pushed to the IBM Container Registry:
 
    ```
