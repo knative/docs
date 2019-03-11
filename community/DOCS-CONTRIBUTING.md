@@ -167,7 +167,7 @@ as a member of the Knative org if they are supportive of you becoming a member.
 
 Once your sponsor notifies you that you've been added to the Knative org,
 open a PR to add yourself as a docs-reviewer in the
-[OWNERS_ALIASES](../OWNERS_ALIASES.md) file.
+[OWNERS_ALIASES](../OWNERS_ALIASES) file.
   
 ## Approver
 
@@ -225,4 +225,4 @@ Once you feel you meet the criteria, you can ask one of the current
 approvers to nominate you to become an approver. If all existing
 approvers agree that you meet the criteria, and no one objects,
 open a PR to add yourself as a docs-approver in the
-[OWNERS_ALIASES](../OWNERS_ALIASES.md) file.
+[OWNERS_ALIASES](../OWNERS_ALIASES) file.
