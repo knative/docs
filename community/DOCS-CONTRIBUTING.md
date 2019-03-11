@@ -156,6 +156,17 @@ Members should be proficient in at least one of these review areas.
   
   - Addresses bugs or issues in their documentation in a timely manner
   
+### Becoming a member
+
+First, reach out to an approver and ask them to sponsor you so that you can become a member.
+The easiest way to do this is using Slack.
+
+Your sponsor will reach out to the Knative Steering committee to ask that you be added
+as a member of the Knative org if they are supportive of you becoming a member. 
+
+Once your sponsor has notified you that you've been added to the Knative org,
+open a PR to add yourself as a reviewer in the [OWNERS_ALIASES](../OWNERS_ALIASES.md) file.
+  
 ## Approver
 
 Docs approvers are able to both review and approve documentation contributions. While
@@ -201,3 +212,14 @@ Docs repo.
 - May approve documentation contributions for acceptance, but will ask for
   engineering review for code-heavy contributions
 
+### Becoming an approver
+
+If you want to become an approver, make your goal clear to the current
+Knative Docs approvers, either by contacting them in Slack or announcing
+your intention to become an approver at a meeting of the Documentation
+Working Group.
+
+Once you feel you meet the criteria, you can ask one of the current
+approvers to nominate you to become an approver. If all existing
+approvers agree that you meet the criteria, and no one objects,
+open a PR to be added as an approver in the [OWNERS_ALIASES.md](../OWNERS_ALIASES.md) file.
