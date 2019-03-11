@@ -1,4 +1,4 @@
-# Knative Install on OpenShift
+# Knative Install on OpenShift (via `oc cluster up`)
 
 This guide walks you through the installation of the latest version of
 [Knative Serving](https://github.com/knative/serving) on an

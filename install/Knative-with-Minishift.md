@@ -1,8 +1,8 @@
-# Knative Install on OpenShift
+# Knative Install on Minishift
 
 This guide walks you through the installation of the latest version of
 [Knative Serving](https://github.com/knative/serving) on an
-[OpenShift](https://github.com/openshift/origin) using pre-built images and
+[OpenShift](https://github.com/openshift/origin) Minishift server using pre-built images and
 demonstrates creating and deploying an image of a sample "hello world" app onto
 the newly created Knative cluster.
 
