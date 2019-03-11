@@ -123,9 +123,10 @@ remain active contributors to the Knative documentation.
 
 All members are encouraged to help with PR reviews, although each PR
 must be reviewed by an official [Approver](#approver). In their review,
-Members should be looking for correctness of the documentation, adherence to the style guide,
-good spelling and grammar (writing quality), intuitive organization, and strong documentation usability.
-Members should be proficient in at least one of these review areas.
+Members should be looking for technical correctness of the documentation,
+adherence to the style guide, good spelling and grammar (writing quality),
+intuitive organization, and strong documentation usability. Members should be
+proficient in at least one of these review areas.
 
 ### Requirements
 
@@ -164,17 +165,18 @@ The easiest way to do this is using Slack.
 Your sponsor will reach out to the Knative Steering committee to ask that you be added
 as a member of the Knative org if they are supportive of you becoming a member. 
 
-Once your sponsor has notified you that you've been added to the Knative org,
-open a PR to add yourself as a reviewer in the [OWNERS_ALIASES](../OWNERS_ALIASES.md) file.
+Once your sponsor notifies you that you've been added to the Knative org,
+open a PR to add yourself as a docs-reviewer in the
+[OWNERS_ALIASES](../OWNERS_ALIASES.md) file.
   
 ## Approver
 
-Docs approvers are able to both review and approve documentation contributions. While
-documentation review is focused on writing quality and correctness, approval is focused on
-holistic acceptance of a contribution including: long-term maintainability, adhering to style
-guide conventions, overall information architecture, and usability from an engineering standpoint.
-Docs approvers will enlist help from engineers for reviewing code-heavy contributions to the
-Docs repo.
+Docs approvers are able to both review and approve documentation contributions.
+While documentation review is focused on writing quality and correctness,
+approval is focused on holistic acceptance of a contribution including:
+long-term maintainability, adhering to style guide conventions, overall information
+architecture, and usability from an engineering standpoint. Docs approvers will
+enlist help from engineers for reviewing code-heavy contributions to the Docs repo.
 
 ### Requirements
 
@@ -222,4 +224,5 @@ Working Group.
 Once you feel you meet the criteria, you can ask one of the current
 approvers to nominate you to become an approver. If all existing
 approvers agree that you meet the criteria, and no one objects,
-open a PR to be added as an approver in the [OWNERS_ALIASES.md](../OWNERS_ALIASES.md) file.
+open a PR to add yourself as a docs-approver in the
+[OWNERS_ALIASES](../OWNERS_ALIASES.md) file.
