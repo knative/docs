@@ -174,7 +174,7 @@ To configure and setup monitoring:
 
     ```shell
       kubectl apply --recursive --filename config/monitoring/100-namespace.yaml \
-          --filename third_party/config/monitoring/logging/stackdriver
+          --filename config/monitoring/logging/stackdriver
     ```
 
 1.  Ensure that the `fluentd-ds-*` pods all report a `Running` status:
