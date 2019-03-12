@@ -14,7 +14,7 @@ You can find [guides for other platforms here](README.md).
 
 ## Minishift setup
 
-- Setup minishift based instructions from
+- Set up minishift based instructions from
   https://docs.okd.io/latest/minishift/getting-started/index.html
 
 - Ensure `minishift` is setup correctly by running the command:
