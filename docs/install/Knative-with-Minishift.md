@@ -1,5 +1,5 @@
 ---
-title: "Install on OpenShift"
+title: "Install on MiniShift"
 #linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
 weight: 10
 ---
@@ -14,7 +14,7 @@ You can find [guides for other platforms here](README.md).
 
 ## Minishift setup
 
-- Setup minishift based instructions from
+- Set up minishift based instructions from
   https://docs.okd.io/latest/minishift/getting-started/index.html
 
 - Ensure `minishift` is setup correctly by running the command:
