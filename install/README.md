@@ -36,7 +36,7 @@ Knative Eventing component_ is not supported by Gloo at this time.
 
 ## Installing Knative with Istio
 
-Istio is a popular service mesh that includes a Knative-compatiblle ingress.
+Istio is a popular service mesh that includes a Knative-compatible ingress.
 Choose this option if you wish to use Istio service mesh features. You will also
 need to choose this installation option if you wish to use the Knative Eventing
 component, which currently depends on Istio.
