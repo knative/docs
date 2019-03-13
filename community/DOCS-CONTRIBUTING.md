@@ -162,8 +162,8 @@ proficient in at least one of these review areas.
 First, reach out to an approver and ask them to sponsor you so that you can become a member.
 The easiest way to do this is using Slack.
 
-Your sponsor will reach out to the Knative Steering committee to ask that you be added
-as a member of the Knative org if they are supportive of you becoming a member. 
+If they are supportive of your membership, your sponsor will reach out to the Knative Steering
+committee to ask that you be added as a member of the Knative org. 
 
 Once your sponsor notifies you that you've been added to the Knative org,
 open a PR to add yourself as a docs-reviewer in the
