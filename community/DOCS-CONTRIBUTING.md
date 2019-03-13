@@ -117,20 +117,20 @@ If you're looking for code contributor roles, see [ROLES](./ROLES.md).
 Established contributor to the Knative docs.
 
 Members are continuously active contributors in the community. They can have
-issues and PRs assigned to them, may participate in working group meetings, and
+issues and PRs assigned to them, might participate in working group meetings, and
 pre-submit tests are automatically run for their PRs. Members are expected to
 remain active contributors to the Knative documentation.
 
 All members are encouraged to help with PR reviews, although each PR
 must be reviewed by an official [Approver](#approver). In their review,
-Members should be looking for technical correctness of the documentation,
-adherence to the style guide, good spelling and grammar (writing quality),
+members should be looking for technical correctness of the documentation,
+adherence to the [style guide](https://developers.google.com/style/), good spelling and grammar (writing quality),
 intuitive organization, and strong documentation usability. Members should be
 proficient in at least one of these review areas.
 
 ### Requirements
 
-- Has made multiple contributions to the project or community. Contributions may
+- Has made multiple contributions to the project or community. Contributions might
   include, but are not limited to:
 
   - Authoring or reviewing PRs on GitHub in Knative/Docs or Knative/Website
@@ -183,8 +183,8 @@ enlist help from engineers for reviewing code-heavy contributions to the Docs re
 - Reviewer of the Docs repo for at least 3 months or 50% of project lifetime,
   whichever is shorter
   
-  - Proficient in reviewing for all aspects of writing quality, including grammar and
-    spelling (writing quality), adherence to style guide convetions, organization,
+  - Proficient in reviewing all aspects of writing quality, including grammar and
+    spelling (writing quality), adherence to style guide conventions, organization,
     and usability. Can coach newer writers to improve their contributions in all of these areas.
   
 - Primary reviewer for at least 10 substantial PRs to the docs, showing substantial
@@ -211,7 +211,7 @@ enlist help from engineers for reviewing code-heavy contributions to the Docs re
 
 - Mentor members and contributors to improve their writing
 
-- May approve documentation contributions for acceptance, but will ask for
+- Might approve documentation contributions for acceptance, but will ask for
   engineering review for code-heavy contributions
 
 ### Becoming an approver
