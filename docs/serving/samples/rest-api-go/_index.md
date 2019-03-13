@@ -2,6 +2,7 @@
 title: "Creating a RESTful Service - Go"
 linkTitle: "RESTful service - Go"
 weight: 1
+type: "docs"
 ---
 
-{{% readfile file="docs/serving/samples/rest-api-go/README.md" markdown="true" %}}
+{{% readfile file="README.md" relative="true" markdown="true" %}}

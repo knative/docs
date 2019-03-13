@@ -2,6 +2,7 @@
 title: "Buildpack Sample App - .NET"
 linkTitle: "Buildpack app - .NET"
 weight: 1
+type: "docs"
 ---
 
-{{% readfile file="docs/serving/samples/buildpack-app-dotnet/README.md" markdown="true" %}}
+{{% readfile file="README.md" relative="true" markdown="true" %}}

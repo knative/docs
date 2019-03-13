@@ -1,7 +1,7 @@
 ---
-title: "GCP Cloud Pub/Sub source"
-linkTitle: "Pub/Sub source"
-weight: 20
+title: "Knative Documentation Version 0.3"
+linkTitle: "Documentation"
+weight: 10
 type: "docs"
 ---
 

@@ -2,6 +2,7 @@
 title: "Installing Knative"
 #linkTitle: "Installing"
 weight: 20
+type: "docs"
 ---
 
-{{% readfile file="docs/install/README.md" markdown="true" %}}
+{{% readfile file="README.md" relative="true" markdown="true" %}}

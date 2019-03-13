@@ -2,6 +2,7 @@
 title: "Hello World - Ruby"
 linkTitle: "Ruby"
 weight: 1
+type: "docs"
 ---
 
-{{% readfile file="docs/serving/samples/hello-world/helloworld-ruby/README.md" markdown="true" %}}
+{{% readfile file="README.md" relative="true" markdown="true" %}}

@@ -2,9 +2,7 @@
 title: "Welcome to Knative"
 linkTitle: "Documentation"
 weight: 10
-menu:
-  main:
-    weight: 20
+type: "docs"
 ---
 
-{{% readfile file="docs/README.md" markdown="true" %}}
+{{% readfile file="README.md" relative="true" markdown="true" %}}

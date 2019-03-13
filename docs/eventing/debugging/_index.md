@@ -5,4 +5,4 @@ weight: 80
 type: "docs"
 ---
 
-{{% readfile file="docs/eventing/debugging/README.md" markdown="true" %}}
+{{% readfile file="README.md" relative="true" markdown="true" %}}

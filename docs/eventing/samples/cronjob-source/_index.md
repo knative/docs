@@ -5,4 +5,4 @@ weight: 10
 type: "docs"
 ---
 
-{{% readfile file="docs/eventing/samples/cronjob-source/README.md" markdown="true" %}}
+{{% readfile file="README.md" relative="true" markdown="true" %}}
