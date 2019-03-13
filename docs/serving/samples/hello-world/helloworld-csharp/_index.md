@@ -2,6 +2,7 @@
 title: "Hello world - .NET Core"
 linkTitle: ".NET"
 weight: 1
+type: "docs"
 ---
 
-{{% readfile file="docs/serving/samples/hello-world/helloworld-csharp/README.md" markdown="true" %}}
+{{% readfile file="README.md" relative="true" markdown="true" %}}

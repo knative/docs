@@ -2,6 +2,7 @@
 title: "Thumbnailer External Dependencies Demo - Go"
 linkTitle: "Deploy, build, and serve - Go"
 weight: 1
+type: "docs"
 ---
 
-{{% readfile file="docs/serving/samples/thumbnailer-go/README.md" markdown="true" %}}
+{{% readfile file="README.md" relative="true" markdown="true" %}}

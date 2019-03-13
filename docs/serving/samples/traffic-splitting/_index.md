@@ -2,6 +2,7 @@
 title: "Simple Traffic Splitting Between Revisions"
 linkTitle: "Traffic splitting"
 weight: 1
+type: "docs"
 ---
 
-{{% readfile file="docs/serving/samples/traffic-splitting/README.md" markdown="true" %}}
+{{% readfile file="README.md" relative="true" markdown="true" %}}

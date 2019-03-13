@@ -2,6 +2,7 @@
 title: "Knative Build"
 linkTitle: "Build Component"
 weight: 20
+type: "docs"
 ---
 
-{{% readfile file="docs/build/README.md" markdown="true" %}}
+{{% readfile file="README.md" relative="true" markdown="true" %}}
