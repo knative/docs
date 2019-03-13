@@ -25,20 +25,20 @@ REFDOCS_REPO="https://${REFDOCS_PKG}.git"
 REFDOCS_VER="5c208a6"
 
 KNATIVE_SERVING_REPO="github.com/knative/serving"
-KNATIVE_SERVING_COMMIT="v0.2.3"
-KNATIVE_SERVING_OUT_FILE="serving.md"
+KNATIVE_SERVING_COMMIT="v0.3.0"
+KNATIVE_SERVING_OUT_FILE="docs/reference/serving.md"
 
 KNATIVE_BUILD_REPO="github.com/knative/build"
-KNATIVE_BUILD_COMMIT="v0.2.0"
-KNATIVE_BUILD_OUT_FILE="build.md"
+KNATIVE_BUILD_COMMIT="v0.3.0"
+KNATIVE_BUILD_OUT_FILE="docs/reference/build.md"
 
 KNATIVE_EVENTING_REPO="github.com/knative/eventing"
-KNATIVE_EVENTING_COMMIT="v0.2.1"
-KNATIVE_EVENTING_OUT_FILE="eventing/eventing.md"
+KNATIVE_EVENTING_COMMIT="v0.3.0"
+KNATIVE_EVENTING_OUT_FILE="docs/reference/eventing/eventing.md"
 
 KNATIVE_EVENTING_SOURCES_REPO="github.com/knative/eventing-sources"
-KNATIVE_EVENTING_SOURCES_COMMIT="v0.2.1"
-KNATIVE_EVENTING_SOURCES_OUT_FILE="eventing/eventing-sources.md"
+KNATIVE_EVENTING_SOURCES_COMMIT="v0.3.0"
+KNATIVE_EVENTING_SOURCES_OUT_FILE="docs/reference/eventing/eventing-sources.md"
 
 log() {
     echo "$@" >&2
@@ -160,9 +160,10 @@ main() {
         "${knative_eventing_sources_root}"
 
     log "Generated files written to ${clone_root}/out/."
-    log "Copy the files in reference/ directory to knative/docs."
-    if command -v open >/dev/null; then
-        open "${clone_root}/out/"
+    log "Opening your tmp/ directory. You can now copy/overwrite the"
+    log "'docs/reference/' folder with the API files you generated."
+    if command -v xdg-open >/dev/null; then
+        xdg-open "${clone_root}/out/"
     fi
 }
 

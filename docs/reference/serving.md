@@ -425,6 +425,19 @@ ingress supports SNI.</p>
 <p>A list of host rules used to configure the ClusterIngress.</p>
 </td>
 </tr>
+<tr>
+<td>
+<code>visibility</code></br>
+<em>
+<a href="#IngressVisibility">
+IngressVisibility
+</a>
+</em>
+</td>
+<td>
+<p>Visibility setting.</p>
+</td>
+</tr>
 </table>
 </td>
 </tr>
@@ -931,6 +944,19 @@ ingress supports SNI.</p>
 <p>A list of host rules used to configure the ClusterIngress.</p>
 </td>
 </tr>
+<tr>
+<td>
+<code>visibility</code></br>
+<em>
+<a href="#IngressVisibility">
+IngressVisibility
+</a>
+</em>
+</td>
+<td>
+<p>Visibility setting.</p>
+</td>
+</tr>
 </tbody>
 </table>
 <h3 id="IngressStatus">IngressStatus
@@ -979,6 +1005,16 @@ LoadBalancerStatus
 </tr>
 </tbody>
 </table>
+<h3 id="IngressVisibility">IngressVisibility
+(<code>string</code> alias)</p></h3>
+<p>
+(<em>Appears on:</em>
+<a href="#IngressSpec">IngressSpec</a>)
+</p>
+<p>
+<p>IngressVisibility describes whether the Ingress should be exposed to
+public gateways or not.</p>
+</p>
 <h3 id="LoadBalancerIngressStatus">LoadBalancerIngressStatus
 </h3>
 <p>
@@ -1035,6 +1071,18 @@ string
 <p>DomainInternal is set if there is a cluster-local DNS name to access the Ingress.</p>
 <p>NOTE: This differs from K8s Ingress, since we also desire to have a cluster-local
 DNS name to allow routing in case of not having a mesh.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>meshOnly</code></br>
+<em>
+bool
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>MeshOnly is set if the ClusterIngress is only load-balanced through a Service mesh.</p>
 </td>
 </tr>
 </tbody>
@@ -1412,6 +1460,18 @@ In the context of a Revision, we disallow a number of the fields of
 this Container, including: name, resources, ports, and volumeMounts.
 TODO(mattmoor): Link to the runtime contract tracked by:
 <a href="https://github.com/knative/serving/issues/627">https://github.com/knative/serving/issues/627</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<code>timeoutSeconds</code></br>
+<em>
+int64
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>TimeoutSeconds holds the max duration the instance is allowed for responding to a request.</p>
 </td>
 </tr>
 </table>
@@ -2209,6 +2269,18 @@ TODO(mattmoor): Link to the runtime contract tracked by:
 <a href="https://github.com/knative/serving/issues/627">https://github.com/knative/serving/issues/627</a></p>
 </td>
 </tr>
+<tr>
+<td>
+<code>timeoutSeconds</code></br>
+<em>
+int64
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>TimeoutSeconds holds the max duration the instance is allowed for responding to a request.</p>
+</td>
+</tr>
 </tbody>
 </table>
 <h3 id="RevisionStatus">RevisionStatus
@@ -2481,6 +2553,18 @@ In the context of a Revision, we disallow a number of the fields of
 this Container, including: name, resources, ports, and volumeMounts.
 TODO(mattmoor): Link to the runtime contract tracked by:
 <a href="https://github.com/knative/serving/issues/627">https://github.com/knative/serving/issues/627</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<code>timeoutSeconds</code></br>
+<em>
+int64
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>TimeoutSeconds holds the max duration the instance is allowed for responding to a request.</p>
 </td>
 </tr>
 </table>
@@ -2991,5 +3075,5 @@ This defaults to zero if unspecified.</p>
 <hr/>
 <p><em>
 Generated with <code>gen-crd-api-reference-docs</code>
-on git commit <code>5cbee406</code>.
+on git commit <code>4d198db8</code>.
 </em></p>
