@@ -100,6 +100,10 @@ Source for a specific namespace. Be sure to replace the
 `ownerAndRepository` value with a valid GitHub public repository owned
 by your GitHub user.
 
+If using GitHub enterprise you will need to add an additional githubAPIURL
+field to the spec specifying your GitHub enterprise API endpoint, see 
+[here](../../README.md#githubsource)
+
 ```yaml
 apiVersion: sources.eventing.knative.dev/v1alpha1
 kind: GitHubSource

@@ -15,7 +15,7 @@ sections to do so now.
 1. Run the following command to install Prometheus and Grafana:
 
    ```shell
-   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.3.0/monitoring-metrics-prometheus.yaml
+   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.4.0/monitoring-metrics-prometheus.yaml
    ```
 
 1. Ensure that the `grafana-*`, `kibana-logging-*`, `kube-state-metrics-*`,
@@ -59,7 +59,7 @@ install:
 1. Run the following command to install an ELK stack:
 
    ```shell
-   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.3.0/monitoring-logs-elasticsearch.yaml
+   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.4.0/monitoring-logs-elasticsearch.yaml
    ```
 
 1. Ensure that the `elasticsearch-logging-*`, `fluentd-ds-*`, and
@@ -149,7 +149,7 @@ To configure and setup monitoring:
     ```shell
     git clone https://github.com/knative/serving knative-serving
     cd knative-serving
-    git checkout v0.3.0
+    git checkout v0.4.0
     ```
 
 1.  Choose a container image that meets the
@@ -174,7 +174,7 @@ To configure and setup monitoring:
 
     ```shell
       kubectl apply --recursive --filename config/monitoring/100-namespace.yaml \
-          --filename third_party/config/monitoring/logging/stackdriver
+          --filename config/monitoring/logging/stackdriver
     ```
 
 1.  Ensure that the `fluentd-ds-*` pods all report a `Running` status:
@@ -226,14 +226,14 @@ Knative.
   traces, run:
 
   ```shell
-  kubectl apply --filename https://github.com/knative/serving/releases/download/v0.3.0/monitoring-tracing-zipkin-in-mem.yaml
+  kubectl apply --filename https://github.com/knative/serving/releases/download/v0.4.0/monitoring-tracing-zipkin-in-mem.yaml
   ```
 
 - If Elasticsearch is installed and you want to persist end to end traces, first
   run:
 
   ```shell
-  kubectl apply --filename https://github.com/knative/serving/releases/download/v0.3.0/monitoring-tracing-zipkin.yaml
+  kubectl apply --filename https://github.com/knative/serving/releases/download/v0.4.0/monitoring-tracing-zipkin.yaml
   ```
 
   Next, create an Elasticsearch index for end to end traces:

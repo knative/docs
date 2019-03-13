@@ -134,6 +134,7 @@ container for the application.
                arguments:
                  - name: IMAGE
                    value: docker.io/{DOCKER_USERNAME}/app-from-source:latest
+             timeout: 10m
          revisionTemplate:
            spec:
              container:
@@ -165,6 +166,8 @@ container for the application.
    app-from-source-00001-deployment-6d6ff665f9-xfhm5   2/3       Running   0         6s
    app-from-source-00001-deployment-6d6ff665f9-xfhm5   3/3       Running   0         11s
    ```
+
+  > **Note:** If the build pod never reaches Completed status and terminates after 10 minutes, Kaniko probably didn't finish pulling the build image within the default timeout period. Try increasing the `timeout` value in `service.yaml`.
 
 1. Once you see the deployment pod switch to the running state, press Ctrl+C to
    escape the watch. Your container is now built and deployed!

@@ -16,14 +16,17 @@ import (
 
 var (
 	serverAddr         = flag.String("server_addr", "127.0.0.1:8080", "The server address in the format of host:port")
-	serverHostOverride = flag.String("server_host_override", "grpc.knative.dev", "")
+	serverHostOverride = flag.String("server_host_override", "", "")
 	insecure           = flag.Bool("insecure", false, "Set to true to skip SSL validation")
 )
 
 func main() {
 	flag.Parse()
 
-	opts := []grpc.DialOption{grpc.WithAuthority(*serverHostOverride)}
+	var opts []grpc.DialOption
+	if *serverHostOverride != "" {
+		opts = append(opts, grpc.WithAuthority(*serverHostOverride))
+	}
 	if *insecure {
 		opts = append(opts, grpc.WithInsecure())
 	}

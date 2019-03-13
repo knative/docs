@@ -20,6 +20,7 @@ spec:
             arguments:
             - name: IMAGE
               value: docker.io/{DOCKER_USERNAME}/app-from-source:latest
+          timeout: 10m
       revisionTemplate:
         spec:
           container:

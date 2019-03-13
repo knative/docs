@@ -61,10 +61,10 @@ source is most useful as a bridge from other GCP services, such as
       # Note that the first secret may already have been created when installing
       # Knative Eventing. The following command will overwrite it. If you don't
       # want to overwrite it, then skip this command.
-      kubectl -n knative-sources create secret generic gcppubsub-source-key --from-file=key.json=knative-source.json --dry-run -o yaml | kubectl apply --filename -
+      kubectl --namespace knative-sources create secret generic gcppubsub-source-key --from-file=key.json=knative-source.json --dry-run --output yaml | kubectl apply --filename -
 
       # The second secret should not already exist, so just try to create it.
-      kubectl -n default create secret generic google-cloud-key --from-file=key.json=knative-source.json
+      kubectl --namespace default create secret generic google-cloud-key --from-file=key.json=knative-source.json
       ```
 
       `gcppubsub-source-key` and `key.json` are pre-configured values in the

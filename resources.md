@@ -77,7 +77,7 @@ abstracting away the container image being used, and instead referring to Go
 packages by their [import paths](https://golang.org/doc/code.html#ImportPaths)
 (e.g., `github.com/kaniko/serving/cmd/controller`)
 
-The typical usage is `ko apply -f config.yaml`, which reads in the config YAML,
+The typical usage is `ko apply --filename config.yaml`, which reads in the config YAML,
 and looks for Go import paths representing runnable commands (i.e.,
 `package main`). When it finds a matching import path, `ko` builds the package
 using `go build` then pushes a container image containing that binary on top of

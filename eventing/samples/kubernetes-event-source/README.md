@@ -19,7 +19,7 @@ consumption by a function that has been implemented as a Knative Service.
    later.
 
 ```shell
-kubectl -n default apply -f channel.yaml
+kubectl --namespace default apply --filename channel.yaml
 ```
 
 ### Service Account
@@ -31,18 +31,18 @@ kubectl -n default apply -f channel.yaml
    `serviceaccount.yaml`.
 
 ```shell
-kubectl apply -f serviceaccount.yaml
+kubectl apply --filename serviceaccount.yaml
 ```
 
 ### Create Event Source for Kubernetes Events
 
 1. In order to receive events, you have to create a concrete Event Source for a
-   specific namespace. If you are wanting to consume events from a differenet
+   specific namespace. If you are wanting to consume events from a different
    namespace or using a different `Service Account`, you need to modify the yaml
    accordingly.
 
 ```shell
-kubectl apply -f k8s-events.yaml
+kubectl apply --filename k8s-events.yaml
 ```
 
 ### Subscriber
@@ -57,7 +57,7 @@ simple Knative Service that dumps incoming messages to its log and create a
 1. Deploy `subscription.yaml`.
 
 ```shell
-kubectl apply -f subscription.yaml
+kubectl apply --filename subscription.yaml
 ```
 
 ### Create Events
@@ -78,7 +78,7 @@ kubectl delete pod busybox
 ### Verify
 
 We will verify that the kubernetes events were sent into the Knative eventing
-system by looking at our message dumper function logsIf you deployed the
+system by looking at our message dumper function logs. If you deployed the
 [Subscriber](#subscriber), then continue using this section. If not, then you
 will need to look downstream yourself.
 

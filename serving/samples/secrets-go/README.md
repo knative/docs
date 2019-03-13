@@ -146,7 +146,7 @@ recreate the source files from this folder.
 
    You can achieve a similar result by editting `secret.yaml`, copying the
    contents of `robot.json` as instructed there, and running
-   `kubectl apply -f secret.yaml`.
+   `kubectl apply --filename secret.yaml`.
 
 1. Create a new file, `service.yaml` and copy the following service definition
    into the file. Make sure to replace `{username}` with your Docker Hub
