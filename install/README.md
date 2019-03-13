@@ -85,8 +85,8 @@ available observability plugins, to minimize the disk space used for install.
 
 - [Knative Install on Docker for Mac](Knative-with-Docker-for-Mac.md)
 - [Knative Install on Minikube](Knative-with-Minikube.md)
-- [Knative Install on Minishift](Knative-with-Minishift.md)
-- [Knative Install on OpenShift](Knative-with-OpenShift.md)
+- [Knative Install on OpenShift (minishift)](Knative-with-Minishift.md)
+- [Knative Install on OpenShift (oc cluster up)](Knative-with-OpenShift.md)
 
 **Custom install guide**
 
