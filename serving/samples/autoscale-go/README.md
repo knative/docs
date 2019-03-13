@@ -26,7 +26,7 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
    kubectl apply --filename serving/samples/autoscale-go/service.yaml
    ```
 
-1. Find the ingress hostname and IP and export as an environment variable:
+1. To get the ingress IP for your cluster, use the following command. If your cluster is new, it can take some time for the service to get an external IP address:
 
    ```shell
    # In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
@@ -40,6 +40,15 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
    fi
 
    export IP_ADDRESS=`kubectl get svc $INGRESSGATEWAY --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
+   ```
+
+   > Note: if you use minikube or a baremetal cluster that has no external load
+   > balancer, the `EXTERNAL-IP` field is shown as `<pending>`. You need to use
+   > `NodeIP` and `NodePort` to interact your app instead. To get your app's
+   > `NodeIP` and `NodePort`, enter the following command:
+
+   ```shell
+   export IP_ADDRESS=$(kubectl get node  --output 'jsonpath={.items[0].status.addresses[0].address}'):$(kubectl get svc $INGRESSGATEWAY --namespace istio-system   --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
    ```
 
 ## Load the Service

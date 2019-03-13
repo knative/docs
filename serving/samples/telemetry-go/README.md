@@ -175,6 +175,15 @@ fi
 export SERVICE_IP=`kubectl get svc $INGRESSGATEWAY --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
 ```
 
+> Note: if you use minikube or a baremetal cluster that has no external load
+> balancer, the `EXTERNAL-IP` field is shown as `<pending>`. You need to use
+> `NodeIP` and `NodePort` to interact your app instead. To get your app's
+> `NodeIP` and `NodePort`, enter the following command:
+
+```shell
+export SERVICE_IP=$(kubectl get node  --output 'jsonpath={.items[0].status.addresses[0].address}'):$(kubectl get svc $INGRESSGATEWAY --namespace istio-system   --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
+```
+
 3. Make a request to the service to see the `Hello World!` message:
 
 ```

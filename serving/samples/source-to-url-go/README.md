@@ -230,6 +230,23 @@ container for the application.
    xxxxxxx-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
    ```
 
+   Take note of the EXTERNAL-IP address.
+
+   You can also export the IP address as a variable with the following command:
+   
+   ```shell
+   export IP_ADDRESS=$(kubectl get svc $INGRESSGATEWAY --namespace istio-system --output 'jsonpath={.status.loadBalancer.ingress[0].ip}')
+   ```    
+
+   > Note: if you use minikube or a baremetal cluster that has no external load
+   > balancer, the `EXTERNAL-IP` field is shown as `<pending>`. You need to use
+   > `NodeIP` and `NodePort` to interact your app instead. To get your app's
+   > `NodeIP` and `NodePort`, enter the following command:
+
+   ```shell
+   export IP_ADDRESS=$(kubectl get node  --output 'jsonpath={.items[0].status.addresses[0].address}'):$(kubectl get svc $INGRESSGATEWAY --namespace istio-system   --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
+   ```
+
 1. To find the URL for your service, type:
 
    ```shell
@@ -238,8 +255,7 @@ container for the application.
    app-from-source     app-from-source.default.example.com
    ```
 
-1. Now you can make a request to your app to see the result. Replace
-   `{IP_ADDRESS}` with the address that you got in the previous step:
+1. Now you can make a request to your app to see the result.
 
    ```shell
    curl -H "Host: app-from-source.default.example.com" http://{IP_ADDRESS}
