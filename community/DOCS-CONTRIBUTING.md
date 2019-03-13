@@ -133,29 +133,29 @@ proficient in at least one of these review areas.
 - Has made multiple contributions to the project or community. Contributions might
   include, but are not limited to:
 
-  - Authoring or reviewing PRs on GitHub in Knative/Docs or Knative/Website
+  - Authoring and reviewing PRs on GitHub in the Docs or Website repos.
 
-  - Filing or commenting on issues on GitHub
+  - Filing and commenting on issues on GitHub.
 
-  - Contributing to working group or community discussions
+  - Contributing to working group or community discussions.
 
 - Subscribed to
-  [knative-dev@googlegroups.com](https://groups.google.com/forum/#!forum/knative-dev)
+  [knative-dev@googlegroups.com](https://groups.google.com/forum/#!forum/knative-dev).
 
 - Actively contributing to 1 or more areas.
 
 - Sponsored by 1 approver.
 
-  - Done by adding GitHub user to Knative organization
+  - Done by adding GitHub user to Knative organization.
 
 ### Responsibilities and privileges
 
-- Responsive to issues and PRs assigned to them
+- Responsive to issues and PRs assigned to them.
 
 - Active owner of documents they have contributed (unless ownership is explicitly
-  transferred)
+  transferred).
   
-  - Addresses bugs or issues in their documentation in a timely manner
+  - Addresses bugs or issues in their documentation in a timely manner.
   
 ### Becoming a member
 
@@ -180,39 +180,36 @@ enlist help from engineers for reviewing code-heavy contributions to the Docs re
 
 ### Requirements
 
-- Reviewer of the Docs repo for at least 3 months or 50% of project lifetime,
-  whichever is shorter
+- Reviewer of the Docs repo for at least 3 months.
   
   - Proficient in reviewing all aspects of writing quality, including grammar and
-    spelling (writing quality), adherence to style guide conventions, organization,
-    and usability. Can coach newer writers to improve their contributions in all of these areas.
+    spelling, adherence to style guide conventions, organization, and usability.
+    Can coach newer writers to improve their contributions in these areas.
   
 - Primary reviewer for at least 10 substantial PRs to the docs, showing substantial
   ability to coach for writing development.
 
-- Reviewed or merged at least 30 PRs to the docs
+- Reviewed or merged at least 30 PRs to the docs.
 
-- Nominated by an area lead
+- Nominated by an area lead (with no objections from other leads).
 
-  - With no objections from other leads
-
-  - Done through PR to update an OWNERS file
+  - Done through PR to update an OWNERS file.
 
 ### Responsibilities and privileges
 
-- Responsible for documentation quality control via PR reviews
+- Responsible for documentation quality control via PR reviews.
 
   - Focus on long-term maintainability, adhering to style
     guide conventions, overall information architecture, and usability from
     an engineering standpoint.
 
 - Expected to be responsive to review requests as per
-  [community expectations](REVIEWING.md)
+  [community expectations](REVIEWING.md).
 
-- Mentor members and contributors to improve their writing
+- Mentor members and contributors to improve their writing.
 
 - Might approve documentation contributions for acceptance, but will ask for
-  engineering review for code-heavy contributions
+  engineering review for code-heavy contributions.
 
 ### Becoming an approver
 
@@ -223,6 +220,5 @@ Working Group.
 
 Once you feel you meet the criteria, you can ask one of the current
 approvers to nominate you to become an approver. If all existing
-approvers agree that you meet the criteria, and no one objects,
-open a PR to add yourself as a docs-approver in the
-[OWNERS_ALIASES](../OWNERS_ALIASES) file.
+approvers agree that you meet the criteria open a PR to add yourself
+as a docs-approver in the [OWNERS_ALIASES](../OWNERS_ALIASES) file.
