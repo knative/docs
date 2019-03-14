@@ -1,12 +1,14 @@
 ---
 name: Bug in existing docs
-about: Create a report to help us improve
+about: Report a bug in the documentation
 title: ''
 labels: kind/bug
 assignees: ''
 
 ---
 
+<!-- If you're reporting a bug with Knative itself, open the bug in the corresponding repo. IE., https://github.com/knative/serving for an issue with serving. -->
+<!-- If you need to report a security issue with Knative, send an email to knative-security@googlegroups.com. -->
 ## Expected Behavior
 
 
