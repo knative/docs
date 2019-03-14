@@ -6,6 +6,7 @@ labels: ''
 assignees: ''
 
 ---
+<!-- For a feature request about a change to Knative, please open the issue in the corresponding repo. -->
 
 **Describe the change you'd like to see**
 A clear and concise description of what you want to happen.
