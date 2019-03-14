@@ -28,11 +28,11 @@ You'll need these tools installed:
 
 ## Steps
 
-1. [Bootstrap Project](01-bootstrap.md)
-1. [Define The Source Resource](02-define-source.md)
-1. [Reconcile Sources](03-reconcile-sources.md)
-1. [Publish to Cluster](04-publish-to-cluster.md)
-1. Dispatching Events
+1. [Bootstrap Project](./01-bootstrap.md)
+1. [Define The Source Resource](./02-define-source.md)
+1. [Reconcile Sources](./03-reconcile-sources.md)
+1. [Publish to Cluster](./04-publish-to-cluster.md)
+1. (TODO) Dispatching Events
 
 ## Alternatives
 

@@ -194,7 +194,7 @@ If there is any failure, the `conditions` in `status` provide the reason. To
 access build logs, first execute `kubectl proxy` and then open
 [Kibana UI](http://localhost:8001/api/v1/namespaces/knative-monitoring/services/kibana-logging/proxy/app/kibana).
 Use any of the following filters within Kibana UI to see build logs. _(See
-[telemetry guide](../telemetry.md) for more information on logging and
+[Installing logging, metrics, and traces](../Installing-logging-metrics-traces.md) for more information on logging and
 monitoring features of Knative Serving.)_
 
 - All build logs: `_exists_:"kubernetes.labels.build-name"`

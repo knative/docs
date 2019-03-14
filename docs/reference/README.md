@@ -1,9 +1,9 @@
 # Knative API Reference documentation
 
-- [Serving API](serving.md)
-- [Build API](build.md)
-- [Eventing API](eventing/eventing.md)
-- [Event Sources API](eventing/eventing-sources.md)
+- [Serving API](./serving.md)
+- [Build API](./build.md)
+- [Eventing API](./eventing/eventing.md)
+- [Event Sources API](./eventing/eventing-sources.md)
 
 Note: The Knative API reference documentation is manually generated using the
 [gen-api-reference-docs.sh](../../hack/) tool. After cloning the Knative/docs

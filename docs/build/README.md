@@ -52,7 +52,7 @@ in your Kubernetes cluster:
   cluster, see [Installing Knative](../install/README.md).
 
 - If you have a component of Knative installed and running, you can
-  [add and install the Knative Build component](installing-build-component.md).
+  [add and install the Knative Build component](./installing-build-component.md).
 
 ## Configuration syntax example
 
