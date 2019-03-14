@@ -74,12 +74,27 @@ kubectl logs -l serving.knative.dev/service=message-dumper -c user-container --s
 
 You should see log lines showing the request headers and body from the source:
 
-```json
-{
-  "ID": "1543616460000180552-203",
-  "EventTime": "2018-11-30T22:21:00.000186721Z",
-  "Body": "{\"message\": \"Hello world!\"}"
-}
+```shell
+2019/03/14 11:54:00 Message Dumper received a message: POST / HTTP/1.1
+Host: message-dumper.default.svc.cluster.local
+Accept-Encoding: gzip
+Ce-Cloudeventsversion: 0.1
+Ce-Eventid: 1552564440000465536-774
+Ce-Eventtime: 2019-03-14T11:54:00.00050081Z
+Ce-Eventtype: dev.knative.cronjob.event
+Ce-Source: CronJob
+Content-Length: 109
+Content-Type: application/json
+User-Agent: Go-http-client/1.1
+X-B3-Parentspanid: 31c560b02cb91642
+X-B3-Sampled: 1
+X-B3-Spanid: 2c9d90dbade95ec9
+X-B3-Traceid: 31c560b02cb91642
+X-Forwarded-For: 127.0.0.1
+X-Forwarded-Proto: http
+X-Request-Id: a5c029d8-1139-9af7-9be9-5bffe2232915
+
+{"ID":"1552564440000465536-774","EventTime":"2019-03-14T11:54:00.00050081Z","Body":"{\"message\": \"Hello world!\"}"}
 ```
 
 You can also use [`kail`](https://github.com/boz/kail) instead of `kubectl logs`
