@@ -15,6 +15,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 set -euo pipefail
 
 SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -25,19 +26,19 @@ REFDOCS_REPO="https://${REFDOCS_PKG}.git"
 REFDOCS_VER="5c208a6"
 
 KNATIVE_SERVING_REPO="github.com/knative/serving"
-KNATIVE_SERVING_COMMIT="v0.2.3"
+KNATIVE_SERVING_COMMIT="${KNATIVE_SERVING_COMMIT:?specify the \$KNATIVE_SERVING_COMMIT variable}"
 KNATIVE_SERVING_OUT_FILE="serving.md"
 
 KNATIVE_BUILD_REPO="github.com/knative/build"
-KNATIVE_BUILD_COMMIT="v0.2.0"
+KNATIVE_BUILD_COMMIT="${KNATIVE_BUILD_COMMIT:?specify the \$KNATIVE_BUILD_COMMIT variable}"
 KNATIVE_BUILD_OUT_FILE="build.md"
 
 KNATIVE_EVENTING_REPO="github.com/knative/eventing"
-KNATIVE_EVENTING_COMMIT="v0.2.1"
+KNATIVE_EVENTING_COMMIT="${KNATIVE_EVENTING_COMMIT:?specify the \$KNATIVE_EVENTING_COMMIT variable}"
 KNATIVE_EVENTING_OUT_FILE="eventing/eventing.md"
 
 KNATIVE_EVENTING_SOURCES_REPO="github.com/knative/eventing-sources"
-KNATIVE_EVENTING_SOURCES_COMMIT="v0.2.1"
+KNATIVE_EVENTING_SOURCES_COMMIT="${KNATIVE_EVENTING_SOURCES_COMMIT:?specify the \$KNATIVE_EVENTING_SOURCES_COMMIT variable}"
 KNATIVE_EVENTING_SOURCES_OUT_FILE="eventing/eventing-sources.md"
 
 log() {
@@ -163,6 +164,8 @@ main() {
     log "Copy the files in reference/ directory to knative/docs."
     if command -v open >/dev/null; then
         open "${clone_root}/out/"
+    elif command -v xdg-open >/dev/null; then
+        xdg-open "${clone_root}/out/"
     fi
 }
 
