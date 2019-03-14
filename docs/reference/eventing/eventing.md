@@ -281,10 +281,10 @@ int64
 </td>
 <td>
 <em>(Optional)</em>
-<p>TODO: Generation does not work correctly with CRD. They are scrubbed
-by the APIserver (<a href="https://github.com/kubernetes/kubernetes/issues/58778">https://github.com/kubernetes/kubernetes/issues/58778</a>)
-So, we add Generation here. Once that gets fixed, remove this and use
-ObjectMeta.Generation instead.</p>
+<p>TODO By enabling the status subresource metadata.generation should increment
+thus making this property obsolete.</p>
+<p>We should be able to drop this property with a CRD conversion webhook
+in the future</p>
 </td>
 </tr>
 <tr>
@@ -415,10 +415,10 @@ int64
 </td>
 <td>
 <em>(Optional)</em>
-<p>TODO: Generation does not work correctly with CRD. They are scrubbed
-by the APIserver (<a href="https://github.com/kubernetes/kubernetes/issues/58778">https://github.com/kubernetes/kubernetes/issues/58778</a>)
-So, we add Generation here. Once that gets fixed, remove this and use
-ObjectMeta.Generation instead.</p>
+<p>TODO By enabling the status subresource metadata.generation should increment
+thus making this property obsolete.</p>
+<p>We should be able to drop this property with a CRD conversion webhook
+in the future</p>
 </td>
 </tr>
 </table>
@@ -507,10 +507,10 @@ int64
 </td>
 <td>
 <em>(Optional)</em>
-<p>TODO: Generation used to not work correctly with CRD. They were scrubbed
-by the APIserver (<a href="https://github.com/kubernetes/kubernetes/issues/58778">https://github.com/kubernetes/kubernetes/issues/58778</a>)
-So, we add Generation here. Once the above bug gets rolled out to production
-clusters, remove this and use ObjectMeta.Generation instead.</p>
+<p>TODO By enabling the status subresource metadata.generation should increment
+thus making this property obsolete.</p>
+<p>We should be able to drop this property with a CRD conversion webhook
+in the future</p>
 </td>
 </tr>
 <tr>
@@ -622,10 +622,10 @@ int64
 </td>
 <td>
 <em>(Optional)</em>
-<p>TODO: Generation does not work correctly with CRD. They are scrubbed
-by the APIserver (<a href="https://github.com/kubernetes/kubernetes/issues/58778">https://github.com/kubernetes/kubernetes/issues/58778</a>)
-So, we add Generation here. Once that gets fixed, remove this and use
-ObjectMeta.Generation instead.</p>
+<p>TODO By enabling the status subresource metadata.generation should increment
+thus making this property obsolete.</p>
+<p>We should be able to drop this property with a CRD conversion webhook
+in the future</p>
 </td>
 </tr>
 <tr>
@@ -760,10 +760,10 @@ int64
 </td>
 <td>
 <em>(Optional)</em>
-<p>TODO: Generation does not work correctly with CRD. They are scrubbed
-by the APIserver (<a href="https://github.com/kubernetes/kubernetes/issues/58778">https://github.com/kubernetes/kubernetes/issues/58778</a>)
-So, we add Generation here. Once that gets fixed, remove this and use
-ObjectMeta.Generation instead.</p>
+<p>TODO By enabling the status subresource metadata.generation should increment
+thus making this property obsolete.</p>
+<p>We should be able to drop this property with a CRD conversion webhook
+in the future</p>
 </td>
 </tr>
 </tbody>
@@ -966,10 +966,10 @@ int64
 </td>
 <td>
 <em>(Optional)</em>
-<p>TODO: Generation used to not work correctly with CRD. They were scrubbed
-by the APIserver (<a href="https://github.com/kubernetes/kubernetes/issues/58778">https://github.com/kubernetes/kubernetes/issues/58778</a>)
-So, we add Generation here. Once the above bug gets rolled out to production
-clusters, remove this and use ObjectMeta.Generation instead.</p>
+<p>TODO By enabling the status subresource metadata.generation should increment
+thus making this property obsolete.</p>
+<p>We should be able to drop this property with a CRD conversion webhook
+in the future</p>
 </td>
 </tr>
 <tr>
@@ -1065,7 +1065,7 @@ github.com/knative/pkg/apis/duck/v1alpha1.Conditions
 </tr>
 <tr>
 <td>
-<code>physicalSubscription,omitEmpty</code></br>
+<code>physicalSubscription</code></br>
 <em>
 <a href="#SubscriptionStatusPhysicalSubscription">
 SubscriptionStatusPhysicalSubscription
@@ -1098,7 +1098,7 @@ Subscription.</p>
 <tbody>
 <tr>
 <td>
-<code>subscriberURI,omitEmpty</code></br>
+<code>subscriberURI</code></br>
 <em>
 string
 </em>
@@ -1109,7 +1109,7 @@ string
 </tr>
 <tr>
 <td>
-<code>replyURI,omitEmpty</code></br>
+<code>replyURI</code></br>
 <em>
 string
 </em>
@@ -1123,5 +1123,5 @@ string
 <hr/>
 <p><em>
 Generated with <code>gen-crd-api-reference-docs</code>
-on git commit <code>90852711</code>.
+on git commit <code>4712e3a4</code>.
 </em></p>

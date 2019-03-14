@@ -84,10 +84,9 @@ int64
 </td>
 <td>
 <em>(Optional)</em>
-<p>TODO: Generation does not work correctly with CRD. They are scrubbed
-by the APIserver (<a href="https://github.com/kubernetes/kubernetes/issues/58778">https://github.com/kubernetes/kubernetes/issues/58778</a>)
-So, we add Generation here. Once that gets fixed, remove this and use
-ObjectMeta.Generation instead.</p>
+<p>TODO(dprotaso) Metadata.Generation should increment so we
+can drop this property when conversion webhooks enable us
+to migrate</p>
 </td>
 </tr>
 <tr>
@@ -100,7 +99,22 @@ SourceSpec
 </em>
 </td>
 <td>
+<em>(Optional)</em>
 <p>Source specifies the input to the build.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>sources</code></br>
+<em>
+<a href="#SourceSpec">
+[]SourceSpec
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Sources specifies the inputs to the build.</p>
 </td>
 </tr>
 <tr>
@@ -113,6 +127,7 @@ SourceSpec
 </em>
 </td>
 <td>
+<em>(Optional)</em>
 <p>Steps are the steps of the build; each step is run sequentially with the
 source mounted into /workspace.</p>
 </td>
@@ -127,6 +142,7 @@ source mounted into /workspace.</p>
 </em>
 </td>
 <td>
+<em>(Optional)</em>
 <p>Volumes is a collection of volumes that are available to mount into the
 steps of the build.</p>
 </td>
@@ -139,6 +155,7 @@ string
 </em>
 </td>
 <td>
+<em>(Optional)</em>
 <p>The name of the service account as which to run this build.</p>
 </td>
 </tr>
@@ -152,6 +169,7 @@ TemplateInstantiationSpec
 </em>
 </td>
 <td>
+<em>(Optional)</em>
 <p>Template, if specified, references a BuildTemplate resource to use to
 populate fields in the build, and optional Arguments to pass to the
 template. The default Kind of template is BuildTemplate</p>
@@ -284,10 +302,9 @@ int64
 </td>
 <td>
 <em>(Optional)</em>
-<p>TODO: Generation does not work correctly with CRD. They are scrubbed
-by the APIserver (<a href="https://github.com/kubernetes/kubernetes/issues/58778">https://github.com/kubernetes/kubernetes/issues/58778</a>)
-So, we add Generation here. Once that gets fixed, remove this and use
-ObjectMeta.Generation instead.</p>
+<p>TODO(dprotaso) Metadata.Generation should increment so we
+can drop this property when conversion webhooks enable us
+to migrate</p>
 </td>
 </tr>
 <tr>
@@ -402,10 +419,9 @@ int64
 </td>
 <td>
 <em>(Optional)</em>
-<p>TODO: Generation does not work correctly with CRD. They are scrubbed
-by the APIserver (<a href="https://github.com/kubernetes/kubernetes/issues/58778">https://github.com/kubernetes/kubernetes/issues/58778</a>)
-So, we add Generation here. Once that gets fixed, remove this and use
-ObjectMeta.Generation instead.</p>
+<p>TODO(dprotaso) Metadata.Generation should increment so we
+can drop this property when conversion webhooks enable us
+to migrate</p>
 </td>
 </tr>
 <tr>
@@ -531,10 +547,9 @@ int64
 </td>
 <td>
 <em>(Optional)</em>
-<p>TODO: Generation does not work correctly with CRD. They are scrubbed
-by the APIserver (<a href="https://github.com/kubernetes/kubernetes/issues/58778">https://github.com/kubernetes/kubernetes/issues/58778</a>)
-So, we add Generation here. Once that gets fixed, remove this and use
-ObjectMeta.Generation instead.</p>
+<p>TODO(dprotaso) Metadata.Generation should increment so we
+can drop this property when conversion webhooks enable us
+to migrate</p>
 </td>
 </tr>
 <tr>
@@ -547,7 +562,22 @@ SourceSpec
 </em>
 </td>
 <td>
+<em>(Optional)</em>
 <p>Source specifies the input to the build.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>sources</code></br>
+<em>
+<a href="#SourceSpec">
+[]SourceSpec
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Sources specifies the inputs to the build.</p>
 </td>
 </tr>
 <tr>
@@ -560,6 +590,7 @@ SourceSpec
 </em>
 </td>
 <td>
+<em>(Optional)</em>
 <p>Steps are the steps of the build; each step is run sequentially with the
 source mounted into /workspace.</p>
 </td>
@@ -574,6 +605,7 @@ source mounted into /workspace.</p>
 </em>
 </td>
 <td>
+<em>(Optional)</em>
 <p>Volumes is a collection of volumes that are available to mount into the
 steps of the build.</p>
 </td>
@@ -586,6 +618,7 @@ string
 </em>
 </td>
 <td>
+<em>(Optional)</em>
 <p>The name of the service account as which to run this build.</p>
 </td>
 </tr>
@@ -599,6 +632,7 @@ TemplateInstantiationSpec
 </em>
 </td>
 <td>
+<em>(Optional)</em>
 <p>Template, if specified, references a BuildTemplate resource to use to
 populate fields in the build, and optional Arguments to pass to the
 template. The default Kind of template is BuildTemplate</p>
@@ -677,6 +711,7 @@ BuildProvider
 </em>
 </td>
 <td>
+<em>(Optional)</em>
 </td>
 </tr>
 <tr>
@@ -689,6 +724,7 @@ ClusterSpec
 </em>
 </td>
 <td>
+<em>(Optional)</em>
 <p>Cluster provides additional information if the builder is Cluster.</p>
 </td>
 </tr>
@@ -702,12 +738,13 @@ GoogleSpec
 </em>
 </td>
 <td>
+<em>(Optional)</em>
 <p>Google provides additional information if the builder is Google.</p>
 </td>
 </tr>
 <tr>
 <td>
-<code>startTime,omitEmpty</code></br>
+<code>startTime</code></br>
 <em>
 <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#time-v1-meta">
 Kubernetes meta/v1.Time
@@ -715,12 +752,13 @@ Kubernetes meta/v1.Time
 </em>
 </td>
 <td>
+<em>(Optional)</em>
 <p>StartTime is the time the build is actually started.</p>
 </td>
 </tr>
 <tr>
 <td>
-<code>completionTime,omitEmpty</code></br>
+<code>completionTime</code></br>
 <em>
 <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#time-v1-meta">
 Kubernetes meta/v1.Time
@@ -728,12 +766,13 @@ Kubernetes meta/v1.Time
 </em>
 </td>
 <td>
+<em>(Optional)</em>
 <p>CompletionTime is the time the build completed.</p>
 </td>
 </tr>
 <tr>
 <td>
-<code>stepStates,omitEmpty</code></br>
+<code>stepStates</code></br>
 <em>
 <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#containerstate-v1-core">
 []Kubernetes core/v1.ContainerState
@@ -741,6 +780,7 @@ Kubernetes meta/v1.Time
 </em>
 </td>
 <td>
+<em>(Optional)</em>
 <p>StepStates describes the state of each build step container.</p>
 </td>
 </tr>
@@ -752,6 +792,7 @@ Kubernetes meta/v1.Time
 </em>
 </td>
 <td>
+<em>(Optional)</em>
 <p>StepsCompleted lists the name of build steps completed.</p>
 </td>
 </tr>
@@ -765,6 +806,7 @@ github.com/knative/pkg/apis/duck/v1alpha1.Conditions
 </em>
 </td>
 <td>
+<em>(Optional)</em>
 <p>Conditions describes the set of conditions of this build.</p>
 </td>
 </tr>
@@ -802,10 +844,9 @@ int64
 </td>
 <td>
 <em>(Optional)</em>
-<p>TODO: Generation does not work correctly with CRD. They are scrubbed
-by the APIserver (<a href="https://github.com/kubernetes/kubernetes/issues/58778">https://github.com/kubernetes/kubernetes/issues/58778</a>)
-So, we add Generation here. Once that gets fixed, remove this and use
-ObjectMeta.Generation instead.</p>
+<p>TODO(dprotaso) Metadata.Generation should increment so we
+can drop this property when conversion webhooks enable us
+to migrate</p>
 </td>
 </tr>
 <tr>
@@ -1099,6 +1140,7 @@ GitSourceSpec
 </em>
 </td>
 <td>
+<em>(Optional)</em>
 <p>Git represents source in a Git repository.</p>
 </td>
 </tr>
@@ -1112,6 +1154,7 @@ GCSSourceSpec
 </em>
 </td>
 <td>
+<em>(Optional)</em>
 <p>GCS represents source in Google Cloud Storage.</p>
 </td>
 </tr>
@@ -1125,6 +1168,7 @@ Kubernetes core/v1.Container
 </em>
 </td>
 <td>
+<em>(Optional)</em>
 <p>Custom indicates that source should be retrieved using a custom
 process defined in a container invocation.</p>
 </td>
@@ -1137,10 +1181,41 @@ string
 </em>
 </td>
 <td>
+<em>(Optional)</em>
 <p>SubPath specifies a path within the fetched source which should be
 built. This option makes parent directories <em>inaccessible</em> to the
 build steps. (The specific source type may, in fact, not even fetch
 files not in the SubPath.)</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>name</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Name is the name of source. This field is used to uniquely identify the
+source init containers
+Restrictions on the allowed charatcers
+Must be a basename (no /)
+Must be a valid DNS name (only alphanumeric characters, no _)
+<a href="https://tools.ietf.org/html/rfc1123#section-2">https://tools.ietf.org/html/rfc1123#section-2</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<code>targetPath</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>TargetPath is the path in workspace directory where the source will be copied.
+TargetPath is optional and if its not set source will be copied under workspace.
+TargetPath should not be set for custom source.</p>
 </td>
 </tr>
 </tbody>
@@ -1177,8 +1252,8 @@ string
 </em>
 </td>
 <td>
-<p>Name references the BuildTemplate resource to use.</p>
-<p>The template is assumed to exist in the Build&rsquo;s namespace.</p>
+<p>Name references the BuildTemplate resource to use.
+The template is assumed to exist in the Build&rsquo;s namespace.</p>
 </td>
 </tr>
 <tr>
@@ -1191,6 +1266,7 @@ TemplateKind
 </em>
 </td>
 <td>
+<em>(Optional)</em>
 <p>The Kind of the template to be used, possible values are BuildTemplate
 or ClusterBuildTemplate. If nothing is specified, the default if is BuildTemplate</p>
 </td>
@@ -1205,6 +1281,7 @@ or ClusterBuildTemplate. If nothing is specified, the default if is BuildTemplat
 </em>
 </td>
 <td>
+<em>(Optional)</em>
 <p>Arguments, if specified, lists values that should be applied to the
 parameters specified by the template.</p>
 </td>
@@ -1219,6 +1296,7 @@ parameters specified by the template.</p>
 </em>
 </td>
 <td>
+<em>(Optional)</em>
 <p>Env, if specified will provide variables to all build template steps.
 This will override any of the template&rsquo;s steps environment variables.</p>
 </td>
@@ -1237,5 +1315,5 @@ This will override any of the template&rsquo;s steps environment variables.</p>
 <hr/>
 <p><em>
 Generated with <code>gen-crd-api-reference-docs</code>
-on git commit <code>9485975</code>.
+on git commit <code>695fd25</code>.
 </em></p>
