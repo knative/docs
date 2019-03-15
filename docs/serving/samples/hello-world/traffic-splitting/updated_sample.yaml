@@ -27,7 +27,7 @@ spec:
           image: ${REPO}/rest-api-go
           env:
             - name: RESOURCE
-              value: stock
+              value: share
           readinessProbe:
             httpGet:
               path: /

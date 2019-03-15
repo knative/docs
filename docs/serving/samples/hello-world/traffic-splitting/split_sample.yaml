@@ -19,7 +19,8 @@ metadata:
   namespace: default
 spec:
  release:
-  revisions: ["${CURRENT}"]
+  revisions: [ "${CURRENT}", "${CANDIDATE}"]
+  rolloutPercent: 50
   configuration:
     revisionTemplate:
       spec:
@@ -27,7 +28,7 @@ spec:
           image: ${REPO}/rest-api-go
           env:
             - name: RESOURCE
-              value: stock
+              value: share
           readinessProbe:
             httpGet:
               path: /
