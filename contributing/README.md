@@ -61,7 +61,7 @@ are contributed, reviewed, and maintained by the community.
 
 Submit a Pull Request to the community sample directory under the Knative
 component folder that aligns with your document. For example, Knative Serving
-samples are under the `serving`. A reviewer will be assigned to review your 
+samples are under the `serving` folder. A reviewer will be assigned to review your 
 submission. They'll work with you to ensure your submission meets the 
 [style guide](./DOCS-CONTRIBUTING.md), but it helps if you follow it as you 
 write your tutorial.
