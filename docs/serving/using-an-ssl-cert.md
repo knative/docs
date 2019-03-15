@@ -133,7 +133,7 @@ which is only supported by a
 Instructions for configuring cert-manager are provided for the following DNS
 hosts:
 
-- [Google Cloud DNS](using-cert-manager-on-gcp.md)
+- [Google Cloud DNS](./using-cert-manager-on-gcp.md)
 
 ---
 

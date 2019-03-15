@@ -226,7 +226,7 @@ Response body: `stock price for ticker <ticker> is <price>`
 ## Next Steps
 
 The
-[traffic splitting example](../traffic-splitting)
+[traffic splitting example](../../traffic-splitting)
 continues from here to walk through creating new Revisions and splitting traffic
 between multiple Revisions.
 
