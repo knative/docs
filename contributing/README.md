@@ -1,6 +1,6 @@
 
 _Important_. Before proceeding, please review the Knative community
-[Code of Conduct](CODE-OF-CONDUCT.md).
+[Code of Conduct](./CODE-OF-CONDUCT.md).
 
 If you any have questions or concerns, please contact the authors at
 knative-code-of-conduct@googlegroups.com.
@@ -21,19 +21,19 @@ improving docs, giving talks, etc.
 
 Other Documents
 
-- [Code of Conduct](CODE-OF-CONDUCT.md) - all contributors must abide by the
+- [Code of Conduct](./CODE-OF-CONDUCT.md) - all contributors must abide by the
   code of conduct
-- [Contributing to Knative](CONTRIBUTING.md) - guidelines and advice on becoming
+- [Contributing to Knative](./CONTRIBUTING.md) - guidelines and advice on becoming
   a contributor
-- [Working Groups](WORKING-GROUPS.md) - describes our various working groups
-- [Working Group Processes](WORKING-GROUP-PROCESSES.md) - describes how working
+- [Working Groups](./WORKING-GROUPS.md) - describes our various working groups
+- [Working Group Processes](./WORKING-GROUP-PROCESSES.md) - describes how working
   groups operate
-- [Technical Oversight Committee](TECH-OVERSIGHT-COMMITTEE.md) - describes our
+- [Technical Oversight Committee](./TECH-OVERSIGHT-COMMITTEE.md) - describes our
   technical oversight committee
-- [Steering Committee](STEERING-COMMITTEE.md) - describes our steering committee
-- [Community Roles](ROLES.md) - describes the roles individuals can assume
+- [Steering Committee](./STEERING-COMMITTEE.md) - describes our steering committee
+- [Community Roles](./ROLES.md) - describes the roles individuals can assume
   within the Knative community
-- [Reviewing and Merging Pull Requests](REVIEWING.md) - how we manage pull
+- [Reviewing and Merging Pull Requests](./REVIEWING.md) - how we manage pull
   requests
 
 ## Introduction
@@ -55,24 +55,24 @@ Beyond the official documentation there are endless possibilities for combining
 tools, platforms, languages, and products. By submitting a tutorial you can
 share your experience and help others who are solving similar problems.
 
-Community tutorials are stored in Markdown files on
-[GitHub](./samples/README.md) where they can be reviewed and edited by the
-community.
+Community tutorials are stored in Markdown files under the `community` folder
+[Community Samples](../community/samples/README.md).  These documents
+are contributed, reviewed, and maintained by the community.
 
-Please submit a Pull Request to the community sample directory under the Knative
-component that your tutorial highlights - [Serving](../community/samples/serving/),
-[Eventing](../community/samples/eventing/), or [Build](../community/samples/build/). A reviewer will
-be assigned to review your submission. They'll work with you to ensure your
-submission meets the [style guide](DOCS-CONTRIBUTING.md), but it helps if you
-follow it as you write your tutorial.
+Submit a Pull Request to the community sample directory under the Knative
+component folder that aligns with your document. For example, Knative Serving
+samples are under the `serving` folder. A reviewer will be assigned to review your 
+submission. They'll work with you to ensure that your submission is clear, correct,
+and meets the [style guide](./DOCS-CONTRIBUTING.md), but it helps if you follow it 
+as you write your tutorial.
 
 ## Meetings and work groups
 
 Knative has public and recorded bi-weekly community meetings.
 
-Each project has one or more [working groups](WORKING-GROUPS.md) driving the
+Each project has one or more [working groups](./WORKING-GROUPS.md) driving the
 project, and Knative as a single
-[technical oversight community](TECH-OVERSIGHT-COMMITTEE.md) monitoring the
+[technical oversight community](./TECH-OVERSIGHT-COMMITTEE.md) monitoring the
 overall project.
 
 ## How can I help
@@ -98,7 +98,7 @@ following resources are available for you:
 - [Knative Users](https://groups.google.com/forum/#!forum/knative-users)
 - [Knative Developers](https://groups.google.com/forum/#!forum/knative-dev)
 
-For contributors to Knative, we also have [Knative Slack](SLACK-GUIDELINES.md).
+For contributors to Knative, we also have [Knative Slack](./SLACK-GUIDELINES.md).
 
 ---
 

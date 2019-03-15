@@ -218,6 +218,7 @@ approver in an OWNERS file:
 
 - Demonstrate sound technical judgment.
 
+
 - Responsible for project quality control via [code reviews](./REVIEWING.md).
 
   - Focus on holistic acceptance of contribution such as dependencies with other

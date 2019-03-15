@@ -31,7 +31,7 @@ that allows sending logs to a Elasticsearch service.
 
 ### Send logs to Stackdriver
 
-This sample [Dockerfile](stackdriver/Dockerfile) is based on
+This sample [Dockerfile](./stackdriver/Dockerfile) is based on
 [k8s.gcr.io/fluentd-elasticsearch:v2.0.4](https://github.com/kubernetes/kubernetes/tree/master/cluster/addons/fluentd-elasticsearch).
 It additionally adds one more plugin -
 [fluent-plugin-google-cloud](https://github.com/GoogleCloudPlatform/fluent-plugin-google-cloud)
@@ -39,7 +39,7 @@ which allows sending logs to Stackdriver.
 
 Operators can build this image and push it to a container registry which their
 Kubernetes cluster has access to. See
-[Setting Up A Logging Plugin](/serving/setting-up-a-logging-plugin.md) for
+[Setting Up A Logging Plugin](../setting-up-a-logging-plugin.md) for
 details. **NOTE**: Operators need to add credentials file the stackdriver agent
 needs to the docker image if their Knative Serving is not built on a GCP based
 cluster or they want to send logs to another GCP project. See

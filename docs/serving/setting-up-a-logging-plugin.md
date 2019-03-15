@@ -35,7 +35,7 @@ collecting `stdout/stderr` logs from the containers:
    in
    [200-fluentd.yaml](https://github.com/knative/serving/blob/master/config/monitoring/logging/elasticsearch/200-fluentd.yaml)
    with the Fluentd image including the desired Fluentd output plugin. See
-   [here](fluentd/README.md) for the requirements of Flunetd image on Knative.
+   [here](./fluentd/README.md) for the requirements of Flunetd image on Knative.
 
 ### Configure the Sidecar for log files under /var/log
 
@@ -83,7 +83,7 @@ the Elasticsearch and Kibana services. Knative provides this sample:
 kubectl apply --recursive --filename third_party/config/monitoring/logging/elasticsearch
 ```
 
-See [here](/serving/installing-logging-metrics-traces.md) for deploying the
+See [here](./installing-logging-metrics-traces.md) for deploying the
 whole Knative monitoring components.
 
 ## Uninstalling

@@ -218,4 +218,4 @@ g.Eventually(func() error {
 These edits in the reference project can be viewed at
 https://github.com/grantr/sample-source/pull/9.
 
-Next: [Publish to Cluster](04-publish-to-cluster.md)
+Next: [Publish to Cluster](./04-publish-to-cluster.md)

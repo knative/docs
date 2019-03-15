@@ -61,7 +61,7 @@ Docker daemon, which would give the build complete access to your entire
 cluster. So that's a very bad idea.
 
 `kaniko` expects to run inside a container, so it's a natural fit for the Build
-CRD [builder contract](...). `kaniko` is available as a builder at
+CRD [builder contract](../build/builder-contract.md). `kaniko` is available as a builder at
 `gcr.io/kaniko-project/executor:latest`, and there's a `BuildTemplate` that
 wraps it at
 https://github.com/knative/build-templates/blob/master/kaniko/kaniko.yaml. It

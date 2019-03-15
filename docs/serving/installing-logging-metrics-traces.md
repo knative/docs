@@ -56,7 +56,7 @@ install:
 
 1. [Elasticsearch and Kibana](#elasticsearch-and-kibana)
 1. [Stackdriver](#stackdriver)
-1. [Custom logging plugin](setting-up-a-logging-plugin.md)
+1. [Custom logging plugin](./setting-up-a-logging-plugin.md)
 
 ### Elasticsearch and Kibana
 
@@ -139,7 +139,7 @@ explore.
   `Index pattern` and select `@timestamp` from `Time Filter field name` and
   click on `Create` button.
 
-![Create logstash-* index](images/kibana-landing-page-configure-index.png)
+![Create logstash-* index](../images/kibana-landing-page-configure-index.png)
 
 See [Accessing Logs](./accessing-logs.md) for more information about logs in
 Knative.
@@ -157,7 +157,7 @@ To configure and setup monitoring:
     ```
 
 1.  Choose a container image that meets the
-    [Fluentd image requirements](fluentd/README.md#requirements). For example,
+    [Fluentd image requirements](./fluentd/README.md#requirements). For example,
     you can use a public image. Or you can create a custom one and upload the
     image to a container registry which your cluster has read access to.
 
@@ -169,7 +169,7 @@ To configure and setup monitoring:
     - You want to send logs to another GCP project.
 
 1.  Follow the instructions in
-    ["Setting up a logging plugin"](setting-up-a-logging-plugin.md#Configuring)
+    ["Setting up a logging plugin"](./setting-up-a-logging-plugin.md#Configuring)
     to configure the stackdriver components settings.
 
 1.  Install Knative Stackdriver components by running the following command from

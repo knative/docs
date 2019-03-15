@@ -110,13 +110,13 @@ The eventing infrastructure supports two forms of event delivery at the moment:
    to the requested destinations and should buffer the events if the destination
    Service is unavailable.
 
-![Control plane object model](control-plane.png)
+![Control plane object model](./images/control-plane.png)
 
 The actual message forwarding is implemented by multiple data plane components
 which provide observability, persistence, and translation between different
 messaging protocols.
 
-![Data plane implementation](data-plane.png)
+![Data plane implementation](./images/data-plane.png)
 
 <!-- TODO(evankanderson): add documentation for Kafka bus once it is available. -->
 
@@ -131,7 +131,7 @@ part of the `sources` category, so you can list all existing Sources with
 `kubectl get sources`. The currently-implemented Sources are described below:
 
 _Want to implement your own source? Check out
-[the tutorial](samples/writing-a-source/README.md)._
+[the tutorial](../samples/writing-a-source/README.md)._
 
 ### KubernetesEventSource
 
@@ -257,11 +257,11 @@ See the [Cronjob Source](samples/cronjob-source) example.
 
 - [Setup Knative Serving](../install/README.md)
 - [Install Eventing components](#installation)
-- [Run samples](samples/)
+- [Run samples](./samples/)
 
 ## Configuration
 
-- [Default Channels](channels/default-channels.md) provide a way to choose the
+- [Default Channels](./channels/default-channels.md) provide a way to choose the
   persistence strategy for Channels across the cluster.
 
 ---

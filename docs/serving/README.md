@@ -40,7 +40,7 @@ serverless workload behaves on the cluster:
 
 ## Getting Started
 
-To get started with Serving, check out one of the [hello world](samples/) sample
+To get started with Serving, check out one of the [hello world](./samples/) sample
 projects. These projects use the `Service` resource, which manages all of the
 details for you.
 

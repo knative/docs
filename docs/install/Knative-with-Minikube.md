@@ -9,7 +9,7 @@ This guide walks you through the installation of the latest version of
 demonstrates creating and deploying an image of a sample "hello world" app onto
 the newly created Knative cluster.
 
-You can find [guides for other platforms here](README.md).
+You can find [guides for other platforms here](./README.md).
 
 ## Before you begin
 
@@ -59,7 +59,7 @@ minikube start --memory=8192 --cpus=4 \
 
 > Note: [Gloo](https://gloo.solo.io/) is available as an alternative to Istio.
 > Gloo is not currently compatible with the Knative Eventing component.
-> [Click here](Knative-with-Gloo.md) to install Knative with Gloo.
+> [Click here](./Knative-with-Gloo.md) to install Knative with Gloo.
 
 Knative depends on Istio. Run the following to install Istio. (We are changing
 `LoadBalancer` to `NodePort` for the `istio-ingress` service).
@@ -137,7 +137,7 @@ Now that your cluster has Knative installed, you're ready to deploy an app.
 
 If you'd like to follow a step-by-step guide for deploying your first app on
 Knative, check out the
-[Getting Started with Knative App Deployment](getting-started-knative-app.md)
+[Getting Started with Knative App Deployment](./getting-started-knative-app.md)
 guide.
 
 If you'd like to view the available sample apps and deploy one of your choosing,
