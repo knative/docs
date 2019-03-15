@@ -65,7 +65,7 @@ samples are under the `serving` folder. A reviewer will be assigned to review yo
 submission. They'll work with you to ensure your submission meets the 
 [style guide](./DOCS-CONTRIBUTING.md), but it helps if you follow it as you 
 write your tutorial.
-
+They'll work with you to ensure that your submission is clear, correct, and follows the style guide...
 ## Meetings and work groups
 
 Knative has public and recorded bi-weekly community meetings.
