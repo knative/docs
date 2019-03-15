@@ -1,6 +1,6 @@
 ---
-name: Feature request -- new or updated documentation
-about: For upcoming changes to the documentation
+name: New/changing functionality in Knative
+about: For new features in Knative, or updates to existing functionality
 title: ''
 labels: ''
 assignees: ''
@@ -11,7 +11,8 @@ assignees: ''
 
 ## How will this impact our users?
 
-## When will the change take effect (to the best of your knowledge)?
+## In what release will this take happen (to the best of your knowledge)?
+Ex. v0.2-v0.3
 
 ## Context
 Link to associated PRs or issues from other repos here.
