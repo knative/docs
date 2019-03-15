@@ -9,7 +9,7 @@ import (
 	"log"
 	"time"
 
-	pb "github.com/knative/docs/serving/samples/grpc-ping-go/proto"
+	pb "github.com/knative/docs/docs/serving/samples/grpc-ping-go/proto"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 )

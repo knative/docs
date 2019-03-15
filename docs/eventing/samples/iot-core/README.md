@@ -191,7 +191,7 @@ see them in the subscriber.
 1.  In a separate terminal, run the following program to generate events.
 
     ```shell
-    go run github.com/knative/docs/eventing/samples/iot-core/generator \
+    go run github.com/knative/docs/docs/eventing/samples/iot-core/generator \
         -project $IOTCORE_PROJECT \
         -region $IOTCORE_REGION \
         -registry $IOTCORE_REGISTRY \

@@ -15,8 +15,8 @@
 FROM golang AS builder
 
 # copy the source
-ADD .   /go/src/github.com/knative/docs/serving/samples/gitwebhook-go
-WORKDIR /go/src/github.com/knative/docs/serving/samples/gitwebhook-go
+ADD .   /go/src/github.com/knative/docs/docs/serving/samples/gitwebhook-go
+WORKDIR /go/src/github.com/knative/docs/docs/serving/samples/gitwebhook-go
 
 # install dependencies
 RUN go get github.com/google/go-github/github
