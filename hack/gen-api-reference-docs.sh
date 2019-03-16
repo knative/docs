@@ -178,11 +178,13 @@ main() {
     gen_refdocs "${refdocs_bin}" "${clone_root}" "${out_dir}" \
         "${KNATIVE_EVENTING_SOURCES_OUT_FILE}" "${knative_eventing_sources_root}"
 
-    log "Generated files written to ${clone_root}/out/."
-    log "Opening your tmp/ directory. You can now copy/overwrite the"
-    log "'docs/reference/' folder with the API files you generated."
+    log "SUCCESS: Generated docs written to ${out_dir}/."
+    log "Opening the ${out_dir}/ directory. You can now copy these API files"
+    log "from ${out_dir}/, into the 'docs/reference/' directory of knative/docs."
     if command -v xdg-open >/dev/null; then
-        xdg-open "${clone_root}/out/"
+        xdg-open "${out_dir}/"
+    elif command -v open >/dev/null; then
+        open "${out_dir}/"
     fi
 }
 
