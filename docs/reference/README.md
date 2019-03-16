@@ -91,7 +91,8 @@ To generate a version of the API:
 
 You can now perform the necessary steps to open a PR, complete a review, and
 merge the new API files into the appropriate branch of the `knative/docs` repo.
-
+See the [contributor flow](../../contributing/DOCS-CONTRIBUTING.md) for 
+details about requesting changes in the `knative/docs` repo.
 
 ### Example
 
