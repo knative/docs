@@ -1,9 +1,13 @@
 # Knative API Reference documentation
 
-The reference documentation for the latest release of the Knative is available
-at [www.knative.dev](https://www.knative.dev/docs/reference/).
+## View the latest release
 
-Use the following list to view the "pre-release" source files:
+The reference documentation for the latest release of the Knative is available
+at [**www.knative.dev**](https://www.knative.dev/docs/reference/).
+
+### Source files
+
+The API source files are located at:
 
 - [Serving API](./serving.md)
 - [Build API](./build.md)
@@ -16,7 +20,7 @@ Use the following list to view the "pre-release" source files:
 The Knative API reference documentation is manually generated using the
 [`gen-api-reference-docs.sh`](../../hack/) tool. If you need to generate a new
 version of the API docs for a recent update or for a new release, you can use
-the steps below.
+the following steps.
 
 To learn more about the tool, see the
 [gen-crd-api-reference-docs](https://github.com/ahmetb/gen-crd-api-reference-docs)
@@ -30,14 +34,14 @@ tool:
 * You need the following software installed:
   * [`git`](https://git-scm.com/download/)
   * [`go` version 1.11+](https://golang.org/dl/)
-* You must locally clone the [knative/docs](https://github.com/knative/docs)
-  repository. For example: `git clone git@github.com:knative/docs.git`
+* Clone [knative/docs](https://github.com/knative/docs)
+  locally. For example: `git clone git@github.com:knative/docs.git`
 
 ### Generating the API
 
 To generate a version of the API:
 
-1. Ensure that your `GOPATH` excludes a value. The `gen-api-reference-docs.sh`
+1. Ensure that your `GOPATH` is empty. The `gen-api-reference-docs.sh`
    script will result in the `GOPATH should not be set` error if your `GOPATH`
    is configured. You view the value by running the following command:
 
@@ -52,7 +56,7 @@ To generate a version of the API:
      export GOPATH=""
      ```
 
-1. Locate the commit or tag numbers that correspond to the version of the API
+1. Locate the commits or tags that correspond to the version of the API
    that you want to generate:
 
    * [Build](https://github.com/knative/build/releases/)
@@ -61,7 +65,7 @@ To generate a version of the API:
    * [Serving](https://github.com/knative/serving/releases/)
 
 1. To run the `gen-api-reference-docs.sh` command from the `hack` directory,
-   you specify the commit numbers or tags for each of the corresponding Knative
+   you specify the commits or tags for each of the corresponding Knative
    component variables (`KNATIVE_[component_name]_COMMIT`):
 
     ```
@@ -72,7 +76,9 @@ To generate a version of the API:
     ./gen-api-reference-docs.sh
     ```
 
-    where `[commit_or_tag]` is the commit number or repo tag.
+    where `[commit_or_tag]` is the commit or tag in the specific repo that
+    represents the version of the API that you want to generate. Also see
+    the [example](#example) below.
 
     **Result**
 
@@ -84,16 +90,19 @@ To generate a version of the API:
    knative/docs clone.
 
 You can now perform the necessary steps to open a PR, complete a review, and
-merge the new API files into the appropriate branch of the knative/docs repo.
+merge the new API files into the appropriate branch of the `knative/docs` repo.
 
 
 ### Example
 
 To build a set of Knative API docs for v0.3, you can use the `v0.3.0` the tags
 from each of the Knative component repositories, like
-[Serving v0.3.0](https://github.com/knative/serving/tree/v0.3.0).
+[Serving v0.3.0](https://github.com/knative/serving/tree/v0.3.0). If you want to
+use a commit for Serving v0.3.0, you would use 
+[4d198d](https://github.com/knative/serving/commit/4d198db8756db2f8a3c228302a97fb3a216a9475).
 
-Using tags from each repo, you would run the following command:
+Using tags from each repo, you would run the following command to generate the 
+v0.3.0 API source files:
 
 ```
 KNATIVE_BUILD_COMMIT=v0.3.0 \
