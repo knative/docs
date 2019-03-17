@@ -1,8 +1,8 @@
 # Knative Community Roles
 
-This document describes the set of roles individuals might have within the Knative
-community, the requirements of each role, and the privileges that each role
-grants.
+This document describes the set of roles individuals might have within the
+Knative community, the requirements of each role, and the privileges that each
+role grants.
 
 - [Role Summary](#role-summary)
 - [Collaborator](#collaborator)
@@ -115,8 +115,8 @@ with the PR bot.
 - Working on some contribution to the project that would benefit from the
   ability to have PRs or Issues to be assigned to the contributor.
 
-- Join [knative-users@](https://groups.google.com/forum/#!forum/knative-users)
-  , which grants read access to documents in the Team Drive.
+- Join [knative-users@](https://groups.google.com/forum/#!forum/knative-users) ,
+  which grants read access to documents in the Team Drive.
 
 ## Member
 
@@ -138,8 +138,8 @@ this is not a requirement.
 
 ### Requirements
 
-- Has made multiple contributions to the project or community. Contributions might
-  include, but are not limited to:
+- Has made multiple contributions to the project or community. Contributions
+  might include, but are not limited to:
 
   - Authoring and reviewing PRs on GitHub.
 
@@ -190,13 +190,13 @@ approver in an OWNERS file:
 - Reviewer of the codebase for at least 3 months.
 
 - Primary reviewer for at least 10 substantial PRs to the codebase.
+
   - One path for getting the necessary reviews is to add yourself to the
-    `reviewers` section of the OWNERS file. Note that this does not give
-    you any additional privileges. By having yourself listed in this
-    section in OWNERS file means that you will get PRs assigned to you
-    for code review. Getting added to `reviewers` section is at the
-    discretion of an approver after enough evidence of quality
-    contributions.
+    `reviewers` section of the OWNERS file. Note that this does not give you any
+    additional privileges. By having yourself listed in this section in OWNERS
+    file means that you will get PRs assigned to you for code review. Getting
+    added to `reviewers` section is at the discretion of an approver after
+    enough evidence of quality contributions.
 
 - Reviewed or merged at least 30 PRs to the codebase.
 

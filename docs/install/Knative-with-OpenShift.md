@@ -23,7 +23,7 @@ directory by downloading the right release tarball for your OS from the
 
 ```shell
 wget https://github.com/openshift/origin/releases/download/v3.11.0/openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit.tar.gz -o oc.tar.gz
-tar xzvf openshift*tar.gz 
+tar xzvf openshift*tar.gz
 mv openshift-origin-client-tools-*/oc .
 mv openshift-origin-client-tools-*/kubectl .
 rm -rf openshift-origin-client-tools-*/
@@ -33,9 +33,9 @@ You will now have the `oc` (and `kubectl`) binaries in your local directory.
 
 ## Scripted cluster setup and installation
 
-For Linux and Mac, once you have `oc` present on your machine and in your `PATH`, you can run a
-[script](scripts/knative-with-openshift.sh) that automates the steps on this
-page.  It will:
+For Linux and Mac, once you have `oc` present on your machine and in your
+`PATH`, you can run a [script](scripts/knative-with-openshift.sh) that automates
+the steps on this page. It will:
 
 - Create a new OpenShift cluster on your local machine with `oc cluster up`
 - Install Istio and Knative serving
@@ -46,7 +46,8 @@ Once the script completes, you'll be ready to test out Knative!
 
 ## Creating a new OpenShift cluster
 
-Here are the manual steps which the above script automates for you in case you prefer doing this yourself:
+Here are the manual steps which the above script automates for you in case you
+prefer doing this yourself:
 
 Create a new OpenShift cluster on your local machine using `oc cluster up`:
 

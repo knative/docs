@@ -68,7 +68,8 @@ docker push "${REPO}/docs/serving/samples/knative-routing-go"
    configuration file `serving/samples/knative-routing-go/sample.yaml`:
 
    - Manually replace:
-     `image: github.com/knative/docs/docs/serving/samples/knative-routing-go` with
+     `image: github.com/knative/docs/docs/serving/samples/knative-routing-go`
+     with
      `image: <YOUR_CONTAINER_REGISTRY>docs/serving/samples/knative-routing-go`
 
    Or
