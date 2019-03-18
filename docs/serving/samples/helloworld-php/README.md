@@ -52,10 +52,6 @@ recreate the source files from this folder.
    # RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
    # https://hub.docker.com/_/php#configuration
    RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
-
-   # Service must listen to $PORT environment variable.
-   # This default value facilitates local development.
-   ENV PORT 8080
    ```
 
 1. Create a new file, `service.yaml` and copy the following service definition
