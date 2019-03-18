@@ -65,7 +65,7 @@ kubectl apply --recursive --filename config/monitoring/100-namespace.yaml \
 ```
 
 In the commands above, replace `<path-of-fluentd-daemonset-config>` with the
-Fluentd DaemonSet configuration file, e.g. `config/monitoring/stackdriver`.
+Fluentd DaemonSet configuration file, e.g. `config/monitoring/logging/stackdriver`.
 
 **NOTE**: The deployment above will not affect the fluentd sidecar of existing
 pods. Developers need to redeploy their app to get the newest configuration for
@@ -76,7 +76,7 @@ backends. For example, if they desire Elasticsearch&Kibana, they have to deploy
 the Elasticsearch and Kibana services. Knative provides this sample:
 
 ```shell
-kubectl apply --recursive --filename third_party/config/monitoring/elasticsearch
+kubectl apply --recursive --filename third_party/config/monitoring/logging/elasticsearch
 ```
 
 See [here](/serving/installing-logging-metrics-traces.md) for deploying the
