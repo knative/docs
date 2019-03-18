@@ -57,8 +57,12 @@ The current membership of the Steering committee is (listed alphabetically by na
 | <img width="30px" src="https://github.com/dewitt.png">   | DeWitt Clinton | Google  | [@dewitt](https://github.com/dewitt)     |
 | <img width="30px" src="https://github.com/mchmarny.png"> | Mark Chmarny   | Google  | [@mchmarny](https://github.com/mchmarny) |
 | <img width="30px" src="https://github.com/isdal.png">    | Tomas Isdal    | Google  | [@isdal](https://github.com/isdal)       |
+|   | TBD-1    | TBD  | Google       |
+|   | TBD-2    | TBD  | IBM       |
+|   | TBD-3    | TBD  | Pivotal       |
+|   | TBD-4    | TBD  | Red Hat       |
 
-There are 4 additional seats to fill at this time.
+There are 4 additional seats to fill at this time, as indiciated by TBD.
 
 ### Allocation of seats
 
