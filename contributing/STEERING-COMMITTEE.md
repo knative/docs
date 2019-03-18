@@ -79,7 +79,7 @@ company who holds the seat shall nominate a new individual for the seat.
 Changes to the number of seats, which company seats are allocated to, and nominations
 to the committee are confirmed by majority vote of the committee members.
 
-## Frequently asked questions
+## Clarifications
 
 _Why are seats company held?_
 
@@ -109,7 +109,8 @@ _How are steering committee decisions reached?_
 
 The steering committee desires to always reach consensus. Decisions are made in
 meetings when a quorum of the members are present and may pass with majority
-vote. Quorum is considered reached when at least half of the members are present.
+of the committee supporting it. Quorum is considered reached when at least half
+of the members are present.
 
 The committee's charter may be changed by majority consent of committee members.
 
