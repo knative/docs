@@ -36,10 +36,10 @@ More information about this use case is demonstrated in
 See the following reference topics for information about each of the build
 components:
 
-- [`Build`](https://github.com/knative/docs/blob/master/build/builds.md)
-- [`BuildTemplate`](https://github.com/knative/docs/blob/master/build/build-templates.md)
-- [`Builder`](https://github.com/knative/docs/blob/master/build/builder-contract.md)
-- [`ServiceAccount`](https://github.com/knative/docs/blob/master/build/auth.md)
+- [`Build`](./builds.md)
+- [`BuildTemplate`](./build-templates.md)
+- [`Builder`](./builder-contract.md)
+- [`ServiceAccount`](./auth.md)
 
 ## Install the Knative Build component
 
