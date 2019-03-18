@@ -41,7 +41,7 @@ acts as the final escalation point for any and all decisions within the project.
 
 ## Committee Meetings
 
-The Knative Steering Committee meets bi-weekly or as-needed.
+The Knative Steering Committee meets every two weeks or as-needed.
 Given the nature of the discussions in the committee, meetings are not generally
 open the public. Questions around governance are listed as issues in the
 [docs repo](https://github.com/knative/docs), and we invite your feedback there.
