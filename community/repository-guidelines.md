@@ -56,6 +56,8 @@ the repository read-only and makes it clear that the repository is retired and n
 
 ---
 
+Contents of this page are revised from the [Kubernetes repository guidelines](https://github.com/kubernetes/community/blob/master/github-management/kubernetes-repositories.md), which are licensed under Apache 2.0.
+
 Except as otherwise noted, the content of this page is licensed under the
 [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),
 and code samples are licensed under the
