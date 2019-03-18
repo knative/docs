@@ -22,19 +22,21 @@ Other Documents
 
 - [Code of Conduct](./CODE-OF-CONDUCT.md) - all contributors must abide by the
   code of conduct
-- [Contributing to Knative](./CONTRIBUTING.md) - guidelines and advice on
-  becoming a contributor
+- [Values](./VALUES.md) - shared goals and values for the community
+- [Contributing to Knative](./CONTRIBUTING.md) - guidelines and advice on becoming
+  a contributor
 - [Working Groups](./WORKING-GROUPS.md) - describes our various working groups
-- [Working Group Processes](./WORKING-GROUP-PROCESSES.md) - describes how
-  working groups operate
+- [Working Group Processes](./WORKING-GROUP-PROCESSES.md) - describes how working
+  groups operate
+- [Steering Committee](./STEERING-COMMITTEE.md) - describes our steering committee
 - [Technical Oversight Committee](./TECH-OVERSIGHT-COMMITTEE.md) - describes our
   technical oversight committee
-- [Steering Committee](./STEERING-COMMITTEE.md) - describes our steering
-  committee
 - [Community Roles](./ROLES.md) - describes the roles individuals can assume
   within the Knative community
 - [Reviewing and Merging Pull Requests](./REVIEWING.md) - how we manage pull
   requests
+- [Repository Guidelines](repository-guidelines.md) - how we create and remove
+  core repositories
 
 ## Introduction
 
