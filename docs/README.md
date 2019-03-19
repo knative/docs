@@ -1,8 +1,9 @@
 
-Knative (pronounced kay-nay-tiv) extends Kubernetes to provide a set of
-middleware components that are essential to build modern, source-centric, and
-container-based applications that can run anywhere: on premises, in the cloud,
-or even in a third-party data center.
+Knative (pronounced kay-nay-tiv) extends
+[Kubernetes](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/)
+to provide a set of middleware components that are essential to build modern,
+source-centric, and container-based applications that can run anywhere: on
+premises, in the cloud, or even in a third-party data center.
 
 Each of the components under the Knative project attempt to identify common
 patterns and codify the best practices that are shared by successful,
