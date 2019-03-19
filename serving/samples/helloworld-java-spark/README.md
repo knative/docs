@@ -19,12 +19,17 @@ While you can clone all of the code from this directory, hello world apps are
 generally more useful if you build them step-by-step. The following instructions
 recreate the source files from this folder.
 
-1. From the console, unzip the helloworld.zip  using the unzip command:
+1. From the console, clone this repository
 
    ```shell
-   unzip helloworld.zip
+   git clone https://github.com/knative/docs.git
    ```
 
+1. Change into this sample directory
+
+   ```shell
+   cd docs/serving/samples/helloworld-java-spark
+   ```
 
 1. Run the application locally:
 
