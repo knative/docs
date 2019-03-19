@@ -61,7 +61,7 @@ event sources. Sources manage registration and delivery of events from external
 systems using Kubernetes
 [Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
 Learn more about Eventing development in the
-[Eventing work group](../contributing/WORKING-GROUPS.md#events).
+[Eventing work group](../../contributing/WORKING-GROUPS.md#events).
 
 ## Installation
 
@@ -131,7 +131,7 @@ part of the `sources` category, so you can list all existing Sources with
 `kubectl get sources`. The currently-implemented Sources are described below:
 
 _Want to implement your own source? Check out
-[the tutorial](../samples/writing-a-source/README.md)._
+[the tutorial](./samples/writing-a-source/README.md)._
 
 ### KubernetesEventSource
 

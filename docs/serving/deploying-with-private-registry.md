@@ -4,8 +4,11 @@ title: "Deploying to Knative using a private container registry"
 weight: 10
 ---
 
-This guide walks you through deploying an application to Knative from source code in a git repository using a private container registry for the container image. The source code should contain a dockerfile. For this guide, we'll use this [helloworld app](https://github.com/knative/docs/tree/master/serving/samples/helloworld-go), but you could use your own.
-
+This guide walks you through deploying an application to Knative from source
+code in a git repository using a private container registry for the container
+image. The source code should contain a dockerfile. For this guide, we'll use
+this [helloworld app](./samples/hello-world/helloworld-go), but you could use
+your own.
 
 ## Set up a private container registry and obtain credentials
 If you do not want your container image to be publicly available, you may want to use a private container registry. In this example, we'll use IBM Container Registry, but most of these concepts will be similar for other clouds.
@@ -124,7 +127,7 @@ To build our application from the source on GitHub, and push the resulting image
                 git:
                   url: https://github.com/knative/docs
                   revision: master
-                subPath: serving/samples/helloworld-go
+                subPath: docs/serving/samples/hello-world/helloworld-go
               template:
                 name: kaniko
                 arguments:

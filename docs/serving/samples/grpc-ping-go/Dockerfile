@@ -20,8 +20,8 @@ RUN go get google.golang.org/grpc
 WORKDIR /go/src/github.com/knative/docs/
 ADD . /go/src/github.com/knative/docs/
 
-RUN CGO_ENABLED=0 go build -tags=grpcping ./serving/samples/grpc-ping-go/
-RUN CGO_ENABLED=0 go build -tags=grpcping ./serving/samples/grpc-ping-go/client
+RUN CGO_ENABLED=0 go build -tags=grpcping ./docs/serving/samples/grpc-ping-go/
+RUN CGO_ENABLED=0 go build -tags=grpcping ./docs/serving/samples/grpc-ping-go/client
 
 FROM gcr.io/distroless/static
 

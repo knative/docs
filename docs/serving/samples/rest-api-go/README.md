@@ -92,6 +92,7 @@ docker push "${REPO}/rest-api-go"
 Now that our image is available from the container registry, we can deploy the
 Knative Serving sample:
 
+
 ```shell
 kubectl apply --filename docs/serving/samples/rest-api-go/sample.yaml
 ```
@@ -240,6 +241,7 @@ between multiple Revisions.
 ## Clean Up
 
 To clean up the sample Service:
+
 
 ```shell
 kubectl delete --filename docs/serving/samples/rest-api-go/sample.yaml
