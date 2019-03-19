@@ -17,15 +17,15 @@ First, build and publish the gRPC server to DockerHub (replacing `{username}`):
 # Build and publish the container, run from the root directory.
 docker build \
   --tag "docker.io/{username}/grpc-ping-go" \
-  --file=serving/samples/grpc-ping-go/Dockerfile .
-docker push "${REPO}/serving/samples/grpc-ping-go"
+  --file=docs/serving/samples/grpc-ping-go/Dockerfile .
+docker push "${REPO}/docs/serving/samples/grpc-ping-go"
 ```
 
 Next, replace `{username}` in `sample.yaml` with your DockerHub username, and
 apply the yaml.
 
 ```shell
-kubectl apply --filename serving/samples/grpc-ping-go/sample.yaml
+kubectl apply --filename docs/serving/samples/grpc-ping-go/sample.yaml
 ```
 
 ## Use the client to stream messages to the gRPC server

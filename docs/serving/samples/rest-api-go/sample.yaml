@@ -27,7 +27,7 @@ spec:
           container:
             # This is the Go import path for the binary to containerize
             # and substitute here.
-            image: github.com/knative/docs/serving/samples/rest-api-go
+            image: github.com/knative/docs/docs/serving/samples/rest-api-go
             env:
               - name: RESOURCE
                 value: stock

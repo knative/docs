@@ -14,25 +14,25 @@ configuration.
 
 1. Replace the image reference path with our published image path in the
    configuration files
-   (`serving/samples/traffic-splitting/updated_configuration.yaml`:
+   (`docs/serving/samples/traffic-splitting/updated_configuration.yaml`:
 
    - Manually replace:
      `image: github.com/knative/docs/docs/serving/samples/rest-api-go` with
-     `image: <YOUR_CONTAINER_REGISTRY>/serving/samples/rest-api-go`
+     `image: <YOUR_CONTAINER_REGISTRY>/docs/serving/samples/rest-api-go`
 
    Or
 
    - Use run this command:
 
    ```
-   perl -pi -e "s@github.com/knative/docs@${REPO}@g" serving/samples/rest-api-go/updated_configuration.yaml
+   perl -pi -e "s@github.com/knative/docs@${REPO}@g" docs/serving/samples/rest-api-go/updated_configuration.yaml
    ```
 
 2. Deploy the new configuration to update the `RESOURCE` environment variable
    from `stock` to `share`:
 
 ```
-kubectl apply --filename serving/samples/traffic-splitting/updated_configuration.yaml
+kubectl apply --filename docs/serving/samples/traffic-splitting/updated_configuration.yaml
 ```
 
 3. Once deployed, traffic will shift to the new revision automatically. Verify
@@ -103,7 +103,7 @@ stock-configuration-example-00001   11m
 stock-configuration-example-00002   4m
 ```
 
-2. Update the `traffic` list in `serving/samples/rest-api-go/sample.yaml` as:
+2. Update the `traffic` list in `docs/serving/samples/rest-api-go/sample.yaml` as:
 
 ```yaml
 traffic:
@@ -116,7 +116,7 @@ traffic:
 3. Deploy your traffic revision:
 
 ```
-kubectl apply --filename serving/samples/rest-api-go/sample.yaml
+kubectl apply --filename docs/serving/samples/rest-api-go/sample.yaml
 ```
 
 4. Verify the deployment by checking the route status:
@@ -133,5 +133,5 @@ Once updated, you can make `curl` requests to the API using either `stock` or
 To clean up the sample service:
 
 ```
-kubectl delete --filename serving/samples/traffic-splitting/updated_configuration.yaml
+kubectl delete --filename docs/serving/samples/traffic-splitting/updated_configuration.yaml
 ```

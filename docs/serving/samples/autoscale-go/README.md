@@ -6,7 +6,7 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 1. A Kubernetes cluster with [Knative Serving](../../../install/README.md)
    installed.
 1. A
-   [metrics installation](../../serving/installing-logging-metrics-traces.md)
+   [metrics installation](../../installing-logging-metrics-traces.md)
    for viewing scaling graphs (optional).
 1. The `hey` load generator installed (`go get -u github.com/rakyll/hey`).
 1. Clone this repository, and move into the sample directory:
@@ -21,7 +21,7 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 1. Deploy the [sample](./service.yaml) Knative Service:
 
     ```
-    kubectl apply --filename serving/samples/autoscale-go/service.yaml
+    kubectl apply --filename docs/serving/samples/autoscale-go/service.yaml
     ```
 
 1. Find the ingress hostname and IP and export as an environment variable:
@@ -281,7 +281,7 @@ View the Knative Serving Scaling and Request dashboards (if configured).
 ## Cleanup
 
  ```
- kubectl delete --filename serving/samples/autoscale-go/service.yaml
+ kubectl delete --filename docs/serving/samples/autoscale-go/service.yaml
  ```
 
 ## Further reading

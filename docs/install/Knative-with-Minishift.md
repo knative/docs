@@ -153,13 +153,13 @@ until oc login -u admin -p admin; do sleep 5; done;
 ### Installing Istio
 
 Knative depends on Istio. The
-[istio-openshift-policies.sh](scripts/istio-openshift-policies.sh) does run the
+[istio-openshift-policies.sh](./scripts/istio-openshift-policies.sh) does run the
 required commands to configure necessary
 [privileges](https://istio.io/docs/setup/kubernetes/platform-setup/openshift/)
 to the service accounts used by Istio.
 
 ```shell
-curl -s https://raw.githubusercontent.com/knative/docs/master/install/scripts/istio-openshift-policies.sh | bash
+curl -s https://raw.githubusercontent.com/knative/docs/master/docs/install/scripts/istio-openshift-policies.sh | bash
 ```
 
 1. Run the following to install Istio:
@@ -189,12 +189,12 @@ curl -s https://raw.githubusercontent.com/knative/docs/master/install/scripts/is
 The following section details on deploying
 [Knative Serving](https://github.com/knative/serving) to OpenShift.
 
-The [knative-openshift-policies.sh](scripts/knative-openshift-policies.sh) runs
+The [knative-openshift-policies.sh](./scripts/knative-openshift-policies.sh) runs
 the required commands to configure necessary privileges to the service accounts
 used by Knative.
 
 ```shell
-curl -s https://raw.githubusercontent.com/knative/docs/master/install/scripts/knative-openshift-policies.sh | bash
+curl -s https://raw.githubusercontent.com/knative/docs/master/docs/install/scripts/knative-openshift-policies.sh | bash
 ```
 
 > You can safely ignore the warnings:

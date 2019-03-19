@@ -52,22 +52,22 @@ Google Cloud Project and to enable the
 
 ```
 docker build \
-  --tag "${REPO}/serving/samples/telemetry-go" \
-  --file=serving/samples/telemetry-go/Dockerfile .
+  --tag "${REPO}/docs/serving/samples/telemetry-go" \
+  --file=docs/serving/samples/telemetry-go/Dockerfile .
 ```
 
 4. Push your container to a container registry:
 
 ```
-docker push "${REPO}/serving/samples/telemetry-go"
+docker push "${REPO}/docs/serving/samples/telemetry-go"
 ```
 
 5.  Replace the image reference path with our published image path in the
-    configuration file (`serving/samples/telemetry-go/sample.yaml`):
+    configuration file (`docs/serving/samples/telemetry-go/sample.yaml`):
 
     - Manually replace:
       `image: github.com/knative/docs/docs/serving/samples/telemetry-go` with
-      `image: <YOUR_CONTAINER_REGISTRY>/serving/samples/telemetry-go`
+      `image: <YOUR_CONTAINER_REGISTRY>/docs/serving/samples/telemetry-go`
 
 
         Or
@@ -76,7 +76,7 @@ docker push "${REPO}/serving/samples/telemetry-go"
 
 
         ```
-        perl -pi -e "s@github.com/knative/docs@${REPO}@g" serving/samples/telemetry-go/sample.yaml
+        perl -pi -e "s@github.com/knative/docs@${REPO}@g" docs/serving/samples/telemetry-go/sample.yaml
         ```
 
 ## Deploy the Service
@@ -84,7 +84,7 @@ docker push "${REPO}/serving/samples/telemetry-go"
 Deploy this application to Knative Serving:
 
 ```
-kubectl apply --filename serving/samples/telemetry-go/
+kubectl apply --filename docs/serving/samples/telemetry-go/
 ```
 
 ## Explore the Service
@@ -213,5 +213,5 @@ Then browse to http://localhost:9090.
 To clean up the sample service:
 
 ```
-kubectl delete --filename serving/samples/telemetry-go/
+kubectl delete --filename docs/serving/samples/telemetry-go/
 ```

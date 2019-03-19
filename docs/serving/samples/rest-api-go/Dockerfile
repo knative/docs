@@ -17,7 +17,7 @@ FROM golang AS builder
 WORKDIR /go/src/github.com/knative/docs/
 ADD . /go/src/github.com/knative/docs/
 
-RUN CGO_ENABLED=0 go build ./serving/samples/rest-api-go/
+RUN CGO_ENABLED=0 go build ./docs/serving/samples/rest-api-go/
 
 FROM gcr.io/distroless/base
 

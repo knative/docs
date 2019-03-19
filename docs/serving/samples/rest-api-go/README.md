@@ -65,29 +65,29 @@ registry specific instructions for both setup and authorizing the image push.
 
 ```
 docker build \
-  --tag "${REPO}/serving/samples/rest-api-go" \
-  --file serving/samples/rest-api-go/Dockerfile .
+  --tag "${REPO}/docs/serving/samples/rest-api-go" \
+  --file docs/serving/samples/rest-api-go/Dockerfile .
 ```
 
 5. Push your container to a container registry:
 
 ```
-docker push "${REPO}/serving/samples/rest-api-go"
+docker push "${REPO}/docs/serving/samples/rest-api-go"
 ```
 
 6. Replace the image reference path with our published image path in the
-   configuration files (`serving/samples/rest-api-go/sample.yaml`:
+   configuration files (`docs/serving/samples/rest-api-go/sample.yaml`:
 
    - Manually replace:
      `image: github.com/knative/docs/docs/serving/samples/rest-api-go` with
-     `image: <YOUR_CONTAINER_REGISTRY>/serving/samples/rest-api-go`
+     `image: <YOUR_CONTAINER_REGISTRY>/docs/serving/samples/rest-api-go`
 
    Or
 
    - Use run this command:
 
    ```
-   perl -pi -e "s@github.com/knative/docs@${REPO}@g" serving/samples/rest-api-go/sample.yaml
+   perl -pi -e "s@github.com/knative/docs@${REPO}@g" docs/serving/samples/rest-api-go/sample.yaml
    ```
 
 ## Deploy the Service
@@ -96,7 +96,7 @@ Now that our image is available from the container registry, we can deploy the
 Knative Serving sample:
 
 ```
-kubectl apply --filename serving/samples/rest-api-go/sample.yaml
+kubectl apply --filename docs/serving/samples/rest-api-go/sample.yaml
 ```
 
 The above command creates a Knative Service within your Kubernetes cluster in
@@ -226,7 +226,7 @@ Response body: `stock price for ticker <ticker> is <price>`
 ## Next Steps
 
 The
-[traffic splitting example](../../traffic-splitting)
+[traffic splitting example](../traffic-splitting/README.md)
 continues from here to walk through creating new Revisions and splitting traffic
 between multiple Revisions.
 
@@ -235,5 +235,5 @@ between multiple Revisions.
 To clean up the sample Service:
 
 ```
-kubectl delete --filename serving/samples/rest-api-go/sample.yaml
+kubectl delete --filename docs/serving/samples/rest-api-go/sample.yaml
 ```
