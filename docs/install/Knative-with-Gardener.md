@@ -88,7 +88,7 @@ Knative depends on Istio.
 3.  Monitor the Istio components until all of the components show a `STATUS` of
     `Running` or `Completed`: 
     ```bash 
-    kubectl get pods --namespace istio-system`
+    kubectl get pods --namespace istio-system
     ```
 
 It will take a few minutes for all the components to be up and running; you can
