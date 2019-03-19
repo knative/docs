@@ -11,7 +11,7 @@ You will need:
 
 1. An internet-accessible Kubernetes cluster with Knative Serving
    installed. Follow the [installation
-   instructions](https://github.com/knative/docs/blob/master/install/README.md)
+   instructions](https://github.com/knative/docs/blob/master/docs/install/README.md)
    if you need to create one.
 1. Ensure Knative Serving is [configured with a domain
    name](https://github.com/knative/docs/blob/master/serving/using-a-custom-domain.md)

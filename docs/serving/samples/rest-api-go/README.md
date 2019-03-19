@@ -7,7 +7,7 @@ then outputs the stock price.
 ## Prerequisites
 
 1. A Kubernetes cluster with
-   [Knative Serving](https://github.com/knative/docs/blob/master/install/README.md)
+   [Knative Serving](https://github.com/knative/docs/blob/master/docs/install/README.md)
    v0.3 or higher installed.
 1. [Docker](https://docs.docker.com/get-started/#prepare-your-docker-environment)
    installed locally.

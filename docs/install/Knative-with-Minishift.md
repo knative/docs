@@ -155,7 +155,7 @@ required commands to configure necessary
 to the service accounts used by Istio.
 
 ```shell
-curl -s https://raw.githubusercontent.com/knative/docs/master/install/scripts/istio-openshift-policies.sh | bash
+curl -s https://raw.githubusercontent.com/knative/docs/master/docs/install/scripts/istio-openshift-policies.sh | bash
 ```
 
 1. Run the following to install Istio:
@@ -190,7 +190,7 @@ the required commands to configure necessary privileges to the service accounts
 used by Knative.
 
 ```shell
-curl -s https://raw.githubusercontent.com/knative/docs/master/install/scripts/knative-openshift-policies.sh | bash
+curl -s https://raw.githubusercontent.com/knative/docs/master/docs/install/scripts/knative-openshift-policies.sh | bash
 ```
 
 > You can safely ignore the warnings:
