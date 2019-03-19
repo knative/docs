@@ -8,22 +8,25 @@ with the Knative project. It also describes how and when repositories are remove
 Core repositories are considered core components of Knative. They are utilities, tools,
 applications, or libraries that form or support the foundation of the project.
 
-### Rules
+Core repositories are all those located under the
+[github.com/knative organization](https://github.com/knative).
+
+### Core Repository Requirements
 
 * Repository must live under github.com/knative/project-name
 * Must adopt the Knative Code of Conduct
-* All code projects use the Apache License version 2.0. Documentation repositories must use
-  Creative Commons License version 4.0.
+* All code projects must use the Apache License version 2.0.
+* Documentation repositories must use Creative Commons License version 4.0.
 * All OWNERS must be members of the Knative community.
-* Repository must be approved by the Technical Oversight Committee.
+* Repository creation must be approved by the Technical Oversight Committee.
 
 ## Removing Repositories
 
-As important as it is to add new repositories, it is equally important to prune repositories
-when necessary.
+As important as it is to add new repositories, it is equally important to prune
+repositories when necessary. See [Grounds for removal](#grounds-for-removal).
 
-It is important to the success of Knative that all Knative repositories stay active, healthy,
-and aligned with the scope and mission of project.
+It is important to the success of Knative that all Knative repositories stay
+active, healthy, and aligned with the scope and mission of project.
 
 ### Grounds for removal
 
@@ -56,7 +59,9 @@ the repository read-only and makes it clear that the repository is retired and n
 
 ---
 
-Contents of this page are revised from the [Kubernetes repository guidelines](https://github.com/kubernetes/community/blob/master/github-management/kubernetes-repositories.md), which are licensed under Apache 2.0.
+Contents of this page are adopted from the
+[Kubernetes repository guidelines](https://github.com/kubernetes/community/blob/master/github-management/kubernetes-repositories.md),
+which is licensed under Apache License 2.0.
 
 Except as otherwise noted, the content of this page is licensed under the
 [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),

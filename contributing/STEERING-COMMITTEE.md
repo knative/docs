@@ -6,14 +6,10 @@ type: "docs"
 ---
 
 The Knative Steering Committee (KSC) is the ultimate authority for the Knative
-project, and controls all aspects of the project or delegates its authority
-to other committees.
-
-KSC has delegated technical guidance for the project to the
-[Technical Oversight Committee](./TECH-OVERSIGHT-COMMITTEE.md). However, the KSC
-acts as the final escalation point for any and all decisions within the project.
+project, and controls all aspects of the project.
 
 - [Charter](#charter)
+- [Delegated authority](#delegated-authority)
 - [Committee Meetings](#committee-meetings)
 - [Committee Mechanics](#committee-mechanics)
 - [Committee Members](#committee-members)
@@ -23,61 +19,89 @@ acts as the final escalation point for any and all decisions within the project.
 
 ## Charter
 
-1. Define, evolve, and defend the vision, values, mission, and scope of the
-   project - to establish and maintain the soul of Knative.
+1. Define, evolve, and defend the vision, values, mission, and scope of the project.
 1. Define and evolve project governance structures and policies, including
    project roles and how collaborators become members, approvers, leads,
    and/or administrators. This includes policy for the creation and
-   administration of community groups, [working groups](./WORKING-GROUPS.md) and
-   committees.
-1. Approve membership to the Technical Oversight Committee.
+   administration of [working groups](./WORKING-GROUPS.md) and committees.
 1. Steward, control access, delegate access, and establishes processes regarding,
    all Knative project resources and has the final say in the disposition of
    those resources.
 1. Manage the Knative brand and decide which things can be called "Knative" and
    how that mark can be used in relation to other efforts or vendors.
-1. Act as the final escalation point for any disputes or escalations from the
-   Technical Oversight Committee.
+1. Confirm/reject nominations to the KSC from organizations who are allocated seats.
+1. Confirm/reject nominations to the Technical Oversight Committee.
+1. Receive and handle reports about [code of conduct](./CODE-OF-CONDUCT.md)
+   violations and maintain confidentiality.
+1. Receive security reports; work with the appropriate technical leads to
+   accept or reject the report; maintain the private nature of such reports
+   until disclosed to the broader community.
+1. Act as the final escalation point and decider for any disputes, issues,
+   clarifications, or escalations within the project scope.
+
+## Delegated authority
+
+KSC may choose to delegate its authority to other
+committees as-needed. The committee currently recognizes this delegated authority
+for:
+
+- Technical guidance is delegated to the [Technical Oversight Committee](TECH-OVERSIGHT-COMMITTEE.md).
 
 ## Committee Meetings
 
-The Knative Steering Committee meets every two weeks or as-needed.
-Given the nature of the discussions in the committee, meetings are not generally
-open the public. Questions around governance are listed as issues in the
+KSC meets every two weeks or as-needed.
+
+Given the private nature of many of these discussions (e.g. privacy, private
+emails to the committee, code of conduct violations, escalations, disputes
+between members, security reports, etc.) meetings are not generally
+open the public.
+
+Questions and proposals for changes to governance are posted as issues in the
 [docs repo](https://github.com/knative/docs), and we invite your feedback there.
 
 ## Committee members
 
-Seats on the Steering Committee are held by a company, not by the individual.
+Seats on the Steering Committee are held by an organization, not by the individual.
 
 The current membership of the Steering committee is (listed alphabetically by name):
 
-| &nbsp;                                                   | Member         | Company | Profile                                  |
-| -------------------------------------------------------- | -------------- | ------- | ---------------------------------------- |
-| <img width="30px" src="https://github.com/dewitt.png">   | DeWitt Clinton | Google  | [@dewitt](https://github.com/dewitt)     |
-| <img width="30px" src="https://github.com/mchmarny.png"> | Mark Chmarny   | Google  | [@mchmarny](https://github.com/mchmarny) |
-| <img width="30px" src="https://github.com/isdal.png">    | Tomas Isdal    | Google  | [@isdal](https://github.com/isdal)       |
-|   | TBD-1    | Google  |        |
-|   | TBD-2    | IBM  |        |
-|   | TBD-3    | Pivotal  |        |
-|   | TBD-4    | Red Hat  |        |
+| &nbsp;                                                   | Member         | Organization | Profile                                  |
+| -------------------------------------------------------- | -------------- | ------------ | ---------------------------------------- |
+| <img width="30px" src="https://github.com/dewitt.png">   | DeWitt Clinton | Google       | [@dewitt](https://github.com/dewitt)     |
+| <img width="30px" src="https://github.com/mchmarny.png"> | Mark Chmarny   | Google       | [@mchmarny](https://github.com/mchmarny) |
+| <img width="30px" src="https://github.com/isdal.png">    | Tomas Isdal    | Google       | [@isdal](https://github.com/isdal)       |
+|   | TBD | Google   |        |
+|   | TBD | IBM      |        |
+|   | TBD | Pivotal  |        |
+|   | TBD | Red Hat  |        |
 
-There are 4 additional seats to fill at this time, as indiciated by TBD.
+There are currently four unfilled seats, as indicated by TBD.
 
 ### Allocation of seats
 
 Seats on the steering committee are allocated based upon contribution
-to the project. No final decision has been made on the exact formula.
-As the project continues to grow, we expect to add additional seats to the committee,
-ensuring that those contributing to the project are properly represented.
+to the project by an organization. No final decision has been made on the exact
+formula.
 
-At a minimum, seat allocation is reviewed once per year.
+As the project continues to grow, we expect to add additional seats to the
+committee, ensuring that those contributing to the project are properly
+represented. At a minimum, seat allocation is reviewed once per year.
 
-Members of the committee may step down at any time. When a member steps down, the
-company who holds the seat shall nominate a new individual for the seat.
-
-Changes to the number of seats, which company seats are allocated to, and nominations
-to the committee are confirmed by majority vote of the committee members.
+- After a seat is allocated to an organization, the organization shall nominate
+  a candidate to be confirmed by KSC. The committee reserves the right to not
+  confirm a candidate, in which the organization would need to nominate a new
+  candidate
+- Members of the committee may step down at any time. When a member steps down,
+  their organization shall nominate a new candidate.
+- If an organization is unable to seat a candidate, the KSC reserves the right
+  to reallocate the seat to another organization.
+- Changes to the number of seats, which company seats are allocated to, and
+  nominations to the committee are confirmed by majority vote of the committee
+  members.
+- In situations where the organization which holds a seat is no longer a viable
+  entity (e.g. merger, dissolution, bankruptcy) the KSC will make a decision on
+  how to reallocate that seat. Seats do not automatically transfer to any 
+  organization.
 
 ## Clarifications
 
@@ -124,7 +148,13 @@ from the same company, during absences.
 If you'd like to reach out to the committee, please drop a note
 to [knative-steering@googlegroups.com](mailto:knative-steering@googlegroups.com).
 
+All members of the KSC have access to the messages sent to this address.
+
 ---
+
+Portions of this document are adapted from the
+[Istio Steering Committee](https://github.com/istio/community/blob/master/STEERING-COMMITTEE.md)
+documentation, which is licensed under the Apache License 2.0.
 
 Except as otherwise noted, the content of this page is licensed under the
 [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),
