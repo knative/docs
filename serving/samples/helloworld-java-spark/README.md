@@ -1,6 +1,6 @@
-# Hello World - Spring Boot Java sample
+# Hello World - Spark Framework Java sample
 
-A simple web app written in Java using Spark Java Framework that you can use for
+A simple web app written in Java using [Spark Framework](http://sparkjava.com/) that you can use for
 testing.  
 
 ## Prerequisites
@@ -40,7 +40,7 @@ recreate the source files from this folder.
    Go to `http://localhost:8080/` to see your `Hello World!` message.
 
 1. In your project directory, create a file named `Dockerfile` and copy the code
-   block below into it. For detailed instructions on dockerizing a Spring Boot
+   block below into it. For detailed instructions on dockerizing a Spark Framework
    app, see
    [Spark with Docker](http://sparkjava.com/tutorials/docker).
    For additional information on multi-stage docker builds for Java see
