@@ -15,6 +15,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 set -euo pipefail
 
 SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -25,20 +26,24 @@ REFDOCS_REPO="https://${REFDOCS_PKG}.git"
 REFDOCS_VER="5c208a6"
 
 KNATIVE_SERVING_REPO="github.com/knative/serving"
-KNATIVE_SERVING_COMMIT="v0.2.3"
+KNATIVE_SERVING_COMMIT="${KNATIVE_SERVING_COMMIT:?specify the \$KNATIVE_SERVING_COMMIT variable}"
 KNATIVE_SERVING_OUT_FILE="serving.md"
 
 KNATIVE_BUILD_REPO="github.com/knative/build"
-KNATIVE_BUILD_COMMIT="v0.2.0"
+KNATIVE_BUILD_COMMIT="${KNATIVE_BUILD_COMMIT:?specify the \$KNATIVE_BUILD_COMMIT variable}"
 KNATIVE_BUILD_OUT_FILE="build.md"
 
 KNATIVE_EVENTING_REPO="github.com/knative/eventing"
-KNATIVE_EVENTING_COMMIT="v0.2.1"
+KNATIVE_EVENTING_COMMIT="${KNATIVE_EVENTING_COMMIT:?specify the \$KNATIVE_EVENTING_COMMIT variable}"
 KNATIVE_EVENTING_OUT_FILE="eventing/eventing.md"
 
 KNATIVE_EVENTING_SOURCES_REPO="github.com/knative/eventing-sources"
-KNATIVE_EVENTING_SOURCES_COMMIT="v0.2.1"
+KNATIVE_EVENTING_SOURCES_COMMIT="${KNATIVE_EVENTING_SOURCES_COMMIT:?specify the \$KNATIVE_EVENTING_SOURCES_COMMIT variable}"
 KNATIVE_EVENTING_SOURCES_OUT_FILE="eventing/eventing-sources.md"
+
+cleanup_refdocs_root=
+cleanup_repo_clone_root=
+trap cleanup EXIT
 
 log() {
     echo "$@" >&2
@@ -88,21 +93,32 @@ clone_at_commit() {
 }
 
 gen_refdocs() {
-    local refdocs_bin gopath out_file repo_root
+    local refdocs_bin gopath out_dir out_file repo_root
     refdocs_bin="$1"
     gopath="$2"
-    out_file="$3"
-    repo_root="$4"
+    out_dir="$3"
+    out_file="$4"
+    repo_root="$5"
 
     (
         cd "${repo_root}"
         env GOPATH="${gopath}" "${refdocs_bin}" \
-            -out-file "${gopath}/out/${out_file}" \
+            -out-file "${out_dir}/${out_file}" \
             -api-dir "./pkg/apis" \
             -config "${SCRIPTDIR}/reference-docs-gen-config.json"
     )
 }
 
+cleanup() {
+    if [ -d "${cleanup_refdocs_root}" ]; then
+        echo "Cleaning up tmp directory: ${cleanup_refdocs_root}"
+        rm -rf -- "${cleanup_refdocs_root}"
+    fi
+    if [ -d "${cleanup_repo_clone_root}" ]; then
+        echo "Cleaning up tmp directory: ${cleanup_repo_clone_root}"
+        rm -rf -- "${cleanup_repo_clone_root}"
+    fi
+}
 
 main() {
     if [[ -n "${GOPATH:-}" ]]; then
@@ -118,51 +134,56 @@ main() {
     # install and place the refdocs tool
     local refdocs_bin refdocs_bin_expected refdocs_dir
     refdocs_dir="$(mktemp -d)"
-    refdocs_bin="${refdocs_dir}/refdocs"
+    cleanup_refdocs_root="${refdocs_dir}"
     # clone repo for ./templates
     git clone --quiet --depth=1 "${REFDOCS_REPO}" "${refdocs_dir}"
     # install bin
     install_go_bin "${REFDOCS_PKG}@${REFDOCS_VER}"
     # move bin to final location
+    refdocs_bin="${refdocs_dir}/refdocs"
     refdocs_bin_expected="$(go env GOPATH)/bin/$(basename ${REFDOCS_PKG})"
     mv "${refdocs_bin_expected}" "${refdocs_bin}"
     [[ ! -f "${refdocs_bin}" ]] && fail "refdocs failed to install"
 
-    local clone_root
+    local clone_root out_dir
     clone_root="$(mktemp -d)"
+    cleanup_repo_clone_root="${clone_root}"
+    out_dir="$(mktemp -d)"
 
     local knative_serving_root
     knative_serving_root="${clone_root}/src/${KNATIVE_SERVING_REPO}"
     clone_at_commit "https://${KNATIVE_SERVING_REPO}.git" "${KNATIVE_SERVING_COMMIT}" \
         "${knative_serving_root}"
-    gen_refdocs "${refdocs_bin}" "${clone_root}" "${KNATIVE_SERVING_OUT_FILE}" \
-        "${knative_serving_root}"
+    gen_refdocs "${refdocs_bin}" "${clone_root}" "${out_dir}" \
+        "${KNATIVE_SERVING_OUT_FILE}" "${knative_serving_root}"
 
     local knative_build_root
     knative_build_root="${clone_root}/src/${KNATIVE_BUILD_REPO}"
     clone_at_commit "https://${KNATIVE_BUILD_REPO}.git" "${KNATIVE_BUILD_COMMIT}" \
         "${knative_build_root}"
-    gen_refdocs "${refdocs_bin}" "${clone_root}" "${KNATIVE_BUILD_OUT_FILE}" \
-        "${knative_build_root}"
+    gen_refdocs "${refdocs_bin}" "${clone_root}" "${out_dir}" \
+        "${KNATIVE_BUILD_OUT_FILE}" "${knative_build_root}"
 
     local knative_eventing_root
     knative_eventing_root="${clone_root}/src/${KNATIVE_EVENTING_REPO}"
     clone_at_commit "https://${KNATIVE_EVENTING_REPO}.git" "${KNATIVE_EVENTING_COMMIT}" \
         "${knative_eventing_root}"
-    gen_refdocs "${refdocs_bin}" "${clone_root}" "${KNATIVE_EVENTING_OUT_FILE}" \
-        "${knative_eventing_root}"
+    gen_refdocs "${refdocs_bin}" "${clone_root}" "${out_dir}" \
+        "${KNATIVE_EVENTING_OUT_FILE}" "${knative_eventing_root}"
 
     local knative_eventing_sources_root
     knative_eventing_sources_root="${clone_root}/src/${KNATIVE_EVENTING_SOURCES_REPO}"
     clone_at_commit "https://${KNATIVE_EVENTING_SOURCES_REPO}.git" "${KNATIVE_EVENTING_SOURCES_COMMIT}" \
         "${knative_eventing_sources_root}"
-    gen_refdocs "${refdocs_bin}" "${clone_root}" "${KNATIVE_EVENTING_SOURCES_OUT_FILE}" \
-        "${knative_eventing_sources_root}"
+    gen_refdocs "${refdocs_bin}" "${clone_root}" "${out_dir}" \
+        "${KNATIVE_EVENTING_SOURCES_OUT_FILE}" "${knative_eventing_sources_root}"
 
-    log "Generated files written to ${clone_root}/out/."
+    log "SUCCESS: Generated docs written to ${out_dir}/."
     log "Copy the files in reference/ directory to knative/docs."
-    if command -v open >/dev/null; then
-        open "${clone_root}/out/"
+    if command -v xdg-open >/dev/null; then
+        xdg-open "${out_dir}/"
+    elif command -v open >/dev/null; then
+        open "${out_dir}/"
     fi
 }
 
