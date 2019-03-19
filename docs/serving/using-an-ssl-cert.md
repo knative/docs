@@ -128,7 +128,7 @@ hosting provider.
 
 Knative currently only works with the `DNS01` challenge type for LetsEncrypt,
 which is only supported by a
-[small number of DNS providers through cert-manager](http://docs.cert-manager.io/en/latest/reference/issuers/acme/dns01.html?highlight=DNS#supported-dns01-providers).
+[small number of DNS providers through cert-manager](http://docs.cert-manager.io/en/latest/tasks/acme/configuring-dns01/index.html?highlight=supported%20DNS01%20providers#supported-dns01-providers).
 
 Instructions for configuring cert-manager are provided for the following DNS
 hosts:

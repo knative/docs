@@ -3,13 +3,13 @@ title: "Deploying to Knative using a private container registry"
 #linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
 weight: 10
 ---
-This guide walks you through deploying an application to Knative from source code in a git repository using a private container registry for the container image. The source code should contain a dockerfile. For this guide, we'll use this [helloworld app](https://github.com/knative/docs/tree/master/serving/samples/helloworld-go), but you could use your own.
+This guide walks you through deploying an application to Knative from source code in a git repository using a private container registry for the container image. The source code should contain a dockerfile. For this guide, we'll use this [helloworld app](./samples/hello-world/helloworld-go), but you could use your own.
 
 
 ## Set up a private container registry and obtain credentials
 If you do not want your container image to be publicly available, you may want to use a private container registry. In this example, we'll use IBM Container Registry, but most of these concepts will be similar for other clouds.
 
-1. Ensure you have the [IBM Cloud CLI](https://cloud.ibm.com/docs/cli/reference/ibmcloud/download_cli.html#install_use) installed.  
+1. Ensure you have the [IBM Cloud CLI](https://cloud.ibm.com/docs/cli/reference/ibmcloud/download_cli.html#install_use) installed.
 
 1. Install the container registry plugin:
 
@@ -17,12 +17,12 @@ If you do not want your container image to be publicly available, you may want t
     ibmcloud plugin install container-registry
     ```
 
-1. Choose a name for your first namespace, and then create it: 
+1. Choose a name for your first namespace, and then create it:
 
     ```
     ibmcloud cr namespace-add <my_namespace>
     ```
-    
+
     A namespace represents the spot within a registry that holds your images. You can set up multiple namespaces as well as control access to your namespaces by using IAM policies.
 
 1. Create a token:
@@ -30,7 +30,7 @@ If you do not want your container image to be publicly available, you may want t
     ```
     ibmcloud cr token-add --description "token description" --non-expiring --readwrite
     ```
-    
+
     The automated build processes you'll be setting up will use this token to access your images.
 
 1. The CLI output should include a token identifier and the token. Make note of the token. You can verify that the token was created by listing all tokens:
@@ -123,7 +123,7 @@ To build our application from the source on GitHub, and push the resulting image
                 git:
                   url: https://github.com/knative/docs
                   revision: master
-                subPath: serving/samples/helloworld-go
+                subPath: docs/serving/samples/hello-world/helloworld-go
               template:
                 name: kaniko
                 arguments:
@@ -133,7 +133,7 @@ To build our application from the source on GitHub, and push the resulting image
             spec:
               serviceAccountName: build-bot
               container:
-                image: registry.ng.bluemix.net/{NAMESPACE}/helloworld-go:latest 
+                image: registry.ng.bluemix.net/{NAMESPACE}/helloworld-go:latest
                 imagePullPolicy: Always
                 env:
                   - name: TARGET
@@ -141,7 +141,7 @@ To build our application from the source on GitHub, and push the resulting image
     ```
 
 1. Apply the configuration using `kubectl`:
-    
+
     ```
     kubectl apply -f service.yaml
     ```
