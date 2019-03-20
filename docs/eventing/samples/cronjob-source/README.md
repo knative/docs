@@ -95,3 +95,16 @@ to tail the logs of the subscriber.
 ```shell
 kail -l serving.knative.dev/service=message-dumper -c user-container --since=10m
 ```
+
+### Cleanup
+
+You can remove the Cron Event Source via:
+```shell
+kubectl delete --filename cronjob-source.yaml
+```
+
+Similarily, you can remove the Service via:
+
+```shell
+kubectl delete --filename service.yaml
+```
