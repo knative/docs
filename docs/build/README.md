@@ -1,4 +1,3 @@
-# Knative Build
 
 A `Build` is a custom resource in Knative that allows you to define a process
 that runs to completion and can provide status. For example, fetch, build, and
@@ -13,9 +12,9 @@ action, you can define a Knative `Build` through a single configuration file.
 
 Also consider using a Knative `Build` to build the source code of your apps into
 container images, which you can then run on
-[Knative `serving`](https://github.com/knative/docs/blob/master/serving/README.md).
+[Knative `serving`](../serving/README.md).
 More information about this use case is demonstrated in
-[this sample](https://github.com/knative/docs/blob/master/serving/samples/source-to-url-go).
+[this sample](../serving/samples/source-to-url-go).
 
 ## Key features of Knative Builds
 
@@ -36,10 +35,10 @@ More information about this use case is demonstrated in
 See the following reference topics for information about each of the build
 components:
 
-- [`Build`](https://github.com/knative/docs/blob/master/build/builds.md)
-- [`BuildTemplate`](https://github.com/knative/docs/blob/master/build/build-templates.md)
-- [`Builder`](https://github.com/knative/docs/blob/master/build/builder-contract.md)
-- [`ServiceAccount`](https://github.com/knative/docs/blob/master/build/auth.md)
+- [`Build`](./builds.md)
+- [`BuildTemplate`](./build-templates.md)
+- [`Builder`](./builder-contract.md)
+- [`ServiceAccount`](./auth.md)
 
 ## Install the Knative Build component
 
@@ -53,7 +52,7 @@ in your Kubernetes cluster:
   cluster, see [Installing Knative](../install/README.md).
 
 - If you have a component of Knative installed and running, you can
-  [add and install the Knative Build component](installing-build-component.md).
+  [add and install the Knative Build component](./installing-build-component.md).
 
 ## Configuration syntax example
 
@@ -104,7 +103,7 @@ builds.
 
 #### Complex samples
 
-- [Use Knative to build apps from source code and then run those containers](https://github.com/knative/docs/blob/master/serving/samples/source-to-url-go).
+- [Use Knative to build apps from source code and then run those containers](../serving/samples/source-to-url-go).
 
 ## Related info
 

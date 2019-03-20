@@ -1,9 +1,13 @@
-# Knative Install on Azure Kubernetes Service (AKS)
+---
+title: "Install on Azure Kubernetes Service (AKS)"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+weight: 15
+---
 
 This guide walks you through the installation of the latest version of Knative
 using pre-built images.
 
-You can find [guides for other platforms here](README.md).
+You can find [guides for other platforms here](./README.md).
 
 ## Before you begin
 
@@ -130,7 +134,7 @@ recommended configuration for a cluster is:
 
 > Note: [Gloo](https://gloo.solo.io/) is available as an alternative to Istio.
 > Gloo is not currently compatible with the Knative Eventing component.
-> [Click here](Knative-with-Gloo.md) to install Knative with Gloo.
+> [Click here](./Knative-with-Gloo.md) to install Knative with Gloo.
 
 Knative depends on Istio.
 
@@ -166,7 +170,7 @@ rerun the command to see the current status.
 
 The following commands install all available Knative components. To customize
 your Knative installation, see
-[Performing a Custom Knative Installation](Knative-custom-install.md).
+[Performing a Custom Knative Installation](./Knative-custom-install.md).
 
 1. If you are upgrading from Knative 0.3.x: Update your domain and static IP
    address to be associated with the LoadBalancer `istio-ingressgateway` instead
@@ -204,7 +208,7 @@ Now that your cluster has Knative installed, you can see what Knative has to
 offer.
 
 To deploy your first app with Knative, follow the step-by-step
-[Getting Started with Knative App Deployment](getting-started-knative-app.md)
+[Getting Started with Knative App Deployment](./getting-started-knative-app.md)
 guide.
 
 To get started with Knative Eventing, pick one of the

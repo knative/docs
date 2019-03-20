@@ -1,4 +1,8 @@
-# Configuring outbound network access
+---
+title: "Configuring outbound network access"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+weight: 45
+---
 
 This guides walks you through enabling outbound network access for a Knative
 app.

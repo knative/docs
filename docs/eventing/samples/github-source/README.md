@@ -1,4 +1,3 @@
-# GitHub Source example
 
 GitHub Source example shows how to wire GitHub events for consumption
 by a Knative Service.
@@ -10,15 +9,14 @@ by a Knative Service.
 You will need:
 
 1. An internet-accessible Kubernetes cluster with Knative Serving
-   installed. Follow the [installation
-   instructions](https://github.com/knative/docs/blob/master/install/README.md)
+   installed. Follow the [installation instructions](../../../install/README.md)
    if you need to create one.
 1. Ensure Knative Serving is [configured with a domain
-   name](https://github.com/knative/docs/blob/master/serving/using-a-custom-domain.md)
+   name](../../../serving/using-a-custom-domain.md)
    that allows GitHub to call into the cluster.
-1. If you're using GKE, you'll also want to [assign a static IP address](https://github.com/knative/docs/blob/master/serving/gke-assigning-static-ip-address.md).
+1. If you're using GKE, you'll also want to [assign a static IP address](../../../serving/gke-assigning-static-ip-address.md).
 1. Install [Knative
-   Eventing](https://github.com/knative/docs/tree/master/eventing). Those
+   Eventing](../../../eventing). Those
    instructions also install the default eventing sources, including
    the `GitHubSource` we'll use.
 
@@ -54,7 +52,7 @@ Create a [personal access token](https://github.com/settings/tokens)
 for GitHub that the GitHub source can use to register webhooks with
 the GitHub API. Also decide on a secret token that your code will use
 to authenticate the incoming webhooks from GitHub (_secretToken_).
-  
+
 The token can be named anything you find convenient. The Source
 requires `repo:public_repo` and `admin:repo_hook`, to let it fire
 events from your public repositories and to create webhooks for those
