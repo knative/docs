@@ -715,7 +715,7 @@ github.com/knative/pkg/apis/duck/v1alpha1.Addressable
 <p>Channel is Addressable. It currently exposes the endpoint as a
 fully-qualified DNS name which will distribute traffic over the
 provided targets from inside the cluster.</p>
-<p>It generally has the form {channel}.{namespace}.svc.cluster.local</p>
+<p>It generally has the form {channel}.{namespace}.svc.{cluster domain name}</p>
 </td>
 </tr>
 <tr>
@@ -730,6 +730,18 @@ github.com/knative/pkg/apis/duck/v1alpha1.Conditions
 <td>
 <em>(Optional)</em>
 <p>Represents the latest available observations of a channel&rsquo;s current state.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>internal</code></br>
+<em>
+k8s.io/apimachinery/pkg/runtime.RawExtension
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Internal is status unique to each ClusterChannelProvisioner.</p>
 </td>
 </tr>
 </tbody>
@@ -1123,5 +1135,5 @@ string
 <hr/>
 <p><em>
 Generated with <code>gen-crd-api-reference-docs</code>
-on git commit <code>4712e3a4</code>.
+on git commit <code>c3b25ccd</code>.
 </em></p>

@@ -219,6 +219,20 @@ Kubernetes core/v1.Affinity
 <p>If specified, the pod&rsquo;s scheduling constraints</p>
 </td>
 </tr>
+<tr>
+<td>
+<code>Status</code></br>
+<em>
+<a href="#BuildSpecStatus">
+BuildSpecStatus
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Used for cancelling a job (and maybe more later on)</p>
+</td>
+</tr>
 </table>
 </td>
 </tr>
@@ -682,8 +696,31 @@ Kubernetes core/v1.Affinity
 <p>If specified, the pod&rsquo;s scheduling constraints</p>
 </td>
 </tr>
+<tr>
+<td>
+<code>Status</code></br>
+<em>
+<a href="#BuildSpecStatus">
+BuildSpecStatus
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Used for cancelling a job (and maybe more later on)</p>
+</td>
+</tr>
 </tbody>
 </table>
+<h3 id="BuildSpecStatus">BuildSpecStatus
+(<code>string</code> alias)</p></h3>
+<p>
+(<em>Appears on:</em>
+<a href="#BuildSpec">BuildSpec</a>)
+</p>
+<p>
+<p>BuildSpecStatus defines the build spec status the user can provide</p>
+</p>
 <h3 id="BuildStatus">BuildStatus
 </h3>
 <p>
@@ -1315,5 +1352,5 @@ This will override any of the template&rsquo;s steps environment variables.</p>
 <hr/>
 <p><em>
 Generated with <code>gen-crd-api-reference-docs</code>
-on git commit <code>695fd25</code>.
+on git commit <code>ee63efc</code>.
 </em></p>
