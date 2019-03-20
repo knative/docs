@@ -27,15 +27,15 @@ project, and includes all communication mediums.
 
 ## Admins
 
-Members of the [Technical Oversight Committee](TECH-OVERSIGHT-COMMITTEE.md) and
-[Steering Committee](STEERING-COMMITTEE.md) are also the administrators for
+Members of the [Technical Oversight Committee (TOC)](TECH-OVERSIGHT-COMMITTEE.md) and
+[Knative Steering Committee (KSC)](STEERING-COMMITTEE.md) are also the administrators for
 the Knative Slack instance.
 
 Slack admins should make sure to mention this in the “What I do” section of
 their Slack profile, as well as for which time zone.
 
 To connect: please reach out in the #slack-admins channel or DM (Direct Message)
-one of us privately.
+a member of the [KSC](STEERING-COMMITTEE.md) or [TOC](TECH-OVERSIGHT-COMMITTEE.md).
 
 ### Admin Expectations and Guidelines
 
