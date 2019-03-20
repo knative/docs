@@ -157,9 +157,10 @@ To configure and setup monitoring:
     ```
 
 1.  Choose a container image that meets the
-    [Fluentd image requirements](./fluentd/README.md#requirements). For example,
-    you can use a public image. Or you can create a custom one and upload the
-    image to a container registry which your cluster has read access to.
+    [Fluentd image requirements](./fluentd/fluentd-requirements.md#requirements).
+    For example, you can use a public image. Or you can create a custom one and
+    upload the image to a container registry which your cluster has read access
+    to.
 
     You must configure and build your own Fluentd image if either of the
     following are true:

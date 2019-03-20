@@ -1,3 +1,9 @@
+---
+title: "Fluentd container image requirements"
+linkTitle: "Fluentd requirements"
+weight: 10
+type: "docs"
+---
 
 Knative Serving uses a [Fluentd](https://www.fluentd.org/) docker image to
 collect logs. Operators can customize their own Fluentd docker image and
