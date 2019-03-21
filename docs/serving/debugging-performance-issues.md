@@ -1,4 +1,8 @@
-# Investigating Performance Issues
+---
+title: "Investigating performance issues"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+weight: 30
+---
 
 You deployed your application or function to Knative Serving but its performance
 doesn't meet your expectations. Knative Serving provides various dashboards and
@@ -16,7 +20,7 @@ Start your investigation with the "Revision - HTTP Requests" dashboard.
 1.  Select your configuration and revision from the menu on top left of the
     page. You will see a page like this:
 
-    ![Knative Serving - Revision HTTP Requests](./images/request_dash1.png)
+    ![Knative Serving - Revision HTTP Requests](../images/request_dash1.png)
 
     This dashboard gives visibility into the following for each revision:
 
@@ -42,7 +46,7 @@ request.
 1.  Select your revision from the "Service Name" dropdown, and then click the
     "Find Traces" button. You'll get a view that looks like this:
 
-    ![Zipkin - Trace Overview](./images/zipkin1.png)
+    ![Zipkin - Trace Overview](../images/zipkin1.png)
 
     In this example, you can see that the request spent most of its time in the
     [span](https://github.com/opentracing/specification/blob/master/specification.md#the-opentracing-data-model)
@@ -50,7 +54,7 @@ request.
 
 1.  Click that span to see a view like the following:
 
-    ![Zipkin - Span Details](./images/zipkin2.png)
+    ![Zipkin - Span Details](../images/zipkin2.png)
 
     This view shows detailed information about the specific span, such as the
     micro service or external URL that was called. In this example, the call to
@@ -66,7 +70,7 @@ next.
 1.  To open the autoscaler dashboard, open Grafana UI and select "Knative
     Serving - Autoscaler" dashboard, which looks like this:
 
-    ![Knative Serving - Autoscaler](./images/autoscaler_dash1.png)
+    ![Knative Serving - Autoscaler](../images/autoscaler_dash1.png)
 
 This view shows 4 key metrics from the Knative Serving autoscaler:
 
@@ -94,7 +98,7 @@ the traffic but was only granted 8 pods because the cluster is out of resources.
 You can access total CPU and memory usage of your revision from the "Knative
 Serving - Revision CPU and Memory Usage" dashboard, which looks like this:
 
-![Knative Serving - Revision CPU and Memory Usage](./images/cpu_dash1.png)
+![Knative Serving - Revision CPU and Memory Usage](../images/cpu_dash1.png)
 
 The first chart shows rate of the CPU usage across all pods serving the
 revision. The second chart shows total memory consumed across all pods serving

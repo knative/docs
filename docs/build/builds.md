@@ -1,4 +1,8 @@
-# Knative `Build` resources
+---
+title: "Knative `Build` resources"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+weight: 5
+---
 
 Use the `Build` resource object to create and run on-cluster processes to
 completion.

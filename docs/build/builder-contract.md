@@ -1,4 +1,8 @@
-# Builders
+---
+title: "Builders"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+weight: 15
+---
 
 This document defines builder images and the conventions to which they are
 expected to adhere.

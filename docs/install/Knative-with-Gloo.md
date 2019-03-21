@@ -1,4 +1,8 @@
-# Knative Install using Gloo on a Kubernetes Cluster
+---
+title: "Knative Install using Gloo on a Kubernetes Cluster"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+weight: 10
+---
 
 This guide walks you through the installation of the latest version of Knative
 using pre-built images.
@@ -70,7 +74,7 @@ Now that your cluster has Knative installed, you can see what Knative has to
 offer.
 
 To deploy your first app with Knative, follow the step-by-step
-[Getting Started with Knative App Deployment](getting-started-knative-app.md)
+[Getting Started with Knative App Deployment](./getting-started-knative-app.md)
 guide.
 
 Note that when you've finished deploying the app, you'll need to connect to the
@@ -94,7 +98,7 @@ curl -H "Host: helloworld-go.myproject.example.com" $GATEWAY_URL
 ```
 
 The full instructions for the
-[Go Hello-World Sample](../serving/samples/helloworld-go) with this substitution
+[Go Hello-World Sample](../serving/samples/hello-world/helloworld-go) with this substitution
 are published bellow:
 
 ### Deploy the Hello-World Go App:
@@ -261,4 +265,4 @@ kubectl delete --filename service.yaml
 ```
 
 Great! our Knative ingress is up and running. See
-https://github.com/knative/docs for more information on using Knative.
+[Knative documentation](../README.md) for more information on using Knative.

@@ -1,15 +1,19 @@
-# Knative Install on IBM Cloud Kubernetes Service (IKS)
+---
+title: "Install on IBM Cloud Kubernetes Service (IKS)"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+weight: 10
+---
 
 This guide walks you through the installation of the latest version of Knative
 using pre-built images.
 
-You may also have it all installed for you by clicking the button below:
+You may also have it all installed for you by clicking the button below:  
 [![Deploy to IBM Cloud](https://bluemix.net/deploy/button_x2.png)](https://console.bluemix.net/devops/setup/deploy?repository=https://git.ng.bluemix.net/start-with-knative/toolchain.git)
 
 More
 [instructions on the deploy button here](https://git.ng.bluemix.net/start-with-knative/toolchain/blob/master/README.md).
 
-You can find [guides for other platforms here](README.md).
+You can find [guides for other platforms here](./README.md).
 
 ## Before you begin
 
@@ -163,7 +167,7 @@ rerun the command to see the current status.
 
 The following commands install all available Knative components as well as the
 standard set of observability plugins. To customize your Knative installation,
-see [Performing a Custom Knative Installation](Knative-custom-install.md).
+see [Performing a Custom Knative Installation](./Knative-custom-install.md).
 
 1. If you are upgrading from Knative 0.3.x: Update your domain and static IP
    address to be associated with the LoadBalancer `istio-ingressgateway` instead
@@ -201,7 +205,7 @@ Now that your cluster has Knative installed, you can see what Knative has to
 offer.
 
 To deploy your first app with Knative, follow the step-by-step
-[Getting Started with Knative App Deployment](getting-started-knative-app.md)
+[Getting Started with Knative App Deployment](./getting-started-knative-app.md)
 guide.
 
 To get started with Knative Eventing, pick one of the

@@ -89,10 +89,11 @@ int64
 </td>
 <td>
 <em>(Optional)</em>
-<p>TODO: Generation does not work correctly with CRD. They are scrubbed
-by the APIserver (<a href="https://github.com/kubernetes/kubernetes/issues/58778">https://github.com/kubernetes/kubernetes/issues/58778</a>)
-So, we add Generation here. Once that gets fixed, remove this and use
-ObjectMeta.Generation instead.</p>
+<p>DeprecatedGeneration was used prior in Kubernetes versions <1.11
+when metadata.generation was not being incremented by the api server</p>
+<p>This property will be dropped in future Knative releases and should
+not be used - use metadata.generation</p>
+<p>Tracking issue: <a href="https://github.com/knative/serving/issues/643">https://github.com/knative/serving/issues/643</a></p>
 </td>
 </tr>
 <tr>
@@ -200,10 +201,11 @@ int64
 </td>
 <td>
 <em>(Optional)</em>
-<p>TODO: Generation does not work correctly with CRD. They are scrubbed
-by the APIserver (<a href="https://github.com/kubernetes/kubernetes/issues/58778">https://github.com/kubernetes/kubernetes/issues/58778</a>)
-So, we add Generation here. Once that gets fixed, remove this and use
-ObjectMeta.Generation instead.</p>
+<p>DeprecatedGeneration was used prior in Kubernetes versions <1.11
+when metadata.generation was not being incremented by the api server</p>
+<p>This property will be dropped in future Knative releases and should
+not be used - use metadata.generation</p>
+<p>Tracking issue: <a href="https://github.com/knative/serving/issues/643">https://github.com/knative/serving/issues/643</a></p>
 </td>
 </tr>
 <tr>
@@ -301,6 +303,20 @@ reconciliation processes that bring the &ldquo;spec&rdquo; inline with the obser
 state of the world.</p>
 </td>
 </tr>
+<tr>
+<td>
+<code>observedGeneration</code></br>
+<em>
+int64
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>ObservedGeneration is the &lsquo;Generation&rsquo; of the PodAutoscaler that
+was last processed by the controller. The observed generation is updated
+even if the controller failed to process the spec.</p>
+</td>
+</tr>
 </tbody>
 </table>
 <hr/>
@@ -387,10 +403,11 @@ int64
 </td>
 <td>
 <em>(Optional)</em>
-<p>TODO: Generation does not work correctly with CRD. They are scrubbed
-by the APIserver (<a href="https://github.com/kubernetes/kubernetes/issues/58778">https://github.com/kubernetes/kubernetes/issues/58778</a>)
-So, we add Generation here. Once that gets fixed, remove this and use
-ObjectMeta.Generation instead.</p>
+<p>DeprecatedGeneration was used prior in Kubernetes versions <1.11
+when metadata.generation was not being incremented by the api server</p>
+<p>This property will be dropped in future Knative releases and should
+not be used - use metadata.generation</p>
+<p>Tracking issue: <a href="https://github.com/knative/serving/issues/643">https://github.com/knative/serving/issues/643</a></p>
 </td>
 </tr>
 <tr>
@@ -423,6 +440,19 @@ ingress supports SNI.</p>
 <td>
 <em>(Optional)</em>
 <p>A list of host rules used to configure the ClusterIngress.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>visibility</code></br>
+<em>
+<a href="#IngressVisibility">
+IngressVisibility
+</a>
+</em>
+</td>
+<td>
+<p>Visibility setting.</p>
 </td>
 </tr>
 </table>
@@ -893,10 +923,11 @@ int64
 </td>
 <td>
 <em>(Optional)</em>
-<p>TODO: Generation does not work correctly with CRD. They are scrubbed
-by the APIserver (<a href="https://github.com/kubernetes/kubernetes/issues/58778">https://github.com/kubernetes/kubernetes/issues/58778</a>)
-So, we add Generation here. Once that gets fixed, remove this and use
-ObjectMeta.Generation instead.</p>
+<p>DeprecatedGeneration was used prior in Kubernetes versions <1.11
+when metadata.generation was not being incremented by the api server</p>
+<p>This property will be dropped in future Knative releases and should
+not be used - use metadata.generation</p>
+<p>Tracking issue: <a href="https://github.com/knative/serving/issues/643">https://github.com/knative/serving/issues/643</a></p>
 </td>
 </tr>
 <tr>
@@ -929,6 +960,19 @@ ingress supports SNI.</p>
 <td>
 <em>(Optional)</em>
 <p>A list of host rules used to configure the ClusterIngress.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>visibility</code></br>
+<em>
+<a href="#IngressVisibility">
+IngressVisibility
+</a>
+</em>
+</td>
+<td>
+<p>Visibility setting.</p>
 </td>
 </tr>
 </tbody>
@@ -977,8 +1021,32 @@ LoadBalancerStatus
 <p>LoadBalancer contains the current status of the load-balancer.</p>
 </td>
 </tr>
+<tr>
+<td>
+<code>observedGeneration</code></br>
+<em>
+int64
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>ObservedGeneration is the &lsquo;Generation&rsquo; of the ClusterIngress that
+was last processed by the controller. The observed generation is updated
+even if the controller failed to process the spec.</p>
+</td>
+</tr>
 </tbody>
 </table>
+<h3 id="IngressVisibility">IngressVisibility
+(<code>string</code> alias)</p></h3>
+<p>
+(<em>Appears on:</em>
+<a href="#IngressSpec">IngressSpec</a>)
+</p>
+<p>
+<p>IngressVisibility describes whether the Ingress should be exposed to
+public gateways or not.</p>
+</p>
 <h3 id="LoadBalancerIngressStatus">LoadBalancerIngressStatus
 </h3>
 <p>
@@ -1035,6 +1103,18 @@ string
 <p>DomainInternal is set if there is a cluster-local DNS name to access the Ingress.</p>
 <p>NOTE: This differs from K8s Ingress, since we also desire to have a cluster-local
 DNS name to allow routing in case of not having a mesh.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>meshOnly</code></br>
+<em>
+bool
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>MeshOnly is set if the ClusterIngress is only load-balanced through a Service mesh.</p>
 </td>
 </tr>
 </tbody>
@@ -1161,10 +1241,11 @@ int64
 </td>
 <td>
 <em>(Optional)</em>
-<p>TODO: Generation does not work correctly with CRD. They are scrubbed
-by the APIserver (<a href="https://github.com/kubernetes/kubernetes/issues/58778">https://github.com/kubernetes/kubernetes/issues/58778</a>)
-So, we add Generation here. Once that gets fixed, remove this and use
-ObjectMeta.Generation instead.</p>
+<p>DeprecatedGeneration was used prior in Kubernetes versions <1.11
+when metadata.generation was not being incremented by the api server</p>
+<p>This property will be dropped in future Knative releases and should
+not be used - use metadata.generation</p>
+<p>Tracking issue: <a href="https://github.com/knative/serving/issues/643">https://github.com/knative/serving/issues/643</a></p>
 </td>
 </tr>
 <tr>
@@ -1291,10 +1372,11 @@ int64
 </td>
 <td>
 <em>(Optional)</em>
-<p>TODO: Generation does not work correctly with CRD. They are scrubbed
-by the APIserver (<a href="https://github.com/kubernetes/kubernetes/issues/58778">https://github.com/kubernetes/kubernetes/issues/58778</a>)
-So, we add Generation here. Once that gets fixed, remove this and use
-ObjectMeta.Generation instead.</p>
+<p>DeprecatedGeneration was used prior in Kubernetes versions <1.11
+when metadata.generation was not being incremented by the api server</p>
+<p>This property will be dropped in future Knative releases and should
+not be used - use metadata.generation</p>
+<p>Tracking issue: <a href="https://github.com/knative/serving/issues/643">https://github.com/knative/serving/issues/643</a></p>
 </td>
 </tr>
 <tr>
@@ -1325,7 +1407,7 @@ RevisionRequestConcurrencyModelType
 </td>
 <td>
 <em>(Optional)</em>
-<p>ConcurrencyModel specifies the desired concurrency model
+<p>DeprecatedConcurrencyModel specifies the desired concurrency model
 (Single or Multi) for the
 Revision. Defaults to Multi.
 Deprecated in favor of ContainerConcurrency.</p>
@@ -1376,7 +1458,7 @@ string
 </td>
 <td>
 <em>(Optional)</em>
-<p>BuildName optionally holds the name of the Build responsible for
+<p>DeprecatedBuildName optionally holds the name of the Build responsible for
 producing the container image for its Revision.
 DEPRECATED: Use BuildRef instead.</p>
 </td>
@@ -1409,9 +1491,37 @@ Kubernetes core/v1.Container
 <em>(Optional)</em>
 <p>Container defines the unit of execution for this Revision.
 In the context of a Revision, we disallow a number of the fields of
-this Container, including: name, resources, ports, and volumeMounts.
-TODO(mattmoor): Link to the runtime contract tracked by:
-<a href="https://github.com/knative/serving/issues/627">https://github.com/knative/serving/issues/627</a></p>
+this Container, including: name and lifecycle.
+See also the runtime contract for more information about the execution
+environment:
+<a href="https://github.com/knative/serving/blob/master/docs/runtime-contract.md">https://github.com/knative/serving/blob/master/docs/runtime-contract.md</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<code>volumes</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#volume-v1-core">
+[]Kubernetes core/v1.Volume
+</a>
+</em>
+</td>
+<td>
+<p>Volumes defines a set of Kubernetes volumes to be mounted into the
+specified Container.  Currently only ConfigMap and Secret volumes are
+supported.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>timeoutSeconds</code></br>
+<em>
+int64
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>TimeoutSeconds holds the max duration the instance is allowed for responding to a request.</p>
 </td>
 </tr>
 </table>
@@ -1507,10 +1617,11 @@ int64
 </td>
 <td>
 <em>(Optional)</em>
-<p>TODO: Generation does not work correctly with CRD. They are scrubbed
-by the APIserver (<a href="https://github.com/kubernetes/kubernetes/issues/58778">https://github.com/kubernetes/kubernetes/issues/58778</a>)
-So, we add Generation here. Once that gets fixed, remove this and use
-ObjectMeta.Generation instead.</p>
+<p>DeprecatedGeneration was used prior in Kubernetes versions <1.11
+when metadata.generation was not being incremented by the api server</p>
+<p>This property will be dropped in future Knative releases and should
+not be used - use metadata.generation</p>
+<p>Tracking issue: <a href="https://github.com/knative/serving/issues/643">https://github.com/knative/serving/issues/643</a></p>
 </td>
 </tr>
 <tr>
@@ -1623,10 +1734,11 @@ int64
 </td>
 <td>
 <em>(Optional)</em>
-<p>TODO: Generation does not work correctly with CRD. They are scrubbed
-by the APIserver (<a href="https://github.com/kubernetes/kubernetes/issues/58778">https://github.com/kubernetes/kubernetes/issues/58778</a>)
-So, we add Generation here. Once that gets fixed, remove this and use
-ObjectMeta.Generation instead.</p>
+<p>DeprecatedGeneration was used prior in Kubernetes versions <1.11
+when metadata.generation was not being incremented by the api server</p>
+<p>This property will be dropped in future Knative releases and should
+not be used - use metadata.generation</p>
+<p>Tracking issue: <a href="https://github.com/knative/serving/issues/643">https://github.com/knative/serving/issues/643</a></p>
 </td>
 </tr>
 <tr>
@@ -1656,9 +1768,7 @@ PinnedType
 </td>
 <td>
 <em>(Optional)</em>
-<p>Pins this service to a specific revision name. The revision must
-be owned by the configuration provided.
-PinnedType is DEPRECATED in favor of ReleaseType</p>
+<p>DeprecatedPinned is DEPRECATED in favor of ReleaseType</p>
 </td>
 </tr>
 <tr>
@@ -1739,10 +1849,11 @@ int64
 </td>
 <td>
 <em>(Optional)</em>
-<p>TODO: Generation does not work correctly with CRD. They are scrubbed
-by the APIserver (<a href="https://github.com/kubernetes/kubernetes/issues/58778">https://github.com/kubernetes/kubernetes/issues/58778</a>)
-So, we add Generation here. Once that gets fixed, remove this and use
-ObjectMeta.Generation instead.</p>
+<p>DeprecatedGeneration was used prior in Kubernetes versions <1.11
+when metadata.generation was not being incremented by the api server</p>
+<p>This property will be dropped in future Knative releases and should
+not be used - use metadata.generation</p>
+<p>Tracking issue: <a href="https://github.com/knative/serving/issues/643">https://github.com/knative/serving/issues/643</a></p>
 </td>
 </tr>
 <tr>
@@ -2047,6 +2158,12 @@ come from a single configuration.</p>
 <p>RevisionContainerConcurrencyType is an integer expressing a number of
 in-flight (concurrent) requests.</p>
 </p>
+<h3 id="RevisionProtocolType">RevisionProtocolType
+(<code>string</code> alias)</p></h3>
+<p>
+<p>RevisionProtocolType is an enumeration of the supported application-layer protocols
+See also: <a href="https://github.com/knative/serving/blob/master/docs/runtime-contract.md#protocols-and-ports">https://github.com/knative/serving/blob/master/docs/runtime-contract.md#protocols-and-ports</a></p>
+</p>
 <h3 id="RevisionRequestConcurrencyModelType">RevisionRequestConcurrencyModelType
 (<code>string</code> alias)</p></h3>
 <p>
@@ -2086,10 +2203,11 @@ int64
 </td>
 <td>
 <em>(Optional)</em>
-<p>TODO: Generation does not work correctly with CRD. They are scrubbed
-by the APIserver (<a href="https://github.com/kubernetes/kubernetes/issues/58778">https://github.com/kubernetes/kubernetes/issues/58778</a>)
-So, we add Generation here. Once that gets fixed, remove this and use
-ObjectMeta.Generation instead.</p>
+<p>DeprecatedGeneration was used prior in Kubernetes versions <1.11
+when metadata.generation was not being incremented by the api server</p>
+<p>This property will be dropped in future Knative releases and should
+not be used - use metadata.generation</p>
+<p>Tracking issue: <a href="https://github.com/knative/serving/issues/643">https://github.com/knative/serving/issues/643</a></p>
 </td>
 </tr>
 <tr>
@@ -2120,7 +2238,7 @@ RevisionRequestConcurrencyModelType
 </td>
 <td>
 <em>(Optional)</em>
-<p>ConcurrencyModel specifies the desired concurrency model
+<p>DeprecatedConcurrencyModel specifies the desired concurrency model
 (Single or Multi) for the
 Revision. Defaults to Multi.
 Deprecated in favor of ContainerConcurrency.</p>
@@ -2171,7 +2289,7 @@ string
 </td>
 <td>
 <em>(Optional)</em>
-<p>BuildName optionally holds the name of the Build responsible for
+<p>DeprecatedBuildName optionally holds the name of the Build responsible for
 producing the container image for its Revision.
 DEPRECATED: Use BuildRef instead.</p>
 </td>
@@ -2204,9 +2322,37 @@ Kubernetes core/v1.Container
 <em>(Optional)</em>
 <p>Container defines the unit of execution for this Revision.
 In the context of a Revision, we disallow a number of the fields of
-this Container, including: name, resources, ports, and volumeMounts.
-TODO(mattmoor): Link to the runtime contract tracked by:
-<a href="https://github.com/knative/serving/issues/627">https://github.com/knative/serving/issues/627</a></p>
+this Container, including: name and lifecycle.
+See also the runtime contract for more information about the execution
+environment:
+<a href="https://github.com/knative/serving/blob/master/docs/runtime-contract.md">https://github.com/knative/serving/blob/master/docs/runtime-contract.md</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<code>volumes</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#volume-v1-core">
+[]Kubernetes core/v1.Volume
+</a>
+</em>
+</td>
+<td>
+<p>Volumes defines a set of Kubernetes volumes to be mounted into the
+specified Container.  Currently only ConfigMap and Secret volumes are
+supported.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>timeoutSeconds</code></br>
+<em>
+int64
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>TimeoutSeconds holds the max duration the instance is allowed for responding to a request.</p>
 </td>
 </tr>
 </tbody>
@@ -2360,10 +2506,11 @@ int64
 </td>
 <td>
 <em>(Optional)</em>
-<p>TODO: Generation does not work correctly with CRD. They are scrubbed
-by the APIserver (<a href="https://github.com/kubernetes/kubernetes/issues/58778">https://github.com/kubernetes/kubernetes/issues/58778</a>)
-So, we add Generation here. Once that gets fixed, remove this and use
-ObjectMeta.Generation instead.</p>
+<p>DeprecatedGeneration was used prior in Kubernetes versions <1.11
+when metadata.generation was not being incremented by the api server</p>
+<p>This property will be dropped in future Knative releases and should
+not be used - use metadata.generation</p>
+<p>Tracking issue: <a href="https://github.com/knative/serving/issues/643">https://github.com/knative/serving/issues/643</a></p>
 </td>
 </tr>
 <tr>
@@ -2394,7 +2541,7 @@ RevisionRequestConcurrencyModelType
 </td>
 <td>
 <em>(Optional)</em>
-<p>ConcurrencyModel specifies the desired concurrency model
+<p>DeprecatedConcurrencyModel specifies the desired concurrency model
 (Single or Multi) for the
 Revision. Defaults to Multi.
 Deprecated in favor of ContainerConcurrency.</p>
@@ -2445,7 +2592,7 @@ string
 </td>
 <td>
 <em>(Optional)</em>
-<p>BuildName optionally holds the name of the Build responsible for
+<p>DeprecatedBuildName optionally holds the name of the Build responsible for
 producing the container image for its Revision.
 DEPRECATED: Use BuildRef instead.</p>
 </td>
@@ -2478,9 +2625,37 @@ Kubernetes core/v1.Container
 <em>(Optional)</em>
 <p>Container defines the unit of execution for this Revision.
 In the context of a Revision, we disallow a number of the fields of
-this Container, including: name, resources, ports, and volumeMounts.
-TODO(mattmoor): Link to the runtime contract tracked by:
-<a href="https://github.com/knative/serving/issues/627">https://github.com/knative/serving/issues/627</a></p>
+this Container, including: name and lifecycle.
+See also the runtime contract for more information about the execution
+environment:
+<a href="https://github.com/knative/serving/blob/master/docs/runtime-contract.md">https://github.com/knative/serving/blob/master/docs/runtime-contract.md</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<code>volumes</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#volume-v1-core">
+[]Kubernetes core/v1.Volume
+</a>
+</em>
+</td>
+<td>
+<p>Volumes defines a set of Kubernetes volumes to be mounted into the
+specified Container.  Currently only ConfigMap and Secret volumes are
+supported.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>timeoutSeconds</code></br>
+<em>
+int64
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>TimeoutSeconds holds the max duration the instance is allowed for responding to a request.</p>
 </td>
 </tr>
 </table>
@@ -2514,10 +2689,11 @@ int64
 </td>
 <td>
 <em>(Optional)</em>
-<p>TODO: Generation does not work correctly with CRD. They are scrubbed
-by the APIserver (<a href="https://github.com/kubernetes/kubernetes/issues/58778">https://github.com/kubernetes/kubernetes/issues/58778</a>)
-So, we add Generation here. Once that gets fixed, remove this and use
-ObjectMeta.Generation instead.</p>
+<p>DeprecatedGeneration was used prior in Kubernetes versions <1.11
+when metadata.generation was not being incremented by the api server</p>
+<p>This property will be dropped in future Knative releases and should
+not be used - use metadata.generation</p>
+<p>Tracking issue: <a href="https://github.com/knative/serving/issues/643">https://github.com/knative/serving/issues/643</a></p>
 </td>
 </tr>
 <tr>
@@ -2575,9 +2751,9 @@ string
 </td>
 <td>
 <em>(Optional)</em>
-<p>DomainInternal holds the top-level domain that will distribute traffic over the provided
+<p>DeprecatedDomainInternal holds the top-level domain that will distribute traffic over the provided
 targets from inside the cluster. It generally has the form
-{route-name}.{route-namespace}.svc.cluster.local
+{route-name}.{route-namespace}.svc.{cluster-domain-name}
 DEPRECATED: Use Address instead.</p>
 </td>
 </tr>
@@ -2707,10 +2883,11 @@ int64
 </td>
 <td>
 <em>(Optional)</em>
-<p>TODO: Generation does not work correctly with CRD. They are scrubbed
-by the APIserver (<a href="https://github.com/kubernetes/kubernetes/issues/58778">https://github.com/kubernetes/kubernetes/issues/58778</a>)
-So, we add Generation here. Once that gets fixed, remove this and use
-ObjectMeta.Generation instead.</p>
+<p>DeprecatedGeneration was used prior in Kubernetes versions <1.11
+when metadata.generation was not being incremented by the api server</p>
+<p>This property will be dropped in future Knative releases and should
+not be used - use metadata.generation</p>
+<p>Tracking issue: <a href="https://github.com/knative/serving/issues/643">https://github.com/knative/serving/issues/643</a></p>
 </td>
 </tr>
 <tr>
@@ -2740,9 +2917,7 @@ PinnedType
 </td>
 <td>
 <em>(Optional)</em>
-<p>Pins this service to a specific revision name. The revision must
-be owned by the configuration provided.
-PinnedType is DEPRECATED in favor of ReleaseType</p>
+<p>DeprecatedPinned is DEPRECATED in favor of ReleaseType</p>
 </td>
 </tr>
 <tr>
@@ -2785,6 +2960,7 @@ to be split between two revisions. This type replaces the deprecated Pinned type
 <a href="#Service">Service</a>)
 </p>
 <p>
+<p>ServiceStatus represents the Status stanza of the Service resource.</p>
 </p>
 <table>
 <thead>
@@ -2831,9 +3007,9 @@ string
 <td>
 <em>(Optional)</em>
 <p>From RouteStatus.
-DomainInternal holds the top-level domain that will distribute traffic over the provided
+DeprecatedDomainInternal holds the top-level domain that will distribute traffic over the provided
 targets from inside the cluster. It generally has the form
-{route-name}.{route-namespace}.svc.cluster.local
+{route-name}.{route-namespace}.svc.{cluster-domain-name}
 DEPRECATED: Use Address instead.</p>
 </td>
 </tr>
@@ -2991,5 +3167,5 @@ This defaults to zero if unspecified.</p>
 <hr/>
 <p><em>
 Generated with <code>gen-crd-api-reference-docs</code>
-on git commit <code>5cbee406</code>.
+on git commit <code>b3c82dc7</code>.
 </em></p>

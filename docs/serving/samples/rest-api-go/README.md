@@ -1,4 +1,3 @@
-# Creating a RESTful Service
 
 This sample demonstrates creating and running a simple RESTful service on
 Knative Serving. The exposed endpoint takes a stock ticker (i.e. stock symbol),
@@ -7,11 +6,11 @@ then outputs the stock price.
 ## Prerequisites
 
 1. A Kubernetes cluster with
-   [Knative Serving](https://github.com/knative/docs/blob/master/install/README.md)
+   [Knative Serving](../../../install/README.md)
    v0.3 or higher installed.
 1. [Docker](https://docs.docker.com/get-started/#prepare-your-docker-environment)
    installed locally.
-1. [Outbound network access](https://github.com/knative/docs/blob/master/serving/outbound-network-access.md)
+1. [Outbound network access](../../outbound-network-access.md)
    enabled for this Service to make external API requests.
 1. The code checked out locally.
 1. `envsubst` installed locally. This is installed by the `gettext` package. If
@@ -19,7 +18,7 @@ then outputs the stock price.
    [Homebrew](https://brew.sh/) on OS X.
 
 ```shell
-go get -d github.com/knative/docs/serving/samples/rest-api-go
+go get -d github.com/knative/docs/docs/serving/samples/rest-api-go
 ```
 
 ## Setup
@@ -30,7 +29,7 @@ image can be accomplished locally using
 [Docker](https://docs.docker.com/get-started) or
 [ko](https://github.com/google/go-containerregistry/tree/master/cmd/ko) as well
 as remotely using
-[Knative Build](https://github.com/knative/docs/tree/master/build).
+[Knative Build](../../../build).
 
 This sample uses Docker for both building and pushing.
 
@@ -70,7 +69,7 @@ registry specific instructions for both setup and authorizing the image push.
 ```shell
 docker build \
   --tag "${REPO}/rest-api-go" \
-  --file serving/samples/rest-api-go/Dockerfile .
+  --file docs/serving/samples/rest-api-go/Dockerfile .
 ```
 
 5. Push your container to a container registry:
@@ -81,11 +80,11 @@ docker push "${REPO}/rest-api-go"
 
 6. Substitute the image reference path in the template with our published image
    path. The command below substitutes using the ${REPO} variable into a new
-   file called `serving/samples/rest-api-go/sample.yaml`.
+   file called `docs/serving/samples/rest-api-go/sample.yaml`.
 
    ```shell
-   envsubst < serving/samples/rest-api-go/sample-template.yaml > \
-   serving/samples/rest-api-go/sample.yaml
+   envsubst < docs/serving/samples/rest-api-go/sample-template.yaml > \
+   docs/serving/samples/rest-api-go/sample.yaml
    ```
 
 ## Deploy the Service
@@ -93,8 +92,9 @@ docker push "${REPO}/rest-api-go"
 Now that our image is available from the container registry, we can deploy the
 Knative Serving sample:
 
+
 ```shell
-kubectl apply --filename serving/samples/rest-api-go/sample.yaml
+kubectl apply --filename docs/serving/samples/rest-api-go/sample.yaml
 ```
 
 The above command creates a Knative Service within your Kubernetes cluster in
@@ -234,7 +234,7 @@ Response body: `stock price for ticker <ticker> is <price>`
 ## Next Steps
 
 The
-[traffic splitting example](https://github.com/knative/docs/tree/master/serving/samples/traffic-splitting)
+[traffic splitting example](../traffic-splitting/README.md)
 continues from here to walk through creating new Revisions and splitting traffic
 between multiple Revisions.
 
@@ -242,6 +242,7 @@ between multiple Revisions.
 
 To clean up the sample Service:
 
+
 ```shell
-kubectl delete --filename serving/samples/rest-api-go/sample.yaml
+kubectl delete --filename docs/serving/samples/rest-api-go/sample.yaml
 ```
