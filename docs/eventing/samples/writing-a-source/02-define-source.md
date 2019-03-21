@@ -1,4 +1,7 @@
-# Define The Source Resource
+---
+title: "Define the source resource"
+weight: 20
+---
 
 We'll use Kubebuilder to generate a new Kubernetes Custom Resource for our
 source. Check out the [Kubebuilder book](https://book.kubebuilder.io/) to learn
@@ -199,4 +202,4 @@ make
 These edits in the reference project can be viewed at
 https://github.com/grantr/sample-source/pull/4.
 
-Next: [Reconcile Sources](03-reconcile-sources.md)
+Next: [Reconcile Sources](./03-reconcile-sources.md)

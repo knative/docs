@@ -1,4 +1,7 @@
-# Bootstrap the Project
+---
+title: "Bootstrap the project"
+weight: 10
+---
 
 We'll use Kubebuilder to bootstrap the project and provide common controller
 boilerplate and scaffolding. Check out the
@@ -50,4 +53,4 @@ your project's vendor directory.
 The result of this command in the reference project can be viewed at
 https://github.com/grantr/sample-source/pull/1.
 
-Next: [Define The Source Resource](02-define-source.md)
+Next: [Define The Source Resource](./02-define-source.md)

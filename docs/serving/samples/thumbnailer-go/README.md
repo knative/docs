@@ -1,4 +1,3 @@
-# Thumbnailer External Dependencies Demo
 
 This is a walk-through example that demonstrates deploying a dockerized
 application that accesses external dependencies to Knative Serving. In this demo

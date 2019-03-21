@@ -1,4 +1,8 @@
-# Configuring HTTPS with a custom certificate
+---
+title: "Configuring HTTPS with a custom certificate"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+weight: 60
+---
 
 If you already have an SSL/TLS certificate for your domain you can follow the
 steps below to configure Knative to use your certificate and enable HTTPS
@@ -124,12 +128,12 @@ hosting provider.
 
 Knative currently only works with the `DNS01` challenge type for LetsEncrypt,
 which is only supported by a
-[small number of DNS providers through cert-manager](http://docs.cert-manager.io/en/latest/reference/issuers/acme/dns01.html?highlight=DNS#supported-dns01-providers).
+[small number of DNS providers through cert-manager](http://docs.cert-manager.io/en/latest/tasks/acme/configuring-dns01/index.html?highlight=supported%20DNS01%20providers#supported-dns01-providers).
 
 Instructions for configuring cert-manager are provided for the following DNS
 hosts:
 
-- [Google Cloud DNS](using-cert-manager-on-gcp.md)
+- [Google Cloud DNS](./using-cert-manager-on-gcp.md)
 
 ---
 

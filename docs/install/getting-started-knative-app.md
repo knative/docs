@@ -1,4 +1,8 @@
-# Getting Started with Knative App Deployment
+---
+title: "Getting Started with App Deployment"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+weight: 05
+---
 
 This guide shows you how to deploy an app using Knative, then interact with it
 using cURL requests.
@@ -15,7 +19,7 @@ You need:
 ## Sample application
 
 This guide uses the
-[Hello World sample app in Go](../serving/samples/helloworld-go) to demonstrate
+[Hello World sample app in Go](../serving/samples/hello-world/helloworld-go) to demonstrate
 the basic workflow for deploying an app, but these steps can be adapted for your
 own application if you have an image of it available on
 [Docker Hub](https://docs.docker.com/docker-hub/repos/),

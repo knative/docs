@@ -1,4 +1,7 @@
-# Publish to a Kubernetes Cluster
+---
+title: "Publish to a Kubernetes cluster"
+weight: 40
+---
 
 So far we've only tested the controller code locally. Now we'd like to deploy it
 to a cluster and test it working.
@@ -193,4 +196,4 @@ kubectl get pods -n sample-source-system
 Now you can use the verification procedure outlined above in
 [Create a sample source](#create-a-sample-source).
 
-Next: Dispatching Events
+(TODO) Next: Dispatching Events

@@ -1,4 +1,3 @@
-# Orchestrating a source-to-URL deployment on Kubernetes
 
 A Go sample that shows how to use Knative to go from source code in a git
 repository to a running application with a URL.
@@ -12,7 +11,7 @@ deployment.
 You need:
 
 - A Kubernetes cluster with Knative installed. Follow the
-  [installation instructions](https://github.com/knative/docs/blob/master/install/README.md)
+  [installation instructions](../../../install/README.md)
   if you need to create one.
 - Go installed and configured. This is optional, and only required if you want
   to run the sample app locally.
@@ -40,7 +39,7 @@ In order to push the container that is built from source to Docker Hub, register
 a secret in Kubernetes for authentication with Docker Hub.
 
 There are
-[detailed instructions](https://github.com/knative/docs/blob/master/build/auth.md#basic-authentication-docker)
+[detailed instructions](../../../build/auth.md#basic-authentication-docker)
 available, but these are the key steps:
 
 1. Create a new `Secret` manifest, which is used to store your Docker Hub
