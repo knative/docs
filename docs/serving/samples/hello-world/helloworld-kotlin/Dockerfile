@@ -1,6 +1,6 @@
 # Use the official gradle image to create a build artifact.
 # https://hub.docker.com/_/gradle
-FROM gradle as builder
+FROM gradle:4.10 as builder
 
 # Copy local code to the container image.
 COPY build.gradle .
