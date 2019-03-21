@@ -74,7 +74,7 @@ https://github.com/knative/build-templates/tree/master/kaniko
 
 `kaniko` is unrelated to `ko`.
 
-### [`ko`](https://github.com/google/go-containerregistry/tree/master/cmd/ko)
+### [`ko`](https://github.com/google/ko)
 
 `ko` is a tool designed to make development of Go apps on Kubernetes easier, by
 abstracting away the container image being used, and instead referring to Go
