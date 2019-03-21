@@ -22,7 +22,7 @@ source is most useful as a bridge from other GCP services, such as
    addition, install the GCP PubSub event source from `release-gcppubsub.yaml`:
 
    ```shell
-   kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.3.0/release-gcppubsub.yaml
+   kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.4.1/gcppubsub.yaml
    ```
 
 1. Enable the `Cloud Pub/Sub API` on your project:
@@ -96,8 +96,8 @@ source is most useful as a bridge from other GCP services, such as
    apply in one command:
 
    ```shell
-    sed "s/MY_GCP_PROJECT/$PROJECT_ID/g" gcp-pubsub-source.yaml | \
-        kubectl apply --filename -
+   sed "s/MY_GCP_PROJECT/$PROJECT_ID/g" gcp-pubsub-source.yaml | \
+       kubectl apply --filename -
    ```
 
    If you are replacing `MY_GCP_PROJECT` manually, then make sure you apply the
@@ -110,7 +110,7 @@ source is most useful as a bridge from other GCP services, such as
 1. Create a function and create a Trigger that will send all events from the Broker to the function:
 
    ```shell
-   kubectl apply --filename subscriber.yaml
+   kubectl apply --filename trigger.yaml
    ```
 
 ## Publish
