@@ -1,4 +1,8 @@
-# Knative Install on [Gardener](https://github.com/gardener)
+---
+title: "Install on Gardener"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+weight: 10
+---
 
 This guide walks you through the installation of the latest version of Knative
 using pre-built images on a [Gardener](https://gardener.cloud) created cluster
@@ -9,7 +13,7 @@ or have a look at the
 project. To learn more about this open source project, read the
 [blog on kubernetes.io](https://kubernetes.io/blog/2018/05/17/gardener/).
 
-You can find [guides for other platforms here](README.md).
+You can find [guides for other platforms here](./README.md).
 
 ## Before you begin
 
@@ -35,7 +39,7 @@ Knative requires a Kubernetes cluster v1.11 or newer.
     your project. You can skip this step if you create your cluster using the
     user interface; it is only needed for programmatic access, make sure you set
     `export KUBECONFIG=garden-my-project.yaml` in your shell.
-    ![Download kubeconfig for Gardener](images/gardener_service_account.png "downloading the kubeconfig using a service account")
+    ![Download kubeconfig for Gardener](../images/gardener_service_account.png "downloading the kubeconfig using a service account")
 
 ### Creating a Kubernetes cluster
 
@@ -51,7 +55,7 @@ kubectl apply --filename my-cluster.yaml
 
 The easier alternative is to create the cluster following the cluster creation
 wizard in the Gardener dashboard:
-![shoot creation](images/gardener_shoot_creation.png "shoot creation via the dashboard")
+![shoot creation](../images/gardener_shoot_creation.png "shoot creation via the dashboard")
 
 ### Configure kubectl for your cluster
 
@@ -102,7 +106,7 @@ rerun the command to see the current status.
 
 The following commands install all available Knative components as well as the
 standard set of observability plugins. To customize your Knative installation,
-see [Performing a Custom Knative Installation](Knative-custom-install.md).
+see [Performing a Custom Knative Installation](./Knative-custom-install.md).
 
 1. If you are upgrading from Knative 0.3.x: Update your domain and static IP
    address to be associated with the LoadBalancer `istio-ingressgateway` instead
@@ -171,7 +175,7 @@ Now that your cluster has Knative installed, you can see what Knative has to
 offer.
 
 To deploy your first app with Knative, follow the step-by-step
-[Getting Started with Knative App Deployment](getting-started-knative-app.md)
+[Getting Started with Knative App Deployment](./getting-started-knative-app.md)
 guide.
 
 To get started with Knative Eventing, pick one of the

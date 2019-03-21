@@ -1,4 +1,3 @@
-# Deploying to Knative from a Private GitHub Repo
 
 This sample demonstrates:
 

@@ -281,10 +281,10 @@ int64
 </td>
 <td>
 <em>(Optional)</em>
-<p>TODO: Generation does not work correctly with CRD. They are scrubbed
-by the APIserver (<a href="https://github.com/kubernetes/kubernetes/issues/58778">https://github.com/kubernetes/kubernetes/issues/58778</a>)
-So, we add Generation here. Once that gets fixed, remove this and use
-ObjectMeta.Generation instead.</p>
+<p>TODO By enabling the status subresource metadata.generation should increment
+thus making this property obsolete.</p>
+<p>We should be able to drop this property with a CRD conversion webhook
+in the future</p>
 </td>
 </tr>
 <tr>
@@ -415,10 +415,10 @@ int64
 </td>
 <td>
 <em>(Optional)</em>
-<p>TODO: Generation does not work correctly with CRD. They are scrubbed
-by the APIserver (<a href="https://github.com/kubernetes/kubernetes/issues/58778">https://github.com/kubernetes/kubernetes/issues/58778</a>)
-So, we add Generation here. Once that gets fixed, remove this and use
-ObjectMeta.Generation instead.</p>
+<p>TODO By enabling the status subresource metadata.generation should increment
+thus making this property obsolete.</p>
+<p>We should be able to drop this property with a CRD conversion webhook
+in the future</p>
 </td>
 </tr>
 </table>
@@ -507,10 +507,10 @@ int64
 </td>
 <td>
 <em>(Optional)</em>
-<p>TODO: Generation used to not work correctly with CRD. They were scrubbed
-by the APIserver (<a href="https://github.com/kubernetes/kubernetes/issues/58778">https://github.com/kubernetes/kubernetes/issues/58778</a>)
-So, we add Generation here. Once the above bug gets rolled out to production
-clusters, remove this and use ObjectMeta.Generation instead.</p>
+<p>TODO By enabling the status subresource metadata.generation should increment
+thus making this property obsolete.</p>
+<p>We should be able to drop this property with a CRD conversion webhook
+in the future</p>
 </td>
 </tr>
 <tr>
@@ -622,10 +622,10 @@ int64
 </td>
 <td>
 <em>(Optional)</em>
-<p>TODO: Generation does not work correctly with CRD. They are scrubbed
-by the APIserver (<a href="https://github.com/kubernetes/kubernetes/issues/58778">https://github.com/kubernetes/kubernetes/issues/58778</a>)
-So, we add Generation here. Once that gets fixed, remove this and use
-ObjectMeta.Generation instead.</p>
+<p>TODO By enabling the status subresource metadata.generation should increment
+thus making this property obsolete.</p>
+<p>We should be able to drop this property with a CRD conversion webhook
+in the future</p>
 </td>
 </tr>
 <tr>
@@ -715,7 +715,7 @@ github.com/knative/pkg/apis/duck/v1alpha1.Addressable
 <p>Channel is Addressable. It currently exposes the endpoint as a
 fully-qualified DNS name which will distribute traffic over the
 provided targets from inside the cluster.</p>
-<p>It generally has the form {channel}.{namespace}.svc.cluster.local</p>
+<p>It generally has the form {channel}.{namespace}.svc.{cluster domain name}</p>
 </td>
 </tr>
 <tr>
@@ -730,6 +730,18 @@ github.com/knative/pkg/apis/duck/v1alpha1.Conditions
 <td>
 <em>(Optional)</em>
 <p>Represents the latest available observations of a channel&rsquo;s current state.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>internal</code></br>
+<em>
+k8s.io/apimachinery/pkg/runtime.RawExtension
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Internal is status unique to each ClusterChannelProvisioner.</p>
 </td>
 </tr>
 </tbody>
@@ -760,10 +772,10 @@ int64
 </td>
 <td>
 <em>(Optional)</em>
-<p>TODO: Generation does not work correctly with CRD. They are scrubbed
-by the APIserver (<a href="https://github.com/kubernetes/kubernetes/issues/58778">https://github.com/kubernetes/kubernetes/issues/58778</a>)
-So, we add Generation here. Once that gets fixed, remove this and use
-ObjectMeta.Generation instead.</p>
+<p>TODO By enabling the status subresource metadata.generation should increment
+thus making this property obsolete.</p>
+<p>We should be able to drop this property with a CRD conversion webhook
+in the future</p>
 </td>
 </tr>
 </tbody>
@@ -966,10 +978,10 @@ int64
 </td>
 <td>
 <em>(Optional)</em>
-<p>TODO: Generation used to not work correctly with CRD. They were scrubbed
-by the APIserver (<a href="https://github.com/kubernetes/kubernetes/issues/58778">https://github.com/kubernetes/kubernetes/issues/58778</a>)
-So, we add Generation here. Once the above bug gets rolled out to production
-clusters, remove this and use ObjectMeta.Generation instead.</p>
+<p>TODO By enabling the status subresource metadata.generation should increment
+thus making this property obsolete.</p>
+<p>We should be able to drop this property with a CRD conversion webhook
+in the future</p>
 </td>
 </tr>
 <tr>
@@ -1065,7 +1077,7 @@ github.com/knative/pkg/apis/duck/v1alpha1.Conditions
 </tr>
 <tr>
 <td>
-<code>physicalSubscription,omitEmpty</code></br>
+<code>physicalSubscription</code></br>
 <em>
 <a href="#SubscriptionStatusPhysicalSubscription">
 SubscriptionStatusPhysicalSubscription
@@ -1098,7 +1110,7 @@ Subscription.</p>
 <tbody>
 <tr>
 <td>
-<code>subscriberURI,omitEmpty</code></br>
+<code>subscriberURI</code></br>
 <em>
 string
 </em>
@@ -1109,7 +1121,7 @@ string
 </tr>
 <tr>
 <td>
-<code>replyURI,omitEmpty</code></br>
+<code>replyURI</code></br>
 <em>
 string
 </em>
@@ -1123,5 +1135,5 @@ string
 <hr/>
 <p><em>
 Generated with <code>gen-crd-api-reference-docs</code>
-on git commit <code>90852711</code>.
+on git commit <code>c3b25ccd</code>.
 </em></p>

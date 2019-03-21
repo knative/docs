@@ -7,6 +7,7 @@ the version that matches your installed version of Knative.
 
 ### Released versions
 
+- [Branch: **`release-0.3`**](https://github.com/knative/docs/tree/release-0.3)
 - [Branch: **`release-0.2`**](https://github.com/knative/docs/tree/release-0.2)
 - [Branch: **`release-0.1`**](https://github.com/knative/docs/tree/release-0.1)
 

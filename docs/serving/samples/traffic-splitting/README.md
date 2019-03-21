@@ -1,165 +1,137 @@
-# Simple Traffic Splitting Between Revisions
 
-This samples builds off of the [Creating a RESTful Service](../rest-api-go) sample
-to illustrate updating a Service to create a new Revision as well as splitting traffic
-between the two created Revisions.
+This samples builds off the [Creating a RESTful Service](../rest-api-go) sample
+to illustrate applying a revision, then using that revision for manual traffic
+splitting.
 
 ## Prerequisites
 
-1. Complete the Service creation steps in [Creating a RESTful Service](../rest-api-go).
-1. Move into the docs directory:
-
-```shell
-cd $GOPATH/src/github.com/knative/docs
-```
-
-## Updating to Release Mode
-
-The service was originally created with a mode of `runLatest`. In `runLatest`
-mode, the service serves the latest Revision that is ready to handle incoming
-traffic. To split traffic between multiple Revisions, the Service mode will need
-to be changed to `release` mode. The `release` mode differs from `runLatest` in that
-it requires a `revisions` list. The `revisions` list accepts 1 or 2 Revisions
-that will be served by the base domain of the service. When 2 Revisions are
-present in the list a `rolloutPercent` parameter specifies the percentage of
-traffic to send to each Revision.
-
-This first step will update the Service to release mode with a single Revision.
-
-1. To populate the `revisions` list the name of the created Revision is required.
-The command below captures the names of all created Revisions as an array so it
-can be substituted it into the YAML.
-
-```shell
-REVISIONS=($(kubectl get revision -l "serving.knative.dev/service=stock-service-example" -o \
-jsonpath="{.items[*].metadata.name}"))
-echo ${REVISIONS[*]}
-```
-
-2. The `release_sample.yaml` is setup in this directory to allow enable substituting the
-Revision name into the file with the `envsubst` utility. Executing the
-command below will update the Service to release mode with the queried Revision name.
-
-- Note: The command below expects `$REPO` to still be exported. See
-  [RESTful Service Setup](https://github.com/knative/docs/tree/master/serving/samples/rest-api-go#setup) to set it.
-
-```shell
-CURRENT=${REVISIONS[0]} \
-envsubst < serving/samples/traffic-splitting/release_sample.yaml \
-| kubectl apply --filename -
-```
-
-3. The `spec` of the Service should now show `release` with the Revision name
-retrieved above.
-
-```shell
-kubectl get ksvc stock-service-example --output yaml
-```
+1. [Creating a RESTful Service](../rest-api-go).
 
 ## Updating the Service
 
-This section describes how to create a new Revision by updating your Service.
+This section describes how to create an revision by deploying a new
+configuration.
 
-A new Revision is created every time a value in the `revisionTemplate` section of
-the Service `spec` is updated. The `updated_sample.yaml` in this folder changes
-the environment variable `RESOURCE` from `stock` to `share`. Applying this
-change will result in a new Revision.
+1. Replace the image reference path with our published image path in the
+   configuration files
+   (`docs/serving/samples/traffic-splitting/updated_configuration.yaml`:
 
-For comparison, you can diff the `release_sample.yaml` with the `updated_sample.yaml`.
+   - Manually replace:
+     `image: github.com/knative/docs/docs/serving/samples/rest-api-go` with
+     `image: <YOUR_CONTAINER_REGISTRY>/docs/serving/samples/rest-api-go`
 
-```shell
-diff serving/samples/traffic-splitting/release_sample.yaml \
-serving/samples/traffic-splitting/updated_sample.yaml
+   Or
+
+   - Use run this command:
+
+   ```
+   perl -pi -e "s@github.com/knative/docs@${REPO}@g" docs/serving/samples/rest-api-go/updated_configuration.yaml
+   ```
+
+2. Deploy the new configuration to update the `RESOURCE` environment variable
+   from `stock` to `share`:
+
+```
+kubectl apply --filename docs/serving/samples/traffic-splitting/updated_configuration.yaml
 ```
 
-1.  Execute the command below to update the environment variable in the Service
-    resulting in a new Revision.
+3. Once deployed, traffic will shift to the new revision automatically. Verify
+   the deployment by checking the route status:
 
-```shell
-CURRENT=${REVISIONS[0]} \
-envsubst < serving/samples/traffic-splitting/updated_sample.yaml \
-| kubectl apply --filename -
+```
+kubectl get route --output yaml
 ```
 
-2. Since we are using a `release` service, traffic will _not_ shift to the new
-   Revision automatically. However, it will be available from the subdomain
-   `latest`. This can be verified through the Service status:
+4. When the new route is ready, you can access the new endpoints: The hostname
+   and IP address can be found in the same manner as the
+   [Creating a RESTful Service](../rest-api-go) sample:
 
-```shell
-kubectl get ksvc stock-service-example --output yaml
+```
+export SERVICE_HOST=`kubectl get route stock-route-example --output jsonpath="{.status.domain}"`
+
+# In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
+INGRESSGATEWAY=knative-ingressgateway
+
+# The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
+# Use `istio-ingressgateway` instead, since `knative-ingressgateway`
+# will be removed in Knative v0.4.
+if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
+    INGRESSGATEWAY=istio-ingressgateway
+fi
+
+export SERVICE_IP=`kubectl get svc $INGRESSGATEWAY --namespace istio-system \
+    --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
 ```
 
-3. The readiness of the Service can be verified through the Service Conditions.
-   When the Service conditions report it is ready again, you can access the new
-   Revision using the same method as found in the [previous sample](../rest-api-go/README.md#access-the-service)
-   by prefixing the Service hostname with `latest.`.
+- Make a request to the index endpoint:
 
-```shell
-curl --header "Host:latest.${SERVICE_HOSTNAME}" http://${INGRESS_IP}
+```
+curl --header "Host:$SERVICE_HOST" http://${SERVICE_IP}
 ```
 
-- Hitting the top domain (or `current.`) will hit the Revision at the first
-  index of the `revisions` list:
+Response body: `Welcome to the share app!`
 
-```shell
-curl --header "Host:${SERVICE_HOSTNAME}" http://${INGRESS_IP}
-curl --header "Host:current.${SERVICE_HOSTNAME}" http://${INGRESS_IP}
+- Make a request to the `/share` endpoint:
+
+```
+curl --header "Host:$SERVICE_HOST" http://${SERVICE_IP}/share
 ```
 
-## Traffic Splitting
+Response body: `share ticker not found!, require /share/{ticker}`
 
-Updating the service to split traffic between the two revisions is done by
-placing a second revision in of the `revisions` list and specifying a `rolloutPercent`.
-The `rolloutPercent` is the percentage of traffic to send to the second element in
-the list. When the Service is Ready the traffic will be split as desired for the
-base domain, and a subdomain of `candidate` will be available pointing to the
-second Revision.
+- Make a request to the `/share` endpoint with a `ticker` parameter:
 
-1. Get the latest list of revisions by executing the command below:
-
-```shell
-REVISIONS=($(kubectl get revision -l "serving.knative.dev/service=stock-service-example" --output \
-jsonpath="{.items[*].metadata.name}"))
-echo ${REVISIONS[*]}
+```
+curl --header "Host:$SERVICE_HOST" http://${SERVICE_IP}/share/<ticker>
 ```
 
-2. Update the `revisions` list in
-   `serving/samples/traffic-splitting/split_sample.yaml`. A `rolloutPercent` of
-   50 has already been specified, but can be changed if desired by editing the
-   `split_sample.yaml` file.
+Response body: `share price for ticker <ticker> is <price>`
 
+## Manual Traffic Splitting
 
-```shell
-CURRENT=${REVISIONS[0]} CANDIDATE=${REVISIONS[1]} \
-envsubst < serving/samples/traffic-splitting/split_sample.yaml \
-| kubectl apply --filename -
+This section describes how to manually split traffic to specific revisions.
+
+1. Get your revisions names via:
+
+```
+kubectl get revisions
 ```
 
-3. Verify the deployment by checking the service status:
-
-```shell
-kubectl get ksvc --output yaml
+```
+NAME                                AGE
+stock-configuration-example-00001   11m
+stock-configuration-example-00002   4m
 ```
 
-4. Once updated, `curl` requests to the base domain should result in responses split evenly between `Welcome to the share app!` and
-`Welcome to the stock app!`.
+2. Update the `traffic` list in `docs/serving/samples/rest-api-go/sample.yaml` as:
 
-```shell
-curl --header "Host:${SERVICE_HOSTNAME}" http://${INGRESS_IP}
+```yaml
+traffic:
+  - revisionName: <YOUR_FIRST_REVISION_NAME>
+    percent: 50
+  - revisionName: <YOUR_SECOND_REVISION_NAME>
+    percent: 50
 ```
 
-5. Much like the `current` and `latest` subdomains there should now be a
-`candidate` subdomain that should return `Welcome to the share app!` as it hits
-the second index of the `revisions` list.
+3. Deploy your traffic revision:
 
-```shell
-curl --header "Host:candidate.${SERVICE_HOSTNAME}" http://${INGRESS_IP}
 ```
+kubectl apply --filename docs/serving/samples/rest-api-go/sample.yaml
+```
+
+4. Verify the deployment by checking the route status:
+
+```
+kubectl get route --output yaml
+```
+
+Once updated, you can make `curl` requests to the API using either `stock` or
+`share` endpoints.
 
 ## Clean Up
 
 To clean up the sample service:
 
-```shell
-kubectl delete --filename serving/samples/traffic-splitting/split_sample.yaml
+```
+kubectl delete --filename docs/serving/samples/traffic-splitting/updated_configuration.yaml
 ```

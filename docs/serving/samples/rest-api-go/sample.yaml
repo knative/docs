@@ -31,3 +31,4 @@ spec:
                 path: /
               initialDelaySeconds: 0
               periodSeconds: 3
+

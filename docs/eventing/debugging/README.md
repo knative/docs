@@ -1,12 +1,11 @@
-# Debugging Knative Eventing
 
 This is an evolving document on how to debug a non-working Knative Eventing
 setup.
 
 ## Audience
 
-This document is intended for people that are familiar with
-[Knative Eventing](../README.md)'s object model. You don't need to be an expert,
+This document is intended for people that are familiar with the object model of
+[Knative Eventing](../README.md). You don't need to be an expert,
 but do need to know roughly how things fit together.
 
 ## Version
