@@ -1,6 +1,6 @@
 # Use the official PHP 7.2 image.
 # https://hub.docker.com/_/php
-FROM php:7.2.6-apache
+FROM php:7.2-apache
 
 # Copy local code to the container image.
 COPY index.php /var/www/html/
@@ -14,6 +14,3 @@ RUN sed -i 's/80/${PORT}/g' /etc/apache2/sites-available/000-default.conf /etc/a
 # https://hub.docker.com/_/php#configuration
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
-# Service must listen to $PORT environment variable.
-# This default value facilitates local development.
-ENV PORT 8080

@@ -1,6 +1,6 @@
 # Use the official gradle image to create a build artifact.
 # https://hub.docker.com/_/gradle
-FROM gradle as builder
+FROM gradle:4.10 as builder
 
 # Copy local code to the container image.
 COPY build.gradle .
@@ -16,10 +16,6 @@ FROM openjdk:8-jre-alpine
 
 # Copy the jar to the production image from the builder stage.
 COPY --from=builder /home/gradle/build/libs/gradle.jar /helloworld.jar
-
-# Service must listen to $PORT environment variable.
-# This default value facilitates local development.
-ENV PORT 8080
 
 # Run the web service on container startup.
 CMD [ "java", "-jar", "-Djava.security.egd=file:/dev/./urandom", "/helloworld.jar" ]
