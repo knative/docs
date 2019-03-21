@@ -27,7 +27,7 @@ In order to run an application on Knative Serving a container image must be
 available to fetch from a container registry. Building and pushing a container
 image can be accomplished locally using
 [Docker](https://docs.docker.com/get-started) or
-[ko](https://github.com/google/go-containerregistry/tree/master/cmd/ko) as well
+[ko](https://github.com/google/ko) as well
 as remotely using
 [Knative Build](../../../build).
 
