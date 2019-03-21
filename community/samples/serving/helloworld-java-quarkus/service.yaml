@@ -1,0 +1,14 @@
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: helloworld-java-quarkus
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            image: docker.io/{username}/helloworld-java-quarkus
+            env:
+              - name: MESSAGE_PREFIX
+                value: "Namaste"

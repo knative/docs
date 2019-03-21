@@ -1,0 +1,51 @@
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: helloworld-java-quarkus
+spec:
+  runLatest:
+    configuration:
+      build:
+        apiVersion: build.knative.dev/v1alpha1
+        kind: Build
+        spec:
+          serviceAccountName: quarkus-builder
+          source:
+            git:
+              revision: "${git.source.revision}"
+              url: "${git.source.repo.url}"
+          steps:
+            - args:
+                - /workspace/${app.context.dir}/scripts/buildah.sh
+              # Check https://github.com/quarkusio/quarkus-images for more configuration options
+              env:
+                - name: WORK_DIR
+                  value: /workspace/${app.context.dir}
+                - name: DESTINATION_NAME
+                  value: ${app.container.image}
+              image: quay.io/quarkus/centos-quarkus-maven:graalvm-1.0.0-rc13
+              name: docker-push
+              # needed for buildah builds to be running as containers
+              securityContext:
+                capabilities:
+                  add: ["SYS_ADMIN"]
+              volumeMounts:
+                - mountPath: /root/.m2
+                  name: m2-cache
+                # needed for buildah to store its built containers
+                - mountPath: /var/lib/containers
+                  name: buildah-cache
+              workingDir: /workspace/${app.context.dir}
+          timeout: 60m
+          volumes:
+            - name: m2-cache
+              emptyDir: {}
+            - name: buildah-cache
+              emptyDir: {}
+      revisionTemplate:
+        metadata:
+          labels:
+            app: helloworld-java-quarkus
+        spec:
+          container:
+            image: ${app.container.image}
