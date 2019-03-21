@@ -106,10 +106,6 @@ recreate the source files from this folder.
    # Copy the jar to the production image from the builder stage.
    COPY --from=builder /app/target/helloworld-*.jar /helloworld.jar
 
-   # Service must listen to $PORT environment variable.
-   # This default value facilitates local development.
-   ENV PORT 8080
-
    # Run the web service on container startup.
    CMD ["java","-Djava.security.egd=file:/dev/./urandom","-Dserver.port=${PORT}","-jar","/helloworld.jar"]
    ```
