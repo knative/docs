@@ -155,6 +155,12 @@ Each Knative component must be installed individually. You can decide which
 components and observability plugins to install based on what you plan to do
 with Knative.
 
+> **Note**: If your install fails on the first attempt, try rerunning the commands.
+  They will likely succeed on the second attempt. For background info and to
+  track the upcoming solution to this problem, see issues
+  [#968](https://github.com/knative/docs/issues/968) and
+  [#1036](https://github.com/knative/docs/issues/1036).
+
 ### Choosing Knative installation files
 
 The following Knative installation files are available:
