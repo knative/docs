@@ -48,7 +48,7 @@ the way we run this committee, based on feedback from the community.
 KSC may choose to delegate its authority to other committees as-needed. The
 committee currently recognizes this delegated authority for:
 
-- Technical guidance is delegated to the [Technical Oversight Committee](TECH-OVERSIGHT-COMMITTEE.md).
+- Technical guidance is delegated to the [Technical Oversight Committee](./TECH-OVERSIGHT-COMMITTEE.md).
 
 ## Committee Meetings
 
@@ -108,7 +108,7 @@ represented.
 - Members of the committee may step down at any time. When a member steps down,
   their organization shall nominate a new candidate.
 - If a member leaves their organization, the organization must nominate a new
-  committee member to replace them following the nomination and confirmation 
+  committee member to replace them following the nomination and confirmation
   process.
 - If an organization is unable to seat a candidate, the KSC reserves the right
   to reallocate the seat to another organization.
