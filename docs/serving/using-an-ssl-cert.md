@@ -2,6 +2,7 @@
 title: "Configuring HTTPS with a custom certificate"
 #linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
 weight: 60
+type: "docs"
 ---
 
 If you already have an SSL/TLS certificate for your domain you can follow the

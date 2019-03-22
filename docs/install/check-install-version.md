@@ -1,7 +1,8 @@
 ---
-title: "Checking the Version of Your Knative Serving Installation"
-#linkTitle: "Checking your install version"
+title: "Checking the version of your Knative Serving installation"
+linkTitle: "Checking your install version"
 weight: 20
+type: "docs"
 ---
 
 If you want to check what version of Knative serving you have installed, enter

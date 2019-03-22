@@ -2,6 +2,7 @@
 title: "Accessing metrics"
 #linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
 weight: 10
+type: "docs"
 ---
 
 You access metrics through the [Grafana](https://grafana.com/) UI. Grafana is

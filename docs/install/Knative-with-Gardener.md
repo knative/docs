@@ -1,7 +1,8 @@
 ---
 title: "Install on Gardener"
-#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+linkTitle: "Gardener"
 weight: 10
+type: "docs"
 ---
 
 This guide walks you through the installation of the latest version of Knative

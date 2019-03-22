@@ -1,7 +1,8 @@
 ---
 title: "Install on IBM Cloud Private"
-#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+linkTitle: "IBM Cloud Private"
 weight: 15
+type: "docs"
 ---
 
 This guide walks you through the installation of the latest version of

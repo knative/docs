@@ -2,6 +2,7 @@
 title: "Setting up a logging plugin"
 #linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
 weight: 50
+type: "docs"
 ---
 
 Knative allows cluster operators to use different backends for their logging

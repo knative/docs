@@ -1,6 +1,7 @@
 ---
 title: "Resources"
 weight: 10
+type: "docs"
 ---
 
 This page contains information about various tools and technologies that are

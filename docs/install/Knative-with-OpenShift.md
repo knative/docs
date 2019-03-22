@@ -1,7 +1,8 @@
 ---
 title: "Install on OpenShift"
-#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+linkTitle: "OpenShift"
 weight: 15
+type: "docs"
 ---
 
 This guide walks you through the installation of the latest version of
