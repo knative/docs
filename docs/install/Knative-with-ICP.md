@@ -139,6 +139,15 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
    kubectl delete deploy knative-ingressgateway -n istio-system
    ```
 
+   If you have the Knative Eventing Sources component installed,
+   you will also need to delete the following resource before upgrading:
+   ```
+   kubectl delete statefulset/controller-manager -n knative-sources
+   ```
+   While the deletion of this resource during the upgrade process will
+   not prevent modifications to Eventing Source resources, those changes will
+   not be completed until the upgrade process finishes.
+
 1. Run the following commands to install Knative:
 
    ```shell
