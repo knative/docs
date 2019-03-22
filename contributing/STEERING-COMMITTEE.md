@@ -124,17 +124,23 @@ represented.
 
 ## Decision Process
 
-The steering committee desires to always reach consensus. Decisions are made in
-meetings when a quorum of the members are present and may pass with majority
-of the committee supporting it. Quorum is considered reached when at least half
-of the members are present.
+The steering committee desires to always reach consensus.
 
-The committee's charter may be changed by majority consent of committee members.
+Decisions are made in meetings when a quorum of the members are present and may
+pass with majority of the committee supporting it.
 
-In case of extended absence, an absent member will be considered to be in
-agreement after eight days have passed since a proposal was accepted by all
-present members. The company of the absent member may appoint a single delegate
-from the same company, during absences.
+Quorum is considered reached when at least half of the members are present.
+
+In case of extended absence, the organization of the absent member may appoint
+a single delegate from the same company during the absence.
+
+## Changes to the charter
+
+Changes to the KSC charter may be proposed via a Pull Request on the charter
+itself. Amendments are accepted with majority consent of the committee.
+
+Proposals and amendments to the charter are available for at least a period of
+one week for comments and questions before a vote will occur.
 
 ## Getting in touch
 
