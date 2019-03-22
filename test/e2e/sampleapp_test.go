@@ -22,7 +22,9 @@ import (
 	"testing"
 )
 
-var configFile = "config.yaml"
+const (
+	configFile = "config.yaml"
+)
 
 // TestSampleApp runs all sample apps from different languages
 func TestSampleApp(t *testing.T) {
