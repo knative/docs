@@ -6,7 +6,11 @@ type: "docs"
 ---
 
 The Knative Steering Committee (KSC) is the ultimate authority for the Knative
-project, and controls all aspects of the project.
+project, and governs all aspects of the project.
+
+The governance of Knative is an open, living document, and will continue to
+evolve as the community and project change. We expect over time we will adapt
+the way we run this committee, based on feedback from the community.
 
 - [Charter](#charter)
 - [Delegated authority](#delegated-authority)
@@ -19,7 +23,7 @@ project, and controls all aspects of the project.
 
 ## Charter
 
-1. Define, evolve, and defend the vision, values, mission, and scope of the project.
+1. Define, evolve, and promote the vision, values, mission, and scope of the project.
 1. Define and evolve project governance structures and policies, including
    project roles and how collaborators become members, approvers, leads,
    and/or administrators. This includes policy for the creation and
@@ -41,29 +45,39 @@ project, and controls all aspects of the project.
 
 ## Delegated authority
 
-KSC may choose to delegate its authority to other
-committees as-needed. The committee currently recognizes this delegated authority
-for:
+KSC may choose to delegate its authority to other committees as-needed. The
+committee currently recognizes this delegated authority for:
 
 - Technical guidance is delegated to the [Technical Oversight Committee](TECH-OVERSIGHT-COMMITTEE.md).
 
 ## Committee Meetings
 
-KSC meets every two weeks or as-needed.
+KSC meets every two weeks, or as-needed. Meetings are held online.
 
 Given the private nature of many of these discussions (e.g. privacy, private
 emails to the committee, code of conduct violations, escalations, disputes
-between members, security reports, etc.) meetings are not generally
-open the public.
+between members, security reports, etc.) meetings are held in private.
+
+Meeting notes are available to members of the knative-dev mailing list
+(link to be added).
 
 Questions and proposals for changes to governance are posted as issues in the
-[docs repo](https://github.com/knative/docs), and we invite your feedback there.
+[docs repo](https://github.com/knative/docs), and the KSC invites your feedback
+there. See [Getting in touch](#getting-in-touch) for other options.
 
 ## Committee members
 
-Seats on the Steering Committee are held by an organization, not by the individual.
+Seats on the Steering Committee are held by an organization, not by the
+individual.
 
-The current membership of the Steering committee is (listed alphabetically by name):
+The committee was created as the project was in its infancy, in order to
+tackle governance and overall project strategy. Because of the nature of the
+project and funding required, it was decided that strong corporate leadership
+was necessary for the project to ensure velocity. As the project grows and
+matures the KSC will, from time to time, consider if this policy should be
+changed.
+
+The current membership of the committee is currently (listed alphabetically by name):
 
 | &nbsp;                                                   | Member         | Organization | Profile                                  |
 | -------------------------------------------------------- | -------------- | ------------ | ---------------------------------------- |
@@ -93,6 +107,9 @@ represented. At a minimum, seat allocation is reviewed once per year.
   candidate
 - Members of the committee may step down at any time. When a member steps down,
   their organization shall nominate a new candidate.
+- If a member leaves their organization, the organization must nominate a new
+  committee member to replace them following the nomination and confirmation 
+  process.
 - If an organization is unable to seat a candidate, the KSC reserves the right
   to reallocate the seat to another organization.
 - Changes to the number of seats, which company seats are allocated to, and
@@ -103,33 +120,7 @@ represented. At a minimum, seat allocation is reviewed once per year.
   how to reallocate that seat. Seats do not automatically transfer to any 
   organization.
 
-## Clarifications
-
-_Why are seats company held?_
-
-The committee was created as the project was in its infancy, in order to tackle governance
-and overall project strategy. Because of the nature of the project and funding required,
-it was decided that strong corporate leadership was necessary for the project to ensure
-velocity.
-
-_What happens if someone leaves the company they represent?_
-
-In that case, the company will nominate a new representative for the seat. The nominee
-shall be confirmed by the standard process as called out above.
-
-_What happens if someone leaves the project or decides to leave the committee?_
-
-As above, the same would apply. The company who holds the seat will nominate a new
-representative to hold the seat. The nominee shall be confirmed by the standard process,
-called out above.
-
-_Is this steering model permanent?_
-
-The governance of Knative is an open, living document, and will continue to evolve as
-the community and project change. We expect over time we will adapt the way we run this
-committee, based on feedback from the community.
-
-_How are steering committee decisions reached?_
+## Decision Process
 
 The steering committee desires to always reach consensus. Decisions are made in
 meetings when a quorum of the members are present and may pass with majority
@@ -147,8 +138,7 @@ from the same company, during absences.
 
 If you'd like to reach out to the committee, please drop a note
 to [knative-steering@googlegroups.com](mailto:knative-steering@googlegroups.com).
-
-All members of the KSC have access to the messages sent to this address.
+This is a private discussion list to which all members of the committee have access.
 
 ---
 
