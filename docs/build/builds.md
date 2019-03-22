@@ -1,6 +1,6 @@
 ---
-title: "Knative `Build` resources"
-linkTitle: "`Build` resources"
+title: "Knative Build resources"
+linkTitle: "Build resources"
 weight: 5
 type: "docs"
 ---
