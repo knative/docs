@@ -139,7 +139,7 @@ assigned an external IP address.
    You can also export the host URL as a variable using the following command:
 
    ```shell
-   export HOST_URL=$(kubectl get ksvc helloworld-go  --output jsonpath='{.status.domain}')
+   export HOST_URL=$(kubectl get route helloworld-go  --output jsonpath='{.status.domain}')
    ```
 
    If you changed the name from `helloworld-go` to something else when creating
