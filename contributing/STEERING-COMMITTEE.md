@@ -18,7 +18,8 @@ the way we run this committee, based on feedback from the community.
 - [Committee Mechanics](#committee-mechanics)
 - [Committee Members](#committee-members)
   - [Allocation of seats](#allocation-of-seats)
-- [Frequently asked questions](#frequently-asked-questions)
+- [Decision process](#decision-process)
+- [Changes to the charter](#changes-to-the-charter)
 - [Getting in touch](#getting-in-touch)
 
 ## Charter
@@ -122,7 +123,7 @@ represented.
 - Members on the committee have a 1 year term from their confirmation, and may
   be reconfirmed to the committee at the end of their term.
 
-## Decision Process
+## Decision process
 
 The steering committee desires to always reach consensus.
 
