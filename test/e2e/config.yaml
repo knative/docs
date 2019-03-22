@@ -3,11 +3,11 @@ languages:
     expectedOutput: "Hello Spring Boot Sample v1!"
     preCommands:
       - exec: "curl"
-        args: "https://start.spring.io/starter.zip -d dependencies=web -d name=helloworld -d artifactId=helloworld -o helloworld.zip"
+        args: "https://start.spring.io/starter.zip -d dependencies=web -d name=helloworld -d artifactId=helloworld -o helloworld-java.zip"
       - exec: "unzip"
-        args: "helloworld.zip -d helloworld-java_tmp"
+        args: "helloworld-java.zip -d helloworld-java_tmp"
       - exec: "rm"
-        args: "helloworld.zip"
+        args: "helloworld-java.zip"
     copies:
       - "/src/main/java/com/example/helloworld/HelloworldApplication.java"
       - "service.yaml"

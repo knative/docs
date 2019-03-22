@@ -271,14 +271,14 @@ function start_latest_knative_serving() {
   kubectl apply -f ${KNATIVE_ISTIO_YAML} || return 1
   wait_until_pods_running istio-system || return 1
   kubectl label namespace default istio-injection=enabled || return 1
-  subheader "Installing Knative Build"
-  echo "Installing Build from ${KNATIVE_BUILD_RELEASE}"
-  kubectl apply -f ${KNATIVE_BUILD_RELEASE} || return 1
+  # subheader "Installing Knative Build"
+  # echo "Installing Build from ${KNATIVE_BUILD_RELEASE}"
+  # kubectl apply -f ${KNATIVE_BUILD_RELEASE} || return 1
   subheader "Installing Knative Serving"
   echo "Installing Serving from ${KNATIVE_SERVING_RELEASE}"
   kubectl apply -f ${KNATIVE_SERVING_RELEASE} || return 1
   wait_until_pods_running knative-serving || return 1
-  wait_until_pods_running knative-build || return 1
+  # wait_until_pods_running knative-build || return 1
 }
 
 # Install the latest stable Knative/build in the current cluster.
