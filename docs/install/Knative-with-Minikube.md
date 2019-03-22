@@ -106,6 +106,15 @@ kubectl delete svc knative-ingressgateway -n istio-system
 kubectl delete deploy knative-ingressgateway -n istio-system
 ```
 
+If you have the Knative Eventing Sources component installed,
+you will also need to delete the following resource before upgrading:
+```shell
+kubectl delete statefulset/controller-manager -n knative-sources
+```
+While the deletion of this resource during the upgrade process will
+not prevent modifications to Eventing Source resources, those changes will
+not be completed until the upgrade process finishes.
+
 Enter the following command:
 
 ```shell
