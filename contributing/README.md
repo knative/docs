@@ -35,7 +35,7 @@ Other Documents
   within the Knative community
 - [Reviewing and Merging Pull Requests](./REVIEWING.md) - how we manage pull
   requests
-- [Repository Guidelines](repository-guidelines.md) - how we create and remove
+- [Repository Guidelines](./REPOSITORY-GUIDELINES.md) - how we create and remove
   core repositories
 
 ## Introduction
