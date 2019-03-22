@@ -1,7 +1,8 @@
 ---
 title: "Assigning a static IP address for Knative on Kubernetes Engine"
-#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+linkTitle: "Assigning static IPs - GKE"
 weight: 35
+type: "docs"
 ---
 
 If you are running Knative on Google Kubernetes Engine and want to use a
@@ -30,6 +31,7 @@ Using the Google Cloud SDK:
 1.  Enter the following command, replacing IP_NAME and REGION with appropriate
     values. For example, select the `us-west1` region if you deployed your
     cluster to the `us-west1-c` zone:
+
     ```shell
     gcloud beta compute addresses create IP_NAME --region=REGION
     ```
@@ -37,6 +39,7 @@ Using the Google Cloud SDK:
     ```shell
     gcloud beta compute addresses create knative-ip --region=us-west1
     ```
+
 1.  Enter the following command to get the newly created static IP address:
     ```shell
     gcloud beta compute addresses list

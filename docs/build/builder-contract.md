@@ -2,6 +2,7 @@
 title: "Builders"
 #linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
 weight: 15
+type: "docs"
 ---
 
 This document defines builder images and the conventions to which they are

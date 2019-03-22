@@ -1,7 +1,8 @@
 ---
 title: "Creating a simple Knative build"
-#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+linkTitle: "Creating a build"
 weight: 30
+type: "docs"
 ---
 
 Use this page to learn how to create and then run a simple build in Knative. In

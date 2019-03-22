@@ -2,6 +2,7 @@
 title: "Install on OpenShift"
 linkTitle: "OpenShift"
 weight: 15
+type: "docs"
 ---
 
 This guide walks you through the installation of the latest version of
