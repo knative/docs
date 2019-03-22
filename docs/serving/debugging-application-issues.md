@@ -2,6 +2,7 @@
 title: "Debugging issues with your application"
 #linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
 weight: 25
+type: "docs"
 ---
 
 You deployed your app to Knative Serving, but it isn't working as expected. Go

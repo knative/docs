@@ -1,13 +1,14 @@
 ---
 title: "Install on IBM Cloud Kubernetes Service (IKS)"
-#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+linkTitle: "IBM Cloud Kubernetes Service"
 weight: 10
+type: "docs"
 ---
 
 This guide walks you through the installation of the latest version of Knative
 using pre-built images.
 
-You may also have it all installed for you by clicking the button below:  
+You may also have it all installed for you by clicking the button below:
 [![Deploy to IBM Cloud](https://bluemix.net/deploy/button_x2.png)](https://console.bluemix.net/devops/setup/deploy?repository=https://git.ng.bluemix.net/start-with-knative/toolchain.git)
 
 More

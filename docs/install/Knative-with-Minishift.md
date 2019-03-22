@@ -2,6 +2,7 @@
 title: "Install on Minishift"
 linkTitle: "Minishift"
 weight: 10
+type: "docs"
 ---
 
 This guide walks you through the installation of the latest version of

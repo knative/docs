@@ -1,4 +1,9 @@
-# Setting Up Custom Ingress Gateway
+---
+title: "Setting up custom ingress gateway"
+linkTitle: "Configuring the ingress gateway"
+weight: 55
+type: "docs"
+---
 
 Knative uses a shared ingress Gateway to serve all incoming traffic within
 Knative service mesh, which is the `knative-ingress-gateway` Gateway under

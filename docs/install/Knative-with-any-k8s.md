@@ -2,6 +2,7 @@
 title: "Install on a Kubernetes cluster"
 linkTitle: "On existing cluster"
 weight: 15
+type: "docs"
 ---
 
 This guide walks you through the installation of the latest version of Knative
@@ -94,7 +95,7 @@ your Knative installation, see
      track the upcoming solution to this problem, see issues
      [#968](https://github.com/knative/docs/issues/968) and
      [#1036](https://github.com/knative/docs/issues/1036).
-     
+
    > **Note**: For the v0.4.0 release and newer, the `clusterrole.yaml` file is
    > required to enable the Build and Serving components to interact with each other.
 
