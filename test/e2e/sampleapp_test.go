@@ -19,7 +19,6 @@ limitations under the License.
 package e2etest
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -69,7 +68,7 @@ func TestSampleApp(t *testing.T) {
 
 	for _, test := range tests {
 		test.lc.useDefaultIfNotProvided()
-		t.Run(fmt.Sprintf("language-%s", test.lc.Language), func(t *testing.T) {
+		t.Run(test.lc.Language, func(t *testing.T) {
 			SampleAppTestBase(t, test.lc, test.expectedOut)
 		})
 	}

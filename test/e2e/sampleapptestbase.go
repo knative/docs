@@ -92,7 +92,7 @@ func prepareWorkDir(t *testing.T, srcDir, workDir string, preCommands []command,
 		src := path.Join(srcDir, f)
 		dst := path.Join(workDir, f)
 		if output, err := exec.Command("cp", src, dst).CombinedOutput(); err != nil {
-			t.Fatalf("Error copying: '%s' '%s' -err: '%v'", src, dst, strings.TrimSpace(string(output)))
+			t.Fatalf("Error copying: '%s' to '%s' -err: '%v'", src, dst, strings.TrimSpace(string(output)))
 		}
 	}
 	for _, c := range postCommands {
@@ -177,12 +177,13 @@ func SampleAppTestBase(t *testing.T, lc languageConfig, expectedOutput string) {
 	imagePath := ImagePath(lc.AppName)
 	yamlFilePath := path.Join(lc.WorkDir, "service.yaml")
 
+	CleanupOnInterrupt(func() { cleanup(yamlFilePath, lc.WorkDir) })
+	defer cleanup(yamlFilePath, lc.WorkDir)
+
 	prepareWorkDir(t, lc.SrcDir, lc.WorkDir, lc.PreCommands, lc.Copies, lc.PostCommands)
 	pushDockerImage(t, imagePath, lc.WorkDir)
 
 	// Deploy and test
-	CleanupOnInterrupt(func() { cleanup(yamlFilePath, lc.WorkDir) })
-	defer cleanup(yamlFilePath, lc.WorkDir)
 	deploy(t, yamlFilePath, lc.YamlImagePlaceholder, imagePath)
 	checkDeployment(t, lc.AppName, expectedOutput)
 }
