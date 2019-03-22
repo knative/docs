@@ -1,7 +1,8 @@
 ---
 title: "Knative Install using Gloo on a Kubernetes Cluster"
-#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+linkTitle: "Gloo on a Cluster"
 weight: 10
+type: "docs"
 ---
 
 This guide walks you through the installation of the latest version of Knative
@@ -257,7 +258,7 @@ Hello Go Sample v1!
 
 > Note: Add `-v` option to get more detail if the `curl` command failed.
 
-Removing the sample app deployment  
+Removing the sample app deployment
 To remove the sample app from your cluster, delete the service record:
 
 ```bash

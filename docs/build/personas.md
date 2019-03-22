@@ -2,6 +2,7 @@
 title: "Knative personas"
 #linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
 weight: 20
+type: "docs"
 ---
 
 When discussing user actions, it is often helpful to

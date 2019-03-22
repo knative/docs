@@ -1,7 +1,8 @@
 ---
 title: "Install on Azure Kubernetes Service (AKS)"
-#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+linkTitle: "Azure Kubernetes Service"
 weight: 15
+type: "docs"
 ---
 
 This guide walks you through the installation of the latest version of Knative

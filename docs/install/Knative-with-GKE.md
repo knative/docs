@@ -1,7 +1,8 @@
 ---
 title: "Install on Google Kubernetes Engine"
-#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+linkTitle: "Google Kubernetes Engine"
 weight: 15
+type: "docs"
 ---
 
 This guide walks you through the installation of the latest version of all
