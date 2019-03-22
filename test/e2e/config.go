@@ -20,9 +20,12 @@ package e2etest
 
 import (
 	"fmt"
+	"io/ioutil"
 	"os/exec"
 	"strings"
 	"testing"
+
+	"gopkg.in/yaml.v2"
 )
 
 const (
@@ -33,20 +36,25 @@ const (
 	defaultYamlImagePlaceHolder = "docker.io/{username}/helloworld-%s"
 )
 
+type allConfigs struct {
+	Languages []languageConfig `yaml:"languages`
+}
+
 type languageConfig struct {
-	Language             string
-	SrcDir               string // Directory contains sample code
-	WorkDir              string // Temp work directory
-	AppName              string
-	YamlImagePlaceholder string    // Token to be replaced by real docker image URI
-	PreCommands          []command // Commands to be ran before copying
-	Copies               []string  // Files to be copied from SrcDir to WorkDir
-	PostCommands         []command // Commands to be ran after copying
+	Language             string    `yaml:"language"`
+	ExpectedOutput       string    `yaml:"expectedOutput"`
+	SrcDir               string    `yaml:"srcDir"`  // Directory contains sample code
+	WorkDir              string    `yaml:"workDir"` // Temp work directory
+	AppName              string    `yaml:"appName"`
+	YamlImagePlaceholder string    `yaml:"yamlImagePlaceholder"` // Token to be replaced by real docker image URI
+	PreCommands          []command `yaml:"preCommands"`          // Commands to be ran before copying
+	Copies               []string  `yaml:"copies"`               // Files to be copied from SrcDir to WorkDir
+	PostCommands         []command `yaml:"postCommands"`         // Commands to be ran after copying
 }
 
 type command struct {
-	Exec string
-	Args string
+	Exec string `yaml:"exec"`
+	Args string `yaml:"args"`
 }
 
 func (lc *languageConfig) useDefaultIfNotProvided() {
@@ -69,4 +77,13 @@ func (c *command) run(t *testing.T) {
 	if output, err := exec.Command(c.Exec, args...).CombinedOutput(); err != nil {
 		t.Fatalf("Error executing: '%s' '%s' -err: '%v'", c.Exec, c.Args, strings.TrimSpace(string(output)))
 	}
+}
+
+func getConfigs(configPath string) (allConfigs, error) {
+	var lcs allConfigs
+	content, err := ioutil.ReadFile(configPath)
+	if nil == err {
+		err = yaml.Unmarshal(content, &lcs)
+	}
+	return lcs, err
 }

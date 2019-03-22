@@ -22,54 +22,19 @@ import (
 	"testing"
 )
 
+var configFile = "config.yaml"
+
 // TestSampleApp runs all sample apps from different languages
 func TestSampleApp(t *testing.T) {
-	tests := []struct {
-		lc          languageConfig
-		expectedOut string
-	}{
-		{
-			languageConfig{
-				Language: "java",
-				PreCommands: []command{
-					{
-						"curl",
-						"https://start.spring.io/starter.zip -d dependencies=web -d name=helloworld -d artifactId=helloworld -o helloworld.zip",
-					},
-					{
-						"unzip",
-						"helloworld.zip -d helloworld-java_tmp",
-					},
-					{
-						"rm",
-						"helloworld.zip",
-					},
-				},
-				Copies: []string{
-					"/src/main/java/com/example/helloworld/HelloworldApplication.java",
-					"service.yaml",
-					"Dockerfile",
-				},
-			},
-			"Hello Spring Boot Sample v1!",
-		},
-		{
-			languageConfig{
-				Language: "go",
-				Copies: []string{
-					"helloworld.go",
-					"service.yaml",
-					"Dockerfile",
-				},
-			},
-			"Hello Go Sample v1!",
-		},
+	lcs, err := getConfigs(configFile)
+	if nil != err {
+		t.Fatalf("Failed reading config file %s: '%v'", configFile, err)
 	}
 
-	for _, test := range tests {
-		test.lc.useDefaultIfNotProvided()
-		t.Run(test.lc.Language, func(t *testing.T) {
-			SampleAppTestBase(t, test.lc, test.expectedOut)
+	for _, lc := range lcs.Languages {
+		lc.useDefaultIfNotProvided()
+		t.Run(lc.Language, func(t *testing.T) {
+			SampleAppTestBase(t, lc, lc.ExpectedOutput)
 		})
 	}
 }
