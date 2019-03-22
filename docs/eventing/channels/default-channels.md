@@ -1,6 +1,8 @@
 ---
 title: "Default channels"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
 weight: 2
+type: "docs"
 ---
 
 The default channel configuration allows channels to be created without
