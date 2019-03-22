@@ -2,6 +2,7 @@
 title: "Getting Started with App Deployment"
 #linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
 weight: 05
+type: "docs"
 ---
 
 This guide shows you how to deploy an app using Knative, then interact with it

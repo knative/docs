@@ -1,7 +1,8 @@
 ---
-title: "Install on Docker for Mac"
-#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+title: "Install on Docker for Mac OS"
+linkTitle: "Docker - Mac OS"
 weight: 15
+type: "docs"
 ---
 
 This guide walks you through the installation of the latest version of

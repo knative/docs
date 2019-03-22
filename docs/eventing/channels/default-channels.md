@@ -1,4 +1,9 @@
-# Default Channels
+---
+title: "Default channels"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+weight: 10
+type: "docs"
+---
 
 The default channel configuration allows channels to be created without
 specifying a provisioner. This leaves the selection of channel provisioner and

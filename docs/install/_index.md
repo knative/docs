@@ -1,7 +1,7 @@
 ---
 title: "Installing Knative"
-#linkTitle: "Installing"
-weight: 20
+linkTitle: ""
+weight: 05
 type: "docs"
 ---
 

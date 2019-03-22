@@ -2,6 +2,7 @@
 title: "Installing the Knative Build component"
 #linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
 weight: 10
+type: "docs"
 ---
 
 Before you can run a Knative Build, you must install the Knative Build component

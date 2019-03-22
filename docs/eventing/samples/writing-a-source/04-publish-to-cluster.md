@@ -1,6 +1,8 @@
 ---
-title: "Publish to a Kubernetes cluster"
+title: "Publishing to your Kubernetes cluster"
+linkTitle: "Publishing to your cluster"
 weight: 40
+type: "docs"
 ---
 
 So far we've only tested the controller code locally. Now we'd like to deploy it

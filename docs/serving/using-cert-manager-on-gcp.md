@@ -2,6 +2,7 @@
 title: "Configuring Knative and CertManager for Google Cloud DNS"
 #linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
 weight: 65
+type: "docs"
 ---
 
 These instructions assume you have already setup a Knative cluster and installed

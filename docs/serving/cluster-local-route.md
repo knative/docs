@@ -1,7 +1,8 @@
 ---
 title: "Making your Routes local to the cluster"
-#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+linkTitle: "Configuring local routes"
 weight: 20
+type: "docs"
 ---
 
 In Knative 0.3.x or later, all Routes with a domain suffix of

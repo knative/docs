@@ -1,10 +1,12 @@
 ---
-title: "Bootstrap the project"
+title: "Creating a Kubebuilder project"
+linkTitle: "Creating a project"
 weight: 10
+type: "docs"
 ---
 
-We'll use Kubebuilder to bootstrap the project and provide common controller
-boilerplate and scaffolding. Check out the
+We'll use Kubebuilder to create a Kubebuilder project and provide common
+controller for your cluster and Kubernetes API. Check out the
 [Kubebuilder book](https://book.kubebuilder.io/) to learn more about
 Kubebuilder.
 
