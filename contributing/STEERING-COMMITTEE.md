@@ -99,7 +99,7 @@ formula.
 
 As the project continues to grow, we expect to add additional seats to the
 committee, ensuring that those contributing to the project are properly
-represented. At a minimum, seat allocation is reviewed once per year.
+represented.
 
 - After a seat is allocated to an organization, the organization shall nominate
   a candidate to be confirmed by KSC. The committee reserves the right to not
@@ -117,8 +117,10 @@ represented. At a minimum, seat allocation is reviewed once per year.
   members.
 - In situations where the organization which holds a seat is no longer a viable
   entity (e.g. merger, dissolution, bankruptcy) the KSC will make a decision on
-  how to reallocate that seat. Seats do not automatically transfer to any 
+  how to reallocate that seat. Seats do not automatically transfer to any
   organization.
+- Members on the committee have a 1 year term from their confirmation, and may
+  be reconfirmed to the committee at the end of their term.
 
 ## Decision Process
 
