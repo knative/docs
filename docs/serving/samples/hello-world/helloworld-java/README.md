@@ -1,4 +1,3 @@
-
 A simple web app written in Java using Spring Boot 2.0 that you can use for
 testing. It reads in an env variable `TARGET` and prints "Hello \${TARGET}!". If
 TARGET is not specified, it will use "World" as the TARGET.
@@ -6,8 +5,8 @@ TARGET is not specified, it will use "World" as the TARGET.
 ## Prerequisites
 
 - A Kubernetes cluster with Knative installed. Follow the
-  [installation instructions](../../../../install/README.md)
-  if you need to create one.
+  [installation instructions](../../../../install/README.md) if you need to
+  create one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
 - You have installed
@@ -207,9 +206,8 @@ folder) you're ready to build and deploy the sample app.
      --output jsonpath={.status.domain}
    ```
 
-1. Now you can make a request to your app to see the result. Presuming,
-   the IP address you got in the step above is in the `${IP_ADDRESS}`
-   env variable:
+1. Now you can make a request to your app to see the result. Presuming, the IP
+   address you got in the step above is in the `${IP_ADDRESS}` env variable:
 
    ```shell
    curl -H "Host: ${DOMAIN_NAME}" http://${IP_ADDRESS}

@@ -1,4 +1,3 @@
-
 Knative Eventing is a system that is designed to address a common need for cloud
 native development and provides composable primitives to enable late-binding
 event sources and event consumers.
@@ -176,7 +175,11 @@ The GitHubSource fires a new event for selected
 - `sink`:
   [ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#objectreference-v1-core)
   A reference to the object that should receive events.
-- `githubAPIURL`: `string` Optional field to specify the base URL for API requests. Defaults to the public GitHub API if not specified, but can be set to a domain endpoint to use with GitHub Enterprise, for example, `https://github.mycompany.com/api/v3/`. This base URL should always be specified with a trailing slash.
+- `githubAPIURL`: `string` Optional field to specify the base URL for API
+  requests. Defaults to the public GitHub API if not specified, but can be set
+  to a domain endpoint to use with GitHub Enterprise, for example,
+  `https://github.mycompany.com/api/v3/`. This base URL should always be
+  specified with a trailing slash.
 
 See the [GitHub Source](samples/github-source) example.
 

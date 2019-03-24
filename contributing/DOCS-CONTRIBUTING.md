@@ -53,7 +53,6 @@ Note that code issues should be filed against the
 [individual Knative repositories](http://github.com/knative), while
 documentation issues should go in the `docs` repository.
 
-
 ### Working group
 
 The [Knative Documentation Working Group](./WORKING-GROUPS.md#documentation)
@@ -112,8 +111,8 @@ that are only expected to be used by contributors, those samples are put in the
 ## Docs contributor roles
 
 Because contributing to the documentation requires a different skill set than
-contributing to the Knative code base, we've defined the roles of
-documentation contributors seperately from the roles of code contributors.
+contributing to the Knative code base, we've defined the roles of documentation
+contributors seperately from the roles of code contributors.
 
 If you're looking for code contributor roles, see [ROLES](./ROLES.md).
 
@@ -122,21 +121,21 @@ If you're looking for code contributor roles, see [ROLES](./ROLES.md).
 Established contributor to the Knative docs.
 
 Members are continuously active contributors in the community. They can have
-issues and PRs assigned to them, might participate in working group meetings, and
-pre-submit tests are automatically run for their PRs. Members are expected to
-remain active contributors to the Knative documentation.
+issues and PRs assigned to them, might participate in working group meetings,
+and pre-submit tests are automatically run for their PRs. Members are expected
+to remain active contributors to the Knative documentation.
 
-All members are encouraged to help with PR reviews, although each PR
-must be reviewed by an official [Approver](#approver). In their review,
-members should be looking for technical correctness of the documentation,
-adherence to the [style guide](https://developers.google.com/style/), good spelling and grammar (writing quality),
-intuitive organization, and strong documentation usability. Members should be
-proficient in at least one of these review areas.
+All members are encouraged to help with PR reviews, although each PR must be
+reviewed by an official [Approver](#approver). In their review, members should
+be looking for technical correctness of the documentation, adherence to the
+[style guide](https://developers.google.com/style/), good spelling and grammar
+(writing quality), intuitive organization, and strong documentation usability.
+Members should be proficient in at least one of these review areas.
 
 ### Requirements
 
-- Has made multiple contributions to the project or community. Contributions might
-  include, but are not limited to:
+- Has made multiple contributions to the project or community. Contributions
+  might include, but are not limited to:
 
   - Authoring and reviewing PRs on GitHub in the Docs or Website repos.
 
@@ -157,42 +156,45 @@ proficient in at least one of these review areas.
 
 - Responsive to issues and PRs assigned to them.
 
-- Active owner of documents they have contributed (unless ownership is explicitly
-  transferred).
-  
+- Active owner of documents they have contributed (unless ownership is
+  explicitly transferred).
+
   - Addresses bugs or issues in their documentation in a timely manner.
-  
+
 ### Becoming a member
 
-First, reach out to an approver and ask them to sponsor you so that you can become a member.
-The easiest way to do this is using Slack.
+First, reach out to an approver and ask them to sponsor you so that you can
+become a member. The easiest way to do this is using Slack.
 
-If they are supportive of your membership, your sponsor will reach out to the Knative Steering
-committee to ask that you be added as a member of the Knative org. 
+If they are supportive of your membership, your sponsor will reach out to the
+Knative Steering committee to ask that you be added as a member of the Knative
+org.
 
-Once your sponsor notifies you that you've been added to the Knative org,
-open a PR to add yourself as a docs-reviewer in the
-[OWNERS_ALIASES](../OWNERS_ALIASES) file.
-  
+Once your sponsor notifies you that you've been added to the Knative org, open a
+PR to add yourself as a docs-reviewer in the [OWNERS_ALIASES](../OWNERS_ALIASES)
+file.
+
 ## Approver
 
 Docs approvers are able to both review and approve documentation contributions.
 While documentation review is focused on writing quality and correctness,
 approval is focused on holistic acceptance of a contribution including:
-long-term maintainability, adhering to style guide conventions, overall information
-architecture, and usability from an engineering standpoint. Docs approvers will
-enlist help from engineers for reviewing code-heavy contributions to the Docs repo.
+long-term maintainability, adhering to style guide conventions, overall
+information architecture, and usability from an engineering standpoint. Docs
+approvers will enlist help from engineers for reviewing code-heavy contributions
+to the Docs repo.
 
 ### Requirements
 
 - Reviewer of the Docs repo for at least 3 months.
-  
-  - Proficient in reviewing all aspects of writing quality, including grammar and
-    spelling, adherence to style guide conventions, organization, and usability.
-    Can coach newer writers to improve their contributions in these areas.
-  
-- Primary reviewer for at least 10 substantial PRs to the docs, showing substantial
-  ability to coach for writing development.
+
+  - Proficient in reviewing all aspects of writing quality, including grammar
+    and spelling, adherence to style guide conventions, organization, and
+    usability. Can coach newer writers to improve their contributions in these
+    areas.
+
+- Primary reviewer for at least 10 substantial PRs to the docs, showing
+  substantial ability to coach for writing development.
 
 - Reviewed or merged at least 30 PRs to the docs.
 
@@ -204,9 +206,9 @@ enlist help from engineers for reviewing code-heavy contributions to the Docs re
 
 - Responsible for documentation quality control via PR reviews.
 
-  - Focus on long-term maintainability, adhering to style
-    guide conventions, overall information architecture, and usability from
-    an engineering standpoint.
+  - Focus on long-term maintainability, adhering to style guide conventions,
+    overall information architecture, and usability from an engineering
+    standpoint.
 
 - Expected to be responsive to review requests as per
   [community expectations](REVIEWING.md).
@@ -218,12 +220,11 @@ enlist help from engineers for reviewing code-heavy contributions to the Docs re
 
 ### Becoming an approver
 
-If you want to become an approver, make your goal clear to the current
-Knative Docs approvers, either by contacting them in Slack or announcing
-your intention to become an approver at a meeting of the Documentation
-Working Group.
+If you want to become an approver, make your goal clear to the current Knative
+Docs approvers, either by contacting them in Slack or announcing your intention
+to become an approver at a meeting of the Documentation Working Group.
 
-Once you feel you meet the criteria, you can ask one of the current
-approvers to nominate you to become an approver. If all existing
-approvers agree that you meet the criteria open a PR to add yourself
-as a docs-approver in the [OWNERS_ALIASES](../OWNERS_ALIASES) file.
+Once you feel you meet the criteria, you can ask one of the current approvers to
+nominate you to become an approver. If all existing approvers agree that you
+meet the criteria open a PR to add yourself as a docs-approver in the
+[OWNERS_ALIASES](../OWNERS_ALIASES) file.

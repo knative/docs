@@ -1,4 +1,3 @@
-
 Kubernetes Event Source example shows how to wire kubernetes cluster events for
 consumption by a function that has been implemented as a Knative Service.
 
@@ -7,8 +6,7 @@ consumption by a function that has been implemented as a Knative Service.
 ### Prerequisites
 
 1. Setup [Knative Serving](../../../serving).
-1. Setup
-   [Knative Eventing](../../../eventing).
+1. Setup [Knative Eventing](../../../eventing).
 
 ### Channel
 

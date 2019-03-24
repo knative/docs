@@ -54,7 +54,8 @@ Once the script completes, you'll be ready to test out Knative!
 
 ## Creating a new OpenShift cluster
 
-Here are the manual steps which the above script automates for you in case you prefer doing this yourself:
+Here are the manual steps which the above script automates for you in case you
+prefer doing this yourself:
 
 Create a new OpenShift cluster on your local machine using `oc cluster up`:
 

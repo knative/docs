@@ -1,4 +1,3 @@
-
 Knative Serving builds on Kubernetes and Istio to support deploying and serving
 of serverless applications and functions. Serving is easy to get started with
 and scales to support advanced scenarios.
@@ -40,9 +39,9 @@ serverless workload behaves on the cluster:
 
 ## Getting Started
 
-To get started with Serving, check out one of the [hello world](./samples/) sample
-projects. These projects use the `Service` resource, which manages all of the
-details for you.
+To get started with Serving, check out one of the [hello world](./samples/)
+sample projects. These projects use the `Service` resource, which manages all of
+the details for you.
 
 With the `Service` resource, a deployed service will automatically have a
 matching route and configuration created. Each time the `Service` is updated, a
@@ -80,6 +79,7 @@ in the Knative Serving repository.
 - [Assigning a static IP address for Knative on Google Kubernetes Engine](./gke-assigning-static-ip-address.md)
 
 ## Private Container Registry
+
 - [Deploying to Knative using a Private Container Registry](./deploying-with-private-registry.md)
 
 ## Known Issues

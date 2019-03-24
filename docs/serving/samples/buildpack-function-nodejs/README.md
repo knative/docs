@@ -1,4 +1,3 @@
-
 A sample function that demonstrates using
 [Cloud Foundry](https://www.cloudfoundry.org/) buildpacks on Knative Serving,
 using the [packs Docker images](https://github.com/sclevine/packs).
