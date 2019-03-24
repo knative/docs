@@ -1,4 +1,3 @@
-
 A Go sample that shows how to use Knative to go from source code in a git
 repository to a running application with a URL.
 
@@ -11,8 +10,8 @@ deployment.
 You need:
 
 - A Kubernetes cluster with Knative installed. Follow the
-  [installation instructions](../../../install/README.md)
-  if you need to create one.
+  [installation instructions](../../../install/README.md) if you need to create
+  one.
 - Go installed and configured. This is optional, and only required if you want
   to run the sample app locally.
 
@@ -76,7 +75,7 @@ available, but these are the key steps:
 
 1. Create a new `Service Account` manifest which is used to link the build
    process to the secret. Save this file as `service-account.yaml`:
-   
+
    ```yaml
    apiVersion: v1
    kind: ServiceAccount
@@ -86,7 +85,8 @@ available, but these are the key steps:
      - name: basic-user-pass
    ```
 
-1. After you have created the manifest files, apply them to your cluster with `kubectl`:
+1. After you have created the manifest files, apply them to your cluster with
+   `kubectl`:
 
    ```shell
    $ kubectl apply --filename docker-secret.yaml
@@ -166,7 +166,9 @@ container for the application.
    app-from-source-00001-deployment-6d6ff665f9-xfhm5   3/3       Running   0         11s
    ```
 
-  > **Note:** If the build pod never reaches Completed status and terminates after 10 minutes, Kaniko probably didn't finish pulling the build image within the default timeout period. Try increasing the `timeout` value in `service.yaml`.
+> **Note:** If the build pod never reaches Completed status and terminates after
+> 10 minutes, Kaniko probably didn't finish pulling the build image within the
+> default timeout period. Try increasing the `timeout` value in `service.yaml`.
 
 1. Once you see the deployment pod switch to the running state, press Ctrl+C to
    escape the watch. Your container is now built and deployed!

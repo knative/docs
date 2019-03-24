@@ -1,4 +1,3 @@
-
 Follow this guide to install Knative components on a platform of your choice.
 
 ## Choosing a Kubernetes cluster

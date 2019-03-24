@@ -30,8 +30,8 @@ Please do not ever hesitate to ask a question or submit a PR.
 
 Reviewers are often the first points of contact between new members of the
 community and are important in shaping the community. We encourage reviewers to
-read the [code of conduct](./CODE-OF-CONDUCT.md) and to go above and
-beyond the code of conduct to promote a collaborative and respectful community.
+read the [code of conduct](./CODE-OF-CONDUCT.md) and to go above and beyond the
+code of conduct to promote a collaborative and respectful community.
 
 ## Code reviewers
 

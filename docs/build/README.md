@@ -1,4 +1,3 @@
-
 A `Build` is a custom resource in Knative that allows you to define a process
 that runs to completion and can provide status. For example, fetch, build, and
 package your code by using a Knative `Build` that communicates whether the
@@ -12,9 +11,8 @@ action, you can define a Knative `Build` through a single configuration file.
 
 Also consider using a Knative `Build` to build the source code of your apps into
 container images, which you can then run on
-[Knative `serving`](../serving/README.md).
-More information about this use case is demonstrated in
-[this sample](../serving/samples/source-to-url-go).
+[Knative `serving`](../serving/README.md). More information about this use case
+is demonstrated in [this sample](../serving/samples/source-to-url-go).
 
 ## Key features of Knative Builds
 

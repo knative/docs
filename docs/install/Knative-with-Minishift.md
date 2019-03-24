@@ -7,9 +7,9 @@ type: "docs"
 
 This guide walks you through the installation of the latest version of
 [Knative Serving](https://github.com/knative/serving) on an
-[OpenShift](https://github.com/openshift/origin) Minishift server using pre-built images and
-demonstrates creating and deploying an image of a sample "hello world" app onto
-the newly created Knative cluster.
+[OpenShift](https://github.com/openshift/origin) Minishift server using
+pre-built images and demonstrates creating and deploying an image of a sample
+"hello world" app onto the newly created Knative cluster.
 
 You can find [guides for other platforms here](./README.md).
 
@@ -154,8 +154,8 @@ until oc login -u admin -p admin; do sleep 5; done;
 ### Installing Istio
 
 Knative depends on Istio. The
-[istio-openshift-policies.sh](./scripts/istio-openshift-policies.sh) does run the
-required commands to configure necessary
+[istio-openshift-policies.sh](./scripts/istio-openshift-policies.sh) does run
+the required commands to configure necessary
 [privileges](https://istio.io/docs/setup/kubernetes/platform-setup/openshift/)
 to the service accounts used by Istio.
 
@@ -190,9 +190,9 @@ curl -s https://raw.githubusercontent.com/knative/docs/master/docs/install/scrip
 The following section details on deploying
 [Knative Serving](https://github.com/knative/serving) to OpenShift.
 
-The [knative-openshift-policies.sh](./scripts/knative-openshift-policies.sh) runs
-the required commands to configure necessary privileges to the service accounts
-used by Knative.
+The [knative-openshift-policies.sh](./scripts/knative-openshift-policies.sh)
+runs the required commands to configure necessary privileges to the service
+accounts used by Knative.
 
 ```shell
 curl -s https://raw.githubusercontent.com/knative/docs/master/docs/install/scripts/knative-openshift-policies.sh | bash
@@ -207,21 +207,24 @@ curl -s https://raw.githubusercontent.com/knative/docs/master/docs/install/scrip
 
 1. If you are upgrading from Knative 0.3.x: Update your domain and static IP
    address to be associated with the LoadBalancer `istio-ingressgateway` instead
-   of `knative-ingressgateway`.  Then run the following to clean up leftover
+   of `knative-ingressgateway`. Then run the following to clean up leftover
    resources:
+
    ```
    oc delete svc knative-ingressgateway -n istio-system
    oc delete deploy knative-ingressgateway -n istio-system
    ```
 
-   If you have the Knative Eventing Sources component installed,
-   you will also need to delete the following resource before upgrading:
+   If you have the Knative Eventing Sources component installed, you will also
+   need to delete the following resource before upgrading:
+
    ```
    oc delete statefulset/controller-manager -n knative-sources
    ```
-   While the deletion of this resource during the upgrade process will
-   not prevent modifications to Eventing Source resources, those changes will
-   not be completed until the upgrade process finishes.
+
+   While the deletion of this resource during the upgrade process will not
+   prevent modifications to Eventing Source resources, those changes will not be
+   completed until the upgrade process finishes.
 
 1. Install Knative serving:
 
@@ -230,8 +233,10 @@ curl -s https://raw.githubusercontent.com/knative/docs/master/docs/install/scrip
    oc apply --filename https://github.com/knative/build/releases/download/v0.4.0/build.yaml \
    oc apply --filename https://raw.githubusercontent.com/knative/serving/v0.4.0/third_party/config/build/clusterrole.yaml
    ```
+
    > **Note**: For the v0.4.0 release and newer, the `clusterrole.yaml` file is
-   > required to enable the Build and Serving components to interact with each other.
+   > required to enable the Build and Serving components to interact with each
+   > other.
 
 1. Monitor the Knative components until all of the components show a `STATUS` of
    `Running` or `Completed`:

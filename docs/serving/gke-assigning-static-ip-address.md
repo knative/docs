@@ -35,7 +35,9 @@ Using the Google Cloud SDK:
     ```shell
     gcloud beta compute addresses create IP_NAME --region=REGION
     ```
+
     For example:
+
     ```shell
     gcloud beta compute addresses create knative-ip --region=us-west1
     ```

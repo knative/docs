@@ -91,8 +91,8 @@ Knative depends on Istio.
     kubectl label namespace default istio-injection=enabled
     ```
 3.  Monitor the Istio components until all of the components show a `STATUS` of
-    `Running` or `Completed`: 
-    ```bash 
+    `Running` or `Completed`:
+    ```bash
     kubectl get pods --namespace istio-system`
     ```
 
@@ -111,23 +111,27 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
 
 1. If you are upgrading from Knative 0.3.x: Update your domain and static IP
    address to be associated with the LoadBalancer `istio-ingressgateway` instead
-   of `knative-ingressgateway`.  Then run the following to clean up leftover
+   of `knative-ingressgateway`. Then run the following to clean up leftover
    resources:
+
    ```
    kubectl delete svc knative-ingressgateway -n istio-system
    kubectl delete deploy knative-ingressgateway -n istio-system
    ```
 
-   If you have the Knative Eventing Sources component installed,
-   you will also need to delete the following resource before upgrading:
+   If you have the Knative Eventing Sources component installed, you will also
+   need to delete the following resource before upgrading:
+
    ```
    kubectl delete statefulset/controller-manager -n knative-sources
    ```
-   While the deletion of this resource during the upgrade process will
-   not prevent modifications to Eventing Source resources, those changes will
-   not be completed until the upgrade process finishes.
+
+   While the deletion of this resource during the upgrade process will not
+   prevent modifications to Eventing Source resources, those changes will not be
+   completed until the upgrade process finishes.
 
 1. Run the `kubectl apply` command to install Knative and its dependencies:
+
    ```bash
    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.4.0/serving.yaml \
    --filename https://github.com/knative/build/releases/download/v0.4.0/build.yaml \
@@ -136,14 +140,17 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
    --filename https://github.com/knative/serving/releases/download/v0.4.0/monitoring.yaml \
    --filename https://raw.githubusercontent.com/knative/serving/v0.4.0/third_party/config/build/clusterrole.yaml
    ```
-   > **Note**: If your install fails on the first attempt, try rerunning the commands.
-     They will likely succeed on the second attempt. For background info and to
-     track the upcoming solution to this problem, see issues
-     [#968](https://github.com/knative/docs/issues/968) and
-     [#1036](https://github.com/knative/docs/issues/1036).
+
+   > **Note**: If your install fails on the first attempt, try rerunning the
+   > commands. They will likely succeed on the second attempt. For background
+   > info and to track the upcoming solution to this problem, see issues
+   > [#968](https://github.com/knative/docs/issues/968) and
+   > [#1036](https://github.com/knative/docs/issues/1036).
 
    > **Note**: For the v0.4.0 release and newer, the `clusterrole.yaml` file is
-   > required to enable the Build and Serving components to interact with each other.
+   > required to enable the Build and Serving components to interact with each
+   > other.
+
 1. Monitor the Knative components until all of the components show a `STATUS` of
    `Running`:
    ```bash

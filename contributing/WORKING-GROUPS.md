@@ -12,8 +12,8 @@ each of these groups may operate a little differently depending on their needs
 and workflow.
 
 When the need arises, a new working group can be created. See the
-[working group processes](./WORKING-GROUP-PROCESSES.md) for working group proposal
-and creation procedures.
+[working group processes](./WORKING-GROUP-PROCESSES.md) for working group
+proposal and creation procedures.
 
 The working groups generate design docs which are kept in a
 [shared drive](https://drive.google.com/corp/drive/folders/0APnJ_hRs30R2Uk9PVA)
@@ -103,8 +103,7 @@ conventions
 
 ## Documentation
 
-Knative documentation, especially the [Docs](../docs/README.md)
-repo.
+Knative documentation, especially the [Docs](../docs/README.md) repo.
 
 | Artifact                   | Link                                                                                                                                                                                                    |
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

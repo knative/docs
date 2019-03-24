@@ -12,7 +12,7 @@ aliases:
 
 Learn how to join the community of Knative contributors.
 
-Also see our [Community page](../community) for links to Knative chats, discussions, or Q&A.
-
+Also see our [Community page](../community) for links to Knative chats,
+discussions, or Q&A.
 
 {{% readfile file="README.md" relative="true" markdown="true" %}}

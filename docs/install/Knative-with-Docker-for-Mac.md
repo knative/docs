@@ -64,8 +64,8 @@ rerun the command to see the current status.
 Next, install [Knative Serving](https://github.com/knative/serving).
 
 Because you have limited resources available, use the
-`https://github.com/knative/serving/releases/download/v0.4.0/serving.yaml`
-file, which installs only Knative Serving:
+`https://github.com/knative/serving/releases/download/v0.4.0/serving.yaml` file,
+which installs only Knative Serving:
 
 ```shell
 curl -L https://github.com/knative/serving/releases/download/v0.4.0/serving.yaml \

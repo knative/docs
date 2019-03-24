@@ -35,8 +35,9 @@ Kubernetes cluster, and it must include the Knative Build component:
 1. Create a configuration file named `build.yaml` that includes the following
    code.
 
-   This `Build` resource definition includes a single "[step](./builds.md#steps)"
-   that performs the task of simply printing "_hello build_":
+   This `Build` resource definition includes a single
+   "[step](./builds.md#steps)" that performs the task of simply printing "_hello
+   build_":
 
    ```yaml
    apiVersion: build.knative.dev/v1alpha1

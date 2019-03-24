@@ -62,9 +62,9 @@ Docker daemon, which would give the build complete access to your entire
 cluster. So that's a very bad idea.
 
 `kaniko` expects to run inside a container, so it's a natural fit for the Build
-CRD [builder contract](../build/builder-contract.md). `kaniko` is available as a builder at
-`gcr.io/kaniko-project/executor:latest`, and there's a `BuildTemplate` that
-wraps it at
+CRD [builder contract](../build/builder-contract.md). `kaniko` is available as a
+builder at `gcr.io/kaniko-project/executor:latest`, and there's a
+`BuildTemplate` that wraps it at
 https://github.com/knative/build-templates/blob/master/kaniko/kaniko.yaml. It
 exposes one required parameter, `IMAGE`, which describes the name of the image
 to push to.
@@ -81,8 +81,8 @@ abstracting away the container image being used, and instead referring to Go
 packages by their [import paths](https://golang.org/doc/code.html#ImportPaths)
 (e.g., `github.com/kaniko/serving/cmd/controller`)
 
-The typical usage is `ko apply --filename config.yaml`, which reads in the config YAML,
-and looks for Go import paths representing runnable commands (i.e.,
+The typical usage is `ko apply --filename config.yaml`, which reads in the
+config YAML, and looks for Go import paths representing runnable commands (i.e.,
 `package main`). When it finds a matching import path, `ko` builds the package
 using `go build` then pushes a container image containing that binary on top of
 a base image (by default, `gcr.io/distroless/base`) to
