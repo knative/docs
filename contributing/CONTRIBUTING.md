@@ -86,8 +86,8 @@ page still applies, but you'll find the specifics about the docs process there.
 In order to contribute a feature to Knative you'll need to go through the
 following steps:
 
-- Discuss your idea with the appropriate [working groups](./WORKING-GROUPS.md) on
-  the working group's mailing list.
+- Discuss your idea with the appropriate [working groups](./WORKING-GROUPS.md)
+  on the working group's mailing list.
 
 - Once there is general agreement that the feature is useful,
   [create a GitHub issue](https://github.com/knative/docs/issues/new) to track

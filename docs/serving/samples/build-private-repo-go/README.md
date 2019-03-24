@@ -1,4 +1,3 @@
-
 This sample demonstrates:
 
 - Pulling source code from a private Github repository using a deploy-key

@@ -1,4 +1,3 @@
-
 A simple web app written in C# using .NET Core 2.2 that you can use for testing.
 It reads in an env variable `TARGET` and prints "Hello \${TARGET}!". If TARGET
 is not specified, it will use "World" as the TARGET.
@@ -6,8 +5,8 @@ is not specified, it will use "World" as the TARGET.
 ## Prerequisites
 
 - A Kubernetes cluster with Knative installed. Follow the
-  [installation instructions](../../../../install/README.md)
-  if you need to create one.
+  [installation instructions](../../../../install/README.md) if you need to
+  create one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
 - You have installed [.NET Core SDK 2.2](https://www.microsoft.com/net/core).
@@ -18,7 +17,8 @@ While you can clone all of the code from this directory, hello world apps are
 generally more useful if you build them step-by-step. The following instructions
 recreate the source files from this folder.
 
-1. First, make sure you have [.NET Core SDK 2.2](https://www.microsoft.com/net/core) installed:
+1. First, make sure you have
+   [.NET Core SDK 2.2](https://www.microsoft.com/net/core) installed:
 
    ```shell
    dotnet --version

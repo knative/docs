@@ -1,4 +1,3 @@
-
 A microservice which demonstrates how to get set up and running with Knative
 Serving when using [Scala](https://scala-lang.org/) and [Akka](https://akka.io/)
 [HTTP](https://doc.akka.io/docs/akka-http/current/). It will respond to a HTTP
@@ -7,9 +6,8 @@ to `"Hello World!"`.
 
 ## Prerequisites
 
-- A Kubernetes cluster
-  [installation](../../../../install/README.md)
-  with Knative Serving up and running.
+- A Kubernetes cluster [installation](../../../../install/README.md) with
+  Knative Serving up and running.
 - [Docker](https://www.docker.com) installed locally, and running, optionally a
   Docker Hub account configured or some other Docker Repository installed
   locally.

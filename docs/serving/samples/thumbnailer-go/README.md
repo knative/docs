@@ -1,4 +1,3 @@
-
 This is a walk-through example that demonstrates deploying a dockerized
 application that accesses external dependencies to Knative Serving. In this demo
 we will use a sample `golang` application that takes a video URL as an input and

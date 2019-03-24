@@ -1,12 +1,11 @@
-
 A handler written in Go that demonstrates interacting with GitHub through a
 webhook.
 
 ## Prerequisites
 
 - A Kubernetes cluster with Knative installed. Follow the
-  [installation instructions](../../../install/README.md)
-  if you need to create one.
+  [installation instructions](../../../install/README.md) if you need to create
+  one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
 - An account on [GitHub](https://github.com) with read/write access to a
@@ -97,8 +96,7 @@ service "gitwebhook" created
 
 1. Finally, once the service is running, create the webhook from your GitHub
    repo to the URL for this service. For this to work properly you will need to
-   [configure a custom domain](../../using-a-custom-domain.md)
-   and
+   [configure a custom domain](../../using-a-custom-domain.md) and
    [assign a static IP address](../../gke-assigning-static-ip-address.md).
 
    1. Retrieve the hostname for this service, using the following command:
