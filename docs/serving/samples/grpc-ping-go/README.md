@@ -1,4 +1,3 @@
-
 A simple gRPC server written in Go that you can use for testing.
 
 This sample requires knative/serving 0.4 or later.

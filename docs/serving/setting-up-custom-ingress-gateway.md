@@ -244,7 +244,8 @@ namespace:
 kubectl edit configmap config-ingressgateway -n knative-serving
 ```
 
-Replace the `ingress-gateway` field with the fully qualified url of your service. For the service above, it should be updated to:
+Replace the `ingress-gateway` field with the fully qualified url of your
+service. For the service above, it should be updated to:
 
 ```
 custom-ingressgateway.istio-system.svc.cluster.local

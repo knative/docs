@@ -49,16 +49,15 @@ These are not directly usable, but make writing a Source much easier.
 
 These are containers intended to be used with `ContainerSource`.
 
-Name | Status | Support | Description
---- | --- | --- | ---
-[AWS CodeCommit](https://github.com/triggermesh/knative-lambda-sources/tree/master/awscodecommit) | Active Development | TriggerMesh | Registers for events of the specified types on the specified AWS CodeCommit repository. Brings those events into Knative.
-[AWS Cognito](https://github.com/triggermesh/knative-lambda-sources/tree/master/awscognito) | Active Development | TriggerMesh | Registers for AWS Cognito events. Brings those events into Knative.
-[AWS DynamoDB](https://github.com/triggermesh/knative-lambda-sources/tree/master/awsdynamodb) | Active Development | TriggerMesh | Registers for events of on the specified AWS DynamoDB table. Brings those events into Knative.
-[AWS Kinesis](https://github.com/triggermesh/knative-lambda-sources/tree/master/awskinesis) | Active Development | TriggerMesh | Registers for events on the specified AWS Kinesis stream. Brings those events into Knative.
-[AWS SNS](https://github.com/triggermesh/knative-lambda-sources/tree/master/awssns) | Active Development | TriggerMesh | Registers for events of the specified AWS SNS endpoint. Brings those events into Knative.
-[AWS SQS](https://github.com/triggermesh/knative-lambda-sources/tree/master/awssqs) | Active Development | TriggerMesh | Registers for events of the specified AWS SQS queue. Brings those events into Knative.
-[Heartbeat](https://github.com/knative/eventing-sources/tree/master/cmd/heartbeats) | Proof of Concept | None | Uses an in-memory timer to produce events at the specified interval.
-[Heartbeat](https://github.com/Harwayne/auto-container-source/tree/master/heartbeat-source) | Proof of Concept | None | Uses an in-memory timer to produce events as the specified interval. Uses AutoContainerSource for underlying infrastructure.
-[K8s](https://github.com/Harwayne/auto-container-source/tree/master/k8s-event-source) | Proof of Concept | None | Brings Kubernetes cluster events into Knative. Uses AutoContainerSource for underlying infrastructure.
-[WebSocket](https://github.com/knative/eventing-sources/tree/master/cmd/websocketsource) | Active Development | None | Opens a WebSocket to the specified source and packages each received message as a Knative event.
-
+| Name                                                                                              | Status             | Support     | Description                                                                                                                  |
+| ------------------------------------------------------------------------------------------------- | ------------------ | ----------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| [AWS CodeCommit](https://github.com/triggermesh/knative-lambda-sources/tree/master/awscodecommit) | Active Development | TriggerMesh | Registers for events of the specified types on the specified AWS CodeCommit repository. Brings those events into Knative.    |
+| [AWS Cognito](https://github.com/triggermesh/knative-lambda-sources/tree/master/awscognito)       | Active Development | TriggerMesh | Registers for AWS Cognito events. Brings those events into Knative.                                                          |
+| [AWS DynamoDB](https://github.com/triggermesh/knative-lambda-sources/tree/master/awsdynamodb)     | Active Development | TriggerMesh | Registers for events of on the specified AWS DynamoDB table. Brings those events into Knative.                               |
+| [AWS Kinesis](https://github.com/triggermesh/knative-lambda-sources/tree/master/awskinesis)       | Active Development | TriggerMesh | Registers for events on the specified AWS Kinesis stream. Brings those events into Knative.                                  |
+| [AWS SNS](https://github.com/triggermesh/knative-lambda-sources/tree/master/awssns)               | Active Development | TriggerMesh | Registers for events of the specified AWS SNS endpoint. Brings those events into Knative.                                    |
+| [AWS SQS](https://github.com/triggermesh/knative-lambda-sources/tree/master/awssqs)               | Active Development | TriggerMesh | Registers for events of the specified AWS SQS queue. Brings those events into Knative.                                       |
+| [Heartbeat](https://github.com/knative/eventing-sources/tree/master/cmd/heartbeats)               | Proof of Concept   | None        | Uses an in-memory timer to produce events at the specified interval.                                                         |
+| [Heartbeat](https://github.com/Harwayne/auto-container-source/tree/master/heartbeat-source)       | Proof of Concept   | None        | Uses an in-memory timer to produce events as the specified interval. Uses AutoContainerSource for underlying infrastructure. |
+| [K8s](https://github.com/Harwayne/auto-container-source/tree/master/k8s-event-source)             | Proof of Concept   | None        | Brings Kubernetes cluster events into Knative. Uses AutoContainerSource for underlying infrastructure.                       |
+| [WebSocket](https://github.com/knative/eventing-sources/tree/master/cmd/websocketsource)          | Active Development | None        | Opens a WebSocket to the specified source and packages each received message as a Knative event.                             |

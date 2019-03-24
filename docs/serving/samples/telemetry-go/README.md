@@ -1,4 +1,3 @@
-
 This sample runs a simple web server that makes calls to other in-cluster
 services and responds to requests with "Hello World!". The purpose of this
 sample is to show generating [metrics](../../accessing-metrics.md),
@@ -8,8 +7,7 @@ dedicated Prometheus instance rather than using the default installation.
 
 ## Prerequisites
 
-1. A Kubernetes cluster with
-   [Knative Serving](../../../install/README.md)
+1. A Kubernetes cluster with [Knative Serving](../../../install/README.md)
    installed.
 2. Check if Knative monitoring components are installed:
 

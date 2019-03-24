@@ -99,8 +99,8 @@ curl -H "Host: helloworld-go.myproject.example.com" $GATEWAY_URL
 ```
 
 The full instructions for the
-[Go Hello-World Sample](../serving/samples/hello-world/helloworld-go) with this substitution
-are published bellow:
+[Go Hello-World Sample](../serving/samples/hello-world/helloworld-go) with this
+substitution are published bellow:
 
 ### Deploy the Hello-World Go App:
 
@@ -258,8 +258,8 @@ Hello Go Sample v1!
 
 > Note: Add `-v` option to get more detail if the `curl` command failed.
 
-Removing the sample app deployment
-To remove the sample app from your cluster, delete the service record:
+Removing the sample app deployment To remove the sample app from your cluster,
+delete the service record:
 
 ```bash
 kubectl delete --filename service.yaml

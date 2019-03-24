@@ -100,8 +100,7 @@ working group:
   these meetings between 9:00AM to 2:59PM Pacific Time. Invite the public Google
   group to the meeting.
 
-- **Register the Working Group**. Go to
-  [WORKING-GROUPS.md](./WORKING-GROUPS.md)
+- **Register the Working Group**. Go to [WORKING-GROUPS.md](./WORKING-GROUPS.md)
   and add your working group name, the names of the leads, the working group
   charter, and a link to the meeting you created.
 
@@ -189,9 +188,10 @@ Leads from all affected working groups generally work together and come to an
 agreeable conclusion.
 
 In all cases, remaining blocking issues can be raised to the
-[technical oversight committee](./TECH-OVERSIGHT-COMMITTEE.md) to help resolve the
-situation. To trigger an escalation, create an issue in the `knative/serving`
-repo and assign it to the **@knative/tech-oversight-committee** team.
+[technical oversight committee](./TECH-OVERSIGHT-COMMITTEE.md) to help resolve
+the situation. To trigger an escalation, create an issue in the
+`knative/serving` repo and assign it to the
+**@knative/tech-oversight-committee** team.
 
 ---
 

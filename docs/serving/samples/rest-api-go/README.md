@@ -1,17 +1,15 @@
-
 This sample demonstrates creating and running a simple RESTful service on
 Knative Serving. The exposed endpoint takes a stock ticker (i.e. stock symbol),
 then outputs the stock price.
 
 ## Prerequisites
 
-1. A Kubernetes cluster with
-   [Knative Serving](../../../install/README.md)
-   v0.3 or higher installed.
+1. A Kubernetes cluster with [Knative Serving](../../../install/README.md) v0.3
+   or higher installed.
 1. [Docker](https://docs.docker.com/get-started/#prepare-your-docker-environment)
    installed locally.
-1. [Outbound network access](../../outbound-network-access.md)
-   enabled for this Service to make external API requests.
+1. [Outbound network access](../../outbound-network-access.md) enabled for this
+   Service to make external API requests.
 1. The code checked out locally.
 1. `envsubst` installed locally. This is installed by the `gettext` package. If
    not installed it can be installed by a Linux package manager, or by
@@ -28,8 +26,7 @@ available to fetch from a container registry. Building and pushing a container
 image can be accomplished locally using
 [Docker](https://docs.docker.com/get-started) or
 [ko](https://github.com/google/go-containerregistry/tree/master/cmd/ko) as well
-as remotely using
-[Knative Build](../../../build).
+as remotely using [Knative Build](../../../build).
 
 This sample uses Docker for both building and pushing.
 
@@ -79,7 +76,7 @@ docker push "${REPO}/rest-api-go"
 ```
 
 6. Substitute the image reference path in the template with our published image
-   path. The command below substitutes using the ${REPO} variable into a new
+   path. The command below substitutes using the \${REPO} variable into a new
    file called `docs/serving/samples/rest-api-go/sample.yaml`.
 
    ```shell
@@ -91,7 +88,6 @@ docker push "${REPO}/rest-api-go"
 
 Now that our image is available from the container registry, we can deploy the
 Knative Serving sample:
-
 
 ```shell
 kubectl apply --filename docs/serving/samples/rest-api-go/sample.yaml
@@ -177,10 +173,10 @@ echo $INGRESS_IP
 
 #### Minikube
 
-1. If your cluster is running outside a cloud provider (for example on Minikube),
-  your services will never get an external IP address, and your INGRESS_IP will
-  be empty. In that case, use the istio `hostIP` and `nodePort` as the ingress
-  IP:
+1. If your cluster is running outside a cloud provider (for example on
+   Minikube), your services will never get an external IP address, and your
+   INGRESS_IP will be empty. In that case, use the istio `hostIP` and `nodePort`
+   as the ingress IP:
 
 ```shell
 export INGRESS_IP=$(kubectl get po --selector $INGRESSGATEWAY_LABEL=ingressgateway --namespace istio-system \
@@ -233,15 +229,13 @@ Response body: `stock price for ticker <ticker> is <price>`
 
 ## Next Steps
 
-The
-[traffic splitting example](../traffic-splitting/README.md)
-continues from here to walk through creating new Revisions and splitting traffic
-between multiple Revisions.
+The [traffic splitting example](../traffic-splitting/README.md) continues from
+here to walk through creating new Revisions and splitting traffic between
+multiple Revisions.
 
 ## Clean Up
 
 To clean up the sample Service:
-
 
 ```shell
 kubectl delete --filename docs/serving/samples/rest-api-go/sample.yaml

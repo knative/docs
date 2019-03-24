@@ -1,4 +1,3 @@
-
 _Important_. Before proceeding, please review the Knative community
 [Code of Conduct](./CODE-OF-CONDUCT.md).
 
@@ -23,14 +22,15 @@ Other Documents
 
 - [Code of Conduct](./CODE-OF-CONDUCT.md) - all contributors must abide by the
   code of conduct
-- [Contributing to Knative](./CONTRIBUTING.md) - guidelines and advice on becoming
-  a contributor
+- [Contributing to Knative](./CONTRIBUTING.md) - guidelines and advice on
+  becoming a contributor
 - [Working Groups](./WORKING-GROUPS.md) - describes our various working groups
-- [Working Group Processes](./WORKING-GROUP-PROCESSES.md) - describes how working
-  groups operate
+- [Working Group Processes](./WORKING-GROUP-PROCESSES.md) - describes how
+  working groups operate
 - [Technical Oversight Committee](./TECH-OVERSIGHT-COMMITTEE.md) - describes our
   technical oversight committee
-- [Steering Committee](./STEERING-COMMITTEE.md) - describes our steering committee
+- [Steering Committee](./STEERING-COMMITTEE.md) - describes our steering
+  committee
 - [Community Roles](./ROLES.md) - describes the roles individuals can assume
   within the Knative community
 - [Reviewing and Merging Pull Requests](./REVIEWING.md) - how we manage pull
@@ -39,8 +39,8 @@ Other Documents
 ## Introduction
 
 Knative is a Kubernetes-based platform to build, deploy, and manage modern
-serverless workloads. See [Knative docs](../docs/README.md) for
-in-depth information about using Knative.
+serverless workloads. See [Knative docs](../docs/README.md) for in-depth
+information about using Knative.
 
 ## Knative authors
 
@@ -56,15 +56,15 @@ tools, platforms, languages, and products. By submitting a tutorial you can
 share your experience and help others who are solving similar problems.
 
 Community tutorials are stored in Markdown files under the `community` folder
-[Community Samples](../community/samples/README.md).  These documents
-are contributed, reviewed, and maintained by the community.
+[Community Samples](../community/samples/README.md). These documents are
+contributed, reviewed, and maintained by the community.
 
 Submit a Pull Request to the community sample directory under the Knative
 component folder that aligns with your document. For example, Knative Serving
-samples are under the `serving` folder. A reviewer will be assigned to review your 
-submission. They'll work with you to ensure that your submission is clear, correct,
-and meets the [style guide](./DOCS-CONTRIBUTING.md), but it helps if you follow it 
-as you write your tutorial.
+samples are under the `serving` folder. A reviewer will be assigned to review
+your submission. They'll work with you to ensure that your submission is clear,
+correct, and meets the [style guide](./DOCS-CONTRIBUTING.md), but it helps if
+you follow it as you write your tutorial.
 
 ## Meetings and work groups
 
@@ -98,7 +98,8 @@ following resources are available for you:
 - [Knative Users](https://groups.google.com/forum/#!forum/knative-users)
 - [Knative Developers](https://groups.google.com/forum/#!forum/knative-dev)
 
-For contributors to Knative, we also have [Knative Slack](./SLACK-GUIDELINES.md).
+For contributors to Knative, we also have
+[Knative Slack](./SLACK-GUIDELINES.md).
 
 ---
 
