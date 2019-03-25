@@ -46,7 +46,7 @@ values we hold as a team:
   - If you have no immediate solution even after thinking about it - if
     something does seem significant, raise it to someone who might be able to
     also think of solutions or to the group (don’t stay frustrated! Feel safe in
-    bringing up issues.
+    bringing up issues).
   - Avoid rehashing old issues that have been resolved/decided (unless you have
     new insights or information).
 
