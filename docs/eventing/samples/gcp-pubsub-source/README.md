@@ -1,4 +1,3 @@
-
 This sample shows how to configure the GCP PubSub event source. This event
 source is most useful as a bridge from other GCP services, such as
 [Cloud Storage](https://cloud.google.com/storage/docs/pubsub-notifications),
@@ -17,9 +16,8 @@ source is most useful as a bridge from other GCP services, such as
 
 1. Setup [Knative Serving](../../../install)
 
-1. Setup
-   [Knative Eventing](../../../eventing). In
-   addition, install the GCP PubSub event source from `release-gcppubsub.yaml`:
+1. Setup [Knative Eventing](../../../eventing). In addition, install the GCP
+   PubSub event source from `release-gcppubsub.yaml`:
 
    ```shell
    kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.3.0/release-gcppubsub.yaml

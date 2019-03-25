@@ -1,4 +1,3 @@
-
 Cron Job Source example shows how to configure Cron Job as event source for
 functions.
 
@@ -7,8 +6,7 @@ functions.
 ### Prerequisites
 
 1. Setup [Knative Serving](../../../serving).
-1. Setup
-   [Knative Eventing](../../../eventing).
+1. Setup [Knative Eventing](../../../eventing).
 
 ### Create a Knative Service
 

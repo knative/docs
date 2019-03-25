@@ -1,4 +1,3 @@
-
 This samples builds off the [Creating a RESTful Service](../rest-api-go) sample
 to illustrate applying a revision, then using that revision for manual traffic
 splitting.
@@ -103,7 +102,8 @@ stock-configuration-example-00001   11m
 stock-configuration-example-00002   4m
 ```
 
-2. Update the `traffic` list in `docs/serving/samples/rest-api-go/sample.yaml` as:
+2. Update the `traffic` list in `docs/serving/samples/rest-api-go/sample.yaml`
+   as:
 
 ```yaml
 traffic:
