@@ -1,4 +1,3 @@
-# Knative Secrets - Go sample
 
 A simple web app written in Go that you can use for testing. It demonstrates how
 to use a Kubernetes secret as a Volume with Knative. We will create a new Google
