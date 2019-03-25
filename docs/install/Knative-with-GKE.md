@@ -209,6 +209,7 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
    > info and to track the upcoming solution to this problem, see issues
    > [#968](https://github.com/knative/docs/issues/968) and
    > [#1036](https://github.com/knative/docs/issues/1036).
+
    > **Note**: For the v0.4.0 release and newer, the `clusterrole.yaml` file is
    > required to enable the Build and Serving components to interact with each
    > other.
