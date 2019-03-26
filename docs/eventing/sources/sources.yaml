@@ -80,6 +80,12 @@ sources:
     description: >
       Registers for events of the specified types on the specified Google Cloud Storage bucket and
       optional object prefix. Brings those events into Knative.
+  - name: Apache Kafka
+    url: https://github.com/knative/eventing-sources/blob/master/contrib/kafka/pkg/apis/sources/v1alpha1/kafka_types.go
+    status: Proof of Concept
+    support: None
+    description: >
+      Brings [Apache Kafka](https://kafka.apache.org/) messages into Knative.
 
 # These are containers intended to be used with ContainerSource, but are not CRDs.
 containers:
