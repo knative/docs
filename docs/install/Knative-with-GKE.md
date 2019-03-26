@@ -152,11 +152,13 @@ Knative depends on Istio.
    about an unknown type, run the second `kubectl apply` command again.
 
 1. Label the default namespace with `istio-injection=enabled`:
+
    ```bash
    kubectl label namespace default istio-injection=enabled
    ```
 1. Monitor the Istio components until all of the components show a `STATUS` of
    `Running` or `Completed`:
+   
    ```bash
    kubectl get pods --namespace istio-system
    ```
