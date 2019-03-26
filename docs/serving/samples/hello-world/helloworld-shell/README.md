@@ -1,5 +1,3 @@
-# Hello World - Shell sample
-
 A simple web app that executes a shell script. The shell script reads an env
 variable `TARGET` and prints `Hello ${TARGET}!`. If the `TARGET` environment
 variable is not specified, the script uses `World`.
