@@ -66,7 +66,7 @@ recreate the source files from this folder.
    WORKDIR /go/src/github.com/knative/docs/helloworld
    COPY . .
 
-   # Build the helloworld command inside the container.
+   # Build the command inside the container.
    # (You may fetch or manage dependencies here,
    # either manually or with a tool like "godep".)
    RUN CGO_ENABLED=0 GOOS=linux go build -v -o helloworld

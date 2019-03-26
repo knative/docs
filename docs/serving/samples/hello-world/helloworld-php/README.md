@@ -28,7 +28,7 @@ recreate the source files from this folder.
    ```php
    <?php
    $target = getenv('TARGET', true) ?: 'World';
-   echo sprintf("Hello %s!", $target);
+   echo sprintf('Hello %s!', $target);
    ```
 
 1. Create a file named `Dockerfile` and copy the code block below into it. See
