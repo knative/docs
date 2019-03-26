@@ -175,7 +175,7 @@ func checkDeployment(t *testing.T, appName, expectedOutput string) {
 }
 
 // SampleAppTestBase tests individual sample app
-func SampleAppTestBase(t *testing.T, lc languageConfig, expectedOutput string) {
+func SampleAppTestBase(t *testing.T, lc LanguageConfig, expectedOutput string) {
 	t.Parallel()
 	imagePath := ImagePath(lc.AppName)
 	yamlFilePath := path.Join(lc.WorkDir, "service.yaml")

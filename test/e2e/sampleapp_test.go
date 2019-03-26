@@ -29,7 +29,7 @@ const (
 
 // TestSampleApp runs all sample apps from different languages
 func TestSampleApp(t *testing.T) {
-	lcs, err := getConfigs(configFile)
+	lcs, err := GetConfigs(configFile)
 	if nil != err {
 		t.Fatalf("Failed reading config file %s: '%v'", configFile, err)
 	}

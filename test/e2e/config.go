@@ -36,11 +36,11 @@ const (
 	defaultYamlImagePlaceHolder = "docker.io/{username}/helloworld-%s"
 )
 
-type allConfigs struct {
-	Languages []languageConfig `yaml:"languages`
+type AllConfigs struct {
+	Languages []LanguageConfig `yaml:"languages`
 }
 
-type languageConfig struct {
+type LanguageConfig struct {
 	Language             string    `yaml:"language"`
 	ExpectedOutput       string    `yaml:"expectedOutput"`
 	SrcDir               string    `yaml:"srcDir"`  // Directory contains sample code
@@ -57,7 +57,7 @@ type command struct {
 	Args string `yaml:"args"`
 }
 
-func (lc *languageConfig) useDefaultIfNotProvided() {
+func (lc *LanguageConfig) UseDefaultIfNotProvided() {
 	if "" == lc.SrcDir {
 		lc.SrcDir = fmt.Sprintf(defaultSrcDir, lc.Language)
 	}
@@ -79,8 +79,8 @@ func (c *command) run(t *testing.T) {
 	}
 }
 
-func getConfigs(configPath string) (allConfigs, error) {
-	var lcs allConfigs
+func GetConfigs(configPath string) (AllConfigs, error) {
+	var lcs AllConfigs
 	content, err := ioutil.ReadFile(configPath)
 	if nil == err {
 		err = yaml.Unmarshal(content, &lcs)
