@@ -1,5 +1,3 @@
-// +build e2e
-
 /*
 Copyright 2019 The Knative Authors
 
@@ -16,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package e2etest
+package sampleapp
 
 import (
 	"fmt"
@@ -36,28 +34,32 @@ const (
 	defaultYamlImagePlaceHolder = "docker.io/{username}/helloworld-%s"
 )
 
-type allConfigs struct {
-	Languages []languageConfig `yaml:"languages`
+// AllConfigs contains all LanguageConfig
+type AllConfigs struct {
+	Languages []LanguageConfig `yaml:"languages`
 }
 
-type languageConfig struct {
+// LanguageConfig contains all information for building/deploying an app
+type LanguageConfig struct {
 	Language             string    `yaml:"language"`
 	ExpectedOutput       string    `yaml:"expectedOutput"`
 	SrcDir               string    `yaml:"srcDir"`  // Directory contains sample code
 	WorkDir              string    `yaml:"workDir"` // Temp work directory
 	AppName              string    `yaml:"appName"`
 	YamlImagePlaceholder string    `yaml:"yamlImagePlaceholder"` // Token to be replaced by real docker image URI
-	PreCommands          []command `yaml:"preCommands"`          // Commands to be ran before copying
+	PreCommands          []Command `yaml:"preCommands"`          // Commands to be ran before copying
 	Copies               []string  `yaml:"copies"`               // Files to be copied from SrcDir to WorkDir
-	PostCommands         []command `yaml:"postCommands"`         // Commands to be ran after copying
+	PostCommands         []Command `yaml:"postCommands"`         // Commands to be ran after copying
 }
 
-type command struct {
+// Command contains shell commands
+type Command struct {
 	Exec string `yaml:"exec"`
 	Args string `yaml:"args"`
 }
 
-func (lc *languageConfig) useDefaultIfNotProvided() {
+// UseDefaultIfNotProvided sets default value to SrcDir, WorkDir, AppName, and YamlImagePlaceholder if not provided
+func (lc *LanguageConfig) UseDefaultIfNotProvided() {
 	if "" == lc.SrcDir {
 		lc.SrcDir = fmt.Sprintf(defaultSrcDir, lc.Language)
 	}
@@ -72,15 +74,17 @@ func (lc *languageConfig) useDefaultIfNotProvided() {
 	}
 }
 
-func (c *command) run(t *testing.T) {
+// Run runs command and fail if it failed
+func (c *Command) Run(t *testing.T) {
 	args := strings.Split(c.Args, " ")
 	if output, err := exec.Command(c.Exec, args...).CombinedOutput(); err != nil {
 		t.Fatalf("Error executing: '%s' '%s' -err: '%v'", c.Exec, c.Args, strings.TrimSpace(string(output)))
 	}
 }
 
-func getConfigs(configPath string) (allConfigs, error) {
-	var lcs allConfigs
+// GetConfigs parses a config yaml file and return AllConfigs struct
+func GetConfigs(configPath string) (AllConfigs, error) {
+	var lcs AllConfigs
 	content, err := ioutil.ReadFile(configPath)
 	if nil == err {
 		err = yaml.Unmarshal(content, &lcs)

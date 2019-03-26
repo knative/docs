@@ -21,22 +21,26 @@ package e2etest
 import (
 	"strings"
 	"testing"
+
+	"github.com/knative/docs/test/sampleapp"
+
+	"github.com/knative/docs/test"
 )
 
 const (
-	configFile = "config.yaml"
+	configFile = "../sampleapp/config.yaml"
 )
 
 // TestSampleApp runs all sample apps from different languages
 func TestSampleApp(t *testing.T) {
-	lcs, err := getConfigs(configFile)
+	lcs, err := sampleapp.GetConfigs(configFile)
 	if nil != err {
 		t.Fatalf("Failed reading config file %s: '%v'", configFile, err)
 	}
 
 	whitelist := make(map[string]bool)
-	if "" != Flags.Languages {
-		for _, l := range strings.Split(Flags.Languages, ",") {
+	if "" != test.Flags.Languages {
+		for _, l := range strings.Split(test.Flags.Languages, ",") {
 			whitelist[l] = true
 		}
 	}
@@ -44,7 +48,7 @@ func TestSampleApp(t *testing.T) {
 		if _, ok := whitelist[lc.Language]; len(whitelist) > 0 && !ok {
 			continue
 		}
-		lc.useDefaultIfNotProvided()
+		lc.UseDefaultIfNotProvided()
 		t.Run(lc.Language, func(t *testing.T) {
 			SampleAppTestBase(t, lc, lc.ExpectedOutput)
 		})
