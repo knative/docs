@@ -36,7 +36,7 @@ func TestSampleApp(t *testing.T) {
 
 	whitelist := make(map[string]bool)
 	if "" != Flags.Languages {
-		for _, l := range strings.Split(Flags.Languages, " ") {
+		for _, l := range strings.Split(Flags.Languages, ",") {
 			whitelist[l] = true
 		}
 	}

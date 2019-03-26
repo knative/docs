@@ -54,7 +54,7 @@ func initializeFlags() *EnvironmentFlags {
 
 	flag.StringVar(&f.Tag, "tag", "latest", "Provide the version tag for the test images.")
 
-	flag.StringVar(&f.Languages, "languages", "", "Select languages to run e2e test on.")
+	flag.StringVar(&f.Languages, "languages", "", "Comma separated languages to run e2e test on.")
 
 	return &f
 }
