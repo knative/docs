@@ -20,7 +20,7 @@ recreate the source files from this folder.
 
    ```sh
    #!/bin/sh
-   echo Hello ${TARGET:=World}
+   echo Hello ${TARGET:=World}!
    ```
 
 1. Create a new file named `invoke.go` and paste the following code. We use a

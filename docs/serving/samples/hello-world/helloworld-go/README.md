@@ -60,7 +60,7 @@ recreate the source files from this folder.
    # Use the offical Golang image to create a build artifact.
    # This is based on Debian and sets the GOPATH to /go.
    # https://hub.docker.com/_/golang
-   FROM golang as builder
+   FROM golang:1.12 as builder
 
    # Copy local code to the container image.
    WORKDIR /go/src/github.com/knative/docs/helloworld

@@ -27,7 +27,7 @@ recreate the source files from this folder.
 
    ```php
    <?php
-   $target = getenv('TARGET', true) ?: "World";
+   $target = getenv('TARGET', true) ?: 'World';
    echo sprintf("Hello %s!", $target);
    ```
 

@@ -64,6 +64,7 @@ recreate the source files from this folder.
    source 'https://rubygems.org'
 
    gem 'sinatra'
+   gem 'rack', '>= 2.0.6'
    ```
 
 1. Run bundle. If you don't have bundler installed, copy the
