@@ -22,13 +22,7 @@ source is most useful as a bridge from other GCP services, such as
    addition, install the GCP PubSub event source from `release-gcppubsub.yaml`:
 
    ```shell
-   kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.4.1/gcppubsub.yaml
-   ```
-
-   Until 0.5.0 is released (and the previous URL is updated to point at it), you will need to have a copy of the `knative/eventing-sources` repo locally and from its root:
-
-   ```shell
-   kubectl apply --filename contrib/gcppubsub/config/201-clusterrole.yaml
+   kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.5.0/gcppubsub.yaml
    ```
 
 1. Enable the `Cloud Pub/Sub API` on your project:
