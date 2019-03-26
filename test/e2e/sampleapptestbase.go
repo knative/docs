@@ -91,6 +91,8 @@ func prepareWorkDir(t *testing.T, srcDir, workDir string, preCommands []command,
 	for _, f := range copies {
 		src := path.Join(srcDir, f)
 		dst := path.Join(workDir, f)
+		dstDir, _ := path.Split(dst)
+		noStderrShell("mkdir", "-p", dstDir)
 		if output, err := exec.Command("cp", src, dst).CombinedOutput(); err != nil {
 			t.Fatalf("Error copying: '%s' to '%s' -err: '%v'", src, dst, strings.TrimSpace(string(output)))
 		}
@@ -174,6 +176,7 @@ func checkDeployment(t *testing.T, appName, expectedOutput string) {
 
 // SampleAppTestBase tests individual sample app
 func SampleAppTestBase(t *testing.T, lc languageConfig, expectedOutput string) {
+	t.Parallel()
 	imagePath := ImagePath(lc.AppName)
 	yamlFilePath := path.Join(lc.WorkDir, "service.yaml")
 
