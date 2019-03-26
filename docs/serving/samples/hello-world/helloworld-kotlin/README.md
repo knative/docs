@@ -46,7 +46,7 @@ recreate the source files from this folder.
        embeddedServer(Netty, port.toInt()) {
            routing {
                get("/") {
-                   call.respondText("Hello $target", ContentType.Text.Html)
+                   call.respondText("Hello $target!", ContentType.Text.Html)
                }
            }
        }.start(wait = true)
@@ -222,7 +222,7 @@ folder) you're ready to build and deploy the sample app.
    ```
 
    ```terminal
-   Hello Kotlin Sample v1
+   Hello Kotlin Sample v1!
    ```
 
 ## Remove the sample app deployment

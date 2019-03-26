@@ -93,7 +93,7 @@ recreate the source files from this folder.
                image: docker.io/{username}/helloworld-shell
                env:
                    - name: TARGET
-                   value: "Shell"
+                   value: "Shell Sample v1"
    ```
 
 ## Building and deploying the sample
@@ -171,7 +171,7 @@ folder) you're ready to build and deploy the sample app.
 
    ```shell
    curl -H "Host: helloworld-shell.default.example.com" http://35.203.155.229
-   Hello World: Go Sample v1!
+   Hello Shell Sample v1!
    ```
 
    > Note: Add `-v` option to get more detail if the `curl` command failed.

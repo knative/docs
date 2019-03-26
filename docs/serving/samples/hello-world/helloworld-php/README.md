@@ -28,7 +28,7 @@ recreate the source files from this folder.
    ```php
    <?php
    $target = getenv('TARGET', true) ?: "World";
-   echo sprintf("Hello %s!\n", $target);
+   echo sprintf("Hello %s!", $target);
    ```
 
 1. Create a file named `Dockerfile` and copy the code block below into it. See
@@ -142,7 +142,7 @@ folder) you're ready to build and deploy the sample app.
 
    ```shell
    curl -H "Host: helloworld-php.default.example.com" http://{IP_ADDRESS}
-   Hello World: PHP Sample v1!
+   Hello PHP Sample v1!
    ```
 
 ## Removing the sample app deployment

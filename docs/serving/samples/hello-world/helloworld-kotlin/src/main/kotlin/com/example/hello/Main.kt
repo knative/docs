@@ -13,7 +13,7 @@ fun main(args: Array<String>) {
     embeddedServer(Netty, port.toInt()) {
         routing {
             get("/") {
-                call.respondText("Hello $target", ContentType.Text.Html)
+                call.respondText("Hello $target!", ContentType.Text.Html)
             }
         }
     }.start(wait = true)

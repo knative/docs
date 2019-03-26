@@ -12,4 +12,4 @@ spec:
             image: docker.io/{username}/helloworld-shell
             env:
             - name: TARGET
-              value: "Shell"
+              value: "Shell Sample v1"

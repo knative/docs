@@ -212,7 +212,7 @@ folder) you're ready to build and deploy the sample app.
    ```shell
    curl -H "Host: ${DOMAIN_NAME}" http://${IP_ADDRESS}
 
-   Hello World: Spring Boot Sample v1
+   Hello Spring Boot Sample v1!
    ```
 
 ## Removing the sample app deployment

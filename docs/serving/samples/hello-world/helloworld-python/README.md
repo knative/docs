@@ -154,7 +154,7 @@ folder) you're ready to build and deploy the sample app.
 
    ```shell
    curl -H "Host: helloworld-python.default.example.com" http://{IP_ADDRESS}
-   Hello World: Python Sample v1!
+   Hello Python Sample v1!
    ```
 
 ## Remove the sample app deployment

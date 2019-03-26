@@ -162,7 +162,7 @@ folder) you're ready to build and deploy the sample app.
 
    ```shell
    curl -H "Host: helloworld-ruby.default.example.com" http://{IP_ADDRESS}
-   Hello World: Ruby Sample v1!
+   Hello Ruby Sample v1!
    ```
 
 ## Remove the sample app deployment

@@ -19,7 +19,7 @@ languages:
       - "service.yaml"
       - "Dockerfile"
   - language: "kotlin"
-    expectedOutput: "Hello Kotlin Sample v1"
+    expectedOutput: "Hello Kotlin Sample v1!"
     copies:
       - "/src/main/kotlin/com/example/hello/Main.kt"
       - "build.gradle"
@@ -33,7 +33,7 @@ languages:
       - "service.yaml"
       - "Dockerfile"
   - language: "php"
-    expectedOutput: "Hello PHP Sample v1!\\n"
+    expectedOutput: "Hello PHP Sample v1!"
     copies:
       - "index.php"
       - "service.yaml"
@@ -53,7 +53,7 @@ languages:
       - "service.yaml"
       - "Dockerfile"
   - language: "shell"
-    expectedOutput: "Hello Shell"
+    expectedOutput: "Hello Shell Sample v1!"
     copies:
       - "script.sh"
       - "invoke.go"

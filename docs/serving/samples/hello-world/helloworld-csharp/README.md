@@ -52,7 +52,7 @@ recreate the source files from this folder.
    app.Run(async (context) =>
    {
        var target = Environment.GetEnvironmentVariable("TARGET") ?? "World";
-       await context.Response.WriteAsync($"Hello {target}\n");
+       await context.Response.WriteAsync($"Hello {target}!\n");
    });
    ```
 
@@ -171,7 +171,7 @@ folder) you're ready to build and deploy the sample app.
 
    ```shell
    curl -H "Host: helloworld-csharp.default.example.com" http://{IP_ADDRESS}
-   Hello World!
+   Hello C# Sample v1!
    ```
 
 ## Removing the sample app deployment
