@@ -19,6 +19,7 @@ limitations under the License.
 package e2etest
 
 import (
+	"strings"
 	"testing"
 )
 
@@ -33,7 +34,16 @@ func TestSampleApp(t *testing.T) {
 		t.Fatalf("Failed reading config file %s: '%v'", configFile, err)
 	}
 
+	whitelist := make(map[string]bool)
+	if "" != Flags.Languages {
+		for _, l := range strings.Split(Flags.Languages, " ") {
+			whitelist[l] = true
+		}
+	}
 	for _, lc := range lcs.Languages {
+		if _, ok := whitelist[lc.Language]; len(whitelist) > 0 && !ok {
+			continue
+		}
 		lc.useDefaultIfNotProvided()
 		t.Run(lc.Language, func(t *testing.T) {
 			SampleAppTestBase(t, lc, lc.ExpectedOutput)

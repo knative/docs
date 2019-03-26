@@ -35,6 +35,7 @@ type EnvironmentFlags struct {
 	DockerRepo  string // Docker repo (defaults to $KO_DOCKER_REPO)
 	EmitMetrics bool   // Emit metrics
 	Tag         string // Docker image tag
+	Languages   string // Whitelisted languages to run
 }
 
 func initializeFlags() *EnvironmentFlags {
@@ -52,6 +53,8 @@ func initializeFlags() *EnvironmentFlags {
 		"Provide the uri of the docker repo you have uploaded the test image to using `uploadtestimage.sh`. Defaults to $KO_DOCKER_REPO")
 
 	flag.StringVar(&f.Tag, "tag", "latest", "Provide the version tag for the test images.")
+
+	flag.StringVar(&f.Languages, "languages", "", "Select languages to run e2e test on.")
 
 	return &f
 }
