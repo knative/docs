@@ -30,10 +30,11 @@ var Flags = initializeFlags()
 
 // EnvironmentFlags define the flags that are needed to run the e2e tests.
 type EnvironmentFlags struct {
-	Cluster    string // K8s cluster (defaults to cluster in kubeconfig)
-	LogVerbose bool   // Enable verbose logging
-	DockerRepo string // Docker repo (defaults to $KO_DOCKER_REPO)
-	Tag        string // Docker image tag
+	Cluster     string // K8s cluster (defaults to cluster in kubeconfig)
+	LogVerbose  bool   // Enable verbose logging
+	DockerRepo  string // Docker repo (defaults to $KO_DOCKER_REPO)
+	EmitMetrics bool   // Emit metrics
+	Tag         string // Docker image tag
 }
 
 func initializeFlags() *EnvironmentFlags {
@@ -43,6 +44,9 @@ func initializeFlags() *EnvironmentFlags {
 
 	flag.BoolVar(&f.LogVerbose, "logverbose", false,
 		"Set this flag to true if you would like to see verbose logging.")
+
+	flag.BoolVar(&f.EmitMetrics, "emitmetrics", false,
+		"Set this flag to true if you would like tests to emit metrics, e.g. latency of resources being realized in the system.")
 
 	flag.StringVar(&f.DockerRepo, "dockerrepo", os.Getenv("KO_DOCKER_REPO"),
 		"Provide the uri of the docker repo you have uploaded the test image to using `uploadtestimage.sh`. Defaults to $KO_DOCKER_REPO")
