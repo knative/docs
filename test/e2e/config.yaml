@@ -52,3 +52,10 @@ languages:
       - "Gemfile.lock"
       - "service.yaml"
       - "Dockerfile"
+  - language: "shell"
+    expectedOutput: "Hello Shell"
+    copies:
+      - "script.sh"
+      - "invoke.go"
+      - "service.yaml"
+      - "Dockerfile"
