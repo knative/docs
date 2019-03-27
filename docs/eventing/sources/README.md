@@ -2,7 +2,7 @@
 This is a generated file and should not be changed manually. All changes should follow the
 procedure:
 
-1. Update the information in [`sources.yaml`](sources.yaml).
+1. Update the information in [`sources.yaml`](./sources.yaml).
 
 2. Run the generator tool:
     ```shell
@@ -63,6 +63,7 @@ Name | Status | Support | Description
 [AWS Kinesis](https://github.com/triggermesh/knative-lambda-sources/tree/master/awskinesis) | Active Development | TriggerMesh | Registers for events on the specified AWS Kinesis stream. Brings those events into Knative.
 [AWS SNS](https://github.com/triggermesh/knative-lambda-sources/tree/master/awssns) | Active Development | TriggerMesh | Registers for events of the specified AWS SNS endpoint. Brings those events into Knative.
 [AWS SQS](https://github.com/triggermesh/knative-lambda-sources/tree/master/awssqs) | Active Development | TriggerMesh | Registers for events of the specified AWS SQS queue. Brings those events into Knative.
+[FTP / SFTP](https://github.com/vaikas-google/ftp) | Proof of concept | None | Watches for files being uploaded into a FTP/SFTP and generates events for those.
 [Heartbeat](https://github.com/knative/eventing-sources/tree/master/cmd/heartbeats) | Proof of Concept | None | Uses an in-memory timer to produce events at the specified interval.
 [Heartbeat](https://github.com/Harwayne/auto-container-source/tree/master/heartbeat-source) | Proof of Concept | None | Uses an in-memory timer to produce events as the specified interval. Uses AutoContainerSource for underlying infrastructure.
 [K8s](https://github.com/Harwayne/auto-container-source/tree/master/k8s-event-source) | Proof of Concept | None | Brings Kubernetes cluster events into Knative. Uses AutoContainerSource for underlying infrastructure.
