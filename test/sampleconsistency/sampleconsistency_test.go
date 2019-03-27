@@ -73,10 +73,6 @@ func checkContains(t *testing.T, rl []string, src string) {
 			continue
 		}
 		if nr != ns {
-			if is == 11 {
-				t.Log(nr)
-				t.Log(ns)
-			}
 			is = 0
 		} else {
 			is++
