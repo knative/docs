@@ -152,3 +152,9 @@ containers:
     support: TriggerMesh
     description: >
       Registers for events of the specified AWS SNS endpoint. Brings those events into Knative.
+  - name: FTP / SFTP
+    url: https://github.com/vaikas-google/ftp
+    status: Proof of concept
+    support: None
+    description: >
+      Watches for files being uploaded into a FTP/SFTP and generates events for those.
