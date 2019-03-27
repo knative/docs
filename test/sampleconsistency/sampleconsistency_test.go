@@ -87,7 +87,6 @@ func checkContains(t *testing.T, rl []string, src string) {
 		ir++
 	}
 	if is < len(sl) && best < len(sl) && best != -1 {
-		// t.Logf("%v", strings.Join(rl, "\n"))
 		t.Fatalf("README missing line '%s' '%d' in file '%s'", sl[best], best, src)
 	}
 }
