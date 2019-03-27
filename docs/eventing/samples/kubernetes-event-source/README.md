@@ -59,15 +59,10 @@ kubectl apply --filename trigger.yaml
 ### Create Events
 
 Create events by launching a pod in the default namespace. Create a busybox
-container
+container and immediately delete it.
 
 ```shell
-kubectl run -i --tty busybox --image=busybox --restart=Never -- sh
-```
-
-Once the shell comes up, just exit it and kill the pod.
-
-```shell
+kubectl run busybox --image=busybox --restart=Never -- ls
 kubectl delete pod busybox
 ```
 

@@ -1,7 +1,7 @@
 apiVersion: eventing.knative.dev/v1alpha1
 kind: Trigger
 metadata:
-  name: testevents-subscription
+  name: testevents-trigger
   namespace: default
 spec:
   subscriber:
