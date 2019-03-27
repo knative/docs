@@ -35,7 +35,7 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
        INGRESSGATEWAY=istio-ingressgateway
    fi
 
-   export IP_ADDRESS=`kubectl get svc $INGRESSGATEWAY --namespace istio-system --output jsonpath=" .  {.status.loadBalancer.ingress[*].ip}"`
+   export IP_ADDRESS=`kubectl get svc $INGRESSGATEWAY --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
    ```
 
 ## Load the Service
