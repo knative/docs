@@ -46,7 +46,7 @@ recreate the source files from this folder.
        embeddedServer(Netty, port.toInt()) {
            routing {
                get("/") {
-                   call.respondText("Hello $target", ContentType.Text.Html)
+                   call.respondText("Hello $target!", ContentType.Text.Html)
                }
            }
        }.start(wait = true)
@@ -109,7 +109,7 @@ recreate the source files from this folder.
    ```docker
    # Use the official gradle image to create a build artifact.
    # https://hub.docker.com/_/gradle
-   FROM gradle as builder
+   FROM gradle:4.10 as builder
 
    # Copy local code to the container image.
    COPY build.gradle .
@@ -222,7 +222,7 @@ folder) you're ready to build and deploy the sample app.
    ```
 
    ```terminal
-   Hello Kotlin Sample v1
+   Hello Kotlin Sample v1!
    ```
 
 ## Remove the sample app deployment

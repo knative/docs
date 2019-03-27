@@ -64,7 +64,7 @@ recreate the source files from this folder.
    {
      "name": "knative-serving-helloworld",
      "version": "1.0.0",
-     "description": "",
+     "description": "Simple hello world sample in Node",
      "main": "index.js",
      "scripts": {
        "start": "node index.js"

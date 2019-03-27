@@ -60,13 +60,13 @@ recreate the source files from this folder.
    # Use the offical Golang image to create a build artifact.
    # This is based on Debian and sets the GOPATH to /go.
    # https://hub.docker.com/_/golang
-   FROM golang as builder
+   FROM golang:1.12 as builder
 
    # Copy local code to the container image.
    WORKDIR /go/src/github.com/knative/docs/helloworld
    COPY . .
 
-   # Build the helloworld command inside the container.
+   # Build the command inside the container.
    # (You may fetch or manage dependencies here,
    # either manually or with a tool like "godep".)
    RUN CGO_ENABLED=0 GOOS=linux go build -v -o helloworld
@@ -188,7 +188,7 @@ folder) you're ready to build and deploy the sample app.
 
    ```shell
    curl -H "Host: helloworld-go.default.example.com" http://35.203.155.229
-   Hello World: Go Sample v1!
+   Hello Go Sample v1!
    ```
 
    > Note: Add `-v` option to get more detail if the `curl` command failed.

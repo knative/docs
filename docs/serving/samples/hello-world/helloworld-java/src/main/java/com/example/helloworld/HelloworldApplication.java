@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloworldApplication {
 
 	@Value("${TARGET:World}")
-	String message;
+	String target;
 
 	@RestController
 	class HelloworldController {
 		@GetMapping("/")
 		String hello() {
-			return "Hello " + message + "!";
+			return "Hello " + target + "!";
 		}
 	}
 
