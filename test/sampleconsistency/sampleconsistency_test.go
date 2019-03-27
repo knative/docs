@@ -57,6 +57,9 @@ func checkContains(t *testing.T, rl []string, src string) {
 	ir := 0
 	is := 0
 	best := -1
+	// Scans rl(README lines) for entire block matching sl(source lines)
+	// Pointer ir keeps on moving, and pointer moves only when there is a line match, otherwise back to 0.
+	// A match is found if pointer is moved to end.
 	for ir < len(rl) && is < len(sl) {
 		nr := normalize(rl[ir])
 		ns := normalize(sl[is])
@@ -83,7 +86,7 @@ func checkContains(t *testing.T, rl []string, src string) {
 		ir++
 	}
 	if is < len(sl) && best < len(sl) && best != -1 {
-		t.Fatalf("README missing line '%s' '%d' in file '%s'", sl[best], best, src)
+		t.Fatalf("README.md file is missing line %d ('%s') from file '%s'", best, sl[best], src)
 	}
 }
 
@@ -96,24 +99,22 @@ func checkDoc(t *testing.T, lc sampleapp.LanguageConfig) {
 	}
 }
 
-// TestDocSrc runs all sample apps from different languages
+// TestDocSrc checks content of README.md files, and ensures that the real code of the samples
+// is properly embedded in the docs.
 func TestDocSrc(t *testing.T) {
 	lcs, err := sampleapp.GetConfigs(configFile)
 	if nil != err {
 		t.Fatalf("Failed reading config file %s: '%v'", configFile, err)
 	}
 
-	whitelist := make(map[string]bool)
-	if "" != test.Flags.Languages {
-		for _, l := range strings.Split(test.Flags.Languages, ",") {
-			whitelist[l] = true
-		}
-	}
+	whitelist := test.GetWhitelistedLanguages()
 	for _, lc := range lcs.Languages {
 		if _, ok := whitelist[lc.Language]; len(whitelist) > 0 && !ok {
 			continue
 		}
 		lc.UseDefaultIfNotProvided()
-		checkDoc(t, lc)
+		t.Run(lc.Language, func(t *testing.T) {
+			checkDoc(t, lc)
+		})
 	}
 }
