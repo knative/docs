@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package unit
+package sampleconsistency
 
 import (
 	"bufio"
@@ -23,11 +23,12 @@ import (
 	"strings"
 	"testing"
 
-	e2etest "github.com/knative/docs/test/e2e"
+	"github.com/knative/docs/test"
+	"github.com/knative/docs/test/sampleapp"
 )
 
 const (
-	configFile = "../e2e/config.yaml"
+	configFile = "../sampleapp/config.yaml"
 )
 
 func readlines(t *testing.T, filename string) []string {
@@ -91,7 +92,7 @@ func checkContains(t *testing.T, rl []string, src string) {
 	}
 }
 
-func checkDoc(t *testing.T, lc e2etest.LanguageConfig) {
+func checkDoc(t *testing.T, lc sampleapp.LanguageConfig) {
 	readme := path.Join(lc.SrcDir, "README.md")
 	rl := readlines(t, readme)
 	for _, f := range lc.Copies {
@@ -102,14 +103,14 @@ func checkDoc(t *testing.T, lc e2etest.LanguageConfig) {
 
 // TestDocSrc runs all sample apps from different languages
 func TestDocSrc(t *testing.T) {
-	lcs, err := e2etest.GetConfigs(configFile)
+	lcs, err := sampleapp.GetConfigs(configFile)
 	if nil != err {
 		t.Fatalf("Failed reading config file %s: '%v'", configFile, err)
 	}
 
 	whitelist := make(map[string]bool)
-	if "" != e2etest.Flags.Languages {
-		for _, l := range strings.Split(e2etest.Flags.Languages, ",") {
+	if "" != test.Flags.Languages {
+		for _, l := range strings.Split(test.Flags.Languages, ",") {
 			whitelist[l] = true
 		}
 	}
@@ -118,8 +119,6 @@ func TestDocSrc(t *testing.T) {
 			continue
 		}
 		lc.UseDefaultIfNotProvided()
-		t.Run(lc.Language, func(t *testing.T) {
-			checkDoc(t, lc)
-		})
+		checkDoc(t, lc)
 	}
 }
