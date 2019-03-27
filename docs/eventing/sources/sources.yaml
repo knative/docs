@@ -27,7 +27,19 @@ metaSources:
 
 # Sources are event sources that users can install and use directly.
 sources:
-  - name: AWS SQS
+  - name: Apache Camel K (Kamel)
+    url: https://github.com/knative/eventing-sources/blob/master/contrib/camel/pkg/apis/sources/v1alpha1/camelsource_types.go
+    status: Proof of Concept
+    support: None
+    description: >
+      Allows users of [Apache Camel K](https://camel.apache.org/staging/camel-k/latest/) to instantly run integration code written in Camel DSL on Kubernetes or OpenShift.
+  - name: Apache Kafka
+    url: https://github.com/knative/eventing-sources/blob/master/contrib/kafka/pkg/apis/sources/v1alpha1/kafka_types.go
+    status: Proof of Concept
+    support: None
+    description: >
+      Brings [Apache Kafka](https://kafka.apache.org/) messages into Knative.
+ - name: AWS SQS
     url: https://github.com/knative/eventing-sources/blob/master/pkg/apis/sources/v1alpha1/aws_sqs_types.go
     status: Proof of Concept
     support: None
@@ -37,7 +49,7 @@ sources:
     url: https://github.com/knative/eventing-sources/blob/master/pkg/apis/sources/v1alpha1/cron_job_types.go
     status: Proof of Concept
     support: None
-    description: >
+    description: >at https://github.com/knative/docs/blob/master/docs/eventing/sources/sources.yaml
       Uses an in-memory timer to produce events on the specified Cron schedule.
   - name: GCP PubSub
     url: https://github.com/knative/eventing-sources/blob/master/contrib/gcppubsub/pkg/apis/sources/v1alpha1/gcp_pubsub_types.go
