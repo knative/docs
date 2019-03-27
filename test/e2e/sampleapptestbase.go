@@ -29,6 +29,10 @@ import (
 	"strings"
 	"testing"
 	"time"
+
+	"github.com/knative/docs/test/sampleapp"
+
+	"github.com/knative/docs/test"
 )
 
 const (
@@ -73,7 +77,7 @@ func ingressAddress(gateway string, addressType string) string {
 		"-o", fmt.Sprintf("jsonpath={.status.loadBalancer.ingress[*]['%s']}", addressType))
 }
 
-func prepareWorkDir(t *testing.T, srcDir, workDir string, preCommands []command, copies []string, postCommands []command) {
+func prepareWorkDir(t *testing.T, srcDir, workDir string, preCommands []sampleapp.Command, copies []string, postCommands []sampleapp.Command) {
 	t.Log("Prepare source project")
 	err := os.RemoveAll(workDir) // this function returns nil if path not found
 	if nil == err {
@@ -86,7 +90,7 @@ func prepareWorkDir(t *testing.T, srcDir, workDir string, preCommands []command,
 	}
 
 	for _, c := range preCommands {
-		c.run(t)
+		c.Run(t)
 	}
 	for _, f := range copies {
 		src := path.Join(srcDir, f)
@@ -98,7 +102,7 @@ func prepareWorkDir(t *testing.T, srcDir, workDir string, preCommands []command,
 		}
 	}
 	for _, c := range postCommands {
-		c.run(t)
+		c.Run(t)
 	}
 }
 
@@ -175,9 +179,9 @@ func checkDeployment(t *testing.T, appName, expectedOutput string) {
 }
 
 // SampleAppTestBase tests individual sample app
-func SampleAppTestBase(t *testing.T, lc languageConfig, expectedOutput string) {
+func SampleAppTestBase(t *testing.T, lc sampleapp.LanguageConfig, expectedOutput string) {
 	t.Parallel()
-	imagePath := ImagePath(lc.AppName)
+	imagePath := test.ImagePath(lc.AppName)
 	yamlFilePath := path.Join(lc.WorkDir, "service.yaml")
 
 	CleanupOnInterrupt(func() { cleanup(yamlFilePath, lc.WorkDir) })
