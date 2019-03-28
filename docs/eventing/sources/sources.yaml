@@ -27,6 +27,12 @@ metaSources:
 
 # Sources are event sources that users can install and use directly.
 sources:
+  - name: Apache Camel
+    url: https://github.com/knative/eventing-sources/blob/master/contrib/camel/pkg/apis/sources/v1alpha1/camelsource_types.go
+    status: Proof of Concept
+    support: None
+    description: >
+      Allows to use [Apache Camel](https://github.com/apache/camel) components for pushing events into Knative.
   - name: AWS SQS
     url: https://github.com/knative/eventing-sources/blob/master/pkg/apis/sources/v1alpha1/aws_sqs_types.go
     status: Proof of Concept
