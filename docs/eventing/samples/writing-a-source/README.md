@@ -1,5 +1,5 @@
 This tutorial walks you through creating an event source for Knative Eventing
-"the hard way", without using helper objects like ContainerSource.
+"the hard way", without using helper objects like ContainerSource ( Go to [ContainerSource sample](../container-source/README.md) to see how to create an event source using ContainerSource ).
 
 After completing through this tutorial, you'll have a basic working event source
 controller and dispatcher (TODO) based on the Kubebuilder framework.
