@@ -258,15 +258,19 @@ See the [Cronjob Source](samples/cronjob-source) example.
 
 ### KafkaSource
 
-The KafkaSource reads events from an Apache Kafka Cluster, and passes these to a Knative Serving application so that they can be consumed.
+The KafkaSource reads events from an Apache Kafka Cluster, and passes these to a
+Knative Serving application so that they can be consumed.
 
 **Spec fields**:
 
 - `consumerGroup`: `string` Name of a Kafka consumer group.
-- `bootstrapServers`: `string` Comma separated list of `hostname:port` pairs for the Kafka Broker.
+- `bootstrapServers`: `string` Comma separated list of `hostname:port` pairs for
+  the Kafka Broker.
 - `topics`: `string` Name of the Kafka topic to consume messages from.
 
-See the [Kafka Source](https://github.com/knative/eventing-sources/tree/master/contrib/kafka/samples) example.
+See the
+[Kafka Source](https://github.com/knative/eventing-sources/tree/master/contrib/kafka/samples)
+example.
 
 ## Getting Started
 
