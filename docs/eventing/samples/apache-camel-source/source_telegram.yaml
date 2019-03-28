@@ -1,0 +1,24 @@
+# Apache Camel Telegram Source
+#
+# Telegram Component documentation: https://github.com/apache/camel/blob/master/components/camel-telegram/src/main/docs/telegram-component.adoc
+#
+# List of available Apache Camel components: https://github.com/apache/camel/tree/master/components
+#
+apiVersion: sources.eventing.knative.dev/v1alpha1
+kind: CamelSource
+metadata:
+  name: camel-telegram-source
+spec:
+  source:
+    component:
+      uri: telegram:bots
+      properties:
+        # Camel Telegram component option (ask it to the Botfather: https://telegram.me/botfather)
+        camel.component.telegram.authorizationToken: "<put-your-token-here>"
+
+        # Camel K option to enable serialization of the component output
+        camel.component.knative.jsonSerializationEnabled: "true"
+  sink:
+    apiVersion: eventing.knative.dev/v1alpha1
+    kind: Channel
+    name: camel-test
