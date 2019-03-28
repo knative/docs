@@ -19,7 +19,6 @@ limitations under the License.
 package e2etest
 
 import (
-	"strings"
 	"testing"
 
 	"github.com/knative/docs/test/sampleapp"
@@ -38,12 +37,7 @@ func TestSampleApp(t *testing.T) {
 		t.Fatalf("Failed reading config file %s: '%v'", configFile, err)
 	}
 
-	whitelist := make(map[string]bool)
-	if "" != test.Flags.Languages {
-		for _, l := range strings.Split(test.Flags.Languages, ",") {
-			whitelist[l] = true
-		}
-	}
+	whitelist := test.GetWhitelistedLanguages()
 	for _, lc := range lcs.Languages {
 		if _, ok := whitelist[lc.Language]; len(whitelist) > 0 && !ok {
 			continue
