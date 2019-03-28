@@ -272,6 +272,8 @@ See the [Kafka Source](https://github.com/knative/eventing-sources/tree/master/c
 
 A CamelSource is an event source that can represent any existing [Apache Camel component](https://github.com/apache/camel/tree/master/components) that provides a consumer side, and enables publishing events to an addressable endpoint. Each Camel endpoint has the form of a URI where the scheme is the ID of the component to use.
 
+CamelSource requires [Camel-K](https://github.com/apache/camel-k#installation) to be installed into the current namespace.
+
 **Spec fields**:
 
 - source: information on the kind of Camel source that should be created.
