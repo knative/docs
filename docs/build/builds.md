@@ -283,6 +283,9 @@ spec:
       args:
         - --dockerfile=${DOCKERFILE}
         - --destination=${IMAGE}
+      env:
+        - name: "DOCKER_CONFIG"
+          value: "/builder/home/.docker/"
 ```
 
 #### Using a `ServiceAccount`
