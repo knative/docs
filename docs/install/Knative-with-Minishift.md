@@ -187,14 +187,14 @@ curl -s https://raw.githubusercontent.com/knative/docs/master/docs/install/scrip
 1. Run the following to install Istio:
 
    ```shell
-   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/istio-crds.yaml && \
+   oc apply --filename https://github.com/knative/serving/releases/download/v0.5.0/istio-crds.yaml && \
    oc apply --filename https://github.com/knative/serving/releases/download/v0.5.0/istio.yaml
    ```
 
    Note: the resources (CRDs) defined in the `istio-crds.yaml`file are also
    included in the `istio.yaml` file, but they are pulled out so that the CRD
    definitions are created first. If you see an error when creating resources
-   about an unknown type, run the second `kubectl apply` command again.
+   about an unknown type, run the second `oc apply` command again.
 
 2. Ensure the istio-sidecar-injector pods runs as privileged:
    ```shell
@@ -315,7 +315,7 @@ INGRESSGATEWAY=knative-ingressgateway
 # The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
 # Use `istio-ingressgateway` instead, since `knative-ingressgateway`
 # will be removed in Knative v0.4.
-if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
+if oc get configmap config-istio -n knative-serving &> /dev/null; then
     INGRESSGATEWAY=istio-ingressgateway
 fi
 
