@@ -159,7 +159,7 @@ Core.
 We now have everything installed and ready to go. We will generate events and
 see them in the subscriber.
 
-1.  Run the following program to generate events.
+1.  Run the following program to generate events:
 
     ```shell
     go run github.com/knative/docs/docs/eventing/samples/iot-core/generator \
