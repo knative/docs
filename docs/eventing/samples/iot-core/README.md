@@ -33,12 +33,6 @@ export IOTCORE_TOPIC_DEVICE="iot-demo-device-pubsub-topic"
 
 ### Prerequisites
 
-#### Local
-
-1.  Clone
-    [Knative Eventing Sources](https://github.com/knative/eventing-sources)
-    locally.
-
 #### Kubernetes
 
 1.  Have a running Kubernetes cluster with `kubectl` pointing at it.
@@ -189,4 +183,29 @@ see them in the subscriber.
     
     ```shell
     {"ID":"481014114648052","Data":"eyJzb3VyY2VfaWQiOiJpb3QtY29yZSBkZW1vIiwiZXZlbnRfaWQiOiJlaWQtMzI3MjJiMzItZWU5Mi00YzZlLWEzOTgtNDlmYjRkYWYyNGE1IiwiZXZlbnRfdHMiOjE1NTM3MTczOTYsIm1ldHJpYyI6MC4xMzY1MjI5OH0=","Attributes":{"deviceId":"iot-demo-client","deviceNumId":"2754785852315736","deviceRegistryId":"iot-demo","deviceRegistryLocation":"us-central1","projectId":"s9-demo","subFolder":""},"PublishTime":"2019-03-27T20:09:56.685Z"}
+
+### Cleanup
+
+To cleanup the knative resources:
+
+1.  Remove the `GcpPubSubSource`:
+
+    ```shell
+    sed -e "s/PROJECT_ID/$IOTCORE_PROJECT/" \
+        -e "s/TOPIC_NAME/$IOTCORE_TOPIC_DATA/" \
+        docs/eventing/samples/iot-core/gcp-pubsub-source.yaml |
+    kubectl delete --filename -
     ```
+    
+1.  Remove the Trigger:
+
+    ```shell
+    kubectl delete --filename docs/eventing/samples/iot-core/trigger.yaml
+    ```
+
+1.  Remove the `GcpPubSubSource` controller:
+
+    ```shell
+    kubectl delete --filename https://github.com/knative/eventing-sources/releases/download/v0.5.0/gcppubsub.yaml
+    ```
+

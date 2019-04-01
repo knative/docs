@@ -92,3 +92,16 @@ Ce-Source: /apis/v1/namespaces/default/pods/busybox
 {"metadata":{"name":"busybox.15644359f59f72f2","namespace":"default","selfLink":"/api/v1/namespaces/default/events/busybox.15644359f59f72f2","uid":"db14ff23-e10d-11e8-bf3c-42010a8a017d","resourceVersion":"7841","creationTimestamp":"2018-11-05T15:17:06Z"},"involvedObject":{"kind":"Pod","namespace":"default","name":"busybox","uid":"daf645df-e10d-11e8-bf3c-42010a8a017d","apiVersion":"v1","resourceVersion":"681389"},"reason":"SuccessfulMountVolume","message":"MountVolume.SetUp succeeded for volume \"default-token-pzr6x\" ","source":{"component":"kubelet","host":"gke-knative-eventing-e2e-default-pool-575bcad9-vz55"},"firstTimestamp":"2018-11-05T15:17:06Z","lastTimestamp":"2018-11-05T15:17:06Z","count":1,"type":"Normal","eventTime":null,"reportingComponent":"","reportingInstance":""}
 Ce-Source: /apis/v1/namespaces/default/pods/busybox
 ```
+
+### Cleanup
+
+You can remove the `Channel`, `Service Account`, `Event Sources`, and
+`Subscriber` via:
+
+```shell
+kubectl --namespace default delete --filename channel.yaml
+kubectl --namespace default delete --filename serviceaccount.yaml
+kubectl --namespace default delete --filename k8s-events.yaml
+kubectl --namespace default delete --filename subscription.yaml
+
+```

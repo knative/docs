@@ -20,6 +20,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"strings"
 )
 
 // Flags holds the command line flags or defaults for settings in the user's environment.
@@ -60,4 +61,15 @@ func initializeFlags() *EnvironmentFlags {
 // ImagePath is a helper function to prefix image name with repo and suffix with tag
 func ImagePath(name string) string {
 	return fmt.Sprintf("%s/%s:%s", Flags.DockerRepo, name, Flags.Tag)
+}
+
+// GetWhitelistedLanguages is a helper function to return a map of whitelisted languages based on Languages filter
+func GetWhitelistedLanguages() map[string]bool {
+	whitelist := make(map[string]bool)
+	if "" != Flags.Languages {
+		for _, l := range strings.Split(Flags.Languages, ",") {
+			whitelist[l] = true
+		}
+	}
+	return whitelist
 }
