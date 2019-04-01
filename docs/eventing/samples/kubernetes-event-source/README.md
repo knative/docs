@@ -8,22 +8,19 @@ consumption by a function that has been implemented as a Knative Service.
 1. Setup [Knative Serving](../../../serving).
 1. Setup [Knative Eventing](../../../eventing).
 
-### Channel
+### Broker
 
-1. Create a `Channel`. You can use your own `Channel` or use the provided
-   sample, which creates a channel called `testchannel`. If you use your own
-   `Channel` with a different name, then you will need to alter other commands
-   later.
+1. Create the `default` Broker in your namespace. These instructions assume the namespace `default`, feel free to change to any other namespace you would like to use instead. If you use a different namespace, you will need to modify all the YAML files deployed in this sample to point at that namespace.
 
 ```shell
-kubectl --namespace default apply --filename channel.yaml
+kubectl label namespace default knative-eventing-injection=enabled
 ```
 
 ### Service Account
 
 1. Create a Service Account that the `Receive Adapter` runs as. The
    `Receive Adapater` watches for Kubernetes events and forwards them to the
-   Knative Eventing Framework. If you want to re-use an existing Service Account
+   Knative Eventing Broker. If you want to re-use an existing Service Account
    with the appropriate permissions, you need to modify the
    `serviceaccount.yaml`.
 
@@ -34,49 +31,44 @@ kubectl apply --filename serviceaccount.yaml
 ### Create Event Source for Kubernetes Events
 
 1. In order to receive events, you have to create a concrete Event Source for a
-   specific namespace. If you are wanting to consume events from a different
-   namespace or using a different `Service Account`, you need to modify the yaml
-   accordingly.
+   specific namespace. If you want to consume events from a different
+   namespace or use a different `Service Account`, you need to modify
+   `k8s-events.yaml` accordingly.
 
 ```shell
 kubectl apply --filename k8s-events.yaml
 ```
 
-### Subscriber
+### Trigger
 
 In order to check the `KubernetesEventSource` is fully working, we will create a
-simple Knative Service that dumps incoming messages to its log and create a
-`Subscription` from the `Channel` to that Knative Service.
+simple Knative Service that dumps incoming messages to its log and creates a
+`Trigger` from the `Broker` to that Knative Service.
 
-1. If the deployed `KubernetesEventSource` is pointing at a `Channel` other than
-   `testchannel`, modify `subscription.yaml` by replacing `testchannel` with
-   that `Channel`'s name.
-1. Deploy `subscription.yaml`.
+1. If the deployed `KubernetesEventSource` is pointing at a `Broker` other than
+   `default`, modify `trigger.yaml` by adding `spec.broker` with the `Broker`'s name.
+
+1. Deploy `trigger.yaml`.
 
 ```shell
-kubectl apply --filename subscription.yaml
+kubectl apply --filename trigger.yaml
 ```
 
 ### Create Events
 
 Create events by launching a pod in the default namespace. Create a busybox
-container
+container and immediately delete it.
 
 ```shell
-kubectl run -i --tty busybox --image=busybox --restart=Never -- sh
-```
-
-Once the shell comes up, just exit it and kill the pod.
-
-```shell
+kubectl run busybox --image=busybox --restart=Never -- ls
 kubectl delete pod busybox
 ```
 
 ### Verify
 
-We will verify that the kubernetes events were sent into the Knative eventing
+We will verify that the Kubernetes events were sent into the Knative eventing
 system by looking at our message dumper function logs. If you deployed the
-[Subscriber](#subscriber), then continue using this section. If not, then you
+[Trigger](#trigger), then continue using this section. If not, then you
 will need to look downstream yourself.
 
 ```shell

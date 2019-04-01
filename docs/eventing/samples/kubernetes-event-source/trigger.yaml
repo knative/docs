@@ -1,13 +1,9 @@
 apiVersion: eventing.knative.dev/v1alpha1
-kind: Subscription
+kind: Trigger
 metadata:
-  name: testevents-subscription
+  name: testevents-trigger
   namespace: default
 spec:
-  channel:
-    apiVersion: eventing.knative.dev/v1alpha1
-    kind: Channel
-    name: testchannel
   subscriber:
     ref:
       apiVersion: serving.knative.dev/v1alpha1
@@ -28,4 +24,6 @@ spec:
       revisionTemplate:
         spec:
           container:
-            image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/message_dumper@sha256:73a95b05b5b937544af7c514c3116479fa5b6acf7771604b313cfc1587bf0940
+            # This corresponds to
+            # https://github.com/knative/eventing-sources/blob/release-0.3/cmd/message_dumper/dumper.go
+            image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/message_dumper@sha256:8423232db7a7b4010c0cfbfaef95745efe962631af9b7456903825801a7893f7
