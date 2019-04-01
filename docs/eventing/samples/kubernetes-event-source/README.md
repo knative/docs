@@ -44,7 +44,7 @@ kubectl apply --filename k8s-events.yaml
 ### Trigger
 
 In order to check the `KubernetesEventSource` is fully working, we will create a
-simple Knative Service that dumps incoming messages to its log and create a
+simple Knative Service that dumps incoming messages to its log and creates a
 `Trigger` from the `Broker` to that Knative Service.
 
 1. If the deployed `KubernetesEventSource` is pointing at a `Broker` other than
