@@ -258,33 +258,49 @@ See the [Cronjob Source](samples/cronjob-source) example.
 
 ### KafkaSource
 
-The KafkaSource reads events from an Apache Kafka Cluster, and passes these to a Knative Serving application so that they can be consumed.
+The KafkaSource reads events from an Apache Kafka Cluster, and passes these to a
+Knative Serving application so that they can be consumed.
 
 **Spec fields**:
 
 - `consumerGroup`: `string` Name of a Kafka consumer group.
-- `bootstrapServers`: `string` Comma separated list of `hostname:port` pairs for the Kafka Broker.
+- `bootstrapServers`: `string` Comma separated list of `hostname:port` pairs for
+  the Kafka Broker.
 - `topics`: `string` Name of the Kafka topic to consume messages from.
 
-See the [Kafka Source](https://github.com/knative/eventing-sources/tree/master/contrib/kafka/samples) example.
+See the
+[Kafka Source](https://github.com/knative/eventing-sources/tree/master/contrib/kafka/samples)
+example.
 
 ### CamelSource
 
-A CamelSource is an event source that can represent any existing [Apache Camel component](https://github.com/apache/camel/tree/master/components) that provides a consumer side, and enables publishing events to an addressable endpoint. Each Camel endpoint has the form of a URI where the scheme is the ID of the component to use.
+A CamelSource is an event source that can represent any existing
+[Apache Camel component](https://github.com/apache/camel/tree/master/components)
+that provides a consumer side, and enables publishing events to an addressable
+endpoint. Each Camel endpoint has the form of a URI where the scheme is the ID
+of the component to use.
 
-CamelSource requires [Camel-K](https://github.com/apache/camel-k#installation) to be installed into the current namespace.
+CamelSource requires [Camel-K](https://github.com/apache/camel-k#installation)
+to be installed into the current namespace.
 
 **Spec fields**:
 
 - source: information on the kind of Camel source that should be created.
-  - component: the default kind of source, enables creating an EventSource by configuring a single Camel component.
-    - uri: `string` contains the Camel URI that should be used to push events into the target sink.
-    - properties: `key/value map` contains Camel global options or component specific configuration. Options are available in the documentation of each existing Apache Camel component.
-- serviceAccountName: `string` an optional service account that can be used to run the source pod.
-- image: `string` an optional base image to use for the source pod, mainly for development purposes.
+  - component: the default kind of source, enables creating an EventSource by
+    configuring a single Camel component.
+    - uri: `string` contains the Camel URI that should be used to push events
+      into the target sink.
+    - properties: `key/value map` contains Camel global options or component
+      specific configuration. Options are available in the documentation of each
+      existing Apache Camel component.
+- serviceAccountName: `string` an optional service account that can be used to
+  run the source pod.
+- image: `string` an optional base image to use for the source pod, mainly for
+  development purposes.
 
-See the [CamelSource](https://github.com/knative/eventing-sources/blob/master/contrib/camel/samples/README.md) example.
-
+See the
+[CamelSource](https://github.com/knative/eventing-sources/blob/master/contrib/camel/samples/README.md)
+example.
 
 ## Getting Started
 

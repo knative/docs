@@ -175,8 +175,8 @@ echo $INGRESS_IP
 
 1. If your cluster is running outside a cloud provider (for example on
    Minikube), your services will never get an external IP address, and
-   `INGRESS_IP` won't contain a value. In that case, use the Istio `hostIP`
-   and `nodePort` as the ingress IP:
+   `INGRESS_IP` won't contain a value. In that case, use the Istio `hostIP` and
+   `nodePort` as the ingress IP:
 
 ```shell
 export INGRESS_IP=$(kubectl get po --selector $INGRESSGATEWAY_LABEL=ingressgateway --namespace istio-system \

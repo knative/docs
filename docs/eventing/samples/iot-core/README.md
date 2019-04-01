@@ -204,6 +204,7 @@ see them in the subscriber.
 To cleanup the knative resources:
 
 1.  Remove the gcppubsub controller:
+
     ```shell
     pushd $HOME/go/src/github.com/knative/eventing-sources
     kubectl delete --filename config/default-gcppubsub.yaml
@@ -211,12 +212,14 @@ To cleanup the knative resources:
     ```
 
 2.  Remove the channel:
+
     ```shell
     sed "s/CHANNEL_NAME/$CHANNEL_NAME/" channel.yaml |
     kubectl --namespace default delete --filename -
     ```
 
 3.  Remove the gcppubsub source:
+
     ```shell
     sed -e "s/MY_GCP_PROJECT/$IOTCORE_PROJECT/" \
         -e "s/TOPIC_NAME/$IOTCORE_TOPIC_DATA/" \

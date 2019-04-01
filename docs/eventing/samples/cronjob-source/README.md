@@ -96,6 +96,7 @@ kail -l serving.knative.dev/service=message-dumper -c user-container --since=10m
 ### Cleanup
 
 You can remove the Cron Event Source via:
+
 ```shell
 kubectl delete --filename cronjob-source.yaml
 ```
