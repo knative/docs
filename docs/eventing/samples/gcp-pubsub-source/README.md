@@ -132,7 +132,7 @@ not, then you will need to look downstream yourself.
    - You can check the status of the downstream pods with:
 
      ```shell
-     kubectl get pods --selector serving.knative.dev/service=message-dumper
+     kubectl get pods --selector serving.knative.dev/service=event-display
      ```
 
      You should see at least one.
@@ -140,7 +140,7 @@ not, then you will need to look downstream yourself.
 1. Inspect the logs of the subscriber:
 
    ```shell
-   kubectl logs --selector serving.knative.dev/service=message-dumper -c user-container
+   kubectl logs --selector serving.knative.dev/service=event-display -c user-container
    ```
 
 You should see log lines similar to:

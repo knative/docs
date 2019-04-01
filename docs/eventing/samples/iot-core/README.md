@@ -176,7 +176,7 @@ see them in the subscriber.
 1. Inspect the logs of the subscriber:
 
     ```shell
-    kubectl logs --selector serving.knative.dev/service=message-dumper -c user-container
+    kubectl logs --selector serving.knative.dev/service=event-display -c user-container
     ```
 
     You should see something along the similar to:
