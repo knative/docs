@@ -24,7 +24,6 @@ export IOTCORE_PROJECT="s9-demo"
 #### Variables you may Change
 
 ```shell
-export CHANNEL_NAME="iot-demo"
 export IOTCORE_REGISTRY="iot-demo"
 export IOTCORE_DEVICE="iot-demo-client"
 export IOTCORE_REGION="us-central1"
@@ -33,12 +32,6 @@ export IOTCORE_TOPIC_DEVICE="iot-demo-device-pubsub-topic"
 ```
 
 ### Prerequisites
-
-#### Local
-
-1.  Clone
-    [Knative Eventing Sources](https://github.com/knative/eventing-sources)
-    locally.
 
 #### Kubernetes
 
@@ -67,13 +60,6 @@ export IOTCORE_TOPIC_DEVICE="iot-demo-device-pubsub-topic"
 
 1.  Setup [Knative Eventing](../../../eventing).
 
-1.  Install the
-    [in-memory `ClusterChannelProvisioner`](https://github.com/knative/eventing/tree/master/config/provisioners/in-memory-channel).
-
-    - Note that you can skip this if you choose to use a different type of
-      `Channel`. If so, you will need to modify `channel.yaml` before deploying
-      it.
-
 #### GCP PubSub Source
 
 1.  Create a GCP
@@ -94,20 +80,17 @@ export IOTCORE_TOPIC_DEVICE="iot-demo-device-pubsub-topic"
     controller.
 
     ```shell
-    pushd $HOME/go/src/github.com/knative/eventing-sources
-    ko apply --filename config/default-gcppubsub.yaml
-    popd
+    kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.5.0/gcppubsub.yaml
     ```
 
 ### Deploying
 
-#### Channel
+#### Broker
 
-1.  Create a `Channel`.
+1. Install the default `Broker`.
 
     ```shell
-    sed "s/CHANNEL_NAME/$CHANNEL_NAME/" channel.yaml |
-    kubectl --namespace default apply --filename -
+    kubectl label namespace default knative-eventing-injection=enabled
     ```
 
 #### GCP PubSub Source
@@ -115,23 +98,21 @@ export IOTCORE_TOPIC_DEVICE="iot-demo-device-pubsub-topic"
 1.  Deploy `gcp-pubsub-source.yaml`.
 
     ```shell
-    sed -e "s/MY_GCP_PROJECT/$IOTCORE_PROJECT/" \
+    sed -e "s/PROJECT_ID/$IOTCORE_PROJECT/" \
         -e "s/TOPIC_NAME/$IOTCORE_TOPIC_DATA/" \
-        -e "s/CHANNEL_NAME/$CHANNEL_NAME/" \
-        gcp-pubsub-source.yaml |
+        docs/eventing/samples/iot-core/gcp-pubsub-source.yaml |
     kubectl apply --filename -
     ```
 
-#### Subscription
+#### Trigger
 
 Even though the `Source` isn't completely ready yet, we can setup the
-`Subscription` for all events coming out of it.
+`Trigger` for all events coming out of it.
 
-1.  Deploy `subscription.yaml`.
+1.  Deploy `trigger.yaml`.
 
     ```shell
-    sed "s/CHANNEL_NAME/$CHANNEL_NAME/" subscription.yaml |
-    ko apply --filename -
+    kubectl apply --filename docs/eventing/samples/iot-core/trigger.yaml
     ```
 
     - This uses a very simple Knative Service to see that events are flowing.
@@ -178,14 +159,7 @@ Core.
 We now have everything installed and ready to go. We will generate events and
 see them in the subscriber.
 
-1.  Setup [`kail`](https://github.com/boz/kail) to tail the logs of the
-    subscriber.
-
-    ```shell
-    kail -d message-dumper -c user-container
-    ```
-
-1.  In a separate terminal, run the following program to generate events.
+1.  Run the following program to generate events:
 
     ```shell
     go run github.com/knative/docs/docs/eventing/samples/iot-core/generator \
@@ -199,37 +173,39 @@ see them in the subscriber.
         -events 10
     ```
 
+1. Inspect the logs of the subscriber:
+
+    ```shell
+    kubectl logs --selector serving.knative.dev/service=message-dumper -c user-container
+    ```
+
+    You should see something along the similar to:
+    
+    ```shell
+    {"ID":"481014114648052","Data":"eyJzb3VyY2VfaWQiOiJpb3QtY29yZSBkZW1vIiwiZXZlbnRfaWQiOiJlaWQtMzI3MjJiMzItZWU5Mi00YzZlLWEzOTgtNDlmYjRkYWYyNGE1IiwiZXZlbnRfdHMiOjE1NTM3MTczOTYsIm1ldHJpYyI6MC4xMzY1MjI5OH0=","Attributes":{"deviceId":"iot-demo-client","deviceNumId":"2754785852315736","deviceRegistryId":"iot-demo","deviceRegistryLocation":"us-central1","projectId":"s9-demo","subFolder":""},"PublishTime":"2019-03-27T20:09:56.685Z"}
+
 ### Cleanup
 
 To cleanup the knative resources:
 
-1.  Remove the gcppubsub controller:
+1.  Remove the `GcpPubSubSource`:
 
     ```shell
-    pushd $HOME/go/src/github.com/knative/eventing-sources
-    kubectl delete --filename config/default-gcppubsub.yaml
-    popd
-    ```
-
-2.  Remove the channel:
-
-    ```shell
-    sed "s/CHANNEL_NAME/$CHANNEL_NAME/" channel.yaml |
-    kubectl --namespace default delete --filename -
-    ```
-
-3.  Remove the gcppubsub source:
-
-    ```shell
-    sed -e "s/MY_GCP_PROJECT/$IOTCORE_PROJECT/" \
+    sed -e "s/PROJECT_ID/$IOTCORE_PROJECT/" \
         -e "s/TOPIC_NAME/$IOTCORE_TOPIC_DATA/" \
-        -e "s/CHANNEL_NAME/$CHANNEL_NAME/" \
-        gcp-pubsub-source.yaml |
+        docs/eventing/samples/iot-core/gcp-pubsub-source.yaml |
     kubectl delete --filename -
+    ```
+    
+1.  Remove the Trigger:
+
+    ```shell
+    kubectl delete --filename docs/eventing/samples/iot-core/trigger.yaml
     ```
 
-4.  Remove the subscription:
+1.  Remove the `GcpPubSubSource` controller:
+
     ```shell
-    sed "s/CHANNEL_NAME/$CHANNEL_NAME/" subscription.yaml |
-    kubectl delete --filename -
+    kubectl delete --filename https://github.com/knative/eventing-sources/releases/download/v0.5.0/gcppubsub.yaml
     ```
+
