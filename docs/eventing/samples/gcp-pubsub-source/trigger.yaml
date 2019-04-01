@@ -16,17 +16,14 @@ spec:
 
 ---
 
-# Subscription from the GcpPubSubSource's output Channel to the Knative Service below.
+# The GcpPubSubSource's output goes to the default Broker. This Trigger subscribes to events in the
+# default Broker.
 
 apiVersion: eventing.knative.dev/v1alpha1
-kind: Subscription
+kind: Trigger
 metadata:
   name: gcppubsub-source-sample
 spec:
-  channel:
-    apiVersion: eventing.knative.dev/v1alpha1
-    kind: Channel
-    name: pubsub-test
   subscriber:
     ref:
       apiVersion: serving.knative.dev/v1alpha1

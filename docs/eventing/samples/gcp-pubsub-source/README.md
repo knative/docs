@@ -20,7 +20,7 @@ source is most useful as a bridge from other GCP services, such as
    PubSub event source from `release-gcppubsub.yaml`:
 
    ```shell
-   kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.3.0/release-gcppubsub.yaml
+   kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.5.0/gcppubsub.yaml
    ```
 
 1. Enable the `Cloud Pub/Sub API` on your project:
@@ -72,26 +72,11 @@ source is most useful as a bridge from other GCP services, such as
 
 ## Deployment
 
-1. Create a Channel. This example creates a Channel called `pubsub-test` which
-   uses the in-memory provisioner, with the following definition:
+1. Create the `default` Broker in your namespace. These instructions assume the namespace `default`, feel free to change to any other namespace you would like to use instead:
 
-   ```yaml
-   apiVersion: eventing.knative.dev/v1alpha1
-   kind: Channel
-   metadata:
-     name: pubsub-test
-   spec:
-     provisioner:
-       apiVersion: eventing.knative.dev/v1alpha1
-       kind: ClusterChannelProvisioner
-       name: in-memory-channel
-   ```
-
-   If you're in the samples directory, you can apply the `channel.yaml` file:
-
-   ```shell
-   kubectl apply --filename channel.yaml
-   ```
+  ```shell
+  kubectl label namespace default knative-eventing-injection=enabled
+  ```
 
 1. Create a GCP PubSub Topic. If you change its name (`testing`), you also need
    to update the `topic` in the
@@ -109,8 +94,8 @@ source is most useful as a bridge from other GCP services, such as
    apply in one command:
 
    ```shell
-    sed "s/MY_GCP_PROJECT/$PROJECT_ID/g" gcp-pubsub-source.yaml | \
-        kubectl apply --filename -
+   sed "s/MY_GCP_PROJECT/$PROJECT_ID/g" gcp-pubsub-source.yaml | \
+       kubectl apply --filename -
    ```
 
    If you are replacing `MY_GCP_PROJECT` manually, then make sure you apply the
@@ -120,10 +105,10 @@ source is most useful as a bridge from other GCP services, such as
    kubectl apply --filename gcp-pubsub-source.yaml
    ```
 
-1. Create a function and subscribe it to the `pubsub-test` channel:
+1. Create a function and create a Trigger that will send all events from the Broker to the function:
 
    ```shell
-   kubectl apply --filename subscriber.yaml
+   kubectl apply --filename trigger.yaml
    ```
 
 ## Publish

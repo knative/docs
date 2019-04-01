@@ -1,9 +1,0 @@
-apiVersion: eventing.knative.dev/v1alpha1
-kind: Channel
-metadata:
-  name: pubsub-test
-spec:
-  provisioner:
-    apiVersion: eventing.knative.dev/v1alpha1
-    kind: ClusterChannelProvisioner
-    name: in-memory-channel
