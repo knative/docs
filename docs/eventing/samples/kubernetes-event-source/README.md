@@ -34,8 +34,8 @@ kubectl apply --filename serviceaccount.yaml
 
 1. In order to receive events, you have to create a concrete Event Source for a
    specific namespace. If you want to consume events from a different
-   namespace or use a different `Service Account`, you need to modify the yaml
-   accordingly.
+   namespace or use a different `Service Account`, you need to modify
+   `k8s-events.yaml` accordingly.
 
 ```shell
 kubectl apply --filename k8s-events.yaml
