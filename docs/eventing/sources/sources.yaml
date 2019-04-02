@@ -32,7 +32,7 @@ sources:
     status: Proof of Concept
     support: None
     description: >
-      Brings [AWS Simple Quele Service](https://aws.amazon.com/sqs/) messages into Knative.
+      Brings [AWS Simple Queue Service](https://aws.amazon.com/sqs/) messages into Knative.
   - name: Cron Job
     url: https://github.com/knative/eventing-sources/blob/master/pkg/apis/sources/v1alpha1/cron_job_types.go
     status: Proof of Concept

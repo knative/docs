@@ -68,9 +68,11 @@ Engine cluster.
 1. Set `PROJECT` environment variable, you can replace `my-knative-project` with
    the desired name of your GCP project. If you don't have one, we'll create one
    in the next step.
+   
    ```bash
    export PROJECT=my-knative-project
    ```
+   
 1. If you don't have a GCP project, create and set it as your `gcloud` default:
 
    ```bash
@@ -92,6 +94,7 @@ Engine cluster.
    > GCP project.
 
 1. Enable the necessary APIs:
+
    ```bash
    gcloud services enable \
      cloudapis.googleapis.com \
@@ -111,6 +114,7 @@ components, the recommended configuration for a cluster is:
   `pubsub` (if those features will be used)
 
 1. Create a Kubernetes cluster on GKE with the required specifications:
+
    ```bash
    gcloud container clusters create $CLUSTER_NAME \
      --zone=$CLUSTER_ZONE \
@@ -121,7 +125,9 @@ components, the recommended configuration for a cluster is:
      --scopes=service-control,service-management,compute-rw,storage-ro,cloud-platform,logging-write,monitoring-write,pubsub,datastore \
      --num-nodes=3
    ```
+   
 1. Grant cluster-admin permissions to the current user:
+   
    ```bash
    kubectl create clusterrolebinding cluster-admin-binding \
    --clusterrole=cluster-admin \
@@ -152,10 +158,15 @@ Knative depends on Istio.
    about an unknown type, run the second `kubectl apply` command again.
 
 1. Label the default namespace with `istio-injection=enabled`:
+<<<<<<< HEAD
 
+=======
+   
+>>>>>>> 4db0a43... #fixitfriday website rendering for GKE install (#1115)
    ```bash
    kubectl label namespace default istio-injection=enabled
    ```
+   
 1. Monitor the Istio components until all of the components show a `STATUS` of
    `Running` or `Completed`:
    
@@ -195,6 +206,7 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
    not be completed until the upgrade process finishes.
 
 1. Run the `kubectl apply` command to install Knative and its dependencies:
+   
    ```bash
    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.4.0/serving.yaml \
    --filename https://github.com/knative/build/releases/download/v0.4.0/build.yaml \
@@ -203,16 +215,18 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
    --filename https://github.com/knative/serving/releases/download/v0.4.0/monitoring.yaml \
    --filename https://raw.githubusercontent.com/knative/serving/v0.4.0/third_party/config/build/clusterrole.yaml
    ```
-   > **Note**: If your install fails on the first attempt, try rerunning the commands.
-     They will likely succeed on the second attempt. For background info and to
-     track the upcoming solution to this problem, see issues
-     [#968](https://github.com/knative/docs/issues/968) and
-     [#1036](https://github.com/knative/docs/issues/1036).
-     
+   
+   > **Note**: If your install fails on the first attempt, try rerunning the
+   > commands. They will likely succeed on the second attempt. For background
+   > info and to track the upcoming solution to this problem, see issues
+   > [#968](https://github.com/knative/docs/issues/968) and
+   > [#1036](https://github.com/knative/docs/issues/1036).
+
    > **Note**: For the v0.4.0 release and newer, the `clusterrole.yaml` file is
    > required to enable the Build and Serving components to interact with each other.
 1. Monitor the Knative components until all of the components show a `STATUS` of
    `Running`:
+   
    ```bash
    kubectl get pods --namespace knative-serving
    kubectl get pods --namespace knative-build

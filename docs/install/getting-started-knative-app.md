@@ -132,7 +132,7 @@ assigned an external IP address.
 1. To find the host URL for your service, enter:
 
    ```shell
-   kubectl get ksvc helloworld-go  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+   kubectl get route helloworld-go  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
    NAME                DOMAIN
    helloworld-go       helloworld-go.default.example.com
    ```
@@ -140,7 +140,7 @@ assigned an external IP address.
    You can also export the host URL as a variable using the following command:
 
    ```shell
-   export HOST_URL=$(kubectl get ksvc helloworld-go  --output jsonpath='{.status.domain}')
+   export HOST_URL=$(kubectl get route helloworld-go  --output jsonpath='{.status.domain}')
    ```
 
    If you changed the name from `helloworld-go` to something else when creating
