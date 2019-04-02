@@ -39,9 +39,23 @@ generic interfaces that can be implemented by multiple Kubernetes resources:
    returned events may be further processed in the same way that events from an
    external event source are processed.
 
+### Event brokers and triggers
+
+As of v0.5, Knative Eventing defines Broker and Trigger objects to make it
+easier to filter events.
+
+A Broker provides a bucket of events which can be selected by attribute. It
+receives events and forwards them to subscribers defined by one or more matching
+Triggers.
+
+A Trigger describes a filter on event attributes which should be delivered to an
+Addressable. You can create as many Triggers as necessary.
+
+![Broker Trigger Diagram](./images/broker-trigger-overview.svg)
+
 ### Event channels and subscriptions
 
-Knative Eventing also defines a single event forwarding and persistence layer,
+Knative Eventing also defines an event forwarding and persistence layer,
 called a
 [**Channel**](https://github.com/knative/eventing/blob/master/pkg/apis/eventing/v1alpha1/channel_types.go#L36).
 Messaging implementations may provide implementations of Channels via the
@@ -72,25 +86,6 @@ Many of the sources require making outbound connections to create the event
 subscription, and if you have any functions that make use of any external (to
 cluster) services, you must enable it also for them to work.
 [Follow the instructions to configure outbound network access](../serving/outbound-network-access.md).
-
-Install the core Knative Eventing (which provides an in-memory
-ChannelProvisioner) and the core sources (which provides the Kubernetes Events,
-GitHub, and "Container" Sources) with the following commands:
-
-```bash
-kubectl apply --filename https://github.com/knative/eventing/releases/download/v0.4.0/release.yaml
-kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.4.0/release.yaml
-```
-
-In addition to the core sources, there are [other sources](./sources/README.md)
-that you can install.
-
-This document will be updated as additional sources (which are custom resource
-definitions and an associated controller) and channels
-(ClusterChannelProvisioners and controllers) become available.
-
-Check out the [Configuration](#configuration) section to learn more about
-operating Knative Eventing.
 
 ## Architecture
 
@@ -127,7 +122,10 @@ Knative Eventing defines the following Sources in the
 `sources.eventing.knative.dev` API group. Types below are declared in golang
 format, but may be expressed as simple lists, etc in YAML. All Sources should be
 part of the `sources` category, so you can list all existing Sources with
-`kubectl get sources`. The currently-implemented Sources are described below:
+`kubectl get sources`. The currently-implemented Sources are described below.
+
+In addition to the core sources, there are [other sources](./sources/README.md)
+that you can install.
 
 _Want to implement your own source? Check out
 [the tutorial](./samples/writing-a-source/README.md)._
@@ -305,7 +303,7 @@ example.
 ## Getting Started
 
 - [Setup Knative Serving](../install/README.md)
-- [Install Eventing components](#installation)
+- [Install the Eventing component](#installation)
 - [Run samples](./samples/)
 
 ## Configuration
