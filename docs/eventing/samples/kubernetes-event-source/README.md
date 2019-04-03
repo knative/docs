@@ -10,7 +10,10 @@ consumption by a function that has been implemented as a Knative Service.
 
 ### Broker
 
-1. Create the `default` Broker in your namespace. These instructions assume the namespace `default`, feel free to change to any other namespace you would like to use instead. If you use a different namespace, you will need to modify all the YAML files deployed in this sample to point at that namespace.
+1. Create the `default` Broker in your namespace. These instructions assume the
+   namespace `default`, feel free to change to any other namespace you would
+   like to use instead. If you use a different namespace, you will need to
+   modify all the YAML files deployed in this sample to point at that namespace.
 
 ```shell
 kubectl label namespace default knative-eventing-injection=enabled
@@ -31,9 +34,9 @@ kubectl apply --filename serviceaccount.yaml
 ### Create Event Source for Kubernetes Events
 
 1. In order to receive events, you have to create a concrete Event Source for a
-   specific namespace. If you want to consume events from a different
-   namespace or use a different `Service Account`, you need to modify
-   `k8s-events.yaml` accordingly.
+   specific namespace. If you want to consume events from a different namespace
+   or use a different `Service Account`, you need to modify `k8s-events.yaml`
+   accordingly.
 
 ```shell
 kubectl apply --filename k8s-events.yaml
@@ -46,7 +49,8 @@ simple Knative Service that dumps incoming messages to its log and creates a
 `Trigger` from the `Broker` to that Knative Service.
 
 1. If the deployed `KubernetesEventSource` is pointing at a `Broker` other than
-   `default`, modify `trigger.yaml` by adding `spec.broker` with the `Broker`'s name.
+   `default`, modify `trigger.yaml` by adding `spec.broker` with the `Broker`'s
+   name.
 
 1. Deploy `trigger.yaml`.
 
@@ -68,8 +72,8 @@ kubectl delete pod busybox
 
 We will verify that the Kubernetes events were sent into the Knative eventing
 system by looking at our message dumper function logs. If you deployed the
-[Trigger](#trigger), then continue using this section. If not, then you
-will need to look downstream yourself.
+[Trigger](#trigger), then continue using this section. If not, then you will
+need to look downstream yourself.
 
 ```shell
 kubectl get pods
