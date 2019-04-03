@@ -248,7 +248,7 @@ Refresh the original route
 that no traffic is being routed to v1 of the app.
 
 We added a named route to v1 of the app, so you can now access it at the URL
-listed in the traffic block of status. To get the url you can execute the
+listed in the traffic block of the status section. To get the URL, enter the
 command below:
 
 ```bash
