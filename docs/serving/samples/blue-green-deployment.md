@@ -249,7 +249,7 @@ that no traffic is being routed to v1 of the app.
 
 We added a named route to v1 of the app, so you can now access it at the URL
 listed in the traffic block of the status section. To get the URL, enter the
-command below:
+following command:
 
 ```bash
 kubectl get route blue-green-demo --output jsonpath="{.status.traffic[*].url}"
