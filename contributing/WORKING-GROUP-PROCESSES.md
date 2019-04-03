@@ -188,10 +188,12 @@ Leads from all affected working groups generally work together and come to an
 agreeable conclusion.
 
 In all cases, remaining blocking issues can be raised to the
-[technical oversight committee](./TECH-OVERSIGHT-COMMITTEE.md) to help resolve
-the situation. To trigger an escalation, create an issue in the
-`knative/serving` repo and assign it to the
-**@knative/tech-oversight-committee** team.
+[technical oversight committee](./TECH-OVERSIGHT-COMMITTEE.md) to help resolve the
+situation. To trigger an escalation, create an issue in the project's
+repo and assign it to the **@knative/tech-oversight-committee** team.
+
+The Steering Committee, as a last resort, provides the final escalation path
+for any repository or working group issue that cannot be resolved by the TOC.
 
 ---
 
