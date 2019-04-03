@@ -78,19 +78,19 @@ was necessary for the project to ensure velocity. As the project grows and
 matures the KSC will, from time to time, consider if this policy should be
 changed.
 
-The current membership of the committee is currently (listed alphabetically by name):
+The current membership of the committee is currently (listed alphabetically by first name):
 
 | &nbsp;                                                   | Member         | Organization | Profile                                  |
 | -------------------------------------------------------- | -------------- | ------------ | ---------------------------------------- |
 | <img width="30px" src="https://github.com/dewitt.png">   | DeWitt Clinton | Google       | [@dewitt](https://github.com/dewitt)     |
 | <img width="30px" src="https://github.com/mchmarny.png"> | Mark Chmarny   | Google       | [@mchmarny](https://github.com/mchmarny) |
+| <img width="30px" src="https://github.com/rgregg.png">   | Ryan Gregg     | Google       | [@rgregg](https://github.com/rgregg)     |
 | <img width="30px" src="https://github.com/isdal.png">    | Tomas Isdal    | Google       | [@isdal](https://github.com/isdal)       |
-|   | TBD | Google   |        |
 |   | TBD | IBM      |        |
 |   | TBD | Pivotal  |        |
 |   | TBD | Red Hat  |        |
 
-There are currently four unfilled seats, as indicated by TBD.
+There are currently three unfilled seats, as indicated by TBD.
 
 ### Allocation of seats
 
