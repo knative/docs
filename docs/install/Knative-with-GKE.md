@@ -158,11 +158,7 @@ Knative depends on Istio.
    about an unknown type, run the second `kubectl apply` command again.
 
 1. Label the default namespace with `istio-injection=enabled`:
-<<<<<<< HEAD
 
-=======
-   
->>>>>>> 4db0a43... #fixitfriday website rendering for GKE install (#1115)
    ```bash
    kubectl label namespace default istio-injection=enabled
    ```
