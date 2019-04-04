@@ -337,16 +337,16 @@ commands below.
        --filename https://github.com/knative/serving/releases/download/v0.4.0/monitoring.yaml
        ```
 
-   * To install all three Knative components and the set of Eventing sources
-     without an observability plugin:
+     - To install all three Knative components and the set of Eventing sources
+       without an observability plugin:
 
-     ```bash
-     kubectl apply --filename https://github.com/knative/serving/releases/download/v0.4.0/serving.yaml \
-     --filename https://github.com/knative/build/releases/download/v0.4.0/build.yaml \
-     --filename https://github.com/knative/eventing/releases/download/v0.4.0/release.yaml \
-     --filename https://github.com/knative/eventing-sources/releases/download/v0.4.0/release.yaml \
-     --filename https://raw.githubusercontent.com/knative/serving/v0.4.0/third_party/config/build/clusterrole.yaml
-     ```
+       ```bash
+       kubectl apply --filename https://github.com/knative/serving/releases/download/v0.4.0/serving.yaml \
+       --filename https://github.com/knative/build/releases/download/v0.4.0/build.yaml \
+       --filename https://github.com/knative/eventing/releases/download/v0.4.0/release.yaml \
+       --filename https://github.com/knative/eventing-sources/releases/download/v0.4.0/release.yaml \
+       --filename https://raw.githubusercontent.com/knative/serving/v0.4.0/third_party/config/build/clusterrole.yaml
+       ```
 
 1. Depending on what you chose to install, view the status of your installation
    by running one or more of the following commands. It might take a few
