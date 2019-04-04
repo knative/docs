@@ -76,9 +76,9 @@ source is most useful as a bridge from other GCP services, such as
    namespace `default`, feel free to change to any other namespace you would
    like to use instead:
 
-```shell
-kubectl label namespace default knative-eventing-injection=enabled
-```
+   ```shell
+   kubectl label namespace default knative-eventing-injection=enabled
+   ```
 
 1. Create a GCP PubSub Topic. If you change its name (`testing`), you also need
    to update the `topic` in the
