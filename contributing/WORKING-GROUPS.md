@@ -58,7 +58,7 @@ API
 | Community Meeting Calendar | Wednesdays 10:30a-11:00a PST <br>[Calendar](https://calendar.google.com/calendar/embed?src=google.com_18un4fuh6rokqf8hmfftm5oqq4%40group.calendar.google.com) |
 | Meeting Notes              | [Notes](https://docs.google.com/document/d/1NC4klOdNaU-N-PsKLyXBqDKgNSHtxCDep29Ta2b5FK0/edit)                                                                 |
 | Document Folder            | [Folder](https://drive.google.com/corp/drive/folders/1fpBW7VyiBISsKuVdgn1MrgFdtx_JGoC5)                                                                       |
-| Slack Channel              | [#serving-api](https://knative.slack.com/messages/serving-api)                                                                                                                |
+| Slack Channel              | [#serving-api](https://knative.slack.com/messages/serving-api)                                                                                                |
 
 | &nbsp;                                                   | Leads      | Company | Profile                                 |
 | -------------------------------------------------------- | ---------- | ------- | --------------------------------------- |

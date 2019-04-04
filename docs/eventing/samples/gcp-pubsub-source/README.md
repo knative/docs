@@ -72,11 +72,13 @@ source is most useful as a bridge from other GCP services, such as
 
 ## Deployment
 
-1. Create the `default` Broker in your namespace. These instructions assume the namespace `default`, feel free to change to any other namespace you would like to use instead:
+1. Create the `default` Broker in your namespace. These instructions assume the
+   namespace `default`, feel free to change to any other namespace you would
+   like to use instead:
 
-  ```shell
-  kubectl label namespace default knative-eventing-injection=enabled
-  ```
+```shell
+kubectl label namespace default knative-eventing-injection=enabled
+```
 
 1. Create a GCP PubSub Topic. If you change its name (`testing`), you also need
    to update the `topic` in the
@@ -105,7 +107,8 @@ source is most useful as a bridge from other GCP services, such as
    kubectl apply --filename gcp-pubsub-source.yaml
    ```
 
-1. Create a function and create a Trigger that will send all events from the Broker to the function:
+1. Create a function and create a Trigger that will send all events from the
+   Broker to the function:
 
    ```shell
    kubectl apply --filename trigger.yaml
