@@ -106,6 +106,7 @@ recreate the source files from this folder.
    # Use a Docker multi-stage build to create a lean production image.
    # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
    FROM alpine
+   RUN apk add --no-cache ca-certificates
 
    # Enable the use of outbound https
    RUN apk add --no-cache ca-certificates
