@@ -167,7 +167,7 @@ string
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#ChannelSpec">ChannelSpec</a>, 
+<a href="#ChannelSpec">ChannelSpec</a>,
 <a href="#ChannelSpec">ChannelSpec</a>)
 </p>
 <p>
@@ -205,12 +205,110 @@ This is the list of subscriptions for this channel.</p>
 </p>
 Resource Types:
 <ul><li>
+<a href="#Broker">Broker</a>
+</li><li>
 <a href="#Channel">Channel</a>
 </li><li>
 <a href="#ClusterChannelProvisioner">ClusterChannelProvisioner</a>
 </li><li>
 <a href="#Subscription">Subscription</a>
+</li><li>
+<a href="#Trigger">Trigger</a>
 </li></ul>
+<h3 id="Broker">Broker
+</h3>
+<p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>apiVersion</code></br>
+string</td>
+<td>
+<code>
+eventing.knative.dev/v1alpha1
+</code>
+</td>
+</tr>
+<tr>
+<td>
+<code>kind</code></br>
+string
+</td>
+<td><code>Broker</code></td>
+</tr>
+<tr>
+<td>
+<code>metadata</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#objectmeta-v1-meta">
+Kubernetes meta/v1.ObjectMeta
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+Refer to the Kubernetes API documentation for the fields of the
+<code>metadata</code> field.
+</td>
+</tr>
+<tr>
+<td>
+<code>spec</code></br>
+<em>
+<a href="#BrokerSpec">
+BrokerSpec
+</a>
+</em>
+</td>
+<td>
+<p>Spec defines the desired state of the Broker.</p>
+<br/>
+<br/>
+<table>
+<tr>
+<td>
+<code>channelTemplate</code></br>
+<em>
+<a href="#ChannelSpec">
+ChannelSpec
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>ChannelTemplate, if specified will be used to create all the Channels used internally by the
+Broker. Only Provisioner and Arguments may be specified. If left unspecified, the default
+Channel for the namespace will be used.</p>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<code>status</code></br>
+<em>
+<a href="#BrokerStatus">
+BrokerStatus
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Status represents the current state of the Broker. This data may be out of
+date.</p>
+</td>
+</tr>
+</tbody>
+</table>
 <h3 id="Channel">Channel
 </h3>
 <p>
@@ -589,6 +687,212 @@ SubscriptionStatus
 </tr>
 </tbody>
 </table>
+<h3 id="Trigger">Trigger
+</h3>
+<p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>apiVersion</code></br>
+string</td>
+<td>
+<code>
+eventing.knative.dev/v1alpha1
+</code>
+</td>
+</tr>
+<tr>
+<td>
+<code>kind</code></br>
+string
+</td>
+<td><code>Trigger</code></td>
+</tr>
+<tr>
+<td>
+<code>metadata</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#objectmeta-v1-meta">
+Kubernetes meta/v1.ObjectMeta
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+Refer to the Kubernetes API documentation for the fields of the
+<code>metadata</code> field.
+</td>
+</tr>
+<tr>
+<td>
+<code>spec</code></br>
+<em>
+<a href="#TriggerSpec">
+TriggerSpec
+</a>
+</em>
+</td>
+<td>
+<p>Spec defines the desired state of the Trigger.</p>
+<br/>
+<br/>
+<table>
+<tr>
+<td>
+<code>broker</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>Broker is the broker that this trigger receives events from. If not specified, will default
+to &lsquo;default&rsquo;.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>filter</code></br>
+<em>
+<a href="#TriggerFilter">
+TriggerFilter
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Filter is the filter to apply against all events from the Broker. Only events that pass this
+filter will be sent to the Subscriber. If not specified, will default to allowing all events.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>subscriber</code></br>
+<em>
+<a href="#SubscriberSpec">
+SubscriberSpec
+</a>
+</em>
+</td>
+<td>
+<p>Subscriber is the addressable that receives events from the Broker that pass the Filter. It
+is required.</p>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<code>status</code></br>
+<em>
+<a href="#TriggerStatus">
+TriggerStatus
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Status represents the current state of the Trigger. This data may be out of
+date.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="BrokerSpec">BrokerSpec
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#Broker">Broker</a>)
+</p>
+<p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>channelTemplate</code></br>
+<em>
+<a href="#ChannelSpec">
+ChannelSpec
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>ChannelTemplate, if specified will be used to create all the Channels used internally by the
+Broker. Only Provisioner and Arguments may be specified. If left unspecified, the default
+Channel for the namespace will be used.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="BrokerStatus">BrokerStatus
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#Broker">Broker</a>)
+</p>
+<p>
+<p>BrokerStatus represents the current state of a Broker.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>Status</code></br>
+<em>
+<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Status">
+github.com/knative/pkg/apis/duck/v1alpha1.Status
+</a>
+</em>
+</td>
+<td>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
+<p>inherits duck/v1alpha1 Status, which currently provides:
+* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
+* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>address</code></br>
+<em>
+<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Addressable">
+github.com/knative/pkg/apis/duck/v1alpha1.Addressable
+</a>
+</em>
+</td>
+<td>
+<p>Broker is Addressable. It currently exposes the endpoint as a
+fully-qualified DNS name which will distribute traffic over the
+provided targets from inside the cluster.</p>
+<p>It generally has the form {broker}-router.{namespace}.svc.{cluster domain name}</p>
+</td>
+</tr>
+</tbody>
+</table>
 <h3 id="ChannelProvisionerDefaulter">ChannelProvisionerDefaulter
 </h3>
 <p>
@@ -599,7 +903,8 @@ specify any Provisioner.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#Channel">Channel</a>)
+<a href="#Channel">Channel</a>,
+<a href="#BrokerSpec">BrokerSpec</a>)
 </p>
 <p>
 <p>ChannelSpec specifies the Provisioner backing a channel and the configuration
@@ -688,18 +993,20 @@ Subscribable
 <tbody>
 <tr>
 <td>
-<code>observedGeneration</code></br>
+<code>Status</code></br>
 <em>
-int64
+<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Status">
+github.com/knative/pkg/apis/duck/v1alpha1.Status
+</a>
 </em>
 </td>
 <td>
-<em>(Optional)</em>
-<p>ObservedGeneration is the most recent generation observed for this Channel.
-It corresponds to the Channel&rsquo;s generation, which is updated on mutation by
-the API Server.
-TODO: The above comment is only true once
-<a href="https://github.com/kubernetes/kubernetes/issues/58778">https://github.com/kubernetes/kubernetes/issues/58778</a> is fixed.</p>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
+<p>inherits duck/v1alpha1 Status, which currently provides:
+* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
+* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
 </td>
 </tr>
 <tr>
@@ -716,20 +1023,6 @@ github.com/knative/pkg/apis/duck/v1alpha1.Addressable
 fully-qualified DNS name which will distribute traffic over the
 provided targets from inside the cluster.</p>
 <p>It generally has the form {channel}.{namespace}.svc.{cluster domain name}</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>conditions</code></br>
-<em>
-<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Conditions">
-github.com/knative/pkg/apis/duck/v1alpha1.Conditions
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Represents the latest available observations of a channel&rsquo;s current state.</p>
 </td>
 </tr>
 <tr>
@@ -870,7 +1163,8 @@ Kind must be &ldquo;Channel&rdquo; and APIVersion must be
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#SubscriptionSpec">SubscriptionSpec</a>)
+<a href="#SubscriptionSpec">SubscriptionSpec</a>,
+<a href="#TriggerSpec">TriggerSpec</a>)
 </p>
 <p>
 <p>SubscriberSpec specifies the reference to an object that&rsquo;s expected to
@@ -928,6 +1222,21 @@ You can specify only the following fields of the ObjectReference:
 <tr>
 <td>
 <code>dnsName</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Deprecated: Use URI instead.
+Reference to a &lsquo;known&rsquo; endpoint where no resolving is done.
+<a href="http://k8s-service">http://k8s-service</a> for example
+<a href="http://myexternalhandler.example.com/foo/bar">http://myexternalhandler.example.com/foo/bar</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<code>uri</code></br>
 <em>
 string
 </em>
@@ -1064,15 +1373,20 @@ the Subscriber target.</p>
 <tbody>
 <tr>
 <td>
-<code>conditions</code></br>
+<code>Status</code></br>
 <em>
-<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Conditions">
-github.com/knative/pkg/apis/duck/v1alpha1.Conditions
+<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Status">
+github.com/knative/pkg/apis/duck/v1alpha1.Status
 </a>
 </em>
 </td>
 <td>
-<p>Represents the latest available observations of a subscription&rsquo;s current state.</p>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
+<p>inherits duck/v1alpha1 Status, which currently provides:
+* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
+* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
 </td>
 </tr>
 <tr>
@@ -1132,8 +1446,186 @@ string
 </tr>
 </tbody>
 </table>
+<h3 id="TriggerFilter">TriggerFilter
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#TriggerSpec">TriggerSpec</a>)
+</p>
+<p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>sourceAndType</code></br>
+<em>
+<a href="#TriggerFilterSourceAndType">
+TriggerFilterSourceAndType
+</a>
+</em>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="TriggerFilterSourceAndType">TriggerFilterSourceAndType
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#TriggerFilter">TriggerFilter</a>)
+</p>
+<p>
+<p>TriggerFilterSourceAndType filters events based on exact matches on the cloud event&rsquo;s type and
+source attributes. Only exact matches will pass the filter. Either or both type and source can
+use the value &lsquo;Any&rsquo; to indicate all strings match.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>type</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<code>source</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="TriggerSpec">TriggerSpec
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#Trigger">Trigger</a>)
+</p>
+<p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>broker</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>Broker is the broker that this trigger receives events from. If not specified, will default
+to &lsquo;default&rsquo;.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>filter</code></br>
+<em>
+<a href="#TriggerFilter">
+TriggerFilter
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Filter is the filter to apply against all events from the Broker. Only events that pass this
+filter will be sent to the Subscriber. If not specified, will default to allowing all events.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>subscriber</code></br>
+<em>
+<a href="#SubscriberSpec">
+SubscriberSpec
+</a>
+</em>
+</td>
+<td>
+<p>Subscriber is the addressable that receives events from the Broker that pass the Filter. It
+is required.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="TriggerStatus">TriggerStatus
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#Trigger">Trigger</a>)
+</p>
+<p>
+<p>TriggerStatus represents the current state of a Trigger.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>Status</code></br>
+<em>
+<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Status">
+github.com/knative/pkg/apis/duck/v1alpha1.Status
+</a>
+</em>
+</td>
+<td>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
+<p>inherits duck/v1alpha1 Status, which currently provides:
+* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
+* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>subscriberURI</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>SubscriberURI is the resolved URI of the receiver for this Trigger.</p>
+</td>
+</tr>
+</tbody>
+</table>
 <hr/>
 <p><em>
 Generated with <code>gen-crd-api-reference-docs</code>
-on git commit <code>c3b25ccd</code>.
+on git commit <code>d817bf6e</code>.
 </em></p>
