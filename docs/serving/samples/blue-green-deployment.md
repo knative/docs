@@ -168,8 +168,12 @@ Revision 2 of the app is staged at this point. That means:
 
 - No traffic will be routed to revision 2 at the main URL,
   http://blue-green-demo.default.YOUR_CUSTOM_DOMAIN.com
-- Knative creates a new route named v2 for testing the newly deployed version at
-  http://v2.blue-green-demo.default.YOUR_CUSTOM_DOMAIN.com
+- Knative creates a new route named v2 for testing the newly deployed version.
+  The URL of this can be seen in the status section of your Route.
+
+```bash
+kubectl get route blue-green-demo --output jsonpath="{.status.traffic[*].url}"
+```
 
 This allows you to validate that the new version of the app is behaving as
 expected before switching any traffic over to it.
@@ -243,8 +247,13 @@ Refresh the original route
 (http://blue-green-demo.default.YOUR_CUSTOM_DOMAIN.com) a few times to verify
 that no traffic is being routed to v1 of the app.
 
-We added a named route to v1 of the app, so you can now access it at
-http://v1.blue-green-demo.default.YOUR_CUSTOM_DOMAIN.com.
+We added a named route to v1 of the app, so you can now access it at the URL
+listed in the traffic block of the status section. To get the URL, enter the
+following command:
+
+```bash
+kubectl get route blue-green-demo --output jsonpath="{.status.traffic[*].url}"
+```
 
 With all inbound traffic being directed to the second revision of the
 application, Knative will soon scale the first revision down to 0 running pods
