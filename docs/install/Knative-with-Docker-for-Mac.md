@@ -38,8 +38,11 @@ Knative depends on Istio. Run the following to install Istio. (This changes
 
 ```shell
 curl -L https://github.com/knative/serving/releases/download/v0.4.0/istio.yaml \
-  | sed 's/LoadBalancer/NodePort/' \
   | kubectl apply --filename -
+  
+> Note: Unlike minikube, we're not changing the LoadBalancer to a NodePort here.
+> Docker for Mac will assign `localhost` as the host for that LoadBalancer,
+> making the applications available easily.
 
 # Label the default namespace with istio-injection=enabled.
 kubectl label namespace default istio-injection=enabled
@@ -69,13 +72,8 @@ file, which installs only Knative Serving:
 
 ```shell
 curl -L https://github.com/knative/serving/releases/download/v0.4.0/serving.yaml \
-  | sed 's/LoadBalancer/NodePort/' \
   | kubectl apply --filename -
 ```
-
-> Note: Unlike minikube, we're not changing the LoadBalancer to a NodePort here.
-> Docker for Mac will assign `localhost` as the host for that LoadBalancer,
-> making the applications available easily.
 
 Monitor the Knative components until all of the components show a `STATUS` of
 `Running`:
