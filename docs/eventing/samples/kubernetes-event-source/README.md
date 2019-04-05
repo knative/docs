@@ -73,7 +73,7 @@ will need to look downstream yourself.
 
 ```shell
 kubectl get pods
-kubectl logs -l serving.knative.dev/service=message-dumper -c user-container
+kubectl logs -l serving.knative.dev/service=event-display -c user-container
 ```
 
 You should see log lines similar to:

@@ -3,7 +3,7 @@
 apiVersion: serving.knative.dev/v1alpha1
 kind: Service
 metadata:
-  name: message-dumper
+  name: event-display
 spec:
   runLatest:
     configuration:
@@ -11,8 +11,8 @@ spec:
         spec:
           container:
             # This corresponds to
-            # https://github.com/knative/eventing-sources/blob/release-0.3/cmd/message_dumper/dumper.go
-            image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/message_dumper@sha256:8423232db7a7b4010c0cfbfaef95745efe962631af9b7456903825801a7893f7
+            # https://github.com/knative/eventing-sources/blob/release-0.5/cmd/event_display/main.go           
+            image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display@sha256:bf45b3eb1e7fc4cb63d6a5a6416cf696295484a7662e0cf9ccdf5c080542c21d
 
 ---
 
@@ -28,5 +28,5 @@ spec:
     ref:
       apiVersion: serving.knative.dev/v1alpha1
       kind: Service
-      name: message-dumper
+      name: event-display
 
