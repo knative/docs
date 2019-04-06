@@ -87,13 +87,12 @@ Ce-Source: /apis/v1/namespaces/default/pods/busybox
 
 ### Cleanup
 
-You can remove the `Channel`, `Service Account`, `Event Sources`, and
-`Subscriber` via:
+You can remove the `Service Account`, `Event Sources`, and
+`Trigger` via:
 
 ```shell
-kubectl --namespace default delete --filename channel.yaml
 kubectl --namespace default delete --filename serviceaccount.yaml
 kubectl --namespace default delete --filename k8s-events.yaml
-kubectl --namespace default delete --filename subscription.yaml
+kubectl --namespace default delete --filename trigger.yaml
 
 ```
