@@ -2273,9 +2273,9 @@ ServiceStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#Configuration">Configuration</a>, 
-<a href="#PinnedType">PinnedType</a>, 
-<a href="#ReleaseType">ReleaseType</a>, 
+<a href="#Configuration">Configuration</a>,
+<a href="#PinnedType">PinnedType</a>,
+<a href="#ReleaseType">ReleaseType</a>,
 <a href="#RunLatestType">RunLatestType</a>)
 </p>
 <p>
@@ -2392,7 +2392,7 @@ ConfigurationStatusFields
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#ConfigurationStatus">ConfigurationStatus</a>, 
+<a href="#ConfigurationStatus">ConfigurationStatus</a>,
 <a href="#ServiceStatus">ServiceStatus</a>)
 </p>
 <p>
@@ -2622,7 +2622,7 @@ come from a single configuration.</p>
 (<code>int64</code> alias)</p></h3>
 <p>
 (<em>Appears on:</em>
-<a href="#PodAutoscalerSpec">PodAutoscalerSpec</a>, 
+<a href="#PodAutoscalerSpec">PodAutoscalerSpec</a>,
 <a href="#RevisionSpec">RevisionSpec</a>)
 </p>
 <p>
@@ -2633,7 +2633,7 @@ in-flight (concurrent) requests.</p>
 (<code>string</code> alias)</p></h3>
 <p>
 (<em>Appears on:</em>
-<a href="#PodAutoscalerSpec">PodAutoscalerSpec</a>, 
+<a href="#PodAutoscalerSpec">PodAutoscalerSpec</a>,
 <a href="#RevisionSpec">RevisionSpec</a>)
 </p>
 <p>
@@ -2645,7 +2645,7 @@ Deprecated in favor of RevisionContainerConcurrencyType.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#Revision">Revision</a>, 
+<a href="#Revision">Revision</a>,
 <a href="#RevisionTemplateSpec">RevisionTemplateSpec</a>)
 </p>
 <p>
@@ -3215,7 +3215,7 @@ RouteStatusFields
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#RouteStatus">RouteStatus</a>, 
+<a href="#RouteStatus">RouteStatus</a>,
 <a href="#ServiceStatus">ServiceStatus</a>)
 </p>
 <p>
@@ -3493,7 +3493,7 @@ ConfigurationStatusFields
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#RouteSpec">RouteSpec</a>, 
+<a href="#RouteSpec">RouteSpec</a>,
 <a href="#RouteStatusFields">RouteStatusFields</a>)
 </p>
 <p>
@@ -3580,5 +3580,5 @@ a hostname, but may not contain anything else (e.g. basic auth, url path, etc.)<
 <hr/>
 <p><em>
 Generated with <code>gen-crd-api-reference-docs</code>
-on git commit <code>0be6e873</code>.
+on git commit <code>ca4fffb4</code>.
 </em></p>

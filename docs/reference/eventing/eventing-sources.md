@@ -550,6 +550,30 @@ Kubernetes core/v1.ObjectReference
 name to use as the sink.</p>
 </td>
 </tr>
+<tr>
+<td>
+<code>githubAPIURL</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>API URL if using github enterprise (default <a href="https://api.github.com">https://api.github.com</a>)</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>secure</code></br>
+<em>
+bool
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Secure can be set to true to configure the webhook to use https.</p>
+</td>
+</tr>
 </table>
 </td>
 </tr>
@@ -769,16 +793,20 @@ run the Receive Adapter Deployment.</p>
 <tbody>
 <tr>
 <td>
-<code>conditions</code></br>
+<code>Status</code></br>
 <em>
-<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Conditions">
-github.com/knative/pkg/apis/duck/v1alpha1.Conditions
+<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Status">
+github.com/knative/pkg/apis/duck/v1alpha1.Status
 </a>
 </em>
 </td>
 <td>
-<em>(Optional)</em>
-<p>Conditions holds the state of a source at a point in time.</p>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
+<p>inherits duck/v1alpha1 Status, which currently provides:
+* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
+* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
 </td>
 </tr>
 <tr>
@@ -897,16 +925,20 @@ Kubernetes core/v1.ObjectReference
 <tbody>
 <tr>
 <td>
-<code>conditions</code></br>
+<code>Status</code></br>
 <em>
-<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Conditions">
-github.com/knative/pkg/apis/duck/v1alpha1.Conditions
+<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Status">
+github.com/knative/pkg/apis/duck/v1alpha1.Status
 </a>
 </em>
 </td>
 <td>
-<em>(Optional)</em>
-<p>Conditions holds the state of a source at a point in time.</p>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
+<p>inherits duck/v1alpha1 Status, which currently provides:
+* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
+* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
 </td>
 </tr>
 <tr>
@@ -1009,16 +1041,20 @@ Adapter Deployment.</p>
 <tbody>
 <tr>
 <td>
-<code>conditions</code></br>
+<code>Status</code></br>
 <em>
-<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Conditions">
-github.com/knative/pkg/apis/duck/v1alpha1.Conditions
+<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Status">
+github.com/knative/pkg/apis/duck/v1alpha1.Status
 </a>
 </em>
 </td>
 <td>
-<em>(Optional)</em>
-<p>Conditions holds the state of a source at a point in time.</p>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
+<p>inherits duck/v1alpha1 Status, which currently provides:
+* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
+* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
 </td>
 </tr>
 <tr>
@@ -1140,6 +1176,30 @@ Kubernetes core/v1.ObjectReference
 name to use as the sink.</p>
 </td>
 </tr>
+<tr>
+<td>
+<code>githubAPIURL</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>API URL if using github enterprise (default <a href="https://api.github.com">https://api.github.com</a>)</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>secure</code></br>
+<em>
+bool
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Secure can be set to true to configure the webhook to use https.</p>
+</td>
+</tr>
 </tbody>
 </table>
 <h3 id="GitHubSourceStatus">GitHubSourceStatus
@@ -1161,16 +1221,20 @@ name to use as the sink.</p>
 <tbody>
 <tr>
 <td>
-<code>conditions</code></br>
+<code>Status</code></br>
 <em>
-<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Conditions">
-github.com/knative/pkg/apis/duck/v1alpha1.Conditions
+<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Status">
+github.com/knative/pkg/apis/duck/v1alpha1.Status
 </a>
 </em>
 </td>
 <td>
-<em>(Optional)</em>
-<p>Conditions holds the state of a source at a point in time.</p>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
+<p>inherits duck/v1alpha1 Status, which currently provides:
+* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
+* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
 </td>
 </tr>
 <tr>
@@ -1276,16 +1340,20 @@ as the sink.</p>
 <tbody>
 <tr>
 <td>
-<code>conditions</code></br>
+<code>Status</code></br>
 <em>
-<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Conditions">
-github.com/knative/pkg/apis/duck/v1alpha1.Conditions
+<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Status">
+github.com/knative/pkg/apis/duck/v1alpha1.Status
 </a>
 </em>
 </td>
 <td>
-<em>(Optional)</em>
-<p>Conditions holds the state of a source at a point in time.</p>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
+<p>inherits duck/v1alpha1 Status, which currently provides:
+* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
+* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
 </td>
 </tr>
 <tr>
@@ -1337,5 +1405,5 @@ Kubernetes core/v1.SecretKeySelector
 <hr/>
 <p><em>
 Generated with <code>gen-crd-api-reference-docs</code>
-on git commit <code>2efe55e1</code>.
+on git commit <code>32ce3778</code>.
 </em></p>
