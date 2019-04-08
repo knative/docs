@@ -1,4 +1,4 @@
-# Hello World - Spring Boot Java sample
+# Hello World - Spark Java sample
 
 A simple web app written in Java using Spark Java Framework that you can use for
 testing.  
@@ -19,14 +19,19 @@ While you can clone all of the code from this directory, hello world apps are
 generally more useful if you build them step-by-step. The following instructions
 recreate the source files from this folder.
 
-1. From the console, unzip the helloworld.zip  using the unzip command:
+1. Clone the repo from the following path:
 
    ```shell
-   unzip helloworld.zip
+   https://github.com/knative/docs.git
    ```
 
+2. Navigate to the helloworld-java-spark directory 
 
-1. Run the application locally:
+   ```shell
+   cd serving/samples/helloworld-java-spark
+   ```
+
+3. Run the application locally:
 
    ```shell
    ./mvnw package && java -jar target/helloworld-0.0.1-SNAPSHOT-jar-with-dependencies.jar 
@@ -34,8 +39,8 @@ recreate the source files from this folder.
 
    Go to `http://localhost:8080/` to see your `Hello World!` message.
 
-1. In your project directory, create a file named `Dockerfile` and copy the code
-   block below into it. For detailed instructions on dockerizing a Spring Boot
+4. In your project directory, create a file named `Dockerfile` and copy the code
+   block below into it. For detailed instructions on dockerizing a Spark Java
    app, see
    [Spark with Docker](http://sparkjava.com/tutorials/docker).
    For additional information on multi-stage docker builds for Java see
@@ -70,7 +75,7 @@ recreate the source files from this folder.
     CMD ["java","-Dserver.port=${PORT}","-jar","/helloworld.jar"] 
    ```
 
-1. Create a new file, `service.yaml` and copy the following service definition
+5. Create a new file, `service.yaml` and copy the following service definition
    into the file. Make sure to replace `{username}` with your Docker Hub
    username.
 
@@ -106,7 +111,7 @@ folder) you're ready to build and deploy the sample app.
    docker push {username}/helloworld-java
    ```
 
-1. After the build has completed and the container is pushed to docker hub, you
+2. After the build has completed and the container is pushed to docker hub, you
    can deploy the app into your cluster. Ensure that the container image value
    in `service.yaml` matches the container you built in the previous step. Apply
    the configuration using `kubectl`:
@@ -115,14 +120,14 @@ folder) you're ready to build and deploy the sample app.
    kubectl apply --filename service.yaml
    ```
 
-1. Now that your service is created, Knative will perform the following steps:
+3. Now that your service is created, Knative will perform the following steps:
 
    - Create a new immutable revision for this version of the app.
    - Network programming to create a route, ingress, service, and load balancer
      for your app.
    - Automatically scale your pods up and down (including to zero active pods).
 
-1. To find the IP address for your service, use. If your cluster is new, it may
+4. To find the IP address for your service, use. If your cluster is new, it may
    take sometime for the service to get asssigned an external IP address.
 
    ```shell
@@ -150,7 +155,7 @@ folder) you're ready to build and deploy the sample app.
      --output jsonpath="{.status.loadBalancer.ingress[*].ip}")
    ```
 
-1. To find the URL for your service, use
+5. To find the URL for your service, use
 
    ```shell
    kubectl get ksvc helloworld-java \
@@ -164,7 +169,7 @@ folder) you're ready to build and deploy the sample app.
      --output jsonpath={.status.domain})
    ```
 
-1. Now you can make a request to your app to see the result. Presuming,
+6. Now you can make a request to your app to see the result. Presuming,
    the IP address you got in the step above is in the `${IP_ADDRESS}`
    env variable:
 
