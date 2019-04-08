@@ -60,7 +60,7 @@ sources:
       Registers for events of the specified types on the specified GitLab repository. Brings those
       events into Knative.
   - name: BitBucket
-    url: https://github.com/knative/eventing-sources/blob/master/pkg/apis/sources/v1alpha1/bitbucketsource_types.go
+    url: https://github.com/nachocano/bitbucket-source
     status: Proof of Concept
     support: None
     description: >
