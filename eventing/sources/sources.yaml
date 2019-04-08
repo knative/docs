@@ -1,0 +1,148 @@
+# MetaSources are not intended to be used directly by a user. Rather they are to help make other
+# sources easy to write and maintain.
+metaSources:
+  - name: Container Source
+    url: https://github.com/knative/eventing-sources/blob/master/pkg/apis/sources/v1alpha1/containersource_types.go
+    status: Active Development
+    support: Knative
+    description: >
+      Container Source is a generic controller. Given an Image URL, it will keep a single `Pod`
+      running with the specified image, environment, and arguments. It is used by multiple other
+      Sources as underlying infrastructure.
+  - name: Auto Container Source
+    url: https://github.com/Harwayne/auto-container-source
+    status: Proof of Concept
+    support: None
+    description: >
+      AutoContainerSource is a controller that allows the Source CRDs _without_ needing a
+      controller. It notices CRDs with a specific label and starts controlling resources of that
+      type. It utilizes Container Source as underlying infrastructure.
+  - name: Sample Source
+    url: https://github.com/grantr/sample-source
+    status: Proof of Concept
+    support: None
+    description: >
+      SampleSource is a reference implementation supporting the
+      [Writing an Event Source the Hard Way tutorial](../samples/writing-a-source).
+
+# Sources are event sources that users can install and use directly.
+sources:
+  - name: AWS SQS
+    url: https://github.com/knative/eventing-sources/blob/master/pkg/apis/sources/v1alpha1/aws_sqs_types.go
+    status: Proof of Concept
+    support: None
+    description: >
+      Brings [AWS Simple Quele Service](https://aws.amazon.com/sqs/) messages into Knative.
+  - name: Cron Job
+    url: https://github.com/knative/eventing-sources/blob/master/pkg/apis/sources/v1alpha1/cron_job_types.go
+    status: Proof of Concept
+    support: None
+    description: >
+      Uses an in-memory timer to produce events on the specified Cron schedule.
+  - name: GCP PubSub
+    url: https://github.com/knative/eventing-sources/blob/master/contrib/gcppubsub/pkg/apis/sources/v1alpha1/gcp_pubsub_types.go
+    status: Proof of Concept
+    support: None
+    description: >
+      Brings [GCP PubSub](https://cloud.google.com/pubsub/) messages into Knative.
+  - name: GitHub
+    url: https://github.com/knative/eventing-sources/blob/master/pkg/apis/sources/v1alpha1/githubsource_types.go
+    status: Proof of Concept
+    support: None
+    description: >
+      Registers for events of the specified types on the specified GitHub organization/repository.
+      Brings those events into Knative.
+  - name: GitLab
+    url: https://gitlab.com/triggermesh/gitlabsource
+    status: Proof of Concept
+    support: None
+    description: >
+      Registers for events of the specified types on the specified GitLab repository. Brings those
+      events into Knative.
+  - name: Kubernetes
+    url: https://github.com/knative/eventing-sources/blob/master/pkg/apis/sources/v1alpha1/kuberneteseventsource_types.go
+    status: Active Development
+    support: Knative
+    description: >
+      Brings Kubernetes cluster events into Knative. Uses ContainerSource for underlying
+      infrastructure.
+  - name: Google Cloud Scheduler
+    url: https://github.com/vaikas-google/csr
+    status: Active Development
+    support: None
+    description: >
+      Create, update, and delete [Google Cloud Scheduler](https://cloud.google.com/scheduler/)
+      Jobs. When those jobs are triggered, receive the event inside Knative.
+  - name: Google Cloud Storage
+    url: https://github.com/vaikas-google/gcs
+    status: Active Development
+    support: None
+    description: >
+      Registers for events of the specified types on the specified Google Cloud Storage bucket and
+      optional object prefix. Brings those events into Knative.
+
+# These are containers intended to be used with ContainerSource, but are not CRDs.
+containers:
+  - name: Heartbeat
+    url: https://github.com/knative/eventing-sources/tree/master/cmd/heartbeats
+    status: Proof of Concept
+    support: None
+    description: >
+      Uses an in-memory timer to produce events at the specified interval.
+  - name: WebSocket
+    url: https://github.com/knative/eventing-sources/tree/master/cmd/websocketsource
+    status: Active Development
+    support: None
+    description: >
+      Opens a WebSocket to the specified source and packages each received message as a Knative
+      event.
+  - name: K8s
+    url: https://github.com/Harwayne/auto-container-source/tree/master/k8s-event-source
+    status: Proof of Concept
+    support: None
+    description: >
+      Brings Kubernetes cluster events into Knative. Uses AutoContainerSource for underlying
+      infrastructure.
+  - name: Heartbeat
+    url: https://github.com/Harwayne/auto-container-source/tree/master/heartbeat-source
+    status: Proof of Concept
+    support: None
+    description: >
+      Uses an in-memory timer to produce events as the specified interval. Uses AutoContainerSource
+      for underlying infrastructure.
+  - name: AWS CodeCommit
+    url: https://github.com/triggermesh/knative-lambda-sources/tree/master/awscodecommit
+    status: Active Development
+    support: TriggerMesh
+    description: >
+      Registers for events of the specified types on the specified AWS CodeCommit repository. Brings those events into Knative.
+  - name: AWS Cognito
+    url: https://github.com/triggermesh/knative-lambda-sources/tree/master/awscognito
+    status: Active Development
+    support: TriggerMesh
+    description: >
+      Registers for AWS Cognito events. Brings those events into Knative.
+  - name: AWS DynamoDB
+    url: https://github.com/triggermesh/knative-lambda-sources/tree/master/awsdynamodb
+    status: Active Development
+    support: TriggerMesh
+    description: >
+      Registers for events of on the specified AWS DynamoDB table. Brings those events into Knative.
+  - name: AWS Kinesis
+    url: https://github.com/triggermesh/knative-lambda-sources/tree/master/awskinesis
+    status: Active Development
+    support: TriggerMesh
+    description: >
+      Registers for events on the specified AWS Kinesis stream. Brings those events into Knative.
+  - name: AWS SQS
+    url: https://github.com/triggermesh/knative-lambda-sources/tree/master/awssqs
+    status: Active Development
+    support: TriggerMesh
+    description: >
+      Registers for events of the specified AWS SQS queue. Brings those events into Knative.
+  - name: AWS SNS
+    url: https://github.com/triggermesh/knative-lambda-sources/tree/master/awssns
+    status: Active Development
+    support: TriggerMesh
+    description: >
+      Registers for events of the specified AWS SNS endpoint. Brings those events into Knative.
