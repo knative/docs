@@ -1,13 +1,11 @@
-# Debugging Knative Eventing
-
 This is an evolving document on how to debug a non-working Knative Eventing
 setup.
 
 ## Audience
 
-This document is intended for people that are familiar with
-[Knative Eventing](../README.md)'s object model. You don't need to be an expert,
-but do need to know roughly how things fit together.
+This document is intended for people that are familiar with the object model of
+[Knative Eventing](../README.md). You don't need to be an expert, but do need to
+know roughly how things fit together.
 
 ## Version
 
@@ -112,7 +110,10 @@ Verify that the `Pod` is `Ready`:
 kubectl --namespace knative-debug get pod -l app=fn -o jsonpath='{.items[*].status.conditions[?(@.type == "Ready")].status}'
 ```
 
-This should return `True`. If it doesn't, then try to debug the `Deployment` using the [Kubernetes Application Debugging](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-application-introspection/) guide.
+This should return `True`. If it doesn't, then try to debug the `Deployment`
+using the
+[Kubernetes Application Debugging](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-application-introspection/)
+guide.
 
 ##### `svc`
 

@@ -1,11 +1,16 @@
-# Knative Install on Docker for Mac
+---
+title: "Install on Docker for Mac OS"
+linkTitle: "Docker - Mac OS"
+weight: 15
+type: "docs"
+---
 
 This guide walks you through the installation of the latest version of
 [Knative Serving](https://github.com/knative/serving) using pre-built images and
 demonstrates creating and deploying an image of a sample "hello world" app onto
 the newly created Knative cluster.
 
-You can find [guides for other platforms here](README.md).
+You can find [guides for other platforms here](./README.md).
 
 ## Before you begin
 
@@ -32,7 +37,7 @@ Knative depends on Istio. Run the following to install Istio. (This changes
 `LoadBalancer` to `NodePort` for the `istio-ingress` service).
 
 ```shell
-curl -L https://github.com/knative/serving/releases/download/v0.4.0/istio.yaml \
+curl -L https://github.com/knative/serving/releases/download/v0.5.0/istio.yaml \
   | sed 's/LoadBalancer/NodePort/' \
   | kubectl apply --filename -
 
@@ -59,11 +64,11 @@ rerun the command to see the current status.
 Next, install [Knative Serving](https://github.com/knative/serving).
 
 Because you have limited resources available, use the
-`https://github.com/knative/serving/releases/download/v0.4.0/serving.yaml`
-file, which installs only Knative Serving:
+`https://github.com/knative/serving/releases/download/v0.5.0/serving.yaml` file,
+which installs only Knative Serving:
 
 ```shell
-curl -L https://github.com/knative/serving/releases/download/v0.4.0/serving.yaml \
+curl -L https://github.com/knative/serving/releases/download/v0.5.0/serving.yaml \
   | sed 's/LoadBalancer/NodePort/' \
   | kubectl apply --filename -
 ```
@@ -95,7 +100,7 @@ Now that your cluster has Knative installed, you're ready to deploy an app.
 
 If you'd like to follow a step-by-step guide for deploying your first app on
 Knative, check out the
-[Getting Started with Knative App Deployment](getting-started-knative-app.md)
+[Getting Started with Knative App Deployment](./getting-started-knative-app.md)
 guide.
 
 If you'd like to view the available sample apps and deploy one of your choosing,

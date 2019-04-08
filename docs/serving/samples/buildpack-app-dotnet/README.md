@@ -1,5 +1,3 @@
-# Buildpack Sample App
-
 A sample app that demonstrates using
 [Cloud Foundry](https://www.cloudfoundry.org/) buildpacks on Knative Serving,
 using the [packs Docker images](https://github.com/sclevine/packs).
@@ -15,7 +13,7 @@ sample app for Cloud Foundry.
 ## Running
 
 This sample uses the
-[Buildpack build template](https://github.com/knative/build-templates/blob/master/buildpack/buildpack.yaml)
+[Buildpack build template](https://github.com/knative/build-templates/blob/master/buildpacks/cnb.yaml)
 in the [build-templates](https://github.com/knative/build-templates/) repo. Save
 a copy of `buildpack.yaml`, then install it:
 
@@ -100,7 +98,7 @@ To clean up the sample service:
 
 ```shell
 # Clean up the serving resources
-kubectl delete --filename serving/samples/buildpack-app-dotnet/sample.yaml
+kubectl delete --filename docs/serving/samples/buildpack-app-dotnet/sample.yaml
 # Clean up the build template
 kubectl delete buildtemplate buildpack
 ```

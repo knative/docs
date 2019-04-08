@@ -1,8 +1,14 @@
-# Define The Source Resource
+---
+title: "Defining a custom resource definition as the source"
+linkTitle: "Defining a CRD source"
+weight: 20
+type: "docs"
+---
 
-We'll use Kubebuilder to generate a new Kubernetes Custom Resource for our
-source. Check out the [Kubebuilder book](https://book.kubebuilder.io/) to learn
-more about Kubebuilder.
+We'll use Kubebuilder to generate a new
+[Kubernetes Custom Resource Definition](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
+for our source. Check out the [Kubebuilder book](https://book.kubebuilder.io/)
+to learn more about Kubebuilder.
 
 ## Create the Source CRD Skeleton
 
@@ -199,4 +205,4 @@ make
 These edits in the reference project can be viewed at
 https://github.com/grantr/sample-source/pull/4.
 
-Next: [Reconcile Sources](03-reconcile-sources.md)
+Next: [Reconcile Sources](./03-reconcile-sources.md)

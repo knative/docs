@@ -1,4 +1,9 @@
-# Setting Up Custom Ingress Gateway
+---
+title: "Setting up custom ingress gateway"
+linkTitle: "Configuring the ingress gateway"
+weight: 55
+type: "docs"
+---
 
 Knative uses a shared ingress Gateway to serve all incoming traffic within
 Knative service mesh, which is the `knative-ingress-gateway` Gateway under
@@ -239,7 +244,8 @@ namespace:
 kubectl edit configmap config-ingressgateway -n knative-serving
 ```
 
-Replace the `ingress-gateway` field with the fully qualified url of your service. For the service above, it should be updated to:
+Replace the `ingress-gateway` field with the fully qualified url of your
+service. For the service above, it should be updated to:
 
 ```
 custom-ingressgateway.istio-system.svc.cluster.local

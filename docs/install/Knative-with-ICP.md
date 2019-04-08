@@ -1,4 +1,9 @@
-# Knative Install on IBM Cloud Private
+---
+title: "Install on IBM Cloud Private"
+linkTitle: "IBM Cloud Private"
+weight: 15
+type: "docs"
+---
 
 This guide walks you through the installation of the latest version of
 [Knative Serving](https://github.com/knative/serving) and
@@ -7,7 +12,7 @@ demonstrates creating and deploying an image of a sample `hello world` app onto
 the newly created Knative cluster on
 [IBM Cloud Private](https://www.ibm.com/cloud/private).
 
-You can find [guides for other platforms here](README.md).
+You can find [guides for other platforms here](./README.md).
 
 ## Before you begin
 
@@ -124,57 +129,77 @@ the`knative-build` and `knative-monitoring` namespaces.
 
 The following commands install all available Knative components as well as the
 standard set of observability plugins. To customize your Knative installation,
-see [Performing a Custom Knative Installation](Knative-custom-install.md).
+see [Performing a Custom Knative Installation](./Knative-custom-install.md).
 
 1. If you are upgrading from Knative 0.3.x: Update your domain and static IP
    address to be associated with the LoadBalancer `istio-ingressgateway` instead
-   of `knative-ingressgateway`.  Then run the following to clean up leftover
+   of `knative-ingressgateway`. Then run the following to clean up leftover
    resources:
+
    ```
    kubectl delete svc knative-ingressgateway -n istio-system
    kubectl delete deploy knative-ingressgateway -n istio-system
    ```
 
+   If you have the Knative Eventing Sources component installed, you will also
+   need to delete the following resource before upgrading:
+
+   ```
+   kubectl delete statefulset/controller-manager -n knative-sources
+   ```
+
+   While the deletion of this resource during the upgrade process will not
+   prevent modifications to Eventing Source resources, those changes will not be
+   completed until the upgrade process finishes.
+
 1. Run the following commands to install Knative:
 
    ```shell
-   curl -L https://github.com/knative/serving/releases/download/v0.4.0/serving.yaml \
+   curl -L https://github.com/knative/serving/releases/download/v0.5.0/serving.yaml \
      | sed 's/LoadBalancer/NodePort/' \
      | kubectl apply --filename -
    ```
 
    ```shell
-   curl -L https://github.com/knative/build/releases/download/v0.4.0/build.yaml \
+   curl -L https://github.com/knative/build/releases/download/v0.5.0/build.yaml \
      | sed 's/LoadBalancer/NodePort/' \
      | kubectl apply --filename -
    ```
 
    ```shell
-   curl -L https://github.com/knative/eventing/releases/download/v0.4.0/release.yaml \
+   curl -L https://github.com/knative/eventing/releases/download/v0.5.0/release.yaml \
      | sed 's/LoadBalancer/NodePort/' \
      | kubectl apply --filename -
    ```
 
    ```shell
-   curl -L https://github.com/knative/eventing-sources/releases/download/v0.4.0/release.yaml \
+   curl -L https://github.com/knative/eventing-sources/releases/download/v0.5.0/eventing-sources.yaml \
      | sed 's/LoadBalancer/NodePort/' \
      | kubectl apply --filename -
    ```
 
    ```shell
-   curl -L https://github.com/knative/serving/releases/download/v0.4.0/monitoring.yaml \
+   curl -L https://github.com/knative/serving/releases/download/v0.5.0/monitoring.yaml \
      | sed 's/LoadBalancer/NodePort/' \
      | kubectl apply --filename -
    ```
 
    ```shell
-   curl -L https://raw.githubusercontent.com/knative/serving/v0.4.0/third_party/config/build/clusterrole.yaml \
+   curl -L https://raw.githubusercontent.com/knative/serving/v0.5.0/third_party/config/build/clusterrole.yaml \
      | sed 's/LoadBalancer/NodePort/' \
      | kubectl apply --filename -
    ```
+
+   > **Note**: If your install fails on the first attempt, try rerunning the
+   > commands. They will likely succeed on the second attempt. For background
+   > info and to track the upcoming solution to this problem, see issues
+   > [#968](https://github.com/knative/docs/issues/968) and
+   > [#1036](https://github.com/knative/docs/issues/1036).
+
    > **Note**: For the v0.4.0 release and newer, the `clusterrole.yaml` file is
-   > required to enable the Build and Serving components to interact with each other.
-   
+   > required to enable the Build and Serving components to interact with each
+   > other.
+
    See
    [Installing logging, metrics, and traces](../serving/installing-logging-metrics-traces.md)
    for details about installing the various supported observability plug-ins.
@@ -202,7 +227,7 @@ Now that your cluster has Knative installed, you can see what Knative has to
 offer.
 
 To deploy your first app with Knative, follow the step-by-step
-[Getting Started with Knative App Deployment](getting-started-knative-app.md)
+[Getting Started with Knative App Deployment](./getting-started-knative-app.md)
 guide.
 
 > **Note**: When looking up the IP address to use for accessing your app, you
@@ -226,31 +251,31 @@ To remove Knative from your IBM Cloud Private cluster, run the following
 commands:
 
 ```shell
-curl -L https://github.com/knative/serving/releases/download/v0.4.0/serving.yaml \
+curl -L https://github.com/knative/serving/releases/download/v0.5.0/serving.yaml \
  | sed 's/LoadBalancer/NodePort/' \
  | kubectl delete --filename -
 ```
 
 ```shell
-curl -L https://github.com/knative/build/releases/download/v0.4.0/build.yaml \
+curl -L https://github.com/knative/build/releases/download/v0.5.0/build.yaml \
  | sed 's/LoadBalancer/NodePort/' \
  | kubectl delete --filename -
 ```
 
 ```shell
-curl -L https://github.com/knative/eventing/releases/download/v0.4.0/release.yaml \
+curl -L https://github.com/knative/eventing/releases/download/v0.5.0/release.yaml \
  | sed 's/LoadBalancer/NodePort/' \
  | kubectl delete --filename -
 ```
 
 ```shell
-curl -L https://github.com/knative/eventing-sources/releases/download/v0.4.0/release.yaml \
+curl -L https://github.com/knative/eventing-sources/releases/download/v0.5.0/eventing-sources.yaml \
  | sed 's/LoadBalancer/NodePort/' \
  | kubectl delete --filename -
 ```
 
 ```shell
-curl -L https://github.com/knative/serving/releases/download/v0.4.0/monitoring.yaml \
+curl -L https://github.com/knative/serving/releases/download/v0.5.0/monitoring.yaml \
  | sed 's/LoadBalancer/NodePort/' \
  | kubectl delete --filename -
 ```

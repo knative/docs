@@ -1,5 +1,3 @@
-# Buildpack Sample Function
-
 A sample function that demonstrates using
 [Cloud Foundry](https://www.cloudfoundry.org/) buildpacks on Knative Serving,
 using the [packs Docker images](https://github.com/sclevine/packs).
@@ -14,13 +12,13 @@ sample function for riff.
 ## Running
 
 This sample uses the
-[Buildpack build template](https://github.com/knative/build-templates/blob/master/buildpack/buildpack.yaml)
+[Buildpack build template](https://github.com/knative/build-templates/blob/master/buildpacks/cnb.yaml)
 from the [build-templates](https://github.com/knative/build-templates/) repo.
 
 Save a copy of `buildpack.yaml`, then install it:
 
 ```shell
-kubectl apply --filename https://raw.githubusercontent.com/knative/build-templates/master/buildpack/buildpack.yaml
+kubectl apply --filename https://raw.githubusercontent.com/knative/build-templates/master/buildpacks/cnb.yaml
 ```
 
 Then you can deploy this to Knative Serving from the root directory via:
@@ -98,7 +96,7 @@ To clean up the sample service:
 
 ```shell
 # Clean up the serving resources
-kubectl delete --filename serving/samples/buildpack-function-nodejs/sample.yaml
+kubectl delete --filename docs/serving/samples/buildpack-function-nodejs/sample.yaml
 # Clean up the build template
 kubectl delete buildtemplate buildpack
 ```

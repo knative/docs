@@ -1,4 +1,9 @@
-# Accessing request traces
+---
+title: "Accessing request traces"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+weight: 15
+type: "docs"
+---
 
 If you have not yet installed the logging and monitoring components, go through
 the [installation instructions](./installing-logging-metrics-traces.md) to set

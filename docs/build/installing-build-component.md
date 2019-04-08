@@ -1,4 +1,9 @@
-# Installing the Knative Build component
+---
+title: "Installing the Knative Build component"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+weight: 10
+type: "docs"
+---
 
 Before you can run a Knative Build, you must install the Knative Build component
 in your Kubernetes cluster. Use this page to add the Knative Build component to
@@ -21,9 +26,11 @@ To add only the Knative Build component to an existing installation:
    [`kubectl apply`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#apply)
    command to install [Knative Build](https://github.com/knative/build) and its
    dependencies:
+
    ```bash
-   kubectl apply --filename https://github.com/knative/build/releases/download/v0.4.0/build.yaml
+   kubectl apply --filename https://github.com/knative/build/releases/download/v0.5.0/build.yaml
    ```
+
 1. Run the
    [`kubectl get`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#get)
    command to monitor the Knative Build components until all of the components
@@ -38,7 +45,7 @@ To add only the Knative Build component to an existing installation:
    time. Use CTRL + C to exit watch mode.
 
 You are now ready to create and run Knative Builds, see
-[Creating a simple Knative Build](../build/creating-builds.md) to get started.
+[Creating a simple Knative Build](./creating-builds.md) to get started.
 
 ---
 

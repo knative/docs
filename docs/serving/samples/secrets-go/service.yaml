@@ -9,7 +9,7 @@ spec:
       revisionTemplate:
         spec:
           container:
-            image: github.com/knative/docs/serving/samples/secrets-go
+            image: github.com/knative/docs/docs/serving/samples/secrets-go
             env:
             # This directs the Google Cloud SDK to use the identity and project
             # defined by the Service Account (aka robot) in the JSON file at

@@ -10,14 +10,141 @@
 </p>
 Resource Types:
 <ul><li>
+<a href="#AwsSqsSource">AwsSqsSource</a>
+</li><li>
 <a href="#ContainerSource">ContainerSource</a>
 </li><li>
-<a href="#GcpPubSubSource">GcpPubSubSource</a>
+<a href="#CronJobSource">CronJobSource</a>
 </li><li>
 <a href="#GitHubSource">GitHubSource</a>
 </li><li>
 <a href="#KubernetesEventSource">KubernetesEventSource</a>
 </li></ul>
+<h3 id="AwsSqsSource">AwsSqsSource
+</h3>
+<p>
+<p>AwsSqsSource is the Schema for the AWS SQS API</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>apiVersion</code></br>
+string</td>
+<td>
+<code>
+sources.eventing.knative.dev/v1alpha1
+</code>
+</td>
+</tr>
+<tr>
+<td>
+<code>kind</code></br>
+string
+</td>
+<td><code>AwsSqsSource</code></td>
+</tr>
+<tr>
+<td>
+<code>metadata</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#objectmeta-v1-meta">
+Kubernetes meta/v1.ObjectMeta
+</a>
+</em>
+</td>
+<td>
+Refer to the Kubernetes API documentation for the fields of the
+<code>metadata</code> field.
+</td>
+</tr>
+<tr>
+<td>
+<code>spec</code></br>
+<em>
+<a href="#AwsSqsSourceSpec">
+AwsSqsSourceSpec
+</a>
+</em>
+</td>
+<td>
+<br/>
+<br/>
+<table>
+<tr>
+<td>
+<code>queueUrl</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>QueueURL of the SQS queue that we will poll from.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>awsCredsSecret</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#secretkeyselector-v1-core">
+Kubernetes core/v1.SecretKeySelector
+</a>
+</em>
+</td>
+<td>
+<p>AwsCredsSecret is the credential to use to poll the AWS SQS</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>sink</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#objectreference-v1-core">
+Kubernetes core/v1.ObjectReference
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Sink is a reference to an object that will resolve to a domain name to
+use as the sink.  This is where events will be received.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>serviceAccountName</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>ServiceAccoutName is the name of the ServiceAccount that will be used to
+run the Receive Adapter Deployment.</p>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<code>status</code></br>
+<em>
+<a href="#AwsSqsSourceStatus">
+AwsSqsSourceStatus
+</a>
+</em>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
 <h3 id="ContainerSource">ContainerSource
 </h3>
 <p>
@@ -156,10 +283,10 @@ ContainerSourceStatus
 </tr>
 </tbody>
 </table>
-<h3 id="GcpPubSubSource">GcpPubSubSource
+<h3 id="CronJobSource">CronJobSource
 </h3>
 <p>
-<p>GcpPubSubSource is the Schema for the gcppubsubsources API.</p>
+<p>CronJobSource is the Schema for the cronjobsources API.</p>
 </p>
 <table>
 <thead>
@@ -184,7 +311,7 @@ sources.eventing.knative.dev/v1alpha1
 <code>kind</code></br>
 string
 </td>
-<td><code>GcpPubSubSource</code></td>
+<td><code>CronJobSource</code></td>
 </tr>
 <tr>
 <td>
@@ -204,8 +331,8 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#GcpPubSubSourceSpec">
-GcpPubSubSourceSpec
+<a href="#CronJobSourceSpec">
+CronJobSourceSpec
 </a>
 </em>
 </td>
@@ -215,42 +342,24 @@ GcpPubSubSourceSpec
 <table>
 <tr>
 <td>
-<code>gcpCredsSecret</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#secretkeyselector-v1-core">
-Kubernetes core/v1.SecretKeySelector
-</a>
-</em>
-</td>
-<td>
-<p>GcpCredsSecret is the credential to use to poll the GCP PubSub Subscription. It is not used
-to create or delete the Subscription, only to poll it. The value of the secret entry must be
-a service account key in the JSON format (see
-<a href="https://cloud.google.com/iam/docs/creating-managing-service-account-keys)">https://cloud.google.com/iam/docs/creating-managing-service-account-keys)</a>.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>googleCloudProject</code></br>
+<code>schedule</code></br>
 <em>
 string
 </em>
 </td>
 <td>
-<p>GoogleCloudProject is the ID of the Google Cloud Project that the PubSub Topic exists in.</p>
+<p>Schedule is the cronjob schedule.</p>
 </td>
 </tr>
 <tr>
 <td>
-<code>topic</code></br>
+<code>data</code></br>
 <em>
 string
 </em>
 </td>
 <td>
-<p>Topic is the ID of the GCP PubSub Topic to Subscribe to. It must be in the form of the
-unique identifier within the project, not the entire name. E.g. it must be &lsquo;laconia&rsquo;, not
-&lsquo;projects/my-gcp-project/topics/laconia&rsquo;.</p>
+<p>Data is the data posted to the target function.</p>
 </td>
 </tr>
 <tr>
@@ -286,8 +395,8 @@ Adapter Deployment.</p>
 <td>
 <code>status</code></br>
 <em>
-<a href="#GcpPubSubSourceStatus">
-GcpPubSubSourceStatus
+<a href="#CronJobSourceStatus">
+CronJobSourceStatus
 </a>
 </em>
 </td>
@@ -441,6 +550,30 @@ Kubernetes core/v1.ObjectReference
 name to use as the sink.</p>
 </td>
 </tr>
+<tr>
+<td>
+<code>githubAPIURL</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>API URL if using github enterprise (default <a href="https://api.github.com">https://api.github.com</a>)</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>secure</code></br>
+<em>
+bool
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Secure can be set to true to configure the webhook to use https.</p>
+</td>
+</tr>
 </table>
 </td>
 </tr>
@@ -571,6 +704,125 @@ KubernetesEventSourceStatus
 </tr>
 </tbody>
 </table>
+<h3 id="AwsSqsSourceSpec">AwsSqsSourceSpec
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#AwsSqsSource">AwsSqsSource</a>)
+</p>
+<p>
+<p>AwsSqsSourceSpec defines the desired state of the source.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>queueUrl</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>QueueURL of the SQS queue that we will poll from.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>awsCredsSecret</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#secretkeyselector-v1-core">
+Kubernetes core/v1.SecretKeySelector
+</a>
+</em>
+</td>
+<td>
+<p>AwsCredsSecret is the credential to use to poll the AWS SQS</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>sink</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#objectreference-v1-core">
+Kubernetes core/v1.ObjectReference
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Sink is a reference to an object that will resolve to a domain name to
+use as the sink.  This is where events will be received.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>serviceAccountName</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>ServiceAccoutName is the name of the ServiceAccount that will be used to
+run the Receive Adapter Deployment.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="AwsSqsSourceStatus">AwsSqsSourceStatus
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#AwsSqsSource">AwsSqsSource</a>)
+</p>
+<p>
+<p>AwsSqsSourceStatus defines the observed state of the source.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>Status</code></br>
+<em>
+<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Status">
+github.com/knative/pkg/apis/duck/v1alpha1.Status
+</a>
+</em>
+</td>
+<td>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
+<p>inherits duck/v1alpha1 Status, which currently provides:
+* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
+* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>sinkUri</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>SinkURI is the current active sink URI that has been configured for the source.</p>
+</td>
+</tr>
+</tbody>
+</table>
 <h3 id="ContainerSourceSpec">ContainerSourceSpec
 </h3>
 <p>
@@ -673,16 +925,20 @@ Kubernetes core/v1.ObjectReference
 <tbody>
 <tr>
 <td>
-<code>conditions</code></br>
+<code>Status</code></br>
 <em>
-<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Conditions">
-github.com/knative/pkg/apis/duck/v1alpha1.Conditions
+<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Status">
+github.com/knative/pkg/apis/duck/v1alpha1.Status
 </a>
 </em>
 </td>
 <td>
-<em>(Optional)</em>
-<p>Conditions holds the state of a source at a point in time.</p>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
+<p>inherits duck/v1alpha1 Status, which currently provides:
+* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
+* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
 </td>
 </tr>
 <tr>
@@ -699,14 +955,14 @@ string
 </tr>
 </tbody>
 </table>
-<h3 id="GcpPubSubSourceSpec">GcpPubSubSourceSpec
+<h3 id="CronJobSourceSpec">CronJobSourceSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#GcpPubSubSource">GcpPubSubSource</a>)
+<a href="#CronJobSource">CronJobSource</a>)
 </p>
 <p>
-<p>GcpPubSubSourceSpec defines the desired state of the GcpPubSubSource.</p>
+<p>CronJobSourceSpec defines the desired state of the CronJobSource.</p>
 </p>
 <table>
 <thead>
@@ -718,42 +974,24 @@ string
 <tbody>
 <tr>
 <td>
-<code>gcpCredsSecret</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#secretkeyselector-v1-core">
-Kubernetes core/v1.SecretKeySelector
-</a>
-</em>
-</td>
-<td>
-<p>GcpCredsSecret is the credential to use to poll the GCP PubSub Subscription. It is not used
-to create or delete the Subscription, only to poll it. The value of the secret entry must be
-a service account key in the JSON format (see
-<a href="https://cloud.google.com/iam/docs/creating-managing-service-account-keys)">https://cloud.google.com/iam/docs/creating-managing-service-account-keys)</a>.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>googleCloudProject</code></br>
+<code>schedule</code></br>
 <em>
 string
 </em>
 </td>
 <td>
-<p>GoogleCloudProject is the ID of the Google Cloud Project that the PubSub Topic exists in.</p>
+<p>Schedule is the cronjob schedule.</p>
 </td>
 </tr>
 <tr>
 <td>
-<code>topic</code></br>
+<code>data</code></br>
 <em>
 string
 </em>
 </td>
 <td>
-<p>Topic is the ID of the GCP PubSub Topic to Subscribe to. It must be in the form of the
-unique identifier within the project, not the entire name. E.g. it must be &lsquo;laconia&rsquo;, not
-&lsquo;projects/my-gcp-project/topics/laconia&rsquo;.</p>
+<p>Data is the data posted to the target function.</p>
 </td>
 </tr>
 <tr>
@@ -784,14 +1022,14 @@ Adapter Deployment.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="GcpPubSubSourceStatus">GcpPubSubSourceStatus
+<h3 id="CronJobSourceStatus">CronJobSourceStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#GcpPubSubSource">GcpPubSubSource</a>)
+<a href="#CronJobSource">CronJobSource</a>)
 </p>
 <p>
-<p>GcpPubSubSourceStatus defines the observed state of GcpPubSubSource.</p>
+<p>CronJobSourceStatus defines the observed state of CronJobSource.</p>
 </p>
 <table>
 <thead>
@@ -803,16 +1041,20 @@ Adapter Deployment.</p>
 <tbody>
 <tr>
 <td>
-<code>conditions</code></br>
+<code>Status</code></br>
 <em>
-<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Conditions">
-github.com/knative/pkg/apis/duck/v1alpha1.Conditions
+<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Status">
+github.com/knative/pkg/apis/duck/v1alpha1.Status
 </a>
 </em>
 </td>
 <td>
-<em>(Optional)</em>
-<p>Conditions holds the state of a source at a point in time.</p>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
+<p>inherits duck/v1alpha1 Status, which currently provides:
+* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
+* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
 </td>
 </tr>
 <tr>
@@ -824,7 +1066,7 @@ string
 </td>
 <td>
 <em>(Optional)</em>
-<p>SinkURI is the current active sink URI that has been configured for the GcpPubSubSource.</p>
+<p>SinkURI is the current active sink URI that has been configured for the CronJobSource.</p>
 </td>
 </tr>
 </tbody>
@@ -934,6 +1176,30 @@ Kubernetes core/v1.ObjectReference
 name to use as the sink.</p>
 </td>
 </tr>
+<tr>
+<td>
+<code>githubAPIURL</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>API URL if using github enterprise (default <a href="https://api.github.com">https://api.github.com</a>)</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>secure</code></br>
+<em>
+bool
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Secure can be set to true to configure the webhook to use https.</p>
+</td>
+</tr>
 </tbody>
 </table>
 <h3 id="GitHubSourceStatus">GitHubSourceStatus
@@ -955,16 +1221,20 @@ name to use as the sink.</p>
 <tbody>
 <tr>
 <td>
-<code>conditions</code></br>
+<code>Status</code></br>
 <em>
-<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Conditions">
-github.com/knative/pkg/apis/duck/v1alpha1.Conditions
+<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Status">
+github.com/knative/pkg/apis/duck/v1alpha1.Status
 </a>
 </em>
 </td>
 <td>
-<em>(Optional)</em>
-<p>Conditions holds the state of a source at a point in time.</p>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
+<p>inherits duck/v1alpha1 Status, which currently provides:
+* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
+* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
 </td>
 </tr>
 <tr>
@@ -1070,16 +1340,20 @@ as the sink.</p>
 <tbody>
 <tr>
 <td>
-<code>conditions</code></br>
+<code>Status</code></br>
 <em>
-<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Conditions">
-github.com/knative/pkg/apis/duck/v1alpha1.Conditions
+<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Status">
+github.com/knative/pkg/apis/duck/v1alpha1.Status
 </a>
 </em>
 </td>
 <td>
-<em>(Optional)</em>
-<p>Conditions holds the state of a source at a point in time.</p>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
+<p>inherits duck/v1alpha1 Status, which currently provides:
+* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
+* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
 </td>
 </tr>
 <tr>
@@ -1131,5 +1405,5 @@ Kubernetes core/v1.SecretKeySelector
 <hr/>
 <p><em>
 Generated with <code>gen-crd-api-reference-docs</code>
-on git commit <code>9741f15</code>.
+on git commit <code>32ce3778</code>.
 </em></p>

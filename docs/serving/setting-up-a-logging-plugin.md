@@ -1,4 +1,9 @@
-# Setting Up A Logging Plugin
+---
+title: "Setting up a logging plugin"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+weight: 50
+type: "docs"
+---
 
 Knative allows cluster operators to use different backends for their logging
 needs. This document describes how to change these settings. Knative currently
@@ -31,7 +36,8 @@ collecting `stdout/stderr` logs from the containers:
    in
    [200-fluentd.yaml](https://github.com/knative/serving/blob/master/config/monitoring/logging/elasticsearch/200-fluentd.yaml)
    with the Fluentd image including the desired Fluentd output plugin. See
-   [here](fluentd/README.md) for the requirements of Flunetd image on Knative.
+   [here](./fluentd-requirements.md) for the requirements of Flunetd image on
+   Knative.
 
 ### Configure the Sidecar for log files under /var/log
 
@@ -65,7 +71,8 @@ kubectl apply --recursive --filename config/monitoring/100-namespace.yaml \
 ```
 
 In the commands above, replace `<path-of-fluentd-daemonset-config>` with the
-Fluentd DaemonSet configuration file, e.g. `config/monitoring/logging/stackdriver`.
+Fluentd DaemonSet configuration file, e.g.
+`config/monitoring/logging/stackdriver`.
 
 **NOTE**: The deployment above will not affect the fluentd sidecar of existing
 pods. Developers need to redeploy their app to get the newest configuration for
@@ -79,8 +86,8 @@ the Elasticsearch and Kibana services. Knative provides this sample:
 kubectl apply --recursive --filename third_party/config/monitoring/logging/elasticsearch
 ```
 
-See [here](/serving/installing-logging-metrics-traces.md) for deploying the
-whole Knative monitoring components.
+See [here](./installing-logging-metrics-traces.md) for deploying the whole
+Knative monitoring components.
 
 ## Uninstalling
 

@@ -13,5 +13,5 @@ spec:
   topic: testing
   sink:
     apiVersion: eventing.knative.dev/v1alpha1
-    kind: Channel
-    name: pubsub-test
+    kind: Broker
+    name: default

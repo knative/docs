@@ -1,4 +1,9 @@
-# Knative Install on OpenShift (via `oc cluster up`)
+---
+title: "Install on OpenShift"
+linkTitle: "OpenShift"
+weight: 15
+type: "docs"
+---
 
 This guide walks you through the installation of the latest version of
 [Knative Serving](https://github.com/knative/serving) on an
@@ -6,7 +11,7 @@ This guide walks you through the installation of the latest version of
 demonstrates creating and deploying an image of a sample "hello world" app onto
 the newly created Knative cluster.
 
-You can find [guides for other platforms here](README.md).
+You can find [guides for other platforms here](./README.md).
 
 ## Before you begin
 
@@ -23,7 +28,7 @@ directory by downloading the right release tarball for your OS from the
 
 ```shell
 wget https://github.com/openshift/origin/releases/download/v3.11.0/openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit.tar.gz -o oc.tar.gz
-tar xzvf openshift*tar.gz 
+tar xzvf openshift*tar.gz
 mv openshift-origin-client-tools-*/oc .
 mv openshift-origin-client-tools-*/kubectl .
 rm -rf openshift-origin-client-tools-*/
@@ -33,9 +38,12 @@ You will now have the `oc` (and `kubectl`) binaries in your local directory.
 
 ## Scripted cluster setup and installation
 
-For Linux and Mac, once you have `oc` present on your machine and in your `PATH`, you can run a
-[script](scripts/knative-with-openshift.sh) that automates the steps on this
-page.  It will:
+For Linux and Mac, you can optionally run a
+[script](./scripts/knative-with-openshift.sh) that automates the steps on this
+page.
+
+Once you have `oc` present on your machine and in your `PATH`, you can simply
+run [this script](./scripts/knative-with-openshift.sh); it will:
 
 - Create a new OpenShift cluster on your local machine with `oc cluster up`
 - Install Istio and Knative serving
@@ -46,7 +54,8 @@ Once the script completes, you'll be ready to test out Knative!
 
 ## Creating a new OpenShift cluster
 
-Here are the manual steps which the above script automates for you in case you prefer doing this yourself:
+Here are the manual steps which the above script automates for you in case you
+prefer doing this yourself:
 
 Create a new OpenShift cluster on your local machine using `oc cluster up`:
 
@@ -98,7 +107,7 @@ oc label namespace default istio-injection=enabled
 
 > Note: [Gloo](https://gloo.solo.io/) is available as an alternative to Istio.
 > Gloo is not currently compatible with the Knative Eventing component.
-> [Click here](Knative-with-Gloo.md) to install Knative with Gloo.
+> [Click here](./Knative-with-Gloo.md) to install Knative with Gloo.
 
 Knative depends on Istio. First, run the following to grant the necessary
 privileges to the service accounts istio will use:
@@ -210,7 +219,7 @@ Now that your cluster has Knative installed, you're ready to deploy an app.
 
 If you'd like to follow a step-by-step guide for deploying your first app on
 Knative, check out the
-[Getting Started with Knative App Deployment](getting-started-knative-app.md)
+[Getting Started with Knative App Deployment](./getting-started-knative-app.md)
 guide.
 
 If you'd like to view the available sample apps and deploy one of your choosing,

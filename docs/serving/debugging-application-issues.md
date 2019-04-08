@@ -1,4 +1,9 @@
-# Debugging Issues with Your Application
+---
+title: "Debugging issues with your application"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+weight: 25
+type: "docs"
+---
 
 You deployed your app to Knative Serving, but it isn't working as expected. Go
 through this step-by-step guide to understand what failed.
@@ -189,9 +194,9 @@ kubectl get build $(kubectl get revision <revision-name> --output jsonpath="{.sp
 If there is any failure, the `conditions` in `status` provide the reason. To
 access build logs, first execute `kubectl proxy` and then open
 [Kibana UI](http://localhost:8001/api/v1/namespaces/knative-monitoring/services/kibana-logging/proxy/app/kibana).
-Use any of the following filters within Kibana UI to see build logs. _(See
-[telemetry guide](../telemetry.md) for more information on logging and
-monitoring features of Knative Serving.)_
+Use any of the following filters within Kibana UI to see build logs. For more
+information about the Knative observability features, see
+[Installing logging, metrics, and traces](./Installing-logging-metrics-traces.md).
 
 - All build logs: `_exists_:"kubernetes.labels.build-name"`
 - Build logs for a specific build: `kubernetes.labels.build-name:"<BUILD NAME>"`

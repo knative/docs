@@ -1,4 +1,9 @@
-# Build Templates
+---
+title: "Build templates"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+weight: 35
+type: "docs"
+---
 
 This document defines "Build Templates" and their capabilities.
 

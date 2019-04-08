@@ -5,15 +5,13 @@
 This is a generated file and should not be changed manually. All changes should follow the
 procedure:
 
-1. Update the information in [`sources.yaml`](sources.yaml).
+1. Update the information in [`sources.yaml`](./sources.yaml).
 
 2. Run the generator tool:
     ```shell
     go run eventing/sources/generator/main.go
     ```
 -->
-
-# Knative Event Sources
 
 Event Sources are Kubernetes Custom Resources which provide a mechanism for registering interest in
 a class of events from a particular software system. Since different event sources may be described

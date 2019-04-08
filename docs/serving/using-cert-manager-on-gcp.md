@@ -1,9 +1,14 @@
-# Configuring Knative and CertManager for Google Cloud DNS
+---
+title: "Configuring Knative and CertManager for Google Cloud DNS"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+weight: 65
+type: "docs"
+---
 
 These instructions assume you have already setup a Knative cluster and installed
 cert-manager into your cluster. For more information, see
-[using an SSL certificate](using-an-ssl-cert.md#install-cert-manager). They also
-assume you have already set up your managed zone with Cloud DNS as part of
+[using an SSL certificate](./using-an-ssl-cert.md#install-cert-manager). They
+also assume you have already set up your managed zone with Cloud DNS as part of
 configuring the domain to map to your IP address.
 
 To automate the generation of a certificate with cert-manager and LetsEncrypt,

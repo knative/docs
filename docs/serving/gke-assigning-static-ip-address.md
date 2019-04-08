@@ -1,4 +1,9 @@
-# Assigning a static IP address for Knative on Kubernetes Engine
+---
+title: "Assigning a static IP address for Knative on Kubernetes Engine"
+linkTitle: "Assigning static IPs - GKE"
+weight: 35
+type: "docs"
+---
 
 If you are running Knative on Google Kubernetes Engine and want to use a
 [custom domain](./using-a-custom-domain.md) with your apps, you need to
@@ -13,7 +18,7 @@ Therefore, in order to set a static IP for the gateway you must to set the
 external IP address of the `istio-ingressgateway` service to a static IP.
 
 If you have configured a
-[custom ingress gateway](setting-up-custom-ingress-gateway.md), replace
+[custom ingress gateway](./setting-up-custom-ingress-gateway.md), replace
 `istio-ingressgateway` with the name of your gateway service in the steps below.
 
 ## Step 1: Reserve a static IP address
@@ -26,13 +31,17 @@ Using the Google Cloud SDK:
 1.  Enter the following command, replacing IP_NAME and REGION with appropriate
     values. For example, select the `us-west1` region if you deployed your
     cluster to the `us-west1-c` zone:
+
     ```shell
     gcloud beta compute addresses create IP_NAME --region=REGION
     ```
+
     For example:
+
     ```shell
     gcloud beta compute addresses create knative-ip --region=us-west1
     ```
+
 1.  Enter the following command to get the newly created static IP address:
     ```shell
     gcloud beta compute addresses list

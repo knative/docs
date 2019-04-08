@@ -1,4 +1,9 @@
-# Getting Started with Knative App Deployment
+---
+title: "Getting Started with App Deployment"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+weight: 05
+type: "docs"
+---
 
 This guide shows you how to deploy an app using Knative, then interact with it
 using cURL requests.
@@ -15,9 +20,9 @@ You need:
 ## Sample application
 
 This guide uses the
-[Hello World sample app in Go](../serving/samples/helloworld-go) to demonstrate
-the basic workflow for deploying an app, but these steps can be adapted for your
-own application if you have an image of it available on
+[Hello World sample app in Go](../serving/samples/hello-world/helloworld-go) to
+demonstrate the basic workflow for deploying an app, but these steps can be
+adapted for your own application if you have an image of it available on
 [Docker Hub](https://docs.docker.com/docker-hub/repos/),
 [Google Container Registry](https://cloud.google.com/container-registry/docs/pushing-and-pulling),
 or another container image registry.
@@ -127,7 +132,7 @@ assigned an external IP address.
 1. To find the host URL for your service, enter:
 
    ```shell
-   kubectl get ksvc helloworld-go  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+   kubectl get route helloworld-go  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
    NAME                DOMAIN
    helloworld-go       helloworld-go.default.example.com
    ```
@@ -135,7 +140,7 @@ assigned an external IP address.
    You can also export the host URL as a variable using the following command:
 
    ```shell
-   export HOST_URL=$(kubectl get ksvc helloworld-go  --output jsonpath='{.status.domain}')
+   export HOST_URL=$(kubectl get route helloworld-go  --output jsonpath='{.status.domain}')
    ```
 
    If you changed the name from `helloworld-go` to something else when creating

@@ -1,4 +1,9 @@
-# Using ExternalDNS on Google Cloud Platform to automate DNS setup
+---
+title: "Using ExternalDNS on Google Cloud Platform to automate DNS setup"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+weight: 70
+type: "docs"
+---
 
 [ExternalDNS](https://github.com/kubernetes-incubator/external-dns) is a tool
 that synchronizes exposed Kubernetes Services and Ingresses with DNS providers.
@@ -111,9 +116,8 @@ permission to get the credential secret can access your Cloud DNS.
 
 ## Set up Knative
 
-1. Follow the
-   [instruction](https://github.com/knative/docs/blob/master/install/README.md)
-   to install Knative on your cluster.
+1. Follow the [instruction](../install/README.md) to install Knative on your
+   cluster.
 1. Configure Knative to use your custom domain.
 
 ```shell
