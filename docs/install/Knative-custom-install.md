@@ -173,6 +173,8 @@ The following Knative installation files are available:
   - https://github.com/knative/serving/releases/download/v0.5.0/monitoring-metrics-prometheus.yaml
   - https://github.com/knative/serving/releases/download/v0.5.0/monitoring-tracing-zipkin.yaml
   - https://github.com/knative/serving/releases/download/v0.5.0/monitoring-tracing-zipkin-in-mem.yaml
+  - https://github.com/knative/serving/releases/download/v0.5.0/monitoring-tracing-jaeger.yaml
+  - https://github.com/knative/serving/releases/download/v0.5.0/monitoring-tracing-jaeger-in-mem.yaml
 - **Build Component**:
   - https://github.com/knative/build/releases/download/v0.5.0/build.yaml
 - **Eventing Component**:
