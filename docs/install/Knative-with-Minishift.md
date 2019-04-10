@@ -229,8 +229,8 @@ curl -s https://raw.githubusercontent.com/knative/docs/master/docs/install/scrip
 1. Install Knative serving:
 
    ```shell
-   oc apply --filename https://github.com/knative/serving/releases/download/v0.5.0/serving.yaml \
-   oc apply --filename https://github.com/knative/build/releases/download/v0.5.0/build.yaml \
+   oc apply --filename https://github.com/knative/serving/releases/download/v0.5.0/serving.yaml && \
+   oc apply --filename https://github.com/knative/build/releases/download/v0.5.0/build.yaml && \
    oc apply --filename https://raw.githubusercontent.com/knative/serving/v0.5.0/third_party/config/build/clusterrole.yaml
    ```
 
