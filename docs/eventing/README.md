@@ -55,8 +55,8 @@ Addressable. You can create as many Triggers as necessary.
 
 ### Event channels and subscriptions
 
-Knative Eventing also defines an event forwarding and persistence layer,
-called a
+Knative Eventing also defines an event forwarding and persistence layer, called
+a
 [**Channel**](https://github.com/knative/eventing/blob/master/pkg/apis/eventing/v1alpha1/channel_types.go#L36).
 Messaging implementations may provide implementations of Channels via the
 [ClusterChannelProvisioner](https://github.com/knative/eventing/blob/master/pkg/apis/eventing/v1alpha1/cluster_channel_provisioner_types.go#L35)
