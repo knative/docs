@@ -1,6 +1,8 @@
 name: hello_world_dart
-private: True  # let's not accidentally publish this to pub.dartlang.org
+publish_to: none # let's not accidentally publish this to pub.dartlang.org
+
+environment:
+  sdk: '>=2.1.0 <3.0.0'
+
 dependencies:
   shelf: ^0.7.3
-environment:
-  sdk: '>=2.0.0 <3.0.0'
