@@ -39,7 +39,7 @@ type: "blog"
                 <div class="aspectRatioPlaceholder-fill">
                 </div>
                 <div data-width="884" data-height="241" data-action="zoom" data-scroll="native">
-                  <img src="https://www.knative.dev/blog/images/singleservice.png">
+                  <img src="../../../../images/singleservice.png">
                 </div>
               </div>
             </figure>
@@ -51,7 +51,7 @@ type: "blog"
                 <div class="aspectRatioPlaceholder-fill">
                 </div>
                 <div data-width="976" data-height="344" data-action="zoom" data-scroll="native">
-                  <img src="https://www.knative.dev/blog/images/multipleservices.png">
+                  <img src="../../../../images/multipleservices.png">
                 </div>
               </div>
             </figure>
@@ -63,7 +63,7 @@ type: "blog"
                 <div class="aspectRatioPlaceholder-fill">
                 </div>
                 <div data-width="944" data-height="477" data-action="zoom" data-scroll="native">
-                  <img src="https://www.knative.dev/blog/images/scaffold.png">
+                  <img src="../../../../images/scaffold.png">
                 </div>
               </div>
             </figure>
@@ -74,7 +74,7 @@ type: "blog"
             <p name="295b" id="295b" class="graf graf--p graf-after--p">One such Go idiom is that binaries are referenced by “<a href="https://golang.org/doc/code.html#ImportPaths" data-href="https://golang.org/doc/code.html#ImportPaths" class="markup--anchor markup--p-anchor" rel="nofollow noopener" target="_blank">import paths</a>”; a typical way of installing a Go binary would be:</p>
             <pre name="c44e" id="c44e" class="graf graf--pre graf-after--p"># e.g. installing ko itself<br>go get github.com/google/go-containerregistry/cmd/ko</pre>
             <p name="2114" id="2114" class="graf graf--p graf-after--pre">Getting started with <code class="markup--code markup--p-code">ko</code> does not take any additional configuration files, you simply replace references to container images with import paths:</p>
-            <pre name="9af3" id="9af3" class="graf graf--pre graf-after--p"># This example is based on:<br># <a href="https://github.com/google/go-containerregistry/blob/master/cmd/ko/test/test.yaml" data-href="https://github.com/google/go-containerregistry/blob/master/cmd/ko/test/test.yaml" class="markup--anchor markup--pre-anchor" rel="nofollow noopener" target="_blank">https://github.com/google/go-containerregistry/blob/master/cmd/ko/test/test.yaml</a>
+            <pre name="9af3" id="9af3" class="graf graf--pre graf-after--p"># This example is based on:<br># <a href="https://github.com/google/ko/blob/master/cmd/ko/test/test.yaml" target="_blank">https://github.com/google/ko/blob/master/cmd/ko/test/test.yaml</a>
               <br>apiVersion: v1<br>kind: Pod<br>metadata:<br>  name: kodata<br>spec:<br>  containers:<br>  - name: test<br>    # ko builds and publishes this Go binary, and replaces this<br>    # with an image name.<br>    image: github.com/google/go-containerregistry/cmd/ko/test<br>  restartPolicy: Never</pre>
               <p name="b28f" id="b28f" class="graf graf--p graf-after--pre">That’s it.</p>
               <p name="7e1e" id="7e1e" class="graf graf--p graf-after--p">
@@ -99,7 +99,7 @@ type: "blog"
                     <div class="aspectRatioPlaceholder-fill">
                     </div>
                   <div data-width="673" data-height="469" data-action="zoom" data-scroll="native">
-                    <img src="https://www.knative.dev/blog/images/koservices.png">
+                    <img src="../../../../images/koservices.png">
                   </div>
                   </div>
                 </figure>

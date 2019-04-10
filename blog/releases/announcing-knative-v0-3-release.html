@@ -30,7 +30,7 @@ type: "blog"
               <div class="aspectRatioPlaceholder is-locked" style="max-width: 200px; max-height: 200px;">
                 <div class="aspectRatioPlaceholder-fill">
                 </div>
-                <img class="graf-image" data-image-id="knative" data-width="200" data-height="200" src="https://www.knative.dev/blog/images/knative.png">
+                <img class="graf-image" data-image-id="knative" data-width="200" data-height="200" src="../../../../images/knative.png">
               </div>
             </figure>
             <p name="de1e" id="de1e" class="graf graf--p graf-after--figure">Starting with the v0.3 release, Knative now requires Kubernetes 1.11, due to the use of `/status` sub-resource support, which went Beta in Kubernetes 1.11 and fixes a long-standing Kubernetes CRD bug.</p>
@@ -44,10 +44,10 @@ type: "blog"
             <p name="5db5" id="5db5" class="graf graf--p graf-after--p">As shown in our <a href="https://youtu.be/OPSIPr-Cybs" data-href="https://youtu.be/OPSIPr-Cybs" class="markup--anchor markup--p-anchor" rel="noopener" target="_blank">Kubecon demo</a>, Knative now offers Horizontal Pod Autoscaler (HPA). This is useful for those who need to opt-out of KPA and use CPU instead of request rate as a scaling metric. (Note: HPA-class Revisions will not scale to zero).</p>
             <p name="716d" id="716d" class="graf graf--p graf-after--p">Lastly, you can now also mutate `PodAutoscaler` specs in-place to adjust the scale bounds and other parameters.</p>
             <h3 name="4108" id="4108" class="graf graf--h3 graf-after--p">Networking</h3>
-            <p name="7ce7" id="7ce7" class="graf graf--p graf-after--h3">A frequently-requested feature is the ability to deploy services which are not exposed externally and can only be accessed by other services in the cluster. In v0.3, Routes <a href="https://www.knative.dev/docs/reference/serving.md#routestatus" data-href="https://www.knative.dev/docs/reference/serving.md#routestatus" class="markup--anchor markup--p-anchor" rel="noopener">configured</a> to use the `svc.cluster.local` domain will only be exposed to the cluster-local Istio gateway. The cluster-local gateway will keep the deployed service inaccessible from outside the cluster. Developers can also use the `serving.knative.dev/visibility=cluster-local` label on their Route or Service to enable this behaviour.</p>
+            <p name="7ce7" id="7ce7" class="graf graf--p graf-after--h3">A frequently-requested feature is the ability to deploy services which are not exposed externally and can only be accessed by other services in the cluster. In v0.3, Routes <a href="../../../../../docs/reference/serving-api/#RouteStatus">configured</a> to use the `svc.cluster.local` domain will only be exposed to the cluster-local Istio gateway. The cluster-local gateway will keep the deployed service inaccessible from outside the cluster. Developers can also use the `serving.knative.dev/visibility=cluster-local` label on their Route or Service to enable this behaviour.</p>
             <p name="09bc" id="09bc" class="graf graf--p graf-after--p">Knative is also deprecating its dedicated Istio gateway. In v0.3 release, Knative will still expose public routes to both the deprecated gateway and the default Istio gateway. Starting with next release however, Knative will remove the deprecated gateway to further reduce overhead and avoid the additional cost of public IP. (Note, you may have to update the gateway IP in your DNS mappings).</p>
             <h3 name="d066" id="d066" class="graf graf--h3 graf-after--p">Eventing</h3>
-            <p name="7ef7" id="7ef7" class="graf graf--p graf-after--h3">With the inclusion of Eventing in the previous release, there has been a significant focus on extending the number of and <a href="https://www.knative.dev/eventing/sources" data-href="https://www.knative.dev/eventing/sources" class="markup--anchor markup--p-anchor" rel="noopener">documenting</a> available external event sources which can be installed in Knative as Kubernetes Custom Resource Definitions (CRDs). The complete list of currently supported event sources can be found <a href="https://www.knative.dev/eventing/sources#sources" data-href="https://www.knative.dev/eventing/sources#sources" class="markup--anchor markup--p-anchor" rel="noopener" target="_blank">here</a>.</p>
+            <p name="7ef7" id="7ef7" class="graf graf--p graf-after--h3">With the inclusion of Eventing in the previous release, there has been a significant focus on extending the number of and documenting available external event sources which can be installed in Knative as Kubernetes Custom Resource Definitions (CRDs). The complete list of currently supported event sources can be found <a href="../../../../../docs/eventing/sources#sources">here</a>.</p>
             <h3 name="87ba" id="87ba" class="graf graf--h3 graf-after--p">Build</h3>
             <p name="9e6a" id="9e6a" class="graf graf--p graf-after--h3">The Knative Build component can now support both single `source` and multiple input `sources`. If multiple sources are requested, each will be fetched in declared order and placed into a directory under `/workspace` named after the source’s name field. The Build controller is also now subject to the PodSecurityPolicy which enables cluster operators to specify further limitations.</p>
             <h3 name="6e57" id="6e57" class="graf graf--h3 graf-after--p">Monitoring</h3>
@@ -55,19 +55,19 @@ type: "blog"
             <h3 name="7ec8" id="7ec8" class="graf graf--h3 graf-after--p">Learn more</h3>
             <ul class="postList">
               <li name="c00d" id="c00d" class="graf graf--li graf-after--h3">
-                <a href="https://www.knative.dev/docs/" data-href="https://www.knative.dev/docs/" class="markup--anchor markup--li-anchor" rel="noopener">Welcome to Knative</a>
+                <a href="../../../../../docs/" data-href="../../../../../docs/" class="markup--anchor markup--li-anchor" rel="noopener">Welcome to Knative</a>
               </li>
               <li name="d88a" id="d88a" class="graf graf--li graf-after--li">
-                <a href="https://www.knative.dev/docs/#documentation" data-href="https://www.knative.dev/docs/#documentation" class="markup--anchor markup--li-anchor" rel="noopener">Getting started documentation</a>
+                <a href="../../../../../docs/#documentation" data-href="../../../../../docs/#documentation" class="markup--anchor markup--li-anchor" rel="noopener">Getting started documentation</a>
               </li>
               <li name="a9ca" id="a9ca" class="graf graf--li graf-after--li">
-                <a href="https://www.knative.dev/docs/#samples-and-demos" data-href="https://www.knative.dev/docs/#samples-and-demos" class="markup--anchor markup--li-anchor" rel="noopener">Samples and demos</a>
+                <a href="../../../../../docs/#samples-and-demos" data-href="../../../../../docs/#samples-and-demos" class="markup--anchor markup--li-anchor" rel="noopener">Samples and demos</a>
               </li>
               <li name="fe75" id="fe75" class="graf graf--li graf-after--li">
-                <a href="https://www.knative.dev/contributing/README.md#meetings-and-work-groups" data-href="https://www.knative.dev/contributing/README.md#meetings-and-work-groups" class="markup--anchor markup--li-anchor" rel="noopener">Knative meetings and work groups</a>
+                <a href="../../../../../contributing/#meetings-and-work-groups" data-href="../../../../../contributing/#meetings-and-work-groups" class="markup--anchor markup--li-anchor" rel="noopener">Knative meetings and work groups</a>
               </li>
               <li name="cf03" id="cf03" class="graf graf--li graf-after--li">
-                <a href="https://www.knative.dev/contributing/README.md#questions-and-issues" data-href="https://www.knative.dev/contributing/README.md#questions-and-issues" class="markup--anchor markup--li-anchor" rel="noopener">Questions and issues</a>
+                <a href="../../../../../contributing/#questions-and-issues" data-href="../../../../../contributing/README.md#questions-and-issues" class="markup--anchor markup--li-anchor" rel="noopener">Questions and issues</a>
               </li>
               <li name="19ce" id="19ce" class="graf graf--li graf-after--li">Knative on Twitter (<a href="https://twitter.com/KnativeProject" data-href="https://twitter.com/KnativeProject" class="markup--anchor markup--li-anchor" rel="noopener" target="_blank">@KnativeProject</a>)</li>
               <li name="5fcb" id="5fcb" class="graf graf--li graf-after--li">Knative on <a href="https://stackoverflow.com/questions/tagged/knative" data-href="https://stackoverflow.com/questions/tagged/knative" class="markup--anchor markup--li-anchor" rel="noopener" target="_blank">StackOverflow</a>

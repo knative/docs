@@ -30,7 +30,7 @@ type: "blog"
                 <div class="aspectRatioPlaceholder-fill">
                 </div>
                 <div class="progressiveMedia js-progressiveMedia graf-image" data-image-id="knative" data-width="200" data-height="200">
-                  <img src="https://www.knative.dev/blog/images/knative.png">
+                  <img src="../../../../images/knative.png">
                 </div>
               </div>
             </figure>
@@ -42,7 +42,7 @@ type: "blog"
                 <div class="aspectRatioPlaceholder-fill">
                 </div>
                 <div class="progressiveMedia js-progressiveMedia graf-image" data-image-id="grpc" data-width="200" data-height="200">
-                  <img src="https://www.knative.dev/blog/images/grpc.png">
+                  <img src="../../../../images/grpc.png">
                 </figure>
                 <p name="c7c6" id="c7c6" class="graf graf--p graf-after--figure">Another area where we had a lot of feedback almost since the initial release of Knative was the need for additional network protocol support besides basic HTTP. I’m happy to say that with the v0.4 release Knative now also <a href="https://www.knative.dev/docs/serving/samples/grpc-ping-go" data-href="https://www.knative.dev/docs/serving/samples/grpc-ping-go" class="markup--anchor markup--p-anchor" rel="nofollow noopener">supports</a> both HTTP2 and gRPC for ports named h2c. There are still some challenges with streaming RPC during cold-starts so we look forward to your feedback.</p>
                 <p name="b291" id="b291" class="graf graf--p graf-after--p">Additionally, Knative also now <a href="https://github.com/mchmarny/knative-ws-example" data-href="https://github.com/mchmarny/knative-ws-example" class="markup--anchor markup--p-anchor" rel="nofollow noopener" target="_blank">supports</a> the ability to upgrade an inbound HTTP connection for WebSockets. This change involved plumbing through various layers of serving infrastructure, including activator and Istio VirtualService, so we are happy to finally land this often requested feature in Knative.</p>
@@ -52,7 +52,7 @@ type: "blog"
                     <div class="aspectRatioPlaceholder-fill">
                     </div>
                     <div class="progressiveMedia js-progressiveMedia graf-image" data-image-id="istio" data-width="200" data-height="200">
-                      <img src="https://www.knative.dev/blog/images/istio.png" crossorigin="anonymous" class="progressiveMedia-thumbnail js-progressiveMedia-thumbnail">
+                      <img src="../../../../images/istio.png" crossorigin="anonymous" class="progressiveMedia-thumbnail js-progressiveMedia-thumbnail">
                     </figure>
                     <p name="353e" id="353e" class="graf graf--p graf-after--figure">As we indicated in the previous release, starting with the v0.4 release, Knative removes the customized Istio IngressGateway to enhance support for multiple versions of Istio and to reduce the number of needed load balancers. Users upgrading from the v0.3 release will need to reconfigure their DNS to point to the IP address exposed by istio-ingressgateway before upgrading, and remove the knative-ingressgateway Service and Deployment.</p>
                     <p name="c01a" id="c01a" class="graf graf--p graf-after--p">Finally, the v0.4 release of Knative serving adds an option to change the default ClusterIngress controller in the config-network ConfigMap from Istio if another controller is necessary.</p>
