@@ -24,23 +24,25 @@ the way we run this committee, based on feedback from the community.
 
 ## Charter
 
-1. Define, evolve, and promote the vision, values, mission, and scope of the project.
+1. Define, evolve, and promote the vision, values, mission, and scope of the
+   project.
 1. Define and evolve project governance structures and policies, including
-   project roles and how collaborators become members, approvers, leads,
-   and/or administrators. This includes policy for the creation and
-   administration of [working groups](./WORKING-GROUPS.md) and committees.
-1. Steward, control access, delegate access, and establishes processes regarding,
-   all Knative project resources and has the final say in the disposition of
-   those resources.
+   project roles and how collaborators become members, approvers, leads, and/or
+   administrators. This includes policy for the creation and administration of
+   [working groups](./WORKING-GROUPS.md) and committees.
+1. Steward, control access, delegate access, and establishes processes
+   regarding, all Knative project resources and has the final say in the
+   disposition of those resources.
 1. Manage the Knative brand and decide which things can be called "Knative" and
    how that mark can be used in relation to other efforts or vendors.
-1. Confirm/reject nominations to the KSC from organizations who are allocated seats.
+1. Confirm/reject nominations to the KSC from organizations who are allocated
+   seats.
 1. Confirm/reject nominations to the Technical Oversight Committee.
 1. Receive and handle reports about [code of conduct](./CODE-OF-CONDUCT.md)
    violations and maintain confidentiality.
-1. Receive security reports; work with the appropriate technical leads to
-   accept or reject the report; maintain the private nature of such reports
-   until disclosed to the broader community.
+1. Receive security reports; work with the appropriate technical leads to accept
+   or reject the report; maintain the private nature of such reports until
+   disclosed to the broader community.
 1. Act as the final escalation point and decider for any disputes, issues,
    clarifications, or escalations within the project scope.
 
@@ -49,7 +51,8 @@ the way we run this committee, based on feedback from the community.
 KSC may choose to delegate its authority to other committees as-needed. The
 committee currently recognizes this delegated authority for:
 
-- Technical guidance is delegated to the [Technical Oversight Committee](./TECH-OVERSIGHT-COMMITTEE.md).
+- Technical guidance is delegated to the
+  [Technical Oversight Committee](./TECH-OVERSIGHT-COMMITTEE.md).
 
 ## Committee Meetings
 
@@ -59,8 +62,8 @@ Given the private nature of many of these discussions (e.g. privacy, private
 emails to the committee, code of conduct violations, escalations, disputes
 between members, security reports, etc.) meetings are held in private.
 
-Meeting notes are available to members of the knative-dev mailing list
-(link to be added).
+Meeting notes are available to members of the knative-dev mailing list (link to
+be added).
 
 Questions and proposals for changes to governance are posted as issues in the
 [docs repo](https://github.com/knative/docs), and the KSC invites your feedback
@@ -71,14 +74,14 @@ there. See [Getting in touch](#getting-in-touch) for other options.
 Seats on the Steering Committee are held by an organization, not by the
 individual.
 
-The committee was created as the project was in its infancy, in order to
-tackle governance and overall project strategy. Because of the nature of the
-project and funding required, it was decided that strong corporate leadership
-was necessary for the project to ensure velocity. As the project grows and
-matures the KSC will, from time to time, consider if this policy should be
-changed.
+The committee was created as the project was in its infancy, in order to tackle
+governance and overall project strategy. Because of the nature of the project
+and funding required, it was decided that strong corporate leadership was
+necessary for the project to ensure velocity. As the project grows and matures
+the KSC will, from time to time, consider if this policy should be changed.
 
-The current membership of the committee is currently (listed alphabetically by first name):
+The current membership of the committee is currently (listed alphabetically by
+first name):
 
 | &nbsp;                                                   | Member         | Organization | Profile                                  |
 | -------------------------------------------------------- | -------------- | ------------ | ---------------------------------------- |
@@ -86,16 +89,16 @@ The current membership of the committee is currently (listed alphabetically by f
 | <img width="30px" src="https://github.com/mchmarny.png"> | Mark Chmarny   | Google       | [@mchmarny](https://github.com/mchmarny) |
 | <img width="30px" src="https://github.com/rgregg.png">   | Ryan Gregg     | Google       | [@rgregg](https://github.com/rgregg)     |
 | <img width="30px" src="https://github.com/isdal.png">    | Tomas Isdal    | Google       | [@isdal](https://github.com/isdal)       |
-|   | TBD | IBM      |        |
-|   | TBD | Pivotal  |        |
-|   | TBD | Red Hat  |        |
+|                                                          | TBD            | IBM          |                                          |
+|                                                          | TBD            | Pivotal      |                                          |
+|                                                          | TBD            | Red Hat      |                                          |
 
 There are currently three unfilled seats, as indicated by TBD.
 
 ### Allocation of seats
 
-Seats on the steering committee are allocated based upon contribution
-to the project by an organization. No final decision has been made on the exact
+Seats on the steering committee are allocated based upon contribution to the
+project by an organization. No final decision has been made on the exact
 formula.
 
 As the project continues to grow, we expect to add additional seats to the
@@ -132,8 +135,8 @@ pass with majority of the committee supporting it.
 
 Quorum is considered reached when at least half of the members are present.
 
-In case of extended absence, the organization of the absent member may appoint
-a single delegate from the same company during the absence.
+In case of extended absence, the organization of the absent member may appoint a
+single delegate from the same company during the absence.
 
 ## Changes to the charter
 
@@ -145,9 +148,10 @@ one week for comments and questions before a vote will occur.
 
 ## Getting in touch
 
-If you'd like to reach out to the committee, please drop a note
-to [knative-steering@googlegroups.com](mailto:knative-steering@googlegroups.com).
-This is a private discussion list to which all members of the committee have access.
+If you'd like to reach out to the committee, please drop a note to
+[knative-steering@googlegroups.com](mailto:knative-steering@googlegroups.com).
+This is a private discussion list to which all members of the committee have
+access.
 
 ---
 
