@@ -125,9 +125,11 @@ gcloud pubsub topics publish testing --message="Hello world"
 ## Verify
 
 We will verify that the published message was sent into the Knative eventing
-system by looking at the logs of the function subscribed to the `pubsub-test` channel.
+system by looking at the logs of the function subscribed to the `pubsub-test`
+channel.
 
-The function and the subscription were created by applying the `subscriber.yaml` manifest in the [deployment](#deployment) section above.
+The function and the subscription were created by applying the `subscriber.yaml`
+manifest in the [deployment](#deployment) section above.
 
 1. We need to wait for the downstream pods to get started and receive our event,
    wait 60 seconds.
