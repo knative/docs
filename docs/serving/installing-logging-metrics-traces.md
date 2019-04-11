@@ -226,7 +226,11 @@ To configure and setup monitoring:
 See [Accessing Logs](./accessing-logs.md) for more information about logs in
 Knative.
 
-## End to end traces
+## End to end request tracing
+
+You can choose from one of the following options to enable request tracing in your Knative Serving cluster.
+
+**Important**: Your cluster supports only a single request trace tool. If you want to replace a currently installed request trace tool, you must first uninstall that tool before installing the new tool.
 
 ### Zipkin
 
