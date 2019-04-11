@@ -3,20 +3,20 @@ import 'dart:io';
 import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart';
 
-void main() {
+Future main() async {
   // Find port to listen on from environment variable.
-  var port = int.tryParse(Platform.environment['PORT']) ?? 8080;
-  
+  var port = int.tryParse(Platform.environment['PORT'] ?? '8080');
+
   // Read $TARGET from environment variable.
   var target = Platform.environment['TARGET'] ?? 'World';
 
-  // Create handler.
-  var handler = Pipeline().addMiddleware(logRequests()).addHandler((request) {
-    return Response.ok('Hello $target');
-  });
+  Response handler(Request request) => Response.ok('Hello $target');
 
   // Serve handler on given port.
-  serve(handler, InternetAddress.anyIPv4, port).then((server) {
-    print('Serving at http://${server.address.host}:${server.port}');
-  });
+  var server = await serve(
+    Pipeline().addMiddleware(logRequests()).addHandler(handler),
+    InternetAddress.anyIPv4,
+    port,
+  );
+  print('Serving at http://${server.address.host}:${server.port}');
 }
