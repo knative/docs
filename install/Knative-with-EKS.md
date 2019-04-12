@@ -11,7 +11,66 @@ through creating a cluster with the correct specifications for Knative on Elasti
 
 ## Creating a Kubernetes cluster
 
-Follow the instruction on: https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html
+1.  Logon on with your AWS credential to the [AWS Cloudformation](https://console.aws.amazon.com/cloudformation).
+1.  Choose Create stack.
+1.  Choose a template, select Specify an Amazon S3 template URL.
+1.  Enter the following template URL to create a EKS VPC:
+
+    ```bash
+    https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2019-02-11/amazon-eks-vpc-sample.yaml
+    ```
+1.  Provide a name for the stack and keep the default values
+1.  Proceed to Review and Create
+1.  Take a note of the generated SecurityGroups and VpcId.
+1.  Install kubectl
+    ```bash
+    sudo apt-get install -y kubectl
+    ```
+1.  Download the Amazon EKS-vended aws-iam-authenticator binary from Amazon S3:
+
+    [Linux](https://amazon-eks.s3-us-west-2.amazonaws.com/1.12.7/2019-03-27/bin/linux/amd64/aws-iam-authenticator)
+    
+    [MacOS](https://amazon-eks.s3-us-west-2.amazonaws.com/1.12.7/2019-03-27/bin/darwin/amd64/aws-iam-authenticator)
+    
+    [Windows](https://amazon-eks.s3-us-west-2.amazonaws.com/1.12.7/2019-03-27/bin/windows/amd64/aws-iam-authenticator.exe)
+    
+1.  Add $HOME/bin to your PATH environment variable.
+
+    ```bash
+    echo 'export PATH=$HOME/bin:$PATH' >> ~/.bashrc
+    ```
+
+1.  Open the [IAM console]( https://console.aws.amazon.com/iam/).
+    Choose Roles, then Create role.
+    Choose EKS from the list of services, then Allows Amazon EKS to manage your clusters on your behalf for your use case, then Next: Permissions.
+    For Role name, enter eksServiceRole, then choose Create role.
+    Take note of the ARN of the newly created role
+
+1.  Replace cluster name, the Amazon Resource Name (ARN) of your Amazon EKS service role and run the create cluster command:
+
+    ```bash
+    aws eks --region region create-cluster --name devel --role-arn arn:aws:iam::111122223333:role/eks-service-role- AWSServiceRoleForAmazonEKS-EXAMPLEBKZRQR --resources-vpc-config subnetIds=subnet-a9189fe2,subnet-50432629,securityGroupIds=sg-f5c54184  
+    ```
+
+1. Update your kubectl configuration:
+
+    ```bash
+    aws eks --region region update-kubeconfig --name devel 
+    ```
+    
+1.  create your worker nodes
+
+    Select "Create Stack" 
+    Enter the following template.
+    For Choose a template, select Specify an Amazon S3 template URL.
+
+    ```bash
+    https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2019-02-11/amazon-eks-nodegroup.yaml 
+    ```
+    
+    Provide the stack name,cluster name, SecurityGroups, role ARN provided earlier.
+    Select the ami for your region from the [NodeImageId table](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html#eks-launch-workers)
+    
 
 ## Installing Istio
 
@@ -45,6 +104,8 @@ rerun the command to see the current status.
 > Note: Instead of rerunning the command, you can add `--watch` to the above
 > command to view the component's status updates in real time. Use CTRL+C to
 > exit watch mode.
+
+
 
 ## Installing Knative
 
