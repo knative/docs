@@ -65,6 +65,7 @@ specs for Knative on your platform of choice, then walk through installing all
 available Knative components and a set of observability plugins.
 
 - [Knative Install on Azure Kubernetes Service](./Knative-with-AKS.md)
+- [Knative Install on Amazon EKS](./Knative-with-EKS.md)
 - [Knative Install on Gardener](./Knative-with-Gardener.md)
 - [Knative Install on Google Kubernetes Engine](./Knative-with-GKE.md)
 - [Knative Install on IBM Cloud Kubernetes Service](./Knative-with-IKS.md)
