@@ -6,7 +6,7 @@ using pre-built images.
 ## Before you begin
 
 Knative requires a Kubernetes cluster v1.11 or newer. This guide walks you
-through creating a cluster with the correct specifications for Knative on Elastic Container Service for Kubernetes (Amazon EKS).
+through creating a cluster with the correct specifications for Knative on Elastic Container Service for Kubernetes ([Amazon EKS](https://aws.amazon.com/eks/)).
 
 
 ## Creating a Kubernetes cluster
