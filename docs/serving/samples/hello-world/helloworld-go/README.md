@@ -75,6 +75,8 @@ recreate the source files from this folder.
    # Use a Docker multi-stage build to create a lean production image.
    # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
    FROM alpine
+   # Add CA certificates so we can make HTTPS requests.
+   RUN apk --no-cache --update add ca-certificates
 
    # Copy the binary to the production image from the builder stage.
    COPY --from=builder /go/src/github.com/knative/docs/helloworld/helloworld /helloworld
