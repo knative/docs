@@ -74,6 +74,9 @@ minishift addons enable admin-user
 # Allow the containers to be run with uid 0
 minishift addons enable anyuid
 
+# Enable Admission Controller Webhook
+minishift addon enable admissions-webhook
+
 # start minishift
 minishift start
 ```
@@ -88,6 +91,8 @@ minishift start
   that is usually after successful start of Minishift
 - The [addon](https://docs.okd.io/latest/minishift/using/addons.html) **anyuid**
   allows the `default` service account to run the application with uid `0`
+- The [addon](https://docs.okd.io/latest/minishift/using/addons.html) **admissions-webhook**
+  allows cluster to register admissions webhooks
 
 - The command `minishift profile set knative` is required every time you start
   and stop minishift to make sure that you are on right `knative` minishift
@@ -106,45 +111,6 @@ minishift oc-env
 ```
 
 ### Preparing Knative Deployment
-
-#### Enable Admission Controller Webhook
-
-To be able to deploy and run serverless Knative applications, its required that
-you must enable the
-[Admission Controller Webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/).
-
-Run the following command to make OpenShift (run via minishift) to be configured
-for
-[Admission Controller Webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/):
-
-```shell
-# Enable admission controller webhooks
-# The configuration stanzas below look weird and are just to workaround for:
-# https://bugzilla.redhat.com/show_bug.cgi?id=1635918
-minishift openshift config set --target=kube --patch '{
-    "admissionConfig": {
-        "pluginConfig": {
-            "ValidatingAdmissionWebhook": {
-                "configuration": {
-                    "apiVersion": "apiserver.config.k8s.io/v1alpha1",
-                    "kind": "WebhookAdmission",
-                    "kubeConfigFile": "/dev/null"
-                }
-            },
-            "MutatingAdmissionWebhook": {
-                "configuration": {
-                    "apiVersion": "apiserver.config.k8s.io/v1alpha1",
-                    "kind": "WebhookAdmission",
-                    "kubeConfigFile": "/dev/null"
-                }
-            }
-        }
-    }
-}'
-
-# wait until the kube-apiserver is restarted
-until oc login -u admin -p admin; do sleep 5; done;
-```
 
 #### Configuring a OpenShift project
 
@@ -187,14 +153,14 @@ curl -s https://raw.githubusercontent.com/knative/docs/master/docs/install/scrip
 1. Run the following to install Istio:
 
    ```shell
-   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/istio-crds.yaml && \
+   oc apply --filename https://github.com/knative/serving/releases/download/v0.5.0/istio-crds.yaml && \
    oc apply --filename https://github.com/knative/serving/releases/download/v0.5.0/istio.yaml
    ```
 
    Note: the resources (CRDs) defined in the `istio-crds.yaml`file are also
    included in the `istio.yaml` file, but they are pulled out so that the CRD
    definitions are created first. If you see an error when creating resources
-   about an unknown type, run the second `kubectl apply` command again.
+   about an unknown type, run the second `oc apply` command again.
 
 2. Ensure the istio-sidecar-injector pods runs as privileged:
    ```shell
@@ -315,7 +281,7 @@ INGRESSGATEWAY=knative-ingressgateway
 # The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
 # Use `istio-ingressgateway` instead, since `knative-ingressgateway`
 # will be removed in Knative v0.4.
-if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
+if oc get configmap config-istio -n knative-serving &> /dev/null; then
     INGRESSGATEWAY=istio-ingressgateway
 fi
 
