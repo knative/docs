@@ -77,6 +77,9 @@ recreate the source files from this folder.
    # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
    FROM alpine
 
+   # Add CA certificates so we can make HTTPS requests.
+   RUN apk --no-cache --update add ca-certificatesAA
+
    # Copy the binary to the production image from the builder stage.
    COPY --from=builder /go/src/github.com/knative/docs/helloworld/helloworld /helloworld
 
