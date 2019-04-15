@@ -4,13 +4,11 @@ metadata:
   name: grpc-ping
   namespace: default
 spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        spec:
-          container:
-            image: docker.io/{username}/grpc-ping-go
-            ports:
-              - name: h2c
-                containerPort: 8080
+  template:
+    spec:
+      containers:
+      - image: docker.io/{username}/grpc-ping-go
+        ports:
+          - name: h2c
+            containerPort: 8080
 

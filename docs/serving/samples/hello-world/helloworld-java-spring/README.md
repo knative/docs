@@ -121,15 +121,13 @@ recreate the source files from this folder.
      name: helloworld-java-spring
      namespace: default
    spec:
-     runLatest:
-       configuration:
-         revisionTemplate:
-           spec:
-             container:
-               image: docker.io/{username}/helloworld-java-spring
-               env:
-                 - name: TARGET
-                   value: "Spring Boot Sample v1"
+     template:
+       spec:
+         containers:
+         - image: docker.io/{username}/helloworld-java-spring
+           env:
+             - name: TARGET
+               value: "Spring Boot Sample v1"
    ```
 
 ## Building and deploying the sample
