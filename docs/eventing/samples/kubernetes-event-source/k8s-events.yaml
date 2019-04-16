@@ -1,0 +1,11 @@
+apiVersion: sources.eventing.knative.dev/v1alpha1
+kind: KubernetesEventSource
+metadata:
+  name: testevents
+spec:
+  namespace: default
+  serviceAccountName: events-sa
+  sink:
+    apiVersion: eventing.knative.dev/v1alpha1
+    kind: Broker
+    name: default

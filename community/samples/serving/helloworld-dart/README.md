@@ -8,8 +8,8 @@ that you can use for testing. It reads in the env variable `TARGET` and prints
 ## Prerequisites
 
 - A Kubernetes cluster with Knative installed. Follow the
-  [installation instructions](https://github.com/knative/docs/blob/master/install/README.md)
-  if you need to create one.
+  [installation instructions](../../../install/README.md) if you need to create
+  one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
 - [dart-sdk](https://www.dartlang.org/tools/sdk#install) installed and
@@ -25,7 +25,7 @@ be created using the following instructions.
 
    ```yaml
    name: hello_world_dart
-   private: True # let's not accidentally publish this to pub.dartlang.org
+   publish_to: none # let's not accidentally publish this to pub.dartlang.org
    description: >-
      Hello world server example in dart.
    dependencies:

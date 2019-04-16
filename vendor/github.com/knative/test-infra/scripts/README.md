@@ -17,10 +17,15 @@ This is a helper script to run the presubmit tests. To use it:
    - run `/hack/verify-codegen.sh` (if it exists)
    - check licenses in all go packages
 
-   The markdown link checker tools doesn't check `localhost` links by default.
+   The markdown link checker tool doesn't check `localhost` links by default.
    Its configuration file, `markdown-link-check-config.json`, lives in the
    `test-infra/scripts` directory. To override it, create a file with the same
    name, containing the custom config in the `/test` directory.
+
+   The markdown lint tool ignores long lines by default. Its configuration file,
+   `markdown-lint-config.rc`, lives in the `test-infra/scripts` directory. To
+   override it, create a file with the same name, containing the custom config
+   in the `/test` directory.
 
 1. [optional] Customize the default build test runner, if you're using it. Set
    the following environment variables if the default values don't fit your needs:
@@ -28,6 +33,8 @@ This is a helper script to run the presubmit tests. To use it:
    - `DISABLE_MD_LINTING`: Disable linting markdown files, defaults to 0 (false).
    - `DISABLE_MD_LINK_CHECK`: Disable checking links in markdown files, defaults
      to 0 (false).
+   - `PRESUBMIT_TEST_FAIL_FAST`: Fail the presubmit test immediately if a test fails,
+     defaults to 0 (false).
 
 1. [optional] Define the functions `pre_build_tests()` and/or
    `post_build_tests()`. These functions will be called before or after the
@@ -101,8 +108,10 @@ This is a helper script for Knative E2E test scripts. To use it:
    if the default values don't fit your needs:
 
    - `E2E_CLUSTER_REGION`: Cluster region, defaults to `us-central1`.
+   - `E2E_CLUSTER_BACKUP_REGIONS`: Space-separated list of regions to retry test cluster creation in case of stockout. Defaults to `us-west1 us-east1`.
    - `E2E_CLUSTER_ZONE`: Cluster zone (e.g., `a`), defaults to none (i.e. use a regional
      cluster).
+   - `E2E_CLUSTER_BACKUP_ZONES`: Space-separated list of zones to retry test cluster creation in case of stockout. If defined, `E2E_CLUSTER_BACKUP_REGIONS` will be ignored thus it defaults to none.
    - `E2E_CLUSTER_MACHINE`: Cluster node machine type, defaults to `n1-standard-4}`.
    - `E2E_MIN_CLUSTER_NODES`: Minimum number of nodes in the cluster when autoscaling,
      defaults to 1.
@@ -111,12 +120,29 @@ This is a helper script for Knative E2E test scripts. To use it:
 
 1. Source the script.
 
-1. [optional] Write the `teardown()` function, which will tear down your test
+1. [optional] Write the `knative_setup()` function, which will set up your
+   system under test (e.g., Knative Serving). This function won't be called if you
+   use the `--skip-knative-setup` flag.
+
+1. [optional] Write the `knative_teardown()` function, which will tear down your
+   system under test (e.g., Knative Serving). This function won't be called if you
+   use the `--skip-knative-setup` flag.
+
+1. [optional] Write the `test_setup()` function, which will set up the test
    resources.
+
+1. [optional] Write the `test_teardown()` function, which will tear down the test
+   resources.
+
+1. [optional] Write the `cluster_setup()` function, which will set up any resources
+   before the test cluster is created.
+
+1. [optional] Write the `cluster_teardown()` function, which will tear down any
+   resources after the test cluster is destroyed.
 
 1. [optional] Write the `dump_extra_cluster_state()` function. It will be
    called when a test fails, and can dump extra information about the current state
-   of the cluster (tipically using `kubectl`).
+   of the cluster (typically using `kubectl`).
 
 1. [optional] Write the `parse_flags()` function. It will be called whenever an
    unrecognized flag is passed to the script, allowing you to define your own flags.
@@ -128,14 +154,11 @@ This is a helper script for Knative E2E test scripts. To use it:
 
 1. Write logic for the end-to-end tests. Run all go tests using `go_test_e2e()`
    (or `report_go_test()` if you need a more fine-grained control) and call
-   `fail_test()` or `success()` if any of them failed. The environment variables
-   `DOCKER_REPO_OVERRIDE`, `K8S_CLUSTER_OVERRIDE` and `K8S_USER_OVERRIDE` will be
-   set according to the test cluster. You can also use the following boolean (0 is
-   false, 1 is true) environment variables for the logic:
+   `fail_test()` or `success()` if any of them failed. The environment variable
+   `KO_DOCKER_REPO` will be set according to the test cluster. You can also use
+   the following boolean (0 is false, 1 is true) environment variables for the logic:
 
    - `EMIT_METRICS`: true if `--emit-metrics` was passed.
-   - `USING_EXISTING_CLUSTER`: true if the test cluster is an already existing one,
-     and not a temporary cluster created by `kubetest`.
 
    All environment variables above are marked read-only.
 
@@ -144,12 +167,12 @@ This is a helper script for Knative E2E test scripts. To use it:
 1. Calling your script without arguments will create a new cluster in the GCP
    project `$PROJECT_ID` and run the tests against it.
 
-1. Calling your script with `--run-tests` and the variables `K8S_CLUSTER_OVERRIDE`,
-   `K8S_USER_OVERRIDE` and `DOCKER_REPO_OVERRIDE` set will immediately start the
-   tests against the cluster.
+1. Calling your script with `--run-tests` and the variable `KO_DOCKER_REPO` set
+   will immediately start the tests against the cluster currently configured for
+   `kubectl`.
 
 1. You can force running the tests against a specific GKE cluster version by using
-   the `--cluster-version` flag and passing a X.Y.Z version as the flag value.
+   the `--cluster-version` flag and passing a full version as the flag value.
 
 ### Sample end-to-end test script
 
@@ -165,8 +188,11 @@ E2E_CLUSTER_REGION=us-west2
 
 source vendor/github.com/knative/test-infra/scripts/e2e-tests.sh
 
-function teardown() {
-  echo "TODO: tear down test resources"
+function knative_setup() {
+  start_latest_knative_serving
+  if (( WAIT_FOR_KNATIVE )); then
+    wait_until_pods_running knative-serving || fail_test "Knative Serving not up"
+  fi
 }
 
 function parse_flags() {
@@ -181,12 +207,6 @@ WAIT_FOR_KNATIVE=1
 
 initialize $@
 
-start_latest_knative_serving
-
-if (( WAIT_FOR_KNATIVE )); then
-  wait_until_pods_running knative-serving || fail_test "Knative Serving is not up"
-fi
-
 # TODO: use go_test_e2e to run the tests.
 kubectl get pods || fail_test
 
@@ -199,16 +219,14 @@ This is a helper script for Knative release scripts. To use it:
 
 1. Source the script.
 
-1. Call the `initialize()` function passing `$@` (without quotes).
+1. [optional] By default, the release script will run `./test/presubmit-tests.sh`
+   as the release validation tests. If you need to run something else, set the
+   environment variable `VALIDATION_TESTS` to the executable to run.
 
-1. Call the `run_validation_tests()` function passing the script or executable that
-   runs the release validation tests. It will call the script to run the tests unless
-   `--skip_tests` was passed.
-
-1. Write logic for the release process. Call `publish_yaml()` to publish the manifest(s),
-   `tag_releases_in_yaml()` to tag the generated images, `branch_release()` to branch
-   named releases. Use the following boolean (0 is false, 1 is true) and string environment
-   variables for the logic:
+1. Write logic for building the release in a function named `build_release()`.
+   Set the environment variable `YAMLS_TO_PUBLISH` to the list of yaml files created,
+   space separated. Use the following boolean (0 is false, 1 is true) and string
+   environment variables for the logic:
 
    - `RELEASE_VERSION`: contains the release version if `--version` was passed. This
      also overrides the value of the `TAG` variable as `v<version>`.
@@ -222,36 +240,31 @@ This is a helper script for Knative release scripts. To use it:
    - `KO_DOCKER_REPO`: contains the GCR to store the images if `--release-gcr` was
      passed, otherwise the default value `gcr.io/knative-nightly` will be used. It
      is set to `ko.local` if `--publish` was not passed.
-   - `SKIP_TESTS`: true if `--skip-tests` was passed. This is handled automatically
-     by the `run_validation_tests()` function.
+   - `SKIP_TESTS`: true if `--skip-tests` was passed. This is handled automatically.
    - `TAG_RELEASE`: true if `--tag-release` was passed. In this case, the environment
      variable `TAG` will contain the release tag in the form `vYYYYMMDD-<commit_short_hash>`.
    - `PUBLISH_RELEASE`: true if `--publish` was passed. In this case, the environment
      variable `KO_FLAGS` will be updated with the `-L` option.
-   - `BRANCH_RELEASE`: true if both `--version` and `--publish-release` were passed.
+   - `PUBLISH_TO_GITHUB`: true if `--version`, `--branch` and `--publish-release`
+     were passed.
 
    All boolean environment variables default to false for safety.
 
    All environment variables above, except `KO_FLAGS`, are marked read-only once
-   `initialize()` is called.
+   `main()` is called (see below).
+
+1. Call the `main()` function passing `$@` (without quotes).
 
 ### Sample release script
 
 ```bash
 source vendor/github.com/knative/test-infra/scripts/release.sh
 
-initialize $@
+function build_release() {
+  # config/ contains the manifests
+  ko resolve ${KO_FLAGS} -f config/ > release.yaml
+  YAMLS_TO_PUBLISH="release.yaml"
+}
 
-run_validation_tests ./test/presubmit-tests.sh
-
-# config/ contains the manifests
-ko resolve ${KO_FLAGS} -f config/ > release.yaml
-
-tag_images_in_yaml release.yaml
-
-if (( PUBLISH_RELEASE )); then
-  publish_yaml release.yaml
-fi
-
-branch_release "Knative Foo" release.yaml
+main $@
 ```
