@@ -1,4 +1,9 @@
-# Accessing logs
+---
+title: "Accessing logs"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+weight: 5
+type: "docs"
+---
 
 If you have not yet installed the logging and monitoring components, go through
 the [installation instructions](./installing-logging-metrics-traces.md) to set
@@ -23,7 +28,7 @@ up the necessary components first.
 
   The Discover tab of the Kibana UI looks like this:
 
-  ![Kibana UI Discover tab](./images/kibana-discover-tab-annotated.png)
+  ![Kibana UI Discover tab](../images/kibana-discover-tab-annotated.png)
 
   You can change the time frame of logs Kibana displays in the upper right
   corner of the screen. The main search bar is across the top of the Discover

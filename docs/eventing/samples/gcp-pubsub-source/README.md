@@ -1,5 +1,3 @@
-# GCP Cloud Pub/Sub - Source
-
 This sample shows how to configure the GCP PubSub event source. This event
 source is most useful as a bridge from other GCP services, such as
 [Cloud Storage](https://cloud.google.com/storage/docs/pubsub-notifications),
@@ -16,14 +14,13 @@ source is most useful as a bridge from other GCP services, such as
    project id, and also set your project ID as default using
    `gcloud config set project $PROJECT_ID`.
 
-1. Setup [Knative Serving](https://github.com/knative/docs/blob/master/install)
+1. Setup [Knative Serving](../../../install)
 
-1. Setup
-   [Knative Eventing](https://github.com/knative/docs/tree/master/eventing). In
-   addition, install the GCP PubSub event source from `release-gcppubsub.yaml`:
+1. Setup [Knative Eventing](../../../eventing). In addition, install the GCP
+   PubSub event source from `release-gcppubsub.yaml`:
 
    ```shell
-   kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.3.0/release-gcppubsub.yaml
+   kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.5.0/gcppubsub.yaml
    ```
 
 1. Enable the `Cloud Pub/Sub API` on your project:
@@ -75,26 +72,13 @@ source is most useful as a bridge from other GCP services, such as
 
 ## Deployment
 
-1. Create a Channel. This example creates a Channel called `pubsub-test` which
-   uses the in-memory provisioner, with the following definition:
+1. Create the `default` Broker in your namespace. These instructions assume the
+   namespace `default`, feel free to change to any other namespace you would
+   like to use instead:
 
-   ```yaml
-   apiVersion: eventing.knative.dev/v1alpha1
-   kind: Channel
-   metadata:
-     name: pubsub-test
-   spec:
-     provisioner:
-       apiVersion: eventing.knative.dev/v1alpha1
-       kind: ClusterChannelProvisioner
-       name: in-memory-channel
-   ```
-
-   If you're in the samples directory, you can apply the `channel.yaml` file:
-
-   ```shell
-   kubectl apply --filename channel.yaml
-   ```
+```shell
+kubectl label namespace default knative-eventing-injection=enabled
+```
 
 1. Create a GCP PubSub Topic. If you change its name (`testing`), you also need
    to update the `topic` in the
@@ -112,8 +96,8 @@ source is most useful as a bridge from other GCP services, such as
    apply in one command:
 
    ```shell
-    sed "s/MY_GCP_PROJECT/$PROJECT_ID/g" gcp-pubsub-source.yaml | \
-        kubectl apply --filename -
+   sed "s/MY_GCP_PROJECT/$PROJECT_ID/g" gcp-pubsub-source.yaml | \
+       kubectl apply --filename -
    ```
 
    If you are replacing `MY_GCP_PROJECT` manually, then make sure you apply the
@@ -123,10 +107,11 @@ source is most useful as a bridge from other GCP services, such as
    kubectl apply --filename gcp-pubsub-source.yaml
    ```
 
-1. Create a function and subscribe it to the `pubsub-test` channel:
+1. Create a function and create a Trigger that will send all events from the
+   Broker to the function:
 
    ```shell
-   kubectl apply --filename subscriber.yaml
+   kubectl apply --filename trigger.yaml
    ```
 
 ## Publish
@@ -140,9 +125,11 @@ gcloud pubsub topics publish testing --message="Hello world"
 ## Verify
 
 We will verify that the published message was sent into the Knative eventing
-system by looking at what is downstream of the `GcpPubSubSource`. If you
-deployed the [Subscriber](#subscriber), then continue using this section. If
-not, then you will need to look downstream yourself.
+system by looking at the logs of the function subscribed to the `pubsub-test`
+channel.
+
+The function and the subscription were created by applying the `subscriber.yaml`
+manifest in the [deployment](#deployment) section above.
 
 1. We need to wait for the downstream pods to get started and receive our event,
    wait 60 seconds.
@@ -150,7 +137,7 @@ not, then you will need to look downstream yourself.
    - You can check the status of the downstream pods with:
 
      ```shell
-     kubectl get pods --selector serving.knative.dev/service=message-dumper
+     kubectl get pods --selector serving.knative.dev/service=event-display
      ```
 
      You should see at least one.
@@ -158,7 +145,7 @@ not, then you will need to look downstream yourself.
 1. Inspect the logs of the subscriber:
 
    ```shell
-   kubectl logs --selector serving.knative.dev/service=message-dumper -c user-container
+   kubectl logs --selector serving.knative.dev/service=event-display -c user-container
    ```
 
 You should see log lines similar to:

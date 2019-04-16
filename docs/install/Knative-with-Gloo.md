@@ -1,4 +1,9 @@
-# Knative Install using Gloo on a Kubernetes Cluster
+---
+title: "Knative Install using Gloo on a Kubernetes Cluster"
+linkTitle: "Gloo on a Cluster"
+weight: 10
+type: "docs"
+---
 
 This guide walks you through the installation of the latest version of Knative
 using pre-built images.
@@ -70,7 +75,7 @@ Now that your cluster has Knative installed, you can see what Knative has to
 offer.
 
 To deploy your first app with Knative, follow the step-by-step
-[Getting Started with Knative App Deployment](getting-started-knative-app.md)
+[Getting Started with Knative App Deployment](./getting-started-knative-app.md)
 guide.
 
 Note that when you've finished deploying the app, you'll need to connect to the
@@ -94,8 +99,8 @@ curl -H "Host: helloworld-go.myproject.example.com" $GATEWAY_URL
 ```
 
 The full instructions for the
-[Go Hello-World Sample](../serving/samples/helloworld-go) with this substitution
-are published bellow:
+[Go Hello-World Sample](../serving/samples/hello-world/helloworld-go) with this
+substitution are published bellow:
 
 ### Deploy the Hello-World Go App:
 
@@ -157,6 +162,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -v -o helloworld
 # Use a Docker multi-stage build to create a lean production image.
 # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
 FROM alpine
+RUN apk add --no-cache ca-certificates
 
 # Copy the binary to the production image from the builder stage.
 COPY --from=builder /go/src/github.com/knative/docs/helloworld/helloworld /helloworld
@@ -253,12 +259,12 @@ Hello Go Sample v1!
 
 > Note: Add `-v` option to get more detail if the `curl` command failed.
 
-Removing the sample app deployment  
-To remove the sample app from your cluster, delete the service record:
+Removing the sample app deployment To remove the sample app from your cluster,
+delete the service record:
 
 ```bash
 kubectl delete --filename service.yaml
 ```
 
 Great! our Knative ingress is up and running. See
-https://github.com/knative/docs for more information on using Knative.
+[Knative documentation](../README.md) for more information on using Knative.

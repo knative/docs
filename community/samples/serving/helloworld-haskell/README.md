@@ -7,8 +7,8 @@ specified, it will use "World" as the TARGET.
 ## Prerequisites
 
 - A Kubernetes cluster with Knative installed. Follow the
-  [installation instructions](https://github.com/knative/docs/blob/master/install/README.md)
-  if you need to create one.
+  [installation instructions](../../../install/README.md) if you need to create
+  one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
 

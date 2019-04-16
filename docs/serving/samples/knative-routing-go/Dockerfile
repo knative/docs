@@ -17,7 +17,7 @@ FROM golang AS builder
 WORKDIR /go/src/github.com/knative/docs/
 ADD . /go/src/github.com/knative/docs/
 
-RUN CGO_ENABLED=0 go build ./serving/samples/knative-routing-go/
+RUN CGO_ENABLED=0 go build ./docs/serving/samples/knative-routing-go/
 
 FROM gcr.io/distroless/base
 

@@ -179,7 +179,8 @@ main() {
         "${KNATIVE_EVENTING_SOURCES_OUT_FILE}" "${knative_eventing_sources_root}"
 
     log "SUCCESS: Generated docs written to ${out_dir}/."
-    log "Copy the files in reference/ directory to knative/docs."
+    log "Opening the ${out_dir}/ directory. You can now copy these API files"
+    log "from ${out_dir}/, into the 'docs/reference/' directory of knative/docs."
     if command -v xdg-open >/dev/null; then
         xdg-open "${out_dir}/"
     elif command -v open >/dev/null; then

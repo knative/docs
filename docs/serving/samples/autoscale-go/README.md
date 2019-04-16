@@ -1,15 +1,11 @@
-# Autoscale Sample
-
 A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 
 ## Prerequisites
 
-1. A Kubernetes cluster with
-   [Knative Serving](https://github.com/knative/docs/blob/master/install/README.md)
+1. A Kubernetes cluster with [Knative Serving](../../../install/README.md)
    installed.
-1. A
-   [metrics installation](https://github.com/knative/docs/blob/master/serving/installing-logging-metrics-traces.md)
-   for viewing scaling graphs (optional).
+1. A [metrics installation](../../installing-logging-metrics-traces.md) for
+   viewing scaling graphs (optional).
 1. The `hey` load generator installed (`go get -u github.com/rakyll/hey`).
 1. Clone this repository, and move into the sample directory:
 
@@ -23,7 +19,7 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 1. Deploy the [sample](./service.yaml) Knative Service:
 
    ```
-   kubectl apply --filename serving/samples/autoscale-go/service.yaml
+   kubectl apply --filename docs/serving/samples/autoscale-go/service.yaml
    ```
 
 1. Find the ingress hostname and IP and export as an environment variable:
@@ -65,7 +61,7 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
      && kubectl get pods
    ```
 
-   ```
+   ```shell
    Summary:
      Total:        30.3379 secs
      Slowest:      0.7433 secs
@@ -109,7 +105,7 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
      [200] 5424 responses
    ```
 
-   ```
+   ```shell
    NAME                                             READY   STATUS    RESTARTS   AGE
    autoscale-go-00001-deployment-78cdc67bf4-2w4sk   3/3     Running   0          26s
    autoscale-go-00001-deployment-78cdc67bf4-dd2zb   3/3     Running   0          24s
@@ -125,8 +121,8 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 Knative Serving autoscaling is based on the average number of in-flight requests
 per pod (concurrency). The system has a default
 [target concurrency of 100](https://github.com/knative/serving/blob/3f00c39e289ed4bfb84019131651c2e4ea660ab5/config/config-autoscaler.yaml#L35-L41)
-but [we used 10](service.yaml#L25-L26) for our service. We loaded the service with
-50 concurrent requests so the autoscaler created 5 pods
+but [we used 10](service.yaml#L25-L26) for our service. We loaded the service
+with 50 concurrent requests so the autoscaler created 5 pods
 (`50 concurrent requests / target of 10 = 5 pods`)
 
 #### Panic
@@ -179,7 +175,7 @@ spec:
         metadata:
           annotations:
             # Standard Kubernetes CPU-based autoscaling.
-            autoscaling.knative.dev/class:  hpa.autoscaling.knative.dev
+            autoscaling.knative.dev/class: hpa.autoscaling.knative.dev
             autoscaling.knative.dev/metric: cpu
         spec:
           container:
@@ -202,7 +198,7 @@ spec:
         metadata:
           annotations:
             # Knative concurrency-based autoscaling (default).
-            autoscaling.knative.dev/class:  kpa.autoscaling.knative.dev
+            autoscaling.knative.dev/class: kpa.autoscaling.knative.dev
             autoscaling.knative.dev/metric: concurrency
             # Target 10 requests in-flight per pod.
             autoscaling.knative.dev/target: "10"
@@ -229,7 +225,7 @@ customization (32 minutes).
 View the Knative Serving Scaling and Request dashboards (if configured).
 
 ```
-kubectl port-forward --namespace knative-monitoring $(kubectl get pods --namespace knative-monitoring --selector=app=grafana --output=jsonpath="{.items..metadata.name}") 3000
+kubectl port-forward --namespace knative-monitoring $(kubectl get pods --namespace knative-monitoring --selector=app=grafana  --output=jsonpath="{.items..metadata.name}") 3000
 ```
 
 ![scale dashboard](scale-dashboard.png)
@@ -273,6 +269,7 @@ kubectl port-forward --namespace knative-monitoring $(kubectl get pods --namespa
 
 1. Send 60 seconds of traffic with heavy memory usage (1 gb/request, total 5
    gb).
+
    ```shell
    hey -z 60s -c 5 \
      -host "autoscale-go.default.example.com" \
@@ -282,9 +279,9 @@ kubectl port-forward --namespace knative-monitoring $(kubectl get pods --namespa
 ## Cleanup
 
 ```
-kubectl delete --filename serving/samples/autoscale-go/service.yaml
+kubectl delete --filename docs/serving/samples/autoscale-go/service.yaml
 ```
 
 ## Further reading
 
-1. [Autoscaling Developer Documentation](https://github.com/knative/serving/blob/master/docs/scaling/DEVELOPMENT.md)
+[Autoscaling Developer Documentation](https://github.com/knative/serving/blob/master/docs/scaling/DEVELOPMENT.md)

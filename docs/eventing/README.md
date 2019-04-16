@@ -1,5 +1,3 @@
-# Knative Eventing
-
 Knative Eventing is a system that is designed to address a common need for cloud
 native development and provides composable primitives to enable late-binding
 event sources and event consumers.
@@ -41,10 +39,24 @@ generic interfaces that can be implemented by multiple Kubernetes resources:
    returned events may be further processed in the same way that events from an
    external event source are processed.
 
+### Event brokers and triggers
+
+As of v0.5, Knative Eventing defines Broker and Trigger objects to make it
+easier to filter events.
+
+A Broker provides a bucket of events which can be selected by attribute. It
+receives events and forwards them to subscribers defined by one or more matching
+Triggers.
+
+A Trigger describes a filter on event attributes which should be delivered to an
+Addressable. You can create as many Triggers as necessary.
+
+![Broker Trigger Diagram](./images/broker-trigger-overview.svg)
+
 ### Event channels and subscriptions
 
-Knative Eventing also defines a single event forwarding and persistence layer,
-called a
+Knative Eventing also defines an event forwarding and persistence layer, called
+a
 [**Channel**](https://github.com/knative/eventing/blob/master/pkg/apis/eventing/v1alpha1/channel_types.go#L36).
 Messaging implementations may provide implementations of Channels via the
 [ClusterChannelProvisioner](https://github.com/knative/eventing/blob/master/pkg/apis/eventing/v1alpha1/cluster_channel_provisioner_types.go#L35)
@@ -62,7 +74,7 @@ event sources. Sources manage registration and delivery of events from external
 systems using Kubernetes
 [Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
 Learn more about Eventing development in the
-[Eventing work group](https://github.com/knative/docs/blob/master/community/WORKING-GROUPS.md#events).
+[Eventing work group](../../contributing/WORKING-GROUPS.md#events).
 
 ## Installation
 
@@ -74,25 +86,6 @@ Many of the sources require making outbound connections to create the event
 subscription, and if you have any functions that make use of any external (to
 cluster) services, you must enable it also for them to work.
 [Follow the instructions to configure outbound network access](../serving/outbound-network-access.md).
-
-Install the core Knative Eventing (which provides an in-memory
-ChannelProvisioner) and the core sources (which provides the Kubernetes Events,
-GitHub, and "Container" Sources) with the following commands:
-
-```bash
-kubectl apply --filename https://github.com/knative/eventing/releases/download/v0.4.0/release.yaml
-kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.4.0/release.yaml
-```
-
-In addition to the core sources, there are [other sources](./sources/README.md)
-that you can install.
-
-This document will be updated as additional sources (which are custom resource
-definitions and an associated controller) and channels
-(ClusterChannelProvisioners and controllers) become available.
-
-Check out the [Configuration](#configuration) section to learn more about
-operating Knative Eventing.
 
 ## Architecture
 
@@ -111,13 +104,13 @@ The eventing infrastructure supports two forms of event delivery at the moment:
    to the requested destinations and should buffer the events if the destination
    Service is unavailable.
 
-![Control plane object model](control-plane.png)
+![Control plane object model](./images/control-plane.png)
 
 The actual message forwarding is implemented by multiple data plane components
 which provide observability, persistence, and translation between different
 messaging protocols.
 
-![Data plane implementation](data-plane.png)
+![Data plane implementation](./images/data-plane.png)
 
 <!-- TODO(evankanderson): add documentation for Kafka bus once it is available. -->
 
@@ -129,10 +122,13 @@ Knative Eventing defines the following Sources in the
 `sources.eventing.knative.dev` API group. Types below are declared in golang
 format, but may be expressed as simple lists, etc in YAML. All Sources should be
 part of the `sources` category, so you can list all existing Sources with
-`kubectl get sources`. The currently-implemented Sources are described below:
+`kubectl get sources`. The currently-implemented Sources are described below.
+
+In addition to the core sources, there are [other sources](./sources/README.md)
+that you can install.
 
 _Want to implement your own source? Check out
-[the tutorial](samples/writing-a-source/README.md)._
+[the tutorial](./samples/writing-a-source/README.md)._
 
 ### KubernetesEventSource
 
@@ -177,7 +173,11 @@ The GitHubSource fires a new event for selected
 - `sink`:
   [ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#objectreference-v1-core)
   A reference to the object that should receive events.
-- `githubAPIURL`: `string` Optional field to specify the base URL for API requests. Defaults to the public GitHub API if not specified, but can be set to a domain endpoint to use with GitHub Enterprise, for example, `https://github.mycompany.com/api/v3/`. This base URL should always be specified with a trailing slash.
+- `githubAPIURL`: `string` Optional field to specify the base URL for API
+  requests. Defaults to the public GitHub API if not specified, but can be set
+  to a domain endpoint to use with GitHub Enterprise, for example,
+  `https://github.mycompany.com/api/v3/`. This base URL should always be
+  specified with a trailing slash.
 
 See the [GitHub Source](samples/github-source) example.
 
@@ -254,15 +254,61 @@ The CronJobSource fires events based on given
 
 See the [Cronjob Source](samples/cronjob-source) example.
 
+### KafkaSource
+
+The KafkaSource reads events from an Apache Kafka Cluster, and passes these to a
+Knative Serving application so that they can be consumed.
+
+**Spec fields**:
+
+- `consumerGroup`: `string` Name of a Kafka consumer group.
+- `bootstrapServers`: `string` Comma separated list of `hostname:port` pairs for
+  the Kafka Broker.
+- `topics`: `string` Name of the Kafka topic to consume messages from.
+
+See the
+[Kafka Source](https://github.com/knative/eventing-sources/tree/master/contrib/kafka/samples)
+example.
+
+### CamelSource
+
+A CamelSource is an event source that can represent any existing
+[Apache Camel component](https://github.com/apache/camel/tree/master/components)
+that provides a consumer side, and enables publishing events to an addressable
+endpoint. Each Camel endpoint has the form of a URI where the scheme is the ID
+of the component to use.
+
+CamelSource requires [Camel-K](https://github.com/apache/camel-k#installation)
+to be installed into the current namespace.
+
+**Spec fields**:
+
+- source: information on the kind of Camel source that should be created.
+  - component: the default kind of source, enables creating an EventSource by
+    configuring a single Camel component.
+    - uri: `string` contains the Camel URI that should be used to push events
+      into the target sink.
+    - properties: `key/value map` contains Camel global options or component
+      specific configuration. Options are available in the documentation of each
+      existing Apache Camel component.
+- serviceAccountName: `string` an optional service account that can be used to
+  run the source pod.
+- image: `string` an optional base image to use for the source pod, mainly for
+  development purposes.
+
+See the
+[CamelSource](https://github.com/knative/eventing-sources/blob/master/contrib/camel/samples/README.md)
+example.
+
 ## Getting Started
 
 - [Setup Knative Serving](../install/README.md)
-- [Install Eventing components](#installation)
-- [Run samples](samples/)
+- [Install the Eventing component](#installation)
+- [Run samples](./samples/)
 
 ## Configuration
 
-- [Default Channels](channels/default-channels.md) provide a way to choose the
+- [Default Channels](./channels/default-channels.md) provide a way to choose the
   persistence strategy for Channels across the cluster.
 
 ---

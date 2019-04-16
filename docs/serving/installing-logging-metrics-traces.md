@@ -1,4 +1,9 @@
-# Installing Logging, Metrics, and Traces
+---
+title: "Installing logging, metrics, and traces"
+#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+weight: 40
+type: "docs"
+---
 
 If you followed one of the
 [comprehensive install guides](../install/README.md#install-guides) or you
@@ -15,7 +20,7 @@ sections to do so now.
 1. Run the following command to install Prometheus and Grafana:
 
    ```shell
-   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.4.0/monitoring-metrics-prometheus.yaml
+   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/monitoring-metrics-prometheus.yaml
    ```
 
 1. Ensure that the `grafana-*`, `kibana-logging-*`, `kube-state-metrics-*`,
@@ -52,14 +57,14 @@ install:
 
 1. [Elasticsearch and Kibana](#elasticsearch-and-kibana)
 1. [Stackdriver](#stackdriver)
-1. [Custom logging plugin](setting-up-a-logging-plugin.md)
+1. [Custom logging plugin](./setting-up-a-logging-plugin.md)
 
 ### Elasticsearch and Kibana
 
 1. Run the following command to install an ELK stack:
 
    ```shell
-   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.4.0/monitoring-logs-elasticsearch.yaml
+   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/monitoring-logs-elasticsearch.yaml
    ```
 
 1. Ensure that the `elasticsearch-logging-*`, `fluentd-ds-*`, and
@@ -135,7 +140,7 @@ explore.
   `Index pattern` and select `@timestamp` from `Time Filter field name` and
   click on `Create` button.
 
-![Create logstash-* index](images/kibana-landing-page-configure-index.png)
+![Create logstash-* index](../images/kibana-landing-page-configure-index.png)
 
 See [Accessing Logs](./accessing-logs.md) for more information about logs in
 Knative.
@@ -153,9 +158,10 @@ To configure and setup monitoring:
     ```
 
 1.  Choose a container image that meets the
-    [Fluentd image requirements](fluentd/README.md#requirements). For example,
-    you can use a public image. Or you can create a custom one and upload the
-    image to a container registry which your cluster has read access to.
+    [Fluentd image requirements](./fluentd-requirements.md#requirements). For
+    example, you can use a public image. Or you can create a custom one and
+    upload the image to a container registry which your cluster has read access
+    to.
 
     You must configure and build your own Fluentd image if either of the
     following are true:
@@ -165,7 +171,7 @@ To configure and setup monitoring:
     - You want to send logs to another GCP project.
 
 1.  Follow the instructions in
-    ["Setting up a logging plugin"](setting-up-a-logging-plugin.md#Configuring)
+    ["Setting up a logging plugin"](./setting-up-a-logging-plugin.md#Configuring)
     to configure the stackdriver components settings.
 
 1.  Install Knative Stackdriver components by running the following command from
@@ -226,14 +232,14 @@ Knative.
   traces, run:
 
   ```shell
-  kubectl apply --filename https://github.com/knative/serving/releases/download/v0.4.0/monitoring-tracing-zipkin-in-mem.yaml
+  kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/monitoring-tracing-zipkin-in-mem.yaml
   ```
 
 - If Elasticsearch is installed and you want to persist end to end traces, first
   run:
 
   ```shell
-  kubectl apply --filename https://github.com/knative/serving/releases/download/v0.4.0/monitoring-tracing-zipkin.yaml
+  kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/monitoring-tracing-zipkin.yaml
   ```
 
   Next, create an Elasticsearch index for end to end traces:

@@ -1,4 +1,3 @@
-# GitHub Source example
 
 GitHub Source example shows how to wire GitHub events for consumption
 by a Knative Service.
@@ -10,15 +9,14 @@ by a Knative Service.
 You will need:
 
 1. An internet-accessible Kubernetes cluster with Knative Serving
-   installed. Follow the [installation
-   instructions](https://github.com/knative/docs/blob/master/install/README.md)
+   installed. Follow the [installation instructions](../../../install/README.md)
    if you need to create one.
 1. Ensure Knative Serving is [configured with a domain
-   name](https://github.com/knative/docs/blob/master/serving/using-a-custom-domain.md)
+   name](../../../serving/using-a-custom-domain.md)
    that allows GitHub to call into the cluster.
-1. If you're using GKE, you'll also want to [assign a static IP address](https://github.com/knative/docs/blob/master/serving/gke-assigning-static-ip-address.md).
+1. If you're using GKE, you'll also want to [assign a static IP address](../../../serving/gke-assigning-static-ip-address.md).
 1. Install [Knative
-   Eventing](https://github.com/knative/docs/tree/master/eventing). Those
+   Eventing](../../../eventing). Those
    instructions also install the default eventing sources, including
    the `GitHubSource` we'll use.
 
@@ -32,14 +30,14 @@ defines this basic service.
 apiVersion: serving.knative.dev/v1alpha1
 kind: Service
 metadata:
-  name: github-message-dumper
+  name: github-event-display
 spec:
   runLatest:
     configuration:
       revisionTemplate:
         spec:
           container:
-            image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/message_dumper
+            image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display
 ```
 
 Enter the following command to create the service from `service.yaml`:
@@ -54,7 +52,7 @@ Create a [personal access token](https://github.com/settings/tokens)
 for GitHub that the GitHub source can use to register webhooks with
 the GitHub API. Also decide on a secret token that your code will use
 to authenticate the incoming webhooks from GitHub (_secretToken_).
-  
+
 The token can be named anything you find convenient. The Source
 requires `repo:public_repo` and `admin:repo_hook`, to let it fire
 events from your public repositories and to create webhooks for those
@@ -124,7 +122,7 @@ spec:
   sink:
     apiVersion: serving.knative.dev/v1alpha1
     kind: Service
-    name: github-message-dumper
+    name: github-event-display
 ```
 
 Then, apply that yaml using `kubectl`:
@@ -150,14 +148,14 @@ by looking at our message dumper function logs.
 
 ```shell
 kubectl --namespace default get pods
-kubectl --namespace default logs github-message-dumper-XXXX user-container
+kubectl --namespace default logs github-event-display-XXXX user-container
 ```
 
 You should log lines similar to:
 
 ```
 2018/11/08 18:25:34 Message Dumper received a message: POST / HTTP/1.1
-Host: github-message-dumper.knative-demo.svc.cluster.local
+Host: github-event-display.knative-demo.svc.cluster.local
 Accept-Encoding: gzip
 Ce-Cloudeventsversion: 0.1
 Ce-Eventid: a8d4cf20-e383-11e8-8069-46e3c8ad2b4d

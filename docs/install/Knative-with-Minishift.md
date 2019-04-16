@@ -1,16 +1,21 @@
-# Knative Install on Minishift
+---
+title: "Install on Minishift"
+linkTitle: "Minishift"
+weight: 10
+type: "docs"
+---
 
 This guide walks you through the installation of the latest version of
 [Knative Serving](https://github.com/knative/serving) on an
-[OpenShift](https://github.com/openshift/origin) Minishift server using pre-built images and
-demonstrates creating and deploying an image of a sample "hello world" app onto
-the newly created Knative cluster.
+[OpenShift](https://github.com/openshift/origin) Minishift server using
+pre-built images and demonstrates creating and deploying an image of a sample
+"hello world" app onto the newly created Knative cluster.
 
-You can find [guides for other platforms here](README.md).
+You can find [guides for other platforms here](./README.md).
 
 ## Minishift setup
 
-- Setup minishift based instructions from
+- Set up minishift based instructions from
   https://docs.okd.io/latest/minishift/getting-started/index.html
 
 - Ensure `minishift` is setup correctly by running the command:
@@ -20,7 +25,28 @@ You can find [guides for other platforms here](README.md).
 minishift version
 ```
 
-## Configure and start minishift
+## Automatic Set Up
+
+Once you have `minishift` present on your machine and in your `PATH`, you can
+either follow the manual set up steps below, or you can run the convenient
+scripts from
+[the openshift-cloud-functions/knative-operators project](https://github.com/openshift-cloud-functions/knative-operators),
+which do something similiar, like this:
+
+    git clone https://github.com/openshift-cloud-functions/knative-operators
+    cd knative-operators
+    ./etc/scripts/install-on-minishift.sh
+
+The `myproject` this created is now ready for Knative! (If you use
+`oc new-project yourproject` to create additional projects, make sure that you
+apply the two `oc adm policy ...` commands from below.)
+
+## Manually Set Up
+
+### Manually configure and start minishift
+
+Here are the manual steps which the above script automates for you in case you
+prefer doing this yourself:
 
 The following details the bare minimum configuration required to setup minishift
 for running Knative:
@@ -48,6 +74,9 @@ minishift addons enable admin-user
 # Allow the containers to be run with uid 0
 minishift addons enable anyuid
 
+# Enable Admission Controller Webhook
+minishift addon enable admissions-webhook
+
 # start minishift
 minishift start
 ```
@@ -62,12 +91,14 @@ minishift start
   that is usually after successful start of Minishift
 - The [addon](https://docs.okd.io/latest/minishift/using/addons.html) **anyuid**
   allows the `default` service account to run the application with uid `0`
+- The [addon](https://docs.okd.io/latest/minishift/using/addons.html) **admissions-webhook**
+  allows cluster to register admissions webhooks
 
 - The command `minishift profile set knative` is required every time you start
   and stop minishift to make sure that you are on right `knative` minishift
   profile that was configured above.
 
-## Configuring `oc` (openshift cli)
+### Configuring `oc` (openshift cli)
 
 Running the following command make sure that you have right version of `oc` and
 have configured the DOCKER daemon to be connected to minishift docker.
@@ -79,48 +110,9 @@ minishift docker-env
 minishift oc-env
 ```
 
-## Preparing Knative Deployment
+### Preparing Knative Deployment
 
-### Enable Admission Controller Webhook
-
-To be able to deploy and run serverless Knative applications, its required that
-you must enable the
-[Admission Controller Webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/).
-
-Run the following command to make OpenShift (run via minishift) to be configured
-for
-[Admission Controller Webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/):
-
-```shell
-# Enable admission controller webhooks
-# The configuration stanzas below look weird and are just to workaround for:
-# https://bugzilla.redhat.com/show_bug.cgi?id=1635918
-minishift openshift config set --target=kube --patch '{
-    "admissionConfig": {
-        "pluginConfig": {
-            "ValidatingAdmissionWebhook": {
-                "configuration": {
-                    "apiVersion": "apiserver.config.k8s.io/v1alpha1",
-                    "kind": "WebhookAdmission",
-                    "kubeConfigFile": "/dev/null"
-                }
-            },
-            "MutatingAdmissionWebhook": {
-                "configuration": {
-                    "apiVersion": "apiserver.config.k8s.io/v1alpha1",
-                    "kind": "WebhookAdmission",
-                    "kubeConfigFile": "/dev/null"
-                }
-            }
-        }
-    }
-}'
-
-# wait until the kube-apiserver is restarted
-until oc login -u admin -p admin; do sleep 5; done;
-```
-
-### Configuring a OpenShift project
+#### Configuring a OpenShift project
 
 1. Set up the project **myproject** for use with Knative applications.
 
@@ -146,29 +138,29 @@ until oc login -u admin -p admin; do sleep 5; done;
 > applications in `default` project, it's safer not to touch it to avoid any
 > instabilities in OpenShift.
 
-### Installing Istio
+#### Installing Istio
 
 Knative depends on Istio. The
-[istio-openshift-policies.sh](scripts/istio-openshift-policies.sh) does run the
-required commands to configure necessary
+[istio-openshift-policies.sh](./scripts/istio-openshift-policies.sh) does run
+the required commands to configure necessary
 [privileges](https://istio.io/docs/setup/kubernetes/platform-setup/openshift/)
 to the service accounts used by Istio.
 
 ```shell
-curl -s https://raw.githubusercontent.com/knative/docs/master/install/scripts/istio-openshift-policies.sh | bash
+curl -s https://raw.githubusercontent.com/knative/docs/master/docs/install/scripts/istio-openshift-policies.sh | bash
 ```
 
 1. Run the following to install Istio:
 
    ```shell
-   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.4.0/istio-crds.yaml && \
-   oc apply --filename https://github.com/knative/serving/releases/download/v0.4.0/istio.yaml
+   oc apply --filename https://github.com/knative/serving/releases/download/v0.5.0/istio-crds.yaml && \
+   oc apply --filename https://github.com/knative/serving/releases/download/v0.5.0/istio.yaml
    ```
 
    Note: the resources (CRDs) defined in the `istio-crds.yaml`file are also
    included in the `istio.yaml` file, but they are pulled out so that the CRD
    definitions are created first. If you see an error when creating resources
-   about an unknown type, run the second `kubectl apply` command again.
+   about an unknown type, run the second `oc apply` command again.
 
 2. Ensure the istio-sidecar-injector pods runs as privileged:
    ```shell
@@ -180,17 +172,17 @@ curl -s https://raw.githubusercontent.com/knative/docs/master/install/scripts/is
    > **NOTE:** It will take a few minutes for all the components to be up and
    > running.
 
-## Install Knative Serving
+### Install Knative Serving
 
 The following section details on deploying
 [Knative Serving](https://github.com/knative/serving) to OpenShift.
 
-The [knative-openshift-policies.sh](scripts/knative-openshift-policies.sh) runs
-the required commands to configure necessary privileges to the service accounts
-used by Knative.
+The [knative-openshift-policies.sh](./scripts/knative-openshift-policies.sh)
+runs the required commands to configure necessary privileges to the service
+accounts used by Knative.
 
 ```shell
-curl -s https://raw.githubusercontent.com/knative/docs/master/install/scripts/knative-openshift-policies.sh | bash
+curl -s https://raw.githubusercontent.com/knative/docs/master/docs/install/scripts/knative-openshift-policies.sh | bash
 ```
 
 > You can safely ignore the warnings:
@@ -202,22 +194,36 @@ curl -s https://raw.githubusercontent.com/knative/docs/master/install/scripts/kn
 
 1. If you are upgrading from Knative 0.3.x: Update your domain and static IP
    address to be associated with the LoadBalancer `istio-ingressgateway` instead
-   of `knative-ingressgateway`.  Then run the following to clean up leftover
+   of `knative-ingressgateway`. Then run the following to clean up leftover
    resources:
+
    ```
    oc delete svc knative-ingressgateway -n istio-system
    oc delete deploy knative-ingressgateway -n istio-system
    ```
 
+   If you have the Knative Eventing Sources component installed, you will also
+   need to delete the following resource before upgrading:
+
+   ```
+   oc delete statefulset/controller-manager -n knative-sources
+   ```
+
+   While the deletion of this resource during the upgrade process will not
+   prevent modifications to Eventing Source resources, those changes will not be
+   completed until the upgrade process finishes.
+
 1. Install Knative serving:
 
    ```shell
-   oc apply --filename https://github.com/knative/serving/releases/download/v0.4.0/serving.yaml \
-   oc apply --filename https://github.com/knative/build/releases/download/v0.4.0/build.yaml \
-   oc apply --filename https://raw.githubusercontent.com/knative/serving/v0.4.0/third_party/config/build/clusterrole.yaml
+   oc apply --filename https://github.com/knative/serving/releases/download/v0.5.0/serving.yaml && \
+   oc apply --filename https://github.com/knative/build/releases/download/v0.5.0/build.yaml && \
+   oc apply --filename https://raw.githubusercontent.com/knative/serving/v0.5.0/third_party/config/build/clusterrole.yaml
    ```
+
    > **Note**: For the v0.4.0 release and newer, the `clusterrole.yaml` file is
-   > required to enable the Build and Serving components to interact with each other.
+   > required to enable the Build and Serving components to interact with each
+   > other.
 
 1. Monitor the Knative components until all of the components show a `STATUS` of
    `Running` or `Completed`:
@@ -275,7 +281,7 @@ INGRESSGATEWAY=knative-ingressgateway
 # The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
 # Use `istio-ingressgateway` instead, since `knative-ingressgateway`
 # will be removed in Knative v0.4.
-if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
+if oc get configmap config-istio -n knative-serving &> /dev/null; then
     INGRESSGATEWAY=istio-ingressgateway
 fi
 

@@ -1,9 +1,8 @@
-# Welcome to Knative
-
-Knative (pronounced kay-nay-tiv) extends Kubernetes to provide a set of
-middleware components that are essential to build modern, source-centric, and
-container-based applications that can run anywhere: on premises, in the cloud,
-or even in a third-party data center.
+Knative (pronounced kay-nay-tiv) extends
+[Kubernetes](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/)
+to provide a set of middleware components that are essential to build modern,
+source-centric, and container-based applications that can run anywhere: on
+premises, in the cloud, or even in a third-party data center.
 
 Each of the components under the Knative project attempt to identify common
 patterns and codify the best practices that are shared by successful,
@@ -13,8 +12,8 @@ focus on solving mundane but difficult tasks such as:
 - [Deploying a container](./install/getting-started-knative-app.md)
 - [Orchestrating source-to-URL workflows on Kubernetes](./serving/samples/source-to-url-go/)
 - [Routing and managing traffic with blue/green deployment](./serving/samples/blue-green-deployment.md)
-- [Scaling automatically and sizing workloads based on demand](./serving/samples/autoscale-go)
-- [Binding running services to eventing ecosystems](./eventing/samples/kubernetes-event-source)
+- [Scaling automatically and sizing workloads based on demand](./serving/samples/autoscale-go/)
+- [Binding running services to eventing ecosystems](./eventing/samples/kubernetes-event-source/)
 
 Developers on Knative can use familiar idioms, languages, and frameworks to
 deploy functions, applications, or containers workloads.
@@ -61,8 +60,8 @@ separation between pluggable components, the Knative project establishes an
 efficient contributor workflow.
 
 Knative is a diverse, open, and inclusive community. To get involved, see
-[CONTRIBUTING.md](./community/CONTRIBUTING.md) and join the
-[Knative community](./community/README.md).
+[CONTRIBUTING.md](../contributing/CONTRIBUTING.md) and join the
+[Knative community](../community/).
 
 Your own path to becoming a Knative contributor can
 [begin anywhere](https://github.com/knative/serving/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Akind%2Fgood-first-issue).
@@ -92,7 +91,7 @@ Follow the links below to learn more about Knative.
 
 - [Autoscaling](./serving/samples/autoscale-go/README.md)
 - [Source-to-URL deployment](./serving/samples/source-to-url-go/README.md)
-- [Binding running services to eventing ecosystems](./eventing/samples/kubernetes-event-source)
+- [Binding running services to eventing ecosystems](./eventing/samples/kubernetes-event-source/)
 - [Telemetry](./serving/samples/telemetry-go/README.md)
 - [REST API sample](./serving/samples/rest-api-go/README.md)
 - [All samples for serving](./serving/samples/)

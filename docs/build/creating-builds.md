@@ -1,4 +1,9 @@
-# Creating a simple Knative Build
+---
+title: "Creating a simple Knative build"
+linkTitle: "Creating a build"
+weight: 30
+type: "docs"
+---
 
 Use this page to learn how to create and then run a simple build in Knative. In
 this topic, you create a Knative Build configuration file for a simple app,
@@ -10,7 +15,7 @@ uses [busybox](https://docs.docker.com/samples/library/busybox/) to simply print
 "_hello build_".
 
 Tip: See the
-[build code samples](builds.md#get-started-with-knative-build-samples) for
+[build code samples](./builds.md#get-started-with-knative-build-samples) for
 examples of more complex builds, including code samples that use container
 images, authentication, and include multiple steps.
 
@@ -23,15 +28,16 @@ Kubernetes cluster, and it must include the Knative Build component:
   cluster, see [Installing Knative](../install/README.md).
 
 - If you have a component of Knative installed and running, you must
-  [ensure that the Knative Build component is also installed](installing-build-component.md).
+  [ensure that the Knative Build component is also installed](./installing-build-component.md).
 
 ## Creating and running a build
 
 1. Create a configuration file named `build.yaml` that includes the following
    code.
 
-   This `Build` resource definition includes a single "[step](builds.md#steps)"
-   that performs the task of simply printing "_hello build_":
+   This `Build` resource definition includes a single
+   "[step](./builds.md#steps)" that performs the task of simply printing "_hello
+   build_":
 
    ```yaml
    apiVersion: build.knative.dev/v1alpha1
@@ -48,7 +54,7 @@ Kubernetes cluster, and it must include the Knative Build component:
    Notice that this definition specifies `kind` as a `Build`, and that the name
    of this `Build` resource is `hello-build`. For more information about
    defining build configuration files, See the
-   [`Build` reference topic](builds.md).
+   [`Build` reference topic](./builds.md).
 
 1. Deploy the `build.yaml` configuration file and run the `hello-build` build on
    Knative by running the
@@ -160,7 +166,7 @@ Kubernetes cluster, and it must include the Knative Build component:
 
 To learn more about the objects and commands used in this topic, see:
 
-- [Knative `Build` resources](builds.md)
+- [Knative `Build` resources](./builds.md)
 - [Kubernetes Init containers](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/)
 - [Kubernetes kubectl CLI](https://kubernetes.io/docs/reference/kubectl/kubectl/)
 

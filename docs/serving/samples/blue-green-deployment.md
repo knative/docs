@@ -1,4 +1,9 @@
-# Routing and managing traffic with blue/green deployment
+---
+title: "Routing and managing traffic with blue/green deployment"
+linkTitle: "Routing and managing traffic"
+weight:
+type: "docs"
+---
 
 This sample demonstrates updating an application to a new version using a
 blue/green traffic routing pattern. With Knative, you can safely reroute traffic
@@ -10,8 +15,7 @@ configuration.
 You need:
 
 - A Kubernetes cluster with [Knative installed](../../install/README.md).
-- (Optional)
-  [A custom domain configured](../../serving/using-a-custom-domain.md) for use
+- (Optional) [A custom domain configured](../using-a-custom-domain.md) for use
   with Knative.
 
 Note: The source code for the gcr.io/knative-samples/knative-route-demo image
@@ -80,9 +84,8 @@ route "blue-green-demo" configured
 
 You'll now be able to view the sample app at
 http://blue-green-demo.default.YOUR_CUSTOM_DOMAIN.com (replace
-`YOUR_CUSTOM_DOMAIN`) with the
-[custom domain](../../serving/using-a-custom-domain.md) you configured for use
-with Knative.
+`YOUR_CUSTOM_DOMAIN`) with the [custom domain](../using-a-custom-domain.md) you
+configured for use with Knative.
 
 > Note: If you don't have a custom domain configured for use with Knative, you
 > can interact with your app using cURL requests if you have the host URL and IP
@@ -165,8 +168,12 @@ Revision 2 of the app is staged at this point. That means:
 
 - No traffic will be routed to revision 2 at the main URL,
   http://blue-green-demo.default.YOUR_CUSTOM_DOMAIN.com
-- Knative creates a new route named v2 for testing the newly deployed version at
-  http://v2.blue-green-demo.default.YOUR_CUSTOM_DOMAIN.com
+- Knative creates a new route named v2 for testing the newly deployed version.
+  The URL of this can be seen in the status section of your Route.
+
+```bash
+kubectl get route blue-green-demo --output jsonpath="{.status.traffic[*].url}"
+```
 
 This allows you to validate that the new version of the app is behaving as
 expected before switching any traffic over to it.
@@ -240,8 +247,13 @@ Refresh the original route
 (http://blue-green-demo.default.YOUR_CUSTOM_DOMAIN.com) a few times to verify
 that no traffic is being routed to v1 of the app.
 
-We added a named route to v1 of the app, so you can now access it at
-http://v1.blue-green-demo.default.YOUR_CUSTOM_DOMAIN.com.
+We added a named route to v1 of the app, so you can now access it at the URL
+listed in the traffic block of the status section. To get the URL, enter the
+following command:
+
+```bash
+kubectl get route blue-green-demo --output jsonpath="{.status.traffic[*].url}"
+```
 
 With all inbound traffic being directed to the second revision of the
 application, Knative will soon scale the first revision down to 0 running pods
