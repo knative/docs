@@ -91,8 +91,8 @@ minishift start
   that is usually after successful start of Minishift
 - The [addon](https://docs.okd.io/latest/minishift/using/addons.html) **anyuid**
   allows the `default` service account to run the application with uid `0`
-- The [addon](https://docs.okd.io/latest/minishift/using/addons.html) **admissions-webhook**
-  allows cluster to register admissions webhooks
+- The [addon](https://docs.okd.io/latest/minishift/using/addons.html)
+  **admissions-webhook** allows cluster to register admissions webhooks
 
 - The command `minishift profile set knative` is required every time you start
   and stop minishift to make sure that you are on right `knative` minishift

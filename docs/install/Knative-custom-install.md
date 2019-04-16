@@ -209,7 +209,7 @@ files from the Knative repositories:
 | [`monitoring-tracing-zipkin.yaml`][1.5]        | Installs only [Zipkin][2.3].**\***                                                                                             | Serving component, ELK stack (monitoring-logs-elasticsearch.yaml) |
 | [`monitoring-tracing-zipkin-in-mem.yaml`][1.6] | Installs only [Zipkin in-memory][2.3]**\***                                                                                    | Serving component                                                 |
 | **knative/build**                              |                                                                                                                                |                                                                   |
-| [`build.yaml`][3.1]†                         | Installs the Build component.                                                                                                  | Cluster roles enabled, if interacting with Serving                |
+| [`build.yaml`][3.1]†                           | Installs the Build component.                                                                                                  | Cluster roles enabled, if interacting with Serving                |
 | **knative/eventing**                           |                                                                                                                                |                                                                   |
 | [`release.yaml`][4.1]†                         | Installs the Eventing component. Includes the in-memory channel provisioner.                                                   | Serving component                                                 |
 | [`eventing.yaml`][4.2]                         | Installs the Eventing component. Does not include the in-memory channel provisioner.                                           | Serving component                                                 |
@@ -332,7 +332,7 @@ commands below.
      - `https://github.com/knative/eventing/releases/download/v0.5.0/release.yaml`
      - `https://github.com/knative/eventing-sources/releases/download/v0.5.0/eventing-sources.yaml`
 
-    **Example install commands:**
+     **Example install commands:**
 
      - To install the Knative Serving component with the set of observability
        plug-ins:
@@ -345,13 +345,13 @@ commands below.
    * To install all three Knative components and the set of Eventing sources
      without an observability plugin:
 
-      ```bash
-      kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/serving.yaml \
-      --filename https://github.com/knative/build/releases/download/v0.5.0/build.yaml \
-      --filename https://github.com/knative/eventing/releases/download/v0.5.0/release.yaml \
-      --filename https://github.com/knative/eventing-sources/releases/download/v0.5.0/eventing-sources.yaml \
-      --filename https://raw.githubusercontent.com/knative/serving/v0.5.0/third_party/config/build/clusterrole.yaml
-      ```
+     ```bash
+     kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/serving.yaml \
+     --filename https://github.com/knative/build/releases/download/v0.5.0/build.yaml \
+     --filename https://github.com/knative/eventing/releases/download/v0.5.0/release.yaml \
+     --filename https://github.com/knative/eventing-sources/releases/download/v0.5.0/eventing-sources.yaml \
+     --filename https://raw.githubusercontent.com/knative/serving/v0.5.0/third_party/config/build/clusterrole.yaml
+     ```
 
 1. Depending on what you chose to install, view the status of your installation
    by running one or more of the following commands. It might take a few
