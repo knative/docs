@@ -87,11 +87,11 @@ first name):
 | -------------------------------------------------------- | -------------- | ------------ | ---------------------------------------- |
 | <img width="30px" src="https://github.com/dewitt.png">   | DeWitt Clinton | Google       | [@dewitt](https://github.com/dewitt)     |
 | <img width="30px" src="https://github.com/mchmarny.png"> | Mark Chmarny   | Google       | [@mchmarny](https://github.com/mchmarny) |
+| <img width="30px" src="https://github.com/pmorie.png">   | Paul Morie     | Red Hat      | [@pmorie](https://github.com/pmorie)     |
 | <img width="30px" src="https://github.com/rgregg.png">   | Ryan Gregg     | Google       | [@rgregg](https://github.com/rgregg)     |
 | <img width="30px" src="https://github.com/isdal.png">    | Tomas Isdal    | Google       | [@isdal](https://github.com/isdal)       |
 |                                                          | TBD            | IBM          |                                          |
 |                                                          | TBD            | Pivotal      |                                          |
-|                                                          | TBD            | Red Hat      |                                          |
 
 There are currently three unfilled seats, as indicated by TBD.
 
