@@ -93,7 +93,7 @@ first name):
 |                                                          | TBD            | IBM          |                                          |
 |                                                          | TBD            | Pivotal      |                                          |
 
-There are currently three unfilled seats, as indicated by TBD.
+There are currently two unfilled seats, as indicated by TBD.
 
 ### Allocation of seats
 
