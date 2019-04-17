@@ -161,7 +161,7 @@ kubectl --namespace knative-debug get channel chan -o jsonpath='{.status.address
 ```
 
 This should return a URI, likely ending in '.cluster.local'. If it doesn't, then
-it implies that something went wrong during reconcilation. See
+it implies that something went wrong during reconciliation. See
 [Channel Controller](#channel-controller).
 
 We will verify that the two resources that the `chan` creates exist and are
