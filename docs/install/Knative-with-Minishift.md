@@ -172,10 +172,11 @@ curl -s https://raw.githubusercontent.com/knative/docs/master/docs/install/scrip
    > **NOTE:** It will take a few minutes for all the components to be up and
    > running.
 
-### Install Knative Serving
+### Install Knative
 
-The following section details on deploying
-[Knative Serving](https://github.com/knative/serving) to OpenShift.
+The following commands install the Knative Serving and Build components on
+OpenShift. To customize your Knative installation, see
+[Performing a Custom Knative Installation](./Knative-custom-install.md).
 
 The [knative-openshift-policies.sh](./scripts/knative-openshift-policies.sh)
 runs the required commands to configure necessary privileges to the service
@@ -213,7 +214,7 @@ curl -s https://raw.githubusercontent.com/knative/docs/master/docs/install/scrip
    prevent modifications to Eventing Source resources, those changes will not be
    completed until the upgrade process finishes.
 
-1. Install Knative serving:
+1. Install Knative Serving and Build:
 
    ```shell
    oc apply --filename https://github.com/knative/serving/releases/download/v0.5.0/serving.yaml && \

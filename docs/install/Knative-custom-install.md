@@ -304,23 +304,29 @@ commands below.
    completed until the upgrade process finishes.
 
 1. To install Knative components or plugins, specify the filenames in the
-   `kubectl apply` command:
+   `kubectl apply` command.
 
-   - To install an individual component or plgugin
-
-     ```bash
-     kubectl apply --filename [FILE_URL]
-     ```
-
-   - To install multiple components or plugins, append additional
-     `--filename [FILENAME]` flags to the `kubectl apply` command:
+   - Run the `kubectl apply` command once with the
+   `-l knative.dev/crd-install=true` flag to install the CRDs first. (This
+   prevents race conditions, which cause intermittent install errors.) 
 
      ```bash
-     kubectl apply --filename [FILE_URL] --filename [FILE_URL] \
-       --filename [FILE_URL]
+     kubectl apply -l knative.dev/crd-install=true \
+     --filename [FILE_URL] \
+     --filename [FILE_URL]
      ```
 
-     where [`FILE_URL`] is the URL path of the desired Knative release:
+   - Then run the `kubectl apply` command without the `-l` flag to complete the
+   install:
+
+     ```bash
+     kubectl apply --filename [FILE_URL] \
+     --filename [FILE_URL]
+     ```
+
+     You can add as many `--filename [FILE_URL]` as needed.
+
+     [`FILE_URL`] is the URL path of the desired Knative release:
 
      `https://github.com/knative/[COMPONENT]/releases/download/[VERSION]/[FILENAME].yaml`
 
@@ -338,12 +344,30 @@ commands below.
        plug-ins:
 
        ```bash
+       kubectl apply -l knative.dev/crd-install=true \
+       --filename https://github.com/knative/serving/releases/download/v0.5.0/serving.yaml \
+       --filename https://github.com/knative/serving/releases/download/v0.5.0/monitoring.yaml
+       ```
+       Then:
+
+       ```bash
        kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/serving.yaml \
        --filename https://github.com/knative/serving/releases/download/v0.5.0/monitoring.yaml
        ```
 
    * To install all three Knative components and the set of Eventing sources
      without an observability plugin:
+
+      ```bash
+      kubectl apply -l knative.dev/crd-install=true \
+      --filename https://github.com/knative/serving/releases/download/v0.5.0/serving.yaml \
+      --filename https://github.com/knative/build/releases/download/v0.5.0/build.yaml \
+      --filename https://github.com/knative/eventing/releases/download/v0.5.0/release.yaml \
+      --filename https://github.com/knative/eventing-sources/releases/download/v0.5.0/eventing-sources.yaml \
+      --filename https://raw.githubusercontent.com/knative/serving/v0.5.0/third_party/config/build/clusterrole.yaml
+      ```
+
+     Then:
 
       ```bash
       kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/serving.yaml \
