@@ -1,6 +1,6 @@
 ---
 title: "Knative releases"
 linkTitle: "Releases"
-weight: 20
+weight: 10
 type: "blog"
 ---

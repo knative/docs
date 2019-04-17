@@ -182,9 +182,10 @@ The following Knative installation files are available:
   - https://github.com/knative/eventing/releases/download/v0.5.0/kafka.yaml
 - **Eventing sources**:
   - https://github.com/knative/eventing-sources/releases/download/v0.5.0/eventing-sources.yaml
+  - https://github.com/knative/eventing-sources/releases/download/v0.5.0/camel.yaml
   - https://github.com/knative/eventing-sources/releases/download/v0.5.0/gcppubsub.yaml
-  - https://github.com/knative/eventing-sources/releases/download/v0.5.0/message-dumper.yaml
-  - https://github.com/knative/eventing-sources/releases/download/v0.5.0/sources.yaml
+  - https://github.com/knative/eventing-sources/releases/download/v0.5.0/kafka.yaml
+  - https://github.com/knative/eventing-sources/releases/download/v0.5.0/event-display.yaml
 - **Cluster roles**:
   - https://raw.githubusercontent.com/knative/serving/v0.5.0/third_party/config/build/clusterrole.yaml
 
@@ -208,16 +209,18 @@ files from the Knative repositories:
 | [`monitoring-tracing-zipkin.yaml`][1.5]        | Installs only [Zipkin][2.3].**\***                                                                                             | Serving component, ELK stack (monitoring-logs-elasticsearch.yaml) |
 | [`monitoring-tracing-zipkin-in-mem.yaml`][1.6] | Installs only [Zipkin in-memory][2.3]**\***                                                                                    | Serving component                                                 |
 | **knative/build**                              |                                                                                                                                |                                                                   |
-| [`release.yaml`][3.1]†                         | Installs the Build component.                                                                                                  | Cluster roles enabled, if interacting with Serving                |
+| [`build.yaml`][3.1]†                         | Installs the Build component.                                                                                                  | Cluster roles enabled, if interacting with Serving                |
 | **knative/eventing**                           |                                                                                                                                |                                                                   |
 | [`release.yaml`][4.1]†                         | Installs the Eventing component. Includes the in-memory channel provisioner.                                                   | Serving component                                                 |
 | [`eventing.yaml`][4.2]                         | Installs the Eventing component. Does not include the in-memory channel provisioner.                                           | Serving component                                                 |
 | [`in-memory-channel.yaml`][4.3]                | Installs only the in-memory channel provisioner.                                                                               | Serving component, Eventing component                             |
 | [`kafka.yaml`][4.4]                            | Installs only the Kafka channel provisioner.                                                                                   | Serving component, Eventing component                             |
 | **knative/eventing-sources**                   |                                                                                                                                |                                                                   |
-| [`release.yaml`][5.1]†                         | Installs the following sources: [Kubernetes][6], [GitHub][6.1], [Container image][../eventing#containersource], [CronJob][6.2] | Serving component, Eventing component                             |
-| [`release-gcppubsub.yaml`][5.2]                | Installs the following sources: [PubSub][6.3]                                                                                  | Serving component, Eventing component                             |
-| [`message-dumper.yaml`][5.3]                   | Installs an Event logging service for debugging.                                                                               | Serving component, Eventing component                             |
+| [`eventing-sources.yaml`][5.1]†                | Installs the following sources: [Kubernetes][6], [GitHub][6.1], [Container image](../eventing#containersource), [CronJob][6.2] | Serving component, Eventing component                             |
+| [`camel.yaml`][5.4]                            | Installs the Apache Camel source.                                                                                              | Serving component, Eventing component                             |
+| [`gcppubsub.yaml`][5.2]                        | Installs the [GCP PubSub source][6.3]                                                                                          | Serving component, Eventing component                             |
+| [`kafka.yaml`][5.5]                            | Installs the Apache Kafka source.                                                                                              | Serving component, Eventing component                             |
+| [`event-display.yaml`][5.3]                    | Installs a Knative Service that logs events received for use in samples and debugging.                                         | Serving component, Eventing component                             |
 | **Cluster roles**                              |                                                                                                                                |                                                                   |
 | [`clusterrole.yaml`][7]†                       | Enables the Build and Serving components to interact.                                                                          | Serving component, Build component                                |
 
@@ -260,9 +263,11 @@ for details about installing the various supported observability plug-ins.
 [5.2]:
   https://github.com/knative/eventing-sources/releases/download/v0.5.0/gcppubsub.yaml
 [5.3]:
-  https://github.com/knative/eventing-sources/releases/download/v0.5.0/message-dumper.yaml
+  https://github.com/knative/eventing-sources/releases/download/v0.5.0/event-display.yaml
 [5.4]:
-  https://github.com/knative/eventing-sources/releases/download/v0.5.0/sources.yaml
+  https://github.com/knative/eventing-sources/releases/download/v0.5.0/camel.yaml
+[5.5]:
+  https://github.com/knative/eventing-sources/releases/download/v0.5.0/kafka.yaml
 [6]:
   https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#event-v1-core
 [6.1]: https://developer.github.com/v3/activity/events/types/

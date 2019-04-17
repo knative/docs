@@ -85,6 +85,7 @@ available observability plugins, to minimize the disk space used for install.
 - [Knative Install on Minikube](./Knative-with-Minikube.md)
 - [Knative Install on Minishift](./Knative-with-Minishift.md)
 - [Knative Install on OpenShift](./Knative-with-OpenShift.md)
+- [Knative Install via Operator](https://github.com/openshift-cloud-functions/Documentation/blob/master/knative-OCP-4x.md)
 
 **Custom install guide**
 

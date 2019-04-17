@@ -26,6 +26,7 @@ be created using the following instructions.
    ```yaml
    name: hello_world_dart
    publish_to: none # let's not accidentally publish this to pub.dartlang.org
+   description: Hello world server example in Dart
    
    environment:
      sdk: '>=2.1.0 <3.0.0'
