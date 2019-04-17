@@ -257,7 +257,7 @@ credentials are then used to authenticate with the Docker registry.
 
 If both `kubernetes.io/*` and knative flavored basic authentication secret are
 provided, knative will merge the credentials from those two ; knative flavored
-credentials taking precendence over `kubernetes.io/dockerconfigjson` (or
+credentials taking precedence over `kubernetes.io/dockerconfigjson` (or
 `kubernetes.io/dockercfg`) ones.
 
 ### Guiding credential selection
