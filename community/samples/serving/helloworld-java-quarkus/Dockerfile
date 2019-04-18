@@ -8,13 +8,9 @@ WORKDIR /project
 
 RUN /usr/local/bin/entrypoint-run.sh mvn -DskipTests clean package
 
-FROM docker.io/fabric8/java-jboss-openjdk8-jdk:1.5.4
+FROM fabric8/java-jboss-openjdk8-jdk:1.5.4
 USER jboss
 ENV JAVA_APP_DIR=/deployments
-
-# Service must listen to $PORT environment variable.
-# This default value facilitates local development.
-ENV PORT 8080
 
 COPY --from=builder /project/target/lib/* /deployments/lib/
 COPY --from=builder /project/target/*-runner.jar /deployments/app.jar

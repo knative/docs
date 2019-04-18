@@ -94,147 +94,147 @@ recreate the source files from this folder.
 
 1. Update the pom.xml with the following content:
 
-```xml
-  <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.redhat.developer.demos</groupId>
-  <artifactId>helloworld-java-quarkus</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <name>Quarkus Hello World</name>
-  <description>A helloworld based on https://quarkus.io</description>
-  <properties>
-    <quarkus.version>0.13.3</quarkus.version>
-    <surefire.version>2.22.0</surefire.version>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-    <rest-assured.version>3.3.0</rest-assured.version>
-    <build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version>
-  </properties>
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>io.quarkus</groupId>
-        <artifactId>quarkus-bom</artifactId>
-        <version>${quarkus.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-  <build>
-    <finalName>${project.artifactId}</finalName>
-    <plugins>
-      <plugin>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>${surefire.version}</version>
-        <configuration>
-          <systemPropertyVariables>
-            <quarkus.http.test-port>8080</quarkus.http.test-port>
-          </systemPropertyVariables>
-          <systemProperties>
-            <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-          </systemProperties>
-        </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-failsafe-plugin</artifactId>
-        <version>${surefire.version}</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>integration-test</goal>
-              <goal>verify</goal>
-            </goals>
-            <configuration>
-              <systemProperties>
-                <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
-                <quarkus.http.test-port>8080</quarkus.http.test-port>
-              </systemProperties>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>io.quarkus</groupId>
-        <artifactId>quarkus-maven-plugin</artifactId>
-        <version>${quarkus.version}</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>build</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>build-helper-maven-plugin</artifactId>
-        <version>${build-helper-maven-plugin.version}</version>
-        <executions>
-          <execution>
-            <id>add-resource</id>
-            <phase>generate-resources</phase>
-            <goals>
-              <goal>add-resource</goal>
-            </goals>
-            <configuration>
-              <resources>
-                <resource>
-                  <directory>${project.basedir}/src/main/knative</directory>
-                  <targetPath>${project.build.directory}/knative</targetPath>
-                  <filtering>true</filtering>
-                </resource>
-              </resources>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
-  <dependencies>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-resteasy</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-junit5</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.rest-assured</groupId>
-      <artifactId>rest-assured</artifactId>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
-  <profiles>
-    <profile>
-      <id>native</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-maven-plugin</artifactId>
-            <version>${quarkus.version}</version>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>native-image</goal>
-                </goals>
-                <configuration>
-                  <enableHttpUrlHandler>true</enableHttpUrlHandler>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
-</project>
-```
+   ```xml
+   <?xml version="1.0" encoding="UTF-8"?>
+   <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+     <modelVersion>4.0.0</modelVersion>
+     <groupId>com.redhat.developer.demos</groupId>
+     <artifactId>helloworld-java-quarkus</artifactId>
+     <version>1.0-SNAPSHOT</version>
+     <name>Quarkus Hello World</name>
+     <description>A helloworld based on https://quarkus.io</description>
+     <properties>
+       <quarkus.version>0.13.3</quarkus.version>
+       <surefire.version>2.22.0</surefire.version>
+       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+       <maven.compiler.source>1.8</maven.compiler.source>
+       <maven.compiler.target>1.8</maven.compiler.target>
+       <rest-assured.version>3.3.0</rest-assured.version>
+       <build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version>
+     </properties>
+     <dependencyManagement>
+       <dependencies>
+         <dependency>
+           <groupId>io.quarkus</groupId>
+           <artifactId>quarkus-bom</artifactId>
+           <version>${quarkus.version}</version>
+           <type>pom</type>
+           <scope>import</scope>
+         </dependency>
+       </dependencies>
+     </dependencyManagement>
+     <build>
+       <finalName>${project.artifactId}</finalName>
+       <plugins>
+         <plugin>
+           <artifactId>maven-surefire-plugin</artifactId>
+           <version>${surefire.version}</version>
+           <configuration>
+             <systemPropertyVariables>
+               <quarkus.http.test-port>8080</quarkus.http.test-port>
+             </systemPropertyVariables>
+             <systemProperties>
+               <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+             </systemProperties>
+           </configuration>
+         </plugin>
+         <plugin>
+           <artifactId>maven-failsafe-plugin</artifactId>
+           <version>${surefire.version}</version>
+           <executions>
+             <execution>
+               <goals>
+                 <goal>integration-test</goal>
+                 <goal>verify</goal>
+               </goals>
+               <configuration>
+                 <systemProperties>
+                   <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
+                   <quarkus.http.test-port>8080</quarkus.http.test-port>
+                 </systemProperties>
+               </configuration>
+             </execution>
+           </executions>
+         </plugin>
+         <plugin>
+           <groupId>io.quarkus</groupId>
+           <artifactId>quarkus-maven-plugin</artifactId>
+           <version>${quarkus.version}</version>
+           <executions>
+             <execution>
+               <goals>
+                 <goal>build</goal>
+               </goals>
+             </execution>
+           </executions>
+         </plugin>
+         <plugin>
+           <groupId>org.codehaus.mojo</groupId>
+           <artifactId>build-helper-maven-plugin</artifactId>
+           <version>${build-helper-maven-plugin.version}</version>
+           <executions>
+             <execution>
+               <id>add-resource</id>
+               <phase>generate-resources</phase>
+               <goals>
+                 <goal>add-resource</goal>
+               </goals>
+               <configuration>
+                 <resources>
+                   <resource>
+                     <directory>${project.basedir}/src/main/knative</directory>
+                     <targetPath>${project.build.directory}/knative</targetPath>
+                     <filtering>true</filtering>
+                   </resource>
+                 </resources>
+               </configuration>
+             </execution>
+           </executions>
+         </plugin>
+       </plugins>
+     </build>
+     <dependencies>
+       <dependency>
+         <groupId>io.quarkus</groupId>
+         <artifactId>quarkus-resteasy</artifactId>
+       </dependency>
+       <dependency>
+         <groupId>io.quarkus</groupId>
+         <artifactId>quarkus-junit5</artifactId>
+         <scope>test</scope>
+       </dependency>
+       <dependency>
+         <groupId>io.rest-assured</groupId>
+         <artifactId>rest-assured</artifactId>
+         <scope>test</scope>
+       </dependency>
+     </dependencies>
+     <profiles>
+       <profile>
+         <id>native</id>
+         <build>
+           <plugins>
+             <plugin>
+               <groupId>io.quarkus</groupId>
+               <artifactId>quarkus-maven-plugin</artifactId>
+               <version>${quarkus.version}</version>
+               <executions>
+                 <execution>
+                   <goals>
+                     <goal>native-image</goal>
+                   </goals>
+                   <configuration>
+                     <enableHttpUrlHandler>true</enableHttpUrlHandler>
+                   </configuration>
+                 </execution>
+               </executions>
+             </plugin>
+           </plugins>
+         </build>
+       </profile>
+     </profiles>
+   </project>
+   ```
 
 1. Run the application locally:
 
@@ -248,41 +248,46 @@ recreate the source files from this folder.
    block below into it.
 
    ```docker
+   FROM quay.io/rhdevelopers/quarkus-java-builder as builder
+   COPY . /project
+   WORKDIR /project
+   # uncomment this to set the MAVEN_MIRROR_URL of your choice, to make faster builds
+   # ARG MAVEN_MIRROR_URL=<your-maven-mirror-url>
+   # e.g.
+   #ARG MAVEN_MIRROR_URL=http://192.168.64.1:8081/nexus/content/groups/public
 
-   FROM docker.io/fabric8/java-jboss-openjdk8-jdk:1.5.4
+   RUN /usr/local/bin/entrypoint-run.sh mvn -DskipTests clean package
+
+   FROM fabric8/java-jboss-openjdk8-jdk:1.5.4
    USER jboss
    ENV JAVA_APP_DIR=/deployments
-   EXPOSE 8080
-   ```
 
-   COPY target/lib/_ /deployments/lib/
-   COPY target/_-runner.jar /deployments/app.jar
+   COPY --from=builder /project/target/lib/* /deployments/lib/
+   COPY --from=builder /project/target/*-runner.jar /deployments/app.jar
 
    ENTRYPOINT [ "/deployments/run-java.sh" ]
-
-````
+   ```
 
 1. Create a new file, `service.yaml` and copy the following service definition
 into the file. Make sure to replace `{username}` with your Docker Hub
 username.
 
-```yaml
-apiVersion: serving.knative.dev/v1alpha1
-kind: Service
-metadata:
-  name: helloworld-java-quarkus
-  namespace: default
-spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        spec:
-          container:
-            image: docker.io/{username}/helloworld-java-quarkus
-            env:
-              - name: MESSAGE_PREFIX
-                value: "Namaste"
-````
+   ```yaml
+   apiVersion: serving.knative.dev/v1alpha1
+   kind: Service
+   metadata:
+     name: helloworld-java-quarkus
+   spec:
+     runLatest:
+       configuration:
+         revisionTemplate:
+           spec:
+             container:
+               image: docker.io/{username}/helloworld-java-quarkus
+               env:
+                 - name: MESSAGE_PREFIX
+                   value: "Namaste"
+   ```
 
 ## Building and deploying the sample
 
