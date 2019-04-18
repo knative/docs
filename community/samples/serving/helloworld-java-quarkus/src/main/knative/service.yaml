@@ -16,14 +16,14 @@ spec:
               url: "${git.source.repo.url}"
           steps:
             - args:
-                - /workspace/${app.context.dir}/scripts/buildah.sh
-              # Check https://github.com/quarkusio/quarkus-images for more configuration options
+                - /workspace/${app.context.dir}/scripts/maven-buildah.sh
+              # Check https://github.com/redhat-developer-demos/quarkus-java-builder for more configuration options
               env:
                 - name: WORK_DIR
                   value: /workspace/${app.context.dir}
                 - name: DESTINATION_NAME
                   value: ${app.container.image}
-              image: quay.io/quarkus/centos-quarkus-maven:graalvm-1.0.0-rc13
+              image: quay.io/rhdevelopers/quarkus-java-builder:graalvm-1.0.0-rc14
               name: docker-push
               # needed for buildah builds to be running as containers
               securityContext:

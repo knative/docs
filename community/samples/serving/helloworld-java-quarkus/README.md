@@ -25,7 +25,7 @@ recreate the source files from this folder.
    commands:
 
    ```shell
-   mvn io.quarkus:quarkus-maven-plugin:0.13.1:create \
+   mvn io.quarkus:quarkus-maven-plugin:0.13.3:create \
     -DprojectGroupId=com.redhat.developer.demos \
     -DprojectArtifactId=helloworld-java-quarkus \
     -DclassName="com.redhat.developer.demos.GreetingResource" \
@@ -104,7 +104,7 @@ recreate the source files from this folder.
   <name>Quarkus Hello World</name>
   <description>A helloworld based on https://quarkus.io</description>
   <properties>
-    <quarkus.version>0.13.1</quarkus.version>
+    <quarkus.version>0.13.3</quarkus.version>
     <surefire.version>2.22.0</surefire.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
@@ -249,44 +249,40 @@ recreate the source files from this folder.
 
    ```docker
 
-   FROM quay.io/quarkus/centos-quarkus-maven:graalvm-1.0.0-rc13 as nativebuilder
-   COPY . /work
-
-   # uncomment this to set the MAVEN_MIRROR_URL of your choice, to make faster builds
-   # ARG MAVEN_MIRROR_URL=<your-maven-mirror-url>
-   # e.g.
-   #ARG MAVEN_MIRROR_URL=http://192.168.64.1:8081/nexus/content/groups/public
-
-   RUN cd /workspace && /usr/local/bin/entrypoint-run.sh mvn -DskipTests clean package -Pnative
-
-   COPY --from=nativebuilder /workspace/helloworld-java-quarkus-runner /application
+   FROM docker.io/fabric8/java-jboss-openjdk8-jdk:1.5.4
+   USER jboss
+   ENV JAVA_APP_DIR=/deployments
    EXPOSE 8080
-   ENTRYPOINT ["/application"]
-   CMD ["-Dquarkus.http.host=0.0.0.0"]
-
    ```
+
+   COPY target/lib/_ /deployments/lib/
+   COPY target/_-runner.jar /deployments/app.jar
+
+   ENTRYPOINT [ "/deployments/run-java.sh" ]
+
+````
 
 1. Create a new file, `service.yaml` and copy the following service definition
-   into the file. Make sure to replace `{username}` with your Docker Hub
-   username.
+into the file. Make sure to replace `{username}` with your Docker Hub
+username.
 
-   ```yaml
-   apiVersion: serving.knative.dev/v1alpha1
-   kind: Service
-   metadata:
-     name: helloworld-java-quarkus
-     namespace: default
-   spec:
-     runLatest:
-       configuration:
-         revisionTemplate:
-           spec:
-             container:
-               image: docker.io/{username}/helloworld-java-quarkus
-               env:
-                 - name: MESSAGE_PREFIX
-                   value: "Namaste"
-   ```
+```yaml
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: helloworld-java-quarkus
+  namespace: default
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            image: docker.io/{username}/helloworld-java-quarkus
+            env:
+              - name: MESSAGE_PREFIX
+                value: "Namaste"
+````
 
 ## Building and deploying the sample
 
@@ -305,6 +301,9 @@ username:
 
 # We will use the docker daemon of the minikube
 eval $(minikube docker-env)
+
+# build the jar and libs
+./mvnw clean package
 
 # Build the container on your local machine
 docker build -t {username}/helloworld-java-quarkus .

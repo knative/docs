@@ -1,19 +1,10 @@
-# https://github.com/redhat-developer-demos/quarkus-java-builder allows to set 
-# various maven build arguments such as MAVEN_MIRROR_URL, HTTP_PROXY_HOST etc.,
-# it also allows building images with https://buildah.io
+FROM docker.io/fabric8/java-jboss-openjdk8-jdk:1.5.4
+USER jboss
+ENV JAVA_APP_DIR=/deployments
 
-FROM quay.io/rhdevelopers/quarkus-java-builder:graal-1.0.0-rc14 as nativebuilder
-COPY . /project
-
-# uncomment this to set the MAVEN_MIRROR_URL of your choice, to make faster builds
-# ARG MAVEN_MIRROR_URL=<your-maven-mirror-url>
-# e.g. 
-ARG MAVEN_MIRROR_URL=http://192.168.0.107:8081/nexus/content/groups/public
-
-RUN  /usr/local/bin/entrypoint-run.sh mvn -DskipTests clean package -Pnative 
-
-FROM registry.fedoraproject.org/fedora-minimal
-COPY --from=nativebuilder /project/target/helloworld-java-quarkus-runner /application
 EXPOSE 8080
-ENTRYPOINT ["/application"]
-CMD ["-Dquarkus.http.host=0.0.0.0"]
+
+COPY target/lib/* /deployments/lib/
+COPY target/*-runner.jar /deployments/app.jar
+
+ENTRYPOINT [ "/deployments/run-java.sh" ]
