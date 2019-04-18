@@ -1,5 +1,3 @@
 micronaut:
   application:
     name: helloworld-micronaut
-  server:
-    port: 8080

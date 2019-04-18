@@ -146,30 +146,44 @@ To create and configure the source files in the root of your working directory:
     }
    ```
 
-1. The Micronaut application is configured via `src/main/resources/application.yml` to start on port 8080:
+1. The Micronaut application is configured via `src/main/resources/application.yml`:
 
     ```yaml
     micronaut:
-    application:
+      application:
         name: helloworld-micronaut
-    server:
-        port: 8080
     ```
 
 1. Create the `Dockerfile` file:
 
    ```docker
-   # Use fabric8's s2i Builder image.
-   # https://hub.docker.com/r/fabric8/s2i-java
-   FROM fabric8/s2i-java:2.0
-
+   # Use the official maven/Java 8 image to create a build artifact.
+   # https://hub.docker.com/_/maven
+   FROM maven:3.5-jdk-8-alpine as builder
+   
+   # Copy local code to the container image.
+   WORKDIR /app
+   COPY pom.xml .
+   COPY src ./src
+   
+   # Build a release artifact.
+   RUN mvn package -DskipTests
+   
+   # Use AdoptOpenJDK for base image.
+   # It's important to use OpenJDK 8u191 or above that has container support enabled.
+   # https://hub.docker.com/r/adoptopenjdk/openjdk8
+   # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
+   FROM adoptopenjdk/openjdk8:jdk8u202-b08-alpine-slim
+   
    # Service must listen to $PORT environment variable.
    # This default value facilitates local development.
    ENV PORT 8080
-
-   # Copy the JAR file to the deployment directory.
-   ENV JAVA_APP_DIR=/deployments
-   COPY target/helloworld-1.0.0-SNAPSHOT.jar /deployments/
+   
+   # Copy the jar to the production image from the builder stage.
+   COPY --from=builder /app/target/helloworld-1.0.0-SNAPSHOT.jar /helloworld.jar
+   
+   # Run the web service on container startup.
+   CMD ["java","-Dmicronaut.server.port=${PORT}","-jar","/helloworld.jar"]
    ```
 
 1. Create the `service.yaml` file. You must specify your Docker Hub username in
