@@ -217,7 +217,7 @@ There are currently two categories of user-focused code samples,
 
    While a sample might be out of date, it could still provide assistance and
    help you get up-and-running with certain use-cases. If you find that
-   something is not right, contains out-dated info, please help us become aware
+   something is not right or contains outdated info, open an
    of the issue. In which case that sample might be fix if bandwidth or resource
    exists, or taken down and archived into a past release branch (where it
    hopefully worked last).
