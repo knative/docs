@@ -36,7 +36,7 @@ recreate the source files from this folder.
 1. Install the `express` package:
 
    ```shell
-   npm install express --save
+   npm install express
    ```
 
 1. Create a new file named `index.js` and paste the following code:
