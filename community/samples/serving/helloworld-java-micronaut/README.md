@@ -152,6 +152,8 @@ To create and configure the source files in the root of your working directory:
     micronaut:
       application:
         name: helloworld-micronaut
+      server:
+        port: ${PORT:8080}
     ```
 
 1. Create the `Dockerfile` file:
@@ -175,15 +177,11 @@ To create and configure the source files in the root of your working directory:
    # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
    FROM adoptopenjdk/openjdk8:jdk8u202-b08-alpine-slim
    
-   # Service must listen to $PORT environment variable.
-   # This default value facilitates local development.
-   ENV PORT 8080
-   
    # Copy the jar to the production image from the builder stage.
    COPY --from=builder /app/target/helloworld-1.0.0-SNAPSHOT.jar /helloworld.jar
    
    # Run the web service on container startup.
-   CMD ["java","-Dmicronaut.server.port=${PORT}","-jar","/helloworld.jar"]
+   CMD ["java","-jar","/helloworld.jar"]
    ```
 
 1. Create the `service.yaml` file. You must specify your Docker Hub username in
