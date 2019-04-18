@@ -16,7 +16,7 @@ spec:
               url: "${git.source.repo.url}"
           steps:
             - args:
-                - /workspace/${app.context.dir}/scripts/maven-buildah.sh
+                - /usr/local/bin/maven-buildah.sh
               # Check https://github.com/redhat-developer-demos/quarkus-java-builder for more configuration options
               env:
                 - name: WORK_DIR
