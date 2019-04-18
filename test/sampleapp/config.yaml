@@ -1,5 +1,5 @@
 languages:
-  - language: "java"
+  - language: "java-spring"
     expectedOutput: "Hello Spring Boot Sample v1!"
     preCommands:
       - exec: "curl"
