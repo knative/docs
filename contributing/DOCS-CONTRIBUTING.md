@@ -131,7 +131,8 @@ Here's what generally happens when you open a PR against the `knative/docs` repo
      organization standards.
 
 We appreciate contributions to the docs, so if you open a PR we
-will help you get it merged. You can also post in the `#docs` Slack channel to get input on your ideas before creating a PR.
+will help you get it merged. You can also post in the `#docs` 
+[Slack channel](https://knative.slack.com/) to get input on your ideas before creating a PR.
 
 ### Putting your docs in the right place
 
