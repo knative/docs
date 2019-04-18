@@ -31,7 +31,7 @@ Once you have `minishift` present on your machine and in your `PATH`, you can
 either follow the manual set up steps below, or you can run the convenient
 scripts from
 [the openshift-cloud-functions/knative-operators project](https://github.com/openshift-cloud-functions/knative-operators),
-which do something similiar, like this:
+which do something similar, like this:
 
     git clone https://github.com/openshift-cloud-functions/knative-operators
     cd knative-operators
