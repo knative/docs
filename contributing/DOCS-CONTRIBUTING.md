@@ -260,7 +260,7 @@ There are currently two categories of user focused code samples, either (1)
 ## Assigning reviewers
 
 For both documentation and code samples, you should assign your PR to a single
-owner. Its best to assign your PR to an owner rather than leaving it unassigned.
+owner. It's best to assign your PR to an owner rather than leaving it unassigned.
 
 For code samples, initially assign your PR to the SME who should review
 for technical accuracy. If you don't know who the appropriate owner/reviewer of
