@@ -163,7 +163,7 @@ etc.) or in `knative/docs`, the Knative documentation repo.
 
 * **User-focused content**
 
-  * *Documentation*: Includes all content for users of Knative. The
+  * *Documentation*: Includes all content for Knative users. The
     external-facing user documentation belongs in the
     [`knative/docs` repo](https://github.com/knative/docs). All content in
     `knative/docs` is published to [https://knative.dev](https://knative.dev).
