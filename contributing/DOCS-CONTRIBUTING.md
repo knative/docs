@@ -117,7 +117,7 @@ Here's what generally happens when you open a PR against the `knative/docs` repo
    review.
 1. If the PR involves significant technical changes, for example new features,
    or new and changed sample code, the PR is assigned to a Subject Matter
-   Expert (SME) or engineer for technical review and approval.
+   Expert (SME), typically an engineer working on Knative, for technical review and approval.
 1. When both the technical writers and SMEs are satisfied with the quality
    of the writing and the technical accuracy of the content, the PR can be
    merged. A PR requires two labels before for it's eligible for merging:
