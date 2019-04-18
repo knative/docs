@@ -125,9 +125,10 @@ Here's what generally happens when you open a PR against the `knative/docs` repo
    * The SME is responsible for reviewing the technical accuracy and adding
      the `lgtm` label.
 
-   * The Knative technical writers generally use the publicly available
-     [Google Style Guide](https://developers.google.com/style/) and are who
-     provide the `approved` label when the content meets quality, clarity, and
+   * The [Knative technical writers](https://github.com/knative/docs/blob/master/OWNERS_ALIASES) 
+     generally use the publicly available
+     [Google Style Guide](https://developers.google.com/style/) for writing standards,
+     and are who provide the `approved` label when the content meets quality, clarity, and
      organization standards.
 
 We appreciate contributions to the docs, so if you open a PR we
