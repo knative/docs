@@ -192,7 +192,7 @@ There are currently two categories of user-focused code samples,
       receive attention or use, those samples will be moved into the
       "[community maintained](https://github.com/knative/docs/tree/master/community/samples)" 
       set of samples.
-    * *Passes e2e testing* - All code samples within `docs/[component]/samples`
+    * *Passes e2e testing* - All code samples within `docs/[*component*]/samples`
       folders must align with (and pass) the
       [`e2e` tests](https://github.com/knative/docs/tree/master/test).
 
