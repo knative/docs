@@ -265,7 +265,7 @@ owner. Its best to assign your PR to an owner rather than leaving it unassigned.
 For code samples, initially assign your PR to the SME who should review
 for technical accuracy. If you don't know who the appropriate owner/reviewer of
 your PR should be, you can assign it to the
-[current Work Group lead](./WORKING-GROUPS.md) of the related component.
+[current working group lead](./WORKING-GROUPS.md) of the related component.
 
 If you want to notify and include other stakeholders in your PR review, use the
 `/cc` command. For example: `/cc @stakeholder1 @stakeholder2`
