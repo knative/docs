@@ -189,7 +189,8 @@ There are currently two categories of user-focused code samples,
     * *Receives regular traffic* - To avoid hosting and maintaining unused
       or stale content, if code samples are not being viewed and fail to
       receive attention or use, those samples will be moved into the
-      "community maintained" set of samples.
+      "[community maintained](https://github.com/knative/docs/tree/master/community/samples)" 
+      set of samples.
     * *Passes e2e testing* - All code samples within `docs/[component]/samples`
       folders must align with (and pass) the
       [`e2e` tests](https://github.com/knative/docs/tree/master/test).
