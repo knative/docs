@@ -18,11 +18,15 @@ into a container as a Volume.
   id, and also set your project ID as default using
   `gcloud config set project $PROJECT_ID`.
 
-## Recreating the sample code
+## Before you begin
+You can either clone the code from this directory using the following commands. Hello world apps are generally more useful if you build them step-by-step therefore you can recreate the source files from this folder by following the steps in the [Recreating the sample code](#Recreating-the-sample-code) section.
 
-While you can clone all of the code from this directory, simple apps are
-generally more useful if you build them step-by-step. The following instructions
-recreate the source files from this folder.
+   ```shell
+   git clone https://github.com/knative/docs knative-docs
+   cd knative-docs/serving/samples/secrets-go
+   ```
+
+## Recreating the sample code
 
 1. Create a new file named `secrets.go` and paste the following code. This code
    creates a basic web server which listens on port 8080:

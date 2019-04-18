@@ -11,11 +11,15 @@ specified, it will use "World" as the TARGET.
   and a Docker Hub account configured (we'll use it for a container registry).
 - [Node.js](https://nodejs.org/en/) installed and configured.
 
-## Recreating the sample code
+## Before you begin
+You can either clone the code from this directory using the following commands. Hello world apps are generally more useful if you build them step-by-step therefore you can recreate the source files from this folder by following the steps in the [Recreating the sample code](#Recreating-the-sample-code) section.
 
-While you can clone all of the code from this directory, hello world apps are
-generally more useful if you build them step-by-step. The following instructions
-recreate the source files from this folder.
+   ```shell
+   git clone https://github.com/knative/docs knative-docs
+   cd knative-docs/serving/samples/hello-world/helloworld-nodejs
+   ```
+
+## Recreating the sample code
 
 1. Create a new directory and initialize `npm`:
 

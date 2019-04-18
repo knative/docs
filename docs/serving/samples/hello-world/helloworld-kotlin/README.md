@@ -10,11 +10,15 @@ use for testing. It reads in an env variable `TARGET` and prints "Hello
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
 
-## Steps to recreate the sample code
+## Before you begin
+You can either clone the code from this directory using the following commands. Hello world apps are generally more useful if you build them step-by-step therefore you can recreate the source files from this folder by following the steps in the [Recreating the sample code](#Recreating-the-sample-code) section.
 
-While you can clone all of the code from this directory, hello world apps are
-generally more useful if you build them step-by-step. The following instructions
-recreate the source files from this folder.
+   ```shell
+   git clone https://github.com/knative/docs knative-docs
+   cd knative-docs/serving/samples/hello-world/helloworld-kotlin
+   ```
+
+## Recreating the sample code
 
 1. Create a new directory and cd into it:
 

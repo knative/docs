@@ -12,11 +12,15 @@ TARGET is not specified, it will use "World" as the TARGET.
 - You have installed
   [Java SE 8 or later JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
 
-## Recreating the sample code
+## Before you begin
+You can either clone the code from this directory using the following commands. Hello world apps are generally more useful if you build them step-by-step therefore you can recreate the source files from this folder by following the steps in the [Recreating the sample code](#Recreating-the-sample-code) section.
 
-While you can clone all of the code from this directory, hello world apps are
-generally more useful if you build them step-by-step. The following instructions
-recreate the source files from this folder.
+   ```shell
+   git clone https://github.com/knative/docs knative-docs
+   cd knative-docs/serving/samples/hello-world/helloworld-java
+   ```
+
+## Recreating the sample code
 
 1. From the console, create a new empty web project using the curl and unzip
    commands:

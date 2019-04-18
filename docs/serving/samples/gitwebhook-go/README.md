@@ -1,6 +1,13 @@
 A handler written in Go that demonstrates interacting with GitHub through a
 webhook.
 
+## Before you begin
+
+   ```shell
+   git clone https://github.com/knative/docs knative-docs
+   cd knative-docs/serving/samples/grpc-ping-go
+   ```
+
 ## Prerequisites
 
 - A Kubernetes cluster with Knative installed. Follow the

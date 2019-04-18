@@ -8,8 +8,11 @@ This sample demonstrates:
 ## Before you begin
 
 - [Install Knative Serving](../../../install/README.md)
-- Create a local folder for this sample and download the files in this directory
-  into it.
+- Clone this repo
+   ```shell
+   git clone https://github.com/knative/docs knative-docs
+   cd knative-docs/serving/samples/build-private-repo-go
+   ```
 
 ## Setup
 

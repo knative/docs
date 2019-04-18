@@ -10,14 +10,14 @@ then outputs the stock price.
    installed locally.
 1. [Outbound network access](../../outbound-network-access.md) enabled for this
    Service to make external API requests.
-1. The code checked out locally.
 1. `envsubst` installed locally. This is installed by the `gettext` package. If
    not installed it can be installed by a Linux package manager, or by
    [Homebrew](https://brew.sh/) on OS X.
-
+1. The code checked out locally.
 ```shell
 go get -d github.com/knative/docs/docs/serving/samples/rest-api-go
 ```
+
 
 ## Setup
 

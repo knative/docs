@@ -16,6 +16,13 @@ to `"Hello World!"`.
 - [Scala's](https://scala-lang.org/) standard build tool
   [sbt](https://www.scala-sbt.org/) installed locally.
 
+## Before you begin
+
+   ```shell
+   git clone https://github.com/knative/docs knative-docs
+   cd knative-docs/serving/samples/hello-world/helloworld-scala
+   ```
+
 ## Configuring the sbt build
 
 If you want to use your Docker Hub repository, set the repository to

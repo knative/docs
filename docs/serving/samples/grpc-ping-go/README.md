@@ -2,6 +2,13 @@ A simple gRPC server written in Go that you can use for testing.
 
 This sample requires knative/serving 0.4 or later.
 
+## Before you begin
+
+   ```shell
+   git clone https://github.com/knative/docs knative-docs
+   cd knative-docs/serving/samples/grpc-ping-go
+   ```
+
 ## Prerequisites
 
 1. [Install Knative](../../../install/README.md).
