@@ -130,7 +130,7 @@ Here's what generally happens when you open a PR against the `knative/docs` repo
      provide the `approved` label when the content meets quality, clarity, and
      organization standards.
 
-Ultimately, we want your assistance so open the PR, and we, the Knative team
+We appreciate contributions to the docs, so if you open a PR we
 will help you get it merged.
 
 ### Putting your docs in the right place
