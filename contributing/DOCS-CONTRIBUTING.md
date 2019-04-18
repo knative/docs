@@ -104,7 +104,7 @@ There are a couple different ways to jump in to the Knative doc set:
   - Was the title or description misleading? Did you expect to find something
     else?
 
-  - If you find something and dont have the bandwidth to open an actual PR, help
+  - If you find something and don't have the bandwidth to open a PR,
     make us aware of the pain point and open an
     [Issue](https://github.com/knative/docs/issues/new).
 
