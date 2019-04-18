@@ -243,7 +243,7 @@ There are currently two categories of user focused code samples, either (1)
 
      To fix the typo:
      1. You open a PR against
-        [`master`](https://github.com/knative/docs/tree/master/).
+        [`master`](https://github.com/knative/docs/tree/master/) branch.
      1. Add one or more `cherrypick-#.#` labels to that PR to indicate which
         of the past release branches should also be fixed. Generally, we only maintain the most recent numbered release.
      1. If you want to complete the fix yourself (best practice), you then open
