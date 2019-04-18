@@ -226,7 +226,7 @@ files from the Knative repositories:
 
 _\*_ See
 [Installing logging, metrics, and traces](../serving/installing-logging-metrics-traces.md)
-for details about installing the various supported observability plug-ins.
+for details about installing the various supported observability plugins.
 
 † These are the recommended standard install files suitable for most use cases.
 
@@ -339,7 +339,7 @@ commands below.
     **Example install commands:**
 
      - To install the Knative Serving component with the set of observability
-       plug-ins, enter the following command. The `--selector` flag
+       plugins, enter the following command. The `--selector` flag
        installs the CRDs first:
 
        ```bash
@@ -403,7 +403,7 @@ commands below.
 
    See
    [Installing logging, metrics, and traces](../serving/installing-logging-metrics-traces.md)
-   for details about setting up the various supported observability plug-ins.
+   for details about setting up the various supported observability plugins.
 
 You are now ready to deploy an app, run a build, or start sending and receiving
 events in your Knative cluster.
