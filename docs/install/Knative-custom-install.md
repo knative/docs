@@ -304,11 +304,9 @@ commands below.
    completed until the upgrade process finishes.
 
 1. To install Knative components or plugins, specify the filenames in the
-   `kubectl apply` command.
-
-   - Run the `kubectl apply` command once with the
-   `-l knative.dev/crd-install=true` flag to install the CRDs first. (This
-   prevents race conditions, which cause intermittent install errors.) 
+   `kubectl apply` command. To prevent install failures due to race conditions,
+   run the install command first with the `-l knative.dev/crd-install=true` flag,
+   then a second time without the selector flag. This installs the CRDs first:
 
      ```bash
      kubectl apply --selector knative.dev/crd-install=true \
@@ -316,8 +314,8 @@ commands below.
      --filename [FILE_URL]
      ```
 
-   - Then run the `kubectl apply` command without the `-l` flag to complete the
-   install:
+   - Then run the `kubectl apply` command again without the `-l` flag to
+   complete the install:
 
      ```bash
      kubectl apply --filename [FILE_URL] \
@@ -341,14 +339,16 @@ commands below.
     **Example install commands:**
 
      - To install the Knative Serving component with the set of observability
-       plug-ins:
+       plug-ins, enter the following command. The `--selector` flag
+       installs the CRDs first:
 
        ```bash
        kubectl apply --selector knative.dev/crd-install=true \
        --filename https://github.com/knative/serving/releases/download/v0.5.0/serving.yaml \
        --filename https://github.com/knative/serving/releases/download/v0.5.0/monitoring.yaml
        ```
-       Then:
+       Then complete the install by running the command again, this time without
+       `--selector knative.dev/crd-install=true`:
 
        ```bash
        kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/serving.yaml \
@@ -356,7 +356,8 @@ commands below.
        ```
 
    * To install all three Knative components and the set of Eventing sources
-     without an observability plugin:
+     without an observability plugin, enter the following command. The
+    `--selector` flag installs the CRDs first:
 
       ```bash
       kubectl apply --selector knative.dev/crd-install=true \
@@ -367,7 +368,8 @@ commands below.
       --filename https://raw.githubusercontent.com/knative/serving/v0.5.0/third_party/config/build/clusterrole.yaml
       ```
 
-     Then:
+     Then complete the install by running the command again, this time without
+     `--selector knative.dev/crd-install=true`:
 
       ```bash
       kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/serving.yaml \

@@ -194,9 +194,9 @@ your Knative installation, see
    prevent modifications to Eventing Source resources, those changes will not be
    completed until the upgrade process finishes.
 
-1. Run the `kubectl apply` command once with the `-l knative.dev/crd-install=true`
-   flag to install the CRDs first. (This prevents race conditions, which
-   cause intermittent install errors.)
+1. To install Knative, first install the CRDs by running the `kubectl apply`
+   command once with the `-l knative.dev/crd-install=true` flag. This prevents
+   race conditions during the install, which cause intermittent errors:
 
    ```bash
    kubectl apply --selector knative.dev/crd-install=true \
@@ -208,8 +208,9 @@ your Knative installation, see
    --filename https://raw.githubusercontent.com/knative/serving/v0.5.0/third_party/config/build/clusterrole.yaml
    ```
 
-1. Then run the `kubectl apply` command without the `-l` flag to complete the
-   install of Knative and its dependencies:
+1. To complete the install of Knative and its dependencies, run the
+   `kubectl apply` command again, this time without the `--selector`
+   flag, to complete the install of Knative and its dependencies:
 
    ```bash
    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/serving.yaml \
