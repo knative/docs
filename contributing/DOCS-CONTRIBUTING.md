@@ -245,7 +245,7 @@ There are currently two categories of user focused code samples, either (1)
      1. You open a PR against
         [`master`](https://github.com/knative/docs/tree/master/).
      1. Add one or more `cherrypick-#.#` labels to that PR to indicate which
-        of the past release branches should also be fixed.
+        of the past release branches should also be fixed. Generally, we only maintain the most recent numbered release.
      1. If you want to complete the fix yourself (best practice), you then open
         a subsequent PR by running `git cherry-pick [OriginalPRCommit#]` against
         the [release-0.5](https://github.com/knative/docs/tree/release-0.5).
