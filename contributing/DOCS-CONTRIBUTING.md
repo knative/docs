@@ -247,9 +247,11 @@ There are currently two categories of user focused code samples, either (1)
      1. Add one or more `cherrypick-#.#` labels to that PR to indicate which
         of the past release branches should also be fixed. Generally, we only maintain the most recent numbered release.
      1. If you want to complete the fix yourself (best practice), you then open
-        a subsequent PR by running `git cherry-pick [OriginalPRCommit#]` against
+        a subsequent PR by running `git cherry-pick [COMMIT#]` against
         the [release-0.5](https://github.com/knative/docs/tree/release-0.5).
-        Depending on workload and available bandwidth, one of
+        Where [COMMIT#] is the commit of your merged PR.
+        
+        Note: Depending on workload and available bandwidth, one of
         the Knative team members might be able to help handle the
         `git cherry-pick` in order to push the fix into the affected release
         branch(es).
