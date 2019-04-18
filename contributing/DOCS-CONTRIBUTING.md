@@ -249,7 +249,7 @@ There are currently two categories of user focused code samples, either (1)
      1. If you want to complete the fix yourself (best practice), you then open
         a subsequent PR by running `git cherry-pick [OriginalPRCommit#]` against
         the [release-0.5](https://github.com/knative/docs/tree/release-0.5).
-        Optionally (and depending on workload and available bandwidth), one of
+        Depending on workload and available bandwidth, one of
         the Knative team members might be able to help handle the
         `git cherry-pick` in order to push the fix into the affected release
         branch(es).
