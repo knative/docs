@@ -2,3 +2,4 @@ README.md
 .editorconfig
 .gitignore
 .git
+target/
