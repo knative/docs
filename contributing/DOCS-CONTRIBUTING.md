@@ -167,7 +167,7 @@ etc.) or in `knative/docs`, the Knative documentation repo.
     [`knative/docs` repo](https://github.com/knative/docs). All content in
     `knative/docs` is published to [https://knative.dev](https://knative.dev).
 
-  * *Code samples*: Includes user facing code samples and their accompanying
+  * *Code samples*: Includes user-facing code samples and their accompanying
     step-by-step instructions. User code samples are currently separated into
     two different locations within the `knative/docs` repo. See the following
     section for details about determining where you can add your code sample.
