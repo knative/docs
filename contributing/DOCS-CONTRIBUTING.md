@@ -175,7 +175,7 @@ etc.) or in `knative/docs`, the Knative documentation repo.
 
 ##### Determining where to add user focused code samples
 
-There are currently two categories of user focused code samples, either (1)
+There are currently two categories of user-focused code samples,
 *Knative owned and maintained*, or (2) *Community owned and maintained*.
 
   * **Knative owned and maintained**: Includes code samples that are actively
