@@ -160,7 +160,7 @@ etc.) or in `knative/docs`, the Knative documentation repo.
     [knative/eventing tests](https://github.com/knative/eventing/tree/master/test)
     folder.
 
-* **User focused content**
+* **User-focused content**
 
   * *Documentation*: Includes all content for users of Knative. The
     external-facing user documentation belongs in the
