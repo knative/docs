@@ -144,7 +144,7 @@ Depending on the type of content that you want to contribute, it might belong in
 one of the Knative code repositories (`knative/serving`, `knative/eventing`,
 etc.) or in `knative/docs`, the Knative documentation repo.
 
-* **Contributor focused content**
+* **Contributor-focused content**
 
   * *Documentation*: Includes content that is component specific and relevant
     only to contributors of a given component. Contributor focused
