@@ -204,10 +204,6 @@ There are currently two categories of user-focused code samples,
     * Eventing samples: [`/docs/eventing/samples`](https://github.com/knative/docs/tree/master/docs/eventing/samples)
     * Serving samples: [`/docs/serving/samples`](https://github.com/knative/docs/tree/master/docs/serving/samples)
 
-    Important: If these samples become outdated, receive no traffic, or lack
-    an active maintainer, they will be moved into the "community samples"
-    folder.
-
   * **Community owned and maintained samples**: Code samples that have
   been contributed by Knative community members. These samples might not receive
   regular maintenance. It is possible that a sample is no longer current and
