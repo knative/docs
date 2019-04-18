@@ -1,14 +1,14 @@
 apiVersion: serving.knative.dev/v1alpha1
 kind: Service
 metadata:
-  name: helloworld-micronaut
+  name: helloworld-java-micronaut
 spec:
   runLatest:
     configuration:
       revisionTemplate:
         spec:
           container:
-            image: docker.io/{username}/helloworld-micronaut
+            image: docker.io/{username}/helloworld-java-micronaut
             env:
             - name: TARGET
               value: "Micronaut Sample v1"

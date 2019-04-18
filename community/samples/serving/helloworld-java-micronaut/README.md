@@ -151,7 +151,7 @@ To create and configure the source files in the root of your working directory:
     ```yaml
     micronaut:
       application:
-        name: helloworld-micronaut
+        name: helloworld-java-micronaut
       server:
         port: ${PORT:8080}
     ```
@@ -192,7 +192,7 @@ To create and configure the source files in the root of your working directory:
    apiVersion: serving.knative.dev/v1alpha1
    kind: Service
    metadata:
-     name: helloworld-micronaut
+     name: helloworld-java-micronaut
      namespace: default
    spec:
      runLatest:
@@ -200,7 +200,7 @@ To create and configure the source files in the root of your working directory:
          revisionTemplate:
            spec:
              container:
-               image: docker.io/{username}/helloworld-micronaut
+               image: docker.io/{username}/helloworld-java-micronaut
                env:
                  - name: TARGET
                    value: "Micronaut Sample v1"
@@ -217,10 +217,10 @@ your sample app to your cluster:
 
    ```shell
    # Build the container on your local machine
-   docker build -t {username}/helloworld-micronaut .
+   docker build -t {username}/helloworld-java-micronaut .
 
    # Push the container to docker registry
-   docker push {username}/helloworld-micronaut
+   docker push {username}/helloworld-java-micronaut
    ```
 
 1. Now that your container image is in the registry, you can deploy it to your
@@ -230,7 +230,7 @@ your sample app to your cluster:
    kubectl apply --filename service.yaml
    ```
 
-   Result: A service name `helloworld-micronaut` is created in your cluster along
+   Result: A service name `helloworld-java-micronaut` is created in your cluster along
    with the following resources:
 
    - A new immutable revision for the version of the app that you just deployed.
@@ -276,14 +276,14 @@ To verify that your sample app has been successfully deployed:
    command:
 
    ```shell
-   kubectl get services.serving.knative.dev helloworld-micronaut  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+   kubectl get services.serving.knative.dev helloworld-java-micronaut  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
    ```
 
    Example result:
 
    ```shell
-   NAME                     DOMAIN
-   helloworld-micronaut     helloworld-micronaut.default.example.com
+   NAME                          DOMAIN
+   helloworld-java-micronaut     helloworld-java-micronaut.default.example.com
    ```
 
 1. Run the following `curl` command to test your deployed sample app. You must
@@ -291,7 +291,7 @@ To verify that your sample app has been successfully deployed:
    previous step.
 
    ```shell
-   curl -H "Host: helloworld-micronaut.default.example.com" http://{IP_ADDRESS}
+   curl -H "Host: helloworld-java-micronaut.default.example.com" http://{IP_ADDRESS}
    ```
 
    Example result:
