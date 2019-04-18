@@ -53,7 +53,7 @@ Note that code issues should be filed against the
 [individual Knative repositories](http://github.com/knative), while
 documentation issues should go in the
 [`knative/docs`repo](https://github.com/knative/docs/issues). If the issue is
-specific to the [Knative.dev](https://www.knative.dev) website, open the issue
+specific to the [https://knative.dev](https://knative.dev) website, open the issue
 in the [`knative/website`repo](https://github.com/knative/website/issues).
 
 ### Working group
