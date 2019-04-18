@@ -220,7 +220,7 @@ There are currently two categories of user-focused code samples,
    help you get up-and-running with certain use-cases. If you find that
    something is not right or contains outdated info, open an
    of the issue. In which case that sample might be fix if bandwidth or resource
-   exists, or taken down and archived into a past release branch (where it
+   exists, or taken down and archived into the last release branch where it worked.
    hopefully worked last).
 
 #### Choosing the correct branch
