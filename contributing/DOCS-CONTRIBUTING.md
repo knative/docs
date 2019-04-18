@@ -122,7 +122,7 @@ Here's what generally happens when you open a PR against the `knative/docs` repo
    of the writing and the technical accuracy of the content, the PR can be
    merged. A PR requires two labels before for it's eligible for merging:
    `lgtm` and `approved`.
-   * The SME is responsible for reviewing the technical accuracy and is who
+   * The SME is responsible for reviewing the technical accuracy and adding
      can provide the `lgtm`.
 
    * The Knative technical writers generally use the publicly available
