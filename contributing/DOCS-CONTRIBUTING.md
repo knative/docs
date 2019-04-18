@@ -185,7 +185,7 @@ There are currently two categories of user-focused code samples,
 
     * *Actively maintained* - The code sample has an active Knative team member
       who has committed to regular maintenance of that content and ensures that
-      the code is current and working for every product release.
+      the code is updated and working for every product release.
     * *Receives regular traffic* - To avoid hosting and maintaining unused
       or stale content, if code samples are not being viewed and fail to
       receive attention or use, those samples will be moved into the
