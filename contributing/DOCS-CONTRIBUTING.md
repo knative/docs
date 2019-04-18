@@ -165,7 +165,7 @@ etc.) or in `knative/docs`, the Knative documentation repo.
   * *Documentation*: Includes all content for users of Knative. The
     external-facing user documentation belongs in the
     [`knative/docs` repo](https://github.com/knative/docs). All content in
-    `knative/docs` is published to [www.knative.dev](https://www.knative.dev).
+    `knative/docs` is published to [https://knative.dev](https://knative.dev).
 
   * *Code samples*: Includes user facing code samples and their accompanying
     step-by-step instructions. User code samples are currently separated into
