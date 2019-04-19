@@ -10,7 +10,7 @@ spec:
         url: https://github.com/projectriff-samples/node-square
         revision: master
     template:
-      name: buildpack
+      name: buildpacks-cnb
       arguments:
       - name: IMAGE
         value: DOCKER_REPO_OVERRIDE/buildpack-function

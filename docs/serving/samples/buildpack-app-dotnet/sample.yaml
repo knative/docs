@@ -10,7 +10,7 @@ spec:
         url: https://github.com/cloudfoundry-samples/dotnet-core-hello-world
         revision: master
     template:
-      name: buildpack
+      name: buildpacks-cnb
       arguments:
       - name: IMAGE
         value: DOCKER_REPO_OVERRIDE/buildpack-sample-app
