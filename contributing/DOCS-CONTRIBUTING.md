@@ -180,9 +180,9 @@ There are currently two categories of user-focused code samples,
 *Knative owned and maintained* and *Community owned and maintained*.
 
   * **Knative owned and maintained**: Includes code samples that are actively
-    maintained and e2e tested. With currency, clarity, and resource in mind,
-    only the code samples that meet the following requirements are located in
-    the `docs/[*component*]/samples` folders of the `knative/docs` repo:
+    maintained and e2e tested. To ensure content currency and balance available 
+    resource, only the code samples that meet the following requirements are
+    located in the `docs/[*component*]/samples` folders of the `knative/docs` repo:
 
     * *Actively maintained* - The code sample has an active Knative team member
       who has committed to regular maintenance of that content and ensures that
