@@ -258,7 +258,7 @@ kubectl get route blue-green-demo --output jsonpath="{.status.traffic[*].url}"
 With all inbound traffic being directed to the second revision of the
 application, Knative will soon scale the first revision down to 0 running pods
 and the blue/green deployment can be considered complete. Using the named `v1`
-route will reactivate a pod to serve any occassional requests intended
+route will reactivate a pod to serve any occasional requests intended
 specifically for the initial revision.
 
 ## Cleaning up
