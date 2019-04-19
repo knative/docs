@@ -23,9 +23,9 @@ for generating events.
 
 In order to check if a `CamelSource` is fully working, we will create:
 
-- a simple Knative Service that dumps incoming events to its log
+- a simple Knative event display service that prints incoming events to its log
 - a in-memory channel named `camel-test` that will buffer events created by the event source
-- a subscription to direct events from the test channel to a event display service
+- a subscription to direct events from the test channel to the event display service
 
 Deploy the [`display_resources.yaml`](./display_resources.yaml):
 
