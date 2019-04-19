@@ -29,6 +29,17 @@ Knative documentation follows the
 [Google Developer Documentation Style Guide](https://developers.google.com/style/);
 use it as a reference for writing style questions.
 
+### Contributor license agreements
+
+We'd love to accept your contributions! But before we can take them, you need to
+fill out the [Google CLA](https://cla.developers.google.com). Important: You must fill
+out the CLA with the same email address that you used to create your GitHub account.
+
+Once you are CLA'ed, we'll be able to accept your pull requests. This is
+necessary because you own the copyright to your changes, even after your
+contribution becomes part of this project. So this agreement simply gives us
+permission to use and redistribute your contributions as part of the project.
+
 ## Contributing to the documentation
 
 ### Reporting documentation issues
@@ -126,10 +137,8 @@ Here's what generally happens when you open a PR against the `knative/docs` repo
      the `lgtm` label.
 
    * The [Knative technical writers](https://github.com/knative/docs/blob/master/OWNERS_ALIASES) 
-     generally use the publicly available
-     [Google Style Guide](https://developers.google.com/style/) for writing standards,
-     and are who provide the `approved` label when the content meets quality, clarity, and
-     organization standards.
+     are who provide the `approved` label when the content meets quality, clarity, and
+     organization standards (see [Style Guide](#style-guide)).
 
 We appreciate contributions to the docs, so if you open a PR we
 will help you get it merged. You can also post in the `#docs` 
