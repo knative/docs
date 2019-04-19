@@ -87,7 +87,7 @@ Now that your service is created, Knative will perform the following steps:
 
 ### Interacting with your app
 
-To see if your app has been deployed succesfully, you need the host URL and IP
+To see if your app has been deployed successfully, you need the host URL and IP
 address created by Knative.
 
 Note: If your cluster is new, it can take some time before the service is
