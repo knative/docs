@@ -215,8 +215,9 @@ There are currently two categories of user-focused code samples,
    While a sample might be out of date, it could still provide assistance and
    help you get up-and-running with certain use-cases. If you find that
    something is not right or contains outdated info, open an
-   of the issue. In which case that sample might be fix if bandwidth or resource
-   exists, or taken down and archived into the last release branch where it worked.
+   [Issue](https://github.com/knative/docs/issues/new). The sample might be
+   fixed if bandwidth or available resource exists, or the sample might be
+   taken down and archived into the last release branch where it worked.
 
 #### Choosing the correct branch
 
