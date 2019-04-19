@@ -257,18 +257,22 @@ There are currently two categories of user-focused code samples,
   For a list of the available branches in the `knative/docs` repo, see
   [Documentation Releases](https://github.com/knative/docs/blob/master/doc-releases.md).
 
-## Assigning reviewers
+## Assigning owners and reviewers
 
 For both documentation and code samples, you should assign your PR to a single
-owner. It's best to assign your PR to an owner rather than leaving it unassigned.
+owner ("*Assignee*"). It's best to set the "Assignee" and include other stakeholders
+as "Reviewers" rather than leaving it unassigned or allowing 
+[Prow](https://prow.k8s.io/command-help) to auto assign reviewers.
 
-For code samples, initially assign your PR to the SME who should review
-for technical accuracy. If you don't know who the appropriate owner/reviewer of
-your PR should be, you can assign it to the
+Use the `/assign` command to set the owner. For example: `/assign @owner_id`
+
+For code samples, initially set the owner of your PR to the SME who should review
+for technical accuracy. If you don't know who the appropriate owner is, nor 
+who your reviewers should be for your PR, you can assign the
 [current working group lead](./WORKING-GROUPS.md) of the related component.
 
 If you want to notify and include other stakeholders in your PR review, use the
-`/cc` command. For example: `/cc @stakeholder1 @stakeholder2`
+`/cc` command. For example: `/cc @stakeholder_id1 @stakeholder_id2`
 
 ## Docs contributor roles
 
