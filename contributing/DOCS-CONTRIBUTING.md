@@ -23,12 +23,6 @@ Knative follows the [Knative Code of Conduct](./CODE-OF-CONDUCT.md). By
 participating, you are expected to uphold this code. Please report unacceptable
 behavior to knative-code-of-conduct@googlegroups.com.
 
-### Style guide
-
-Knative documentation follows the
-[Google Developer Documentation Style Guide](https://developers.google.com/style/);
-use it as a reference for writing style questions.
-
 ### Contributor license agreements
 
 We'd love to accept your contributions! But before we can take them, you need to
@@ -39,6 +33,12 @@ Once you are CLA'ed, we'll be able to accept your pull requests. This is
 necessary because you own the copyright to your changes, even after your
 contribution becomes part of this project. So this agreement simply gives us
 permission to use and redistribute your contributions as part of the project.
+
+### Style guide
+
+Knative documentation follows the
+[Google Developer Documentation Style Guide](https://developers.google.com/style/);
+use it as a reference for writing style questions.
 
 ## Contributing to the documentation
 
