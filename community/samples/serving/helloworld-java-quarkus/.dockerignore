@@ -3,3 +3,8 @@ README.md
 .gitignore
 .git
 target/
+.settings
+.idea
+.project
+.classpath
+*.iml

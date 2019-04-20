@@ -1,11 +1,19 @@
-# Hello World - Quarkus Java sample
+---
+title: "Hello World - Java (Quarkus)"
+linkTitle: "Java"
+weight: 1
+type: "docs"
+---
 
-A simple JAX-RS REST API application written in Java using [QuarkusIO](https://quarkus.io/).
+{{% readfile file="README.md" relative="true" markdown="true" %}}
 
-It uses an ENV variable `MESSAGE_PREFIX`(defaults to value `Hello`) and prints a message of format
-`${MESSAGE_PREFIX} Knative World!`.
+A simple [JAX-RS REST API](https://github.com/jax-rs) application that is written in Java and uses [QuarkusIO](https://quarkus.io/).
 
-## Prerequisites
+It uses an ENV variable `MESSAGE_PREFIX`(defaults to value `Hello`) and prints a message of format `${MESSAGE_PREFIX} Knative World!`.
+
+## Before you begin
+
+You must meet the following requirements to run this sample:
 
 - A Kubernetes cluster with Knative installed. Follow the
   [installation instructions](https://github.com/knative/docs/blob/master/docs/install/README.md)
@@ -248,7 +256,7 @@ recreate the source files from this folder.
    block below into it.
 
    ```docker
-   FROM quay.io/rhdevelopers/quarkus-java-builder as builder
+   FROM quay.io/rhdevelopers/quarkus-java-builder:graal-1.0.0-rc15 as builder
    COPY . /project
    WORKDIR /project
    # uncomment this to set the MAVEN_MIRROR_URL of your choice, to make faster builds
@@ -268,50 +276,75 @@ recreate the source files from this folder.
    ENTRYPOINT [ "/deployments/run-java.sh" ]
    ```
 
-1. Create a new file, `service.yaml` and copy the following service definition
-into the file. Make sure to replace `{username}` with your Docker Hub
-username.
+   If you want to build Quarkus native image, then copy the following code block in to file called `Dockerfile.native`
 
-   ```yaml
-   apiVersion: serving.knative.dev/v1alpha1
-   kind: Service
-   metadata:
-     name: helloworld-java-quarkus
-   spec:
-     runLatest:
-       configuration:
-         revisionTemplate:
-           spec:
-             container:
-               image: docker.io/{username}/helloworld-java-quarkus
-               env:
-                 - name: MESSAGE_PREFIX
-                   value: "Namaste"
+   ```docker
+    FROM quay.io/rhdevelopers/quarkus-java-builder:graal-1.0.0-rc15 as builder
+    COPY . /project
+    # uncomment this to set the MAVEN_MIRROR_URL of your choice, to make faster builds
+    # ARG MAVEN_MIRROR_URL=<your-maven-mirror-url>
+    # e.g.
+    # ARG MAVEN_MIRROR_URL=http://192.168.64.1:8081/nexus/content/groups/public
+
+    RUN /usr/local/bin/entrypoint-run.sh mvn -DskipTests clean package -Pnative
+
+    FROM registry.fedoraproject.org/fedora-minimal
+
+    COPY --from=builder /project/target/helloworld-java-quarkus-runner /app
+
+    ENTRYPOINT [ "/app" ]
+    CMD [ "-Dquarkus.http.host=0.0.0.0","-Dquarkus.http.port=8080" ]
    ```
+
+1. Create a new file, `service.yaml` and copy the following service definition
+   into the file. Make sure to replace `{username}` with your Docker Hub
+   username.
+
+```yaml
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: helloworld-java-quarkus
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            image: docker.io/{username}/helloworld-java-quarkus
+            env:
+              - name: MESSAGE_PREFIX
+                value: "Namaste"
+```
 
 ## Building and deploying the sample
 
-Once you have recreated the sample code files (or used the files in the sample
-folder) you're ready to build and deploy the sample app.
+Once you have recreated the sample code files (or used the files in the sample folder) you're ready to build and deploy the sample app.
 
 We will be using hub.docker.com as the container registry, if you dont have an account yet have one created before proceeding further.
 
+To use Knative Build, you add your Docker Hub information to the `quarkus-build.yaml` file.
+
+You can build the container image for this sample with either Docker or by using Knative Build:
+
+- [Docker](#using-docker)
+- [Knative Build](#using-knative-build)
+
 ### Using Docker
 
-Use Docker to build the sample code into a container. To build and push with
-Docker Hub, run these commands replacing `{username}` with your Docker Hub
-username:
+To use Docker to locally build your container image and and push to Docker Hub, run the following commands with your Docker Hub username:
 
 ```shell
 
 # We will use the docker daemon of the minikube
 eval $(minikube docker-env)
 
-# build the jar and libs
-./mvnw clean package
-
-# Build the container on your local machine
+# Build the container on your local machine - Quarkus JVM mode
 docker build -t {username}/helloworld-java-quarkus .
+
+# (OR)
+# Build the container on your local machine - Quarkus native mode
+docker build -t {username}/helloworld-java-quarkus -f Dockerfile.native .
 
 # Push the container to docker registry
 docker push {username}/helloworld-java-quarkus
@@ -339,7 +372,7 @@ mvn -Dcontainer.registry.url='https://index.docker.io' \
     -Dgit.source.revision='master' \
     -Dgit.source.repo.url='https://github.com/knative/docs.git' \
     -Dapp.container.image='docker.io/${container.registry.user}/helloworld-java-quarkus' \
-    -Dapp.context.dir='docs/serving/samples/helloworld-java-quarkus' \
+    -Dapp.context.dir='community/samples/serving/helloworld-java-quarkus' \
     clean process-resources
 # create all the resources
 kubectl apply -f target/knative

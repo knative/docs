@@ -16,14 +16,17 @@ spec:
               url: "${git.source.repo.url}"
           steps:
             - args:
-                - /usr/local/bin/maven-buildah.sh
-              # Check https://github.com/redhat-developer-demos/quarkus-java-builder for more configuration options
+                # Check https://github.com/redhat-developer-demos/quarkus-java-builder for more configuration options
+                - /usr/local/bin/buildah.sh              
               env:
                 - name: WORK_DIR
                   value: /workspace/${app.context.dir}
                 - name: DESTINATION_NAME
                   value: ${app.container.image}
-              image: quay.io/rhdevelopers/quarkus-java-builder:graalvm-1.0.0-rc14
+                # uncomment this if you want to build Quarkus in JVM mode
+                # - name: MVN_CMD_ARGS
+                  # value: "clean -DskipTests install"
+              image: quay.io/rhdevelopers/quarkus-java-builder:graal-1.0.0-rc15
               name: docker-push
               # needed for buildah builds to be running as containers
               securityContext:
