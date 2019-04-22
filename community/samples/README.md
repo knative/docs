@@ -1,8 +1,9 @@
 Get up and running with one of the community code samples. 
-This collection of samples are contributed and maintained by members of the Knative community. 
+These samples are contributed and maintained by members of the Knative community. 
 
-Note: It is possible that these samples are no longer current and the author might not be actively maintaining their contribution. 
-[Learn more about the lifespan of samples](../../contributing/DOCS-CONTRIBUTING.md).  If you find that something is not right, lend a helping hand and fix it in a PR.
+Note: It is possible that one or more samples might become outdated or the original author is unable to maintain their
+contribution. If you find that something isn't working, lend a helping hand and fix it in a PR.
+[Learn more about the lifespan of samples](../../contributing/DOCS-CONTRIBUTING.md).  
 
 [**See all Knative code samples**](../../docs/samples/)
 
