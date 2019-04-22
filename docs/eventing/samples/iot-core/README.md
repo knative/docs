@@ -183,6 +183,7 @@ see them in the subscriber.
     
     ```shell
     {"ID":"481014114648052","Data":"eyJzb3VyY2VfaWQiOiJpb3QtY29yZSBkZW1vIiwiZXZlbnRfaWQiOiJlaWQtMzI3MjJiMzItZWU5Mi00YzZlLWEzOTgtNDlmYjRkYWYyNGE1IiwiZXZlbnRfdHMiOjE1NTM3MTczOTYsIm1ldHJpYyI6MC4xMzY1MjI5OH0=","Attributes":{"deviceId":"iot-demo-client","deviceNumId":"2754785852315736","deviceRegistryId":"iot-demo","deviceRegistryLocation":"us-central1","projectId":"s9-demo","subFolder":""},"PublishTime":"2019-03-27T20:09:56.685Z"}
+    ```
 
 ### Cleanup
 
