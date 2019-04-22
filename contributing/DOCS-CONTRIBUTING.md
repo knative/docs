@@ -287,7 +287,7 @@ If you want to notify and include other stakeholders in your PR review, use the
 
 Because contributing to the documentation requires a different skill set than
 contributing to the Knative code base, we've defined the roles of documentation
-contributors seperately from the roles of code contributors.
+contributors separately from the roles of code contributors.
 
 If you're looking for code contributor roles, see [ROLES](./ROLES.md).
 
