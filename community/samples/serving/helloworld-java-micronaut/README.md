@@ -1,5 +1,3 @@
-# Hello World - Micronaut sample
-
 Learn how to deploy a simple web app that is written in Java and uses Micronaut. 
 
 This samples uses Docker to build locally. The app reads in a `TARGET`
