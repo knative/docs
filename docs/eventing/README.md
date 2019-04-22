@@ -9,7 +9,7 @@ Knative Eventing is designed around the following goals:
 1. Knative Eventing services are loosely coupled. These services can be
    developed and deployed independently on, and across a variety of platforms
    (for example Kubernetes, VMs, SaaS or FaaS).
-1. Event producers and event sources are independent. Any producer (or source),
+1. Event producers and event consumers are independent. Any producer (or source),
    can generate events before there are active event consumers that are
    listening. Any event consumer can express interest in an event or class of
    events, before there are producers that are creating those events.
