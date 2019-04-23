@@ -63,15 +63,13 @@ recreate the source files from this folder.
      name: helloworld-php
      namespace: default
    spec:
-     runLatest:
-       configuration:
-         revisionTemplate:
-           spec:
-             container:
-               image: docker.io/{username}/helloworld-php
-               env:
-                 - name: TARGET
-                   value: "PHP Sample v1"
+     template:
+       spec:
+         containers:
+         - image: docker.io/{username}/helloworld-php
+           env:
+             - name: TARGET
+               value: "PHP Sample v1"
    ```
 
 ## Building and deploying the sample

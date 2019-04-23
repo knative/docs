@@ -263,15 +263,13 @@ kind: Service
 metadata:
   name: helloworld-go # The name of the app
 spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        spec:
-          container:
-            image: gcr.io/knative-samples/helloworld-go # The URL to the image of the app
-            env:
-            - name: TARGET # The environment variable printed out by the sample app
-              value: "Go Sample v1"
+  template:
+    spec:
+      containers:
+      - image: gcr.io/knative-samples/helloworld-go # The URL to the image of the app
+        env:
+        - name: TARGET # The environment variable printed out by the sample app
+          value: "Go Sample v1"
 ' | oc create -f -
 # Wait for the hello pod to enter its `Running` state
 oc get pod --watch
