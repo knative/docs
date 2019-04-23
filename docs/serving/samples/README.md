@@ -1,8 +1,8 @@
-Use the following sample applications to help you understand the various Knative
+Use the following code samples to help you understand the various Knative
 Serving resources and how they can be applied across common use cases.
 [Learn more about Knative Serving resources](../README.md).
 
-Additional samples provided by the community are available in the [Community Samples](../../../community/samples/serving) folder.
+[**See all Knative code samples**](../../samples/)
 
 | Name                       | Description                                                                                                                                                                                                              |                                                                                                                                                                                                                            Languages                                                                                                                                                                                                                             |
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
