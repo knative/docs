@@ -83,10 +83,10 @@ overall project.
 If you're looking for something to do to get your feet wet working on Knative,
 look for GitHub issues marked with the Help Wanted label:
 
-- [Build issues](https://github.com/knative/build/issues?utf8=✓&q=is%3Aopen+is%3Aissue+label%3A"help+wanted")
-- [Eventing issues](https://github.com/knative/eventing/issues?utf8=✓&q=is%3Aopen+is%3Aissue+label%3A"help+wanted")
-- [Serving issues](https://github.com/knative/serving/issues?utf8=✓&q=is%3Aopen+is%3Aissue+label%3A"help+wanted")
-- [Documentation repo](https://github.com/knative/docs/issues?utf8=✓&q=is%3Aopen+is%3Aissue+label%3A"help+wanted")
+- [Build issues](https://github.com/knative/build/labels/kind%2Fgood-first-issue)
+- [Eventing issues](https://github.com/knative/eventing/labels/kind%2Fgood-first-issue)
+- [Serving issues](https://github.com/knative/serving/labels/kind%2Fgood-first-issue)
+- [Documentation repo](https://github.com/knative/docs/labels/kind%2Fgood-first-issue)
 
 Even if there's not an issue opened for it, we can always use more testing
 throughout the platform. Similarly, we can always use more docs, richer docs,
