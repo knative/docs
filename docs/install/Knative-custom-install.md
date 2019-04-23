@@ -209,7 +209,7 @@ files from the Knative repositories:
 | [`monitoring-tracing-zipkin.yaml`][1.5]        | Installs only [Zipkin][2.3].**\***                                                                                             | Serving component, ELK stack (monitoring-logs-elasticsearch.yaml) |
 | [`monitoring-tracing-zipkin-in-mem.yaml`][1.6] | Installs only [Zipkin in-memory][2.3]**\***                                                                                    | Serving component                                                 |
 | **knative/build**                              |                                                                                                                                |                                                                   |
-| [`release.yaml`][3.1]†                         | Installs the Build component.                                                                                                  | Cluster roles enabled, if interacting with Serving                |
+| [`build.yaml`][3.1]†                         | Installs the Build component.                                                                                                  | Cluster roles enabled, if interacting with Serving                |
 | **knative/eventing**                           |                                                                                                                                |                                                                   |
 | [`release.yaml`][4.1]†                         | Installs the Eventing component. Includes the in-memory channel provisioner.                                                   | Serving component                                                 |
 | [`eventing.yaml`][4.2]                         | Installs the Eventing component. Does not include the in-memory channel provisioner.                                           | Serving component                                                 |
@@ -226,7 +226,7 @@ files from the Knative repositories:
 
 _\*_ See
 [Installing logging, metrics, and traces](../serving/installing-logging-metrics-traces.md)
-for details about installing the various supported observability plug-ins.
+for details about installing the various supported observability plugins.
 
 † These are the recommended standard install files suitable for most use cases.
 
@@ -304,23 +304,27 @@ commands below.
    completed until the upgrade process finishes.
 
 1. To install Knative components or plugins, specify the filenames in the
-   `kubectl apply` command:
-
-   - To install an individual component or plgugin
-
-     ```bash
-     kubectl apply --filename [FILE_URL]
-     ```
-
-   - To install multiple components or plugins, append additional
-     `--filename [FILENAME]` flags to the `kubectl apply` command:
+   `kubectl apply` command. To prevent install failures due to race conditions,
+   run the install command first with the `-l knative.dev/crd-install=true` flag,
+   then a second time without the selector flag. This installs the CRDs first:
 
      ```bash
-     kubectl apply --filename [FILE_URL] --filename [FILE_URL] \
-       --filename [FILE_URL]
+     kubectl apply --selector knative.dev/crd-install=true \
+     --filename [FILE_URL] \
+     --filename [FILE_URL]
      ```
 
-     where [`FILE_URL`] is the URL path of the desired Knative release:
+   - Then run the `kubectl apply` command again without the `-l` flag to
+   complete the install:
+
+     ```bash
+     kubectl apply --filename [FILE_URL] \
+     --filename [FILE_URL]
+     ```
+
+     You can add as many `--filename [FILE_URL]` as needed.
+
+     [`FILE_URL`] is the URL path of the desired Knative release:
 
      `https://github.com/knative/[COMPONENT]/releases/download/[VERSION]/[FILENAME].yaml`
 
@@ -335,7 +339,16 @@ commands below.
     **Example install commands:**
 
      - To install the Knative Serving component with the set of observability
-       plug-ins:
+       plugins, enter the following command. The `--selector` flag
+       installs the CRDs first:
+
+       ```bash
+       kubectl apply --selector knative.dev/crd-install=true \
+       --filename https://github.com/knative/serving/releases/download/v0.5.0/serving.yaml \
+       --filename https://github.com/knative/serving/releases/download/v0.5.0/monitoring.yaml
+       ```
+       Then complete the install by running the command again, this time without
+       `--selector knative.dev/crd-install=true`:
 
        ```bash
        kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/serving.yaml \
@@ -343,7 +356,20 @@ commands below.
        ```
 
    * To install all three Knative components and the set of Eventing sources
-     without an observability plugin:
+     without an observability plugin, enter the following command. The
+    `--selector` flag installs the CRDs first:
+
+      ```bash
+      kubectl apply --selector knative.dev/crd-install=true \
+      --filename https://github.com/knative/serving/releases/download/v0.5.0/serving.yaml \
+      --filename https://github.com/knative/build/releases/download/v0.5.0/build.yaml \
+      --filename https://github.com/knative/eventing/releases/download/v0.5.0/release.yaml \
+      --filename https://github.com/knative/eventing-sources/releases/download/v0.5.0/eventing-sources.yaml \
+      --filename https://raw.githubusercontent.com/knative/serving/v0.5.0/third_party/config/build/clusterrole.yaml
+      ```
+
+     Then complete the install by running the command again, this time without
+     `--selector knative.dev/crd-install=true`:
 
       ```bash
       kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/serving.yaml \
@@ -377,7 +403,7 @@ commands below.
 
    See
    [Installing logging, metrics, and traces](../serving/installing-logging-metrics-traces.md)
-   for details about setting up the various supported observability plug-ins.
+   for details about setting up the various supported observability plugins.
 
 You are now ready to deploy an app, run a build, or start sending and receiving
 events in your Knative cluster.
