@@ -93,7 +93,7 @@ first name):
 | <img width="30px" src="https://github.com/isdal.png">    | Tomas Isdal    | Google       | [@isdal](https://github.com/isdal)       |
 |                                                          | TBD            | Pivotal      |                                          |
 
-There are currently one unfilled seat, as indicated by TBD.
+There is currently one unfilled seat, as indicated by TBD.
 
 ### Allocation of seats
 
