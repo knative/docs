@@ -740,6 +740,21 @@ BuildSpecStatus
 <tbody>
 <tr>
 <td>
+<code>Status</code></br>
+<em>
+<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Status">
+github.com/knative/pkg/apis/duck/v1alpha1.Status
+</a>
+</em>
+</td>
+<td>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
+</td>
+</tr>
+<tr>
+<td>
 <code>builder</code></br>
 <em>
 <a href="#BuildProvider">
@@ -833,20 +848,6 @@ Kubernetes meta/v1.Time
 <p>StepsCompleted lists the name of build steps completed.</p>
 </td>
 </tr>
-<tr>
-<td>
-<code>conditions</code></br>
-<em>
-<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Conditions">
-github.com/knative/pkg/apis/duck/v1alpha1.Conditions
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Conditions describes the set of conditions of this build.</p>
-</td>
-</tr>
 </tbody>
 </table>
 <h3 id="BuildTemplateInterface">BuildTemplateInterface
@@ -858,7 +859,7 @@ github.com/knative/pkg/apis/duck/v1alpha1.Conditions
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#BuildTemplate">BuildTemplate</a>, 
+<a href="#BuildTemplate">BuildTemplate</a>,
 <a href="#ClusterBuildTemplate">ClusterBuildTemplate</a>)
 </p>
 <p>
@@ -1352,5 +1353,5 @@ This will override any of the template&rsquo;s steps environment variables.</p>
 <hr/>
 <p><em>
 Generated with <code>gen-crd-api-reference-docs</code>
-on git commit <code>ee63efc</code>.
+on git commit <code>4fc8663f</code>.
 </em></p>

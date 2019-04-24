@@ -17,13 +17,11 @@ metadata:
   name: autoscale-go
   namespace: default
 spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        metadata:
-          annotations:
-            # Target 10 in-flight-requests per pod.
-            autoscaling.knative.dev/target: "10"
-        spec:
-          container:
-            image: gcr.io/knative-samples/autoscale-go:0.1
+  template:
+    metadata:
+      annotations:
+        # Target 10 in-flight-requests per pod.
+        autoscaling.knative.dev/target: "10"
+    spec:
+      containers:
+      - image: gcr.io/knative-samples/autoscale-go:0.1

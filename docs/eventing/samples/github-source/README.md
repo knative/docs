@@ -30,14 +30,12 @@ defines this basic service.
 apiVersion: serving.knative.dev/v1alpha1
 kind: Service
 metadata:
-  name: github-message-dumper
+  name: github-event-display
 spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        spec:
-          container:
-            image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/message_dumper
+  template:
+    spec:
+      containers:
+      - image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display
 ```
 
 Enter the following command to create the service from `service.yaml`:
@@ -122,7 +120,7 @@ spec:
   sink:
     apiVersion: serving.knative.dev/v1alpha1
     kind: Service
-    name: github-message-dumper
+    name: github-event-display
 ```
 
 Then, apply that yaml using `kubectl`:
@@ -148,14 +146,14 @@ by looking at our message dumper function logs.
 
 ```shell
 kubectl --namespace default get pods
-kubectl --namespace default logs github-message-dumper-XXXX user-container
+kubectl --namespace default logs github-event-display-XXXX user-container
 ```
 
 You should log lines similar to:
 
 ```
 2018/11/08 18:25:34 Message Dumper received a message: POST / HTTP/1.1
-Host: github-message-dumper.knative-demo.svc.cluster.local
+Host: github-event-display.knative-demo.svc.cluster.local
 Accept-Encoding: gzip
 Ce-Cloudeventsversion: 0.1
 Ce-Eventid: a8d4cf20-e383-11e8-8069-46e3c8ad2b4d

@@ -1,4 +1,3 @@
-# Hello World - Elixir Sample
 
 A simple web application written in [Elixir](https://elixir-lang.org/) using the
 [Phoenix Framework](https://phoenixframework.org/). The application prints all
@@ -70,7 +69,7 @@ When asked, if you want to `Fetch and install dependencies? [Yn]` select `y`
 
    # Prepare final layer
    FROM alpine:latest
-   RUN apk update && apk --no-cache --update add bash openssl-dev
+   RUN apk update && apk --no-cache --update add bash openssl-dev ca-certificates
 
    # Add a user so the server will run as a non-root user.
    RUN addgroup -g 1000 appuser && \

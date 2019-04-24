@@ -10,9 +10,9 @@ spec:
   gcpCredsSecret:
     name: google-cloud-key
     key: key.json
-  googleCloudProject: MY_GCP_PROJECT
+  googleCloudProject: PROJECT_ID
   topic: TOPIC_NAME
   sink:
     apiVersion: eventing.knative.dev/v1alpha1
-    kind: Channel
-    name: CHANNEL_NAME
+    kind: Broker
+    name: default

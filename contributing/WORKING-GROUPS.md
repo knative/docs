@@ -58,7 +58,7 @@ API
 | Community Meeting Calendar | Wednesdays 10:30a-11:00a PST <br>[Calendar](https://calendar.google.com/calendar/embed?src=google.com_18un4fuh6rokqf8hmfftm5oqq4%40group.calendar.google.com) |
 | Meeting Notes              | [Notes](https://docs.google.com/document/d/1NC4klOdNaU-N-PsKLyXBqDKgNSHtxCDep29Ta2b5FK0/edit)                                                                 |
 | Document Folder            | [Folder](https://drive.google.com/corp/drive/folders/1fpBW7VyiBISsKuVdgn1MrgFdtx_JGoC5)                                                                       |
-| Slack Channel              | [#api](https://knative.slack.com/messages/api)                                                                                                                |
+| Slack Channel              | [#serving-api](https://slack.knative.dev/messages/serving-api)                                                                                                |
 
 | &nbsp;                                                   | Leads      | Company | Profile                                 |
 | -------------------------------------------------------- | ---------- | ------- | --------------------------------------- |
@@ -68,14 +68,14 @@ API
 
 [Build](https://github.com/knative/build), Builders, and Build templates
 
-| Artifact                   | Link                                                                                                                                                                                                                             |
-| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Forum                      | [knative-dev@](https://groups.google.com/forum/#!forum/knative-dev)                                                                                                                                                              |
-| Community Meeting VC       | [meet.google.com/hau-nwak-tgm](https://meet.google.com/hau-nwak-tgm) <br>Or dial in:<br>(US) +1 219-778-6103‬ PIN: ‪573 000‬#                                                                                                    |
-| Community Meeting Calendar | Every other Wednesday 10:00a-10:30a PST <br>[Calendar](https://calendar.google.com/event?action=TEMPLATE&tmeid=MTBkb3MwYnVrbDd0djE0a2kzcmpmbjZndm9fMjAxODA5MTJUMTcwMDAwWiBqYXNvbmhhbGxAZ29vZ2xlLmNvbQ&tmsrc=jasonhall%40google.com&scp=ALL) |
-| Meeting Notes              | [Notes](https://docs.google.com/document/d/1e7gMVFlJfkFdTcaWj2qETeRD9kSBG2Vh8mASPmQMYC0/edit)                                                                                                                                    |
-| Document Folder            | [Folder](https://drive.google.com/corp/drive/folders/1ov16HvPam-v_FXAGEaUdHok6_hUAoIoe)                                                                                                                                          |
-| Slack Channel              | [#build-crd](https://knative.slack.com/messages/build-crd)                                                                                                                                                                       |
+| Artifact                   | Link                                                                                                                                                                                                                                        |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Forum                      | [knative-dev@](https://groups.google.com/forum/#!forum/knative-dev)                                                                                                                                                                         |
+| Community Meeting VC       | [meet.google.com/hau-nwak-tgm](https://meet.google.com/hau-nwak-tgm) <br>Or dial in:<br>(US) +1 219-778-6103‬ PIN: ‪573 000‬#                                                                                                               |
+| Community Meeting Calendar | Every other Wednesday 10:00a-10:30a PST <br>[Calendar](https://calendar.google.com/calendar/embed?src=google.com_18un4fuh6rokqf8hmfftm5oqq4%40group.calendar.google.com) |
+| Meeting Notes              | [Notes](https://docs.google.com/document/d/1e7gMVFlJfkFdTcaWj2qETeRD9kSBG2Vh8mASPmQMYC0/edit)                                                                                                                                               |
+| Document Folder            | [Folder](https://drive.google.com/corp/drive/folders/1ov16HvPam-v_FXAGEaUdHok6_hUAoIoe)                                                                                                                                                     |
+| Slack Channel              | [#build-crd](https://slack.knative.dev/messages/build-crd)                                                                                                                                                                                  |
 
 | &nbsp;                                                   | Leads      | Company | Profile                                 |
 | -------------------------------------------------------- | ---------- | ------- | --------------------------------------- |
@@ -94,7 +94,7 @@ conventions
 | Community Meeting Calendar | Tuesdays 10:30a-11:00a Pacific <br>[Calendar Invitation](https://calendar.google.com/calendar/embed?src=google.com_18un4fuh6rokqf8hmfftm5oqq4%40group.calendar.google.com) |
 | Meeting Notes              | [Notes](https://docs.google.com/document/d/1Uh7jTWQruBBmic-WmTvtc9cMF95kQrKb5lsqWhNuikM/edit)                                                                              |
 | Document Folder            | [Folder](https://drive.google.com/corp/drive/folders/1QF-job3rCEqCpJLm8nHkC4mBIi4XANE1)                                                                                    |
-| Slack Channel              | [#cli](https://knative.slack.com)                                                                                                                                          |
+| Slack Channel              | [#cli](https://slack.knative.dev)                                                                                                                                          |
 
 | &nbsp;                                                     | Leads           | Company | Profile                                     |
 | ---------------------------------------------------------- | --------------- | ------- | ------------------------------------------- |
@@ -112,7 +112,7 @@ Knative documentation, especially the [Docs](../docs/README.md) repo.
 | Community Meeting Calendar | Weekly on Tuesdays, alternating between 9:00-9:30am and 4:30-5:00pm PST<br>[Calendar](https://calendar.google.com/calendar/embed?src=google.com_18un4fuh6rokqf8hmfftm5oqq4%40group.calendar.google.com) |
 | Meeting Notes              | [Notes](https://docs.google.com/document/d/1Y7rug0XshcQPdKzptdWbQLQjcjgpFdLeEgP1nfkDAe4/edit)                                                                                                           |
 | Document Folder            | [Folder](https://drive.google.com/corp/drive/folders/1K5cM9m-b93ySI5WGKalJKbBq_cfjyi-y)                                                                                                                 |
-| Slack Channel              | [#docs](https://knative.slack.com/messages/docs)                                                                                                                                                        |
+| Slack Channel              | [#docs](https://slack.knative.dev/messages/docs)                                                                                                                                                        |
 
 | &nbsp;                                                   | Leads      | Company | Profile                                 |
 | -------------------------------------------------------- | ---------- | ------- | --------------------------------------- |
@@ -129,7 +129,7 @@ Event sources, bindings, FaaS framework, and orchestration
 | Community Meeting Calendar | Wednesdays 9:00a-9:30a PST<br>[Calendar](https://calendar.google.com/calendar/embed?src=google.com_18un4fuh6rokqf8hmfftm5oqq4%40group.calendar.google.com) |
 | Meeting Notes              | [Notes](https://docs.google.com/document/d/1uGDehQu493N_XCAT5H4XEw5T9IWlPN1o19ULOWKuPnY/edit)                                                              |
 | Document Folder            | [Folder](https://drive.google.com/corp/drive/folders/1S22YmGl6B1ppYApwa1j5j9Nc6rEChlPo)                                                                    |
-| Slack Channel              | [#eventing](https://knative.slack.com/messages/eventing)                                                                                                   |
+| Slack Channel              | [#eventing](https://slack.knative.dev/messages/eventing)                                                                                                   |
 
 | &nbsp;                                                        | Leads       | Company | Profile                                           |
 | ------------------------------------------------------------- | ----------- | ------- | ------------------------------------------------- |
@@ -148,7 +148,7 @@ interest include: load balancing, routing, DNS configuration and TLS support.
 | Community Meeting Calendar | Thursdays at 9:00a-9:30a PST<br>[Calendar](https://calendar.google.com/calendar/embed?src=google.com_18un4fuh6rokqf8hmfftm5oqq4%40group.calendar.google.com) |
 | Meeting Notes              | [Notes](https://drive.google.com/open?id=1EE1t5mTfnTir2lEasdTMRNtuPEYuPqQCZbU3NC9mHOI)                                                                       |
 | Document Folder            | [Folder](https://drive.google.com/corp/drive/folders/1oVDYbcEDdQ9EpUmkK6gE4C7aZ8u6ujsN)                                                                      |
-| Slack Channel              | [#networking](https://knative.slack.com/messages/networking)                                                                                                 |
+| Slack Channel              | [#networking](https://slack.knative.dev/messages/networking)                                                                                                 |
 
 | &nbsp;                                                    | Leads            | Company | Profile                                   |
 | --------------------------------------------------------- | ---------------- | ------- | ----------------------------------------- |
@@ -166,7 +166,7 @@ Logging, monitoring & tracing infrastructure
 | Community Meeting Calendar | Every other Thursday, 10:30a-11a PST<br>[Calendar](https://calendar.google.com/calendar/embed?src=google.com_18un4fuh6rokqf8hmfftm5oqq4%40group.calendar.google.com) |
 | Meeting Notes              | [Notes](https://drive.google.com/open?id=1vWEpjf093Jsih3mKkpIvmWWbUQPxFkcyDxzNH15rQgE)                                                                               |
 | Document Folder            | [Folder](https://drive.google.com/corp/drive/folders/10HcpZlI1PbFyzinO6HjfHbzCkBXrqXMy)                                                                              |
-| Slack Channel              | [#observability](https://knative.slack.com/messages/observability)                                                                                                   |
+| Slack Channel              | [#observability](https://slack.knative.dev/messages/observability)                                                                                                   |
 
 | &nbsp;                                                    | Leads            | Company | Profile                                   |
 | --------------------------------------------------------- | ---------------- | ------- | ----------------------------------------- |
@@ -183,7 +183,7 @@ Autoscaling
 | Community Meeting Calendar | Wednesdays at 9:30am PST <br>[Calendar](https://calendar.google.com/calendar/embed?src=google.com_18un4fuh6rokqf8hmfftm5oqq4%40group.calendar.google.com) |
 | Meeting Notes              | [Notes](https://docs.google.com/document/d/1FoLJqbDJM8_tw7CON-CJZsO2mlF8Ia1cWzCjWX8HDAI/edit#heading=h.c0ufqy5rucfa)                                      |
 | Document Folder            | [Folder](https://drive.google.com/corp/drive/folders/1qpGIPXVGoMm6IXb74gPrrHkudV_bjIZ9)                                                                   |
-| Slack Channel              | [#autoscaling](https://knative.slack.com/messages/autoscaling)                                                                                            |
+| Slack Channel              | [#autoscaling](https://slack.knative.dev/messages/autoscaling)                                                                                            |
 
 | &nbsp;                                                        | Leads          | Company | Profile                                           |
 | ------------------------------------------------------------- | -------------- | ------- | ------------------------------------------------- |
@@ -201,7 +201,7 @@ performance/scale/load testing infrastructure
 | Community Meeting Calendar | Every other Thursday, 2p PST<br>[Calendar](https://calendar.google.com/calendar/embed?src=google.com_18un4fuh6rokqf8hmfftm5oqq4%40group.calendar.google.com) |
 | Meeting Notes              | [Notes](https://docs.google.com/document/d/1aPRwYGD4XscRIqlBzbNsSB886PJ0G-vZYUAAUjoydko)                                                                     |
 | Document Folder            | [Folder](https://drive.google.com/corp/drive/folders/1oMYB4LQHjySuMChmcWYCyhH7-CSkz2r_)                                                                      |
-| Slack Channel              | [#productivity](https://knative.slack.com/messages/productivity)                                                                                             |
+| Slack Channel              | [#productivity](https://slack.knative.dev/messages/productivity)                                                                                             |
 
 | &nbsp;                                                    | Leads         | Company | Profile                                   |
 | --------------------------------------------------------- | ------------- | ------- | ----------------------------------------- |

@@ -4,9 +4,7 @@ kind: Service
 metadata:
   name: github-message-dumper
 spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        spec:
-          container:
-            image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/message_dumper
+  template:
+    spec:
+      containers:
+      - image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display

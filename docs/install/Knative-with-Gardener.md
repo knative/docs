@@ -77,8 +77,8 @@ Knative depends on Istio.
 1.  Install Istio:
 
     ```bash
-    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.4.0/istio-crds.yaml && \
-    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.4.0/istio.yaml
+    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/istio-crds.yaml && \
+    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/istio.yaml
     ```
 
     Note: the resources (CRDs) defined in the `istio-crds.yaml`file are also
@@ -91,9 +91,9 @@ Knative depends on Istio.
     kubectl label namespace default istio-injection=enabled
     ```
 3.  Monitor the Istio components until all of the components show a `STATUS` of
-    `Running` or `Completed`:
-    ```bash
-    kubectl get pods --namespace istio-system`
+    `Running` or `Completed`: 
+    ```bash 
+    kubectl get pods --namespace istio-system
     ```
 
 It will take a few minutes for all the components to be up and running; you can
@@ -130,22 +130,32 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
    prevent modifications to Eventing Source resources, those changes will not be
    completed until the upgrade process finishes.
 
-1. Run the `kubectl apply` command to install Knative and its dependencies:
+1. To install Knative, first install the CRDs by running the `kubectl apply`
+   command once with the `-l knative.dev/crd-install=true` flag. This prevents
+   race conditions during the install, which cause intermittent errors:
 
    ```bash
-   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.4.0/serving.yaml \
-   --filename https://github.com/knative/build/releases/download/v0.4.0/build.yaml \
-   --filename https://github.com/knative/eventing/releases/download/v0.4.0/release.yaml \
-   --filename https://github.com/knative/eventing-sources/releases/download/v0.4.0/release.yaml \
-   --filename https://github.com/knative/serving/releases/download/v0.4.0/monitoring.yaml \
-   --filename https://raw.githubusercontent.com/knative/serving/v0.4.0/third_party/config/build/clusterrole.yaml
+   kubectl apply --selector knative.dev/crd-install=true \
+   --filename https://github.com/knative/serving/releases/download/v0.5.0/serving.yaml \
+   --filename https://github.com/knative/build/releases/download/v0.5.0/build.yaml \
+   --filename https://github.com/knative/eventing/releases/download/v0.5.0/release.yaml \
+   --filename https://github.com/knative/eventing-sources/releases/download/v0.5.0/eventing-sources.yaml \
+   --filename https://github.com/knative/serving/releases/download/v0.5.0/monitoring.yaml \
+   --filename https://raw.githubusercontent.com/knative/serving/v0.5.0/third_party/config/build/clusterrole.yaml
    ```
 
-   > **Note**: If your install fails on the first attempt, try rerunning the
-   > commands. They will likely succeed on the second attempt. For background
-   > info and to track the upcoming solution to this problem, see issues
-   > [#968](https://github.com/knative/docs/issues/968) and
-   > [#1036](https://github.com/knative/docs/issues/1036).
+1. To complete the install of Knative and its dependencies, run the
+   `kubectl apply` command again, this time without the `--selector`
+   flag, to complete the install of Knative and its dependencies:
+
+   ```bash
+   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/serving.yaml \
+   --filename https://github.com/knative/build/releases/download/v0.5.0/build.yaml \
+   --filename https://github.com/knative/eventing/releases/download/v0.5.0/release.yaml \
+   --filename https://github.com/knative/eventing-sources/releases/download/v0.5.0/eventing-sources.yaml \
+   --filename https://github.com/knative/serving/releases/download/v0.5.0/monitoring.yaml \
+   --filename https://raw.githubusercontent.com/knative/serving/v0.5.0/third_party/config/build/clusterrole.yaml
+   ```
 
    > **Note**: For the v0.4.0 release and newer, the `clusterrole.yaml` file is
    > required to enable the Build and Serving components to interact with each

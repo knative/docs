@@ -156,6 +156,17 @@ string
 load balances over the pods referenced by the ScaleTargetRef.</p>
 </td>
 </tr>
+<tr>
+<td>
+<code>ProtocolType</code></br>
+<em>
+github.com/knative/serving/pkg/apis/networking.ProtocolType
+</em>
+</td>
+<td>
+<p>The application-layer protocol. Matches <code>ProtocolType</code> inferred from the revision spec.</p>
+</td>
+</tr>
 </table>
 </td>
 </tr>
@@ -268,6 +279,17 @@ string
 load balances over the pods referenced by the ScaleTargetRef.</p>
 </td>
 </tr>
+<tr>
+<td>
+<code>ProtocolType</code></br>
+<em>
+github.com/knative/serving/pkg/apis/networking.ProtocolType
+</em>
+</td>
+<td>
+<p>The application-layer protocol. Matches <code>ProtocolType</code> inferred from the revision spec.</p>
+</td>
+</tr>
 </tbody>
 </table>
 <h3 id="PodAutoscalerStatus">PodAutoscalerStatus
@@ -289,6 +311,19 @@ load balances over the pods referenced by the ScaleTargetRef.</p>
 <tbody>
 <tr>
 <td>
+<code>observedGeneration</code></br>
+<em>
+int64
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>ObservedGeneration is the &lsquo;Generation&rsquo; of the Service that
+was last processed by the controller.</p>
+</td>
+</tr>
+<tr>
+<td>
 <code>conditions</code></br>
 <em>
 <a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Conditions">
@@ -298,23 +333,7 @@ github.com/knative/pkg/apis/duck/v1alpha1.Conditions
 </td>
 <td>
 <em>(Optional)</em>
-<p>Conditions communicates information about ongoing/complete
-reconciliation processes that bring the &ldquo;spec&rdquo; inline with the observed
-state of the world.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>observedGeneration</code></br>
-<em>
-int64
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>ObservedGeneration is the &lsquo;Generation&rsquo; of the PodAutoscaler that
-was last processed by the controller. The observed generation is updated
-even if the controller failed to process the spec.</p>
+<p>Conditions the latest available observations of a resource&rsquo;s current state.</p>
 </td>
 </tr>
 </tbody>
@@ -325,14 +344,126 @@ even if the controller failed to process the spec.</p>
 </p>
 Resource Types:
 <ul><li>
+<a href="#Certificate">Certificate</a>
+</li><li>
 <a href="#ClusterIngress">ClusterIngress</a>
+</li><li>
+<a href="#ServerlessService">ServerlessService</a>
 </li></ul>
+<h3 id="Certificate">Certificate
+</h3>
+<p>
+<p>Certificate is responsible for provisioning a SSL certificate for the
+given hosts. It is a Knative abstraction for various SSL certificate
+provisioning solutions (such as cert-manager or self-signed SSL certificate).</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>apiVersion</code></br>
+string</td>
+<td>
+<code>
+networking.internal.knative.dev/v1alpha1
+</code>
+</td>
+</tr>
+<tr>
+<td>
+<code>kind</code></br>
+string
+</td>
+<td><code>Certificate</code></td>
+</tr>
+<tr>
+<td>
+<code>metadata</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#objectmeta-v1-meta">
+Kubernetes meta/v1.ObjectMeta
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Standard object&rsquo;s metadata.
+More info: <a href="https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata">https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata</a></p>
+Refer to the Kubernetes API documentation for the fields of the
+<code>metadata</code> field.
+</td>
+</tr>
+<tr>
+<td>
+<code>spec</code></br>
+<em>
+<a href="#CertificateSpec">
+CertificateSpec
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Spec is the desired state of the Certificate.
+More info: <a href="https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status">https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status</a></p>
+<br/>
+<br/>
+<table>
+<tr>
+<td>
+<code>dnsNames</code></br>
+<em>
+[]string
+</em>
+</td>
+<td>
+<p>DNSNames is a list of DNS names the Certificate could support.
+The wildcard format of DNSNames (e.g. *.default.example.com) is supported.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>secretName</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>SecretName is the name of the secret resource to store the SSL certificate in.</p>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<code>status</code></br>
+<em>
+<a href="#CertificateStatus">
+CertificateStatus
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Status is the current state of the Certificate.
+More info: <a href="https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status">https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status</a></p>
+</td>
+</tr>
+</tbody>
+</table>
 <h3 id="ClusterIngress">ClusterIngress
 </h3>
 <p>
 <p>ClusterIngress is a collection of rules that allow inbound connections to reach the
-endpoints defined by a backend. An ClusterIngress can be configured to give services
-externally-reachable urls, load balance traffic offer name based virtual hosting etc.</p>
+endpoints defined by a backend. A ClusterIngress can be configured to give services
+externally-reachable URLs, load balance traffic, offer name based virtual hosting, etc.</p>
 <p>This is heavily based on K8s Ingress <a href="https://godoc.org/k8s.io/api/extensions/v1beta1#Ingress">https://godoc.org/k8s.io/api/extensions/v1beta1#Ingress</a>
 which some highlighted modifications.</p>
 </p>
@@ -421,8 +552,8 @@ not be used - use metadata.generation</p>
 </td>
 <td>
 <em>(Optional)</em>
-<p>TLS configuration. Currently the ClusterIngress only supports a single TLS
-port, 443. If multiple members of this list specify different hosts, they
+<p>TLS configuration. Currently ClusterIngress only supports a single TLS
+port: 443. If multiple members of this list specify different hosts, they
 will be multiplexed on the same port according to the hostname specified
 through the SNI TLS extension, if the ingress controller fulfilling the
 ingress supports SNI.</p>
@@ -471,6 +602,221 @@ IngressStatus
 <em>(Optional)</em>
 <p>Status is the current state of the ClusterIngress.
 More info: <a href="https://git.k8s.io/community/contributors/devel/api-conventions.md#spec-and-status">https://git.k8s.io/community/contributors/devel/api-conventions.md#spec-and-status</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ServerlessService">ServerlessService
+</h3>
+<p>
+<p>ServerlessService is a proxy for the K8s service objects containing the
+endpoints for the revision, whether those are endpoints of the activator or
+revision pods.
+See: <a href="https://knative.page.link/naxz">https://knative.page.link/naxz</a> for details.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>apiVersion</code></br>
+string</td>
+<td>
+<code>
+networking.internal.knative.dev/v1alpha1
+</code>
+</td>
+</tr>
+<tr>
+<td>
+<code>kind</code></br>
+string
+</td>
+<td><code>ServerlessService</code></td>
+</tr>
+<tr>
+<td>
+<code>metadata</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#objectmeta-v1-meta">
+Kubernetes meta/v1.ObjectMeta
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Standard object&rsquo;s metadata.
+More info: <a href="https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata">https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata</a></p>
+Refer to the Kubernetes API documentation for the fields of the
+<code>metadata</code> field.
+</td>
+</tr>
+<tr>
+<td>
+<code>spec</code></br>
+<em>
+<a href="#ServerlessServiceSpec">
+ServerlessServiceSpec
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Spec is the desired state of the ServerlessService.
+More info: <a href="https://git.k8s.io/community/contributors/devel/api-conventions.md#spec-and-status">https://git.k8s.io/community/contributors/devel/api-conventions.md#spec-and-status</a></p>
+<br/>
+<br/>
+<table>
+<tr>
+<td>
+<code>mode</code></br>
+<em>
+<a href="#ServerlessServiceOperationMode">
+ServerlessServiceOperationMode
+</a>
+</em>
+</td>
+<td>
+<p>Mode describes the mode of operation of the ServerlessService.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>selector</code></br>
+<em>
+map[string]string
+</em>
+</td>
+<td>
+<p>Selector describes the pod labels for selection of pods for the
+revision. Same as K8s service selector.
+See: <a href="https://kubernetes.io/docs/concepts/services-networking/service/">https://kubernetes.io/docs/concepts/services-networking/service/</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>ProtocolType</code></br>
+<em>
+github.com/knative/serving/pkg/apis/networking.ProtocolType
+</em>
+</td>
+<td>
+<p>The application-layer protocol. Matches <code>RevisionProtocolType</code> set on the owning pa/revision.
+serving imports networking, so just use string.</p>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<code>status</code></br>
+<em>
+<a href="#ServerlessServiceStatus">
+ServerlessServiceStatus
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Status is the current state of the ServerlessService.
+More info: <a href="https://git.k8s.io/community/contributors/devel/api-conventions.md#spec-and-status">https://git.k8s.io/community/contributors/devel/api-conventions.md#spec-and-status</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CertificateSpec">CertificateSpec
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#Certificate">Certificate</a>)
+</p>
+<p>
+<p>CertificateSpec defines the desired state of a <code>Certificate</code>.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>dnsNames</code></br>
+<em>
+[]string
+</em>
+</td>
+<td>
+<p>DNSNames is a list of DNS names the Certificate could support.
+The wildcard format of DNSNames (e.g. *.default.example.com) is supported.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>secretName</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>SecretName is the name of the secret resource to store the SSL certificate in.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CertificateStatus">CertificateStatus
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#Certificate">Certificate</a>)
+</p>
+<p>
+<p>CertificateStatus defines the observed state of a <code>Certificate</code>.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>Status</code></br>
+<em>
+<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Status">
+github.com/knative/pkg/apis/duck/v1alpha1.Status
+</a>
+</em>
+</td>
+<td>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>notAfter</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#time-v1-meta">
+Kubernetes meta/v1.Time
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>The expiration time of the TLS certificate stored in the secret named
+by this resource in spec.secretName.</p>
 </td>
 </tr>
 </tbody>
@@ -535,7 +881,7 @@ k8s.io/apimachinery/pkg/util/intstr.IntOrString
 <a href="#HTTPClusterIngressPath">HTTPClusterIngressPath</a>)
 </p>
 <p>
-<p>ClusterIngressBackend describes all endpoints for a given service and port.</p>
+<p>ClusterIngressBackendSplit describes all endpoints for a given service and port.</p>
 </p>
 <table>
 <thead>
@@ -660,7 +1006,7 @@ rule is satisfied, the request is routed to the specified backend.</p>
 </td>
 <td>
 <em>(Optional)</em>
-<p>Hosts are a list of hosts included in the TLS certificate. The values in
+<p>Hosts is a list of hosts included in the TLS certificate. The values in
 this list must match the name/s used in the tlsSecret. Defaults to the
 wildcard host setting for the loadbalancer controller fulfilling this
 ClusterIngress, if left unspecified.</p>
@@ -723,7 +1069,7 @@ Defaults to <code>tls.key</code>.</p>
 <a href="#HTTPClusterIngressRuleValue">HTTPClusterIngressRuleValue</a>)
 </p>
 <p>
-<p>HTTPClusterIngressPath associates a path regex with a backend. Incoming urls matching
+<p>HTTPClusterIngressPath associates a path regex with a backend. Incoming URLs matching
 the path are forwarded to the backend.</p>
 </p>
 <table>
@@ -900,7 +1246,8 @@ Kubernetes meta/v1.Duration
 </p>
 <p>
 <p>IngressSpec describes the ClusterIngress the user wishes to exist.</p>
-<p>In general this follow the same shape as K8s Ingress.  Some notable differences:
+<p>In general this follows the same shape as K8s Ingress.
+Some notable differences:
 - Backends now can have namespace:
 - Traffic can be split across multiple backends.
 - Timeout &amp; Retry can be configured.
@@ -941,8 +1288,8 @@ not be used - use metadata.generation</p>
 </td>
 <td>
 <em>(Optional)</em>
-<p>TLS configuration. Currently the ClusterIngress only supports a single TLS
-port, 443. If multiple members of this list specify different hosts, they
+<p>TLS configuration. Currently ClusterIngress only supports a single TLS
+port: 443. If multiple members of this list specify different hosts, they
 will be multiplexed on the same port according to the hostname specified
 through the SNI TLS extension, if the ingress controller fulfilling the
 ingress supports SNI.</p>
@@ -996,15 +1343,17 @@ IngressVisibility
 <tbody>
 <tr>
 <td>
-<code>conditions</code></br>
+<code>Status</code></br>
 <em>
-<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Conditions">
-github.com/knative/pkg/apis/duck/v1alpha1.Conditions
+<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Status">
+github.com/knative/pkg/apis/duck/v1alpha1.Status
 </a>
 </em>
 </td>
 <td>
-<em>(Optional)</em>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
 </td>
 </tr>
 <tr>
@@ -1019,20 +1368,6 @@ LoadBalancerStatus
 <td>
 <em>(Optional)</em>
 <p>LoadBalancer contains the current status of the load-balancer.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>observedGeneration</code></br>
-<em>
-int64
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>ObservedGeneration is the &lsquo;Generation&rsquo; of the ClusterIngress that
-was last processed by the controller. The observed generation is updated
-even if the controller failed to process the spec.</p>
 </td>
 </tr>
 </tbody>
@@ -1149,6 +1484,120 @@ bool
 <em>(Optional)</em>
 <p>Ingress is a list containing ingress points for the load-balancer.
 Traffic intended for the service should be sent to these ingress points.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ServerlessServiceOperationMode">ServerlessServiceOperationMode
+(<code>string</code> alias)</p></h3>
+<p>
+(<em>Appears on:</em>
+<a href="#ServerlessServiceSpec">ServerlessServiceSpec</a>)
+</p>
+<p>
+<p>ServerlessServiceOperationMode is an enumeration of the modes of operation
+for the ServerlessService.</p>
+</p>
+<h3 id="ServerlessServiceSpec">ServerlessServiceSpec
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#ServerlessService">ServerlessService</a>)
+</p>
+<p>
+<p>ServerlessServiceSpec describes the ServerlessService.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>mode</code></br>
+<em>
+<a href="#ServerlessServiceOperationMode">
+ServerlessServiceOperationMode
+</a>
+</em>
+</td>
+<td>
+<p>Mode describes the mode of operation of the ServerlessService.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>selector</code></br>
+<em>
+map[string]string
+</em>
+</td>
+<td>
+<p>Selector describes the pod labels for selection of pods for the
+revision. Same as K8s service selector.
+See: <a href="https://kubernetes.io/docs/concepts/services-networking/service/">https://kubernetes.io/docs/concepts/services-networking/service/</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>ProtocolType</code></br>
+<em>
+github.com/knative/serving/pkg/apis/networking.ProtocolType
+</em>
+</td>
+<td>
+<p>The application-layer protocol. Matches <code>RevisionProtocolType</code> set on the owning pa/revision.
+serving imports networking, so just use string.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ServerlessServiceStatus">ServerlessServiceStatus
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#ServerlessService">ServerlessService</a>)
+</p>
+<p>
+<p>ServerlessServiceStatus describes the current state of the ServerlessService.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>Status</code></br>
+<em>
+<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Status">
+github.com/knative/pkg/apis/duck/v1alpha1.Status
+</a>
+</em>
+</td>
+<td>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>serviceName</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>ServiceName holds the name of a core K8s Service resource that
+load balances over the pods backing this Revision (activator or revision).</p>
 </td>
 </tr>
 </tbody>
@@ -1824,9 +2273,9 @@ ServiceStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#Configuration">Configuration</a>, 
-<a href="#PinnedType">PinnedType</a>, 
-<a href="#ReleaseType">ReleaseType</a>, 
+<a href="#Configuration">Configuration</a>,
+<a href="#PinnedType">PinnedType</a>,
+<a href="#ReleaseType">ReleaseType</a>,
 <a href="#RunLatestType">RunLatestType</a>)
 </p>
 <p>
@@ -1909,20 +2358,56 @@ the Build object created to produce the container for the Revision.</p>
 <tbody>
 <tr>
 <td>
-<code>conditions</code></br>
+<code>Status</code></br>
 <em>
-<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Conditions">
-github.com/knative/pkg/apis/duck/v1alpha1.Conditions
+<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Status">
+github.com/knative/pkg/apis/duck/v1alpha1.Status
 </a>
 </em>
 </td>
 <td>
-<em>(Optional)</em>
-<p>Conditions communicates information about ongoing/complete
-reconciliation processes that bring the &ldquo;spec&rdquo; inline with the observed
-state of the world.</p>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
 </td>
 </tr>
+<tr>
+<td>
+<code>ConfigurationStatusFields</code></br>
+<em>
+<a href="#ConfigurationStatusFields">
+ConfigurationStatusFields
+</a>
+</em>
+</td>
+<td>
+<p>
+(Members of <code>ConfigurationStatusFields</code> are embedded into this type.)
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ConfigurationStatusFields">ConfigurationStatusFields
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#ConfigurationStatus">ConfigurationStatus</a>,
+<a href="#ServiceStatus">ServiceStatus</a>)
+</p>
+<p>
+<p>ConfigurationStatusFields holds all of the non-duckv1alpha1.Status status fields of a Route.
+These are defined outline so that we can also inline them into Service, and more easily
+copy them.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td>
 <code>latestReadyRevisionName</code></br>
@@ -1947,20 +2432,6 @@ string
 <em>(Optional)</em>
 <p>LatestCreatedRevisionName is the last revision that was created from this
 Configuration. It might not be ready yet, for that use LatestReadyRevisionName.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>observedGeneration</code></br>
-<em>
-int64
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>ObservedGeneration is the &lsquo;Generation&rsquo; of the Configuration that
-was last processed by the controller. The observed generation is updated
-even if the controller failed to process the spec and create the Revision.</p>
 </td>
 </tr>
 </tbody>
@@ -2151,24 +2622,18 @@ come from a single configuration.</p>
 (<code>int64</code> alias)</p></h3>
 <p>
 (<em>Appears on:</em>
-<a href="#PodAutoscalerSpec">PodAutoscalerSpec</a>, 
+<a href="#PodAutoscalerSpec">PodAutoscalerSpec</a>,
 <a href="#RevisionSpec">RevisionSpec</a>)
 </p>
 <p>
 <p>RevisionContainerConcurrencyType is an integer expressing a number of
 in-flight (concurrent) requests.</p>
 </p>
-<h3 id="RevisionProtocolType">RevisionProtocolType
-(<code>string</code> alias)</p></h3>
-<p>
-<p>RevisionProtocolType is an enumeration of the supported application-layer protocols
-See also: <a href="https://github.com/knative/serving/blob/master/docs/runtime-contract.md#protocols-and-ports">https://github.com/knative/serving/blob/master/docs/runtime-contract.md#protocols-and-ports</a></p>
-</p>
 <h3 id="RevisionRequestConcurrencyModelType">RevisionRequestConcurrencyModelType
 (<code>string</code> alias)</p></h3>
 <p>
 (<em>Appears on:</em>
-<a href="#PodAutoscalerSpec">PodAutoscalerSpec</a>, 
+<a href="#PodAutoscalerSpec">PodAutoscalerSpec</a>,
 <a href="#RevisionSpec">RevisionSpec</a>)
 </p>
 <p>
@@ -2180,7 +2645,7 @@ Deprecated in favor of RevisionContainerConcurrencyType.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#Revision">Revision</a>, 
+<a href="#Revision">Revision</a>,
 <a href="#RevisionTemplateSpec">RevisionTemplateSpec</a>)
 </p>
 <p>
@@ -2376,6 +2841,21 @@ int64
 <tbody>
 <tr>
 <td>
+<code>Status</code></br>
+<em>
+<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Status">
+github.com/knative/pkg/apis/duck/v1alpha1.Status
+</a>
+</em>
+</td>
+<td>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
+</td>
+</tr>
+<tr>
+<td>
 <code>serviceName</code></br>
 <em>
 string
@@ -2387,36 +2867,6 @@ string
 load balances over the pods backing this Revision. When the Revision
 is Active, this service would be an appropriate ingress target for
 targeting the revision.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>conditions</code></br>
-<em>
-<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Conditions">
-github.com/knative/pkg/apis/duck/v1alpha1.Conditions
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Conditions communicates information about ongoing/complete
-reconciliation processes that bring the &ldquo;spec&rdquo; inline with the observed
-state of the world.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>observedGeneration</code></br>
-<em>
-int64
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>ObservedGeneration is the &lsquo;Generation&rsquo; of the Configuration that
-was last processed by the controller. The observed generation is updated
-even if the controller failed to process the spec and create the Revision.</p>
 </td>
 </tr>
 <tr>
@@ -2731,6 +3181,58 @@ not be used - use metadata.generation</p>
 <tbody>
 <tr>
 <td>
+<code>Status</code></br>
+<em>
+<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Status">
+github.com/knative/pkg/apis/duck/v1alpha1.Status
+</a>
+</em>
+</td>
+<td>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>RouteStatusFields</code></br>
+<em>
+<a href="#RouteStatusFields">
+RouteStatusFields
+</a>
+</em>
+</td>
+<td>
+<p>
+(Members of <code>RouteStatusFields</code> are embedded into this type.)
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="RouteStatusFields">RouteStatusFields
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#RouteStatus">RouteStatus</a>,
+<a href="#ServiceStatus">ServiceStatus</a>)
+</p>
+<p>
+<p>RouteStatusFields holds all of the non-duckv1alpha1.Status status fields of a Route.
+These are defined outline so that we can also inline them into Service, and more easily
+copy them.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
 <code>domain</code></br>
 <em>
 string
@@ -2786,36 +3288,6 @@ github.com/knative/pkg/apis/duck/v1alpha1.Addressable
 These entries will always contain RevisionName references.
 When ConfigurationName appears in the spec, this will hold the
 LatestReadyRevisionName that we last observed.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>conditions</code></br>
-<em>
-<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Conditions">
-github.com/knative/pkg/apis/duck/v1alpha1.Conditions
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Conditions communicates information about ongoing/complete
-reconciliation processes that bring the &ldquo;spec&rdquo; inline with the observed
-state of the world.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>observedGeneration</code></br>
-<em>
-int64
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>ObservedGeneration is the &lsquo;Generation&rsquo; of the Configuration that
-was last processed by the controller. The observed generation is updated
-even if the controller failed to process the spec and create the Revision.</p>
 </td>
 </tr>
 </tbody>
@@ -2972,118 +3444,47 @@ to be split between two revisions. This type replaces the deprecated Pinned type
 <tbody>
 <tr>
 <td>
-<code>conditions</code></br>
+<code>Status</code></br>
 <em>
-<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Conditions">
-github.com/knative/pkg/apis/duck/v1alpha1.Conditions
+<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Status">
+github.com/knative/pkg/apis/duck/v1alpha1.Status
 </a>
 </em>
 </td>
 <td>
-<em>(Optional)</em>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
 </td>
 </tr>
 <tr>
 <td>
-<code>domain</code></br>
+<code>RouteStatusFields</code></br>
 <em>
-string
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>From RouteStatus.
-Domain holds the top-level domain that will distribute traffic over the provided targets.
-It generally has the form {route-name}.{route-namespace}.{cluster-level-suffix}</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>domainInternal</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>From RouteStatus.
-DeprecatedDomainInternal holds the top-level domain that will distribute traffic over the provided
-targets from inside the cluster. It generally has the form
-{route-name}.{route-namespace}.svc.{cluster-domain-name}
-DEPRECATED: Use Address instead.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>address</code></br>
-<em>
-<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Addressable">
-github.com/knative/pkg/apis/duck/v1alpha1.Addressable
+<a href="#RouteStatusFields">
+RouteStatusFields
 </a>
 </em>
 </td>
 <td>
-<em>(Optional)</em>
-<p>Address holds the information needed for a Route to be the target of an event.</p>
+<p>
+(Members of <code>RouteStatusFields</code> are embedded into this type.)
+</p>
 </td>
 </tr>
 <tr>
 <td>
-<code>traffic</code></br>
+<code>ConfigurationStatusFields</code></br>
 <em>
-<a href="#TrafficTarget">
-[]TrafficTarget
+<a href="#ConfigurationStatusFields">
+ConfigurationStatusFields
 </a>
 </em>
 </td>
 <td>
-<em>(Optional)</em>
-<p>From RouteStatus.
-Traffic holds the configured traffic distribution.
-These entries will always contain RevisionName references.
-When ConfigurationName appears in the spec, this will hold the
-LatestReadyRevisionName that we last observed.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>latestReadyRevisionName</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>From ConfigurationStatus.
-LatestReadyRevisionName holds the name of the latest Revision stamped out
-from this Service&rsquo;s Configuration that has had its &ldquo;Ready&rdquo; condition become &ldquo;True&rdquo;.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>latestCreatedRevisionName</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>From ConfigurationStatus.
-LatestCreatedRevisionName is the last revision that was created from this Service&rsquo;s
-Configuration. It might not be ready yet, for that use LatestReadyRevisionName.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>observedGeneration</code></br>
-<em>
-int64
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>ObservedGeneration is the &lsquo;Generation&rsquo; of the Service that
-was last processed by the controller.</p>
+<p>
+(Members of <code>ConfigurationStatusFields</code> are embedded into this type.)
+</p>
 </td>
 </tr>
 </tbody>
@@ -3092,9 +3493,8 @@ was last processed by the controller.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#RouteSpec">RouteSpec</a>, 
-<a href="#RouteStatus">RouteStatus</a>, 
-<a href="#ServiceStatus">ServiceStatus</a>)
+<a href="#RouteSpec">RouteSpec</a>,
+<a href="#RouteStatusFields">RouteStatusFields</a>)
 </p>
 <p>
 <p>TrafficTarget holds a single entry of the routing table for a Route.</p>
@@ -3162,10 +3562,23 @@ int
 This defaults to zero if unspecified.</p>
 </td>
 </tr>
+<tr>
+<td>
+<code>url</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>URL displays the URL for accessing named traffic targets. URL is displayed in
+status, and is disallowed on spec. URL must contain a scheme (e.g. http://) and
+a hostname, but may not contain anything else (e.g. basic auth, url path, etc.)</p>
+</td>
+</tr>
 </tbody>
 </table>
 <hr/>
 <p><em>
 Generated with <code>gen-crd-api-reference-docs</code>
-on git commit <code>b3c82dc7</code>.
+on git commit <code>ca4fffb4</code>.
 </em></p>

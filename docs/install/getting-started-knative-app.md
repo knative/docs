@@ -53,15 +53,13 @@ metadata:
   name: helloworld-go # The name of the app
   namespace: default # The namespace the app will use
 spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        spec:
-          container:
-            image: gcr.io/knative-samples/helloworld-go # The URL to the image of the app
-            env:
-              - name: TARGET # The environment variable printed out by the sample app
-                value: "Go Sample v1"
+  template:
+    spec:
+      containers:
+      - image: gcr.io/knative-samples/helloworld-go # The URL to the image of the app
+        env:
+          - name: TARGET # The environment variable printed out by the sample app
+            value: "Go Sample v1"
 ```
 
 If you want to deploy the sample app, leave the config file as-is. If you're
@@ -87,7 +85,7 @@ Now that your service is created, Knative will perform the following steps:
 
 ### Interacting with your app
 
-To see if your app has been deployed succesfully, you need the host URL and IP
+To see if your app has been deployed successfully, you need the host URL and IP
 address created by Knative.
 
 Note: If your cluster is new, it can take some time before the service is

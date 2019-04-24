@@ -1,4 +1,3 @@
-# Hello World - Dart sample
 
 A simple web app written in the [Dart](www.dartlang.org) programming language
 that you can use for testing. It reads in the env variable `TARGET` and prints
@@ -25,7 +24,7 @@ be created using the following instructions.
 
    ```yaml
    name: hello_world_dart
-   private: True # let's not accidentally publish this to pub.dartlang.org
+   publish_to: none # let's not accidentally publish this to pub.dartlang.org
    description: >-
      Hello world server example in dart.
    dependencies:

@@ -209,14 +209,12 @@ credentials are then used to authenticate with the Docker registry.
 ## Kubernetes's Docker registry's secret
 
 Kubernetes defines two types of secrets for Docker registries :
-`kubernetes.io/dockercfg` and
-`kubernetes.io/dockerconfigjson`. Knative supports those secrets in
-addition to the one described above.
+`kubernetes.io/dockercfg` and `kubernetes.io/dockerconfigjson`. Knative supports
+those secrets in addition to the one described above.
 
-1. Define a `Secret` from a Docker client configuration file, as
-   documented in [Pull an Image from a Private
-   Registry](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/) 
-   
+1. Define a `Secret` from a Docker client configuration file, as documented in
+   [Pull an Image from a Private Registry](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/)
+
    ```bash
    kubectl create secret generic regcred \
     --from-file=.dockerconfigjson=<path/to/.docker/config.json> \
@@ -225,42 +223,42 @@ addition to the one described above.
 
 1. Direct a `ServiceAccount` to use this `Secret`:
 
-	```yaml
-    apiVersion: v1
-    kind: ServiceAccount
-    metadata:
-      name: build-bot
-    secrets:
-      - name: regcred
-	```
+   ```yaml
+   apiVersion: v1
+   kind: ServiceAccount
+   metadata:
+     name: build-bot
+   secrets:
+     - name: regcred
+   ```
 
-1.  Use that `ServiceAccount` in your `Build`:
+1. Use that `ServiceAccount` in your `Build`:
 
-    ```yaml
-    apiVersion: build.knative.dev/v1alpha1
-    kind: Build
-    metadata:
-      name: build-with-basic-auth
-    spec:
-      serviceAccountName: build-bot
-      steps:
-      ...
-    ```
+   ```yaml
+   apiVersion: build.knative.dev/v1alpha1
+   kind: Build
+   metadata:
+     name: build-with-basic-auth
+   spec:
+     serviceAccountName: build-bot
+     steps:
+     ...
+   ```
 
-1.  Execute the build:
+1. Execute the build:
 
-    ```shell
-    kubectl apply --filename secret.yaml --filename serviceaccount.yaml --filename build.yaml
-    ```
+   ```shell
+   kubectl apply --filename secret.yaml --filename serviceaccount.yaml --filename build.yaml
+   ```
 
 When this build executes, before steps execute, a `~/.docker/config.json` will
 be generated containing the credentials configured in the `Secret`, and these
 credentials are then used to authenticate with the Docker registry.
 
-If both `kubernetes.io/*` and knative flavored basic authentication
-secret are provided, knative will merge the credentials from those
-two ; knative flavored credentials taking precendence over
-`kubernetes.io/dockerconfigjson` (or `kubernetes.io/dockercfg`) ones.
+If both `kubernetes.io/*` and knative flavored basic authentication secret are
+provided, knative will merge the credentials from those two ; knative flavored
+credentials taking precedence over `kubernetes.io/dockerconfigjson` (or
+`kubernetes.io/dockercfg`) ones.
 
 ### Guiding credential selection
 
