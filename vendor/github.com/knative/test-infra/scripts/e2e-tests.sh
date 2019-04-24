@@ -131,10 +131,7 @@ EOF
 # See https://github.com/knative/serving/issues/959 for details.
 # TODO(adrcunha): Remove once the leak issue is resolved.
 function delete_leaked_network_resources() {
-<<<<<<< HEAD
   # On boskos, don't bother with leaks as the janitor will delete everything in the project.
-=======
->>>>>>> master
   (( IS_BOSKOS )) && return
   # Ensure we're using the GCP project used by kubetest
   local gcloud_project="$(gcloud config get-value project)"
@@ -314,11 +311,7 @@ function setup_test_cluster() {
   fi
 }
 
-<<<<<<< HEAD
 # Gets the exit of the test script.
-=======
-# Gets the exit of of the test script.
->>>>>>> master
 # For more details, see set_test_return_code().
 function get_test_return_code() {
   echo $(cat ${TEST_RESULT_FILE})
