@@ -99,6 +99,12 @@ sources:
     support: None
     description: >
       Brings [Apache Kafka](https://kafka.apache.org/) messages into Knative.
+  - name: Kubernetes API Server
+    url: https://github.com/knative/eventing/blob/master/pkg/apis/sources/v1alpha1/apiserver_types.go
+    status: Active Development
+    support: None
+    description: >
+      Brings Kubernetes API server events into Knative.
 
 # These are containers intended to be used with ContainerSource, but are not CRDs.
 containers:
