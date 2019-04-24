@@ -4,6 +4,8 @@ This sample requires knative/serving 0.4 or later.
 
 ## Before you begin
 
+You can either clone the code from this directory using the following commands or you can build this sample step-by-step. To build this app step-by-step complete the [prerequisites](Prerequisites) if you have not already done so, then go to the [Build and run the gRPC server](#Build-and-run-the-gRPC-server) section to get started.
+
    ```shell
    git clone https://github.com/knative/docs knative-docs
    cd knative-docs/serving/samples/grpc-ping-go

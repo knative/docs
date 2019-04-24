@@ -18,6 +18,8 @@ to `"Hello World!"`.
 
 ## Before you begin
 
+You can either clone the code from this directory using the following commands or you can build this sample step-by-step. Hello world apps are generally more useful if you build them step-by-step you can start by [Configuring the sbt build](#Configuring-the-sbt-build).
+
    ```shell
    git clone https://github.com/knative/docs knative-docs
    cd knative-docs/serving/samples/hello-world/helloworld-scala
