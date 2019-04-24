@@ -87,13 +87,13 @@ first name):
 | -------------------------------------------------------- | -------------- | ------------ | ---------------------------------------- |
 | <img width="30px" src="https://github.com/dewitt.png">   | DeWitt Clinton | Google       | [@dewitt](https://github.com/dewitt)     |
 | <img width="30px" src="https://github.com/mchmarny.png"> | Mark Chmarny   | Google       | [@mchmarny](https://github.com/mchmarny) |
+| <img width="30px" src="https://github.com/michael-behrendt.png"> | Michael Behrendt | IBM | [@michael-behrendt](https://github.com/michael-behrendt) |
 | <img width="30px" src="https://github.com/pmorie.png">   | Paul Morie     | Red Hat      | [@pmorie](https://github.com/pmorie)     |
 | <img width="30px" src="https://github.com/rgregg.png">   | Ryan Gregg     | Google       | [@rgregg](https://github.com/rgregg)     |
 | <img width="30px" src="https://github.com/isdal.png">    | Tomas Isdal    | Google       | [@isdal](https://github.com/isdal)       |
-|                                                          | TBD            | IBM          |                                          |
 |                                                          | TBD            | Pivotal      |                                          |
 
-There are currently two unfilled seats, as indicated by TBD.
+There is currently one unfilled seat, as indicated by TBD.
 
 ### Allocation of seats
 

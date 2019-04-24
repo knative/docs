@@ -89,15 +89,13 @@ You can either clone the code from this directory using the following commands. 
      name: helloworld-ruby
      namespace: default
    spec:
-     runLatest:
-       configuration:
-         revisionTemplate:
-           spec:
-             container:
-               image: docker.io/{username}/helloworld-ruby
-               env:
-                 - name: TARGET
-                   value: "Ruby Sample v1"
+     template:
+       spec:
+         containers:
+         - image: docker.io/{username}/helloworld-ruby
+           env:
+             - name: TARGET
+               value: "Ruby Sample v1"
    ```
 
 ## Build and deploy this sample

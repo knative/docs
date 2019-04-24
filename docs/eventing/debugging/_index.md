@@ -1,7 +1,7 @@
 ---
 title: "Debugging Knative Eventing"
 linkTitle: "Debugging"
-weight: 80
+weight: 100
 type: "docs"
 ---
 

@@ -146,15 +146,13 @@ You can either clone the code from this directory using the following commands. 
      name: helloworld-kotlin
      namespace: default
    spec:
-     runLatest:
-       configuration:
-         revisionTemplate:
-           spec:
-             container:
-               image: docker.io/{username}/helloworld-kotlin
-               env:
-                 - name: TARGET
-                   value: "Kotlin Sample v1"
+     template:
+       spec:
+         containers:
+         - image: docker.io/{username}/helloworld-kotlin
+           env:
+             - name: TARGET
+               value: "Kotlin Sample v1"
    ```
 
 ## Build and deploy this sample

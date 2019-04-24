@@ -37,7 +37,7 @@ secrets:
 We are going to add to this an image pull Secret.
 
 1. Create your image pull Secret with the following command, replacing values as
-   neccesary:
+   necessary:
 
    ```shell
    kubectl create secret docker-registry dockerhub-pull-secret \

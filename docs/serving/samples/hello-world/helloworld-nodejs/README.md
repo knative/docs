@@ -40,7 +40,7 @@ You can either clone the code from this directory using the following commands. 
 1. Install the `express` package:
 
    ```shell
-   npm install express --save
+   npm install express
    ```
 
 1. Create a new file named `index.js` and paste the following code:
@@ -120,15 +120,13 @@ You can either clone the code from this directory using the following commands. 
      name: helloworld-nodejs
      namespace: default
    spec:
-     runLatest:
-       configuration:
-         revisionTemplate:
-           spec:
-             container:
-               image: docker.io/{username}/helloworld-nodejs
-               env:
-                 - name: TARGET
-                   value: "Node.js Sample v1"
+     template:
+       spec:
+         containers:
+         - image: docker.io/{username}/helloworld-nodejs
+           env:
+             - name: TARGET
+               value: "Node.js Sample v1"
    ```
 
 ## Building and deploying the sample

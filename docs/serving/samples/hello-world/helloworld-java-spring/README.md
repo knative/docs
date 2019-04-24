@@ -122,18 +122,16 @@ You can either clone the code from this directory using the following commands. 
    apiVersion: serving.knative.dev/v1alpha1
    kind: Service
    metadata:
-     name: helloworld-java
+     name: helloworld-java-spring
      namespace: default
    spec:
-     runLatest:
-       configuration:
-         revisionTemplate:
-           spec:
-             container:
-               image: docker.io/{username}/helloworld-java
-               env:
-                 - name: TARGET
-                   value: "Spring Boot Sample v1"
+     template:
+       spec:
+         containers:
+         - image: docker.io/{username}/helloworld-java-spring
+           env:
+             - name: TARGET
+               value: "Spring Boot Sample v1"
    ```
 
 ## Building and deploying the sample
@@ -147,10 +145,10 @@ folder) you're ready to build and deploy the sample app.
 
    ```shell
    # Build the container on your local machine
-   docker build -t {username}/helloworld-java .
+   docker build -t {username}/helloworld-java-spring .
 
    # Push the container to docker registry
-   docker push {username}/helloworld-java
+   docker push {username}/helloworld-java-spring
    ```
 
 1. After the build has completed and the container is pushed to docker hub, you
@@ -200,14 +198,14 @@ folder) you're ready to build and deploy the sample app.
 1. To find the URL for your service, use
 
    ```shell
-   kubectl get ksvc helloworld-java \
+   kubectl get ksvc helloworld-java-spring \
        --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
 
-   NAME                DOMAIN
-   helloworld-java     helloworld-java.default.example.com
+   NAME                       DOMAIN
+   helloworld-java-spring     helloworld-java-spring.default.example.com
 
    # Or simply:
-   export DOMAIN_NAME=$(kubectl get ksvc helloworld-java \
+   export DOMAIN_NAME=$(kubectl get ksvc helloworld-java-spring \
      --output jsonpath={.status.domain}
    ```
 
