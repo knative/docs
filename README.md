@@ -12,3 +12,7 @@ release of the Knative docs are
 [branched](https://github.com/knative/docs/branches). If you are looking for an
 archived doc set, see the list of available versions in
 [Knative doc releases](./doc-releases.md).
+
+## Building the docs
+
+Docs here are built by <https://github.com/knative/website> and pushed to <https://knative.dev>.
