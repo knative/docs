@@ -19,6 +19,7 @@ files in the following branches:
 
   The following branches include content for released versions of Knative:
 
+  - [**`release-0.5`**](https://github.com/knative/docs/tree/release-0.5)
   - [**`release-0.4`**](https://github.com/knative/docs/tree/release-0.4)
   - [**`release-0.3`**](https://github.com/knative/docs/tree/release-0.3)
   - [**`release-0.2`**](https://github.com/knative/docs/tree/release-0.2)

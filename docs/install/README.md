@@ -69,6 +69,7 @@ available Knative components and a set of observability plugins.
 - [Knative Install on Google Kubernetes Engine](./Knative-with-GKE.md)
 - [Knative Install on IBM Cloud Kubernetes Service](./Knative-with-IKS.md)
 - [Knative Install on IBM Cloud Private](./Knative-with-ICP.md)
+- [Knative Install on Minikube](./Knative-with-Minikube.md)
 - [Knative Install on Pivotal Container Service](./Knative-with-PKS.md)
 
 If you already have a Kubernetes cluster you're comfortable installing _alpha_
@@ -82,10 +83,9 @@ The guides below install some of the available Knative components, without all
 available observability plugins, to minimize the disk space used for install.
 
 - [Knative Install on Docker for Mac](./Knative-with-Docker-for-Mac.md)
-- [Knative Install on Minikube](./Knative-with-Minikube.md)
 - [Knative Install on Minishift](./Knative-with-Minishift.md)
 - [Knative Install on OpenShift](./Knative-with-OpenShift.md)
-- [Knative Install via Operator](https://github.com/openshift-cloud-functions/Documentation/blob/master/knative-OCP-4x.md)
+- [Knative Install on OpenShift via Operator](https://github.com/openshift-cloud-functions/Documentation/blob/master/knative-OCP-4x.md)
 
 **Custom install guide**
 
