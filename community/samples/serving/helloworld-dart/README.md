@@ -1,4 +1,3 @@
-# Hello World - Dart sample
 
 A simple web app written in the [Dart](www.dartlang.org) programming language
 that you can use for testing. It reads in the env variable `TARGET` and prints

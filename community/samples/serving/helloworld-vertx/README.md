@@ -1,4 +1,3 @@
-# Hello World - Eclipse Vert.x sample
 
 Learn how to deploy a simple web app that is written in Java and uses Eclipse
 Vert.x. This samples uses Docker to build locally. The app reads in a `TARGET`
@@ -26,9 +25,9 @@ You must meet the following requirements to complete this sample:
 - A [Docker Hub](https://hub.docker.com/) account where you can push your
   container image.
 
-**Tip**: You can clone the [Knatve/docs repo](https://github.com/knative/docs)
+**Tip**: You can clone the [Knative/docs repo](https://github.com/knative/docs)
 and then modify the source files. Alternatively, learn more by manually creating
-the files youself.
+the files yourself.
 
 ## Creating and configuring the sample code
 

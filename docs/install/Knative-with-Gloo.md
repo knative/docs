@@ -185,15 +185,13 @@ metadata:
   name: helloworld-go
   namespace: default
 spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        spec:
-          container:
-            image: docker.io/{username}/helloworld-go
-            env:
-              - name: TARGET
-                value: "Go Sample v1"
+  template:
+    spec:
+      containers:
+      - image: docker.io/{username}/helloworld-go
+        env:
+          - name: TARGET
+            value: "Go Sample v1"
 ```
 
 Once the sample code has been created, we'll build and deploy it

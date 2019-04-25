@@ -17,18 +17,16 @@ metadata:
   name: stock-service-example
   namespace: default
 spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        spec:
-          container:
-            image: ${REPO}/rest-api-go
-            env:
-              - name: RESOURCE
-                value: stock
-            readinessProbe:
-              httpGet:
-                path: /
-              initialDelaySeconds: 0
-              periodSeconds: 3
+  template:
+    spec:
+      containers:
+      - image: ${REPO}/rest-api-go
+        env:
+          - name: RESOURCE
+            value: stock
+        readinessProbe:
+          httpGet:
+            path: /
+          initialDelaySeconds: 0
+          periodSeconds: 3
 
