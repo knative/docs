@@ -8,7 +8,7 @@ spec:
       revisionTemplate:
         spec:
           container:
-            image: docker.io/{username}/helloworld-java-quarkus
+            image: docker.io/saturnism/helloworld-java-quarkus
             env:
-              - name: MESSAGE_PREFIX
-                value: "Namaste"
+            - name: TARGET
+              value: "Quarkus Sample v1"
