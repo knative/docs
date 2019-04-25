@@ -1,15 +1,6 @@
----
-title: "Hello World - Java (Quarkus)"
-linkTitle: "Java"
-weight: 1
-type: "docs"
----
+A simple [JAX-RS REST API](https://github.com/jax-rs) application that is written in Java and uses [Quarkus](https://quarkus.io/).
 
-{{% readfile file="README.md" relative="true" markdown="true" %}}
-
-A simple [JAX-RS REST API](https://github.com/jax-rs) application that is written in Java and uses [QuarkusIO](https://quarkus.io/).
-
-It uses an ENV variable `MESSAGE_PREFIX`(defaults to value `Hello`) and prints a message of format `${MESSAGE_PREFIX} Knative World!`.
+This samples uses Docker to build locally. The app reads in a `TARGET` env variable and then prints "Hello World: \${TARGET}!". If a value for `TARGET` is not specified, the "NOT SPECIFIED" default value is used.
 
 ## Before you begin
 
@@ -29,7 +20,7 @@ While you can clone all of the code from this directory, hello world apps are
 generally more useful if you build them step-by-step. The following instructions
 recreate the source files from this folder.
 
-1. From the console, create a new empty web project using the maven archetype
+1. From the console, create a new empty web project using the Maven archetype
    commands:
 
    ```shell
@@ -41,12 +32,11 @@ recreate the source files from this folder.
    ```
 
 1. Update the `GreetingResource` class in
-   `src/main/java/com/redhat/developers/demo/GreetingResource.java` with content as:
+   `src/main/java/com/redhat/developer/demos/GreetingResource.java` to handle the "/" mapping and also add a `@ConfigProperty` field to provide the TARGET environment variable:
 
    ```java
    package com.redhat.developer.demos;
 
-   import javax.inject.Inject;
    import javax.ws.rs.GET;
    import javax.ws.rs.Path;
    import javax.ws.rs.Produces;
@@ -55,202 +45,53 @@ recreate the source files from this folder.
 
    @Path("/")
    public class GreeterResource {
-
-     @Inject
-     GreetingService greetingService;
-
-     @ConfigProperty(name = "message.prefix")
-     String messagePrefix;
+     @ConfigProperty(name = "TARGET", defaultValue="World")
+     String target;
 
      @GET
      @Produces(MediaType.TEXT_PLAIN)
-     @Path("/")
      public String greet() {
-       return greetingService.greet(messagePrefix);
+       return "Hello " + target + "!";
      }
+   }
+   ```
 
-     @GET
-     @Produces(MediaType.TEXT_PLAIN)
-     @Path("/healthz")
-     public String health() {
-       return "OK";
+1. Update `src/test/java/com/redhat/developer/demos/GreetingResourceTest.java` test to reflect the change:
+
+   ```java
+   package com.redhat.developer.demos;
+  
+   import io.quarkus.test.junit.QuarkusTest;
+   import org.junit.jupiter.api.Test;
+
+   import static io.restassured.RestAssured.given;
+   import static org.hamcrest.CoreMatchers.is;
+
+   @QuarkusTest
+   public class GreetingResourceTest {
+
+     @Test
+     public void testHelloEndpoint() {
+         given()
+           .when().get("/")
+           .then()
+             .statusCode(200)
+             .body(is("Hello World!"));
      }
    }
 
    ```
 
-1. Add a new class the `GreetingService` class in
-   `src/main/java/com/redhat/developers/demo/GreetingService.java` with content as:
-
-   ```java
-    package com.redhat.developer.demos;
-
-    import javax.enterprise.context.ApplicationScoped;
-
-    @ApplicationScoped
-    public class GreetingService {
-
-      private static final String RESPONSE_STRING_FORMAT = "%s Knative World!";
-
-      public String greet(String prefix) {
-        return String.format(RESPONSE_STRING_FORMAT, prefix);
-      }
-
-    }
-
-   ```
-
-1. Update the pom.xml with the following content:
-
-   ```xml
-   <?xml version="1.0" encoding="UTF-8"?>
-   <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-     <modelVersion>4.0.0</modelVersion>
-     <groupId>com.redhat.developer.demos</groupId>
-     <artifactId>helloworld-java-quarkus</artifactId>
-     <version>1.0-SNAPSHOT</version>
-     <name>Quarkus Hello World</name>
-     <description>A helloworld based on https://quarkus.io</description>
-     <properties>
-       <quarkus.version>0.13.3</quarkus.version>
-       <surefire.version>2.22.0</surefire.version>
-       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-       <maven.compiler.source>1.8</maven.compiler.source>
-       <maven.compiler.target>1.8</maven.compiler.target>
-       <rest-assured.version>3.3.0</rest-assured.version>
-       <build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version>
-     </properties>
-     <dependencyManagement>
-       <dependencies>
-         <dependency>
-           <groupId>io.quarkus</groupId>
-           <artifactId>quarkus-bom</artifactId>
-           <version>${quarkus.version}</version>
-           <type>pom</type>
-           <scope>import</scope>
-         </dependency>
-       </dependencies>
-     </dependencyManagement>
-     <build>
-       <finalName>${project.artifactId}</finalName>
-       <plugins>
-         <plugin>
-           <artifactId>maven-surefire-plugin</artifactId>
-           <version>${surefire.version}</version>
-           <configuration>
-             <systemPropertyVariables>
-               <quarkus.http.test-port>8080</quarkus.http.test-port>
-             </systemPropertyVariables>
-             <systemProperties>
-               <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-             </systemProperties>
-           </configuration>
-         </plugin>
-         <plugin>
-           <artifactId>maven-failsafe-plugin</artifactId>
-           <version>${surefire.version}</version>
-           <executions>
-             <execution>
-               <goals>
-                 <goal>integration-test</goal>
-                 <goal>verify</goal>
-               </goals>
-               <configuration>
-                 <systemProperties>
-                   <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
-                   <quarkus.http.test-port>8080</quarkus.http.test-port>
-                 </systemProperties>
-               </configuration>
-             </execution>
-           </executions>
-         </plugin>
-         <plugin>
-           <groupId>io.quarkus</groupId>
-           <artifactId>quarkus-maven-plugin</artifactId>
-           <version>${quarkus.version}</version>
-           <executions>
-             <execution>
-               <goals>
-                 <goal>build</goal>
-               </goals>
-             </execution>
-           </executions>
-         </plugin>
-         <plugin>
-           <groupId>org.codehaus.mojo</groupId>
-           <artifactId>build-helper-maven-plugin</artifactId>
-           <version>${build-helper-maven-plugin.version}</version>
-           <executions>
-             <execution>
-               <id>add-resource</id>
-               <phase>generate-resources</phase>
-               <goals>
-                 <goal>add-resource</goal>
-               </goals>
-               <configuration>
-                 <resources>
-                   <resource>
-                     <directory>${project.basedir}/src/main/knative</directory>
-                     <targetPath>${project.build.directory}/knative</targetPath>
-                     <filtering>true</filtering>
-                   </resource>
-                 </resources>
-               </configuration>
-             </execution>
-           </executions>
-         </plugin>
-       </plugins>
-     </build>
-     <dependencies>
-       <dependency>
-         <groupId>io.quarkus</groupId>
-         <artifactId>quarkus-resteasy</artifactId>
-       </dependency>
-       <dependency>
-         <groupId>io.quarkus</groupId>
-         <artifactId>quarkus-junit5</artifactId>
-         <scope>test</scope>
-       </dependency>
-       <dependency>
-         <groupId>io.rest-assured</groupId>
-         <artifactId>rest-assured</artifactId>
-         <scope>test</scope>
-       </dependency>
-     </dependencies>
-     <profiles>
-       <profile>
-         <id>native</id>
-         <build>
-           <plugins>
-             <plugin>
-               <groupId>io.quarkus</groupId>
-               <artifactId>quarkus-maven-plugin</artifactId>
-               <version>${quarkus.version}</version>
-               <executions>
-                 <execution>
-                   <goals>
-                     <goal>native-image</goal>
-                   </goals>
-                   <configuration>
-                     <enableHttpUrlHandler>true</enableHttpUrlHandler>
-                   </configuration>
-                 </execution>
-               </executions>
-             </plugin>
-           </plugins>
-         </build>
-       </profile>
-     </profiles>
-   </project>
-   ```
-
-1. Run the application locally:
+1. Remove `src/main/resources/META-INF/resources/index.html` file since it's unncessary for this example.
 
    ```shell
-   ./mvnw compile quarkus:dev
+   rm src/main/resources/META-INF/resources/index.html
    ```
+1. Remove `.dockerignore` file since it's unncessary for this example.
 
-   Go to `http://localhost:8080/` to see your `Hello World!` message.
+   ```shell
+   rm .dockerignore
+   ```
 
 1. In your project directory, create a file named `Dockerfile` and copy the code
    block below into it.
@@ -279,104 +120,80 @@ recreate the source files from this folder.
    If you want to build Quarkus native image, then copy the following code block in to file called `Dockerfile.native`
 
    ```docker
-    FROM quay.io/rhdevelopers/quarkus-java-builder:graal-1.0.0-rc15 as builder
-    COPY . /project
-    # uncomment this to set the MAVEN_MIRROR_URL of your choice, to make faster builds
-    # ARG MAVEN_MIRROR_URL=<your-maven-mirror-url>
-    # e.g.
-    # ARG MAVEN_MIRROR_URL=http://192.168.64.1:8081/nexus/content/groups/public
+   FROM quay.io/rhdevelopers/quarkus-java-builder:graal-1.0.0-rc15 as builder
+   COPY . /project
+   # uncomment this to set the MAVEN_MIRROR_URL of your choice, to make faster builds
+   # ARG MAVEN_MIRROR_URL=<your-maven-mirror-url>
+   # e.g.
+   # ARG MAVEN_MIRROR_URL=http://192.168.64.1:8081/nexus/content/groups/public
 
-    RUN /usr/local/bin/entrypoint-run.sh mvn -DskipTests clean package -Pnative
+   RUN /usr/local/bin/entrypoint-run.sh mvn -DskipTests clean package -Pnative
 
-    FROM registry.fedoraproject.org/fedora-minimal
+   FROM registry.fedoraproject.org/fedora-minimal
 
-    COPY --from=builder /project/target/helloworld-java-quarkus-runner /app
+   COPY --from=builder /project/target/helloworld-java-quarkus-runner /app
 
-    ENTRYPOINT [ "/app" ]
-    CMD [ "-Dquarkus.http.host=0.0.0.0","-Dquarkus.http.port=8080" ]
+   ENTRYPOINT [ "/app" ]
+   CMD [ "-Dquarkus.http.host=0.0.0.0","-Dquarkus.http.port=8080" ]
    ```
 
 1. Create a new file, `service.yaml` and copy the following service definition
    into the file. Make sure to replace `{username}` with your Docker Hub
    username.
 
-```yaml
-apiVersion: serving.knative.dev/v1alpha1
-kind: Service
-metadata:
-  name: helloworld-java-quarkus
-spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        spec:
-          container:
-            image: docker.io/{username}/helloworld-java-quarkus
-            env:
-              - name: MESSAGE_PREFIX
-                value: "Namaste"
-```
+   ```yaml
+   apiVersion: serving.knative.dev/v1alpha1
+   kind: Service
+   metadata:
+     name: helloworld-java-quarkus
+   spec:
+     runLatest:
+       configuration:
+         revisionTemplate:
+           spec:
+             container:
+               image: docker.io/{username}/helloworld-java-quarkus
+               env:
+               - name: TARGET
+                 value: "Quarkus Sample v1"
+   ```
+
+## Locally testing your sample
+
+1. Run the application locally:
+
+   ```shell
+   ./mvnw compile quarkus:dev
+   ```
+
+   Go to `http://localhost:8080/` to see your `Hello World!` message.
 
 ## Building and deploying the sample
 
 Once you have recreated the sample code files (or used the files in the sample folder) you're ready to build and deploy the sample app.
 
-We will be using hub.docker.com as the container registry, if you dont have an account yet have one created before proceeding further.
+1. Use Docker to build the sample code into a container. To build and push with Docker Hub, run these commands replacing `{username}` with your Docker Hub username:
 
-To use Knative Build, you add your Docker Hub information to the `quarkus-build.yaml` file.
+   ```shell
+   # Build the container on your local machine
+   docker build -t {username}/helloworld-java-quarkus .
 
-You can build the container image for this sample with either Docker or by using Knative Build:
+   # (OR)
+   # Build the container on your local machine - Quarkus native mode
+   docker build -t {username}/helloworld-java-quarkus -f Dockerfile.native .
 
-- [Docker](#using-docker)
-- [Knative Build](#using-knative-build)
+   # Push the container to docker registry
+   docker push {username}/helloworld-java-quarkus
+   ```
 
-### Using Docker
-
-To use Docker to locally build your container image and and push to Docker Hub, run the following commands with your Docker Hub username:
-
-```shell
-
-# We will use the docker daemon of the minikube
-eval $(minikube docker-env)
-
-# Build the container on your local machine - Quarkus JVM mode
-docker build -t {username}/helloworld-java-quarkus .
-
-# (OR)
-# Build the container on your local machine - Quarkus native mode
-docker build -t {username}/helloworld-java-quarkus -f Dockerfile.native .
-
-# Push the container to docker registry
-docker push {username}/helloworld-java-quarkus
-```
-
-After the build has completed and the container is pushed to docker hub, you
+1. After the build has completed and the container is pushed to docker hub, you
 can deploy the app into your cluster. Ensure that the container image value
 in `service.yaml` matches the container you built in the previous step. Apply
 the configuration using `kubectl`:
 
-```shell
-kubectl apply --filename service.yaml
-```
-
-### Using Knative Build
-
-The sources also has a knative build file called `quarkus-build.yaml`, that will perform docker less container image build using [buildah](https://buildah.io)
-
-Run the following command replacing `{username}` with your Docker Hub username and `{password}` with Docker Hub password:
-
-```shell
-mvn -Dcontainer.registry.url='https://index.docker.io' \
-    -Dcontainer.registry.user='{username}' \
-    -Dcontainer.registry.password='{password}' \
-    -Dgit.source.revision='master' \
-    -Dgit.source.repo.url='https://github.com/knative/docs.git' \
-    -Dapp.container.image='docker.io/${container.registry.user}/helloworld-java-quarkus' \
-    -Dapp.context.dir='community/samples/serving/helloworld-java-quarkus' \
-    clean process-resources
-# create all the resources
-kubectl apply -f target/knative
-```
+   ```shell
+   kubectl apply --filename service.yaml
+   ```
 
 1. Now that your service is created, Knative will perform the following steps:
 
@@ -444,9 +261,3 @@ To remove the sample app from your cluster, delete the service record:
 kubectl delete --filename service.yaml
 ```
 
-If you have used Knative build technique to build the container image
-then run the following commands to clean up:
-
-```shell
-kubectl delete --filename target/knative
-```
