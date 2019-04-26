@@ -171,8 +171,8 @@ The following Knative installation files are available:
   - https://github.com/knative/serving/releases/download/v0.5.0/monitoring.yaml
   - https://github.com/knative/serving/releases/download/v0.5.0/monitoring-logs-elasticsearch.yaml
   - https://github.com/knative/serving/releases/download/v0.5.0/monitoring-metrics-prometheus.yaml
-  - https://github.com/knative/serving/releases/download/v0.5.0/monitoring-tracing-jaeger.yaml
-  - https://github.com/knative/serving/releases/download/v0.5.0/monitoring-tracing-jaeger-in-mem.yaml
+  - https://github.com/knative/serving/releases/download/v0.6.0/monitoring-tracing-jaeger.yaml
+  - https://github.com/knative/serving/releases/download/v0.6.0/monitoring-tracing-jaeger-in-mem.yaml
   - https://github.com/knative/serving/releases/download/v0.5.0/monitoring-tracing-zipkin.yaml
   - https://github.com/knative/serving/releases/download/v0.5.0/monitoring-tracing-zipkin-in-mem.yaml
 - **Build Component**:
@@ -245,9 +245,9 @@ for details about installing the various supported observability plugins.
 [1.4]:
   https://github.com/knative/serving/releases/download/v0.5.0/monitoring-metrics-prometheus.yaml
 [1.5]:
-  https://github.com/knative/serving/releases/download/v0.5.0/monitoring-tracing-jaeger.yaml
+  https://github.com/knative/serving/releases/download/v0.6.0/monitoring-tracing-jaeger.yaml
 [1.6]:
-  https://github.com/knative/serving/releases/download/v0.5.0/monitoring-tracing-jaeger-in-mem.yaml
+  https://github.com/knative/serving/releases/download/v0.6.0/monitoring-tracing-jaeger-in-mem.yaml
 [1.7]:
   https://github.com/knative/serving/releases/download/v0.5.0/monitoring-tracing-zipkin.yaml
 [1.8]:
