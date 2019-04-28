@@ -337,7 +337,7 @@ commands below.
      - `https://github.com/knative/eventing/releases/download/v0.5.0/release.yaml`
      - `https://github.com/knative/eventing-sources/releases/download/v0.5.0/eventing-sources.yaml`
 
-     **Example install commands:**
+    **Example install commands:**
 
      - To install the Knative Serving component with the set of observability
        plugins, enter the following command. The `--selector` flag installs the
@@ -345,8 +345,8 @@ commands below.
 
        ```bash
        kubectl apply --selector knative.dev/crd-install=true \
-       --filename https://github.com/knative/serving/releases/download/v0.5.0/serving.yaml \
-       --filename https://github.com/knative/serving/releases/download/v0.5.0/monitoring.yaml
+         --filename https://github.com/knative/serving/releases/download/v0.5.0/serving.yaml \
+         --filename https://github.com/knative/serving/releases/download/v0.5.0/monitoring.yaml
        ```
 
        Then complete the install by running the command again, this time without
@@ -354,7 +354,7 @@ commands below.
 
        ```bash
        kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/serving.yaml \
-       --filename https://github.com/knative/serving/releases/download/v0.5.0/monitoring.yaml
+         --filename https://github.com/knative/serving/releases/download/v0.5.0/monitoring.yaml
        ```
 
    * To install all three Knative components and the set of Eventing sources
