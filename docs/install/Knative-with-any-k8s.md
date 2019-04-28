@@ -98,8 +98,8 @@ your Knative installation, see
    ```
 
 1. To complete the install of Knative and its dependencies, run the
-   `kubectl apply` command again, this time without the `--selector`
-   flag, to complete the install of Knative and its dependencies:
+   `kubectl apply` command again, this time without the `--selector` flag, to
+   complete the install of Knative and its dependencies:
 
    ```bash
    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/serving.yaml \

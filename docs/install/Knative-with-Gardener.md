@@ -91,8 +91,8 @@ Knative depends on Istio.
     kubectl label namespace default istio-injection=enabled
     ```
 3.  Monitor the Istio components until all of the components show a `STATUS` of
-    `Running` or `Completed`: 
-    ```bash 
+    `Running` or `Completed`:
+    ```bash
     kubectl get pods --namespace istio-system
     ```
 
@@ -145,8 +145,8 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
    ```
 
 1. To complete the install of Knative and its dependencies, run the
-   `kubectl apply` command again, this time without the `--selector`
-   flag, to complete the install of Knative and its dependencies:
+   `kubectl apply` command again, this time without the `--selector` flag, to
+   complete the install of Knative and its dependencies:
 
    ```bash
    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/serving.yaml \

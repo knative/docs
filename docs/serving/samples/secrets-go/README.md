@@ -161,25 +161,25 @@ recreate the source files from this folder.
        spec:
          containers:
            # Replace {username} with your DockerHub username
-         - image: docker.io/{username}/secrets-go
+           - image: docker.io/{username}/secrets-go
 
-           env:
-             # This directs the Google Cloud SDK to use the identity and project
-             # defined by the Service Account (aka robot) in the JSON file at
-             # this path.
-             #  - `/var/secret` is determined by the `volumeMounts[0].mountPath`
-             #   below. This can be changed if both places are changed.
-             #  - `robot.json` is determined by the "key" that is used to hold the
-             #   secret content in the Kubernetes secret.  This can be changed
-             #   if both places are changed.
-             - name: GOOGLE_APPLICATION_DEFAULT
-               value: /var/secret/robot.json
+             env:
+               # This directs the Google Cloud SDK to use the identity and project
+               # defined by the Service Account (aka robot) in the JSON file at
+               # this path.
+               #  - `/var/secret` is determined by the `volumeMounts[0].mountPath`
+               #   below. This can be changed if both places are changed.
+               #  - `robot.json` is determined by the "key" that is used to hold the
+               #   secret content in the Kubernetes secret.  This can be changed
+               #   if both places are changed.
+               - name: GOOGLE_APPLICATION_DEFAULT
+                 value: /var/secret/robot.json
 
-           # This section specified where in the container we want the
-           # volume containing our secret to be mounted.
-           volumeMounts:
-             - name: robot-secret
-               mountPath: /var/secret
+             # This section specified where in the container we want the
+             # volume containing our secret to be mounted.
+             volumeMounts:
+               - name: robot-secret
+                 mountPath: /var/secret
 
          # This section attaches the secret "google-robot-secret" to
          # the Pod holding the user container.

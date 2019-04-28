@@ -85,7 +85,7 @@ spec:
 
 ## Get started with Knative Build samples
 
-[See Knative Build code samples](./samples.md) 
+[See Knative Build code samples](./samples.md)
 
 ## Related info
 
