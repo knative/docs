@@ -88,10 +88,10 @@ recreate the source files from this folder.
      template:
        spec:
          containers:
-         - image: docker.io/{username}/helloworld-shell
-           env:
-           - name: TARGET
-             value: "Shell Sample v1"
+           - image: docker.io/{username}/helloworld-shell
+             env:
+               - name: TARGET
+                 value: "Shell Sample v1"
    ```
 
 ## Building and deploying the sample

@@ -1,7 +1,7 @@
 # Hello World - Spark Java sample
 
 A simple web app written in Java using Spark Java Framework that you can use for
-testing.  
+testing.
 
 ## Prerequisites
 
@@ -25,7 +25,7 @@ recreate the source files from this folder.
    https://github.com/knative/docs.git
    ```
 
-2. Navigate to the helloworld-java-spark directory 
+2. Navigate to the helloworld-java-spark directory
 
    ```shell
    cd serving/samples/helloworld-java-spark
@@ -34,45 +34,44 @@ recreate the source files from this folder.
 3. Run the application locally:
 
    ```shell
-   ./mvnw package && java -jar target/helloworld-0.0.1-SNAPSHOT-jar-with-dependencies.jar 
+   ./mvnw package && java -jar target/helloworld-0.0.1-SNAPSHOT-jar-with-dependencies.jar
    ```
 
    Go to `http://localhost:8080/` to see your `Hello World!` message.
 
 4. In your project directory, create a file named `Dockerfile` and copy the code
    block below into it. For detailed instructions on dockerizing a Spark Java
-   app, see
-   [Spark with Docker](http://sparkjava.com/tutorials/docker).
-   For additional information on multi-stage docker builds for Java see
+   app, see [Spark with Docker](http://sparkjava.com/tutorials/docker). For
+   additional information on multi-stage docker builds for Java see
    [Creating Smaller Java Image using Docker Multi-stage Build](http://blog.arungupta.me/smaller-java-image-docker-multi-stage-build/).
 
    ```docker
     # Use the official maven/Java 8 image to create a build artifact.
     # https://hub.docker.com/_/maven
     FROM maven:3.5-jdk-8-alpine as builder
-    
+
     # Copy local code to the container image.
     WORKDIR /app
     COPY pom.xml .
     COPY src ./src
-    
+
     # Build a release artifact.
     RUN mvn package -DskipTests
-    
+
     # Use the Official OpenJDK image for a lean production stage of our multi-stage build.
     # https://hub.docker.com/_/openjdk
     # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
     FROM openjdk:8-jre-alpine
-    
+
     # Copy the jar to the production image from the builder stage.
     COPY --from=builder /app/target/helloworld-0.0.1-SNAPSHOT-jar-with-dependencies.jar /helloworld.jar
-    
+
     # Service must listen to $PORT environment variable.
     # This default value facilitates local development.
     ENV PORT 8080
-    
+
     # Run the web service on container startup.
-    CMD ["java","-Dserver.port=${PORT}","-jar","/helloworld.jar"] 
+    CMD ["java","-Dserver.port=${PORT}","-jar","/helloworld.jar"]
    ```
 
 5. Create a new file, `service.yaml` and copy the following service definition
@@ -169,9 +168,8 @@ folder) you're ready to build and deploy the sample app.
      --output jsonpath={.status.domain})
    ```
 
-6. Now you can make a request to your app to see the result. Presuming,
-   the IP address you got in the step above is in the `${IP_ADDRESS}`
-   env variable:
+6. Now you can make a request to your app to see the result. Presuming, the IP
+   address you got in the step above is in the `${IP_ADDRESS}` env variable:
 
    ```shell
    curl -H "Host: ${DOMAIN_NAME}" http://${IP_ADDRESS}
