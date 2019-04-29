@@ -171,6 +171,8 @@ The following Knative installation files are available:
   - https://github.com/knative/serving/releases/download/v0.5.2/monitoring.yaml
   - https://github.com/knative/serving/releases/download/v0.5.2/monitoring-logs-elasticsearch.yaml
   - https://github.com/knative/serving/releases/download/v0.5.2/monitoring-metrics-prometheus.yaml
+  - https://github.com/knative/serving/releases/download/v0.6.0/monitoring-tracing-jaeger.yaml
+  - https://github.com/knative/serving/releases/download/v0.6.0/monitoring-tracing-jaeger-in-mem.yaml
   - https://github.com/knative/serving/releases/download/v0.5.2/monitoring-tracing-zipkin.yaml
   - https://github.com/knative/serving/releases/download/v0.5.2/monitoring-tracing-zipkin-in-mem.yaml
 - **Build Component**:
@@ -206,8 +208,10 @@ files from the Knative repositories:
 | [`monitoring.yaml`][1.2]†                      | Installs the [ELK stack][2], [Prometheus][2.1], [Grafana][2.2], and [Zipkin][2.3]**\***                                        | Serving component                                                 |
 | [`monitoring-logs-elasticsearch.yaml`][1.3]    | Installs only the [ELK stack][2]**\***                                                                                         | Serving component                                                 |
 | [`monitoring-metrics-prometheus.yaml`][1.4]    | Installs only [Prometheus][2.1]**\***                                                                                          | Serving component                                                 |
-| [`monitoring-tracing-zipkin.yaml`][1.5]        | Installs only [Zipkin][2.3].**\***                                                                                             | Serving component, ELK stack (monitoring-logs-elasticsearch.yaml) |
-| [`monitoring-tracing-zipkin-in-mem.yaml`][1.6] | Installs only [Zipkin in-memory][2.3]**\***                                                                                    | Serving component                                                 |
+| [`monitoring-tracing-jaeger.yaml`][1.5]        | Installs only [Jaeger][2.4].**\***                                                                                             | Serving component, ELK stack (monitoring-logs-elasticsearch.yaml) |
+| [`monitoring-tracing-jaeger-in-mem.yaml`][1.6] | Installs only [Jaeger in-memory][2.4]**\***                                                                                    | Serving component                                                 |
+| [`monitoring-tracing-zipkin.yaml`][1.7]        | Installs only [Zipkin][2.3].**\***                                                                                             | Serving component, ELK stack (monitoring-logs-elasticsearch.yaml) |
+| [`monitoring-tracing-zipkin-in-mem.yaml`][1.8] | Installs only [Zipkin in-memory][2.3]**\***                                                                                    | Serving component                                                 |
 | **knative/build**                              |                                                                                                                                |                                                                   |
 | [`build.yaml`][3.1]†                           | Installs the Build component.                                                                                                  | Cluster roles enabled, if interacting with Serving                |
 | **knative/eventing**                           |                                                                                                                                |                                                                   |
@@ -241,13 +245,18 @@ for details about installing the various supported observability plugins.
 [1.4]:
   https://github.com/knative/serving/releases/download/v0.5.2/monitoring-metrics-prometheus.yaml
 [1.5]:
-  https://github.com/knative/serving/releases/download/v0.5.2/monitoring-tracing-zipkin.yaml
+  https://github.com/knative/serving/releases/download/v0.6.0/monitoring-tracing-jaeger.yaml
 [1.6]:
+  https://github.com/knative/serving/releases/download/v0.6.0/monitoring-tracing-jaeger-in-mem.yaml
+[1.7]:
+  https://github.com/knative/serving/releases/download/v0.5.2/monitoring-tracing-zipkin.yaml
+[1.8]:
   https://github.com/knative/serving/releases/download/v0.5.2/monitoring-tracing-zipkin-in-mem.yaml
 [2]: https://www.elastic.co/elk-stack
 [2.1]: https://prometheus.io
 [2.2]: https://grafana.com
 [2.3]: https://zipkin.io/
+[2.4]: https://jaegertracing.io/
 [3]: https://github.com/knative/build/releases/tag/v0.5.2
 [3.1]: https://github.com/knative/build/releases/download/v0.5.0/build.yaml
 [4]: https://github.com/knative/eventing/releases/tag/v0.5.2
