@@ -145,10 +145,10 @@ recreate the source files from this folder.
      template:
        spec:
          containers:
-         - image: docker.io/{username}/helloworld-kotlin
-           env:
-             - name: TARGET
-               value: "Kotlin Sample v1"
+           - image: docker.io/{username}/helloworld-kotlin
+             env:
+               - name: TARGET
+                 value: "Kotlin Sample v1"
    ```
 
 ## Build and deploy this sample

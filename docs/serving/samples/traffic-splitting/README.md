@@ -15,10 +15,10 @@ cd $GOPATH/src/github.com/knative/docs
 ## Using the `traffic:` block
 
 The service was originally created without a `traffic:` block, which means that
-it will automatically deploy the latest updates as they become ready.  To split
+it will automatically deploy the latest updates as they become ready. To split
 traffic between multiple Revisions, we will start to use a customized `traffic:`
-block.  The `traffic:` block enables users to split traffic over any number of
-fixed Revisions, or the floating "latest revision" for the Service.  It also
+block. The `traffic:` block enables users to split traffic over any number of
+fixed Revisions, or the floating "latest revision" for the Service. It also
 enables users to name the specific sub-routes, so that they can be directly
 addressed for qualification or debugging.
 
@@ -26,7 +26,7 @@ The first thing we will do is look at the traffic block that was defaulted for
 us in the previous sample:
 
 1. Fetch the state of the Service, and note the `traffic:` block that will run
-   the latest ready revision, each time we update our template.  Also note that
+   the latest ready revision, each time we update our template. Also note that
    under `status:` we see a specific `revisionName:` here, which is what it has
    resolved to (in this case the name we asked for).
 
@@ -71,10 +71,10 @@ kubectl get ksvc stock-service-example --output yaml
 
 This section describes how to create a new Revision by updating your Service.
 
-A new Revision is created every time a value in the `template` section
-of the Service `spec` is updated. The `updated_sample.yaml` in this folder
-changes the environment variable `RESOURCE` from `stock` to `share`. Applying
-this change will result in a new Revision.
+A new Revision is created every time a value in the `template` section of the
+Service `spec` is updated. The `updated_sample.yaml` in this folder changes the
+environment variable `RESOURCE` from `stock` to `share`. Applying this change
+will result in a new Revision.
 
 For comparison, you can diff the `release_sample.yaml` with the
 `updated_sample.yaml`.
@@ -90,10 +90,10 @@ serving/samples/traffic-splitting/updated_sample.yaml
 kubectl apply --filename serving/samples/traffic-splitting/updated_sample.yaml
 ```
 
-2. With our `traffic` block, traffic will _not_ shift to the new
-   Revision automatically. However, it will be available via the URL associated
-   with our `latest` sub-route. This can be verified through the Service status,
-   by finding the entry of `status.traffic` for `latest`:
+2. With our `traffic` block, traffic will _not_ shift to the new Revision
+   automatically. However, it will be available via the URL associated with our
+   `latest` sub-route. This can be verified through the Service status, by
+   finding the entry of `status.traffic` for `latest`:
 
 ```shell
 kubectl get ksvc stock-service-example --output yaml
@@ -102,8 +102,8 @@ kubectl get ksvc stock-service-example --output yaml
 3. The readiness of the Service can be verified through the Service Conditions.
    When the Service conditions report it is ready again, you can access the new
    Revision using the same method as found in the
-   [previous sample](../rest-api-go/README.md#access-the-service) using
-   the Service hostname found above.
+   [previous sample](../rest-api-go/README.md#access-the-service) using the
+   Service hostname found above.
 
 ```shell
 # Replace "latest" with whichever tag for which we want the hostname.

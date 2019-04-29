@@ -91,8 +91,8 @@ minishift start
   that is usually after successful start of Minishift
 - The [addon](https://docs.okd.io/latest/minishift/using/addons.html) **anyuid**
   allows the `default` service account to run the application with uid `0`
-- The [addon](https://docs.okd.io/latest/minishift/using/addons.html) **admissions-webhook**
-  allows cluster to register admissions webhooks
+- The [addon](https://docs.okd.io/latest/minishift/using/addons.html)
+  **admissions-webhook** allows cluster to register admissions webhooks
 
 - The command `minishift profile set knative` is required every time you start
   and stop minishift to make sure that you are on right `knative` minishift
@@ -153,8 +153,8 @@ curl -s https://raw.githubusercontent.com/knative/docs/master/docs/install/scrip
 1. Run the following to install Istio:
 
    ```shell
-   oc apply --filename https://github.com/knative/serving/releases/download/v0.5.0/istio-crds.yaml && \
-   oc apply --filename https://github.com/knative/serving/releases/download/v0.5.0/istio.yaml
+   oc apply --filename https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/istio-1.0.7/istio-crds.yaml && \
+   oc apply --filename https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/istio-1.0.7/istio.yaml
    ```
 
    Note: the resources (CRDs) defined in the `istio-crds.yaml`file are also
@@ -217,9 +217,9 @@ curl -s https://raw.githubusercontent.com/knative/docs/master/docs/install/scrip
 1. Install Knative Serving and Build:
 
    ```shell
-   oc apply --filename https://github.com/knative/serving/releases/download/v0.5.0/serving.yaml && \
+   oc apply --filename https://github.com/knative/serving/releases/download/v0.5.2/serving.yaml && \
    oc apply --filename https://github.com/knative/build/releases/download/v0.5.0/build.yaml && \
-   oc apply --filename https://raw.githubusercontent.com/knative/serving/v0.5.0/third_party/config/build/clusterrole.yaml
+   oc apply --filename https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/config/build/clusterrole.yaml
    ```
 
    > **Note**: For the v0.4.0 release and newer, the `clusterrole.yaml` file is

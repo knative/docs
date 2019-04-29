@@ -188,10 +188,10 @@ spec:
   template:
     spec:
       containers:
-      - image: docker.io/{username}/helloworld-go
-        env:
-          - name: TARGET
-            value: "Go Sample v1"
+        - image: docker.io/{username}/helloworld-go
+          env:
+            - name: TARGET
+              value: "Go Sample v1"
 ```
 
 Once the sample code has been created, we'll build and deploy it
