@@ -47,7 +47,7 @@ In order to access request traces, you use the Jaeger visualization tool.
     reasons, the Jaeger UI is exposed only within the cluster.
 
 1.  Navigate to the
-    [Jaeger UI](http://http://localhost:8001/api/v1/namespaces/istio-system/services/jaeger-query:16686/proxy/search/).
+    [Jaeger UI](http://localhost:8001/api/v1/namespaces/istio-system/services/jaeger-query:16686/proxy/search/).
 
 1.  Select the service of interest and click "Find Traces" to see the latest traces. Click on a trace to see a
     detailed view of a specific call.
