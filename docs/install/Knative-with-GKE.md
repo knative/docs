@@ -117,20 +117,20 @@ the recommended configuration for a cluster is:
 
 1. Create a Kubernetes cluster on GKE with the required specifications:
 
-> Note: If this setup is for development, or a non-Istio networking layer
-> (e.g. [Gloo](./Knative-with-Gloo.md)) will be used, then you can remove
-> the `--addons` line below.
+> Note: If this setup is for development, or a non-Istio networking layer (e.g.
+> [Gloo](./Knative-with-Gloo.md)) will be used, then you can remove the
+> `--addons` line below.
 
-   ```bash
-   gcloud beta container clusters create $CLUSTER_NAME \
-     --addons=HorizontalPodAutoscaling,HttpLoadBalancing,Istio \
-     --machine-type=n1-standard-4 \
-     --cluster-version=latest --zone=$CLUSTER_ZONE \
-     --enable-stackdriver-kubernetes --enable-ip-alias \
-     --enable-autoscaling --min-nodes=1 --max-nodes=10 \
-     --enable-autorepair \
-     --scopes cloud-platform
-   ```
+```bash
+gcloud beta container clusters create $CLUSTER_NAME \
+  --addons=HorizontalPodAutoscaling,HttpLoadBalancing,Istio \
+  --machine-type=n1-standard-4 \
+  --cluster-version=latest --zone=$CLUSTER_ZONE \
+  --enable-stackdriver-kubernetes --enable-ip-alias \
+  --enable-autoscaling --min-nodes=1 --max-nodes=10 \
+  --enable-autorepair \
+  --scopes cloud-platform
+```
 
 1. Grant cluster-admin permissions to the current user:
 
