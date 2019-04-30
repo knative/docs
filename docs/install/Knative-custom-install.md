@@ -83,8 +83,10 @@ service mesh. If you install any of the following options, you must install
 
 † These are the recommended standard install files suitable for most use cases.
 
-[a]: https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/istio-1.0.7/istio-crds.yaml
-[b]: https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/istio-1.0.7/istio.yaml
+[a]:
+  https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/istio-1.0.7/istio-crds.yaml
+[b]:
+  https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/istio-1.0.7/istio.yaml
 [c]: https://github.com/knative/serving/releases/download/v0.5.2/istio-lean.yaml
 
 ### Installing Istio
@@ -346,7 +348,7 @@ commands below.
      - `https://github.com/knative/eventing/releases/download/v0.5.0/release.yaml`
      - `https://github.com/knative/eventing-sources/releases/download/v0.5.0/eventing-sources.yaml`
 
-    **Example install commands:**
+     **Example install commands:**
 
      - To install the Knative Serving component with the set of observability
        plugins, enter the following command. The `--selector` flag installs the
