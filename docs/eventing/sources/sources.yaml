@@ -2,7 +2,7 @@
 # sources easy to write and maintain.
 metaSources:
   - name: Container Source
-    url: https://github.com/knative/eventing-sources/blob/master/pkg/apis/sources/v1alpha1/containersource_types.go
+    url: https://github.com/knative/eventing/blob/master/pkg/apis/sources/v1alpha1/containersource_types.go
     status: Active Development
     support: Knative
     description: >
@@ -102,7 +102,7 @@ sources:
 
 # These are containers intended to be used with ContainerSource, but are not CRDs.
 containers:
-  - name: Heartbeat
+  - name: Heartbeats
     url: https://github.com/knative/eventing-sources/tree/master/cmd/heartbeats
     status: Proof of Concept
     support: None
