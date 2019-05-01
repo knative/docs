@@ -85,15 +85,14 @@ first name):
 
 | &nbsp;                                                    | Member           | Organization | Profile                                    |
 | --------------------------------------------------------- | ---------------- | ------------ | ------------------------------------------ |
+| <img width="30px" src="https://github.com/bsnchan.png">   | Brenda Chan      | Pivotal      | [@bsnchan](https://github.com/bsnchan)     |
 | <img width="30px" src="https://github.com/dewitt.png">    | DeWitt Clinton   | Google       | [@dewitt](https://github.com/dewitt)       |
 | <img width="30px" src="https://github.com/mchmarny.png">  | Mark Chmarny     | Google       | [@mchmarny](https://github.com/mchmarny)   |
 | <img width="30px" src="https://github.com/mbehrendt.png"> | Michael Behrendt | IBM          | [@mbehrendt](https://github.com/mbehrendt) |
 | <img width="30px" src="https://github.com/pmorie.png">    | Paul Morie       | Red Hat      | [@pmorie](https://github.com/pmorie)       |
 | <img width="30px" src="https://github.com/rgregg.png">    | Ryan Gregg       | Google       | [@rgregg](https://github.com/rgregg)       |
 | <img width="30px" src="https://github.com/isdal.png">     | Tomas Isdal      | Google       | [@isdal](https://github.com/isdal)         |
-|                                                           | TBD              | Pivotal      |                                            |
 
-There is currently one unfilled seat, as indicated by TBD.
 
 ### Allocation of seats
 
