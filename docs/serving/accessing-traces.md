@@ -5,7 +5,9 @@ weight: 15
 type: "docs"
 ---
 
-Depending on the request tracing tool that you have installed on your Knative Serving cluster, see the corresponding section for details about how to visualize and trace your requests.
+Depending on the request tracing tool that you have installed on your Knative
+Serving cluster, see the corresponding section for details about how to
+visualize and trace your requests.
 
 If you have not yet installed the logging and monitoring components, go through
 the [installation instructions](./installing-logging-metrics-traces.md) to set
@@ -49,8 +51,8 @@ In order to access request traces, you use the Jaeger visualization tool.
 1.  Navigate to the
     [Jaeger UI](http://localhost:8001/api/v1/namespaces/istio-system/services/jaeger-query:16686/proxy/search/).
 
-1.  Select the service of interest and click "Find Traces" to see the latest traces. Click on a trace to see a
-    detailed view of a specific call.
+1.  Select the service of interest and click "Find Traces" to see the latest
+    traces. Click on a trace to see a detailed view of a specific call.
 
 <!--TODO: Consider adding a video here. -->
 
