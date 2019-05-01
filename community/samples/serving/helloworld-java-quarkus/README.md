@@ -56,6 +56,15 @@ recreate the source files from this folder.
    }
    ```
 
+1. Update `src/main/resources/application.properties` to configuration the application to default to port 8080, but allow the port to be overriden by the `PORT` environmental variable:
+
+   ```
+   # Configuration file
+   # key = value
+
+   quarkus.http.port=${PORT:8080}
+   ```
+
 1. Update `src/test/java/com/redhat/developer/demos/GreetingResourceTest.java` test to reflect the change:
 
    ```java
@@ -87,6 +96,7 @@ recreate the source files from this folder.
    ```shell
    rm src/main/resources/META-INF/resources/index.html
    ```
+
 1. Remove `.dockerignore` file since it's unncessary for this example.
 
    ```shell
@@ -134,7 +144,6 @@ recreate the source files from this folder.
    COPY --from=builder /project/target/helloworld-java-quarkus-runner /app
 
    ENTRYPOINT [ "/app" ]
-   CMD [ "-Dquarkus.http.host=0.0.0.0","-Dquarkus.http.port=8080" ]
    ```
 
 1. Create a new file, `service.yaml` and copy the following service definition

@@ -8,9 +8,10 @@ COPY . /project
 
 RUN /usr/local/bin/entrypoint-run.sh mvn -DskipTests clean package -Pnative
 
+RUN ls -lh /project/target
+
 FROM registry.fedoraproject.org/fedora-minimal
 
-COPY --from=builder /project/target/helloworld-java-quarkus-runner /app
+COPY --from=builder /project/target/helloworld-java-quarkus-1.0-SNAPSHOT-runner /app
 
 ENTRYPOINT [ "/app" ]
-CMD [ "-Dquarkus.http.host=0.0.0.0","-Dquarkus.http.port=8080" ]
