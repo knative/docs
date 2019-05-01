@@ -5,9 +5,13 @@ weight: 15
 type: "docs"
 ---
 
+Depending on the request tracing tool that you have installed on your Knative Serving cluster, see the corresponding section for details about how to visualize and trace your requests.
+
 If you have not yet installed the logging and monitoring components, go through
 the [installation instructions](./installing-logging-metrics-traces.md) to set
 up the necessary components.
+
+## Zipkin
 
 In order to access request traces, you use the Zipkin visualization tool.
 
@@ -25,6 +29,27 @@ In order to access request traces, you use the Zipkin visualization tool.
 
 1.  Click "Find Traces" to see the latest traces. You can search for a trace ID
     or look at traces of a specific application. Click on a trace to see a
+    detailed view of a specific call.
+
+<!--TODO: Consider adding a video here. -->
+
+## Jaeger
+
+In order to access request traces, you use the Jaeger visualization tool.
+
+1.  To open the Jaeger UI, enter the following command:
+
+    ```shell
+    kubectl proxy
+    ```
+
+    This command starts a local proxy of Jaeger on port 8001. For security
+    reasons, the Jaeger UI is exposed only within the cluster.
+
+1.  Navigate to the
+    [Jaeger UI](http://localhost:8001/api/v1/namespaces/istio-system/services/jaeger-query:16686/proxy/search/).
+
+1.  Select the service of interest and click "Find Traces" to see the latest traces. Click on a trace to see a
     detailed view of a specific call.
 
 <!--TODO: Consider adding a video here. -->

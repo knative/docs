@@ -169,17 +169,15 @@ metadata:
   name: autoscale-go
   namespace: default
 spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        metadata:
-          annotations:
-            # Standard Kubernetes CPU-based autoscaling.
-            autoscaling.knative.dev/class: hpa.autoscaling.knative.dev
-            autoscaling.knative.dev/metric: cpu
-        spec:
-          container:
-            image: gcr.io/knative-samples/autoscale-go:0.1
+  template:
+    metadata:
+      annotations:
+        # Standard Kubernetes CPU-based autoscaling.
+        autoscaling.knative.dev/class: hpa.autoscaling.knative.dev
+        autoscaling.knative.dev/metric: cpu
+    spec:
+      containers:
+        - image: gcr.io/knative-samples/autoscale-go:0.1
 ```
 
 Additionally the autoscaler targets and scaling bounds can be specified in
@@ -192,23 +190,21 @@ metadata:
   name: autoscale-go
   namespace: default
 spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        metadata:
-          annotations:
-            # Knative concurrency-based autoscaling (default).
-            autoscaling.knative.dev/class: kpa.autoscaling.knative.dev
-            autoscaling.knative.dev/metric: concurrency
-            # Target 10 requests in-flight per pod.
-            autoscaling.knative.dev/target: "10"
-            # Disable scale to zero with a minScale of 1.
-            autoscaling.knative.dev/minScale: "1"
-            # Limit scaling to 100 pods.
-            autoscaling.knative.dev/maxScale: "100"
-        spec:
-          container:
-            image: gcr.io/knative-samples/autoscale-go:0.1
+  template:
+    metadata:
+      annotations:
+        # Knative concurrency-based autoscaling (default).
+        autoscaling.knative.dev/class: kpa.autoscaling.knative.dev
+        autoscaling.knative.dev/metric: concurrency
+        # Target 10 requests in-flight per pod.
+        autoscaling.knative.dev/target: "10"
+        # Disable scale to zero with a minScale of 1.
+        autoscaling.knative.dev/minScale: "1"
+        # Limit scaling to 100 pods.
+        autoscaling.knative.dev/maxScale: "100"
+    spec:
+      containers:
+        - image: gcr.io/knative-samples/autoscale-go:0.1
 ```
 
 Note: for an `hpa.autoscaling.knative.dev` class service, the

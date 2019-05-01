@@ -83,17 +83,17 @@ the KSC will, from time to time, consider if this policy should be changed.
 The current membership of the committee is currently (listed alphabetically by
 first name):
 
-| &nbsp;                                                   | Member         | Organization | Profile                                  |
-| -------------------------------------------------------- | -------------- | ------------ | ---------------------------------------- |
-| <img width="30px" src="https://github.com/dewitt.png">   | DeWitt Clinton | Google       | [@dewitt](https://github.com/dewitt)     |
-| <img width="30px" src="https://github.com/mchmarny.png"> | Mark Chmarny   | Google       | [@mchmarny](https://github.com/mchmarny) |
-| <img width="30px" src="https://github.com/pmorie.png">   | Paul Morie     | Red Hat      | [@pmorie](https://github.com/pmorie)     |
-| <img width="30px" src="https://github.com/rgregg.png">   | Ryan Gregg     | Google       | [@rgregg](https://github.com/rgregg)     |
-| <img width="30px" src="https://github.com/isdal.png">    | Tomas Isdal    | Google       | [@isdal](https://github.com/isdal)       |
-|                                                          | TBD            | IBM          |                                          |
-|                                                          | TBD            | Pivotal      |                                          |
+| &nbsp;                                                    | Member           | Organization | Profile                                    |
+| --------------------------------------------------------- | ---------------- | ------------ | ------------------------------------------ |
+| <img width="30px" src="https://github.com/dewitt.png">    | DeWitt Clinton   | Google       | [@dewitt](https://github.com/dewitt)       |
+| <img width="30px" src="https://github.com/mchmarny.png">  | Mark Chmarny     | Google       | [@mchmarny](https://github.com/mchmarny)   |
+| <img width="30px" src="https://github.com/mbehrendt.png"> | Michael Behrendt | IBM          | [@mbehrendt](https://github.com/mbehrendt) |
+| <img width="30px" src="https://github.com/pmorie.png">    | Paul Morie       | Red Hat      | [@pmorie](https://github.com/pmorie)       |
+| <img width="30px" src="https://github.com/rgregg.png">    | Ryan Gregg       | Google       | [@rgregg](https://github.com/rgregg)       |
+| <img width="30px" src="https://github.com/isdal.png">     | Tomas Isdal      | Google       | [@isdal](https://github.com/isdal)         |
+|                                                           | TBD              | Pivotal      |                                            |
 
-There are currently two unfilled seats, as indicated by TBD.
+There is currently one unfilled seat, as indicated by TBD.
 
 ### Allocation of seats
 
