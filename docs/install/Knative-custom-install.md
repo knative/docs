@@ -348,7 +348,7 @@ commands below.
      - `https://github.com/knative/eventing/releases/download/v0.5.0/release.yaml`
      - `https://github.com/knative/eventing-sources/releases/download/v0.5.0/eventing-sources.yaml`
 
-     **Example install commands:**
+   **Example install commands:**
 
      - To install the Knative Serving component with the set of observability
        plugins, enter the following command. The `--selector` flag installs the
