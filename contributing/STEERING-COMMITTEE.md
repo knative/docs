@@ -93,7 +93,6 @@ first name):
 | <img width="30px" src="https://github.com/rgregg.png">    | Ryan Gregg       | Google       | [@rgregg](https://github.com/rgregg)       |
 | <img width="30px" src="https://github.com/isdal.png">     | Tomas Isdal      | Google       | [@isdal](https://github.com/isdal)         |
 
-
 ### Allocation of seats
 
 Seats on the steering committee are allocated based upon contribution to the
