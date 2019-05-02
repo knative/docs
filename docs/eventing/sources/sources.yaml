@@ -2,7 +2,7 @@
 # sources easy to write and maintain.
 metaSources:
   - name: Container Source
-    url: https://github.com/knative/eventing-sources/blob/master/pkg/apis/sources/v1alpha1/containersource_types.go
+    url: https://github.com/knative/eventing/blob/master/pkg/apis/sources/v1alpha1/containersource_types.go
     status: Active Development
     support: Knative
     description: >
@@ -40,7 +40,7 @@ sources:
     description: >
       Brings [AWS Simple Queue Service](https://aws.amazon.com/sqs/) messages into Knative.
   - name: Cron Job
-    url: https://github.com/knative/eventing-sources/blob/master/pkg/apis/sources/v1alpha1/cron_job_types.go
+    url: https://github.com/knative/eventing/blob/master/pkg/apis/sources/v1alpha1/cron_job_types.go
     status: Proof of Concept
     support: None
     description: >
