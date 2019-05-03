@@ -22,6 +22,7 @@ import (
 	"strconv"
 	"sync"
 	"time"
+	"os"
 )
 
 // Algorithm from https://stackoverflow.com/a/21854246
@@ -153,7 +154,22 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func replyWithToken(token string) func(http.ResponseWriter, *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+	  fmt.Fprintln(w, token)
+	}
+  }
+
 func main() {
+	validateToken := os.Getenv("VALIDATION")
+	if validateToken != "" {
+		http.HandleFunc("/" + validateToken + "/", replyWithToken(validateToken))
+	}
+	
+	listenPort := os.Getenv("PORT")
+	if listenPort == "" {
+		listenPort = "8080"
+	}
 	http.HandleFunc("/", handler)
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":" + listenPort, nil)
 }
