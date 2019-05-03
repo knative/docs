@@ -119,10 +119,10 @@ recreate the source files from this folder.
      template:
        spec:
          containers:
-         - image: docker.io/{username}/helloworld-nodejs
-           env:
-             - name: TARGET
-               value: "Node.js Sample v1"
+           - image: docker.io/{username}/helloworld-nodejs
+             env:
+               - name: TARGET
+                 value: "Node.js Sample v1"
    ```
 
 ## Building and deploying the sample

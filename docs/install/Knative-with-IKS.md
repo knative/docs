@@ -128,15 +128,16 @@ components, the recommended configuration for a cluster is:
 With a Kuberntes cluster ready, you now have two choices on how to install
 Knative: via a one-click "add-on" or manually.
 
-## Installing Knative using an IKS managed add-on 
+## Installing Knative using an IKS managed add-on
 
-The easiest way to install it is using the Managed Knative add-on facility.
-This one-click install process will install Knative, and Istio if not already
+The easiest way to install it is using the Managed Knative add-on facility. This
+one-click install process will install Knative, and Istio if not already
 installed, and provide automatic updates and lifecycle management of your
 Knative control plane.
 
 You can get the add-on via the "Add-ons" tab of your Kubernetes cluster's
 console page, or via the command line:
+
 ```bash
 ibmcloud ks cluster-addon-enable -y knative $CLUSTER_NAME
 ```
@@ -144,12 +145,12 @@ ibmcloud ks cluster-addon-enable -y knative $CLUSTER_NAME
 For more information about the add-on see
 [here](https://cloud.ibm.com/docs/containers?topic=containers-knative_tutorial#knative_tutorial).
 
-## Manually installing Knative on IKS 
+## Manually installing Knative on IKS
 
-However, if you'd like to install Knative manually, see the instructions
-below. Kind in mind that if you do not use the add-on mechanism then you will
-need to manually manage the upgrade of your Istio and Knative installs
-yourself going forward.
+However, if you'd like to install Knative manually, see the instructions below.
+Kind in mind that if you do not use the add-on mechanism then you will need to
+manually manage the upgrade of your Istio and Knative installs yourself going
+forward.
 
 ### Installing Istio
 
@@ -158,8 +159,8 @@ Knative depends on Istio.
 1.  Install Istio:
 
     ```bash
-    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/istio-crds.yaml && \
-    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/istio.yaml
+    kubectl apply --filename https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/istio-1.0.7/istio-crds.yaml && \
+    kubectl apply --filename https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/istio-1.0.7/istio.yaml
     ```
 
     Note: the resources (CRDs) defined in the `istio-crds.yaml`file are also
@@ -217,25 +218,25 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
 
    ```bash
    kubectl apply --selector knative.dev/crd-install=true \
-   --filename https://github.com/knative/serving/releases/download/v0.5.0/serving.yaml \
+   --filename https://github.com/knative/serving/releases/download/v0.5.2/serving.yaml \
    --filename https://github.com/knative/build/releases/download/v0.5.0/build.yaml \
    --filename https://github.com/knative/eventing/releases/download/v0.5.0/release.yaml \
    --filename https://github.com/knative/eventing-sources/releases/download/v0.5.0/eventing-sources.yaml \
-   --filename https://github.com/knative/serving/releases/download/v0.5.0/monitoring.yaml \
-   --filename https://raw.githubusercontent.com/knative/serving/v0.5.0/third_party/config/build/clusterrole.yaml
+   --filename https://github.com/knative/serving/releases/download/v0.5.2/monitoring.yaml \
+   --filename https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/config/build/clusterrole.yaml
    ```
 
 1. To complete the install of Knative and its dependencies, run the
-   `kubectl apply` command again, this time without the `--selector`
-   flag, to complete the install of Knative and its dependencies:
+   `kubectl apply` command again, this time without the `--selector` flag, to
+   complete the install of Knative and its dependencies:
 
    ```bash
-   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/serving.yaml \
+   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.2/serving.yaml \
    --filename https://github.com/knative/build/releases/download/v0.5.0/build.yaml \
    --filename https://github.com/knative/eventing/releases/download/v0.5.0/release.yaml \
    --filename https://github.com/knative/eventing-sources/releases/download/v0.5.0/eventing-sources.yaml \
-   --filename https://github.com/knative/serving/releases/download/v0.5.0/monitoring.yaml \
-   --filename https://raw.githubusercontent.com/knative/serving/v0.5.0/third_party/config/build/clusterrole.yaml
+   --filename https://github.com/knative/serving/releases/download/v0.5.2/monitoring.yaml \
+   --filename https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/config/build/clusterrole.yaml
    ```
 
    > **Note**: For the v0.4.0 release and newer, the `clusterrole.yaml` file is

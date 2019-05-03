@@ -1,4 +1,3 @@
-
 Learn how to deploy a simple web app that is written in Java and uses Eclipse
 Vert.x. This samples uses Docker to build locally. The app reads in a `TARGET`
 env variable and then prints "Hello World: \${TARGET}!". If a value for `TARGET`

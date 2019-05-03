@@ -28,7 +28,7 @@ recreate the source files from this folder.
    ```php
    <?php
    $target = getenv('TARGET', true) ?: 'World';
-   echo sprintf('Hello %s!', $target);
+   echo sprintf("Hello %s!", $target);
    ```
 
 1. Create a file named `Dockerfile` and copy the code block below into it. See
@@ -66,10 +66,10 @@ recreate the source files from this folder.
      template:
        spec:
          containers:
-         - image: docker.io/{username}/helloworld-php
-           env:
-             - name: TARGET
-               value: "PHP Sample v1"
+           - image: docker.io/{username}/helloworld-php
+             env:
+               - name: TARGET
+                 value: "PHP Sample v1"
    ```
 
 ## Building and deploying the sample

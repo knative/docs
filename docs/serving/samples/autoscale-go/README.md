@@ -177,7 +177,7 @@ spec:
         autoscaling.knative.dev/metric: cpu
     spec:
       containers:
-      - image: gcr.io/knative-samples/autoscale-go:0.1
+        - image: gcr.io/knative-samples/autoscale-go:0.1
 ```
 
 Additionally the autoscaler targets and scaling bounds can be specified in
@@ -204,7 +204,7 @@ spec:
         autoscaling.knative.dev/maxScale: "100"
     spec:
       containers:
-      - image: gcr.io/knative-samples/autoscale-go:0.1
+        - image: gcr.io/knative-samples/autoscale-go:0.1
 ```
 
 Note: for an `hpa.autoscaling.knative.dev` class service, the
