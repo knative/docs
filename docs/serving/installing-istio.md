@@ -62,8 +62,8 @@ helm template --namespace=istio-system \
   | sed 's/[ \t]*$//' \
   > ./istio.yaml
 
-  kubectl apply -f istio.yaml
-  ```
+kubectl apply -f istio.yaml
+```
 
 ### Istio with no Sidecar Injector
 If you don't need sidecar injection in your cluster, you can install an 
