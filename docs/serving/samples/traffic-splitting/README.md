@@ -107,7 +107,7 @@ kubectl get ksvc stock-service-example --output yaml
 
 ```shell
 # Replace "latest" with whichever tag for which we want the hostname.
-export LATEST_HOSTNAME=`kubectl get ksvc autoscale-go --output jsonpath="{.status.traffic[?(@.tag=='latest')].url}" | cut -d'/' -f 3`
+export LATEST_HOSTNAME=`kubectl get ksvc stock-service-example --output jsonpath="{.status.traffic[?(@.name=='latest')].url}" | cut -d'/' -f 3`
 curl --header "Host: ${LATEST_HOSTNAME}" http://${INGRESS_IP}
 ```
 
