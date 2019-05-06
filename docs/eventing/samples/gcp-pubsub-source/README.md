@@ -76,9 +76,9 @@ source is most useful as a bridge from other GCP services, such as
    namespace `default`, feel free to change to any other namespace you would
    like to use instead:
 
-```shell
-kubectl label namespace default knative-eventing-injection=enabled
-```
+    ```shell
+    kubectl label namespace default knative-eventing-injection=enabled
+    ```
 
 1. Create a GCP PubSub Topic. If you change its name (`testing`), you also need
    to update the `topic` in the
@@ -128,7 +128,7 @@ We will verify that the published message was sent into the Knative eventing
 system by looking at the logs of the function subscribed to the `pubsub-test`
 channel.
 
-The function and the subscription were created by applying the `subscriber.yaml`
+The function and the subscription were created by applying the [`trigger.yaml`](./trigger.yaml)
 manifest in the [deployment](#deployment) section above.
 
 1. We need to wait for the downstream pods to get started and receive our event,
