@@ -46,10 +46,12 @@ easier to filter events.
 
 A Broker provides a bucket of events which can be selected by attribute. It
 receives events and forwards them to subscribers defined by one or more matching
-Triggers.
+Triggers. Each Trigger operates in the context of a single Broker. You can
+create as many Triggers as necessary.
 
 A Trigger describes a filter on event attributes which should be delivered to an
-Addressable. You can create as many Triggers as necessary.
+Addressable. See [Filtering][./filtering.md] for more information on specifying
+filters.
 
 ![Broker Trigger Diagram](./images/broker-trigger-overview.svg)
 
