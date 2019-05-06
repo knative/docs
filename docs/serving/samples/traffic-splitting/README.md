@@ -47,7 +47,7 @@ echo ${REVISIONS[*]}
 ```shell
 CURRENT=${REVISIONS[0]} \
 envsubst < serving/samples/traffic-splitting/release_sample.yaml \
-| kubectl apply --filename -
+| kubectl replace --filename -
 ```
 
 3. The `spec` of the Service should now show `release` with the Revision name
