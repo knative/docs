@@ -89,7 +89,7 @@ cluster) services, you must enable it also for them to work.
 
 ## Architecture
 
-The eventing infrastructure supports two forms of event delivery at the moment:
+The eventing infrastructure supports three forms of event delivery at the moment:
 
 1. Direct delivery from a source to a single Service (an Addressable endpoint,
    including a Knative Service or a core Kubernetes Service). In this case, the
@@ -103,6 +103,9 @@ The eventing infrastructure supports two forms of event delivery at the moment:
    In this case, the Channel implementation ensures that messages are delivered
    to the requested destinations and should buffer the events if the destination
    Service is unavailable.
+1. Selective delivery of events sent to a Broker via a Trigger specification
+   consisting of a filter and destination. This method provides the same
+   guarantees as the Channel and Subscription model.
 
 ![Control plane object model](./images/control-plane.png)
 
