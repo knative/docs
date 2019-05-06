@@ -54,6 +54,7 @@ in IBM Cloud Private to allow the access to the Knative image:
    ```
 
 2. Update `spec.repositories` by adding the following entries, for example:
+
    ```yaml
    spec:
      repositories:
