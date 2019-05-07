@@ -49,4 +49,4 @@ rm v${CERT_MANAGER_VERSION}.tar.gz
 
 ## Set up Auto-TLS within Knative
 For more information about setting up Auto-TLS within Knative, please check
-the [doc]().
+the [doc](../using-auto-tls.md).
