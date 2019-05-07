@@ -159,15 +159,46 @@ solverConfig: |
 Follow the [instructions](https://github.com/knative/docs/blob/master/docs/serving/using-a-custom-domain.md#edit-using-kubectl) to configure the domain of Knative serving with your custom domain.
 
 ### Turn on Auto TLS
-Change the value `autoTLS` in the ConfigMap `config-network` to `Enabled`.
-```shell
-kubectl edit cm config-network -n knative-serving
+
+Add the entry `autoTLS:Enabled` into the ConfigMap `config-network` under 
+`knative-serving` namespace to turn on Auto TLS. The ConfigMap should look 
+like:
+```
+apiVersion: v1
+data:
+  _example: |
+  ...
+
+  # Add this entry in the `data` field.
+  autoTLS: Enabled
+kind: ConfigMap
+metadata:
+  name: config-network
+  namespace: knative-serving
+...
 ```
 
 ### Configure HTTP Protocol
+
 By default, Knative ingress is still able to serve HTTP traffic.
 If you want to change the way of handling HTTP traffic, configure the 
 value [httpProtocol](https://github.com/knative/serving/blob/9c51850c3d4b8a3665c0d2fab3fa840a9e1e4334/config/config-network.yaml#L110) in the ConfigMap `config-network` accordingly.
+Specifically, add the entry `httpProtocol:{your-new-http-way}` into the ConfigMap `config-network` under `knative-serving` namespace. 
+The ConfigMap should look like:
+```
+apiVersion: v1
+data:
+  _example: |
+  ...
+
+  # Add this entry in the `data` field.
+  httpProtocol:{your-new-http-way}
+kind: ConfigMap
+metadata:
+  name: config-network
+  namespace: knative-serving
+...
+```
 
 At this point, Auto TLS feature is configured and ready to use. When deploying 
 a Knative service, you should be able to send HTTPS traffic to it when the TLS
