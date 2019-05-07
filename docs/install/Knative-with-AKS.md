@@ -225,7 +225,7 @@ your Knative installation, see
    --filename https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/config/build/clusterrole.yaml
    ```
 
-   > **Note**: You can ddd `-l networking.knative.dev/certificate-provider!=cert-manager` to above `kubctl apply` command to 
+   > **Note**: You can add `-l networking.knative.dev/certificate-provider!=cert-manager` to above `kubctl apply` command to 
    > exclude Auto TLS related components if you don't need this feature.
 
    > **Note**: For the v0.4.0 release and newer, the `clusterrole.yaml` file is

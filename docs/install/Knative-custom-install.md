@@ -395,7 +395,7 @@ commands below.
        --filename https://github.com/knative/eventing-sources/releases/download/v0.5.0/eventing-sources.yaml \
        --filename https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/config/build/clusterrole.yaml
      ```
-     > **Note**: You can ddd `-l networking.knative.dev/certificate-provider!=cert-manager` to above `kubctl apply` command to 
+     > **Note**: You can add `-l networking.knative.dev/certificate-provider!=cert-manager` to above `kubctl apply` command to 
      > exclude Auto TLS related components if you don't need this feature.
 
 1. Depending on what you chose to install, view the status of your installation
