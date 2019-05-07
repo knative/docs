@@ -19,12 +19,10 @@ kind: Service
 metadata:
   name: event-display
 spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        spec:
-          container:
-            image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display
+  template:
+    spec:
+      containers:
+        - image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display
 ```
 
 Use following command to create the service from `service.yaml`:
@@ -36,7 +34,7 @@ kubectl apply --filename service.yaml
 ### Create Cron Job Event Source
 
 For each set of cron events you want to request, you need to create an Event
-Source in the same namespace as the destiantion. If you need a different
+Source in the same namespace as the destination. If you need a different
 ServiceAccount to create the Deployment, modify the entry accordingly in the
 yaml.
 
@@ -101,7 +99,7 @@ You can remove the Cron Event Source via:
 kubectl delete --filename cronjob-source.yaml
 ```
 
-Similarily, you can remove the Service via:
+Similarly, you can remove the Service via:
 
 ```shell
 kubectl delete --filename service.yaml

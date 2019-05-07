@@ -18,18 +18,24 @@ metadata:
   name: stock-service-example
   namespace: default
 spec:
- release:
-  revisions: ["${CURRENT}"]
-  configuration:
-    revisionTemplate:
-      spec:
-        container:
-          image: ${REPO}/rest-api-go
-          env:
-            - name: RESOURCE
-              value: stock
-          readinessProbe:
-            httpGet:
-              path: /
-            initialDelaySeconds: 0
-            periodSeconds: 3
+  template:
+    metadata:
+      name: stock-service-example-first
+    spec:
+      containers:
+      - image: ${REPO}/rest-api-go
+        env:
+          - name: RESOURCE
+            value: stock
+        readinessProbe:
+          httpGet:
+            path: /
+          initialDelaySeconds: 0
+          periodSeconds: 3
+  traffic:
+  - tag: current
+    revisionName: stock-service-example-first
+    percent: 100
+  - tag: latest
+    latestRevision: true
+    percent: 0

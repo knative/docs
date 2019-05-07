@@ -85,23 +85,7 @@ spec:
 
 ## Get started with Knative Build samples
 
-Use the following samples to learn how to configure your Knative Builds to
-perform simple tasks.
-
-Tip: Review and reference multiple samples to piece together more complex
-builds.
-
-#### Simple build samples
-
-- [Collection of simple test builds](https://github.com/knative/build/tree/master/test).
-
-#### Build templates
-
-- [Repository of sample build templates](https://github.com/knative/build-templates).
-
-#### Complex samples
-
-- [Use Knative to build apps from source code and then run those containers](../serving/samples/source-to-url-go).
+[See Knative Build code samples](./samples.md)
 
 ## Related info
 

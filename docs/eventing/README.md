@@ -9,8 +9,8 @@ Knative Eventing is designed around the following goals:
 1. Knative Eventing services are loosely coupled. These services can be
    developed and deployed independently on, and across a variety of platforms
    (for example Kubernetes, VMs, SaaS or FaaS).
-1. Event producers and event sources are independent. Any producer (or source),
-   can generate events before there are active event consumers that are
+1. Event producers and event consumers are independent. Any producer (or
+   source), can generate events before there are active event consumers that are
    listening. Any event consumer can express interest in an event or class of
    events, before there are producers that are creating those events.
 1. Other services can be connected to the Eventing system. These services can
@@ -55,8 +55,8 @@ Addressable. You can create as many Triggers as necessary.
 
 ### Event channels and subscriptions
 
-Knative Eventing also defines an event forwarding and persistence layer,
-called a
+Knative Eventing also defines an event forwarding and persistence layer, called
+a
 [**Channel**](https://github.com/knative/eventing/blob/master/pkg/apis/eventing/v1alpha1/channel_types.go#L36).
 Messaging implementations may provide implementations of Channels via the
 [ClusterChannelProvisioner](https://github.com/knative/eventing/blob/master/pkg/apis/eventing/v1alpha1/cluster_channel_provisioner_types.go#L35)

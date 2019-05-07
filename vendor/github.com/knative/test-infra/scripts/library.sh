@@ -146,22 +146,23 @@ function wait_until_pods_running() {
   return 1
 }
 
-# Waits until all batch job pods are running in the given namespace.
+# Waits until all batch jobs complete in the given namespace.
 # Parameters: $1 - namespace.
 function wait_until_batch_job_complete() {
-  echo -n "Waiting until all batch job pods in namespace $1 run to completion."
+  echo -n "Waiting until all batch jobs in namespace $1 run to completion."
   for i in {1..150}; do  # timeout after 5 minutes
-    local pods="$(kubectl get pods --selector=job-name --no-headers -n $1 2>/dev/null | grep -v '^[[:space:]]*$')"
-    # All pods must be complete
-    local not_complete=$(echo "${pods}" | grep -v Completed | wc -l)
+    local jobs=$(kubectl get jobs -n $1 --no-headers \
+                 -ocustom-columns='n:{.metadata.name},c:{.spec.completions},s:{.status.succeeded}')
+    # All jobs must be complete
+    local not_complete=$(echo "${jobs}" | awk '{if ($2!=$3) print $0}' | wc -l)
     if [[ ${not_complete} -eq 0 ]]; then
-      echo -e "\nAll pods are complete:\n${pods}"
+      echo -e "\nAll jobs are complete:\n${jobs}"
       return 0
     fi
     echo -n "."
     sleep 2
   done
-  echo -e "\n\nERROR: timeout waiting for pods to complete\n${pods}"
+  echo -e "\n\nERROR: timeout waiting for jobs to complete\n${jobs}"
   return 1
 }
 
@@ -320,14 +321,6 @@ function report_go_test() {
 # Install the latest stable Knative/serving in the current cluster.
 function start_latest_knative_serving() {
   header "Starting Knative Serving"
-  subheader "Installing Istio"
-  echo "Running Istio CRD from ${KNATIVE_ISTIO_CRD_YAML}"
-  kubectl apply -f ${KNATIVE_ISTIO_CRD_YAML} || return 1
-  wait_until_batch_job_complete istio-system || return 1
-  echo "Installing Istio from ${KNATIVE_ISTIO_YAML}"
-  kubectl apply -f ${KNATIVE_ISTIO_YAML} || return 1
-  wait_until_pods_running istio-system || return 1
-  kubectl label namespace default istio-injection=enabled || return 1
   subheader "Installing Knative Serving"
   echo "Installing Serving from ${KNATIVE_SERVING_RELEASE}"
   kubectl apply -f ${KNATIVE_SERVING_RELEASE} || return 1

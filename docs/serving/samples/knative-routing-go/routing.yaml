@@ -39,7 +39,7 @@ spec:
       # updated header "search-service.default.example.com" so the request will
       # eventually be directed to Search service.
       - destination:
-          host: knative-ingressgateway.istio-system.svc.cluster.local
+          host: istio-ingressgateway.istio-system.svc.cluster.local
         weight: 100
   - match:
     - uri:
@@ -53,5 +53,5 @@ spec:
       # updated header "login-service.default.example.com" so the request will
       # eventually be directed to LOgin service.
       - destination:
-          host: knative-ingressgateway.istio-system.svc.cluster.local
+          host: istio-ingressgateway.istio-system.svc.cluster.local
         weight: 100

@@ -1,5 +1,3 @@
-# Hello World - Swift sample
-
 A simple web app written in Swift that you can use for testing. The app reads in
 an env variable `TARGET` and prints "Hello \${TARGET}!". If TARGET is not
 specified, the app uses "World" as the TARGET.

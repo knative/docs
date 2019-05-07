@@ -76,15 +76,13 @@ recreate the source files from this folder.
      name: helloworld-python
      namespace: default
    spec:
-     runLatest:
-       configuration:
-         revisionTemplate:
-           spec:
-             container:
-               image: docker.io/{username}/helloworld-python
-               env:
-                 - name: TARGET
-                   value: "Python Sample v1"
+     template:
+       spec:
+         containers:
+           - image: docker.io/{username}/helloworld-python
+             env:
+               - name: TARGET
+                 value: "Python Sample v1"
    ```
 
 ## Build and deploy this sample

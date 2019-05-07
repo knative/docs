@@ -1,5 +1,3 @@
-# Hello World - Rust sample
-
 A simple web app written in Rust that you can use for testing. It reads in an
 env variable `TARGET` and prints "Hello \${TARGET}!". If
 
