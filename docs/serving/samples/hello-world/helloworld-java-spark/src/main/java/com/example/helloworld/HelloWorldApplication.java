@@ -8,10 +8,17 @@ public class HelloWorldApplication {
 
 	
 	public static void main(String args[]) {
-		//Default port in SparkJava is 4567
-		// Setting the PORT to 8080 here
-		if(System.getenv("PORT") != null)
-			port(Integer.valueOf(System.getenv("PORT")));
+		
+	/*
+     * Please Note: 
+     * Default port in SparkJava is 4567
+     * If you wish to use port of your choice, 
+     * uncomment the following code and set the
+     * required port
+     */
+
+		//private static final String PORT = "8080";
+        //port(Integer.valueOf(System.getenv("PORT")));
 			
 		if( System.getenv("TARGET") == null) 
 			message = "World";

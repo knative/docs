@@ -354,23 +354,23 @@ commands below.
 
    **Example install commands:**
 
-     - To install the Knative Serving component with the set of observability
-       plugins, enter the following command. The `--selector` flag installs the
-       CRDs first:
+   - To install the Knative Serving component with the set of observability
+     plugins, enter the following command. The `--selector` flag installs the
+     CRDs first:
 
-       ```bash
-       kubectl apply --selector knative.dev/crd-install=true \
-         --filename https://github.com/knative/serving/releases/download/v0.5.2/serving.yaml \
-         --filename https://github.com/knative/serving/releases/download/v0.5.2/monitoring.yaml
-       ```
+     ```bash
+     kubectl apply --selector knative.dev/crd-install=true \
+       --filename https://github.com/knative/serving/releases/download/v0.5.2/serving.yaml \
+       --filename https://github.com/knative/serving/releases/download/v0.5.2/monitoring.yaml
+     ```
 
-       Then complete the install by running the command again, this time without
-       `--selector knative.dev/crd-install=true`:
+     Then complete the install by running the command again, this time without
+     `--selector knative.dev/crd-install=true`:
 
-       ```bash
-       kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.2/serving.yaml \
-         --filename https://github.com/knative/serving/releases/download/v0.5.2/monitoring.yaml
-       ```
+     ```bash
+     kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.2/serving.yaml \
+       --filename https://github.com/knative/serving/releases/download/v0.5.2/monitoring.yaml
+     ```
 
    * To install all three Knative components and the set of Eventing sources
      without an observability plugin, enter the following command. The
