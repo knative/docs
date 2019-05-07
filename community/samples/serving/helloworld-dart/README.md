@@ -26,45 +26,46 @@ be created using the following instructions.
    ```yaml
    name: hello_world_dart
    publish_to: none # let's not accidentally publish this to pub.dartlang.org
-   description: >-
-     Hello world server example in dart.
+   description: Hello world server example in Dart
+   
+   environment:
+     sdk: '>=2.1.0 <3.0.0'
+   
    dependencies:
      shelf: ^0.7.3
-   environment:
-     sdk: ">=2.0.0 <3.0.0"
    ```
 
 2. If you want to run locally, install dependencies. If you only want to run in
    Docker or Knative, you can skip this step.
 
    ```shell
-   pub get
+   > pub get
    ```
 
-3. Create a new file `bin/main.dart` and write the following code:
+3. Create a new file `bin/server.dart` and write the following code:
 
    ```dart
    import 'dart:io';
-
+   
    import 'package:shelf/shelf.dart';
    import 'package:shelf/shelf_io.dart';
-
-   void main() {
+   
+   Future main() async {
      // Find port to listen on from environment variable.
-     var port = int.tryParse(Platform.environment['PORT']);
-
+     var port = int.tryParse(Platform.environment['PORT'] ?? '8080');
+   
      // Read $TARGET from environment variable.
      var target = Platform.environment['TARGET'] ?? 'World';
-
-     // Create handler.
-     var handler = Pipeline().addMiddleware(logRequests()).addHandler((request) {
-       return Response.ok('Hello $target');
-     });
-
+   
+     Response handler(Request request) => Response.ok('Hello $target');
+   
      // Serve handler on given port.
-     serve(handler, InternetAddress.anyIPv4, port).then((server) {
-       print('Serving at http://${server.address.host}:${server.port}');
-     });
+     var server = await serve(
+       Pipeline().addMiddleware(logRequests()).addHandler(handler),
+       InternetAddress.anyIPv4,
+       port,
+     );
+     print('Serving at http://${server.address.host}:${server.port}');
    }
    ```
 
@@ -99,8 +100,8 @@ be created using the following instructions.
              container:
                image: docker.io/{username}/helloworld-dart
                env:
-                 - name: TARGET
-                   value: "Dart Sample v1"
+               - name: TARGET
+                 value: "Dart Sample v1"
    ```
 
 ## Building and deploying the sample
@@ -138,7 +139,7 @@ folder) you're ready to build and deploy the sample app.
 
 1. To find the IP address for your service, use these commands to get the
    ingress IP for your cluster. If your cluster is new, it may take sometime for
-   the service to get asssigned an external IP address.
+   the service to get assigned an external IP address.
 
    ```shell
    # In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
