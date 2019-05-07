@@ -12,7 +12,8 @@ provides a guide about how to enable and configure Auto TLS feature in Knative.
 
 <!-- TODO(zhiminx) add the link about installing Istio with SDS enabled after PR https://github.com/knative/docs/pull/1272 is checked in-->
 1. Follow the [instructions]() to install Istio with SDS enabled. Istio version
-needs to be 1.1 or above.
+needs to be 1.1 or above. And currently this feature does not work with 
+Gloo yet.
 2. Follow the [instructions](./installing-cert-manager.md) to install Cert-Manager.
 3. Follow the [instructions](../install) to install Knative cluster. Knative 
 version needs to be 0.6.0 or above.
