@@ -6,19 +6,34 @@ This samples uses Docker to build locally. The app reads in a `TARGET` env varia
 
 You must meet the following requirements to run this sample:
 
-- A Kubernetes cluster with Knative installed. Follow the
-  [installation instructions](https://github.com/knative/docs/blob/master/docs/install/README.md)
-  if you need to create one.
-- [Docker](https://www.docker.com) installed and running on your local machine,
-  and a Docker Hub account configured (we'll use it for a container registry).
-- You have installed
-  [Java SE 8 or later JDK](https://www.eclipse.org/openj9/).
+- Have a Kubernetes cluster running with the Knative Serving component installed. For more information, see the
+  [Knative instruction guides](https://github.com/knative/docs/blob/master/docs/install/README.md).
+- An installed version of the following tools:
+  - [Docker](https://www.docker.com)
+  - [Java SE 8 or later JDK](https://www.eclipse.org/openj9/)
+  - [Maven](https://maven.apache.org/download.cgi)
+- A [Docker Hub account](https://hub.docker.com/) to which you are able to upload your sample's container image. 
 
-## Recreating the sample code
+## Getting the code
 
-While you can clone all of the code from this directory, hello world apps are
-generally more useful if you build them step-by-step. The following instructions
-recreate the source files from this folder.
+You can either clone a working copy of the sample code from the repository, or following the steps in the 
+[Recreating the sample code](#recreating-the-sample-code) to walk through the steps of updating all the files.
+
+### Cloning the sample code
+
+Use this method to clone and then immediate run the sample. To clone the sample code, run the following commands:
+
+```
+git clone https://github.com/knative/docs.git knative/docs
+cd knative/docs/community/samples/serving/helloworld-java-quarkus
+```
+
+You are now ready to [run the sample locally](#locally-testing-your-sample).
+
+### Recreating the sample code
+
+Use the following steps to obtain an incomplete copy of the sample code for which you update and create the
+necessary build and configuration files:
 
 1. From the console, create a new empty web project using the Maven archetype
    commands:
