@@ -10,7 +10,7 @@ provides a guide about how to enable and configure Auto TLS feature in Knative.
 
 ## Prerequesties
 
-<!-- TODO add the link about installing Istio with SDS enabled after PR https://github.com/knative/docs/pull/1272 is checked in-->
+<!-- TODO(zhiminx) add the link about installing Istio with SDS enabled after PR https://github.com/knative/docs/pull/1272 is checked in-->
 1. Follow the [instructions]() to install Istio with SDS enabled.
 2. Follow the [instructions](../installing-cert-manager.md) to install Cert-Manager.
 
@@ -20,13 +20,13 @@ provides a guide about how to enable and configure Auto TLS feature in Knative.
 
 ### Set up DNS challenge Provider
 
-Follow the [instructions](https://docs.cert-manager.io/en/latest/tasks/acme/configuring-dns01/index.html) to set up DNS challenge according to the 
-different DNS providers.
+Follow the [instructions](https://docs.cert-manager.io/en/latest/tasks/acme/configuring-dns01/index.html#supported-dns01-providers) to set up DNS challenge issuer according to the 
+DNS provider of your custom domain.
 
-#### Google Cloud DNS
+#### Google Cloud DNS Provider Instruction
 
 Specifically for Google Cloud DNS, below are steps to set up the DNS challenge 
-provider.
+issuer.
 
 ##### Creating a Cloud DNS service account
 
@@ -119,7 +119,7 @@ Then confirm that its conditions have `Ready=True`.
 Configure `issuerRef` and `solverConfig` in the ConfigMap `config-certmanager` 
 according to the created `ClusterIssuer`.
 
-For above [ClusterIssuer](#####Specifying-a-certificate-issuer) example, the corresponding `issuerRef` and 
+For above [ClusterIssuer](#Specifying-a-certificate-issuer) example, the corresponding `issuerRef` and 
 `solverConfig` are
 ```
 issuerRef: |
@@ -131,6 +131,9 @@ solverConfig: |
     provider: cloud-dns-provider
 ```
 
+### Configure Custom Domain
+Follow the [instructions](https://github.com/knative/docs/blob/master/docs/serving/using-a-custom-domain.md#edit-using-kubectl) to configure the domain of Knative serving with your custom domain.
+
 ### Turn on Auto TLS
 Change the value `autoTLS` in the ConfigMap `config-network` to `Enabled`.
 ```shell
@@ -141,3 +144,7 @@ kubectl edit cm config-network -n knative-serving
 By default, Knative ingress is still able to serve HTTP traffic.
 If you want to change the way of handling HTTP traffic, configure the 
 value [httpProtocol](https://github.com/knative/serving/blob/9c51850c3d4b8a3665c0d2fab3fa840a9e1e4334/config/config-network.yaml#L110) in the ConfigMap `config-network` accordingly.
+
+At this point, Auto TLS feature is configured and ready to use. When deploying 
+a Knative service, you should be able to send HTTPS traffic to it when the TLS
+certificate is ready.

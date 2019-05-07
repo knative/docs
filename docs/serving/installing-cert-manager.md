@@ -6,13 +6,14 @@ type: "docs"
 
 Within Knative, we provide a feature of automatically provisioning and 
 configuring TLS certificates to terminate the external TLS connection. This 
-feature needs [`Cert-Manager`](https://github.com/jetstack/cert-manager) to be 
+feature needs [Cert-Manager](https://github.com/jetstack/cert-manager) to be 
 installed within your cluster.
-This doc provides a guide to install `Cert-Manager`.
+This doc provides a guide to install Cert-Manager.
 
-> Note: `Cert-Manager` CRDs need to be installed if Knative 
-> `networking-certmanager` deployment is installed in your cluster (no matter 
-> whether the auto TLS will be used). 
+<!-- TODO(zhiminx) add the link of networking-certmanager deployment after the code is checked in.-->
+> Note: Cert-Manager CRDs need to be installed if Knative 
+> [networking-certmanager deployment]() is installed in your 
+> cluster (no matter whether the auto TLS will be used). 
 
 ## Download Cert-Manager
 Run below command to download `Cert-Manager`
@@ -27,15 +28,15 @@ cd cert-manager-${CERT_MANAGER_VERSION}
 ```
 
 ## Install Cert-Manager CRDs
-Run below command to install `Cert-Manager` CRDs
+Run below command to install Cert-Manager CRDs
 ```shell
 kubectl apply -f deploy/manifests/00-crds.yaml
 ```
 
 ## Install Full Cert-Manager
-To use Knative Auto TLS feature, a full `Cert-Manager` needs to be 
+To use Knative Auto TLS feature, a full Cert-Manager needs to be 
 installed.
-Run below command to install `Cert-Manager`
+Run below command to install Cert-Manager
 ```shell
 kubectl apply -f deploy/manifests/cert-manager.yaml
 ```
