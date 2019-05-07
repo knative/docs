@@ -152,6 +152,10 @@ service mesh. If you install any of the following options, you must install
    > Tip: You can append the `--watch` flag to the `kubectl get` commands to
    > view the pod status in realtime. You use `CTRL + C` to exit watch mode.
 
+## Installing Cert-Manager
+
+Follow the [instructions](../serving/installing-cert-manager.md) to install Cert-Manager if you want to use use [Auto TLS feature](../serving/using-auto-tls.md).
+
 ## Installing Knative components
 
 Each Knative component must be installed individually. You can decide which
@@ -391,6 +395,8 @@ commands below.
        --filename https://github.com/knative/eventing-sources/releases/download/v0.5.0/eventing-sources.yaml \
        --filename https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/config/build/clusterrole.yaml
      ```
+     > **Note**: You can ddd `-l networking.knative.dev/certificate-provider!=cert-manager` to above `kubctl apply` command to 
+     > exclude Auto TLS related components if you don't need this feature.
 
 1. Depending on what you chose to install, view the status of your installation
    by running one or more of the following commands. It might take a few

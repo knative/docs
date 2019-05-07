@@ -8,11 +8,26 @@ Within Knative, we provide a feature of automatically provisioning and
 configuring TLS certificates to terminate the external TLS connection. This doc
 provides a guide about how to enable and configure Auto TLS feature in Knative.
 
-## Prerequesties
+## Prerequisites
 
 <!-- TODO(zhiminx) add the link about installing Istio with SDS enabled after PR https://github.com/knative/docs/pull/1272 is checked in-->
-1. Follow the [instructions]() to install Istio with SDS enabled.
-2. Follow the [instructions](../installing-cert-manager.md) to install Cert-Manager.
+1. Follow the [instructions]() to install Istio with SDS enabled. Istio version
+needs to be 1.1 or above.
+2. Follow the [instructions](./installing-cert-manager.md) to install Cert-Manager.
+3. Follow the [instructions](../install) to install Knative cluster. Knative 
+version needs to be 0.6.0 or above.
+
+## Install Knative networking-certmanager components
+
+Skip this step if you already have Knative networking-certmanager components installed.
+Run below command to install Knative networking-certmanager components.
+```shell
+# KNATIVE_VERSION needs to be 0.6.0 or above.
+KNATIVE_VERSION=0.6.0
+
+kubectl apply --filename https://github.com/knative/serving/releases/download/v${KNATIVE_VERSION}/serving.yaml \ 
+-l networking.knative.dev/certificate-provider=cert-manager
+```
 
 ## Configure Cert-Manager
 
@@ -28,9 +43,15 @@ DNS provider of your custom domain.
 Specifically for Google Cloud DNS, below are steps to set up the DNS challenge 
 issuer.
 
+##### Set up Cloud DNS servers
+
+Skip this step if you already have Cloud DNS set up for your domain in your 
+GCP project.
+Follow the [instructions](https://cloud.google.com/dns/docs/how-to) to set up Cloud DNS first.
+
 ##### Creating a Cloud DNS service account
 
-To add the TXT record, configure Knative with a service account that can be used
+Configure Knative with a service account that can be used
 by cert-manager to create and update the DNS record.
 
 To begin, create a new service account with the project role `dns.admin`:
@@ -54,8 +75,11 @@ gcloud projects add-iam-policy-binding $PROJECT_ID \
   --member serviceAccount:$CLOUD_DNS_SA \
   --role roles/dns.admin
 
+# Make a temporary directory to store key
+KEY_DIRECTORY=`mktemp -d`
+
 # Download the secret key file for your service account.
-gcloud iam service-accounts keys create ~/key.json \
+gcloud iam service-accounts keys create $KEY_DIRECTORY/cloud-dns-key.json \
   --iam-account=$CLOUD_DNS_SA
 ```
 
@@ -66,10 +90,10 @@ name.
 ```shell
 # Upload that as a secret in your Kubernetes cluster.
 kubectl create secret --namespace cert-manager generic cloud-dns-key \
-  --from-file=key.json=$HOME/key.json
+  --from-file=key.json=$KEY_DIRECTORY/cloud-dns-key.json
 
 # Delete the local secret
-rm ~/key.json
+rm -rf $KEY_DIRECTORY
 ```
 
 ##### Specifying a certificate issuer

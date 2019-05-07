@@ -36,9 +36,16 @@ kubectl apply -f deploy/manifests/00-crds.yaml
 ## Install Full Cert-Manager
 To use Knative Auto TLS feature, a full Cert-Manager needs to be 
 installed.
-Run below command to install Cert-Manager
+Run below command to install Cert-Manager:
+
 ```shell
-kubectl apply -f deploy/manifests/cert-manager.yaml
+# If you are running cluster in 1.12 or below, you will need to add the --validate=false flag
+kubectl apply -f deploy/manifests/cert-manager.yaml --validate=false
+```
+Or
+```shell
+# If you are running cluster in 1.13 or above
+kubectl apply -f deploy/manifests/cert-manager.yaml 
 ```
 
 ## Clean UP
@@ -50,4 +57,4 @@ rm v${CERT_MANAGER_VERSION}.tar.gz
 
 ## Set up Auto-TLS within Knative
 For more information about setting up Auto-TLS within Knative, please check
-the [doc](../using-auto-tls.md).
+the [doc](./using-auto-tls.md).

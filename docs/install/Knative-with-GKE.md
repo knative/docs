@@ -121,6 +121,10 @@ the recommended configuration for a cluster is:
 > [Gloo](./Knative-with-Gloo.md)) will be used, then you can remove the
 > `--addons` line below.
 
+> Note: If you want to use [Auto TLS feature](../serving/using-auto-tls.md), you need to remove 
+> the `--addons` line below, and follow the [instructions](../serving/installing-istio.md) to install Istio
+> with Secret Discovery Service.
+
 ```bash
 gcloud beta container clusters create $CLUSTER_NAME \
   --addons=HorizontalPodAutoscaling,HttpLoadBalancing,Istio \
@@ -142,6 +146,10 @@ gcloud beta container clusters create $CLUSTER_NAME \
 
 Admin permissions are required to create the necessary
 [RBAC rules for Knative](https://istio.io/docs/concepts/security/rbac/).
+
+## Installing Cert-Manager
+
+Follow the [instructions](../serving/installing-cert-manager.md) to install Cert-Manager if you want to use use [Auto TLS feature](../serving/using-auto-tls.md).
 
 ## Installing Knative
 
@@ -175,6 +183,9 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
    --filename https://github.com/knative/serving/releases/download/v0.5.2/monitoring.yaml \
    --filename https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/config/build/clusterrole.yaml
    ```
+
+   > **Note**: You can add `-l networking.knative.dev/certificate-provider!=cert-manager` to above `kubctl apply` command to 
+   > exclude Auto TLS related components if you don't need this feature.
 
    > **Note**: For the v0.4.0 release and newer, the `clusterrole.yaml` file is
    > required to enable the Build and Serving components to interact with each

@@ -111,12 +111,7 @@ automate the steps required to generate a TLS certificate using LetsEncrypt.
 
 ### Install cert-manager
 
-To install cert-manager into your cluster, use kubectl to apply the cert-manager
-manifest:
-
-```
-kubectl apply --filename https://raw.githubusercontent.com/jetstack/cert-manager/release-0.5/contrib/manifests/cert-manager/with-rbac.yaml
-```
+Follow the [instructions](./installing-cert-manager.md) to install cert-manager.
 
 or see the
 [cert-manager docs](https://cert-manager.readthedocs.io/en/latest/getting-started/)
@@ -134,8 +129,15 @@ which is only supported by a
 Instructions for configuring cert-manager are provided for the following DNS
 hosts:
 
-- [Google Cloud DNS](./using-cert-manager-on-gcp.md)
+- [Google Cloud DNS](./using-auto-tls.md#Set-up-DNS-challenge-Provider)
 
+## Using Auto TLS feature of Knative with cert-manager
+
+Knative provides a feature of automatically provisioning and configuring TLS 
+certificates for Knative Services or Routes to terminate external TLS 
+connections.
+
+Follow the [instructions](./using-auto-tls.md) to set up the environment and use this feature.
 ---
 
 Except as otherwise noted, the content of this page is licensed under the
