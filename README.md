@@ -1,35 +1,45 @@
 # Knative documentation
 
-Welcome to the repository for [Knative](https://knative.dev) documentation
+Welcome to the source file repository for our documentation on https://knative.dev.
 
-## View published docs
+## View published documentation
 
-To view the docs and learn about Knative, go the Knative [Documentation website](https://www.knative.dev/docs) directly.
+View all Knative documentation and walk-through our code samples on the [website](https://knative.dev).
 
-## Access Source files
+The Knative website includes versioned docs for recent releases, the Knative blog, links to all community resources, 
+as well as Knative governance and contributor guidelines.
 
-To view the documentation source files directly please browse the [`/docs`](./docs) directory.
+## Website source files
 
-If you want to contribute a fix or add new content to the documentation please read our contributions [guidelines](./contributing/DOCS-CONTRIBUTING.md).
+Source files for the documentation on the website are located within the [`/docs`](./docs) directory of this repo.
 
-To learn about the Knative community, its governance, committees and values please check our [`/contributing`](./contributing) directory.
+If you want to contribute a fix or add new content to the documentation, you can navigate through this repo or use the 
+`Edit ths page` on each of the pages of the website.
 
-## Documentation versions
+Before you can contribute, first start by reading the Knative contributor guidelines and learning about our community and 
+requirements. In addition to reading about how to contribute to the docs, you should take a moment to learn about the Knative 
+code of conduct, governance, values, and the various working groups and committees.
 
-Each
-release of the Knative docs are
-[branched](https://github.com/knative/docs/branches).
+[Knative community and contributor guidelines](https://knative.dev/contributing/) 
+ 
+Source files for all Knative community and governance topics are located separately in the
+[knative/community](https://github.com/knative/community/) repo. 
 
-If you are looking for an
-archived doc set, see the list of available versions in
-[Knative doc releases](./doc-releases.md).
+### Documentation versions for Knative releases
 
-## Support
+Each release of the Knative docs are available in the website (starting with 0.3) and their source files are all stored 
+in [branches of this repo](./doc-releases.md).
 
-We welcome all the help we can get to make this Knative documentation great. If you encounter any issues with Knative please do not hesitate to file an [issue](https://github.com/knative/docs/issues/new/choose).
+## Help and support
 
-You can also reach us on [Slack](https://knative.slack.com/) in the `#docs` channel.
+Your help and feedback is always welcome! 
 
-## Code of Conduct
+If you find an issue lets us know, either by clicking the `Create Issue` on any of 
+the website pages, or by directly opening an [issue](https://github.com/knative/docs/issues/new/choose) here in the repo.
 
-Any contributor, maintainer or general participant in this repository pledges to follow our [Code of Conduct](./contributing/CODE_OF_CONDUCT.md)
+If you have a question that you can't find an answer to, we would also like to hear about that too. In addition to our docs,
+you can also reach out to the community for assistance. For example, ask a documentation specific question on the `#docs` channel in [Slack](https://knative.slack.com/).
+
+Also see the [Knative community resouce page](https://knative.dev/community/) for a list of all the available 
+community resources, including links to the various community discussion groups for both development as well as troubleshooting.
+
