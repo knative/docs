@@ -31,7 +31,7 @@ RUN chown appuser /opt/app/var
 
 USER appuser
 
-ENV PORT=8080 MIX_ENV=prod REPLACE_OS_VARS=true
+MIX_ENV=prod REPLACE_OS_VARS=true
 WORKDIR /opt/app
 COPY --from=0 /opt/release .
 ENV RUNNER_LOG_DIR /var/log
