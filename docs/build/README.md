@@ -77,8 +77,7 @@ spec:
   steps:
   - name: ubuntu-example
     image: ubuntu
-    args: ["ubuntu-build-example", "SECRETS-example.md"]
-  steps:
+    args: ['ubuntu-build-example', 'SECRETS-example.md']
   - image: gcr.io/example-builders/build-example
     args: ['echo', 'hello-example', 'build']
 ```
