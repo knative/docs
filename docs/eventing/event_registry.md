@@ -1,11 +1,10 @@
 # Event Registry
 
-
 ## Overview
 
 The Event Registry is a component that maintains a catalog of the event types that can flow through the system. 
-As an `Event Consumer`, you can use the Registry to discover what are the different type of events that you can consume 
-from the Brokers' eventing mesh.
+For doing so, it introduces a new [EventType](../reference/eventing/eventing.md) CRD to be able to persist the event types 
+information in Kubernetes data store. 
 
 ## Before you begin
 
@@ -16,16 +15,76 @@ from the Brokers' eventing mesh.
 1. Be familiar with the [User stories and personas for Knative eventing](https://docs.google.com/document/d/15uhyqQvaomxRX2u8s0i6CNhA86BQTNztkdsLUnPmvv4/edit?usp=sharing).
 1. Be familiar with the [Sources](./sources/README.md).
 
-## How to Use the Event Registry
+## Discovering Events with the Registry
 
-The Registry introduces a new namespace-scoped `EventType` CRD that allows users to store the event type information in 
-Kubernetes API server. 
+By leveraging the Registry, Event Consumers can discover what are the different types of events that they can consume 
+from the Brokers' event meshes. Our current implementation mainly targets the Broker/Trigger model, and aims to help 
+consumers creating Triggers. 
 
-From an `Event Consumer` standpoint, the interesting fields from the CRD are within its `spec` field, described below:
+Event Consumers can simply execute the following command to see what are the events they can *subscribe* to:
 
-- `type`: is authoritative. This refers to the CloudEvent type as it enters into the eventing mesh. It is mandatory.
+`$kubectl get eventtypes -n <namespace>`
 
-- `source`: is a valid URI. Refers to the CloudEvent source as it enters into the eventing mesh. It is mandatory.
+Below, we show an example output of executing the above command using the `default` namespace in a testing cluster. 
+We will address the question of how this Registry was populated in a later section.  
+
+```
+NAME                                         TYPE                                    SOURCE                                                 SCHEMA        BROKER     DESCRIPTION     READY     REASON
+dev.knative.source.github.push-34cnb         dev.knative.source.github.push          https://github.com/nachocano/eventing                                default                    True
+dev.knative.source.github.push-44svn         dev.knative.source.github.push          https://github.com/nachocano/serving                                 default                    True 
+dev.knative.source.github.pullrequest-86jhv  dev.knative.source.github.pull_request  https://github.com/nachocano/eventing                                default                    True
+dev.knative.source.github.pullrequest-97shf  dev.knative.source.github.pull_request  https://github.com/nachocano/serving                                 default                    True  
+dev.knative.kafka.event-cjvcr                dev.knative.kafka.event                 news                                                                 default                    True    
+dev.knative.kafka.event-tdt48                dev.knative.kafka.event                 knative-demo                                                         default                    True
+google.pubsub.topic.publish-hrxhh            google.pubsub.topic.publish             //pubsub.googleapis.com/knative-2222/topics/testing                  dev                        False     BrokerIsNotReady
+```
+
+We can see that there are seven different EventTypes in the Event Registry of the `default` namespace. 
+Let's pick the first one and see how the EventType yaml looks like:
+
+`$kubectl get eventtype dev.knative.source.github.push-34cnb -o yaml`
+
+Omitting irrelevant fields:
+
+```yaml
+apiVersion: eventing.knative.dev/v1alpha1
+kind: EventType
+metadata:
+  name: dev.knative.source.github.push-34cnb
+  namespace: default
+  generateName: dev.knative.source.github.push-  
+spec:
+  type: dev.knative.source.github.push
+  source: https://github.com/nachocano/eventing
+  schema:
+  description:
+  broker: default
+status:
+  conditions:
+  - status: "True"
+    type: BrokerExists
+  - status: "True"
+    type: BrokerReady
+  - status: "True"
+    type: Ready
+```
+
+From an Event Consumer standpoint, the fields that matter the most are the `spec` fields as well as the `status`.
+The `name` is advisory (i.e., non-authoritative), and we typically generate it (`generateName`) to avoid naming collisions 
+(e.g., two EventTypes listening to pull requests on two different github repositories). 
+As `name` nor `generateName` are needed for consumers to create Triggers, we defer their discussion for later on.
+
+Regarding `status`, its main purpose it to tell Event Consumers (or Cluster Configurators) whether the EventType is ready 
+for consumption or not. That *readiness* is based on the `broker` being ready. We can see from the example output that 
+the PubSub EventType is not ready, as its `dev` Broker is not.
+ 
+Let's talk in more details about the `spec` fields:
+ 
+- `type`: is authoritative. This refers to the CloudEvent type as it enters into the eventing mesh. It is mandatory. 
+Event Consumers can (and in most cases should) create Triggers filtering on this attribute.
+
+- `source`: Refers to the CloudEvent source as it enters into the eventing mesh. It is mandatory.
+Event Consumers can (and in most cases should) create Triggers filtering on this attribute.
 
 - `schema`: is a valid URI with the EventType schema. It may be a JSON schema, a protobuf schema, etc. It is optional.
 
@@ -34,226 +93,109 @@ From an `Event Consumer` standpoint, the interesting fields from the CRD are wit
 - `broker` refers to the Broker that can provide the EventType. It is mandatory.
 
 
-## Typical Flow
+## Subscribing to Events of Interest
 
-1. A `Cluster Configurator` configures the cluster in a way that allows the population of EventTypes in the Registry. 
-We foresee the following two ways of populating the Registry for the MVP:
+Given that the consumers now know what events can be consumed from the Brokers' event meshes, they can easily create 
+Triggers to materialize their desire to subscribe to particular ones. 
+Here are few Trigger examples that does so, using basic exact matching on `type` and/or `source`, based on the above Registry output.
 
-    1.1. Event Source CO instantiation
+1. Subscribes to GitHub push requests from any `source`.
 
-    Upon instantiation of an Event Source CO by a `Cluster Configurator`, the Source will register its EventTypes.
-
-    Example:
-    
-    ```yaml
-    apiVersion: sources.eventing.knative.dev/v1alpha1
-    kind: GitHubSource
-    metadata:
-      name: github-source-sample
-      namespace: default
-    spec:
-      eventTypes:
-        - push
-        - pull_request
-      ownerAndRepository: my-other-user/my-other-repo
-      accessToken:
-        secretKeyRef:
-          name: github-secret
-          key: accessToken
-      secretToken:
-        secretKeyRef:
-          name: github-secret
-          key: secretToken
-      sink:
-        apiVersion: eventing.knative.dev/v1alpha1
-        kind: Broker
-        name: default
-    ```
- 
-    By applying the above file, two EventTypes will be registered, with types `dev.knative.source.github.push` and 
-    `dev.knative.source.github.pull_request`, source `https://github.com/my-other-user/my-other-repo`, for the `default` Broker in the `default`
-     namespace, and with owner `github-source-sample`. This should be done by the Event Source controller, in this case, 
-     the GitHubSource controller. Although not shown here, the controller could add some `description` to the EventTypes, e.g., 
-     from which owner and repo the events are, etc.
-     
-    Note that the `Cluster Configurator` is the person in charge of taking care of authentication-related matters. E.g., if a new `Event Consumer` 
-    wants to listen for events from a different GitHub repo, the `Cluster Configurator` will take care of the necessary secrets generation, 
-    and new Source instantiation.
-     
-    In YAML, the above EventTypes would look something like these:
-    
-    ```yaml
-    apiVersion: eventing.knative.dev/v1alpha1
-    kind: EventType
-    metadata:
-      generateName: dev.knative.source.github.push-
-      namespace: default
-      owner: # Owned by github-source-sample
-    spec:
-      type: dev.knative.source.github.push
-      source: https://github.com/my-other-user/my-other-repo
-      broker: default
-   ---
-    apiVersion: eventing.knative.dev/v1alpha1
-    kind: EventType
-    metadata:
-      generateName: dev.knative.source.github.pullrequest-
-      namespace: default
-      owner: # Owned by github-source-sample
-    spec:
-      type: dev.knative.source.github.pull_request
-      source: https://github.com/my-other-user/my-other-repo
-      broker: default
-    ```
-    
-    Two things to notice: 
-    - We generate the names by stripping invalid characters from the original type (e.g., `_`). By generating names we aim to 
-    avoid naming collisions. This is a **separate discussion** on whether we should generate them when code (in this case, 
-    the GitHubSource controller) creates the EventTypes or not. 
-     
-    - We add the prefix `dev.knative.source.github.` to `spec.type`. This is a **separate discussion** on whether we should 
-    change the (GitHub) web hook types or not.
- 
-    1.2. Manual Registration
-
-    The `Cluster Configurator` manually `kubectl applies` an EventType CR.
-    
-    Example: 
-    
-    ```yaml
-    apiVersion: eventing.knative.dev/v1alpha1
-    kind: EventType
-    metadata:
-      name: org.bitbucket.repofork
-      namespace: default
-    spec:
-      type: org.bitbucket.repo:fork
-      source: https://bitbucket.org/my-other-user/my-other-repo
-      broker: dev
-      description: "BitBucket fork"
-    ``` 
-
-    This would register the EventType named `org.bitbucket.repofork` with type `org.bitbucket.repo:fork`, 
-    source `https://bitbucket.org/my-other-user/my-other-repo` in the `dev` Broker of the `default` namespace.
-    
-    As under the hood, `kubectl apply` just makes a REST call to the API server with the appropriate RBAC permissions, 
-    the `Cluster Configurator` can give EventType `create` permissions to trusted parties, so that they can register 
-    their EventTypes.  
-
-1. An `Event Consumer` checks the Registry to see what EventTypes it can consume from the mesh.
-
-    Example:
-    
-    `$ kubectl get eventtypes -n default`
-    
-    ```
-    NAME                                         TYPE                                    SOURCE                                              SCHEMA                                     BROKER     DESCRIPTION           READY    REASON
-    org.bitbucket.repofork                       org.bitbucket.repo:fork                 https://bitbucket.org/my-other-user/my-other-repo                                              dev        BitBucket fork        False    BrokerIsNotReady
-    com.github.pullrequest                       com.github.pull_request                 https://github.com/user/repo                        https://github.com/schemas/pull_request    default    GitHub pull request   True 
-    dev.knative.source.github.push-34cnb         dev.knative.source.github.push          https://github.com/my-other-user/my-other-repo                                                 default                          True 
-    dev.knative.source.github.pullrequest-86jhv  dev.knative.source.github.pull_request  https://github.com/my-other-user/my-other-repo                                                 default                          True  
-    ```
-
-1. The `Event Consumer` creates a Trigger to listen to an EventType in the Registry. 
-
-    Example:
-    
     ```yaml
     apiVersion: eventing.knative.dev/v1alpha1
     kind: Trigger
     metadata:
-      name: my-service-trigger
+      name: push-trigger
       namespace: default
     spec:
+      broker: default
       filter:
         sourceAndType:
           type: dev.knative.source.github.push
-          source: https://github.com/my-other-user/my-other-repo
       subscriber:
         ref:
          apiVersion: serving.knative.dev/v1alpha1
          kind: Service
-         name: my-service
+         name: push-service
+    ```
+    
+    As per the Registry output above, only two sources exist 
+    for that particular type of event (nachocano's eventing and serving repositories). 
+    If later on new sources are registered for GitHub pushes, this trigger will be able to consume them.
+        
+1. Subscribes to GitHub pull requests from *nachocano's eventing* repository.
+
+    ```yaml
+    apiVersion: eventing.knative.dev/v1alpha1
+    kind: Trigger
+    metadata:
+      name: gh-nachocano-eventing-pull-trigger
+      namespace: default
+    spec:
+      broker: default
+      filter:
+        sourceAndType:
+          type: dev.knative.source.github.pull_request
+          source: https://github.com/nachocano/eventing
+      subscriber:
+        ref:
+         apiVersion: serving.knative.dev/v1alpha1
+         kind: Service
+         name: gh-nachocano-eventing-pull-service
     ```
 
-## FAQ
+1. Subscribes to Kafka messages sent to the *knative-demo* topic
 
-Here is a list of frequently asked questions that may help clarify the scope of the Registry.
+    ```yaml
+    apiVersion: eventing.knative.dev/v1alpha1
+    kind: Trigger
+    metadata:
+      name: kafka-knative-demo-trigger
+      namespace: default
+    spec:
+      broker: default
+      filter:
+        sourceAndType:
+          type: dev.knative.kafka.event
+          source: knative-demo
+      subscriber:
+        ref:
+         apiVersion: serving.knative.dev/v1alpha1
+         kind: Service
+         name: kafka-knative-demo-service
+    ```
 
-- Is the Registry meant to be used just for creating Triggers or for also setting up Event Sources?
+1. Subscribes to PubSub messages from GCP's *knative-2222* project sent to the *testing* topic
 
-    It's mainly intended for helping the `Event Consumer` with the `discoverability` use case. Therefore, 
-    it is meant for helping out creating Triggers.
-
-- If I have a simple use case where I'm just setting up an Event Source and my KnService is its Sink (i.e., no Triggers involved), 
-is there a need/use for the Registry?
-
-    As stated before, this Registry proposal for the MVP helps creating Triggers, i.e., when you use the Broker/Trigger 
-    model. As you can see in the EventType CRD, there is a mandatory `broker` field. If you are not sending events to a Broker, 
-    then EventTypes won't be added to the Registry (at least in this proposal). 
-    Implementation-wise, we can check whether the Source's sink kind is `Broker`, and if so, then register its EventTypes.
+    ```yaml
+    apiVersion: eventing.knative.dev/v1alpha1
+    kind: Trigger
+    metadata:
+      name: gcp-pubsub-knative-2222-testing-trigger
+      namespace: default
+    spec:
+      broker: dev
+      filter:
+        sourceAndType:
+          source: //pubsub.googleapis.com/knative/topics/testing
+      subscriber:
+        ref:
+         apiVersion: serving.knative.dev/v1alpha1
+         kind: Service
+         name: gcp-pubsub-knative-2222-testing-service
+    ```
     
-- Is the Registry meant to be used in a single-user environment where the same person is setting up both the Event Source and 
-the destination Sink?
+    Note that events won't be received until the Broker's becomes ready.
 
-    We believe is mainly intended for multi-user environment. A `Cluster Configurator` persona is in charge of setting up 
-    the Sources, and `Event Consumers` are the ones that create the Triggers. Having said that, it can also be used in 
-    a single-user environment, but the Registry might not add much value compared to what we have right now in terms of 
-    `discoverability`, but it surely does in terms of, for example, `admission control`. 
-    
-- Does a user need to know which type of environment they're in before they should know if they should look at the Registry? 
-In other words, is a Registry always going to be there and if not under what conditions will it be?
 
-    A Registry will always be there, i.e., `Event Consumers` will always be able to `kubectl get eventtypes -n <namespace>`. 
-    In case no CO Sources are pointing to Brokers, then the Registry will be empty. 
-    
-- Once an Event Source is created, how is a new one created with different auth in an env where the user is really just meant 
-to deal with Triggers? This may not be a Registry specific question but if one of the goals of the Registry is to make it 
-so that the user only deals with Triggers using the info in the Registry, I think this aspect comes into play.
+## Populating the Registry
 
-    We believe the Event Source instantiation with different credentials should be handled by the `Cluster Configurer`. If the 
-    `Cluster Configurer` persona happens to be the same person as the `Event Consumer` persona, then it will have to take care 
-    of creating the Source. This is related to the question of a single-user, multi-user environment above.
-    
-- I've heard conflicting messages around whether the Registry is just a list of Event Types or it will also be a list of 
-Event Sources so that the user doesn't need to query the CRDs to get the list. We need to be clear about this.
+Now that we know how to discover events using the Registry and how we can leverage that information to subscribe to 
+events of interest, let's move on to the next topic: How do we actually populate the Registry in the first place? 
 
-    The Registry is a list of EventTypes. Having said that, the `Event Consumer` could also (if it has the proper RBAC permissions) 
-    list Event Sources (e.g., `kubectl get crds -l eventing.knative.dev/source=true`), but that list is not part of what we call 
-    Registry here. The idea behind the fields in the EventType CRD is to have all the necessary information there in 
-    order to create Triggers, thus, in most cases, the `Event Consumer` shouldn't have to list Sources. 
+You might be wondering why didn't we explain this first? The simple answer is we could have, but as population of the 
+Registry is more of a Cluster Configurator concern rather than an Event Consumer one, we decided to leave it for the end. 
+The previous two are mainly focused for Event Consumers.    
 
--  I wonder if the Event Source populating the Registry should happen when the Event Source is loaded into the system, 
-meaning when the Event Source's CRD is installed (not when an instance of the CRD is created). 
-
-    The problem with that is that you don't have a namespace (nor Broker, user/repo, etc.) at that point. 
-    Which namespace the EventType should be created on? Pointing to which Broker? 
-    Implementation-wise, one potential solution is to have a controller for source CRDs, whenever one is installed, search for all the namespaces with 
-    eventing enabled (`kubectl get namespaces -l knative-eventing-injection=enabled`), and adding all the possible EventTypes from that CRD to each of 
-    the Brokers in those namespaces. A downside of this is that the Registry information is not "accurate", in the sense that it only has info about EventTypes 
-    that may potentially flow in the system. But actually, they will only be able to flow when a CO is created.
-
-- How can I filter events by the CloudEvents `subject` field?
-
-  The EventType CRD will not include a `subject` field because we expect the cardinality of `subject` to be quite high. 
-  However, a user that would like to filter by a known subject value can do this in the Trigger with the 
-  Advanced Filtering proposed in [#1047](https://github.com/knative/eventing/pull/1047).
-  
-  Example:
-
-  ```yaml
-  apiVersion: eventing.knative.dev/v1alpha1
-  kind: Trigger
-  metadata:
-    name: only-knative
-  spec:
-    filter:
-     cel:
-        expression: ce.subject.match("/knative/*")
-    subscriber:
-     ref:
-       apiVersion: serving.knative.dev/v1alpha1
-       kind: Service
-       name: knative-events-processor
-  ```
-
+ 
+TODO update this.
