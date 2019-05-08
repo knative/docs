@@ -25,10 +25,10 @@ be created using the following instructions.
    name: hello_world_dart
    publish_to: none # let's not accidentally publish this to pub.dartlang.org
    description: Hello world server example in Dart
-   
+
    environment:
-     sdk: '>=2.1.0 <3.0.0'
-   
+     sdk: ">=2.1.0 <3.0.0"
+
    dependencies:
      shelf: ^0.7.3
    ```
@@ -44,19 +44,19 @@ be created using the following instructions.
 
    ```dart
    import 'dart:io';
-   
+
    import 'package:shelf/shelf.dart';
    import 'package:shelf/shelf_io.dart';
-   
+
    Future main() async {
      // Find port to listen on from environment variable.
      var port = int.tryParse(Platform.environment['PORT'] ?? '8080');
-   
+
      // Read $TARGET from environment variable.
      var target = Platform.environment['TARGET'] ?? 'World';
-   
+
      Response handler(Request request) => Response.ok('Hello $target');
-   
+
      // Serve handler on given port.
      var server = await serve(
        Pipeline().addMiddleware(logRequests()).addHandler(handler),
@@ -98,8 +98,8 @@ be created using the following instructions.
              container:
                image: docker.io/{username}/helloworld-dart
                env:
-               - name: TARGET
-                 value: "Dart Sample v1"
+                 - name: TARGET
+                   value: "Dart Sample v1"
    ```
 
 ## Building and deploying the sample
