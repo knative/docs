@@ -1,89 +1,40 @@
 # Event Registry
 
 
+## Overview
+
+The Event Registry is a component that maintains a catalog of the event types that can flow through the system. 
+As an `Event Consumer`, you can use the Registry to discover what are the different type of events that you can consume 
+from the Brokers' eventing mesh.
+
 ## Before you begin
 
+1. Read about the [Broker and Trigger objects](./broker-trigger.md).
+1. Be familiar with the [CloudEvents spec](https://github.com/cloudevents/spec/blob/master/spec.md),
+   particularly the [Context Attributes](https://github.com/cloudevents/spec/blob/master/spec.md#context-attributes)
+   section.
+1. Be familiar with the [User stories and personas for Knative eventing](https://docs.google.com/document/d/15uhyqQvaomxRX2u8s0i6CNhA86BQTNztkdsLUnPmvv4/edit?usp=sharing).
+1. Be familiar with the [Sources](./sources/README.md).
 
-## Using the Registry
+## How to Use the Event Registry
 
- 
-## Problem 
+The Registry introduces a new namespace-scoped `EventType` CRD that allows users to store the event type information in 
+Kubernetes API server. 
 
-As an `Event Consumer` I want to be able to discover the different event types that I can consume 
-from the different Brokers. 
-This is also known as the `discoverability` use case, and is the main focus of this proposal. 
+From an `Event Consumer` standpoint, the interesting fields from the CRD are within its `spec` field, described below:
 
-## Objective
+- `type`: is authoritative. This refers to the CloudEvent type as it enters into the eventing mesh. It is mandatory.
 
-Design an **initial** version of the **Registry** for the **MVP** that can support discoverability of 
-the different event types that can be consumed from the eventing mesh. For details on the different user stories 
-that this proposal touches, please refer to the 
-[User stories and personas for Knative eventing](https://docs.google.com/document/d/15uhyqQvaomxRX2u8s0i6CNhA86BQTNztkdsLUnPmvv4/edit?usp=sharing) document.
-Note that this proposal targets the cases where the Broker/Trigger model is used.
+- `source`: is a valid URI. Refers to the CloudEvent source as it enters into the eventing mesh. It is mandatory.
 
-#### Out of scope
-
-- Registry to Registry communication. This doesn't seem needed for an MVP.
-- Security-related matters. Those are handled offline by the `Cluster Configurator`, e.g., the `Cluster Configurator` 
-takes care of setting up Secrets for connecting to a GitHub repo, and so on.
-- Registry synchronization with `Event Producers`. We assume that if new GitHub events are created by 
-GitHub after our cluster has been configured (i.e., our GitHub CRD Source installed) and the appropriate webhooks 
-have been created, we will need to create new webhooks (and update the GitHub CRD Source) if we want to listen for 
-those new events. Until doing so, those new events shouldn't be listed in the Registry. 
-Such task will again be in charge of the `Cluster Configurator`.
-
-## Requirements
-
-Our design revolves around the following core requirements:
-
-1. We should have a Registry per namespace to enforce isolation.
-2. The Registry should contain the event types that can be consumed from
-the eventing mesh in order to support the `discoverability` use case.
-If an event type is not ready for consumption, we should explicitly indicate so (e.g., if the Broker 
-is not ready).
-3. The event types stored in the Registry should contain (all) the required information 
-for a consumer to create a Trigger without resorting to some other OOB mechanism.
-
-
-## Design Ideas
-
-### EventType CRD
-
-We propose introducing a namespaced-EventType Custom Resource Definition (CRD). 
-Here is an example of how a **Custom Object** (CO) would look like:
-
-```yaml
-apiVersion: eventing.knative.dev/v1alpha1
-kind: EventType
-metadata:
-  name: com.github.pullrequest
-  namespace: default
-spec:
-  type: com.github.pull_request
-  source: https://github.com/user/repo
-  schema: https://github.com/schemas/pull_request
-  description: "GitHub pull request"
-  broker: default
-```
-
-- The `name` of the EventType is advisory, non-authoritative. Given that CloudEvents types can 
-contain characters that may not comply with Kubernetes naming conventions, we will (slightly) 
-modify those names to make them K8s-compliant, whenever we need to generate them. 
-
-- `type`: is authoritative. This refers to the CloudEvent type as it enters into the eventing mesh. 
-
-- `source`: is a valid URI. Refers to the CloudEvent source as it enters into the eventing mesh.
-
-- `schema`: is a URI with the EventType schema. It may be a JSON schema, a protobuf schema, etc. It is optional.
+- `schema`: is a valid URI with the EventType schema. It may be a JSON schema, a protobuf schema, etc. It is optional.
 
 - `description`: is a string describing what the EventType is about. It is optional.
 
-- `broker` refers to the Broker that can provide the EventType. 
+- `broker` refers to the Broker that can provide the EventType. It is mandatory.
 
-In order to *uniquely* identify an EventType, we would need to look at the tuple `(type, source, schema, broker)`, 
-as there might be EventTypes with the same `type` but different `sources`, or pointing to different `brokers`, and so on. 
 
-### Typical Flow
+## Typical Flow
 
 1. A `Cluster Configurator` configures the cluster in a way that allows the population of EventTypes in the Registry. 
 We foresee the following two ways of populating the Registry for the MVP:
