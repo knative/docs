@@ -23,7 +23,7 @@ consumers creating Triggers.
 
 Event Consumers can simply execute the following command to see what are the events they can *subscribe* to:
 
-`$kubectl get eventtypes -n <namespace>`
+`kubectl get eventtypes -n <namespace>`
 
 Below, we show an example output of executing the above command using the `default` namespace in a testing cluster. 
 We will address the question of how this Registry was populated in a later section.  
@@ -42,7 +42,7 @@ google.pubsub.topic.publish-hrxhh            google.pubsub.topic.publish        
 We can see that there are seven different EventTypes in the Event Registry of the `default` namespace. 
 Let's pick the first one and see how the EventType yaml looks like:
 
-`$kubectl get eventtype dev.knative.source.github.push-34cnb -o yaml`
+`kubectl get eventtype dev.knative.source.github.push-34cnb -o yaml`
 
 Omitting irrelevant fields:
 
