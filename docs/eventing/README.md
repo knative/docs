@@ -53,6 +53,16 @@ Addressable. You can create as many Triggers as necessary.
 
 ![Broker Trigger Diagram](./images/broker-trigger-overview.svg)
 
+### Event registry
+
+As of v0.6, Knative Eventing defines an EventType object to make it easier for 
+consumers to discover the type of events they can consume from the different 
+Brokers.
+
+The registry consists of a collection of event types. The event types stored in 
+the registry contain (all) the required information for a consumer to create a 
+Trigger without resorting to some other OOB mechanism. 
+
 ### Event channels and subscriptions
 
 Knative Eventing also defines an event forwarding and persistence layer, called
