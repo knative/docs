@@ -251,4 +251,10 @@ Registry is more of a Cluster Configurator concern rather than an Event Consumer
         
 ## Next Steps
 
-We suggest the reader to experiment in her own cluster with the different Event Sources listed above. 
+We suggest the reader to experiment in her own cluster with the different Event Sources listed above. The following 
+links might help to get you started. 
+
+1. [Installing Knative](./install/README.md) in case you haven't already done so.
+1. [Getting started with eventing](./eventing) in case you haven't read it. 
+1. [Knative code samples](./samples/) is a useful resource to better understand some of the Event Sources (remember to 
+point them to a Broker if you want automatic registration of EventTypes in the Registry).
