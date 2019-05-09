@@ -8,6 +8,13 @@ This sample requires knative/serving 0.4 or later.
 
 1. Install [docker](https://www.docker.com/).
 
+1. Clone the repository, and move into the sample directory:
+
+   ```shell
+   git clone https://github.com/knative/docs 
+   cd docs
+   ```
+
 ## Build and run the gRPC server
 
 First, build and publish the gRPC server to DockerHub (replacing `{username}`):

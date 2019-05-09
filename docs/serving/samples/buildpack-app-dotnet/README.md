@@ -18,7 +18,7 @@ in the [build-templates](https://github.com/knative/build-templates/) repo. Save
 a copy of `buildpack.yaml`, then install it:
 
 ```shell
-kubectl apply --filename https://raw.githubusercontent.com/knative/build-templates/master/buildpack/buildpack.yaml
+kubectl apply --filename https://raw.githubusercontent.com/knative/build-templates/master/buildpacks/cnb.yaml
 ```
 
 Then you can deploy this to Knative Serving from the root directory by entering
