@@ -662,7 +662,7 @@ string
 </tr>
 <tr>
 <td>
-<code>Description</code></br>
+<code>description</code></br>
 <em>
 string
 </em>
@@ -1337,7 +1337,7 @@ string
 </tr>
 <tr>
 <td>
-<code>Description</code></br>
+<code>description</code></br>
 <em>
 string
 </em>
@@ -2000,6 +2000,19 @@ Kubernetes core/v1.ObjectReference
 <p>Sink is a reference to an object that will resolve to a domain name to use as the sink.</p>
 </td>
 </tr>
+<tr>
+<td>
+<code>mode</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>Mode is the mode the receive adapter controller runs under: Ref or Resource.
+<code>Ref</code> sends only the reference to the resource.
+<code>Resource</code> send the full resource.</p>
+</td>
+</tr>
 </table>
 </td>
 </tr>
@@ -2387,6 +2400,19 @@ Kubernetes core/v1.ObjectReference
 <p>Sink is a reference to an object that will resolve to a domain name to use as the sink.</p>
 </td>
 </tr>
+<tr>
+<td>
+<code>mode</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>Mode is the mode the receive adapter controller runs under: Ref or Resource.
+<code>Ref</code> sends only the reference to the resource.
+<code>Resource</code> send the full resource.</p>
+</td>
+</tr>
 </tbody>
 </table>
 <h3 id="ApiServerSourceStatus">ApiServerSourceStatus
@@ -2689,5 +2715,5 @@ string
 <hr/>
 <p><em>
 Generated with <code>gen-crd-api-reference-docs</code>
-on git commit <code>759d58bc</code>.
+on git commit <code>e9e81345</code>.
 </em></p>
