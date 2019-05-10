@@ -98,7 +98,9 @@ kubectl get ksvc stock-service-example --output yaml
    the Service hostname with `latest.`.
 
 ```shell
-curl --header "Host:latest.${SERVICE_HOSTNAME}" http://${INGRESS_IP}
+# Replace "latest" with whichever tag for which we want the hostname.
+export LATEST_HOSTNAME=`kubectl get ksvc stock-service-example --output jsonpath="{.status.traffic[?(@.name=='latest')].url}" | cut -d'/' -f 3`
+curl --header "Host: ${LATEST_HOSTNAME}" http://${INGRESS_IP}
 ```
 
 - Hitting the top domain (or `current.`) will hit the Revision at the first

@@ -74,9 +74,9 @@ source is most useful as a bridge from other GCP services, such as
 
 1. Create the `default` Broker in your namespace. These instructions assume the namespace `default`, feel free to change to any other namespace you would like to use instead:
 
-  ```shell
-  kubectl label namespace default knative-eventing-injection=enabled
-  ```
+    ```shell
+    kubectl label namespace default knative-eventing-injection=enabled
+    ```
 
 1. Create a GCP PubSub Topic. If you change its name (`testing`), you also need
    to update the `topic` in the
@@ -122,9 +122,11 @@ gcloud pubsub topics publish testing --message="Hello world"
 ## Verify
 
 We will verify that the published message was sent into the Knative eventing
-system by looking at what is downstream of the `GcpPubSubSource`. If you
-deployed the [Subscriber](#subscriber), then continue using this section. If
-not, then you will need to look downstream yourself.
+system by looking at the logs of the function subscribed to the `pubsub-test`
+channel.
+
+The function and the subscription were created by applying the [`trigger.yaml`](./trigger.yaml)
+manifest in the [deployment](#deployment) section above.
 
 1. We need to wait for the downstream pods to get started and receive our event,
    wait 60 seconds.
