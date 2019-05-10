@@ -1,10 +1,14 @@
-# Event Registry
+---
+title: "Event registry"
+weight: 20
+type: "docs"
+---
 
 ## Overview
 
-The Event Registry is a component that maintains a catalog of the event types that can flow through the system. 
-For doing so, it introduces a new [EventType](../reference/eventing/eventing.md) CRD to be able to persist the event types 
-information in Kubernetes data store. 
+The Event Registry maintains a catalog of the event types that can be consumed from the system. 
+It introduces a new [EventType](../reference/eventing/eventing.md) CRD in order to persist the event types information 
+in the cluster's data store. 
 
 ## Before you begin
 
@@ -12,21 +16,20 @@ information in Kubernetes data store.
 1. Be familiar with the [CloudEvents spec](https://github.com/cloudevents/spec/blob/master/spec.md),
    particularly the [Context Attributes](https://github.com/cloudevents/spec/blob/master/spec.md#context-attributes)
    section.
-1. Be familiar with the [User stories and personas for Knative eventing](https://docs.google.com/document/d/15uhyqQvaomxRX2u8s0i6CNhA86BQTNztkdsLUnPmvv4/edit?usp=sharing).
 1. Be familiar with the [Sources](./sources/README.md).
 
-## Discovering Events with the Registry
+## Discovering events with the registry
 
-By leveraging the Registry, Event Consumers can discover what are the different types of events that they can consume 
-from the Brokers' event meshes. Our current implementation mainly targets the Broker/Trigger model, and aims to help 
-consumers creating Triggers. 
+Using the registry, you can discover the different types of events you can consume 
+from the Brokers' event meshes. The registry is designed for use with the Broker/Trigger model and aims to help 
+you create Triggers. 
 
-Event Consumers can simply execute the following command to see what are the events they can *subscribe* to:
+To see the event types available to *subscribe* to, enter the following command:
 
 `kubectl get eventtypes -n <namespace>`
 
 Below, we show an example output of executing the above command using the `default` namespace in a testing cluster. 
-We will address the question of how this Registry was populated in a later section.  
+We will address the question of how this registry was populated in a later section.  
 
 ```
 NAME                                         TYPE                                    SOURCE                                                 SCHEMA        BROKER     DESCRIPTION     READY     REASON
@@ -39,7 +42,7 @@ dev.knative.kafka.event-tdt48                dev.knative.kafka.event            
 google.pubsub.topic.publish-hrxhh            google.pubsub.topic.publish             //pubsub.googleapis.com/knative/topics/testing                       dev                        False     BrokerIsNotReady
 ```
 
-We can see that there are seven different EventTypes in the Event Registry of the `default` namespace. 
+We can see that there are seven different EventTypes in the registry of the `default` namespace. 
 Let's pick the first one and see how the EventType yaml looks like:
 
 `kubectl get eventtype dev.knative.source.github.push-34cnb -o yaml`
@@ -93,12 +96,12 @@ Event Consumers can (and in most cases would) create Triggers filtering on this 
 - `broker` refers to the Broker that can provide the EventType. It is mandatory.
 
 
-## Subscribing to Events of Interest
+## Subscribing to events 
 
-Given that the consumers now know what events can be consumed from the Brokers' event meshes, they can easily create 
-Triggers to materialize their desire to subscribe to particular ones. 
-Here are few Trigger examples that do so, using basic exact matching on `type` and/or `source`, 
-based on the above Registry output.
+Now that you know what events can be consumed from the Brokers' event meshes, they you can create 
+Triggers to subscribe to particular events. 
+Here are a few example Triggers that subscribe to events using exact matching on `type` and/or `source`, 
+based on the above registry output:
 
 1. Subscribes to GitHub push requests from any `source`.
 
@@ -120,7 +123,7 @@ based on the above Registry output.
          name: push-service
     ```
     
-    As per the Registry output above, only two sources exist 
+    As per the registry output above, only two sources exist 
     for that particular type of event (knative's eventing and serving repositories). 
     If later on new sources are registered for GitHub pushes, this trigger will be able to consume them.
         
@@ -189,22 +192,19 @@ based on the above Registry output.
     Note that events won't be able to be consumed by this Trigger's subscriber until the Broker becomes ready.
 
 
-## Populating the Registry
+## Populating the registry
 
-Now that we know how to discover events using the Registry and how we can leverage that information to subscribe to 
-events of interest, let's move on to the next topic: How do we actually populate the Registry in the first place? 
+Now that we know how to discover events using the registry and how we can leverage that information to subscribe to 
+events of interest, let's move on to the next topic: How do we actually populate the registry in the first place? 
 
-You might be wondering why didn't we explain this first? The simple answer is we could have, but as population of the 
-Registry is more of a Cluster Configurator concern rather than an Event Consumer one, we decided to leave it for the end.  
+- Manual Registration
 
-1. Manual Registration
-
-    In order to populate the Registry, a Cluster Configurator can manually register the EventTypes. 
+    In order to populate the registry, a Cluster Configurator can manually register the EventTypes. 
     This means that the configurator can simply apply EventTypes yaml files, just as with any other Kubernetes resource:
 
     `kubectl apply -f <event_type.yaml>`
 
-1. Automatic Registration
+- Automatic Registration
 
     As Manual Registration might be tedious and error-prone, we also support automatic registration of EventTypes. 
     Herein, the creation of the EventTypes is done upon instantiation of an Event Source. 
@@ -217,7 +217,7 @@ Registry is more of a Cluster Configurator concern rather than an Event Consumer
     - KafkaSource
     - AwsSqsSource
     
-    Let's look at an example, in particular, the KafkaSource sample we used to populate the Registry in our testing 
+    Let's look at an example, in particular, the KafkaSource sample we used to populate the registry in our testing 
     cluster. Below is what the yaml looks like. 
 
     ```yaml
@@ -245,11 +245,11 @@ Registry is more of a Cluster Configurator concern rather than an Event Consumer
     Regarding `topics`, this is what we use for the EventTypes `source` field, which is equal to the CloudEvent source 
     attribute. 
 
-    When a Cluster Configurator `kubectl apply` this yaml, not only the KafkaSource `kafka-source-sample` will be instantiated,
-    but also two EventTypes will be added to the Registry (as there are two topics). You can see that in the Registry 
+    When you `kubectl apply` this yaml, the KafkaSource `kafka-source-sample` will be instantiated,
+    and two EventTypes will be added to the registry (as there are two topics). You can see that in the registry 
     example output from the previous sections.  
         
-## Next Steps
+## What's next
 
 We suggest the reader to experiment in her own cluster with the different Event Sources listed above. The following 
 links might help to get you started. 
@@ -257,4 +257,4 @@ links might help to get you started.
 1. [Installing Knative](./install/README.md) in case you haven't already done so.
 1. [Getting started with eventing](./eventing) in case you haven't read it. 
 1. [Knative code samples](./samples/) is a useful resource to better understand some of the Event Sources (remember to 
-point them to a Broker if you want automatic registration of EventTypes in the Registry).
+point them to a Broker if you want automatic registration of EventTypes in the registry).
