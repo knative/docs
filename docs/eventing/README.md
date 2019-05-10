@@ -53,6 +53,18 @@ Addressable. You can create as many Triggers as necessary.
 
 ![Broker Trigger Diagram](./images/broker-trigger-overview.svg)
 
+### Event registry
+
+As of v0.6, Knative Eventing defines an EventType object to make it easier for 
+consumers to discover the types of events they can consume from the different 
+Brokers.
+
+The registry consists of a collection of event types. The event types stored in 
+the registry contain (all) the required information for a consumer to create a 
+Trigger without resorting to some other out-of-band mechanism. 
+
+To learn how to use the registry, see the [Event Registry documentation](./event-registry.md).
+
 ### Event channels and subscriptions
 
 Knative Eventing also defines an event forwarding and persistence layer, called
@@ -265,6 +277,17 @@ Knative Serving application so that they can be consumed.
 - `bootstrapServers`: `string` Comma separated list of `hostname:port` pairs for
   the Kafka Broker.
 - `topics`: `string` Name of the Kafka topic to consume messages from.
+- `net`: Optional network configuration.
+  - `sasl`: Optional SASL authentication configuration.
+    - `enable`: `boolean` If true, use SASL for authentication.
+    - `user.secretKeyRef`:
+      [SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#secretkeyselector-v1-core)
+      containing the SASL username to use.
+    - `password.secretKeyRef`:
+      [SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#secretkeyselector-v1-core)
+      containing the SASL password to use.
+  - `tls`: Optional TLS configuration.
+    - `enable`: `boolean` If true, use TLS when connecting.
 
 See the
 [Kafka Source](https://github.com/knative/eventing-sources/tree/master/contrib/kafka/samples)

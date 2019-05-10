@@ -204,7 +204,7 @@ during `chan` reconciliation. See [Channel Controller](#channel-controller).
 `src` is a
 [`KubernetesEventSource`](https://github.com/knative/eventing-sources/blob/master/pkg/apis/sources/v1alpha1/kuberneteseventsource_types.go),
 which creates an underlying
-[`ContainerSource`](https://github.com/knative/eventing-sources/blob/master/pkg/apis/sources/v1alpha1/containersource_types.go).
+[`ContainerSource`](https://github.com/knative/eventing/blob/master/pkg/apis/sources/v1alpha1/containersource_types.go).
 
 First we will verify that `src` is writing to `chan`.
 
@@ -354,16 +354,16 @@ kubectl --namespace knative-sources logs -l control-plane=controller-manager
 ###### ContainerSource Controller
 
 The `ContainerSource` Controller is run in the same binary as some other Source
-Controllers. It is:
+Controllers from Eventing. It is:
 
 ```shell
-kubectl --namespace knative-sources get pod -l control-plane=controller-manager
+kubectl --namespace knative-eventing get pod -l app=sources-controller
 ```
 
 View its logs with:
 
 ```shell
-kubectl --namespace knative-sources logs -l control-plane=controller-manager
+kubectl --namespace knative-eventing logs -l app=sources-controller
 ```
 
 Pay particular attention to any lines that have a logging level of `warning` or
