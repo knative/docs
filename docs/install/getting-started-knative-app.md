@@ -146,20 +146,19 @@ assigned an external IP address.
    you entered.
 
 1. Now you can make a request to your app and see the results. Replace
-   `IP_ADDRESS` with the `EXTERNAL-IP` you wrote down, and replace
    `helloworld-go.default.example.com` with the domain returned in the previous
    step.
 
    ```shell
-   curl -H "Host: helloworld-go.default.example.com" http://${IP_ADDRESS}
+   curl http://helloworld-go.default.example.com
    Hello World: Go Sample v1!
    ```
 
-   If you exported the host URL and IP address as variables in the previous
-   steps, you can use those variables to simplify your cURL request:
+   If you exported the host URL as a variable in the previous
+   steps, you can use this variable to simplify your cURL request:
 
    ```shell
-   curl -H "Host: ${HOST_URL}" http://${IP_ADDRESS}
+   curl http://${HOST_URL}
    Hello World: Go Sample v1!
    ```
 
