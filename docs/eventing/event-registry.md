@@ -32,14 +32,14 @@ Below, we show an example output of executing the above command using the `defau
 We will address the question of how this registry was populated in a later section.  
 
 ```
-NAME                                         TYPE                                    SOURCE                                                 SCHEMA        BROKER     DESCRIPTION     READY     REASON
-dev.knative.source.github.push-34cnb         dev.knative.source.github.push          https://github.com/knative/eventing                                  default                    True
-dev.knative.source.github.push-44svn         dev.knative.source.github.push          https://github.com/knative/serving                                   default                    True 
-dev.knative.source.github.pullrequest-86jhv  dev.knative.source.github.pull_request  https://github.com/knative/eventing                                  default                    True
-dev.knative.source.github.pullrequest-97shf  dev.knative.source.github.pull_request  https://github.com/knative/serving                                   default                    True  
-dev.knative.kafka.event-cjvcr                dev.knative.kafka.event                 news                                                                 default                    True    
-dev.knative.kafka.event-tdt48                dev.knative.kafka.event                 knative-demo                                                         default                    True
-google.pubsub.topic.publish-hrxhh            google.pubsub.topic.publish             //pubsub.googleapis.com/knative/topics/testing                       dev                        False     BrokerIsNotReady
+NAME                                         TYPE                                    SOURCE                                                               SCHEMA        BROKER     DESCRIPTION     READY     REASON
+dev.knative.source.github.push-34cnb         dev.knative.source.github.push          https://github.com/knative/eventing                                                default                    True
+dev.knative.source.github.push-44svn         dev.knative.source.github.push          https://github.com/knative/serving                                                 default                    True 
+dev.knative.source.github.pullrequest-86jhv  dev.knative.source.github.pull_request  https://github.com/knative/eventing                                                default                    True
+dev.knative.source.github.pullrequest-97shf  dev.knative.source.github.pull_request  https://github.com/knative/serving                                                 default                    True  
+dev.knative.kafka.event-cjvcr                dev.knative.kafka.event                 /apis/v1/namespaces/default/kafkasources/kafka-sample#news                         default                    True    
+dev.knative.kafka.event-tdt48                dev.knative.kafka.event                 /apis/v1/namespaces/default/kafkasources/kafka-sample#knative-demo                 default                    True
+google.pubsub.topic.publish-hrxhh            google.pubsub.topic.publish             //pubsub.googleapis.com/knative/topics/testing                                     dev                        False     BrokerIsNotReady
 ```
 
 We can see that there are seven different EventTypes in the registry of the `default` namespace. 
@@ -72,22 +72,22 @@ status:
     type: Ready
 ```
 
-From an Event Consumer standpoint, the fields that matter the most are the `spec` fields as well as the `status`.
+From a consumer standpoint, the fields that matter the most are the `spec` fields as well as the `status`.
 The `name` is advisory (i.e., non-authoritative), and we typically generate it (`generateName`) to avoid naming collisions 
 (e.g., two EventTypes listening to pull requests on two different Github repositories). 
 As `name` nor `generateName` are needed for consumers to create Triggers, we defer their discussion for later on.
 
-Regarding `status`, its main purpose it to tell Event Consumers (or Cluster Configurators) whether the EventType is ready 
+Regarding `status`, its main purpose it to tell consumers (or cluster operators) whether the EventType is ready 
 for consumption or not. That *readiness* is based on the `broker` being ready. We can see from the example output that 
 the PubSub EventType is not ready, as its `dev` Broker isn't.
  
 Let's talk in more details about the `spec` fields:
  
 - `type`: is authoritative. This refers to the CloudEvent type as it enters into the eventing mesh. It is mandatory. 
-Event Consumers can (and in most cases would) create Triggers filtering on this attribute.
+Event consumers can (and in most cases would) create Triggers filtering on this attribute.
 
-- `source`: Refers to the CloudEvent source as it enters into the eventing mesh. It is mandatory.
-Event Consumers can (and in most cases would) create Triggers filtering on this attribute.
+- `source`: refers to the CloudEvent source as it enters into the eventing mesh. It is mandatory.
+Event consumers can (and in most cases would) create Triggers filtering on this attribute.
 
 - `schema`: is a valid URI with the EventType schema. It may be a JSON schema, a protobuf schema, etc. It is optional.
 
@@ -161,7 +161,7 @@ based on the above registry output:
       filter:
         sourceAndType:
           type: dev.knative.kafka.event
-          source: knative-demo
+          source: /apis/v1/namespaces/default/kafkasources/kafka-sample#knative-demo
       subscriber:
         ref:
          apiVersion: serving.knative.dev/v1alpha1
@@ -224,7 +224,7 @@ events of interest, let's move on to the next topic: How do we actually populate
     apiVersion: sources.eventing.knative.dev/v1alpha1
     kind: KafkaSource
     metadata:
-      name: kafka-source-sample
+      name: kafka-sample
       namespace: default
     spec:
       consumerGroup: knative-group
