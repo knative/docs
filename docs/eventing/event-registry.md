@@ -7,7 +7,7 @@ type: "docs"
 ## Overview
 
 The Event Registry maintains a catalog of the event types that can be consumed from the system. 
-It introduces a new [EventType](../reference/eventing/eventing.md) CRD in order to persist the event types information 
+It introduces a new [EventType](../reference/eventing/eventing.md) CRD in order to persist the events information 
 in the cluster's data store. 
 
 ## Before you begin
