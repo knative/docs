@@ -22,7 +22,10 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
    kubectl apply --filename docs/serving/samples/autoscale-go/service.yaml
    ```
 
-1. Find the ingress hostname and IP and export as an environment variable:
+1. Find the ingress hostname and IP and export as an environment variable. The variable IP_ADDRESS is configured
+   differently, based on which platform you use as the Kubernetes environment.
+
+   If you use GKE as the Kubernetes environment, run the commands as below:
 
    ```shell
    # In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
@@ -37,6 +40,21 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 
    export IP_ADDRESS=`kubectl get svc $INGRESSGATEWAY --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
    ```
+   
+   If you use Minikube as the Kubernetes environment, run the command as below:
+   
+   ```shell
+   export IP_ADDRESS=$(minikube ip)
+   ```
+   
+   If you use Docker Desktop as the Kubernetes environment, run the command as below:
+   
+   ```shell
+   # The value can be 127.0.0.1 as well
+   export IP_ADDRESS=localhost
+   ```     
+   
+   If you use other cloud platform for Kubernetes service, please refer to document about [Control Ingress Traffic](https://istio.io/docs/tasks/traffic-management/ingress/) to get the hostname or IP.
 
 ## Load the Service
 
