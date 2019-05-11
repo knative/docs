@@ -17,7 +17,7 @@ FROM golang AS builder
 WORKDIR /go/src/github.com/knative/docs/
 ADD . /go/src/github.com/knative/docs/
 
-RUN CGO_ENABLED=0 go build ./serving/samples/telemetry-go/
+RUN CGO_ENABLED=0 go build ./docs/serving/samples/telemetry-go/
 
 FROM gcr.io/distroless/base
 
