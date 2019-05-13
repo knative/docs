@@ -11,14 +11,6 @@ image. The source code should contain a dockerfile. For this guide, we'll use
 this [helloworld app](./samples/hello-world/helloworld-go), but you could use
 your own.
 
-> > > > > > > fe15327... explicit template types (#1061)
-
-This guide walks you through deploying an application to Knative from source
-code in a git repository using a private container registry for the container
-image. The source code should contain a dockerfile. For this guide, we'll use
-this [helloworld app](./samples/hello-world/helloworld-go), but you could use
-your own.
-
 ## Set up a private container registry and obtain credentials
 
 If you do not want your container image to be publicly available, you may want
