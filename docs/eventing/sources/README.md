@@ -36,7 +36,7 @@ These are sources that are installed as `CRD`s.
 | [GitLab](https://gitlab.com/triggermesh/gitlabsource)                                                                                 | Proof of Concept   | None    | Registers for events of the specified types on the specified GitLab repository. Brings those events into Knative.                                               |
 | [Google Cloud Scheduler](https://github.com/vaikas-google/csr)                                                                        | Active Development | None    | Create, update, and delete [Google Cloud Scheduler](https://cloud.google.com/scheduler/) Jobs. When those jobs are triggered, receive the event inside Knative. |
 | [Google Cloud Storage](https://github.com/vaikas-google/gcs)                                                                          | Active Development | None    | Registers for events of the specified types on the specified Google Cloud Storage bucket and optional object prefix. Brings those events into Knative.          |
-| [Kubernetes](https://github.com/knative/eventing-sources/blob/master/pkg/apis/sources/v1alpha1/kuberneteseventsource_types.go)        | Active Development | Knative | Brings Kubernetes cluster events into Knative. Uses ContainerSource for underlying infrastructure.                                                              |
+| [Kubernetes Api Server](https://github.com/knative/eventing/blob/master/pkg/apis/sources/v1alpha1/apiserver_types.go)                 | Active Development | Knative | Brings Kubernetes resource changes into Knative as references or as full resources.                                                                             |
 
 ## Meta Sources
 
