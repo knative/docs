@@ -79,7 +79,7 @@ When asked, if you want to `Fetch and install dependencies? [Yn]` select `y`
    # Run everything else as 'appuser'
    USER appuser
 
-   MIX_ENV=prod REPLACE_OS_VARS=true
+   ENV MIX_ENV=prod REPLACE_OS_VARS=true
    WORKDIR /opt/app
    COPY --from=0 /opt/release .
    ENV RUNNER_LOG_DIR /var/log
