@@ -6,7 +6,7 @@ type: "docs"
 
 ## Overview
 
-The Event Registry maintains a catalog of the event types that can be consumed from the system. 
+The Event Registry maintains a catalog of the event types that can be consumed from the different Brokers. 
 It introduces a new [EventType](../reference/eventing/eventing.md) CRD in order to persist the event type's information 
 in the cluster's data store. 
 
@@ -16,7 +16,7 @@ in the cluster's data store.
 1. Be familiar with the [CloudEvents spec](https://github.com/cloudevents/spec/blob/master/spec.md),
    particularly the [Context Attributes](https://github.com/cloudevents/spec/blob/master/spec.md#context-attributes)
    section.
-1. Be familiar with the [Sources](./sources/README.md).
+1. Be familiar with the [Eventing sources](./sources/README.md).
 
 ## Discovering events with the registry
 
@@ -73,20 +73,21 @@ status:
 ```
 
 From a consumer standpoint, the fields that matter the most are the `spec` fields as well as the `status`.
+
 The `name` is advisory (i.e., non-authoritative), and we typically generate it (`generateName`) to avoid naming collisions 
 (e.g., two EventTypes listening to pull requests on two different Github repositories). 
 As `name` nor `generateName` are needed for consumers to create Triggers, we defer their discussion for later on.
 
 Regarding `status`, its main purpose it to tell consumers (or cluster operators) whether the EventType is ready 
-for consumption or not. That *readiness* is based on the `broker` being ready. We can see from the example output that 
+for consumption or not. That *readiness* is based on the Broker being ready. We can see from the example output that 
 the PubSub EventType is not ready, as its `dev` Broker isn't.
  
 Let's talk in more details about the `spec` fields:
  
-- `type`: is authoritative. This refers to the CloudEvent type as it enters into the eventing mesh. It is mandatory. 
+- `type`: is authoritative. This refers to the CloudEvent type as it enters into the event mesh. It is mandatory. 
 Event consumers can (and in most cases would) create Triggers filtering on this attribute.
 
-- `source`: refers to the CloudEvent source as it enters into the eventing mesh. It is mandatory.
+- `source`: refers to the CloudEvent source as it enters into the event mesh. It is mandatory.
 Event consumers can (and in most cases would) create Triggers filtering on this attribute.
 
 - `schema`: is a valid URI with the EventType schema. It may be a JSON schema, a protobuf schema, etc. It is optional.
@@ -98,12 +99,13 @@ Event consumers can (and in most cases would) create Triggers filtering on this 
 
 ## Subscribing to events 
 
-Now that you know what events can be consumed from the Brokers' event meshes, they you can create 
+Now that you know what events can be consumed from the Brokers' event meshes, you can create 
 Triggers to subscribe to particular events. 
+
 Here are a few example Triggers that subscribe to events using exact matching on `type` and/or `source`, 
 based on the above registry output:
 
-1. Subscribes to GitHub push requests from any `source`.
+1. Subscribes to GitHub *pushes* from any source.
 
     ```yaml
     apiVersion: eventing.knative.dev/v1alpha1
@@ -124,10 +126,10 @@ based on the above registry output:
     ```
     
     As per the registry output above, only two sources exist 
-    for that particular type of event (knative's eventing and serving repositories). 
+    for that particular type of event (*knative's eventing and serving* repositories). 
     If later on new sources are registered for GitHub pushes, this trigger will be able to consume them.
         
-1. Subscribes to GitHub pull requests from *knative's eventing* repository.
+1. Subscribes to GitHub *pull requests* from *knative's eventing* repository.
 
     ```yaml
     apiVersion: eventing.knative.dev/v1alpha1
@@ -199,7 +201,7 @@ events of interest, let's move on to the next topic: How do we actually populate
 
 - Manual Registration
 
-    In order to populate the registry, a Cluster Configurator can manually register the EventTypes. 
+    In order to populate the registry, a cluster configurator can manually register the EventTypes. 
     This means that the configurator can simply apply EventTypes yaml files, just as with any other Kubernetes resource:
 
     `kubectl apply -f <event_type.yaml>`
@@ -208,7 +210,7 @@ events of interest, let's move on to the next topic: How do we actually populate
 
     As Manual Registration might be tedious and error-prone, we also support automatic registration of EventTypes. 
     Herein, the creation of the EventTypes is done upon instantiation of an Event Source. 
-    We currently support automatic Registration of EventTypes for the following Event Sources:
+    We currently support automatic registration of EventTypes for the following Event Sources:
 
     - CronJobSource
     - ApiServerSource
@@ -242,8 +244,8 @@ events of interest, let's move on to the next topic: How do we actually populate
     For this discussion, the relevant information from the yaml above are the `sink` and the `topics`. 
     We observe that the `sink` is of kind `Broker`. We currently only support automatic creation of EventTypes for Sources 
     instances that point to Brokers.
-    Regarding `topics`, this is what we use for the EventTypes `source` field, which is equal to the CloudEvent source 
-    attribute. 
+    Regarding `topics`, this is what we use to generate the EventTypes `source` field, which is equal to the CloudEvent 
+    source attribute. 
 
     When you `kubectl apply` this yaml, the KafkaSource `kafka-source-sample` will be instantiated,
     and two EventTypes will be added to the registry (as there are two topics). You can see that in the registry 
@@ -251,7 +253,7 @@ events of interest, let's move on to the next topic: How do we actually populate
         
 ## What's next
 
-We suggest the reader to experiment in her own cluster with the different Event Sources listed above. The following 
+We suggest the reader to experiment in her own cluster with different Event Sources. The following 
 links might help to get you started. 
 
 1. [Installing Knative](./install/README.md) in case you haven't already done so.
