@@ -209,7 +209,7 @@ events of interest, let's move on to the next topic: How do we actually populate
 - Automatic Registration
 
     As Manual Registration might be tedious and error-prone, we also support automatic registration of EventTypes. 
-    Herein, the creation of the EventTypes is done upon instantiation of an Event Source. 
+    The creation of the EventTypes is done upon instantiation of an Event Source. 
     We currently support automatic registration of EventTypes for the following Event Sources:
 
     - CronJobSource
@@ -253,10 +253,9 @@ events of interest, let's move on to the next topic: How do we actually populate
         
 ## What's next
 
-We suggest the reader to experiment in her own cluster with different Event Sources. The following 
-links might help to get you started. 
+To get started, install Knative Eventing if you haven't yet, and try experimenting with different Event Sources in your Knative cluster.
 
 1. [Installing Knative](./install/README.md) in case you haven't already done so.
-1. [Getting started with eventing](./eventing) in case you haven't read it. 
+1. [Getting started with eventing](./README.md) in case you haven't read it. 
 1. [Knative code samples](./samples/) is a useful resource to better understand some of the Event Sources (remember to 
 point them to a Broker if you want automatic registration of EventTypes in the registry).
