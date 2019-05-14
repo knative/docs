@@ -11,6 +11,7 @@ If your cloud platform offers a managed Istio installation, we recommend
 installing Istio that way, unless you need the ability to customize your
 installation. If your cloud platform offers a managed Istio installation,
 the [install guide](./README.md) for your specific platform will have those instructions.
+
 For example, the [GKE Install Guide](./knative-with-gke.md) includes the
 instructions for installing Istio on your cluster using `gcloud`.
 
@@ -48,7 +49,7 @@ cover a few useful Istio configurations and their benefits.
    ```shell
    for i in install/kubernetes/helm/istio-init/files/crd*yaml; do kubectl apply -f $i; done
    ```
-   
+
    Wait a few seconds for the CRDs to be committed in the Kubernetes API-server,
    then continue with these instructions.
 
@@ -134,18 +135,22 @@ kubectl apply -f istio.yaml
 
 ### Installing Istio with SDS to secure the ingress gateway
 
-Install Istio with [Secret Discovery Service (SDS)][3] to secure your ingress gateway
+Install Istio with [Secret Discovery Service (SDS)][3] to enable a few additional
+configurations for the gateway TLS. This will allow you to:
 
-if you want to dynamically update your gateway with multiple TLS
-certificates to terminate TLS connections. The below `helm` flag is needed in
-your `helm` command to enable `SDS`:
+- Dynamically update the gateway TLS with multiple TLS certificates to terminate
+  TLS connections. 
+
+- Use [Auto TLS](../serving/using-auto-tls.md).
+
+The below `helm` flag is needed in your `helm` command to enable `SDS`:
 
 ```
 --set gateways.istio-ingressgateway.sds.enabled=true
 ```
 
-For example, the `helm` command for installing Istio with Ingress `SDS` and 
-Istio sidecar injection is:
+Enter the following command to install Istio with ingress `SDS` and 
+automatic sidecar injection:
 
 ```shell
 helm template --namespace=istio-system \
