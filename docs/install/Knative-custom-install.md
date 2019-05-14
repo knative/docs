@@ -44,113 +44,13 @@ traffic routing and ingress. You have the option of injecting Istio sidecars and
 enabling the Istio service mesh, but it's not required for all Knative
 components.
 
-You should first install the `istio-crds.yaml` file to ensure that the Istio
-[Custom Resource Definitions (CRD)](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
-are created before installing Istio.
+If your cloud platform offers a managed Istio installation, we recommend
+installing Istio that way, unless you need the ability to customize your
+installation.
 
-### Choosing an Istio installation
-
-You can Istio with or without a service mesh:
-
-- _automatic sidecar injection_: Enables the Istio service mesh by
-  [automatically injecting the Istio sidecars](https://istio.io/docs/setup/kubernetes/sidecar-injection/#automatic-sidecar-injection).
-  The sidecars are injected into each pod of your cluster as each pod is
-  created.
-
-- _manual sidecar injection_: Provides your Knative installation with traffic
-  routing and ingress, without the Istio service mesh. You do have the option of
-  later enabling the service mesh if you
-  [manually inject the Istio sidecars](https://istio.io/docs/setup/kubernetes/sidecar-injection/#manual-sidecar-injection).
-
-If you are just getting started with Knative, you should choose automatic
-sidecar injection and enable the Istio service mesh.
-
-Due to current dependencies, some installable Knative options require the Istio
-service mesh. If you install any of the following options, you must install
-`istio.yaml` so that automatic sidecar injection is enabled:
-
-- [Knative Eventing](https://github.com/knative/eventing)
-- [Knative Eventing Sources](https://github.com/knative/eventing-sources)
-- [Observability plugins](../serving/installing-logging-metrics-traces.md)
-
-#### Istio installation options
-
-| Istio Install Filename  | Description                                                            |
-| ----------------------- | ---------------------------------------------------------------------- |
-| [`istio-crds.yaml`][a]† | Creates CRDs before installing Istio.                                  |
-| [`istio.yaml`][b]†      | Install Istio with service mesh enabled (automatic sidecar injection). |
-| [`istio-lean.yaml`][c]  | Install Istio and disable the service mesh by default.                 |
-
-† These are the recommended standard install files suitable for most use cases.
-
-[a]:
-  https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/istio-1.0.7/istio-crds.yaml
-[b]:
-  https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/istio-1.0.7/istio.yaml
-[c]: https://github.com/knative/serving/releases/download/v0.5.2/istio-lean.yaml
-
-### Installing Istio
-
-1. If you choose to install the Istio service mesh with automatic sidecar
-   injection, you must ensure that the
-   [`MutatingAdmissionWebhook` admission controller](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.11/#mutatingwebhookconfiguration-v1beta1-admissionregistration-k8s-io)
-   is enabled on your cluster by running the following command:
-
-   ```bash
-   kubectl api-versions | grep admissionregistration
-   ```
-
-   Result:
-
-   ```bash
-   admissionregistration.k8s.io/v1beta1
-   ```
-
-   If `admissionregistration.k8s.io/v1beta1` is not listed, follow the
-   [Kubernetes instructions about enabling the `MutatingAdmissionWebhook` admission controller](https://kubernetes.io/docs/admin/admission-controllers/#how-do-i-turn-on-an-admission-controller).
-
-   For example, you add `--enable-admission-plugins=MutatingAdmissionWebhook` to
-   the `/etc/kubernetes/manifests/kube-apiserver.yaml` file.
-
-1. Create the Istio CRDs on your cluster:
-
-   ```bash
-   kubectl apply --filename https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/istio-1.0.7/istio-crds.yaml
-   ```
-
-1. Install Istio by specifying the filename in the `kubectl apply` command:
-
-   ```bash
-   kubectl apply --filename https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/istio-1.0.7/[FILENAME].yaml
-   ```
-
-   where `[FILENAME]` is the name of the Istio file that you want to install.
-   Examples:
-
-   - `istio.yaml`
-   - `istio-lean.yaml`
-
-1. If you chose to install the Istio service mesh with automatic sidecar
-   injection, you must label the default namespace with
-   `istio-injection=enabled`:
-
-   ```bash
-   kubectl label namespace default istio-injection=enabled
-   ```
-
-   Important: You should set the `istio-injection` namespace, if you intend on
-   later enabling the Istio service mesh through manual sidecar injection.
-
-1. View the status of your Istio installation. It might take a few seconds, so
-   rerun the following command until all of the pods show a `STATUS` of
-   `Running` or `Completed`:
-
-   ```bash
-   kubectl get pods --namespace istio-system
-   ```
-
-   > Tip: You can append the `--watch` flag to the `kubectl get` commands to
-   > view the pod status in realtime. You use `CTRL + C` to exit watch mode.
+If you prefer to install Istio manually, your cloud provider doesn't offer
+a managed Istio installation, or you're installing Knative locally using Minkube
+or similar, see the [Installing Istio for Knative guide](./installing-istio.md).
 
 ## Installing Knative components
 
