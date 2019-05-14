@@ -14,7 +14,7 @@
 
 FROM golang AS builder
 
-WORKDIR /go/src/github.com/knative/docs/
+WORKDIR /go/src/github.com/knative/docs/docs/
 ADD . /go/src/github.com/knative/docs/
 
 RUN CGO_ENABLED=0 go build ./serving/samples/telemetry-go/
@@ -22,6 +22,6 @@ RUN CGO_ENABLED=0 go build ./serving/samples/telemetry-go/
 FROM gcr.io/distroless/base
 
 EXPOSE 8080
-COPY --from=builder /go/src/github.com/knative/docs/telemetry-go /sample
+COPY --from=builder /go/src/github.com/knative/docs/docs/telemetry-go /sample
 
 ENTRYPOINT ["/sample"]
