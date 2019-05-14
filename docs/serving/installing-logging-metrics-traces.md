@@ -264,6 +264,8 @@ end traces.
 
 ### Jaeger
 
+**Important**: Before proceeding with the steps below, you will need to install the Jaeger operator (if not already installed). Follow the instructions in the [Installing the operator](https://github.com/jaegertracing/jaeger-operator#installing-the-operator) section only.
+
 - If Elasticsearch is not installed or if you don't want to persist end to end
   traces, run:
 
