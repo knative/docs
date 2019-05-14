@@ -10,8 +10,8 @@ with Knative.
 If your cloud platform offers a managed Istio installation, we recommend
 installing Istio that way, unless you need the ability to customize your
 installation. If your cloud platform offers a managed Istio installation,
-the [install guide](./) for your specific platform will have those instructions.
-For example, the [GKE Install Guide](./knative-with-gke) includes the
+the [install guide](./README.md) for your specific platform will have those instructions.
+For example, the [GKE Install Guide](./knative-with-gke.md) includes the
 instructions for installing Istio on your cluster using `gcloud`.
 
 ## Before you begin
@@ -22,18 +22,20 @@ You need:
 
 ## Installing Istio
 
-When you install Istio, there are a couple of different steps, and a few options
-depending on your goals. For a basic Istio installation suitable for most use
-cases, see the [Default Istio installation](#default-istio-instllation)
-instructions. Those steps will get you up and running quickly without having to
-make decisions about Istio. To customize Istio your Istion installion for use
-with Knative, see the [Custom Istio installation](#customizing-your-installation) instructions.
+When you install Istio, there are a few options depending on your goals. For a
+basic Istio installation suitable for most Knative use cases, follow the
+[Installing Istio without sidecar injection](#installing-istio-without-sidecar-injection)
+instructions. If you're familiar with Istio and know what kind of
+installation you want, read through the options and choose the installation that
+suits your needs.
 
-### Default Istio installation
-The following steps install a default version of Istio that is appropriate for
-most Knative use cases.
+You can easily customize your Istio installation with `helm`. The below sections
+cover a few useful Istio configurations and their benefits. 
+
+### Downloading Istio and installing CRDs
 
 1. Enter the following commands to download Istio:
+
    ```shell
    # Download and unpack Istio
    export ISTIO_VERSION=1.1.3
@@ -42,151 +44,100 @@ most Knative use cases.
    ```
 
 1. Enter the following command to install the Istio CRDs first:
+
    ```shell
    for i in install/kubernetes/helm/istio-init/files/crd*yaml; do kubectl apply -f $i; done
    ```
+   
    Wait a few seconds for the CRDs to be committed in the Kubernetes API-server,
    then continue with these instructions.
 
-1. Enter the following command to install Istio:
-   ```shell
-   # A template with sidecar injection enabled.
-   helm template --namespace=istio-system \
-    --set sidecarInjectorWebhook.enabled=true \
-    --set sidecarInjectorWebhook.enableNamespacesByDefault=true \
-    --set global.proxy.autoInject=disabled \
-    --set global.disablePolicyChecks=true \
-    --set prometheus.enabled=false \
-    `# Disable mixer prometheus adapter to remove istio default metrics.` \
-    --set mixer.adapters.prometheus.enabled=false \
-    `# Disable mixer policy check, since in our template we set no policy.` \
-    --set global.disablePolicyChecks=true \
-    `# Set gateway pods to 1 to sidestep eventual consistency / readiness problems.` \
-    --set gateways.istio-ingressgateway.autoscaleMin=1 \
-    --set gateways.istio-ingressgateway.autoscaleMax=1 \
-    --set gateways.istio-ingressgateway.resources.requests.cpu=500m \
-    --set gateways.istio-ingressgateway.resources.requests.memory=256Mi \
-    `# More pilot replicas for better scale` \
-    --set pilot.autoscaleMin=2 \
-    `# Set pilot trace sampling to 100%` \
-    --set pilot.traceSampling=100 \
-    install/kubernetes/helm/istio \
-    `# Removing trailing whitespaces to make automation happy` \
-    | sed 's/[ \t]*$//' \
-    > ./istio.yaml
+1. Finish the install by applying your desired Istio configuration:
+   - [Installing Istio without sidecar injection](#installing-istio-without-sidecar-injection) (Recommended default installation)
+   - [Installing Istio with sidecar injection](#installing-istio-with-sidecar-injection)
+   - [Installing Istio with SDS to secure the ingress gateway](#installing-istio-with-SDS-to-secure-the-ingress-gateway)
 
-   kubectl apply -f istio.yaml
-   ```
 
-This default installation enables [automatic sidecar injection][1].
+### Installing Istio without sidecar injection
 
-## Customizing your installation
+If you want to get up and running with Knative quickly, installing Istio without
+sidecar injection is the recommended install. It's also recommended for users
+who don't need Istio service mesh, or who want to enable the service by 
+[manually injecting the Istio sidecars][2].
 
-You can easily customize your Istio installation with `helm`. The below sections
-cover a few useful customizations and their purpose.
+Enter the following command to install Istio:
+
+```shell
+# A lighter template, with no sidecar injection.
+helm template --namespace=istio-system \
+  --set global.proxy.autoInject=disabled \
+  --set global.omitSidecarInjectorConfigMap=true \
+  --set global.disablePolicyChecks=true \
+  --set prometheus.enabled=false \
+  `# Disable mixer prometheus adapter to remove istio default metrics.` \
+  --set mixer.adapters.prometheus.enabled=false \
+  `# Disable mixer policy check, since in our template we set no policy.` \
+  --set global.disablePolicyChecks=true \
+  `# Set gateway pods to 1 to sidestep eventual consistency / readiness problems.` \
+  --set gateways.istio-ingressgateway.autoscaleMin=1 \
+  --set gateways.istio-ingressgateway.autoscaleMax=1 \
+  `# Set pilot trace sampling to 100%` \
+  --set pilot.traceSampling=100 \
+  install/kubernetes/helm/istio \
+  `# Removing trailing whitespaces to make automation happy` \
+  | sed 's/[ \t]*$//' \
+  > ./istio-lean.yaml
+
+kubectl apply -f istio-lean.yaml
+```
 
 ### Installing Istio with sidecar injection
 
-If you need Istio service mesh, and want to enable it by
-[automatically injecting the Istio sidecars][1], then you must enable Istio
-sidecar injection and add a few related configurations your Istio installation.
+If you want to enable the Istio service mesh, you must enable [automatic sidecar injection][1]. The Istio service mesh provides a few benefits:
 
-1. Enter the following commands to download Istio:
-   ```shell
-   # Download and unpack Istio
-   export ISTIO_VERSION=1.1.3
-   curl -L https://git.io/getLatestIstio | sh -
-   cd istio-${ISTIO_VERSION}
-   ```
+- Allows you to turn on [mutual TLS][4], which secures service-to-service
+  traffic within the cluster.
 
-1. Enter the following command to install the Istio CRDs first:
-   ```shell
-   for i in install/kubernetes/helm/istio-init/files/crd*yaml; do kubectl apply -f $i; done
-   ```
-   Wait a few seconds for the CRDs to be committed in the Kubernetes API-server,
-   then continue with these instructions.
+- Allows you to use the [Istio authorization policy][5], controlling the access
+  to each Knative service based on Istio service roles.
 
-1. Enter the following command to install Istio:
-   ```shell
-   # A template with sidecar injection enabled.
-   helm template --namespace=istio-system \
-    --set sidecarInjectorWebhook.enabled=true \
-    --set sidecarInjectorWebhook.enableNamespacesByDefault=true \
-    --set global.proxy.autoInject=disabled \
-    --set global.disablePolicyChecks=true \
-    --set prometheus.enabled=false \
-    `# Disable mixer prometheus adapter to remove istio default metrics.` \
-    --set mixer.adapters.prometheus.enabled=false \
-    `# Disable mixer policy check, since in our template we set no policy.` \
-    --set global.disablePolicyChecks=true \
-    `# Set gateway pods to 1 to sidestep eventual consistency / readiness problems.` \
-    --set gateways.istio-ingressgateway.autoscaleMin=1 \
-    --set gateways.istio-ingressgateway.autoscaleMax=1 \
-    --set gateways.istio-ingressgateway.resources.requests.cpu=500m \
-    --set gateways.istio-ingressgateway.resources.requests.memory=256Mi \
-    `# More pilot replicas for better scale` \
-    --set pilot.autoscaleMin=2 \
-    `# Set pilot trace sampling to 100%` \
-    --set pilot.traceSampling=100 \
-    install/kubernetes/helm/istio \
-    `# Removing trailing whitespaces to make automation happy` \
-    | sed 's/[ \t]*$//' \
-    > ./istio.yaml
+Enter the following command to install Istio:
 
-   kubectl apply -f istio.yaml
-   ```
+```shell
+# A template with sidecar injection enabled.
+helm template --namespace=istio-system \
+  --set sidecarInjectorWebhook.enabled=true \
+  --set sidecarInjectorWebhook.enableNamespacesByDefault=true \
+  --set global.proxy.autoInject=disabled \
+  --set global.disablePolicyChecks=true \
+  --set prometheus.enabled=false \
+  `# Disable mixer prometheus adapter to remove istio default metrics.` \
+  --set mixer.adapters.prometheus.enabled=false \
+  `# Disable mixer policy check, since in our template we set no policy.` \
+  --set global.disablePolicyChecks=true \
+  `# Set gateway pods to 1 to sidestep eventual consistency / readiness problems.` \
+  --set gateways.istio-ingressgateway.autoscaleMin=1 \
+  --set gateways.istio-ingressgateway.autoscaleMax=1 \
+  --set gateways.istio-ingressgateway.resources.requests.cpu=500m \
+  --set gateways.istio-ingressgateway.resources.requests.memory=256Mi \
+  `# More pilot replicas for better scale` \
+  --set pilot.autoscaleMin=2 \
+  `# Set pilot trace sampling to 100%` \
+  --set pilot.traceSampling=100 \
+  install/kubernetes/helm/istio \
+  `# Removing trailing whitespaces to make automation happy` \
+  | sed 's/[ \t]*$//' \
+  > ./istio.yaml
 
-### Installing Istio with no sidecar injection
+kubectl apply -f istio.yaml
+```
 
-If you don't need Istio service mesh, or want to enable the service by 
-[manually injecting the Istio sidecars](https://istio.io/docs/setup/kubernetes/additional-setup/sidecar-injection/#manual-sidecar-injection), you can install an Istio without sidecar injector.
+### Installing Istio with SDS to secure the ingress gateway
 
-1. Enter the following commands to download Istio:
-   ```shell
-   # Download and unpack Istio
-   export ISTIO_VERSION=1.1.3
-   curl -L https://git.io/getLatestIstio | sh -
-   cd istio-${ISTIO_VERSION}
-   ```
+Install Istio with [Secret Discovery Service (SDS)][3] to secure your ingress gateway
 
-1. Enter the following command to install the Istio CRDs first:
-   ```shell
-   for i in install/kubernetes/helm/istio-init/files/crd*yaml; do kubectl apply -f $i; done
-   ```
-   Wait a few seconds for the CRDs to be committed in the Kubernetes API-server,
-   then continue with these instructions.
-
-1. Enter the following command to install Istio:
-   ```shell
-   # A lighter template, with no sidecar injection.
-   helm template --namespace=istio-system \
-    --set sidecarInjectorWebhook.enabled=false \
-    --set global.proxy.autoInject=disabled \
-    --set global.omitSidecarInjectorConfigMap=true \
-    --set global.disablePolicyChecks=true \
-    --set prometheus.enabled=false \
-    `# Disable mixer prometheus adapter to remove istio default metrics.` \
-    --set mixer.adapters.prometheus.enabled=false \
-    `# Disable mixer policy check, since in our template we set no policy.` \
-    --set global.disablePolicyChecks=true \
-    `# Set gateway pods to 1 to sidestep eventual consistency / readiness problems.` \
-    --set gateways.istio-ingressgateway.autoscaleMin=1 \
-    --set gateways.istio-ingressgateway.autoscaleMax=1 \
-    `# Set pilot trace sampling to 100%` \
-    --set pilot.traceSampling=100 \
-    install/kubernetes/helm/istio \
-    `# Removing trailing whitespaces to make automation happy` \
-    | sed 's/[ \t]*$//' \
-    > ./istio-lean.yaml
-
-  kubectl apply -f istio-lean.yaml
-  ```
-
-### Installing Istio with Secret Discovery Service
-
-[Secret Discovery Service](https://istio.io/docs/tasks/traffic-management/secure-ingress/sds/)
-is needed if you want to dynamically update your Gateway  with multiple TLS
-certificates to terminate TLS connection. The below `helm` flag is needed in
+if you want to dynamically update your gateway with multiple TLS
+certificates to terminate TLS connections. The below `helm` flag is needed in
 your `helm` command to enable `SDS`:
 
 ```
@@ -227,7 +178,7 @@ helm template --namespace=istio-system \
 
 ```
 
-### Updating your install to use cluster local gateway
+## Updating your install to use cluster local gateway
 
 If you want your Routes to be visible only inside the cluster, you may
 want to enable [cluster local routes](../docs/serving/cluster-local-route.md).
@@ -266,7 +217,9 @@ kubectl apply -f istio-local-gateway.yaml
   the [Istio Installation Options reference](https://istio.io/docs/reference/config/installation-options/).
 
 ## Clean up Istio
-Run below command to clean up all of the Istio files.
+
+Enter the following command to remove all of the Istio files:
+
 ```shell
 cd ../
 rm -rf istio-${ISTIO_VERSION}
@@ -279,3 +232,7 @@ rm -rf istio-${ISTIO_VERSION}
   for Knative serving.
 
 [1]: https://istio.io/docs/setup/kubernetes/additional-setup/sidecar-injection/#automatic-sidecar-injection
+[2]: https://istio.io/docs/setup/kubernetes/additional-setup/sidecar-injection/#manual-sidecar-injection
+[3]: https://istio.io/docs/tasks/traffic-management/secure-ingress/sds/
+[4]: https://istio.io/docs/tasks/security/mutual-tls/
+[5]: https://istio.io/docs/tasks/security/authz-http/
