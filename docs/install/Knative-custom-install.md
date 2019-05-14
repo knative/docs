@@ -210,8 +210,8 @@ files from the Knative repositories:
 | [`monitoring.yaml`][1.2]†                      | Installs the [ELK stack][2], [Prometheus][2.1], [Grafana][2.2], and [Zipkin][2.3]**\***                                                            | Serving component                                                 |
 | [`monitoring-logs-elasticsearch.yaml`][1.3]    | Installs only the [ELK stack][2]**\***                                                                                                             | Serving component                                                 |
 | [`monitoring-metrics-prometheus.yaml`][1.4]    | Installs only [Prometheus][2.1]**\***                                                                                                              | Serving component                                                 |
-| [`monitoring-tracing-jaeger.yaml`][1.5]        | Installs only [Jaeger][2.4].**\***                                                                                                                 | Serving component, ELK stack (monitoring-logs-elasticsearch.yaml) |
-| [`monitoring-tracing-jaeger-in-mem.yaml`][1.6] | Installs only [Jaeger in-memory][2.4]**\***                                                                                                        | Serving component                                                 |
+| [`monitoring-tracing-jaeger.yaml`][1.5]        | Installs only [Jaeger][2.4]**\***                                                                                                                 | Serving component, ELK stack (monitoring-logs-elasticsearch.yaml), [Jaeger Operator][2.5] |
+| [`monitoring-tracing-jaeger-in-mem.yaml`][1.6] | Installs only [Jaeger in-memory][2.4]**\***                                                                                                       | Serving component, [Jaeger Operator][2.5]                                                  |
 | [`monitoring-tracing-zipkin.yaml`][1.7]        | Installs only [Zipkin][2.3].**\***                                                                                                                 | Serving component, ELK stack (monitoring-logs-elasticsearch.yaml) |
 | [`monitoring-tracing-zipkin-in-mem.yaml`][1.8] | Installs only [Zipkin in-memory][2.3]**\***                                                                                                        | Serving component                                                 |
 | **knative/build**                              |                                                                                                                                                    |                                                                   |
@@ -259,6 +259,7 @@ for details about installing the various supported observability plugins.
 [2.2]: https://grafana.com
 [2.3]: https://zipkin.io/
 [2.4]: https://jaegertracing.io/
+[2.5]: https://github.com/jaegertracing/jaeger-operator#installing-the-operator
 [3]: https://github.com/knative/build/releases/tag/v0.5.2
 [3.1]: https://github.com/knative/build/releases/download/v0.5.0/build.yaml
 [4]: https://github.com/knative/eventing/releases/tag/v0.5.2
