@@ -1,143 +1,218 @@
 ---
-title: "Configuring HTTPS with a custom certificate"
-#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
+title: "Configuring HTTPS with TLS certificates"
+linkTitle: "Configuring HTTPS connections"
 weight: 60
 type: "docs"
 ---
 
-If you already have an SSL/TLS certificate for your domain you can follow the
-steps below to configure Knative to use your certificate and enable HTTPS
-connections.
+Learn how to configure secure HTTPS connections in Knative using TLS certificates
+([TLS replaces SSL](https://en.wikipedia.org/wiki/Transport_Layer_Security)).
+Configure secure HTTPS connections to enable your Knative services and routes to
+[terminate external TLS connections](https://en.wikipedia.org/wiki/Transport_Layer_Security#TLS_interception).
+You can configure Knative to handle certificates that you manually specify,
+or you can enable Knative to automatically obtain and renew certificates.
 
-Before you begin, you will need to
-[configure Knative to use your custom domain](./using-a-custom-domain.md).
+You can use either [Certbot][cb] or [cert-manager][cm] to obtain certificates.
+Both tools support TLS certificates but if you want to enable Knative for
+automatic TLS certificate provisioning, you must install and configure the cert-manager tool:
 
-**Note:** due to limitations in Istio, Knative only supports a single
-certificate per cluster. If you will serve multiple domains in the same cluster,
-make sure the certificate is signed for all the domains.
+- **Manually obtain and renew certificates**: Both the Certbot and cert-manager
+  tools can be used to manually obtain TLS certificates. In general, after you
+  obtain a certificate, you must create a Kubernetes secret to use that
+  certificate in your cluster. See the complete set of steps below for details
+  about manually obtaining and configuring certificates.
 
-## Add the Certificate and Private Key into a secret
+- **Enable Knative to automatically obtain and renew TLS certificates**: You
+  can also use cert-manager to configure Knative to automatically obtain new
+  TLS certificates and renew existing ones. If you want to enable Knative to
+  automatically provision TLS certificates, instead see the
+  [Enabling automatic TLS certificate provisioning](./using-auto-tls.md) topic.
 
-> Note, if you don't have a certificate, you can find instructions on obtaining
-> an SSL/TLS certificate using LetsEncrypt at the bottom of this page.
+By default, the [Let's Encrypt Certificate Authority (CA)][le] is used to
+demonstrate how to enable HTTPS connections, but you can configure Knative to
+use any certificate from a CA that supports the ACME protocol. However, you
+must use and configure your certificate issuer to use the
+[`DNS-01` challenge type](https://letsencrypt.org/docs/challenge-types/#dns-01-challenge).
 
-Assuming you have two files, `cert.pk` which contains your certificate private
-key, and `cert.pem` which contains the public certificate, you can use the
-following command to create a secret that stores the certificate. Note the name
-of the secret, `istio-ingressgateway-certs` is required.
+> **Important:** Certificates issued by Let's Encrypt are valid for only [90 days][le-faqs].
+> Therefore, if you choose to manually obtain and configure your certificates,
+> you must ensure that you renew each certificate before it expires.
 
-```shell
-kubectl create --namespace istio-system secret tls istio-ingressgateway-certs \
-  --key cert.pk \
-  --cert cert.pem
-```
+[cm]: https://github.com/jetstack/cert-manager
+[cm-docs]: https://cert-manager.readthedocs.io/en/latest/getting-started/
+[cm-providers]: http://docs.cert-manager.io/en/latest/tasks/acme/configuring-dns01/index.html?highlight=supported%20DNS01%20providers#supported-dns01-providers
+[le]: https://letsencrypt.org
+[le-faqs]: https://letsencrypt.org/docs/faq/
+[cb]: https://certbot.eff.org
+[cb-docs]: https://certbot.eff.org/docs/install.html#certbot-auto
+[cb-providers]: https://certbot.eff.org/docs/using.html#changing-the-acme-server
+[cb-cli]: https://certbot.eff.org/docs/using.html#certbot-command-line-options
 
-## Configure the Knative shared Gateway to use the new secret
+## Before you begin
 
-Once you have created a secret that contains the certificate, you need to update
-the Gateway spec to use the HTTPS.
+You must meet the following requirements to enable secure HTTPS connections:
 
-To edit the shared gateway, run:
+- Knative Serving must be installed. For details about installing the Serving
+  component, see the [Knative installation guides](../install/).
+- You must configure your Knative cluster to use a
+  [custom domain](./using-a-custom-domain.md).
 
-```shell
-kubectl edit gateway knative-ingress-gateway --namespace knative-serving
-```
+**Important:** Istio only supports a single certificate per Kubernetes cluster.
+To serve multiple domains using your Knative cluster, you must ensure that your
+new or existing certificate is signed for each of the domains that you want to
+serve.
 
-Change the Gateway spec to include the `tls:` section as shown below, then save
-the changes.
+## Obtaining a TLS certificate
 
-```yaml
-# Please edit the object below. Lines beginning with a '#' will be ignored.
-# and an empty file will abort the edit. If an error occurs while saving this file will be
-# reopened with the relevant failures.
-apiVersion: networking.istio.io/v1alpha3
-kind: Gateway
-metadata:
-  # ... skipped ...
-spec:
-  selector:
-    knative: ingressgateway
-  servers:
-    - hosts:
-        - "*"
-      port:
-        name: http
-        number: 80
-        protocol: HTTP
-    - hosts:
-        - "*"
-      port:
-        name: https
-        number: 443
-        protocol: HTTPS
-      tls:
-        mode: SIMPLE
-        privateKey: /etc/istio/ingressgateway-certs/tls.key
-        serverCertificate: /etc/istio/ingressgateway-certs/tls.crt
-```
+If you already have a signed certificate for your domain, see
+[Manually adding a TLS certificate](#manually-adding-a-tls-certificate) for
+details about configuring your Knative cluster.
 
-Once the change has been made, you can now use the HTTPS protocol to access your
-deployed services.
+If you need a new TLS certificate, you can choose to use one of the following
+tools to obtain a certificate from Let's Encrypt:
 
-## Obtaining an SSL/TLS certificate using Let’s Encrypt through CertBot
+- [Setup Certbot to manually obtain certificates](using-certbot-to-manually-obtain-lets-encrypt-certificates)
+- [Setup cert-manager to either manually obtain a certificate, or to automatically provision certificates](using-cert-manager-to-obtain-lets-encrypt-certificates
+)
 
-If you don't have an existing SSL/TLS certificate, you can use [Let's
-Encrypt][le] to obtain a certificate manually.
+For details about using other CA's, see the tool's reference documentation:
 
-> **Warning:** Certificates issued by [Let's Encrypt][le] are only valid for
-> [90 days](https://letsencrypt.org/docs/faq/). You must renew your certificate
-> with the certbot tool again every 90 days.
+ - [Certbot supported providers][cb-providers]
+ - [cert-manager supported providers][cm-providers]
 
-[le]: https://letsencrypt.org/
+### Using Certbot to manually obtain Let’s Encrypt certificates
 
-1. Install the `certbot-auto` script from the
-   [Certbot website](https://certbot.eff.org/docs/install.html#certbot-auto).
-1. Use the certbot to request a certificate, using DNS validation. The certbot
-   tool will walk you through validating your domain ownership by creating TXT
-   records in your domain.
+Use the following steps to install [Certbot][cb] and the use the tool to manually
+obtain a TLS certificate from Let's Encrypt.
+
+1. Install Certbot by following the [`certbot-auto` wrapper script][cb-docs] instructions.
+
+1. Run the following command to use Certbot to request a certificate using DNS challenge during authorization:
 
    ```shell
    ./certbot-auto certonly --manual --preferred-challenges dns -d '*.default.yourdomain.com'
    ```
 
-1. When certbot is complete, you will have two output files, `privkey.pem` and
-   `fullchain.pem`. These files map to the `cert.pk` and `cert.pem` files used
-   above.
+   where `-d` specifies your domain. If you want to validate multiple domain's, you
+   can include multiple flags: `-d MY.EXAMPLEDOMAIN.1 -d MY.EXAMPLEDOMAIN.2`. 
+   For more information, see the [Cerbot command-line][cb-cli] reference.
 
-## Obtaining an SSL/TLS certificate using LetsEncrypt with cert-manager
+   The Certbot tool walks you through the steps of validating that you own each
+   domain that you specify by creating TXT records in those domains.
 
-You can also use [cert-manager](https://github.com/jetstack/cert-manager) to
-automate the steps required to generate a TLS certificate using LetsEncrypt.
+   Result: CertBot creates two files:
 
-### Install cert-manager
+    - Certificate:`fullchain.pem`
+    - Private key: `privkey.pem`
 
-Follow the [instructions](./installing-cert-manager.md) to install cert-manager.
+What's next:
 
-or see the
-[cert-manager docs](https://cert-manager.readthedocs.io/en/latest/getting-started/)
-for more ways to install and customize.
+Add the certificate and private key to your Knative cluster by
+[creating a Kubernetes secret](#manually-adding-a-tls-certificate).
 
-### Configure cert-manager for your DNS provider
+### Using cert-manager to obtain Let's Encrypt certificates
 
-Once you have installed cert-manager, you'll need to configure it for your DNS
-hosting provider.
+You can install and use [cert-manager][cm] to either manually obtain a
+certificate or to configure your Knative cluster for automatic certificate
+provisioning:
 
-Knative currently only works with the `DNS01` challenge type for LetsEncrypt,
-which is only supported by a
-[small number of DNS providers through cert-manager](http://docs.cert-manager.io/en/latest/tasks/acme/configuring-dns01/index.html?highlight=supported%20DNS01%20providers#supported-dns01-providers).
+ - **Manual certificates**: Install cert-manager and then use the tool to
+   manually obtain a certificate.
 
-Instructions for configuring cert-manager are provided for the following DNS
-hosts:
+   To use cert-manager to manually obtain certificates:
 
-- [Google Cloud DNS](./using-auto-tls.md#Set-up-DNS-challenge-Provider)
+   1. [Install and configure cert-manager](./installing-cert-manager.md).
 
-## Using Auto TLS feature of Knative with cert-manager
+   1. Continue to the steps below about
+      [manually adding a TLS certificate](#manually-adding-a-tls-certificate) by
+      creating and using a Kubernetes secret.
 
-Knative provides a feature of automatically provisioning and configuring TLS 
-certificates for Knative Services or Routes to terminate external TLS 
-connections.
+ - **Automatic certificates**: Configure Knative to use cert-manager
+   for automatically obtaining and renewing TLS certificate. The steps for
+   installing and configuring cert-manager for this method are covered in full
+   in the [Enabling automatic TLS cert provisioning](./using-auto-tls.md) topic.
 
-Follow the [instructions](./using-auto-tls.md) to set up the environment and use this feature.
+## Manually adding a TLS certificate
+
+If you have an existing certificate or have used one of the Certbot or cert-manager tool to manually obtain a new certificate, you can use the
+following steps to add that certificate to your Knative cluster.
+
+For instructions about enabling Knative for automatic certificate provisioning,
+see [Enabling automatic TLS cert provisioning](./using-auto-tls.md). Otherwise,
+continue below for instructions about manually adding a certificate.
+
+To manually add a TLS certificate to your Knative cluster, you create a
+Kubernetes secret and then configure the `knative-ingress-gateway`:
+
+1. Run the following command to create a Kubernetes secret to hold your TLS
+   certificate, `cert.pk`, and the private key, `cert.pem`:
+
+   ```shell
+   kubectl create --namespace istio-system secret tls istio-ingressgateway-certs \
+     --key cert.pk \
+     --cert cert.pem
+   ```
+
+   where `cert.pk` and `cert.pem` are your certificate and private key files.
+   Note that the `istio-ingressgateway-certs` secret name is required.
+
+1. Configure Knative to use the new secret that you created for HTTPS
+   connections:
+
+   1. Run the following command to open the Knative shared `gateway` in edit mode:
+
+      ```shell
+      kubectl edit gateway knative-ingress-gateway --namespace knative-serving
+      ```
+
+   1. Update the `gateway` to include the following `tls:` section and
+      configuration:
+
+      ```yaml
+      ...
+      tls:
+              mode: SIMPLE
+              privateKey: /etc/istio/ingressgateway-certs/tls.key
+              serverCertificate: /etc/istio/ingressgateway-certs/tls.crt
+      ```
+
+      Example:
+
+      ```yaml
+      # Please edit the object below. Lines beginning with a '#' will be ignored.
+      # and an empty file will abort the edit. If an error occurs while saving this
+      # file will be reopened with the relevant failures.
+      apiVersion: networking.istio.io/v1alpha3
+      kind: Gateway
+      metadata:
+        # ... skipped ...
+      spec:
+        selector:
+          knative: ingressgateway
+        servers:
+          - hosts:
+              - "*"
+            port:
+              name: http
+              number: 80
+              protocol: HTTP
+          - hosts:
+              - "*"
+            port:
+              name: https
+              number: 443
+              protocol: HTTPS
+            tls:
+              mode: SIMPLE
+              privateKey: /etc/istio/ingressgateway-certs/tls.key
+              serverCertificate: /etc/istio/ingressgateway-certs/tls.crt
+      ```
+
+## What's next:
+
+After your changes are running on your Knative cluster, you can
+begin using the HTTPS protocol for secure access your deployed Knative services.
+
 ---
 
 Except as otherwise noted, the content of this page is licensed under the
