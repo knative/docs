@@ -46,44 +46,29 @@ environment:
     cd cert-manager-${CERT_MANAGER_VERSION} 
     ```
 
-2. Depending on how you want to use cert-manager, choose one of the following
-   options for installing cert-manager:
+1. Run the following commands to install cert-manager:
 
-    - **Manually obtain and renew certificates**: Run the following command to 
-      install the cert-manager CRDs for Knative so that you can use the cert-manager tool for 
-      manually obtaining TLS certificates and adding them to your cluster.
+    1. Install the cert-manager CRDs:
 
        ```shell
        kubectl apply -f deploy/manifests/00-crds.yaml
        ```
 
-    - **Enable Knative to automatically obtain and renew TLS certificates**: 
-    
-      1. Run one of the following commands to enable Knative to automatically obtain 
-         new TLS certificates and renew existing ones:
-      
-         - For Knative clusters running Kubernetes version 1.13 or above:
+    1. Run one of the following commands to install the cert-manager plugin:
 
-           ```shell
-           # If you are running cluster in 1.13 or above
-           kubectl apply -f deploy/manifests/cert-manager.yaml 
-           ```
+       - For Knative clusters running Kubernetes version 1.13 or above:
 
-         - For Knative clusters running Kubernetes version 1.12 or below:
+          ```shell
+          # If you are running cluster version 1.13 or above
+          kubectl apply -f deploy/manifests/cert-manager.yaml
+          ```
 
-           ```shell
-           # If you are running cluster in 1.12 or below, you will need to add the --validate=false flag
-           kubectl apply -f deploy/manifests/cert-manager.yaml --validate=false
-           ```
-          
-         <!-- TODO(zhiminx) add the link of networking-certmanager deployment after the code is checked in.-->
-      1. If you install the Knative [networking-certmanager deployment]() 
-         in your cluster, you must also run the following command to install the Knative cert-manager CRDs: 
-          
-         ```shell
-         # If you are running cluster in 1.13 or above
-         kubectl apply -f deploy/manifests/cert-manager.yaml 
-         ```
+        - For Knative clusters running Kubernetes version 1.12 or below:
+
+          ```shell
+          # If you are running cluster version 1.12 or below, you must append the --validate=false flag
+          kubectl apply -f deploy/manifests/cert-manager.yaml --validate=false
+          ```
 
 1. Configure which DNS provider is to validate the DNS-01 challenge requests.
 
