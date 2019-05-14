@@ -18,8 +18,8 @@ instructions for installing Istio on your cluster using `gcloud`.
 ## Before you begin
 
 You need:
-- A Kubernetes cluster created
-- [`helm`](https://helm.sh/) installed
+- A Kubernetes cluster created.
+- [`helm`](https://helm.sh/) installed.
 
 ## Installing Istio
 
