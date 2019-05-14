@@ -237,56 +237,66 @@ uninstall that tool before installing the new tool.
 
 ### Zipkin
 
-- If Elasticsearch is not installed or if you don't want to persist end to end
-  traces, run:
 
-  ```shell
-  kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/monitoring-tracing-zipkin-in-mem.yaml
-  ```
+1. Install support for Zipkin:
 
-- If Elasticsearch is installed and you want to persist end to end traces, first
-  run:
+   - If Elasticsearch is not installed or if you don't want to persist end to end
+     traces, run:
 
-  ```shell
-  kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/monitoring-tracing-zipkin.yaml
-  ```
+     ```shell
+     kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/monitoring-tracing-zipkin-in-mem.yaml
+     ```
 
-  Next, create an Elasticsearch index for end to end traces:
+   - If Elasticsearch is installed and you want to persist end to end traces, first
+     run:
 
-  - Open Kibana UI as described in
-    [Create Elasticsearch Indices](#create-elasticsearch-indices) section.
-  - Select `Create Index Pattern` button on top left of the page. Enter
-    `zipkin*` to `Index pattern` and select `timestamp_millis` from
-    `Time Filter field name` and click on `Create` button.
+     ```shell
+     kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/monitoring-tracing-zipkin.yaml
+     ```
+
+1. Create an Elasticsearch index for end to end traces:
+
+   1. Open Kibana UI as described in
+      [Create Elasticsearch Indices](#create-elasticsearch-indices) section.
+
+   1. Select `Create Index Pattern` button on top left of the page. Enter
+      `zipkin*` to `Index pattern` and select `timestamp_millis` from
+      `Time Filter field name` and click on `Create` button.
 
 Visit [Accessing Traces](./accessing-traces.md) for more information on end to
 end traces.
 
 ### Jaeger
 
-**Important**: Before proceeding with the steps below, you will need to install the Jaeger operator (if not already installed). Follow the instructions in the [Installing the operator](https://github.com/jaegertracing/jaeger-operator#installing-the-operator) section only.
+1. Install the Jaeger operator. Use the instructions in jaegertracing/jaeger-operator
+   repository and follow only the steps in the 
+   [Installing the operator](https://github.com/jaegertracing/jaeger-operator#installing-the-operator) 
+   section.
 
-- If Elasticsearch is not installed or if you don't want to persist end to end
-  traces, run:
+1. Install support for Jaeger:
 
-  ```shell
-  kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/monitoring-tracing-jaeger-in-mem.yaml
-  ```
+   - If Elasticsearch is not installed or if you don't want to persist end to end
+     traces, run:
 
-- If Elasticsearch is installed and you want to persist end to end traces, first
-  run:
+     ```shell
+     kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/monitoring-tracing-jaeger-in-mem.yaml
+     ```
 
-  ```shell
-  kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/monitoring-tracing-jaeger.yaml
-  ```
+   - If Elasticsearch is installed and you want to persist end to end traces, first
+     run:
 
-  Next, create an Elasticsearch index for end to end traces:
+     ```shell
+     kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/monitoring-tracing-jaeger.yaml
+     ```
 
-  - Open Kibana UI as described in
-    [Create Elasticsearch Indices](#create-elasticsearch-indices) section.
-  - Select `Create Index Pattern` button on top left of the page. Enter
-    `jaeger*` to `Index pattern` and select `timestamp_millis` from
-    `Time Filter field name` and click on `Create` button.
+1. Create an Elasticsearch index for end to end traces:
+
+   1. Open Kibana UI as described in
+      [Create Elasticsearch Indices](#create-elasticsearch-indices) section.
+      
+   1. Select `Create Index Pattern` button on top left of the page. Enter
+      `jaeger*` to `Index pattern` and select `timestamp_millis` from
+      `Time Filter field name` and click on `Create` button.
 
 Visit [Accessing Traces](./accessing-traces.md) for more information on end to
 end traces.
