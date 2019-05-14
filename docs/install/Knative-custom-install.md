@@ -203,32 +203,32 @@ files from the Knative repositories:
 - [Eventing][4]
 - [Eventing Sources][5]
 
-| Knative Install Filename                       | Notes                                                                                                                          | Dependencies                                                      |
-| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------- |
-| **knative/serving**                            |                                                                                                                                |                                                                   |
-| [`serving.yaml`][1.1]†                         | Installs the Serving component.                                                                                                | Cluster roles enabled, if interacting with Build                  |
-| [`monitoring.yaml`][1.2]†                      | Installs the [ELK stack][2], [Prometheus][2.1], [Grafana][2.2], and [Zipkin][2.3]**\***                                        | Serving component                                                 |
-| [`monitoring-logs-elasticsearch.yaml`][1.3]    | Installs only the [ELK stack][2]**\***                                                                                         | Serving component                                                 |
-| [`monitoring-metrics-prometheus.yaml`][1.4]    | Installs only [Prometheus][2.1]**\***                                                                                          | Serving component                                                 |
-| [`monitoring-tracing-jaeger.yaml`][1.5]        | Installs only [Jaeger][2.4].**\***                                                                                             | Serving component, ELK stack (monitoring-logs-elasticsearch.yaml) |
-| [`monitoring-tracing-jaeger-in-mem.yaml`][1.6] | Installs only [Jaeger in-memory][2.4]**\***                                                                                    | Serving component                                                 |
-| [`monitoring-tracing-zipkin.yaml`][1.7]        | Installs only [Zipkin][2.3].**\***                                                                                             | Serving component, ELK stack (monitoring-logs-elasticsearch.yaml) |
-| [`monitoring-tracing-zipkin-in-mem.yaml`][1.8] | Installs only [Zipkin in-memory][2.3]**\***                                                                                    | Serving component                                                 |
-| **knative/build**                              |                                                                                                                                |                                                                   |
-| [`build.yaml`][3.1]†                           | Installs the Build component.                                                                                                  | Cluster roles enabled, if interacting with Serving                |
-| **knative/eventing**                           |                                                                                                                                |                                                                   |
-| [`release.yaml`][4.1]†                         | Installs the Eventing component. Includes the in-memory channel provisioner.                                                   | Serving component                                                 |
-| [`eventing.yaml`][4.2]                         | Installs the Eventing component. Does not include the in-memory channel provisioner.                                           | Serving component                                                 |
-| [`in-memory-channel.yaml`][4.3]                | Installs only the in-memory channel provisioner.                                                                               | Serving component, Eventing component                             |
-| [`kafka.yaml`][4.4]                            | Installs only the Kafka channel provisioner.                                                                                   | Serving component, Eventing component                             |
-| **knative/eventing-sources**                   |                                                                                                                                |                                                                   |
-| [`eventing-sources.yaml`][5.1]†                | Installs the following sources: [Kubernetes][6], [GitHub][6.1], [Container image](../eventing#containersource), [CronJob][6.2] | Serving component, Eventing component                             |
-| [`camel.yaml`][5.4]                            | Installs the Apache Camel source.                                                                                              | Serving component, Eventing component                             |
-| [`gcppubsub.yaml`][5.2]                        | Installs the [GCP PubSub source][6.3]                                                                                          | Serving component, Eventing component                             |
-| [`kafka.yaml`][5.5]                            | Installs the Apache Kafka source.                                                                                              | Serving component, Eventing component                             |
-| [`event-display.yaml`][5.3]                    | Installs a Knative Service that logs events received for use in samples and debugging.                                         | Serving component, Eventing component                             |
-| **Cluster roles**                              |                                                                                                                                |                                                                   |
-| [`clusterrole.yaml`][7]†                       | Enables the Build and Serving components to interact.                                                                          | Serving component, Build component                                |
+| Knative Install Filename                       | Notes                                                                                                                                              | Dependencies                                                      |
+| ---------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| **knative/serving**                            |                                                                                                                                                    |                                                                   |
+| [`serving.yaml`][1.1]†                         | Installs the Serving component.                                                                                                                    | Cluster roles enabled, if interacting with Build                  |
+| [`monitoring.yaml`][1.2]†                      | Installs the [ELK stack][2], [Prometheus][2.1], [Grafana][2.2], and [Zipkin][2.3]**\***                                                            | Serving component                                                 |
+| [`monitoring-logs-elasticsearch.yaml`][1.3]    | Installs only the [ELK stack][2]**\***                                                                                                             | Serving component                                                 |
+| [`monitoring-metrics-prometheus.yaml`][1.4]    | Installs only [Prometheus][2.1]**\***                                                                                                              | Serving component                                                 |
+| [`monitoring-tracing-jaeger.yaml`][1.5]        | Installs only [Jaeger][2.4]**\***                                                                                                                 | Serving component, ELK stack (monitoring-logs-elasticsearch.yaml), [Jaeger Operator][2.5] |
+| [`monitoring-tracing-jaeger-in-mem.yaml`][1.6] | Installs only [Jaeger in-memory][2.4]**\***                                                                                                       | Serving component, [Jaeger Operator][2.5]                                                  |
+| [`monitoring-tracing-zipkin.yaml`][1.7]        | Installs only [Zipkin][2.3].**\***                                                                                                                 | Serving component, ELK stack (monitoring-logs-elasticsearch.yaml) |
+| [`monitoring-tracing-zipkin-in-mem.yaml`][1.8] | Installs only [Zipkin in-memory][2.3]**\***                                                                                                        | Serving component                                                 |
+| **knative/build**                              |                                                                                                                                                    |                                                                   |
+| [`build.yaml`][3.1]†                           | Installs the Build component.                                                                                                                      | Cluster roles enabled, if interacting with Serving                |
+| **knative/eventing**                           |                                                                                                                                                    |                                                                   |
+| [`release.yaml`][4.1]†                         | Installs the Eventing component. Includes [ContainerSource](../eventing#containersource), [CronJobSource][6.2], the in-memory channel provisioner. | Serving component                                                 |
+| [`eventing.yaml`][4.2]                         | Installs the Eventing component. Does not include the in-memory channel provisioner.                                                               | Serving component                                                 |
+| [`in-memory-channel.yaml`][4.3]                | Installs only the in-memory channel provisioner.                                                                                                   | Serving component, Eventing component                             |
+| [`kafka.yaml`][4.4]                            | Installs only the Kafka channel provisioner.                                                                                                       | Serving component, Eventing component                             |
+| **knative/eventing-sources**                   |                                                                                                                                                    |                                                                   |
+| [`eventing-sources.yaml`][5.1]†                | Installs the following sources: [Kubernetes][6], [GitHub][6.1]                                                                                     | Serving component, Eventing component                             |
+| [`camel.yaml`][5.4]                            | Installs the Apache Camel source.                                                                                                                  | Serving component, Eventing component                             |
+| [`gcppubsub.yaml`][5.2]                        | Installs the [GCP PubSub source][6.3]                                                                                                              | Serving component, Eventing component                             |
+| [`kafka.yaml`][5.5]                            | Installs the Apache Kafka source.                                                                                                                  | Serving component, Eventing component                             |
+| [`event-display.yaml`][5.3]                    | Installs a Knative Service that logs events received for use in samples and debugging.                                                             | Serving component, Eventing component                             |
+| **Cluster roles**                              |                                                                                                                                                    |                                                                   |
+| [`clusterrole.yaml`][7]†                       | Enables the Build and Serving components to interact.                                                                                              | Serving component, Build component                                |
 
 _\*_ See
 [Installing logging, metrics, and traces](../serving/installing-logging-metrics-traces.md)
@@ -259,6 +259,7 @@ for details about installing the various supported observability plugins.
 [2.2]: https://grafana.com
 [2.3]: https://zipkin.io/
 [2.4]: https://jaegertracing.io/
+[2.5]: https://github.com/jaegertracing/jaeger-operator#installing-the-operator
 [3]: https://github.com/knative/build/releases/tag/v0.5.2
 [3.1]: https://github.com/knative/build/releases/download/v0.5.0/build.yaml
 [4]: https://github.com/knative/eventing/releases/tag/v0.5.2
@@ -348,7 +349,7 @@ commands below.
      - `https://github.com/knative/eventing/releases/download/v0.5.0/release.yaml`
      - `https://github.com/knative/eventing-sources/releases/download/v0.5.0/eventing-sources.yaml`
 
-   **Example install commands:**
+     **Example install commands:**
 
    - To install the Knative Serving component with the set of observability
      plugins, enter the following command. The `--selector` flag installs the

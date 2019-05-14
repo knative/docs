@@ -98,11 +98,7 @@ recreate the source files from this folder.
    # Copy the "helloworld-haskell-exe" executable from the builder stage to the production image.
    WORKDIR /root/
    COPY --from=builder /root/.local/bin/helloworld-haskell-exe .
-
-   # Service must listen to $PORT environment variable.
-   # This default value facilitates local development.
-   ENV PORT 8080
-
+   
    # Run the web service on container startup.
    CMD ["./helloworld-haskell-exe"]
    ```
