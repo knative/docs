@@ -62,32 +62,11 @@ minikube start --memory=8192 --cpus=4 \
 > Gloo is not currently compatible with the Knative Eventing component.
 > [Click here](./Knative-with-Gloo.md) to install Knative with Gloo.
 
-Knative depends on Istio. Run the following to install Istio. (We are changing
-`LoadBalancer` to `NodePort` for the `istio-ingress` service).
+Knative depends on Istio. See the
+[Installing Istio for Knative guide](./installing-istio.md) to install Istio.
 
-```shell
-kubectl apply --filename https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/istio-1.0.7/istio-crds.yaml &&
-curl -L https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/istio-1.0.7/istio.yaml \
-  | sed 's/LoadBalancer/NodePort/' \
-  | kubectl apply --filename -
-
-# Label the default namespace with istio-injection=enabled.
-kubectl label namespace default istio-injection=enabled
-```
-
-Monitor the Istio components until all of the components show a `STATUS` of
-`Running` or `Completed`:
-
-```shell
-kubectl get pods --namespace istio-system
-```
-
-It will take a few minutes for all the components to be up and running; you can
-rerun the command to see the current status.
-
-> Note: Instead of rerunning the command, you can add `--watch` to the above
-> command to view the component's status updates in real time. Use CTRL+C to
-> exit watch mode.
+You must install Istio on your Kubernetes cluster before continuing with these
+instructions to install Knative.
 
 ## Installing Knative
 

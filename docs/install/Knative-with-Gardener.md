@@ -72,36 +72,15 @@ of this guide be sure you have `export KUBECONFIG=my-cluster.yaml` set.
 
 ## Installing Istio
 
-Knative depends on Istio.
+Knative depends on Istio. If your cloud platform offers a managed Istio
+installation, we recommend installing Istio that way, unless you need the
+ability to customize your installation. 
 
-1.  Install Istio:
+Otherwise, see the
+[Installing Istio for Knative guide](./installing-istio.md) to install Istio.
 
-    ```bash
-    kubectl apply --filename https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/istio-1.0.7/istio-crds.yaml && \
-    kubectl apply --filename https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/istio-1.0.7/istio.yaml
-    ```
-
-    Note: the resources (CRDs) defined in the `istio-crds.yaml`file are also
-    included in the `istio.yaml` file, but they are pulled out so that the CRD
-    definitions are created first. If you see an error when creating resources
-    about an unknown type, run the second `kubectl apply` command again.
-
-2.  Label the default namespace with `istio-injection=enabled`:
-    ```bash
-    kubectl label namespace default istio-injection=enabled
-    ```
-3.  Monitor the Istio components until all of the components show a `STATUS` of
-    `Running` or `Completed`:
-    ```bash
-    kubectl get pods --namespace istio-system
-    ```
-
-It will take a few minutes for all the components to be up and running; you can
-rerun the command to see the current status.
-
-> Note: Instead of rerunning the command, you can add `--watch` to the above
-> command to view the component's status updates in real time. Use CTRL + C to
-> exit watch mode.
+You must install Istio on your Kubernetes cluster before continuing with these
+instructions to install Knative.
 
 ## Installing Knative
 

@@ -125,6 +125,12 @@ the`knative-build` and `knative-monitoring` namespaces.
 
 [Follow the instructions to install and run Istio in IBM Cloud Private](https://istio.io/docs/setup/kubernetes/quick-start-ibm/#ibm-cloud-private).
 
+If you prefer to install Istio manually, see the
+[Installing Istio for Knative guide](./installing-istio.md).
+
+You must install Istio on your Kubernetes cluster before continuing with these
+instructions to install Knative.
+
 ## Installing Knative
 
 The following commands install all available Knative components as well as the

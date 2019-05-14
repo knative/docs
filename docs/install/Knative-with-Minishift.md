@@ -140,37 +140,11 @@ minishift oc-env
 
 #### Installing Istio
 
-Knative depends on Istio. The
-[istio-openshift-policies.sh](./scripts/istio-openshift-policies.sh) does run
-the required commands to configure necessary
-[privileges](https://istio.io/docs/setup/kubernetes/platform-setup/openshift/)
-to the service accounts used by Istio.
+Knative depends on Istio. See the
+[Installing Istio for Knative guide](./installing-istio.md) to install Istio.
 
-```shell
-curl -s https://raw.githubusercontent.com/knative/docs/master/docs/install/scripts/istio-openshift-policies.sh | bash
-```
-
-1. Run the following to install Istio:
-
-   ```shell
-   oc apply --filename https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/istio-1.0.7/istio-crds.yaml && \
-   oc apply --filename https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/istio-1.0.7/istio.yaml
-   ```
-
-   Note: the resources (CRDs) defined in the `istio-crds.yaml`file are also
-   included in the `istio.yaml` file, but they are pulled out so that the CRD
-   definitions are created first. If you see an error when creating resources
-   about an unknown type, run the second `oc apply` command again.
-
-2. Ensure the istio-sidecar-injector pods runs as privileged:
-   ```shell
-   oc get cm istio-sidecar-injector -n istio-system -oyaml | sed -e 's/securityContext:/securityContext:\\n      privileged: true/' | oc replace -f -
-   ```
-3. Monitor the Istio components until all of the components show a `STATUS` of
-   `Running` or `Completed`:
-   `shell while oc get pods -n istio-system | grep -v -E "(Running|Completed|STATUS)"; do sleep 5; done`
-   > **NOTE:** It will take a few minutes for all the components to be up and
-   > running.
+You must install Istio on your Kubernetes cluster before continuing with these
+instructions to install Knative.
 
 ### Install Knative
 
