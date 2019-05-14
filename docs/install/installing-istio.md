@@ -77,8 +77,8 @@ Istio with automatic sidecar injection enabled:
    then continue with these instructions.
 
 1. Finish the install by applying your desired Istio configuration:
-   - [Installing Istio without sidecar injection](#installing-istio-without-sidecar-injection) (Recommended default installation)
-   - [Installing Istio with sidecar injection](#installing-istio-with-sidecar-injection)
+   - [Installing Istio with sidecar injection](#installing-istio-with-sidecar-injection) (Recommended default installation)
+   - [Installing Istio without sidecar injection](#installing-istio-without-sidecar-injection)
    - [Installing Istio with SDS to secure the ingress gateway](#installing-istio-with-SDS-to-secure-the-ingress-gateway)
 
 #### Installing Istio with sidecar injection
