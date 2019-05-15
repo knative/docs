@@ -343,11 +343,24 @@ commands below.
      `[COMPONENT]`, `[VERSION]`, and `[FILENAME]` are the Knative component,
      release version, and filename of the Knative component or plugin. Examples:
 
-     - `https://github.com/knative/serving/releases/download/v0.5.2/serving.yaml`
+     - `https://github.com/knative/serving/releases/download/v0.5.2/serving.yaml --selector networking.knative.dev/certificate-provider=cert-manager`
      - `https://github.com/knative/build/releases/download/v0.5.0/build.yaml`
      - `https://github.com/knative/eventing/releases/download/v0.5.0/release.yaml`
      - `https://github.com/knative/eventing-sources/releases/download/v0.5.0/eventing-sources.yaml`
 
+     **Note**: By default, the Knative Serving component installation (for example,`serving.yaml`) includes a 
+     controller for [enabling automatic TLS certificate provisioning](../serving/using-a-tls-cert.md). If you 
+     intend on immediatelly enabling auto certificates in Knative, you can remove the `--selector` statement, 
+     otherwise you can install that feature at a later time:
+     ```bash
+     --selector networking.knative.dev/certificate-provider=cert-manager
+     ```
+     
+     Example:
+     ```bash
+     kubectl  delete --filename https://github.com/knative/serving/releases/download/v0.6.0/serving.yaml --selector networking.knative.dev/certificate-provider=cert-manager
+     ```
+     
    **Example install commands:**
 
    - To install the Knative Serving component with the set of observability
@@ -368,7 +381,7 @@ commands below.
        --filename https://github.com/knative/serving/releases/download/v0.5.2/monitoring.yaml
      ```
 
-   * To install all three Knative components and the set of Eventing sources
+   - To install all three Knative components and the set of Eventing sources
      without an observability plugin, enter the following command. The
      `--selector` flag installs the CRDs first:
 
@@ -391,15 +404,6 @@ commands below.
        --filename https://github.com/knative/eventing-sources/releases/download/v0.5.0/eventing-sources.yaml \
        --filename https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/config/build/clusterrole.yaml
      ```
-     > **Note**: If you do not intend on enabling automatic TLS certificate provisioning in Knative, you need to run below command to delete TLS related components from Knative serving:
-     ```bash
-     kubectl  delete --filename https://github.com/knative/serving/releases/download/v0.6.0/serving.yaml  -l networking.knative.dev/certificate-provider=cert-manager
-     ```
-     > **Note**: If you do intend on enabling automatic TLS certificate provisioning in Knative, you need to follow the
-     [instructions](../docs/serving/installing-cert-manager.md) to install cert-manager.
-     
-
-
 1. Depending on what you chose to install, view the status of your installation
    by running one or more of the following commands. It might take a few
    seconds, so rerun the commands until all of the components show a `STATUS` of
