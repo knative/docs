@@ -5,7 +5,7 @@ details of event routing from the event producer and event consumer.
 
 ## Broker
 
-Broker represents an 'event mesh'. Events are sent to the Broker's ingress and
+A Broker represents an 'event mesh'. Events are sent to the Broker's ingress and
 are then sent to any subscribers that are interested in that event. Once inside
 a Broker, all metadata other than the CloudEvent is stripped away (e.g. unless
 set as a CloudEvent attribute, there is no concept of how this event entered the
@@ -28,8 +28,8 @@ spec:
 
 ## Trigger
 
-Trigger represents a desire to subscribe to events from a specific Broker. Basic
-filtering on the types of events is provided.
+A Trigger represents a desire to subscribe to events from a specific Broker. Basic
+filtering on the type and source of events is provided.
 
 Example:
 
@@ -89,8 +89,10 @@ If `spec.channelTemplate` is not specified:
 
 ### Broker
 
-There are two ways to create a Broker, via [namespace annotation](#annotation)
-or [manual setup](#manual-setup).
+There are two ways to create a Broker:
+
+* [namespace annotation](#annotation)
+* [manual setup](#manual-setup)
 
 Normally the [namespace annotation](#annotation) is used to do this setup.
 
@@ -103,7 +105,8 @@ with the desired namespace):
 kubectl label namespace default knative-eventing-injection=enabled
 ```
 
-This should automatically create the `default` `Broker` in that namespace.
+This should automatically create a `Broker` named `default` in the `default`
+namespace.
 
 ```shell
 kubectl -n default get broker default
@@ -150,8 +153,9 @@ EOF
 
 ### Subscriber
 
-Now create some function that wants to receive those events. This document will
-assume the following, but it could be anything that is `Addressable`.
+Now create a function to receive those events. This document will
+assume the following manifest describing a Knative Service is created, but it
+could be anything that is `Addressable`.
 
 ```yaml
 apiVersion: serving.knative.dev/v1alpha1
@@ -172,7 +176,8 @@ spec:
 
 ### Trigger
 
-Create a `Trigger` that sends only events of a particular type to `my-service`:
+Create a `Trigger` using the following manifest that sends only events of a
+particular type to `my-service`:
 
 ```yaml
 apiVersion: eventing.knative.dev/v1alpha1
