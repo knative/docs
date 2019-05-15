@@ -3,6 +3,8 @@ title: "Configuring HTTPS with TLS certificates"
 linkTitle: "Configuring HTTPS connections"
 weight: 60
 type: "docs"
+aliases:
+    - /docs/serving/using-a-ssl-cert/
 ---
 
 Learn how to configure secure HTTPS connections in Knative using TLS certificates
@@ -188,7 +190,7 @@ Kubernetes secret and then configure the `knative-ingress-gateway`:
         # ... skipped ...
       spec:
         selector:
-          knative: ingressgateway
+          istio: ingressgateway
         servers:
           - hosts:
               - "*"
