@@ -343,18 +343,16 @@ commands below.
      `[COMPONENT]`, `[VERSION]`, and `[FILENAME]` are the Knative component,
      release version, and filename of the Knative component or plugin. Examples:
 
-     - `https://github.com/knative/serving/releases/download/v0.5.2/serving.yaml --selector networking.knative.dev/certificate-provider=cert-manager`
+     - `https://github.com/knative/serving/releases/download/v0.5.2/serving.yaml --selector networking.knative.dev/certificate-provider!=cert-manager`
      - `https://github.com/knative/build/releases/download/v0.5.0/build.yaml`
      - `https://github.com/knative/eventing/releases/download/v0.5.0/release.yaml`
      - `https://github.com/knative/eventing-sources/releases/download/v0.5.0/eventing-sources.yaml`
 
-     **Note**: By default, the Knative Serving component installation (for example,`serving.yaml`) includes a 
-     controller for [enabling automatic TLS certificate provisioning](../serving/using-a-tls-cert.md). If you 
-     intend on immediatelly enabling auto certificates in Knative, you can remove the `--selector` statement, 
-     otherwise you can install that feature at a later time:
-     ```bash
-     --selector networking.knative.dev/certificate-provider=cert-manager
-     ```
+     **Note**: By default, the Knative Serving component installation (`serving.yaml`) includes a 
+     controller for [enabling automatic TLS certificate provisioning](../serving/using-auto-tls.md). If you 
+     do intend on immediately enabling auto certificates in Knative, you can remove the 
+     `--selector networking.knative.dev/certificate-provider!=cert-manager` statement to install the controller. 
+     Otherwise, you can choose to install the auto certificates feature and controller at a later time.
      
    **Example install commands:**
 
