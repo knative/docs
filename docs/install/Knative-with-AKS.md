@@ -167,10 +167,6 @@ rerun the command to see the current status.
 > command to view the component's status updates in real time. Use CTRL + C to
 > exit watch mode.
 
-## Installing Cert-Manager
-
-Follow the [instructions](../serving/installing-cert-manager.md) to install Cert-Manager if you want to use use [Auto TLS feature](../serving/using-auto-tls.md).
-
 ## Installing Knative
 
 The following commands install all available Knative components. To customize
@@ -225,8 +221,12 @@ your Knative installation, see
    --filename https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/config/build/clusterrole.yaml
    ```
 
-   > **Note**: You can add `-l networking.knative.dev/certificate-provider!=cert-manager` to above `kubctl apply` command to 
-   > exclude Auto TLS related components if you don't need this feature.
+   > **Note**: If you do not intend on enabling automatic TLS certificate provisioning in Knative, you need to run below command to delete TLS related components from Knative serving:
+     ```bash
+     kubectl  delete --filename https://github.com/knative/serving/releases/download/v0.6.0/serving.yaml  -l networking.knative.dev/certificate-provider=cert-manager
+     ```
+   > **Note**: If you do intend on enabling automatic TLS certificate provisioning in Knative, you need to follow the
+     [instructions](../docs/serving/installing-cert-manager.md) to install cert-manager.
 
    > **Note**: For the v0.4.0 release and newer, the `clusterrole.yaml` file is
    > required to enable the Build and Serving components to interact with each
