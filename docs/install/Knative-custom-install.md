@@ -356,11 +356,6 @@ commands below.
      --selector networking.knative.dev/certificate-provider=cert-manager
      ```
      
-     Example:
-     ```bash
-     kubectl  delete --filename https://github.com/knative/serving/releases/download/v0.6.0/serving.yaml --selector networking.knative.dev/certificate-provider=cert-manager
-     ```
-     
    **Example install commands:**
 
    - To install the Knative Serving component with the set of observability
