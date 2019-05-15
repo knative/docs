@@ -21,11 +21,11 @@ deploy functions, applications, or containers workloads.
 
 The following Knative components are available:
 
-- [Build](https://github.com/knative/build) - Source-to-container build
+- [Build](./build) - Source-to-container build
   orchestration
-- [Eventing](https://github.com/knative/eventing) - Management and delivery of
+- [Eventing](./eventing) - Management and delivery of
   events
-- [Serving](https://github.com/knative/serving) - Request-driven compute that
+- [Serving](./serving) - Request-driven compute that
   can scale to zero
 
 ## Audience
@@ -63,7 +63,13 @@ Knative is a diverse, open, and inclusive community. To get involved, see
 [Knative community](../community/).
 
 Your own path to becoming a Knative contributor can
-[begin anywhere](https://github.com/knative/serving/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Akind%2Fgood-first-issue).
+begin in any of the components below:
+
+- [serving](https://github.com/knative/serving/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Akind%2Fgood-first-issue).
+- [eventing](https://github.com/knative/eventing/issues)
+- [build](https://github.com/knative/build/issues)
+- [documentation](https://github.com/knative/docs/issues)
+
 [Bug reports](https://github.com/knative/serving/issues/new) and friction logs
 from new developers are especially welcome.
 
