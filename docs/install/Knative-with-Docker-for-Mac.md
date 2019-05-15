@@ -59,10 +59,6 @@ rerun the command to see the current status.
 > command to view the component's status updates in real time. Use CTRL+C to
 > exit watch mode.
 
-## Installing Cert-Manager
-
-Follow the [instructions](../serving/installing-cert-manager.md) to install Cert-Manager if you want to use use [Auto TLS feature](../serving/using-auto-tls.md).
-
 ## Installing Knative Serving
 
 Next, install [Knative Serving](https://github.com/knative/serving).
@@ -72,13 +68,17 @@ Because you have limited resources available, use the
 which installs only Knative Serving:
 
 ```shell
-curl -L https://github.com/knative/serving/releases/download/v0.5.2/serving.yaml \
+curl -L https://github.com/knative/serving/releases/download/v0.6.0/serving.yaml \
   | sed 's/LoadBalancer/NodePort/' \
-  | kubectl apply --filename -
+  | kubectl apply --selector networking.knative.dev/certificate-provider!=cert-manager --filename -
 ```
 
-> **Note**: You can add `-l networking.knative.dev/certificate-provider!=cert-manager` to above `kubctl apply` command to 
-> exclude Auto TLS related components if you don't need this feature.
+  **Notes**: 
+  > - By default, the Knative Serving component installation (`serving.yaml`) includes a controller
+  >   for [enabling automatic TLS certificate provisioning](../serving/using-auto-tls.md). If you do
+  >   intend on immediately enabling auto certificates in Knative, you can remove the 
+  >   `--selector networking.knative.dev/certificate-provider!=cert-manager` statement to install the
+  >   controller. 
 
 > Note: Unlike minikube, we're not changing the LoadBalancer to a NodePort here.
 > Docker for Mac will assign `localhost` as the host for that LoadBalancer,

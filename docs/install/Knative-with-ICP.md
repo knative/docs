@@ -161,13 +161,17 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
 1. Run the following commands to install Knative:
 
    ```shell
-   curl -L https://github.com/knative/serving/releases/download/v0.5.0/serving.yaml \
+   curl -L https://github.com/knative/serving/releases/download/v0.6.0/serving.yaml \
      | sed 's/LoadBalancer/NodePort/' \
-     | kubectl apply --filename -
+     | kubectl apply --selector networking.knative.dev/certificate-provider!=cert-manager --filename -
    ```
 
-   > **Note**: You can add `-l networking.knative.dev/certificate-provider!=cert-manager` to above `kubctl apply` command to 
-   > exclude Auto TLS related components if you don't need this feature.
+   **Notes**: 
+   > - By default, the Knative Serving component installation (`serving.yaml`) includes a controller
+   >   for [enabling automatic TLS certificate provisioning](../serving/using-auto-tls.md). If you do
+   >   intend on immediately enabling auto certificates in Knative, you can remove the 
+   >   `--selector networking.knative.dev/certificate-provider!=cert-manager` statement to install the
+   >   controller. 
 
    ```shell
    curl -L https://github.com/knative/build/releases/download/v0.5.0/build.yaml \
