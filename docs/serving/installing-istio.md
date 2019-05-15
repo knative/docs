@@ -9,12 +9,14 @@ Use this guide to perform a custom installation of Istio for use with Knative.
 ## Before you begin
 
 You need:
+
 - A Kubernetes cluster created
 - [`helm`](https://helm.sh/) installed
 
 ## Download Istio
 
 Run below command to download Istio.
+
 ```shell
 # Download and unpack Istio
 export ISTIO_VERSION=1.1.3
@@ -22,21 +24,25 @@ curl -L https://git.io/getLatestIstio | sh -
 cd istio-${ISTIO_VERSION}
 ```
 
-## Install Istio CRDs 
-Default Istio Installation
-Run below command to install Istio CRDs first.
+## Install Istio CRDs
+
+Default Istio Installation Run below command to install Istio CRDs first.
+
 ```shell
 for i in install/kubernetes/helm/istio-init/files/crd*yaml; do kubectl apply -f $i; done
 ```
+
 wait a few seconds for the CRDs to be committed in the Kubernetes API-server
 
 ## Custom Installation
 
 ### Istio with Sidecar Injector
 
-If you need Istio service mesh, and want to enable it by [automatically 
-injecting the Istio sidecars](https://istio.io/docs/setup/kubernetes/additional-setup/sidecar-injection/#automatic-sidecar-injection), then Istio sidecar injector and related configurations are needed in your Istio. Run 
-below command to install the custom Istio.
+If you need Istio service mesh, and want to enable it by
+[automatically injecting the Istio sidecars](https://istio.io/docs/setup/kubernetes/additional-setup/sidecar-injection/#automatic-sidecar-injection),
+then Istio sidecar injector and related configurations are needed in your Istio.
+Run below command to install the custom Istio.
+
 ```shell
 # A template with sidecar injection enabled.
 helm template --namespace=istio-system \
@@ -68,9 +74,11 @@ kubectl apply -f istio.yaml
 
 ### Istio with no Sidecar Injector
 
-If you don't need Istio service mesh, or want to enable the service by 
-[manually injecting the Istio sidecars](https://istio.io/docs/setup/kubernetes/additional-setup/sidecar-injection/#manual-sidecar-injection), you can install an Istio without sidecar injector. Run below command to install the custom 
-Istio.
+If you don't need Istio service mesh, or want to enable the service by
+[manually injecting the Istio sidecars](https://istio.io/docs/setup/kubernetes/additional-setup/sidecar-injection/#manual-sidecar-injection),
+you can install an Istio without sidecar injector. Run below command to install
+the custom Istio.
+
 ```shell
 # A lighter template, with no sidecar injection.
 helm template --namespace=istio-system \
@@ -98,10 +106,12 @@ kubectl apply -f istio-lean.yaml
 
 ### Install Cluster Local Gateway
 
-If you want your Routes to be only visible inside the cluster, you may
-want to use the feature of [cluster local route](../docs/serving/cluster-local-route.md). In order to use this feature, an extra Istio
-cluster local gateway needs to be added into your cluster. Run below command
-to add the cluster local gateway.
+If you want your Routes to be only visible inside the cluster, you may want to
+use the feature of
+[cluster local route](../docs/serving/cluster-local-route.md). In order to use
+this feature, an extra Istio cluster local gateway needs to be added into your
+cluster. Run below command to add the cluster local gateway.
+
 ```shell
 # Generate the extra gateway.
 helm template --namespace=istio-system \
@@ -126,13 +136,18 @@ kubectl apply -f istio-local-gateway.yaml
 
 ### Istio with Secret Discovery Service
 
-[Secret Discovery Service](https://istio.io/docs/tasks/traffic-management/secure-ingress/sds/) is needed if you want to dyanmically update your Gateway 
-with multiple TLS certificates to terminate TLS connection. The below`helm` flag is needed in your `helm` command to enable `SDS`.
+[Secret Discovery Service](https://istio.io/docs/tasks/traffic-management/secure-ingress/sds/)
+is needed if you want to dyanmically update your Gateway with multiple TLS
+certificates to terminate TLS connection. The below`helm` flag is needed in your
+`helm` command to enable `SDS`.
+
 ```
 --set gateways.istio-ingressgateway.sds.enabled=true
 ```
-For example, the `helm` command for installing Istio with Ingress `SDS` and 
+
+For example, the `helm` command for installing Istio with Ingress `SDS` and
 Istio sidecar injector is
+
 ```shell
 helm template --namespace=istio-system \
   --set sidecarInjectorWebhook.enabled=true \
@@ -166,12 +181,16 @@ helm template --namespace=istio-system \
 
 ## Full Istio Installation Guide.
 
-1. For the full Istio Installation Guide, check [doc](https://istio.io/docs/setup/kubernetes/).
+1. For the full Istio Installation Guide, check
+   [doc](https://istio.io/docs/setup/kubernetes/).
 
-1. For the full Istio Installation Option, check [doc](https://istio.io/docs/reference/config/installation-options/).
+1. For the full Istio Installation Option, check
+   [doc](https://istio.io/docs/reference/config/installation-options/).
 
 ## Clean up
+
 Run below command to clean up all of the Istio files.
+
 ```shell
 cd ../
 rm -rf istio-${ISTIO_VERSION}

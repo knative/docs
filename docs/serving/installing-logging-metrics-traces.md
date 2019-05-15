@@ -237,18 +237,17 @@ uninstall that tool before installing the new tool.
 
 ### Zipkin
 
-
 1. Install support for Zipkin:
 
-   - If Elasticsearch is not installed or if you don't want to persist end to end
-     traces, run:
+   - If Elasticsearch is not installed or if you don't want to persist end to
+     end traces, run:
 
      ```shell
      kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/monitoring-tracing-zipkin-in-mem.yaml
      ```
 
-   - If Elasticsearch is installed and you want to persist end to end traces, first
-     run:
+   - If Elasticsearch is installed and you want to persist end to end traces,
+     first run:
 
      ```shell
      kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/monitoring-tracing-zipkin.yaml
@@ -268,22 +267,22 @@ end traces.
 
 ### Jaeger
 
-1. Install the Jaeger operator. Use the instructions in jaegertracing/jaeger-operator
-   repository and follow only the steps in the 
-   [Installing the operator](https://github.com/jaegertracing/jaeger-operator#installing-the-operator) 
+1. Install the Jaeger operator. Use the instructions in
+   jaegertracing/jaeger-operator repository and follow only the steps in the
+   [Installing the operator](https://github.com/jaegertracing/jaeger-operator#installing-the-operator)
    section.
 
 1. Install support for Jaeger:
 
-   - If Elasticsearch is not installed or if you don't want to persist end to end
-     traces, run:
+   - If Elasticsearch is not installed or if you don't want to persist end to
+     end traces, run:
 
      ```shell
      kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/monitoring-tracing-jaeger-in-mem.yaml
      ```
 
-   - If Elasticsearch is installed and you want to persist end to end traces, first
-     run:
+   - If Elasticsearch is installed and you want to persist end to end traces,
+     first run:
 
      ```shell
      kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/monitoring-tracing-jaeger.yaml
@@ -293,7 +292,7 @@ end traces.
 
    1. Open Kibana UI as described in
       [Create Elasticsearch Indices](#create-elasticsearch-indices) section.
-      
+
    1. Select `Create Index Pattern` button on top left of the page. Enter
       `jaeger*` to `Index pattern` and select `timestamp_millis` from
       `Time Filter field name` and click on `Create` button.
