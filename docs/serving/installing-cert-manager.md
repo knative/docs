@@ -100,7 +100,7 @@ environment:
 Before you can use a TLS certificate for secure connections, you must finish configuring Knative:
 
 - **Manual**: If you installed cert-manager to manually obtain certificates, continue to the following topic
-  for instructions about creating a Kubernetes secret: [Manually adding a TLS certificate](./using-an-tls-cert.md#manually-adding-a-tls-certificate) 
+  for instructions about creating a Kubernetes secret: [Manually adding a TLS certificate](./using-a-tls-cert.md#manually-adding-a-tls-certificate) 
   
 - **Automatic**: If you installed cert-manager to use for automatic certificate provisioning, continue to the following topic
   to enable that feature: [Enabling automatic TLS certificate provisioning in Knative](./using-auto-tls.md)
