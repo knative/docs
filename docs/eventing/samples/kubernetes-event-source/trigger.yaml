@@ -11,6 +11,7 @@ spec:
       name: event-display
 
 ---
+
 # This is a very simple Knative Service that writes the input request to its log.
 
 apiVersion: serving.knative.dev/v1alpha1

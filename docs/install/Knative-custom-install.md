@@ -44,113 +44,13 @@ traffic routing and ingress. You have the option of injecting Istio sidecars and
 enabling the Istio service mesh, but it's not required for all Knative
 components.
 
-You should first install the `istio-crds.yaml` file to ensure that the Istio
-[Custom Resource Definitions (CRD)](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
-are created before installing Istio.
+If your cloud platform offers a managed Istio installation, we recommend
+installing Istio that way, unless you need the ability to customize your
+installation.
 
-### Choosing an Istio installation
-
-You can Istio with or without a service mesh:
-
-- _automatic sidecar injection_: Enables the Istio service mesh by
-  [automatically injecting the Istio sidecars](https://istio.io/docs/setup/kubernetes/sidecar-injection/#automatic-sidecar-injection).
-  The sidecars are injected into each pod of your cluster as each pod is
-  created.
-
-- _manual sidecar injection_: Provides your Knative installation with traffic
-  routing and ingress, without the Istio service mesh. You do have the option of
-  later enabling the service mesh if you
-  [manually inject the Istio sidecars](https://istio.io/docs/setup/kubernetes/sidecar-injection/#manual-sidecar-injection).
-
-If you are just getting started with Knative, you should choose automatic
-sidecar injection and enable the Istio service mesh.
-
-Due to current dependencies, some installable Knative options require the Istio
-service mesh. If you install any of the following options, you must install
-`istio.yaml` so that automatic sidecar injection is enabled:
-
-- [Knative Eventing](https://github.com/knative/eventing)
-- [Knative Eventing Sources](https://github.com/knative/eventing-sources)
-- [Observability plugins](../serving/installing-logging-metrics-traces.md)
-
-#### Istio installation options
-
-| Istio Install Filename  | Description                                                            |
-| ----------------------- | ---------------------------------------------------------------------- |
-| [`istio-crds.yaml`][a]† | Creates CRDs before installing Istio.                                  |
-| [`istio.yaml`][b]†      | Install Istio with service mesh enabled (automatic sidecar injection). |
-| [`istio-lean.yaml`][c]  | Install Istio and disable the service mesh by default.                 |
-
-† These are the recommended standard install files suitable for most use cases.
-
-[a]:
-  https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/istio-1.0.7/istio-crds.yaml
-[b]:
-  https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/istio-1.0.7/istio.yaml
-[c]: https://github.com/knative/serving/releases/download/v0.5.2/istio-lean.yaml
-
-### Installing Istio
-
-1. If you choose to install the Istio service mesh with automatic sidecar
-   injection, you must ensure that the
-   [`MutatingAdmissionWebhook` admission controller](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.11/#mutatingwebhookconfiguration-v1beta1-admissionregistration-k8s-io)
-   is enabled on your cluster by running the following command:
-
-   ```bash
-   kubectl api-versions | grep admissionregistration
-   ```
-
-   Result:
-
-   ```bash
-   admissionregistration.k8s.io/v1beta1
-   ```
-
-   If `admissionregistration.k8s.io/v1beta1` is not listed, follow the
-   [Kubernetes instructions about enabling the `MutatingAdmissionWebhook` admission controller](https://kubernetes.io/docs/admin/admission-controllers/#how-do-i-turn-on-an-admission-controller).
-
-   For example, you add `--enable-admission-plugins=MutatingAdmissionWebhook` to
-   the `/etc/kubernetes/manifests/kube-apiserver.yaml` file.
-
-1. Create the Istio CRDs on your cluster:
-
-   ```bash
-   kubectl apply --filename https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/istio-1.0.7/istio-crds.yaml
-   ```
-
-1. Install Istio by specifying the filename in the `kubectl apply` command:
-
-   ```bash
-   kubectl apply --filename https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/istio-1.0.7/[FILENAME].yaml
-   ```
-
-   where `[FILENAME]` is the name of the Istio file that you want to install.
-   Examples:
-
-   - `istio.yaml`
-   - `istio-lean.yaml`
-
-1. If you chose to install the Istio service mesh with automatic sidecar
-   injection, you must label the default namespace with
-   `istio-injection=enabled`:
-
-   ```bash
-   kubectl label namespace default istio-injection=enabled
-   ```
-
-   Important: You should set the `istio-injection` namespace, if you intend on
-   later enabling the Istio service mesh through manual sidecar injection.
-
-1. View the status of your Istio installation. It might take a few seconds, so
-   rerun the following command until all of the pods show a `STATUS` of
-   `Running` or `Completed`:
-
-   ```bash
-   kubectl get pods --namespace istio-system
-   ```
-
-   > Tip: You can append the `--watch` flag to the `kubectl get` commands to
-   > view the pod status in realtime. You use `CTRL + C` to exit watch mode.
+If you prefer to install Istio manually, if your cloud provider doesn't offer
+a managed Istio installation, or if you're installing Knative locally using Minkube
+or similar, see the [Installing Istio for Knative guide](./installing-istio.md).
 
 ## Installing Knative components
 
@@ -203,32 +103,32 @@ files from the Knative repositories:
 - [Eventing][4]
 - [Eventing Sources][5]
 
-| Knative Install Filename                       | Notes                                                                                                                          | Dependencies                                                      |
-| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------- |
-| **knative/serving**                            |                                                                                                                                |                                                                   |
-| [`serving.yaml`][1.1]†                         | Installs the Serving component.                                                                                                | Cluster roles enabled, if interacting with Build                  |
-| [`monitoring.yaml`][1.2]†                      | Installs the [ELK stack][2], [Prometheus][2.1], [Grafana][2.2], and [Zipkin][2.3]**\***                                        | Serving component                                                 |
-| [`monitoring-logs-elasticsearch.yaml`][1.3]    | Installs only the [ELK stack][2]**\***                                                                                         | Serving component                                                 |
-| [`monitoring-metrics-prometheus.yaml`][1.4]    | Installs only [Prometheus][2.1]**\***                                                                                          | Serving component                                                 |
-| [`monitoring-tracing-jaeger.yaml`][1.5]        | Installs only [Jaeger][2.4].**\***                                                                                             | Serving component, ELK stack (monitoring-logs-elasticsearch.yaml) |
-| [`monitoring-tracing-jaeger-in-mem.yaml`][1.6] | Installs only [Jaeger in-memory][2.4]**\***                                                                                    | Serving component                                                 |
-| [`monitoring-tracing-zipkin.yaml`][1.7]        | Installs only [Zipkin][2.3].**\***                                                                                             | Serving component, ELK stack (monitoring-logs-elasticsearch.yaml) |
-| [`monitoring-tracing-zipkin-in-mem.yaml`][1.8] | Installs only [Zipkin in-memory][2.3]**\***                                                                                    | Serving component                                                 |
-| **knative/build**                              |                                                                                                                                |                                                                   |
-| [`build.yaml`][3.1]†                           | Installs the Build component.                                                                                                  | Cluster roles enabled, if interacting with Serving                |
-| **knative/eventing**                           |                                                                                                                                |                                                                   |
-| [`release.yaml`][4.1]†                         | Installs the Eventing component. Includes the in-memory channel provisioner.                                                   | Serving component                                                 |
-| [`eventing.yaml`][4.2]                         | Installs the Eventing component. Does not include the in-memory channel provisioner.                                           | Serving component                                                 |
-| [`in-memory-channel.yaml`][4.3]                | Installs only the in-memory channel provisioner.                                                                               | Serving component, Eventing component                             |
-| [`kafka.yaml`][4.4]                            | Installs only the Kafka channel provisioner.                                                                                   | Serving component, Eventing component                             |
-| **knative/eventing-sources**                   |                                                                                                                                |                                                                   |
-| [`eventing-sources.yaml`][5.1]†                | Installs the following sources: [Kubernetes][6], [GitHub][6.1], [Container image](../eventing#containersource), [CronJob][6.2] | Serving component, Eventing component                             |
-| [`camel.yaml`][5.4]                            | Installs the Apache Camel source.                                                                                              | Serving component, Eventing component                             |
-| [`gcppubsub.yaml`][5.2]                        | Installs the [GCP PubSub source][6.3]                                                                                          | Serving component, Eventing component                             |
-| [`kafka.yaml`][5.5]                            | Installs the Apache Kafka source.                                                                                              | Serving component, Eventing component                             |
-| [`event-display.yaml`][5.3]                    | Installs a Knative Service that logs events received for use in samples and debugging.                                         | Serving component, Eventing component                             |
-| **Cluster roles**                              |                                                                                                                                |                                                                   |
-| [`clusterrole.yaml`][7]†                       | Enables the Build and Serving components to interact.                                                                          | Serving component, Build component                                |
+| Knative Install Filename                       | Notes                                                                                                                                              | Dependencies                                                      |
+| ---------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| **knative/serving**                            |                                                                                                                                                    |                                                                   |
+| [`serving.yaml`][1.1]†                         | Installs the Serving component.                                                                                                                    | Cluster roles enabled, if interacting with Build                  |
+| [`monitoring.yaml`][1.2]†                      | Installs the [ELK stack][2], [Prometheus][2.1], [Grafana][2.2], and [Zipkin][2.3]**\***                                                            | Serving component                                                 |
+| [`monitoring-logs-elasticsearch.yaml`][1.3]    | Installs only the [ELK stack][2]**\***                                                                                                             | Serving component                                                 |
+| [`monitoring-metrics-prometheus.yaml`][1.4]    | Installs only [Prometheus][2.1]**\***                                                                                                              | Serving component                                                 |
+| [`monitoring-tracing-jaeger.yaml`][1.5]        | Installs only [Jaeger][2.4]**\***                                                                                                                 | Serving component, ELK stack (monitoring-logs-elasticsearch.yaml), [Jaeger Operator][2.5] |
+| [`monitoring-tracing-jaeger-in-mem.yaml`][1.6] | Installs only [Jaeger in-memory][2.4]**\***                                                                                                       | Serving component, [Jaeger Operator][2.5]                                                  |
+| [`monitoring-tracing-zipkin.yaml`][1.7]        | Installs only [Zipkin][2.3].**\***                                                                                                                 | Serving component, ELK stack (monitoring-logs-elasticsearch.yaml) |
+| [`monitoring-tracing-zipkin-in-mem.yaml`][1.8] | Installs only [Zipkin in-memory][2.3]**\***                                                                                                        | Serving component                                                 |
+| **knative/build**                              |                                                                                                                                                    |                                                                   |
+| [`build.yaml`][3.1]†                           | Installs the Build component.                                                                                                                      | Cluster roles enabled, if interacting with Serving                |
+| **knative/eventing**                           |                                                                                                                                                    |                                                                   |
+| [`release.yaml`][4.1]†                         | Installs the Eventing component. Includes [ContainerSource](../eventing#containersource), [CronJobSource][6.2], the in-memory channel provisioner. | Serving component                                                 |
+| [`eventing.yaml`][4.2]                         | Installs the Eventing component. Does not include the in-memory channel provisioner.                                                               | Serving component                                                 |
+| [`in-memory-channel.yaml`][4.3]                | Installs only the in-memory channel provisioner.                                                                                                   | Serving component, Eventing component                             |
+| [`kafka.yaml`][4.4]                            | Installs only the Kafka channel provisioner.                                                                                                       | Serving component, Eventing component                             |
+| **knative/eventing-sources**                   |                                                                                                                                                    |                                                                   |
+| [`eventing-sources.yaml`][5.1]†                | Installs the following sources: [Kubernetes][6], [GitHub][6.1]                                                                                     | Serving component, Eventing component                             |
+| [`camel.yaml`][5.4]                            | Installs the Apache Camel source.                                                                                                                  | Serving component, Eventing component                             |
+| [`gcppubsub.yaml`][5.2]                        | Installs the [GCP PubSub source][6.3]                                                                                                              | Serving component, Eventing component                             |
+| [`kafka.yaml`][5.5]                            | Installs the Apache Kafka source.                                                                                                                  | Serving component, Eventing component                             |
+| [`event-display.yaml`][5.3]                    | Installs a Knative Service that logs events received for use in samples and debugging.                                                             | Serving component, Eventing component                             |
+| **Cluster roles**                              |                                                                                                                                                    |                                                                   |
+| [`clusterrole.yaml`][7]†                       | Enables the Build and Serving components to interact.                                                                                              | Serving component, Build component                                |
 
 _\*_ See
 [Installing logging, metrics, and traces](../serving/installing-logging-metrics-traces.md)
@@ -259,6 +159,7 @@ for details about installing the various supported observability plugins.
 [2.2]: https://grafana.com
 [2.3]: https://zipkin.io/
 [2.4]: https://jaegertracing.io/
+[2.5]: https://github.com/jaegertracing/jaeger-operator#installing-the-operator
 [3]: https://github.com/knative/build/releases/tag/v0.5.2
 [3.1]: https://github.com/knative/build/releases/download/v0.5.0/build.yaml
 [4]: https://github.com/knative/eventing/releases/tag/v0.5.2
@@ -354,7 +255,7 @@ commands below.
      `--selector networking.knative.dev/certificate-provider!=cert-manager` statement to install the controller. 
      Otherwise, you can choose to install the auto certificates feature and controller at a later time.
      
-   **Example install commands:**
+     **Example install commands:**
 
    - To install the Knative Serving component with the set of observability
      plugins, enter the following command. The `--selector` flag installs the

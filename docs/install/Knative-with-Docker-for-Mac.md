@@ -25,7 +25,7 @@ continuing.
 1. After Docker for Mac is installed, configure it with sufficient resources.
    You can do that via the
    [_Advanced_ menu](https://docs.docker.com/docker-for-mac/#advanced) in Docker
-   for Mac's preferences. Set **CPUs** to at least **4** and **Memory** to at
+   for Mac's preferences. Set **CPUs** to at least **6** and **Memory** to at
    least **8.0 GiB**.
 1. Now enable Docker for Mac's
    [Kubernetes capabilities](https://docs.docker.com/docker-for-mac/#kubernetes)

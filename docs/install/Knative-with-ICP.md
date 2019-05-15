@@ -125,9 +125,11 @@ the`knative-build` and `knative-monitoring` namespaces.
 
 [Follow the instructions to install and run Istio in IBM Cloud Private](https://istio.io/docs/setup/kubernetes/quick-start-ibm/#ibm-cloud-private).
 
-## Installing Cert-Manager
+If you prefer to install Istio manually, see the
+[Installing Istio for Knative guide](./installing-istio.md).
 
-Follow the [instructions](../serving/installing-cert-manager.md) to install Cert-Manager if you want to use use [Auto TLS feature](../serving/using-auto-tls.md).
+You must install Istio on your Kubernetes cluster before continuing with these
+instructions to install Knative.
 
 ## Installing Knative
 
