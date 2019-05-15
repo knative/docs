@@ -83,7 +83,7 @@ environment:
 
     **Example**
 
-    [Configure cert-manager for Google Cloud DNS](./using-auto-tls.md#Set-up-DNS-challenge-Provider)
+    [Configure cert-manager for Google Cloud DNS](./using-cert-manager-on-gcp.md)
 
 1. Post-install cleanup
 
