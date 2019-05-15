@@ -74,8 +74,9 @@ environment:
     By default, the [Let's Encrypt](https://letsencrypt.org) is used to
     demonstrate how to configure cert-manager, but you can use other supported CA's 
     that issue certificates with the ACME protocol. However, you
-    must use and configure your CA to use the
-    [`DNS-01` challenge type](https://letsencrypt.org/docs/challenge-types/#dns-01-challenge).
+    must use the
+    [`DNS-01` challenge type](https://letsencrypt.org/docs/challenge-types/#dns-01-challenge)
+    to validate requests.
 
     Instructions about configuring cert-manager for any of the supported DNS providers are provided in
     [DNS01 challenge providers and configuration instructions](https://docs.cert-manager.io/en/latest/tasks/acme/configuring-dns01/index.html#supported-dns01-providers).

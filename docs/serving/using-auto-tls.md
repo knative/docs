@@ -22,6 +22,7 @@ provisioning:
   - [cert-manager version `0.6.1` or higher](./installing-cert-manager.md).
 - Your Knative cluster must be configured to use a
   [custom domain](./using-a-custom-domain.md).
+- Your DNS provider must be setup and configured to your domain.
 
 
 ## Enabling automatic certificate provisioning
