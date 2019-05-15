@@ -12,7 +12,7 @@ about enabling HTTPS connections in Knative, see
 
 You can use cert-manager to either manually obtain certificates, or to enable Knative for 
 automatic certificate provisioning.
-ConfigMap. Complete instructions about automatic certificate provisioning are provided in 
+Complete instructions about automatic certificate provisioning are provided in 
 [Enabling automatic TLS cert provisioning](./using-auto-tls.md).
 
 Regardless of if your want to manually obtain certificates, or configure Knative for automatic
