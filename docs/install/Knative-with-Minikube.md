@@ -39,7 +39,7 @@ greater and your chosen VM driver:
 For Linux use:
 
 ```shell
-minikube start --memory=8192 --cpus=4 \
+minikube start --memory=8192 --cpus=6 \
   --kubernetes-version=v1.12.0 \
   --vm-driver=kvm2 \
   --disk-size=30g \
@@ -49,7 +49,7 @@ minikube start --memory=8192 --cpus=4 \
 For macOS use:
 
 ```shell
-minikube start --memory=8192 --cpus=4 \
+minikube start --memory=8192 --cpus=6 \
   --kubernetes-version=v1.12.0 \
   --vm-driver=hyperkit \
   --disk-size=30g \
