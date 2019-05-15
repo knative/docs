@@ -139,7 +139,7 @@ You can get the add-on via the "Add-ons" tab of your Kubernetes cluster's
 console page, or via the command line:
 
 ```bash
-ibmcloud ks cluster-addon-enable -y knative $CLUSTER_NAME
+ibmcloud ks cluster-addon-enable knative -y $CLUSTER_NAME
 ```
 
 For more information about the add-on see
