@@ -8,7 +8,7 @@ type: "docs"
 If you install and configure cert-manager, you can configure Knative to
 automatically obtain new TLS certificates and renew existing ones.
 To learn more about using secure connections in Knative, see
-[Configuring HTTPS with TLS certificates](./using-tls-cert.md).
+[Configuring HTTPS with TLS certificates](./using-a-tls-cert.md).
 
 ## Before you begin
 
