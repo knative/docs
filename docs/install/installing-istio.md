@@ -26,7 +26,7 @@ You need:
 
 When you install Istio, there are a few options depending on your goals. For a
 basic Istio installation suitable for most Knative use cases, follow the
-[Installing Istio with sidecar injection](#installing-istio-with-sidecar-injection)
+[Installing Istio without sidecar injection](#installing-istio-without-sidecar-injection)
 instructions. If you're familiar with Istio and know what kind of
 installation you want, read through the options and choose the installation that
 suits your needs.
