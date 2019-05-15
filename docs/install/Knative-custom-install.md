@@ -244,7 +244,7 @@ commands below.
      `[COMPONENT]`, `[VERSION]`, and `[FILENAME]` are the Knative component,
      release version, and filename of the Knative component or plugin. Examples:
 
-     - `https://github.com/knative/serving/releases/download/v0.5.2/serving.yaml --selector networking.knative.dev/certificate-provider!=cert-manager`
+     - `https://github.com/knative/serving/releases/download/v0.6.0/serving.yaml --selector networking.knative.dev/certificate-provider!=cert-manager`
      - `https://github.com/knative/build/releases/download/v0.5.0/build.yaml`
      - `https://github.com/knative/eventing/releases/download/v0.5.0/release.yaml`
      - `https://github.com/knative/eventing-sources/releases/download/v0.5.0/eventing-sources.yaml`
@@ -292,12 +292,19 @@ commands below.
      `--selector knative.dev/crd-install=true`:
 
      ```bash
-     kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.2/serving.yaml \
+     kubectl apply --filename https://github.com/knative/serving/releases/download/v0.6.0/serving.yaml \
+       --selector networking.knative.dev/certificate-provider!=cert-manager \
        --filename https://github.com/knative/build/releases/download/v0.5.0/build.yaml \
        --filename https://github.com/knative/eventing/releases/download/v0.5.0/release.yaml \
        --filename https://github.com/knative/eventing-sources/releases/download/v0.5.0/eventing-sources.yaml \
-       --filename https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/config/build/clusterrole.yaml
+       --filename https://raw.githubusercontent.com/knative/serving/v0.6.0/third_party/config/build/clusterrole.yaml
      ```
+   **Note**: By default, the Knative Serving component installation (`serving.yaml`) includes a 
+   controller for [enabling automatic TLS certificate provisioning](../serving/using-auto-tls.md). If you 
+   do intend on immediately enabling auto certificates in Knative, you can remove the 
+   `--selector networking.knative.dev/certificate-provider!=cert-manager` statement to install the controller. 
+   Otherwise, you can choose to install the auto certificates feature and controller at a later time.
+     
 1. Depending on what you chose to install, view the status of your installation
    by running one or more of the following commands. It might take a few
    seconds, so rerun the commands until all of the components show a `STATUS` of
