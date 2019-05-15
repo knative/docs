@@ -8,7 +8,7 @@ type: "docs"
 Install the  [Cert-Manager](https://github.com/jetstack/cert-manager) tool to obtain TLS 
 certificates that you can use for secure HTTPS connections in Knative. For more information 
 about enabling HTTPS connections in Knative, see 
-[Configuring HTTPS with TLS certificates](./using-an-tls-cert.md).
+[Configuring HTTPS with TLS certificates](./using-a-tls-cert.md).
 
 You can use cert-manager to either manually obtain certificates, or to enable Knative for 
 automatic certificate provisioning.
