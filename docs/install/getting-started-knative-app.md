@@ -135,6 +135,8 @@ assigned an external IP address.
    helloworld-go       helloworld-go.default.example.com
    ```
 
+   > Note: Knative installation use the default domain `example.com` if you want to use a custom DNS domain please refer to this [installation guide](./docs/serving/using-a-custom-domain.md).
+
    You can also export the host URL as a variable using the following command:
 
    ```shell
