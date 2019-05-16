@@ -29,12 +29,14 @@ provisioning:
 
 To enable Knative to automatically provision TLS certificates:
 
-1. Run the following commands to check if the `networking-certmanager` is installed:
+1. Determine if `networking-certmanager` is installed by running the following
+   command:
    ```shell
    kubectl get deployment networking-certmanager -n knative-serving
    ```
    
-   If it is not found, run the following commands to install the `networking-certmanager`:
+1. If `networking-certmanager` is not found, run the following commands to 
+   install it:
 
    ```shell
    # KNATIVE_VERSION needs to be 0.6.0 or above.
@@ -44,17 +46,20 @@ To enable Knative to automatically provision TLS certificates:
    --selector networking.knative.dev/certificate-provider=cert-manager
     ```
 
-1. Configure your CA, the required `DNS-01` challenge type, and your DNS
-   provider in the `config-certmanager` ConfigMap, where:
+1. Create a `ClusterIssuer` configuration file to define who issues the
+   TLS certificates, how requests are validated (`DNS-01`), and which DNS provider
+   validates those requests.
 
-    - `issuerRef`: Defines the CA that issues your TLS certificates.
-    - `solverConfig`: Defines the challenge type and DNS provider.
+   For reference, see the 
+   [cert-manager `ClusterIssuer` example](https://docs.cert-manager.io/en/latest/tasks/issuers/setup-acme.html#creating-a-basic-acme-issuer).
 
+    
    Example:
 
-   If you use the Let's Encrypt CA and Google Cloud DNS, then the `name` of
-   your `issuerRef` is `letsencrypt-issue` and `solverConfig` specifies the
-   `dns01` challenge type and `cloud-dns-provider` DNS provider:
+   If you use the Let's Encrypt CA and Google Cloud DNS, you would create the
+  `letsencrypt-issuer` `ClusterIssuer`, that includes your Let's Encrypt 
+   account info, the required `DNS-01` challenge type, and Cloud DNS provider 
+   info.
 
    ```
    issuerRef: |
@@ -67,7 +72,7 @@ To enable Knative to automatically provision TLS certificates:
    ```
 
    See a complete example that demonstrates how to
-   [configure cert-manager for Google Cloud DNS](./using-cert-manager-on-gcp.md).
+   [configure cert-manager with Google Cloud DNS](./using-cert-manager-on-gcp.md).
 
 1. Update the `config-network` ConfigMap in the `knative-serving` namespace to
    include the `autoTLS: Enabled` attribute under `data`. For example:
