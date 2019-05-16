@@ -58,17 +58,22 @@ kubectl apply --filename blue-green-demo-config.yaml
 configuration "blue-green-demo" configured
 ```
 
-This will deploy the initial revision of the sample
-application. Before we can route traffic to this application we need to know the name of the initail revision which was just created. Using `kubectl` you can get it with the following command:
+This will deploy the initial revision of the sample application. Before we can
+route traffic to this application we need to know the name of the initail
+revision which was just created. Using `kubectl` you can get it with the
+following command:
 
 ```bash
 kubectl get configurations blue-green-demo -o=jsonpath='{.status.latestCreatedRevisionName}'
 ```
 
-The command above will return the name of the revision, it will be similar to `blue-green-demo-lcfrd`. In the rest of this document we will use this revision name, but yours will be different.
+The command above will return the name of the revision, it will be similar to
+`blue-green-demo-lcfrd`. In the rest of this document we will use this revision
+name, but yours will be different.
 
-To route inbound traffic to it, we need to define a route. Create a new
-file called `blue-green-demo-route.yaml` and copy the following YAML manifest into it (do not forget to edit the revision name):
+To route inbound traffic to it, we need to define a route. Create a new file
+called `blue-green-demo-route.yaml` and copy the following YAML manifest into it
+(do not forget to edit the revision name):
 
 ```yaml
 apiVersion: serving.knative.dev/v1alpha1
@@ -149,7 +154,9 @@ Find the name of the second revision with the following command:
 kubectl get configurations blue-green-demo -o=jsonpath='{.status.latestCreatedRevisionName}'
 ```
 
-In the rest of this document we will assume that the second revision is called `blue-green-demo-m9548`, however yours will differ. Make sure to use the correct name of the second revision in the manifests that follow.
+In the rest of this document we will assume that the second revision is called
+`blue-green-demo-m9548`, however yours will differ. Make sure to use the correct
+name of the second revision in the manifests that follow.
 
 At this point, the first revision (`blue-green-demo-lcfrd`) and the second
 revision (`blue-green-demo-m9548`) will both be deployed and running. We can

@@ -74,10 +74,10 @@ of this guide be sure you have `export KUBECONFIG=my-cluster.yaml` set.
 
 Knative depends on Istio. If your cloud platform offers a managed Istio
 installation, we recommend installing Istio that way, unless you need the
-ability to customize your installation. 
+ability to customize your installation.
 
-Otherwise, see the
-[Installing Istio for Knative guide](./installing-istio.md) to install Istio.
+Otherwise, see the [Installing Istio for Knative guide](./installing-istio.md)
+to install Istio.
 
 You must install Istio on your Kubernetes cluster before continuing with these
 instructions to install Knative.

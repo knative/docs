@@ -139,10 +139,10 @@ recommended configuration for a cluster is:
 
 Knative depends on Istio. If your cloud platform offers a managed Istio
 installation, we recommend installing Istio that way, unless you need the
-ability to customize your installation. 
+ability to customize your installation.
 
-If you prefer to install Istio manually, if your cloud provider doesn't offer
-a managed Istio installation, or if you're installing Knative locally using
+If you prefer to install Istio manually, if your cloud provider doesn't offer a
+managed Istio installation, or if you're installing Knative locally using
 Minkube or similar, see the
 [Installing Istio for Knative guide](./installing-istio.md).
 

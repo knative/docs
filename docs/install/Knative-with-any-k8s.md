@@ -27,8 +27,8 @@ ability to customize your installation. For example, the
 [GKE Install Guide](./knative-with-gke.md) includes the instructions for
 installing Istio on your cluster using `gcloud`.
 
-If you prefer to install Istio manually, if your cloud provider doesn't offer
-a managed Istio installation, or if you're installing Knative locally using
+If you prefer to install Istio manually, if your cloud provider doesn't offer a
+managed Istio installation, or if you're installing Knative locally using
 Minkube or similar, see the
 [Installing Istio for Knative guide](./installing-istio.md).
 
