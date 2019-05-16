@@ -1,4 +1,8 @@
-# Broker and Trigger
+---
+title: "Broker and Trigger"
+weight: 20
+type: "docs"
+---
 
 Broker and Trigger are CRDs providing an event delivery mechanism that hides the
 details of event routing from the event producer and event consumer.
@@ -53,7 +57,7 @@ spec:
 
 ### ClusterChannelProvisioner
 
-`Broker`'s use their `spec.channelTemplate` to create their internal `Channel`s,
+`Broker`s use their `spec.channelTemplate` to create their internal `Channel`s,
 which dictate the durability guarantees of events sent to that `Broker`. If
 `spec.channelTemplate` is not specified, then the
 [default provisioner](https://www.knative.dev/docs/eventing/channels/default-channels/)
