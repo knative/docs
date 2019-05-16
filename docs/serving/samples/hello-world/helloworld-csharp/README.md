@@ -20,10 +20,10 @@ recreate the source files from this folder.
 1. First, make sure you have
    [.NET Core SDK 2.2](https://www.microsoft.com/net/core) installed:
 
-   ```shell
-   dotnet --version
-   2.2.102
-   ```
+    ```shell
+    dotnet --version
+    2.2.102
+    ```
 
 1. From the console, create a new empty web project using the dotnet command:
 
