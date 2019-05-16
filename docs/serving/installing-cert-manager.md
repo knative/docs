@@ -69,7 +69,7 @@ environment:
           kubectl apply -f deploy/manifests/cert-manager.yaml --validate=false
           ```
 
-1. Configure which DNS provider is to validate the DNS-01 challenge requests.
+1. Configure which DNS provider is used to validate the DNS-01 challenge requests.
 
     By default, the [Let's Encrypt](https://letsencrypt.org) is used to
     demonstrate how to configure cert-manager, but you can use other supported CA's 
@@ -81,9 +81,10 @@ environment:
     Instructions about configuring cert-manager for any of the supported DNS providers are provided in
     [DNS01 challenge providers and configuration instructions](https://docs.cert-manager.io/en/latest/tasks/acme/configuring-dns01/index.html#supported-dns01-providers).
 
-    **Example**
-
-    [Configure cert-manager for Google Cloud DNS](./using-cert-manager-on-gcp.md)
+    Example:
+    
+    See how the Google Cloud DNS is defined as the provider: 
+    [Configuring HTTPS with cert-manager and Google Cloud DNS](./using-cert-manager-on-gcp.md#adding-your-service-account-to-cert-manager)
 
 1. Post-install cleanup
 
