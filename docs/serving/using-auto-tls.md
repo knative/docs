@@ -127,37 +127,37 @@ To enable Knative to automatically provision TLS certificates:
 
    1. Add the `issuerRef` and `solverConfig` sections within the `data` section:
    
-    ```shell
-    ...
-    data:
-    ...
-      issuerRef: |
-        kind: ClusterIssuer
-        name: letsencrypt-issuer
+      ```shell
+      ...
+      data:
+      ...
+        issuerRef: |
+          kind: ClusterIssuer
+          name: letsencrypt-issuer
 
-      solverConfig: |
-        dns01:
-          provider: cloud-dns-provider
-    ```
+        solverConfig: |
+          dns01:
+            provider: cloud-dns-provider
+      ```
 
-    Example:
+      Example:
 
-    ```shell
-    apiVersion: v1
-    kind: ConfigMap
-    metadata:
-      name: config-certmanager
-      namespace: knative-serving
-      labels:
-        networking.knative.dev/certificate-provider: cert-manager
-    data:
-      issuerRef: |
-        kind: ClusterIssuer
-        name: letsencrypt-issuer
-      solverConfig: |
-        dns01:
-          provider: cloud-dns-provider
-    ```
+      ```shell
+      apiVersion: v1
+      kind: ConfigMap
+      metadata:
+        name: config-certmanager
+        namespace: knative-serving
+        labels:
+          networking.knative.dev/certificate-provider: cert-manager
+      data:
+        issuerRef: |
+          kind: ClusterIssuer
+          name: letsencrypt-issuer
+        solverConfig: |
+          dns01:
+            provider: cloud-dns-provider
+      ```
 
     1. Ensure that the file was updated successfully:
 
