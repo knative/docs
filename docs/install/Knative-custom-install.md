@@ -218,81 +218,98 @@ commands below.
 1. To install Knative components or plugins, specify the filenames in the
    `kubectl apply` command. To prevent install failures due to race conditions,
    run the install command first with the `-l knative.dev/crd-install=true`
-   flag, then a second time without the selector flag. This installs the CRDs
-   first:
+   flag, then a second time without the selector flag. 
+   
+   1. Install only the CRDs by using the `--selector knative.dev/crd-install=true` flag:
 
-   ```bash
-   kubectl apply --selector knative.dev/crd-install=true \
-   --filename [FILE_URL] \
-   --filename [FILE_URL]
-   ```
+      ```bash
+      kubectl apply --selector knative.dev/crd-install=true \
+      --filename [FILE_URL] \
+      --filename [FILE_URL]
+      ```
 
-   - Then run the `kubectl apply` command again without the `-l` flag to
-     complete the install:
+   1. Remove `--selector knative.dev/crd-install=true` and then run the command again to 
+      install the actual components or plugins:
 
-     ```bash
-     kubectl apply --filename [FILE_URL] \
-     --filename [FILE_URL]
-     ```
+      ```bash
+      kubectl apply --filename [FILE_URL] \
+      --filename [FILE_URL]
+      ```
 
-     You can add as many `--filename [FILE_URL]` as needed.
+       You can add as many `--filename [FILE_URL]` flags to your commands as needed. 
 
-     [`FILE_URL`] is the URL path of the desired Knative release:
+       Syntax: 
+       
+        - `[FILE_URL]`: URL path of a Knative component or plugin:
+          `https://github.com/knative/[COMPONENT]/releases/download/[VERSION]/[FILENAME].yaml`
+          
+           - `[COMPONENT]`: A Knative component repository.
+           - `[VERSION]`: Version number of a Knative component release.
+           - `[FILENAME]`: Filename of the component or plugin that you want installed.
 
-     `https://github.com/knative/[COMPONENT]/releases/download/[VERSION]/[FILENAME].yaml`
+        `[FILE_URL]`Examples:
 
-     `[COMPONENT]`, `[VERSION]`, and `[FILENAME]` are the Knative component,
-     release version, and filename of the Knative component or plugin. Examples:
+        - `https://github.com/knative/serving/releases/download/v0.5.2/serving.yaml --selector networking.knative.dev/certificate-provider!=cert-manager`
+        - `https://github.com/knative/build/releases/download/v0.5.0/build.yaml`
+        - `https://github.com/knative/eventing/releases/download/v0.5.0/release.yaml`
+        - `https://github.com/knative/eventing-sources/releases/download/v0.5.0/eventing-sources.yaml`
+        - `https://github.com/knative/serving/releases/download/v0.5.2/monitoring.yaml`
 
-     - `https://github.com/knative/serving/releases/download/v0.5.2/serving.yaml`
-     - `https://github.com/knative/build/releases/download/v0.5.0/build.yaml`
-     - `https://github.com/knative/eventing/releases/download/v0.5.0/release.yaml`
-     - `https://github.com/knative/eventing-sources/releases/download/v0.5.0/eventing-sources.yaml`
-
+     **Note**: By default, the Knative Serving component installation (`serving.yaml`) includes a 
+     controller for [enabling automatic TLS certificate provisioning](../serving/using-auto-tls.md). If you 
+     do intend on immediately enabling auto certificates in Knative, you can remove the 
+     `--selector networking.knative.dev/certificate-provider!=cert-manager` statement to install the controller. 
+     Otherwise, you can choose to install the auto certificates feature and controller at a later time.
+     
      **Example install commands:**
 
-   - To install the Knative Serving component with the set of observability
-     plugins, enter the following command. The `--selector` flag installs the
-     CRDs first:
+     - To install the Knative Serving component with the set of observability
+       plugins but exclude the auto certificates controller, run the following commands: 
+       
+       1. Installs the CRDs only:
 
-     ```bash
-     kubectl apply --selector knative.dev/crd-install=true \
-       --filename https://github.com/knative/serving/releases/download/v0.5.2/serving.yaml \
-       --filename https://github.com/knative/serving/releases/download/v0.5.2/monitoring.yaml
-     ```
+          ```bash
+          kubectl apply --selector knative.dev/crd-install=true \
+            --filename https://github.com/knative/serving/releases/download/v0.5.2/serving.yaml --selector networking.knative.dev/certificate-provider!=cert-manager\
+            --filename https://github.com/knative/serving/releases/download/v0.5.2/monitoring.yaml
+          ```
 
-     Then complete the install by running the command again, this time without
-     `--selector knative.dev/crd-install=true`:
+       1. Remove the `--selector knative.dev/crd-install=true` flag and the run the command to install
+          the Serving component and observability plugins:
 
-     ```bash
-     kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.2/serving.yaml \
-       --filename https://github.com/knative/serving/releases/download/v0.5.2/monitoring.yaml
-     ```
+          ```bash
+          kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.2/serving.yaml --selector networking.knative.dev/certificate-provider!=cert-manager\
+            --filename https://github.com/knative/serving/releases/download/v0.5.2/monitoring.yaml
+          ```
 
-   * To install all three Knative components and the set of Eventing sources
-     without an observability plugin, enter the following command. The
-     `--selector` flag installs the CRDs first:
+     - To install all three Knative components and the set of Eventing sources
+       without an observability plugin, run the following commands. 
 
-     ```bash
-     kubectl apply --selector knative.dev/crd-install=true \
-       --filename https://github.com/knative/serving/releases/download/v0.5.2/serving.yaml \
-       --filename https://github.com/knative/build/releases/download/v0.5.0/build.yaml \
-       --filename https://github.com/knative/eventing/releases/download/v0.5.0/release.yaml \
-       --filename https://github.com/knative/eventing-sources/releases/download/v0.5.0/eventing-sources.yaml \
-       --filename https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/config/build/clusterrole.yaml
-     ```
+       In this example, the auto certificate controller is installed so that you can
+       [enable automatic certificates provisioning](/serving/using-auto-tls.md). 
+       
+       1. Installs the CRDs only:
 
-     Then complete the install by running the command again, this time without
-     `--selector knative.dev/crd-install=true`:
+          ```bash
+          kubectl apply --selector knative.dev/crd-install=true \
+            --filename https://github.com/knative/serving/releases/download/v0.5.2/serving.yaml \
+            --filename https://github.com/knative/build/releases/download/v0.5.0/build.yaml \
+            --filename https://github.com/knative/eventing/releases/download/v0.5.0/release.yaml \
+            --filename https://github.com/knative/eventing-sources/releases/download/v0.5.0/eventing-sources.yaml \
+            --filename https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/config/build/clusterrole.yaml
+          ```
 
-     ```bash
-     kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.2/serving.yaml \
-       --filename https://github.com/knative/build/releases/download/v0.5.0/build.yaml \
-       --filename https://github.com/knative/eventing/releases/download/v0.5.0/release.yaml \
-       --filename https://github.com/knative/eventing-sources/releases/download/v0.5.0/eventing-sources.yaml \
-       --filename https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/config/build/clusterrole.yaml
-     ```
+       1. Remove the `--selector knative.dev/crd-install=true` flag and the run the command to install
+          all the Knative components, including the Eventing sources and auto certificate controller:
 
+          ```bash
+          kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.2/serving.yaml \
+            --filename https://github.com/knative/build/releases/download/v0.5.0/build.yaml \
+            --filename https://github.com/knative/eventing/releases/download/v0.5.0/release.yaml \
+            --filename https://github.com/knative/eventing-sources/releases/download/v0.5.0/eventing-sources.yaml \
+            --filename https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/config/build/clusterrole.yaml
+          ```
+     
 1. Depending on what you chose to install, view the status of your installation
    by running one or more of the following commands. It might take a few
    seconds, so rerun the commands until all of the components show a `STATUS` of

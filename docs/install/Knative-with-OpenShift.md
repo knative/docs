@@ -170,6 +170,8 @@ else
 fi
 ```
 
+<!-- TODO: need instruction about installing Cert-Manager with `oc`-->
+
 ## Installing Knative Serving
 
 Next, we'll install [Knative Serving](https://github.com/knative/serving).
@@ -195,6 +197,9 @@ curl -L https://storage.googleapis.com/knative-releases/serving/latest/serving.y
   | sed 's/LoadBalancer/NodePort/' \
   | oc apply --filename -
 ```
+
+> **Note**: You can add `-l networking.knative.dev/certificate-provider!=cert-manager` to above `oc apply` command to 
+> exclude [Auto TLS feature](../serving/using-auto-tls.md) related components if you don't need this feature.
 
 Monitor the Knative components until all of the components show a `STATUS` of
 `Running`:

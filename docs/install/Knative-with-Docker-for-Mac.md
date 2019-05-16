@@ -68,10 +68,17 @@ Because you have limited resources available, use the
 which installs only Knative Serving:
 
 ```shell
-curl -L https://github.com/knative/serving/releases/download/v0.5.2/serving.yaml \
+curl -L https://github.com/knative/serving/releases/download/v0.6.0/serving.yaml \
   | sed 's/LoadBalancer/NodePort/' \
-  | kubectl apply --filename -
+  | kubectl apply --selector networking.knative.dev/certificate-provider!=cert-manager --filename -
 ```
+
+  **Notes**: 
+  > - By default, the Knative Serving component installation (`serving.yaml`) includes a controller
+  >   for [enabling automatic TLS certificate provisioning](../serving/using-auto-tls.md). If you do
+  >   intend on immediately enabling auto certificates in Knative, you can remove the 
+  >   `--selector networking.knative.dev/certificate-provider!=cert-manager` statement to install the
+  >   controller. 
 
 > Note: Unlike minikube, we're not changing the LoadBalancer to a NodePort here.
 > Docker for Mac will assign `localhost` as the host for that LoadBalancer,
