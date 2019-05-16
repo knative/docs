@@ -189,6 +189,7 @@ function create_test_cluster() {
   local gcloud_project="${GCP_PROJECT}"
   [[ -z "${gcloud_project}" ]] && gcloud_project="$(gcloud config get-value project)"
   echo "gcloud project is ${gcloud_project}"
+  echo "gcloud user is $(gcloud config get-value core/account)"
   (( IS_BOSKOS )) && echo "Using boskos for the test cluster"
   [[ -n "${GCP_PROJECT}" ]] && echo "GCP project for test cluster is ${GCP_PROJECT}"
   echo "Test script is ${E2E_SCRIPT}"
@@ -258,7 +259,7 @@ function create_test_cluster_with_retries() {
       # Exit if test succeeded
       [[ "$(get_test_return_code)" == "0" ]] && return
       # If test failed not because of cluster creation stockout, return
-      [[ -z "$(grep -Eio 'does not have enough resources available to fulfill the request' ${cluster_creation_log})" ]] && return
+      [[ -z "$(grep -Eio 'does not have enough resources available to fulfill' ${cluster_creation_log})" ]] && return
     done
   done
 }
@@ -349,7 +350,7 @@ function fail_test() {
 RUN_TESTS=0
 EMIT_METRICS=0
 SKIP_KNATIVE_SETUP=0
-SKIP_ISTIO=0
+SKIP_ISTIO_ADDON=0
 GCP_PROJECT=""
 E2E_SCRIPT=""
 E2E_CLUSTER_VERSION=""
@@ -385,7 +386,7 @@ function initialize() {
       --run-tests) RUN_TESTS=1 ;;
       --emit-metrics) EMIT_METRICS=1 ;;
       --skip-knative-setup) SKIP_KNATIVE_SETUP=1 ;;
-      --skip-istio) SKIP_ISTIO=1 ;;
+      --skip-istio-addon) SKIP_ISTIO_ADDON=1 ;;
       *)
         [[ $# -ge 2 ]] || abort "missing parameter after $1"
         shift
@@ -415,7 +416,7 @@ function initialize() {
   is_protected_gcr ${KO_DOCKER_REPO} && \
     abort "\$KO_DOCKER_REPO set to ${KO_DOCKER_REPO}, which is forbidden"
 
-  (( SKIP_ISTIO )) || GKE_ADDONS="--addons=Istio"
+  (( SKIP_ISTIO_ADDON )) || GKE_ADDONS="--addons=Istio"
 
   readonly RUN_TESTS
   readonly EMIT_METRICS
