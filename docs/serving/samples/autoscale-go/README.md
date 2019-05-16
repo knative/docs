@@ -22,21 +22,43 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
    kubectl apply --filename docs/serving/samples/autoscale-go/service.yaml
    ```
 
-1. Find the ingress hostname and IP and export as an environment variable:
+1. Obtain both the hostname and IP address of the `istio-ingressgateway` service in the `istio-system` namespace,
+   and then `export` them into the `IP_ADDRESS` environment variable.
+   
+   Note that each platform where you run your Kubernetes cluster is configured differently. Details about the 
+   various ways that you can obatin your ingress hostname and IP address is available in the Istio documentation
+   under the [Control Ingress Traffic](https://istio.io/docs/tasks/traffic-management/ingress/) topic.
 
-   ```shell
-   # In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
-   INGRESSGATEWAY=knative-ingressgateway
+   **Examples**:
+   
+   * For GKE, you run the following commands:
 
-   # The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
-   # Use `istio-ingressgateway` instead, since `knative-ingressgateway`
-   # will be removed in Knative v0.4.
-   if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
-       INGRESSGATEWAY=istio-ingressgateway
-   fi
+      ```shell
+      # In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
+      INGRESSGATEWAY=knative-ingressgateway
 
-   export IP_ADDRESS=`kubectl get svc $INGRESSGATEWAY --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
-   ```
+      # The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
+      # Use `istio-ingressgateway` instead, since `knative-ingressgateway`
+      # will be removed in Knative v0.4.
+      if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
+          INGRESSGATEWAY=istio-ingressgateway
+      fi
+
+      export IP_ADDRESS=`kubectl get svc $INGRESSGATEWAY --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
+      ```
+   
+   * For Minikube, you run the following command:
+   
+      ```shell
+      export IP_ADDRESS=$(minikube ip)
+      ```
+   
+   * For Docker Desktop, you run the following command:
+   
+      ```shell
+      # The value can be 127.0.0.1 as well
+      export IP_ADDRESS=localhost
+      ```   
 
 ## Load the Service
 
