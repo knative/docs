@@ -98,7 +98,7 @@ example secret or file names, which can all be changed to your liking.
 ## Adding your service account to cert-manager
 
 Create a `ClusterIssuer` configuration file to define how cert-manager
-obtains TLS certificates, how the requests are validated with Cloud DNS.
+obtains TLS certificates and how the requests are validated with Cloud DNS.
 
 1. Run the following command to create the `ClusterIssuer` configuration.
    The following creates the `letsencrypt-issuer` `ClusterIssuer`, that
