@@ -97,7 +97,7 @@ To enable Knative to automatically provision TLS certificates:
       ```
 
    1. Add your `ClusterIssuer` configuration to your Knative cluster by 
-      running the following commands, where <filename> is the name of the file
+      running the following commands, where `<filename>` is the name of the file
       that you created:
 
       1. Add the configuration file to Knative:
