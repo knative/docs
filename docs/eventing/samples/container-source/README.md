@@ -11,7 +11,7 @@ ContainerSource will start a container image which will generate events under ce
 
 Knative [event-sources](https://github.com/knative/eventing-sources) has a sample of heartbeats event source. You could clone the source codes by
 ```
-git clone https://github.com/knative/eventing-sources.git
+git clone -b "release-0.6" https://github.com/knative/eventing-sources.git
 ```
 And then build a heartbeats image and publish to your image repo with
 ```
@@ -63,7 +63,7 @@ spec:
     apiVersion: serving.knative.dev/v1alpha1
     kind: Service
     name: event-display
-  args: 
+  args:
     - --period=1
   env:
     - name: POD_NAME
