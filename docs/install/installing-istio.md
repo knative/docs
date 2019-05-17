@@ -161,7 +161,7 @@ helm template --namespace=istio-system \
   `# Set pilot trace sampling to 100%` \
   --set pilot.traceSampling=100 \
   install/kubernetes/helm/istio \
-  > ../istio.yaml
+  > ./istio.yaml
 
 kubectl apply -f istio.yaml
 ```
@@ -208,7 +208,7 @@ helm template --namespace=istio-system \
   `# Set pilot trace sampling to 100%` \
   --set pilot.traceSampling=100 \
   install/kubernetes/helm/istio \
-  > ../istio.yaml
+  > ./istio.yaml
 
   kubectl apply -f istio.yaml
 
@@ -237,9 +237,7 @@ helm template --namespace=istio-system \
   install/kubernetes/helm/istio \
   -f install/kubernetes/helm/istio/example-values/values-istio-gateways.yaml \
   | sed -e "s/custom-gateway/cluster-local-gateway/g" -e "s/customgateway/clusterlocalgateway/g" \
-  `# Removing trailing whitespaces to make automation happy` \
-  | sed "s/[[:space:]]*$//" \
-  > ../istio-local-gateway.yaml
+  > ./istio-local-gateway.yaml
 
 kubectl apply -f istio-local-gateway.yaml
 ```
