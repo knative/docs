@@ -4,7 +4,16 @@ Serving when using [Scala](https://scala-lang.org/) and [Akka](https://akka.io/)
 request with a text specified as an `ENV` variable named `MESSAGE`, defaulting
 to `"Hello World!"`.
 
-## Prerequisites
+Follow the steps below to create the sample code and then deploy the app to your
+cluster. You can also download a working copy of the sample, by running the
+following commands:
+
+   ```shell
+  git clone -b "release-0.6" https://github.com/knative/docs knative-docs
+  cd knative-docs/serving/samples/hello-world/helloworld-scala
+  ```
+
+## Before you begin
 
 - A Kubernetes cluster [installation](../../../../install/README.md) with
   Knative Serving up and running.
@@ -15,15 +24,6 @@ to `"Hello World!"`.
   locally.
 - [Scala's](https://scala-lang.org/) standard build tool
   [sbt](https://www.scala-sbt.org/) installed locally.
-
-## Before you begin
-
-You can either clone the code from this directory using the following commands or you can build this sample step-by-step. Hello world apps are generally more useful if you build them step-by-step you can start by [Configuring the sbt build](#Configuring-the-sbt-build).
-
-   ```shell
-   git clone https://github.com/knative/docs knative-docs
-   cd knative-docs/serving/samples/hello-world/helloworld-scala
-   ```
 
 ## Configuring the sbt build
 
