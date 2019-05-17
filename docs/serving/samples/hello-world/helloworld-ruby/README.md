@@ -93,10 +93,10 @@ following commands:
       template:
         spec:
           containers:
-          - image: docker.io/{username}/helloworld-ruby
-            env:
-              - name: TARGET
-                value: "Ruby Sample v1"
+           - image: docker.io/{username}/helloworld-ruby
+             env:
+               - name: TARGET
+                 value: "Ruby Sample v1"
     ```
 
 ## Build and deploy this sample

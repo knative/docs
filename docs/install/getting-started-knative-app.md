@@ -56,10 +56,10 @@ spec:
   template:
     spec:
       containers:
-      - image: gcr.io/knative-samples/helloworld-go # The URL to the image of the app
-        env:
-          - name: TARGET # The environment variable printed out by the sample app
-            value: "Go Sample v1"
+        - image: gcr.io/knative-samples/helloworld-go # The URL to the image of the app
+          env:
+            - name: TARGET # The environment variable printed out by the sample app
+              value: "Go Sample v1"
 ```
 
 If you want to deploy the sample app, leave the config file as-is. If you're

@@ -226,29 +226,77 @@ To configure and setup monitoring:
 See [Accessing Logs](./accessing-logs.md) for more information about logs in
 Knative.
 
-## End to end traces
+## End to end request tracing
 
-- If Elasticsearch is not installed or if you don't want to persist end to end
-  traces, run:
+You can choose from one of the following options to enable request tracing in
+your Knative Serving cluster.
 
-  ```shell
-  kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/monitoring-tracing-zipkin-in-mem.yaml
-  ```
+**Important**: Your cluster supports only a single request trace tool. If you
+want to replace a currently installed request trace tool, you must first
+uninstall that tool before installing the new tool.
 
-- If Elasticsearch is installed and you want to persist end to end traces, first
-  run:
+### Zipkin
 
-  ```shell
-  kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/monitoring-tracing-zipkin.yaml
-  ```
 
-  Next, create an Elasticsearch index for end to end traces:
+1. Install support for Zipkin:
 
-  - Open Kibana UI as described in
-    [Create Elasticsearch Indices](#create-elasticsearch-indices) section.
-  - Select `Create Index Pattern` button on top left of the page. Enter
-    `zipkin*` to `Index pattern` and select `timestamp_millis` from
-    `Time Filter field name` and click on `Create` button.
+   - If Elasticsearch is not installed or if you don't want to persist end to end
+     traces, run:
+
+     ```shell
+     kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/monitoring-tracing-zipkin-in-mem.yaml
+     ```
+
+   - If Elasticsearch is installed and you want to persist end to end traces, first
+     run:
+
+     ```shell
+     kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/monitoring-tracing-zipkin.yaml
+     ```
+
+1. Create an Elasticsearch index for end to end traces:
+
+   1. Open Kibana UI as described in
+      [Create Elasticsearch Indices](#create-elasticsearch-indices) section.
+
+   1. Select `Create Index Pattern` button on top left of the page. Enter
+      `zipkin*` to `Index pattern` and select `timestamp_millis` from
+      `Time Filter field name` and click on `Create` button.
+
+Visit [Accessing Traces](./accessing-traces.md) for more information on end to
+end traces.
+
+### Jaeger
+
+1. Install the Jaeger operator. Use the instructions in jaegertracing/jaeger-operator
+   repository and follow only the steps in the 
+   [Installing the operator](https://github.com/jaegertracing/jaeger-operator#installing-the-operator) 
+   section.
+
+1. Install support for Jaeger:
+
+   - If Elasticsearch is not installed or if you don't want to persist end to end
+     traces, run:
+
+     ```shell
+     kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/monitoring-tracing-jaeger-in-mem.yaml
+     ```
+
+   - If Elasticsearch is installed and you want to persist end to end traces, first
+     run:
+
+     ```shell
+     kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/monitoring-tracing-jaeger.yaml
+     ```
+
+1. Create an Elasticsearch index for end to end traces:
+
+   1. Open Kibana UI as described in
+      [Create Elasticsearch Indices](#create-elasticsearch-indices) section.
+      
+   1. Select `Create Index Pattern` button on top left of the page. Enter
+      `jaeger*` to `Index pattern` and select `timestamp_millis` from
+      `Time Filter field name` and click on `Create` button.
 
 Visit [Accessing Traces](./accessing-traces.md) for more information on end to
 end traces.

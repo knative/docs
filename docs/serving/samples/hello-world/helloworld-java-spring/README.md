@@ -129,10 +129,10 @@ following commands:
       template:
         spec:
           containers:
-          - image: docker.io/{username}/helloworld-java-spring
-            env:
-              - name: TARGET
-                value: "Spring Boot Sample v1"
+            - image: docker.io/{username}/helloworld-java-spring
+              env:
+                - name: TARGET
+                  value: "Spring Boot Sample v1"
     ```
 
 ## Building and deploying the sample

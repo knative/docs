@@ -125,6 +125,12 @@ the`knative-build` and `knative-monitoring` namespaces.
 
 [Follow the instructions to install and run Istio in IBM Cloud Private](https://istio.io/docs/setup/kubernetes/quick-start-ibm/#ibm-cloud-private).
 
+If you prefer to install Istio manually, see the
+[Installing Istio for Knative guide](./installing-istio.md).
+
+You must install Istio on your Kubernetes cluster before continuing with these
+instructions to install Knative.
+
 ## Installing Knative
 
 The following commands install all available Knative components as well as the
@@ -155,10 +161,17 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
 1. Run the following commands to install Knative:
 
    ```shell
-   curl -L https://github.com/knative/serving/releases/download/v0.5.0/serving.yaml \
+   curl -L https://github.com/knative/serving/releases/download/v0.6.0/serving.yaml \
      | sed 's/LoadBalancer/NodePort/' \
-     | kubectl apply --filename -
+     | kubectl apply --selector networking.knative.dev/certificate-provider!=cert-manager --filename -
    ```
+
+   **Notes**: 
+   > - By default, the Knative Serving component installation (`serving.yaml`) includes a controller
+   >   for [enabling automatic TLS certificate provisioning](../serving/using-auto-tls.md). If you do
+   >   intend on immediately enabling auto certificates in Knative, you can remove the 
+   >   `--selector networking.knative.dev/certificate-provider!=cert-manager` statement to install the
+   >   controller. 
 
    ```shell
    curl -L https://github.com/knative/build/releases/download/v0.5.0/build.yaml \

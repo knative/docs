@@ -10,7 +10,6 @@ real-world, Kubernetes-based frameworks and applications. Knative components
 focus on solving mundane but difficult tasks such as:
 
 - [Deploying a container](./install/getting-started-knative-app.md)
-- [Orchestrating source-to-URL workflows on Kubernetes](./serving/samples/source-to-url-go/)
 - [Routing and managing traffic with blue/green deployment](./serving/samples/blue-green-deployment.md)
 - [Scaling automatically and sizing workloads based on demand](./serving/samples/autoscale-go/)
 - [Binding running services to eventing ecosystems](./eventing/samples/kubernetes-event-source/)
@@ -90,7 +89,6 @@ Follow the links below to learn more about Knative.
 ### Samples and demos
 
 - [Autoscaling](./serving/samples/autoscale-go/README.md)
-- [Source-to-URL deployment](./serving/samples/source-to-url-go/README.md)
 - [Binding running services to eventing ecosystems](./eventing/samples/kubernetes-event-source/)
 - [Telemetry](./serving/samples/telemetry-go/README.md)
 - [REST API sample](./serving/samples/rest-api-go/README.md)

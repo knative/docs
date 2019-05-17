@@ -167,10 +167,6 @@ RUN apk add --no-cache ca-certificates
 # Copy the binary to the production image from the builder stage.
 COPY --from=builder /go/src/github.com/knative/docs/helloworld/helloworld /helloworld
 
-# Service must listen to $PORT environment variable.
-# This default value facilitates local development.
-ENV PORT 8080
-
 # Run the web service on container startup.
 CMD ["/helloworld"]
 ```
@@ -188,10 +184,10 @@ spec:
   template:
     spec:
       containers:
-      - image: docker.io/{username}/helloworld-go
-        env:
-          - name: TARGET
-            value: "Go Sample v1"
+        - image: docker.io/{username}/helloworld-go
+          env:
+            - name: TARGET
+              value: "Go Sample v1"
 ```
 
 Once the sample code has been created, we'll build and deploy it

@@ -21,8 +21,8 @@ kubectl label namespace default knative-eventing-injection=enabled
 
 ### Service Account
 
-1. Create a Service Account that the `Receive Adapter` runs as. The
-   `Receive Adapater` watches for Kubernetes events and forwards them to the
+1. Create a Service Account that the `ApiServerSource` runs as. The
+   `ApiServerSource` watches for Kubernetes events and forwards them to the
    Knative Eventing Broker. If you want to re-use an existing Service Account
    with the appropriate permissions, you need to modify the
    `serviceaccount.yaml`.
@@ -44,11 +44,11 @@ kubectl apply --filename k8s-events.yaml
 
 ### Trigger
 
-In order to check the `KubernetesEventSource` is fully working, we will create a
+In order to check the `ApiServerSource` is fully working, we will create a
 simple Knative Service that dumps incoming messages to its log and creates a
 `Trigger` from the `Broker` to that Knative Service.
 
-1. If the deployed `KubernetesEventSource` is pointing at a `Broker` other than
+1. If the deployed `ApiServerSource` is pointing at a `Broker` other than
    `default`, modify `trigger.yaml` by adding `spec.broker` with the `Broker`'s
    name.
 
@@ -83,15 +83,62 @@ kubectl logs -l serving.knative.dev/service=event-display -c user-container
 You should see log lines similar to:
 
 ```
-{"metadata":{"name":"busybox.15644359eaa4d8e7","namespace":"default","selfLink":"/api/v1/namespaces/default/events/busybox.15644359eaa4d8e7","uid":"daf8d3ca-e10d-11e8-bf3c-42010a8a017d","resourceVersion":"7840","creationTimestamp":"2018-11-05T15:17:05Z"},"involvedObject":{"kind":"Pod","namespace":"default","name":"busybox","uid":"daf645df-e10d-11e8-bf3c-42010a8a017d","apiVersion":"v1","resourceVersion":"681388"},"reason":"Scheduled","message":"Successfully assigned busybox to gke-knative-eventing-e2e-default-pool-575bcad9-vz55","source":{"component":"default-scheduler"},"firstTimestamp":"2018-11-05T15:17:05Z","lastTimestamp":"2018-11-05T15:17:05Z","count":1,"type":"Normal","eventTime":null,"reportingComponent":"","reportingInstance":""}
-Ce-Source: /apis/v1/namespaces/default/pods/busybox
-{"metadata":{"name":"busybox.15644359f59f72f2","namespace":"default","selfLink":"/api/v1/namespaces/default/events/busybox.15644359f59f72f2","uid":"db14ff23-e10d-11e8-bf3c-42010a8a017d","resourceVersion":"7841","creationTimestamp":"2018-11-05T15:17:06Z"},"involvedObject":{"kind":"Pod","namespace":"default","name":"busybox","uid":"daf645df-e10d-11e8-bf3c-42010a8a017d","apiVersion":"v1","resourceVersion":"681389"},"reason":"SuccessfulMountVolume","message":"MountVolume.SetUp succeeded for volume \"default-token-pzr6x\" ","source":{"component":"kubelet","host":"gke-knative-eventing-e2e-default-pool-575bcad9-vz55"},"firstTimestamp":"2018-11-05T15:17:06Z","lastTimestamp":"2018-11-05T15:17:06Z","count":1,"type":"Normal","eventTime":null,"reportingComponent":"","reportingInstance":""}
-Ce-Source: /apis/v1/namespaces/default/pods/busybox
+☁️  CloudEvent: valid ✅
+Context Attributes,
+  SpecVersion: 0.2
+  Type: dev.knative.apiserver.resource.add
+  Source: https://10.39.240.1:443
+  ID: 716d4536-3b92-4fbb-98d9-14bfcf94683f
+  Time: 2019-05-10T23:27:06.695575294Z
+  ContentType: application/json
+  Extensions:
+    knativehistory: default-broker-b7k2p-channel-z7mqq.default.svc.cluster.local
+    subject: /apis/v1/namespaces/default/events/busybox.159d7608e3a3572c
+Transport Context,
+  URI: /
+  Host: auto-event-display.default.svc.cluster.local
+  Method: POST
+Data,
+  {
+    "apiVersion": "v1",
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2019-05-10T23:27:06Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{busybox}",
+      "kind": "Pod",
+      "name": "busybox",
+      "namespace": "default",
+      "resourceVersion": "28987493",
+      "uid": "1efb342a-737b-11e9-a6c5-42010a8a00ed"
+    },
+    "kind": "Event",
+    "lastTimestamp": "2019-05-10T23:27:06Z",
+    "message": "Started container",
+    "metadata": {
+      "creationTimestamp": "2019-05-10T23:27:06Z",
+      "name": "busybox.159d7608e3a3572c",
+      "namespace": "default",
+      "resourceVersion": "506088",
+      "selfLink": "/api/v1/namespaces/default/events/busybox.159d7608e3a3572c",
+      "uid": "2005af47-737b-11e9-a6c5-42010a8a00ed"
+    },
+    "reason": "Started",
+    "reportingComponent": "",
+    "reportingInstance": "",
+    "source": {
+      "component": "kubelet",
+      "host": "gke-knative-auto-cluster-default-pool-23c23c4f-xdj0"
+    },
+    "type": "Normal"
+  }
 ```
 
 ### Cleanup
 
-You can remove the `Service Account`, `Event Sources`, and `Trigger` via:
+You can remove the `ServiceAccount`, `ClusterRoles`, `ClusterRoleBinding`,
+`ApiSeverSource`, `Service` and `Trigger` via:
 
 ```shell
 kubectl --namespace default delete --filename serviceaccount.yaml

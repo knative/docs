@@ -67,6 +67,8 @@ IS_BOSKOS=0
 
 # Tear down the test resources.
 function teardown_test_resources() {
+  # On boskos, save time and don't teardown as the cluster will be destroyed anyway.
+  (( IS_BOSKOS )) && return
   header "Tearing down test environment"
   function_exists test_teardown && test_teardown
   (( ! SKIP_KNATIVE_SETUP )) && function_exists knative_teardown && knative_teardown
@@ -113,8 +115,7 @@ function save_metadata() {
     geo_key="Zone"
     geo_value="${E2E_CLUSTER_REGION}-${E2E_CLUSTER_ZONE}"
   fi
-  local gcloud_project="$(gcloud config get-value project)"
-  local cluster_version="$(gcloud container clusters list --project=${gcloud_project} --format='value(currentMasterVersion)')"
+  local cluster_version="$(gcloud container clusters list --project=${E2E_PROJECT_ID} --format='value(currentMasterVersion)')"
   cat << EOF > ${ARTIFACTS}/metadata.json
 {
   "E2E:${geo_key}": "${geo_value}",
@@ -130,6 +131,7 @@ EOF
 # See https://github.com/knative/serving/issues/959 for details.
 # TODO(adrcunha): Remove once the leak issue is resolved.
 function delete_leaked_network_resources() {
+  # On boskos, don't bother with leaks as the janitor will delete everything in the project.
   (( IS_BOSKOS )) && return
   # Ensure we're using the GCP project used by kubetest
   local gcloud_project="$(gcloud config get-value project)"
@@ -164,7 +166,7 @@ function create_test_cluster() {
 
   # Smallest cluster required to run the end-to-end-tests
   local CLUSTER_CREATION_ARGS=(
-    --gke-create-command="container clusters create --quiet --enable-autoscaling --min-nodes=${E2E_MIN_CLUSTER_NODES} --max-nodes=${E2E_MAX_CLUSTER_NODES} --scopes=cloud-platform --enable-basic-auth --no-issue-client-certificate ${EXTRA_CLUSTER_CREATION_FLAGS[@]}"
+    --gke-create-command="container clusters create --quiet --enable-autoscaling --min-nodes=${E2E_MIN_CLUSTER_NODES} --max-nodes=${E2E_MAX_CLUSTER_NODES} --scopes=cloud-platform --enable-basic-auth --no-issue-client-certificate ${GKE_ADDONS} ${EXTRA_CLUSTER_CREATION_FLAGS[@]}"
     --gke-shape={\"default\":{\"Nodes\":${E2E_MIN_CLUSTER_NODES}\,\"MachineType\":\"${E2E_CLUSTER_MACHINE}\"}}
     --provider=gke
     --deployment=gke
@@ -187,6 +189,7 @@ function create_test_cluster() {
   local gcloud_project="${GCP_PROJECT}"
   [[ -z "${gcloud_project}" ]] && gcloud_project="$(gcloud config get-value project)"
   echo "gcloud project is ${gcloud_project}"
+  echo "gcloud user is $(gcloud config get-value core/account)"
   (( IS_BOSKOS )) && echo "Using boskos for the test cluster"
   [[ -n "${GCP_PROJECT}" ]] && echo "GCP project for test cluster is ${GCP_PROJECT}"
   echo "Test script is ${E2E_SCRIPT}"
@@ -256,7 +259,7 @@ function create_test_cluster_with_retries() {
       # Exit if test succeeded
       [[ "$(get_test_return_code)" == "0" ]] && return
       # If test failed not because of cluster creation stockout, return
-      [[ -z "$(grep -Eio 'does not have enough resources to fulfill the request' ${cluster_creation_log})" ]] && return
+      [[ -z "$(grep -Eio 'does not have enough resources available to fulfill' ${cluster_creation_log})" ]] && return
     done
   done
 }
@@ -269,6 +272,11 @@ function setup_test_cluster() {
 
   header "Setting up test cluster"
 
+  # Set the actual project the test cluster resides in
+  # It will be a project assigned by Boskos if test is running on Prow, 
+  # otherwise will be ${GCP_PROJECT} set up by user.
+  readonly export E2E_PROJECT_ID="$(gcloud config get-value project)"
+
   # Save some metadata about cluster creation for using in prow and testgrid
   save_metadata
 
@@ -280,9 +288,10 @@ function setup_test_cluster() {
   if [[ -z "$(kubectl get clusterrolebinding cluster-admin-binding 2> /dev/null)" ]]; then
     acquire_cluster_admin_role ${k8s_user} ${E2E_CLUSTER_NAME} ${E2E_CLUSTER_REGION} ${E2E_CLUSTER_ZONE}
     kubectl config set-context ${k8s_cluster} --namespace=default
-    export KO_DOCKER_REPO=gcr.io/$(gcloud config get-value project)/${E2E_BASE_NAME}-e2e-img
+    export KO_DOCKER_REPO=gcr.io/${E2E_PROJECT_ID}/${E2E_BASE_NAME}-e2e-img
   fi
 
+  echo "- Project is ${E2E_PROJECT_ID}"
   echo "- Cluster is ${k8s_cluster}"
   echo "- User is ${k8s_user}"
   echo "- Docker is ${KO_DOCKER_REPO}"
@@ -303,7 +312,7 @@ function setup_test_cluster() {
   fi
 }
 
-# Gets the exit of of the test script.
+# Gets the exit of the test script.
 # For more details, see set_test_return_code().
 function get_test_return_code() {
   echo $(cat ${TEST_RESULT_FILE})
@@ -341,9 +350,11 @@ function fail_test() {
 RUN_TESTS=0
 EMIT_METRICS=0
 SKIP_KNATIVE_SETUP=0
+SKIP_ISTIO_ADDON=0
 GCP_PROJECT=""
 E2E_SCRIPT=""
 E2E_CLUSTER_VERSION=""
+GKE_ADDONS=""
 EXTRA_CLUSTER_CREATION_FLAGS=()
 EXTRA_KUBETEST_FLAGS=()
 E2E_SCRIPT_CUSTOM_FLAGS=()
@@ -375,6 +386,7 @@ function initialize() {
       --run-tests) RUN_TESTS=1 ;;
       --emit-metrics) EMIT_METRICS=1 ;;
       --skip-knative-setup) SKIP_KNATIVE_SETUP=1 ;;
+      --skip-istio-addon) SKIP_ISTIO_ADDON=1 ;;
       *)
         [[ $# -ge 2 ]] || abort "missing parameter after $1"
         shift
@@ -404,6 +416,8 @@ function initialize() {
   is_protected_gcr ${KO_DOCKER_REPO} && \
     abort "\$KO_DOCKER_REPO set to ${KO_DOCKER_REPO}, which is forbidden"
 
+  (( SKIP_ISTIO_ADDON )) || GKE_ADDONS="--addons=Istio"
+
   readonly RUN_TESTS
   readonly EMIT_METRICS
   readonly GCP_PROJECT
@@ -411,6 +425,7 @@ function initialize() {
   readonly EXTRA_CLUSTER_CREATION_FLAGS
   readonly EXTRA_KUBETEST_FLAGS
   readonly SKIP_KNATIVE_SETUP
+  readonly GKE_ADDONS
 
   if (( ! RUN_TESTS )); then
     create_test_cluster

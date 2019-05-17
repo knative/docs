@@ -92,11 +92,11 @@ following commands:
     spec:
      template:
        spec:
-         containers:
-         - image: docker.io/{username}/helloworld-shell
-           env:
-           - name: TARGET
-             value: "Shell Sample v1"
+         containers:\
+          - image: docker.io/{username}/helloworld-shell
+            env:
+            - name: TARGET
+              value: "Shell Sample v1"
     ```
 
 ## Building and deploying the sample
