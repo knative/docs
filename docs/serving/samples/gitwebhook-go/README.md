@@ -76,20 +76,20 @@ metadata:
 spec:
   template:
     spec:
-    - containers:
-        # Replace {DOCKER_HUB_USERNAME} with your actual docker hub username
-        image: docker.io/{DOCKER_HUB_USERNAME}/gitwebhook-go
-        env:
-          - name: SECRET_TOKEN
-            valueFrom:
-              secretKeyRef:
-                name: githubsecret
-                key: secretToken
-          - name: ACCESS_TOKEN
-            valueFrom:
-              secretKeyRef:
-                name: githubsecret
-                key: accessToken
+      - containers:
+          # Replace {DOCKER_HUB_USERNAME} with your actual docker hub username
+          image: docker.io/{DOCKER_HUB_USERNAME}/gitwebhook-go
+          env:
+            - name: SECRET_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: githubsecret
+                  key: secretToken
+            - name: ACCESS_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: githubsecret
+                  key: accessToken
 ```
 
 1. Use `kubectl` to apply the `service.yaml` file.

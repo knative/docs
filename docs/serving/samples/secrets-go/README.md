@@ -117,10 +117,6 @@ You can either clone the code from this directory using the following commands. 
    # Copy the binary to the production image from the builder stage.
    COPY --from=builder /go/src/github.com/knative/docs/hellosecrets/hellosecrets /hellosecrets
 
-   # Service must listen to $PORT environment variable.
-   # This default value facilitates local development.
-   ENV PORT 8080
-
    # Run the web service on container startup.
    CMD ["/hellosecrets"]
    ```
@@ -165,25 +161,25 @@ You can either clone the code from this directory using the following commands. 
        spec:
          containers:
            # Replace {username} with your DockerHub username
-         - image: docker.io/{username}/secrets-go
+           - image: docker.io/{username}/secrets-go
 
-           env:
-             # This directs the Google Cloud SDK to use the identity and project
-             # defined by the Service Account (aka robot) in the JSON file at
-             # this path.
-             #  - `/var/secret` is determined by the `volumeMounts[0].mountPath`
-             #   below. This can be changed if both places are changed.
-             #  - `robot.json` is determined by the "key" that is used to hold the
-             #   secret content in the Kubernetes secret.  This can be changed
-             #   if both places are changed.
-             - name: GOOGLE_APPLICATION_DEFAULT
-               value: /var/secret/robot.json
+             env:
+               # This directs the Google Cloud SDK to use the identity and project
+               # defined by the Service Account (aka robot) in the JSON file at
+               # this path.
+               #  - `/var/secret` is determined by the `volumeMounts[0].mountPath`
+               #   below. This can be changed if both places are changed.
+               #  - `robot.json` is determined by the "key" that is used to hold the
+               #   secret content in the Kubernetes secret.  This can be changed
+               #   if both places are changed.
+               - name: GOOGLE_APPLICATION_DEFAULT
+                 value: /var/secret/robot.json
 
-           # This section specified where in the container we want the
-           # volume containing our secret to be mounted.
-           volumeMounts:
-             - name: robot-secret
-               mountPath: /var/secret
+             # This section specified where in the container we want the
+             # volume containing our secret to be mounted.
+             volumeMounts:
+               - name: robot-secret
+                 mountPath: /var/secret
 
          # This section attaches the secret "google-robot-secret" to
          # the Pod holding the user container.

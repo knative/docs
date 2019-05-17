@@ -101,10 +101,10 @@ You can either clone the code from this directory using the following commands. 
      template:
        spec:
          containers:
-         - image: docker.io/{username}/helloworld-go
-           env:
-             - name: TARGET
-               value: "Go Sample v1"
+           - image: docker.io/{username}/helloworld-go
+             env:
+               - name: TARGET
+                 value: "Go Sample v1"
    ```
 
 ## Building and deploying the sample

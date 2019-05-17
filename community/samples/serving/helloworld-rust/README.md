@@ -1,4 +1,3 @@
-
 A simple web app written in Rust that you can use for testing. It reads in an
 env variable `TARGET` and prints "Hello \${TARGET}!". If
 
@@ -97,10 +96,6 @@ recreate the source files from this folder.
 
    # Install production dependencies and build a release artifact.
    RUN cargo install
-
-   # Service must listen to $PORT environment variable.
-   # This default value facilitates local development.
-   ENV PORT 8080
 
    # Run the web service on container startup.
    CMD ["hellorust"]

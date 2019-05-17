@@ -72,12 +72,12 @@ spec:
   template:
     spec:
       containers:
-      - image: "your_repository_name/helloworld-scala:0.0.1"
-        env:
-          - name: MESSAGE
-            value: "Scala & Akka on Knative says hello!"
-          - name: HOST
-            value: "localhost"
+        - image: "your_repository_name/helloworld-scala:0.0.1"
+          env:
+            - name: MESSAGE
+              value: "Scala & Akka on Knative says hello!"
+            - name: HOST
+              value: "localhost"
 ```
 
 ## Publishing to Docker

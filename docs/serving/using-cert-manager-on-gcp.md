@@ -1,210 +1,249 @@
 ---
-title: "Configuring Knative and CertManager for Google Cloud DNS"
-#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
-weight: 65
+title: "Configuring HTTPS with cert-manager and Google Cloud DNS"
+linkTitle: "Configuring HTTPS with Cloud DNS"
+weight: 63
 type: "docs"
 ---
 
-These instructions assume you have already setup a Knative cluster and installed
-cert-manager into your cluster. For more information, see
-[using an SSL certificate](./using-an-ssl-cert.md#install-cert-manager). They
-also assume you have already set up your managed zone with Cloud DNS as part of
-configuring the domain to map to your IP address.
+You can use cert-manager with Knative to automatically provision TLS
+certificates from Let's Encrypt and use
+[Google Cloud DNS](https://cloud.google.com/dns/) to handle HTTPS
+requests and validate DNS challenges.
 
-To automate the generation of a certificate with cert-manager and LetsEncrypt,
-we will use a `DNS01` challenge type, which requires the domain owner to add a
-TXT record to their zone to prove ownership. Other challenge types are not
-currently supported by Knative.
+The following guide demonstrates how you can setup Knative to handle
+secure HTTPS requests on Google Cloud Platform, specifically using
+cert-manager for TLS certificates and
+[Google Cloud DNS](https://cloud.google.com/dns/) as the DNS provider.
 
-## Creating a Cloud DNS service account
+Learn more about using TLS certificates in Knative:
 
-To add the TXT record, configure Knative with a service account that can be used
-by cert-manager to create and update the DNS record.
+- [Configuring HTTPS with TLS certificates](./using-a-tls-cert.md)
+- [Enabling automatic TLS certificate provisioning](./using-auto-tls.md)
 
-To begin, create a new service account with the project role `dns.admin`:
+## Before you begin
 
-```shell
-# Set this to your GCP project ID
-export PROJECT_ID=<your-project-id>
+You must meet the following prerequisites to configure Knative with
+cert-manager and Cloud DNS:
 
-# Name of the service account you want to create.
-export CLOUD_DNS_SA=cert-manager-cloud-dns-admin
-gcloud --project $PROJECT_ID iam service-accounts \
-  create $CLOUD_DNS_SA \
-  --display-name "Service Account to support ACME DNS-01 challenge."
+- You must have a
+  [GCP project ID with owner privileges](https://console.cloud.google.com/cloud-resource-manager).
+- [Google Cloud DNS](https://cloud.google.com/dns/docs/how-to) must set
+  up and configure for your domain.
+- You must have a Knative cluster with the following requirements:
+  - Knative Serving v0.6.0 or higher running.
+  - The Knative cluster must be running on Google Cloud Platform.
+    For details about installing the Serving component, see the
+    [Knative installation guides](../install/).
+  - Your Knative cluster must be configured to use a
+    [custom domain](./using-a-custom-domain.md).
+  - [cert-manager v0.6.1 or higher installed](./installing-cert-manager.md)
+- Your DNS provider must be setup and configured to your domain.
 
-# Fully-qualified service account name also has project-id information.
-export CLOUD_DNS_SA=$CLOUD_DNS_SA@$PROJECT_ID.iam.gserviceaccount.com
 
-# Bind the role dns.admin to this service account, so it can be used to support
-# the ACME DNS01 challenge.
-gcloud projects add-iam-policy-binding $PROJECT_ID \
-  --member serviceAccount:$CLOUD_DNS_SA \
-  --role roles/dns.admin
+## Creating a service account and using a Kubernetes secret
 
-# Download the secret key file for your service account.
-gcloud iam service-accounts keys create ~/key.json \
-  --iam-account=$CLOUD_DNS_SA
-```
+To allow cert-manager to access and update the DNS record, you must create a
+service account in GCP, add the key in a Kubernetes secret, and then add that
+secret to your Knative cluster.
 
-After obtaining the service account secret, publish it to your cluster. This
-command uses the secret name `cloud-dns-key`, but you can choose a different
-name.
+Note that several example names are used in the following commands, for
+example secret or file names, which can all be changed to your liking.
 
-```shell
-# Upload that as a secret in your Kubernetes cluster.
-kubectl create secret --namespace cert-manager generic cloud-dns-key \
-  --from-file=key.json=$HOME/key.json
+1. Create a service account in GCP with `dns.admin` project role by running the
+   following commands, where `<your-project-id>` is the ID of your GCP project:
 
-# Delete the local secret
-rm ~/key.json
+   ```shell
+   # Set this to your GCP project ID
+   export PROJECT_ID=<your-project-id>
 
-```
+   # Name of the service account you want to create.
+   export CLOUD_DNS_SA=cert-manager-cloud-dns-admin
+   gcloud --project $PROJECT_ID iam service-accounts \
+     create $CLOUD_DNS_SA \
+     --display-name "Service Account to support ACME DNS-01 challenge."
 
-## Configuring CertManager to use your DNS admin service account
+   # Fully-qualified service account name also has project-id information.
+   export CLOUD_DNS_SA=$CLOUD_DNS_SA@$PROJECT_ID.iam.gserviceaccount.com
 
-Next, configure cert-manager to request new certificates and verify the
-challenges using DNS.
+   # Bind the role dns.admin to this service account, so it can be used to support
+   # the ACME DNS01 challenge.
+   gcloud projects add-iam-policy-binding $PROJECT_ID \
+     --member serviceAccount:$CLOUD_DNS_SA \
+     --role roles/dns.admin
+   ```
 
-### Specifying a certificate issuer
+1. Download the service account key by running the following commands:
 
-This example configures cert-manager to use LetsEncrypt, but you can use any
-certificate provider that supports the ACME protocol.
+   ```shell
+   # Make a temporary directory to store key
+   KEY_DIRECTORY=`mktemp -d`
 
-This example uses the `dns01` challenge type, which will enable certificate
-generation and wildcard certificates.
+   # Download the secret key file for your service account.
+   gcloud iam service-accounts keys create $KEY_DIRECTORY/cloud-dns-key.json \
+     --iam-account=$CLOUD_DNS_SA
+   ```
 
-```shell
-kubectl apply --filename - <<EOF
-apiVersion: certmanager.k8s.io/v1alpha1
-kind: ClusterIssuer
-metadata:
-  name: letsencrypt-issuer
-  namespace: cert-manager
-spec:
-  acme:
-    server: https://acme-v02.api.letsencrypt.org/directory
-    # This will register an issuer with LetsEncrypt.  Replace
-    # with your admin email address.
-    email: myemail@gmail.com
-    privateKeySecretRef:
-      # Set privateKeySecretRef to any unused secret name.
-      name: letsencrypt-issuer
-    dns01:
-      providers:
-      - name: cloud-dns-provider
-        clouddns:
-          # Set this to your GCP project-id
-          project: $PROJECT_ID
-          # Set this to the secret that we publish our service account key
-          # in the previous step.
-          serviceAccountSecretRef:
-            name: cloud-dns-key
-            key: key.json
-EOF
+1. Create a Kubernetes secret and then add that secret to your Knative cluster
+   by running the following commands:
 
-```
+   ```shell
+   # Upload that as a secret in your Kubernetes cluster.
+   kubectl create secret --namespace cert-manager generic cloud-dns-key \
+     --from-file=key.json=$KEY_DIRECTORY/cloud-dns-key.json
 
-To check if your ClusterIssuer is valid, enter:
+   # Delete the local secret
+   rm -rf $KEY_DIRECTORY
+   ```
 
-```shell
-kubectl get clusterissuer --namespace cert-manager letsencrypt-issuer --output yaml
-```
+## Adding your service account to cert-manager
 
-Then confirm that its conditions have `Ready=True`. For example:
+Create a `ClusterIssuer` configuration file to define how cert-manager
+obtains TLS certificates and how the requests are validated with Cloud DNS.
 
-```yaml
-status:
-  acme:
-    uri: https://acme-v02.api.letsencrypt.org/acme/acct/40759665
-  conditions:
-    - lastTransitionTime: 2018-08-23T01:44:54Z
-      message: The ACME account was registered with the ACME server
-      reason: ACMEAccountRegistered
-      status: "True"
-      type: Ready
-```
+1. Run the following command to create the `ClusterIssuer` configuration.
+   The following creates the `letsencrypt-issuer` `ClusterIssuer`, that
+   includes your Let's Encrypt account info, `DNS-01` challenge type, and
+   Cloud DNS provider info, including your `cert-manager-cloud-dns-admin`
+   service account.
 
-### Specifying the certificate
+   ```shell
+   kubectl apply --filename - <<EOF
+   apiVersion: certmanager.k8s.io/v1alpha1
+   kind: ClusterIssuer
+   metadata:
+     name: letsencrypt-issuer
+     namespace: cert-manager
+   spec:
+     acme:
+       server: https://acme-v02.api.letsencrypt.org/directory
+       # This will register an issuer with LetsEncrypt.  Replace
+       # with your admin email address.
+       email: myemail@gmail.com
+       privateKeySecretRef:
+         # Set privateKeySecretRef to any unused secret name.
+         name: letsencrypt-issuer
+       dns01:
+         providers:
+         - name: cloud-dns-provider
+           clouddns:
+             # Set this to your GCP project-id
+             project: $PROJECT_ID
+             # Set this to the secret that we publish our service account key
+             # in the previous step.
+             serviceAccountSecretRef:
+               name: cloud-dns-key
+               key: key.json
+   EOF
+   ```
 
-Next, configure which certificate issuer to use and which secret you will
-publish the certificate into. Use the Secret `istio-ingressgateway-certs`. The
-following steps will overwrite this Secret if it already exists.
+1. Ensure that `letsencrypt-issuer` is created successfully by
+   running the following command:
 
-```shell
-# Change this value to the domain you want to use.
-export DOMAIN=your-domain.com
+   ```shell
+   kubectl get clusterissuer --namespace cert-manager letsencrypt-issuer --output yaml
+   ```
+   Result: The `Status.Conditions` should include `Ready=True`. For example:
 
-kubectl apply --filename - <<EOF
-apiVersion: certmanager.k8s.io/v1alpha1
-kind: Certificate
-metadata:
-  name: my-certificate
-  # Istio certs secret lives in the istio-system namespace, and
-  # a cert-manager Certificate is namespace-scoped.
-  namespace: istio-system
-spec:
-  # Reference to the Istio default cert secret.
-  secretName: istio-ingressgateway-certs
-  acme:
-    config:
-    # Each certificate could rely on different ACME challenge
-    # solver.  In this example we are using one provider for all
-    # the domains.
-    - dns01:
-        provider: cloud-dns-provider
-      domains:
-      # Since certificate wildcards only allow one level, we will
-      # need to one for every namespace that Knative is used in.
-      # We don't need to use wildcard here, fully-qualified domains
-      # will work fine too.
-      - "*.default.$DOMAIN"
-      - "*.other-namespace.$DOMAIN"
-  # The certificate common name, use one from your domains.
-  commonName: "*.default.$DOMAIN"
-  dnsNames:
-  # Provide same list as `domains` section.
-  - "*.default.$DOMAIN"
-  - "*.other-namespace.$DOMAIN"
-  # Reference to the ClusterIssuer we created in the previous step.
-  issuerRef:
-    kind: ClusterIssuer
-    name: letsencrypt-issuer
-EOF
-```
+   ```yaml
+   status:
+     acme:
+       uri: https://acme-v02.api.letsencrypt.org/acme/acct/40759665
+     conditions:
+       - lastTransitionTime: 2018-08-23T01:44:54Z
+         message: The ACME account was registered with the ACME server
+         reason: ACMEAccountRegistered
+         status: "True"
+         type: Ready
+   ```
 
-To check that your certificate setting is valid, enter:
+## Add `letsencrypt-issuer` to your ingress secret to configure your certificate
 
-```shell
-kubectl get certificate --namespace istio-system my-certificate --output yaml
-```
+To configure how Knative uses your TLS certificates, you create
+a `Certificate` to add `letsencrypt-issuer` to the
+`istio-ingressgateway-certs` secret.
 
-Verify that its `Status.Conditions` have `Ready=True`. For example:
+Note that `istio-ingressgateway-certs` will be overridden if the
+secret already exists.
 
-```yaml
-status:
-  acme:
-    order:
-      url: https://acme-v02.api.letsencrypt.org/acme/order/40759665/45358362
-  conditions:
-    - lastTransitionTime: 2018-08-23T02:28:44Z
-      message: Certificate issued successfully
-      reason: CertIssued
-      status: "True"
-      type: Ready
-```
+1. Run the following commands to create the `my-certificate` `Certificate`,
+   where `<your-domain.com>` is your domain:
 
-A condition with `Ready=False` is a failure to obtain certificate, and such
-condition usually has an error message to indicate the reason of failure.
+   ```shell
+   # Change this value to the domain you want to use.
+   export DOMAIN=<your-domain.com>
 
-### Configuring the gateway
+   kubectl apply --filename - <<EOF
+   apiVersion: certmanager.k8s.io/v1alpha1
+   kind: Certificate
+   metadata:
+     name: my-certificate
+     # Istio certs secret lives in the istio-system namespace, and
+     # a cert-manager Certificate is namespace-scoped.
+     namespace: istio-system
+   spec:
+     # Reference to the Istio default cert secret.
+     secretName: istio-ingressgateway-certs
+     acme:
+       config:
+       # Each certificate could rely on different ACME challenge
+       # solver.  In this example we are using one provider for all
+       # the domains.
+       - dns01:
+           provider: cloud-dns-provider
+         domains:
+         # Since certificate wildcards only allow one level, we will
+         # need to one for every namespace that Knative is used in.
+         # We don't need to use wildcard here, fully-qualified domains
+         # will work fine too.
+         - "*.default.$DOMAIN"
+         - "*.other-namespace.$DOMAIN"
+     # The certificate common name, use one from your domains.
+     commonName: "*.default.$DOMAIN"
+     dnsNames:
+     # Provide same list as `domains` section.
+     - "*.default.$DOMAIN"
+     - "*.other-namespace.$DOMAIN"
+     # Reference to the ClusterIssuer we created in the previous step.
+     issuerRef:
+       kind: ClusterIssuer
+       name: letsencrypt-issuer
+   EOF
+   ```
 
-In the last step, configure the `knative-ingress-gateway` (or
-`knative-shared-gateway` if using Knative Serving 0.2.x or prior version) to use
-the certificate that is generated and stored automatically by cert-manager.
+1. Ensure that `my-certificate` is created successfully by
+   running the following command:
 
-The key edit here is adding the `tls:` section to the end of the HTTPS port
+   ```shell
+   kubectl get certificate --namespace istio-system my-certificate --output yaml
+   ```
+
+   Result: The `Status.Conditions` should include `Ready=True`. For example:
+
+   ```yaml
+   status:
+     acme:
+       order:
+         url: https://acme-v02.api.letsencrypt.org/acme/order/40759665/45358362
+     conditions:
+       - lastTransitionTime: 2018-08-23T02:28:44Z
+         message: Certificate issued successfully
+         reason: CertIssued
+         status: "True"
+         type: Ready
+   ```
+
+Note: If `Status.Conditions` is `Ready=False`, that indicates a failure to
+obtain a certificate, which should be explained in the accompanying error
+message.
+
+## Configuring the Knative ingress gateway
+
+To configure the `knative-ingress-gateway` to use the TLS certificate
+that you created, append the `tls:` section to the end of your HTTPS port
 configuration.
+
+Run the following commands to configure Knative to use HTTPS connections and
+send a `301` redirect response for all HTTP requests:
 
 ```shell
 kubectl apply --filename - <<EOF
@@ -215,7 +254,7 @@ metadata:
   namespace: knative-serving
 spec:
   selector:
-    knative: ingressgateway
+    istio: ingressgateway
   servers:
   - port:
       number: 80
@@ -237,5 +276,14 @@ spec:
 EOF
 ```
 
-Now you can access your services via HTTPS; cert-manager will keep your
-certificates up-to-date, replacing them before the certificate expires.
+Congratulations, you can now access your Knative services with secure HTTPS
+connections. Your Knative cluster is configured to use cert-manager to
+manually obtain TLS certificates but see the following section about
+automating that process.
+
+## Configure Knative for automatic certificate provisioning
+
+You can update your Knative configuration to automatically obtain and
+renew TLS certificates before they expire. To learn more about automatic
+certificates, see
+[Enabling automatic TLS certificate provisioning](./using-auto-tls.md).

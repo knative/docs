@@ -155,8 +155,9 @@ This is a helper script for Knative E2E test scripts. To use it:
 1. Write logic for the end-to-end tests. Run all go tests using `go_test_e2e()`
    (or `report_go_test()` if you need a more fine-grained control) and call
    `fail_test()` or `success()` if any of them failed. The environment variable
-   `KO_DOCKER_REPO` will be set according to the test cluster. You can also use
-   the following boolean (0 is false, 1 is true) environment variables for the logic:
+   `KO_DOCKER_REPO` and `E2E_PROJECT_ID` will be set according to the test cluster.
+   You can also use the following boolean (0 is false, 1 is true) environment
+   variables for the logic:
 
    - `EMIT_METRICS`: true if `--emit-metrics` was passed.
 
@@ -170,6 +171,9 @@ This is a helper script for Knative E2E test scripts. To use it:
 1. Calling your script with `--run-tests` and the variable `KO_DOCKER_REPO` set
    will immediately start the tests against the cluster currently configured for
    `kubectl`.
+
+1. By default Istio is installed on the cluster via Addon, use `--skip-istio-addon` if
+   you choose not to have it preinstalled.
 
 1. You can force running the tests against a specific GKE cluster version by using
    the `--cluster-version` flag and passing a full version as the flag value.
@@ -224,7 +228,7 @@ This is a helper script for Knative release scripts. To use it:
    environment variable `VALIDATION_TESTS` to the executable to run.
 
 1. Write logic for building the release in a function named `build_release()`.
-   Set the environment variable `YAMLS_TO_PUBLISH` to the list of yaml files created,
+   Set the environment variable `ARTIFACTS_TO_PUBLISH` to the list of files created,
    space separated. Use the following boolean (0 is false, 1 is true) and string
    environment variables for the logic:
 
@@ -263,7 +267,7 @@ source vendor/github.com/knative/test-infra/scripts/release.sh
 function build_release() {
   # config/ contains the manifests
   ko resolve ${KO_FLAGS} -f config/ > release.yaml
-  YAMLS_TO_PUBLISH="release.yaml"
+  ARTIFACTS_TO_PUBLISH="release.yaml"
 }
 
 main $@

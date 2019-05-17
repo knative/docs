@@ -1,4 +1,3 @@
-
 Learn how to deploy a simple web app that is written in Java and uses Eclipse
 Vert.x. This samples uses Docker to build locally. The app reads in a `TARGET`
 env variable and then prints "Hello World: \${TARGET}!". If a value for `TARGET`
@@ -27,7 +26,7 @@ You must meet the following requirements to complete this sample:
 
 **Tip**: You can clone the [Knative/docs repo](https://github.com/knative/docs)
 and then modify the source files. Alternatively, learn more by manually creating
-the files youself.
+the files yourself.
 
 ## Creating and configuring the sample code
 
@@ -146,10 +145,6 @@ To create and configure the source files in the root of your working directory:
    # Use fabric8's s2i Builder image.
    # https://hub.docker.com/r/fabric8/s2i-java
    FROM fabric8/s2i-java:2.0
-
-   # Service must listen to $PORT environment variable.
-   # This default value facilitates local development.
-   ENV PORT 8080
 
    # Copy the JAR file to the deployment directory.
    ENV JAVA_APP_DIR=/deployments

@@ -101,10 +101,10 @@ You can either clone the code from this directory using the following commands. 
      template:
        spec:
          containers:
-         - image: docker.io/{username}/helloworld-csharp
-           env:
-             - name: TARGET
-               value: "C# Sample v1"
+           - image: docker.io/{username}/helloworld-csharp
+             env:
+               - name: TARGET
+                 value: "C# Sample v1"
    ```
 
 ## Building and deploying the sample

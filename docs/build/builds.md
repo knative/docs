@@ -76,10 +76,8 @@ spec:
   - name: ubuntu-example
     image: ubuntu
     args: ["ubuntu-build-example", "SECRETS-example.md"]
-  steps:
   - image: gcr.io/example-builders/build-example
     args: ['echo', 'hello-example', 'build']
-  steps:
   - name: dockerfile-pushexample
     image: gcr.io/example-builders/push-example
     args: ["push", "${IMAGE}"]
@@ -93,10 +91,9 @@ spec:
 
 #### Steps
 
-The `steps` field is required if the `template` field is not defined. You define
-one or more `steps` fields to define the body of a build.
+The `steps` field is required if the `template` field is not defined.
 
-Each `steps` in a build must specify a `Builder`, or type of container image
+Each `steps` field in a build must specify a `Builder`, or type of container image
 that adheres to the [Knative builder contract](./builder-contract.md). For each
 of the `steps` fields, or container images that you define:
 

@@ -1,0 +1,19 @@
+apiVersion: sources.eventing.knative.dev/v1alpha1
+kind: ContainerSource
+metadata:
+  name: test-heartbeats
+spec:
+  # This corresponds to a heartbeats image uri you build and publish,
+  # e.g. gcr.io/[gcloud-project]/github.com/knative/eventing-sources/cmd/heartbeats
+  image: index.docker.io/daisyycguo/heartbeats-6790335e994243a8d3f53b967cdd6398
+  args: 
+    - --period=1
+  sink:
+    apiVersion: serving.knative.dev/v1alpha1
+    kind: Service
+    name: event-display
+  env:
+    - name: POD_NAME
+      value: "mypod"
+    - name: POD_NAMESPACE
+      value: "event-test"

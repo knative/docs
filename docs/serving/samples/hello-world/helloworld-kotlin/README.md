@@ -149,10 +149,10 @@ You can either clone the code from this directory using the following commands. 
      template:
        spec:
          containers:
-         - image: docker.io/{username}/helloworld-kotlin
-           env:
-             - name: TARGET
-               value: "Kotlin Sample v1"
+           - image: docker.io/{username}/helloworld-kotlin
+             env:
+               - name: TARGET
+                 value: "Kotlin Sample v1"
    ```
 
 ## Build and deploy this sample

@@ -92,10 +92,10 @@ You can either clone the code from this directory using the following commands. 
      template:
        spec:
          containers:
-         - image: docker.io/{username}/helloworld-shell
-           env:
-           - name: TARGET
-             value: "Shell Sample v1"
+           - image: docker.io/{username}/helloworld-shell
+             env:
+               - name: TARGET
+                 value: "Shell Sample v1"
    ```
 
 ## Building and deploying the sample

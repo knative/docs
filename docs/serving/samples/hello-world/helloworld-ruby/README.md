@@ -92,10 +92,10 @@ You can either clone the code from this directory using the following commands. 
      template:
        spec:
          containers:
-         - image: docker.io/{username}/helloworld-ruby
-           env:
-             - name: TARGET
-               value: "Ruby Sample v1"
+           - image: docker.io/{username}/helloworld-ruby
+             env:
+               - name: TARGET
+                 value: "Ruby Sample v1"
    ```
 
 ## Build and deploy this sample

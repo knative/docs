@@ -33,9 +33,9 @@ spec:
           initialDelaySeconds: 0
           periodSeconds: 3
   traffic:
-  - subroute: current
+  - tag: current
     revisionName: stock-service-example-first
     percent: 100
-  - subroute: latest
+  - tag: latest
     latestRevision: true
     percent: 0

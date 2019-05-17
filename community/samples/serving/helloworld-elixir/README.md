@@ -1,4 +1,3 @@
-
 A simple web application written in [Elixir](https://elixir-lang.org/) using the
 [Phoenix Framework](https://phoenixframework.org/). The application prints all
 environment variables to the main page.
@@ -80,8 +79,7 @@ When asked, if you want to `Fetch and install dependencies? [Yn]` select `y`
    # Run everything else as 'appuser'
    USER appuser
 
-   # Document that the service listens on port 8080.
-   ENV PORT=8080 MIX_ENV=prod REPLACE_OS_VARS=true
+   ENV MIX_ENV=prod REPLACE_OS_VARS=true
    WORKDIR /opt/app
    COPY --from=0 /opt/release .
    ENV RUNNER_LOG_DIR /var/log
