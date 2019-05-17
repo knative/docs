@@ -8,7 +8,7 @@ following commands:
 
     ```shell
    git clone -b "release-0.6" https://github.com/knative/docs knative-docs
-   cd knative-docs/serving/samples/hello-world/helloworld-java
+   cd knative-docs/serving/samples/hello-world/helloworld-java-spring
    ```
 
  ## Before you begin
