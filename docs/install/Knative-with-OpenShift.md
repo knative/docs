@@ -198,8 +198,10 @@ curl -L https://storage.googleapis.com/knative-releases/serving/latest/serving.y
   | oc apply --filename -
 ```
 
-> **Note**: You can add `-l networking.knative.dev/certificate-provider!=cert-manager` to above `oc apply` command to 
-> exclude [Auto TLS feature](../serving/using-auto-tls.md) related components if you don't need this feature.
+> **Note**: You can add
+> `-l networking.knative.dev/certificate-provider!=cert-manager` to above
+> `oc apply` command to exclude [Auto TLS feature](../serving/using-auto-tls.md)
+> related components if you don't need this feature.
 
 Monitor the Knative components until all of the components show a `STATUS` of
 `Running`:

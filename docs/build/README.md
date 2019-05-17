@@ -75,11 +75,11 @@ spec:
       url: https://github.com/example/build-example.git
       revision: master
   steps:
-  - name: ubuntu-example
-    image: ubuntu
-    args: ['ubuntu-build-example', 'SECRETS-example.md']
-  - image: gcr.io/example-builders/build-example
-    args: ['echo', 'hello-example', 'build']
+    - name: ubuntu-example
+      image: ubuntu
+      args: ["ubuntu-build-example", "SECRETS-example.md"]
+    - image: gcr.io/example-builders/build-example
+      args: ["echo", "hello-example", "build"]
 ```
 
 ## Get started with Knative Build samples
