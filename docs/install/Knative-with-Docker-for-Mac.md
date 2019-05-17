@@ -25,7 +25,7 @@ continuing.
 1. After Docker for Mac is installed, configure it with sufficient resources.
    You can do that via the
    [_Advanced_ menu](https://docs.docker.com/docker-for-mac/#advanced) in Docker
-   for Mac's preferences. Set **CPUs** to at least **4** and **Memory** to at
+   for Mac's preferences. Set **CPUs** to at least **6** and **Memory** to at
    least **8.0 GiB**.
 1. Now enable Docker for Mac's
    [Kubernetes capabilities](https://docs.docker.com/docker-for-mac/#kubernetes)
@@ -68,10 +68,17 @@ Because you have limited resources available, use the
 which installs only Knative Serving:
 
 ```shell
-curl -L https://github.com/knative/serving/releases/download/v0.5.2/serving.yaml \
+curl -L https://github.com/knative/serving/releases/download/v0.6.0/serving.yaml \
   | sed 's/LoadBalancer/NodePort/' \
-  | kubectl apply --filename -
+  | kubectl apply --selector networking.knative.dev/certificate-provider!=cert-manager --filename -
 ```
+
+  **Notes**: 
+  > - By default, the Knative Serving component installation (`serving.yaml`) includes a controller
+  >   for [enabling automatic TLS certificate provisioning](../serving/using-auto-tls.md). If you do
+  >   intend on immediately enabling auto certificates in Knative, you can remove the 
+  >   `--selector networking.knative.dev/certificate-provider!=cert-manager` statement to install the
+  >   controller. 
 
 > Note: Unlike minikube, we're not changing the LoadBalancer to a NodePort here.
 > Docker for Mac will assign `localhost` as the host for that LoadBalancer,

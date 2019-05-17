@@ -4,7 +4,16 @@ Serving when using [Scala](https://scala-lang.org/) and [Akka](https://akka.io/)
 request with a text specified as an `ENV` variable named `MESSAGE`, defaulting
 to `"Hello World!"`.
 
-## Prerequisites
+Follow the steps below to create the sample code and then deploy the app to your
+cluster. You can also download a working copy of the sample, by running the
+following commands:
+
+   ```shell
+  git clone -b "release-0.6" https://github.com/knative/docs knative-docs
+  cd knative-docs/serving/samples/hello-world/helloworld-scala
+  ```
+
+## Before you begin
 
 - A Kubernetes cluster [installation](../../../../install/README.md) with
   Knative Serving up and running.
