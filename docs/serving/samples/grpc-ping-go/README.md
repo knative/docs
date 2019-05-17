@@ -1,21 +1,17 @@
 A simple gRPC server written in Go that you can use for testing.
 
-This sample requires knative/serving 0.4 or later.
-
-## Before you begin
-
-You can either clone the code from this directory using the following commands or you can build this sample step-by-step. To build this app step-by-step complete the [prerequisites](Prerequisites) if you have not already done so, then go to the [Build and run the gRPC server](#Build-and-run-the-gRPC-server) section to get started.
-
-   ```shell
-   git clone https://github.com/knative/docs knative-docs
-   cd knative-docs/serving/samples/grpc-ping-go
-   ```
-
 ## Prerequisites
 
-1. [Install Knative](../../../install/README.md).
+- [Install the Knative Serving version 0.4 or later](../../../install/README.md).
 
-1. Install [docker](https://www.docker.com/).
+- Install [docker](https://www.docker.com/).
+
+- Download a copy of the code:
+
+   ```shell
+   git clone -b "release-0.6" https://github.com/knative/docs knative-docs
+   cd knative-docs/serving/samples/grpc-ping-go
+   ```
 
 ## Build and run the gRPC server
 
@@ -40,20 +36,20 @@ kubectl apply --filename docs/serving/samples/grpc-ping-go/sample.yaml
 
 1. Fetch the created ingress hostname and IP.
 
-```shell
-# Put the Host name into an environment variable.
-export SERVICE_HOST=`kubectl get route grpc-ping --output jsonpath="{.status.domain}"`
+    ```shell
+    # Put the Host name into an environment variable.
+    export SERVICE_HOST=`kubectl get route grpc-ping --output jsonpath="{.status.domain}"`
 
-# Put the ingress IP into an environment variable.
-export SERVICE_IP=`kubectl get svc istio-ingressgateway --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
-```
+    # Put the ingress IP into an environment variable.
+    export SERVICE_IP=`kubectl get svc istio-ingressgateway --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
+    ```
 
 1. Use the client to send message streams to the gRPC server (replacing
    `{username}`)
 
-```shell
-docker run -ti --entrypoint=/client docker.io/{username}/grpc-ping-go \
-  -server_addr="${SERVICE_IP}:80" \
-  -server_host_override="${SERVICE_HOST}" \
-  -insecure
-```
+   ```shell
+   docker run -ti --entrypoint=/client docker.io/{username}/grpc-ping-go \
+     -server_addr="${SERVICE_IP}:80" \
+     -server_host_override="${SERVICE_HOST}" \
+     -insecure
+   ```
