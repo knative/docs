@@ -4,7 +4,7 @@ Serving when using [Scala](https://scala-lang.org/) and [Akka](https://akka.io/)
 request with a text specified as an `ENV` variable named `MESSAGE`, defaulting
 to `"Hello World!"`.
 
-Follow the steps below to create the sample code and the deploy the app to your
+Follow the steps below to create the sample code and then deploy the app to your
 cluster. You can also download a working copy of the sample, by running the
 following commands:
 
