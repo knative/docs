@@ -97,7 +97,7 @@ func prepareWorkDir(t *testing.T, srcDir, workDir string, preCommands []sampleap
 		dst := path.Join(workDir, f)
 		dstDir, _ := path.Split(dst)
 		noStderrShell("mkdir", "-p", dstDir)
-		if output, err := exec.Command("cp", src, dst).CombinedOutput(); err != nil {
+		if output, err := exec.Command("cp", "-r", src, dst).CombinedOutput(); err != nil {
 			t.Fatalf("Error copying: '%s' to '%s' -err: '%v'", src, dst, strings.TrimSpace(string(output)))
 		}
 	}

@@ -1,15 +1,11 @@
 languages:
   - language: "java-spring"
     expectedOutput: "Hello Spring Boot Sample v1!"
-    preCommands:
-      - exec: "curl"
-        args: "https://start.spring.io/starter.zip -d dependencies=web -d name=helloworld -d artifactId=helloworld -o helloworld.zip"
-      - exec: "unzip"
-        args: "helloworld.zip -d helloworld-java-spring_tmp"
-      - exec: "rm"
-        args: "helloworld.zip"
     copies:
-      - "/src/main/java/com/example/helloworld/HelloworldApplication.java"
+      - "/src"
+      - "mvnw"
+      - "mvnw.cmd"
+      - "pom.xml"
       - "service.yaml"
       - "Dockerfile"
   - language: "go"
