@@ -15,10 +15,10 @@ webhook.
 
 1. Download a copy of the code:
 
-   ```shell
-   git clone -b "release-0.6" https://github.com/knative/docs knative-docs
-   cd knative-docs/serving/samples/grpc-ping-go
-   ```
+    ```shell
+    git clone -b "release-0.6" https://github.com/knative/docs knative-docs
+    cd knative-docs/serving/samples/gitwebhook-go
+    ```
    
 1. Use Docker to build a container image for this service. Replace `username`
    with your Docker Hub username in the following commands.
