@@ -92,7 +92,7 @@ following commands:
     spec:
      template:
        spec:
-         containers:\
+         containers:
           - image: docker.io/{username}/helloworld-shell
             env:
             - name: TARGET
