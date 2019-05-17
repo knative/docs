@@ -215,7 +215,7 @@ metadata:
   namespace: knative-serving
 spec:
   selector:
-    knative: ingressgateway
+    istio: ingressgateway
   servers:
   - port:
       number: 80
