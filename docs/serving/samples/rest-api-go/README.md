@@ -15,11 +15,10 @@ then outputs the stock price.
    [Homebrew](https://brew.sh/) on OS X.
 1. Download a copy of the code:
 
-    ```shell
-    git clone -b "release-0.6" https://github.com/knative/docs knative-docs
-    cd knative-docs/serving/samples/rest-api-go
-    ```
-
+   ```shell
+   git clone -b "release-0.6" https://github.com/knative/docs knative-docs
+   cd knative-docs/serving/samples/rest-api-go
+   ```
 
 ## Setup
 
@@ -36,9 +35,9 @@ To build and push to a container registry using Docker:
 
 1. Move into the sample directory:
 
-    ```shell
-    cd $GOPATH/src/github.com/knative/docs
-    ```
+   ```shell
+   cd $GOPATH/src/github.com/knative/docs
+   ```
 
 2. Set your preferred container registry endpoint as an environment variable.
    This sample uses
@@ -66,26 +65,26 @@ registry specific instructions for both setup and authorizing the image push.
 
 4. Use Docker to build your application container:
 
-    ```shell
-    docker build \
-      --tag "${REPO}/rest-api-go" \
-      --file docs/serving/samples/rest-api-go/Dockerfile .
-    ```
+   ```shell
+   docker build \
+     --tag "${REPO}/rest-api-go" \
+     --file docs/serving/samples/rest-api-go/Dockerfile .
+   ```
 
 5. Push your container to a container registry:
 
-    ```shell
-    docker push "${REPO}/rest-api-go"
-    ```
+   ```shell
+   docker push "${REPO}/rest-api-go"
+   ```
 
 6. Substitute the image reference path in the template with our published image
    path. The command below substitutes using the \${REPO} variable into a new
    file called `docs/serving/samples/rest-api-go/sample.yaml`.
 
-    ```shell
-    envsubst < docs/serving/samples/rest-api-go/sample-template.yaml > \
-    docs/serving/samples/rest-api-go/sample.yaml
-    ```
+   ```shell
+   envsubst < docs/serving/samples/rest-api-go/sample-template.yaml > \
+   docs/serving/samples/rest-api-go/sample.yaml
+   ```
 
 ## Deploy the Service
 
@@ -165,14 +164,14 @@ variables below.
 
 1. To get the IP address of your Ingress Gateway:
 
-    ```shell
-    INGRESSGATEWAY=istio-ingressgateway
-    INGRESSGATEWAY_LABEL=istio
+   ```shell
+   INGRESSGATEWAY=istio-ingressgateway
+   INGRESSGATEWAY_LABEL=istio
 
-    export INGRESS_IP=`kubectl get svc $INGRESSGATEWAY --namespace istio-system \
-    --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
-    echo $INGRESS_IP
-    ```
+   export INGRESS_IP=`kubectl get svc $INGRESSGATEWAY --namespace istio-system \
+   --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
+   echo $INGRESS_IP
+   ```
 
 #### Minikube
 
@@ -181,10 +180,10 @@ variables below.
    `INGRESS_IP` won't contain a value. In that case, use the Istio `hostIP` and
    `nodePort` as the ingress IP:
 
-    ```shell
-    export INGRESS_IP=$(kubectl get po --selector $INGRESSGATEWAY_LABEL=ingressgateway --namespace istio-system \
-      --output 'jsonpath={.items[0].status.hostIP}'):$(kubectl get svc $INGRESSGATEWAY --namespace istio-system \
-      --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
+   ```shell
+   export INGRESS_IP=$(kubectl get po --selector $INGRESSGATEWAY_LABEL=ingressgateway --namespace istio-system \
+     --output 'jsonpath={.items[0].status.hostIP}'):$(kubectl get svc $INGRESSGATEWAY --namespace istio-system \
+     --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
    echo $INGRESS_IP
    ```
 
@@ -192,43 +191,44 @@ variables below.
 
 2. To get the hostname of the Service:
 
-    ```shell
-    export SERVICE_HOSTNAME=`kubectl get ksvc stock-service-example --output jsonpath="{.status.domain}"`
-    echo $SERVICE_HOSTNAME
-    ```
+   ```shell
+   export SERVICE_HOSTNAME=`kubectl get ksvc stock-service-example --output jsonpath="{.status.domain}"`
+   echo $SERVICE_HOSTNAME
+   ```
 
 ### Sending Requests
 
 3. Now use `curl` to make a request to the Service:
 
-    - Make a request to the index endpoint:
+   - Make a request to the index endpoint:
 
-    The `curl` command below makes a request to the Ingress Gateway IP. The Ingress
-    Gateway uses the host header to route the request to the Service. This example
-    passes the host header to skip DNS configuration. If your cluster has DNS
-    configured, you can simply curl the DNS name instead of the ingress gateway IP.
+   The `curl` command below makes a request to the Ingress Gateway IP. The
+   Ingress Gateway uses the host header to route the request to the Service.
+   This example passes the host header to skip DNS configuration. If your
+   cluster has DNS configured, you can simply curl the DNS name instead of the
+   ingress gateway IP.
 
-    ```shell
-    curl --header "Host:$SERVICE_HOSTNAME" http://${INGRESS_IP}
-    ```
+   ```shell
+   curl --header "Host:$SERVICE_HOSTNAME" http://${INGRESS_IP}
+   ```
 
-    Response body: `Welcome to the stock app!`
+   Response body: `Welcome to the stock app!`
 
-    - Make a request to the `/stock` endpoint:
+   - Make a request to the `/stock` endpoint:
 
-    ```shell
-    curl --header "Host:$SERVICE_HOSTNAME" http://${INGRESS_IP}/stock
-    ```
+   ```shell
+   curl --header "Host:$SERVICE_HOSTNAME" http://${INGRESS_IP}/stock
+   ```
 
-    Response body: `stock ticker not found!, require /stock/{ticker}`
+   Response body: `stock ticker not found!, require /stock/{ticker}`
 
-    - Make a request to the `/stock` endpoint with a `ticker` parameter:
+   - Make a request to the `/stock` endpoint with a `ticker` parameter:
 
-    ```shell
-    curl --header "Host:$SERVICE_HOSTNAME" http://${INGRESS_IP}/stock/<ticker>
-    ```
+   ```shell
+   curl --header "Host:$SERVICE_HOSTNAME" http://${INGRESS_IP}/stock/<ticker>
+   ```
 
-    Response body: `stock price for ticker <ticker> is <price>`
+   Response body: `stock price for ticker <ticker> is <price>`
 
 ## Next Steps
 
