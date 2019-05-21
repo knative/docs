@@ -1,6 +1,6 @@
 ---
 title: "Hello World - Java (Quarkus)"
-linkTitle: "Java"
+linkTitle: "Java (Quarkus)"
 weight: 1
 type: "docs"
 ---
