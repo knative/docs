@@ -156,10 +156,10 @@ forward.
 
 Knative depends on Istio. If your cloud platform offers a managed Istio
 installation, we recommend installing Istio that way, unless you need the
-ability to customize your installation. 
+ability to customize your installation.
 
-If you prefer to install Istio manually, if your cloud provider doesn't offer
-a managed Istio installation, or if you're installing Knative locally using
+If you prefer to install Istio manually, if your cloud provider doesn't offer a
+managed Istio installation, or if you're installing Knative locally using
 Minkube or similar, see the
 [Installing Istio for Knative guide](./installing-istio.md).
 
@@ -220,17 +220,19 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
    --filename https://raw.githubusercontent.com/knative/serving/v0.6.0/third_party/config/build/clusterrole.yaml
    ```
 
-   > **Notes**: 
-   > - By default, the Knative Serving component installation (`serving.yaml`) includes a controller
-   >   for [enabling automatic TLS certificate provisioning](../serving/using-auto-tls.md). If you do
-   >   intend on immediately enabling auto certificates in Knative, you can remove the 
-   >   `--selector networking.knative.dev/certificate-provider!=cert-manager` statement to install the
-   >   controller. 
-   >   Otherwise, you can choose to install the auto certificates feature and controller at a later time.
-   >   
-   > - For the v0.4.0 release and newer, the `clusterrole.yaml` file is
-   > required to enable the Build and Serving components to interact with each
-   > other.
+   > **Notes**:
+   >
+   > - By default, the Knative Serving component installation (`serving.yaml`)
+   >   includes a controller for
+   >   [enabling automatic TLS certificate provisioning](../serving/using-auto-tls.md).
+   >   If you do intend on immediately enabling auto certificates in Knative,
+   >   you can remove the
+   >   `--selector networking.knative.dev/certificate-provider!=cert-manager`
+   >   statement to install the controller. Otherwise, you can choose to install
+   >   the auto certificates feature and controller at a later time.
+   >
+   > - For the v0.4.0 release and newer, the `clusterrole.yaml` file is required
+   >   to enable the Build and Serving components to interact with each other.
 
 1. Monitor the Knative components until all of the components show a `STATUS` of
    `Running`:

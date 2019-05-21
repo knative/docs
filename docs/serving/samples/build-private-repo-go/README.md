@@ -10,10 +10,10 @@ This sample demonstrates:
 - [Install Knative Serving](../../../install/README.md)
 - Download a copy of the code:
 
-   ```shell
-   git clone -b "release-0.6" https://github.com/knative/docs knative-docs
-   cd knative-docs/serving/samples/build-private-repo-go
-   ```
+  ```shell
+  git clone -b "release-0.6" https://github.com/knative/docs knative-docs
+  cd knative-docs/serving/samples/build-private-repo-go
+  ```
 
 ## Setup
 
@@ -40,11 +40,11 @@ We are going to add to this an image pull Secret.
 1. Create your image pull Secret with the following command, replacing values as
    necessary:
 
-    ```shell
-    kubectl create secret docker-registry dockerhub-pull-secret \
-    --docker-server=https://index.docker.io/v1/ --docker-email=not@val.id \
-    --docker-username=<your-name> --docker-password=<your-pword>
-    ```
+   ```shell
+   kubectl create secret docker-registry dockerhub-pull-secret \
+   --docker-server=https://index.docker.io/v1/ --docker-email=not@val.id \
+   --docker-username=<your-name> --docker-password=<your-pword>
+   ```
 
    To learn more about Kubernetes pull Secrets, see
    [Creating a Secret in the cluster that holds your authorization token](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#create-a-secret-in-the-cluster-that-holds-your-authorization-token).
@@ -52,20 +52,20 @@ We are going to add to this an image pull Secret.
 2. Add the newly created `imagePullSecret` to your default service account by
    entering:
 
-    ```shell
-    kubectl edit serviceaccount default
-    ```
+   ```shell
+   kubectl edit serviceaccount default
+   ```
 
-    This will open the resource in your default text editor. Under `secrets:`,
-    add:
+   This will open the resource in your default text editor. Under `secrets:`,
+   add:
 
-    ```yaml
-    secrets:
-      - name: default-token-zd84v
-    # This is the secret we just created:
-    imagePullSecrets:
-      - name: dockerhub-pull-secret
-    ```
+   ```yaml
+   secrets:
+     - name: default-token-zd84v
+   # This is the secret we just created:
+   imagePullSecrets:
+     - name: dockerhub-pull-secret
+   ```
 
 ### 2. Configuring the build
 
@@ -151,9 +151,9 @@ kubectl create --filename build-bot.yaml
    [Kaniko build template](https://github.com/knative/build-templates/blob/master/kaniko/kaniko.yaml)
    by entering the following command:
 
-    ```shell
-    kubectl apply --filename https://raw.githubusercontent.com/knative/build-templates/master/kaniko/kaniko.yaml
-    ```
+   ```shell
+   kubectl apply --filename https://raw.githubusercontent.com/knative/build-templates/master/kaniko/kaniko.yaml
+   ```
 
 1. Open `manifest.yaml` and substitute your private DockerHub repository name
    for `REPLACE_ME`.
@@ -215,41 +215,41 @@ The sample code is in a private Github repository consisting of two files.
 
 1. `Dockerfile`
 
-    ```Dockerfile
-    # Use golang:alpine to optimize the image size.
-    # See https://hub.docker.com/_/golang/ for more information
-    # about the difference between golang and golang:alpine.
-    FROM golang:alpine
+   ```Dockerfile
+   # Use golang:alpine to optimize the image size.
+   # See https://hub.docker.com/_/golang/ for more information
+   # about the difference between golang and golang:alpine.
+   FROM golang:alpine
 
-    ENV GOPATH /go
+   ENV GOPATH /go
 
-    ADD . /go/src/github.com/dewitt/knative-build
+   ADD . /go/src/github.com/dewitt/knative-build
 
-    RUN CGO_ENABLED=0 go build github.com/dewitt/knative-build
+   RUN CGO_ENABLED=0 go build github.com/dewitt/knative-build
 
-    ENTRYPOINT ["knative-build"]
-    ```
+   ENTRYPOINT ["knative-build"]
+   ```
 
 1. `main.go`
 
-    ```go
-    package main
+   ```go
+   package main
 
-    import (
-    "
-    "
-    )
+   import (
+   "
+   "
+   )
 
-    const (
-   	   port = ":8080"
-    )
+   const (
+      port = ":8080"
+   )
 
-    func helloWorld(w http.ResponseWriter, r *http.Request) {
-    )
-    }
+   func helloWorld(w http.ResponseWriter, r *http.Request) {
+   )
+   }
 
-    func main() {
-    )
-    )
-    }
-    ```
+   func main() {
+   )
+   )
+   }
+   ```

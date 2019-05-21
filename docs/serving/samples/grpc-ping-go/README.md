@@ -8,10 +8,10 @@ A simple gRPC server written in Go that you can use for testing.
 
 - Download a copy of the code:
 
-   ```shell
-   git clone -b "release-0.6" https://github.com/knative/docs knative-docs
-   cd knative-docs/serving/samples/grpc-ping-go
-   ```
+  ```shell
+  git clone -b "release-0.6" https://github.com/knative/docs knative-docs
+  cd knative-docs/serving/samples/grpc-ping-go
+  ```
 
 ## Build and run the gRPC server
 
@@ -36,13 +36,13 @@ kubectl apply --filename docs/serving/samples/grpc-ping-go/sample.yaml
 
 1. Fetch the created ingress hostname and IP.
 
-    ```shell
-    # Put the Host name into an environment variable.
-    export SERVICE_HOST=`kubectl get route grpc-ping --output jsonpath="{.status.domain}"`
+   ```shell
+   # Put the Host name into an environment variable.
+   export SERVICE_HOST=`kubectl get route grpc-ping --output jsonpath="{.status.domain}"`
 
-    # Put the ingress IP into an environment variable.
-    export SERVICE_IP=`kubectl get svc istio-ingressgateway --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
-    ```
+   # Put the ingress IP into an environment variable.
+   export SERVICE_IP=`kubectl get svc istio-ingressgateway --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
+   ```
 
 1. Use the client to send message streams to the gRPC server (replacing
    `{username}`)

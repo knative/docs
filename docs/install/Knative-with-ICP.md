@@ -166,12 +166,15 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
      | kubectl apply --selector networking.knative.dev/certificate-provider!=cert-manager --filename -
    ```
 
-   **Notes**: 
-   > - By default, the Knative Serving component installation (`serving.yaml`) includes a controller
-   >   for [enabling automatic TLS certificate provisioning](../serving/using-auto-tls.md). If you do
-   >   intend on immediately enabling auto certificates in Knative, you can remove the 
-   >   `--selector networking.knative.dev/certificate-provider!=cert-manager` statement to install the
-   >   controller. 
+   **Notes**:
+
+   > - By default, the Knative Serving component installation (`serving.yaml`)
+   >   includes a controller for
+   >   [enabling automatic TLS certificate provisioning](../serving/using-auto-tls.md).
+   >   If you do intend on immediately enabling auto certificates in Knative,
+   >   you can remove the
+   >   `--selector networking.knative.dev/certificate-provider!=cert-manager`
+   >   statement to install the controller.
 
    ```shell
    curl -L https://github.com/knative/build/releases/download/v0.6.0/build.yaml \
