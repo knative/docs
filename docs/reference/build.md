@@ -859,7 +859,7 @@ Kubernetes meta/v1.Time
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#BuildTemplate">BuildTemplate</a>,
+<a href="#BuildTemplate">BuildTemplate</a>, 
 <a href="#ClusterBuildTemplate">ClusterBuildTemplate</a>)
 </p>
 <p>
@@ -1353,5 +1353,5 @@ This will override any of the template&rsquo;s steps environment variables.</p>
 <hr/>
 <p><em>
 Generated with <code>gen-crd-api-reference-docs</code>
-on git commit <code>4fc8663f</code>.
+on git commit <code>002a41a3</code>.
 </em></p>

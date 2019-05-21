@@ -69,6 +69,18 @@ without automatic sidecar injection.
    Wait a few seconds for the CRDs to be committed in the Kubernetes API-server,
    then continue with these instructions.
 
+1. Create `istio-system` namespace
+    ```shell
+    cat <<EOF | kubectl apply -f -
+    apiVersion: v1
+    kind: Namespace
+    metadata:
+      name: istio-system
+      labels:
+        istio-injection: disabled
+    EOF
+    ```
+
 1. Finish the install by applying your desired Istio configuration:
    - [Installing Istio without sidecar injection](#installing-istio-without-sidecar-injection)(Recommended default installation)
    - [Installing Istio with sidecar injection](#installing-istio-with-sidecar-injection)
@@ -84,24 +96,31 @@ mesh by [manually injecting the Istio sidecars][2].
 Enter the following command to install Istio:
 
 ```shell
-# A lighter template, with no sidecar injection.
+# A lighter template, with just pilot/gateway.
+# Based on install/kubernetes/helm/istio/values-istio-minimal.yaml
 helm template --namespace=istio-system \
+  --set prometheus.enabled=false \
+  --set mixer.enabled=false \
+  --set mixer.policy.enabled=false \
+  --set mixer.telemetry.enabled=false \
+  `# Pilot doesn't need a sidecar.` \
+  --set pilot.sidecar=false \
+  `# Disable galley (and things requiring galley).` \
+  --set galley.enabled=false \
+  --set global.useMCP=false \
+  `# Disable security / policy.` \
+  --set security.enabled=false \
+  --set global.disablePolicyChecks=true \
+  `# Disable sidecar injection.` \
+  --set sidecarInjectorWebhook.enabled=false \
   --set global.proxy.autoInject=disabled \
   --set global.omitSidecarInjectorConfigMap=true \
-  --set global.disablePolicyChecks=true \
-  --set prometheus.enabled=false \
-  `# Disable mixer prometheus adapter to remove istio default metrics.` \
-  --set mixer.adapters.prometheus.enabled=false \
-  `# Disable mixer policy check, since in our template we set no policy.` \
-  --set global.disablePolicyChecks=true \
   `# Set gateway pods to 1 to sidestep eventual consistency / readiness problems.` \
   --set gateways.istio-ingressgateway.autoscaleMin=1 \
   --set gateways.istio-ingressgateway.autoscaleMax=1 \
   `# Set pilot trace sampling to 100%` \
   --set pilot.traceSampling=100 \
   install/kubernetes/helm/istio \
-  `# Removing trailing whitespaces to make automation happy` \
-  | sed 's/[ \t]*$//' \
   > ./istio-lean.yaml
 
 kubectl apply -f istio-lean.yaml
@@ -142,8 +161,6 @@ helm template --namespace=istio-system \
   `# Set pilot trace sampling to 100%` \
   --set pilot.traceSampling=100 \
   install/kubernetes/helm/istio \
-  `# Removing trailing whitespaces to make automation happy` \
-  | sed 's/[ \t]*$//' \
   > ./istio.yaml
 
 kubectl apply -f istio.yaml
@@ -191,8 +208,6 @@ helm template --namespace=istio-system \
   `# Set pilot trace sampling to 100%` \
   --set pilot.traceSampling=100 \
   install/kubernetes/helm/istio \
-  `# Removing trailing whitespaces to make automation happy` \
-  | sed 's/[ \t]*$//' \
   > ./istio.yaml
 
   kubectl apply -f istio.yaml
@@ -222,8 +237,6 @@ helm template --namespace=istio-system \
   install/kubernetes/helm/istio \
   -f install/kubernetes/helm/istio/example-values/values-istio-gateways.yaml \
   | sed -e "s/custom-gateway/cluster-local-gateway/g" -e "s/customgateway/clusterlocalgateway/g" \
-  `# Removing trailing whitespaces to make automation happy` \
-  | sed "s/[[:space:]]*$//" \
   > ./istio-local-gateway.yaml
 
 kubectl apply -f istio-local-gateway.yaml

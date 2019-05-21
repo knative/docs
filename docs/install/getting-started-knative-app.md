@@ -93,83 +93,86 @@ assigned an external IP address.
 
 1. To find the IP address for your service, enter:
 
-   ```shell
-   # In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
-   INGRESSGATEWAY=knative-ingressgateway
+    ```shell
+    # In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
+    INGRESSGATEWAY=knative-ingressgateway
 
-   # The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
-   # Use `istio-ingressgateway` instead, since `knative-ingressgateway`
-   # will be removed in Knative v0.4.
-   if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
-       INGRESSGATEWAY=istio-ingressgateway
-   fi
+    # The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
+    # Use `istio-ingressgateway` instead, since `knative-ingressgateway`
+    # will be removed in Knative v0.4.
+    if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
+        INGRESSGATEWAY=istio-ingressgateway
+    fi
 
-   kubectl get svc $INGRESSGATEWAY --namespace istio-system
+    kubectl get svc $INGRESSGATEWAY --namespace istio-system
 
-   NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
-   istio-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
-   ```
+    NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
+    istio-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
+    ```
 
-   Take note of the `EXTERNAL-IP` address.
+    Take note of the `EXTERNAL-IP` address.
 
-   You can also export the IP address as a variable with the following command:
+    You can also export the IP address as a variable with the following command:
 
-   ```shell
-   export IP_ADDRESS=$(kubectl get svc $INGRESSGATEWAY --namespace istio-system --output 'jsonpath={.status.loadBalancer.ingress[0].ip}')
-   ```
+    ```shell
+    export IP_ADDRESS=$(kubectl get svc $INGRESSGATEWAY --namespace istio-system --output 'jsonpath={.status.loadBalancer.ingress[0].ip}')
+    ```
 
-   > Note: if you use minikube or a baremetal cluster that has no external load
-   > balancer, the `EXTERNAL-IP` field is shown as `<pending>`. You need to use
-   > `NodeIP` and `NodePort` to interact your app instead. To get your app's
-   > `NodeIP` and `NodePort`, enter the following command:
+    > Note: If you use minikube or a baremetal cluster that has no external load
+    > balancer, the `EXTERNAL-IP` field is shown as `<pending>`. You need to use
+    > `NodeIP` and `NodePort` to interact your app instead. To get your app's
+    > `NodeIP` and `NodePort`, enter the following command:
 
-   ```shell
-   export IP_ADDRESS=$(kubectl get node  --output 'jsonpath={.items[0].status.addresses[0].address}'):$(kubectl get svc $INGRESSGATEWAY --namespace istio-system   --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
-   ```
+    ```shell
+    export IP_ADDRESS=$(kubectl get node  --output 'jsonpath={.items[0].status.addresses[0].address}'):$(kubectl get svc $INGRESSGATEWAY --namespace istio-system   --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
+    ```
 
 1. To find the host URL for your service, enter:
 
-   ```shell
-   kubectl get route helloworld-go  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
-   NAME                DOMAIN
-   helloworld-go       helloworld-go.default.example.com
-   ```
+    ```shell
+    kubectl get route helloworld-go  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+    NAME                DOMAIN
+    helloworld-go       helloworld-go.default.example.com
+    ```
 
-   You can also export the host URL as a variable using the following command:
+    > Note: By default, Knative uses the `example.com` domain. 
+    > To configure a custom DNS domain, see [Using a Custom Domain](../serving/using-a-custom-domain.md).
 
-   ```shell
-   export HOST_URL=$(kubectl get route helloworld-go  --output jsonpath='{.status.domain}')
-   ```
+    You can also export the host URL as a variable using the following command:
 
-   If you changed the name from `helloworld-go` to something else when creating
-   the `.yaml` file, replace `helloworld-go` in the above commands with the name
-   you entered.
+    ```shell
+    export HOST_URL=$(kubectl get route helloworld-go  --output jsonpath='{.status.domain}')
+    ```
+
+    If you changed the name from `helloworld-go` to something else when creating
+    the `.yaml` file, replace `helloworld-go` in the above commands with the name
+    you entered.
 
 1. Now you can make a request to your app and see the results. Replace
    `IP_ADDRESS` with the `EXTERNAL-IP` you wrote down, and replace
    `helloworld-go.default.example.com` with the domain returned in the previous
    step.
 
-   ```shell
-   curl -H "Host: helloworld-go.default.example.com" http://${IP_ADDRESS}
-   Hello World: Go Sample v1!
-   ```
+    ```shell
+    curl -H "Host: helloworld-go.default.example.com" http://${IP_ADDRESS}
+    Hello World: Go Sample v1!
+    ```
 
-   If you exported the host URL and IP address as variables in the previous
-   steps, you can use those variables to simplify your cURL request:
+    If you exported the host URL and IP address as variables in the previous
+    steps, you can use those variables to simplify your cURL request:
 
-   ```shell
-   curl -H "Host: ${HOST_URL}" http://${IP_ADDRESS}
-   Hello World: Go Sample v1!
-   ```
+    ```shell
+    curl -H "Host: ${HOST_URL}" http://${IP_ADDRESS}
+    Hello World: Go Sample v1!
+    ```
 
-   If you deployed your own app, you might want to customize this cURL request
-   to interact with your application.
+    If you deployed your own app, you might want to customize this cURL request
+    to interact with your application.
 
-   It can take a few seconds for Knative to scale up your application and return
-   a response.
+    It can take a few seconds for Knative to scale up your application and return
+    a response.
 
-   > Note: Add `-v` option to get more detail if the `curl` command failed.
+    > Note: Add `-v` option to get more detail if the `curl` command failed.
 
 You've successfully deployed your first application using Knative!
 

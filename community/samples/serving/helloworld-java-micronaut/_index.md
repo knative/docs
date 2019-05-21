@@ -1,6 +1,6 @@
 ---
-title: "Hello World - Java (Quarkus)"
-linkTitle: "Java (Quarkus)"
+title: "Hello World - Java (Micronaut)"
+linkTitle: "Java (Micronaut)"
 weight: 1
 type: "docs"
 ---

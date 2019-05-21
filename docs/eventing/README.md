@@ -282,13 +282,22 @@ Knative Serving application so that they can be consumed.
   - `sasl`: Optional SASL authentication configuration.
     - `enable`: `boolean` If true, use SASL for authentication.
     - `user.secretKeyRef`:
-      [SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#secretkeyselector-v1-core)
+      [`SecretKeySelector`](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#secretkeyselector-v1-core)
       containing the SASL username to use.
     - `password.secretKeyRef`:
-      [SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#secretkeyselector-v1-core)
+      [`SecretKeySelector`](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#secretkeyselector-v1-core)
       containing the SASL password to use.
   - `tls`: Optional TLS configuration.
     - `enable`: `boolean` If true, use TLS when connecting.
+    - `cert.secretKeyRef`:
+      [`SecretKeySelector`](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#secretkeyselector-v1-core)
+      containing the client certificate to use.
+    - `key.secretKeyRef`:
+      [`SecretKeySelector`](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#secretkeyselector-v1-core)
+      containing the client key to use.
+    - `caCert.secretKeyRef`:
+      [`SecretKeySelector`](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#secretkeyselector-v1-core)
+      containing a server CA certificate to use when verifying the server certificate.
 
 See the
 [Kafka Source](https://github.com/knative/eventing-sources/tree/master/contrib/kafka/samples)
