@@ -7,13 +7,15 @@ type: "docs"
 
 ## Knative Serving (0.4.0 and later)
 
-If your installed version of Knative Serving is v0.4.0 or later, enter the following command:
+If your installed version of Knative Serving is v0.4.0 or later, enter the
+following command:
 
 ```bash
 kubectl get deploy -n knative-serving --label-columns=serving.knative.dev/release
 ```
 
-This will return a list of deployments in the `knative-serving` namespace and their release versions:
+This will return a list of deployments in the `knative-serving` namespace and
+their release versions:
 
 ```
 NAME                     DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE       RELEASE
@@ -27,8 +29,8 @@ webhook                  1         1         1            1           6s        
 
 ## Knative Serving (pre-0.4.0)
 
-If your installed version of Knative Serving is earlier than v0.4.0, enter
-the following command:
+If your installed version of Knative Serving is earlier than v0.4.0, enter the
+following command:
 
 ```bash
 kubectl describe deploy controller --namespace knative-serving
@@ -64,8 +66,8 @@ have installed:
 
 ## Knative Eventing
 
-To check what version of Knative serving you have installed, enter
-the following command:
+To check what version of Knative serving you have installed, enter the following
+command:
 
 ```bash
 kubectl describe deploy eventing-controller --namespace knative-eventing
@@ -77,13 +79,12 @@ information contains the link to the container that was used to install Knative:
 ```yaml
 ---
 Pod Template:
-  Labels:           app=eventing-controller
-                    eventing.knative.dev/release=devel
-  Service Account:  eventing-controller
+  Labels: app=eventing-controller eventing.knative.dev/release=devel
+  Service Account: eventing-controller
   Containers:
-   eventing-controller:
-    # Link to container used to run the Knative Eventing controller
-    Image:      gcr.io/knative-releases/github.com/knative/eventing/cmd/controller@sha256:85c010633944c06f4c16253108c2338dba271971b2b5f2d877b8247fa19ff5cb
+    eventing-controller:
+      # Link to container used to run the Knative Eventing controller
+      Image: gcr.io/knative-releases/github.com/knative/eventing/cmd/controller@sha256:85c010633944c06f4c16253108c2338dba271971b2b5f2d877b8247fa19ff5cb
 ```
 
 Copy the full `gcr.io` link to the container and paste it into your browser. If
