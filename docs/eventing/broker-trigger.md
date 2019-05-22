@@ -32,8 +32,8 @@ spec:
 
 ## Trigger
 
-A Trigger represents a desire to subscribe to events from a specific Broker. Basic
-filtering on the type and source of events is provided.
+A Trigger represents a desire to subscribe to events from a specific Broker.
+Basic filtering on the type and source of events is provided.
 
 Example:
 
@@ -95,8 +95,8 @@ If `spec.channelTemplate` is not specified:
 
 There are two ways to create a Broker:
 
-* [namespace annotation](#annotation)
-* [manual setup](#manual-setup)
+- [namespace annotation](#annotation)
+- [manual setup](#manual-setup)
 
 Normally the [namespace annotation](#annotation) is used to do this setup.
 
@@ -119,9 +119,10 @@ kubectl -n default get broker default
 #### Manual Setup
 
 In order to setup a `Broker` manually, we must first create the required
-`ServiceAccount`s and give them the proper RBAC permissions. This setup is required
-once per namespace. These instructions will use the `default` namespace, but you
-can replace it with any namespace you want to install a `Broker` into.
+`ServiceAccount`s and give them the proper RBAC permissions. This setup is
+required once per namespace. These instructions will use the `default`
+namespace, but you can replace it with any namespace you want to install a
+`Broker` into.
 
 Create the `ServiceAccount`.
 
@@ -142,7 +143,8 @@ kubectl -n default create rolebinding eventing-broker-filter \
 ```
 
 Note that the previous commands uses three different objects, all named
-`eventing-broker-ingress` or `eventing-broker-filter`. The `ClusterRole` is installed with Knative Eventing
+`eventing-broker-ingress` or `eventing-broker-filter`. The `ClusterRole` is
+installed with Knative Eventing
 [here](../../config/200-broker-clusterrole.yaml). The `ServiceAccount` was
 created two commands prior. The `RoleBinding` is created with this command.
 
@@ -161,9 +163,9 @@ EOF
 
 ### Subscriber
 
-Now create a function to receive those events. This document will
-assume the following manifest describing a Knative Service is created, but it
-could be anything that is `Addressable`.
+Now create a function to receive those events. This document will assume the
+following manifest describing a Knative Service is created, but it could be
+anything that is `Addressable`.
 
 ```yaml
 apiVersion: serving.knative.dev/v1alpha1

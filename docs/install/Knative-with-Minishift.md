@@ -224,8 +224,11 @@ curl -s https://raw.githubusercontent.com/knative/docs/master/docs/install/scrip
    oc apply --filename https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/config/build/clusterrole.yaml
    ```
 
-   > **Note**: You can add `-l networking.knative.dev/certificate-provider!=cert-manager` to above `oc apply` command to 
-   > exclude [Auto TLS feature](../serving/using-auto-tls.md) related components if you don't need this feature.
+   > **Note**: You can add
+   > `-l networking.knative.dev/certificate-provider!=cert-manager` to above
+   > `oc apply` command to exclude
+   > [Auto TLS feature](../serving/using-auto-tls.md) related components if you
+   > don't need this feature.
 
    > **Note**: For the v0.4.0 release and newer, the `clusterrole.yaml` file is
    > required to enable the Build and Serving components to interact with each
