@@ -179,7 +179,6 @@ Kubernetes secret and then configure the `knative-ingress-gateway`:
       configuration:
 
       ```yaml
-
       ---
       tls:
         mode: SIMPLE
