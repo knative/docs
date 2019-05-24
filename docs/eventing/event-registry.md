@@ -269,8 +269,7 @@ the next topic: How do we actually populate the registry in the first place?
   When you `kubectl apply` this yaml, the KafkaSource `kafka-source-sample` will
   be instantiated, and two EventTypes will be added to the registry (as there
   are two topics). You can see that in the registry example output from the
-  previous sections.  
-
+  previous sections.
 
 ## What's next
 
