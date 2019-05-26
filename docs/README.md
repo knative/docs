@@ -62,7 +62,7 @@ Knative is a diverse, open, and inclusive community. To get involved, see
 Your own path to becoming a Knative contributor can begin in any of the
 components below:
 
-- [serving](https://github.com/knative/serving/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Akind%2Fgood-first-issue).
+- [serving](https://github.com/knative/serving/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Akind%2Fgood-first-issue)
 - [eventing](https://github.com/knative/eventing/issues)
 - [build](https://github.com/knative/build/issues)
 - [documentation](https://github.com/knative/docs/issues)
