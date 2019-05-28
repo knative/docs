@@ -10,6 +10,10 @@ webhook.
   and a Docker Hub account configured (we'll use it for a container registry).
 - An account on [GitHub](https://github.com) with read/write access to a
   repository.
+- A public domain name available over the internet for your service to run this
+  example, if you use the repository in GitHub to send a payload to your
+  webhook service. Check the guidance on how to get one for your service
+  with your cloud provider.
 
 ## Build the sample code
 
@@ -74,20 +78,22 @@ webhook.
      name: gitwebhook
      namespace: default
    spec:
-     - containers:
-         # Replace {DOCKER_HUB_USERNAME} with your actual docker hub username
-         image: docker.io/{DOCKER_HUB_USERNAME}/gitwebhook-go
-         env:
-           - name: SECRET_TOKEN
+     template:
+       spec:
+         containers:
+         - # Replace {DOCKER_HUB_USERNAME} with your actual docker hub username
+           image: docker.io/{DOCKER_HUB_USERNAME}/gitwebhook-go:latest
+           env:
+           - name: GITHUB_PERSONAL_TOKEN
              valueFrom:
                secretKeyRef:
                  name: githubsecret
-                 key: secretToken
-           - name: ACCESS_TOKEN
+                 key: personalAccessToken
+           - name: WEBHOOK_SECRET
              valueFrom:
                secretKeyRef:
                  name: githubsecret
-                 key: accessToken
+                 key: webhookSecret
    ```
 
 1. Use `kubectl` to apply the `service.yaml` file.
