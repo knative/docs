@@ -1,6 +1,9 @@
 This sample demonstrates creating and running a simple RESTful service on
 Knative Serving. The exposed endpoint takes a stock ticker (i.e. stock symbol),
-then outputs the stock price.
+then outputs the stock price. You may look up the stock tickers [here](https://www.marketwatch.com/tools/quotes/lookup.asp). Some
+examples for valid stock tickers can be AMZN for Amazon, AAPL for Apple, MSFT
+for Microsoft, etc. 
+
 
 ## Prerequisites
 
