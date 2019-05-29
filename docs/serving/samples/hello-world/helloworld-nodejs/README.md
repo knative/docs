@@ -110,6 +110,15 @@ cd knative-docs/serving/samples/hello-world/helloworld-nodejs
    CMD [ "npm", "start" ]
    ```
 
+1. Add a `.dockerignore` file to ensure local builds cannot disrupt container builds.
+
+   ```ignore
+   Dockerfile
+   README.md
+   node_modules
+   npm-debug.log
+   ```
+
 1. Create a new file, `service.yaml` and copy the following service definition
    into the file. Make sure to replace `{username}` with your Docker Hub
    username.
