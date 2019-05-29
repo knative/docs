@@ -32,8 +32,8 @@ spec:
 
 ## Trigger
 
-A Trigger represents a desire to subscribe to events from a specific Broker. Basic
-filtering on the type and source of events is provided.
+A Trigger represents a desire to subscribe to events from a specific Broker.
+Basic filtering on the type and source of events is provided.
 
 Example:
 
@@ -95,8 +95,8 @@ If `spec.channelTemplate` is not specified:
 
 There are two ways to create a Broker:
 
-* [namespace annotation](#annotation)
-* [manual setup](#manual-setup)
+- [namespace annotation](#annotation)
+- [manual setup](#manual-setup)
 
 Normally the [namespace annotation](#annotation) is used to do this setup.
 
@@ -134,7 +134,7 @@ Then give it the needed RBAC permissions:
 ```shell
 kubectl -n default create rolebinding eventing-broker-filter \
   --clusterrole=eventing-broker-filter \
-  --user=eventing-broker-filter
+  --serviceaccount=default:eventing-broker-filter
 ```
 
 Note that the previous commands uses three different objects, all named
@@ -157,9 +157,9 @@ EOF
 
 ### Subscriber
 
-Now create a function to receive those events. This document will
-assume the following manifest describing a Knative Service is created, but it
-could be anything that is `Addressable`.
+Now create a function to receive those events. This document will assume the
+following manifest describing a Knative Service is created, but it could be
+anything that is `Addressable`.
 
 ```yaml
 apiVersion: serving.knative.dev/v1alpha1
