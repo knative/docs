@@ -2,7 +2,7 @@ A simple gRPC server written in Go that you can use for testing.
 
 ## Prerequisites
 
-- [Install the Knative Serving version 0.4 or later](../../../install/README.md).
+- [Install the latest version of Knative Serving](../../../install/README.md).
 
 - Install [docker](https://www.docker.com/).
 
@@ -22,7 +22,7 @@ First, build and publish the gRPC server to DockerHub (replacing `{username}`):
 docker build \
   --tag "docker.io/{username}/grpc-ping-go" \
   --file=docs/serving/samples/grpc-ping-go/Dockerfile .
-docker push "${REPO}/docs/serving/samples/grpc-ping-go"
+docker push "docker.io/{username}/grpc-ping-go"
 ```
 
 Next, replace `{username}` in `sample.yaml` with your DockerHub username, and
