@@ -4,7 +4,7 @@ Follow this guide to install Knative components on a platform of your choice.
 
 To get started with Knative, you need a Kubernetes cluster. If you aren't sure
 which Kubernetes platform is right for you, see
-[Picking the Right Solution](https://kubernetes.io/docs/setup/pick-right-solution/).
+[Picking the Right Solution](https://kubernetes.io/docs/setup/).
 
 We provide information for installing Knative on
 [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine/docs/),
