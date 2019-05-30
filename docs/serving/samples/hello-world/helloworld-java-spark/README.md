@@ -1,5 +1,3 @@
-# Hello World - Spark Java sample
-
 A simple web app written in Java using Spark Java Framework that you can use for
 testing.
 
