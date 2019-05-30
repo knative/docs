@@ -1,6 +1,6 @@
 ---
-title: "Hello World - Spring Boot Java"
-linkTitle: "Java (Spring)"
+title: "Hello World - Spark Java Framework"
+linkTitle: "Java (Spark)"
 weight: 1
 type: "docs"
 ---
