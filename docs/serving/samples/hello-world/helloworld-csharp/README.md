@@ -87,7 +87,7 @@ cd knative-docs/serving/samples/hello-world/helloworld-csharp
    CMD ["dotnet", "out/helloworld-csharp.dll"]
    ```
 
-1. Add a `.dockerignore` file to ensure local builds cannot disrupt container builds.
+1. Create a `.dockerignore` file to ensure that any files related to a local build, do not affect the container that you build for deployment.
 
    ```ignore
    Dockerfile
