@@ -6,11 +6,9 @@ Follow the steps below to create the sample code and then deploy the app to your
 cluster. You can also download a working copy of the sample, by running the
 following commands:
 
-    ```shell
-
+```shell
 git clone -b "release-0.6" https://github.com/knative/docs knative-docs cd
 knative-docs/serving/samples/hello-world/helloworld-java-spring
-
 ````
 
 ## Before you begin
