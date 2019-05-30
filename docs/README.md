@@ -60,12 +60,12 @@ Knative is a diverse, open, and inclusive community. To get involved, see
 [Knative community](../community/).
 
 Your own path to becoming a Knative contributor can begin in any of the
-components below:
+following components:
 
 - [serving](https://github.com/knative/serving/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Akind%2Fgood-first-issue)
-- [eventing](https://github.com/knative/eventing/issues)
-- [build](https://github.com/knative/build/issues)
-- [documentation](https://github.com/knative/docs/issues)
+- [eventing](https://github.com/knative/eventing/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Akind%2Fgood-first-issue)
+- [build](https://github.com/knative/build/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Akind%2Fgood-first-issue)
+- [documentation](https://github.com/knative/docs/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Akind%2Fgood-first-issue)
 
 [Bug reports](https://github.com/knative/serving/issues/new) and friction logs
 from new developers are especially welcome.
@@ -87,7 +87,7 @@ Follow the links below to learn more about Knative.
 - [Configuring outbound network access](./serving/outbound-network-access.md)
 - [Using a custom domain](./serving/using-a-custom-domain.md)
 - [Assigning a static IP address for Knative on Google Kubernetes Engine](./serving/gke-assigning-static-ip-address.md)
-- [Configuring HTTPS with a custom certificate](./serving/using-an-ssl-cert.md)
+- [Configuring HTTPS with a custom certificate](./serving/using-a-tls-cert.md)
 
 ### Samples and demos
 
