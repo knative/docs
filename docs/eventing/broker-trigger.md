@@ -136,10 +136,10 @@ Then give it the needed RBAC permissions:
 ```shell
 kubectl -n default create rolebinding eventing-broker-ingress \
   --clusterrole=eventing-broker-ingress \
-  --user=eventing-broker-ingress
+  --serviceaccount=default:eventing-broker-ingress
 kubectl -n default create rolebinding eventing-broker-filter \
   --clusterrole=eventing-broker-filter \
-  --user=eventing-broker-filter
+  --serviceaccount=default:eventing-broker-filter
 ```
 
 Note that the previous commands uses three different objects, all named
