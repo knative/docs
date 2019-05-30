@@ -3,39 +3,45 @@ webhook.
 
 ## Before you begin
 
-- A Kubernetes cluster with Knative installed. Follow the
-  [installation instructions](../../../install/README.md) if you need to create
-  one.
-- [Docker](https://www.docker.com) installed and running on your local machine,
-  and a Docker Hub account configured (we'll use it for a container registry).
-- An account on [GitHub](https://github.com) with read/write access to a
-  repository.
-- A public domain name available over the internet for your service to run this
-  example, if you use the repository in GitHub to send a payload to your
-  webhook service. Check the guidance on how to get one for your service
-  with your cloud provider.
+You must meet the following requirements to run this sample:
+
+- Own a public domain. For example, you can create a domain with
+  [Google Domains](https://domains.google/).
+- A Kubernetes cluster running with the following:
+  - Knative Serving must be installed. For details about
+    setting up a Knative cluster, see the
+    [installation guides](../../../install/README.md).
+  - Your Knative cluster must be 
+    [configured to use your custom domain](../../using-a-custom-domain.md).
+  - You must ensure that your Knative cluster uses a static IP address:
+    - For Google Kubernetes Engine, see 
+      [assigning a static IP address](../../gke-assigning-static-ip-address.md).
+    - For other cloud providers, refer to your provider's documentation.
+- An installed version of [Docker](https://www.docker.com).
+- A [Docker Hub account](https://hub.docker.com/) to which you are able to
+  upload your sample's container image.
 
 ## Build the sample code
 
 1. Download a copy of the code:
 
-   ```shell
-   git clone -b "release-0.6" https://github.com/knative/docs knative-docs
-   cd knative-docs/serving/samples/gitwebhook-go
-   ```
+    ```shell
+    git clone -b "release-0.6" https://github.com/knative/docs knative-docs
+    cd knative-docs/serving/samples/gitwebhook-go
+    ```
 
 1. Use Docker to build a container image for this service. Replace `username`
    with your Docker Hub username in the following commands.
 
-   ```shell
-   export DOCKER_HUB_USERNAME=username
+    ```shell
+    export DOCKER_HUB_USERNAME=username
 
-   # Build the container, run from the project folder
-   docker build -t ${DOCKER_HUB_USERNAME}/gitwebhook-go .
+    # Build the container, run from the project folder
+    docker build -t ${DOCKER_HUB_USERNAME}/gitwebhook-go .
 
-   # Push the container to the registry
-   docker push ${DOCKER_HUB_USERNAME}/gitwebhook-go
-   ```
+    # Push the container to the registry
+    docker push ${DOCKER_HUB_USERNAME}/gitwebhook-go
+    ```
 
 1. Create a secret that holds two values from GitHub, a personal access token
    used to make API requests to GitHub, and a webhook secret, used to validate
@@ -45,86 +51,110 @@ webhook.
       [create a personal access token](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/).
       Ensure to grant the `repo` permission to give `read/write` access to the
       personal access token.
+      
    1. Base64 encode the access token:
 
-      ```shell
-      $ echo -n "45d382d4a9a93c453fb7c8adc109121e7c29fa3ca" | base64
-      NDVkMzgyZDRhOWE5M2M0NTNmYjdjOGFkYzEwOTEyMWU3YzI5ZmEzY2E=
-      ```
+       ```shell
+       $ echo -n "45d382d4a9a93c453fb7c8adc109121e7c29fa3ca" | base64
+       NDVkMzgyZDRhOWE5M2M0NTNmYjdjOGFkYzEwOTEyMWU3YzI5ZmEzY2E=
+       ```
 
    1. Copy the encoded access token into `github-secret.yaml` next to
       `personalAccessToken:`.
+      
    1. Create a webhook secert value unique to this sample, base64 encode it, and
       copy it into `github-secret.yaml` next to `webhookSecret:`:
 
-      ```shell
-      $ echo -n "mygithubwebhooksecret" | base64
-      bXlnaXRodWJ3ZWJob29rc2VjcmV0
-      ```
+       ```shell
+       $ echo -n "mygithubwebhooksecret" | base64
+       bXlnaXRodWJ3ZWJob29rc2VjcmV0
+       ```
 
    1. Apply the secret to your cluster:
 
-      ```shell
-      kubectl apply --filename github-secret.yaml
-      ```
+       ```shell
+       kubectl apply --filename github-secret.yaml
+       ```
 
 1. Next, update the `service.yaml` file in the project to reference the tagged
    image from step 1.
 
-   ```yaml
-   apiVersion: serving.knative.dev/v1beta1
-   kind: Service
-   metadata:
-     name: gitwebhook
-     namespace: default
-   spec:
-     template:
-       spec:
-         containers:
-         - # Replace {DOCKER_HUB_USERNAME} with your actual docker hub username
-           image: docker.io/{DOCKER_HUB_USERNAME}/gitwebhook-go:latest
-           env:
-           - name: GITHUB_PERSONAL_TOKEN
-             valueFrom:
-               secretKeyRef:
-                 name: githubsecret
-                 key: personalAccessToken
-           - name: WEBHOOK_SECRET
-             valueFrom:
-               secretKeyRef:
-                 name: githubsecret
-                 key: webhookSecret
-   ```
+    ```yaml
+    apiVersion: serving.knative.dev/v1alpha1
+    kind: Service
+    metadata:
+      name: gitwebhook
+      namespace: default
+    spec:
+      template:
+        spec:
+          containers:
+          - # Replace {DOCKER_HUB_USERNAME} with your actual docker hub username
+            image: docker.io/{DOCKER_HUB_USERNAME}/gitwebhook-go:latest
+            env:
+            - name: GITHUB_PERSONAL_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: githubsecret
+                  key: personalAccessToken
+            - name: WEBHOOK_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: githubsecret
+                  key: webhookSecret
+    ```
 
 1. Use `kubectl` to apply the `service.yaml` file.
 
-   ```shell
-   $ kubectl apply --filename service.yaml
-   service "gitwebhook" created
-   ```
+    ```shell
+    $ kubectl apply --filename service.yaml
+    ```
+    
+    Response:
+    
+    ```shell
+    service "gitwebhook" created
+    ```
 
-1. Finally, once the service is running, create the webhook from your GitHub
-   repo to the URL for this service. For this to work properly you will need to
-   [configure a custom domain](../../using-a-custom-domain.md) and
-   [assign a static IP address](../../gke-assigning-static-ip-address.md).
+1. Create a webhook in your GitHub repo using the URL for your `gitwebhook` service:
 
    1. Retrieve the hostname for this service, using the following command:
 
-      ```shell
-      $ kubectl get ksvc gitwebhook \
-         --output=custom-columns=NAME:.metadata.name,URL:.status.url
-      NAME          URL
-      gitwebhook    http://gitwebhook.default.example.com
-      ```
+       ```shell
+       $ kubectl get ksvc gitwebhook \
+          --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+       ```
+       
+       Example response:
+       
+       ```shell
+       NAME                DOMAIN
+       gitwebhook          gitwebhook.default.MYCUSTOMDOMAIN.com
+       ```
+       
+       where `MYCUSTOMDOMAIN` is the domain that you set as your
+       [custom domain](../../using-a-custom-domain.md).
 
-   1. Browse on GitHub to the repository where you want to create a webhook.
-   1. Click **Settings**, then **Webhooks**, then **Add webhook**.
-   1. Fill in **Payload URL** with the value of URL listed above.
+   1. Go to the GitHub repository for which you have privileges to create a
+      webhook.
+   
+   1. Click **Settings** > **Webhooks** > **Add webhook** to open the Webhooks
+      page.
+   
+   1. Enter the **Payload URL** as `http://{DOMAIN}`, where `{DOMAIN}` is the
+      address from the `kubectl get ksvc gitwebhook` command. 
+      For example: `http://gitwebhook.default.MYCUSTOMDOMAIN.com`
+
    1. Set the **Content type** to `application/json`.
-   1. Enter the **Secret** value to be the same as the original base used for
-      `webhookSecret` above (the original value, not the base64 encoded value).
-   1. Select **Disable** under SSL Validation, unless you've
-      [enabled SSL](../../using-an-ssl-cert.md).
+   
+   1. Enter your webhook secret in **Secret** using the original base value that
+      you set in `webhookSecret` (not the base64 encoded value). For example:
+      `mygithubwebhooksecret`
+      
+   1. If you did not
+      [enabled TLS certificates](../../using-a-tls-cert.md),
+      click **Disable** under **SSL Validation**.
+      
    1. Click **Add webhook** to create the webhook.
 
 ## Exploring
