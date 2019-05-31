@@ -11,7 +11,7 @@ focus on solving mundane but difficult tasks such as:
 
 - [Deploying a container](./install/getting-started-knative-app.md)
 - [Routing and managing traffic with blue/green deployment](./serving/samples/blue-green-deployment.md)
-- [Scaling automatically and sizing workloads based on demand](./serving/samples/autoscale-go/)
+- [Scaling automatically and sizing workloads based on demand](./serving/configuring-the-autoscaler.md)
 - [Binding running services to eventing ecosystems](./eventing/samples/kubernetes-event-source/)
 
 Developers on Knative can use familiar idioms, languages, and frameworks to
