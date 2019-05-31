@@ -57,6 +57,14 @@ cd knative-docs/serving/samples/hello-world/helloworld-php
    RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
    ```
 
+1. Create a `.dockerignore` file to ensure that any files related to a local build do not affect the container that you build for deployment.
+
+   ```ignore
+   Dockerfile
+   README.md
+   vendor
+   ```
+
 1. Create a new file, `service.yaml` and copy the following service definition
    into the file. Make sure to replace `{username}` with your Docker Hub
    username.

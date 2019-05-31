@@ -87,6 +87,15 @@ cd knative-docs/serving/samples/hello-world/helloworld-csharp
    CMD ["dotnet", "out/helloworld-csharp.dll"]
    ```
 
+1. Create a `.dockerignore` file to ensure that any files related to a local build do not affect the container that you build for deployment.
+
+   ```ignore
+   Dockerfile
+   README.md
+   **/obj/
+   **/bin/
+   ```
+
 1. Create a new file, `service.yaml` and copy the following service definition
    into the file. Make sure to replace `{username}` with your Docker Hub
    username.
