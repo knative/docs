@@ -1,7 +1,11 @@
-<!-- Add metadata as included for other files -->
-# Autoscaling
+# Configuring the Autoscaler
+---
+title: "Configuring the Autoscaler"
+weight: 10
+type: "docs"
+---
 
-Since Knative v0.2, per revision autoscalers have been replaced by a single shared autoscaler. This is, by default, the Knative Pod Autoscaler (KPA), which provides fast, request based autoscaling capabilities out of the box.
+Since Knative v0.2, per revision autoscalers have been replaced by a single shared autoscaler. This is, by default, the Knative Pod Autoscaler (KPA), which provides fast, request-based autoscaling capabilities out of the box.
 
 ## Configuring Knative Pod Autoscaler
 
@@ -97,7 +101,7 @@ containerConcurrency: 0 | 1 | 2-N
 
 If there is no `/target` annotation, the autoscaler is configured as if `/target` == `containerConcurrency`.
 
-## Configuring CPU based autoscaling
+## Configuring CPU-based autoscaling
 
 **NOTE:** You can configure Knative autoscaling to work with either the default KPA or a CPU based metric, i.e. Horizontal Pod Autoscaler (HPA), however scale-to-zero capabilities are only supported for KPA.
 
@@ -111,4 +115,4 @@ autoscaling.knative.dev/class: hpa.autoscaling.knative.dev
 ## Additional resources
 
 - [Go autoscaling sample](https://knative.dev/docs/serving/samples/autoscale-go/index.html)
-- Knative v0.3 Autoscaling  - A Love Story [blog post](https://medium.com/knative/knative-v0-3-autoscaling-a-love-story-d6954279a67a)
+- [Knative v0.3 Autoscaling  - A Love Story blog post](https://medium.com/knative/knative-v0-3-autoscaling-a-love-story-d6954279a67a)
