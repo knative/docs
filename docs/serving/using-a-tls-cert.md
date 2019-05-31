@@ -4,7 +4,7 @@ linkTitle: "Configuring HTTPS connections"
 weight: 60
 type: "docs"
 aliases:
-  - /docs/serving/using-a-ssl-cert/
+  - /docs/serving/using-an-ssl-cert/
 ---
 
 Learn how to configure secure HTTPS connections in Knative using TLS
