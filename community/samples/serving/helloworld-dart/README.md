@@ -22,15 +22,7 @@ be created using the following instructions.
 1. Create a new directory and write `pubspec.yaml` as follows:
 
    ```yaml
-   name: hello_world_dart
-   publish_to: none # let's not accidentally publish this to pub.dartlang.org
-   description: Hello world server example in Dart
-
-   environment:
-     sdk: ">=2.1.0 <3.0.0"
-
-   dependencies:
-     shelf: ^0.7.3
+   {{readFile "pubspec.yaml"}}
    ```
 
 2. If you want to run locally, install dependencies. If you only want to run in
@@ -43,37 +35,14 @@ be created using the following instructions.
 3. Create a new file `bin/server.dart` and write the following code:
 
    ```dart
-   import 'dart:io';
-
-   import 'package:shelf/shelf.dart';
-   import 'package:shelf/shelf_io.dart';
-
-   Future main() async {
-     // Find port to listen on from environment variable.
-     var port = int.tryParse(Platform.environment['PORT'] ?? '8080');
-
-     // Read $TARGET from environment variable.
-     var target = Platform.environment['TARGET'] ?? 'World';
-
-     Response handler(Request request) => Response.ok('Hello $target');
-
-     // Serve handler on given port.
-     var server = await serve(
-       Pipeline().addMiddleware(logRequests()).addHandler(handler),
-       InternetAddress.anyIPv4,
-       port,
-     );
-     print('Serving at http://${server.address.host}:${server.port}');
-   }
+   {{readFile "bin/server.dart"}}
    ```
 
 4. Create a new file named `Dockerfile`, this file defines instructions for
    dockerizing your applications, for dart apps this can be done as follows:
 
    ```Dockerfile
-   # Use Google's official Dart image.
-   # https://hub.docker.com/r/google/dart-runtime/
-   FROM google/dart-runtime
+   {{readFile "Dockerfile"}}
    ```
 
 5. Create a new file, `service.yaml` and copy the following service definition
@@ -81,21 +50,7 @@ be created using the following instructions.
    username.
 
    ```yaml
-   apiVersion: serving.knative.dev/v1alpha1
-   kind: Service
-   metadata:
-     name: helloworld-dart
-     namespace: default
-   spec:
-     runLatest:
-       configuration:
-         revisionTemplate:
-           spec:
-             container:
-               image: docker.io/{username}/helloworld-dart
-               env:
-                 - name: TARGET
-                   value: "Dart Sample v1"
+   {{readFile "service.yaml"}}
    ```
 
 ## Building and deploying the sample
