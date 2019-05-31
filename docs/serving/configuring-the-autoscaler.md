@@ -1,4 +1,3 @@
-# Configuring the Autoscaler
 ---
 title: "Configuring the Autoscaler"
 weight: 10
