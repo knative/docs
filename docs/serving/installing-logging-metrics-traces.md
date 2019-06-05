@@ -23,9 +23,8 @@ sections to do so now.
    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.6.0/monitoring-metrics-prometheus.yaml
    ```
 
-1. Ensure that the `grafana-*`, `kibana-logging-*`, `kube-state-metrics-*`,
-   `node-exporter-*` and `prometheus-system-*` pods all report a `Running`
-   status:
+1. Ensure that the `grafana-*`, `kube-state-metrics-*`, `node-exporter-*`
+   and `prometheus-system-*` pods all report a `Running` status:
 
    ```shell
    kubectl get pods --namespace knative-monitoring --watch
@@ -36,7 +35,6 @@ sections to do so now.
    ```text
    NAME                                  READY     STATUS    RESTARTS   AGE
    grafana-798cf569ff-v4q74              1/1       Running   0          2d
-   kibana-logging-7d474fbb45-6qb8x       1/1       Running   0          2d
    kube-state-metrics-75bd4f5b8b-8t2h2   4/4       Running   0          2d
    node-exporter-cr6bh                   2/2       Running   0          2d
    node-exporter-mf6k7                   2/2       Running   0          2d
