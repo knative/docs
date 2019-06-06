@@ -32,7 +32,7 @@ collecting `stdout/stderr` logs from the containers:
    with the desired output configuration. Knative provides a sample for sending
    logs to Elasticsearch or Stackdriver. Developers can simply use
    `100-fluentd-configmap.yaml` or override any with other configuration.
-2. Replace the `image` field of `fluentd-ds` container of `flunetd-ds` DaemonSet
+2. Replace the `image` field of `fluentd-ds` container of `fluentd-ds` DaemonSet
    in
    [200-fluentd.yaml](https://github.com/knative/serving/blob/master/config/monitoring/logging/elasticsearch/200-fluentd.yaml)
    with the Fluentd image including the desired Fluentd output plugin. See
