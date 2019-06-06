@@ -248,12 +248,6 @@ To enable Knative to automatically provision TLS certificates:
         kubectl get configmap config-network --namespace knative-serving --output yaml
         ```
 
-1.  Ensure that the file was updated successfully:
-
-```shell
- kubectl get configmap config-network --namespace knative-serving --output yaml
-```
-
 Congratulations! Knative is now configured to obtain and renew TLS certificates.
 When your TLS certificate is active on your cluster, your Knative services will
 be able to handle HTTPS traffic.
