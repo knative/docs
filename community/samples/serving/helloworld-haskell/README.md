@@ -114,15 +114,13 @@ recreate the source files from this folder.
      name: helloworld-haskell
      namespace: default
    spec:
-     runLatest:
-       configuration:
-         revisionTemplate:
-           spec:
-             container:
-               image: docker.io/{username}/helloworld-haskell
-               env:
-                 - name: TARGET
-                   value: "Haskell Sample v1"
+     template:
+       spec:
+         containers:
+           - image: docker.io/{username}/helloworld-haskell
+             env:
+               - name: TARGET
+                 value: "Haskell Sample v1"
    ```
 
 ## Build and deploy this sample
