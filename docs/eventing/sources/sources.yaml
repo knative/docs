@@ -28,13 +28,13 @@ metaSources:
 # Sources are event sources that users can install and use directly.
 sources:
   - name: Apache Camel
-    url: https://github.com/knative/eventing-sources/blob/master/contrib/camel/pkg/apis/sources/v1alpha1/camelsource_types.go
+    url: https://github.com/knative/eventing-contrib/blob/master/contrib/camel/pkg/apis/sources/v1alpha1/camelsource_types.go
     status: Proof of Concept
     support: None
     description: >
       Allows to use [Apache Camel](https://github.com/apache/camel) components for pushing events into Knative.
   - name: AWS SQS
-    url: https://github.com/knative/eventing-sources/blob/master/pkg/apis/sources/v1alpha1/aws_sqs_types.go
+    url: https://github.com/knative/eventing-contrib/blob/master/pkg/apis/sources/v1alpha1/aws_sqs_types.go
     status: Proof of Concept
     support: None
     description: >
@@ -46,13 +46,13 @@ sources:
     description: >
       Uses an in-memory timer to produce events on the specified Cron schedule.
   - name: GCP PubSub
-    url: https://github.com/knative/eventing-sources/blob/master/contrib/gcppubsub/pkg/apis/sources/v1alpha1/gcp_pubsub_types.go
+    url: https://github.com/knative/eventing-contrib/blob/master/contrib/gcppubsub/pkg/apis/sources/v1alpha1/gcp_pubsub_types.go
     status: Proof of Concept
     support: None
     description: >
       Brings [GCP PubSub](https://cloud.google.com/pubsub/) messages into Knative.
   - name: GitHub
-    url: https://github.com/knative/eventing-sources/blob/master/pkg/apis/sources/v1alpha1/githubsource_types.go
+    url: https://github.com/knative/eventing-contrib/blob/master/pkg/apis/sources/v1alpha1/githubsource_types.go
     status: Proof of Concept
     support: None
     description: >
@@ -73,7 +73,7 @@ sources:
       Registers for events of the specified types on the specified BitBucket organization/repository.
       Brings those events into Knative.
   - name: Kubernetes
-    url: https://github.com/knative/eventing-sources/blob/master/pkg/apis/sources/v1alpha1/kuberneteseventsource_types.go
+    url: https://github.com/knative/eventing-contrib/blob/master/pkg/apis/sources/v1alpha1/kuberneteseventsource_types.go
     status: Active Development
     support: Knative
     description: >
@@ -94,7 +94,7 @@ sources:
       Registers for events of the specified types on the specified Google Cloud Storage bucket and
       optional object prefix. Brings those events into Knative.
   - name: Apache Kafka
-    url: https://github.com/knative/eventing-sources/blob/master/contrib/kafka/pkg/apis/sources/v1alpha1/kafka_types.go
+    url: https://github.com/knative/eventing-contrib/blob/master/contrib/kafka/pkg/apis/sources/v1alpha1/kafka_types.go
     status: Proof of Concept
     support: None
     description: >
@@ -103,13 +103,13 @@ sources:
 # These are containers intended to be used with ContainerSource, but are not CRDs.
 containers:
   - name: Heartbeats
-    url: https://github.com/knative/eventing-sources/tree/master/cmd/heartbeats
+    url: https://github.com/knative/eventing-contrib/tree/master/cmd/heartbeats
     status: Proof of Concept
     support: None
     description: >
       Uses an in-memory timer to produce events at the specified interval.
   - name: WebSocket
-    url: https://github.com/knative/eventing-sources/tree/master/cmd/websocketsource
+    url: https://github.com/knative/eventing-contrib/tree/master/cmd/websocketsource
     status: Active Development
     support: None
     description: >
