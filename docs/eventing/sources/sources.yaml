@@ -94,7 +94,7 @@ sources:
       Registers for events of the specified types on the specified Google Cloud Storage bucket and
       optional object prefix. Brings those events into Knative.
   - name: Apache Kafka
-    url: https://github.com/knative/eventing-contrib/blob/master/contrib/kafka/pkg/apis/sources/v1alpha1/kafka_types.go
+    url: https://github.com/knative/eventing-contrib/blob/master/kafka/source/pkg/apis/sources/v1alpha1/kafka_types.go
     status: Proof of Concept
     support: None
     description: >

@@ -29,7 +29,7 @@ Name | Status | Support | Description
 --- | --- | --- | ---
 [AWS SQS](https://github.com/knative/eventing-contrib/blob/master/pkg/apis/sources/v1alpha1/aws_sqs_types.go) | Proof of Concept | None | Brings [AWS Simple Queue Service](https://aws.amazon.com/sqs/) messages into Knative.
 [Apache Camel](https://github.com/knative/eventing-contrib/blob/master/contrib/camel/pkg/apis/sources/v1alpha1/camelsource_types.go) | Proof of Concept | None | Allows to use [Apache Camel](https://github.com/apache/camel) components for pushing events into Knative.
-[Apache Kafka](https://github.com/knative/eventing-contrib/blob/master/contrib/kafka/pkg/apis/sources/v1alpha1/kafka_types.go) | Proof of Concept | None | Brings [Apache Kafka](https://kafka.apache.org/) messages into Knative.
+[Apache Kafka](https://github.com/knative/eventing-contrib/blob/master/kafka/source/pkg/apis/sources/v1alpha1/kafka_types.go) | Proof of Concept | None | Brings [Apache Kafka](https://kafka.apache.org/) messages into Knative.
 [BitBucket](https://github.com/nachocano/bitbucket-source) | Proof of Concept | None | Registers for events of the specified types on the specified BitBucket organization/repository. Brings those events into Knative.
 [Cron Job](https://github.com/knative/eventing/blob/master/pkg/apis/sources/v1alpha1/cron_job_types.go) | Proof of Concept | None | Uses an in-memory timer to produce events on the specified Cron schedule.
 [GCP PubSub](https://github.com/knative/eventing-contrib/blob/master/contrib/gcppubsub/pkg/apis/sources/v1alpha1/gcp_pubsub_types.go) | Proof of Concept | None | Brings [GCP PubSub](https://cloud.google.com/pubsub/) messages into Knative.
