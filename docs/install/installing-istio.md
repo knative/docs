@@ -32,7 +32,7 @@ installation you want, read through the options and choose the installation that
 suits your needs.
 
 You can easily customize your Istio installation with `helm`. The below sections
-cover a few useful Istio configurations and their benefits. 
+cover a few useful Istio configurations and their benefits.
 
 ### Choosing an Istio installation
 
@@ -172,7 +172,7 @@ Install Istio with [Secret Discovery Service (SDS)][3] to enable a few additiona
 configurations for the gateway TLS. This will allow you to:
 
 - Dynamically update the gateway TLS with multiple TLS certificates to terminate
-  TLS connections. 
+  TLS connections.
 
 - Use [Auto TLS](../serving/using-auto-tls.md).
 
@@ -182,7 +182,7 @@ The below `helm` flag is needed in your `helm` command to enable `SDS`:
 --set gateways.istio-ingressgateway.sds.enabled=true
 ```
 
-Enter the following command to install Istio with ingress `SDS` and 
+Enter the following command to install Istio with ingress `SDS` and
 automatic sidecar injection:
 
 ```shell
@@ -216,11 +216,11 @@ helm template --namespace=istio-system \
 
 ### Updating your install to use cluster local gateway
 
-If you want your Routes to be visible only inside the cluster, you may
-want to enable [cluster local routes](../docs/serving/cluster-local-route.md).
-To use this feature, add an extra Istio cluster local gateway to your cluster.
-Enter the following command to add the cluster local gateway to an existing
-Istio installation:
+If you want your Routes to be visible only inside the cluster, you may want to
+enable [cluster local routes](../../docs/serving/cluster-local-route.md). To use
+this feature, add an extra Istio cluster local gateway to your cluster. Enter
+the following command to add the cluster local gateway to an existing Istio
+installation:
 
 ```shell
 # Add the extra gateway.
