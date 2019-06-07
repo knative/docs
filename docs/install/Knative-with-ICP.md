@@ -189,7 +189,7 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
    ```
 
    ```shell
-   curl -L https://github.com/knative/eventing-sources/releases/download/v0.6.0/eventing-sources.yaml \
+   curl -L https://github.com/knative/eventing-contrib/releases/download/v0.6.0/eventing-sources.yaml \
      | sed 's/LoadBalancer/NodePort/' \
      | kubectl apply --filename -
    ```
@@ -285,7 +285,7 @@ curl -L https://github.com/knative/eventing/releases/download/v0.6.0/release.yam
 ```
 
 ```shell
-curl -L https://github.com/knative/eventing-sources/releases/download/v0.6.0/eventing-sources.yaml \
+curl -L https://github.com/knative/eventing-contrib/releases/download/v0.6.0/eventing-sources.yaml \
  | sed 's/LoadBalancer/NodePort/' \
  | kubectl delete --filename -
 ```

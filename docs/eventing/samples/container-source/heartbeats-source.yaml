@@ -4,7 +4,7 @@ metadata:
   name: test-heartbeats
 spec:
   # This corresponds to a heartbeats image uri you build and publish,
-  # e.g. gcr.io/[gcloud-project]/github.com/knative/eventing-sources/cmd/heartbeats
+  # e.g. gcr.io/[gcloud-project]/github.com/knative/eventing-contrib/cmd/heartbeats
   image: index.docker.io/daisyycguo/heartbeats-6790335e994243a8d3f53b967cdd6398
   args: 
     - --period=1
