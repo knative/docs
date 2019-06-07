@@ -24,6 +24,6 @@ function knative_setup() {
 
 initialize $@
 
-go_test_e2e ./test/e2e || fail_test
+go_test_e2e -timeout=20m ./test/e2e || fail_test
 
 success
