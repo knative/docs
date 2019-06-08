@@ -327,22 +327,21 @@ function report_go_test() {
   return ${failed}
 }
 
-# Install the latest stable Knative/serving in the current cluster.
-function start_latest_knative_serving() {
+# Install Knative Serving in the current cluster.
+# Parameters: $1 - Knative Serving manifest.
+function start_knative_serving() {
   header "Starting Knative Serving"
   subheader "Installing Knative Serving"
-  echo "Installing Serving from ${KNATIVE_SERVING_RELEASE}"
-  # Some CRDs defined in serving YAML are also referenced by other components in serving. As it takes
-  # time for CRDs to become effective, there is a race condition between when the CRDs are effective
-  # and when the resources that references those CRDs are created.
-  # The current workaround is to re-apply serving.yaml if it fails. Remove the retry logic after the
-  # race condition is fixed. (https://github.com/knative/serving/issues/4176)
-  if ! kubectl apply -f ${KNATIVE_SERVING_RELEASE}; then
-    echo "Install failed, waiting 60s and then retrying..."
-    sleep 60
-    kubectl apply -f ${KNATIVE_SERVING_RELEASE} || return 1
-  fi
+  echo "Installing Serving CRDs from $1"
+  kubectl apply --selector knative.dev/crd-install=true -f "$1"
+  echo "Installing the rest of serving components from $1"
+  kubectl apply -f "$1"
   wait_until_pods_running knative-serving || return 1
+}
+
+# Install the latest stable Knative Serving in the current cluster.
+function start_latest_knative_serving() {
+  start_knative_serving "${KNATIVE_SERVING_RELEASE}"
 }
 
 # Run a go tool, installing it first if necessary.
@@ -475,21 +474,32 @@ function get_canonical_path() {
   echo "$(cd ${path%/*} && echo $PWD/${path##*/})"
 }
 
-# Return the base url we use to build the actual knative yaml sources.
-function get_knative_base_yaml_source() {
-  local knative_base_yaml_source="https://storage.googleapis.com/knative-nightly/@/latest"
+# Returns the URL to the latest manifest for the given Knative project.
+# Parameters: $1 - repository name of the given project
+#             $2 - name of the yaml file, without extension
+function get_latest_knative_yaml_source() {
   local branch_name=""
+  local repo_name="$1"
+  local yaml_name="$2"
   # Get the branch name from Prow's env var, see https://github.com/kubernetes/test-infra/blob/master/prow/jobs.md.
   # Otherwise, try getting the current branch from git.
   (( IS_PROW )) && branch_name="${PULL_BASE_REF:-}"
   [[ -z "${branch_name}" ]] && branch_name="$(git rev-parse --abbrev-ref HEAD)"
-  # If it's a release branch, base URL should point to a specific version.
+  # If it's a release branch, the yaml source URL should point to a specific version.
   if [[ ${branch_name} =~ ^release-[0-9\.]+$ ]]; then
     # Get the latest tag name for the current branch, which is likely formatted as v0.5.0
     local tag_name="$(git describe --tags --abbrev=0)"
-    knative_base_yaml_source="https://storage.googleapis.com/knative-releases/@/previous/${tag_name}"
+    # The given repo might not have this tag, so we need to find its latest release manifest with the same major&minor version.
+    local major_minor="$(echo ${tag_name} | cut -d. -f1-2)"
+    local yaml_source_path="$(gsutil ls gs://knative-releases/${repo_name}/previous/${major_minor}.*/${yaml_name}.yaml \
+      | sort \
+      | tail -n 1 \
+      | cut -b6-)"
+    echo "https://storage.googleapis.com/${yaml_source_path}"
+  # If it's not a release branch, the yaml source URL should be nightly build.
+  else
+    echo "https://storage.googleapis.com/knative-nightly/${repo_name}/latest/${yaml_name}.yaml"
   fi
-  echo "${knative_base_yaml_source}"
 }
 
 # Initializations that depend on previous functions.
@@ -499,7 +509,6 @@ readonly _TEST_INFRA_SCRIPTS_DIR="$(dirname $(get_canonical_path ${BASH_SOURCE[0
 readonly REPO_NAME_FORMATTED="Knative $(capitalize ${REPO_NAME//-/})"
 
 # Public latest nightly or release yaml files.
-readonly KNATIVE_BASE_YAML_SOURCE="$(get_knative_base_yaml_source)"
-readonly KNATIVE_SERVING_RELEASE="${KNATIVE_BASE_YAML_SOURCE/@/serving}/serving.yaml"
-readonly KNATIVE_BUILD_RELEASE="${KNATIVE_BASE_YAML_SOURCE/@/build}/build.yaml"
-readonly KNATIVE_EVENTING_RELEASE="${KNATIVE_BASE_YAML_SOURCE/@/eventing}/release.yaml"
+readonly KNATIVE_SERVING_RELEASE="$(get_latest_knative_yaml_source "serving" "serving")"
+readonly KNATIVE_BUILD_RELEASE="$(get_latest_knative_yaml_source "build" "build")"
+readonly KNATIVE_EVENTING_RELEASE="$(get_latest_knative_yaml_source "eventing" "release")"

@@ -201,7 +201,7 @@ function create_test_cluster() {
   [[ -n "${E2E_SCRIPT_CUSTOM_FLAGS[@]}" ]] && test_cmd_args+=" ${E2E_SCRIPT_CUSTOM_FLAGS[@]}"
   local extra_flags=()
   # If using boskos, save time and let it tear down the cluster
-  (( ! IS_BOSKOS )) && extra_flags+=(--down)
+  #(( ! IS_BOSKOS )) && extra_flags+=(--down)
   create_test_cluster_with_retries "${CLUSTER_CREATION_ARGS[@]}" \
     --up \
     --extract "${E2E_CLUSTER_VERSION}" \
@@ -262,7 +262,8 @@ function create_test_cluster_with_retries() {
       # - stockout (https://github.com/knative/test-infra/issues/592)
       # - latest GKE not available in this region/zone yet (https://github.com/knative/test-infra/issues/694)
       [[ -z "$(grep -Fo 'does not have enough resources available to fulfill' ${cluster_creation_log})" \
-          && -z "$(grep -Fo 'ResponseError: code=400, message=No valid versions with the prefix' ${cluster_creation_log})" ]] \
+          && -z "$(grep -Fo 'ResponseError: code=400, message=No valid versions with the prefix' ${cluster_creation_log})" \
+          && -z "$(grep -Po 'ResponseError: code=400, message=Master version "[0-9a-z\-\.]+" is unsupported' ${cluster_creation_log})" ]] \
           && return 1
     done
   done
@@ -300,6 +301,10 @@ function setup_test_cluster() {
     export KO_DOCKER_REPO=gcr.io/${E2E_PROJECT_ID}/${E2E_BASE_NAME}-e2e-img
   fi
 
+  # Safety checks
+  is_protected_gcr ${KO_DOCKER_REPO} && \
+    abort "\$KO_DOCKER_REPO set to ${KO_DOCKER_REPO}, which is forbidden"
+
   echo "- Project is ${E2E_PROJECT_ID}"
   echo "- Cluster is ${k8s_cluster}"
   echo "- User is ${k8s_user}"
@@ -307,7 +312,7 @@ function setup_test_cluster() {
 
   export KO_DATA_PATH="${REPO_ROOT_DIR}/.git"
 
-  trap teardown_test_resources EXIT
+  #trap teardown_test_resources EXIT
 
   # Handle failures ourselves, so we can dump useful info.
   set +o errexit
@@ -422,10 +427,6 @@ function initialize() {
   fi
 
   (( IS_PROW )) && [[ -z "${GCP_PROJECT}" ]] && IS_BOSKOS=1
-
-  # Safety checks
-  is_protected_gcr ${KO_DOCKER_REPO} && \
-    abort "\$KO_DOCKER_REPO set to ${KO_DOCKER_REPO}, which is forbidden"
 
   (( SKIP_ISTIO_ADDON )) || GKE_ADDONS="--addons=Istio"
 
