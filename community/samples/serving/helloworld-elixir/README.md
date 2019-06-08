@@ -179,10 +179,10 @@ above.
 1.  To find the URL for your service, use
 
     ```
-    kubectl get ksvc helloworld-elixir --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+    kubectl get ksvc helloworld-elixir --output=custom-columns=NAME:.metadata.name,URL:.status.url
 
-    NAME                DOMAIN
-    helloworld-elixir   helloworld-elixir.default.example.com
+    NAME                URL
+    helloworld-elixir   http://helloworld-elixir.default.example.com
     ```
 
 1.  Now you can make a request to your app to see the results. Replace

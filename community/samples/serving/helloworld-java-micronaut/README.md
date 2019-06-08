@@ -276,14 +276,14 @@ To verify that your sample app has been successfully deployed:
    command:
 
    ```shell
-   kubectl get services.serving.knative.dev helloworld-java-micronaut  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+   kubectl get services.serving.knative.dev helloworld-java-micronaut  --output=custom-columns=NAME:.metadata.name,URL:.status.url
    ```
 
    Example result:
 
    ```shell
-   NAME                          DOMAIN
-   helloworld-java-micronaut     helloworld-java-micronaut.default.example.com
+   NAME                          URL
+   helloworld-java-micronaut     http://helloworld-java-micronaut.default.example.com
    ```
 
 1. Run the following `curl` command to test your deployed sample app. You must

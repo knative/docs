@@ -232,14 +232,14 @@ http://192.168.99.230:31864
 Run the following command to find the domain URL for your service:
 
 ```bash
-kubectl get ksvc helloworld-go -n default  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+kubectl get ksvc helloworld-go -n default  --output=custom-columns=NAME:.metadata.name,URL:.status.url
 ```
 
 Example:
 
 ```bash
-NAME                DOMAIN
-helloworld-go       helloworld-go.default.example.com
+NAME                URL
+helloworld-go       http://helloworld-go.default.example.com
 ```
 
 Test your app by sending it a request. Use the following `curl` command with the
