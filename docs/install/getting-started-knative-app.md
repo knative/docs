@@ -53,12 +53,6 @@ metadata:
   name: helloworld-go # The name of the app
   namespace: default # The namespace the app will use
 spec:
-apiVersion: serving.knative.dev/v1alpha1 # Current version of Knative
-kind: Service
-metadata:
-  name: helloworld-go # The name of the app
-  namespace: default # The namespace the app will use
-spec:
   runLatest:
     configuration:
       revisionTemplate:
