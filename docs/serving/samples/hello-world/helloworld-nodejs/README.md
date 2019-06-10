@@ -197,9 +197,9 @@ folder) you're ready to build and deploy the sample app.
 1. To find the URL for your service, use
 
    ```
-   kubectl get ksvc helloworld-nodejs  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
-   NAME                DOMAIN
-   helloworld-nodejs   helloworld-nodejs.default.example.com
+   kubectl get ksvc helloworld-nodejs  --output=custom-columns=NAME:.metadata.name,URL:.status.url
+   NAME                URL
+   helloworld-nodejs   http://helloworld-nodejs.default.example.com
    ```
 
 1. Now you can make a request to your app to see the result. Replace

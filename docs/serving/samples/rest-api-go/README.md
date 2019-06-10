@@ -187,11 +187,12 @@ variables in the following steps.
      echo $INGRESS_IP
      ```
 
-2. Get the hostname of the service:
+2. Get the URL of the service:
 
    ```shell
-   export SERVICE_HOSTNAME=`kubectl get ksvc stock-service-example --output jsonpath="{.status.domain}"`
-   echo $SERVICE_HOSTNAME
+   kubectl get ksvc stock-service-example  --output=custom-columns=NAME:.metadata.name,URL:.status.url
+   NAME                    URL
+   stock-service-example   http://stock-service-example.default.example.com
    ```
 
 3. Send requests to the service using `curl`:
@@ -205,7 +206,7 @@ variables in the following steps.
       the ingress gateway IP.
 
       ```shell
-      curl --header "Host:$SERVICE_HOSTNAME" http://${INGRESS_IP}
+      curl --header "Host:stock-service-example.default.example.com" http://${INGRESS_IP}
       ```
 
       Response body: `Welcome to the stock app!`
@@ -213,7 +214,7 @@ variables in the following steps.
    2. Send a request to the `/stock` endpoint:
 
       ```shell
-      curl --header "Host:$SERVICE_HOSTNAME" http://${INGRESS_IP}/stock
+      curl --header "Host:stock-service-example.default.example.com" http://${INGRESS_IP}/stock
       ```
 
       Response body: `stock ticker not found!, require /stock/{ticker}`
@@ -222,7 +223,7 @@ variables in the following steps.
       "[stock symbol](https://www.marketwatch.com/tools/quotes/lookup.asp)":
 
       ```shell
-      curl --header "Host:$SERVICE_HOSTNAME" http://${INGRESS_IP}/stock/<SYMBOL>
+      curl --header "Host:stock-service-example.default.example.com" http://${INGRESS_IP}/stock/<SYMBOL>
       ```
 
       where `<SYMBOL>` is your "stock symbol".
@@ -234,7 +235,7 @@ variables in the following steps.
       Request:
 
       ```shell
-      curl --header "Host:$SERVICE_HOSTNAME" http://${INGRESS_IP}/stock/FAKE
+      curl --header "Host:stock-service-example.default.example.com" http://${INGRESS_IP}/stock/FAKE
       ```
 
       Response: `stock price for ticker FAKE is 0.00`

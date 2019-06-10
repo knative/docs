@@ -140,16 +140,18 @@ export GATEWAY_IP=`kubectl get svc $INGRESSGATEWAY --namespace istio-system \
     --output jsonpath="{.status.loadBalancer.ingress[*]['ip']}"`
 ```
 
-2. Find the `Search` service route and export as an environment variable:
+2. Find the `Search` service URL with:
 
 ```shell
-export SERVICE_HOST=`kubectl get route search-service --output jsonpath="{.status.domain}"`
+# kubectl get route search-service  --output=custom-columns=NAME:.metadata.name,URL:.status.url
+NAME              URL
+search-service    http://search-service.default.example.com
 ```
 
 3. Make a curl request to the service:
 
 ```shell
-curl http://${GATEWAY_IP} --header "Host:${SERVICE_HOST}"
+curl http://${GATEWAY_IP} --header "Host:search-service.default.example.com"
 ```
 
 You should see: `Search Service is called !`
@@ -157,11 +159,7 @@ You should see: `Search Service is called !`
 4. Similarly, you can also directly access "Login" service with:
 
 ```shell
-export SERVICE_HOST=`kubectl get route login-service --output jsonpath="{.status.domain}"`
-```
-
-```shell
-curl http://${GATEWAY_IP} --header "Host:${SERVICE_HOST}"
+curl http://${GATEWAY_IP} --header "Host:login-service.default.example.com"
 ```
 
 You should see: `Login Service is called !`

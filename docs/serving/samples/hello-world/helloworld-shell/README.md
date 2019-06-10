@@ -152,14 +152,14 @@ folder) you're ready to build and deploy the sample app.
 1. Run the following command to find the domain URL for your service:
 
    ```shell
-   kubectl get ksvc helloworld-shell  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+   kubectl get ksvc helloworld-shell  --output=custom-columns=NAME:.metadata.name,URL:.status.url
    ```
 
    Example:
 
    ```shell
-   NAME                DOMAIN
-   helloworld-shell       helloworld-shell.default.example.com
+   NAME                URL
+   helloworld-shell    http://helloworld-shell.default.example.com
    ```
 
 1. Test your app by sending it a request. Use the following `curl` command with
