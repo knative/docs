@@ -4,10 +4,13 @@ metadata:
   name: helloworld-go
   namespace: default
 spec:
-  template:
-    spec:
-      containers:
-      - image: docker.io/{username}/helloworld-go
-        env:
-        - name: TARGET
-          value: "Go Sample v1"
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            image: docker.io/{username}/helloworld-go
+            env:
+            - name: TARGET
+              value: "Go Sample v1"
+
