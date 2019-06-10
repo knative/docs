@@ -157,7 +157,7 @@ func checkDeployment(t *testing.T, appName, expectedOutput string) {
 		t.Fatalf("Ingress not found (ingress='%s', host='%s')", ingressAddr, serviceHost)
 	}
 	t.Logf("Curling %s/%s", ingressAddr, serviceHost)
-	
+
 	serviceHost = strings.Replace(serviceHost, "http://", "", 1)
 	outputString := ""
 	timeout = servingTimeout
