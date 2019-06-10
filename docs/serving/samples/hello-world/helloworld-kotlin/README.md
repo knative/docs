@@ -212,10 +212,10 @@ folder) you're ready to build and deploy the sample app.
 1. To find the URL for your service, use
 
    ```shell
-   kubectl get ksvc helloworld-kotlin  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+   kubectl get ksvc helloworld-kotlin  --output=custom-columns=NAME:.metadata.name,URL:.status.url
 
-   NAME                DOMAIN
-   helloworld-kotlin   helloworld-kotlin.default.example.com
+   NAME                URL
+   helloworld-kotlin   http://helloworld-kotlin.default.example.com
    ```
 
 1. Now you can make a request to your app to see the result. Presuming, the IP

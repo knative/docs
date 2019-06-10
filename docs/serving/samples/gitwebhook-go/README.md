@@ -106,15 +106,14 @@ webhook.
 
       ```shell
       $ kubectl get ksvc gitwebhook \
-         --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
-      NAME                DOMAIN
-      gitwebhook          gitwebhook.default.example.com
+         --output=custom-columns=NAME:.metadata.name,URL:.status.url
+      NAME          URL
+      gitwebhook    http://gitwebhook.default.example.com
       ```
 
    1. Browse on GitHub to the repository where you want to create a webhook.
    1. Click **Settings**, then **Webhooks**, then **Add webhook**.
-   1. Enter the **Payload URL** as `http://{DOMAIN}`, with the value of DOMAIN
-      listed above.
+   1. Fill in **Payload URL** with the value of URL listed above.
    1. Set the **Content type** to `application/json`.
    1. Enter the **Secret** value to be the same as the original base used for
       `webhookSecret` above (the original value, not the base64 encoded value).
