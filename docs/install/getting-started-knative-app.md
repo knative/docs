@@ -53,13 +53,22 @@ metadata:
   name: helloworld-go # The name of the app
   namespace: default # The namespace the app will use
 spec:
-  template:
-    spec:
-      containers:
-        - image: gcr.io/knative-samples/helloworld-go # The URL to the image of the app
-          env:
+apiVersion: serving.knative.dev/v1alpha1 # Current version of Knative
+kind: Service
+metadata:
+  name: helloworld-go # The name of the app
+  namespace: default # The namespace the app will use
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            image: gcr.io/knative-samples/helloworld-go # The URL to the image of the app
+            env:
             - name: TARGET # The environment variable printed out by the sample app
               value: "Go Sample v1"
+
 ```
 
 If you want to deploy the sample app, leave the config file as-is. If you're
