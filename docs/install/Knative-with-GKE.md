@@ -122,7 +122,7 @@ the recommended configuration for a cluster is:
 > `--addons` line below.
 
 > Note: If you want to use [Auto TLS feature](../serving/using-auto-tls.md), you need to remove 
-> the `--addons` line below, and follow the [instructions](installing-istio.md) to install Istio
+> the `--addons` line below, and follow the [instructions](../installing-istio.md) to install Istio
 > with Secret Discovery Service.
 
 ```bash
