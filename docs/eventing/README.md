@@ -140,9 +140,6 @@ part of the `sources` category, so you can list all existing Sources with
 In addition to the core sources, there are [other sources](./sources/README.md)
 that you can install.
 
-_Want to implement your own source? Check out
-[the tutorial](./samples/writing-a-source/README.md)._
-
 ### KubernetesEventSource
 
 The KubernetesEventSource fires a new event each time a
@@ -339,6 +336,12 @@ example.
 - [Setup Knative Serving](../install/README.md)
 - [Install the Eventing component](#installation)
 - [Run samples](./samples/)
+
+## Sending Events: Sources vs Manual
+
+If you need a Source not covered by the available Source implementations, there is a [tutorial on writing your own Source](./samples/writing-a-source/README.md).
+
+If your code needs to send events as part of its buisness logic and doesn't fit the model of a Source, consider [feeding events directly to a Broker](https://knative.dev/docs/eventing/broker-trigger/#manual).
 
 ## Configuration
 
