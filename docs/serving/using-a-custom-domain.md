@@ -83,8 +83,8 @@ You can also apply an updated domain configuration:
 
 Deploy an app (for example,
 [`helloworld-go`](./samples/hello-world/helloworld-go/README.md)), to your
-cluster as normal. You can retrieve the URL in Knative Route
-"helloworld-go" with the following command:
+cluster as normal. You can retrieve the URL in Knative Route "helloworld-go"
+with the following command:
 
 ```shell
 kubectl get route helloworld-go --output jsonpath="{.status.url}"
