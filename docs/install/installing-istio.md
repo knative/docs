@@ -109,6 +109,7 @@ helm template --namespace=istio-system \
   --set mixer.telemetry.enabled=false \
   `# Pilot doesn't need a sidecar.` \
   --set pilot.sidecar=false \
+  --set pilot.resources.requests.memory=128Mi \
   `# Disable galley (and things requiring galley).` \
   --set galley.enabled=false \
   --set global.useMCP=false \
