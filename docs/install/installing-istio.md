@@ -57,7 +57,7 @@ without automatic sidecar injection.
 
    ```shell
    # Download and unpack Istio
-   export ISTIO_VERSION=1.1.3
+   export ISTIO_VERSION=1.1.7
    curl -L https://git.io/getLatestIstio | sh -
    cd istio-${ISTIO_VERSION}
    ```
