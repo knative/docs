@@ -87,15 +87,13 @@ be created using the following instructions.
      name: helloworld-dart
      namespace: default
    spec:
-     runLatest:
-       configuration:
-         revisionTemplate:
-           spec:
-             container:
-               image: docker.io/{username}/helloworld-dart
-               env:
-                 - name: TARGET
-                   value: "Dart Sample v1"
+     template:
+       spec:
+         containers:
+           - image: docker.io/{username}/helloworld-dart
+             env:
+               - name: TARGET
+                 value: "Dart Sample v1"
    ```
 
 ## Building and deploying the sample
