@@ -21,8 +21,8 @@ the Login service.
    - In this example, we use `example.com`. If you don't have a domain name, you
      can modify your hosts file (on Mac or Linux) to map `example.com` to your
      cluster's ingress IP.
-   - If you have configured a custom domain for your Knative installation, we will
-     refer to it as <YOUR_DOMAIN_NAME> in the rest of this document
+   - If you have configured a custom domain for your Knative installation, we
+     will refer to it as <YOUR_DOMAIN_NAME> in the rest of this document
 4. Check out the code:
 
 ```
@@ -32,11 +32,13 @@ go get -d github.com/knative/docs/docs/serving/samples/knative-routing-go
 ## Setup
 
 To check the domain name, run the following command:
+
 ```
 kubectl get cm  -n knative-serving config-domain -o yaml
 ```
-Then, check the value for `data`. The domain name should be in the format of `<YOUR_DOMAIN_NAME>: ""`,
-if it is available.
+
+Then, check the value for `data`. The domain name should be in the format of
+`<YOUR_DOMAIN_NAME>: ""`, if it is available.
 
 Build the application container and publish it to a container registry:
 
@@ -48,14 +50,16 @@ cd $GOPATH/src/github.com/knative/docs
 
 2. Set your preferred container registry:
 
-If you use Google Container Registry (GCR), uou will need to enable the [GCR API](https://console.cloud.google.com/apis/library/containerregistry.googleapis.com) in your GCP project.
+If you use Google Container Registry (GCR), uou will need to enable the
+[GCR API](https://console.cloud.google.com/apis/library/containerregistry.googleapis.com)
+in your GCP project.
 
 ```shell
 export REPO="gcr.io/<YOUR_PROJECT_ID>"
 ```
 
-If you use Docker Hub as your docker image registry, replace <username> with your dockerhub username and
-run the following command:
+If you use Docker Hub as your docker image registry, replace <username> with
+your dockerhub username and run the following command:
 
 ```shell
 export REPO="docker.io/<username>"
@@ -80,9 +84,9 @@ docker push "${REPO}/knative-routing-go"
 
    - Manually replace:
      `image: github.com/knative/docs/docs/serving/samples/knative-routing-go`
-     with
-     `image: ${REPO}/knative-routing-go`
-     If you manually changed the .yaml file, you must replace ${REPO} with the correct path on your local machine.
+     with `image: ${REPO}/knative-routing-go` If you manually changed the .yaml
+     file, you must replace \${REPO} with the correct path on your local
+     machine.
 
    Or
 
@@ -191,19 +195,20 @@ If you have configured a custom domain name for your service, please replace all
 mentions of "example.com" in `routing.yaml` with "<YOUR_DOMAIN_NAME>" for
 spec.hosts and spec.http.rewrite.authority.
 
-In addition, you need to verify how your domain template is defined. By default, we
-use the format of {{.Name}}.{{.Namespace}}, like search-service.default and
-login-service.default. However, some Knative environments may use other format like
-{{.Name}}-{{.Namespace}}. You can find out the format by running the command:
+In addition, you need to verify how your domain template is defined. By default,
+we use the format of {{.Name}}.{{.Namespace}}, like search-service.default and
+login-service.default. However, some Knative environments may use other format
+like {{.Name}}-{{.Namespace}}. You can find out the format by running the
+command:
 
 ```
 kubectl get cm  -n knative-serving config-network -o yaml
 ```
 
-Then look for the value for `domainTemplate`. If it is `{{.Name}}-{{.Namespace}}.{{.Domain}}`,
-you need to change `search-service.default` into `search-service-default` and
+Then look for the value for `domainTemplate`. If it is
+`{{.Name}}-{{.Namespace}}.{{.Domain}}`, you need to change
+`search-service.default` into `search-service-default` and
 `login-service.default` into `login-service-default` as well in `routing.yaml`.
-
 
 2. The `routing.yaml` file will generate a new VirtualService `entry-route` for
    domain `example.com` or your own domain name. View the VirtualService:
