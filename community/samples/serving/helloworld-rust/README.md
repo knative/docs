@@ -109,18 +109,16 @@ recreate the source files from this folder.
    apiVersion: serving.knative.dev/v1alpha1
    kind: Service
    metadata:
-   name: helloworld-rust
-   namespace: default
+     name: helloworld-rust
+     namespace: default
    spec:
-   runLatest:
-     configuration:
-     revisionTemplate:
+     template:
        spec:
-       container:
-         image: docker.io/{username}/helloworld-rust
-         env:
-           - name: TARGET
-         value: "Rust Sample v1"
+       containers:
+         - image: docker.io/{username}/helloworld-rust
+           env:
+             - name: TARGET
+           value: "Rust Sample v1"
    ```
 
 ## Build and deploy this sample
