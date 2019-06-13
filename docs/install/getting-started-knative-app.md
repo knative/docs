@@ -130,20 +130,14 @@ assigned an external IP address.
 1. To find the host URL for your service, enter:
 
    ```shell
-   kubectl get route helloworld-go  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
-   NAME                DOMAIN
-   helloworld-go       helloworld-go.default.example.com
+   kubectl get route helloworld-go  --output=custom-columns=NAME:.metadata.name,URL:.status.url
+   NAME                URL
+   helloworld-go       http://helloworld-go.default.example.com
    ```
 
    > Note: By default, Knative uses the `example.com` domain. To configure a
    > custom DNS domain, see
    > [Using a Custom Domain](../serving/using-a-custom-domain.md).
-
-   You can also export the host URL as a variable using the following command:
-
-   ```shell
-   export HOST_URL=$(kubectl get route helloworld-go  --output jsonpath='{.status.domain}')
-   ```
 
    If you changed the name from `helloworld-go` to something else when creating
    the `.yaml` file, replace `helloworld-go` in the above commands with the name
@@ -156,14 +150,6 @@ assigned an external IP address.
 
    ```shell
    curl -H "Host: helloworld-go.default.example.com" http://${IP_ADDRESS}
-   Hello World: Go Sample v1!
-   ```
-
-   If you exported the host URL and IP address as variables in the previous
-   steps, you can use those variables to simplify your cURL request:
-
-   ```shell
-   curl -H "Host: ${HOST_URL}" http://${IP_ADDRESS}
    Hello World: Go Sample v1!
    ```
 

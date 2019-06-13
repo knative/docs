@@ -136,11 +136,11 @@ Then find the service host:
 
 ```shell
 kubectl get ksvc helloworld-scala \
-    --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+    --output=custom-columns=NAME:.metadata.name,URL:.status.url
 
-# It will print something like this, the DOMAIN is what you're going to use as HTTP Host header:
-# NAME                DOMAIN
-# helloworld-scala    helloworld-scala.default.example.com
+# It will print something like this, the URL is what you're going to use as HTTP Host header:
+# NAME                URL
+# helloworld-scala    http://helloworld-scala.default.example.com
 ```
 
 Finally, to try your service, use the obtained address in the Host header:
