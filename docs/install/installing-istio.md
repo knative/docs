@@ -57,7 +57,7 @@ without automatic sidecar injection.
 
    ```shell
    # Download and unpack Istio
-   export ISTIO_VERSION=1.1.3
+   export ISTIO_VERSION=1.1.7
    curl -L https://git.io/getLatestIstio | sh -
    cd istio-${ISTIO_VERSION}
    ```
@@ -109,6 +109,7 @@ helm template --namespace=istio-system \
   --set mixer.telemetry.enabled=false \
   `# Pilot doesn't need a sidecar.` \
   --set pilot.sidecar=false \
+  --set pilot.resources.requests.memory=128Mi \
   `# Disable galley (and things requiring galley).` \
   --set galley.enabled=false \
   --set global.useMCP=false \

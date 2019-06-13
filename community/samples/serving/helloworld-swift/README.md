@@ -92,18 +92,16 @@ source files from this folder.
    apiVersion: serving.knative.dev/v1alpha1
    kind: Service
    metadata:
-   name: helloworld-swift
-   namespace: default
+     name: helloworld-swift
+     namespace: default
    spec:
-   runLatest:
-     configuration:
-     revisionTemplate:
+     template:
        spec:
-       container:
-         image: docker.io/{username}/helloworld-swift
-         env:
-           - name: TARGET
-         value: "Swift"
+       containers:
+         - image: docker.io/{username}/helloworld-swift
+           env:
+             - name: TARGET
+           value: "Swift"
    ```
 
 ## Building and deploying the sample
@@ -155,9 +153,9 @@ folder) you're ready to build and deploy the sample app.
 1. To find the URL for your service, use the following command:
 
    ```
-   kubectl get ksvc helloworld-swift  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
-   NAME                DOMAIN
-   helloworld-swift   helloworld-swift.default.example.com
+   kubectl get ksvc helloworld-swift  --output=custom-columns=NAME:.metadata.name,URL:.status.url
+   NAME               URL
+   helloworld-swift   http://helloworld-swift.default.example.com
    ```
 
 1. Now you can make a request to your app to see the result. Replace

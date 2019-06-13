@@ -87,15 +87,13 @@ be created using the following instructions.
      name: helloworld-dart
      namespace: default
    spec:
-     runLatest:
-       configuration:
-         revisionTemplate:
-           spec:
-             container:
-               image: docker.io/{username}/helloworld-dart
-               env:
-                 - name: TARGET
-                   value: "Dart Sample v1"
+     template:
+       spec:
+         containers:
+           - image: docker.io/{username}/helloworld-dart
+             env:
+               - name: TARGET
+                 value: "Dart Sample v1"
    ```
 
 ## Building and deploying the sample
@@ -156,9 +154,9 @@ folder) you're ready to build and deploy the sample app.
 1. To find the URL for your service, use
 
    ```
-   kubectl get ksvc helloworld-dart  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
-   NAME                DOMAIN
-   helloworld-dart   helloworld-dart.default.example.com
+   kubectl get ksvc helloworld-dart  --output=custom-columns=NAME:.metadata.name,URL:.status.url
+   NAME             URL
+   helloworld-dart  http://helloworld-dart.default.example.com
    ```
 
 1. Now you can make a request to your app to see the result. Replace

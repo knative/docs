@@ -37,9 +37,6 @@ kubectl apply --filename docs/serving/samples/grpc-ping-go/sample.yaml
 1. Fetch the created ingress hostname and IP.
 
    ```shell
-   # Put the Host name into an environment variable.
-   export SERVICE_HOST=`kubectl get route grpc-ping --output jsonpath="{.status.domain}"`
-
    # Put the ingress IP into an environment variable.
    export SERVICE_IP=`kubectl get svc istio-ingressgateway --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
    ```
@@ -50,6 +47,6 @@ kubectl apply --filename docs/serving/samples/grpc-ping-go/sample.yaml
    ```shell
    docker run -ti --entrypoint=/client docker.io/{username}/grpc-ping-go \
      -server_addr="${SERVICE_IP}:80" \
-     -server_host_override="${SERVICE_HOST}" \
+     -server_host_override="grpc-ping.default.example.com" \
      -insecure
    ```
