@@ -94,7 +94,7 @@ The default value for concurrency target is specified in the ConfigMap as `100`.
 ```
 
 This value can be configured by adding or modifying the
-`autoscaling.knative.dev/target` annotation value in the Revision template.
+`autoscaling.knative.dev/target` annotation value in the revision template.
 
 ```
 autoscaling.knative.dev/target: 50
@@ -108,7 +108,7 @@ limit how many requests reach the app at a given time. Using
 enforced constraint of concurrency.
 
 `containerConcurrency` limits the amount of concurrent requests are allowed into
-the application at a given time (hard limit), and is configured in the Revision
+the application at a given time (hard limit), and is configured in the revision
 template.
 
 ```
@@ -116,12 +116,34 @@ containerConcurrency: 0 | 1 | 2-N
 ```
 
 - A `containerConcurrency` value of `1` will guarantee that only one request is
-  handled at a time by a given instance of the Revision container.
+  handled at a time by a given instance of the revision container.
 - A value of `2` or more will limit request concurrency to that value.
 - A value of `0` means the system should decide.
 
 If there is no `/target` annotation, the autoscaler is configured as if
 `/target` == `containerConcurrency`.
+
+### Configuring scale bounds (minScale and maxScale)
+
+The `minScale` and  `maxScale` annotations can be used to configure the minimum and maximum number of pods that can serve applications.
+These annotations can be used to prevent cold starts or to help control computing costs.
+
+`minScale` and `maxScale` can be configured as follows in the revision template;
+
+```
+autoscaling.knative.dev/minScale: "2"
+autoscaling.knative.dev/maxScale: "10"
+```
+
+Using these annotations in the revision template will propagate this to `PodAutoscaler` objects. You can also manually propagate `PodAutoscaler` objects.
+
+**NOTE:** These annotations apply for the full lifetime of a revision. Even when a revision is not referenced by any route, the minimal pod count specified by `minScale` will still be provided. Keep in mind that non-routeable revisions may be garbage collected, which enables Knative to reclaim the resources.
+
+#### Default behavior
+
+If the `minScale` annotation is not set, pods will scale to zero.
+If the `maxScale` annotation is not set, there will be no upper limit for the number of pods created.
+
 
 ## Configuring CPU-based autoscaling
 
@@ -131,7 +153,7 @@ scale-to-zero capabilities are only supported for KPA.
 
 You can configure Knative to use CPU based autoscaling instead of the default
 request based metric by adding or modifying the `autoscaling.knative.dev/class`
-and `autoscaling.knative.dev/metric` values as annotations in the Revision
+and `autoscaling.knative.dev/metric` values as annotations in the revision
 template.
 
 ```
