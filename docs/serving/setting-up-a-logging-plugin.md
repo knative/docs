@@ -41,10 +41,10 @@ collecting `stdout/stderr` logs from the containers:
 
 ### Configure the DaemonSet for log files under /var/log
 
-The Fluentd DaemonSet can also capture `/var/log` logs from the containers.
-To enable:
+The Fluentd DaemonSet can also capture `/var/log` logs from the containers. To
+enable:
 
-* Set `logging.enable-var-log-collection` to `true` in
+- Set `logging.enable-var-log-collection` to `true` in
   [config-observability](https://github.com/knative/serving/blob/master/config/config-observability.yaml)
 
 ## Deploying
@@ -64,9 +64,9 @@ In the commands above, replace `<path-of-fluentd-daemonset-config>` with the
 Fluentd DaemonSet configuration file, e.g.
 `config/monitoring/logging/stackdriver`.
 
-**NOTE**: The deployment above will not affect the existing pods.
-Developers need to redeploy their app to get the newest configuration for
-`/var/log` collection.
+**NOTE**: The deployment above will not affect the existing pods. Developers
+need to redeploy their app to get the newest configuration for `/var/log`
+collection.
 
 **NOTE**: Operators sometimes need to deploy extra services as the logging
 backends. For example, if they desire Elasticsearch&Kibana, they have to deploy
