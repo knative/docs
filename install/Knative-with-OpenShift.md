@@ -15,7 +15,7 @@ You can find [guides for other platforms here](README.md).
 ## Install `oc` (openshift cli)
 
 You can install the latest version of `oc`, the OpenShift CLI, into your local
-directory by downloading the right releasean OpenShift 4 tarball for your OS from the
+directory by downloading the right OpenShift 4 release tarball for your OS from the
 [releases page](https://github.com/openshift/origin/releases/tag/v4.10.0).
 
 ```shell
