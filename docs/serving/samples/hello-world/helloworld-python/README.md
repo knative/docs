@@ -86,19 +86,21 @@ following commands:
    username.
 
     ```yaml
-    apiVersion: serving.knative.dev/v1alpha1
-    kind: Service
-    metadata:
-      name: helloworld-python
-      namespace: default
-    spec:
-      template:
-        spec:
-          containers:
-          - image: docker.io/{username}/helloworld-python
-            env:
-              - name: TARGET
-                value: "Python Sample v1"
+      apiVersion: serving.knative.dev/v1alpha1
+      kind: Service
+      metadata:
+       name: helloworld-python
+       namespace: default
+      spec:
+        runLatest:
+          configuration:
+            revisionTemplate:
+              spec:
+                container:
+                  image: docker.io/{username}/python-knative-demo
+                  env:
+                  - name: TARGET
+                    value: "Hola!"
     ```
 
 ## Build and deploy this sample
