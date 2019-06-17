@@ -19,7 +19,7 @@ for generating events.
    environments, including development clusters.
 
 1. Install the Camel Source from the `camel.yaml` in the
-   [Eventing Sources release page](https://github.com/knative/eventing-sources/releases):
+   [Eventing Sources release page](https://github.com/knative/eventing-contrib/releases):
 
    ```shell
    kubectl apply --filename camel.yaml

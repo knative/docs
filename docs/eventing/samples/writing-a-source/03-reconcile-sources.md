@@ -116,7 +116,7 @@ _After completing this tutorial, consider replacing the code below with existing
 sink resolution helpers provided by Knative: `AddressableType` from
 `[github.com/knative/pkg/apis/duck/v1alpha1](https://github.com/knative/pkg/tree/master/apis/duck/v1alpha1)`
 and `GetSinkURI` from
-`[github.com/knative/eventing-sources/pkg/controller/sinks](https://github.com/knative/eventing-sources/tree/master/pkg/controller/sinks)`._
+`[github.com/knative/eventing-contrib/pkg/controller/sinks](https://github.com/knative/eventing-contrib/tree/master/pkg/controller/sinks)`._
 
 ```go
 type addressableType struct {
@@ -128,7 +128,7 @@ type addressableType struct {
 }
 
 // TODO(user): A version of this function is also available in the
-// github.com/knative/eventing-sources/pkg/controller/sinks package.
+// github.com/knative/eventing-contrib/pkg/controller/sinks package.
 func (r *ReconcileSampleSource) resolveSinkRef(ctx context.Context, sinkRef *corev1.ObjectReference) (string, error) {
   // Make sure the reference is not nil.
   if sinkRef == nil {
