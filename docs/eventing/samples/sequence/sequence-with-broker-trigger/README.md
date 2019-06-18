@@ -9,7 +9,7 @@ type: "docs"
 ## Prerequisites
 
 For this example, we'll assume you have set up a `Broker` and an `InMemoryChannel`
-as well as Knative Serving (for our functions). The examples use `newbroker`
+as well as Knative Serving (for our functions). The examples use `default`
 namespace, again, if your broker lives in another Namespace, you will need to
 modify the examples to reflect this.
 If you want to use different type of `Channel`, you will have to modify the
@@ -33,52 +33,46 @@ the Broker.
 
 ### Create the Knative Services
 
-Change `newbroker` below to create the steps in the Namespace where you have configured your
+Change `default` below to create the steps in the Namespace where you have configured your
 `Broker`
 
 ```yaml
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1beta1
 kind: Service
 metadata:
   name: first
 spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        spec:
-          container:
-            image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:17f0bb4c6ee5b1e5580966aa705a51f1b54adc794356f14c9d441d91a26412a3
+  template:
+    spec:
+      containers:
+      - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:17f0bb4c6ee5b1e5580966aa705a51f1b54adc794356f14c9d441d91a26412a3
             env:
             - name: STEP
               value: "0"
 
 ---
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1beta1
 kind: Service
 metadata:
   name: second
 spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        spec:
-          container:
-            image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:17f0bb4c6ee5b1e5580966aa705a51f1b54adc794356f14c9d441d91a26412a3
+  template:
+    spec:
+      containers:
+      - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:17f0bb4c6ee5b1e5580966aa705a51f1b54adc794356f14c9d441d91a26412a3
             env:
             - name: STEP
               value: "1"
 ---
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1beta1
 kind: Service
 metadata:
   name: third
 spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        spec:
-          container:
-            image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:17f0bb4c6ee5b1e5580966aa705a51f1b54adc794356f14c9d441d91a26412a3
+  template:
+    spec:
+      containers:
+      - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:17f0bb4c6ee5b1e5580966aa705a51f1b54adc794356f14c9d441d91a26412a3
             env:
             - name: STEP
               value: "2"
@@ -88,7 +82,7 @@ spec:
 
 
 ```shell
-kubectl -n newbroker create -f ./steps.yaml
+kubectl -n default create -f ./steps.yaml
 ```
 
 ### Create the Sequence
@@ -108,15 +102,15 @@ spec:
     kind: InMemoryChannel
   steps:
   - ref:
-      apiVersion: serving.knative.dev/v1alpha1
+      apiVersion: serving.knative.dev/v1beta1
       kind: Service
       name: first
   - ref:
-      apiVersion: serving.knative.dev/v1alpha1
+      apiVersion: serving.knative.dev/v1beta1
       kind: Service
       name: second
   - ref:
-      apiVersion: serving.knative.dev/v1alpha1
+      apiVersion: serving.knative.dev/v1beta1
       kind: Service
       name: third
   reply:
@@ -125,10 +119,10 @@ spec:
     name: broker-test
 ```
 
-Change `newbroker` below to create the `Sequence` in the Namespace where you have configured your
+Change `default` below to create the `Sequence` in the Namespace where you have configured your
 `Broker`. 
 ```shell
-kubectl -n newbroker create -f ./sequence.yaml
+kubectl -n default create -f ./sequence.yaml
 ```
 
 
@@ -152,10 +146,10 @@ Here, if you are using different type of Channel, you need to change the
 spec.channelTemplate to point to your desired Channel. Also, change the
 spec.reply.name to point to your `Broker`
 
-Change `newbroker` below to create the `Sequence` in the Namespace where you have configured your
+Change `default` below to create the `Sequence` in the Namespace where you have configured your
 `Broker`. 
 ```shell
-kubectl -n newbroker create -f ./cron-source.yaml
+kubectl -n default create -f ./cron-source.yaml
 ```
 
 ### Create the Trigger targeting the Sequence
@@ -176,10 +170,10 @@ spec:
       name: sequence
 ```
 
-Change `newbroker` below to create the `Sequence` in the Namespace where you have configured your
+Change `default` below to create the `Sequence` in the Namespace where you have configured your
 `Broker`. 
 ```shell
-kubectl -n newbroker create -f ./trigger.yaml
+kubectl -n default create -f ./trigger.yaml
 
 ```
 
@@ -189,17 +183,15 @@ kubectl -n newbroker create -f ./trigger.yaml
 are filtered. [TODO: Fix this](https://github.com/knative/eventing/issues/1421)
 
 ```yaml
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1beta1
 kind: Service
 metadata:
   name: sequence-display
 spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        spec:
-          container:
-            image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display
+  template:
+    spec:
+      containers:
+      - image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display
 ---
 apiVersion: eventing.knative.dev/v1alpha1
 kind: Trigger
@@ -211,15 +203,15 @@ spec:
       type: samples.http.mod3
   subscriber:
     ref:
-      apiVersion: serving.knative.dev/v1alpha1
+      apiVersion: serving.knative.dev/v1beta1
       kind: Service
       name: sequence-display
 ---
 ```
 
-Change `newbroker` below to create the `Sequence` in the Namespace where you have configured your
+Change `default` below to create the `Sequence` in the Namespace where you have configured your
 `Broker`. 
 ```shell
-kubectl -n newbroker create -f ./display-trigger.yaml
+kubectl -n default create -f ./display-trigger.yaml
 ```
 
