@@ -1,92 +1,80 @@
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1beta1
 kind: Service
 metadata:
   name: first
 spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        spec:
-          container:
-            image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:17f0bb4c6ee5b1e5580966aa705a51f1b54adc794356f14c9d441d91a26412a3
-            env:
-            - name: STEP
-              value: "0"
+  template:
+    spec:
+      containers:
+      - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:17f0bb4c6ee5b1e5580966aa705a51f1b54adc794356f14c9d441d91a26412a3
+        env:
+        - name: STEP
+          value: "0"
 
 ---
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1beta1
 kind: Service
 metadata:
   name: second
 spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        spec:
-          container:
-            image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:17f0bb4c6ee5b1e5580966aa705a51f1b54adc794356f14c9d441d91a26412a3
-            env:
-            - name: STEP
-              value: "1"
+  template:
+    spec:
+      containers:
+      - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:17f0bb4c6ee5b1e5580966aa705a51f1b54adc794356f14c9d441d91a26412a3
+        env:
+        - name: STEP
+          value: "1"
 ---
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1beta1
 kind: Service
 metadata:
   name: third
 spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        spec:
-          container:
-            image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:17f0bb4c6ee5b1e5580966aa705a51f1b54adc794356f14c9d441d91a26412a3
-            env:
-            - name: STEP
-              value: "2"
+  template:
+    spec:
+      containers:
+      - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:17f0bb4c6ee5b1e5580966aa705a51f1b54adc794356f14c9d441d91a26412a3
+        env:
+        - name: STEP
+          value: "2"
 
 ---
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1beta1
 kind: Service
 metadata:
   name: fourth
 spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        spec:
-          container:
-            image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:17f0bb4c6ee5b1e5580966aa705a51f1b54adc794356f14c9d441d91a26412a3
-            env:
-            - name: STEP
-              value: "3"
+  template:
+    spec:
+      containers:
+      - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:17f0bb4c6ee5b1e5580966aa705a51f1b54adc794356f14c9d441d91a26412a3
+        env:
+        - name: STEP
+          value: "3"
 ---
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1beta1
 kind: Service
 metadata:
   name: fifth
 spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        spec:
-          container:
-            image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:17f0bb4c6ee5b1e5580966aa705a51f1b54adc794356f14c9d441d91a26412a3
-            env:
-            - name: STEP
-              value: "4"
+  template:
+    spec:
+      containers:
+      - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:17f0bb4c6ee5b1e5580966aa705a51f1b54adc794356f14c9d441d91a26412a3
+        env:
+        - name: STEP
+          value: "4"
 ---
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1beta1
 kind: Service
 metadata:
   name: sixth
 spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        spec:
-          container:
-            image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:17f0bb4c6ee5b1e5580966aa705a51f1b54adc794356f14c9d441d91a26412a3
-            env:
-            - name: STEP
-              value: "5"
+  template:
+    spec:
+      containers:
+      - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:17f0bb4c6ee5b1e5580966aa705a51f1b54adc794356f14c9d441d91a26412a3
+        env:
+        - name: STEP
+          value: "5"
 ---
