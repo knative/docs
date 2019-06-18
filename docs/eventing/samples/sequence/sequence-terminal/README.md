@@ -8,7 +8,7 @@ type: "docs"
 ## Prerequisites
 
 For this example, we'll assume you have set up an `InMemoryChannel`
-as well as Knative Serving (for our functions). The examples use `newbroker`
+as well as Knative Serving (for our functions). The examples use `default`
 namespace, again, if you want to deploy to another Namespace, you will need
 to modify the examples to reflect this.
 If you want to use different type of `Channel`, you will have to modify the
@@ -27,61 +27,54 @@ out of band create additional events.
 
 ### Create the Knative Services
 
-Change `newbroker` below to create the steps in the Namespace where you want resources
-created.
+First create the 3 steps that will be referenced in the Steps.
 
 ```yaml
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1beta1
 kind: Service
 metadata:
   name: first
 spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        spec:
-          container:
-            image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:17f0bb4c6ee5b1e5580966aa705a51f1b54adc794356f14c9d441d91a26412a3
-            env:
-            - name: STEP
-              value: "0"
+  template:
+    spec:
+      containers:
+      - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:17f0bb4c6ee5b1e5580966aa705a51f1b54adc794356f14c9d441d91a26412a3
+        env:
+        - name: STEP
+          value: "0"
 
 ---
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1beta1
 kind: Service
 metadata:
   name: second
 spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        spec:
-          container:
-            image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:17f0bb4c6ee5b1e5580966aa705a51f1b54adc794356f14c9d441d91a26412a3
-            env:
-            - name: STEP
-              value: "1"
+  template:
+    spec:
+      containers:
+      - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:17f0bb4c6ee5b1e5580966aa705a51f1b54adc794356f14c9d441d91a26412a3
+        env:
+        - name: STEP
+          value: "1"
 ---
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1beta1
 kind: Service
 metadata:
   name: third
 spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        spec:
-          container:
-            image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:17f0bb4c6ee5b1e5580966aa705a51f1b54adc794356f14c9d441d91a26412a3
-            env:
-            - name: STEP
-              value: "2"
+  template:
+    spec:
+      containers:
+      - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:17f0bb4c6ee5b1e5580966aa705a51f1b54adc794356f14c9d441d91a26412a3
+        env:
+        - name: STEP
+          value: "2"
 ---
 ```
 
 
 ```shell
-kubectl -n newbroker create -f ./steps.yaml
+kubectl -n default create -f ./steps.yaml
 ```
 
 ### Create the Sequence
@@ -100,23 +93,23 @@ spec:
     kind: InMemoryChannel
   steps:
   - ref:
-      apiVersion: serving.knative.dev/v1alpha1
+      apiVersion: serving.knative.dev/v1beta1
       kind: Service
       name: first
   - ref:
-      apiVersion: serving.knative.dev/v1alpha1
+      apiVersion: serving.knative.dev/v1beta1
       kind: Service
       name: second
   - ref:
-      apiVersion: serving.knative.dev/v1alpha1
+      apiVersion: serving.knative.dev/v1beta1
       kind: Service
       name: third
 ```
 
-Change `newbroker` below to create the `Sequence` in the Namespace where you want the
+Change `default` below to create the `Sequence` in the Namespace where you want the
 resources to be created.
 ```shell
-kubectl -n newbroker create -f ./sequence.yaml
+kubectl -n default create -f ./sequence.yaml
 ```
 
 
@@ -140,36 +133,36 @@ Here, if you are using different type of Channel, you need to change the
 spec.channelTemplate to point to your desired Channel. 
 
 ```shell
-kubectl -n newbroker create -f ./cron-source.yaml
+kubectl -n default create -f ./cron-source.yaml
 ```
 
 ### Inspecting the results
 
 You can now see the final output by inspecting the logs of the event-display pods.
 ```shell
-kubectl -n newbroker get pods
+kubectl -n default get pods
 ```
 
 Then grab the pod name for the first step in the `Sequence` (in my case: "first-bx2w9-deployment-599866bc88-rfqvz")
 
 
 ```shell
-vaikas@penguin:~/projects/go/src/github.com/knative/docs$ kubectl -n newbroker4 logs first-bx2w9-deployment-599866bc88-rfqvz user-container
+vaikas@penguin:~/projects/go/src/github.com/knative/docs$ kubectl -n default logs first-bx2w9-deployment-599866bc88-rfqvz user-container
 Got Event Context: Context Attributes,
   specversion: 0.2
   type: dev.knative.cronjob.event
-  source: /apis/v1/namespaces/newbroker4/cronjobsources/cronjob-source
+  source: /apis/v1/namespaces/default/cronjobsources/cronjob-source
   id: 2fdf69ec-0480-463a-92fb-8d1259550f32
   time: 2019-06-18T14:38:00.000379084Z
   contenttype: application/json
 Extensions,
-  knativehistory: sequence-kn-sequence-0-kn-channel.newbroker4.svc.cluster.local
+  knativehistory: sequence-kn-sequence-0-kn-channel.default.svc.cluster.local
 2019/06/18 14:38:14 http: superfluous response.WriteHeader call from github.com/vaikas-google/transformer/vendor/github.com/cloudevents/sdk-go/pkg/cloudevents/transport/http.(*Transport).ServeHTTP (transport.go:446)
 
 Got Data: &{Sequence:0 Message:Hello world!}
 Got Transport Context: Transport Context,
   URI: /
-  Host: first.newbroker4.svc.cluster.local
+  Host: first.default.svc.cluster.local
   Method: POST
   Header:
     X-Request-Id: 9b51bcaa-10bc-97a5-a288-dde9b97f6e1e
@@ -177,7 +170,7 @@ Got Transport Context: Transport Context,
     K-Proxy-Request: activator
     X-Forwarded-For: 10.16.3.77, 127.0.0.1, 127.0.0.1
     X-Forwarded-Proto: http
-    Ce-Knativehistory: sequence-kn-sequence-0-kn-channel.newbroker4.svc.cluster.local
+    Ce-Knativehistory: sequence-kn-sequence-0-kn-channel.default.svc.cluster.local
     X-B3-Spanid: 42bcd58bd1ea8191
     X-B3-Parentspanid: c63efd989dcf5dc5
     X-B3-Sampled: 0
@@ -189,7 +182,7 @@ Got Transport Context: Transport Context,
 
 Then we can look at the output of the second Step in the `Sequence`:
 ```shell
-vaikas@penguin:~/projects/go/src/github.com/knative/docs$ kubectl -n newbroker4 logs second-w9vbk-deployment-68b946f49b-2rv95 user-container
+vaikas@penguin:~/projects/go/src/github.com/knative/docs$ kubectl -n default logs second-w9vbk-deployment-68b946f49b-2rv95 user-container
 Got Event Context: Context Attributes,
   cloudEventsVersion: 0.1
   eventType: samples.http.mod3
@@ -201,14 +194,14 @@ Got Event Context: Context Attributes,
 Got Data: &{Sequence:0 Message:Hello world! - Handled by 0}
 Got Transport Context: Transport Context,
   URI: /
-  Host: second.newbroker4.svc.cluster.local
+  Host: second.default.svc.cluster.local
   Method: POST
   Header:
     X-Forwarded-For: 10.16.3.77, 127.0.0.1, 127.0.0.1
     X-Forwarded-Proto: http
     Content-Length: 48
     X-B3-Sampled: 0
-    Ce-Knativehistory: sequence-kn-sequence-1-kn-channel.newbroker4.svc.cluster.local
+    Ce-Knativehistory: sequence-kn-sequence-1-kn-channel.default.svc.cluster.local
     X-B3-Parentspanid: 4fba491a605b2391
     K-Proxy-Request: activator
     X-B3-Spanid: 56e4150c4e1d679b
@@ -224,7 +217,7 @@ first step in the Sequence to include " - Handled by 0". Exciting :)
 Then we can look at the output of the last Step in the `Sequence`:
 
 ```shell
-vaikas@penguin:~/projects/go/src/github.com/knative/docs$ kubectl -n newbroker4 logs third-wxt9q-deployment-7f6d4b9d89-56cqc user-container
+vaikas@penguin:~/projects/go/src/github.com/knative/docs$ kubectl -n default logs third-wxt9q-deployment-7f6d4b9d89-56cqc user-container
 Got Event Context: Context Attributes,
   cloudEventsVersion: 0.1
   eventType: samples.http.mod3
@@ -236,14 +229,14 @@ Got Event Context: Context Attributes,
 Got Data: &{Sequence:0 Message:Hello world! - Handled by 0 - Handled by 1}
 Got Transport Context: Transport Context,
   URI: /
-  Host: third.newbroker4.svc.cluster.local
+  Host: third.default.svc.cluster.local
   Method: POST
   Header:
     X-B3-Sampled: 0
     X-B3-Traceid: 64a9c48c219375476ffcdd5eb14ec6e0
     X-Forwarded-For: 10.16.3.77, 127.0.0.1, 127.0.0.1
     X-Forwarded-Proto: http
-    Ce-Knativehistory: sequence-kn-sequence-2-kn-channel.newbroker4.svc.cluster.local
+    Ce-Knativehistory: sequence-kn-sequence-2-kn-channel.default.svc.cluster.local
     K-Proxy-Request: activator
     X-Request-Id: 505ff620-2822-9e7d-8855-53d02a2e36e2
     Content-Length: 63
