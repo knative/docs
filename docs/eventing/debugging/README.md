@@ -202,14 +202,14 @@ during `chan` reconciliation. See [Channel Controller](#channel-controller).
 ##### `src`
 
 `src` is a
-[`KubernetesEventSource`](https://github.com/knative/eventing-sources/blob/master/pkg/apis/sources/v1alpha1/kuberneteseventsource_types.go),
+[`ApiServerSource`](https://github.com/knative/eventing/blob/master/pkg/apis/sources/v1alpha1/apiserver_types.go),
 which creates an underlying
 [`ContainerSource`](https://github.com/knative/eventing/blob/master/pkg/apis/sources/v1alpha1/containersource_types.go).
 
 First we will verify that `src` is writing to `chan`.
 
 ```shell
-kubectl --namespace knative-debug get kuberneteseventsource src -o jsonpath='{.spec.sink}'
+kubectl --namespace knative-debug get apiserversource src -o jsonpath='{.spec.sink}'
 ```
 
 Which should return
@@ -221,7 +221,7 @@ Fixing should be as simple as updating its `spec` to have the correct `sink`
 Now that we know `src` is sending to `chan`, let's verify that it is `Ready`.
 
 ```shell
-kubectl --namespace knative-debug get kuberneteseventsource src -o jsonpath='{.status.conditions[?(.type == "Ready")].status}'
+kubectl --namespace knative-debug get apiserversource src -o jsonpath='{.status.conditions[?(.type == "Ready")].status}'
 ```
 
 This should return `True`. If it doesn't, then we need to investigate why. First
@@ -235,7 +235,7 @@ not fruitful, look at the [Source Controller](#source-controller).
 Is the `ContainerSource` `Ready`?
 
 ```shell
-srcUID=$(kubectl --namespace knative-debug get kuberneteseventsource src -o jsonpath='{.metadata.uid}')
+srcUID=$(kubectl --namespace knative-debug get apiserversource src -o jsonpath='{.metadata.uid}')
 kubectl --namespace knative-debug get containersource -o jsonpath="{.items[?(.metadata.ownerReferences[0].uid == '$srcUID')].status.conditions[?(.type == 'Ready')].status}"
 ```
 
@@ -246,7 +246,7 @@ If `ContainerSource` is not `Ready`, then we need to look at its entire
 `status`:
 
 ```shell
-srcUID=$(kubectl --namespace knative-debug get kuberneteseventsource src -o jsonpath='{.metadata.uid}')
+srcUID=$(kubectl --namespace knative-debug get apiserversource src -o jsonpath='{.metadata.uid}')
 containerSourceName=$(kubectl --namespace knative-debug get containersource -o jsonpath="{.items[?(.metadata.ownerReferences[*].uid == '$srcUID')].metadata.name}")
 kubectl --namespace knative-debug get containersource $containerSourceName --output yaml
 ```
@@ -254,7 +254,7 @@ kubectl --namespace knative-debug get containersource $containerSourceName --out
 The most useful condition (when `Ready` is not `True`), is `Deployed`.
 
 ```shell
-srcUID=$(kubectl --namespace knative-debug get kuberneteseventsource src -o jsonpath='{.metadata.uid}')
+srcUID=$(kubectl --namespace knative-debug get apiserversource src -o jsonpath='{.metadata.uid}')
 containerSourceName=$(kubectl --namespace knative-debug get containersource -o jsonpath="{.items[?(.metadata.ownerReferences[*].uid == '$srcUID')].metadata.name}")
 kubectl --namespace knative-debug get containersource $containerSourceName -o jsonpath='{.status.conditions[?(.type == "Deployed")].message}'
 ```
@@ -264,7 +264,7 @@ the health of the `Deployment` that `ContainerSource` created (named in the
 message, but we will get it directly in the following command):
 
 ```shell
-srcUID=$(kubectl --namespace knative-debug get kuberneteseventsource src -o jsonpath='{.metadata.uid}')
+srcUID=$(kubectl --namespace knative-debug get apiserversource src -o jsonpath='{.metadata.uid}')
 containerSourceUID=$(kubectl --namespace knative-debug get containersource -o jsonpath="{.items[?(.metadata.ownerReferences[*].uid == '$srcUID')].metadata.uid}")
 deploymentName=$(kubectl --namespace knative-debug get deployment -o jsonpath="{.items[?(.metadata.ownerReferences[*].uid == '$containerSourceUID')].metadata.name}")
 kubectl --namespace knative-debug get deployment $deploymentName --output yaml
@@ -331,7 +331,7 @@ Pay particular attention to any lines that have a logging level of `warning` or
 
 ##### Source Controller
 
-Each Source will have its own Controller. `src` is a `KubernetesEventSource`, so
+Each Source will have its own Controller. `src` is a `ApiServerSource`, so
 its Controller is:
 
 ```shell
@@ -341,11 +341,11 @@ kubectl --namespace knative-sources get pod -l control-plane=controller-manager
 This is actually a single binary that runs multiple Source Controllers,
 importantly including [ContainerSource Controller](#containersource-controller).
 
-The `KubernetesEventSource` is fairly simple, as it delegates all functionality
+The `ApiServerSource` is fairly simple, as it delegates all functionality
 to an underlying [ContainerSource](#containersource), so there is likely no
 useful information in its logs. Instead more useful information is likely in the
 [ContainerSource Controller](#containersource-controller)'s logs. If you want to
-look at `KubernetesEventSource` Controller's logs anyway, they can be see with:
+look at `ApiServerSource` Controller's logs anyway, they can be see with:
 
 ```shell
 kubectl --namespace knative-sources logs -l control-plane=controller-manager
@@ -424,7 +424,7 @@ We will investigate components in the order in which events should travel.
 Events should be generated at `src`. First let's look at the `Pod`s logs:
 
 ```shell
-srcUID=$(kubectl --namespace knative-debug get kuberneteseventsource src -o jsonpath='{.metadata.uid}')
+srcUID=$(kubectl --namespace knative-debug get apiserversource src -o jsonpath='{.metadata.uid}')
 containerSourceName=$(kubectl --namespace knative-debug get containersource -o jsonpath="{.items[?(.metadata.ownerReferences[*].uid == '$srcUID')].metadata.name}")
 kubectl --namespace knative-debug logs -l source=$containerSourceName -c source
 ```
@@ -452,7 +452,7 @@ will look at the Istio proxy's logs to see if we can get any further
 information:
 
 ```shell
-srcUID=$(kubectl --namespace knative-debug get kuberneteseventsource src -o jsonpath='{.metadata.uid}')
+srcUID=$(kubectl --namespace knative-debug get apiserversource src -o jsonpath='{.metadata.uid}')
 containerSourceName=$(kubectl --namespace knative-debug get containersource -o jsonpath="{.items[?(.metadata.ownerReferences[*].uid == '$srcUID')].metadata.name}")
 kubectl --namespace knative-debug logs -l source=$containerSourceName -c istio-proxy
 ```
