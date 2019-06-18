@@ -175,6 +175,7 @@ rules:
       - ""
     resources:
       - events
+      - pods
     verbs:
       - get
       - list
