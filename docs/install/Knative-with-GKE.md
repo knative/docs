@@ -34,7 +34,7 @@ commands will need to be adjusted for use in a Windows environment.
    ```
 
 1. Download and install the `gcloud` command line tool:
-   https://cloud.google.com/sdk/install
+   https://cloud.google.com/sdk/docs/quickstarts
 
 1. Install the `kubectl` component:
    ```
