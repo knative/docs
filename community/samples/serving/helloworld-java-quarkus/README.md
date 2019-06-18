@@ -181,20 +181,18 @@ which you update and create the necessary build and configuration files:
    username.
 
    ```yaml
-   apiVersion: serving.knative.dev/v1alpha1
+   apiVersion: serving.knative.dev/v1beta1
    kind: Service
    metadata:
      name: helloworld-java-quarkus
    spec:
-     runLatest:
-       configuration:
-         revisionTemplate:
-           spec:
-             container:
-               image: docker.io/{username}/helloworld-java-quarkus
-               env:
-                 - name: TARGET
-                   value: "Quarkus Sample v1"
+     template:
+       spec:
+         containers:
+         - image: docker.io/{username}/helloworld-java-quarkus
+           env:
+             - name: TARGET
+               value: "Quarkus Sample v1"
    ```
 
 ## Locally testing your sample
