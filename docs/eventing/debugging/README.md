@@ -74,14 +74,14 @@ kubectl -n knative-debug -c user-container logs event-display-prxh4-deployment-8
 ☁️  CloudEvent: valid ✅
 Context Attributes,
   SpecVersion: 0.2
-  Type: dev.knative.apiserver.resource.add
+  Type: dev.knative.apiserver.resource.update
   Source: https://172.21.0.1:443
-  ID: 80aa392e-9ca8-4940-b94a-7171c03e2f34
-  Time: 2019-06-18T07:28:18.147514684Z
+  ID: ee2abbc5-1f94-4fbc-9598-531dbea9af92
+  Time: 2019-06-18T13:51:19.729381233Z
   ContentType: application/json
   Extensions:
-    knativehistory: chan-channel-rxnpk.knative-debug.svc.cluster.local
-    subject: /apis/v1/namespaces/knative-debug/events/event-display-prxh4-deployment-89c744b59-45d8g.15a93a58458344cb
+    subject: /apis/v1/namespaces/knative-debug/pods/event-display-2hqvh-deployment-6fcdbf5bd6-j6ghb
+    knativehistory: chan-channel-p9wzl.knative-debug.svc.cluster.local
 Transport Context,
   URI: /
   Host: event-display.knative-debug.svc.cluster.local
@@ -89,37 +89,316 @@ Transport Context,
 Data,
   {
     "apiVersion": "v1",
-    "count": 1,
-    "eventTime": null,
-    "firstTimestamp": "2019-06-18T07:28:16Z",
-    "involvedObject": {
-      "apiVersion": "v1",
-      "fieldPath": "spec.containers{user-container}",
-      "kind": "Pod",
-      "name": "event-display-prxh4-deployment-89c744b59-45d8g",
-      "namespace": "knative-debug",
-      "resourceVersion": "4828705",
-      "uid": "a2088e80-919a-11e9-82e2-860655d61d12"
-    },
-    "kind": "Event",
-   "lastTimestamp": "2019-06-18T07:28:16Z",
-    "message": "Created container user-container",
+    "kind": "Pod",
     "metadata": {
-      "creationTimestamp": "2019-06-18T07:28:16Z",
-      "name": "event-display-prxh4-deployment-89c744b59-45d8g.15a93a58458344cb",
+      "annotations": {
+        "kubernetes.io/psp": "ibm-privileged-psp",
+        "sidecar.istio.io/inject": "true",
+        "traffic.sidecar.istio.io/includeOutboundIPRanges": "172.30.0.0/16,172.20.0.0/16,10.10.10.0/24"
+      },
+      "creationTimestamp": "2019-06-18T13:49:34Z",
+      "deletionGracePeriodSeconds": 300,
+      "deletionTimestamp": "2019-06-18T13:56:19Z",
+      "generateName": "event-display-2hqvh-deployment-6fcdbf5bd6-",
+      "labels": {
+        "app": "event-display-2hqvh",
+        "pod-template-hash": "6fcdbf5bd6",
+        "serving.knative.dev/configuration": "event-display",
+        "serving.knative.dev/configurationGeneration": "1",
+        "serving.knative.dev/revision": "event-display-2hqvh",
+        "serving.knative.dev/revisionUID": "a97708df-91c9-11e9-a15f-56e246950a1a",
+        "serving.knative.dev/service": "event-display"
+      },
+      "name": "event-display-2hqvh-deployment-6fcdbf5bd6-j6ghb",
       "namespace": "knative-debug",
-      "resourceVersion": "4828742",
-      "selfLink": "/api/v1/namespaces/knative-debug/events/event-display-prxh4-deployment-89c744b59-45d8g.15a93a58458344cb",
-      "uid": "a3b27285-919a-11e9-82e2-860655d61d12"
+      "ownerReferences": [
+        {
+          "apiVersion": "apps/v1",
+          "blockOwnerDeletion": true,
+          "controller": true,
+          "kind": "ReplicaSet",
+          "name": "event-display-2hqvh-deployment-6fcdbf5bd6",
+          "uid": "a98b76f1-91c9-11e9-8cc0-06c1da8f3461"
+        }
+      ],
+      "resourceVersion": "66156",
+      "selfLink": "/api/v1/namespaces/knative-debug/pods/event-display-2hqvh-deployment-6fcdbf5bd6-j6ghb",
+      "uid": "e8145b1d-91cf-11e9-8cc0-06c1da8f3461"
     },
-    "reason": "Created",
-    "reportingComponent": "",
-    "reportingInstance": "",
-    "source": {
-      "component": "kubelet",
-      "host": "10.171.147.117"
+    "spec": {
+      "containers": [
+        {
+          "env": [
+            {
+              "name": "PORT",
+              "value": "8080"
+            },
+            {
+              "name": "K_REVISION",
+              "value": "event-display-2hqvh"
+            },
+            {
+              "name": "K_CONFIGURATION",
+              "value": "event-display"
+            },
+            {
+              "name": "K_SERVICE",
+              "value": "event-display"
+            }
+          ],
+          "image": "gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display@sha256:bf45b3eb1e7fc4cb63d6a5a6416cf696295484a7662e0cf9ccdf5c080542c21d",
+          "imagePullPolicy": "IfNotPresent",
+          "lifecycle": {
+            "preStop": {
+              "httpGet": {
+                "path": "/wait-for-drain",
+                "port": 8022,
+                "scheme": "HTTP"
+              }
+            }
+          },
+          "name": "user-container",
+          "ports": [
+            {
+              "containerPort": 8080,
+              "name": "user-port",
+              "protocol": "TCP"
+            }
+          ],
+          "resources": {},
+          "terminationMessagePath": "/dev/termination-log",
+          "terminationMessagePolicy": "FallbackToLogsOnError",
+          "volumeMounts": [
+            {
+              "mountPath": "/var/log",
+              "name": "varlog"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "default-token-qm8bb",
+              "readOnly": true
+            }
+          ]
+        },
+        {
+          "env": [
+            {
+              "name": "SERVING_NAMESPACE",
+              "value": "knative-debug"
+            },
+            {
+              "name": "SERVING_SERVICE",
+              "value": "event-display"
+            },
+            {
+              "name": "SERVING_CONFIGURATION",
+              "value": "event-display"
+            },
+            {
+              "name": "SERVING_REVISION",
+              "value": "event-display-2hqvh"
+            },
+            {
+              "name": "QUEUE_SERVING_PORT",
+              "value": "8012"
+            },
+            {
+              "name": "CONTAINER_CONCURRENCY",
+              "value": "0"
+            },
+            {
+              "name": "REVISION_TIMEOUT_SECONDS",
+              "value": "300"
+            },
+            {
+              "name": "SERVING_POD",
+              "valueFrom": {
+                "fieldRef": {
+                  "apiVersion": "v1",
+                  "fieldPath": "metadata.name"
+                }
+              }
+            },
+            {
+              "name": "SERVING_POD_IP",
+              "valueFrom": {
+                "fieldRef": {
+                  "apiVersion": "v1",
+                  "fieldPath": "status.podIP"
+                }
+              }
+            },
+            {
+              "name": "SERVING_LOGGING_CONFIG",
+              "value": "{\n  \"level\": \"info\",\n  \"development\": false,\n  \"outputPaths\": [\"stdout\"],\n  \"errorOutputPaths\": [\"stderr\"],\n  \"encoding\": \"json\",\n  \"encoderConfig\": {\n    \"timeKey\": \"ts\",\n    \"levelKey\": \"level\",\n    \"nameKey\": \"logger\",\n    \"callerKey\": \"caller\",\n    \"messageKey\": \"msg\",\n    \"stacktraceKey\": \"stacktrace\",\n    \"lineEnding\": \"\",\n    \"levelEncoder\": \"\",\n    \"timeEncoder\": \"iso8601\",\n    \"durationEncoder\": \"\",\n    \"callerEncoder\": \"\"\n  }\n}"
+            },
+            {
+              "name": "SERVING_LOGGING_LEVEL",
+              "value": "info"
+            },
+            {
+              "name": "SERVING_REQUEST_LOG_TEMPLATE"
+            },
+            {
+              "name": "SERVING_REQUEST_METRICS_BACKEND"
+            },
+            {
+              "name": "USER_PORT",
+              "value": "8080"
+            },
+            {
+              "name": "SYSTEM_NAMESPACE",
+              "value": "knative-serving"
+            }
+          ],
+          "image": "icr.io/ext/knative/serving/cmd/queue:1e40c99ff5977daa2d69873fff604c6d09651af1f9ff15aadf8849b3ee77ab45",
+          "imagePullPolicy": "IfNotPresent",
+          "name": "queue-proxy",
+          "ports": [
+            {
+              "containerPort": 8022,
+              "name": "queueadm-port",
+              "protocol": "TCP"
+            },
+            {
+              "containerPort": 9090,
+              "name": "queue-metrics",
+              "protocol": "TCP"
+            },
+            {
+              "containerPort": 8012,
+              "name": "queue-port",
+              "protocol": "TCP"
+            }
+          ],
+          "readinessProbe": {
+            "failureThreshold": 3,
+            "httpGet": {
+              "path": "/health",
+              "port": 8022,
+              "scheme": "HTTP"
+            },
+            "periodSeconds": 1,
+            "successThreshold": 1,
+            "timeoutSeconds": 10
+          },
+          "resources": {
+            "requests": {
+              "cpu": "25m"
+            }
+          },
+          "terminationMessagePath": "/dev/termination-log",
+          "terminationMessagePolicy": "File",
+          "volumeMounts": [
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "default-token-qm8bb",
+              "readOnly": true
+            }
+          ]
+        }
+      ],
+      "dnsPolicy": "ClusterFirst",
+      "enableServiceLinks": true,
+      "nodeName": "10.171.147.102",
+      "priority": 0,
+      "restartPolicy": "Always",
+      "schedulerName": "default-scheduler",
+      "securityContext": {},
+      "serviceAccount": "default",
+      "serviceAccountName": "default",
+      "terminationGracePeriodSeconds": 300,
+      "tolerations": [
+        {
+          "effect": "NoExecute",
+          "key": "node.kubernetes.io/not-ready",
+          "operator": "Exists",
+          "tolerationSeconds": 300
+        },
+        {
+          "effect": "NoExecute",
+          "key": "node.kubernetes.io/unreachable",
+          "operator": "Exists",
+          "tolerationSeconds": 300
+        }
+      ],
+      "volumes": [
+        {
+          "emptyDir": {},
+          "name": "varlog"
+        },
+        {
+          "name": "default-token-qm8bb",
+          "secret": {
+            "defaultMode": 420,
+            "secretName": "default-token-qm8bb"
+          }
+        }
+      ]
     },
-    "type": "Normal"
+    "status": {
+      "conditions": [
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": "2019-06-18T13:49:35Z",
+          "status": "True",
+          "type": "Initialized"
+        },
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": "2019-06-18T13:49:39Z",
+          "status": "True",
+          "type": "Ready"
+        },
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": "2019-06-18T13:49:39Z",
+          "status": "True",
+          "type": "ContainersReady"
+        },
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": "2019-06-18T13:49:34Z",
+          "status": "True",
+          "type": "PodScheduled"
+        }
+      ],
+      "containerStatuses": [
+        {
+          "containerID": "containerd://ab211b11e00c23b961eb0dde78fa3f2ad1497e11240d807f92be537bce11739c",
+          "image": "icr.io/ext/knative/serving/cmd/queue:1e40c99ff5977daa2d69873fff604c6d09651af1f9ff15aadf8849b3ee77ab45",
+          "imageID": "icr.io/ext/knative/serving/cmd/queue@sha256:6c6d30ec4bef7bfddec66d44e6f33e964b52a0c8731773e7ead07f3ff7c473ce",
+          "lastState": {},
+          "name": "queue-proxy",
+          "ready": true,
+          "restartCount": 0,
+          "state": {
+            "running": {
+              "startedAt": "2019-06-18T13:49:38Z"
+            }
+          }
+        },
+        {
+          "containerID": "containerd://e1b32e765e38bce2002ed58db83fd1e224a6805e29a293d7039e76fb0f7a6a95",
+          "image": "sha256:73bc780983f889919fd7748ce13f51f7f850dcb9346b1a58951551b4d0068fe0",
+          "imageID": "gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display@sha256:bf45b3eb1e7fc4cb63d6a5a6416cf696295484a7662e0cf9ccdf5c080542c21d",
+          "lastState": {},
+          "name": "user-container",
+          "ready": true,
+          "restartCount": 0,
+          "state": {
+            "running": {
+              "startedAt": "2019-06-18T13:49:38Z"
+            }
+          }
+        }
+      ],
+      "hostIP": "10.171.147.102",
+      "phase": "Running",
+      "podIP": "172.30.123.200",
+      "qosClass": "Burstable",
+      "startTime": "2019-06-18T13:49:35Z"
+    }
   }
 ```
 
