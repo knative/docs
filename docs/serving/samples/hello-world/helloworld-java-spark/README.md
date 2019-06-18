@@ -79,12 +79,10 @@ recreate the source files from this folder.
      name: helloworld-java
      namespace: default
    spec:
-     runLatest:
-       configuration:
-         revisionTemplate:
-           spec:
-             container:
-               image: docker.io/{username}/helloworld-java
+     template:
+       spec:
+         containers:
+         - image: docker.io/{username}/helloworld-java
    ```
 
 ## Building and deploying the sample

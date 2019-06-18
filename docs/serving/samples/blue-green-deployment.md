@@ -37,14 +37,13 @@ metadata:
   name: blue-green-demo
   namespace: default
 spec:
-  revisionTemplate:
+  template:
     metadata:
       labels:
         knative.dev/type: container
     spec:
-      container:
-        image: gcr.io/knative-samples/knative-route-demo:blue # The URL to the sample app docker image
-        imagePullPolicy: Always
+      containers:
+      - image: gcr.io/knative-samples/knative-route-demo:blue # The URL to the sample app docker image
         env:
           - name: T_VERSION
             value: "blue"
@@ -127,14 +126,13 @@ metadata:
   name: blue-green-demo # Configuration name is unchanged, since we're updating an existing Configuration
   namespace: default
 spec:
-  revisionTemplate:
+  template:
     metadata:
       labels:
         knative.dev/type: container
     spec:
-      container:
-        image: gcr.io/knative-samples/knative-route-demo:green # URL to the new version of the sample app docker image
-        imagePullPolicy: Always
+      containers:
+      - image: gcr.io/knative-samples/knative-route-demo:green # URL to the new version of the sample app docker image
         env:
           - name: T_VERSION
             value: "green" # Updated value for the T_VERSION environment variable

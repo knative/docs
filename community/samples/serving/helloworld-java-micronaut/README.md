@@ -195,15 +195,13 @@ To create and configure the source files in the root of your working directory:
      name: helloworld-java-micronaut
      namespace: default
    spec:
-     runLatest:
-       configuration:
-         revisionTemplate:
-           spec:
-             container:
-               image: docker.io/{username}/helloworld-java-micronaut
-               env:
-                 - name: TARGET
-                   value: "Micronaut Sample v1"
+     template:
+       spec:
+         containers:
+         - image: docker.io/{username}/helloworld-java-micronaut
+           env:
+             - name: TARGET
+               value: "Micronaut Sample v1"
    ```
 
 ## Building and deploying the sample
