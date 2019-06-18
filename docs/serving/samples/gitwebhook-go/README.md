@@ -68,7 +68,7 @@ webhook.
    image from step 1.
 
    ```yaml
-   apiVersion: serving.knative.dev/v1alpha1
+   apiVersion: serving.knative.dev/v1beta1
    kind: Service
    metadata:
      name: gitwebhook

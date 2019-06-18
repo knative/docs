@@ -39,7 +39,7 @@ In order to verify `ContainerSource` is working, we will create a Event Display
 Service that dumps incoming messages to its log.
 
 ```yaml
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1beta1
 kind: Service
 metadata:
   name: event-display
@@ -73,7 +73,7 @@ metadata:
 spec:
   image: <heartbeats_image_uri>
   sink:
-    apiVersion: serving.knative.dev/v1alpha1
+    apiVersion: serving.knative.dev/v1beta1
     kind: Service
     name: event-display
   args:

@@ -125,7 +125,7 @@ cd knative-docs/serving/samples/hello-world/helloworld-nodejs
    username.
 
    ```yaml
-   apiVersion: serving.knative.dev/v1alpha1
+   apiVersion: serving.knative.dev/v1beta1
    kind: Service
    metadata:
      name: helloworld-nodejs

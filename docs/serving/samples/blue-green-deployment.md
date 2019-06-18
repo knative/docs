@@ -31,7 +31,7 @@ First, create a new file called `blue-green-demo-config.yaml`and copy this into
 it:
 
 ```yaml
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1beta1
 kind: Configuration
 metadata:
   name: blue-green-demo
@@ -75,7 +75,7 @@ called `blue-green-demo-route.yaml` and copy the following YAML manifest into it
 (do not forget to edit the revision name):
 
 ```yaml
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1beta1
 kind: Route
 metadata:
   name: blue-green-demo # The name of our route; appears in the URL to access the app
@@ -120,7 +120,7 @@ background. To create the new revision, we'll edit our existing configuration in
 `blue-green-demo-config.yaml` with an updated image and environment variables:
 
 ```yaml
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1beta1
 kind: Configuration
 metadata:
   name: blue-green-demo # Configuration name is unchanged, since we're updating an existing Configuration
@@ -163,7 +163,7 @@ revision while still sending all other traffic to the first revision. Edit
 `blue-green-demo-route.yaml`:
 
 ```yaml
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1beta1
 kind: Route
 metadata:
   name: blue-green-demo # Route name is unchanged, since we're updating an existing Route
@@ -205,7 +205,7 @@ We'll once again update our existing route to begin shifting traffic away from
 the first revision and toward the second. Edit `blue-green-demo-route.yaml`:
 
 ```yaml
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1beta1
 kind: Route
 metadata:
   name: blue-green-demo # Updating our existing route
@@ -241,7 +241,7 @@ Lastly, we'll update our existing route to finally shift all traffic to the
 second revision. Edit `blue-green-demo-route.yaml`:
 
 ```yaml
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1beta1
 kind: Route
 metadata:
   name: blue-green-demo # Updating our existing route
