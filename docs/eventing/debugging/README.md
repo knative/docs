@@ -61,6 +61,70 @@ LAST SEEN   FIRST SEEN   COUNT     NAME                             KIND      SU
 
 ## Where are my events?
 
+You can check if events were delivered by lokking int logs of sunscribers.
+
+```
+kubectl -n knative-debug get pods
+NAME                                             READY   STATUS    RESTARTS   AGE
+apiserversource-src-skzlm-54c6bbdccd-w27ms       1/1     Running   0          19m
+event-display-prxh4-deployment-89c744b59-kv8zt   2/2     Running   0          91s
+fn-bfb44f975-2s68r                               1/1     Running   0          64m
+
+kubectl -n knative-debug -c user-container logs event-display-prxh4-deployment-89c744b59-45d8g|less
+☁️  CloudEvent: valid ✅
+Context Attributes,
+  SpecVersion: 0.2
+  Type: dev.knative.apiserver.resource.add
+  Source: https://172.21.0.1:443
+  ID: 80aa392e-9ca8-4940-b94a-7171c03e2f34
+  Time: 2019-06-18T07:28:18.147514684Z
+  ContentType: application/json
+  Extensions:
+    knativehistory: chan-channel-rxnpk.knative-debug.svc.cluster.local
+    subject: /apis/v1/namespaces/knative-debug/events/event-display-prxh4-deployment-89c744b59-45d8g.15a93a58458344cb
+Transport Context,
+  URI: /
+  Host: event-display.knative-debug.svc.cluster.local
+  Method: POST
+Data,
+  {
+    "apiVersion": "v1",
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2019-06-18T07:28:16Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{user-container}",
+      "kind": "Pod",
+      "name": "event-display-prxh4-deployment-89c744b59-45d8g",
+      "namespace": "knative-debug",
+      "resourceVersion": "4828705",
+      "uid": "a2088e80-919a-11e9-82e2-860655d61d12"
+    },
+    "kind": "Event",
+   "lastTimestamp": "2019-06-18T07:28:16Z",
+    "message": "Created container user-container",
+    "metadata": {
+      "creationTimestamp": "2019-06-18T07:28:16Z",
+      "name": "event-display-prxh4-deployment-89c744b59-45d8g.15a93a58458344cb",
+      "namespace": "knative-debug",
+      "resourceVersion": "4828742",
+      "selfLink": "/api/v1/namespaces/knative-debug/events/event-display-prxh4-deployment-89c744b59-45d8g.15a93a58458344cb",
+      "uid": "a3b27285-919a-11e9-82e2-860655d61d12"
+    },
+    "reason": "Created",
+    "reportingComponent": "",
+    "reportingInstance": "",
+    "source": {
+      "component": "kubelet",
+      "host": "10.171.147.117"
+    },
+    "type": "Normal"
+  }
+```
+
+
+
 You've applied [example.yaml](example.yaml) and you are inspecting `fn`'s logs:
 
 ```shell
