@@ -1,5 +1,5 @@
 ---
-title: "Sequence Wired to another Sequence"
+title: "Sequence Wired to event-display"
 weight: 20
 type: "docs"
 ---
@@ -85,17 +85,16 @@ spec:
 kubectl -n newbroker create -f ./steps.yaml
 ```
 
-### Create the first Sequence
+### Create the Sequence
 
 Here, if you are using different type of Channel, you need to change the
-spec.channelTemplate to point to your desired Channel. Also, change the
-spec.reply.name to point to your `Broker`
+spec.channelTemplate to point to your desired Channel.
 
 ```yaml
 apiVersion: messaging.knative.dev/v1alpha1
 kind: Sequence
 metadata:
-  name: first-sequence
+  name: sequence
 spec:
   channelTemplate:
     apiVersion: messaging.knative.dev/v1alpha1
@@ -114,50 +113,15 @@ spec:
       kind: Service
       name: third
   reply:
-    kind: Sequence
-    apiVersion: messaging.knative.dev/v1alpha1
-    name: second-sequence
-```
-
-Change `newbroker` below to create the `Sequence` in the Namespace where you have configured your
-`Broker`. 
-```shell
-kubectl -n newbroker create -f ./sequence1.yaml
-```
-
-
-### Create the second Sequence
-
-Here, again if you are using different type of Channel, you need to change the
-spec.channelTemplate to point to your desired Channel. Also, change the
-spec.reply.name to point to your `Broker`
-
-```yaml
-apiVersion: messaging.knative.dev/v1alpha1
-kind: Sequence
-metadata:
-  name: second-sequence
-spec:
-  channelTemplate:
-    apiVersion: messaging.knative.dev/v1alpha1
-    kind: InMemoryChannel
-  steps:
-  - ref:
-      apiVersion: serving.knative.dev/v1alpha1
-      kind: Service
-      name: fourth
-  - ref:
-      apiVersion: serving.knative.dev/v1alpha1
-      kind: Service
-      name: fifth
-  - ref:
-      apiVersion: serving.knative.dev/v1alpha1
-      kind: Service
-      name: sixth
-  reply:
     kind: Service
     apiVersion: serving.knative.dev/v1alpha1
     name: event-display
+```
+
+Change `newbroker` below to create the `Sequence` in the Namespace where you want the
+resources to be created.
+```shell
+kubectl -n newbroker create -f ./sequence.yaml
 ```
 
 
@@ -183,7 +147,7 @@ to be created.
 kubectl -n newbroker create -f ./event-display.yaml
 ```
 
-### Create the CronJobSource targeting the first Sequence
+### Create the CronJobSource targeting the Sequence
 
 ```yaml
 apiVersion: sources.eventing.knative.dev/v1alpha1
@@ -196,7 +160,7 @@ spec:
   sink:
     apiVersion: messaging.knative.dev/v1alpha1
     kind: Sequence
-    name: first-sequence
+    name: sequence
 ```
 
 Here, if you are using different type of Channel, you need to change the
