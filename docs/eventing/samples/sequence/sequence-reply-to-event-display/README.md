@@ -8,20 +8,20 @@ type: "docs"
 
 ## Prerequisites
 
-For this example, we'll assume you have set up a an `InMemoryChannel`
+For this example, we'll assume you have set up an `InMemoryChannel`
 as well as Knative Serving (for our functions). The examples use `newbroker`
-namespace, again, if you want to deploy to another Namespace, you will need to
-modify the examples to reflect this.
+namespace, again, if you want to deploy to another Namespace, you will need
+to modify the examples to reflect this.
 If you want to use different type of `Channel`, you will have to modify the
 `Sequence.Spec.ChannelTemplate` to create the appropriate Channel resources.
 
 ## Overview
 
 We are going to create the following logical configuration. We create a CronJobSource,
-feeding events to a `Sequence`, then taking the output of that `Sequence` and sending
-it to a second `Sequence` and finally displaying the resulting output.
+feeding events to a `Sequence`, then taking the output of that `Sequence` and
+displaying the resulting output.
 
-![Logical Configuration](./sequence-reply-to-sequence.png)
+![Logical Configuration](./sequence-reply-to-event-display.png)
 
 
 ## Setup
@@ -78,52 +78,6 @@ spec:
             - name: STEP
               value: "2"
 ---
-apiVersion: serving.knative.dev/v1alpha1
-kind: Service
-metadata:
-  name: fourth
-spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        spec:
-          container:
-            image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:17f0bb4c6ee5b1e5580966aa705a51f1b54adc794356f14c9d441d91a26412a3
-            env:
-            - name: STEP
-              value: "3"
-
----
-apiVersion: serving.knative.dev/v1alpha1
-kind: Service
-metadata:
-  name: fifth
-spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        spec:
-          container:
-            image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:17f0bb4c6ee5b1e5580966aa705a51f1b54adc794356f14c9d441d91a26412a3
-            env:
-            - name: STEP
-              value: "4"
----
-apiVersion: serving.knative.dev/v1alpha1
-kind: Service
-metadata:
-  name: sixth
-spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        spec:
-          container:
-            image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:17f0bb4c6ee5b1e5580966aa705a51f1b54adc794356f14c9d441d91a26412a3
-            env:
-            - name: STEP
-              value: "5"
----
 ```
 
 
@@ -134,7 +88,8 @@ kubectl -n newbroker create -f ./steps.yaml
 ### Create the first Sequence
 
 Here, if you are using different type of Channel, you need to change the
-spec.channelTemplate to point to your desired Channel.
+spec.channelTemplate to point to your desired Channel. Also, change the
+spec.reply.name to point to your `Broker`
 
 ```yaml
 apiVersion: messaging.knative.dev/v1alpha1
@@ -164,8 +119,8 @@ spec:
     name: second-sequence
 ```
 
-Change `newbroker` below to create the `Sequence` in the Namespace where you  want
-your resources created.
+Change `newbroker` below to create the `Sequence` in the Namespace where you have configured your
+`Broker`. 
 ```shell
 kubectl -n newbroker create -f ./sequence1.yaml
 ```
@@ -174,7 +129,8 @@ kubectl -n newbroker create -f ./sequence1.yaml
 ### Create the second Sequence
 
 Here, again if you are using different type of Channel, you need to change the
-spec.channelTemplate to point to your desired Channel.
+spec.channelTemplate to point to your desired Channel. Also, change the
+spec.reply.name to point to your `Broker`
 
 ```yaml
 apiVersion: messaging.knative.dev/v1alpha1
@@ -222,7 +178,7 @@ spec:
 ```
 
 Change `newbroker` below to create the `Sequence` in the Namespace where you want your resources
-created.
+to be created.
 ```shell
 kubectl -n newbroker create -f ./event-display.yaml
 ```
@@ -244,7 +200,7 @@ spec:
 ```
 
 Here, if you are using different type of Channel, you need to change the
-spec.channelTemplate to point to your desired Channel.
+spec.channelTemplate to point to your desired Channel. 
 
 ```shell
 kubectl -n newbroker create -f ./cron-source.yaml
@@ -257,24 +213,24 @@ You can now see the final output by inspecting the logs of the event-display pod
 kubectl -n newbroker get pods
 ```
 
-Then grab the pod name for the event-display (in my case: "event-display-hw7r6-deployment-5555cf68db-bx4m2")
+Then grab the pod name for the event-display (in my case: "event-display-sldk5-deployment-79b69bb4c9-djwj4")
 
 
 ```shell
-vaikas@penguin:~/projects/go/src/github.com/knative/docs$ kubectl -n newbroker logs event-display-hw7r6-deployment-5555cf68db-bx4m2 user-container
+vaikas@penguin:~/projects/go/src/github.com/knative/docs$ kubectl -n newbroker3 logs event-display-sldk5-deployment-79b69bb4c9-djwj4 user-container
 ☁️  cloudevents.Event
 Validation: valid
 Context Attributes,
   cloudEventsVersion: 0.1
   eventType: samples.http.mod3
-  source: /transformer/5
-  eventID: 7628a147-ec74-43d5-a888-8384a1b6b005
-  eventTime: 2019-06-18T13:57:20.279354375Z
+  source: /transformer/2
+  eventID: df52b47e-02fd-45b2-8180-dabb572573f5
+  eventTime: 2019-06-18T14:18:42.478140635Z
   contentType: application/json
 Data,
   {
     "id": 0,
-    "message": "Hello world! - Handled by 0 - Handled by 1 - Handled by 2 - Handled by 3 - Handled by 4 - Handled by 5"
+    "message": "Hello world! - Handled by 0 - Handled by 1 - Handled by 2"
   }
 ```
 

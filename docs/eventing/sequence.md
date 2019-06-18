@@ -50,7 +50,7 @@ For the first example, we'll use a 3 Step `Sequence` that is wired directly into
 Each of the steps simply tacks on "- Handled by <STEP NUMBER>", for example the first Step in the
 `Sequence` will take the incoming message and append "- Handled by 0" to the incoming message.
 
-### Sequence with reply (last Step produces output)
+### [Sequence with reply (last Step produces output)](./samples/sequence/sequence-reply-to-event-display/README.md)
 
 For the next example, we'll use the same 3 Step `Sequence` that is wired directly into the `CronJobSource`.
 Each of the steps simply tacks on "- Handled by <STEP NUMBER>", for example the first Step in the
