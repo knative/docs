@@ -188,7 +188,7 @@ autoscaler classes built into Knative:
    Example of a Service scaled on CPU:
 
    ```yaml
-   apiVersion: serving.knative.dev/v1alpha1
+   apiVersion: serving.knative.dev/v1beta1
    kind: Service
    metadata:
      name: autoscale-go
@@ -209,7 +209,7 @@ autoscaler classes built into Knative:
    annotations. Example of a Service with custom targets and scale bounds:
 
    ```yaml
-   apiVersion: serving.knative.dev/v1alpha1
+   apiVersion: serving.knative.dev/v1beta1
    kind: Service
    metadata:
      name: autoscale-go

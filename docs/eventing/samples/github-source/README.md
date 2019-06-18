@@ -27,7 +27,7 @@ To verify the `GitHubSource` is working, we will create a simple Knative
 defines this basic service.
 
 ```yaml
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1beta1
 kind: Service
 metadata:
   name: github-event-display
@@ -118,7 +118,7 @@ spec:
       name: githubsecret
       key: secretToken
   sink:
-    apiVersion: serving.knative.dev/v1alpha1
+    apiVersion: serving.knative.dev/v1beta1
     kind: Service
     name: github-event-display
 ```
