@@ -10,8 +10,8 @@ know roughly how things fit together.
 ## Version
 
 This document works with
-[Eventing 0.3](https://github.com/knative/eventing/releases/tag/v0.3.0) and
-[Eventing Sources 0.3](https://github.com/knative/eventing-sources/releases/tag/v0.3.0).
+[Eventing 0.6](https://github.com/knative/eventing/releases/tag/v0.6.0) and
+[Eventing Sources 0.6](https://github.com/knative/eventing-sources/releases/tag/v0.6.0).
 
 ## Prerequisites
 
