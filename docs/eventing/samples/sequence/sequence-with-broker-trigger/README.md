@@ -221,4 +221,5 @@ Change `newbroker` below to create the `Sequence` in the Namespace where you hav
 `Broker`. 
 ```shell
 kubectl -n newbroker create -f ./display-trigger.yaml
+```
 
