@@ -1,0 +1,14 @@
+apiVersion: eventing.knative.dev/v1alpha1
+kind: Trigger
+metadata:
+  name: sequence-trigger
+spec:
+  broker: broker-test
+  filter:
+    sourceAndType:
+      type: dev.knative.cronjob.event
+  subscriber:
+    ref:
+      apiVersion: messaging.knative.dev/v1alpha1
+      kind: Sequence
+      name: sequence
