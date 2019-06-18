@@ -301,7 +301,7 @@ Knative Serving application so that they can be consumed.
       certificate.
 
 See the
-[Kafka Source](https://github.com/knative/eventing-sources/tree/master/contrib/kafka/samples)
+[Kafka Source](https://github.com/knative/eventing-contrib/tree/master/contrib/kafka/samples)
 example.
 
 ### CamelSource
@@ -331,7 +331,7 @@ to be installed into the current namespace.
   development purposes.
 
 See the
-[CamelSource](https://github.com/knative/eventing-sources/blob/master/contrib/camel/samples/README.md)
+[CamelSource](https://github.com/knative/eventing-contrib/blob/master/contrib/camel/samples/README.md)
 example.
 
 ## Getting Started
