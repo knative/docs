@@ -12,6 +12,7 @@ For this example, we'll assume you have set up a `Broker` and an `InMemoryChanne
 as well as Knative Serving (for our functions). The examples use `default`
 namespace, again, if your broker lives in another Namespace, you will need to
 modify the examples to reflect this.
+
 If you want to use different type of `Channel`, you will have to modify the
 `Sequence.Spec.ChannelTemplate` to create the appropriate Channel resources.
 
@@ -22,6 +23,7 @@ feeding events into the Broker, then we create a `Filter` that wires those event
 into a Sequence consisting of 3 steps. Then we take the end of the Sequence and
 feed newly minted events back into the Broker and create another Trigger which 
 will then display those events.
+
 **NOTE** [TODO: Fix this](https://github.com/knative/eventing/issues/1421)
 So, currently as set up, the events emitted by the Sequence do not make it into
 the Broker.
@@ -121,6 +123,7 @@ spec:
 
 Change `default` below to create the `Sequence` in the Namespace where you have configured your
 `Broker`. 
+
 ```shell
 kubectl -n default create -f ./sequence.yaml
 ```
@@ -148,6 +151,7 @@ spec.reply.name to point to your `Broker`
 
 Change `default` below to create the `Sequence` in the Namespace where you have configured your
 `Broker`. 
+
 ```shell
 kubectl -n default create -f ./cron-source.yaml
 ```
@@ -172,6 +176,7 @@ spec:
 
 Change `default` below to create the `Sequence` in the Namespace where you have configured your
 `Broker`. 
+
 ```shell
 kubectl -n default create -f ./trigger.yaml
 
@@ -211,6 +216,7 @@ spec:
 
 Change `default` below to create the `Sequence` in the Namespace where you have configured your
 `Broker`. 
+
 ```shell
 kubectl -n default create -f ./display-trigger.yaml
 ```

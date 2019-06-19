@@ -11,6 +11,7 @@ For this example, we'll assume you have set up an `InMemoryChannel`
 as well as Knative Serving (for our functions). The examples use `default`
 namespace, again, if you want to deploy to another Namespace, you will need
 to modify the examples to reflect this.
+
 If you want to use different type of `Channel`, you will have to modify the
 `Sequence.Spec.ChannelTemplate` to create the appropriate Channel resources.
 
@@ -138,16 +139,18 @@ kubectl -n default create -f ./cron-source.yaml
 
 ### Inspecting the results
 
-You can now see the final output by inspecting the logs of the event-display pods.
+You can now see the final output by inspecting the logs of the event-display pods. Note that since
+we set the `CronJobSource` to emit every 2 minutes, it might take some time for the events to show
+up in the logs.
+
 ```shell
 kubectl -n default get pods
 ```
 
-Then grab the pod name for the first step in the `Sequence` (in my case: "first-bx2w9-deployment-599866bc88-rfqvz")
-
+Let's look at the logs for the first `Step` in the `Sequence`:
 
 ```shell
-vaikas@penguin:~/projects/go/src/github.com/knative/docs$ kubectl -n default logs first-bx2w9-deployment-599866bc88-rfqvz user-container
+kubectl -n default logs -l serving.knative.dev/service=first -c user-container
 Got Event Context: Context Attributes,
   specversion: 0.2
   type: dev.knative.cronjob.event
@@ -181,8 +184,9 @@ Got Transport Context: Transport Context,
 
 
 Then we can look at the output of the second Step in the `Sequence`:
+
 ```shell
-vaikas@penguin:~/projects/go/src/github.com/knative/docs$ kubectl -n default logs second-w9vbk-deployment-68b946f49b-2rv95 user-container
+kubectl -n default logs -l serving.knative.dev/service=second -c user-container
 Got Event Context: Context Attributes,
   cloudEventsVersion: 0.1
   eventType: samples.http.mod3
@@ -217,7 +221,7 @@ first step in the Sequence to include " - Handled by 0". Exciting :)
 Then we can look at the output of the last Step in the `Sequence`:
 
 ```shell
-vaikas@penguin:~/projects/go/src/github.com/knative/docs$ kubectl -n default logs third-wxt9q-deployment-7f6d4b9d89-56cqc user-container
+kubectl -n default logs -l serving.knative.dev/service=third -c user-container
 Got Event Context: Context Attributes,
   cloudEventsVersion: 0.1
   eventType: samples.http.mod3

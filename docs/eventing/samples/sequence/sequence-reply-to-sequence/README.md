@@ -12,6 +12,7 @@ For this example, we'll assume you have set up a an `InMemoryChannel`
 as well as Knative Serving (for our functions). The examples use `default`
 namespace, again, if you want to deploy to another Namespace, you will need to
 modify the examples to reflect this.
+
 If you want to use different type of `Channel`, you will have to modify the
 `Sequence.Spec.ChannelTemplate` to create the appropriate Channel resources.
 
@@ -154,6 +155,7 @@ spec:
 
 Change `default` below to create the `Sequence` in the Namespace where you  want
 your resources created.
+
 ```shell
 kubectl -n default create -f ./sequence1.yaml
 ```
@@ -209,6 +211,7 @@ spec:
 
 Change `default` below to create the `Sequence` in the Namespace where you want your resources
 created.
+
 ```shell
 kubectl -n default create -f ./event-display.yaml
 ```
@@ -229,9 +232,6 @@ spec:
     name: first-sequence
 ```
 
-Here, if you are using different type of Channel, you need to change the
-spec.channelTemplate to point to your desired Channel.
-
 ```shell
 kubectl -n default create -f ./cron-source.yaml
 ```
@@ -239,15 +239,15 @@ kubectl -n default create -f ./cron-source.yaml
 ### Inspecting the results
 
 You can now see the final output by inspecting the logs of the event-display pods.
+
 ```shell
 kubectl -n default get pods
 ```
 
-Then grab the pod name for the event-display (in my case: "event-display-hw7r6-deployment-5555cf68db-bx4m2")
-
+Then look at the logs for the event-display pod:
 
 ```shell
-vaikas@penguin:~/projects/go/src/github.com/knative/docs$ kubectl -n default logs event-display-hw7r6-deployment-5555cf68db-bx4m2 user-container
+kubectl -n default logs -l serving.knative.dev/service=event-display -c user-container
 ☁️  cloudevents.Event
 Validation: valid
 Context Attributes,

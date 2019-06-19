@@ -55,6 +55,7 @@ Each of the steps simply tacks on "- Handled by <STEP NUMBER>", for example the 
 For the next example, we'll use the same 3 Step `Sequence` that is wired directly into the `CronJobSource`.
 Each of the steps simply tacks on "- Handled by <STEP NUMBER>", for example the first Step in the
 `Sequence` will take the incoming message and append "- Handled by 0" to the incoming message.
+
 The only difference is that we'll use the `Subscriber.Spec.Reply` field to wire the output of the
 last Step to an event display pod.
 
@@ -63,6 +64,7 @@ last Step to an event display pod.
 For the next example, we'll use the same 3 Step `Sequence` that is wired directly into the `CronJobSource`.
 Each of the steps simply tacks on "- Handled by <STEP NUMBER>", for example the first Step in the
 `Sequence` will take the incoming message and append "- Handled by 0" to the incoming message.
+
 The only difference is that we'll use the `Subscriber.Spec.Reply` field to wire the output of the
 last Step to another `Sequence` that does the smae message modifications as the first pipeline (with
 different steps however).
