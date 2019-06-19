@@ -82,7 +82,7 @@ recreate the source files from this folder.
      template:
        spec:
          containers:
-         - image: docker.io/{username}/helloworld-java
+           - image: docker.io/{username}/helloworld-java
    ```
 
 ## Building and deploying the sample

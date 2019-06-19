@@ -198,10 +198,10 @@ To create and configure the source files in the root of your working directory:
      template:
        spec:
          containers:
-         - image: docker.io/{username}/helloworld-java-micronaut
-           env:
-             - name: TARGET
-               value: "Micronaut Sample v1"
+           - image: docker.io/{username}/helloworld-java-micronaut
+             env:
+               - name: TARGET
+                 value: "Micronaut Sample v1"
    ```
 
 ## Building and deploying the sample
