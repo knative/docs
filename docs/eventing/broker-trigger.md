@@ -124,16 +124,19 @@ required once per namespace. These instructions will use the `default`
 namespace, but you can replace it with any namespace you want to install a
 `Broker` into.
 
-Create the `ServiceAccount`.
+Create the `ServiceAccount` objects.
 
 ```shell
 kubectl -n default create serviceaccount eventing-broker-ingress
 kubectl -n default create serviceaccount eventing-broker-filter
 ```
 
-Then give it the needed RBAC permissions:
+Then give them the needed RBAC permissions:
 
 ```shell
+kubectl -n default create rolebinding eventing-broker-ingress \
+  --clusterrole=eventing-broker-ingress \
+  --serviceaccount=default:eventing-broker-ingress
 kubectl -n default create rolebinding eventing-broker-ingress \
   --clusterrole=eventing-broker-ingress \
   --serviceaccount=default:eventing-broker-ingress
@@ -142,11 +145,28 @@ kubectl -n default create rolebinding eventing-broker-filter \
   --serviceaccount=default:eventing-broker-filter
 ```
 
-Note that the previous commands uses three different objects, all named
+Note that these commands each use three different objects, all named
 `eventing-broker-ingress` or `eventing-broker-filter`. The `ClusterRole` is
 installed with Knative Eventing
 [here](../../config/200-broker-clusterrole.yaml). The `ServiceAccount` was
-created two commands prior. The `RoleBinding` is created with this command.
+created two commands prior. The `RoleBinding` is created here.
+
+Create RBAC permissions granting access to shared configmaps for logging,
+tracing, and metrics configuration.
+
+_These commands assume the shared Knative
+Eventing components are installed in the `knative-eventing` namespace. If you
+installed the shared Knative Eventing components in a different namespace,
+replace `knative-eventing` with the name of that namespace._
+
+```shell
+kubectl -n knative-eventing create rolebinding eventing-config-reader-default-eventing-broker-ingress \
+  --clusterrole=eventing-config-reader \
+  --serviceaccount=default:eventing-broker-ingress
+kubectl -n knative-eventing create rolebinding eventing-config-reader-default-eventing-broker-filter \
+  --clusterrole=eventing-config-reader \
+  --serviceaccount=default:eventing-broker-filter
+```
 
 Now we can create the `Broker`. Note that this example uses the name `default`,
 but could be replaced by any other valid name.
