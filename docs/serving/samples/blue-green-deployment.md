@@ -43,10 +43,10 @@ spec:
         knative.dev/type: container
     spec:
       containers:
-      - image: gcr.io/knative-samples/knative-route-demo:blue # The URL to the sample app docker image
-        env:
-          - name: T_VERSION
-            value: "blue"
+        - image: gcr.io/knative-samples/knative-route-demo:blue # The URL to the sample app docker image
+          env:
+            - name: T_VERSION
+              value: "blue"
 ```
 
 Save the file, then deploy the configuration to your cluster:
@@ -132,10 +132,10 @@ spec:
         knative.dev/type: container
     spec:
       containers:
-      - image: gcr.io/knative-samples/knative-route-demo:green # URL to the new version of the sample app docker image
-        env:
-          - name: T_VERSION
-            value: "green" # Updated value for the T_VERSION environment variable
+        - image: gcr.io/knative-samples/knative-route-demo:green # URL to the new version of the sample app docker image
+          env:
+            - name: T_VERSION
+              value: "green" # Updated value for the T_VERSION environment variable
 ```
 
 Save the file, then apply the updated configuration to your cluster:

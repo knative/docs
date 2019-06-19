@@ -189,10 +189,10 @@ which you update and create the necessary build and configuration files:
      template:
        spec:
          containers:
-         - image: docker.io/{username}/helloworld-java-quarkus
-           env:
-             - name: TARGET
-               value: "Quarkus Sample v1"
+           - image: docker.io/{username}/helloworld-java-quarkus
+             env:
+               - name: TARGET
+                 value: "Quarkus Sample v1"
    ```
 
 ## Locally testing your sample
