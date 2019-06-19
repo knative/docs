@@ -137,9 +137,6 @@ Then give them the needed RBAC permissions:
 kubectl -n default create rolebinding eventing-broker-ingress \
   --clusterrole=eventing-broker-ingress \
   --serviceaccount=default:eventing-broker-ingress
-kubectl -n default create rolebinding eventing-broker-ingress \
-  --clusterrole=eventing-broker-ingress \
-  --serviceaccount=default:eventing-broker-ingress
 kubectl -n default create rolebinding eventing-broker-filter \
   --clusterrole=eventing-broker-filter \
   --serviceaccount=default:eventing-broker-filter
