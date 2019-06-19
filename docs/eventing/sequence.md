@@ -44,6 +44,10 @@ For each of these examples below, we'll use
 [`CronJobSource`](https://knative.dev/v0.4-docs/reference/eventing/eventing-sources-api/#CronJobSource)
 as the source of events.
 
+We also use a very simple [transformer](https://github.com/vaikas-google/transformer) which
+performs very trivial transformation of the incoming events to demonstrate they have passed
+through each stage.
+
 ### (Sequence with no reply (terminal last Step))[./samples/sequence/sequence-terminal/README.md)
 
 For the first example, we'll use a 3 Step `Sequence` that is wired directly into the `CronJobSource`.
