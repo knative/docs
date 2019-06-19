@@ -88,7 +88,7 @@ The following Knative installation files are available:
   - https://github.com/knative/eventing-sources/releases/download/v0.6.0/camel.yaml
   - https://github.com/knative/eventing-sources/releases/download/v0.6.0/gcppubsub.yaml
   - https://github.com/knative/eventing-sources/releases/download/v0.6.0/kafka.yaml
-  - https://github.com/knative/eventing-sources/releases/download/v0.6.0/event-display.yaml
+
 - **Cluster roles**:
   - https://raw.githubusercontent.com/knative/serving/v0.6.0/third_party/config/build/clusterrole.yaml
 
