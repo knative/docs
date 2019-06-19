@@ -137,8 +137,13 @@ format, but may be expressed as simple lists, etc in YAML. All Sources should be
 part of the `sources` category, so you can list all existing Sources with
 `kubectl get sources`. The currently-implemented Sources are described below.
 
-In addition to the core sources, there are [other sources](./sources/README.md)
+In addition to the core sources (explained below), there are [other sources](./sources/README.md)
 that you can install.
+
+If you need a Source not covered by the available Source implementations, there is a [tutorial on writing your own Source](./samples/writing-a-source/README.md).
+
+If your code needs to send events as part of its business logic and doesn't fit the model of a Source, consider [feeding events directly to a Broker](https://knative.dev/docs/eventing/broker-trigger/#manual).
+
 
 ### KubernetesEventSource
 
@@ -336,12 +341,6 @@ example.
 - [Setup Knative Serving](../install/README.md)
 - [Install the Eventing component](#installation)
 - [Run samples](./samples/)
-
-## Sending Events: Sources vs Manual
-
-If you need a Source not covered by the available Source implementations, there is a [tutorial on writing your own Source](./samples/writing-a-source/README.md).
-
-If your code needs to send events as part of its buisness logic and doesn't fit the model of a Source, consider [feeding events directly to a Broker](https://knative.dev/docs/eventing/broker-trigger/#manual).
 
 ## Configuration
 
