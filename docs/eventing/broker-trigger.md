@@ -261,7 +261,8 @@ curl -v "http://default-broker.default.svc.cluster.local/" \
 
 #### Knative Source
 
-Provide the Knative Source the `default` `Broker` as its sink:
+Provide the Knative Source the `default` `Broker` as its sink
+(note you'll need to use `ko apply -f <source_file>.yaml` to create it):
 
 ```yaml
 apiVersion: sources.eventing.knative.dev/v1alpha1
