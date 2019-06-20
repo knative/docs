@@ -1,5 +1,3 @@
-# Hello World - Dart sample
-
 A simple web app written in the [Dart](www.dartlang.org) programming language
 that you can use for testing. It reads in the env variable `TARGET` and prints
 `"Hello $TARGET"`. If `TARGET` is not specified, it will use `"World"` as
@@ -8,8 +6,8 @@ that you can use for testing. It reads in the env variable `TARGET` and prints
 ## Prerequisites
 
 - A Kubernetes cluster with Knative installed. Follow the
-  [installation instructions](https://github.com/knative/docs/blob/master/install/README.md)
-  if you need to create one.
+  [installation instructions](../../../install/README.md) if you need to create
+  one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
 - [dart-sdk](https://www.dartlang.org/tools/sdk#install) installed and
@@ -25,23 +23,24 @@ be created using the following instructions.
 
    ```yaml
    name: hello_world_dart
-   private: True # let's not accidentally publish this to pub.dartlang.org
-   description: >-
-     Hello world server example in dart.
+   publish_to: none # let's not accidentally publish this to pub.dartlang.org
+   description: Hello world server example in Dart
+
+   environment:
+     sdk: ">=2.1.0 <3.0.0"
+
    dependencies:
      shelf: ^0.7.3
-   environment:
-     sdk: ">=2.0.0 <3.0.0"
    ```
 
 2. If you want to run locally, install dependencies. If you only want to run in
    Docker or Knative, you can skip this step.
 
    ```shell
-   pub get
+   > pub get
    ```
 
-3. Create a new file `bin/main.dart` and write the following code:
+3. Create a new file `bin/server.dart` and write the following code:
 
    ```dart
    import 'dart:io';
@@ -49,22 +48,22 @@ be created using the following instructions.
    import 'package:shelf/shelf.dart';
    import 'package:shelf/shelf_io.dart';
 
-   void main() {
+   Future main() async {
      // Find port to listen on from environment variable.
-     var port = int.tryParse(Platform.environment['PORT']);
+     var port = int.tryParse(Platform.environment['PORT'] ?? '8080');
 
      // Read $TARGET from environment variable.
      var target = Platform.environment['TARGET'] ?? 'World';
 
-     // Create handler.
-     var handler = Pipeline().addMiddleware(logRequests()).addHandler((request) {
-       return Response.ok('Hello $target');
-     });
+     Response handler(Request request) => Response.ok('Hello $target');
 
      // Serve handler on given port.
-     serve(handler, InternetAddress.anyIPv4, port).then((server) {
-       print('Serving at http://${server.address.host}:${server.port}');
-     });
+     var server = await serve(
+       Pipeline().addMiddleware(logRequests()).addHandler(handler),
+       InternetAddress.anyIPv4,
+       port,
+     );
+     print('Serving at http://${server.address.host}:${server.port}');
    }
    ```
 
@@ -75,10 +74,6 @@ be created using the following instructions.
    # Use Google's official Dart image.
    # https://hub.docker.com/r/google/dart-runtime/
    FROM google/dart-runtime
-
-   # Service must listen to $PORT environment variable.
-   # This default value facilitates local development.
-   ENV PORT 8080
    ```
 
 5. Create a new file, `service.yaml` and copy the following service definition
@@ -86,21 +81,19 @@ be created using the following instructions.
    username.
 
    ```yaml
-   apiVersion: serving.knative.dev/v1alpha1
+   apiVersion: serving.knative.dev/v1beta1
    kind: Service
    metadata:
      name: helloworld-dart
      namespace: default
    spec:
-     runLatest:
-       configuration:
-         revisionTemplate:
-           spec:
-             container:
-               image: docker.io/{username}/helloworld-dart
-               env:
-                 - name: TARGET
-                   value: "Dart Sample v1"
+     template:
+       spec:
+         containers:
+           - image: docker.io/{username}/helloworld-dart
+             env:
+               - name: TARGET
+                 value: "Dart Sample v1"
    ```
 
 ## Building and deploying the sample
@@ -138,7 +131,7 @@ folder) you're ready to build and deploy the sample app.
 
 1. To find the IP address for your service, use these commands to get the
    ingress IP for your cluster. If your cluster is new, it may take sometime for
-   the service to get asssigned an external IP address.
+   the service to get assigned an external IP address.
 
    ```shell
    # In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
@@ -161,9 +154,9 @@ folder) you're ready to build and deploy the sample app.
 1. To find the URL for your service, use
 
    ```
-   kubectl get ksvc helloworld-dart  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
-   NAME                DOMAIN
-   helloworld-dart   helloworld-dart.default.example.com
+   kubectl get ksvc helloworld-dart  --output=custom-columns=NAME:.metadata.name,URL:.status.url
+   NAME             URL
+   helloworld-dart  http://helloworld-dart.default.example.com
    ```
 
 1. Now you can make a request to your app to see the result. Replace

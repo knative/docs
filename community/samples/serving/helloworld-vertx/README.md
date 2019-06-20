@@ -1,5 +1,3 @@
-# Hello World - Eclipse Vert.x sample
-
 Learn how to deploy a simple web app that is written in Java and uses Eclipse
 Vert.x. This samples uses Docker to build locally. The app reads in a `TARGET`
 env variable and then prints "Hello World: \${TARGET}!". If a value for `TARGET`
@@ -15,8 +13,8 @@ You must meet the following requirements to complete this sample:
 
 - A version of the Knative Serving component installed and running on your
   Kubernetes cluster. Follow the
-  [Knative installation instructions](https://github.com/knative/docs/blob/master/install/README.md)
-  if you need to create a Knative cluster.
+  [Knative installation instructions](../../../install/README.md) if you need to
+  create a Knative cluster.
 - The following software downloaded and install on your loacal machine:
   - [Java SE 8 or later JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
   - [Eclipse Vert.x v3.5.4](https://vertx.io/).
@@ -26,9 +24,9 @@ You must meet the following requirements to complete this sample:
 - A [Docker Hub](https://hub.docker.com/) account where you can push your
   container image.
 
-**Tip**: You can clone the [Knatve/docs repo](https://github.com/knative/docs)
+**Tip**: You can clone the [Knative/docs repo](https://github.com/knative/docs)
 and then modify the source files. Alternatively, learn more by manually creating
-the files youself.
+the files yourself.
 
 ## Creating and configuring the sample code
 
@@ -148,10 +146,6 @@ To create and configure the source files in the root of your working directory:
    # https://hub.docker.com/r/fabric8/s2i-java
    FROM fabric8/s2i-java:2.0
 
-   # Service must listen to $PORT environment variable.
-   # This default value facilitates local development.
-   ENV PORT 8080
-
    # Copy the JAR file to the deployment directory.
    ENV JAVA_APP_DIR=/deployments
    COPY target/helloworld-1.0.0-SNAPSHOT.jar /deployments/
@@ -162,21 +156,19 @@ To create and configure the source files in the root of your working directory:
    the `Eclipse Vert.x Sample v1` value.
 
    ```yaml
-   apiVersion: serving.knative.dev/v1alpha1
+   apiVersion: serving.knative.dev/v1beta1
    kind: Service
    metadata:
      name: helloworld-vertx
      namespace: default
    spec:
-     runLatest:
-       configuration:
-         revisionTemplate:
-           spec:
-             container:
-               image: docker.io/{username}/helloworld-vertx
-               env:
-                 - name: TARGET
-                   value: "Eclipse Vert.x Sample v1"
+     template:
+       spec:
+         containers:
+           - image: docker.io/{username}/helloworld-vertx
+             env:
+               - name: TARGET
+                 value: "Eclipse Vert.x Sample v1"
    ```
 
 ## Building and deploying the sample
@@ -249,14 +241,14 @@ To verify that your sample app has been successfully deployed:
    command:
 
    ```shell
-   kubectl get services.serving.knative.dev helloworld-vertx  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+   kubectl get services.serving.knative.dev helloworld-vertx  --output=custom-columns=NAME:.metadata.name,URL:.status.url
    ```
 
    Example result:
 
    ```shell
-   NAME                DOMAIN
-   helloworld-vertx     helloworld-vertx.default.example.com
+   NAME                URL
+   helloworld-vertx    http://helloworld-vertx.default.example.com
    ```
 
 1. Run the following `curl` command to test your deployed sample app. You must

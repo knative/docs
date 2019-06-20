@@ -1,0 +1,159 @@
+# This is a simple example that creates a source and sends events to a function.
+
+# The namespace the example lives in.
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: knative-debug
+
+---
+
+# The event source.
+
+apiVersion: sources.eventing.knative.dev/v1alpha1
+kind: KubernetesEventSource
+metadata:
+  name: src
+  namespace: knative-debug
+spec:
+  namespace: knative-debug
+  serviceAccountName: service-account
+  sink:
+    apiVersion: eventing.knative.dev/v1alpha1
+    kind: Channel
+    name: chan
+
+---
+
+# The Channel events are sent to.
+
+apiVersion: eventing.knative.dev/v1alpha1
+kind: Channel
+metadata:
+  name: chan
+  namespace: knative-debug
+spec:
+  provisioner:
+    apiVersion: eventing.knative.dev/v1alpha1
+    kind: ClusterChannelProvisioner
+    name: in-memory-channel
+
+---
+
+# The Subscription to the Channel.
+
+apiVersion: eventing.knative.dev/v1alpha1
+kind: Subscription
+metadata:
+  name: sub
+  namespace: knative-debug
+spec:
+  channel:
+    apiVersion: eventing.knative.dev/v1alpha1
+    kind: Channel
+    name: chan
+  subscriber:
+    ref:
+      apiVersion: v1
+      kind: Service
+      name: svc
+
+---
+
+# K8s Service which points at the Deployment below.
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc
+  namespace: knative-debug
+spec:
+  selector:
+    app: fn
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+
+---
+
+# K8s Deployment that simply writes input requests to its log.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fn
+  namespace: knative-debug
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fn
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
+      labels:
+        app: fn
+    spec:
+      containers:
+        - name: user-container
+          # This corresponds to
+          # https://github.com/knative/eventing-contrib/blob/v0.2.1/cmd/message_dumper/dumper.go.
+          image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/message_dumper@sha256:ab5391755f11a5821e7263686564b3c3cd5348522f5b31509963afb269ddcd63
+          ports:
+            - containerPort: 8080
+
+---
+
+# Everything after this is just structure for the above.
+
+---
+
+# K8s Service Account that runs `src`'s container.
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: service-account
+  namespace: knative-debug
+
+---
+
+# The permissions that `src` needs.
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  creationTimestamp: null
+  name: event-watcher
+  namespace: knative-debug
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - events
+    verbs:
+      - get
+      - list
+      - watch
+
+---
+
+# Give `src`'s service account the necessary permissions.
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  creationTimestamp: null
+  name: k8s-ra-event-watcher
+  namespace: knative-debug
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: event-watcher
+subjects:
+  - kind: ServiceAccount
+    name: service-account
+    namespace: knative-debug

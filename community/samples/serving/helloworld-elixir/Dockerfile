@@ -21,7 +21,7 @@ RUN mix release --env=prod --verbose \
     && mv /opt/release/bin/${APP_NAME} /opt/release/bin/start_server
 
 FROM alpine:latest
-RUN apk update && apk --no-cache --update add bash openssl-dev
+RUN apk update && apk --no-cache --update add bash openssl-dev ca-certificates
 
 RUN addgroup -g 1000 appuser && \
     adduser -S -u 1000 -G appuser appuser
@@ -31,7 +31,7 @@ RUN chown appuser /opt/app/var
 
 USER appuser
 
-ENV PORT=8080 MIX_ENV=prod REPLACE_OS_VARS=true
+ENV MIX_ENV=prod REPLACE_OS_VARS=true
 WORKDIR /opt/app
 COPY --from=0 /opt/release .
 ENV RUNNER_LOG_DIR /var/log

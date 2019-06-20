@@ -1,5 +1,3 @@
-# Hello World - Clojure sample
-
 A simple web app written in Clojure that you can use for testing. It reads in an
 env variable `TARGET` and prints "Hello \${TARGET}!". If TARGET is not
 specified, it will use "World" as the TARGET.
@@ -7,8 +5,8 @@ specified, it will use "World" as the TARGET.
 ## Prerequisites
 
 - A Kubernetes cluster with Knative installed. Follow the
-  [installation instructions](https://github.com/knative/docs/blob/master/install/README.md)
-  if you need to create one.
+  [installation instructions](../../../install/README.md) if you need to create
+  one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
 
@@ -75,10 +73,6 @@ recreate the source files from this folder.
    # Build an uberjar release artifact.
    RUN mv "$(lein uberjar | sed -n 's/^Created \(.*standalone\.jar\)/\1/p')" app-standalone.jar
 
-   # Service must listen to $PORT environment variable.
-   # This default value facilitates local development.
-   ENV PORT 8080
-
    # Run the web service on container startup.
    CMD ["java", "-jar", "app-standalone.jar"]
    ```
@@ -88,21 +82,19 @@ recreate the source files from this folder.
    username.
 
    ```yaml
-   apiVersion: serving.knative.dev/v1alpha1
+   apiVersion: serving.knative.dev/v1beta1
    kind: Service
    metadata:
      name: helloworld-clojure
      namespace: default
    spec:
-     runLatest:
-       configuration:
-         revisionTemplate:
-           spec:
-             container:
-               image: docker.io/{username}/helloworld-clojure
-               env:
-                 - name: TARGET
-                   value: "Clojure Sample v1"
+     template:
+       spec:
+         containers:
+           - image: docker.io/{username}/helloworld-clojure
+             env:
+               - name: TARGET
+                 value: "Clojure Sample v1"
    ```
 
 ## Building and deploying the sample
@@ -163,9 +155,9 @@ folder) you're ready to build and deploy the sample app.
 1. To find the URL for your service, use
 
    ```
-   kubectl get ksvc helloworld-clojure --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
-   NAME                DOMAIN
-   helloworld-clojure  helloworld-clojure.default.example.com
+   kubectl get ksvc helloworld-clojure --output=custom-columns=NAME:.metadata.name,URL:.status.url
+   NAME                URL
+   helloworld-clojure  http://helloworld-clojure.default.example.com
    ```
 
 1. Now you can make a request to your app to see the results. Replace

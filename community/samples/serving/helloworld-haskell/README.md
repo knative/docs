@@ -1,5 +1,3 @@
-# Hello World - Haskell sample
-
 A simple web app written in Haskell that you can use for testing. It reads in an
 env variable `TARGET` and prints "Hello \${TARGET}!". If TARGET is not
 specified, it will use "World" as the TARGET.
@@ -7,8 +5,8 @@ specified, it will use "World" as the TARGET.
 ## Prerequisites
 
 - A Kubernetes cluster with Knative installed. Follow the
-  [installation instructions](https://github.com/knative/docs/blob/master/install/README.md)
-  if you need to create one.
+  [installation instructions](../../../install/README.md) if you need to create
+  one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
 
@@ -101,10 +99,6 @@ recreate the source files from this folder.
    WORKDIR /root/
    COPY --from=builder /root/.local/bin/helloworld-haskell-exe .
 
-   # Service must listen to $PORT environment variable.
-   # This default value facilitates local development.
-   ENV PORT 8080
-
    # Run the web service on container startup.
    CMD ["./helloworld-haskell-exe"]
    ```
@@ -114,21 +108,19 @@ recreate the source files from this folder.
    username.
 
    ```yaml
-   apiVersion: serving.knative.dev/v1alpha1
+   apiVersion: serving.knative.dev/v1beta1
    kind: Service
    metadata:
      name: helloworld-haskell
      namespace: default
    spec:
-     runLatest:
-       configuration:
-         revisionTemplate:
-           spec:
-             container:
-               image: docker.io/{username}/helloworld-haskell
-               env:
-                 - name: TARGET
-                   value: "Haskell Sample v1"
+     template:
+       spec:
+         containers:
+           - image: docker.io/{username}/helloworld-haskell
+             env:
+               - name: TARGET
+                 value: "Haskell Sample v1"
    ```
 
 ## Build and deploy this sample
@@ -196,9 +188,9 @@ folder) you're ready to build and deploy the sample app.
 1. To find the URL for your service, enter:
 
    ```
-   kubectl get ksvc helloworld-haskell  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
-   NAME                   DOMAIN
-   helloworld-haskell     helloworld-haskell.default.example.com
+   kubectl get ksvc helloworld-haskell  --output=custom-columns=NAME:.metadata.name,URL:.status.url
+   NAME                   URL
+   helloworld-haskell     http://helloworld-haskell.default.example.com
    ```
 
 1. Now you can make a request to your app and see the result. Replace
