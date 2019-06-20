@@ -82,7 +82,7 @@ kubectl -n default create -f ./steps.yaml
 
 ### Create the Sequence
 
-Here, if you are using different type of Channel, you need to change the
+The `sequence.yaml` file contains the specifications for creating the Sequence. If you are using a different type of Channel, you need to change the
 spec.channelTemplate to point to your desired Channel.
 
 ```yaml
@@ -142,6 +142,9 @@ kubectl -n default create -f ./event-display.yaml
 ```
 
 ### Create the CronJobSource targeting the Sequence
+
+This will create a CronJobSource which will send a CloudEvent with {"message": "Hello world!"} as
+the data payload every 2 minutes.
 
 ```yaml
 apiVersion: sources.eventing.knative.dev/v1alpha1

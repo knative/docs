@@ -4,8 +4,9 @@ weight: 20
 type: "docs"
 ---
 
-Sequence CRD provides a way to define a an in-order list of functions that will
-be invoked. Sequence creates `Channel`s and `Subscription`s under the hood.
+Sequence CRD provides a way to define an in-order list of functions that will
+be invoked. Each step can modify, filter or create a new kind of an event.
+Sequence creates `Channel`s and `Subscription`s under the hood.
 
 ## Usage
 
@@ -41,7 +42,7 @@ to this address will target the `Channel` which is fronting the first Step in th
 ## Examples
 
 For each of these examples below, we'll use
-[`CronJobSource`](https://knative.dev/v0.4-docs/reference/eventing/eventing-sources-api/#CronJobSource)
+[`CronJobSource`](https://knative.dev/docs/eventing/samples/cronjob-source/)
 as the source of events.
 
 We also use a very simple [transformer](https://github.com/vaikas-google/transformer) which
