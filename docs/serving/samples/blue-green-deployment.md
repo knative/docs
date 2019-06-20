@@ -174,7 +174,7 @@ spec:
       percent: 100 # All traffic still going to the first revision
     - revisionName: blue-green-demo-m9548
       percent: 0 # 0% of traffic routed to the second revision
-      name: v2 # A named route
+      tag: v2 # A named route
 ```
 
 Save the file, then apply the updated route to your cluster:
@@ -216,7 +216,7 @@ spec:
       percent: 50 # Updating the percentage from 100 to 50
     - revisionName: blue-green-demo-m9548
       percent: 50 # Updating the percentage from 0 to 50
-      name: v2
+      tag: v2
 ```
 
 Save the file, then apply the updated route to your cluster:
@@ -250,7 +250,7 @@ spec:
   traffic:
     - revisionName: blue-green-demo-lcfrd
       percent: 0
-      name: v1 # Adding a new named route for v1
+      tag: v1 # Adding a new named route for v1
     - revisionName: blue-green-demo-m9548
       percent: 100
       # Named route for v2 has been removed, since we don't need it anymore
