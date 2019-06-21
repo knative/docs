@@ -30,7 +30,7 @@ You must meet the following requirements to run this sample:
     cd knative-docs/serving/samples/gitwebhook-go
     ```
 
-1. Use Docker to build a container image for this service. Replace `username`
+1. Use Docker to build a container image for this service. Replace `{DOCKER_HUB_USERNAME}`
    with your Docker Hub username in the following commands.
 
     ```shell
