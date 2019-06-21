@@ -145,16 +145,17 @@ kubectl -n default create rolebinding eventing-broker-filter \
 Note that these commands each use three different objects, all named
 `eventing-broker-ingress` or `eventing-broker-filter`. The `ClusterRole` is
 installed with Knative Eventing
-[here](https://github.com/knative/eventing/blob/master/config/200-broker-clusterrole.yaml). The `ServiceAccount` was
-created two commands prior. The `RoleBinding` is created here.
+[here](https://github.com/knative/eventing/blob/master/config/200-broker-clusterrole.yaml).
+The `ServiceAccount` was created two commands prior. The `RoleBinding` is
+created here.
 
 Create RBAC permissions granting access to shared configmaps for logging,
 tracing, and metrics configuration.
 
-_These commands assume the shared Knative
-Eventing components are installed in the `knative-eventing` namespace. If you
-installed the shared Knative Eventing components in a different namespace,
-replace `knative-eventing` with the name of that namespace._
+_These commands assume the shared Knative Eventing components are installed in
+the `knative-eventing` namespace. If you installed the shared Knative Eventing
+components in a different namespace, replace `knative-eventing` with the name of
+that namespace._
 
 ```shell
 kubectl -n knative-eventing create rolebinding eventing-config-reader-default-eventing-broker-ingress \
