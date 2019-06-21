@@ -149,9 +149,9 @@ edit podautoscaler <revision-name>
 
 ### Default behavior
 
-If the `minScale` annotation is not set, pods will scale to zero.
-If the `maxScale` annotation is not set, there will be no upper limit for the number of pods created.
+If the `minScale` annotation is not set, pods will scale to zero (or to 1 if `enable-scale-to-zero` is `false` per the ConfigMap mentioned above).
 
+If the `maxScale` annotation is not set, there will be no upper limit for the number of pods created.
 
 ## Configuring CPU-based autoscaling
 
