@@ -8,16 +8,15 @@ Since Knative v0.2, per revision autoscalers have been replaced by a single
 shared autoscaler. This is, by default, the Knative Pod Autoscaler (KPA), which
 provides fast, request-based autoscaling capabilities out of the box.
 
-## Configuring Knative Pod Autoscaler
+# Configuring Knative Pod Autoscaler
 
-To modify the autoscaler configuration, you must modify a Kubernetes ConfigMap
-called `config-autoscaler` in the `knative-serving` namespace.
+To modify the Knative Pod Autoscaler (KPA) configuration, you must modify a Kubernetes ConfigMap called `config-autoscaler` in the `knative-serving` namespace.
 
 You can view the default contents of this ConfigMap using the following command.
 
 `kubectl -n knative-serving get cm config-autoscaler`
 
-### Example of default ConfigMap
+## Example of default ConfigMap
 
 ```
 apiVersion: v1
@@ -37,12 +36,12 @@ data:
  tick-interval: 2s
 ```
 
-## Configuring scale to zero
+# Configuring scale to zero for KPA
 
 To correctly configure autoscaling to zero for revisions, you must modify the
 following parameters in the ConfigMap.
 
-### scale-to-zero-grace-period
+## scale-to-zero-grace-period
 
 `scale-to-zero-grace-period` specifies the time an inactive revision is left
 running before it is scaled to zero (min: 30s).
@@ -51,7 +50,7 @@ running before it is scaled to zero (min: 30s).
 scale-to-zero-grace-period: 30s
 ```
 
-### stable-window
+## stable-window
 
 When operating in a stable mode, the autoscaler operates on the average
 concurrency over the stable window.
@@ -67,11 +66,11 @@ annotation.
 autoscaling.knative.dev/window: 60s
 ```
 
-### enable-scale-to-zero
+## enable-scale-to-zero
 
 Ensure that enable-scale-to-zero is set to `true`.
 
-### Termination period
+## Termination period
 
 The termination period is the time that the pod takes to shut down after the
 last request is finished. The termination period of the pod is equal to the sum
@@ -81,6 +80,8 @@ parameters. In the case of this example, the termination period would be 90s.
 ## Configuring concurrency
 
 Concurrency for autoscaling can be configured using the following methods.
+
+## Configuring concurrent request limits
 
 ### target
 
@@ -123,7 +124,7 @@ containerConcurrency: 0 | 1 | 2-N
 If there is no `/target` annotation, the autoscaler is configured as if
 `/target` == `containerConcurrency`.
 
-### Configuring scale bounds (minScale and maxScale)
+## Configuring scale bounds (minScale and maxScale)
 
 The `minScale` and  `maxScale` annotations can be used to configure the minimum and maximum number of pods that can serve applications.
 These annotations can be used to prevent cold starts or to help control computing costs.
@@ -131,15 +132,22 @@ These annotations can be used to prevent cold starts or to help control computin
 `minScale` and `maxScale` can be configured as follows in the revision template;
 
 ```
-autoscaling.knative.dev/minScale: "2"
-autoscaling.knative.dev/maxScale: "10"
+spec:
+  template:
+    metadata:
+      autoscaling.knative.dev/minScale: "2"
+      autoscaling.knative.dev/maxScale: "10"
 ```
 
-Using these annotations in the revision template will propagate this to `PodAutoscaler` objects. You can also manually propagate `PodAutoscaler` objects.
+Using these annotations in the revision template will propagate this to `PodAutoscaler` objects. `PodAutoscaler` objects are mutable and can be further modified later without modifying anything else in the Knative Serving system.
+
+```
+edit podautoscaler <revision-name>
+```
 
 **NOTE:** These annotations apply for the full lifetime of a revision. Even when a revision is not referenced by any route, the minimal pod count specified by `minScale` will still be provided. Keep in mind that non-routeable revisions may be garbage collected, which enables Knative to reclaim the resources.
 
-#### Default behavior
+### Default behavior
 
 If the `minScale` annotation is not set, pods will scale to zero.
 If the `maxScale` annotation is not set, there will be no upper limit for the number of pods created.
@@ -148,8 +156,7 @@ If the `maxScale` annotation is not set, there will be no upper limit for the nu
 ## Configuring CPU-based autoscaling
 
 **NOTE:** You can configure Knative autoscaling to work with either the default
-KPA or a CPU based metric, i.e. Horizontal Pod Autoscaler (HPA), however
-scale-to-zero capabilities are only supported for KPA.
+KPA or a CPU based metric, i.e. Horizontal Pod Autoscaler (HPA).
 
 You can configure Knative to use CPU based autoscaling instead of the default
 request based metric by adding or modifying the `autoscaling.knative.dev/class`
@@ -157,11 +164,15 @@ and `autoscaling.knative.dev/metric` values as annotations in the revision
 template.
 
 ```
-autoscaling.knative.dev/metric: cpu
-autoscaling.knative.dev/class: hpa.autoscaling.knative.dev
+spec:
+  template:
+    metadata:
+      autoscaling.knative.dev/metric: concurrency
+      autoscaling.knative.dev/class: hpa.autoscaling.knative.dev
 ```
 
 ## Additional resources
 
 - [Go autoscaling sample](https://knative.dev/docs/serving/samples/autoscale-go/index.html)
-- [Knative v0.3 Autoscaling  - A Love Story blog post](https://medium.com/knative/knative-v0-3-autoscaling-a-love-story-d6954279a67a)
+- ["Knative v0.3 Autoscaling  - A Love Story" blog post](https://medium.com/knative/knative-v0-3-autoscaling-a-love-story-d6954279a67a)
+- [Kubernetes Horizontal Pod Autoscaler (HPA)](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)
