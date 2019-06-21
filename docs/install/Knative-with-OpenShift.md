@@ -19,69 +19,35 @@ You can find [guides for other platforms here](README.md).
 > Note: Currently, long-running clusters are not supported on OpenShift 4.
 
 
-## Install `oc` (openshift cli)
+## Installing the Knative Serving Operator
 
-You can install the latest version of `oc`, the OpenShift CLI, into your local
-directory by downloading the right OpenShift 4 release tarball for your OS from the
-[releases page](https://github.com/openshift/origin/releases/tag/v4.10.0).
+1. Go to **Catalog > OperatorHub** in the OpenShift Web Console. A list of operators for OpenShift, provided by Red Hat as well as a community of partners and open-source projects is provided. Click on the **Knative Serving Operator** tile.
 
-```shell
-export OS=<your OS here>
-curl https://github.com/openshift/origin/releases/download/v3.10.0/openshift-origin-client-tools-v3.10.0-dd10d17-$OS-64bit.tar.gz -o oc.tar.gz
-tar zvf oc.tar.gz -x openshift-origin-client-tools-v3.10.0-dd10d17-$OS-64bit/oc --strip=1
-
-# You will now have the oc binary in your local directory
-```
-
-
-## Installing the Knative Serving Operator 
-
-1. Go to **Catalog > OperatorHub** in the OpenShift Web Console. A list of operators for OpenShift, provided by Red Hat as well as a community of partners and open-source projects is provided. Click on the **Knative Serving Operator** tile. Use the **Filter by Keyword** box to facilitate the search of the Knative Serving operator in the catalog. 
+> **NOTE:** Use the **Filter by Keyword** box to facilitate the search of the Knative Serving operator in the catalog.
 
 ![KSO Tile](/images/knative_serving_tile_highlighted.png)
 
-2. A `Show Community Operator` dialog box will appear. Click **Continue** to proceed.
+2. A **Show Community Operator** dialog box will open. Click **Continue** to proceed.
 
 3. The **Knative Serving Operator** descriptor screen will appear. Click **Install**.
 
 ![KSO Install Screen](/images/knative_serving_operator_screen.png)
 
-4. On the **Create the Operator Subscription** screen, ensure  **All namespaces on the cluster (default)** is selected under the **Installation Mode** section.
+4. On the **Create the Operator Subscription** screen, create a new subscription by cliking on the **Subscribe** button. This will install the Knative Serving Operator in the project `openshift-operators` and Knative Serving in the `knative-serving` project.
 
 ![KSO Namespaces Default](/images/knative_serving_namespaces_default.png)
 
-> Note: The Operator Lifecycle Manager (OLM) will install the operator in all namespaces. This is will create `knative-serving`, `istio-operator`,and `istio-system` namespaces.
+> **NOTE:** The Operator Lifecycle Manager (OLM) installs the operator, which will automatically install Knative. This installation will create the `knative-serving`, `istio-operator`, and `istio-system` namespaces.
 
-5. Confirm the subscription for the installation operator, by viewing the **Subscription Overview**. The **UPGRADE STATUS** will update from `1 installing` to `1 Installed`.
+5. Verify the subscription status for the installation operator, by viewing the **Subscription Overview**. The **UPGRADE STATUS** will update from **0 Installing** to **1 Installed**. 
+
+> **NOTE:** The screen will update after a few minutes. Wait for the `knative-serving` namespace to appear in the project drop-down menu. Refresh the page if needed.
 
 ![KSO Upgrade Status](/images/knative_serving_installed_sub.png)
 
-> Note: The screen will update after a few minutes. Wait for the `knative-serving` namespace to appear in the project drop-down menu. Refresh the page if needed.
-
-6. Knative Serving is now installed. Navigate to **Catalog > Installed Operators** to confirm the operator is installed. Click on `knative-serving` to view the install status.
+6. Knative Serving is now installed. Navigate to **Catalog > Installed Operators** to confirm the operator is installed. Click on **knative-serving** to view the install status.
 
 ![KSO installed](/images/knative_serving_installed_operator.png)
-
-
-
-## Uninstalling the Knative Serving Operator 
-
-1. To uninstall the operator, go to **Catalog > OperatorHub** in the OpenShift Web Console. 
-
-2. Click on the **Knative Serving Operator** tile. 
-
-![KSO Uninstall Tile](/images/knative_serving_uninstall_operator.png)
- 
-3. The **Show Community Operator**` dialog box will appear. Click **Continue** to proceed.
-
-4. Once the **Knative Serving Operator** descriptor screen appears, click **Uninstall**.
-
-![KSO Uninstall](/images/knative_serving_uninstall_operator.png)
-
-5. Select **Also completely remove the Operator from the selected namespace**, in the **Remove Operator Subscription** dialog box.
-
-6. Click **Remove**.
-
 
 
 ## Deploying an app
@@ -114,6 +80,26 @@ fi
 
 export IP_ADDRESS=$(oc get node  -o 'jsonpath={.items[0].status.addresses[0].address}'):$(oc get svc $INGRESSGATEWAY -n istio-system -o 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
 ```
+
+## Uninstalling the Knative Serving Operator
+
+1. Go to **Catalog > OperatorHub** in the OpenShift Web Console.
+
+2. Click on the **Knative Serving Operator** tile.
+
+![KSO Uninstall Tile](/images/knative_serving_uninstall_operator.png)
+
+> **NOTE:** The operator tile will indicate it is installed.
+
+3. The **Show Community Operator**` dialog box will appear. Click **Continue** to proceed.
+
+4. Once the **Knative Serving Operator** descriptor screen appears, click **Uninstall**.
+
+![KSO Uninstall](/images/knative_serving_uninstall_operator.png)
+
+5. Select **Also completely remove the Operator from the selected namespace**, in the **Remove Operator Subscription** dialog box.
+
+6. Click **Remove**.
 
 
 ## Cleaning up
