@@ -18,5 +18,5 @@ For example, if you didn't set a label when you created the Route
 `helloworld-go` and you want to make it local to the cluster, run:
 
 ```shell
-kubectl label route helloworld-go serving.knative.dev/visibility=cluster-local
+kubectl label kservice helloworld-go serving.knative.dev/visibility=cluster-local
 ```
