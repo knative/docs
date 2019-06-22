@@ -285,7 +285,8 @@ curl -v "http://default-broker.default.svc.cluster.local/" \
 
 #### Knative Source
 
-Provide the Knative Source the `default` `Broker` as its sink:
+Provide the Knative Source the `default` `Broker` as its sink
+ (note you'll need to use ko apply -f <source_file>.yaml to create it):
 
 ```yaml
 apiVersion: sources.eventing.knative.dev/v1alpha1
@@ -293,7 +294,22 @@ kind: ContainerSource
 metadata:
   name: heartbeats-sender
 spec:
-  image: github.com/knative/eventing-contrib/cmd/heartbeats/
+  template:
+    spec:
+      containers:
+        - image: github.com/knative/eventing-contrib/cmd/heartbeats/
+          name: heartbeats-sender
+          args:
+            - --eventType=dev.knative.foo.bar
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
   sink:
     apiVersion: eventing.knative.dev/v1alpha1
     kind: Broker
