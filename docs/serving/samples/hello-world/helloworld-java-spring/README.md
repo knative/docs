@@ -3,23 +3,22 @@ testing. It reads in an env variable `TARGET` and prints "Hello \${TARGET}!". If
 TARGET is not specified, it will use "World" as the TARGET.
 
 Follow the steps below to create the sample code and then deploy the app to your
-cluster. You can also download a working copy of the sample, by running the
+cluster. You can also download a working copy of the sample by running the
 following commands:
 
-    ```shell
-   git clone -b "release-0.6" https://github.com/knative/docs knative-docs
-   cd knative-docs/serving/samples/hello-world/helloworld-java-spring
-   ```
+```shell
+git clone -b "release-0.6" https://github.com/knative/docs knative-docs 
+cd knative-docs/serving/samples/hello-world/helloworld-java-spring
+```
 
- ## Before you begin
+## Before you begin
 
 - A Kubernetes cluster with Knative installed. Follow the
   [installation instructions](../../../../install/README.md) if you need to
   create one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
-- You have installed
-  [Java SE 8 or later JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
+- You have installed [Java SE 8 or later JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
 
 ## Recreating the sample code
 
@@ -120,7 +119,7 @@ following commands:
    username.
 
     ```yaml
-    apiVersion: serving.knative.dev/v1alpha1
+    apiVersion: serving.knative.dev/v1beta1
     kind: Service
     metadata:
       name: helloworld-java-spring
@@ -188,9 +187,10 @@ folder) you're ready to build and deploy the sample app.
     xxxxxxx-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
 
     # Now you can assign the external IP address to the env variable.
-    export IP_ADDRESS=<EXTERNAL-IP column from the command above> 
+    export IP_ADDRESS=<EXTERNAL-IP column from the command above>
 
     # Or just execute:
+
     export IP_ADDRESS=$(kubectl get svc $INGRESSGATEWAY \
       --namespace istio-system \
       --output jsonpath="{.status.loadBalancer.ingress[*].ip}")
@@ -200,21 +200,17 @@ folder) you're ready to build and deploy the sample app.
 
     ```shell
     kubectl get ksvc helloworld-java-spring \
-       --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+       --output=custom-columns=NAME:.metadata.name,URL:.status.url
 
-    NAME                       DOMAIN
-    helloworld-java-spring     helloworld-java-spring.default.example.com
-
-    # Or simply:
-    export DOMAIN_NAME=$(kubectl get ksvc helloworld-java-spring \
-      --output jsonpath={.status.domain}
+    NAME                       URL
+    helloworld-java-spring     http://helloworld-java-spring.default.example.com
     ```
 
 1. Now you can make a request to your app to see the result. Presuming, the IP
    address you got in the step above is in the `${IP_ADDRESS}` env variable:
 
     ```shell
-    curl -H "Host: ${DOMAIN_NAME}" http://${IP_ADDRESS}
+    curl -H "Host: helloworld-java-spring.default.example.com" http://${IP_ADDRESS}
 
     Hello Spring Boot Sample v1!
     ```
@@ -223,6 +219,6 @@ folder) you're ready to build and deploy the sample app.
 
 To remove the sample app from your cluster, delete the service record:
 
-```shell
-kubectl delete --filename service.yaml
-```
+ ```shell
+ kubectl delete --filename service.yaml
+ ```
