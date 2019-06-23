@@ -8,7 +8,7 @@ type: "docs"
 # Knative Install on OpenShift
 
 This guide walks you through the installation of the latest version of [Knative
-Serving](https://github.com/knative/serving) on [OpenShift](https://github.com/openshift/origin) by using the Knative Serving Operator. The operator is available on the OpenShift embedded Operatorhub. Create and deploy an image of a sample "hello world" app onto the newly created Knative cluster.
+Serving](https://github.com/knative/serving) on [OpenShift](https://github.com/openshift/origin) by using the Knative Serving Operator. The operator is available on the OpenShift Operatorhub. Create and deploy an image of a sample "hello world" app onto the newly created Knative cluster.
 
 You can find [guides for other platforms here](README.md).
 
