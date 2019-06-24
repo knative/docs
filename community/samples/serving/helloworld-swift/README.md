@@ -92,18 +92,16 @@ source files from this folder.
    apiVersion: serving.knative.dev/v1alpha1
    kind: Service
    metadata:
-   name: helloworld-swift
-   namespace: default
+     name: helloworld-swift
+     namespace: default
    spec:
-   runLatest:
-     configuration:
-     revisionTemplate:
+     template:
        spec:
-       container:
-         image: docker.io/{username}/helloworld-swift
-         env:
-           - name: TARGET
-         value: "Swift"
+       containers:
+         - image: docker.io/{username}/helloworld-swift
+           env:
+             - name: TARGET
+           value: "Swift"
    ```
 
 ## Building and deploying the sample

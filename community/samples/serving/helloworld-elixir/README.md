@@ -99,15 +99,13 @@ When asked, if you want to `Fetch and install dependencies? [Yn]` select `y`
      name: helloworld-elixir
      namespace: default
    spec:
-     runLatest:
-       configuration:
-         revisionTemplate:
-           spec:
-             container:
-               image: docker.io/{username}/helloworld-elixir
-               env:
-                 - name: TARGET
-                   value: "elixir Sample v1"
+     template:
+       spec:
+         containers:
+           - image: docker.io/{username}/helloworld-elixir
+             env:
+               - name: TARGET
+                 value: "elixir Sample v1"
    ```
 
 # Building and deploying the sample
