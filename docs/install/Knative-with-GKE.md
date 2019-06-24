@@ -121,9 +121,10 @@ the recommended configuration for a cluster is:
 > [Gloo](./Knative-with-Gloo.md)) will be used, then you can remove the
 > `--addons` line below.
 
-> Note: If you want to use [Auto TLS feature](../serving/using-auto-tls.md), you need to remove 
-> the `--addons` line below, and follow the [instructions](../installing-istio.md) to install Istio
-> with Secret Discovery Service.
+> Note: If you want to use [Auto TLS feature](../serving/using-auto-tls.md), you
+> need to remove the `--addons` line below, and follow the
+> [instructions](../installing-istio.md) to install Istio with Secret Discovery
+> Service.
 
 ```bash
 gcloud beta container clusters create $CLUSTER_NAME \

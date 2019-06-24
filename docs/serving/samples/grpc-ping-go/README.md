@@ -8,10 +8,10 @@ A simple gRPC server written in Go that you can use for testing.
 
 - Download a copy of the code:
 
-   ```shell
-   git clone -b "release-0.6" https://github.com/knative/docs knative-docs
-   cd knative-docs/docs/serving/samples/grpc-ping-go
-   ```
+  ```shell
+  git clone -b "release-0.6" https://github.com/knative/docs knative-docs
+  cd knative-docs/docs/serving/samples/grpc-ping-go
+  ```
 
 ## Build and run the gRPC server
 
