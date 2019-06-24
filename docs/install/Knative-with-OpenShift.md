@@ -4,7 +4,6 @@ linkTitle: "OpenShift"
 weight: 15
 type: "docs"
 ---
-<<<<<<< HEAD:install/Knative-with-OpenShift.md
 
 # Knative Install on OpenShift
 
@@ -23,7 +22,6 @@ You can find [guides for other platforms here](./README.md).
 
 ## Before you begin
 
-<<<<<<< HEAD:install/Knative-with-OpenShift.md
 * An OpenShift 4 cluster is required for installation. Visit [try.openshift.com](try.openshift.com) for information on setting up a cluster. You will need cluster administrator privileges to install and use Knative on an OpenShift cluster. 
 =======
 These instructions will run an OpenShift 3.11 (Kubernetes 1.11) cluster on your
