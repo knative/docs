@@ -154,7 +154,7 @@ To manually add a TLS certificate to your Knative cluster, you create a
 Kubernetes secret and then configure the `knative-ingress-gateway`:
 
 1. Run the following command to create a Kubernetes secret to hold your TLS
-   certificate, `cert.pk`, and the private key, `cert.pem`:
+   certificate, `cert.pem`, and the private key, `cert.pk`:
 
    ```shell
    kubectl create --namespace istio-system secret tls istio-ingressgateway-certs \
