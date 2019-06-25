@@ -5,6 +5,14 @@ type: "docs"
 
 # Using Sequences in series
 
+## Overview
+
+We are going to create the following logical configuration. We create a CronJobSource,
+feeding events to a (`Sequence`)[../../../sequence.md]. Sequence can then do either external work, or 
+out of band create additional events.
+
+![Logical Configuration](./sequence-terminal.png)
+
 ## Prerequisites
 
 For this example, we'll assume you have set up an `InMemoryChannel`
@@ -14,14 +22,6 @@ to modify the examples to reflect this.
 
 If you want to use different type of `Channel`, you will have to modify the
 `Sequence.Spec.ChannelTemplate` to create the appropriate Channel resources.
-
-## Overview
-
-We are going to create the following logical configuration. We create a CronJobSource,
-feeding events to a `Sequence`. Sequence can then do either external work, or 
-out of band create additional events.
-
-![Logical Configuration](./sequence-terminal.png)
 
 
 ## Setup

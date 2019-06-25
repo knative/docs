@@ -6,6 +6,18 @@ type: "docs"
 
 # Using Sequence with Broker and Trigger
 
+## Overview
+
+We are going to create the following logical configuration. We create a CronJobSource,
+feeding events into the Broker, then we create a `Filter` that wires those events
+into a (`Sequence`)[../../../sequence.md] consisting of 3 steps. Then we take the end of the Sequence and
+feed newly minted events back into the Broker and create another Trigger which 
+will then display those events.
+
+**NOTE** [TODO: Fix this](https://github.com/knative/eventing/issues/1421)
+So, currently as set up, the events emitted by the Sequence do not make it into
+the Broker.
+
 ## Prerequisites
 
 For this example, we'll assume you have set up a `Broker` and an `InMemoryChannel`
@@ -15,18 +27,6 @@ modify the examples to reflect this.
 
 If you want to use different type of `Channel`, you will have to modify the
 `Sequence.Spec.ChannelTemplate` to create the appropriate Channel resources.
-
-## Overview
-
-We are going to create the following logical configuration. We create a CronJobSource,
-feeding events into the Broker, then we create a `Filter` that wires those events
-into a Sequence consisting of 3 steps. Then we take the end of the Sequence and
-feed newly minted events back into the Broker and create another Trigger which 
-will then display those events.
-
-**NOTE** [TODO: Fix this](https://github.com/knative/eventing/issues/1421)
-So, currently as set up, the events emitted by the Sequence do not make it into
-the Broker.
 
 ![Logical Configuration](./sequence-with-broker-trigger.png)
 
