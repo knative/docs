@@ -177,7 +177,7 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
    >   statement to install the controller.
 
    ```shell
-   curl -L https://github.com/knative/build/releases/download/v0.6.0/build.yaml \
+   curl -L https://github.com/knative/build/releases/download/v0.7.0/build.yaml \
      | sed 's/LoadBalancer/NodePort/' \
      | kubectl apply --filename -
    ```
@@ -273,7 +273,7 @@ curl -L https://github.com/knative/serving/releases/download/v0.7.0/serving.yaml
 ```
 
 ```shell
-curl -L https://github.com/knative/build/releases/download/v0.6.0/build.yaml \
+curl -L https://github.com/knative/build/releases/download/v0.7.0/build.yaml \
  | sed 's/LoadBalancer/NodePort/' \
  | kubectl delete --filename -
 ```

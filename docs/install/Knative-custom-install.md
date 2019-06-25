@@ -78,7 +78,7 @@ The following Knative installation files are available:
   - https://github.com/knative/serving/releases/download/v0.7.0/monitoring-tracing-zipkin.yaml
   - https://github.com/knative/serving/releases/download/v0.7.0/monitoring-tracing-zipkin-in-mem.yaml
 - **Build Component**:
-  - https://github.com/knative/build/releases/download/v0.6.0/build.yaml
+  - https://github.com/knative/build/releases/download/v0.7.0/build.yaml
 - **Eventing Component**:
   - https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml
   - https://github.com/knative/eventing/releases/download/v0.7.0/eventing.yaml
@@ -163,7 +163,7 @@ for details about installing the various supported observability plugins.
 [2.4]: https://jaegertracing.io/
 [2.5]: https://github.com/jaegertracing/jaeger-operator#installing-the-operator
 [3]: https://github.com/knative/build/releases/tag/v0.7.0
-[3.1]: https://github.com/knative/build/releases/download/v0.6.0/build.yaml
+[3.1]: https://github.com/knative/build/releases/download/v0.7.0/build.yaml
 [4]: https://github.com/knative/eventing/releases/tag/v0.7.0
 [4.1]: https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml
 [4.2]:
@@ -260,7 +260,7 @@ commands below.
       `[FILE_URL]`Examples:
 
       - `https://github.com/knative/serving/releases/download/v0.7.0/serving.yaml --selector networking.knative.dev/certificate-provider!=cert-manager`
-      - `https://github.com/knative/build/releases/download/v0.6.0/build.yaml`
+      - `https://github.com/knative/build/releases/download/v0.7.0/build.yaml`
       - `https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml`
       - `https://github.com/knative/eventing-contrib/releases/download/v0.7.0/eventing-sources.yaml`
       - `https://github.com/knative/serving/releases/download/v0.7.0/monitoring.yaml`
@@ -308,7 +308,7 @@ commands below.
         ```bash
         kubectl apply --selector knative.dev/crd-install=true \
           --filename https://github.com/knative/serving/releases/download/v0.7.0/serving.yaml \
-          --filename https://github.com/knative/build/releases/download/v0.6.0/build.yaml \
+          --filename https://github.com/knative/build/releases/download/v0.7.0/build.yaml \
           --filename https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml \
           --filename https://github.com/knative/eventing-contrib/releases/download/v0.7.0/eventing-sources.yaml \
           --filename https://raw.githubusercontent.com/knative/serving/v0.7.0/third_party/config/build/clusterrole.yaml
@@ -320,7 +320,7 @@ commands below.
 
         ```bash
         kubectl apply --filename https://github.com/knative/serving/releases/download/v0.7.0/serving.yaml \
-          --filename https://github.com/knative/build/releases/download/v0.6.0/build.yaml \
+          --filename https://github.com/knative/build/releases/download/v0.7.0/build.yaml \
           --filename https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml \
           --filename https://github.com/knative/eventing-contrib/releases/download/v0.7.0/eventing-sources.yaml \
           --filename https://raw.githubusercontent.com/knative/serving/v0.7.0/third_party/config/build/clusterrole.yaml
