@@ -119,7 +119,7 @@ cd knative-docs/serving/samples/hello-world/helloworld-java-spring
    username.
 
     ```yaml
-    apiVersion: serving.knative.dev/v1beta1
+    apiVersion: serving.knative.dev/v1alpha1
     kind: Service
     metadata:
       name: helloworld-java-spring
@@ -200,18 +200,22 @@ folder) you're ready to build and deploy the sample app.
 
     ```shell
     kubectl get ksvc helloworld-java-spring \
-       --output=custom-columns=NAME:.metadata.name,URL:.status.url
+       output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
 
     NAME                       URL
     helloworld-java-spring     http://helloworld-java-spring.default.example.com
+ 
+    # Or simply:
+    export DOMAIN_NAME=$(kubectl get ksvc helloworld-java-spring \
+      --output jsonpath={.status.domain}
     ```
-
+    
 1. Now you can make a request to your app to see the result. Presuming, the IP
    address you got in the step above is in the `${IP_ADDRESS}` env variable:
 
     ```shell
-    curl -H "Host: helloworld-java-spring.default.example.com" http://${IP_ADDRESS}
-
+      curl -H "Host: ${DOMAIN_NAME}" http://${IP_ADDRESS}
+	
     Hello Spring Boot Sample v1!
     ```
 
