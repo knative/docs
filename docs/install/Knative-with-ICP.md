@@ -201,7 +201,7 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
    ```
 
    ```shell
-   curl -L https://raw.githubusercontent.com/knative/serving/v0.6.0/third_party/config/build/clusterrole.yaml \
+   curl -L https://raw.githubusercontent.com/knative/serving/v0.7.0/third_party/config/build/clusterrole.yaml \
      | sed 's/LoadBalancer/NodePort/' \
      | kubectl apply --filename -
    ```

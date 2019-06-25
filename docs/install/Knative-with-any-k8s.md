@@ -73,7 +73,7 @@ your Knative installation, see
    --filename https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml \
    --filename https://github.com/knative/eventing-contrib/releases/download/v0.7.0/eventing-sources.yaml \
    --filename https://github.com/knative/serving/releases/download/v0.7.0/monitoring.yaml \
-   --filename https://raw.githubusercontent.com/knative/serving/v0.6.0/third_party/config/build/clusterrole.yaml
+   --filename https://raw.githubusercontent.com/knative/serving/v0.7.0/third_party/config/build/clusterrole.yaml
    ```
 
 1. To complete the install of Knative and its dependencies, run the
@@ -86,7 +86,7 @@ your Knative installation, see
    --filename https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml \
    --filename https://github.com/knative/eventing-contrib/releases/download/v0.7.0/eventing-sources.yaml \
    --filename https://github.com/knative/serving/releases/download/v0.7.0/monitoring.yaml \
-   --filename https://raw.githubusercontent.com/knative/serving/v0.6.0/third_party/config/build/clusterrole.yaml
+   --filename https://raw.githubusercontent.com/knative/serving/v0.7.0/third_party/config/build/clusterrole.yaml
    ```
 
    > **Notes**:

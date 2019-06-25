@@ -90,7 +90,7 @@ The following Knative installation files are available:
   - https://github.com/knative/eventing-contrib/releases/download/v0.7.0/gcppubsub.yaml
   - https://github.com/knative/eventing-contrib/releases/download/v0.7.0/kafka.yaml
 - **Cluster roles**:
-  - https://raw.githubusercontent.com/knative/serving/v0.6.0/third_party/config/build/clusterrole.yaml
+  - https://raw.githubusercontent.com/knative/serving/v0.7.0/third_party/config/build/clusterrole.yaml
 
 #### Install details and options
 
@@ -140,7 +140,7 @@ for details about installing the various supported observability plugins.
 
 <!-- USE ONLY FULLY QUALIFIED URLS -->
 
-[1]: https://github.com/knative/serving/releases/tag/v0.6.0
+[1]: https://github.com/knative/serving/releases/tag/v0.7.0
 [1.1]: https://github.com/knative/serving/releases/download/v0.7.0/serving.yaml
 [1.2]:
   https://github.com/knative/serving/releases/download/v0.7.0/monitoring.yaml
@@ -162,9 +162,9 @@ for details about installing the various supported observability plugins.
 [2.3]: https://zipkin.io/
 [2.4]: https://jaegertracing.io/
 [2.5]: https://github.com/jaegertracing/jaeger-operator#installing-the-operator
-[3]: https://github.com/knative/build/releases/tag/v0.6.0
+[3]: https://github.com/knative/build/releases/tag/v0.7.0
 [3.1]: https://github.com/knative/build/releases/download/v0.6.0/build.yaml
-[4]: https://github.com/knative/eventing/releases/tag/v0.6.0
+[4]: https://github.com/knative/eventing/releases/tag/v0.7.0
 [4.1]: https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml
 [4.2]:
   https://github.com/knative/eventing/releases/download/v0.7.0/eventing.yaml
@@ -174,7 +174,7 @@ for details about installing the various supported observability plugins.
 [4.5]: https://github.com/knative/eventing/releases/download/v0.7.0/natss.yaml
 [4.6]:
   https://github.com/knative/eventing/releases/download/v0.7.0/gcp-pubsub.yaml
-[5]: https://github.com/knative/eventing-contrib/releases/tag/v0.6.0
+[5]: https://github.com/knative/eventing-contrib/releases/tag/v0.7.0
 [5.1]:
   https://github.com/knative/eventing-contrib/releases/download/v0.7.0/eventing-sources.yaml
 [5.2]:
@@ -194,7 +194,7 @@ for details about installing the various supported observability plugins.
   https://github.com/knative/eventing-contrib/blob/master/samples/cronjob-source/README.md
 [6.3]: https://cloud.google.com/pubsub/
 [7]:
-  https://raw.githubusercontent.com/knative/serving/v0.6.0/third_party/config/build/clusterrole.yaml
+  https://raw.githubusercontent.com/knative/serving/v0.7.0/third_party/config/build/clusterrole.yaml
 
 ### Installing Knative
 
@@ -311,7 +311,7 @@ commands below.
           --filename https://github.com/knative/build/releases/download/v0.6.0/build.yaml \
           --filename https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml \
           --filename https://github.com/knative/eventing-contrib/releases/download/v0.7.0/eventing-sources.yaml \
-          --filename https://raw.githubusercontent.com/knative/serving/v0.6.0/third_party/config/build/clusterrole.yaml
+          --filename https://raw.githubusercontent.com/knative/serving/v0.7.0/third_party/config/build/clusterrole.yaml
         ```
 
      1. Remove the `--selector knative.dev/crd-install=true` flag and the run
@@ -323,7 +323,7 @@ commands below.
           --filename https://github.com/knative/build/releases/download/v0.6.0/build.yaml \
           --filename https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml \
           --filename https://github.com/knative/eventing-contrib/releases/download/v0.7.0/eventing-sources.yaml \
-          --filename https://raw.githubusercontent.com/knative/serving/v0.6.0/third_party/config/build/clusterrole.yaml
+          --filename https://raw.githubusercontent.com/knative/serving/v0.7.0/third_party/config/build/clusterrole.yaml
         ```
 
 1. Depending on what you chose to install, view the status of your installation
