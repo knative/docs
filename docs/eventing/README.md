@@ -137,11 +137,16 @@ format, but may be expressed as simple lists, etc in YAML. All Sources should be
 part of the `sources` category, so you can list all existing Sources with
 `kubectl get sources`. The currently-implemented Sources are described below.
 
-In addition to the core sources, there are [other sources](./sources/README.md)
-that you can install.
+In addition to the core sources (explained below), there are
+[other sources](./sources/README.md) that you can install.
 
-_Want to implement your own source? Check out
-[the tutorial](./samples/writing-a-source/README.md)._
+If you need a Source not covered by the
+[available Source implementations](./sources/README.md), there is a
+[tutorial on writing your own Source](./samples/writing-a-source/README.md).
+
+If your code needs to send events as part of its business logic and doesn't fit
+the model of a Source, consider
+[feeding events directly to a Broker](https://knative.dev/docs/eventing/broker-trigger/#manual).
 
 ### KubernetesEventSource
 
@@ -301,7 +306,7 @@ Knative Serving application so that they can be consumed.
       certificate.
 
 See the
-[Kafka Source](https://github.com/knative/eventing-sources/tree/master/contrib/kafka/samples)
+[Kafka Source](https://github.com/knative/eventing-contrib/tree/master/contrib/kafka/samples)
 example.
 
 ### CamelSource
@@ -331,7 +336,7 @@ to be installed into the current namespace.
   development purposes.
 
 See the
-[CamelSource](https://github.com/knative/eventing-sources/blob/master/contrib/camel/samples/README.md)
+[CamelSource](https://github.com/knative/eventing-contrib/blob/master/contrib/camel/samples/README.md)
 example.
 
 ## Getting Started

@@ -124,14 +124,14 @@ required once per namespace. These instructions will use the `default`
 namespace, but you can replace it with any namespace you want to install a
 `Broker` into.
 
-Create the `ServiceAccount`.
+Create the `ServiceAccount` objects.
 
 ```shell
 kubectl -n default create serviceaccount eventing-broker-ingress
 kubectl -n default create serviceaccount eventing-broker-filter
 ```
 
-Then give it the needed RBAC permissions:
+Then give them the needed RBAC permissions:
 
 ```shell
 kubectl -n default create rolebinding eventing-broker-ingress \
@@ -142,11 +142,28 @@ kubectl -n default create rolebinding eventing-broker-filter \
   --serviceaccount=default:eventing-broker-filter
 ```
 
-Note that the previous commands uses three different objects, all named
+Note that these commands each use three different objects, all named
 `eventing-broker-ingress` or `eventing-broker-filter`. The `ClusterRole` is
 installed with Knative Eventing
 [here](https://github.com/knative/eventing/blob/master/config/200-broker-clusterrole.yaml). The `ServiceAccount` was
 created two commands prior. The `RoleBinding` is created with this command.
+
+Create RBAC permissions granting access to shared configmaps for logging,
+tracing, and metrics configuration.
+
+_These commands assume the shared Knative Eventing components are installed in
+the `knative-eventing` namespace. If you installed the shared Knative Eventing
+components in a different namespace, replace `knative-eventing` with the name of
+that namespace._
+
+```shell
+kubectl -n knative-eventing create rolebinding eventing-config-reader-default-eventing-broker-ingress \
+  --clusterrole=eventing-config-reader \
+  --serviceaccount=default:eventing-broker-ingress
+kubectl -n knative-eventing create rolebinding eventing-config-reader-default-eventing-broker-filter \
+  --clusterrole=eventing-config-reader \
+  --serviceaccount=default:eventing-broker-filter
+```
 
 Now we can create the `Broker`. Note that this example uses the name `default`,
 but could be replaced by any other valid name.
@@ -180,7 +197,7 @@ spec:
         spec:
           container:
             # This corresponds to
-            # https://github.com/knative/eventing-sources/blob/v0.2.1/cmd/message_dumper/dumper.go.
+            # https://github.com/knative/eventing-contrib/blob/v0.2.1/cmd/message_dumper/dumper.go.
             image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/message_dumper@sha256:ab5391755f11a5821e7263686564b3c3cd5348522f5b31509963afb269ddcd63
 ```
 
@@ -267,7 +284,8 @@ curl -v "http://default-broker.default.svc.cluster.local/" \
 
 #### Knative Source
 
-Provide the Knative Source the `default` `Broker` as its sink:
+Provide the Knative Source the `default` `Broker` as its sink (note you'll need
+to use ko apply -f <source_file>.yaml to create it):
 
 ```yaml
 apiVersion: sources.eventing.knative.dev/v1alpha1
@@ -275,7 +293,22 @@ kind: ContainerSource
 metadata:
   name: heartbeats-sender
 spec:
-  image: github.com/knative/eventing-sources/cmd/heartbeats/
+  template:
+    spec:
+      containers:
+        - image: github.com/knative/eventing-contrib/cmd/heartbeats/
+          name: heartbeats-sender
+          args:
+            - --eventType=dev.knative.foo.bar
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
   sink:
     apiVersion: eventing.knative.dev/v1alpha1
     kind: Broker

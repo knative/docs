@@ -73,18 +73,16 @@ recreate the source files from this folder.
    username.
 
    ```yaml
-   apiVersion: serving.knative.dev/v1alpha1
+   apiVersion: serving.knative.dev/v1beta1
    kind: Service
    metadata:
      name: helloworld-java
      namespace: default
    spec:
-     runLatest:
-       configuration:
-         revisionTemplate:
-           spec:
-             container:
-               image: docker.io/{username}/helloworld-java
+     template:
+       spec:
+         containers:
+           - image: docker.io/{username}/helloworld-java
    ```
 
 ## Building and deploying the sample

@@ -60,7 +60,7 @@ To generate a version of the API:
 
    - [Build](https://github.com/knative/build/releases/)
    - [Eventing](https://github.com/knative/eventing/releases/)
-   - [Eventing Sources](https://github.com/knative/eventing-sources/releases/)
+   - [Eventing Sources](https://github.com/knative/eventing-contrib/releases/)
    - [Serving](https://github.com/knative/serving/releases/)
 
 1. To run the `gen-api-reference-docs.sh` command from the `hack` directory, you

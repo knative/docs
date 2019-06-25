@@ -11,7 +11,7 @@ know roughly how things fit together.
 
 This document works with
 [Eventing 0.3](https://github.com/knative/eventing/releases/tag/v0.3.0) and
-[Eventing Sources 0.3](https://github.com/knative/eventing-sources/releases/tag/v0.3.0).
+[Eventing Sources 0.3](https://github.com/knative/eventing-contrib/releases/tag/v0.3.0).
 
 ## Prerequisites
 
@@ -202,7 +202,7 @@ during `chan` reconciliation. See [Channel Controller](#channel-controller).
 ##### `src`
 
 `src` is a
-[`KubernetesEventSource`](https://github.com/knative/eventing-sources/blob/master/pkg/apis/sources/v1alpha1/kuberneteseventsource_types.go),
+[`KubernetesEventSource`](https://github.com/knative/eventing-contrib/blob/master/pkg/apis/sources/v1alpha1/kuberneteseventsource_types.go),
 which creates an underlying
 [`ContainerSource`](https://github.com/knative/eventing/blob/master/pkg/apis/sources/v1alpha1/containersource_types.go).
 
@@ -435,8 +435,8 @@ to start. If you see these more than a few seconds after the `Pod` starts, then
 something is wrong.
 
 ```shell
-E0116 23:59:40.033667       1 reflector.go:205] github.com/knative/eventing-sources/pkg/adapter/kubernetesevents/adapter.go:73: Failed to list *v1.Event: Get https://10.51.240.1:443/api/v1/namespaces/kna tive-debug/events?limit=500&resourceVersion=0: dial tcp 10.51.240.1:443: connect: connection refused
-E0116 23:59:41.034572       1 reflector.go:205] github.com/knative/eventing-sources/pkg/adapter/kubernetesevents/adapter.go:73: Failed to list *v1.Event: Get https://10.51.240.1:443/api/v1/namespaces/kna tive-debug/events?limit=500&resourceVersion=0: dial tcp 10.51.240.1:443: connect: connection refused
+E0116 23:59:40.033667       1 reflector.go:205] github.com/knative/eventing-contrib/pkg/adapter/kubernetesevents/adapter.go:73: Failed to list *v1.Event: Get https://10.51.240.1:443/api/v1/namespaces/kna tive-debug/events?limit=500&resourceVersion=0: dial tcp 10.51.240.1:443: connect: connection refused
+E0116 23:59:41.034572       1 reflector.go:205] github.com/knative/eventing-contrib/pkg/adapter/kubernetesevents/adapter.go:73: Failed to list *v1.Event: Get https://10.51.240.1:443/api/v1/namespaces/kna tive-debug/events?limit=500&resourceVersion=0: dial tcp 10.51.240.1:443: connect: connection refused
 ```
 
 The success message is `debug` level, so we don't expect to see anything. If you

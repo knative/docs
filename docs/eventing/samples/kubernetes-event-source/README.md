@@ -1,5 +1,8 @@
 Kubernetes Event Source example shows how to wire kubernetes cluster events for
-consumption by a function that has been implemented as a Knative Service.
+consumption by a function that has been implemented as a Knative Service. The
+code for the following files can be found in the
+[/kubernetes-event-source/](https://github.com/knative/docs/tree/master/docs/eventing/samples/kubernetes-event-source)
+directory.
 
 ## Deployment Steps
 
@@ -23,9 +26,51 @@ kubectl label namespace default knative-eventing-injection=enabled
 
 1. Create a Service Account that the `ApiServerSource` runs as. The
    `ApiServerSource` watches for Kubernetes events and forwards them to the
-   Knative Eventing Broker. If you want to re-use an existing Service Account
-   with the appropriate permissions, you need to modify the
-   `serviceaccount.yaml`.
+   Knative Eventing Broker. Create a file named `serviceaccount.yaml` and copy
+   the code block below into it.
+
+```yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: events-sa
+  namespace: default
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: event-watcher
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - events
+    verbs:
+      - get
+      - list
+      - watch
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: k8s-ra-event-watcher
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: event-watcher
+subjects:
+  - kind: ServiceAccount
+    name: events-sa
+    namespace: default
+```
+
+If you want to re-use an existing Service Account with the appropriate
+permissions, you need to modify the `serviceaccount.yaml`.
+
+Enter the following command to create the service account from
+`serviceaccount.yaml`:
 
 ```shell
 kubectl apply --filename serviceaccount.yaml
@@ -34,9 +79,31 @@ kubectl apply --filename serviceaccount.yaml
 ### Create Event Source for Kubernetes Events
 
 1. In order to receive events, you have to create a concrete Event Source for a
-   specific namespace. If you want to consume events from a different namespace
-   or use a different `Service Account`, you need to modify `k8s-events.yaml`
-   accordingly.
+   specific namespace. Create a file named `k8s-events.yaml` and copy the code
+   block below into it.
+
+```yaml
+apiVersion: sources.eventing.knative.dev/v1alpha1
+kind: ApiServerSource
+metadata:
+  name: testevents
+  namespace: default
+spec:
+  serviceAccountName: events-sa
+  mode: Resource
+  resources:
+    - apiVersion: v1
+      kind: Event
+  sink:
+    apiVersion: eventing.knative.dev/v1alpha1
+    kind: Broker
+    name: default
+```
+
+If you want to consume events from a different namespace or use a different
+`Service Account`, you need to modify `k8s-events.yaml` accordingly.
+
+Enter the following command to create the event source:
 
 ```shell
 kubectl apply --filename k8s-events.yaml
@@ -47,6 +114,38 @@ kubectl apply --filename k8s-events.yaml
 In order to check the `ApiServerSource` is fully working, we will create a
 simple Knative Service that dumps incoming messages to its log and creates a
 `Trigger` from the `Broker` to that Knative Service.
+
+Create a file named `trigger.yaml` and copy the code block below into it.
+
+```yaml
+apiVersion: eventing.knative.dev/v1alpha1
+kind: Trigger
+metadata:
+  name: testevents-trigger
+  namespace: default
+spec:
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1beta1
+      kind: Service
+      name: event-display
+
+---
+# This is a very simple Knative Service that writes the input request to its log.
+
+apiVersion: serving.knative.dev/v1beta1
+kind: Service
+metadata:
+  name: event-display
+  namespace: default
+spec:
+  template:
+    spec:
+      containers:
+        - # This corresponds to
+          # https://github.com/knative/eventing-contrib/blob/release-0.5/cmd/event_display/main.go
+          image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display@sha256:bf45b3eb1e7fc4cb63d6a5a6416cf696295484a7662e0cf9ccdf5c080542c21d
+```
 
 1. If the deployed `ApiServerSource` is pointing at a `Broker` other than
    `default`, modify `trigger.yaml` by adding `spec.broker` with the `Broker`'s

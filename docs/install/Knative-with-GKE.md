@@ -34,7 +34,7 @@ commands will need to be adjusted for use in a Windows environment.
    ```
 
 1. Download and install the `gcloud` command line tool:
-   https://cloud.google.com/sdk/install
+   https://cloud.google.com/sdk/docs/quickstarts
 
 1. Install the `kubectl` component:
    ```
@@ -123,7 +123,7 @@ the recommended configuration for a cluster is:
 
 > Note: If you want to use [Auto TLS feature](../serving/using-auto-tls.md), you
 > need to remove the `--addons` line below, and follow the
-> [instructions](installing-istio.md) to install Istio with Secret Discovery
+> [instructions](../installing-istio.md) to install Istio with Secret Discovery
 > Service.
 
 ```bash
@@ -163,7 +163,7 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
    --filename https://github.com/knative/serving/releases/download/v0.6.0/serving.yaml \
    --filename https://github.com/knative/build/releases/download/v0.6.0/build.yaml \
    --filename https://github.com/knative/eventing/releases/download/v0.6.0/release.yaml \
-   --filename https://github.com/knative/eventing-sources/releases/download/v0.6.0/eventing-sources.yaml \
+   --filename https://github.com/knative/eventing-contrib/releases/download/v0.6.0/eventing-sources.yaml \
    --filename https://github.com/knative/serving/releases/download/v0.6.0/monitoring.yaml \
    --filename https://raw.githubusercontent.com/knative/serving/v0.6.0/third_party/config/build/clusterrole.yaml
    ```
@@ -176,7 +176,7 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.6.0/serving.yaml --selector networking.knative.dev/certificate-provider!=cert-manager \
    --filename https://github.com/knative/build/releases/download/v0.6.0/build.yaml \
    --filename https://github.com/knative/eventing/releases/download/v0.6.0/release.yaml \
-   --filename https://github.com/knative/eventing-sources/releases/download/v0.6.0/eventing-sources.yaml \
+   --filename https://github.com/knative/eventing-contrib/releases/download/v0.6.0/eventing-sources.yaml \
    --filename https://github.com/knative/serving/releases/download/v0.6.0/monitoring.yaml \
    --filename https://raw.githubusercontent.com/knative/serving/v0.6.0/third_party/config/build/clusterrole.yaml
    ```

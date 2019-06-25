@@ -31,23 +31,22 @@ First, create a new file called `blue-green-demo-config.yaml`and copy this into
 it:
 
 ```yaml
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1beta1
 kind: Configuration
 metadata:
   name: blue-green-demo
   namespace: default
 spec:
-  revisionTemplate:
+  template:
     metadata:
       labels:
         knative.dev/type: container
     spec:
-      container:
-        image: gcr.io/knative-samples/knative-route-demo:blue # The URL to the sample app docker image
-        imagePullPolicy: Always
-        env:
-          - name: T_VERSION
-            value: "blue"
+      containers:
+        - image: gcr.io/knative-samples/knative-route-demo:blue # The URL to the sample app docker image
+          env:
+            - name: T_VERSION
+              value: "blue"
 ```
 
 Save the file, then deploy the configuration to your cluster:
@@ -76,7 +75,7 @@ called `blue-green-demo-route.yaml` and copy the following YAML manifest into it
 (do not forget to edit the revision name):
 
 ```yaml
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1beta1
 kind: Route
 metadata:
   name: blue-green-demo # The name of our route; appears in the URL to access the app
@@ -121,23 +120,22 @@ background. To create the new revision, we'll edit our existing configuration in
 `blue-green-demo-config.yaml` with an updated image and environment variables:
 
 ```yaml
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1beta1
 kind: Configuration
 metadata:
   name: blue-green-demo # Configuration name is unchanged, since we're updating an existing Configuration
   namespace: default
 spec:
-  revisionTemplate:
+  template:
     metadata:
       labels:
         knative.dev/type: container
     spec:
-      container:
-        image: gcr.io/knative-samples/knative-route-demo:green # URL to the new version of the sample app docker image
-        imagePullPolicy: Always
-        env:
-          - name: T_VERSION
-            value: "green" # Updated value for the T_VERSION environment variable
+      containers:
+        - image: gcr.io/knative-samples/knative-route-demo:green # URL to the new version of the sample app docker image
+          env:
+            - name: T_VERSION
+              value: "green" # Updated value for the T_VERSION environment variable
 ```
 
 Save the file, then apply the updated configuration to your cluster:
@@ -165,7 +163,7 @@ revision while still sending all other traffic to the first revision. Edit
 `blue-green-demo-route.yaml`:
 
 ```yaml
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1beta1
 kind: Route
 metadata:
   name: blue-green-demo # Route name is unchanged, since we're updating an existing Route
@@ -176,7 +174,7 @@ spec:
       percent: 100 # All traffic still going to the first revision
     - revisionName: blue-green-demo-m9548
       percent: 0 # 0% of traffic routed to the second revision
-      name: v2 # A named route
+      tag: v2 # A named route
 ```
 
 Save the file, then apply the updated route to your cluster:
@@ -207,7 +205,7 @@ We'll once again update our existing route to begin shifting traffic away from
 the first revision and toward the second. Edit `blue-green-demo-route.yaml`:
 
 ```yaml
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1beta1
 kind: Route
 metadata:
   name: blue-green-demo # Updating our existing route
@@ -218,7 +216,7 @@ spec:
       percent: 50 # Updating the percentage from 100 to 50
     - revisionName: blue-green-demo-m9548
       percent: 50 # Updating the percentage from 0 to 50
-      name: v2
+      tag: v2
 ```
 
 Save the file, then apply the updated route to your cluster:
@@ -243,7 +241,7 @@ Lastly, we'll update our existing route to finally shift all traffic to the
 second revision. Edit `blue-green-demo-route.yaml`:
 
 ```yaml
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1beta1
 kind: Route
 metadata:
   name: blue-green-demo # Updating our existing route
@@ -252,7 +250,7 @@ spec:
   traffic:
     - revisionName: blue-green-demo-lcfrd
       percent: 0
-      name: v1 # Adding a new named route for v1
+      tag: v1 # Adding a new named route for v1
     - revisionName: blue-green-demo-m9548
       percent: 100
       # Named route for v2 has been removed, since we don't need it anymore
