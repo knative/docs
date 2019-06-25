@@ -145,7 +145,7 @@ kubectl -n default create rolebinding eventing-broker-filter \
 Note that the previous commands uses three different objects, all named
 `eventing-broker-ingress` or `eventing-broker-filter`. The `ClusterRole` is
 installed with Knative Eventing
-[here](../../config/200-broker-clusterrole.yaml). The `ServiceAccount` was
+[here](https://github.com/knative/eventing/blob/master/config/200-broker-clusterrole.yaml). The `ServiceAccount` was
 created two commands prior. The `RoleBinding` is created with this command.
 
 Now we can create the `Broker`. Note that this example uses the name `default`,
