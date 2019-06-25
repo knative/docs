@@ -71,18 +71,22 @@ kind: ContainerSource
 metadata:
   name: test-heartbeats
 spec:
-  image: <heartbeats_image_uri>
+  template:
+    spec:
+      containers:
+        - image: <heartbeats_image_uri>
+          name: heartbeats
+          args:
+            - --period=1
+          env:
+            - name: POD_NAME
+              value: "mypod"
+            - name: POD_NAMESPACE
+              value: "event-test"
   sink:
     apiVersion: serving.knative.dev/v1beta1
     kind: Service
     name: event-display
-  args:
-    - --period=1
-  env:
-    - name: POD_NAME
-      value: "mypod"
-    - name: POD_NAMESPACE
-      value: "event-test"
 ```
 
 Use the following command to create the event source from
