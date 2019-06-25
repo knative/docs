@@ -174,5 +174,5 @@ spec:
 ## Additional resources
 
 - [Go autoscaling sample](https://knative.dev/docs/serving/samples/autoscale-go/index.html)
-- ["Knative v0.3 Autoscaling  - A Love Story" blog post](https://medium.com/knative/knative-v0-3-autoscaling-a-love-story-d6954279a67a)
+- ["Knative v0.3 Autoscaling  - A Love Story" blog post](https://knative.dev/blog/2019/03/27/knative-v0.3-autoscaling-a-love-story/)
 - [Kubernetes Horizontal Pod Autoscaler (HPA)](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)
