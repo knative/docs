@@ -11,16 +11,16 @@ know roughly how things fit together.
 
 This document works with
 [Eventing 0.3](https://github.com/knative/eventing/releases/tag/v0.3.0) and
-[Eventing Sources 0.3](https://github.com/knative/eventing-contrib/releases/tag/v0.3.0).
+[Eventing-contrib resources 0.3](https://github.com/knative/eventing-contrib/releases/tag/v0.3.0).
 
 ## Prerequisites
 
-1. Setup [Knative Eventing and Eventing-Sources](../README.md).
+1. Setup [Knative Eventing and an Eventing-contrib resource](../README.md).
 
 ## Example
 
-This guide uses an example consisting of an Event Source sending events to a
-function.
+This guide uses an example consisting of an event source that sends
+events to a function.
 
 ![src -> chan -> sub -> svc -> fn](ExampleModel.png)
 
