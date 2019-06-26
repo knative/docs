@@ -1,28 +1,26 @@
-title: "Sequence terminal"
-weight: 20
-type: "docs"
+title: "Sequence terminal" weight: 20 type: "docs"
+
 ---
 
 # Using Sequences in series
 
 ## Overview
 
-We are going to create the following logical configuration. We create a CronJobSource,
-feeding events to a (`Sequence`)[../../../sequence.md]. Sequence can then do either external work, or 
-out of band create additional events.
+We are going to create the following logical configuration. We create a
+CronJobSource, feeding events to a (`Sequence`)[../../../sequence.md]. Sequence
+can then do either external work, or out of band create additional events.
 
 ![Logical Configuration](./sequence-terminal.png)
 
 ## Prerequisites
 
-For this example, we'll assume you have set up an `InMemoryChannel`
-as well as Knative Serving (for our functions). The examples use `default`
-namespace, again, if you want to deploy to another Namespace, you will need
-to modify the examples to reflect this.
+For this example, we'll assume you have set up an `InMemoryChannel` as well as
+Knative Serving (for our functions). The examples use `default` namespace,
+again, if you want to deploy to another Namespace, you will need to modify the
+examples to reflect this.
 
 If you want to use different type of `Channel`, you will have to modify the
 `Sequence.Spec.ChannelTemplate` to create the appropriate Channel resources.
-
 
 ## Setup
 
@@ -39,10 +37,10 @@ spec:
   template:
     spec:
       containers:
-      - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:2656f39a7fcb6afd9fc79e7a4e215d14d651dc674f38020d1d18c6f04b220700
-        env:
-        - name: STEP
-          value: "0"
+        - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:2656f39a7fcb6afd9fc79e7a4e215d14d651dc674f38020d1d18c6f04b220700
+          env:
+            - name: STEP
+              value: "0"
 
 ---
 apiVersion: serving.knative.dev/v1beta1
@@ -53,10 +51,10 @@ spec:
   template:
     spec:
       containers:
-      - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:2656f39a7fcb6afd9fc79e7a4e215d14d651dc674f38020d1d18c6f04b220700
-        env:
-        - name: STEP
-          value: "1"
+        - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:2656f39a7fcb6afd9fc79e7a4e215d14d651dc674f38020d1d18c6f04b220700
+          env:
+            - name: STEP
+              value: "1"
 ---
 apiVersion: serving.knative.dev/v1beta1
 kind: Service
@@ -66,13 +64,13 @@ spec:
   template:
     spec:
       containers:
-      - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:2656f39a7fcb6afd9fc79e7a4e215d14d651dc674f38020d1d18c6f04b220700
-        env:
-        - name: STEP
-          value: "2"
+        - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:2656f39a7fcb6afd9fc79e7a4e215d14d651dc674f38020d1d18c6f04b220700
+          env:
+            - name: STEP
+              value: "2"
 ---
-```
 
+```
 
 ```shell
 kubectl -n default create -f ./steps.yaml
@@ -80,7 +78,8 @@ kubectl -n default create -f ./steps.yaml
 
 ### Create the Sequence
 
-The `sequence.yaml` file contains the specifications for creating the Sequence. If you are using a different type of Channel, you need to change the
+The `sequence.yaml` file contains the specifications for creating the Sequence.
+If you are using a different type of Channel, you need to change the
 spec.channelTemplate to point to your desired Channel.
 
 ```yaml
@@ -93,31 +92,31 @@ spec:
     apiVersion: messaging.knative.dev/v1alpha1
     kind: InMemoryChannel
   steps:
-  - ref:
-      apiVersion: serving.knative.dev/v1beta1
-      kind: Service
-      name: first
-  - ref:
-      apiVersion: serving.knative.dev/v1beta1
-      kind: Service
-      name: second
-  - ref:
-      apiVersion: serving.knative.dev/v1beta1
-      kind: Service
-      name: third
+    - ref:
+        apiVersion: serving.knative.dev/v1beta1
+        kind: Service
+        name: first
+    - ref:
+        apiVersion: serving.knative.dev/v1beta1
+        kind: Service
+        name: second
+    - ref:
+        apiVersion: serving.knative.dev/v1beta1
+        kind: Service
+        name: third
 ```
 
-Change `default` below to create the `Sequence` in the Namespace where you want the
-resources to be created.
+Change `default` below to create the `Sequence` in the Namespace where you want
+the resources to be created.
+
 ```shell
 kubectl -n default create -f ./sequence.yaml
 ```
 
-
 ### Create the CronJobSource targeting the Sequence
 
-This will create a CronJobSource which will send a CloudEvent with {"message": "Hello world!"} as
-the data payload every 2 minutes.
+This will create a CronJobSource which will send a CloudEvent with {"message":
+"Hello world!"} as the data payload every 2 minutes.
 
 ```yaml
 apiVersion: sources.eventing.knative.dev/v1alpha1
@@ -134,7 +133,7 @@ spec:
 ```
 
 Here, if you are using different type of Channel, you need to change the
-spec.channelTemplate to point to your desired Channel. 
+spec.channelTemplate to point to your desired Channel.
 
 ```shell
 kubectl -n default create -f ./cron-source.yaml
@@ -142,9 +141,9 @@ kubectl -n default create -f ./cron-source.yaml
 
 ### Inspecting the results
 
-You can now see the final output by inspecting the logs of the event-display pods. Note that since
-we set the `CronJobSource` to emit every 2 minutes, it might take some time for the events to show
-up in the logs.
+You can now see the final output by inspecting the logs of the event-display
+pods. Note that since we set the `CronJobSource` to emit every 2 minutes, it
+might take some time for the events to show up in the logs.
 
 ```shell
 kubectl -n default get pods
@@ -185,7 +184,6 @@ Got Transport Context: Transport Context,
 ----------------------------
 ```
 
-
 Then we can look at the output of the second Step in the `Sequence`:
 
 ```shell
@@ -218,8 +216,9 @@ Got Transport Context: Transport Context,
 ----------------------------
 ```
 
-And you can see that the initial Cron Source message ("Hello World!") has now been modified by the
-first step in the Sequence to include " - Handled by 0". Exciting :)
+And you can see that the initial Cron Source message ("Hello World!") has now
+been modified by the first step in the Sequence to include " - Handled by 0".
+Exciting :)
 
 Then we can look at the output of the last Step in the `Sequence`:
 
@@ -253,5 +252,5 @@ Got Transport Context: Transport Context,
 ----------------------------
 ```
 
-And as expected it's now been handled by both the first and second Step as reflected by
-the Message being now: "Hello world! - Handled by 0 - Handled by 1"
+And as expected it's now been handled by both the first and second Step as
+reflected by the Message being now: "Hello world! - Handled by 0 - Handled by 1"
