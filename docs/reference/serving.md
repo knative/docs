@@ -332,6 +332,18 @@ string
 The service is created and owned by the ServerlessService object owned by this PA.</p>
 </td>
 </tr>
+<tr>
+<td>
+<code>metricsServiceName</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>MetricsServiceName is the K8s Service name that provides revision metrics.
+The service is managed by the PA object.</p>
+</td>
+</tr>
 </tbody>
 </table>
 <h3 id="PodScalable">PodScalable
@@ -522,6 +534,8 @@ Resource Types:
 <a href="#Certificate">Certificate</a>
 </li><li>
 <a href="#ClusterIngress">ClusterIngress</a>
+</li><li>
+<a href="#Ingress">Ingress</a>
 </li><li>
 <a href="#ServerlessService">ServerlessService</a>
 </li></ul>
@@ -720,8 +734,8 @@ not be used - use metadata.generation</p>
 <td>
 <code>tls</code></br>
 <em>
-<a href="#ClusterIngressTLS">
-[]ClusterIngressTLS
+<a href="#IngressTLS">
+[]IngressTLS
 </a>
 </em>
 </td>
@@ -738,14 +752,162 @@ ingress supports SNI.</p>
 <td>
 <code>rules</code></br>
 <em>
-<a href="#ClusterIngressRule">
-[]ClusterIngressRule
+<a href="#IngressRule">
+[]IngressRule
 </a>
 </em>
 </td>
 <td>
 <em>(Optional)</em>
-<p>A list of host rules used to configure the ClusterIngress.</p>
+<p>A list of host rules used to configure the Ingress.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>visibility</code></br>
+<em>
+<a href="#IngressVisibility">
+IngressVisibility
+</a>
+</em>
+</td>
+<td>
+<p>Visibility setting.</p>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<code>status</code></br>
+<em>
+<a href="#IngressStatus">
+IngressStatus
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Status is the current state of the ClusterIngress.
+More info: <a href="https://git.k8s.io/community/contributors/devel/api-conventions.md#spec-and-status">https://git.k8s.io/community/contributors/devel/api-conventions.md#spec-and-status</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Ingress">Ingress
+</h3>
+<p>
+<p>Ingress is a collection of rules that allow inbound connections to reach the endpoints defined
+by a backend. An Ingress can be configured to give services externally-reachable URLs, load
+balance traffic, offer name based virtual hosting, etc.</p>
+<p>This is heavily based on K8s Ingress <a href="https://godoc.org/k8s.io/api/extensions/v1beta1#Ingress">https://godoc.org/k8s.io/api/extensions/v1beta1#Ingress</a>
+which some highlighted modifications.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>apiVersion</code></br>
+string</td>
+<td>
+<code>
+networking.internal.knative.dev/v1alpha1
+</code>
+</td>
+</tr>
+<tr>
+<td>
+<code>kind</code></br>
+string
+</td>
+<td><code>Ingress</code></td>
+</tr>
+<tr>
+<td>
+<code>metadata</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#objectmeta-v1-meta">
+Kubernetes meta/v1.ObjectMeta
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Standard object&rsquo;s metadata.
+More info: <a href="https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata">https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata</a></p>
+Refer to the Kubernetes API documentation for the fields of the
+<code>metadata</code> field.
+</td>
+</tr>
+<tr>
+<td>
+<code>spec</code></br>
+<em>
+<a href="#IngressSpec">
+IngressSpec
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Spec is the desired state of the Ingress.
+More info: <a href="https://git.k8s.io/community/contributors/devel/api-conventions.md#spec-and-status">https://git.k8s.io/community/contributors/devel/api-conventions.md#spec-and-status</a></p>
+<br/>
+<br/>
+<table>
+<tr>
+<td>
+<code>generation</code></br>
+<em>
+int64
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>DeprecatedGeneration was used prior in Kubernetes versions <1.11
+when metadata.generation was not being incremented by the api server</p>
+<p>This property will be dropped in future Knative releases and should
+not be used - use metadata.generation</p>
+<p>Tracking issue: <a href="https://github.com/knative/serving/issues/643">https://github.com/knative/serving/issues/643</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<code>tls</code></br>
+<em>
+<a href="#IngressTLS">
+[]IngressTLS
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>TLS configuration. Currently ClusterIngress only supports a single TLS
+port: 443. If multiple members of this list specify different hosts, they
+will be multiplexed on the same port according to the hostname specified
+through the SNI TLS extension, if the ingress controller fulfilling the
+ingress supports SNI.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>rules</code></br>
+<em>
+<a href="#IngressRule">
+[]IngressRule
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>A list of host rules used to configure the Ingress.</p>
 </td>
 </tr>
 <tr>
@@ -999,16 +1161,270 @@ Kubernetes meta/v1.Time
 by this resource in spec.secretName.</p>
 </td>
 </tr>
+<tr>
+<td>
+<code>http01Challenges</code></br>
+<em>
+<a href="#HTTP01Challenge">
+[]HTTP01Challenge
+</a>
+</em>
+</td>
+<td>
+<p>HTTP01Challenges is a list of HTTP01 challenges that need to be fulfilled
+in order to get the TLS certificate..</p>
+</td>
+</tr>
 </tbody>
 </table>
-<h3 id="ClusterIngressBackend">ClusterIngressBackend
+<h3 id="HTTP01Challenge">HTTP01Challenge
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#ClusterIngressBackendSplit">ClusterIngressBackendSplit</a>)
+<a href="#CertificateStatus">CertificateStatus</a>)
 </p>
 <p>
-<p>ClusterIngressBackend describes all endpoints for a given service and port.</p>
+<p>HTTP01Challenge defines the status of a HTTP01 challenge that a certificate needs
+to fulfill.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>url</code></br>
+<em>
+github.com/knative/pkg/apis.URL
+</em>
+</td>
+<td>
+<p>URL is the URL that the HTTP01 challenge is expected to serve on.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>serviceName</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>ServiceName is the name of the service to serve HTTP01 challenge requests.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>serviceNamespace</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>ServiceNamespace is the namespace of the service to serve HTTP01 challenge requests.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>servicePort</code></br>
+<em>
+k8s.io/apimachinery/pkg/util/intstr.IntOrString
+</em>
+</td>
+<td>
+<p>ServicePort is the port of the service to serve HTTP01 challenge requests.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="HTTPIngressPath">HTTPIngressPath
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#HTTPIngressRuleValue">HTTPIngressRuleValue</a>)
+</p>
+<p>
+<p>HTTPIngressPath associates a path regex with a backend. Incoming URLs matching
+the path are forwarded to the backend.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>path</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Path is an extended POSIX regex as defined by IEEE Std 1003.1,
+(i.e this follows the egrep/unix syntax, not the perl syntax)
+matched against the path of an incoming request. Currently it can
+contain characters disallowed from the conventional &ldquo;path&rdquo;
+part of a URL as defined by RFC 3986. Paths must begin with
+a &lsquo;/&rsquo;. If unspecified, the path defaults to a catch all sending
+traffic to the backend.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>splits</code></br>
+<em>
+<a href="#IngressBackendSplit">
+[]IngressBackendSplit
+</a>
+</em>
+</td>
+<td>
+<p>Splits defines the referenced service endpoints to which the traffic
+will be forwarded to.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>appendHeaders</code></br>
+<em>
+map[string]string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>AppendHeaders allow specifying additional HTTP headers to add
+before forwarding a request to the destination service.</p>
+<p>NOTE: This differs from K8s Ingress which doesn&rsquo;t allow header appending.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>timeout</code></br>
+<em>
+<a href="https://godoc.org/k8s.io/apimachinery/pkg/apis/meta/v1#Duration">
+Kubernetes meta/v1.Duration
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Timeout for HTTP requests.</p>
+<p>NOTE: This differs from K8s Ingress which doesn&rsquo;t allow setting timeouts.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>retries</code></br>
+<em>
+<a href="#HTTPRetry">
+HTTPRetry
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Retry policy for HTTP requests.</p>
+<p>NOTE: This differs from K8s Ingress which doesn&rsquo;t allow retry settings.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="HTTPIngressRuleValue">HTTPIngressRuleValue
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#IngressRule">IngressRule</a>)
+</p>
+<p>
+<p>HTTPIngressRuleValue is a list of http selectors pointing to backends.
+In the example: http://<host>/<path>?<searchpart> -&gt; backend where
+where parts of the url correspond to RFC 3986, this resource will be used
+to match against everything after the last &lsquo;/&rsquo; and before the first &lsquo;?&rsquo;
+or &lsquo;#&rsquo;.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>paths</code></br>
+<em>
+<a href="#HTTPIngressPath">
+[]HTTPIngressPath
+</a>
+</em>
+</td>
+<td>
+<p>A collection of paths that map requests to backends.</p>
+<p>If they are multiple matching paths, the first match takes precendent.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="HTTPRetry">HTTPRetry
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#HTTPIngressPath">HTTPIngressPath</a>)
+</p>
+<p>
+<p>HTTPRetry describes the retry policy to use when a HTTP request fails.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>attempts</code></br>
+<em>
+int
+</em>
+</td>
+<td>
+<p>Number of retries for a given request.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>perTryTimeout</code></br>
+<em>
+<a href="https://godoc.org/k8s.io/apimachinery/pkg/apis/meta/v1#Duration">
+Kubernetes meta/v1.Duration
+</a>
+</em>
+</td>
+<td>
+<p>Timeout per retry attempt for a given request. format: 1h/1m/1s/1ms. MUST BE &gt;=1ms.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="IngressBackend">IngressBackend
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#IngressBackendSplit">IngressBackendSplit</a>)
+</p>
+<p>
+<p>IngressBackend describes all endpoints for a given service and port.</p>
 </p>
 <table>
 <thead>
@@ -1054,14 +1470,14 @@ k8s.io/apimachinery/pkg/util/intstr.IntOrString
 </tr>
 </tbody>
 </table>
-<h3 id="ClusterIngressBackendSplit">ClusterIngressBackendSplit
+<h3 id="IngressBackendSplit">IngressBackendSplit
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#HTTPClusterIngressPath">HTTPClusterIngressPath</a>)
+<a href="#HTTPIngressPath">HTTPIngressPath</a>)
 </p>
 <p>
-<p>ClusterIngressBackendSplit describes all endpoints for a given service and port.</p>
+<p>IngressBackendSplit describes all endpoints for a given service and port.</p>
 </p>
 <table>
 <thead>
@@ -1073,16 +1489,16 @@ k8s.io/apimachinery/pkg/util/intstr.IntOrString
 <tbody>
 <tr>
 <td>
-<code>ClusterIngressBackend</code></br>
+<code>IngressBackend</code></br>
 <em>
-<a href="#ClusterIngressBackend">
-ClusterIngressBackend
+<a href="#IngressBackend">
+IngressBackend
 </a>
 </em>
 </td>
 <td>
 <p>
-(Members of <code>ClusterIngressBackend</code> are embedded into this type.)
+(Members of <code>IngressBackend</code> are embedded into this type.)
 </p>
 <p>Specifies the backend receiving the traffic split.</p>
 </td>
@@ -1116,16 +1532,16 @@ before forwarding a request to the destination service.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="ClusterIngressRule">ClusterIngressRule
+<h3 id="IngressRule">IngressRule
 </h3>
 <p>
 (<em>Appears on:</em>
 <a href="#IngressSpec">IngressSpec</a>)
 </p>
 <p>
-<p>ClusterIngressRule represents the rules mapping the paths under a specified host to
+<p>IngressRule represents the rules mapping the paths under a specified host to
 the related backend services. Incoming requests are first evaluated for a host
-match, then routed to the backend associated with the matching ClusterIngressRuleValue.</p>
+match, then routed to the backend associated with the matching IngressRuleValue.</p>
 </p>
 <table>
 <thead>
@@ -1154,7 +1570,7 @@ Currently the port of an ClusterIngress is implicitly :80 for http and
 :443 for https.
 Both these may change in the future.
 If the host is unspecified, the ClusterIngress routes all traffic based on the
-specified ClusterIngressRuleValue.
+specified IngressRuleValue.
 If multiple matching Hosts were provided, the first rule will take precedent.</p>
 </td>
 </tr>
@@ -1162,8 +1578,8 @@ If multiple matching Hosts were provided, the first rule will take precedent.</p
 <td>
 <code>http</code></br>
 <em>
-<a href="#HTTPClusterIngressRuleValue">
-HTTPClusterIngressRuleValue
+<a href="#HTTPIngressRuleValue">
+HTTPIngressRuleValue
 </a>
 </em>
 </td>
@@ -1174,14 +1590,150 @@ rule is satisfied, the request is routed to the specified backend.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="ClusterIngressTLS">ClusterIngressTLS
+<h3 id="IngressSpec">IngressSpec
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#ClusterIngress">ClusterIngress</a>, 
+<a href="#Ingress">Ingress</a>)
+</p>
+<p>
+<p>IngressSpec describes the Ingress the user wishes to exist.</p>
+<p>In general this follows the same shape as K8s Ingress.
+Some notable differences:
+- Backends now can have namespace:
+- Traffic can be split across multiple backends.
+- Timeout &amp; Retry can be configured.
+- Headers can be appended.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>generation</code></br>
+<em>
+int64
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>DeprecatedGeneration was used prior in Kubernetes versions <1.11
+when metadata.generation was not being incremented by the api server</p>
+<p>This property will be dropped in future Knative releases and should
+not be used - use metadata.generation</p>
+<p>Tracking issue: <a href="https://github.com/knative/serving/issues/643">https://github.com/knative/serving/issues/643</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<code>tls</code></br>
+<em>
+<a href="#IngressTLS">
+[]IngressTLS
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>TLS configuration. Currently ClusterIngress only supports a single TLS
+port: 443. If multiple members of this list specify different hosts, they
+will be multiplexed on the same port according to the hostname specified
+through the SNI TLS extension, if the ingress controller fulfilling the
+ingress supports SNI.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>rules</code></br>
+<em>
+<a href="#IngressRule">
+[]IngressRule
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>A list of host rules used to configure the Ingress.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>visibility</code></br>
+<em>
+<a href="#IngressVisibility">
+IngressVisibility
+</a>
+</em>
+</td>
+<td>
+<p>Visibility setting.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="IngressStatus">IngressStatus
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#ClusterIngress">ClusterIngress</a>, 
+<a href="#Ingress">Ingress</a>)
+</p>
+<p>
+<p>IngressStatus describe the current state of the Ingress.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>Status</code></br>
+<em>
+<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1beta1#Status">
+github.com/knative/pkg/apis/duck/v1beta1.Status
+</a>
+</em>
+</td>
+<td>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>loadBalancer</code></br>
+<em>
+<a href="#LoadBalancerStatus">
+LoadBalancerStatus
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>LoadBalancer contains the current status of the load-balancer.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="IngressTLS">IngressTLS
 </h3>
 <p>
 (<em>Appears on:</em>
 <a href="#IngressSpec">IngressSpec</a>)
 </p>
 <p>
-<p>ClusterIngressTLS describes the transport layer security associated with an ClusterIngress.</p>
+<p>IngressTLS describes the transport layer security associated with an Ingress.</p>
 </p>
 <table>
 <thead>
@@ -1256,316 +1808,6 @@ Defaults to <code>tls.key</code>.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="HTTPClusterIngressPath">HTTPClusterIngressPath
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#HTTPClusterIngressRuleValue">HTTPClusterIngressRuleValue</a>)
-</p>
-<p>
-<p>HTTPClusterIngressPath associates a path regex with a backend. Incoming URLs matching
-the path are forwarded to the backend.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>path</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Path is an extended POSIX regex as defined by IEEE Std 1003.1,
-(i.e this follows the egrep/unix syntax, not the perl syntax)
-matched against the path of an incoming request. Currently it can
-contain characters disallowed from the conventional &ldquo;path&rdquo;
-part of a URL as defined by RFC 3986. Paths must begin with
-a &lsquo;/&rsquo;. If unspecified, the path defaults to a catch all sending
-traffic to the backend.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>splits</code></br>
-<em>
-<a href="#ClusterIngressBackendSplit">
-[]ClusterIngressBackendSplit
-</a>
-</em>
-</td>
-<td>
-<p>Splits defines the referenced service endpoints to which the traffic
-will be forwarded to.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>appendHeaders</code></br>
-<em>
-map[string]string
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>AppendHeaders allow specifying additional HTTP headers to add
-before forwarding a request to the destination service.</p>
-<p>NOTE: This differs from K8s Ingress which doesn&rsquo;t allow header appending.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>timeout</code></br>
-<em>
-<a href="https://godoc.org/k8s.io/apimachinery/pkg/apis/meta/v1#Duration">
-Kubernetes meta/v1.Duration
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Timeout for HTTP requests.</p>
-<p>NOTE: This differs from K8s Ingress which doesn&rsquo;t allow setting timeouts.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>retries</code></br>
-<em>
-<a href="#HTTPRetry">
-HTTPRetry
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Retry policy for HTTP requests.</p>
-<p>NOTE: This differs from K8s Ingress which doesn&rsquo;t allow retry settings.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="HTTPClusterIngressRuleValue">HTTPClusterIngressRuleValue
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#ClusterIngressRule">ClusterIngressRule</a>)
-</p>
-<p>
-<p>HTTPClusterIngressRuleValue is a list of http selectors pointing to backends.
-In the example: http://<host>/<path>?<searchpart> -&gt; backend where
-where parts of the url correspond to RFC 3986, this resource will be used
-to match against everything after the last &lsquo;/&rsquo; and before the first &lsquo;?&rsquo;
-or &lsquo;#&rsquo;.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>paths</code></br>
-<em>
-<a href="#HTTPClusterIngressPath">
-[]HTTPClusterIngressPath
-</a>
-</em>
-</td>
-<td>
-<p>A collection of paths that map requests to backends.</p>
-<p>If they are multiple matching paths, the first match takes precendent.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="HTTPRetry">HTTPRetry
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#HTTPClusterIngressPath">HTTPClusterIngressPath</a>)
-</p>
-<p>
-<p>HTTPRetry describes the retry policy to use when a HTTP request fails.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>attempts</code></br>
-<em>
-int
-</em>
-</td>
-<td>
-<p>Number of retries for a given request.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>perTryTimeout</code></br>
-<em>
-<a href="https://godoc.org/k8s.io/apimachinery/pkg/apis/meta/v1#Duration">
-Kubernetes meta/v1.Duration
-</a>
-</em>
-</td>
-<td>
-<p>Timeout per retry attempt for a given request. format: 1h/1m/1s/1ms. MUST BE &gt;=1ms.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="IngressSpec">IngressSpec
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#ClusterIngress">ClusterIngress</a>)
-</p>
-<p>
-<p>IngressSpec describes the ClusterIngress the user wishes to exist.</p>
-<p>In general this follows the same shape as K8s Ingress.
-Some notable differences:
-- Backends now can have namespace:
-- Traffic can be split across multiple backends.
-- Timeout &amp; Retry can be configured.
-- Headers can be appended.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>generation</code></br>
-<em>
-int64
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>DeprecatedGeneration was used prior in Kubernetes versions <1.11
-when metadata.generation was not being incremented by the api server</p>
-<p>This property will be dropped in future Knative releases and should
-not be used - use metadata.generation</p>
-<p>Tracking issue: <a href="https://github.com/knative/serving/issues/643">https://github.com/knative/serving/issues/643</a></p>
-</td>
-</tr>
-<tr>
-<td>
-<code>tls</code></br>
-<em>
-<a href="#ClusterIngressTLS">
-[]ClusterIngressTLS
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>TLS configuration. Currently ClusterIngress only supports a single TLS
-port: 443. If multiple members of this list specify different hosts, they
-will be multiplexed on the same port according to the hostname specified
-through the SNI TLS extension, if the ingress controller fulfilling the
-ingress supports SNI.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>rules</code></br>
-<em>
-<a href="#ClusterIngressRule">
-[]ClusterIngressRule
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>A list of host rules used to configure the ClusterIngress.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>visibility</code></br>
-<em>
-<a href="#IngressVisibility">
-IngressVisibility
-</a>
-</em>
-</td>
-<td>
-<p>Visibility setting.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="IngressStatus">IngressStatus
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#ClusterIngress">ClusterIngress</a>)
-</p>
-<p>
-<p>IngressStatus describe the current state of the ClusterIngress.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>Status</code></br>
-<em>
-<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1beta1#Status">
-github.com/knative/pkg/apis/duck/v1beta1.Status
-</a>
-</em>
-</td>
-<td>
-<p>
-(Members of <code>Status</code> are embedded into this type.)
-</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>loadBalancer</code></br>
-<em>
-<a href="#LoadBalancerStatus">
-LoadBalancerStatus
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>LoadBalancer contains the current status of the load-balancer.</p>
-</td>
-</tr>
-</tbody>
-</table>
 <h3 id="IngressVisibility">IngressVisibility
 (<code>string</code> alias)</p></h3>
 <p>
@@ -1583,7 +1825,7 @@ public gateways or not.</p>
 <a href="#LoadBalancerStatus">LoadBalancerStatus</a>)
 </p>
 <p>
-<p>LoadBalancerIngress represents the status of a load-balancer ingress point:
+<p>LoadBalancerIngressStatus represents the status of a load-balancer ingress point:
 traffic intended for the service should be sent to an ingress point.</p>
 </p>
 <table>
@@ -1909,9 +2151,7 @@ not be used - use metadata.generation</p>
 <td>
 <code>build</code></br>
 <em>
-<a href="#RawExtension">
-RawExtension
-</a>
+k8s.io/apimachinery/pkg/runtime.RawExtension
 </em>
 </td>
 <td>
@@ -2556,9 +2796,7 @@ not be used - use metadata.generation</p>
 <td>
 <code>build</code></br>
 <em>
-<a href="#RawExtension">
-RawExtension
-</a>
+k8s.io/apimachinery/pkg/runtime.RawExtension
 </em>
 </td>
 <td>
@@ -2762,59 +3000,6 @@ ConfigurationSpec
 <td>
 <em>(Optional)</em>
 <p>The configuration for this service.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="RawExtension">RawExtension
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#ConfigurationSpec">ConfigurationSpec</a>)
-</p>
-<p>
-<p>RawExtension is modeled after runtime.RawExtension, and should be
-replaced with it (or an alias) once we can stop supporting embedded
-BuildSpecs.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>Raw</code></br>
-<em>
-[]byte
-</em>
-</td>
-<td>
-<p>Field order is the precedence for JSON marshaling if multiple
-fields are set.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>Object</code></br>
-<em>
-k8s.io/apimachinery/pkg/runtime.Object
-</em>
-</td>
-<td>
-</td>
-</tr>
-<tr>
-<td>
-<code>BuildSpec</code></br>
-<em>
-github.com/knative/build/pkg/apis/build/v1alpha1.BuildSpec
-</em>
-</td>
-<td>
 </td>
 </tr>
 </tbody>
@@ -3917,8 +4102,8 @@ RevisionSpec
 <td>
 <code>PodSpec</code></br>
 <em>
-<a href="#PodSpec">
-PodSpec
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#podspec-v1-core">
+Kubernetes core/v1.PodSpec
 </a>
 </em>
 </td>
@@ -4327,85 +4512,6 @@ Configuration. It might not be ready yet, for that use LatestReadyRevisionName.<
 </tr>
 </tbody>
 </table>
-<h3 id="PodSpec">PodSpec
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#RevisionSpec">RevisionSpec</a>)
-</p>
-<p>
-<p>PodSpec is our standing for corev1.PodSpec.
-TODO(mattmoor): We cannot inline PodSpec until 0.7 when the containers
-field it introduces has been available for a release because this
-definition doesn&rsquo;t &ldquo;omitempty&rdquo; the containers field, which means that
-0.6 clients would send <code>containers: null</code>, which 0.5 webhooks will
-reject.  Once we ship a webhook that will parse the null properly, we
-can switch to the PodSpec definition.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>serviceAccountName</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>ServiceAccountName holds the name of the Kubernetes service account
-as which the underlying K8s resources should be run. If unspecified
-this will default to the &ldquo;default&rdquo; service account for the namespace
-in which the Revision exists.
-This may be used to provide access to private container images by
-following: <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#add-imagepullsecrets-to-a-service-account">https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#add-imagepullsecrets-to-a-service-account</a>
-TODO(ZhiminXiang): verify the corresponding service account exists.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>containers</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#container-v1-core">
-[]Kubernetes core/v1.Container
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Containers holds the single container that defines the unit of
-execution for this Revision.
-In the context of a Revision, we disallow a number of the fields of
-this Container, including: name and lifecycle.
-See also the runtime contract for more information about the execution
-environment:
-<a href="https://github.com/knative/serving/blob/master/docs/runtime-contract.md">https://github.com/knative/serving/blob/master/docs/runtime-contract.md</a></p>
-</td>
-</tr>
-<tr>
-<td>
-<code>volumes</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#volume-v1-core">
-[]Kubernetes core/v1.Volume
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Volumes defines a set of Kubernetes volumes to be mounted into the
-specified Container.  Currently only ConfigMap and Secret volumes are
-supported.</p>
-</td>
-</tr>
-</tbody>
-</table>
 <h3 id="RevisionContainerConcurrencyType">RevisionContainerConcurrencyType
 (<code>int64</code> alias)</p></h3>
 <p>
@@ -4440,8 +4546,8 @@ in-flight (concurrent) requests.</p>
 <td>
 <code>PodSpec</code></br>
 <em>
-<a href="#PodSpec">
-PodSpec
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#podspec-v1-core">
+Kubernetes core/v1.PodSpec
 </a>
 </em>
 </td>
@@ -4541,6 +4647,22 @@ string
 based on the revision url template specified in the controller&rsquo;s config.</p>
 </td>
 </tr>
+<tr>
+<td>
+<code>imageDigest</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>ImageDigest holds the resolved digest for the image specified
+within .Spec.Container.Image. The digest is resolved during the creation
+of Revision. This field holds the digest value regardless of whether
+a tag or digest was originally specified in the Container object. It
+may be empty if the image comes from a registry listed to skip resolution.</p>
+</td>
+</tr>
 </tbody>
 </table>
 <h3 id="RevisionTemplateSpec">RevisionTemplateSpec
@@ -4594,8 +4716,8 @@ RevisionSpec
 <td>
 <code>PodSpec</code></br>
 <em>
-<a href="#PodSpec">
-PodSpec
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#podspec-v1-core">
+Kubernetes core/v1.PodSpec
 </a>
 </em>
 </td>
@@ -5028,5 +5150,5 @@ a hostname, but may not contain anything else (e.g. basic auth, url path, etc.)<
 <hr/>
 <p><em>
 Generated with <code>gen-crd-api-reference-docs</code>
-on git commit <code>0800b94f</code>.
+on git commit <code>cb5c1810</code>.
 </em></p>
