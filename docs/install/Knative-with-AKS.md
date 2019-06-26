@@ -184,7 +184,6 @@ your Knative installation, see
    --filename https://github.com/knative/serving/releases/download/v0.7.0/serving.yaml \
    --filename https://github.com/knative/build/releases/download/v0.7.0/build.yaml \
    --filename https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml \
-   --filename https://github.com/knative/eventing-contrib/releases/download/v0.7.0/eventing-sources.yaml \
    --filename https://github.com/knative/serving/releases/download/v0.7.0/monitoring.yaml
    ```
 
@@ -197,7 +196,6 @@ your Knative installation, see
    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.7.0/serving.yaml --selector networking.knative.dev/certificate-provider!=cert-manager \
    --filename https://github.com/knative/build/releases/download/v0.7.0/build.yaml \
    --filename https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml \
-   --filename https://github.com/knative/eventing-contrib/releases/download/v0.7.0/eventing-sources.yaml \
    --filename https://github.com/knative/serving/releases/download/v0.7.0/monitoring.yaml
    ```
 
