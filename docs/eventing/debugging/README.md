@@ -19,7 +19,7 @@ This document works with
 
 ## Example
 
-This guide uses an example consisting of an Eventing-contrib resource that sends
+This guide uses an example consisting of an event source that sends
 events to a function.
 
 ![src -> chan -> sub -> svc -> fn](ExampleModel.png)
