@@ -10,7 +10,9 @@ provides fast, request-based autoscaling capabilities out of the box.
 
 # Configuring Knative Pod Autoscaler
 
-To modify the Knative Pod Autoscaler (KPA) configuration, you must modify a Kubernetes ConfigMap called `config-autoscaler` in the `knative-serving` namespace.
+To modify the Knative Pod Autoscaler (KPA) configuration, you must modify a
+Kubernetes ConfigMap called `config-autoscaler` in the `knative-serving`
+namespace.
 
 You can view the default contents of this ConfigMap using the following command.
 
@@ -126,8 +128,9 @@ If there is no `/target` annotation, the autoscaler is configured as if
 
 ## Configuring scale bounds (minScale and maxScale)
 
-The `minScale` and  `maxScale` annotations can be used to configure the minimum and maximum number of pods that can serve applications.
-These annotations can be used to prevent cold starts or to help control computing costs.
+The `minScale` and `maxScale` annotations can be used to configure the minimum
+and maximum number of pods that can serve applications. These annotations can be
+used to prevent cold starts or to help control computing costs.
 
 `minScale` and `maxScale` can be configured as follows in the revision template;
 
@@ -139,19 +142,26 @@ spec:
       autoscaling.knative.dev/maxScale: "10"
 ```
 
-Using these annotations in the revision template will propagate this to `PodAutoscaler` objects. `PodAutoscaler` objects are mutable and can be further modified later without modifying anything else in the Knative Serving system.
+Using these annotations in the revision template will propagate this to
+`PodAutoscaler` objects. `PodAutoscaler` objects are mutable and can be further
+modified later without modifying anything else in the Knative Serving system.
 
 ```
 edit podautoscaler <revision-name>
 ```
 
-**NOTE:** These annotations apply for the full lifetime of a revision. Even when a revision is not referenced by any route, the minimal pod count specified by `minScale` will still be provided. Keep in mind that non-routeable revisions may be garbage collected, which enables Knative to reclaim the resources.
+**NOTE:** These annotations apply for the full lifetime of a revision. Even when
+a revision is not referenced by any route, the minimal pod count specified by
+`minScale` will still be provided. Keep in mind that non-routeable revisions may
+be garbage collected, which enables Knative to reclaim the resources.
 
 ### Default behavior
 
-If the `minScale` annotation is not set, pods will scale to zero (or to 1 if `enable-scale-to-zero` is `false` per the ConfigMap mentioned above).
+If the `minScale` annotation is not set, pods will scale to zero (or to 1 if
+`enable-scale-to-zero` is `false` per the ConfigMap mentioned above).
 
-If the `maxScale` annotation is not set, there will be no upper limit for the number of pods created.
+If the `maxScale` annotation is not set, there will be no upper limit for the
+number of pods created.
 
 ## Configuring CPU-based autoscaling
 

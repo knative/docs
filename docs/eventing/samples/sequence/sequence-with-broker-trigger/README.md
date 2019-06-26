@@ -8,35 +8,34 @@ type: "docs"
 
 ## Overview
 
-We are going to create the following logical configuration. We create a CronJobSource,
-feeding events into the Broker, then we create a `Filter` that wires those events
-into a (`Sequence`)[../../../sequence.md] consisting of 3 steps. Then we take the end of the Sequence and
-feed newly minted events back into the Broker and create another Trigger which 
-will then display those events.
+We are going to create the following logical configuration. We create a
+CronJobSource, feeding events into the Broker, then we create a `Filter` that
+wires those events into a (`Sequence`)[../../../sequence.md] consisting of 3
+steps. Then we take the end of the Sequence and feed newly minted events back
+into the Broker and create another Trigger which will then display those events.
 
-**NOTE** [TODO: Fix this](https://github.com/knative/eventing/issues/1421)
-So, currently as set up, the events emitted by the Sequence do not make it into
-the Broker.
+**NOTE** [TODO: Fix this](https://github.com/knative/eventing/issues/1421) So,
+currently as set up, the events emitted by the Sequence do not make it into the
+Broker.
 
 ## Prerequisites
 
-For this example, we'll assume you have set up a `Broker` and an `InMemoryChannel`
-as well as Knative Serving (for our functions). The examples use `default`
-namespace, again, if your broker lives in another Namespace, you will need to
-modify the examples to reflect this.
+For this example, we'll assume you have set up a `Broker` and an
+`InMemoryChannel` as well as Knative Serving (for our functions). The examples
+use `default` namespace, again, if your broker lives in another Namespace, you
+will need to modify the examples to reflect this.
 
 If you want to use different type of `Channel`, you will have to modify the
 `Sequence.Spec.ChannelTemplate` to create the appropriate Channel resources.
 
 ![Logical Configuration](./sequence-with-broker-trigger.png)
 
-
 ## Setup
 
 ### Create the Knative Services
 
-Change `default` below to create the steps in the Namespace where you have configured your
-`Broker`
+Change `default` below to create the steps in the Namespace where you have
+configured your `Broker`
 
 ```yaml
 apiVersion: serving.knative.dev/v1beta1
@@ -82,15 +81,15 @@ spec:
 ---
 ```
 
-
 ```shell
 kubectl -n default create -f ./steps.yaml
 ```
 
 ### Create the Sequence
 
-The `sequence.yaml` file contains the specifications for creating the Sequence. If you are using a different type of Channel,
-you need to change the spec.channelTemplate to point to your desired Channel.
+The `sequence.yaml` file contains the specifications for creating the Sequence.
+If you are using a different type of Channel, you need to change the
+spec.channelTemplate to point to your desired Channel.
 
 Also, change the spec.reply.name to point to your `Broker`
 
@@ -104,36 +103,35 @@ spec:
     apiVersion: messaging.knative.dev/v1alpha1
     kind: InMemoryChannel
   steps:
-  - ref:
-      apiVersion: serving.knative.dev/v1beta1
-      kind: Service
-      name: first
-  - ref:
-      apiVersion: serving.knative.dev/v1beta1
-      kind: Service
-      name: second
-  - ref:
-      apiVersion: serving.knative.dev/v1beta1
-      kind: Service
-      name: third
+    - ref:
+        apiVersion: serving.knative.dev/v1beta1
+        kind: Service
+        name: first
+    - ref:
+        apiVersion: serving.knative.dev/v1beta1
+        kind: Service
+        name: second
+    - ref:
+        apiVersion: serving.knative.dev/v1beta1
+        kind: Service
+        name: third
   reply:
     kind: Broker
     apiVersion: eventing.knative.dev/v1alpha1
     name: broker-test
 ```
 
-Change `default` below to create the `Sequence` in the Namespace where you have configured your
-`Broker`. 
+Change `default` below to create the `Sequence` in the Namespace where you have
+configured your `Broker`.
 
 ```shell
 kubectl -n default create -f ./sequence.yaml
 ```
 
-
 ### Create the CronJobSource targeting the Broker
 
-This will create a CronJobSource which will send a CloudEvent with {"message": "Hello world!"} as
-the data payload every 2 minutes.
+This will create a CronJobSource which will send a CloudEvent with {"message":
+"Hello world!"} as the data payload every 2 minutes.
 
 ```yaml
 apiVersion: sources.eventing.knative.dev/v1alpha1
@@ -153,8 +151,8 @@ Here, if you are using different type of Channel, you need to change the
 spec.channelTemplate to point to your desired Channel. Also, change the
 spec.reply.name to point to your `Broker`
 
-Change `default` below to create the `Sequence` in the Namespace where you have configured your
-`Broker`. 
+Change `default` below to create the `Sequence` in the Namespace where you have
+configured your `Broker`.
 
 ```shell
 kubectl -n default create -f ./cron-source.yaml
@@ -178,8 +176,8 @@ spec:
       name: sequence
 ```
 
-Change `default` below to create the `Sequence` in the Namespace where you have configured your
-`Broker`. 
+Change `default` below to create the `Sequence` in the Namespace where you have
+configured your `Broker`.
 
 ```shell
 kubectl -n default create -f ./trigger.yaml
@@ -188,8 +186,9 @@ kubectl -n default create -f ./trigger.yaml
 
 ### Create the Service and Trigger displaying the events created by Sequence
 
-**NOTE** This does not work yet because the events created by the Sequence in the last step
-are filtered. [TODO: Fix this](https://github.com/knative/eventing/issues/1421)
+**NOTE** This does not work yet because the events created by the Sequence in
+the last step are filtered.
+[TODO: Fix this](https://github.com/knative/eventing/issues/1421)
 
 ```yaml
 apiVersion: serving.knative.dev/v1beta1
@@ -200,7 +199,7 @@ spec:
   template:
     spec:
       containers:
-      - image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display
+        - image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display
 ---
 apiVersion: eventing.knative.dev/v1alpha1
 kind: Trigger
@@ -216,12 +215,12 @@ spec:
       kind: Service
       name: sequence-display
 ---
+
 ```
 
-Change `default` below to create the `Sequence` in the Namespace where you have configured your
-`Broker`. 
+Change `default` below to create the `Sequence` in the Namespace where you have
+configured your `Broker`.
 
 ```shell
 kubectl -n default create -f ./display-trigger.yaml
 ```
-
