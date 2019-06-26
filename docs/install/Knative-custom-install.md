@@ -85,7 +85,7 @@ The following Knative installation files are available:
   - https://github.com/knative/eventing/releases/download/v0.7.0/in-memory-channel.yaml
   - https://github.com/knative/eventing/releases/download/v0.7.0/kafka.yaml
 - **Eventing sources**:
-  - https://github.com/knative/eventing-contrib/releases/download/v0.7.0/eventing-sources.yaml
+  - https://github.com/knative/eventing-contrib/releases/download/v0.7.0/github.yaml
   - https://github.com/knative/eventing-contrib/releases/download/v0.7.0/camel.yaml
   - https://github.com/knative/eventing-contrib/releases/download/v0.7.0/gcppubsub.yaml
   - https://github.com/knative/eventing-contrib/releases/download/v0.7.0/kafka.yaml
@@ -121,7 +121,7 @@ files from the Knative repositories:
 | [`natss.yaml`][4.5]                            | Installs only the NATSS channel provisioner.                                                                                                                           | Eventing component                                                                        |
 | [`gcp-pubsub.yaml`][4.6]                       | Installs only the GCP PubSub channel provisioner.                                                                                                                      | Eventing component                                                                        |
 | **knative/eventing-contrib**                   |                                                                                                                                                                        |                                                                                           |
-| [`eventing-sources.yaml`][5.1]†                | Installs the [GitHub][6.1] source.                                                                                                                                     | Eventing component                                                                        |
+| [`github.yaml`][5.1]†                          | Installs the [GitHub][6.1] source.                                                                                                                                     | Eventing component                                                                        |
 | [`camel.yaml`][5.4]                            | Installs the Apache Camel source.                                                                                                                                      | Eventing component                                                                        |
 | [`gcppubsub.yaml`][5.2]                        | Installs the [GCP PubSub source][6.3]                                                                                                                                  | Eventing component                                                                        |
 | [`kafka.yaml`][5.5]                            | Installs the Apache Kafka source.                                                                                                                                      | Eventing component                                                                        |
@@ -172,7 +172,7 @@ for details about installing the various supported observability plugins.
   https://github.com/knative/eventing/releases/download/v0.7.0/gcp-pubsub.yaml
 [5]: https://github.com/knative/eventing-contrib/releases/tag/v0.7.0
 [5.1]:
-  https://github.com/knative/eventing-contrib/releases/download/v0.7.0/eventing-sources.yaml
+  https://github.com/knative/eventing-contrib/releases/download/v0.7.0/github.yaml
 [5.2]:
   https://github.com/knative/eventing-contrib/releases/download/v0.7.0/gcppubsub.yaml
 [5.3]:
@@ -256,7 +256,6 @@ commands below.
       - `https://github.com/knative/serving/releases/download/v0.7.0/serving.yaml --selector networking.knative.dev/certificate-provider!=cert-manager`
       - `https://github.com/knative/build/releases/download/v0.7.0/build.yaml`
       - `https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml`
-      - `https://github.com/knative/eventing-contrib/releases/download/v0.7.0/eventing-sources.yaml`
       - `https://github.com/knative/serving/releases/download/v0.7.0/monitoring.yaml`
 
       **Note**: By default, the Knative Serving component installation
@@ -303,8 +302,7 @@ commands below.
         kubectl apply --selector knative.dev/crd-install=true \
           --filename https://github.com/knative/serving/releases/download/v0.7.0/serving.yaml \
           --filename https://github.com/knative/build/releases/download/v0.7.0/build.yaml \
-          --filename https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml \
-          --filename https://github.com/knative/eventing-contrib/releases/download/v0.7.0/eventing-sources.yaml
+          --filename https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml
         ```
 
      1. Remove the `--selector knative.dev/crd-install=true` flag and the run
@@ -314,8 +312,7 @@ commands below.
         ```bash
         kubectl apply --filename https://github.com/knative/serving/releases/download/v0.7.0/serving.yaml \
           --filename https://github.com/knative/build/releases/download/v0.7.0/build.yaml \
-          --filename https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml \
-          --filename https://github.com/knative/eventing-contrib/releases/download/v0.7.0/eventing-sources.yaml
+          --filename https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml
         ```
 
 1. Depending on what you chose to install, view the status of your installation
