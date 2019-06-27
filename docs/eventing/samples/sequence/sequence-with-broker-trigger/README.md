@@ -1,16 +1,9 @@
----
-title: "Sequence with Broker and Trigger"
-weight: 20
-type: "docs"
----
-
-# Using Sequence with Broker and Trigger
 
 ## Overview
 
 We are going to create the following logical configuration. We create a
 CronJobSource, feeding events into the Broker, then we create a `Filter` that
-wires those events into a (`Sequence`)[../../../sequence.md] consisting of 3
+wires those events into a [`Sequence`](../../../sequence.md) consisting of 3
 steps. Then we take the end of the Sequence and feed newly minted events back
 into the Broker and create another Trigger which will then display those events.
 

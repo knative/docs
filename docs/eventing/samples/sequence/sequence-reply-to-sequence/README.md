@@ -1,15 +1,8 @@
----
-title: "Sequence Wired to another Sequence"
-weight: 20
-type: "docs"
----
-
-# Using Sequences in series
 
 ## Overview
 
 We are going to create the following logical configuration. We create a
-CronJobSource, feeding events to a (`Sequence`)[../../../sequence.md], then
+CronJobSource, feeding events to a [`Sequence`](../../../sequence.md), then
 taking the output of that `Sequence` and sending it to a second `Sequence` and
 finally displaying the resulting output.
 
