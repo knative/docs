@@ -7,9 +7,8 @@ aliases:
   - /docs/reference/eventing/eventing-contrib-resources/
 ---
 
-
-The API definitions for the Eventing resources that conform to
-Knative Eventing are located in the
+The API definitions for the Eventing resources that conform to Knative Eventing
+are located in the
 [`knative/eventing-contrib`](https://github.com/knative/eventing-contrib/tree/release-0.7/)
 repo:
 
