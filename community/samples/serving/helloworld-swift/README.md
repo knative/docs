@@ -89,7 +89,7 @@ source files from this folder.
    into the file. Replace `{username}` with your Docker Hub username.
 
    ```yaml
-   apiVersion: serving.knative.dev/v1beta1
+   apiVersion: serving.knative.dev/v1alpha1
    kind: Service
    metadata:
      name: helloworld-swift

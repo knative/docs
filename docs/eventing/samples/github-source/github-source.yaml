@@ -15,7 +15,7 @@ spec:
       name: githubsecret
       key: secretToken
   sink:
-    apiVersion: serving.knative.dev/v1beta1
+    apiVersion: serving.knative.dev/v1alpha1
     kind: Service
     name: github-message-dumper
 # To use GitHub Enterprise you would need to add an entry for your githubAPIURL similar to the example below
