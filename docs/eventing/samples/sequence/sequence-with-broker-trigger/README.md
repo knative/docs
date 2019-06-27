@@ -38,7 +38,7 @@ Change `default` below to create the steps in the Namespace where you have
 configured your `Broker`
 
 ```yaml
-apiVersion: serving.knative.dev/v1beta1
+apiVersion: serving.knative.dev/v1alpha1
 kind: Service
 metadata:
   name: first
@@ -52,7 +52,7 @@ spec:
               value: "0"
 
 ---
-apiVersion: serving.knative.dev/v1beta1
+apiVersion: serving.knative.dev/v1alpha1
 kind: Service
 metadata:
   name: second
@@ -65,7 +65,7 @@ spec:
             - name: STEP
               value: "1"
 ---
-apiVersion: serving.knative.dev/v1beta1
+apiVersion: serving.knative.dev/v1alpha1
 kind: Service
 metadata:
   name: third
@@ -104,15 +104,15 @@ spec:
     kind: InMemoryChannel
   steps:
     - ref:
-        apiVersion: serving.knative.dev/v1beta1
+        apiVersion: serving.knative.dev/v1alpha1
         kind: Service
         name: first
     - ref:
-        apiVersion: serving.knative.dev/v1beta1
+        apiVersion: serving.knative.dev/v1alpha1
         kind: Service
         name: second
     - ref:
-        apiVersion: serving.knative.dev/v1beta1
+        apiVersion: serving.knative.dev/v1alpha1
         kind: Service
         name: third
   reply:
@@ -191,7 +191,7 @@ the last step are filtered.
 [TODO: Fix this](https://github.com/knative/eventing/issues/1421)
 
 ```yaml
-apiVersion: serving.knative.dev/v1beta1
+apiVersion: serving.knative.dev/v1alpha1
 kind: Service
 metadata:
   name: sequence-display
@@ -211,7 +211,7 @@ spec:
       type: samples.http.mod3
   subscriber:
     ref:
-      apiVersion: serving.knative.dev/v1beta1
+      apiVersion: serving.knative.dev/v1alpha1
       kind: Service
       name: sequence-display
 ---

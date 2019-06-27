@@ -8,15 +8,15 @@ spec:
     kind: InMemoryChannel
   steps:
   - ref:
-      apiVersion: serving.knative.dev/v1beta1
+      apiVersion: serving.knative.dev/v1alpha1
       kind: Service
       name: fourth
   - ref:
-      apiVersion: serving.knative.dev/v1beta1
+      apiVersion: serving.knative.dev/v1alpha1
       kind: Service
       name: fifth
   - ref:
-      apiVersion: serving.knative.dev/v1beta1
+      apiVersion: serving.knative.dev/v1alpha1
       kind: Service
       name: sixth
   reply:

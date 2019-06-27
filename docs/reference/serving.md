@@ -3964,7 +3964,7 @@ See also: <a href="https://github.com/knative/serving/blob/master/docs/spec/over
 string</td>
 <td>
 <code>
-serving.knative.dev/v1beta1
+serving.knative.dev/v1alpha1
 </code>
 </td>
 </tr>
@@ -4058,7 +4058,7 @@ Configuration.</p>
 string</td>
 <td>
 <code>
-serving.knative.dev/v1beta1
+serving.knative.dev/v1alpha1
 </code>
 </td>
 </tr>
@@ -4185,7 +4185,7 @@ See also: <a href="https://github.com/knative/serving/blob/master/docs/spec/over
 string</td>
 <td>
 <code>
-serving.knative.dev/v1beta1
+serving.knative.dev/v1alpha1
 </code>
 </td>
 </tr>
@@ -4288,7 +4288,7 @@ and Route, reflecting their statuses and conditions as its own.</p>
 string</td>
 <td>
 <code>
-serving.knative.dev/v1beta1
+serving.knative.dev/v1alpha1
 </code>
 </td>
 </tr>
