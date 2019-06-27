@@ -8,7 +8,8 @@ type: "docs"
 # Knative Install on OpenShift
 
 This guide walks you through the installation of the latest version of [Knative
-Serving](https://github.com/knative/serving) on [OpenShift](https://github.com/openshift/origin) by using the Knative Serving Operator. The operator is available on the OpenShift OperatorHub. After you install Knative Serving, create and deploy an image of a sample "hello world" app onto the newly created Knative cluster.
+Serving](https://github.com/knative/serving) on [OpenShift](https://github.com/openshift/origin) by using the Knative Serving Operator. The operator is available on the OpenShift OperatorHub. After you install Knative Serving, this guide walks you through creating and deploying an image of a sample "Hello World" app onto the new Knative cluster.
+
 
 You can find [guides for other platforms here](./README.md).
 
@@ -18,9 +19,9 @@ You can find [guides for other platforms here](./README.md).
 
 ## Installing the Knative Serving Operator
 
-1. Go to **Catalog > OperatorHub** in the OpenShift Web Console. A list of operators for OpenShift, provided by Red Hat as well as a community of partners and open-source projects is provided. Click on the **Knative Serving Operator** tile.
+1. Go to **Catalog > OperatorHub** in the [OpenShift Web Console](https://www.openshift.com/). A list of operators for OpenShift, provided by Red Hat as well as a community of partners and open-source projects is provided. Click on the **Knative Serving Operator** tile.
 
-> **NOTE:** Use the **Filter by Keyword** box to facilitate the search of the Knative Serving operator in the catalog.
+> **NOTE:** Use the **Filter by Keyword** box to help you find the Knative Serving operator in the catalog.
 
 ![KSO Tile](images/knative_serving_tile_highlighted.png)
 
@@ -59,7 +60,7 @@ guide.
 If you'd like to view the available sample apps and deploy one of your choosing,
 head to the [sample apps](../serving/samples/README.md) repo.
 
-> Note: When looking up the IP address to use for accessing your app, you need
+> **NOTE:** When looking up the IP address to use for accessing your app, you need
 > to look up the NodePort for the `istio-ingressgateway` well as the IP address
 > used for OpenShift. You can use the following command to look up the value to
 > use for the {IP_ADDRESS} placeholder used in the samples:
