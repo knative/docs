@@ -23,7 +23,7 @@ If you want to use different type of `Channel`, you will have to modify the
 First create the 3 steps that will be referenced in the Steps.
 
 ```yaml
-apiVersion: serving.knative.dev/v1beta1
+apiVersion: serving.knative.dev/v1alpha1
 kind: Service
 metadata:
   name: first
@@ -37,7 +37,7 @@ spec:
               value: "0"
 
 ---
-apiVersion: serving.knative.dev/v1beta1
+apiVersion: serving.knative.dev/v1alpha1
 kind: Service
 metadata:
   name: second
@@ -50,7 +50,7 @@ spec:
             - name: STEP
               value: "1"
 ---
-apiVersion: serving.knative.dev/v1beta1
+apiVersion: serving.knative.dev/v1alpha1
 kind: Service
 metadata:
   name: third
@@ -87,15 +87,15 @@ spec:
     kind: InMemoryChannel
   steps:
     - ref:
-        apiVersion: serving.knative.dev/v1beta1
+        apiVersion: serving.knative.dev/v1alpha1
         kind: Service
         name: first
     - ref:
-        apiVersion: serving.knative.dev/v1beta1
+        apiVersion: serving.knative.dev/v1alpha1
         kind: Service
         name: second
     - ref:
-        apiVersion: serving.knative.dev/v1beta1
+        apiVersion: serving.knative.dev/v1alpha1
         kind: Service
         name: third
 ```
