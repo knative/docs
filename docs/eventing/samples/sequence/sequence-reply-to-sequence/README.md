@@ -1,4 +1,3 @@
-
 ## Overview
 
 We are going to create the following logical configuration. We create a
