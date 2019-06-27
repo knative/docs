@@ -15,7 +15,7 @@ You can find [guides for other platforms here](./README.md).
 
 ## Before you begin
 
-* An OpenShift 4 cluster is required for installation. Visit [try.openshift.com](try.openshift.com) for information on setting up a cluster. You will need cluster administrator privileges to install and use Knative on an OpenShift cluster. 
+* An OpenShift 4 cluster is required for installation. Visit [try.openshift.com](https://try.openshift.com) for information on setting up a cluster. You will need cluster administrator privileges to install and use Knative on an OpenShift cluster. 
 
 ## Installing the Knative Serving Operator
 
