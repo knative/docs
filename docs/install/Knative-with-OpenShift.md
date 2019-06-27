@@ -85,7 +85,7 @@ export IP_ADDRESS=$(oc get node  -o 'jsonpath={.items[0].status.addresses[0].add
 
 2. Click on the **Knative Serving Operator** tile.
 
-![KSO Uninstall Tile](images/knative_serving_uninstall_operator.png)
+![KSO Uninstall Tile](images/knative_serving_uninstall_tile.png)
 
 > **NOTE:** The operator tile will indicate it is installed.
 
