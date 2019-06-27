@@ -25,7 +25,7 @@ spec:
     name: camel-test
   subscriber:
     ref:
-      apiVersion: serving.knative.dev/v1beta1
+      apiVersion: serving.knative.dev/v1alpha1
       kind: Service
       name: camel-event-display
 
@@ -33,7 +33,7 @@ spec:
 
 # This is a very simple Knative Service that prints the input event to its log.
 
-apiVersion: serving.knative.dev/v1beta1
+apiVersion: serving.knative.dev/v1alpha1
 kind: Service
 metadata:
   name: camel-event-display
