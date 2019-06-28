@@ -5,7 +5,7 @@ weight: 9
 type: "docs"
 ---
 
-This guide describes the components that are active when running Knative Serving.
+This guide describes the [Kubernetes Services](https://kubernetes.io/docs/concepts/services-networking/service/) that are active when running Knative Serving.
 
 ## Before You Begin
 
@@ -44,13 +44,13 @@ networking-istio         1         1         1            1           1h
 webhook                  1         1         1            1           1h
 ```
 
-These serivces and deployments are installed by the `serving.yaml` file during install. The next section describes the function of these components.
+These services and deployments are installed by the `serving.yaml` file during install. The next section describes their function.
 
 ## Components
 
 ### Service: activator
 
-The activator is responsible for receiving & buffering requests for inactive revisions and reporting metrics to the autoscaler. In addition, it retries requests to a revision after the autoscaler scales the revision based on the reported metrics.
+The activator is responsible for receiving & buffering requests for inactive revisions and reporting metrics to the autoscaler. It also retries requests to a revision after the autoscaler scales the revision based on the reported metrics.
 
 ### Service: autoscaler
 
@@ -58,9 +58,9 @@ The autoscaler receives request metrics and adjusts the number of pods required 
 
 ### Service: controller
 
-The controller service reconciles all the public knative objects and autoscaling
+The controller service reconciles all the public Knative objects and autoscaling
 CRDs. When a user applies a Knative service to the Kubernetes API, this creates
-the configuration and route. It will convert the configuration into revisions, and the revisions into Deployment and Knative Pod Autoscaling (KPA).
+the configuration and route. It will convert the configuration into revisions and the revisions into deployments and Knative Pod Autoscalers (KPAs).
 
 ### Service: webhook
 
@@ -73,7 +73,7 @@ The certmanager reconciles cluster ingresses into cert manager objects.
 
 ### Deployment: networking-istio
 
-The networking-istio deployment reconciles a cluster's ingress into a virtual service.
+The networking-istio deployment reconciles a cluster's ingress into an [Istio virtual service](https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/).
 
 ## What's Next
 
