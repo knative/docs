@@ -7,10 +7,10 @@
 <a href="#networking.internal.knative.dev">networking.internal.knative.dev</a>
 </li>
 <li>
-<a href="#serving.knative.dev">serving.knative.dev</a>
+<a href="#serving.knative.dev-v1alpha1">serving.knative.dev (v1alpha1)</a>
 </li>
 <li>
-<a href="#serving.knative.dev">serving.knative.dev</a>
+<a href="#serving.knative.dev-v1beta1">serving.knative.dev (v1beta1)</a>
 </li>
 </ul>
 <h2 id="autoscaling.internal.knative.dev">autoscaling.internal.knative.dev</h2>
@@ -1594,7 +1594,7 @@ rule is satisfied, the request is routed to the specified backend.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fnetworking%2fv1alpha1.ClusterIngress">ClusterIngress</a>, 
+<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fnetworking%2fv1alpha1.ClusterIngress">ClusterIngress</a>,
 <a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fnetworking%2fv1alpha1.Ingress">Ingress</a>)
 </p>
 <p>
@@ -1681,7 +1681,7 @@ IngressVisibility
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fnetworking%2fv1alpha1.ClusterIngress">ClusterIngress</a>, 
+<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fnetworking%2fv1alpha1.ClusterIngress">ClusterIngress</a>,
 <a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fnetworking%2fv1alpha1.Ingress">Ingress</a>)
 </p>
 <p>
@@ -2053,7 +2053,7 @@ load balances over the user service pods backing this Revision.</p>
 </tbody>
 </table>
 <hr/>
-<h2 id="serving.knative.dev">serving.knative.dev</h2>
+<h2 id="serving.knative.dev-v1alpha1">serving.knative.dev (v1alpha1)</h2>
 <p>
 </p>
 Resource Types:
@@ -2759,10 +2759,10 @@ string
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.Configuration">Configuration</a>, 
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.PinnedType">PinnedType</a>, 
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.ReleaseType">ReleaseType</a>, 
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.RunLatestType">RunLatestType</a>, 
+<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.Configuration">Configuration</a>,
+<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.PinnedType">PinnedType</a>,
+<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.ReleaseType">ReleaseType</a>,
+<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.RunLatestType">RunLatestType</a>,
 <a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.ServiceSpec">ServiceSpec</a>)
 </p>
 <p>
@@ -2893,7 +2893,7 @@ ConfigurationStatusFields
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.ConfigurationStatus">ConfigurationStatus</a>, 
+<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.ConfigurationStatus">ConfigurationStatus</a>,
 <a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.ServiceStatus">ServiceStatus</a>)
 </p>
 <p>
@@ -3070,7 +3070,7 @@ come from a single configuration.</p>
 (<code>string</code> alias)</p></h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fautoscaling%2fv1alpha1.PodAutoscalerSpec">PodAutoscalerSpec</a>, 
+<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fautoscaling%2fv1alpha1.PodAutoscalerSpec">PodAutoscalerSpec</a>,
 <a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.RevisionSpec">RevisionSpec</a>)
 </p>
 <p>
@@ -3082,7 +3082,7 @@ DEPRECATED in favor of RevisionContainerConcurrencyType.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.Revision">Revision</a>, 
+<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.Revision">Revision</a>,
 <a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.RevisionTemplateSpec">RevisionTemplateSpec</a>)
 </p>
 <p>
@@ -3456,7 +3456,7 @@ environment:
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.Route">Route</a>, 
+<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.Route">Route</a>,
 <a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.ServiceSpec">ServiceSpec</a>)
 </p>
 <p>
@@ -3555,7 +3555,7 @@ RouteStatusFields
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.RouteStatus">RouteStatus</a>, 
+<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.RouteStatus">RouteStatus</a>,
 <a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.ServiceStatus">ServiceStatus</a>)
 </p>
 <p>
@@ -3881,7 +3881,7 @@ ConfigurationStatusFields
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.RouteSpec">RouteSpec</a>, 
+<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.RouteSpec">RouteSpec</a>,
 <a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.RouteStatusFields">RouteStatusFields</a>)
 </p>
 <p>
@@ -3928,7 +3928,7 @@ Ultimately all non-v1beta1 fields will be deprecated.</p>
 </tbody>
 </table>
 <hr/>
-<h2 id="serving.knative.dev">serving.knative.dev</h2>
+<h2 id="serving.knative.dev-v1beta1">serving.knative.dev (v1beta1)</h2>
 <p>
 </p>
 Resource Types:
@@ -4385,7 +4385,7 @@ ServiceStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.Configuration">Configuration</a>, 
+<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.Configuration">Configuration</a>,
 <a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.ServiceSpec">ServiceSpec</a>)
 </p>
 <p>
@@ -4468,7 +4468,7 @@ ConfigurationStatusFields
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.ConfigurationStatus">ConfigurationStatus</a>, 
+<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.ConfigurationStatus">ConfigurationStatus</a>,
 <a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.ServiceStatus">ServiceStatus</a>)
 </p>
 <p>
@@ -4516,7 +4516,7 @@ Configuration. It might not be ready yet, for that use LatestReadyRevisionName.<
 (<code>int64</code> alias)</p></h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fautoscaling%2fv1alpha1.PodAutoscalerSpec">PodAutoscalerSpec</a>, 
+<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fautoscaling%2fv1alpha1.PodAutoscalerSpec">PodAutoscalerSpec</a>,
 <a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.RevisionSpec">RevisionSpec</a>)
 </p>
 <p>
@@ -4527,8 +4527,8 @@ in-flight (concurrent) requests.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.Revision">Revision</a>, 
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.RevisionSpec">RevisionSpec</a>, 
+<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.Revision">Revision</a>,
+<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.RevisionSpec">RevisionSpec</a>,
 <a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.RevisionTemplateSpec">RevisionTemplateSpec</a>)
 </p>
 <p>
@@ -4766,7 +4766,7 @@ be provided.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.Route">Route</a>, 
+<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.Route">Route</a>,
 <a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.ServiceSpec">ServiceSpec</a>)
 </p>
 <p>
@@ -4850,7 +4850,7 @@ RouteStatusFields
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.RouteStatus">RouteStatus</a>, 
+<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.RouteStatus">RouteStatus</a>,
 <a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.ServiceStatus">ServiceStatus</a>)
 </p>
 <p>
@@ -5044,8 +5044,8 @@ specific to RouteStatus.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.RouteSpec">RouteSpec</a>, 
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.RouteStatusFields">RouteStatusFields</a>, 
+<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.RouteSpec">RouteSpec</a>,
+<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.RouteStatusFields">RouteStatusFields</a>,
 <a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.TrafficTarget">TrafficTarget</a>)
 </p>
 <p>

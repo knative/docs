@@ -3,18 +3,6 @@
 <li>
 <a href="#sources.eventing.knative.dev">sources.eventing.knative.dev</a>
 </li>
-<li>
-<a href="#sources.eventing.knative.dev">sources.eventing.knative.dev</a>
-</li>
-<li>
-<a href="#sources.eventing.knative.dev">sources.eventing.knative.dev</a>
-</li>
-<li>
-<a href="#sources.eventing.knative.dev">sources.eventing.knative.dev</a>
-</li>
-<li>
-<a href="#sources.eventing.knative.dev">sources.eventing.knative.dev</a>
-</li>
 </ul>
 <h2 id="sources.eventing.knative.dev">sources.eventing.knative.dev</h2>
 <p>
@@ -23,6 +11,18 @@
 Resource Types:
 <ul><li>
 <a href="#github.com%2fknative%2feventing-contrib%2fcamel%2fsource%2fpkg%2fapis%2fsources%2fv1alpha1.CamelSource">CamelSource</a>
+</li>
+<li>
+<a href="#github.com%2fknative%2feventing-contrib%2fcontrib%2fawssqs%2fpkg%2fapis%2fsources%2fv1alpha1.AwsSqsSource">AwsSqsSource</a>
+</li>
+<li>
+<a href="#github.com%2fknative%2feventing-contrib%2fcontrib%2fgcppubsub%2fpkg%2fapis%2fsources%2fv1alpha1.GcpPubSubSource">GcpPubSubSource</a>
+</li>
+<li>
+<a href="#github.com%2fknative%2feventing-contrib%2fcontrib%2fgithub%2fpkg%2fapis%2fsources%2fv1alpha1.GitHubSource">GitHubSource</a>
+</li>
+<li>
+<a href="#github.com%2fknative%2feventing-contrib%2fkafka%2fsource%2fpkg%2fapis%2fsources%2fv1alpha1.KafkaSource">KafkaSource</a>
 </li></ul>
 <h3 id="github.com/knative/eventing-contrib/camel/source/pkg/apis/sources/v1alpha1.CamelSource">CamelSource
 </h3>
@@ -381,14 +381,6 @@ string
 </tbody>
 </table>
 <hr/>
-<h2 id="sources.eventing.knative.dev">sources.eventing.knative.dev</h2>
-<p>
-<p>Package v1alpha1 contains API Schema definitions for the sources v1alpha1 API group</p>
-</p>
-Resource Types:
-<ul><li>
-<a href="#github.com%2fknative%2feventing-contrib%2fcontrib%2fawssqs%2fpkg%2fapis%2fsources%2fv1alpha1.AwsSqsSource">AwsSqsSource</a>
-</li></ul>
 <h3 id="github.com/knative/eventing-contrib/contrib/awssqs/pkg/apis/sources/v1alpha1.AwsSqsSource">AwsSqsSource
 </h3>
 <p>
@@ -634,14 +626,6 @@ string
 </tbody>
 </table>
 <hr/>
-<h2 id="sources.eventing.knative.dev">sources.eventing.knative.dev</h2>
-<p>
-<p>Package v1alpha1 contains API Schema definitions for the sources v1alpha1 API group</p>
-</p>
-Resource Types:
-<ul><li>
-<a href="#github.com%2fknative%2feventing-contrib%2fcontrib%2fgcppubsub%2fpkg%2fapis%2fsources%2fv1alpha1.GcpPubSubSource">GcpPubSubSource</a>
-</li></ul>
 <h3 id="github.com/knative/eventing-contrib/contrib/gcppubsub/pkg/apis/sources/v1alpha1.GcpPubSubSource">GcpPubSubSource
 </h3>
 <p>
@@ -712,7 +696,7 @@ Kubernetes core/v1.SecretKeySelector
 <p>GcpCredsSecret is the credential to use to poll the GCP PubSub Subscription. It is not used
 to create or delete the Subscription, only to poll it. The value of the secret entry must be
 a service account key in the JSON format (see
-<a href="https://cloud.google.com/iam/docs/creating-managing-service-account-keys)">https://cloud.google.com/iam/docs/creating-managing-service-account-keys)</a>.</p>
+<a href="https://cloud.google.com/iam/docs/creating-managing-service-account-keys">https://cloud.google.com/iam/docs/creating-managing-service-account-keys</a>.</p>
 </td>
 </tr>
 <tr>
@@ -826,7 +810,7 @@ Kubernetes core/v1.SecretKeySelector
 <p>GcpCredsSecret is the credential to use to poll the GCP PubSub Subscription. It is not used
 to create or delete the Subscription, only to poll it. The value of the secret entry must be
 a service account key in the JSON format (see
-<a href="https://cloud.google.com/iam/docs/creating-managing-service-account-keys)">https://cloud.google.com/iam/docs/creating-managing-service-account-keys)</a>.</p>
+<a href="https://cloud.google.com/iam/docs/creating-managing-service-account-keys">https://cloud.google.com/iam/docs/creating-managing-service-account-keys</a>.</p>
 </td>
 </tr>
 <tr>
@@ -957,14 +941,6 @@ string
 </tbody>
 </table>
 <hr/>
-<h2 id="sources.eventing.knative.dev">sources.eventing.knative.dev</h2>
-<p>
-<p>Package v1alpha1 contains API Schema definitions for the sources v1alpha1 API group</p>
-</p>
-Resource Types:
-<ul><li>
-<a href="#github.com%2fknative%2feventing-contrib%2fcontrib%2fgithub%2fpkg%2fapis%2fsources%2fv1alpha1.GitHubSource">GitHubSource</a>
-</li></ul>
 <h3 id="github.com/knative/eventing-contrib/contrib/github/pkg/apis/sources/v1alpha1.GitHubSource">GitHubSource
 </h3>
 <p>
@@ -1376,14 +1352,6 @@ Kubernetes core/v1.SecretKeySelector
 </tbody>
 </table>
 <hr/>
-<h2 id="sources.eventing.knative.dev">sources.eventing.knative.dev</h2>
-<p>
-<p>Package v1alpha1 contains API Schema definitions for the sources v1alpha1 API group</p>
-</p>
-Resource Types:
-<ul><li>
-<a href="#github.com%2fknative%2feventing-contrib%2fkafka%2fsource%2fpkg%2fapis%2fsources%2fv1alpha1.KafkaSource">KafkaSource</a>
-</li></ul>
 <h3 id="github.com/knative/eventing-contrib/kafka/source/pkg/apis/sources/v1alpha1.KafkaSource">KafkaSource
 </h3>
 <p>
@@ -1984,7 +1952,7 @@ SecretValueFromSource
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing-contrib%2fkafka%2fsource%2fpkg%2fapis%2fsources%2fv1alpha1.KafkaSourceSASLSpec">KafkaSourceSASLSpec</a>, 
+<a href="#github.com%2fknative%2feventing-contrib%2fkafka%2fsource%2fpkg%2fapis%2fsources%2fv1alpha1.KafkaSourceSASLSpec">KafkaSourceSASLSpec</a>,
 <a href="#github.com%2fknative%2feventing-contrib%2fkafka%2fsource%2fpkg%2fapis%2fsources%2fv1alpha1.KafkaSourceTLSSpec">KafkaSourceTLSSpec</a>)
 </p>
 <p>
