@@ -44,7 +44,7 @@ networking-istio         1         1         1            1           1h
 webhook                  1         1         1            1           1h
 ```
 
-These serivces and deployments are installed by the `serving.yaml` file during install. The next section describes the function of these components.
+These services and deployments are installed by the `serving.yaml` file during install. The next section describes their function.
 
 ## Components
 
