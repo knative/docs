@@ -9,8 +9,8 @@ This guide describes the components that are active when running Knative Serving
 
 ## Before You Begin
 
-1. Install Knative Serving. Instructions on how to do this are located 
-   [here](https://knative.dev/docs/install/knative-custom-install/).
+1. This guide assumes that you have installed Knative Serving. If you have not,
+   instructions on how to do this are located [here](https://knative.dev/docs/install/knative-custom-install/).
 2. Verify that you have the proper components in your cluster. To view the services installed in your cluster, use the commmand:
 
    ```sh
@@ -77,7 +77,7 @@ The networking-istio deployment reconciles a cluster's ingress into a virtual se
 
 ## What's Next
 
-1. For a deeper look at the services and deployments involved in Knative Serving, click [here](https://github.com/knative/serving/blob/master/docs/spec/overview.md#service).
-2. For a high-level analysis of Serving, look at the [Kubernetes documentation](https://Kubernetes.io/docs/concepts/services-networking/service/)
-3. Check out the Knative Seriving code samples [here](https://knative.dev/docs/serving/samples/) for more hands-on tutorials.
+- For a deeper look at the services and deployments involved in Knative Serving, click [here](https://github.com/knative/serving/blob/master/docs/spec/overview.md#service).
+- For a high-level analysis of Serving, look at the [Kubernetes documentation](https://Kubernetes.io/docs/concepts/services-networking/service/)
+- Check out the Knative Seriving code samples [here](https://knative.dev/docs/serving/samples/) for more hands-on tutorials.
 
