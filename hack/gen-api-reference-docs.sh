@@ -23,7 +23,7 @@ SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 REFDOCS_PKG="github.com/ahmetb/gen-crd-api-reference-docs"
 REFDOCS_REPO="https://${REFDOCS_PKG}.git"
-REFDOCS_VER="5c208a6"
+REFDOCS_VER="v0.1.4"
 
 KNATIVE_SERVING_REPO="github.com/knative/serving"
 KNATIVE_SERVING_COMMIT="${KNATIVE_SERVING_COMMIT:?specify the \$KNATIVE_SERVING_COMMIT variable}"
@@ -93,18 +93,20 @@ clone_at_commit() {
 }
 
 gen_refdocs() {
-    local refdocs_bin gopath out_dir out_file repo_root
+    local refdocs_bin gopath out_file repo_root api_dir
     refdocs_bin="$1"
     gopath="$2"
-    out_dir="$3"
+    template_dir="$3"
     out_file="$4"
     repo_root="$5"
+    api_dir="$6"
 
     (
         cd "${repo_root}"
         env GOPATH="${gopath}" "${refdocs_bin}" \
-            -out-file "${out_dir}/${out_file}" \
-            -api-dir "./pkg/apis" \
+            -out-file "${out_file}" \
+            -api-dir "${api_dir}" \
+            -template-dir "${template_dir}" \
             -config "${SCRIPTDIR}/reference-docs-gen-config.json"
     )
 }
@@ -132,11 +134,12 @@ main() {
     fi
 
     # install and place the refdocs tool
-    local refdocs_bin refdocs_bin_expected refdocs_dir
+    local refdocs_bin refdocs_bin_expected refdocs_dir template_dir
     refdocs_dir="$(mktemp -d)"
     cleanup_refdocs_root="${refdocs_dir}"
     # clone repo for ./templates
     git clone --quiet --depth=1 "${REFDOCS_REPO}" "${refdocs_dir}"
+    template_dir="${refdocs_dir}/template"
     # install bin
     install_go_bin "${REFDOCS_PKG}@${REFDOCS_VER}"
     # move bin to final location
@@ -154,29 +157,29 @@ main() {
     knative_serving_root="${clone_root}/src/${KNATIVE_SERVING_REPO}"
     clone_at_commit "https://${KNATIVE_SERVING_REPO}.git" "${KNATIVE_SERVING_COMMIT}" \
         "${knative_serving_root}"
-    gen_refdocs "${refdocs_bin}" "${clone_root}" "${out_dir}" \
-        "${KNATIVE_SERVING_OUT_FILE}" "${knative_serving_root}"
+    gen_refdocs "${refdocs_bin}" "${clone_root}" "${template_dir}" \
+        "${out_dir}/${KNATIVE_SERVING_OUT_FILE}" "${knative_serving_root}" "./pkg/apis"
 
     local knative_build_root
     knative_build_root="${clone_root}/src/${KNATIVE_BUILD_REPO}"
     clone_at_commit "https://${KNATIVE_BUILD_REPO}.git" "${KNATIVE_BUILD_COMMIT}" \
         "${knative_build_root}"
-    gen_refdocs "${refdocs_bin}" "${clone_root}" "${out_dir}" \
-        "${KNATIVE_BUILD_OUT_FILE}" "${knative_build_root}"
+    gen_refdocs "${refdocs_bin}" "${clone_root}" "${template_dir}" \
+        "${out_dir}/${KNATIVE_BUILD_OUT_FILE}" "${knative_build_root}" "./pkg/apis"
 
     local knative_eventing_root
     knative_eventing_root="${clone_root}/src/${KNATIVE_EVENTING_REPO}"
     clone_at_commit "https://${KNATIVE_EVENTING_REPO}.git" "${KNATIVE_EVENTING_COMMIT}" \
         "${knative_eventing_root}"
-    gen_refdocs "${refdocs_bin}" "${clone_root}" "${out_dir}" \
-        "${KNATIVE_EVENTING_OUT_FILE}" "${knative_eventing_root}"
+    gen_refdocs "${refdocs_bin}" "${clone_root}" "${template_dir}" \
+        "${out_dir}/${KNATIVE_EVENTING_OUT_FILE}" "${knative_eventing_root}" "./pkg/apis"
 
     local knative_eventing_sources_root
     knative_eventing_sources_root="${clone_root}/src/${KNATIVE_EVENTING_SOURCES_REPO}"
     clone_at_commit "https://${KNATIVE_EVENTING_SOURCES_REPO}.git" "${KNATIVE_EVENTING_SOURCES_COMMIT}" \
         "${knative_eventing_sources_root}"
-    gen_refdocs "${refdocs_bin}" "${clone_root}" "${out_dir}" \
-        "${KNATIVE_EVENTING_SOURCES_OUT_FILE}" "${knative_eventing_sources_root}"
+    gen_refdocs "${refdocs_bin}" "${clone_root}" "${template_dir}" \
+        "${out_dir}/${KNATIVE_EVENTING_SOURCES_OUT_FILE}" "${knative_eventing_sources_root}" "."
 
     log "SUCCESS: Generated docs written to ${out_dir}/."
     log "Opening the ${out_dir}/ directory. You can now copy these API files"
