@@ -5,7 +5,7 @@ weight: 9
 type: "docs"
 ---
 
-This guide describes the components that are active when running Knative Serving.
+This guide describes the [Kubernetes Services](https://kubernetes.io/docs/concepts/services-networking/service/) that are active when running Knative Serving.
 
 ## Before You Begin
 
