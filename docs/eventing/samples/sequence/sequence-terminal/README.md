@@ -1,13 +1,8 @@
-title: "Sequence terminal" weight: 20 type: "docs"
-
----
-
-# Using Sequences in series
 
 ## Overview
 
 We are going to create the following logical configuration. We create a
-CronJobSource, feeding events to a (`Sequence`)[../../../sequence.md]. Sequence
+CronJobSource, feeding events to a [`Sequence`](../../../sequence.md). Sequence
 can then do either external work, or out of band create additional events.
 
 ![Logical Configuration](./sequence-terminal.png)

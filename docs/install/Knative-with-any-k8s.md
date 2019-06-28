@@ -103,7 +103,6 @@ your Knative installation, see
    kubectl get pods --namespace knative-serving
    kubectl get pods --namespace knative-build
    kubectl get pods --namespace knative-eventing
-   kubectl get pods --namespace knative-sources
    kubectl get pods --namespace knative-monitoring
    ```
 
