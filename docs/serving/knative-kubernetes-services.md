@@ -58,7 +58,7 @@ The autoscaler receives request metrics and adjusts the number of pods required 
 
 ### Service: controller
 
-The controller service reconciles all the public knative objects and autoscaling
+The controller service reconciles all the public Knative objects and autoscaling
 CRDs. When a user applies a Knative service to the Kubernetes API, this creates
 the configuration and route. It will convert the configuration into revisions, and the revisions into Deployment and Knative Pod Autoscaling (KPA).
 
