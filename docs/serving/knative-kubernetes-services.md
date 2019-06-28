@@ -50,7 +50,7 @@ These services and deployments are installed by the `serving.yaml` file during i
 
 ### Service: activator
 
-The activator is responsible for receiving & buffering requests for inactive revisions and reporting metrics to the autoscaler. In addition, it retries requests to a revision after the autoscaler scales the revision based on the reported metrics.
+The activator is responsible for receiving & buffering requests for inactive revisions and reporting metrics to the autoscaler. It also retries requests to a revision after the autoscaler scales the revision based on the reported metrics.
 
 ### Service: autoscaler
 
