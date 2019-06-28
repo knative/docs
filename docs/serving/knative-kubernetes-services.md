@@ -73,7 +73,7 @@ The certmanager reconciles cluster ingresses into cert manager objects.
 
 ### Deployment: networking-istio
 
-The networking-istio deployment reconciles a cluster's ingress into a virtual service.
+The networking-istio deployment reconciles a cluster's ingress into an [Istio virtual service](https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/).
 
 ## What's Next
 
