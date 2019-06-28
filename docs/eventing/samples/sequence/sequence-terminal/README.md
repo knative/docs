@@ -1,13 +1,7 @@
-title: "Sequence terminal" weight: 20 type: "docs"
-
----
-
-# Using Sequences in series
-
 ## Overview
 
 We are going to create the following logical configuration. We create a
-CronJobSource, feeding events to a (`Sequence`)[../../../sequence.md]. Sequence
+CronJobSource, feeding events to a [`Sequence`](../../../sequence.md). Sequence
 can then do either external work, or out of band create additional events.
 
 ![Logical Configuration](./sequence-terminal.png)
@@ -29,7 +23,7 @@ If you want to use different type of `Channel`, you will have to modify the
 First create the 3 steps that will be referenced in the Steps.
 
 ```yaml
-apiVersion: serving.knative.dev/v1beta1
+apiVersion: serving.knative.dev/v1alpha1
 kind: Service
 metadata:
   name: first
@@ -43,7 +37,7 @@ spec:
               value: "0"
 
 ---
-apiVersion: serving.knative.dev/v1beta1
+apiVersion: serving.knative.dev/v1alpha1
 kind: Service
 metadata:
   name: second
@@ -56,7 +50,7 @@ spec:
             - name: STEP
               value: "1"
 ---
-apiVersion: serving.knative.dev/v1beta1
+apiVersion: serving.knative.dev/v1alpha1
 kind: Service
 metadata:
   name: third
@@ -93,15 +87,15 @@ spec:
     kind: InMemoryChannel
   steps:
     - ref:
-        apiVersion: serving.knative.dev/v1beta1
+        apiVersion: serving.knative.dev/v1alpha1
         kind: Service
         name: first
     - ref:
-        apiVersion: serving.knative.dev/v1beta1
+        apiVersion: serving.knative.dev/v1alpha1
         kind: Service
         name: second
     - ref:
-        apiVersion: serving.knative.dev/v1beta1
+        apiVersion: serving.knative.dev/v1alpha1
         kind: Service
         name: third
 ```

@@ -17,13 +17,9 @@ files in the following branches:
 
 - **Released versions**
 
-  The following branches include content for released versions of Knative:
+  The released versions of Knative are available in:
 
-  - [**`release-0.5`**](https://github.com/knative/docs/tree/release-0.5)
-  - [**`release-0.4`**](https://github.com/knative/docs/tree/release-0.4)
-  - [**`release-0.3`**](https://github.com/knative/docs/tree/release-0.3)
-  - [**`release-0.2`**](https://github.com/knative/docs/tree/release-0.2)
-  - [**`release-0.1`**](https://github.com/knative/docs/tree/release-0.1)
+  - [**`Knative Doc Releases`**](https://github.com/knative/docs/releases)
 
 - **Development (pre-release) version**
 
