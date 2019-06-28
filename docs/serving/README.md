@@ -22,7 +22,7 @@ serverless workload behaves on the cluster:
   update of the service. Service can be defined to always route traffic to the
   latest revision or to a pinned revision.
 - [Route](https://github.com/knative/serving/blob/master/docs/spec/spec.md#route):
-  The `route.serving.knative.dev` resource maps a network endpoint to a one or
+  The `route.serving.knative.dev` resource maps a network endpoint to one or
   more revisions. You can manage the traffic in several ways, including
   fractional traffic and named routes.
 - [Configuration](https://github.com/knative/serving/blob/master/docs/spec/spec.md#configuration):
