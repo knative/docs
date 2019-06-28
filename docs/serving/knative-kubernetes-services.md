@@ -78,6 +78,6 @@ The networking-istio deployment reconciles a cluster's ingress into an [Istio vi
 ## What's Next
 
 - For a deeper look at the services and deployments involved in Knative Serving, click [here](https://github.com/knative/serving/blob/master/docs/spec/overview.md#service).
-- For a high-level analysis of Serving, look at the [Kubernetes documentation](https://Kubernetes.io/docs/concepts/services-networking/service/)
+- For a high-level analysis of Serving, look at the [documentation here](https://knative.dev/docs/serving/)
 - Check out the Knative Seriving code samples [here](https://knative.dev/docs/serving/samples/) for more hands-on tutorials.
 
