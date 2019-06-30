@@ -74,7 +74,7 @@ your Knative installation, see
    --filename https://github.com/knative/serving/releases/download/v0.7.0/monitoring.yaml
    ```
 
-1. To complete the install of Knative and its dependencies, run the
+2. To complete the install of Knative and its dependencies, run the
    `kubectl apply` command again, this time without the `--selector` flag, to
    complete the install of Knative and its dependencies:
 
@@ -96,7 +96,7 @@ your Knative installation, see
    >   statement to install the controller. Otherwise, you can choose to install
    >   the auto certificates feature and controller at a later time.
 
-1. Monitor the Knative components until all of the components show a `STATUS` of
+3. Monitor the Knative components until all of the components show a `STATUS` of
    `Running`:
 
    ```bash
