@@ -75,45 +75,110 @@ To create the `foo` component:
 
 1. Create a YAML file called `foo.yaml`.
 2. Copy the following code into `foo.yaml`:
+
 ```sh
-NAME      READY   REASON   HOSTNAME                                                           AGE
-default   True             default-Broker.kn-eventing-step-by-step-sample.svc.cluster.local   1m
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: foo-display
+spec:
+  replicas: 1
+  selector:
+    matchLabels: &labels
+      app: foo-display
+  template:
+    metadata:
+      labels: *labels
+    spec:
+      containers:
+        - name: event-display
+          # Source code: https://github.com/knative/eventing-sources/blob/release-0.6/cmd/event_display/main.go
+          image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display@sha256:37ace92b63fc516ad4c8331b6b3b2d84e4ab2d8ba898e387c0b6f68f0e3081c4
+
+---
+
+# Service pointing at the previous Deployment. This will be the target for event
+# consumption.
+kind: Service
+apiVersion: v1
+metadata:
+  name: foo-display
+spec:
+  selector:
+    app: foo-display
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
 ```
 3. Apply `foo.yaml` to the Namespace.
 
 ```sh
-NAME      READY   REASON   HOSTNAME                                                           AGE
-default   True             default-Broker.kn-eventing-step-by-step-sample.svc.cluster.local   1m
+kubectl -n $K_NAMESPACE apply -f
 ```
 
 To create the bar component:
 
 1. Create a YAML file called `bar.yaml`.
 2. Copy the following code into `bar.yaml`:
+
 ```sh
-NAME      READY   REASON   HOSTNAME                                                           AGE
-default   True             default-Broker.kn-eventing-step-by-step-sample.svc.cluster.local   1m
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bar-display
+spec:
+  replicas: 1
+  selector:
+    matchLabels: &labels
+      app: bar-display
+  template:
+    metadata:
+      labels: *labels
+    spec:
+      containers:
+        - name: event-display
+          # Source code: https://github.com/knative/eventing-sources/blob/release-0.6/cmd/event_display/main.go
+          image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display@sha256:37ace92b63fc516ad4c8331b6b3b2d84e4ab2d8ba898e387c0b6f68f0e3081c4
+
+---
+
+# Service pointing at the previous Deployment. This will be the target for event
+# consumption.
+kind: Service
+apiVersion: v1
+metadata:
+  name: bar-display
+spec:
+  selector:
+    app: bar-display
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
 ```
 3. Apply `bar.yaml` to the Namespace.
 
 ```sh
-NAME      READY   REASON   HOSTNAME                                                           AGE
-default   True             default-`Broker`.kn-eventing-step-by-step-sample.svc.cluster.local   1m
+kubectl -n $K_NAMESPACE apply -f 
 ```
 
 Just like the `Broker`, verify that the event consumers are working with the following command:
 
 ```sh
-NAME      READY   REASON   HOSTNAME                                                           AGE
-default   True             default-`Broker`.kn-eventing-step-by-step-sample.svc.cluster.local   1m
+kubectl -n $K_NAMESPACE get deployments foo-display bar-display
 ```
 
 This should return:
 
 ```sh
-NAME      READY   REASON   HOSTNAME                                                           AGE
-default   True             default-`Broker`.kn-eventing-step-by-step-sample.svc.cluster.local   1m
+NAME           DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+foo-display    1         1         1            1           16m
+NAME           DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+bar-display    1         1         1            1           16m
 ```
+
+The number in the DESIRED column should match the number in the AVAILABLE column. This may take a few minutes. If after two minute the numbers still do not match, then consult the [Debugging Guide](TODO).
 
 ### Triggers
 
@@ -128,8 +193,19 @@ For example, to create a `Trigger` to send events to `foo`:
 2. Copy the following code into `trigger.yaml`:
 
 ```sh
-NAME      READY   REASON   HOSTNAME                                                           AGE
-default   True             default-`Broker`.kn-eventing-step-by-step-sample.svc.cluster.local   1m
+apiVersion: eventing.knative.dev/v1alpha1
+kind: Trigger
+metadata:
+  name: foo-display
+spec:
+  filter:
+    sourceAndType:
+      type: foo
+  subscriber:
+    ref:
+     apiVersion: v1
+     kind: Service
+     name: foo-display
 ```
 
 Before you apply the YAML, take notice to the value of the Filter. Every valid CloudEvent has attributes named Type and Source. Triggers allow you to specify interest in specific CloudEvents by matching the CloudEvent's Type and Source. Your YAML is searching for all CloudEvents of type `foo`, regardless of their Source.
@@ -139,29 +215,39 @@ Add another trigger to your YAML file for all of the CloudEvents that come from 
 1. Copy the following code into `trigger.yaml`:
 
 ```sh
-NAME      READY   REASON   HOSTNAME                                                           AGE
-default   True             default-`Broker`.kn-eventing-step-by-step-sample.svc.cluster.local   1m
+apiVersion: eventing.knative.dev/v1alpha1
+kind: Trigger
+metadata:
+  name: bar-display
+spec:
+  filter:
+    sourceAndType:
+      source: bar
+  subscriber:
+    ref:
+     apiVersion: v1
+     kind: Service
+     name: bar-display
 ```
 
 2. Apply `trigger.yaml` to the Namespace.
 
 ```sh
-NAME      READY   REASON   HOSTNAME                                                           AGE
-default   True             default-`Broker`.kn-eventing-step-by-step-sample.svc.cluster.local   1m
+kubectl -n $K_NAMESPACE apply -f 
 ```
 
 3. Verify that the `Triggers` are running correctly with the following command:
 
 ```sh
-NAME      READY   REASON   HOSTNAME                                                           AGE
-default   True             default-`Broker`.kn-eventing-step-by-step-sample.svc.cluster.local   1m
+kubectl -n $K_NAMESPACE get triggers
 ```
 
 You should expect to see something like:
 
 ```sh
-NAME      READY   REASON   HOSTNAME                                                           AGE
-default   True             default-`Broker`.kn-eventing-step-by-step-sample.svc.cluster.local   1m
+NAME                 READY   REASON   BROKER    SUBSCRIBER_URI                                                                 AGE
+bar-display          True             default   http://bar-display.kn-eventing-step-by-step-sample.svc.cluster.local/   9s
+foo-display          True             default   http://foo-display.kn-eventing-step-by-step-sample.svc.cluster.local/    16s
 ```
 
 Now, you made a namespace with a `Broker` inside it. Then, you created a pair of event consumers and registered their interest in a certain events by creating `Triggers`.
@@ -175,14 +261,28 @@ Since this tutorial uses manual curl requests to send events, the final componen
 1. Create a YAML file called `pod.yaml`.
 2. Copy the following code into `pod.yaml`:
 ```sh
-NAME      READY   REASON   HOSTNAME                                                           AGE
-default   True             default-`Broker`.kn-eventing-step-by-step-sample.svc.cluster.local   1m
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: curl
+  name: curl
+spec:
+  containers:
+    # This could be any image that we can SSH into and has curl.
+  - image: radial/busyboxplus:curl
+    imagePullPolicy: IfNotPresent
+    name: curl
+    resources: {}
+    stdin: true
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    tty: true
 ```
 3. Apply `pod.yaml` to the Namespace.
 
 ```sh
-NAME      READY   REASON   HOSTNAME                                                           AGE
-default   True             default-`Broker`.kn-eventing-step-by-step-sample.svc.cluster.local   1m
+kubectl -n $K_NAMESPACE apply -f 
 ```
 
 ## Sending Events
@@ -192,8 +292,7 @@ Now that the components are created, you can creare a CloudEvent by sending an H
 1. SSH into the `Pod` with the following command:
 
 ```sh
-NAME      READY   REASON   HOSTNAME                                                           AGE
-default   True             default-`Broker`.kn-eventing-step-by-step-sample.svc.cluster.local   1m
+kubectl -n $K_NAMESPACE attach curl -it
 ```
 
 Now, you can make a curl request. To show the various types of events you can send, you will make four curl requests.
@@ -201,8 +300,14 @@ Now, you can make a curl request. To show the various types of events you can se
 1. To make a request to `foo`, paste the following in the SSH terminal:
 
 ```sh
-NAME      READY   REASON   HOSTNAME                                                           AGE
-default   True             default-`Broker`.kn-eventing-step-by-step-sample.svc.cluster.local   1m
+curl -v "default-broker.kn-eventing-step-by-step-sample.svc.cluster.local" \
+  -X POST \
+  -H "Ce-Id: should-be-seen-by-foo" \
+  -H "Ce-Specversion: 0.2" \
+  -H "Ce-Type: foo" \
+  -H "Ce-Source: anything-but-bar" \
+  -H "Content-Type: application/json" \
+  -d '{"msg":"Hello World event from Knative - Foo"}'
 ```
 
 You should receive a `202 Accepted` response.
@@ -210,8 +315,14 @@ You should receive a `202 Accepted` response.
 2. To make a request to `bar`, paste the following in the SSH terminal:
 
 ```sh
-NAME      READY   REASON   HOSTNAME                                                           AGE
-default   True             default-`Broker`.kn-eventing-step-by-step-sample.svc.cluster.local   1m
+ curl -v "default-broker.kn-eventing-step-by-step-sample.svc.cluster.local" \
+  -X POST \
+  -H "Ce-Id: should-be-seen-by-test" \
+  -H "Ce-Specversion: 0.2" \
+  -H "Ce-Type: anything-but-foo" \
+  -H "Ce-Source: bar" \
+  -H "Content-Type: application/json" \
+  -d '{"msg":"Hello World event from Knative - Bar"}'
 ```
 
 You should receive a `202 Accepted` response.
@@ -219,8 +330,14 @@ You should receive a `202 Accepted` response.
 3. To make a request to `foo` and `bar`, paste the following in the SSH terminal:
 
 ```sh
-NAME      READY   REASON   HOSTNAME                                                           AGE
-default   True             default-`Broker`.kn-eventing-step-by-step-sample.svc.cluster.local   1m
+ curl -v "default-broker.kn-eventing-step-by-step-sample.svc.cluster.local" \
+  -X POST \
+  -H "Ce-Id: should-be-seen-by-test" \
+  -H "Ce-Specversion: 0.2" \
+  -H "Ce-Type: foo" \
+  -H "Ce-Source: bar" \
+  -H "Content-Type: application/json" \
+  -d '{"msg":"Hello World event from Knative - Both"}'
 ```
 
 You should receive a `202 Accepted` response.
@@ -228,17 +345,18 @@ You should receive a `202 Accepted` response.
 4. To make a request to neither `foo` nor `bar`, paste the following in the SSH terminal:
 
 ```sh
-NAME      READY   REASON   HOSTNAME                                                           AGE
-default   True             default-`Broker`.kn-eventing-step-by-step-sample.svc.cluster.local   1m
+ curl -v "default-broker.kn-eventing-step-by-step-sample.svc.cluster.local" \
+  -X POST \
+  -H "Ce-Id: should-be-seen-by-neither" \
+  -H "Ce-Specversion: 0.2" \
+  -H "Ce-Type: anything-but-foo" \
+  -H "Ce-Source: anything-but-bar" \
+  -H "Content-Type: application/json" \
+  -d '{"msg":"Hello World event from Knative - Neither"}'
 ```
 You should receive a `202 Accepted` response.
 
-5. Exit SSH with the following command:
-
-```sh
-NAME      READY   REASON   HOSTNAME                                                           AGE
-default   True             default-`Broker`.kn-eventing-step-by-step-sample.svc.cluster.local   1m
-```
+5. Exit SSH.
 
 If everything has been done correctly, you should have sent four CloudEvents: two to `foo` and two to `bar`. You will verify this in the next section.
 
@@ -249,29 +367,83 @@ After sending events, verify that the events were received by the appropriate su
 1. Look at the logs for the `foo` event consumer with the following command:
 
 ```sh
-NAME      READY   REASON   HOSTNAME                                                           AGE
-default   True             default-`Broker`.kn-eventing-step-by-step-sample.svc.cluster.local   1m
+kubectl -n $K_NAMESPACE logs -l app=foo-display
 ```
 
 This should return: 
 
 ```sh
-NAME      READY   REASON   HOSTNAME                                                           AGE
-default   True             default-`Broker`.kn-eventing-step-by-step-sample.svc.cluster.local   1m
+☁️  cloudevents.Event
+Validation: valid
+Context Attributes,
+  specversion: 0.2
+  type: foo
+  source: anything-but-bar
+  id: should-be-seen-by-foo
+  time: 2019-05-20T17:59:43.81718488Z
+  contenttype: application/json
+Extensions,
+  knativehistory: default-broker-srk54-channel-24gls.kn-eventing-step-by-step-sample.svc.cluster.local
+Data,
+  {
+    "msg": "Hello World event from Knative - Foo"
+  }
+☁️  cloudevents.Event
+Validation: valid
+Context Attributes,
+  specversion: 0.2
+  type: foo
+  source: bar
+  id: should-be-seen-by-test
+  time: 2019-05-20T17:59:54.211866425Z
+  contenttype: application/json
+Extensions,
+  knativehistory: default-broker-srk54-channel-24gls.kn-eventing-step-by-step-sample.svc.cluster.local
+Data,
+  {
+    "msg": "Hello World event from Knative - Both"
+  }
 ```
 
 2. Look at the logs for the `bar` event consumer with the following command:
 
 ```sh
-NAME      READY   REASON   HOSTNAME                                                           AGE
-default   True             default-`Broker`.kn-eventing-step-by-step-sample.svc.cluster.local   1m
+kubectl -n $K_NAMESPACE logs -l app=bar-display
 ```
 
 This should return: 
 
 ```sh
-NAME      READY   REASON   HOSTNAME                                                           AGE
-default   True             default-`Broker`.kn-eventing-step-by-step-sample.svc.cluster.local   1m
+☁️  cloudevents.Event
+ Validation: valid
+ Context Attributes,
+   specversion: 0.2
+   type: anything-but-foo
+   source: bar
+   id: should-be-seen-by-test
+   time: 2019-05-20T17:59:49.044926148Z
+   contenttype: application/json
+ Extensions,
+   knativehistory: default-broker-srk54-channel-24gls.kn-eventing-step-by-step-sample.svc.cluster.local
+ Data,
+   {
+     "msg": "Hello World event from Knative - Bar"
+   }
+ ☁️  cloudevents.Event
+ Validation: valid
+ Context Attributes,
+   specversion: 0.2
+   type: foo
+   source: bar
+   id: should-be-seen-by-test
+   time: 2019-05-20T17:59:54.211866425Z
+   contenttype: application/json
+ Extensions,
+   knativehistory: default-broker-srk54-channel-24gls.kn-eventing-step-by-step-sample.svc.cluster.local
+ Data,
+   {
+     "msg": "Hello World event from Knative - Both"
+   } 
 ```
 
 If you do not see these results, check the [Debugging Guide](TODO) for more information.
@@ -281,8 +453,7 @@ If you do not see these results, check the [Debugging Guide](TODO) for more info
 Delete the namespace to conserve resources:
 
 ```sh
-NAME      READY   REASON   HOSTNAME                                                           AGE
-default   True             default-`Broker`.kn-eventing-step-by-step-sample.svc.cluster.local   1m
+kubectl delete namespace $K_NAMESPACE
 ```
 
 ## What’s Next 
