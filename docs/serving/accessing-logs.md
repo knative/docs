@@ -61,13 +61,13 @@ Below is a sample request log:
 
 ```text
 @timestamp                                            July 10th 2018, 10:09:28.000
-kubernetes.labels.serving_knative_dev/configuration	  helloworld-go
+kubernetes.labels.serving_knative_dev/configuration   helloworld-go
 kubernetes.labels.serving_knative_dev/revision	      helloworld-go-6vf4x
-kubernetes.labels.serving_knative_dev/service	       	helloworld-go
-httpRequest.protocol	     	                          HTTP/1.1
+kubernetes.labels.serving_knative_dev/service         helloworld-go
+httpRequest.protocol                                  HTTP/1.1
 httpRequest.referer
-httpRequest.remoteIp	     	                          10.32.0.2:46866
-httpRequest.requestMethod                   	     	  GET
+httpRequest.remoteIp                                  10.32.0.2:46866
+httpRequest.requestMethod                             GET
 httpRequest.requestSize                               0
 httpRequest.requestUrl                                /
 httpRequest.responseSize                              20

@@ -73,6 +73,7 @@ Copy `logging.request-log-template` from `data._example` field to`data`
 field. You can find detail information in `data._example` to customize the
 request log format.
 
+### Choose logs backend
 
 Knative offers three different setups for collecting logs. Choose one to
 install:
@@ -81,7 +82,7 @@ install:
 1. [Stackdriver](#stackdriver)
 1. [Custom logging plugin](./setting-up-a-logging-plugin.md)
 
-### Elasticsearch and Kibana
+#### Elasticsearch and Kibana
 
 1. Run the following command to install an ELK stack:
 
@@ -138,7 +139,7 @@ install:
 1. When the installation is complete and all the resources are running, you can
    continue to the next section and begin creating your Elasticsearch indices.
 
-#### Create Elasticsearch Indices
+##### Create Elasticsearch Indices
 
 To visualize logs with Kibana, you need to set which Elasticsearch indices to
 explore.
@@ -167,7 +168,7 @@ explore.
 See [Accessing Logs](./accessing-logs.md) for more information about logs in
 Knative.
 
-### Stackdriver
+#### Stackdriver
 
 To configure and setup monitoring:
 
