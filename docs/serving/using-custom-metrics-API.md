@@ -6,7 +6,7 @@ type: "docs"
 
 The `custom-metrics` API is installed by default when you install Knative Serving.
 
->**IMPORTANT:** If you already have an existing `custom-metrics` API implementation in your cluster, you must disable this so that Knative Serving can use the default Knative Serving installation of the `custom-metrics` API. Enabling both implementations can cause issues.
+>**IMPORTANT:** If you already have an existing `custom-metrics` API implementation in your cluster, you must delete this so that Knative Serving can use the default Knative Serving installation of the `custom-metrics` API. Enabling both implementations can cause issues.
 >
 >If you intend to use an existing `custom-metrics` API implementation in your cluster, you will not be able to use custom metrics or HPA concurrency metrics on that cluster. These features require the Knative Serving `custom-metrics` API implementation.
 
