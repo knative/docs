@@ -88,8 +88,8 @@ To generate a version of the API:
 1. Copy the generated API files into the `docs/reference` directory of your
    knative/docs clone.
 
-1. IMPORTANT: There are some limitations to the build script that require
-   manual changes to the HTML. For the `serving.md` and
+1. IMPORTANT: There are some limitations to the build script that require manual
+   changes to the HTML. For the `serving.md` and
    `eventing-contrib-resources.md`, you must manually fix the `Packages` lists.
    Details for the required manual changes are in
    [PR 1552](https://github.com/knative/docs/pull/1552#issuecomment-506891983).
