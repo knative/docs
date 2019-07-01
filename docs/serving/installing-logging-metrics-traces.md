@@ -61,7 +61,7 @@ in Knative.
 
 ## Logs
 
-### Enable request logs
+### Enable Request Logs
 
 Run the following command to enable request logs if they are wanted:
 
@@ -73,7 +73,7 @@ Copy `logging.request-log-template` from `data._example` field to`data`
 field. You can find detail information in `data._example` to customize the
 request log format.
 
-### Choose logs backend
+### Choose One Logging Backend
 
 Knative offers three different setups for collecting logs. Choose one to
 install:
@@ -163,7 +163,7 @@ explore.
   `Index pattern` and select `@timestamp` from `Time Filter field name` and
   click on `Create` button.
 
-![Create logstash-* index](../images/kibana-landing-page-configure-index.png)
+![Create logstash-* index](./images/kibana-landing-page-configure-index.png)
 
 See [Accessing Logs](./accessing-logs.md) for more information about logs in
 Knative.
