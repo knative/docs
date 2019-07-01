@@ -14,11 +14,11 @@ You need:
 - A Kubernetes cluster with [Knative installed](https://knative.dev/docs/install/index.html).
 - All Knative Eventing components installed. Information on how to do this is [here](https://knative.dev/docs/install/knative-custom-install/). 
 
-## Creating Components
+## Setup Components
 
 Before you start to send Knative events, you need to create the components needed to move the events. In this example, you'll be creating components individually, but you can also create components by deploying a [single YAML file](https://raw.githubusercontent.com/akashrv/docs/qs/docs/eventing/samples/hello-world/quick-start.yaml).
 
-### Namespace
+### Create and Configure Namespace
 First, create the Namespace. In this guide, you will be using a Namespace called "kn-eventing-step-by-step-sample".
 
 1. (Optional) Create a shell variable called `K_NAMESPACE` using the following command:
@@ -43,7 +43,7 @@ kubectl label namespace $K_NAMESPACE knative-eventing-injection=enabled
 
 This label triggers Knative to add `Service Accounts`, `Role Bindings`, and a ``Broker`` to your namespace. You'll learn more about `Brokers` in the next section.
 
-### Broker
+### Create Broker
 
 The `Broker` ensures that every event sent to the `Broker` by event producers is sent to all interested event consumers. While you created the `Broker` when you labeled your Namespace as ready for eventing, it is important to verify that your `Broker` is working.
 
@@ -64,7 +64,7 @@ default   True             default-Broker.kn-eventing-step-by-step-sample.svc.cl
 
 Now your `Broker` is ready to manage your events.
 
-### Event Consumers
+### Create Event Consumers
 
 These components receive the events sent by event producers (you'll create those a little later). You'll create two event consumers, `foo` and `bar`.
 
@@ -180,7 +180,7 @@ bar-display    1         1         1            1           16m
 
 The number in the DESIRED column should match the number in the AVAILABLE column. This may take a few minutes. If after two minute the numbers still do not match, then consult the [Debugging Guide](TODO).
 
-### Triggers
+### Create Triggers
 
 `Triggers` allow events to register interest with a `Broker`. A `Trigger` is split into two parts: the Filter, which tracks interested events, and the Subscriber, which determines where the event should be sent. 
 
@@ -254,9 +254,9 @@ Now, you made a namespace with a `Broker` inside it. Then, you created a pair of
 
 
 
-### Event Producers
+### Create Event Producers
 
-Since this tutorial uses manual curl requests to send events, the final component you will need to make is a `Pod`. The `Broker` is only exposed from within the Kubernetes cluster, so we will run the curl request from there.
+Since this tutorial uses manual curl requests to send events, the final component you will need to make is an event producer called a `Pod`. The `Broker` is only exposed from within the Kubernetes cluster, so we will run the curl request from there.
 
 1. Create a YAML file called `pod.yaml`.
 2. Copy the following code into `pod.yaml`:
@@ -285,9 +285,9 @@ spec:
 kubectl -n $K_NAMESPACE apply -f 
 ```
 
-## Sending Events
+## Send Events to the Broker
 
-Now that the components are created, you can creare a CloudEvent by sending an HTTP request to the `Broker`.
+Now that the Pod is created, you can create a CloudEvent by sending an HTTP request to the `Broker`.
 
 1. SSH into the `Pod` with the following command:
 
@@ -360,7 +360,7 @@ You should receive a `202 Accepted` response.
 
 If everything has been done correctly, you should have sent four CloudEvents: two to `foo` and two to `bar`. You will verify this in the next section.
 
-## Verifying Events
+## Verify Events Were Received 
 
 After sending events, verify that the events were received by the appropriate subscribers.
 
@@ -448,7 +448,7 @@ This should return:
 
 If you do not see these results, check the [Debugging Guide](TODO) for more information.
 
-## Cleaning Up
+## Clean Up
 
 Delete the namespace to conserve resources:
 
