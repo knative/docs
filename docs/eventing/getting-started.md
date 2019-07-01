@@ -12,11 +12,11 @@ This getting started guide will walk you through all the steps involved in a typ
 You need:
 
 - A Kubernetes cluster with [Knative installed](https://knative.dev/docs/install/index.html).
-- All Knative Eventing components installed. Information on how to do this is [here](https://knative.dev/docs/install/knative-custom-install/). 
+- All Knative Eventing components installed. Information on how to install the Eventing components is [here](https://knative.dev/docs/install/knative-custom-install/). 
 
 ## Setup Components
 
-Before you start to send Knative events, you need to create the components needed to move the events. In this example, you'll be creating components individually, but you can also create components by deploying a [single YAML file](https://raw.githubusercontent.com/akashrv/docs/qs/docs/eventing/samples/hello-world/quick-start.yaml).
+Before you start to send Knative events, you need to create the components needed to move the events. In this guide, you will be creating components individually, but you can also create components by deploying a [single YAML file](https://raw.githubusercontent.com/akashrv/docs/qs/docs/eventing/samples/hello-world/quick-start.yaml).
 
 ### Create and Configure Namespace
 First, create the namespace. In this guide, you will be using a namespace called "kn-eventing-step-by-step-sample".
@@ -35,7 +35,7 @@ This step prevents you from having to type the same long name multiple times.
 kubectl create namespace $K_NAMESPACE
 ```
 
-3. Setup up the namespace for Knative Eventing. To do this, add a label to your namespace with this command:
+3. Setup up the namespace for Knative Eventing. To setup the namespace, add a label to your namespace with this command:
 
 ```sh
 kubectl label namespace $K_NAMESPACE knative-eventing-injection=enabled
@@ -60,7 +60,7 @@ NAME      READY   REASON   HOSTNAME                                             
 default   True             default-Broker.kn-eventing-step-by-step-sample.svc.cluster.local   1m
 ```
 
-2. If the READY column reads False, wait 2 minutes and repeat Step 1. If the READY column still reads False, see the [Debugging Guide](TODO) to trouble shoot the issue.
+2. If the READY column reads False, wait 2 minutes and repeat Step 1. If the READY column still reads False, see the [Debugging Guide](TODO) to troubleshoot the issue.
 
 Now your `Broker` is ready to manage your events.
 
@@ -157,7 +157,7 @@ spec:
     port: 80
     targetPort: 8080
 ```
-3. Apply `bar.yaml` to the Namespace.
+3. Apply `bar.yaml` to the namespace.
 
 ```sh
 kubectl -n $K_NAMESPACE apply -f 
@@ -256,7 +256,7 @@ Now, you made a namespace with a `Broker` inside it. Then, you created a pair of
 
 ### Create Event Producers
 
-Since this tutorial uses manual curl requests to send events, the final component you will need to make is an event producer called a `Pod`. The `Broker` is only exposed from within the Kubernetes cluster, so we will run the curl request from there.
+Since this guide uses manual curl requests to send events, the final component you will need to make is an event producer called a `Pod`. The `Broker` is only exposed from within the Kubernetes cluster, so we will run the curl request from there.
 
 1. Create a YAML file called `pod.yaml`.
 2. Copy the following code into `pod.yaml`:
@@ -358,7 +358,7 @@ You should receive a `202 Accepted` response.
 
 5. Exit SSH.
 
-If everything has been done correctly, you should have sent four CloudEvents: two to `foo` and two to `bar`. You will verify this in the next section.
+If everything has been done correctly, you should have sent four CloudEvents: two to `foo` and two to `bar`. You will verify that the events were received in the next section.
 
 ## Verify Events Were Received 
 
