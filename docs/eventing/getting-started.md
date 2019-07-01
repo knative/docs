@@ -43,7 +43,7 @@ kubectl label namespace $K_NAMESPACE knative-eventing-injection=enabled
 
 This label triggers Knative to add `Service Accounts`, `Role Bindings`, and a ``Broker`` to your namespace. You'll learn more about `Brokers` in the next section.
 
-### `Broker`
+### Broker
 
 The `Broker` ensures that every event sent to the `Broker` by event producers is sent to all interested event consumers. While you created the `Broker` when you labeled your Namespace as ready for eventing, it is important to verify that your `Broker` is working.
 
@@ -117,7 +117,7 @@ default   True             default-`Broker`.kn-eventing-step-by-step-sample.svc.
 
 ### Triggers
 
-Triggers allows events to register interest with a `Broker`. A `Trigger` is split into two parts: the Filter, which tracks interested events, and the Subscriber, which determines where the event should be sent. 
+`Triggers` allow events to register interest with a `Broker`. A `Trigger` is split into two parts: the Filter, which tracks interested events, and the Subscriber, which determines where the event should be sent. 
 
 *Note: These steps may change, as the current steps in the Hello Word Eventing Solution don't seem to work. Will ask for engineer input here. This is a workaround for now*
 
