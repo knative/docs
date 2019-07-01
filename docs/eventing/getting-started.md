@@ -19,7 +19,7 @@ You need:
 Before you start to send Knative events, you need to create the components needed to move the events. In this example, you'll be creating components individually, but you can also create components by deploying a [single YAML file](https://raw.githubusercontent.com/akashrv/docs/qs/docs/eventing/samples/hello-world/quick-start.yaml).
 
 ### Create and Configure Namespace
-First, create the Namespace. In this guide, you will be using a Namespace called "kn-eventing-step-by-step-sample".
+First, create the namespace. In this guide, you will be using a namespace called "kn-eventing-step-by-step-sample".
 
 1. (Optional) Create a shell variable called `K_NAMESPACE` using the following command:
 
@@ -66,7 +66,7 @@ Now your `Broker` is ready to manage your events.
 
 ### Create Event Consumers
 
-These components receive the events sent by event producers (you'll create those a little later). You'll create two event consumers, `foo` and `bar`.
+These components receive the events sent by event producers (you'll create those a little later). You'll create two event consumers, `foo` and `bar`, so that you can see how to selectively send events to distinct event consumers later.
 
 *Note: These steps may change, as the current steps in the Hello Word Eventing Solution don't seem to work. Will ask for engineer input here. This is a workaround for now*
 
@@ -111,7 +111,7 @@ spec:
     port: 80
     targetPort: 8080
 ```
-3. Apply `foo.yaml` to the Namespace.
+3. Apply `foo.yaml` to the namespace.
 
 ```sh
 kubectl -n $K_NAMESPACE apply -f
