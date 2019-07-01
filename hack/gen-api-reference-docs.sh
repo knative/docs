@@ -23,7 +23,7 @@ SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 REFDOCS_PKG="github.com/ahmetb/gen-crd-api-reference-docs"
 REFDOCS_REPO="https://${REFDOCS_PKG}.git"
-REFDOCS_VER="v0.1.4"
+REFDOCS_VER="v0.1.5"
 
 KNATIVE_SERVING_REPO="github.com/knative/serving"
 KNATIVE_SERVING_COMMIT="${KNATIVE_SERVING_COMMIT:?specify the \$KNATIVE_SERVING_COMMIT variable}"
