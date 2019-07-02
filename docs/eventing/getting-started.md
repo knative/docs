@@ -68,15 +68,15 @@ Now your `Broker` is ready to manage your events.
 
 These components receive the events sent by event producers (you'll create those a little later). You'll create two event consumers, `foo` and `bar`, so that you can see how to selectively send events to distinct event consumers later.
 
-*Note: These steps may change, as the current steps in the Hello Word Eventing Solution don't seem to work. Will ask for engineer input here. This is a workaround for now*
+*Note: These steps are accurate to the previous docs. However, after the 0.7 update, some of the events do not work. Will investigate.*
 
 
 To create the `foo` component:
 
-1. Create a YAML file called `foo.yaml`.
-2. Copy the following code into `foo.yaml`:
+1. Copy the following code:
 
 ```sh
+kubectl -n $K_NAMESPACE apply -f - << END
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -110,19 +110,18 @@ spec:
   - protocol: TCP
     port: 80
     targetPort: 8080
+END
 ```
-3. Apply `foo.yaml` to the namespace.
 
-```sh
-kubectl -n $K_NAMESPACE apply -f
-```
+2. Paste into your terminal window.
+
 
 To create the bar component:
 
-1. Create a YAML file called `bar.yaml`.
-2. Copy the following code into `bar.yaml`:
+1. Copy the following code:
 
 ```sh
+kubectl -n $K_NAMESPACE apply -f - << END
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -156,12 +155,10 @@ spec:
   - protocol: TCP
     port: 80
     targetPort: 8080
+END
 ```
-3. Apply `bar.yaml` to the namespace.
 
-```sh
-kubectl -n $K_NAMESPACE apply -f 
-```
+2. Paste into your terminal window.
 
 Just like the `Broker`, verify that the event consumers are working with the following command:
 
@@ -189,10 +186,10 @@ The number in the DESIRED column should match the number in the AVAILABLE column
 
 For example, to create a `Trigger` to send events to `foo`:
 
-1. Create a YAML file called `trigger.yaml`.
-2. Copy the following code into `trigger.yaml`:
+1. Copy the following code:
 
 ```sh
+kubectl -n $K_NAMESPACE apply -f - << END
 apiVersion: eventing.knative.dev/v1alpha1
 kind: Trigger
 metadata:
@@ -206,15 +203,19 @@ spec:
      apiVersion: v1
      kind: Service
      name: foo-display
+END
 ```
 
-Before you apply the YAML, take notice to the value of the Filter. Every valid CloudEvent has attributes named Type and Source. Triggers allow you to specify interest in specific CloudEvents by matching the CloudEvent's Type and Source. Your YAML is searching for all CloudEvents of type `foo`, regardless of their Source.
+2. Paste into your terminal window.
 
-Add another trigger to your YAML file for all of the CloudEvents that come from `bar`:
+Take notice to the value of the Filter. Every valid CloudEvent has attributes named Type and Source. Triggers allow you to specify interest in specific CloudEvents by matching the CloudEvent's Type and Source. Your YAML is searching for all CloudEvents of type `foo`, regardless of their Source.
 
-1. Copy the following code into `trigger.yaml`:
+Add another trigger to send events to `bar`:
+
+1. Copy the following code:
 
 ```sh
+kubectl -n $K_NAMESPACE apply -f - << END
 apiVersion: eventing.knative.dev/v1alpha1
 kind: Trigger
 metadata:
@@ -228,13 +229,11 @@ spec:
      apiVersion: v1
      kind: Service
      name: bar-display
+END
 ```
 
-2. Apply `trigger.yaml` to the Namespace.
+2. Paste into your terminal window.
 
-```sh
-kubectl -n $K_NAMESPACE apply -f 
-```
 
 3. Verify that the `Triggers` are running correctly with the following command:
 
@@ -258,9 +257,10 @@ Now, you made a namespace with a `Broker` inside it. Then, you created a pair of
 
 Since this guide uses manual curl requests to send events, the final component you will need to make is an event producer called a `Pod`. The `Broker` is only exposed from within the Kubernetes cluster, so we will run the curl request from there.
 
-1. Create a YAML file called `pod.yaml`.
-2. Copy the following code into `pod.yaml`:
+1. Copy the following code:
+
 ```sh
+kubectl -n $K_NAMESPACE apply -f - << END
 apiVersion: v1
 kind: Pod
 metadata:
@@ -278,12 +278,10 @@ spec:
     terminationMessagePath: /dev/termination-log
     terminationMessagePolicy: File
     tty: true
+END
 ```
-3. Apply `pod.yaml` to the Namespace.
 
-```sh
-kubectl -n $K_NAMESPACE apply -f 
-```
+2. Paste into your terminal window.
 
 ## Send Events to the Broker
 
