@@ -17,6 +17,17 @@ sections to do so now.
 
 ## Metrics
 
+1. Run the following command and follow the instructions below to enable request
+   metrics if they are wanted:
+
+   ```
+   kubectl edit cm -n knative-serving config-observability
+   ```
+
+   Add `metrics.request-metrics-backend-destination: prometheus` to `data`
+   field. You can find detailed information in `data._example` field in the
+   `ConfigMap` you are editing.
+
 1. Run the following command to install Prometheus and Grafana:
 
    ```shell
@@ -52,6 +63,22 @@ in Knative.
 
 ## Logs
 
+### Enable Request Logs
+
+Run the following command and follow the instructions below to enable request
+logs if they are wanted:
+
+
+```
+kubectl edit cm -n knative-serving config-observability
+```
+
+Copy `logging.request-log-template` from `data._example` field to`data`
+field in the `ConfigMap` you are editing.. You can find detailed information in
+`data._example` field to customize the request log format.
+
+### Choose One Logging Backend
+
 Knative offers three different setups for collecting logs. Choose one to
 install:
 
@@ -59,7 +86,7 @@ install:
 1. [Stackdriver](#stackdriver)
 1. [Custom logging plugin](./setting-up-a-logging-plugin.md)
 
-### Elasticsearch and Kibana
+#### Elasticsearch and Kibana
 
 1. Run the following command to install an ELK stack:
 
@@ -116,7 +143,7 @@ install:
 1. When the installation is complete and all the resources are running, you can
    continue to the next section and begin creating your Elasticsearch indices.
 
-#### Create Elasticsearch Indices
+##### Create Elasticsearch Indices
 
 To visualize logs with Kibana, you need to set which Elasticsearch indices to
 explore.
@@ -140,12 +167,12 @@ explore.
   `Index pattern` and select `@timestamp` from `Time Filter field name` and
   click on `Create` button.
 
-![Create logstash-* index](../images/kibana-landing-page-configure-index.png)
+![Create logstash-* index](./images/kibana-landing-page-configure-index.png)
 
 See [Accessing Logs](./accessing-logs.md) for more information about logs in
 Knative.
 
-### Stackdriver
+#### Stackdriver
 
 To configure and setup monitoring:
 
