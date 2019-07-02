@@ -28,7 +28,7 @@ up the necessary components first.
 
   The Discover tab of the Kibana UI looks like this:
 
-  ![Kibana UI Discover tab](../images/kibana-discover-tab-annotated.png)
+  ![Kibana UI Discover tab](./images/kibana-discover-tab-annotated.png)
 
   You can change the time frame of logs Kibana displays in the upper right
   corner of the screen. The main search bar is across the top of the Discover
