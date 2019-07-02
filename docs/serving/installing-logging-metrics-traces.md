@@ -17,14 +17,16 @@ sections to do so now.
 
 ## Metrics
 
-1. Run the following command to enable request metrics if they are wanted:
+1. Run the following command and follow the instructions below to enable request
+   metrics if they are wanted:
 
    ```
    kubectl edit cm -n knative-serving config-observability
    ```
 
-   Add `metrics.request-metrics-backend-destination: prometheus` to `data` field.
-   You can find detail information in `data._example`.
+   Add `metrics.request-metrics-backend-destination: prometheus` to `data`
+   field. You can find detailed information in `data._example` field in the
+   `ConfigMap` you are editing.
 
 1. Run the following command to install Prometheus and Grafana:
 
@@ -63,15 +65,17 @@ in Knative.
 
 ### Enable Request Logs
 
-Run the following command to enable request logs if they are wanted:
+Run the following command and follow the instructions below to enable request
+logs if they are wanted:
+
 
 ```
 kubectl edit cm -n knative-serving config-observability
 ```
 
 Copy `logging.request-log-template` from `data._example` field to`data`
-field. You can find detail information in `data._example` to customize the
-request log format.
+field in the `ConfigMap` you are editing.. You can find detailed information in
+`data._example` field to customize the request log format.
 
 ### Choose One Logging Backend
 

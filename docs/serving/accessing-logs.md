@@ -50,7 +50,7 @@ To find the logs sent to `stdout/stderr` from your application in the Kibana UI:
 
 ### Accessing request logs
 
-To access the request logs(if enabled), enter the following search in Kibana:
+To access the request logs (if enabled), enter the following search in Kibana:
 
 ```text
 _exists_:"httpRequest.requestUrl"
