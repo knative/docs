@@ -343,7 +343,7 @@ Kubernetes core/v1.SecretKeySelector
 <p>GcpCredsSecret is the credential to use to poll the GCP PubSub Subscription. It is not used
 to create or delete the Subscription, only to poll it. The value of the secret entry must be
 a service account key in the JSON format (see
-<a href="https://cloud.google.com/iam/docs/creating-managing-service-account-keys)">https://cloud.google.com/iam/docs/creating-managing-service-account-keys)</a>.</p>
+<a href="https://cloud.google.com/iam/docs/creating-managing-service-account-keys">https://cloud.google.com/iam/docs/creating-managing-service-account-keys</a>.</p>
 </td>
 </tr>
 <tr>
