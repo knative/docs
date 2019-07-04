@@ -68,13 +68,12 @@ in Knative.
 Run the following command and follow the instructions below to enable request
 logs if they are wanted:
 
-
 ```
 kubectl edit cm -n knative-serving config-observability
 ```
 
-Copy `logging.request-log-template` from `data._example` field to`data`
-field in the `ConfigMap` you are editing.. You can find detailed information in
+Copy `logging.request-log-template` from `data._example` field to`data` field in
+the `ConfigMap` you are editing.. You can find detailed information in
 `data._example` field to customize the request log format.
 
 ### Choose One Logging Backend
