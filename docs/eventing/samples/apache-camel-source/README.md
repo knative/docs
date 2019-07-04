@@ -17,28 +17,25 @@ for generating events.
    Documentation includes specific instructions for common Kubernetes
    environments, including development clusters.
 
-1. Install the Camel Source from the [yaml files in the config dir](../config/)
-   from source:
+1. Install the Camel Source from the `camel.yaml` in the [Eventing Sources release page](https://github.com/knative/eventing-contrib/releases):
 
    ```shell
-   ko apply -f ../config/
+   kubectl apply --filename camel.yaml
    ```
-  
-  Or install a released version.   
    
 
 ### Create a Channel and a Subscriber
 
-To check that a `CamelSource` is fully working, we will create:
+To verify that the `CamelSource` is working, we will create:
 
 - a simple Knative event display service that prints incoming events to its log
 - an in-memory channel named `camel-test` that will buffer events created by the event source
 - a subscription to direct events from the test channel to the event display service
 
-Deploy `display_resources.yaml`, building it from source:
+Deploy the [`display_resources.yaml`](./display_resources.yaml):
 
 ```shell
-ko apply -f display_resources.yaml
+kubectl apply -f display_resources.yaml
 ```
 
 ### Run a CamelSource using the Timer component
@@ -58,7 +55,7 @@ All Camel components are documented in the
 Install the [timer CamelSource](source_timer.yaml) from source:
 
 ```shell
-ko apply -f source_timer.yaml
+kubectl apply -f source_timer.yaml
 ```
 
 We will verify that the published message was sent to the Knative eventing
@@ -101,7 +98,7 @@ kubectl delete camelsource camel-timer-source
 Install the [telegram CamelSource](source_telegram.yaml) from source:
 
 ```shell
-ko apply -f source_telegram.yaml
+kunbectl apply -f source_telegram.yaml
 ```
 
 Start kail again and keep it open on the event display:
@@ -128,10 +125,10 @@ kubectl delete camelsource --all
 Install the [Camel K Source](source_camel_k.yaml) from source:
 
 ```shell
-ko apply -f source_camel_k.yaml
+kubectl apply -f source_camel_k.yaml
 ```
 
-Start kail again and keep it open on the event display:
+Start `kail` again and keep it open on the event display:
 
 ```shell
 kail -d camel-event-display --since=10m
