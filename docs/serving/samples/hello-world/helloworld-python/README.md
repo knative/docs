@@ -7,7 +7,7 @@ cluster. You can also download a working copy of the sample, by running the
 following commands:
 
 ```shell
-git clone -b "release-0.6" https://github.com/knative/docs knative-docs
+git clone -b "release-0.7" https://github.com/knative/docs knative-docs
 cd knative-docs/serving/samples/hello-world/helloworld-python
 ```
 
@@ -87,7 +87,7 @@ cd knative-docs/serving/samples/hello-world/helloworld-python
    username.
 
    ```yaml
-   apiVersion: serving.knative.dev/v1beta1
+   apiVersion: serving.knative.dev/v1alpha1
    kind: Service
    metadata:
      name: helloworld-python

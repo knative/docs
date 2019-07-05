@@ -39,7 +39,7 @@ KNATIVE_EVENTING_OUT_FILE="eventing/eventing.md"
 
 KNATIVE_EVENTING_SOURCES_REPO="github.com/knative/eventing-contrib"
 KNATIVE_EVENTING_SOURCES_COMMIT="${KNATIVE_EVENTING_SOURCES_COMMIT:?specify the \$KNATIVE_EVENTING_SOURCES_COMMIT variable}"
-KNATIVE_EVENTING_SOURCES_OUT_FILE="eventing/eventing-sources.md"
+KNATIVE_EVENTING_SOURCES_OUT_FILE="eventing/eventing-contrib-resources.md"
 
 cleanup_refdocs_root=
 cleanup_repo_clone_root=

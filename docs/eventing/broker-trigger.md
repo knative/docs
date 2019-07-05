@@ -145,9 +145,8 @@ kubectl -n default create rolebinding eventing-broker-filter \
 Note that these commands each use three different objects, all named
 `eventing-broker-ingress` or `eventing-broker-filter`. The `ClusterRole` is
 installed with Knative Eventing
-[here](https://github.com/knative/eventing/blob/master/config/200-broker-clusterrole.yaml).
-The `ServiceAccount` was created two commands prior. The `RoleBinding` is
-created here.
+[here](https://github.com/knative/eventing/blob/master/config/200-broker-clusterrole.yaml). The `ServiceAccount` was
+created two commands prior. The `RoleBinding` is created with this command.
 
 Create RBAC permissions granting access to shared configmaps for logging,
 tracing, and metrics configuration.
@@ -274,11 +273,11 @@ While SSHed into a `Pod` and run:
 curl -v "http://default-broker.default.svc.cluster.local/" \
   -X POST \
   -H "X-B3-Flags: 1" \
-  -H "CE-CloudEventsVersion: 0.1" \
-  -H "CE-EventType: dev.knative.foo.bar" \
-  -H "CE-EventTime: 2018-04-05T03:56:24Z" \
-  -H "CE-EventID: 45a8b444-3213-4758-be3f-540bf93f85ff" \
-  -H "CE-Source: dev.knative.example" \
+  -H "ce-specversion: 0.2" \
+  -H "ce-type: dev.knative.foo.bar" \
+  -H "ce-time: 2018-04-05T03:56:24Z" \
+  -H "ce-id: 45a8b444-3213-4758-be3f-540bf93f85ff" \
+  -H "ce-source: dev.knative.example" \
   -H 'Content-Type: application/json' \
   -d '{ "much": "wow" }'
 ```

@@ -6,6 +6,6 @@ spec:
   schedule: "*/2 * * * *"
   data: '{"message": "Hello world!"}'
   sink:
-    apiVersion: serving.knative.dev/v1beta1
+    apiVersion: serving.knative.dev/v1alpha1
     kind: Service
     name: event-display

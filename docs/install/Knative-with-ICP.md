@@ -161,7 +161,7 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
 1. Run the following commands to install Knative:
 
    ```shell
-   curl -L https://github.com/knative/serving/releases/download/v0.6.0/serving.yaml \
+   curl -L https://github.com/knative/serving/releases/download/v0.7.0/serving.yaml \
      | sed 's/LoadBalancer/NodePort/' \
      | kubectl apply --selector networking.knative.dev/certificate-provider!=cert-manager --filename -
    ```
@@ -177,31 +177,19 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
    >   statement to install the controller.
 
    ```shell
-   curl -L https://github.com/knative/build/releases/download/v0.6.0/build.yaml \
+   curl -L https://github.com/knative/build/releases/download/v0.7.0/build.yaml \
      | sed 's/LoadBalancer/NodePort/' \
      | kubectl apply --filename -
    ```
 
    ```shell
-   curl -L https://github.com/knative/eventing/releases/download/v0.6.0/release.yaml \
+   curl -L https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml \
      | sed 's/LoadBalancer/NodePort/' \
      | kubectl apply --filename -
    ```
 
    ```shell
-   curl -L https://github.com/knative/eventing-contrib/releases/download/v0.6.0/eventing-sources.yaml \
-     | sed 's/LoadBalancer/NodePort/' \
-     | kubectl apply --filename -
-   ```
-
-   ```shell
-   curl -L https://github.com/knative/serving/releases/download/v0.6.0/monitoring.yaml \
-     | sed 's/LoadBalancer/NodePort/' \
-     | kubectl apply --filename -
-   ```
-
-   ```shell
-   curl -L https://raw.githubusercontent.com/knative/serving/v0.6.0/third_party/config/build/clusterrole.yaml \
+   curl -L https://github.com/knative/serving/releases/download/v0.7.0/monitoring.yaml \
      | sed 's/LoadBalancer/NodePort/' \
      | kubectl apply --filename -
    ```
@@ -211,10 +199,6 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
    > info and to track the upcoming solution to this problem, see issues
    > [#968](https://github.com/knative/docs/issues/968) and
    > [#1036](https://github.com/knative/docs/issues/1036).
-
-   > **Note**: For the v0.4.0 release and newer, the `clusterrole.yaml` file is
-   > required to enable the Build and Serving components to interact with each
-   > other.
 
    See
    [Installing logging, metrics, and traces](../serving/installing-logging-metrics-traces.md)
@@ -227,7 +211,6 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
    kubectl get pods --namespace knative-serving
    kubectl get pods --namespace knative-build
    kubectl get pods --namespace knative-eventing
-   kubectl get pods --namespace knative-sources
    kubectl get pods --namespace knative-monitoring
    ```
 
@@ -267,31 +250,25 @@ To remove Knative from your IBM Cloud Private cluster, run the following
 commands:
 
 ```shell
-curl -L https://github.com/knative/serving/releases/download/v0.6.0/serving.yaml \
+curl -L https://github.com/knative/serving/releases/download/v0.7.0/serving.yaml \
  | sed 's/LoadBalancer/NodePort/' \
  | kubectl delete --filename -
 ```
 
 ```shell
-curl -L https://github.com/knative/build/releases/download/v0.6.0/build.yaml \
+curl -L https://github.com/knative/build/releases/download/v0.7.0/build.yaml \
  | sed 's/LoadBalancer/NodePort/' \
  | kubectl delete --filename -
 ```
 
 ```shell
-curl -L https://github.com/knative/eventing/releases/download/v0.6.0/release.yaml \
+curl -L https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml \
  | sed 's/LoadBalancer/NodePort/' \
  | kubectl delete --filename -
 ```
 
 ```shell
-curl -L https://github.com/knative/eventing-contrib/releases/download/v0.6.0/eventing-sources.yaml \
- | sed 's/LoadBalancer/NodePort/' \
- | kubectl delete --filename -
-```
-
-```shell
-curl -L https://github.com/knative/serving/releases/download/v0.6.0/monitoring.yaml \
+curl -L https://github.com/knative/serving/releases/download/v0.7.0/monitoring.yaml \
  | sed 's/LoadBalancer/NodePort/' \
  | kubectl delete --filename -
 ```
