@@ -19,26 +19,18 @@ You need:
 Before you start to send Knative events, you need to create the components needed to move the events. In this guide, you will be creating components individually, but you can also create components by deploying a [single YAML file](https://raw.githubusercontent.com/akashrv/docs/qs/docs/eventing/samples/hello-world/quick-start.yaml).
 
 ### Create and Configure Namespace
-First, create the namespace. In this guide, you will be using a namespace called "kn-eventing-step-by-step-sample".
+First, create the namespace. In this guide, you will be using the default namespace.
 
-1. (Optional) Create a shell variable called `K_NAMESPACE` using the following command:
-
-```sh
-K_NAMESPACE=kn-eventing-step-by-step-sample
-```
-
-This step prevents you from having to type the same long name multiple times.
-
-2. Create the namespace using this command:
+1. Create the namespace using this command:
 
 ```sh
-kubectl create namespace $K_NAMESPACE
+kubectl create namespace default
 ```
 
 3. Setup up the namespace for Knative Eventing. To setup the namespace, add a label to your namespace with this command:
 
 ```sh
-kubectl label namespace $K_NAMESPACE knative-eventing-injection=enabled
+kubectl label namespace default knative-eventing-injection=enabled
 ```
 
 This label triggers Knative to add `Service Accounts`, `Role Bindings`, and a ``Broker`` to your namespace. You'll learn more about `Brokers` in the next section.
@@ -50,14 +42,14 @@ The `Broker` ensures that every event sent to the `Broker` by event producers is
 1. Use the following command to verify that the `Broker` is in a healthy state:
 
 ```sh
-kubectl -n $K_NAMESPACE get Broker default
+kubectl -n default get Broker default
 ```
 
 This should return the following:
 
 ```sh
 NAME      READY   REASON   HOSTNAME                                                           AGE
-default   True             default-Broker.kn-eventing-step-by-step-sample.svc.cluster.local   1m
+default   True             default-Broker.default.svc.cluster.local   1m
 ```
 
 2. If the READY column reads False, wait 2 minutes and repeat Step 1. If the READY column still reads False, see the [Debugging Guide](TODO) to troubleshoot the issue.
@@ -76,7 +68,7 @@ To create the `foo` component:
 1. Copy the following code:
 
 ```sh
-kubectl -n $K_NAMESPACE apply -f - << END
+kubectl -n default apply -f - << END
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -121,7 +113,7 @@ To create the bar component:
 1. Copy the following code:
 
 ```sh
-kubectl -n $K_NAMESPACE apply -f - << END
+kubectl -n default apply -f - << END
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -163,7 +155,7 @@ END
 Just like the `Broker`, verify that the event consumers are working with the following command:
 
 ```sh
-kubectl -n $K_NAMESPACE get deployments foo-display bar-display
+kubectl -n default get deployments foo-display bar-display
 ```
 
 This should return:
@@ -175,21 +167,18 @@ NAME           DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
 bar-display    1         1         1            1           16m
 ```
 
-The number in the DESIRED column should match the number in the AVAILABLE column. This may take a few minutes. If after two minute the numbers still do not match, then consult the [Debugging Guide](TODO).
+The number in the DESIRED column should match the number in the AVAILABLE column. This may take a few minutes. If after two minute the numbers still do not match, then see the [Debugging Guide](TODO).
 
 ### Create Triggers
 
 `Triggers` allow events to register interest with a `Broker`. A `Trigger` is split into two parts: the Filter, which tracks interested events, and the Subscriber, which determines where the event should be sent. 
-
-*Note: These steps may change, as the current steps in the Hello Word Eventing Solution don't seem to work. Will ask for engineer input here. This is a workaround for now*
-
 
 For example, to create a `Trigger` to send events to `foo`:
 
 1. Copy the following code:
 
 ```sh
-kubectl -n $K_NAMESPACE apply -f - << END
+kubectl -n default apply -f - << END
 apiVersion: eventing.knative.dev/v1alpha1
 kind: Trigger
 metadata:
@@ -208,14 +197,14 @@ END
 
 2. Paste into your terminal window.
 
-Take notice to the value of the Filter. Every valid CloudEvent has attributes named Type and Source. Triggers allow you to specify interest in specific CloudEvents by matching the CloudEvent's Type and Source. Your YAML is searching for all CloudEvents of type `foo`, regardless of their Source.
+Take notice of the attributes of the Filter. Every valid CloudEvent has attributes named `Type` and `Source`. Triggers allow you to specify interest in specific CloudEvents by matching the CloudEvent's Type and Source. Here, the command searches for all CloudEvents of type `foo`, regardless of their Source.
 
 Add another trigger to send events to `bar`:
 
 1. Copy the following code:
 
 ```sh
-kubectl -n $K_NAMESPACE apply -f - << END
+kubectl -n default apply -f - << END
 apiVersion: eventing.knative.dev/v1alpha1
 kind: Trigger
 metadata:
@@ -238,29 +227,29 @@ END
 3. Verify that the `Triggers` are running correctly with the following command:
 
 ```sh
-kubectl -n $K_NAMESPACE get triggers
+kubectl -n default get triggers
 ```
 
 You should expect to see something like:
 
 ```sh
 NAME                 READY   REASON   BROKER    SUBSCRIBER_URI                                                                 AGE
-bar-display          True             default   http://bar-display.kn-eventing-step-by-step-sample.svc.cluster.local/   9s
-foo-display          True             default   http://foo-display.kn-eventing-step-by-step-sample.svc.cluster.local/    16s
+bar-display          True             default   http://bar-display.default.svc.cluster.local/   9s
+foo-display          True             default   http://foo-display.default.svc.cluster.local/    16s
 ```
 
-Now, you made a namespace with a `Broker` inside it. Then, you created a pair of event consumers and registered their interest in a certain events by creating `Triggers`.
+You now have a namespace with a `Broker` inside it. You also have a pair of event consumers with their interest registered in  certain kinds of events by creating `Triggers`.
 
 
 
 ### Create Event Producers
 
-Since this guide uses manual curl requests to send events, the final component you will need to make is an event producer called a `Pod`. The `Broker` is only exposed from within the Kubernetes cluster, so we will run the curl request from there.
+Since this guide uses manual curl requests to send events, the final component you will need to make is an event producer called a `Pod`. The `Broker` is only exposed from within the Kubernetes cluster, so you will run the curl request from there.
 
 1. Copy the following code:
 
 ```sh
-kubectl -n $K_NAMESPACE apply -f - << END
+kubectl -n default apply -f - << END
 apiVersion: v1
 kind: Pod
 metadata:
@@ -290,15 +279,15 @@ Now that the Pod is created, you can create a CloudEvent by sending an HTTP requ
 1. SSH into the `Pod` with the following command:
 
 ```sh
-kubectl -n $K_NAMESPACE attach curl -it
+kubectl -n default attach curl -it
 ```
 
-Now, you can make a curl request. To show the various types of events you can send, you will make four curl requests.
+Now, you can make a curl request. To show the various types of events you can send, you will make three curl requests.
 
 1. To make a request to `foo`, paste the following in the SSH terminal:
 
 ```sh
-curl -v "default-broker.kn-eventing-step-by-step-sample.svc.cluster.local" \
+curl -v "default-broker.default.svc.cluster.local" \
   -X POST \
   -H "Ce-Id: should-be-seen-by-foo" \
   -H "Ce-Specversion: 0.2" \
@@ -313,7 +302,7 @@ You should receive a `202 Accepted` response.
 2. To make a request to `bar`, paste the following in the SSH terminal:
 
 ```sh
- curl -v "default-broker.kn-eventing-step-by-step-sample.svc.cluster.local" \
+ curl -v "default-broker.default.svc.cluster.local" \
   -X POST \
   -H "Ce-Id: should-be-seen-by-test" \
   -H "Ce-Specversion: 0.2" \
@@ -328,7 +317,7 @@ You should receive a `202 Accepted` response.
 3. To make a request to `foo` and `bar`, paste the following in the SSH terminal:
 
 ```sh
- curl -v "default-broker.kn-eventing-step-by-step-sample.svc.cluster.local" \
+ curl -v "default-broker.default.svc.cluster.local" \
   -X POST \
   -H "Ce-Id: should-be-seen-by-test" \
   -H "Ce-Specversion: 0.2" \
@@ -340,23 +329,10 @@ You should receive a `202 Accepted` response.
 
 You should receive a `202 Accepted` response.
 
-4. To make a request to neither `foo` nor `bar`, paste the following in the SSH terminal:
 
-```sh
- curl -v "default-broker.kn-eventing-step-by-step-sample.svc.cluster.local" \
-  -X POST \
-  -H "Ce-Id: should-be-seen-by-neither" \
-  -H "Ce-Specversion: 0.2" \
-  -H "Ce-Type: anything-but-foo" \
-  -H "Ce-Source: anything-but-bar" \
-  -H "Content-Type: application/json" \
-  -d '{"msg":"Hello World event from Knative - Neither"}'
-```
-You should receive a `202 Accepted` response.
+4. Exit SSH.
 
-5. Exit SSH.
-
-If everything has been done correctly, you should have sent four CloudEvents: two to `foo` and two to `bar`. You will verify that the events were received in the next section.
+If everything has been done correctly, you should have sent 3 CloudEvents. You will verify that the events were received correctly in the next section.
 
 ## Verify Events Were Received 
 
@@ -365,7 +341,7 @@ After sending events, verify that the events were received by the appropriate su
 1. Look at the logs for the `foo` event consumer with the following command:
 
 ```sh
-kubectl -n $K_NAMESPACE logs -l app=foo-display
+kubectl -n default logs -l app=foo-display
 ```
 
 This should return: 
@@ -381,7 +357,7 @@ Context Attributes,
   time: 2019-05-20T17:59:43.81718488Z
   contenttype: application/json
 Extensions,
-  knativehistory: default-broker-srk54-channel-24gls.kn-eventing-step-by-step-sample.svc.cluster.local
+  knativehistory: default-broker-srk54-channel-24gls.default.svc.cluster.local
 Data,
   {
     "msg": "Hello World event from Knative - Foo"
@@ -396,7 +372,7 @@ Context Attributes,
   time: 2019-05-20T17:59:54.211866425Z
   contenttype: application/json
 Extensions,
-  knativehistory: default-broker-srk54-channel-24gls.kn-eventing-step-by-step-sample.svc.cluster.local
+  knativehistory: default-broker-srk54-channel-24gls.default.svc.cluster.local
 Data,
   {
     "msg": "Hello World event from Knative - Both"
@@ -406,7 +382,7 @@ Data,
 2. Look at the logs for the `bar` event consumer with the following command:
 
 ```sh
-kubectl -n $K_NAMESPACE logs -l app=bar-display
+kubectl -n default logs -l app=bar-display
 ```
 
 This should return: 
@@ -422,7 +398,7 @@ This should return:
    time: 2019-05-20T17:59:49.044926148Z
    contenttype: application/json
  Extensions,
-   knativehistory: default-broker-srk54-channel-24gls.kn-eventing-step-by-step-sample.svc.cluster.local
+   knativehistory: default-broker-srk54-channel-24gls.default.svc.cluster.local
  Data,
    {
      "msg": "Hello World event from Knative - Bar"
@@ -437,21 +413,21 @@ This should return:
    time: 2019-05-20T17:59:54.211866425Z
    contenttype: application/json
  Extensions,
-   knativehistory: default-broker-srk54-channel-24gls.kn-eventing-step-by-step-sample.svc.cluster.local
+   knativehistory: default-broker-srk54-channel-24gls.default.svc.cluster.local
  Data,
    {
      "msg": "Hello World event from Knative - Both"
    } 
 ```
 
-If you do not see these results, check the [Debugging Guide](TODO) for more information.
+If you do not see these results, see the [Debugging Guide](TODO) for more information.
 
 ## Clean Up
 
 Delete the namespace to conserve resources:
 
 ```sh
-kubectl delete namespace $K_NAMESPACE
+kubectl delete namespace default
 ```
 
 ## What’s Next 
