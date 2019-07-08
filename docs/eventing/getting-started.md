@@ -14,30 +14,31 @@ You need:
 - A Kubernetes cluster with [Knative installed](https://knative.dev/docs/install/index.html).
 - All Knative Eventing components installed. Information on how to install the Eventing components is [here](https://knative.dev/docs/install/knative-custom-install/). 
 
-## Setup Components
+## Set Up Components
 
 Before you start to send Knative events, you need to create the components needed to move the events. In this guide, you will be creating components individually, but you can also create components by deploying a [single YAML file](https://raw.githubusercontent.com/akashrv/docs/qs/docs/eventing/samples/hello-world/quick-start.yaml).
 
-### Create and Configure Namespace
-First, create the namespace. In this guide, you will be using the default namespace.
+### Configure Namespace For Eventing
 
-1. Create the namespace using this command:
+First, create the `namespace`. In this guide, you will be using the default `namespace`.
+
+1. Create the `namespace` using this command:
 
 ```sh
 kubectl create namespace default
 ```
 
-2. Setup up the namespace for Knative Eventing. To setup the namespace, add a label to your namespace with this command:
+2. Setup up the `namespace` for Knative Eventing. To set up the `namespace`, add a label to your `namespace` with this command:
 
 ```sh
 kubectl label namespace default knative-eventing-injection=enabled
 ```
 
-This label triggers Knative to add `Service Accounts`, `Role Bindings`, and a ``Broker`` to your namespace. You'll learn more about `Brokers` in the next section.
+This label triggers Knative to add `Service Accounts`, `Role Bindings`, and a `Broker` to your `namespace`. You'll learn more about `Brokers` in the next section.
 
-### Create Broker
+### Examine Broker For Issues
 
-The `Broker` ensures that every event sent to the `Broker` by event producers is sent to all interested event consumers. While you created the `Broker` when you labeled your Namespace as ready for eventing, it is important to verify that your `Broker` is working.
+The `Broker` ensures that every event sent to the `Broker` by event producers is sent to all interested `event consumers`. While you created the `Broker` when you labeled your `namespace` as ready for eventing, it is important to verify that your `Broker` is working correctly.
 
 1. Use the following command to verify that the `Broker` is in a healthy state:
 
@@ -52,7 +53,7 @@ NAME      READY   REASON   HOSTNAME                                             
 default   True             default-Broker.default.svc.cluster.local   1m
 ```
 
-2. If the READY column reads False, wait 2 minutes and repeat Step 1. If the READY column still reads False, see the [Debugging Guide](TODO) to troubleshoot the issue.
+2. If the **READY** column reads **False**, wait 2 minutes and repeat Step 1. If the **READY** column still reads **False**, see the [Debugging Guide](TODO) to troubleshoot the issue.
 
 Now your `Broker` is ready to manage your events.
 
@@ -60,7 +61,6 @@ Now your `Broker` is ready to manage your events.
 
 These components receive the events sent by event producers (you'll create those a little later). You'll create two event consumers, `foo` and `bar`, so that you can see how to selectively send events to distinct event consumers later.
 
-*Note: These steps are accurate to the previous docs. However, after the 0.7 update, some of the events do not work. Will investigate.*
 
 
 To create the `foo` component:
@@ -108,7 +108,7 @@ END
 2. Paste into your terminal window.
 
 
-To create the bar component:
+To create the `bar` component:
 
 1. Copy the following code:
 
@@ -167,11 +167,11 @@ NAME           DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
 bar-display    1         1         1            1           16m
 ```
 
-The number in the DESIRED column should match the number in the AVAILABLE column. This may take a few minutes. If after two minute the numbers still do not match, then see the [Debugging Guide](TODO).
+The number in the **DESIRED** column should match the number in the **AVAILABLE** column. This may take a few minutes. If after two minutes the numbers still do not match, then see the [Debugging Guide](TODO).
 
 ### Create Triggers
 
-`Triggers` allow events to register interest with a `Broker`. A `Trigger` is split into two parts: the Filter, which tracks interested events, and the Subscriber, which determines where the event should be sent. 
+`Triggers` allow events to register interest with a `Broker`. A `Trigger` is split into two parts: the `Filter`, which tracks interested events, and the `Subscriber`, which determines where the event should be sent. 
 
 For example, to create a `Trigger` to send events to `foo`:
 
@@ -197,9 +197,9 @@ END
 
 2. Paste into your terminal window.
 
-Take notice of the attributes of the Filter. Every valid CloudEvent has attributes named `Type` and `Source`. Triggers allow you to specify interest in specific CloudEvents by matching the CloudEvent's Type and Source. Here, the command searches for all CloudEvents of type `foo`, regardless of their Source.
+Take notice of the attributes of the `Filter`. Every valid `CloudEvent` has attributes named `Type` and `Source`. Triggers allow you to specify interest in specific `CloudEvents` by matching the `CloudEvent's` `Type` and `Source`. Here, the command searches for all `CloudEvents` of type `foo`, regardless of their `Source`.
 
-Add another trigger to send events to `bar`:
+Add another `Trigger` to send events to `bar`:
 
 1. Copy the following code:
 
@@ -238,7 +238,7 @@ bar-display          True             default   http://bar-display.default.svc.c
 foo-display          True             default   http://foo-display.default.svc.cluster.local/    16s
 ```
 
-You now have a namespace with a `Broker` inside it. You also have a pair of event consumers with their interest registered in  certain kinds of events by creating `Triggers`.
+You now have a namespace with a `Broker` inside it. You also have a pair of event consumers with their interest registered in certain kinds of events by creating `Triggers`.
 
 
 
@@ -272,7 +272,7 @@ END
 
 2. Paste into your terminal window.
 
-## Send Events to the Broker
+## Send CloudEvents to the Broker
 
 Now that the Pod is created, you can create a CloudEvent by sending an HTTP request to the `Broker`.
 
@@ -332,11 +332,11 @@ You should receive a `202 Accepted` response.
 
 4. Exit SSH.
 
-If everything has been done correctly, you should have sent 3 CloudEvents. You will verify that the events were received correctly in the next section.
+If everything has been done correctly, you should have sent 3 `CloudEvents`. You will verify that the events were received correctly in the next section.
 
 ## Verify Events Were Received 
 
-After sending events, verify that the events were received by the appropriate subscribers.
+After sending events, verify that the events were received by the appropriate `Subscribers`.
 
 1. Look at the logs for the `foo` event consumer with the following command:
 
