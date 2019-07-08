@@ -17,6 +17,8 @@ for generating events.
    Documentation includes specific instructions for common Kubernetes
    environments, including development clusters.
 
+1. Download Kail binaries for Linux or OSX, which can be found on the [latest release](https://github.com/boz/kail/releases/latest) page. You can use `kail` instead of `kubectl logs` to tail the logs of the subscriber.
+
 1. Install the Camel Source from the `camel.yaml` in the [Eventing Sources release page](https://github.com/knative/eventing-contrib/releases):
 
    ```shell
@@ -35,7 +37,7 @@ To verify that the `CamelSource` is working, we will create:
 Deploy the [`display_resources.yaml`](./display_resources.yaml):
 
 ```shell
-kubectl apply -f display_resources.yaml
+kubectl apply --filename display_resources.yaml
 ```
 
 ### Run a CamelSource using the Timer component
@@ -60,14 +62,19 @@ kubectl apply -f source_timer.yaml
 
 We will verify that the published message was sent to the Knative eventing
 system by looking at the downstream of the `CamelSource`.
+ 
+```shell
+kubectl logs --selector serving.knative.dev/service=camel-event-display -c user-container
+```
+or 
 
-1. Use [`kail`](https://github.com/boz/kail) to tail the logs of the subscriber.
+You can also use [`kail`](https://github.com/boz/kail) to tail the logs of the subscriber.
 
-   ```shell
-   kail -d camel-event-display --since=10m
-   ```
+```shell
+kail -d camel-event-display --since=10m
+```
 
-If you've deployed the timer source, you should see log lines appearing every 3
+If you have deployed the timer source, you should see log lines appearing every 3
 seconds.
 
 
@@ -101,7 +108,7 @@ Install the [telegram CamelSource](source_telegram.yaml) from source:
 kunbectl apply -f source_telegram.yaml
 ```
 
-Start kail again and keep it open on the event display:
+Start `kail` again and keep it open on the event display:
 
 ```shell
 kail -d camel-event-display --since=10m
