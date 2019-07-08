@@ -28,7 +28,7 @@ First, create the `namespace`. In this guide, you will be using the default `nam
 kubectl create namespace default
 ```
 
-2. Setup up the `namespace` for Knative Eventing. To set up the `namespace`, add a label to your `namespace` with this command:
+2. Set up up the `namespace` for Knative Eventing. To set up the `namespace`, add a label to your `namespace` with this command:
 
 ```sh
 kubectl label namespace default knative-eventing-injection=enabled
@@ -53,7 +53,7 @@ NAME      READY   REASON   HOSTNAME                                             
 default   True             default-Broker.default.svc.cluster.local   1m
 ```
 
-2. If the **READY** column reads **False**, wait 2 minutes and repeat Step 1. If the **READY** column still reads **False**, see the [Debugging Guide](TODO) to troubleshoot the issue.
+2. If the **READY** column reads **False**, wait 2 minutes and repeat Step 1. If the **READY** column still reads **False**, see the [Debugging Guide](./debugging/README.md) to troubleshoot the issue.
 
 Now your `Broker` is ready to manage your events.
 
@@ -167,7 +167,7 @@ NAME           DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
 bar-display    1         1         1            1           16m
 ```
 
-The number in the **DESIRED** column should match the number in the **AVAILABLE** column. This may take a few minutes. If after two minutes the numbers still do not match, then see the [Debugging Guide](TODO).
+The number in the **DESIRED** column should match the number in the **AVAILABLE** column. This may take a few minutes. If after two minutes the numbers still do not match the example, then see the [Debugging Guide](./debugging/README.md).
 
 ### Create Triggers
 
@@ -238,7 +238,7 @@ bar-display          True             default   http://bar-display.default.svc.c
 foo-display          True             default   http://foo-display.default.svc.cluster.local/    16s
 ```
 
-You now have a namespace with a `Broker` inside it. You also have a pair of event consumers with their interest registered in certain kinds of events by creating `Triggers`.
+You now have a `namespace` with a `Broker` inside it. You also have a pair of event consumers with their interest registered in certain kinds of events by creating `Triggers`.
 
 
 
@@ -420,7 +420,7 @@ This should return:
    } 
 ```
 
-If you do not see these results, see the [Debugging Guide](TODO) for more information.
+If you do not see these results, see the [Debugging Guide](./debugging/README.md) for more information.
 
 ## Clean Up
 
@@ -435,7 +435,7 @@ kubectl delete namespace default
 You've learned the basics of the Knative Eventing workflow. Here are some additional resources to help you continue to build with the Knative Eventing component.
 
 - [Using event importer to consume events](TODO)
-- [Configure `Broker` to Use a Different Channel](TODO)
+- [Configure `Broker` to Use a Different Channel](https://github.com/Harwayne/knative-eventing/blob/sample-3/configure-broker-to-use-a-different-channel.md)
 - [Eventing Concepts](TODO) 
 
 
