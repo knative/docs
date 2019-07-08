@@ -11,7 +11,7 @@ focus on solving mundane but difficult tasks such as:
 
 - [Deploying a container](./install/getting-started-knative-app.md)
 - [Routing and managing traffic with blue/green deployment](./serving/samples/blue-green-deployment.md)
-- [Scaling automatically and sizing workloads based on demand](./serving/samples/autoscale-go/)
+- [Scaling automatically and sizing workloads based on demand](./serving/configuring-the-autoscaler.md)
 - [Binding running services to eventing ecosystems](./eventing/samples/kubernetes-event-source/)
 
 Developers on Knative can use familiar idioms, languages, and frameworks to
@@ -21,12 +21,9 @@ deploy functions, applications, or containers workloads.
 
 The following Knative components are available:
 
-- [Build](./build) - Source-to-container build
-  orchestration
-- [Eventing](./eventing) - Management and delivery of
-  events
-- [Serving](./serving) - Request-driven compute that
-  can scale to zero
+- [Build](./build) - Source-to-container build orchestration
+- [Eventing](./eventing) - Management and delivery of events
+- [Serving](./serving) - Request-driven compute that can scale to zero
 
 ## Audience
 
@@ -62,13 +59,13 @@ Knative is a diverse, open, and inclusive community. To get involved, see
 [CONTRIBUTING.md](../contributing/CONTRIBUTING.md) and join the
 [Knative community](../community/).
 
-Your own path to becoming a Knative contributor can
-begin in any of the components below:
+Your own path to becoming a Knative contributor can begin in any of the
+following components:
 
-- [serving](https://github.com/knative/serving/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Akind%2Fgood-first-issue).
-- [eventing](https://github.com/knative/eventing/issues)
-- [build](https://github.com/knative/build/issues)
-- [documentation](https://github.com/knative/docs/issues)
+- [serving](https://github.com/knative/serving/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Akind%2Fgood-first-issue)
+- [eventing](https://github.com/knative/eventing/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Akind%2Fgood-first-issue)
+- [build](https://github.com/knative/build/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Akind%2Fgood-first-issue)
+- [documentation](https://github.com/knative/docs/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Akind%2Fgood-first-issue)
 
 [Bug reports](https://github.com/knative/serving/issues/new) and friction logs
 from new developers are especially welcome.
@@ -90,7 +87,7 @@ Follow the links below to learn more about Knative.
 - [Configuring outbound network access](./serving/outbound-network-access.md)
 - [Using a custom domain](./serving/using-a-custom-domain.md)
 - [Assigning a static IP address for Knative on Google Kubernetes Engine](./serving/gke-assigning-static-ip-address.md)
-- [Configuring HTTPS with a custom certificate](./serving/using-an-ssl-cert.md)
+- [Configuring HTTPS with a custom certificate](./serving/using-a-tls-cert.md)
 
 ### Samples and demos
 

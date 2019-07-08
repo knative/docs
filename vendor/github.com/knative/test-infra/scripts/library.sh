@@ -18,6 +18,9 @@
 # to be used in test scripts and the like. It doesn't do anything when
 # called from command line.
 
+# GCP project where all tests related resources live
+readonly KNATIVE_TESTS_PROJECT=knative-tests
+
 # Default GKE version to be used with Knative Serving
 readonly SERVING_GKE_VERSION=gke-latest
 readonly SERVING_GKE_IMAGE=cos
@@ -329,7 +332,16 @@ function start_latest_knative_serving() {
   header "Starting Knative Serving"
   subheader "Installing Knative Serving"
   echo "Installing Serving from ${KNATIVE_SERVING_RELEASE}"
-  kubectl apply -f ${KNATIVE_SERVING_RELEASE} || return 1
+  # Some CRDs defined in serving YAML are also referenced by other components in serving. As it takes
+  # time for CRDs to become effective, there is a race condition between when the CRDs are effective
+  # and when the resources that references those CRDs are created.
+  # The current workaround is to re-apply serving.yaml if it fails. Remove the retry logic after the
+  # race condition is fixed. (https://github.com/knative/serving/issues/4176)
+  if ! kubectl apply -f ${KNATIVE_SERVING_RELEASE}; then
+    echo "Install failed, waiting 60s and then retrying..."
+    sleep 60
+    kubectl apply -f ${KNATIVE_SERVING_RELEASE} || return 1
+  fi
   wait_until_pods_running knative-serving || return 1
 }
 
@@ -415,7 +427,20 @@ function is_int() {
 # Return whether the given parameter is the knative release/nightly GCF.
 # Parameters: $1 - full GCR name, e.g. gcr.io/knative-foo-bar
 function is_protected_gcr() {
-  [[ -n $1 && "$1" =~ "^gcr.io/knative-(releases|nightly)/?$" ]]
+  [[ -n $1 && $1 =~ ^gcr.io/knative-(releases|nightly)/?$ ]]
+}
+
+# Return whether the given parameter is any cluster under ${KNATIVE_TESTS_PROJECT}.
+# Parameters: $1 - Kubernetes cluster context (output of kubectl config current-context)
+function is_protected_cluster() {
+  # Example: gke_knative-tests_us-central1-f_prow
+  [[ -n $1 && $1 =~ ^gke_${KNATIVE_TESTS_PROJECT}_us\-[a-zA-Z0-9]+\-[a-z]+_[a-z0-9\-]+$ ]]
+}
+
+# Return whether the given parameter is ${KNATIVE_TESTS_PROJECT}.
+# Parameters: $1 - project name
+function is_protected_project() {
+  [[ -n $1 && "$1" == "${KNATIVE_TESTS_PROJECT}" ]]
 }
 
 # Remove symlinks in a path that are broken or lead outside the repo.
@@ -437,12 +462,6 @@ function remove_broken_symlinks() {
       continue
     fi
   done
-}
-
-# Return whether the given parameter is knative-tests.
-# Parameters: $1 - project name
-function is_protected_project() {
-  [[ -n "$1" && "$1" == "knative-tests" ]]
 }
 
 # Returns the canonical path of a filesystem object.

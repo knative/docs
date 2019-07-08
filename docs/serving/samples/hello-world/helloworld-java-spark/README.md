@@ -1,5 +1,3 @@
-# Hello World - Spark Java sample
-
 A simple web app written in Java using Spark Java Framework that you can use for
 testing.
 
@@ -81,12 +79,10 @@ recreate the source files from this folder.
      name: helloworld-java
      namespace: default
    spec:
-     runLatest:
-       configuration:
-         revisionTemplate:
-           spec:
-             container:
-               image: docker.io/{username}/helloworld-java
+     template:
+       spec:
+         containers:
+           - image: docker.io/{username}/helloworld-java
    ```
 
 ## Building and deploying the sample
@@ -154,21 +150,17 @@ folder) you're ready to build and deploy the sample app.
 
    ```shell
    kubectl get ksvc helloworld-java \
-       --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+       --output=custom-columns=NAME:.metadata.name,URL:.status.url
 
-   NAME                DOMAIN
-   helloworld-java     helloworld-java.default.example.com
-
-   # Or simply:
-   export DOMAIN_NAME=$(kubectl get ksvc helloworld-java \
-     --output jsonpath={.status.domain})
+   NAME                URL
+   helloworld-java     http://helloworld-java.default.example.com
    ```
 
 6. Now you can make a request to your app to see the result. Presuming, the IP
    address you got in the step above is in the `${IP_ADDRESS}` env variable:
 
    ```shell
-   curl -H "Host: ${DOMAIN_NAME}" http://${IP_ADDRESS}
+   curl -H "Host: helloworld-java.default.example.com" http://${IP_ADDRESS}
    ```
 
 ## Removing the sample app deployment

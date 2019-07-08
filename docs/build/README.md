@@ -20,7 +20,7 @@ is demonstrated in [this sample](../serving/samples/source-to-url-go).
 - A _builder_ is a type of container image that you create to accomplish any
   task, whether that's a single step in a process, or the whole process itself.
 - The `steps` in a `Build` can push to a registry.
-- A `BuildTemplate` can be used to defined reusable templates.
+- A `BuildTemplate` can be used to define reusable templates.
 - The `source` in a `Build` can be defined to mount data to a Kubernetes Volume,
   and supports:
   - `git` repositories
@@ -75,11 +75,11 @@ spec:
       url: https://github.com/example/build-example.git
       revision: master
   steps:
-  - name: ubuntu-example
-    image: ubuntu
-    args: ['ubuntu-build-example', 'SECRETS-example.md']
-  - image: gcr.io/example-builders/build-example
-    args: ['echo', 'hello-example', 'build']
+    - name: ubuntu-example
+      image: ubuntu
+      args: ["ubuntu-build-example", "SECRETS-example.md"]
+    - image: gcr.io/example-builders/build-example
+      args: ["echo", "hello-example", "build"]
 ```
 
 ## Get started with Knative Build samples

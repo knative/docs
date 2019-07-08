@@ -109,18 +109,16 @@ recreate the source files from this folder.
    apiVersion: serving.knative.dev/v1alpha1
    kind: Service
    metadata:
-   name: helloworld-rust
-   namespace: default
+     name: helloworld-rust
+     namespace: default
    spec:
-   runLatest:
-     configuration:
-     revisionTemplate:
+     template:
        spec:
-       container:
-         image: docker.io/{username}/helloworld-rust
-         env:
-           - name: TARGET
-         value: "Rust Sample v1"
+       containers:
+         - image: docker.io/{username}/helloworld-rust
+           env:
+             - name: TARGET
+           value: "Rust Sample v1"
    ```
 
 ## Build and deploy this sample
@@ -181,9 +179,9 @@ folder) you're ready to build and deploy the sample app.
 1. To find the URL for your service, enter:
 
    ```
-   kubectl get ksvc helloworld-rust  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
-   NAME                DOMAIN
-   helloworld-rust     helloworld-rust.default.example.com
+   kubectl get ksvc helloworld-rust  --output=custom-columns=NAME:.metadata.name,URL:.status.url
+   NAME                URL
+   helloworld-rust     http://helloworld-rust.default.example.com
    ```
 
 1. Now you can make a request to your app and see the result. Replace

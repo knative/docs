@@ -186,15 +186,13 @@ which you update and create the necessary build and configuration files:
    metadata:
      name: helloworld-java-quarkus
    spec:
-     runLatest:
-       configuration:
-         revisionTemplate:
-           spec:
-             container:
-               image: docker.io/{username}/helloworld-java-quarkus
-               env:
-                 - name: TARGET
-                   value: "Quarkus Sample v1"
+     template:
+       spec:
+         containers:
+           - image: docker.io/{username}/helloworld-java-quarkus
+             env:
+               - name: TARGET
+                 value: "Quarkus Sample v1"
    ```
 
 ## Locally testing your sample
@@ -277,19 +275,15 @@ folder) you're ready to build and deploy the sample app.
    ```shell
    kubectl get ksvc helloworld-java-quarkus
 
-   NAME                DOMAIN
-   helloworld-java-quarkus     helloworld-java-quarkus.default.example.com
-
-   # Or simply:
-   export DOMAIN_NAME=$(kubectl get ksvc helloworld-java-quarkus \
-     --output jsonpath={.status.domain}
+   NAME                     URL
+   helloworld-java-quarkus  http://helloworld-java-quarkus.default.example.com
    ```
 
 1. Now you can make a request to your app to see the result. Presuming, the IP
    address you got in the step above is in the `${IP_ADDRESS}` env variable:
 
    ```shell
-   curl -H "Host: ${DOMAIN_NAME}" http://${IP_ADDRESS}
+   curl -H "Host: helloworld-java-quarkus.default.example.com" http://${IP_ADDRESS}
 
    Namaste Knative World!
    ```

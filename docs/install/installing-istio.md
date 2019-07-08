@@ -9,8 +9,8 @@ with Knative.
 
 If your cloud platform offers a managed Istio installation, we recommend
 installing Istio that way, unless you need the ability to customize your
-installation. If your cloud platform offers a managed Istio installation,
-the [install guide](./README.md) for your specific platform will have those
+installation. If your cloud platform offers a managed Istio installation, the
+[install guide](./README.md) for your specific platform will have those
 instructions.
 
 For example, the [GKE Install Guide](./knative-with-gke.md) includes the
@@ -19,6 +19,7 @@ instructions for installing Istio on your cluster using `gcloud`.
 ## Before you begin
 
 You need:
+
 - A Kubernetes cluster created.
 - [`helm`](https://helm.sh/) installed.
 
@@ -27,12 +28,12 @@ You need:
 When you install Istio, there are a few options depending on your goals. For a
 basic Istio installation suitable for most Knative use cases, follow the
 [Installing Istio without sidecar injection](#installing-istio-without-sidecar-injection)
-instructions. If you're familiar with Istio and know what kind of
-installation you want, read through the options and choose the installation that
-suits your needs.
+instructions. If you're familiar with Istio and know what kind of installation
+you want, read through the options and choose the installation that suits your
+needs.
 
 You can easily customize your Istio installation with `helm`. The below sections
-cover a few useful Istio configurations and their benefits. 
+cover a few useful Istio configurations and their benefits.
 
 ### Choosing an Istio installation
 
@@ -44,7 +45,8 @@ You can install Istio with or without a service mesh:
 
 - _manual sidecar injection_: Provides your Knative installation with traffic
   routing and ingress, without the Istio service mesh. You do have the option of
-  later enabling the service mesh if you [manually inject the Istio sidecars][2].
+  later enabling the service mesh if you [manually inject the Istio
+  sidecars][2].
 
 If you are just getting started with Knative, we recommend installing Istio
 without automatic sidecar injection.
@@ -55,7 +57,7 @@ without automatic sidecar injection.
 
    ```shell
    # Download and unpack Istio
-   export ISTIO_VERSION=1.1.3
+   export ISTIO_VERSION=1.1.7
    curl -L https://git.io/getLatestIstio | sh -
    cd istio-${ISTIO_VERSION}
    ```
@@ -70,19 +72,21 @@ without automatic sidecar injection.
    then continue with these instructions.
 
 1. Create `istio-system` namespace
-    ```shell
-    cat <<EOF | kubectl apply -f -
-    apiVersion: v1
-    kind: Namespace
-    metadata:
-      name: istio-system
-      labels:
-        istio-injection: disabled
-    EOF
-    ```
+
+   ```shell
+   cat <<EOF | kubectl apply -f -
+   apiVersion: v1
+   kind: Namespace
+   metadata:
+     name: istio-system
+     labels:
+       istio-injection: disabled
+   EOF
+   ```
 
 1. Finish the install by applying your desired Istio configuration:
-   - [Installing Istio without sidecar injection](#installing-istio-without-sidecar-injection)(Recommended default installation)
+   - [Installing Istio without sidecar injection](#installing-istio-without-sidecar-injection)(Recommended
+     default installation)
    - [Installing Istio with sidecar injection](#installing-istio-with-sidecar-injection)
    - [Installing Istio with SDS to secure the ingress gateway](#installing-istio-with-SDS-to-secure-the-ingress-gateway)
 
@@ -105,6 +109,7 @@ helm template --namespace=istio-system \
   --set mixer.telemetry.enabled=false \
   `# Pilot doesn't need a sidecar.` \
   --set pilot.sidecar=false \
+  --set pilot.resources.requests.memory=128Mi \
   `# Disable galley (and things requiring galley).` \
   --set galley.enabled=false \
   --set global.useMCP=false \
@@ -128,8 +133,8 @@ kubectl apply -f istio-lean.yaml
 
 #### Installing Istio with sidecar injection
 
-If you want to enable the Istio service mesh, you must enable
-[automatic sidecar injection][1]. The Istio service mesh provides a few benefits:
+If you want to enable the Istio service mesh, you must enable [automatic sidecar
+injection][1]. The Istio service mesh provides a few benefits:
 
 - Allows you to turn on [mutual TLS][4], which secures service-to-service
   traffic within the cluster.
@@ -168,11 +173,11 @@ kubectl apply -f istio.yaml
 
 #### Installing Istio with SDS to secure the ingress gateway
 
-Install Istio with [Secret Discovery Service (SDS)][3] to enable a few additional
-configurations for the gateway TLS. This will allow you to:
+Install Istio with [Secret Discovery Service (SDS)][3] to enable a few
+additional configurations for the gateway TLS. This will allow you to:
 
 - Dynamically update the gateway TLS with multiple TLS certificates to terminate
-  TLS connections. 
+  TLS connections.
 
 - Use [Auto TLS](../serving/using-auto-tls.md).
 
@@ -182,8 +187,8 @@ The below `helm` flag is needed in your `helm` command to enable `SDS`:
 --set gateways.istio-ingressgateway.sds.enabled=true
 ```
 
-Enter the following command to install Istio with ingress `SDS` and 
-automatic sidecar injection:
+Enter the following command to install Istio with ingress `SDS` and automatic
+sidecar injection:
 
 ```shell
 helm template --namespace=istio-system \
@@ -216,11 +221,11 @@ helm template --namespace=istio-system \
 
 ### Updating your install to use cluster local gateway
 
-If you want your Routes to be visible only inside the cluster, you may
-want to enable [cluster local routes](../docs/serving/cluster-local-route.md).
-To use this feature, add an extra Istio cluster local gateway to your cluster.
-Enter the following command to add the cluster local gateway to an existing
-Istio installation:
+If you want your Routes to be visible only inside the cluster, you may want to
+enable [cluster local routes](../../docs/serving/cluster-local-route.md). To use
+this feature, add an extra Istio cluster local gateway to your cluster. Enter
+the following command to add the cluster local gateway to an existing Istio
+installation:
 
 ```shell
 # Add the extra gateway.
@@ -252,8 +257,8 @@ all of the pods show a `STATUS` of `Running` or `Completed`:
 kubectl get pods --namespace istio-system
 ```
 
-> Tip: You can append the `--watch` flag to the `kubectl get` commands to
-> view the pod status in realtime. You use `CTRL + C` to exit watch mode.
+> Tip: You can append the `--watch` flag to the `kubectl get` commands to view
+> the pod status in realtime. You use `CTRL + C` to exit watch mode.
 
 ## Istio resources
 
@@ -261,7 +266,8 @@ kubectl get pods --namespace istio-system
   [Istio Kubernetes Getting Started Guide](https://istio.io/docs/setup/kubernetes/).
 
 - For the full list of available configs when installing Istio with `helm`, see
-  the [Istio Installation Options reference](https://istio.io/docs/reference/config/installation-options/).
+  the
+  [Istio Installation Options reference](https://istio.io/docs/reference/config/installation-options/).
 
 ## Clean up Istio
 
@@ -275,11 +281,14 @@ rm -rf istio-${ISTIO_VERSION}
 ## What's next
 
 - [Install Knative](./README.md).
-- Try the [Getting Started with App Deployment guide](./getting-started-knative-app/)
+- Try the
+  [Getting Started with App Deployment guide](./getting-started-knative-app/)
   for Knative serving.
 
-[1]: https://istio.io/docs/setup/kubernetes/additional-setup/sidecar-injection/#automatic-sidecar-injection
-[2]: https://istio.io/docs/setup/kubernetes/additional-setup/sidecar-injection/#manual-sidecar-injection
+[1]:
+  https://istio.io/docs/setup/kubernetes/additional-setup/sidecar-injection/#automatic-sidecar-injection
+[2]:
+  https://istio.io/docs/setup/kubernetes/additional-setup/sidecar-injection/#manual-sidecar-injection
 [3]: https://istio.io/docs/tasks/traffic-management/secure-ingress/sds/
 [4]: https://istio.io/docs/tasks/security/mutual-tls/
 [5]: https://istio.io/docs/tasks/security/authz-http/

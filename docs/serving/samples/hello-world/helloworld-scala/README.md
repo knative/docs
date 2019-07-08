@@ -8,10 +8,10 @@ Follow the steps below to create the sample code and then deploy the app to your
 cluster. You can also download a working copy of the sample, by running the
 following commands:
 
-   ```shell
-  git clone -b "release-0.6" https://github.com/knative/docs knative-docs
-  cd knative-docs/serving/samples/hello-world/helloworld-scala
-  ```
+```shell
+git clone -b "release-0.7" https://github.com/knative/docs knative-docs
+cd knative-docs/serving/samples/hello-world/helloworld-scala
+```
 
 ## Before you begin
 
@@ -136,11 +136,11 @@ Then find the service host:
 
 ```shell
 kubectl get ksvc helloworld-scala \
-    --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+    --output=custom-columns=NAME:.metadata.name,URL:.status.url
 
-# It will print something like this, the DOMAIN is what you're going to use as HTTP Host header:
-# NAME                DOMAIN
-# helloworld-scala    helloworld-scala.default.example.com
+# It will print something like this, the URL is what you're going to use as HTTP Host header:
+# NAME                URL
+# helloworld-scala    http://helloworld-scala.default.example.com
 ```
 
 Finally, to try your service, use the obtained address in the Host header:

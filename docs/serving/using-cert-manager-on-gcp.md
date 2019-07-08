@@ -7,13 +7,13 @@ type: "docs"
 
 You can use cert-manager with Knative to automatically provision TLS
 certificates from Let's Encrypt and use
-[Google Cloud DNS](https://cloud.google.com/dns/) to handle HTTPS
-requests and validate DNS challenges.
+[Google Cloud DNS](https://cloud.google.com/dns/) to handle HTTPS requests and
+validate DNS challenges.
 
-The following guide demonstrates how you can setup Knative to handle
-secure HTTPS requests on Google Cloud Platform, specifically using
-cert-manager for TLS certificates and
-[Google Cloud DNS](https://cloud.google.com/dns/) as the DNS provider.
+The following guide demonstrates how you can setup Knative to handle secure
+HTTPS requests on Google Cloud Platform, specifically using cert-manager for TLS
+certificates and [Google Cloud DNS](https://cloud.google.com/dns/) as the DNS
+provider.
 
 Learn more about using TLS certificates in Knative:
 
@@ -22,23 +22,22 @@ Learn more about using TLS certificates in Knative:
 
 ## Before you begin
 
-You must meet the following prerequisites to configure Knative with
-cert-manager and Cloud DNS:
+You must meet the following prerequisites to configure Knative with cert-manager
+and Cloud DNS:
 
 - You must have a
   [GCP project ID with owner privileges](https://console.cloud.google.com/cloud-resource-manager).
-- [Google Cloud DNS](https://cloud.google.com/dns/docs/how-to) must set
-  up and configure for your domain.
+- [Google Cloud DNS](https://cloud.google.com/dns/docs/how-to) must set up and
+  configure for your domain.
 - You must have a Knative cluster with the following requirements:
   - Knative Serving v0.6.0 or higher running.
-  - The Knative cluster must be running on Google Cloud Platform.
-    For details about installing the Serving component, see the
+  - The Knative cluster must be running on Google Cloud Platform. For details
+    about installing the Serving component, see the
     [Knative installation guides](../install/).
   - Your Knative cluster must be configured to use a
     [custom domain](./using-a-custom-domain.md).
   - [cert-manager v0.6.1 or higher installed](./installing-cert-manager.md)
 - Your DNS provider must be setup and configured to your domain.
-
 
 ## Creating a service account and using a Kubernetes secret
 
@@ -46,8 +45,8 @@ To allow cert-manager to access and update the DNS record, you must create a
 service account in GCP, add the key in a Kubernetes secret, and then add that
 secret to your Knative cluster.
 
-Note that several example names are used in the following commands, for
-example secret or file names, which can all be changed to your liking.
+Note that several example names are used in the following commands, for example
+secret or file names, which can all be changed to your liking.
 
 1. Create a service account in GCP with `dns.admin` project role by running the
    following commands, where `<your-project-id>` is the ID of your GCP project:
@@ -97,14 +96,13 @@ example secret or file names, which can all be changed to your liking.
 
 ## Adding your service account to cert-manager
 
-Create a `ClusterIssuer` configuration file to define how cert-manager
-obtains TLS certificates and how the requests are validated with Cloud DNS.
+Create a `ClusterIssuer` configuration file to define how cert-manager obtains
+TLS certificates and how the requests are validated with Cloud DNS.
 
-1. Run the following command to create the `ClusterIssuer` configuration.
-   The following creates the `letsencrypt-issuer` `ClusterIssuer`, that
-   includes your Let's Encrypt account info, `DNS-01` challenge type, and
-   Cloud DNS provider info, including your `cert-manager-cloud-dns-admin`
-   service account.
+1. Run the following command to create the `ClusterIssuer` configuration. The
+   following creates the `letsencrypt-issuer` `ClusterIssuer`, that includes
+   your Let's Encrypt account info, `DNS-01` challenge type, and Cloud DNS
+   provider info, including your `cert-manager-cloud-dns-admin` service account.
 
    ```shell
    kubectl apply --filename - <<EOF
@@ -136,12 +134,13 @@ obtains TLS certificates and how the requests are validated with Cloud DNS.
    EOF
    ```
 
-1. Ensure that `letsencrypt-issuer` is created successfully by
-   running the following command:
+1. Ensure that `letsencrypt-issuer` is created successfully by running the
+   following command:
 
    ```shell
    kubectl get clusterissuer --namespace cert-manager letsencrypt-issuer --output yaml
    ```
+
    Result: The `Status.Conditions` should include `Ready=True`. For example:
 
    ```yaml
@@ -158,12 +157,11 @@ obtains TLS certificates and how the requests are validated with Cloud DNS.
 
 ## Add `letsencrypt-issuer` to your ingress secret to configure your certificate
 
-To configure how Knative uses your TLS certificates, you create
-a `Certificate` to add `letsencrypt-issuer` to the
-`istio-ingressgateway-certs` secret.
+To configure how Knative uses your TLS certificates, you create a `Certificate`
+to add `letsencrypt-issuer` to the `istio-ingressgateway-certs` secret.
 
-Note that `istio-ingressgateway-certs` will be overridden if the
-secret already exists.
+Note that `istio-ingressgateway-certs` will be overridden if the secret already
+exists.
 
 1. Run the following commands to create the `my-certificate` `Certificate`,
    where `<your-domain.com>` is your domain:
@@ -210,8 +208,8 @@ secret already exists.
    EOF
    ```
 
-1. Ensure that `my-certificate` is created successfully by
-   running the following command:
+1. Ensure that `my-certificate` is created successfully by running the following
+   command:
 
    ```shell
    kubectl get certificate --namespace istio-system my-certificate --output yaml
@@ -238,9 +236,8 @@ message.
 
 ## Configuring the Knative ingress gateway
 
-To configure the `knative-ingress-gateway` to use the TLS certificate
-that you created, append the `tls:` section to the end of your HTTPS port
-configuration.
+To configure the `knative-ingress-gateway` to use the TLS certificate that you
+created, append the `tls:` section to the end of your HTTPS port configuration.
 
 Run the following commands to configure Knative to use HTTPS connections and
 send a `301` redirect response for all HTTP requests:
@@ -262,6 +259,10 @@ spec:
       protocol: HTTP
     hosts:
     - "*"
+    tls:
+      # Sends 301 redirect for all http requests.
+      # Omit to allow http and https.
+      httpsRedirect: true
   - port:
       number: 443
       name: https
@@ -269,7 +270,6 @@ spec:
     hosts:
     - "*"
     tls:
-      httpsRedirect: true # sends 301 redirect for http requests.
       mode: SIMPLE
       privateKey: /etc/istio/ingressgateway-certs/tls.key
       serverCertificate: /etc/istio/ingressgateway-certs/tls.crt
@@ -277,13 +277,12 @@ EOF
 ```
 
 Congratulations, you can now access your Knative services with secure HTTPS
-connections. Your Knative cluster is configured to use cert-manager to
-manually obtain TLS certificates but see the following section about
-automating that process.
+connections. Your Knative cluster is configured to use cert-manager to manually
+obtain TLS certificates but see the following section about automating that
+process.
 
 ## Configure Knative for automatic certificate provisioning
 
-You can update your Knative configuration to automatically obtain and
-renew TLS certificates before they expire. To learn more about automatic
-certificates, see
+You can update your Knative configuration to automatically obtain and renew TLS
+certificates before they expire. To learn more about automatic certificates, see
 [Enabling automatic TLS certificate provisioning](./using-auto-tls.md).

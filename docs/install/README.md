@@ -4,7 +4,7 @@ Follow this guide to install Knative components on a platform of your choice.
 
 To get started with Knative, you need a Kubernetes cluster. If you aren't sure
 which Kubernetes platform is right for you, see
-[Picking the Right Solution](https://kubernetes.io/docs/setup/pick-right-solution/).
+[Picking the Right Solution](https://kubernetes.io/docs/setup/).
 
 We provide information for installing Knative on
 [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine/docs/),
@@ -83,9 +83,8 @@ The guides below install some of the available Knative components, without all
 available observability plugins, to minimize the disk space used for install.
 
 - [Knative Install on Docker for Mac](./Knative-with-Docker-for-Mac.md)
-- [Knative Install on Minishift](./Knative-with-Minishift.md)
 - [Knative Install on OpenShift](./Knative-with-OpenShift.md)
-- [Knative Install on OpenShift via Operator](https://github.com/openshift-cloud-functions/Documentation/blob/master/knative-OCP-4x.md)
+- [Knative Install on OpenShift via Operator](https://github.com/openshift-knative/docs/blob/master/README.md)
 
 **Custom install guide**
 

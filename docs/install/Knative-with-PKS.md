@@ -54,8 +54,8 @@ ability to customize your installation. For example, the
 [GKE Install Guide](./knative-with-gke.md) includes the instructions for
 installing Istio on your cluster using `gcloud`.
 
-If you prefer to install Istio manually, if your cloud provider doesn't offer
-a managed Istio installation, or if you're installing Knative locally using
+If you prefer to install Istio manually, if your cloud provider doesn't offer a
+managed Istio installation, or if you're installing Knative locally using
 Minkube or similar, see the
 [Installing Istio for Knative guide](./installing-istio.md).
 
@@ -64,7 +64,9 @@ instructions to install Knative.
 
 ## Installing Cert-Manager
 
-Follow the [instructions](../serving/installing-cert-manager.md) to install Cert-Manager if you want to use use [Auto TLS feature](../serving/using-auto-tls.md).
+Follow the [instructions](../serving/installing-cert-manager.md) to install
+Cert-Manager if you want to use use
+[Auto TLS feature](../serving/using-auto-tls.md).
 
 ## Installing Knative
 
@@ -99,12 +101,10 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
 
    ```bash
    kubectl apply --selector knative.dev/crd-install=true \
-   --filename https://github.com/knative/serving/releases/download/v0.6.0/serving.yaml \
-   --filename https://github.com/knative/build/releases/download/v0.6.0/build.yaml \
-   --filename https://github.com/knative/eventing/releases/download/v0.6.0/release.yaml \
-   --filename https://github.com/knative/eventing-sources/releases/download/v0.6.0/eventing-sources.yaml \
-   --filename https://github.com/knative/serving/releases/download/v0.6.0/monitoring.yaml \
-   --filename https://raw.githubusercontent.com/knative/serving/v0.6.0/third_party/config/build/clusterrole.yaml
+   --filename https://github.com/knative/serving/releases/download/v0.7.0/serving.yaml \
+   --filename https://github.com/knative/build/releases/download/v0.7.0/build.yaml \
+   --filename https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml \
+   --filename https://github.com/knative/serving/releases/download/v0.7.0/monitoring.yaml
    ```
 
 1. To complete the install of Knative and its dependencies, run the
@@ -112,25 +112,22 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
    complete the install of Knative and its dependencies:
 
    ```bash
-   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.6.0/serving.yaml --selector networking.knative.dev/certificate-provider!=cert-manager \
-   --filename https://github.com/knative/build/releases/download/v0.6.0/build.yaml \
-   --filename https://github.com/knative/eventing/releases/download/v0.6.0/release.yaml \
-   --filename https://github.com/knative/eventing-sources/releases/download/v0.6.0/eventing-sources.yaml \
-   --filename https://github.com/knative/serving/releases/download/v0.6.0/monitoring.yaml \
-   --filename https://raw.githubusercontent.com/knative/serving/v0.6.0/third_party/config/build/clusterrole.yaml
+   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.7.0/serving.yaml --selector networking.knative.dev/certificate-provider!=cert-manager \
+   --filename https://github.com/knative/build/releases/download/v0.7.0/build.yaml \
+   --filename https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml \
+   --filename https://github.com/knative/serving/releases/download/v0.7.0/monitoring.yaml
    ```
 
-   > **Notes**: 
-   > - By default, the Knative Serving component installation (`serving.yaml`) includes a controller
-   >   for [enabling automatic TLS certificate provisioning](../serving/using-auto-tls.md). If you do
-   >   intend on immediately enabling auto certificates in Knative, you can remove the 
-   >   `--selector networking.knative.dev/certificate-provider!=cert-manager` statement to install the
-   >   controller. 
-   >   Otherwise, you can choose to install the auto certificates feature and controller at a later time.
-   >   
-   > - For the v0.4.0 release and newer, the `clusterrole.yaml` file is
-   > required to enable the Build and Serving components to interact with each
-   > other.
+   > **Notes**:
+   >
+   > - By default, the Knative Serving component installation (`serving.yaml`)
+   >   includes a controller for
+   >   [enabling automatic TLS certificate provisioning](../serving/using-auto-tls.md).
+   >   If you do intend on immediately enabling auto certificates in Knative,
+   >   you can remove the
+   >   `--selector networking.knative.dev/certificate-provider!=cert-manager`
+   >   statement to install the controller. Otherwise, you can choose to install
+   >   the auto certificates feature and controller at a later time.
 
 1. Monitor the Knative components until all of the components show a `STATUS` of
    `Running`:
@@ -138,7 +135,6 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
    kubectl get pods --namespace knative-serving
    kubectl get pods --namespace knative-build
    kubectl get pods --namespace knative-eventing
-   kubectl get pods --namespace knative-sources
    kubectl get pods --namespace knative-monitoring
    ```
 

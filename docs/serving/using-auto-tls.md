@@ -6,8 +6,8 @@ type: "docs"
 ---
 
 If you install and configure cert-manager, you can configure Knative to
-automatically obtain new TLS certificates and renew existing ones.
-To learn more about using secure connections in Knative, see
+automatically obtain new TLS certificates and renew existing ones. To learn more
+about using secure connections in Knative, see
 [Configuring HTTPS with TLS certificates](./using-a-tls-cert.md).
 
 ## Before you begin
@@ -24,18 +24,18 @@ provisioning:
   [custom domain](./using-a-custom-domain.md).
 - Your DNS provider must be setup and configured to your domain.
 
-
 ## Enabling automatic certificate provisioning
 
 To enable Knative to automatically provision TLS certificates:
 
 1. Determine if `networking-certmanager` is installed by running the following
    command:
+
    ```shell
    kubectl get deployment networking-certmanager -n knative-serving
    ```
-   
-1. If `networking-certmanager` is not found, run the following commands to 
+
+1. If `networking-certmanager` is not found, run the following commands to
    install it:
 
    ```shell
@@ -44,29 +44,30 @@ To enable Knative to automatically provision TLS certificates:
 
    kubectl apply --filename https://github.com/knative/serving/releases/download/v${KNATIVE_VERSION}/serving.yaml \
    --selector networking.knative.dev/certificate-provider=cert-manager
-    ```
+   ```
 
 1. Create and add the `ClusterIssuer` configuration file to your Knative cluster
-   to define who issues the TLS certificates, how requests are validated (`DNS-01`), 
-   and which DNS provider validates those requests.
+   to define who issues the TLS certificates, how requests are validated
+   (`DNS-01`), and which DNS provider validates those requests.
 
    1. Create the `ClusterIssuer` file:
-   
-      cert-manager reference:
 
-       - See the generic
-      [`ClusterIssuer` example](https://docs.cert-manager.io/en/latest/tasks/issuers/setup-acme.html#creating-a-basic-acme-issuer)
-       - Also see the [`DNS-01` example](https://docs.cert-manager.io/en/latest/tasks/acme/configuring-dns01/index.html)
-      
-      Example Cloud DNS `ClusterIssuer` configuration file:
+      Use the cert-manager reference to determine how to configure your
+      `ClusterIssuer` file:
 
-      If you use the Let's Encrypt CA and Google Cloud DNS, you would create the
-     `letsencrypt-issuer` `ClusterIssuer` file, that includes your Let's Encrypt 
-      account info, the required `DNS-01` challenge type, and Cloud DNS provider 
-      info.
+      - See the generic
+        [`ClusterIssuer` example](https://docs.cert-manager.io/en/latest/tasks/issuers/setup-acme.html#creating-a-basic-acme-issuer)
+      - Also see the
+        [`DNS-01` example](https://docs.cert-manager.io/en/latest/tasks/acme/configuring-dns01/index.html)
 
-      See the 
-      [complete Google Cloud DNS configuration](./using-cert-manager-on-gcp.md).
+      **Example**: Cloud DNS `ClusterIssuer` configuration file:
+
+      The following `letsencrypt-issuer` named `ClusterIssuer` file is
+      configured for the Let's Encrypt CA and Google Cloud DNS. Under `spec`,
+      the Let's Encrypt account info, required `DNS-01` challenge type, and
+      Cloud DNS provider info defined. For the complete Google Cloud DNS
+      example, see
+      [Configuring HTTPS with cert-manager and Google Cloud DNS](./using-cert-manager-on-gcp.md).
 
       ```shell
       apiVersion: certmanager.k8s.io/v1alpha1
@@ -96,9 +97,9 @@ To enable Knative to automatically provision TLS certificates:
                   key: key.json
       ```
 
-   1. Add your `ClusterIssuer` configuration to your Knative cluster by 
-      running the following commands, where `<filename>` is the name of the file
-      that you created:
+   1. Add your `ClusterIssuer` configuration to your Knative cluster by running
+      the following commands, where `<filename>` is the name of the file that
+      you created:
 
       1. Add the configuration file to Knative:
 
@@ -111,12 +112,12 @@ To enable Knative to automatically provision TLS certificates:
          ```shell
          kubectl get clusterissuer --namespace cert-manager letsencrypt-issuer --output yaml
          ```
-          
+
          Result: The `Status.Conditions` should include `Ready=True`.
-          
-1. Update your 
-   [`config-certmanager` ConfigMap](https://github.com/knative/serving/blob/master/config/config-certmanager.yaml) 
-   in the `knative-serving` namespace to define your new `ClusterIssuer` 
+
+1. Update your
+   [`config-certmanager` ConfigMap](https://github.com/knative/serving/blob/master/config/config-certmanager.yaml)
+   in the `knative-serving` namespace to define your new `ClusterIssuer`
    configuration and your your DNS provider.
 
    1. Run the following command to edit your `config-certmanager` ConfigMap:
@@ -126,7 +127,7 @@ To enable Knative to automatically provision TLS certificates:
       ```
 
    1. Add the `issuerRef` and `solverConfig` sections within the `data` section:
-   
+
       ```shell
       ...
       data:
@@ -159,13 +160,13 @@ To enable Knative to automatically provision TLS certificates:
             provider: cloud-dns-provider
       ```
 
-    1. Ensure that the file was updated successfully:
+   1. Ensure that the file was updated successfully:
 
-          ```shell
-          kubectl get configmap config-certmanager --namespace knative-serving --output yaml
-          ```
+      ```shell
+      kubectl get configmap config-certmanager --namespace knative-serving --output yaml
+      ```
 
-1. Update the 
+1. Update the
    [`config-network` ConfigMap](https://github.com/knative/serving/blob/master/config/config-network.yaml)
    in the `knative-serving` namespace to enable `autoTLS`and specify how HTTP
    requests are handled:
@@ -177,7 +178,7 @@ To enable Knative to automatically provision TLS certificates:
       ```
 
    1. Add the `autoTLS: Enabled` attribute under the `data` section:
-     
+
       ```shell
       ...
       data:
@@ -200,53 +201,53 @@ To enable Knative to automatically provision TLS certificates:
          ...
       ```
 
-   1. Configure how HTTP and HTTPS requests are handled in the 
+   1. Configure how HTTP and HTTPS requests are handled in the
       [`httpProtocol`](https://github.com/knative/serving/blob/master/config/config-network.yaml#L110)
       attribute.
 
       By default, Knative ingress is configured to serve HTTP traffic
-      (`httpProtocol: Enabled`). Now that your cluster is configured to use 
-      TLS certificates and handle HTTPS traffic, you can specify whether or not
-      any HTTP traffic is allowed.
-      
+      (`httpProtocol: Enabled`). Now that your cluster is configured to use TLS
+      certificates and handle HTTPS traffic, you can specify whether or not any
+      HTTP traffic is allowed.
+
       Supported `httpProtocol` values:
 
-       - `Enabled`: Serve HTTP traffic.
-       - `Disabled`: Rejects all HTTP traffic.
-       - `Redirected`: Responds to HTTP request with a `302` redirect to ask 
-         the clients to use HTTPS.
-         
-       
-       ```shell
-       ...
-       data:
-       ...
-         autoTLS: Enabled
-       ...
-       ```
+      - `Enabled`: Serve HTTP traffic.
+      - `Disabled`: Rejects all HTTP traffic.
+      - `Redirected`: Responds to HTTP request with a `302` redirect to ask the
+        clients to use HTTPS.
 
-       Example:
 
-       ```shell
-       apiVersion: v1
-       kind: ConfigMap
-       metadata:
-         name: config-network
-         namespace: knative-serving
-       data:
+         ```shell
          ...
-         autoTLS: Enabled
+         data:
          ...
-         httpProtocol: Redirected
+           autoTLS: Enabled
          ...
-       ```
+         ```
 
-   1. Ensure that the file was updated successfully:
+         Example:
 
-     ```shell
-      kubectl get configmap config-network --namespace knative-serving --output yaml
-      ```
+         ```shell
+         apiVersion: v1
+         kind: ConfigMap
+         metadata:
+           name: config-network
+           namespace: knative-serving
+         data:
+           ...
+           autoTLS: Enabled
+           ...
+           httpProtocol: Redirected
+           ...
+         ```
 
-Congratulations! Knative is now configured to obtain and renew TLS 
-certificates. When your TLS certificate is active on your cluster, your 
-Knative services will be able to handle HTTPS traffic.
+    1. Ensure that the file was updated successfully:
+
+        ```shell
+        kubectl get configmap config-network --namespace knative-serving --output yaml
+        ```
+
+Congratulations! Knative is now configured to obtain and renew TLS certificates.
+When your TLS certificate is active on your cluster, your Knative services will
+be able to handle HTTPS traffic.

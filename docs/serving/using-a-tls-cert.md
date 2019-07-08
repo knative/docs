@@ -4,19 +4,21 @@ linkTitle: "Configuring HTTPS connections"
 weight: 60
 type: "docs"
 aliases:
-    - /docs/serving/using-a-ssl-cert/
+  - /docs/serving/using-an-ssl-cert/
 ---
 
-Learn how to configure secure HTTPS connections in Knative using TLS certificates
+Learn how to configure secure HTTPS connections in Knative using TLS
+certificates
 ([TLS replaces SSL](https://en.wikipedia.org/wiki/Transport_Layer_Security)).
 Configure secure HTTPS connections to enable your Knative services and routes to
 [terminate external TLS connections](https://en.wikipedia.org/wiki/Transport_Layer_Security#TLS_interception).
-You can configure Knative to handle certificates that you manually specify,
-or you can enable Knative to automatically obtain and renew certificates.
+You can configure Knative to handle certificates that you manually specify, or
+you can enable Knative to automatically obtain and renew certificates.
 
 You can use either [Certbot][cb] or [cert-manager][cm] to obtain certificates.
 Both tools support TLS certificates but if you want to enable Knative for
-automatic TLS certificate provisioning, you must install and configure the cert-manager tool:
+automatic TLS certificate provisioning, you must install and configure the
+cert-manager tool:
 
 - **Manually obtain and renew certificates**: Both the Certbot and cert-manager
   tools can be used to manually obtain TLS certificates. In general, after you
@@ -24,25 +26,27 @@ automatic TLS certificate provisioning, you must install and configure the cert-
   certificate in your cluster. See the complete set of steps below for details
   about manually obtaining and configuring certificates.
 
-- **Enable Knative to automatically obtain and renew TLS certificates**: You
-  can also use cert-manager to configure Knative to automatically obtain new
-  TLS certificates and renew existing ones. If you want to enable Knative to
+- **Enable Knative to automatically obtain and renew TLS certificates**: You can
+  also use cert-manager to configure Knative to automatically obtain new TLS
+  certificates and renew existing ones. If you want to enable Knative to
   automatically provision TLS certificates, instead see the
   [Enabling automatic TLS certificate provisioning](./using-auto-tls.md) topic.
 
 By default, the [Let's Encrypt Certificate Authority (CA)][le] is used to
 demonstrate how to enable HTTPS connections, but you can configure Knative to
-use any certificate from a CA that supports the ACME protocol. However, you
-must use and configure your certificate issuer to use the
+use any certificate from a CA that supports the ACME protocol. However, you must
+use and configure your certificate issuer to use the
 [`DNS-01` challenge type](https://letsencrypt.org/docs/challenge-types/#dns-01-challenge).
 
-> **Important:** Certificates issued by Let's Encrypt are valid for only [90 days][le-faqs].
-> Therefore, if you choose to manually obtain and configure your certificates,
-> you must ensure that you renew each certificate before it expires.
+> **Important:** Certificates issued by Let's Encrypt are valid for only [90
+> days][le-faqs]. Therefore, if you choose to manually obtain and configure your
+> certificates, you must ensure that you renew each certificate before it
+> expires.
 
 [cm]: https://github.com/jetstack/cert-manager
 [cm-docs]: https://cert-manager.readthedocs.io/en/latest/getting-started/
-[cm-providers]: http://docs.cert-manager.io/en/latest/tasks/acme/configuring-dns01/index.html?highlight=supported%20DNS01%20providers#supported-dns01-providers
+[cm-providers]:
+  http://docs.cert-manager.io/en/latest/tasks/acme/configuring-dns01/index.html?highlight=supported%20DNS01%20providers#supported-dns01-providers
 [le]: https://letsencrypt.org
 [le-faqs]: https://letsencrypt.org/docs/faq/
 [cb]: https://certbot.eff.org
@@ -74,38 +78,40 @@ If you need a new TLS certificate, you can choose to use one of the following
 tools to obtain a certificate from Let's Encrypt:
 
 - [Setup Certbot to manually obtain certificates](using-certbot-to-manually-obtain-lets-encrypt-certificates)
-- [Setup cert-manager to either manually obtain a certificate, or to automatically provision certificates](using-cert-manager-to-obtain-lets-encrypt-certificates
-)
+- [Setup cert-manager to either manually obtain a certificate, or to automatically provision certificates](using-cert-manager-to-obtain-lets-encrypt-certificates)
 
 For details about using other CA's, see the tool's reference documentation:
 
- - [Certbot supported providers][cb-providers]
- - [cert-manager supported providers][cm-providers]
+- [Certbot supported providers][cb-providers]
+- [cert-manager supported providers][cm-providers]
 
 ### Using Certbot to manually obtain Let’s Encrypt certificates
 
-Use the following steps to install [Certbot][cb] and the use the tool to manually
-obtain a TLS certificate from Let's Encrypt.
+Use the following steps to install [Certbot][cb] and the use the tool to
+manually obtain a TLS certificate from Let's Encrypt.
 
-1. Install Certbot by following the [`certbot-auto` wrapper script][cb-docs] instructions.
+1. Install Certbot by following the [`certbot-auto` wrapper script][cb-docs]
+   instructions.
 
-1. Run the following command to use Certbot to request a certificate using DNS challenge during authorization:
+1. Run the following command to use Certbot to request a certificate using DNS
+   challenge during authorization:
 
    ```shell
    ./certbot-auto certonly --manual --preferred-challenges dns -d '*.default.yourdomain.com'
    ```
 
-   where `-d` specifies your domain. If you want to validate multiple domain's, you
-   can include multiple flags: `-d MY.EXAMPLEDOMAIN.1 -d MY.EXAMPLEDOMAIN.2`. 
-   For more information, see the [Cerbot command-line][cb-cli] reference.
+   where `-d` specifies your domain. If you want to validate multiple domain's,
+   you can include multiple flags:
+   `-d MY.EXAMPLEDOMAIN.1 -d MY.EXAMPLEDOMAIN.2`. For more information, see the
+   [Cerbot command-line][cb-cli] reference.
 
    The Certbot tool walks you through the steps of validating that you own each
    domain that you specify by creating TXT records in those domains.
 
    Result: CertBot creates two files:
 
-    - Certificate:`fullchain.pem`
-    - Private key: `privkey.pem`
+   - Certificate:`fullchain.pem`
+   - Private key: `privkey.pem`
 
 What's next:
 
@@ -118,25 +124,26 @@ You can install and use [cert-manager][cm] to either manually obtain a
 certificate or to configure your Knative cluster for automatic certificate
 provisioning:
 
- - **Manual certificates**: Install cert-manager and then use the tool to
-   manually obtain a certificate.
+- **Manual certificates**: Install cert-manager and then use the tool to
+  manually obtain a certificate.
 
-   To use cert-manager to manually obtain certificates:
+  To use cert-manager to manually obtain certificates:
 
-   1. [Install and configure cert-manager](./installing-cert-manager.md).
+  1.  [Install and configure cert-manager](./installing-cert-manager.md).
 
-   1. Continue to the steps below about
+  1.  Continue to the steps below about
       [manually adding a TLS certificate](#manually-adding-a-tls-certificate) by
       creating and using a Kubernetes secret.
 
- - **Automatic certificates**: Configure Knative to use cert-manager
-   for automatically obtaining and renewing TLS certificate. The steps for
-   installing and configuring cert-manager for this method are covered in full
-   in the [Enabling automatic TLS cert provisioning](./using-auto-tls.md) topic.
+- **Automatic certificates**: Configure Knative to use cert-manager for
+  automatically obtaining and renewing TLS certificate. The steps for installing
+  and configuring cert-manager for this method are covered in full in the
+  [Enabling automatic TLS cert provisioning](./using-auto-tls.md) topic.
 
 ## Manually adding a TLS certificate
 
-If you have an existing certificate or have used one of the Certbot or cert-manager tool to manually obtain a new certificate, you can use the
+If you have an existing certificate or have used one of the Certbot or
+cert-manager tool to manually obtain a new certificate, you can use the
 following steps to add that certificate to your Knative cluster.
 
 For instructions about enabling Knative for automatic certificate provisioning,
@@ -147,7 +154,7 @@ To manually add a TLS certificate to your Knative cluster, you create a
 Kubernetes secret and then configure the `knative-ingress-gateway`:
 
 1. Run the following command to create a Kubernetes secret to hold your TLS
-   certificate, `cert.pk`, and the private key, `cert.pem`:
+   certificate, `cert.pem`, and the private key, `cert.pk`:
 
    ```shell
    kubectl create --namespace istio-system secret tls istio-ingressgateway-certs \
@@ -161,7 +168,8 @@ Kubernetes secret and then configure the `knative-ingress-gateway`:
 1. Configure Knative to use the new secret that you created for HTTPS
    connections:
 
-   1. Run the following command to open the Knative shared `gateway` in edit mode:
+   1. Run the following command to open the Knative shared `gateway` in edit
+      mode:
 
       ```shell
       kubectl edit gateway knative-ingress-gateway --namespace knative-serving
@@ -171,11 +179,11 @@ Kubernetes secret and then configure the `knative-ingress-gateway`:
       configuration:
 
       ```yaml
-      ...
+      ---
       tls:
-              mode: SIMPLE
-              privateKey: /etc/istio/ingressgateway-certs/tls.key
-              serverCertificate: /etc/istio/ingressgateway-certs/tls.crt
+        mode: SIMPLE
+        privateKey: /etc/istio/ingressgateway-certs/tls.key
+        serverCertificate: /etc/istio/ingressgateway-certs/tls.crt
       ```
 
       Example:
@@ -212,8 +220,8 @@ Kubernetes secret and then configure the `knative-ingress-gateway`:
 
 ## What's next:
 
-After your changes are running on your Knative cluster, you can
-begin using the HTTPS protocol for secure access your deployed Knative services.
+After your changes are running on your Knative cluster, you can begin using the
+HTTPS protocol for secure access your deployed Knative services.
 
 ---
 

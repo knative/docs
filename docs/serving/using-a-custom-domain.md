@@ -83,11 +83,11 @@ You can also apply an updated domain configuration:
 
 Deploy an app (for example,
 [`helloworld-go`](./samples/hello-world/helloworld-go/README.md)), to your
-cluster as normal. You can check the customized domain in Knative Route
-"helloworld-go" with the following command:
+cluster as normal. You can retrieve the URL in Knative Route "helloworld-go"
+with the following command:
 
 ```shell
-kubectl get route helloworld-go --output jsonpath="{.status.domain}"
+kubectl get route helloworld-go --output jsonpath="{.status.url}"
 ```
 
 You should see the full customized domain: `helloworld-go.default.mydomain.com`.
@@ -128,7 +128,7 @@ export GATEWAY_IP=`kubectl get svc $INGRESSGATEWAY --namespace istio-system --ou
 
 # helloworld-go is the generated Knative Route of "helloworld-go" sample.
 # You need to replace it with your own Route in your project.
-export DOMAIN_NAME=`kubectl get route helloworld-go --output jsonpath="{.status.domain}"`
+export DOMAIN_NAME=`kubectl get route helloworld-go --output jsonpath="{.status.url}" | cut -d'/' -f 3`
 
 # Add the record of Gateway IP and domain name into file "/etc/hosts"
 echo -e "$GATEWAY_IP\t$DOMAIN_NAME" | sudo tee -a /etc/hosts

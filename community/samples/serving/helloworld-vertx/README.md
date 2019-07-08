@@ -162,15 +162,13 @@ To create and configure the source files in the root of your working directory:
      name: helloworld-vertx
      namespace: default
    spec:
-     runLatest:
-       configuration:
-         revisionTemplate:
-           spec:
-             container:
-               image: docker.io/{username}/helloworld-vertx
-               env:
-                 - name: TARGET
-                   value: "Eclipse Vert.x Sample v1"
+     template:
+       spec:
+         containers:
+           - image: docker.io/{username}/helloworld-vertx
+             env:
+               - name: TARGET
+                 value: "Eclipse Vert.x Sample v1"
    ```
 
 ## Building and deploying the sample
@@ -243,14 +241,14 @@ To verify that your sample app has been successfully deployed:
    command:
 
    ```shell
-   kubectl get services.serving.knative.dev helloworld-vertx  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+   kubectl get services.serving.knative.dev helloworld-vertx  --output=custom-columns=NAME:.metadata.name,URL:.status.url
    ```
 
    Example result:
 
    ```shell
-   NAME                DOMAIN
-   helloworld-vertx     helloworld-vertx.default.example.com
+   NAME                URL
+   helloworld-vertx    http://helloworld-vertx.default.example.com
    ```
 
 1. Run the following `curl` command to test your deployed sample app. You must
