@@ -13,8 +13,8 @@ for generating events.
    The preferred version that is compatible with Camel sources is
    [Camel K v0.2.0](https://github.com/apache/camel-k/releases/tag/0.2.0).
 
-   Installation instruction are provided on the
-   [Apache Camel K Github repository](https://github.com/apache/camel-k#installation).
+   Installation instructions are provided in the
+   [Apache Camel K GitHub repository](https://github.com/apache/camel-k#installation).
    Documentation includes specific instructions for common Kubernetes
    environments, including development clusters.
 
@@ -27,10 +27,10 @@ for generating events.
 
 ## Create a Channel and a Subscriber
 
-In order to check if a `CamelSource` is fully working, we will create:
+To check if a `CamelSource` is fully working, create:
 
 - a simple Knative event display service that prints incoming events to its log
-- a in-memory channel named `camel-test` that will buffer events created by the
+- an in-memory channel named `camel-test` that buffers events created by the
   event source
 - a subscription to direct events from the test channel to the event display
   service
@@ -43,14 +43,14 @@ kubectl apply --filename display_resources.yaml
 
 ## Run a CamelSource using the Timer component
 
-The simplest example of CamelSource, that does not require additional
+The simplest example of the `CamelSource`, that does not require additional
 configuration, is the "timer" source.
 
 If you want, you can customize the source behavior using options available in
 the Apache Camel documentation for the
 [timer component](https://github.com/apache/camel/blob/master/components/camel-timer/src/main/docs/timer-component.adoc).
 All Camel components are documented in the
-[Apache Camel github repository](https://github.com/apache/camel/tree/master/components).
+[Apache Camel GitHub repository](https://github.com/apache/camel/tree/master/components).
 
 Install the [`source_timer.yaml`](source_timer.yaml) resource:
 
@@ -58,7 +58,7 @@ Install the [`source_timer.yaml`](source_timer.yaml) resource:
 kubectl apply --filename source_timer.yaml
 ```
 
-We will verify that the published events were sent into the Knative eventing
+Verify that the published events were sent into the Knative eventing
 system by looking at what is downstream of the `CamelSource`.
 
 ```shell
@@ -72,14 +72,14 @@ seconds.
 
 Another useful component available with Camel is the Telegram component. It can
 be used to forward messages of a [Telegram](https://telegram.org/) chat into
-Knative channels as events.
+Knative channels, as events.
 
-Before using the provided Telegram CamelSource example, you need to follow the
+Before using the provided Telegram `CamelSource` example, you need to follow the
 instructions on the Telegram website for creating a
 [Telegram Bot](https://core.telegram.org/bots). The quickest way to create a bot
 is to contact the [Bot Father](https://telegram.me/botfather), another Telegram
 Bot, using your preferred Telegram client (mobile or web). After you create the
-bot, you'll receive an **authorization token** that is needed for the source to
+bot, you will receive an **authorization token** that is needed for the source to
 work.
 
 First, download and edit the [`source_telegram.yaml`](source_telegram.yaml) file
