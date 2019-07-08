@@ -27,7 +27,7 @@ First, create the namespace. In this guide, you will be using the default namesp
 kubectl create namespace default
 ```
 
-3. Setup up the namespace for Knative Eventing. To setup the namespace, add a label to your namespace with this command:
+2. Setup up the namespace for Knative Eventing. To setup the namespace, add a label to your namespace with this command:
 
 ```sh
 kubectl label namespace default knative-eventing-injection=enabled
