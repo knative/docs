@@ -1,29 +1,29 @@
 <p>Packages:</p>
 <ul>
 <li>
-<a href="#duck.knative.dev">duck.knative.dev</a>
+<a href="#duck.knative.dev%2fv1alpha1">duck.knative.dev/v1alpha1</a>
 </li>
 <li>
-<a href="#eventing.knative.dev">eventing.knative.dev</a>
+<a href="#eventing.knative.dev%2fv1alpha1">eventing.knative.dev/v1alpha1</a>
 </li>
 <li>
-<a href="#messaging.knative.dev">messaging.knative.dev</a>
+<a href="#messaging.knative.dev%2fv1alpha1">messaging.knative.dev/v1alpha1</a>
 </li>
 <li>
-<a href="#sources.eventing.knative.dev">sources.eventing.knative.dev</a>
+<a href="#sources.eventing.knative.dev%2fv1alpha1">sources.eventing.knative.dev/v1alpha1</a>
 </li>
 </ul>
-<h2 id="duck.knative.dev">duck.knative.dev</h2>
+<h2 id="duck.knative.dev/v1alpha1">duck.knative.dev/v1alpha1</h2>
 <p>
 <p>Package v1alpha1 is the v1alpha1 version of the API.</p>
 </p>
 Resource Types:
 <ul><li>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2fduck%2fv1alpha1.Channelable">Channelable</a>
+<a href="#duck.knative.dev/v1alpha1.Channelable">Channelable</a>
 </li><li>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2fduck%2fv1alpha1.SubscribableType">SubscribableType</a>
+<a href="#duck.knative.dev/v1alpha1.SubscribableType">SubscribableType</a>
 </li></ul>
-<h3 id="github.com/knative/eventing/pkg/apis/duck/v1alpha1.Channelable">Channelable
+<h3 id="duck.knative.dev/v1alpha1.Channelable">Channelable
 </h3>
 <p>
 <p>Channelable is a skeleton type wrapping Subscribable and Addressable in the manner we expect resource writers
@@ -73,7 +73,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/duck/v1alpha1.ChannelableSpec">
+<a href="#duck.knative.dev/v1alpha1.ChannelableSpec">
 ChannelableSpec
 </a>
 </em>
@@ -87,7 +87,7 @@ ChannelableSpec
 <td>
 <code>SubscribableTypeSpec</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/duck/v1alpha1.SubscribableTypeSpec">
+<a href="#duck.knative.dev/v1alpha1.SubscribableTypeSpec">
 SubscribableTypeSpec
 </a>
 </em>
@@ -105,7 +105,7 @@ SubscribableTypeSpec
 <td>
 <code>status</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/duck/v1alpha1.ChannelableStatus">
+<a href="#duck.knative.dev/v1alpha1.ChannelableStatus">
 ChannelableStatus
 </a>
 </em>
@@ -115,7 +115,7 @@ ChannelableStatus
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/duck/v1alpha1.SubscribableType">SubscribableType
+<h3 id="duck.knative.dev/v1alpha1.SubscribableType">SubscribableType
 </h3>
 <p>
 <p>SubscribableType is a skeleton type wrapping Subscribable in the manner we expect resource writers
@@ -165,7 +165,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/duck/v1alpha1.SubscribableTypeSpec">
+<a href="#duck.knative.dev/v1alpha1.SubscribableTypeSpec">
 SubscribableTypeSpec
 </a>
 </em>
@@ -180,8 +180,8 @@ configured as to be compatible with Subscribable contract.</p>
 <td>
 <code>subscribable</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/duck/v1alpha1.Subscribable">
-github.com/knative/eventing/pkg/apis/duck/v1alpha1.Subscribable
+<a href="#duck.knative.dev/v1alpha1.Subscribable">
+Subscribable
 </a>
 </em>
 </td>
@@ -195,7 +195,7 @@ github.com/knative/eventing/pkg/apis/duck/v1alpha1.Subscribable
 <td>
 <code>status</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/duck/v1alpha1.SubscribableTypeStatus">
+<a href="#duck.knative.dev/v1alpha1.SubscribableTypeStatus">
 SubscribableTypeStatus
 </a>
 </em>
@@ -207,11 +207,11 @@ configured as to be compatible with Subscribable contract.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/duck/v1alpha1.ChannelableSpec">ChannelableSpec
+<h3 id="duck.knative.dev/v1alpha1.ChannelableSpec">ChannelableSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2fduck%2fv1alpha1.Channelable">Channelable</a>)
+<a href="#duck.knative.dev/v1alpha1.Channelable">Channelable</a>)
 </p>
 <p>
 <p>ChannelableSpec contains Spec of the Channelable object</p>
@@ -228,7 +228,7 @@ configured as to be compatible with Subscribable contract.</p>
 <td>
 <code>SubscribableTypeSpec</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/duck/v1alpha1.SubscribableTypeSpec">
+<a href="#duck.knative.dev/v1alpha1.SubscribableTypeSpec">
 SubscribableTypeSpec
 </a>
 </em>
@@ -241,11 +241,11 @@ SubscribableTypeSpec
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/duck/v1alpha1.ChannelableStatus">ChannelableStatus
+<h3 id="duck.knative.dev/v1alpha1.ChannelableStatus">ChannelableStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2fduck%2fv1alpha1.Channelable">Channelable</a>)
+<a href="#duck.knative.dev/v1alpha1.Channelable">Channelable</a>)
 </p>
 <p>
 <p>ChannelableStatus contains the Status of a Channelable object.</p>
@@ -296,7 +296,7 @@ github.com/knative/pkg/apis/duck/v1alpha1.AddressStatus
 <td>
 <code>SubscribableTypeStatus</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/duck/v1alpha1.SubscribableTypeStatus">
+<a href="#duck.knative.dev/v1alpha1.SubscribableTypeStatus">
 SubscribableTypeStatus
 </a>
 </em>
@@ -310,13 +310,13 @@ SubscribableTypeStatus
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/duck/v1alpha1.Subscribable">Subscribable
+<h3 id="duck.knative.dev/v1alpha1.Subscribable">Subscribable
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2feventing%2fv1alpha1.ChannelSpec">ChannelSpec</a>, 
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2fmessaging%2fv1alpha1.InMemoryChannelSpec">InMemoryChannelSpec</a>, 
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2fduck%2fv1alpha1.SubscribableTypeSpec">SubscribableTypeSpec</a>)
+<a href="#eventing.knative.dev/v1alpha1.ChannelSpec">ChannelSpec</a>, 
+<a href="#messaging.knative.dev/v1alpha1.InMemoryChannelSpec">InMemoryChannelSpec</a>, 
+<a href="#duck.knative.dev/v1alpha1.SubscribableTypeSpec">SubscribableTypeSpec</a>)
 </p>
 <p>
 <p>Subscribable is the schema for the subscribable portion of the spec
@@ -334,8 +334,8 @@ section of the resource.</p>
 <td>
 <code>subscribers</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/duck/v1alpha1.SubscriberSpec">
-[][]github.com/knative/eventing/pkg/apis/duck/v1alpha1.SubscriberSpec
+<a href="#duck.knative.dev/v1alpha1.SubscriberSpec">
+[]SubscriberSpec
 </a>
 </em>
 </td>
@@ -345,11 +345,11 @@ section of the resource.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/duck/v1alpha1.SubscribableStatus">SubscribableStatus
+<h3 id="duck.knative.dev/v1alpha1.SubscribableStatus">SubscribableStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2fduck%2fv1alpha1.SubscribableTypeStatus">SubscribableTypeStatus</a>)
+<a href="#duck.knative.dev/v1alpha1.SubscribableTypeStatus">SubscribableTypeStatus</a>)
 </p>
 <p>
 <p>SubscribableStatus is the schema for the subscribable&rsquo;s status portion of the status
@@ -367,8 +367,8 @@ section of the resource.</p>
 <td>
 <code>subscribers</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/duck/v1alpha1.SubscriberStatus">
-[][]github.com/knative/eventing/pkg/apis/duck/v1alpha1.SubscriberStatus
+<a href="#duck.knative.dev/v1alpha1.SubscriberStatus">
+[]SubscriberStatus
 </a>
 </em>
 </td>
@@ -378,12 +378,12 @@ section of the resource.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/duck/v1alpha1.SubscribableTypeSpec">SubscribableTypeSpec
+<h3 id="duck.knative.dev/v1alpha1.SubscribableTypeSpec">SubscribableTypeSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2fduck%2fv1alpha1.SubscribableType">SubscribableType</a>, 
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2fduck%2fv1alpha1.ChannelableSpec">ChannelableSpec</a>)
+<a href="#duck.knative.dev/v1alpha1.SubscribableType">SubscribableType</a>, 
+<a href="#duck.knative.dev/v1alpha1.ChannelableSpec">ChannelableSpec</a>)
 </p>
 <p>
 <p>SubscribableTypeSpec shows how we expect folks to embed Subscribable in their Spec field.</p>
@@ -400,8 +400,8 @@ section of the resource.</p>
 <td>
 <code>subscribable</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/duck/v1alpha1.Subscribable">
-github.com/knative/eventing/pkg/apis/duck/v1alpha1.Subscribable
+<a href="#duck.knative.dev/v1alpha1.Subscribable">
+Subscribable
 </a>
 </em>
 </td>
@@ -410,14 +410,14 @@ github.com/knative/eventing/pkg/apis/duck/v1alpha1.Subscribable
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/duck/v1alpha1.SubscribableTypeStatus">SubscribableTypeStatus
+<h3 id="duck.knative.dev/v1alpha1.SubscribableTypeStatus">SubscribableTypeStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2fduck%2fv1alpha1.SubscribableType">SubscribableType</a>, 
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2feventing%2fv1alpha1.ChannelStatus">ChannelStatus</a>, 
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2fduck%2fv1alpha1.ChannelableStatus">ChannelableStatus</a>, 
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2fmessaging%2fv1alpha1.InMemoryChannelStatus">InMemoryChannelStatus</a>)
+<a href="#duck.knative.dev/v1alpha1.SubscribableType">SubscribableType</a>, 
+<a href="#eventing.knative.dev/v1alpha1.ChannelStatus">ChannelStatus</a>, 
+<a href="#duck.knative.dev/v1alpha1.ChannelableStatus">ChannelableStatus</a>, 
+<a href="#messaging.knative.dev/v1alpha1.InMemoryChannelStatus">InMemoryChannelStatus</a>)
 </p>
 <p>
 <p>SubscribableTypeStatus shows how we expect folks to embed Subscribable in their Status field.</p>
@@ -434,8 +434,8 @@ github.com/knative/eventing/pkg/apis/duck/v1alpha1.Subscribable
 <td>
 <code>subscribablestatus</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/duck/v1alpha1.SubscribableStatus">
-github.com/knative/eventing/pkg/apis/duck/v1alpha1.SubscribableStatus
+<a href="#duck.knative.dev/v1alpha1.SubscribableStatus">
+SubscribableStatus
 </a>
 </em>
 </td>
@@ -444,11 +444,11 @@ github.com/knative/eventing/pkg/apis/duck/v1alpha1.SubscribableStatus
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/duck/v1alpha1.SubscriberSpec">SubscriberSpec
+<h3 id="duck.knative.dev/v1alpha1.SubscriberSpec">SubscriberSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2fduck%2fv1alpha1.Subscribable">Subscribable</a>)
+<a href="#duck.knative.dev/v1alpha1.Subscribable">Subscribable</a>)
 </p>
 <p>
 <p>SubscriberSpec defines a single subscriber to a Subscribable.
@@ -527,11 +527,11 @@ string
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/duck/v1alpha1.SubscriberStatus">SubscriberStatus
+<h3 id="duck.knative.dev/v1alpha1.SubscriberStatus">SubscriberStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2fduck%2fv1alpha1.SubscribableStatus">SubscribableStatus</a>)
+<a href="#duck.knative.dev/v1alpha1.SubscribableStatus">SubscribableStatus</a>)
 </p>
 <p>
 <p>SubscriberStatus defines the status of a single subscriber to a Channel.</p>
@@ -597,25 +597,25 @@ string
 </tbody>
 </table>
 <hr/>
-<h2 id="eventing.knative.dev">eventing.knative.dev</h2>
+<h2 id="eventing.knative.dev/v1alpha1">eventing.knative.dev/v1alpha1</h2>
 <p>
 <p>Package v1alpha1 is the v1alpha1 version of the API.</p>
 </p>
 Resource Types:
 <ul><li>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2feventing%2fv1alpha1.Broker">Broker</a>
+<a href="#eventing.knative.dev/v1alpha1.Broker">Broker</a>
 </li><li>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2feventing%2fv1alpha1.Channel">Channel</a>
+<a href="#eventing.knative.dev/v1alpha1.Channel">Channel</a>
 </li><li>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2feventing%2fv1alpha1.ClusterChannelProvisioner">ClusterChannelProvisioner</a>
+<a href="#eventing.knative.dev/v1alpha1.ClusterChannelProvisioner">ClusterChannelProvisioner</a>
 </li><li>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2feventing%2fv1alpha1.EventType">EventType</a>
+<a href="#eventing.knative.dev/v1alpha1.EventType">EventType</a>
 </li><li>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2feventing%2fv1alpha1.Subscription">Subscription</a>
+<a href="#eventing.knative.dev/v1alpha1.Subscription">Subscription</a>
 </li><li>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2feventing%2fv1alpha1.Trigger">Trigger</a>
+<a href="#eventing.knative.dev/v1alpha1.Trigger">Trigger</a>
 </li></ul>
-<h3 id="github.com/knative/eventing/pkg/apis/eventing/v1alpha1.Broker">Broker
+<h3 id="eventing.knative.dev/v1alpha1.Broker">Broker
 </h3>
 <p>
 <p>Broker collects a pool of events that are consumable using Triggers. Brokers
@@ -668,7 +668,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/eventing/v1alpha1.BrokerSpec">
+<a href="#eventing.knative.dev/v1alpha1.BrokerSpec">
 BrokerSpec
 </a>
 </em>
@@ -682,8 +682,8 @@ BrokerSpec
 <td>
 <code>channelTemplate</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/eventing/v1alpha1.ChannelSpec">
-github.com/knative/eventing/pkg/apis/eventing/v1alpha1.ChannelSpec
+<a href="#eventing.knative.dev/v1alpha1.ChannelSpec">
+ChannelSpec
 </a>
 </em>
 </td>
@@ -698,7 +698,7 @@ Channel for the namespace will be used.</p>
 <td>
 <code>channelTemplateSpec</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/eventing/v1alpha1.ChannelTemplateSpec">
+<a href="#eventing.knative.dev/v1alpha1.ChannelTemplateSpec">
 ChannelTemplateSpec
 </a>
 </em>
@@ -715,7 +715,7 @@ Broker.</p>
 <td>
 <code>status</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/eventing/v1alpha1.BrokerStatus">
+<a href="#eventing.knative.dev/v1alpha1.BrokerStatus">
 BrokerStatus
 </a>
 </em>
@@ -728,7 +728,7 @@ date.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/eventing/v1alpha1.Channel">Channel
+<h3 id="eventing.knative.dev/v1alpha1.Channel">Channel
 </h3>
 <p>
 <p>Channel is an abstract resource that implements the Addressable contract.
@@ -779,7 +779,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/eventing/v1alpha1.ChannelSpec">
+<a href="#eventing.knative.dev/v1alpha1.ChannelSpec">
 ChannelSpec
 </a>
 </em>
@@ -834,8 +834,8 @@ provisions this Channel.</p>
 <td>
 <code>subscribable</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/duck/v1alpha1.Subscribable">
-github.com/knative/eventing/pkg/apis/duck/v1alpha1.Subscribable
+<a href="#duck.knative.dev/v1alpha1.Subscribable">
+Subscribable
 </a>
 </em>
 </td>
@@ -850,7 +850,7 @@ github.com/knative/eventing/pkg/apis/duck/v1alpha1.Subscribable
 <td>
 <code>status</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/eventing/v1alpha1.ChannelStatus">
+<a href="#eventing.knative.dev/v1alpha1.ChannelStatus">
 ChannelStatus
 </a>
 </em>
@@ -863,7 +863,7 @@ date.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/eventing/v1alpha1.ClusterChannelProvisioner">ClusterChannelProvisioner
+<h3 id="eventing.knative.dev/v1alpha1.ClusterChannelProvisioner">ClusterChannelProvisioner
 </h3>
 <p>
 <p>ClusterChannelProvisioner encapsulates a provisioning strategy for the
@@ -913,7 +913,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/eventing/v1alpha1.ClusterChannelProvisionerSpec">
+<a href="#eventing.knative.dev/v1alpha1.ClusterChannelProvisionerSpec">
 ClusterChannelProvisionerSpec
 </a>
 </em>
@@ -945,7 +945,7 @@ in the future</p>
 <td>
 <code>status</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/eventing/v1alpha1.ClusterChannelProvisionerStatus">
+<a href="#eventing.knative.dev/v1alpha1.ClusterChannelProvisionerStatus">
 ClusterChannelProvisionerStatus
 </a>
 </em>
@@ -957,7 +957,7 @@ ClusterChannelProvisionerStatus
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/eventing/v1alpha1.EventType">EventType
+<h3 id="eventing.knative.dev/v1alpha1.EventType">EventType
 </h3>
 <p>
 </p>
@@ -1005,7 +1005,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/eventing/v1alpha1.EventTypeSpec">
+<a href="#eventing.knative.dev/v1alpha1.EventTypeSpec">
 EventTypeSpec
 </a>
 </em>
@@ -1080,7 +1080,7 @@ string
 <td>
 <code>status</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/eventing/v1alpha1.EventTypeStatus">
+<a href="#eventing.knative.dev/v1alpha1.EventTypeStatus">
 EventTypeStatus
 </a>
 </em>
@@ -1093,7 +1093,7 @@ This data may be out of date.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/eventing/v1alpha1.Subscription">Subscription
+<h3 id="eventing.knative.dev/v1alpha1.Subscription">Subscription
 </h3>
 <p>
 <p>Subscription routes events received on a Channel to a DNS name and
@@ -1142,7 +1142,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/eventing/v1alpha1.SubscriptionSpec">
+<a href="#eventing.knative.dev/v1alpha1.SubscriptionSpec">
 SubscriptionSpec
 </a>
 </em>
@@ -1189,8 +1189,8 @@ etc.)</p>
 <td>
 <code>subscriber</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/eventing/v1alpha1.SubscriberSpec">
-github.com/knative/eventing/pkg/apis/eventing/v1alpha1.SubscriberSpec
+<a href="#eventing.knative.dev/v1alpha1.SubscriberSpec">
+SubscriberSpec
 </a>
 </em>
 </td>
@@ -1205,8 +1205,8 @@ sent to a channel as specified by the Reply.</p>
 <td>
 <code>reply</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/eventing/v1alpha1.ReplyStrategy">
-github.com/knative/eventing/pkg/apis/eventing/v1alpha1.ReplyStrategy
+<a href="#eventing.knative.dev/v1alpha1.ReplyStrategy">
+ReplyStrategy
 </a>
 </em>
 </td>
@@ -1223,7 +1223,7 @@ the Subscriber target.</p>
 <td>
 <code>status</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/eventing/v1alpha1.SubscriptionStatus">
+<a href="#eventing.knative.dev/v1alpha1.SubscriptionStatus">
 SubscriptionStatus
 </a>
 </em>
@@ -1233,7 +1233,7 @@ SubscriptionStatus
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/eventing/v1alpha1.Trigger">Trigger
+<h3 id="eventing.knative.dev/v1alpha1.Trigger">Trigger
 </h3>
 <p>
 <p>Trigger represents a request to have events delivered to a consumer from a
@@ -1283,7 +1283,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/eventing/v1alpha1.TriggerSpec">
+<a href="#eventing.knative.dev/v1alpha1.TriggerSpec">
 TriggerSpec
 </a>
 </em>
@@ -1309,8 +1309,8 @@ to &lsquo;default&rsquo;.</p>
 <td>
 <code>filter</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/eventing/v1alpha1.TriggerFilter">
-github.com/knative/eventing/pkg/apis/eventing/v1alpha1.TriggerFilter
+<a href="#eventing.knative.dev/v1alpha1.TriggerFilter">
+TriggerFilter
 </a>
 </em>
 </td>
@@ -1324,8 +1324,8 @@ filter will be sent to the Subscriber. If not specified, will default to allowin
 <td>
 <code>subscriber</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/eventing/v1alpha1.SubscriberSpec">
-github.com/knative/eventing/pkg/apis/eventing/v1alpha1.SubscriberSpec
+<a href="#eventing.knative.dev/v1alpha1.SubscriberSpec">
+SubscriberSpec
 </a>
 </em>
 </td>
@@ -1341,7 +1341,7 @@ is required.</p>
 <td>
 <code>status</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/eventing/v1alpha1.TriggerStatus">
+<a href="#eventing.knative.dev/v1alpha1.TriggerStatus">
 TriggerStatus
 </a>
 </em>
@@ -1354,11 +1354,11 @@ date.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/eventing/v1alpha1.BrokerSpec">BrokerSpec
+<h3 id="eventing.knative.dev/v1alpha1.BrokerSpec">BrokerSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2feventing%2fv1alpha1.Broker">Broker</a>)
+<a href="#eventing.knative.dev/v1alpha1.Broker">Broker</a>)
 </p>
 <p>
 </p>
@@ -1374,8 +1374,8 @@ date.</p>
 <td>
 <code>channelTemplate</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/eventing/v1alpha1.ChannelSpec">
-github.com/knative/eventing/pkg/apis/eventing/v1alpha1.ChannelSpec
+<a href="#eventing.knative.dev/v1alpha1.ChannelSpec">
+ChannelSpec
 </a>
 </em>
 </td>
@@ -1390,7 +1390,7 @@ Channel for the namespace will be used.</p>
 <td>
 <code>channelTemplateSpec</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/eventing/v1alpha1.ChannelTemplateSpec">
+<a href="#eventing.knative.dev/v1alpha1.ChannelTemplateSpec">
 ChannelTemplateSpec
 </a>
 </em>
@@ -1402,11 +1402,11 @@ Broker.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/eventing/v1alpha1.BrokerStatus">BrokerStatus
+<h3 id="eventing.knative.dev/v1alpha1.BrokerStatus">BrokerStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2feventing%2fv1alpha1.Broker">Broker</a>)
+<a href="#eventing.knative.dev/v1alpha1.Broker">Broker</a>)
 </p>
 <p>
 <p>BrokerStatus represents the current state of a Broker.</p>
@@ -1481,18 +1481,18 @@ Kubernetes core/v1.ObjectReference
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/eventing/v1alpha1.ChannelProvisionerDefaulter">ChannelProvisionerDefaulter
+<h3 id="eventing.knative.dev/v1alpha1.ChannelProvisionerDefaulter">ChannelProvisionerDefaulter
 </h3>
 <p>
 <p>ChannelProvisionerDefaulter sets the default Provisioner and Arguments on Channels that do not
 specify any Provisioner.</p>
 </p>
-<h3 id="github.com/knative/eventing/pkg/apis/eventing/v1alpha1.ChannelSpec">ChannelSpec
+<h3 id="eventing.knative.dev/v1alpha1.ChannelSpec">ChannelSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2feventing%2fv1alpha1.Channel">Channel</a>, 
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2feventing%2fv1alpha1.BrokerSpec">BrokerSpec</a>)
+<a href="#eventing.knative.dev/v1alpha1.Channel">Channel</a>, 
+<a href="#eventing.knative.dev/v1alpha1.BrokerSpec">BrokerSpec</a>)
 </p>
 <p>
 <p>ChannelSpec specifies the Provisioner backing a channel and the configuration
@@ -1551,8 +1551,8 @@ provisions this Channel.</p>
 <td>
 <code>subscribable</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/duck/v1alpha1.Subscribable">
-github.com/knative/eventing/pkg/apis/duck/v1alpha1.Subscribable
+<a href="#duck.knative.dev/v1alpha1.Subscribable">
+Subscribable
 </a>
 </em>
 </td>
@@ -1562,11 +1562,11 @@ github.com/knative/eventing/pkg/apis/duck/v1alpha1.Subscribable
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/eventing/v1alpha1.ChannelStatus">ChannelStatus
+<h3 id="eventing.knative.dev/v1alpha1.ChannelStatus">ChannelStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2feventing%2fv1alpha1.Channel">Channel</a>)
+<a href="#eventing.knative.dev/v1alpha1.Channel">Channel</a>)
 </p>
 <p>
 <p>ChannelStatus represents the current state of a Channel.</p>
@@ -1629,7 +1629,7 @@ k8s.io/apimachinery/pkg/runtime.RawExtension
 <td>
 <code>SubscribableTypeStatus</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/duck/v1alpha1.SubscribableTypeStatus">
+<a href="#duck.knative.dev/v1alpha1.SubscribableTypeStatus">
 SubscribableTypeStatus
 </a>
 </em>
@@ -1642,11 +1642,11 @@ SubscribableTypeStatus
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/eventing/v1alpha1.ChannelTemplateSpec">ChannelTemplateSpec
+<h3 id="eventing.knative.dev/v1alpha1.ChannelTemplateSpec">ChannelTemplateSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2feventing%2fv1alpha1.BrokerSpec">BrokerSpec</a>)
+<a href="#eventing.knative.dev/v1alpha1.BrokerSpec">BrokerSpec</a>)
 </p>
 <p>
 <p>This should be duck so that Broker can also use this</p>
@@ -1702,7 +1702,7 @@ structs.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/eventing/v1alpha1.ChannelTemplateSpecInternal">ChannelTemplateSpecInternal
+<h3 id="eventing.knative.dev/v1alpha1.ChannelTemplateSpecInternal">ChannelTemplateSpecInternal
 </h3>
 <p>
 <p>Internal version of ChannelTemplateSpec that includes ObjectMeta so that
@@ -1774,11 +1774,11 @@ structs.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/eventing/v1alpha1.ClusterChannelProvisionerSpec">ClusterChannelProvisionerSpec
+<h3 id="eventing.knative.dev/v1alpha1.ClusterChannelProvisionerSpec">ClusterChannelProvisionerSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2feventing%2fv1alpha1.ClusterChannelProvisioner">ClusterChannelProvisioner</a>)
+<a href="#eventing.knative.dev/v1alpha1.ClusterChannelProvisioner">ClusterChannelProvisioner</a>)
 </p>
 <p>
 <p>ClusterChannelProvisionerSpec is the spec for a ClusterChannelProvisioner resource.</p>
@@ -1808,11 +1808,11 @@ in the future</p>
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/eventing/v1alpha1.ClusterChannelProvisionerStatus">ClusterChannelProvisionerStatus
+<h3 id="eventing.knative.dev/v1alpha1.ClusterChannelProvisionerStatus">ClusterChannelProvisionerStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2feventing%2fv1alpha1.ClusterChannelProvisioner">ClusterChannelProvisioner</a>)
+<a href="#eventing.knative.dev/v1alpha1.ClusterChannelProvisioner">ClusterChannelProvisioner</a>)
 </p>
 <p>
 <p>ClusterChannelProvisionerStatus is the status for a ClusterChannelProvisioner resource</p>
@@ -1845,11 +1845,11 @@ github.com/knative/pkg/apis/duck/v1beta1.Status
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/eventing/v1alpha1.EventTypeSpec">EventTypeSpec
+<h3 id="eventing.knative.dev/v1alpha1.EventTypeSpec">EventTypeSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2feventing%2fv1alpha1.EventType">EventType</a>)
+<a href="#eventing.knative.dev/v1alpha1.EventType">EventType</a>)
 </p>
 <p>
 </p>
@@ -1921,11 +1921,11 @@ string
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/eventing/v1alpha1.EventTypeStatus">EventTypeStatus
+<h3 id="eventing.knative.dev/v1alpha1.EventTypeStatus">EventTypeStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2feventing%2fv1alpha1.EventType">EventType</a>)
+<a href="#eventing.knative.dev/v1alpha1.EventType">EventType</a>)
 </p>
 <p>
 <p>EventTypeStatus represents the current state of a EventType.</p>
@@ -1958,15 +1958,15 @@ github.com/knative/pkg/apis/duck/v1beta1.Status
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/eventing/v1alpha1.HasSpec">HasSpec
+<h3 id="eventing.knative.dev/v1alpha1.HasSpec">HasSpec
 </h3>
 <p>
 </p>
-<h3 id="github.com/knative/eventing/pkg/apis/eventing/v1alpha1.ReplyStrategy">ReplyStrategy
+<h3 id="eventing.knative.dev/v1alpha1.ReplyStrategy">ReplyStrategy
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2feventing%2fv1alpha1.SubscriptionSpec">SubscriptionSpec</a>)
+<a href="#eventing.knative.dev/v1alpha1.SubscriptionSpec">SubscriptionSpec</a>)
 </p>
 <p>
 <p>ReplyStrategy specifies the handling of the SubscriberSpec&rsquo;s returned replies.
@@ -2002,13 +2002,13 @@ it will be reflected in the Subscription&rsquo;s status.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/eventing/v1alpha1.SubscriberSpec">SubscriberSpec
+<h3 id="eventing.knative.dev/v1alpha1.SubscriberSpec">SubscriberSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2fmessaging%2fv1alpha1.SequenceSpec">SequenceSpec</a>, 
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2feventing%2fv1alpha1.SubscriptionSpec">SubscriptionSpec</a>, 
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2feventing%2fv1alpha1.TriggerSpec">TriggerSpec</a>)
+<a href="#messaging.knative.dev/v1alpha1.SequenceSpec">SequenceSpec</a>, 
+<a href="#eventing.knative.dev/v1alpha1.SubscriptionSpec">SubscriptionSpec</a>, 
+<a href="#eventing.knative.dev/v1alpha1.TriggerSpec">TriggerSpec</a>)
 </p>
 <p>
 <p>SubscriberSpec specifies the reference to an object that&rsquo;s expected to
@@ -2093,11 +2093,11 @@ string
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/eventing/v1alpha1.SubscriptionSpec">SubscriptionSpec
+<h3 id="eventing.knative.dev/v1alpha1.SubscriptionSpec">SubscriptionSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2feventing%2fv1alpha1.Subscription">Subscription</a>)
+<a href="#eventing.knative.dev/v1alpha1.Subscription">Subscription</a>)
 </p>
 <p>
 <p>SubscriptionSpec specifies the Channel for incoming events, a Subscriber target
@@ -2159,8 +2159,8 @@ etc.)</p>
 <td>
 <code>subscriber</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/eventing/v1alpha1.SubscriberSpec">
-github.com/knative/eventing/pkg/apis/eventing/v1alpha1.SubscriberSpec
+<a href="#eventing.knative.dev/v1alpha1.SubscriberSpec">
+SubscriberSpec
 </a>
 </em>
 </td>
@@ -2175,8 +2175,8 @@ sent to a channel as specified by the Reply.</p>
 <td>
 <code>reply</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/eventing/v1alpha1.ReplyStrategy">
-github.com/knative/eventing/pkg/apis/eventing/v1alpha1.ReplyStrategy
+<a href="#eventing.knative.dev/v1alpha1.ReplyStrategy">
+ReplyStrategy
 </a>
 </em>
 </td>
@@ -2188,11 +2188,11 @@ the Subscriber target.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/eventing/v1alpha1.SubscriptionStatus">SubscriptionStatus
+<h3 id="eventing.knative.dev/v1alpha1.SubscriptionStatus">SubscriptionStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2feventing%2fv1alpha1.Subscription">Subscription</a>)
+<a href="#eventing.knative.dev/v1alpha1.Subscription">Subscription</a>)
 </p>
 <p>
 <p>SubscriptionStatus (computed) for a subscription</p>
@@ -2227,7 +2227,7 @@ github.com/knative/pkg/apis/duck/v1beta1.Status
 <td>
 <code>physicalSubscription</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/eventing/v1alpha1.SubscriptionStatusPhysicalSubscription">
+<a href="#eventing.knative.dev/v1alpha1.SubscriptionStatusPhysicalSubscription">
 SubscriptionStatusPhysicalSubscription
 </a>
 </em>
@@ -2238,11 +2238,11 @@ SubscriptionStatusPhysicalSubscription
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/eventing/v1alpha1.SubscriptionStatusPhysicalSubscription">SubscriptionStatusPhysicalSubscription
+<h3 id="eventing.knative.dev/v1alpha1.SubscriptionStatusPhysicalSubscription">SubscriptionStatusPhysicalSubscription
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2feventing%2fv1alpha1.SubscriptionStatus">SubscriptionStatus</a>)
+<a href="#eventing.knative.dev/v1alpha1.SubscriptionStatus">SubscriptionStatus</a>)
 </p>
 <p>
 <p>SubscriptionStatusPhysicalSubscription represents the fully resolved values for this
@@ -2280,11 +2280,11 @@ string
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/eventing/v1alpha1.TriggerFilter">TriggerFilter
+<h3 id="eventing.knative.dev/v1alpha1.TriggerFilter">TriggerFilter
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2feventing%2fv1alpha1.TriggerSpec">TriggerSpec</a>)
+<a href="#eventing.knative.dev/v1alpha1.TriggerSpec">TriggerSpec</a>)
 </p>
 <p>
 </p>
@@ -2300,8 +2300,8 @@ string
 <td>
 <code>sourceAndType</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/eventing/v1alpha1.TriggerFilterSourceAndType">
-github.com/knative/eventing/pkg/apis/eventing/v1alpha1.TriggerFilterSourceAndType
+<a href="#eventing.knative.dev/v1alpha1.TriggerFilterSourceAndType">
+TriggerFilterSourceAndType
 </a>
 </em>
 </td>
@@ -2310,11 +2310,11 @@ github.com/knative/eventing/pkg/apis/eventing/v1alpha1.TriggerFilterSourceAndTyp
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/eventing/v1alpha1.TriggerFilterSourceAndType">TriggerFilterSourceAndType
+<h3 id="eventing.knative.dev/v1alpha1.TriggerFilterSourceAndType">TriggerFilterSourceAndType
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2feventing%2fv1alpha1.TriggerFilter">TriggerFilter</a>)
+<a href="#eventing.knative.dev/v1alpha1.TriggerFilter">TriggerFilter</a>)
 </p>
 <p>
 <p>TriggerFilterSourceAndType filters events based on exact matches on the cloud event&rsquo;s type and
@@ -2351,11 +2351,11 @@ string
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/eventing/v1alpha1.TriggerSpec">TriggerSpec
+<h3 id="eventing.knative.dev/v1alpha1.TriggerSpec">TriggerSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2feventing%2fv1alpha1.Trigger">Trigger</a>)
+<a href="#eventing.knative.dev/v1alpha1.Trigger">Trigger</a>)
 </p>
 <p>
 </p>
@@ -2383,8 +2383,8 @@ to &lsquo;default&rsquo;.</p>
 <td>
 <code>filter</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/eventing/v1alpha1.TriggerFilter">
-github.com/knative/eventing/pkg/apis/eventing/v1alpha1.TriggerFilter
+<a href="#eventing.knative.dev/v1alpha1.TriggerFilter">
+TriggerFilter
 </a>
 </em>
 </td>
@@ -2398,8 +2398,8 @@ filter will be sent to the Subscriber. If not specified, will default to allowin
 <td>
 <code>subscriber</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/eventing/v1alpha1.SubscriberSpec">
-github.com/knative/eventing/pkg/apis/eventing/v1alpha1.SubscriberSpec
+<a href="#eventing.knative.dev/v1alpha1.SubscriberSpec">
+SubscriberSpec
 </a>
 </em>
 </td>
@@ -2410,11 +2410,11 @@ is required.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/eventing/v1alpha1.TriggerStatus">TriggerStatus
+<h3 id="eventing.knative.dev/v1alpha1.TriggerStatus">TriggerStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2feventing%2fv1alpha1.Trigger">Trigger</a>)
+<a href="#eventing.knative.dev/v1alpha1.Trigger">Trigger</a>)
 </p>
 <p>
 <p>TriggerStatus represents the current state of a Trigger.</p>
@@ -2459,15 +2459,15 @@ string
 </tbody>
 </table>
 <hr/>
-<h2 id="messaging.knative.dev">messaging.knative.dev</h2>
+<h2 id="messaging.knative.dev/v1alpha1">messaging.knative.dev/v1alpha1</h2>
 <p>
 <p>Package v1alpha1 is the v1alpha1 version of the API.</p>
 </p>
 Resource Types:
 <ul><li>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2fmessaging%2fv1alpha1.InMemoryChannel">InMemoryChannel</a>
+<a href="#messaging.knative.dev/v1alpha1.InMemoryChannel">InMemoryChannel</a>
 </li></ul>
-<h3 id="github.com/knative/eventing/pkg/apis/messaging/v1alpha1.InMemoryChannel">InMemoryChannel
+<h3 id="messaging.knative.dev/v1alpha1.InMemoryChannel">InMemoryChannel
 </h3>
 <p>
 <p>InMemoryChannel is a resource representing an in memory channel</p>
@@ -2516,7 +2516,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/messaging/v1alpha1.InMemoryChannelSpec">
+<a href="#messaging.knative.dev/v1alpha1.InMemoryChannelSpec">
 InMemoryChannelSpec
 </a>
 </em>
@@ -2530,8 +2530,8 @@ InMemoryChannelSpec
 <td>
 <code>subscribable</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/duck/v1alpha1.Subscribable">
-github.com/knative/eventing/pkg/apis/duck/v1alpha1.Subscribable
+<a href="#duck.knative.dev/v1alpha1.Subscribable">
+Subscribable
 </a>
 </em>
 </td>
@@ -2546,7 +2546,7 @@ github.com/knative/eventing/pkg/apis/duck/v1alpha1.Subscribable
 <td>
 <code>status</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/messaging/v1alpha1.InMemoryChannelStatus">
+<a href="#messaging.knative.dev/v1alpha1.InMemoryChannelStatus">
 InMemoryChannelStatus
 </a>
 </em>
@@ -2559,11 +2559,11 @@ date.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/messaging/v1alpha1.ChannelTemplateSpec">ChannelTemplateSpec
+<h3 id="messaging.knative.dev/v1alpha1.ChannelTemplateSpec">ChannelTemplateSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2fmessaging%2fv1alpha1.SequenceSpec">SequenceSpec</a>)
+<a href="#messaging.knative.dev/v1alpha1.SequenceSpec">SequenceSpec</a>)
 </p>
 <p>
 <p>This should be duck so that Broker can also use this</p>
@@ -2595,7 +2595,7 @@ in verbatim to the Channel CRD as Spec section.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/messaging/v1alpha1.ChannelTemplateSpecInternal">ChannelTemplateSpecInternal
+<h3 id="messaging.knative.dev/v1alpha1.ChannelTemplateSpecInternal">ChannelTemplateSpecInternal
 </h3>
 <p>
 <p>Internal version of ChannelTemplateSpec that includes ObjectMeta so that
@@ -2643,11 +2643,11 @@ in verbatim to the Channel CRD as Spec section.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/messaging/v1alpha1.InMemoryChannelSpec">InMemoryChannelSpec
+<h3 id="messaging.knative.dev/v1alpha1.InMemoryChannelSpec">InMemoryChannelSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2fmessaging%2fv1alpha1.InMemoryChannel">InMemoryChannel</a>)
+<a href="#messaging.knative.dev/v1alpha1.InMemoryChannel">InMemoryChannel</a>)
 </p>
 <p>
 <p>InMemoryChannelSpec defines which subscribers have expressed interest in
@@ -2666,8 +2666,8 @@ arguments for a Channel.</p>
 <td>
 <code>subscribable</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/duck/v1alpha1.Subscribable">
-github.com/knative/eventing/pkg/apis/duck/v1alpha1.Subscribable
+<a href="#duck.knative.dev/v1alpha1.Subscribable">
+Subscribable
 </a>
 </em>
 </td>
@@ -2677,11 +2677,11 @@ github.com/knative/eventing/pkg/apis/duck/v1alpha1.Subscribable
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/messaging/v1alpha1.InMemoryChannelStatus">InMemoryChannelStatus
+<h3 id="messaging.knative.dev/v1alpha1.InMemoryChannelStatus">InMemoryChannelStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2fmessaging%2fv1alpha1.InMemoryChannel">InMemoryChannel</a>)
+<a href="#messaging.knative.dev/v1alpha1.InMemoryChannel">InMemoryChannel</a>)
 </p>
 <p>
 <p>ChannelStatus represents the current state of a Channel.</p>
@@ -2735,7 +2735,7 @@ provided targets from inside the cluster.</p>
 <td>
 <code>SubscribableTypeStatus</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/duck/v1alpha1.SubscribableTypeStatus">
+<a href="#duck.knative.dev/v1alpha1.SubscribableTypeStatus">
 SubscribableTypeStatus
 </a>
 </em>
@@ -2749,7 +2749,7 @@ SubscribableTypeStatus
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/messaging/v1alpha1.Sequence">Sequence
+<h3 id="messaging.knative.dev/v1alpha1.Sequence">Sequence
 </h3>
 <p>
 <p>Sequence defines a sequence of Subscribers that will be wired in
@@ -2782,7 +2782,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/messaging/v1alpha1.SequenceSpec">
+<a href="#messaging.knative.dev/v1alpha1.SequenceSpec">
 SequenceSpec
 </a>
 </em>
@@ -2796,8 +2796,8 @@ SequenceSpec
 <td>
 <code>steps</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/eventing/v1alpha1.SubscriberSpec">
-[][]github.com/knative/eventing/pkg/apis/eventing/v1alpha1.SubscriberSpec
+<a href="#eventing.knative.dev/v1alpha1.SubscriberSpec">
+[]SubscriberSpec
 </a>
 </em>
 </td>
@@ -2810,7 +2810,7 @@ provided.</p>
 <td>
 <code>channelTemplate</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/messaging/v1alpha1.ChannelTemplateSpec">
+<a href="#messaging.knative.dev/v1alpha1.ChannelTemplateSpec">
 ChannelTemplateSpec
 </a>
 </em>
@@ -2847,7 +2847,7 @@ it will be reflected in the Subscription&rsquo;s status.</p>
 <td>
 <code>status</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/messaging/v1alpha1.SequenceStatus">
+<a href="#messaging.knative.dev/v1alpha1.SequenceStatus">
 SequenceStatus
 </a>
 </em>
@@ -2860,11 +2860,11 @@ date.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/messaging/v1alpha1.SequenceChannelStatus">SequenceChannelStatus
+<h3 id="messaging.knative.dev/v1alpha1.SequenceChannelStatus">SequenceChannelStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2fmessaging%2fv1alpha1.SequenceStatus">SequenceStatus</a>)
+<a href="#messaging.knative.dev/v1alpha1.SequenceStatus">SequenceStatus</a>)
 </p>
 <p>
 </p>
@@ -2902,11 +2902,11 @@ github.com/knative/pkg/apis.Condition
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/messaging/v1alpha1.SequenceSpec">SequenceSpec
+<h3 id="messaging.knative.dev/v1alpha1.SequenceSpec">SequenceSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2fmessaging%2fv1alpha1.Sequence">Sequence</a>)
+<a href="#messaging.knative.dev/v1alpha1.Sequence">Sequence</a>)
 </p>
 <p>
 </p>
@@ -2922,8 +2922,8 @@ github.com/knative/pkg/apis.Condition
 <td>
 <code>steps</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/eventing/v1alpha1.SubscriberSpec">
-[][]github.com/knative/eventing/pkg/apis/eventing/v1alpha1.SubscriberSpec
+<a href="#eventing.knative.dev/v1alpha1.SubscriberSpec">
+[]SubscriberSpec
 </a>
 </em>
 </td>
@@ -2936,7 +2936,7 @@ provided.</p>
 <td>
 <code>channelTemplate</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/messaging/v1alpha1.ChannelTemplateSpec">
+<a href="#messaging.knative.dev/v1alpha1.ChannelTemplateSpec">
 ChannelTemplateSpec
 </a>
 </em>
@@ -2968,11 +2968,11 @@ it will be reflected in the Subscription&rsquo;s status.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/messaging/v1alpha1.SequenceStatus">SequenceStatus
+<h3 id="messaging.knative.dev/v1alpha1.SequenceStatus">SequenceStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2fmessaging%2fv1alpha1.Sequence">Sequence</a>)
+<a href="#messaging.knative.dev/v1alpha1.Sequence">Sequence</a>)
 </p>
 <p>
 <p>SequenceStatus represents the current state of a Sequence.</p>
@@ -3007,8 +3007,8 @@ github.com/knative/pkg/apis/duck/v1beta1.Status
 <td>
 <code>SubscriptionStatuses</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/messaging/v1alpha1.SequenceSubscriptionStatus">
-[][]github.com/knative/eventing/pkg/apis/messaging/v1alpha1.SequenceSubscriptionStatus
+<a href="#messaging.knative.dev/v1alpha1.SequenceSubscriptionStatus">
+[]SequenceSubscriptionStatus
 </a>
 </em>
 </td>
@@ -3021,8 +3021,8 @@ Matches the Spec.Steps array in the order.</p>
 <td>
 <code>ChannelStatuses</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/messaging/v1alpha1.SequenceChannelStatus">
-[][]github.com/knative/eventing/pkg/apis/messaging/v1alpha1.SequenceChannelStatus
+<a href="#messaging.knative.dev/v1alpha1.SequenceChannelStatus">
+[]SequenceChannelStatus
 </a>
 </em>
 </td>
@@ -3051,11 +3051,11 @@ It generally has the form {channel}.{namespace}.svc.{cluster domain name}</p>
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/messaging/v1alpha1.SequenceSubscriptionStatus">SequenceSubscriptionStatus
+<h3 id="messaging.knative.dev/v1alpha1.SequenceSubscriptionStatus">SequenceSubscriptionStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2fmessaging%2fv1alpha1.SequenceStatus">SequenceStatus</a>)
+<a href="#messaging.knative.dev/v1alpha1.SequenceStatus">SequenceStatus</a>)
 </p>
 <p>
 </p>
@@ -3094,19 +3094,19 @@ github.com/knative/pkg/apis.Condition
 </tbody>
 </table>
 <hr/>
-<h2 id="sources.eventing.knative.dev">sources.eventing.knative.dev</h2>
+<h2 id="sources.eventing.knative.dev/v1alpha1">sources.eventing.knative.dev/v1alpha1</h2>
 <p>
 <p>Package v1alpha1 contains API Schema definitions for the sources v1alpha1 API group</p>
 </p>
 Resource Types:
 <ul><li>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2fsources%2fv1alpha1.ApiServerSource">ApiServerSource</a>
+<a href="#sources.eventing.knative.dev/v1alpha1.ApiServerSource">ApiServerSource</a>
 </li><li>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2fsources%2fv1alpha1.ContainerSource">ContainerSource</a>
+<a href="#sources.eventing.knative.dev/v1alpha1.ContainerSource">ContainerSource</a>
 </li><li>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2fsources%2fv1alpha1.CronJobSource">CronJobSource</a>
+<a href="#sources.eventing.knative.dev/v1alpha1.CronJobSource">CronJobSource</a>
 </li></ul>
-<h3 id="github.com/knative/eventing/pkg/apis/sources/v1alpha1.ApiServerSource">ApiServerSource
+<h3 id="sources.eventing.knative.dev/v1alpha1.ApiServerSource">ApiServerSource
 </h3>
 <p>
 <p>ApiServerSource is the Schema for the apiserversources API</p>
@@ -3154,7 +3154,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/sources/v1alpha1.ApiServerSourceSpec">
+<a href="#sources.eventing.knative.dev/v1alpha1.ApiServerSourceSpec">
 ApiServerSourceSpec
 </a>
 </em>
@@ -3167,8 +3167,8 @@ ApiServerSourceSpec
 <td>
 <code>resources</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/sources/v1alpha1.ApiServerResource">
-[][]github.com/knative/eventing/pkg/apis/sources/v1alpha1.ApiServerResource
+<a href="#sources.eventing.knative.dev/v1alpha1.ApiServerResource">
+[]ApiServerResource
 </a>
 </em>
 </td>
@@ -3223,7 +3223,7 @@ string
 <td>
 <code>status</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/sources/v1alpha1.ApiServerSourceStatus">
+<a href="#sources.eventing.knative.dev/v1alpha1.ApiServerSourceStatus">
 ApiServerSourceStatus
 </a>
 </em>
@@ -3233,7 +3233,7 @@ ApiServerSourceStatus
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/sources/v1alpha1.ContainerSource">ContainerSource
+<h3 id="sources.eventing.knative.dev/v1alpha1.ContainerSource">ContainerSource
 </h3>
 <p>
 <p>ContainerSource is the Schema for the containersources API</p>
@@ -3281,7 +3281,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/sources/v1alpha1.ContainerSourceSpec">
+<a href="#sources.eventing.knative.dev/v1alpha1.ContainerSourceSpec">
 ContainerSourceSpec
 </a>
 </em>
@@ -3383,7 +3383,7 @@ Kubernetes core/v1.ObjectReference
 <td>
 <code>status</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/sources/v1alpha1.ContainerSourceStatus">
+<a href="#sources.eventing.knative.dev/v1alpha1.ContainerSourceStatus">
 ContainerSourceStatus
 </a>
 </em>
@@ -3393,7 +3393,7 @@ ContainerSourceStatus
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/sources/v1alpha1.CronJobSource">CronJobSource
+<h3 id="sources.eventing.knative.dev/v1alpha1.CronJobSource">CronJobSource
 </h3>
 <p>
 <p>CronJobSource is the Schema for the cronjobsources API.</p>
@@ -3441,7 +3441,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/sources/v1alpha1.CronJobSourceSpec">
+<a href="#sources.eventing.knative.dev/v1alpha1.CronJobSourceSpec">
 CronJobSourceSpec
 </a>
 </em>
@@ -3502,7 +3502,7 @@ Adapter Deployment.</p>
 <td>
 <code>resources</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/sources/v1alpha1.CronJobResourceSpec">
+<a href="#sources.eventing.knative.dev/v1alpha1.CronJobResourceSpec">
 CronJobResourceSpec
 </a>
 </em>
@@ -3518,7 +3518,7 @@ CronJobResourceSpec
 <td>
 <code>status</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/sources/v1alpha1.CronJobSourceStatus">
+<a href="#sources.eventing.knative.dev/v1alpha1.CronJobSourceStatus">
 CronJobSourceStatus
 </a>
 </em>
@@ -3528,11 +3528,11 @@ CronJobSourceStatus
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/sources/v1alpha1.ApiServerResource">ApiServerResource
+<h3 id="sources.eventing.knative.dev/v1alpha1.ApiServerResource">ApiServerResource
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2fsources%2fv1alpha1.ApiServerSourceSpec">ApiServerSourceSpec</a>)
+<a href="#sources.eventing.knative.dev/v1alpha1.ApiServerSourceSpec">ApiServerSourceSpec</a>)
 </p>
 <p>
 <p>ApiServerResource defines the resource to watch</p>
@@ -3581,11 +3581,11 @@ bool
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/sources/v1alpha1.ApiServerSourceSpec">ApiServerSourceSpec
+<h3 id="sources.eventing.knative.dev/v1alpha1.ApiServerSourceSpec">ApiServerSourceSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2fsources%2fv1alpha1.ApiServerSource">ApiServerSource</a>)
+<a href="#sources.eventing.knative.dev/v1alpha1.ApiServerSource">ApiServerSource</a>)
 </p>
 <p>
 <p>ApiServerSourceSpec defines the desired state of ApiServerSource</p>
@@ -3602,8 +3602,8 @@ bool
 <td>
 <code>resources</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/sources/v1alpha1.ApiServerResource">
-[][]github.com/knative/eventing/pkg/apis/sources/v1alpha1.ApiServerResource
+<a href="#sources.eventing.knative.dev/v1alpha1.ApiServerResource">
+[]ApiServerResource
 </a>
 </em>
 </td>
@@ -3653,11 +3653,11 @@ string
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/sources/v1alpha1.ApiServerSourceStatus">ApiServerSourceStatus
+<h3 id="sources.eventing.knative.dev/v1alpha1.ApiServerSourceStatus">ApiServerSourceStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2fsources%2fv1alpha1.ApiServerSource">ApiServerSource</a>)
+<a href="#sources.eventing.knative.dev/v1alpha1.ApiServerSource">ApiServerSource</a>)
 </p>
 <p>
 <p>ApiServerSourceStatus defines the observed state of ApiServerSource</p>
@@ -3702,11 +3702,11 @@ string
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/sources/v1alpha1.ContainerSourceSpec">ContainerSourceSpec
+<h3 id="sources.eventing.knative.dev/v1alpha1.ContainerSourceSpec">ContainerSourceSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2fsources%2fv1alpha1.ContainerSource">ContainerSource</a>)
+<a href="#sources.eventing.knative.dev/v1alpha1.ContainerSource">ContainerSource</a>)
 </p>
 <p>
 <p>ContainerSourceSpec defines the desired state of ContainerSource</p>
@@ -3807,11 +3807,11 @@ Kubernetes core/v1.ObjectReference
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/sources/v1alpha1.ContainerSourceStatus">ContainerSourceStatus
+<h3 id="sources.eventing.knative.dev/v1alpha1.ContainerSourceStatus">ContainerSourceStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2fsources%2fv1alpha1.ContainerSource">ContainerSource</a>)
+<a href="#sources.eventing.knative.dev/v1alpha1.ContainerSource">ContainerSource</a>)
 </p>
 <p>
 <p>ContainerSourceStatus defines the observed state of ContainerSource</p>
@@ -3856,11 +3856,11 @@ string
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/sources/v1alpha1.CronJobLimitsSpec">CronJobLimitsSpec
+<h3 id="sources.eventing.knative.dev/v1alpha1.CronJobLimitsSpec">CronJobLimitsSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2fsources%2fv1alpha1.CronJobResourceSpec">CronJobResourceSpec</a>)
+<a href="#sources.eventing.knative.dev/v1alpha1.CronJobResourceSpec">CronJobResourceSpec</a>)
 </p>
 <p>
 </p>
@@ -3894,11 +3894,11 @@ string
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/sources/v1alpha1.CronJobRequestsSpec">CronJobRequestsSpec
+<h3 id="sources.eventing.knative.dev/v1alpha1.CronJobRequestsSpec">CronJobRequestsSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2fsources%2fv1alpha1.CronJobResourceSpec">CronJobResourceSpec</a>)
+<a href="#sources.eventing.knative.dev/v1alpha1.CronJobResourceSpec">CronJobResourceSpec</a>)
 </p>
 <p>
 </p>
@@ -3932,11 +3932,11 @@ string
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/sources/v1alpha1.CronJobResourceSpec">CronJobResourceSpec
+<h3 id="sources.eventing.knative.dev/v1alpha1.CronJobResourceSpec">CronJobResourceSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2fsources%2fv1alpha1.CronJobSourceSpec">CronJobSourceSpec</a>)
+<a href="#sources.eventing.knative.dev/v1alpha1.CronJobSourceSpec">CronJobSourceSpec</a>)
 </p>
 <p>
 </p>
@@ -3952,7 +3952,7 @@ string
 <td>
 <code>requests</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/sources/v1alpha1.CronJobRequestsSpec">
+<a href="#sources.eventing.knative.dev/v1alpha1.CronJobRequestsSpec">
 CronJobRequestsSpec
 </a>
 </em>
@@ -3964,7 +3964,7 @@ CronJobRequestsSpec
 <td>
 <code>limits</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/sources/v1alpha1.CronJobLimitsSpec">
+<a href="#sources.eventing.knative.dev/v1alpha1.CronJobLimitsSpec">
 CronJobLimitsSpec
 </a>
 </em>
@@ -3974,11 +3974,11 @@ CronJobLimitsSpec
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/sources/v1alpha1.CronJobSourceSpec">CronJobSourceSpec
+<h3 id="sources.eventing.knative.dev/v1alpha1.CronJobSourceSpec">CronJobSourceSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2fsources%2fv1alpha1.CronJobSource">CronJobSource</a>)
+<a href="#sources.eventing.knative.dev/v1alpha1.CronJobSource">CronJobSource</a>)
 </p>
 <p>
 <p>CronJobSourceSpec defines the desired state of the CronJobSource.</p>
@@ -4043,7 +4043,7 @@ Adapter Deployment.</p>
 <td>
 <code>resources</code></br>
 <em>
-<a href="#github.com/knative/eventing/pkg/apis/sources/v1alpha1.CronJobResourceSpec">
+<a href="#sources.eventing.knative.dev/v1alpha1.CronJobResourceSpec">
 CronJobResourceSpec
 </a>
 </em>
@@ -4054,11 +4054,11 @@ CronJobResourceSpec
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/eventing/pkg/apis/sources/v1alpha1.CronJobSourceStatus">CronJobSourceStatus
+<h3 id="sources.eventing.knative.dev/v1alpha1.CronJobSourceStatus">CronJobSourceStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2feventing%2fpkg%2fapis%2fsources%2fv1alpha1.CronJobSource">CronJobSource</a>)
+<a href="#sources.eventing.knative.dev/v1alpha1.CronJobSource">CronJobSource</a>)
 </p>
 <p>
 <p>CronJobSourceStatus defines the observed state of CronJobSource.</p>
