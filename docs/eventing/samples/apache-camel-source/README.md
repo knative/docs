@@ -72,7 +72,7 @@ seconds.
 
 Another useful component available with Camel is the Telegram component. It can
 be used to forward messages of a [Telegram](https://telegram.org/) chat into
-Knative channels, as events.
+Knative channels as events.
 
 Before using the provided Telegram `CamelSource` example, you need to follow the
 instructions on the Telegram website for creating a
