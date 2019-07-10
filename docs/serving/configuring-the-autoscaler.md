@@ -24,18 +24,18 @@ You can view the default contents of this ConfigMap using the following command.
 apiVersion: v1
 kind: ConfigMap
 metadata:
- name: config-autoscaler
- namespace: knative-serving
+  name: config-autoscaler
+  namespace: knative-serving
 data:
- container-concurrency-target-default: 100
- container-concurrency-target-percentage: 1.0
- enable-scale-to-zero: true
- enable-vertical-pod-autoscaling: false
- max-scale-up-rate: 10
- panic-window: 6s
- scale-to-zero-grace-period: 30s
- stable-window: 60s
- tick-interval: 2s
+  container-concurrency-target-default: 100
+  container-concurrency-target-percentage: 1.0
+  enable-scale-to-zero: true
+  enable-vertical-pod-autoscaling: false
+  max-scale-up-rate: 10
+  panic-window: 6s
+  scale-to-zero-grace-period: 30s
+  stable-window: 60s
+  tick-interval: 2s
 ```
 
 # Configuring scale to zero for KPA
