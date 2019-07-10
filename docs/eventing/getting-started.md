@@ -7,28 +7,21 @@ type: "docs"
 
 This getting started guide will walk you through all the steps involved in a typical Knative workflow. You will learn how to create, send, and verify Knative events.
 
-## Before You Begin
+## Before you begin
 
 You need:
 
-- A Kubernetes cluster with [Knative installed](https://knative.dev/docs/install/index.html).
-- All Knative Eventing components installed. Information on how to install the Eventing components is [here](https://knative.dev/docs/install/knative-custom-install/). 
+- A Kubernetes cluster with [Knative Eventing installed](https://knative.dev/docs/install/index.html). 
 
-## Set Up Components
+## Set up components
 
 Before you start to send Knative events, you need to create the components needed to move the events. In this guide, you will be creating components individually, but you can also create components by deploying a [single YAML file](https://raw.githubusercontent.com/akashrv/docs/qs/docs/eventing/samples/hello-world/quick-start.yaml).
 
-### Configure Namespace For Eventing
+### Configure namespace for eventing
 
-First, create the `namespace`. In this guide, you will be using the default `namespace`.
+This guide uses the default `namespace`, so there is no need to create a new one.
 
-1. Create the `namespace` using this command:
-
-```sh
-kubectl create namespace default
-```
-
-2. Set up up the `namespace` for Knative Eventing. To set up the `namespace`, add a label to your `namespace` with this command:
+1. Set up up the `namespace` for Knative Eventing. To set up the `namespace`, add a label to your `namespace` with this command:
 
 ```sh
 kubectl label namespace default knative-eventing-injection=enabled
@@ -36,7 +29,7 @@ kubectl label namespace default knative-eventing-injection=enabled
 
 This label triggers Knative to add `Service Accounts`, `Role Bindings`, and a `Broker` to your `namespace`. You'll learn more about `Brokers` in the next section.
 
-### Examine Broker For Issues
+### Examine broker for issues
 
 The `Broker` ensures that every event sent to the `Broker` by event producers is sent to all interested `event consumers`. While you created the `Broker` when you labeled your `namespace` as ready for eventing, it is important to verify that your `Broker` is working correctly.
 
@@ -57,15 +50,13 @@ default   True             default-Broker.default.svc.cluster.local   1m
 
 Now your `Broker` is ready to manage your events.
 
-### Create Event Consumers
+### Create event consumers
 
 These components receive the events sent by event producers (you'll create those a little later). You'll create two event consumers, `foo` and `bar`, so that you can see how to selectively send events to distinct event consumers later.
 
 
 
-To create the `foo` component:
-
-1. Copy the following code:
+1. To create the `foo` component, enter the following command:
 
 ```sh
 kubectl -n default apply -f - << END
@@ -105,12 +96,7 @@ spec:
 END
 ```
 
-2. Paste into your terminal window.
-
-
-To create the `bar` component:
-
-1. Copy the following code:
+2. To create the `bar` component, enter the following command:
 
 ```sh
 kubectl -n default apply -f - << END
@@ -150,9 +136,7 @@ spec:
 END
 ```
 
-2. Paste into your terminal window.
-
-Just like the `Broker`, verify that the event consumers are working with the following command:
+3. Just like the `Broker`, verify that the event consumers are working with the following command:
 
 ```sh
 kubectl -n default get deployments foo-display bar-display
@@ -162,20 +146,18 @@ This should return:
 
 ```sh
 NAME           DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-foo-display    1         1         1            1           16m
+foo-display    1         1         1            1           26s
 NAME           DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-bar-display    1         1         1            1           16m
+bar-display    1         1         1            1           16s
 ```
 
 The number in the **DESIRED** column should match the number in the **AVAILABLE** column. This may take a few minutes. If after two minutes the numbers still do not match the example, then see the [Debugging Guide](./debugging/README.md).
 
-### Create Triggers
+### Create `Triggers`
 
-`Triggers` allow events to register interest with a `Broker`. A `Trigger` is split into two parts: the `Filter`, which tracks interested events, and the `Subscriber`, which determines where the event should be sent. 
+`Triggers` allow events to register interest with a `Broker`. A `Trigger` is split into two parts: the `Filter`, which tracks interested events, and the `Subscriber`, which determines where the event should be sent. Triggers can search for various types of events:
 
-For example, to create a `Trigger` to send events to `foo`:
-
-1. Copy the following code:
+1. To create a `Trigger` to send events to `foo`, enter the following command:
 
 ```sh
 kubectl -n default apply -f - << END
@@ -195,13 +177,9 @@ spec:
 END
 ```
 
-2. Paste into your terminal window.
-
 Take notice of the attributes of the `Filter`. Every valid `CloudEvent` has attributes named `Type` and `Source`. Triggers allow you to specify interest in specific `CloudEvents` by matching the `CloudEvent's` `Type` and `Source`. Here, the command searches for all `CloudEvents` of type `foo`, regardless of their `Source`.
 
-Add another `Trigger` to send events to `bar`:
-
-1. Copy the following code:
+2. To add another `Trigger` to send events to `bar`, enter the following command:
 
 ```sh
 kubectl -n default apply -f - << END
@@ -221,9 +199,6 @@ spec:
 END
 ```
 
-2. Paste into your terminal window.
-
-
 3. Verify that the `Triggers` are running correctly with the following command:
 
 ```sh
@@ -242,7 +217,7 @@ You now have a `namespace` with a `Broker` inside it. You also have a pair of ev
 
 
 
-### Create Event Producers
+### Create event producers
 
 Since this guide uses manual curl requests to send events, the final component you will need to make is an event producer called a `Pod`. The `Broker` is only exposed from within the Kubernetes cluster, so you will run the curl request from there.
 
@@ -334,7 +309,7 @@ You should receive a `202 Accepted` response.
 
 If everything has been done correctly, you should have sent 3 `CloudEvents`. You will verify that the events were received correctly in the next section.
 
-## Verify Events Were Received 
+## Verify events were received 
 
 After sending events, verify that the events were received by the appropriate `Subscribers`.
 
@@ -422,7 +397,7 @@ This should return:
 
 If you do not see these results, see the [Debugging Guide](./debugging/README.md) for more information.
 
-## Clean Up
+## Clean up
 
 Delete the namespace to conserve resources:
 
@@ -430,7 +405,7 @@ Delete the namespace to conserve resources:
 kubectl delete namespace default
 ```
 
-## What’s Next 
+## What’s next 
 
 You've learned the basics of the Knative Eventing workflow. Here are some additional resources to help you continue to build with the Knative Eventing component.
 
