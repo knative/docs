@@ -3,9 +3,6 @@ title: "Knative contribution guidelines"
 linkTitle: "Contributing"
 weight: 20
 type: "docs"
-menu:
-  main:
-    weight: 60
 aliases:
   - /docs/contribution-guidelines/
 ---
