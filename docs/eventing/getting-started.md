@@ -21,7 +21,7 @@ Before you start to send Knative events, you need to create the components neede
 
 This guide uses the default `namespace`, so there is no need to create a new one.
 
-1. Set up up the `namespace` for Knative Eventing. To set up the `namespace`, add a label to your `namespace` with this command:
+1. Set up the `namespace` for Knative Eventing. To set up the `namespace`, add a label to your `namespace` with this command:
 
 ```sh
 kubectl label namespace default knative-eventing-injection=enabled
