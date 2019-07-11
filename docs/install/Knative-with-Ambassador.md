@@ -5,8 +5,8 @@ weight: 15
 type: "docs"
 ---
 
-[Ambassador](https://www.getambassador.io/) is a popular, Kubernetes native,
- open-source API gateway and the most popular distrbution of 
+[Ambassador](https://www.getambassador.io/) is a popular Kubernetes-native,
+ open-source API gateway built on
  [Envoy Proxy](https://www.envoyproxy.io/).
 
 This guide walks you through the installation of the latest version of Knative
@@ -30,10 +30,9 @@ Knative was originally built using Istio to handle cluster networking. While
 the Istio gateway provides the functionality needed to serve requests to your 
 application, installing a service mesh to handle north-south traffic carries 
 some operational overhead with it. Ambassador provides a way to get traffic to 
-your Knative application without the overhead of a full service mesh.
+your Knative application without the overhead or complexity of a full service mesh.
 
-You can easily install Ambassador as your ingress controller using two 
-`kubectl` commands:
+You can install Ambassador with `kubectl`:
 
 ```
 kubectl apply -f https://getambassador.io/yaml/ambassador/ambassador-knative.yaml
