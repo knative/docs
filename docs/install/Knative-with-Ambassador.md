@@ -27,9 +27,9 @@ This guide assumes that you have already
 ## Install Ambassador
 
 Knative was originally built using Istio to handle cluster networking. While 
-the Istio gateway provides the functionality we need to serve requests to our 
-application, needing to install a service mesh to handle north-south traffic 
-brings some operational overhead. Ambassador provides a way to get traffic to 
+the Istio gateway provides the functionality needed to serve requests to your 
+application, installing a service mesh to handle north-south traffic carries 
+some operational overhead with it. Ambassador provides a way to get traffic to 
 your Knative application without the overhead of a full service mesh.
 
 You can easily install Ambassador as your ingress controller using two 
@@ -42,7 +42,7 @@ kubectl apply -f https://getambassador.io/yaml/ambassador/ambassador-service.yam
 
 Ambassador will watch for and create routes based off of Knative 
 `ClusterIngress` resources. These will then be accessible over the external IP 
-address of the Ambassador service we just created.
+address of the Ambassador service you just created.
 
 Get this external IP address and save it in a variable named `AMBASSADOR_IP`
 
@@ -57,8 +57,8 @@ $ AMBASSADOR_IP=35.229.120.99
 
 ## Install Knative
 
-Now that we have Ambassador installed to handle ingress to our serverless 
-applications we need to install Knative to manage them.
+Now that Ambassador is installed to handle ingress to your serverless 
+applications, you need to install Knative to manage them.
 
 The following commands install all available Knative components as well as the 
 standard set of observability plugins. To customize your Knative installation, 
@@ -103,12 +103,12 @@ race conditions during the install, which cause intermittent errors:
 
 ## Deploying an Application
 
-Now that we have Knative and Ambassador running, we can use them to manage and 
+Now that Knative and Ambassador are running, you can use them to manage and 
 route traffic to a serverless application.
 
 1. Create a `Knative Service`
 
-   For this demo, we will use a simple helloworld application written in go. 
+   For this demo, a simple helloworld application written in go will be used.
    Copy the YAML below to a file called `helloworld-go.yaml` and apply it 
    with `kubectl`
 
@@ -137,7 +137,7 @@ route traffic to a serverless application.
     `Knative Service`s are exposed via a `Host` header assigned by Knative. 
     By default, Knative will assign the 
     `Host`: `{service-name}.{namespace}.example.com`. You can verify this by 
-    checking the `EXTERNAL-IP` of the `helloworld-go` service we created above.
+    checking the `EXTERNAL-IP` of the `helloworld-go` service created above.
 
     ```
     $ kubectl get service helloworld-go
@@ -147,7 +147,7 @@ route traffic to a serverless application.
     ```
 
     Ambassador will use this `Host` header to route requests to the correct 
-    service. We can send a request to the `helloworld-go` service with curl 
+    service. You can send a request to the `helloworld-go` service with curl 
     using the `Host` and `AMBASSADOR_IP` from above:
 
     ```
