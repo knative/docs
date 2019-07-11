@@ -34,7 +34,7 @@ You can find [guides for other platforms here](./README.md).
 > **NOTE:** Use the **Filter by Keyword** box to help you find the Knative
 > Serving operator in the catalog.
 
-![KSO Tile](images/knative_serving_tile_highlighted.png)
+![KSO Tile](./images/knative_serving_tile_highlighted.png)
 
 2. A **Show Community Operator** dialog box will open. Click **Continue** to
    proceed.
@@ -42,34 +42,34 @@ You can find [guides for other platforms here](./README.md).
 3. The **Knative Serving Operator** descriptor screen will appear. Click
    **Install**.
 
-![KSO Install Screen](images/knative_serving_operator_screen.png)
+![KSO Install Screen](./images/knative_serving_operator_screen.png)
 
 4. On the **Create the Operator Subscription** screen, create a new subscription
    by clicking on the **Subscribe** button. This will install the Knative
    Serving Operator in the project `openshift-operators` and Knative Serving in
    the `knative-serving` project.
 
-![KSO Namespaces Default](images/knative_serving_namespaces_default.png)
+![KSO Namespaces Default](./images/knative_serving_namespaces_default.png)
 
 > **NOTE:** The Operator Lifecycle Manager (OLM) installs the operator, which
 > will automatically install Knative. This installation will create the
 > `knative-serving`, `istio-operator`, and `istio-system` namespaces.
 
 5. Verify the subscription status for the installation operator, by viewing the
-   **Subscription Overview**. The **UPGRADE STATUS** will update from **0
-   Installing** to **1 Installed**.
+   **Subscription Overview**. The **UPGRADE STATUS** will update from `0
+   Installing` to `1 Installed`.
 
 > **NOTE:** The screen will update after a few minutes. Wait for the
 > `knative-serving` namespace to appear in the project drop-down menu. Refresh
 > the page if needed.
 
-![KSO Upgrade Status](images/knative_serving_installed_sub.png)
+![KSO Upgrade Status](./images/knative_serving_installed_sub.png)
 
 6. Knative Serving is now installed. Navigate to **Catalog > Installed
    Operators** to confirm the operator is installed. Click on
    **knative-serving** to view the install status.
 
-![KSO installed](images/knative_serving_installed_operator.png)
+![KSO installed](./images/knative_serving_installed_operator.png)
 
 ## Deploying an app
 
@@ -108,7 +108,7 @@ export IP_ADDRESS=$(oc get node  -o 'jsonpath={.items[0].status.addresses[0].add
 
 2. Click on the **Knative Serving Operator** tile.
 
-![KSO Uninstall Tile](images/knative_serving_uninstall_tile.png)
+![KSO Uninstall Tile](./images/knative_serving_uninstall_tile.png)
 
 > **NOTE:** The operator tile will indicate it is installed.
 
@@ -118,7 +118,7 @@ export IP_ADDRESS=$(oc get node  -o 'jsonpath={.items[0].status.addresses[0].add
 4. Once the **Knative Serving Operator** descriptor screen appears, click
    **Uninstall**.
 
-![KSO Uninstall](images/knative_serving_uninstall_operator.png)
+![KSO Uninstall](./images/knative_serving_uninstall_operator.png)
 
 5. Select **Also completely remove the Operator from the selected namespace**,
    in the **Remove Operator Subscription** dialog box.
