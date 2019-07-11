@@ -1,10 +1,10 @@
 ---
-title: "Using the custom-metrics API"
+title: "Custom-metrics API"
 weight: 10
 type: "docs"
 ---
 
-The `custom-metrics` API is installed by default when you install Knative Serving.
+The `custom-metrics` API is installed by default when you install Knative Serving, and allows users to configure concurrency based scaling when using the Horizontal Pod Autoscaler (HPA).
 
 >**IMPORTANT:** If you already have an existing `custom-metrics` API implementation in your cluster, you must delete this so that Knative Serving can use the default Knative Serving installation of the `custom-metrics` API. Enabling both implementations can cause issues.
 >
