@@ -1,3 +1,10 @@
+---
+title: "Hello World - Kotlin"
+linkTitle: "Kotlin"
+weight: 1
+type: "docs"
+---
+
 A simple web app written in Kotlin using [Ktor](https://ktor.io/) that you can
 use for testing. It reads in an env variable `TARGET` and prints "Hello
 \${TARGET}". If TARGET is not specified, it will use "World" as the TARGET.

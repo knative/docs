@@ -1,3 +1,10 @@
+---
+title: "Hello World - Spark Java Framework"
+linkTitle: "Java (Spark)"
+weight: 1
+type: "docs"
+---
+
 A simple web app written in Java using Spark Java Framework that you can use for
 testing.
 

@@ -1,3 +1,10 @@
+---
+title: "gRPC server - Go"
+#linkTitle: ""
+weight: 1
+type: "docs"
+---
+
 A simple gRPC server written in Go that you can use for testing.
 
 ## Prerequisites
