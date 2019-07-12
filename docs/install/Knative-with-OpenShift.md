@@ -56,8 +56,8 @@ You can find [guides for other platforms here](./README.md).
 > `knative-serving`, `istio-operator`, and `istio-system` namespaces.
 
 5. Verify the subscription status for the installation operator, by viewing the
-   **Subscription Overview**. The **UPGRADE STATUS** will update from `0
-   Installing` to `1 Installed`.
+   **Subscription Overview**. The **UPGRADE STATUS** will update from
+   `0 Installing` to `1 Installed`.
 
 > **NOTE:** The screen will update after a few minutes. Wait for the
 > `knative-serving` namespace to appear in the project drop-down menu. Refresh
