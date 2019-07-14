@@ -1,5 +1,5 @@
 These samples show how to configure a Camel Source. It is an Event Source that
-can leverage one of the[250+ Apache Camel components](https://github.com/apache/camel/tree/master/components)
+can leverage one of the [250+ Apache Camel components](https://github.com/apache/camel/tree/master/components)
 for generating events.
 
 ## Prerequisites
@@ -17,7 +17,7 @@ for generating events.
    Documentation includes specific instructions for common Kubernetes
    environments, including development clusters.
 
-1. Download Kail binaries for Linux or OSX, which can be found on the [latest release](https://github.com/boz/kail/releases/latest) page. You can use `kail` instead of `kubectl logs` to tail the logs of the subscriber.
+1.(Optional) Download Kail binaries for Linux or OSX, which can be found on the [latest release](https://github.com/boz/kail/releases/latest) page. You can use `kail` instead of `kubectl logs` to tail the logs of the subscriber.
 
 1. Install the Camel Source from the `camel.yaml` in the [Eventing Sources release page](https://github.com/knative/eventing-contrib/releases):
 
