@@ -118,7 +118,7 @@ the recommended configuration for a cluster is:
 1. Create a Kubernetes cluster on GKE with the required specifications:
 
 > Note: If this setup is for development, or a non-Istio networking layer (e.g.
-> [Ambassador](https://getambassador.io/) or [Gloo](./Knative-with-Gloo.md)) 
+> [Ambassador](./Knative-with-Ambassador.md) or [Gloo](./Knative-with-Gloo.md)) 
 > will be used, then you can remove the `--addons` line below.
 
 > Note: If you want to use [Auto TLS feature](../serving/using-auto-tls.md), you
