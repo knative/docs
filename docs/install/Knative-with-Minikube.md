@@ -24,9 +24,9 @@ v1.12 or newer.
    version. You need v1.10 or newer. If your `kubectl` is older, follow the next
    step to install a newer version.
 
-1. [Install the kubectl CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl).
+2. [Install the kubectl CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl).
 
-1. [Install and configure minikube](https://github.com/kubernetes/minikube#installation)
+3. [Install and configure minikube](https://github.com/kubernetes/minikube#installation)
    version v0.28.1 or later with a
    [VM driver](https://github.com/kubernetes/minikube#requirements), e.g. `kvm2`
    on Linux or `hyperkit` on macOS.
@@ -115,7 +115,7 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
    prevent modifications to Eventing Source resources, those changes will not be
    completed until the upgrade process finishes.
 
-1. To install Knative, first install the CRDs by running the `kubectl apply`
+2. To install Knative, first install the CRDs by running the `kubectl apply`
    command once with the `-l knative.dev/crd-install=true` flag. This prevents
    race conditions during the install, which cause intermittent errors:
 
@@ -127,7 +127,7 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
    --filename https://github.com/knative/serving/releases/download/v0.7.0/monitoring.yaml
    ```
 
-1. To complete the install of Knative and its dependencies, run the
+3. To complete the install of Knative and its dependencies, run the
    `kubectl apply` command again, this time without the `--selector` flag, to
    complete the install of Knative and its dependencies:
 
@@ -149,7 +149,7 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
    >   statement to install the controller. Otherwise, you can choose to install
    >   the auto certificates feature and controller at a later time.
 
-1. Monitor the Knative components until all of the components show a `STATUS` of
+4. Monitor the Knative components until all of the components show a `STATUS` of
    `Running`:
 
    ```shell
