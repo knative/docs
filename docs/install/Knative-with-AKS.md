@@ -133,7 +133,8 @@ recommended configuration for a cluster is:
 
 ## Installing Istio
 
-> Note: [Ambassador](https://www.getambassador.io/) and [Gloo](https://gloo.solo.io/) are available as an alternative to Istio.
+> Note: [Ambassador](https://www.getambassador.io/) and
+> [Gloo](https://gloo.solo.io/) are available as an alternative to Istio.
 > [Click here](./Knative-with-Ambassador.md) to install Knative with Ambassador.
 > [Click here](./Knative-with-Gloo.md) to install Knative with Gloo.
 
