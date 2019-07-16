@@ -67,22 +67,18 @@ see Performing a Custom Knative Installation.
     command once with the `-l knative.dev/crd-install=true` flag. This prevents
     race conditions during the install, which cause intermittent errors:
 
-        ```
         kubectl apply -l knative.dev/crd-install=true \
         --filename https://github.com/knative/serving/releases/download/v0.7.1/serving.yaml \
         --filename https://github.com/knative/build/releases/download/v0.7.1/build.yaml \
         --filename https://github.com/knative/serving/releases/download/v0.7.1/monitoring.yaml
-        ```
 
 2.  To complete the install of Knative and it's dependencies, run the
     `kubectl apply` command again, this time without the
     `-l knative.dev/crd-install=true`:
 
-        ```
         kubectl apply --filename https://github.com/knative/serving/releases/download/v0.7.1 serving.yaml --selector networking.knative.dev/certificate-provider!=cert-manager \
         --filename https://github.com/knative/build/releases/download/v0.7.1/build.yaml \
         --filename https://github.com/knative/serving/releases/download/v0.7.1/monitoring.yaml
-        ```
 
     > **Notes**:
     >
