@@ -52,7 +52,7 @@ We also use a very simple
 trivial transformation of the incoming events to demonstrate they have passed
 through each stage.
 
-### (Sequence with no reply (terminal last Step))[./samples/sequence/sequence-terminal/README.md)
+### [Sequence with no reply (terminal last Step)](./samples/sequence/sequence-terminal/README.md)
 
 For the first example, we'll use a 3 Step `Sequence` that is wired directly into
 the `CronJobSource`. Each of the steps simply tacks on "- Handled by
