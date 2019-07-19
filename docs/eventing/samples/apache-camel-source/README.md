@@ -50,9 +50,9 @@ source.
 
 If you want, you can customize the source behavior using options available in
 the Apache Camel documentation for the
-[timer component](https://github.com/apache/camel/blob/master/camel-core/src/main/docs/timer-component.adoc).
+[timer component](https://github.com/apache/camel/blob/master/components/camel-timer/src/main/docs/timer-component.adoc).
 All Camel components are documented in the
-[Apache Camel github repository](https://github.com/apache/camel/tree/master/components).
+[Apache Camel GitHub repository](https://github.com/apache/camel/tree/master/components).
 
 Install the [timer CamelSource](source_timer.yaml) from source:
 
