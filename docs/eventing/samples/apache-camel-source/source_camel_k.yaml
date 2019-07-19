@@ -1,0 +1,24 @@
+# Apache Camel K Source
+#
+# Camel K documentation: https://github.com/apache/camel-k
+#
+#
+apiVersion: sources.eventing.knative.dev/v1alpha1
+kind: CamelSource
+metadata:
+  name: camel-k-source
+spec:
+  source:
+    integration:
+      sources:
+      - name: file.groovy
+        content:
+          from("timer:tick?period=5s")
+            .log("Fetching quote of the day")
+            .to("https4://gist.githubusercontent.com/nicolaferraro/e3c72ace3c751f9f88273896611ce5fe/raw/3b6f54060bacb56b6719b7386a4645cb59ad6cc1/quote.json")
+            .setHeader("Content-Type").constant("application/json")
+            .to("knative:endpoint/sink?cloudEventsType=org.apache.camel.quote")
+  sink:
+    apiVersion: eventing.knative.dev/v1alpha1
+    kind: Channel
+    name: camel-test
