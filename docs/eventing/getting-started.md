@@ -5,7 +5,7 @@ weight: 9
 type: "docs"
 ---
 
-This getting started guide will walk you through all the steps involved in a typical Knative workflow. You will learn how to create, send, and verify Knative events.
+This getting started guide will walk you through all the steps involved in a typical Knative workflow. You will learn how to create, send, and verify events in Knative.
 
 ## Before you begin
 
@@ -13,13 +13,16 @@ You need:
 
 - A Kubernetes cluster with [Knative Eventing installed](https://knative.dev/docs/install/index.html). 
 
-## Set up components
+## Setting up Eventing Subcomponents
 
-Before you start to send Knative events, you need to create the components needed to move the events. In this guide, you will be creating components individually, but you can also create components by deploying a [single YAML file](https://raw.githubusercontent.com/akashrv/docs/qs/docs/eventing/samples/hello-world/quick-start.yaml).
+Before you start to send events, you need to create the components needed to move the events. In this guide, you will be creating components individually, but you can also create components by deploying a [single YAML file](https://raw.githubusercontent.com/akashrv/docs/qs/docs/eventing/samples/hello-world/quick-start.yaml).
 
-### Configure namespace for eventing
+### Configuring namespace for eventing
 
-This guide uses the default `namespace`, so there is no need to create a new one.
+In most Knative tutorials, you will operate inside of a `namespace`. A `namespace` groups together subcomponents so that you can easily organize them.
+
+This guide uses the default `namespace`, so there is no need to create one. 
+
 
 1. Set up the `namespace` for Knative Eventing. To set up the `namespace`, add a label to your `namespace` with this command:
 
@@ -27,11 +30,13 @@ This guide uses the default `namespace`, so there is no need to create a new one
 kubectl label namespace default knative-eventing-injection=enabled
 ```
 
-This label triggers Knative to add `Service Accounts`, `Role Bindings`, and a `Broker` to your `namespace`. You'll learn more about `Brokers` in the next section.
+Labeling a `namespace` adds a specific organizational structure to the `namespace`. The `knative-eventing-injection` label triggers Knative to add `Service Accounts`, `Role Bindings`, and a `Broker` to your `namespace`. Without this label, Knative will not know how to manage your events.
 
-### Examine broker for issues
+In the next section, you'll learn more about one of the subcompoents added to your namespace, the `Broker`.
 
-The `Broker` ensures that every event sent to the `Broker` by event producers is sent to all interested `event consumers`. While you created the `Broker` when you labeled your `namespace` as ready for eventing, it is important to verify that your `Broker` is working correctly.
+### Validating that the `Broker` is running
+
+The `Broker` ensures that every event sent by `event producers` is sent to the correct `event consumers`. While you created the `Broker` when you labeled your `namespace` as ready for eventing, it is important to verify that your `Broker` is working correctly. In this guide, you will use the default broker.
 
 1. Use the following command to verify that the `Broker` is in a healthy state:
 
@@ -46,17 +51,19 @@ NAME      READY   REASON   HOSTNAME                                             
 default   True             default-Broker.default.svc.cluster.local   1m
 ```
 
+When the `Broker` is **READY**, it can begin to manage the events it receives.
+
 2. If the **READY** column reads **False**, wait 2 minutes and repeat Step 1. If the **READY** column still reads **False**, see the [Debugging Guide](./debugging/README.md) to troubleshoot the issue.
 
 Now your `Broker` is ready to manage your events.
 
-### Create event consumers
+### Creating event consumers
 
-These components receive the events sent by event producers (you'll create those a little later). You'll create two event consumers, `foo` and `bar`, so that you can see how to selectively send events to distinct event consumers later.
+These subcomponents receive the events sent by event producers (you'll create those a little later). You'll create two event consumers, `foo` and `bar`, so that you can see how to selectively send events to them later.
 
 
 
-1. To create the `foo` component, enter the following command:
+1. To create the `foo-display` subcomponent, enter the following command:
 
 ```sh
 kubectl -n default apply -f - << END
@@ -96,7 +103,7 @@ spec:
 END
 ```
 
-2. To create the `bar` component, enter the following command:
+2. To create the `bar-display` subcomponent, enter the following command:
 
 ```sh
 kubectl -n default apply -f - << END
@@ -153,11 +160,11 @@ bar-display    1         1         1            1           16s
 
 The number in the **DESIRED** column should match the number in the **AVAILABLE** column. This may take a few minutes. If after two minutes the numbers still do not match the example, then see the [Debugging Guide](./debugging/README.md).
 
-### Create `Triggers`
+### Creating `Triggers`
 
 `Triggers` allow events to register interest with a `Broker`. A `Trigger` is split into two parts: the `Filter`, which tracks interested events, and the `Subscriber`, which determines where the event should be sent. Triggers can search for various types of events:
 
-1. To create a `Trigger` to send events to `foo`, enter the following command:
+1. To create the first `Trigger` enter the following command:
 
 ```sh
 kubectl -n default apply -f - << END
@@ -177,9 +184,11 @@ spec:
 END
 ```
 
-Take notice of the attributes of the `Filter`. Every valid `CloudEvent` has attributes named `Type` and `Source`. Triggers allow you to specify interest in specific `CloudEvents` by matching the `CloudEvent's` `Type` and `Source`. Here, the command searches for all `CloudEvents` of type `foo`, regardless of their `Source`.
+Take notice of the attributes of the `Filter`. Every valid `CloudEvent` has attributes named `Type` and `Source`. Triggers allow you to specify interest in specific `CloudEvents` by matching the `CloudEvent's` `Type` and `Source`. 
 
-2. To add another `Trigger` to send events to `bar`, enter the following command:
+In this case, the `Trigger` you created searches for all `CloudEvents` of type `foo` and sends them to the `event consumer` `foo-display`.
+
+2. To add the second `Trigger`, enter the following command:
 
 ```sh
 kubectl -n default apply -f - << END
@@ -199,6 +208,8 @@ spec:
 END
 ```
 
+Here, the command creates a `Trigger` that searches for all `CloudEvents` of source `bar` and sends them to the `event consumer` `bar-display`.
+
 3. Verify that the `Triggers` are running correctly with the following command:
 
 ```sh
@@ -217,9 +228,9 @@ You now have a `namespace` with a `Broker` inside it. You also have a pair of ev
 
 
 
-### Create event producers
+### Creating event producers
 
-Since this guide uses manual curl requests to send events, the final component you will need to make is an event producer called a `Pod`. The `Broker` is only exposed from within the Kubernetes cluster, so you will run the curl request from there.
+Since this guide uses manual curl requests to send events, the final subcomponent you will need to make is an event producer called a `Pod`. The `Broker` is only exposed from within the Kubernetes cluster, so you will run the curl request from there.
 
 1. Copy the following code:
 
@@ -247,7 +258,7 @@ END
 
 2. Paste into your terminal window.
 
-## Send CloudEvents to the Broker
+## Sending CloudEvents to the Broker
 
 Now that the Pod is created, you can create a CloudEvent by sending an HTTP request to the `Broker`.
 
@@ -259,7 +270,7 @@ kubectl -n default attach curl -it
 
 Now, you can make a curl request. To show the various types of events you can send, you will make three curl requests.
 
-1. To make a request to `foo`, paste the following in the SSH terminal:
+1. To make the first request, enter the following in the SSH terminal:
 
 ```sh
 curl -v "default-broker.default.svc.cluster.local" \
@@ -272,14 +283,17 @@ curl -v "default-broker.default.svc.cluster.local" \
   -d '{"msg":"Hello World event from Knative - Foo"}'
 ```
 
-You should receive a `202 Accepted` response.
+This creates a `CloudEvent` called `should-be-seen-by-foo` which has the `Type` `foo`. When event is sent to the `Broker`, the `Trigger` `foo-display` will activate and send it to the event consumer of the same name.
 
-2. To make a request to `bar`, paste the following in the SSH terminal:
+If the event has been received, you will receive a `202 Accepted` response.
+
+
+2. To make the second request, enter the following in the SSH terminal:
 
 ```sh
  curl -v "default-broker.default.svc.cluster.local" \
   -X POST \
-  -H "Ce-Id: should-be-seen-by-test" \
+  -H "Ce-Id: should-be-seen-by-bar" \
   -H "Ce-Specversion: 0.2" \
   -H "Ce-Type: anything-but-foo" \
   -H "Ce-Source: bar" \
@@ -287,9 +301,12 @@ You should receive a `202 Accepted` response.
   -d '{"msg":"Hello World event from Knative - Bar"}'
 ```
 
-You should receive a `202 Accepted` response.
+This creates a `CloudEvent` called `should-be-seen-by-bar` which has the `Source` `bar`. When the event is sent to the `Broker`, the `Trigger` `bar-display` will activate and send it to the event consumer of the same name.
 
-3. To make a request to `foo` and `bar`, paste the following in the SSH terminal:
+If the event has been received, you will receive a `202 Accepted` response.
+
+
+3. To make the third request, paste the following in the SSH terminal:
 
 ```sh
  curl -v "default-broker.default.svc.cluster.local" \
@@ -302,24 +319,26 @@ You should receive a `202 Accepted` response.
   -d '{"msg":"Hello World event from Knative - Both"}'
 ```
 
-You should receive a `202 Accepted` response.
+If the event has been received, you should receive a `202 Accepted` response.
 
+This creates a `CloudEvent` called `should-be-seen-by-test` which has the `Type` `foo` and the`Source` `bar`. When the event is sent to the `Broker`, the `Triggers` `foo-display` and `bar-display` will activate and send it to the event consumers of the same name.
 
 4. Exit SSH.
 
-If everything has been done correctly, you should have sent 3 `CloudEvents`. You will verify that the events were received correctly in the next section.
+If everything has been done correctly, you should have sent 2 `CloudEvents` to the `foo-display` event consumer and 2 `CloudEvents` to the `bar-display` event consumer. You will verify that these events were received in the next section.
 
-## Verify events were received 
+## Verifying events were received 
 
 After sending events, verify that the events were received by the appropriate `Subscribers`.
 
-1. Look at the logs for the `foo` event consumer with the following command:
+1. Look at the logs for the `foo-display` event consumer with the following command:
 
 ```sh
 kubectl -n default logs -l app=foo-display
 ```
 
-This should return: 
+
+The command shows the `Attributes` and `Data` of the events you sent to `foo-display`:
 
 ```sh
 ☁️  cloudevents.Event
@@ -354,13 +373,14 @@ Data,
   }
 ```
 
-2. Look at the logs for the `bar` event consumer with the following command:
+2. Look at the logs for the `bar-display` event consumer with the following command:
 
 ```sh
 kubectl -n default logs -l app=bar-display
 ```
 
-This should return: 
+The command shows the `Attributes` and `Data` of the events you sent to `bar-display`:
+
 
 ```sh
 ☁️  cloudevents.Event
@@ -369,7 +389,7 @@ This should return:
    specversion: 0.2
    type: anything-but-foo
    source: bar
-   id: should-be-seen-by-test
+   id: should-be-seen-by-bar
    time: 2019-05-20T17:59:49.044926148Z
    contenttype: application/json
  Extensions,
@@ -395,9 +415,9 @@ This should return:
    } 
 ```
 
-If you do not see these results, see the [Debugging Guide](./debugging/README.md) for more information.
+These results should match up with the CloudEvents you created in **Sending CloudEvents to the Broker**. If they do not, see the [Debugging Guide](./debugging/README.md) for more information.
 
-## Clean up
+## Cleaning up
 
 Delete the namespace to conserve resources:
 
