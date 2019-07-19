@@ -10,7 +10,6 @@ A simple gRPC server written in Go that you can use for testing.
 
   ```shell
   git clone -b "release-0.7" https://github.com/knative/docs knative-docs
-  cd knative-docs/docs/serving/samples/grpc-ping-go
   ```
 
 ## Build and run the gRPC server
@@ -29,6 +28,7 @@ Next, replace `{username}` in `sample.yaml` with your DockerHub username, and
 apply the yaml.
 
 ```shell
+$EDITOR docs/serving/samples/grpc-ping-go/sample.yaml
 kubectl apply --filename docs/serving/samples/grpc-ping-go/sample.yaml
 ```
 
