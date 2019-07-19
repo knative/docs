@@ -121,7 +121,7 @@ to the bot will be printed by the event display as a cloudevent.
 ### Run a Camel K Source
 
 For complex use cases that require multiple steps to be executed before event data is ready to be published, you can use Camel K sources.
-Camel K lets you use Camel DSL to design one or more routes that can define arbitrarily complex workflows before sending events to the target sink.
+Camel K lets you use Camel DSL to design one or more routes that can define complex workflows before sending events to the target sink.
 
 If you have previously deployed other CamelSources, to reduce noise in the event display, you can remove them all from the namespace:
 
