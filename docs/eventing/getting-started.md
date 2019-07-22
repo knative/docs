@@ -59,7 +59,7 @@ Now your `Broker` is ready to manage your events.
 
 ### Creating event consumers
 
-These subcomponents receive the events sent by event producers (you'll create those a little later). You'll create two event consumers, `foo` and `bar`, so that you can see how to selectively send events to them later.
+These subcomponents receive the events sent by event producers (you'll create those a little later). You'll create two event consumers, `foo-display` and `bar-display`, so that you can see how to selectively send events to different consumers later.
 
 
 
@@ -149,7 +149,7 @@ END
 kubectl -n default get deployments foo-display bar-display
 ```
 
-This should return:
+This commmand shows all of the deployments that have been created in `foo-display` and `bar-display`. You should have one replica in each event consumer:
 
 ```sh
 NAME           DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
@@ -158,7 +158,7 @@ NAME           DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
 bar-display    1         1         1            1           16s
 ```
 
-The number in the **DESIRED** column should match the number in the **AVAILABLE** column. This may take a few minutes. If after two minutes the numbers still do not match the example, then see the [Debugging Guide](./debugging/README.md).
+The number of replicas in the **DESIRED** column should match the number of replicas in the **AVAILABLE** column. This may take a few minutes. If after two minutes the numbers still do not match the example, then see the [Debugging Guide](./debugging/README.md).
 
 ### Creating `Triggers`
 
@@ -216,7 +216,8 @@ Here, the command creates a `Trigger` that searches for all `CloudEvents` of sou
 kubectl -n default get triggers
 ```
 
-You should expect to see something like:
+This command displays the `NAME`, `Broker`, `Subscriber_URI`, `AGE` and readiness of the `Triggers` in your `namespace`. You should see something like this:
+
 
 ```sh
 NAME                 READY   REASON   BROKER    SUBSCRIBER_URI                                                                 AGE
@@ -224,7 +225,9 @@ bar-display          True             default   http://bar-display.default.svc.c
 foo-display          True             default   http://foo-display.default.svc.cluster.local/    16s
 ```
 
-You now have a `namespace` with a `Broker` inside it. You also have a pair of event consumers with their interest registered in certain kinds of events by creating `Triggers`.
+Both `Triggers` should be `READY` and pointing to the correct `Broker`  and `Subscriber_URI`. If this is not the case, see the [Debugging Guide](./debugging/README.md).
+
+You have now created all of the subcomponents needed to recieve and manage events. In the next section, you will create the subcomponents that will create and send events.
 
 
 
@@ -232,7 +235,7 @@ You now have a `namespace` with a `Broker` inside it. You also have a pair of ev
 
 Since this guide uses manual curl requests to send events, the final subcomponent you will need to make is an event producer called a `Pod`. The `Broker` is only exposed from within the Kubernetes cluster, so you will run the curl request from there.
 
-1. Copy the following code:
+1. To create the `Pod`, enter the following command:
 
 ```sh
 kubectl -n default apply -f - << END
@@ -256,7 +259,7 @@ spec:
 END
 ```
 
-2. Paste into your terminal window.
+You will use this `Pod` to send events in the next section.
 
 ## Sending CloudEvents to the Broker
 
@@ -268,7 +271,7 @@ Now that the Pod is created, you can create a CloudEvent by sending an HTTP requ
 kubectl -n default attach curl -it
 ```
 
-Now, you can make a curl request. To show the various types of events you can send, you will make three curl requests.
+Now, you can make a HTTP request. To show the various types of events you can send, you will make three requests.
 
 1. To make the first request, enter the following in the SSH terminal:
 
@@ -283,7 +286,7 @@ curl -v "default-broker.default.svc.cluster.local" \
   -d '{"msg":"Hello World event from Knative - Foo"}'
 ```
 
-This creates a `CloudEvent` called `should-be-seen-by-foo` which has the `Type` `foo`. When event is sent to the `Broker`, the `Trigger` `foo-display` will activate and send it to the event consumer of the same name.
+This creates a `CloudEvent` called `should-be-seen-by-foo` which has the `Type` `foo`. When an event is sent to the `Broker`, the `Trigger` `foo-display` will activate and send it to the event consumer of the same name.
 
 If the event has been received, you will receive a `202 Accepted` response.
 
@@ -325,7 +328,7 @@ This creates a `CloudEvent` called `should-be-seen-by-test` which has the `Type`
 
 4. Exit SSH.
 
-If everything has been done correctly, you should have sent 2 `CloudEvents` to the `foo-display` event consumer and 2 `CloudEvents` to the `bar-display` event consumer. You will verify that these events were received in the next section.
+If everything has been done correctly, you should have sent 2 `CloudEvents` to the `foo-display` event consumer and 2 `CloudEvents` to the `bar-display` event consumer (should-seen-by-test is sent to *both* `foo-display` and `bar-display`). You will verify that these events were received in the next section.
 
 ## Verifying events were received 
 
