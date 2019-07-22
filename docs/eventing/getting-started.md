@@ -11,7 +11,7 @@ This getting started guide will walk you through all the steps involved in a typ
 
 You need:
 
-- A Kubernetes cluster with [Knative Eventing installed](https://knative.dev/docs/install/index.html). 
+- A Kubernetes cluster with [Knative Eventing installed](./install/index.html). 
 
 ## Setting up Eventing Subcomponents
 
@@ -60,7 +60,6 @@ Now your `Broker` is ready to manage your events.
 ### Creating event consumers
 
 These subcomponents receive the events sent by event producers (you'll create those a little later). You'll create two event consumers, `foo-display` and `bar-display`, so that you can see how to selectively send events to different consumers later.
-
 
 
 1. To create the `foo-display` subcomponent, enter the following command:
@@ -184,7 +183,7 @@ spec:
 END
 ```
 
-Take notice of the attributes of the `Filter`. Every valid `CloudEvent` has attributes named `Type` and `Source`. Triggers allow you to specify interest in specific `CloudEvents` by matching the `CloudEvent's` `Type` and `Source`. 
+Take notice of the attributes of the `Filter`. Every valid `CloudEvent` has attributes named `Type` and `Source`. Triggers allow you to specify interest in specific `CloudEvents` by matching its `Type` and `Source`. 
 
 In this case, the `Trigger` you created searches for all `CloudEvents` of type `foo` and sends them to the `event consumer` `foo-display`.
 
@@ -216,7 +215,7 @@ Here, the command creates a `Trigger` that searches for all `CloudEvents` of sou
 kubectl -n default get triggers
 ```
 
-This command displays the `NAME`, `Broker`, `Subscriber_URI`, `AGE` and readiness of the `Triggers` in your `namespace`. You should see something like this:
+This command displays the **NAME**, **Broker**, **Subscriber_URI**, **AGE** and readiness of the `Triggers` in your `namespace`. You should see something like this:
 
 
 ```sh
@@ -225,9 +224,9 @@ bar-display          True             default   http://bar-display.default.svc.c
 foo-display          True             default   http://foo-display.default.svc.cluster.local/    16s
 ```
 
-Both `Triggers` should be `READY` and pointing to the correct `Broker`  and `Subscriber_URI`. If this is not the case, see the [Debugging Guide](./debugging/README.md).
+Both `Triggers` should be ready and pointing to the correct `Broker`  and `Subscriber_URI`. If this is not the case, see the [Debugging Guide](./debugging/README.md).
 
-You have now created all of the subcomponents needed to recieve and manage events. In the next section, you will create the subcomponents that will create and send events.
+You have now created all of the subcomponents needed to recieve and manage events. In the next section, you will create the subcomponent that will be used to create your events.
 
 
 
