@@ -8,7 +8,7 @@ following commands:
 
 ```shell
 git clone -b "release-0.7" https://github.com/knative/docs knative-docs
-cd knative-docs/serving/samples/hello-world/helloworld-ruby
+cd knative-docs/docs/serving/samples/hello-world/helloworld-ruby
 ```
 
 ## Before you begin
