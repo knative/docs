@@ -13,30 +13,30 @@ You need:
 
 - A Kubernetes cluster with [Knative Eventing installed](./install/index.html). 
 
-## Setting up Eventing Subcomponents
+## Setting up Eventing subcomponents
 
-Before you start to send events, you need to create the components needed to move the events. In this guide, you will be creating components individually, but you can also create components by deploying a [single YAML file](https://raw.githubusercontent.com/akashrv/docs/qs/docs/eventing/samples/hello-world/quick-start.yaml).
+Before you start to send events, you need to create the components needed to move the events. This guide walks you through creating each Eventing subcomponent.
 
 ### Configuring namespace for eventing
 
-In most Knative tutorials, you will operate inside of a `namespace`. A `namespace` groups together subcomponents so that you can easily organize them.
+In most Knative tutorials, you will operate inside of a namespace. A namespace groups together subcomponents so that you can easily organize them.
 
-This guide uses the default `namespace`, so there is no need to create one. 
+This guide uses the default namespace, so there is no need to create one. 
 
 
-1. Set up the `namespace` for Knative Eventing. To set up the `namespace`, add a label to your `namespace` with this command:
+1. Set up the namespace for Knative Eventing. To set up the namespace, add a label to your namespace with this command:
 
 ```sh
 kubectl label namespace default knative-eventing-injection=enabled
 ```
 
-Labeling a `namespace` adds a specific organizational structure to the `namespace`. The `knative-eventing-injection` label triggers Knative to add `Service Accounts`, `Role Bindings`, and a `Broker` to your `namespace`. Without this label, Knative will not know how to manage your events.
+Labeling a namespace adds a specific organizational structure to the namespace. The `knative-eventing-injection` label triggers Knative to add `Service Accounts`, `Role Bindings`, and a `Broker` to your namespace. Without this label, Knative will not know how to manage your events.
 
 In the next section, you'll learn more about one of the subcompoents added to your namespace, the `Broker`.
 
 ### Validating that the `Broker` is running
 
-The `Broker` ensures that every event sent by `event producers` is sent to the correct `event consumers`. While you created the `Broker` when you labeled your `namespace` as ready for eventing, it is important to verify that your `Broker` is working correctly. In this guide, you will use the default broker.
+The `Broker` ensures that every event sent by event producers is sent to the correct event consumers. While you created the `Broker` when you labeled your namespace as ready for eventing, it is important to verify that your `Broker` is working correctly. In this guide, you will use the default broker.
 
 1. Use the following command to verify that the `Broker` is in a healthy state:
 
@@ -183,9 +183,9 @@ spec:
 END
 ```
 
-Take notice of the attributes of the `Filter`. Every valid `CloudEvent` has attributes named `Type` and `Source`. Triggers allow you to specify interest in specific `CloudEvents` by matching its `Type` and `Source`. 
+Take notice of the attributes of the `Filter`. Every valid `CloudEvent` has attributes named `type` and `Source`. Triggers allow you to specify interest in specific `CloudEvents` by matching its `type` and `source`. 
 
-In this case, the `Trigger` you created searches for all `CloudEvents` of type `foo` and sends them to the `event consumer` `foo-display`.
+In this case, the `Trigger` you created searches for all `CloudEvents` of `type` `foo` and sends them to the event consumer `foo-display`.
 
 2. To add the second `Trigger`, enter the following command:
 
@@ -207,7 +207,7 @@ spec:
 END
 ```
 
-Here, the command creates a `Trigger` that searches for all `CloudEvents` of source `bar` and sends them to the `event consumer` `bar-display`.
+Here, the command creates a `Trigger` that searches for all `CloudEvents` of `source` `bar` and sends them to the event consumer `bar-display`.
 
 3. Verify that the `Triggers` are running correctly with the following command:
 
@@ -215,7 +215,7 @@ Here, the command creates a `Trigger` that searches for all `CloudEvents` of sou
 kubectl -n default get triggers
 ```
 
-This command displays the **NAME**, **Broker**, **Subscriber_URI**, **AGE** and readiness of the `Triggers` in your `namespace`. You should see something like this:
+This command displays the **NAME**, **Broker**, **Subscriber_URI**, **AGE** and readiness of the `Triggers` in your namespace. You should see something like this:
 
 
 ```sh
@@ -260,7 +260,7 @@ END
 
 You will use this `Pod` to send events in the next section.
 
-## Sending CloudEvents to the Broker
+## Sending CloudEvents to the `Broker`
 
 Now that the Pod is created, you can create a CloudEvent by sending an HTTP request to the `Broker`.
 
@@ -285,7 +285,7 @@ curl -v "default-broker.default.svc.cluster.local" \
   -d '{"msg":"Hello World event from Knative - Foo"}'
 ```
 
-This creates a `CloudEvent` called `should-be-seen-by-foo` which has the `Type` `foo`. When an event is sent to the `Broker`, the `Trigger` `foo-display` will activate and send it to the event consumer of the same name.
+This creates a `CloudEvent` called `should-be-seen-by-foo` which has the `type` `foo`. When an event is sent to the `Broker`, the `Trigger` `foo-display` will activate and send it to the event consumer of the same name.
 
 If the event has been received, you will receive a `202 Accepted` response.
 
@@ -303,7 +303,7 @@ If the event has been received, you will receive a `202 Accepted` response.
   -d '{"msg":"Hello World event from Knative - Bar"}'
 ```
 
-This creates a `CloudEvent` called `should-be-seen-by-bar` which has the `Source` `bar`. When the event is sent to the `Broker`, the `Trigger` `bar-display` will activate and send it to the event consumer of the same name.
+This creates a `CloudEvent` called `should-be-seen-by-bar` which has the `source` `bar`. When the event is sent to the `Broker`, the `Trigger` `bar-display` will activate and send it to the event consumer of the same name.
 
 If the event has been received, you will receive a `202 Accepted` response.
 
@@ -323,7 +323,7 @@ If the event has been received, you will receive a `202 Accepted` response.
 
 If the event has been received, you should receive a `202 Accepted` response.
 
-This creates a `CloudEvent` called `should-be-seen-by-test` which has the `Type` `foo` and the`Source` `bar`. When the event is sent to the `Broker`, the `Triggers` `foo-display` and `bar-display` will activate and send it to the event consumers of the same name.
+This creates a `CloudEvent` called `should-be-seen-by-test` which has the `type` `foo` and the`source` `bar`. When the event is sent to the `Broker`, the `Triggers` `foo-display` and `bar-display` will activate and send it to the event consumers of the same name.
 
 4. Exit SSH.
 
@@ -431,8 +431,8 @@ kubectl delete namespace default
 
 You've learned the basics of the Knative Eventing workflow. Here are some additional resources to help you continue to build with the Knative Eventing component.
 
-- [Using event importer to consume events](TODO)
-- [Configure `Broker` to Use a Different Channel](https://github.com/Harwayne/knative-eventing/blob/sample-3/configure-broker-to-use-a-different-channel.md)
-- [Eventing Concepts](TODO) 
+- [Knative Eventing Overview](./README.md)
+- [Broker and Trigger](./broker-trigger.md)
+- [Event Registry](./event-registry.md) 
 
 
