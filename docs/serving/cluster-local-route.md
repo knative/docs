@@ -1,22 +1,63 @@
 ---
-title: "Making your Routes local to the cluster"
-linkTitle: "Configuring local routes"
+title: "Creating a private cluster-local service"
+linkTitle: "Configuring cluster-local services"
 weight: 20
 type: "docs"
 ---
 
-In Knative 0.3.x or later, all Routes with a domain suffix of
-`svc.cluster.local` will only be visible inside the cluster.
+By default services deployed through Knative are published to an external IP
+address, making them public services on a public IP address and with a
+[public URL](./using-a-custom-domain.md).
 
-This can be done by changing the `config-domain` config map as instructed
-[here](./using-a-custom-domain.md).
+While this is useful for services that need to be accessible from outside
+of the cluster, frequently you may be building a backend service which
+should not be available off-cluster.
 
-You can also set the label `serving.knative.dev/visibility=cluster-local` on
-your Route or KService to achieve the same effect.
+Knative provides two ways to enable private services which are only available
+inside the cluster:
 
-For example, if you didn't set a label when you created the Route
-`helloworld-go` and you want to make it local to the cluster, run:
+1. To make all services only cluster-local, change the default domain
+   to `svc.cluster.local` by [editing the `config-domain` config map](./using-a-custom-domain.md).
+   This will change all services deployed through Knative to only be published
+   to the cluster, none will be available off-cluster.
+1. To make an individual service cluster-local, the service or route can be
+   labeled in such a way to prevent it from getting published to the external
+   gateway.
+   
+## Label a service to be cluster-local
+
+To configure a KService to only be available on the cluster-local network (and not
+on the public Internet), you can apply the `serving.knative.dev/visibility=cluster-local`
+label to the KService or Route object.
+
+To label the KService:
 
 ```shell
-kubectl label route helloworld-go serving.knative.dev/visibility=cluster-local
+kubectl label kservice ${KSVC_NAME} serving.knative.dev/visibility=cluster-local
 ```
+
+To label a route:
+
+```shell
+kubectl label route ${ROUTE_NAME} serving.knative.dev/visibility=cluster-local
+```
+
+For example, you can deploy the [Hello World sample](./samples/helloworld-go)
+and then convert it to be an cluster-local service by labeling the service:
+
+```shell
+kubectl label kservice helloworld-go serving.knative.dev/visibility=cluster-local
+```
+
+You can then verify that the change has been made by verifying the URL for
+the helloworld-go service:
+
+```shell
+kubectl get ksvc helloworld-go
+
+NAME            URL                                              LATESTCREATED         LATESTREADY           READY   REASON
+helloworld-go   http://helloworld-go.default.svc.cluster.local   helloworld-go-2bz5l   helloworld-go-2bz5l   True
+```
+
+The service returns the a URL with the `svc.cluster.local`
+domain, indicating the service is only available in the cluster local network.
