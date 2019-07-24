@@ -197,7 +197,10 @@ folder) you're ready to build and deploy the sample app.
    ```
 
    **Note**
-   If your cluster is new, it may take some time for the service to get assigned an external IP address. Instead of rerunning the command, you can add `--watch` to the command below to view the component's status updates in real time. Use CTRL+C to exit watch mode. 
+   If your cluster is new, it may take some time for the service to get
+   assigned an external IP address. Instead of rerunning the command, you
+   can add `--watch` to the command below to view the component's status
+   updates in real time. Use CTRL+C to exit watch mode. 
    
 1. To find the URL of your service, use:
 
@@ -217,8 +220,11 @@ folder) you're ready to build and deploy the sample app.
 
    Hello Spring Boot Sample v1!
    ```
+
 **Note**
-Replace `{IP_ADDRESS}` with the address you saw returned in the previous step. i.e. `EXTERNAL-IP`
+Replace `{IP_ADDRESS}` with the address you saw returned in the previous
+step. i.e. `EXTERNAL-IP`
+
 ## Removing the sample app deployment
 1. To remove the sample app from your cluster, use:
 
