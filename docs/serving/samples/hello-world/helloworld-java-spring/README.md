@@ -177,8 +177,8 @@ folder) you're ready to build and deploy the sample app.
    # The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
    # Use `istio-ingressgateway` instead, since `knative-ingressgateway`
    # will be removed in Knative v0.4.
-   if kubectl get configmap config-istio -n knative-serving &> /dev/null; then \
-       INGRESSGATEWAY=istio-ingressgateway \
+   if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
+       INGRESSGATEWAY=istio-ingressgateway
    fi
 
    kubectl get svc $INGRESSGATEWAY --namespace istio-system
