@@ -306,7 +306,7 @@ Knative Serving application so that they can be consumed.
       certificate.
 
 See the
-[Kafka Source](https://github.com/knative/eventing-contrib/tree/master/contrib/kafka/samples)
+[Kafka Source](https://github.com/knative/eventing-contrib/tree/master/kafka/source/samples)
 example.
 
 ### CamelSource
