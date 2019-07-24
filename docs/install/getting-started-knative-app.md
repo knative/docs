@@ -105,7 +105,11 @@ assigned an external IP address.
    fi
 
    kubectl get svc $INGRESSGATEWAY --namespace istio-system
+```
 
+The command will return something similar to this:
+
+```shell
    NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
    istio-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
    ```
@@ -114,7 +118,7 @@ assigned an external IP address.
 
    You can also export the IP address as a variable with the following command:
 
-   ```shell
+```shell
    export IP_ADDRESS=$(kubectl get svc $INGRESSGATEWAY --namespace istio-system --output 'jsonpath={.status.loadBalancer.ingress[0].ip}')
    ```
 
@@ -123,7 +127,7 @@ assigned an external IP address.
    > `NodeIP` and `NodePort` to interact your app instead. To get your app's
    > `NodeIP` and `NodePort`, enter the following command:
 
-   ```shell
+```shell
    export IP_ADDRESS=$(kubectl get node  --output 'jsonpath={.items[0].status.addresses[0].address}'):$(kubectl get svc $INGRESSGATEWAY --namespace istio-system   --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
    ```
 
@@ -131,6 +135,11 @@ assigned an external IP address.
 
    ```shell
    kubectl get route helloworld-go  --output=custom-columns=NAME:.metadata.name,URL:.status.url
+   ```
+
+   The command will return the following:
+   
+   ```shell
    NAME                URL
    helloworld-go       http://helloworld-go.default.example.com
    ```
