@@ -27,12 +27,12 @@ knative-docs/serving/samples/hello-world/helloworld-java-spring
    commands:
 
    ```shell
-   $ curl https://start.spring.io/starter.zip \
+   curl https://start.spring.io/starter.zip \
        -d dependencies=web \
        -d name=helloworld \
        -d artifactId=helloworld \
        -o helloworld.zip
-   $ unzip helloworld.zip
+   unzip helloworld.zip
    ```
 
    If you don't have curl installed, you can accomplish the same by visiting the
@@ -77,7 +77,7 @@ knative-docs/serving/samples/hello-world/helloworld-java-spring
 1. Run the application locally:
 
    ```shell
-   $ ./mvnw package && java -jar target/helloworld-0.0.1-SNAPSHOT.jar
+   ./mvnw package && java -jar target/helloworld-0.0.1-SNAPSHOT.jar
    ```
 
    Go to `http://localhost:8080/` to see your `Hello World!` message.
@@ -146,10 +146,10 @@ folder) you're ready to build and deploy the sample app.
 
    ```shell
    # Build the container on your local machine
-   $ docker build -t {username}/helloworld-java-spring .
+   docker build -t {username}/helloworld-java-spring .
 
    # Push the container to docker registry
-   $ docker push {username}/helloworld-java-spring
+   docker push {username}/helloworld-java-spring
    ```
 
 1. After the build has completed and the container is pushed to docker hub, you
@@ -158,7 +158,7 @@ folder) you're ready to build and deploy the sample app.
    the configuration using `kubectl`:
 
    ```shell
-   $ kubectl apply --filename service.yaml
+   kubectl apply --filename service.yaml
    ```
 
 1. Now that your service is created, Knative will perform the following steps:
@@ -172,26 +172,26 @@ folder) you're ready to build and deploy the sample app.
 
    ```shell
    # In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
-   $ INGRESSGATEWAY=knative-ingressgateway
+   INGRESSGATEWAY=knative-ingressgateway
 
    # The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
    # Use `istio-ingressgateway` instead, since `knative-ingressgateway`
    # will be removed in Knative v0.4.
-   $ if kubectl get configmap config-istio -n knative-serving &> /dev/null; then \
+   if kubectl get configmap config-istio -n knative-serving &> /dev/null; then \
        INGRESSGATEWAY=istio-ingressgateway \
    fi
 
-   $ kubectl get svc $INGRESSGATEWAY --namespace istio-system
+   kubectl get svc $INGRESSGATEWAY --namespace istio-system
 
    NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
    xxxxxxx-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
 
    # Now you can assign the external IP address to the env variable.
-   $ export IP_ADDRESS=<EXTERNAL-IP column from the command above>
+   export IP_ADDRESS=<EXTERNAL-IP column from the command above>
 
    # Or just execute:
 
-   $ export IP_ADDRESS=$(kubectl get svc $INGRESSGATEWAY \
+   export IP_ADDRESS=$(kubectl get svc $INGRESSGATEWAY \
      --namespace istio-system \
      --output jsonpath="{.status.loadBalancer.ingress[*].ip}")
    ```
@@ -202,7 +202,7 @@ folder) you're ready to build and deploy the sample app.
 1. To find the URL of your service, use:
 
    ```shell
-   $ kubectl get ksvc helloworld-java-spring \
+   kubectl get ksvc helloworld-java-spring \
       --output=custom-columns=NAME:.metadata.name,URL:.status.url
 
    NAME                       URL
@@ -213,7 +213,7 @@ folder) you're ready to build and deploy the sample app.
    address you got in the step above is in the `${IP_ADDRESS}` env variable:
 
    ```shell
-   $ curl -H "Host: helloworld-java-spring.default.example.com" http://${IP_ADDRESS}
+   curl -H "Host: helloworld-java-spring.default.example.com" http://${IP_ADDRESS}
 
    Hello Spring Boot Sample v1!
    ```
@@ -223,5 +223,5 @@ Replace `{IP_ADDRESS}` with the address you saw returned in the previous step. i
 1. To remove the sample app from your cluster, use:
 
 ```shell
-$ kubectl delete --filename service.yaml
+kubectl delete --filename service.yaml
 ```
