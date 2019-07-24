@@ -6,10 +6,6 @@ wires those events into a [`Sequence`](../../../sequence.md) consisting of 3
 steps. Then we take the end of the Sequence and feed newly minted events back
 into the Broker and create another Trigger which will then display those events.
 
-**NOTE** [TODO: Fix this](https://github.com/knative/eventing/issues/1421) So,
-currently as set up, the events emitted by the Sequence do not make it into the
-Broker.
-
 ## Prerequisites
 
 For this example, we'll assume you have set up a `Broker` and an
@@ -178,10 +174,6 @@ kubectl -n default create -f ./trigger.yaml
 
 ### Create the Service and Trigger displaying the events created by Sequence
 
-**NOTE** This does not work yet because the events created by the Sequence in
-the last step are filtered.
-[TODO: Fix this](https://github.com/knative/eventing/issues/1421)
-
 ```yaml
 apiVersion: serving.knative.dev/v1alpha1
 kind: Service
@@ -210,9 +202,41 @@ spec:
 
 ```
 
-Change `default` below to create the `Sequence` in the Namespace where you have
+Change `default` below to create the `Service` and `Trigger` in the Namespace where you have
 configured your `Broker`.
 
 ```shell
 kubectl -n default create -f ./display-trigger.yaml
 ```
+
+### Inspecting the results
+
+You can now see the final output by inspecting the logs of the event-display
+pods.
+
+```shell
+kubectl -n default get pods
+```
+
+Then look at the logs for the event-display pod:
+
+```shell
+kubectl -n default logs -l serving.knative.dev/service=sequence-display -c user-container
+☁️  cloudevents.Event
+Validation: valid
+Context Attributes,
+  cloudEventsVersion: 0.1
+  eventType: samples.http.mod3
+  source: /transformer/2
+  eventID: df52b47e-02fd-45b2-8180-dabb572573f5
+  eventTime: 2019-06-18T14:18:42.478140635Z
+  contentType: application/json
+Data,
+  {
+    "id": 0,
+    "message": "Hello world! - Handled by 0 - Handled by 1 - Handled by 2"
+  }
+```
+
+And you can see that the initial Cron Source message ("Hello World!") has been
+appended to it by each of the steps in the Sequence.

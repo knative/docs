@@ -9,11 +9,6 @@ A Knative `Build` runs on-cluster and is implemented by a
 Given a _builder_, or container image that you have created to perform a task or
 action, you can define a Knative `Build` through a single configuration file.
 
-Also consider using a Knative `Build` to build the source code of your apps into
-container images, which you can then run on
-[Knative `serving`](../serving/README.md). More information about this use case
-is demonstrated in [this sample](../serving/samples/source-to-url-go).
-
 ## Key features of Knative Builds
 
 - A `Build` can include multiple `steps` where each step specifies a `Builder`.
