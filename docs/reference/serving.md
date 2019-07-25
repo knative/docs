@@ -1,26 +1,26 @@
 <p>Packages:</p>
 <ul>
 <li>
-<a href="#autoscaling.internal.knative.dev">autoscaling.internal.knative.dev</a>
+<a href="#autoscaling.internal.knative.dev%2fv1alpha1">autoscaling.internal.knative.dev/v1alpha1</a>
 </li>
 <li>
-<a href="#networking.internal.knative.dev">networking.internal.knative.dev</a>
+<a href="#networking.internal.knative.dev%2fv1alpha1">networking.internal.knative.dev/v1alpha1</a>
 </li>
 <li>
-<a href="#serving.knative.dev-v1alpha1">serving.knative.dev (v1alpha1)</a>
+<a href="#serving.knative.dev%2fv1alpha1">serving.knative.dev/v1alpha1</a>
 </li>
 <li>
-<a href="#serving.knative.dev-v1beta1">serving.knative.dev (v1beta1)</a>
+<a href="#serving.knative.dev%2fv1beta1">serving.knative.dev/v1beta1</a>
 </li>
 </ul>
-<h2 id="autoscaling.internal.knative.dev">autoscaling.internal.knative.dev</h2>
+<h2 id="autoscaling.internal.knative.dev/v1alpha1">autoscaling.internal.knative.dev/v1alpha1</h2>
 <p>
 </p>
 Resource Types:
 <ul><li>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fautoscaling%2fv1alpha1.PodAutoscaler">PodAutoscaler</a>
+<a href="#autoscaling.internal.knative.dev/v1alpha1.PodAutoscaler">PodAutoscaler</a>
 </li></ul>
-<h3 id="github.com/knative/serving/pkg/apis/autoscaling/v1alpha1.PodAutoscaler">PodAutoscaler
+<h3 id="autoscaling.internal.knative.dev/v1alpha1.PodAutoscaler">PodAutoscaler
 </h3>
 <p>
 <p>PodAutoscaler is a Knative abstraction that encapsulates the interface by which Knative
@@ -72,7 +72,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/autoscaling/v1alpha1.PodAutoscalerSpec">
+<a href="#autoscaling.internal.knative.dev/v1alpha1.PodAutoscalerSpec">
 PodAutoscalerSpec
 </a>
 </em>
@@ -103,7 +103,7 @@ not be used - use metadata.generation</p>
 <td>
 <code>concurrencyModel</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.RevisionRequestConcurrencyModelType">
+<a href="#serving.knative.dev/v1alpha1.RevisionRequestConcurrencyModelType">
 RevisionRequestConcurrencyModelType
 </a>
 </em>
@@ -117,7 +117,7 @@ RevisionRequestConcurrencyModelType
 <td>
 <code>containerConcurrency</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1beta1.RevisionContainerConcurrencyType">
+<a href="#serving.knative.dev/v1beta1.RevisionContainerConcurrencyType">
 RevisionContainerConcurrencyType
 </a>
 </em>
@@ -175,7 +175,7 @@ github.com/knative/serving/pkg/apis/networking.ProtocolType
 <td>
 <code>status</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/autoscaling/v1alpha1.PodAutoscalerStatus">
+<a href="#autoscaling.internal.knative.dev/v1alpha1.PodAutoscalerStatus">
 PodAutoscalerStatus
 </a>
 </em>
@@ -187,11 +187,11 @@ PodAutoscalerStatus
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/autoscaling/v1alpha1.PodAutoscalerSpec">PodAutoscalerSpec
+<h3 id="autoscaling.internal.knative.dev/v1alpha1.PodAutoscalerSpec">PodAutoscalerSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fautoscaling%2fv1alpha1.PodAutoscaler">PodAutoscaler</a>)
+<a href="#autoscaling.internal.knative.dev/v1alpha1.PodAutoscaler">PodAutoscaler</a>)
 </p>
 <p>
 <p>PodAutoscalerSpec holds the desired state of the PodAutoscaler (from the client).</p>
@@ -224,7 +224,7 @@ not be used - use metadata.generation</p>
 <td>
 <code>concurrencyModel</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.RevisionRequestConcurrencyModelType">
+<a href="#serving.knative.dev/v1alpha1.RevisionRequestConcurrencyModelType">
 RevisionRequestConcurrencyModelType
 </a>
 </em>
@@ -238,7 +238,7 @@ RevisionRequestConcurrencyModelType
 <td>
 <code>containerConcurrency</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1beta1.RevisionContainerConcurrencyType">
+<a href="#serving.knative.dev/v1beta1.RevisionContainerConcurrencyType">
 RevisionContainerConcurrencyType
 </a>
 </em>
@@ -291,11 +291,11 @@ github.com/knative/serving/pkg/apis/networking.ProtocolType
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/autoscaling/v1alpha1.PodAutoscalerStatus">PodAutoscalerStatus
+<h3 id="autoscaling.internal.knative.dev/v1alpha1.PodAutoscalerStatus">PodAutoscalerStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fautoscaling%2fv1alpha1.PodAutoscaler">PodAutoscaler</a>)
+<a href="#autoscaling.internal.knative.dev/v1alpha1.PodAutoscaler">PodAutoscaler</a>)
 </p>
 <p>
 <p>PodAutoscalerStatus communicates the observed state of the PodAutoscaler (from the controller).</p>
@@ -346,7 +346,7 @@ The service is managed by the PA object.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/autoscaling/v1alpha1.PodScalable">PodScalable
+<h3 id="autoscaling.internal.knative.dev/v1alpha1.PodScalable">PodScalable
 </h3>
 <p>
 <p>PodScalable is a duck type that the resources referenced by the
@@ -381,7 +381,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/autoscaling/v1alpha1.PodScalableSpec">
+<a href="#autoscaling.internal.knative.dev/v1alpha1.PodScalableSpec">
 PodScalableSpec
 </a>
 </em>
@@ -431,7 +431,7 @@ Kubernetes core/v1.PodTemplateSpec
 <td>
 <code>status</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/autoscaling/v1alpha1.PodScalableStatus">
+<a href="#autoscaling.internal.knative.dev/v1alpha1.PodScalableStatus">
 PodScalableStatus
 </a>
 </em>
@@ -441,11 +441,11 @@ PodScalableStatus
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/autoscaling/v1alpha1.PodScalableSpec">PodScalableSpec
+<h3 id="autoscaling.internal.knative.dev/v1alpha1.PodScalableSpec">PodScalableSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fautoscaling%2fv1alpha1.PodScalable">PodScalable</a>)
+<a href="#autoscaling.internal.knative.dev/v1alpha1.PodScalable">PodScalable</a>)
 </p>
 <p>
 <p>PodScalableSpec is the specification for the desired state of a
@@ -495,11 +495,11 @@ Kubernetes core/v1.PodTemplateSpec
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/autoscaling/v1alpha1.PodScalableStatus">PodScalableStatus
+<h3 id="autoscaling.internal.knative.dev/v1alpha1.PodScalableStatus">PodScalableStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fautoscaling%2fv1alpha1.PodScalable">PodScalable</a>)
+<a href="#autoscaling.internal.knative.dev/v1alpha1.PodScalable">PodScalable</a>)
 </p>
 <p>
 <p>PodScalableStatus is the observed state of a PodScalable (or at
@@ -526,20 +526,20 @@ int32
 </tbody>
 </table>
 <hr/>
-<h2 id="networking.internal.knative.dev">networking.internal.knative.dev</h2>
+<h2 id="networking.internal.knative.dev/v1alpha1">networking.internal.knative.dev/v1alpha1</h2>
 <p>
 </p>
 Resource Types:
 <ul><li>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fnetworking%2fv1alpha1.Certificate">Certificate</a>
+<a href="#networking.internal.knative.dev/v1alpha1.Certificate">Certificate</a>
 </li><li>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fnetworking%2fv1alpha1.ClusterIngress">ClusterIngress</a>
+<a href="#networking.internal.knative.dev/v1alpha1.ClusterIngress">ClusterIngress</a>
 </li><li>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fnetworking%2fv1alpha1.Ingress">Ingress</a>
+<a href="#networking.internal.knative.dev/v1alpha1.Ingress">Ingress</a>
 </li><li>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fnetworking%2fv1alpha1.ServerlessService">ServerlessService</a>
+<a href="#networking.internal.knative.dev/v1alpha1.ServerlessService">ServerlessService</a>
 </li></ul>
-<h3 id="github.com/knative/serving/pkg/apis/networking/v1alpha1.Certificate">Certificate
+<h3 id="networking.internal.knative.dev/v1alpha1.Certificate">Certificate
 </h3>
 <p>
 <p>Certificate is responsible for provisioning a SSL certificate for the
@@ -592,7 +592,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/networking/v1alpha1.CertificateSpec">
+<a href="#networking.internal.knative.dev/v1alpha1.CertificateSpec">
 CertificateSpec
 </a>
 </em>
@@ -634,7 +634,7 @@ string
 <td>
 <code>status</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/networking/v1alpha1.CertificateStatus">
+<a href="#networking.internal.knative.dev/v1alpha1.CertificateStatus">
 CertificateStatus
 </a>
 </em>
@@ -647,7 +647,7 @@ More info: <a href="https://git.k8s.io/community/contributors/devel/sig-architec
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/networking/v1alpha1.ClusterIngress">ClusterIngress
+<h3 id="networking.internal.knative.dev/v1alpha1.ClusterIngress">ClusterIngress
 </h3>
 <p>
 <p>ClusterIngress is a collection of rules that allow inbound connections to reach the
@@ -702,7 +702,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/networking/v1alpha1.IngressSpec">
+<a href="#networking.internal.knative.dev/v1alpha1.IngressSpec">
 IngressSpec
 </a>
 </em>
@@ -734,8 +734,8 @@ not be used - use metadata.generation</p>
 <td>
 <code>tls</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/networking/v1alpha1.IngressTLS">
-[][]github.com/knative/serving/pkg/apis/networking/v1alpha1.IngressTLS
+<a href="#networking.internal.knative.dev/v1alpha1.IngressTLS">
+[]IngressTLS
 </a>
 </em>
 </td>
@@ -752,8 +752,8 @@ ingress supports SNI.</p>
 <td>
 <code>rules</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/networking/v1alpha1.IngressRule">
-[][]github.com/knative/serving/pkg/apis/networking/v1alpha1.IngressRule
+<a href="#networking.internal.knative.dev/v1alpha1.IngressRule">
+[]IngressRule
 </a>
 </em>
 </td>
@@ -766,7 +766,7 @@ ingress supports SNI.</p>
 <td>
 <code>visibility</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/networking/v1alpha1.IngressVisibility">
+<a href="#networking.internal.knative.dev/v1alpha1.IngressVisibility">
 IngressVisibility
 </a>
 </em>
@@ -782,7 +782,7 @@ IngressVisibility
 <td>
 <code>status</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/networking/v1alpha1.IngressStatus">
+<a href="#networking.internal.knative.dev/v1alpha1.IngressStatus">
 IngressStatus
 </a>
 </em>
@@ -795,7 +795,7 @@ More info: <a href="https://git.k8s.io/community/contributors/devel/api-conventi
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/networking/v1alpha1.Ingress">Ingress
+<h3 id="networking.internal.knative.dev/v1alpha1.Ingress">Ingress
 </h3>
 <p>
 <p>Ingress is a collection of rules that allow inbound connections to reach the endpoints defined
@@ -850,7 +850,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/networking/v1alpha1.IngressSpec">
+<a href="#networking.internal.knative.dev/v1alpha1.IngressSpec">
 IngressSpec
 </a>
 </em>
@@ -882,8 +882,8 @@ not be used - use metadata.generation</p>
 <td>
 <code>tls</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/networking/v1alpha1.IngressTLS">
-[][]github.com/knative/serving/pkg/apis/networking/v1alpha1.IngressTLS
+<a href="#networking.internal.knative.dev/v1alpha1.IngressTLS">
+[]IngressTLS
 </a>
 </em>
 </td>
@@ -900,8 +900,8 @@ ingress supports SNI.</p>
 <td>
 <code>rules</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/networking/v1alpha1.IngressRule">
-[][]github.com/knative/serving/pkg/apis/networking/v1alpha1.IngressRule
+<a href="#networking.internal.knative.dev/v1alpha1.IngressRule">
+[]IngressRule
 </a>
 </em>
 </td>
@@ -914,7 +914,7 @@ ingress supports SNI.</p>
 <td>
 <code>visibility</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/networking/v1alpha1.IngressVisibility">
+<a href="#networking.internal.knative.dev/v1alpha1.IngressVisibility">
 IngressVisibility
 </a>
 </em>
@@ -930,7 +930,7 @@ IngressVisibility
 <td>
 <code>status</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/networking/v1alpha1.IngressStatus">
+<a href="#networking.internal.knative.dev/v1alpha1.IngressStatus">
 IngressStatus
 </a>
 </em>
@@ -943,7 +943,7 @@ More info: <a href="https://git.k8s.io/community/contributors/devel/api-conventi
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/networking/v1alpha1.ServerlessService">ServerlessService
+<h3 id="networking.internal.knative.dev/v1alpha1.ServerlessService">ServerlessService
 </h3>
 <p>
 <p>ServerlessService is a proxy for the K8s service objects containing the
@@ -997,7 +997,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/networking/v1alpha1.ServerlessServiceSpec">
+<a href="#networking.internal.knative.dev/v1alpha1.ServerlessServiceSpec">
 ServerlessServiceSpec
 </a>
 </em>
@@ -1013,7 +1013,7 @@ More info: <a href="https://git.k8s.io/community/contributors/devel/api-conventi
 <td>
 <code>mode</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/networking/v1alpha1.ServerlessServiceOperationMode">
+<a href="#networking.internal.knative.dev/v1alpha1.ServerlessServiceOperationMode">
 ServerlessServiceOperationMode
 </a>
 </em>
@@ -1055,7 +1055,7 @@ serving imports networking, so just use string.</p>
 <td>
 <code>status</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/networking/v1alpha1.ServerlessServiceStatus">
+<a href="#networking.internal.knative.dev/v1alpha1.ServerlessServiceStatus">
 ServerlessServiceStatus
 </a>
 </em>
@@ -1068,11 +1068,11 @@ More info: <a href="https://git.k8s.io/community/contributors/devel/api-conventi
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/networking/v1alpha1.CertificateSpec">CertificateSpec
+<h3 id="networking.internal.knative.dev/v1alpha1.CertificateSpec">CertificateSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fnetworking%2fv1alpha1.Certificate">Certificate</a>)
+<a href="#networking.internal.knative.dev/v1alpha1.Certificate">Certificate</a>)
 </p>
 <p>
 <p>CertificateSpec defines the desired state of a <code>Certificate</code>.</p>
@@ -1110,11 +1110,11 @@ string
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/networking/v1alpha1.CertificateStatus">CertificateStatus
+<h3 id="networking.internal.knative.dev/v1alpha1.CertificateStatus">CertificateStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fnetworking%2fv1alpha1.Certificate">Certificate</a>)
+<a href="#networking.internal.knative.dev/v1alpha1.Certificate">Certificate</a>)
 </p>
 <p>
 <p>CertificateStatus defines the observed state of a <code>Certificate</code>.</p>
@@ -1165,8 +1165,8 @@ by this resource in spec.secretName.</p>
 <td>
 <code>http01Challenges</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/networking/v1alpha1.HTTP01Challenge">
-[][]github.com/knative/serving/pkg/apis/networking/v1alpha1.HTTP01Challenge
+<a href="#networking.internal.knative.dev/v1alpha1.HTTP01Challenge">
+[]HTTP01Challenge
 </a>
 </em>
 </td>
@@ -1177,11 +1177,11 @@ in order to get the TLS certificate..</p>
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/networking/v1alpha1.HTTP01Challenge">HTTP01Challenge
+<h3 id="networking.internal.knative.dev/v1alpha1.HTTP01Challenge">HTTP01Challenge
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fnetworking%2fv1alpha1.CertificateStatus">CertificateStatus</a>)
+<a href="#networking.internal.knative.dev/v1alpha1.CertificateStatus">CertificateStatus</a>)
 </p>
 <p>
 <p>HTTP01Challenge defines the status of a HTTP01 challenge that a certificate needs
@@ -1241,11 +1241,11 @@ k8s.io/apimachinery/pkg/util/intstr.IntOrString
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/networking/v1alpha1.HTTPIngressPath">HTTPIngressPath
+<h3 id="networking.internal.knative.dev/v1alpha1.HTTPIngressPath">HTTPIngressPath
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fnetworking%2fv1alpha1.HTTPIngressRuleValue">HTTPIngressRuleValue</a>)
+<a href="#networking.internal.knative.dev/v1alpha1.HTTPIngressRuleValue">HTTPIngressRuleValue</a>)
 </p>
 <p>
 <p>HTTPIngressPath associates a path regex with a backend. Incoming URLs matching
@@ -1281,8 +1281,8 @@ traffic to the backend.</p>
 <td>
 <code>splits</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/networking/v1alpha1.IngressBackendSplit">
-[][]github.com/knative/serving/pkg/apis/networking/v1alpha1.IngressBackendSplit
+<a href="#networking.internal.knative.dev/v1alpha1.IngressBackendSplit">
+[]IngressBackendSplit
 </a>
 </em>
 </td>
@@ -1324,8 +1324,8 @@ Kubernetes meta/v1.Duration
 <td>
 <code>retries</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/networking/v1alpha1.HTTPRetry">
-github.com/knative/serving/pkg/apis/networking/v1alpha1.HTTPRetry
+<a href="#networking.internal.knative.dev/v1alpha1.HTTPRetry">
+HTTPRetry
 </a>
 </em>
 </td>
@@ -1337,11 +1337,11 @@ github.com/knative/serving/pkg/apis/networking/v1alpha1.HTTPRetry
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/networking/v1alpha1.HTTPIngressRuleValue">HTTPIngressRuleValue
+<h3 id="networking.internal.knative.dev/v1alpha1.HTTPIngressRuleValue">HTTPIngressRuleValue
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fnetworking%2fv1alpha1.IngressRule">IngressRule</a>)
+<a href="#networking.internal.knative.dev/v1alpha1.IngressRule">IngressRule</a>)
 </p>
 <p>
 <p>HTTPIngressRuleValue is a list of http selectors pointing to backends.
@@ -1362,8 +1362,8 @@ or &lsquo;#&rsquo;.</p>
 <td>
 <code>paths</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/networking/v1alpha1.HTTPIngressPath">
-[][]github.com/knative/serving/pkg/apis/networking/v1alpha1.HTTPIngressPath
+<a href="#networking.internal.knative.dev/v1alpha1.HTTPIngressPath">
+[]HTTPIngressPath
 </a>
 </em>
 </td>
@@ -1374,11 +1374,11 @@ or &lsquo;#&rsquo;.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/networking/v1alpha1.HTTPRetry">HTTPRetry
+<h3 id="networking.internal.knative.dev/v1alpha1.HTTPRetry">HTTPRetry
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fnetworking%2fv1alpha1.HTTPIngressPath">HTTPIngressPath</a>)
+<a href="#networking.internal.knative.dev/v1alpha1.HTTPIngressPath">HTTPIngressPath</a>)
 </p>
 <p>
 <p>HTTPRetry describes the retry policy to use when a HTTP request fails.</p>
@@ -1417,11 +1417,11 @@ Kubernetes meta/v1.Duration
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/networking/v1alpha1.IngressBackend">IngressBackend
+<h3 id="networking.internal.knative.dev/v1alpha1.IngressBackend">IngressBackend
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fnetworking%2fv1alpha1.IngressBackendSplit">IngressBackendSplit</a>)
+<a href="#networking.internal.knative.dev/v1alpha1.IngressBackendSplit">IngressBackendSplit</a>)
 </p>
 <p>
 <p>IngressBackend describes all endpoints for a given service and port.</p>
@@ -1470,11 +1470,11 @@ k8s.io/apimachinery/pkg/util/intstr.IntOrString
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/networking/v1alpha1.IngressBackendSplit">IngressBackendSplit
+<h3 id="networking.internal.knative.dev/v1alpha1.IngressBackendSplit">IngressBackendSplit
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fnetworking%2fv1alpha1.HTTPIngressPath">HTTPIngressPath</a>)
+<a href="#networking.internal.knative.dev/v1alpha1.HTTPIngressPath">HTTPIngressPath</a>)
 </p>
 <p>
 <p>IngressBackendSplit describes all endpoints for a given service and port.</p>
@@ -1491,7 +1491,7 @@ k8s.io/apimachinery/pkg/util/intstr.IntOrString
 <td>
 <code>IngressBackend</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/networking/v1alpha1.IngressBackend">
+<a href="#networking.internal.knative.dev/v1alpha1.IngressBackend">
 IngressBackend
 </a>
 </em>
@@ -1532,11 +1532,11 @@ before forwarding a request to the destination service.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/networking/v1alpha1.IngressRule">IngressRule
+<h3 id="networking.internal.knative.dev/v1alpha1.IngressRule">IngressRule
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fnetworking%2fv1alpha1.IngressSpec">IngressSpec</a>)
+<a href="#networking.internal.knative.dev/v1alpha1.IngressSpec">IngressSpec</a>)
 </p>
 <p>
 <p>IngressRule represents the rules mapping the paths under a specified host to
@@ -1578,8 +1578,8 @@ If multiple matching Hosts were provided, the first rule will take precedent.</p
 <td>
 <code>http</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/networking/v1alpha1.HTTPIngressRuleValue">
-github.com/knative/serving/pkg/apis/networking/v1alpha1.HTTPIngressRuleValue
+<a href="#networking.internal.knative.dev/v1alpha1.HTTPIngressRuleValue">
+HTTPIngressRuleValue
 </a>
 </em>
 </td>
@@ -1590,12 +1590,12 @@ rule is satisfied, the request is routed to the specified backend.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/networking/v1alpha1.IngressSpec">IngressSpec
+<h3 id="networking.internal.knative.dev/v1alpha1.IngressSpec">IngressSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fnetworking%2fv1alpha1.ClusterIngress">ClusterIngress</a>,
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fnetworking%2fv1alpha1.Ingress">Ingress</a>)
+<a href="#networking.internal.knative.dev/v1alpha1.ClusterIngress">ClusterIngress</a>, 
+<a href="#networking.internal.knative.dev/v1alpha1.Ingress">Ingress</a>)
 </p>
 <p>
 <p>IngressSpec describes the Ingress the user wishes to exist.</p>
@@ -1634,8 +1634,8 @@ not be used - use metadata.generation</p>
 <td>
 <code>tls</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/networking/v1alpha1.IngressTLS">
-[][]github.com/knative/serving/pkg/apis/networking/v1alpha1.IngressTLS
+<a href="#networking.internal.knative.dev/v1alpha1.IngressTLS">
+[]IngressTLS
 </a>
 </em>
 </td>
@@ -1652,8 +1652,8 @@ ingress supports SNI.</p>
 <td>
 <code>rules</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/networking/v1alpha1.IngressRule">
-[][]github.com/knative/serving/pkg/apis/networking/v1alpha1.IngressRule
+<a href="#networking.internal.knative.dev/v1alpha1.IngressRule">
+[]IngressRule
 </a>
 </em>
 </td>
@@ -1666,7 +1666,7 @@ ingress supports SNI.</p>
 <td>
 <code>visibility</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/networking/v1alpha1.IngressVisibility">
+<a href="#networking.internal.knative.dev/v1alpha1.IngressVisibility">
 IngressVisibility
 </a>
 </em>
@@ -1677,12 +1677,12 @@ IngressVisibility
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/networking/v1alpha1.IngressStatus">IngressStatus
+<h3 id="networking.internal.knative.dev/v1alpha1.IngressStatus">IngressStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fnetworking%2fv1alpha1.ClusterIngress">ClusterIngress</a>,
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fnetworking%2fv1alpha1.Ingress">Ingress</a>)
+<a href="#networking.internal.knative.dev/v1alpha1.ClusterIngress">ClusterIngress</a>, 
+<a href="#networking.internal.knative.dev/v1alpha1.Ingress">Ingress</a>)
 </p>
 <p>
 <p>IngressStatus describe the current state of the Ingress.</p>
@@ -1714,8 +1714,8 @@ github.com/knative/pkg/apis/duck/v1beta1.Status
 <td>
 <code>loadBalancer</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/networking/v1alpha1.LoadBalancerStatus">
-github.com/knative/serving/pkg/apis/networking/v1alpha1.LoadBalancerStatus
+<a href="#networking.internal.knative.dev/v1alpha1.LoadBalancerStatus">
+LoadBalancerStatus
 </a>
 </em>
 </td>
@@ -1726,11 +1726,11 @@ github.com/knative/serving/pkg/apis/networking/v1alpha1.LoadBalancerStatus
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/networking/v1alpha1.IngressTLS">IngressTLS
+<h3 id="networking.internal.knative.dev/v1alpha1.IngressTLS">IngressTLS
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fnetworking%2fv1alpha1.IngressSpec">IngressSpec</a>)
+<a href="#networking.internal.knative.dev/v1alpha1.IngressSpec">IngressSpec</a>)
 </p>
 <p>
 <p>IngressTLS describes the transport layer security associated with an Ingress.</p>
@@ -1808,21 +1808,21 @@ Defaults to <code>tls.key</code>.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/networking/v1alpha1.IngressVisibility">IngressVisibility
+<h3 id="networking.internal.knative.dev/v1alpha1.IngressVisibility">IngressVisibility
 (<code>string</code> alias)</p></h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fnetworking%2fv1alpha1.IngressSpec">IngressSpec</a>)
+<a href="#networking.internal.knative.dev/v1alpha1.IngressSpec">IngressSpec</a>)
 </p>
 <p>
 <p>IngressVisibility describes whether the Ingress should be exposed to
 public gateways or not.</p>
 </p>
-<h3 id="github.com/knative/serving/pkg/apis/networking/v1alpha1.LoadBalancerIngressStatus">LoadBalancerIngressStatus
+<h3 id="networking.internal.knative.dev/v1alpha1.LoadBalancerIngressStatus">LoadBalancerIngressStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fnetworking%2fv1alpha1.LoadBalancerStatus">LoadBalancerStatus</a>)
+<a href="#networking.internal.knative.dev/v1alpha1.LoadBalancerStatus">LoadBalancerStatus</a>)
 </p>
 <p>
 <p>LoadBalancerIngressStatus represents the status of a load-balancer ingress point:
@@ -1890,11 +1890,11 @@ bool
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/networking/v1alpha1.LoadBalancerStatus">LoadBalancerStatus
+<h3 id="networking.internal.knative.dev/v1alpha1.LoadBalancerStatus">LoadBalancerStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fnetworking%2fv1alpha1.IngressStatus">IngressStatus</a>)
+<a href="#networking.internal.knative.dev/v1alpha1.IngressStatus">IngressStatus</a>)
 </p>
 <p>
 <p>LoadBalancerStatus represents the status of a load-balancer.</p>
@@ -1911,8 +1911,8 @@ bool
 <td>
 <code>ingress</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/networking/v1alpha1.LoadBalancerIngressStatus">
-[][]github.com/knative/serving/pkg/apis/networking/v1alpha1.LoadBalancerIngressStatus
+<a href="#networking.internal.knative.dev/v1alpha1.LoadBalancerIngressStatus">
+[]LoadBalancerIngressStatus
 </a>
 </em>
 </td>
@@ -1924,21 +1924,21 @@ Traffic intended for the service should be sent to these ingress points.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/networking/v1alpha1.ServerlessServiceOperationMode">ServerlessServiceOperationMode
+<h3 id="networking.internal.knative.dev/v1alpha1.ServerlessServiceOperationMode">ServerlessServiceOperationMode
 (<code>string</code> alias)</p></h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fnetworking%2fv1alpha1.ServerlessServiceSpec">ServerlessServiceSpec</a>)
+<a href="#networking.internal.knative.dev/v1alpha1.ServerlessServiceSpec">ServerlessServiceSpec</a>)
 </p>
 <p>
 <p>ServerlessServiceOperationMode is an enumeration of the modes of operation
 for the ServerlessService.</p>
 </p>
-<h3 id="github.com/knative/serving/pkg/apis/networking/v1alpha1.ServerlessServiceSpec">ServerlessServiceSpec
+<h3 id="networking.internal.knative.dev/v1alpha1.ServerlessServiceSpec">ServerlessServiceSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fnetworking%2fv1alpha1.ServerlessService">ServerlessService</a>)
+<a href="#networking.internal.knative.dev/v1alpha1.ServerlessService">ServerlessService</a>)
 </p>
 <p>
 <p>ServerlessServiceSpec describes the ServerlessService.</p>
@@ -1955,7 +1955,7 @@ for the ServerlessService.</p>
 <td>
 <code>mode</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/networking/v1alpha1.ServerlessServiceOperationMode">
+<a href="#networking.internal.knative.dev/v1alpha1.ServerlessServiceOperationMode">
 ServerlessServiceOperationMode
 </a>
 </em>
@@ -1992,11 +1992,11 @@ serving imports networking, so just use string.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/networking/v1alpha1.ServerlessServiceStatus">ServerlessServiceStatus
+<h3 id="networking.internal.knative.dev/v1alpha1.ServerlessServiceStatus">ServerlessServiceStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fnetworking%2fv1alpha1.ServerlessService">ServerlessService</a>)
+<a href="#networking.internal.knative.dev/v1alpha1.ServerlessService">ServerlessService</a>)
 </p>
 <p>
 <p>ServerlessServiceStatus describes the current state of the ServerlessService.</p>
@@ -2053,20 +2053,20 @@ load balances over the user service pods backing this Revision.</p>
 </tbody>
 </table>
 <hr/>
-<h2 id="serving.knative.dev-v1alpha1">serving.knative.dev (v1alpha1)</h2>
+<h2 id="serving.knative.dev/v1alpha1">serving.knative.dev/v1alpha1</h2>
 <p>
 </p>
 Resource Types:
 <ul><li>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.Configuration">Configuration</a>
+<a href="#serving.knative.dev/v1alpha1.Configuration">Configuration</a>
 </li><li>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.Revision">Revision</a>
+<a href="#serving.knative.dev/v1alpha1.Revision">Revision</a>
 </li><li>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.Route">Route</a>
+<a href="#serving.knative.dev/v1alpha1.Route">Route</a>
 </li><li>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.Service">Service</a>
+<a href="#serving.knative.dev/v1alpha1.Service">Service</a>
 </li></ul>
-<h3 id="github.com/knative/serving/pkg/apis/serving/v1alpha1.Configuration">Configuration
+<h3 id="serving.knative.dev/v1alpha1.Configuration">Configuration
 </h3>
 <p>
 <p>Configuration represents the &ldquo;floating HEAD&rdquo; of a linear history of Revisions,
@@ -2120,7 +2120,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.ConfigurationSpec">
+<a href="#serving.knative.dev/v1alpha1.ConfigurationSpec">
 ConfigurationSpec
 </a>
 </em>
@@ -2164,8 +2164,8 @@ perform to produce the Revision&rsquo;s container image.</p>
 <td>
 <code>revisionTemplate</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.RevisionTemplateSpec">
-github.com/knative/serving/pkg/apis/serving/v1alpha1.RevisionTemplateSpec
+<a href="#serving.knative.dev/v1alpha1.RevisionTemplateSpec">
+RevisionTemplateSpec
 </a>
 </em>
 </td>
@@ -2182,8 +2182,8 @@ DEPRECATED Use Template instead.</p>
 <td>
 <code>template</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.RevisionTemplateSpec">
-github.com/knative/serving/pkg/apis/serving/v1alpha1.RevisionTemplateSpec
+<a href="#serving.knative.dev/v1alpha1.RevisionTemplateSpec">
+RevisionTemplateSpec
 </a>
 </em>
 </td>
@@ -2200,7 +2200,7 @@ be stamped out.</p>
 <td>
 <code>status</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.ConfigurationStatus">
+<a href="#serving.knative.dev/v1alpha1.ConfigurationStatus">
 ConfigurationStatus
 </a>
 </em>
@@ -2212,7 +2212,7 @@ ConfigurationStatus
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/serving/v1alpha1.Revision">Revision
+<h3 id="serving.knative.dev/v1alpha1.Revision">Revision
 </h3>
 <p>
 <p>Revision is an immutable snapshot of code and configuration.  A revision
@@ -2265,7 +2265,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.RevisionSpec">
+<a href="#serving.knative.dev/v1alpha1.RevisionSpec">
 RevisionSpec
 </a>
 </em>
@@ -2280,7 +2280,7 @@ RevisionSpec
 <td>
 <code>RevisionSpec</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1beta1.RevisionSpec">
+<a href="#serving.knative.dev/v1beta1.RevisionSpec">
 RevisionSpec
 </a>
 </em>
@@ -2311,7 +2311,7 @@ not be used - use metadata.generation</p>
 <td>
 <code>servingState</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.DeprecatedRevisionServingStateType">
+<a href="#serving.knative.dev/v1alpha1.DeprecatedRevisionServingStateType">
 DeprecatedRevisionServingStateType
 </a>
 </em>
@@ -2328,7 +2328,7 @@ updated by the system.</p>
 <td>
 <code>concurrencyModel</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.RevisionRequestConcurrencyModelType">
+<a href="#serving.knative.dev/v1alpha1.RevisionRequestConcurrencyModelType">
 RevisionRequestConcurrencyModelType
 </a>
 </em>
@@ -2396,7 +2396,7 @@ environment:
 <td>
 <code>status</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.RevisionStatus">
+<a href="#serving.knative.dev/v1alpha1.RevisionStatus">
 RevisionStatus
 </a>
 </em>
@@ -2408,7 +2408,7 @@ RevisionStatus
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/serving/v1alpha1.Route">Route
+<h3 id="serving.knative.dev/v1alpha1.Route">Route
 </h3>
 <p>
 <p>Route is responsible for configuring ingress over a collection of Revisions.
@@ -2462,7 +2462,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.RouteSpec">
+<a href="#serving.knative.dev/v1alpha1.RouteSpec">
 RouteSpec
 </a>
 </em>
@@ -2493,8 +2493,8 @@ not be used - use metadata.generation</p>
 <td>
 <code>traffic</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.TrafficTarget">
-[][]github.com/knative/serving/pkg/apis/serving/v1alpha1.TrafficTarget
+<a href="#serving.knative.dev/v1alpha1.TrafficTarget">
+[]TrafficTarget
 </a>
 </em>
 </td>
@@ -2510,7 +2510,7 @@ not be used - use metadata.generation</p>
 <td>
 <code>status</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.RouteStatus">
+<a href="#serving.knative.dev/v1alpha1.RouteStatus">
 RouteStatus
 </a>
 </em>
@@ -2522,7 +2522,7 @@ RouteStatus
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/serving/v1alpha1.Service">Service
+<h3 id="serving.knative.dev/v1alpha1.Service">Service
 </h3>
 <p>
 <p>Service acts as a top-level container that manages a set of Routes and
@@ -2580,7 +2580,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.ServiceSpec">
+<a href="#serving.knative.dev/v1alpha1.ServiceSpec">
 ServiceSpec
 </a>
 </em>
@@ -2610,8 +2610,8 @@ not be used - use metadata.generation</p>
 <td>
 <code>runLatest</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.RunLatestType">
-github.com/knative/serving/pkg/apis/serving/v1alpha1.RunLatestType
+<a href="#serving.knative.dev/v1alpha1.RunLatestType">
+RunLatestType
 </a>
 </em>
 </td>
@@ -2626,8 +2626,8 @@ from the supplied configuration running.</p>
 <td>
 <code>pinned</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.PinnedType">
-github.com/knative/serving/pkg/apis/serving/v1alpha1.PinnedType
+<a href="#serving.knative.dev/v1alpha1.PinnedType">
+PinnedType
 </a>
 </em>
 </td>
@@ -2640,8 +2640,8 @@ github.com/knative/serving/pkg/apis/serving/v1alpha1.PinnedType
 <td>
 <code>manual</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.ManualType">
-github.com/knative/serving/pkg/apis/serving/v1alpha1.ManualType
+<a href="#serving.knative.dev/v1alpha1.ManualType">
+ManualType
 </a>
 </em>
 </td>
@@ -2656,8 +2656,8 @@ from the limited capabilities of Service to the full power of Route.</p>
 <td>
 <code>release</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.ReleaseType">
-github.com/knative/serving/pkg/apis/serving/v1alpha1.ReleaseType
+<a href="#serving.knative.dev/v1alpha1.ReleaseType">
+ReleaseType
 </a>
 </em>
 </td>
@@ -2671,7 +2671,7 @@ to be split between two revisions. This type replaces the deprecated Pinned type
 <td>
 <code>ConfigurationSpec</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.ConfigurationSpec">
+<a href="#serving.knative.dev/v1alpha1.ConfigurationSpec">
 ConfigurationSpec
 </a>
 </em>
@@ -2691,7 +2691,7 @@ be deprecated, and then dropped in v1beta1.</p>
 <td>
 <code>RouteSpec</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.RouteSpec">
+<a href="#serving.knative.dev/v1alpha1.RouteSpec">
 RouteSpec
 </a>
 </em>
@@ -2709,7 +2709,7 @@ RouteSpec
 <td>
 <code>status</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.ServiceStatus">
+<a href="#serving.knative.dev/v1alpha1.ServiceStatus">
 ServiceStatus
 </a>
 </em>
@@ -2720,7 +2720,7 @@ ServiceStatus
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/serving/v1alpha1.CannotConvertError">CannotConvertError
+<h3 id="serving.knative.dev/v1alpha1.CannotConvertError">CannotConvertError
 </h3>
 <p>
 <p>CannotConvertError is returned when a field cannot be converted.</p>
@@ -2755,15 +2755,15 @@ string
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/serving/v1alpha1.ConfigurationSpec">ConfigurationSpec
+<h3 id="serving.knative.dev/v1alpha1.ConfigurationSpec">ConfigurationSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.Configuration">Configuration</a>,
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.PinnedType">PinnedType</a>,
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.ReleaseType">ReleaseType</a>,
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.RunLatestType">RunLatestType</a>,
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.ServiceSpec">ServiceSpec</a>)
+<a href="#serving.knative.dev/v1alpha1.Configuration">Configuration</a>, 
+<a href="#serving.knative.dev/v1alpha1.PinnedType">PinnedType</a>, 
+<a href="#serving.knative.dev/v1alpha1.ReleaseType">ReleaseType</a>, 
+<a href="#serving.knative.dev/v1alpha1.RunLatestType">RunLatestType</a>, 
+<a href="#serving.knative.dev/v1alpha1.ServiceSpec">ServiceSpec</a>)
 </p>
 <p>
 <p>ConfigurationSpec holds the desired state of the Configuration (from the client).</p>
@@ -2809,8 +2809,8 @@ perform to produce the Revision&rsquo;s container image.</p>
 <td>
 <code>revisionTemplate</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.RevisionTemplateSpec">
-github.com/knative/serving/pkg/apis/serving/v1alpha1.RevisionTemplateSpec
+<a href="#serving.knative.dev/v1alpha1.RevisionTemplateSpec">
+RevisionTemplateSpec
 </a>
 </em>
 </td>
@@ -2827,8 +2827,8 @@ DEPRECATED Use Template instead.</p>
 <td>
 <code>template</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.RevisionTemplateSpec">
-github.com/knative/serving/pkg/apis/serving/v1alpha1.RevisionTemplateSpec
+<a href="#serving.knative.dev/v1alpha1.RevisionTemplateSpec">
+RevisionTemplateSpec
 </a>
 </em>
 </td>
@@ -2840,11 +2840,11 @@ be stamped out.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/serving/v1alpha1.ConfigurationStatus">ConfigurationStatus
+<h3 id="serving.knative.dev/v1alpha1.ConfigurationStatus">ConfigurationStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.Configuration">Configuration</a>)
+<a href="#serving.knative.dev/v1alpha1.Configuration">Configuration</a>)
 </p>
 <p>
 <p>ConfigurationStatus communicates the observed state of the Configuration (from the controller).</p>
@@ -2876,7 +2876,7 @@ github.com/knative/pkg/apis/duck/v1beta1.Status
 <td>
 <code>ConfigurationStatusFields</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.ConfigurationStatusFields">
+<a href="#serving.knative.dev/v1alpha1.ConfigurationStatusFields">
 ConfigurationStatusFields
 </a>
 </em>
@@ -2889,12 +2889,12 @@ ConfigurationStatusFields
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/serving/v1alpha1.ConfigurationStatusFields">ConfigurationStatusFields
+<h3 id="serving.knative.dev/v1alpha1.ConfigurationStatusFields">ConfigurationStatusFields
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.ConfigurationStatus">ConfigurationStatus</a>,
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.ServiceStatus">ServiceStatus</a>)
+<a href="#serving.knative.dev/v1alpha1.ConfigurationStatus">ConfigurationStatus</a>, 
+<a href="#serving.knative.dev/v1alpha1.ServiceStatus">ServiceStatus</a>)
 </p>
 <p>
 <p>ConfigurationStatusFields holds all of the non-duckv1beta1.Status status fields of a Route.
@@ -2937,31 +2937,31 @@ Configuration. It might not be ready yet, for that use LatestReadyRevisionName.<
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/serving/v1alpha1.DeprecatedRevisionServingStateType">DeprecatedRevisionServingStateType
+<h3 id="serving.knative.dev/v1alpha1.DeprecatedRevisionServingStateType">DeprecatedRevisionServingStateType
 (<code>string</code> alias)</p></h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.RevisionSpec">RevisionSpec</a>)
+<a href="#serving.knative.dev/v1alpha1.RevisionSpec">RevisionSpec</a>)
 </p>
 <p>
 <p>DeprecatedRevisionServingStateType is an enumeration of the levels of serving readiness of the Revision.
 See also: <a href="https://github.com/knative/serving/blob/master/docs/spec/errors.md#error-conditions-and-reporting">https://github.com/knative/serving/blob/master/docs/spec/errors.md#error-conditions-and-reporting</a></p>
 </p>
-<h3 id="github.com/knative/serving/pkg/apis/serving/v1alpha1.ManualType">ManualType
+<h3 id="serving.knative.dev/v1alpha1.ManualType">ManualType
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.ServiceSpec">ServiceSpec</a>)
+<a href="#serving.knative.dev/v1alpha1.ServiceSpec">ServiceSpec</a>)
 </p>
 <p>
 <p>ManualType contains the options for configuring a manual service. See ServiceSpec for
 more details.</p>
 </p>
-<h3 id="github.com/knative/serving/pkg/apis/serving/v1alpha1.PinnedType">PinnedType
+<h3 id="serving.knative.dev/v1alpha1.PinnedType">PinnedType
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.ServiceSpec">ServiceSpec</a>)
+<a href="#serving.knative.dev/v1alpha1.ServiceSpec">ServiceSpec</a>)
 </p>
 <p>
 <p>PinnedType is DEPRECATED. ReleaseType should be used instead. To get the behavior of PinnedType set
@@ -2992,7 +2992,7 @@ to a different service type.</p>
 <td>
 <code>configuration</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.ConfigurationSpec">
+<a href="#serving.knative.dev/v1alpha1.ConfigurationSpec">
 ConfigurationSpec
 </a>
 </em>
@@ -3004,11 +3004,11 @@ ConfigurationSpec
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/serving/v1alpha1.ReleaseType">ReleaseType
+<h3 id="serving.knative.dev/v1alpha1.ReleaseType">ReleaseType
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.ServiceSpec">ServiceSpec</a>)
+<a href="#serving.knative.dev/v1alpha1.ServiceSpec">ServiceSpec</a>)
 </p>
 <p>
 <p>ReleaseType contains the options for slowly releasing revisions. See ServiceSpec for
@@ -3053,7 +3053,7 @@ revision. Valid values are between 0 and 99 inclusive.</p>
 <td>
 <code>configuration</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.ConfigurationSpec">
+<a href="#serving.knative.dev/v1alpha1.ConfigurationSpec">
 ConfigurationSpec
 </a>
 </em>
@@ -3066,24 +3066,24 @@ come from a single configuration.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/serving/v1alpha1.RevisionRequestConcurrencyModelType">RevisionRequestConcurrencyModelType
+<h3 id="serving.knative.dev/v1alpha1.RevisionRequestConcurrencyModelType">RevisionRequestConcurrencyModelType
 (<code>string</code> alias)</p></h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fautoscaling%2fv1alpha1.PodAutoscalerSpec">PodAutoscalerSpec</a>,
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.RevisionSpec">RevisionSpec</a>)
+<a href="#autoscaling.internal.knative.dev/v1alpha1.PodAutoscalerSpec">PodAutoscalerSpec</a>, 
+<a href="#serving.knative.dev/v1alpha1.RevisionSpec">RevisionSpec</a>)
 </p>
 <p>
 <p>RevisionRequestConcurrencyModelType is an enumeration of the
 concurrency models supported by a Revision.
 DEPRECATED in favor of RevisionContainerConcurrencyType.</p>
 </p>
-<h3 id="github.com/knative/serving/pkg/apis/serving/v1alpha1.RevisionSpec">RevisionSpec
+<h3 id="serving.knative.dev/v1alpha1.RevisionSpec">RevisionSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.Revision">Revision</a>,
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.RevisionTemplateSpec">RevisionTemplateSpec</a>)
+<a href="#serving.knative.dev/v1alpha1.Revision">Revision</a>, 
+<a href="#serving.knative.dev/v1alpha1.RevisionTemplateSpec">RevisionTemplateSpec</a>)
 </p>
 <p>
 <p>RevisionSpec holds the desired state of the Revision (from the client).</p>
@@ -3100,7 +3100,7 @@ DEPRECATED in favor of RevisionContainerConcurrencyType.</p>
 <td>
 <code>RevisionSpec</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1beta1.RevisionSpec">
+<a href="#serving.knative.dev/v1beta1.RevisionSpec">
 RevisionSpec
 </a>
 </em>
@@ -3131,7 +3131,7 @@ not be used - use metadata.generation</p>
 <td>
 <code>servingState</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.DeprecatedRevisionServingStateType">
+<a href="#serving.knative.dev/v1alpha1.DeprecatedRevisionServingStateType">
 DeprecatedRevisionServingStateType
 </a>
 </em>
@@ -3148,7 +3148,7 @@ updated by the system.</p>
 <td>
 <code>concurrencyModel</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.RevisionRequestConcurrencyModelType">
+<a href="#serving.knative.dev/v1alpha1.RevisionRequestConcurrencyModelType">
 RevisionRequestConcurrencyModelType
 </a>
 </em>
@@ -3211,11 +3211,11 @@ environment:
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/serving/v1alpha1.RevisionStatus">RevisionStatus
+<h3 id="serving.knative.dev/v1alpha1.RevisionStatus">RevisionStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.Revision">Revision</a>)
+<a href="#serving.knative.dev/v1alpha1.Revision">Revision</a>)
 </p>
 <p>
 <p>RevisionStatus communicates the observed state of the Revision (from the controller).</p>
@@ -3287,11 +3287,11 @@ may be empty if the image comes from a registry listed to skip resolution.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/serving/v1alpha1.RevisionTemplateSpec">RevisionTemplateSpec
+<h3 id="serving.knative.dev/v1alpha1.RevisionTemplateSpec">RevisionTemplateSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.ConfigurationSpec">ConfigurationSpec</a>)
+<a href="#serving.knative.dev/v1alpha1.ConfigurationSpec">ConfigurationSpec</a>)
 </p>
 <p>
 <p>RevisionTemplateSpec describes the data a revision should have when created from a template.
@@ -3324,7 +3324,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.RevisionSpec">
+<a href="#serving.knative.dev/v1alpha1.RevisionSpec">
 RevisionSpec
 </a>
 </em>
@@ -3338,7 +3338,7 @@ RevisionSpec
 <td>
 <code>RevisionSpec</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1beta1.RevisionSpec">
+<a href="#serving.knative.dev/v1beta1.RevisionSpec">
 RevisionSpec
 </a>
 </em>
@@ -3369,7 +3369,7 @@ not be used - use metadata.generation</p>
 <td>
 <code>servingState</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.DeprecatedRevisionServingStateType">
+<a href="#serving.knative.dev/v1alpha1.DeprecatedRevisionServingStateType">
 DeprecatedRevisionServingStateType
 </a>
 </em>
@@ -3386,7 +3386,7 @@ updated by the system.</p>
 <td>
 <code>concurrencyModel</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.RevisionRequestConcurrencyModelType">
+<a href="#serving.knative.dev/v1alpha1.RevisionRequestConcurrencyModelType">
 RevisionRequestConcurrencyModelType
 </a>
 </em>
@@ -3452,12 +3452,12 @@ environment:
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/serving/v1alpha1.RouteSpec">RouteSpec
+<h3 id="serving.knative.dev/v1alpha1.RouteSpec">RouteSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.Route">Route</a>,
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.ServiceSpec">ServiceSpec</a>)
+<a href="#serving.knative.dev/v1alpha1.Route">Route</a>, 
+<a href="#serving.knative.dev/v1alpha1.ServiceSpec">ServiceSpec</a>)
 </p>
 <p>
 <p>RouteSpec holds the desired state of the Route (from the client).</p>
@@ -3490,8 +3490,8 @@ not be used - use metadata.generation</p>
 <td>
 <code>traffic</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.TrafficTarget">
-[][]github.com/knative/serving/pkg/apis/serving/v1alpha1.TrafficTarget
+<a href="#serving.knative.dev/v1alpha1.TrafficTarget">
+[]TrafficTarget
 </a>
 </em>
 </td>
@@ -3502,11 +3502,11 @@ not be used - use metadata.generation</p>
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/serving/v1alpha1.RouteStatus">RouteStatus
+<h3 id="serving.knative.dev/v1alpha1.RouteStatus">RouteStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.Route">Route</a>)
+<a href="#serving.knative.dev/v1alpha1.Route">Route</a>)
 </p>
 <p>
 <p>RouteStatus communicates the observed state of the Route (from the controller).</p>
@@ -3538,7 +3538,7 @@ github.com/knative/pkg/apis/duck/v1beta1.Status
 <td>
 <code>RouteStatusFields</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.RouteStatusFields">
+<a href="#serving.knative.dev/v1alpha1.RouteStatusFields">
 RouteStatusFields
 </a>
 </em>
@@ -3551,12 +3551,12 @@ RouteStatusFields
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/serving/v1alpha1.RouteStatusFields">RouteStatusFields
+<h3 id="serving.knative.dev/v1alpha1.RouteStatusFields">RouteStatusFields
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.RouteStatus">RouteStatus</a>,
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.ServiceStatus">ServiceStatus</a>)
+<a href="#serving.knative.dev/v1alpha1.RouteStatus">RouteStatus</a>, 
+<a href="#serving.knative.dev/v1alpha1.ServiceStatus">ServiceStatus</a>)
 </p>
 <p>
 <p>RouteStatusFields holds all of the non-duckv1beta1.Status status fields of a Route.
@@ -3630,8 +3630,8 @@ github.com/knative/pkg/apis/duck/v1alpha1.Addressable
 <td>
 <code>traffic</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.TrafficTarget">
-[][]github.com/knative/serving/pkg/apis/serving/v1alpha1.TrafficTarget
+<a href="#serving.knative.dev/v1alpha1.TrafficTarget">
+[]TrafficTarget
 </a>
 </em>
 </td>
@@ -3645,11 +3645,11 @@ LatestReadyRevisionName that we last observed.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/serving/v1alpha1.RunLatestType">RunLatestType
+<h3 id="serving.knative.dev/v1alpha1.RunLatestType">RunLatestType
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.ServiceSpec">ServiceSpec</a>)
+<a href="#serving.knative.dev/v1alpha1.ServiceSpec">ServiceSpec</a>)
 </p>
 <p>
 <p>RunLatestType contains the options for always having a route to the latest configuration. See
@@ -3667,7 +3667,7 @@ ServiceSpec for more details.</p>
 <td>
 <code>configuration</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.ConfigurationSpec">
+<a href="#serving.knative.dev/v1alpha1.ConfigurationSpec">
 ConfigurationSpec
 </a>
 </em>
@@ -3679,11 +3679,11 @@ ConfigurationSpec
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/serving/v1alpha1.ServiceSpec">ServiceSpec
+<h3 id="serving.knative.dev/v1alpha1.ServiceSpec">ServiceSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.Service">Service</a>)
+<a href="#serving.knative.dev/v1alpha1.Service">Service</a>)
 </p>
 <p>
 <p>ServiceSpec represents the configuration for the Service object. Exactly one
@@ -3719,8 +3719,8 @@ not be used - use metadata.generation</p>
 <td>
 <code>runLatest</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.RunLatestType">
-github.com/knative/serving/pkg/apis/serving/v1alpha1.RunLatestType
+<a href="#serving.knative.dev/v1alpha1.RunLatestType">
+RunLatestType
 </a>
 </em>
 </td>
@@ -3735,8 +3735,8 @@ from the supplied configuration running.</p>
 <td>
 <code>pinned</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.PinnedType">
-github.com/knative/serving/pkg/apis/serving/v1alpha1.PinnedType
+<a href="#serving.knative.dev/v1alpha1.PinnedType">
+PinnedType
 </a>
 </em>
 </td>
@@ -3749,8 +3749,8 @@ github.com/knative/serving/pkg/apis/serving/v1alpha1.PinnedType
 <td>
 <code>manual</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.ManualType">
-github.com/knative/serving/pkg/apis/serving/v1alpha1.ManualType
+<a href="#serving.knative.dev/v1alpha1.ManualType">
+ManualType
 </a>
 </em>
 </td>
@@ -3765,8 +3765,8 @@ from the limited capabilities of Service to the full power of Route.</p>
 <td>
 <code>release</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.ReleaseType">
-github.com/knative/serving/pkg/apis/serving/v1alpha1.ReleaseType
+<a href="#serving.knative.dev/v1alpha1.ReleaseType">
+ReleaseType
 </a>
 </em>
 </td>
@@ -3780,7 +3780,7 @@ to be split between two revisions. This type replaces the deprecated Pinned type
 <td>
 <code>ConfigurationSpec</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.ConfigurationSpec">
+<a href="#serving.knative.dev/v1alpha1.ConfigurationSpec">
 ConfigurationSpec
 </a>
 </em>
@@ -3800,7 +3800,7 @@ be deprecated, and then dropped in v1beta1.</p>
 <td>
 <code>RouteSpec</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.RouteSpec">
+<a href="#serving.knative.dev/v1alpha1.RouteSpec">
 RouteSpec
 </a>
 </em>
@@ -3813,11 +3813,11 @@ RouteSpec
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/serving/v1alpha1.ServiceStatus">ServiceStatus
+<h3 id="serving.knative.dev/v1alpha1.ServiceStatus">ServiceStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.Service">Service</a>)
+<a href="#serving.knative.dev/v1alpha1.Service">Service</a>)
 </p>
 <p>
 <p>ServiceStatus represents the Status stanza of the Service resource.</p>
@@ -3849,7 +3849,7 @@ github.com/knative/pkg/apis/duck/v1beta1.Status
 <td>
 <code>RouteStatusFields</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.RouteStatusFields">
+<a href="#serving.knative.dev/v1alpha1.RouteStatusFields">
 RouteStatusFields
 </a>
 </em>
@@ -3864,7 +3864,7 @@ RouteStatusFields
 <td>
 <code>ConfigurationStatusFields</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1alpha1.ConfigurationStatusFields">
+<a href="#serving.knative.dev/v1alpha1.ConfigurationStatusFields">
 ConfigurationStatusFields
 </a>
 </em>
@@ -3877,12 +3877,12 @@ ConfigurationStatusFields
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/serving/v1alpha1.TrafficTarget">TrafficTarget
+<h3 id="serving.knative.dev/v1alpha1.TrafficTarget">TrafficTarget
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.RouteSpec">RouteSpec</a>,
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.RouteStatusFields">RouteStatusFields</a>)
+<a href="#serving.knative.dev/v1alpha1.RouteSpec">RouteSpec</a>, 
+<a href="#serving.knative.dev/v1alpha1.RouteStatusFields">RouteStatusFields</a>)
 </p>
 <p>
 <p>TrafficTarget holds a single entry of the routing table for a Route.</p>
@@ -3912,7 +3912,7 @@ target exclusively. It has the form: {name}.${route.status.domain}</p>
 <td>
 <code>TrafficTarget</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1beta1.TrafficTarget">
+<a href="#serving.knative.dev/v1beta1.TrafficTarget">
 TrafficTarget
 </a>
 </em>
@@ -3928,20 +3928,20 @@ Ultimately all non-v1beta1 fields will be deprecated.</p>
 </tbody>
 </table>
 <hr/>
-<h2 id="serving.knative.dev-v1beta1">serving.knative.dev (v1beta1)</h2>
+<h2 id="serving.knative.dev/v1beta1">serving.knative.dev/v1beta1</h2>
 <p>
 </p>
 Resource Types:
 <ul><li>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.Configuration">Configuration</a>
+<a href="#serving.knative.dev/v1beta1.Configuration">Configuration</a>
 </li><li>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.Revision">Revision</a>
+<a href="#serving.knative.dev/v1beta1.Revision">Revision</a>
 </li><li>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.Route">Route</a>
+<a href="#serving.knative.dev/v1beta1.Route">Route</a>
 </li><li>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.Service">Service</a>
+<a href="#serving.knative.dev/v1beta1.Service">Service</a>
 </li></ul>
-<h3 id="github.com/knative/serving/pkg/apis/serving/v1beta1.Configuration">Configuration
+<h3 id="serving.knative.dev/v1beta1.Configuration">Configuration
 </h3>
 <p>
 <p>Configuration represents the &ldquo;floating HEAD&rdquo; of a linear history of Revisions.
@@ -3994,7 +3994,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1beta1.ConfigurationSpec">
+<a href="#serving.knative.dev/v1beta1.ConfigurationSpec">
 ConfigurationSpec
 </a>
 </em>
@@ -4008,7 +4008,7 @@ ConfigurationSpec
 <td>
 <code>template</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1beta1.RevisionTemplateSpec">
+<a href="#serving.knative.dev/v1beta1.RevisionTemplateSpec">
 RevisionTemplateSpec
 </a>
 </em>
@@ -4025,7 +4025,7 @@ RevisionTemplateSpec
 <td>
 <code>status</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1beta1.ConfigurationStatus">
+<a href="#serving.knative.dev/v1beta1.ConfigurationStatus">
 ConfigurationStatus
 </a>
 </em>
@@ -4036,7 +4036,7 @@ ConfigurationStatus
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/serving/v1beta1.Revision">Revision
+<h3 id="serving.knative.dev/v1beta1.Revision">Revision
 </h3>
 <p>
 <p>Revision is an immutable snapshot of code and configuration.  A revision
@@ -4088,7 +4088,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1beta1.RevisionSpec">
+<a href="#serving.knative.dev/v1beta1.RevisionSpec">
 RevisionSpec
 </a>
 </em>
@@ -4117,7 +4117,7 @@ Kubernetes core/v1.PodSpec
 <td>
 <code>containerConcurrency</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1beta1.RevisionContainerConcurrencyType">
+<a href="#serving.knative.dev/v1beta1.RevisionContainerConcurrencyType">
 RevisionContainerConcurrencyType
 </a>
 </em>
@@ -4150,7 +4150,7 @@ be provided.</p>
 <td>
 <code>status</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1beta1.RevisionStatus">
+<a href="#serving.knative.dev/v1beta1.RevisionStatus">
 RevisionStatus
 </a>
 </em>
@@ -4161,7 +4161,7 @@ RevisionStatus
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/serving/v1beta1.Route">Route
+<h3 id="serving.knative.dev/v1beta1.Route">Route
 </h3>
 <p>
 <p>Route is responsible for configuring ingress over a collection of Revisions.
@@ -4215,7 +4215,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1beta1.RouteSpec">
+<a href="#serving.knative.dev/v1beta1.RouteSpec">
 RouteSpec
 </a>
 </em>
@@ -4230,8 +4230,8 @@ RouteSpec
 <td>
 <code>traffic</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1beta1.TrafficTarget">
-[][]github.com/knative/serving/pkg/apis/serving/v1beta1.TrafficTarget
+<a href="#serving.knative.dev/v1beta1.TrafficTarget">
+[]TrafficTarget
 </a>
 </em>
 </td>
@@ -4248,7 +4248,7 @@ revisions and configurations.</p>
 <td>
 <code>status</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1beta1.RouteStatus">
+<a href="#serving.knative.dev/v1beta1.RouteStatus">
 RouteStatus
 </a>
 </em>
@@ -4260,7 +4260,7 @@ RouteStatus
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/serving/v1beta1.Service">Service
+<h3 id="serving.knative.dev/v1beta1.Service">Service
 </h3>
 <p>
 <p>Service acts as a top-level container that manages a Route and Configuration
@@ -4318,7 +4318,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1beta1.ServiceSpec">
+<a href="#serving.knative.dev/v1beta1.ServiceSpec">
 ServiceSpec
 </a>
 </em>
@@ -4332,7 +4332,7 @@ ServiceSpec
 <td>
 <code>ConfigurationSpec</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1beta1.ConfigurationSpec">
+<a href="#serving.knative.dev/v1beta1.ConfigurationSpec">
 ConfigurationSpec
 </a>
 </em>
@@ -4348,7 +4348,7 @@ ConfigurationSpec
 <td>
 <code>RouteSpec</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1beta1.RouteSpec">
+<a href="#serving.knative.dev/v1beta1.RouteSpec">
 RouteSpec
 </a>
 </em>
@@ -4370,7 +4370,7 @@ defaults).</p>
 <td>
 <code>status</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1beta1.ServiceStatus">
+<a href="#serving.knative.dev/v1beta1.ServiceStatus">
 ServiceStatus
 </a>
 </em>
@@ -4381,12 +4381,12 @@ ServiceStatus
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/serving/v1beta1.ConfigurationSpec">ConfigurationSpec
+<h3 id="serving.knative.dev/v1beta1.ConfigurationSpec">ConfigurationSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.Configuration">Configuration</a>,
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.ServiceSpec">ServiceSpec</a>)
+<a href="#serving.knative.dev/v1beta1.Configuration">Configuration</a>, 
+<a href="#serving.knative.dev/v1beta1.ServiceSpec">ServiceSpec</a>)
 </p>
 <p>
 <p>ConfigurationSpec holds the desired state of the Configuration (from the client).</p>
@@ -4403,7 +4403,7 @@ ServiceStatus
 <td>
 <code>template</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1beta1.RevisionTemplateSpec">
+<a href="#serving.knative.dev/v1beta1.RevisionTemplateSpec">
 RevisionTemplateSpec
 </a>
 </em>
@@ -4415,11 +4415,11 @@ RevisionTemplateSpec
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/serving/v1beta1.ConfigurationStatus">ConfigurationStatus
+<h3 id="serving.knative.dev/v1beta1.ConfigurationStatus">ConfigurationStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.Configuration">Configuration</a>)
+<a href="#serving.knative.dev/v1beta1.Configuration">Configuration</a>)
 </p>
 <p>
 <p>ConfigurationStatus communicates the observed state of the Configuration (from the controller).</p>
@@ -4451,7 +4451,7 @@ github.com/knative/pkg/apis/duck/v1beta1.Status
 <td>
 <code>ConfigurationStatusFields</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1beta1.ConfigurationStatusFields">
+<a href="#serving.knative.dev/v1beta1.ConfigurationStatusFields">
 ConfigurationStatusFields
 </a>
 </em>
@@ -4464,12 +4464,12 @@ ConfigurationStatusFields
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/serving/v1beta1.ConfigurationStatusFields">ConfigurationStatusFields
+<h3 id="serving.knative.dev/v1beta1.ConfigurationStatusFields">ConfigurationStatusFields
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.ConfigurationStatus">ConfigurationStatus</a>,
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.ServiceStatus">ServiceStatus</a>)
+<a href="#serving.knative.dev/v1beta1.ConfigurationStatus">ConfigurationStatus</a>, 
+<a href="#serving.knative.dev/v1beta1.ServiceStatus">ServiceStatus</a>)
 </p>
 <p>
 <p>ConfigurationStatusFields holds the fields of Configuration&rsquo;s status that
@@ -4512,24 +4512,24 @@ Configuration. It might not be ready yet, for that use LatestReadyRevisionName.<
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/serving/v1beta1.RevisionContainerConcurrencyType">RevisionContainerConcurrencyType
+<h3 id="serving.knative.dev/v1beta1.RevisionContainerConcurrencyType">RevisionContainerConcurrencyType
 (<code>int64</code> alias)</p></h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fautoscaling%2fv1alpha1.PodAutoscalerSpec">PodAutoscalerSpec</a>,
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.RevisionSpec">RevisionSpec</a>)
+<a href="#autoscaling.internal.knative.dev/v1alpha1.PodAutoscalerSpec">PodAutoscalerSpec</a>, 
+<a href="#serving.knative.dev/v1beta1.RevisionSpec">RevisionSpec</a>)
 </p>
 <p>
 <p>RevisionContainerConcurrencyType is an integer expressing the maximum number of
 in-flight (concurrent) requests.</p>
 </p>
-<h3 id="github.com/knative/serving/pkg/apis/serving/v1beta1.RevisionSpec">RevisionSpec
+<h3 id="serving.knative.dev/v1beta1.RevisionSpec">RevisionSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.Revision">Revision</a>,
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.RevisionSpec">RevisionSpec</a>,
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.RevisionTemplateSpec">RevisionTemplateSpec</a>)
+<a href="#serving.knative.dev/v1beta1.Revision">Revision</a>, 
+<a href="#serving.knative.dev/v1alpha1.RevisionSpec">RevisionSpec</a>, 
+<a href="#serving.knative.dev/v1beta1.RevisionTemplateSpec">RevisionTemplateSpec</a>)
 </p>
 <p>
 <p>RevisionSpec holds the desired state of the Revision (from the client).</p>
@@ -4561,7 +4561,7 @@ Kubernetes core/v1.PodSpec
 <td>
 <code>containerConcurrency</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1beta1.RevisionContainerConcurrencyType">
+<a href="#serving.knative.dev/v1beta1.RevisionContainerConcurrencyType">
 RevisionContainerConcurrencyType
 </a>
 </em>
@@ -4589,11 +4589,11 @@ be provided.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/serving/v1beta1.RevisionStatus">RevisionStatus
+<h3 id="serving.knative.dev/v1beta1.RevisionStatus">RevisionStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.Revision">Revision</a>)
+<a href="#serving.knative.dev/v1beta1.Revision">Revision</a>)
 </p>
 <p>
 <p>RevisionStatus communicates the observed state of the Revision (from the controller).</p>
@@ -4665,11 +4665,11 @@ may be empty if the image comes from a registry listed to skip resolution.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/serving/v1beta1.RevisionTemplateSpec">RevisionTemplateSpec
+<h3 id="serving.knative.dev/v1beta1.RevisionTemplateSpec">RevisionTemplateSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.ConfigurationSpec">ConfigurationSpec</a>)
+<a href="#serving.knative.dev/v1beta1.ConfigurationSpec">ConfigurationSpec</a>)
 </p>
 <p>
 <p>RevisionTemplateSpec describes the data a revision should have when created from a template.
@@ -4702,7 +4702,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1beta1.RevisionSpec">
+<a href="#serving.knative.dev/v1beta1.RevisionSpec">
 RevisionSpec
 </a>
 </em>
@@ -4731,7 +4731,7 @@ Kubernetes core/v1.PodSpec
 <td>
 <code>containerConcurrency</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1beta1.RevisionContainerConcurrencyType">
+<a href="#serving.knative.dev/v1beta1.RevisionContainerConcurrencyType">
 RevisionContainerConcurrencyType
 </a>
 </em>
@@ -4762,12 +4762,12 @@ be provided.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/serving/v1beta1.RouteSpec">RouteSpec
+<h3 id="serving.knative.dev/v1beta1.RouteSpec">RouteSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.Route">Route</a>,
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.ServiceSpec">ServiceSpec</a>)
+<a href="#serving.knative.dev/v1beta1.Route">Route</a>, 
+<a href="#serving.knative.dev/v1beta1.ServiceSpec">ServiceSpec</a>)
 </p>
 <p>
 <p>RouteSpec holds the desired state of the Route (from the client).</p>
@@ -4784,8 +4784,8 @@ be provided.</p>
 <td>
 <code>traffic</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1beta1.TrafficTarget">
-[][]github.com/knative/serving/pkg/apis/serving/v1beta1.TrafficTarget
+<a href="#serving.knative.dev/v1beta1.TrafficTarget">
+[]TrafficTarget
 </a>
 </em>
 </td>
@@ -4797,11 +4797,11 @@ revisions and configurations.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/serving/v1beta1.RouteStatus">RouteStatus
+<h3 id="serving.knative.dev/v1beta1.RouteStatus">RouteStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.Route">Route</a>)
+<a href="#serving.knative.dev/v1beta1.Route">Route</a>)
 </p>
 <p>
 <p>RouteStatus communicates the observed state of the Route (from the controller).</p>
@@ -4833,7 +4833,7 @@ github.com/knative/pkg/apis/duck/v1beta1.Status
 <td>
 <code>RouteStatusFields</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1beta1.RouteStatusFields">
+<a href="#serving.knative.dev/v1beta1.RouteStatusFields">
 RouteStatusFields
 </a>
 </em>
@@ -4846,12 +4846,12 @@ RouteStatusFields
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/serving/v1beta1.RouteStatusFields">RouteStatusFields
+<h3 id="serving.knative.dev/v1beta1.RouteStatusFields">RouteStatusFields
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.RouteStatus">RouteStatus</a>,
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.ServiceStatus">ServiceStatus</a>)
+<a href="#serving.knative.dev/v1beta1.RouteStatus">RouteStatus</a>, 
+<a href="#serving.knative.dev/v1beta1.ServiceStatus">ServiceStatus</a>)
 </p>
 <p>
 <p>RouteStatusFields holds the fields of Route&rsquo;s status that
@@ -4897,8 +4897,8 @@ github.com/knative/pkg/apis/duck/v1beta1.Addressable
 <td>
 <code>traffic</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1beta1.TrafficTarget">
-[][]github.com/knative/serving/pkg/apis/serving/v1beta1.TrafficTarget
+<a href="#serving.knative.dev/v1beta1.TrafficTarget">
+[]TrafficTarget
 </a>
 </em>
 </td>
@@ -4912,11 +4912,11 @@ LatestReadyRevisionName that we last observed.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/serving/v1beta1.ServiceSpec">ServiceSpec
+<h3 id="serving.knative.dev/v1beta1.ServiceSpec">ServiceSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.Service">Service</a>)
+<a href="#serving.knative.dev/v1beta1.Service">Service</a>)
 </p>
 <p>
 <p>ServiceSpec represents the configuration for the Service object.
@@ -4939,7 +4939,7 @@ the appropriate &ldquo;run latest&rdquo; spec.</p>
 <td>
 <code>ConfigurationSpec</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1beta1.ConfigurationSpec">
+<a href="#serving.knative.dev/v1beta1.ConfigurationSpec">
 ConfigurationSpec
 </a>
 </em>
@@ -4955,7 +4955,7 @@ ConfigurationSpec
 <td>
 <code>RouteSpec</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1beta1.RouteSpec">
+<a href="#serving.knative.dev/v1beta1.RouteSpec">
 RouteSpec
 </a>
 </em>
@@ -4972,11 +4972,11 @@ defaults).</p>
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/serving/v1beta1.ServiceStatus">ServiceStatus
+<h3 id="serving.knative.dev/v1beta1.ServiceStatus">ServiceStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.Service">Service</a>)
+<a href="#serving.knative.dev/v1beta1.Service">Service</a>)
 </p>
 <p>
 <p>ServiceStatus represents the Status stanza of the Service resource.</p>
@@ -5008,7 +5008,7 @@ github.com/knative/pkg/apis/duck/v1beta1.Status
 <td>
 <code>ConfigurationStatusFields</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1beta1.ConfigurationStatusFields">
+<a href="#serving.knative.dev/v1beta1.ConfigurationStatusFields">
 ConfigurationStatusFields
 </a>
 </em>
@@ -5025,7 +5025,7 @@ specific to ConfigurationStatus.</p>
 <td>
 <code>RouteStatusFields</code></br>
 <em>
-<a href="#github.com/knative/serving/pkg/apis/serving/v1beta1.RouteStatusFields">
+<a href="#serving.knative.dev/v1beta1.RouteStatusFields">
 RouteStatusFields
 </a>
 </em>
@@ -5040,13 +5040,13 @@ specific to RouteStatus.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="github.com/knative/serving/pkg/apis/serving/v1beta1.TrafficTarget">TrafficTarget
+<h3 id="serving.knative.dev/v1beta1.TrafficTarget">TrafficTarget
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.RouteSpec">RouteSpec</a>,
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1beta1.RouteStatusFields">RouteStatusFields</a>,
-<a href="#github.com%2fknative%2fserving%2fpkg%2fapis%2fserving%2fv1alpha1.TrafficTarget">TrafficTarget</a>)
+<a href="#serving.knative.dev/v1beta1.RouteSpec">RouteSpec</a>, 
+<a href="#serving.knative.dev/v1beta1.RouteStatusFields">RouteStatusFields</a>, 
+<a href="#serving.knative.dev/v1alpha1.TrafficTarget">TrafficTarget</a>)
 </p>
 <p>
 <p>TrafficTarget holds a single entry of the routing table for a Route.</p>
