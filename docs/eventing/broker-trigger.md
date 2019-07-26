@@ -122,6 +122,13 @@ which will then create the `Broker` as described above. If you now
 remove the annotation, the `Broker` will not be removed, you have
 to manually delete it.
 
+For example, to delete the injected Broker from the foo namespace:
+
+```shell
+kubectl -n foo delete broker default
+```
+
+
 #### Manual Setup
 
 In order to setup a `Broker` manually, we must first create the required
