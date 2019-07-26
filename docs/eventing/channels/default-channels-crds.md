@@ -8,44 +8,11 @@ type: "docs"
 The default channel configuration allows channels to be created without
 specifying an underlying implementation. This leaves the selection of the channel implementation 
 and properties up to the operator. The operator controls the default settings via a
-`ConfigMap`.
+`ConfigMap`. For example, when `Brokers` or `Sequences` are created, an operator can configure a default channel to use 
+for their underlying channel-based implementations.
 
-## Creating a default channel
-
-To create a default channel, create a `Channel` custom object.
-For example, this is a valid default channel:
-
-```yaml
-apiVersion: messaging.knative.dev/v1alpha1
-kind: Channel
-metadata:
-  name: default-channel
-  namespace: default
-```
-
-When the above `Channel` is created, a mutating admission webhook sets `spec.channelTemplate` based on the default channel 
-implementation chosen by the operator. The `Channel` controller will then create the backing channel instance based on 
-that `spec.channelTemplate`. The `spec.channelTemplate` property cannot be changed after creation, and it will be normally 
-set by the default channel mechanism instead of the user.
-
-For example, this is the output when the default channel is set to `InMemoryChannel`:
-
-```yaml
-apiVersion: messaging.knative.dev/v1alpha1
-kind: Channel
-metadata:
-  name: default-channel
-  namespace: default
-spec:
-  channelTemplate:
-    apiVersion: messaging.knative.dev/v1alpha1
-￼    kind: InMemoryChannel
-```
-
-When this mechanism is used, two objects are created, a generic `Channel` and an `InMemoryChannel` channel. 
-The former acts as a proxy of the latter: it copies its subscriptions to the `InMemoryChannel` one and sets its `status`
-with the backing `InMemoryChannel` `status`. 
-
+Even though this default channel mechanism aims to ease the usability of the system, users can still create their own 
+channels directly by instantiating one of the supported channel objects (e.g., `InMemoryChannel`, `KafkaChannel`, etc.).
 
 ## Setting the default channel configuration
 
@@ -81,12 +48,53 @@ data:
           replicationFactor: 1
 ```
 
-Namespace-specific defaults take precedence when matched. In the above example, a
-`Channel` created in the `some-namespace` namespace will be backed by an underlying `KafkaChannel`, 
-not an `InMemoryChannel`.
+Namespace-specific defaults take precedence over cluster defaults when matched.
 
-## Defaults only apply on channel creation
+## Creating a channel with cluster or namespace defaults
 
-Defaults are applied by the webhook on `Channel` creation only. If the default
-settings change, the new defaults will apply to newly-created channels only.
-Existing channels will not change.
+To create a channel using the cluster or namespace defaults set by the operator, create a generic `Channel` custom object. 
+This is typically useful if you do not care what kind of channel it is, and if you are comfortable using the ones that 
+the operator has selected for you.
+
+For example, this is a valid `Channel` object:
+
+```yaml
+apiVersion: messaging.knative.dev/v1alpha1
+kind: Channel
+metadata:
+  name: my-channel
+  namespace: default
+```
+
+When the above `Channel` is created, a mutating admission webhook sets `spec.channelTemplate` based on the default channel 
+implementation chosen by the operator. The `Channel` controller will then create the backing channel instance based on 
+that `spec.channelTemplate`. The `spec.channelTemplate` property cannot be changed after creation, and it will be normally 
+set by the default channel mechanism instead of the user.
+
+For example, this is the output when the default channel is set using the above `ConfigMap` configuration:
+
+```yaml
+apiVersion: messaging.knative.dev/v1alpha1
+kind: Channel
+metadata:
+  name: my-channel
+  namespace: default
+spec:
+  channelTemplate:
+    apiVersion: messaging.knative.dev/v1alpha1
+￼    kind: InMemoryChannel
+```
+
+When this mechanism is used, two objects are created, a generic `Channel` and an `InMemoryChannel` channel. 
+The former acts as a proxy of the latter: it copies its subscriptions to the `InMemoryChannel` one and sets its `status`
+with the backing `InMemoryChannel` `status`. 
+
+Further, note that as the `Channel` was created in the `default` namespace, it uses the cluster defaults, i.e., `InMemoryChannel`. 
+If the `Channel` would have been created in the `some-namespace` namespace, it would have been backed by an underlying 
+`KafkaChannel` instead (i.e., the default for that namespace).
+
+## Defaults only apply on object creation
+
+Defaults are applied by the webhook only on `Channel`, `Broker`, or `Sequence` creation. If the default
+settings change, the new defaults will only apply to newly-created channels, brokers, or sequences.
+Existing ones will not change.
