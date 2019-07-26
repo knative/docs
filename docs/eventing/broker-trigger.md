@@ -116,6 +116,12 @@ namespace.
 kubectl -n default get broker default
 ```
 
+*NOTE* `Broker`s created due to annotation will not be removed if you
+remove the annotation. For example, if you annotate the namespace,
+which will then create the `Broker` as described above. If you now
+remove the annotation, the `Broker` will not be removed, you have
+to manually delete it.
+
 #### Manual Setup
 
 In order to setup a `Broker` manually, we must first create the required
