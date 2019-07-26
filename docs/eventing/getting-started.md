@@ -33,9 +33,9 @@ kubectl create namespace event-example
 kubectl label namespace event-example knative-eventing-injection=enabled
 ```
 
-Labeling a namespace adds a specific organizational structure to the namespace. The `knative-eventing-injection` label triggers Knative to add `Service Accounts`, `Role Bindings`, and a `Broker` to your namespace. Without this label, Knative will not know how to manage your events.
+The `knative-eventing-injection` label triggers Knative to add Knative Eventing subcomponents such as the `Broker` in your namespace.
 
-In the next section, you'll learn more about one of the subcompoents added to your namespace, the `Broker`.
+In the next section, you'll learn more about the `Broker`.
 
 ### Validating that the `Broker` is running
 
@@ -62,22 +62,22 @@ Now your `Broker` is ready to manage your events.
 
 ### Creating event consumers
 
-These subcomponents receive the events sent by event producers (you'll create those a little later). You'll create two event consumers, `foo-display` and `bar-display`, so that you can see how to selectively send events to different consumers later.
+These subcomponents receive the events sent by event producers (you'll create those a little later). You'll create two event consumers, `hello-display` and `goodbye-display`, so that you can see how to selectively send events to different consumers later.
 
 
-1. To create the `foo-display` subcomponent, enter the following command:
+1. To create the `hello-display` subcomponent, enter the following command:
 
 ```sh
 kubectl -n event-example apply -f - << END
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: foo-display
+  name: hello-display
 spec:
   replicas: 1
   selector:
     matchLabels: &labels
-      app: foo-display
+      app: hello-display
   template:
     metadata:
       labels: *labels
@@ -94,10 +94,10 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: foo-display
+  name: hello-display
 spec:
   selector:
-    app: foo-display
+    app: hello-display
   ports:
   - protocol: TCP
     port: 80
@@ -105,19 +105,19 @@ spec:
 END
 ```
 
-2. To create the `bar-display` subcomponent, enter the following command:
+2. To create the `goodbye-display` subcomponent, enter the following command:
 
 ```sh
 kubectl -n event-example apply -f - << END
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: bar-display
+  name: goodbye-display
 spec:
   replicas: 1
   selector:
     matchLabels: &labels
-      app: bar-display
+      app: goodbye-display
   template:
     metadata:
       labels: *labels
@@ -134,10 +134,10 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: bar-display
+  name: goodbye-display
 spec:
   selector:
-    app: bar-display
+    app: goodbye-display
   ports:
   - protocol: TCP
     port: 80
@@ -148,16 +148,16 @@ END
 3. Just like the `Broker`, verify that the event consumers are working with the following command:
 
 ```sh
-kubectl -n event-example get deployments foo-display bar-display
+kubectl -n event-example get deployments hello-display goodbye-display
 ```
 
-This commmand shows all of the deployments that have been created in `foo-display` and `bar-display`. You should have one replica in each event consumer:
+This commmand shows all of the deployments that have been created in `hello-display` and `goodbye-display`. You should have one replica in each event consumer:
 
 ```sh
 NAME           DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-foo-display    1         1         1            1           26s
+hello-display    1         1         1            1           26s
 NAME           DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-bar-display    1         1         1            1           16s
+goodbye-display    1         1         1            1           16s
 ```
 
 The number of replicas in the **DESIRED** column should match the number of replicas in the **AVAILABLE** column. This may take a few minutes. If after two minutes the numbers still do not match the example, then see the [Debugging Guide](./debugging/README.md).
@@ -173,22 +173,22 @@ kubectl -n event-example apply -f - << END
 apiVersion: eventing.knative.dev/v1alpha1
 kind: Trigger
 metadata:
-  name: foo-display
+  name: hello-display
 spec:
   filter:
     sourceAndType:
-      type: foo
+      type: greeting
   subscriber:
     ref:
      apiVersion: v1
      kind: Service
-     name: foo-display
+     name: hello-display
 END
 ```
 
 Take notice of the attributes of the `Filter`.  All Knative events use a specification for describing event data called [`CloudEvent`](https://cloudevents.io/). Every valid `CloudEvent` has attributes named `type` and `source`. Triggers allow you to specify interest in specific `CloudEvents` by matching its `type` and `source`. 
 
-In this case, the `Trigger` you created searches for all `CloudEvents` of `type` `foo` and sends them to the event consumer `foo-display`.
+In this case, the `Trigger` you created searches for all `CloudEvents` of `type` `greeting` and sends them to the event consumer `hello-display`.
 
 2. To add the second `Trigger`, enter the following command:
 
@@ -197,20 +197,20 @@ kubectl -n event-example apply -f - << END
 apiVersion: eventing.knative.dev/v1alpha1
 kind: Trigger
 metadata:
-  name: bar-display
+  name: goodbye-display
 spec:
   filter:
     sourceAndType:
-      source: bar
+      source: sendoff
   subscriber:
     ref:
      apiVersion: v1
      kind: Service
-     name: bar-display
+     name: goodbye-display
 END
 ```
 
-Here, the command creates a `Trigger` that searches for all `CloudEvents` of `source` `bar` and sends them to the event consumer `bar-display`.
+Here, the command creates a `Trigger` that searches for all `CloudEvents` of `source` `sendoff` and sends them to the event consumer `goodbye-display`.
 
 3. Verify that the `Triggers` are running correctly with the following command:
 
@@ -223,8 +223,8 @@ This command displays the **NAME**, **Broker**, **Subscriber_URI**, **AGE** and 
 
 ```sh
 NAME                 READY   REASON   BROKER    SUBSCRIBER_URI                                                                 AGE
-bar-display          True             default   http://bar-display.event-example.svc.cluster.local/   9s
-foo-display          True             default   http://foo-display.event-example.svc.cluster.local/    16s
+goodbye-display          True             default   http://goodbye-display.event-example.svc.cluster.local/   9s
+hello-display          True             default   http://hello-display.event-example.svc.cluster.local/    16s
 ```
 
 Both `Triggers` should be ready and pointing to the correct `Broker`  and `Subscriber_URI`. If this is not the case, see the [Debugging Guide](./debugging/README.md).
@@ -280,15 +280,15 @@ Now, you can make a HTTP request. To show the various types of events you can se
 ```sh
 curl -v "default-broker.event-example.svc.cluster.local" \
   -X POST \
-  -H "Ce-Id: should-be-seen-by-foo" \
+  -H "Ce-Id: say-hello" \
   -H "Ce-Specversion: 0.2" \
-  -H "Ce-Type: foo" \
-  -H "Ce-Source: anything-but-bar" \
+  -H "Ce-Type: greeting" \
+  -H "Ce-Source: not-sendoff" \
   -H "Content-Type: application/json" \
-  -d '{"msg":"Hello World event from Knative - Foo"}'
+  -d '{"msg":"Hello Knative!"}'
 ```
 
-This creates a `CloudEvent` called `should-be-seen-by-foo` which has the `type` `foo`. When an event is sent to the `Broker`, the `Trigger` `foo-display` will activate and send it to the event consumer of the same name.
+This creates a `CloudEvent` called `say-hello` which has the `type` `greeting`. When an event is sent to the `Broker`, the `Trigger` `hello-display` will activate and send it to the event consumer of the same name.
 
 If the event has been received, you will receive a `202 Accepted` response.
 
@@ -298,15 +298,15 @@ If the event has been received, you will receive a `202 Accepted` response.
 ```sh
  curl -v "default-broker.event-example.svc.cluster.local" \
   -X POST \
-  -H "Ce-Id: should-be-seen-by-bar" \
+  -H "Ce-Id: say-goodbye" \
   -H "Ce-Specversion: 0.2" \
-  -H "Ce-Type: anything-but-foo" \
-  -H "Ce-Source: bar" \
+  -H "Ce-Type: not-greeting" \
+  -H "Ce-Source: sendoff" \
   -H "Content-Type: application/json" \
-  -d '{"msg":"Hello World event from Knative - Bar"}'
+  -d '{"msg":"Goodbye Knative!"}'
 ```
 
-This creates a `CloudEvent` called `should-be-seen-by-bar` which has the `source` `bar`. When the event is sent to the `Broker`, the `Trigger` `bar-display` will activate and send it to the event consumer of the same name.
+This creates a `CloudEvent` called `say-goodbye` which has the `source` `sendoff`. When the event is sent to the `Broker`, the `Trigger` `goodbye-display` will activate and send it to the event consumer of the same name.
 
 If the event has been received, you will receive a `202 Accepted` response.
 
@@ -316,75 +316,75 @@ If the event has been received, you will receive a `202 Accepted` response.
 ```sh
  curl -v "default-broker.event-example.svc.cluster.local" \
   -X POST \
-  -H "Ce-Id: should-be-seen-by-test" \
+  -H "Ce-Id: say-hello-goodbye" \
   -H "Ce-Specversion: 0.2" \
-  -H "Ce-Type: foo" \
-  -H "Ce-Source: bar" \
+  -H "Ce-Type: greeting" \
+  -H "Ce-Source: sendoff" \
   -H "Content-Type: application/json" \
-  -d '{"msg":"Hello World event from Knative - Both"}'
+  -d '{"msg":"Hello Knative! Goodbye Knative!"}'
 ```
 
 If the event has been received, you should receive a `202 Accepted` response.
 
-This creates a `CloudEvent` called `should-be-seen-by-test` which has the `type` `foo` and the`source` `bar`. When the event is sent to the `Broker`, the `Triggers` `foo-display` and `bar-display` will activate and send it to the event consumer of the same name.
+This creates a `CloudEvent` called `say-hello-goodbye` which has the `type` `greeting` and the`source` `sendoff`. When the event is sent to the `Broker`, the `Triggers` `hello-display` and `goodbye-display` will activate and send it to the event consumer of the same name.
 
 4. Exit SSH.
 
-If everything has been done correctly, you should have sent 2 `CloudEvents` to the `foo-display` event consumer and 2 `CloudEvents` to the `bar-display` event consumer (should-seen-by-test is sent to *both* `foo-display` and `bar-display`). You will verify that these events were received in the next section.
+If everything has been done correctly, you should have sent 2 `CloudEvents` to the `hello-display` event consumer and 2 `CloudEvents` to the `goodbye-display` event consumer (should-seen-by-test is sent to *both* `hello-display` and `goodbye-display`). You will verify that these events were received in the next section.
 
 ## Verifying events were received 
 
 After sending events, verify that the events were received by the appropriate `Subscribers`.
 
-1. Look at the logs for the `foo-display` event consumer with the following command:
+1. Look at the logs for the `hello-display` event consumer with the following command:
 
 ```sh
-kubectl -n event-example logs -l app=foo-display
+kubectl -n event-example logs -l app=hello-display
 ```
 
 
-The command shows the `Attributes` and `Data` of the events you sent to `foo-display`:
+The command shows the `Attributes` and `Data` of the events you sent to `hello-display`:
 
 ```sh
 ☁️  cloudevents.Event
 Validation: valid
 Context Attributes,
   specversion: 0.2
-  type: foo
-  source: anything-but-bar
-  id: should-be-seen-by-foo
+  type: greeting
+  source: not-sendoff
+  id: say-hello
   time: 2019-05-20T17:59:43.81718488Z
   contenttype: application/json
 Extensions,
   knativehistory: default-broker-srk54-channel-24gls.event-example.svc.cluster.local
 Data,
   {
-    "msg": "Hello World event from Knative - Foo"
+    "msg": "Hello Knative!"
   }
 ☁️  cloudevents.Event
 Validation: valid
 Context Attributes,
   specversion: 0.2
-  type: foo
-  source: bar
-  id: should-be-seen-by-test
+  type: greeting
+  source: sendoff
+  id: say-hello-goodbye
   time: 2019-05-20T17:59:54.211866425Z
   contenttype: application/json
 Extensions,
   knativehistory: default-broker-srk54-channel-24gls.event-example.svc.cluster.local
 Data,
   {
-    "msg": "Hello World event from Knative - Both"
+    "msg": "Hello Knative! Goodbye Knative!"
   }
 ```
 
-2. Look at the logs for the `bar-display` event consumer with the following command:
+2. Look at the logs for the `goodbye-display` event consumer with the following command:
 
 ```sh
-kubectl -n event-example logs -l app=bar-display
+kubectl -n event-example logs -l app=goodbye-display
 ```
 
-The command shows the `Attributes` and `Data` of the events you sent to `bar-display`:
+The command shows the `Attributes` and `Data` of the events you sent to `goodbye-display`:
 
 
 ```sh
@@ -392,31 +392,31 @@ The command shows the `Attributes` and `Data` of the events you sent to `bar-dis
  Validation: valid
  Context Attributes,
    specversion: 0.2
-   type: anything-but-foo
-   source: bar
-   id: should-be-seen-by-bar
+   type: not-greeting
+   source: sendoff
+   id: say-goodbye
    time: 2019-05-20T17:59:49.044926148Z
    contenttype: application/json
  Extensions,
    knativehistory: default-broker-srk54-channel-24gls.event-example.svc.cluster.local
  Data,
    {
-     "msg": "Hello World event from Knative - Bar"
+     "msg": "Goodbye Knative!"
    }
  ☁️  cloudevents.Event
  Validation: valid
  Context Attributes,
    specversion: 0.2
-   type: foo
-   source: bar
-   id: should-be-seen-by-test
+   type: greeting
+   source: sendoff
+   id: say-hello-goodbye
    time: 2019-05-20T17:59:54.211866425Z
    contenttype: application/json
  Extensions,
    knativehistory: default-broker-srk54-channel-24gls.event-example.svc.cluster.local
  Data,
    {
-     "msg": "Hello World event from Knative - Both"
+     "msg": "Hello Knative! Goodbye Knative!"
    } 
 ```
 
