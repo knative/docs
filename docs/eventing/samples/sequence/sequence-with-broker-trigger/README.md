@@ -202,8 +202,8 @@ spec:
 
 ```
 
-Change `default` below to create the `Service` and `Trigger` in the Namespace where you have
-configured your `Broker`.
+Change `default` below to create the `Service` and `Trigger` in the Namespace
+where you have configured your `Broker`.
 
 ```shell
 kubectl -n default create -f ./display-trigger.yaml
