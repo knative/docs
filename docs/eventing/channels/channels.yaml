@@ -1,7 +1,7 @@
 # List of available Channel implementation for persistence of the events associated with a given channel 
 channels:
-  - name: In-Memory
-    url: https://github.com/knative/eventing/tree/master/config/provisioners/in-memory-channel
+  - name: In-Memory Channel
+    url: https://github.com/knative/eventing/tree/master/config/channels/in-memory-channel
     status: Proof of Concept
     support: None
     description: >
