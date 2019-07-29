@@ -186,7 +186,7 @@ spec:
 END
 ```
 
-Take notice of the attributes of the `Filter`.  All Knative events use a specification for describing event data called [`CloudEvent`](https://cloudevents.io/). Every valid `CloudEvent` has attributes named `type` and `source`. Triggers allow you to specify interest in specific `CloudEvents` by matching its `type` and `source`. 
+Take notice of the attributes of the `Filter`.  All Knative events use a specification for describing event data called [`CloudEvents`](https://cloudevents.io/). Every valid `CloudEvent` has attributes named `type` and `source`. Triggers allow you to specify interest in specific `CloudEvents` by matching its `type` and `source`. 
 
 In this case, the `Trigger` you created searches for all `CloudEvents` of `type` `greeting` and sends them to the event consumer `hello-display`.
 
@@ -229,13 +229,13 @@ hello-display          True             default   http://hello-display.event-exa
 
 Both `Triggers` should be ready and pointing to the correct `Broker`  and `Subscriber_URI`. If this is not the case, see the [Debugging Guide](./debugging/README.md).
 
-You have now created all of the subcomponents needed to recieve and manage events. In the next section, you will create the subcomponent that will be used to create your events.
+You have now created all of the subcomponents needed to recieve and manage events. In the next section, you will make the subcomponent that will be used to create your events.
 
 
 
 ### Creating event producers
 
-Since this guide uses manual curl requests to send events, the final subcomponent you will need to make is an event producer called a `Pod`. The `Broker` is only exposed from within the Kubernetes cluster, so you will run the curl request from there.
+Since this guide uses manual curl requests to send events, the final subcomponent you will need to make is an event producer called a `Pod`. The `Broker` is only exposed from within the Kubernetes cluster, so you will run the curl request from the `Pod`.
 
 1. To create the `Pod`, enter the following command:
 
@@ -330,7 +330,7 @@ This creates a `CloudEvent` called `say-hello-goodbye` which has the `type` `gre
 
 4. Exit SSH.
 
-If everything has been done correctly, you should have sent 2 `CloudEvents` to the `hello-display` event consumer and 2 `CloudEvents` to the `goodbye-display` event consumer (should-seen-by-test is sent to *both* `hello-display` and `goodbye-display`). You will verify that these events were received in the next section.
+If everything has been done correctly, you should have sent 2 `CloudEvents` to the `hello-display` event consumer and 2 `CloudEvents` to the `goodbye-display` event consumer (note that `say-hello-goodbye` is sent to *both* `hello-display` and `goodbye-display`). You will verify that these events were received correctly in the next section.
 
 ## Verifying events were received 
 
