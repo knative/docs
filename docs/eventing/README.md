@@ -71,14 +71,15 @@ To learn how to use the registry, see the
 Knative Eventing also defines an event forwarding and persistence layer, called
 a
 [**Channel**](https://github.com/knative/eventing/blob/master/pkg/apis/eventing/v1alpha1/channel_types.go#L36).
-Messaging implementations may provide implementations of Channels via the
-[ClusterChannelProvisioner](https://github.com/knative/eventing/blob/master/pkg/apis/eventing/v1alpha1/cluster_channel_provisioner_types.go#L35)
-object. Events are delivered to Services or forwarded to other channels
+Each channel is a separate Kubernetes custom resources.
+Events are delivered to Services or forwarded to other channels
 (possibly of a different type) using
 [Subscriptions](https://github.com/knative/eventing/blob/master/pkg/apis/eventing/v1alpha1/subscription_types.go#L35).
 This allows message delivery in a cluster to vary based on requirements, so that
 some events might be handled by an in-memory implementation while others would
 be persisted using Apache Kafka or NATS Streaming.
+
+See the [List of Channel implementations](../eventing/channels/channels.yaml).
 
 ### Future design goals
 

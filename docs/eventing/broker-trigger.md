@@ -23,11 +23,9 @@ kind: Broker
 metadata:
   name: default
 spec:
-  channelTemplate:
-    provisioner:
-      apiVersion: eventing.knative.dev/v1alpha1
-      kind: ClusterChannelProvisioner
-      name: gcp-pubsub
+  channelTemplateSpec:
+    apiVersion: messaging.knative.dev/v1alpha1
+    kind: InMemoryChannel
 ```
 
 ## Trigger
@@ -55,16 +53,14 @@ spec:
 
 ## Usage
 
-### ClusterChannelProvisioner
+### Channel CRDs
 
-`Broker`s use their `spec.channelTemplate` to create their internal `Channel`s,
-which dictate the durability guarantees of events sent to that `Broker`. If
-`spec.channelTemplate` is not specified, then the
-[default provisioner](https://www.knative.dev/docs/eventing/channels/default-channels/)
-for their namespace is used.
+`Broker`s use their `spec.channelTemplateSpec` to create their internal `Channel`s,
+which dictate the durability guarantees of events sent to that `Broker`.
 
 #### Setup
 
+<!-- TODO(nachtmaar): link to new docs/eventing/channels/default-channels-crds.md -->
 Have a `ClusterChannelProvisioner` installed and set as the
 [default provisioner](https://www.knative.dev/docs/eventing/channels/default-channels/)
 for the namespace you are interested in. For development, the
@@ -73,16 +69,14 @@ is normally used.
 
 #### Changing
 
-**Note** changing the `ClusterChannelProvisioner` of a running `Broker` will
-lose all in-flight events.
+<!-- TODO(nachtmaar): is the behaviour the same when changing the default channel in the cm ?. See https://github.com/knative/docs/pull/1619/files -->
+If you want to change which `Channel` is used by a given
+`Broker`, then determine if the `spec.channelTemplateSpec` is specified or not.
 
-If you want to change which `ClusterChannelProvisioner` is used by a given
-`Broker`, then determine if the `spec.channelTemplate` is specified or not.
-
-If `spec.channelTemplate` is specified:
+If `spec.channelTemplateSpec` is specified:
 
 1. Delete the `Broker`.
-1. Create the `Broker` with the updated `spec.channelTemplate`.
+1. Create the `Broker` with the updated `spec.channelTemplateSpec`.
 
 If `spec.channelTemplate` is not specified:
 

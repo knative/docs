@@ -12,9 +12,7 @@ procedure:
 
 Channels are Kubernetes Custom Resources which define a single event forwarding
 and persistence layer. Messaging implementations may provide implementations of
-Channels via the
-[ClusterChannelProvisioner](https://github.com/knative/eventing/blob/master/pkg/apis/eventing/v1alpha1/cluster_channel_provisioner_types.go#L35)
-object, supporting different technologies, such as Apache Kafka or NATS
+Channels via a Kubernetes Custom Resource, supporting different technologies, such as Apache Kafka or NATS
 Streaming.
 
 This is a non-exhaustive list of Channels for Knative.

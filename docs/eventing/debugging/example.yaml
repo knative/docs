@@ -28,6 +28,8 @@ spec:
 
 # The Channel events are sent to.
 
+<!-- TODO(nachtmaar) use CRD directly or does channelTemplate work ? -->
+
 apiVersion: eventing.knative.dev/v1alpha1
 kind: Channel
 metadata:
