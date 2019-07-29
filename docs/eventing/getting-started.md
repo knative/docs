@@ -58,11 +58,11 @@ When the `Broker` is **READY**, it can begin to manage the events it receives.
 
 2. If the **READY** column reads **False**, wait 2 minutes and repeat Step 1. If the **READY** column still reads **False**, see the [Debugging Guide](./debugging/README.md) to troubleshoot the issue.
 
-Now your `Broker` is ready to manage your events.
+Now your `Broker` is ready to manage events.
 
 ### Creating event consumers
 
-These subcomponents receive the events sent by event producers (you'll create those a little later). You'll create two event consumers, `hello-display` and `goodbye-display`, so that you can see how to selectively send events to different consumers later.
+These subcomponents receive the events sent by event producers (you'll create those a little later). You'll create two event consumers, `hello-display` and `goodbye-display`, so that you can see how to selectively deliver events to different consumers later.
 
 
 1. To create the `hello-display` subcomponent, enter the following command:
@@ -145,7 +145,7 @@ spec:
 END
 ```
 
-3. Just like the `Broker`, verify that the event consumers are working with the following command:
+3. Just like you did with the `Broker`, verify that the event consumers are working with the following command:
 
 ```sh
 kubectl -n event-example get deployments hello-display goodbye-display
@@ -164,7 +164,7 @@ The number of replicas in the **DESIRED** column should match the number of repl
 
 ### Creating `Triggers`
 
-A `Trigger` expresses a workload's interest in events it wants to receive. A `Trigger` is split into two parts: the `Filter`, which tracks interested events, and the `Subscriber`, which determines where the event should be sent. Triggers can search for various types of events:
+A `Trigger` expresses an event consumer's interest in events it wants to receive. A `Trigger` is split into two parts: the `filter`, which specifies interesting events, and the `subscriber`, which determines where the event should be sent. `Triggers` can match for various types of events:
 
 1. To create the first `Trigger` enter the following command:
 
@@ -218,7 +218,7 @@ Here, the command creates a `Trigger` that searches for all `CloudEvents` of `so
 kubectl -n event-example get triggers
 ```
 
-This command displays the **NAME**, **Broker**, **Subscriber_URI**, **AGE** and readiness of the `Triggers` in your namespace. You should see something like this:
+This command displays the **NAME**, **Broker**, **SUBSCRIBER_URI**, **AGE** and readiness of the `Triggers` in your namespace. You should see something like this:
 
 
 ```sh
@@ -227,7 +227,7 @@ goodbye-display          True             default   http://goodbye-display.event
 hello-display          True             default   http://hello-display.event-example.svc.cluster.local/    16s
 ```
 
-Both `Triggers` should be ready and pointing to the correct `Broker`  and `Subscriber_URI`. If this is not the case, see the [Debugging Guide](./debugging/README.md).
+Both `Triggers` should be ready and pointing to the correct **Broker**  and **SUBSCRIBER_URI**. If this is not the case, see the [Debugging Guide](./debugging/README.md).
 
 You have now created all of the subcomponents needed to recieve and manage events. In the next section, you will make the subcomponent that will be used to create your events.
 
@@ -324,9 +324,9 @@ If the event has been received, you will receive a `202 Accepted` response.
   -d '{"msg":"Hello Knative! Goodbye Knative!"}'
 ```
 
-If the event has been received, you should receive a `202 Accepted` response.
-
 This creates a `CloudEvent` called `say-hello-goodbye` which has the `type` `greeting` and the`source` `sendoff`. When the event is sent to the `Broker`, the `Triggers` `hello-display` and `goodbye-display` will activate and send it to the event consumer of the same name.
+
+If the event has been received, you should receive a `202 Accepted` response.
 
 4. Exit SSH.
 
