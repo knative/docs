@@ -11,7 +11,8 @@ This getting started guide will walk you through all the steps involved in a typ
 
 You need:
 
-- A Kubernetes cluster with [Knative Eventing installed](./install/index.html). 
+- A Kubernetes cluster with [Knative Eventing installed](.
+/install/_index.html). 
 
 ## Setting up Eventing subcomponents
 
