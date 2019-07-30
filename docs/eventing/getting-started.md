@@ -15,7 +15,7 @@ You need:
 
 ## Setting up Eventing subcomponents
 
-Before you start to send events, you need to create the components needed to move the events. This guide walks you through creating each Eventing subcomponent.
+Before you start to send events, you need to create the components needed to transport the events. This guide walks you through creating each Eventing subcomponent.
 
 ### Configuring namespace for eventing
 
@@ -164,7 +164,7 @@ The number of replicas in the **DESIRED** column should match the number of repl
 
 ### Creating `Triggers`
 
-A `Trigger` expresses an event consumer's interest in events it wants to receive. A `Trigger` is split into two parts: the `filter`, which specifies interesting events, and the `subscriber`, which determines where the event should be sent. `Triggers` can match for various types of events:
+A `Trigger` expresses an event consumer's interest in events it wants to receive. A `Trigger` is split into two parts: the `filter`, which specifies interesting events, and the `subscriber`, which determines where the event should be sent. `Triggers` can match various types of events:
 
 1. To create the first `Trigger` enter the following command:
 
@@ -186,9 +186,9 @@ spec:
 END
 ```
 
-Take notice of the attributes of the `Filter`.  All Knative events use a specification for describing event data called [`CloudEvents`](https://cloudevents.io/). Every valid `CloudEvent` has attributes named `type` and `source`. Triggers allow you to specify interest in specific `CloudEvents` by matching its `type` and `source`. 
+Take notice of the attributes of the Filter.  All Knative events use a specification for describing event data called [CloudEvents](https://cloudevents.io/). Every valid CloudEvent has attributes named `type` and `source`. Triggers allow you to specify interest in specific CloudEvents by matching its `type` and `source`. 
 
-In this case, the `Trigger` you created searches for all `CloudEvents` of `type` `greeting` and sends them to the event consumer `hello-display`.
+In this case, the `Trigger` you created matches all `CloudEvents` of `type` `greeting` and sends them to the event consumer `hello-display`.
 
 2. To add the second `Trigger`, enter the following command:
 
@@ -210,7 +210,7 @@ spec:
 END
 ```
 
-Here, the command creates a `Trigger` that searches for all `CloudEvents` of `source` `sendoff` and sends them to the event consumer `goodbye-display`.
+Here, the command creates a `Trigger` that matches all `CloudEvents` of `source` `sendoff` and sends them to the event consumer `goodbye-display`.
 
 3. Verify that the `Triggers` are running correctly with the following command:
 
@@ -288,7 +288,7 @@ curl -v "default-broker.event-example.svc.cluster.local" \
   -d '{"msg":"Hello Knative!"}'
 ```
 
-This creates a `CloudEvent` called `say-hello` which has the `type` `greeting`. When an event is sent to the `Broker`, the `Trigger` `hello-display` will activate and send it to the event consumer of the same name.
+This creates a `CloudEvent` that has the `type` `greeting`. When an event is sent to the `Broker`, the `Trigger` `hello-display` will activate and send it to the event consumer of the same name.
 
 If the event has been received, you will receive a `202 Accepted` response.
 
@@ -306,7 +306,7 @@ If the event has been received, you will receive a `202 Accepted` response.
   -d '{"msg":"Goodbye Knative!"}'
 ```
 
-This creates a `CloudEvent` called `say-goodbye` which has the `source` `sendoff`. When the event is sent to the `Broker`, the `Trigger` `goodbye-display` will activate and send it to the event consumer of the same name.
+This creates a `CloudEvent` that has the `source` `sendoff`. When the event is sent to the `Broker`, the `Trigger` `goodbye-display` will activate and send it to the event consumer of the same name.
 
 If the event has been received, you will receive a `202 Accepted` response.
 
@@ -324,7 +324,7 @@ If the event has been received, you will receive a `202 Accepted` response.
   -d '{"msg":"Hello Knative! Goodbye Knative!"}'
 ```
 
-This creates a `CloudEvent` called `say-hello-goodbye` which has the `type` `greeting` and the`source` `sendoff`. When the event is sent to the `Broker`, the `Triggers` `hello-display` and `goodbye-display` will activate and send it to the event consumer of the same name.
+This creates a `CloudEvent` that has the `type` `greeting` and the`source` `sendoff`. When the event is sent to the `Broker`, the `Triggers` `hello-display` and `goodbye-display` will activate and send it to the event consumer of the same name.
 
 If the event has been received, you should receive a `202 Accepted` response.
 
