@@ -168,7 +168,7 @@ folder) you're ready to build and deploy the sample app.
      for your app.
    - Automatically scale your pods up and down (including to zero active pods).
 
-1. To find the IP address of your service, use: 
+1. To find the IP address of your service, use:
 
    ```shell
    # In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
@@ -196,12 +196,11 @@ folder) you're ready to build and deploy the sample app.
      --output jsonpath="{.status.loadBalancer.ingress[*].ip}")
    ```
 
-   **Note**
-   If your cluster is new, it may take some time for the service to get
-   assigned an external IP address. Instead of rerunning the command, you
-   can add `--watch` to the command below to view the component's status
-   updates in real time. Use CTRL+C to exit watch mode. 
-   
+   **Note** If your cluster is new, it may take some time for the service to get
+   assigned an external IP address. Instead of rerunning the command, you can
+   add `--watch` to the command below to view the component's status updates in
+   real time. Use CTRL+C to exit watch mode.
+
 1. To find the URL of your service, use:
 
    ```shell
@@ -221,11 +220,11 @@ folder) you're ready to build and deploy the sample app.
    Hello Spring Boot Sample v1!
    ```
 
-**Note**
-Replace `{IP_ADDRESS}` with the address you saw returned in the previous
-step. i.e. `EXTERNAL-IP`
+**Note** Replace `{IP_ADDRESS}` with the address you saw returned in the
+previous step. i.e. `EXTERNAL-IP`
 
 ## Removing the sample app deployment
+
 1. To remove the sample app from your cluster, use:
 
 ```shell
