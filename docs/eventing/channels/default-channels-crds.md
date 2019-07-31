@@ -5,10 +5,12 @@ weight: 2
 type: "docs"
 ---
 
+A channel provides an event delivery mechanism that can fan-out received events to multiple destinations. 
 The default channel configuration allows channels to be created without
-specifying an underlying implementation. This leaves the selection of the channel implementation 
-and properties up to the operator. The operator controls the default settings via a
-`ConfigMap`. For example, when `Brokers` or `Sequences` are created, an operator can configure a default channel to use 
+specifying an underlying implementation. This is useful for users that do not care about the properties a particular 
+channel provides (e.g., ordering, persistence, etc.), but are rather fine with using the  
+implementation selected by the the operator. The operator controls the default settings via a `ConfigMap`. 
+For example, when `Brokers` or `Sequences` are created, an operator can configure a default channel to use 
 for their underlying channel-based implementations.
 
 Even though this default channel mechanism aims to ease the usability of the system, users can still create their own 
