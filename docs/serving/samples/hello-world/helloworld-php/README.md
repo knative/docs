@@ -40,9 +40,9 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-php
    [official PHP docker image](https://hub.docker.com/_/php/) for more details.
 
    ```docker
-   # Use the official PHP 7.2 image.
+   # Use the official PHP 7.3 image.
    # https://hub.docker.com/_/php
-   FROM php:7.2-apache
+   FROM php:7.3-apache
 
    # Copy local code to the container image.
    COPY index.php /var/www/html/
