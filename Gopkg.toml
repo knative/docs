@@ -2,8 +2,8 @@
 # for detailed Gopkg.toml documentation.
 
 required = [
-  "github.com/knative/test-infra/scripts",
-  "github.com/knative/test-infra/tools/dep-collector",
+  "knative.dev/test-infra/scripts",
+  "knative.dev/test-infra/tools/dep-collector",
 ]
 
 [prune]
@@ -12,5 +12,5 @@ required = [
   non-go = true
 
 [[prune.project]]
-  name = "github.com/knative/test-infra"
+  name = "knative.dev/test-infra"
   non-go = false
