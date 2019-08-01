@@ -1,3 +1,10 @@
+---
+title: "Hello World - Rust"
+linkTitle: "Rust"
+weight: 1
+type: "docs"
+---
+
 A simple web app written in Rust that you can use for testing. It reads in an
 env variable `TARGET` and prints "Hello \${TARGET}!". If
 

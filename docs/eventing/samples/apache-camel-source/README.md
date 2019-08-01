@@ -1,4 +1,11 @@
-These samples show how to configure a Camel source. It is a event source that
+---
+title: "Apache Camel source"
+linkTitle: "Camel source"
+weight: 5
+type: "docs"
+---
+
+These samples show how to configure a Camel Source. It is an Event Source that
 can leverage one of the
 [250+ Apache Camel components](https://github.com/apache/camel/tree/master/components)
 for generating events.

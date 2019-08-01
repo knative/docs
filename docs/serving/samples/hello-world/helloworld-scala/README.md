@@ -1,3 +1,10 @@
+---
+title: "Hello World - Scala using Akka HTTP"
+linkTitle: "Scala"
+weight: 1
+type: "docs"
+---
+
 A microservice which demonstrates how to get set up and running with Knative
 Serving when using [Scala](https://scala-lang.org/) and [Akka](https://akka.io/)
 [HTTP](https://doc.akka.io/docs/akka-http/current/). It will respond to a HTTP
