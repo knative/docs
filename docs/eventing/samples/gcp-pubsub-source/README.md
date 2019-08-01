@@ -1,3 +1,10 @@
+---
+title: "GCP Cloud Pub/Sub source"
+linkTitle: "Pub/Sub source"
+weight: 20
+type: "docs"
+---
+
 This sample shows how to configure the GCP PubSub event source. This event
 source is most useful as a bridge from other GCP services, such as
 [Cloud Storage](https://cloud.google.com/storage/docs/pubsub-notifications),

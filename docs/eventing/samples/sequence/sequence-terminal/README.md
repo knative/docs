@@ -1,5 +1,9 @@
-
-## Overview
+---
+title: "Sequence terminal"
+linkTitle: "Create additional events"
+weight: 20
+type: "docs"
+---
 
 We are going to create the following logical configuration. We create a
 CronJobSource, feeding events to a [`Sequence`](../../../sequence.md). Sequence
