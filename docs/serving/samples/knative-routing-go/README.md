@@ -1,3 +1,10 @@
+---
+title: "Routing across multiple Knative services - Go"
+linkTitle: "Routing services - Go"
+weight: 1
+type: "docs"
+---
+
 This example shows how to map multiple Knative services to different paths under
 a single domain name using the Istio VirtualService concept. Istio is a
 general-purpose reverse proxy, therefore these directions can also be used to

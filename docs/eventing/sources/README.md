@@ -1,3 +1,10 @@
+---
+title: "Knative Eventing sources"
+linkTitle: "Eventing sources"
+weight: 20
+type: "docs"
+---
+
 <!--
 This is a generated file and should not be changed manually. All changes should follow the
 procedure:
@@ -10,11 +17,10 @@ procedure:
     ```
 -->
 
-Event Sources are Kubernetes Custom Resources which provide a mechanism for
-registering interest in a class of events from a particular software system.
-Since different event sources may be described by different Custom Resources,
-this page provides an index of the available source resource types as well as
-links to installation instructions.
+Event Sources are Kubernetes Custom Resources which provide a mechanism for registering interest in
+a class of events from a particular software system. Since different event sources may be described
+by different Custom Resources, this page provides an index of the available source resource types as
+well as links to installation instructions.
 
 This is a non-exhaustive list of Event sources for Knative.
 
@@ -42,11 +48,11 @@ These are sources that are installed as `CRD`s.
 
 These are not directly usable, but make writing a Source much easier.
 
-| Name                                                                                                                   | Status             | Support | Description                                                                                                                                                                                                                                     |
-| ---------------------------------------------------------------------------------------------------------------------- | ------------------ | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Auto Container Source](https://github.com/Harwayne/auto-container-source)                                             | Proof of Concept   | None    | AutoContainerSource is a controller that allows the Source CRDs _without_ needing a controller. It notices CRDs with a specific label and starts controlling resources of that type. It utilizes Container Source as underlying infrastructure. |
-| [Container Source](https://github.com/knative/eventing/blob/master/pkg/apis/sources/v1alpha1/containersource_types.go) | Active Development | Knative | Container Source is a generic controller. Given an Image URL, it will keep a single `Pod` running with the specified image, environment, and arguments. It is used by multiple other Sources as underlying infrastructure.                      |
-| [Sample Source](https://github.com/grantr/sample-source)                                                               | Proof of Concept   | None    | SampleSource is a reference implementation supporting the [Writing an Event Source the Hard Way tutorial](../samples/writing-a-source).                                                                                                         |
+Name | Status | Support | Description
+--- | --- | --- | ---
+[Auto Container Source](https://github.com/Harwayne/auto-container-source) | Proof of Concept | None | AutoContainerSource is a controller that allows the Source CRDs _without_ needing a controller. It notices CRDs with a specific label and starts controlling resources of that type. It utilizes Container Source as underlying infrastructure.
+[Container Source](https://github.com/knative/eventing/blob/master/pkg/apis/sources/v1alpha1/containersource_types.go) | Active Development | Knative | Container Source is a generic controller. Given an Image URL, it will keep a single `Pod` running with the specified image, environment, and arguments. It is used by multiple other Sources as underlying infrastructure.
+[Sample Source](https://github.com/grantr/sample-source) | Proof of Concept | None | SampleSource is a reference implementation supporting the [Writing an Event Source the Hard Way tutorial](../samples/writing-a-source).
 
 ### ContainerSource Containers
 
