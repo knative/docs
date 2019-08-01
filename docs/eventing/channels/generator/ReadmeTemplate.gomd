@@ -1,3 +1,12 @@
+---
+title: "Knative Eventing channels"
+linkTitle: "Eventing channels"
+weight: 40
+type: "docs"
+---
+
+{{ "" }}
+
 {{- /* This will be interpreted given a yamlChannels object. */ -}}
 
 {{- /* Ignore this next paragraph, it is only intended in the generated markdown, not here. */ -}}
