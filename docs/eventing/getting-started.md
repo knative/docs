@@ -71,7 +71,7 @@ Now that you have the event-example namespace, you create the rest of your event
 
 ### Validating that the `Broker` is running
 
-The `Broker` ensures that every event sent by event producers is sent to the correct event consumers. While you created the `Broker` when you labeled your namespace as ready for eventing, it is important to verify that your `Broker` is working correctly. In this guide, you will use the default broker.
+The `Broker` ensures that every event sent by event producers is sent to the correct event consumers. The `Broker` was created when you labeled your namespace as ready for eventing, but it is important to verify that your `Broker` is working correctly. In this guide, you will use the default broker.
 
 1. Run the following command to verify that the `Broker` is in a healthy state:
 
