@@ -20,7 +20,7 @@ Choice has three parts for the Spec:
     branch, and optionally a `reply` object. For each branch:
     1. the `filter` is evaluated and when it returns an event the `subscriber` is executed.
     Both `filter` and `subscriber` must be `Callable`.
-    2. the event returned by the `subscriber` is sent to the branch `reply` object. When
+    1. the event returned by the `subscriber` is sent to the branch `reply` object. When
     the `reply` is empty, the event is sent to the `spec.reply` object (see below).
 1. (optional) `channelTemplate` defines the Template which will be used to create
    `Channel`s.
