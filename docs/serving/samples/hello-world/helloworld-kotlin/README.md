@@ -1,8 +1,24 @@
+---
+title: "Hello World - Kotlin"
+linkTitle: "Kotlin"
+weight: 1
+type: "docs"
+---
+
 A simple web app written in Kotlin using [Ktor](https://ktor.io/) that you can
 use for testing. It reads in an env variable `TARGET` and prints "Hello
 \${TARGET}". If TARGET is not specified, it will use "World" as the TARGET.
 
-## Prerequisites
+Follow the steps below to create the sample code and then deploy the app to your
+cluster. You can also download a working copy of the sample, by running the
+following commands:
+
+```shell
+git clone -b "release-0.7" https://github.com/knative/docs knative-docs
+cd knative-docs/docs/serving/samples/hello-world/helloworld-kotlin
+```
+
+## Before you begin
 
 - A Kubernetes cluster with Knative installed. Follow the
   [installation instructions](../../../../install/README.md) if you need to
@@ -10,11 +26,7 @@ use for testing. It reads in an env variable `TARGET` and prints "Hello
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
 
-## Steps to recreate the sample code
-
-While you can clone all of the code from this directory, hello world apps are
-generally more useful if you build them step-by-step. The following instructions
-recreate the source files from this folder.
+## Recreating the sample code
 
 1. Create a new directory and cd into it:
 
@@ -41,15 +53,15 @@ recreate the source files from this folder.
    import io.ktor.server.netty.*
 
    fun main(args: Array<String>) {
-       val target = System.getenv("TARGET") ?: "World"
-       val port = System.getenv("PORT") ?: "8080"
-       embeddedServer(Netty, port.toInt()) {
-           routing {
-               get("/") {
-                   call.respondText("Hello $target!", ContentType.Text.Html)
-               }
-           }
-       }.start(wait = true)
+      val target = System.getenv("TARGET") ?: "World"
+      val port = System.getenv("PORT") ?: "8080"
+      embeddedServer(Netty, port.toInt()) {
+          routing {
+              get("/") {
+                  call.respondText("Hello $target!", ContentType.Text.Html)
+              }
+          }
+      }.start(wait = true)
    }
    ```
 
@@ -94,7 +106,7 @@ recreate the source files from this folder.
        manifest {
            attributes 'Main-Class': mainClassName
        }
-       from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+      from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
    }
 
    dependencies {
@@ -142,15 +154,13 @@ recreate the source files from this folder.
      name: helloworld-kotlin
      namespace: default
    spec:
-     runLatest:
-       configuration:
-         revisionTemplate:
-           spec:
-             container:
-               image: docker.io/{username}/helloworld-kotlin
-               env:
-                 - name: TARGET
-                   value: "Kotlin Sample v1"
+     template:
+       spec:
+         containers:
+           - image: docker.io/{username}/helloworld-kotlin
+             env:
+               - name: TARGET
+                 value: "Kotlin Sample v1"
    ```
 
 ## Build and deploy this sample
@@ -209,10 +219,10 @@ folder) you're ready to build and deploy the sample app.
 1. To find the URL for your service, use
 
    ```shell
-   kubectl get ksvc helloworld-kotlin  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+   kubectl get ksvc helloworld-kotlin  --output=custom-columns=NAME:.metadata.name,URL:.status.url
 
-   NAME                DOMAIN
-   helloworld-kotlin   helloworld-kotlin.default.example.com
+   NAME                URL
+   helloworld-kotlin   http://helloworld-kotlin.default.example.com
    ```
 
 1. Now you can make a request to your app to see the result. Presuming, the IP

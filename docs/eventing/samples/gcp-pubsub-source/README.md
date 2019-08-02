@@ -1,3 +1,10 @@
+---
+title: "GCP Cloud Pub/Sub source"
+linkTitle: "Pub/Sub source"
+weight: 20
+type: "docs"
+---
+
 This sample shows how to configure the GCP PubSub event source. This event
 source is most useful as a bridge from other GCP services, such as
 [Cloud Storage](https://cloud.google.com/storage/docs/pubsub-notifications),
@@ -20,7 +27,7 @@ source is most useful as a bridge from other GCP services, such as
    PubSub event source from `release-gcppubsub.yaml`:
 
    ```shell
-   kubectl apply --filename https://github.com/knative/eventing-sources/releases/download/v0.5.0/gcppubsub.yaml
+   kubectl apply --filename https://github.com/knative/eventing-contrib/releases/download/v0.7.0/gcppubsub.yaml
    ```
 
 1. Enable the `Cloud Pub/Sub API` on your project:
@@ -76,9 +83,9 @@ source is most useful as a bridge from other GCP services, such as
    namespace `default`, feel free to change to any other namespace you would
    like to use instead:
 
-```shell
-kubectl label namespace default knative-eventing-injection=enabled
-```
+   ```shell
+   kubectl label namespace default knative-eventing-injection=enabled
+   ```
 
 1. Create a GCP PubSub Topic. If you change its name (`testing`), you also need
    to update the `topic` in the
@@ -128,8 +135,9 @@ We will verify that the published message was sent into the Knative eventing
 system by looking at the logs of the function subscribed to the `pubsub-test`
 channel.
 
-The function and the subscription were created by applying the `subscriber.yaml`
-manifest in the [deployment](#deployment) section above.
+The function and the subscription were created by applying the
+[`trigger.yaml`](./trigger.yaml) manifest in the [deployment](#deployment)
+section above.
 
 1. We need to wait for the downstream pods to get started and receive our event,
    wait 60 seconds.

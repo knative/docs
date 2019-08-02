@@ -72,36 +72,15 @@ of this guide be sure you have `export KUBECONFIG=my-cluster.yaml` set.
 
 ## Installing Istio
 
-Knative depends on Istio.
+Knative depends on Istio. If your cloud platform offers a managed Istio
+installation, we recommend installing Istio that way, unless you need the
+ability to customize your installation.
 
-1.  Install Istio:
+Otherwise, see the [Installing Istio for Knative guide](./installing-istio.md)
+to install Istio.
 
-    ```bash
-    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/istio-crds.yaml && \
-    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/istio.yaml
-    ```
-
-    Note: the resources (CRDs) defined in the `istio-crds.yaml`file are also
-    included in the `istio.yaml` file, but they are pulled out so that the CRD
-    definitions are created first. If you see an error when creating resources
-    about an unknown type, run the second `kubectl apply` command again.
-
-2.  Label the default namespace with `istio-injection=enabled`:
-    ```bash
-    kubectl label namespace default istio-injection=enabled
-    ```
-3.  Monitor the Istio components until all of the components show a `STATUS` of
-    `Running` or `Completed`: 
-    ```bash 
-    kubectl get pods --namespace istio-system
-    ```
-
-It will take a few minutes for all the components to be up and running; you can
-rerun the command to see the current status.
-
-> Note: Instead of rerunning the command, you can add `--watch` to the above
-> command to view the component's status updates in real time. Use CTRL + C to
-> exit watch mode.
+You must install Istio on your Kubernetes cluster before continuing with these
+instructions to install Knative.
 
 ## Installing Knative
 
@@ -136,30 +115,33 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
 
    ```bash
    kubectl apply --selector knative.dev/crd-install=true \
-   --filename https://github.com/knative/serving/releases/download/v0.5.0/serving.yaml \
-   --filename https://github.com/knative/build/releases/download/v0.5.0/build.yaml \
-   --filename https://github.com/knative/eventing/releases/download/v0.5.0/release.yaml \
-   --filename https://github.com/knative/eventing-sources/releases/download/v0.5.0/eventing-sources.yaml \
-   --filename https://github.com/knative/serving/releases/download/v0.5.0/monitoring.yaml \
-   --filename https://raw.githubusercontent.com/knative/serving/v0.5.0/third_party/config/build/clusterrole.yaml
+   --filename https://github.com/knative/serving/releases/download/v0.7.0/serving.yaml \
+   --filename https://github.com/knative/build/releases/download/v0.7.0/build.yaml \
+   --filename https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml \
+   --filename https://github.com/knative/serving/releases/download/v0.7.0/monitoring.yaml
    ```
 
 1. To complete the install of Knative and its dependencies, run the
-   `kubectl apply` command again, this time without the `--selector`
-   flag, to complete the install of Knative and its dependencies:
+   `kubectl apply` command again, this time without the `--selector` flag, to
+   complete the install of Knative and its dependencies:
 
    ```bash
-   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/serving.yaml \
-   --filename https://github.com/knative/build/releases/download/v0.5.0/build.yaml \
-   --filename https://github.com/knative/eventing/releases/download/v0.5.0/release.yaml \
-   --filename https://github.com/knative/eventing-sources/releases/download/v0.5.0/eventing-sources.yaml \
-   --filename https://github.com/knative/serving/releases/download/v0.5.0/monitoring.yaml \
-   --filename https://raw.githubusercontent.com/knative/serving/v0.5.0/third_party/config/build/clusterrole.yaml
+   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.7.0/serving.yaml --selector networking.knative.dev/certificate-provider!=cert-manager \
+   --filename https://github.com/knative/build/releases/download/v0.7.0/build.yaml \
+   --filename https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml \
+   --filename https://github.com/knative/serving/releases/download/v0.7.0/monitoring.yaml
    ```
 
-   > **Note**: For the v0.4.0 release and newer, the `clusterrole.yaml` file is
-   > required to enable the Build and Serving components to interact with each
-   > other.
+   > **Notes**:
+   >
+   > - By default, the Knative Serving component installation (`serving.yaml`)
+   >   includes a controller for
+   >   [enabling automatic TLS certificate provisioning](../serving/using-auto-tls.md).
+   >   If you do intend on immediately enabling auto certificates in Knative,
+   >   you can remove the
+   >   `--selector networking.knative.dev/certificate-provider!=cert-manager`
+   >   statement to install the controller. Otherwise, you can choose to install
+   >   the auto certificates feature and controller at a later time.
 
 1. Monitor the Knative components until all of the components show a `STATUS` of
    `Running`:
@@ -167,7 +149,6 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
    kubectl get pods --namespace knative-serving
    kubectl get pods --namespace knative-build
    kubectl get pods --namespace knative-eventing
-   kubectl get pods --namespace knative-sources
    kubectl get pods --namespace knative-monitoring
    ```
 

@@ -17,10 +17,21 @@ sections to do so now.
 
 ## Metrics
 
+1. Run the following command and follow the instructions below to enable request
+   metrics if they are wanted:
+
+   ```
+   kubectl edit cm -n knative-serving config-observability
+   ```
+
+   Add `metrics.request-metrics-backend-destination: prometheus` to `data`
+   field. You can find detailed information in `data._example` field in the
+   `ConfigMap` you are editing.
+
 1. Run the following command to install Prometheus and Grafana:
 
    ```shell
-   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/monitoring-metrics-prometheus.yaml
+   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.7.0/monitoring-metrics-prometheus.yaml
    ```
 
 1. Ensure that the `grafana-*`, `kibana-logging-*`, `kube-state-metrics-*`,
@@ -52,6 +63,21 @@ in Knative.
 
 ## Logs
 
+### Enable Request Logs
+
+Run the following command and follow the instructions below to enable request
+logs if they are wanted:
+
+```
+kubectl edit cm -n knative-serving config-observability
+```
+
+Copy `logging.request-log-template` from `data._example` field to`data` field in
+the `ConfigMap` you are editing.. You can find detailed information in
+`data._example` field to customize the request log format.
+
+### Choose One Logging Backend
+
 Knative offers three different setups for collecting logs. Choose one to
 install:
 
@@ -59,12 +85,12 @@ install:
 1. [Stackdriver](#stackdriver)
 1. [Custom logging plugin](./setting-up-a-logging-plugin.md)
 
-### Elasticsearch and Kibana
+#### Elasticsearch and Kibana
 
 1. Run the following command to install an ELK stack:
 
    ```shell
-   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/monitoring-logs-elasticsearch.yaml
+   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.7.0/monitoring-logs-elasticsearch.yaml
    ```
 
 1. Ensure that the `elasticsearch-logging-*`, `fluentd-ds-*`, and
@@ -116,7 +142,7 @@ install:
 1. When the installation is complete and all the resources are running, you can
    continue to the next section and begin creating your Elasticsearch indices.
 
-#### Create Elasticsearch Indices
+##### Create Elasticsearch Indices
 
 To visualize logs with Kibana, you need to set which Elasticsearch indices to
 explore.
@@ -140,12 +166,12 @@ explore.
   `Index pattern` and select `@timestamp` from `Time Filter field name` and
   click on `Create` button.
 
-![Create logstash-* index](../images/kibana-landing-page-configure-index.png)
+![Create logstash-* index](./images/kibana-landing-page-configure-index.png)
 
 See [Accessing Logs](./accessing-logs.md) for more information about logs in
 Knative.
 
-### Stackdriver
+#### Stackdriver
 
 To configure and setup monitoring:
 
@@ -226,29 +252,76 @@ To configure and setup monitoring:
 See [Accessing Logs](./accessing-logs.md) for more information about logs in
 Knative.
 
-## End to end traces
+## End to end request tracing
 
-- If Elasticsearch is not installed or if you don't want to persist end to end
-  traces, run:
+You can choose from one of the following options to enable request tracing in
+your Knative Serving cluster.
 
-  ```shell
-  kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/monitoring-tracing-zipkin-in-mem.yaml
-  ```
+**Important**: Your cluster supports only a single request trace tool. If you
+want to replace a currently installed request trace tool, you must first
+uninstall that tool before installing the new tool.
 
-- If Elasticsearch is installed and you want to persist end to end traces, first
-  run:
+### Zipkin
 
-  ```shell
-  kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/monitoring-tracing-zipkin.yaml
-  ```
+1. Install support for Zipkin:
 
-  Next, create an Elasticsearch index for end to end traces:
+   - If Elasticsearch is not installed or if you don't want to persist end to
+     end traces, run:
 
-  - Open Kibana UI as described in
-    [Create Elasticsearch Indices](#create-elasticsearch-indices) section.
-  - Select `Create Index Pattern` button on top left of the page. Enter
-    `zipkin*` to `Index pattern` and select `timestamp_millis` from
-    `Time Filter field name` and click on `Create` button.
+     ```shell
+     kubectl apply --filename https://github.com/knative/serving/releases/download/v0.7.0/monitoring-tracing-zipkin-in-mem.yaml
+     ```
+
+   - If Elasticsearch is installed and you want to persist end to end traces,
+     first run:
+
+     ```shell
+     kubectl apply --filename https://github.com/knative/serving/releases/download/v0.7.0/monitoring-tracing-zipkin.yaml
+     ```
+
+1. Create an Elasticsearch index for end to end traces:
+
+   1. Open Kibana UI as described in
+      [Create Elasticsearch Indices](#create-elasticsearch-indices) section.
+
+   1. Select `Create Index Pattern` button on top left of the page. Enter
+      `zipkin*` to `Index pattern` and select `timestamp_millis` from
+      `Time Filter field name` and click on `Create` button.
+
+Visit [Accessing Traces](./accessing-traces.md) for more information on end to
+end traces.
+
+### Jaeger
+
+1. Install the Jaeger operator. Use the instructions in
+   jaegertracing/jaeger-operator repository and follow only the steps in the
+   [Installing the operator](https://github.com/jaegertracing/jaeger-operator#installing-the-operator)
+   section.
+
+1. Install support for Jaeger:
+
+   - If Elasticsearch is not installed or if you don't want to persist end to
+     end traces, run:
+
+     ```shell
+     kubectl apply --filename https://github.com/knative/serving/releases/download/v0.7.0/monitoring-tracing-jaeger-in-mem.yaml
+     ```
+
+   - If Elasticsearch is installed and you want to persist end to end traces,
+     first run:
+
+     ```shell
+     kubectl apply --filename https://github.com/knative/serving/releases/download/v0.7.0/monitoring-tracing-jaeger.yaml
+     ```
+
+1. Create an Elasticsearch index for end to end traces:
+
+   1. Open Kibana UI as described in
+      [Create Elasticsearch Indices](#create-elasticsearch-indices) section.
+
+   1. Select `Create Index Pattern` button on top left of the page. Enter
+      `jaeger*` to `Index pattern` and select `timestamp_millis` from
+      `Time Filter field name` and click on `Create` button.
 
 Visit [Accessing Traces](./accessing-traces.md) for more information on end to
 end traces.

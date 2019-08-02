@@ -167,10 +167,6 @@ RUN apk add --no-cache ca-certificates
 # Copy the binary to the production image from the builder stage.
 COPY --from=builder /go/src/github.com/knative/docs/helloworld/helloworld /helloworld
 
-# Service must listen to $PORT environment variable.
-# This default value facilitates local development.
-ENV PORT 8080
-
 # Run the web service on container startup.
 CMD ["/helloworld"]
 ```
@@ -185,15 +181,13 @@ metadata:
   name: helloworld-go
   namespace: default
 spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        spec:
-          container:
-            image: docker.io/{username}/helloworld-go
-            env:
-              - name: TARGET
-                value: "Go Sample v1"
+  template:
+    spec:
+      containers:
+        - image: docker.io/{username}/helloworld-go
+          env:
+            - name: TARGET
+              value: "Go Sample v1"
 ```
 
 Once the sample code has been created, we'll build and deploy it
@@ -238,14 +232,14 @@ http://192.168.99.230:31864
 Run the following command to find the domain URL for your service:
 
 ```bash
-kubectl get ksvc helloworld-go -n default  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+kubectl get ksvc helloworld-go -n default  --output=custom-columns=NAME:.metadata.name,URL:.status.url
 ```
 
 Example:
 
 ```bash
-NAME                DOMAIN
-helloworld-go       helloworld-go.default.example.com
+NAME                URL
+helloworld-go       http://helloworld-go.default.example.com
 ```
 
 Test your app by sending it a request. Use the following `curl` command with the

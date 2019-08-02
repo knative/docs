@@ -1,3 +1,10 @@
+---
+title: "Cron job source example"
+linkTitle: "Cron job source"
+weight: 10
+type: "docs"
+---
+
 Cron Job Source example shows how to configure Cron Job as event source for
 functions.
 
@@ -19,12 +26,10 @@ kind: Service
 metadata:
   name: event-display
 spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        spec:
-          container:
-            image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display
+  template:
+    spec:
+      containers:
+        - image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display
 ```
 
 Use following command to create the service from `service.yaml`:

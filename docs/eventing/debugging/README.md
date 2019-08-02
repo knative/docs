@@ -1,3 +1,10 @@
+---
+title: "Debugging Knative Eventing"
+linkTitle: "Debugging"
+weight: 100
+type: "docs"
+---
+
 This is an evolving document on how to debug a non-working Knative Eventing
 setup.
 
@@ -11,15 +18,15 @@ know roughly how things fit together.
 
 This document works with
 [Eventing 0.3](https://github.com/knative/eventing/releases/tag/v0.3.0) and
-[Eventing Sources 0.3](https://github.com/knative/eventing-sources/releases/tag/v0.3.0).
+[Eventing-contrib resources 0.3](https://github.com/knative/eventing-contrib/releases/tag/v0.3.0).
 
 ## Prerequisites
 
-1. Setup [Knative Eventing and Eventing-Sources](../README.md).
+1. Setup [Knative Eventing and an Eventing-contrib resource](../README.md).
 
 ## Example
 
-This guide uses an example consisting of an Event Source sending events to a
+This guide uses an example consisting of an event source that sends events to a
 function.
 
 ![src -> chan -> sub -> svc -> fn](ExampleModel.png)
@@ -202,9 +209,9 @@ during `chan` reconciliation. See [Channel Controller](#channel-controller).
 ##### `src`
 
 `src` is a
-[`KubernetesEventSource`](https://github.com/knative/eventing-sources/blob/master/pkg/apis/sources/v1alpha1/kuberneteseventsource_types.go),
+[`KubernetesEventSource`](https://github.com/knative/eventing-contrib/blob/master/pkg/apis/sources/v1alpha1/kuberneteseventsource_types.go),
 which creates an underlying
-[`ContainerSource`](https://github.com/knative/eventing-sources/blob/master/pkg/apis/sources/v1alpha1/containersource_types.go).
+[`ContainerSource`](https://github.com/knative/eventing/blob/master/pkg/apis/sources/v1alpha1/containersource_types.go).
 
 First we will verify that `src` is writing to `chan`.
 
@@ -354,16 +361,16 @@ kubectl --namespace knative-sources logs -l control-plane=controller-manager
 ###### ContainerSource Controller
 
 The `ContainerSource` Controller is run in the same binary as some other Source
-Controllers. It is:
+Controllers from Eventing. It is:
 
 ```shell
-kubectl --namespace knative-sources get pod -l control-plane=controller-manager
+kubectl --namespace knative-eventing get pod -l app=sources-controller
 ```
 
 View its logs with:
 
 ```shell
-kubectl --namespace knative-sources logs -l control-plane=controller-manager
+kubectl --namespace knative-eventing logs -l app=sources-controller
 ```
 
 Pay particular attention to any lines that have a logging level of `warning` or
@@ -435,8 +442,8 @@ to start. If you see these more than a few seconds after the `Pod` starts, then
 something is wrong.
 
 ```shell
-E0116 23:59:40.033667       1 reflector.go:205] github.com/knative/eventing-sources/pkg/adapter/kubernetesevents/adapter.go:73: Failed to list *v1.Event: Get https://10.51.240.1:443/api/v1/namespaces/kna tive-debug/events?limit=500&resourceVersion=0: dial tcp 10.51.240.1:443: connect: connection refused
-E0116 23:59:41.034572       1 reflector.go:205] github.com/knative/eventing-sources/pkg/adapter/kubernetesevents/adapter.go:73: Failed to list *v1.Event: Get https://10.51.240.1:443/api/v1/namespaces/kna tive-debug/events?limit=500&resourceVersion=0: dial tcp 10.51.240.1:443: connect: connection refused
+E0116 23:59:40.033667       1 reflector.go:205] github.com/knative/eventing-contrib/pkg/adapter/kubernetesevents/adapter.go:73: Failed to list *v1.Event: Get https://10.51.240.1:443/api/v1/namespaces/kna tive-debug/events?limit=500&resourceVersion=0: dial tcp 10.51.240.1:443: connect: connection refused
+E0116 23:59:41.034572       1 reflector.go:205] github.com/knative/eventing-contrib/pkg/adapter/kubernetesevents/adapter.go:73: Failed to list *v1.Event: Get https://10.51.240.1:443/api/v1/namespaces/kna tive-debug/events?limit=500&resourceVersion=0: dial tcp 10.51.240.1:443: connect: connection refused
 ```
 
 The success message is `debug` level, so we don't expect to see anything. If you

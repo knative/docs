@@ -1,3 +1,10 @@
+---
+title: "Observability: Monitoring, logging, and tracing sample - Go"
+linkTitle: "Observability - Go"
+weight: 1
+type: "docs"
+---
+
 This sample runs a simple web server that makes calls to other in-cluster
 services and responds to requests with "Hello World!". The purpose of this
 sample is to show generating [metrics](../../accessing-metrics.md),
@@ -151,14 +158,12 @@ status:
     ...
     status: "True"
     type: Ready
-    domain: telemetrysample-route.default.example.com
+  url: http://telemetrysample-route.default.example.com
 ```
 
-2. Export the ingress hostname and IP as environment variables:
+2. Export the ingress IP as an environment variable:
 
 ```
-export SERVICE_HOST=`kubectl get route telemetrysample-route --output jsonpath="{.status.domain}"`
-
 # In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
 INGRESSGATEWAY=knative-ingressgateway
 
@@ -175,14 +180,14 @@ export SERVICE_IP=`kubectl get svc $INGRESSGATEWAY --namespace istio-system --ou
 3. Make a request to the service to see the `Hello World!` message:
 
 ```
-curl --header "Host:$SERVICE_HOST" http://${SERVICE_IP}
+curl --header "Host:telemetrysample-route.default.example.com" http://${SERVICE_IP}
 ```
 
 4. Make a request to the `/log` endpoint to generate logs to the `stdout` file
    and generate files under `/var/log` in both `JSON` and plain text formats:
 
 ```
-curl --header "Host:$SERVICE_HOST" http://${SERVICE_IP}/log
+curl --header "Host:telemetrysample-route.default.example.com" http://${SERVICE_IP}/log
 ```
 
 ## Access Logs

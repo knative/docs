@@ -32,37 +32,27 @@ collecting `stdout/stderr` logs from the containers:
    with the desired output configuration. Knative provides a sample for sending
    logs to Elasticsearch or Stackdriver. Developers can simply use
    `100-fluentd-configmap.yaml` or override any with other configuration.
-2. Replace the `image` field of `fluentd-ds` container of `flunetd-ds` DaemonSet
+2. Replace the `image` field of `fluentd-ds` container of `fluentd-ds` DaemonSet
    in
    [200-fluentd.yaml](https://github.com/knative/serving/blob/master/config/monitoring/logging/elasticsearch/200-fluentd.yaml)
    with the Fluentd image including the desired Fluentd output plugin. See
    [here](./fluentd-requirements.md) for the requirements of Flunetd image on
    Knative.
 
-### Configure the Sidecar for log files under /var/log
+### Configure the DaemonSet for log files under /var/log
 
-Currently operators have to configure the Fluentd Sidecar separately for
-collecting log files under `/var/log`. An
-[effort](https://github.com/knative/serving/issues/818) is in process to get rid
-of the sidecar. The steps to configure are:
+The Fluentd DaemonSet can also capture `/var/log` logs from the containers. To
+enable:
 
-1. Replace `logging.fluentd-sidecar-output-config` flag in
-   [config-observability](https://github.com/knative/serving/blob/master/config/config-observability.yaml)
-   with the desired output configuration. **NOTE**: The Fluentd DaemonSet is in
-   `monitoring` namespace while the Fluentd sidecar is in the namespace same
-   with the app. There may be small differences between the configuration for
-   DaemonSet and sidecar even though the desired backends are the same.
-2. Replace `logging.fluentd-sidecar-image` flag in
-   [config-observability](https://github.com/knative/serving/blob/master/config/config-observability.yaml)
-   with the Fluentd image including the desired Fluentd output plugin. In
-   theory, this is the same with the one for Fluentd DaemonSet.
+- Set `logging.enable-var-log-collection` to `true` in
+  [config-observability](https://github.com/knative/serving/blob/master/config/config-observability.yaml)
 
 ## Deploying
 
 Operators need to deploy Knative components after the configuring:
 
 ```shell
-# Deploy the configuration for sidecar
+# Deploy the configuration for enabling /var/log collection
 kubectl apply --filename config/config-observability.yaml
 
 # Deploy the DaemonSet to make configuration for DaemonSet take effect
@@ -74,9 +64,9 @@ In the commands above, replace `<path-of-fluentd-daemonset-config>` with the
 Fluentd DaemonSet configuration file, e.g.
 `config/monitoring/logging/stackdriver`.
 
-**NOTE**: The deployment above will not affect the fluentd sidecar of existing
-pods. Developers need to redeploy their app to get the newest configuration for
-the fluentd sidecar used to send logs to `/var/log`.
+**NOTE**: The deployment above will not affect the existing pods. Developers
+need to redeploy their app to get the newest configuration for `/var/log`
+collection.
 
 **NOTE**: Operators sometimes need to deploy extra services as the logging
 backends. For example, if they desire Elasticsearch&Kibana, they have to deploy

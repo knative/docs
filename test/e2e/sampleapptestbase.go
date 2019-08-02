@@ -69,7 +69,7 @@ func cleanup(yamlFilePath, workDir string) {
 }
 
 func serviceHostname(appName string) string {
-	return noStderrShell("kubectl", "get", "rt", appName, "-o", "jsonpath={.status.domain}", "-n", servingNamespace)
+	return noStderrShell("kubectl", "get", "rt", appName, "-o", "jsonpath={.status.url}", "-n", servingNamespace)
 }
 
 func ingressAddress(gateway string, addressType string) string {
@@ -158,6 +158,7 @@ func checkDeployment(t *testing.T, appName, expectedOutput string) {
 	}
 	t.Logf("Curling %s/%s", ingressAddr, serviceHost)
 
+	serviceHost = strings.Replace(serviceHost, "http://", "", 1)
 	outputString := ""
 	timeout = servingTimeout
 	for outputString != expectedOutput && timeout >= 0 {

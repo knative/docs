@@ -1,8 +1,24 @@
+---
+title: "Hello World - Go"
+linkTitle: "Go"
+weight: 1
+type: "docs"
+---
+
 A simple web app written in Go that you can use for testing. It reads in an env
 variable `TARGET` and prints `Hello ${TARGET}!`. If `TARGET` is not specified,
 it will use `World` as the `TARGET`.
 
-## Prerequisites
+Follow the steps below to create the sample code and then deploy the app to your
+cluster. You can also download a working copy of the sample, by running the
+following commands:
+
+```shell
+git clone -b "release-0.7" https://github.com/knative/docs knative-docs
+cd knative-docs/docs/serving/samples/hello-world/helloworld-go
+```
+
+## Before you begin
 
 - A Kubernetes cluster with Knative installed. Follow the
   [installation instructions](../../../../install/README.md) if you need to
@@ -11,10 +27,6 @@ it will use `World` as the `TARGET`.
   and a Docker Hub account configured (we'll use it for a container registry).
 
 ## Recreating the sample code
-
-While you can clone all of the code from this directory, hello world apps are
-generally more useful if you build them step-by-step. The following instructions
-recreate the source files from this folder.
 
 1. Create a new file named `helloworld.go` and paste the following code. This
    code creates a basic web server which listens on port 8080:
@@ -94,15 +106,13 @@ recreate the source files from this folder.
      name: helloworld-go
      namespace: default
    spec:
-     runLatest:
-       configuration:
-         revisionTemplate:
-           spec:
-             container:
-               image: docker.io/{username}/helloworld-go
-               env:
-                 - name: TARGET
-                   value: "Go Sample v1"
+     template:
+       spec:
+         containers:
+           - image: docker.io/{username}/helloworld-go
+             env:
+               - name: TARGET
+                 value: "Go Sample v1"
    ```
 
 ## Building and deploying the sample
@@ -167,14 +177,14 @@ folder) you're ready to build and deploy the sample app.
 1. Run the following command to find the domain URL for your service:
 
    ```shell
-   kubectl get ksvc helloworld-go  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+   kubectl get ksvc helloworld-go  --output=custom-columns=NAME:.metadata.name,URL:.status.url
    ```
 
    Example:
 
    ```shell
-   NAME                DOMAIN
-   helloworld-go       helloworld-go.default.example.com
+    NAME                URL
+    helloworld-go       http://helloworld-go.default.example.com
    ```
 
 1. Test your app by sending it a request. Use the following `curl` command with

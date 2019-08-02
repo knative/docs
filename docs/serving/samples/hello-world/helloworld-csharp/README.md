@@ -1,8 +1,24 @@
+---
+title: "Hello world - .NET Core"
+linkTitle: ".NET"
+weight: 1
+type: "docs"
+---
+
 A simple web app written in C# using .NET Core 2.2 that you can use for testing.
 It reads in an env variable `TARGET` and prints "Hello \${TARGET}!". If TARGET
 is not specified, it will use "World" as the TARGET.
 
-## Prerequisites
+Follow the steps below to create the sample code and then deploy the app to your
+cluster. You can also download a working copy of the sample, by running the
+following commands:
+
+```shell
+git clone -b "release-0.7" https://github.com/knative/docs knative-docs
+cd knative-docs/docs/serving/samples/hello-world/helloworld-csharp
+```
+
+## Before you begin
 
 - A Kubernetes cluster with Knative installed. Follow the
   [installation instructions](../../../../install/README.md) if you need to
@@ -12,10 +28,6 @@ is not specified, it will use "World" as the TARGET.
 - You have installed [.NET Core SDK 2.2](https://www.microsoft.com/net/core).
 
 ## Recreating the sample code
-
-While you can clone all of the code from this directory, hello world apps are
-generally more useful if you build them step-by-step. The following instructions
-recreate the source files from this folder.
 
 1. First, make sure you have
    [.NET Core SDK 2.2](https://www.microsoft.com/net/core) installed:
@@ -82,6 +94,16 @@ recreate the source files from this folder.
    CMD ["dotnet", "out/helloworld-csharp.dll"]
    ```
 
+1. Create a `.dockerignore` file to ensure that any files related to a local
+   build do not affect the container that you build for deployment.
+
+   ```ignore
+   Dockerfile
+   README.md
+   **/obj/
+   **/bin/
+   ```
+
 1. Create a new file, `service.yaml` and copy the following service definition
    into the file. Make sure to replace `{username}` with your Docker Hub
    username.
@@ -93,15 +115,13 @@ recreate the source files from this folder.
      name: helloworld-csharp
      namespace: default
    spec:
-     runLatest:
-       configuration:
-         revisionTemplate:
-           spec:
-             container:
-               image: docker.io/{username}/helloworld-csharp
-               env:
-                 - name: TARGET
-                   value: "C# Sample v1"
+     template:
+       spec:
+         containers:
+           - image: docker.io/{username}/helloworld-csharp
+             env:
+               - name: TARGET
+                 value: "C# Sample v1"
    ```
 
 ## Building and deploying the sample
@@ -161,9 +181,9 @@ folder) you're ready to build and deploy the sample app.
 1. To find the URL for your service, use
 
    ```
-   kubectl get ksvc helloworld-csharp  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
-   NAME                DOMAIN
-   helloworld-csharp   helloworld-csharp.default.example.com
+   kubectl get ksvc helloworld-csharp  --output=custom-columns=NAME:.metadata.name,URL:.status.url
+   NAME                URL
+   helloworld-csharp   http://helloworld-csharp.default.example.com
    ```
 
 1. Now you can make a request to your app to see the result. Replace

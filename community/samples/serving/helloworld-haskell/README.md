@@ -1,4 +1,9 @@
-# Hello World - Haskell sample
+---
+title: "Hello World - Haskell"
+linkTitle: "Haskell"
+weight: 1
+type: "docs"
+---
 
 A simple web app written in Haskell that you can use for testing. It reads in an
 env variable `TARGET` and prints "Hello \${TARGET}!". If TARGET is not
@@ -101,10 +106,6 @@ recreate the source files from this folder.
    WORKDIR /root/
    COPY --from=builder /root/.local/bin/helloworld-haskell-exe .
 
-   # Service must listen to $PORT environment variable.
-   # This default value facilitates local development.
-   ENV PORT 8080
-
    # Run the web service on container startup.
    CMD ["./helloworld-haskell-exe"]
    ```
@@ -120,15 +121,13 @@ recreate the source files from this folder.
      name: helloworld-haskell
      namespace: default
    spec:
-     runLatest:
-       configuration:
-         revisionTemplate:
-           spec:
-             container:
-               image: docker.io/{username}/helloworld-haskell
-               env:
-                 - name: TARGET
-                   value: "Haskell Sample v1"
+     template:
+       spec:
+         containers:
+           - image: docker.io/{username}/helloworld-haskell
+             env:
+               - name: TARGET
+                 value: "Haskell Sample v1"
    ```
 
 ## Build and deploy this sample
@@ -196,9 +195,9 @@ folder) you're ready to build and deploy the sample app.
 1. To find the URL for your service, enter:
 
    ```
-   kubectl get ksvc helloworld-haskell  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
-   NAME                   DOMAIN
-   helloworld-haskell     helloworld-haskell.default.example.com
+   kubectl get ksvc helloworld-haskell  --output=custom-columns=NAME:.metadata.name,URL:.status.url
+   NAME                   URL
+   helloworld-haskell     http://helloworld-haskell.default.example.com
    ```
 
 1. Now you can make a request to your app and see the result. Replace

@@ -1,8 +1,24 @@
+---
+title: "Hello World - Python"
+linkTitle: "Python"
+weight: 1
+type: "docs"
+---
+
 A simple web app written in Python that you can use for testing. It reads in an
 env variable `TARGET` and prints "Hello \${TARGET}!". If TARGET is not
 specified, it will use "World" as the TARGET.
 
-## Prerequisites
+Follow the steps below to create the sample code and then deploy the app to your
+cluster. You can also download a working copy of the sample, by running the
+following commands:
+
+```shell
+git clone -b "release-0.7" https://github.com/knative/docs knative-docs
+cd knative-docs/docs/serving/samples/hello-world/helloworld-python
+```
+
+## Before you begin
 
 - A Kubernetes cluster with Knative installed. Follow the
   [installation instructions](../../../../install/README.md) if you need to
@@ -10,11 +26,7 @@ specified, it will use "World" as the TARGET.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
 
-## Steps to recreate the sample code
-
-While you can clone all of the code from this directory, hello world apps are
-generally more useful if you build them step-by-step. The following instructions
-recreate the source files from this folder.
+## Recreating the sample code
 
 1. Create a new directory and cd into it:
 
@@ -34,11 +46,11 @@ recreate the source files from this folder.
 
    @app.route('/')
    def hello_world():
-       target = os.environ.get('TARGET', 'World')
-       return 'Hello {}!\n'.format(target)
+      target = os.environ.get('TARGET', 'World')
+      return 'Hello {}!\n'.format(target)
 
    if __name__ == "__main__":
-       app.run(debug=True,host='0.0.0.0',port=int(os.environ.get('PORT', 8080)))
+      app.run(debug=True,host='0.0.0.0',port=int(os.environ.get('PORT', 8080)))
    ```
 
 1. Create a file named `Dockerfile` and copy the code block below into it. See
@@ -65,6 +77,18 @@ recreate the source files from this folder.
    CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 app:app
    ```
 
+1. Create a `.dockerignore` file to ensure that any files related to a local
+   build do not affect the container that you build for deployment.
+
+   ```ignore
+   Dockerfile
+   README.md
+   *.pyc
+   *.pyo
+   *.pyd
+   __pycache__
+   ```
+
 1. Create a new file, `service.yaml` and copy the following service definition
    into the file. Make sure to replace `{username}` with your Docker Hub
    username.
@@ -76,15 +100,13 @@ recreate the source files from this folder.
      name: helloworld-python
      namespace: default
    spec:
-     runLatest:
-       configuration:
-         revisionTemplate:
-           spec:
-             container:
-               image: docker.io/{username}/helloworld-python
-               env:
-                 - name: TARGET
-                   value: "Python Sample v1"
+     template:
+       spec:
+         containers:
+           - image: docker.io/{username}/helloworld-python
+             env:
+               - name: TARGET
+                 value: "Python Sample v1"
    ```
 
 ## Build and deploy this sample
@@ -132,7 +154,7 @@ folder) you're ready to build and deploy the sample app.
    # Use `istio-ingressgateway` instead, since `knative-ingressgateway`
    # will be removed in Knative v0.4.
    if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
-       INGRESSGATEWAY=istio-ingressgateway
+      INGRESSGATEWAY=istio-ingressgateway
    fi
 
    kubectl get svc $INGRESSGATEWAY --namespace istio-system
@@ -144,9 +166,9 @@ folder) you're ready to build and deploy the sample app.
 1. To find the URL for your service, use
 
    ```
-   kubectl get ksvc helloworld-python  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
-   NAME                DOMAIN
-   helloworld-python   helloworld-python.default.example.com
+   kubectl get ksvc helloworld-python  --output=custom-columns=NAME:.metadata.name,URL:.status.url
+   NAME                URL
+   helloworld-python   http://helloworld-python.default.example.com
    ```
 
 1. Now you can make a request to your app to see the result. Replace

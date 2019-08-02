@@ -73,32 +73,29 @@ spec:
       url: https://github.com/example/build-example.git
       revision: master
   steps:
-  - name: ubuntu-example
-    image: ubuntu
-    args: ["ubuntu-build-example", "SECRETS-example.md"]
-  steps:
-  - image: gcr.io/example-builders/build-example
-    args: ['echo', 'hello-example', 'build']
-  steps:
-  - name: dockerfile-pushexample
-    image: gcr.io/example-builders/push-example
-    args: ["push", "${IMAGE}"]
-    volumeMounts:
-    - name: docker-socket-example
-      mountPath: /var/run/docker.sock
+    - name: ubuntu-example
+      image: ubuntu
+      args: ["ubuntu-build-example", "SECRETS-example.md"]
+    - image: gcr.io/example-builders/build-example
+      args: ["echo", "hello-example", "build"]
+    - name: dockerfile-pushexample
+      image: gcr.io/example-builders/push-example
+      args: ["push", "${IMAGE}"]
+      volumeMounts:
+        - name: docker-socket-example
+          mountPath: /var/run/docker.sock
   volumes:
-  - name: example-volume
-    emptyDir: {}
+    - name: example-volume
+      emptyDir: {}
 ```
 
 #### Steps
 
-The `steps` field is required if the `template` field is not defined. You define
-one or more `steps` fields to define the body of a build.
+The `steps` field is required if the `template` field is not defined.
 
-Each `steps` in a build must specify a `Builder`, or type of container image
-that adheres to the [Knative builder contract](./builder-contract.md). For each
-of the `steps` fields, or container images that you define:
+Each `steps` field in a build must specify a `Builder`, or type of container
+image that adheres to the [Knative builder contract](./builder-contract.md). For
+each of the `steps` fields, or container images that you define:
 
 - The `Builder`-type container images are run and evaluated in order, starting
   from the top of the configuration file.

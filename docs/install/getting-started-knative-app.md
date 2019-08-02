@@ -53,15 +53,13 @@ metadata:
   name: helloworld-go # The name of the app
   namespace: default # The namespace the app will use
 spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        spec:
-          container:
-            image: gcr.io/knative-samples/helloworld-go # The URL to the image of the app
-            env:
-              - name: TARGET # The environment variable printed out by the sample app
-                value: "Go Sample v1"
+  template:
+    spec:
+      containers:
+        - image: gcr.io/knative-samples/helloworld-go # The URL to the image of the app
+          env:
+            - name: TARGET # The environment variable printed out by the sample app
+              value: "Go Sample v1"
 ```
 
 If you want to deploy the sample app, leave the config file as-is. If you're
@@ -87,7 +85,7 @@ Now that your service is created, Knative will perform the following steps:
 
 ### Interacting with your app
 
-To see if your app has been deployed succesfully, you need the host URL and IP
+To see if your app has been deployed successfully, you need the host URL and IP
 address created by Knative.
 
 Note: If your cluster is new, it can take some time before the service is
@@ -107,41 +105,50 @@ assigned an external IP address.
    fi
 
    kubectl get svc $INGRESSGATEWAY --namespace istio-system
+   ```
 
+````
+
+The command will return something similar to this:
+
+```shell
    NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
    istio-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
-   ```
+````
 
-   Take note of the `EXTERNAL-IP` address.
+Take note of the `EXTERNAL-IP` address.
 
-   You can also export the IP address as a variable with the following command:
+You can also export the IP address as a variable with the following command:
 
-   ```shell
+```shell
    export IP_ADDRESS=$(kubectl get svc $INGRESSGATEWAY --namespace istio-system --output 'jsonpath={.status.loadBalancer.ingress[0].ip}')
-   ```
+```
 
-   > Note: if you use minikube or a baremetal cluster that has no external load
-   > balancer, the `EXTERNAL-IP` field is shown as `<pending>`. You need to use
-   > `NodeIP` and `NodePort` to interact your app instead. To get your app's
-   > `NodeIP` and `NodePort`, enter the following command:
+> Note: If you use minikube or a baremetal cluster that has no external load
+> balancer, the `EXTERNAL-IP` field is shown as `<pending>`. You need to use
+> `NodeIP` and `NodePort` to interact your app instead. To get your app's
+> `NodeIP` and `NodePort`, enter the following command:
 
-   ```shell
+```shell
    export IP_ADDRESS=$(kubectl get node  --output 'jsonpath={.items[0].status.addresses[0].address}'):$(kubectl get svc $INGRESSGATEWAY --namespace istio-system   --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
-   ```
+```
 
 1. To find the host URL for your service, enter:
 
    ```shell
-   kubectl get route helloworld-go  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
-   NAME                DOMAIN
-   helloworld-go       helloworld-go.default.example.com
+   kubectl get route helloworld-go  --output=custom-columns=NAME:.metadata.name,URL:.status.url
    ```
 
-   You can also export the host URL as a variable using the following command:
+   The command will return the following:
 
    ```shell
-   export HOST_URL=$(kubectl get route helloworld-go  --output jsonpath='{.status.domain}')
+   NAME                URL
+   helloworld-go       http://helloworld-go.default.example.com
    ```
+
+   > Note: By default, Knative uses the `example.com` domain. To configure a
+   > custom DNS domain, see
+   > [Using a Custom Domain](../serving/using-a-custom-domain.md).
 
    If you changed the name from `helloworld-go` to something else when creating
    the `.yaml` file, replace `helloworld-go` in the above commands with the name
@@ -154,14 +161,6 @@ assigned an external IP address.
 
    ```shell
    curl -H "Host: helloworld-go.default.example.com" http://${IP_ADDRESS}
-   Hello World: Go Sample v1!
-   ```
-
-   If you exported the host URL and IP address as variables in the previous
-   steps, you can use those variables to simplify your cURL request:
-
-   ```shell
-   curl -H "Host: ${HOST_URL}" http://${IP_ADDRESS}
    Hello World: Go Sample v1!
    ```
 

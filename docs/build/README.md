@@ -9,18 +9,13 @@ A Knative `Build` runs on-cluster and is implemented by a
 Given a _builder_, or container image that you have created to perform a task or
 action, you can define a Knative `Build` through a single configuration file.
 
-Also consider using a Knative `Build` to build the source code of your apps into
-container images, which you can then run on
-[Knative `serving`](../serving/README.md). More information about this use case
-is demonstrated in [this sample](../serving/samples/source-to-url-go).
-
 ## Key features of Knative Builds
 
 - A `Build` can include multiple `steps` where each step specifies a `Builder`.
 - A _builder_ is a type of container image that you create to accomplish any
   task, whether that's a single step in a process, or the whole process itself.
 - The `steps` in a `Build` can push to a registry.
-- A `BuildTemplate` can be used to defined reusable templates.
+- A `BuildTemplate` can be used to define reusable templates.
 - The `source` in a `Build` can be defined to mount data to a Kubernetes Volume,
   and supports:
   - `git` repositories
@@ -75,33 +70,16 @@ spec:
       url: https://github.com/example/build-example.git
       revision: master
   steps:
-  - name: ubuntu-example
-    image: ubuntu
-    args: ["ubuntu-build-example", "SECRETS-example.md"]
-  steps:
-  - image: gcr.io/example-builders/build-example
-    args: ['echo', 'hello-example', 'build']
+    - name: ubuntu-example
+      image: ubuntu
+      args: ["ubuntu-build-example", "SECRETS-example.md"]
+    - image: gcr.io/example-builders/build-example
+      args: ["echo", "hello-example", "build"]
 ```
 
 ## Get started with Knative Build samples
 
-Use the following samples to learn how to configure your Knative Builds to
-perform simple tasks.
-
-Tip: Review and reference multiple samples to piece together more complex
-builds.
-
-#### Simple build samples
-
-- [Collection of simple test builds](https://github.com/knative/build/tree/master/test).
-
-#### Build templates
-
-- [Repository of sample build templates](https://github.com/knative/build-templates).
-
-#### Complex samples
-
-- [Use Knative to build apps from source code and then run those containers](../serving/samples/source-to-url-go).
+[See Knative Build code samples](./samples.md)
 
 ## Related info
 

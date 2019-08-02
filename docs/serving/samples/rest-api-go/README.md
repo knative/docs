@@ -1,6 +1,14 @@
-This sample demonstrates creating and running a simple RESTful service on
-Knative Serving. The exposed endpoint takes a stock ticker (i.e. stock symbol),
-then outputs the stock price.
+---
+title: "Creating a RESTful Service - Go"
+linkTitle: "RESTful service - Go"
+weight: 1
+type: "docs"
+---
+
+This "stock ticker" sample demonstrates how to create and run a simple RESTful
+service on Knative Serving. The exposed endpoint outputs the stock price for a
+given "[stock symbol](https://www.marketwatch.com/tools/quotes/lookup.asp)",
+like `AAPL`,`AMZN`, `GOOG`, `MSFT`, etc.
 
 ## Prerequisites
 
@@ -10,14 +18,15 @@ then outputs the stock price.
    installed locally.
 1. [Outbound network access](../../outbound-network-access.md) enabled for this
    Service to make external API requests.
-1. The code checked out locally.
 1. `envsubst` installed locally. This is installed by the `gettext` package. If
    not installed it can be installed by a Linux package manager, or by
    [Homebrew](https://brew.sh/) on OS X.
+1. Download a copy of the code:
 
-```shell
-go get -d github.com/knative/docs/docs/serving/samples/rest-api-go
-```
+   ```shell
+   git clone -b "release-0.7" https://github.com/knative/docs knative-docs
+   cd knative-docs/serving/samples/rest-api-go
+   ```
 
 ## Setup
 
@@ -34,46 +43,47 @@ To build and push to a container registry using Docker:
 
 1. Move into the sample directory:
 
-```shell
-cd $GOPATH/src/github.com/knative/docs
-```
+   ```shell
+   cd $GOPATH/src/github.com/knative/docs
+   ```
 
 2. Set your preferred container registry endpoint as an environment variable.
    This sample uses
    [Google Container Registry (GCR)](https://cloud.google.com/container-registry/):
 
-```shell
-export REPO="gcr.io/<YOUR_PROJECT_ID>"
-```
+
+    ```shell
+    export REPO="gcr.io/<YOUR_PROJECT_ID>"
+    ```
 
 3. Set up your container registry to make sure you are ready to push.
 
-To push to GCR, you need to:
+   To push to GCR, you need to:
 
-- Create a
-  [Google Cloud Platform project](https://cloud.google.com/resource-manager/docs/creating-managing-projects#creating_a_project).
-- Enable the
-  [Google Container Registry API](https://console.cloud.google.com/apis/library/containerregistry.googleapis.com).
-- Setup an
-  [auth helper](https://cloud.google.com/container-registry/docs/advanced-authentication#gcloud_as_a_docker_credential_helper)
-  to give the Docker client the permissions it needs to push.
+   - Create a
+     [Google Cloud Platform project](https://cloud.google.com/resource-manager/docs/creating-managing-projects#creating_a_project).
+   - Enable the
+     [Google Container Registry API](https://console.cloud.google.com/apis/library/containerregistry.googleapis.com).
+   - Setup an
+     [auth helper](https://cloud.google.com/container-registry/docs/advanced-authentication#gcloud_as_a_docker_credential_helper)
+     to give the Docker client the permissions it needs to push.
 
-If you are using a different container registry, you will want to follow the
-registry specific instructions for both setup and authorizing the image push.
+   If you are using a different container registry, you will want to follow the
+   registry specific instructions for both setup and authorizing the image push.
 
 4. Use Docker to build your application container:
 
-```shell
-docker build \
-  --tag "${REPO}/rest-api-go" \
-  --file docs/serving/samples/rest-api-go/Dockerfile .
-```
+   ```shell
+   docker build \
+     --tag "${REPO}/rest-api-go" \
+     --file docs/serving/samples/rest-api-go/Dockerfile .
+   ```
 
 5. Push your container to a container registry:
 
-```shell
-docker push "${REPO}/rest-api-go"
-```
+   ```shell
+   docker push "${REPO}/rest-api-go"
+   ```
 
 6. Substitute the image reference path in the template with our published image
    path. The command below substitutes using the \${REPO} variable into a new
@@ -110,128 +120,138 @@ You can inspect the created resources with the following `kubectl` commands:
 
 - View the created Service resource:
 
-```shell
-kubectl get ksvc stock-service-example --output yaml
-```
+  ```shell
+  kubectl get ksvc stock-service-example --output yaml
+  ```
 
 - View the created Route resource:
 
-```shell
-kubectl get route -l \
-"serving.knative.dev/service=stock-service-example" --output yaml
-```
+  ```shell
+  kubectl get route -l \
+  "serving.knative.dev/service=stock-service-example" --output yaml
+  ```
 
 - View the Kubernetes Service created by the Route
 
-```shell
-kubectl get service -l \
-"serving.knative.dev/service=stock-service-example" --output yaml
-```
+  ```shell
+  kubectl get service -l \
+  "serving.knative.dev/service=stock-service-example" --output yaml
+  ```
 
 - View the created Configuration resource:
 
-```shell
-kubectl get configuration -l \
-"serving.knative.dev/service=stock-service-example" --output yaml
-```
+  ```shell
+  kubectl get configuration -l \
+  "serving.knative.dev/service=stock-service-example" --output yaml
+  ```
 
 - View the Revision that was created by our Configuration:
 
-```shell
-kubectl get revision -l \
-"serving.knative.dev/service=stock-service-example" --output yaml
-```
+  ```shell
+  kubectl get revision -l \
+  "serving.knative.dev/service=stock-service-example" --output yaml
+  ```
 
 - View the Deployment created by our Revision
 
-```shell
-kubectl get deployment -l \
-"serving.knative.dev/service=stock-service-example" --output yaml
-```
+  ```shell
+  kubectl get deployment -l \
+  "serving.knative.dev/service=stock-service-example" --output yaml
+  ```
 
 ## Access the Service
 
-To access this service via `curl`, you need to determine its ingress address.
-This example assumes you are using the default Ingress Gateway setup for
-Knative. If you customized your gateway, you will want to adjust the enviornment
-variables below.
+To access this service and run the stock ticker, you first obtain the ingress
+address and service hostname, and then you run `curl` commands to send request
+with your stock symbol.
 
-### Find Ingress Gateway IP
+**Note**: This sample assumes that you are using Knative's default Ingress
+Gateway. If you customized your gateway, you need to adjust the enviornment
+variables in the following steps.
 
-#### Cloud Provider
+1. Find the IP address of the ingress gateway:
 
-1. To get the IP address of your Ingress Gateway:
+   - **Cloud Provider**: To get the IP address of your ingress gateway:
 
-```shell
-INGRESSGATEWAY=istio-ingressgateway
-INGRESSGATEWAY_LABEL=istio
+     ```shell
+     INGRESSGATEWAY=istio-ingressgateway
+     INGRESSGATEWAY_LABEL=istio
 
-export INGRESS_IP=`kubectl get svc $INGRESSGATEWAY --namespace istio-system \
---output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
-echo $INGRESS_IP
-```
+     export INGRESS_IP=`kubectl get svc $INGRESSGATEWAY --namespace istio-system \
+     --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
+     echo $INGRESS_IP
+     ```
 
-#### Minikube
+   - **Minikube**: If your cluster is running outside a cloud provider (for
+     example on Minikube), your services will never get an external IP address,
+     and `INGRESS_IP` won't contain a value. In that case, use the Istio
+     `hostIP` and `nodePort` as the ingress IP:
 
-1. If your cluster is running outside a cloud provider (for example on
-   Minikube), your services will never get an external IP address, and
-   `INGRESS_IP` won't contain a value. In that case, use the Istio `hostIP` and
-   `nodePort` as the ingress IP:
+     ```shell
+     export INGRESS_IP=$(kubectl get po --selector $INGRESSGATEWAY_LABEL=ingressgateway --namespace istio-system \
+       --output 'jsonpath={.items[0].status.hostIP}'):$(kubectl get svc $INGRESSGATEWAY --namespace istio-system \
+       --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
+     echo $INGRESS_IP
+     ```
 
-```shell
-export INGRESS_IP=$(kubectl get po --selector $INGRESSGATEWAY_LABEL=ingressgateway --namespace istio-system \
-  --output 'jsonpath={.items[0].status.hostIP}'):$(kubectl get svc $INGRESSGATEWAY --namespace istio-system \
-  --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
-echo $INGRESS_IP
-```
+2. Get the URL of the service:
 
-### Get Service Hostname
+   ```shell
+   kubectl get ksvc stock-service-example  --output=custom-columns=NAME:.metadata.name,URL:.status.url
+   NAME                    URL
+   stock-service-example   http://stock-service-example.default.example.com
+   ```
 
-2. To get the hostname of the Service:
+3. Send requests to the service using `curl`:
 
-```shell
-export SERVICE_HOSTNAME=`kubectl get ksvc stock-service-example --output jsonpath="{.status.domain}"`
-echo $SERVICE_HOSTNAME
-```
+   1. Send a request to the index endpoint:
 
-### Sending Requests
+      The `curl` command below makes a request to the Ingress Gateway IP. The
+      Ingress Gateway uses the host header to route the request to the Service.
+      This example passes the host header to skip DNS configuration. If your
+      cluster has DNS configured, you can simply curl the DNS name instead of
+      the ingress gateway IP.
 
-3. Now use `curl` to make a request to the Service:
+      ```shell
+      curl --header "Host:stock-service-example.default.example.com" http://${INGRESS_IP}
+      ```
 
-- Make a request to the index endpoint:
+      Response body: `Welcome to the stock app!`
 
-The `curl` command below makes a request to the Ingress Gateway IP. The Ingress
-Gateway uses the host header to route the request to the Service. This example
-passes the host header to skip DNS configuration. If your cluster has DNS
-configured, you can simply curl the DNS name instead of the ingress gateway IP.
+   2. Send a request to the `/stock` endpoint:
 
-```shell
-curl --header "Host:$SERVICE_HOSTNAME" http://${INGRESS_IP}
-```
+      ```shell
+      curl --header "Host:stock-service-example.default.example.com" http://${INGRESS_IP}/stock
+      ```
 
-Response body: `Welcome to the stock app!`
+      Response body: `stock ticker not found!, require /stock/{ticker}`
 
-- Make a request to the `/stock` endpoint:
+   3. Send a request to the `/stock` endpoint with your
+      "[stock symbol](https://www.marketwatch.com/tools/quotes/lookup.asp)":
 
-```shell
-curl --header "Host:$SERVICE_HOSTNAME" http://${INGRESS_IP}/stock
-```
+      ```shell
+      curl --header "Host:stock-service-example.default.example.com" http://${INGRESS_IP}/stock/<SYMBOL>
+      ```
 
-Response body: `stock ticker not found!, require /stock/{ticker}`
+      where `<SYMBOL>` is your "stock symbol".
 
-- Make a request to the `/stock` endpoint with a `ticker` parameter:
+      Response body: `stock price for ticker <SYMBOL> is <PRICE>`
 
-```shell
-curl --header "Host:$SERVICE_HOSTNAME" http://${INGRESS_IP}/stock/<ticker>
-```
+      **Example**
 
-Response body: `stock price for ticker <ticker> is <price>`
+      Request:
+
+      ```shell
+      curl --header "Host:stock-service-example.default.example.com" http://${INGRESS_IP}/stock/FAKE
+      ```
+
+      Response: `stock price for ticker FAKE is 0.00`
 
 ## Next Steps
 
 The [traffic splitting example](../traffic-splitting/README.md) continues from
-here to walk through creating new Revisions and splitting traffic between
-multiple Revisions.
+here to walk you through how to create new Revisions and then use traffic
+splitting between those Revisions.
 
 ## Clean Up
 

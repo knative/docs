@@ -1,8 +1,24 @@
+---
+title: "Hello World - Ruby"
+linkTitle: "Ruby"
+weight: 1
+type: "docs"
+---
+
 A simple web app written in Ruby that you can use for testing. It reads in an
 env variable `TARGET` and prints "Hello \${TARGET}!". If TARGET is not
 specified, it will use "World" as the TARGET.
 
-## Prerequisites
+Follow the steps below to create the sample code and then deploy the app to your
+cluster. You can also download a working copy of the sample, by running the
+following commands:
+
+```shell
+git clone -b "release-0.7" https://github.com/knative/docs knative-docs
+cd knative-docs/docs/serving/samples/hello-world/helloworld-ruby
+```
+
+## Before you begin
 
 - A Kubernetes cluster with Knative installed. Follow the
   [installation instructions](../../../../install/README.md) if you need to
@@ -10,11 +26,7 @@ specified, it will use "World" as the TARGET.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
 
-## Steps to recreate the sample code
-
-While you can clone all of the code from this directory, hello world apps are
-generally more useful if you build them step-by-step. The following instructions
-recreate the source files from this folder.
+## Recreating the sample code
 
 1. Create a new directory and cd into it:
 
@@ -31,8 +43,8 @@ recreate the source files from this folder.
    set :bind, '0.0.0.0'
 
    get '/' do
-     target = ENV['TARGET'] || 'World'
-     "Hello #{target}!\n"
+    target = ENV['TARGET'] || 'World'
+    "Hello #{target}!\n"
    end
    ```
 
@@ -85,15 +97,13 @@ recreate the source files from this folder.
      name: helloworld-ruby
      namespace: default
    spec:
-     runLatest:
-       configuration:
-         revisionTemplate:
-           spec:
-             container:
-               image: docker.io/{username}/helloworld-ruby
-               env:
-                 - name: TARGET
-                   value: "Ruby Sample v1"
+     template:
+       spec:
+         containers:
+           - image: docker.io/{username}/helloworld-ruby
+             env:
+               - name: TARGET
+                 value: "Ruby Sample v1"
    ```
 
 ## Build and deploy this sample
@@ -141,7 +151,7 @@ folder) you're ready to build and deploy the sample app.
    # Use `istio-ingressgateway` instead, since `knative-ingressgateway`
    # will be removed in Knative v0.4.
    if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
-       INGRESSGATEWAY=istio-ingressgateway
+      INGRESSGATEWAY=istio-ingressgateway
    fi
 
    kubectl get svc $INGRESSGATEWAY --namespace istio-system
@@ -153,9 +163,9 @@ folder) you're ready to build and deploy the sample app.
 1. To find the URL for your service, use
 
    ```
-   kubectl get ksvc helloworld-ruby  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
-   NAME                DOMAIN
-   helloworld-ruby     helloworld-ruby.default.example.com
+   kubectl get ksvc helloworld-ruby  --output=custom-columns=NAME:.metadata.name,URL:.status.url
+   NAME                URL
+   helloworld-ruby     http://helloworld-ruby.default.example.com
    ```
 
 1. Now you can make a request to your app to see the result. Replace

@@ -1,3 +1,10 @@
+---
+title: "Autoscale Sample App - Go"
+linkTitle: "Autoscaling - Go"
+weight: 1
+type: "docs"
+---
+
 A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 
 ## Prerequisites
@@ -10,7 +17,7 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 1. Clone this repository, and move into the sample directory:
 
    ```shell
-   git clone https://github.com/knative/docs knative-docs
+   git clone -b "release-0.7" https://github.com/knative/docs knative-docs
    cd knative-docs
    ```
 
@@ -22,21 +29,46 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
    kubectl apply --filename docs/serving/samples/autoscale-go/service.yaml
    ```
 
-1. Find the ingress hostname and IP and export as an environment variable:
+1. Obtain both the hostname and IP address of the `istio-ingressgateway` service
+   in the `istio-system` namespace, and then `export` them into the `IP_ADDRESS`
+   environment variable.
 
-   ```shell
-   # In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
-   INGRESSGATEWAY=knative-ingressgateway
+   Note that each platform where you run your Kubernetes cluster is configured
+   differently. Details about the various ways that you can obatin your ingress
+   hostname and IP address is available in the Istio documentation under the
+   [Control Ingress Traffic](https://istio.io/docs/tasks/traffic-management/ingress/)
+   topic.
 
-   # The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
-   # Use `istio-ingressgateway` instead, since `knative-ingressgateway`
-   # will be removed in Knative v0.4.
-   if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
-       INGRESSGATEWAY=istio-ingressgateway
-   fi
+   **Examples**:
 
-   export IP_ADDRESS=`kubectl get svc $INGRESSGATEWAY --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
-   ```
+   - For GKE, you run the following commands:
+
+     ```shell
+     # In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
+     INGRESSGATEWAY=knative-ingressgateway
+
+     # The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
+     # Use `istio-ingressgateway` instead, since `knative-ingressgateway`
+     # will be removed in Knative v0.4.
+     if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
+         INGRESSGATEWAY=istio-ingressgateway
+     fi
+
+     export IP_ADDRESS=`kubectl get svc $INGRESSGATEWAY --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
+     ```
+
+   - For Minikube, you run the following command:
+
+     ```shell
+     export IP_ADDRESS=$(minikube ip)
+     ```
+
+   - For Docker Desktop, you run the following command:
+
+     ```shell
+     # The value can be 127.0.0.1 as well
+     export IP_ADDRESS=localhost
+     ```
 
 ## Load the Service
 
@@ -160,60 +192,56 @@ autoscaler classes built into Knative:
 2. `hpa.autoscaling.knative.dev` which delegates to the Kubernetes HPA which
    autoscales on CPU usage.
 
-Example of a Service scaled on CPU:
+   Example of a Service scaled on CPU:
 
-```yaml
-apiVersion: serving.knative.dev/v1alpha1
-kind: Service
-metadata:
-  name: autoscale-go
-  namespace: default
-spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        metadata:
-          annotations:
-            # Standard Kubernetes CPU-based autoscaling.
-            autoscaling.knative.dev/class: hpa.autoscaling.knative.dev
-            autoscaling.knative.dev/metric: cpu
-        spec:
-          container:
-            image: gcr.io/knative-samples/autoscale-go:0.1
-```
+   ```yaml
+   apiVersion: serving.knative.dev/v1alpha1
+   kind: Service
+   metadata:
+     name: autoscale-go
+     namespace: default
+   spec:
+     template:
+       metadata:
+         annotations:
+           # Standard Kubernetes CPU-based autoscaling.
+           autoscaling.knative.dev/class: hpa.autoscaling.knative.dev
+           autoscaling.knative.dev/metric: cpu
+       spec:
+         containers:
+           - image: gcr.io/knative-samples/autoscale-go:0.1
+   ```
 
-Additionally the autoscaler targets and scaling bounds can be specified in
-annotations. Example of a Service with custom targets and scale bounds:
+   Additionally the autoscaler targets and scaling bounds can be specified in
+   annotations. Example of a Service with custom targets and scale bounds:
 
-```yaml
-apiVersion: serving.knative.dev/v1alpha1
-kind: Service
-metadata:
-  name: autoscale-go
-  namespace: default
-spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        metadata:
-          annotations:
-            # Knative concurrency-based autoscaling (default).
-            autoscaling.knative.dev/class: kpa.autoscaling.knative.dev
-            autoscaling.knative.dev/metric: concurrency
-            # Target 10 requests in-flight per pod.
-            autoscaling.knative.dev/target: "10"
-            # Disable scale to zero with a minScale of 1.
-            autoscaling.knative.dev/minScale: "1"
-            # Limit scaling to 100 pods.
-            autoscaling.knative.dev/maxScale: "100"
-        spec:
-          container:
-            image: gcr.io/knative-samples/autoscale-go:0.1
-```
+   ```yaml
+   apiVersion: serving.knative.dev/v1alpha1
+   kind: Service
+   metadata:
+     name: autoscale-go
+     namespace: default
+   spec:
+     template:
+       metadata:
+         annotations:
+           # Knative concurrency-based autoscaling (default).
+           autoscaling.knative.dev/class: kpa.autoscaling.knative.dev
+           autoscaling.knative.dev/metric: concurrency
+           # Target 10 requests in-flight per pod.
+           autoscaling.knative.dev/target: "10"
+           # Disable scale to zero with a minScale of 1.
+           autoscaling.knative.dev/minScale: "1"
+           # Limit scaling to 100 pods.
+           autoscaling.knative.dev/maxScale: "100"
+       spec:
+         containers:
+           - image: gcr.io/knative-samples/autoscale-go:0.1
+   ```
 
-Note: for an `hpa.autoscaling.knative.dev` class service, the
-`autoscaling.knative.dev/target` specifies the CPU percentage target (default
-`"80"`).
+   Note: for an `hpa.autoscaling.knative.dev` class service, the
+   `autoscaling.knative.dev/target` specifies the CPU percentage target (default
+   `"80"`).
 
 #### Demo
 

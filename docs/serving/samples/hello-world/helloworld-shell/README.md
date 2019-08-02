@@ -1,8 +1,24 @@
+---
+title: "Hello World - Shell"
+linkTitle: "Shell"
+weight: 1
+type: "docs"
+---
+
 A simple web app that executes a shell script. The shell script reads an env
 variable `TARGET` and prints `Hello ${TARGET}!`. If the `TARGET` environment
 variable is not specified, the script uses `World`.
 
-## Prerequisites
+Follow the steps below to create the sample code and then deploy the app to your
+cluster. You can also download a working copy of the sample, by running the
+following commands:
+
+```shell
+git clone -b "release-0.7" https://github.com/knative/docs knative-docs
+cd knative-docs/docs/serving/samples/hello-world/helloworld-shell
+```
+
+## Before you begin
 
 - A Kubernetes cluster with Knative installed. Follow the
   [installation instructions](../../../install/README.md) if you need to create
@@ -11,10 +27,6 @@ variable is not specified, the script uses `World`.
   and a Docker Hub account configured (we'll use it for a container registry).
 
 ## Recreating the sample code
-
-While you can clone all of the code from this directory, hello world apps are
-generally more useful if you build them step-by-step. The following instructions
-recreate the source files from this folder.
 
 1. Create a new file named `script.sh` and paste the following script:
 
@@ -30,32 +42,32 @@ recreate the source files from this folder.
    package main
 
    import (
-       "fmt"
-       "log"
-       "net/http"
-       "os"
-       "os/exec"
+      "fmt"
+      "log"
+      "net/http"
+      "os"
+      "os/exec"
    )
 
    func handler(w http.ResponseWriter, r *http.Request) {
-       cmd := exec.CommandContext(r.Context(), "/bin/sh", "script.sh")
-       cmd.Stderr = os.Stderr
-       out, err := cmd.Output()
-       if err != nil {
-           w.WriteHeader(500)
-       }
-       w.Write(out)
+      cmd := exec.CommandContext(r.Context(), "/bin/sh", "script.sh")
+      cmd.Stderr = os.Stderr
+      out, err := cmd.Output()
+      if err != nil {
+          w.WriteHeader(500)
+      }
+      w.Write(out)
    }
 
    func main() {
-       http.HandleFunc("/", handler)
+      http.HandleFunc("/", handler)
 
-       port := os.Getenv("PORT")
-       if port == "" {
-           port = "8080"
-       }
+      port := os.Getenv("PORT")
+      if port == "" {
+          port = "8080"
+      }
 
-       log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
+      log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
    }
    ```
 
@@ -82,18 +94,16 @@ recreate the source files from this folder.
    apiVersion: serving.knative.dev/v1alpha1
    kind: Service
    metadata:
-       name: helloworld-shell
-       namespace: default
+     name: helloworld-shell
+     namespace: default
    spec:
-       runLatest:
-       configuration:
-           revisionTemplate:
-           spec:
-               container:
-               image: docker.io/{username}/helloworld-shell
-               env:
-                   - name: TARGET
-                   value: "Shell Sample v1"
+     template:
+       spec:
+         containers:
+           - image: docker.io/{username}/helloworld-shell
+             env:
+               - name: TARGET
+                 value: "Shell Sample v1"
    ```
 
 ## Building and deploying the sample
@@ -149,14 +159,14 @@ folder) you're ready to build and deploy the sample app.
 1. Run the following command to find the domain URL for your service:
 
    ```shell
-   kubectl get ksvc helloworld-shell  --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+   kubectl get ksvc helloworld-shell  --output=custom-columns=NAME:.metadata.name,URL:.status.url
    ```
 
    Example:
 
    ```shell
-   NAME                DOMAIN
-   helloworld-shell       helloworld-shell.default.example.com
+   NAME                URL
+   helloworld-shell    http://helloworld-shell.default.example.com
    ```
 
 1. Test your app by sending it a request. Use the following `curl` command with

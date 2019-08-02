@@ -22,7 +22,7 @@ serverless workload behaves on the cluster:
   update of the service. Service can be defined to always route traffic to the
   latest revision or to a pinned revision.
 - [Route](https://github.com/knative/serving/blob/master/docs/spec/spec.md#route):
-  The `route.serving.knative.dev` resource maps a network endpoint to a one or
+  The `route.serving.knative.dev` resource maps a network endpoint to one or
   more revisions. You can manage the traffic in several ways, including
   fractional traffic and named routes.
 - [Configuration](https://github.com/knative/serving/blob/master/docs/spec/spec.md#configuration):
@@ -33,7 +33,11 @@ serverless workload behaves on the cluster:
 - [Revision](https://github.com/knative/serving/blob/master/docs/spec/spec.md#revision):
   The `revision.serving.knative.dev` resource is a point-in-time snapshot of the
   code and configuration for each modification made to the workload. Revisions
-  are immutable objects and can be retained for as long as useful.
+  are immutable objects and can be retained for as long as useful. Knative
+  Serving Revisions can be automatically scaled up and down according to
+  incoming traffic. See
+  [Configuring the Autoscaler](./configuring-the-autoscaler.md) for more
+  information.
 
 ![Diagram that displays how the Serving resources coordinate with each other.](https://github.com/knative/serving/raw/master/docs/spec/images/object_model.png)
 

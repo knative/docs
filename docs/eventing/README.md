@@ -9,8 +9,8 @@ Knative Eventing is designed around the following goals:
 1. Knative Eventing services are loosely coupled. These services can be
    developed and deployed independently on, and across a variety of platforms
    (for example Kubernetes, VMs, SaaS or FaaS).
-1. Event producers and event sources are independent. Any producer (or source),
-   can generate events before there are active event consumers that are
+1. Event producers and event consumers are independent. Any producer (or
+   source), can generate events before there are active event consumers that are
    listening. Any event consumer can express interest in an event or class of
    events, before there are producers that are creating those events.
 1. Other services can be connected to the Eventing system. These services can
@@ -52,6 +52,19 @@ A Trigger describes a filter on event attributes which should be delivered to an
 Addressable. You can create as many Triggers as necessary.
 
 ![Broker Trigger Diagram](./images/broker-trigger-overview.svg)
+
+### Event registry
+
+As of v0.6, Knative Eventing defines an EventType object to make it easier for
+consumers to discover the types of events they can consume from the different
+Brokers.
+
+The registry consists of a collection of event types. The event types stored in
+the registry contain (all) the required information for a consumer to create a
+Trigger without resorting to some other out-of-band mechanism.
+
+To learn how to use the registry, see the
+[Event Registry documentation](./event-registry.md).
 
 ### Event channels and subscriptions
 
@@ -124,11 +137,16 @@ format, but may be expressed as simple lists, etc in YAML. All Sources should be
 part of the `sources` category, so you can list all existing Sources with
 `kubectl get sources`. The currently-implemented Sources are described below.
 
-In addition to the core sources, there are [other sources](./sources/README.md)
-that you can install.
+In addition to the core sources (explained below), there are
+[other sources](./sources/README.md) that you can install.
 
-_Want to implement your own source? Check out
-[the tutorial](./samples/writing-a-source/README.md)._
+If you need a Source not covered by the
+[available Source implementations](./sources/README.md), there is a
+[tutorial on writing your own Source](./samples/writing-a-source/README.md).
+
+If your code needs to send events as part of its business logic and doesn't fit
+the model of a Source, consider
+[feeding events directly to a Broker](https://knative.dev/docs/eventing/broker-trigger/#manual).
 
 ### KubernetesEventSource
 
@@ -265,9 +283,30 @@ Knative Serving application so that they can be consumed.
 - `bootstrapServers`: `string` Comma separated list of `hostname:port` pairs for
   the Kafka Broker.
 - `topics`: `string` Name of the Kafka topic to consume messages from.
+- `net`: Optional network configuration.
+  - `sasl`: Optional SASL authentication configuration.
+    - `enable`: `boolean` If true, use SASL for authentication.
+    - `user.secretKeyRef`:
+      [`SecretKeySelector`](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#secretkeyselector-v1-core)
+      containing the SASL username to use.
+    - `password.secretKeyRef`:
+      [`SecretKeySelector`](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#secretkeyselector-v1-core)
+      containing the SASL password to use.
+  - `tls`: Optional TLS configuration.
+    - `enable`: `boolean` If true, use TLS when connecting.
+    - `cert.secretKeyRef`:
+      [`SecretKeySelector`](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#secretkeyselector-v1-core)
+      containing the client certificate to use.
+    - `key.secretKeyRef`:
+      [`SecretKeySelector`](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#secretkeyselector-v1-core)
+      containing the client key to use.
+    - `caCert.secretKeyRef`:
+      [`SecretKeySelector`](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#secretkeyselector-v1-core)
+      containing a server CA certificate to use when verifying the server
+      certificate.
 
 See the
-[Kafka Source](https://github.com/knative/eventing-sources/tree/master/contrib/kafka/samples)
+[Kafka Source](https://github.com/knative/eventing-contrib/tree/master/kafka/source/samples)
 example.
 
 ### CamelSource
@@ -297,7 +336,7 @@ to be installed into the current namespace.
   development purposes.
 
 See the
-[CamelSource](https://github.com/knative/eventing-sources/blob/master/contrib/camel/samples/README.md)
+[CamelSource](https://github.com/knative/eventing-contrib/blob/master/contrib/camel/samples/README.md)
 example.
 
 ## Getting Started

@@ -1,4 +1,9 @@
-# Hello World - Elixir Sample
+---
+title: "Hello World - Elixir"
+linkTitle: "Elixir"
+weight: 1
+type: "docs"
+---
 
 A simple web application written in [Elixir](https://elixir-lang.org/) using the
 [Phoenix Framework](https://phoenixframework.org/). The application prints all
@@ -81,8 +86,7 @@ When asked, if you want to `Fetch and install dependencies? [Yn]` select `y`
    # Run everything else as 'appuser'
    USER appuser
 
-   # Document that the service listens on port 8080.
-   ENV PORT=8080 MIX_ENV=prod REPLACE_OS_VARS=true
+   ENV MIX_ENV=prod REPLACE_OS_VARS=true
    WORKDIR /opt/app
    COPY --from=0 /opt/release .
    ENV RUNNER_LOG_DIR /var/log
@@ -102,15 +106,13 @@ When asked, if you want to `Fetch and install dependencies? [Yn]` select `y`
      name: helloworld-elixir
      namespace: default
    spec:
-     runLatest:
-       configuration:
-         revisionTemplate:
-           spec:
-             container:
-               image: docker.io/{username}/helloworld-elixir
-               env:
-                 - name: TARGET
-                   value: "elixir Sample v1"
+     template:
+       spec:
+         containers:
+           - image: docker.io/{username}/helloworld-elixir
+             env:
+               - name: TARGET
+                 value: "elixir Sample v1"
    ```
 
 # Building and deploying the sample
@@ -182,10 +184,10 @@ above.
 1.  To find the URL for your service, use
 
     ```
-    kubectl get ksvc helloworld-elixir --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+    kubectl get ksvc helloworld-elixir --output=custom-columns=NAME:.metadata.name,URL:.status.url
 
-    NAME                DOMAIN
-    helloworld-elixir   helloworld-elixir.default.example.com
+    NAME                URL
+    helloworld-elixir   http://helloworld-elixir.default.example.com
     ```
 
 1.  Now you can make a request to your app to see the results. Replace

@@ -1,10 +1,26 @@
+---
+title: "Hello World - Scala using Akka HTTP"
+linkTitle: "Scala"
+weight: 1
+type: "docs"
+---
+
 A microservice which demonstrates how to get set up and running with Knative
 Serving when using [Scala](https://scala-lang.org/) and [Akka](https://akka.io/)
 [HTTP](https://doc.akka.io/docs/akka-http/current/). It will respond to a HTTP
 request with a text specified as an `ENV` variable named `MESSAGE`, defaulting
 to `"Hello World!"`.
 
-## Prerequisites
+Follow the steps below to create the sample code and then deploy the app to your
+cluster. You can also download a working copy of the sample, by running the
+following commands:
+
+```shell
+git clone -b "release-0.7" https://github.com/knative/docs knative-docs
+cd knative-docs/docs/serving/samples/hello-world/helloworld-scala
+```
+
+## Before you begin
 
 - A Kubernetes cluster [installation](../../../../install/README.md) with
   Knative Serving up and running.
@@ -60,18 +76,15 @@ metadata:
   name: helloworld-scala
   namespace: default
 spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        spec:
-          container:
-            image: "your_repository_name/helloworld-scala:0.0.1"
-            imagePullPolicy: IfNotPresent
-            env:
-              - name: MESSAGE
-                value: "Scala & Akka on Knative says hello!"
-              - name: HOST
-                value: "localhost"
+  template:
+    spec:
+      containers:
+        - image: "your_repository_name/helloworld-scala:0.0.1"
+          env:
+            - name: MESSAGE
+              value: "Scala & Akka on Knative says hello!"
+            - name: HOST
+              value: "localhost"
 ```
 
 ## Publishing to Docker
@@ -130,11 +143,11 @@ Then find the service host:
 
 ```shell
 kubectl get ksvc helloworld-scala \
-    --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+    --output=custom-columns=NAME:.metadata.name,URL:.status.url
 
-# It will print something like this, the DOMAIN is what you're going to use as HTTP Host header:
-# NAME                DOMAIN
-# helloworld-scala    helloworld-scala.default.example.com
+# It will print something like this, the URL is what you're going to use as HTTP Host header:
+# NAME                URL
+# helloworld-scala    http://helloworld-scala.default.example.com
 ```
 
 Finally, to try your service, use the obtained address in the Host header:
