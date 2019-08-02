@@ -5,5 +5,5 @@ weight: 40
 type: "docs"
 ---
 
-{{% readfile file="index.md" relative="true" markdown="true" %}}
+{{% readfile file="README.md" relative="true" markdown="true" %}}
 
