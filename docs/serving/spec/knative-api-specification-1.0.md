@@ -534,7 +534,7 @@ Configuration MUST track the status of owned Revisions in order of creation, and
 
 ## Revision
 
-A Revision is automatically scaled by the underlying infrastructure; a Revision with no referencing Routes MAY be automatically scaled to zero instances and backing resources collected. Additionally, Revisions which have been scaled to zero instances and which are older than the oldest live Revision (referenced by at least one Route or latest for the Configuration) MAY be automatically deleted by the system.
+A Revision is automatically scaled by the underlying infrastructure; a Revision with no referencing Routes MAY be automatically scaled to zero instances and backing resources collected. Additionally, Revisions which are older than the oldest live Revision (referenced by at least one Route or latest for the Configuration) MAY be automatically deleted by the system.
 
 
 ## Route
@@ -592,6 +592,7 @@ Service `labels` and `annotations` MUST be copied to the `labels` and `annotatio
    </td>
    <td>
 <a href="#revisiontemplatespec">RevisionTemplateSpec</a>
+<br>
 (Required)
    </td>
    <td>A template for the current desired application state. Changes to <code>template</code> will cause a new Revision to be created
@@ -604,6 +605,7 @@ Service `labels` and `annotations` MUST be copied to the `labels` and `annotatio
    <td><code>traffic</code>
    </td>
    <td>[]<a href="#traffictarget">TrafficTarget</a>
+<br>
 (Optional)
    </td>
    <td>Traffic specifies how to distribute traffic over a collection of Revisions belonging to the Service. If traffic is empty or not provided, defaults to 100% traffic to the latest <code>Ready</code> Revision. The contents of the Service's TrafficTarget is used to create a corresponding Route.
@@ -738,6 +740,7 @@ Configuration `labels` and `annotations` MUST NOT be copied to the `labels` and 
 
 
 <a href="#revisiontemplatespec">RevisionTemplateSpec</a>
+<br>
 (Required)
    </td>
    <td>A template for the current desired application state. Changes to <code>template</code> will cause a new Revision to be created 
@@ -839,6 +842,7 @@ Standard Kubernetes [meta.v1/ObjectMeta](https://kubernetes.io/docs/reference/ge
    <td><code>traffic</code>
    </td>
    <td>[]<a href="#traffictarget">TrafficTarget</a>
+<br>
 (Optional)
    </td>
    <td>Traffic specifies how to distribute traffic over a collection of Revisions belonging to the Service. If traffic is empty or not provided, defaults to 100% traffic to the latest Ready Revision.
@@ -900,10 +904,7 @@ Standard Kubernetes [meta.v1/ObjectMeta](https://kubernetes.io/docs/reference/ge
   <tr>
    <td><code>address</code>
    </td>
-   <td>An implementation of the 
-
-
-<a href="#addressable-interface">Addressable</a> contract (an object with a <code>url</code> string).
+   <td>An implementation of the <a href="#addressable-interface">Addressable</a> contract (an object with a <code>url</code> string).
    </td>
    <td>A duck-typed interface for loading the delivery address of the destination. The URL provided in address MAY only be internally-routable.
    </td>
@@ -950,7 +951,9 @@ Standard Kubernetes [meta.v1/ObjectMeta](https://kubernetes.io/docs/reference/ge
    <td><code>containers</code>
    </td>
    <td>[]<a href="#container">Container</a>
+<br>
 (Required)
+<br>
 Min: 1
 <br>
 Max: 1
@@ -964,6 +967,7 @@ Max: 1
    <td><code>volumes</code>
    </td>
    <td>[]<a href="#volume">Volume</a>
+<br>
 (Optional)
    </td>
    <td>A list of Volumes to make available to <code>containers[0]</code>.
@@ -975,6 +979,7 @@ Max: 1
    <td><code>timeoutSeconds</code>
    </td>
    <td>int
+<br>
 (Optional)
    </td>
    <td>The maximum duration in seconds that the request routing layer will wait for a request delivered to a container to progress (send network traffic). If unspecified, a system default will be provided.
@@ -986,7 +991,9 @@ Max: 1
    <td><code>containerConcurrency</code>
    </td>
    <td>int
+<br>
 (Optional)
+<br>
 Default: 0
    </td>
    <td>The maximum number of concurrent requests being handled by a single instance of <code>containers[0]</code>. The default value is 0, which means that the system decides.
@@ -1003,6 +1010,7 @@ See
    <td><code>serviceAccountName</code>
    </td>
    <td>string
+<br>
 (Optional)
    </td>
    <td>The name of a Service Account which <code>containers[0]</code> should be run as. The Service Account should be used to provide access and authorization to the container.
@@ -1341,9 +1349,8 @@ Max: 1
    <td><code>readinessProbe</code>
    </td>
    <td>
-
-
-<a href="#probe">Probe</a>
+   <a href="#probe">Probe</a>
+<br>
 (Optional)
    </td>
    <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#container-v1-core">core/v1.Container</a>.
@@ -1355,9 +1362,8 @@ Max: 1
    <td><code>resources</code>
    </td>
    <td>
-
-
-<a href="#resourcerequirements">ResourceRequirements</a>
+   <a href="#resourcerequirements">ResourceRequirements</a>
+<br>
 (Optional)
    </td>
    <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#container-v1-core">core/v1.Container</a>. 
@@ -1369,9 +1375,8 @@ Max: 1
    <td><code>securityContext</code>
    </td>
    <td>
-
-
-<a href="#securitycontext">SecurityContext</a>
+   <a href="#securitycontext">SecurityContext</a>
+<br>
 (Optional)
    </td>
    <td>In <code>securityContext</code>, only <code>runAsUser</code> MAY be set.
@@ -1383,7 +1388,7 @@ Max: 1
    <td><code>terminationMessagePath</code>
    </td>
    <td>string
-<p>
+<br>
 (Optional)
    </td>
    <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#container-v1-core">core/v1.Container</a>. 
@@ -1395,7 +1400,7 @@ Max: 1
    <td><code>terminationMessagePolicy</code>
    </td>
    <td>string
-<p>
+<br>
 (Optional)
    </td>
    <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#container-v1-core">core/v1.Container</a>. 
@@ -1407,7 +1412,7 @@ Max: 1
    <td><code>volumeMounts</code>
    </td>
    <td>[]<a href="#volumemount">VolumeMount</a>
-<p>
+<br>
 (Optional)
    </td>
    <td><code>volumeMounts</code> MUST correspond to a volume and specify an absolute mount path which does not shadow <a href="https://github.com/knative/serving/blob/master/docs/runtime-contract.md#default-filesystems">the runtime contract directories</a>.
@@ -1419,7 +1424,7 @@ Max: 1
    <td><code>workingDir</code>
    </td>
    <td>string
-<p>
+<br>
 (Optional)
    </td>
    <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#container-v1-core">core/v1.Container</a>.
@@ -1449,7 +1454,7 @@ Max: 1
    <td><code>name</code>
    </td>
    <td>string
-<p>
+<br>
 (Required)
    </td>
    <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#envvar-v1-core">core/v1.EnvVar</a>
@@ -1461,7 +1466,7 @@ Max: 1
    <td><code>value</code>
    </td>
    <td>string
-<p>
+<br>
 (Optional)
    </td>
    <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#envvar-v1-core">core/v1.EnvVar</a>. Must have one of value or valueFrom.
@@ -1473,9 +1478,8 @@ Max: 1
    <td><code>valueFrom</code>
    </td>
    <td>
-
-
 <a href="#envvarsource">EnvVarSource</a>
+<br>
 (Optional)
    </td>
    <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#envvar-v1-core">core/v1.EnvVar</a>. Must have one of value or valueFrom.
@@ -1505,9 +1509,8 @@ Max: 1
    <td><code>configMapKeyRef</code>
    </td>
    <td>
-
-
 <a href="#configmapkeyselector">ConfigMapKeySelector</a>
+<br>
 (Optional)
    </td>
    <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#envvarsource-v1-core">core/v1.EnvVarSource</a>. Must have one of configMapKeyRef or secretKeyRef.
@@ -1519,9 +1522,8 @@ Max: 1
    <td><code>secretKeyRef</code>
    </td>
    <td>
-
-
 <a href="#secretkeyselector">SecretKeySelector</a>
+<br>
 (Optional)
    </td>
    <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#envvarsource-v1-core">core/v1.EnvVarSource</a>. Must have one of configMapKeyRef or secretKeyRef.
@@ -1798,7 +1800,7 @@ Max: 1
    <td><code>command</code>
    </td>
    <td>[]string
-<p>
+<br>
 (Required)
    </td>
    <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#execaction-v1-core">core/v1.ExecAction</a>.
@@ -1955,7 +1957,7 @@ Max: 1
    <td><code>name</code>
    </td>
    <td>string
-<p>
+<br>
 (Optional)
    </td>
    <td>Must be one of "http1" or "h2c" (if supported). Defaults to "http1".
@@ -1977,7 +1979,7 @@ Max: 1
    <td><code>protocol</code>
    </td>
    <td>string
-<p>
+<br>
 (Optional)
    </td>
    <td>If specified must be TCP. Defaults to TCP.
