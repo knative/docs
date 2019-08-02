@@ -1146,8 +1146,10 @@ Although `container,` `volumes,` and types that they reference are based upon co
   <tr>
    <td><code>percent</code>
    </td>
-   <td>int 
+   <td>int
+<br>
 (Required)
+<br>
 Min: 0
 <br>
 Max: 100
@@ -1335,7 +1337,9 @@ All <code>percent</code> values in <code>traffic</code> MUST sum to 100.
    <td><code>ports</code>
    </td>
    <td>[]<a href="#containerport">ContainerPort</a>
+<br>
 (Optional)
+<br>
 Min: 0
 <br>
 Max: 1
