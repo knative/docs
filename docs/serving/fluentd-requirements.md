@@ -45,9 +45,11 @@ which allows sending logs to Stackdriver.
 
 Operators can build this image and push it to a container registry which their
 Kubernetes cluster has access to. See
-[Setting Up A Logging Plugin](../setting-up-a-logging-plugin.md) for details.
-**NOTE**: Operators need to add credentials file the stackdriver agent needs to
-the docker image if their Knative Serving is not built on a GCP based cluster or
-they want to send logs to another GCP project. See
-[here](https://cloud.google.com/logging/docs/agent/authorization) for more
-information.
+[Setting Up A Logging Plugin](./setting-up-a-logging-plugin.md) for details.
+
+> **NOTE**: Operators must add the credentials file the Stackdriver agent needs
+> to the Docker image if their Knative Serving is not built on a
+> Google Cloud Platform-based cluster or if they want to send logs to another
+> Google Cloud Platform project. See
+> [here](https://cloud.google.com/logging/docs/agent/authorization) for more
+> information.

@@ -25,7 +25,3 @@ builds.
 
 - View the collection of build templates in the `knative/build-template` repo:
   [Sample build templates](https://github.com/knative/build-templates).
-
-#### Complex code samples
-
-- [Learn how to use Knative to build apps from source code and then run those containers](../serving/samples/source-to-url-go).
