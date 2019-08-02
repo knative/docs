@@ -40,9 +40,9 @@ spec:
     spec:
       containers:
       - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:2656f39a7fcb6afd9fc79e7a4e215d14d651dc674f38020d1d18c6f04b220700
-            env:
-            - name: STEP
-              value: "0"
+        env:
+        - name: STEP
+          value: "0"
 
 ---
 apiVersion: serving.knative.dev/v1alpha1
@@ -54,9 +54,9 @@ spec:
     spec:
       containers:
       - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:2656f39a7fcb6afd9fc79e7a4e215d14d651dc674f38020d1d18c6f04b220700
-            env:
-            - name: STEP
-              value: "1"
+        env:
+        - name: STEP
+          value: "1"
 ---
 apiVersion: serving.knative.dev/v1alpha1
 kind: Service
@@ -67,9 +67,9 @@ spec:
     spec:
       containers:
       - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:2656f39a7fcb6afd9fc79e7a4e215d14d651dc674f38020d1d18c6f04b220700
-            env:
-            - name: STEP
-              value: "2"
+        env:
+        - name: STEP
+          value: "2"
 
 ---
 ```
@@ -193,7 +193,7 @@ spec:
 apiVersion: eventing.knative.dev/v1alpha1
 kind: Trigger
 metadata:
-  name: sequence-trigger
+  name: display-trigger
 spec:
   filter:
     sourceAndType:
