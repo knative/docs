@@ -40,4 +40,4 @@ Choice has three parts for the Status:
 
 ## Examples
 
-The best is to learn how to use Choice through [examples](./samples/choice/README.md)
+Learn how to use Choice by following the [examples](./samples/choice/README.md)
