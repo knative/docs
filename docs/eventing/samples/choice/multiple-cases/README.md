@@ -1,4 +1,5 @@
 We are going to create a Choice with two cases:
+
 - the first case accepts events with a time that is is even
 - the second case accepts events with a time that is is odd
 
@@ -10,7 +11,8 @@ Please refer to the sample overview for the [prerequisites](../README.md).
 
 ### Create the Knative Services
 
-Let's first create the filter and transformer services that we will use in our Choice.
+Let's first create the filter and transformer services that we will use in our
+Choice.
 
 ```yaml
 apiVersion: serving.knative.dev/v1alpha1
@@ -90,26 +92,26 @@ spec:
     apiVersion: messaging.knative.dev/v1alpha1
     kind: InMemoryChannel
   cases:
-  - filter:
-      ref:
-        apiVersion: serving.knative.dev/v1alpha1
-        kind: Service
-        name: even-filter
-    subscriber:
-      ref:
-        apiVersion: serving.knative.dev/v1alpha1
-        kind: Service
-        name: even-transformer
-  - filter:
-      ref:
-        apiVersion: serving.knative.dev/v1alpha1
-        kind: Service
-        name: odd-filter
-    subscriber:
-      ref:
-        apiVersion: serving.knative.dev/v1alpha1
-        kind: Service
-        name: odd-transformer
+    - filter:
+        ref:
+          apiVersion: serving.knative.dev/v1alpha1
+          kind: Service
+          name: even-filter
+      subscriber:
+        ref:
+          apiVersion: serving.knative.dev/v1alpha1
+          kind: Service
+          name: even-transformer
+    - filter:
+        ref:
+          apiVersion: serving.knative.dev/v1alpha1
+          kind: Service
+          name: odd-filter
+      subscriber:
+        ref:
+          apiVersion: serving.knative.dev/v1alpha1
+          kind: Service
+          name: odd-transformer
   reply:
     apiVersion: serving.knative.dev/v1alpha1
     kind: Service
@@ -146,8 +148,8 @@ kubectl create -f ./cron-source.yaml
 ### Inspecting the results
 
 You can now see the final output by inspecting the logs of the event-display
-pods. Note that since we set the `CronJobSource` to emit every minute, it
-might take some time for the events to show up in the logs.
+pods. Note that since we set the `CronJobSource` to emit every minute, it might
+take some time for the events to show up in the logs.
 
 Let's look at the `event-display` log:
 

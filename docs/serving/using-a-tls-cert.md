@@ -78,7 +78,8 @@ If you need a new TLS certificate, you can choose to use one of the following
 tools to obtain a certificate from Let's Encrypt:
 
 - Setup Certbot to manually obtain Let's Encrypt certificates
-- Setup cert-manager to either manually obtain a certificate, or to automatically provision certificates
+- Setup cert-manager to either manually obtain a certificate, or to
+  automatically provision certificates
 
 This page covers details for both of the above options.
 

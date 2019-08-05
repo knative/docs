@@ -1,8 +1,11 @@
-In this example, we are going to see how we can create a Choice
-with mutually exclusive cases.
+In this example, we are going to see how we can create a Choice with mutually
+exclusive cases.
 
-This example is the same as the [multiple cases example](../multiple-cases/README.md) except
-that we are now going to rely on the Knative [switcher](https://github.com/lionelvillard/knative-functions#switcher) function to provide a soft mutual exclusivity guarantee.
+This example is the same as the
+[multiple cases example](../multiple-cases/README.md) except that we are now
+going to rely on the Knative
+[switcher](https://github.com/lionelvillard/knative-functions#switcher) function
+to provide a soft mutual exclusivity guarantee.
 
 NOTE: this example has to be deployed in the default namespace.
 
@@ -12,7 +15,8 @@ Please refer to the sample overview for the [prerequisites](../README.md).
 
 ### Create the Knative Services
 
-Let's first create the switcher and transformer services that we will use in our Choice.
+Let's first create the switcher and transformer services that we will use in our
+Choice.
 
 ```yaml
 apiVersion: serving.knative.dev/v1alpha1
@@ -79,20 +83,20 @@ spec:
     apiVersion: messaging.knative.dev/v1alpha1
     kind: InMemoryChannel
   cases:
-  - filter:
-      uri: "http://me-even-odd-switcher.default.svc.cluster.local/0"
-    subscriber:
-      ref:
-        apiVersion: serving.knative.dev/v1alpha1
-        kind: Service
-        name: me-even-transformer
-  - filter:
-      uri: "http://me-even-odd-switcher.default.svc.cluster.local/1"
-    subscriber:
-      ref:
-        apiVersion: serving.knative.dev/v1alpha1
-        kind: Service
-        name: me-odd-transformer
+    - filter:
+        uri: "http://me-even-odd-switcher.default.svc.cluster.local/0"
+      subscriber:
+        ref:
+          apiVersion: serving.knative.dev/v1alpha1
+          kind: Service
+          name: me-even-transformer
+    - filter:
+        uri: "http://me-even-odd-switcher.default.svc.cluster.local/1"
+      subscriber:
+        ref:
+          apiVersion: serving.knative.dev/v1alpha1
+          kind: Service
+          name: me-odd-transformer
   reply:
     apiVersion: serving.knative.dev/v1alpha1
     kind: Service
@@ -128,9 +132,9 @@ kubectl create -f ./cron-source.yaml
 
 ### Inspecting the results
 
-You can now see the final output by inspecting the logs of the `me-event-display`
-pods. Note that since we set the `CronJobSource` to emit every minute, it
-might take some time for the events to show up in the logs.
+You can now see the final output by inspecting the logs of the
+`me-event-display` pods. Note that since we set the `CronJobSource` to emit
+every minute, it might take some time for the events to show up in the logs.
 
 Let's look at the `me-event-display` log:
 
@@ -168,4 +172,3 @@ Data,
     "message": "this is odd!"
   }
 ```
-
