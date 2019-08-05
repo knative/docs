@@ -7,10 +7,10 @@ type: "docs"
 
 Use this guide to learn how to learn how to create, send, and verify events in Knative. The steps in this guide demonstrate a basic developer flow for managing events in Knative, including:
 
-- [Installing the Knative Eventing component](#install)
-- [Creating and configuring the resources needed to manage events](#setup)
-- [Creating and sending events with HTTP requests](#send)
-- [Verifying events were sent correctly](#verify)
+- [Installing the Knative Eventing component](#installing-knative-eventing)
+- [Creating and configuring the resources needed to manage events](#setting-up-knative-eventing-resources)
+- [Creating and sending events with HTTP requests](#sending-cloudevents-to-the-broker)
+- [Verifying events were sent correctly](#verifying-events-were-received)
 
 ## Before you begin
 
@@ -20,7 +20,7 @@ To complete this guide, you will need the following installed and running:
 - [Kubectl CLI tool](https://kubernetes.io/docs/reference/kubectl/overview/) v1.10 or higher
 - Knative Eventing Component. If you have previously installed Knative on your cluster with our [Install Guide](../install/_index.md), you already have Knative Eventing installed. Otherwise, you will need to install Eventing with the steps below.
 
-### Installing Knative Eventing {: #install}
+### Installing Knative Eventing 
 
 To install the Knative Eventing component:
 
@@ -45,7 +45,7 @@ To install the Knative Eventing component:
     ```
     If the **STATUS** of the Eventing component is **Running**, your Eventing install is correctly set up.
 
-## Setting up Knative Eventing Resources {: #setup}
+## Setting up Knative Eventing Resources 
 
 Before you start to manage events, you need to create the objects needed to transport the events. 
 
@@ -297,7 +297,7 @@ Since this guide uses manual curl requests to send events, you will need to make
 
 You will use this `Pod` to send events in the next section.
 
-## Sending CloudEvents to the `Broker` {: #send}
+## Sending CloudEvents to the `Broker` 
 
 Now that the `Pod` is created, you can create a `CloudEvent` by sending an HTTP request to the `Broker`. 
 
@@ -366,7 +366,7 @@ Now, you can make a HTTP request. To show the various types of events you can se
 
 If everything has been done correctly, you should have sent 2 `CloudEvents` to the `hello-display` event consumer and 2 `CloudEvents` to the `goodbye-display` event consumer (note that `say-hello-goodbye` is sent to *both* `hello-display` and `goodbye-display`). You will verify that these events were received correctly in the next section.
 
-## Verifying events were received {: #verify}
+## Verifying events were received {:#verify}
 
 After sending events, verify that the events were received by the appropriate `Subscribers`.
 
