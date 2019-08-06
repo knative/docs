@@ -1,24 +1,42 @@
-# List of available Channel implementation for persistence of the events associated with a given channel 
+# List of available Channel implementation for persistence of the events associated with a given channel
 channels:
-  - name: In-Memory
+  - name: CCP - In-Memory
     url: https://github.com/knative/eventing/tree/master/config/provisioners/in-memory-channel
     status: Proof of Concept
     support: None
     description: >
-      In-memory channels are a best effort Channel. They should NOT be used in Production. They are useful for development.
-  - name: Apache Kafka
-    url: https://github.com/knative/eventing/tree/master/contrib/kafka/config
+      Deprecated: In-memory channels are a best effort Channel. They should NOT be used in Production. They are useful for development.
+  - name: CCP - Apache Kafka
+    url: https://github.com/knative/eventing-contrib/tree/master/kafka/channel/config/provisioner
     status: Proof of Concept
     support: None
     description: >
-      Channels are backed by [Apache Kafka](http://kafka.apache.org/) topics.
-  - name: GCP PubSub
+      Deprecated: Channels are backed by [Apache Kafka](http://kafka.apache.org/) topics.
+  - name: CCP - GCP PubSub
     url: https://github.com/knative/eventing/tree/master/contrib/gcppubsub/config
     status: Proof of Concept
     support: None
     description: >
-      Channels are backed by [GCP PubSub](https://cloud.google.com/pubsub/).
-  - name: Natss
+      Deprecated: Channels are backed by [GCP PubSub](https://cloud.google.com/pubsub/).
+  - name: CCP - Natss
+    url: https://github.com/knative/eventing/tree/master/contrib/natss/config/provisioner
+    status: Proof of Concept
+    support: None
+    description: >
+      Deprecated: Channels are backed by [NATS Streaming](https://github.com/nats-io/nats-streaming-server#configuring).
+  - name: CRD - InMemoryChannel
+    url: https://github.com/knative/eventing/tree/master/config/channels/in-memory-channel
+    status: Proof of Concept
+    support: None
+    description: >
+      In-memory channels are a best effort Channel. They should NOT be used in Production. They are useful for development.
+  - name: CRD - KafkaChannel
+    url: https://github.com/knative/eventing-contrib/tree/master/kafka/channel/config
+    status: Proof of Concept
+    support: None
+    description: >
+      Channels are backed by [Apache Kafka](http://kafka.apache.org/) topics.
+  - name: CRD - NatssChannel
     url: https://github.com/knative/eventing/tree/master/contrib/natss/config
     status: Proof of Concept
     support: None
