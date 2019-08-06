@@ -1,3 +1,10 @@
+---
+title: "Container Source Example"
+linkTitle: "Container source"
+weight: 10
+type: "docs"
+---
+
 ContainerSource will start a container image which will generate events under
 certain situations and send messages to a sink URI. It also can be an easy way
 to support your own event sources in Knative. This guide shows how to configure

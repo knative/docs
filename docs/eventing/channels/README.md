@@ -1,3 +1,10 @@
+---
+title: "Knative Eventing channels"
+linkTitle: "Eventing channels"
+weight: 40
+type: "docs"
+---
+
 <!--
 This is a generated file and should not be changed manually. All changes should follow the
 procedure:

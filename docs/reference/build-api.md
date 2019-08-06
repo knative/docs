@@ -5,4 +5,4 @@ weight: 20
 type: "docs"
 ---
 
-{{% readfile file="build.md" relative="true" %}}
+{{< readfile file="build.md" relative="true" >}}

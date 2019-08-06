@@ -1,3 +1,10 @@
+---
+title: "Simple Traffic Splitting Between Revisions"
+linkTitle: "Traffic splitting"
+weight: 1
+type: "docs"
+---
+
 This samples builds off of the [Creating a RESTful Service](../rest-api-go)
 sample to illustrate updating a Service to create a new Revision as well as
 splitting traffic between the two created Revisions.

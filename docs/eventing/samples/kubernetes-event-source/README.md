@@ -1,3 +1,10 @@
+---
+title: "Kubernetes Api Server Source"
+linkTitle: "Kubernetes event"
+weight: 50
+type: "docs"
+---
+
 Kubernetes Event Source example shows how to wire kubernetes cluster events for
 consumption by a function that has been implemented as a Knative Service. The
 code for the following files can be found in the

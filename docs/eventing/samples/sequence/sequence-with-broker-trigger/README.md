@@ -1,4 +1,9 @@
-## Overview
+---
+title: "Using Sequence with Broker and Trigger"
+linkTitle: "Using with Broker and Trigger"
+weight: 20
+type: "docs"
+---
 
 We are going to create the following logical configuration. We create a
 CronJobSource, feeding events into the Broker, then we create a `Filter` that
@@ -34,8 +39,8 @@ spec:
   template:
     spec:
       containers:
-      - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:2656f39a7fcb6afd9fc79e7a4e215d14d651dc674f38020d1d18c6f04b220700
-            env:
+        - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:2656f39a7fcb6afd9fc79e7a4e215d14d651dc674f38020d1d18c6f04b220700
+          env:
             - name: STEP
               value: "0"
 
@@ -48,8 +53,8 @@ spec:
   template:
     spec:
       containers:
-      - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:2656f39a7fcb6afd9fc79e7a4e215d14d651dc674f38020d1d18c6f04b220700
-            env:
+        - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:2656f39a7fcb6afd9fc79e7a4e215d14d651dc674f38020d1d18c6f04b220700
+          env:
             - name: STEP
               value: "1"
 ---
@@ -61,12 +66,13 @@ spec:
   template:
     spec:
       containers:
-      - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:2656f39a7fcb6afd9fc79e7a4e215d14d651dc674f38020d1d18c6f04b220700
-            env:
+        - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:2656f39a7fcb6afd9fc79e7a4e215d14d651dc674f38020d1d18c6f04b220700
+          env:
             - name: STEP
               value: "2"
 
 ---
+
 ```
 
 ```shell
@@ -188,7 +194,7 @@ spec:
 apiVersion: eventing.knative.dev/v1alpha1
 kind: Trigger
 metadata:
-  name: sequence-trigger
+  name: display-trigger
 spec:
   filter:
     sourceAndType:
@@ -202,8 +208,8 @@ spec:
 
 ```
 
-Change `default` below to create the `Service` and `Trigger` in the Namespace where you have
-configured your `Broker`.
+Change `default` below to create the `Service` and `Trigger` in the Namespace
+where you have configured your `Broker`.
 
 ```shell
 kubectl -n default create -f ./display-trigger.yaml

@@ -296,7 +296,7 @@ commands below.
 
      In this example, the auto certificate controller is installed so that you
      can
-     [enable automatic certificates provisioning](/serving/using-auto-tls.md).
+     [enable automatic certificates provisioning](../serving/using-auto-tls.md).
 
      1. Installs the CRDs only:
 
