@@ -10,7 +10,6 @@ at [**www.knative.dev**](https://www.knative.dev/docs/reference/).
 The API source files are located at:
 
 - [Serving API](./serving.md)
-- [Build API](./build.md)
 - [Eventing API](./eventing/eventing.md)
 - [Eventing-contrib resources API](./eventing/eventing-resources.md)
 
@@ -58,7 +57,6 @@ To generate a version of the API:
 1. Locate the commits or tags that correspond to the version of the API that you
    want to generate:
 
-   - [Build](https://github.com/knative/build/releases/)
    - [Eventing](https://github.com/knative/eventing/releases/)
    - [Eventing-contrib resources](https://github.com/knative/eventing-contrib/releases/)
    - [Serving](https://github.com/knative/serving/releases/)
@@ -68,7 +66,6 @@ To generate a version of the API:
    variables (`KNATIVE_[component_name]_COMMIT`):
 
    ```
-   KNATIVE_BUILD_COMMIT=[commit_or_tag] \
    KNATIVE_EVENTING_COMMIT=[commit_or_tag] \
    KNATIVE_EVENTING_SOURCES_COMMIT=[commit_or_tag] \
    KNATIVE_SERVING_COMMIT=[commit_or_tag] \
@@ -111,7 +108,6 @@ Using tags from each repo, you would run the following command to generate the
 v0.3.0 API source files:
 
 ```
-KNATIVE_BUILD_COMMIT=v0.3.0 \
 KNATIVE_EVENTING_COMMIT=v0.3.0 \
 KNATIVE_EVENTING_SOURCES_COMMIT=v0.3.0 \
 KNATIVE_SERVING_COMMIT=v0.3.0 \

@@ -184,7 +184,6 @@ your Knative installation, see
    ```bash
    kubectl apply --selector knative.dev/crd-install=true \
    --filename https://github.com/knative/serving/releases/download/v0.7.0/serving.yaml \
-   --filename https://github.com/knative/build/releases/download/v0.7.0/build.yaml \
    --filename https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml \
    --filename https://github.com/knative/serving/releases/download/v0.7.0/monitoring.yaml
    ```
@@ -196,7 +195,6 @@ your Knative installation, see
 
    ```bash
    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.7.0/serving.yaml --selector networking.knative.dev/certificate-provider!=cert-manager \
-   --filename https://github.com/knative/build/releases/download/v0.7.0/build.yaml \
    --filename https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml \
    --filename https://github.com/knative/serving/releases/download/v0.7.0/monitoring.yaml
    ```
@@ -216,7 +214,6 @@ your Knative installation, see
    `Running`:
    ```bash
    kubectl get pods --namespace knative-serving
-   kubectl get pods --namespace knative-build
    kubectl get pods --namespace knative-eventing
    kubectl get pods --namespace knative-monitoring
    ```
@@ -232,9 +229,6 @@ guide.
 
 To get started with Knative Eventing, pick one of the
 [Eventing Samples](../eventing/samples/) to walk through.
-
-To get started with Knative Build, read the [Build README](../build/README.md),
-then choose a sample to walk through.
 
 ## Cleaning up
 

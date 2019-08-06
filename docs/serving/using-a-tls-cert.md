@@ -226,9 +226,4 @@ Kubernetes secret and then configure the `knative-ingress-gateway`:
 After your changes are running on your Knative cluster, you can begin using the
 HTTPS protocol for secure access your deployed Knative services.
 
----
 
-Except as otherwise noted, the content of this page is licensed under the
-[Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),
-and code samples are licensed under the
-[Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).
