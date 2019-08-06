@@ -78,14 +78,12 @@ The following Knative installation files are available:
   - https://github.com/knative/serving/releases/download/v0.7.0/monitoring-tracing-jaeger-in-mem.yaml
   - https://github.com/knative/serving/releases/download/v0.7.0/monitoring-tracing-zipkin.yaml
   - https://github.com/knative/serving/releases/download/v0.7.0/monitoring-tracing-zipkin-in-mem.yaml
-- **Build Component**:
-  - https://github.com/knative/build/releases/download/v0.7.0/build.yaml
 - **Eventing Component**:
   - https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml
   - https://github.com/knative/eventing/releases/download/v0.7.0/eventing.yaml
   - https://github.com/knative/eventing/releases/download/v0.7.0/in-memory-channel.yaml
   - https://github.com/knative/eventing/releases/download/v0.7.0/kafka.yaml
-- **Eventing sources**:
+- **Eventing Resources**:
   - https://github.com/knative/eventing-contrib/releases/download/v0.7.0/github.yaml
   - https://github.com/knative/eventing-contrib/releases/download/v0.7.0/camel.yaml
   - https://github.com/knative/eventing-contrib/releases/download/v0.7.0/gcppubsub.yaml
@@ -97,9 +95,8 @@ The following table includes details about the available Knative installation
 files from the Knative repositories:
 
 - [Serving][1]
-- [Build][3]
 - [Eventing][4]
-- [Eventing Sources][5]
+- [Eventing Resources][5]
 
 | Knative Install Filename                       | Notes                                                                                                                                                                  | Dependencies                                                                              |
 | ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
@@ -112,8 +109,6 @@ files from the Knative repositories:
 | [`monitoring-tracing-jaeger-in-mem.yaml`][1.6] | Installs only [Jaeger in-memory][2.4]**\***                                                                                                                            | Serving component, [Jaeger Operator][2.5]                                                 |
 | [`monitoring-tracing-zipkin.yaml`][1.7]        | Installs only [Zipkin][2.3].**\***                                                                                                                                     | Serving component, ELK stack (monitoring-logs-elasticsearch.yaml)                         |
 | [`monitoring-tracing-zipkin-in-mem.yaml`][1.8] | Installs only [Zipkin in-memory][2.3]**\***                                                                                                                            | Serving component                                                                         |
-| **knative/build**                              |                                                                                                                                                                        |                                                                                           |
-| [`build.yaml`][3.1]†                           | Installs the Build component.                                                                                                                                          |                                                                                           |
 | **knative/eventing**                           |                                                                                                                                                                        |                                                                                           |
 | [`release.yaml`][4.1]†                         | Installs the Eventing component. Includes [ContainerSource](../eventing#containersource), [CronJobSource][6.2], the in-memory channel provisioner.                     |                                                                                           |
 | [`eventing.yaml`][4.2]                         | Installs the Eventing component. Includes [ContainerSource](../eventing#containersource) and [CronJobSource][6.2]. Does not include the in-memory channel provisioner. |                                                                                           |
@@ -159,8 +154,6 @@ for details about installing the various supported observability plugins.
 [2.3]: https://zipkin.io/
 [2.4]: https://jaegertracing.io/
 [2.5]: https://github.com/jaegertracing/jaeger-operator#installing-the-operator
-[3]: https://github.com/knative/build/releases/tag/v0.7.0
-[3.1]: https://github.com/knative/build/releases/download/v0.7.0/build.yaml
 [4]: https://github.com/knative/eventing/releases/tag/v0.7.0
 [4.1]: https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml
 [4.2]:
@@ -255,7 +248,6 @@ commands below.
       `[FILE_URL]`Examples:
 
       - `https://github.com/knative/serving/releases/download/v0.7.0/serving.yaml --selector networking.knative.dev/certificate-provider!=cert-manager`
-      - `https://github.com/knative/build/releases/download/v0.7.0/build.yaml`
       - `https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml`
       - `https://github.com/knative/serving/releases/download/v0.7.0/monitoring.yaml`
 
@@ -302,7 +294,6 @@ commands below.
         ```bash
         kubectl apply --selector knative.dev/crd-install=true \
           --filename https://github.com/knative/serving/releases/download/v0.7.0/serving.yaml \
-          --filename https://github.com/knative/build/releases/download/v0.7.0/build.yaml \
           --filename https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml
         ```
 
@@ -312,7 +303,6 @@ commands below.
 
         ```bash
         kubectl apply --filename https://github.com/knative/serving/releases/download/v0.7.0/serving.yaml \
-          --filename https://github.com/knative/build/releases/download/v0.7.0/build.yaml \
           --filename https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml
         ```
 
@@ -323,7 +313,6 @@ commands below.
 
    ```bash
    kubectl get pods --namespace knative-serving
-   kubectl get pods --namespace knative-build
    kubectl get pods --namespace knative-eventing
    ```
 
@@ -341,7 +330,7 @@ commands below.
    [Installing logging, metrics, and traces](../serving/installing-logging-metrics-traces.md)
    for details about setting up the various supported observability plugins.
 
-You are now ready to deploy an app, run a build, or start sending and receiving
+You are now ready to deploy an app or start sending and receiving
 events in your Knative cluster.
 
 ## What's next
@@ -353,17 +342,6 @@ guides to help you get started with Knative:
 
   - [Knative Serving sample apps](../serving/samples/README.md)
 
-- [Creating a simple Knative Build](../build/creating-builds.md)
-
-  - [Knative Build templates](https://github.com/knative/build-templates)
-
 - [Knative Eventing overview](../eventing/README.md)
 
   - [Knative Eventing code samples](../eventing/samples/)
-
----
-
-Except as otherwise noted, the content of this page is licensed under the
-[Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),
-and code samples are licensed under the
-[Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).

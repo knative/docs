@@ -123,7 +123,6 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
    ```shell
    kubectl apply --selector knative.dev/crd-install=true \
    --filename https://github.com/knative/serving/releases/download/v0.7.0/serving.yaml \
-   --filename https://github.com/knative/build/releases/download/v0.7.0/build.yaml \
    --filename https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml \
    --filename https://github.com/knative/serving/releases/download/v0.7.0/monitoring.yaml
    ```
@@ -134,7 +133,6 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
 
    ```shell
    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.7.0/serving.yaml --selector networking.knative.dev/certificate-provider!=cert-manager \
-   --filename https://github.com/knative/build/releases/download/v0.7.0/build.yaml \
    --filename https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml \
    --filename https://github.com/knative/serving/releases/download/v0.7.0/monitoring.yaml
    ```
@@ -155,7 +153,6 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
 
    ```shell
    kubectl get pods --namespace knative-serving
-   kubectl get pods --namespace knative-build
    kubectl get pods --namespace knative-eventing
    kubectl get pods --namespace knative-monitoring
    ```
@@ -198,10 +195,3 @@ Delete the Kubernetes cluster along with Knative, Istio, and any deployed apps:
 ```shell
 minikube delete
 ```
-
----
-
-Except as otherwise noted, the content of this page is licensed under the
-[Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),
-and code samples are licensed under the
-[Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).

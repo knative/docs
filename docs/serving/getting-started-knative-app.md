@@ -1,8 +1,10 @@
 ---
 title: "Getting Started with App Deployment"
-#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
-weight: 05
+linkTitle: "Getting started"
+weight: 01
 type: "docs"
+aliases:
+  - "/docs/install/getting-started-knative-app/"
 ---
 
 This guide shows you how to deploy an app using Knative, then interact with it
@@ -170,10 +172,3 @@ To remove the sample app from your cluster, delete the service record:
 ```shell
 kubectl delete --filename service.yaml
 ```
-
----
-
-Except as otherwise noted, the content of this page is licensed under the
-[Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),
-and code samples are licensed under the
-[Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).

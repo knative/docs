@@ -87,65 +87,6 @@ kubectl get revisions
 kubernetes.labels.serving_knative_dev\/revision: <REVISION_NAME>
 ```
 
-### Accessing build logs
-
-To access logs for a [Knative Build](../build/README.md):
-
-- Find the build's name in the specified in the `.yaml` file:
-
-  ```yaml
-  apiVersion: build.knative.dev/v1alpha1
-  kind: Build
-  metadata:
-    name: <BUILD_NAME>
-  ```
-
-  Or find build names with the following command:
-
-  ```
-  kubectl get builds
-  ```
-
-- Replace `<BUILD_NAME>` and enter the following search query in Kibana:
-
-```
-kubernetes.labels.build\-name: <BUILD_NAME>
-```
-
-### Accessing request logs
-
-To access the request logs, enter the following search in Kibana:
-
-```text
-tag: "requestlog.logentry.istio-system"
-```
-
-Request logs contain details about requests served by the revision. Below is a
-sample request log:
-
-```text
-@timestamp                   July 10th 2018, 10:09:28.000
-destinationConfiguration     configuration-example
-destinationNamespace         default
-destinationRevision          configuration-example-00001
-destinationService           configuration-example-00001-service.default.svc.cluster.local
-latency                      1.232902ms
-method                       GET
-protocol                     http
-referer                      unknown
-requestHost                  route-example.default.example.com
-requestSize                  0
-responseCode                 200
-responseSize                 36
-severity                     Info
-sourceNamespace              istio-system
-sourceService                unknown
-tag                          requestlog.logentry.istio-system
-traceId                      986d6faa02d49533
-url                          /
-userAgent                    curl/7.60.0
-```
-
 ### Accessing end to end request traces
 
 See [Accessing Traces](./accessing-traces.md) page for details.
@@ -156,9 +97,4 @@ Go to the
 [GCP Console logging page](https://console.cloud.google.com/logs/viewer) for
 your GCP project, which stores your logs via Stackdriver.
 
----
 
-Except as otherwise noted, the content of this page is licensed under the
-[Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),
-and code samples are licensed under the
-[Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).
