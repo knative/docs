@@ -42,7 +42,7 @@ spec:
   template:
     spec:
       containers:
-      - image: villardl/transformer-nodejs
+      - image: villardl/transformer-nodejs:0.1
         env:
         - name: TRANSFORMER
           value: |
@@ -57,7 +57,7 @@ spec:
   template:
     spec:
       containers:
-      - image: villardl/transformer-nodejs
+      - image: villardl/transformer-nodejs:0.1
         env:
         - name: TRANSFORMER
           value: |
