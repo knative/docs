@@ -1,0 +1,1302 @@
+[
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "4c77ed9c5d2f9989",
+    "id": "7b23e86c3956d748",
+    "kind": "CLIENT",
+    "name": "/triggers/default/display-mutated/9965e4f4-b87b-11e9-9ba8-42010a800052",
+    "timestamp": 1565117930562183,
+    "duration": 1491,
+    "localEndpoint": {
+      "serviceName": "imc-dispatcher"
+    },
+    "tags": {
+      "http.host": "default-broker-filter.default.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/triggers/default/display-mutated/9965e4f4-b87b-11e9-9ba8-42010a800052",
+      "http.status_code": "202",
+      "http.url": "http://default-broker-filter.default.svc.cluster.local/triggers/default/display-mutated/9965e4f4-b87b-11e9-9ba8-42010a800052",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "aacfe23c157d1508",
+    "id": "d97bdd0cf1a353c7",
+    "kind": "CLIENT",
+    "name": "/triggers/default/mutator-t/82d528bb-b87b-11e9-a59d-42010a8000c3",
+    "timestamp": 1565117930562244,
+    "duration": 15631,
+    "localEndpoint": {
+      "serviceName": "imc-dispatcher"
+    },
+    "tags": {
+      "http.host": "default-broker-filter.default.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/triggers/default/mutator-t/82d528bb-b87b-11e9-a59d-42010a8000c3",
+      "http.status_code": "200",
+      "http.url": "http://default-broker-filter.default.svc.cluster.local/triggers/default/mutator-t/82d528bb-b87b-11e9-a59d-42010a8000c3",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "fd3bfe9f4874e029",
+    "id": "169e7e2205207d1b",
+    "name": "transport/http/send",
+    "timestamp": 1565117930561028,
+    "duration": 1591,
+    "localEndpoint": {
+      "serviceName": "default-broker-ingress.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "e4d97d1d8cc84338",
+    "id": "fd3bfe9f4874e029",
+    "name": "client/send",
+    "timestamp": 1565117930561021,
+    "duration": 1647,
+    "localEndpoint": {
+      "serviceName": "default-broker-ingress.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "deae8136e97d62a8",
+    "id": "f71002b9a529ff99",
+    "name": "client/send",
+    "timestamp": 1565117930602174,
+    "duration": 1641,
+    "localEndpoint": {
+      "serviceName": "default-broker-ingress.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "a09488632a9166a5",
+    "id": "b9f608e6e63c0397",
+    "name": "transport/http/send",
+    "timestamp": 1565117930602464,
+    "duration": 2868,
+    "localEndpoint": {
+      "serviceName": "default-broker-ingress.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "873208e16de5c9b3",
+    "id": "a09488632a9166a5",
+    "name": "client/send",
+    "timestamp": 1565117930602460,
+    "duration": 2885,
+    "localEndpoint": {
+      "serviceName": "default-broker-ingress.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "d883854f46338118",
+    "id": "f1e505d202df1d0a",
+    "name": "client/receive/fn",
+    "timestamp": 1565117930602388,
+    "duration": 6132,
+    "localEndpoint": {
+      "serviceName": "default-broker-ingress.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "86e87ef758bbdde1",
+    "id": "4da72463317fc74c",
+    "name": "client/receive/fn",
+    "timestamp": 1565117930562920,
+    "duration": 363,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "6aede748f7ab3636",
+    "id": "31ac8db4cf6f20a1",
+    "name": "transport/http/send",
+    "timestamp": 1565117930562885,
+    "duration": 14483,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "f9b55f570c51d249",
+    "id": "15b1f6056e6079f5",
+    "name": "transport/http/receive",
+    "timestamp": 1565117930562748,
+    "duration": 14713,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "f6d4dab1dff87990",
+    "id": "bd93801db8bc63fb",
+    "name": "client/receive",
+    "timestamp": 1565117930604199,
+    "duration": 82,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "0fefecba14b0c882",
+    "id": "d6ad9226ed73b2ed",
+    "name": "client/receive/fn",
+    "timestamp": 1565117930619274,
+    "duration": 653,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "e34768ecd4faaa36",
+    "id": "f43e824317bee914",
+    "kind": "SERVER",
+    "name": "/triggers/default/mutator-t/82d528bb-b87b-11e9-a59d-42010a8000c3",
+    "timestamp": 1565117930616577,
+    "duration": 3426,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    },
+    "tags": {
+      "http.host": "default-broker-filter.default.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/triggers/default/mutator-t/82d528bb-b87b-11e9-a59d-42010a8000c3",
+      "http.status_code": "202",
+      "http.url": "/triggers/default/mutator-t/82d528bb-b87b-11e9-a59d-42010a8000c3",
+      "http.user_agent": "Go-http-client/1.1",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "a32e42dd1ee84ccb",
+    "id": "6aede748f7ab3636",
+    "name": "client/send",
+    "timestamp": 1565117930562878,
+    "duration": 14500,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "a04dbd37f28ff411",
+    "id": "670c63a3ca53de7c",
+    "name": "client/receive",
+    "timestamp": 1565117930605589,
+    "duration": 112,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "27977dac655fb239",
+    "id": "4b11ccf4684437d1",
+    "kind": "SERVER",
+    "name": "/triggers/default/mutator-t/82d528bb-b87b-11e9-a59d-42010a8000c3",
+    "timestamp": 1565117930605514,
+    "duration": 275,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    },
+    "tags": {
+      "http.host": "default-broker-filter.default.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/triggers/default/mutator-t/82d528bb-b87b-11e9-a59d-42010a8000c3",
+      "http.status_code": "202",
+      "http.url": "/triggers/default/mutator-t/82d528bb-b87b-11e9-a59d-42010a8000c3",
+      "http.user_agent": "Go-http-client/1.1",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "4ac69fbd04276f93",
+    "id": "11854529ddea58fe",
+    "name": "client/receive",
+    "timestamp": 1565117930606296,
+    "duration": 11329,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "a198e96e56adbc4f",
+    "id": "68578fda2e71a6ba",
+    "name": "transport/http/send",
+    "timestamp": 1565117930604141,
+    "duration": 14184,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "bedeac541cda2b39",
+    "id": "859d52c0f49d15a4",
+    "name": "client/receive/fn",
+    "timestamp": 1565117930603985,
+    "duration": 14388,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "0d8e9dcc3e763dbe",
+    "id": "a2e315a6baca848d",
+    "kind": "SERVER",
+    "name": "/triggers/default/display-mutated/9965e4f4-b87b-11e9-9ba8-42010a800052",
+    "timestamp": 1565117930603837,
+    "duration": 14577,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    },
+    "tags": {
+      "http.host": "default-broker-filter.default.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/triggers/default/display-mutated/9965e4f4-b87b-11e9-9ba8-42010a800052",
+      "http.status_code": "202",
+      "http.url": "/triggers/default/display-mutated/9965e4f4-b87b-11e9-9ba8-42010a800052",
+      "http.user_agent": "Go-http-client/1.1",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "65760a3502194e01",
+    "id": "2c35b0a0dadc376c",
+    "name": "client/receive/fn",
+    "timestamp": 1565117930616768,
+    "duration": 1840,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "4830474f3cecde17",
+    "id": "0fefecba14b0c882",
+    "name": "client/receive",
+    "timestamp": 1565117930619271,
+    "duration": 681,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "51ddb28ccfda44c1",
+    "id": "8089ad5cab018380",
+    "kind": "CLIENT",
+    "name": "/",
+    "timestamp": 1565117930590008,
+    "duration": 15574,
+    "localEndpoint": {
+      "serviceName": "imc-dispatcher"
+    },
+    "tags": {
+      "http.host": "default-broker.default.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/",
+      "http.status_code": "202",
+      "http.url": "http://default-broker.default.svc.cluster.local/",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "80517c139a19d171",
+    "id": "b2157d1813710a55",
+    "name": "transport/http/receive",
+    "timestamp": 1565117930560968,
+    "duration": 1745,
+    "localEndpoint": {
+      "serviceName": "default-broker-ingress.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "f71002b9a529ff99",
+    "id": "29d502be1e81387d",
+    "name": "transport/http/send",
+    "timestamp": 1565117930602187,
+    "duration": 1613,
+    "localEndpoint": {
+      "serviceName": "default-broker-ingress.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "61c4ffa93a2353f0",
+    "id": "acea8031702629c5",
+    "name": "transport/http/receive",
+    "timestamp": 1565117930602133,
+    "duration": 1709,
+    "localEndpoint": {
+      "serviceName": "default-broker-ingress.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "6ed0875eb1392dc2",
+    "id": "873208e16de5c9b3",
+    "name": "client/receive/fn",
+    "timestamp": 1565117930602440,
+    "duration": 2927,
+    "localEndpoint": {
+      "serviceName": "default-broker-ingress.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "1073823b62d59b8b",
+    "id": "3c0c875938e2f3de",
+    "name": "transport/http/receive",
+    "timestamp": 1565117930602434,
+    "duration": 2942,
+    "localEndpoint": {
+      "serviceName": "default-broker-ingress.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "37d4d2aca8f1cf45",
+    "id": "6680cd7c84180e05",
+    "kind": "SERVER",
+    "name": "/",
+    "timestamp": 1565117930589209,
+    "duration": 201,
+    "localEndpoint": {
+      "serviceName": "imc-dispatcher"
+    },
+    "tags": {
+      "http.host": "default-kn-ingress-kn-channel.default.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/",
+      "http.status_code": "202",
+      "http.url": "/",
+      "http.user_agent": "Go-http-client/1.1",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "0828d8dcccca9186",
+    "id": "37d4d2aca8f1cf45",
+    "kind": "CLIENT",
+    "timestamp": 1565117930578053,
+    "duration": 12138,
+    "localEndpoint": {
+      "serviceName": "imc-dispatcher"
+    },
+    "tags": {
+      "http.host": "default-kn-ingress-kn-channel.default.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "",
+      "http.status_code": "202",
+      "http.url": "http://default-kn-ingress-kn-channel.default.svc.cluster.local",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "f384bdec178dc842",
+    "id": "85ef724c1dad2eb8",
+    "kind": "SERVER",
+    "name": "/",
+    "timestamp": 1565117930606113,
+    "duration": 1516,
+    "localEndpoint": {
+      "serviceName": "imc-dispatcher"
+    },
+    "tags": {
+      "http.host": "default-kn-trigger-kn-channel.default.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/",
+      "http.status_code": "202",
+      "http.url": "/",
+      "http.user_agent": "Go-http-client/1.1",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "952cc84c603f4cc4",
+    "id": "f384bdec178dc842",
+    "kind": "CLIENT",
+    "name": "/",
+    "timestamp": 1565117930589768,
+    "duration": 18981,
+    "localEndpoint": {
+      "serviceName": "imc-dispatcher"
+    },
+    "tags": {
+      "http.host": "default-broker.default.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/",
+      "http.status_code": "202",
+      "http.url": "http://default-broker.default.svc.cluster.local/",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "cb77fd9acf1ca746",
+    "id": "e4d97d1d8cc84338",
+    "name": "client/receive/fn",
+    "timestamp": 1565117930560978,
+    "duration": 1726,
+    "localEndpoint": {
+      "serviceName": "default-broker-ingress.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "a59bff624b223415",
+    "id": "67effb90dd6d3480",
+    "kind": "SERVER",
+    "name": "/",
+    "timestamp": 1565117930560821,
+    "duration": 1920,
+    "localEndpoint": {
+      "serviceName": "default-broker-ingress.default"
+    },
+    "tags": {
+      "http.host": "default-broker.default.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/",
+      "http.status_code": "202",
+      "http.url": "/",
+      "http.user_agent": "curl/7.35.0",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "c54c01b42cd2c5b6",
+    "id": "deae8136e97d62a8",
+    "name": "client/receive/fn",
+    "timestamp": 1565117930602140,
+    "duration": 1693,
+    "localEndpoint": {
+      "serviceName": "default-broker-ingress.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "acea8031702629c5",
+    "id": "c54c01b42cd2c5b6",
+    "name": "client/receive",
+    "timestamp": 1565117930602138,
+    "duration": 1699,
+    "localEndpoint": {
+      "serviceName": "default-broker-ingress.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "48627f277e77b6fe",
+    "id": "61c4ffa93a2353f0",
+    "name": "transport/http/servehttp",
+    "timestamp": 1565117930602053,
+    "duration": 1798,
+    "localEndpoint": {
+      "serviceName": "default-broker-ingress.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "8d5d04c81030ab43",
+    "id": "bf2105cd8987e426",
+    "name": "transport/http/receive",
+    "timestamp": 1565117930602380,
+    "duration": 6151,
+    "localEndpoint": {
+      "serviceName": "default-broker-ingress.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "74fb834554840e52",
+    "id": "8d5d04c81030ab43",
+    "name": "transport/http/servehttp",
+    "timestamp": 1565117930602340,
+    "duration": 6201,
+    "localEndpoint": {
+      "serviceName": "default-broker-ingress.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "7b23e86c3956d748",
+    "id": "32f7b9eb338de8de",
+    "kind": "SERVER",
+    "name": "/triggers/default/display-mutated/9965e4f4-b87b-11e9-9ba8-42010a800052",
+    "timestamp": 1565117930562610,
+    "duration": 715,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    },
+    "tags": {
+      "http.host": "default-broker-filter.default.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/triggers/default/display-mutated/9965e4f4-b87b-11e9-9ba8-42010a800052",
+      "http.status_code": "202",
+      "http.url": "/triggers/default/display-mutated/9965e4f4-b87b-11e9-9ba8-42010a800052",
+      "http.user_agent": "Go-http-client/1.1",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "dc6f9c7146246360",
+    "id": "a32e42dd1ee84ccb",
+    "name": "client/receive/fn",
+    "timestamp": 1565117930562755,
+    "duration": 14640,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "d843eb94b5ae4269",
+    "id": "9f0291008e722cd4",
+    "name": "client/send",
+    "timestamp": 1565117930606386,
+    "duration": 11209,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "5643787c4186f0f8",
+    "id": "f589ae7a7bdbb152",
+    "kind": "SERVER",
+    "name": "/triggers/default/display-mutated/9965e4f4-b87b-11e9-9ba8-42010a800052",
+    "timestamp": 1565117930606218,
+    "duration": 11456,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    },
+    "tags": {
+      "http.host": "default-broker-filter.default.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/triggers/default/display-mutated/9965e4f4-b87b-11e9-9ba8-42010a800052",
+      "http.status_code": "202",
+      "http.url": "/triggers/default/display-mutated/9965e4f4-b87b-11e9-9ba8-42010a800052",
+      "http.user_agent": "Go-http-client/1.1",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "69a2bb11938e6ef8",
+    "id": "f71f07e9431642ce",
+    "name": "transport/http/receive",
+    "timestamp": 1565117930603977,
+    "duration": 14409,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "a2e315a6baca848d",
+    "id": "69a2bb11938e6ef8",
+    "name": "transport/http/servehttp",
+    "timestamp": 1565117930603883,
+    "duration": 14510,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "2c35b0a0dadc376c",
+    "id": "f3f3550cb3a021d7",
+    "name": "client/send",
+    "timestamp": 1565117930616953,
+    "duration": 1615,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "f43e824317bee914",
+    "id": "82bccd1ac845bdea",
+    "name": "transport/http/servehttp",
+    "timestamp": 1565117930616638,
+    "duration": 3343,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "a59bff624b223415",
+    "id": "1dcbf2cc81085bca",
+    "kind": "SERVER",
+    "name": "/",
+    "timestamp": 1565117930561639,
+    "duration": 219,
+    "localEndpoint": {
+      "serviceName": "imc-dispatcher"
+    },
+    "tags": {
+      "http.host": "default-kn-trigger-kn-channel.default.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/",
+      "http.status_code": "202",
+      "http.url": "/",
+      "http.user_agent": "Go-http-client/1.1",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "2231b8bcf3b30602",
+    "id": "af35a82c8728c13f",
+    "kind": "SERVER",
+    "name": "/",
+    "timestamp": 1565117930602650,
+    "duration": 262,
+    "localEndpoint": {
+      "serviceName": "imc-dispatcher"
+    },
+    "tags": {
+      "http.host": "default-kn-trigger-kn-channel.default.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/",
+      "http.status_code": "202",
+      "http.url": "/",
+      "http.user_agent": "Go-http-client/1.1",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "8089ad5cab018380",
+    "id": "9a928d3cd2eaf7fb",
+    "kind": "SERVER",
+    "name": "/",
+    "timestamp": 1565117930604233,
+    "duration": 647,
+    "localEndpoint": {
+      "serviceName": "imc-dispatcher"
+    },
+    "tags": {
+      "http.host": "default-kn-trigger-kn-channel.default.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/",
+      "http.status_code": "202",
+      "http.url": "/",
+      "http.user_agent": "Go-http-client/1.1",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "f8ea82dc8938747a",
+    "id": "27977dac655fb239",
+    "kind": "CLIENT",
+    "name": "/triggers/default/mutator-t/82d528bb-b87b-11e9-a59d-42010a8000c3",
+    "timestamp": 1565117930605228,
+    "duration": 719,
+    "localEndpoint": {
+      "serviceName": "imc-dispatcher"
+    },
+    "tags": {
+      "http.host": "default-broker-filter.default.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/triggers/default/mutator-t/82d528bb-b87b-11e9-a59d-42010a8000c3",
+      "http.status_code": "202",
+      "http.url": "http://default-broker-filter.default.svc.cluster.local/triggers/default/mutator-t/82d528bb-b87b-11e9-a59d-42010a8000c3",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "c93e880cae1136bb",
+    "id": "5643787c4186f0f8",
+    "kind": "CLIENT",
+    "name": "/triggers/default/display-mutated/9965e4f4-b87b-11e9-9ba8-42010a800052",
+    "timestamp": 1565117930605236,
+    "duration": 12638,
+    "localEndpoint": {
+      "serviceName": "imc-dispatcher"
+    },
+    "tags": {
+      "http.host": "default-broker-filter.default.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/triggers/default/display-mutated/9965e4f4-b87b-11e9-9ba8-42010a800052",
+      "http.status_code": "202",
+      "http.url": "http://default-broker-filter.default.svc.cluster.local/triggers/default/display-mutated/9965e4f4-b87b-11e9-9ba8-42010a800052",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "dee1a2fc624ffffe",
+    "id": "0d8e9dcc3e763dbe",
+    "kind": "CLIENT",
+    "name": "/triggers/default/display-mutated/9965e4f4-b87b-11e9-9ba8-42010a800052",
+    "timestamp": 1565117930603339,
+    "duration": 15385,
+    "localEndpoint": {
+      "serviceName": "imc-dispatcher"
+    },
+    "tags": {
+      "http.host": "default-broker-filter.default.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/triggers/default/display-mutated/9965e4f4-b87b-11e9-9ba8-42010a800052",
+      "http.status_code": "202",
+      "http.url": "http://default-broker-filter.default.svc.cluster.local/triggers/default/display-mutated/9965e4f4-b87b-11e9-9ba8-42010a800052",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "12f462bcb021e9f5",
+    "id": "41a05d8c8c4827b5",
+    "kind": "CLIENT",
+    "name": "/triggers/default/display-mutated/9965e4f4-b87b-11e9-9ba8-42010a800052",
+    "timestamp": 1565117930608300,
+    "duration": 10501,
+    "localEndpoint": {
+      "serviceName": "imc-dispatcher"
+    },
+    "tags": {
+      "http.host": "default-broker-filter.default.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/triggers/default/display-mutated/9965e4f4-b87b-11e9-9ba8-42010a800052",
+      "http.status_code": "202",
+      "http.url": "http://default-broker-filter.default.svc.cluster.local/triggers/default/display-mutated/9965e4f4-b87b-11e9-9ba8-42010a800052",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "b49b6d1cf9d36c77",
+    "id": "e34768ecd4faaa36",
+    "kind": "CLIENT",
+    "name": "/triggers/default/mutator-t/82d528bb-b87b-11e9-a59d-42010a8000c3",
+    "timestamp": 1565117930607886,
+    "duration": 12269,
+    "localEndpoint": {
+      "serviceName": "imc-dispatcher"
+    },
+    "tags": {
+      "http.host": "default-broker-filter.default.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/triggers/default/mutator-t/82d528bb-b87b-11e9-a59d-42010a8000c3",
+      "http.status_code": "202",
+      "http.url": "http://default-broker-filter.default.svc.cluster.local/triggers/default/mutator-t/82d528bb-b87b-11e9-a59d-42010a8000c3",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "b2157d1813710a55",
+    "id": "cb77fd9acf1ca746",
+    "name": "client/receive",
+    "timestamp": 1565117930560974,
+    "duration": 1734,
+    "localEndpoint": {
+      "serviceName": "default-broker-ingress.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "67effb90dd6d3480",
+    "id": "80517c139a19d171",
+    "name": "transport/http/servehttp",
+    "timestamp": 1565117930560894,
+    "duration": 1830,
+    "localEndpoint": {
+      "serviceName": "default-broker-ingress.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "938800afb37a8cd3",
+    "id": "1073823b62d59b8b",
+    "name": "transport/http/servehttp",
+    "timestamp": 1565117930602176,
+    "duration": 3208,
+    "localEndpoint": {
+      "serviceName": "default-broker-ingress.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "8089ad5cab018380",
+    "id": "938800afb37a8cd3",
+    "kind": "SERVER",
+    "name": "/",
+    "timestamp": 1565117930602132,
+    "duration": 3264,
+    "localEndpoint": {
+      "serviceName": "default-broker-ingress.default"
+    },
+    "tags": {
+      "http.host": "default-broker.default.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/",
+      "http.status_code": "202",
+      "http.url": "/",
+      "http.user_agent": "Go-http-client/1.1",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "bf2105cd8987e426",
+    "id": "d883854f46338118",
+    "name": "client/receive",
+    "timestamp": 1565117930602385,
+    "duration": 6140,
+    "localEndpoint": {
+      "serviceName": "default-broker-ingress.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "32f7b9eb338de8de",
+    "id": "c07405c3e414bcb4",
+    "name": "transport/http/servehttp",
+    "timestamp": 1565117930562641,
+    "duration": 670,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "6b3814805bc9fe73",
+    "id": "f9b55f570c51d249",
+    "name": "transport/http/servehttp",
+    "timestamp": 1565117930562641,
+    "duration": 14905,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "4c5cf82bcd61ff0e",
+    "id": "131b9e97a525e979",
+    "name": "transport/http/servehttp",
+    "timestamp": 1565117930604026,
+    "duration": 272,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "6be6926cf6c3b93c",
+    "id": "4c5cf82bcd61ff0e",
+    "kind": "SERVER",
+    "name": "/triggers/default/mutator-t/82d528bb-b87b-11e9-a59d-42010a8000c3",
+    "timestamp": 1565117930604003,
+    "duration": 312,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    },
+    "tags": {
+      "http.host": "default-broker-filter.default.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/triggers/default/mutator-t/82d528bb-b87b-11e9-a59d-42010a8000c3",
+      "http.status_code": "202",
+      "http.url": "/triggers/default/mutator-t/82d528bb-b87b-11e9-a59d-42010a8000c3",
+      "http.user_agent": "Go-http-client/1.1",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "670c63a3ca53de7c",
+    "id": "2ecb080fa317c8e7",
+    "name": "client/receive/fn",
+    "timestamp": 1565117930605591,
+    "duration": 105,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "4b11ccf4684437d1",
+    "id": "12d071604108213c",
+    "name": "transport/http/servehttp",
+    "timestamp": 1565117930605531,
+    "duration": 245,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "9f0291008e722cd4",
+    "id": "66c1366c6636163f",
+    "name": "transport/http/send",
+    "timestamp": 1565117930606392,
+    "duration": 11185,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "f71f07e9431642ce",
+    "id": "bedeac541cda2b39",
+    "name": "client/receive",
+    "timestamp": 1565117930603982,
+    "duration": 14396,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "f3f3550cb3a021d7",
+    "id": "bab2fb778b640b42",
+    "name": "transport/http/send",
+    "timestamp": 1565117930616966,
+    "duration": 1586,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "103a19f278cd90c0",
+    "id": "9eb764c929556496",
+    "name": "transport/http/receive",
+    "timestamp": 1565117930616749,
+    "duration": 1882,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "bbfd27afef81d37f",
+    "id": "103a19f278cd90c0",
+    "name": "transport/http/servehttp",
+    "timestamp": 1565117930616668,
+    "duration": 1974,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "41a05d8c8c4827b5",
+    "id": "bbfd27afef81d37f",
+    "kind": "SERVER",
+    "name": "/triggers/default/display-mutated/9965e4f4-b87b-11e9-9ba8-42010a800052",
+    "timestamp": 1565117930616629,
+    "duration": 2032,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    },
+    "tags": {
+      "http.host": "default-broker-filter.default.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/triggers/default/display-mutated/9965e4f4-b87b-11e9-9ba8-42010a800052",
+      "http.status_code": "202",
+      "http.url": "/triggers/default/display-mutated/9965e4f4-b87b-11e9-9ba8-42010a800052",
+      "http.user_agent": "Go-http-client/1.1",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "82bccd1ac845bdea",
+    "id": "4830474f3cecde17",
+    "name": "transport/http/receive",
+    "timestamp": 1565117930619265,
+    "duration": 701,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "bf29d98b80f7f376",
+    "id": "86e87ef758bbdde1",
+    "name": "client/receive",
+    "timestamp": 1565117930562916,
+    "duration": 376,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "c07405c3e414bcb4",
+    "id": "bf29d98b80f7f376",
+    "name": "transport/http/receive",
+    "timestamp": 1565117930562906,
+    "duration": 395,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "15b1f6056e6079f5",
+    "id": "dc6f9c7146246360",
+    "name": "client/receive",
+    "timestamp": 1565117930562752,
+    "duration": 14660,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "d97bdd0cf1a353c7",
+    "id": "6b3814805bc9fe73",
+    "kind": "SERVER",
+    "name": "/triggers/default/mutator-t/82d528bb-b87b-11e9-a59d-42010a8000c3",
+    "timestamp": 1565117930562609,
+    "duration": 14954,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    },
+    "tags": {
+      "http.host": "default-broker-filter.default.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/triggers/default/mutator-t/82d528bb-b87b-11e9-a59d-42010a8000c3",
+      "http.status_code": "202",
+      "http.url": "/triggers/default/mutator-t/82d528bb-b87b-11e9-a59d-42010a8000c3",
+      "http.user_agent": "Go-http-client/1.1",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "bd93801db8bc63fb",
+    "id": "8452268990804d66",
+    "name": "client/receive/fn",
+    "timestamp": 1565117930604202,
+    "duration": 76,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "131b9e97a525e979",
+    "id": "f6d4dab1dff87990",
+    "name": "transport/http/receive",
+    "timestamp": 1565117930604195,
+    "duration": 94,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "12d071604108213c",
+    "id": "a04dbd37f28ff411",
+    "name": "transport/http/receive",
+    "timestamp": 1565117930605585,
+    "duration": 176,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "11854529ddea58fe",
+    "id": "d843eb94b5ae4269",
+    "name": "client/receive/fn",
+    "timestamp": 1565117930606304,
+    "duration": 11316,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "bc4854e6539f9bbd",
+    "id": "4ac69fbd04276f93",
+    "name": "transport/http/receive",
+    "timestamp": 1565117930606292,
+    "duration": 11349,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "f589ae7a7bdbb152",
+    "id": "bc4854e6539f9bbd",
+    "name": "transport/http/servehttp",
+    "timestamp": 1565117930606241,
+    "duration": 11411,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "859d52c0f49d15a4",
+    "id": "a198e96e56adbc4f",
+    "name": "client/send",
+    "timestamp": 1565117930604134,
+    "duration": 14213,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "9eb764c929556496",
+    "id": "65760a3502194e01",
+    "name": "client/receive",
+    "timestamp": 1565117930616757,
+    "duration": 1856,
+    "localEndpoint": {
+      "serviceName": "default-broker-filter.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "c4d8c21c3c668a83",
+    "id": "2231b8bcf3b30602",
+    "kind": "CLIENT",
+    "name": "/",
+    "timestamp": 1565117930589802,
+    "duration": 14508,
+    "localEndpoint": {
+      "serviceName": "imc-dispatcher"
+    },
+    "tags": {
+      "http.host": "default-broker.default.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/",
+      "http.status_code": "202",
+      "http.url": "http://default-broker.default.svc.cluster.local/",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "3c3a989c1a9d7b7d",
+    "id": "6be6926cf6c3b93c",
+    "kind": "CLIENT",
+    "name": "/triggers/default/mutator-t/82d528bb-b87b-11e9-a59d-42010a8000c3",
+    "timestamp": 1565117930603459,
+    "duration": 1301,
+    "localEndpoint": {
+      "serviceName": "imc-dispatcher"
+    },
+    "tags": {
+      "http.host": "default-broker-filter.default.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/triggers/default/mutator-t/82d528bb-b87b-11e9-a59d-42010a8000c3",
+      "http.status_code": "202",
+      "http.url": "http://default-broker-filter.default.svc.cluster.local/triggers/default/mutator-t/82d528bb-b87b-11e9-a59d-42010a8000c3",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "2231b8bcf3b30602",
+    "id": "48627f277e77b6fe",
+    "kind": "SERVER",
+    "name": "/",
+    "timestamp": 1565117930601994,
+    "duration": 1872,
+    "localEndpoint": {
+      "serviceName": "default-broker-ingress.default"
+    },
+    "tags": {
+      "http.host": "default-broker.default.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/",
+      "http.status_code": "202",
+      "http.url": "/",
+      "http.user_agent": "Go-http-client/1.1",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "3c0c875938e2f3de",
+    "id": "6ed0875eb1392dc2",
+    "name": "client/receive",
+    "timestamp": 1565117930602438,
+    "duration": 2934,
+    "localEndpoint": {
+      "serviceName": "default-broker-ingress.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "0a488654bf8abafb",
+    "id": "23aa06d77b3657ed",
+    "name": "transport/http/send",
+    "timestamp": 1565117930602425,
+    "duration": 6070,
+    "localEndpoint": {
+      "serviceName": "default-broker-ingress.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "f1e505d202df1d0a",
+    "id": "0a488654bf8abafb",
+    "name": "client/send",
+    "timestamp": 1565117930602419,
+    "duration": 6084,
+    "localEndpoint": {
+      "serviceName": "default-broker-ingress.default"
+    }
+  },
+  {
+    "traceId": "ea2ead6af3a34b2ea59bff624b223415",
+    "parentId": "f384bdec178dc842",
+    "id": "74fb834554840e52",
+    "kind": "SERVER",
+    "name": "/",
+    "timestamp": 1565117930602311,
+    "duration": 6246,
+    "localEndpoint": {
+      "serviceName": "default-broker-ingress.default"
+    },
+    "tags": {
+      "http.host": "default-broker.default.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/",
+      "http.status_code": "202",
+      "http.url": "/",
+      "http.user_agent": "Go-http-client/1.1",
+      "opencensus.status_description": "OK"
+    }
+  }
+]
