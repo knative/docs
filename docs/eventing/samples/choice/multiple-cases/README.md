@@ -23,7 +23,7 @@ spec:
   template:
     spec:
       containers:
-      - image: villardl/filter-nodejs
+      - image: villardl/filter-nodejs:0.1
         env:
         - name: FILTER
           value: |
@@ -37,7 +37,7 @@ spec:
   template:
     spec:
       containers:
-      - image: villardl/filter-nodejs
+      - image: villardl/filter-nodejs:0.1
         env:
         - name: FILTER
           value: |
@@ -66,7 +66,7 @@ spec:
   template:
     spec:
       containers:
-      - image: villardl/transformer-nodejs
+      - image: villardl/transformer-nodejs:0.1
         env:
         - name: TRANSFORMER
           value: |
