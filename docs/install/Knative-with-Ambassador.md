@@ -23,41 +23,9 @@ This guide assumes that you have already
 [created a Kubernetes cluster](https://kubernetes.io/docs/setup/) and are using
 bash in a Mac or Linux environment.
 
-## Install Ambassador
-
-Knative was originally built using Istio to handle cluster networking. While the
-Istio gateway provides the functionality needed to serve requests to your
-application, installing a service mesh to handle north-south traffic carries
-some operational overhead with it. Ambassador provides a way to get traffic to
-your Knative application without the overhead or complexity of a full service
-mesh.
-
-You can install Ambassador with `kubectl`:
-
-```
-kubectl apply -f https://getambassador.io/yaml/ambassador/ambassador-knative.yaml
-kubectl apply -f https://getambassador.io/yaml/ambassador/ambassador-service.yaml
-```
-
-Ambassador will watch for and create routes based off of Knative
-`ClusterIngress` resources. These will then be accessible over the external IP
-address of the Ambassador service you just created.
-
-Get this external IP address and save it in a variable named `AMBASSADOR_IP`
-
-```
-$ kubectl get svc ambassador
-
-NAME         TYPE           CLUSTER-IP     EXTERNAL-IP     PORT(S)        AGE
-ambassador   LoadBalancer   10.59.246.30   35.229.120.99   80:32073/TCP   13m
-
-$ AMBASSADOR_IP=35.229.120.99
-```
-
 ## Install Knative
 
-Now that Ambassador is installed to handle ingress to your serverless
-applications, you need to install Knative to manage them.
+First, let's install Knative to manage our serverless applications.
 
 The following commands install all available Knative components as well as the
 standard set of observability plugins. To customize your Knative installation,
@@ -97,6 +65,37 @@ see Performing a Custom Knative Installation.
     ```
     kubectl get pods -w --all-namespaces
     ```
+
+## Install Ambassador
+
+Knative was originally built using Istio to handle cluster networking. While the
+Istio gateway provides the functionality needed to serve requests to your
+application, installing a service mesh just to handle north-south traffic 
+carries some operational overhead with it. Ambassador provides a way to get 
+traffic to your Knative application without the overhead or complexity of a 
+full service mesh.
+
+You can install Ambassador with `kubectl`:
+
+```
+kubectl apply -f https://getambassador.io/yaml/ambassador/ambassador-knative.yaml
+kubectl apply -f https://getambassador.io/yaml/ambassador/ambassador-service.yaml
+```
+
+Ambassador will watch for and create routes based off of Knative
+`ClusterIngress` resources. These will then be accessible over the external IP
+address of the Ambassador service you just created.
+
+Get this external IP address and save it in a variable named `AMBASSADOR_IP`
+
+```
+$ kubectl get svc ambassador
+
+NAME         TYPE           CLUSTER-IP     EXTERNAL-IP     PORT(S)        AGE
+ambassador   LoadBalancer   10.59.246.30   35.229.120.99   80:32073/TCP   13m
+
+$ AMBASSADOR_IP=35.229.120.99
+```
 
 ## Deploying an Application
 
