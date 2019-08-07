@@ -91,10 +91,3 @@ Our libraries actually create traces inside their own code. Here is the fully ex
 ![Total Trace](./images/TotalTrace.png)
 
 If you are interested, here is the [raw JSON](./data/ea2ead6af3a34b2ea59bff624b223415.json) of the trace.
-
----
-
-Except as otherwise noted, the content of this page is licensed under the
-[Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),
-and code samples are licensed under the
-[Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).
