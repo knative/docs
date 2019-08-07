@@ -1,6 +1,6 @@
-# Use the official Node.js 10 image.
+# Use the official Node.js 12 image.
 # https://hub.docker.com/_/node
-FROM node:10
+FROM node:12
 
 # Create and change to the app directory.
 WORKDIR /usr/src/app

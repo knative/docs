@@ -1,3 +1,10 @@
+---
+title: "Hello World - Node.js"
+linkTitle: "Node.js"
+weight: 1
+type: "docs"
+---
+
 A simple web app written in Node.js that you can use for testing. It reads in an
 env variable `TARGET` and prints "Hello \${TARGET}!". If TARGET is not
 specified, it will use "World" as the TARGET.
@@ -7,8 +14,8 @@ cluster. You can also download a working copy of the sample, by running the
 following commands:
 
 ```shell
-git clone -b "release-0.6" https://github.com/knative/docs knative-docs
-cd knative-docs/serving/samples/hello-world/helloworld-nodejs
+git clone -b "release-0.7" https://github.com/knative/docs knative-docs
+cd knative-docs/docs/serving/samples/hello-world/helloworld-nodejs
 ```
 
 ## Before you begin
@@ -88,9 +95,9 @@ cd knative-docs/serving/samples/hello-world/helloworld-nodejs
    [Dockerizing a Node.js web app](https://nodejs.org/en/docs/guides/nodejs-docker-webapp/).
 
    ```Dockerfile
-   # Use the official Node.js 10 image.
+   # Use the official Node.js 12 image.
    # https://hub.docker.com/_/node
-   FROM node:10
+   FROM node:12
 
    # Create and change to the app directory.
    WORKDIR /usr/src/app
@@ -125,7 +132,7 @@ cd knative-docs/serving/samples/hello-world/helloworld-nodejs
    username.
 
    ```yaml
-   apiVersion: serving.knative.dev/v1beta1
+   apiVersion: serving.knative.dev/v1alpha1
    kind: Service
    metadata:
      name: helloworld-nodejs

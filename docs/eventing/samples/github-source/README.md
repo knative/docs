@@ -1,3 +1,9 @@
+---
+title: "GitHub source"
+linkTitle: "GitHub source"
+weight: 30
+type: "docs"
+---
 
 GitHub Source example shows how to wire GitHub events for consumption
 by a Knative Service.
@@ -27,10 +33,10 @@ To verify the `GitHubSource` is working, we will create a simple Knative
 defines this basic service.
 
 ```yaml
-apiVersion: serving.knative.dev/v1beta1
+apiVersion: serving.knative.dev/v1alpha1
 kind: Service
 metadata:
-  name: github-event-display
+  name: github-message-dumper
 spec:
   template:
     spec:
@@ -97,7 +103,7 @@ Source for a specific namespace. Be sure to replace the
 by your GitHub user.
 
 If using GitHub enterprise you will need to add an additional githubAPIURL
-field to the spec specifying your GitHub enterprise API endpoint, see 
+field to the spec specifying your GitHub enterprise API endpoint, see
 [here](../../README.md#githubsource)
 
 ```yaml
@@ -118,7 +124,7 @@ spec:
       name: githubsecret
       key: secretToken
   sink:
-    apiVersion: serving.knative.dev/v1beta1
+    apiVersion: serving.knative.dev/v1alpha1
     kind: Service
     name: github-event-display
 ```

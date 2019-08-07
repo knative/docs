@@ -1,3 +1,10 @@
+---
+title: "Hello World - Java (Quarkus)"
+linkTitle: "Java (Quarkus)"
+weight: 1
+type: "docs"
+---
+
 A simple [JAX-RS REST API](https://github.com/jax-rs) application that is
 written in Java and uses [Quarkus](https://quarkus.io/).
 
@@ -181,7 +188,7 @@ which you update and create the necessary build and configuration files:
    username.
 
    ```yaml
-   apiVersion: serving.knative.dev/v1beta1
+   apiVersion: serving.knative.dev/v1alpha1
    kind: Service
    metadata:
      name: helloworld-java-quarkus

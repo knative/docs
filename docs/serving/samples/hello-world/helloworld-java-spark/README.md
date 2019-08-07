@@ -1,3 +1,10 @@
+---
+title: "Hello World - Spark Java Framework"
+linkTitle: "Java (Spark)"
+weight: 1
+type: "docs"
+---
+
 A simple web app written in Java using Spark Java Framework that you can use for
 testing.
 
@@ -73,7 +80,7 @@ recreate the source files from this folder.
    username.
 
    ```yaml
-   apiVersion: serving.knative.dev/v1beta1
+   apiVersion: serving.knative.dev/v1alpha1
    kind: Service
    metadata:
      name: helloworld-java

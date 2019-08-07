@@ -1,3 +1,10 @@
+---
+title: "Hello World - Elixir"
+linkTitle: "Elixir"
+weight: 1
+type: "docs"
+---
+
 A simple web application written in [Elixir](https://elixir-lang.org/) using the
 [Phoenix Framework](https://phoenixframework.org/). The application prints all
 environment variables to the main page.
@@ -93,7 +100,7 @@ When asked, if you want to `Fetch and install dependencies? [Yn]` select `y`
    username.
 
    ```yaml
-   apiVersion: serving.knative.dev/v1beta1
+   apiVersion: serving.knative.dev/v1alpha1
    kind: Service
    metadata:
      name: helloworld-elixir

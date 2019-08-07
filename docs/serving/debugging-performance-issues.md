@@ -109,7 +109,7 @@ usage.
 - user-container: This container runs the user code (application, function, or
   container).
 - [istio-proxy](https://github.com/istio/proxy): Sidecar container to form an
-  [Istio](https://istio.io/docs/concepts/what-is-istio/overview.html) mesh.
+  [Istio](https://istio.io/docs/concepts/what-is-istio/) mesh.
 - queue-proxy: Knative Serving owned sidecar container to enforce request
   concurrency limits.
 - autoscaler: Knative Serving owned sidecar container to provide autoscaling for

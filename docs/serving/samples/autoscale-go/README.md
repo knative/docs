@@ -1,3 +1,10 @@
+---
+title: "Autoscale Sample App - Go"
+linkTitle: "Autoscaling - Go"
+weight: 1
+type: "docs"
+---
+
 A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 
 ## Prerequisites
@@ -10,7 +17,7 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 1. Clone this repository, and move into the sample directory:
 
    ```shell
-   git clone -b "release-0.6" https://github.com/knative/docs knative-docs
+   git clone -b "release-0.7" https://github.com/knative/docs knative-docs
    cd knative-docs
    ```
 
@@ -188,7 +195,7 @@ autoscaler classes built into Knative:
    Example of a Service scaled on CPU:
 
    ```yaml
-   apiVersion: serving.knative.dev/v1beta1
+   apiVersion: serving.knative.dev/v1alpha1
    kind: Service
    metadata:
      name: autoscale-go
@@ -209,7 +216,7 @@ autoscaler classes built into Knative:
    annotations. Example of a Service with custom targets and scale bounds:
 
    ```yaml
-   apiVersion: serving.knative.dev/v1beta1
+   apiVersion: serving.knative.dev/v1alpha1
    kind: Service
    metadata:
      name: autoscale-go

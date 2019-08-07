@@ -33,7 +33,7 @@ spec:
 ## Trigger
 
 A Trigger represents a desire to subscribe to events from a specific Broker.
-Basic filtering on the type and source of events is provided.
+Exact match filtering on CloudEvents attributes as well as extensions are supported.
 
 Example:
 
@@ -44,7 +44,7 @@ metadata:
   name: my-service-trigger
 spec:
   filter:
-    sourceAndType:
+    attributes:
       type: dev.knative.foo.bar
   subscriber:
     ref:
@@ -55,39 +55,38 @@ spec:
 
 ## Usage
 
-### ClusterChannelProvisioner
+### Channel
 
-`Broker`s use their `spec.channelTemplate` to create their internal `Channel`s,
+`Broker`s use their `spec.channelTemplateSpec` to create their internal [Channels](./channels/),
 which dictate the durability guarantees of events sent to that `Broker`. If
-`spec.channelTemplate` is not specified, then the
-[default provisioner](https://www.knative.dev/docs/eventing/channels/default-channels/)
+`spec.channelTemplateSpec` is not specified, then the
+[default channel](./channels/default-channels.md)
 for their namespace is used.
 
 #### Setup
 
-Have a `ClusterChannelProvisioner` installed and set as the
-[default provisioner](https://www.knative.dev/docs/eventing/channels/default-channels/)
-for the namespace you are interested in. For development, the
-[`in-memory` `ClusterChannelProvisioner`](https://github.com/knative/eventing/tree/master/config/provisioners/in-memory-channel#deployment-steps)
+Have a `Channel` CRD installed and set as the
+default channel for the namespace you are interested in. For development, the
+[InMemoryChannel](https://github.com/knative/eventing/tree/master/config/channels/in-memory-channel)
 is normally used.
 
 #### Changing
 
-**Note** changing the `ClusterChannelProvisioner` of a running `Broker` will
+**Note** changing the `Channel` of a running `Broker` will
 lose all in-flight events.
 
-If you want to change which `ClusterChannelProvisioner` is used by a given
-`Broker`, then determine if the `spec.channelTemplate` is specified or not.
+If you want to change which `Channel` is used by a given
+`Broker`, then determine if the `spec.channelTemplateSpec` is specified or not.
 
-If `spec.channelTemplate` is specified:
+If `spec.channelTemplateSpec` is specified:
 
 1. Delete the `Broker`.
-1. Create the `Broker` with the updated `spec.channelTemplate`.
+1. Create the `Broker` with the updated `spec.channelTemplateSpec`.
 
-If `spec.channelTemplate` is not specified:
+If `spec.channelTemplateSpec` is not specified:
 
 1. Change the
-   [default provisioner](https://github.com/knative/docs/blob/master/docs/eventing/channels/default-channels.md#setting-the-default-channel-configuration)
+   [default channel](./channels/default-channels.md#setting-the-default-channel-configuration)
    for the namespace that `Broker` is in.
 1. Delete and recreate the `Broker`.
 
@@ -114,6 +113,17 @@ namespace.
 
 ```shell
 kubectl -n default get broker default
+```
+
+_NOTE_ `Broker`s created due to annotation will not be removed if you remove the
+annotation. For example, if you annotate the namespace, which will then create
+the `Broker` as described above. If you now remove the annotation, the `Broker`
+will not be removed, you have to manually delete it.
+
+For example, to delete the injected Broker from the foo namespace:
+
+```shell
+kubectl -n foo delete broker default
 ```
 
 #### Manual Setup
@@ -147,7 +157,7 @@ Note that these commands each use three different objects, all named
 installed with Knative Eventing
 [here](https://github.com/knative/eventing/blob/master/config/200-broker-clusterrole.yaml).
 The `ServiceAccount` was created two commands prior. The `RoleBinding` is
-created here.
+created with this command.
 
 Create RBAC permissions granting access to shared configmaps for logging,
 tracing, and metrics configuration.
@@ -215,7 +225,7 @@ metadata:
   namespace: default
 spec:
   filter:
-    sourceAndType:
+    attributes:
       type: dev.knative.foo.bar
   subscriber:
     ref:
@@ -226,11 +236,7 @@ spec:
 
 #### Defaulting
 
-The Webhook will default certain unspecified fields. For example if
-`spec.broker` is unspecified, it will default to `default`. If
-`spec.filter.sourceAndType.type` or `spec.filter.sourceAndType.Source` are
-unspecified, then they will default to the special value empty string, which
-matches everything.
+The Webhook will default the `spec.broker` field to `default`, if left unspecified. 
 
 The Webhook will default the YAML above to:
 
@@ -243,9 +249,8 @@ metadata:
 spec:
   broker: default # Defaulted by the Webhook.
   filter:
-    sourceAndType:
+    attributes:
       type: dev.knative.foo.bar
-      source: "" # Defaulted by the Webhook.
   subscriber:
     ref:
       apiVersion: serving.knative.dev/v1alpha1
@@ -254,7 +259,7 @@ spec:
 ```
 
 You can make multiple `Trigger`s on the same `Broker` corresponding to different
-types, sources, and subscribers.
+types, sources (or any other CloudEvents attribute), and subscribers.
 
 ### Source
 
@@ -274,10 +279,10 @@ While SSHed into a `Pod` and run:
 curl -v "http://default-broker.default.svc.cluster.local/" \
   -X POST \
   -H "X-B3-Flags: 1" \
-  -H "CE-CloudEventsVersion: 0.1" \
-  -H "CE-EventType: dev.knative.foo.bar" \
-  -H "CE-EventTime: 2018-04-05T03:56:24Z" \
-  -H "CE-EventID: 45a8b444-3213-4758-be3f-540bf93f85ff" \
+  -H "CE-SpecVersion: 0.2" \
+  -H "CE-Type: dev.knative.foo.bar" \
+  -H "CE-Time: 2018-04-05T03:56:24Z" \
+  -H "CE-ID: 45a8b444-3213-4758-be3f-540bf93f85ff" \
   -H "CE-Source: dev.knative.example" \
   -H 'Content-Type: application/json' \
   -d '{ "much": "wow" }'

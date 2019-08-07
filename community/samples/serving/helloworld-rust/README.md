@@ -1,3 +1,10 @@
+---
+title: "Hello World - Rust"
+linkTitle: "Rust"
+weight: 1
+type: "docs"
+---
+
 A simple web app written in Rust that you can use for testing. It reads in an
 env variable `TARGET` and prints "Hello \${TARGET}!". If
 
@@ -106,7 +113,7 @@ recreate the source files from this folder.
    username.
 
    ```yaml
-   apiVersion: serving.knative.dev/v1beta1
+   apiVersion: serving.knative.dev/v1alpha1
    kind: Service
    metadata:
      name: helloworld-rust

@@ -1,3 +1,10 @@
+---
+title: "Hello World - Go"
+linkTitle: "Go"
+weight: 1
+type: "docs"
+---
+
 A simple web app written in Go that you can use for testing. It reads in an env
 variable `TARGET` and prints `Hello ${TARGET}!`. If `TARGET` is not specified,
 it will use `World` as the `TARGET`.
@@ -7,7 +14,7 @@ cluster. You can also download a working copy of the sample, by running the
 following commands:
 
 ```shell
-git clone -b "release-0.6" https://github.com/knative/docs knative-docs
+git clone -b "release-0.7" https://github.com/knative/docs knative-docs
 cd knative-docs/docs/serving/samples/hello-world/helloworld-go
 ```
 
@@ -93,7 +100,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-go
    username.
 
    ```yaml
-   apiVersion: serving.knative.dev/v1beta1
+   apiVersion: serving.knative.dev/v1alpha1
    kind: Service
    metadata:
      name: helloworld-go

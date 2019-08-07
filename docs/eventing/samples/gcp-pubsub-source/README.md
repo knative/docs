@@ -1,3 +1,10 @@
+---
+title: "GCP Cloud Pub/Sub source"
+linkTitle: "Pub/Sub source"
+weight: 20
+type: "docs"
+---
+
 This sample shows how to configure the GCP PubSub event source. This event
 source is most useful as a bridge from other GCP services, such as
 [Cloud Storage](https://cloud.google.com/storage/docs/pubsub-notifications),
@@ -20,7 +27,7 @@ source is most useful as a bridge from other GCP services, such as
    PubSub event source from `release-gcppubsub.yaml`:
 
    ```shell
-   kubectl apply --filename https://github.com/knative/eventing-contrib/releases/download/v0.6.0/gcppubsub.yaml
+   kubectl apply --filename https://github.com/knative/eventing-contrib/releases/download/v0.7.0/gcppubsub.yaml
    ```
 
 1. Enable the `Cloud Pub/Sub API` on your project:

@@ -1,22 +1,22 @@
 <p>Packages:</p>
 <ul>
 <li>
-<a href="#build.knative.dev">build.knative.dev</a>
+<a href="#build.knative.dev%2fv1alpha1">build.knative.dev/v1alpha1</a>
 </li>
 </ul>
-<h2 id="build.knative.dev">build.knative.dev</h2>
+<h2 id="build.knative.dev/v1alpha1">build.knative.dev/v1alpha1</h2>
 <p>
 <p>Package v1alpha1 is the v1alpha1 version of the API.</p>
 </p>
 Resource Types:
 <ul><li>
-<a href="#Build">Build</a>
+<a href="#build.knative.dev/v1alpha1.Build">Build</a>
 </li><li>
-<a href="#BuildTemplate">BuildTemplate</a>
+<a href="#build.knative.dev/v1alpha1.BuildTemplate">BuildTemplate</a>
 </li><li>
-<a href="#ClusterBuildTemplate">ClusterBuildTemplate</a>
+<a href="#build.knative.dev/v1alpha1.ClusterBuildTemplate">ClusterBuildTemplate</a>
 </li></ul>
-<h3 id="Build">Build
+<h3 id="build.knative.dev/v1alpha1.Build">Build
 </h3>
 <p>
 <p>Build represents a build of a container image. A Build is made up of a
@@ -66,7 +66,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#BuildSpec">
+<a href="#build.knative.dev/v1alpha1.BuildSpec">
 BuildSpec
 </a>
 </em>
@@ -93,7 +93,7 @@ to migrate</p>
 <td>
 <code>source</code></br>
 <em>
-<a href="#SourceSpec">
+<a href="#build.knative.dev/v1alpha1.SourceSpec">
 SourceSpec
 </a>
 </em>
@@ -107,7 +107,7 @@ SourceSpec
 <td>
 <code>sources</code></br>
 <em>
-<a href="#SourceSpec">
+<a href="#build.knative.dev/v1alpha1.SourceSpec">
 []SourceSpec
 </a>
 </em>
@@ -163,7 +163,7 @@ string
 <td>
 <code>template</code></br>
 <em>
-<a href="#TemplateInstantiationSpec">
+<a href="#build.knative.dev/v1alpha1.TemplateInstantiationSpec">
 TemplateInstantiationSpec
 </a>
 </em>
@@ -223,7 +223,7 @@ Kubernetes core/v1.Affinity
 <td>
 <code>Status</code></br>
 <em>
-<a href="#BuildSpecStatus">
+<a href="#build.knative.dev/v1alpha1.BuildSpecStatus">
 BuildSpecStatus
 </a>
 </em>
@@ -240,7 +240,7 @@ BuildSpecStatus
 <td>
 <code>status</code></br>
 <em>
-<a href="#BuildStatus">
+<a href="#build.knative.dev/v1alpha1.BuildStatus">
 BuildStatus
 </a>
 </em>
@@ -250,7 +250,7 @@ BuildStatus
 </tr>
 </tbody>
 </table>
-<h3 id="BuildTemplate">BuildTemplate
+<h3 id="build.knative.dev/v1alpha1.BuildTemplate">BuildTemplate
 </h3>
 <p>
 <p>BuildTemplate is a template that can used to easily create Builds.</p>
@@ -298,7 +298,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#BuildTemplateSpec">
+<a href="#build.knative.dev/v1alpha1.BuildTemplateSpec">
 BuildTemplateSpec
 </a>
 </em>
@@ -325,7 +325,7 @@ to migrate</p>
 <td>
 <code>parameters</code></br>
 <em>
-<a href="#ParameterSpec">
+<a href="#build.knative.dev/v1alpha1.ParameterSpec">
 []ParameterSpec
 </a>
 </em>
@@ -367,7 +367,7 @@ steps of the build.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="ClusterBuildTemplate">ClusterBuildTemplate
+<h3 id="build.knative.dev/v1alpha1.ClusterBuildTemplate">ClusterBuildTemplate
 </h3>
 <p>
 <p>ClusterBuildTemplate is a template that can used to easily create Builds.</p>
@@ -415,7 +415,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#BuildTemplateSpec">
+<a href="#build.knative.dev/v1alpha1.BuildTemplateSpec">
 BuildTemplateSpec
 </a>
 </em>
@@ -442,7 +442,7 @@ to migrate</p>
 <td>
 <code>parameters</code></br>
 <em>
-<a href="#ParameterSpec">
+<a href="#build.knative.dev/v1alpha1.ParameterSpec">
 []ParameterSpec
 </a>
 </em>
@@ -484,11 +484,11 @@ steps of the build.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="ArgumentSpec">ArgumentSpec
+<h3 id="build.knative.dev/v1alpha1.ArgumentSpec">ArgumentSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#TemplateInstantiationSpec">TemplateInstantiationSpec</a>)
+<a href="#build.knative.dev/v1alpha1.TemplateInstantiationSpec">TemplateInstantiationSpec</a>)
 </p>
 <p>
 <p>ArgumentSpec defines the actual values to use to populate a template&rsquo;s
@@ -526,20 +526,20 @@ string
 </tr>
 </tbody>
 </table>
-<h3 id="BuildProvider">BuildProvider
+<h3 id="build.knative.dev/v1alpha1.BuildProvider">BuildProvider
 (<code>string</code> alias)</p></h3>
 <p>
 (<em>Appears on:</em>
-<a href="#BuildStatus">BuildStatus</a>)
+<a href="#build.knative.dev/v1alpha1.BuildStatus">BuildStatus</a>)
 </p>
 <p>
 <p>BuildProvider defines a build execution implementation.</p>
 </p>
-<h3 id="BuildSpec">BuildSpec
+<h3 id="build.knative.dev/v1alpha1.BuildSpec">BuildSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#Build">Build</a>)
+<a href="#build.knative.dev/v1alpha1.Build">Build</a>)
 </p>
 <p>
 <p>BuildSpec is the spec for a Build resource.</p>
@@ -570,7 +570,7 @@ to migrate</p>
 <td>
 <code>source</code></br>
 <em>
-<a href="#SourceSpec">
+<a href="#build.knative.dev/v1alpha1.SourceSpec">
 SourceSpec
 </a>
 </em>
@@ -584,7 +584,7 @@ SourceSpec
 <td>
 <code>sources</code></br>
 <em>
-<a href="#SourceSpec">
+<a href="#build.knative.dev/v1alpha1.SourceSpec">
 []SourceSpec
 </a>
 </em>
@@ -640,7 +640,7 @@ string
 <td>
 <code>template</code></br>
 <em>
-<a href="#TemplateInstantiationSpec">
+<a href="#build.knative.dev/v1alpha1.TemplateInstantiationSpec">
 TemplateInstantiationSpec
 </a>
 </em>
@@ -700,7 +700,7 @@ Kubernetes core/v1.Affinity
 <td>
 <code>Status</code></br>
 <em>
-<a href="#BuildSpecStatus">
+<a href="#build.knative.dev/v1alpha1.BuildSpecStatus">
 BuildSpecStatus
 </a>
 </em>
@@ -712,20 +712,20 @@ BuildSpecStatus
 </tr>
 </tbody>
 </table>
-<h3 id="BuildSpecStatus">BuildSpecStatus
+<h3 id="build.knative.dev/v1alpha1.BuildSpecStatus">BuildSpecStatus
 (<code>string</code> alias)</p></h3>
 <p>
 (<em>Appears on:</em>
-<a href="#BuildSpec">BuildSpec</a>)
+<a href="#build.knative.dev/v1alpha1.BuildSpec">BuildSpec</a>)
 </p>
 <p>
 <p>BuildSpecStatus defines the build spec status the user can provide</p>
 </p>
-<h3 id="BuildStatus">BuildStatus
+<h3 id="build.knative.dev/v1alpha1.BuildStatus">BuildStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#Build">Build</a>)
+<a href="#build.knative.dev/v1alpha1.Build">Build</a>)
 </p>
 <p>
 <p>BuildStatus is the status for a Build resource</p>
@@ -757,7 +757,7 @@ github.com/knative/pkg/apis/duck/v1alpha1.Status
 <td>
 <code>builder</code></br>
 <em>
-<a href="#BuildProvider">
+<a href="#build.knative.dev/v1alpha1.BuildProvider">
 BuildProvider
 </a>
 </em>
@@ -770,7 +770,7 @@ BuildProvider
 <td>
 <code>cluster</code></br>
 <em>
-<a href="#ClusterSpec">
+<a href="#build.knative.dev/v1alpha1.ClusterSpec">
 ClusterSpec
 </a>
 </em>
@@ -784,7 +784,7 @@ ClusterSpec
 <td>
 <code>google</code></br>
 <em>
-<a href="#GoogleSpec">
+<a href="#build.knative.dev/v1alpha1.GoogleSpec">
 GoogleSpec
 </a>
 </em>
@@ -850,17 +850,17 @@ Kubernetes meta/v1.Time
 </tr>
 </tbody>
 </table>
-<h3 id="BuildTemplateInterface">BuildTemplateInterface
+<h3 id="build.knative.dev/v1alpha1.BuildTemplateInterface">BuildTemplateInterface
 </h3>
 <p>
 <p>BuildTemplateInterface is implemented by BuildTemplate and ClusterBuildTemplate</p>
 </p>
-<h3 id="BuildTemplateSpec">BuildTemplateSpec
+<h3 id="build.knative.dev/v1alpha1.BuildTemplateSpec">BuildTemplateSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#BuildTemplate">BuildTemplate</a>, 
-<a href="#ClusterBuildTemplate">ClusterBuildTemplate</a>)
+<a href="#build.knative.dev/v1alpha1.BuildTemplate">BuildTemplate</a>, 
+<a href="#build.knative.dev/v1alpha1.ClusterBuildTemplate">ClusterBuildTemplate</a>)
 </p>
 <p>
 <p>BuildTemplateSpec is the spec for a BuildTemplate.</p>
@@ -891,7 +891,7 @@ to migrate</p>
 <td>
 <code>parameters</code></br>
 <em>
-<a href="#ParameterSpec">
+<a href="#build.knative.dev/v1alpha1.ParameterSpec">
 []ParameterSpec
 </a>
 </em>
@@ -930,11 +930,11 @@ steps of the build.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="ClusterSpec">ClusterSpec
+<h3 id="build.knative.dev/v1alpha1.ClusterSpec">ClusterSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#BuildStatus">BuildStatus</a>)
+<a href="#build.knative.dev/v1alpha1.BuildStatus">BuildStatus</a>)
 </p>
 <p>
 <p>ClusterSpec provides information about the on-cluster build, if applicable.</p>
@@ -971,11 +971,11 @@ string
 </tr>
 </tbody>
 </table>
-<h3 id="GCSSourceSpec">GCSSourceSpec
+<h3 id="build.knative.dev/v1alpha1.GCSSourceSpec">GCSSourceSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#SourceSpec">SourceSpec</a>)
+<a href="#build.knative.dev/v1alpha1.SourceSpec">SourceSpec</a>)
 </p>
 <p>
 <p>GCSSourceSpec describes source input to the Build in the form of an archive,
@@ -993,7 +993,7 @@ or a source manifest describing files to fetch.</p>
 <td>
 <code>type</code></br>
 <em>
-<a href="#GCSSourceType">
+<a href="#build.knative.dev/v1alpha1.GCSSourceType">
 GCSSourceType
 </a>
 </em>
@@ -1015,20 +1015,20 @@ string
 </tr>
 </tbody>
 </table>
-<h3 id="GCSSourceType">GCSSourceType
+<h3 id="build.knative.dev/v1alpha1.GCSSourceType">GCSSourceType
 (<code>string</code> alias)</p></h3>
 <p>
 (<em>Appears on:</em>
-<a href="#GCSSourceSpec">GCSSourceSpec</a>)
+<a href="#build.knative.dev/v1alpha1.GCSSourceSpec">GCSSourceSpec</a>)
 </p>
 <p>
 <p>GCSSourceType defines a type of GCS source fetch.</p>
 </p>
-<h3 id="GitSourceSpec">GitSourceSpec
+<h3 id="build.knative.dev/v1alpha1.GitSourceSpec">GitSourceSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#SourceSpec">SourceSpec</a>)
+<a href="#build.knative.dev/v1alpha1.SourceSpec">SourceSpec</a>)
 </p>
 <p>
 <p>GitSourceSpec describes a Git repo source input to the Build.</p>
@@ -1067,11 +1067,11 @@ information.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="GoogleSpec">GoogleSpec
+<h3 id="build.knative.dev/v1alpha1.GoogleSpec">GoogleSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#BuildStatus">BuildStatus</a>)
+<a href="#build.knative.dev/v1alpha1.BuildStatus">BuildStatus</a>)
 </p>
 <p>
 <p>GoogleSpec provides information about the GCB build, if applicable.</p>
@@ -1097,11 +1097,11 @@ string
 </tr>
 </tbody>
 </table>
-<h3 id="ParameterSpec">ParameterSpec
+<h3 id="build.knative.dev/v1alpha1.ParameterSpec">ParameterSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#BuildTemplateSpec">BuildTemplateSpec</a>)
+<a href="#build.knative.dev/v1alpha1.BuildTemplateSpec">BuildTemplateSpec</a>)
 </p>
 <p>
 <p>ParameterSpec defines the possible parameters that can be populated in a
@@ -1151,11 +1151,11 @@ the build does not specify the value for this parameter.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="SourceSpec">SourceSpec
+<h3 id="build.knative.dev/v1alpha1.SourceSpec">SourceSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#BuildSpec">BuildSpec</a>)
+<a href="#build.knative.dev/v1alpha1.BuildSpec">BuildSpec</a>)
 </p>
 <p>
 <p>SourceSpec defines the input to the Build</p>
@@ -1172,7 +1172,7 @@ the build does not specify the value for this parameter.</p>
 <td>
 <code>git</code></br>
 <em>
-<a href="#GitSourceSpec">
+<a href="#build.knative.dev/v1alpha1.GitSourceSpec">
 GitSourceSpec
 </a>
 </em>
@@ -1186,7 +1186,7 @@ GitSourceSpec
 <td>
 <code>gcs</code></br>
 <em>
-<a href="#GCSSourceSpec">
+<a href="#build.knative.dev/v1alpha1.GCSSourceSpec">
 GCSSourceSpec
 </a>
 </em>
@@ -1258,17 +1258,17 @@ TargetPath should not be set for custom source.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="Template">Template
+<h3 id="build.knative.dev/v1alpha1.Template">Template
 </h3>
 <p>
 <p>Template is an interface for accessing the BuildTemplateSpec
 from various forms of template (namespace-/cluster-scoped).</p>
 </p>
-<h3 id="TemplateInstantiationSpec">TemplateInstantiationSpec
+<h3 id="build.knative.dev/v1alpha1.TemplateInstantiationSpec">TemplateInstantiationSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#BuildSpec">BuildSpec</a>)
+<a href="#build.knative.dev/v1alpha1.BuildSpec">BuildSpec</a>)
 </p>
 <p>
 <p>TemplateInstantiationSpec specifies how a BuildTemplate is instantiated into
@@ -1298,7 +1298,7 @@ The template is assumed to exist in the Build&rsquo;s namespace.</p>
 <td>
 <code>kind</code></br>
 <em>
-<a href="#TemplateKind">
+<a href="#build.knative.dev/v1alpha1.TemplateKind">
 TemplateKind
 </a>
 </em>
@@ -1313,7 +1313,7 @@ or ClusterBuildTemplate. If nothing is specified, the default if is BuildTemplat
 <td>
 <code>arguments</code></br>
 <em>
-<a href="#ArgumentSpec">
+<a href="#build.knative.dev/v1alpha1.ArgumentSpec">
 []ArgumentSpec
 </a>
 </em>
@@ -1341,11 +1341,11 @@ This will override any of the template&rsquo;s steps environment variables.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="TemplateKind">TemplateKind
+<h3 id="build.knative.dev/v1alpha1.TemplateKind">TemplateKind
 (<code>string</code> alias)</p></h3>
 <p>
 (<em>Appears on:</em>
-<a href="#TemplateInstantiationSpec">TemplateInstantiationSpec</a>)
+<a href="#build.knative.dev/v1alpha1.TemplateInstantiationSpec">TemplateInstantiationSpec</a>)
 </p>
 <p>
 <p>TemplateKind defines the type of BuildTemplate used by the build.</p>
@@ -1353,5 +1353,5 @@ This will override any of the template&rsquo;s steps environment variables.</p>
 <hr/>
 <p><em>
 Generated with <code>gen-crd-api-reference-docs</code>
-on git commit <code>002a41a3</code>.
+on git commit <code>0ff65541</code>.
 </em></p>

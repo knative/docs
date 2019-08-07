@@ -1,3 +1,10 @@
+---
+title: "Hello world - .NET Core"
+linkTitle: ".NET"
+weight: 1
+type: "docs"
+---
+
 A simple web app written in C# using .NET Core 2.2 that you can use for testing.
 It reads in an env variable `TARGET` and prints "Hello \${TARGET}!". If TARGET
 is not specified, it will use "World" as the TARGET.
@@ -7,8 +14,8 @@ cluster. You can also download a working copy of the sample, by running the
 following commands:
 
 ```shell
-git clone -b "release-0.6" https://github.com/knative/docs knative-docs
-cd knative-docs/serving/samples/hello-world/helloworld-csharp
+git clone -b "release-0.7" https://github.com/knative/docs knative-docs
+cd knative-docs/docs/serving/samples/hello-world/helloworld-csharp
 ```
 
 ## Before you begin
@@ -102,7 +109,7 @@ cd knative-docs/serving/samples/hello-world/helloworld-csharp
    username.
 
    ```yaml
-   apiVersion: serving.knative.dev/v1beta1
+   apiVersion: serving.knative.dev/v1alpha1
    kind: Service
    metadata:
      name: helloworld-csharp

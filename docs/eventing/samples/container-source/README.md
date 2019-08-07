@@ -1,3 +1,10 @@
+---
+title: "Container Source Example"
+linkTitle: "Container source"
+weight: 10
+type: "docs"
+---
+
 ContainerSource will start a container image which will generate events under
 certain situations and send messages to a sink URI. It also can be an easy way
 to support your own event sources in Knative. This guide shows how to configure
@@ -17,7 +24,7 @@ Knative [event-sources](https://github.com/knative/eventing-contrib) has a
 sample of heartbeats event source. You could clone the source codes by
 
 ```
-git clone -b "release-0.6" https://github.com/knative/eventing-contrib.git
+git clone -b "release-0.7" https://github.com/knative/eventing-contrib.git
 ```
 
 And then build a heartbeats image and publish to your image repo with
@@ -39,7 +46,7 @@ In order to verify `ContainerSource` is working, we will create a Event Display
 Service that dumps incoming messages to its log.
 
 ```yaml
-apiVersion: serving.knative.dev/v1beta1
+apiVersion: serving.knative.dev/v1alpha1
 kind: Service
 metadata:
   name: event-display
@@ -71,18 +78,22 @@ kind: ContainerSource
 metadata:
   name: test-heartbeats
 spec:
-  image: <heartbeats_image_uri>
+  template:
+    spec:
+      containers:
+        - image: <heartbeats_image_uri>
+          name: heartbeats
+          args:
+            - --period=1
+          env:
+            - name: POD_NAME
+              value: "mypod"
+            - name: POD_NAMESPACE
+              value: "event-test"
   sink:
-    apiVersion: serving.knative.dev/v1beta1
+    apiVersion: serving.knative.dev/v1alpha1
     kind: Service
     name: event-display
-  args:
-    - --period=1
-  env:
-    - name: POD_NAME
-      value: "mypod"
-    - name: POD_NAMESPACE
-      value: "event-test"
 ```
 
 Use the following command to create the event source from

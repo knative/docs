@@ -28,7 +28,7 @@ up the necessary components first.
 
   The Discover tab of the Kibana UI looks like this:
 
-  ![Kibana UI Discover tab](../images/kibana-discover-tab-annotated.png)
+  ![Kibana UI Discover tab](./images/kibana-discover-tab-annotated.png)
 
   You can change the time frame of logs Kibana displays in the upper right
   corner of the screen. The main search bar is across the top of the Discover
@@ -50,12 +50,32 @@ To find the logs sent to `stdout/stderr` from your application in the Kibana UI:
 
 ### Accessing request logs
 
-To find the request logs of your application in the Kibana UI :
+To access the request logs (if enabled), enter the following search in Kibana:
 
-1. Click `Discover` on the left side bar.
-1. Choose `logstash-*` index pattern on the left top.
-1. Input `tag: "requestlog.logentry.istio-system"` in the top search bar then
-   search.
+```text
+_exists_:"httpRequest.requestUrl"
+```
+
+Request logs contain customized details about requests served by the revision.
+Below is a sample request log:
+
+```text
+@timestamp                                            July 10th 2018, 10:09:28.000
+kubernetes.labels.serving_knative_dev/configuration   helloworld-go
+kubernetes.labels.serving_knative_dev/revision	      helloworld-go-6vf4x
+kubernetes.labels.serving_knative_dev/service         helloworld-go
+httpRequest.protocol                                  HTTP/1.1
+httpRequest.referer
+httpRequest.remoteIp                                  10.32.0.2:46866
+httpRequest.requestMethod                             GET
+httpRequest.requestSize                               0
+httpRequest.requestUrl                                /
+httpRequest.responseSize                              20
+httpRequest.serverIp                                  10.32.1.36
+httpRequest.status                                    200
+httpRequest.userAgent                                 curl/7.60.0
+traceId                                               0def9abf835ad90e9d824f7a492e2dcb
+```
 
 ### Accessing configuration and revision logs
 
@@ -110,40 +130,6 @@ To access logs for a [Knative Build](../build/README.md):
 
 ```
 kubernetes.labels.build\-name: <BUILD_NAME>
-```
-
-### Accessing request logs
-
-To access the request logs, enter the following search in Kibana:
-
-```text
-tag: "requestlog.logentry.istio-system"
-```
-
-Request logs contain details about requests served by the revision. Below is a
-sample request log:
-
-```text
-@timestamp                   July 10th 2018, 10:09:28.000
-destinationConfiguration     configuration-example
-destinationNamespace         default
-destinationRevision          configuration-example-00001
-destinationService           configuration-example-00001-service.default.svc.cluster.local
-latency                      1.232902ms
-method                       GET
-protocol                     http
-referer                      unknown
-requestHost                  route-example.default.example.com
-requestSize                  0
-responseCode                 200
-responseSize                 36
-severity                     Info
-sourceNamespace              istio-system
-sourceService                unknown
-tag                          requestlog.logentry.istio-system
-traceId                      986d6faa02d49533
-url                          /
-userAgent                    curl/7.60.0
 ```
 
 ### Accessing end to end request traces

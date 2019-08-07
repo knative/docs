@@ -77,8 +77,11 @@ details about configuring your Knative cluster.
 If you need a new TLS certificate, you can choose to use one of the following
 tools to obtain a certificate from Let's Encrypt:
 
-- [Setup Certbot to manually obtain certificates](using-certbot-to-manually-obtain-lets-encrypt-certificates)
-- [Setup cert-manager to either manually obtain a certificate, or to automatically provision certificates](using-cert-manager-to-obtain-lets-encrypt-certificates)
+- Setup Certbot to manually obtain Let's Encrypt certificates
+- Setup cert-manager to either manually obtain a certificate, or to
+  automatically provision certificates
+
+This page covers details for both of the above options.
 
 For details about using other CA's, see the tool's reference documentation:
 
@@ -154,7 +157,7 @@ To manually add a TLS certificate to your Knative cluster, you create a
 Kubernetes secret and then configure the `knative-ingress-gateway`:
 
 1. Run the following command to create a Kubernetes secret to hold your TLS
-   certificate, `cert.pk`, and the private key, `cert.pem`:
+   certificate, `cert.pem`, and the private key, `cert.pk`:
 
    ```shell
    kubectl create --namespace istio-system secret tls istio-ingressgateway-certs \

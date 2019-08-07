@@ -1,3 +1,10 @@
+---
+title: "Hello World - Java (Micronaut)"
+linkTitle: "Java (Micronaut)"
+weight: 1
+type: "docs"
+---
+
 Learn how to deploy a simple web app that is written in Java and uses Micronaut.
 
 This samples uses Docker to build locally. The app reads in a `TARGET` env
@@ -189,7 +196,7 @@ To create and configure the source files in the root of your working directory:
    the `Micronaut Sample v1` value.
 
    ```yaml
-   apiVersion: serving.knative.dev/v1beta1
+   apiVersion: serving.knative.dev/v1alpha1
    kind: Service
    metadata:
      name: helloworld-java-micronaut

@@ -1,3 +1,10 @@
+---
+title: "Hello World - Dart"
+linkTitle: "Dart"
+weight: 1
+type: "docs"
+---
+
 A simple web app written in the [Dart](www.dartlang.org) programming language
 that you can use for testing. It reads in the env variable `TARGET` and prints
 `"Hello $TARGET"`. If `TARGET` is not specified, it will use `"World"` as
@@ -81,7 +88,7 @@ be created using the following instructions.
    username.
 
    ```yaml
-   apiVersion: serving.knative.dev/v1beta1
+   apiVersion: serving.knative.dev/v1alpha1
    kind: Service
    metadata:
      name: helloworld-dart

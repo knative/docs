@@ -1,3 +1,10 @@
+---
+title: "Hello World - Swift"
+linkTitle: "Swift"
+weight: 1
+type: "docs"
+---
+
 A simple web app written in Swift that you can use for testing. The app reads in
 an env variable `TARGET` and prints "Hello \${TARGET}!". If TARGET is not
 specified, the app uses "World" as the TARGET.
@@ -89,7 +96,7 @@ source files from this folder.
    into the file. Replace `{username}` with your Docker Hub username.
 
    ```yaml
-   apiVersion: serving.knative.dev/v1beta1
+   apiVersion: serving.knative.dev/v1alpha1
    kind: Service
    metadata:
      name: helloworld-swift
