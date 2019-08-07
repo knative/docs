@@ -1,6 +1,6 @@
 ---
-title: "Available Channels CRDs"
-linkTitle: "Channels CRDs"
+title: "Available Channels"
+#linkTitle: "Channels"
 weight: 40
 type: "docs"
 ---
@@ -17,7 +17,7 @@ procedure:
     ```
 -->
 
-This is a non-exhaustive list of Channels `CRD`s for Knative.
+This is a non-exhaustive list of the available Channels for Knative Eventing.
 
 Notes:
 
