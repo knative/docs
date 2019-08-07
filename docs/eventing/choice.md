@@ -5,7 +5,7 @@ type: "docs"
 ---
 
 Choice CRD provides a way to easily define a list of branches, each
-receiving the same Cloud Event sent to the Choice ingress channel.
+receiving the same CloudEvent sent to the Choice ingress channel.
 Typically, each branch consists of a filter function guarding the execution
 of the branch.
 
