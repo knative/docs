@@ -33,7 +33,7 @@ spec:
 ## Trigger
 
 A Trigger represents a desire to subscribe to events from a specific Broker.
-Exact match filtering on CloudEvents attributes as well as extensions is supported.
+Exact match filtering on CloudEvents attributes as well as extensions are supported.
 
 Example:
 
@@ -57,7 +57,7 @@ spec:
 
 ### Channel
 
-`Broker`s use their `spec.channelTemplateSpec` to create their internal `Channel`s,
+`Broker`s use their `spec.channelTemplateSpec` to create their internal [Channels](./channels/),
 which dictate the durability guarantees of events sent to that `Broker`. If
 `spec.channelTemplateSpec` is not specified, then the
 [default channel](./channels/default-channels.md)
@@ -66,8 +66,7 @@ for their namespace is used.
 #### Setup
 
 Have a `Channel` CRD installed and set as the
-[default channel](./channels/default-channels.md)
-for the namespace you are interested in. For development, the
+default channel for the namespace you are interested in. For development, the
 [InMemoryChannel](https://github.com/knative/eventing/tree/master/config/channels/in-memory-channel)
 is normally used.
 
