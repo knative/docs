@@ -39,10 +39,9 @@ To enable Knative to automatically provision TLS certificates:
    install it:
 
    ```shell
-   # KNATIVE_VERSION needs to be 0.6.0 or above.
-   KNATIVE_VERSION=0.6.0
+   # Knative Serving must be v0.6.0 or later.
 
-   kubectl apply --filename https://github.com/knative/serving/releases/download/v${KNATIVE_VERSION}/serving.yaml \
+   kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
    --selector networking.knative.dev/certificate-provider=cert-manager
    ```
 
