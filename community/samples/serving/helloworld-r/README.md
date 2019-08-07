@@ -1,11 +1,11 @@
 ---
-title: "Hello World - Shell"
-linkTitle: "Shell"
+title: "Hello World - R"
+linkTitle: "R"
 weight: 1
 type: "docs"
 ---
 
-A simple web app that executes a shell script. The shell script reads an env
+A simple web app that executes an R script. The R script reads an env
 variable `TARGET` and prints `Hello ${TARGET}!`. If the `TARGET` environment
 variable is not specified, the script uses `World`.
 
@@ -15,7 +15,7 @@ following commands:
 
 ```shell
 git clone -b "release-0.7" https://github.com/knative/docs knative-docs
-cd knative-docs/docs/serving/samples/hello-world/helloworld-shell
+cd knative-docs/docs/serving/samples/hello-world/helloworld-r
 ```
 
 ## Before you begin
@@ -28,62 +28,61 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-shell
 
 ## Recreating the sample code
 
-1. Create a new file named `script.sh` and paste the following script:
+1. Create a new file named `HelloWorld.R` and paste the following script:
 
-   ```sh
-   #!/bin/sh
-   echo Hello ${TARGET:=World}!
+   ```R
+   #!/usr/bin/Rscript
+   TARGET <- Sys.getenv("TARGET", "World")
+
+   message = paste("Hello ", TARGET, "!", sep = "")
+   print(message)
    ```
 
-1. Create a new file named `invoke.go` and paste the following code. We use a
-   basic web server written in Go to execute the shell script:
+1. Create a new file named `app.py` and paste the following code. We use a
+   basic web server written in Python to execute the R script:
 
-   ```go
-   package main
+   ```py
+   import os
+   import subprocess
 
-   import (
-      "fmt"
-      "log"
-      "net/http"
-      "os"
-      "os/exec"
-   )
+   from flask import Flask
 
-   func handler(w http.ResponseWriter, r *http.Request) {
-      cmd := exec.CommandContext(r.Context(), "/bin/sh", "script.sh")
-      cmd.Stderr = os.Stderr
-      out, err := cmd.Output()
-      if err != nil {
-          w.WriteHeader(500)
-      }
-      w.Write(out)
-   }
+   app = Flask(__name__)
 
-   func main() {
-      http.HandleFunc("/", handler)
+   @app.route('/')
+   def hello_world():
+       output = subprocess.check_output('/usr/bin/Rscript HelloWorld.R', shell=True)
+       return output
 
-      port := os.Getenv("PORT")
-      if port == "" {
-          port = "8080"
-      }
 
-      log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
-   }
+   if __name__ == "__main__":
+       app.run(debug=True,host='0.0.0.0',port=int(os.environ.get('PORT', 8080)))
    ```
 
 1. Create a new file named `Dockerfile` and copy the code block below into it.
 
    ```docker
-   FROM golang:1.11
+   # Use the official Python image.
+   # https://hub.docker.com/_/python
+   FROM python:3.7
 
-   WORKDIR /go/src/invoke
-
-   COPY invoke.go .
-   RUN go install -v
-
+   # Copy local code to the container image.
+   ENV APP_HOME /app
+   WORKDIR $APP_HOME
    COPY . .
 
-   CMD ["invoke"]
+   # Install production dependencies.
+   RUN pip install Flask gunicorn
+
+   # Install R
+   RUN apt-get update && \
+       apt-get install -y --no-install-recommends --allow-unauthenticated r-base
+
+   # Run the web service on container startup. Here we use the gunicorn
+   # webserver, with one worker process and 8 threads.
+   # For environments with multiple CPU cores, increase the number of workers
+   # to be equal to the cores available.
+   CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 app:app
    ```
 
 1. Create a new file, `service.yaml` and copy the following service definition
@@ -94,16 +93,16 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-shell
    apiVersion: serving.knative.dev/v1alpha1
    kind: Service
    metadata:
-     name: helloworld-shell
+     name: helloworld-r
      namespace: default
    spec:
      template:
        spec:
          containers:
-           - image: docker.io/{username}/helloworld-shell
+           - image: docker.io/{username}/helloworld-r
              env:
                - name: TARGET
-                 value: "Shell Sample v1"
+                 value: "R Sample v1"
    ```
 
 ## Building and deploying the sample
@@ -117,10 +116,10 @@ folder) you're ready to build and deploy the sample app.
 
    ```shell
    # Build the container on your local machine
-   docker build -t {username}/helloworld-shell .
+   docker build -t {username}/helloworld-r .
 
    # Push the container to docker registry
-   docker push {username}/helloworld-shell
+   docker push {username}/helloworld-r
    ```
 
 1. After the build has completed and the container is pushed to docker hub, you
@@ -159,29 +158,29 @@ folder) you're ready to build and deploy the sample app.
 1. Run the following command to find the domain URL for your service:
 
    ```shell
-   kubectl get ksvc helloworld-shell  --output=custom-columns=NAME:.metadata.name,URL:.status.url
+   kubectl get ksvc helloworld-r  --output=custom-columns=NAME:.metadata.name,URL:.status.url
    ```
 
    Example:
 
    ```shell
    NAME                URL
-   helloworld-shell    http://helloworld-shell.default.example.com
+   helloworld-r    http://helloworld-r.default.example.com
    ```
 
 1. Test your app by sending it a request. Use the following `curl` command with
-   the domain URL `helloworld-shell.default.example.com` and `EXTERNAL-IP`
+   the domain URL `helloworld-r.default.example.com` and `EXTERNAL-IP`
    address that you retrieved in the previous steps:
 
    ```shell
-   curl -H "Host: helloworld-shell.default.example.com" http://{EXTERNAL_IP_ADDRESS}
+   curl -H "Host: helloworld-r.default.example.com" http://{EXTERNAL_IP_ADDRESS}
    ```
 
    Example:
 
    ```shell
-   curl -H "Host: helloworld-shell.default.example.com" http://35.203.155.229
-   Hello Shell Sample v1!
+   curl -H "Host: helloworld-r.default.example.com" http://35.203.155.229
+   [1] "Hello R Sample v1!"
    ```
 
    > Note: Add `-v` option to get more detail if the `curl` command failed.
