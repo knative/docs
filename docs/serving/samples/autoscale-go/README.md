@@ -256,9 +256,9 @@ View the Knative Serving Scaling and Request dashboards (if configured).
 kubectl port-forward --namespace knative-monitoring $(kubectl get pods --namespace knative-monitoring --selector=app=grafana  --output=jsonpath="{.items..metadata.name}") 3000
 ```
 
-![scale dashboard](scale-dashboard.png)
+![scale dashboard](./scale-dashboard.png)
 
-![request dashboard](request-dashboard.png)
+![request dashboard](./request-dashboard.png)
 
 ### Other Experiments
 
