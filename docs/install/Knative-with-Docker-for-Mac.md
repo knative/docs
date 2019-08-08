@@ -68,7 +68,7 @@ Because you have limited resources available, use the
 which installs only Knative Serving:
 
 ```shell
-curl -L https://github.com/knative/serving/releases/download/v0.7.0/serving.yaml \
+curl -L https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
   | sed 's/LoadBalancer/NodePort/' \
   | kubectl apply --selector networking.knative.dev/certificate-provider!=cert-manager --filename -
 ```
