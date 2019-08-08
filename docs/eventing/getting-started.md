@@ -172,10 +172,10 @@ These subcomponents receive the events sent by event producers (you'll create th
     spec:
       selector:
         app: goodbye-display
-    ports:
-     - protocol: TCP
-     port: 80
-     targetPort: 8080
+      ports:
+      - protocol: TCP
+        port: 80
+        targetPort: 8080
     END
     ```
 
