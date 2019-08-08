@@ -200,7 +200,6 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
    ```bash
    kubectl apply --selector knative.dev/crd-install=true \
    --filename https://github.com/knative/serving/releases/download/v0.7.0/serving.yaml \
-   --filename https://github.com/knative/build/releases/download/v0.7.0/build.yaml \
    --filename https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml \
    --filename https://github.com/knative/serving/releases/download/v0.7.0/monitoring.yaml
    ```
@@ -211,7 +210,6 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
 
    ```bash
    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.7.0/serving.yaml --selector networking.knative.dev/certificate-provider!=cert-manager \
-   --filename https://github.com/knative/build/releases/download/v0.7.0/build.yaml \
    --filename https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml \
    --filename https://github.com/knative/serving/releases/download/v0.7.0/monitoring.yaml
    ```
@@ -231,7 +229,6 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
    `Running`:
    ```bash
    kubectl get pods --namespace knative-serving
-   kubectl get pods --namespace knative-build
    kubectl get pods --namespace knative-eventing
    kubectl get pods --namespace knative-monitoring
    ```
@@ -248,9 +245,6 @@ guide.
 To get started with Knative Eventing, pick one of the
 [Eventing Samples](../eventing/samples/) to walk through.
 
-To get started with Knative Build, read the [Build README](../build/README.md),
-then choose a sample to walk through.
-
 ## Cleaning up
 
 Running a cluster in IKS costs money, so if you're not using it, you might want
@@ -262,10 +256,3 @@ To delete the cluster, enter the following command:
 ```bash
 ibmcloud cs cluster-rm $CLUSTER_NAME
 ```
-
----
-
-Except as otherwise noted, the content of this page is licensed under the
-[Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),
-and code samples are licensed under the
-[Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).
