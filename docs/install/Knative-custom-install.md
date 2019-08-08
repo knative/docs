@@ -82,7 +82,7 @@ The following Knative installation files are available:
 - **Eventing Component**:
   - https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml
   - https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml
-  - https://github.com/knative/eventing/releases/download/{{< version >}}/in-memory-channel.yaml
+  - https://github.com/knative/eventing/releases/download/{{< version >}}/in-memory-channel-crd.yaml
   - https://github.com/knative/eventing/releases/download/{{< version >}}/kafka.yaml
 - **Eventing Resources**:
   - https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/github.yaml
@@ -113,7 +113,7 @@ files from the Knative repositories:
 | **knative/eventing**                           |                                                                                                                                                                        |                                                                                           |
 | [`release.yaml`][4.1]†                         | Installs the Eventing component. Includes [ContainerSource](../eventing#containersource), [CronJobSource][6.2], the in-memory channel provisioner.                     |                                                                                           |
 | [`eventing.yaml`][4.2]                         | Installs the Eventing component. Includes [ContainerSource](../eventing#containersource) and [CronJobSource][6.2]. Does not include the in-memory channel provisioner. |                                                                                           |
-| [`in-memory-channel.yaml`][4.3]                | Installs only the in-memory channel provisioner.                                                                                                                       | Eventing component                                                                        |
+| [`in-memory-channel-crd.yaml`][4.3]                | Installs only the in-memory channel provisioner.                                                                                                                       | Eventing component                                                                        |
 | [`kafka.yaml`][4.4]                            | Installs only the Kafka channel provisioner.                                                                                                                           | Eventing component                                                                        |
 | [`natss.yaml`][4.5]                            | Installs only the NATSS channel provisioner.                                                                                                                           | Eventing component                                                                        |
 | [`gcp-pubsub.yaml`][4.6]                       | Installs only the GCP PubSub channel provisioner.                                                                                                                      | Eventing component                                                                        |
@@ -160,7 +160,7 @@ for details about installing the various supported observability plugins.
 [4.2]:
   https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml
 [4.3]:
-  https://github.com/knative/eventing/releases/download/{{< version >}}/in-memory-channel.yaml
+  https://github.com/knative/eventing/releases/download/{{< version >}}/in-memory-channel-crd.yaml
 [4.4]: https://github.com/knative/eventing/releases/download/{{< version >}}/kafka.yaml
 [4.5]: https://github.com/knative/eventing/releases/download/{{< version >}}/natss.yaml
 [4.6]:
