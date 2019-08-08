@@ -107,31 +107,6 @@ kubectl get revisions
 kubernetes.labels.serving_knative_dev\/revision: <REVISION_NAME>
 ```
 
-### Accessing build logs
-
-To access logs for a [Knative Build](../build/README.md):
-
-- Find the build's name in the specified in the `.yaml` file:
-
-  ```yaml
-  apiVersion: build.knative.dev/v1alpha1
-  kind: Build
-  metadata:
-    name: <BUILD_NAME>
-  ```
-
-  Or find build names with the following command:
-
-  ```
-  kubectl get builds
-  ```
-
-- Replace `<BUILD_NAME>` and enter the following search query in Kibana:
-
-```
-kubernetes.labels.build\-name: <BUILD_NAME>
-```
-
 ### Accessing end to end request traces
 
 See [Accessing Traces](./accessing-traces.md) page for details.
@@ -142,9 +117,4 @@ Go to the
 [GCP Console logging page](https://console.cloud.google.com/logs/viewer) for
 your GCP project, which stores your logs via Stackdriver.
 
----
 
-Except as otherwise noted, the content of this page is licensed under the
-[Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),
-and code samples are licensed under the
-[Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).
