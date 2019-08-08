@@ -58,7 +58,7 @@ configuration "blue-green-demo" configured
 ```
 
 This will deploy the initial revision of the sample application. Before we can
-route traffic to this application we need to know the name of the initail
+route traffic to this application we need to know the name of the initial
 revision which was just created. Using `kubectl` you can get it with the
 following command:
 
