@@ -27,7 +27,7 @@ recreate the source files from this folder.
 1. Clone the repo from the following path:
 
    ```shell
-   https://github.com/knative/docs.git
+   git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
    ```
 
 2. Navigate to the helloworld-java-spark directory

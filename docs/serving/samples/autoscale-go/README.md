@@ -17,7 +17,7 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 1. Clone this repository, and move into the sample directory:
 
    ```shell
-   git clone -b "release-0.7" https://github.com/knative/docs knative-docs
+   git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
    cd knative-docs
    ```
 
