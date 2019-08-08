@@ -4,10 +4,9 @@ weight: 20
 type: "docs"
 ---
 
-Choice CRD provides a way to easily define a list of branches, each
-receiving the same CloudEvent sent to the Choice ingress channel.
-Typically, each branch consists of a filter function guarding the execution
-of the branch.
+Choice CRD provides a way to easily define a list of branches, each receiving
+the same CloudEvent sent to the Choice ingress channel. Typically, each branch
+consists of a filter function guarding the execution of the branch.
 
 Choice creates `Channel`s and `Subscription`s under the hood.
 
@@ -34,12 +33,12 @@ Choice has three parts for the Spec:
 Choice has three parts for the Status:
 
 1. `conditions` which details the overall status of the Choice object
-1. `ingressChannelStatus` and `caseStatuses` which convey the status of underlying
-   `Channel` and `Subscription` resource that are created as part of this
-   Choice.
-1. `address` which is exposed so that Choice can be used where Addressable
-   can be used. Sending to this address will target the `Channel` which is
-   fronting this Choice (same as `ingressChannelStatus`).
+1. `ingressChannelStatus` and `caseStatuses` which convey the status of
+   underlying `Channel` and `Subscription` resource that are created as part of
+   this Choice.
+1. `address` which is exposed so that Choice can be used where Addressable can
+   be used. Sending to this address will target the `Channel` which is fronting
+   this Choice (same as `ingressChannelStatus`).
 
 ## Examples
 

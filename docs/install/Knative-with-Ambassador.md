@@ -70,10 +70,10 @@ see Performing a Custom Knative Installation.
 
 Knative was originally built using Istio to handle cluster networking. While the
 Istio gateway provides the functionality needed to serve requests to your
-application, installing a service mesh just to handle north-south traffic 
-carries some operational overhead with it. Ambassador provides a way to get 
-traffic to your Knative application without the overhead or complexity of a 
-full service mesh.
+application, installing a service mesh just to handle north-south traffic
+carries some operational overhead with it. Ambassador provides a way to get
+traffic to your Knative application without the overhead or complexity of a full
+service mesh.
 
 You can install Ambassador with `kubectl`:
 
