@@ -258,7 +258,7 @@ the next topic: How do we actually populate the registry in the first place?
 
   If you are interested in more information regarding configuration options of a
   KafkaSource, please refer to the
-  [KafKaSource example](https://github.com/knative/eventing-contrib/tree/master/contrib/kafka/samples).
+  [KafKaSource example](https://github.com/knative/eventing-contrib/tree/master/kafka/source/samples).
 
   For this discussion, the relevant information from the yaml above are the
   `sink` and the `topics`. We observe that the `sink` is of kind `Broker`. We
