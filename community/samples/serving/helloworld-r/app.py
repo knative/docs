@@ -7,7 +7,12 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    output = subprocess.check_output('/usr/bin/Rscript HelloWorld.R', shell=True)
+    try:
+        output = subprocess.check_output('/usr/bin/Rscript HelloWorld.R', shell=True)
+        print(output)
+    except subprocess.CalledProcessError:
+        return "Error in R script.", 500
+
     return output
 
 

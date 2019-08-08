@@ -12,7 +12,7 @@ RUN pip install Flask gunicorn
 
 # Install R
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends --allow-unauthenticated r-base
+    apt-get install -y r-base
 
 # Run the web service on container startup. Here we use the gunicorn
 # webserver, with one worker process and 8 threads.
