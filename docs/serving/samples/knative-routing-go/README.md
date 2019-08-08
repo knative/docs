@@ -57,7 +57,7 @@ cd $GOPATH/src/github.com/knative/docs
 
 2. Set your preferred container registry:
 
-If you use Google Container Registry (GCR), uou will need to enable the
+If you use Google Container Registry (GCR), you will need to enable the
 [GCR API](https://console.cloud.google.com/apis/library/containerregistry.googleapis.com)
 in your GCP project.
 
