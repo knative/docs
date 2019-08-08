@@ -40,7 +40,7 @@ Knative requires a Kubernetes cluster v1.11 or newer.
     your project. You can skip this step if you create your cluster using the
     user interface; it is only needed for programmatic access, make sure you set
     `export KUBECONFIG=garden-my-project.yaml` in your shell.
-    ![Download kubeconfig for Gardener](../images/gardener_service_account.png "downloading the kubeconfig using a service account")
+    ![Download kubeconfig for Gardener](./images/gardener_service_account.png "downloading the kubeconfig using a service account")
 
 ### Creating a Kubernetes cluster
 
@@ -56,7 +56,7 @@ kubectl apply --filename my-cluster.yaml
 
 The easier alternative is to create the cluster following the cluster creation
 wizard in the Gardener dashboard:
-![shoot creation](../images/gardener_shoot_creation.png "shoot creation via the dashboard")
+![shoot creation](./images/gardener_shoot_creation.png "shoot creation via the dashboard")
 
 ### Configure kubectl for your cluster
 
