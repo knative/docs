@@ -16,9 +16,9 @@ know roughly how things fit together.
 
 ## Version
 
-This document works with
-[Eventing 0.3](https://github.com/knative/eventing/releases/tag/v0.3.0) and
-[Eventing-contrib resources 0.3](https://github.com/knative/eventing-contrib/releases/tag/v0.3.0).
+This Debugging content supports version v0.3.0 or later of
+[Knative Eventing](https://github.com/knative/eventing/releases/) and the
+[Eventing-contrib resources](https://github.com/knative/eventing-contrib/releases/).
 
 ## Prerequisites
 

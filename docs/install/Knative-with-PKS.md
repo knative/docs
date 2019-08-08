@@ -101,9 +101,9 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
 
    ```bash
    kubectl apply --selector knative.dev/crd-install=true \
-   --filename https://github.com/knative/serving/releases/download/v0.7.0/serving.yaml \
-   --filename https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml \
-   --filename https://github.com/knative/serving/releases/download/v0.7.0/monitoring.yaml
+   --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
+   --filename https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml \
+   --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml
    ```
 
 1. To complete the install of Knative and its dependencies, run the
@@ -111,9 +111,9 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
    complete the install of Knative and its dependencies:
 
    ```bash
-   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.7.0/serving.yaml --selector networking.knative.dev/certificate-provider!=cert-manager \
-   --filename https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml \
-   --filename https://github.com/knative/serving/releases/download/v0.7.0/monitoring.yaml
+   kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml --selector networking.knative.dev/certificate-provider!=cert-manager \
+   --filename https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml \
+   --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml
    ```
 
    > **Notes**:
