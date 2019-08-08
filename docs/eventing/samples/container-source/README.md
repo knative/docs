@@ -24,7 +24,7 @@ Knative [event-sources](https://github.com/knative/eventing-contrib) has a
 sample of heartbeats event source. You could clone the source codes by
 
 ```
-git clone -b "release-0.7" https://github.com/knative/eventing-contrib.git
+git clone -b "{{< branch >}}" https://github.com/knative/eventing-contrib.git
 ```
 
 And then build a heartbeats image and publish to your image repo with

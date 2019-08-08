@@ -24,7 +24,7 @@ like `AAPL`,`AMZN`, `GOOG`, `MSFT`, etc.
 1. Download a copy of the code:
 
    ```shell
-   git clone -b "release-0.7" https://github.com/knative/docs knative-docs
+   git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
    cd knative-docs/serving/samples/rest-api-go
    ```
 
