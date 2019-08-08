@@ -148,6 +148,10 @@ Service object to reduce the cognitive overhead for application developers – t
 Service object should provide sufficient controls to cover most of application
 deployment scenarios (by frequency).
 
+Unless otherwise noted, implementations of this specification MAY define
+additonal fields for these resources, however, those extensions MUST NOT
+contradict the semantics defined within this specification.
+
 ## Service
 
 The Knative Service represents an instantiation of a single serverless container
@@ -1309,6 +1313,9 @@ Restrictions to the values of the field are noted in the Description column.
 
 ## TrafficTarget
 
+This resource specifies the how the network traffic for a particular
+Revision or Configuration is to be configured.
+
 <table>
   <tr>
    <td><strong>FieldName</strong>
@@ -1376,7 +1383,7 @@ Restrictions to the values of the field are noted in the Description column.
    </td>
    <td>int
 <br>
-(Required)
+(Optional)
 <br>
 Min: 0
 <br>
@@ -1384,14 +1391,14 @@ Max: 100
    </td>
    <td>The
 
-<a href="#request-routing">percentage of requests which should be allocated from
+<a href="#request-routing">Percent is optionally used to specify the percentage of requests which should be allocated from
 the main Route domain name</a> to the specified <code>revisionName</code> or
 <code>configurationName</code>.
 
 <p>
-All <code>percent</code> values in <code>traffic</code> MUST sum to 100.
+When percentage based routing is being used, all <code>traffic</code> sections for a single Service MUST have a <code>percent</code> value, and all values MUST sum to 100.
    </td>
-   <td>REQUIRED
+   <td>OPTIONAL
    </td>
   </tr>
   <tr>
