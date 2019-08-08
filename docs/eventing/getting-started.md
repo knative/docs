@@ -173,9 +173,9 @@ These subcomponents receive the events sent by event producers (you'll create th
       selector:
         app: goodbye-display
     ports:
-    - protocol: TCP
-    port: 80
-    targetPort: 8080
+     - protocol: TCP
+     port: 80
+     targetPort: 8080
     END
     ```
 
@@ -304,7 +304,7 @@ Now that the `Pod` is created, you can create a `CloudEvent` by sending an HTTP 
 1. SSH into the `Pod` by running the following command:
 
     ```sh
-    kubectl -n default attach curl -it
+    kubectl -n event-example attach curl -it
     ```
 
 Now, you can make a HTTP request. To show the various types of events you can send, you will make three requests.
