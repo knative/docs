@@ -274,13 +274,14 @@ with updated host will be forwarded to `knative-ingress-gateway` Gateway again.
 The Gateway proxy checks the updated host, and forwards it to `Search` or
 `Login` service according to its host setting.
 
-![Object model](images/knative-routing-sample-flow.png)
+![Object model](./images/knative-routing-sample-flow.png)
 
 ## Clean Up
 
 To clean up the sample resources:
 
-```
+```shell
 kubectl delete --filename docs/serving/samples/knative-routing-go/sample.yaml
 kubectl delete --filename docs/serving/samples/knative-routing-go/routing.yaml
 ```
+
