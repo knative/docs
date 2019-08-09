@@ -127,5 +127,3 @@ up.
 To reset only the Kubernetes cluster to a fresh one, click "Reset Kubernetes
 cluster" in the
 [_Reset_ preferences](https://docs.docker.com/docker-for-mac/#reset).
-
-

@@ -349,5 +349,3 @@ example.
 
 - [Default Channels](./channels/default-channels.md) provide a way to choose the
   persistence strategy for Channels across the cluster.
-
-

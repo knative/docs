@@ -100,5 +100,3 @@ metadata:
     traffic.sidecar.istio.io/includeOutboundIPRanges: 10.16.0.0/14,10.19.240.0/20
 ...
 ```
-
-
