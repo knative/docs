@@ -57,9 +57,7 @@ in the Knative Serving repository.
 
 ## More samples and demos
 
-- [Autoscaling with Knative Serving](./samples/autoscale-go/README.md)
-- [Telemetry with Knative Serving](./samples/telemetry-go/README.md)
-- [REST API sample](./samples/rest-api-go/README.md)
+- [Knative Serving code samples](./samples/README.md)
 
 ## Setting up Logging and Metrics
 
@@ -80,10 +78,6 @@ in the Knative Serving repository.
 - [Configuring cluster local routes](./cluster-local-route.md)
 - [Using a custom domain](./using-a-custom-domain.md)
 - [Assigning a static IP address for Knative on Google Kubernetes Engine](./gke-assigning-static-ip-address.md)
-
-## Private Container Registry
-
-- [Deploying to Knative using a Private Container Registry](./deploying-with-private-registry.md)
 
 ## Known Issues
 
