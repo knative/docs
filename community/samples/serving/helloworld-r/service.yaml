@@ -7,7 +7,7 @@ spec:
   template:
     spec:
       containers:
-      - image: docker.io/akitsch/helloworld-r
+      - image: docker.io/{username}/helloworld-r
         env:
         - name: TARGET
           value: "R Sample v1"

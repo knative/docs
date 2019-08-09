@@ -1,21 +1,16 @@
-# Use the official Python image.
-# https://hub.docker.com/_/python
-FROM python:3.7
+# Build executable binary
+FROM golang:1.11 AS builder
 
-# Copy local code to the container image.
-ENV APP_HOME /app
-WORKDIR $APP_HOME
-COPY . .
+WORKDIR $GOPATH
 
-# Install production dependencies.
-RUN pip install Flask gunicorn
+COPY invoke.go .
+RUN go build -o /go/bin/invoke
 
-# Install R
-RUN apt-get update && \
-    apt-get install -y r-base
+# Build r-base image
+FROM r-base:3.6.0
 
-# Run the web service on container startup. Here we use the gunicorn
-# webserver, with one worker process and 8 threads.
-# For environments with multiple CPU cores, increase the number of workers
-# to be equal to the cores available.
-CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 app:app
+# Copy Go binary
+COPY --from=builder /go/bin/invoke /go/bin/invoke
+COPY HelloWorld.R .
+
+ENTRYPOINT ["/go/bin/invoke"]
