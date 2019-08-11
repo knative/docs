@@ -159,7 +159,7 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
    race conditions during the install, which cause intermittent errors:
 
    ```bash
-   kubectl apply --selector knative.dev/crd-install=true \\
+   kubectl apply --selector knative.dev/crd-install=true \
    --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
    --filename https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml \
    --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml
