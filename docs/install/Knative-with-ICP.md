@@ -255,5 +255,3 @@ curl -L https://github.com/knative/serving/releases/download/{{< version >}}/mon
  | sed 's/LoadBalancer/NodePort/' \
  | kubectl delete --filename -
 ```
-
-
