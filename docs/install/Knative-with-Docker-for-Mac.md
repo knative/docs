@@ -68,7 +68,7 @@ Because you have limited resources available, use the
 which installs only Knative Serving:
 
 ```shell
-curl -L https://github.com/knative/serving/releases/download/v0.7.0/serving.yaml \
+curl -L https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
   | sed 's/LoadBalancer/NodePort/' \
   | kubectl apply --selector networking.knative.dev/certificate-provider!=cert-manager --filename -
 ```
@@ -128,9 +128,4 @@ To reset only the Kubernetes cluster to a fresh one, click "Reset Kubernetes
 cluster" in the
 [_Reset_ preferences](https://docs.docker.com/docker-for-mac/#reset).
 
----
 
-Except as otherwise noted, the content of this page is licensed under the
-[Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),
-and code samples are licensed under the
-[Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).

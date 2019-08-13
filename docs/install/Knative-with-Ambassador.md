@@ -23,14 +23,55 @@ This guide assumes that you have already
 [created a Kubernetes cluster](https://kubernetes.io/docs/setup/) and are using
 bash in a Mac or Linux environment.
 
+## Install Knative
+
+First, let's install Knative to manage our serverless applications.
+
+The following commands install all available Knative components as well as the
+standard set of observability plugins. To customize your Knative installation,
+see Performing a Custom Knative Installation.
+
+1.  To install Knative, first install the CRDs by running the `kubectl apply`
+    command once with the `-l knative.dev/crd-install=true` flag. This prevents
+    race conditions during the install, which cause intermittent errors:
+
+        kubectl apply -l knative.dev/crd-install=true \
+        --filename https://github.com/knative/serving/releases/download/v0.7.1/serving.yaml \
+                --filename https://github.com/knative/serving/releases/download/v0.7.1/monitoring.yaml
+
+2.  To complete the install of Knative and it's dependencies, run the
+    `kubectl apply` command again, this time without the
+    `-l knative.dev/crd-install=true`:
+
+        kubectl apply --filename https://github.com/knative/serving/releases/download/v0.7.1 serving.yaml --selector networking.knative.dev/certificate-provider!=cert-manager \
+                --filename https://github.com/knative/serving/releases/download/v0.7.1/monitoring.yaml
+
+    > **Notes**:
+    >
+    > - By default, the Knative Serving component installation (`serving.yaml`)
+    >   includes a controller for
+    >   [enabling automatic TLS certificate provisioning](../serving/using-auto-tls.md).
+    >   If you do intend on immediately enabling auto certificates in Knative,
+    >   you can remove the
+    >   `--selector networking.knative.dev/certificate-provider!=cert-manager`
+    >   statement to install the controller. Otherwise, you can choose to
+    >   install the auto certificates feature and controller at a later time.
+
+3.  Monitor the Knative namespaces and wait until all of the pods come up with a
+    `STATUS` of `Running`:
+
+    ```
+    kubectl get pods -w --all-namespaces
+    ```
+
 ## Install Ambassador
 
 Knative was originally built using Istio to handle cluster networking. While the
 Istio gateway provides the functionality needed to serve requests to your
-application, installing a service mesh to handle north-south traffic carries
-some operational overhead with it. Ambassador provides a way to get traffic to
-your Knative application without the overhead or complexity of a full service
-mesh.
+application, installing a service mesh just to handle north-south traffic
+carries some operational overhead with it. Ambassador provides a way to get
+traffic to your Knative application without the overhead or complexity of a full
+service mesh.
 
 You can install Ambassador with `kubectl`:
 
@@ -53,50 +94,6 @@ ambassador   LoadBalancer   10.59.246.30   35.229.120.99   80:32073/TCP   13m
 
 $ AMBASSADOR_IP=35.229.120.99
 ```
-
-## Install Knative
-
-Now that Ambassador is installed to handle ingress to your serverless
-applications, you need to install Knative to manage them.
-
-The following commands install all available Knative components as well as the
-standard set of observability plugins. To customize your Knative installation,
-see Performing a Custom Knative Installation.
-
-1.  To install Knative, first install the CRDs by running the `kubectl apply`
-    command once with the `-l knative.dev/crd-install=true` flag. This prevents
-    race conditions during the install, which cause intermittent errors:
-
-        kubectl apply -l knative.dev/crd-install=true \
-        --filename https://github.com/knative/serving/releases/download/v0.7.1/serving.yaml \
-        --filename https://github.com/knative/build/releases/download/v0.7.1/build.yaml \
-        --filename https://github.com/knative/serving/releases/download/v0.7.1/monitoring.yaml
-
-2.  To complete the install of Knative and it's dependencies, run the
-    `kubectl apply` command again, this time without the
-    `-l knative.dev/crd-install=true`:
-
-        kubectl apply --filename https://github.com/knative/serving/releases/download/v0.7.1 serving.yaml --selector networking.knative.dev/certificate-provider!=cert-manager \
-        --filename https://github.com/knative/build/releases/download/v0.7.1/build.yaml \
-        --filename https://github.com/knative/serving/releases/download/v0.7.1/monitoring.yaml
-
-    > **Notes**:
-    >
-    > - By default, the Knative Serving component installation (`serving.yaml`)
-    >   includes a controller for
-    >   [enabling automatic TLS certificate provisioning](../serving/using-auto-tls.md).
-    >   If you do intend on immediately enabling auto certificates in Knative,
-    >   you can remove the
-    >   `--selector networking.knative.dev/certificate-provider!=cert-manager`
-    >   statement to install the controller. Otherwise, you can choose to
-    >   install the auto certificates feature and controller at a later time.
-
-3.  Monitor the Knative namespaces and wait until all of the pods come up with a
-    `STATUS` of `Running`:
-
-    ```
-    kubectl get pods -w --all-namespaces
-    ```
 
 ## Deploying an Application
 

@@ -1,3 +1,10 @@
+---
+title: "Hello World - Java (Quarkus)"
+linkTitle: "Java (Quarkus)"
+weight: 1
+type: "docs"
+---
+
 A simple [JAX-RS REST API](https://github.com/jax-rs) application that is
 written in Java and uses [Quarkus](https://quarkus.io/).
 
@@ -32,7 +39,7 @@ Use this method to clone and then immediate run the sample. To clone the sample
 code, run the following commands:
 
 ```
-git clone https://github.com/knative/docs.git knative/docs
+git clone -b "{{< branch >}}" https://github.com/knative/docs.git knative/docs
 cd knative/docs/community/samples/serving/helloworld-java-quarkus
 ```
 

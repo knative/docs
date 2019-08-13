@@ -1,3 +1,10 @@
+---
+title: "Hello World - Spring Boot Java"
+linkTitle: "Java (Spring)"
+weight: 1
+type: "docs"
+---
+
 A simple web app written in Java using Spring Boot 2.0 that you can use for
 testing. It reads in an env variable `TARGET` and prints "Hello \${TARGET}!". If
 TARGET is not specified, it will use "World" as the TARGET.
@@ -7,7 +14,7 @@ cluster. You can also download a working copy of the sample, by running the
 following commands:
 
 ```shell
-git clone -b "release-0.7" https://github.com/knative/docs knative-docs cd
+git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs cd
 knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
 ```
 

@@ -1,3 +1,10 @@
+---
+title: "Creating a RESTful Service - Go"
+linkTitle: "RESTful service - Go"
+weight: 1
+type: "docs"
+---
+
 This "stock ticker" sample demonstrates how to create and run a simple RESTful
 service on Knative Serving. The exposed endpoint outputs the stock price for a
 given "[stock symbol](https://www.marketwatch.com/tools/quotes/lookup.asp)",
@@ -17,18 +24,14 @@ like `AAPL`,`AMZN`, `GOOG`, `MSFT`, etc.
 1. Download a copy of the code:
 
    ```shell
-   git clone -b "release-0.7" https://github.com/knative/docs knative-docs
+   git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
    cd knative-docs/serving/samples/rest-api-go
    ```
 
 ## Setup
 
 In order to run an application on Knative Serving a container image must be
-available to fetch from a container registry. Building and pushing a container
-image can be accomplished locally using
-[Docker](https://docs.docker.com/get-started) or
-[ko](https://github.com/google/go-containerregistry/tree/master/cmd/ko) as well
-as remotely using [Knative Build](../../../build).
+available to fetch from a container registry.
 
 This sample uses Docker for both building and pushing.
 

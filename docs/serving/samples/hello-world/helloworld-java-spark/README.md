@@ -1,3 +1,10 @@
+---
+title: "Hello World - Spark Java Framework"
+linkTitle: "Java (Spark)"
+weight: 1
+type: "docs"
+---
+
 A simple web app written in Java using Spark Java Framework that you can use for
 testing.
 
@@ -20,7 +27,7 @@ recreate the source files from this folder.
 1. Clone the repo from the following path:
 
    ```shell
-   https://github.com/knative/docs.git
+   git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
    ```
 
 2. Navigate to the helloworld-java-spark directory

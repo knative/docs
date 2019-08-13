@@ -1,3 +1,10 @@
+---
+title: "Autoscale Sample App - Go"
+linkTitle: "Autoscaling - Go"
+weight: 1
+type: "docs"
+---
+
 A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 
 ## Prerequisites
@@ -10,7 +17,7 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 1. Clone this repository, and move into the sample directory:
 
    ```shell
-   git clone -b "release-0.7" https://github.com/knative/docs knative-docs
+   git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
    cd knative-docs
    ```
 
@@ -249,9 +256,9 @@ View the Knative Serving Scaling and Request dashboards (if configured).
 kubectl port-forward --namespace knative-monitoring $(kubectl get pods --namespace knative-monitoring --selector=app=grafana  --output=jsonpath="{.items..metadata.name}") 3000
 ```
 
-![scale dashboard](scale-dashboard.png)
+![scale dashboard](./scale-dashboard.png)
 
-![request dashboard](request-dashboard.png)
+![request dashboard](./request-dashboard.png)
 
 ### Other Experiments
 

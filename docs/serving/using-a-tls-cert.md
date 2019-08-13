@@ -77,8 +77,11 @@ details about configuring your Knative cluster.
 If you need a new TLS certificate, you can choose to use one of the following
 tools to obtain a certificate from Let's Encrypt:
 
-- [Setup Certbot to manually obtain certificates](using-certbot-to-manually-obtain-lets-encrypt-certificates)
-- [Setup cert-manager to either manually obtain a certificate, or to automatically provision certificates](using-cert-manager-to-obtain-lets-encrypt-certificates)
+- Setup Certbot to manually obtain Let's Encrypt certificates
+- Setup cert-manager to either manually obtain a certificate, or to
+  automatically provision certificates
+
+This page covers details for both of the above options.
 
 For details about using other CA's, see the tool's reference documentation:
 
@@ -223,9 +226,4 @@ Kubernetes secret and then configure the `knative-ingress-gateway`:
 After your changes are running on your Knative cluster, you can begin using the
 HTTPS protocol for secure access your deployed Knative services.
 
----
 
-Except as otherwise noted, the content of this page is licensed under the
-[Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),
-and code samples are licensed under the
-[Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).

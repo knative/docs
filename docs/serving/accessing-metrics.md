@@ -26,7 +26,7 @@ $(kubectl get pods --namespace knative-monitoring \
 
 3. Select the **Home** button on the top of the page to see the list of
    pre-installed dashboards (screenshot below):
-   ![Knative Dashboards](../images/grafana1.png)
+   ![Knative Dashboards](./images/grafana1.png)
 
 The following dashboards are pre-installed with Knative Serving:
 
@@ -79,9 +79,4 @@ discovery issues for metrics.
 - To see a specific metric you can search for in the in search box on the top of
   the page
 
----
 
-Except as otherwise noted, the content of this page is licensed under the
-[Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),
-and code samples are licensed under the
-[Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).

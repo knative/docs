@@ -6,8 +6,7 @@ type: "docs"
 ---
 
 This guide walks you through the installation of the latest version of
-[Knative Serving](https://github.com/knative/serving) and
-[Knative Build](https://github.com/knative/build) using pre-built images and
+[Knative Serving](https://github.com/knative/serving) using pre-built images and
 demonstrates creating and deploying an image of a sample `hello world` app onto
 the newly created Knative cluster on
 [IBM Cloud Private](https://www.ibm.com/cloud/private).
@@ -117,9 +116,9 @@ Configure the namespaces `knative-serving` into pod security policy
    EOF
    ```
 
-**Important**: If you choose to install the Knative Build or observability
+**Important**: If you choose to install the Knative eventing or observability
 plugin, you must also create cluster role bindings for the service accounts in
-the`knative-build` and `knative-monitoring` namespaces.
+the`knative-eventing` and `knative-monitoring` namespaces.
 
 ## Installing Istio
 
@@ -161,7 +160,7 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
 1. Run the following commands to install Knative:
 
    ```shell
-   curl -L https://github.com/knative/serving/releases/download/v0.7.0/serving.yaml \
+   curl -L https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
      | sed 's/LoadBalancer/NodePort/' \
      | kubectl apply --selector networking.knative.dev/certificate-provider!=cert-manager --filename -
    ```
@@ -177,19 +176,13 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
    >   statement to install the controller.
 
    ```shell
-   curl -L https://github.com/knative/build/releases/download/v0.7.0/build.yaml \
+   curl -L https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml \
      | sed 's/LoadBalancer/NodePort/' \
      | kubectl apply --filename -
    ```
 
    ```shell
-   curl -L https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml \
-     | sed 's/LoadBalancer/NodePort/' \
-     | kubectl apply --filename -
-   ```
-
-   ```shell
-   curl -L https://github.com/knative/serving/releases/download/v0.7.0/monitoring.yaml \
+   curl -L https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml \
      | sed 's/LoadBalancer/NodePort/' \
      | kubectl apply --filename -
    ```
@@ -209,7 +202,6 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
 
    ```bash
    kubectl get pods --namespace knative-serving
-   kubectl get pods --namespace knative-build
    kubectl get pods --namespace knative-eventing
    kubectl get pods --namespace knative-monitoring
    ```
@@ -241,41 +233,27 @@ echo $(ICP cluster ip):$(kubectl get svc istio-ingressgateway --namespace istio-
 To get started with Knative Eventing, walk through one of the
 [Eventing Samples](../eventing/samples/).
 
-To get started with Knative Build, read the [Build README](../build/README.md),
-then choose a sample to walk through.
-
 ## Cleaning up
 
 To remove Knative from your IBM Cloud Private cluster, run the following
 commands:
 
 ```shell
-curl -L https://github.com/knative/serving/releases/download/v0.7.0/serving.yaml \
+curl -L https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
  | sed 's/LoadBalancer/NodePort/' \
  | kubectl delete --filename -
 ```
 
 ```shell
-curl -L https://github.com/knative/build/releases/download/v0.7.0/build.yaml \
+curl -L https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml \
  | sed 's/LoadBalancer/NodePort/' \
  | kubectl delete --filename -
 ```
 
 ```shell
-curl -L https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml \
+curl -L https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml \
  | sed 's/LoadBalancer/NodePort/' \
  | kubectl delete --filename -
 ```
 
-```shell
-curl -L https://github.com/knative/serving/releases/download/v0.7.0/monitoring.yaml \
- | sed 's/LoadBalancer/NodePort/' \
- | kubectl delete --filename -
-```
 
----
-
-Except as otherwise noted, the content of this page is licensed under the
-[Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),
-and code samples are licensed under the
-[Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).

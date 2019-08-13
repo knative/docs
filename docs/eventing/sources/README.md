@@ -1,3 +1,10 @@
+---
+title: "Knative Eventing sources"
+linkTitle: "Eventing sources"
+weight: 20
+type: "docs"
+---
+
 <!--
 This is a generated file and should not be changed manually. All changes should follow the
 procedure:

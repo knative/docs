@@ -40,7 +40,7 @@ Knative requires a Kubernetes cluster v1.11 or newer.
     your project. You can skip this step if you create your cluster using the
     user interface; it is only needed for programmatic access, make sure you set
     `export KUBECONFIG=garden-my-project.yaml` in your shell.
-    ![Download kubeconfig for Gardener](../images/gardener_service_account.png "downloading the kubeconfig using a service account")
+    ![Download kubeconfig for Gardener](./images/gardener_service_account.png "downloading the kubeconfig using a service account")
 
 ### Creating a Kubernetes cluster
 
@@ -56,7 +56,7 @@ kubectl apply --filename my-cluster.yaml
 
 The easier alternative is to create the cluster following the cluster creation
 wizard in the Gardener dashboard:
-![shoot creation](../images/gardener_shoot_creation.png "shoot creation via the dashboard")
+![shoot creation](./images/gardener_shoot_creation.png "shoot creation via the dashboard")
 
 ### Configure kubectl for your cluster
 
@@ -115,10 +115,9 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
 
    ```bash
    kubectl apply --selector knative.dev/crd-install=true \
-   --filename https://github.com/knative/serving/releases/download/v0.7.0/serving.yaml \
-   --filename https://github.com/knative/build/releases/download/v0.7.0/build.yaml \
-   --filename https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml \
-   --filename https://github.com/knative/serving/releases/download/v0.7.0/monitoring.yaml
+   --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
+   --filename https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml \
+   --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml
    ```
 
 1. To complete the install of Knative and its dependencies, run the
@@ -126,10 +125,9 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
    complete the install of Knative and its dependencies:
 
    ```bash
-   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.7.0/serving.yaml --selector networking.knative.dev/certificate-provider!=cert-manager \
-   --filename https://github.com/knative/build/releases/download/v0.7.0/build.yaml \
-   --filename https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml \
-   --filename https://github.com/knative/serving/releases/download/v0.7.0/monitoring.yaml
+   kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml --selector networking.knative.dev/certificate-provider!=cert-manager \
+   --filename https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml \
+   --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml
    ```
 
    > **Notes**:
@@ -147,7 +145,6 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
    `Running`:
    ```bash
    kubectl get pods --namespace knative-serving
-   kubectl get pods --namespace knative-build
    kubectl get pods --namespace knative-eventing
    kubectl get pods --namespace knative-monitoring
    ```
@@ -195,9 +192,6 @@ guide.
 To get started with Knative Eventing, pick one of the
 [Eventing Samples](../eventing/samples/) to walk through.
 
-To get started with Knative Build, read the [Build README](../build/README.md),
-then choose a sample to walk through.
-
 ## Cleaning up
 
 Use the Gardener dashboard to delete your cluster, or execute the following with
@@ -208,10 +202,3 @@ kubectl --kubeconfig garden-my-project.yaml --namespace garden--my-project annot
 
 kubectl --kubeconfig garden-my-project.yaml --namespace garden--my-project delete shoot my-cluster
 ```
-
----
-
-Except as otherwise noted, the content of this page is licensed under the
-[Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),
-and code samples are licensed under the
-[Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).

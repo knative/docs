@@ -1,3 +1,10 @@
+---
+title: "Hello World - Scala using Akka HTTP"
+linkTitle: "Scala"
+weight: 1
+type: "docs"
+---
+
 A microservice which demonstrates how to get set up and running with Knative
 Serving when using [Scala](https://scala-lang.org/) and [Akka](https://akka.io/)
 [HTTP](https://doc.akka.io/docs/akka-http/current/). It will respond to a HTTP
@@ -9,7 +16,7 @@ cluster. You can also download a working copy of the sample, by running the
 following commands:
 
 ```shell
-git clone -b "release-0.7" https://github.com/knative/docs knative-docs
+git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
 cd knative-docs/docs/serving/samples/hello-world/helloworld-scala
 ```
 
