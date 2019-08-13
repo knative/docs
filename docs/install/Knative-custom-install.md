@@ -83,7 +83,6 @@ The following Knative installation files are available:
   - https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml
   - https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml
   - https://github.com/knative/eventing/releases/download/{{< version >}}/in-memory-channel-crd.yaml
-  - https://github.com/knative/eventing/releases/download/{{< version >}}/kafka.yaml
 - **Eventing Resources**:
   - https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/github.yaml
   - https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/camel.yaml
@@ -114,7 +113,6 @@ files from the Knative repositories:
 | [`release.yaml`][4.1]†                         | Installs the Eventing component. Includes [ContainerSource](../eventing#containersource), [CronJobSource][6.2], the in-memory channel provisioner.                     |                                                                                           |
 | [`eventing.yaml`][4.2]                         | Installs the Eventing component. Includes [ContainerSource](../eventing#containersource) and [CronJobSource][6.2]. Does not include the in-memory channel provisioner. |                                                                                           |
 | [`in-memory-channel-crd.yaml`][4.3]                | Installs only the in-memory channel provisioner.                                                                                                                       | Eventing component                                                                        |
-| [`kafka.yaml`][4.4]                            | Installs only the Kafka channel provisioner.                                                                                                                           | Eventing component                                                                        |
 | [`natss.yaml`][4.5]                            | Installs only the NATSS channel provisioner.                                                                                                                           | Eventing component                                                                        |
 | [`gcp-pubsub.yaml`][4.6]                       | Installs only the GCP PubSub channel provisioner.                                                                                                                      | Eventing component                                                                        |
 | **knative/eventing-contrib**                   |                                                                                                                                                                        |                                                                                           |
