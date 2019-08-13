@@ -11,7 +11,11 @@ visualize and trace your requests.
 
 ## Installation
 
-Knative Eventing uses the same tracing installation as Knative Service. Follow Knative Serving's [installation instructions](./../serving/installing-logging-metrics-traces.md) to set up the necessary components.
+Knative Eventing uses the same tracing plugin as Knative Serving. See the 
+[Tracing installation instructions](./../serving/installing-logging-metrics-traces.md#end-to-end-request-tracing)
+in the Knative Serving section for details. Note that you do not need to install the 
+Knative Serving component itself. To enable request tracing in Knative Eventing 
+you need to install only Elasticsearch and either the Zipkin or Jaeger plugins.
 
 ## Configuration
 
