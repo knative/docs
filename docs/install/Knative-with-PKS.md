@@ -62,12 +62,6 @@ Minkube or similar, see the
 You must install Istio on your Kubernetes cluster before continuing with these
 instructions to install Knative.
 
-## Installing Cert-Manager
-
-Follow the [instructions](../serving/installing-cert-manager.md) to install
-Cert-Manager if you want to use use
-[Auto TLS feature](../serving/using-auto-tls.md).
-
 ## Installing Knative
 
 The following commands install all available Knative components as well as the
@@ -111,21 +105,10 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
    complete the install of Knative and its dependencies:
 
    ```bash
-   kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml --selector networking.knative.dev/certificate-provider!=cert-manager \
+   kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
    --filename https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml \
    --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml
    ```
-
-   > **Notes**:
-   >
-   > - By default, the Knative Serving component installation (`serving.yaml`)
-   >   includes a controller for
-   >   [enabling automatic TLS certificate provisioning](../serving/using-auto-tls.md).
-   >   If you do intend on immediately enabling auto certificates in Knative,
-   >   you can remove the
-   >   `--selector networking.knative.dev/certificate-provider!=cert-manager`
-   >   statement to install the controller. Otherwise, you can choose to install
-   >   the auto certificates feature and controller at a later time.
 
 1. Monitor the Knative components until all of the components show a `STATUS` of
    `Running`:
@@ -140,12 +123,15 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
 Now that your cluster has Knative installed, you can see what Knative has to
 offer.
 
-To deploy your first app with Knative, follow the step-by-step
+To deploy your first app with the
 [Getting Started with Knative App Deployment](./getting-started-knative-app.md)
 guide.
 
-To get started with Knative Eventing, pick one of the
-[Eventing Samples](../eventing/samples/) to walk through.
+Get started with Knative Eventing by walking through one of the
+[Eventing Samples](../eventing/samples/).
+
+[Install Cert-Manager](../serving/installing-cert-manager.md) if you want to use the
+[automatic TLS cert provisioning feature](../serving/using-auto-tls.md).
 
 ## Cleaning up
 

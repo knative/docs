@@ -43,19 +43,8 @@ see Performing a Custom Knative Installation.
     `kubectl apply` command again, this time without the
     `-l knative.dev/crd-install=true`:
 
-        kubectl apply --filename https://github.com/knative/serving/releases/download/v0.7.1 serving.yaml --selector networking.knative.dev/certificate-provider!=cert-manager \
+        kubectl apply --filename https://github.com/knative/serving/releases/download/v0.7.1 serving.yaml \
                 --filename https://github.com/knative/serving/releases/download/v0.7.1/monitoring.yaml
-
-    > **Notes**:
-    >
-    > - By default, the Knative Serving component installation (`serving.yaml`)
-    >   includes a controller for
-    >   [enabling automatic TLS certificate provisioning](../serving/using-auto-tls.md).
-    >   If you do intend on immediately enabling auto certificates in Knative,
-    >   you can remove the
-    >   `--selector networking.knative.dev/certificate-provider!=cert-manager`
-    >   statement to install the controller. Otherwise, you can choose to
-    >   install the auto certificates feature and controller at a later time.
 
 3.  Monitor the Knative namespaces and wait until all of the pods come up with a
     `STATUS` of `Running`:
@@ -158,5 +147,7 @@ manage and route to serverless applications!
 - Try the
   [Getting Started with App Deployment guide](./getting-started-knative-app/)
   for Knative serving.
-- Take a look at the rest of what
-  [Knative has to offer](https://knative.dev/docs/index.html)
+- Get started with Knative Eventing by walking through one of the
+  [Eventing Samples](../eventing/samples/).
+- [Install Cert-Manager](../serving/installing-cert-manager.md) if you want to use the
+  [automatic TLS cert provisioning feature](../serving/using-auto-tls.md).
