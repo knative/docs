@@ -36,15 +36,15 @@ see Performing a Custom Knative Installation.
     race conditions during the install, which cause intermittent errors:
 
         kubectl apply -l knative.dev/crd-install=true \
-        --filename https://github.com/knative/serving/releases/download/v0.7.1/serving.yaml \
-                --filename https://github.com/knative/serving/releases/download/v0.7.1/monitoring.yaml
+        --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
+                --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml
 
 2.  To complete the install of Knative and it's dependencies, run the
     `kubectl apply` command again, this time without the
     `-l knative.dev/crd-install=true`:
 
-        kubectl apply --filename https://github.com/knative/serving/releases/download/v0.7.1 serving.yaml \
-                --filename https://github.com/knative/serving/releases/download/v0.7.1/monitoring.yaml
+        kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
+                --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml
 
 3.  Monitor the Knative namespaces and wait until all of the pods come up with a
     `STATUS` of `Running`:
