@@ -90,7 +90,7 @@ We will attempt to determine why from the most basic pieces out:
 
 1. `fn` - The `Deployment` has no dependencies inside Knative.
 1. `svc` - The `Service` has no dependencies inside Knative.
-1. `chan` - The `Channel` depends on its backing `ClusterChannelProvisioner` and
+1. `chan` - The `Channel` depends on its backing `channel implementation` and
    somewhat depends on `sub`.
 1. `src` - The `Source` depends on `chan`.
 1. `sub` - The `Subscription` depends on both `chan` and `svc`.
@@ -321,18 +321,18 @@ document.
 
 ##### Channel Controller
 
-There is not a single `Channel` Controller. Instead, there is a single
-Controller for each `ClusterChannelProvisioner`. `chan` uses the
-`in-memory-channel` `ClusterChannelProvisioner`, whose Controller is:
+There is not a single `Channel` Controller. Instead, there is one
+Controller for each Channel CRD. `chan` uses the
+`InMemoryChannel` `Channel CRD`, whose Controller is:
 
 ```shell
-kubectl --namespace knative-eventing get pod -l clusterChannelProvisioner=in-memory-channel,role=controller --output yaml
+kubectl --namespace knative-eventing get pod -l messaging.knative.dev/channel=in-memory-channel,messaging.knative.dev/role=dispatcher --output yaml
 ```
 
 See its logs with:
 
 ```shell
-kubectl --namespace knative-eventing logs -l clusterChannelProvisioner=in-memory-channel,role=controller
+kubectl --namespace knative-eventing logs -l messaging.knative.dev/channel=in-memory-channel,messaging.knative.dev/role=dispatcher
 ```
 
 Pay particular attention to any lines that have a logging level of `warning` or

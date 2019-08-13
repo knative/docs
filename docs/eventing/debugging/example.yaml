@@ -12,15 +12,18 @@ metadata:
 # The event source.
 
 apiVersion: sources.eventing.knative.dev/v1alpha1
-kind: KubernetesEventSource
+kind: ApiServerSource
 metadata:
   name: src
   namespace: knative-debug
 spec:
-  namespace: knative-debug
   serviceAccountName: service-account
+  mode: Resource
+  resources:
+    - apiVersion: v1
+      kind: Event
   sink:
-    apiVersion: eventing.knative.dev/v1alpha1
+    apiVersion: messaging.knative.dev/v1alpha1
     kind: Channel
     name: chan
 
@@ -28,18 +31,14 @@ spec:
 
 # The Channel events are sent to.
 
-<!-- TODO(nachtmaar) use CRD directly or does channelTemplate work ? -->
-
-apiVersion: eventing.knative.dev/v1alpha1
+apiVersion: messaging.knative.dev/v1alpha1
 kind: Channel
 metadata:
   name: chan
   namespace: knative-debug
 spec:
-  provisioner:
-    apiVersion: eventing.knative.dev/v1alpha1
-    kind: ClusterChannelProvisioner
-    name: in-memory-channel
+  apiVersion: messaging.knative.dev/v1alpha1
+  kind: InMemoryChannel
 
 ---
 
@@ -52,7 +51,7 @@ metadata:
   namespace: knative-debug
 spec:
   channel:
-    apiVersion: eventing.knative.dev/v1alpha1
+    apiVersion: messaging.knative.dev/v1alpha1
     kind: Channel
     name: chan
   subscriber:
