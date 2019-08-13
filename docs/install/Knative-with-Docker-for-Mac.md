@@ -33,55 +33,33 @@ continuing.
 
 ## Installing Istio
 
-Knative depends on Istio. Run the following to install Istio. (This changes
-`LoadBalancer` to `NodePort` for the `istio-ingress` service).
+Knative depends on [Istio](https://istio.io/docs/concepts/what-is-istio/) for
+traffic routing and ingress. You have the option of injecting Istio sidecars and
+enabling the Istio service mesh, but it's not required for all Knative
+components.
 
-```shell
-curl -L https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/istio-1.0.7/istio.yaml \
-  | sed 's/LoadBalancer/NodePort/' \
-  | kubectl apply --filename -
+If your cloud platform offers a managed Istio installation, we recommend
+installing Istio that way, unless you need the ability to customize your
+installation.
 
-# Label the default namespace with istio-injection=enabled.
-kubectl label namespace default istio-injection=enabled
-```
-
-Monitor the Istio components until all of the components show a `STATUS` of
-`Running` or `Completed`:
-
-```shell
-kubectl get pods --namespace istio-system
-```
-
-It will take a few minutes for all the components to be up and running; you can
-rerun the command to see the current status.
-
-> Note: Instead of rerunning the command, you can add `--watch` to the above
-> command to view the component's status updates in real time. Use CTRL+C to
-> exit watch mode.
+If you prefer to install Istio manually, if your cloud provider doesn't offer a
+managed Istio installation, or if you're installing Knative locally using
+Minkube or similar, see the
+[Installing Istio for Knative guide](./installing-istio.md).
 
 ## Installing Knative Serving
 
 Next, install [Knative Serving](https://github.com/knative/serving).
 
 Because you have limited resources available, use the
-`https://github.com/knative/serving/releases/download/v0.5.2/serving.yaml` file,
+`https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml` file,
 which installs only Knative Serving:
 
 ```shell
 curl -L https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
   | sed 's/LoadBalancer/NodePort/' \
-  | kubectl apply --selector networking.knative.dev/certificate-provider!=cert-manager --filename -
+  | kubectl apply --filename -
 ```
-
-**Notes**:
-
-> - By default, the Knative Serving component installation (`serving.yaml`)
->   includes a controller for
->   [enabling automatic TLS certificate provisioning](../serving/using-auto-tls.md).
->   If you do intend on immediately enabling auto certificates in Knative, you
->   can remove the
->   `--selector networking.knative.dev/certificate-provider!=cert-manager`
->   statement to install the controller.
 
 > Note: Unlike minikube, we're not changing the LoadBalancer to a NodePort here.
 > Docker for Mac will assign `localhost` as the host for that LoadBalancer,
@@ -118,6 +96,12 @@ head to the [sample apps](../serving/samples/README.md) repo.
 
 > Note: You can replace the {IP_ADDRESS} placeholder used in the samples with
 > `localhost` as mentioned above.
+
+Get started with Knative Eventing by walking through one of the
+[Eventing Samples](../eventing/samples/).
+
+[Install Cert-Manager](../serving/installing-cert-manager.md) if you want to use the
+[automatic TLS cert provisioning feature](../serving/using-auto-tls.md).
 
 ## Cleaning up
 
