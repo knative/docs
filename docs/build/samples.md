@@ -10,10 +10,10 @@ Knative Build. [Learn more about Knative Build](../index.html).
 
 [**See all Knative code samples**](../samples/)
 
-Use the following code samples to learn about configuring and createing your
+Use the following code samples to learn about configuring and creating your
 Knative Builds.
 
-Tip: Review and reference multiple samples to piece together more complex
+Tip: Review and reference multiple samples to understand building together more complex
 builds.
 
 #### Simple build samples
