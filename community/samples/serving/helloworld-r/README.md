@@ -5,9 +5,9 @@ weight: 1
 type: "docs"
 ---
 
-A simple web app that executes an R script. The R script reads an env
-variable `TARGET` and prints `Hello ${TARGET}!`. If the `TARGET` environment
-variable is not specified, the script uses `World`.
+A simple web app that executes an R script. The R script reads an env variable
+`TARGET` and prints `Hello ${TARGET}!`. If the `TARGET` environment variable is
+not specified, the script uses `World`.
 
 Follow the steps below to create the sample code and then deploy the app to your
 cluster. You can also download a working copy of the sample, by running the
@@ -38,8 +38,8 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-r
    print(message)
    ```
 
-1. Create a new file named `app.py` and paste the following code. We use a
-   basic web server written in Python to execute the R script:
+1. Create a new file named `app.py` and paste the following code. We use a basic
+   web server written in Python to execute the R script:
 
    ```py
    import os
@@ -58,37 +58,38 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-r
            return "Error in R script.", 500
 
        return output
-
-
-   if __name__ == "__main__":
-       app.run(debug=True,host='0.0.0.0',port=int(os.environ.get('PORT', 8080)))
    ```
+
+if **name** == "**main**":
+app.run(debug=True,host='0.0.0.0',port=int(os.environ.get('PORT', 8080)))
+
+````
 
 1. Create a new file named `Dockerfile` and copy the code block below into it.
 
-   ```docker
-   # Use the official Python image.
-   # https://hub.docker.com/_/python
-   FROM python:3.7
+```docker
+# Use the official Python image.
+# https://hub.docker.com/_/python
+FROM python:3.7
 
-   # Copy local code to the container image.
-   ENV APP_HOME /app
-   WORKDIR $APP_HOME
-   COPY . .
+# Copy local code to the container image.
+ENV APP_HOME /app
+WORKDIR $APP_HOME
+COPY . .
 
-   # Install production dependencies.
-   RUN pip install Flask gunicorn
+# Install production dependencies.
+RUN pip install Flask gunicorn
 
-   # Install R
-   RUN apt-get update && \
-       apt-get install -y r-base
+# Install R
+RUN apt-get update && \
+    apt-get install -y r-base
 
-   # Run the web service on container startup. Here we use the gunicorn
-   # webserver, with one worker process and 8 threads.
-   # For environments with multiple CPU cores, increase the number of workers
-   # to be equal to the cores available.
-   CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 app:app
-   ```
+# Run the web service on container startup. Here we use the gunicorn
+# webserver, with one worker process and 8 threads.
+# For environments with multiple CPU cores, increase the number of workers
+# to be equal to the cores available.
+CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 app:app
+````
 
 1. Create a new file, `service.yaml` and copy the following service definition
    into the file. Make sure to replace `{username}` with your Docker Hub
@@ -174,8 +175,8 @@ folder) you're ready to build and deploy the sample app.
    ```
 
 1. Test your app by sending it a request. Use the following `curl` command with
-   the domain URL `helloworld-r.default.example.com` and `EXTERNAL-IP`
-   address that you retrieved in the previous steps:
+   the domain URL `helloworld-r.default.example.com` and `EXTERNAL-IP` address
+   that you retrieved in the previous steps:
 
    ```shell
    curl -H "Host: helloworld-r.default.example.com" http://{EXTERNAL_IP_ADDRESS}

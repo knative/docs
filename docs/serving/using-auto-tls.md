@@ -29,17 +29,17 @@ provisioning:
 To enable support for automatic TLS certificate provisioning in Knative:
 
 1. Determine if `networking-certmanager` is already installed by running the 
-    following command:
+   following command:
 
-    ```shell
-    kubectl get deployment networking-certmanager -n knative-serving
-    ```
+   ```shell
+   kubectl get deployment networking-certmanager -n knative-serving
+   ```
 
 1. If `networking-certmanager` is not found, run the following command:
-   
-    ```shell
-    kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving-cert-manager.yaml
-    ```
+
+   ```shell
+   kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving-cert-manager.yaml
+   ```
 
 1. Create and add the `ClusterIssuer` configuration file to your Knative cluster
    to define who issues the TLS certificates, how requests are validated
