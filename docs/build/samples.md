@@ -13,7 +13,7 @@ Knative Build. [Learn more about Knative Build](../index.html).
 Use the following code samples to learn about configuring and creating your
 Knative Builds.
 
-Tip: Review and reference multiple samples to understand building together more complex
+Tip: Review and reference multiple samples to understand how to create more complex
 builds.
 
 #### Simple build samples
