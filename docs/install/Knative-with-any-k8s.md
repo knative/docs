@@ -69,7 +69,7 @@ your Knative installation, see
    ```bash
    kubectl apply --selector knative.dev/crd-install=true \
    --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
-   --filename https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml \
+   --filename https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml \
    --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml
    ```
 
@@ -79,7 +79,7 @@ your Knative installation, see
 
    ```bash
    kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
-   --filename https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml \
+   --filename https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml \
    --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml
    ```
 
