@@ -3,6 +3,7 @@
 package main
 
 import (
+	"crypto/tls"
 	"flag"
 	"fmt"
 	"io"
@@ -12,12 +13,14 @@ import (
 	pb "github.com/knative/docs/docs/serving/samples/grpc-ping-go/proto"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"
 )
 
 var (
 	serverAddr         = flag.String("server_addr", "127.0.0.1:8080", "The server address in the format of host:port")
 	serverHostOverride = flag.String("server_host_override", "", "")
 	insecure           = flag.Bool("insecure", false, "Set to true to skip SSL validation")
+	skipVerify         = flag.Bool("skip_verify", false, "Set to true to skip server hostname verification in SSL validation")
 )
 
 func main() {
@@ -29,8 +32,12 @@ func main() {
 	}
 	if *insecure {
 		opts = append(opts, grpc.WithInsecure())
+	} else {
+		cred := credentials.NewTLS(&tls.Config{
+			InsecureSkipVerify: *skipVerify,
+		})
+		opts = append(opts, grpc.WithTransportCredentials(cred))
 	}
-
 	conn, err := grpc.Dial(*serverAddr, opts...)
 	if err != nil {
 		log.Fatalf("fail to dial: %v", err)
