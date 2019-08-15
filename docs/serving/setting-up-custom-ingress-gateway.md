@@ -241,7 +241,7 @@ Update gateway configmap `config-ingressgateway` under `knative-serving`
 namespace:
 
 ```shell
-kubectl edit configmap config-ingressgateway -n knative-serving
+kubectl edit configmap config-istio -n knative-serving
 ```
 
 Replace the `ingress-gateway` field with the fully qualified url of your
