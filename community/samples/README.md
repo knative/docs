@@ -16,7 +16,6 @@ Knative Serving sample apps.
 | ----------- | ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Hello World | A quick introduction to Knative Serving that highlights how to deploy an app. | [Clojure](./serving/helloworld-clojure/README.md), [Dart](./serving/helloworld-dart/README.md), [Elixir](./serving/helloworld-elixir/README.md), [Haskell](./serving/helloworld-haskell/README.md), [Java - Micronaut](./serving/helloworld-java-micronaut/README.md), [Java - Quarkus](./serving/helloworld-java-quarkus/README.md), [Rust](./serving/helloworld-rust/README.md), [Swift](./serving/helloworld-swift/README.md), [Vertx](./serving/helloworld-vertx/README.md) |
 
-
 #### Eventing and Eventing Resources samples
 
 - _Be the first to contribute an Eventing or Eventing Sources code sample to the

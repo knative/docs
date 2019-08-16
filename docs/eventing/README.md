@@ -1,4 +1,3 @@
-
 Knative Eventing is a system that is designed to address a common need for cloud
 native development and provides composable primitives to enable late-binding
 event sources and event consumers.
@@ -350,5 +349,3 @@ example.
 
 - [Default Channels](./channels/default-channels.md) provide a way to choose the
   persistence strategy for Channels across the cluster.
-
-
