@@ -346,7 +346,7 @@ binary that handles both the receiving and dispatching sides for all
 First we will inspect the Dispatcher's logs to see if it is anything obvious:
 
 ```shell
-kubectl --namespace knative-eventing logs -l messaging.knative.dev/channel=in-memory-channel,messaging.knative.dev/role=dispatcher
+kubectl --namespace knative-eventing logs -l messaging.knative.dev/channel=in-memory-channel,messaging.knative.dev/role=dispatcher -c dispatcher
 ```
 
 Ideally we will see lines like:
