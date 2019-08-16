@@ -312,7 +312,6 @@ Pay particular attention to any lines that have a logging level of `warning` or
 
 ### Data Plane
 
-<!-- TODO(nachtmaar): check -->
 The entire [Control Plane](#control-plane) looks healthy, but we're still not
 getting any events. Now we need to investigate the data plane.
 
@@ -335,108 +334,6 @@ The Knative event takes the following path:
 1. `fn` receives the request and logs it.
 
 We will investigate components in the order in which events should travel.
-
-#### `src`
-
-<!-- TODO(nachtmaar) -->
-
-Events should be generated at `src`. First let's look at the `Pod`s logs:
-
-```shell
-srcUID=$(kubectl --namespace knative-debug get apiserversource src -o jsonpath='{.metadata.uid}')
-containerSourceName=$(kubectl --namespace knative-debug get containersource -o jsonpath="{.items[?(.metadata.ownerReferences[*].uid == '$srcUID')].metadata.name}")
-kubectl --namespace knative-debug logs -l source=$containerSourceName -c source
-```
-
-Note that a few log lines within the first ~15 seconds of the `Pod` starting
-like the following are fine. They represent the time waiting for the Istio proxy
-to start. If you see these more than a few seconds after the `Pod` starts, then
-something is wrong.
-
-```shell
-E0116 23:59:40.033667       1 reflector.go:205] github.com/knative/eventing-contrib/pkg/adapter/kubernetesevents/adapter.go:73: Failed to list *v1.Event: Get https://10.51.240.1:443/api/v1/namespaces/kna tive-debug/events?limit=500&resourceVersion=0: dial tcp 10.51.240.1:443: connect: connection refused
-E0116 23:59:41.034572       1 reflector.go:205] github.com/knative/eventing-contrib/pkg/adapter/kubernetesevents/adapter.go:73: Failed to list *v1.Event: Get https://10.51.240.1:443/api/v1/namespaces/kna tive-debug/events?limit=500&resourceVersion=0: dial tcp 10.51.240.1:443: connect: connection refused
-```
-
-The success message is `debug` level, so we don't expect to see anything. If you
-see lines with a logging level of `error`, look at their `msg`. For example:
-
-```shell
-"msg":"[404] unexpected response \"\""
-```
-
-Which means that `src` correctly got the Kubernetes `Event` and tried to send it
-to `chan`, but failed to do so. In this case, the response code was a 404. We
-will look at the Istio proxy's logs to see if we can get any further
-information:
-
-```shell
-srcUID=$(kubectl --namespace knative-debug get apiserversource src -o jsonpath='{.metadata.uid}')
-containerSourceName=$(kubectl --namespace knative-debug get containersource -o jsonpath="{.items[?(.metadata.ownerReferences[*].uid == '$srcUID')].metadata.name}")
-kubectl --namespace knative-debug logs -l source=$containerSourceName -c istio-proxy
-```
-
-We see lines like:
-
-```shell
-[2019-01-17T17:16:11.898Z] "POST / HTTP/1.1" 404 NR 0 0 0 - "-" "Go-http-client/1.1" "4702a818-11e3-9e15-b523-277b94598101" "chan-channel-45k5h.knative-debug.svc.cluster.local" "-"
-```
-
-These are lines emitted by [Envoy](https://www.envoyproxy.io). The line is
-documented as Envoy's
-[Access Logging](https://www.envoyproxy.io/docs/envoy/latest/configuration/access_log).
-That's odd, we already verified that there is a
-[`VirtualService`](#virtualservice) for `chan`. In fact, we don't expect to see
-`chan-channel-45k5h.knative-debug.svc.cluster.local` at all, it should be
-replaced with `chan.knative-debug.channels.cluster.local`. We keep looking in
-the same Istio proxy logs and see:
-
-```shell
- [2019-01-16 23:59:41.408][23][warning][config] bazel-out/k8-opt/bin/external/envoy/source/common/config/_virtual_includes/grpc_mux_subscription_lib/common/config/grpc_mux_subscription_impl.h:70] gRPC     config for type.googleapis.com/envoy.api.v2.RouteConfiguration rejected: Only unique values for domains are permitted. Duplicate entry of domain chan.knative-debug.channels.cluster.local
-```
-
-This shows that the [`VirtualService`](#virtualservice) created for `chan`,
-which tries to map two hosts,
-`chan-channel-45k5h.knative-debug.svc.cluster.local` and
-`chan.knative-debug.channels.cluster.local`, is not working. The most likely
-cause is duplicate `VirtualService`s that all try to rewrite those hosts. Look
-at all the `VirtualService`s in the namespace and see what hosts they rewrite:
-
-```shell
-kubectl --namespace knative-debug get virtualservice -o custom-columns='NAME:.metadata.name,HOST:.spec.hosts[*]'
-```
-
-In this case, we see:
-
-```shell
-NAME                 HOST
-chan-channel-38x5a   chan-channel-45k5h.knative-debug.svc.cluster.local,chan.knative-debug.channels.cluster.local
-chan-channel-8dc2x   chan-channel-45k5h.knative-debug.svc.cluster.local,chan.knative-debug.channels.cluster.local
-```
-
-```
-Note: This shouldn't happen normally. It only happened here because I had local edits to the Channel controller and created a bug. If you see this with any released Channel Controllers, open a bug with all relevant information (Channel Controller info and YAML of all the VirtualServices).
-```
-
-Both are owned by `chan`. Deleting both, causes the
-[Channel Controller](#channel-controller) to recreate the correct one. After
-deleting both, a single new one is created (same command as above):
-
-```shell
-NAME                 HOST
-chan-channel-9kbr8   chan-channel-45k5h.knative-debug.svc.cluster.local,chan.knative-debug.channels.cluster.local
-```
-
-After [forcing a Kubernetes event to occur](#triggering-events), the Istio proxy
-logs now have:
-
-```shell
-[2019-01-17T18:04:07.571Z] "POST / HTTP/1.1" 202 - 795 0 1 1 "-" "Go-http-client/1.1" "ba36be7e-4fc4-9f26-83bd-b1438db730b0" "chan.knative-debug.channels.cluster.local" "10.48.1.94:8080"
-```
-
-Which looks correct. Most importantly, the return code is now 202 Accepted. In
-addition, the request's Host is being correctly rewritten to
-`chan.knative-debug.channels.cluster.local`.
 
 #### Channel Dispatcher
 
@@ -465,11 +362,15 @@ returning a 2XX response code (likely 200, 202, or 204).
 
 However if we see something like:
 
-<!-- TODO(nachtmaar) what is the log we need here ?-->
+<!--
+ NOTE: This error has been produced by settings spec.ports[0].port to 8081
+ kubectl patch -n knative-debug svc svc -p '{"spec":{"ports": [{"port": 8081, "targetPort":8080}]}}' --type='merge' 
+-->
 ```shell
-{"level":"info","ts":1547752478.5898774,"caller":"provisioners/message_receiver.go:116","msg":"Received request for chan.knative-debug.channels.cluster.local"}
-{"level":"info","ts":1547752478.58999,"caller":"provisioners/message_dispatcher.go:106","msg":"Dispatching message to http://svc.knative-debug.svc.cluster.local/"}
-{"level":"error","ts":1547752478.6035335,"caller":"fanout/fanout_handler.go:108","msg":"Fanout had an error","error":"Unable to complete request Post http://svc.knative-debug.svc.cluster.local/: EOF","stacktrace":"github.com/knative/eventing/pkg/sidecar/fanout.(*Handler).dispatch\n\t/usr/local/google/home/harwayne/go/src/github.com/knative/eventing/pkg/sidecar/fanout/fanout_handler.go:108\ngithub.com/knative/eventing/pkg/sidecar/fanout.createReceiverFunction.func1\n\t/usr/local/google/home/harwayne/go/src/github.com/knative/eventing/pkg/sidecar/fanout/fanout_handler.go:86\ngithub.com/knative/eventing/pkg/provisioners.(*MessageReceiver).HandleRequest\n\t/usr/local/google/home/harwayne/go/src/github.com/knative/eventing/pkg/provisioners/message_receiver.go:132\ngithub.com/knative/eventing/pkg/sidecar/fanout.(*Handler).ServeHTTP\n\t/usr/local/google/home/harwayne/go/src/github.com/knative/eventing/pkg/sidecar/fanout/fanout_handler.go:91\ngithub.com/knative/eventing/pkg/sidecar/multichannelfanout.(*Handler).ServeHTTP\n\t/usr/local/google/home/harwayne/go/src/github.com/knative/eventing/pkg/sidecar/multichannelfanout/multi_channel_fanout_handler.go:128\ngithub.com/knative/eventing/pkg/sidecar/swappable.(*Handler).ServeHTTP\n\t/usr/local/google/home/harwayne/go/src/github.com/knative/eventing/pkg/sidecar/swappable/swappable.go:105\nnet/http.serverHandler.ServeHTTP\n\t/usr/lib/google-golang/src/net/http/server.go:2740\nnet/http.(*conn).serve\n\t/usr/lib/google-golang/src/net/http/server.go:1846"}
+{"level":"info","ts":"2019-08-16T16:10:16.859Z","logger":"inmemorychannel-dispatcher.in-memory-channel-dispatcher","caller":"provisioners/message_receiver.go:140","msg":"Received request for chan-kn-channel.knative-debug.svc.cluster.local","knative.dev/controller":"in-memory-channel-dispatcher"}
+{"level":"info","ts":"2019-08-16T16:10:16.859Z","logger":"inmemorychannel-dispatcher.in-memory-channel-dispatcher","caller":"provisioners/message_receiver.go:147","msg":"Request mapped to channel: knative-debug/chan-kn-channel","knative.dev/controller":"in-memory-channel-dispatcher"}
+{"level":"info","ts":"2019-08-16T16:10:16.859Z","logger":"inmemorychannel-dispatcher.in-memory-channel-dispatcher","caller":"provisioners/message_dispatcher.go:112","msg":"Dispatching message to http://svc.knative-debug.svc.cluster.local/","knative.dev/controller":"in-memory-channel-dispatcher"}
+{"level":"error","ts":"2019-08-16T16:10:38.169Z","logger":"inmemorychannel-dispatcher.in-memory-channel-dispatcher","caller":"fanout/fanout_handler.go:121","msg":"Fanout had an error","knative.dev/controller":"in-memory-channel-dispatcher","error":"Unable to complete request Post http://svc.knative-debug.svc.cluster.local/: dial tcp 10.4.44.156:80: i/o timeout","stacktrace":"knative.dev/eventing/pkg/provisioners/fanout.(*Handler).dispatch\n\t/Users/xxxxxx/go/src/knative.dev/eventing/pkg/provisioners/fanout/fanout_handler.go:121\nknative.dev/eventing/pkg/provisioners/fanout.createReceiverFunction.func1.1\n\t/Users/i512777/go/src/knative.dev/eventing/pkg/provisioners/fanout/fanout_handler.go:95"}
 ```
 
 Then we know there was a problem posting to
@@ -481,11 +382,5 @@ events about failures.
 #### `fn`
 
 TODO Fill in this section.
-
-See `fn`'s Istio proxy logs:
-
-```shell
-kubectl --namespace knative-debug logs -l app=fn -c istio-proxy
-```
 
 # TODO Finish the guide.
