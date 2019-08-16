@@ -12,10 +12,6 @@ Learn how to deploy Gloo and Knative to your Kubernetes cluster using the Gloo c
 
 Gloo provides a complete gateway replacement for Istio and supports the full Knative Ingress spec. Choose Gloo as a lightweight option that requires less resource usage and operational overhead compared to Istio.
 
-
-> Note: `glooctl` generates a manifest which can be piped to stdout or a file using the `--dry-run` flag. Alternatively,
-Gloo can be installed via its [Helm Chart](https://gloo.solo.io/installation/gateway/kubernetes/#installing-on-kubernetes-with-helm), which will permit fine-grained configuration of installation parameters.
-
 ## Before you begin
 
 Knative requires a Kubernetes cluster v1.11 or newer with the
@@ -65,6 +61,9 @@ The `glooctl install knative` command can be customized with a variety of option
 - use `--install-knative=false` to only install Gloo without installing Knative components. This can be used if you wish to install Knative independently of Gloo.
 
 See https://github.com/solo-io/gloo/blob/master/docs/cli/glooctl_install_knative.md for the full list of available options for installing Knative with `glooctl`
+
+> Note: `glooctl` generates a manifest which can be piped to stdout or a file using the `--dry-run` flag. Alternatively,
+Gloo can be installed via its [Helm Chart](https://gloo.solo.io/installation/gateway/kubernetes/#installing-on-kubernetes-with-helm), which will permit fine-grained configuration of installation parameters.
 
 Monitor the Gloo and Knative components until each one shows a `STATUS` of `Running` or `Completed`:
 
@@ -144,18 +143,6 @@ Let's deploy an app to test that everything is set up correctly:
 
 Congratulations! You have successfully installed Knative with Gloo to manage and route to serverless applications!
 
-## What's next
-
-Now that your cluster has Knative installed, you can see what Knative has to
-offer.
-
-Learn more about deploying apps to Knative with the
-[Getting Started with Knative App Deployment](./getting-started-knative-app.md)
-guide.
-
-To get started with Knative Eventing, pick one of the
-[Eventing Samples](../eventing/samples/) to walk through.
-
 > Note that when following other Knative tutorials, you'll need to connect to the Gloo Gateway rather than the Istio Gateway when the tutorials prompts doing so.
 
 To get the URL of the Gloo Gateway, run
@@ -174,3 +161,15 @@ export GATEWAY_URL=$(glooctl proxy url --name knative-external-proxy)
 
 curl -H "Host: helloworld-go.myproject.example.com" $GATEWAY_URL
 ```
+
+## What's next
+
+Now that your cluster has Knative installed, you can see what Knative has to
+offer.
+
+Learn more about deploying apps to Knative with the
+[Getting Started with Knative App Deployment](./getting-started-knative-app.md)
+guide.
+
+To get started with Knative Eventing, pick one of the
+[Eventing Samples](../eventing/samples/) to walk through.
