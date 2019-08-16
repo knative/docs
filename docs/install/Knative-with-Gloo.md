@@ -1,6 +1,6 @@
 ---
 title: "Knative Install using Gloo on a Kubernetes Cluster"
-linkTitle: "Knative with Gloo"
+linkTitle: "Gloo"
 weight: 10
 type: "docs"
 ---
