@@ -93,8 +93,6 @@ spec:
       app: fn
   template:
     metadata:
-      annotations:
-        sidecar.istio.io/inject: "true"
       labels:
         app: fn
     spec:
