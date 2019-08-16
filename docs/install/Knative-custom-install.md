@@ -119,14 +119,13 @@ files from the Knative repositories:
 | **knative/eventing-contrib**                   |                                                                                                                                                                        |                                                                                           |
 | [`github.yaml`][5.10]†                          | Installs the [GitHub][6.10] source.                                                                                                                                     | Eventing component                                                                        |
 | [`camel.yaml`][5.40]                            | Installs the Apache Camel source.                                                                                                                                      | Eventing component                                                                        |
-| [`gcppubsub.yaml`][5.20]                        | Installs the [GCP PubSub source][6.30]                                                                                                                                  | Eventing component                                                                        |
 | [`kafka-importer.yaml`][5.50]                   | Installs the Apache Kafka source.                                                                                                                                      | Eventing component                                                                        |
 | [`kafka-channel.yaml`][5.60]                    | Installs the KafkaChannel.                                                                                                                                      | Eventing component                                                                        |
 | [`awssqs.yaml`][5.70]                           | Installs the AWS SQS source.                                                                                                                                           | Eventing component                                                                        |
 | [`event-display.yaml`][5.30]                    | Installs a Knative Service that logs events received for use in samples and debugging.                                                                                 | Serving component, Eventing component                                                     |
-| [`natss-channel.yaml`][4.5]                    | Installs the NATS streaming channel implementation.                                                                                                                       | Eventing component                                                                        |
+| [`natss-channel.yaml`][5.80]                    | Installs the NATS streaming channel implementation.                                                                                                                       | Eventing component                                                                        |
 | **knative/google/knative-gcp**                  |                                                                                                                                                                           |                                                                                           |
-| [`cloud-run-events.yaml`][6.10]                 | Installs the GCP PubSub channel implementation                                                                                                                            |                                                                                           |
+| [`cloud-run-events.yaml`][7.10]                 | Installs the GCP PubSub channel implementation                                                                                                                            |                                                                                           |
 
 _\*_ See
 [Installing logging, metrics, and traces](../serving/installing-logging-metrics-traces.md)
@@ -166,13 +165,9 @@ for details about installing the various supported observability plugins.
 [4.30]:
   https://github.com/knative/eventing/releases/download/{{< version >}}/in-memory-channel-crd.yaml
 [4.40]: https://github.com/knative/eventing/releases/download/{{< version >}}/kafka.yaml
-<!--TODO-->
-[4.50]: https://github.com/knative/eventing/releases/download/{{< version >}}/natss.yaml
 [5.0]: https://github.com/knative/eventing-contrib/releases/tag/{{< version >}}
 [5.10]:
   https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/github.yaml
-[5.20]:
-  https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/gcppubsub.yaml
 [5.30]:
   https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/event-display.yaml
 [5.40]:
@@ -183,13 +178,13 @@ for details about installing the various supported observability plugins.
   https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/kafka-channel.yaml
 [5.70]:
   https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/awssqs.yaml
+[5.80]:
+  https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/natss.yaml  
 [6.10]: https://developer.github.com/v3/activity/events/types/
 [6.20]:
   https://github.com/knative/eventing-contrib/blob/master/samples/cronjob-source/README.md
-[6.3]: https://cloud.google.com/pubsub/
 [7.0]: https://github.com/google/knative-gcp/releases/tag/{{< version >}}
 [7.10]: https://github.com/google/knative-gcp/releases/download/{{< version >}}/cloud-run-events.yaml
-[6.30]: https://cloud.google.com/pubsub/
 
 ### Installing Knative
 
