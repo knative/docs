@@ -12,7 +12,6 @@ Learn how to deploy Gloo and Knative to your Kubernetes cluster using the Gloo c
 
 Gloo can function as a complete replacement for Istio, supporting the full Knative Ingress spec. Using Knative with Gloo requires less resource usage and operational overhead than Istio.
 
-This guide walks you through installing Gloo and Knative using `glooctl`, the Gloo command line. 
 
 > Note: `glooctl` generates a manifest which can be piped to stdout or a file using the `--dry-run` flag. Alternatively,
 Gloo can be installed via its [Helm Chart](https://gloo.solo.io/installation/gateway/kubernetes/#installing-on-kubernetes-with-helm), which will permit fine-grained configuration of installation parameters.
