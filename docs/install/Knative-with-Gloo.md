@@ -130,7 +130,7 @@ Let's deploy an app to test that everything is set up correctly:
    helloworld-go   http://helloworld-go.default.example.com
    ```
 
-   Gloo will use the `Host` header to route requests to the correct
+   Gloo uses the `Host` header to route requests to the correct
    service. You can send a request to the `helloworld-go` service with curl
    using the `Host` and `$GATEWAY_URL` from above:
 
