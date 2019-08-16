@@ -162,18 +162,8 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
    ```shell
    curl -L https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
      | sed 's/LoadBalancer/NodePort/' \
-     | kubectl apply --selector networking.knative.dev/certificate-provider!=cert-manager --filename -
+     | kubectl apply --filename -
    ```
-
-   **Notes**:
-
-   > - By default, the Knative Serving component installation (`serving.yaml`)
-   >   includes a controller for
-   >   [enabling automatic TLS certificate provisioning](../serving/using-auto-tls.md).
-   >   If you do intend on immediately enabling auto certificates in Knative,
-   >   you can remove the
-   >   `--selector networking.knative.dev/certificate-provider!=cert-manager`
-   >   statement to install the controller.
 
    ```shell
    curl -L https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml \
@@ -217,7 +207,7 @@ Now you can deploy an app to your newly created Knative cluster.
 Now that your cluster has Knative installed, you can see what Knative has to
 offer.
 
-To deploy your first app with Knative, follow the step-by-step
+To deploy your first app with the
 [Getting Started with Knative App Deployment](./getting-started-knative-app.md)
 guide.
 
@@ -230,8 +220,11 @@ echo $(ICP cluster ip):$(kubectl get svc istio-ingressgateway --namespace istio-
 --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
 ```
 
-To get started with Knative Eventing, walk through one of the
+Get started with Knative Eventing by walking through one of the
 [Eventing Samples](../eventing/samples/).
+
+[Install Cert-Manager](../serving/installing-cert-manager.md) if you want to use the
+[automatic TLS cert provisioning feature](../serving/using-auto-tls.md).
 
 ## Cleaning up
 
