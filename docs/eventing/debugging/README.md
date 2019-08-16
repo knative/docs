@@ -16,7 +16,7 @@ know roughly how things fit together.
 
 ## Version
 
-This Debugging content supports version v0.3.0 or later of
+This Debugging content supports version v0.8.0 or later of
 [Knative Eventing](https://github.com/knative/eventing/releases/) and the
 [Eventing-contrib resources](https://github.com/knative/eventing-contrib/releases/).
 
@@ -149,13 +149,13 @@ This is a very basic channel and has few
 failure modes that will be exhibited in `chan`'s `status`.
 
 ```shell
-kubectl --namespace knative-debug get channel chan -o jsonpath='{.status.conditions[?(@.type == "Ready")].status}'
+kubectl --namespace knative-debug get channel.messaging.knative.dev chan -o jsonpath='{.status.conditions[?(@.type == "Ready")].status}'
 ```
 
 This should return `True`. If it doesn't, get the full resource:
 
 ```shell
-kubectl --namespace knative-debug get channel chan --output yaml
+kubectl --namespace knative-debug get channel.messaging.knative.dev chan --output yaml
 ```
 
 If `status` is completely missing, it implies that something is wrong with the
@@ -164,7 +164,7 @@ If `status` is completely missing, it implies that something is wrong with the
 Next verify that `chan` is addressable:
 
 ```shell
-kubectl --namespace knative-debug get channel chan -o jsonpath='{.status.address.hostname}'
+kubectl --namespace knative-debug get channel.messaging.knative.dev chan -o jsonpath='{.status.address.hostname}'
 ```
 
 This should return a URI, likely ending in '.cluster.local'. If it doesn't, then
@@ -178,9 +178,8 @@ We will verify that the two resources that the `chan` creates exist and are
 
 `chan` creates a K8s `Service`.
 
-<!-- TODO(nachtmaar) what is the label we need here ?-->
 ```shell
-kubectl --namespace knative-debug get service -l provisioner=in-memory-channel,channel=chan
+kubectl --namespace knative-debug get service -l messaging.knative.dev/role=in-memory-channel
 ```
 
 It's spec is completely unimportant, as Istio will ignore it. It just needs to
@@ -188,41 +187,19 @@ exist so that `src` can send events to it. If it doesn't exist, it implies that
 something went wrong during `chan` reconciliation. See
 [Channel Controller](#channel-controller).
 
-###### `VirtualService`
-
-`chan` creates a `VirtualService` which redirects its hostname to the
-`in-memory-channel` dispatcher.
-
-<!-- TODO(nachtmaar) what is the label we need here ?-->
-```shell
-kubectl --namespace knative-debug get virtualservice -l provisioner=in-memory-channel,channel=chan -o custom-columns='HOST:.spec.hosts[0],DESTINATION:.spec.http[0].route[0].destination.host'
-```
-
-Verify that
-
-1. `HOST` is the same as the hostname returned by in `chan`'s
-   `status.address.hostname`.
-1. `DESTINATION` is
-   `in-memory-channel-dispatcher.knative-eventing.svc.cluster.local`.
-
-If either of those is not accurate, then it implies that something went wrong
-during `chan` reconciliation. See [Channel Controller](#channel-controller).
-
 ##### `src`
 
 `src` is a
-[`KubernetesEventSource`](https://github.com/knative/eventing-contrib/blob/master/pkg/apis/sources/v1alpha1/kuberneteseventsource_types.go),
-which creates an underlying
-[`ContainerSource`](https://github.com/knative/eventing/blob/master/pkg/apis/sources/v1alpha1/containersource_types.go).
+[`ApiServerSource`](https://github.com/knative/eventing/blob/master/pkg/apis/sources/v1alpha1/apiserver_types.go).
 
 First we will verify that `src` is writing to `chan`.
 
 ```shell
-kubectl --namespace knative-debug get kuberneteseventsource src -o jsonpath='{.spec.sink}'
+kubectl --namespace knative-debug get apiserversource src -o jsonpath='{.spec.sink}'
 ```
 
 Which should return
-`map[apiVersion:eventing.knative.dev/v1alpha1 kind:Channel name:chan]`. If it
+`map[apiVersion:messaging.knative.dev/v1alpha1 kind:Channel name:chan]`. If it
 doesn't, then `src` was setup incorrectly and its `spec` needs to be fixed.
 Fixing should be as simple as updating its `spec` to have the correct `sink`
 (see [example.yaml](example.yaml)).
@@ -230,62 +207,8 @@ Fixing should be as simple as updating its `spec` to have the correct `sink`
 Now that we know `src` is sending to `chan`, let's verify that it is `Ready`.
 
 ```shell
-kubectl --namespace knative-debug get kuberneteseventsource src -o jsonpath='{.status.conditions[?(.type == "Ready")].status}'
+kubectl --namespace knative-debug get apiserversource src -o jsonpath='{.status.conditions[?(.type == "Ready")].status}'
 ```
-
-This should return `True`. If it doesn't, then we need to investigate why. First
-we will look at the owned `ContainerSource` that underlies `src`, and if that is
-not fruitful, look at the [Source Controller](#source-controller).
-
-##### ContainerSource
-
-`src` is backed by a `ContainerSource` resource.
-
-Is the `ContainerSource` `Ready`?
-
-```shell
-srcUID=$(kubectl --namespace knative-debug get kuberneteseventsource src -o jsonpath='{.metadata.uid}')
-kubectl --namespace knative-debug get containersource -o jsonpath="{.items[?(.metadata.ownerReferences[0].uid == '$srcUID')].status.conditions[?(.type == 'Ready')].status}"
-```
-
-That should be `True`. If it is, but `src` is not `Ready`, then that implies the
-problem is in the [Source Controller](#source-controller).
-
-If `ContainerSource` is not `Ready`, then we need to look at its entire
-`status`:
-
-```shell
-srcUID=$(kubectl --namespace knative-debug get kuberneteseventsource src -o jsonpath='{.metadata.uid}')
-containerSourceName=$(kubectl --namespace knative-debug get containersource -o jsonpath="{.items[?(.metadata.ownerReferences[*].uid == '$srcUID')].metadata.name}")
-kubectl --namespace knative-debug get containersource $containerSourceName --output yaml
-```
-
-The most useful condition (when `Ready` is not `True`), is `Deployed`.
-
-```shell
-srcUID=$(kubectl --namespace knative-debug get kuberneteseventsource src -o jsonpath='{.metadata.uid}')
-containerSourceName=$(kubectl --namespace knative-debug get containersource -o jsonpath="{.items[?(.metadata.ownerReferences[*].uid == '$srcUID')].metadata.name}")
-kubectl --namespace knative-debug get containersource $containerSourceName -o jsonpath='{.status.conditions[?(.type == "Deployed")].message}'
-```
-
-You should see something like `Updated deployment src-xz59f-hmtkp`. Let's see
-the health of the `Deployment` that `ContainerSource` created (named in the
-message, but we will get it directly in the following command):
-
-```shell
-srcUID=$(kubectl --namespace knative-debug get kuberneteseventsource src -o jsonpath='{.metadata.uid}')
-containerSourceUID=$(kubectl --namespace knative-debug get containersource -o jsonpath="{.items[?(.metadata.ownerReferences[*].uid == '$srcUID')].metadata.uid}")
-deploymentName=$(kubectl --namespace knative-debug get deployment -o jsonpath="{.items[?(.metadata.ownerReferences[*].uid == '$containerSourceUID')].metadata.name}")
-kubectl --namespace knative-debug get deployment $deploymentName --output yaml
-```
-
-If this is unhealthy, then it should tell you why. E.g.
-`'pods "src-xz59f-hmtkp-7bd4bc6964-" is forbidden: error looking up service account knative-debug/events-sa: serviceaccount "events-sa" not found'`.
-Fix any errors so that it the `Deployment` is healthy.
-
-If the `Deployment` is healthy, but the `ContainerSource` isn't, that implies
-something went wrong in
-[ContainerSource Controller](#containersource-controller).
 
 #### `sub`
 
@@ -326,13 +249,13 @@ Controller for each Channel CRD. `chan` uses the
 `InMemoryChannel` `Channel CRD`, whose Controller is:
 
 ```shell
-kubectl --namespace knative-eventing get pod -l messaging.knative.dev/channel=in-memory-channel,messaging.knative.dev/role=dispatcher --output yaml
+kubectl --namespace knative-eventing get pod -l messaging.knative.dev/channel=in-memory-channel,messaging.knative.dev/role=controller --output yaml
 ```
 
 See its logs with:
 
 ```shell
-kubectl --namespace knative-eventing logs -l messaging.knative.dev/channel=in-memory-channel,messaging.knative.dev/role=dispatcher
+kubectl --namespace knative-eventing logs -l messaging.knative.dev/channel=in-memory-channel,messaging.knative.dev/role=controller
 ```
 
 Pay particular attention to any lines that have a logging level of `warning` or
@@ -340,39 +263,29 @@ Pay particular attention to any lines that have a logging level of `warning` or
 
 ##### Source Controller
 
-Each Source will have its own Controller. `src` is a `KubernetesEventSource`, so
+Each Source will have its own Controller. `src` is a `ApiServerSource`, so
 its Controller is:
-
-```shell
-kubectl --namespace knative-sources get pod -l control-plane=controller-manager
-```
-
-This is actually a single binary that runs multiple Source Controllers,
-importantly including [ContainerSource Controller](#containersource-controller).
-
-The `KubernetesEventSource` is fairly simple, as it delegates all functionality
-to an underlying [ContainerSource](#containersource), so there is likely no
-useful information in its logs. Instead more useful information is likely in the
-[ContainerSource Controller](#containersource-controller)'s logs. If you want to
-look at `KubernetesEventSource` Controller's logs anyway, they can be see with:
-
-```shell
-kubectl --namespace knative-sources logs -l control-plane=controller-manager
-```
-
-###### ContainerSource Controller
-
-The `ContainerSource` Controller is run in the same binary as some other Source
-Controllers from Eventing. It is:
 
 ```shell
 kubectl --namespace knative-eventing get pod -l app=sources-controller
 ```
 
+This is actually a single binary that runs multiple Source Controllers,
+importantly including [ApiServerSource Controller](#apiserversource-controller).
+
+###### ApiServerSource Controller
+
+The `ApiServerSource` Controller is run in the same binary as some other Source
+Controllers from Eventing. It is:
+
+```shell
+kubectl --namespace knative-debug get pod -l eventing.knative.dev/sourceName=src,eventing.knative.dev/source=apiserver-source-controller
+```
+
 View its logs with:
 
 ```shell
-kubectl --namespace knative-eventing logs -l app=sources-controller
+kubectl --namespace knative-debug logs -l eventing.knative.dev/sourceName=src,eventing.knative.dev/source=apiserver-source-controller
 ```
 
 Pay particular attention to any lines that have a logging level of `warning` or
@@ -399,6 +312,7 @@ Pay particular attention to any lines that have a logging level of `warning` or
 
 ### Data Plane
 
+<!-- TODO(nachtmaar): check -->
 The entire [Control Plane](#control-plane) looks healthy, but we're still not
 getting any events. Now we need to investigate the data plane.
 
@@ -411,13 +325,7 @@ The Knative event takes the following path:
      (from nothing).
 
 1. `src` is POSTing the event to `chan`'s address,
-   `chan-channel-45k5h.knative-debug.svc.cluster.local`.
-
-1. `src`'s Istio proxy is intercepting the request, seeing that the Host matches
-   a `VirtualService`. The request's Host is rewritten to
-   `chan.knative-debug.channels.cluster.local` and sent to the
-   [Channel Dispatcher](#channel-dispatcher),
-   `in-memory-channel-dispatcher.knative-eventing.svc.cluster.local`.
+   `http://chan-kn-channel.knative-debug.svc.cluster.local`.
 
 1. The Channel Dispatcher receives the request and introspects the Host header
    to determine which `Channel` it corresponds to. It sees that it corresponds
@@ -430,10 +338,12 @@ We will investigate components in the order in which events should travel.
 
 #### `src`
 
+<!-- TODO(nachtmaar) -->
+
 Events should be generated at `src`. First let's look at the `Pod`s logs:
 
 ```shell
-srcUID=$(kubectl --namespace knative-debug get kuberneteseventsource src -o jsonpath='{.metadata.uid}')
+srcUID=$(kubectl --namespace knative-debug get apiserversource src -o jsonpath='{.metadata.uid}')
 containerSourceName=$(kubectl --namespace knative-debug get containersource -o jsonpath="{.items[?(.metadata.ownerReferences[*].uid == '$srcUID')].metadata.name}")
 kubectl --namespace knative-debug logs -l source=$containerSourceName -c source
 ```
@@ -461,7 +371,7 @@ will look at the Istio proxy's logs to see if we can get any further
 information:
 
 ```shell
-srcUID=$(kubectl --namespace knative-debug get kuberneteseventsource src -o jsonpath='{.metadata.uid}')
+srcUID=$(kubectl --namespace knative-debug get apiserversource src -o jsonpath='{.metadata.uid}')
 containerSourceName=$(kubectl --namespace knative-debug get containersource -o jsonpath="{.items[?(.metadata.ownerReferences[*].uid == '$srcUID')].metadata.name}")
 kubectl --namespace knative-debug logs -l source=$containerSourceName -c istio-proxy
 ```
@@ -539,15 +449,15 @@ binary that handles both the receiving and dispatching sides for all
 First we will inspect the Dispatcher's logs to see if it is anything obvious:
 
 ```shell
-kubectl --namespace knative-eventing logs -l clusterChannelProvisioner=in-memory-channel,role=dispatcher -c dispatcher
+kubectl --namespace knative-eventing logs -l messaging.knative.dev/channel=in-memory-channel,messaging.knative.dev/role=dispatcher
 ```
 
 Ideally we will see lines like:
 
-<!-- TODO(nachtmaar) what is the log we need here ?-->
 ```shell
-{"level":"info","ts":1547752472.9581263,"caller":"provisioners/message_receiver.go:116","msg":"Received request for chan.knative-debug.channels.cluster.local"}
-{"level":"info","ts":1547752472.9582398,"caller":"provisioners/message_dispatcher.go:106","msg":"Dispatching message to http://svc.knative-debug.svc.cluster.local/"}
+{"level":"info","ts":"2019-08-16T13:50:55.424Z","logger":"inmemorychannel-dispatcher.in-memory-channel-dispatcher","caller":"provisioners/message_receiver.go:147","msg":"Request mapped to channel: knative-debug/chan-kn-channel","knative.dev/controller":"in-memory-channel-dispatcher"}
+{"level":"info","ts":"2019-08-16T13:50:55.425Z","logger":"inmemorychannel-dispatcher.in-memory-channel-dispatcher","caller":"provisioners/message_dispatcher.go:112","msg":"Dispatching message to http://svc.knative-debug.svc.cluster.local/","knative.dev/controller":"in-memory-channel-dispatcher"}
+{"level":"info","ts":"2019-08-16T13:50:55.981Z","logger":"inmemorychannel-dispatcher.in-memory-channel-dispatcher","caller":"provisioners/message_receiver.go:140","msg":"Received request for chan-kn-channel.knative-debug.svc.cluster.local","knative.dev/controller":"in-memory-channel-dispatcher"}
 ```
 
 Which shows that the request is being received and then sent to `svc`, which is
