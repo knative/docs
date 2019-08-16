@@ -149,8 +149,8 @@ Congratulations! You have successfully installed Knative with Gloo to manage and
 Now that your cluster has Knative installed, you can see what Knative has to
 offer.
 
-To deploy your first app with Knative, follow the step-by-step
-[Getting Started with Knative App Deployment](../serving/getting-started-knative-app.md)
+Learn more about deploying apps to Knative with the
+[Getting Started with Knative App Deployment](./getting-started-knative-app.md)
 guide.
 
 To get started with Knative Eventing, pick one of the
