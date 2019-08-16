@@ -10,7 +10,7 @@ Learn how to deploy Gloo and Knative to your Kubernetes cluster using the Gloo c
 
 [Gloo](https://gloo.solo.io) is a popular open-source Envoy control plane and API gateway built for Kubernetes (and other platforms). 
 
-Gloo can function as a complete replacement for Istio, supporting the full Knative Ingress spec. Using Knative with Gloo requires less resource usage and operational overhead than Istio.
+Gloo provides a complete gateway replacement for Istio and supports the full Knative Ingress spec. Choose Gloo as a lightweight option that requires less resource usage and operational overhead compared to Istio.
 
 
 > Note: `glooctl` generates a manifest which can be piped to stdout or a file using the `--dry-run` flag. Alternatively,
