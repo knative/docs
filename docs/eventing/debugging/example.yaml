@@ -24,7 +24,7 @@ spec:
       kind: Event
   sink:
     apiVersion: messaging.knative.dev/v1alpha1
-    kind: Channel
+    kind: InMemoryChannel
     name: chan
 
 ---
@@ -32,17 +32,13 @@ spec:
 # The Channel events are sent to.
 
 apiVersion: messaging.knative.dev/v1alpha1
-kind: Channel
+kind: InMemoryChannel
 metadata:
   name: chan
   namespace: knative-debug
-spec:
-  apiVersion: messaging.knative.dev/v1alpha1
-  kind: InMemoryChannel
-
 ---
 
-# The Subscription to the Channel.
+# The Subscription to the InMemoryChannel.
 
 apiVersion: eventing.knative.dev/v1alpha1
 kind: Subscription
@@ -52,7 +48,7 @@ metadata:
 spec:
   channel:
     apiVersion: messaging.knative.dev/v1alpha1
-    kind: Channel
+    kind: InMemoryChannel
     name: chan
   subscriber:
     ref:
