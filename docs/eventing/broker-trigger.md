@@ -79,7 +79,7 @@ determine if the `spec.channelTemplateSpec` is specified or not.
 If `spec.channelTemplateSpec` is specified:
 
 1. Delete the `Broker`.
-1. Create the `Broker` with the updated `spec.channelTemplate`.
+1. Create the `Broker` with the updated `spec.channelTemplateSpec`.
 
 If `spec.channelTemplateSpec` is not specified:
 
