@@ -480,11 +480,18 @@ After sending events, verify that your events were received by the appropriate `
 
 ## Cleaning up
 
-Run the following command to delete your namespace to conserve resources:
+After you finish this guide, delete your namespace to conserve resources if you do not plan to use them.
+
+Note: If you plan to continue learning about Knative Eventing with one of our [code samples](./samples/_index.md), check the requirements of the sample and make sure you do not need a namespace before you delete `event-example`. You can always reuse your namespaces.
+
+Run the following command to delete `event-example`:
 
 ```sh
 kubectl delete namespace event-example
 ```
+
+Result: The namespace is removed from your cluster, along with the resources inside the namespace.
+
 
 ## What’s next 
 
