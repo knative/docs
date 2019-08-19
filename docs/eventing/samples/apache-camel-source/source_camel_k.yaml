@@ -19,6 +19,6 @@ spec:
             .setHeader("Content-Type").constant("application/json")
             .to("knative:endpoint/sink?cloudEventsType=org.apache.camel.quote")
   sink:
-    apiVersion: eventing.knative.dev/v1alpha1
+    apiVersion: messaging.knative.dev/v1alpha1
     kind: Channel
     name: camel-test

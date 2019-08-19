@@ -118,7 +118,7 @@ kubectl delete camelsource camel-timer-source
 Install the [telegram CamelSource](source_telegram.yaml) from source:
 
 ```shell
-kunbectl apply -f source_telegram.yaml
+kubectl apply -f source_telegram.yaml
 ```
 
 Start `kail` again and keep it open on the event display:
