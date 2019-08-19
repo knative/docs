@@ -1,24 +1,24 @@
 # List of available Channel implementation for persistence of the events associated with a given channel 
 channels:
-  - name: CRD - InMemoryChannel
+  - name: InMemoryChannel
     url: https://github.com/knative/eventing/tree/master/config/channels/in-memory-channel
     status: Proof of Concept
     support: None
     description: >
       In-memory channels are a best effort Channel. They should NOT be used in Production. They are useful for development.
-  - name: CRD - KafkaChannel
+  - name: KafkaChannel
     url: https://github.com/knative/eventing-contrib/tree/master/kafka/channel/config
     status: Proof of Concept
     support: None
     description: >
       Channels are backed by [Apache Kafka](http://kafka.apache.org/) topics.
-  - name: CRD - NatssChannel
+  - name: NatssChannel
     url: https://github.com/knative/eventing/tree/master/contrib/natss/config
     status: Proof of Concept
     support: None
     description: >
       Channels are backed by [NATS Streaming](https://github.com/nats-io/nats-streaming-server#configuring).
-  - name: CRD - GCP PubSub
+  - name: GCP PubSub
     url: https://github.com/google/knative-gcp
     status: Proof of Concept
     support: None
