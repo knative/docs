@@ -71,7 +71,7 @@ To learn how to use the registry, see the
 
 Knative Eventing also defines an event forwarding and persistence layer, called
 a
-[**Channel**](https://github.com/knative/eventing/blob/master/pkg/apis/eventing/v1alpha1/channel_types.go#L36).
+[**Channel**](https://github.com/knative/eventing/blob/master/pkg/apis/messaging/v1alpha1/channel_types.go#L57).
 Each channel is a separate Kubernetes [Custom Resource](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
 Events are delivered to Services or forwarded to other channels
 (possibly of a different type) using
@@ -112,7 +112,7 @@ The eventing infrastructure supports two forms of event delivery at the moment:
    Service is not available.
 1. Fan-out delivery from a source or Service response to multiple endpoints
    using
-   [Channels](https://github.com/knative/eventing/blob/master/pkg/apis/eventing/v1alpha1/channel_types.go#L36)
+   [Channels](https://github.com/knative/eventing/blob/master/pkg/apis/messaging/v1alpha1/channel_types.go#L57)
    and
    [Subscriptions](https://github.com/knative/eventing/blob/master/pkg/apis/eventing/v1alpha1/subscription_types.go#L35).
    In this case, the Channel implementation ensures that messages are delivered
