@@ -9,7 +9,7 @@ Use this guide to learn how to create, send, and verify events in Knative. The s
 
 - [Installing the Knative Eventing component](#installing-knative-eventing)
 - [Creating and configuring Knative Eventing Resources](#setting-up-knative-eventing-resources)
-- [Sending events with HTTP requests](#sending-cloudevents-to-the-broker)
+- [Sending events with HTTP requests](#sending-events-to-the-broker)
 - [Verifying events were sent correctly](#verifying-events-were-received)
 
 ## Before you begin
@@ -308,9 +308,9 @@ END
 
 Now that your Eventing cluster is set up to send and consume events, you will use HTTP requests to manually send separate events and demonstrate how each of those events can target your individual event consumers in the next section.
 
-## Sending CloudEvents to the `Broker` 
+## Sending Events to the `Broker` 
 
-Now that the `Pod` is created, you can create a `CloudEvent` by sending an HTTP request to the `Broker`. SSH into the `Pod` by running the following command:
+Now that the `Pod` is created, you can create an event by sending an HTTP request to the `Broker`. SSH into the `Pod` by running the following command:
 
 ```sh
   kubectl --namespace event-example attach curl -it
@@ -388,7 +388,7 @@ Now, you can make a HTTP request. To show the various types of events you can se
 
 4. Exit SSH by typing `exit` into the command prompt.
     
-If everything has been done correctly, you should have sent 2 `CloudEvents` to the `hello-display` event consumer and 2 `CloudEvents` to the `goodbye-display` event consumer (note that `say-hello-goodbye` is sent to *both* `hello-display` and `goodbye-display`). You will verify that these events were received correctly in the next section.
+If everything has been done correctly, you should have sent 2 events to the `hello-display` event consumer and 2 events to the `goodbye-display` event consumer (note that `say-hello-goodbye` is sent to *both* `hello-display` and `goodbye-display`). You will verify that these events were received correctly in the next section.
 
 ## Verifying events were received 
 
