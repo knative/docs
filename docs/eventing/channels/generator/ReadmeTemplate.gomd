@@ -29,9 +29,6 @@ Notes:
 * Inclusion in this list is not an endorsement, nor does it imply any level of
   support.
 
-* Cluster Channel Provisioner (CCP) has been deprecated and will be
-  unsupported in v0.9. You should now use the Channels CRDs.
-
 Name | Status | Support | Description
 --- | --- | --- | ---
 {{ range .Channels -}}

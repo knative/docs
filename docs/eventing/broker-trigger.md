@@ -23,11 +23,9 @@ kind: Broker
 metadata:
   name: default
 spec:
-  channelTemplate:
-    provisioner:
-      apiVersion: eventing.knative.dev/v1alpha1
-      kind: ClusterChannelProvisioner
-      name: gcp-pubsub
+  channelTemplateSpec:
+    apiVersion: messaging.knative.dev/v1alpha1
+    kind: InMemoryChannel
 ```
 
 ## Trigger
