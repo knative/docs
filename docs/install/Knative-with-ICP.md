@@ -223,8 +223,8 @@ echo $(ICP cluster ip):$(kubectl get svc istio-ingressgateway --namespace istio-
 Get started with Knative Eventing by walking through one of the
 [Eventing Samples](../eventing/samples/).
 
-[Install Cert-Manager](../serving/installing-cert-manager.md) if you want to use the
-[automatic TLS cert provisioning feature](../serving/using-auto-tls.md).
+[Install Cert-Manager](../serving/installing-cert-manager.md) if you want to use
+the [automatic TLS cert provisioning feature](../serving/using-auto-tls.md).
 
 ## Cleaning up
 
@@ -248,5 +248,3 @@ curl -L https://github.com/knative/serving/releases/download/{{< version >}}/mon
  | sed 's/LoadBalancer/NodePort/' \
  | kubectl delete --filename -
 ```
-
-
