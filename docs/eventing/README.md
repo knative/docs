@@ -337,7 +337,7 @@ to be installed into the current namespace.
   development purposes.
 
 See the
-[CamelSource](https://github.com/knative/eventing-contrib/blob/master/contrib/camel/samples/)
+[CamelSource](https://github.com/knative/eventing-contrib/tree/master/camel/source/samples)
 example.
 
 ## Getting Started
