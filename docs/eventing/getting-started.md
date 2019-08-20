@@ -33,7 +33,7 @@ kubectl get pods --namespace knative-eventing
 If the `knative-eventing` namespace does not exist or the `in-memory-channel-controller-*` is not listed, use the following steps to install Knative Eventing with the in-memory channel provisioner:
 
 1. Make sure that you have a functioning Kubernetes cluster. See the [Comprehensive Install guide](../install/_index.md) for more information.
-2. Install the Eventing CRDs by running the following commmand:
+2. Install the Eventing CRDs by running the following command:
 
     ```sh
     kubectl apply --selector knative.dev/crd-install=true \
@@ -81,6 +81,7 @@ In this section you create the `event-example` namespace and then add the `knati
     ```sh
     kubectl create namespace event-example
     ```
+    Result: You have created an empty namespace called `event-example`.
 
 2. Add a label to your namespace with the following command:
 
@@ -88,7 +89,9 @@ In this section you create the `event-example` namespace and then add the `knati
     kubectl label namespace event-example knative-eventing-injection=enabled
     ```
 
-Now that you have labeled the `event-example` namespace, you will need to verify that the resources you added in this section are running correctly. Then, you can create the rest of the eventing resources you need to manage events.
+   Result: The `event-example`  namespace now has the `knative-eventing-injection` label. This label adds resources that will allow you to manage your events.
+
+In the next section, you will need to verify that the resources you added in this section are running correctly. Then, you can create the rest of the eventing resources you need to manage events.
 
 ### Validating that the `Broker` is running
 
@@ -285,7 +288,7 @@ to consumers, where a trigger's `filter` specifies the event `type` attribute, a
 
     Both triggers should be ready and pointing to the correct **Broker** (your triggers should be pointing at the default broker)  and **SUBSCRIBER_URI** (your triggers should be pointing to triggerName.namespaceName.svc.cluster.local). If this is not the case, see the [Debugging Guide](./debugging/README.md) to help troubleshoot the issue.
 
-You have now created all of the resources needed to recieve and manage events. You created the `Broker`, which manages the events sent to event consumers with the help of triggers.  In the next section, you will make the event producer that will be used to create your events.
+You have now created all of the resources needed to receive and manage events. You created the `Broker`, which manages the events sent to event consumers with the help of triggers.  In the next section, you will make the event producer that will be used to create your events.
 
 
 
@@ -331,7 +334,16 @@ Now that the `Pod` is created, you can create an event by sending an HTTP reques
   kubectl --namespace event-example attach curl -it
 ```
 
-Now, you can make a HTTP request. To show the various types of events you can send, you will make three requests.
+Result: You should be inside of the Pod, and you can now make a HTTP request. You should see this prompt:
+    
+```sh
+    Defaulting container name to curl.
+    Use 'kubectl describe pod/ -n event-example' to see all of the containers in this pod.
+    If you don't see a command prompt, try pressing enter.
+    [ root@curl:/ ]$
+```
+
+To show the various types of events you can send, you will make three requests.
 
 1. To make the first request, which creates an event that has the `type` `greeting`, run the following in the SSH terminal:
 
@@ -414,8 +426,6 @@ After sending events, verify that your events were received by the appropriate `
     ```sh
     kubectl --namespace event-example logs -l app=hello-display --tail=100
     ```
-
-
     Result: The command shows the `Attributes` and `Data` of the events you sent to `hello-display`:
 
     ```sh
@@ -513,6 +523,6 @@ Result: The namespace is removed from your cluster, along with the resources ins
 You've learned the basics of the Knative Eventing workflow. Here are some additional resources to help you continue to build with the Knative Eventing component.
 
 - [Broker and Trigger](./broker-trigger.md)
-- [Eventing with a Github source](./samples/github-source.md) 
+- [Eventing with a GitHub source](./samples/github-source.md) 
 
 
