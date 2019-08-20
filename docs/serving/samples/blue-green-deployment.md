@@ -31,7 +31,7 @@ First, create a new file called `blue-green-demo.yaml` and copy this into
 it:
 
 ```yaml
-apiVersion: serving.knative.dev/v1beta1
+apiVersion: serving.knative.dev/v1alpha1
 kind: Service
 metadata:
   name: demo
@@ -84,7 +84,7 @@ background. To create the new revision, we'll edit our existing service in
 `blue-green-demo.yaml` with an updated image, environment variable and a traffic section:
 
 ```yaml
-apiVersion: serving.knative.dev/v1beta1
+apiVersion: serving.knative.dev/v1alpha1
 kind: Service
 metadata:
   name: demo
@@ -141,7 +141,7 @@ We'll once again update our existing service to begin shifting traffic away from
 the first revision and toward the second. Edit `blue-green-demo.yaml`:
 
 ```yaml
-apiVersion: serving.knative.dev/v1beta1
+apiVersion: serving.knative.dev/v1alpha1
 kind: Service
 metadata:
   name: demo
@@ -190,7 +190,7 @@ Lastly, we'll update our existing service to finally shift all traffic to the
 second revision. Edit `blue-green-demo.yaml`:
 
 ```yaml
-apiVersion: serving.knative.dev/v1beta1
+apiVersion: serving.knative.dev/v1alpha1
 kind: Service
 metadata:
   name: demo
