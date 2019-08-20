@@ -134,7 +134,7 @@ Let's deploy an app to test that everything is set up correctly:
    using the `Host` and `$GATEWAY_URL` from above:
 
    ```
-   $ curl -H "Host: helloworld-go.default.example.com" $(glooctl proxy url --name knative-external-proxy)
+   curl -H "Host: helloworld-go.default.example.com" $(glooctl proxy url --name knative-external-proxy)
    ```
   
    ```
