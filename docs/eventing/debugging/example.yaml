@@ -20,8 +20,8 @@ spec:
   serviceAccountName: service-account
   mode: Resource
   resources:
-    - apiVersion: v1
-      kind: Event
+  - apiVersion: v1
+    kind: Pod
   sink:
     apiVersion: messaging.knative.dev/v1alpha1
     kind: InMemoryChannel
@@ -100,6 +100,44 @@ spec:
           ports:
             - containerPort: 8080
 
+
+---
+
+# Second Subscription to the Channel for event-display
+
+apiVersion: eventing.knative.dev/v1alpha1
+kind: Subscription
+metadata:
+  name: sub2
+  namespace: knative-debug
+spec:
+  channel:
+    apiVersion: eventing.knative.dev/v1alpha1
+    kind: Channel
+    name: chan
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1alpha1
+      kind: Service
+      name: event-display
+
+---
+
+# event-display is replacing message_dumper
+
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: event-display
+  namespace: knative-debug
+spec:
+  template:
+    spec:
+      containers:
+      - # This corresponds to
+        # https://github.com/knative/eventing-contrib/blob/release-0.5/cmd/event_display/main.go
+        image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display@sha256:bf45b3eb1e7fc4cb63d6a5a6416cf696295484a7662e0cf9ccdf5c080542c21d
+
 ---
 
 # Everything after this is just structure for the above.
@@ -129,6 +167,7 @@ rules:
       - ""
     resources:
       - events
+      - pods
     verbs:
       - get
       - list
