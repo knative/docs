@@ -10,7 +10,7 @@ patterns and codify the best practices that are shared by successful,
 real-world, Kubernetes-based frameworks and applications. Knative components
 focus on solving mundane but difficult tasks such as:
 
-- [Deploying a container](./install/getting-started-knative-app.md)
+- [Deploying a container](./serving/getting-started-knative-app.md)
 - [Routing and managing traffic with blue/green deployment](./serving/samples/blue-green-deployment.md)
 - [Scaling automatically and sizing workloads based on demand](./serving/configuring-the-autoscaler.md)
 - [Binding running services to eventing ecosystems](./eventing/samples/kubernetes-event-source/)
@@ -76,7 +76,7 @@ Follow the links below to learn more about Knative.
 ### Getting started
 
 - [Installing Knative](./install/README.md)
-- [Getting started with app deployment](./install/getting-started-knative-app.md)
+- [Getting started with app deployment](./serving/getting-started-knative-app.md)
 - [Getting started with serving](./serving)
 - [Getting started with eventing](./eventing)
 
