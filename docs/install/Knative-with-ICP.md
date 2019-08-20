@@ -208,7 +208,7 @@ Now that your cluster has Knative installed, you can see what Knative has to
 offer.
 
 To deploy your first app with the
-[Getting Started with Knative App Deployment](./getting-started-knative-app.md)
+[Getting Started with Knative App Deployment](../serving/getting-started-knative-app.md)
 guide.
 
 > **Note**: When looking up the IP address to use for accessing your app, you

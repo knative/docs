@@ -117,7 +117,7 @@ Knative cluster.
 Now you're ready to deploy an app:
 
 - Follow the step-by-step
-  [Getting Started with Knative App Deployment](./getting-started-knative-app.md)
+  [Getting Started with Knative App Deployment](../serving/getting-started-knative-app.md)
   guide.
 
 - View the available [sample apps](../serving/samples) and deploy one of your

@@ -110,7 +110,7 @@ configured for use with Knative.
 > `kubectl get svc istio-ingressgateway --namespace istio-system` if using
 > Knative 0.2.x or prior versions) and copying the `EXTERNAL-IP` returned by
 > that command. See
-> [Interacting with your app](../../install/getting-started-knative-app.md#interacting-with-your-app)
+> [Interacting with your app](../getting-started-knative-app.md#interacting-with-your-app)
 > for more information.
 
 ## Deploying Revision 2 (Green)
