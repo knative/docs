@@ -331,7 +331,7 @@ events in your Knative cluster.
 Depending on the Knative components you installed, you can use the following
 guides to help you get started with Knative:
 
-- [Getting Started with Knative App Deployment](./getting-started-knative-app.md)
+- [Getting Started with Knative App Deployment](../serving/getting-started-knative-app.md)
 
   - [Knative Serving sample apps](../serving/samples/README.md)
 
