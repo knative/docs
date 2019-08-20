@@ -1,3 +1,10 @@
+---
+title: "Routing across multiple Knative services - Go"
+linkTitle: "Routing services - Go"
+weight: 1
+type: "docs"
+---
+
 This example shows how to map multiple Knative services to different paths under
 a single domain name using the Istio VirtualService concept. Istio is a
 general-purpose reverse proxy, therefore these directions can also be used to
@@ -50,7 +57,7 @@ cd $GOPATH/src/github.com/knative/docs
 
 2. Set your preferred container registry:
 
-If you use Google Container Registry (GCR), uou will need to enable the
+If you use Google Container Registry (GCR), you will need to enable the
 [GCR API](https://console.cloud.google.com/apis/library/containerregistry.googleapis.com)
 in your GCP project.
 
@@ -267,13 +274,14 @@ with updated host will be forwarded to `knative-ingress-gateway` Gateway again.
 The Gateway proxy checks the updated host, and forwards it to `Search` or
 `Login` service according to its host setting.
 
-![Object model](images/knative-routing-sample-flow.png)
+![Object model](./images/knative-routing-sample-flow.png)
 
 ## Clean Up
 
 To clean up the sample resources:
 
-```
+```shell
 kubectl delete --filename docs/serving/samples/knative-routing-go/sample.yaml
 kubectl delete --filename docs/serving/samples/knative-routing-go/routing.yaml
 ```
+

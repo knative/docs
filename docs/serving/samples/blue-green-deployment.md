@@ -37,17 +37,16 @@ metadata:
   name: blue-green-demo
   namespace: default
 spec:
-  revisionTemplate:
+  template:
     metadata:
       labels:
         knative.dev/type: container
     spec:
-      container:
-        image: gcr.io/knative-samples/knative-route-demo:blue # The URL to the sample app docker image
-        imagePullPolicy: Always
-        env:
-          - name: T_VERSION
-            value: "blue"
+      containers:
+        - image: gcr.io/knative-samples/knative-route-demo:blue # The URL to the sample app docker image
+          env:
+            - name: T_VERSION
+              value: "blue"
 ```
 
 Save the file, then deploy the configuration to your cluster:
@@ -59,7 +58,7 @@ configuration "blue-green-demo" configured
 ```
 
 This will deploy the initial revision of the sample application. Before we can
-route traffic to this application we need to know the name of the initail
+route traffic to this application we need to know the name of the initial
 revision which was just created. Using `kubectl` you can get it with the
 following command:
 
@@ -111,7 +110,7 @@ configured for use with Knative.
 > `kubectl get svc istio-ingressgateway --namespace istio-system` if using
 > Knative 0.2.x or prior versions) and copying the `EXTERNAL-IP` returned by
 > that command. See
-> [Interacting with your app](../../install/getting-started-knative-app.md#interacting-with-your-app)
+> [Interacting with your app](../getting-started-knative-app.md#interacting-with-your-app)
 > for more information.
 
 ## Deploying Revision 2 (Green)
@@ -127,17 +126,16 @@ metadata:
   name: blue-green-demo # Configuration name is unchanged, since we're updating an existing Configuration
   namespace: default
 spec:
-  revisionTemplate:
+  template:
     metadata:
       labels:
         knative.dev/type: container
     spec:
-      container:
-        image: gcr.io/knative-samples/knative-route-demo:green # URL to the new version of the sample app docker image
-        imagePullPolicy: Always
-        env:
-          - name: T_VERSION
-            value: "green" # Updated value for the T_VERSION environment variable
+      containers:
+        - image: gcr.io/knative-samples/knative-route-demo:green # URL to the new version of the sample app docker image
+          env:
+            - name: T_VERSION
+              value: "green" # Updated value for the T_VERSION environment variable
 ```
 
 Save the file, then apply the updated configuration to your cluster:
@@ -176,7 +174,7 @@ spec:
       percent: 100 # All traffic still going to the first revision
     - revisionName: blue-green-demo-m9548
       percent: 0 # 0% of traffic routed to the second revision
-      name: v2 # A named route
+      tag: v2 # A named route
 ```
 
 Save the file, then apply the updated route to your cluster:
@@ -218,7 +216,7 @@ spec:
       percent: 50 # Updating the percentage from 100 to 50
     - revisionName: blue-green-demo-m9548
       percent: 50 # Updating the percentage from 0 to 50
-      name: v2
+      tag: v2
 ```
 
 Save the file, then apply the updated route to your cluster:
@@ -252,7 +250,7 @@ spec:
   traffic:
     - revisionName: blue-green-demo-lcfrd
       percent: 0
-      name: v1 # Adding a new named route for v1
+      tag: v1 # Adding a new named route for v1
     - revisionName: blue-green-demo-m9548
       percent: 100
       # Named route for v2 has been removed, since we don't need it anymore

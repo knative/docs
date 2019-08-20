@@ -1,3 +1,10 @@
+---
+title: "Knative Secrets - Go"
+linkTitle: "Secrets - Go"
+weight: 1
+type: "docs"
+---
+
 A simple web app written in Go that you can use for testing. It demonstrates how
 to use a Kubernetes secret as a Volume with Knative. We will create a new Google
 Service Account and place it into a Kubernetes secret, then we will mount it
@@ -8,7 +15,7 @@ cluster. You can also download a working copy of the sample, by running the
 following commands:
 
 ```shell
-git clone -b "release-0.6" https://github.com/knative/docs knative-docs
+git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
 cd knative-docs/serving/samples/secrets-go
 ```
 

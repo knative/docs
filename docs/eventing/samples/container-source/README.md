@@ -1,3 +1,10 @@
+---
+title: "Container Source Example"
+linkTitle: "Container source"
+weight: 10
+type: "docs"
+---
+
 ContainerSource will start a container image which will generate events under
 certain situations and send messages to a sink URI. It also can be an easy way
 to support your own event sources in Knative. This guide shows how to configure
@@ -13,17 +20,17 @@ creating your own event source as a ContainerSource.
 
 ### Prepare the heartbeats image
 
-Knative [event-sources](https://github.com/knative/eventing-sources) has a
+Knative [event-sources](https://github.com/knative/eventing-contrib) has a
 sample of heartbeats event source. You could clone the source codes by
 
 ```
-git clone -b "release-0.6" https://github.com/knative/eventing-sources.git
+git clone -b "{{< branch >}}" https://github.com/knative/eventing-contrib.git
 ```
 
 And then build a heartbeats image and publish to your image repo with
 
 ```
-ko publish github.com/knative/eventing-sources/cmd/heartbeats
+ko publish github.com/knative/eventing-contrib/cmd/heartbeats
 ```
 
 **Note**: `ko publish` requires:
@@ -44,12 +51,10 @@ kind: Service
 metadata:
   name: event-display
 spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        spec:
-          container:
-            image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display
+  template:
+    spec:
+      containers:
+        - image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display
 ```
 
 Use following command to create the service from `service.yaml`:
@@ -73,18 +78,22 @@ kind: ContainerSource
 metadata:
   name: test-heartbeats
 spec:
-  image: <heartbeats_image_uri>
+  template:
+    spec:
+      containers:
+        - image: <heartbeats_image_uri>
+          name: heartbeats
+          args:
+            - --period=1
+          env:
+            - name: POD_NAME
+              value: "mypod"
+            - name: POD_NAMESPACE
+              value: "event-test"
   sink:
     apiVersion: serving.knative.dev/v1alpha1
     kind: Service
     name: event-display
-  args:
-    - --period=1
-  env:
-    - name: POD_NAME
-      value: "mypod"
-    - name: POD_NAMESPACE
-      value: "event-test"
 ```
 
 Use the following command to create the event source from
@@ -111,7 +120,7 @@ message sent by the heartbeats source to the display function:
 Context Attributes,
   SpecVersion: 0.2
   Type: dev.knative.eventing.samples.heartbeat
-  Source: https://github.com/knative/eventing-sources/cmd/heartbeats/#event-test/mypod
+  Source: https://github.com/knative/eventing-contrib/cmd/heartbeats/#event-test/mypod
   ID: cd1f5f24-12dd-489d-aff4-23302c6091fa
   Time: 2019-04-04T08:38:24.833521851Z
   ContentType: application/json
@@ -153,7 +162,7 @@ any tools you like. Here are some basic guidelines:
   [CloudEvents](https://github.com/cloudevents/spec/blob/master/spec.md#design-goals)
   format is recommended.
 
-[heartbeats](https://github.com/knative/eventing-sources/blob/master/cmd/heartbeats/main.go)
+[heartbeats](https://github.com/knative/eventing-contrib/blob/master/cmd/heartbeats/main.go)
 event source is a sample for your reference.
 
 ### Create the ContainerSource using this container image

@@ -222,7 +222,7 @@ helm template --namespace=istio-system \
 ### Updating your install to use cluster local gateway
 
 If you want your Routes to be visible only inside the cluster, you may want to
-enable [cluster local routes](../../docs/serving/cluster-local-route.md). To use
+enable [cluster local routes](../serving/cluster-local-route.md). To use
 this feature, add an extra Istio cluster local gateway to your cluster. Enter
 the following command to add the cluster local gateway to an existing Istio
 installation:
@@ -282,13 +282,13 @@ rm -rf istio-${ISTIO_VERSION}
 
 - [Install Knative](./README.md).
 - Try the
-  [Getting Started with App Deployment guide](./getting-started-knative-app/)
+  [Getting Started with App Deployment guide](../serving/getting-started-knative-app/)
   for Knative serving.
 
 [1]:
   https://istio.io/docs/setup/kubernetes/additional-setup/sidecar-injection/#automatic-sidecar-injection
 [2]:
   https://istio.io/docs/setup/kubernetes/additional-setup/sidecar-injection/#manual-sidecar-injection
-[3]: https://istio.io/docs/tasks/traffic-management/secure-ingress/sds/
+[3]: https://istio.io/docs/tasks/traffic-management/ingress/secure-ingress-sds/
 [4]: https://istio.io/docs/tasks/security/mutual-tls/
 [5]: https://istio.io/docs/tasks/security/authz-http/

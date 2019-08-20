@@ -1,3 +1,10 @@
+---
+title: "Hello World - Shell"
+linkTitle: "Shell"
+weight: 1
+type: "docs"
+---
+
 A simple web app that executes a shell script. The shell script reads an env
 variable `TARGET` and prints `Hello ${TARGET}!`. If the `TARGET` environment
 variable is not specified, the script uses `World`.
@@ -7,15 +14,15 @@ cluster. You can also download a working copy of the sample, by running the
 following commands:
 
 ```shell
-git clone -b "release-0.6" https://github.com/knative/docs knative-docs
-cd knative-docs/serving/samples/hello-world/helloworld-shell
+git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
+cd knative-docs/docs/serving/samples/hello-world/helloworld-shell
 ```
 
 ## Before you begin
 
 - A Kubernetes cluster with Knative installed. Follow the
-  [installation instructions](../../../install/README.md) if you need to create
-  one.
+  [installation instructions](../../../../install/README.md) if you need to
+  create one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
 

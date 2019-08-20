@@ -1,3 +1,10 @@
+---
+title: "Hello World - Spring Boot Java"
+linkTitle: "Java (Spring)"
+weight: 1
+type: "docs"
+---
+
 A simple web app written in Java using Spring Boot 2.0 that you can use for
 testing. It reads in an env variable `TARGET` and prints "Hello \${TARGET}!". If
 TARGET is not specified, it will use "World" as the TARGET.
@@ -7,8 +14,8 @@ cluster. You can also download a working copy of the sample, by running the
 following commands:
 
 ```shell
-git clone -b "release-0.6" https://github.com/knative/docs knative-docs cd
-knative-docs/serving/samples/hello-world/helloworld-java-spring
+git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs cd
+knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
 ```
 
 ## Before you begin
@@ -168,8 +175,7 @@ folder) you're ready to build and deploy the sample app.
      for your app.
    - Automatically scale your pods up and down (including to zero active pods).
 
-1. To find the IP address for your service, use. If your cluster is new, it may
-   take sometime for the service to get asssigned an external IP address.
+1. To find the IP address of your service, use:
 
    ```shell
    # In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
@@ -197,7 +203,12 @@ folder) you're ready to build and deploy the sample app.
      --output jsonpath="{.status.loadBalancer.ingress[*].ip}")
    ```
 
-1. To find the URL for your service, use
+   **Note** If your cluster is new, it may take some time for the service to get
+   assigned an external IP address. Instead of rerunning the command, you can
+   add `--watch` to the command below to view the component's status updates in
+   real time. Use CTRL+C to exit watch mode.
+
+1. To find the URL of your service, use:
 
    ```shell
    kubectl get ksvc helloworld-java-spring \
@@ -216,9 +227,12 @@ folder) you're ready to build and deploy the sample app.
    Hello Spring Boot Sample v1!
    ```
 
+**Note** Replace `{IP_ADDRESS}` with the address you saw returned in the
+previous step. i.e. `EXTERNAL-IP`
+
 ## Removing the sample app deployment
 
-To remove the sample app from your cluster, delete the service record:
+1. To remove the sample app from your cluster, use:
 
 ```shell
 kubectl delete --filename service.yaml

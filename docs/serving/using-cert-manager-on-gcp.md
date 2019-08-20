@@ -259,6 +259,10 @@ spec:
       protocol: HTTP
     hosts:
     - "*"
+    tls:
+      # Sends 301 redirect for all http requests.
+      # Omit to allow http and https.
+      httpsRedirect: true
   - port:
       number: 443
       name: https
@@ -266,7 +270,6 @@ spec:
     hosts:
     - "*"
     tls:
-      httpsRedirect: true # sends 301 redirect for http requests.
       mode: SIMPLE
       privateKey: /etc/istio/ingressgateway-certs/tls.key
       serverCertificate: /etc/istio/ingressgateway-certs/tls.crt

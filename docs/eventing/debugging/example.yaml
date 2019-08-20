@@ -20,31 +20,30 @@ spec:
   serviceAccountName: service-account
   mode: Resource
   resources:
+<<<<<<< HEAD
   - apiVersion: v1
     kind: Pod
+=======
+    - apiVersion: v1
+      kind: Event
+>>>>>>> knative/master
   sink:
-    apiVersion: eventing.knative.dev/v1alpha1
-    kind: Channel
+    apiVersion: messaging.knative.dev/v1alpha1
+    kind: InMemoryChannel
     name: chan
 
 ---
 
 # The Channel events are sent to.
 
-apiVersion: eventing.knative.dev/v1alpha1
-kind: Channel
+apiVersion: messaging.knative.dev/v1alpha1
+kind: InMemoryChannel
 metadata:
   name: chan
   namespace: knative-debug
-spec:
-  provisioner:
-    apiVersion: eventing.knative.dev/v1alpha1
-    kind: ClusterChannelProvisioner
-    name: in-memory-channel
-
 ---
 
-# The Subscription to the Channel.
+# The Subscription to the InMemoryChannel.
 
 apiVersion: eventing.knative.dev/v1alpha1
 kind: Subscription
@@ -53,8 +52,8 @@ metadata:
   namespace: knative-debug
 spec:
   channel:
-    apiVersion: eventing.knative.dev/v1alpha1
-    kind: Channel
+    apiVersion: messaging.knative.dev/v1alpha1
+    kind: InMemoryChannel
     name: chan
   subscriber:
     ref:
@@ -95,15 +94,13 @@ spec:
       app: fn
   template:
     metadata:
-      annotations:
-        sidecar.istio.io/inject: "true"
       labels:
         app: fn
     spec:
       containers:
         - name: user-container
           # This corresponds to
-          # https://github.com/knative/eventing-sources/blob/v0.2.1/cmd/message_dumper/dumper.go.
+          # https://github.com/knative/eventing-contrib/blob/v0.2.1/cmd/message_dumper/dumper.go.
           image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/message_dumper@sha256:ab5391755f11a5821e7263686564b3c3cd5348522f5b31509963afb269ddcd63
           ports:
             - containerPort: 8080

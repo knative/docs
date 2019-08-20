@@ -1,3 +1,10 @@
+---
+title: "Hello World - Java (Micronaut)"
+linkTitle: "Java (Micronaut)"
+weight: 1
+type: "docs"
+---
+
 Learn how to deploy a simple web app that is written in Java and uses Micronaut.
 
 This samples uses Docker to build locally. The app reads in a `TARGET` env
@@ -195,15 +202,13 @@ To create and configure the source files in the root of your working directory:
      name: helloworld-java-micronaut
      namespace: default
    spec:
-     runLatest:
-       configuration:
-         revisionTemplate:
-           spec:
-             container:
-               image: docker.io/{username}/helloworld-java-micronaut
-               env:
-                 - name: TARGET
-                   value: "Micronaut Sample v1"
+     template:
+       spec:
+         containers:
+           - image: docker.io/{username}/helloworld-java-micronaut
+             env:
+               - name: TARGET
+                 value: "Micronaut Sample v1"
    ```
 
 ## Building and deploying the sample

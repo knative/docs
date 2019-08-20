@@ -20,12 +20,12 @@ metadata:
   labels:
     app: telemetrysample
 spec:
-  revisionTemplate:
+  template:
     metadata:
       labels:
         knative.dev/type: app
     spec:
-      container:
-        # This is the Go import path for the binary to containerize
+      containers:
+      - # This is the Go import path for the binary to containerize
         # and substitute here.
         image: github.com/knative/docs/docs/serving/samples/telemetry-go

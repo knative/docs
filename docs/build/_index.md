@@ -1,8 +1,8 @@
 ---
-title: "Knative Build"
-linkTitle: "Build Component"
-weight: 20
+title: "Deprecated: Knative Build Component"
+linkTitle: "(Deprecated) Build"
+weight: 200
 type: "docs"
 ---
 
-{{% readfile file="README.md" relative="true" markdown="true" %}}
+{{% readfile file="README.md" %}}

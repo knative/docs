@@ -1,3 +1,10 @@
+---
+title: "Hello World - PHP"
+linkTitle: "PHP"
+weight: 1
+type: "docs"
+---
+
 A simple web app written in Go that you can use for testing. It reads in an env
 variable `TARGET` and prints `Hello ${TARGET}!`. If `TARGET` is not specified,
 it will use `World` as the `TARGET`.
@@ -7,8 +14,8 @@ cluster. You can also download a working copy of the sample, by running the
 following commands:
 
 ```shell
-git clone -b "release-0.6" https://github.com/knative/docs knative-docs
-cd knative-docs/serving/samples/hello-world/helloworld-php
+git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
+cd knative-docs/docs/serving/samples/hello-world/helloworld-php
 ```
 
 ## Before you begin
@@ -40,9 +47,9 @@ cd knative-docs/serving/samples/hello-world/helloworld-php
    [official PHP docker image](https://hub.docker.com/_/php/) for more details.
 
    ```docker
-   # Use the official PHP 7.2 image.
+   # Use the official PHP 7.3 image.
    # https://hub.docker.com/_/php
-   FROM php:7.2-apache
+   FROM php:7.3-apache
 
    # Copy local code to the container image.
    COPY index.php /var/www/html/

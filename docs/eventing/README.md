@@ -1,3 +1,4 @@
+
 Knative Eventing is a system that is designed to address a common need for cloud
 native development and provides composable primitives to enable late-binding
 event sources and event consumers.
@@ -70,15 +71,16 @@ To learn how to use the registry, see the
 
 Knative Eventing also defines an event forwarding and persistence layer, called
 a
-[**Channel**](https://github.com/knative/eventing/blob/master/pkg/apis/eventing/v1alpha1/channel_types.go#L36).
-Messaging implementations may provide implementations of Channels via the
-[ClusterChannelProvisioner](https://github.com/knative/eventing/blob/master/pkg/apis/eventing/v1alpha1/cluster_channel_provisioner_types.go#L35)
-object. Events are delivered to Services or forwarded to other channels
+[**Channel**](https://github.com/knative/eventing/blob/master/pkg/apis/messaging/v1alpha1/channel_types.go#L57).
+Each channel is a separate Kubernetes [Custom Resource](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
+Events are delivered to Services or forwarded to other channels
 (possibly of a different type) using
 [Subscriptions](https://github.com/knative/eventing/blob/master/pkg/apis/eventing/v1alpha1/subscription_types.go#L35).
 This allows message delivery in a cluster to vary based on requirements, so that
 some events might be handled by an in-memory implementation while others would
 be persisted using Apache Kafka or NATS Streaming.
+
+See the [List of Channel implementations](../eventing/channels/channels.yaml).
 
 ### Future design goals
 
@@ -110,7 +112,7 @@ The eventing infrastructure supports two forms of event delivery at the moment:
    Service is not available.
 1. Fan-out delivery from a source or Service response to multiple endpoints
    using
-   [Channels](https://github.com/knative/eventing/blob/master/pkg/apis/eventing/v1alpha1/channel_types.go#L36)
+   [Channels](https://github.com/knative/eventing/blob/master/pkg/apis/messaging/v1alpha1/channel_types.go#L57)
    and
    [Subscriptions](https://github.com/knative/eventing/blob/master/pkg/apis/eventing/v1alpha1/subscription_types.go#L35).
    In this case, the Channel implementation ensures that messages are delivered
@@ -137,11 +139,16 @@ format, but may be expressed as simple lists, etc in YAML. All Sources should be
 part of the `sources` category, so you can list all existing Sources with
 `kubectl get sources`. The currently-implemented Sources are described below.
 
-In addition to the core sources, there are [other sources](./sources/README.md)
-that you can install.
+In addition to the core sources (explained below), there are
+[other sources](./sources/README.md) that you can install.
 
-_Want to implement your own source? Check out
-[the tutorial](./samples/writing-a-source/README.md)._
+If you need a Source not covered by the
+[available Source implementations](./sources/README.md), there is a
+[tutorial on writing your own Source](./samples/writing-a-source/README.md).
+
+If your code needs to send events as part of its business logic and doesn't fit
+the model of a Source, consider
+[feeding events directly to a Broker](https://knative.dev/docs/eventing/broker-trigger/#manual).
 
 ### KubernetesEventSource
 
@@ -301,7 +308,7 @@ Knative Serving application so that they can be consumed.
       certificate.
 
 See the
-[Kafka Source](https://github.com/knative/eventing-sources/tree/master/contrib/kafka/samples)
+[Kafka Source](https://github.com/knative/eventing-contrib/tree/master/kafka/source/samples)
 example.
 
 ### CamelSource
@@ -331,7 +338,7 @@ to be installed into the current namespace.
   development purposes.
 
 See the
-[CamelSource](https://github.com/knative/eventing-sources/blob/master/contrib/camel/samples/README.md)
+[CamelSource](https://github.com/knative/eventing-contrib/tree/master/camel/source/samples)
 example.
 
 ## Getting Started
@@ -345,9 +352,4 @@ example.
 - [Default Channels](./channels/default-channels.md) provide a way to choose the
   persistence strategy for Channels across the cluster.
 
----
 
-Except as otherwise noted, the content of this page is licensed under the
-[Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),
-and code samples are licensed under the
-[Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).

@@ -18,7 +18,7 @@ Source files for the documentation on the website are located within the
 [`/docs`](./docs) directory of this repo.
 
 If you want to contribute a fix or add new content to the documentation, you can
-navigate through this repo or use the `Edit ths page` on each of the pages of
+navigate through this repo or use the `Edit this page` on each of the pages of
 the website.
 
 Before you can contribute, first start by reading the Knative contributor
@@ -43,7 +43,7 @@ Each release of the Knative docs are available in the website (starting with
 
 Your help and feedback is always welcome!
 
-If you find an issue lets us know, either by clicking the `Create Issue` on any
+If you find an issue let us know, either by clicking the `Create Issue` on any
 of the website pages, or by directly opening an
 [issue](https://github.com/knative/docs/issues/new/choose) here in the repo.
 
