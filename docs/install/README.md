@@ -1,4 +1,3 @@
-
 Follow this guide to install Knative components on a platform of your choice.
 
 ## Choosing a Kubernetes cluster
@@ -140,5 +139,3 @@ and set up an Istio IP range for outbound network access:
 ## Checking the version of your Knative Serving installation
 
 - [Checking the version of your Knative Serving installation](./check-install-version.md)
-
-

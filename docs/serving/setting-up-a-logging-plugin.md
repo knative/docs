@@ -86,5 +86,3 @@ To uninstall a logging plugin, run:
 ```shell
 kubectl delete --recursive --filename <path-of-fluentd-daemonset-config>
 ```
-
-
