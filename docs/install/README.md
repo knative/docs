@@ -36,10 +36,7 @@ component.
 
 ## Installing Knative with Gloo
 
-[Install with Gloo](./Knative-with-Gloo.md): Gloo functions as a lightweight
-gateway for Knative. Choose this option if you don't require service mesh in
-your cluster and want a lighter-weight alternative to Istio. Note that _the
-Knative Eventing component_ is not supported by Gloo at this time.
+[Install with Gloo](./Knative-with-Gloo.md): Gloo functions as a lightweight gateway for Knative. Choose this option if you don't require a service mesh in your cluster and want a lightweight alternative to Istio. Gloo supports all documented Knative features, as well as extensions to Serving such as Eventing and Monitoring.
 
 ## Installing Knative with Istio
 
