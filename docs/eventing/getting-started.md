@@ -30,7 +30,7 @@ If you previously [created a Knative cluster](../install/_index.md), you might a
 kubectl get pods --namespace knative-eventing
 ```
 
-If the `knative-eventing` namespace does not exist or the `in-memory-channel-controller-*` is not listed, use the following steps to install Knative Eventing with the in-memory channel provisioner:
+If the `knative-eventing` namespace or the `in-memory-channel-controller-*` does not exist, use the following steps to install Knative Eventing with the in-memory channel provisioner:
 
 1. Make sure that you have a functioning Kubernetes cluster. See the [Comprehensive Install guide](../install/_index.md) for more information.
 2. Install the Eventing CRDs by running the following command:
@@ -51,7 +51,7 @@ If the `knative-eventing` namespace does not exist or the `in-memory-channel-con
     ```sh
     kubectl get pods --namespace knative-eventing
     ```
-    Result:
+    This will return the following result:
 
     ```sh
     NAME                                            READY   STATUS    RESTARTS   AGE
@@ -63,9 +63,6 @@ If the `knative-eventing` namespace does not exist or the `in-memory-channel-con
     in-memory-channel-dispatcher-79bc7f46cd-4mvj6   1/1     Running   0          13m
     sources-controller-5847564f4f-z59xc             1/1     Running   0          29m
    ```
-
-
-
 
 ## Setting up Knative Eventing Resources 
 
@@ -81,7 +78,8 @@ In this section you create the `event-example` namespace and then add the `knati
     ```sh
     kubectl create namespace event-example
     ```
-    Result: You have created an empty namespace called `event-example`.
+
+    This creates an empty namespace called `event-example`.
 
 2. Add a label to your namespace with the following command:
 
@@ -89,13 +87,13 @@ In this section you create the `event-example` namespace and then add the `knati
     kubectl label namespace event-example knative-eventing-injection=enabled
     ```
 
-   Result: The `event-example`  namespace now has the `knative-eventing-injection` label. This label adds resources that will allow you to manage your events.
+   This gives the `event-example`  namespace the `knative-eventing-injection` label, which adds resources that will allow you to manage your events.
 
 In the next section, you will need to verify that the resources you added in this section are running correctly. Then, you can create the rest of the eventing resources you need to manage events.
 
 ### Validating that the `Broker` is running
 
-The `Broker` ensures that every event sent by event producers is sent to the correct event consumers. The `Broker` was created when you labeled your namespace as ready for eventing, but it is important to verify that your `Broker` is working correctly. In this guide, you will use the default broker.
+The `Broker` ensures that every event sent by event producers arrives at the correct event consumers. The `Broker` was created when you labeled your namespace as ready for eventing, but it is important to verify that your `Broker` is working correctly. In this guide, you will use the default broker.
 
 1. Run the following command to verify that the `Broker` is in a healthy state:
 
@@ -103,7 +101,7 @@ The `Broker` ensures that every event sent by event producers is sent to the cor
     kubectl --namespace event-example get Broker default
     ```
 
-    Result: The `Broker` that you created should be listed, for example:
+   This shows the `Broker` that you created:
 
     ```sh
     NAME      READY   REASON   HOSTNAME                                                           AGE
@@ -114,12 +112,11 @@ The `Broker` ensures that every event sent by event producers is sent to the cor
 
 2. If `READY=False`, wait 2 minutes and re-run the command. If you continue to receive the `READY=False`, see the [Debugging Guide](./debugging/README.md) to help troubleshoot the issue.
 
-
 Now that your `Broker` is ready to manage events, you can create and configure your event producers and consumers.
 
 ### Creating event consumers
 
-Your event consumers receive the events that are sent by event producers. In this step, you will create two event consumers, `hello-display` and `goodbye-display`, to demonstrate how you can configure your event producers to selectively target a specific consumer.
+Your event consumers receive the events sent by event producers. In this step, you will create two event consumers, `hello-display` and `goodbye-display`, to demonstrate how you can configure your event producers to selectively target a specific consumer.
 
 1. To deploy the `hello-display` consumer to your cluster, run the following command:
 
@@ -207,7 +204,7 @@ Your event consumers receive the events that are sent by event producers. In thi
     kubectl --namespace event-example get deployments hello-display goodbye-display
     ```
 
-    Result: Both the `hello-display` and `goodbye-display` consumers that you deployed should be listed, for example:
+    This lists the `hello-display` and `goodbye-display` consumers that you deployed:
 
     ```sh
     NAME           DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
@@ -221,9 +218,9 @@ Your event consumers receive the events that are sent by event producers. In thi
 ### Creating `Triggers`
 
 A [Trigger](./broker-trigger.md#trigger) defines the events that you want each of your event consumers 
-to receive. Your triggers are used by your `Broker` to forward events to the right consumers. Because all events 
+to receive. Your `Broker` uses triggers to forward events to the right consumers. Because all events 
 in Knative align with the [CloudEvents](https://cloudevents.io/) specification, each event in Knative must include 
-the `type` and `source` attributes. The `type` and `source` attributes are used by each Trigger to match events 
+the `type` and `source` attributes. Each trigger uses the `type` and `source` attributes to match events 
 to consumers, where a trigger's `filter` specifies the event `type` attribute, and a trigger's `subscriber` defines the event `source` attribute.
 
 
@@ -247,7 +244,7 @@ to consumers, where a trigger's `filter` specifies the event `type` attribute, a
     END
     ```
 
-   Result: You created a trigger that sends all events of type `greeting` to your event consumer named `hello-display`.
+   The command creates a trigger that sends all events of type `greeting` to your event consumer named `hello-display`.
 
 2. To add the second `Trigger`, run the following command:
 
@@ -269,7 +266,7 @@ to consumers, where a trigger's `filter` specifies the event `type` attribute, a
     END
     ```
 
-   Result: You created a trigger that sends all events of source `sendoff` to your event consumer named `goodbye-display`.
+   The command creates a trigger that sends all events of source `sendoff` to your event consumer named `goodbye-display`.
 
 3. Verify that the triggers are working correctly by running the following command:
 
@@ -277,7 +274,7 @@ to consumers, where a trigger's `filter` specifies the event `type` attribute, a
     kubectl --namespace event-example get triggers
     ```
 
-    Result: Both the `hello-display` and `goodbye-display` triggers that you created should be listed, for example:
+    This returns the `hello-display` and `goodbye-display` triggers that you created:
 
 
     ```sh
@@ -286,17 +283,13 @@ to consumers, where a trigger's `filter` specifies the event `type` attribute, a
     hello-display          True             default   http://hello-display.event-example.svc.cluster.local/                          16s
     ```
 
-    Both triggers should be ready and pointing to the correct **Broker** (your triggers should be pointing at the default broker)  and **SUBSCRIBER_URI** (your triggers should be pointing to triggerName.namespaceName.svc.cluster.local). If this is not the case, see the [Debugging Guide](./debugging/README.md) to help troubleshoot the issue.
+    If the triggers are correctly configured, they will be ready and pointing to the correct **Broker** (the default broker)  and **SUBSCRIBER_URI** (triggerName.namespaceName.svc.cluster.local). If this is not the case, see the [Debugging Guide](./debugging/README.md) to help troubleshoot the issue.
 
 You have now created all of the resources needed to receive and manage events. You created the `Broker`, which manages the events sent to event consumers with the help of triggers.  In the next section, you will make the event producer that will be used to create your events.
 
-
-
 ### Creating event producers
 
-In this section you will create an event producer that you can use to interact with the Knative Eventing subcomponents you created earlier.
-Typically, events are created systematically but in this guide `curl` is used to allow you to manually send individual events and demonstrate how each of those events are received by the correct event consumer within your Knative Eventing cluster.
-Since the `Broker` is accessible only from within your Eventing cluster, you must create a `Pod` within that cluster to act as your event producer.  
+In this section you will create an event producer that you can use to interact with the Knative Eventing subcomponents you created earlier. Most events are created systematically, but this guide uses `curl` to manually send individual events and demonstrate how these events are received by the correct event consumer. Because you can only access the `Broker` from within your Eventing cluster, you must create a `Pod` within that cluster to act as your event producer.
 
 In the following step, you will create a `Pod` that executes your `curl` commands to send events to the `Broker` in your Eventing cluster.
 
@@ -324,17 +317,17 @@ spec:
 END
 ```
 
-Now that your Eventing cluster is set up to send and consume events, you will use HTTP requests to manually send separate events and demonstrate how each of those events can target your individual event consumers in the next section.
+Now that you've set up your Eventing cluster to send and consume events, you will use HTTP requests to manually send separate events and demonstrate how each of those events can target your individual event consumers in the next section.
 
 ## Sending Events to the `Broker` 
 
-Now that the `Pod` is created, you can create an event by sending an HTTP request to the `Broker`. SSH into the `Pod` by running the following command:
+Now that you've created the Pod, you can create an event by sending an HTTP request to the `Broker`. SSH into the `Pod` by running the following command:
 
 ```sh
   kubectl --namespace event-example attach curl -it
 ```
 
-Result: You should be inside of the Pod, and you can now make a HTTP request. You should see this prompt:
+ You have sshed into the Pod, and can now make a HTTP request. A prompt similar to the one below will appear:
     
 ```sh
     Defaulting container name to curl.
@@ -343,7 +336,7 @@ Result: You should be inside of the Pod, and you can now make a HTTP request. Yo
     [ root@curl:/ ]$
 ```
 
-To show the various types of events you can send, you will make three requests.
+To show the various types of events you can send, you will make three requests:
 
 1. To make the first request, which creates an event that has the `type` `greeting`, run the following in the SSH terminal:
 
@@ -358,9 +351,10 @@ To show the various types of events you can send, you will make three requests.
       -d '{"msg":"Hello Knative!"}'
     ```
 
-    Result: When your event is sent to the `Broker`, `hello-display` will activate and send it to the event consumer of the same name.
+    When the `Broker` receives your event, `hello-display` will activate and send it to the event consumer of the same name.
 
     If the event has been received, you will receive a `202 Accepted` response similar to the one below:
+
     ```sh
     < HTTP/1.1 202 Accepted
     < Content-Length: 0
@@ -381,15 +375,15 @@ To show the various types of events you can send, you will make three requests.
       -d '{"msg":"Goodbye Knative!"}'
     ```
 
-   Result: When your event is sent to the `Broker`, `goodbye-display` will activate and send the event to the event consumer of the same name.
+   When the `Broker` receives your event, `goodbye-display` will activate and send the event to the event consumer of the same name.
 
-    If the event has been received, you will receive a `202 Accepted` response similar to the one below:
+   If the event has been received, you will receive a `202 Accepted` response similar to the one below:
+
     ```sh
     < HTTP/1.1 202 Accepted
     < Content-Length: 0
     < Date: Mon, 12 Aug 2019 19:48:18 GMT
     ```
-
 
 3. To make the third request, which creates an event that has the `type` `greeting` and the`source` `sendoff`, run the following in the SSH terminal:
 
@@ -404,9 +398,10 @@ To show the various types of events you can send, you will make three requests.
       -d '{"msg":"Hello Knative! Goodbye Knative!"}'
    ```
 
-   Result: When your event is sent to the `Broker`,  `hello-display` and `goodbye-display` will activate and send the event to the event consumer of the same name.
+   When the `Broker` receives your event,  `hello-display` and `goodbye-display` will activate and send the event to the event consumer of the same name.
 
    If the event has been received, you will receive a `202 Accepted` response similar to the one below:
+
     ```sh
     < HTTP/1.1 202 Accepted
     < Content-Length: 0
@@ -415,7 +410,7 @@ To show the various types of events you can send, you will make three requests.
 
 4. Exit SSH by typing `exit` into the command prompt.
     
-If everything has been done correctly, you should have sent 2 events to the `hello-display` event consumer and 2 events to the `goodbye-display` event consumer (note that `say-hello-goodbye` is sent to *both* `hello-display` and `goodbye-display`). You will verify that these events were received correctly in the next section.
+You have sent two events to the `hello-display` event consumer and two events to the `goodbye-display` event consumer (note that `say-hello-goodbye` activates the trigger conditions for *both* `hello-display` and `goodbye-display`). You will verify that these events were received correctly in the next section.
 
 ## Verifying events were received 
 
@@ -426,7 +421,8 @@ After sending events, verify that your events were received by the appropriate `
     ```sh
     kubectl --namespace event-example logs -l app=hello-display --tail=100
     ```
-    Result: The command shows the `Attributes` and `Data` of the events you sent to `hello-display`:
+   
+    This returns the `Attributes` and `Data` of the events you sent to `hello-display`:
 
     ```sh
     ☁️  cloudevents.Event
@@ -467,7 +463,7 @@ After sending events, verify that your events were received by the appropriate `
     kubectl --namespace event-example logs -l app=goodbye-display --tail=100
     ```
 
-    Result: The command shows the `Attributes` and `Data` of the events you sent to `goodbye-display`:
+    This returns the `Attributes` and `Data` of the events you sent to `goodbye-display`:
 
 
     ```sh
@@ -515,7 +511,7 @@ Run the following command to delete `event-example`:
 kubectl delete namespace event-example
 ```
 
-Result: The namespace is removed from your cluster, along with the resources inside the namespace.
+This removes the namespace and all of its resources from your cluster.
 
 
 ## What’s next 
