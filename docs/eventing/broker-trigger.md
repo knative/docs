@@ -50,8 +50,8 @@ spec:
 
 ### Trigger Filtering
 
-Exact match filtering on any CloudEvents attributes as well as extensions are
-supported. Note that the attribute filters are AND'ed.
+Exact match filtering on any number of CloudEvents attributes as well as extensions are
+supported. Note that the attribute filters are AND'ed. As of 0.8, we only support exact matching on string values.
 
 Example:
 
