@@ -109,8 +109,6 @@ assigned an external IP address.
    kubectl get svc $INGRESSGATEWAY --namespace istio-system
    ```
 
-````
-
 The command will return something similar to this:
 
 ```shell
