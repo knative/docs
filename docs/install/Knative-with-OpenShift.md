@@ -124,5 +124,3 @@ export IP_ADDRESS=$(oc get node  -o 'jsonpath={.items[0].status.addresses[0].add
    in the **Remove Operator Subscription** dialog box.
 
 6. Click **Remove**.
-
-
