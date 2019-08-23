@@ -31,8 +31,6 @@ spec:
 ## Trigger
 
 A Trigger represents a desire to subscribe to events from a specific Broker.
-Exact match filtering on CloudEvents attributes as well as extensions are
-supported.
 
 Example:
 
@@ -42,15 +40,41 @@ kind: Trigger
 metadata:
   name: my-service-trigger
 spec:
-  filter:
-    attributes:
-      type: dev.knative.foo.bar
+  broker: default
   subscriber:
     ref:
       apiVersion: serving.knative.dev/v1alpha1
       kind: Service
       name: my-service
 ```
+
+### Trigger Filtering
+
+Exact match filtering on any CloudEvents attributes as well as extensions are
+supported. Note that the attribute filters are AND'ed.
+
+Example:
+
+```yaml
+apiVersion: eventing.knative.dev/v1alpha1
+kind: Trigger
+metadata:
+  name: my-service-trigger
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: dev.knative.foo.bar
+      myextension: my-extension-value
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1alpha1
+      kind: Service
+      name: my-service
+```
+
+The example above filters events from the `default` Broker that are of type `dev.knative.foo.bar` AND 
+have the extension `myextension` with the value `my-extension-value`.
 
 ## Usage
 
