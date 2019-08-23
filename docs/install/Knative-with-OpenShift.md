@@ -77,7 +77,7 @@ Now that your cluster has Knative installed, you're ready to deploy an app.
 
 If you'd like to follow a step-by-step guide for deploying your first app on
 Knative, check out the
-[Getting Started with Knative App Deployment](./getting-started-knative-app.md)
+[Getting Started with Knative App Deployment](../serving/getting-started-knative-app.md)
 guide.
 
 If you'd like to view the available sample apps and deploy one of your choosing,
@@ -125,9 +125,4 @@ export IP_ADDRESS=$(oc get node  -o 'jsonpath={.items[0].status.addresses[0].add
 
 6. Click **Remove**.
 
----
 
-Except as otherwise noted, the content of this page is licensed under the
-[Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),
-and code samples are licensed under the
-[Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).

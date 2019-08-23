@@ -1,13 +1,13 @@
 ---
-title: "Hello World - Python"
-linkTitle: "Python"
+title: "Hello World - R"
+linkTitle: "R"
 weight: 1
 type: "docs"
 ---
 
-A simple web app written in Python that you can use for testing. It reads in an
-env variable `TARGET` and prints "Hello \${TARGET}!". If TARGET is not
-specified, it will use "World" as the TARGET.
+A simple web app that executes an R script. The R script reads an env
+variable `TARGET` and prints `Hello ${TARGET}!`. If the `TARGET` environment
+variable is not specified, the script uses `World`.
 
 Follow the steps below to create the sample code and then deploy the app to your
 cluster. You can also download a working copy of the sample, by running the
@@ -15,7 +15,7 @@ following commands:
 
 ```shell
 git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
-cd knative-docs/docs/serving/samples/hello-world/helloworld-python
+cd knative-docs/docs/serving/samples/hello-world/helloworld-r
 ```
 
 ## Before you begin
@@ -28,17 +28,22 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-python
 
 ## Recreating the sample code
 
-1. Create a new directory and cd into it:
+1. Create a new file named `HelloWorld.R` and paste the following script:
 
-   ```shell
-   mkdir app
-   cd app
+   ```R
+   #!/usr/bin/Rscript
+   TARGET <- Sys.getenv("TARGET", "World")
+
+   message = paste("Hello ", TARGET, "!", sep = "")
+   print(message)
    ```
 
-1. Create a file named `app.py` and copy the code block below into it:
+1. Create a new file named `app.py` and paste the following code. We use a
+   basic web server written in Python to execute the R script:
 
-   ```python
+   ```py
    import os
+   import subprocess
 
    from flask import Flask
 
@@ -46,16 +51,20 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-python
 
    @app.route('/')
    def hello_world():
-      target = os.environ.get('TARGET', 'World')
-      return 'Hello {}!\n'.format(target)
+       try:
+           output = subprocess.check_output('/usr/bin/Rscript HelloWorld.R', shell=True)
+           print(output)
+       except subprocess.CalledProcessError:
+           return "Error in R script.", 500
+
+       return output
+
 
    if __name__ == "__main__":
-      app.run(debug=True,host='0.0.0.0',port=int(os.environ.get('PORT', 8080)))
+       app.run(debug=True,host='0.0.0.0',port=int(os.environ.get('PORT', 8080)))
    ```
 
-1. Create a file named `Dockerfile` and copy the code block below into it. See
-   [official Python docker image](https://hub.docker.com/_/python/) for more
-   details.
+1. Create a new file named `Dockerfile` and copy the code block below into it.
 
    ```docker
    # Use the official Python image.
@@ -70,23 +79,15 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-python
    # Install production dependencies.
    RUN pip install Flask gunicorn
 
+   # Install R
+   RUN apt-get update && \
+       apt-get install -y r-base
+
    # Run the web service on container startup. Here we use the gunicorn
    # webserver, with one worker process and 8 threads.
    # For environments with multiple CPU cores, increase the number of workers
    # to be equal to the cores available.
    CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 app:app
-   ```
-
-1. Create a `.dockerignore` file to ensure that any files related to a local
-   build do not affect the container that you build for deployment.
-
-   ```ignore
-   Dockerfile
-   README.md
-   *.pyc
-   *.pyo
-   *.pyd
-   __pycache__
    ```
 
 1. Create a new file, `service.yaml` and copy the following service definition
@@ -97,19 +98,19 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-python
    apiVersion: serving.knative.dev/v1alpha1
    kind: Service
    metadata:
-     name: helloworld-python
+     name: helloworld-r
      namespace: default
    spec:
      template:
        spec:
          containers:
-           - image: docker.io/{username}/helloworld-python
+           - image: docker.io/{username}/helloworld-r
              env:
                - name: TARGET
-                 value: "Python Sample v1"
+                 value: "R Sample v1"
    ```
 
-## Build and deploy this sample
+## Building and deploying the sample
 
 Once you have recreated the sample code files (or used the files in the sample
 folder) you're ready to build and deploy the sample app.
@@ -120,10 +121,10 @@ folder) you're ready to build and deploy the sample app.
 
    ```shell
    # Build the container on your local machine
-   docker build -t {username}/helloworld-python .
+   docker build -t {username}/helloworld-r .
 
    # Push the container to docker registry
-   docker push {username}/helloworld-python
+   docker push {username}/helloworld-r
    ```
 
 1. After the build has completed and the container is pushed to docker hub, you
@@ -135,51 +136,61 @@ folder) you're ready to build and deploy the sample app.
    kubectl apply --filename service.yaml
    ```
 
-1. Now that your service is created, Knative will perform the following steps:
+1. Now that your service is created, Knative performs the following steps:
 
    - Create a new immutable revision for this version of the app.
    - Network programming to create a route, ingress, service, and load balance
      for your app.
    - Automatically scale your pods up and down (including to zero active pods).
 
-1. To find the IP address for your service, use these commands to get the
-   ingress IP for your cluster. If your cluster is new, it may take sometime for
-   the service to get asssigned an external IP address.
+1. Run the following command to find the external IP address for your service.
+   The ingress IP for your cluster is returned. If you just created your
+   cluster, you might need to wait and rerun the command until your service gets
+   asssigned an external IP address.
 
    ```shell
-   # In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
-   INGRESSGATEWAY=knative-ingressgateway
+   kubectl get svc knative-ingressgateway --namespace istio-system
+   ```
 
-   # The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
-   # Use `istio-ingressgateway` instead, since `knative-ingressgateway`
-   # will be removed in Knative v0.4.
-   if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
-      INGRESSGATEWAY=istio-ingressgateway
-   fi
+   Example:
 
-   kubectl get svc $INGRESSGATEWAY --namespace istio-system
-
+   ```shell
    NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
-   xxxxxxx-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
-   ```
-
-1. To find the URL for your service, use
+   knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
 
    ```
-   kubectl get ksvc helloworld-python  --output=custom-columns=NAME:.metadata.name,URL:.status.url
-   NAME                URL
-   helloworld-python   http://helloworld-python.default.example.com
-   ```
 
-1. Now you can make a request to your app to see the result. Replace
-   `{IP_ADDRESS}` with the address you see returned in the previous step.
+1. Run the following command to find the domain URL for your service:
 
    ```shell
-   curl -H "Host: helloworld-python.default.example.com" http://{IP_ADDRESS}
-   Hello Python Sample v1!
+   kubectl get ksvc helloworld-r  --output=custom-columns=NAME:.metadata.name,URL:.status.url
    ```
 
-## Remove the sample app deployment
+   Example:
+
+   ```shell
+   NAME                URL
+   helloworld-r    http://helloworld-r.default.example.com
+   ```
+
+1. Test your app by sending it a request. Use the following `curl` command with
+   the domain URL `helloworld-r.default.example.com` and `EXTERNAL-IP`
+   address that you retrieved in the previous steps:
+
+   ```shell
+   curl -H "Host: helloworld-r.default.example.com" http://{EXTERNAL_IP_ADDRESS}
+   ```
+
+   Example:
+
+   ```shell
+   curl -H "Host: helloworld-r.default.example.com" http://35.203.155.229
+   [1] "Hello R Sample v1!"
+   ```
+
+   > Note: Add `-v` option to get more detail if the `curl` command failed.
+
+## Removing the sample app deployment
 
 To remove the sample app from your cluster, delete the service record:
 

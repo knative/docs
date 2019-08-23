@@ -31,7 +31,7 @@ sections to do so now.
 1. Run the following command to install Prometheus and Grafana:
 
    ```shell
-   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.7.0/monitoring-metrics-prometheus.yaml
+   kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring-metrics-prometheus.yaml
    ```
 
 1. Ensure that the `grafana-*`, `kibana-logging-*`, `kube-state-metrics-*`,
@@ -90,7 +90,7 @@ install:
 1. Run the following command to install an ELK stack:
 
    ```shell
-   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.7.0/monitoring-logs-elasticsearch.yaml
+   kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring-logs-elasticsearch.yaml
    ```
 
 1. Ensure that the `elasticsearch-logging-*`, `fluentd-ds-*`, and
@@ -178,9 +178,8 @@ To configure and setup monitoring:
 1.  Clone the Knative Serving repository:
 
     ```shell
-    git clone https://github.com/knative/serving knative-serving
+    git clone -b {{< version >}} https://github.com/knative/serving knative-serving
     cd knative-serving
-    git checkout v0.4.0
     ```
 
 1.  Choose a container image that meets the
@@ -269,14 +268,14 @@ uninstall that tool before installing the new tool.
      end traces, run:
 
      ```shell
-     kubectl apply --filename https://github.com/knative/serving/releases/download/v0.7.0/monitoring-tracing-zipkin-in-mem.yaml
+     kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring-tracing-zipkin-in-mem.yaml
      ```
 
    - If Elasticsearch is installed and you want to persist end to end traces,
      first run:
 
      ```shell
-     kubectl apply --filename https://github.com/knative/serving/releases/download/v0.7.0/monitoring-tracing-zipkin.yaml
+     kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring-tracing-zipkin.yaml
      ```
 
 1. Create an Elasticsearch index for end to end traces:
@@ -304,14 +303,14 @@ end traces.
      end traces, run:
 
      ```shell
-     kubectl apply --filename https://github.com/knative/serving/releases/download/v0.7.0/monitoring-tracing-jaeger-in-mem.yaml
+     kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring-tracing-jaeger-in-mem.yaml
      ```
 
    - If Elasticsearch is installed and you want to persist end to end traces,
      first run:
 
      ```shell
-     kubectl apply --filename https://github.com/knative/serving/releases/download/v0.7.0/monitoring-tracing-jaeger.yaml
+     kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring-tracing-jaeger.yaml
      ```
 
 1. Create an Elasticsearch index for end to end traces:
@@ -333,9 +332,4 @@ end traces.
   - [Accessing Metrics](./accessing-metrics.md)
   - [Accessing Traces](./accessing-traces.md)
 
----
 
-Except as otherwise noted, the content of this page is licensed under the
-[Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),
-and code samples are licensed under the
-[Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).

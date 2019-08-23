@@ -23,17 +23,16 @@ kind: Broker
 metadata:
   name: default
 spec:
-  channelTemplate:
-    provisioner:
-      apiVersion: eventing.knative.dev/v1alpha1
-      kind: ClusterChannelProvisioner
-      name: gcp-pubsub
+  channelTemplateSpec:
+    apiVersion: messaging.knative.dev/v1alpha1
+    kind: InMemoryChannel
 ```
 
 ## Trigger
 
 A Trigger represents a desire to subscribe to events from a specific Broker.
-Exact match filtering on CloudEvents attributes as well as extensions are supported.
+Exact match filtering on CloudEvents attributes as well as extensions are
+supported.
 
 Example:
 
@@ -57,26 +56,25 @@ spec:
 
 ### Channel
 
-`Broker`s use their `spec.channelTemplateSpec` to create their internal [Channels](./channels/),
-which dictate the durability guarantees of events sent to that `Broker`. If
-`spec.channelTemplateSpec` is not specified, then the
-[default channel](./channels/default-channels.md)
-for their namespace is used.
+`Broker`s use their `spec.channelTemplateSpec` to create their internal
+[Channels](./channels/), which dictate the durability guarantees of events sent
+to that `Broker`. If `spec.channelTemplateSpec` is not specified, then the
+[default channel](./channels/default-channels.md) for their namespace is used.
 
 #### Setup
 
-Have a `Channel` CRD installed and set as the
-default channel for the namespace you are interested in. For development, the
+Have a `Channel` CRD installed and set as the default channel for the namespace
+you are interested in. For development, the
 [InMemoryChannel](https://github.com/knative/eventing/tree/master/config/channels/in-memory-channel)
 is normally used.
 
 #### Changing
 
-**Note** changing the `Channel` of a running `Broker` will
-lose all in-flight events.
+**Note** changing the `Channel` of a running `Broker` will lose all in-flight
+events.
 
-If you want to change which `Channel` is used by a given
-`Broker`, then determine if the `spec.channelTemplateSpec` is specified or not.
+If you want to change which `Channel` is used by a given `Broker`, then
+determine if the `spec.channelTemplateSpec` is specified or not.
 
 If `spec.channelTemplateSpec` is specified:
 
@@ -236,7 +234,8 @@ spec:
 
 #### Defaulting
 
-The Webhook will default the `spec.broker` field to `default`, if left unspecified. 
+The Webhook will default the `spec.broker` field to `default`, if left
+unspecified.
 
 The Webhook will default the YAML above to:
 

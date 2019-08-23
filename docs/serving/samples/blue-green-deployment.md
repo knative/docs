@@ -58,7 +58,7 @@ configuration "blue-green-demo" configured
 ```
 
 This will deploy the initial revision of the sample application. Before we can
-route traffic to this application we need to know the name of the initail
+route traffic to this application we need to know the name of the initial
 revision which was just created. Using `kubectl` you can get it with the
 following command:
 
@@ -110,7 +110,7 @@ configured for use with Knative.
 > `kubectl get svc istio-ingressgateway --namespace istio-system` if using
 > Knative 0.2.x or prior versions) and copying the `EXTERNAL-IP` returned by
 > that command. See
-> [Interacting with your app](../../install/getting-started-knative-app.md#interacting-with-your-app)
+> [Interacting with your app](../getting-started-knative-app.md#interacting-with-your-app)
 > for more information.
 
 ## Deploying Revision 2 (Green)
