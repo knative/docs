@@ -1,18 +1,19 @@
 # Use Microsoft's official .NET image.
 # https://hub.docker.com/r/microsoft/dotnet
-FROM microsoft/dotnet:2.2-sdk
-
-# Install production dependencies.
-# Copy csproj and restore as distinct layers.
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build
 WORKDIR /app
+
+# copy csproj and restore as distinct layers
 COPY *.csproj .
 RUN dotnet restore
 
-# Copy local code to the container image.
+# copy everything else and build app
 COPY . .
-
-# Build a release artifact.
+WORKDIR /app
 RUN dotnet publish -c Release -o out
 
-# Run the web service on container startup.
-CMD ["dotnet", "out/helloworld-csharp.dll"]
+
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.2 AS runtime
+WORKDIR /app
+COPY --from=build /app/out ./
+ENTRYPOINT ["dotnet", "helloworld-csharp.dll"]
