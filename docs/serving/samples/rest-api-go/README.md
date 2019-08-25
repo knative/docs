@@ -25,7 +25,7 @@ like `AAPL`,`AMZN`, `GOOG`, `MSFT`, etc.
 
    ```shell
    git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
-   cd knative-docs/serving/samples/rest-api-go
+   cd knative-docs
    ```
 
 ## Setup
@@ -37,11 +37,7 @@ This sample uses Docker for both building and pushing.
 
 To build and push to a container registry using Docker:
 
-1. Move into the sample directory:
-
-   ```shell
-   cd $GOPATH/src/github.com/knative/docs
-   ```
+1. Continue in the knative-docs directory previously cloned
 
 2. Set your preferred container registry endpoint as an environment variable.
    This sample uses

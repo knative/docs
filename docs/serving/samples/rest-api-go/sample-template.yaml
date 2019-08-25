@@ -29,3 +29,5 @@ spec:
             path: /
           initialDelaySeconds: 0
           periodSeconds: 3
+          timeoutSeconds: 11
+          failureThreshold: 3
