@@ -93,7 +93,7 @@ In the next section, you will need to verify that the resources you added in thi
 
 ### Validating that the `Broker` is running
 
-The `Broker` ensures that every event sent by event producers arrives at the correct event consumers. The `Broker` was created when you labeled your namespace as ready for eventing, but it is important to verify that your `Broker` is working correctly. In this guide, you will use the default broker.
+The [`Broker`](./broker-trigger.md#broker) ensures that every event sent by event producers arrives at the correct event consumers. The `Broker` was created when you labeled your namespace as ready for eventing, but it is important to verify that your `Broker` is working correctly. In this guide, you will use the default broker.
 
 1. Run the following command to verify that the `Broker` is in a healthy state:
 
