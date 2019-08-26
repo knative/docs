@@ -218,10 +218,7 @@ Your event consumers receive the events sent by event producers. In this step, y
 ### Creating `Triggers`
 
 A [Trigger](./broker-trigger.md#trigger) defines the events that you want each of your event consumers 
-to receive. Your `Broker` uses triggers to forward events to the right consumers. Because all events 
-in Knative align with the [CloudEvents](https://cloudevents.io/) specification, each event in Knative must include 
-the `type` and `source` attributes. Each trigger uses the `type` and `source` attributes to match events 
-to consumers, where a trigger's `filter` specifies the event `type` attribute, and a trigger's `subscriber` defines the event `source` attribute.
+to receive. Your `Broker` uses triggers to forward events to the right consumers. Each trigger can specify a filter to select relevant events based on the Cloud Event context attributes.
 
 
 1. To create the first `Trigger`, run the following command:
@@ -234,7 +231,7 @@ to consumers, where a trigger's `filter` specifies the event `type` attribute, a
       name: hello-display
     spec:
       filter:
-        sourceAndType:
+        attributes:
           type: greeting
       subscriber:
         ref:
@@ -256,7 +253,7 @@ to consumers, where a trigger's `filter` specifies the event `type` attribute, a
       name: goodbye-display
     spec:
       filter:
-        sourceAndType:
+        attributes:
           source: sendoff
       subscriber:
         ref:
