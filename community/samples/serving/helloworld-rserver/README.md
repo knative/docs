@@ -1,13 +1,14 @@
 ---
-title: "Hello World - R"
-linkTitle: "R"
+title: "Hello World - R server"
+linkTitle: "R server"
 weight: 1
 type: "docs"
 ---
 
-A simple web app that executes an R script. The R script reads an env
-variable `TARGET` and prints `Hello ${TARGET}!`. If the `TARGET` environment
-variable is not specified, the script uses `World`.
+A simple web app created with R package, [plumber](https://www.rplumber.io).
+plumber creates a REST API by adding annotations to your R code. The R script
+reads an environment variable `TARGET` and prints `Hello ${TARGET}!`. If the
+`TARGET` environment variable is not specified, the script uses `World`.
 
 Follow the steps below to create the sample code and then deploy the app to your
 cluster. You can also download a working copy of the sample, by running the
@@ -31,68 +32,48 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-r
 1. Create a new file named `HelloWorld.R` and paste the following script:
 
    ```R
-   #!/usr/bin/Rscript
-   TARGET <- Sys.getenv("TARGET", "World")
+   #' HelloWorld function
+   #' @get /
+   #' @html
+   function() {
+     TARGET <- Sys.getenv("TARGET", "World")
 
-   message = paste("Hello ", TARGET, "!", sep = "")
-   print(message)
+     message = paste("Hello ", TARGET, "!", sep = "")
+     print(message)
+   }
    ```
 
-   1. Create a new file named `invoke.go` and paste the following code. We use a
-      basic web server written in Go to execute the shell script:
+   This file defines the endpoint `/`, using plumber annotations.
 
-      ```go
-      package main
+   1. Create a new file named `server.R` and paste the following code:
 
-      import (
-         "fmt"
-         "log"
-         "net/http"
-         "os"
-         "os/exec"
-      )
+      ```R
+      library(plumber) # https://www.rplumber.io/
 
-      func handler(w http.ResponseWriter, r *http.Request) {
-         cmd := exec.CommandContext(r.Context(), "Rscript", "HelloWorld.R")
-         cmd.Stderr = os.Stderr
-         out, err := cmd.Output()
-         if err != nil {
-             w.WriteHeader(500)
-         }
-         w.Write(out)
-      }
-
-      func main() {
-         http.HandleFunc("/", handler)
-
-         port := os.Getenv("PORT")
-         if port == "" {
-             port = "8080"
-         }
-
-         log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
-      }
+      # Translate the HelloWorld file into a Plumber API
+      r <- plumb("HelloWorld.R")
+      # Get the PORT env var
+      PORT <- strtoi(Sys.getenv("PORT", 8080))
+      # Run the API
+      r$run(port=PORT, host="0.0.0.0")
       ```
 
-   1. Create a new file named `Dockerfile` and copy the code block below into it.
+   1. Create a new file named `Dockerfile` and paste the following code:
 
       ```docker
-      # Build executable binary
-      FROM golang:1.11 AS builder
-
-      WORKDIR $GOPATH
-
-      COPY invoke.go .
-      RUN go build -o /go/bin/invoke
-
-      # Build r-base image
+      # The official R base image
+      # https://hub.docker.com/_/r-base
       FROM r-base:3.6.0
 
-      # Copy Go binary
-      COPY --from=builder /go/bin/invoke /go/bin/invoke
-      COPY HelloWorld.R .
+      # Copy local code to the container image.
+      WORKDIR /usr/src/app
+      COPY . .
 
-      ENTRYPOINT ["/go/bin/invoke"]
+      # Install R packages
+      RUN Rscript -e "install.packages('plumber', repos='http://cran.us.r-project.org/')"
+
+      # Run the web service on container startup.
+      CMD ["Rscript", "server.R"]
       ```
 
 
@@ -104,16 +85,16 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-r
    apiVersion: serving.knative.dev/v1alpha1
    kind: Service
    metadata:
-     name: helloworld-r
+     name: helloworld-rserver
      namespace: default
    spec:
      template:
        spec:
          containers:
-           - image: docker.io/{username}/helloworld-r
-             env:
-               - name: TARGET
-                 value: "R Sample v1"
+         - image: docker.io/{username}/helloworld-rserver
+           env:
+           - name: TARGET
+             value: "R Server Sample v1"
    ```
 
 ## Building and deploying the sample
@@ -127,10 +108,10 @@ folder) you're ready to build and deploy the sample app.
 
    ```shell
    # Build the container on your local machine
-   docker build -t {username}/helloworld-r .
+   docker build -t {username}/helloworld-rserver .
 
    # Push the container to docker registry
-   docker push {username}/helloworld-r
+   docker push {username}/helloworld-rserver
    ```
 
 1. After the build has completed and the container is pushed to docker hub, you
@@ -180,17 +161,17 @@ folder) you're ready to build and deploy the sample app.
    ```
 
 1. Test your app by sending it a request. Use the following `curl` command with
-   the domain URL `helloworld-r.default.example.com` and `EXTERNAL-IP`
+   the domain URL `helloworld-rserver.default.example.com` and `EXTERNAL-IP`
    address that you retrieved in the previous steps:
 
    ```shell
-   curl -H "Host: helloworld-r.default.example.com" http://{EXTERNAL_IP_ADDRESS}
+   curl -H "Host: helloworld-rserver.default.example.com" http://{EXTERNAL_IP_ADDRESS}
    ```
 
    Example:
 
    ```shell
-   curl -H "Host: helloworld-r.default.example.com" http://35.203.155.229
+   curl -H "Host: helloworld-rserver.default.example.com" http://35.203.155.229
    [1] "Hello R Sample v1!"
    ```
 
