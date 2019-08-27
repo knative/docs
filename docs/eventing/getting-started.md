@@ -140,7 +140,7 @@ Your event consumers receive the events sent by event producers. In this step, y
               # Source code: https://github.com/knative/eventing-contrib/blob/release-0.6/cmd/event_display/main.go
               image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display@sha256:37ace92b63fc516ad4c8331b6b3b2d84e4ab2d8ba898e387c0b6f68f0e3081c4
 
-     ---
+    ---
 
     # Service pointing at the previous Deployment. This will be the target for event
     # consumption.
