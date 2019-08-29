@@ -23,6 +23,7 @@ Most Knative Eventing tracing configuration is handled by the `config-tracing` C
  - Brokers
  - Triggers
  - Channel Dispatchers
+     - Channel Dispatchers are the name we use to describe the data plane portion of a Channel. When an event is sent to a Channel, the code handling that event is the Channel's dispatcher. Similarly, when an event is sent from a Channel to one of its Subscribers, the code handling sending that event is the Channel's dispatcher.
 
 Here is an example ConfigMap that samples 10% of all CloudEvents.
 ```yaml
