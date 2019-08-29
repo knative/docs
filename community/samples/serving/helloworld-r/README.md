@@ -38,57 +38,73 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-r
    print(message)
    ```
 
-1. Create a new file named `app.py` and paste the following code. We use a
-   basic web server written in Python to execute the R script:
+   1. Create a new file named `invoke.go` and paste the following code. We use a
+      basic web server written in Go to execute the shell script:
 
-   ```py
-   import os
-   import subprocess
+      ```go
+      package main
 
-   from flask import Flask
+      import (
+         "fmt"
+         "log"
+         "net/http"
+         "os"
+         "os/exec"
+      )
 
-   app = Flask(__name__)
+      func handler(w http.ResponseWriter, r *http.Request) {
+         cmd := exec.CommandContext(r.Context(), "Rscript", "HelloWorld.R")
+         cmd.Stderr = os.Stderr
+         out, err := cmd.Output()
+         if err != nil {
+             w.WriteHeader(500)
+         }
+         w.Write(out)
+      }
 
-   @app.route('/')
-   def hello_world():
-       try:
-           output = subprocess.check_output('/usr/bin/Rscript HelloWorld.R', shell=True)
-           print(output)
-       except subprocess.CalledProcessError:
-           return "Error in R script.", 500
+      func main() {
+         http.HandleFunc("/", handler)
 
-       return output
+         port := os.Getenv("PORT")
+         if port == "" {
+             port = "8080"
+         }
 
+         log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
+      }
+      ```
 
-   if __name__ == "__main__":
-       app.run(debug=True,host='0.0.0.0',port=int(os.environ.get('PORT', 8080)))
-   ```
+   1. Create a new file named `Dockerfile` and copy the code block below into it.
 
-1. Create a new file named `Dockerfile` and copy the code block below into it.
+      ```docker
+      # Use the offical Golang image to create a build artifact.
+      # This is based on Debian and sets the GOPATH to /go.
+      # https://hub.docker.com/_/golang
+      FROM golang:1.12 as builder
 
-   ```docker
-   # Use the official Python image.
-   # https://hub.docker.com/_/python
-   FROM python:3.7
+      # Copy local code to the container image.
+      WORKDIR /go/src/github.com/knative/docs/helloworld-r
+      COPY invoke.go .
 
-   # Copy local code to the container image.
-   ENV APP_HOME /app
-   WORKDIR $APP_HOME
-   COPY . .
+      # Build the command inside the container.
+      # (You may fetch or manage dependencies here,
+      # either manually or with a tool like "godep".)
+      RUN CGO_ENABLED=0 GOOS=linux go build -v -o invoke
 
-   # Install production dependencies.
-   RUN pip install Flask gunicorn
+      # The official R base image
+      # https://hub.docker.com/_/r-base
+      # Use a Docker multi-stage build to create a lean production image.
+      # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
+      FROM r-base:3.6.0
 
-   # Install R
-   RUN apt-get update && \
-       apt-get install -y r-base
+      # Copy Go binary
+      COPY --from=builder /go/src/github.com/knative/docs/helloworld-r/invoke /invoke
+      COPY HelloWorld.R .
 
-   # Run the web service on container startup. Here we use the gunicorn
-   # webserver, with one worker process and 8 threads.
-   # For environments with multiple CPU cores, increase the number of workers
-   # to be equal to the cores available.
-   CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 app:app
-   ```
+      # Run the web service on container startup.
+      CMD ["/invoke"]
+      ```
+
 
 1. Create a new file, `service.yaml` and copy the following service definition
    into the file. Make sure to replace `{username}` with your Docker Hub
