@@ -43,9 +43,23 @@ To see your current configuration:
 kubectl -n knative-eventing get configmap config-tracing -oyaml
 ```
 
-The `_example` section explains all the available options.
+Configuration options:
 
-Updating the ConfigMap will cause the new configuration to go live almost immediately.
+  * `backend`: Valid values are `zipkin`, `stackdriver`, or `none`. The default is `none`.
+
+ * `zipkin-endpoint`: Specifies the URL to the zipkin collector where you want to send the traces. Must be set if backend is set to `zipkin`.
+
+ * `stackdriver-project-id`: Specifies the GCP project into which stackdriver traces will be written. Only has an effect if the back is set to `stackdriver`. If unspecified, the project-id is read from GCP metadata when running on GCP.
+
+ * `sample-rate`: Valid values are one digit decimals from `0` to `1`. Specifies the percentage amount of all the requests that you want to trace.
+
+ * `debug`: Valid values are `true` or `false`. If not specified, defaults to `false`. Set to `true` to enable debug mode, which bypasses sampling and sends all spans to the server.
+
+Updating the ConfigMap will cause the new configuration to go live almost immediately:
+
+```shell script
+kubectl -n knative-eventing edit configmap config-tracing
+```
 
 ### Importer Configuration
 
@@ -60,7 +74,7 @@ To access the traces, you will use a tool such as Zipkin or Jaeger. Follow the K
 
 ### Example
 
-Everything happens in the `default` namespace.
+For this example, everything happens in the `default` namespace.
 - Broker named `default`
 - Two Triggers associated with the Broker:
     - `mutator-t` - Filters to only allow events whose type is `original`. It will reply with an identical event, except the replied event's type will be `mutated`.
@@ -70,7 +84,7 @@ Everything happens in the `default` namespace.
 So we expect the event to do the  following:
 
 1. Go to the Broker's ingress Pod.
-1. Go to the InMemory dispatcher.
+1. Go to the `imc-dispatcher` Channel (imc stands for InMemoryChannel).
 1. Go to both Triggers.
     1. Go to the Broker's filter Pod for the Trigger `display-mutated`. The Trigger's filter ignores this event.
     1. Go to the Broker's filter Pod for the Trigger `mutator-t`. The filter does pass, so it goes to the Knative Service pointed at.
