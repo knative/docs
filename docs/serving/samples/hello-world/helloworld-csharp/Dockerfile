@@ -5,11 +5,11 @@ WORKDIR /app
 
 # Install production dependencies.
 # Copy csproj and restore as distinct layers.
-COPY *.csproj .
+COPY *.csproj ./
 RUN dotnet restore
 
 # Copy local code to the container image.
-COPY . .
+COPY . ./
 WORKDIR /app
 
 # Build a release artifact.
