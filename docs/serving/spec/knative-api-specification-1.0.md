@@ -149,7 +149,7 @@ Service object should provide sufficient controls to cover most of application
 deployment scenarios (by frequency).
 
 Unless otherwise noted, implementations of this specification MAY define
-additonal fields for these resources, however, those extensions MUST NOT
+additional fields for these resources, however, those extensions MUST NOT
 contradict the semantics defined within this specification.
 
 ## Service
