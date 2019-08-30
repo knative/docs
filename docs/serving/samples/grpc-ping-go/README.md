@@ -1,11 +1,18 @@
 ---
-title: "gRPC server - Go"
+title: "gRPC Server - Go"
 #linkTitle: ""
 weight: 1
 type: "docs"
 ---
 
-A simple gRPC server written in Go that you can use for testing.
+A [gRPC](https://grpc.io) server written in Go.
+
+This sample can be used to try out gRPC, HTTP/2, and custom port configuration
+in a knative service.
+
+The container image is built with two binaries: the server and the client.
+This is done for ease of testing and is not a recommended practice
+for production containers.
 
 ## Prerequisites
 
@@ -38,7 +45,7 @@ A simple gRPC server written in Go that you can use for testing.
 
 3. Update the `service.yaml` file in the project to reference the published image from step 1.
 
-   Replace `{username}` in `service.yaml` with your DockerHub username:
+   Replace `{username}` in `service.yaml` with your Docker Hub user name:
    
    
   ```yaml
@@ -89,7 +96,8 @@ kubectl get revisions --output yaml
 
 ## Testing the service
 
-Testing the gRPC service uses the gRPC client built into the container.
+Testing the gRPC service requires using a gRPC client built from the same
+protobuf definition used by the server.
 
 1. Fetch the created ingress hostname and IP.
 
@@ -98,8 +106,13 @@ Testing the gRPC service uses the gRPC client built into the container.
    export SERVICE_IP=$(kubectl get svc istio-ingressgateway --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*].ip}")
    ```
 
-1. Use the containerized client to send message streams to the gRPC server (replacing
-   `{username}`):
+1. Use the gRPC client to send message streams to the gRPC server.
+
+   The Dockerfile builds the client binary. To run the client you will use the
+   same container image deployed for the server with an override to the
+   entrypoint command to use the client binary instead of the server binary.
+
+   Replace `{username}` with your Docker Hub user name and run the command:
 
    ```shell
    docker run --rm -it {username}/grpc-ping-go \
@@ -109,5 +122,6 @@ Testing the gRPC service uses the gRPC client built into the container.
      -insecure
    ```
 
-  The arguments after the container tag `{username}/grpc-ping-go` replace the container's default entrypoint which starts the server with a command that starts the gRPC client.
+   The arguments after the container tag `{username}/grpc-ping-go` are used
+   instead of the entrypoint command defined in the Dockerfile `CMD` statement.
   
