@@ -100,5 +100,3 @@ xxxxxxx-ingressgateway   LoadBalancer   12.34.567.890   98.765.43.210   80:32380
 ```
 
 > Note: Updating the external IP address can take several minutes.
-
-
