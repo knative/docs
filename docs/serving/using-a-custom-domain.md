@@ -176,5 +176,3 @@ If you are using Google Cloud DNS, you can find step-by-step instructions in the
 Once the domain update has propagated, you can access your app using the fully
 qualified domain name of the deployed route, for example
 `http://helloworld-go.default.mydomain.com`
-
-
