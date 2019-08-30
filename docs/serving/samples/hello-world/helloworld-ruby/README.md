@@ -53,9 +53,9 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-ruby
    details.
 
    ```docker
-   # Use the official Ruby image.
+   # Use the official lightweight Ruby image.
    # https://hub.docker.com/_/ruby
-   FROM ruby:2.5
+   FROM ruby:2.5-slim
 
    # Install production dependencies.
    WORKDIR /usr/src/app
@@ -64,7 +64,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-ruby
    RUN bundle install
 
    # Copy local code to the container image.
-   COPY . .
+   COPY . ./
 
    # Run the web service on container startup.
    CMD ["ruby", "./app.rb"]
