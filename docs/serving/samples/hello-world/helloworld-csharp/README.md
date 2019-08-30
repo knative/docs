@@ -75,24 +75,41 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-csharp
 
    ```docker
    # Use Microsoft's official .NET image.
-   # https://hub.docker.com/r/microsoft/dotnet
+   # https://hub.docker.com/_/microsoft-dotnet-core-sdk/
    FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build
    WORKDIR /app
-
-   # copy csproj and restore as distinct layers
+   
+   # Install production dependencies.
+   # Copy csproj and restore as distinct layers.
    COPY *.csproj .
    RUN dotnet restore
-
-   # copy everything else and build app
+   
+   # Copy local code to the container image.
    COPY . .
    WORKDIR /app
+   
+   # Build a release artifact.
    RUN dotnet publish -c Release -o out
-
-
+   
+   
+   # Use Microsoft's official .NET image.
+   # https://hub.docker.com/_/microsoft-dotnet-core-aspnet/
    FROM mcr.microsoft.com/dotnet/core/aspnet:2.2 AS runtime
    WORKDIR /app
    COPY --from=build /app/out ./
+   
+   # Run the web service on container startup.
    ENTRYPOINT ["dotnet", "helloworld-csharp.dll"]
+   ```
+
+1. Create a `.dockerignore` file to ensure that any files related to a local
+   build do not affect the container that you build for deployment.
+
+   ```ignore
+   Dockerfile
+   README.md
+   **/obj/
+   **/bin/
    ```
 
 1. Create a new file, `service.yaml` and copy the following service definition
