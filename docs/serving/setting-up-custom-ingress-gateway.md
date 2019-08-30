@@ -237,8 +237,7 @@ If there is a change in service ports (compared with that of
 
 ## Step 3: Update Gateway Configmap
 
-Update gateway configmap `config-istio` under `knative-serving`
-namespace:
+Update gateway configmap `config-istio` under `knative-serving` namespace:
 
 ```shell
 kubectl edit configmap config-istio -n knative-serving
