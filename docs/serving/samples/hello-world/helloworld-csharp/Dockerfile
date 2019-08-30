@@ -1,4 +1,4 @@
-# Use Microsoft's official .NET image.
+# Use Microsoft's official build .NET image.
 # https://hub.docker.com/_/microsoft-dotnet-core-sdk/
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build
 WORKDIR /app
@@ -16,7 +16,7 @@ WORKDIR /app
 RUN dotnet publish -c Release -o out
 
 
-# Use Microsoft's official .NET image.
+# Use Microsoft's official runtime .NET image.
 # https://hub.docker.com/_/microsoft-dotnet-core-aspnet/
 FROM mcr.microsoft.com/dotnet/core/aspnet:2.2 AS runtime
 WORKDIR /app
