@@ -148,9 +148,38 @@ Service object to reduce the cognitive overhead for application developers – t
 Service object should provide sufficient controls to cover most of application
 deployment scenarios (by frequency).
 
-Unless otherwise noted, implementations of this specification MAY define
-additional fields for these resources, however, those extensions MUST NOT
-contradict the semantics defined within this specification.
+## Extentions
+
+Extending the Knative resource model allows for custom semantics to be
+offered by implementions of the specification. Unless otherwise noted,
+implementations of this specification MAY define extensions but those
+extensions MUST NOT contradict the semantics defined within this specification.
+
+There are several ways in which implementations can extend the model:
+- Annotations and Labels
+  Allowing end users to include annotations or labels on the Knative resources
+  allows for them to indicate that they would like some additional semantics
+  applied to those resources. When defining annotations, or labels, it
+  is STRONGLY RECOMMENDED that they have some vendor-specific prefix to
+  avoid any potential naming conflict with other extensions or future
+  annotations defined by the specification.
+
+  Note that this would allow for new controllers to be added to the system,
+  to detect these annotations/labels and act upon them, without requiring
+  code changes to the core Knative components. As such, when possible, this
+  mechanism is preferred.
+
+- Additional Properties
+  There might be times when annotations and labels can not be used to
+  properly (or easily) allow end users to convey their desired semantics,
+  in which case additional well-defined properties might need to be
+  defined by implementations.
+
+  In these cases vendor-specific properties MAY be defined and it is
+  STRONGLY RECOMMENDED that they be named, or prefixed, in such a way
+  to clearly indicate their scope and purpose. Choosing a name that
+  is too generic might lead to conflicts with other vendor extensions
+  or future changes to the specification.
 
 ## Service
 
