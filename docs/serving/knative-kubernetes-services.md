@@ -40,15 +40,14 @@ that are active when running Knative Serving.
     This should return the following output:
 
      ```sh
-```
-NAME                     DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-activator                1         1         1            1           1h
-autoscaler               1         1         1            1           1h
-controller               1         1         1            1           1h
-networking-certmanager   1         1         1            1           1h
-networking-istio         1         1         1            1           1h
-webhook                  1         1         1            1           1h
-```
+     NAME                     DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+     activator                1         1         1            1           1h
+     autoscaler               1         1         1            1           1h
+     controller               1         1         1            1           1h
+     networking-certmanager   1         1         1            1           1h
+     networking-istio         1         1         1            1           1h
+     webhook                  1         1         1            1           1h
+     ```
 
 These services and deployments are installed by the `serving.yaml` file during
 install. The next section describes their function.
