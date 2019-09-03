@@ -115,7 +115,7 @@ protobuf definition used by the server.
    Replace `{username}` with your Docker Hub user name and run the command:
 
    ```shell
-   docker run --rm -it {username}/grpc-ping-go \
+   docker run --rm {username}/grpc-ping-go \
      /client \
      -server_addr="${SERVICE_IP}:80" \
      -server_host_override="grpc-ping.default.example.com" \
