@@ -55,5 +55,3 @@ In order to access request traces, you use the Jaeger visualization tool.
     traces. Click on a trace to see a detailed view of a specific call.
 
 <!--TODO: Consider adding a video here. -->
-
-
