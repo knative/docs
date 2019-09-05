@@ -2,6 +2,7 @@ aliases:
   eng-approvers:
   - evankanderson
   - mattmoor
+  - dgerd
   - vaikas-google
   - rgregg
   - mchmarny
