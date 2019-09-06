@@ -10,7 +10,7 @@ COPY . ./
 # Build the command inside the container.
 # (You may fetch or manage dependencies here,
 # either manually or with a tool like "godep".)
-RUN CGO_ENABLED=0 GOOS=linux go build -v -o helloworld
+RUN CGO_ENABLED=0 GOOS=linux go build -v -o helloworld-server
 
 # Use the official Alpine image for a lean production container.
 # https://hub.docker.com/_/alpine
@@ -19,7 +19,7 @@ FROM alpine:3
 RUN apk add --no-cache ca-certificates
 
 # Copy the binary to the production image from the builder stage.
-COPY --from=builder /app/helloworld /helloworld
+COPY --from=builder /app/helloworld-server /helloworld-server
 
 # Run the web service on container startup.
-CMD ["/helloworld"]
+CMD ["/helloworld-server"]
