@@ -1,4 +1,3 @@
-
 Follow this guide to install Knative components on a platform of your choice.
 
 ## Choosing a Kubernetes cluster
@@ -36,7 +35,11 @@ component.
 
 ## Installing Knative with Gloo
 
-[Install with Gloo](./Knative-with-Gloo.md): Gloo functions as a lightweight gateway for Knative. Choose this option if you don't require a service mesh in your cluster and want a lightweight alternative to Istio. Gloo supports all documented Knative features, as well as extensions to Serving such as Eventing and Monitoring.
+[Install with Gloo](./Knative-with-Gloo.md): Gloo functions as a lightweight
+gateway for Knative. Choose this option if you don't require a service mesh in
+your cluster and want a lightweight alternative to Istio. Gloo supports all
+documented Knative features, as well as extensions to Serving such as Eventing
+and Monitoring.
 
 ## Installing Knative with Istio
 
@@ -137,5 +140,3 @@ and set up an Istio IP range for outbound network access:
 ## Checking the version of your Knative Serving installation
 
 - [Checking the version of your Knative Serving installation](./check-install-version.md)
-
-
