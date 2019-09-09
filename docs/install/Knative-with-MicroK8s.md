@@ -27,8 +27,9 @@ You can find [guides for other platforms here](./README.md).
 ```shell
    echo 'N;' | microk8s.enable knative
 ```
+This command will install all available Knative components.
 
-This command will install all available Knative v0.7.1 components.
+NOTE: As of this writing, MicroK8s comes with Knative version 0.7.1, this doc will be updated to reflect versioning changes. 
 
 You can check the status of Knative pods using the following commands:
 
@@ -50,4 +51,10 @@ Knative can be removed from MicroK8s using the following command:
 
 ```shell
 sudo microk8s.disable knative
+```
+
+To delete MicroK8s along with Knative, Istio, and any deployed apps run:
+
+```shell
+sudo snap remove microk8s
 ```
