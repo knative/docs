@@ -5,7 +5,8 @@ weight: 10
 type: "docs"
 ---
 
-This guide walks you through the installation of Knative using [MicroK8s](https://microk8s.io).
+[MicroK8s](https://microk8s.io) is a lightweight, powerful fully-conformant Kubernetes that tracks upstream releases and makes clustering trivial. It can run on any flavor of Linux that supports [Snap](https://snapcraft.io) packages. It can run on Windows and Mac OS using [Mutlipass](https://multipass.run).
+This guide walks you through the installation of Knative using MicroK8s.
 
 You can find [guides for other platforms here](./README.md).
 
@@ -27,16 +28,12 @@ You can find [guides for other platforms here](./README.md).
    echo 'N;' | microk8s.enable knative
 ```
 
-This command will install all available Knative components.
+This command will install all available Knative components, Serving, Eventing and Monitoring.
 
 You can check the status of Knative pods using the following commands:
 
 ```shell
    kubectl get pods -n knative-serving
-```
-
-```shell
-   kubectl get pods -n knative-build
 ```
 
 ```shell
@@ -49,8 +46,8 @@ You can check the status of Knative pods using the following commands:
 
 ## Cleaning up
 
-Delete MicroK8s along with Knative, Istio, and any deployed apps:
+Knative can be removed from MicroK8s using the following command:
 
 ```shell
-sudo snap remove microk8s
+sudo microk8s.disable knative
 ```
