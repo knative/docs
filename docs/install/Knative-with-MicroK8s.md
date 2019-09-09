@@ -28,7 +28,7 @@ You can find [guides for other platforms here](./README.md).
    echo 'N;' | microk8s.enable knative
 ```
 
-This command will install all available Knative components, Serving, Eventing and Monitoring.
+This command will install all available Knative v0.7.1 components.
 
 You can check the status of Knative pods using the following commands:
 
