@@ -78,5 +78,3 @@ discovery issues for metrics.
   Status -> Service Discovery
 - To see a specific metric you can search for in the in search box on the top of
   the page
-
-
