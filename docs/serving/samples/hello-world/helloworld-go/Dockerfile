@@ -7,9 +7,7 @@ FROM golang:1.13 as builder
 WORKDIR /app
 COPY . ./
 
-# Build the command inside the container.
-# (You may fetch or manage dependencies here,
-# either manually or with a tool like "godep".)
+# Build the binary.
 RUN CGO_ENABLED=0 GOOS=linux go build -v -o helloworld-server
 
 # Use the official Alpine image for a lean production container.
