@@ -108,6 +108,8 @@ func prepareWorkDir(t *testing.T, srcDir, workDir string, preCommands []sampleap
 
 func pushDockerImage(t *testing.T, imagePath, workDir string) {
 	t.Logf("Pushing docker image to: '%s'", imagePath)
+	t.Logf("image path is: %s", imagePath)
+	t.Logf("work dir is: %s", workDir)
 	if output, err := exec.Command("docker", "build", "-t", imagePath, workDir).CombinedOutput(); err != nil {
 		t.Fatalf("Error building docker image: %v", strings.TrimSpace(string(output)))
 	}
