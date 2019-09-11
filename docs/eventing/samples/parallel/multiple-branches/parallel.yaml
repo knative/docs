@@ -1,12 +1,12 @@
 apiVersion: messaging.knative.dev/v1alpha1
-kind: Choice
+kind: Parallel
 metadata:
-  name: odd-even-choice
+  name: odd-even-parallel
 spec:
   channelTemplate:
     apiVersion: messaging.knative.dev/v1alpha1
     kind: InMemoryChannel
-  cases:
+  branches:
   - filter:
       ref:
         apiVersion: serving.knative.dev/v1alpha1

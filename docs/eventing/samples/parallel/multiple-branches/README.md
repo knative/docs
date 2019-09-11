@@ -1,9 +1,9 @@
-We are going to create a Choice with two cases:
+We are going to create a Parallel with two branches:
 
-- the first case accepts events with a time that is is even
-- the second case accepts events with a time that is is odd
+- the first branch accepts events with a time that is is even
+- the second branch accepts events with a time that is is odd
 
-The events produced by each case are then sent to the `event-display` service.
+The events produced by each branch are then sent to the `event-display` service.
 
 ## Prerequisites
 
@@ -12,7 +12,7 @@ Please refer to the sample overview for the [prerequisites](../README.md).
 ### Create the Knative Services
 
 Let's first create the filter and transformer services that we will use in our
-Choice.
+Parallel.
 
 ```yaml
 apiVersion: serving.knative.dev/v1alpha1
@@ -78,20 +78,20 @@ spec:
 kubectl create -f ./filters.yaml -f ./transformers.yaml
 ```
 
-### Create the Choice
+### Create the Parallel
 
-The `choice.yaml` file contains the specifications for creating the Choice.
+The `parallel.yaml` file contains the specifications for creating the Parallel.
 
 ```yaml
 apiVersion: messaging.knative.dev/v1alpha1
-kind: Choice
+kind: Parallel
 metadata:
-  name: odd-even-choice
+  name: odd-even-parallel
 spec:
   channelTemplate:
     apiVersion: messaging.knative.dev/v1alpha1
     kind: InMemoryChannel
-  cases:
+  branches:
     - filter:
         ref:
           apiVersion: serving.knative.dev/v1alpha1
@@ -119,10 +119,10 @@ spec:
 ```
 
 ```shell
-kubectl create -f ./choice.yaml
+kubectl create -f ./parallel.yaml
 ```
 
-### Create the CronJobSource targeting the Choice
+### Create the CronJobSource targeting the Parallel
 
 This will create a CronJobSource which will send a CloudEvent with {"message":
 "Even or odd?"} as the data payload every minute.
@@ -137,8 +137,8 @@ spec:
   data: '{"message": "Even or odd?"}'
   sink:
     apiVersion: messaging.knative.dev/v1alpha1
-    kind: Choice
-    name: odd-even-choice
+    kind: Parallel
+    name: odd-even-parallel
 ```
 
 ```shell
@@ -166,7 +166,7 @@ Context Attributes,
   time: 2019-07-31T18:10:00.000309586Z
   datacontenttype: application/json; charset=utf-8
 Extensions,
-  knativehistory: odd-even-choice-kn-choice-0-kn-channel.default.svc.cluster.local, odd-even-choice-kn-choice-kn-channel.default.svc.cluster.local
+  knativehistory: odd-even-parallel-kn-parallel-0-kn-channel.default.svc.cluster.local, odd-even-parallel-kn-parallel-kn-channel.default.svc.cluster.local
 Data,
   {
     "message": "we are even!"
@@ -181,7 +181,7 @@ Context Attributes,
   time: 2019-07-31T18:11:00.002649881Z
   datacontenttype: application/json; charset=utf-8
 Extensions,
-  knativehistory: odd-even-choice-kn-choice-1-kn-channel.default.svc.cluster.local, odd-even-choice-kn-choice-kn-channel.default.svc.cluster.local
+  knativehistory: odd-even-parallel-kn-parallel-1-kn-channel.default.svc.cluster.local, odd-even-parallel-kn-parallel-kn-channel.default.svc.cluster.local
 Data,
   {
     "message": "this is odd!"
