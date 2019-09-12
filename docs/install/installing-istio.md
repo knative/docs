@@ -222,9 +222,9 @@ helm template --namespace=istio-system \
 ### Updating your install to use cluster local gateway
 
 If you want your Routes to be visible only inside the cluster, you may want to
-enable [cluster local routes](../serving/cluster-local-route.md). To use
-this feature, add an extra Istio cluster local gateway to your cluster. Enter
-the following command to add the cluster local gateway to an existing Istio
+enable [cluster local routes](../serving/cluster-local-route.md). To use this
+feature, add an extra Istio cluster local gateway to your cluster. Enter the
+following command to add the cluster local gateway to an existing Istio
 installation:
 
 ```shell

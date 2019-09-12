@@ -83,5 +83,3 @@ in the Knative Serving repository.
 
 See the [Knative Serving Issues](https://github.com/knative/serving/issues) page
 for a full list of known issues.
-
-
