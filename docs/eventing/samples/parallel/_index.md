@@ -1,6 +1,6 @@
 ---
-title: "Choice Example"
-linkTitle: "Choice"
+title: "Parallel Example"
+linkTitle: "Parallel"
 weight: 10
 type: "docs"
 ---

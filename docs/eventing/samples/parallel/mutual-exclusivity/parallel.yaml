@@ -1,12 +1,12 @@
 apiVersion: messaging.knative.dev/v1alpha1
-kind: Choice
+kind: Parallel
 metadata:
-  name: me-odd-even-choice
+  name: me-odd-even-parallel
 spec:
   channelTemplate:
     apiVersion: messaging.knative.dev/v1alpha1
     kind: InMemoryChannel
-  cases:
+  branches:
   - filter:
       uri: "http://me-even-odd-switcher.default.svc.cluster.local/0"
     subscriber:

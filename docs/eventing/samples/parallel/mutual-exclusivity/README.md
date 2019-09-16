@@ -1,13 +1,13 @@
-In this example, we are going to see how we can create a Choice with mutually
-exclusive cases.
+In this example, we are going to see how we can create a Parallel with mutually
+exclusive branches.
 
 This example is the same as the
-[multiple cases example](../multiple-cases/README.md) except that we are now
+[multiple barnaches example](../multiple-branches/README.md) except that we are now
 going to rely on the Knative
-[switcher](https://github.com/lionelvillard/knative-functions#switcher) function
+[switch](https://github.com/lionelvillard/knative-functions#switch) function
 to provide a soft mutual exclusivity guarantee.
 
-NOTE: this example has to be deployed in the default namespace.
+NOTE: this example must be deployed in the default namespace.
 
 ## Prerequisites
 
@@ -16,7 +16,7 @@ Please refer to the sample overview for the [prerequisites](../README.md).
 ### Create the Knative Services
 
 Let's first create the switcher and transformer services that we will use in our
-Choice.
+Parallel.
 
 ```yaml
 apiVersion: serving.knative.dev/v1alpha1
@@ -69,20 +69,20 @@ spec:
 kubectl create -f ./switcher.yaml -f ./transformers.yaml
 ```
 
-### Create the Choice
+### Create the Parallel object
 
-The `choice.yaml` file contains the specifications for creating the Choice.
+The `parallel.yaml` file contains the specifications for creating the Parallel object.
 
 ```yaml
 apiVersion: messaging.knative.dev/v1alpha1
-kind: Choice
+kind: Parallel
 metadata:
-  name: me-odd-even-choice
+  name: me-odd-even-parallel
 spec:
   channelTemplate:
     apiVersion: messaging.knative.dev/v1alpha1
     kind: InMemoryChannel
-  cases:
+  branches:
     - filter:
         uri: "http://me-even-odd-switcher.default.svc.cluster.local/0"
       subscriber:
@@ -104,10 +104,10 @@ spec:
 ```
 
 ```shell
-kubectl create -f ./choice.yaml
+kubectl create -f ./parallel.yaml
 ```
 
-### Create the CronJobSource targeting the Choice
+### Create the CronJobSource targeting the Parallel object
 
 This will create a CronJobSource which will send a CloudEvent with {"message":
 "Even or odd?"} as the data payload every minute.
@@ -122,8 +122,8 @@ spec:
   data: '{"message": "Even or odd?"}'
   sink:
     apiVersion: messaging.knative.dev/v1alpha1
-    kind: Choice
-    name: me-odd-even-choice
+    kind: Parallel
+    name: me-odd-even-parallel
 ```
 
 ```shell
@@ -151,7 +151,7 @@ Context Attributes,
   time: 2019-07-31T20:56:00.000477587Z
   datacontenttype: application/json; charset=utf-8
 Extensions,
-  knativehistory: me-odd-even-choice-kn-choice-kn-channel.default.svc.cluster.local, me-odd-even-choice-kn-choice-0-kn-channel.default.svc.cluster.local
+  knativehistory: me-odd-even-parallel-kn-parallel-kn-channel.default.svc.cluster.local, me-odd-even-parallel-kn-parallel-0-kn-channel.default.svc.cluster.local
 Data,
   {
     "message": "we are even!"
@@ -166,7 +166,7 @@ Context Attributes,
   time: 2019-07-31T20:57:00.000312243Z
   datacontenttype: application/json; charset=utf-8
 Extensions,
-  knativehistory: me-odd-even-choice-kn-choice-1-kn-channel.default.svc.cluster.local, me-odd-even-choice-kn-choice-kn-channel.default.svc.cluster.local
+  knativehistory: me-odd-even-parallel-kn-parallel-1-kn-channel.default.svc.cluster.local, me-odd-even-parallel-kn-parallel-kn-channel.default.svc.cluster.local
 Data,
   {
     "message": "this is odd!"
