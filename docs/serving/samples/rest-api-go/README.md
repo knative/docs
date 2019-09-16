@@ -24,39 +24,30 @@ like `AAPL`,`AMZN`, `GOOG`, `MSFT`, etc.
 1. Download a copy of the code:
 
    ```shell
-   git clone -b "release-0.7" https://github.com/knative/docs knative-docs
-   cd knative-docs/serving/samples/rest-api-go
+   git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
+   cd knative-docs
    ```
 
 ## Setup
 
 In order to run an application on Knative Serving a container image must be
-available to fetch from a container registry. Building and pushing a container
-image can be accomplished locally using
-[Docker](https://docs.docker.com/get-started) or
-[ko](https://github.com/google/go-containerregistry/tree/master/cmd/ko) as well
-as remotely using [Knative Build](../../../build).
+available to fetch from a container registry.
 
 This sample uses Docker for both building and pushing.
 
 To build and push to a container registry using Docker:
 
-1. Move into the sample directory:
-
-   ```shell
-   cd $GOPATH/src/github.com/knative/docs
-   ```
-
-2. Set your preferred container registry endpoint as an environment variable.
+1. From the `knative-docs` directory, run the following command to set your 
+   container registry endpoint as an environment variable.
+   
    This sample uses
    [Google Container Registry (GCR)](https://cloud.google.com/container-registry/):
-
-
+   
     ```shell
     export REPO="gcr.io/<YOUR_PROJECT_ID>"
     ```
 
-3. Set up your container registry to make sure you are ready to push.
+1. Set up your container registry to make sure you are ready to push.
 
    To push to GCR, you need to:
 
@@ -71,7 +62,7 @@ To build and push to a container registry using Docker:
    If you are using a different container registry, you will want to follow the
    registry specific instructions for both setup and authorizing the image push.
 
-4. Use Docker to build your application container:
+1. Use Docker to build your application container:
 
    ```shell
    docker build \
@@ -79,13 +70,13 @@ To build and push to a container registry using Docker:
      --file docs/serving/samples/rest-api-go/Dockerfile .
    ```
 
-5. Push your container to a container registry:
+1. Push your container to a container registry:
 
    ```shell
    docker push "${REPO}/rest-api-go"
    ```
 
-6. Substitute the image reference path in the template with our published image
+1. Substitute the image reference path in the template with our published image
    path. The command below substitutes using the \${REPO} variable into a new
    file called `docs/serving/samples/rest-api-go/sample.yaml`.
 

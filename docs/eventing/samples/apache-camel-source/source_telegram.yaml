@@ -19,6 +19,6 @@ spec:
         # Camel K option to enable serialization of the component output
         camel.component.knative.jsonSerializationEnabled: "true"
   sink:
-    apiVersion: eventing.knative.dev/v1alpha1
+    apiVersion: messaging.knative.dev/v1alpha1
     kind: Channel
     name: camel-test

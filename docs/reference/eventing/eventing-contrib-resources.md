@@ -3,6 +3,9 @@
 <li>
 <a href="#sources.eventing.knative.dev%2fv1alpha1">sources.eventing.knative.dev/v1alpha1</a>
 </li>
+<li>
+<a href="#messaging.knative.dev%2fv1alpha1">messaging.knative.dev/v1alpha1</a>
+</li>
 </ul>
 <h2 id="sources.eventing.knative.dev/v1alpha1">sources.eventing.knative.dev/v1alpha1</h2>
 <p>
@@ -54,7 +57,7 @@ string
 <td>
 <code>metadata</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#objectmeta-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
 </a>
 </em>
@@ -92,7 +95,7 @@ string
 <td>
 <code>awsCredsSecret</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#secretkeyselector-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#secretkeyselector-v1-core">
 Kubernetes core/v1.SecretKeySelector
 </a>
 </em>
@@ -105,7 +108,7 @@ Kubernetes core/v1.SecretKeySelector
 <td>
 <code>sink</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#objectreference-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
 Kubernetes core/v1.ObjectReference
 </a>
 </em>
@@ -179,7 +182,7 @@ string
 <td>
 <code>metadata</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#objectmeta-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
 </a>
 </em>
@@ -217,36 +220,9 @@ CamelSourceOriginSpec
 </tr>
 <tr>
 <td>
-<code>serviceAccountName</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>DEPRECATED: moved inside the specific CamelSourceOriginSpec
-ServiceAccountName is the name of the ServiceAccount to use to run this
-source.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>image</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>DEPRECATED: use the context field in CamelSourceOriginSpec
-Image is an optional base image used to run the source.</p>
-</td>
-</tr>
-<tr>
-<td>
 <code>sink</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#objectreference-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
 Kubernetes core/v1.ObjectReference
 </a>
 </em>
@@ -307,7 +283,7 @@ string
 <td>
 <code>metadata</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#objectmeta-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
 </a>
 </em>
@@ -334,7 +310,7 @@ GcpPubSubSourceSpec
 <td>
 <code>gcpCredsSecret</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#secretkeyselector-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#secretkeyselector-v1-core">
 Kubernetes core/v1.SecretKeySelector
 </a>
 </em>
@@ -342,8 +318,8 @@ Kubernetes core/v1.SecretKeySelector
 <td>
 <p>GcpCredsSecret is the credential to use to poll the GCP PubSub Subscription. It is not used
 to create or delete the Subscription, only to poll it. The value of the secret entry must be
-a service account key in the JSON format (see
-<a href="https://cloud.google.com/iam/docs/creating-managing-service-account-keys">https://cloud.google.com/iam/docs/creating-managing-service-account-keys</a>.</p>
+a service account key in the JSON format
+( see <a href="https://cloud.google.com/iam/docs/creating-managing-service-account-keys">https://cloud.google.com/iam/docs/creating-managing-service-account-keys</a> ).</p>
 </td>
 </tr>
 <tr>
@@ -374,7 +350,7 @@ unique identifier within the project, not the entire name. E.g. it must be &lsqu
 <td>
 <code>sink</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#objectreference-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
 Kubernetes core/v1.ObjectReference
 </a>
 </em>
@@ -388,7 +364,7 @@ Kubernetes core/v1.ObjectReference
 <td>
 <code>transformer</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#objectreference-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
 Kubernetes core/v1.ObjectReference
 </a>
 </em>
@@ -461,7 +437,7 @@ string
 <td>
 <code>metadata</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#objectmeta-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
 </a>
 </em>
@@ -561,7 +537,7 @@ secret token</p>
 <td>
 <code>sink</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#objectreference-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
 Kubernetes core/v1.ObjectReference
 </a>
 </em>
@@ -647,7 +623,7 @@ string
 <td>
 <code>metadata</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#objectmeta-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
 </a>
 </em>
@@ -719,7 +695,7 @@ KafkaSourceNetSpec
 <td>
 <code>sink</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#objectreference-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
 Kubernetes core/v1.ObjectReference
 </a>
 </em>
@@ -803,7 +779,7 @@ string
 <td>
 <code>awsCredsSecret</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#secretkeyselector-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#secretkeyselector-v1-core">
 Kubernetes core/v1.SecretKeySelector
 </a>
 </em>
@@ -816,7 +792,7 @@ Kubernetes core/v1.SecretKeySelector
 <td>
 <code>sink</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#objectreference-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
 Kubernetes core/v1.ObjectReference
 </a>
 </em>
@@ -862,9 +838,7 @@ run the Receive Adapter Deployment.</p>
 <td>
 <code>Status</code></br>
 <em>
-<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Status">
-github.com/knative/pkg/apis/duck/v1alpha1.Status
-</a>
+knative.dev/pkg/apis/duck/v1alpha1.Status
 </em>
 </td>
 <td>
@@ -980,7 +954,8 @@ CamelSourceOriginComponentSpec
 </em>
 </td>
 <td>
-<p>Component is a kind of source that directly references a Camel component</p>
+<p>Component is a kind of source that directly references a Camel component
+DEPRECATED</p>
 </td>
 </tr>
 <tr>
@@ -992,6 +967,17 @@ github.com/apache/camel-k/pkg/apis/camel/v1alpha1.IntegrationSpec
 </td>
 <td>
 <p>Integration is a kind of source that contains a Camel K integration</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>flow</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>Flow is a kind of source that contains a single Camel YAML flow route</p>
 </td>
 </tr>
 </tbody>
@@ -1028,36 +1014,9 @@ CamelSourceOriginSpec
 </tr>
 <tr>
 <td>
-<code>serviceAccountName</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>DEPRECATED: moved inside the specific CamelSourceOriginSpec
-ServiceAccountName is the name of the ServiceAccount to use to run this
-source.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>image</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>DEPRECATED: use the context field in CamelSourceOriginSpec
-Image is an optional base image used to run the source.</p>
-</td>
-</tr>
-<tr>
-<td>
 <code>sink</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#objectreference-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
 Kubernetes core/v1.ObjectReference
 </a>
 </em>
@@ -1090,9 +1049,7 @@ Kubernetes core/v1.ObjectReference
 <td>
 <code>Status</code></br>
 <em>
-<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Status">
-github.com/knative/pkg/apis/duck/v1alpha1.Status
-</a>
+knative.dev/pkg/apis/duck/v1alpha1.Status
 </em>
 </td>
 <td>
@@ -1139,7 +1096,7 @@ string
 <td>
 <code>gcpCredsSecret</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#secretkeyselector-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#secretkeyselector-v1-core">
 Kubernetes core/v1.SecretKeySelector
 </a>
 </em>
@@ -1147,8 +1104,8 @@ Kubernetes core/v1.SecretKeySelector
 <td>
 <p>GcpCredsSecret is the credential to use to poll the GCP PubSub Subscription. It is not used
 to create or delete the Subscription, only to poll it. The value of the secret entry must be
-a service account key in the JSON format (see
-<a href="https://cloud.google.com/iam/docs/creating-managing-service-account-keys)">https://cloud.google.com/iam/docs/creating-managing-service-account-keys)</a>.</p>
+a service account key in the JSON format
+( see <a href="https://cloud.google.com/iam/docs/creating-managing-service-account-keys">https://cloud.google.com/iam/docs/creating-managing-service-account-keys</a> ).</p>
 </td>
 </tr>
 <tr>
@@ -1179,7 +1136,7 @@ unique identifier within the project, not the entire name. E.g. it must be &lsqu
 <td>
 <code>sink</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#objectreference-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
 Kubernetes core/v1.ObjectReference
 </a>
 </em>
@@ -1193,7 +1150,7 @@ Kubernetes core/v1.ObjectReference
 <td>
 <code>transformer</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#objectreference-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
 Kubernetes core/v1.ObjectReference
 </a>
 </em>
@@ -1238,9 +1195,7 @@ Adapter Deployment.</p>
 <td>
 <code>Status</code></br>
 <em>
-<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Status">
-github.com/knative/pkg/apis/duck/v1alpha1.Status
-</a>
+knative.dev/pkg/apis/duck/v1alpha1.Status
 </em>
 </td>
 <td>
@@ -1372,7 +1327,7 @@ secret token</p>
 <td>
 <code>sink</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#objectreference-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
 Kubernetes core/v1.ObjectReference
 </a>
 </em>
@@ -1430,9 +1385,7 @@ bool
 <td>
 <code>Status</code></br>
 <em>
-<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Status">
-github.com/knative/pkg/apis/duck/v1alpha1.Status
-</a>
+knative.dev/pkg/apis/duck/v1alpha1.Status
 </em>
 </td>
 <td>
@@ -1752,7 +1705,7 @@ KafkaSourceNetSpec
 <td>
 <code>sink</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#objectreference-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
 Kubernetes core/v1.ObjectReference
 </a>
 </em>
@@ -1810,9 +1763,7 @@ KafkaResourceSpec
 <td>
 <code>Status</code></br>
 <em>
-<a href="https://godoc.org/github.com/knative/pkg/apis/duck/v1alpha1#Status">
-github.com/knative/pkg/apis/duck/v1alpha1.Status
-</a>
+knative.dev/pkg/apis/duck/v1alpha1.Status
 </em>
 </td>
 <td>
@@ -1912,6 +1863,38 @@ SecretValueFromSource
 </h3>
 <p>
 (<em>Appears on:</em>
+<a href="#sources.eventing.knative.dev/v1alpha1.GitHubSourceSpec">GitHubSourceSpec</a>)
+</p>
+<p>
+<p>SecretValueFromSource represents the source of a secret value</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>secretKeyRef</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#secretkeyselector-v1-core">
+Kubernetes core/v1.SecretKeySelector
+</a>
+</em>
+</td>
+<td>
+<p>The Secret key to select from.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sources.eventing.knative.dev/v1alpha1.SecretValueFromSource">SecretValueFromSource
+</h3>
+<p>
+(<em>Appears on:</em>
 <a href="#sources.eventing.knative.dev/v1alpha1.KafkaSourceSASLSpec">KafkaSourceSASLSpec</a>, 
 <a href="#sources.eventing.knative.dev/v1alpha1.KafkaSourceTLSSpec">KafkaSourceTLSSpec</a>)
 </p>
@@ -1930,39 +1913,7 @@ SecretValueFromSource
 <td>
 <code>secretKeyRef</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#secretkeyselector-v1-core">
-Kubernetes core/v1.SecretKeySelector
-</a>
-</em>
-</td>
-<td>
-<p>The Secret key to select from.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.SecretValueFromSource">SecretValueFromSource
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.GitHubSourceSpec">GitHubSourceSpec</a>)
-</p>
-<p>
-<p>SecretValueFromSource represents the source of a secret value</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>secretKeyRef</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#secretkeyselector-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#secretkeyselector-v1-core">
 Kubernetes core/v1.SecretKeySelector
 </a>
 </em>
@@ -1974,7 +1925,246 @@ Kubernetes core/v1.SecretKeySelector
 </tbody>
 </table>
 <hr/>
+<h2 id="messaging.knative.dev/v1alpha1">messaging.knative.dev/v1alpha1</h2>
+<p>
+<p>Package v1alpha1 is the v1alpha1 version of the API.</p>
+</p>
+Resource Types:
+<ul><li>
+<a href="#messaging.knative.dev/v1alpha1.KafkaChannel">KafkaChannel</a>
+</li></ul>
+<h3 id="messaging.knative.dev/v1alpha1.KafkaChannel">KafkaChannel
+</h3>
+<p>
+<p>KafkaChannel is a resource representing a Kafka Channel.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>apiVersion</code></br>
+string</td>
+<td>
+<code>
+messaging.knative.dev/v1alpha1
+</code>
+</td>
+</tr>
+<tr>
+<td>
+<code>kind</code></br>
+string
+</td>
+<td><code>KafkaChannel</code></td>
+</tr>
+<tr>
+<td>
+<code>metadata</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
+Kubernetes meta/v1.ObjectMeta
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+Refer to the Kubernetes API documentation for the fields of the
+<code>metadata</code> field.
+</td>
+</tr>
+<tr>
+<td>
+<code>spec</code></br>
+<em>
+<a href="#messaging.knative.dev/v1alpha1.KafkaChannelSpec">
+KafkaChannelSpec
+</a>
+</em>
+</td>
+<td>
+<p>Spec defines the desired state of the Channel.</p>
+<br/>
+<br/>
+<table>
+<tr>
+<td>
+<code>numPartitions</code></br>
+<em>
+int32
+</em>
+</td>
+<td>
+<p>NumPartitions is the number of partitions of a Kafka topic. By default, it is set to 1.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>replicationFactor</code></br>
+<em>
+int16
+</em>
+</td>
+<td>
+<p>ReplicationFactor is the replication factor of a Kafka topic. By default, it is set to 1.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>subscribable</code></br>
+<em>
+github.com/knative/eventing/pkg/apis/duck/v1alpha1.Subscribable
+</em>
+</td>
+<td>
+<p>KafkaChannel conforms to Duck type Subscribable.</p>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<code>status</code></br>
+<em>
+<a href="#messaging.knative.dev/v1alpha1.KafkaChannelStatus">
+KafkaChannelStatus
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Status represents the current state of the KafkaChannel. This data may be out of
+date.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="messaging.knative.dev/v1alpha1.KafkaChannelSpec">KafkaChannelSpec
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#messaging.knative.dev/v1alpha1.KafkaChannel">KafkaChannel</a>)
+</p>
+<p>
+<p>KafkaChannelSpec defines the specification for a KafkaChannel.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>numPartitions</code></br>
+<em>
+int32
+</em>
+</td>
+<td>
+<p>NumPartitions is the number of partitions of a Kafka topic. By default, it is set to 1.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>replicationFactor</code></br>
+<em>
+int16
+</em>
+</td>
+<td>
+<p>ReplicationFactor is the replication factor of a Kafka topic. By default, it is set to 1.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>subscribable</code></br>
+<em>
+github.com/knative/eventing/pkg/apis/duck/v1alpha1.Subscribable
+</em>
+</td>
+<td>
+<p>KafkaChannel conforms to Duck type Subscribable.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="messaging.knative.dev/v1alpha1.KafkaChannelStatus">KafkaChannelStatus
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#messaging.knative.dev/v1alpha1.KafkaChannel">KafkaChannel</a>)
+</p>
+<p>
+<p>KafkaChannelStatus represents the current state of a KafkaChannel.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>Status</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1beta1.Status
+</em>
+</td>
+<td>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
+<p>inherits duck/v1beta1 Status, which currently provides:
+* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
+* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>AddressStatus</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1alpha1.AddressStatus
+</em>
+</td>
+<td>
+<p>
+(Members of <code>AddressStatus</code> are embedded into this type.)
+</p>
+<p>KafkaChannel is Addressable. It currently exposes the endpoint as a
+fully-qualified DNS name which will distribute traffic over the
+provided targets from inside the cluster.</p>
+<p>It generally has the form {channel}.{namespace}.svc.{cluster domain name}</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>SubscribableTypeStatus</code></br>
+<em>
+github.com/knative/eventing/pkg/apis/duck/v1alpha1.SubscribableTypeStatus
+</em>
+</td>
+<td>
+<p>
+(Members of <code>SubscribableTypeStatus</code> are embedded into this type.)
+</p>
+<p>Subscribers is populated with the statuses of each of the Channelable&rsquo;s subscribers.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<hr/>
 <p><em>
 Generated with <code>gen-crd-api-reference-docs</code>
-on git commit <code>641f98fe</code>.
+on git commit <code>4bda4fca</code>.
 </em></p>

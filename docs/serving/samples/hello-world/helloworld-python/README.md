@@ -14,7 +14,7 @@ cluster. You can also download a working copy of the sample, by running the
 following commands:
 
 ```shell
-git clone -b "release-0.7" https://github.com/knative/docs knative-docs
+git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
 cd knative-docs/docs/serving/samples/hello-world/helloworld-python
 ```
 
@@ -58,14 +58,14 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-python
    details.
 
    ```docker
-   # Use the official Python image.
+   # Use the official lightweight Python image.
    # https://hub.docker.com/_/python
-   FROM python:3.7
+   FROM python:3.7-slim
 
    # Copy local code to the container image.
    ENV APP_HOME /app
    WORKDIR $APP_HOME
-   COPY . .
+   COPY . ./
 
    # Install production dependencies.
    RUN pip install Flask gunicorn

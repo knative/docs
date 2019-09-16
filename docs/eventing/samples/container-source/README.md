@@ -24,13 +24,13 @@ Knative [event-sources](https://github.com/knative/eventing-contrib) has a
 sample of heartbeats event source. You could clone the source codes by
 
 ```
-git clone -b "release-0.7" https://github.com/knative/eventing-contrib.git
+git clone -b "{{< branch >}}" https://github.com/knative/eventing-contrib.git
 ```
 
 And then build a heartbeats image and publish to your image repo with
 
 ```
-ko publish github.com/knative/eventing-contrib/cmd/heartbeats
+ko publish knative.dev/eventing-contrib/cmd/heartbeats
 ```
 
 **Note**: `ko publish` requires:
@@ -61,6 +61,14 @@ Use following command to create the service from `service.yaml`:
 
 ```shell
 kubectl apply --filename service.yaml
+```
+The status of the created service can be seen using:
+
+```shell
+kubectl get ksvc
+
+NAME            URL                                        LATESTCREATED         LATESTREADY           READY   REASON
+event-display   http://event-display.default.example.com   event-display-gqjbw   event-display-gqjbw   True    
 ```
 
 ### Create a ContainerSource using the heartbeats image

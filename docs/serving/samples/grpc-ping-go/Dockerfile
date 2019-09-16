@@ -12,21 +12,31 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM golang AS builder
+# Use the offical Golang image to create a build artifact.
+# This is based on Debian and sets the GOPATH to /go.
+# https://hub.docker.com/_/golang
+FROM golang:1.12 as builder
 
-# Get the dependencies from GitHub
+# Retrieve the dependencies.
 RUN go get google.golang.org/grpc
 
-WORKDIR /go/src/github.com/knative/docs/
-ADD . /go/src/github.com/knative/docs/
+# Copy local code to the container image.
+WORKDIR /go/src/github.com/knative/docs/docs/serving/samples/grpc-ping-go
+COPY . ./
 
-RUN CGO_ENABLED=0 go build -tags=grpcping ./docs/serving/samples/grpc-ping-go/
-RUN CGO_ENABLED=0 go build -tags=grpcping ./docs/serving/samples/grpc-ping-go/client
+# Build the command inside the container.
+# To facilitate gRPC testing, this container includes a client command.
+RUN CGO_ENABLED=0 go build -tags=grpcping -o ./ping-server
+RUN CGO_ENABLED=0 go build -tags=grpcping -o ./ping-client ./client
 
+# Use a Docker multi-stage build to create a lean production image.
+# https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
+# https://github.com/GoogleContainerTools/distroless#readme
 FROM gcr.io/distroless/static
 
-EXPOSE 8080
-COPY --from=builder /go/src/github.com/knative/docs/grpc-ping-go /server
-COPY --from=builder /go/src/github.com/knative/docs/client /client
+# Copy the binaries to the production image from the builder stage.
+COPY --from=builder /go/src/github.com/knative/docs/docs/serving/samples/grpc-ping-go/ping-server /server
+COPY --from=builder /go/src/github.com/knative/docs/docs/serving/samples/grpc-ping-go/ping-client /client
 
-ENTRYPOINT ["/server"]
+# Run the service on container startup.
+CMD ["/server"]

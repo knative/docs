@@ -14,7 +14,7 @@ cluster. You can also download a working copy of the sample, by running the
 following commands:
 
 ```shell
-git clone -b "release-0.7" https://github.com/knative/docs knative-docs
+git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
 cd knative-docs/docs/serving/samples/hello-world/helloworld-csharp
 ```
 
@@ -69,29 +69,37 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-csharp
    ```
 
 1. In your project directory, create a file named `Dockerfile` and copy the code
-   block below into it. For detailed instructions on dockerizing a .NET core
+   block below into it. For detailed instructions on dockerizing an ASP.NET Core
    app, see
-   [dockerizing a .NET core app](https://docs.microsoft.com/en-us/dotnet/core/docker/docker-basics-dotnet-core#dockerize-the-net-core-application).
+   [Docker images for ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images).
 
    ```docker
-   # Use Microsoft's official .NET image.
-   # https://hub.docker.com/r/microsoft/dotnet
-   FROM microsoft/dotnet:2.2-sdk
-
+   # Use Microsoft's official build .NET image.
+   # https://hub.docker.com/_/microsoft-dotnet-core-sdk/
+   FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build
+   WORKDIR /app
+   
    # Install production dependencies.
    # Copy csproj and restore as distinct layers.
-   WORKDIR /app
-   COPY *.csproj .
+   COPY *.csproj ./
    RUN dotnet restore
-
+   
    # Copy local code to the container image.
-   COPY . .
-
+   COPY . ./
+   WORKDIR /app
+   
    # Build a release artifact.
    RUN dotnet publish -c Release -o out
-
+   
+   
+   # Use Microsoft's official runtime .NET image.
+   # https://hub.docker.com/_/microsoft-dotnet-core-aspnet/
+   FROM mcr.microsoft.com/dotnet/core/aspnet:2.2 AS runtime
+   WORKDIR /app
+   COPY --from=build /app/out ./
+   
    # Run the web service on container startup.
-   CMD ["dotnet", "out/helloworld-csharp.dll"]
+   ENTRYPOINT ["dotnet", "helloworld-csharp.dll"]
    ```
 
 1. Create a `.dockerignore` file to ensure that any files related to a local

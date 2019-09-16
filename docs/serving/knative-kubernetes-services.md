@@ -31,7 +31,6 @@ that are active when running Knative Serving.
    webhook             ClusterIP   10.107.144.50    <none>        443/TCP                  1h
    ```
 
-````
  3. To view the deployments in your cluster, use the following command:
 
     ```sh
@@ -41,14 +40,14 @@ that are active when running Knative Serving.
     This should return the following output:
 
      ```sh
-NAME                     DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-activator                1         1         1            1           1h
-autoscaler               1         1         1            1           1h
-controller               1         1         1            1           1h
-networking-certmanager   1         1         1            1           1h
-networking-istio         1         1         1            1           1h
-webhook                  1         1         1            1           1h
-````
+     NAME                     DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+     activator                1         1         1            1           1h
+     autoscaler               1         1         1            1           1h
+     controller               1         1         1            1           1h
+     networking-certmanager   1         1         1            1           1h
+     networking-istio         1         1         1            1           1h
+     webhook                  1         1         1            1           1h
+     ```
 
 These services and deployments are installed by the `serving.yaml` file during
 install. The next section describes their function.

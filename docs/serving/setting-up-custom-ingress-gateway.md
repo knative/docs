@@ -237,11 +237,11 @@ If there is a change in service ports (compared with that of
 
 ## Step 3: Update Gateway Configmap
 
-Update gateway configmap `config-ingressgateway` under `knative-serving`
+Update gateway configmap `config-istio` under `knative-serving`
 namespace:
 
 ```shell
-kubectl edit configmap config-ingressgateway -n knative-serving
+kubectl edit configmap config-istio -n knative-serving
 ```
 
 Replace the `ingress-gateway` field with the fully qualified url of your

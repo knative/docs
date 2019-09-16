@@ -14,7 +14,7 @@ cluster. You can also download a working copy of the sample, by running the
 following commands:
 
 ```shell
-git clone -b "release-0.7" https://github.com/knative/docs knative-docs
+git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
 cd knative-docs/docs/serving/samples/hello-world/helloworld-nodejs
 ```
 
@@ -95,9 +95,9 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-nodejs
    [Dockerizing a Node.js web app](https://nodejs.org/en/docs/guides/nodejs-docker-webapp/).
 
    ```Dockerfile
-   # Use the official Node.js 12 image.
+   # Use the official lightweight Node.js 12 image.
    # https://hub.docker.com/_/node
-   FROM node:12
+   FROM node:12-slim
 
    # Create and change to the app directory.
    WORKDIR /usr/src/app
@@ -111,7 +111,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-nodejs
    RUN npm install --only=production
 
    # Copy local code to the container image.
-   COPY . .
+   COPY . ./
 
    # Run the web service on container startup.
    CMD [ "npm", "start" ]
