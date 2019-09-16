@@ -121,6 +121,13 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-go
                  value: "Go Sample v1"
    ```
 
+1. Use the go tool to create a
+   [`go.mod`](https://github.com/golang/go/wiki/Modules#gomod) manifest.
+
+   ```shell
+   go mod init github.com/knative/docs/docs/serving/samples/hello-world/helloworld-go
+   ```
+
 ## Building and deploying the sample
 
 Once you have recreated the sample code files (or used the files in the sample
