@@ -181,3 +181,9 @@ To remove the sample app from your cluster, delete the service record:
 ```shell
 kubectl delete --filename service.yaml
 ```
+
+Alternatively, delete the service by name:
+
+```shell
+kubectl delete kservice helloworld-go
+```
