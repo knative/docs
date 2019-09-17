@@ -307,7 +307,7 @@ Knative Serving application so that they can be consumed.
       certificate.
 
 See the
-[Kafka Source](https://github.com/knative/eventing-contrib/tree/master/kafka/source/samples)
+[Kafka Source](https://github.com/knative/eventing-contrib/tree/master/kafka/source)
 example.
 
 ### CamelSource
@@ -350,5 +350,3 @@ example.
 
 - [Default Channels](./channels/default-channels.md) provide a way to choose the
   persistence strategy for Channels across the cluster.
-
-
