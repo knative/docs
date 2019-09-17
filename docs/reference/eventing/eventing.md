@@ -2378,7 +2378,7 @@ ChannelableStatus
 </h3>
 <p>
 <p>Resource is a skeleton type wrapping all Kubernetes resources. It is typically used to watch
-arbitrary other resources (such as any Importer or Addressable). This is not a real resource.</p>
+arbitrary other resources (such as any Source or Addressable). This is not a real resource.</p>
 </p>
 <table>
 <thead>
