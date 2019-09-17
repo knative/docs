@@ -16,36 +16,36 @@ You can find [guides for other platforms here](./README.md).
 ### Install MicroK8s
 
 ```shell
-   sudo snap install --classic microk8s
+sudo snap install --classic microk8s
 ```
 
 ## Alias MicroK8s kubectl for convenience
 
 ```shell
-   sudo snap alias microk8s.kubectl kubectl
+sudo snap alias microk8s.kubectl kubectl
 ```
 
 ## Enable Knative
 
 ```shell
-   echo 'N;' | microk8s.enable knative
+echo 'N;' | microk8s.enable knative
 ```
-This command will install all available Knative components.
+This command will install Knative Serving version 0.7.1 and Eventing version 0.7.1 components.
 
-NOTE: As of this writing, MicroK8s comes with Knative version 0.7.1, this doc will be updated to reflect versioning changes. 
+NOTE: As of this writing, MicroK8s comes with version 0.7.1, this doc will be updated to reflect versioning changes. 
 
 You can check the status of Knative pods using the following commands:
 
 ```shell
-   kubectl get pods -n knative-serving
+kubectl get pods -n knative-serving
 ```
 
 ```shell
-   kubectl get pods -n knative-eventing
+kubectl get pods -n knative-eventing
 ```
 
 ```shell
-   kubectl get pods -n knative-monitoring
+kubectl get pods -n knative-monitoring
 ```
 
 ## Cleaning up
