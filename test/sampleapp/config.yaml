@@ -11,6 +11,7 @@ languages:
   - language: "go"
     expectedOutput: "Hello Go Sample v1!"
     copies:
+      - "go.mod"
       - "helloworld.go"
       - "service.yaml"
       - "Dockerfile"
