@@ -93,8 +93,7 @@ Learn more about Eventing development in the
 
 ## Installation
 
-Knative Eventing currently requires Knative Serving and Istio version 1.0 or
-later installed.
+Knative Eventing currently requires Knative Serving installed with either Istio version >=1.0, or Gloo version >=0.18.16.
 [Follow the instructions to install on the platform of your choice](../install/README.md).
 
 Many of the sources require making outbound connections to create the event
