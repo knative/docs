@@ -2,10 +2,10 @@ In this example, we are going to see how we can create a Parallel with mutually
 exclusive branches.
 
 This example is the same as the
-[multiple barnaches example](../multiple-branches/README.md) except that we are now
-going to rely on the Knative
-[switch](https://github.com/lionelvillard/knative-functions#switch) function
-to provide a soft mutual exclusivity guarantee.
+[multiple barnaches example](../multiple-branches/README.md) except that we are
+now going to rely on the Knative
+[switch](https://github.com/lionelvillard/knative-functions#switch) function to
+provide a soft mutual exclusivity guarantee.
 
 NOTE: this example must be deployed in the default namespace.
 
@@ -71,7 +71,8 @@ kubectl create -f ./switcher.yaml -f ./transformers.yaml
 
 ### Create the Parallel object
 
-The `parallel.yaml` file contains the specifications for creating the Parallel object.
+The `parallel.yaml` file contains the specifications for creating the Parallel
+object.
 
 ```yaml
 apiVersion: messaging.knative.dev/v1alpha1
