@@ -1363,7 +1363,7 @@ All <code>percent</code> values in <code>traffic</code> MUST sum to 100.
    </td>
    <td>
 
-<a href="#revisionmetadata">RevisionMetadata</a>
+<a href="#metadata-3">RevisionMetadata</a>
 
    </td>
    <td>The requested metadata for the Revision.
@@ -1376,7 +1376,7 @@ All <code>percent</code> values in <code>traffic</code> MUST sum to 100.
    </td>
    <td>
 
-<a href="#revisionspec">RevisionSpec</a>
+<a href="#spec-3">RevisionSpec</a>
 
    </td>
    <td>The requested spec for the Revision.
