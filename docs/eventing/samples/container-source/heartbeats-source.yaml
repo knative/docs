@@ -18,6 +18,6 @@ spec:
             - name: POD_NAMESPACE
               value: "event-test"
   sink:
-    apiVersion: serving.knative.dev/v1alpha1
+    apiVersion: serving.knative.dev/v1
     kind: Service
     name: event-display
