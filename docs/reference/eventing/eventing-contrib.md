@@ -17,8 +17,6 @@ Resource Types:
 </li><li>
 <a href="#sources.eventing.knative.dev/v1alpha1.CamelSource">CamelSource</a>
 </li><li>
-<a href="#sources.eventing.knative.dev/v1alpha1.GcpPubSubSource">GcpPubSubSource</a>
-</li><li>
 <a href="#sources.eventing.knative.dev/v1alpha1.GitHubSource">GitHubSource</a>
 </li><li>
 <a href="#sources.eventing.knative.dev/v1alpha1.KafkaSource">KafkaSource</a>
@@ -241,160 +239,6 @@ Kubernetes core/v1.ObjectReference
 <em>
 <a href="#sources.eventing.knative.dev/v1alpha1.CamelSourceStatus">
 CamelSourceStatus
-</a>
-</em>
-</td>
-<td>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.GcpPubSubSource">GcpPubSubSource
-</h3>
-<p>
-<p>GcpPubSubSource is the Schema for the gcppubsubsources API.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>apiVersion</code></br>
-string</td>
-<td>
-<code>
-sources.eventing.knative.dev/v1alpha1
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<code>kind</code></br>
-string
-</td>
-<td><code>GcpPubSubSource</code></td>
-</tr>
-<tr>
-<td>
-<code>metadata</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
-Kubernetes meta/v1.ObjectMeta
-</a>
-</em>
-</td>
-<td>
-Refer to the Kubernetes API documentation for the fields of the
-<code>metadata</code> field.
-</td>
-</tr>
-<tr>
-<td>
-<code>spec</code></br>
-<em>
-<a href="#sources.eventing.knative.dev/v1alpha1.GcpPubSubSourceSpec">
-GcpPubSubSourceSpec
-</a>
-</em>
-</td>
-<td>
-<br/>
-<br/>
-<table>
-<tr>
-<td>
-<code>gcpCredsSecret</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#secretkeyselector-v1-core">
-Kubernetes core/v1.SecretKeySelector
-</a>
-</em>
-</td>
-<td>
-<p>GcpCredsSecret is the credential to use to poll the GCP PubSub Subscription. It is not used
-to create or delete the Subscription, only to poll it. The value of the secret entry must be
-a service account key in the JSON format
-( see <a href="https://cloud.google.com/iam/docs/creating-managing-service-account-keys">https://cloud.google.com/iam/docs/creating-managing-service-account-keys</a> ).</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>googleCloudProject</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<p>GoogleCloudProject is the ID of the Google Cloud Project that the PubSub Topic exists in.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>topic</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<p>Topic is the ID of the GCP PubSub Topic to Subscribe to. It must be in the form of the
-unique identifier within the project, not the entire name. E.g. it must be &lsquo;laconia&rsquo;, not
-&lsquo;projects/my-gcp-project/topics/laconia&rsquo;.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>sink</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
-Kubernetes core/v1.ObjectReference
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Sink is a reference to an object that will resolve to a domain name to use as the sink.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>transformer</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
-Kubernetes core/v1.ObjectReference
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Transformer is a reference to an object that will resolve to a domain name to use as the transformer.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>serviceAccountName</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<p>ServiceAccoutName is the name of the ServiceAccount that will be used to run the Receive
-Adapter Deployment.</p>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-<tr>
-<td>
-<code>status</code></br>
-<em>
-<a href="#sources.eventing.knative.dev/v1alpha1.GcpPubSubSourceStatus">
-GcpPubSubSourceStatus
 </a>
 </em>
 </td>
@@ -1075,164 +919,6 @@ string
 </tr>
 </tbody>
 </table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.GcpPubSubSourceSpec">GcpPubSubSourceSpec
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.GcpPubSubSource">GcpPubSubSource</a>)
-</p>
-<p>
-<p>GcpPubSubSourceSpec defines the desired state of the GcpPubSubSource.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>gcpCredsSecret</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#secretkeyselector-v1-core">
-Kubernetes core/v1.SecretKeySelector
-</a>
-</em>
-</td>
-<td>
-<p>GcpCredsSecret is the credential to use to poll the GCP PubSub Subscription. It is not used
-to create or delete the Subscription, only to poll it. The value of the secret entry must be
-a service account key in the JSON format
-( see <a href="https://cloud.google.com/iam/docs/creating-managing-service-account-keys">https://cloud.google.com/iam/docs/creating-managing-service-account-keys</a> ).</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>googleCloudProject</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<p>GoogleCloudProject is the ID of the Google Cloud Project that the PubSub Topic exists in.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>topic</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<p>Topic is the ID of the GCP PubSub Topic to Subscribe to. It must be in the form of the
-unique identifier within the project, not the entire name. E.g. it must be &lsquo;laconia&rsquo;, not
-&lsquo;projects/my-gcp-project/topics/laconia&rsquo;.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>sink</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
-Kubernetes core/v1.ObjectReference
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Sink is a reference to an object that will resolve to a domain name to use as the sink.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>transformer</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
-Kubernetes core/v1.ObjectReference
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Transformer is a reference to an object that will resolve to a domain name to use as the transformer.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>serviceAccountName</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<p>ServiceAccoutName is the name of the ServiceAccount that will be used to run the Receive
-Adapter Deployment.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.GcpPubSubSourceStatus">GcpPubSubSourceStatus
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.GcpPubSubSource">GcpPubSubSource</a>)
-</p>
-<p>
-<p>GcpPubSubSourceStatus defines the observed state of GcpPubSubSource.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>Status</code></br>
-<em>
-knative.dev/pkg/apis/duck/v1alpha1.Status
-</em>
-</td>
-<td>
-<p>
-(Members of <code>Status</code> are embedded into this type.)
-</p>
-<p>inherits duck/v1alpha1 Status, which currently provides:
-* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
-* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>sinkUri</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>SinkURI is the current active sink URI that has been configured for the GcpPubSubSource.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>transformerUri</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>TransformerURI is the current active transformer URI that has been configured for the GcpPubSubSource.</p>
-</td>
-</tr>
-</tbody>
-</table>
 <h3 id="sources.eventing.knative.dev/v1alpha1.GitHubSourceSpec">GitHubSourceSpec
 </h3>
 <p>
@@ -1863,7 +1549,8 @@ SecretValueFromSource
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.GitHubSourceSpec">GitHubSourceSpec</a>)
+<a href="#sources.eventing.knative.dev/v1alpha1.KafkaSourceSASLSpec">KafkaSourceSASLSpec</a>, 
+<a href="#sources.eventing.knative.dev/v1alpha1.KafkaSourceTLSSpec">KafkaSourceTLSSpec</a>)
 </p>
 <p>
 <p>SecretValueFromSource represents the source of a secret value</p>
@@ -1895,8 +1582,7 @@ Kubernetes core/v1.SecretKeySelector
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.KafkaSourceSASLSpec">KafkaSourceSASLSpec</a>, 
-<a href="#sources.eventing.knative.dev/v1alpha1.KafkaSourceTLSSpec">KafkaSourceTLSSpec</a>)
+<a href="#sources.eventing.knative.dev/v1alpha1.GitHubSourceSpec">GitHubSourceSpec</a>)
 </p>
 <p>
 <p>SecretValueFromSource represents the source of a secret value</p>
@@ -1932,6 +1618,8 @@ Kubernetes core/v1.SecretKeySelector
 Resource Types:
 <ul><li>
 <a href="#messaging.knative.dev/v1alpha1.KafkaChannel">KafkaChannel</a>
+</li><li>
+<a href="#messaging.knative.dev/v1alpha1.NatssChannel">NatssChannel</a>
 </li></ul>
 <h3 id="messaging.knative.dev/v1alpha1.KafkaChannel">KafkaChannel
 </h3>
@@ -2018,7 +1706,7 @@ int16
 <td>
 <code>subscribable</code></br>
 <em>
-github.com/knative/eventing/pkg/apis/duck/v1alpha1.Subscribable
+knative.dev/eventing/pkg/apis/duck/v1alpha1.Subscribable
 </em>
 </td>
 <td>
@@ -2040,6 +1728,96 @@ KafkaChannelStatus
 <td>
 <em>(Optional)</em>
 <p>Status represents the current state of the KafkaChannel. This data may be out of
+date.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="messaging.knative.dev/v1alpha1.NatssChannel">NatssChannel
+</h3>
+<p>
+<p>NatssChannel is a resource representing a NATSS Channel.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>apiVersion</code></br>
+string</td>
+<td>
+<code>
+messaging.knative.dev/v1alpha1
+</code>
+</td>
+</tr>
+<tr>
+<td>
+<code>kind</code></br>
+string
+</td>
+<td><code>NatssChannel</code></td>
+</tr>
+<tr>
+<td>
+<code>metadata</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
+Kubernetes meta/v1.ObjectMeta
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+Refer to the Kubernetes API documentation for the fields of the
+<code>metadata</code> field.
+</td>
+</tr>
+<tr>
+<td>
+<code>spec</code></br>
+<em>
+<a href="#messaging.knative.dev/v1alpha1.NatssChannelSpec">
+NatssChannelSpec
+</a>
+</em>
+</td>
+<td>
+<p>Spec defines the desired state of the Channel.</p>
+<br/>
+<br/>
+<table>
+<tr>
+<td>
+<code>subscribable</code></br>
+<em>
+knative.dev/eventing/pkg/apis/duck/v1alpha1.Subscribable
+</em>
+</td>
+<td>
+<p>NatssChannel conforms to Duck type Subscribable.</p>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<code>status</code></br>
+<em>
+<a href="#messaging.knative.dev/v1alpha1.NatssChannelStatus">
+NatssChannelStatus
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Status represents the current state of the NatssChannel. This data may be out of
 date.</p>
 </td>
 </tr>
@@ -2088,7 +1866,7 @@ int16
 <td>
 <code>subscribable</code></br>
 <em>
-github.com/knative/eventing/pkg/apis/duck/v1alpha1.Subscribable
+knative.dev/eventing/pkg/apis/duck/v1alpha1.Subscribable
 </em>
 </td>
 <td>
@@ -2151,7 +1929,103 @@ provided targets from inside the cluster.</p>
 <td>
 <code>SubscribableTypeStatus</code></br>
 <em>
-github.com/knative/eventing/pkg/apis/duck/v1alpha1.SubscribableTypeStatus
+knative.dev/eventing/pkg/apis/duck/v1alpha1.SubscribableTypeStatus
+</em>
+</td>
+<td>
+<p>
+(Members of <code>SubscribableTypeStatus</code> are embedded into this type.)
+</p>
+<p>Subscribers is populated with the statuses of each of the Channelable&rsquo;s subscribers.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="messaging.knative.dev/v1alpha1.NatssChannelSpec">NatssChannelSpec
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#messaging.knative.dev/v1alpha1.NatssChannel">NatssChannel</a>)
+</p>
+<p>
+<p>NatssChannelSpec defines the specification for a NatssChannel.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>subscribable</code></br>
+<em>
+knative.dev/eventing/pkg/apis/duck/v1alpha1.Subscribable
+</em>
+</td>
+<td>
+<p>NatssChannel conforms to Duck type Subscribable.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="messaging.knative.dev/v1alpha1.NatssChannelStatus">NatssChannelStatus
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#messaging.knative.dev/v1alpha1.NatssChannel">NatssChannel</a>)
+</p>
+<p>
+<p>NatssChannelStatus represents the current state of a NatssChannel.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>Status</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1beta1.Status
+</em>
+</td>
+<td>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
+<p>inherits duck/v1beta1 Status, which currently provides:
+* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
+* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>AddressStatus</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1alpha1.AddressStatus
+</em>
+</td>
+<td>
+<p>
+(Members of <code>AddressStatus</code> are embedded into this type.)
+</p>
+<p>NatssChannel is Addressable. It currently exposes the endpoint as a
+fully-qualified DNS name which will distribute traffic over the
+provided targets from inside the cluster.</p>
+<p>It generally has the form {channel}.{namespace}.svc.{cluster domain name}</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>SubscribableTypeStatus</code></br>
+<em>
+knative.dev/eventing/pkg/apis/duck/v1alpha1.SubscribableTypeStatus
 </em>
 </td>
 <td>
@@ -2166,5 +2040,5 @@ github.com/knative/eventing/pkg/apis/duck/v1alpha1.SubscribableTypeStatus
 <hr/>
 <p><em>
 Generated with <code>gen-crd-api-reference-docs</code>
-on git commit <code>4bda4fca</code>.
+on git commit <code>89b43a1d</code>.
 </em></p>
