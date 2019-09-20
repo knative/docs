@@ -10,8 +10,10 @@ languages:
       - "Dockerfile"
   - language: "go"
     expectedOutput: "Hello Go Sample v1!"
+    preCommands:
+      - exec: "cp"
+        args: "../../docs/serving/samples/hello-world/helloworld-go/go.mod helloworld-go_tmp/go.mod"
     copies:
-      - "go.mod"
       - "helloworld.go"
       - "service.yaml"
       - "Dockerfile"
@@ -43,10 +45,12 @@ languages:
       - "Dockerfile"
   - language: "ruby"
     expectedOutput: "Hello Ruby Sample v1!"
+    preCommands:
+      - exec: "cp"
+        args: "../../docs/serving/samples/hello-world/helloworld-ruby/Gemfile.lock helloworld-ruby_tmp/Gemfile.lock"
     copies:
       - "app.rb"
       - "Gemfile"
-      - "Gemfile.lock"
       - "service.yaml"
       - "Dockerfile"
   - language: "shell"
