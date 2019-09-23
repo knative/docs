@@ -95,7 +95,7 @@ Let's deploy an app to test that everything is set up correctly:
    `kubectl`
 
    ```yaml
-   apiVersion: serving.knative.dev/v1alpha1
+   apiVersion: serving.knative.dev/v1
    kind: Service
    metadata:
      name: helloworld-go

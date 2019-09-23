@@ -43,7 +43,7 @@ spec:
   broker: default
   subscriber:
     ref:
-      apiVersion: serving.knative.dev/v1alpha1
+      apiVersion: serving.knative.dev/v1
       kind: Service
       name: my-service
 ```
@@ -69,7 +69,7 @@ spec:
       myextension: my-extension-value
   subscriber:
     ref:
-      apiVersion: serving.knative.dev/v1alpha1
+      apiVersion: serving.knative.dev/v1
       kind: Service
       name: my-service
 ```
@@ -219,7 +219,7 @@ following manifest describing a Knative Service is created, but it could be
 anything that is `Addressable`.
 
 ```yaml
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: my-service
@@ -250,7 +250,7 @@ spec:
       type: dev.knative.foo.bar
   subscriber:
     ref:
-      apiVersion: serving.knative.dev/v1alpha1
+      apiVersion: serving.knative.dev/v1
       kind: Service
       name: my-service
 ```
@@ -275,7 +275,7 @@ spec:
       type: dev.knative.foo.bar
   subscriber:
     ref:
-      apiVersion: serving.knative.dev/v1alpha1
+      apiVersion: serving.knative.dev/v1
       kind: Service
       name: my-service
 ```

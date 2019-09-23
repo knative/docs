@@ -100,7 +100,7 @@ When asked, if you want to `Fetch and install dependencies? [Yn]` select `y`
    username.
 
    ```yaml
-   apiVersion: serving.knative.dev/v1alpha1
+   apiVersion: serving.knative.dev/v1
    kind: Service
    metadata:
      name: helloworld-elixir

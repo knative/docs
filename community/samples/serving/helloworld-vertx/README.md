@@ -163,7 +163,7 @@ To create and configure the source files in the root of your working directory:
    the `Eclipse Vert.x Sample v1` value.
 
    ```yaml
-   apiVersion: serving.knative.dev/v1alpha1
+   apiVersion: serving.knative.dev/v1
    kind: Service
    metadata:
      name: helloworld-vertx

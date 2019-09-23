@@ -6,7 +6,7 @@ metadata:
 spec:
   subscriber:
     ref:
-      apiVersion: serving.knative.dev/v1alpha1
+      apiVersion: serving.knative.dev/v1
       kind: Service
       name: event-display
 
@@ -14,7 +14,7 @@ spec:
 
 # This is a very simple Knative Service that writes the input request to its log.
 
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: event-display

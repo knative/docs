@@ -21,7 +21,7 @@ In order to verify `CronJobSource` is working, we will create a simple Knative
 Service that dumps incoming messages to its log.
 
 ```yaml
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: event-display
@@ -54,7 +54,7 @@ spec:
   schedule: "*/2 * * * *"
   data: '{"message": "Hello world!"}'
   sink:
-    apiVersion: serving.knative.dev/v1alpha1
+    apiVersion: serving.knative.dev/v1
     kind: Service
     name: event-display
 ```

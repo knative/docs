@@ -49,7 +49,7 @@ Create a new file named `service.yaml`, then copy and paste the following
 content into it:
 
 ```yaml
-apiVersion: serving.knative.dev/v1alpha1 # Current version of Knative
+apiVersion: serving.knative.dev/v1 # Current version of Knative
 kind: Service
 metadata:
   name: helloworld-go # The name of the app

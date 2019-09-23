@@ -15,7 +15,7 @@ Let's first create the filter and transformer services that we will use in our
 Parallel.
 
 ```yaml
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: even-filter
@@ -29,7 +29,7 @@ spec:
           value: |
             Math.round(Date.parse(event.time) / 60000) % 2 === 0
 ---
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: odd-filter
@@ -43,7 +43,7 @@ spec:
           value: |
             Math.round(Date.parse(event.time) / 60000) % 2 !== 0
 ---
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: even-transformer
@@ -58,7 +58,7 @@ spec:
             ({"message": "we are even!"})
 
 ---
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: odd-transformer
@@ -94,26 +94,26 @@ spec:
   branches:
     - filter:
         ref:
-          apiVersion: serving.knative.dev/v1alpha1
+          apiVersion: serving.knative.dev/v1
           kind: Service
           name: even-filter
       subscriber:
         ref:
-          apiVersion: serving.knative.dev/v1alpha1
+          apiVersion: serving.knative.dev/v1
           kind: Service
           name: even-transformer
     - filter:
         ref:
-          apiVersion: serving.knative.dev/v1alpha1
+          apiVersion: serving.knative.dev/v1
           kind: Service
           name: odd-filter
       subscriber:
         ref:
-          apiVersion: serving.knative.dev/v1alpha1
+          apiVersion: serving.knative.dev/v1
           kind: Service
           name: odd-transformer
   reply:
-    apiVersion: serving.knative.dev/v1alpha1
+    apiVersion: serving.knative.dev/v1
     kind: Service
     name: event-display
 ```
