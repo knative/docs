@@ -26,6 +26,9 @@ languages:
       - "Dockerfile"
   - language: "nodejs"
     expectedOutput: "Hello Node.js Sample v1!"
+    preCommands:
+      - exec: "cp"
+        args: "../../docs/serving/samples/hello-world/helloworld-nodejs/package-lock.json helloworld-nodejs_tmp/package-lock.json"
     copies:
       - "index.js"
       - "package.json"

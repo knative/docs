@@ -32,6 +32,16 @@ const (
 	defaultWorkDir              = "helloworld-%s_tmp"
 	defaultAppName              = "helloworld-%s"
 	defaultYamlImagePlaceHolder = "docker.io/{username}/helloworld-%s"
+
+	// ActionMsg serves as documentation purpose, which will be referenced for
+	// clearly displaying error messages.
+	ActionMsg = "All files required for running sample apps are checked " +
+		"against README.md, the content of source files should be identical with what's " +
+		"in README.md file, the list of the files to be verified is the same set of files " +
+		"used for running sample apps, they are configured in `/test/sampleapp/config.yaml`. " +
+		"If an exception is needed the file can be configured to be copied as a separate step " +
+		"in `PreCommand` such as: " +
+		"https://github.com/knative/docs/blob/65f7b402fee7f94dfbd9e4512ef3beed7b85de66/test/sampleapp/config.yaml#L4"
 )
 
 // AllConfigs contains all LanguageConfig

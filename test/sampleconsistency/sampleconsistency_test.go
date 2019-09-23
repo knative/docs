@@ -89,19 +89,12 @@ func checkContains(t *testing.T, rl []string, src string) {
 		ir++
 	}
 
-	actionMsg := "All files required for running Helloworld sample apps are checked " +
-		"against README.md, the content of source files should be identical with what's " +
-		"in README.md file, the list of the files to be verified is the same set of files " +
-		"used for running sample apps, they are configured in `/test/sampleapp/config.yaml`. " +
-		"If an exception is needed the file can be configured to be copied as a separate step " +
-		"in `PreCommand` such as: " +
-		"https://github.com/knative/docs/blob/65f7b402fee7f94dfbd9e4512ef3beed7b85de66/test/sampleapp/config.yaml#L4"
 	if best == -1 {
 		// missing line is line 0
 		best = 0
 	}
 	if best != len(sl) {
-		t.Fatalf("README.md file is missing line %d ('%s') from file '%s'\nAdditional info:\n%s", best, sl[best], src, actionMsg)
+		t.Fatalf("README.md file is missing line %d ('%s') from file '%s'\nAdditional info:\n%s", best, sl[best], src, sampleapp.ActionMsg)
 	}
 }
 
