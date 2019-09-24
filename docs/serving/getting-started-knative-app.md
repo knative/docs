@@ -14,7 +14,7 @@ using cURL requests.
 
 You need:
 
-- A Kubernetes cluster with [Knative installed](./README.md).
+- A Kubernetes cluster with [Knative installed](../install/README.md).
 - An image of the app that you'd like to deploy available on a container
   registry. The image of the sample app used in this guide is available on
   Google Container Registry.
