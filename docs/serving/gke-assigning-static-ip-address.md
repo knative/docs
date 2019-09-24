@@ -69,10 +69,7 @@ Run following command to configure the external IP of the `istio-ingressgateway`
 service to the static IP that you reserved:
 
 ```shell
-# In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
-# INGRESSGATEWAY=knative-ingressgateway
 INGRESSGATEWAY=istio-ingressgateway
-
 kubectl patch svc $INGRESSGATEWAY --namespace istio-system --patch '{"spec": { "loadBalancerIP": "<your-reserved-static-ip>" }}'
 ```
 
