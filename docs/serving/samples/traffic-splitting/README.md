@@ -64,7 +64,7 @@ status:
    available via the sub-route "latest".
 
 ```shell
-kubectl apply --filename serving/samples/traffic-splitting/release_sample.yaml
+kubectl apply --filename docs/serving/samples/traffic-splitting/release_sample.yaml
 ```
 
 1. The `spec` of the Service should now show our `traffic` block with the
@@ -94,7 +94,7 @@ serving/samples/traffic-splitting/updated_sample.yaml
 1.  Execute the command below to update Service, resulting in a new Revision.
 
 ```shell
-kubectl apply --filename serving/samples/traffic-splitting/updated_sample.yaml
+kubectl apply --filename docs/erving/samples/traffic-splitting/updated_sample.yaml
 ```
 
 2. With our `traffic` block, traffic will _not_ shift to the new Revision
@@ -114,7 +114,7 @@ kubectl get ksvc stock-service-example --output yaml
 
 ```shell
 # Replace "latest" with whichever tag for which we want the hostname.
-export LATEST_HOSTNAME=`kubectl get ksvc stock-service-example --output jsonpath="{.status.traffic[?(@.name=='latest')].url}" | cut -d'/' -f 3`
+export LATEST_HOSTNAME=`kubectl get ksvc stock-service-example --output jsonpath="{.status.traffic[?(@.tag=='latest')].url}" | cut -d'/' -f 3`
 curl --header "Host: ${LATEST_HOSTNAME}" http://${INGRESS_IP}
 ```
 
@@ -135,7 +135,7 @@ extending our `traffic` list, and splitting the `percent` across them.
     split.
 
 ```shell
-kubectl apply --filename serving/samples/traffic-splitting/split_sample.yaml
+kubectl apply --filename docs/serving/samples/traffic-splitting/split_sample.yaml
 ```
 
 2. Verify the deployment by checking the service status:
@@ -157,5 +157,5 @@ curl --header "Host:${SERVICE_HOSTNAME}" http://${INGRESS_IP}
 To clean up the sample service:
 
 ```shell
-kubectl delete --filename serving/samples/traffic-splitting/split_sample.yaml
+kubectl delete --filename docs/serving/samples/traffic-splitting/split_sample.yaml
 ```
