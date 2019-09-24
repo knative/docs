@@ -213,7 +213,7 @@ kubectl get VirtualService entry-route --output yaml
     these services. \_ Get the ingress IP:
 
     ```shell
- INGRESSGATEWAY=istio-ingressgateway
+    INGRESSGATEWAY=istio-ingressgateway
 
     export GATEWAY_IP=`kubectl get svc $INGRESSGATEWAY --namespace istio-system \
         --output jsonpath="{.status.loadBalancer.ingress[*]['ip']}"`
