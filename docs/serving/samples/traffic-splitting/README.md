@@ -39,7 +39,7 @@ us in the previous sample:
 
 ```shell
 $ kubectl get ksvc -oyaml stock-service-example
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: stock-service-example

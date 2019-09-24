@@ -49,7 +49,7 @@ for production containers.
    
    
   ```yaml
-  apiVersion: serving.knative.dev/v1alpha1
+  apiVersion: serving.knative.dev/v1
   kind: Service
   metadata:
     name: grpc-ping

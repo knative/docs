@@ -20,20 +20,26 @@ To change the {default-domain} value there are a few steps involved:
    kubectl edit cm config-domain --namespace knative-serving
    ```
 
-   This command opens your default text editor and allows you to edit the config
-   map.
+   This command opens your default text editor and allows you to edit the [config
+   map](https://github.com/knative/serving/blob/master/config/config-domain.yaml).
 
    ```yaml
    apiVersion: v1
    data:
-     example.com: ""
+     _example: |
+       ################################
+       #                              #
+       #    EXAMPLE CONFIGURATION     #
+       #                              #
+       ################################
+       # ...
+       example.com: |
    kind: ConfigMap
-   [...]
    ```
 
-1. Edit the file to replace `example.com` with the domain you'd like to use and
-   save your changes. In this example, we configure `mydomain.com` for all
-   routes:
+1. Edit the file to replace `example.com` with the domain you'd like to use,
+   remove the `_example` key and save your changes.
+   In this example, we configure `mydomain.com` for all routes:
 
    ```yaml
    apiVersion: v1

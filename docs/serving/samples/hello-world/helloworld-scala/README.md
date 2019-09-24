@@ -70,7 +70,7 @@ image reference to match up with the repository**, name, and version specified
 in the [build.sbt](./build.sbt) in the previous section.
 
 ```yaml
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: helloworld-scala

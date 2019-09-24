@@ -19,7 +19,7 @@ Let's first create the switcher and transformer services that we will use in our
 Parallel.
 
 ```yaml
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: me-even-odd-switcher
@@ -34,7 +34,7 @@ spec:
         - name: CASES
           value: '[0, 1]'
 ---
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: even-transformer
@@ -49,7 +49,7 @@ spec:
             ({"message": "we are even!"})
 
 ---
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: odd-transformer
@@ -87,18 +87,18 @@ spec:
         uri: "http://me-even-odd-switcher.default.svc.cluster.local/0"
       subscriber:
         ref:
-          apiVersion: serving.knative.dev/v1alpha1
+          apiVersion: serving.knative.dev/v1
           kind: Service
           name: me-even-transformer
     - filter:
         uri: "http://me-even-odd-switcher.default.svc.cluster.local/1"
       subscriber:
         ref:
-          apiVersion: serving.knative.dev/v1alpha1
+          apiVersion: serving.knative.dev/v1
           kind: Service
           name: me-odd-transformer
   reply:
-    apiVersion: serving.knative.dev/v1alpha1
+    apiVersion: serving.knative.dev/v1
     kind: Service
     name: me-event-display
 ```
