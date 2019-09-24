@@ -126,15 +126,7 @@ kubectl get Gateway --namespace knative-serving --output yaml
 - Check the corresponding Kubernetes service for the shared Gateway:
 
 ```
-# In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
-INGRESSGATEWAY=knative-ingressgateway
-
-# The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
-# Use `istio-ingressgateway` instead, since `knative-ingressgateway`
-# will be removed in Knative v0.4.
-if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
-    INGRESSGATEWAY=istio-ingressgateway
-fi
+INGRESSGATEWAY=istio-ingressgateway
 
 kubectl get svc $INGRESSGATEWAY --namespace istio-system --output yaml
 ```
@@ -152,15 +144,7 @@ You should see 2 Knative services: `search-service` and `login-service`.
 1. Find the shared Gateway IP and export as an environment variable:
 
 ```shell
-# In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
-INGRESSGATEWAY=knative-ingressgateway
-
-# The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
-# Use `istio-ingressgateway` instead, since `knative-ingressgateway`
-# will be removed in Knative v0.4.
-if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
-    INGRESSGATEWAY=istio-ingressgateway
-fi
+INGRESSGATEWAY=istio-ingressgateway
 
 export GATEWAY_IP=`kubectl get svc $INGRESSGATEWAY --namespace istio-system \
     --output jsonpath="{.status.loadBalancer.ingress[*]['ip']}"`
@@ -229,15 +213,7 @@ kubectl get VirtualService entry-route --output yaml
     these services. \_ Get the ingress IP:
 
     ```shell
-    # In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
-    INGRESSGATEWAY=knative-ingressgateway
-
-    # The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
-    # Use `istio-ingressgateway` instead, since `knative-ingressgateway`
-    # will be removed in Knative v0.4.
-    if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
-        INGRESSGATEWAY=istio-ingressgateway
-    fi
+    INGRESSGATEWAY=istio-ingressgateway
 
     export GATEWAY_IP=`kubectl get svc $INGRESSGATEWAY --namespace istio-system \
         --output jsonpath="{.status.loadBalancer.ingress[*]['ip']}"`
