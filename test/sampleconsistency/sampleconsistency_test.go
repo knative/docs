@@ -57,16 +57,19 @@ func checkContains(t *testing.T, rl []string, src string) {
 	ir := 0
 	is := 0
 	best := -1
-	// Scans rl(README lines) for entire block matching sl(source lines)
-	// Pointer ir keeps on moving, and pointer moves only when there is a line match, otherwise back to 0.
-	// A match is found if pointer is moved to end.
+	// Scans rl(README lines) for entire block matching sl(source lines).
+	// Pointer ir: keeps on moving no matter what.
+	// Pointer is: moves only when there is a line match, otherwise back to 0. A
+	//   match is found if pointer is moved to end.
+	// best: tracks where the best match is on source lines, it's always one
+	//   more line ahead of real match
 	for ir < len(rl) && is < len(sl) {
 		nr := normalize(rl[ir])
 		ns := normalize(sl[is])
 
 		if "" == ns {
 			is++
-			if is > best {
+			if is > best { // Consider it a match if it's empty line
 				best = is
 			}
 			continue
@@ -75,7 +78,7 @@ func checkContains(t *testing.T, rl []string, src string) {
 			ir++
 			continue
 		}
-		if nr != ns {
+		if nr != ns { // Start over if a non-match is found
 			is = 0
 		} else {
 			is++
@@ -85,8 +88,13 @@ func checkContains(t *testing.T, rl []string, src string) {
 		}
 		ir++
 	}
-	if is < len(sl) && best < len(sl) && best != -1 {
-		t.Fatalf("README.md file is missing line %d ('%s') from file '%s'", best, sl[best], src)
+
+	if best == -1 {
+		// missing line is line 0
+		best = 0
+	}
+	if best != len(sl) {
+		t.Fatalf("README.md file is missing line %d ('%s') from file '%s'\nAdditional info:\n%s", best, sl[best], src, sampleapp.ActionMsg)
 	}
 }
 
