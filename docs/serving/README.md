@@ -77,6 +77,7 @@ in the Knative Serving repository.
 - [Configuring cluster local routes](./cluster-local-route.md)
 - [Using a custom domain](./using-a-custom-domain.md)
 - [Assigning a static IP address for Knative on Google Kubernetes Engine](./gke-assigning-static-ip-address.md)
+- [Using subroutes](./using-subroutes.md)
 
 ## Known Issues
 
