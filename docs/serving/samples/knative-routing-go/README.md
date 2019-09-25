@@ -219,25 +219,25 @@ kubectl get VirtualService entry-route --output yaml
         --output jsonpath="{.status.loadBalancer.ingress[*]['ip']}"`
     ```
 
-        * Send a request to the Search service:
-        ```shell
-        curl http://${GATEWAY_IP}/search --header "Host: example.com"
-        ```
-        or
-        ```shell
-        curl http://${GATEWAY_IP}/search --header "Host: <YOUR_DOMAIN_NAME>"
-        ```
-        for the case using your own domain.
+* Send a request to the Search service:
+    ```shell
+    curl http://${GATEWAY_IP}/search --header "Host: example.com"
+    ```
+    or
+    ```shell
+    curl http://${GATEWAY_IP}/search --header "Host: <YOUR_DOMAIN_NAME>"
+    ```
+    for the case using your own domain.
 
-        * Send a request to the Login service:
-        ```shell
-        curl http://${GATEWAY_IP}/login --header "Host: example.com"
-        ```
-        or
-        ```shell
-        curl http://${GATEWAY_IP}/login --header "Host: <YOUR_DOMAIN_NAME>"
-        ```
-        for the case using your own domain.
+    * Send a request to the Login service:
+    ```shell
+    curl http://${GATEWAY_IP}/login --header "Host: example.com"
+    ```
+    or
+    ```shell
+    curl http://${GATEWAY_IP}/login --header "Host: <YOUR_DOMAIN_NAME>"
+    ```
+    for the case using your own domain.
 
 ## How It Works
 
