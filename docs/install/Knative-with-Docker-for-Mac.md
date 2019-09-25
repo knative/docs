@@ -52,8 +52,8 @@ Minkube or similar, see the
 Next, install [Knative Serving](https://github.com/knative/serving).
 
 Because you have limited resources available, use the
-`https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml` file,
-which installs only Knative Serving:
+`https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml`
+file, which installs only Knative Serving:
 
 ```shell
 curl -L https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
@@ -100,8 +100,8 @@ head to the [sample apps](../serving/samples/README.md) repo.
 Get started with Knative Eventing by walking through one of the
 [Eventing Samples](../eventing/samples/).
 
-[Install Cert-Manager](../serving/installing-cert-manager.md) if you want to use the
-[automatic TLS cert provisioning feature](../serving/using-auto-tls.md).
+[Install Cert-Manager](../serving/installing-cert-manager.md) if you want to use
+the [automatic TLS cert provisioning feature](../serving/using-auto-tls.md).
 
 ## Cleaning up
 
@@ -111,5 +111,3 @@ up.
 To reset only the Kubernetes cluster to a fresh one, click "Reset Kubernetes
 cluster" in the
 [_Reset_ preferences](https://docs.docker.com/docker-for-mac/#reset).
-
-
