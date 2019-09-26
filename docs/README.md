@@ -55,6 +55,8 @@ With a clear project scope, lightweight governance model, and clean lines of
 separation between pluggable components, the Knative project establishes an
 efficient contributor workflow.
 
+While not part of a software foundation, Knative provides contributors with a clear project scope, open governance with multiple companies represented, and clean lines of separation between pluggable components. The Knative project strives for an efficient contributor workflow.
+
 Knative is a diverse, open, and inclusive community. To get involved, see
 [CONTRIBUTING.md](../contributing/CONTRIBUTING.md) and join the
 [Knative community](../community/).
