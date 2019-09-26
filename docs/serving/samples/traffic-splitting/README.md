@@ -94,7 +94,7 @@ serving/samples/traffic-splitting/updated_sample.yaml
 1.  Execute the command below to update Service, resulting in a new Revision.
 
 ```shell
-kubectl apply --filename docs/erving/samples/traffic-splitting/updated_sample.yaml
+kubectl apply --filename docs/serving/samples/traffic-splitting/updated_sample.yaml
 ```
 
 2. With our `traffic` block, traffic will _not_ shift to the new Revision
