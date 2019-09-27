@@ -92,6 +92,9 @@ xxxxxxx-ingressgateway   LoadBalancer   12.34.567.890   98.765.43.210   80:32380
 
 > Note: Updating the external IP address can take several minutes.
 
-The [external IP address](https://console.cloud.google.com/networking/addresses/list) should have a value now in the `In use by` column and should not be `None` anymore:
+The
+[external IP address](https://console.cloud.google.com/networking/addresses/list)
+should have a value now in the `In use by` column and should not be `None`
+anymore:
 
 ![External IP address assigned](gke-assigning-static-ip-address.png)
