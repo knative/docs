@@ -27,7 +27,7 @@ to run multiple installation commands.
 
 - Kubernetes requirements:
 
-  - Your Kubernetes cluster version must be v1.11 or newer.
+  - Your Kubernetes cluster version must be v1.14 or newer.
 
   - Your version of the
     [`kubectl` CLI tool](https://kubernetes.io/docs/tasks/tools/install-kubectl/)

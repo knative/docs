@@ -12,7 +12,7 @@ You can find [guides for other platforms here](./README.md).
 
 ## Before you begin
 
-Knative requires a Kubernetes cluster v1.11 or newer. This guide walks you
+Knative requires a Kubernetes cluster v1.14 or newer. This guide walks you
 through creating a cluster with the correct specifications for Knative on IBM
 Cloud Kubernetes Service.
 
@@ -66,7 +66,7 @@ environment variables.
 To make sure the cluster is large enough to host all the Knative and Istio
 components, the recommended configuration for a cluster is:
 
-- Kubernetes version 1.11 or later
+- Kubernetes version 1.14 or later
 - 4 vCPU nodes with 16GB memory (`b2c.4x16`)
 
 1.  Set `ibmcloud` to the appropriate region:

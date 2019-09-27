@@ -13,9 +13,7 @@ using pre-built images.
 
 ## Before you Begin
 
-Knative requires a Kubernetes cluster v1.11 or newer with the
-[MutatingAdmissionWebhook admission controller](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#how-do-i-turn-on-an-admission-controller)
-enabled.
+Knative requires a Kubernetes cluster v1.14 or newer.
 
 `kubectl` v1.10 is also required.
 
@@ -36,15 +34,16 @@ see Performing a Custom Knative Installation.
     race conditions during the install, which cause intermittent errors:
 
         kubectl apply -l knative.dev/crd-install=true \
-        --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
-                --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml
+          --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
+          --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml
 
-2.  To complete the install of Knative and it's dependencies, run the
+2.  To complete the install of Knative and its dependencies, run the
     `kubectl apply` command again, this time without the
     `-l knative.dev/crd-install=true`:
 
-        kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
-                --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml
+        kubectl apply \
+          --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
+          --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml
 
 3.  Monitor the Knative namespaces and wait until all of the pods come up with a
     `STATUS` of `Running`:

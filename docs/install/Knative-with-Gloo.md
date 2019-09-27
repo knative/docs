@@ -14,11 +14,9 @@ Gloo provides a complete gateway replacement for Istio and supports the full Kna
 
 ## Before you begin
 
-Knative requires a Kubernetes cluster v1.11 or newer with the
-[MutatingAdmissionWebhook admission controller](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#how-do-i-turn-on-an-admission-controller)
-enabled. `kubectl` v1.10 is also required. This guide assumes that you've
-already created a Kubernetes cluster which you're comfortable installing _alpha_
-software on.
+Knative requires a Kubernetes cluster v1.14 or newer. `kubectl` v1.10 is also
+required. This guide assumes that you've already created a Kubernetes cluster
+which you're comfortable installing _alpha_ software on.
 
 This guide assumes you are using bash in a Mac or Linux environment; some commands will need to be adjusted for use in a Windows environment.
 
