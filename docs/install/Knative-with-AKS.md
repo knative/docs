@@ -12,8 +12,8 @@ You can find [guides for other platforms here](./README.md).
 
 ## Before you begin
 
-Knative requires a Kubernetes cluster v1.14 or newer. `kubectl` v1.10 is also
-required. This guide walks you through creating a cluster with the correct
+Knative requires a Kubernetes cluster v1.14 or newer, as well as a compatible
+`kubectl`. This guide walks you through creating a cluster with the correct
 specifications for Knative on Azure Kubernetes Service (AKS).
 
 This guide assumes you are using bash in a Mac or Linux environment; some
@@ -51,8 +51,8 @@ brew install azure-cli
 ### Installing kubectl
 
 1. If you already have `kubectl`, run `kubectl version` to check your client
-   version. If you have `kubectl` v1.10 installed, you can skip to the next
-   section and create an AKS cluster
+   version. If the client is within a minor version of the master, then you
+   can skip to the next section and create an AKS cluster
 
 ```bash
 az aks install-cli
@@ -115,7 +115,7 @@ recommended configuration for a cluster is:
    az aks create --resource-group $RESOURCE_GROUP \
    --name $CLUSTER_NAME \
    --generate-ssh-keys \
-   --kubernetes-version 1.14.0 \
+   --kubernetes-version 1.14.6 \
    --enable-rbac \
    --node-vm-size Standard_DS3_v2
    ```

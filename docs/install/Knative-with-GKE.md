@@ -15,8 +15,8 @@ You can find [guides for other platforms here](./README.md).
 > [Cloud Run on GKE](https://cloud.google.com/run/docs/gke/setup) is a hosted
 > offering on top of GKE that builds around Istio and Knative Serving.
 
-Knative requires a Kubernetes cluster v1.14 or newer. `kubectl` v1.10 is also
-required. This guide walks you through creating a cluster with the correct
+Knative requires a Kubernetes cluster v1.14 or newer, as well as a compatible
+`kubectl`. This guide walks you through creating a cluster with the correct
 specifications for Knative on Google Cloud Platform (GCP).
 
 This guide assumes you are using `bash` in a Mac or Linux environment; some
@@ -24,7 +24,7 @@ commands will need to be adjusted for use in a Windows environment.
 
 ### Installing the Google Cloud SDK and `kubectl`
 
-1. If you already have `gcloud` installed with `kubectl` version 1.10 or newer,
+1. If you already have `gcloud` installed with `kubectl`,
    you can skip these steps.
 
    > Tip: To check which version of `kubectl` you have installed, enter:
