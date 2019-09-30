@@ -12,7 +12,7 @@ TARGET is not specified, it will use "World" as the TARGET.
 
 ## Prerequisites
 
-- A Kubernetes cluster with Knative installed. Follow the
+- A Kubernetes cluster with Knative installed and DNS configured. Follow the
   [installation instructions](../../../install/README.md) if you need to create
   one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
@@ -161,33 +161,19 @@ folder) you're ready to build and deploy the sample app.
      for your app.
    - Automatically scale your pods up and down (including to zero active pods).
 
-1. To find the IP address for your service, enter these commands to get the
-   ingress IP for your cluster. If your cluster is new, it may take sometime for
-   the service to get asssigned an external IP address.
-
-   ```shell
-   INGRESSGATEWAY=istio-ingressgateway
-
-   kubectl get svc $INGRESSGATEWAY --namespace istio-system
-
-   NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
-   xxxxxxx-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
-
-   ```
-
 1. To find the URL for your service, enter:
 
    ```
    kubectl get ksvc helloworld-rust  --output=custom-columns=NAME:.metadata.name,URL:.status.url
    NAME                URL
-   helloworld-rust     http://helloworld-rust.default.example.com
+   helloworld-rust     http://helloworld-rust.default.1.2.3.4.xip.io
    ```
 
 1. Now you can make a request to your app and see the result. Replace
-   `{IP_ADDRESS}` with the address you see returned in the previous step.
+   the URL below the with URL returned in the previous command.
 
    ```shell
-   curl -H "Host: helloworld-rust.default.example.com" http://{IP_ADDRESS}
+   curl http://helloworld-rust.default.1.2.3.4.xip.io
    Hello World!
    ```
 
