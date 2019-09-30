@@ -114,7 +114,7 @@ The command will return something similar to this:
 ```shell
    NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
    istio-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
-````
+```
 
 Take note of the `EXTERNAL-IP` address.
 
