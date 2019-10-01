@@ -297,7 +297,7 @@ To verify that your sample app has been successfully deployed:
     Hello World: Micronaut Sample v1
    ```
 
-Congtratualations on deploying your sample Java app to Knative!
+Congratulations on deploying your sample Java app to Knative!
 
 ## Removing the sample app deployment
 
