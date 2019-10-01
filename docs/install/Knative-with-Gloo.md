@@ -79,6 +79,45 @@ rerun the command to see the current status.
 
 Now you can deploy an app using your freshly installed Knative environment.
 
+## Configuring DNS
+
+Knative dispatches to different services based on their hostname, so it greatly
+simplifies things to have DNS properly configured. For this, we must look up the
+external IP address that Gloo received. This can be done with the following command:
+
+```
+$ kubectl get svc -ngloo-system
+NAME                     TYPE           CLUSTER-IP    EXTERNAL-IP    PORT(S)                      AGE
+gloo                     ClusterIP      10.0.11.200   <none>         9977/TCP                     9m50s
+knative-external-proxy   LoadBalancer   10.0.15.230   34.83.80.117   80:30351/TCP,443:30157/TCP   9m50s
+knative-internal-proxy   ClusterIP      10.0.7.102    <none>         80/TCP,443/TCP               9m50s
+```
+
+
+This external IP can be used with your DNS provider with a wildcard `A` record;
+however, for a basic functioning DNS setup (not suitable for production!) this
+external IP address can be used with `xip.io` in the `config-domain` ConfigMap
+in `knative-serving`. You can edit this with the following command:
+
+```
+kubectl edit cm config-domain --namespace knative-serving
+```
+
+Given the external IP above, change the content to:
+
+```
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-domain
+  namespace: knative-serving
+data:
+  # xip.io is a "magic" DNS provider, which resolves all DNS lookups for:
+  # *.{ip}.xip.io to {ip}.
+  34.83.80.117.xip.io: ""
+```
+
+
 ## Running Knative apps
 
 Now that your cluster has Gloo & Knative installed, you can run serverless applications with Knative.
@@ -116,49 +155,23 @@ Let's deploy an app to test that everything is set up correctly:
 
    **Knative Services** are exposed via the *Host* header assigned by Knative. By
    default, Knative will use the header `Host`:
-   `{service-name}.{namespace}.example.com`. You can discover the appropriate *Host* header by checking the URL Knative has assigned to the `helloworld-go` service created above.
+   `{service-name}.{namespace}.{the domain we setup above}`. You can see this with:
 
    ```
-   $ kubectl get ksvc helloworld-go -n default  --output=custom-columns=NAME:.metadata.name,URL:.status.url
-   ```
-  
-   ```
-   NAME            URL
-   helloworld-go   http://helloworld-go.default.example.com
+   $ kubectl get ksvc helloworld-go
+   NAME            URL                                                LATESTCREATED         LATESTREADY           READY     REASON
+   helloworld-go   http://helloworld-go.default.34.83.80.117.xip.io   helloworld-go-nwblj   helloworld-go-nwblj   True
    ```
 
-   Gloo uses the `Host` header to route requests to the correct
-   service. You can send a request to the `helloworld-go` service with curl
-   using the `Host` and `$GATEWAY_URL` from above:
+   You can send a request to the `helloworld-go` service with curl using the `URL` given above:
 
    ```
-   curl -H "Host: helloworld-go.default.example.com" $(glooctl proxy url --name knative-external-proxy)
-   ```
-  
-   ```
+   $ curl http://helloworld-go.default.34.83.124.52.xip.io
+
    Hello Go Sample v1!
    ```
 
 Congratulations! You have successfully installed Knative with Gloo to manage and route to serverless applications!
-
-> Note that when following other Knative tutorials, you'll need to connect to the Gloo Gateway rather than the Istio Gateway when the tutorials prompts doing so.
-
-To get the URL of the Gloo Gateway, run
-
-```bash
-export GATEWAY_URL=$(glooctl proxy url --name knative-external-proxy)
-
-echo $GATEWAY_URL
-http://192.168.99.230:31864
-```
-
-To send requests to your service:
-
-```bash
-export GATEWAY_URL=$(glooctl proxy url --name knative-external-proxy)
-
-curl -H "Host: helloworld-go.myproject.example.com" $GATEWAY_URL
-```
 
 ## What's next
 
