@@ -5,12 +5,16 @@ weight: 10
 type: "docs"
 ---
 
-Learn how to deploy Gloo and Knative to your Kubernetes cluster using the Gloo command line tool `glooctl`.
- 
+Learn how to deploy Gloo and Knative to your Kubernetes cluster using the Gloo
+command line tool `glooctl`.
 
-[Gloo](https://gloo.solo.io) is a popular open-source Envoy control plane and API gateway built for Kubernetes (and other platforms). 
+[Gloo](https://gloo.solo.io) is a popular open-source Envoy control plane and
+API gateway built for Kubernetes (and other platforms).
 
-Gloo provides a complete gateway replacement for Istio and supports the full Knative Ingress spec. Choose Gloo if you don't require a service mesh in your cluster and want a lightweight alternative that requires less resource usage and operational overhead.
+Gloo provides a complete gateway replacement for Istio and supports the full
+Knative Ingress spec. Choose Gloo if you don't require a service mesh in your
+cluster and want a lightweight alternative that requires less resource usage and
+operational overhead.
 
 ## Before you begin
 
@@ -18,11 +22,14 @@ Knative requires a Kubernetes cluster v1.14 or newer, as well as a compatible
 `kubectl`. This guide assumes that you've already created a Kubernetes cluster
 which you're comfortable installing _alpha_ software on.
 
-This guide assumes you are using bash in a Mac or Linux environment; some commands will need to be adjusted for use in a Windows environment.
+This guide assumes you are using bash in a Mac or Linux environment; some
+commands will need to be adjusted for use in a Windows environment.
 
 ## Installing Glooctl
 
-Gloo's CLI tool `glooctl` makes it easy to install both Gloo and Knative without the need to use [Helm](https://helm.sh) or multiple manifests.  Let's go ahead and download `glooctl`:
+Gloo's CLI tool `glooctl` makes it easy to install both Gloo and Knative without
+the need to use [Helm](https://helm.sh) or multiple manifests. Let's go ahead
+and download `glooctl`:
 
 ```shell
 curl -sL https://run.solo.io/gloo/install | sh
@@ -51,19 +58,30 @@ Finally, install Gloo and Knative in a single command with `glooctl`:
 glooctl install knative
 ```
 
-The `glooctl install knative` command can be customized with a variety of options:
-- use `--install-knative-version` to set the installed version of Knative Serving (defaults to `0.8.0`)
+The `glooctl install knative` command can be customized with a variety of
+options:
+
+- use `--install-knative-version` to set the installed version of Knative
+  Serving (defaults to `0.8.0`)
 - use `--install-build` to install Knative Build
 - use `--install-eventing` to install Knative Eventing
-- use `--dry-run` to produce the kubernetes YAML that would be applied to your cluster rather than applying.
-- use `--install-knative=false` to only install Gloo without installing Knative components. This can be used if you wish to install Knative independently of Gloo.
+- use `--dry-run` to produce the kubernetes YAML that would be applied to your
+  cluster rather than applying.
+- use `--install-knative=false` to only install Gloo without installing Knative
+  components. This can be used if you wish to install Knative independently of
+  Gloo.
 
-See https://github.com/solo-io/gloo/blob/master/docs/cli/glooctl_install_knative.md for the full list of available options for installing Knative with `glooctl`
+See
+https://github.com/solo-io/gloo/blob/master/docs/cli/glooctl_install_knative.md
+for the full list of available options for installing Knative with `glooctl`
 
-> Note: `glooctl` generates a manifest which can be piped to stdout or a file using the `--dry-run` flag. Alternatively,
-Gloo can be installed via its [Helm Chart](https://gloo.solo.io/installation/gateway/kubernetes/#installing-on-kubernetes-with-helm), which will permit fine-grained configuration of installation parameters.
+> Note: `glooctl` generates a manifest which can be piped to stdout or a file
+> using the `--dry-run` flag. Alternatively, Gloo can be installed via its
+> [Helm Chart](https://gloo.solo.io/installation/gateway/kubernetes/#installing-on-kubernetes-with-helm),
+> which will permit fine-grained configuration of installation parameters.
 
-Monitor the Gloo and Knative components until each one shows a `STATUS` of `Running` or `Completed`:
+Monitor the Gloo and Knative components until each one shows a `STATUS` of
+`Running` or `Completed`:
 
 ```shell
 kubectl get pods --namespace gloo-system
@@ -81,10 +99,10 @@ Now you can deploy an app using your freshly installed Knative environment.
 
 ## Running Knative apps
 
-Now that your cluster has Gloo & Knative installed, you can run serverless applications with Knative.
+Now that your cluster has Gloo & Knative installed, you can run serverless
+applications with Knative.
 
 Let's deploy an app to test that everything is set up correctly:
-
 
 1. Next, create a `Knative Service`
 
@@ -114,34 +132,39 @@ Let's deploy an app to test that everything is set up correctly:
 
 2. Send a request
 
-   **Knative Services** are exposed via the *Host* header assigned by Knative. By
-   default, Knative will use the header `Host`:
-   `{service-name}.{namespace}.example.com`. You can discover the appropriate *Host* header by checking the URL Knative has assigned to the `helloworld-go` service created above.
+   **Knative Services** are exposed via the _Host_ header assigned by Knative.
+   By default, Knative will use the header `Host`:
+   `{service-name}.{namespace}.example.com`. You can discover the appropriate
+   _Host_ header by checking the URL Knative has assigned to the `helloworld-go`
+   service created above.
 
    ```
    $ kubectl get ksvc helloworld-go -n default  --output=custom-columns=NAME:.metadata.name,URL:.status.url
    ```
-  
+
    ```
    NAME            URL
    helloworld-go   http://helloworld-go.default.example.com
    ```
 
-   Gloo uses the `Host` header to route requests to the correct
-   service. You can send a request to the `helloworld-go` service with curl
-   using the `Host` and `$GATEWAY_URL` from above:
+   Gloo uses the `Host` header to route requests to the correct service. You can
+   send a request to the `helloworld-go` service with curl using the `Host` and
+   `$GATEWAY_URL` from above:
 
    ```
    curl -H "Host: helloworld-go.default.example.com" $(glooctl proxy url --name knative-external-proxy)
    ```
-  
+
    ```
    Hello Go Sample v1!
    ```
 
-Congratulations! You have successfully installed Knative with Gloo to manage and route to serverless applications!
+Congratulations! You have successfully installed Knative with Gloo to manage and
+route to serverless applications!
 
-> Note that when following other Knative tutorials, you'll need to connect to the Gloo Gateway rather than the Istio Gateway when the tutorials prompts doing so.
+> Note that when following other Knative tutorials, you'll need to connect to
+> the Gloo Gateway rather than the Istio Gateway when the tutorials prompts
+> doing so.
 
 To get the URL of the Gloo Gateway, run
 
