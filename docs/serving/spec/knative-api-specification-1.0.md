@@ -91,7 +91,7 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 interpreted as described in [RFC 2119](https://tools.ietf.org/html/rfc2119).
 
 There is no formal specification of the Kubernetes API and Resource Model. This
-document assumes Kubernetes 1.13 behavior; this behavior will typically be
+document assumes Kubernetes 1.14 behavior; this behavior will typically be
 supported by many future Kubernetes versions. Additionally, this document may
 reference specific core Kubernetes resources; these references may be
 illustrative (i.e. _an implementation on Kubernetes_) or descriptive (i.e. _this
