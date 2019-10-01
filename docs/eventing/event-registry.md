@@ -2,6 +2,7 @@
 title: "Event registry"
 weight: 20
 type: "docs"
+markup: "mmark"
 ---
 
 ## Overview

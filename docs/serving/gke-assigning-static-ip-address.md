@@ -3,6 +3,7 @@ title: "Assigning a static IP address for Knative on Kubernetes Engine"
 linkTitle: "Assigning static IPs - GKE"
 weight: 35
 type: "docs"
+markup: "mmark"
 ---
 
 If you are running Knative on Google Kubernetes Engine and want to use a

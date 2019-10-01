@@ -3,6 +3,7 @@ title: "Reconcile sources"
 linkTitle: ""
 weight: 30
 type: "docs"
+markup: "mmark"
 ---
 
 Now that we have a Source CRD defined with Sink and SinkURI fields, we'll need

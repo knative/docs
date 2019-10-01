@@ -3,6 +3,7 @@ title: "Hello World - Shell"
 linkTitle: "Shell"
 weight: 1
 type: "docs"
+markup: "mmark"
 ---
 
 A simple web app that executes a shell script. The shell script reads an env

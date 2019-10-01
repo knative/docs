@@ -3,6 +3,7 @@ title: "Available Channels"
 #linkTitle: "Channels"
 weight: 40
 type: "docs"
+markup: "mmark"
 ---
 
 <!--

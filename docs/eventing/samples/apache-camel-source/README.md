@@ -3,6 +3,7 @@ title: "Apache Camel source"
 linkTitle: "Camel source"
 weight: 5
 type: "docs"
+markup: "mmark"
 ---
 
 These samples show how to configure a Camel Source. It is an Event Source that

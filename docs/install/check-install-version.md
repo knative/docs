@@ -3,6 +3,7 @@ title: "Checking the version of your Knative components"
 linkTitle: "Checking your install version"
 weight: 20
 type: "docs"
+markup: "mmark"
 ---
 
 ## Knative Serving (0.4.0 and later)

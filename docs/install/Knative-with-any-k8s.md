@@ -3,6 +3,7 @@ title: "Install on a Kubernetes cluster"
 linkTitle: "On existing cluster"
 weight: 15
 type: "docs"
+markup: "mmark"
 ---
 
 This guide walks you through the installation of the latest version of Knative

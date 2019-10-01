@@ -3,6 +3,7 @@ title: "Install on IBM Cloud Kubernetes Service (IKS)"
 linkTitle: "IBM Cloud Kubernetes Service"
 weight: 10
 type: "docs"
+markup: "mmark"
 ---
 
 This guide walks you through the installation of the latest version of Knative

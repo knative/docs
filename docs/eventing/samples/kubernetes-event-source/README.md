@@ -3,6 +3,7 @@ title: "Kubernetes Api Server Source"
 linkTitle: "Kubernetes event"
 weight: 50
 type: "docs"
+markup: "mmark"
 ---
 
 Kubernetes Event Source example shows how to wire kubernetes cluster events for

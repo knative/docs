@@ -3,6 +3,7 @@ title: "Defining a custom resource definition as the source"
 linkTitle: "Defining a CRD source"
 weight: 20
 type: "docs"
+markup: "mmark"
 ---
 
 We'll use Kubebuilder to generate a new

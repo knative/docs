@@ -3,6 +3,7 @@ title: "GitHub webhook sample - Go"
 linkTitle: "GitHub Webhook - Go"
 weight: 1
 type: "docs"
+markup: "mmark"
 ---
 
 A handler written in Go that demonstrates interacting with GitHub through a

@@ -3,6 +3,7 @@ title: "Getting Started with Eventing"
 linkTitle: "Getting Started"
 weight: 9
 type: "docs"
+markup: "mmark"
 ---
 
 Use this guide to learn how to create, send, and verify events in Knative. The steps in this guide demonstrate a basic developer flow for managing events in Knative, including:

@@ -3,6 +3,7 @@ title: "Creating a private cluster-local service"
 linkTitle: "Configuring cluster-local services"
 weight: 20
 type: "docs"
+markup: "mmark"
 ---
 
 By default services deployed through Knative are published to an external IP

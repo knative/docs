@@ -3,6 +3,7 @@ title: "Install on MicroK8s"
 linkTitle: "MicroK8s"
 weight: 10
 type: "docs"
+markup: "mmark"
 ---
 
 [MicroK8s](https://microk8s.io) is a lightweight, powerful fully-conformant Kubernetes that tracks upstream releases and makes clustering trivial. It can run on any flavor of Linux that supports [Snap](https://snapcraft.io) packages. It can run on Windows and Mac OS using [Mutlipass](https://multipass.run).

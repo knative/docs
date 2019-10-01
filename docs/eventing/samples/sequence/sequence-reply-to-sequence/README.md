@@ -3,6 +3,7 @@ title: "Sequence wired to another Sequence"
 linkTitle: "Using Sequences in series"
 weight: 20
 type: "docs"
+markup: "mmark"
 ---
 
 We are going to create the following logical configuration. We create a

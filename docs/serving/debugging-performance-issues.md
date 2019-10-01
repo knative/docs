@@ -3,6 +3,7 @@ title: "Investigating performance issues"
 #linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
 weight: 30
 type: "docs"
+markup: "mmark"
 ---
 
 You deployed your application or function to Knative Serving but its performance

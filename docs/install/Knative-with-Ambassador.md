@@ -3,6 +3,7 @@ title: "Installing Knative with Ambassador"
 linkTitle: "Ambassador API Gatway and Knative"
 weight: 15
 type: "docs"
+markup: "mmark"
 ---
 
 [Ambassador](https://www.getambassador.io/) is a popular Kubernetes-native,

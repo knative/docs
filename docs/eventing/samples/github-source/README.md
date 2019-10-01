@@ -3,6 +3,7 @@ title: "GitHub source"
 linkTitle: "GitHub source"
 weight: 30
 type: "docs"
+markup: "mmark"
 ---
 
 GitHub Source example shows how to wire GitHub events for consumption

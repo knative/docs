@@ -2,6 +2,7 @@
 title: "Parallel"
 weight: 20
 type: "docs"
+markup: "mmark"
 ---
 
 Parallel CRD provides a way to easily define a list of branches, each receiving

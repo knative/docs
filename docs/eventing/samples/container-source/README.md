@@ -3,6 +3,7 @@ title: "Container Source Example"
 linkTitle: "Container source"
 weight: 10
 type: "docs"
+markup: "mmark"
 ---
 
 ContainerSource will start a container image which will generate events under

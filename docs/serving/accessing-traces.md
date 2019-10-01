@@ -3,6 +3,7 @@ title: "Accessing request traces"
 #linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
 weight: 15
 type: "docs"
+markup: "mmark"
 ---
 
 Depending on the request tracing tool that you have installed on your Knative

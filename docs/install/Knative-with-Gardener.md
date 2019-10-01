@@ -3,6 +3,7 @@ title: "Install on Gardener"
 linkTitle: "Gardener"
 weight: 10
 type: "docs"
+markup: "mmark"
 ---
 
 This guide walks you through the installation of the latest version of Knative

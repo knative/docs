@@ -3,6 +3,7 @@ title: "gRPC Server - Go"
 #linkTitle: ""
 weight: 1
 type: "docs"
+markup: "mmark"
 ---
 
 A [gRPC](https://grpc.io) server written in Go.

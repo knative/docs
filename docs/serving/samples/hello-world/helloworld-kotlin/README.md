@@ -3,6 +3,7 @@ title: "Hello World - Kotlin"
 linkTitle: "Kotlin"
 weight: 1
 type: "docs"
+markup: "mmark"
 ---
 
 A simple web app written in Kotlin using [Ktor](https://ktor.io/) that you can

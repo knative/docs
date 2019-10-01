@@ -3,6 +3,7 @@ title: "Hello World - Node.js"
 linkTitle: "Node.js"
 weight: 1
 type: "docs"
+markup: "mmark"
 ---
 
 A simple web app written in Node.js that you can use for testing. It reads in an

@@ -3,6 +3,7 @@ title: "Hello World - Python"
 linkTitle: "Python"
 weight: 1
 type: "docs"
+markup: "mmark"
 ---
 
 A simple web app written in Python that you can use for testing. It reads in an

@@ -3,6 +3,7 @@ title: "Hello World - Ruby"
 linkTitle: "Ruby"
 weight: 1
 type: "docs"
+markup: "mmark"
 ---
 
 A simple web app written in Ruby that you can use for testing. It reads in an

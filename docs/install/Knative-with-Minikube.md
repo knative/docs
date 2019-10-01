@@ -3,6 +3,7 @@ title: "Install on Minikube"
 linkTitle: "Minikube"
 weight: 10
 type: "docs"
+markup: "mmark"
 ---
 
 This guide walks you through the installation of the latest version of

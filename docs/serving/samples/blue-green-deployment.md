@@ -3,6 +3,7 @@ title: "Routing and managing traffic with blue/green deployment"
 linkTitle: "Routing and managing traffic"
 weight:
 type: "docs"
+markup: "mmark"
 ---
 
 This sample demonstrates updating an application to a new version using a

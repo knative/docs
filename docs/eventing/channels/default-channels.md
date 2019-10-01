@@ -3,6 +3,7 @@ title: "Default channels"
 #linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
 weight: 2
 type: "docs"
+markup: "mmark"
 ---
 
 A channel provides an event delivery mechanism that can fan-out received events

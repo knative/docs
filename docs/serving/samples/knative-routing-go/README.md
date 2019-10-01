@@ -3,6 +3,7 @@ title: "Routing across multiple Knative services - Go"
 linkTitle: "Routing services - Go"
 weight: 1
 type: "docs"
+markup: "mmark"
 ---
 
 This example shows how to map multiple Knative services to different paths under

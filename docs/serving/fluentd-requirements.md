@@ -3,6 +3,7 @@ title: "Fluentd container image requirements"
 linkTitle: "Fluentd requirements"
 weight: 10
 type: "docs"
+markup: "mmark"
 ---
 
 Knative Serving uses a [Fluentd](https://www.fluentd.org/) docker image to

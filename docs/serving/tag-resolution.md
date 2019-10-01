@@ -3,6 +3,7 @@ title: "Enabling tag to digest resolution"
 linkTitle: "Tag resolution"
 weight: 75
 type: "docs"
+markup: "mmark"
 ---
 
 Knative serving resolves image tags to a digest when you create a revision. This

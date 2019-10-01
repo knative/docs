@@ -3,6 +3,7 @@ title: "Simple Traffic Splitting Between Revisions"
 linkTitle: "Traffic splitting"
 weight: 1
 type: "docs"
+markup: "mmark"
 ---
 
 This samples builds off of the [Creating a RESTful Service](../rest-api-go)

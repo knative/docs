@@ -2,6 +2,7 @@
 title: "Resources"
 weight: 10
 type: "docs"
+markup: "mmark"
 ---
 
 This page contains information about various tools and technologies that are

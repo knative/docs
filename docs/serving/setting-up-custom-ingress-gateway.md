@@ -3,6 +3,7 @@ title: "Setting up custom ingress gateway"
 linkTitle: "Configuring the ingress gateway"
 weight: 55
 type: "docs"
+markup: "mmark"
 ---
 
 Knative uses a shared ingress Gateway to serve all incoming traffic within

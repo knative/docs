@@ -3,6 +3,7 @@ title: "Enabling automatic TLS certificate provisioning"
 linkTitle: "Enabling auto TLS certs"
 weight: 64
 type: "docs"
+markup: "mmark"
 ---
 
 If you install and configure cert-manager, you can configure Knative to

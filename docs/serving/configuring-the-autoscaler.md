@@ -2,6 +2,7 @@
 title: "Configuring the Autoscaler"
 weight: 10
 type: "docs"
+markup: "mmark"
 ---
 
 Since Knative v0.2, per revision autoscalers have been replaced by a single

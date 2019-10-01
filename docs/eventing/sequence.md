@@ -2,6 +2,7 @@
 title: "Sequence"
 weight: 20
 type: "docs"
+markup: "mmark"
 ---
 
 Sequence CRD provides a way to define an in-order list of functions that will be

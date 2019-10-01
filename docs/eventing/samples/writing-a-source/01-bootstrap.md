@@ -3,6 +3,7 @@ title: "Creating a Kubebuilder project"
 linkTitle: "Creating a project"
 weight: 10
 type: "docs"
+markup: "mmark"
 ---
 
 We'll use Kubebuilder to create a Kubebuilder project and provide common

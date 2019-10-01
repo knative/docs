@@ -3,6 +3,7 @@ title: "Accessing logs"
 #linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
 weight: 5
 type: "docs"
+markup: "mmark"
 ---
 
 If you have not yet installed the logging and monitoring components, go through

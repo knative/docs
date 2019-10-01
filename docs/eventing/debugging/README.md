@@ -3,6 +3,7 @@ title: "Debugging Knative Eventing"
 linkTitle: "Debugging"
 weight: 100
 type: "docs"
+markup: "mmark"
 ---
 
 This is an evolving document on how to debug a non-working Knative Eventing

@@ -3,6 +3,7 @@ title: "Knative Install using Gloo on a Kubernetes Cluster"
 linkTitle: "Gloo"
 weight: 10
 type: "docs"
+markup: "mmark"
 ---
 
 Learn how to deploy Gloo and Knative to your Kubernetes cluster using the Gloo command line tool `glooctl`.

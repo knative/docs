@@ -3,6 +3,7 @@ title: "GCP Cloud Pub/Sub source"
 linkTitle: "Pub/Sub source"
 weight: 20
 type: "docs"
+markup: "mmark"
 ---
 
 This sample shows how to configure the GCP PubSub event source. This event

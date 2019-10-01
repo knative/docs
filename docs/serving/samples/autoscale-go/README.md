@@ -3,6 +3,7 @@ title: "Autoscale Sample App - Go"
 linkTitle: "Autoscaling - Go"
 weight: 1
 type: "docs"
+markup: "mmark"
 ---
 
 A demonstration of the autoscaling capabilities of a Knative Serving Revision.

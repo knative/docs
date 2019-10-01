@@ -3,6 +3,7 @@ title: "Install on Docker for Mac OS"
 linkTitle: "Docker - Mac OS"
 weight: 15
 type: "docs"
+markup: "mmark"
 ---
 
 This guide walks you through the installation of the latest version of

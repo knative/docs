@@ -3,6 +3,7 @@ title: "Knative code samples"
 linkTitle: "Code samples"
 weight: 90
 type: "docs"
+markup: "mmark"
 ---
 
 Find and use Knative code samples to help you get up and running with common use

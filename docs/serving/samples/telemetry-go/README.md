@@ -3,6 +3,7 @@ title: "Observability: Monitoring, logging, and tracing sample - Go"
 linkTitle: "Observability - Go"
 weight: 1
 type: "docs"
+markup: "mmark"
 ---
 
 This sample runs a simple web server that makes calls to other in-cluster

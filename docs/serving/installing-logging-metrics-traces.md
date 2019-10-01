@@ -3,6 +3,7 @@ title: "Installing logging, metrics, and traces"
 #linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
 weight: 40
 type: "docs"
+markup: "mmark"
 ---
 
 If you followed one of the

@@ -3,6 +3,7 @@ title: "Publishing to your Kubernetes cluster"
 linkTitle: "Publishing to your cluster"
 weight: 40
 type: "docs"
+markup: "mmark"
 ---
 
 So far we've only tested the controller code locally. Now we'd like to deploy it

@@ -3,6 +3,7 @@ title: "Knative Eventing code samples"
 linkTitle: "Code samples"
 weight: 90
 type: "docs"
+markup: "mmark"
 ---
 
 Use the following code samples to help you understand the various use cases for

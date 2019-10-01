@@ -3,6 +3,7 @@ title: "Hello world - .NET Core"
 linkTitle: ".NET"
 weight: 1
 type: "docs"
+markup: "mmark"
 ---
 
 A simple web app written in C# using .NET Core 2.2 that you can use for testing.

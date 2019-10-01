@@ -3,6 +3,7 @@ title: "Setting up a custom domain"
 #linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
 weight: 55
 type: "docs"
+markup: "mmark"
 ---
 
 By default, Knative Serving routes use `example.com` as the default domain. The

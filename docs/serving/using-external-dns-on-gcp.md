@@ -3,6 +3,7 @@ title: "Using ExternalDNS on Google Cloud Platform to automate DNS setup"
 #linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
 weight: 70
 type: "docs"
+markup: "mmark"
 ---
 
 [ExternalDNS](https://github.com/kubernetes-incubator/external-dns) is a tool
