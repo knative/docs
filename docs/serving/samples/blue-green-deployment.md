@@ -38,9 +38,6 @@ metadata:
   namespace: default
 spec:
   template:
-    metadata:
-      labels:
-        knative.dev/type: container
     spec:
       containers:
         - image: gcr.io/knative-samples/knative-route-demo:blue # The URL to the sample app docker image
@@ -127,9 +124,6 @@ metadata:
   namespace: default
 spec:
   template:
-    metadata:
-      labels:
-        knative.dev/type: container
     spec:
       containers:
         - image: gcr.io/knative-samples/knative-route-demo:green # URL to the new version of the sample app docker image
