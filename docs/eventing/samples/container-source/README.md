@@ -62,13 +62,14 @@ Use following command to create the service from `service.yaml`:
 ```shell
 kubectl apply --filename service.yaml
 ```
+
 The status of the created service can be seen using:
 
 ```shell
 kubectl get ksvc
 
-NAME            URL                                        LATESTCREATED         LATESTREADY           READY   REASON
-event-display   http://event-display.default.example.com   event-display-gqjbw   event-display-gqjbw   True    
+NAME            URL                                           LATESTCREATED         LATESTREADY           READY   REASON
+event-display   http://event-display.default.1.2.3.4.xip.io   event-display-gqjbw   event-display-gqjbw   True    
 ```
 
 ### Create a ContainerSource using the heartbeats image

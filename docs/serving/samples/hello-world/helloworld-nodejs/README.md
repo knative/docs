@@ -20,7 +20,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-nodejs
 
 ## Before you begin
 
-- A Kubernetes cluster with Knative installed. Follow the
+- A Kubernetes cluster with Knative installed and DNS configured. Follow the
   [installation instructions](../../../../install/README.md) if you need to
   create one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
@@ -180,32 +180,19 @@ folder) you're ready to build and deploy the sample app.
      for your app.
    - Automatically scale your pods up and down (including to zero active pods).
 
-1. To find the IP address for your service, use these commands to get the
-   ingress IP for your cluster. If your cluster is new, it may take sometime for
-   the service to get asssigned an external IP address.
-
-   ```shell
-   INGRESSGATEWAY=istio-ingressgateway
-
-   kubectl get svc $INGRESSGATEWAY --namespace istio-system
-
-   NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
-   xxxxxxx-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
-   ```
-
 1. To find the URL for your service, use
 
    ```
    kubectl get ksvc helloworld-nodejs  --output=custom-columns=NAME:.metadata.name,URL:.status.url
    NAME                URL
-   helloworld-nodejs   http://helloworld-nodejs.default.example.com
+   helloworld-nodejs   http://helloworld-nodejs.default.1.2.3.4.xip.io
    ```
 
-1. Now you can make a request to your app to see the result. Replace
-   `{IP_ADDRESS}` with the address you see returned in the previous step.
+1. Now you can make a request to your app and see the result. Replace
+   the URL below the with URL returned in the previous command.
 
    ```shell
-   curl -H "Host: helloworld-nodejs.default.example.com" http://{IP_ADDRESS}
+   curl http://helloworld-nodejs.default.1.2.3.4.xip.io
    Hello Node.js Sample v1!
    ```
 

@@ -99,29 +99,19 @@ kubectl get revisions --output yaml
 Testing the gRPC service requires using a gRPC client built from the same
 protobuf definition used by the server.
 
-1. Fetch the created ingress hostname and IP.
+The Dockerfile builds the client binary. To run the client you will use the
+same container image deployed for the server with an override to the
+entrypoint command to use the client binary instead of the server binary.
 
-   ```shell
-   # Put the ingress IP into an environment variable.
-   export SERVICE_IP=$(kubectl get svc istio-ingressgateway --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*].ip}")
-   ```
+Replace `{username}` with your Docker Hub user name and run the command:
 
-1. Use the gRPC client to send message streams to the gRPC server.
+```shell
+docker run --rm {username}/grpc-ping-go \
+  /client \
+  -server_addr="grpc-ping.default.1.2.3.4.xip.io:80" \
+  -insecure
+```
 
-   The Dockerfile builds the client binary. To run the client you will use the
-   same container image deployed for the server with an override to the
-   entrypoint command to use the client binary instead of the server binary.
-
-   Replace `{username}` with your Docker Hub user name and run the command:
-
-   ```shell
-   docker run --rm {username}/grpc-ping-go \
-     /client \
-     -server_addr="${SERVICE_IP}:80" \
-     -server_host_override="grpc-ping.default.example.com" \
-     -insecure
-   ```
-
-   The arguments after the container tag `{username}/grpc-ping-go` are used
-   instead of the entrypoint command defined in the Dockerfile `CMD` statement.
+The arguments after the container tag `{username}/grpc-ping-go` are used
+instead of the entrypoint command defined in the Dockerfile `CMD` statement.
   

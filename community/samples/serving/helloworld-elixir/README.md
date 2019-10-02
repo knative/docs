@@ -160,33 +160,20 @@ above.
       for your app.
     - Automatically scale your pods up and down (including to zero active pods).
 
-1.  To find the IP address for your service, use these commands to get the
-    ingress IP for your cluster. If your cluster is new, it may take sometime
-    for the service to get asssigned an external IP address.
-
-    ```shell
-    INGRESSGATEWAY=istio-ingressgateway
-
-    kubectl get svc $INGRESSGATEWAY --namespace istio-system
-
-    NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
-    xxxxxxx-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
-    ```
-
 1.  To find the URL for your service, use
 
     ```
     kubectl get ksvc helloworld-elixir --output=custom-columns=NAME:.metadata.name,URL:.status.url
 
     NAME                URL
-    helloworld-elixir   http://helloworld-elixir.default.example.com
+    helloworld-elixir   http://helloworld-elixir.default.1.2.3.4.xip.io
     ```
 
 1.  Now you can make a request to your app to see the results. Replace
     `{IP_ADDRESS}` with the address you see returned in the previous step.
 
         ```shell
-        curl -H "Host: helloworld-elixir.default.example.com" http://{IP_ADDRESS}
+        curl http://helloworld-elixir.default.1.2.3.4.xip.io
 
         ...
         # HTML from your application is returned.

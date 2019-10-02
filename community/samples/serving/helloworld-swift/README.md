@@ -11,8 +11,8 @@ specified, the app uses "World" as the TARGET.
 
 ## Prerequisites
 
-- You must have a Kubernetes cluster with Knative installed. If you need to
-  create a cluster, follow the
+- You must have a Kubernetes cluster with Knative installed and DNS configured.
+  If you need to create a cluster, follow the
   [installation instructions](../../../install/README.md).
 - You must have [Docker](https://www.docker.com) installed and running on your
   local machine, and a Docker Hub account configured (used for container
@@ -144,32 +144,19 @@ folder) you're ready to build and deploy the sample app.
      for your app.
    - Automatically scales your pods up and down (including to zero active pods).
 
-1. To find the IP address for your service, use
-   `kubectl get svc knative-ingressgateway --namespace istio-system` to get the
-   ingress IP for your cluster. If your cluster is new, it might take sometime
-   for the service to get asssigned an external IP address.
-
-   ```shell
-   kubectl get svc knative-ingressgateway --namespace istio-system
-
-   NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
-   knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
-
-   ```
-
 1. To find the URL for your service, use the following command:
 
    ```
    kubectl get ksvc helloworld-swift  --output=custom-columns=NAME:.metadata.name,URL:.status.url
    NAME               URL
-   helloworld-swift   http://helloworld-swift.default.example.com
+   helloworld-swift   http://helloworld-swift.default.1.2.3.4.xip.io
    ```
 
-1. Now you can make a request to your app to see the result. Replace
-   `{IP_ADDRESS}` with the address you see returned in the previous step:
+1. Now you can make a request to your app and see the result. Replace
+   the URL below the with URL returned in the previous command.
 
    ```shell
-   curl -H "Host: helloworld-swift.default.example.com" http://{IP_ADDRESS}
+   curl http://helloworld-swift.default.1.2.3.4.xip.io
    Hello Swift
    ```
 
