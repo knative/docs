@@ -13,7 +13,8 @@ using pre-built images.
 
 ## Before you Begin
 
-Knative requires a Kubernetes cluster v1.14 or newer, as well as a compatible `kubectl`.
+Knative requires a Kubernetes cluster v1.14 or newer, as well as a compatible
+`kubectl`.
 
 This guide assumes that you have already
 [created a Kubernetes cluster](https://kubernetes.io/docs/setup/) and are using

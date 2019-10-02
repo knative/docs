@@ -20,8 +20,8 @@ To change the {default-domain} value there are a few steps involved:
    kubectl edit cm config-domain --namespace knative-serving
    ```
 
-   This command opens your default text editor and allows you to edit the [config
-   map](https://github.com/knative/serving/blob/master/config/config-domain.yaml).
+   This command opens your default text editor and allows you to edit the
+   [config map](https://github.com/knative/serving/blob/master/config/config-domain.yaml).
 
    ```yaml
    apiVersion: v1
@@ -38,8 +38,8 @@ To change the {default-domain} value there are a few steps involved:
    ```
 
 1. Edit the file to replace `example.com` with the domain you'd like to use,
-   remove the `_example` key and save your changes.
-   In this example, we configure `mydomain.com` for all routes:
+   remove the `_example` key and save your changes. In this example, we
+   configure `mydomain.com` for all routes:
 
    ```yaml
    apiVersion: v1
@@ -174,5 +174,3 @@ If you are using Google Cloud DNS, you can find step-by-step instructions in the
 Once the domain update has propagated, you can access your app using the fully
 qualified domain name of the deployed route, for example
 `http://helloworld-go.default.mydomain.com`
-
-
