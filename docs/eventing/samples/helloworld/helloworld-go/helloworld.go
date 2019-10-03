@@ -18,13 +18,13 @@ type eventData struct {
 func receive(ctx context.Context, event cloudevents.Event, response *cloudevents.EventResponse) error {
 	// Here is where your code to process the event will go.
 	// In this example we will log the event msg
-	log.Printf("Event Context: %+v\n", event.Context)
+	log.Printf("Event received. Context: %v\n", event.Context)
 	data := &HelloWorld{}
 	if err := event.DataAs(data); err != nil {
 		log.Printf("Error while extracting cloudevent Data: %s\n", err.Error())
 		return err
 	}
-	log.Printf("Hello World Message %q", data.Msg)
+	log.Printf("Hello World Message from received event %q", data.Msg)
 
 	// Respond with another event (optional)
 	// This is optional and is intended to show how to respond back with another event after processing.
