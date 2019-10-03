@@ -1,10 +1,3 @@
----
-title: "Hello World - Go"
-linkTitle: "Go"
-weight: 1
-type: "docs"
----
-
 A simple web app written in Go that you can use to test knative eventing. It shows how to consume a [CloudEvent](https://cloudevents.io/) in Knative eventing, and optionally how to respond back with another CloudEvent in the http response, using the [Go SDK for CloudEvents](https://github.com/cloudevents/sdk-go)
 
 We will deploy the app as a [Knative Serving Service](../../../../serving/README.md). However, you can also deploy the app as a [K8s Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) along with a [K8s Service](https://kubernetes.io/docs/concepts/services-networking/service/).
