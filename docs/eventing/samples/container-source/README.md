@@ -69,7 +69,7 @@ The status of the created service can be seen using:
 kubectl get ksvc
 
 NAME            URL                                           LATESTCREATED         LATESTREADY           READY   REASON
-event-display   http://event-display.default.1.2.3.4.xip.io   event-display-gqjbw   event-display-gqjbw   True    
+event-display   http://event-display.default.1.2.3.4.xip.io   event-display-gqjbw   event-display-gqjbw   True
 ```
 
 ### Create a ContainerSource using the heartbeats image

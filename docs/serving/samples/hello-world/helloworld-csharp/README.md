@@ -78,26 +78,26 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-csharp
    # https://hub.docker.com/_/microsoft-dotnet-core-sdk/
    FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build
    WORKDIR /app
-   
+
    # Install production dependencies.
    # Copy csproj and restore as distinct layers.
    COPY *.csproj ./
    RUN dotnet restore
-   
+
    # Copy local code to the container image.
    COPY . ./
    WORKDIR /app
-   
+
    # Build a release artifact.
    RUN dotnet publish -c Release -o out
-   
-   
+
+
    # Use Microsoft's official runtime .NET image.
    # https://hub.docker.com/_/microsoft-dotnet-core-aspnet/
    FROM mcr.microsoft.com/dotnet/core/aspnet:2.2 AS runtime
    WORKDIR /app
    COPY --from=build /app/out ./
-   
+
    # Run the web service on container startup.
    ENTRYPOINT ["dotnet", "helloworld-csharp.dll"]
    ```
@@ -173,8 +173,8 @@ folder) you're ready to build and deploy the sample app.
    helloworld-csharp   http://helloworld-csharp.default.1.2.3.4.xip.io
    ```
 
-1. Now you can make a request to your app and see the result. Replace
-   the URL below the with URL returned in the previous command.
+1. Now you can make a request to your app and see the result. Replace the URL
+   below the with URL returned in the previous command.
 
    ```shell
    curl http://helloworld-csharp.default.1.2.3.4.xip.io

@@ -205,8 +205,8 @@ folder) you're ready to build and deploy the sample app.
    helloworld-kotlin   http://helloworld-kotlin.default.1.2.3.4.xip.io
    ```
 
-1. Now you can make a request to your app and see the result. Replace
-   the URL below the with URL returned in the previous command.
+1. Now you can make a request to your app and see the result. Replace the URL
+   below the with URL returned in the previous command.
 
    ```shell
    curl http://helloworld-kotlin.default.1.2.3.4.xip.io
