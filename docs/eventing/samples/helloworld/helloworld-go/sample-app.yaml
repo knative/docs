@@ -1,0 +1,39 @@
+# Namespace for sample application with eventing enabled
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: knative-samples
+  labels:
+       knative-eventing-injection: enabled
+---
+# Knative Serving service that will receive the event
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: helloworld-go
+  namespace: knative-samples
+spec:
+  template:
+    spec:
+      containers:
+      - image: docker.io/akashv/helloworld-go
+---
+# Knative Eventing Trigger to trigger the helloworld-go service
+apiVersion: eventing.knative.dev/v1alpha1
+kind: Trigger
+metadata:
+  name: helloworld-go
+  namespace: knative-samples
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: dev.knative.samples.helloworld
+      source: dev.knative.samples/helloworldsource
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1alpha1
+      kind: Service
+      name: helloworld-go
+---
+
