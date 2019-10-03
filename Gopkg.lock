@@ -11,7 +11,7 @@
     "internal/optional",
     "internal/trace",
     "internal/version",
-    "storage"
+    "storage",
   ]
   pruneopts = "NUT"
   revision = "28a4bc8c44b3acbcc482cff0cdf7de29a4688b61"
@@ -26,6 +26,26 @@
   revision = "3a771d992973f24aa725d07868b467d1ddfceafb"
 
 [[projects]]
+  digest = "1:d3c3de7c1ad57f795e5c409afa842fea27899f124622bcdce83f8bea8721b9db"
+  name = "github.com/cloudevents/sdk-go"
+  packages = [
+    ".",
+    "pkg/cloudevents",
+    "pkg/cloudevents/client",
+    "pkg/cloudevents/context",
+    "pkg/cloudevents/datacodec",
+    "pkg/cloudevents/datacodec/json",
+    "pkg/cloudevents/datacodec/xml",
+    "pkg/cloudevents/observability",
+    "pkg/cloudevents/transport",
+    "pkg/cloudevents/transport/http",
+    "pkg/cloudevents/types",
+  ]
+  pruneopts = "NUT"
+  revision = "4cc108a637ff4bf2d1848c60d5fbb0f711fd1b8c"
+  version = "v0.9.2"
+
+[[projects]]
   digest = "1:7a6852b35eb5bbc184561443762d225116ae630c26a7c4d90546619f1e7d2ad2"
   name = "github.com/dgrijalva/jwt-go"
   packages = ["."]
@@ -38,7 +58,7 @@
   name = "github.com/eclipse/paho.mqtt.golang"
   packages = [
     ".",
-    "packets"
+    "packets",
   ]
   pruneopts = "NUT"
   revision = "36d01c2b4cbeb3d2a12063e4880ce30800af9560"
@@ -53,7 +73,7 @@
     "ptypes",
     "ptypes/any",
     "ptypes/duration",
-    "ptypes/timestamp"
+    "ptypes/timestamp",
   ]
   pruneopts = "NUT"
   revision = "b4deda0973fb4c70b50d226b1af49f3da59f5265"
@@ -85,10 +105,18 @@
     "stringclassifier",
     "stringclassifier/internal/pq",
     "stringclassifier/searchset",
-    "stringclassifier/searchset/tokenizer"
+    "stringclassifier/searchset/tokenizer",
   ]
   pruneopts = "NUT"
   revision = "c2a262e3078ad90718f59866f1ec18601b2fee1b"
+
+[[projects]]
+  digest = "1:ab3ec1fe3e39bac4b3ab63390767766622be35b7cab03f47f787f9ec60522a53"
+  name = "github.com/google/uuid"
+  packages = ["."]
+  pruneopts = "NUT"
+  revision = "0cd6bf5da1e1c83f8b45653022c74f71af0538a4"
+  version = "v1.1.1"
 
 [[projects]]
   digest = "1:fa300677001e58a995e10afe4e251d2a6e30d3815a234d553b5810db7795d5a2"
@@ -131,7 +159,7 @@
     "model",
     "propagation",
     "reporter",
-    "reporter/http"
+    "reporter/http",
   ]
   pruneopts = "NUT"
   revision = "f197ec29e729f226d23370ea60f0e49b8f44ccf4"
@@ -142,7 +170,7 @@
   name = "github.com/prometheus/client_golang"
   packages = [
     "prometheus",
-    "prometheus/promhttp"
+    "prometheus/promhttp",
   ]
   pruneopts = "NUT"
   revision = "c5b7fccd204277076155f10851dad72b76a49317"
@@ -163,7 +191,7 @@
   packages = [
     "expfmt",
     "internal/bitbucket.org/ww/goautoneg",
-    "model"
+    "model",
   ]
   pruneopts = "NUT"
   revision = "7600349dcfe1abd18d72d3a1770870d9800a7801"
@@ -176,7 +204,7 @@
     ".",
     "internal/util",
     "nfs",
-    "xfs"
+    "xfs",
   ]
   pruneopts = "NUT"
   revision = "ae68e2d4c00fed4943b5f6698d504a5fe083da8a"
@@ -214,11 +242,42 @@
     "tag",
     "trace",
     "trace/internal",
-    "trace/propagation"
+    "trace/propagation",
   ]
   pruneopts = "NUT"
   revision = "e262766cd0d230a1bb7c37281e345e465f19b41b"
   version = "v0.14.0"
+
+[[projects]]
+  digest = "1:cc9d86ec4e6e3bdf87e3a421273bfeed003cf8e21351c0302fe8b0eb7b10efe6"
+  name = "go.uber.org/atomic"
+  packages = ["."]
+  pruneopts = "NUT"
+  revision = "df976f2515e274675050de7b3f42545de80594fd"
+  version = "v1.4.0"
+
+[[projects]]
+  digest = "1:7b954fc1e310e8df787500d512b4f1e47e6bf05989c6f7118a5159978abdbc41"
+  name = "go.uber.org/multierr"
+  packages = ["."]
+  pruneopts = "NUT"
+  revision = "71e610a0e48dbda460d9c18adca8b5f2de04a7c1"
+  version = "v1.2.0"
+
+[[projects]]
+  digest = "1:4af5a022f8c5c97734c3c6fad58fdce078e2322ddc98d3102b225a729f03916e"
+  name = "go.uber.org/zap"
+  packages = [
+    ".",
+    "buffer",
+    "internal/bufferpool",
+    "internal/color",
+    "internal/exit",
+    "zapcore",
+  ]
+  pruneopts = "NUT"
+  revision = "27376062155ad36be76b0f12cf1572a221d3a48c"
+  version = "v1.10.0"
 
 [[projects]]
   branch = "master"
@@ -235,7 +294,7 @@
     "internal/timeseries",
     "proxy",
     "trace",
-    "websocket"
+    "websocket",
   ]
   pruneopts = "NUT"
   revision = "d0887baf81f4598189d4e12a37c6da86f0bba4d0"
@@ -249,7 +308,7 @@
     "google",
     "internal",
     "jws",
-    "jwt"
+    "jwt",
   ]
   pruneopts = "NUT"
   revision = "ef147856a6ddbb60760db74283d2424e98c87bff"
@@ -279,7 +338,7 @@
     "unicode/bidi",
     "unicode/cldr",
     "unicode/norm",
-    "unicode/rangetable"
+    "unicode/rangetable",
   ]
   pruneopts = "NUT"
   revision = "f21a4dfb5e38f5895301dc265a8def02365cc3d0"
@@ -298,7 +357,7 @@
     "option",
     "storage/v1",
     "transport/http",
-    "transport/http/internal/propagation"
+    "transport/http/internal/propagation",
   ]
   pruneopts = "NUT"
   revision = "19e022d8cf43ce81f046bae8cc18c5397cc7732f"
@@ -317,7 +376,7 @@
     "internal/modules",
     "internal/remote_api",
     "internal/urlfetch",
-    "urlfetch"
+    "urlfetch",
   ]
   pruneopts = "NUT"
   revision = "b1f26356af11148e710935ed1ac8a7f5702c7612"
@@ -331,7 +390,7 @@
     "googleapis/api/annotations",
     "googleapis/iam/v1",
     "googleapis/rpc/code",
-    "googleapis/rpc/status"
+    "googleapis/rpc/status",
   ]
   pruneopts = "NUT"
   revision = "ae2f86662275e140f395167f1dab7081a5bd5fa8"
@@ -370,7 +429,7 @@
     "resolver/passthrough",
     "stats",
     "status",
-    "tap"
+    "tap",
   ]
   pruneopts = "NUT"
   revision = "df014850f6dee74ba2fc94874043a9f3f75fbfd8"
@@ -381,7 +440,7 @@
   name = "gopkg.in/go-playground/webhooks.v3"
   packages = [
     ".",
-    "github"
+    "github",
   ]
   pruneopts = "NUT"
   revision = "8ffb2ffc32b7af2c7e940944eccba4dcd66c692a"
@@ -401,7 +460,7 @@
   name = "knative.dev/test-infra"
   packages = [
     "scripts",
-    "tools/dep-collector"
+    "tools/dep-collector",
   ]
   pruneopts = "UT"
   revision = "17f2331e80ad0d3e170ea2bae45c3922744f83af"
@@ -411,10 +470,12 @@
   analyzer-version = 1
   input-imports = [
     "cloud.google.com/go/storage",
+    "github.com/cloudevents/sdk-go",
     "github.com/dgrijalva/jwt-go",
     "github.com/eclipse/paho.mqtt.golang",
     "github.com/golang/protobuf/proto",
     "github.com/google/go-github/github",
+    "github.com/google/uuid",
     "github.com/gorilla/mux",
     "github.com/openzipkin/zipkin-go",
     "github.com/openzipkin/zipkin-go/reporter/http",
@@ -430,11 +491,12 @@
     "golang.org/x/net/context",
     "golang.org/x/oauth2",
     "google.golang.org/grpc",
+    "google.golang.org/grpc/credentials",
     "gopkg.in/go-playground/webhooks.v3",
     "gopkg.in/go-playground/webhooks.v3/github",
     "gopkg.in/yaml.v2",
     "knative.dev/test-infra/scripts",
-    "knative.dev/test-infra/tools/dep-collector"
+    "knative.dev/test-infra/tools/dep-collector",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1
