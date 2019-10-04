@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: helloworld-go
-          image: docker.io/akashv/helloworld-go
+          image: docker.io/{username}/helloworld-go
 ---
 # Service that exposes helloworld-go app.
 # This will be the subscriber for the Trigger
