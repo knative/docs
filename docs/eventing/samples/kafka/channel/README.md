@@ -141,5 +141,5 @@ To use the Apache Kafka based broker, let's take a look at a simple demo. Use th
 Now you can see the events in the log of the `ksvc` using the command:
 
 ```
-kubectl logs --selector='serving.knative.dev/service: broker-kafka-display' -c user-container
+kubectl logs --selector='serving.knative.dev/service=broker-kafka-display' -c user-container
 ```

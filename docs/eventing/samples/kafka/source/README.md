@@ -150,7 +150,7 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
 1. Ensure the Event Display received the message sent to it by the Event Source.
 
    ```
-   $ kubectl logs --selector='serving.knative.dev/service: event-display' -c user-container
+   $ kubectl logs --selector='serving.knative.dev/service=event-display' -c user-container
 
    ☁️  CloudEvent: valid ✅
    Context Attributes,
