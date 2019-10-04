@@ -73,7 +73,7 @@ kubectl edit cm -n knative-serving config-observability
 ```
 
 Copy `logging.request-log-template` from `data._example` field to`data` field in
-the `ConfigMap` you are editing.. You can find detailed information in
+the `ConfigMap` you are editing. You can find detailed information in
 `data._example` field to customize the request log format.
 
 ### Choose One Logging Backend
@@ -196,7 +196,7 @@ To configure and setup monitoring:
     - You want to send logs to another GCP project.
 
 1.  Follow the instructions in
-    ["Setting up a logging plugin"](./setting-up-a-logging-plugin.md#Configuring)
+    [Setting up a logging plugin](./setting-up-a-logging-plugin.md#Configuring)
     to configure the stackdriver components settings.
 
 1.  Install Knative Stackdriver components by running the following command from

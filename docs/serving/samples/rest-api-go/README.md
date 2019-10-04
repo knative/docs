@@ -12,8 +12,8 @@ like `AAPL`,`AMZN`, `GOOG`, `MSFT`, etc.
 
 ## Prerequisites
 
-1. A Kubernetes cluster with [Knative Serving](../../../install/README.md) v0.3
-   or higher installed.
+1. A Kubernetes cluster with [Knative Serving](../../../install/README.md) installed
+   and DNS configured.
 1. [Docker](https://docs.docker.com/get-started/#prepare-your-docker-environment)
    installed locally.
 1. [Outbound network access](../../outbound-network-access.md) enabled for this
@@ -25,7 +25,7 @@ like `AAPL`,`AMZN`, `GOOG`, `MSFT`, etc.
 
    ```shell
    git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
-   cd knative-docs/serving/samples/rest-api-go
+   cd knative-docs
    ```
 
 ## Setup
@@ -37,22 +37,17 @@ This sample uses Docker for both building and pushing.
 
 To build and push to a container registry using Docker:
 
-1. Move into the sample directory:
-
-   ```shell
-   cd $GOPATH/src/github.com/knative/docs
-   ```
-
-2. Set your preferred container registry endpoint as an environment variable.
+1. From the `knative-docs` directory, run the following command to set your 
+   container registry endpoint as an environment variable.
+   
    This sample uses
    [Google Container Registry (GCR)](https://cloud.google.com/container-registry/):
-
-
+   
     ```shell
     export REPO="gcr.io/<YOUR_PROJECT_ID>"
     ```
 
-3. Set up your container registry to make sure you are ready to push.
+1. Set up your container registry to make sure you are ready to push.
 
    To push to GCR, you need to:
 
@@ -67,7 +62,7 @@ To build and push to a container registry using Docker:
    If you are using a different container registry, you will want to follow the
    registry specific instructions for both setup and authorizing the image push.
 
-4. Use Docker to build your application container:
+1. Use Docker to build your application container:
 
    ```shell
    docker build \
@@ -75,13 +70,13 @@ To build and push to a container registry using Docker:
      --file docs/serving/samples/rest-api-go/Dockerfile .
    ```
 
-5. Push your container to a container registry:
+1. Push your container to a container registry:
 
    ```shell
    docker push "${REPO}/rest-api-go"
    ```
 
-6. Substitute the image reference path in the template with our published image
+1. Substitute the image reference path in the template with our published image
    path. The command below substitutes using the \${REPO} variable into a new
    file called `docs/serving/samples/rest-api-go/sample.yaml`.
 
@@ -157,59 +152,23 @@ You can inspect the created resources with the following `kubectl` commands:
 
 ## Access the Service
 
-To access this service and run the stock ticker, you first obtain the ingress
-address and service hostname, and then you run `curl` commands to send request
-with your stock symbol.
+To access this service and run the stock ticker, you first obtain the service URL,
+and then you run `curl` commands to send request with your stock symbol.
 
-**Note**: This sample assumes that you are using Knative's default Ingress
-Gateway. If you customized your gateway, you need to adjust the enviornment
-variables in the following steps.
-
-1. Find the IP address of the ingress gateway:
-
-   - **Cloud Provider**: To get the IP address of your ingress gateway:
-
-     ```shell
-     INGRESSGATEWAY=istio-ingressgateway
-     INGRESSGATEWAY_LABEL=istio
-
-     export INGRESS_IP=`kubectl get svc $INGRESSGATEWAY --namespace istio-system \
-     --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
-     echo $INGRESS_IP
-     ```
-
-   - **Minikube**: If your cluster is running outside a cloud provider (for
-     example on Minikube), your services will never get an external IP address,
-     and `INGRESS_IP` won't contain a value. In that case, use the Istio
-     `hostIP` and `nodePort` as the ingress IP:
-
-     ```shell
-     export INGRESS_IP=$(kubectl get po --selector $INGRESSGATEWAY_LABEL=ingressgateway --namespace istio-system \
-       --output 'jsonpath={.items[0].status.hostIP}'):$(kubectl get svc $INGRESSGATEWAY --namespace istio-system \
-       --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
-     echo $INGRESS_IP
-     ```
-
-2. Get the URL of the service:
+1. Get the URL of the service:
 
    ```shell
    kubectl get ksvc stock-service-example  --output=custom-columns=NAME:.metadata.name,URL:.status.url
    NAME                    URL
-   stock-service-example   http://stock-service-example.default.example.com
+   stock-service-example   http://stock-service-example.default.1.2.3.4.xip.io
    ```
 
-3. Send requests to the service using `curl`:
+2. Send requests to the service using `curl`:
 
    1. Send a request to the index endpoint:
 
-      The `curl` command below makes a request to the Ingress Gateway IP. The
-      Ingress Gateway uses the host header to route the request to the Service.
-      This example passes the host header to skip DNS configuration. If your
-      cluster has DNS configured, you can simply curl the DNS name instead of
-      the ingress gateway IP.
-
       ```shell
-      curl --header "Host:stock-service-example.default.example.com" http://${INGRESS_IP}
+      curl http://stock-service-example.default.1.2.3.4.xip.io
       ```
 
       Response body: `Welcome to the stock app!`
@@ -217,7 +176,7 @@ variables in the following steps.
    2. Send a request to the `/stock` endpoint:
 
       ```shell
-      curl --header "Host:stock-service-example.default.example.com" http://${INGRESS_IP}/stock
+      curl http://stock-service-example.default.1.2.3.4.xip.io/stock
       ```
 
       Response body: `stock ticker not found!, require /stock/{ticker}`
@@ -226,7 +185,7 @@ variables in the following steps.
       "[stock symbol](https://www.marketwatch.com/tools/quotes/lookup.asp)":
 
       ```shell
-      curl --header "Host:stock-service-example.default.example.com" http://${INGRESS_IP}/stock/<SYMBOL>
+      curl http://stock-service-example.default.1.2.3.4.xip.io/stock/<SYMBOL>
       ```
 
       where `<SYMBOL>` is your "stock symbol".
@@ -238,7 +197,7 @@ variables in the following steps.
       Request:
 
       ```shell
-      curl --header "Host:stock-service-example.default.example.com" http://${INGRESS_IP}/stock/FAKE
+      curl http://stock-service-example.default.1.2.3.4.xip.io/stock/FAKE
       ```
 
       Response: `stock price for ticker FAKE is 0.00`

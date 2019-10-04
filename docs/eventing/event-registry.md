@@ -132,7 +132,7 @@ Here are a few example Triggers that subscribe to events using exact matching on
          type: dev.knative.source.github.push
      subscriber:
        ref:
-         apiVersion: serving.knative.dev/v1alpha1
+         apiVersion: serving.knative.dev/v1
          kind: Service
          name: push-service
    ```
@@ -158,7 +158,7 @@ Here are a few example Triggers that subscribe to events using exact matching on
          source: https://github.com/knative/eventing
      subscriber:
        ref:
-         apiVersion: serving.knative.dev/v1alpha1
+         apiVersion: serving.knative.dev/v1
          kind: Service
          name: gh-knative-eventing-pull-service
    ```
@@ -179,7 +179,7 @@ Here are a few example Triggers that subscribe to events using exact matching on
          source: /apis/v1/namespaces/default/kafkasources/kafka-sample#knative-demo
      subscriber:
        ref:
-         apiVersion: serving.knative.dev/v1alpha1
+         apiVersion: serving.knative.dev/v1
          kind: Service
          name: kafka-knative-demo-service
    ```
@@ -200,7 +200,7 @@ Here are a few example Triggers that subscribe to events using exact matching on
          source: //pubsub.googleapis.com/knative/topics/testing
      subscriber:
        ref:
-         apiVersion: serving.knative.dev/v1alpha1
+         apiVersion: serving.knative.dev/v1
          kind: Service
          name: gcp-pubsub-knative-testing-service
    ```

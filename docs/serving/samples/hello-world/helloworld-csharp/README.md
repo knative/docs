@@ -20,7 +20,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-csharp
 
 ## Before you begin
 
-- A Kubernetes cluster with Knative installed. Follow the
+- A Kubernetes cluster with Knative installed and DNS configured. Follow the
   [installation instructions](../../../../install/README.md) if you need to
   create one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
@@ -69,29 +69,37 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-csharp
    ```
 
 1. In your project directory, create a file named `Dockerfile` and copy the code
-   block below into it. For detailed instructions on dockerizing a .NET core
+   block below into it. For detailed instructions on dockerizing an ASP.NET Core
    app, see
-   [dockerizing a .NET core app](https://docs.microsoft.com/en-us/dotnet/core/docker/docker-basics-dotnet-core#dockerize-the-net-core-application).
+   [Docker images for ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images).
 
    ```docker
-   # Use Microsoft's official .NET image.
-   # https://hub.docker.com/r/microsoft/dotnet
-   FROM microsoft/dotnet:2.2-sdk
-
+   # Use Microsoft's official build .NET image.
+   # https://hub.docker.com/_/microsoft-dotnet-core-sdk/
+   FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build
+   WORKDIR /app
+   
    # Install production dependencies.
    # Copy csproj and restore as distinct layers.
-   WORKDIR /app
-   COPY *.csproj .
+   COPY *.csproj ./
    RUN dotnet restore
-
+   
    # Copy local code to the container image.
-   COPY . .
-
+   COPY . ./
+   WORKDIR /app
+   
    # Build a release artifact.
    RUN dotnet publish -c Release -o out
-
+   
+   
+   # Use Microsoft's official runtime .NET image.
+   # https://hub.docker.com/_/microsoft-dotnet-core-aspnet/
+   FROM mcr.microsoft.com/dotnet/core/aspnet:2.2 AS runtime
+   WORKDIR /app
+   COPY --from=build /app/out ./
+   
    # Run the web service on container startup.
-   CMD ["dotnet", "out/helloworld-csharp.dll"]
+   ENTRYPOINT ["dotnet", "helloworld-csharp.dll"]
    ```
 
 1. Create a `.dockerignore` file to ensure that any files related to a local
@@ -109,7 +117,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-csharp
    username.
 
    ```yaml
-   apiVersion: serving.knative.dev/v1alpha1
+   apiVersion: serving.knative.dev/v1
    kind: Service
    metadata:
      name: helloworld-csharp
@@ -157,40 +165,19 @@ folder) you're ready to build and deploy the sample app.
      for your app.
    - Automatically scale your pods up and down (including to zero active pods).
 
-1. To find the IP address for your service, use these commands to get the
-   ingress IP for your cluster. If your cluster is new, it may take sometime for
-   the service to get asssigned an external IP address.
-
-   ```shell
-   # In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
-   INGRESSGATEWAY=knative-ingressgateway
-
-   # The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
-   # Use `istio-ingressgateway` instead, since `knative-ingressgateway`
-   # will be removed in Knative v0.4.
-   if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
-       INGRESSGATEWAY=istio-ingressgateway
-   fi
-
-   kubectl get svc $INGRESSGATEWAY --namespace istio-system
-
-   NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
-   xxxxxxx-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
-   ```
-
 1. To find the URL for your service, use
 
    ```
    kubectl get ksvc helloworld-csharp  --output=custom-columns=NAME:.metadata.name,URL:.status.url
    NAME                URL
-   helloworld-csharp   http://helloworld-csharp.default.example.com
+   helloworld-csharp   http://helloworld-csharp.default.1.2.3.4.xip.io
    ```
 
-1. Now you can make a request to your app to see the result. Replace
-   `{IP_ADDRESS}` with the address you see returned in the previous step.
+1. Now you can make a request to your app and see the result. Replace
+   the URL below the with URL returned in the previous command.
 
    ```shell
-   curl -H "Host: helloworld-csharp.default.example.com" http://{IP_ADDRESS}
+   curl http://helloworld-csharp.default.1.2.3.4.xip.io
    Hello C# Sample v1!
    ```
 

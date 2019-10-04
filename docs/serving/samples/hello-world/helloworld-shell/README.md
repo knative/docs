@@ -20,7 +20,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-shell
 
 ## Before you begin
 
-- A Kubernetes cluster with Knative installed. Follow the
+- A Kubernetes cluster with Knative installed and DNS configured. Follow the
   [installation instructions](../../../../install/README.md) if you need to
   create one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
@@ -107,7 +107,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-shell
    username.
 
    ```yaml
-   apiVersion: serving.knative.dev/v1alpha1
+   apiVersion: serving.knative.dev/v1
    kind: Service
    metadata:
      name: helloworld-shell
@@ -155,23 +155,6 @@ folder) you're ready to build and deploy the sample app.
      for your app.
    - Automatically scale your pods up and down (including to zero active pods).
 
-1. Run the following command to find the external IP address for your service.
-   The ingress IP for your cluster is returned. If you just created your
-   cluster, you might need to wait and rerun the command until your service gets
-   asssigned an external IP address.
-
-   ```shell
-   kubectl get svc knative-ingressgateway --namespace istio-system
-   ```
-
-   Example:
-
-   ```shell
-   NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
-   knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
-
-   ```
-
 1. Run the following command to find the domain URL for your service:
 
    ```shell
@@ -182,21 +165,20 @@ folder) you're ready to build and deploy the sample app.
 
    ```shell
    NAME                URL
-   helloworld-shell    http://helloworld-shell.default.example.com
+   helloworld-shell    http://helloworld-shell.default.1.2.3.4.xip.io
    ```
 
-1. Test your app by sending it a request. Use the following `curl` command with
-   the domain URL `helloworld-shell.default.example.com` and `EXTERNAL-IP`
-   address that you retrieved in the previous steps:
+1. Now you can make a request to your app and see the result. Replace
+   the URL below the with URL returned in the previous command.
 
    ```shell
-   curl -H "Host: helloworld-shell.default.example.com" http://{EXTERNAL_IP_ADDRESS}
+   curl http://helloworld-shell.default.1.2.3.4.xip.io
    ```
 
    Example:
 
    ```shell
-   curl -H "Host: helloworld-shell.default.example.com" http://35.203.155.229
+   curl http://helloworld-shell.default.1.2.3.4.xip.io
    Hello Shell Sample v1!
    ```
 

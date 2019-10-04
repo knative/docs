@@ -1,27 +1,27 @@
 apiVersion: messaging.knative.dev/v1alpha1
-kind: Choice
+kind: Parallel
 metadata:
-  name: me-odd-even-choice
+  name: me-odd-even-parallel
 spec:
   channelTemplate:
     apiVersion: messaging.knative.dev/v1alpha1
     kind: InMemoryChannel
-  cases:
+  branches:
   - filter:
       uri: "http://me-even-odd-switcher.default.svc.cluster.local/0"
     subscriber:
       ref:
-        apiVersion: serving.knative.dev/v1alpha1
+        apiVersion: serving.knative.dev/v1
         kind: Service
         name: me-even-transformer
   - filter:
       uri: "http://me-even-odd-switcher.default.svc.cluster.local/1"
     subscriber:
       ref:
-        apiVersion: serving.knative.dev/v1alpha1
+        apiVersion: serving.knative.dev/v1
         kind: Service
         name: me-odd-transformer
   reply:
-    apiVersion: serving.knative.dev/v1alpha1
+    apiVersion: serving.knative.dev/v1
     kind: Service
     name: me-event-display
