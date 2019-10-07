@@ -30,7 +30,7 @@ If you previously [created a Knative cluster](../install/_index.md), you might a
 kubectl get pods --namespace knative-eventing
 ```
 
-If the `knative-eventing` namespace or the `in-memory-channel-controller-*` does not exist, use the following steps to install Knative Eventing with the in-memory channel provisioner:
+If the `knative-eventing` namespace or the `imc-controller-*` does not exist, use the following steps to install Knative Eventing with the in-memory channel provisioner:
 
 1. Make sure that you have a functioning Kubernetes cluster. See the [Comprehensive Install guide](../install/_index.md) for more information.
 2. Install the Eventing CRDs by running the following command:
