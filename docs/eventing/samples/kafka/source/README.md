@@ -11,7 +11,8 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
 
 1. Install the `KafkaSource` sub-component to your Knative cluster:
    ```
-   kubectl apply -f https://github.com/knative/eventing-contrib/releases/download/v0.9.0/kafka-importer.yaml
+   kubectl apply -f https://github.com/knative/eventing-contrib/releases/download/v0.9.0/kafka-source.yaml
+
    ```
 2. Check that the `kafka-controller-manager-0` pod is running.
    ```
