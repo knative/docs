@@ -1,3 +1,10 @@
+---
+title: "Apache Kafka examples"
+linkTitle: "Apache Kafka"
+weight: 10
+type: "docs"
+---
+
 The following examples will help you understand how to use the different Apache Kafka components for Knative.
 
 ## Prerequisites
