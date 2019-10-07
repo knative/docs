@@ -130,11 +130,9 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
 
 1. Produce a message (`{"msg": "This is a test!"}`) to the Apache Kafka topic, like shown below:
    ```
-   kubectl -n kafka run kafka-producer -ti --image=strimzi/kafka:0.14.0-kafka-2.3.0 --rm=true --restart=Never -- bin/kafka-console-producer.sh --broker-list my-cluster-kafka-bootstrap:9092 --topic my-topic
-
-
-  If you don't see a command prompt, try pressing enter.
-  >{"msg": "This is a test!"}
+   kubectl -n kafka run kafka-producer -ti --image=strimzi/kafka:0.14.0-kafka-2.3.0 --rm=true --restart=Never -- bin/kafka-console-producer.sh --broker-list my-cluster-kafka-bootstrap:9092 --topic knative-demo-topic
+   If you don't see a command prompt, try pressing enter.
+   >{"msg": "This is a test!"}
    ```
 1. Check that the Apache Kafka Event Source consumed the message and sent it to
    its sink properly.
