@@ -24,7 +24,7 @@ To complete this guide, you will need the following installed and running:
 
 ### Installing Knative Eventing 
 
-If you previously [created a Knative cluster](../install/_index.md), you might already have Knative Eventing installed and running. You can check to see if the Eventing component exists on your cluster by running:
+If you previously [created a Knative cluster](../install), you might already have Knative Eventing installed and running. You can check to see if the Eventing component exists on your cluster by running:
 
 ```sh
 kubectl get pods --namespace knative-eventing
@@ -32,7 +32,9 @@ kubectl get pods --namespace knative-eventing
 
 If the `knative-eventing` namespace or the `in-memory-channel-controller-*` does not exist, use the following steps to install Knative Eventing with the in-memory channel provisioner:
 
-1. Make sure that you have a functioning Kubernetes cluster. See the [Comprehensive Install guide](../install/_index.md) for more information.
+1. Make sure that you have a functioning Kubernetes cluster. See the [Comprehensive Install guide](../install) for more information.
+   - Old versions of Knative Serving doesn't necessarily work well with latest Knative Eventing, so try to install the latest version of Knative Serving.
+   - If your Kubernetes cluster comes with pre-installed Istio, make sure it has `cluster-local-gateway` [deployed](https://github.com/knative/serving/blob/master/DEVELOPMENT.md#deploy-istio).
 2. Install the Eventing CRDs by running the following command:
 
     ```sh
