@@ -120,9 +120,8 @@ helm template --namespace=istio-system \
   --set sidecarInjectorWebhook.enabled=false \
   --set global.proxy.autoInject=disabled \
   --set global.omitSidecarInjectorConfigMap=true \
-  `# Set gateway pods to 1 to sidestep eventual consistency / readiness problems.` \
   --set gateways.istio-ingressgateway.autoscaleMin=1 \
-  --set gateways.istio-ingressgateway.autoscaleMax=1 \
+  --set gateways.istio-ingressgateway.autoscaleMax=2 \
   `# Set pilot trace sampling to 100%` \
   --set pilot.traceSampling=100 \
   install/kubernetes/helm/istio \
@@ -156,9 +155,8 @@ helm template --namespace=istio-system \
   --set mixer.adapters.prometheus.enabled=false \
   `# Disable mixer policy check, since in our template we set no policy.` \
   --set global.disablePolicyChecks=true \
-  `# Set gateway pods to 1 to sidestep eventual consistency / readiness problems.` \
   --set gateways.istio-ingressgateway.autoscaleMin=1 \
-  --set gateways.istio-ingressgateway.autoscaleMax=1 \
+  --set gateways.istio-ingressgateway.autoscaleMax=2 \
   --set gateways.istio-ingressgateway.resources.requests.cpu=500m \
   --set gateways.istio-ingressgateway.resources.requests.memory=256Mi \
   `# More pilot replicas for better scale` \
@@ -201,9 +199,8 @@ helm template --namespace=istio-system \
   --set mixer.adapters.prometheus.enabled=false \
   `# Disable mixer policy check, since in our template we set no policy.` \
   --set global.disablePolicyChecks=true \
-  `# Set gateway pods to 1 to sidestep eventual consistency / readiness problems.` \
   --set gateways.istio-ingressgateway.autoscaleMin=1 \
-  --set gateways.istio-ingressgateway.autoscaleMax=1 \
+  --set gateways.istio-ingressgateway.autoscaleMax=2 \
   --set gateways.istio-ingressgateway.resources.requests.cpu=500m \
   --set gateways.istio-ingressgateway.resources.requests.memory=256Mi \
   `# Enable SDS in the gateway to allow dynamically configuring TLS of gateway.` \
@@ -231,7 +228,7 @@ installation:
 # Add the extra gateway.
 helm template --namespace=istio-system \
   --set gateways.custom-gateway.autoscaleMin=1 \
-  --set gateways.custom-gateway.autoscaleMax=1 \
+  --set gateways.custom-gateway.autoscaleMax=2 \
   --set gateways.custom-gateway.cpu.targetAverageUtilization=60 \
   --set gateways.custom-gateway.labels.app='cluster-local-gateway' \
   --set gateways.custom-gateway.labels.istio='cluster-local-gateway' \
