@@ -34,7 +34,7 @@ If the `knative-eventing` namespace or the `in-memory-channel-controller-*` does
 
 1. Make sure that you have a functioning Kubernetes cluster. See the [Comprehensive Install guide](../install) for more information.
    - Old versions of Knative Serving doesn't necessarily work well with latest Knative Eventing, so try to install the latest version of Knative Serving.
-   - If your Kubernetes cluster comes with pre-installed Istio, make sure it has `cluster-local-gateway` [deployed](https://github.com/knative/serving/blob/master/DEVELOPMENT.md#deploy-istio).
+   - If your Kubernetes cluster comes with pre-installed Istio, make sure it has `cluster-local-gateway` [deployed](https://github.com/knative/serving/blob/master/DEVELOPMENT.md#deploy-istio). Depending on which Istio version you have, you'd need to apply the `istio-knative-extras.yaml` in the corresponding version folder at [here](https://github.com/knative/serving/tree/master/third_party).
 2. Install the Eventing CRDs by running the following command:
 
     ```sh
