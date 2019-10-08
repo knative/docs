@@ -140,12 +140,12 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
 
 ## Set your custom domain
 
-1.  Fetch the external IP or CNAME of the knative-ingressgateway
+1.  Fetch the external IP or CNAME of the istio-ingressgateway
 
 ```
-kubectl --namespace istio-system get service knative-ingressgateway
+kubectl --namespace istio-system get service istio-ingressgateway
 NAME                     TYPE           CLUSTER-IP      EXTERNAL-IP     PORT(S)                                      AGE
-knative-ingressgateway   LoadBalancer   100.70.219.81   35.233.41.212   80:32380/TCP,443:32390/TCP,32400:32400/TCP   4d
+istio-ingressgateway   LoadBalancer   100.70.219.81   35.233.41.212   80:32380/TCP,443:32390/TCP,32400:32400/TCP   4d
 ```
 
 2.  Create a wildcard DNS entry in your custom domain to point to above IP or
