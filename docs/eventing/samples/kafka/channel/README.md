@@ -1,6 +1,6 @@
 ---
-title: "Apache Kafka channel example"
-linkTitle: "Apache Kafka channel example"
+title: "Apache Kafka Channel example"
+linkTitle: "Apache Kafka Channel example"
 weight: 20
 type: "docs"
 ---
