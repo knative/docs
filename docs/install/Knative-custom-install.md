@@ -79,7 +79,7 @@ The following Knative installation files are available:
 - **Eventing Component**:
   - https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml
   - https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml
-  - https://github.com/knative/eventing/releases/download/{{< version >}}/in-memory-channel-crd.yaml
+  - https://github.com/knative/eventing/releases/download/{{< version >}}/in-memory-channel.yaml
 - **Eventing Resources**:
   - https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/github.yaml
   - https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/camel.yaml
@@ -112,7 +112,7 @@ files from the Knative repositories:
 | **knative/eventing**                           |                                                                                                                                                                        |                                                                                           |
 | [`release.yaml`][4.1]†                         | Installs the Eventing component. Includes [ContainerSource](../eventing#containersource), [CronJobSource][6.2], InMemoryChannel.                     |                                                                                           |
 | [`eventing.yaml`][4.2]                         | Installs the Eventing component. Includes [ContainerSource](../eventing#containersource) and [CronJobSource][6.2]. Does not include any Channel. |                                                                                           |
-| [`in-memory-channel-crd.yaml`][4.3]            | Installs only the InMemoryChannel.                                                                                                                       | Eventing component                                                                        |
+| [`in-memory-channel.yaml`][4.3]            | Installs only the InMemoryChannel.                                                                                                                       | Eventing component                                                                        |
 | **knative/eventing-contrib**                   |                                                                                                                                                                        |                                                                                           |
 | [`github.yaml`][5.10]†                          | Installs the [GitHub][6.10] source.                                                                                                                                     | Eventing component                                                                        |
 | [`camel.yaml`][5.40]                            | Installs the Apache Camel source.                                                                                                                                      | Eventing component                                                                        |
@@ -160,7 +160,7 @@ for details about installing the various supported observability plugins.
 [4.20]:
   https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml
 [4.30]:
-  https://github.com/knative/eventing/releases/download/{{< version >}}/in-memory-channel-crd.yaml
+  https://github.com/knative/eventing/releases/download/{{< version >}}/in-memory-channel.yaml
 [4.40]: https://github.com/knative/eventing/releases/download/{{< version >}}/kafka.yaml
 [5.0]: https://github.com/knative/eventing-contrib/releases/tag/{{< version >}}
 [5.10]:
