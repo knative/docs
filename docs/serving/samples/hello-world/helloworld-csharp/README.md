@@ -46,7 +46,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-csharp
 1. Update the `CreateHostBuilder` definition in `Program.cs` by adding
    `.UseUrls()` to define the serving port:
 
-   ```csharp
+  ```csharp
   public static IHostBuilder CreateHostBuilder(string[] args)
   {
       string port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
@@ -58,12 +58,12 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-csharp
               webBuilder.UseStartup<Startup>().UseUrls(url);
           });
   }
-   ```
+  ```
 
 1. Update the `app.UseEndpoints(...)` statement in `Startup.cs` to read and return the
    TARGET environment variable:
 
-   ```csharp
+  ```csharp
   app.UseEndpoints(endpoints =>
   {
       endpoints.MapGet("/", async context =>
@@ -72,14 +72,14 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-csharp
           await context.Response.WriteAsync($"Hello {target}!\n");
       });
   });
-   ```
+  ```
 
 1. In your project directory, create a file named `Dockerfile` and copy the code
    block below into it. For detailed instructions on dockerizing an ASP.NET Core
    app, see
    [Docker images for ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images).
 
-   ```docker
+```docker
 # Use Microsoft's official build .NET image.
 # https://hub.docker.com/_/microsoft-dotnet-core-sdk/
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0-alpine AS build
@@ -106,7 +106,7 @@ COPY --from=build /app/out ./
 
 # Run the web service on container startup.
 ENTRYPOINT ["dotnet", "helloworld-csharp.dll"]
-   ```
+```
 
 1. Create a `.dockerignore` file to ensure that any files related to a local
    build do not affect the container that you build for deployment.
