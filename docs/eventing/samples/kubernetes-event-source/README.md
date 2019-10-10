@@ -150,8 +150,8 @@ spec:
     spec:
       containers:
         - # This corresponds to
-          # https://github.com/knative/eventing-contrib/blob/release-0.5/cmd/event_display/main.go
-          image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display@sha256:bf45b3eb1e7fc4cb63d6a5a6416cf696295484a7662e0cf9ccdf5c080542c21d
+          # https://github.com/knative/eventing-contrib/tree/master/cmd/event_display/main.go
+          image: gcr.io/knative-releases/github.com/knative/eventing-contrib/cmd/event_display
 ```
 
 1. If the deployed `ApiServerSource` is pointing at a `Broker` other than
