@@ -5,7 +5,7 @@ weight: 1
 type: "docs"
 ---
 
-A simple web app written in C# using .NET Core 2.2 that you can use for testing.
+A simple web app written in C# using .NET Core 3.0 that you can use for testing.
 It reads in an env variable `TARGET` and prints "Hello \${TARGET}!". If TARGET
 is not specified, it will use "World" as the TARGET.
 
@@ -30,11 +30,11 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-csharp
 ## Recreating the sample code
 
 1. First, make sure you have
-   [.NET Core SDK 2.2](https://www.microsoft.com/net/core) installed:
+   [.NET Core SDK 3.0](https://www.microsoft.com/net/core) installed:
 
    ```shell
    dotnet --version
-   2.2.102
+   3.0.100
    ```
 
 1. From the console, create a new empty web project using the dotnet command:
@@ -43,29 +43,35 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-csharp
    dotnet new web -o helloworld-csharp
    ```
 
-1. Update the `CreateWebHostBuilder` definition in `Program.cs` by adding
+1. Update the `CreateHostBuilder` definition in `Program.cs` by adding
    `.UseUrls()` to define the serving port:
 
    ```csharp
-   public static IWebHostBuilder CreateWebHostBuilder(string[] args)
-   {
-       string port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-       string url = String.Concat("http://0.0.0.0:", port);
+  public static IHostBuilder CreateHostBuilder(string[] args)
+  {
+      string port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+      string url = String.Concat("http://0.0.0.0:", port);
 
-       return WebHost.CreateDefaultBuilder(args)
-           .UseStartup<Startup>().UseUrls(url);
-   }
+      return Host.CreateDefaultBuilder(args)
+          .ConfigureWebHostDefaults(webBuilder =>
+          {
+              webBuilder.UseStartup<Startup>().UseUrls(url);
+          });
+  }
    ```
 
-1. Update the `app.Run(...)` statement in `Startup.cs` to read and return the
+1. Update the `app.UseEndpoints(...)` statement in `Startup.cs` to read and return the
    TARGET environment variable:
 
    ```csharp
-   app.Run(async (context) =>
-   {
-       var target = Environment.GetEnvironmentVariable("TARGET") ?? "World";
-       await context.Response.WriteAsync($"Hello {target}!\n");
-   });
+  app.UseEndpoints(endpoints =>
+  {
+      endpoints.MapGet("/", async context =>
+      {
+          var target = Environment.GetEnvironmentVariable("TARGET") ?? "World";
+          await context.Response.WriteAsync($"Hello {target}!\n");
+      });
+  });
    ```
 
 1. In your project directory, create a file named `Dockerfile` and copy the code
@@ -74,32 +80,32 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-csharp
    [Docker images for ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images).
 
    ```docker
-   # Use Microsoft's official build .NET image.
-   # https://hub.docker.com/_/microsoft-dotnet-core-sdk/
-   FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build
-   WORKDIR /app
-   
-   # Install production dependencies.
-   # Copy csproj and restore as distinct layers.
-   COPY *.csproj ./
-   RUN dotnet restore
-   
-   # Copy local code to the container image.
-   COPY . ./
-   WORKDIR /app
-   
-   # Build a release artifact.
-   RUN dotnet publish -c Release -o out
-   
-   
-   # Use Microsoft's official runtime .NET image.
-   # https://hub.docker.com/_/microsoft-dotnet-core-aspnet/
-   FROM mcr.microsoft.com/dotnet/core/aspnet:2.2 AS runtime
-   WORKDIR /app
-   COPY --from=build /app/out ./
-   
-   # Run the web service on container startup.
-   ENTRYPOINT ["dotnet", "helloworld-csharp.dll"]
+# Use Microsoft's official build .NET image.
+# https://hub.docker.com/_/microsoft-dotnet-core-sdk/
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0-alpine AS build
+WORKDIR /app
+
+# Install production dependencies.
+# Copy csproj and restore as distinct layers.
+COPY *.csproj ./
+RUN dotnet restore
+
+# Copy local code to the container image.
+COPY . ./
+WORKDIR /app
+
+# Build a release artifact.
+RUN dotnet publish -c Release -o out
+
+
+# Use Microsoft's official runtime .NET image.
+# https://hub.docker.com/_/microsoft-dotnet-core-aspnet/
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.0-alpine AS runtime
+WORKDIR /app
+COPY --from=build /app/out ./
+
+# Run the web service on container startup.
+ENTRYPOINT ["dotnet", "helloworld-csharp.dll"]
    ```
 
 1. Create a `.dockerignore` file to ensure that any files related to a local
