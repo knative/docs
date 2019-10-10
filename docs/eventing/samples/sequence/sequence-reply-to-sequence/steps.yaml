@@ -1,4 +1,4 @@
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: first
@@ -12,7 +12,7 @@ spec:
           value: "0"
 
 ---
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: second
@@ -25,7 +25,7 @@ spec:
         - name: STEP
           value: "1"
 ---
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: third
@@ -39,7 +39,7 @@ spec:
           value: "2"
 
 ---
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: fourth
@@ -52,7 +52,7 @@ spec:
         - name: STEP
           value: "3"
 ---
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: fifth
@@ -65,7 +65,7 @@ spec:
         - name: STEP
           value: "4"
 ---
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: sixth

@@ -20,7 +20,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-kotlin
 
 ## Before you begin
 
-- A Kubernetes cluster with Knative installed. Follow the
+- A Kubernetes cluster with Knative installed and DNS configured. Follow the
   [installation instructions](../../../../install/README.md) if you need to
   create one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
@@ -148,7 +148,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-kotlin
    username.
 
    ```yaml
-   apiVersion: serving.knative.dev/v1alpha1
+   apiVersion: serving.knative.dev/v1
    kind: Service
    metadata:
      name: helloworld-kotlin
@@ -196,43 +196,20 @@ folder) you're ready to build and deploy the sample app.
      for your app.
    - Automatically scale your pods up and down (including to zero active pods).
 
-1. To find the IP address for your service, use
-   `kubectl get service knative-ingressgateway --namespace istio-system` to get
-   the ingress IP for your cluster. If your cluster is new, it may take sometime
-   for the service to get assigned an external IP address.
-
-   ```shell
-   kubectl get service knative-ingressgateway --namespace istio-system
-
-   NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
-   knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
-
-   # Now you can assign the external IP address to the env variable.
-   export IP_ADDRESS=<EXTERNAL-IP column from the command above>
-
-   # Or just execute:
-   export IP_ADDRESS=$(kubectl get svc $INGRESSGATEWAY \
-     --namespace istio-system \
-     --output jsonpath="{.status.loadBalancer.ingress[*].ip}")
-   ```
-
 1. To find the URL for your service, use
 
    ```shell
    kubectl get ksvc helloworld-kotlin  --output=custom-columns=NAME:.metadata.name,URL:.status.url
 
    NAME                URL
-   helloworld-kotlin   http://helloworld-kotlin.default.example.com
+   helloworld-kotlin   http://helloworld-kotlin.default.1.2.3.4.xip.io
    ```
 
-1. Now you can make a request to your app to see the result. Presuming, the IP
-   address you got in the step above is in the `${IP_ADDRESS}` env variable:
+1. Now you can make a request to your app and see the result. Replace
+   the URL below the with URL returned in the previous command.
 
    ```shell
-   curl -H "Host: helloworld-kotlin.default.example.com" http://${IP_ADDRESS}
-   ```
-
-   ```terminal
+   curl http://helloworld-kotlin.default.1.2.3.4.xip.io
    Hello Kotlin Sample v1!
    ```
 

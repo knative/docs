@@ -29,53 +29,20 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
    kubectl apply --filename docs/serving/samples/autoscale-go/service.yaml
    ```
 
-1. Obtain both the hostname and IP address of the `istio-ingressgateway` service
-   in the `istio-system` namespace, and then `export` them into the `IP_ADDRESS`
-   environment variable.
+1. Obtain the URL of the service (once `Ready`):
 
-   Note that each platform where you run your Kubernetes cluster is configured
-   differently. Details about the various ways that you can obatin your ingress
-   hostname and IP address is available in the Istio documentation under the
-   [Control Ingress Traffic](https://istio.io/docs/tasks/traffic-management/ingress/)
-   topic.
-
-   **Examples**:
-
-   - For GKE, you run the following commands:
-
-     ```shell
-     # In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
-     INGRESSGATEWAY=knative-ingressgateway
-
-     # The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
-     # Use `istio-ingressgateway` instead, since `knative-ingressgateway`
-     # will be removed in Knative v0.4.
-     if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
-         INGRESSGATEWAY=istio-ingressgateway
-     fi
-
-     export IP_ADDRESS=`kubectl get svc $INGRESSGATEWAY --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
-     ```
-
-   - For Minikube, you run the following command:
-
-     ```shell
-     export IP_ADDRESS=$(minikube ip)
-     ```
-
-   - For Docker Desktop, you run the following command:
-
-     ```shell
-     # The value can be 127.0.0.1 as well
-     export IP_ADDRESS=localhost
-     ```
+   ```
+   $ kubectl get ksvc autoscale-go
+   NAME            URL                                                LATESTCREATED         LATESTREADY           READY   REASON
+   autoscale-go    http://autoscale-go.default.1.2.3.4.xip.io    autoscale-go-96dtk    autoscale-go-96dtk    True
+   ```
 
 ## Load the Service
 
 1. Make a request to the autoscale app to see it consume some resources.
 
    ```shell
-   curl --header "Host: autoscale-go.default.example.com" "http://${IP_ADDRESS?}?sleep=100&prime=10000&bloat=5"
+   curl "http://autoscale-go.default.1.2.3.4.xip.io?sleep=100&prime=10000&bloat=5"
    ```
 
    ```
@@ -88,8 +55,7 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 
    ```shell
    hey -z 30s -c 50 \
-     -host "autoscale-go.default.example.com" \
-     "http://${IP_ADDRESS?}?sleep=100&prime=10000&bloat=5" \
+     "http://autoscale-go.default.1.2.3.4.xip.io?sleep=100&prime=10000&bloat=5" \
      && kubectl get pods
    ```
 
@@ -195,7 +161,7 @@ autoscaler classes built into Knative:
    Example of a Service scaled on CPU:
 
    ```yaml
-   apiVersion: serving.knative.dev/v1alpha1
+   apiVersion: serving.knative.dev/v1
    kind: Service
    metadata:
      name: autoscale-go
@@ -216,7 +182,7 @@ autoscaler classes built into Knative:
    annotations. Example of a Service with custom targets and scale bounds:
 
    ```yaml
-   apiVersion: serving.knative.dev/v1alpha1
+   apiVersion: serving.knative.dev/v1
    kind: Service
    metadata:
      name: autoscale-go
@@ -266,24 +232,21 @@ kubectl port-forward --namespace knative-monitoring $(kubectl get pods --namespa
 
    ```shell
    hey -z 60s -c 100 \
-     -host "autoscale-go.default.example.com" \
-     "http://${IP_ADDRESS?}?sleep=100&prime=10000&bloat=5"
+     "http://autoscale-go.default.1.2.3.4.xip.io?sleep=100&prime=10000&bloat=5"
    ```
 
 1. Send 60 seconds of traffic maintaining 100 qps with short requests (10 ms).
 
    ```shell
    hey -z 60s -q 100 \
-     -host "autoscale-go.default.example.com" \
-     "http://${IP_ADDRESS?}?sleep=10"
+     "http://autoscale-go.default.1.2.3.4.xip.io?sleep=10"
    ```
 
 1. Send 60 seconds of traffic maintaining 100 qps with long requests (1 sec).
 
    ```shell
    hey -z 60s -q 100 \
-     -host "autoscale-go.default.example.com" \
-     "http://${IP_ADDRESS?}?sleep=1000"
+     "http://autoscale-go.default.1.2.3.4.xip.io?sleep=1000"
    ```
 
 1. Send 60 seconds of traffic with heavy CPU usage (~1 cpu/sec/request, total
@@ -291,8 +254,7 @@ kubectl port-forward --namespace knative-monitoring $(kubectl get pods --namespa
 
    ```shell
    hey -z 60s -q 100 \
-     -host "autoscale-go.default.example.com" \
-     "http://${IP_ADDRESS?}?prime=40000000"
+     "http://autoscale-go.default.1.2.3.4.xip.io?prime=40000000"
    ```
 
 1. Send 60 seconds of traffic with heavy memory usage (1 gb/request, total 5
@@ -300,8 +262,7 @@ kubectl port-forward --namespace knative-monitoring $(kubectl get pods --namespa
 
    ```shell
    hey -z 60s -c 5 \
-     -host "autoscale-go.default.example.com" \
-     "http://${IP_ADDRESS?}?bloat=1000"
+     "http://autoscale-go.default.1.2.3.4.xip.io?bloat=1000"
    ```
 
 ## Cleanup

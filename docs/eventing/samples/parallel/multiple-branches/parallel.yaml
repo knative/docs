@@ -9,25 +9,25 @@ spec:
   branches:
   - filter:
       ref:
-        apiVersion: serving.knative.dev/v1alpha1
+        apiVersion: serving.knative.dev/v1
         kind: Service
         name: even-filter
     subscriber:
       ref:
-        apiVersion: serving.knative.dev/v1alpha1
+        apiVersion: serving.knative.dev/v1
         kind: Service
         name: even-transformer
   - filter:
       ref:
-        apiVersion: serving.knative.dev/v1alpha1
+        apiVersion: serving.knative.dev/v1
         kind: Service
         name: odd-filter
     subscriber:
       ref:
-        apiVersion: serving.knative.dev/v1alpha1
+        apiVersion: serving.knative.dev/v1
         kind: Service
         name: odd-transformer
   reply:
-    apiVersion: serving.knative.dev/v1alpha1
+    apiVersion: serving.knative.dev/v1
     kind: Service
     name: event-display

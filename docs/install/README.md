@@ -74,6 +74,7 @@ available Knative components and a set of observability plugins.
 - [Knative Install on IBM Cloud Kubernetes Service](./Knative-with-IKS.md)
 - [Knative Install on IBM Cloud Private](./Knative-with-ICP.md)
 - [Knative Install on Minikube](./Knative-with-Minikube.md)
+- [Knative Install on OpenShift Container Platform](https://docs.openshift.com/container-platform/4.1/serverless/installing-openshift-serverless.html)
 - [Knative Install on Pivotal Container Service](./Knative-with-PKS.md)
 
 If you already have a Kubernetes cluster you're comfortable installing _alpha_
@@ -87,8 +88,6 @@ The guides below install some of the available Knative components, without all
 available observability plugins, to minimize the disk space used for install.
 
 - [Knative Install on Docker for Mac](./Knative-with-Docker-for-Mac.md)
-- [Knative Install on OpenShift](./Knative-with-OpenShift.md)
-- [Knative Install on OpenShift via Operator](https://github.com/openshift-knative/docs/blob/master/README.md)
 
 **Custom install guide**
 
@@ -137,5 +136,3 @@ and set up an Istio IP range for outbound network access:
 ## Checking the version of your Knative Serving installation
 
 - [Checking the version of your Knative Serving installation](./check-install-version.md)
-
-
