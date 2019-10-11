@@ -106,8 +106,8 @@ The [`Broker`](./broker-trigger.md#broker) ensures that every event sent by even
    This shows the `Broker` that you created:
 
     ```sh
-    NAME      READY   REASON   HOSTNAME                                                           AGE
-    default   True             default-Broker.event-example.svc.cluster.local   1m
+    NAME      READY   REASON   URL                                                        AGE
+    default   True             http://default-broker.event-example.svc.cluster.local      1m
     ```
 
     When the `Broker` has the `READY=True` state, it can begin to manage any events it receives.
@@ -275,7 +275,6 @@ to receive. Your `Broker` uses triggers to forward events to the right consumers
 
     This returns the `hello-display` and `goodbye-display` triggers that you created:
 
-
     ```sh
     NAME                   READY   REASON   BROKER    SUBSCRIBER_URI                                                                 AGE
     goodbye-display        True             default   http://goodbye-display.event-example.svc.cluster.local/                        9s
@@ -340,10 +339,10 @@ To show the various types of events you can send, you will make three requests:
 1. To make the first request, which creates an event that has the `type` `greeting`, run the following in the SSH terminal:
 
     ```sh
-    curl -v "default-broker.event-example.svc.cluster.local" \
+    curl -v "http://default-broker.event-example.svc.cluster.local" \
       -X POST \
       -H "Ce-Id: say-hello" \
-      -H "Ce-Specversion: 0.2" \
+      -H "Ce-Specversion: 0.3" \
       -H "Ce-Type: greeting" \
       -H "Ce-Source: not-sendoff" \
       -H "Content-Type: application/json" \
@@ -364,10 +363,10 @@ To show the various types of events you can send, you will make three requests:
 2. To make the second request, which creates an event that has the `source` `sendoff`, run the following in the SSH terminal:
 
     ```sh
-    curl -v "default-broker.event-example.svc.cluster.local" \
+    curl -v "http://default-broker.event-example.svc.cluster.local" \
       -X POST \
       -H "Ce-Id: say-goodbye" \
-      -H "Ce-Specversion: 0.2" \
+      -H "Ce-Specversion: 0.3" \
       -H "Ce-Type: not-greeting" \
       -H "Ce-Source: sendoff" \
       -H "Content-Type: application/json" \
@@ -387,10 +386,10 @@ To show the various types of events you can send, you will make three requests:
 3. To make the third request, which creates an event that has the `type` `greeting` and the`source` `sendoff`, run the following in the SSH terminal:
 
     ```sh
-    curl -v "default-broker.event-example.svc.cluster.local" \
+    curl -v "http://default-broker.event-example.svc.cluster.local" \
       -X POST \
       -H "Ce-Id: say-hello-goodbye" \
-      -H "Ce-Specversion: 0.2" \
+      -H "Ce-Specversion: 0.3" \
       -H "Ce-Type: greeting" \
       -H "Ce-Source: sendoff" \
       -H "Content-Type: application/json" \
@@ -427,7 +426,7 @@ After sending events, verify that your events were received by the appropriate `
     ☁️  cloudevents.Event
     Validation: valid
     Context Attributes,
-      specversion: 0.2
+      specversion: 0.3
       type: greeting
       source: not-sendoff
       id: say-hello
@@ -442,7 +441,7 @@ After sending events, verify that your events were received by the appropriate `
     ☁️  cloudevents.Event
     Validation: valid
     Context Attributes,
-      specversion: 0.2
+      specversion: 0.3
       type: greeting
       source: sendoff
       id: say-hello-goodbye
@@ -464,12 +463,11 @@ After sending events, verify that your events were received by the appropriate `
 
     This returns the `Attributes` and `Data` of the events you sent to `goodbye-display`:
 
-
     ```sh
     ☁️  cloudevents.Event
     Validation: valid
     Context Attributes,
-       specversion: 0.2
+       specversion: 0.3
        type: not-greeting
        source: sendoff
        id: say-goodbye
@@ -484,7 +482,7 @@ After sending events, verify that your events were received by the appropriate `
      ☁️  cloudevents.Event
      Validation: valid
      Context Attributes,
-       specversion: 0.2
+       specversion: 0.3
        type: greeting
        source: sendoff
        id: say-hello-goodbye
