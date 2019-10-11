@@ -57,8 +57,13 @@ You can install Ambassador with `kubectl`:
 
 ```
 kubectl apply \
-  --filename https://getambassador.io/yaml/ambassador/ambassador-knative.yaml \
+  --filename https://getambassador.io/yaml/ambassador/ambassador-rbac.yaml \
   --filename https://getambassador.io/yaml/ambassador/ambassador-service.yaml
+```
+
+Next, enable Knative support in Ambasssador:
+```
+kubectl set env deployments/ambassador AMBASSADOR_KNATIVE_SUPPORT=true
 ```
 
 ## Configuring DNS
