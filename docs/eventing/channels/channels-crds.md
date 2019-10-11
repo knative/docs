@@ -29,6 +29,6 @@ Name | Status | Support | Description
 [GCP PubSub](https://github.com/google/knative-gcp) | Proof of Concept | None | Channels are backed by [GCP PubSub](https://cloud.google.com/pubsub/).
 [InMemoryChannel](https://github.com/knative/eventing/tree/master/config/channels/in-memory-channel) | Proof of Concept | None | In-memory channels are a best effort Channel. They should NOT be used in Production. They are useful for development.
 [KafkaChannel](https://github.com/knative/eventing-contrib/tree/master/kafka/channel/config) | Proof of Concept | None | Channels are backed by [Apache Kafka](http://kafka.apache.org/) topics.
-[NatssChannel](https://github.com/knative/eventing/tree/master/contrib/natss/config) | Proof of Concept | None | Channels are backed by [NATS Streaming](https://github.com/nats-io/nats-streaming-server#configuring).
+[NatssChannel](https://github.com/knative/eventing-contrib/tree/master/natss/config) | Proof of Concept | None | Channels are backed by [NATS Streaming](https://github.com/nats-io/nats-streaming-server#configuring).
 
 

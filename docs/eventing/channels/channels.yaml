@@ -13,7 +13,7 @@ channels:
     description: >
       Channels are backed by [Apache Kafka](http://kafka.apache.org/) topics.
   - name: NatssChannel
-    url: https://github.com/knative/eventing/tree/master/contrib/natss/config
+    url: https://github.com/knative/eventing-contrib/tree/master/natss/config
     status: Proof of Concept
     support: None
     description: >
