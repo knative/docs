@@ -20,7 +20,7 @@ To complete this guide, you will need the following installed and running:
 - [`kubectl` CLI tool](https://kubernetes.io/docs/reference/kubectl/overview/) within a minor version of your Kubernetes cluster.
 - [curl v7.65 or higher](https://curl.haxx.se/download.html)
 - Knative Eventing Component
-   - Knative Eventing In-memory channel Provisioner 
+   - Knative Eventing In-memory channel 
 
 ### Installing Knative Eventing 
 
@@ -30,7 +30,7 @@ If you previously [created a Knative cluster](../install), you might already hav
 kubectl get pods --namespace knative-eventing
 ```
 
-If the `knative-eventing` namespace or the `in-memory-channel-controller-*` does not exist, use the following steps to install Knative Eventing with the in-memory channel provisioner:
+If the `knative-eventing` namespace or the `imc-controller-*` does not exist, use the following steps to install Knative Eventing with the in-memory channel:
 
 1. Make sure that you have a functioning Kubernetes cluster. See the [Comprehensive Install guide](../install) for more information.
    - Old versions of Knative Serving doesn't necessarily work well with latest Knative Eventing, so try to install the latest version of Knative Serving.
@@ -61,8 +61,6 @@ If the `knative-eventing` namespace or the `in-memory-channel-controller-*` does
     eventing-webhook-6c4f6699d8-qclbx               1/1     Running   0          29m
     imc-controller-85cdb4946b-h2msj                 1/1     Running   0          13m
     imc-dispatcher-5f4689d868-fspt6                 1/1     Running   0          13m
-    in-memory-channel-controller-d9db9d879-f2jw6    1/1     Running   0          13m
-    in-memory-channel-dispatcher-79bc7f46cd-4mvj6   1/1     Running   0          13m
     sources-controller-5847564f4f-z59xc             1/1     Running   0          29m
    ```
 
