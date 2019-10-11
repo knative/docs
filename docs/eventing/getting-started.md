@@ -30,7 +30,7 @@ If you previously [created a Knative cluster](../install), you might already hav
 kubectl get pods --namespace knative-eventing
 ```
 
-If the `knative-eventing` namespace or the `imc-controller-*` does not exist, use the following steps to install Knative Eventing with the in-memory channel provisioner:
+If the `knative-eventing` namespace or the `imc-controller-*` does not exist, use the following steps to install Knative Eventing with the in-memory channel:
 
 1. Make sure that you have a functioning Kubernetes cluster. See the [Comprehensive Install guide](../install) for more information.
    - Old versions of Knative Serving doesn't necessarily work well with latest Knative Eventing, so try to install the latest version of Knative Serving.
