@@ -260,7 +260,7 @@ kubectl apply -f https://raw.githubusercontent.com/knative/serving/master/third_
 ```
 
 **Note:** Above installation method is only for development purpose. The production readiness of above 
-installation method is not ensured. For production installtion, refer the `helm` installtion method in this
+installation method is not ensured. For production installation, refer the `helm` installation method in this
 section.
 
 ### Verifying your Istio install
