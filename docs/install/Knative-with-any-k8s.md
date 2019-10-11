@@ -35,6 +35,10 @@ Minkube or similar, see the
 You must install Istio on your Kubernetes cluster before continuing with these
 instructions to install Knative.
 
+## Installing Cluster Local Gateway
+
+Follow the [instruction](./installing-istio#updating-your-install-to-use-cluster-local-gateway) to install Cluster Local Gateway.
+
 ## Installing Knative
 
 The following commands install all available Knative components. To customize
