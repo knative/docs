@@ -69,16 +69,7 @@ Run following command to configure the external IP of the `istio-ingressgateway`
 service to the static IP that you reserved:
 
 ```shell
-# In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
-INGRESSGATEWAY=knative-ingressgateway
-
-# The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
-# Use `istio-ingressgateway` instead, since `knative-ingressgateway`
-# will be removed in Knative v0.4.
-if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
-    INGRESSGATEWAY=istio-ingressgateway
-fi
-
+INGRESSGATEWAY=istio-ingressgateway
 kubectl patch svc $INGRESSGATEWAY --namespace istio-system --patch '{"spec": { "loadBalancerIP": "<your-reserved-static-ip>" }}'
 ```
 
@@ -101,4 +92,6 @@ xxxxxxx-ingressgateway   LoadBalancer   12.34.567.890   98.765.43.210   80:32380
 
 > Note: Updating the external IP address can take several minutes.
 
+The [external IP address](https://console.cloud.google.com/networking/addresses/list) should have a value now in the `In use by` column and should not be `None` anymore:
 
+![External IP address assigned](gke-assigning-static-ip-address.png)

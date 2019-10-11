@@ -1,7 +1,7 @@
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
-  name: me-event-display
+  name: event-display
 spec:
   template:
     spec:

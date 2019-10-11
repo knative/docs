@@ -14,9 +14,7 @@ You can find [guides for other platforms here](./README.md).
 
 ## Before you begin
 
-Although Knative requires a Kubernetes cluster v1.11 or newer, installing
-Knative on [Minikube](https://github.com/kubernetes/minikube) requires a cluster
-v1.12 or newer.
+Knative requires a Kubernetes cluster v1.14 or newer.
 
 ### Install kubectl and Minikube
 
@@ -40,7 +38,7 @@ For Linux use:
 
 ```shell
 minikube start --memory=8192 --cpus=6 \
-  --kubernetes-version=v1.12.0 \
+  --kubernetes-version=v1.14.0 \
   --vm-driver=kvm2 \
   --disk-size=30g \
   --extra-config=apiserver.enable-admission-plugins="LimitRanger,NamespaceExists,NamespaceLifecycle,ResourceQuota,ServiceAccount,DefaultStorageClass,MutatingAdmissionWebhook"
@@ -50,7 +48,7 @@ For macOS use:
 
 ```shell
 minikube start --memory=8192 --cpus=6 \
-  --kubernetes-version=v1.12.0 \
+  --kubernetes-version=v1.14.0 \
   --vm-driver=hyperkit \
   --disk-size=30g \
   --extra-config=apiserver.enable-admission-plugins="LimitRanger,NamespaceExists,NamespaceLifecycle,ResourceQuota,ServiceAccount,DefaultStorageClass,MutatingAdmissionWebhook"
@@ -152,15 +150,7 @@ head to the [sample apps](../serving/samples/README.md) repo.
 > use for the {IP_ADDRESS} placeholder used in the samples:
 
 ```shell
-# In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
-INGRESSGATEWAY=knative-ingressgateway
-
-# The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
-# Use `istio-ingressgateway` instead, since `knative-ingressgateway`
-# will be removed in Knative v0.4.
-if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
-    INGRESSGATEWAY=istio-ingressgateway
-fi
+INGRESSGATEWAY=istio-ingressgateway
 
 echo $(minikube ip):$(kubectl get svc $INGRESSGATEWAY --namespace istio-system --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
 ```

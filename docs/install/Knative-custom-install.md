@@ -25,13 +25,8 @@ to run multiple installation commands.
 - This guide assumes that you have an existing Kubernetes cluster, on which
   you're comfortable installing and running _alpha_ level software.
 
-- Kubernetes requirements:
-
-  - Your Kubernetes cluster version must be v1.11 or newer.
-
-  - Your version of the
-    [`kubectl` CLI tool](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
-    must be v1.10 or newer.
+- Knative requires a Kubernetes cluster v1.14 or newer, as well as a compatible
+`kubectl`.
 
 ## Installing Istio
 
@@ -84,7 +79,7 @@ The following Knative installation files are available:
 - **Eventing Component**:
   - https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml
   - https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml
-  - https://github.com/knative/eventing/releases/download/{{< version >}}/in-memory-channel-crd.yaml
+  - https://github.com/knative/eventing/releases/download/{{< version >}}/in-memory-channel.yaml
 - **Eventing Resources**:
   - https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/github.yaml
   - https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/camel.yaml
@@ -117,11 +112,11 @@ files from the Knative repositories:
 | **knative/eventing**                           |                                                                                                                                                                        |                                                                                           |
 | [`release.yaml`][4.1]†                         | Installs the Eventing component. Includes [ContainerSource](../eventing#containersource), [CronJobSource][6.2], InMemoryChannel.                     |                                                                                           |
 | [`eventing.yaml`][4.2]                         | Installs the Eventing component. Includes [ContainerSource](../eventing#containersource) and [CronJobSource][6.2]. Does not include any Channel. |                                                                                           |
-| [`in-memory-channel-crd.yaml`][4.3]            | Installs only the InMemoryChannel.                                                                                                                       | Eventing component                                                                        |
+| [`in-memory-channel.yaml`][4.3]            | Installs only the InMemoryChannel.                                                                                                                       | Eventing component                                                                        |
 | **knative/eventing-contrib**                   |                                                                                                                                                                        |                                                                                           |
 | [`github.yaml`][5.10]†                          | Installs the [GitHub][6.10] source.                                                                                                                                     | Eventing component                                                                        |
 | [`camel.yaml`][5.40]                            | Installs the Apache Camel source.                                                                                                                                      | Eventing component                                                                        |
-| [`kafka-importer.yaml`][5.50]                   | Installs the Apache Kafka source.                                                                                                                                      | Eventing component                                                                        |
+| [`kafka-source.yaml`][5.50]                     | Installs the Apache Kafka source.                                                                                                                                      | Eventing component                                                                        |
 | [`kafka-channel.yaml`][5.60]                    | Installs the KafkaChannel.                                                                                                                                      | Eventing component                                                                        |
 | [`awssqs.yaml`][5.70]                           | Installs the AWS SQS source.                                                                                                                                           | Eventing component                                                                        |
 | [`event-display.yaml`][5.30]                    | Installs a Knative Service that logs events received for use in samples and debugging.                                                                                 | Serving component, Eventing component                                                     |
@@ -165,7 +160,7 @@ for details about installing the various supported observability plugins.
 [4.20]:
   https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml
 [4.30]:
-  https://github.com/knative/eventing/releases/download/{{< version >}}/in-memory-channel-crd.yaml
+  https://github.com/knative/eventing/releases/download/{{< version >}}/in-memory-channel.yaml
 [4.40]: https://github.com/knative/eventing/releases/download/{{< version >}}/kafka.yaml
 [5.0]: https://github.com/knative/eventing-contrib/releases/tag/{{< version >}}
 [5.10]:
@@ -175,7 +170,7 @@ for details about installing the various supported observability plugins.
 [5.40]:
   https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/camel.yaml
 [5.50]:
-  https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/kafka-importer.yaml
+  https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/kafka-source.yaml
 [5.60]:
   https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/kafka-channel.yaml
 [5.70]:

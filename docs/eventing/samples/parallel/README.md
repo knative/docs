@@ -1,4 +1,4 @@
-The following examples will help you understand how to use Choice to describe
+The following examples will help you understand how to use Parallel to describe
 various flows.
 
 ## Prerequisites
@@ -6,7 +6,7 @@ various flows.
 All examples require:
 
 - A Kubernetes cluster with
-  - Knative Eventing v0.8+
+  - Knative Eventing v0.9+
   - Knative Service v0.8+
 
 All examples are using the
@@ -23,5 +23,5 @@ trivial filtering, transformation and routing of the incoming events.
 
 The examples are:
 
-- [Choice with multiple cases and global reply](./multiple-cases/README.md)
-- [Choice with mutually exclusive cases](./mutual-exclusivity/README.md)
+- [Parallel with multiple branches and global reply](./multiple-branches/README.md)
+- [Parallel with mutually exclusive cases](./mutual-exclusivity/README.md)
