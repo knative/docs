@@ -19,7 +19,7 @@ Parallel has three parts for the Spec:
 1. `branches` defines the list of `filter` and `subscriber` pairs, one per branch,
    and optionally a `reply` object. For each branch:
    1. (optional) the `filter` is evaluated and when it returns an event the `subscriber` is
-      executed. Both `filter` and `subscriber` must be `Callable`.
+      executed. Both `filter` and `subscriber` must be `Addressable`.
    1. the event returned by the `subscriber` is sent to the branch `reply`
       object. When the `reply` is empty, the event is sent to the `spec.reply`
       object (see below).

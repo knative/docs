@@ -31,7 +31,7 @@ To enable delivery to multiple types of Services, Knative Eventing defines two
 generic interfaces that can be implemented by multiple Kubernetes resources:
 
 1. **Addressable** objects are able to receive and acknowledge an event
-   delivered over HTTP to an address defined in their `status.address.hostname`
+   delivered over HTTP to an address defined in their `status.address.url`
    field. As a special case, the core
    [Kubernetes Service object](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#service-v1-core)
    also fulfils the Addressable interface.
