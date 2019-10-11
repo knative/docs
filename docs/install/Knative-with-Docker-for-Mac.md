@@ -47,6 +47,10 @@ managed Istio installation, or if you're installing Knative locally using
 Minkube or similar, see the
 [Installing Istio for Knative guide](./installing-istio.md).
 
+## Installing Cluster Local Gateway
+
+Follow the [instruction](./installing-istio#updating-your-install-to-use-cluster-local-gateway) to install Cluster Local Gateway.
+
 ## Installing Knative Serving
 
 Next, install [Knative Serving](https://github.com/knative/serving).

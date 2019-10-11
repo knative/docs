@@ -150,6 +150,10 @@ instructions to install Knative.
 > [Click here](./Knative-with-Ambassador.md) to install Knative with Ambassador.
 > [Click here](./Knative-with-Gloo.md) to install Knative with Gloo.
 
+## Installing Cluster Local Gateway
+
+Follow the [instruction](./installing-istio#updating-your-install-to-use-cluster-local-gateway) to install Cluster Local Gateway.
+
 ## Installing Knative
 
 The following commands install all available Knative components. To customize
