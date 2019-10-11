@@ -1,6 +1,6 @@
 ﻿using System;
-using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 
 namespace helloworld_csharp
 {
@@ -8,16 +8,19 @@ namespace helloworld_csharp
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            CreateHostBuilder(args).Build().Run();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args)
+        public static IHostBuilder CreateHostBuilder(string[] args)
         {
             string port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
             string url = String.Concat("http://0.0.0.0:", port);
 
-            return WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>().UseUrls(url);
+            return Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>().UseUrls(url);
+                });
         }
     }
 }
