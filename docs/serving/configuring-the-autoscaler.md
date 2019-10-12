@@ -179,8 +179,9 @@ template.
 spec:
   template:
     metadata:
-      autoscaling.knative.dev/metric: concurrency
-      autoscaling.knative.dev/class: hpa.autoscaling.knative.dev
+      annotations:
+        autoscaling.knative.dev/metric: concurrency
+        autoscaling.knative.dev/class: hpa.autoscaling.knative.dev
 ```
 
 ## Additional resources
