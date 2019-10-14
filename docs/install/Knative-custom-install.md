@@ -54,6 +54,10 @@ Minkube or similar, see the
 > [Click here](./Knative-with-Ambassador.md) to install Knative with Ambassador.
 > [Click here](./Knative-with-Gloo.md) to install Knative with Gloo.
 
+## Installing Cluster Local Gateway
+
+Follow the [instruction](./installing-istio#updating-your-install-to-use-cluster-local-gateway) to install Cluster Local Gateway.
+
 ## Installing Knative components
 
 Each Knative component must be installed individually. You can decide which
