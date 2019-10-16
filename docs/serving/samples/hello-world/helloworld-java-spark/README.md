@@ -10,8 +10,8 @@ testing.
 
 ## Prerequisites
 
-- A Kubernetes cluster with Knative installed. Follow the
-  [installation instructions](https://github.com/knative/docs/blob/master/install/README.md)
+- A Kubernetes cluster with Knative installed and DNS configured. Follow the
+  [installation instructions](../../../../install/README.md)
   if you need to create one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
@@ -27,7 +27,7 @@ recreate the source files from this folder.
 1. Clone the repo from the following path:
 
    ```shell
-   https://github.com/knative/docs.git
+   git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
    ```
 
 2. Navigate to the helloworld-java-spark directory
@@ -48,7 +48,7 @@ recreate the source files from this folder.
    block below into it. For detailed instructions on dockerizing a Spark Java
    app, see [Spark with Docker](http://sparkjava.com/tutorials/docker). For
    additional information on multi-stage docker builds for Java see
-   [Creating Smaller Java Image using Docker Multi-stage Build](http://blog.arungupta.me/smaller-java-image-docker-multi-stage-build/).
+   [Creating Smaller Java Image using Docker Multi-stage Build](https://github.com/arun-gupta/docker-java-multistage).
 
    ```docker
     # Use the official maven/Java 8 image to create a build artifact.
@@ -80,7 +80,7 @@ recreate the source files from this folder.
    username.
 
    ```yaml
-   apiVersion: serving.knative.dev/v1alpha1
+   apiVersion: serving.knative.dev/v1
    kind: Service
    metadata:
      name: helloworld-java
@@ -109,7 +109,7 @@ folder) you're ready to build and deploy the sample app.
    docker push {username}/helloworld-java
    ```
 
-2. After the build has completed and the container is pushed to docker hub, you
+1. After the build has completed and the container is pushed to docker hub, you
    can deploy the app into your cluster. Ensure that the container image value
    in `service.yaml` matches the container you built in the previous step. Apply
    the configuration using `kubectl`:
@@ -118,56 +118,29 @@ folder) you're ready to build and deploy the sample app.
    kubectl apply --filename service.yaml
    ```
 
-3. Now that your service is created, Knative will perform the following steps:
+1. Now that your service is created, Knative will perform the following steps:
 
    - Create a new immutable revision for this version of the app.
    - Network programming to create a route, ingress, service, and load balancer
      for your app.
    - Automatically scale your pods up and down (including to zero active pods).
 
-4. To find the IP address for your service, use. If your cluster is new, it may
-   take sometime for the service to get asssigned an external IP address.
-
-   ```shell
-   # In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
-   INGRESSGATEWAY=knative-ingressgateway
-
-   # The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
-   # Use `istio-ingressgateway` instead, since `knative-ingressgateway`
-   # will be removed in Knative v0.4.
-   if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
-       INGRESSGATEWAY=istio-ingressgateway
-   fi
-
-   kubectl get svc $INGRESSGATEWAY --namespace istio-system
-
-   NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
-   xxxxxxx-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
-
-   # Now you can assign the external IP address to the env variable.
-   export IP_ADDRESS=<EXTERNAL-IP column from the command above>
-
-   # Or just execute:
-   export IP_ADDRESS=$(kubectl get svc $INGRESSGATEWAY \
-     --namespace istio-system \
-     --output jsonpath="{.status.loadBalancer.ingress[*].ip}")
-   ```
-
-5. To find the URL for your service, use
+1. To find the URL for your service, use
 
    ```shell
    kubectl get ksvc helloworld-java \
        --output=custom-columns=NAME:.metadata.name,URL:.status.url
 
    NAME                URL
-   helloworld-java     http://helloworld-java.default.example.com
+   helloworld-java     http://helloworld-java.default.1.2.3.4.xip.io
    ```
 
-6. Now you can make a request to your app to see the result. Presuming, the IP
-   address you got in the step above is in the `${IP_ADDRESS}` env variable:
+1. Now you can make a request to your app and see the result. Replace
+   the URL below the with URL returned in the previous command.
 
    ```shell
-   curl -H "Host: helloworld-java.default.example.com" http://${IP_ADDRESS}
+   curl http://helloworld-java.default.1.2.3.4.xip.io
+   Hello World!
    ```
 
 ## Removing the sample app deployment

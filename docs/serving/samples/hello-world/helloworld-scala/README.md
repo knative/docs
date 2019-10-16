@@ -16,7 +16,7 @@ cluster. You can also download a working copy of the sample, by running the
 following commands:
 
 ```shell
-git clone -b "release-0.7" https://github.com/knative/docs knative-docs
+git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
 cd knative-docs/docs/serving/samples/hello-world/helloworld-scala
 ```
 
@@ -70,7 +70,7 @@ image reference to match up with the repository**, name, and version specified
 in the [build.sbt](./build.sbt) in the previous section.
 
 ```yaml
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: helloworld-scala
@@ -106,33 +106,6 @@ local Docker Repository.
 
 ## Deploying to Knative Serving
 
-Locate the Knative Serving gateway address:
-
-```shell
-# In Knative 0.2.x and prior versions, `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
-
-kubectl get svc istio-ingressgateway --namespace istio-system
-```
-
-Example output, see the address under **EXTERNAL-IP**:
-
-```shell
-NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP       PORTS)                                      AGE
-xxxxxxx-ingressgateway   LoadBalancer   123.456.789.01   111.111.111.111   80:32380/TCP,443:32390/TCP,32400:32400/TCP   1m
-```
-
-Then export the external address obtained for ease of reuse later:
-
-```shell
-export SERVING_GATEWAY=<replace this with the address obtained>
-```
-
-If you use Minikube, then you will likely have to do the following instead:
-
-```shell
-export SERVING_GATEWAY=$(minikube ip):$(kubectl get svc istio-ingressgateway --namespace istio-system --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
-```
-
 Apply the [Service yaml definition](./helloworld-scala.yaml):
 
 ```shell
@@ -145,15 +118,15 @@ Then find the service host:
 kubectl get ksvc helloworld-scala \
     --output=custom-columns=NAME:.metadata.name,URL:.status.url
 
-# It will print something like this, the URL is what you're going to use as HTTP Host header:
+# It will print something like this, the URL is what you're looking for.
 # NAME                URL
-# helloworld-scala    http://helloworld-scala.default.example.com
+# helloworld-scala    http://helloworld-scala.default.1.2.3.4.xip.io
 ```
 
-Finally, to try your service, use the obtained address in the Host header:
+Finally, to try your service, use the obtained URL:
 
 ```shell
-curl -v -H "Host: helloworld-scala.default.example.com" http://$SERVING_GATEWAY
+curl -v http://helloworld-scala.default.1.2.3.4.xip.io
 ```
 
 ## Cleanup

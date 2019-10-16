@@ -13,6 +13,12 @@ If you have not yet installed the logging and monitoring components, go through
 the [installation instructions](./installing-logging-metrics-traces.md) to set
 up the necessary components.
 
+## Configuring Traces
+
+You can update the configuration file for tracing in [config-tracing.yaml](https://github.com/knative/serving/blob/master/config/config-tracing.yaml).
+
+Follow the instructions in the file to set your configuration options. This file includes options such as sample rate (to determine what percentage of requests to trace), debug mode, and backend selection (zipkin or stackdriver).
+
 ## Zipkin
 
 In order to access request traces, you use the Zipkin visualization tool.
@@ -56,9 +62,4 @@ In order to access request traces, you use the Jaeger visualization tool.
 
 <!--TODO: Consider adding a video here. -->
 
----
 
-Except as otherwise noted, the content of this page is licensed under the
-[Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),
-and code samples are licensed under the
-[Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).

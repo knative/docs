@@ -30,7 +30,7 @@ import (
 var (
 	yamlFile     = flag.String("yaml", "eventing/channels/channels.yaml", "The YAML file to parse to generate the mark down.")
 	templateFile = flag.String("template", "eventing/channels/generator/ReadmeTemplate.gomd", "The template file to fill in.")
-	mdFile       = flag.String("md", "eventing/channels/README.md", "The mark down file to write to. Any existing file will be overwritten.")
+	mdFile       = flag.String("md", "eventing/channels/channels-crds.md", "The mark down file to write to. Any existing file will be overwritten.")
 )
 
 func main() {

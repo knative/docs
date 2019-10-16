@@ -14,13 +14,13 @@ cluster. You can also download a working copy of the sample, by running the
 following commands:
 
 ```shell
-git clone -b "release-0.7" https://github.com/knative/docs knative-docs cd
+git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs cd
 knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
 ```
 
 ## Before you begin
 
-- A Kubernetes cluster with Knative installed. Follow the
+- A Kubernetes cluster with Knative installed and DNS configured. Follow the
   [installation instructions](../../../../install/README.md) if you need to
   create one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
@@ -127,7 +127,7 @@ knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
    username.
 
    ```yaml
-   apiVersion: serving.knative.dev/v1alpha1
+   apiVersion: serving.knative.dev/v1
    kind: Service
    metadata:
      name: helloworld-java-spring
@@ -175,39 +175,6 @@ folder) you're ready to build and deploy the sample app.
      for your app.
    - Automatically scale your pods up and down (including to zero active pods).
 
-1. To find the IP address of your service, use:
-
-   ```shell
-   # In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
-   INGRESSGATEWAY=knative-ingressgateway
-
-   # The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
-   # Use `istio-ingressgateway` instead, since `knative-ingressgateway`
-   # will be removed in Knative v0.4.
-   if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
-       INGRESSGATEWAY=istio-ingressgateway
-   fi
-
-   kubectl get svc $INGRESSGATEWAY --namespace istio-system
-
-   NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
-   xxxxxxx-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
-
-   # Now you can assign the external IP address to the env variable.
-   export IP_ADDRESS=<EXTERNAL-IP column from the command above>
-
-   # Or just execute:
-
-   export IP_ADDRESS=$(kubectl get svc $INGRESSGATEWAY \
-     --namespace istio-system \
-     --output jsonpath="{.status.loadBalancer.ingress[*].ip}")
-   ```
-
-   **Note** If your cluster is new, it may take some time for the service to get
-   assigned an external IP address. Instead of rerunning the command, you can
-   add `--watch` to the command below to view the component's status updates in
-   real time. Use CTRL+C to exit watch mode.
-
 1. To find the URL of your service, use:
 
    ```shell
@@ -215,20 +182,16 @@ folder) you're ready to build and deploy the sample app.
       --output=custom-columns=NAME:.metadata.name,URL:.status.url
 
    NAME                       URL
-   helloworld-java-spring     http://helloworld-java-spring.default.example.com
+   helloworld-java-spring     http://helloworld-java-spring.default.1.2.3.4.xip.io
    ```
 
-1. Now you can make a request to your app to see the result. Presuming, the IP
-   address you got in the step above is in the `${IP_ADDRESS}` env variable:
+1. Now you can make a request to your app and see the result. Replace
+   the URL below the with URL returned in the previous command.
 
    ```shell
-   curl -H "Host: helloworld-java-spring.default.example.com" http://${IP_ADDRESS}
-
+   curl http://helloworld-java-spring.default.1.2.3.4.xip.io
    Hello Spring Boot Sample v1!
    ```
-
-**Note** Replace `{IP_ADDRESS}` with the address you saw returned in the
-previous step. i.e. `EXTERNAL-IP`
 
 ## Removing the sample app deployment
 

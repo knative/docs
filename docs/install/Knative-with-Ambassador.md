@@ -13,83 +13,29 @@ using pre-built images.
 
 ## Before you Begin
 
-Knative requires a Kubernetes cluster v1.11 or newer with the
-[MutatingAdmissionWebhook admission controller](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#how-do-i-turn-on-an-admission-controller)
-enabled.
-
-`kubectl` v1.10 is also required.
+Knative requires a Kubernetes cluster v1.14 or newer, as well as a compatible `kubectl`.
 
 This guide assumes that you have already
 [created a Kubernetes cluster](https://kubernetes.io/docs/setup/) and are using
 bash in a Mac or Linux environment.
 
-## Install Ambassador
-
-Knative was originally built using Istio to handle cluster networking. While the
-Istio gateway provides the functionality needed to serve requests to your
-application, installing a service mesh to handle north-south traffic carries
-some operational overhead with it. Ambassador provides a way to get traffic to
-your Knative application without the overhead or complexity of a full service
-mesh.
-
-You can install Ambassador with `kubectl`:
-
-```
-kubectl apply -f https://getambassador.io/yaml/ambassador/ambassador-knative.yaml
-kubectl apply -f https://getambassador.io/yaml/ambassador/ambassador-service.yaml
-```
-
-Ambassador will watch for and create routes based off of Knative
-`ClusterIngress` resources. These will then be accessible over the external IP
-address of the Ambassador service you just created.
-
-Get this external IP address and save it in a variable named `AMBASSADOR_IP`
-
-```
-$ kubectl get svc ambassador
-
-NAME         TYPE           CLUSTER-IP     EXTERNAL-IP     PORT(S)        AGE
-ambassador   LoadBalancer   10.59.246.30   35.229.120.99   80:32073/TCP   13m
-
-$ AMBASSADOR_IP=35.229.120.99
-```
-
 ## Install Knative
 
-Now that Ambassador is installed to handle ingress to your serverless
-applications, you need to install Knative to manage them.
+First, let's install Knative to manage our serverless applications.
 
 The following commands install all available Knative components as well as the
 standard set of observability plugins. To customize your Knative installation,
 see Performing a Custom Knative Installation.
 
-1.  To install Knative, first install the CRDs by running the `kubectl apply`
-    command once with the `-l knative.dev/crd-install=true` flag. This prevents
-    race conditions during the install, which cause intermittent errors:
+1.  To install Knative, first install the CRDs by running the following `kubectl apply`
+    command. This prevents race conditions during the install, which cause intermittent errors:
 
-        kubectl apply -l knative.dev/crd-install=true \
-        --filename https://github.com/knative/serving/releases/download/v0.7.1/serving.yaml \
-        --filename https://github.com/knative/build/releases/download/v0.7.1/build.yaml \
-        --filename https://github.com/knative/serving/releases/download/v0.7.1/monitoring.yaml
+        kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving-crds.yaml
 
-2.  To complete the install of Knative and it's dependencies, run the
-    `kubectl apply` command again, this time without the
-    `-l knative.dev/crd-install=true`:
+2.  To complete the install of Knative and its dependencies, next run the
+    following `kubectl apply` command:
 
-        kubectl apply --filename https://github.com/knative/serving/releases/download/v0.7.1 serving.yaml --selector networking.knative.dev/certificate-provider!=cert-manager \
-        --filename https://github.com/knative/build/releases/download/v0.7.1/build.yaml \
-        --filename https://github.com/knative/serving/releases/download/v0.7.1/monitoring.yaml
-
-    > **Notes**:
-    >
-    > - By default, the Knative Serving component installation (`serving.yaml`)
-    >   includes a controller for
-    >   [enabling automatic TLS certificate provisioning](../serving/using-auto-tls.md).
-    >   If you do intend on immediately enabling auto certificates in Knative,
-    >   you can remove the
-    >   `--selector networking.knative.dev/certificate-provider!=cert-manager`
-    >   statement to install the controller. Otherwise, you can choose to
-    >   install the auto certificates feature and controller at a later time.
+        kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving-core.yaml
 
 3.  Monitor the Knative namespaces and wait until all of the pods come up with a
     `STATUS` of `Running`:
@@ -97,6 +43,62 @@ see Performing a Custom Knative Installation.
     ```
     kubectl get pods -w --all-namespaces
     ```
+
+## Install Ambassador
+
+Knative was originally built using Istio to handle cluster networking. While the
+Istio gateway provides the functionality needed to serve requests to your
+application, installing a service mesh just to handle north-south traffic
+carries some operational overhead with it. Ambassador provides a way to get
+traffic to your Knative application without the overhead or complexity of a full
+service mesh.
+
+You can install Ambassador with `kubectl`:
+
+```
+kubectl apply \
+  --filename https://getambassador.io/yaml/ambassador/ambassador-knative.yaml \
+  --filename https://getambassador.io/yaml/ambassador/ambassador-service.yaml
+```
+
+## Configuring DNS
+
+Installing Ambassador will create a Kubernetes Service with type `LoadBalancer`.
+This may take some time to get an IP address assigned, during this process it
+will appear as `<pending>`.  You must wait for this IP address to be assigned
+before DNS may be set up.
+
+Get this external IP address with:
+
+```
+$ kubectl get svc ambassador
+
+NAME         TYPE           CLUSTER-IP     EXTERNAL-IP     PORT(S)        AGE
+ambassador   LoadBalancer   10.59.246.30   35.229.120.99   80:32073/TCP   13m
+
+```
+
+This external IP can be used with your DNS provider with a wildcard `A` record;
+however, for a basic functioning DNS setup (not suitable for production!) this
+external IP address can be added to the `config-domain` ConfigMap in
+`knative-serving`. You can edit this with the following command:
+
+```
+kubectl edit cm config-domain --namespace knative-serving
+```
+
+Given the external IP above, change the content to:
+```
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-domain
+  namespace: knative-serving
+data:
+  # xip.io is a "magic" DNS provider, which resolves all DNS lookups for:
+  # *.{ip}.xip.io to {ip}.
+  35.229.120.99.xip.io: ""
+```
 
 ## Deploying an Application
 
@@ -110,7 +112,7 @@ route traffic to a serverless application.
    `kubectl`
 
    ```yaml
-   apiVersion: serving.knative.dev/v1alpha1
+   apiVersion: serving.knative.dev/v1
    kind: Service
    metadata:
      name: helloworld-go
@@ -133,22 +135,20 @@ route traffic to a serverless application.
 
    `Knative Service`s are exposed via a `Host` header assigned by Knative. By
    default, Knative will assign the `Host`:
-   `{service-name}.{namespace}.example.com`. You can verify this by checking the
-   `EXTERNAL-IP` of the `helloworld-go` service created above.
+   `{service-name}.{namespace}.{the domain we setup above}`.  You can see this
+   with:
 
    ```
-   $ kubectl get service helloworld-go
-
-   NAME            TYPE           CLUSTER-IP   EXTERNAL-IP                         PORT(S)   AGE
-   helloworld-go   ExternalName   <none>       helloworld-go.default.example.com   <none>    32m
+   $ kubectl get ksvc helloworld-go
+   NAME            URL                                                LATESTCREATED         LATESTREADY           READY     REASON
+   helloworld-go   http://helloworld-go.default.34.83.124.52.xip.io   helloworld-go-nwblj   helloworld-go-nwblj   True
    ```
 
-   Ambassador will use this `Host` header to route requests to the correct
-   service. You can send a request to the `helloworld-go` service with curl
-   using the `Host` and `AMBASSADOR_IP` from above:
+   You can send a request to the `helloworld-go` service with curl
+   using the `URL` given above:
 
    ```
-   $ curl -H "Host: helloworld-go.default.example.com" $AMBASSADOR_IP
+   $ curl http://helloworld-go.default.34.83.124.52.xip.io
 
    Hello Go Sample v1!
    ```
@@ -159,7 +159,7 @@ manage and route to serverless applications!
 ## What's next
 
 - Try the
-  [Getting Started with App Deployment guide](./getting-started-knative-app/)
+  [Getting Started with App Deployment guide](../serving/getting-started-knative-app/)
   for Knative serving.
-- Take a look at the rest of what
-  [Knative has to offer](https://knative.dev/docs/index.html)
+- Get started with Knative Eventing by walking through one of the
+  [Eventing Samples](../eventing/samples/).

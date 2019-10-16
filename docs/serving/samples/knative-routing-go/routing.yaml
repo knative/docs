@@ -40,6 +40,8 @@ spec:
       # eventually be directed to Search service.
       - destination:
           host: istio-ingressgateway.istio-system.svc.cluster.local
+          port:
+            number: 80
         weight: 100
   - match:
     - uri:
@@ -54,4 +56,6 @@ spec:
       # eventually be directed to LOgin service.
       - destination:
           host: istio-ingressgateway.istio-system.svc.cluster.local
+          port:
+            number: 80
         weight: 100

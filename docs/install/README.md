@@ -1,3 +1,4 @@
+
 Follow this guide to install Knative components on a platform of your choice.
 
 ## Choosing a Kubernetes cluster
@@ -35,10 +36,7 @@ component.
 
 ## Installing Knative with Gloo
 
-[Install with Gloo](./Knative-with-Gloo.md): Gloo functions as a lightweight
-gateway for Knative. Choose this option if you don't require service mesh in
-your cluster and want a lighter-weight alternative to Istio. Note that _the
-Knative Eventing component_ is not supported by Gloo at this time.
+[Install with Gloo](./Knative-with-Gloo.md): Gloo functions as a lightweight gateway for Knative. Choose this option if you don't require a service mesh in your cluster and want a lightweight alternative to Istio. Gloo supports all documented Knative features, as well as extensions to Serving such as Eventing and Monitoring.
 
 ## Installing Knative with Istio
 
@@ -76,6 +74,7 @@ available Knative components and a set of observability plugins.
 - [Knative Install on IBM Cloud Kubernetes Service](./Knative-with-IKS.md)
 - [Knative Install on IBM Cloud Private](./Knative-with-ICP.md)
 - [Knative Install on Minikube](./Knative-with-Minikube.md)
+- [Knative Install on OpenShift Container Platform](https://docs.openshift.com/container-platform/4.1/serverless/installing-openshift-serverless.html)
 - [Knative Install on Pivotal Container Service](./Knative-with-PKS.md)
 
 If you already have a Kubernetes cluster you're comfortable installing _alpha_
@@ -89,8 +88,6 @@ The guides below install some of the available Knative components, without all
 available observability plugins, to minimize the disk space used for install.
 
 - [Knative Install on Docker for Mac](./Knative-with-Docker-for-Mac.md)
-- [Knative Install on OpenShift](./Knative-with-OpenShift.md)
-- [Knative Install on OpenShift via Operator](https://github.com/openshift-knative/docs/blob/master/README.md)
 
 **Custom install guide**
 
@@ -116,7 +113,7 @@ Knative cluster.
 Now you're ready to deploy an app:
 
 - Follow the step-by-step
-  [Getting Started with Knative App Deployment](./getting-started-knative-app.md)
+  [Getting Started with Knative App Deployment](../serving/getting-started-knative-app.md)
   guide.
 
 - View the available [sample apps](../serving/samples) and deploy one of your
@@ -139,10 +136,3 @@ and set up an Istio IP range for outbound network access:
 ## Checking the version of your Knative Serving installation
 
 - [Checking the version of your Knative Serving installation](./check-install-version.md)
-
----
-
-Except as otherwise noted, the content of this page is licensed under the
-[Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),
-and code samples are licensed under the
-[Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).

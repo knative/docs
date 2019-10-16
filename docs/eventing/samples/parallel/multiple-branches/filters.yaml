@@ -1,0 +1,27 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: even-filter
+spec:
+  template:
+    spec:
+      containers:
+      - image: villardl/filter-nodejs:0.1
+        env:
+        - name: FILTER
+          value: |
+            Math.round(Date.parse(event.time) / 60000) % 2 === 0
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: odd-filter
+spec:
+  template:
+    spec:
+      containers:
+      - image: villardl/filter-nodejs:0.1
+        env:
+        - name: FILTER
+          value: |
+            Math.round(Date.parse(event.time) / 60000) % 2 !== 0

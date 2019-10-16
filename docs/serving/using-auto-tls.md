@@ -17,8 +17,8 @@ provisioning:
 
 - The following must be installed on your Knative cluter:
   - [Knative Serving version 0.6.0 or higher](../install/).
-  - [Istio with SDS, version 1.1 or higher](../install/installing-istio.md#installing-istio-with-SDS-to-secure-the-ingress-gateway).
-    Note: Currently, [Gloo](https://github.com/solo-io/gloo) is unsupported.
+  - [Istio with SDS, version 1.1 or higher](../install/installing-istio.md#installing-istio-with-SDS-to-secure-the-ingress-gateway) or [Gloo, version 0.18.16 or higher](../install/Knative-with-Gloo.md).
+    Note: Currently, [Ambassador](https://github.com/datawire/ambassador) is unsupported.
   - [cert-manager version `0.6.1` or higher](./installing-cert-manager.md).
 - Your Knative cluster must be configured to use a
   [custom domain](./using-a-custom-domain.md).
@@ -26,25 +26,20 @@ provisioning:
 
 ## Enabling automatic certificate provisioning
 
-To enable Knative to automatically provision TLS certificates:
+To enable support for automatic TLS certificate provisioning in Knative:
 
-1. Determine if `networking-certmanager` is installed by running the following
-   command:
+1. Determine if `networking-certmanager` is already installed by running the 
+    following command:
 
-   ```shell
-   kubectl get deployment networking-certmanager -n knative-serving
-   ```
+    ```shell
+    kubectl get deployment networking-certmanager -n knative-serving
+    ```
 
-1. If `networking-certmanager` is not found, run the following commands to
-   install it:
-
-   ```shell
-   # KNATIVE_VERSION needs to be 0.6.0 or above.
-   KNATIVE_VERSION=0.6.0
-
-   kubectl apply --filename https://github.com/knative/serving/releases/download/v${KNATIVE_VERSION}/serving.yaml \
-   --selector networking.knative.dev/certificate-provider=cert-manager
-   ```
+1. If `networking-certmanager` is not found, run the following command:
+   
+    ```shell
+    kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving-cert-manager.yaml
+    ```
 
 1. Create and add the `ClusterIssuer` configuration file to your Knative cluster
    to define who issues the TLS certificates, how requests are validated

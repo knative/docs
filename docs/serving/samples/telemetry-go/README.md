@@ -15,7 +15,7 @@ dedicated Prometheus instance rather than using the default installation.
 ## Prerequisites
 
 1. A Kubernetes cluster with [Knative Serving](../../../install/README.md)
-   installed.
+   installed and DNS configured.
 2. Check if Knative monitoring components are installed:
 
 ```
@@ -118,39 +118,13 @@ kubectl get revisions --output yaml
 
 To access this service via `curl`, you need to determine its ingress address.
 
-1. To determine if your service is ready: Check the status of your Knative
-   gateway:
+1. To determine if your service is ready:
 
 ```
-# In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
-INGRESSGATEWAY=knative-ingressgateway
-
-# The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
-# Use `istio-ingressgateway` instead, since `knative-ingressgateway`
-# will be removed in Knative v0.4.
-if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
-    INGRESSGATEWAY=istio-ingressgateway
-fi
-
-kubectl get svc $INGRESSGATEWAY --namespace istio-system --watch
+kubectl get ksvc --output yaml
 ```
 
-When the service is ready, you'll see an IP address in the `EXTERNAL-IP` field:
-
-```
-NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
-xxxxxxx-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
-```
-
-CTRL+C to end watch.
-
-Check the status of your route:
-
-```
-kubectl get route --output yaml
-```
-
-When the route is ready, you'll see the following fields reported as:
+When the service is ready, you'll see the following fields reported as:
 
 ```YAML
 status:
@@ -158,36 +132,20 @@ status:
     ...
     status: "True"
     type: Ready
-  url: http://telemetrysample-route.default.example.com
+  url: http://telemetrysample-route.default.1.2.3.4.xip.io
 ```
 
-2. Export the ingress IP as an environment variable:
+1. Make a request to the service to see the `Hello World!` message:
 
 ```
-# In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
-INGRESSGATEWAY=knative-ingressgateway
-
-# The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
-# Use `istio-ingressgateway` instead, since `knative-ingressgateway`
-# will be removed in Knative v0.4.
-if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
-    INGRESSGATEWAY=istio-ingressgateway
-fi
-
-export SERVICE_IP=`kubectl get svc $INGRESSGATEWAY --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*].ip}"`
+curl http://telemetrysample-route.default.1.2.3.4.xip.io
 ```
 
-3. Make a request to the service to see the `Hello World!` message:
-
-```
-curl --header "Host:telemetrysample-route.default.example.com" http://${SERVICE_IP}
-```
-
-4. Make a request to the `/log` endpoint to generate logs to the `stdout` file
+1. Make a request to the `/log` endpoint to generate logs to the `stdout` file
    and generate files under `/var/log` in both `JSON` and plain text formats:
 
 ```
-curl --header "Host:telemetrysample-route.default.example.com" http://${SERVICE_IP}/log
+curl http://telemetrysample-route.default.1.2.3.4.xip.io/log
 ```
 
 ## Access Logs

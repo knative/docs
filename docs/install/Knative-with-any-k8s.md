@@ -10,11 +10,9 @@ using pre-built images.
 
 ## Before you begin
 
-Knative requires a Kubernetes cluster v1.11 or newer with the
-[MutatingAdmissionWebhook admission controller](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#how-do-i-turn-on-an-admission-controller)
-enabled. `kubectl` v1.10 is also required. This guide assumes that you've
-already created a Kubernetes cluster which you're comfortable installing _alpha_
-software on.
+Knative requires a Kubernetes cluster v1.14 or newer, as well as a compatible
+`kubectl`. This guide assumes that you've already created a Kubernetes cluster
+which you're comfortable installing _alpha_ software on.
 
 This guide assumes you are using bash in a Mac or Linux environment; some
 commands will need to be adjusted for use in a Windows environment.
@@ -68,10 +66,9 @@ your Knative installation, see
 
    ```bash
    kubectl apply --selector knative.dev/crd-install=true \
-   --filename https://github.com/knative/serving/releases/download/v0.7.0/serving.yaml \
-   --filename https://github.com/knative/build/releases/download/v0.7.0/build.yaml \
-   --filename https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml \
-   --filename https://github.com/knative/serving/releases/download/v0.7.0/monitoring.yaml
+   --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
+   --filename https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml \
+   --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml
    ```
 
 1. To complete the install of Knative and its dependencies, run the
@@ -79,29 +76,16 @@ your Knative installation, see
    complete the install of Knative and its dependencies:
 
    ```bash
-   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.7.0/serving.yaml --selector networking.knative.dev/certificate-provider!=cert-manager \
-   --filename https://github.com/knative/build/releases/download/v0.7.0/build.yaml \
-   --filename https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml \
-   --filename https://github.com/knative/serving/releases/download/v0.7.0/monitoring.yaml
+   kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
+   --filename https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml \
+   --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml
    ```
-
-   > **Notes**:
-   >
-   > - By default, the Knative Serving component installation (`serving.yaml`)
-   >   includes a controller for
-   >   [enabling automatic TLS certificate provisioning](../serving/using-auto-tls.md).
-   >   If you do intend on immediately enabling auto certificates in Knative,
-   >   you can remove the
-   >   `--selector networking.knative.dev/certificate-provider!=cert-manager`
-   >   statement to install the controller. Otherwise, you can choose to install
-   >   the auto certificates feature and controller at a later time.
 
 1. Monitor the Knative components until all of the components show a `STATUS` of
    `Running`:
 
    ```bash
    kubectl get pods --namespace knative-serving
-   kubectl get pods --namespace knative-build
    kubectl get pods --namespace knative-eventing
    kubectl get pods --namespace knative-monitoring
    ```
@@ -111,19 +95,12 @@ your Knative installation, see
 Now that your cluster has Knative installed, you can see what Knative has to
 offer.
 
-To deploy your first app with Knative, follow the step-by-step
-[Getting Started with Knative App Deployment](./getting-started-knative-app.md)
+To deploy your first app with the
+[Getting Started with Knative App Deployment](../serving/getting-started-knative-app.md)
 guide.
 
-To get started with Knative Eventing, pick one of the
-[Eventing Samples](../eventing/samples/) to walk through.
+Get started with Knative Eventing by walking through one of the
+[Eventing Samples](../eventing/samples/).
 
-To get started with Knative Build, read the [Build README](../build/README.md),
-then choose a sample to walk through.
-
----
-
-Except as otherwise noted, the content of this page is licensed under the
-[Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),
-and code samples are licensed under the
-[Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).
+[Install Cert-Manager](../serving/installing-cert-manager.md) if you want to use the
+[automatic TLS cert provisioning feature](../serving/using-auto-tls.md).

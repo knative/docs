@@ -14,9 +14,7 @@ You can find [guides for other platforms here](./README.md).
 
 ## Before you begin
 
-Although Knative requires a Kubernetes cluster v1.11 or newer, installing
-Knative on [Minikube](https://github.com/kubernetes/minikube) requires a cluster
-v1.12 or newer.
+Knative requires a Kubernetes cluster v1.14 or newer.
 
 ### Install kubectl and Minikube
 
@@ -40,7 +38,7 @@ For Linux use:
 
 ```shell
 minikube start --memory=8192 --cpus=6 \
-  --kubernetes-version=v1.12.0 \
+  --kubernetes-version=v1.14.0 \
   --vm-driver=kvm2 \
   --disk-size=30g \
   --extra-config=apiserver.enable-admission-plugins="LimitRanger,NamespaceExists,NamespaceLifecycle,ResourceQuota,ServiceAccount,DefaultStorageClass,MutatingAdmissionWebhook"
@@ -50,7 +48,7 @@ For macOS use:
 
 ```shell
 minikube start --memory=8192 --cpus=6 \
-  --kubernetes-version=v1.12.0 \
+  --kubernetes-version=v1.14.0 \
   --vm-driver=hyperkit \
   --disk-size=30g \
   --extra-config=apiserver.enable-admission-plugins="LimitRanger,NamespaceExists,NamespaceLifecycle,ResourceQuota,ServiceAccount,DefaultStorageClass,MutatingAdmissionWebhook"
@@ -58,37 +56,24 @@ minikube start --memory=8192 --cpus=6 \
 
 ## Installing Istio
 
+Knative depends on [Istio](https://istio.io/docs/concepts/what-is-istio/) for
+traffic routing and ingress. You have the option of injecting Istio sidecars and
+enabling the Istio service mesh, but it's not required for all Knative
+components.
+
+If your cloud platform offers a managed Istio installation, we recommend
+installing Istio that way, unless you need the ability to customize your
+installation.
+
+If you prefer to install Istio manually, if your cloud provider doesn't offer a
+managed Istio installation, or if you're installing Knative locally using
+Minkube or similar, see the
+[Installing Istio for Knative guide](./installing-istio.md).
+
 > Note: [Ambassador](https://www.getambassador.io/) and
 > [Gloo](https://gloo.solo.io/) are available as an alternative to Istio.
 > [Click here](./Knative-with-Ambassador.md) to install Knative with Ambassador.
 > [Click here](./Knative-with-Gloo.md) to install Knative with Gloo.
-
-Knative depends on Istio. Run the following to install Istio. (We are changing
-`LoadBalancer` to `NodePort` for the `istio-ingress` service).
-
-```shell
-kubectl apply --filename https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/istio-1.0.7/istio-crds.yaml &&
-curl -L https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/istio-1.0.7/istio.yaml \
-  | sed 's/LoadBalancer/NodePort/' \
-  | kubectl apply --filename -
-
-# Label the default namespace with istio-injection=enabled.
-kubectl label namespace default istio-injection=enabled
-```
-
-Monitor the Istio components until all of the components show a `STATUS` of
-`Running` or `Completed`:
-
-```shell
-kubectl get pods --namespace istio-system
-```
-
-It will take a few minutes for all the components to be up and running; you can
-rerun the command to see the current status.
-
-> Note: Instead of rerunning the command, you can add `--watch` to the above
-> command to view the component's status updates in real time. Use CTRL+C to
-> exit watch mode.
 
 ## Installing Knative
 
@@ -123,10 +108,9 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
 
    ```shell
    kubectl apply --selector knative.dev/crd-install=true \
-   --filename https://github.com/knative/serving/releases/download/v0.7.0/serving.yaml \
-   --filename https://github.com/knative/build/releases/download/v0.7.0/build.yaml \
-   --filename https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml \
-   --filename https://github.com/knative/serving/releases/download/v0.7.0/monitoring.yaml
+   --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
+   --filename https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml \
+   --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml
    ```
 
 1. To complete the install of Knative and its dependencies, run the
@@ -134,29 +118,16 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
    complete the install of Knative and its dependencies:
 
    ```shell
-   kubectl apply --filename https://github.com/knative/serving/releases/download/v0.7.0/serving.yaml --selector networking.knative.dev/certificate-provider!=cert-manager \
-   --filename https://github.com/knative/build/releases/download/v0.7.0/build.yaml \
-   --filename https://github.com/knative/eventing/releases/download/v0.7.0/release.yaml \
-   --filename https://github.com/knative/serving/releases/download/v0.7.0/monitoring.yaml
+   kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
+   --filename https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml \
+   --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml
    ```
-
-   > **Notes**:
-   >
-   > - By default, the Knative Serving component installation (`serving.yaml`)
-   >   includes a controller for
-   >   [enabling automatic TLS certificate provisioning](../serving/using-auto-tls.md).
-   >   If you do intend on immediately enabling auto certificates in Knative,
-   >   you can remove the
-   >   `--selector networking.knative.dev/certificate-provider!=cert-manager`
-   >   statement to install the controller. Otherwise, you can choose to install
-   >   the auto certificates feature and controller at a later time.
 
 1. Monitor the Knative components until all of the components show a `STATUS` of
    `Running`:
 
    ```shell
    kubectl get pods --namespace knative-serving
-   kubectl get pods --namespace knative-build
    kubectl get pods --namespace knative-eventing
    kubectl get pods --namespace knative-monitoring
    ```
@@ -167,7 +138,7 @@ Now that your cluster has Knative installed, you're ready to deploy an app.
 
 If you'd like to follow a step-by-step guide for deploying your first app on
 Knative, check out the
-[Getting Started with Knative App Deployment](./getting-started-knative-app.md)
+[Getting Started with Knative App Deployment](../serving/getting-started-knative-app.md)
 guide.
 
 If you'd like to view the available sample apps and deploy one of your choosing,
@@ -179,15 +150,7 @@ head to the [sample apps](../serving/samples/README.md) repo.
 > use for the {IP_ADDRESS} placeholder used in the samples:
 
 ```shell
-# In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
-INGRESSGATEWAY=knative-ingressgateway
-
-# The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
-# Use `istio-ingressgateway` instead, since `knative-ingressgateway`
-# will be removed in Knative v0.4.
-if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
-    INGRESSGATEWAY=istio-ingressgateway
-fi
+INGRESSGATEWAY=istio-ingressgateway
 
 echo $(minikube ip):$(kubectl get svc $INGRESSGATEWAY --namespace istio-system --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
 ```
@@ -199,10 +162,3 @@ Delete the Kubernetes cluster along with Knative, Istio, and any deployed apps:
 ```shell
 minikube delete
 ```
-
----
-
-Except as otherwise noted, the content of this page is licensed under the
-[Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/),
-and code samples are licensed under the
-[Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).

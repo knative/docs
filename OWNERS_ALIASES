@@ -2,6 +2,7 @@ aliases:
   eng-approvers:
   - evankanderson
   - mattmoor
+  - dgerd
   - vaikas-google
   - rgregg
   - mchmarny
@@ -15,13 +16,10 @@ aliases:
   productivity-approvers:
   - adrcunha
   - chaodaiG
-  - srinivashegde86
   productivity-reviewers:
   - adrcunha
   - chaodaiG
   - coryrc
-  - dushyanthsc
-  - Fredy-Z
-  - srinivashegde86
+  - chizhg
   - steuhs
   - yt3liu

@@ -29,17 +29,13 @@ KNATIVE_SERVING_REPO="github.com/knative/serving"
 KNATIVE_SERVING_COMMIT="${KNATIVE_SERVING_COMMIT:?specify the \$KNATIVE_SERVING_COMMIT variable}"
 KNATIVE_SERVING_OUT_FILE="serving.md"
 
-KNATIVE_BUILD_REPO="github.com/knative/build"
-KNATIVE_BUILD_COMMIT="${KNATIVE_BUILD_COMMIT:?specify the \$KNATIVE_BUILD_COMMIT variable}"
-KNATIVE_BUILD_OUT_FILE="build.md"
-
 KNATIVE_EVENTING_REPO="github.com/knative/eventing"
 KNATIVE_EVENTING_COMMIT="${KNATIVE_EVENTING_COMMIT:?specify the \$KNATIVE_EVENTING_COMMIT variable}"
 KNATIVE_EVENTING_OUT_FILE="eventing/eventing.md"
 
-KNATIVE_EVENTING_SOURCES_REPO="github.com/knative/eventing-contrib"
-KNATIVE_EVENTING_SOURCES_COMMIT="${KNATIVE_EVENTING_SOURCES_COMMIT:?specify the \$KNATIVE_EVENTING_SOURCES_COMMIT variable}"
-KNATIVE_EVENTING_SOURCES_OUT_FILE="eventing/eventing-contrib-resources.md"
+KNATIVE_EVENTING_CONTRIB_REPO="github.com/knative/eventing-contrib"
+KNATIVE_EVENTING_CONTRIB_COMMIT="${KNATIVE_EVENTING_CONTRIB_COMMIT:?specify the \$KNATIVE_EVENTING_CONTRIB_COMMIT variable}"
+KNATIVE_EVENTING_CONTRIB_OUT_FILE="eventing/eventing-contrib.md"
 
 cleanup_refdocs_root=
 cleanup_repo_clone_root=
@@ -160,13 +156,6 @@ main() {
     gen_refdocs "${refdocs_bin}" "${clone_root}" "${template_dir}" \
         "${out_dir}/${KNATIVE_SERVING_OUT_FILE}" "${knative_serving_root}" "./pkg/apis"
 
-    local knative_build_root
-    knative_build_root="${clone_root}/src/${KNATIVE_BUILD_REPO}"
-    clone_at_commit "https://${KNATIVE_BUILD_REPO}.git" "${KNATIVE_BUILD_COMMIT}" \
-        "${knative_build_root}"
-    gen_refdocs "${refdocs_bin}" "${clone_root}" "${template_dir}" \
-        "${out_dir}/${KNATIVE_BUILD_OUT_FILE}" "${knative_build_root}" "./pkg/apis"
-
     local knative_eventing_root
     knative_eventing_root="${clone_root}/src/${KNATIVE_EVENTING_REPO}"
     clone_at_commit "https://${KNATIVE_EVENTING_REPO}.git" "${KNATIVE_EVENTING_COMMIT}" \
@@ -174,12 +163,12 @@ main() {
     gen_refdocs "${refdocs_bin}" "${clone_root}" "${template_dir}" \
         "${out_dir}/${KNATIVE_EVENTING_OUT_FILE}" "${knative_eventing_root}" "./pkg/apis"
 
-    local knative_eventing_sources_root
-    knative_eventing_sources_root="${clone_root}/src/${KNATIVE_EVENTING_SOURCES_REPO}"
-    clone_at_commit "https://${KNATIVE_EVENTING_SOURCES_REPO}.git" "${KNATIVE_EVENTING_SOURCES_COMMIT}" \
-        "${knative_eventing_sources_root}"
+    local knative_eventing_contrib_root
+    knative_eventing_contrib_root="${clone_root}/src/${KNATIVE_EVENTING_CONTRIB_REPO}"
+    clone_at_commit "https://${KNATIVE_EVENTING_CONTRIB_REPO}.git" "${KNATIVE_EVENTING_CONTRIB_COMMIT}" \
+        "${knative_eventing_contrib_root}"
     gen_refdocs "${refdocs_bin}" "${clone_root}" "${template_dir}" \
-        "${out_dir}/${KNATIVE_EVENTING_SOURCES_OUT_FILE}" "${knative_eventing_sources_root}" "."
+        "${out_dir}/${KNATIVE_EVENTING_CONTRIB_OUT_FILE}" "${knative_eventing_contrib_root}" "."
 
     log "SUCCESS: Generated docs written to ${out_dir}/."
     log "Opening the ${out_dir}/ directory. You can now copy these API files"

@@ -1,9 +1,0 @@
-apiVersion: serving.knative.dev/v1alpha1
-kind: Service
-metadata:
-  name: me-event-display
-spec:
-  template:
-    spec:
-      containers:
-      - image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display

@@ -46,7 +46,7 @@ following parameters in the ConfigMap.
 ## scale-to-zero-grace-period
 
 `scale-to-zero-grace-period` specifies the time an inactive revision is left
-running before it is scaled to zero (min: 30s).
+running before it is scaled to zero (min: 6s).
 
 ```
 scale-to-zero-grace-period: 30s
@@ -55,7 +55,7 @@ scale-to-zero-grace-period: 30s
 ## stable-window
 
 When operating in a stable mode, the autoscaler operates on the average
-concurrency over the stable window.
+concurrency over the stable window (min: 6s).
 
 ```
 stable-window: 60s
@@ -70,7 +70,7 @@ autoscaling.knative.dev/window: 60s
 
 ## enable-scale-to-zero
 
-Ensure that enable-scale-to-zero is set to `true`.
+Ensure that enable-scale-to-zero is set to `true`, if scale to zero is desired.
 
 ## Termination period
 
@@ -119,7 +119,8 @@ containerConcurrency: 0 | 1 | 2-N
 ```
 
 - A `containerConcurrency` value of `1` will guarantee that only one request is
-  handled at a time by a given instance of the revision container.
+  handled at a time by a given instance of the revision container, though requests
+  might be queued, waiting to be served.
 - A value of `2` or more will limit request concurrency to that value.
 - A value of `0` means the system should decide.
 
@@ -138,8 +139,9 @@ used to prevent cold starts or to help control computing costs.
 spec:
   template:
     metadata:
-      autoscaling.knative.dev/minScale: "2"
-      autoscaling.knative.dev/maxScale: "10"
+      annotations:
+        autoscaling.knative.dev/minScale: "2"
+        autoscaling.knative.dev/maxScale: "10"
 ```
 
 Using these annotations in the revision template will propagate this to
@@ -147,7 +149,7 @@ Using these annotations in the revision template will propagate this to
 modified later without modifying anything else in the Knative Serving system.
 
 ```
-edit podautoscaler <revision-name>
+kubectl edit podautoscaler <revision-name>
 ```
 
 **NOTE:** These annotations apply for the full lifetime of a revision. Even when

@@ -1,14 +1,13 @@
 # Channel for testing events.
 
-apiVersion: eventing.knative.dev/v1alpha1
+apiVersion: messaging.knative.dev/v1alpha1
 kind: Channel
 metadata:
   name: camel-test
 spec:
-  provisioner:
-    apiVersion: eventing.knative.dev/v1alpha1
-    kind: ClusterChannelProvisioner
-    name: in-memory-channel
+  channelTemplate:
+    apiVersion: messaging.knative.dev/v1alpha1
+    kind: InMemoryChannel
 
 ---
 
@@ -20,12 +19,12 @@ metadata:
   name: camel-source-display
 spec:
   channel:
-    apiVersion: eventing.knative.dev/v1alpha1
+    apiVersion: messaging.knative.dev/v1alpha1
     kind: Channel
     name: camel-test
   subscriber:
     ref:
-      apiVersion: serving.knative.dev/v1alpha1
+      apiVersion: serving.knative.dev/v1
       kind: Service
       name: camel-event-display
 
@@ -33,7 +32,7 @@ spec:
 
 # This is a very simple Knative Service that prints the input event to its log.
 
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: camel-event-display
