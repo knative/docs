@@ -48,7 +48,7 @@ recreate the source files from this folder.
    block below into it. For detailed instructions on dockerizing a Spark Java
    app, see [Spark with Docker](http://sparkjava.com/tutorials/docker). For
    additional information on multi-stage docker builds for Java see
-   [Creating Smaller Java Image using Docker Multi-stage Build](http://blog.arungupta.me/smaller-java-image-docker-multi-stage-build/).
+   [Creating Smaller Java Image using Docker Multi-stage Build](https://github.com/arun-gupta/docker-java-multistage).
 
    ```docker
     # Use the official maven/Java 8 image to create a build artifact.
