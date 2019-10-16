@@ -15,7 +15,7 @@ RUN go mod download
 COPY . ./
 
 # Build the binary.
-# -mod=readonly ensures go.mod and go.sum are immutable in container builds.
+# -mod=readonly ensures immutable go.mod and go.sum in container builds.
 RUN CGO_ENABLED=0 GOOS=linux go build -mod=readonly -v -o server
 
 # Use the official Alpine image for a lean production container.
