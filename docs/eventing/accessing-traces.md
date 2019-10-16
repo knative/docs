@@ -49,11 +49,11 @@ Configuration options:
 
  * `zipkin-endpoint`: Specifies the URL to the zipkin collector where you want to send the traces. Must be set if backend is set to `zipkin`.
 
- * `stackdriver-project-id`: Specifies the GCP project into which stackdriver traces will be written. Only has an effect if the back is set to `stackdriver`. If unspecified, the project-id is read from GCP metadata when running on GCP.
+ * `stackdriver-project-id`: Specifies the GCP project into which stackdriver traces will be written. Only has an effect if `backend` is set to `stackdriver`. If unspecified, the project-id is read from GCP metadata when running on GCP.
 
- * `sample-rate`: Valid values are decimals from `0` to `1` (interpreted as a float64). Specifies the probability of sampling any given request.
+ * `sample-rate`: Specifies the probability of sampling any given request. Valid values are decimals from `0` to `1` (interpreted as a float64).
 
- * `debug`: Valid values are `true` or `false`. If not specified, defaults to `false`. Set to `true` to enable debug mode, which bypasses sample-rate and sends all spans to the server.
+ * `debug`: Valid values are `true` or `false`. If not specified, defaults to `false`. Set to `true` to enable debug mode, which bypasses `sample-rate` and sends all spans to the server.
 
 Updating the ConfigMap will cause the new configuration to go live almost immediately:
 
