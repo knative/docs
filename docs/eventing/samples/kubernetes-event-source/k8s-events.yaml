@@ -10,6 +10,6 @@ spec:
   - apiVersion: v1
     kind: Event
   sink:
-    apiVersion: eventing.knative.dev/v1alpha1
-    kind: Broker
-    name: default
+    apiVersion: serving.knative.dev/v1alpha1
+    kind: Service
+    name: event-display

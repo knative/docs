@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: kafka.strimzi.io/v1alpha1
+apiVersion: kafka.strimzi.io/v1beta1
 kind: KafkaTopic
 metadata:
   name: knative-demo-topic
