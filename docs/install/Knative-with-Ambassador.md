@@ -55,16 +55,31 @@ service mesh.
 
 You can install Ambassador with `kubectl`:
 
-```
-kubectl apply \
-  --filename https://getambassador.io/yaml/ambassador/ambassador-rbac.yaml \
-  --filename https://getambassador.io/yaml/ambassador/ambassador-service.yaml
-```
+1. Create a namespace to install Ambassador in:
 
-Next, enable Knative support in Ambasssador:
-```
-kubectl set env deployments/ambassador AMBASSADOR_KNATIVE_SUPPORT=true
-```
+   ```
+   kubectl create namespace ambassador
+   ```
+
+2. Install Ambassador:
+
+   ```
+   kubectl apply --namespace ambassador \
+     --filename https://getambassador.io/yaml/ambassador/ambassador-rbac.yaml \
+     --filename https://getambassador.io/yaml/ambassador/ambassador-service.yaml
+   ```
+
+3. Give Ambassador the required permissions:
+
+   ```
+   kubectl patch clusterrolebinding ambassador -p '{"subjects":[{"kind": "ServiceAccount", "name": "ambassador", "namespace": "ambassador"}]}'
+   ```
+
+4. Enable Knative support in Ambasssador:
+
+   ```
+   kubectl set env --namespace ambassador  deployments/ambassador AMBASSADOR_KNATIVE_SUPPORT=true
+   ```
 
 ## Configuring DNS
 
@@ -76,7 +91,7 @@ before DNS may be set up.
 Get this external IP address with:
 
 ```
-$ kubectl get svc ambassador
+$ kubectl get service ambassador -n ambassador
 
 NAME         TYPE           CLUSTER-IP     EXTERNAL-IP     PORT(S)        AGE
 ambassador   LoadBalancer   10.59.246.30   35.229.120.99   80:32073/TCP   13m
