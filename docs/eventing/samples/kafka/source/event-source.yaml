@@ -70,6 +70,6 @@ spec:
       cpu: 250m
       memory: 512Mi
   sink:
-    apiVersion: serving.knative.dev/v1alpha1
+    apiVersion: serving.knative.dev/v1
     kind: Service
     name: event-display

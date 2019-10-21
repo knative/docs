@@ -47,7 +47,7 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
 - Replicas
 
   ```yaml
-  apiVersion: kafka.strimzi.io/v1alpha1
+  apiVersion: kafka.strimzi.io/v1beta1
   kind: KafkaTopic
   metadata:
     name: knative-demo-topic
@@ -109,7 +109,7 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
      bootstrapServers: my-cluster-kafka-bootstrap.kafka:9092 #note the kafka namespace
      topics: knative-demo-topic
      sink:
-       apiVersion: serving.knative.dev/v1alpha1
+       apiVersion: serving.knative.dev/v1
        kind: Service
        name: event-display
    ```
@@ -158,24 +158,21 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
    ```
    $ kubectl logs --selector='serving.knative.dev/service=event-display' -c user-container
 
-   ☁️  CloudEvent: valid ✅
-   Context Attributes,
-     SpecVersion: 0.2
-     Type: dev.knative.kafka.event
-     Source: dubee
-     ID: partition:0/offset:333
-     Time: 2019-03-19T22:32:06.535321588Z
-     ContentType: application/json
-     Extensions:
-       key:
-   Transport Context,
-     URI: /
-     Host: event-display.default.svc.cluster.local
-     Method: POST
-   Data,
-     {
-       "msg": "This is a test!"
-     }
+    ☁️  cloudevents.Event
+    Validation: valid
+    Context Attributes,
+      specversion: 0.3
+      type: dev.knative.kafka.event
+      source: dubee
+      id: partition:0/offset:333
+      time: 2019-10-18T15:23:20.809775386Z
+      contenttype: application/json
+    Extensions,
+      key:
+    Data,
+      {
+        "msg": "This is a test!"
+      }
    ```
 
 ## Teardown Steps

@@ -189,21 +189,15 @@ kubectl logs -l serving.knative.dev/service=event-display -c user-container
 You should see log lines similar to:
 
 ```
-☁️  CloudEvent: valid ✅
+☁️  cloudevents.Event
+Validation: valid
 Context Attributes,
-  SpecVersion: 0.2
-  Type: dev.knative.apiserver.resource.add
-  Source: https://10.39.240.1:443
-  ID: 716d4536-3b92-4fbb-98d9-14bfcf94683f
-  Time: 2019-05-10T23:27:06.695575294Z
-  ContentType: application/json
-  Extensions:
-    knativehistory: default-broker-b7k2p-channel-z7mqq.default.svc.cluster.local
-    subject: /apis/v1/namespaces/default/events/busybox.159d7608e3a3572c
-Transport Context,
-  URI: /
-  Host: auto-event-display.default.svc.cluster.local
-  Method: POST
+  specversion: 0.3
+  type: dev.knative.apiserver.resource.add
+  source: https://10.96.0.1:443
+  subject: /apis/v1/namespaces/default/events/busybox.15cec7980c1702d1
+  id: 6ea84c37-c2b4-4687-866b-fb1b2c0fe969
+  time: 2019-10-18T15:32:55.855413776Z
 Data,
   {
     "apiVersion": "v1",
