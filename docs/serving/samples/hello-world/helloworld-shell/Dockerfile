@@ -1,26 +1,32 @@
-# Use the offical Golang image to create a build artifact.
+# Use the official Golang image to create a build artifact.
 # This is based on Debian and sets the GOPATH to /go.
 # https://hub.docker.com/_/golang
-FROM golang:1.12 as builder
+FROM golang:1.13 as builder
+
+# Create and change to the app directory.
+WORKDIR /app
+
+# Retrieve application dependencies using go modules.
+# Allows container builds to reuse downloaded dependencies.
+COPY go.* ./
+RUN go mod download
 
 # Copy local code to the container image.
-WORKDIR /go/src/github.com/knative/docs/helloworld-shell
-COPY invoke.go .
+COPY invoke.go ./
 
-# Build the command inside the container.
-# (You may fetch or manage dependencies here,
-# either manually or with a tool like "godep".)
-RUN CGO_ENABLED=0 GOOS=linux go build -v -o invoke
+# Build the binary.
+# -mod=readonly ensures immutable go.mod and go.sum in container builds.
+RUN CGO_ENABLED=0 GOOS=linux go build -mod=readonly -v -o server
 
-# The official Alpine base image
+# Use the official Alpine image for a lean production container.
 # https://hub.docker.com/_/alpine
-# Use a Docker multi-stage build to create a lean production image.
 # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
-FROM alpine:3.10
+FROM alpine:3
+RUN apk add --no-cache ca-certificates
 
-# Copy Go binary
-COPY --from=builder /go/src/github.com/knative/docs/helloworld-shell/invoke /invoke
-COPY script.sh .
+# Copy the binary to the production image from the builder stage.
+COPY --from=builder /app/server /server
+COPY script.sh ./
 
 # Run the web service on container startup.
-CMD ["/invoke"]
+CMD ["/server"]
