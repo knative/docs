@@ -5,7 +5,7 @@ weight: 10
 type: "docs"
 ---
 
-[MicroK8s](https://microk8s.io) is a lightweight, powerful fully-conformant Kubernetes that tracks upstream releases and makes clustering trivial. It can run on any flavor of Linux that supports [Snap](https://snapcraft.io) packages. It can run on Windows and Mac OS using [Mutlipass](https://multipass.run).
+[MicroK8s](https://microk8s.io) is a lightweight, powerful fully-conformant Kubernetes that tracks upstream releases and makes clustering trivial. It can run on any flavor of Linux that supports [Snap](https://snapcraft.io) packages. It can run on Windows and Mac OS using [Multipass](https://multipass.run).
 This guide walks you through the installation of Knative using MicroK8s.
 
 If you need help or support please reach out on the [Kubernetes forum](https://discuss.kubernetes.io/tags/microk8s) or Kubernetes.slack.com channel #microk8s. 
