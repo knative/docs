@@ -118,34 +118,29 @@ kubectl get revisions --output yaml
 
 To access this service via `curl`, you need to determine its ingress address.
 
-1. To determine if your service is ready:
+1. To determine if your route is ready:
 
 ```
-kubectl get ksvc --output yaml
+kubectl get route
 ```
 
-When the service is ready, you'll see the following fields reported as:
+When the route is ready, you'll see the following fields reported as:
 
 ```YAML
-status:
-  conditions:
-    ...
-    status: "True"
-    type: Ready
-  url: http://telemetrysample-route.default.1.2.3.4.xip.io
+telemetrysample-route   http://telemetrysample-route.default.example.com   True
 ```
 
 1. Make a request to the service to see the `Hello World!` message:
 
 ```
-curl http://telemetrysample-route.default.1.2.3.4.xip.io
+curl http://telemetrysample-route.default.example.com
 ```
 
 1. Make a request to the `/log` endpoint to generate logs to the `stdout` file
    and generate files under `/var/log` in both `JSON` and plain text formats:
 
 ```
-curl http://telemetrysample-route.default.1.2.3.4.xip.io/log
+curl http://telemetrysample-route.default.example.com/log
 ```
 
 ## Access Logs
