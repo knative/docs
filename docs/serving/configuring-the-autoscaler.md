@@ -180,9 +180,11 @@ spec:
   template:
     metadata:
       annotations:
-        autoscaling.knative.dev/metric: concurrency
+        autoscaling.knative.dev/metric: cpu
+        autoscaling.knative.dev/target: 70
         autoscaling.knative.dev/class: hpa.autoscaling.knative.dev
 ```
+
 
 ## Additional resources
 
