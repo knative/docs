@@ -87,7 +87,8 @@ Now that your service is created, Knative will perform the following steps:
 
 ### Interacting with your app
 
-To see if your app has been deployed successfully, you need the URL created by Knative.
+To see if your app has been deployed successfully, you need the URL created by
+Knative.
 
 1. To find the URL for your service, enter:
 
@@ -102,15 +103,16 @@ To see if your app has been deployed successfully, you need the URL created by K
    helloworld-go   http://helloworld-go.default.34.83.80.117.xip.io   helloworld-go-96dtk   helloworld-go-96dtk   True
    ```
 
-   > Note: If your URL includes `example.com` then consult the setup instructions for
-   > configuring DNS (e.g. with `xip.io`), or [using a Custom Domain](../serving/using-a-custom-domain.md).
+   > Note: If your URL includes `example.com` then consult the setup
+   > instructions for configuring DNS (e.g. with `xip.io`), or
+   > [using a Custom Domain](../serving/using-a-custom-domain.md).
 
    If you changed the name from `helloworld-go` to something else when creating
    the `.yaml` file, replace `helloworld-go` in the above commands with the name
    you entered.
 
-1. Now you can make a request to your app and see the results. Replace
-   the URL with the one returned by the command in the previous step.
+1. Now you can make a request to your app and see the results. Replace the URL
+   with the one returned by the command in the previous step.
 
    ```shell
    # curl http://helloworld-go.default.34.83.80.117.xip.io
