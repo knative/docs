@@ -119,8 +119,8 @@ containerConcurrency: 0 | 1 | 2-N
 ```
 
 - A `containerConcurrency` value of `1` will guarantee that only one request is
-  handled at a time by a given instance of the revision container, though requests
-  might be queued, waiting to be served.
+  handled at a time by a given instance of the revision container, though
+  requests might be queued, waiting to be served.
 - A value of `2` or more will limit request concurrency to that value.
 - A value of `0` means the system should decide.
 
@@ -184,7 +184,6 @@ spec:
         autoscaling.knative.dev/target: 70
         autoscaling.knative.dev/class: hpa.autoscaling.knative.dev
 ```
-
 
 ## Additional resources
 
