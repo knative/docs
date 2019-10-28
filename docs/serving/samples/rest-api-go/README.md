@@ -12,8 +12,8 @@ like `AAPL`,`AMZN`, `GOOG`, `MSFT`, etc.
 
 ## Prerequisites
 
-1. A Kubernetes cluster with [Knative Serving](../../../install/README.md) installed
-   and DNS configured.
+1. A Kubernetes cluster with [Knative Serving](../../../install/README.md)
+   installed and DNS configured.
 1. [Docker](https://docs.docker.com/get-started/#prepare-your-docker-environment)
    installed locally.
 1. [Outbound network access](../../outbound-network-access.md) enabled for this
@@ -37,15 +37,15 @@ This sample uses Docker for both building and pushing.
 
 To build and push to a container registry using Docker:
 
-1. From the `knative-docs` directory, run the following command to set your 
+1. From the `knative-docs` directory, run the following command to set your
    container registry endpoint as an environment variable.
-   
+
    This sample uses
    [Google Container Registry (GCR)](https://cloud.google.com/container-registry/):
-   
-    ```shell
-    export REPO="gcr.io/<YOUR_PROJECT_ID>"
-    ```
+
+   ```shell
+   export REPO="gcr.io/<YOUR_PROJECT_ID>"
+   ```
 
 1. Set up your container registry to make sure you are ready to push.
 
@@ -152,8 +152,8 @@ You can inspect the created resources with the following `kubectl` commands:
 
 ## Access the Service
 
-To access this service and run the stock ticker, you first obtain the service URL,
-and then you run `curl` commands to send request with your stock symbol.
+To access this service and run the stock ticker, you first obtain the service
+URL, and then you run `curl` commands to send request with your stock symbol.
 
 1. Get the URL of the service:
 
