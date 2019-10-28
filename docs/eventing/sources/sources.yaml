@@ -98,6 +98,12 @@ sources:
     support: None
     description: >
       Brings [Apache Kafka](https://kafka.apache.org/) messages into Knative.
+  - name: Apache CouchDB
+    url: https://github.com/knative/eventing-contrib/tree/master/couchdb
+    status:  Active Development
+    support: None
+    description: >
+      Brings [Apache CouchDB](https://couchdb.apache.org/) messages into Knative.
 
 # These are containers intended to be used with ContainerSource, but are not CRDs.
 containers:
