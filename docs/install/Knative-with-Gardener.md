@@ -46,7 +46,7 @@ Knative requires a Kubernetes cluster v1.14 or newer.
 
 You can create your cluster using `kubectl` cli by providing a cluster
 specification yaml file. You can find an example for GCP
-[here](https://github.com/gardener/gardener/blob/master/example/90-shoot-gcp.yaml).
+[here](https://github.com/gardener/gardener/blob/master/example/90-shoot.yaml).
 Make sure the namespace matches that of your project. Then just apply the
 prepared so-called "shoot" cluster crd with kubectl:
 

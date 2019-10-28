@@ -122,7 +122,7 @@ the`knative-eventing` and `knative-monitoring` namespaces.
 
 ## Installing Istio
 
-[Follow the instructions to install and run Istio in IBM Cloud Private](https://istio.io/docs/setup/kubernetes/quick-start-ibm/#ibm-cloud-private).
+[Follow the instructions to install and run Istio in IBM Cloud Private](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.2/manage_cluster/istio.html).
 
 If you prefer to install Istio manually, see the
 [Installing Istio for Knative guide](./installing-istio.md).
