@@ -19,7 +19,7 @@ All Camel Sources use [Apache Camel K](https://github.com/apache/camel-k) as run
    any namespace where you want to run Camel sources.
 
    The preferred version that is compatible with Camel sources is
-   [Camel K v1.0.0-M3](https://github.com/apache/camel-k/releases/tag/1.0.0-M3).
+   [Camel K v1.0.0-M4](https://github.com/apache/camel-k/releases).
 
    Installation instructions are provided in the
    [Apache Camel K Manual](https://camel.apache.org/camel-k/latest/installation/installation.html).
