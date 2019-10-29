@@ -47,7 +47,7 @@ If you find an issue let us know, either by clicking the `Create Issue` on any
 of the website pages, or by directly opening an
 [issue](https://github.com/knative/docs/issues/new/choose) here in the repo.
 
-If you have a question that you can't find an answer to, we would also like to
+If you have a question or a problem that you can't find an answer to, we would also like to
 hear about that too. In addition to our docs, you can also reach out to the
 community for assistance. For example, ask a documentation specific question on
 the `#docs` channel in [Slack](https://knative.slack.com/).
