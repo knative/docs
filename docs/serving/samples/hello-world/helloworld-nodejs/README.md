@@ -1,7 +1,7 @@
 ---
 title: "Hello World - Node.js"
 linkTitle: "Node.js"
-weight: 1 
+weight: 1
 type: "docs"
 ---
 
@@ -54,19 +54,19 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-nodejs
 1. Create a new file named `index.js` and paste the following code:
 
    ```js
-   const express = require('express');
+   const express = require("express");
    const app = express();
 
-   app.get('/', (req, res) => {
-     console.log('Hello world received a request.');
+   app.get("/", (req, res) => {
+     console.log("Hello world received a request.");
 
-     const target = process.env.TARGET || 'World';
+     const target = process.env.TARGET || "World";
      res.send(`Hello ${target}!`);
    });
 
    const port = process.env.PORT || 8080;
    app.listen(port, () => {
-     console.log('Hello world listening on port', port);
+     console.log("Hello world listening on port", port);
    });
    ```
 
@@ -188,8 +188,8 @@ folder) you're ready to build and deploy the sample app.
    helloworld-nodejs   http://helloworld-nodejs.default.1.2.3.4.xip.io
    ```
 
-1. Now you can make a request to your app and see the result. Replace
-   the URL below the with URL returned in the previous command.
+1. Now you can make a request to your app and see the result. Replace the URL
+   below the with URL returned in the previous command.
 
    ```shell
    curl http://helloworld-nodejs.default.1.2.3.4.xip.io

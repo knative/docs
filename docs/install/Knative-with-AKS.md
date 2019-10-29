@@ -51,8 +51,8 @@ brew install azure-cli
 ### Installing kubectl
 
 1. If you already have `kubectl`, run `kubectl version` to check your client
-   version. If the client is within a minor version of the master, then you
-   can skip to the next section and create an AKS cluster
+   version. If the client is within a minor version of the master, then you can
+   skip to the next section and create an AKS cluster
 
 ```bash
 az aks install-cli
@@ -219,8 +219,8 @@ guide.
 Get started with Knative Eventing by walking through one of the
 [Eventing Samples](../eventing/samples/).
 
-[Install Cert-Manager](../serving/installing-cert-manager.md) if you want to use the
-[automatic TLS cert provisioning feature](../serving/using-auto-tls.md).
+[Install Cert-Manager](../serving/installing-cert-manager.md) if you want to use
+the [automatic TLS cert provisioning feature](../serving/using-auto-tls.md).
 
 ## Cleaning up
 

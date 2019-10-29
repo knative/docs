@@ -7,20 +7,23 @@ type: "docs"
 
 # Apache Kafka - Source Example
 
-Tutorial on how to build and deploy a `KafkaSource` [Eventing source](../../../sources/README.md) using a Knative Serving `Service`.
-
+Tutorial on how to build and deploy a `KafkaSource`
+[Eventing source](../../../sources/README.md) using a Knative Serving `Service`.
 
 ## Prerequisites
 
-You must ensure that you meet the [prerequisites listed in the Apache Kafka overview](../README.md).
+You must ensure that you meet the
+[prerequisites listed in the Apache Kafka overview](../README.md).
 
 ## Creating a `KafkaSource` source CRD
 
 1. Install the `KafkaSource` sub-component to your Knative cluster:
+
    ```
    kubectl apply -f https://github.com/knative/eventing-contrib/releases/download/v0.9.0/kafka-source.yaml
 
    ```
+
 2. Check that the `kafka-controller-manager-0` pod is running.
    ```
    kubectl get pods --namespace knative-sources
@@ -38,8 +41,8 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
 
 ### Apache Kafka Topic (Optional)
 
-1. If using Strimzi, you can set a topic modifying
-   `source/kafka-topic.yaml` with your desired:
+1. If using Strimzi, you can set a topic modifying `source/kafka-topic.yaml`
+   with your desired:
 
 - Topic
 - Cluster Name
@@ -96,8 +99,8 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
 
 #### Apache Kafka Event Source
 
-1. Modify `source/event-source.yaml` accordingly with bootstrap
-   servers, topics, etc...:
+1. Modify `source/event-source.yaml` accordingly with bootstrap servers, topics,
+   etc...:
 
    ```yaml
    apiVersion: sources.eventing.knative.dev/v1alpha1
@@ -136,7 +139,8 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
 
 ### Verify
 
-1. Produce a message (`{"msg": "This is a test!"}`) to the Apache Kafka topic, like shown below:
+1. Produce a message (`{"msg": "This is a test!"}`) to the Apache Kafka topic,
+   like shown below:
    ```
    kubectl -n kafka run kafka-producer -ti --image=strimzi/kafka:0.14.0-kafka-2.3.0 --rm=true --restart=Never -- bin/kafka-console-producer.sh --broker-list my-cluster-kafka-bootstrap:9092 --topic knative-demo-topic
    If you don't see a command prompt, try pressing enter.
