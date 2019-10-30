@@ -6,14 +6,9 @@ type: "docs"
 ---
 
 Kubernetes Event Source example shows how to wire kubernetes cluster events for
-consumption by a function that has been implemented as a Knative Service. The
-code for the following files can be found in the
-[/kubernetes-event-source/](https://github.com/knative/docs/tree/release-0.9/docs/eventing/samples/kubernetes-event-source)
-directory.
+consumption by a function that has been implemented as a Knative Service.
 
-## Deployment Steps
-
-### Before you begin
+## Before you begin
 
 1. You must have a Knative cluster running both the Serving and Eventing components.
    To learn how to install the required components, see [Installing Knative](../../../install).
@@ -24,6 +19,8 @@ directory.
    git clone -b "release-0.9" https://github.com/knative/docs knative-docs
    cd knative-docs/docs/eventing/samples/kubernetes-event-source
    ```
+
+## Deployment Steps
 
 ### Broker
 
