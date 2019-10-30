@@ -60,8 +60,8 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-csharp
    }
    ```
 
-1. Update the `app.UseEndpoints(...)` statement in `Startup.cs` to read and return the
-   TARGET environment variable:
+1. Update the `app.UseEndpoints(...)` statement in `Startup.cs` to read and
+   return the TARGET environment variable:
 
    ```csharp
    app.UseEndpoints(endpoints =>
@@ -84,7 +84,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-csharp
    # https://hub.docker.com/_/microsoft-dotnet-core-sdk/
    FROM mcr.microsoft.com/dotnet/core/sdk:3.0-alpine AS build
    WORKDIR /app
- 
+
    # Install production dependencies.
    # Copy csproj and restore as distinct layers.
    COPY *.csproj ./
@@ -178,8 +178,8 @@ folder) you're ready to build and deploy the sample app.
    helloworld-csharp   http://helloworld-csharp.default.1.2.3.4.xip.io
    ```
 
-1. Now you can make a request to your app and see the result. Replace
-   the URL below the with URL returned in the previous command.
+1. Now you can make a request to your app and see the result. Replace the URL
+   below the with URL returned in the previous command.
 
    ```shell
    curl http://helloworld-csharp.default.1.2.3.4.xip.io
