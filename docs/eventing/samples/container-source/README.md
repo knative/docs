@@ -178,4 +178,4 @@ event source is a sample for your reference.
 When the container image is ready, a YAML file will be used to create a concrete
 ContainerSource. Use [heartbeats-source.yaml](./heartbeats-source.yaml) as a
 sample for reference. [Learn more about the ContainerSource
-specification](../../eventing#containersource).
+specification](../../../eventing#containersource).
