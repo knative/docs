@@ -90,7 +90,7 @@ to that `Broker`. If `spec.channelTemplateSpec` is not specified, then the
 
 Have a `Channel` CRD installed and set as the default channel for the namespace
 you are interested in. For development, the
-[InMemoryChannel](https://github.com/knative/eventing/tree/master/config/channels/in-memory-channel)
+[InMemoryChannel](https://github.com/knative/eventing/tree/{{< branch >}}/config/channels/in-memory-channel)
 is normally used.
 
 #### Changing

@@ -99,7 +99,7 @@ sources:
     description: >
       Brings [Apache Kafka](https://kafka.apache.org/) messages into Knative.
   - name: Apache CouchDB
-    url: https://github.com/knative/eventing-contrib/tree/master/couchdb
+    url: https://github.com/knative/eventing-contrib/tree/{{< branch >}}/couchdb
     status:  Active Development
     support: None
     description: >
@@ -108,13 +108,13 @@ sources:
 # These are containers intended to be used with ContainerSource, but are not CRDs.
 containers:
   - name: Heartbeats
-    url: https://github.com/knative/eventing-contrib/tree/master/cmd/heartbeats
+    url: https://github.com/knative/eventing-contrib/tree/{{< branch >}}/cmd/heartbeats
     status: Proof of Concept
     support: None
     description: >
       Uses an in-memory timer to produce events at the specified interval.
   - name: WebSocket
-    url: https://github.com/knative/eventing-contrib/tree/master/cmd/websocketsource
+    url: https://github.com/knative/eventing-contrib/tree/{{< branch >}}/cmd/websocketsource
     status: Active Development
     support: None
     description: >
