@@ -177,6 +177,5 @@ event source is a sample for your reference.
 
 When the container image is ready, a YAML file will be used to create a concrete
 ContainerSource. Use [heartbeats-source.yaml](./heartbeats-source.yaml) as a
-sample for reference. You can get more details about ContainerSource
-specification
-[here](https://github.com/knative/docs/tree/master/docs/eventing#containersource).
+sample for reference. [Learn more about the ContainerSource
+specification](../../docs/eventing#containersource).

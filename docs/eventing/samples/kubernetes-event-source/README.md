@@ -8,15 +8,22 @@ type: "docs"
 Kubernetes Event Source example shows how to wire kubernetes cluster events for
 consumption by a function that has been implemented as a Knative Service. The
 code for the following files can be found in the
-[/kubernetes-event-source/](https://github.com/knative/docs/tree/master/docs/eventing/samples/kubernetes-event-source)
+[/kubernetes-event-source/](https://github.com/knative/docs/tree/release-0.9/docs/eventing/samples/kubernetes-event-source)
 directory.
 
 ## Deployment Steps
 
-### Prerequisites
+### Before you begin
 
-1. Setup [Knative Serving](../../../serving).
-1. Setup [Knative Eventing](../../../eventing).
+1. You must have a Knative cluster running both the Serving and Eventing components.
+   To learn how to install the required components, see [Installing Knative](../../../install).
+1. You can follow the steps below to create new files, or you clone a copy from
+   the repo by running:
+
+   ```shell
+   git clone -b "release-0.9" https://github.com/knative/docs knative-docs
+   cd knative-docs/docs/eventing/samples/kubernetes-event-source
+   ```
 
 ### Broker
 
