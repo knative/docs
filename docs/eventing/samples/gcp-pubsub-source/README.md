@@ -17,18 +17,9 @@ source is most useful as a bridge from other GCP services, such as
    [Google Cloud project](https://cloud.google.com/resource-manager/docs/creating-managing-projects)
    and install the `gcloud` CLI and run `gcloud auth login`. This sample will
    use a mix of `gcloud` and `kubectl` commands. The rest of the sample assumes
-   that you've set the `$PROJECT_ID` environment variable to your Google Cloud
+   that you've set the `PROJECT_ID` environment variable to your Google Cloud
    project id, and also set your project ID as default using
    `gcloud config set project $PROJECT_ID`.
-
-1. Setup [Knative Serving](../../../install)
-
-1. Setup [Knative Eventing](../../../eventing). In addition, install the GCP
-   PubSub event source from `release-gcppubsub.yaml`:
-
-   ```shell
-   kubectl apply --filename https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/gcppubsub.yaml
-   ```
 
 1. Enable the `Cloud Pub/Sub API` on your project:
 
@@ -36,46 +27,65 @@ source is most useful as a bridge from other GCP services, such as
    gcloud services enable pubsub.googleapis.com
    ```
 
-1. Create a
-   [GCP Service Account](https://console.cloud.google.com/iam-admin/serviceaccounts/project).
-   This sample creates one service account for both registration and receiving
-   messages, but you can also create a separate service account for receiving
-   messages if you want additional privilege separation.
+1. Setup [Knative Serving](../../../install)
 
-   1. Create a new service account named `knative-source` with the following
-      command:
-      ```shell
-      gcloud iam service-accounts create knative-source
-      ```
-   1. Give that Service Account the `Pub/Sub Editor` role on your GCP project:
-      ```shell
-      gcloud projects add-iam-policy-binding $PROJECT_ID \
-        --member=serviceAccount:knative-source@$PROJECT_ID.iam.gserviceaccount.com \
-        --role roles/pubsub.editor
-      ```
-   1. Download a new JSON private key for that Service Account. **Be sure not to
-      check this key into source control!**
-      ```shell
-      gcloud iam service-accounts keys create knative-source.json \
-        --iam-account=knative-source@$PROJECT_ID.iam.gserviceaccount.com
-      ```
-   1. Create two secrets on the kubernetes cluster with the downloaded key:
+1. Setup [Knative Eventing](../../../eventing)
 
-      ```shell
-      # Note that the first secret may already have been created when installing
-      # Knative Eventing. The following command will overwrite it. If you don't
-      # want to overwrite it, then skip this command.
-      kubectl --namespace knative-sources create secret generic gcppubsub-source-key --from-file=key.json=knative-source.json --dry-run --output yaml | kubectl apply --filename -
+1. In addition, install the PubSub event source from `cloud-run-events.yaml`:
 
-      # The second secret should not already exist, so just try to create it.
-      kubectl --namespace default create secret generic google-cloud-key --from-file=key.json=knative-source.json
-      ```
+    1. To install the PubSub source, first install the CRDs by running the `kubectl apply`
+       command with the `--selector events.cloud.google.com/crd-install=true` flag. This prevents
+       race conditions during the install, which cause intermittent errors:
 
-      `gcppubsub-source-key` and `key.json` are pre-configured values in the
-      `controller-manager` StatefulSet which manages your Eventing sources.
+        ```shell
+        kubectl apply --selector events.cloud.google.com/crd-install=true \
+        --filename https://github.com/google/knative-gcp/releases/download/{{< version >}}/cloud-run-events.yaml
+        ```
 
-      `google-cloud-key` and `key.json` are pre-configured values in
-      [`gcp-pubsub-source.yaml`](./gcp-pubsub-source.yaml).
+    1. To complete the install of the PubSub source and its dependencies, run the
+       `kubectl apply` command again, this time without the `--selector` flag:
+
+        ```shell
+        kubectl apply --filename https://github.com/google/knative-gcp/releases/download/{{< version >}}/cloud-run-events.yaml
+        ```
+
+1.  Create a
+    [Google Cloud Service Account](https://console.cloud.google.com/iam-admin/serviceaccounts/project).
+    This sample creates one Service Account for both registration and receiving
+    messages, but you can also create a separate Service Account for receiving
+    messages if you want additional privilege separation.
+
+    1.  Create a new Service Account named `gcp-source` with the following command:
+
+        ```shell
+        gcloud iam service-accounts create gcp-source
+        ```
+
+    1.  Give that Service Account the `Pub/Sub Editor` role on your Google Cloud
+        project:
+
+        ```shell
+        gcloud projects add-iam-policy-binding $PROJECT_ID \
+          --member=serviceAccount:gcp-source@$PROJECT_ID.iam.gserviceaccount.com \
+          --role roles/pubsub.editor
+        ```
+
+    1.  Download a new JSON private key for that Service Account. **Be sure not
+        to check this key into source control!**
+
+        ```shell
+        gcloud iam service-accounts keys create gcp-source.json \
+        --iam-account=gcp-source@$PROJECT_ID.iam.gserviceaccount.com
+        ```
+
+    1.  Create a Secret on the Kubernetes cluster with the downloaded key:
+
+        ```shell
+        # The Secret should not already exist, so just try to create it.
+        kubectl --namespace default create secret generic google-cloud-key --from-file=key.json=gcp-source.json
+        ```
+
+        `google-cloud-key` and `key.json` are default values expected by the PubSub source.
 
 ## Deployment
 
@@ -95,26 +105,21 @@ source is most useful as a bridge from other GCP services, such as
    gcloud pubsub topics create testing
    ```
 
-1. Replace the
-   [`MY_GCP_PROJECT` placeholder](https://cloud.google.com/resource-manager/docs/creating-managing-projects)
-   in [`gcp-pubsub-source.yaml`](./gcp-pubsub-source.yaml) and apply it.
-
-   If you're in the samples directory, you can replace `MY_GCP_PROJECT` and
-   apply in one command:
-
-   ```shell
-   sed "s/MY_GCP_PROJECT/$PROJECT_ID/g" gcp-pubsub-source.yaml | \
-       kubectl apply --filename -
-   ```
-
-   If you are replacing `MY_GCP_PROJECT` manually, then make sure you apply the
-   resulting YAML:
+1. If you are *not* running on GKE, uncomment the project line in [`gcp-pubsub-source.yaml`](./gcp-pubsub-source.yaml) 
+   and replace `MY_GCP_PROJECT` with your `PROJECT_ID`. If you are running on GKE, we use GKE's metadata server to
+   automatically set the project information. Make sure to apply the yaml:
 
    ```shell
    kubectl apply --filename gcp-pubsub-source.yaml
    ```
 
-1. Create a function and create a Trigger that will send all events from the
+1. Create a function that will receive the event:
+
+   ```shell
+   kubectl apply --filename event-display.yaml
+   ```
+
+1. Create a Trigger that will send all events from the
    Broker to the function:
 
    ```shell
@@ -123,24 +128,20 @@ source is most useful as a bridge from other GCP services, such as
 
 ## Publish
 
-Publish messages to your GCP PubSub Topic:
+Publish messages to your GCP PubSub topic:
 
 ```shell
-gcloud pubsub topics publish testing --message="Hello world"
+gcloud pubsub topics publish testing --message='{"Hello": "world"}'
 ```
 
 ## Verify
 
 We will verify that the published message was sent into the Knative eventing
-system by looking at the logs of the function subscribed to the `pubsub-test`
-channel.
-
-The function and the subscription were created by applying the
-[`trigger.yaml`](./trigger.yaml) manifest in the [deployment](#deployment)
-section above.
+mesh by looking at the logs of the function subscribed, through a Trigger,
+to the `default` Broker.
 
 1. We need to wait for the downstream pods to get started and receive our event,
-   wait 60 seconds.
+   wait a few seconds.
 
    - You can check the status of the downstream pods with:
 
@@ -158,24 +159,33 @@ section above.
 
 You should see log lines similar to:
 
-```json
-{
-  "ID": "284375451531353",
-  "Data": "SGVsbG8sIHdvcmxk",
-  "Attributes": null,
-  "PublishTime": "2018-10-31T00:00:00.00Z"
-}
-```
-
-The log message is a dump of the message sent by `GCP PubSub`. In particular, if
-you [base-64 decode](https://www.base64decode.org/) the `Data` field, you should
-see the sent message:
-
 ```shell
-echo "SGVsbG8sIHdvcmxk" | base64 --decode
+☁️  CloudEvent: valid ✅
+Context Attributes,
+  SpecVersion: 0.3
+  Type: com.google.cloud.pubsub.topic.publish
+  Source: //pubsub.googleapis.com/projects/PROJECT_ID/topics/testing
+  ID: 815117146007971
+  Time: 2019-10-31T04:49:12.582Z
+  DataContentType: application/json
+  Extensions:
+    knativecemode: binary
+    knativearrivaltime: 2019-10-31T04:49:12Z
+    knativehistory: default-kne-trigger-kn-channel.default.svc.cluster.local
+    traceparent: 00-c9659e66c0ed05d6f4fac3e57e62287c-05a289c3e928e698-00
+Transport Context,
+  URI: /
+  Host: event-display.default.svc.cluster.local
+  Method: POST
+Data,
+  {
+    "Hello": "world"
+  }
 ```
 
-Results in: "Hello world"
-
-For more information about the format of the message, see the
+For more information about the format of the `Data,` see
+the `data` field of
 [PubsubMessage documentation](https://cloud.google.com/pubsub/docs/reference/rest/v1/PubsubMessage).
+
+For more information about CloudEvents, see the
+[HTTP transport bindings documentation](https://github.com/cloudevents/spec).
