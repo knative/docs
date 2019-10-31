@@ -16,8 +16,6 @@ like `AAPL`,`AMZN`, `GOOG`, `MSFT`, etc.
    or higher installed.
 1. [Docker](https://docs.docker.com/get-started/#prepare-your-docker-environment)
    installed locally.
-1. [Outbound network access](../../outbound-network-access.md) enabled for this
-   Service to make external API requests.
 1. `envsubst` installed locally. This is installed by the `gettext` package. If
    not installed it can be installed by a Linux package manager, or by
    [Homebrew](https://brew.sh/) on OS X.
