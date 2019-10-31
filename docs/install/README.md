@@ -125,12 +125,11 @@ Now you're ready to deploy an app:
 ## Configuring Knative Serving
 
 After your Knative installation is running, you can set up a custom domain with
-a static IP address to be able to use Knative for publicly available services
-and set up an Istio IP range for outbound network access:
+a static IP address to be able to use Knative for publicly available services,
+and set up TLS certificates to use HTTPS:
 
 - [Assign a static IP address](../serving/gke-assigning-static-ip-address.md)
 - [Configure a custom domain](../serving/using-a-custom-domain.md)
-- [Configure outbound network access](../serving/outbound-network-access.md)
 - [Configuring HTTPS with a custom certificate](../serving/using-an-ssl-cert.md)
 
 ## Checking the version of your Knative Serving installation

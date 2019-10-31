@@ -96,11 +96,6 @@ Learn more about Eventing development in the
 Knative Eventing currently requires Knative Serving installed with either Istio version >=1.0, or Gloo version >=0.18.16.
 [Follow the instructions to install on the platform of your choice](../install/README.md).
 
-Many of the sources require making outbound connections to create the event
-subscription, and if you have any functions that make use of any external (to
-cluster) services, you must enable it also for them to work.
-[Follow the instructions to configure outbound network access](../serving/outbound-network-access.md).
-
 ## Architecture
 
 The eventing infrastructure supports two forms of event delivery at the moment:
