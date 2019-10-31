@@ -331,5 +331,3 @@ end traces.
   - [Accessing Logs](./accessing-logs.md)
   - [Accessing Metrics](./accessing-metrics.md)
   - [Accessing Traces](./accessing-traces.md)
-
-

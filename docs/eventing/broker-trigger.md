@@ -50,9 +50,10 @@ spec:
 
 ### Trigger Filtering
 
-Exact match filtering on any number of CloudEvents attributes as well as extensions are
-supported. If your filter sets multiple attributes, an event must have all of the attributes for the Trigger to filter it. 
-Note that we only support exact matching on string values.
+Exact match filtering on any number of CloudEvents attributes as well as
+extensions are supported. If your filter sets multiple attributes, an event must
+have all of the attributes for the Trigger to filter it. Note that we only
+support exact matching on string values.
 
 Example:
 
@@ -74,8 +75,9 @@ spec:
       name: my-service
 ```
 
-The example above filters events from the `default` Broker that are of type `dev.knative.foo.bar` AND 
-have the extension `myextension` with the value `my-extension-value`.
+The example above filters events from the `default` Broker that are of type
+`dev.knative.foo.bar` AND have the extension `myextension` with the value
+`my-extension-value`.
 
 ## Usage
 
@@ -90,8 +92,8 @@ to that `Broker`. If `spec.channelTemplateSpec` is not specified, then the
 
 Have a `Channel` CRD installed and set as the default channel for the namespace
 you are interested in. For development, the
-[InMemoryChannel](https://github.com/knative/eventing/tree/{{< branch >}}/config/channels/in-memory-channel)
-is normally used.
+[InMemoryChannel](https://github.com/knative/eventing/tree/{{<
+branch >}}/config/channels/in-memory-channel) is normally used.
 
 #### Changing
 
@@ -228,9 +230,9 @@ spec:
   template:
     spec:
       containers:
-      -  # This corresponds to
-         # https://github.com/knative/eventing-contrib/blob/v0.2.1/cmd/message_dumper/dumper.go.
-         image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/message_dumper@sha256:ab5391755f11a5821e7263686564b3c3cd5348522f5b31509963afb269ddcd63
+        - # This corresponds to
+          # https://github.com/knative/eventing-contrib/blob/v0.2.1/cmd/message_dumper/dumper.go.
+          image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/message_dumper@sha256:ab5391755f11a5821e7263686564b3c3cd5348522f5b31509963afb269ddcd63
 ```
 
 ### Trigger

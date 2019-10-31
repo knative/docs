@@ -1,4 +1,3 @@
-
 Knative Eventing is a system that is designed to address a common need for cloud
 native development and provides composable primitives to enable late-binding
 event sources and event consumers.
@@ -72,9 +71,10 @@ To learn how to use the registry, see the
 Knative Eventing also defines an event forwarding and persistence layer, called
 a
 [**Channel**](https://github.com/knative/eventing/blob/master/pkg/apis/messaging/v1alpha1/channel_types.go#L57).
-Each channel is a separate Kubernetes [Custom Resource](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
-Events are delivered to Services or forwarded to other channels
-(possibly of a different type) using
+Each channel is a separate Kubernetes
+[Custom Resource](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
+Events are delivered to Services or forwarded to other channels (possibly of a
+different type) using
 [Subscriptions](https://github.com/knative/eventing/blob/master/pkg/apis/eventing/v1alpha1/subscription_types.go#L35).
 This allows message delivery in a cluster to vary based on requirements, so that
 some events might be handled by an in-memory implementation while others would
@@ -93,7 +93,8 @@ Learn more about Eventing development in the
 
 ## Installation
 
-Knative Eventing currently requires Knative Serving installed with either Istio version >=1.0, or Gloo version >=0.18.16.
+Knative Eventing currently requires Knative Serving installed with either Istio
+version >=1.0, or Gloo version >=0.18.16.
 [Follow the instructions to install on the platform of your choice](../install/README.md).
 
 ## Architecture
@@ -301,9 +302,8 @@ Knative Serving application so that they can be consumed.
       containing a server CA certificate to use when verifying the server
       certificate.
 
-See the
-[Kafka Source](https://github.com/knative/eventing-contrib/tree/{{< branch >}}/kafka/source)
-example.
+See the [Kafka Source](https://github.com/knative/eventing-contrib/tree/{{<
+branch >}}/kafka/source) example.
 
 ### CamelSource
 
@@ -331,9 +331,8 @@ to be installed into the current namespace.
 - image: `string` an optional base image to use for the source pod, mainly for
   development purposes.
 
-See the
-[CamelSource](https://github.com/knative/eventing-contrib/tree/{{< branch >}}/camel/source/samples)
-example.
+See the [CamelSource](https://github.com/knative/eventing-contrib/tree/{{<
+branch >}}/camel/source/samples) example.
 
 ## Getting Started
 

@@ -67,7 +67,7 @@ To generate a version of the API:
 
    ```
    cd hack
-   
+
    KNATIVE_SERVING_COMMIT=[commit_or_tag] \
    KNATIVE_EVENTING_COMMIT=[commit_or_tag] \
    KNATIVE_EVENTING_CONTRIB_COMMIT=[commit_or_tag] \

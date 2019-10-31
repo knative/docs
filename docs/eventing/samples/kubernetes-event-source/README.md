@@ -6,12 +6,13 @@ type: "docs"
 ---
 
 Kubernetes Event Source example shows how to wire Kubernetes cluster events for
-consumption by a function that has been implemented as a Knative Service. 
+consumption by a function that has been implemented as a Knative Service.
 
 ## Before you begin
 
-1. You must have a Knative cluster running both the Serving and Eventing components.
-   To learn how to install the required components, see [Installing Knative](../../../install).
+1. You must have a Knative cluster running both the Serving and Eventing
+   components. To learn how to install the required components, see
+   [Installing Knative](../../../install).
 1. You can follow the steps below to create new files, or you clone a copy from
    the repo by running:
 
