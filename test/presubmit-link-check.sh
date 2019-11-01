@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright 2018 The Knative Authors
+# Copyright 2019 The Knative Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,15 +18,14 @@
 # It is started by prow for each PR.
 # For convenience, it can also be executed manually.
 
-# markdown linting is too picky for our docs; disabling it for now.
-DISABLE_MD_LINTING=1
-DISABLE_MD_LINK_CHECK=1
-
 source $(dirname $0)/../vendor/knative.dev/test-infra/scripts/presubmit-tests.sh
 
-# We use the default build, unit and integration test runners.
+initialize_environment
+if (( IS_PRESUBMIT_EXEMPT_PR )) || (( ! IS_DOCUMENTATION_PR )); then
+  header "Commit only contains changes that don't require link checks, skipping"
+  exit 0
+fi
 
-# TODO(#67): Add more build tests.
-# TODO(#66): Add more unit tests.
-
-main "$@"
+# Force presubmit link checking only.
+export DISABLE_MD_LINTING=1
+$(dirname $0)/presubmit-tests.sh --build-tests
