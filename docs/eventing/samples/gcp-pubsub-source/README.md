@@ -113,13 +113,13 @@ source is most useful as a bridge from other GCP services, such as
    kubectl apply --filename gcp-pubsub-source.yaml
    ```
 
-1. Create a function that will receive the event:
+1. Create the function from [`event-display.yaml`](./event-display.yaml) that will receive the event:
 
    ```shell
    kubectl apply --filename event-display.yaml
    ```
 
-1. Create a Trigger that will send all events from the
+1. Create the Trigger from [`trigger.yaml`](./trigger.yaml) that will send all events from the
    Broker to the function:
 
    ```shell
