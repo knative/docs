@@ -9,22 +9,36 @@ Depending on the request tracing tool that you have installed on your Knative
 Eventing cluster, see the corresponding section for details about how to
 visualize and trace your requests.
 
-## Installation
+## Before you begin
+
+You must have a Knative cluster running with the Eventing component installed. [Learn more](../install/README.md)
+
+## Installing observability plugins
 
 Knative Eventing uses the same tracing plugin as Knative Serving. See the 
 [Tracing installation instructions](./../serving/installing-logging-metrics-traces.md#end-to-end-request-tracing)
 in the Knative Serving section for details. Note that you do not need to install the 
-Knative Serving component itself. To enable request tracing in Knative Eventing 
-you need to install only Elasticsearch and either the Zipkin or Jaeger plugins.
+Knative Serving component itself. 
 
-## Configuration
+To enable request tracing in Knative Eventing, 
+you must install Elasticsearch and either the Zipkin or Jaeger plugins.
 
-Most Knative Eventing tracing configuration is handled by the `config-tracing` ConfigMap in the `knative-eventing` namespace. This single ConfigMap controls tracing for:
+## Configuring tracing
+
+With the exception of importers, the Knative Eventing tracing is configured through the 
+`config-tracing` ConfigMap in the `knative-eventing` namespace. 
+
+Most importers do _not_ use the ConfigMap and instead, use a static 1% sampling rate.
+
+You can use the `config-tracing` ConfigMap to configure the following Eventing subcomponents:
  - Brokers
  - Triggers
  - InMemoryChannel
 
-Here is an example ConfigMap that samples 10% of all CloudEvents.
+**Example:**
+
+The following example `config-tracing` ConfigMap samples 10% of all CloudEvents:
+
 ```yaml
 apiVersion: v1
 kind: ConfigMap
@@ -37,53 +51,68 @@ data:
   sample-rate: "0.1"
 ```
 
-To see your current configuration:
+### Configuration options
 
-```shell script
+You can configure your `config-tracing` with following options:
+
+ * `backend`: Valid values are `zipkin`, `stackdriver`, or `none`. The default is `none`.
+
+ * `zipkin-endpoint`: Specifies the URL to the zipkin collector where you want to send the traces. 
+   Must be set if backend is set to `zipkin`.
+
+ * `stackdriver-project-id`: Specifies the GCP project ID into which the Stackdriver traces are written. 
+   You must specify the `backend` as `stackdriver`. If `backend`is unspecified, the GCP project ID is read 
+   from GCP metadata when running on GCP.
+
+ * `sample-rate`: Specifies the sampling rate. Valid values are decimals from `0` to `1` 
+   (interpreted as a float64), which indicate the probability that any given request is sampled.
+   An example value is `0.5`, which gives each request a 50% sampling probablity.
+
+ * `debug`: Enables debugging. Valid values are `true` or `false`. Defaults to `false` when not specified.
+   Set to `true` to enable debug mode, which forces the `sample-rate` to `1.0` and sends all spans to 
+   the server.
+
+### Viewing your `config-tracing` ConfigMap
+To view your current configuration:
+
+```shell
 kubectl -n knative-eventing get configmap config-tracing -oyaml
 ```
 
-Configuration options:
+### Editing and deploying your `config-tracing` ConfigMap
 
-  * `backend`: Valid values are `zipkin`, `stackdriver`, or `none`. The default is `none`.
+To edit and then immediately deploy changes to your ConfigMap, run the following command:
 
- * `zipkin-endpoint`: Specifies the URL to the zipkin collector where you want to send the traces. Must be set if backend is set to `zipkin`.
-
- * `stackdriver-project-id`: Specifies the GCP project into which stackdriver traces will be written. Only has an effect if `backend` is set to `stackdriver`. If unspecified, the project-id is read from GCP metadata when running on GCP.
-
- * `sample-rate`: Specifies the probability of sampling any given request. Valid values are decimals from `0` to `1` (interpreted as a float64).
-
- * `debug`: Valid values are `true` or `false`. If not specified, defaults to `false`. Set to `true` to enable debug mode, which bypasses `sample-rate` and sends all spans to the server.
-
-Updating the ConfigMap will cause the new configuration to go live almost immediately:
-
-```shell script
+```shell
 kubectl -n knative-eventing edit configmap config-tracing
 ```
 
-### Importer Configuration
+## Accessing traces in Eventing
 
-Most importers do _not_ use the configuration from the shared ConfigMap. Instead, they have a static, 1% sampling rate.
+To access the traces, you use either the Zipkin or Jaeger tool. Details about using these tools to access
+traces are provided in the Knative Serving observability section:
 
-
-## Tools
-
-To access the traces, you will use a tool such as Zipkin or Jaeger. Follow the Knative Serving [instructions](./../serving/accessing-traces.md) for accessing the traces:
  - [Zipkin](./../serving/accessing-traces.md#zipkin)
  - [Jaeger](./../serving/accessing-traces.md#jaeger)
 
 ### Example
 
-> This example is the [`TestBrokerTracing`](https://github.com/knative/eventing/blob/master/test/conformance/broker_tracing_test.go) End-to-End test.
+The following demonstrates how to trace requests in Knative Eventing with Zipkin, using the
+[`TestBrokerTracing`](https://github.com/knative/eventing/blob/master/test/conformance/broker_tracing_test.go)
+End-to-End test.
 
-For this example, everything happens in the `includes-incoming-trace-id-2qszn` namespace.
-- Broker named `br`
-- Two Triggers associated with the Broker:
-    - `transformer` - Filters to only allow events whose type is `transformer`. Sends the event to the Kubernetes Service `transformer`, which will reply with an identical event, except the replied event's type will be `logger`.
-    - `logger` - Filters to only allow events whose type is `logger`. Sends the event to the Kubernetes Service `logger`.
+For this example, assume the following details:
+- Everything happens in the `includes-incoming-trace-id-2qszn` namespace.
+- The Broker is named `br`.
+- There are two Triggers that are associated with the Broker:
+    - `transformer` - Filters to only allow events whose type is `transformer`. 
+      Sends the event to the Kubernetes Service `transformer`, which will reply with an 
+      identical event, except the replied event's type will be `logger`.
+    - `logger` - Filters to only allow events whose type is `logger`. Sends the event to 
+      the Kubernetes Service `logger`.
 - An event is sent to the Broker with the type `transformer`, by the Pod named `sender`.
 
-So we expect the event to do the  following:
+Given the above, the expected path and behavior of an event is as follows:
 
 1. `sender` Pod sends the request to the Broker.
 1. Go to the Broker's ingress Pod.
