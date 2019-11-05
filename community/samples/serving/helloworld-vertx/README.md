@@ -233,7 +233,7 @@ To verify that your sample app has been successfully deployed:
    ```
 
 1. Now you can make a request to your app and see the result. Replace
-   the URL below the with URL returned in the previous command.
+   the URL below with the URL returned in the previous command.
 
    ```shell
    curl http://helloworld-vertx.default.1.2.3.4.xip.io
