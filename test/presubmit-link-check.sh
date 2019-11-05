@@ -18,14 +18,16 @@
 # It is started by prow for each PR.
 # For convenience, it can also be executed manually.
 
+# Force presubmit link checking only.
+DISABLE_MD_LINTING=1
+
 source $(dirname $0)/../vendor/knative.dev/test-infra/scripts/presubmit-tests.sh
 
 initialize_environment
-if (( IS_PRESUBMIT_EXEMPT_PR )) || (( ! IS_DOCUMENTATION_PR )); then
-  header "Commit only contains changes that don't require link checks, skipping"
+
+if [[ -z "$(echo "${CHANGED_FILES}" | grep '\.md')" ]]; then
+  header "Commit doesn't contain changes that require link checks, skipping"
   exit 0
 fi
 
-# Force presubmit link checking only.
-export DISABLE_MD_LINTING=1
-$(dirname $0)/presubmit-tests.sh --build-tests
+markdown_build_tests
