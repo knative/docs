@@ -1,8 +1,9 @@
 # Apache Camel Telegram Source
 #
-# Telegram Component documentation: https://github.com/apache/camel/blob/master/components/camel-telegram/src/main/docs/telegram-component.adoc
+# Telegram Component documentation: https://camel.apache.org/components/latest/telegram-component.html
+# Simple language documentation: https://camel.apache.org/manual/latest/simple-language.html
 #
-# List of available Apache Camel components: https://github.com/apache/camel/tree/master/components
+# List of available Apache Camel components: https://camel.apache.org/components/latest/
 #
 apiVersion: sources.eventing.knative.dev/v1alpha1
 kind: CamelSource
@@ -10,15 +11,24 @@ metadata:
   name: camel-telegram-source
 spec:
   source:
-    component:
-      uri: telegram:bots
-      properties:
-        # Camel Telegram component option (ask it to the Botfather: https://telegram.me/botfather)
-        camel.component.telegram.authorizationToken: "<put-your-token-here>"
-
-        # Camel K option to enable serialization of the component output
-        camel.component.knative.jsonSerializationEnabled: "true"
+    flow:
+      from:
+        uri: telegram:bots
+        parameters:
+          authorizationToken: "<put-your-token-here>"
+        steps:
+          - set-header:
+              name: ce-author
+              simple: "${body.from.firstName} ${body.from.lastName}"
+          - set-header:
+              name: ce-chat
+              simple: "${body.chat.id}"
+          - set-header:
+              name: Content-Type
+              constant: text/plain
+          - transform:
+              simple: "${body.text}"
   sink:
     apiVersion: messaging.knative.dev/v1alpha1
-    kind: Channel
+    kind: InMemoryChannel
     name: camel-test
