@@ -169,7 +169,7 @@ route "blue-green-demo" configured
 Revision 2 of the app is staged at this point. That means:
 
 - No traffic will be routed to revision 2 at the main URL,
-  http://blue-green-demo.default.YOUR_CUSTOM_DOMAIN.com
+  http://blue-green-demo.default.**[YOUR_CUSTOM_DOMAIN]**.com
 - Knative creates a new route named v2 for testing the newly deployed version.
   The URL of this can be seen in the status section of your Route.
 
@@ -209,7 +209,7 @@ route "blue-green-demo" configured
 ```
 
 Refresh the original route
-(http://blue-green-demo.default.YOUR_CUSTOM_DOMAIN.com) a few times to see that
+(http://blue-green-demo.default.**[YOUR_CUSTOM_DOMAIN]**.com) a few times to see that
 some traffic now goes to version 2 of the app.
 
 > Note: This sample shows a 50/50 split to assure you don't have to refresh too
@@ -246,7 +246,7 @@ route "blue-green-demo" configured
 ```
 
 Refresh the original route
-(http://blue-green-demo.default.YOUR_CUSTOM_DOMAIN.com) a few times to verify
+(http://blue-green-demo.default.**[YOUR_CUSTOM_DOMAIN]**.com) a few times to verify
 that no traffic is being routed to v1 of the app.
 
 We added a named route to v1 of the app, so you can now access it at the URL

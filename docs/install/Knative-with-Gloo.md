@@ -179,7 +179,7 @@ Now that your cluster has Knative installed, you can see what Knative has to
 offer.
 
 Learn more about deploying apps to Knative with the
-[Getting Started with Knative App Deployment](./getting-started-knative-app.md)
+[Getting Started with Knative App Deployment](../serving/getting-started-knative-app.md)
 guide.
 
 To get started with Knative Eventing, pick one of the

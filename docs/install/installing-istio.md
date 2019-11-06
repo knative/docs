@@ -317,7 +317,7 @@ rm -rf istio-${ISTIO_VERSION}
 
 - [Install Knative](./README.md).
 - Try the
-  [Getting Started with App Deployment guide](../serving/getting-started-knative-app/)
+  [Getting Started with App Deployment guide](../serving/getting-started-knative-app.md)
   for Knative serving.
 
 [1]:

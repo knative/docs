@@ -20,7 +20,7 @@ You must meet the following requirements to complete this sample:
 
 - A version of the Knative Serving component installed and running on your
   Kubernetes cluster. Follow the
-  [Knative installation instructions](../../../install/README.md) if you need to
+  [Knative installation instructions](../../../../docs/install/README.md) if you need to
   create a Knative cluster.
 - The following software downloaded and install on your loacal machine:
   - [Java SE 8 or later JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
