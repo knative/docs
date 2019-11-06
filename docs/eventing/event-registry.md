@@ -276,7 +276,7 @@ the next topic: How do we actually populate the registry in the first place?
 To get started, install Knative Eventing if you haven't yet, and try
 experimenting with different Event Sources in your Knative cluster.
 
-1. [Installing Knative](./install/README.md) in case you haven't already done
+1. [Installing Knative](../install/README.md) in case you haven't already done
    so.
 1. [Getting started with eventing](./README.md) in case you haven't read it.
 1. [Knative code samples](./samples/) is a useful resource to better understand
