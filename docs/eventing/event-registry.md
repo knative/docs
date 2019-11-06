@@ -117,7 +117,7 @@ you can create Triggers to subscribe to particular events.
 Here are a few example Triggers that subscribe to events using exact matching on
 `type` and/or `source`, based on the above registry output:
 
-1. Subscribes to GitHub _pushes_ from any source.
+- Subscribes to GitHub _pushes_ from any source.
 
    ```yaml
    apiVersion: eventing.knative.dev/v1alpha1
@@ -142,7 +142,7 @@ Here are a few example Triggers that subscribe to events using exact matching on
    new sources are registered for GitHub pushes, this trigger will be able to
    consume them.
 
-1. Subscribes to GitHub _pull requests_ from _knative's eventing_ repository.
+- Subscribes to GitHub _pull requests_ from _knative's eventing_ repository.
 
    ```yaml
    apiVersion: eventing.knative.dev/v1alpha1
@@ -163,7 +163,7 @@ Here are a few example Triggers that subscribe to events using exact matching on
          name: gh-knative-eventing-pull-service
    ```
 
-1. Subscribes to Kafka messages sent to the _knative-demo_ topic
+- Subscribes to Kafka messages sent to the _knative-demo_ topic
 
    ```yaml
    apiVersion: eventing.knative.dev/v1alpha1
@@ -184,7 +184,7 @@ Here are a few example Triggers that subscribe to events using exact matching on
          name: kafka-knative-demo-service
    ```
 
-1. Subscribes to PubSub messages from GCP's _knative_ project sent to the
+- Subscribes to PubSub messages from GCP's _knative_ project sent to the
    _testing_ topic
 
    ```yaml
