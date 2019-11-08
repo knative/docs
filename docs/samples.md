@@ -28,5 +28,6 @@ A list of links to Knative code samples that live outside of
 [https://knative.dev](https://knative.dev):
 
 - [Image processing using Knative Eventing, Cloud Run on GKE (Knative Serving implementation) and Google Cloud Vision API](https://github.com/akashrv/knative-samples/blob/master/docs/image-processing.md)
+- [A potpourri of Knative Eventing Examples](https://github.com/lionelvillard/knative-examples)
 
 _Please add links to your externally hosted Knative code sample._
