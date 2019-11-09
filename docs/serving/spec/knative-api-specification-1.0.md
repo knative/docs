@@ -2740,7 +2740,7 @@ Max: 1
    </td>
    <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#localobjectreference-v1-core">core/v1.LocalObjectReference</a>.
    </td>
-   <td>REQUIRED
+   <td>REQUIRED, if imagePullSecrets is supported.
    </td>
   </tr>
 
