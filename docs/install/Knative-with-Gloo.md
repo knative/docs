@@ -8,7 +8,7 @@ type: "docs"
 Learn how to deploy Gloo and Knative to your Kubernetes cluster using the Gloo command line tool `glooctl`.
  
 
-[Gloo](https://gloo.solo.io) is a popular open-source Envoy control plane and API gateway built for Kubernetes (and other platforms). 
+[Gloo](https://docs.solo.io/gloo/latest/) is a popular open-source Envoy control plane and API gateway built for Kubernetes (and other platforms). 
 
 Gloo provides a complete gateway replacement for Istio and supports the full Knative Ingress spec. Choose Gloo if you don't require a service mesh in your cluster and want a lightweight alternative that requires less resource usage and operational overhead.
 
@@ -61,7 +61,7 @@ The `glooctl install knative` command can be customized with a variety of option
 See https://github.com/solo-io/gloo/blob/master/docs/cli/glooctl_install_knative.md for the full list of available options for installing Knative with `glooctl`
 
 > Note: `glooctl` generates a manifest which can be piped to stdout or a file using the `--dry-run` flag. Alternatively,
-Gloo can be installed via its [Helm Chart](https://gloo.solo.io/installation/gateway/kubernetes/#installing-on-kubernetes-with-helm), which will permit fine-grained configuration of installation parameters.
+Gloo can be installed via its [Helm Chart](https://docs.solo.io/gloo/latest/installation/gateway/kubernetes/#installing-on-kubernetes-with-helm), which will permit fine-grained configuration of installation parameters.
 
 Monitor the Gloo and Knative components until each one shows a `STATUS` of `Running` or `Completed`:
 
@@ -179,7 +179,7 @@ Now that your cluster has Knative installed, you can see what Knative has to
 offer.
 
 Learn more about deploying apps to Knative with the
-[Getting Started with Knative App Deployment](./getting-started-knative-app.md)
+[Getting Started with Knative App Deployment](../serving/getting-started-knative-app.md)
 guide.
 
 To get started with Knative Eventing, pick one of the

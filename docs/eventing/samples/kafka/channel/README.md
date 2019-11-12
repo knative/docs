@@ -47,7 +47,7 @@ You can now set the `KafkaChannel` CRD as the default channel configuration.
 
 ## Specifying the default channel configuration
 
-To configure the usage of the `KafkaChannel` CRD as the [default channel configuration](channels/default-channels.md), edit the `default-ch-webhook` ConfigMap as follows:
+To configure the usage of the `KafkaChannel` CRD as the [default channel configuration](../../../channels/default-channels.md), edit the `default-ch-webhook` ConfigMap as follows:
 
 ```
 cat <<-EOF | kubectl apply -f -
