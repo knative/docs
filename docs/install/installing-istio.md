@@ -219,9 +219,9 @@ helm template --namespace=istio-system \
 ### Updating your install to use cluster local gateway
 
 If you want your Routes to be visible only inside the cluster, you may want to
-enable [cluster local routes](../serving/cluster-local-route.md). To use
-this feature, add an extra Istio cluster local gateway to your cluster. Enter
-the following command to add the cluster local gateway to an existing Istio
+enable [cluster local routes](../serving/cluster-local-route.md). To use this
+feature, add an extra Istio cluster local gateway to your cluster. Enter the
+following command to add the cluster local gateway to an existing Istio
 installation:
 
 ```shell
@@ -257,12 +257,12 @@ kubectl get pods --namespace istio-system
 > Tip: You can append the `--watch` flag to the `kubectl get` commands to view
 > the pod status in realtime. You use `CTRL + C` to exit watch mode.
 
-
 ### Configuring DNS
 
 Knative dispatches to different services based on their hostname, so it greatly
 simplifies things to have DNS properly configured. For this, we must look up the
-external IP address that Gloo received. This can be done with the following command:
+external IP address that Gloo received. This can be done with the following
+command:
 
 ```
 $ kubectl get svc -nistio-system

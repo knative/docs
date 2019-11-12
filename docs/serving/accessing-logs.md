@@ -116,5 +116,3 @@ See [Accessing Traces](./accessing-traces.md) page for details.
 Go to the
 [GCP Console logging page](https://console.cloud.google.com/logs/viewer) for
 your GCP project, which stores your logs via Stackdriver.
-
-

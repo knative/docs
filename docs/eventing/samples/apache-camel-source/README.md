@@ -5,11 +5,14 @@ weight: 5
 type: "docs"
 ---
 
-These samples show how to configure Camel Sources. These event sources are highly dynamic and allow you to
-generate events from a variety of systems (cloud platforms, social networks, datastores, message brokers, legacy systems, etc.), 
-leveraging all the [300+ components provided by Apache Camel](https://camel.apache.org/components/latest/).
+These samples show how to configure Camel Sources. These event sources are
+highly dynamic and allow you to generate events from a variety of systems (cloud
+platforms, social networks, datastores, message brokers, legacy systems, etc.),
+leveraging all the
+[300+ components provided by Apache Camel](https://camel.apache.org/components/latest/).
 
-All Camel Sources use [Apache Camel K](https://github.com/apache/camel-k) as the runtime engine.
+All Camel Sources use [Apache Camel K](https://github.com/apache/camel-k) as the
+runtime engine.
 
 ## Prerequisites
 
@@ -35,8 +38,8 @@ All Camel Sources use [Apache Camel K](https://github.com/apache/camel-k) as the
 
 ### Create Test Resources
 
-All the `CamelSource` examples use some test resources for the purpose of displaying the generated events.
-The following resources need to be created:
+All the `CamelSource` examples use some test resources for the purpose of
+displaying the generated events. The following resources need to be created:
 
 - a simple Knative event display service that prints incoming events to its log
 - an in-memory channel named `camel-test` that buffers events created by the
@@ -58,7 +61,8 @@ events.
 The simplest example of `CamelSource`, that does not require additional
 configuration, is the timer source.
 
-The timer source periodically generates "Hello world!" events and forwards them to the provided destination. 
+The timer source periodically generates "Hello world!" events and forwards them
+to the provided destination.
 
 If you want, you can customize the source behavior using options available in
 the Apache Camel documentation for the
@@ -79,27 +83,31 @@ looking at what is downstream of the `CamelSource`.
 kubectl logs --selector serving.knative.dev/service=camel-event-display -c user-container
 ```
 
-If you have deployed the timer source, you should see new log lines appearing every
-3 seconds.
+If you have deployed the timer source, you should see new log lines appearing
+every 3 seconds.
 
 ### Run a MQTT CamelSource
 
-One of the 300+ Camel components that you can leverage is [Camel-Paho](https://camel.apache.org/components/latest/paho-component.html), 
+One of the 300+ Camel components that you can leverage is
+[Camel-Paho](https://camel.apache.org/components/latest/paho-component.html),
 based on the [Eclipse Paho](https://www.eclipse.org/paho/) open source project.
 
-A source based on Paho (like the provided [MQTT CamelSource](source_mqtt.yaml)) allows to bridge any MQTT broker to a Knative resource,
-automatically converting IoT messages to Cloudevents.
+A source based on Paho (like the provided [MQTT CamelSource](source_mqtt.yaml))
+allows to bridge any MQTT broker to a Knative resource, automatically converting
+IoT messages to Cloudevents.
 
-To use the MQTT source, you need a MQTT broker running and reachable from your cluster.
-For example, it's possible to run a [Mosquitto MQTT Broker](https://mosquitto.org/) for testing purposes.  
+To use the MQTT source, you need a MQTT broker running and reachable from your
+cluster. For example, it's possible to run a
+[Mosquitto MQTT Broker](https://mosquitto.org/) for testing purposes.
 
-First, edit the [MQTT CamelSource](source_mqtt.yaml) and put the
-correct address of the MQTT broker in the `brokerUrl` field.
-You also need to provide the name of the topic that you want to subscribe to: just change `paho:mytopic` to match
+First, edit the [MQTT CamelSource](source_mqtt.yaml) and put the correct address
+of the MQTT broker in the `brokerUrl` field. You also need to provide the name
+of the topic that you want to subscribe to: just change `paho:mytopic` to match
 the topic that you want to use.
 
-You can also scale this source out, in order to obtain more throughput, by changing the value of the `replicas` field.
-By default it creates *2* replicas for demonstration purposes.
+You can also scale this source out, in order to obtain more throughput, by
+changing the value of the `replicas` field. By default it creates _2_ replicas
+for demonstration purposes.
 
 To reduce noise in the event display, you can remove all previously created
 CamelSources from the namespace:
@@ -114,16 +122,17 @@ Install the [mqtt CamelSource](mqtt_telegram.yaml):
 kubectl apply -f source_mqtt.yaml
 ```
 
-You can now send MQTT messages to your broker using your favourite client (you can even use Camel K for sending test events).
+You can now send MQTT messages to your broker using your favourite client (you
+can even use Camel K for sending test events).
 
-Each message you send to the MQTT broker will be printed by the event display as a Cloudevent.
+Each message you send to the MQTT broker will be printed by the event display as
+a Cloudevent.
 
 You can verify that your messages reach the event display by checking its logs:
 
 ```shell
 kubectl logs --selector serving.knative.dev/service=camel-event-display -c user-container
 ```
-
 
 ### Run a Telegram CamelSource
 
@@ -164,17 +173,18 @@ You can verify that your messages reach the event display by checking its logs:
 kubectl logs --selector serving.knative.dev/service=camel-event-display -c user-container
 ```
 
-
 ### Run an HTTP Poller CamelSource
 
-CamelSources are not limited to using a single Camel component. For example, 
-you can combine the [Camel Timer component](https://camel.apache.org/components/latest/timer-component.html)
-with the [Camel HTTP component](https://camel.apache.org/components/latest/http-component.html)
-to periodically fetch an external API, transform the result into a Cloudevent and forward it to a 
-given destination.
+CamelSources are not limited to using a single Camel component. For example, you
+can combine the
+[Camel Timer component](https://camel.apache.org/components/latest/timer-component.html)
+with the
+[Camel HTTP component](https://camel.apache.org/components/latest/http-component.html)
+to periodically fetch an external API, transform the result into a Cloudevent
+and forward it to a given destination.
 
-The example will retrieve a static JSON file from a remote URL, but you can edit the
-[HTTP poller CamelSource](source_http_poller.yaml) to add your own API.
+The example will retrieve a static JSON file from a remote URL, but you can edit
+the [HTTP poller CamelSource](source_http_poller.yaml) to add your own API.
 
 If you have previously deployed other CamelSources, to reduce noise in the event
 display, you can remove them all from the namespace:

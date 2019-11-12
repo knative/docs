@@ -20,8 +20,8 @@ You must meet the following requirements to complete this sample:
 
 - A version of the Knative Serving component installed and running on your
   Kubernetes cluster. Follow the
-  [Knative installation instructions](../../../../docs/install/README.md) if you need to
-  create a Knative cluster.
+  [Knative installation instructions](../../../../docs/install/README.md) if you
+  need to create a Knative cluster.
 - The following software downloaded and install on your loacal machine:
   - [Java SE 8 or later JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
   - [Eclipse Vert.x v3.5.4](https://vertx.io/).
@@ -232,8 +232,8 @@ To verify that your sample app has been successfully deployed:
    helloworld-vertx    http://helloworld-vertx.default.1.2.3.4.xip.io
    ```
 
-1. Now you can make a request to your app and see the result. Replace
-   the URL below the with URL returned in the previous command.
+1. Now you can make a request to your app and see the result. Replace the URL
+   below the with URL returned in the previous command.
 
    ```shell
    curl http://helloworld-vertx.default.1.2.3.4.xip.io

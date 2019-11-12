@@ -209,8 +209,8 @@ route "blue-green-demo" configured
 ```
 
 Refresh the original route
-(`http://blue-green-demo.default.[YOUR_CUSTOM_DOMAIN].com`) a few times to see that
-some traffic now goes to version 2 of the app.
+(`http://blue-green-demo.default.[YOUR_CUSTOM_DOMAIN].com`) a few times to see
+that some traffic now goes to version 2 of the app.
 
 > Note: This sample shows a 50/50 split to assure you don't have to refresh too
 > much, but it's recommended to start with 1-2% of traffic in a production
@@ -246,8 +246,8 @@ route "blue-green-demo" configured
 ```
 
 Refresh the original route
-(`http://blue-green-demo.default.[YOUR_CUSTOM_DOMAIN].com`) a few times to verify
-that no traffic is being routed to v1 of the app.
+(`http://blue-green-demo.default.[YOUR_CUSTOM_DOMAIN].com`) a few times to
+verify that no traffic is being routed to v1 of the app.
 
 We added a named route to v1 of the app, so you can now access it at the URL
 listed in the traffic block of the status section. To get the URL, enter the

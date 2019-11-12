@@ -24,8 +24,8 @@ commands will need to be adjusted for use in a Windows environment.
 
 ### Installing the Google Cloud SDK and `kubectl`
 
-1. If you already have `gcloud` installed with `kubectl`,
-   you can skip these steps.
+1. If you already have `gcloud` installed with `kubectl`, you can skip these
+   steps.
 
    > Tip: To check which version of `kubectl` you have installed, enter:
 
@@ -196,8 +196,8 @@ guide.
 Get started with Knative Eventing by walking through one of the
 [Eventing Samples](../eventing/samples/).
 
-[Install Cert-Manager](../serving/installing-cert-manager.md) if you want to use the
-[automatic TLS cert provisioning feature](../serving/using-auto-tls.md).
+[Install Cert-Manager](../serving/installing-cert-manager.md) if you want to use
+the [automatic TLS cert provisioning feature](../serving/using-auto-tls.md).
 
 ## Cleaning up
 

@@ -12,10 +12,9 @@ something isn't working, lend a helping hand and fix it in a PR.
 
 Knative Serving sample apps.
 
-| Sample Name | Description | Language(s) |
-| ----------- | ----------- | ----------- |
+| Sample Name | Description                                                                   | Language(s)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| ----------- | ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Hello World | A quick introduction to Knative Serving that highlights how to deploy an app. | [Clojure](./serving/helloworld-clojure/README.md), [Dart](./serving/helloworld-dart/README.md), [Elixir](./serving/helloworld-elixir/README.md), [Haskell](./serving/helloworld-haskell/README.md), [Java - Micronaut](./serving/helloworld-java-micronaut/README.md), [Java - Quarkus](./serving/helloworld-java-quarkus/README.md), [R - Go Server](./serving/helloworld-r/README.md), [Rust](./serving/helloworld-rust/README.md), [Swift](./serving/helloworld-swift/README.md), [Vertx](./serving/helloworld-vertx/README.md) |
-
 
 #### Eventing and Eventing Resources samples
 

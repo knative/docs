@@ -33,59 +33,62 @@ source is most useful as a bridge from other GCP services, such as
 
 1. In addition, install the PubSub event source from `cloud-run-events.yaml`:
 
-    1. To install the PubSub source, first install the CRDs by running the `kubectl apply`
-       command with the `--selector events.cloud.google.com/crd-install=true` flag. This prevents
-       race conditions during the install, which cause intermittent errors:
+   1. To install the PubSub source, first install the CRDs by running the
+      `kubectl apply` command with the
+      `--selector events.cloud.google.com/crd-install=true` flag. This prevents
+      race conditions during the install, which cause intermittent errors:
 
-        ```shell
-        kubectl apply --selector events.cloud.google.com/crd-install=true \
-        --filename https://github.com/google/knative-gcp/releases/download/{{< version >}}/cloud-run-events.yaml
-        ```
+      ```shell
+      kubectl apply --selector events.cloud.google.com/crd-install=true \
+      --filename https://github.com/google/knative-gcp/releases/download/{{< version >}}/cloud-run-events.yaml
+      ```
 
-    1. To complete the install of the PubSub source and its dependencies, run the
-       `kubectl apply` command again, this time without the `--selector` flag:
+   1. To complete the install of the PubSub source and its dependencies, run the
+      `kubectl apply` command again, this time without the `--selector` flag:
 
-        ```shell
-        kubectl apply --filename https://github.com/google/knative-gcp/releases/download/{{< version >}}/cloud-run-events.yaml
-        ```
+      ```shell
+      kubectl apply --filename https://github.com/google/knative-gcp/releases/download/{{< version >}}/cloud-run-events.yaml
+      ```
 
-1.  Create a
-    [Google Cloud Service Account](https://console.cloud.google.com/iam-admin/serviceaccounts/project).
-    This sample creates one Service Account for both registration and receiving
-    messages, but you can also create a separate Service Account for receiving
-    messages if you want additional privilege separation.
+1. Create a
+   [Google Cloud Service Account](https://console.cloud.google.com/iam-admin/serviceaccounts/project).
+   This sample creates one Service Account for both registration and receiving
+   messages, but you can also create a separate Service Account for receiving
+   messages if you want additional privilege separation.
 
-    1.  Create a new Service Account named `gcp-source` with the following command:
+   1. Create a new Service Account named `gcp-source` with the following
+      command:
 
-        ```shell
-        gcloud iam service-accounts create gcp-source
-        ```
+      ```shell
+      gcloud iam service-accounts create gcp-source
+      ```
 
-    1.  Give that Service Account the `Pub/Sub Editor` role on your Google Cloud
-        project:
+   1. Give that Service Account the `Pub/Sub Editor` role on your Google Cloud
+      project:
 
-        ```shell
-        gcloud projects add-iam-policy-binding $PROJECT_ID \
-          --member=serviceAccount:gcp-source@$PROJECT_ID.iam.gserviceaccount.com \
-          --role roles/pubsub.editor
-        ```
+      ```shell
+      gcloud projects add-iam-policy-binding $PROJECT_ID \
+        --member=serviceAccount:gcp-source@$PROJECT_ID.iam.gserviceaccount.com \
+        --role roles/pubsub.editor
+      ```
 
-    1.  Download a new JSON private key for that Service Account. **Be sure not
-        to check this key into source control!**
+   1. Download a new JSON private key for that Service Account. **Be sure not to
+      check this key into source control!**
 
-        ```shell
-        gcloud iam service-accounts keys create gcp-source.json \
-        --iam-account=gcp-source@$PROJECT_ID.iam.gserviceaccount.com
-        ```
+      ```shell
+      gcloud iam service-accounts keys create gcp-source.json \
+      --iam-account=gcp-source@$PROJECT_ID.iam.gserviceaccount.com
+      ```
 
-    1.  Create a Secret on the Kubernetes cluster with the downloaded key:
+   1. Create a Secret on the Kubernetes cluster with the downloaded key:
 
-        ```shell
-        # The Secret should not already exist, so just try to create it.
-        kubectl --namespace default create secret generic google-cloud-key --from-file=key.json=gcp-source.json
-        ```
+      ```shell
+      # The Secret should not already exist, so just try to create it.
+      kubectl --namespace default create secret generic google-cloud-key --from-file=key.json=gcp-source.json
+      ```
 
-        `google-cloud-key` and `key.json` are default values expected by the PubSub source.
+      `google-cloud-key` and `key.json` are default values expected by the
+      PubSub source.
 
 ## Deployment
 
@@ -105,22 +108,25 @@ source is most useful as a bridge from other GCP services, such as
    gcloud pubsub topics create testing
    ```
 
-1. If you are *not* running on GKE, uncomment the project line in [`gcp-pubsub-source.yaml`](./gcp-pubsub-source.yaml) 
-   and replace `MY_GCP_PROJECT` with your `PROJECT_ID`. If you are running on GKE, we use GKE's metadata server to
-   automatically set the project information. Make sure to apply the yaml:
+1. If you are _not_ running on GKE, uncomment the project line in
+   [`gcp-pubsub-source.yaml`](./gcp-pubsub-source.yaml) and replace
+   `MY_GCP_PROJECT` with your `PROJECT_ID`. If you are running on GKE, we use
+   GKE's metadata server to automatically set the project information. Make sure
+   to apply the yaml:
 
    ```shell
    kubectl apply --filename gcp-pubsub-source.yaml
    ```
 
-1. Create the function from [`event-display.yaml`](./event-display.yaml) that will receive the event:
+1. Create the function from [`event-display.yaml`](./event-display.yaml) that
+   will receive the event:
 
    ```shell
    kubectl apply --filename event-display.yaml
    ```
 
-1. Create the Trigger from [`trigger.yaml`](./trigger.yaml) that will send all events from the
-   Broker to the function:
+1. Create the Trigger from [`trigger.yaml`](./trigger.yaml) that will send all
+   events from the Broker to the function:
 
    ```shell
    kubectl apply --filename trigger.yaml
@@ -137,8 +143,8 @@ gcloud pubsub topics publish testing --message='{"Hello": "world"}'
 ## Verify
 
 We will verify that the published message was sent into the Knative eventing
-mesh by looking at the logs of the function subscribed, through a Trigger,
-to the `default` Broker.
+mesh by looking at the logs of the function subscribed, through a Trigger, to
+the `default` Broker.
 
 1. We need to wait for the downstream pods to get started and receive our event,
    wait a few seconds.
@@ -183,8 +189,7 @@ Data,
   }
 ```
 
-For more information about the format of the `Data,` see
-the `data` field of
+For more information about the format of the `Data,` see the `data` field of
 [PubsubMessage documentation](https://cloud.google.com/pubsub/docs/reference/rest/v1/PubsubMessage).
 
 For more information about CloudEvents, see the

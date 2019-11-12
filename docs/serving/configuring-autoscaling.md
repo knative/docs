@@ -3,18 +3,19 @@ title: "Configuring autoscaling "
 weight: 10
 type: "docs"
 aliases:
-- /docs/serving/configuring-the-autoscaler/
+  - /docs/serving/configuring-the-autoscaler/
 ---
 
-Knative uses a single shared autoscaler. This is, by default, the Knative Pod Autoscaler (KPA), which
-provides fast, request-based autoscaling capabilities out of the box.
-You can also configure Knative to use Horizontal Pod Autoscaler (HPA), or use your own autoscaler, by implementing the Pod Autoscaler custom resource.
+Knative uses a single shared autoscaler. This is, by default, the Knative Pod
+Autoscaler (KPA), which provides fast, request-based autoscaling capabilities
+out of the box. You can also configure Knative to use Horizontal Pod Autoscaler
+(HPA), or use your own autoscaler, by implementing the Pod Autoscaler custom
+resource.
 
 # Modifying the ConfigMap for KPA
 
-To modify the KPA configuration, you must modify a
-Kubernetes ConfigMap called `config-autoscaler` in the `knative-serving`
-namespace.
+To modify the KPA configuration, you must modify a Kubernetes ConfigMap called
+`config-autoscaler` in the `knative-serving` namespace.
 
 You can view the default contents of this ConfigMap using the following command.
 
@@ -78,7 +79,9 @@ Ensure that enable-scale-to-zero is set to `true`, if scale to zero is desired.
 
 The termination period is the time that the pod takes to shut down after the
 last request is finished. The termination period of the pod is equal to the sum
-of the values of the `stable-window` and `scale-to-zero-grace-period` parameters. In the case of this example, the termination period would be at least 90s.
+of the values of the `stable-window` and `scale-to-zero-grace-period`
+parameters. In the case of this example, the termination period would be at
+least 90s.
 
 ## Configuring concurrency
 
@@ -120,8 +123,8 @@ containerConcurrency: 0 | 1 | 2-N
 ```
 
 - A `containerConcurrency` value of `1` will guarantee that only one request is
-  handled at a time by a given instance of the revision container, though requests
-  might be queued, waiting to be served.
+  handled at a time by a given instance of the revision container, though
+  requests might be queued, waiting to be served.
 - A value of `2` or more will limit request concurrency to that value.
 - A value of `0` means the system should decide.
 
@@ -185,38 +188,52 @@ spec:
     autoscaling.knative.dev/target: 70
     autoscaling.knative.dev/class: hpa.autoscaling.knative.dev
 ```
+
 ## Using the recommended autoscaling reconciler for custom Go implementations
 
-It is recommended to use the [`autoscaling-base-reconciler`](https://github.com/knative/serving/blob/master/pkg/reconciler/autoscaling/reconciler.go) as implemented in Knative Serving.
+It is recommended to use the
+[`autoscaling-base-reconciler`](https://github.com/knative/serving/blob/master/pkg/reconciler/autoscaling/reconciler.go)
+as implemented in Knative Serving.
 
-To use this reconciler, ensure that you are calling `ReconcileSKS` from the `autoscaling-base-reconciler`.
+To use this reconciler, ensure that you are calling `ReconcileSKS` from the
+`autoscaling-base-reconciler`.
 
-If you want to use metrics collected by Knative like `concurrency`, ensure that you are using `ReconcileMetric` to enable that system.
+If you want to use metrics collected by Knative like `concurrency`, ensure that
+you are using `ReconcileMetric` to enable that system.
 
 ## Implementing your own Pod Autoscaler
 
-The Pod Autoscaler custom resource allows you to implement your own autoscaler without changing anything else about the Knative Serving system.
+The Pod Autoscaler custom resource allows you to implement your own autoscaler
+without changing anything else about the Knative Serving system.
 
-You can implement your own Pod Autoscaler if the requirements of your workload cannot be covered by the KPA or HPA, for example if you want to use a more specialized autoscaling algorithm, or if you need to use a specialized set of metrics not supported by Knative out of the box.
+You can implement your own Pod Autoscaler if the requirements of your workload
+cannot be covered by the KPA or HPA, for example if you want to use a more
+specialized autoscaling algorithm, or if you need to use a specialized set of
+metrics not supported by Knative out of the box.
 
-To implement your own Pod Autoscaler, you can create a reconciler that operates on your own class of Pod Autoscaler.
+To implement your own Pod Autoscaler, you can create a reconciler that operates
+on your own class of Pod Autoscaler.
 
-To do this, you can copy a [Knative sample controller](https://github.com/knative/sample-controller) and modify its configuration to suit your desired use case.
+To do this, you can copy a
+[Knative sample controller](https://github.com/knative/sample-controller) and
+modify its configuration to suit your desired use case.
 
-  For example, if your service's template YAML includes a class annotation like:
-  ```
-  autoscaling.knative.dev/class: sample
-  ```
-  Your reconciler should only reconcile PodAutoscaler resources with that target.
+For example, if your service's template YAML includes a class annotation like:
 
-  The informer setup of your controller might look like this:
+```
+autoscaling.knative.dev/class: sample
+```
 
-  ```golang
-  paInformer.Informer().AddEventHandler(cache.FilteringResourceEventHandler{
-  	FilterFunc: reconciler.AnnotationFilterFunc(autoscaling.ClassAnnotationKey, "sample", false),
-  	Handler:    controller.HandleAll(impl.Enqueue),
-  })
-  ```
+Your reconciler should only reconcile PodAutoscaler resources with that target.
+
+The informer setup of your controller might look like this:
+
+```golang
+paInformer.Informer().AddEventHandler(cache.FilteringResourceEventHandler{
+	FilterFunc: reconciler.AnnotationFilterFunc(autoscaling.ClassAnnotationKey, "sample", false),
+	Handler:    controller.HandleAll(impl.Enqueue),
+})
+```
 
 # Additional resources
 

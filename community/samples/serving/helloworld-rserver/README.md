@@ -76,8 +76,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-r
       CMD ["Rscript", "server.R"]
       ```
 
-
-1. Create a new file, `service.yaml` and copy the following service definition
+1) Create a new file, `service.yaml` and copy the following service definition
    into the file. Make sure to replace `{username}` with your Docker Hub
    username.
 
@@ -91,10 +90,10 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-r
      template:
        spec:
          containers:
-         - image: docker.io/{username}/helloworld-rserver
-           env:
-           - name: TARGET
-             value: "R Server Sample v1"
+           - image: docker.io/{username}/helloworld-rserver
+             env:
+               - name: TARGET
+                 value: "R Server Sample v1"
    ```
 
 ## Building and deploying the sample
@@ -143,8 +142,8 @@ folder) you're ready to build and deploy the sample app.
    helloworld-r    http://helloworld-r.default.1.2.3.4.xip.io
    ```
 
-1. Now you can make a request to your app and see the result. Replace
-   the URL below the with URL returned in the previous command.
+1. Now you can make a request to your app and see the result. Replace the URL
+   below the with URL returned in the previous command.
 
    ```shell
    curl http://helloworld-rserver.default.1.2.3.4.xip.io

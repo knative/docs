@@ -12,8 +12,8 @@ specified, it will use "World" as the TARGET.
 ## Prerequisites
 
 - A Kubernetes cluster with Knative installed and DNS configured. Follow the
-  [installation instructions](../../../../docs/install/README.md) if you need to create
-  one.
+  [installation instructions](../../../../docs/install/README.md) if you need to
+  create one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
 
@@ -171,8 +171,8 @@ folder) you're ready to build and deploy the sample app.
    helloworld-haskell     http://helloworld-haskell.default.1.2.3.4.xip.io
    ```
 
-1. Now you can make a request to your app and see the result. Replace
-   the URL below the with URL returned in the previous command.
+1. Now you can make a request to your app and see the result. Replace the URL
+   below the with URL returned in the previous command.
 
    ```shell
    curl http://helloworld-haskell.default.1.2.3.4.xip.io

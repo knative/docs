@@ -13,7 +13,8 @@ using pre-built images.
 
 ## Before you Begin
 
-Knative requires a Kubernetes cluster v1.14 or newer, as well as a compatible `kubectl`.
+Knative requires a Kubernetes cluster v1.14 or newer, as well as a compatible
+`kubectl`.
 
 This guide assumes that you have already
 [created a Kubernetes cluster](https://kubernetes.io/docs/setup/) and are using
@@ -27,8 +28,9 @@ The following commands install all available Knative components as well as the
 standard set of observability plugins. To customize your Knative installation,
 see Performing a Custom Knative Installation.
 
-1.  To install Knative, first install the CRDs by running the following `kubectl apply`
-    command. This prevents race conditions during the install, which cause intermittent errors:
+1.  To install Knative, first install the CRDs by running the following
+    `kubectl apply` command. This prevents race conditions during the install,
+    which cause intermittent errors:
 
         kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving-crds.yaml
 
@@ -65,7 +67,7 @@ kubectl apply \
 
 Installing Ambassador will create a Kubernetes Service with type `LoadBalancer`.
 This may take some time to get an IP address assigned, during this process it
-will appear as `<pending>`.  You must wait for this IP address to be assigned
+will appear as `<pending>`. You must wait for this IP address to be assigned
 before DNS may be set up.
 
 Get this external IP address with:
@@ -88,6 +90,7 @@ kubectl edit cm config-domain --namespace knative-serving
 ```
 
 Given the external IP above, change the content to:
+
 ```
 apiVersion: v1
 kind: ConfigMap
@@ -135,7 +138,7 @@ route traffic to a serverless application.
 
    `Knative Service`s are exposed via a `Host` header assigned by Knative. By
    default, Knative will assign the `Host`:
-   `{service-name}.{namespace}.{the domain we setup above}`.  You can see this
+   `{service-name}.{namespace}.{the domain we setup above}`. You can see this
    with:
 
    ```
@@ -144,8 +147,8 @@ route traffic to a serverless application.
    helloworld-go   http://helloworld-go.default.34.83.124.52.xip.io   helloworld-go-nwblj   helloworld-go-nwblj   True
    ```
 
-   You can send a request to the `helloworld-go` service with curl
-   using the `URL` given above:
+   You can send a request to the `helloworld-go` service with curl using the
+   `URL` given above:
 
    ```
    $ curl http://helloworld-go.default.34.83.124.52.xip.io

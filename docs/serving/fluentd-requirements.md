@@ -30,16 +30,17 @@ includes the desired output plugin. Two examples below:
 ### Send logs to Elasticsearch
 
 Operators can use
-[k8s.gcr.io/fluentd-elasticsearch:v2.0.4](https://github.com/kubernetes/kubernetes/tree/{{< branch >}}/cluster/addons/fluentd-elasticsearch/fluentd-es-image)
-which includes
+[k8s.gcr.io/fluentd-elasticsearch:v2.0.4](https://github.com/kubernetes/kubernetes/tree/{{<
+branch >}}/cluster/addons/fluentd-elasticsearch/fluentd-es-image) which includes
 [fluent-plugin-elasticsearch](https://github.com/uken/fluent-plugin-elasticsearch)
 that allows sending logs to a Elasticsearch service.
 
 ### Send logs to Stackdriver
 
 This sample [Dockerfile](./stackdriver/Dockerfile) is based on
-[k8s.gcr.io/fluentd-elasticsearch:v2.0.4](https://github.com/kubernetes/kubernetes/tree/{{< branch >}}/cluster/addons/fluentd-elasticsearch).
-It additionally adds one more plugin -
+[k8s.gcr.io/fluentd-elasticsearch:v2.0.4](https://github.com/kubernetes/kubernetes/tree/{{<
+branch >}}/cluster/addons/fluentd-elasticsearch). It additionally adds one more
+plugin -
 [fluent-plugin-google-cloud](https://github.com/GoogleCloudPlatform/fluent-plugin-google-cloud)
 which allows sending logs to Stackdriver.
 

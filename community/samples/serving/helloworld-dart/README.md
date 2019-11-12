@@ -5,20 +5,20 @@ weight: 1
 type: "docs"
 ---
 
-A simple web app written in the [Dart](https://www.dart.dev) programming language
-that you can use for testing. It reads in the env variable `TARGET` and prints
-`"Hello $TARGET"`. If `TARGET` is not specified, it will use `"World"` as
+A simple web app written in the [Dart](https://www.dart.dev) programming
+language that you can use for testing. It reads in the env variable `TARGET` and
+prints `"Hello $TARGET"`. If `TARGET` is not specified, it will use `"World"` as
 `TARGET`.
 
 ## Prerequisites
 
 - A Kubernetes cluster with Knative installed and DNS configured. Follow the
-  [installation instructions](../../../../docs/install/README.md) if you need to create
-  one.
+  [installation instructions](../../../../docs/install/README.md) if you need to
+  create one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
-- [dart-sdk](https://www.dart.dev/tools/sdk#install) installed and
-  configured if you want to run the program locally.
+- [dart-sdk](https://www.dart.dev/tools/sdk#install) installed and configured if
+  you want to run the program locally.
 
 ## Recreating the sample code
 
@@ -144,8 +144,8 @@ folder) you're ready to build and deploy the sample app.
    helloworld-dart  http://helloworld-dart.default.1.2.3.4.xip.io
    ```
 
-1. Now you can make a request to your app and see the result. Replace
-   the URL below the with URL returned in the previous command.
+1. Now you can make a request to your app and see the result. Replace the URL
+   below the with URL returned in the previous command.
 
    ```shell
    curl http://helloworld-dart.default.1.2.3.4.xip.io

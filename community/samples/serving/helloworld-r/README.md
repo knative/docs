@@ -5,9 +5,9 @@ weight: 1
 type: "docs"
 ---
 
-A simple web app that executes an R script. The R script reads an env
-variable `TARGET` and prints `Hello ${TARGET}!`. If the `TARGET` environment
-variable is not specified, the script uses `World`.
+A simple web app that executes an R script. The R script reads an env variable
+`TARGET` and prints `Hello ${TARGET}!`. If the `TARGET` environment variable is
+not specified, the script uses `World`.
 
 Follow the steps below to create the sample code and then deploy the app to your
 cluster. You can also download a working copy of the sample, by running the
@@ -74,7 +74,8 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-r
       }
       ```
 
-   1. Create a new file named `Dockerfile` and copy the code block below into it.
+   1. Create a new file named `Dockerfile` and copy the code block below into
+      it.
 
       ```docker
       # Use the offical Golang image to create a build artifact.
@@ -105,8 +106,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-r
       CMD ["/invoke"]
       ```
 
-
-1. Create a new file, `service.yaml` and copy the following service definition
+1) Create a new file, `service.yaml` and copy the following service definition
    into the file. Make sure to replace `{username}` with your Docker Hub
    username.
 
@@ -172,8 +172,8 @@ folder) you're ready to build and deploy the sample app.
    helloworld-r        http://helloworld-r.default.1.2.3.4.xip.io
    ```
 
-1. Now you can make a request to your app and see the result. Replace
-   the URL below the with URL returned in the previous command.
+1. Now you can make a request to your app and see the result. Replace the URL
+   below the with URL returned in the previous command.
 
    ```shell
    curl http://helloworld-r.default.1.2.3.4.xip.io
