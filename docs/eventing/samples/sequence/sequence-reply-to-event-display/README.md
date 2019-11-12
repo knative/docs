@@ -11,6 +11,9 @@ taking the output of that `Sequence` and displaying the resulting output.
 
 ![Logical Configuration](./sequence-reply-to-event-display.png)
 
+The functions used in these examples live in
+(https://github.com/vaikas/transformer)[https://github.com/vaikas/transformer]
+
 ## Prerequisites
 
 For this example, we'll assume you have set up an `InMemoryChannel` as well as
