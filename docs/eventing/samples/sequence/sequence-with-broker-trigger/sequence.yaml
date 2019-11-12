@@ -1,4 +1,4 @@
-apiVersion: messaging.knative.dev/v1alpha1
+apiVersion: flows.knative.dev/v1alpha1
 kind: Sequence
 metadata:
   name: sequence
@@ -20,6 +20,7 @@ spec:
       kind: Service
       name: third
   reply:
-    kind: Broker
-    apiVersion: eventing.knative.dev/v1alpha1
-    name: broker-test
+    ref:
+      kind: Broker
+      apiVersion: eventing.knative.dev/v1alpha1
+      name: default

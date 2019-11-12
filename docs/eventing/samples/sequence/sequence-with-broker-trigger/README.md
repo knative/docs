@@ -39,7 +39,7 @@ spec:
   template:
     spec:
       containers:
-        - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:2656f39a7fcb6afd9fc79e7a4e215d14d651dc674f38020d1d18c6f04b220700
+        - image: gcr.io/vaikas-knative/cmd-736bbd9d5a42b6282732cf4569e3c0ff@sha256:f069e4e58d6b420d66304d3bbde019160eb12ca17bb98fc3b88e0de5ad2cacd1
           env:
             - name: STEP
               value: "0"
@@ -53,7 +53,7 @@ spec:
   template:
     spec:
       containers:
-        - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:2656f39a7fcb6afd9fc79e7a4e215d14d651dc674f38020d1d18c6f04b220700
+        - image: gcr.io/vaikas-knative/cmd-736bbd9d5a42b6282732cf4569e3c0ff@sha256:f069e4e58d6b420d66304d3bbde019160eb12ca17bb98fc3b88e0de5ad2cacd1
           env:
             - name: STEP
               value: "1"
@@ -66,7 +66,7 @@ spec:
   template:
     spec:
       containers:
-        - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:2656f39a7fcb6afd9fc79e7a4e215d14d651dc674f38020d1d18c6f04b220700
+        - image: gcr.io/vaikas-knative/cmd-736bbd9d5a42b6282732cf4569e3c0ff@sha256:f069e4e58d6b420d66304d3bbde019160eb12ca17bb98fc3b88e0de5ad2cacd1
           env:
             - name: STEP
               value: "2"
@@ -88,7 +88,7 @@ spec.channelTemplate to point to your desired Channel.
 Also, change the spec.reply.name to point to your `Broker`
 
 ```yaml
-apiVersion: messaging.knative.dev/v1alpha1
+apiVersion: flows.knative.dev/v1alpha1
 kind: Sequence
 metadata:
   name: sequence
@@ -110,9 +110,10 @@ spec:
         kind: Service
         name: third
   reply:
-    kind: Broker
-    apiVersion: eventing.knative.dev/v1alpha1
-    name: broker-test
+    ref:
+      kind: Broker
+      apiVersion: eventing.knative.dev/v1alpha1
+      name: default
 ```
 
 Change `default` below to create the `Sequence` in the Namespace where you have
@@ -136,9 +137,10 @@ spec:
   schedule: "*/2 * * * *"
   data: '{"message": "Hello world!"}'
   sink:
-    apiVersion: eventing.knative.dev/v1alpha1
-    kind: Broker
-    name: broker-test
+    ref:
+      apiVersion: eventing.knative.dev/v1alpha1
+      kind: Broker
+      name: default
 ```
 
 Here, if you are using different type of Channel, you need to change the
@@ -165,7 +167,7 @@ spec:
       type: dev.knative.cronjob.event
   subscriber:
     ref:
-      apiVersion: messaging.knative.dev/v1alpha1
+      apiVersion: flows.knative.dev/v1alpha1
       kind: Sequence
       name: sequence
 ```
@@ -227,7 +229,7 @@ kubectl -n default get pods
 Then look at the logs for the event-display pod:
 
 ```shell
-kubectl -n default logs -l serving.knative.dev/service=sequence-display -c user-container
+kubectl -n default logs --tail=50 -l serving.knative.dev/service=sequence-display -c user-container
 ☁️  cloudevents.Event
 Validation: valid
 Context Attributes,

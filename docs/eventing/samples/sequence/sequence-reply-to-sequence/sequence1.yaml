@@ -1,4 +1,4 @@
-apiVersion: messaging.knative.dev/v1alpha1
+apiVersion: flows.knative.dev/v1alpha1
 kind: Sequence
 metadata:
   name: first-sequence
@@ -20,6 +20,7 @@ spec:
       kind: Service
       name: third
   reply:
-    kind: Sequence
-    apiVersion: messaging.knative.dev/v1alpha1
-    name: second-sequence
+    ref:
+      kind: Sequence
+      apiVersion: flows.knative.dev/v1alpha1
+      name: second-sequence

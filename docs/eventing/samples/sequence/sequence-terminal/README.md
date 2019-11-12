@@ -36,7 +36,7 @@ spec:
   template:
     spec:
       containers:
-        - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:2656f39a7fcb6afd9fc79e7a4e215d14d651dc674f38020d1d18c6f04b220700
+        - image: gcr.io/vaikas-knative/cmd-736bbd9d5a42b6282732cf4569e3c0ff@sha256:f069e4e58d6b420d66304d3bbde019160eb12ca17bb98fc3b88e0de5ad2cacd1
           env:
             - name: STEP
               value: "0"
@@ -50,7 +50,7 @@ spec:
   template:
     spec:
       containers:
-        - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:2656f39a7fcb6afd9fc79e7a4e215d14d651dc674f38020d1d18c6f04b220700
+        - image: gcr.io/vaikas-knative/cmd-736bbd9d5a42b6282732cf4569e3c0ff@sha256:f069e4e58d6b420d66304d3bbde019160eb12ca17bb98fc3b88e0de5ad2cacd1
           env:
             - name: STEP
               value: "1"
@@ -63,7 +63,7 @@ spec:
   template:
     spec:
       containers:
-        - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:2656f39a7fcb6afd9fc79e7a4e215d14d651dc674f38020d1d18c6f04b220700
+        - image: gcr.io/vaikas-knative/cmd-736bbd9d5a42b6282732cf4569e3c0ff@sha256:f069e4e58d6b420d66304d3bbde019160eb12ca17bb98fc3b88e0de5ad2cacd1
           env:
             - name: STEP
               value: "2"
@@ -82,7 +82,7 @@ If you are using a different type of Channel, you need to change the
 spec.channelTemplate to point to your desired Channel.
 
 ```yaml
-apiVersion: messaging.knative.dev/v1alpha1
+apiVersion: flows.knative.dev/v1alpha1
 kind: Sequence
 metadata:
   name: sequence
@@ -126,9 +126,10 @@ spec:
   schedule: "*/2 * * * *"
   data: '{"message": "Hello world!"}'
   sink:
-    apiVersion: messaging.knative.dev/v1alpha1
-    kind: Sequence
-    name: sequence
+    ref:
+      apiVersion: flows.knative.dev/v1alpha1
+      kind: Sequence
+      name: sequence
 ```
 
 Here, if you are using different type of Channel, you need to change the
@@ -151,7 +152,7 @@ kubectl -n default get pods
 Let's look at the logs for the first `Step` in the `Sequence`:
 
 ```shell
-kubectl -n default logs -l serving.knative.dev/service=first -c user-container
+kubectl -n default logs --tail=50 -l serving.knative.dev/service=first -c user-container
 Got Event Context: Context Attributes,
   specversion: 0.2
   type: dev.knative.cronjob.event
@@ -186,7 +187,7 @@ Got Transport Context: Transport Context,
 Then we can look at the output of the second Step in the `Sequence`:
 
 ```shell
-kubectl -n default logs -l serving.knative.dev/service=second -c user-container
+kubectl -n default logs --tail=50 -l serving.knative.dev/service=second -c user-container
 Got Event Context: Context Attributes,
   cloudEventsVersion: 0.1
   eventType: samples.http.mod3
@@ -222,7 +223,7 @@ Exciting :)
 Then we can look at the output of the last Step in the `Sequence`:
 
 ```shell
-kubectl -n default logs -l serving.knative.dev/service=third -c user-container
+kubectl -n default logs --tail=50 -l serving.knative.dev/service=third -c user-container
 Got Event Context: Context Attributes,
   cloudEventsVersion: 0.1
   eventType: samples.http.mod3

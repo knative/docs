@@ -82,6 +82,15 @@ be persisted using Apache Kafka or NATS Streaming.
 
 See the [List of Channel implementations](../eventing/channels/channels.yaml).
 
+### Higher Level eventing constructs
+
+There are cases where you may want to utilize a set of co-operating functions
+together and for those use cases, Knative Eventing provides two additional
+resources:
+
+1. **[Sequence](./sequence.md)** provides a way to define an in-order list of functions.
+1. **[Parallel](./parallel.md)** provides a way to define a list of branches for events.
+
 ### Future design goals
 
 The focus for the next Eventing release will be to enable easy implementation of
