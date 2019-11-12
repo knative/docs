@@ -11,6 +11,9 @@ taking the output of that `Sequence` and displaying the resulting output.
 
 ![Logical Configuration](./sequence-reply-to-event-display.png)
 
+The functions used in these examples live in
+(https://github.com/vaikas/transformer)[https://github.com/vaikas/transformer]
+
 ## Prerequisites
 
 For this example, we'll assume you have set up an `InMemoryChannel` as well as
@@ -37,7 +40,7 @@ spec:
   template:
     spec:
       containers:
-        - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:2656f39a7fcb6afd9fc79e7a4e215d14d651dc674f38020d1d18c6f04b220700
+        - image: gcr.io/vaikas-knative/cmd-736bbd9d5a42b6282732cf4569e3c0ff@sha256:f069e4e58d6b420d66304d3bbde019160eb12ca17bb98fc3b88e0de5ad2cacd1
           env:
             - name: STEP
               value: "0"
@@ -51,7 +54,7 @@ spec:
   template:
     spec:
       containers:
-        - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:2656f39a7fcb6afd9fc79e7a4e215d14d651dc674f38020d1d18c6f04b220700
+        - image: gcr.io/vaikas-knative/cmd-736bbd9d5a42b6282732cf4569e3c0ff@sha256:f069e4e58d6b420d66304d3bbde019160eb12ca17bb98fc3b88e0de5ad2cacd1
           env:
             - name: STEP
               value: "1"
@@ -64,7 +67,7 @@ spec:
   template:
     spec:
       containers:
-        - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:2656f39a7fcb6afd9fc79e7a4e215d14d651dc674f38020d1d18c6f04b220700
+        - image: gcr.io/vaikas-knative/cmd-736bbd9d5a42b6282732cf4569e3c0ff@sha256:f069e4e58d6b420d66304d3bbde019160eb12ca17bb98fc3b88e0de5ad2cacd1
           env:
             - name: STEP
               value: "2"
@@ -83,7 +86,7 @@ If you are using a different type of Channel, you need to change the
 spec.channelTemplate to point to your desired Channel.
 
 ```yaml
-apiVersion: messaging.knative.dev/v1alpha1
+apiVersion: flows.knative.dev/v1alpha1
 kind: Sequence
 metadata:
   name: sequence
@@ -105,9 +108,10 @@ spec:
         kind: Service
         name: third
   reply:
-    kind: Service
-    apiVersion: serving.knative.dev/v1
-    name: event-display
+    ref:
+      kind: Service
+      apiVersion: serving.knative.dev/v1
+      name: event-display
 ```
 
 Change `default` below to create the `Sequence` in the Namespace where you want
@@ -152,9 +156,10 @@ spec:
   schedule: "*/2 * * * *"
   data: '{"message": "Hello world!"}'
   sink:
-    apiVersion: messaging.knative.dev/v1alpha1
-    kind: Sequence
-    name: sequence
+    ref:
+      apiVersion: flows.knative.dev/v1alpha1
+      kind: Sequence
+      name: sequence
 ```
 
 ```shell

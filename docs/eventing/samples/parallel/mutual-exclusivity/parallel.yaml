@@ -1,4 +1,4 @@
-apiVersion: messaging.knative.dev/v1alpha1
+apiVersion: flows.knative.dev/v1alpha1
 kind: Parallel
 metadata:
   name: me-odd-even-parallel
@@ -22,6 +22,7 @@ spec:
         kind: Service
         name: me-odd-transformer
   reply:
-    apiVersion: serving.knative.dev/v1
-    kind: Service
-    name: me-event-display
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: me-event-display

@@ -13,7 +13,7 @@ kind: Trigger
 metadata:
   name: display-trigger
 spec:
-  broker: broker-test
+  broker: default
   filter:
     sourceAndType:
       type: samples.http.mod3

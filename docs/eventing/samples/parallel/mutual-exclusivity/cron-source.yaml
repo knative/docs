@@ -6,6 +6,7 @@ spec:
   schedule: "*/1 * * * *"
   data: '{"message": "Even or odd?"}'
   sink:
-    apiVersion: messaging.knative.dev/v1alpha1
-    kind: Parallel
-    name: me-odd-even-parallel
+    ref:
+      apiVersion: flows.knative.dev/v1alpha1
+      kind: Parallel
+      name: me-odd-even-parallel

@@ -6,6 +6,7 @@ spec:
   schedule: "*/2 * * * *"
   data: '{"message": "Hello world!"}'
   sink:
-    apiVersion: eventing.knative.dev/v1alpha1
-    kind: Broker
-    name: broker-test
+    ref:
+      apiVersion: eventing.knative.dev/v1alpha1
+      kind: Broker
+      name: default
