@@ -6,7 +6,7 @@ original author is unable to maintain their contribution. If you find that
 something isn't working, lend a helping hand and fix it in a PR.
 [Learn more about the lifespan of samples](../../contributing/DOCS-CONTRIBUTING.md).
 
-[**See all Knative code samples**](../../../docs/samples/)
+[**See all Knative code samples**](../../docs/samples.md)
 
 ### Serving samples
 
