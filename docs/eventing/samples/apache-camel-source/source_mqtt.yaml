@@ -26,6 +26,7 @@ spec:
           - log:
               message: "Forwarding: ${body}"
   sink:
-    apiVersion: messaging.knative.dev/v1alpha1
-    kind: InMemoryChannel
-    name: camel-test
+    ref:
+      apiVersion: messaging.knative.dev/v1alpha1
+      kind: InMemoryChannel
+      name: camel-test
