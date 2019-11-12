@@ -44,10 +44,8 @@ managed Istio installation, or if you're installing Knative locally using
 Minkube or similar, see the
 [Installing Istio for Knative guide](./installing-istio.md).
 
-> Note: [Ambassador](https://www.getambassador.io/) and
-> [Gloo](https://gloo.solo.io/) are available as an alternative to Istio.
-> [Click here](./Knative-with-Ambassador.md) to install Knative with Ambassador.
-> [Click here](./Knative-with-Gloo.md) to install Knative with Gloo.
+> Note: [Ambassador](./Knative-with-Ambassador.md) and
+> [Gloo](./Knative-with-Gloo.md) are available as an alternative to Istio.
 
 ## Installing Knative components
 
