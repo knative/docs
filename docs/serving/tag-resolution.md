@@ -45,7 +45,8 @@ spec:
               value: /path/to/custom/certs
       volumes:
         - name: custom-certs
-          secret: custom-certs
+          secret:
+            secretName: custom-certs
 ```
 
 ## Corporate Proxy
