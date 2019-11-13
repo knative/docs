@@ -514,6 +514,4 @@ This removes the namespace and all of its resources from your cluster.
 You've learned the basics of the Knative Eventing workflow. Here are some additional resources to help you continue to build with the Knative Eventing component.
 
 - [Broker and Trigger](./broker-trigger.md)
-- [Eventing with a GitHub source](./samples/github-source.md) 
-
-
+- [Eventing with a GitHub source](./samples/github-source/README.md)

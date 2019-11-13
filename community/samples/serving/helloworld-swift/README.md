@@ -13,7 +13,7 @@ specified, the app uses "World" as the TARGET.
 
 - You must have a Kubernetes cluster with Knative installed and DNS configured.
   If you need to create a cluster, follow the
-  [installation instructions](../../../install/README.md).
+  [installation instructions](../../../../docs/install/README.md).
 - You must have [Docker](https://www.docker.com) installed and running on your
   local machine, and a Docker Hub account configured (used for container
   registry).

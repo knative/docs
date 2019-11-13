@@ -44,10 +44,8 @@ managed Istio installation, or if you're installing Knative locally using
 Minkube or similar, see the
 [Installing Istio for Knative guide](./installing-istio.md).
 
-> Note: [Ambassador](https://www.getambassador.io/) and
-> [Gloo](https://gloo.solo.io/) are available as an alternative to Istio.
-> [Click here](./Knative-with-Ambassador.md) to install Knative with Ambassador.
-> [Click here](./Knative-with-Gloo.md) to install Knative with Gloo.
+> Note: [Ambassador](./Knative-with-Ambassador.md) and
+> [Gloo](./Knative-with-Gloo.md) are available as an alternative to Istio.
 
 ## Installing Knative components
 
@@ -83,8 +81,7 @@ The following Knative installation files are available:
 - **Eventing Resources**:
   - https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/github.yaml
   - https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/camel.yaml
-  - https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/gcppubsub.yaml
-  - https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/kafka.yaml
+  - https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/kafka-source.yaml
   - https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/kafka-channel.yaml
 
 #### Install details and options
@@ -110,14 +107,14 @@ files from the Knative repositories:
 | [`monitoring-tracing-zipkin.yaml`][1.80]        | Installs only [Zipkin][2.30].**\***                                                                                                                                     | Serving or Eventing component, ELK stack (monitoring-logs-elasticsearch.yaml)     |
 | [`monitoring-tracing-zipkin-in-mem.yaml`][1.90] | Installs only [Zipkin in-memory][2.30]**\***                                                                                                                            | Serving or Eventing component                                                                  |
 | **knative/eventing**                           |                                                                                                                                                                        |                                                                                           |
-| [`release.yaml`][4.1]†                         | Installs the Eventing component. Includes [ContainerSource](../eventing#containersource), [CronJobSource][6.2], InMemoryChannel.                     |                                                                                           |
-| [`eventing.yaml`][4.2]                         | Installs the Eventing component. Includes [ContainerSource](../eventing#containersource) and [CronJobSource][6.2]. Does not include any Channel. |                                                                                           |
-| [`in-memory-channel.yaml`][4.3]            | Installs only the InMemoryChannel.                                                                                                                       | Eventing component                                                                        |
+| [`release.yaml`][4.10]†                         | Installs the Eventing component. Includes [ContainerSource](../eventing#containersource), [CronJobSource][6.2], InMemoryChannel.                     |                                                                                           |
+| [`eventing.yaml`][4.20]                         | Installs the Eventing component. Includes [ContainerSource](../eventing#containersource) and [CronJobSource][6.2]. Does not include any Channel. |                                                                                           |
+| [`in-memory-channel.yaml`][4.30]            | Installs only the InMemoryChannel.                                                                                                                       | Eventing component                                                                        |
 | **knative/eventing-contrib**                   |                                                                                                                                                                        |                                                                                           |
 | [`github.yaml`][5.10]†                          | Installs the [GitHub][6.10] source.                                                                                                                                     | Eventing component                                                                        |
 | [`camel.yaml`][5.40]                            | Installs the Apache Camel source.                                                                                                                                      | Eventing component                                                                        |
 | [`kafka-source.yaml`][5.50]                     | Installs the Apache Kafka source.                                                                                                                                      | Eventing component                                                                        |
-| [`kafka-channel.yaml`][5.60]                    | Installs the KafkaChannel.                                                                                                                                      | Eventing component                                                                        |
+| [`kafka-channel.yaml`][5.60]                    | Installs the Kafka channel.                                                                                                                                      | Eventing component                                                                        |
 | [`awssqs.yaml`][5.70]                           | Installs the AWS SQS source.                                                                                                                                           | Eventing component                                                                        |
 | [`event-display.yaml`][5.30]                    | Installs a Knative Service that logs events received for use in samples and debugging.                                                                                 | Serving component, Eventing component                                                     |
 | [`natss-channel.yaml`][5.80]                    | Installs the NATS streaming channel implementation.                                                                                                                       | Eventing component                                                                        |
@@ -161,7 +158,6 @@ for details about installing the various supported observability plugins.
   https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml
 [4.30]:
   https://github.com/knative/eventing/releases/download/{{< version >}}/in-memory-channel.yaml
-[4.40]: https://github.com/knative/eventing/releases/download/{{< version >}}/kafka.yaml
 [5.0]: https://github.com/knative/eventing-contrib/releases/tag/{{< version >}}
 [5.10]:
   https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/github.yaml
@@ -176,7 +172,7 @@ for details about installing the various supported observability plugins.
 [5.70]:
   https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/awssqs.yaml
 [5.80]:
-  https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/natss.yaml  
+  https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/natss-channel.yaml
 [6.10]: https://developer.github.com/v3/activity/events/types/
 [6.20]:
   https://github.com/knative/eventing-contrib/blob/master/samples/cronjob-source/README.md
