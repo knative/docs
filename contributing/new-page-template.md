@@ -18,12 +18,24 @@ this guide show you how to do?" and "why would someone want to do this?".
 
 You need:
 
-- A Kubernetes cluster with [Knative installed](../install/README.md). <!-- Update this relative link as needed, depending on where the new page is located in the file structure. -->
+- A Kubernetes cluster with [Knative installed](../install/README.md). <!-- Update this relative link as needed,
+depending on where the new page is located in the file structure. -->
 - Anything else?
 
 ## Break steps into logical sections
 
 Avoid nesting headings directly on top of each other with no text inbetween.
+
+1. Use ordered lists for steps.
+
+1. Step number two.
+
+1. Step number three.
+
+<!-- GitHub's markdown processor will correctly automate the numbers in ordered
+	 lists if every list item starts with one. Our site has a known issue with
+	 rendering the numbers in ordered lists (see https://github.com/knative/docs/issues/1202)
+     but we still recommend contributors avoid manually numbered ordered lists. -->
 
 ### You can use smaller sections within sections for related tasks
 
@@ -35,9 +47,9 @@ If your guide installs a sample application, show the user how to delete it.
 
 ## What's next
 
-Provide relative links to other relevant topics, if applicable. Once someone has
+Provide links to other relevant topics, if applicable. Once someone has
 completed these steps, what might they want to do next?
 
-- [Link](./page.md)
+- [Link](./page.md) <!-- Always use relative links if linking to a page within the Docs repo. -->
 - [Link](./page.md)
 - [Link](./page.md)
