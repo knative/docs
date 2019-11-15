@@ -32,6 +32,6 @@ labels on those components. Release labels were added in the following releases:
 If you have an earlier version that excludes release labels, you must obtain the
 version from the container images of your Knative controllers:
 
-1. Query your Knative Controller to receive a URL.
+1. Query your Knative Controller to receive the `Image` URL. For example, you can run `kubectl describe deploy controller --namespace knative-serving` or `kubectl describe deploy eventing-controller --namespace knative-eventing`
 1. Navigate to the full `gcr.io` URL with your browser. 
 1. Review the contents for the release version from with the `Tags` section.
