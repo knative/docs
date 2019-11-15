@@ -26,7 +26,7 @@
   revision = "3a771d992973f24aa725d07868b467d1ddfceafb"
 
 [[projects]]
-  digest = "1:d3c3de7c1ad57f795e5c409afa842fea27899f124622bcdce83f8bea8721b9db"
+  digest = "1:902544577dcb868a5ae31529d73a1ce5031e224923290caedf6176241ee304e0"
   name = "github.com/cloudevents/sdk-go"
   packages = [
     ".",
@@ -35,6 +35,7 @@
     "pkg/cloudevents/context",
     "pkg/cloudevents/datacodec",
     "pkg/cloudevents/datacodec/json",
+    "pkg/cloudevents/datacodec/text",
     "pkg/cloudevents/datacodec/xml",
     "pkg/cloudevents/observability",
     "pkg/cloudevents/transport",
@@ -42,8 +43,8 @@
     "pkg/cloudevents/types",
   ]
   pruneopts = "NUT"
-  revision = "4cc108a637ff4bf2d1848c60d5fbb0f711fd1b8c"
-  version = "v0.9.2"
+  revision = "2fa4bb1fbb4aac4d906b0173a2a408f701439b82"
+  version = "v0.10.0"
 
 [[projects]]
   digest = "1:7a6852b35eb5bbc184561443762d225116ae630c26a7c4d90546619f1e7d2ad2"
@@ -141,6 +142,14 @@
   pruneopts = "NUT"
   revision = "e3702bed27f0d39777b0b37b664b6280e8ef8fbf"
   version = "v1.6.2"
+
+[[projects]]
+  digest = "1:08c58ac78a8c1f61e9a96350066d30fe194b8779799bd932a79932a5166a173f"
+  name = "github.com/kelseyhightower/envconfig"
+  packages = ["."]
+  pruneopts = "NUT"
+  revision = "0b417c4ec4a8a82eecc22a1459a504aa55163d61"
+  version = "v1.4.0"
 
 [[projects]]
   digest = "1:5985ef4caf91ece5d54817c11ea25f182697534f8ae6521eadcd628c142ac4b6"
@@ -477,6 +486,7 @@
     "github.com/google/go-github/github",
     "github.com/google/uuid",
     "github.com/gorilla/mux",
+    "github.com/kelseyhightower/envconfig",
     "github.com/openzipkin/zipkin-go",
     "github.com/openzipkin/zipkin-go/reporter/http",
     "github.com/satori/go.uuid",
