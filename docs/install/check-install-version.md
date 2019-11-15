@@ -5,39 +5,33 @@ weight: 20
 type: "docs"
 ---
 
-## Knative Serving
 
-To query the version of Knative Serving running on the cluster enter the
-following command:
+To obtain the version of the Knative component that you have running on your cluster, you query for the 
+`[component].knative.dev/release` label with the following commands:
 
-```bash
-kubectl get namespace knative-serving -o 'go-template={{index .metadata.labels
-"serving.knative.dev/release"}}'
-```
+* Knative Serving
+   ```bash
+   kubectl get namespace knative-serving -o 'go-template={{index .metadata.labels
+   "serving.knative.dev/release"}}'
+   ```
 
-## Knative Eventing
-
-To query the version of Knative Eventing running on the cluster enter the
-following command:
-
-```bash
-kubectl get namespace knative-eventing -o 'go-template={{index .metadata.labels
-"eventing.knative.dev/release"}}'
-```
-
+* Knative Eventing
+   ```bash
+   kubectl get namespace knative-eventing -o 'go-template={{index .metadata.labels
+   "eventing.knative.dev/release"}}'
+   ```
 
 ## Older versions
 
 Early versions of Knative Eventing and Serving do not have release version
-labels on the components. Release labels were added in:
+labels on those components. Release labels were added in the following releases:
 
 * Knative Serving 0.4.0
 * Knative Eventing 0.7.0
 
-If you have a version earlier than the versions above, the release version will not
-be returned from the commands. The version will need to be determined from the
-container images of your Knative controllers.
+If you have an earlier version that excludes release labels, you must obtain the
+version from the container images of your Knative controllers:
 
-Query a Knative Controller and copy the full `gcr.io` url into into your browser. From
-this page you will be able to look up the release version from the `Tags`
-section.
+1. Query your Knative Controller to receive a URL.
+1. Navigate to the full `gcr.io` URL with your browser. 
+1. Review the contents for the release version from with the `Tags` section.
