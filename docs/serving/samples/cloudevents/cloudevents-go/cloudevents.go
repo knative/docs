@@ -29,7 +29,7 @@ func main() {
 		log.Fatal(err.Error())
 	}
 
-	// Depending on whether targetting data has been supplied,
+	// Depending on whether targeting data has been supplied,
 	// we will either reply with our response or send it on to
 	// an event sink.
 	var receiver interface{} // the SDK reflects on the signature.
