@@ -5,8 +5,10 @@ title: "Title for your page" # Use sentence case for titles
 # The linkTitle field (above) is optional; use it to provide a shorter link if your page title is very long
 weight: 10 # This affects the placement of the link in the sidebar on the left. Pages are ordered from top to bottom by weight, lowest to highest.
 type: "docs" # You won't need to update this.
-aliases:
-  - # Has the page ever moved? If yes, include the prior location here, starting with /docs/, and the old URL will redirect to the new location. For a new page, there should be no aliases.
+#aliases:
+#  - /docs/example/redirect/moved-renamed-page
+#  - /docs/another-example
+# Has the page ever moved? If yes, include the prior location above, starting with path from the site root (for example /docs/, /blog/, or /community/). The old URL will redirect to this new file. For a new pages, "aliases" are not required.
 ---
 
 This guide shows you how to do something very cool. Make sure to include
