@@ -1,9 +1,9 @@
 ---
 # This section is called the "frontmatter" for your page
-title: "Title For Your Page" # Use title case for titles
-#linkTitle: "Link For This Page in the Sidebar"
+title: "Title for your page" # Use sentence case for titles
+#linkTitle: "Link for this page in the sidebar"
 # The linkTitle field (above) is optional; use it to provide a shorter link if your page title is very long
-weight: 01 # This affects the placement of the link in the sidebar on the left. Pages are ordered from top to bottom by weight.
+weight: 10 # This affects the placement of the link in the sidebar on the left. Pages are ordered from top to bottom by weight, lowest to highest.
 type: "docs" # You won't need to update this.
 aliases:
   - # Has the page ever moved? If yes, include the prior location here, starting with /docs/, and the old URL will redirect to the new location. For a new page, there should be no aliases.
@@ -40,6 +40,22 @@ Avoid nesting headings directly on top of each other with no text inbetween.
 ### You can use smaller sections within sections for related tasks
 
 Avoid nesting headings directly on top of each other with no text inbetween.
+
+Put code into a code block. 
+
+1. Here's a code snippet:
+   <!-- Use spaces and not tabs to indent code blocks, and leave one blank line before and after the block. -->
+   ```bash
+   kubectl apply --filename test.yaml
+   ```
+1. Another code snippet:
+
+   ```bash
+   kubectl apply --filename test2.yaml
+   ```
+
+Always explain code snippets thoroughly so that how they work or what they do
+is clear.
 
 ## Cleaning up
 
