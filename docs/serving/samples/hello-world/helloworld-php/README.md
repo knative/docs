@@ -82,7 +82,6 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-php
    kind: Service
    metadata:
      name: helloworld-php
-     namespace: default
    spec:
      template:
        spec:

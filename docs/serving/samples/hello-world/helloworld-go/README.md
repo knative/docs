@@ -112,7 +112,6 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-go
    kind: Service
    metadata:
      name: helloworld-go
-     namespace: default
    spec:
      template:
        spec:

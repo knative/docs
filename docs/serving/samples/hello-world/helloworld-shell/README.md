@@ -122,7 +122,6 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-shell
    kind: Service
    metadata:
      name: helloworld-shell
-     namespace: default
    spec:
      template:
        spec:

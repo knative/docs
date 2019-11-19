@@ -84,7 +84,6 @@ recreate the source files from this folder.
    kind: Service
    metadata:
      name: helloworld-java
-     namespace: default
    spec:
      template:
        spec:

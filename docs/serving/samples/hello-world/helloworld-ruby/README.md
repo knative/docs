@@ -95,7 +95,6 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-ruby
    kind: Service
    metadata:
      name: helloworld-ruby
-     namespace: default
    spec:
      template:
        spec:

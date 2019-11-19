@@ -74,7 +74,6 @@ apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: helloworld-scala
-  namespace: default
 spec:
   template:
     spec:

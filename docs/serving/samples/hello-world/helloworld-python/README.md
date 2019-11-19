@@ -98,7 +98,6 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-python
    kind: Service
    metadata:
      name: helloworld-python
-     namespace: default
    spec:
      template:
        spec:

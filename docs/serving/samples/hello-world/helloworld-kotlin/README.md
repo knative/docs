@@ -152,7 +152,6 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-kotlin
    kind: Service
    metadata:
      name: helloworld-kotlin
-     namespace: default
    spec:
      template:
        spec:
