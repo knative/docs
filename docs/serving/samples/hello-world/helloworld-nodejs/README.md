@@ -136,7 +136,6 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-nodejs
    kind: Service
    metadata:
      name: helloworld-nodejs
-     namespace: default
    spec:
      template:
        spec:

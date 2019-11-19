@@ -126,7 +126,6 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-csharp
    kind: Service
    metadata:
      name: helloworld-csharp
-     namespace: default
    spec:
      template:
        spec:

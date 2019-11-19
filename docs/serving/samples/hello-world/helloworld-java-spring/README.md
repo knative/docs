@@ -131,7 +131,6 @@ knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
    kind: Service
    metadata:
      name: helloworld-java-spring
-     namespace: default
    spec:
      template:
        spec:
