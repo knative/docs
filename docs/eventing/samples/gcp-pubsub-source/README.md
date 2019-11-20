@@ -142,8 +142,7 @@ to the `default` Broker.
 
 1. We need to wait for the downstream pods to get started and receive our event,
    wait a few seconds.
-
-   - You can check the status of the downstream pods with:
+   You can check the status of the downstream pods with:
 
      ```shell
      kubectl get pods --selector serving.knative.dev/service=event-display
@@ -167,7 +166,7 @@ Context Attributes,
   Source: //pubsub.googleapis.com/projects/PROJECT_ID/topics/testing
   ID: 815117146007971
   Time: 2019-10-31T04:49:12.582Z
-  DataContentType: application/json
+  DataContentType: application/octet-stream
   Extensions:
     knativecemode: binary
     knativearrivaltime: 2019-10-31T04:49:12Z
