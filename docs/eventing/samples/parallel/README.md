@@ -6,8 +6,8 @@ various flows.
 All examples require:
 
 - A Kubernetes cluster with
-  - Knative Eventing v0.11+
-  - Knative Serving v0.8+
+  - Knative Eventing
+  - Knative Serving
 
 All examples are using the
 [default channel template](../../channels/default-channels.md).

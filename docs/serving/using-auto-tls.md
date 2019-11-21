@@ -16,7 +16,7 @@ You must meet the following prerequisites to enable automatic certificate
 provisioning:
 
 - The following must be installed on your Knative cluter:
-  - [Knative Serving version 0.6.0 or higher](../install/).
+  - [Knative Serving](../install/).
   - [Istio with SDS, version 1.1 or higher](../install/installing-istio.md#installing-istio-with-SDS-to-secure-the-ingress-gateway) or [Gloo, version 0.18.16 or higher](../install/Knative-with-Gloo.md).
     Note: Currently, [Ambassador](https://github.com/datawire/ambassador) is unsupported.
   - [cert-manager version `0.6.1` or higher](./installing-cert-manager.md).
@@ -36,7 +36,7 @@ To enable support for automatic TLS certificate provisioning in Knative:
     ```
 
 1. If `networking-certmanager` is not found, run the following command:
-   
+
     ```shell
     kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving-cert-manager.yaml
     ```
