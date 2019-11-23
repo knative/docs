@@ -40,7 +40,7 @@ export PATH=$HOME/.gloo/bin:$PATH
 Verify the CLI is installed and running correctly with:
 
 ```shell
-glooctl --version
+glooctl version
 ```
 
 ### Deploying Gloo and Knative to your cluster
@@ -48,12 +48,12 @@ glooctl --version
 Finally, install Gloo and Knative in a single command with `glooctl`:
 
 ```shell
-glooctl install knative
+glooctl install knative --install-knative-version=0.10.0
 ```
 
 The `glooctl install knative` command can be customized with a variety of options:
-- use `--install-knative-version` to set the installed version of Knative Serving (defaults to `0.8.0`)
-- use `--install-build` to install Knative Build
+
+- use `--install-knative-version` to set the installed version of Knative Serving (defaults to `0.10.0`)
 - use `--install-eventing` to install Knative Eventing
 - use `--dry-run` to produce the kubernetes YAML that would be applied to your cluster rather than applying.
 - use `--install-knative=false` to only install Gloo without installing Knative components. This can be used if you wish to install Knative independently of Gloo.
@@ -78,6 +78,8 @@ rerun the command to see the current status.
 > exit watch mode.
 
 Now you can deploy an app using your freshly installed Knative environment.
+
+See https://docs.solo.io/gloo/latest/gloo_integrations/knative/ for an example of running a simple *hello world* with Knative.
 
 ## Configuring DNS
 
