@@ -97,6 +97,15 @@ Istio without automatic sidecar injection. This install is also recommended for
 users who don't need the Istio service mesh, or who want to enable the service
 mesh by [manually injecting the Istio sidecars][2].
 
+Enter the following commands to download Istio:
+
+   ```shell
+   # Download and unpack Istio
+   export ISTIO_VERSION=1.1.7
+   curl -L https://git.io/getLatestIstio | sh -
+   cd istio-${ISTIO_VERSION}
+   ```
+
 Enter the following command to install Istio:
 
 ```shell
