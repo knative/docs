@@ -19,8 +19,7 @@ to run multiple installation commands.
   [follow one of the platform-specific installation guides](./README.md) to help
   you get up and running quickly.
 
-- The steps in this guide use `bash` for the MacOS or Linux environment; for
-  Windows, some commands might need adjustment.
+- The steps in this guide use `bash` for the MacOS or Linux environment.
 
 - This guide assumes that you have an existing Kubernetes cluster, on which
   you're comfortable installing and running _alpha_ level software.
@@ -31,17 +30,12 @@ to run multiple installation commands.
 ## Installing Istio
 
 Knative depends on [Istio](https://istio.io/docs/concepts/what-is-istio/) for
-traffic routing and ingress. You have the option of injecting Istio sidecars and
-enabling the Istio service mesh, but it's not required for all Knative
-components.
+traffic routing and ingress.
 
 If your cloud platform offers a managed Istio installation, we recommend
-installing Istio that way, unless you need the ability to customize your
-installation.
+installing Istio that way.
 
-If you prefer to install Istio manually, if your cloud provider doesn't offer a
-managed Istio installation, or if you're installing Knative locally using
-Minkube or similar, see the
+If you prefer to install Istio manually, see the
 [Installing Istio for Knative guide](./installing-istio.md).
 
 > Note: [Ambassador](./Knative-with-Ambassador.md) and
@@ -50,14 +44,7 @@ Minkube or similar, see the
 ## Installing Knative components
 
 Each Knative component must be installed individually. You can decide which
-components and observability plugins to install based on what you plan to do
-with Knative.
-
-> **Note**: If your install fails on the first attempt, try rerunning the
-> commands. They will likely succeed on the second attempt. For background info
-> and to track the upcoming solution to this problem, see issues
-> [#968](https://github.com/knative/docs/issues/968) and
-> [#1036](https://github.com/knative/docs/issues/1036).
+components to install based on what you plan to do with Knative.
 
 ### Choosing Knative installation files
 
@@ -184,17 +171,7 @@ for details about installing the various supported observability plugins.
 **Tip**: From the table above, copy and paste the URL and filename into the
 commands below.
 
-1. If you are upgrading from Knative 0.3.x: Update your domain and static IP
-   address to be associated with the LoadBalancer `istio-ingressgateway` instead
-   of `knative-ingressgateway`. Then run the following to clean up leftover
-   resources:
-
-   ```
-   kubectl delete svc knative-ingressgateway -n istio-system
-   kubectl delete deploy knative-ingressgateway -n istio-system
-   ```
-
-   If you have the Knative Eventing Sources component installed, you will also
+1. If you have the Knative Eventing Sources component installed, you will also
    need to delete the following resource before upgrading:
 
    ```
@@ -214,21 +191,20 @@ commands below.
       `--selector knative.dev/crd-install=true` flag:
 
       ```bash
+      URL=[FILE_URL]
       kubectl apply --selector knative.dev/crd-install=true \
-      --filename [FILE_URL] \
-      --filename [FILE_URL]
+      --filename ${URL} \
       ```
 
    1. Remove `--selector knative.dev/crd-install=true` and then run the command
       again to install the actual components or plugins:
 
       ```bash
-      kubectl apply --filename [FILE_URL] \
-      --filename [FILE_URL]
+      kubectl apply --filename ${URL}
       ```
 
-      You can add as many `--filename [FILE_URL]` flags to your commands as
-      needed.
+      To install multiple components at once, you can add as many `--filename [FILE_URL]`
+      flags to your commands as needed.
 
       Syntax:
 
