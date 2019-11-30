@@ -1,0 +1,17 @@
+apiVersion: sources.eventing.knative.dev/v1alpha1
+kind: SinkBinding
+metadata:
+  name: bind-heartbeat
+spec:
+  subject:
+    apiVersion: batch/v1
+    kind: Job
+    selector:
+      matchLabels:
+        app: heartbeat-cron
+
+  sink:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: event-display
