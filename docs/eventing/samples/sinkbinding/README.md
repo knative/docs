@@ -25,7 +25,7 @@ Configuration).
 
 ### Prepare the heartbeats image
 
-Knative [event-sources](https://github.com/knative/eventing-contrib) has a
+Knative [event-contrib](https://github.com/knative/eventing-contrib) has a
 sample of heartbeats event source. You could clone the source codes by
 
 ```
@@ -58,7 +58,7 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display
+        - image: gcr.io/knative-releases/github.com/knative/eventing-contrib/cmd/event_display
 ```
 
 Use following command to create the service from `service.yaml`:
