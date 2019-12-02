@@ -66,7 +66,7 @@ the Apache Camel documentation for the
 All Camel components are documented in the
 [Apache Camel Website](https://camel.apache.org/components/latest/).
 
-Install the [timer CamelSource](source_timer.yaml) from source:
+Install the [timer CamelSource](./source_timer.yaml) from source:
 
 ```shell
 kubectl apply -f source_timer.yaml
@@ -87,13 +87,13 @@ If you have deployed the timer source, you should see new log lines appearing ev
 One of the 300+ Camel components that you can leverage is [Camel-Paho](https://camel.apache.org/components/latest/paho-component.html), 
 based on the [Eclipse Paho](https://www.eclipse.org/paho/) open source project.
 
-A source based on Paho (like the provided [MQTT CamelSource](source_mqtt.yaml)) allows to bridge any MQTT broker to a Knative resource,
+A source based on Paho (like the provided [MQTT CamelSource](./source_mqtt.yaml)) allows to bridge any MQTT broker to a Knative resource,
 automatically converting IoT messages to Cloudevents.
 
 To use the MQTT source, you need a MQTT broker running and reachable from your cluster.
 For example, it's possible to run a [Mosquitto MQTT Broker](https://mosquitto.org/) for testing purposes.  
 
-First, edit the [MQTT CamelSource](source_mqtt.yaml) and put the
+First, edit the [MQTT CamelSource](./source_mqtt.yaml) and put the
 correct address of the MQTT broker in the `brokerUrl` field.
 You also need to provide the name of the topic that you want to subscribe to: just change `paho:mytopic` to match
 the topic that you want to use.
@@ -108,7 +108,7 @@ CamelSources from the namespace:
 kubectl delete camelsource --all
 ```
 
-Install the [mqtt CamelSource](mqtt_telegram.yaml):
+Install the [mqtt CamelSource](./mqtt_telegram.yaml):
 
 ```shell
 kubectl apply -f source_mqtt.yaml
@@ -139,7 +139,7 @@ Bot, using your preferred Telegram client (mobile or web). After you create the
 bot, you will receive an **authorization token** that is needed for the source
 to work.
 
-First, edit the [telegram CamelSource](source_telegram.yaml) and put the
+First, edit the [telegram CamelSource](./source_telegram.yaml) and put the
 authorization token, replacing the `<put-your-token-here>` placeholder.
 
 To reduce noise in the event display, you can remove all previously created
@@ -149,7 +149,7 @@ CamelSources from the namespace:
 kubectl delete camelsource --all
 ```
 
-Install the [telegram CamelSource](source_telegram.yaml):
+Install the [telegram CamelSource](./source_telegram.yaml):
 
 ```shell
 kubectl apply -f source_telegram.yaml
@@ -174,7 +174,7 @@ to periodically fetch an external API, transform the result into a Cloudevent an
 given destination.
 
 The example will retrieve a static JSON file from a remote URL, but you can edit the
-[HTTP poller CamelSource](source_http_poller.yaml) to add your own API.
+[HTTP poller CamelSource](./source_http_poller.yaml) to add your own API.
 
 If you have previously deployed other CamelSources, to reduce noise in the event
 display, you can remove them all from the namespace:
@@ -183,7 +183,7 @@ display, you can remove them all from the namespace:
 kubectl delete camelsource --all
 ```
 
-Install the [HTTP poller CamelSource](source_http_poller.yaml):
+Install the [HTTP poller CamelSource](./source_http_poller.yaml):
 
 ```shell
 kubectl apply -f source_http_poller.yaml
