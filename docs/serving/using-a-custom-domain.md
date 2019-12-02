@@ -101,12 +101,8 @@ You should see the full customized domain: `helloworld-go.default.mydomain.com`.
 And you can check the IP address of your Knative gateway by running:
 
 ```shell
-# In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
-export INGRESSGATEWAY=knative-ingressgateway
+export INGRESSGATEWAY=istio-ingressgateway
 
-# The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
-# Use `istio-ingressgateway` instead, since `knative-ingressgateway`
-# will be removed in Knative v0.4.
 if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
     export INGRESSGATEWAY=istio-ingressgateway
 fi
@@ -174,5 +170,3 @@ If you are using Google Cloud DNS, you can find step-by-step instructions in the
 Once the domain update has propagated, you can access your app using the fully
 qualified domain name of the deployed route, for example
 `http://helloworld-go.default.mydomain.com`
-
-
