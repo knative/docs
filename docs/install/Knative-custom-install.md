@@ -170,31 +170,17 @@ for details about installing the various supported observability plugins.
 
 **Tip**: From the table above, copy and paste the URL and filename into the
 commands below.
-
-1. To install Knative components or plugins, specify the filenames in the
-   `kubectl apply` command. To prevent install failures due to race conditions,
-   run the install command first with the `-l knative.dev/crd-install=true`
-   flag, then a second time without the selector flag.
-
-   1. Install only the CRDs by using the
-      `--selector knative.dev/crd-install=true` flag:
-
+ 
+1. To install Knative components or plugins, you specify and then run their filenames 
+   in the `kubectl apply` command. To prevent race conditions, you first create
+   the CRD by using the `-l knative.dev/crd-install=true` flag.
+   
+   1. Create the `URL` variable and specify the path to the Knative component or plugin
+      that you want to install:  
       ```bash
       URL=[FILE_URL]
-      kubectl apply --selector knative.dev/crd-install=true \
-      --filename ${URL} \
       ```
-
-   1. Remove `--selector knative.dev/crd-install=true` and then run the command
-      again to install the actual components or plugins:
-
-      ```bash
-      kubectl apply --filename ${URL}
-      ```
-
-      To install multiple components at once, you can add as many `--filename [FILE_URL]`
-      flags to your commands as needed.
-
+   
       Syntax:
 
       - `[FILE_URL]`: URL path of a Knative component or plugin:
@@ -205,28 +191,42 @@ commands below.
         - `[FILENAME]`: Filename of the component or plugin that you want
           installed.
 
-      `[FILE_URL]`Examples:
+      Examples:
 
       - `https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml`
       - `https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml`
       - `https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml`
 
-      **Example install commands:**
+   1. Install only the CRD by using the `--selector knative.dev/crd-install=true` flag:
+      ```bash
+      kubectl apply --selector knative.dev/crd-install=true \
+      --filename ${URL}
+      ```
+      
+   1. Install the actual component or plugin by running the command without the 
+      `--selector knative.dev/crd-install=true` flag:
+      ```bash
+      kubectl apply --filename ${URL}
+      ```
+      Tip: To install multiple components or plugins at the same time, you can add 
+      multiple `--filename [FILE_URL]` flags to the commands.
+
+    **Example install commands:**
+    
+    The following examples demonstrate how to install muliptle components and plugins at the same time.
 
    - To install the Knative Serving component with the set of observability
-     plugins, run the following commands:
+     plugin, run the following commands:
 
      1. Installs the CRDs only:
-
         ```bash
         kubectl apply --selector knative.dev/crd-install=true \
           --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
           --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml
         ```
 
-     1. Remove the `--selector knative.dev/crd-install=true` flag and then run
-        the command to install the Serving component and observability plugins:
-
+     1. Remove the `--selector knative.dev/crd-install=true` flag 
+        to install the actual Serving component and observability plugin:
         ```bash
         kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
           --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml
@@ -234,19 +234,16 @@ commands below.
 
    - To install all three Knative components without an observability plugin,
      run the following commands.
-
+     
      1. Installs the CRDs only:
-
         ```bash
         kubectl apply --selector knative.dev/crd-install=true \
           --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
           --filename https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml
         ```
 
-     1. Remove the `--selector knative.dev/crd-install=true` flag and then run
-        the command to install all the Knative components, including the
-        Eventing resources:
-
+     1. Remove the `--selector knative.dev/crd-install=true` flag 
+        to install all the Knative components and the Eventing resources:
         ```bash
         kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
           --filename https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml
@@ -256,7 +253,6 @@ commands below.
    by running one or more of the following commands. It might take a few
    seconds, so rerun the commands until all of the components show a `STATUS` of
    `Running`:
-
    ```bash
    kubectl get pods --namespace knative-serving
    kubectl get pods --namespace knative-eventing
@@ -267,7 +263,6 @@ commands below.
 
 1. If you installed an observability plugin, run the following command to ensure
    that the necessary `knative-monitoring` pods show a `STATUS` of `Running`:
-
    ```bash
    kubectl get pods --namespace knative-monitoring
    ```
