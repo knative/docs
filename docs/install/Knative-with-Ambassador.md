@@ -1,6 +1,6 @@
 ---
 title: "Installing Knative with Ambassador"
-linkTitle: "Ambassador API Gatway and Knative"
+linkTitle: "Ambassador API Gateway and Knative"
 weight: 15
 type: "docs"
 ---
