@@ -265,7 +265,7 @@ simplifies things to have DNS properly configured. For this, we must look up the
 external IP address that Gloo received. This can be done with the following command:
 
 ```
-$ kubectl get svc -n istio-system
+$ kubectl get svc --namespace istio-system
 NAME                    TYPE           CLUSTER-IP   EXTERNAL-IP    PORT(S)                                      AGE
 cluster-local-gateway   ClusterIP      10.0.2.216   <none>         15020/TCP,80/TCP,443/TCP                     2m14s
 istio-ingressgateway    LoadBalancer   10.0.2.24    34.83.80.117   15020:32206/TCP,80:30742/TCP,443:30996/TCP   2m14s
