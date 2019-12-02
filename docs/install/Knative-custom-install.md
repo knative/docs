@@ -171,17 +171,6 @@ for details about installing the various supported observability plugins.
 **Tip**: From the table above, copy and paste the URL and filename into the
 commands below.
 
-1. If you have the Knative Eventing Sources component installed, you will also
-   need to delete the following resource before upgrading:
-
-   ```
-   kubectl delete statefulset/controller-manager -n knative-sources
-   ```
-
-   While the deletion of this resource during the upgrade process will not
-   prevent modifications to Eventing Source resources, those changes will not be
-   completed until the upgrade process finishes.
-
 1. To install Knative components or plugins, specify the filenames in the
    `kubectl apply` command. To prevent install failures due to race conditions,
    run the install command first with the `-l knative.dev/crd-install=true`
@@ -243,9 +232,9 @@ commands below.
           --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml
         ```
 
-   - To install all three Knative components without an observability plugin, 
+   - To install all three Knative components without an observability plugin,
      run the following commands.
-     
+
      1. Installs the CRDs only:
 
         ```bash
@@ -287,7 +276,7 @@ See the following topics for information about installing other Knative features
 
 - [Installing logging, metrics, and traces](../serving/installing-logging-metrics-traces.md):
   Learn how to install and set up the various observability plugins.
-   
+
 - [Installing Cert-Manager](../serving/installing-cert-manager.md):
   Learn how to set up and configure secure HTTPS requests and enable
   [automatic TLS cert provisioning](../serving/using-auto-tls.md).

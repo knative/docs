@@ -5,8 +5,9 @@ metadata:
 spec:
   topic: testing
   sink:
-    apiVersion: eventing.knative.dev/v1alpha1
-    kind: Broker
-    name: default
+    ref:
+      apiVersion: eventing.knative.dev/v1alpha1
+      kind: Broker
+      name: default
   # If running in GKE, we will ask the metadata server for the project.
   #project: MY_GCP_PROJECT

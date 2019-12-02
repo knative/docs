@@ -14,12 +14,6 @@ This document is intended for people that are familiar with the object model of
 [Knative Eventing](../README.md). You don't need to be an expert, but do need to
 know roughly how things fit together.
 
-## Version
-
-This Debugging content supports version v0.8.0 or later of
-[Knative Eventing](https://github.com/knative/eventing/releases/) and the
-[Eventing-contrib resources](https://github.com/knative/eventing-contrib/releases/).
-
 ## Prerequisites
 
 1. Setup [Knative Eventing and an Eventing-contrib resource](../README.md).
@@ -364,7 +358,7 @@ However if we see something like:
 
 <!--
  NOTE: This error has been produced by settings spec.ports[0].port to 8081
- kubectl patch -n knative-debug svc svc -p '{"spec":{"ports": [{"port": 8081, "targetPort":8080}]}}' --type='merge' 
+ kubectl patch -n knative-debug svc svc -p '{"spec":{"ports": [{"port": 8081, "targetPort":8080}]}}' --type='merge'
 -->
 ```shell
 {"level":"info","ts":"2019-08-16T16:10:16.859Z","logger":"inmemorychannel-dispatcher.in-memory-channel-dispatcher","caller":"provisioners/message_receiver.go:140","msg":"Received request for chan-kn-channel.knative-debug.svc.cluster.local","knative.dev/controller":"in-memory-channel-dispatcher"}
