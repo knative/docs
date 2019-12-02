@@ -1,5 +1,5 @@
 ---
-title: "Creating Knative Services"
+title: "Creating Knative services"
 type: “docs”
 ---
 
