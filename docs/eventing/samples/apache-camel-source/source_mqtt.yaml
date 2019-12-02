@@ -1,0 +1,32 @@
+# Apache Camel MQTT Source
+#
+# Paho Component documentation: https://camel.apache.org/components/latest/paho-component.html
+#
+# List of available Apache Camel components: https://camel.apache.org/components/latest/
+#
+apiVersion: sources.eventing.knative.dev/v1alpha1
+kind: CamelSource
+metadata:
+  name: camel-mqtt-source
+spec:
+  source:
+    # To increase throughput, you can (optionally) read using multiple pods in parallel
+    integration:
+     replicas: 2
+    flow:
+      from:
+        # Specify here the topic to subscribe to
+        uri: paho:mytopic
+        parameters:
+          # URL of the MQTT source
+          brokerUrl: tcp://mosquitto:1883
+          # A unique client ID for the source
+          clientId: mqtt-knative-bridge
+        steps:
+          - log:
+              message: "Forwarding: ${body}"
+  sink:
+    ref:
+      apiVersion: messaging.knative.dev/v1alpha1
+      kind: InMemoryChannel
+      name: camel-test
