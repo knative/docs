@@ -1,6 +1,7 @@
 ---
 title: "Creating Knative services"
-type: “docs”
+weight: 10
+type: "docs"
 ---
 
 Knative Services are used to deploy an application. Each Knative Service is defined by a Route and a Configuration, which have the same name as the Service, contained in a YAML file. Every time the Configuration is updated, a new Revision is created.
