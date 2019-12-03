@@ -447,7 +447,7 @@ func (r *Registry) Gather() ([]*dto.MetricFamily, error) {
 
 	// Drain metricChan in case of premature return.
 	defer func() {
-		for _ = range metricChan {
+		for range metricChan {
 		}
 	}()
 

@@ -376,12 +376,12 @@ type DeletePayload struct {
 // DeploymentPayload contains the information for GitHub's deployment hook
 type DeploymentPayload struct {
 	Deployment struct {
-		URL     string `json:"url"`
-		ID      int64  `json:"id"`
-		Sha     string `json:"sha"`
-		Ref     string `json:"ref"`
-		Task    string `json:"task"`
-		Payload string `json:"payload"`
+		URL         string  `json:"url"`
+		ID          int64   `json:"id"`
+		Sha         string  `json:"sha"`
+		Ref         string  `json:"ref"`
+		Task        string  `json:"task"`
+		Payload     string  `json:"payload"`
 		Environment string  `json:"environment"`
 		Description *string `json:"description"`
 		Creator     struct {
@@ -549,12 +549,12 @@ type DeploymentStatusPayload struct {
 		RepositoryURL string    `json:"repository_url"`
 	} `json:"deployment_status"`
 	Deployment struct {
-		URL     string `json:"url"`
-		ID      int64  `json:"id"`
-		Sha     string `json:"sha"`
-		Ref     string `json:"ref"`
-		Task    string `json:"task"`
-		Payload string `json:"payload"`
+		URL         string  `json:"url"`
+		ID          int64   `json:"id"`
+		Sha         string  `json:"sha"`
+		Ref         string  `json:"ref"`
+		Task        string  `json:"task"`
+		Payload     string  `json:"payload"`
 		Environment string  `json:"environment"`
 		Description *string `json:"description"`
 		Creator     struct {
