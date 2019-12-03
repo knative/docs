@@ -168,34 +168,36 @@ for details about installing the various supported observability plugins.
 
 ### Installing Knative
 
-**Tip**: From the table above, copy and paste the URL and filename into the
+To install Knative components or plugins, you specify and then run their
+filenames in the `kubectl apply` command. To prevent race conditions, you
+first create the CRD by using the `-l knative.dev/crd-install=true` flag.
+
+Tip: From the table above, copy and paste the URL and filename into the
 commands below.
  
-1. To install Knative components or plugins, you specify and then run their filenames 
-   in the `kubectl apply` command. To prevent race conditions, you first create
-   the CRD by using the `-l knative.dev/crd-install=true` flag.
+1. Install the component or plugin:
    
-   1. Create the `URL` variable and specify the path to the Knative component or plugin
-      that you want to install:  
-      ```bash
-      URL=[FILE_URL]
-      ```
-   
-      Syntax:
+    1. Create the `URL` variable and specify the path to the Knative component or plugin
+       that you want to install:  
+       ```bash
+       URL=[FILE_URL]
+       ```
 
-      - `[FILE_URL]`: URL path of a Knative component or plugin:
-        `https://github.com/knative/[COMPONENT]/releases/download/[VERSION]/[FILENAME].yaml`
+        Where `[FILE_URL]` is the URL path of a Knative component or plugin and includes
+        the following details:
 
-        - `[COMPONENT]`: A Knative component repository.
-        - `[VERSION]`: Version number of a Knative component release.
-        - `[FILENAME]`: Filename of the component or plugin that you want
-          installed.
+           - `[COMPONENT]`: A Knative component repository.
+           - `[VERSION]`: Version number of a Knative component release.
+           - `[FILENAME]`: Filename of the component or plugin that you want
+           installed.
 
-      Examples:
+          `https://github.com/knative/[COMPONENT]/releases/download/[VERSION]/[FILENAME].yaml`
 
-      - `https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml`
-      - `https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml`
-      - `https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml`
+	       Examples:
+	       
+	       - `https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml`
+	       - `https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml`
+	       - `https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml`
 
    1. Install only the CRD by using the `--selector knative.dev/crd-install=true` flag:
       ```bash
@@ -249,25 +251,25 @@ commands below.
           --filename https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml
         ```
 
-1. Depending on what you chose to install, view the status of your installation
-   by running one or more of the following commands. It might take a few
-   seconds, so rerun the commands until all of the components show a `STATUS` of
-   `Running`:
-   ```bash
-   kubectl get pods --namespace knative-serving
-   kubectl get pods --namespace knative-eventing
-   ```
+1. Run one or more of the following commands to ensure that your component or plugin was 
+   installed successfully. It can take a few seconds for your install to complete, so
+   rerun the commands until you receive a `STATUS` of `Running`.
 
-   > Tip: You can append the `--watch` flag to the `kubectl get` commands to
-   > view the pod status in realtime. You use `CTRL + C` to exit watch mode.
+    Tip: You can append the `--watch` flag to the `kubectl get` commands to
+    view the pod status in realtime. You use `CTRL + C` to exit watch mode.
 
-1. If you installed an observability plugin, run the following command to ensure
-   that the necessary `knative-monitoring` pods show a `STATUS` of `Running`:
-   ```bash
-   kubectl get pods --namespace knative-monitoring
-   ```
+    - If you installed the Serving or Eventing component:
+      ```bash
+      kubectl get pods --namespace knative-serving
+      kubectl get pods --namespace knative-eventing
+      ```
 
-See the following topics for information about installing other Knative features:
+   - If you installed an observability plugin:
+     ```bash
+     kubectl get pods --namespace knative-monitoring
+     ```
+
+For information about installing other Knative features, see the following topics:
 
 - [Installing logging, metrics, and traces](../serving/installing-logging-metrics-traces.md):
   Learn how to install and set up the various observability plugins.
