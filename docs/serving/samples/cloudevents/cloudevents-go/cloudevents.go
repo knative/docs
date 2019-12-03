@@ -78,7 +78,7 @@ func (recv *Receiver) ReceiveAndSend(ctx context.Context, event cloudevents.Even
 	r.SetData(resp)
 
 	ctx = cloudevents.ContextWithTarget(ctx, recv.Target)
-	_, _, err := recv.client.Send(ctx, event)
+	_, _, err := recv.client.Send(ctx, r)
 	return err
 }
 
