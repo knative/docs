@@ -11,7 +11,7 @@ of events in case of failure. For instance, you can decide to retry sending even
 that failed to be consumed, and if this didn't work you can decide to forward those
 events to a dead letter sink.
 
-## Configurating Subscription Delivery
+## Configuring Subscription Delivery
 
 Knative Eventing offers fine-grained control on how events are delivered for each subscription by adding a `delivery` section. Consider this example:
 
@@ -28,7 +28,7 @@ spec:
   delivery:
     deadLetterSink:
       ref:
-        apiVersion: serving.knative.dev/v1alpha1
+        apiVersion: serving.knative.dev/v1
         kind: Service
         name: error-handler
   subscriber:
@@ -44,7 +44,7 @@ The `deadLetterSink` specifies where to send events that failed be consumed by `
 When present, events that failed to be consumed are sent to the `deadLetterSink`.
 In case of failure, the event is dropped and an error is logged into the system.
 
-The `deadLetterSink` value must be a [Destination](https://godoc.org/knative.dev/pkg/apis/v1alpha1#Destination).
+The `deadLetterSink` value must be a [Destination](https://godoc.org/knative.dev/pkg/apis/duck/v1#Destination).
 
 ```yaml
 spec:
