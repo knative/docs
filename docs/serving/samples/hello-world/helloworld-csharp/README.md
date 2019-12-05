@@ -5,7 +5,7 @@ weight: 1
 type: "docs"
 ---
 
-A simple web app written in C# using .NET Core 3.0 that you can use for testing.
+A simple web app written in C# using .NET Core 3.1 that you can use for testing.
 It reads in an env variable `TARGET` and prints "Hello \${TARGET}!". If TARGET
 is not specified, it will use "World" as the TARGET.
 
@@ -25,16 +25,16 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-csharp
   create one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
-- You have installed [.NET Core SDK 3.0](https://www.microsoft.com/net/core).
+- You have installed [.NET Core SDK 3.1](https://www.microsoft.com/net/core).
 
 ## Recreating the sample code
 
 1. First, make sure you have
-   [.NET Core SDK 3.0](https://www.microsoft.com/net/core) installed:
+   [.NET Core SDK 3.1](https://www.microsoft.com/net/core) installed:
 
    ```shell
    dotnet --version
-   3.0.100
+   3.1.100
    ```
 
 1. From the console, create a new empty web project using the dotnet command:
@@ -82,7 +82,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-csharp
    ```docker
    # Use Microsoft's official build .NET image.
    # https://hub.docker.com/_/microsoft-dotnet-core-sdk/
-   FROM mcr.microsoft.com/dotnet/core/sdk:3.0-alpine AS build
+   FROM mcr.microsoft.com/dotnet/core/sdk:3.1-alpine AS build
    WORKDIR /app
  
    # Install production dependencies.
@@ -99,7 +99,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-csharp
 
    # Use Microsoft's official runtime .NET image.
    # https://hub.docker.com/_/microsoft-dotnet-core-aspnet/
-   FROM mcr.microsoft.com/dotnet/core/aspnet:3.0-alpine AS runtime
+   FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-alpine AS runtime
    WORKDIR /app
    COPY --from=build /app/out ./
 
