@@ -6,7 +6,7 @@ spec:
   template:
     spec:
       containers:
-      - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:2656f39a7fcb6afd9fc79e7a4e215d14d651dc674f38020d1d18c6f04b220700
+      - image: gcr.io/vaikas-knative/cmd-736bbd9d5a42b6282732cf4569e3c0ff@sha256:f069e4e58d6b420d66304d3bbde019160eb12ca17bb98fc3b88e0de5ad2cacd1
         env:
         - name: STEP
           value: "0"
@@ -20,7 +20,7 @@ spec:
   template:
     spec:
       containers:
-      - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:2656f39a7fcb6afd9fc79e7a4e215d14d651dc674f38020d1d18c6f04b220700
+      - image: gcr.io/vaikas-knative/cmd-736bbd9d5a42b6282732cf4569e3c0ff@sha256:f069e4e58d6b420d66304d3bbde019160eb12ca17bb98fc3b88e0de5ad2cacd1
         env:
         - name: STEP
           value: "1"
@@ -33,7 +33,7 @@ spec:
   template:
     spec:
       containers:
-      - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:2656f39a7fcb6afd9fc79e7a4e215d14d651dc674f38020d1d18c6f04b220700
+      - image: gcr.io/vaikas-knative/cmd-736bbd9d5a42b6282732cf4569e3c0ff@sha256:f069e4e58d6b420d66304d3bbde019160eb12ca17bb98fc3b88e0de5ad2cacd1
         env:
         - name: STEP
           value: "2"

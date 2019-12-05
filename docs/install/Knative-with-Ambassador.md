@@ -1,6 +1,6 @@
 ---
 title: "Installing Knative with Ambassador"
-linkTitle: "Ambassador API Gatway and Knative"
+linkTitle: "Ambassador API Gateway"
 weight: 15
 type: "docs"
 ---
@@ -159,7 +159,7 @@ manage and route to serverless applications!
 ## What's next
 
 - Try the
-  [Getting Started with App Deployment guide](../serving/getting-started-knative-app/)
+  [Getting Started with App Deployment guide](../serving/getting-started-knative-app.md)
   for Knative serving.
 - Get started with Knative Eventing by walking through one of the
   [Eventing Samples](../eventing/samples/).

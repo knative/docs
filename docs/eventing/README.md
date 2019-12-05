@@ -31,7 +31,7 @@ To enable delivery to multiple types of Services, Knative Eventing defines two
 generic interfaces that can be implemented by multiple Kubernetes resources:
 
 1. **Addressable** objects are able to receive and acknowledge an event
-   delivered over HTTP to an address defined in their `status.address.hostname`
+   delivered over HTTP to an address defined in their `status.address.url`
    field. As a special case, the core
    [Kubernetes Service object](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#service-v1-core)
    also fulfils the Addressable interface.
@@ -82,6 +82,15 @@ be persisted using Apache Kafka or NATS Streaming.
 
 See the [List of Channel implementations](../eventing/channels/channels.yaml).
 
+### Higher Level eventing constructs
+
+There are cases where you may want to utilize a set of co-operating functions
+together and for those use cases, Knative Eventing provides two additional
+resources:
+
+1. **[Sequence](./sequence.md)** provides a way to define an in-order list of functions.
+1. **[Parallel](./parallel.md)** provides a way to define a list of branches for events.
+
 ### Future design goals
 
 The focus for the next Eventing release will be to enable easy implementation of
@@ -95,11 +104,6 @@ Learn more about Eventing development in the
 
 Knative Eventing currently requires Knative Serving installed with either Istio version >=1.0, or Gloo version >=0.18.16.
 [Follow the instructions to install on the platform of your choice](../install/README.md).
-
-Many of the sources require making outbound connections to create the event
-subscription, and if you have any functions that make use of any external (to
-cluster) services, you must enable it also for them to work.
-[Follow the instructions to configure outbound network access](../serving/outbound-network-access.md).
 
 ## Architecture
 
@@ -307,7 +311,7 @@ Knative Serving application so that they can be consumed.
       certificate.
 
 See the
-[Kafka Source](https://github.com/knative/eventing-contrib/tree/master/kafka/source)
+[Kafka Source](https://github.com/knative/eventing-contrib/tree/{{< branch >}}/kafka/source)
 example.
 
 ### CamelSource
@@ -337,7 +341,7 @@ to be installed into the current namespace.
   development purposes.
 
 See the
-[CamelSource](https://github.com/knative/eventing-contrib/tree/master/camel/source/samples)
+[CamelSource](https://github.com/knative/eventing-contrib/tree/{{< branch >}}/camel/source/samples)
 example.
 
 ## Getting Started

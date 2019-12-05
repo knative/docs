@@ -17,9 +17,13 @@ Resource Types:
 </li><li>
 <a href="#sources.eventing.knative.dev/v1alpha1.CamelSource">CamelSource</a>
 </li><li>
+<a href="#sources.eventing.knative.dev/v1alpha1.CouchDbSource">CouchDbSource</a>
+</li><li>
 <a href="#sources.eventing.knative.dev/v1alpha1.GitHubSource">GitHubSource</a>
 </li><li>
 <a href="#sources.eventing.knative.dev/v1alpha1.KafkaSource">KafkaSource</a>
+</li><li>
+<a href="#sources.eventing.knative.dev/v1alpha1.PrometheusSource">PrometheusSource</a>
 </li></ul>
 <h3 id="sources.eventing.knative.dev/v1alpha1.AwsSqsSource">AwsSqsSource
 </h3>
@@ -230,6 +234,19 @@ Kubernetes core/v1.ObjectReference
 <p>Sink is a reference to an object that will resolve to a domain name to use as the sink.</p>
 </td>
 </tr>
+<tr>
+<td>
+<code>ceOverrides</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1.CloudEventOverrides
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>CloudEventOverrides defines overrides to control the output format and
+modifications of the event sent to the sink.</p>
+</td>
+</tr>
 </table>
 </td>
 </tr>
@@ -239,6 +256,146 @@ Kubernetes core/v1.ObjectReference
 <em>
 <a href="#sources.eventing.knative.dev/v1alpha1.CamelSourceStatus">
 CamelSourceStatus
+</a>
+</em>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sources.eventing.knative.dev/v1alpha1.CouchDbSource">CouchDbSource
+</h3>
+<p>
+<p>CouchDbSource is the Schema for the githubsources API</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>apiVersion</code></br>
+string</td>
+<td>
+<code>
+sources.eventing.knative.dev/v1alpha1
+</code>
+</td>
+</tr>
+<tr>
+<td>
+<code>kind</code></br>
+string
+</td>
+<td><code>CouchDbSource</code></td>
+</tr>
+<tr>
+<td>
+<code>metadata</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
+Kubernetes meta/v1.ObjectMeta
+</a>
+</em>
+</td>
+<td>
+Refer to the Kubernetes API documentation for the fields of the
+<code>metadata</code> field.
+</td>
+</tr>
+<tr>
+<td>
+<code>spec</code></br>
+<em>
+<a href="#sources.eventing.knative.dev/v1alpha1.CouchDbSourceSpec">
+CouchDbSourceSpec
+</a>
+</em>
+</td>
+<td>
+<br/>
+<br/>
+<table>
+<tr>
+<td>
+<code>serviceAccountName</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>ServiceAccountName holds the name of the Kubernetes service account
+as which the underlying K8s resources should be run. If unspecified
+this will default to the &ldquo;default&rdquo; service account for the namespace
+in which the CouchDbSource exists.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>credentials</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
+Kubernetes core/v1.ObjectReference
+</a>
+</em>
+</td>
+<td>
+<p>CouchDbCredentials is the credential to use to access CouchDb.
+Must be a secret. Only Name and Namespace are used.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>feed</code></br>
+<em>
+<a href="#sources.eventing.knative.dev/v1alpha1.FeedType">
+FeedType
+</a>
+</em>
+</td>
+<td>
+<p>Feed changes how CouchDB sends the response.
+More information: <a href="https://docs.couchdb.org/en/stable/api/database/changes.html#changes-feeds">https://docs.couchdb.org/en/stable/api/database/changes.html#changes-feeds</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<code>database</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>Database is the database to watch for changes</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>sink</code></br>
+<em>
+knative.dev/pkg/apis/v1alpha1.Destination
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Sink is a reference to an object that will resolve to a domain name to use as the sink.</p>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<code>status</code></br>
+<em>
+<a href="#sources.eventing.knative.dev/v1alpha1.CouchDbSourceStatus">
+CouchDbSourceStatus
 </a>
 </em>
 </td>
@@ -539,9 +696,7 @@ KafkaSourceNetSpec
 <td>
 <code>sink</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
-Kubernetes core/v1.ObjectReference
-</a>
+knative.dev/pkg/apis/v1alpha1.Destination
 </em>
 </td>
 <td>
@@ -583,6 +738,132 @@ KafkaResourceSpec
 <em>
 <a href="#sources.eventing.knative.dev/v1alpha1.KafkaSourceStatus">
 KafkaSourceStatus
+</a>
+</em>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sources.eventing.knative.dev/v1alpha1.PrometheusSource">PrometheusSource
+</h3>
+<p>
+<p>PrometheusSource is the Schema for the prometheussources API</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>apiVersion</code></br>
+string</td>
+<td>
+<code>
+sources.eventing.knative.dev/v1alpha1
+</code>
+</td>
+</tr>
+<tr>
+<td>
+<code>kind</code></br>
+string
+</td>
+<td><code>PrometheusSource</code></td>
+</tr>
+<tr>
+<td>
+<code>metadata</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
+Kubernetes meta/v1.ObjectMeta
+</a>
+</em>
+</td>
+<td>
+Refer to the Kubernetes API documentation for the fields of the
+<code>metadata</code> field.
+</td>
+</tr>
+<tr>
+<td>
+<code>spec</code></br>
+<em>
+<a href="#sources.eventing.knative.dev/v1alpha1.PrometheusSourceSpec">
+PrometheusSourceSpec
+</a>
+</em>
+</td>
+<td>
+<br/>
+<br/>
+<table>
+<tr>
+<td>
+<code>serviceAccountName</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>ServiceAccountName holds the name of the Kubernetes service account
+as which the underlying K8s resources should be run. If unspecified
+this will default to the &ldquo;default&rdquo; service account for the namespace
+in which the PrometheusSource exists.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>serverURL</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>ServerURL is the URL of the Prometheus server</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>promQL</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>PromQL is the Prometheus query for this source</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>sink</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
+Kubernetes core/v1.ObjectReference
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Sink is a reference to an object that will resolve to a domain
+name to use as the sink.</p>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<code>status</code></br>
+<em>
+<a href="#sources.eventing.knative.dev/v1alpha1.PrometheusSourceStatus">
+PrometheusSourceStatus
 </a>
 </em>
 </td>
@@ -708,69 +989,6 @@ string
 </tr>
 </tbody>
 </table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.CamelSourceOriginComponentSpec">CamelSourceOriginComponentSpec
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.CamelSourceOriginSpec">CamelSourceOriginSpec</a>)
-</p>
-<p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>uri</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<p>URI is a Camel component URI to use as starting point (e.g. &ldquo;timer:tick?period=2s&rdquo;)</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>properties</code></br>
-<em>
-map[string]string
-</em>
-</td>
-<td>
-</td>
-</tr>
-<tr>
-<td>
-<code>serviceAccountName</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>ServiceAccountName is the name of the ServiceAccount to use to run this source.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>context</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>The Camel K context to use when running the source</p>
-</td>
-</tr>
-</tbody>
-</table>
 <h3 id="sources.eventing.knative.dev/v1alpha1.CamelSourceOriginSpec">CamelSourceOriginSpec
 </h3>
 <p>
@@ -790,20 +1008,6 @@ string
 <tbody>
 <tr>
 <td>
-<code>component</code></br>
-<em>
-<a href="#sources.eventing.knative.dev/v1alpha1.CamelSourceOriginComponentSpec">
-CamelSourceOriginComponentSpec
-</a>
-</em>
-</td>
-<td>
-<p>Component is a kind of source that directly references a Camel component
-DEPRECATED</p>
-</td>
-</tr>
-<tr>
-<td>
 <code>integration</code></br>
 <em>
 github.com/apache/camel-k/pkg/apis/camel/v1alpha1.IntegrationSpec
@@ -817,7 +1021,9 @@ github.com/apache/camel-k/pkg/apis/camel/v1alpha1.IntegrationSpec
 <td>
 <code>flow</code></br>
 <em>
-string
+<a href="#sources.eventing.knative.dev/v1alpha1.Flow">
+Flow
+</a>
 </em>
 </td>
 <td>
@@ -870,6 +1076,19 @@ Kubernetes core/v1.ObjectReference
 <p>Sink is a reference to an object that will resolve to a domain name to use as the sink.</p>
 </td>
 </tr>
+<tr>
+<td>
+<code>ceOverrides</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1.CloudEventOverrides
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>CloudEventOverrides defines overrides to control the output format and
+modifications of the event sent to the sink.</p>
+</td>
+</tr>
 </tbody>
 </table>
 <h3 id="sources.eventing.knative.dev/v1alpha1.CamelSourceStatus">CamelSourceStatus
@@ -893,7 +1112,7 @@ Kubernetes core/v1.ObjectReference
 <td>
 <code>Status</code></br>
 <em>
-knative.dev/pkg/apis/duck/v1alpha1.Status
+knative.dev/pkg/apis/duck/v1.Status
 </em>
 </td>
 <td>
@@ -919,6 +1138,157 @@ string
 </tr>
 </tbody>
 </table>
+<h3 id="sources.eventing.knative.dev/v1alpha1.CouchDbSourceSpec">CouchDbSourceSpec
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#sources.eventing.knative.dev/v1alpha1.CouchDbSource">CouchDbSource</a>)
+</p>
+<p>
+<p>CouchDbSourceSpec defines the desired state of CouchDbSource</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>serviceAccountName</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>ServiceAccountName holds the name of the Kubernetes service account
+as which the underlying K8s resources should be run. If unspecified
+this will default to the &ldquo;default&rdquo; service account for the namespace
+in which the CouchDbSource exists.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>credentials</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
+Kubernetes core/v1.ObjectReference
+</a>
+</em>
+</td>
+<td>
+<p>CouchDbCredentials is the credential to use to access CouchDb.
+Must be a secret. Only Name and Namespace are used.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>feed</code></br>
+<em>
+<a href="#sources.eventing.knative.dev/v1alpha1.FeedType">
+FeedType
+</a>
+</em>
+</td>
+<td>
+<p>Feed changes how CouchDB sends the response.
+More information: <a href="https://docs.couchdb.org/en/stable/api/database/changes.html#changes-feeds">https://docs.couchdb.org/en/stable/api/database/changes.html#changes-feeds</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<code>database</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>Database is the database to watch for changes</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>sink</code></br>
+<em>
+knative.dev/pkg/apis/v1alpha1.Destination
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Sink is a reference to an object that will resolve to a domain name to use as the sink.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sources.eventing.knative.dev/v1alpha1.CouchDbSourceStatus">CouchDbSourceStatus
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#sources.eventing.knative.dev/v1alpha1.CouchDbSource">CouchDbSource</a>)
+</p>
+<p>
+<p>CouchDbSourceStatus defines the observed state of CouchDbSource</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>Status</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1beta1.Status
+</em>
+</td>
+<td>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
+<p>inherits duck/v1alpha1 Status, which currently provides:
+* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
+* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>sinkUri</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>SinkURI is the current active sink URI that has been configured
+for the CouchDbSource.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sources.eventing.knative.dev/v1alpha1.FeedType">FeedType
+(<code>string</code> alias)</p></h3>
+<p>
+(<em>Appears on:</em>
+<a href="#sources.eventing.knative.dev/v1alpha1.CouchDbSourceSpec">CouchDbSourceSpec</a>)
+</p>
+<p>
+<p>FeedType is the type of Feed</p>
+</p>
+<h3 id="sources.eventing.knative.dev/v1alpha1.Flow">Flow
+(<code>map[string]interface{}</code> alias)</p></h3>
+<p>
+(<em>Appears on:</em>
+<a href="#sources.eventing.knative.dev/v1alpha1.CamelSourceOriginSpec">CamelSourceOriginSpec</a>)
+</p>
+<p>
+<p>Flow is an unstructured object representing a Camel Flow in YAML/JSON DSL</p>
+</p>
 <h3 id="sources.eventing.knative.dev/v1alpha1.GitHubSourceSpec">GitHubSourceSpec
 </h3>
 <p>
@@ -1391,9 +1761,7 @@ KafkaSourceNetSpec
 <td>
 <code>sink</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
-Kubernetes core/v1.ObjectReference
-</a>
+knative.dev/pkg/apis/v1alpha1.Destination
 </em>
 </td>
 <td>
@@ -1449,7 +1817,7 @@ KafkaResourceSpec
 <td>
 <code>Status</code></br>
 <em>
-knative.dev/pkg/apis/duck/v1alpha1.Status
+knative.dev/pkg/apis/duck/v1.Status
 </em>
 </td>
 <td>
@@ -1541,6 +1909,125 @@ SecretValueFromSource
 <td>
 <em>(Optional)</em>
 <p>CACert is the Kubernetes secret containing the server CA cert.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sources.eventing.knative.dev/v1alpha1.PrometheusSourceSpec">PrometheusSourceSpec
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#sources.eventing.knative.dev/v1alpha1.PrometheusSource">PrometheusSource</a>)
+</p>
+<p>
+<p>PrometheusSourceSpec defines the desired state of PrometheusSource</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>serviceAccountName</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>ServiceAccountName holds the name of the Kubernetes service account
+as which the underlying K8s resources should be run. If unspecified
+this will default to the &ldquo;default&rdquo; service account for the namespace
+in which the PrometheusSource exists.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>serverURL</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>ServerURL is the URL of the Prometheus server</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>promQL</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>PromQL is the Prometheus query for this source</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>sink</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
+Kubernetes core/v1.ObjectReference
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Sink is a reference to an object that will resolve to a domain
+name to use as the sink.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sources.eventing.knative.dev/v1alpha1.PrometheusSourceStatus">PrometheusSourceStatus
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#sources.eventing.knative.dev/v1alpha1.PrometheusSource">PrometheusSource</a>)
+</p>
+<p>
+<p>PrometheusSourceStatus defines the observed state of PrometheusSource</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>Status</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1.Status
+</em>
+</td>
+<td>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
+<p>inherits duck/v1 Status, which currently provides:
+* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
+* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>sinkUri</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>SinkURI is the current active sink URI that has been configured
+for the PrometheusSource.</p>
 </td>
 </tr>
 </tbody>
@@ -2040,5 +2527,5 @@ knative.dev/eventing/pkg/apis/duck/v1alpha1.SubscribableTypeStatus
 <hr/>
 <p><em>
 Generated with <code>gen-crd-api-reference-docs</code>
-on git commit <code>89b43a1d</code>.
+on git commit <code>e9b94f38</code>.
 </em></p>

@@ -2,7 +2,7 @@ In this example, we are going to see how we can create a Parallel with mutually
 exclusive branches.
 
 This example is the same as the
-[multiple barnaches example](../multiple-branches/README.md) except that we are now
+[multiple branches example](../multiple-branches/README.md) except that we are now
 going to rely on the Knative
 [switch](https://github.com/lionelvillard/knative-functions#switch) function
 to provide a soft mutual exclusivity guarantee.
@@ -69,12 +69,33 @@ spec:
 kubectl create -f ./switcher.yaml -f ./transformers.yaml
 ```
 
+### Create the Service displaying the events created by Sequence
+
+```yaml
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: event-display
+spec:
+  template:
+    spec:
+      containers:
+        - image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display
+```
+
+Change `default` below to create the `Sequence` in the Namespace where you want
+your resources to be created.
+
+```shell
+kubectl -n default create -f ./event-display.yaml
+```
+
 ### Create the Parallel object
 
 The `parallel.yaml` file contains the specifications for creating the Parallel object.
 
 ```yaml
-apiVersion: messaging.knative.dev/v1alpha1
+apiVersion: flows.knative.dev/v1alpha1
 kind: Parallel
 metadata:
   name: me-odd-even-parallel
@@ -98,9 +119,10 @@ spec:
           kind: Service
           name: me-odd-transformer
   reply:
-    apiVersion: serving.knative.dev/v1
-    kind: Service
-    name: me-event-display
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: me-event-display
 ```
 
 ```shell
@@ -121,9 +143,10 @@ spec:
   schedule: "*/1 * * * *"
   data: '{"message": "Even or odd?"}'
   sink:
-    apiVersion: messaging.knative.dev/v1alpha1
-    kind: Parallel
-    name: me-odd-even-parallel
+    ref:
+      apiVersion: flows.knative.dev/v1alpha1
+      kind: Parallel
+      name: me-odd-even-parallel
 ```
 
 ```shell

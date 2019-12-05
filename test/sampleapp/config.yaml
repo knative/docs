@@ -58,6 +58,9 @@ languages:
       - "Dockerfile"
   - language: "shell"
     expectedOutput: "Hello Shell Sample v1!"
+    preCommands:
+      - exec: "cp"
+        args: "../../docs/serving/samples/hello-world/helloworld-shell/go.mod helloworld-shell_tmp/go.mod"
     copies:
       - "script.sh"
       - "invoke.go"

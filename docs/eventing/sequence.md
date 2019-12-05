@@ -17,7 +17,7 @@ Sequence has three parts for the Spec:
 1. `Steps` which defines the in-order list of `Subscriber`s, aka, which
    functions are executed in the listed order. These are specified using the
    `eventingv1alpha1.SubscriberSpec` just like you would when creating
-   `Subscription`. Each step should be `Callable`.
+   `Subscription`. Each step should be `Addressable`.
 1. `ChannelTemplate` defines the Template which will be used to create
    `Channel`s between the steps.
 1. `Reply` (Optional) Reference to where the results of the final step in the

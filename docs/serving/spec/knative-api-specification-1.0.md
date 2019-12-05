@@ -30,7 +30,7 @@ APPROVED</p>
 
    </td>
    <td><p style="text-align: right">
-2019-08-02</p>
+2019-11-04</p>
 
    </td>
   </tr>
@@ -38,7 +38,7 @@ APPROVED</p>
    <td><p style="text-align: right">
 <strong>Version</strong></p>
    </td>
-   <td> 1.0  </td>
+   <td> 1.0.1  </td>
   </tr>
 </table>
 
@@ -1188,6 +1188,18 @@ constitutes a request.
    <td>RECOMMENDED
    </td>
   </tr>
+    <tr>
+     <td><code>imagePullSecrets</code>
+     </td>
+     <td>[]<a href="#localobjectreference">LocalObjectReference</a>
+  <br>
+  (Optional)
+     </td>
+     <td>The list of secrets for pulling images from private repositories.
+     </td>
+     <td>RECOMMENDED
+     </td>
+    </tr>
 </table>
 
 ### Status:
@@ -2706,4 +2718,30 @@ Max: 1
    <td>REQUIRED
    </td>
   </tr>
+</table>
+
+## LocalObjectReference
+
+<table>
+  <tr>
+   <td><strong>FieldName</strong>
+   </td>
+   <td><strong>Field Type</strong>
+   </td>
+   <td><strong>Description</strong>
+   </td>
+   <td><strong>Schema Requirement</strong>
+   </td>
+  </tr>
+  <tr>
+   <td><code>name</code>
+   </td>
+   <td>string
+   </td>
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#localobjectreference-v1-core">core/v1.LocalObjectReference</a>.
+   </td>
+   <td>REQUIRED, if imagePullSecrets is supported.
+   </td>
+  </tr>
+
 </table>

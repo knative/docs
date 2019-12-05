@@ -87,7 +87,7 @@ export IOTCORE_TOPIC_DEVICE="iot-demo-device-pubsub-topic"
     controller.
 
     ```shell
-    kubectl apply --filename https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/gcppubsub.yaml
+    kubectl apply --filename https://github.com/knative/eventing-contrib/releases/download/v0.8.2/gcppubsub.yaml
     ```
 
 ### Deploying
@@ -214,5 +214,5 @@ To cleanup the knative resources:
 1.  Remove the `GcpPubSubSource` controller:
 
     ```shell
-    kubectl delete --filename https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/gcppubsub.yaml
+    kubectl delete --filename https://github.com/knative/eventing-contrib/releases/download/v0.8.2/gcppubsub.yaml
     ```

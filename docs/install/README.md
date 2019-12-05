@@ -24,7 +24,7 @@ Knative Services.
 
 Currently, three options exist which provide this functionality:
 [Ambassador](https://www.getambassador.io/), an Envoy-based API Gateway,
-[Gloo](https://gloo.solo.io), an Envoy-based API Gateway, and
+[Gloo](https://docs.solo.io/gloo/latest/), an Envoy-based API Gateway, and
 [Istio](https://istio.io/), an Envoy-based Service Mesh.
 
 ## Installing Knative with Ambassador
@@ -99,7 +99,7 @@ custom install guide:
 > **Note**: If need to set up a Kubernetes cluster with the correct
 > specifications to run Knative, you can follow any of the install instructions
 > through the creation of the cluster, then follow the
-> [Performing a Custom Knative Installation](./knative-custom-install.md) guide.
+> [Performing a Custom Knative Installation](./Knative-custom-install.md) guide.
 
 **Observability install guide**
 
@@ -125,13 +125,12 @@ Now you're ready to deploy an app:
 ## Configuring Knative Serving
 
 After your Knative installation is running, you can set up a custom domain with
-a static IP address to be able to use Knative for publicly available services
-and set up an Istio IP range for outbound network access:
+a static IP address to be able to use Knative for publicly available services,
+and set up TLS certificates to use HTTPS:
 
 - [Assign a static IP address](../serving/gke-assigning-static-ip-address.md)
 - [Configure a custom domain](../serving/using-a-custom-domain.md)
-- [Configure outbound network access](../serving/outbound-network-access.md)
-- [Configuring HTTPS with a custom certificate](../serving/using-an-ssl-cert.md)
+- [Configuring HTTPS with a custom certificate](../serving/using-a-tls-cert.md)
 
 ## Checking the version of your Knative Serving installation
 

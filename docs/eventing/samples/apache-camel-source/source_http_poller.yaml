@@ -1,0 +1,26 @@
+# Apache Camel Http Poller Source
+#
+# Timer Component documentation: https://camel.apache.org/components/latest/timer-component.html
+# Http Component documentation: https://camel.apache.org/components/latest/http-component.html
+#
+# List of available Apache Camel components: https://camel.apache.org/components/latest/
+#
+apiVersion: sources.eventing.knative.dev/v1alpha1
+kind: CamelSource
+metadata:
+  name: camel-http-poller-source
+spec:
+  source:
+    flow:
+      from:
+        uri: timer:tick?period=10s
+        steps:
+          - to: https://gist.githubusercontent.com/nicolaferraro/e3c72ace3c751f9f88273896611ce5fe/raw/3b6f54060bacb56b6719b7386a4645cb59ad6cc1/quote.json
+          - set-header:
+              name: Content-Type
+              constant: application/json
+  sink:
+    ref:
+      apiVersion: messaging.knative.dev/v1alpha1
+      kind: InMemoryChannel
+      name: camel-test

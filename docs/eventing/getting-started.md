@@ -20,7 +20,7 @@ To complete this guide, you will need the following installed and running:
 - [`kubectl` CLI tool](https://kubernetes.io/docs/reference/kubectl/overview/) within a minor version of your Kubernetes cluster.
 - [curl v7.65 or higher](https://curl.haxx.se/download.html)
 - Knative Eventing Component
-   - Knative Eventing In-memory channel Provisioner 
+   - Knative Eventing In-memory channel 
 
 ### Installing Knative Eventing 
 
@@ -30,11 +30,11 @@ If you previously [created a Knative cluster](../install), you might already hav
 kubectl get pods --namespace knative-eventing
 ```
 
-If the `knative-eventing` namespace or the `in-memory-channel-controller-*` does not exist, use the following steps to install Knative Eventing with the in-memory channel provisioner:
+If the `knative-eventing` namespace or the `imc-controller-*` does not exist, use the following steps to install Knative Eventing with the in-memory channel:
 
 1. Make sure that you have a functioning Kubernetes cluster. See the [Comprehensive Install guide](../install) for more information.
    - Old versions of Knative Serving doesn't necessarily work well with latest Knative Eventing, so try to install the latest version of Knative Serving.
-   - If your Kubernetes cluster comes with pre-installed Istio, make sure it has `cluster-local-gateway` [deployed](https://github.com/knative/serving/blob/master/DEVELOPMENT.md#deploy-istio). Depending on which Istio version you have, you'd need to apply the `istio-knative-extras.yaml` in the corresponding version folder at [here](https://github.com/knative/serving/tree/master/third_party).
+   - If your Kubernetes cluster comes with pre-installed Istio, make sure it has `cluster-local-gateway` [deployed](https://github.com/knative/serving/blob/master/DEVELOPMENT.md#deploy-istio). Depending on which Istio version you have, you'd need to apply the `istio-knative-extras.yaml` in the corresponding version folder at [here](https://github.com/knative/serving/tree/{{< branch >}}/third_party).
 2. Install the Eventing CRDs by running the following command:
 
     ```sh
@@ -61,8 +61,6 @@ If the `knative-eventing` namespace or the `in-memory-channel-controller-*` does
     eventing-webhook-6c4f6699d8-qclbx               1/1     Running   0          29m
     imc-controller-85cdb4946b-h2msj                 1/1     Running   0          13m
     imc-dispatcher-5f4689d868-fspt6                 1/1     Running   0          13m
-    in-memory-channel-controller-d9db9d879-f2jw6    1/1     Running   0          13m
-    in-memory-channel-dispatcher-79bc7f46cd-4mvj6   1/1     Running   0          13m
     sources-controller-5847564f4f-z59xc             1/1     Running   0          29m
    ```
 
@@ -106,8 +104,8 @@ The [`Broker`](./broker-trigger.md#broker) ensures that every event sent by even
    This shows the `Broker` that you created:
 
     ```sh
-    NAME      READY   REASON   HOSTNAME                                                           AGE
-    default   True             default-Broker.event-example.svc.cluster.local   1m
+    NAME      READY   REASON   URL                                                        AGE
+    default   True             http://default-broker.event-example.svc.cluster.local      1m
     ```
 
     When the `Broker` has the `READY=True` state, it can begin to manage any events it receives.
@@ -275,7 +273,6 @@ to receive. Your `Broker` uses triggers to forward events to the right consumers
 
     This returns the `hello-display` and `goodbye-display` triggers that you created:
 
-
     ```sh
     NAME                   READY   REASON   BROKER    SUBSCRIBER_URI                                                                 AGE
     goodbye-display        True             default   http://goodbye-display.event-example.svc.cluster.local/                        9s
@@ -340,10 +337,10 @@ To show the various types of events you can send, you will make three requests:
 1. To make the first request, which creates an event that has the `type` `greeting`, run the following in the SSH terminal:
 
     ```sh
-    curl -v "default-broker.event-example.svc.cluster.local" \
+    curl -v "http://default-broker.event-example.svc.cluster.local" \
       -X POST \
       -H "Ce-Id: say-hello" \
-      -H "Ce-Specversion: 0.2" \
+      -H "Ce-Specversion: 0.3" \
       -H "Ce-Type: greeting" \
       -H "Ce-Source: not-sendoff" \
       -H "Content-Type: application/json" \
@@ -364,10 +361,10 @@ To show the various types of events you can send, you will make three requests:
 2. To make the second request, which creates an event that has the `source` `sendoff`, run the following in the SSH terminal:
 
     ```sh
-    curl -v "default-broker.event-example.svc.cluster.local" \
+    curl -v "http://default-broker.event-example.svc.cluster.local" \
       -X POST \
       -H "Ce-Id: say-goodbye" \
-      -H "Ce-Specversion: 0.2" \
+      -H "Ce-Specversion: 0.3" \
       -H "Ce-Type: not-greeting" \
       -H "Ce-Source: sendoff" \
       -H "Content-Type: application/json" \
@@ -387,10 +384,10 @@ To show the various types of events you can send, you will make three requests:
 3. To make the third request, which creates an event that has the `type` `greeting` and the`source` `sendoff`, run the following in the SSH terminal:
 
     ```sh
-    curl -v "default-broker.event-example.svc.cluster.local" \
+    curl -v "http://default-broker.event-example.svc.cluster.local" \
       -X POST \
       -H "Ce-Id: say-hello-goodbye" \
-      -H "Ce-Specversion: 0.2" \
+      -H "Ce-Specversion: 0.3" \
       -H "Ce-Type: greeting" \
       -H "Ce-Source: sendoff" \
       -H "Content-Type: application/json" \
@@ -427,7 +424,7 @@ After sending events, verify that your events were received by the appropriate `
     ☁️  cloudevents.Event
     Validation: valid
     Context Attributes,
-      specversion: 0.2
+      specversion: 0.3
       type: greeting
       source: not-sendoff
       id: say-hello
@@ -442,7 +439,7 @@ After sending events, verify that your events were received by the appropriate `
     ☁️  cloudevents.Event
     Validation: valid
     Context Attributes,
-      specversion: 0.2
+      specversion: 0.3
       type: greeting
       source: sendoff
       id: say-hello-goodbye
@@ -464,12 +461,11 @@ After sending events, verify that your events were received by the appropriate `
 
     This returns the `Attributes` and `Data` of the events you sent to `goodbye-display`:
 
-
     ```sh
     ☁️  cloudevents.Event
     Validation: valid
     Context Attributes,
-       specversion: 0.2
+       specversion: 0.3
        type: not-greeting
        source: sendoff
        id: say-goodbye
@@ -484,7 +480,7 @@ After sending events, verify that your events were received by the appropriate `
      ☁️  cloudevents.Event
      Validation: valid
      Context Attributes,
-       specversion: 0.2
+       specversion: 0.3
        type: greeting
        source: sendoff
        id: say-hello-goodbye
@@ -518,6 +514,4 @@ This removes the namespace and all of its resources from your cluster.
 You've learned the basics of the Knative Eventing workflow. Here are some additional resources to help you continue to build with the Knative Eventing component.
 
 - [Broker and Trigger](./broker-trigger.md)
-- [Eventing with a GitHub source](./samples/github-source.md) 
-
-
+- [Eventing with a GitHub source](./samples/github-source/README.md)

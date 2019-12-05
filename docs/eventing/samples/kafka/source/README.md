@@ -18,7 +18,7 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
 
 1. Install the `KafkaSource` sub-component to your Knative cluster:
    ```
-   kubectl apply -f https://github.com/knative/eventing-contrib/releases/download/v0.9.0/kafka-source.yaml
+   kubectl apply -f https://github.com/knative/eventing-contrib/releases/download/v0.10.1/kafka-source.yaml
 
    ```
 2. Check that the `kafka-controller-manager-0` pod is running.
@@ -47,7 +47,7 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
 - Replicas
 
   ```yaml
-  apiVersion: kafka.strimzi.io/v1alpha1
+  apiVersion: kafka.strimzi.io/v1beta1
   kind: KafkaTopic
   metadata:
     name: knative-demo-topic
@@ -109,9 +109,10 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
      bootstrapServers: my-cluster-kafka-bootstrap.kafka:9092 #note the kafka namespace
      topics: knative-demo-topic
      sink:
-       apiVersion: serving.knative.dev/v1alpha1
-       kind: Service
-       name: event-display
+       ref:
+         apiVersion: serving.knative.dev/v1
+         kind: Service
+         name: event-display
    ```
 
 1. Deploy the event source.
@@ -158,24 +159,21 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
    ```
    $ kubectl logs --selector='serving.knative.dev/service=event-display' -c user-container
 
-   ☁️  CloudEvent: valid ✅
-   Context Attributes,
-     SpecVersion: 0.2
-     Type: dev.knative.kafka.event
-     Source: dubee
-     ID: partition:0/offset:333
-     Time: 2019-03-19T22:32:06.535321588Z
-     ContentType: application/json
-     Extensions:
-       key:
-   Transport Context,
-     URI: /
-     Host: event-display.default.svc.cluster.local
-     Method: POST
-   Data,
-     {
-       "msg": "This is a test!"
-     }
+    ☁️  cloudevents.Event
+    Validation: valid
+    Context Attributes,
+      specversion: 0.3
+      type: dev.knative.kafka.event
+      source: dubee
+      id: partition:0/offset:333
+      time: 2019-10-18T15:23:20.809775386Z
+      contenttype: application/json
+    Extensions,
+      key:
+    Data,
+      {
+        "msg": "This is a test!"
+      }
    ```
 
 ## Teardown Steps
@@ -192,7 +190,7 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
    ```
 3. Remove the Apache Kafka Event Controller
    ```
-   $ kubectl delete -f https://github.com/knative/eventing-contrib/releases/download/v0.9.0/kafka-importer.yaml
+   $ kubectl delete -f https://github.com/knative/eventing-contrib/releases/download/v0.10.1/kafka-importer.yaml
    serviceaccount "kafka-controller-manager" deleted
    clusterrole.rbac.authorization.k8s.io "eventing-sources-kafka-controller" deleted
    clusterrolebinding.rbac.authorization.k8s.io "eventing-sources-kafka-controller" deleted

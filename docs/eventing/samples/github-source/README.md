@@ -41,7 +41,7 @@ spec:
   template:
     spec:
       containers:
-      - image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display
+      - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
 ```
 
 Enter the following command to create the service from `service.yaml`:
@@ -126,7 +126,7 @@ spec:
   sink:
     apiVersion: serving.knative.dev/v1
     kind: Service
-    name: github-event-display
+    name: github-message-dumper
 ```
 
 Then, apply that yaml using `kubectl`:

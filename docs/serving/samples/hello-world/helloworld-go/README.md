@@ -42,7 +42,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-go
    )
 
    func handler(w http.ResponseWriter, r *http.Request) {
-     log.Print("Hello world received a request.")
+     log.Print("helloworld: received a request")
      target := os.Getenv("TARGET")
      if target == "" {
        target = "World"
@@ -51,7 +51,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-go
    }
 
    func main() {
-     log.Print("Hello world sample started.")
+     log.Print("helloworld: starting server...")
 
      http.HandleFunc("/", handler)
 
@@ -60,6 +60,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-go
        port = "8080"
      }
 
+     log.Printf("helloworld: listening on port %s", port)
      log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
    }
    ```
@@ -69,7 +70,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-go
    [Deploying Go servers with Docker](https://blog.golang.org/docker).
 
    ```docker
-   # Use the offical Golang image to create a build artifact.
+   # Use the official Golang image to create a build artifact.
    # This is based on Debian and sets the GOPATH to /go.
    # https://hub.docker.com/_/golang
    FROM golang:1.13 as builder
@@ -77,8 +78,8 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-go
    # Create and change to the app directory.
    WORKDIR /app
 
-   # Retrieve application dependencies.
-   # This allows the container build to reuse cached dependencies.
+   # Retrieve application dependencies using go modules.
+   # Allows container builds to reuse downloaded dependencies.
    COPY go.* ./
    RUN go mod download
 
@@ -86,6 +87,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-go
    COPY . ./
 
    # Build the binary.
+   # -mod=readonly ensures immutable go.mod and go.sum in container builds.
    RUN CGO_ENABLED=0 GOOS=linux go build -mod=readonly -v -o server
 
    # Use the official Alpine image for a lean production container.

@@ -5,7 +5,7 @@ weight: 1
 type: "docs"
 ---
 
-A simple web app written in the [Dart](www.dartlang.org) programming language
+A simple web app written in the [Dart](https://www.dart.dev) programming language
 that you can use for testing. It reads in the env variable `TARGET` and prints
 `"Hello $TARGET"`. If `TARGET` is not specified, it will use `"World"` as
 `TARGET`.
@@ -13,11 +13,11 @@ that you can use for testing. It reads in the env variable `TARGET` and prints
 ## Prerequisites
 
 - A Kubernetes cluster with Knative installed and DNS configured. Follow the
-  [installation instructions](../../../install/README.md) if you need to create
+  [installation instructions](../../../../docs/install/README.md) if you need to create
   one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
-- [dart-sdk](https://www.dartlang.org/tools/sdk#install) installed and
+- [dart-sdk](https://www.dart.dev/tools/sdk#install) installed and
   configured if you want to run the program locally.
 
 ## Recreating the sample code

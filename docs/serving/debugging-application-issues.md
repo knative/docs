@@ -91,8 +91,7 @@ look deeper using Istio
 
 ### Check Ingress status
 
-Before Knative 0.3 we use a LoadBalancer service call `knative-ingressgateway`
-to handle ingress. Since Knative 0.3 we now use `istio-ingressgateway` Service.
+Knative uses a LoadBalancer service called `istio-ingressgateway` Service.
 
 To check the IP address of your Ingress, use
 

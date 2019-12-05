@@ -114,9 +114,9 @@ string.
 
 _After completing this tutorial, consider replacing the code below with existing
 sink resolution helpers provided by Knative: `AddressableType` from
-`[github.com/knative/pkg/apis/duck/v1alpha1](https://github.com/knative/pkg/tree/master/apis/duck/v1alpha1)`
+`[github.com/knative/pkg/apis/duck/v1alpha1](https://github.com/knative/pkg/tree/{{< branch >}}/apis/duck/v1alpha1)`
 and `GetSinkURI` from
-`[github.com/knative/eventing-contrib/pkg/controller/sinks](https://github.com/knative/eventing-contrib/tree/master/pkg/controller/sinks)`._
+`[github.com/knative/eventing-contrib/pkg/controller/sinks](https://github.com/knative/eventing-contrib/tree/{{< branch >}}/pkg/controller/sinks)`._
 
 ```go
 type addressableType struct {

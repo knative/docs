@@ -21,7 +21,7 @@ You must also have the following tools installed:
 
 Install the `KafkaChannel` sub-component on your Knative Eventing cluster:
    ```
-   curl -L "https://github.com/knative/eventing-contrib/releases/download/v0.9.0/kafka-channel.yaml" \
+   curl -L "https://github.com/knative/eventing-contrib/releases/download/v0.10.1/kafka-channel.yaml" \
     | sed 's/REPLACE_WITH_CLUSTER_URL/my-cluster-kafka-bootstrap.kafka:9092/' \
     | kubectl apply --filename -
    ```
@@ -47,7 +47,7 @@ You can now set the `KafkaChannel` CRD as the default channel configuration.
 
 ## Specifying the default channel configuration
 
-To configure the usage of the `KafkaChannel` CRD as the [default channel configuration](channels/default-channels.md), edit the `default-ch-webhook` ConfigMap as follows:
+To configure the usage of the `KafkaChannel` CRD as the [default channel configuration](../../../channels/default-channels.md), edit the `default-ch-webhook` ConfigMap as follows:
 
 ```
 cat <<-EOF | kubectl apply -f -

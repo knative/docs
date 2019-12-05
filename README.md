@@ -52,7 +52,7 @@ hear about that too. In addition to our docs, you can also reach out to the
 community for assistance. For example, ask a documentation specific question on
 the `#docs` channel in [Slack](https://knative.slack.com/).
 
-Also see the [Knative community resouce page](https://knative.dev/community/)
+Also see the [Knative community resource page](https://knative.dev/community/)
 for a list of all the available community resources, including links to the
 various community discussion groups for both development as well as
 troubleshooting.

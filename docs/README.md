@@ -12,7 +12,7 @@ focus on solving mundane but difficult tasks such as:
 
 - [Deploying a container](./serving/getting-started-knative-app.md)
 - [Routing and managing traffic with blue/green deployment](./serving/samples/blue-green-deployment.md)
-- [Scaling automatically and sizing workloads based on demand](./serving/configuring-the-autoscaler.md)
+- [Scaling automatically and sizing workloads based on demand](./serving/autoscaling.md)
 - [Binding running services to eventing ecosystems](./eventing/samples/kubernetes-event-source/)
 
 Developers on Knative can use familiar idioms, languages, and frameworks to
@@ -82,7 +82,6 @@ Follow the links below to learn more about Knative.
 
 ### Configuration and networking
 
-- [Configuring outbound network access](./serving/outbound-network-access.md)
 - [Using a custom domain](./serving/using-a-custom-domain.md)
 - [Assigning a static IP address for Knative on Google Kubernetes Engine](./serving/gke-assigning-static-ip-address.md)
 - [Configuring HTTPS with a custom certificate](./serving/using-a-tls-cert.md)

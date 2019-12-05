@@ -13,7 +13,7 @@ installation. If your cloud platform offers a managed Istio installation, the
 [install guide](./README.md) for your specific platform will have those
 instructions.
 
-For example, the [GKE Install Guide](./knative-with-gke.md) includes the
+For example, the [GKE Install Guide](./Knative-with-GKE.md) includes the
 instructions for installing Istio on your cluster using `gcloud`.
 
 ## Before you begin
@@ -57,7 +57,7 @@ without automatic sidecar injection.
 
    ```shell
    # Download and unpack Istio
-   export ISTIO_VERSION=1.1.7
+   export ISTIO_VERSION=1.3.5
    curl -L https://git.io/getLatestIstio | sh -
    cd istio-${ISTIO_VERSION}
    ```
@@ -317,7 +317,7 @@ rm -rf istio-${ISTIO_VERSION}
 
 - [Install Knative](./README.md).
 - Try the
-  [Getting Started with App Deployment guide](../serving/getting-started-knative-app/)
+  [Getting Started with App Deployment guide](../serving/getting-started-knative-app.md)
   for Knative serving.
 
 [1]:

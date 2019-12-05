@@ -78,12 +78,33 @@ spec:
 kubectl create -f ./filters.yaml -f ./transformers.yaml
 ```
 
+### Create the Service displaying the events created by Sequence
+
+```yaml
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: event-display
+spec:
+  template:
+    spec:
+      containers:
+        - image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display
+```
+
+Change `default` below to create the `Sequence` in the Namespace where you want
+your resources to be created.
+
+```shell
+kubectl -n default create -f ./event-display.yaml
+```
+
 ### Create the Parallel
 
 The `parallel.yaml` file contains the specifications for creating the Parallel.
 
 ```yaml
-apiVersion: messaging.knative.dev/v1alpha1
+apiVersion: flows.knative.dev/v1alpha1
 kind: Parallel
 metadata:
   name: odd-even-parallel
@@ -113,9 +134,10 @@ spec:
           kind: Service
           name: odd-transformer
   reply:
-    apiVersion: serving.knative.dev/v1
-    kind: Service
-    name: event-display
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: event-display
 ```
 
 ```shell
@@ -136,9 +158,10 @@ spec:
   schedule: "*/1 * * * *"
   data: '{"message": "Even or odd?"}'
   sink:
-    apiVersion: messaging.knative.dev/v1alpha1
-    kind: Parallel
-    name: odd-even-parallel
+    ref:
+      apiVersion: flows.knative.dev/v1alpha1
+      kind: Parallel
+      name: odd-even-parallel
 ```
 
 ```shell
