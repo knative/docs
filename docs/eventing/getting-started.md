@@ -498,7 +498,7 @@ After sending events, verify that your events were received by the appropriate `
 
 After you finish this guide, delete your namespace to conserve resources if you do not plan to use them.
 
-Note: If you plan to continue learning about Knative Eventing with one of our [code samples](./samples/_index.md), check the requirements of the sample and make sure you do not need a namespace before you delete `event-example`. You can always reuse your namespaces.
+Note: If you plan to continue learning about Knative Eventing with one of our [code samples](./samples/), check the requirements of the sample and make sure you do not need a namespace before you delete `event-example`. You can always reuse your namespaces.
 
 Run the following command to delete `event-example`:
 

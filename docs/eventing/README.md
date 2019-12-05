@@ -75,7 +75,7 @@ a
 Each channel is a separate Kubernetes [Custom Resource](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
 Events are delivered to Services or forwarded to other channels
 (possibly of a different type) using
-[Subscriptions](https://github.com/knative/eventing/blob/master/pkg/apis/eventing/v1alpha1/subscription_types.go#L35).
+[Subscriptions](https://github.com/knative/eventing/blob/master/pkg/apis/messaging/v1alpha1/subscription_types.go).
 This allows message delivery in a cluster to vary based on requirements, so that
 some events might be handled by an in-memory implementation while others would
 be persisted using Apache Kafka or NATS Streaming.
@@ -117,7 +117,7 @@ The eventing infrastructure supports two forms of event delivery at the moment:
    using
    [Channels](https://github.com/knative/eventing/blob/master/pkg/apis/messaging/v1alpha1/channel_types.go#L57)
    and
-   [Subscriptions](https://github.com/knative/eventing/blob/master/pkg/apis/eventing/v1alpha1/subscription_types.go#L35).
+   [Subscriptions](https://github.com/knative/eventing/blob/master/pkg/apis/messaging/v1alpha1/subscription_types.go).
    In this case, the Channel implementation ensures that messages are delivered
    to the requested destinations and should buffer the events if the destination
    Service is unavailable.
