@@ -31,8 +31,7 @@ Currently, three options exist which provide this functionality:
 
 [Installing with Ambassador](./Knative-with-Ambassador.md) gives us an
 alternative to installing a service mesh for routing to applications with the
-Knative Serving component. Note that Istio is required for the Knative Eventing
-component.
+Knative Serving component.
 
 ## Installing Knative with Gloo
 
