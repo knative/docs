@@ -196,12 +196,13 @@ You should see log lines similar to:
 ☁️  cloudevents.Event
 Validation: valid
 Context Attributes,
-  specversion: 0.3
-  type: dev.knative.apiserver.resource.add
+  specversion: 1.0
+  type: dev.knative.apiserver.resource.update
   source: https://10.96.0.1:443
-  subject: /apis/v1/namespaces/default/events/busybox.15cec7980c1702d1
-  id: 6ea84c37-c2b4-4687-866b-fb1b2c0fe969
-  time: 2019-10-18T15:32:55.855413776Z
+  subject: /apis/v1/namespaces/default/events/testevents.15dd3050eb1e6f50
+  id: e0447eb7-36b5-443b-9d37-faf4fe5c62f0
+  time: 2019-12-04T14:09:30.917608978Z
+  datacontenttype: application/json
 Data,
   {
     "apiVersion": "v1",

@@ -80,13 +80,16 @@ You should see log lines showing the request headers and body from the source:
 ☁️  cloudevents.Event
 Validation: valid
 Context Attributes,
-  specversion: 0.3
+  specversion: 1.0
   type: dev.knative.cronjob.event
   source: /apis/v1/namespaces/default/cronjobsources/test-cronjob-source
-  id: 7f88a38f-35f1-41f6-b72d-6b1af1d64e6e
-  time: 2019-10-18T15:18:00.000829514Z
+  id: d8e761eb-30c7-49a3-a421-cd5895239f2d
+  time: 2019-12-04T14:24:00.000702251Z
+  datacontenttype: application/json
 Data,
-  {"message":"Hello world!"}
+  {
+    "message": "Hello world!"
+  }
 ```
 
 You can also use [`kail`](https://github.com/boz/kail) instead of `kubectl logs`
