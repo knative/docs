@@ -134,6 +134,9 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-csharp
              env:
                - name: TARGET
                  value: "C# Sample v1"
+             ports:
+               - name: http1
+                 containerPort: 80
    ```
 
 ## Building and deploying the sample
@@ -181,7 +184,7 @@ folder) you're ready to build and deploy the sample app.
    the URL below with the URL returned in the previous command.
 
    ```shell
-   curl http://helloworld-csharp.default.1.2.3.4.xip.io
+   curl -H "Host: helloworld-csharp.default.1.2.3.4.xip.io" http://localhost
    Hello C# Sample v1!
    ```
 
