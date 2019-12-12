@@ -24,7 +24,7 @@ If you want to use different type of `Channel`, you will have to modify the
 ![Logical Configuration](./sequence-with-broker-trigger.png)
 
 The functions used in these examples live in
-(https://github.com/vaikas/transformer)[https://github.com/vaikas/transformer]
+[https://github.com/vaikas/transformer](https://github.com/vaikas/transformer).
 
 ## Setup
 
