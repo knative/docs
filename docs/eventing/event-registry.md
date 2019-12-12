@@ -8,7 +8,7 @@ type: "docs"
 
 The Event Registry maintains a catalog of the event types that can be consumed
 from the different Brokers. It introduces a new
-[EventType](../reference/eventing/eventing.md) CRD in order to persist the event
+[EventType](../reference/eventing/) CRD in order to persist the event
 type's information in the cluster's data store.
 
 ## Before you begin
