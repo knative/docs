@@ -6,4 +6,4 @@ type: "docs"
 showlandingtoc: "true"
 ---
 
-{{% readfile file="README.md" relative="true" markdown="true" %}}
+{{% readfile file="README.md" %}}
