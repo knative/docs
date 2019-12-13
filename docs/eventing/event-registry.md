@@ -128,7 +128,7 @@ Here are a few example Triggers that subscribe to events using exact matching on
    spec:
      broker: default
      filter:
-       sourceAndType:
+       attributes:
          type: dev.knative.source.github.push
      subscriber:
        ref:
@@ -153,7 +153,7 @@ Here are a few example Triggers that subscribe to events using exact matching on
    spec:
      broker: default
      filter:
-       sourceAndType:
+       attributes:
          type: dev.knative.source.github.pull_request
          source: https://github.com/knative/eventing
      subscriber:
@@ -174,7 +174,7 @@ Here are a few example Triggers that subscribe to events using exact matching on
    spec:
      broker: default
      filter:
-       sourceAndType:
+       attributes:
          type: dev.knative.kafka.event
          source: /apis/v1/namespaces/default/kafkasources/kafka-sample#knative-demo
      subscriber:
@@ -196,7 +196,7 @@ Here are a few example Triggers that subscribe to events using exact matching on
    spec:
      broker: dev
      filter:
-       sourceAndType:
+       attributes:
          source: //pubsub.googleapis.com/knative/topics/testing
      subscriber:
        ref:

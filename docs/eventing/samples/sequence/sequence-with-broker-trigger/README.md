@@ -166,7 +166,7 @@ metadata:
   name: sequence-trigger
 spec:
   filter:
-    sourceAndType:
+    attributes:
       type: dev.knative.cronjob.event
   subscriber:
     ref:
@@ -202,7 +202,7 @@ metadata:
   name: display-trigger
 spec:
   filter:
-    sourceAndType:
+    attributes:
       type: samples.http.mod3
   subscriber:
     ref:

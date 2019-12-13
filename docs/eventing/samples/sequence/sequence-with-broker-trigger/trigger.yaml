@@ -5,7 +5,7 @@ metadata:
 spec:
   broker: default
   filter:
-    sourceAndType:
+    attributes:
       type: dev.knative.cronjob.event
   subscriber:
     ref:
