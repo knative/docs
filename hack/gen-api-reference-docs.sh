@@ -26,14 +26,17 @@ REFDOCS_REPO="https://${REFDOCS_PKG}.git"
 REFDOCS_VER="v0.1.5"
 
 KNATIVE_SERVING_REPO="github.com/knative/serving"
+KNATIVE_SERVING_LOCAL_REPO="knative.dev/serving"
 KNATIVE_SERVING_COMMIT="${KNATIVE_SERVING_COMMIT:?specify the \$KNATIVE_SERVING_COMMIT variable}"
 KNATIVE_SERVING_OUT_FILE="serving.md"
 
 KNATIVE_EVENTING_REPO="github.com/knative/eventing"
+KNATIVE_EVENTING_LOCAL_REPO="knative.dev/eventing"
 KNATIVE_EVENTING_COMMIT="${KNATIVE_EVENTING_COMMIT:?specify the \$KNATIVE_EVENTING_COMMIT variable}"
 KNATIVE_EVENTING_OUT_FILE="eventing/eventing.md"
 
 KNATIVE_EVENTING_CONTRIB_REPO="github.com/knative/eventing-contrib"
+KNATIVE_EVENTING_CONTRIB_LOCAL_REPO="knative.dev/eventing-contrib"
 KNATIVE_EVENTING_CONTRIB_COMMIT="${KNATIVE_EVENTING_CONTRIB_COMMIT:?specify the \$KNATIVE_EVENTING_CONTRIB_COMMIT variable}"
 KNATIVE_EVENTING_CONTRIB_OUT_FILE="eventing/eventing-contrib.md"
 
@@ -150,21 +153,21 @@ main() {
     out_dir="$(mktemp -d)"
 
     local knative_serving_root
-    knative_serving_root="${clone_root}/src/${KNATIVE_SERVING_REPO}"
+    knative_serving_root="${clone_root}/src/${KNATIVE_SERVING_LOCAL_REPO}"
     clone_at_commit "https://${KNATIVE_SERVING_REPO}.git" "${KNATIVE_SERVING_COMMIT}" \
         "${knative_serving_root}"
     gen_refdocs "${refdocs_bin}" "${clone_root}" "${template_dir}" \
         "${out_dir}/${KNATIVE_SERVING_OUT_FILE}" "${knative_serving_root}" "./pkg/apis"
 
     local knative_eventing_root
-    knative_eventing_root="${clone_root}/src/${KNATIVE_EVENTING_REPO}"
+    knative_eventing_root="${clone_root}/src/${KNATIVE_EVENTING_LOCAL_REPO}"
     clone_at_commit "https://${KNATIVE_EVENTING_REPO}.git" "${KNATIVE_EVENTING_COMMIT}" \
         "${knative_eventing_root}"
     gen_refdocs "${refdocs_bin}" "${clone_root}" "${template_dir}" \
         "${out_dir}/${KNATIVE_EVENTING_OUT_FILE}" "${knative_eventing_root}" "./pkg/apis"
 
     local knative_eventing_contrib_root
-    knative_eventing_contrib_root="${clone_root}/src/${KNATIVE_EVENTING_CONTRIB_REPO}"
+    knative_eventing_contrib_root="${clone_root}/src/${KNATIVE_EVENTING_CONTRIB_LOCAL_REPO}"
     clone_at_commit "https://${KNATIVE_EVENTING_CONTRIB_REPO}.git" "${KNATIVE_EVENTING_CONTRIB_COMMIT}" \
         "${knative_eventing_contrib_root}"
     gen_refdocs "${refdocs_bin}" "${clone_root}" "${template_dir}" \
