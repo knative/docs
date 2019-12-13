@@ -8,7 +8,7 @@ type: "docs"
 
 The Event Registry maintains a catalog of the event types that can be consumed
 from the different Brokers. It introduces a new
-[EventType](../reference/eventing/eventing.md) CRD in order to persist the event
+[EventType](../reference/eventing/) CRD in order to persist the event
 type's information in the cluster's data store.
 
 ## Before you begin
@@ -258,7 +258,7 @@ the next topic: How do we actually populate the registry in the first place?
 
   If you are interested in more information regarding configuration options of a
   KafkaSource, please refer to the
-  [KafKaSource example](https://github.com/knative/eventing-contrib/tree/{{< branch >}}/kafka/source/samples).
+  [KafKaSource sample](./samples/kafka/).
 
   For this discussion, the relevant information from the yaml above are the
   `sink` and the `topics`. We observe that the `sink` is of kind `Broker`. We

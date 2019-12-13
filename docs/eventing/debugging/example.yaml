@@ -40,7 +40,7 @@ metadata:
 
 # The Subscription to the InMemoryChannel.
 
-apiVersion: eventing.knative.dev/v1alpha1
+apiVersion: messaging.knative.dev/v1alpha1
 kind: Subscription
 metadata:
   name: sub

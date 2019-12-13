@@ -56,7 +56,7 @@ cd knative-docs/serving/samples/secrets-go
     log.Print("Secrets sample started.")
 
     // This sets up the standard GCS storage client, which will pull
-    // credentials from GOOGLE_APPLICATION_DEFAULT if specified.
+    // credentials from GOOGLE_APPLICATION_CREDENTIALS if specified.
     ctx := context.Background()
     client, err := storage.NewClient(ctx)
     if err != nil {
@@ -184,7 +184,7 @@ cd knative-docs/serving/samples/secrets-go
                #  - `robot.json` is determined by the "key" that is used to hold the
                #   secret content in the Kubernetes secret.  This can be changed
                #   if both places are changed.
-               - name: GOOGLE_APPLICATION_DEFAULT
+               - name: GOOGLE_APPLICATION_CREDENTIALS
                  value: /var/secret/robot.json
 
              # This section specified where in the container we want the
@@ -248,7 +248,7 @@ folder) you're ready to build and deploy the sample app.
    ```
 
 1. Now you can make a request to your app and see the result. Replace
-   the URL below the with URL returned in the previous command.
+   the URL below with the URL returned in the previous command.
 
    ```shell
    curl http://secrets-go.default.1.2.3.4.xip.io
