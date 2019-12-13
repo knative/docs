@@ -1,11 +1,9 @@
 ---
 title: "Apache Kafka Source Example"
-linkTitle: "Apache Kafka Source Example"
+linkTitle: "Source Example"
 weight: 20
 type: "docs"
 ---
-
-# Apache Kafka - Source Example
 
 Tutorial on how to build and deploy a `KafkaSource` [Eventing source](../../../sources/README.md) using a Knative Serving `Service`.
 
