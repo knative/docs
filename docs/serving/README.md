@@ -36,7 +36,7 @@ serverless workload behaves on the cluster:
   are immutable objects and can be retained for as long as useful. Knative
   Serving Revisions can be automatically scaled up and down according to
   incoming traffic. See
-  [Configuring the Autoscaler](./configuring-the-autoscaler.md) for more
+  [Configuring the Autoscaler](./configuring-autoscaling.md) for more
   information.
 
 ![Diagram that displays how the Serving resources coordinate with each other.](https://github.com/knative/serving/raw/master/docs/spec/images/object_model.png)

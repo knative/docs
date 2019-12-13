@@ -29,7 +29,7 @@ git commit -m "Initial commit" --allow-empty
 ## Create a Kubebuilder project
 
 _When in doubt, the
-[Kubebuilder Quick Start docs](https://book.kubebuilder.io/quick_start.html) are
+[Kubebuilder Quick Start docs](https://book.kubebuilder.io/quick-start.html) are
 likely more current than these instructions._
 
 Use the `kubebuilder init` command in the repo root directory to create the

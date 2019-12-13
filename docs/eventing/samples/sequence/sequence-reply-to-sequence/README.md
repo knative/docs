@@ -13,7 +13,7 @@ finally displaying the resulting output.
 ![Logical Configuration](./sequence-reply-to-sequence.png)
 
 The functions used in these examples live in
-(https://github.com/vaikas/transformer)[https://github.com/vaikas/transformer]
+[https://github.com/vaikas/transformer](https://github.com/vaikas/transformer).
 
 ## Prerequisites
 

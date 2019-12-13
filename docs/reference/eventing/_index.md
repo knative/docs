@@ -5,4 +5,4 @@ weight: 30
 type: "docs"
 ---
 
-{{< readfile file="eventing.md" relative="true" >}}
+{{< readfile file="eventing.md" >}}
