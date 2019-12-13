@@ -210,7 +210,7 @@ kubectl get VirtualService entry-route --output yaml
 
 3.  Send a request to the `Search` service and the `Login` service by using
     corresponding URIs. You should get the same results as directly accessing
-    these services. \_ Get the ingress IP:
+    these services. Get the ingress IP:
 
     ```shell
     INGRESSGATEWAY=istio-ingressgateway
