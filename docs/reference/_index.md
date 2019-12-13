@@ -1,8 +1,8 @@
 ---
 title: "Knative Reference Documentation"
-linkTitle: "Reference and API"
+linkTitle: "Reference"
 weight: 100
 type: "docs"
 ---
 
-Knative API and reference documentation.
+{{< readfile file="README.md" relative="true" >}}
