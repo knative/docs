@@ -12,7 +12,7 @@ can then do either external work, or out of band create additional events.
 ![Logical Configuration](./sequence-terminal.png)
 
 The functions used in these examples live in
-(https://github.com/vaikas/transformer)[https://github.com/vaikas/transformer]
+[https://github.com/vaikas/transformer](https://github.com/vaikas/transformer).
 
 ## Prerequisites
 
