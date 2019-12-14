@@ -36,7 +36,7 @@ Resource Types:
 Users create new Revisions by updating the Configuration&rsquo;s spec.
 The &ldquo;latest created&rdquo; revision&rsquo;s name is available under status, as is the
 &ldquo;latest ready&rdquo; revision&rsquo;s name.
-See also: <a href="https://knative.dev/serving/blob/master/docs/spec/overview.md#configuration">https://knative.dev/serving/blob/master/docs/spec/overview.md#configuration</a></p>
+See also: <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#configuration">https://github.com/knative/serving/blob/master/docs/spec/overview.md#configuration</a></p>
 </p>
 <table>
 <thead>
@@ -130,7 +130,7 @@ ConfigurationStatus
 <p>Revision is an immutable snapshot of code and configuration.  A revision
 references a container image. Revisions are created by updates to a
 Configuration.</p>
-<p>See also: <a href="https://knative.dev/serving/blob/master/docs/spec/overview.md#revision">https://knative.dev/serving/blob/master/docs/spec/overview.md#revision</a></p>
+<p>See also: <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#revision">https://github.com/knative/serving/blob/master/docs/spec/overview.md#revision</a></p>
 </p>
 <table>
 <thead>
@@ -256,7 +256,7 @@ Some of the Revisions a Route distributes traffic over may be specified by
 referencing the Configuration responsible for creating them; in these cases
 the Route is additionally responsible for monitoring the Configuration for
 &ldquo;latest ready revision&rdquo; changes, and smoothly rolling out latest revisions.
-See also: <a href="https://knative.dev/serving/blob/master/docs/spec/overview.md#route">https://knative.dev/serving/blob/master/docs/spec/overview.md#route</a></p>
+See also: <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#route">https://github.com/knative/serving/blob/master/docs/spec/overview.md#route</a></p>
 </p>
 <table>
 <thead>
@@ -359,7 +359,7 @@ underlying Routes and Configurations (much as a kubernetes Deployment
 orchestrates ReplicaSets), and its usage is optional but recommended.</p>
 <p>The Service&rsquo;s controller will track the statuses of its owned Configuration
 and Route, reflecting their statuses and conditions as its own.</p>
-<p>See also: <a href="https://knative.dev/serving/blob/master/docs/spec/overview.md#service">https://knative.dev/serving/blob/master/docs/spec/overview.md#service</a></p>
+<p>See also: <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#service">https://github.com/knative/serving/blob/master/docs/spec/overview.md#service</a></p>
 </p>
 <table>
 <thead>
@@ -552,7 +552,7 @@ int64
 when metadata.generation was not being incremented by the api server</p>
 <p>This property will be dropped in future Knative releases and should
 not be used - use metadata.generation</p>
-<p>Tracking issue: <a href="https://knative.dev/serving/issues/643">https://knative.dev/serving/issues/643</a></p>
+<p>Tracking issue: <a href="https://github.com/knative/serving/issues/643">https://github.com/knative/serving/issues/643</a></p>
 </td>
 </tr>
 <tr>
@@ -837,7 +837,7 @@ int64
 when metadata.generation was not being incremented by the api server</p>
 <p>This property will be dropped in future Knative releases and should
 not be used - use metadata.generation</p>
-<p>Tracking issue: <a href="https://knative.dev/serving/issues/643">https://knative.dev/serving/issues/643</a></p>
+<p>Tracking issue: <a href="https://github.com/knative/serving/issues/643">https://github.com/knative/serving/issues/643</a></p>
 </td>
 </tr>
 <tr>
@@ -1363,7 +1363,7 @@ int64
 when metadata.generation was not being incremented by the api server</p>
 <p>This property will be dropped in future Knative releases and should
 not be used - use metadata.generation</p>
-<p>Tracking issue: <a href="https://knative.dev/serving/issues/643">https://knative.dev/serving/issues/643</a></p>
+<p>Tracking issue: <a href="https://github.com/knative/serving/issues/643">https://github.com/knative/serving/issues/643</a></p>
 </td>
 </tr>
 <tr>
@@ -2127,7 +2127,7 @@ int64
 when metadata.generation was not being incremented by the api server</p>
 <p>This property will be dropped in future Knative releases and should
 not be used - use metadata.generation</p>
-<p>Tracking issue: <a href="https://knative.dev/serving/issues/643">https://knative.dev/serving/issues/643</a></p>
+<p>Tracking issue: <a href="https://github.com/knative/serving/issues/643">https://github.com/knative/serving/issues/643</a></p>
 </td>
 </tr>
 <tr>
@@ -2598,7 +2598,7 @@ Resource Types:
 Users create new Revisions by updating the Configuration&rsquo;s spec.
 The &ldquo;latest created&rdquo; revision&rsquo;s name is available under status, as is the
 &ldquo;latest ready&rdquo; revision&rsquo;s name.
-See also: <a href="https://knative.dev/serving/blob/master/docs/spec/overview.md#configuration">https://knative.dev/serving/blob/master/docs/spec/overview.md#configuration</a></p>
+See also: <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#configuration">https://github.com/knative/serving/blob/master/docs/spec/overview.md#configuration</a></p>
 </p>
 <table>
 <thead>
@@ -2692,7 +2692,7 @@ ConfigurationStatus
 <p>Revision is an immutable snapshot of code and configuration.  A revision
 references a container image. Revisions are created by updates to a
 Configuration.</p>
-<p>See also: <a href="https://knative.dev/serving/blob/master/docs/spec/overview.md#revision">https://knative.dev/serving/blob/master/docs/spec/overview.md#revision</a></p>
+<p>See also: <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#revision">https://github.com/knative/serving/blob/master/docs/spec/overview.md#revision</a></p>
 </p>
 <table>
 <thead>
@@ -2818,7 +2818,7 @@ Some of the Revisions a Route distributes traffic over may be specified by
 referencing the Configuration responsible for creating them; in these cases
 the Route is additionally responsible for monitoring the Configuration for
 &ldquo;latest ready revision&rdquo; changes, and smoothly rolling out latest revisions.
-See also: <a href="https://knative.dev/serving/blob/master/docs/spec/overview.md#route">https://knative.dev/serving/blob/master/docs/spec/overview.md#route</a></p>
+See also: <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#route">https://github.com/knative/serving/blob/master/docs/spec/overview.md#route</a></p>
 </p>
 <table>
 <thead>
@@ -2921,7 +2921,7 @@ underlying Routes and Configurations (much as a kubernetes Deployment
 orchestrates ReplicaSets), and its usage is optional but recommended.</p>
 <p>The Service&rsquo;s controller will track the statuses of its owned Configuration
 and Route, reflecting their statuses and conditions as its own.</p>
-<p>See also: <a href="https://knative.dev/serving/blob/master/docs/spec/overview.md#service">https://knative.dev/serving/blob/master/docs/spec/overview.md#service</a></p>
+<p>See also: <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#service">https://github.com/knative/serving/blob/master/docs/spec/overview.md#service</a></p>
 </p>
 <table>
 <thead>
@@ -3808,7 +3808,7 @@ and optionally how the containers those revisions reference are built.
 Users create new Revisions by updating the Configuration&rsquo;s spec.
 The &ldquo;latest created&rdquo; revision&rsquo;s name is available under status, as is the
 &ldquo;latest ready&rdquo; revision&rsquo;s name.
-See also: <a href="https://knative.dev/serving/blob/master/docs/spec/overview.md#configuration">https://knative.dev/serving/blob/master/docs/spec/overview.md#configuration</a></p>
+See also: <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#configuration">https://github.com/knative/serving/blob/master/docs/spec/overview.md#configuration</a></p>
 </p>
 <table>
 <thead>
@@ -3878,7 +3878,7 @@ int64
 when metadata.generation was not being incremented by the api server</p>
 <p>This property will be dropped in future Knative releases and should
 not be used - use metadata.generation</p>
-<p>Tracking issue: <a href="https://knative.dev/serving/issues/643">https://knative.dev/serving/issues/643</a></p>
+<p>Tracking issue: <a href="https://github.com/knative/serving/issues/643">https://github.com/knative/serving/issues/643</a></p>
 </td>
 </tr>
 <tr>
@@ -3953,7 +3953,7 @@ ConfigurationStatus
 references a container image, and optionally a build that is responsible for
 materializing that container image from source. Revisions are created by
 updates to a Configuration.</p>
-<p>See also: <a href="https://knative.dev/serving/blob/master/docs/spec/overview.md#revision">https://knative.dev/serving/blob/master/docs/spec/overview.md#revision</a></p>
+<p>See also: <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#revision">https://github.com/knative/serving/blob/master/docs/spec/overview.md#revision</a></p>
 </p>
 <table>
 <thead>
@@ -4038,7 +4038,7 @@ int64
 when metadata.generation was not being incremented by the api server</p>
 <p>This property will be dropped in future Knative releases and should
 not be used - use metadata.generation</p>
-<p>Tracking issue: <a href="https://knative.dev/serving/issues/643">https://knative.dev/serving/issues/643</a></p>
+<p>Tracking issue: <a href="https://github.com/knative/serving/issues/643">https://github.com/knative/serving/issues/643</a></p>
 </td>
 </tr>
 <tr>
@@ -4120,7 +4120,7 @@ In the context of a Revision, we disallow a number of the fields of
 this Container, including: name and lifecycle.
 See also the runtime contract for more information about the execution
 environment:
-<a href="https://knative.dev/serving/blob/master/docs/runtime-contract.md">https://knative.dev/serving/blob/master/docs/runtime-contract.md</a></p>
+<a href="https://github.com/knative/serving/blob/master/docs/runtime-contract.md">https://github.com/knative/serving/blob/master/docs/runtime-contract.md</a></p>
 </td>
 </tr>
 </table>
@@ -4150,7 +4150,7 @@ Some of the Revisions a Route distributes traffic over may be specified by
 referencing the Configuration responsible for creating them; in these cases
 the Route is additionally responsible for monitoring the Configuration for
 &ldquo;latest ready&rdquo; revision changes, and smoothly rolling out latest revisions.
-See also: <a href="https://knative.dev/serving/blob/master/docs/spec/overview.md#route">https://knative.dev/serving/blob/master/docs/spec/overview.md#route</a></p>
+See also: <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#route">https://github.com/knative/serving/blob/master/docs/spec/overview.md#route</a></p>
 </p>
 <table>
 <thead>
@@ -4220,7 +4220,7 @@ int64
 when metadata.generation was not being incremented by the api server</p>
 <p>This property will be dropped in future Knative releases and should
 not be used - use metadata.generation</p>
-<p>Tracking issue: <a href="https://knative.dev/serving/issues/643">https://knative.dev/serving/issues/643</a></p>
+<p>Tracking issue: <a href="https://github.com/knative/serving/issues/643">https://github.com/knative/serving/issues/643</a></p>
 </td>
 </tr>
 <tr>
@@ -4268,7 +4268,7 @@ underlying Routes and Configurations (much as a kubernetes Deployment
 orchestrates ReplicaSets), and its usage is optional but recommended.</p>
 <p>The Service&rsquo;s controller will track the statuses of its owned Configuration
 and Route, reflecting their statuses and conditions as its own.</p>
-<p>See also: <a href="https://knative.dev/serving/blob/master/docs/spec/overview.md#service">https://knative.dev/serving/blob/master/docs/spec/overview.md#service</a></p>
+<p>See also: <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#service">https://github.com/knative/serving/blob/master/docs/spec/overview.md#service</a></p>
 </p>
 <table>
 <thead>
@@ -4337,7 +4337,7 @@ int64
 when metadata.generation was not being incremented by the api server</p>
 <p>This property will be dropped in future Knative releases and should
 not be used - use metadata.generation</p>
-<p>Tracking issue: <a href="https://knative.dev/serving/issues/643">https://knative.dev/serving/issues/643</a></p>
+<p>Tracking issue: <a href="https://github.com/knative/serving/issues/643">https://github.com/knative/serving/issues/643</a></p>
 </td>
 </tr>
 <tr>
@@ -4523,7 +4523,7 @@ int64
 when metadata.generation was not being incremented by the api server</p>
 <p>This property will be dropped in future Knative releases and should
 not be used - use metadata.generation</p>
-<p>Tracking issue: <a href="https://knative.dev/serving/issues/643">https://knative.dev/serving/issues/643</a></p>
+<p>Tracking issue: <a href="https://github.com/knative/serving/issues/643">https://github.com/knative/serving/issues/643</a></p>
 </td>
 </tr>
 <tr>
@@ -4689,7 +4689,7 @@ TODO(vagababov): retire completely in 0.9.</p>
 </p>
 <p>
 <p>DeprecatedRevisionServingStateType is an enumeration of the levels of serving readiness of the Revision.
-See also: <a href="https://knative.dev/serving/blob/master/docs/spec/errors.md#error-conditions-and-reporting">https://knative.dev/serving/blob/master/docs/spec/errors.md#error-conditions-and-reporting</a></p>
+See also: <a href="https://github.com/knative/serving/blob/master/docs/spec/errors.md#error-conditions-and-reporting">https://github.com/knative/serving/blob/master/docs/spec/errors.md#error-conditions-and-reporting</a></p>
 </p>
 <h3 id="serving.knative.dev/v1alpha1.ManualType">ManualType
 </h3>
@@ -4856,7 +4856,7 @@ int64
 when metadata.generation was not being incremented by the api server</p>
 <p>This property will be dropped in future Knative releases and should
 not be used - use metadata.generation</p>
-<p>Tracking issue: <a href="https://knative.dev/serving/issues/643">https://knative.dev/serving/issues/643</a></p>
+<p>Tracking issue: <a href="https://github.com/knative/serving/issues/643">https://github.com/knative/serving/issues/643</a></p>
 </td>
 </tr>
 <tr>
@@ -4938,7 +4938,7 @@ In the context of a Revision, we disallow a number of the fields of
 this Container, including: name and lifecycle.
 See also the runtime contract for more information about the execution
 environment:
-<a href="https://knative.dev/serving/blob/master/docs/runtime-contract.md">https://knative.dev/serving/blob/master/docs/runtime-contract.md</a></p>
+<a href="https://github.com/knative/serving/blob/master/docs/runtime-contract.md">https://github.com/knative/serving/blob/master/docs/runtime-contract.md</a></p>
 </td>
 </tr>
 </tbody>
@@ -5092,7 +5092,7 @@ int64
 when metadata.generation was not being incremented by the api server</p>
 <p>This property will be dropped in future Knative releases and should
 not be used - use metadata.generation</p>
-<p>Tracking issue: <a href="https://knative.dev/serving/issues/643">https://knative.dev/serving/issues/643</a></p>
+<p>Tracking issue: <a href="https://github.com/knative/serving/issues/643">https://github.com/knative/serving/issues/643</a></p>
 </td>
 </tr>
 <tr>
@@ -5174,7 +5174,7 @@ In the context of a Revision, we disallow a number of the fields of
 this Container, including: name and lifecycle.
 See also the runtime contract for more information about the execution
 environment:
-<a href="https://knative.dev/serving/blob/master/docs/runtime-contract.md">https://knative.dev/serving/blob/master/docs/runtime-contract.md</a></p>
+<a href="https://github.com/knative/serving/blob/master/docs/runtime-contract.md">https://github.com/knative/serving/blob/master/docs/runtime-contract.md</a></p>
 </td>
 </tr>
 </table>
@@ -5213,7 +5213,7 @@ int64
 when metadata.generation was not being incremented by the api server</p>
 <p>This property will be dropped in future Knative releases and should
 not be used - use metadata.generation</p>
-<p>Tracking issue: <a href="https://knative.dev/serving/issues/643">https://knative.dev/serving/issues/643</a></p>
+<p>Tracking issue: <a href="https://github.com/knative/serving/issues/643">https://github.com/knative/serving/issues/643</a></p>
 </td>
 </tr>
 <tr>
@@ -5438,7 +5438,7 @@ int64
 when metadata.generation was not being incremented by the api server</p>
 <p>This property will be dropped in future Knative releases and should
 not be used - use metadata.generation</p>
-<p>Tracking issue: <a href="https://knative.dev/serving/issues/643">https://knative.dev/serving/issues/643</a></p>
+<p>Tracking issue: <a href="https://github.com/knative/serving/issues/643">https://github.com/knative/serving/issues/643</a></p>
 </td>
 </tr>
 <tr>
