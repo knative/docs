@@ -224,9 +224,7 @@ CamelSourceOriginSpec
 <td>
 <code>sink</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
-Kubernetes core/v1.ObjectReference
-</a>
+knative.dev/pkg/apis/duck/v1beta1.Destination
 </em>
 </td>
 <td>
@@ -379,7 +377,7 @@ string
 <td>
 <code>sink</code></br>
 <em>
-knative.dev/pkg/apis/v1alpha1.Destination
+knative.dev/pkg/apis/duck/v1beta1.Destination
 </em>
 </td>
 <td>
@@ -538,9 +536,7 @@ secret token</p>
 <td>
 <code>sink</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
-Kubernetes core/v1.ObjectReference
-</a>
+knative.dev/pkg/apis/duck/v1beta1.Destination
 </em>
 </td>
 <td>
@@ -696,7 +692,7 @@ KafkaSourceNetSpec
 <td>
 <code>sink</code></br>
 <em>
-knative.dev/pkg/apis/v1alpha1.Destination
+knative.dev/pkg/apis/duck/v1beta1.Destination
 </em>
 </td>
 <td>
@@ -842,16 +838,63 @@ string
 </tr>
 <tr>
 <td>
-<code>sink</code></br>
+<code>authTokenFile</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
-Kubernetes core/v1.ObjectReference
-</a>
+string
 </em>
 </td>
 <td>
 <em>(Optional)</em>
-<p>Sink is a reference to an object that will resolve to a domain
+<p>The name of the file containing the authenication token</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>caCertConfigMap</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>The name of the config map containing the CA certificate of the
+Prometheus service&rsquo;s signer.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>schedule</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>A crontab-formatted schedule for running the PromQL query</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>step</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Query resolution step width in duration format or float number of seconds.
+Prometheus duration strings are of the form [0-9]+[smhdwy].</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>sink</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1beta1.Destination
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Sink is a reference to an object that will resolve to a host
 name to use as the sink.</p>
 </td>
 </tr>
@@ -1066,9 +1109,7 @@ CamelSourceOriginSpec
 <td>
 <code>sink</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
-Kubernetes core/v1.ObjectReference
-</a>
+knative.dev/pkg/apis/duck/v1beta1.Destination
 </em>
 </td>
 <td>
@@ -1213,7 +1254,7 @@ string
 <td>
 <code>sink</code></br>
 <em>
-knative.dev/pkg/apis/v1alpha1.Destination
+knative.dev/pkg/apis/duck/v1beta1.Destination
 </em>
 </td>
 <td>
@@ -1383,9 +1424,7 @@ secret token</p>
 <td>
 <code>sink</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
-Kubernetes core/v1.ObjectReference
-</a>
+knative.dev/pkg/apis/duck/v1beta1.Destination
 </em>
 </td>
 <td>
@@ -1441,7 +1480,7 @@ bool
 <td>
 <code>Status</code></br>
 <em>
-knative.dev/pkg/apis/duck/v1alpha1.Status
+knative.dev/pkg/apis/duck/v1.Status
 </em>
 </td>
 <td>
@@ -1761,7 +1800,7 @@ KafkaSourceNetSpec
 <td>
 <code>sink</code></br>
 <em>
-knative.dev/pkg/apis/v1alpha1.Destination
+knative.dev/pkg/apis/duck/v1beta1.Destination
 </em>
 </td>
 <td>
@@ -1969,16 +2008,63 @@ string
 </tr>
 <tr>
 <td>
-<code>sink</code></br>
+<code>authTokenFile</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
-Kubernetes core/v1.ObjectReference
-</a>
+string
 </em>
 </td>
 <td>
 <em>(Optional)</em>
-<p>Sink is a reference to an object that will resolve to a domain
+<p>The name of the file containing the authenication token</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>caCertConfigMap</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>The name of the config map containing the CA certificate of the
+Prometheus service&rsquo;s signer.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>schedule</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>A crontab-formatted schedule for running the PromQL query</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>step</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Query resolution step width in duration format or float number of seconds.
+Prometheus duration strings are of the form [0-9]+[smhdwy].</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>sink</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1beta1.Destination
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Sink is a reference to an object that will resolve to a host
 name to use as the sink.</p>
 </td>
 </tr>
@@ -2527,5 +2613,5 @@ knative.dev/eventing/pkg/apis/duck/v1alpha1.SubscribableTypeStatus
 <hr/>
 <p><em>
 Generated with <code>gen-crd-api-reference-docs</code>
-on git commit <code>e9b94f38</code>.
+on git commit <code>c409ee07</code>.
 </em></p>
