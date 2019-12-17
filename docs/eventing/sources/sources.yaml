@@ -24,6 +24,14 @@ metaSources:
     description: >
       SampleSource is a reference implementation supporting the
       [Writing an Event Source the Hard Way tutorial](../samples/writing-a-source).
+  - name: Sample Source
+    url: https://github.com/knative/sample-source
+    status: Active Development
+    support: Knative
+    description: >
+      Used as reference implementation supporting
+      [Writing an Event Source from Scratch tutorial](../samples/writing-ra-source).
+
 
 # Sources are event sources that users can install and use directly.
 sources:
