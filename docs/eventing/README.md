@@ -98,7 +98,6 @@ event sources. Sources manage registration and delivery of events from external
 systems using Kubernetes
 [Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
 Learn more about Eventing development in the
-[Eventing work group](../../contributing/WORKING-GROUPS.md#events).
 
 ## Installation
 
