@@ -15,7 +15,7 @@ metadata:
 spec:
   broker: default
   filter:
-    sourceAndType:
+    attributes:
       type: samples.http.mod3
   subscriber:
     ref:
