@@ -6,7 +6,7 @@ spec:
   template:
     spec:
       containers:
-      - image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display
+      - image: gcr.io/knative-releases/knative.dev/eventing-sources/cmd/event_display
 ---
 apiVersion: eventing.knative.dev/v1alpha1
 kind: Trigger

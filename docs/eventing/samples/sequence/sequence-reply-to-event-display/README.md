@@ -12,7 +12,7 @@ taking the output of that `Sequence` and displaying the resulting output.
 ![Logical Configuration](./sequence-reply-to-event-display.png)
 
 The functions used in these examples live in
-[https://github.com/vaikas/transformer](https://github.com/vaikas/transformer).
+[https://github.com/knative/eventing-contrib/blob/master/cmd/appender/main.go](https://github.com/knative/eventing-contrib/blob/master/cmd/appender/main.go).
 
 ## Prerequisites
 
@@ -40,10 +40,10 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/vaikas-knative/cmd-736bbd9d5a42b6282732cf4569e3c0ff@sha256:f069e4e58d6b420d66304d3bbde019160eb12ca17bb98fc3b88e0de5ad2cacd1
+        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/appender
           env:
-            - name: STEP
-              value: "0"
+            - name: MESSAGE
+              value: " - Handled by 0"
 
 ---
 apiVersion: serving.knative.dev/v1
@@ -54,10 +54,10 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/vaikas-knative/cmd-736bbd9d5a42b6282732cf4569e3c0ff@sha256:f069e4e58d6b420d66304d3bbde019160eb12ca17bb98fc3b88e0de5ad2cacd1
+        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/appender
           env:
-            - name: STEP
-              value: "1"
+            - name: MESSAGE
+              value: " - Handled by 1"
 ---
 apiVersion: serving.knative.dev/v1
 kind: Service
@@ -67,10 +67,10 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/vaikas-knative/cmd-736bbd9d5a42b6282732cf4569e3c0ff@sha256:f069e4e58d6b420d66304d3bbde019160eb12ca17bb98fc3b88e0de5ad2cacd1
+        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/appender
           env:
-            - name: STEP
-              value: "2"
+            - name: MESSAGE
+              value: " - Handled by 2"
 ---
 
 ```
@@ -132,7 +132,7 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display
+        - image: gcr.io/knative-releases/knative.dev/eventing-sources/cmd/event_display
 ```
 
 Change `default` below to create the `Sequence` in the Namespace where you want
