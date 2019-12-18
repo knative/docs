@@ -23,12 +23,12 @@ Key takeaways from the steering meeting are:
     *   We value transparency and visibility
     *   We focus on what is right for our users
     *   We value feedback
-*   The Steering Committee will make adjustments to provide the opportunity for wider inclusion. This concretely translates to opening additional seats providing end-user and community voices a place in the discussion. The details will be shaped over the coming weeks.
+*   The Steering Committee will make adjustments to provide the **opportunity for wider inclusion**. This concretely translates to opening additional seats providing end-user and community voices a place in the discussion. The details will be shaped over the coming weeks.
 *   We will be creating a comprehensive contribution ladder that defines how contributors can become eligible for every role in the project.
     *   The community needs many kinds of contributions to be successful. We will recognize contributors with defined roles. With that in mind we will update our project roles as follows:
-        *   Create an opportunity for workgroup leadership by both technical and non-technical individuals, who can focus on different elements of running a workgroup (technical specialization and organizational specialization).
-        *   Create a scribe role, which recognizes individuals who write notes from WGs. This is in line with our transparency value and recognizing non-technical contributions. \
-        *   Create a mentor/sponsor role which is open to any approver or lead interested in mentoring new members in the community. Mentorship is open to anyone but the program will primarily focus on underrepresented groups. This is in line with our Welcoming value.
+        *   Create an opportunity for **workgroup leadership by both technical and non-technical individuals**, who can focus on different elements of running a workgroup (technical specialization and organizational specialization).
+        *   Create a **scribe role**, which recognizes individuals who write notes from WGs. This is in line with our transparency value and recognizing non-technical contributions. \
+        *   Create a **mentor/sponsor role** which is open to any approver or lead interested in mentoring new members in the community. Mentorship is open to anyone but the program will primarily focus on underrepresented groups. This is in line with our Welcoming value.
 *   We will write up answers to the questions asked in the December 9th Steering Committee AMA to over time build up a FAQ we can refer to in the future.
 *   Finally, we discussed having a one-day event for the community and our users. For this to be successful we will need the community to submit presentations so we would like to gauge interest for something like that this winter.
 
