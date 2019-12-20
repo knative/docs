@@ -51,7 +51,7 @@ https://docs.pivotal.io/runtimes/pks/1-1/cluster-credentials.html.
 Knative depends on Istio. If your cloud platform offers a managed Istio
 installation, we recommend installing Istio that way, unless you need the
 ability to customize your installation. For example, the
-[GKE Install Guide](./knative-with-gke.md) includes the instructions for
+[GKE Install Guide](./Knative-with-GKE.md) includes the instructions for
 installing Istio on your cluster using `gcloud`.
 
 If you prefer to install Istio manually, if your cloud provider doesn't offer a
