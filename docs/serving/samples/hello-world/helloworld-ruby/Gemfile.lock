@@ -2,7 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     mustermann (1.0.2)
-    rack (2.0.6)
+    rack (2.0.8)
     rack-protection (2.0.3)
       rack
     sinatra (2.0.3)
