@@ -51,7 +51,7 @@ https://docs.pivotal.io/runtimes/pks/1-1/cluster-credentials.html.
 Knative depends on Istio. If your cloud platform offers a managed Istio
 installation, we recommend installing Istio that way, unless you need the
 ability to customize your installation. For example, the
-[GKE Install Guide](./knative-with-gke.md) includes the instructions for
+[GKE Install Guide](./Knative-with-GKE.md) includes the instructions for
 installing Istio on your cluster using `gcloud`.
 
 If you prefer to install Istio manually, if your cloud provider doesn't offer a
@@ -61,6 +61,10 @@ Minkube or similar, see the
 
 You must install Istio on your Kubernetes cluster before continuing with these
 instructions to install Knative.
+
+## Installing `cluster-local-gateway` for serving cluster-internal traffic
+
+If you installed Istio, you can install a `cluster-local-gateway` within your Knative cluster so that you can serve cluster-internal traffic. If you want to configure your revisions to use routes that are visible only within your cluster, [install and use the `cluster-local-gateway`](./installing-istio.md#updating-your-install-to-use-cluster-local-gateway).
 
 ## Installing Knative
 
