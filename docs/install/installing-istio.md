@@ -244,6 +244,21 @@ helm template --namespace=istio-system \
 kubectl apply -f istio-local-gateway.yaml
 ```
 
+Alternatively, if you want to install the cluster local gateway for **development purposes**, enter the following command 
+without `helm` for an easy installation:
+
+```shell
+# Istio minor version should be 1.2 or 1.3
+export ISTIO_MINOR_VERSION=1.2
+
+export VERSION=$(curl https://raw.githubusercontent.com/knative/serving/master/third_party/istio-${ISTIO_MINOR_VERSION}-latest)
+
+kubectl apply -f https://raw.githubusercontent.com/knative/serving/master/third_party/${VERSION}/istio-knative-extras.yaml
+```
+
+**Note:** This method is only for development purposes. The production readiness of the above 
+installation method is not ensured. For a production-ready installation, see the `helm` installation method above.
+
 ### Verifying your Istio install
 
 View the status of your Istio installation to make sure the install was
