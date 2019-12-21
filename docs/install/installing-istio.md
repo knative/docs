@@ -244,7 +244,7 @@ helm template --namespace=istio-system \
 kubectl apply -f istio-local-gateway.yaml
 ```
 
-Alternatively, if you want to install cluster local gateway for **development purpose**, run below command 
+Alternatively, if you want to install the cluster local gateway for **development purposes**, enter the following command 
 without `helm` for an easy installation:
 
 ```shell
