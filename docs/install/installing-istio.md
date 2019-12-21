@@ -256,7 +256,7 @@ export VERSION=$(curl https://raw.githubusercontent.com/knative/serving/master/t
 kubectl apply -f https://raw.githubusercontent.com/knative/serving/master/third_party/${VERSION}/istio-knative-extras.yaml
 ```
 
-**Note:** Above installation method is only for development purpose. The production readiness of above 
+**Note:** This method is only for development purposes. The production readiness of the above 
 installation method is not ensured. For production installation, refer the `helm` installation method in this
 section.
 
