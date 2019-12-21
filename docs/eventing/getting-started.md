@@ -58,7 +58,10 @@ If the `knative-eventing` namespace or the `imc-controller-*` does not exist, us
     kubectl apply --filename https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml
     ```
 
-   Installing the CRDs first can prevent race conditions and failures during the install.
+   Installing the CRDs first can prevent race conditions, which may cause failures during the install.
+   Race conditions exist during install because a CRD must be defined before an instance of that
+   resource can be created. Defining all CRDs before continuing with the rest of the installation
+   prevents this problem.
 
 1. Confirm that Knative Eventing is correctly installed by running the following command:
 
