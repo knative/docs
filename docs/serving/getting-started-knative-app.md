@@ -29,6 +29,12 @@ adapted for your own application if you have an image of it available on
 [Google Container Registry](https://cloud.google.com/container-registry/docs/pushing-and-pulling),
 or another container image registry.
 
+In case your image is in the local registry, you need to tag it as following first:
+
+```bash
+docker tag local-image dev.local/local-image # use dev.local/local-image in your yamls
+```
+
 The Hello World sample app reads in an `env` variable, `TARGET`, from the
 configuration `.yaml` file, then prints "Hello World: \${TARGET}!". If `TARGET`
 isn't defined, it will print "NOT SPECIFIED".
