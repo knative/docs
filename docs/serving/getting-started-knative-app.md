@@ -21,13 +21,11 @@ You need:
 
 ## Sample application
 
-This guide uses the
-[Hello World sample app in Go](../serving/samples/hello-world/helloworld-go) to
-demonstrate the basic workflow for deploying an app, but these steps can be
-adapted for your own application if you have an image of it available on
-[Docker Hub](https://docs.docker.com/docker-hub/repos/),
-[Google Container Registry](https://cloud.google.com/container-registry/docs/pushing-and-pulling),
-or another container image registry.
+This guide demonstrates the basic workflow for deploying the
+[Hello World sample app (Go)](../serving/samples/hello-world/helloworld-go) from the 
+[Google Container Registry](https://cloud.google.com/container-registry/docs/pushing-and-pulling).
+You can use these steps as a guide for deploying your own container images from other
+registries like [Docker Hub](https://docs.docker.com/docker-hub/repos/).
 
 In case your image is in the local registry you will want to have Knative skip resolving the image tag. To do this you will need to tag it as following first:
 
