@@ -148,6 +148,10 @@ gcloud beta container clusters create $CLUSTER_NAME \
 Admin permissions are required to create the necessary
 [RBAC rules for Knative](https://istio.io/docs/concepts/security/rbac/).
 
+## Installing `cluster-local-gateway` for serving cluster-internal traffic
+
+If you installed Istio, you can install a `cluster-local-gateway` within your Knative cluster so that you can serve cluster-internal traffic. If you want to configure your revisions to use routes that are visible only within your cluster, [install and use the `cluster-local-gateway`](./installing-istio.md#updating-your-install-to-use-cluster-local-gateway).
+
 ## Installing Knative
 
 The following commands install all available Knative components as well as the

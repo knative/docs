@@ -146,9 +146,13 @@ You must install Istio on your Kubernetes cluster before continuing with these
 instructions to install Knative.
 
 > Note: [Ambassador](https://www.getambassador.io/) and
-> [Gloo](https://gloo.solo.io/) are available as an alternative to Istio.
+> [Gloo](https://docs.solo.io/gloo/latest/) are available as an alternative to Istio.
 > [Click here](./Knative-with-Ambassador.md) to install Knative with Ambassador.
 > [Click here](./Knative-with-Gloo.md) to install Knative with Gloo.
+
+## Installing `cluster-local-gateway` for serving cluster-internal traffic
+
+If you installed Istio, you can install a `cluster-local-gateway` within your Knative cluster so that you can serve cluster-internal traffic. If you want to configure your revisions to use routes that are visible only within your cluster, [install and use the `cluster-local-gateway`](./installing-istio.md#updating-your-install-to-use-cluster-local-gateway).
 
 ## Installing Knative
 
