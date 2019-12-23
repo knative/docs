@@ -29,7 +29,7 @@ adapted for your own application if you have an image of it available on
 [Google Container Registry](https://cloud.google.com/container-registry/docs/pushing-and-pulling),
 or another container image registry.
 
-In case your image is in the local registry, you need to tag it as following first:
+In case your image is in the local registry you will want to have Knative skip resolving the image tag. To do this you will need to tag it as following first:
 
 ```bash
 docker tag local-image dev.local/local-image # use dev.local/local-image in your yamls
