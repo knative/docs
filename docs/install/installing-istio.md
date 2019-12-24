@@ -124,6 +124,7 @@ helm template --namespace=istio-system \
   --set gateways.istio-ingressgateway.autoscaleMax=2 \
   `# Set pilot trace sampling to 100%` \
   --set pilot.traceSampling=100 \
+  --set global.mtls.auto=false \
   install/kubernetes/helm/istio \
   > ./istio-lean.yaml
 
@@ -236,6 +237,7 @@ helm template --namespace=istio-system \
   --set gateways.istio-ingressgateway.enabled=false \
   --set gateways.istio-egressgateway.enabled=false \
   --set gateways.istio-ilbgateway.enabled=false \
+  --set global.mtls.auto=false \
   install/kubernetes/helm/istio \
   -f install/kubernetes/helm/istio/example-values/values-istio-gateways.yaml \
   | sed -e "s/custom-gateway/cluster-local-gateway/g" -e "s/customgateway/clusterlocalgateway/g" \
