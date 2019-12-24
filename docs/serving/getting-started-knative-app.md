@@ -27,7 +27,7 @@ This guide demonstrates the basic workflow for deploying the
 You can use these steps as a guide for deploying your own container images from other
 registries like [Docker Hub](https://docs.docker.com/docker-hub/repos/).
 
-In case your image is in the local registry you will want to have Knative skip resolving the image tag. To do this you will need to tag it as following first:
+To deploy a local container image, you need to disable image tag resolution by running the following command:
 
 ```bash
 docker tag local-image dev.local/local-image # use dev.local/local-image in your yamls
