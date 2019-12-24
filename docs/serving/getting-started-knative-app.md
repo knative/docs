@@ -30,7 +30,8 @@ registries like [Docker Hub](https://docs.docker.com/docker-hub/repos/).
 To deploy a local container image, you need to disable image tag resolution by running the following command:
 
 ```bash
-docker tag local-image dev.local/local-image # use dev.local/local-image in your yamls
+# Set to dev.local/local-image when deploying local container images
+docker tag local-image dev.local/local-image
 ```
 
 The Hello World sample app reads in an `env` variable, `TARGET`, from the
