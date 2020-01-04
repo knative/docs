@@ -10,6 +10,12 @@ automatically obtain new TLS certificates and renew existing ones. To learn more
 about using secure connections in Knative, see
 [Configuring HTTPS with TLS certificates](./using-a-tls-cert.md).
 
+## Auto TLS types
+In Knative, we support 3 types of Auto TLS:
+1. Certificate per Knative Service using HTTP01 challenge
+2. Certificate per namespace using DNS challenge
+3. Certificate per Knative Service using DNS challenge
+
 ## Before you begin
 
 You must meet the following prerequisites to enable automatic certificate
@@ -19,7 +25,7 @@ provisioning:
   - [Knative Serving](../install/).
   - [Istio with SDS, version 1.1 or higher](../install/installing-istio.md#installing-istio-with-SDS-to-secure-the-ingress-gateway) or [Gloo, version 0.18.16 or higher](../install/Knative-with-Gloo.md).
     Note: Currently, [Ambassador](https://github.com/datawire/ambassador) is unsupported.
-  - [cert-manager version `0.6.1` or higher](./installing-cert-manager.md).
+  - [cert-manager version `0.12.0` or higher](./installing-cert-manager.md).
 - Your Knative cluster must be configured to use a
   [custom domain](./using-a-custom-domain.md).
 - Your DNS provider must be setup and configured to your domain.
