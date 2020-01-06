@@ -35,6 +35,7 @@ docker tag local-image dev.local/local-image
 ```
 
 [Learn more about image tag resolution.](./tag-resolution.md)
+
 The Hello World sample app reads in an `env` variable, `TARGET`, from the
 configuration `.yaml` file, then prints "Hello World: \${TARGET}!". If `TARGET`
 isn't defined, it will print "NOT SPECIFIED".
