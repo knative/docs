@@ -18,7 +18,7 @@ notes. Before upgrading, review the release notes for the target version to
 learn about any changes you might need to make to your Knative applications.
 
 The [Serving](https://github.com/knative/serving/releases) and
-[Eventing](https://github.com/knative/serving/releases) release notes are
+[Eventing](https://github.com/knative/eventing/releases) release notes are
 published with each version on the "Releases" page of their respective
 repositories in GitHub.
 
