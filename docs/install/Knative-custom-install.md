@@ -24,7 +24,7 @@ to run multiple installation commands.
 - This guide assumes that you have an existing Kubernetes cluster, on which
   you're comfortable installing and running _alpha_ level software.
 
-- Knative requires a Kubernetes cluster v1.14 or newer, as well as a compatible
+- Knative requires a Kubernetes cluster v1.15 or newer, as well as a compatible
 `kubectl`.
 
 ## Installing Istio
