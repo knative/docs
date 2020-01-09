@@ -94,7 +94,7 @@ kubectl apply --filename serviceaccount.yaml
    block below into it.
 
 ```yaml
-apiVersion: sources.eventing.knative.dev/v1alpha1
+apiVersion: sources.knative.dev/v1alpha1
 kind: ApiServerSource
 metadata:
   name: testevents
