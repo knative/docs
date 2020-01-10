@@ -85,6 +85,22 @@ func NewController(ctx context.Context, cmw configmap.Watcher) *controller.Impl 
 ```
 Ensure that the specific source subdirectory has been added to the injection portion of the `hack/update-codegen.sh` script.
 
+```patch
+
+# Sources
++API_DIRS_SOURCES=(github/pkg camel/source/pkg kafka/source/pkg awssqs/pkg couchdb/source/pkg prometheus/pkg YourSourceHere/pkg)
+-API_DIRS_SOURCES=(github/pkg camel/source/pkg kafka/source/pkg awssqs/pkg couchdb/source/pkg prometheus/pkg)
+
+```
+and
+```patch
+  -i knative.dev/eventing-contrib/camel/source/pkg/apis \
+- -i knative.dev/eventing-contrib/github/pkg/apis
++ -i knative.dev/eventing-contrib/github/pkg/apis \
++ -i knative.dev/eventing-contrib/YourSourceHere/pkg/apis
+
+```
+
 File Layout & Hierarchy:
 
 * `cmd/controller/main.go` - Pass source’s NewController implementation to the shared main
