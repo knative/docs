@@ -16,17 +16,17 @@ What are the personas and critical paths?
 ## Separation of concerns
 ### Contributor:
 * Receive Adapter (RA) - process that receives incoming events.
-* Implement CloudEvent binding interfaces, we provide libraries for standard access to config.
+* Implement CloudEvent binding interfaces, [cloudevent's go sdk](https://github.com/cloudevents/sdk-go) provides libraries for standard access to configure interfaces as needed.
 * Configuration description (YAML, Go Struct, JSON) links `Receive Adapter` to controller runtime.
 
 ### Source library (provided by Knative):
 * Controller runtime (this is what we share via injection) incorporates protocol specific config into "generic controller" CRD.
-* Identifying event aspects/characteristics (i.e. value of interest, relevant metadata, etc) to pass along to the serverless system
+* Identifying specific event characteristics (i.e. value of interest, relevant metadata, etc) to pass along to the serverless system
 * Propagating events internally to the system (i.e. cloudevents)
 
 # Theory
 Quick Introduction to Knative Eventing Sources
-A Source is any Kubernetes object that generates or imports an event and relays that event to another endpoint on the cluster via [CloudEvents](https://github.com/cloudevents/spec/blob/v1.0/primer.md).
+A Knative Source is Kubernetes Custom Resource that generates or imports an event and pushes that event to another endpoint on the cluster via a [CloudEvents](https://github.com/cloudevents/spec/blob/v1.0/primer.md).
 
 [The specification](https://github.com/knative/eventing/blob/master/docs/spec/sources.md)
 for Knative Eventing Sources contains a number of requirements that
@@ -34,17 +34,18 @@ together define a well-behaved Knative Source.
 
 
 To achieve this, there are several separations of concerns that we have to keep in mind:
-1. A controller to run our Event Source and reconcile the underlying deployments
-2. A "receive adapter" which imports the actual events
+1. A controller to run our Event Source and reconcile the underlying `Receive Adapter` deployments
+2. A "receive adapter" which generates or imports the actual events
 3. A series of identifying characteristics for our event
 4. Transporting a valid event to the serverless system for further processing
 
 There are also two different classes of developer to consider:
 1. A "contributor" knows about the foreign protocol but is not a Knative expert.
 2. Knative Eventing expert knows how Knative Eventing components are implemented, configured and deployed, but is not an expert in all the foreign protocols that sources may implement.
+
 These two roles will often not be the same person.  We want to confine the job of the "contributor" to implementing the `Receive Adapter`, and specifying what configuration their adapter needs connect, subscribe, or do whatever it does.
 
-The Knative Eventing developer exposes protocol configuration as part of the Source `CRD`, and the controller passes any required configuration (which may include resolved data like URLs) to the `Receive Adapter`.
+The Knative Eventing developer exposes the protocol configuration as part of the Source `CRD`, and the controller passes any required configuration (which may include resolved data like URLs) to the `Receive Adapter`.
 
 API Resources required:
 
@@ -58,26 +59,28 @@ Used for source &mdash; in this case, `samplesource` &mdash; specific config and
 To ease writing a new event source, the eventing subsystem has offloaded several core functionalities (via injection) to the `eventing-sources-controller`.
 
 
+![Simplified Controller](simplified-controller.png)
+
 Fig 1. - Via shared [Knative Dependency Injection](https://docs.google.com/presentation/d/1aK5xCBv7wbfdDZAvnUE4vGWGk77EYZ6AbL0OR1vKPq8/edit#slide=id.g596dcbbefb_0_40)
-presentation in the Knative community drive
 
 
 Specifically, the `clientset`, `cache`, `informers`, and `listers` can all be generated and shared. Thus, they can be generated, imported, and assigned to the underlying reconciler when creating a new controller source implementation:
 
 ```golang
 import (
-    …
+    // ...
     sampleSourceClient "knative.dev/sample-source/pkg/client/injection/client"
     samplesourceinformer “knative.dev/sample-source/pkg/client/injection/informers/samples/v1alpha1/samplesource"
 )
-…
-sampleSourceInformer := samplesourceinformer.Get(ctx)
+// ...
+func NewController(ctx context.Context, cmw configmap.Watcher) *controller.Impl {
+    sampleSourceInformer := samplesourceinformer.Get(ctx)
 
-r := &Reconciler{
-    …
-    samplesourceClientSet: sampleSourceClient.Get(ctx),
-    samplesourceLister:    sampleSourceInformer.Lister(),
-    …
+    r := &Reconciler{
+        // ...
+        samplesourceClientSet: sampleSourceClient.Get(ctx),
+        samplesourceLister:    sampleSourceInformer.Lister(),
+        // ...
 }
 ```
 Ensure that the specific source subdirectory has been added to the injection portion of the `hack/update-codegen.sh` script.

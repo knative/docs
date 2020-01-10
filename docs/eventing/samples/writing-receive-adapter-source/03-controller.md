@@ -33,7 +33,7 @@ func NewController(
 	ctx context.Context,
 	cmw configmap.Watcher,
 ) *controller.Impl {
-…
+    // ...
 	sampleSourceInformer := samplesourceinformer.Get(ctx)
 
 	r := &Reconciler{
@@ -46,9 +46,9 @@ func NewController(
 The base reconciler is imported from the knative.dev/pkg dependency:
 ```go
 import (
-…
-"knative.dev/eventing/pkg/reconciler"
-…
+    // ...
+    "knative.dev/eventing/pkg/reconciler"
+    // ...
 )
 ```
 Ensure the correct informers have EventHandlers filtered to them

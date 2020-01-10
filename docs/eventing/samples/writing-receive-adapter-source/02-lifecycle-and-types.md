@@ -63,7 +63,7 @@ Define the lifecycle that will be reflected in the status and SinkURI fields
 const (
 	// SampleConditionReady has status True when the SampleSource is ready to send events.
 	SampleConditionReady = apis.ConditionReady
-...
+    // ...
 )
 
 ```
