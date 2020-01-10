@@ -12,7 +12,7 @@ You can find [guides for other platforms here](./README.md).
 
 ## Before you begin
 
-Knative requires a Kubernetes cluster v1.14 or newer, as well as a compatible
+Knative requires a Kubernetes cluster v1.15 or newer, as well as a compatible
 `kubectl`. This guide walks you through creating a cluster with the correct
 specifications for Knative on Azure Kubernetes Service (AKS).
 
@@ -99,7 +99,7 @@ Next we will create a managed Kubernetes cluster using AKS. To make sure the
 cluster is large enough to host all the Knative and Istio components, the
 recommended configuration for a cluster is:
 
-- Kubernetes version 1.14 or later
+- Kubernetes version 1.15 or later
 - Three or more nodes
 - Standard_DS3_v2 nodes
 - RBAC enabled
@@ -115,7 +115,7 @@ recommended configuration for a cluster is:
    az aks create --resource-group $RESOURCE_GROUP \
    --name $CLUSTER_NAME \
    --generate-ssh-keys \
-   --kubernetes-version 1.14.6 \
+   --kubernetes-version 1.15.5 \
    --enable-rbac \
    --node-vm-size Standard_DS3_v2
    ```

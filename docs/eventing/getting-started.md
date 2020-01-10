@@ -19,7 +19,7 @@ Use this guide to learn how to create, send, and verify events in Knative. The s
 
 To complete this guide, you will need the following installed and running:
 
-- A [Kubernetes cluster](https://kubernetes.io/docs/concepts/cluster-administration/cluster-administration-overview/) running v1.14 or higher
+- A [Kubernetes cluster](https://kubernetes.io/docs/concepts/cluster-administration/cluster-administration-overview/) running v1.15 or higher
 
 - [`kubectl` CLI tool](https://kubernetes.io/docs/reference/kubectl/overview/) within a minor version of your Kubernetes cluster.
 

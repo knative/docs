@@ -12,7 +12,7 @@ You can find [guides for other platforms here](./README.md).
 
 ## Before you begin
 
-Knative requires a Kubernetes cluster v1.14 or newer, as well as a compatible
+Knative requires a Kubernetes cluster v1.15 or newer, as well as a compatible
 `kubectl`. This guide walks you through creating a cluster with the correct
 specifications for Knative on Pivotal Container Service.
 

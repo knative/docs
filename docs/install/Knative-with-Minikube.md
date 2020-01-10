@@ -14,7 +14,7 @@ You can find [guides for other platforms here](./README.md).
 
 ## Before you begin
 
-Knative requires a Kubernetes cluster v1.14 or newer.
+Knative requires a Kubernetes cluster v1.15 or newer.
 
 ### Install kubectl and Minikube
 
@@ -38,7 +38,7 @@ For Linux use:
 
 ```shell
 minikube start --memory=8192 --cpus=6 \
-  --kubernetes-version=v1.14.0 \
+  --kubernetes-version=v1.15.0 \
   --vm-driver=kvm2 \
   --disk-size=30g \
   --extra-config=apiserver.enable-admission-plugins="LimitRanger,NamespaceExists,NamespaceLifecycle,ResourceQuota,ServiceAccount,DefaultStorageClass,MutatingAdmissionWebhook"
@@ -48,7 +48,7 @@ For macOS use:
 
 ```shell
 minikube start --memory=8192 --cpus=6 \
-  --kubernetes-version=v1.14.0 \
+  --kubernetes-version=v1.15.0 \
   --vm-driver=hyperkit \
   --disk-size=30g \
   --extra-config=apiserver.enable-admission-plugins="LimitRanger,NamespaceExists,NamespaceLifecycle,ResourceQuota,ServiceAccount,DefaultStorageClass,MutatingAdmissionWebhook"
