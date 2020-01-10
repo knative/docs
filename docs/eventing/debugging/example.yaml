@@ -23,9 +23,10 @@ spec:
     - apiVersion: v1
       kind: Event
   sink:
-    apiVersion: messaging.knative.dev/v1alpha1
-    kind: InMemoryChannel
-    name: chan
+    ref:
+      apiVersion: messaging.knative.dev/v1alpha1
+      kind: InMemoryChannel
+      name: chan
 
 ---
 

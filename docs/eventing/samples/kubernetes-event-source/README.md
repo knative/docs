@@ -106,9 +106,10 @@ spec:
     - apiVersion: v1
       kind: Event
   sink:
-    apiVersion: eventing.knative.dev/v1alpha1
-    kind: Broker
-    name: default
+    ref:
+      apiVersion: eventing.knative.dev/v1alpha1
+      kind: Broker
+      name: default
 ```
 
 If you want to consume events from a different namespace or use a different
