@@ -6,12 +6,12 @@ After completing the tutorial, you'll have a basic event source controller as
 well as receive adapter, which events can be viewed through a basic
 event_display Knative Service.
 
-Just want to see the Code? The reference project is
-https://github.com/knative/sample-source.
+Just want to see the code? The reference project is
+[https://github.com/knative/sample-source](https://github.com/knative/sample-source).
 
 ## Target Audience
 
-The target audience is alrady familiar with Kubernetes and Go development and
+The target audience is already familiar with Kubernetes and Go development and
 wants to develope a new event source, importing their custom events via Knative
 Eventing into the Knative system.
 
@@ -28,8 +28,8 @@ You'll need these tools installed:
 ## Steps
 
 1. [Separation of Concerns](./01-theory.md)
-2. [API Deinition](./02-api.md)
+2. [API Definition](./02-lifecycle-and-types.md)
 3. [Controller](./03-controller.md)
 4. [Reconciler](./04-reconciler.md)
-5. [Receive Adapter](./05-ra.md)
+5. [Receive Adapter](./05-receive-adapter.md)
 6. [Example YAML](./06-yaml.md)

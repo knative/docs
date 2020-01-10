@@ -1,6 +1,6 @@
 ---
-title: "Receive Adapter Implementation and Design"
-linkTitle: "Receieve Adapter Implementation"
+title: "Reconciler Implementation and Design"
+linkTitle: "Reconciler Implementation"
 weight: 40
 type: "docs"
 ---
