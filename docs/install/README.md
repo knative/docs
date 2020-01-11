@@ -24,6 +24,7 @@ Knative Services.
 
 Currently, three options exist which provide this functionality:
 [Ambassador](https://www.getambassador.io/), an Envoy-based API Gateway,
+[Contour](https://projectcontour.io/), an Envoy-based ingress, and
 [Gloo](https://docs.solo.io/gloo/latest/), an Envoy-based API Gateway, and
 [Istio](https://istio.io/), an Envoy-based Service Mesh.
 
@@ -32,6 +33,11 @@ Currently, three options exist which provide this functionality:
 [Installing with Ambassador](./Knative-with-Ambassador.md) gives us an
 alternative to installing a service mesh for routing to applications with the
 Knative Serving component.
+
+## Installing Knative with Contour
+
+[Install with Contour](./Knative-with-Contour.md): Contour can handle all of
+the networking requirements for a full Knative installation.
 
 ## Installing Knative with Gloo
 
