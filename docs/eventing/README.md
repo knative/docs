@@ -148,7 +148,7 @@ In addition to the core sources (explained below), there are
 
 If you need a Source not covered by the
 [available Source implementations](./sources/README.md), there is a
-[tutorial on writing your own Source](./samples/writing-a-source/README.md) as
+[tutorial on writing your own Source with kubebuilder](./samples/writing-a-source/README.md) as
 well as an
 [extended tutorial on writing a Source with Receive Adapter](./samples/writing-receive-adapter-source).
 
