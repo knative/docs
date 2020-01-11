@@ -17,7 +17,7 @@ What are the personas and critical paths?
 ### Contributor:
 * Receive Adapter (RA) - process that receives incoming events.
 * Implement CloudEvent binding interfaces, [cloudevent's go sdk](https://github.com/cloudevents/sdk-go) provides libraries for standard access to configure interfaces as needed.
-* Configuration description (YAML, Go Struct, JSON) links `Receive Adapter` to controller runtime.
+* Passing configuration from the Source `CRD` YAML, that the controller needs to configure the `Receive Adapter`
 
 ### Source library (provided by Knative):
 * Controller runtime (this is what we share via injection) incorporates protocol specific config into "generic controller" CRD.
