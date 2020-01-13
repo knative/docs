@@ -48,3 +48,5 @@ Kubebuilder not your thing? Prefer the easy way? Check out these alternatives.
   as webhooks in any language.
 - The [Cloud Scheduler source](https://github.com/vaikas-google/csr) uses the
   standard Kubernetes Golang client library instead of Kubebuilder.
+- The [Writing an event source from scratch](../writing-receive-adapter-source/README.md)
+  tutorial.

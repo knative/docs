@@ -17,13 +17,21 @@ metaSources:
       AutoContainerSource is a controller that allows the Source CRDs _without_ needing a
       controller. It notices CRDs with a specific label and starts controlling resources of that
       type. It utilizes Container Source as underlying infrastructure.
-  - name: Sample Source
+  - name: Kubebuilder Sample Source
     url: https://github.com/grantr/sample-source
     status: Proof of Concept
     support: None
     description: >
-      SampleSource is a reference implementation supporting the
+      Kubebuilder SampleSource is a kubebuilder based implementation supporting the
       [Writing an Event Source the Hard Way tutorial](../samples/writing-a-source).
+  - name: Sample Source
+    url: https://github.com/knative/sample-source
+    status: Active Development
+    support: Knative
+    description: >
+      Used as reference implementation supporting
+      [Writing an Event Source from Scratch tutorial](../samples/writing-ra-source).
+
 
 # Sources are event sources that users can install and use directly.
 sources:
