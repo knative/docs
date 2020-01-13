@@ -48,17 +48,17 @@ glooctl --version
 Finally, install Gloo and Knative in a single command with `glooctl`:
 
 ```shell
-glooctl install knative
+glooctl install knative --install-eventing --install-eventing-version=<knative-release> --install-knative --install-knative-version=<knative-release> --install-monitoring
 ```
 
 The `glooctl install knative` command can be customized with a variety of options:
-- use `--install-knative-version` to set the installed version of Knative Serving (defaults to `0.8.0`)
+- use `--install-knative-version` to set the installed version of Knative Serving (defaults to `0.10.0`)
 - use `--install-build` to install Knative Build
 - use `--install-eventing` to install Knative Eventing
 - use `--dry-run` to produce the kubernetes YAML that would be applied to your cluster rather than applying.
 - use `--install-knative=false` to only install Gloo without installing Knative components. This can be used if you wish to install Knative independently of Gloo.
 
-See https://github.com/solo-io/gloo/blob/master/docs/cli/glooctl_install_knative.md for the full list of available options for installing Knative with `glooctl`
+See https://github.com/solo-io/gloo/blob/master/docs/content/cli/glooctl_install_knative.md for the full list of available options for installing Knative with `glooctl`
 
 > Note: `glooctl` generates a manifest which can be piped to stdout or a file using the `--dry-run` flag. Alternatively,
 Gloo can be installed via its [Helm Chart](https://docs.solo.io/gloo/latest/installation/gateway/kubernetes/#installing-on-kubernetes-with-helm), which will permit fine-grained configuration of installation parameters.
