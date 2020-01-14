@@ -30,9 +30,7 @@ Knative supports the following Auto TLS modes:
 1.  Using HTTP-01 challenge
 
     - In this type, your cluster does not need to be able to talk to your DNS server. You just 
-    need to map your domain to the IP of the cluser ingress. You can achieve this by adding a
-     DNS A record to map the domain to the IP according to the instructions of your DNS 
-     provider.
+    need to map your domain to the IP of the cluser ingress.
     - When using HTTP-01 challenge, **a certificate will be provisioned per Knative Service.** Certificate provision per namespace is not supported when using HTTP-01 challenge. 
 
 ## Before you begin
@@ -48,7 +46,7 @@ You must meet the following prerequisites to enable auto TLS:
   [custom domain](./using-a-custom-domain.md).
 - Your DNS provider must be setup and configured to your domain.
 - If you want to use HTTP-01 challenge, you need to configure your custom 
-domain to map to the IP of ingress.
+domain to map to the IP of ingress. You can achieve this by adding a DNS A record to map the domain to the IP according to the instructions of your DNS provider.
 
 ## Enabling Auto TLS
 
@@ -60,7 +58,7 @@ To enable support for Auto TLS in Knative:
 to define who issues the TLS certificates, how requests are validated,
 and which DNS provider validates those requests.
 
-  ####  ClusterIssuer for DNS-01 challenge
+    #### ClusterIssuer for DNS-01 challenge
 
     Use the cert-manager reference to determine how to configure your
     `ClusterIssuer` file:
@@ -104,9 +102,10 @@ and which DNS provider validates those requests.
                 key: key.json
       ```
 
-  ####  ClusterIssuer for HTTP-01 challenge
+    ####  ClusterIssuer for HTTP-01 challenge
 
     Run the following command to apply the ClusterIssuer for HTT01 challenge:
+
     ```shell
     kubectl apply -f - <<EOF
     apiVersion: cert-manager.io/v1alpha2
@@ -315,5 +314,6 @@ be able to handle HTTPS traffic.
     ```
     NAME               URL                                           LATESTCREATED            LATESTREADY              READY   REASON
     autoscale-go       https://autoscale-go.default.{custom-domain}   autoscale-go-6jf85 autoscale-go-6jf85       True  
+    ```
 
     Note that the URL will be **https** in this case.
