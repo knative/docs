@@ -17,7 +17,7 @@ your original PR has been merged into the master branch. Once the cherry-pick PR
 has merged, remove the cherry-pick label from the original PR.
 
 For more information on contributing to the Knative Docs, see:
-https://www.knative.dev/contributing/docs-contributing/
+https://www.knative.dev/community/contributing/
 
  -->
 
