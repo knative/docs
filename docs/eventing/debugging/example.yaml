@@ -11,7 +11,7 @@ metadata:
 
 # The event source.
 
-apiVersion: sources.eventing.knative.dev/v1alpha1
+apiVersion: sources.knative.dev/v1alpha1
 kind: ApiServerSource
 metadata:
   name: src
@@ -23,9 +23,10 @@ spec:
     - apiVersion: v1
       kind: Event
   sink:
-    apiVersion: messaging.knative.dev/v1alpha1
-    kind: InMemoryChannel
-    name: chan
+    ref:
+      apiVersion: messaging.knative.dev/v1alpha1
+      kind: InMemoryChannel
+      name: chan
 
 ---
 
