@@ -27,12 +27,12 @@ The following commands install the Knative Serving components:
 
         kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving-crds.yaml
 
-2.  To complete the install of Knative and its dependencies, next run the
+1.  To complete the install of Knative and its dependencies, next run the
     following `kubectl apply` command:
 
         kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving-core.yaml
 
-3.  Monitor the `knative-serving` namespaces and wait until all of the pods come up with a
+1.  Monitor the `knative-serving` namespaces and wait until all of the pods come up with a
     `STATUS` of `Running`:
 
     ```
@@ -41,13 +41,14 @@ The following commands install the Knative Serving components:
 
 ### Installing Contour for Knative
 
-This next step will install both Contour (in the namespace `projectcontour`) and an additional
-controller in `knative-serving` to bridge the two:
+Contour is installed in the namespace `projectcontour` with an additional controller in `knative-serving` to bridge the two.
+
+To install Contour, enter the following command:
 
         kubectl apply --filename https://raw.githubusercontent.com/knative/serving/{{< version >}}/third_party/contour-latest/contour.yaml
 
 
-You can then configure Knative Serving to use this integration by adding the following key to
+To configure Knative Serving to use Contour, add the following key to
 the `config-network` config map in `knative-serving`:
 
 ```yaml
@@ -60,7 +61,7 @@ data:
   ingress.class: contour.ingress.networking.knative.dev
 ```
 
-This key can be added by running the command:
+Enter the following command to add the key:
 
         kubectl edit --namespace knative-serving config-network
 
@@ -73,7 +74,7 @@ simplifies things to have DNS properly configured. For this, we must look up the
 external IP address that Contour received. This can be done with the following command:
 
 ```
-$ kubectl get svc -nprojectcontour
+$ kubectl get svc -n projectcontour
 NAME               TYPE           CLUSTER-IP    EXTERNAL-IP     PORT(S)                      AGE
 contour-external   ClusterIP      10.3.2.96     <none>          8001/TCP                     29d
 contour-internal   ClusterIP      10.3.9.254    <none>          8001/TCP                     29d
@@ -85,7 +86,8 @@ envoy-internal     ClusterIP      10.3.11.69    <none>          80/TCP          
 This external IP can be used with your DNS provider with a wildcard `A` record;
 however, for a basic functioning DNS setup (not suitable for production!) this
 external IP address can be used with `xip.io` in the `config-domain` ConfigMap
-in `knative-serving`. You can edit this with the following command:
+in `knative-serving`. Enter the following command to edit the ConfigMap:
+
 
 ```
 kubectl edit cm config-domain --namespace knative-serving
@@ -108,12 +110,12 @@ data:
 
 ## Running Knative apps
 
-Now that your cluster has Contour & Knative installed, you can run serverless applications with Knative.
+Now that your cluster has Contour and Knative installed, you can run serverless applications with Knative.
 
 Let's deploy an app to test that everything is set up correctly:
 
 
-1. Next, create a `Knative Service`
+1. Create a `Knative Service`.
 
    For this demo, a simple helloworld application written in go will be used.
    Copy the YAML below to a file called `helloworld-go.yaml` and apply it with
@@ -139,7 +141,7 @@ Let's deploy an app to test that everything is set up correctly:
    kubectl apply -f helloworld-go.yaml
    ```
 
-2. Send a request
+1. Send a request
 
    **Knative Services** are exposed via the *Host* header assigned by Knative. By
    default, Knative will use the header `Host`:
@@ -159,7 +161,7 @@ Let's deploy an app to test that everything is set up correctly:
    Hello Go Sample v1!
    ```
 
-Congratulations! You have successfully installed Knative with Contour to manage and route to serverless applications!
+You have successfully installed Knative with Contour to manage and route to serverless applications!
 
 ## What's next
 

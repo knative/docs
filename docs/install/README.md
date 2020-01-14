@@ -22,7 +22,7 @@ clusters.
 Knative depends on an Ingress/Gateway which is capable of routing requests to
 Knative Services.
 
-Currently, three options exist which provide this functionality:
+Currently, four options exist which provide this functionality:
 [Ambassador](https://www.getambassador.io/), an Envoy-based API Gateway,
 [Contour](https://projectcontour.io/), an Envoy-based ingress, and
 [Gloo](https://docs.solo.io/gloo/latest/), an Envoy-based API Gateway, and
