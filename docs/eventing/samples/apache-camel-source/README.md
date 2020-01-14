@@ -108,7 +108,7 @@ CamelSources from the namespace:
 kubectl delete camelsource --all
 ```
 
-Install the [mqtt CamelSource](source_telegram.yaml):
+Install the [mqtt CamelSource](source_mqtt.yaml):
 
 ```shell
 kubectl apply -f source_mqtt.yaml
