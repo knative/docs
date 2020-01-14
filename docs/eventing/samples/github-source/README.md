@@ -133,9 +133,10 @@ spec:
       name: githubsecret
       key: secretToken
   sink:
-    apiVersion: serving.knative.dev/v1
-    kind: Service
-    name: github-message-dumper
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: github-message-dumper
 ```
 
 Then, apply that yaml using `kubectl`:
