@@ -17,7 +17,9 @@ provisioning:
 
 - The following must be installed on your Knative cluter:
   - [Knative Serving](../install/).
-  - [Istio with SDS, version 1.1 or higher](../install/installing-istio.md#installing-istio-with-SDS-to-secure-the-ingress-gateway) or [Gloo, version 0.18.16 or higher](../install/Knative-with-Gloo.md).
+  - [Istio with SDS, version 1.1 or higher](../install/installing-istio.md#installing-istio-with-SDS-to-secure-the-ingress-gateway),
+    [Contour, version 1.1 or higher](../install/Knative-with-Contour.md),
+    or [Gloo, version 0.18.16 or higher](../install/Knative-with-Gloo.md).
     Note: Currently, [Ambassador](https://github.com/datawire/ambassador) is unsupported.
   - [cert-manager version `0.6.1` or higher](./installing-cert-manager.md).
 - Your Knative cluster must be configured to use a

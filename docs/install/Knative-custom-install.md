@@ -38,7 +38,7 @@ installing Istio that way.
 If you prefer to install Istio manually, see the
 [Installing Istio for Knative guide](./installing-istio.md).
 
-> Note: [Ambassador](./Knative-with-Ambassador.md) and
+> Note: [Ambassador](./Knative-with-Ambassador.md), [Contour](./Knative-with-Contour.md) and
 > [Gloo](./Knative-with-Gloo.md) are available as an alternative to Istio.
 
 ## Installing `cluster-local-gateway` for serving cluster-internal traffic

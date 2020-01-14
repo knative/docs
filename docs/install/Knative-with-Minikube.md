@@ -70,9 +70,10 @@ managed Istio installation, or if you're installing Knative locally using
 Minkube or similar, see the
 [Installing Istio for Knative guide](./installing-istio.md).
 
-> Note: [Ambassador](https://www.getambassador.io/) and
+> Note: [Ambassador](https://www.getambassador.io/), [Contour](https://projectcontour.io/), and
 > [Gloo](https://docs.solo.io/gloo/latest/) are available as an alternative to Istio.
 > [Click here](./Knative-with-Ambassador.md) to install Knative with Ambassador.
+> [Click here](./Knative-with-Contour.md) to install Knative with Contour.
 > [Click here](./Knative-with-Gloo.md) to install Knative with Gloo.
 
 ## Installing `cluster-local-gateway` for serving cluster-internal traffic
