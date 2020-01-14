@@ -66,9 +66,7 @@ The following Knative installation files are available:
   - https://github.com/knative/serving/releases/download/{{< version >}}/monitoring-tracing-zipkin.yaml
   - https://github.com/knative/serving/releases/download/{{< version >}}/monitoring-tracing-zipkin-in-mem.yaml
 - **Eventing Component**:
-  - https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml
   - https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml
-  - https://github.com/knative/eventing/releases/download/{{< version >}}/in-memory-channel.yaml
 - **Eventing Resources**:
   - https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/github.yaml
   - https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/camel.yaml
@@ -200,7 +198,7 @@ commands below.
 
         ```bash
         https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml
-        https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml
+        https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml
         https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml
         ```
 
@@ -246,14 +244,14 @@ commands below.
           ```bash
           kubectl apply --selector knative.dev/crd-install=true \
             --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
-            --filename https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml
+            --filename https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml
           ```
 
       1. Remove the `--selector knative.dev/crd-install=true` flag 
          to install all the Knative components and the Eventing resources:
          ```bash
          kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
-           --filename https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml
+           --filename https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml
          ```
 
 1. Run one or more of the following commands to ensure that your component or plugin was 
