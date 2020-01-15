@@ -49,13 +49,13 @@ If the `knative-eventing` namespace or the `imc-controller-*` does not exist, us
 
     ```sh
     kubectl apply --selector knative.dev/crd-install=true \
-    --filename https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml
+    --filename https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml
     ```
 
 1. Finish installing Eventing resources by running the following command:
 
     ```sh
-    kubectl apply --filename https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml
+    kubectl apply --filename https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml
     ```
 
    Installing the CRDs first can prevent race conditions, which might cause failures during the install.
