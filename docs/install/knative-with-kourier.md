@@ -69,7 +69,7 @@ before DNS may be set up.
 To get the external IP address, use the following command:
 
 ```
-kubectl get svc kourier -n knative-serving
+kubectl get svc kourier -n kourier-system
 
 NAME         TYPE           CLUSTER-IP     EXTERNAL-IP     PORT(S)        AGE
 kourier      LoadBalancer   10.43.242.100  172.22.0.2      80:31828/TCP   19m
