@@ -45,7 +45,7 @@ You can install Kourier with `kubectl`:
 
 ```
 kubectl apply \
-  --filename https://raw.githubusercontent.com/3scale/kourier/master/deploy/kourier-knative.yaml
+  --filename https://raw.githubusercontent.com/knative/serving/{{< version >}}/third_party/kourier-latest/kourier.yaml
 ```
 
 ## Configuring the Knative ingress class
