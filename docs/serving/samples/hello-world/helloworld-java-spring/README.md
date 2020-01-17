@@ -14,8 +14,8 @@ cluster. You can also download a working copy of the sample, by running the
 following commands:
 
 ```shell
-git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs cd
-knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
+git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs 
+cd knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
 ```
 
 ## Before you begin
