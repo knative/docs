@@ -14,14 +14,15 @@
 
 FROM golang AS builder
 
-WORKDIR /go/src/github.com/knative/docs/docs/
-ADD . /go/src/github.com/knative/docs/
+WORKDIR /go/src/github.com/knative/docs/
+ADD . .
 
-RUN CGO_ENABLED=0 go build ./serving/samples/telemetry-go/
+RUN go get -d -v ./... && \
+    CGO_ENABLED=0 go build telemetrysample.go
 
 FROM gcr.io/distroless/base
 
 EXPOSE 8080
-COPY --from=builder /go/src/github.com/knative/docs/docs/telemetry-go /sample
+COPY --from=builder /go/src/github.com/knative/docs/telemetrysample /sample
 
 ENTRYPOINT ["/sample"]
