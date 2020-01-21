@@ -19,7 +19,7 @@ namespace.
 
 You can view the default contents of this ConfigMap using the following command.
 
-`kubectl -n knative-serving get cm config-autoscaler`
+`kubectl -n knative-serving describe cm config-autoscaler`
 
 ## Example of the default Kubernetes ConfigMap
 
