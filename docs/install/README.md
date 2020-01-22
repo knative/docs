@@ -62,6 +62,10 @@ There are several options when installing Knative:
 For new users, we recommend the comprehensive install to get you up and running
 quickly.
 
+## Installing Knative with Kourier
+
+[Installing Knative with Kourier](./knative-with-kourier.md): In this guide, Knative will be installed with Kourier to replace the Istio Service Mesh, providing a more lightweight and simple Ingress controller. Note that Istio is required for the Knative Eventing component.
+
 ### Install guides
 
 Follow these step-by-step guides for setting up Kubernetes and installing
