@@ -10,7 +10,7 @@ using pre-built images.
 
 ## Before you begin
 
-Knative requires a Kubernetes cluster v1.14 or newer, as well as a compatible
+Knative requires a Kubernetes cluster v1.15 or newer, as well as a compatible
 `kubectl`. This guide assumes that you've already created a Kubernetes cluster
 which you're comfortable installing _alpha_ software on.
 
@@ -50,7 +50,7 @@ your Knative installation, see
    ```bash
    kubectl apply --selector knative.dev/crd-install=true \
    --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
-   --filename https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml \
+   --filename https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml \
    --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml
    ```
 
@@ -60,7 +60,7 @@ your Knative installation, see
 
    ```bash
    kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
-   --filename https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml \
+   --filename https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml \
    --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml
    ```
 

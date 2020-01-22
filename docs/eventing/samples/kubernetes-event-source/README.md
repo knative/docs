@@ -94,7 +94,7 @@ kubectl apply --filename serviceaccount.yaml
    block below into it.
 
 ```yaml
-apiVersion: sources.eventing.knative.dev/v1alpha1
+apiVersion: sources.knative.dev/v1alpha1
 kind: ApiServerSource
 metadata:
   name: testevents
@@ -106,9 +106,10 @@ spec:
     - apiVersion: v1
       kind: Event
   sink:
-    apiVersion: eventing.knative.dev/v1alpha1
-    kind: Broker
-    name: default
+    ref:
+      apiVersion: eventing.knative.dev/v1alpha1
+      kind: Broker
+      name: default
 ```
 
 If you want to consume events from a different namespace or use a different
@@ -154,8 +155,8 @@ spec:
     spec:
       containers:
         - # This corresponds to
-          # https://github.com/knative/eventing-contrib/blob/release-0.5/cmd/event_display/main.go
-          image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display@sha256:bf45b3eb1e7fc4cb63d6a5a6416cf696295484a7662e0cf9ccdf5c080542c21d
+          # https://github.com/knative/eventing-contrib/tree/master/cmd/event_display/main.go
+          image: gcr.io/knative-releases/github.com/knative/eventing-contrib/cmd/event_display
 ```
 
 1. If the deployed `ApiServerSource` is pointing at a `Broker` other than

@@ -19,7 +19,7 @@ You must also have the following tools installed:
 
 Install the `KafkaChannel` sub-component on your Knative Eventing cluster:
    ```
-   curl -L "https://github.com/knative/eventing-contrib/releases/download/v0.10.1/kafka-channel.yaml" \
+   curl -L "https://storage.googleapis.com/knative-releases/eventing-contrib/latest/kafka-channel.yaml" \
     | sed 's/REPLACE_WITH_CLUSTER_URL/my-cluster-kafka-bootstrap.kafka:9092/' \
     | kubectl apply --filename -
    ```
@@ -36,8 +36,8 @@ kind: KafkaChannel
 metadata:
   name: my-kafka-channel
 spec:
-  numPartitions: 1
-  replicationFactor: 3
+  numPartitions: 3
+  replicationFactor: 1
 EOF
 ```
 

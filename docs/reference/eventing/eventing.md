@@ -1,7 +1,7 @@
 <p>Packages:</p>
 <ul>
 <li>
-<a href="#sources.eventing.knative.dev%2fv1alpha1">sources.eventing.knative.dev/v1alpha1</a>
+<a href="#sources.knative.dev%2fv1alpha1">sources.knative.dev/v1alpha1</a>
 </li>
 <li>
 <a href="#duck.knative.dev%2fv1alpha1">duck.knative.dev/v1alpha1</a>
@@ -13,24 +13,23 @@
 <a href="#flows.knative.dev%2fv1alpha1">flows.knative.dev/v1alpha1</a>
 </li>
 <li>
+<a href="#sources.eventing.knative.dev%2fv1alpha1">sources.eventing.knative.dev/v1alpha1</a>
+</li>
+<li>
 <a href="#messaging.knative.dev%2fv1alpha1">messaging.knative.dev/v1alpha1</a>
 </li>
 </ul>
-<h2 id="sources.eventing.knative.dev/v1alpha1">sources.eventing.knative.dev/v1alpha1</h2>
+<h2 id="sources.knative.dev/v1alpha1">sources.knative.dev/v1alpha1</h2>
 <p>
 <p>Package v1alpha1 contains API Schema definitions for the sources v1alpha1 API group</p>
 </p>
 Resource Types:
 <ul><li>
-<a href="#sources.eventing.knative.dev/v1alpha1.ApiServerSource">ApiServerSource</a>
+<a href="#sources.knative.dev/v1alpha1.ApiServerSource">ApiServerSource</a>
 </li><li>
-<a href="#sources.eventing.knative.dev/v1alpha1.ContainerSource">ContainerSource</a>
-</li><li>
-<a href="#sources.eventing.knative.dev/v1alpha1.CronJobSource">CronJobSource</a>
-</li><li>
-<a href="#sources.eventing.knative.dev/v1alpha1.SinkBinding">SinkBinding</a>
+<a href="#sources.knative.dev/v1alpha1.SinkBinding">SinkBinding</a>
 </li></ul>
-<h3 id="sources.eventing.knative.dev/v1alpha1.ApiServerSource">ApiServerSource
+<h3 id="sources.knative.dev/v1alpha1.ApiServerSource">ApiServerSource
 </h3>
 <p>
 <p>ApiServerSource is the Schema for the apiserversources API</p>
@@ -49,7 +48,7 @@ Resource Types:
 string</td>
 <td>
 <code>
-sources.eventing.knative.dev/v1alpha1
+sources.knative.dev/v1alpha1
 </code>
 </td>
 </tr>
@@ -64,7 +63,7 @@ string
 <td>
 <code>metadata</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
 </a>
 </em>
@@ -78,7 +77,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#sources.eventing.knative.dev/v1alpha1.ApiServerSourceSpec">
+<a href="#sources.knative.dev/v1alpha1.ApiServerSourceSpec">
 ApiServerSourceSpec
 </a>
 </em>
@@ -91,7 +90,7 @@ ApiServerSourceSpec
 <td>
 <code>resources</code></br>
 <em>
-<a href="#sources.eventing.knative.dev/v1alpha1.ApiServerResource">
+<a href="#sources.knative.dev/v1alpha1.ApiServerResource">
 []ApiServerResource
 </a>
 </em>
@@ -145,7 +144,7 @@ string
 <td>
 <code>status</code></br>
 <em>
-<a href="#sources.eventing.knative.dev/v1alpha1.ApiServerSourceStatus">
+<a href="#sources.knative.dev/v1alpha1.ApiServerSourceStatus">
 ApiServerSourceStatus
 </a>
 </em>
@@ -155,296 +154,7 @@ ApiServerSourceStatus
 </tr>
 </tbody>
 </table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.ContainerSource">ContainerSource
-</h3>
-<p>
-<p>ContainerSource is the Schema for the containersources API</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>apiVersion</code></br>
-string</td>
-<td>
-<code>
-sources.eventing.knative.dev/v1alpha1
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<code>kind</code></br>
-string
-</td>
-<td><code>ContainerSource</code></td>
-</tr>
-<tr>
-<td>
-<code>metadata</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
-Kubernetes meta/v1.ObjectMeta
-</a>
-</em>
-</td>
-<td>
-Refer to the Kubernetes API documentation for the fields of the
-<code>metadata</code> field.
-</td>
-</tr>
-<tr>
-<td>
-<code>spec</code></br>
-<em>
-<a href="#sources.eventing.knative.dev/v1alpha1.ContainerSourceSpec">
-ContainerSourceSpec
-</a>
-</em>
-</td>
-<td>
-<br/>
-<br/>
-<table>
-<tr>
-<td>
-<code>template</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#podtemplatespec-v1-core">
-Kubernetes core/v1.PodTemplateSpec
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Template describes the pods that will be created</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>image</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<p>DeprecatedImage is the image to run inside of the container.
-This field is to be deprecated. Use <code>Template</code> instead.
-When <code>Template</code> is set, this field is ignored.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>args</code></br>
-<em>
-[]string
-</em>
-</td>
-<td>
-<p>DeprecatedArgs are passed to the ContainerSpec as they are.
-This field is to be deprecated. Use <code>Template</code> instead.
-When <code>Template</code> is set, this field is ignored.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>env</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#envvar-v1-core">
-[]Kubernetes core/v1.EnvVar
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>DeprecatedEnv is the list of environment variables to set in the container.
-Cannot be updated.
-This field is to be deprecated. Use <code>Template</code> instead.
-When <code>Template</code> is set, this field is ignored.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>serviceAccountName</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>DeprecatedServiceAccountName is the name of the ServiceAccount to use to run this
-source.
-This field is to be deprecated. Use <code>Template</code> instead.
-When <code>Template</code> is set, this field is ignored.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>sink</code></br>
-<em>
-knative.dev/pkg/apis/duck/v1beta1.Destination
-</em>
-</td>
-<td>
-<p>Sink is a reference to an object that will resolve to a domain name to use as the sink.</p>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-<tr>
-<td>
-<code>status</code></br>
-<em>
-<a href="#sources.eventing.knative.dev/v1alpha1.ContainerSourceStatus">
-ContainerSourceStatus
-</a>
-</em>
-</td>
-<td>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.CronJobSource">CronJobSource
-</h3>
-<p>
-<p>CronJobSource is the Schema for the cronjobsources API.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>apiVersion</code></br>
-string</td>
-<td>
-<code>
-sources.eventing.knative.dev/v1alpha1
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<code>kind</code></br>
-string
-</td>
-<td><code>CronJobSource</code></td>
-</tr>
-<tr>
-<td>
-<code>metadata</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
-Kubernetes meta/v1.ObjectMeta
-</a>
-</em>
-</td>
-<td>
-Refer to the Kubernetes API documentation for the fields of the
-<code>metadata</code> field.
-</td>
-</tr>
-<tr>
-<td>
-<code>spec</code></br>
-<em>
-<a href="#sources.eventing.knative.dev/v1alpha1.CronJobSourceSpec">
-CronJobSourceSpec
-</a>
-</em>
-</td>
-<td>
-<br/>
-<br/>
-<table>
-<tr>
-<td>
-<code>schedule</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<p>Schedule is the cronjob schedule.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>data</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<p>Data is the data posted to the target function.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>sink</code></br>
-<em>
-knative.dev/pkg/apis/duck/v1beta1.Destination
-</em>
-</td>
-<td>
-<p>Sink is a reference to an object that will resolve to a domain name to use as the sink.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>serviceAccountName</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<p>ServiceAccoutName is the name of the ServiceAccount that will be used to run the Receive
-Adapter Deployment.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>resources</code></br>
-<em>
-<a href="#sources.eventing.knative.dev/v1alpha1.CronJobResourceSpec">
-CronJobResourceSpec
-</a>
-</em>
-</td>
-<td>
-<p>Resource limits and Request specifications of the Receive Adapter Deployment</p>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-<tr>
-<td>
-<code>status</code></br>
-<em>
-<a href="#sources.eventing.knative.dev/v1alpha1.CronJobSourceStatus">
-CronJobSourceStatus
-</a>
-</em>
-</td>
-<td>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.SinkBinding">SinkBinding
+<h3 id="sources.knative.dev/v1alpha1.SinkBinding">SinkBinding
 </h3>
 <p>
 <p>SinkBinding describes a Binding that is also a Source.
@@ -468,7 +178,7 @@ cloud events.</p>
 string</td>
 <td>
 <code>
-sources.eventing.knative.dev/v1alpha1
+sources.knative.dev/v1alpha1
 </code>
 </td>
 </tr>
@@ -483,7 +193,7 @@ string
 <td>
 <code>metadata</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
 </a>
 </em>
@@ -497,7 +207,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#sources.eventing.knative.dev/v1alpha1.SinkBindingSpec">
+<a href="#sources.knative.dev/v1alpha1.SinkBindingSpec">
 SinkBindingSpec
 </a>
 </em>
@@ -539,7 +249,7 @@ knative.dev/pkg/apis/duck/v1alpha1.BindingSpec
 <td>
 <code>status</code></br>
 <em>
-<a href="#sources.eventing.knative.dev/v1alpha1.SinkBindingStatus">
+<a href="#sources.knative.dev/v1alpha1.SinkBindingStatus">
 SinkBindingStatus
 </a>
 </em>
@@ -549,11 +259,11 @@ SinkBindingStatus
 </tr>
 </tbody>
 </table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.ApiServerResource">ApiServerResource
+<h3 id="sources.knative.dev/v1alpha1.ApiServerResource">ApiServerResource
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.ApiServerSourceSpec">ApiServerSourceSpec</a>)
+<a href="#sources.knative.dev/v1alpha1.ApiServerSourceSpec">ApiServerSourceSpec</a>)
 </p>
 <p>
 <p>ApiServerResource defines the resource to watch</p>
@@ -593,7 +303,7 @@ More info: <a href="https://git.k8s.io/community/contributors/devel/sig-architec
 <td>
 <code>labelSelector</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#labelselector-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#labelselector-v1-meta">
 Kubernetes meta/v1.LabelSelector
 </a>
 </em>
@@ -607,7 +317,7 @@ More info: <a href="http://kubernetes.io/docs/concepts/overview/working-with-obj
 <td>
 <code>controllerSelector</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#ownerreference-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#ownerreference-v1-meta">
 Kubernetes meta/v1.OwnerReference
 </a>
 </em>
@@ -630,11 +340,11 @@ bool
 </tr>
 </tbody>
 </table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.ApiServerSourceSpec">ApiServerSourceSpec
+<h3 id="sources.knative.dev/v1alpha1.ApiServerSourceSpec">ApiServerSourceSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.ApiServerSource">ApiServerSource</a>)
+<a href="#sources.knative.dev/v1alpha1.ApiServerSource">ApiServerSource</a>)
 </p>
 <p>
 <p>ApiServerSourceSpec defines the desired state of ApiServerSource</p>
@@ -651,7 +361,7 @@ bool
 <td>
 <code>resources</code></br>
 <em>
-<a href="#sources.eventing.knative.dev/v1alpha1.ApiServerResource">
+<a href="#sources.knative.dev/v1alpha1.ApiServerResource">
 []ApiServerResource
 </a>
 </em>
@@ -700,11 +410,11 @@ string
 </tr>
 </tbody>
 </table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.ApiServerSourceStatus">ApiServerSourceStatus
+<h3 id="sources.knative.dev/v1alpha1.ApiServerSourceStatus">ApiServerSourceStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.ApiServerSource">ApiServerSource</a>)
+<a href="#sources.knative.dev/v1alpha1.ApiServerSource">ApiServerSource</a>)
 </p>
 <p>
 <p>ApiServerSourceStatus defines the observed state of ApiServerSource</p>
@@ -747,402 +457,11 @@ string
 </tr>
 </tbody>
 </table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.ContainerSourceSpec">ContainerSourceSpec
+<h3 id="sources.knative.dev/v1alpha1.SinkBindingSpec">SinkBindingSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.ContainerSource">ContainerSource</a>)
-</p>
-<p>
-<p>ContainerSourceSpec defines the desired state of ContainerSource</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>template</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#podtemplatespec-v1-core">
-Kubernetes core/v1.PodTemplateSpec
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Template describes the pods that will be created</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>image</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<p>DeprecatedImage is the image to run inside of the container.
-This field is to be deprecated. Use <code>Template</code> instead.
-When <code>Template</code> is set, this field is ignored.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>args</code></br>
-<em>
-[]string
-</em>
-</td>
-<td>
-<p>DeprecatedArgs are passed to the ContainerSpec as they are.
-This field is to be deprecated. Use <code>Template</code> instead.
-When <code>Template</code> is set, this field is ignored.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>env</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#envvar-v1-core">
-[]Kubernetes core/v1.EnvVar
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>DeprecatedEnv is the list of environment variables to set in the container.
-Cannot be updated.
-This field is to be deprecated. Use <code>Template</code> instead.
-When <code>Template</code> is set, this field is ignored.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>serviceAccountName</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>DeprecatedServiceAccountName is the name of the ServiceAccount to use to run this
-source.
-This field is to be deprecated. Use <code>Template</code> instead.
-When <code>Template</code> is set, this field is ignored.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>sink</code></br>
-<em>
-knative.dev/pkg/apis/duck/v1beta1.Destination
-</em>
-</td>
-<td>
-<p>Sink is a reference to an object that will resolve to a domain name to use as the sink.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.ContainerSourceStatus">ContainerSourceStatus
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.ContainerSource">ContainerSource</a>)
-</p>
-<p>
-<p>ContainerSourceStatus defines the observed state of ContainerSource</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>Status</code></br>
-<em>
-knative.dev/pkg/apis/duck/v1.Status
-</em>
-</td>
-<td>
-<p>
-(Members of <code>Status</code> are embedded into this type.)
-</p>
-<p>inherits duck/v1 Status, which currently provides:
-* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
-* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>sinkUri</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>SinkURI is the current active sink URI that has been configured for the ContainerSource.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.CronJobLimitsSpec">CronJobLimitsSpec
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.CronJobResourceSpec">CronJobResourceSpec</a>)
-</p>
-<p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>cpu</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-</td>
-</tr>
-<tr>
-<td>
-<code>memory</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.CronJobRequestsSpec">CronJobRequestsSpec
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.CronJobResourceSpec">CronJobResourceSpec</a>)
-</p>
-<p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>cpu</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-</td>
-</tr>
-<tr>
-<td>
-<code>memory</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.CronJobResourceSpec">CronJobResourceSpec
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.CronJobSourceSpec">CronJobSourceSpec</a>)
-</p>
-<p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>requests</code></br>
-<em>
-<a href="#sources.eventing.knative.dev/v1alpha1.CronJobRequestsSpec">
-CronJobRequestsSpec
-</a>
-</em>
-</td>
-<td>
-</td>
-</tr>
-<tr>
-<td>
-<code>limits</code></br>
-<em>
-<a href="#sources.eventing.knative.dev/v1alpha1.CronJobLimitsSpec">
-CronJobLimitsSpec
-</a>
-</em>
-</td>
-<td>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.CronJobSourceSpec">CronJobSourceSpec
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.CronJobSource">CronJobSource</a>)
-</p>
-<p>
-<p>CronJobSourceSpec defines the desired state of the CronJobSource.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>schedule</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<p>Schedule is the cronjob schedule.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>data</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<p>Data is the data posted to the target function.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>sink</code></br>
-<em>
-knative.dev/pkg/apis/duck/v1beta1.Destination
-</em>
-</td>
-<td>
-<p>Sink is a reference to an object that will resolve to a domain name to use as the sink.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>serviceAccountName</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<p>ServiceAccoutName is the name of the ServiceAccount that will be used to run the Receive
-Adapter Deployment.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>resources</code></br>
-<em>
-<a href="#sources.eventing.knative.dev/v1alpha1.CronJobResourceSpec">
-CronJobResourceSpec
-</a>
-</em>
-</td>
-<td>
-<p>Resource limits and Request specifications of the Receive Adapter Deployment</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.CronJobSourceStatus">CronJobSourceStatus
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.CronJobSource">CronJobSource</a>)
-</p>
-<p>
-<p>CronJobSourceStatus defines the observed state of CronJobSource.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>Status</code></br>
-<em>
-knative.dev/pkg/apis/duck/v1.Status
-</em>
-</td>
-<td>
-<p>
-(Members of <code>Status</code> are embedded into this type.)
-</p>
-<p>inherits duck/v1 Status, which currently provides:
-* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
-* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>sinkUri</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>SinkURI is the current active sink URI that has been configured for the CronJobSource.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.SinkBindingSpec">SinkBindingSpec
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.SinkBinding">SinkBinding</a>)
+<a href="#sources.knative.dev/v1alpha1.SinkBinding">SinkBinding</a>)
 </p>
 <p>
 <p>SinkBindingSpec holds the desired state of the SinkBinding (from the client).</p>
@@ -1183,11 +502,11 @@ knative.dev/pkg/apis/duck/v1alpha1.BindingSpec
 </tr>
 </tbody>
 </table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.SinkBindingStatus">SinkBindingStatus
+<h3 id="sources.knative.dev/v1alpha1.SinkBindingStatus">SinkBindingStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.SinkBinding">SinkBinding</a>)
+<a href="#sources.knative.dev/v1alpha1.SinkBinding">SinkBinding</a>)
 </p>
 <p>
 <p>SinkBindingStatus communicates the observed state of the SinkBinding (from the controller).</p>
@@ -1245,8 +564,8 @@ specify any implementation.</p>
 <a href="#messaging.knative.dev/v1alpha1.ChannelSpec">ChannelSpec</a>, 
 <a href="#flows.knative.dev/v1alpha1.ParallelSpec">ParallelSpec</a>, 
 <a href="#messaging.knative.dev/v1alpha1.ParallelSpec">ParallelSpec</a>, 
-<a href="#flows.knative.dev/v1alpha1.SequenceSpec">SequenceSpec</a>, 
-<a href="#messaging.knative.dev/v1alpha1.SequenceSpec">SequenceSpec</a>)
+<a href="#messaging.knative.dev/v1alpha1.SequenceSpec">SequenceSpec</a>, 
+<a href="#flows.knative.dev/v1alpha1.SequenceSpec">SequenceSpec</a>)
 </p>
 <p>
 </p>
@@ -1295,7 +614,7 @@ we can easily create new Channels off of it.</p>
 <td>
 <code>metadata</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
 </a>
 </em>
@@ -1344,7 +663,7 @@ Channelable ObjectReferences and access their subscription and address data.  Th
 <td>
 <code>metadata</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
 </a>
 </em>
@@ -1529,7 +848,7 @@ SubscribableTypeStatus
 <td>
 <code>errorChannel</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectreference-v1-core">
 Kubernetes core/v1.ObjectReference
 </a>
 </em>
@@ -1545,6 +864,7 @@ Kubernetes core/v1.ObjectReference
 </h3>
 <p>
 (<em>Appears on:</em>
+<a href="#eventing.knative.dev/v1alpha1.BrokerSpec">BrokerSpec</a>, 
 <a href="#duck.knative.dev/v1alpha1.ChannelableSpec">ChannelableSpec</a>, 
 <a href="#messaging.knative.dev/v1alpha1.SubscriptionSpec">SubscriptionSpec</a>)
 </p>
@@ -1564,7 +884,7 @@ such as channelable and source.</p>
 <td>
 <code>deadLetterSink</code></br>
 <em>
-knative.dev/pkg/apis/duck/v1beta1.Destination
+knative.dev/pkg/apis/duck/v1.Destination
 </em>
 </td>
 <td>
@@ -1602,7 +922,7 @@ BackoffPolicyType
 </tr>
 <tr>
 <td>
-<code>BackoffDelay</code></br>
+<code>backoffDelay</code></br>
 <em>
 string
 </em>
@@ -1634,7 +954,7 @@ For exponential policy , backoff delay is backoffDelay*2^<numberOfRetries></p>
 <td>
 <code>deadLetterChannel</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectreference-v1-core">
 Kubernetes core/v1.ObjectReference
 </a>
 </em>
@@ -1665,7 +985,7 @@ arbitrary other resources (such as any Source or Addressable). This is not a rea
 <td>
 <code>metadata</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
 </a>
 </em>
@@ -1764,7 +1084,7 @@ SubscribableType ObjectReferences and access the Subscription data.  This is not
 <td>
 <code>metadata</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
 </a>
 </em>
@@ -1909,20 +1229,6 @@ At least one of SubscriberURI and ReplyURI must be present</p>
 <tbody>
 <tr>
 <td>
-<code>ref</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
-Kubernetes core/v1.ObjectReference
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Deprecated: use UID.</p>
-</td>
-</tr>
-<tr>
-<td>
 <code>uid</code></br>
 <em>
 k8s.io/apimachinery/pkg/types.UID
@@ -2025,7 +1331,7 @@ int64
 <td>
 <code>ready</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#conditionstatus-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#conditionstatus-v1-core">
 Kubernetes core/v1.ConditionStatus
 </a>
 </em>
@@ -2100,7 +1406,7 @@ string
 <td>
 <code>metadata</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
 </a>
 </em>
@@ -2139,6 +1445,21 @@ ChannelTemplateSpec
 <p>ChannelTemplate specifies which Channel CRD to use to create all the Channels used internally by the
 Broker. If left unspecified, it is set to the default Channel CRD for the namespace (or cluster, in case there
 are no defaults for the namespace).</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>delivery</code></br>
+<em>
+<a href="#duck.knative.dev/v1alpha1.DeliverySpec">
+DeliverySpec
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Delivery is the delivery specification to be used internally by the broker to
+create subscriptions.</p>
 </td>
 </tr>
 </table>
@@ -2194,7 +1515,7 @@ string
 <td>
 <code>metadata</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
 </a>
 </em>
@@ -2332,7 +1653,7 @@ string
 <td>
 <code>metadata</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
 </a>
 </em>
@@ -2448,6 +1769,21 @@ Broker. If left unspecified, it is set to the default Channel CRD for the namesp
 are no defaults for the namespace).</p>
 </td>
 </tr>
+<tr>
+<td>
+<code>delivery</code></br>
+<em>
+<a href="#duck.knative.dev/v1alpha1.DeliverySpec">
+DeliverySpec
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Delivery is the delivery specification to be used internally by the broker to
+create subscriptions.</p>
+</td>
+</tr>
 </tbody>
 </table>
 <h3 id="eventing.knative.dev/v1alpha1.BrokerStatus">BrokerStatus
@@ -2501,26 +1837,13 @@ provided targets from inside the cluster.</p>
 <td>
 <code>triggerChannel</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectreference-v1-core">
 Kubernetes core/v1.ObjectReference
 </a>
 </em>
 </td>
 <td>
 <p>TriggerChannel is an objectref to the object for the TriggerChannel</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>IngressChannel</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
-Kubernetes core/v1.ObjectReference
-</a>
-</em>
-</td>
-<td>
-<p>IngressChannel is an objectref to the object for the IngressChannel</p>
 </td>
 </tr>
 </tbody>
@@ -2868,7 +2191,7 @@ series through Channels and Subscriptions.</p>
 <td>
 <code>metadata</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
 </a>
 </em>
@@ -3086,7 +2409,7 @@ ParallelSubscriptionStatus
 <td>
 <code>channel</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectreference-v1-core">
 Kubernetes core/v1.ObjectReference
 </a>
 </em>
@@ -3265,7 +2588,7 @@ It generally has the form {channel}.{namespace}.svc.{cluster domain name}</p>
 <td>
 <code>subscription</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectreference-v1-core">
 Kubernetes core/v1.ObjectReference
 </a>
 </em>
@@ -3305,7 +2628,7 @@ series through Channels and Subscriptions.</p>
 <td>
 <code>metadata</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
 </a>
 </em>
@@ -3409,7 +2732,7 @@ date.</p>
 <td>
 <code>channel</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectreference-v1-core">
 Kubernetes core/v1.ObjectReference
 </a>
 </em>
@@ -3587,7 +2910,7 @@ It generally has the form {channel}.{namespace}.svc.{cluster domain name}</p>
 <td>
 <code>subscription</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectreference-v1-core">
 Kubernetes core/v1.ObjectReference
 </a>
 </em>
@@ -3605,6 +2928,1269 @@ knative.dev/pkg/apis.Condition
 </td>
 <td>
 <p>ReadyCondition indicates whether the Subscription is ready or not.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="sources.eventing.knative.dev/v1alpha1">sources.eventing.knative.dev/v1alpha1</h2>
+<p>
+<p>Package v1alpha1 contains API Schema definitions for the sources v1alpha1 API group</p>
+</p>
+Resource Types:
+<ul><li>
+<a href="#sources.eventing.knative.dev/v1alpha1.ApiServerSource">ApiServerSource</a>
+</li><li>
+<a href="#sources.eventing.knative.dev/v1alpha1.ContainerSource">ContainerSource</a>
+</li><li>
+<a href="#sources.eventing.knative.dev/v1alpha1.CronJobSource">CronJobSource</a>
+</li><li>
+<a href="#sources.eventing.knative.dev/v1alpha1.SinkBinding">SinkBinding</a>
+</li></ul>
+<h3 id="sources.eventing.knative.dev/v1alpha1.ApiServerSource">ApiServerSource
+</h3>
+<p>
+<p>ApiServerSource is the Schema for the apiserversources API</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>apiVersion</code></br>
+string</td>
+<td>
+<code>
+sources.eventing.knative.dev/v1alpha1
+</code>
+</td>
+</tr>
+<tr>
+<td>
+<code>kind</code></br>
+string
+</td>
+<td><code>ApiServerSource</code></td>
+</tr>
+<tr>
+<td>
+<code>Deprecated</code></br>
+<em>
+<a href="#sources.eventing.knative.dev/v1alpha1.Deprecated">
+Deprecated
+</a>
+</em>
+</td>
+<td>
+<p>Deprecated allows ApiServerSource to have a deprecated message.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>metadata</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
+Kubernetes meta/v1.ObjectMeta
+</a>
+</em>
+</td>
+<td>
+Refer to the Kubernetes API documentation for the fields of the
+<code>metadata</code> field.
+</td>
+</tr>
+<tr>
+<td>
+<code>spec</code></br>
+<em>
+<a href="#sources.eventing.knative.dev/v1alpha1.ApiServerSourceSpec">
+ApiServerSourceSpec
+</a>
+</em>
+</td>
+<td>
+<br/>
+<br/>
+<table>
+<tr>
+<td>
+<code>resources</code></br>
+<em>
+<a href="#sources.eventing.knative.dev/v1alpha1.ApiServerResource">
+[]ApiServerResource
+</a>
+</em>
+</td>
+<td>
+<p>Resources is the list of resources to watch</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>serviceAccountName</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>ServiceAccountName is the name of the ServiceAccount to use to run this
+source.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>sink</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1beta1.Destination
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Sink is a reference to an object that will resolve to a domain name to use as the sink.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>mode</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>Mode is the mode the receive adapter controller runs under: Ref or Resource.
+<code>Ref</code> sends only the reference to the resource.
+<code>Resource</code> send the full resource.</p>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<code>status</code></br>
+<em>
+<a href="#sources.eventing.knative.dev/v1alpha1.ApiServerSourceStatus">
+ApiServerSourceStatus
+</a>
+</em>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sources.eventing.knative.dev/v1alpha1.ContainerSource">ContainerSource
+</h3>
+<p>
+<p>ContainerSource is the Schema for the containersources API</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>apiVersion</code></br>
+string</td>
+<td>
+<code>
+sources.eventing.knative.dev/v1alpha1
+</code>
+</td>
+</tr>
+<tr>
+<td>
+<code>kind</code></br>
+string
+</td>
+<td><code>ContainerSource</code></td>
+</tr>
+<tr>
+<td>
+<code>Deprecated</code></br>
+<em>
+<a href="#sources.eventing.knative.dev/v1alpha1.Deprecated">
+Deprecated
+</a>
+</em>
+</td>
+<td>
+<p>Deprecated allows ContainerSource to have a deprecated message.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>metadata</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
+Kubernetes meta/v1.ObjectMeta
+</a>
+</em>
+</td>
+<td>
+Refer to the Kubernetes API documentation for the fields of the
+<code>metadata</code> field.
+</td>
+</tr>
+<tr>
+<td>
+<code>spec</code></br>
+<em>
+<a href="#sources.eventing.knative.dev/v1alpha1.ContainerSourceSpec">
+ContainerSourceSpec
+</a>
+</em>
+</td>
+<td>
+<br/>
+<br/>
+<table>
+<tr>
+<td>
+<code>template</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#podtemplatespec-v1-core">
+Kubernetes core/v1.PodTemplateSpec
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Template describes the pods that will be created</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>image</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>DeprecatedImage is the image to run inside of the container.
+This field is to be deprecated. Use <code>Template</code> instead.
+When <code>Template</code> is set, this field is ignored.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>args</code></br>
+<em>
+[]string
+</em>
+</td>
+<td>
+<p>DeprecatedArgs are passed to the ContainerSpec as they are.
+This field is to be deprecated. Use <code>Template</code> instead.
+When <code>Template</code> is set, this field is ignored.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>env</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#envvar-v1-core">
+[]Kubernetes core/v1.EnvVar
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>DeprecatedEnv is the list of environment variables to set in the container.
+Cannot be updated.
+This field is to be deprecated. Use <code>Template</code> instead.
+When <code>Template</code> is set, this field is ignored.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>serviceAccountName</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>DeprecatedServiceAccountName is the name of the ServiceAccount to use to run this
+source.
+This field is to be deprecated. Use <code>Template</code> instead.
+When <code>Template</code> is set, this field is ignored.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>sink</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1beta1.Destination
+</em>
+</td>
+<td>
+<p>Sink is a reference to an object that will resolve to a domain name to use as the sink.</p>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<code>status</code></br>
+<em>
+<a href="#sources.eventing.knative.dev/v1alpha1.ContainerSourceStatus">
+ContainerSourceStatus
+</a>
+</em>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sources.eventing.knative.dev/v1alpha1.CronJobSource">CronJobSource
+</h3>
+<p>
+<p>CronJobSource is the Schema for the cronjobsources API.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>apiVersion</code></br>
+string</td>
+<td>
+<code>
+sources.eventing.knative.dev/v1alpha1
+</code>
+</td>
+</tr>
+<tr>
+<td>
+<code>kind</code></br>
+string
+</td>
+<td><code>CronJobSource</code></td>
+</tr>
+<tr>
+<td>
+<code>Deprecated</code></br>
+<em>
+<a href="#sources.eventing.knative.dev/v1alpha1.Deprecated">
+Deprecated
+</a>
+</em>
+</td>
+<td>
+<p>Deprecated allows CronJobSource to have a deprecated message.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>metadata</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
+Kubernetes meta/v1.ObjectMeta
+</a>
+</em>
+</td>
+<td>
+Refer to the Kubernetes API documentation for the fields of the
+<code>metadata</code> field.
+</td>
+</tr>
+<tr>
+<td>
+<code>spec</code></br>
+<em>
+<a href="#sources.eventing.knative.dev/v1alpha1.CronJobSourceSpec">
+CronJobSourceSpec
+</a>
+</em>
+</td>
+<td>
+<br/>
+<br/>
+<table>
+<tr>
+<td>
+<code>schedule</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>Schedule is the cronjob schedule.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>data</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>Data is the data posted to the target function.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>sink</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1beta1.Destination
+</em>
+</td>
+<td>
+<p>Sink is a reference to an object that will resolve to a domain name to use as the sink.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>serviceAccountName</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>ServiceAccoutName is the name of the ServiceAccount that will be used to run the Receive
+Adapter Deployment.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>resources</code></br>
+<em>
+<a href="#sources.eventing.knative.dev/v1alpha1.CronJobResourceSpec">
+CronJobResourceSpec
+</a>
+</em>
+</td>
+<td>
+<p>Resource limits and Request specifications of the Receive Adapter Deployment</p>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<code>status</code></br>
+<em>
+<a href="#sources.eventing.knative.dev/v1alpha1.CronJobSourceStatus">
+CronJobSourceStatus
+</a>
+</em>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sources.eventing.knative.dev/v1alpha1.SinkBinding">SinkBinding
+</h3>
+<p>
+<p>SinkBinding describes a Binding that is also a Source.
+The <code>sink</code> (from the Source duck) is resolved to a URL and
+then projected into the <code>subject</code> by augmenting the runtime
+contract of the referenced containers to have a <code>K_SINK</code>
+environment variable holding the endpoint to which to send
+cloud events.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>apiVersion</code></br>
+string</td>
+<td>
+<code>
+sources.eventing.knative.dev/v1alpha1
+</code>
+</td>
+</tr>
+<tr>
+<td>
+<code>kind</code></br>
+string
+</td>
+<td><code>SinkBinding</code></td>
+</tr>
+<tr>
+<td>
+<code>Deprecated</code></br>
+<em>
+<a href="#sources.eventing.knative.dev/v1alpha1.Deprecated">
+Deprecated
+</a>
+</em>
+</td>
+<td>
+<p>Deprecated allows ApiServerSource to have a deprecated message.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>metadata</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
+Kubernetes meta/v1.ObjectMeta
+</a>
+</em>
+</td>
+<td>
+Refer to the Kubernetes API documentation for the fields of the
+<code>metadata</code> field.
+</td>
+</tr>
+<tr>
+<td>
+<code>spec</code></br>
+<em>
+<a href="#sources.eventing.knative.dev/v1alpha1.SinkBindingSpec">
+SinkBindingSpec
+</a>
+</em>
+</td>
+<td>
+<br/>
+<br/>
+<table>
+<tr>
+<td>
+<code>SourceSpec</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1.SourceSpec
+</em>
+</td>
+<td>
+<p>
+(Members of <code>SourceSpec</code> are embedded into this type.)
+</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>BindingSpec</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1alpha1.BindingSpec
+</em>
+</td>
+<td>
+<p>
+(Members of <code>BindingSpec</code> are embedded into this type.)
+</p>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<code>status</code></br>
+<em>
+<a href="#sources.eventing.knative.dev/v1alpha1.SinkBindingStatus">
+SinkBindingStatus
+</a>
+</em>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sources.eventing.knative.dev/v1alpha1.ApiServerResource">ApiServerResource
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#sources.eventing.knative.dev/v1alpha1.ApiServerSourceSpec">ApiServerSourceSpec</a>)
+</p>
+<p>
+<p>ApiServerResource defines the resource to watch</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>apiVersion</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>API version of the resource to watch.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>kind</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>Kind of the resource to watch.
+More info: <a href="https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds">https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<code>labelSelector</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#labelselector-v1-meta">
+Kubernetes meta/v1.LabelSelector
+</a>
+</em>
+</td>
+<td>
+<p>LabelSelector restricts this source to objects with the selected labels
+More info: <a href="http://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors">http://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<code>controllerSelector</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#ownerreference-v1-meta">
+Kubernetes meta/v1.OwnerReference
+</a>
+</em>
+</td>
+<td>
+<p>ControllerSelector restricts this source to objects with a controlling owner reference of the specified kind.
+Only apiVersion and kind are used. Both are optional.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>controller</code></br>
+<em>
+bool
+</em>
+</td>
+<td>
+<p>If true, send an event referencing the object controlling the resource</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sources.eventing.knative.dev/v1alpha1.ApiServerSourceSpec">ApiServerSourceSpec
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#sources.eventing.knative.dev/v1alpha1.ApiServerSource">ApiServerSource</a>)
+</p>
+<p>
+<p>ApiServerSourceSpec defines the desired state of ApiServerSource</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>resources</code></br>
+<em>
+<a href="#sources.eventing.knative.dev/v1alpha1.ApiServerResource">
+[]ApiServerResource
+</a>
+</em>
+</td>
+<td>
+<p>Resources is the list of resources to watch</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>serviceAccountName</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>ServiceAccountName is the name of the ServiceAccount to use to run this
+source.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>sink</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1beta1.Destination
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Sink is a reference to an object that will resolve to a domain name to use as the sink.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>mode</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>Mode is the mode the receive adapter controller runs under: Ref or Resource.
+<code>Ref</code> sends only the reference to the resource.
+<code>Resource</code> send the full resource.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sources.eventing.knative.dev/v1alpha1.ApiServerSourceStatus">ApiServerSourceStatus
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#sources.eventing.knative.dev/v1alpha1.ApiServerSource">ApiServerSource</a>)
+</p>
+<p>
+<p>ApiServerSourceStatus defines the observed state of ApiServerSource</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>Status</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1.Status
+</em>
+</td>
+<td>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
+<p>inherits duck/v1 Status, which currently provides:
+* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
+* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>sinkUri</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>SinkURI is the current active sink URI that has been configured for the ApiServerSource.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sources.eventing.knative.dev/v1alpha1.ContainerSourceSpec">ContainerSourceSpec
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#sources.eventing.knative.dev/v1alpha1.ContainerSource">ContainerSource</a>)
+</p>
+<p>
+<p>ContainerSourceSpec defines the desired state of ContainerSource</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>template</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#podtemplatespec-v1-core">
+Kubernetes core/v1.PodTemplateSpec
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Template describes the pods that will be created</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>image</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>DeprecatedImage is the image to run inside of the container.
+This field is to be deprecated. Use <code>Template</code> instead.
+When <code>Template</code> is set, this field is ignored.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>args</code></br>
+<em>
+[]string
+</em>
+</td>
+<td>
+<p>DeprecatedArgs are passed to the ContainerSpec as they are.
+This field is to be deprecated. Use <code>Template</code> instead.
+When <code>Template</code> is set, this field is ignored.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>env</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#envvar-v1-core">
+[]Kubernetes core/v1.EnvVar
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>DeprecatedEnv is the list of environment variables to set in the container.
+Cannot be updated.
+This field is to be deprecated. Use <code>Template</code> instead.
+When <code>Template</code> is set, this field is ignored.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>serviceAccountName</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>DeprecatedServiceAccountName is the name of the ServiceAccount to use to run this
+source.
+This field is to be deprecated. Use <code>Template</code> instead.
+When <code>Template</code> is set, this field is ignored.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>sink</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1beta1.Destination
+</em>
+</td>
+<td>
+<p>Sink is a reference to an object that will resolve to a domain name to use as the sink.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sources.eventing.knative.dev/v1alpha1.ContainerSourceStatus">ContainerSourceStatus
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#sources.eventing.knative.dev/v1alpha1.ContainerSource">ContainerSource</a>)
+</p>
+<p>
+<p>ContainerSourceStatus defines the observed state of ContainerSource</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>Status</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1.Status
+</em>
+</td>
+<td>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
+<p>inherits duck/v1 Status, which currently provides:
+* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
+* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>sinkUri</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>SinkURI is the current active sink URI that has been configured for the ContainerSource.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sources.eventing.knative.dev/v1alpha1.CronJobLimitsSpec">CronJobLimitsSpec
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#sources.eventing.knative.dev/v1alpha1.CronJobResourceSpec">CronJobResourceSpec</a>)
+</p>
+<p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>cpu</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<code>memory</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sources.eventing.knative.dev/v1alpha1.CronJobRequestsSpec">CronJobRequestsSpec
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#sources.eventing.knative.dev/v1alpha1.CronJobResourceSpec">CronJobResourceSpec</a>)
+</p>
+<p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>cpu</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<code>memory</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sources.eventing.knative.dev/v1alpha1.CronJobResourceSpec">CronJobResourceSpec
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#sources.eventing.knative.dev/v1alpha1.CronJobSourceSpec">CronJobSourceSpec</a>)
+</p>
+<p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>requests</code></br>
+<em>
+<a href="#sources.eventing.knative.dev/v1alpha1.CronJobRequestsSpec">
+CronJobRequestsSpec
+</a>
+</em>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<code>limits</code></br>
+<em>
+<a href="#sources.eventing.knative.dev/v1alpha1.CronJobLimitsSpec">
+CronJobLimitsSpec
+</a>
+</em>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sources.eventing.knative.dev/v1alpha1.CronJobSourceSpec">CronJobSourceSpec
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#sources.eventing.knative.dev/v1alpha1.CronJobSource">CronJobSource</a>)
+</p>
+<p>
+<p>CronJobSourceSpec defines the desired state of the CronJobSource.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>schedule</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>Schedule is the cronjob schedule.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>data</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>Data is the data posted to the target function.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>sink</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1beta1.Destination
+</em>
+</td>
+<td>
+<p>Sink is a reference to an object that will resolve to a domain name to use as the sink.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>serviceAccountName</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>ServiceAccoutName is the name of the ServiceAccount that will be used to run the Receive
+Adapter Deployment.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>resources</code></br>
+<em>
+<a href="#sources.eventing.knative.dev/v1alpha1.CronJobResourceSpec">
+CronJobResourceSpec
+</a>
+</em>
+</td>
+<td>
+<p>Resource limits and Request specifications of the Receive Adapter Deployment</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sources.eventing.knative.dev/v1alpha1.CronJobSourceStatus">CronJobSourceStatus
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#sources.eventing.knative.dev/v1alpha1.CronJobSource">CronJobSource</a>)
+</p>
+<p>
+<p>CronJobSourceStatus defines the observed state of CronJobSource.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>Status</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1.Status
+</em>
+</td>
+<td>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
+<p>inherits duck/v1 Status, which currently provides:
+* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
+* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>sinkUri</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>SinkURI is the current active sink URI that has been configured for the CronJobSource.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sources.eventing.knative.dev/v1alpha1.Deprecated">Deprecated
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#sources.eventing.knative.dev/v1alpha1.ApiServerSource">ApiServerSource</a>, 
+<a href="#sources.eventing.knative.dev/v1alpha1.ContainerSource">ContainerSource</a>, 
+<a href="#sources.eventing.knative.dev/v1alpha1.CronJobSource">CronJobSource</a>, 
+<a href="#sources.eventing.knative.dev/v1alpha1.SinkBinding">SinkBinding</a>)
+</p>
+<p>
+</p>
+<h3 id="sources.eventing.knative.dev/v1alpha1.SinkBindingSpec">SinkBindingSpec
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#sources.eventing.knative.dev/v1alpha1.SinkBinding">SinkBinding</a>)
+</p>
+<p>
+<p>SinkBindingSpec holds the desired state of the SinkBinding (from the client).</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>SourceSpec</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1.SourceSpec
+</em>
+</td>
+<td>
+<p>
+(Members of <code>SourceSpec</code> are embedded into this type.)
+</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>BindingSpec</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1alpha1.BindingSpec
+</em>
+</td>
+<td>
+<p>
+(Members of <code>BindingSpec</code> are embedded into this type.)
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sources.eventing.knative.dev/v1alpha1.SinkBindingStatus">SinkBindingStatus
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#sources.eventing.knative.dev/v1alpha1.SinkBinding">SinkBinding</a>)
+</p>
+<p>
+<p>SinkBindingStatus communicates the observed state of the SinkBinding (from the controller).</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>SourceStatus</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1.SourceStatus
+</em>
+</td>
+<td>
+<p>
+(Members of <code>SourceStatus</code> are embedded into this type.)
+</p>
 </td>
 </tr>
 </tbody>
@@ -3656,7 +4242,7 @@ string
 <td>
 <code>metadata</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
 </a>
 </em>
@@ -3762,7 +4348,7 @@ string
 <td>
 <code>metadata</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
 </a>
 </em>
@@ -3855,7 +4441,7 @@ string
 <td>
 <code>metadata</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
 </a>
 </em>
@@ -3897,7 +4483,7 @@ in the future</p>
 <td>
 <code>channel</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectreference-v1-core">
 Kubernetes core/v1.ObjectReference
 </a>
 </em>
@@ -3916,23 +4502,21 @@ etc.)</p>
 <td>
 <code>subscriber</code></br>
 <em>
-knative.dev/pkg/apis/duck/v1beta1.Destination
+knative.dev/pkg/apis/duck/v1.Destination
 </em>
 </td>
 <td>
 <em>(Optional)</em>
 <p>Subscriber is reference to (optional) function for processing events.
 Events from the Channel will be delivered here and replies are
-sent to a channel as specified by the Reply.</p>
+sent to a Destination as specified by the Reply.</p>
 </td>
 </tr>
 <tr>
 <td>
 <code>reply</code></br>
 <em>
-<a href="#messaging.knative.dev/v1alpha1.ReplyStrategy">
-ReplyStrategy
-</a>
+knative.dev/pkg/apis/duck/v1.Destination
 </em>
 </td>
 <td>
@@ -4089,7 +4673,7 @@ SubscribableTypeStatus
 <td>
 <code>channel</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectreference-v1-core">
 Kubernetes core/v1.ObjectReference
 </a>
 </em>
@@ -4220,7 +4804,7 @@ series through Channels and Subscriptions.</p>
 <td>
 <code>metadata</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
 </a>
 </em>
@@ -4277,7 +4861,7 @@ for the namespace (or cluster, in case there are no defaults for the namespace).
 <td>
 <code>reply</code></br>
 <em>
-knative.dev/pkg/apis/duck/v1beta1.Destination
+knative.dev/pkg/apis/duck/v1.Destination
 </em>
 </td>
 <td>
@@ -4326,7 +4910,7 @@ date.</p>
 <td>
 <code>filter</code></br>
 <em>
-knative.dev/pkg/apis/duck/v1beta1.Destination
+knative.dev/pkg/apis/duck/v1.Destination
 </em>
 </td>
 <td>
@@ -4337,7 +4921,7 @@ knative.dev/pkg/apis/duck/v1beta1.Destination
 <td>
 <code>subscriber</code></br>
 <em>
-knative.dev/pkg/apis/duck/v1beta1.Destination
+knative.dev/pkg/apis/duck/v1.Destination
 </em>
 </td>
 <td>
@@ -4348,7 +4932,7 @@ knative.dev/pkg/apis/duck/v1beta1.Destination
 <td>
 <code>reply</code></br>
 <em>
-knative.dev/pkg/apis/duck/v1beta1.Destination
+knative.dev/pkg/apis/duck/v1.Destination
 </em>
 </td>
 <td>
@@ -4438,7 +5022,7 @@ ParallelSubscriptionStatus
 <td>
 <code>channel</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectreference-v1-core">
 Kubernetes core/v1.ObjectReference
 </a>
 </em>
@@ -4508,7 +5092,7 @@ for the namespace (or cluster, in case there are no defaults for the namespace).
 <td>
 <code>reply</code></br>
 <em>
-knative.dev/pkg/apis/duck/v1beta1.Destination
+knative.dev/pkg/apis/duck/v1.Destination
 </em>
 </td>
 <td>
@@ -4617,7 +5201,7 @@ It generally has the form {channel}.{namespace}.svc.{cluster domain name}</p>
 <td>
 <code>subscription</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectreference-v1-core">
 Kubernetes core/v1.ObjectReference
 </a>
 </em>
@@ -4635,57 +5219,6 @@ knative.dev/pkg/apis.Condition
 </td>
 <td>
 <p>ReadyCondition indicates whether the Subscription is ready or not.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="messaging.knative.dev/v1alpha1.ReplyStrategy">ReplyStrategy
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#messaging.knative.dev/v1alpha1.SubscriptionSpec">SubscriptionSpec</a>)
-</p>
-<p>
-<p>ReplyStrategy specifies the handling of the Subscriber&rsquo;s returned replies.
-If no Subscriber is specified, the identity function is assumed.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>Destination</code></br>
-<em>
-knative.dev/pkg/apis/duck/v1beta1.Destination
-</em>
-</td>
-<td>
-<p>
-(Members of <code>Destination</code> are embedded into this type.)
-</p>
-<em>(Optional)</em>
-<p>The resource pointed by this Destination must meet the Addressable contract
-with a reference to the Addressable duck type. If the resource does not meet this contract,
-it will be reflected in the Subscription&rsquo;s status.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>channel</code></br>
-<em>
-knative.dev/pkg/apis/duck/v1beta1.Destination
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>The resource pointed by this ObjectReference must meet the Addressable contract
-with a reference to the Addressable duck type. If the resource does not meet this contract,
-it will be reflected in the Subscription&rsquo;s status.</p>
 </td>
 </tr>
 </tbody>
@@ -4708,7 +5241,7 @@ series through Channels and Subscriptions.</p>
 <td>
 <code>metadata</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
 </a>
 </em>
@@ -4737,7 +5270,7 @@ SequenceSpec
 <td>
 <code>steps</code></br>
 <em>
-[]knative.dev/pkg/apis/duck/v1beta1.Destination
+[]knative.dev/pkg/apis/duck/v1.Destination
 </em>
 </td>
 <td>
@@ -4764,7 +5297,7 @@ for the namespace (or cluster, in case there are no defaults for the namespace).
 <td>
 <code>reply</code></br>
 <em>
-knative.dev/pkg/apis/duck/v1beta1.Destination
+knative.dev/pkg/apis/duck/v1.Destination
 </em>
 </td>
 <td>
@@ -4812,7 +5345,7 @@ date.</p>
 <td>
 <code>channel</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectreference-v1-core">
 Kubernetes core/v1.ObjectReference
 </a>
 </em>
@@ -4854,7 +5387,7 @@ knative.dev/pkg/apis.Condition
 <td>
 <code>steps</code></br>
 <em>
-[]knative.dev/pkg/apis/duck/v1beta1.Destination
+[]knative.dev/pkg/apis/duck/v1.Destination
 </em>
 </td>
 <td>
@@ -4881,7 +5414,7 @@ for the namespace (or cluster, in case there are no defaults for the namespace).
 <td>
 <code>reply</code></br>
 <em>
-knative.dev/pkg/apis/duck/v1beta1.Destination
+knative.dev/pkg/apis/duck/v1.Destination
 </em>
 </td>
 <td>
@@ -4990,7 +5523,7 @@ It generally has the form {channel}.{namespace}.svc.{cluster domain name}</p>
 <td>
 <code>subscription</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectreference-v1-core">
 Kubernetes core/v1.ObjectReference
 </a>
 </em>
@@ -5059,7 +5592,7 @@ in the future</p>
 <td>
 <code>channel</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectreference-v1-core">
 Kubernetes core/v1.ObjectReference
 </a>
 </em>
@@ -5078,23 +5611,21 @@ etc.)</p>
 <td>
 <code>subscriber</code></br>
 <em>
-knative.dev/pkg/apis/duck/v1beta1.Destination
+knative.dev/pkg/apis/duck/v1.Destination
 </em>
 </td>
 <td>
 <em>(Optional)</em>
 <p>Subscriber is reference to (optional) function for processing events.
 Events from the Channel will be delivered here and replies are
-sent to a channel as specified by the Reply.</p>
+sent to a Destination as specified by the Reply.</p>
 </td>
 </tr>
 <tr>
 <td>
 <code>reply</code></br>
 <em>
-<a href="#messaging.knative.dev/v1alpha1.ReplyStrategy">
-ReplyStrategy
-</a>
+knative.dev/pkg/apis/duck/v1.Destination
 </em>
 </td>
 <td>
@@ -5223,5 +5754,5 @@ knative.dev/pkg/apis.URL
 <hr/>
 <p><em>
 Generated with <code>gen-crd-api-reference-docs</code>
-on git commit <code>3bf80459</code>.
+on git commit <code>8a92a8c9</code>.
 </em></p>

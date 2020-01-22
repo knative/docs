@@ -16,7 +16,7 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
 
 1. Install the `KafkaSource` sub-component to your Knative cluster:
    ```
-   kubectl apply -f https://github.com/knative/eventing-contrib/releases/download/v0.10.1/kafka-source.yaml
+   kubectl apply -f https://storage.googleapis.com/knative-releases/eventing-contrib/latest/kafka-source.yaml
 
    ```
 2. Check that the `kafka-controller-manager-0` pod is running.
@@ -188,7 +188,7 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
    ```
 3. Remove the Apache Kafka Event Controller
    ```
-   $ kubectl delete -f https://github.com/knative/eventing-contrib/releases/download/v0.10.1/kafka-importer.yaml
+   $ kubectl delete -f https://storage.googleapis.com/knative-releases/eventing-contrib/latest/kafka-source.yaml
    serviceaccount "kafka-controller-manager" deleted
    clusterrole.rbac.authorization.k8s.io "eventing-sources-kafka-controller" deleted
    clusterrolebinding.rbac.authorization.k8s.io "eventing-sources-kafka-controller" deleted

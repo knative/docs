@@ -21,13 +21,20 @@ You need:
 
 ## Sample application
 
-This guide uses the
-[Hello World sample app in Go](../serving/samples/hello-world/helloworld-go) to
-demonstrate the basic workflow for deploying an app, but these steps can be
-adapted for your own application if you have an image of it available on
-[Docker Hub](https://docs.docker.com/docker-hub/repos/),
-[Google Container Registry](https://cloud.google.com/container-registry/docs/pushing-and-pulling),
-or another container image registry.
+This guide demonstrates the basic workflow for deploying the
+[Hello World sample app (Go)](../serving/samples/hello-world/helloworld-go) from the 
+[Google Container Registry](https://cloud.google.com/container-registry/docs/pushing-and-pulling).
+You can use these steps as a guide for deploying your own container images from other
+registries like [Docker Hub](https://docs.docker.com/docker-hub/repos/).
+
+To deploy a local container image, you need to disable image tag resolution by running the following command:
+
+```bash
+# Set to dev.local/local-image when deploying local container images
+docker tag local-image dev.local/local-image
+```
+
+[Learn more about image tag resolution.](./tag-resolution.md)
 
 The Hello World sample app reads in an `env` variable, `TARGET`, from the
 configuration `.yaml` file, then prints "Hello World: \${TARGET}!". If `TARGET`

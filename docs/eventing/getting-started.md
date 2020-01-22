@@ -19,7 +19,7 @@ Use this guide to learn how to create, send, and verify events in Knative. The s
 
 To complete this guide, you will need the following installed and running:
 
-- A [Kubernetes cluster](https://kubernetes.io/docs/concepts/cluster-administration/cluster-administration-overview/) running v1.14 or higher
+- A [Kubernetes cluster](https://kubernetes.io/docs/concepts/cluster-administration/cluster-administration-overview/) running v1.15 or higher
 
 - [`kubectl` CLI tool](https://kubernetes.io/docs/reference/kubectl/overview/) within a minor version of your Kubernetes cluster.
 
@@ -49,13 +49,13 @@ If the `knative-eventing` namespace or the `imc-controller-*` does not exist, us
 
     ```sh
     kubectl apply --selector knative.dev/crd-install=true \
-    --filename https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml
+    --filename https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml
     ```
 
 1. Finish installing Eventing resources by running the following command:
 
     ```sh
-    kubectl apply --filename https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml
+    kubectl apply --filename https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml
     ```
 
    Installing the CRDs first can prevent race conditions, which might cause failures during the install.

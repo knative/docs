@@ -14,7 +14,7 @@ You can find [guides for other platforms here](./README.md).
 
 ## Before you begin
 
-Knative requires a Kubernetes cluster v1.14 or newer. If you don't have one, you
+Knative requires a Kubernetes cluster v1.15 or newer. If you don't have one, you
 can create one using [Docker for Mac](https://docs.docker.com/docker-for-mac/).
 If you haven't already,
 [install Docker for Mac](https://docs.docker.com/docker-for-mac/install/) before
@@ -25,43 +25,37 @@ continuing.
 1. After Docker for Mac is installed, configure it with sufficient resources.
    You can do that via the
    [_Advanced_ menu](https://docs.docker.com/docker-for-mac/#advanced) in Docker
-   for Mac's preferences. Set **CPUs** to at least **6** and **Memory** to at
-   least **8.0 GiB**.
+   for Mac's preferences. Set **CPUs** to at least **2** and **Memory** to at
+   least **6.0 GiB**.
 1. Now enable Docker for Mac's
    [Kubernetes capabilities](https://docs.docker.com/docker-for-mac/#kubernetes)
    and wait for the cluster to start up.
 
 ## Installing Istio
 
-Knative depends on [Istio](https://istio.io/docs/concepts/what-is-istio/) for
-traffic routing and ingress. You have the option of injecting Istio sidecars and
-enabling the Istio service mesh, but it's not required for all Knative
-components.
-
-If your cloud platform offers a managed Istio installation, we recommend
-installing Istio that way, unless you need the ability to customize your
-installation.
-
-If you prefer to install Istio manually, if your cloud provider doesn't offer a
-managed Istio installation, or if you're installing Knative locally using
-Minkube or similar, see the
-[Installing Istio for Knative guide](./installing-istio.md).
+Knative depends on [Istio](https://istio.io/docs/concepts/what-is-istio/) or
+other HTTP loadbalancers for traffic routing and ingress. See the
+[installing Istio for Knative guide](./installing-istio.md), and
+[select the minimal install without sidecar injection or SSL](./installing-istio.md#installing-istio-without-sidecar-injection).
 
 ## Installing `cluster-local-gateway` for serving cluster-internal traffic
 
-If you installed Istio, you can install a `cluster-local-gateway` within your Knative cluster so that you can serve cluster-internal traffic. If you want to configure your revisions to use routes that are visible only within your cluster, [install and use the `cluster-local-gateway`](./installing-istio.md#updating-your-install-to-use-cluster-local-gateway).
+If you installed Istio, you can install a `cluster-local-gateway` within your
+Knative cluster so that you can serve cluster-internal traffic. If you want to
+configure your revisions to use routes that are visible only within your
+cluster,
+[install and use the `cluster-local-gateway`](./installing-istio.md#updating-your-install-to-use-cluster-local-gateway).
 
 ## Installing Knative Serving
 
 Next, install [Knative Serving](https://github.com/knative/serving).
 
 Because you have limited resources available, use the
-`https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml` file,
-which installs only Knative Serving:
+`https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml`
+file, which installs only Knative Serving:
 
 ```shell
 curl -L https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
-  | sed 's/LoadBalancer/NodePort/' \
   | kubectl apply --filename -
 ```
 
@@ -93,7 +87,8 @@ Now that your cluster has Knative installed, you're ready to deploy an app.
 If you'd like to follow a step-by-step guide for deploying your first app on
 Knative, check out the
 [Getting Started with Knative App Deployment](../serving/getting-started-knative-app.md)
-guide.
+guide. Note that (as of 1.11) you'll need to push your docker images to
+DockerHub rather than only building them locally.
 
 If you'd like to view the available sample apps and deploy one of your choosing,
 head to the [sample apps](../serving/samples/README.md) repo.
@@ -104,8 +99,8 @@ head to the [sample apps](../serving/samples/README.md) repo.
 Get started with Knative Eventing by walking through one of the
 [Eventing Samples](../eventing/samples/).
 
-[Install Cert-Manager](../serving/installing-cert-manager.md) if you want to use the
-[automatic TLS cert provisioning feature](../serving/using-auto-tls.md).
+[Install Cert-Manager](../serving/installing-cert-manager.md) if you want to use
+the [automatic TLS cert provisioning feature](../serving/using-auto-tls.md).
 
 ## Cleaning up
 
@@ -115,5 +110,3 @@ up.
 To reset only the Kubernetes cluster to a fresh one, click "Reset Kubernetes
 cluster" in the
 [_Reset_ preferences](https://docs.docker.com/docker-for-mac/#reset).
-
-
