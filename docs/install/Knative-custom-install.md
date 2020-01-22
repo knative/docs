@@ -24,7 +24,7 @@ to run multiple installation commands.
 - This guide assumes that you have an existing Kubernetes cluster, on which
   you're comfortable installing and running _alpha_ level software.
 
-- Knative requires a Kubernetes cluster v1.14 or newer, as well as a compatible
+- Knative requires a Kubernetes cluster v1.15 or newer, as well as a compatible
 `kubectl`.
 
 ## Installing Istio
@@ -38,7 +38,7 @@ installing Istio that way.
 If you prefer to install Istio manually, see the
 [Installing Istio for Knative guide](./installing-istio.md).
 
-> Note: [Ambassador](./Knative-with-Ambassador.md) and
+> Note: [Ambassador](./Knative-with-Ambassador.md), [Contour](./Knative-with-Contour.md) and
 > [Gloo](./Knative-with-Gloo.md) are available as an alternative to Istio.
 
 ## Installing `cluster-local-gateway` for serving cluster-internal traffic
@@ -66,9 +66,7 @@ The following Knative installation files are available:
   - https://github.com/knative/serving/releases/download/{{< version >}}/monitoring-tracing-zipkin.yaml
   - https://github.com/knative/serving/releases/download/{{< version >}}/monitoring-tracing-zipkin-in-mem.yaml
 - **Eventing Component**:
-  - https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml
   - https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml
-  - https://github.com/knative/eventing/releases/download/{{< version >}}/in-memory-channel.yaml
 - **Eventing Resources**:
   - https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/github.yaml
   - https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/camel.yaml
@@ -200,7 +198,7 @@ commands below.
 
         ```bash
         https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml
-        https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml
+        https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml
         https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml
         ```
 
@@ -246,14 +244,14 @@ commands below.
           ```bash
           kubectl apply --selector knative.dev/crd-install=true \
             --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
-            --filename https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml
+            --filename https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml
           ```
 
       1. Remove the `--selector knative.dev/crd-install=true` flag 
          to install all the Knative components and the Eventing resources:
          ```bash
          kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
-           --filename https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml
+           --filename https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml
          ```
 
 1. Run one or more of the following commands to ensure that your component or plugin was 

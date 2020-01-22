@@ -26,6 +26,15 @@ You will need:
    instructions also install the default eventing sources, including
    the `GitHubSource` we'll use.
 
+### Install Github Event Source
+
+Github Event source lives in the [knative/eventing-contrib](https://github.com/knative/eventing-contrib).
+You can install it by running the following (this is currently the latest released version (0.11.2))
+
+```shell
+kubectl apply -f https://github.com/knative/eventing-contrib/releases/download/v0.11.2/github.yaml
+```
+
 ### Create a Knative Service
 
 To verify the `GitHubSource` is working, we will create a simple Knative
@@ -124,9 +133,10 @@ spec:
       name: githubsecret
       key: secretToken
   sink:
-    apiVersion: serving.knative.dev/v1
-    kind: Service
-    name: github-message-dumper
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: github-message-dumper
 ```
 
 Then, apply that yaml using `kubectl`:

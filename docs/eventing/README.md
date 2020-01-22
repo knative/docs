@@ -98,11 +98,13 @@ event sources. Sources manage registration and delivery of events from external
 systems using Kubernetes
 [Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
 Learn more about Eventing development in the
-[Eventing work group](../../contributing/WORKING-GROUPS.md#events).
+
+- [Eventing work group](../../contributing/WORKING-GROUPS.md#eventing).
 
 ## Installation
 
-Knative Eventing currently requires Knative Serving installed with either Istio version >=1.0, or Gloo version >=0.18.16.
+Knative Eventing currently requires Knative Serving installed with either Istio version >=1.0,
+Contour version >=1.1, or Gloo version >=0.18.16.
 [Follow the instructions to install on the platform of your choice](../install/README.md).
 
 ## Architecture
@@ -147,7 +149,9 @@ In addition to the core sources (explained below), there are
 
 If you need a Source not covered by the
 [available Source implementations](./sources/README.md), there is a
-[tutorial on writing your own Source](./samples/writing-a-source/README.md).
+[tutorial on writing your own Source with kubebuilder](./samples/writing-a-source/README.md) as
+well as an
+[extended tutorial on writing a Source with Receive Adapter](./samples/writing-receive-adapter-source).
 
 If your code needs to send events as part of its business logic and doesn't fit
 the model of a Source, consider
