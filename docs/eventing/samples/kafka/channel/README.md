@@ -36,8 +36,8 @@ kind: KafkaChannel
 metadata:
   name: my-kafka-channel
 spec:
-  numPartitions: 1
-  replicationFactor: 3
+  numPartitions: 3
+  replicationFactor: 1
 EOF
 ```
 
