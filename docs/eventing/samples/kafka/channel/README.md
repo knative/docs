@@ -63,6 +63,8 @@ data:
     clusterDefault:
       apiVersion: messaging.knative.dev/v1alpha1
       kind: KafkaChannel
+        numPartitions: 3
+        replicationFactor: 1
 EOF
 ```
 
