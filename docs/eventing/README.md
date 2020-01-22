@@ -208,26 +208,65 @@ The GitHubSource fires a new event for selected
 
 See the [GitHub Source](samples/github-source) example.
 
-### GcpPubSubSource
+### CloudPubSubSource
 
-The GcpPubSubSource fires a new event each time a message is published on a
+The CloudPubSubSource fires a new event each time a message is published on a
 [Google Cloud Platform PubSub topic](https://cloud.google.com/pubsub/).
 
 **Spec fields**:
 
-- `googleCloudProject`: `string` The GCP project ID that owns the topic.
 - `topic`: `string` The name of the PubSub topic.
-- `serviceAccountName`: `string` The name of the ServiceAccount used to access
-  the `gcpCredsSecret`.
-- `gcpCredsSecret`:
-  [ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#objectreference-v1-core)
-  A reference to a Secret which contains a GCP refresh token for talking to
-  PubSub.
 - `sink`:
-  [ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#objectreference-v1-core)
-  A reference to the object that should receive events.
+  [Destination](https://github.com/knative/pkg/blob/master/apis/duck/v1/destination.go)
+  A reference to the target that should receive events.
 
-See the [GCP PubSub Source](samples/gcp-pubsub-source) example.
+See the [CloudPubSubSource](samples/cloudpubsubsource) example.
+
+### CloudStorageSource
+
+Registers for events of the specified types on the specified 
+[Google Cloud Storage](https://cloud.google.com/storage/) bucket and optional object prefix. 
+Brings those events into Knative.
+
+**Spec fields**:
+
+- `bucket`: `string` GCS bucket to subscribe to. For example my-test-bucket.
+- `sink`:
+  [Destination](https://github.com/knative/pkg/blob/master/apis/duck/v1/destination.go)
+  A reference to the target that should receive events.
+
+See the [CloudStorageSource](samples/cloudstoragesource) example.
+
+### CloudSchedulerSource
+
+Create, update, and delete [Google Cloud Scheduler](https://cloud.google.com/scheduler/) Jobs. 
+When those jobs are triggered, receive the event inside Knative.
+
+**Spec fields**:
+
+- `location`: `string` Location to create the Scheduler job in.
+- `data`: `string` Data to send in the payload of the Event.
+- `schedule`: `string` Frequency using the unix-cron format. Or App Engine Cron format.
+- `sink`:
+  [Destination](https://github.com/knative/pkg/blob/master/apis/duck/v1/destination.go)
+  A reference to the target that should receive events.
+
+See the [CloudSchedulerSource](samples/cloudschedulersource) example.
+
+### CloudAuditLogsSource
+
+Registers for events of the specified types on the specified [Google Cloud Audit Logs](https://cloud.google.com/logging/docs/audit/). Brings those events into Knative.
+
+**Spec fields**:
+
+- `serviceName`: `string` The GCP service providing audit logs.
+- `methodName`: `string` The name of the service method or operation. For API calls, this should be the name of the API method.
+- `resourceName`: `string` The resource or collection that is the target of the operation. The name is a scheme-less URI, not including the API service name. If omitted, audit log events matching service and method will be pulled for all resources.
+- `sink`:
+  [Destination](https://github.com/knative/pkg/blob/master/apis/duck/v1/destination.go)
+  A reference to the target that should receive events.
+
+See the [CloudAuditLogsSource](samples/cloudauditlogssource) example.
 
 ### AwsSqsSource
 
