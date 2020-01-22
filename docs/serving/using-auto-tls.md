@@ -52,7 +52,7 @@ domain to map to the IP of ingress. You can achieve this by adding a DNS A recor
 
 To enable support for Auto TLS in Knative:
 
-### Step 1: Create cert-manager ClusterIssuer
+### Create cert-manager ClusterIssuer
 
 1.  Create and add the `ClusterIssuer` configuration file to your Knative cluster
 to define who issues the TLS certificates, how requests are validated,
@@ -133,7 +133,7 @@ and which DNS provider validates those requests.
     Result: The `Status.Conditions` should include `Ready=True`.
 
 
-### Step 2: Install networking-certmanager deployment
+### Install networking-certmanager deployment
 
 1.  Determine if `networking-certmanager` is already installed by running the 
     following command:
@@ -148,7 +148,7 @@ and which DNS provider validates those requests.
     kubectl apply --filename https://github.com/knative/serving/releases/download/v{{< version >}}/serving-cert-manager.yaml
     ```
 
-### Step 3: Install networking-ns-cert component
+### Install networking-ns-cert component
 
 If you choose to use the mode of provisioning certificate per namespace, you need to install `networking-ns-cert` components.
 
@@ -165,7 +165,7 @@ running the following command:
     kubectl apply --filename https://github.com/knative/serving/releases/download/v{{< version >}}/serving-nscert.yaml
     ```
 
-### Step 4: Configure config-certmanager ConfigMap
+### Configure config-certmanager ConfigMap
 
 Update your [`config-certmanager` ConfigMap](https://github.com/knative/serving/blob/master/config/config-certmanager.yaml)
 in the `knative-serving` namespace to reference your new `ClusterIssuer`.
@@ -212,7 +212,7 @@ in the `knative-serving` namespace to reference your new `ClusterIssuer`.
     kubectl get configmap config-certmanager --namespace knative-serving --output yaml
     ```
 
-### Step 5: Turn on Auto TLS
+### Turn on Auto TLS
 
 Update the
 [`config-network` ConfigMap](https://github.com/knative/serving/blob/master/config/config-network.yaml)
@@ -302,7 +302,7 @@ Congratulations! Knative is now configured to obtain and renew TLS certificates.
 When your TLS certificate is active on your cluster, your Knative services will
 be able to handle HTTPS traffic.
 
-### Step 6: Verify Auto TLS
+### Verify Auto TLS
 
 1.  Run the following comand to create a Knative Service:
     ```shell
