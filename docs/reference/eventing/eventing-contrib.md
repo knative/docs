@@ -2613,5 +2613,5 @@ knative.dev/eventing/pkg/apis/duck/v1alpha1.SubscribableTypeStatus
 <hr/>
 <p><em>
 Generated with <code>gen-crd-api-reference-docs</code>
-on git commit <code>c409ee07</code>.
+on git commit <code>395598e8</code>.
 </em></p>
