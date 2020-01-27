@@ -163,7 +163,7 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-go
         spec:
           containers:
             - name: helloworld-go
-              image: docker.io/akashv/helloworld-go
+              image: docker.io/{username}/helloworld-go
 
     ---
 
