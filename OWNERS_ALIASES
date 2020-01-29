@@ -27,3 +27,24 @@ aliases:
   - chizhg
   - steuhs
   - yt3liu
+
+  serving-eng-reviewers:
+  - dgerd
+  - dprotaso
+  - markusthoemmes
+  - mattmoor
+  - tcnghia
+  - vagababov
+
+  eventing-eng-reviewers:
+  - evankanderson
+  - grantr
+  - vaikas
+  - n3wscott
+  - matzew
+  - nachocano
+  - lionelvillard
+
+  install-eng-reviewers:
+  - serving-eng-reviewers
+  - eventing-eng-reviewers
