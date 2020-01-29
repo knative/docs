@@ -24,7 +24,7 @@ Knative Services.
 
 Currently, four options exist which provide this functionality:
 [Ambassador](https://www.getambassador.io/), an Envoy-based API Gateway,
-[Contour](https://projectcontour.io/), an Envoy-based ingress, and
+[Contour](https://projectcontour.io/), an Envoy-based ingress,
 [Gloo](https://docs.solo.io/gloo/latest/), an Envoy-based API Gateway, and
 [Istio](https://istio.io/), an Envoy-based Service Mesh.
 
