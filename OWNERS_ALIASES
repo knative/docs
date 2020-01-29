@@ -8,16 +8,19 @@ aliases:
   - rgregg
   - mchmarny
   - averikitsch
+ 
   docs-approvers:
   - carieshmarie
   - samodell
   - richieescarez
+ 
   docs-reviewers:
-  - gyliu513
   - abrennan89
+ 
   productivity-approvers:
   - adrcunha
   - chaodaiG
+ 
   productivity-reviewers:
   - adrcunha
   - chaodaiG
