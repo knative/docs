@@ -46,5 +46,16 @@ aliases:
   - lionelvillard
 
   install-eng-reviewers:
-  - serving-eng-reviewers
-  - eventing-eng-reviewers
+  - dgerd
+  - dprotaso
+  - markusthoemmes
+  - mattmoor
+  - tcnghia
+  - vagababov
+  - evankanderson
+  - grantr
+  - vaikas
+  - n3wscott
+  - matzew
+  - nachocano
+  - lionelvillard
