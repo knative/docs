@@ -5,9 +5,9 @@ weight: 1
 type: "docs"
 ---
 
-A simple web app written in Go that you can use for testing. It reads in an env
-variable `TARGET` and prints `Hello ${TARGET}!`. If `TARGET` is not specified,
-it will use `World` as the `TARGET`.
+A simple web app written in [PHP](https://www.php.net) that you can use for testing. It reads in
+an env variable `TARGET` and prints `Hello ${TARGET}!`. If `TARGET` is not specified, it will
+use `World` as the `TARGET`.
 
 Follow the steps below to create the sample code and then deploy the app to your
 cluster. You can also download a working copy of the sample, by running the
@@ -47,21 +47,16 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-php
    [official PHP docker image](https://hub.docker.com/_/php/) for more details.
 
    ```docker
-   # Use the official PHP 7.3 image.
-   # https://hub.docker.com/_/php
-   FROM php:7.3-apache
-
-   # Copy local code to the container image.
-   COPY index.php /var/www/html/
-
-   # Use the PORT environment variable in Apache configuration files.
-   RUN sed -i 's/80/${PORT}/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
-
-   # Configure PHP for development.
-   # Switch to the production php.ini for production operations.
-   # RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
-   # https://hub.docker.com/_/php#configuration
-   RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
+    # Use the official PHP image
+    # https://hub.docker.com/_/php
+    FROM php:cli
+    
+    COPY index.php /
+    EXPOSE 80
+    
+    # Use PHP built-in web server for serving index.php
+    # https://www.php.net/manual/en/features.commandline.webserver.php
+    ENTRYPOINT ["php", "-S", "0.0.0.0:80", "/index.php"]
    ```
 
 1. Create a `.dockerignore` file to ensure that any files related to a local
@@ -70,7 +65,6 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-php
    ```ignore
    Dockerfile
    README.md
-   vendor
    ```
 
 1. Create a new file, `service.yaml` and copy the following service definition
@@ -129,7 +123,7 @@ folder) you're ready to build and deploy the sample app.
 1. To find the URL for your service, use
 
    ```
-   kubectl get ksvc helloworld-php  --output=custom-columns=NAME:.metadata.name,URL:.status.url
+   kubectl get ksvc helloworld-php --output=custom-columns=NAME:.metadata.name,URL:.status.url
    NAME                URL
    helloworld-php      http://helloworld-php.default.1.2.3.4.xip.io
    ```
