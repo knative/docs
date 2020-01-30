@@ -77,17 +77,17 @@ Stuff
 {{< /tab >}}
 
 {{% tab name="Istio" %}}
-More Stuff
+{{% readfile file="./docs/README.md" %}}
 {{< /tab >}}
 {{< /tabs >}}
 ```
 
 {{< tabs name="serving_networking" default="Istio" >}}
-{{% tab name="Contour" %}}
+{{% tab name="Include example" %}}
 Stuff
 {{< /tab >}}
 
 {{% tab name="Istio" %}}
-More Stuff
+{{% readfile file="./docs/README.md" %}}
 {{< /tab >}}
 {{< /tabs >}}
