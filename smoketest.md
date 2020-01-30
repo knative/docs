@@ -65,3 +65,29 @@ added in-line with the
 
    Example:
    `git clone -b "{{% branch override="release-0.NEXT" %}}" https://github.com/knative/docs knative-docs`
+
+## Tabs
+
+How to include tabbed content in your page. Note that you can set a default tab.
+
+```
+{{< tabs name="serving_networking" default="Istio" >}}
+{{% tab name="Contour" %}}
+Stuff
+{{< /tab >}}
+
+{{% tab name="Istio" %}}
+More Stuff
+{{< /tab >}}
+{{< /tabs >}}
+```
+
+{{< tabs name="serving_networking" default="Istio" >}}
+{{% tab name="Contour" %}}
+Stuff
+{{< /tab >}}
+
+{{% tab name="Istio" %}}
+More Stuff
+{{< /tab >}}
+{{< /tabs >}}
