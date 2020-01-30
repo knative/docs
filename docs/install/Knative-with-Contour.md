@@ -63,7 +63,7 @@ data:
 
 Enter the following command to add the key:
 
-        kubectl edit --namespace knative-serving config-network
+        kubectl edit --namespace knative-serving configmap config-network
 
 
 
