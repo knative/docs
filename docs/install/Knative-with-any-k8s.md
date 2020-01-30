@@ -408,7 +408,7 @@ The following command enables the default Broker on a namespace (here `default`)
 
 ### Getting started with Eventing
 
-You can find a number of sample on how to get started with Knative Eventing [here](../eventing/eventing/).
+You can find a number of sample on how to get started with Knative Eventing [here](../eventing/).
 
 
 ## Installing the Monitoring bundle
