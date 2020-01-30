@@ -16,8 +16,9 @@ Here is a list of commercial Knative products (alphabetically):
 - [Google Cloud Run for Anthos](https://cloud.google.com/run/docs/gke/setup): <!-- TODO(ryangregg): add a description -->
 - IBM Kubernetes Service managed Knative add-on: <!-- TODO(duglin): add a description/link --> 
 - [Openshift Serverless](https://docs.openshift.com/container-platform/4.1/serverless/installing-openshift-serverless.html): <!-- TODO(bbrowning): add a description -->
+- [Pivotal Function Service](https://docs.pivotal.io/pfs): <!-- TODO(jurgen): add a description -->
 
-<!-- In which category do we put PFS, SAP/Kyma -->
+<!-- In which category do we put SAP/Kyma -->
 
 There are also a number of products that build on top of Knative components:
 
