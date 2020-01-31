@@ -18,7 +18,7 @@ Knative is implemented as a set of [controllers](https://kubernetes.io/docs/conc
 on your Kubernetes cluster. Knative registers its own API types to the Kubernetes API, so working with it is not 
 too different from working with Kubernetes itself.
 
-Knative consists of two separate projects:
+Knative consists of two independent components that have their own GitHub projects:
 
 * [Knative Serving](https://knative.dev/docs/serving/): Run stateless services more easily on Kubernetes, 
    by making autoscaling, networking and rollouts easier. 
