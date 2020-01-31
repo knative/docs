@@ -10,7 +10,7 @@ Knative (pronounced kay-native) is a set of open source components for [Kubernet
 functionality to:
 
 * run stateless workloads, such as microservices
-* support event subscription, delivery and handling 
+* support event subscription, delivery, and handling 
 
 on Kubernetes clusters.
 
