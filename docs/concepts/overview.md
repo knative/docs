@@ -15,7 +15,7 @@ functionality to:
 on Kubernetes clusters.
 
 Knative is implemented as a set of [controllers](https://kubernetes.io/docs/concepts/architecture/controller/) you install
-on your Kubernetes cluster. Knative registers its own API types to Kubernetes API, so working with it is not 
+on your Kubernetes cluster. Knative registers its own API types to the Kubernetes API, so working with it is not 
 too different from working with Kubernetes itself.
 
 Knative consists of two separate projects:
