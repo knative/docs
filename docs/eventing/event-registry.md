@@ -47,7 +47,7 @@ google.pubsub.topic.publish-hrxhh            google.pubsub.topic.publish        
 ```
 
 We can see that there are seven different EventTypes in the registry of the
-`default` namespace. Let's pick the first one and see how the EventType yaml
+`default` namespace. Let's pick the first one and see what the EventType yaml
 looks like:
 
 `kubectl get eventtype dev.knative.source.github.push-34cnb -o yaml`

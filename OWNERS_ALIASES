@@ -3,24 +3,61 @@ aliases:
   - evankanderson
   - mattmoor
   - dgerd
-  - vaikas-google
   - vaikas
   - rgregg
   - mchmarny
   - averikitsch
+ 
   docs-approvers:
   - carieshmarie
   - samodell
   - richieescarez
+ 
   docs-reviewers:
-  - gyliu513
   - abrennan89
+ 
   productivity-approvers:
   - chaodaiG
   - chizhg
+
   productivity-reviewers:
   - chaodaiG
   - coryrc
   - chizhg
   - steuhs
   - yt3liu
+
+  serving-eng-reviewers:
+  - dgerd
+  - dprotaso
+  - markusthoemmes
+  - mattmoor
+  - tcnghia
+  - vagababov
+
+  eventing-eng-reviewers:
+  - evankanderson
+  - grantr
+  - vaikas
+  - n3wscott
+  - matzew
+  - nachocano
+  - lionelvillard
+
+  install-eng-reviewers:
+  - dgerd
+  - dprotaso
+  - markusthoemmes
+  - mattmoor
+  - tcnghia
+  - vagababov
+  - evankanderson
+  - grantr
+  - vaikas
+  - n3wscott
+  - matzew
+  - nachocano
+  - lionelvillard
+  - k4leung4
+  - bbrowning
+  - houshengbo

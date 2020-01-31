@@ -1,15 +1,14 @@
 ---
 title: "Knative contribution guidelines"
-linkTitle: "Contributing"
+linkTitle: "Contribution guidelines"
 weight: 20
 type: "docs"
+showlandingtoc: "true"
 aliases:
   - /docs/contribution-guidelines/
+  - /contributing/
 ---
 
 Learn how to join the community of Knative contributors.
-
-Also see our [Community page](../community) for links to Knative chats,
-discussions, or Q&A.
 
 {{% readfile file="README.md" %}}
