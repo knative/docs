@@ -4,7 +4,7 @@ weight: 5
 type: "docs"
 ---
 
-This document contains a quick overview of Knative, what it is and how it is used.
+This document contains a quick overview of Knative.
 
 Knative (pronounced kay-native) is a set of open source components for [Kubernetes](https://kubernetes.io) that implements
 functionality to:
