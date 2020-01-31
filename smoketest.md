@@ -71,7 +71,7 @@ added in-line with the
 How to include tabbed content in your page. Note that you can set a default tab.
 
 ```
-{{< tabs name="serving_networking" default="Istio" >}}
+   {{< tabs name="serving_networking" default="Istio" >}}
 {{% tab name="Contour" %}}
 Stuff
 {{< /tab >}}
