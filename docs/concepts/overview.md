@@ -1,5 +1,5 @@
 ---
-title:  "Quick Overview"
+title:  "Overview"
 weight: ?
 type: "docs"
 ---
