@@ -1,7 +1,7 @@
 ---
 title: "2019 Annual Report"
 linkTitle: "2019 Annual Report"
-date: 2019-02-03
+date: 2020-02-03
 description: "2019 Knative Annual Report"
 type: "blog"
 ---
