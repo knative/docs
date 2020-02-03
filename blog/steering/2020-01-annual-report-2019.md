@@ -4,6 +4,8 @@ linkTitle: "2019 Annual Report"
 date: 2020-02-03
 description: "2019 Knative Annual Report"
 type: "blog"
+aliases:
+  - /blog/2019/02/03/2019-annual-report/
 ---
 
 We have created a 2019 Knative annual report for the community. The report can
