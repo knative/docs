@@ -9,10 +9,10 @@ This guide walks you through the installation of the latest version of Knative.
 Knative has two components, which can be installed and used independently or together.
 To help you pick and choose the pieces that are right for you, here is a brief
 description of each:
- - [**Serving**](#installing-the-serving-component)(_stable_) provides an abstraction for stateless request-based scale-to-zero services.
- - [**Eventing**](#installing-the-eventing-component)(_alpha_) provides abstractions to enable binding event sources (e.g. Github Webhooks, Kafka) and consumers (e.g. Kubernetes or Knative Services).
+ - [**Serving**](#installing-the-serving-component) (_stable_) provides an abstraction for stateless request-based scale-to-zero services.
+ - [**Eventing**](#installing-the-eventing-component) (_alpha_) provides abstractions to enable binding event sources (e.g. Github Webhooks, Kafka) and consumers (e.g. Kubernetes or Knative Services).
 
-Knative also has a [**Monitoring bundle**](#installing-the-monitoring-bundle)(_alpha_) which provides standard tooling that can be used to get visibility into the health of the software running on Knative.
+Knative also has a [**Monitoring bundle**](#installing-the-monitoring-bundle) (_alpha_) which provides standard tooling that can be used to get visibility into the health of the software running on Knative.
 
 ## Before you begin
 
