@@ -1,6 +1,5 @@
 ---
 title: "Installing Knative"
-linkTitle: "Installing Knative"
 weight: 15
 type: "docs"
 ---
@@ -17,7 +16,7 @@ Knative also has a [**Monitoring bundle**](#installing-the-monitoring-bundle)(_a
 
 ## Before you begin
 
-This guide assumes that you want to install an upstream Knative release on a Kubernetes cluster. A growing number of vendors have managed Knative offerings, see [here](../knative-offerings.md) for the known list.
+This guide assumes that you want to install an upstream Knative release on a Kubernetes cluster. A growing number of vendors have managed Knative offerings; see the [Knative Offerings](../knative-offerings.md) page for a full list.
 
 Knative {{< version >}} requires a Kubernetes cluster v1.15 or newer, as well as a compatible
 `kubectl`. This guide assumes that you've already created a Kubernetes cluster,
@@ -49,7 +48,7 @@ The following commands install the Knative Serving component.
    {{< tabs name="serving_networking" default="Istio" >}}
 {{% tab name="Ambassador" %}}
 
-The following commands install Ambassador and enable its Knative integration:
+The following commands install Ambassador and enable its Knative integration.
 
 1. Create a namespace to install Ambassador in:
 
@@ -57,7 +56,7 @@ The following commands install Ambassador and enable its Knative integration:
    kubectl create namespace ambassador
    ```
 
-2. Install Ambassador:
+1. Install Ambassador:
 
    ```bash
    kubectl apply --namespace ambassador \
@@ -65,19 +64,19 @@ The following commands install Ambassador and enable its Knative integration:
      --filename https://getambassador.io/yaml/ambassador/ambassador-service.yaml
    ```
 
-3. Give Ambassador the required permissions:
+1. Give Ambassador the required permissions:
 
    ```bash
    kubectl patch clusterrolebinding ambassador -p '{"subjects":[{"kind": "ServiceAccount", "name": "ambassador", "namespace": "ambassador"}]}'
    ```
 
-4. Enable Knative support in Ambassador:
+1. Enable Knative support in Ambassador:
 
    ```bash
    kubectl set env --namespace ambassador  deployments/ambassador AMBASSADOR_KNATIVE_SUPPORT=true
    ```
 
-5. To configure Knative Serving to use Ambassador by default:
+1. To configure Knative Serving to use Ambassador by default:
 
     ```bash
     kubectl patch configmap/config-network \
@@ -86,7 +85,7 @@ The following commands install Ambassador and enable its Knative integration:
       --patch '{"data":{"ingress.class":"ambassador.ingress.networking.knative.dev"}}'
     ```
 
-6. Fetch the External IP or CNAME
+1. Fetch the External IP or CNAME:
 
    ```bash
    kubectl --namespace ambassador get service ambassador
@@ -97,7 +96,7 @@ The following commands install Ambassador and enable its Knative integration:
 {{< /tab >}}
 
 {{% tab name="Contour" %}}
-The following commands install Contour and enables its Knative integration:
+The following commands install Contour and enable its Knative integration.
 
 1. Install the Knative Contour controller (includes Contour):
 
@@ -105,7 +104,7 @@ The following commands install Contour and enables its Knative integration:
    kubectl apply --filename https://raw.githubusercontent.com/knative/serving/{{< version >}}/third_party/contour-latest/contour.yaml
    ```
 
-2. To configure Knative Serving to use Contour by default:
+1. To configure Knative Serving to use Contour by default:
 
     ```bash
     kubectl patch configmap/config-network \
@@ -114,7 +113,7 @@ The following commands install Contour and enables its Knative integration:
       --patch '{"data":{"ingress.class":"contour.ingress.networking.knative.dev"}}'
     ```
 
-3. Fetch the External IP or CNAME
+1. Fetch the External IP or CNAME:
 
    ```bash
    kubectl --namespace projectcontour get service envoy-external
@@ -125,9 +124,9 @@ The following commands install Contour and enables its Knative integration:
 {{< /tab >}}
 
 {{% tab name="Gloo" %}}
-_For a detailed guide on Gloo integration, see [here](https://docs.solo.io/gloo/latest/installation/knative/)_
+_For a detailed guide on Gloo integration, see [Installing Gloo for Knative](https://docs.solo.io/gloo/latest/installation/knative/) in the Gloo documentation._
 
-The following commands install Gloo and enables its Knative integration:
+The following commands install Gloo and enable its Knative integration.
 
 1. Make sure `glooctl` is installed (version 1.3.x and higher recommended):
 
@@ -137,13 +136,13 @@ The following commands install Gloo and enables its Knative integration:
 
    If it is not installed, follow the instructions [here](https://docs.solo.io/gloo/latest/installation/knative/#install-command-line-tool-cli)
 
-2. Install Gloo and the Knative integration:
+1. Install Gloo and the Knative integration:
 
     ```bash
     glooctl install knative --install-knative=false
     ```
 
-3. Fetch the External IP or CNAME
+1. Fetch the External IP or CNAME:
 
    ```bash
    kubectl get svc -ngloo-system knative-external-proxy
@@ -154,19 +153,19 @@ The following commands install Gloo and enables its Knative integration:
 {{< /tab >}}
 
 {{% tab name="Istio" %}}
-The following commands install Istio and enables its Knative integration:
+The following commands install Istio and enable its Knative integration.
 
 <!-- TODO(https://github.com/knative/docs/issues/2166): Create streamlined instructions to inline -->
 
 1. [Installing Istio for Knative](./installing-istio.md)
 
-2. Install the Knative Istio controller:
+1. Install the Knative Istio controller:
 
    ```bash
    kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving-istio.yaml
    ```
 
-3. Fetch the External IP or CNAME
+1. Fetch the External IP or CNAME:
 
    ```bash
    kubectl --namespace istio-system get service istio-ingressgateway
@@ -177,7 +176,7 @@ The following commands install Istio and enables its Knative integration:
 {{< /tab >}}
 
 {{% tab name="Kourier" %}}
-The following commands install Kourier and enables its Knative integration:
+The following commands install Kourier and enable its Knative integration.
 
 1. Install the Knative Kourier controller:
 
@@ -185,7 +184,7 @@ The following commands install Kourier and enables its Knative integration:
    kubectl apply --filename https://raw.githubusercontent.com/knative/serving/{{< version >}}/third_party/kourier-latest/kourier.yaml
    ```
 
-2. To configure Knative Serving to use Kourier by default:
+1. To configure Knative Serving to use Kourier by default:
 
     ```bash
     kubectl patch configmap/config-network \
@@ -194,7 +193,7 @@ The following commands install Kourier and enables its Knative integration:
       --patch '{"data":{"ingress.class":"kourier.ingress.networking.knative.dev"}}'
     ```
 
-3. Fetch the External IP or CNAME
+1. Fetch the External IP or CNAME:
 
    ```bash
    kubectl --namespace kourier-system get service kourier
@@ -223,7 +222,7 @@ kubectl apply --filename https://github.com/knative/serving/releases/download/{{
 {{% tab name="Real DNS" %}}
 To configure DNS for Knative, take the External IP or CNAME from setting up networking, and configure it with your DNS provider as follows:
 
-- If the networking layer produced an External IP address, then configure a wildcard A record for the domain:
+- If the networking layer produced an External IP address, then configure a wildcard `A` record for the domain:
 
     ```
     # Here knative.example.com is the domain suffix for your cluster
@@ -237,7 +236,7 @@ To configure DNS for Knative, take the External IP or CNAME from setting up netw
     *.knative.example.com == CNAME a317a278525d111e89f272a164fd35fb-1510370581.eu-central-1.elb.amazonaws.com
     ```
 
-Once your DNS provider has been configured, direct Knative to use that domain with:
+Once your DNS provider has been configured, direct Knative to use that domain:
 
 ```bash
 # Replace knative.example.com with your domain suffix
@@ -278,7 +277,7 @@ kubectl apply --filename https://github.com/knative/serving/releases/download/{{
 
 {{% tab name="TLS with cert-manager" %}}
 
-Knative supports automatically provisioning TLS certificates via cert-manager.  The following commands will install the components needed to support the provisioning of TLS certificates via cert-manager:
+Knative supports automatically provisioning TLS certificates via [cert-manager](https://cert-manager.io/docs/).  The following commands will install the components needed to support the provisioning of TLS certificates via cert-manager.
 
 1. First, install [cert-manager version `0.12.0` or higher](../serving/installing-cert-manager.md)
 
