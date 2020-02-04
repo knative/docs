@@ -1,12 +1,12 @@
 ---
-title: "Commercial Knative Offerings"
-linkTitle: "Knative Vendors"
+title: "Knative Offerings"
+linkTitle: "Knative Offerings"
 weight: 15
 type: "docs"
 ---
 
 Knative has a rich community with many vendors participating, and many of those
-vendors offer commercial Knative offerings.  Please check with each of these
+vendors offer commercial Knative products.  Please check with each of these
 vendors for what is or is not supported.
 
 <!-- TODO: Talk about criteria for inclusion here?  a la Conformance -->
