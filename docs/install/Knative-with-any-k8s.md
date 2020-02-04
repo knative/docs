@@ -134,7 +134,14 @@ The following commands install Gloo and enable its Knative integration.
    glooctl version
    ```
 
-   If it is not installed, follow the instructions [here](https://docs.solo.io/gloo/latest/installation/knative/#install-command-line-tool-cli)
+   If it is not installed, you can install the latest version using:
+
+   ```bash
+   curl -sL https://run.solo.io/gloo/install | sh
+   export PATH=$HOME/.gloo/bin:$PATH
+   ```
+
+   Or following the [Gloo CLI install instructions](https://docs.solo.io/gloo/latest/installation/knative/#install-command-line-tool-cli).
 
 1. Install Gloo and the Knative integration:
 
@@ -145,7 +152,7 @@ The following commands install Gloo and enable its Knative integration.
 1. Fetch the External IP or CNAME:
 
    ```bash
-   kubectl get svc -ngloo-system knative-external-proxy
+   glooctl proxy url --name knative-external-proxy
    ```
 
    Save this for configuring DNS below.
