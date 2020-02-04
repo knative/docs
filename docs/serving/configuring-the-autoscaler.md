@@ -30,7 +30,6 @@ data:
  container-concurrency-target-default: 100
  container-concurrency-target-percentage: 1.0
  enable-scale-to-zero: true
- enable-vertical-pod-autoscaling: false
  max-scale-up-rate: 10
  panic-window: 6s
  scale-to-zero-grace-period: 30s
