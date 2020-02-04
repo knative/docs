@@ -64,20 +64,22 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
    @SpringBootApplication
    public class HelloworldApplication {
 
-      @Value("${TARGET:World}")
-      String target;
+     @Value("${TARGET:World}")
+     String target;
 
-      @RestController
-      class HelloworldController {
-          @GetMapping("/")
-          String hello() {
-              return "Hello " + target + "!";
-          }
-      }
+     @RestController
+     class HelloworldController {
+       @GetMapping("/")
+       String hello() {
+         return "Hello " + target + "!";
+       }
+     }
 
-      public static void main(String[] args) {
-          SpringApplication.run(HelloworldApplication.class, args);
-      }
+     public static void main(String[] args) {
+       String port = System.getenv().getOrDefault("PORT", "8080");
+       System.setProperty("server.port", port);
+       SpringApplication.run(HelloworldApplication.class, args);
+     }
    }
    ```
 
@@ -119,7 +121,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
    COPY --from=builder /app/target/helloworld-*.jar /helloworld.jar
 
    # Run the web service on container startup.
-   CMD ["java","-Djava.security.egd=file:/dev/./urandom","-Dserver.port=${PORT}","-jar","/helloworld.jar"]
+   CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/helloworld.jar"]
    ```
 
 1. Create a new file, `service.yaml` and copy the following service definition
