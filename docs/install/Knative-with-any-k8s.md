@@ -7,18 +7,19 @@ type: "docs"
 
 This guide walks you through the installation of the latest version of Knative.
 
-Knative has several pieces, which can be installed and used independently or together.
+Knative has two components, which can be installed and used independently or together.
 To help you pick and choose the pieces that are right for you, here is a brief
 description of each:
  - [**Serving**](#installing-the-serving-component)(_stable_) provides an abstraction for stateless request-based scale-to-zero services.
  - [**Eventing**](#installing-the-eventing-component)(_alpha_) provides abstractions to enable binding event sources (e.g. Github Webhooks, Kafka) and consumers (e.g. Kubernetes or Knative Services).
- - [**Monitoring**](#installing-the-monitoring-bundle)(_alpha_) provides a bundle of standard tooling that can be used to get visibility into the health of the software running on Knative.
+
+Knative also has a [**Monitoring bundle**](#installing-the-monitoring-bundle)(_alpha_) which provides standard tooling that can be used to get visibility into the health of the software running on Knative.
 
 ## Before you begin
 
 This guide assumes that you want to install an upstream Knative release on a Kubernetes cluster. A growing number of vendors are offering managed Knative services, see [here](./vendor-options.md) for a list of the known offerings.
 
-Knative requires a Kubernetes cluster v1.15 or newer, as well as a compatible
+Knative {{< version >}} requires a Kubernetes cluster v1.15 or newer, as well as a compatible
 `kubectl`. This guide assumes that you've already created a Kubernetes cluster,
 and that you are using bash in a Mac or Linux environment; some commands will
 need to be adjusted for use in a Windows environment.
@@ -29,7 +30,7 @@ need to be adjusted for use in a Windows environment.
 
 The following commands install the Knative Serving component.
 
-1. Install the Custom Resource Definitions (aka CRDs):
+1. Install the [Custom Resource Definitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) (aka CRDs):
 
    ```bash
    kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving-crds.yaml
@@ -42,6 +43,7 @@ The following commands install the Knative Serving component.
    ```
 
 1. Pick a networking layer (alphabetical):
+   <!-- TODO: Link to document/diagram describing what is a networking layer.  -->
 
    <!-- This indentation is important for things to render properly. -->
    {{< tabs name="serving_networking" default="Istio" >}}
@@ -154,6 +156,8 @@ The following commands install Gloo and enables its Knative integration:
 {{% tab name="Istio" %}}
 The following commands install Istio and enables its Knative integration:
 
+<!-- TODO(https://github.com/knative/docs/issues/2166): Create streamlined instructions to inline -->
+
 1. [Installing Istio for Knative](./installing-istio.md)
 
 2. Install the Knative Istio controller:
@@ -212,7 +216,7 @@ We ship a simple Kubernetes Job called "default domain" that will (see caveats) 
 kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving-default-domain.yaml
 ```
 
-**Caveat**: This will only work if the cluster LoadBalancer service exposes an IPv4 address, so it will not work with IPv6 clusters, AWS, or local setups like Minikube.  For these, see "Using a real DNS record" (below).
+**Caveat**: This will only work if the cluster LoadBalancer service exposes an IPv4 address, so it will not work with IPv6 clusters, AWS, or local setups like Minikube.  For these, see "Real DNS".
 {{< /tab >}}
 
 
@@ -308,7 +312,7 @@ Deploy your first app with the [getting started with Knative app deployment](../
 
 The following commands install the Knative Eventing component.
 
-1. Install the Custom Resource Definitions (aka CRDs):
+1. Install the [Custom Resource Definitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) (aka CRDs):
 
    ```bash
    kubectl apply --filename https://github.com/knative/eventing/releases/download/{{< version >}}/eventing-crds.yaml
