@@ -30,14 +30,18 @@ metadata:
  name: config-autoscaler
  namespace: knative-serving
 data:
- container-concurrency-target-default: 100
- container-concurrency-target-percentage: 1.0
- enable-scale-to-zero: true
- max-scale-up-rate: 10
- panic-window: 6s
- scale-to-zero-grace-period: 30s
- stable-window: 60s
- tick-interval: 2s
+ container-concurrency-target-default: "100"
+ container-concurrency-target-percentage: "0.7"
+ enable-scale-to-zero: "true"
+ max-scale-up-rate: "1000"
+ max-scale-down-rate: "2"
+ panic-window-percentage: "10"
+ panic-threshold-percentage: "200"
+ scale-to-zero-grace-period: "30s"
+ stable-window: "60s"
+ tick-interval: "2s"
+ target-burst-capacity: "200"
+ requests-per-second-target-default: "200"
 ```
 
 # Configuring scale to zero for KPA
@@ -51,7 +55,7 @@ following parameters in the ConfigMap.
 running before it is scaled to zero (min: 6s).
 
 ```
-scale-to-zero-grace-period: 30s
+scale-to-zero-grace-period: "30s"
 ```
 
 ## stable-window
@@ -60,14 +64,14 @@ When operating in a stable mode, the autoscaler operates on the average
 concurrency over the stable window (min: 6s).
 
 ```
-stable-window: 60s
+stable-window: "60s"
 ```
 
 `stable-window` can also be configured in the Revision template as an
 annotation.
 
 ```
-autoscaling.knative.dev/window: 60s
+autoscaling.knative.dev/window: "60s"
 ```
 
 ## enable-scale-to-zero
@@ -94,14 +98,14 @@ limit) and is the recommended configuration for autoscaling in Knative.
 The default value for concurrency target is specified in the ConfigMap as `100`.
 
 ```
-`container-concurrency-target-default: 100`
+container-concurrency-target-default: "100"
 ```
 
 This value can be configured by adding or modifying the
 `autoscaling.knative.dev/target` annotation value in the revision template.
 
 ```
-autoscaling.knative.dev/target: 50
+autoscaling.knative.dev/target: "50"
 ```
 
 #### containerConcurrency
@@ -125,8 +129,7 @@ containerConcurrency: 0 | 1 | 2-N
 - A value of `2` or more will limit request concurrency to that value.
 - A value of `0` means the system should decide.
 
-If there is no `/target` annotation, the autoscaler is configured as if
-`/target` == `containerConcurrency`.
+`containerConcurrency` takes precedence over the `target` values.
 
 ## Configuring scale bounds (minScale and maxScale)
 
@@ -182,7 +185,7 @@ spec:
   metadata:
    annotations:
     autoscaling.knative.dev/metric: cpu
-    autoscaling.knative.dev/target: 70
+    autoscaling.knative.dev/target: "70"
     autoscaling.knative.dev/class: hpa.autoscaling.knative.dev
 ```
 ## Using the recommended autoscaling reconciler for custom Go implementations
