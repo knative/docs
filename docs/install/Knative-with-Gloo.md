@@ -53,7 +53,6 @@ glooctl install knative --install-eventing --install-eventing-version=<knative-r
 
 The `glooctl install knative` command can be customized with a variety of options:
 - use `--install-knative-version` to set the installed version of Knative Serving (defaults to `0.10.0`)
-- use `--install-build` to install Knative Build
 - use `--install-eventing` to install Knative Eventing
 - use `--dry-run` to produce the kubernetes YAML that would be applied to your cluster rather than applying.
 - use `--install-knative=false` to only install Gloo without installing Knative components. This can be used if you wish to install Knative independently of Gloo.
