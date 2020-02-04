@@ -19,8 +19,6 @@ Here is a list of commercial Knative products (alphabetically):
 - [Openshift Serverless](https://access.redhat.com/documentation/en-us/openshift_container_platform/4.3/html-single/serverless_applications/index): on OpenShift Container Platform enables stateful, stateless, and serverless workloads to all run on a single multi-cloud container platform with automated operations. Developers can use a single platform for hosting their microservices, legacy, and serverless applications.
 - [Pivotal Function Service (PFS)](https://docs.pivotal.io/pfs): is a platform for building and running functions, applications, and containers on Kubernetes. PFS is based on the [riff](https://projectriff.io) open source project.
 
-<!-- In which category do we put SAP/Kyma? -->
+<!-- TODO: In which category do we put SAP/Kyma? -->
 
-There are also a number of products that build on top of Knative components:
-
-<!-- TODO(mattmoor): Solicit a list of stuff in #community -->
+<!-- TODO(you!): Add a new section if your project builds ON Knative (vs. offering it directly)  -->
