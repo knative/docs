@@ -17,7 +17,7 @@ Knative also has a [**Monitoring bundle**](#installing-the-monitoring-bundle)(_a
 
 ## Before you begin
 
-This guide assumes that you want to install an upstream Knative release on a Kubernetes cluster. A growing number of vendors are offering managed Knative services, see [here](./vendor-options.md) for a list of the known offerings.
+This guide assumes that you want to install an upstream Knative release on a Kubernetes cluster. A growing number of vendors have managed Knative offerings, see [here](../knative-offerings.md) for the known list.
 
 Knative {{< version >}} requires a Kubernetes cluster v1.15 or newer, as well as a compatible
 `kubectl`. This guide assumes that you've already created a Kubernetes cluster,
