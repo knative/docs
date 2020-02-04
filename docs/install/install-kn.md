@@ -1,6 +1,5 @@
 ---
-title: "Installing the `kn` Client"
-linkTitle: "Installing the `kn` Client"
+title: "Installing the Knative CLI"
 weight: 10
 type: "docs"
 ---
