@@ -15,11 +15,11 @@ You must place the executable binary in your system path, and make sure that it 
 ## Install `kn` using Go
 1. Check out the [Client repository](https://github.com/knative/client).
 1. Run the command:
-  ```
+  ```bash
   go install ./cmd/kn
   ```
 
 ## `kn` container images
 The `kn` container images are available here:
-- [Nightly container image](gcr.io/knative-nightly/knative.dev/client/cmd/kn)
-- [Latest release](gcr.io/knative-releases/knative.dev/client/cmd/kn)
+- [Nightly container image](https://gcr.io/knative-nightly/knative.dev/client/cmd/kn)
+- [Latest release](https://gcr.io/knative-releases/knative.dev/client/cmd/kn)
