@@ -71,11 +71,11 @@ To learn how to use the registry, see the
 
 Knative Eventing also defines an event forwarding and persistence layer, called
 a
-[**Channel**](https://github.com/knative/eventing/blob/master/pkg/apis/messaging/v1alpha1/channel_types.go#L57).
+[**Channel**](https://github.com/knative/eventing/blob/master/pkg/apis/messaging/v1beta1/channel_types.go).
 Each channel is a separate Kubernetes [Custom Resource](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
 Events are delivered to Services or forwarded to other channels
 (possibly of a different type) using
-[Subscriptions](https://github.com/knative/eventing/blob/master/pkg/apis/messaging/v1alpha1/subscription_types.go).
+[Subscriptions](https://github.com/knative/eventing/blob/master/pkg/apis/messaging/v1beta1/subscription_types.go).
 This allows message delivery in a cluster to vary based on requirements, so that
 some events might be handled by an in-memory implementation while others would
 be persisted using Apache Kafka or NATS Streaming.
@@ -116,9 +116,9 @@ The eventing infrastructure supports two forms of event delivery at the moment:
    Service is not available.
 1. Fan-out delivery from a source or Service response to multiple endpoints
    using
-   [Channels](https://github.com/knative/eventing/blob/master/pkg/apis/messaging/v1alpha1/channel_types.go#L57)
+   [Channels](https://github.com/knative/eventing/blob/master/pkg/apis/messaging/v1beta1/channel_types.go)
    and
-   [Subscriptions](https://github.com/knative/eventing/blob/master/pkg/apis/messaging/v1alpha1/subscription_types.go).
+   [Subscriptions](https://github.com/knative/eventing/blob/master/pkg/apis/messaging/v1beta1/subscription_types.go).
    In this case, the Channel implementation ensures that messages are delivered
    to the requested destinations and should buffer the events if the destination
    Service is unavailable.
