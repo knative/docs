@@ -122,7 +122,7 @@ the`knative-eventing` and `knative-monitoring` namespaces.
 
 ## Installing Istio
 
-[Follow the instructions to install and run Istio in IBM Cloud Private](https://istio.io/docs/setup/kubernetes/quick-start-ibm/#ibm-cloud-private).
+[Follow the instructions to install and run Istio in IBM Cloud Private](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.2/manage_cluster/istio.html).
 
 If you prefer to install Istio manually, see the
 [Installing Istio for Knative guide](./installing-istio.md).
@@ -130,32 +130,15 @@ If you prefer to install Istio manually, see the
 You must install Istio on your Kubernetes cluster before continuing with these
 instructions to install Knative.
 
+## Installing `cluster-local-gateway` for serving cluster-internal traffic
+
+If you installed Istio, you can install a `cluster-local-gateway` within your Knative cluster so that you can serve cluster-internal traffic. If you want to configure your revisions to use routes that are visible only within your cluster, [install and use the `cluster-local-gateway`](./installing-istio.md#updating-your-install-to-use-cluster-local-gateway).
+
 ## Installing Knative
 
 The following commands install all available Knative components as well as the
 standard set of observability plugins. To customize your Knative installation,
 see [Performing a Custom Knative Installation](./Knative-custom-install.md).
-
-1. If you are upgrading from Knative 0.3.x: Update your domain and static IP
-   address to be associated with the LoadBalancer `istio-ingressgateway` instead
-   of `knative-ingressgateway`. Then run the following to clean up leftover
-   resources:
-
-   ```
-   kubectl delete svc knative-ingressgateway -n istio-system
-   kubectl delete deploy knative-ingressgateway -n istio-system
-   ```
-
-   If you have the Knative Eventing Sources component installed, you will also
-   need to delete the following resource before upgrading:
-
-   ```
-   kubectl delete statefulset/controller-manager -n knative-sources
-   ```
-
-   While the deletion of this resource during the upgrade process will not
-   prevent modifications to Eventing Source resources, those changes will not be
-   completed until the upgrade process finishes.
 
 1. Run the following commands to install Knative:
 
@@ -166,7 +149,7 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
    ```
 
    ```shell
-   curl -L https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml \
+   curl -L https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml \
      | sed 's/LoadBalancer/NodePort/' \
      | kubectl apply --filename -
    ```
@@ -238,7 +221,7 @@ curl -L https://github.com/knative/serving/releases/download/{{< version >}}/ser
 ```
 
 ```shell
-curl -L https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml \
+curl -L https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml \
  | sed 's/LoadBalancer/NodePort/' \
  | kubectl delete --filename -
 ```
@@ -248,5 +231,3 @@ curl -L https://github.com/knative/serving/releases/download/{{< version >}}/mon
  | sed 's/LoadBalancer/NodePort/' \
  | kubectl delete --filename -
 ```
-
-

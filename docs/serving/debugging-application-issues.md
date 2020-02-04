@@ -20,7 +20,7 @@ route traffic percent to sum to 100:
 
 ```
 Error from server (InternalError): error when applying patch:
-{"metadata":{"annotations":{"kubectl.kubernetes.io/last-applied-configuration":"{\"apiVersion\":\"serving.knative.dev/v1alpha1\",\"kind\":\"Route\",\"metadata\":{\"annotations\":{},\"name\":\"route-example\",\"namespace\":\"default\"},\"spec\":{\"traffic\":[{\"configurationName\":\"configuration-example\",\"percent\":50}]}}\n"}},"spec":{"traffic":[{"configurationName":"configuration-example","percent":50}]}}
+{"metadata":{"annotations":{"kubectl.kubernetes.io/last-applied-configuration":"{\"apiVersion\":\"serving.knative.dev/v1\",\"kind\":\"Route\",\"metadata\":{\"annotations\":{},\"name\":\"route-example\",\"namespace\":\"default\"},\"spec\":{\"traffic\":[{\"configurationName\":\"configuration-example\",\"percent\":50}]}}\n"}},"spec":{"traffic":[{"configurationName":"configuration-example","percent":50}]}}
 to:
 &{0xc421d98240 0xc421e77490 default route-example STDIN 0xc421db0488 264682 false}
 for: "STDIN": Internal error occurred: admission webhook "webhook.knative.dev" denied the request: mutation failed: The route must have traffic percent sum equal to 100.
@@ -43,22 +43,21 @@ kubectl get route <route-name> --output yaml
 
 The `conditions` in `status` provide the reason if there is any failure. For
 details, see Knative
-[Error Conditions and Reporting](https://github.com/knative/serving/blob/master/docs/spec/errors.md)(currently
-some of them are not implemented yet).
+[Error Conditions and Reporting](https://github.com/knative/docs/blob/master/docs/serving/spec/knative-api-specification-1.0.md#error-signalling).
 
-### Check ClusterIngress/Istio routing
+### Check Ingress/Istio routing
 
-Run the following command to list all the cluster ingress, with their labels
+To list all Ingress resources and their corresponding labels, run the following command:
 
 ```shell
-kubectl get clusteringress -o=custom-columns='NAME:.metadata.name,LABELS:.metadata.labels'
-NAME                   LABELS
-helloworld-go-h5kd4    map[serving.knative.dev/route:helloworld-go serving.knative.dev/routeNamespace:default]
+kubectl get ingresses.networking.internal.knative.dev -o=custom-columns='NAME:.metadata.name,LABELS:.metadata.labels'
+NAME            LABELS
+helloworld-go   map[serving.knative.dev/route:helloworld-go serving.knative.dev/routeNamespace:default serving.knative.dev/service:helloworld-go]
 ```
 
 The labels `serving.knative.dev/route` and `serving.knative.dev/routeNamespace`
-will tell exactly which Route a ClusterIngress is a child resource of. Find the
-one corresponding to your Route. If a ClusterIngress does not exist, the route
+indicate the Route in which the Ingress resource resides. Your Route and 
+Ingress should be listed. If your Ingress does not exist, the route
 controller believes that the Revisions targeted by your Route/Service isn't
 ready. Please proceed to later sections to diagnose Revision readiness status.
 
@@ -66,23 +65,23 @@ Otherwise, run the following command to look at the ClusterIngress created for
 your Route
 
 ```
-kubectl get clusteringress <CLUSTERINGRESS_NAME> --output yaml
+kubectl get ingresses.networking.internal.knative.dev <INGRESS_NAME> --output yaml
 ```
 
-particularly, look at the `status:` section. If the ClusterIngress is working
+particularly, look at the `status:` section. If the Ingress is working
 correctly, we should see the condition with `type=Ready` to have `status=True`.
 Otherwise, there will be error messages.
 
-Now, if ClusterIngress shows status Ready, there must be a corresponding
+Now, if Ingress shows status `Ready`, there must be a corresponding
 VirtualService. Run the following command:
 
 ```shell
-kubectl get virtualservice <CLUSTERINGRESS_NAME> -n knative-serving --output yaml
+kubectl get virtualservice <INGRESS_NAME> -n <INGRESS_NAMESPACE> --output yaml
 ```
 
-the network configuration in VirtualService must match that of ClusterIngress
+the network configuration in VirtualService must match that of Ingress
 and Route. VirtualService currently doesn't expose a Status field, so if one
-exists and have matching configurations with ClusterIngress and Route, you may
+exists and have matching configurations with Ingress and Route, you may
 want to wait a little bit for those settings to propagate.
 
 If you are familar with Istio and `istioctl`, you may try using `istioctl` to
@@ -91,8 +90,7 @@ look deeper using Istio
 
 ### Check Ingress status
 
-Before Knative 0.3 we use a LoadBalancer service call `knative-ingressgateway`
-to handle ingress. Since Knative 0.3 we now use `istio-ingressgateway` Service.
+Knative uses a LoadBalancer service called `istio-ingressgateway` Service.
 
 To check the IP address of your Ingress, use
 

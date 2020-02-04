@@ -1,4 +1,4 @@
-apiVersion: messaging.knative.dev/v1alpha1
+apiVersion: flows.knative.dev/v1alpha1
 kind: Sequence
 metadata:
   name: second-sequence
@@ -8,18 +8,19 @@ spec:
     kind: InMemoryChannel
   steps:
   - ref:
-      apiVersion: serving.knative.dev/v1alpha1
+      apiVersion: serving.knative.dev/v1
       kind: Service
       name: fourth
   - ref:
-      apiVersion: serving.knative.dev/v1alpha1
+      apiVersion: serving.knative.dev/v1
       kind: Service
       name: fifth
   - ref:
-      apiVersion: serving.knative.dev/v1alpha1
+      apiVersion: serving.knative.dev/v1
       kind: Service
       name: sixth
   reply:
-    kind: Service
-    apiVersion: serving.knative.dev/v1alpha1
-    name: event-display
+    ref:
+      kind: Service
+      apiVersion: serving.knative.dev/v1
+      name: event-display

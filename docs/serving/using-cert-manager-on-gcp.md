@@ -30,7 +30,7 @@ and Cloud DNS:
 - [Google Cloud DNS](https://cloud.google.com/dns/docs/how-to) must set up and
   configure for your domain.
 - You must have a Knative cluster with the following requirements:
-  - Knative Serving v0.6.0 or higher running.
+  - Knative Serving running.
   - The Knative cluster must be running on Google Cloud Platform. For details
     about installing the Serving component, see the
     [Knative installation guides](../install/).

@@ -8,7 +8,7 @@ spec:
       containers:
         # This corresponds to a heartbeats image uri you build and publish,
         # e.g. gcr.io/[gcloud-project]/github.com/knative/eventing-contrib/cmd/heartbeats
-        - image: github.com/knative/eventing-contrib/cmd/heartbeats
+        - image: knative.dev/eventing-contrib/cmd/heartbeats
           name: heartbeats
           args:
             - --period=1

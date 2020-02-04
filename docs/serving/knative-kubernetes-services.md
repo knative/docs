@@ -31,24 +31,23 @@ that are active when running Knative Serving.
    webhook             ClusterIP   10.107.144.50    <none>        443/TCP                  1h
    ```
 
-````
- 3. To view the deployments in your cluster, use the following command:
+3. To view the deployments in your cluster, use the following command:
 
-    ```sh
-    $ kubectl get deployments -n knative-serving
-    ```
+   ```sh
+   $ kubectl get deployments -n knative-serving
+   ```
 
-    This should return the following output:
+   This should return the following output:
 
-     ```sh
-NAME                     DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-activator                1         1         1            1           1h
-autoscaler               1         1         1            1           1h
-controller               1         1         1            1           1h
-networking-certmanager   1         1         1            1           1h
-networking-istio         1         1         1            1           1h
-webhook                  1         1         1            1           1h
-````
+   ```sh
+   NAME                     DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+   activator                1         1         1            1           1h
+   autoscaler               1         1         1            1           1h
+   controller               1         1         1            1           1h
+   networking-certmanager   1         1         1            1           1h
+   networking-istio         1         1         1            1           1h
+   webhook                  1         1         1            1           1h
+   ```
 
 These services and deployments are installed by the `serving.yaml` file during
 install. The next section describes their function.
@@ -94,5 +93,5 @@ The networking-istio deployment reconciles a cluster's ingress into an
   click
   [here](https://github.com/knative/serving/blob/master/docs/spec/overview.md#service).
 - For a high-level analysis of Serving, look at the [documentation here](./).
-- Check out the Knative Seriving code samples [here](./samples/) for more
+- Check out the Knative Serving code samples [here](./samples/) for more
   hands-on tutorials.

@@ -1,0 +1,16 @@
+apiVersion: sources.knative.dev/v1alpha1
+kind: ApiServerSource
+metadata:
+  name: testevents-kafka-03
+  namespace: default
+spec:
+  serviceAccountName: events-sa
+  mode: Resource
+  resources:
+  - apiVersion: v1
+    kind: Event
+  sink:
+    ref:
+      apiVersion: eventing.knative.dev/v1alpha1
+      kind: Broker
+      name: default

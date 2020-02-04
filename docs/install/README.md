@@ -22,17 +22,22 @@ clusters.
 Knative depends on an Ingress/Gateway which is capable of routing requests to
 Knative Services.
 
-Currently, three options exist which provide this functionality:
+Currently, four options exist which provide this functionality:
 [Ambassador](https://www.getambassador.io/), an Envoy-based API Gateway,
-[Gloo](https://gloo.solo.io), an Envoy-based API Gateway, and
+[Contour](https://projectcontour.io/), an Envoy-based ingress,
+[Gloo](https://docs.solo.io/gloo/latest/), an Envoy-based API Gateway, and
 [Istio](https://istio.io/), an Envoy-based Service Mesh.
 
 ## Installing Knative with Ambassador
 
 [Installing with Ambassador](./Knative-with-Ambassador.md) gives us an
 alternative to installing a service mesh for routing to applications with the
-Knative Serving component. Note that Istio is required for the Knative Eventing
-component.
+Knative Serving component.
+
+## Installing Knative with Contour
+
+[Install with Contour](./Knative-with-Contour.md): Contour can handle all of
+the networking requirements for a full Knative installation.
 
 ## Installing Knative with Gloo
 
@@ -57,6 +62,10 @@ There are several options when installing Knative:
 For new users, we recommend the comprehensive install to get you up and running
 quickly.
 
+## Installing Knative with Kourier
+
+[Installing Knative with Kourier](./knative-with-kourier.md): In this guide, Knative will be installed with Kourier to replace the Istio Service Mesh, providing a more lightweight and simple Ingress controller. Note that Istio is required for the Knative Eventing component.
+
 ### Install guides
 
 Follow these step-by-step guides for setting up Kubernetes and installing
@@ -74,6 +83,7 @@ available Knative components and a set of observability plugins.
 - [Knative Install on IBM Cloud Kubernetes Service](./Knative-with-IKS.md)
 - [Knative Install on IBM Cloud Private](./Knative-with-ICP.md)
 - [Knative Install on Minikube](./Knative-with-Minikube.md)
+- [Knative Install on OpenShift Container Platform](https://docs.openshift.com/container-platform/4.1/serverless/installing-openshift-serverless.html)
 - [Knative Install on Pivotal Container Service](./Knative-with-PKS.md)
 
 If you already have a Kubernetes cluster you're comfortable installing _alpha_
@@ -87,8 +97,6 @@ The guides below install some of the available Knative components, without all
 available observability plugins, to minimize the disk space used for install.
 
 - [Knative Install on Docker for Mac](./Knative-with-Docker-for-Mac.md)
-- [Knative Install on OpenShift](./Knative-with-OpenShift.md)
-- [Knative Install on OpenShift via Operator](https://github.com/openshift-knative/docs/blob/master/README.md)
 
 **Custom install guide**
 
@@ -100,7 +108,7 @@ custom install guide:
 > **Note**: If need to set up a Kubernetes cluster with the correct
 > specifications to run Knative, you can follow any of the install instructions
 > through the creation of the cluster, then follow the
-> [Performing a Custom Knative Installation](./knative-custom-install.md) guide.
+> [Performing a Custom Knative Installation](./Knative-custom-install.md) guide.
 
 **Observability install guide**
 
@@ -126,16 +134,13 @@ Now you're ready to deploy an app:
 ## Configuring Knative Serving
 
 After your Knative installation is running, you can set up a custom domain with
-a static IP address to be able to use Knative for publicly available services
-and set up an Istio IP range for outbound network access:
+a static IP address to be able to use Knative for publicly available services,
+and set up TLS certificates to use HTTPS:
 
 - [Assign a static IP address](../serving/gke-assigning-static-ip-address.md)
 - [Configure a custom domain](../serving/using-a-custom-domain.md)
-- [Configure outbound network access](../serving/outbound-network-access.md)
-- [Configuring HTTPS with a custom certificate](../serving/using-an-ssl-cert.md)
+- [Configuring HTTPS with a custom certificate](../serving/using-a-tls-cert.md)
 
 ## Checking the version of your Knative Serving installation
 
 - [Checking the version of your Knative Serving installation](./check-install-version.md)
-
-

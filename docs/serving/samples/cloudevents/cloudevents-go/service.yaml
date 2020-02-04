@@ -1,0 +1,14 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: cloudevents-go
+  namespace: default
+spec:
+  template:
+    spec:
+      containers:
+      - image: github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-go
+        # Uncomment this to send events somewhere.
+        # env:
+        # - name: K_SINK
+        #   value: http://default-broker.default.svc.cluster.local

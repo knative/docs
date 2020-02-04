@@ -10,11 +10,9 @@ using pre-built images.
 
 ## Before you begin
 
-Knative requires a Kubernetes cluster v1.11 or newer with the
-[MutatingAdmissionWebhook admission controller](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#how-do-i-turn-on-an-admission-controller)
-enabled. `kubectl` v1.10 is also required. This guide assumes that you've
-already created a Kubernetes cluster which you're comfortable installing _alpha_
-software on.
+Knative requires a Kubernetes cluster v1.15 or newer, as well as a compatible
+`kubectl`. This guide assumes that you've already created a Kubernetes cluster
+which you're comfortable installing _alpha_ software on.
 
 This guide assumes you are using bash in a Mac or Linux environment; some
 commands will need to be adjusted for use in a Windows environment.
@@ -24,7 +22,7 @@ commands will need to be adjusted for use in a Windows environment.
 Knative depends on Istio. If your cloud platform offers a managed Istio
 installation, we recommend installing Istio that way, unless you need the
 ability to customize your installation. For example, the
-[GKE Install Guide](./knative-with-gke.md) includes the instructions for
+[GKE Install Guide](./Knative-with-GKE.md) includes the instructions for
 installing Istio on your cluster using `gcloud`.
 
 If you prefer to install Istio manually, if your cloud provider doesn't offer a
@@ -35,32 +33,15 @@ Minkube or similar, see the
 You must install Istio on your Kubernetes cluster before continuing with these
 instructions to install Knative.
 
+## Installing `cluster-local-gateway` for serving cluster-internal traffic
+
+If you installed Istio, you can install a `cluster-local-gateway` within your Knative cluster so that you can serve cluster-internal traffic. If you want to configure your revisions to use routes that are visible only within your cluster, [install and use the `cluster-local-gateway`](./installing-istio.md#updating-your-install-to-use-cluster-local-gateway).
+
 ## Installing Knative
 
 The following commands install all available Knative components. To customize
 your Knative installation, see
 [Performing a Custom Knative Installation](./Knative-custom-install.md).
-
-1. If you are upgrading from Knative 0.3.x: Update your domain and static IP
-   address to be associated with the LoadBalancer `istio-ingressgateway` instead
-   of `knative-ingressgateway`. Then run the following to clean up leftover
-   resources:
-
-   ```bash
-   kubectl delete svc knative-ingressgateway -n istio-system
-   kubectl delete deploy knative-ingressgateway -n istio-system
-   ```
-
-   If you have the Knative Eventing Sources component installed, you will also
-   need to delete the following resource before upgrading:
-
-   ```
-   kubectl delete statefulset/controller-manager -n knative-sources
-   ```
-
-   While the deletion of this resource during the upgrade process will not
-   prevent modifications to Eventing Source resources, those changes will not be
-   completed until the upgrade process finishes.
 
 1. To install Knative, first install the CRDs by running the `kubectl apply`
    command once with the `-l knative.dev/crd-install=true` flag. This prevents
@@ -69,7 +50,7 @@ your Knative installation, see
    ```bash
    kubectl apply --selector knative.dev/crd-install=true \
    --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
-   --filename https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml \
+   --filename https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml \
    --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml
    ```
 
@@ -79,7 +60,7 @@ your Knative installation, see
 
    ```bash
    kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
-   --filename https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml \
+   --filename https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml \
    --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml
    ```
 

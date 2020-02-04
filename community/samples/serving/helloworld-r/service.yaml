@@ -1,4 +1,4 @@
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: helloworld-r
@@ -7,7 +7,7 @@ spec:
   template:
     spec:
       containers:
-      - image: docker.io/akitsch/helloworld-r
+      - image: docker.io/{username}/helloworld-r
         env:
         - name: TARGET
           value: "R Sample v1"

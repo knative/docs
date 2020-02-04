@@ -1,27 +1,25 @@
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: sequence-display
 spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        spec:
-          container:
-            image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display
+  template:
+    spec:
+      containers:
+      - image: gcr.io/knative-releases/knative.dev/eventing-sources/cmd/event_display
 ---
 apiVersion: eventing.knative.dev/v1alpha1
 kind: Trigger
 metadata:
   name: display-trigger
 spec:
-  broker: broker-test
+  broker: default
   filter:
-    sourceAndType:
+    attributes:
       type: samples.http.mod3
   subscriber:
     ref:
-      apiVersion: serving.knative.dev/v1alpha1
+      apiVersion: serving.knative.dev/v1
       kind: Service
       name: sequence-display
 ---

@@ -1,4 +1,4 @@
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: first
@@ -6,13 +6,13 @@ spec:
   template:
     spec:
       containers:
-      - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:2656f39a7fcb6afd9fc79e7a4e215d14d651dc674f38020d1d18c6f04b220700
+      - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/appender
         env:
-        - name: STEP
-          value: "0"
+        - name: MESSAGE
+          value: " - Handled by 0"
 
 ---
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: second
@@ -20,12 +20,12 @@ spec:
   template:
     spec:
       containers:
-      - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:2656f39a7fcb6afd9fc79e7a4e215d14d651dc674f38020d1d18c6f04b220700
+      - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/appender
         env:
-        - name: STEP
-          value: "1"
+        - name: MESSAGE
+          value: " - Handled by 1"
 ---
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: third
@@ -33,13 +33,13 @@ spec:
   template:
     spec:
       containers:
-      - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:2656f39a7fcb6afd9fc79e7a4e215d14d651dc674f38020d1d18c6f04b220700
+      - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/appender
         env:
-        - name: STEP
-          value: "2"
+        - name: MESSAGE
+          value: " - Handled by 2"
 
 ---
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: fourth
@@ -47,12 +47,12 @@ spec:
   template:
     spec:
       containers:
-      - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:2656f39a7fcb6afd9fc79e7a4e215d14d651dc674f38020d1d18c6f04b220700
+      - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/appender
         env:
-        - name: STEP
-          value: "3"
+        - name: MESSAGE
+          value: " - Handled by 3"
 ---
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: fifth
@@ -60,12 +60,12 @@ spec:
   template:
     spec:
       containers:
-      - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:2656f39a7fcb6afd9fc79e7a4e215d14d651dc674f38020d1d18c6f04b220700
+      - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/appender
         env:
-        - name: STEP
-          value: "4"
+        - name: MESSAGE
+          value: " - Handled by 4"
 ---
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: sixth
@@ -73,8 +73,8 @@ spec:
   template:
     spec:
       containers:
-      - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:2656f39a7fcb6afd9fc79e7a4e215d14d651dc674f38020d1d18c6f04b220700
+      - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/appender
         env:
-        - name: STEP
-          value: "5"
+        - name: MESSAGE
+          value: " - Handled by 5"
 ---

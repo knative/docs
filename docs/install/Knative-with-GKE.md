@@ -15,8 +15,8 @@ You can find [guides for other platforms here](./README.md).
 > [Cloud Run on GKE](https://cloud.google.com/run/docs/gke/setup) is a hosted
 > offering on top of GKE that builds around Istio and Knative Serving.
 
-Knative requires a Kubernetes cluster v1.11 or newer. `kubectl` v1.10 is also
-required. This guide walks you through creating a cluster with the correct
+Knative requires a Kubernetes cluster v1.15 or newer, as well as a compatible
+`kubectl`. This guide walks you through creating a cluster with the correct
 specifications for Knative on Google Cloud Platform (GCP).
 
 This guide assumes you are using `bash` in a Mac or Linux environment; some
@@ -24,7 +24,7 @@ commands will need to be adjusted for use in a Windows environment.
 
 ### Installing the Google Cloud SDK and `kubectl`
 
-1. If you already have `gcloud` installed with `kubectl` version 1.10 or newer,
+1. If you already have `gcloud` installed with `kubectl`,
    you can skip these steps.
 
    > Tip: To check which version of `kubectl` you have installed, enter:
@@ -110,7 +110,7 @@ Engine cluster.
 To make sure the cluster is large enough to host Knative and its dependencies,
 the recommended configuration for a cluster is:
 
-- Kubernetes version 1.11 or later
+- Kubernetes version 1.15 or later
 - 4 vCPU nodes (`n1-standard-4`)
 - Node autoscaling, up to 10 nodes
 - API scopes for `cloud-platform`
@@ -118,12 +118,12 @@ the recommended configuration for a cluster is:
 1. Create a Kubernetes cluster on GKE with the required specifications:
 
 > Note: If this setup is for development, or a non-Istio networking layer (e.g.
-> [Ambassador](./Knative-with-Ambassador.md) or [Gloo](./Knative-with-Gloo.md))
+> [Ambassador](./Knative-with-Ambassador.md), [Contour](./Knative-with-Contour.md), or [Gloo](./Knative-with-Gloo.md))
 > will be used, then you can remove the `--addons` line below.
 
 > Note: If you want to use [Auto TLS feature](../serving/using-auto-tls.md), you
 > need to remove the `--addons` line below, and follow the
-> [instructions](../installing-istio.md) to install Istio with Secret Discovery
+> [instructions](./installing-istio.md) to install Istio with Secret Discovery
 > Service.
 
 ```bash
@@ -148,6 +148,10 @@ gcloud beta container clusters create $CLUSTER_NAME \
 Admin permissions are required to create the necessary
 [RBAC rules for Knative](https://istio.io/docs/concepts/security/rbac/).
 
+## Installing `cluster-local-gateway` for serving cluster-internal traffic
+
+If you installed Istio, you can install a `cluster-local-gateway` within your Knative cluster so that you can serve cluster-internal traffic. If you want to configure your revisions to use routes that are visible only within your cluster, [install and use the `cluster-local-gateway`](./installing-istio.md#updating-your-install-to-use-cluster-local-gateway).
+
 ## Installing Knative
 
 The following commands install all available Knative components as well as the
@@ -161,7 +165,7 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
    ```bash
    kubectl apply --selector knative.dev/crd-install=true \
    --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
-   --filename https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml \
+   --filename https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml \
    --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml
    ```
 
@@ -171,7 +175,7 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
 
    ```bash
    kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
-   --filename https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml \
+   --filename https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml \
    --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml
    ```
 

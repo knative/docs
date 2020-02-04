@@ -12,8 +12,8 @@ You can find [guides for other platforms here](./README.md).
 
 ## Before you begin
 
-Knative requires a Kubernetes cluster v1.11 or newer. `kubectl` v1.10 is also
-required. This guide walks you through creating a cluster with the correct
+Knative requires a Kubernetes cluster v1.15 or newer, as well as a compatible
+`kubectl`. This guide walks you through creating a cluster with the correct
 specifications for Knative on Azure Kubernetes Service (AKS).
 
 This guide assumes you are using bash in a Mac or Linux environment; some
@@ -51,8 +51,8 @@ brew install azure-cli
 ### Installing kubectl
 
 1. If you already have `kubectl`, run `kubectl version` to check your client
-   version. If you have `kubectl` v1.10 installed, you can skip to the next
-   section and create an AKS cluster
+   version. If the client is within a minor version of the master, then you
+   can skip to the next section and create an AKS cluster
 
 ```bash
 az aks install-cli
@@ -99,7 +99,7 @@ Next we will create a managed Kubernetes cluster using AKS. To make sure the
 cluster is large enough to host all the Knative and Istio components, the
 recommended configuration for a cluster is:
 
-- Kubernetes version 1.11 or later
+- Kubernetes version 1.15 or later
 - Three or more nodes
 - Standard_DS3_v2 nodes
 - RBAC enabled
@@ -115,7 +115,7 @@ recommended configuration for a cluster is:
    az aks create --resource-group $RESOURCE_GROUP \
    --name $CLUSTER_NAME \
    --generate-ssh-keys \
-   --kubernetes-version 1.11.5 \
+   --kubernetes-version 1.15.5 \
    --enable-rbac \
    --node-vm-size Standard_DS3_v2
    ```
@@ -145,37 +145,21 @@ Minkube or similar, see the
 You must install Istio on your Kubernetes cluster before continuing with these
 instructions to install Knative.
 
-> Note: [Ambassador](https://www.getambassador.io/) and
-> [Gloo](https://gloo.solo.io/) are available as an alternative to Istio.
+> Note: [Ambassador](https://www.getambassador.io/), [Contour](https://projectcontour.io/), and
+> [Gloo](https://docs.solo.io/gloo/latest/) are available as an alternative to Istio.
 > [Click here](./Knative-with-Ambassador.md) to install Knative with Ambassador.
+> [Click here](./Knative-with-Contour.md) to install Knative with Contour.
 > [Click here](./Knative-with-Gloo.md) to install Knative with Gloo.
+
+## Installing `cluster-local-gateway` for serving cluster-internal traffic
+
+If you installed Istio, you can install a `cluster-local-gateway` within your Knative cluster so that you can serve cluster-internal traffic. If you want to configure your revisions to use routes that are visible only within your cluster, [install and use the `cluster-local-gateway`](./installing-istio.md#updating-your-install-to-use-cluster-local-gateway).
 
 ## Installing Knative
 
 The following commands install all available Knative components. To customize
 your Knative installation, see
 [Performing a Custom Knative Installation](./Knative-custom-install.md).
-
-1. If you are upgrading from Knative 0.3.x: Update your domain and static IP
-   address to be associated with the LoadBalancer `istio-ingressgateway` instead
-   of `knative-ingressgateway`. Then run the following to clean up leftover
-   resources:
-
-   ```
-   kubectl delete svc knative-ingressgateway -n istio-system
-   kubectl delete deploy knative-ingressgateway -n istio-system
-   ```
-
-   If you have the Knative Eventing Sources component installed, you will also
-   need to delete the following resource before upgrading:
-
-   ```
-   kubectl delete statefulset/controller-manager -n knative-sources
-   ```
-
-   While the deletion of this resource during the upgrade process will not
-   prevent modifications to Eventing Source resources, those changes will not be
-   completed until the upgrade process finishes.
 
 1. To install Knative, first install the CRDs by running the `kubectl apply`
    command once with the `--selector knative.dev/crd-install=true` flag. This
@@ -184,7 +168,7 @@ your Knative installation, see
    ```bash
    kubectl apply --selector knative.dev/crd-install=true \
    --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
-   --filename https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml \
+   --filename https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml \
    --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml
    ```
 
@@ -195,7 +179,7 @@ your Knative installation, see
 
    ```bash
    kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
-   --filename https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml \
+   --filename https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml \
    --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml
    ```
 

@@ -13,7 +13,7 @@ installation. If your cloud platform offers a managed Istio installation, the
 [install guide](./README.md) for your specific platform will have those
 instructions.
 
-For example, the [GKE Install Guide](./knative-with-gke.md) includes the
+For example, the [GKE Install Guide](./Knative-with-GKE.md) includes the
 instructions for installing Istio on your cluster using `gcloud`.
 
 ## Before you begin
@@ -57,7 +57,7 @@ without automatic sidecar injection.
 
    ```shell
    # Download and unpack Istio
-   export ISTIO_VERSION=1.1.7
+   export ISTIO_VERSION=1.3.6
    curl -L https://git.io/getLatestIstio | sh -
    cd istio-${ISTIO_VERSION}
    ```
@@ -120,11 +120,11 @@ helm template --namespace=istio-system \
   --set sidecarInjectorWebhook.enabled=false \
   --set global.proxy.autoInject=disabled \
   --set global.omitSidecarInjectorConfigMap=true \
-  `# Set gateway pods to 1 to sidestep eventual consistency / readiness problems.` \
   --set gateways.istio-ingressgateway.autoscaleMin=1 \
-  --set gateways.istio-ingressgateway.autoscaleMax=1 \
+  --set gateways.istio-ingressgateway.autoscaleMax=2 \
   `# Set pilot trace sampling to 100%` \
   --set pilot.traceSampling=100 \
+  --set global.mtls.auto=false \
   install/kubernetes/helm/istio \
   > ./istio-lean.yaml
 
@@ -156,9 +156,8 @@ helm template --namespace=istio-system \
   --set mixer.adapters.prometheus.enabled=false \
   `# Disable mixer policy check, since in our template we set no policy.` \
   --set global.disablePolicyChecks=true \
-  `# Set gateway pods to 1 to sidestep eventual consistency / readiness problems.` \
   --set gateways.istio-ingressgateway.autoscaleMin=1 \
-  --set gateways.istio-ingressgateway.autoscaleMax=1 \
+  --set gateways.istio-ingressgateway.autoscaleMax=2 \
   --set gateways.istio-ingressgateway.resources.requests.cpu=500m \
   --set gateways.istio-ingressgateway.resources.requests.memory=256Mi \
   `# More pilot replicas for better scale` \
@@ -201,9 +200,8 @@ helm template --namespace=istio-system \
   --set mixer.adapters.prometheus.enabled=false \
   `# Disable mixer policy check, since in our template we set no policy.` \
   --set global.disablePolicyChecks=true \
-  `# Set gateway pods to 1 to sidestep eventual consistency / readiness problems.` \
   --set gateways.istio-ingressgateway.autoscaleMin=1 \
-  --set gateways.istio-ingressgateway.autoscaleMax=1 \
+  --set gateways.istio-ingressgateway.autoscaleMax=2 \
   --set gateways.istio-ingressgateway.resources.requests.cpu=500m \
   --set gateways.istio-ingressgateway.resources.requests.memory=256Mi \
   `# Enable SDS in the gateway to allow dynamically configuring TLS of gateway.` \
@@ -222,16 +220,16 @@ helm template --namespace=istio-system \
 ### Updating your install to use cluster local gateway
 
 If you want your Routes to be visible only inside the cluster, you may want to
-enable [cluster local routes](../serving/cluster-local-route.md). To use
-this feature, add an extra Istio cluster local gateway to your cluster. Enter
-the following command to add the cluster local gateway to an existing Istio
+enable [cluster local routes](../serving/cluster-local-route.md). To use this
+feature, add an extra Istio cluster local gateway to your cluster. Enter the
+following command to add the cluster local gateway to an existing Istio
 installation:
 
 ```shell
 # Add the extra gateway.
 helm template --namespace=istio-system \
   --set gateways.custom-gateway.autoscaleMin=1 \
-  --set gateways.custom-gateway.autoscaleMax=1 \
+  --set gateways.custom-gateway.autoscaleMax=2 \
   --set gateways.custom-gateway.cpu.targetAverageUtilization=60 \
   --set gateways.custom-gateway.labels.app='cluster-local-gateway' \
   --set gateways.custom-gateway.labels.istio='cluster-local-gateway' \
@@ -239,6 +237,7 @@ helm template --namespace=istio-system \
   --set gateways.istio-ingressgateway.enabled=false \
   --set gateways.istio-egressgateway.enabled=false \
   --set gateways.istio-ilbgateway.enabled=false \
+  --set global.mtls.auto=false \
   install/kubernetes/helm/istio \
   -f install/kubernetes/helm/istio/example-values/values-istio-gateways.yaml \
   | sed -e "s/custom-gateway/cluster-local-gateway/g" -e "s/customgateway/clusterlocalgateway/g" \
@@ -246,6 +245,21 @@ helm template --namespace=istio-system \
 
 kubectl apply -f istio-local-gateway.yaml
 ```
+
+Alternatively, if you want to install the cluster local gateway for **development purposes**, enter the following command 
+without `helm` for an easy installation:
+
+```shell
+# Istio minor version should be 1.2 or 1.3
+export ISTIO_MINOR_VERSION=1.2
+
+export VERSION=$(curl https://raw.githubusercontent.com/knative/serving/master/third_party/istio-${ISTIO_MINOR_VERSION}-latest)
+
+kubectl apply -f https://raw.githubusercontent.com/knative/serving/master/third_party/${VERSION}/istio-knative-extras.yaml
+```
+
+**Note:** This method is only for development purposes. The production readiness of the above 
+installation method is not ensured. For a production-ready installation, see the `helm` installation method above.
 
 ### Verifying your Istio install
 
@@ -259,6 +273,44 @@ kubectl get pods --namespace istio-system
 
 > Tip: You can append the `--watch` flag to the `kubectl get` commands to view
 > the pod status in realtime. You use `CTRL + C` to exit watch mode.
+
+### Configuring DNS
+
+Knative dispatches to different services based on their hostname, so it greatly
+simplifies things to have DNS properly configured. For this, we must look up the
+external IP address that Istio received. This can be done with the following
+command:
+
+```
+$ kubectl get svc -nistio-system
+NAME                    TYPE           CLUSTER-IP   EXTERNAL-IP    PORT(S)                                      AGE
+cluster-local-gateway   ClusterIP      10.0.2.216   <none>         15020/TCP,80/TCP,443/TCP                     2m14s
+istio-ingressgateway    LoadBalancer   10.0.2.24    34.83.80.117   15020:32206/TCP,80:30742/TCP,443:30996/TCP   2m14s
+istio-pilot             ClusterIP      10.0.3.27    <none>         15010/TCP,15011/TCP,8080/TCP,15014/TCP       2m14s
+```
+
+This external IP can be used with your DNS provider with a wildcard `A` record;
+however, for a basic functioning DNS setup (not suitable for production!) this
+external IP address can be used with `xip.io` in the `config-domain` ConfigMap
+in `knative-serving`. You can edit this with the following command:
+
+```
+kubectl edit cm config-domain --namespace knative-serving
+```
+
+Given the external IP above, change the content to:
+
+```
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-domain
+  namespace: knative-serving
+data:
+  # xip.io is a "magic" DNS provider, which resolves all DNS lookups for:
+  # *.{ip}.xip.io to {ip}.
+  34.83.80.117.xip.io: ""
+```
 
 ## Istio resources
 
@@ -282,7 +334,7 @@ rm -rf istio-${ISTIO_VERSION}
 
 - [Install Knative](./README.md).
 - Try the
-  [Getting Started with App Deployment guide](../serving/getting-started-knative-app/)
+  [Getting Started with App Deployment guide](../serving/getting-started-knative-app.md)
   for Knative serving.
 
 [1]:

@@ -12,7 +12,7 @@ You can find [guides for other platforms here](./README.md).
 
 ## Before you begin
 
-Knative requires a Kubernetes cluster v1.11 or newer. This guide walks you
+Knative requires a Kubernetes cluster v1.15 or newer. This guide walks you
 through creating a cluster with the correct specifications for Knative on IBM
 Cloud Kubernetes Service.
 
@@ -66,7 +66,7 @@ environment variables.
 To make sure the cluster is large enough to host all the Knative and Istio
 components, the recommended configuration for a cluster is:
 
-- Kubernetes version 1.11 or later
+- Kubernetes version 1.15 or later
 - 4 vCPU nodes with 16GB memory (`b2c.4x16`)
 
 1.  Set `ibmcloud` to the appropriate region:
@@ -166,6 +166,10 @@ Minkube or similar, see the
 You must install Istio on your Kubernetes cluster before continuing with these
 instructions to install Knative.
 
+## Installing `cluster-local-gateway` for serving cluster-internal traffic
+
+If you installed Istio, you can install a `cluster-local-gateway` within your Knative cluster so that you can serve cluster-internal traffic. If you want to configure your revisions to use routes that are visible only within your cluster, [install and use the `cluster-local-gateway`](./installing-istio.md#updating-your-install-to-use-cluster-local-gateway).
+
 ### Installing Knative
 
 The following commands install all available Knative components as well as the
@@ -200,7 +204,7 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
    ```bash
    kubectl apply --selector knative.dev/crd-install=true \
    --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
-   --filename https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml \
+   --filename https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml \
    --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml
    ```
 
@@ -210,7 +214,7 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
 
    ```bash
    kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
-   --filename https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml \
+   --filename https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml \
    --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml
    ```
 

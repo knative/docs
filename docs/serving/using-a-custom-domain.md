@@ -20,20 +20,26 @@ To change the {default-domain} value there are a few steps involved:
    kubectl edit cm config-domain --namespace knative-serving
    ```
 
-   This command opens your default text editor and allows you to edit the config
-   map.
+   This command opens your default text editor and allows you to edit the [config
+   map](https://github.com/knative/serving/blob/master/config/config-domain.yaml).
 
    ```yaml
    apiVersion: v1
    data:
-     example.com: ""
+     _example: |
+       ################################
+       #                              #
+       #    EXAMPLE CONFIGURATION     #
+       #                              #
+       ################################
+       # ...
+       example.com: |
    kind: ConfigMap
-   [...]
    ```
 
-1. Edit the file to replace `example.com` with the domain you'd like to use and
-   save your changes. In this example, we configure `mydomain.com` for all
-   routes:
+1. Edit the file to replace `example.com` with the domain you'd like to use,
+   remove the `_example` key and save your changes.
+   In this example, we configure `mydomain.com` for all routes:
 
    ```yaml
    apiVersion: v1
@@ -95,12 +101,8 @@ You should see the full customized domain: `helloworld-go.default.mydomain.com`.
 And you can check the IP address of your Knative gateway by running:
 
 ```shell
-# In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
-export INGRESSGATEWAY=knative-ingressgateway
+export INGRESSGATEWAY=istio-ingressgateway
 
-# The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
-# Use `istio-ingressgateway` instead, since `knative-ingressgateway`
-# will be removed in Knative v0.4.
 if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
     export INGRESSGATEWAY=istio-ingressgateway
 fi
@@ -114,15 +116,7 @@ You can map the domain to the IP address of your Knative gateway in your local
 machine with:
 
 ```shell
-# In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
-INGRESSGATEWAY=knative-ingressgateway
-
-# The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
-# Use `istio-ingressgateway` instead, since `knative-ingressgateway`
-# will be removed in Knative v0.4.
-if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
-    INGRESSGATEWAY=istio-ingressgateway
-fi
+INGRESSGATEWAY=istio-ingressgateway
 
 export GATEWAY_IP=`kubectl get svc $INGRESSGATEWAY --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*]['ip']}"`
 
@@ -176,5 +170,3 @@ If you are using Google Cloud DNS, you can find step-by-step instructions in the
 Once the domain update has propagated, you can access your app using the fully
 qualified domain name of the deployed route, for example
 `http://helloworld-go.default.mydomain.com`
-
-

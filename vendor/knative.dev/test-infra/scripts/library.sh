@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Copyright 2018 The Knative Authors
 #
@@ -283,9 +283,9 @@ function acquire_cluster_admin_role() {
     local key=$(mktemp)
     echo "Certificate in ${cert}, key in ${key}"
     gcloud --format="value(masterAuth.clientCertificate)" \
-      container clusters describe $2 ${geoflag} | base64 -d > ${cert}
+      container clusters describe $2 ${geoflag} | base64 --decode > ${cert}
     gcloud --format="value(masterAuth.clientKey)" \
-      container clusters describe $2 ${geoflag} | base64 -d > ${key}
+      container clusters describe $2 ${geoflag} | base64 --decode > ${key}
     kubectl config set-credentials cluster-admin \
       --client-certificate=${cert} --client-key=${key}
   fi
@@ -311,12 +311,26 @@ function capture_output() {
   return ${failed}
 }
 
+# Create a temporary file with the given extension in a way that works on both Linux and macOS.
+# Parameters: $1 - file name without extension (e.g. 'myfile_XXXX')
+#             $2 - file extension (e.g. 'xml')
+function mktemp_with_extension() {
+  local nameprefix
+  local fullname
+
+  nameprefix="$(mktemp $1)"
+  fullname="${nameprefix}.$2"
+  mv ${nameprefix} ${fullname}
+
+  echo ${fullname}
+}
+
 # Create a JUnit XML for a test.
 # Parameters: $1 - check class name as an identifier (e.g. BuildTests)
 #             $2 - check name as an identifier (e.g., GoBuild)
 #             $3 - failure message (can contain newlines), optional (means success)
 function create_junit_xml() {
-  local xml="$(mktemp ${ARTIFACTS}/junit_XXXXXXXX.xml)"
+  local xml="$(mktemp_with_extension ${ARTIFACTS}/junit_XXXXXXXX xml)"
   local failure=""
   if [[ "$3" != "" ]]; then
     # Transform newlines into HTML code.
@@ -352,7 +366,7 @@ function report_go_test() {
   echo "Finished run, return code is ${failed}"
   # Install go-junit-report if necessary.
   run_go_tool github.com/jstemmer/go-junit-report go-junit-report --help > /dev/null 2>&1
-  local xml=$(mktemp ${ARTIFACTS}/junit_XXXXXXXX.xml)
+  local xml="$(mktemp_with_extension ${ARTIFACTS}/junit_XXXXXXXX xml)"
   cat ${report} \
       | go-junit-report \
       | sed -e "s#\"\(github\.com/knative\|knative\.dev\)/${REPO_NAME}/#\"#g" \
@@ -529,19 +543,24 @@ function get_canonical_path() {
   echo "$(cd ${path%/*} && echo $PWD/${path##*/})"
 }
 
-# Returns the URL to the latest manifest for the given Knative project.
-# Parameters: $1 - repository name of the given project
-#             $2 - name of the yaml file, without extension
-function get_latest_knative_yaml_source() {
+# Returns whether the current branch is a release branch.
+function is_release_branch() {
   local branch_name=""
-  local repo_name="$1"
-  local yaml_name="$2"
   # Get the branch name from Prow's env var, see https://github.com/kubernetes/test-infra/blob/master/prow/jobs.md.
   # Otherwise, try getting the current branch from git.
   (( IS_PROW )) && branch_name="${PULL_BASE_REF:-}"
   [[ -z "${branch_name}" ]] && branch_name="$(git rev-parse --abbrev-ref HEAD)"
+  [[ ${branch_name} =~ ^release-[0-9\.]+$ ]]
+}
+
+# Returns the URL to the latest manifest for the given Knative project.
+# Parameters: $1 - repository name of the given project
+#             $2 - name of the yaml file, without extension
+function get_latest_knative_yaml_source() {
+  local repo_name="$1"
+  local yaml_name="$2"
   # If it's a release branch, the yaml source URL should point to a specific version.
-  if [[ ${branch_name} =~ ^release-[0-9\.]+$ ]]; then
+  if is_release_branch; then
     # Get the latest tag name for the current branch, which is likely formatted as v0.5.0
     local tag_name="$(git describe --tags --abbrev=0)"
     # The given repo might not have this tag, so we need to find its latest release manifest with the same major&minor version.
@@ -565,5 +584,5 @@ readonly REPO_NAME_FORMATTED="Knative $(capitalize ${REPO_NAME//-/ })"
 
 # Public latest nightly or release yaml files.
 readonly KNATIVE_SERVING_RELEASE="$(get_latest_knative_yaml_source "serving" "serving")"
-readonly KNATIVE_BUILD_RELEASE="$(get_latest_knative_yaml_source "build" "build")"
 readonly KNATIVE_EVENTING_RELEASE="$(get_latest_knative_yaml_source "eventing" "release")"
+readonly KNATIVE_MONITORING_RELEASE="$(get_latest_knative_yaml_source "serving" "monitoring")"

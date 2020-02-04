@@ -8,7 +8,7 @@ type: "docs"
 
 The Event Registry maintains a catalog of the event types that can be consumed
 from the different Brokers. It introduces a new
-[EventType](../reference/eventing/eventing.md) CRD in order to persist the event
+[EventType](../reference/eventing/) CRD in order to persist the event
 type's information in the cluster's data store.
 
 ## Before you begin
@@ -47,7 +47,7 @@ google.pubsub.topic.publish-hrxhh            google.pubsub.topic.publish        
 ```
 
 We can see that there are seven different EventTypes in the registry of the
-`default` namespace. Let's pick the first one and see how the EventType yaml
+`default` namespace. Let's pick the first one and see what the EventType yaml
 looks like:
 
 `kubectl get eventtype dev.knative.source.github.push-34cnb -o yaml`
@@ -128,11 +128,11 @@ Here are a few example Triggers that subscribe to events using exact matching on
    spec:
      broker: default
      filter:
-       sourceAndType:
+       attributes:
          type: dev.knative.source.github.push
      subscriber:
        ref:
-         apiVersion: serving.knative.dev/v1alpha1
+         apiVersion: serving.knative.dev/v1
          kind: Service
          name: push-service
    ```
@@ -153,12 +153,12 @@ Here are a few example Triggers that subscribe to events using exact matching on
    spec:
      broker: default
      filter:
-       sourceAndType:
+       attributes:
          type: dev.knative.source.github.pull_request
          source: https://github.com/knative/eventing
      subscriber:
        ref:
-         apiVersion: serving.knative.dev/v1alpha1
+         apiVersion: serving.knative.dev/v1
          kind: Service
          name: gh-knative-eventing-pull-service
    ```
@@ -174,12 +174,12 @@ Here are a few example Triggers that subscribe to events using exact matching on
    spec:
      broker: default
      filter:
-       sourceAndType:
+       attributes:
          type: dev.knative.kafka.event
          source: /apis/v1/namespaces/default/kafkasources/kafka-sample#knative-demo
      subscriber:
        ref:
-         apiVersion: serving.knative.dev/v1alpha1
+         apiVersion: serving.knative.dev/v1
          kind: Service
          name: kafka-knative-demo-service
    ```
@@ -196,11 +196,11 @@ Here are a few example Triggers that subscribe to events using exact matching on
    spec:
      broker: dev
      filter:
-       sourceAndType:
+       attributes:
          source: //pubsub.googleapis.com/knative/topics/testing
      subscriber:
        ref:
-         apiVersion: serving.knative.dev/v1alpha1
+         apiVersion: serving.knative.dev/v1
          kind: Service
          name: gcp-pubsub-knative-testing-service
    ```
@@ -258,7 +258,7 @@ the next topic: How do we actually populate the registry in the first place?
 
   If you are interested in more information regarding configuration options of a
   KafkaSource, please refer to the
-  [KafKaSource example](https://github.com/knative/eventing-contrib/tree/master/kafka/source/samples).
+  [KafKaSource sample](./samples/kafka/).
 
   For this discussion, the relevant information from the yaml above are the
   `sink` and the `topics`. We observe that the `sink` is of kind `Broker`. We
@@ -276,7 +276,7 @@ the next topic: How do we actually populate the registry in the first place?
 To get started, install Knative Eventing if you haven't yet, and try
 experimenting with different Event Sources in your Knative cluster.
 
-1. [Installing Knative](./install/README.md) in case you haven't already done
+1. [Installing Knative](../install/README.md) in case you haven't already done
    so.
 1. [Getting started with eventing](./README.md) in case you haven't read it.
 1. [Knative code samples](./samples/) is a useful resource to better understand

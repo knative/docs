@@ -6,7 +6,7 @@ metadata:
 spec:
   subscriber:
     ref:
-      apiVersion: serving.knative.dev/v1alpha1
+      apiVersion: serving.knative.dev/v1
       kind: Service
       name: event-display
 
@@ -14,7 +14,7 @@ spec:
 
 # This is a very simple Knative Service that writes the input request to its log.
 
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: event-display
@@ -24,5 +24,5 @@ spec:
     spec:
       containers:
       - # This corresponds to
-        # https://github.com/knative/eventing-contrib/blob/release-0.5/cmd/event_display/main.go
-        image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display@sha256:bf45b3eb1e7fc4cb63d6a5a6416cf696295484a7662e0cf9ccdf5c080542c21d
+        # https://github.com/knative/eventing-contrib/tree/master/cmd/event_display/main.go
+        image: gcr.io/knative-releases/github.com/knative/eventing-contrib/cmd/event_display

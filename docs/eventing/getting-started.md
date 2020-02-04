@@ -8,45 +8,62 @@ type: "docs"
 Use this guide to learn how to create, send, and verify events in Knative. The steps in this guide demonstrate a basic developer flow for managing events in Knative, including:
 
 1. [Installing the Knative Eventing component](#installing-knative-eventing)
+
 1. [Creating and configuring Knative Eventing Resources](#setting-up-knative-eventing-resources)
+
 1. [Sending events with HTTP requests](#sending-events-to-the-broker)
+
 1. [Verifying events were sent correctly](#verifying-events-were-received)
 
 ## Before you begin
 
 To complete this guide, you will need the following installed and running:
 
-- A [Kubernetes cluster](https://kubernetes.io/docs/concepts/cluster-administration/cluster-administration-overview/) running v1.11 or higher
-- [Kubectl CLI tool](https://kubernetes.io/docs/reference/kubectl/overview/) v1.10 or higher
+- A [Kubernetes cluster](https://kubernetes.io/docs/concepts/cluster-administration/cluster-administration-overview/) running v1.15 or higher
+
+- [`kubectl` CLI tool](https://kubernetes.io/docs/reference/kubectl/overview/) within a minor version of your Kubernetes cluster.
+
 - [curl v7.65 or higher](https://curl.haxx.se/download.html)
+
 - Knative Eventing Component
-   - Knative Eventing In-memory channel Provisioner 
+
+   - Knative Eventing In-memory channel 
 
 ### Installing Knative Eventing 
 
-If you previously [created a Knative cluster](../install/_index.md), you might already have Knative Eventing installed and running. You can check to see if the Eventing component exists on your cluster by running:
+If you previously [created a Knative cluster](../install), you might already have Knative Eventing installed and running. You can check to see if the Eventing component exists on your cluster by running:
 
 ```sh
 kubectl get pods --namespace knative-eventing
 ```
 
-If the `knative-eventing` namespace or the `in-memory-channel-controller-*` does not exist, use the following steps to install Knative Eventing with the in-memory channel provisioner:
+If the `knative-eventing` namespace or the `imc-controller-*` does not exist, use the following steps to install Knative Eventing with the in-memory channel:
 
-1. Make sure that you have a functioning Kubernetes cluster. See the [Comprehensive Install guide](../install/_index.md) for more information.
-2. Install the Eventing CRDs by running the following command:
+1. Make sure that you have a functioning Kubernetes cluster. See the [Comprehensive Install guide](../install) for more information.
+
+   - Old versions of Knative Serving doesn't necessarily work well with latest Knative Eventing, so try to install the latest version of Knative Serving.
+
+   - If your Kubernetes cluster comes with pre-installed Istio, make sure it has `cluster-local-gateway` [deployed](https://github.com/knative/serving/blob/master/DEVELOPMENT.md#deploy-istio). Depending on which Istio version you have, you'd need to apply the `istio-knative-extras.yaml` in the corresponding version folder at [here](https://github.com/knative/serving/tree/{{< branch >}}/third_party).
+
+1. Install the Eventing CRDs by running the following command:
 
     ```sh
     kubectl apply --selector knative.dev/crd-install=true \
-    --filename https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml
+    --filename https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml
     ```
 
-3. Install the Eventing sources by running the following command:
+1. Finish installing Eventing resources by running the following command:
 
     ```sh
-    kubectl apply --filename https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml
+    kubectl apply --filename https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml
     ```
 
-4. Confirm that Knative Eventing is correctly installed by running the following command:
+   Installing the CRDs first can prevent race conditions, which might cause failures during the install.
+   Race conditions exist during install because a CRD must be defined before an instance of that
+   resource can be created. Defining all CRDs before continuing with the rest of the installation
+   prevents this problem.
+
+1. Confirm that Knative Eventing is correctly installed by running the following command:
 
     ```sh
     kubectl get pods --namespace knative-eventing
@@ -59,8 +76,6 @@ If the `knative-eventing` namespace or the `in-memory-channel-controller-*` does
     eventing-webhook-6c4f6699d8-qclbx               1/1     Running   0          29m
     imc-controller-85cdb4946b-h2msj                 1/1     Running   0          13m
     imc-dispatcher-5f4689d868-fspt6                 1/1     Running   0          13m
-    in-memory-channel-controller-d9db9d879-f2jw6    1/1     Running   0          13m
-    in-memory-channel-dispatcher-79bc7f46cd-4mvj6   1/1     Running   0          13m
     sources-controller-5847564f4f-z59xc             1/1     Running   0          29m
    ```
 
@@ -81,7 +96,7 @@ In this section you create the `event-example` namespace and then add the `knati
 
     This creates an empty namespace called `event-example`.
 
-2. Add a label to your namespace with the following command:
+1. Add a label to your namespace with the following command:
 
     ```sh
     kubectl label namespace event-example knative-eventing-injection=enabled
@@ -104,13 +119,13 @@ The [`Broker`](./broker-trigger.md#broker) ensures that every event sent by even
    This shows the `Broker` that you created:
 
     ```sh
-    NAME      READY   REASON   HOSTNAME                                                           AGE
-    default   True             default-Broker.event-example.svc.cluster.local   1m
+    NAME      READY   REASON   URL                                                        AGE
+    default   True             http://default-broker.event-example.svc.cluster.local      1m
     ```
 
     When the `Broker` has the `READY=True` state, it can begin to manage any events it receives.
 
-2. If `READY=False`, wait 2 minutes and re-run the command. If you continue to receive the `READY=False`, see the [Debugging Guide](./debugging/README.md) to help troubleshoot the issue.
+1. If `READY=False`, wait 2 minutes and re-run the command. If you continue to receive the `READY=False`, see the [Debugging Guide](./debugging/README.md) to help troubleshoot the issue.
 
 Now that your `Broker` is ready to manage events, you can create and configure your event producers and consumers.
 
@@ -158,7 +173,7 @@ Your event consumers receive the events sent by event producers. In this step, y
     END
     ```
 
-2. To deploy the `goodbye-display` consumer to your cluster, run the following command:
+1. To deploy the `goodbye-display` consumer to your cluster, run the following command:
 
     ```sh
     kubectl --namespace event-example apply --filename - << END
@@ -198,7 +213,7 @@ Your event consumers receive the events sent by event producers. In this step, y
     END
     ```
 
-3. Just like you did with the `Broker`, verify that your event consumers are working by running the following command:
+1. Just like you did with the `Broker`, verify that your event consumers are working by running the following command:
 
     ```sh
     kubectl --namespace event-example get deployments hello-display goodbye-display
@@ -243,7 +258,7 @@ to receive. Your `Broker` uses triggers to forward events to the right consumers
 
    The command creates a trigger that sends all events of type `greeting` to your event consumer named `hello-display`.
 
-2. To add the second `Trigger`, run the following command:
+1. To add the second `Trigger`, run the following command:
 
     ```sh
     kubectl --namespace event-example apply --filename - << END
@@ -265,14 +280,13 @@ to receive. Your `Broker` uses triggers to forward events to the right consumers
 
    The command creates a trigger that sends all events of source `sendoff` to your event consumer named `goodbye-display`.
 
-3. Verify that the triggers are working correctly by running the following command:
+1. Verify that the triggers are working correctly by running the following command:
 
     ```sh
     kubectl --namespace event-example get triggers
     ```
 
     This returns the `hello-display` and `goodbye-display` triggers that you created:
-
 
     ```sh
     NAME                   READY   REASON   BROKER    SUBSCRIBER_URI                                                                 AGE
@@ -338,10 +352,10 @@ To show the various types of events you can send, you will make three requests:
 1. To make the first request, which creates an event that has the `type` `greeting`, run the following in the SSH terminal:
 
     ```sh
-    curl -v "default-broker.event-example.svc.cluster.local" \
+    curl -v "http://default-broker.event-example.svc.cluster.local" \
       -X POST \
       -H "Ce-Id: say-hello" \
-      -H "Ce-Specversion: 0.2" \
+      -H "Ce-Specversion: 0.3" \
       -H "Ce-Type: greeting" \
       -H "Ce-Source: not-sendoff" \
       -H "Content-Type: application/json" \
@@ -359,13 +373,13 @@ To show the various types of events you can send, you will make three requests:
     ```
 
 
-2. To make the second request, which creates an event that has the `source` `sendoff`, run the following in the SSH terminal:
+1. To make the second request, which creates an event that has the `source` `sendoff`, run the following in the SSH terminal:
 
     ```sh
-    curl -v "default-broker.event-example.svc.cluster.local" \
+    curl -v "http://default-broker.event-example.svc.cluster.local" \
       -X POST \
       -H "Ce-Id: say-goodbye" \
-      -H "Ce-Specversion: 0.2" \
+      -H "Ce-Specversion: 0.3" \
       -H "Ce-Type: not-greeting" \
       -H "Ce-Source: sendoff" \
       -H "Content-Type: application/json" \
@@ -382,13 +396,13 @@ To show the various types of events you can send, you will make three requests:
     < Date: Mon, 12 Aug 2019 19:48:18 GMT
     ```
 
-3. To make the third request, which creates an event that has the `type` `greeting` and the`source` `sendoff`, run the following in the SSH terminal:
+1. To make the third request, which creates an event that has the `type` `greeting` and the`source` `sendoff`, run the following in the SSH terminal:
 
     ```sh
-    curl -v "default-broker.event-example.svc.cluster.local" \
+    curl -v "http://default-broker.event-example.svc.cluster.local" \
       -X POST \
       -H "Ce-Id: say-hello-goodbye" \
-      -H "Ce-Specversion: 0.2" \
+      -H "Ce-Specversion: 0.3" \
       -H "Ce-Type: greeting" \
       -H "Ce-Source: sendoff" \
       -H "Content-Type: application/json" \
@@ -425,7 +439,7 @@ After sending events, verify that your events were received by the appropriate `
     ☁️  cloudevents.Event
     Validation: valid
     Context Attributes,
-      specversion: 0.2
+      specversion: 0.3
       type: greeting
       source: not-sendoff
       id: say-hello
@@ -440,7 +454,7 @@ After sending events, verify that your events were received by the appropriate `
     ☁️  cloudevents.Event
     Validation: valid
     Context Attributes,
-      specversion: 0.2
+      specversion: 0.3
       type: greeting
       source: sendoff
       id: say-hello-goodbye
@@ -454,7 +468,7 @@ After sending events, verify that your events were received by the appropriate `
      }
     ```
 
-2. Look at the logs for the `goodbye-display` event consumer by running the following command:
+1. Look at the logs for the `goodbye-display` event consumer by running the following command:
 
     ```sh
     kubectl --namespace event-example logs -l app=goodbye-display --tail=100
@@ -462,12 +476,11 @@ After sending events, verify that your events were received by the appropriate `
 
     This returns the `Attributes` and `Data` of the events you sent to `goodbye-display`:
 
-
     ```sh
     ☁️  cloudevents.Event
     Validation: valid
     Context Attributes,
-       specversion: 0.2
+       specversion: 0.3
        type: not-greeting
        source: sendoff
        id: say-goodbye
@@ -482,7 +495,7 @@ After sending events, verify that your events were received by the appropriate `
      ☁️  cloudevents.Event
      Validation: valid
      Context Attributes,
-       specversion: 0.2
+       specversion: 0.3
        type: greeting
        source: sendoff
        id: say-hello-goodbye
@@ -500,7 +513,7 @@ After sending events, verify that your events were received by the appropriate `
 
 After you finish this guide, delete your namespace to conserve resources if you do not plan to use them.
 
-Note: If you plan to continue learning about Knative Eventing with one of our [code samples](./samples/_index.md), check the requirements of the sample and make sure you do not need a namespace before you delete `event-example`. You can always reuse your namespaces.
+Note: If you plan to continue learning about Knative Eventing with one of our [code samples](./samples/), check the requirements of the sample and make sure you do not need a namespace before you delete `event-example`. You can always reuse your namespaces.
 
 Run the following command to delete `event-example`:
 
@@ -516,6 +529,4 @@ This removes the namespace and all of its resources from your cluster.
 You've learned the basics of the Knative Eventing workflow. Here are some additional resources to help you continue to build with the Knative Eventing component.
 
 - [Broker and Trigger](./broker-trigger.md)
-- [Eventing with a GitHub source](./samples/github-source.md) 
-
-
+- [Eventing with a GitHub source](./samples/github-source/README.md)

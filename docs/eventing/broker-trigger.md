@@ -43,7 +43,7 @@ spec:
   broker: default
   subscriber:
     ref:
-      apiVersion: serving.knative.dev/v1alpha1
+      apiVersion: serving.knative.dev/v1
       kind: Service
       name: my-service
 ```
@@ -69,7 +69,7 @@ spec:
       myextension: my-extension-value
   subscriber:
     ref:
-      apiVersion: serving.knative.dev/v1alpha1
+      apiVersion: serving.knative.dev/v1
       kind: Service
       name: my-service
 ```
@@ -90,7 +90,7 @@ to that `Broker`. If `spec.channelTemplateSpec` is not specified, then the
 
 Have a `Channel` CRD installed and set as the default channel for the namespace
 you are interested in. For development, the
-[InMemoryChannel](https://github.com/knative/eventing/tree/master/config/channels/in-memory-channel)
+[InMemoryChannel](https://github.com/knative/eventing/tree/{{< branch >}}/config/channels/in-memory-channel)
 is normally used.
 
 #### Changing
@@ -219,20 +219,18 @@ following manifest describing a Knative Service is created, but it could be
 anything that is `Addressable`.
 
 ```yaml
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: my-service
   namespace: default
 spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        spec:
-          container:
-            # This corresponds to
-            # https://github.com/knative/eventing-contrib/blob/v0.2.1/cmd/message_dumper/dumper.go.
-            image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/message_dumper@sha256:ab5391755f11a5821e7263686564b3c3cd5348522f5b31509963afb269ddcd63
+  template:
+    spec:
+      containers:
+      -  # This corresponds to
+         # https://github.com/knative/eventing-contrib/blob/v0.2.1/cmd/message_dumper/dumper.go.
+         image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/message_dumper@sha256:ab5391755f11a5821e7263686564b3c3cd5348522f5b31509963afb269ddcd63
 ```
 
 ### Trigger
@@ -252,7 +250,7 @@ spec:
       type: dev.knative.foo.bar
   subscriber:
     ref:
-      apiVersion: serving.knative.dev/v1alpha1
+      apiVersion: serving.knative.dev/v1
       kind: Service
       name: my-service
 ```
@@ -277,7 +275,7 @@ spec:
       type: dev.knative.foo.bar
   subscriber:
     ref:
-      apiVersion: serving.knative.dev/v1alpha1
+      apiVersion: serving.knative.dev/v1
       kind: Service
       name: my-service
 ```

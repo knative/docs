@@ -3,12 +3,12 @@ kind: Trigger
 metadata:
   name: sequence-trigger
 spec:
-  broker: broker-test
+  broker: default
   filter:
-    sourceAndType:
+    attributes:
       type: dev.knative.cronjob.event
   subscriber:
     ref:
-      apiVersion: messaging.knative.dev/v1alpha1
+      apiVersion: flows.knative.dev/v1alpha1
       kind: Sequence
       name: sequence

@@ -12,6 +12,9 @@ finally displaying the resulting output.
 
 ![Logical Configuration](./sequence-reply-to-sequence.png)
 
+The functions used in these examples live in
+[https://github.com/knative/eventing-contrib/blob/master/cmd/appender/main.go](https://github.com/knative/eventing-contrib/blob/master/cmd/appender/main.go).
+
 ## Prerequisites
 
 For this example, we'll assume you have set up a an `InMemoryChannel` as well as
@@ -30,7 +33,7 @@ Change `default` below to create the steps in the Namespace where you want
 resources created.
 
 ```yaml
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: first
@@ -38,13 +41,13 @@ spec:
   template:
     spec:
       containers:
-        - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:2656f39a7fcb6afd9fc79e7a4e215d14d651dc674f38020d1d18c6f04b220700
+        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/appender
           env:
-            - name: STEP
-              value: "0"
+            - name: MESSAGE
+              value: " - Handled by 0"
 
 ---
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: second
@@ -52,12 +55,12 @@ spec:
   template:
     spec:
       containers:
-        - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:2656f39a7fcb6afd9fc79e7a4e215d14d651dc674f38020d1d18c6f04b220700
+        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/appender
           env:
-            - name: STEP
-              value: "1"
+            - name: MESSAGE
+              value: " - Handled by 1"
 ---
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: third
@@ -65,12 +68,12 @@ spec:
   template:
     spec:
       containers:
-        - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:2656f39a7fcb6afd9fc79e7a4e215d14d651dc674f38020d1d18c6f04b220700
+        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/appender
           env:
-            - name: STEP
-              value: "2"
+            - name: MESSAGE
+              value: " - Handled by 2"
 ---
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: fourth
@@ -78,13 +81,13 @@ spec:
   template:
     spec:
       containers:
-        - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:2656f39a7fcb6afd9fc79e7a4e215d14d651dc674f38020d1d18c6f04b220700
+        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/appender
           env:
-            - name: STEP
-              value: "3"
+            - name: MESSAGE
+              value: " - Handled by 3"
 
 ---
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: fifth
@@ -92,12 +95,12 @@ spec:
   template:
     spec:
       containers:
-        - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:2656f39a7fcb6afd9fc79e7a4e215d14d651dc674f38020d1d18c6f04b220700
+        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/appender
           env:
-            - name: STEP
-              value: "4"
+            - name: MESSAGE
+              value: " - Handled by 4"
 ---
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: sixth
@@ -105,10 +108,10 @@ spec:
   template:
     spec:
       containers:
-        - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:2656f39a7fcb6afd9fc79e7a4e215d14d651dc674f38020d1d18c6f04b220700
+        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/appender
           env:
-            - name: STEP
-              value: "5"
+            - name: MESSAGE
+              value: " - Handled by 5"
 ---
 
 ```
@@ -124,7 +127,7 @@ If you are using a different type of Channel, you need to change the
 spec.channelTemplate to point to your desired Channel.
 
 ```yaml
-apiVersion: messaging.knative.dev/v1alpha1
+apiVersion: flows.knative.dev/v1alpha1
 kind: Sequence
 metadata:
   name: first-sequence
@@ -134,21 +137,22 @@ spec:
     kind: InMemoryChannel
   steps:
     - ref:
-        apiVersion: serving.knative.dev/v1alpha1
+        apiVersion: serving.knative.dev/v1
         kind: Service
         name: first
     - ref:
-        apiVersion: serving.knative.dev/v1alpha1
+        apiVersion: serving.knative.dev/v1
         kind: Service
         name: second
     - ref:
-        apiVersion: serving.knative.dev/v1alpha1
+        apiVersion: serving.knative.dev/v1
         kind: Service
         name: third
   reply:
-    kind: Sequence
-    apiVersion: messaging.knative.dev/v1alpha1
-    name: second-sequence
+    ref:
+      kind: Sequence
+      apiVersion: flows.knative.dev/v1alpha1
+      name: second-sequence
 ```
 
 Change `default` below to create the `Sequence` in the Namespace where you want
@@ -165,7 +169,7 @@ If you are using a different type of Channel, you need to change the
 spec.channelTemplate to point to your desired Channel.
 
 ```yaml
-apiVersion: messaging.knative.dev/v1alpha1
+apiVersion: flows.knative.dev/v1alpha1
 kind: Sequence
 metadata:
   name: second-sequence
@@ -175,27 +179,28 @@ spec:
     kind: InMemoryChannel
   steps:
     - ref:
-        apiVersion: serving.knative.dev/v1alpha1
+        apiVersion: serving.knative.dev/v1
         kind: Service
         name: fourth
     - ref:
-        apiVersion: serving.knative.dev/v1alpha1
+        apiVersion: serving.knative.dev/v1
         kind: Service
         name: fifth
     - ref:
-        apiVersion: serving.knative.dev/v1alpha1
+        apiVersion: serving.knative.dev/v1
         kind: Service
         name: sixth
   reply:
-    kind: Service
-    apiVersion: serving.knative.dev/v1alpha1
-    name: event-display
+    ref:
+      kind: Service
+      apiVersion: serving.knative.dev/v1
+      name: event-display
 ```
 
 ### Create the Service displaying the events created by Sequence
 
 ```yaml
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: event-display
@@ -203,7 +208,7 @@ spec:
   template:
     spec:
       containerers:
-        - image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display
+        - image: gcr.io/knative-releases/knative.dev/eventing-sources/cmd/event_display
 ```
 
 Change `default` below to create the `Sequence` in the Namespace where you want
@@ -227,9 +232,10 @@ spec:
   schedule: "*/2 * * * *"
   data: '{"message": "Hello world!"}'
   sink:
-    apiVersion: messaging.knative.dev/v1alpha1
-    kind: Sequence
-    name: first-sequence
+    ref:
+      apiVersion: flows.knative.dev/v1alpha1
+      kind: Sequence
+      name: first-sequence
 ```
 
 ```shell

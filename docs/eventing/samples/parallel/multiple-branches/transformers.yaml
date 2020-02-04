@@ -1,0 +1,28 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: even-transformer
+spec:
+  template:
+    spec:
+      containers:
+      - image: villardl/transformer-nodejs:0.1
+        env:
+        - name: TRANSFORMER
+          value: |
+            ({"message": "we are even!"})
+
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: odd-transformer
+spec:
+  template:
+    spec:
+      containers:
+      - image: villardl/transformer-nodejs:0.1
+        env:
+        - name: TRANSFORMER
+          value: |
+            ({"message": "this is odd!"})

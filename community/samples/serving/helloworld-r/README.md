@@ -21,7 +21,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-r
 ## Before you begin
 
 - A Kubernetes cluster with Knative installed. Follow the
-  [installation instructions](../../../../install/README.md) if you need to
+  [installation instructions](../../../../docs/install/README.md) if you need to
   create one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
@@ -38,64 +38,80 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-r
    print(message)
    ```
 
-1. Create a new file named `app.py` and paste the following code. We use a
-   basic web server written in Python to execute the R script:
+   1. Create a new file named `invoke.go` and paste the following code. We use a
+      basic web server written in Go to execute the shell script:
 
-   ```py
-   import os
-   import subprocess
+      ```go
+      package main
 
-   from flask import Flask
+      import (
+         "fmt"
+         "log"
+         "net/http"
+         "os"
+         "os/exec"
+      )
 
-   app = Flask(__name__)
+      func handler(w http.ResponseWriter, r *http.Request) {
+         cmd := exec.CommandContext(r.Context(), "Rscript", "HelloWorld.R")
+         cmd.Stderr = os.Stderr
+         out, err := cmd.Output()
+         if err != nil {
+             w.WriteHeader(500)
+         }
+         w.Write(out)
+      }
 
-   @app.route('/')
-   def hello_world():
-       try:
-           output = subprocess.check_output('/usr/bin/Rscript HelloWorld.R', shell=True)
-           print(output)
-       except subprocess.CalledProcessError:
-           return "Error in R script.", 500
+      func main() {
+         http.HandleFunc("/", handler)
 
-       return output
+         port := os.Getenv("PORT")
+         if port == "" {
+             port = "8080"
+         }
 
+         log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
+      }
+      ```
 
-   if __name__ == "__main__":
-       app.run(debug=True,host='0.0.0.0',port=int(os.environ.get('PORT', 8080)))
-   ```
+   1. Create a new file named `Dockerfile` and copy the code block below into it.
 
-1. Create a new file named `Dockerfile` and copy the code block below into it.
+      ```docker
+      # Use the offical Golang image to create a build artifact.
+      # This is based on Debian and sets the GOPATH to /go.
+      # https://hub.docker.com/_/golang
+      FROM golang:1.12 as builder
 
-   ```docker
-   # Use the official Python image.
-   # https://hub.docker.com/_/python
-   FROM python:3.7
+      # Copy local code to the container image.
+      WORKDIR /go/src/github.com/knative/docs/helloworld-r
+      COPY invoke.go .
 
-   # Copy local code to the container image.
-   ENV APP_HOME /app
-   WORKDIR $APP_HOME
-   COPY . .
+      # Build the command inside the container.
+      # (You may fetch or manage dependencies here,
+      # either manually or with a tool like "godep".)
+      RUN CGO_ENABLED=0 GOOS=linux go build -v -o invoke
 
-   # Install production dependencies.
-   RUN pip install Flask gunicorn
+      # The official R base image
+      # https://hub.docker.com/_/r-base
+      # Use a Docker multi-stage build to create a lean production image.
+      # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
+      FROM r-base:3.6.0
 
-   # Install R
-   RUN apt-get update && \
-       apt-get install -y r-base
+      # Copy Go binary
+      COPY --from=builder /go/src/github.com/knative/docs/helloworld-r/invoke /invoke
+      COPY HelloWorld.R .
 
-   # Run the web service on container startup. Here we use the gunicorn
-   # webserver, with one worker process and 8 threads.
-   # For environments with multiple CPU cores, increase the number of workers
-   # to be equal to the cores available.
-   CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 app:app
-   ```
+      # Run the web service on container startup.
+      CMD ["/invoke"]
+      ```
+
 
 1. Create a new file, `service.yaml` and copy the following service definition
    into the file. Make sure to replace `{username}` with your Docker Hub
    username.
 
    ```yaml
-   apiVersion: serving.knative.dev/v1alpha1
+   apiVersion: serving.knative.dev/v1
    kind: Service
    metadata:
      name: helloworld-r
@@ -143,23 +159,6 @@ folder) you're ready to build and deploy the sample app.
      for your app.
    - Automatically scale your pods up and down (including to zero active pods).
 
-1. Run the following command to find the external IP address for your service.
-   The ingress IP for your cluster is returned. If you just created your
-   cluster, you might need to wait and rerun the command until your service gets
-   asssigned an external IP address.
-
-   ```shell
-   kubectl get svc knative-ingressgateway --namespace istio-system
-   ```
-
-   Example:
-
-   ```shell
-   NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
-   knative-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
-
-   ```
-
 1. Run the following command to find the domain URL for your service:
 
    ```shell
@@ -170,21 +169,20 @@ folder) you're ready to build and deploy the sample app.
 
    ```shell
    NAME                URL
-   helloworld-r    http://helloworld-r.default.example.com
+   helloworld-r        http://helloworld-r.default.1.2.3.4.xip.io
    ```
 
-1. Test your app by sending it a request. Use the following `curl` command with
-   the domain URL `helloworld-r.default.example.com` and `EXTERNAL-IP`
-   address that you retrieved in the previous steps:
+1. Now you can make a request to your app and see the result. Replace
+   the URL below with the URL returned in the previous command.
 
    ```shell
-   curl -H "Host: helloworld-r.default.example.com" http://{EXTERNAL_IP_ADDRESS}
+   curl http://helloworld-r.default.1.2.3.4.xip.io
    ```
 
    Example:
 
    ```shell
-   curl -H "Host: helloworld-r.default.example.com" http://35.203.155.229
+   curl http://helloworld-r.default.1.2.3.4.xip.io
    [1] "Hello R Sample v1!"
    ```
 

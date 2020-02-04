@@ -26,7 +26,4 @@ source $(dirname $0)/../vendor/knative.dev/test-infra/scripts/presubmit-tests.sh
 
 # We use the default build, unit and integration test runners.
 
-# TODO(#67): Add more build tests.
-# TODO(#66): Add more unit tests.
-
-main $@
+main "$@"

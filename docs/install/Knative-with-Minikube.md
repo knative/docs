@@ -14,9 +14,7 @@ You can find [guides for other platforms here](./README.md).
 
 ## Before you begin
 
-Although Knative requires a Kubernetes cluster v1.11 or newer, installing
-Knative on [Minikube](https://github.com/kubernetes/minikube) requires a cluster
-v1.12 or newer.
+Knative requires a Kubernetes cluster v1.15 or newer.
 
 ### Install kubectl and Minikube
 
@@ -40,7 +38,7 @@ For Linux use:
 
 ```shell
 minikube start --memory=8192 --cpus=6 \
-  --kubernetes-version=v1.12.0 \
+  --kubernetes-version=v1.15.0 \
   --vm-driver=kvm2 \
   --disk-size=30g \
   --extra-config=apiserver.enable-admission-plugins="LimitRanger,NamespaceExists,NamespaceLifecycle,ResourceQuota,ServiceAccount,DefaultStorageClass,MutatingAdmissionWebhook"
@@ -50,7 +48,7 @@ For macOS use:
 
 ```shell
 minikube start --memory=8192 --cpus=6 \
-  --kubernetes-version=v1.12.0 \
+  --kubernetes-version=v1.15.0 \
   --vm-driver=hyperkit \
   --disk-size=30g \
   --extra-config=apiserver.enable-admission-plugins="LimitRanger,NamespaceExists,NamespaceLifecycle,ResourceQuota,ServiceAccount,DefaultStorageClass,MutatingAdmissionWebhook"
@@ -72,10 +70,15 @@ managed Istio installation, or if you're installing Knative locally using
 Minkube or similar, see the
 [Installing Istio for Knative guide](./installing-istio.md).
 
-> Note: [Ambassador](https://www.getambassador.io/) and
-> [Gloo](https://gloo.solo.io/) are available as an alternative to Istio.
+> Note: [Ambassador](https://www.getambassador.io/), [Contour](https://projectcontour.io/), and
+> [Gloo](https://docs.solo.io/gloo/latest/) are available as an alternative to Istio.
 > [Click here](./Knative-with-Ambassador.md) to install Knative with Ambassador.
+> [Click here](./Knative-with-Contour.md) to install Knative with Contour.
 > [Click here](./Knative-with-Gloo.md) to install Knative with Gloo.
+
+## Installing `cluster-local-gateway` for serving cluster-internal traffic
+
+If you installed Istio, you can install a `cluster-local-gateway` within your Knative cluster so that you can serve cluster-internal traffic. If you want to configure your revisions to use routes that are visible only within your cluster, [install and use the `cluster-local-gateway`](./installing-istio.md#updating-your-install-to-use-cluster-local-gateway).
 
 ## Installing Knative
 
@@ -111,7 +114,7 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
    ```shell
    kubectl apply --selector knative.dev/crd-install=true \
    --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
-   --filename https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml \
+   --filename https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml \
    --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml
    ```
 
@@ -121,7 +124,7 @@ see [Performing a Custom Knative Installation](./Knative-custom-install.md).
 
    ```shell
    kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
-   --filename https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml \
+   --filename https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml \
    --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml
    ```
 
@@ -152,15 +155,7 @@ head to the [sample apps](../serving/samples/README.md) repo.
 > use for the {IP_ADDRESS} placeholder used in the samples:
 
 ```shell
-# In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
-INGRESSGATEWAY=knative-ingressgateway
-
-# The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
-# Use `istio-ingressgateway` instead, since `knative-ingressgateway`
-# will be removed in Knative v0.4.
-if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
-    INGRESSGATEWAY=istio-ingressgateway
-fi
+INGRESSGATEWAY=istio-ingressgateway
 
 echo $(minikube ip):$(kubectl get svc $INGRESSGATEWAY --namespace istio-system --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
 ```

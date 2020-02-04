@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Copyright 2018 The Knative Authors
 #
@@ -165,8 +165,8 @@ function prepare_auto_release() {
   PUBLISH_RELEASE=1
 
   git fetch --all || abort "error fetching branches/tags from remote"
-  local tags="$(git tag | cut -d 'v' -f2 | cut -d '.' -f1-2 | sort | uniq)"
-  local branches="$( { (git branch -r | grep upstream/release-) ; (git branch | grep release-); } | cut -d '-' -f2 | sort | uniq)"
+  local tags="$(git tag | cut -d 'v' -f2 | cut -d '.' -f1-2 | sort -V | uniq)"
+  local branches="$( { (git branch -r | grep upstream/release-) ; (git branch | grep release-); } | cut -d '-' -f2 | sort -V | uniq)"
 
   echo "Versions released (from tags): [" ${tags} "]"
   echo "Versions released (from branches): [" ${branches} "]"
@@ -485,7 +485,9 @@ function main() {
   parse_flags $@
   # Log what will be done and where.
   banner "Release configuration"
-  echo "- gcloud user: $(gcloud config get-value core/account)"
+  if which gcloud &>/dev/null ; then
+    echo "- gcloud user: $(gcloud config get-value core/account)"
+  fi
   echo "- Go path: ${GOPATH}"
   echo "- Repository root: ${REPO_ROOT_DIR}"
   echo "- Destination GCR: ${KO_DOCKER_REPO}"

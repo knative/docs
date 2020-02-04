@@ -14,20 +14,27 @@ using cURL requests.
 
 You need:
 
-- A Kubernetes cluster with [Knative installed](./README.md).
+- A Kubernetes cluster with [Knative installed](../install/README.md).
 - An image of the app that you'd like to deploy available on a container
   registry. The image of the sample app used in this guide is available on
   Google Container Registry.
 
 ## Sample application
 
-This guide uses the
-[Hello World sample app in Go](../serving/samples/hello-world/helloworld-go) to
-demonstrate the basic workflow for deploying an app, but these steps can be
-adapted for your own application if you have an image of it available on
-[Docker Hub](https://docs.docker.com/docker-hub/repos/),
-[Google Container Registry](https://cloud.google.com/container-registry/docs/pushing-and-pulling),
-or another container image registry.
+This guide demonstrates the basic workflow for deploying the
+[Hello World sample app (Go)](../serving/samples/hello-world/helloworld-go) from the 
+[Google Container Registry](https://cloud.google.com/container-registry/docs/pushing-and-pulling).
+You can use these steps as a guide for deploying your own container images from other
+registries like [Docker Hub](https://docs.docker.com/docker-hub/repos/).
+
+To deploy a local container image, you need to disable image tag resolution by running the following command:
+
+```bash
+# Set to dev.local/local-image when deploying local container images
+docker tag local-image dev.local/local-image
+```
+
+[Learn more about image tag resolution.](./tag-resolution.md)
 
 The Hello World sample app reads in an `env` variable, `TARGET`, from the
 configuration `.yaml` file, then prints "Hello World: \${TARGET}!". If `TARGET`
@@ -49,7 +56,7 @@ Create a new file named `service.yaml`, then copy and paste the following
 content into it:
 
 ```yaml
-apiVersion: serving.knative.dev/v1alpha1 # Current version of Knative
+apiVersion: serving.knative.dev/v1 # Current version of Knative
 kind: Service
 metadata:
   name: helloworld-go # The name of the app
@@ -87,80 +94,33 @@ Now that your service is created, Knative will perform the following steps:
 
 ### Interacting with your app
 
-To see if your app has been deployed successfully, you need the host URL and IP
-address created by Knative.
+To see if your app has been deployed successfully, you need the URL created by Knative.
 
-Note: If your cluster is new, it can take some time before the service is
-assigned an external IP address.
-
-1. To find the IP address for your service, enter:
+1. To find the URL for your service, enter:
 
    ```shell
-   # In Knative 0.2.x and prior versions, the `knative-ingressgateway` service was used instead of `istio-ingressgateway`.
-   INGRESSGATEWAY=knative-ingressgateway
-
-   # The use of `knative-ingressgateway` is deprecated in Knative v0.3.x.
-   # Use `istio-ingressgateway` instead, since `knative-ingressgateway`
-   # will be removed in Knative v0.4.
-   if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
-       INGRESSGATEWAY=istio-ingressgateway
-   fi
-
-   kubectl get svc $INGRESSGATEWAY --namespace istio-system
-   ```
-
-The command will return something similar to this:
-
-```shell
-   NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                                      AGE
-   istio-ingressgateway   LoadBalancer   10.23.247.74   35.203.155.229   80:32380/TCP,443:32390/TCP,32400:32400/TCP   2d
-````
-
-Take note of the `EXTERNAL-IP` address.
-
-You can also export the IP address as a variable with the following command:
-
-```shell
-   export IP_ADDRESS=$(kubectl get svc $INGRESSGATEWAY --namespace istio-system --output 'jsonpath={.status.loadBalancer.ingress[0].ip}')
-```
-
-> Note: If you use minikube or a baremetal cluster that has no external load
-> balancer, the `EXTERNAL-IP` field is shown as `<pending>`. You need to use
-> `NodeIP` and `NodePort` to interact your app instead. To get your app's
-> `NodeIP` and `NodePort`, enter the following command:
-
-```shell
-   export IP_ADDRESS=$(kubectl get node  --output 'jsonpath={.items[0].status.addresses[0].address}'):$(kubectl get svc $INGRESSGATEWAY --namespace istio-system   --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
-```
-
-1. To find the host URL for your service, enter:
-
-   ```shell
-   kubectl get route helloworld-go  --output=custom-columns=NAME:.metadata.name,URL:.status.url
+   kubectl get ksvc helloworld-go
    ```
 
    The command will return the following:
 
    ```shell
-   NAME                URL
-   helloworld-go       http://helloworld-go.default.example.com
+   NAME            URL                                                LATESTCREATED         LATESTREADY           READY   REASON
+   helloworld-go   http://helloworld-go.default.34.83.80.117.xip.io   helloworld-go-96dtk   helloworld-go-96dtk   True
    ```
 
-   > Note: By default, Knative uses the `example.com` domain. To configure a
-   > custom DNS domain, see
-   > [Using a Custom Domain](../serving/using-a-custom-domain.md).
+   > Note: If your URL includes `example.com` then consult the setup instructions for
+   > configuring DNS (e.g. with `xip.io`), or [using a Custom Domain](../serving/using-a-custom-domain.md).
 
    If you changed the name from `helloworld-go` to something else when creating
    the `.yaml` file, replace `helloworld-go` in the above commands with the name
    you entered.
 
 1. Now you can make a request to your app and see the results. Replace
-   `IP_ADDRESS` with the `EXTERNAL-IP` you wrote down, and replace
-   `helloworld-go.default.example.com` with the domain returned in the previous
-   step.
+   the URL with the one returned by the command in the previous step.
 
    ```shell
-   curl -H "Host: helloworld-go.default.example.com" http://${IP_ADDRESS}
+   # curl http://helloworld-go.default.34.83.80.117.xip.io
    Hello World: Go Sample v1!
    ```
 
@@ -180,4 +140,10 @@ To remove the sample app from your cluster, delete the service record:
 
 ```shell
 kubectl delete --filename service.yaml
+```
+
+Alternatively, delete the service by name:
+
+```shell
+kubectl delete kservice helloworld-go
 ```

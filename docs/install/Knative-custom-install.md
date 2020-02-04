@@ -19,52 +19,36 @@ to run multiple installation commands.
   [follow one of the platform-specific installation guides](./README.md) to help
   you get up and running quickly.
 
-- The steps in this guide use `bash` for the MacOS or Linux environment; for
-  Windows, some commands might need adjustment.
+- The steps in this guide use `bash` for the MacOS or Linux environment.
 
 - This guide assumes that you have an existing Kubernetes cluster, on which
   you're comfortable installing and running _alpha_ level software.
 
-- Kubernetes requirements:
-
-  - Your Kubernetes cluster version must be v1.11 or newer.
-
-  - Your version of the
-    [`kubectl` CLI tool](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
-    must be v1.10 or newer.
+- Knative requires a Kubernetes cluster v1.15 or newer, as well as a compatible
+`kubectl`.
 
 ## Installing Istio
 
 Knative depends on [Istio](https://istio.io/docs/concepts/what-is-istio/) for
-traffic routing and ingress. You have the option of injecting Istio sidecars and
-enabling the Istio service mesh, but it's not required for all Knative
-components.
+traffic routing and ingress.
 
 If your cloud platform offers a managed Istio installation, we recommend
-installing Istio that way, unless you need the ability to customize your
-installation.
+installing Istio that way.
 
-If you prefer to install Istio manually, if your cloud provider doesn't offer a
-managed Istio installation, or if you're installing Knative locally using
-Minkube or similar, see the
+If you prefer to install Istio manually, see the
 [Installing Istio for Knative guide](./installing-istio.md).
 
-> Note: [Ambassador](https://www.getambassador.io/) and
-> [Gloo](https://gloo.solo.io/) are available as an alternative to Istio.
-> [Click here](./Knative-with-Ambassador.md) to install Knative with Ambassador.
-> [Click here](./Knative-with-Gloo.md) to install Knative with Gloo.
+> Note: [Ambassador](./Knative-with-Ambassador.md), [Contour](./Knative-with-Contour.md) and
+> [Gloo](./Knative-with-Gloo.md) are available as an alternative to Istio.
+
+## Installing `cluster-local-gateway` for serving cluster-internal traffic
+
+If you installed Istio, you can install a `cluster-local-gateway` within your Knative cluster so that you can serve cluster-internal traffic. If you want to configure your revisions to use routes that are visible only within your cluster, [install and use the `cluster-local-gateway`](./installing-istio.md#updating-your-install-to-use-cluster-local-gateway).
 
 ## Installing Knative components
 
 Each Knative component must be installed individually. You can decide which
-components and observability plugins to install based on what you plan to do
-with Knative.
-
-> **Note**: If your install fails on the first attempt, try rerunning the
-> commands. They will likely succeed on the second attempt. For background info
-> and to track the upcoming solution to this problem, see issues
-> [#968](https://github.com/knative/docs/issues/968) and
-> [#1036](https://github.com/knative/docs/issues/1036).
+components to install based on what you plan to do with Knative.
 
 ### Choosing Knative installation files
 
@@ -82,14 +66,11 @@ The following Knative installation files are available:
   - https://github.com/knative/serving/releases/download/{{< version >}}/monitoring-tracing-zipkin.yaml
   - https://github.com/knative/serving/releases/download/{{< version >}}/monitoring-tracing-zipkin-in-mem.yaml
 - **Eventing Component**:
-  - https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml
   - https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml
-  - https://github.com/knative/eventing/releases/download/{{< version >}}/in-memory-channel-crd.yaml
 - **Eventing Resources**:
   - https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/github.yaml
   - https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/camel.yaml
-  - https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/gcppubsub.yaml
-  - https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/kafka.yaml
+  - https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/kafka-source.yaml
   - https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/kafka-channel.yaml
 
 #### Install details and options
@@ -115,14 +96,14 @@ files from the Knative repositories:
 | [`monitoring-tracing-zipkin.yaml`][1.80]        | Installs only [Zipkin][2.30].**\***                                                                                                                                     | Serving or Eventing component, ELK stack (monitoring-logs-elasticsearch.yaml)     |
 | [`monitoring-tracing-zipkin-in-mem.yaml`][1.90] | Installs only [Zipkin in-memory][2.30]**\***                                                                                                                            | Serving or Eventing component                                                                  |
 | **knative/eventing**                           |                                                                                                                                                                        |                                                                                           |
-| [`release.yaml`][4.1]†                         | Installs the Eventing component. Includes [ContainerSource](../eventing#containersource), [CronJobSource][6.2], InMemoryChannel.                     |                                                                                           |
-| [`eventing.yaml`][4.2]                         | Installs the Eventing component. Includes [ContainerSource](../eventing#containersource) and [CronJobSource][6.2]. Does not include any Channel. |                                                                                           |
-| [`in-memory-channel-crd.yaml`][4.3]            | Installs only the InMemoryChannel.                                                                                                                       | Eventing component                                                                        |
+| [`release.yaml`][4.10]†                         | Installs the Eventing component. Includes [ContainerSource](../eventing#containersource), [CronJobSource][6.2], InMemoryChannel.                     |                                                                                           |
+| [`eventing.yaml`][4.20]                         | Installs the Eventing component. Includes [ContainerSource](../eventing#containersource) and [CronJobSource][6.2]. Does not include any Channel. |                                                                                           |
+| [`in-memory-channel.yaml`][4.30]            | Installs only the InMemoryChannel.                                                                                                                       | Eventing component                                                                        |
 | **knative/eventing-contrib**                   |                                                                                                                                                                        |                                                                                           |
 | [`github.yaml`][5.10]†                          | Installs the [GitHub][6.10] source.                                                                                                                                     | Eventing component                                                                        |
 | [`camel.yaml`][5.40]                            | Installs the Apache Camel source.                                                                                                                                      | Eventing component                                                                        |
-| [`kafka-importer.yaml`][5.50]                   | Installs the Apache Kafka source.                                                                                                                                      | Eventing component                                                                        |
-| [`kafka-channel.yaml`][5.60]                    | Installs the KafkaChannel.                                                                                                                                      | Eventing component                                                                        |
+| [`kafka-source.yaml`][5.50]                     | Installs the Apache Kafka source.                                                                                                                                      | Eventing component                                                                        |
+| [`kafka-channel.yaml`][5.60]                    | Installs the Kafka channel.                                                                                                                                      | Eventing component                                                                        |
 | [`awssqs.yaml`][5.70]                           | Installs the AWS SQS source.                                                                                                                                           | Eventing component                                                                        |
 | [`event-display.yaml`][5.30]                    | Installs a Knative Service that logs events received for use in samples and debugging.                                                                                 | Serving component, Eventing component                                                     |
 | [`natss-channel.yaml`][5.80]                    | Installs the NATS streaming channel implementation.                                                                                                                       | Eventing component                                                                        |
@@ -165,8 +146,7 @@ for details about installing the various supported observability plugins.
 [4.20]:
   https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml
 [4.30]:
-  https://github.com/knative/eventing/releases/download/{{< version >}}/in-memory-channel-crd.yaml
-[4.40]: https://github.com/knative/eventing/releases/download/{{< version >}}/kafka.yaml
+  https://github.com/knative/eventing/releases/download/{{< version >}}/in-memory-channel.yaml
 [5.0]: https://github.com/knative/eventing-contrib/releases/tag/{{< version >}}
 [5.10]:
   https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/github.yaml
@@ -175,13 +155,13 @@ for details about installing the various supported observability plugins.
 [5.40]:
   https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/camel.yaml
 [5.50]:
-  https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/kafka-importer.yaml
+  https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/kafka-source.yaml
 [5.60]:
   https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/kafka-channel.yaml
 [5.70]:
   https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/awssqs.yaml
 [5.80]:
-  https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/natss.yaml  
+  https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/natss-channel.yaml
 [6.10]: https://developer.github.com/v3/activity/events/types/
 [6.20]:
   https://github.com/knative/eventing-contrib/blob/master/samples/cronjob-source/README.md
@@ -190,137 +170,113 @@ for details about installing the various supported observability plugins.
 
 ### Installing Knative
 
-**Tip**: From the table above, copy and paste the URL and filename into the
+To install Knative components or plugins, you specify and then run their
+filenames in the `kubectl apply` command. To prevent race conditions, you
+first create the CRD by using the `-l knative.dev/crd-install=true` flag.
+
+Tip: From the table above, copy and paste the URL and filename into the
 commands below.
+ 
+1. Install the component or plugin:
+   
+    1. Create the `URL` variable and specify the path to the Knative component or plugin
+       that you want to install:
+       ```bash
+       URL=[FILE_URL]
+       ```
+       Where `[FILE_URL]` is the URL path of a Knative component or plugin and includes
+       the following details:
 
-1. If you are upgrading from Knative 0.3.x: Update your domain and static IP
-   address to be associated with the LoadBalancer `istio-ingressgateway` instead
-   of `knative-ingressgateway`. Then run the following to clean up leftover
-   resources:
-
-   ```
-   kubectl delete svc knative-ingressgateway -n istio-system
-   kubectl delete deploy knative-ingressgateway -n istio-system
-   ```
-
-   If you have the Knative Eventing Sources component installed, you will also
-   need to delete the following resource before upgrading:
-
-   ```
-   kubectl delete statefulset/controller-manager -n knative-sources
-   ```
-
-   While the deletion of this resource during the upgrade process will not
-   prevent modifications to Eventing Source resources, those changes will not be
-   completed until the upgrade process finishes.
-
-1. To install Knative components or plugins, specify the filenames in the
-   `kubectl apply` command. To prevent install failures due to race conditions,
-   run the install command first with the `-l knative.dev/crd-install=true`
-   flag, then a second time without the selector flag.
-
-   1. Install only the CRDs by using the
-      `--selector knative.dev/crd-install=true` flag:
-
-      ```bash
-      kubectl apply --selector knative.dev/crd-install=true \
-      --filename [FILE_URL] \
-      --filename [FILE_URL]
-      ```
-
-   1. Remove `--selector knative.dev/crd-install=true` and then run the command
-      again to install the actual components or plugins:
-
-      ```bash
-      kubectl apply --filename [FILE_URL] \
-      --filename [FILE_URL]
-      ```
-
-      You can add as many `--filename [FILE_URL]` flags to your commands as
-      needed.
-
-      Syntax:
-
-      - `[FILE_URL]`: URL path of a Knative component or plugin:
         `https://github.com/knative/[COMPONENT]/releases/download/[VERSION]/[FILENAME].yaml`
-
+       
         - `[COMPONENT]`: A Knative component repository.
         - `[VERSION]`: Version number of a Knative component release.
         - `[FILENAME]`: Filename of the component or plugin that you want
           installed.
-
-      `[FILE_URL]`Examples:
-
-      - `https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml`
-      - `https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml`
-      - `https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml`
-
-      **Example install commands:**
-
-   - To install the Knative Serving component with the set of observability
-     plugins, run the following commands:
-
-     1. Installs the CRDs only:
+       
+        Examples:
 
         ```bash
-        kubectl apply --selector knative.dev/crd-install=true \
-          --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
-          --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml
+        https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml
+        https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml
+        https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml
         ```
 
-     1. Remove the `--selector knative.dev/crd-install=true` flag and then run
-        the command to install the Serving component and observability plugins:
+   1. Install only the CRD by using the `--selector knative.dev/crd-install=true` flag:
+      ```bash
+      kubectl apply --selector knative.dev/crd-install=true \
+      --filename ${URL}
+      ```
+      
+   1. Install the actual component or plugin by running the command without the 
+      `--selector knative.dev/crd-install=true` flag:
+      ```bash
+      kubectl apply --filename ${URL}
+      ```
+      Tip: To install multiple components or plugins at the same time, you can add 
+      multiple `--filename [FILE_URL]` flags to the commands.
 
-        ```bash
-        kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
-          --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml
-        ```
+    **Example install commands:**
+    
+    The following examples demonstrate how to install muliptle components and plugins at the same time.
 
-   - To install all three Knative components without an observability plugin, 
-     run the following commands.
+    - To install the Knative Serving component with the set of observability
+      plugin, run the following commands:
+
+       1. Installs the CRDs only:
+          ```bash
+          kubectl apply --selector knative.dev/crd-install=true \
+            --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
+            --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml
+          ```
+
+       1. Remove the `--selector knative.dev/crd-install=true` flag 
+          to install the actual Serving component and observability plugin:
+          ```bash
+          kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
+            --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring.yaml
+          ```
+
+    - To install both Knative components without an observability plugin,
+      run the following commands.
      
-     1. Installs the CRDs only:
+       1. Installs the CRDs only:
+          ```bash
+          kubectl apply --selector knative.dev/crd-install=true \
+            --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
+            --filename https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml
+          ```
 
-        ```bash
-        kubectl apply --selector knative.dev/crd-install=true \
-          --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
-          --filename https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml
-        ```
+      1. Remove the `--selector knative.dev/crd-install=true` flag 
+         to install all the Knative components and the Eventing resources:
+         ```bash
+         kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
+           --filename https://github.com/knative/eventing/releases/download/{{< version >}}/eventing.yaml
+         ```
 
-     1. Remove the `--selector knative.dev/crd-install=true` flag and then run
-        the command to install all the Knative components, including the
-        Eventing resources:
+1. Run one or more of the following commands to ensure that your component or plugin was 
+   installed successfully. It can take a few seconds for your install to complete, so
+   rerun the commands until you receive a `STATUS` of `Running`.
 
-        ```bash
-        kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving.yaml \
-          --filename https://github.com/knative/eventing/releases/download/{{< version >}}/release.yaml
-        ```
+    Tip: You can append the `--watch` flag to the `kubectl get` commands to
+    view the pod status in realtime. You use `CTRL + C` to exit watch mode.
 
-1. Depending on what you chose to install, view the status of your installation
-   by running one or more of the following commands. It might take a few
-   seconds, so rerun the commands until all of the components show a `STATUS` of
-   `Running`:
+    - If you installed the Serving or Eventing component:
+      ```bash
+      kubectl get pods --namespace knative-serving
+      kubectl get pods --namespace knative-eventing
+      ```
 
-   ```bash
-   kubectl get pods --namespace knative-serving
-   kubectl get pods --namespace knative-eventing
-   ```
+   - If you installed an observability plugin:
+     ```bash
+     kubectl get pods --namespace knative-monitoring
+     ```
 
-   > Tip: You can append the `--watch` flag to the `kubectl get` commands to
-   > view the pod status in realtime. You use `CTRL + C` to exit watch mode.
-
-1. If you installed an observability plugin, run the following command to ensure
-   that the necessary `knative-monitoring` pods show a `STATUS` of `Running`:
-
-   ```bash
-   kubectl get pods --namespace knative-monitoring
-   ```
-
-See the following topics for information about installing other Knative features:
+For information about installing other Knative features, see the following topics:
 
 - [Installing logging, metrics, and traces](../serving/installing-logging-metrics-traces.md):
   Learn how to install and set up the various observability plugins.
-   
+
 - [Installing Cert-Manager](../serving/installing-cert-manager.md):
   Learn how to set up and configure secure HTTPS requests and enable
   [automatic TLS cert provisioning](../serving/using-auto-tls.md).

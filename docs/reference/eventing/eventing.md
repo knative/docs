@@ -1,10 +1,7 @@
 <p>Packages:</p>
 <ul>
 <li>
-<a href="#messaging.knative.dev%2fv1alpha1">messaging.knative.dev/v1alpha1</a>
-</li>
-<li>
-<a href="#sources.eventing.knative.dev%2fv1alpha1">sources.eventing.knative.dev/v1alpha1</a>
+<a href="#sources.knative.dev%2fv1alpha1">sources.knative.dev/v1alpha1</a>
 </li>
 <li>
 <a href="#duck.knative.dev%2fv1alpha1">duck.knative.dev/v1alpha1</a>
@@ -12,21 +9,30 @@
 <li>
 <a href="#eventing.knative.dev%2fv1alpha1">eventing.knative.dev/v1alpha1</a>
 </li>
+<li>
+<a href="#flows.knative.dev%2fv1alpha1">flows.knative.dev/v1alpha1</a>
+</li>
+<li>
+<a href="#sources.eventing.knative.dev%2fv1alpha1">sources.eventing.knative.dev/v1alpha1</a>
+</li>
+<li>
+<a href="#messaging.knative.dev%2fv1alpha1">messaging.knative.dev/v1alpha1</a>
+</li>
 </ul>
-<h2 id="messaging.knative.dev/v1alpha1">messaging.knative.dev/v1alpha1</h2>
+<h2 id="sources.knative.dev/v1alpha1">sources.knative.dev/v1alpha1</h2>
 <p>
-<p>Package v1alpha1 is the v1alpha1 version of the API.</p>
+<p>Package v1alpha1 contains API Schema definitions for the sources v1alpha1 API group</p>
 </p>
 Resource Types:
 <ul><li>
-<a href="#messaging.knative.dev/v1alpha1.Channel">Channel</a>
+<a href="#sources.knative.dev/v1alpha1.ApiServerSource">ApiServerSource</a>
 </li><li>
-<a href="#messaging.knative.dev/v1alpha1.InMemoryChannel">InMemoryChannel</a>
+<a href="#sources.knative.dev/v1alpha1.SinkBinding">SinkBinding</a>
 </li></ul>
-<h3 id="messaging.knative.dev/v1alpha1.Channel">Channel
+<h3 id="sources.knative.dev/v1alpha1.ApiServerSource">ApiServerSource
 </h3>
 <p>
-<p>Channel represents a generic Channel. It is normally used when we want a Channel, but don&rsquo;t need a specific Channel implementation.</p>
+<p>ApiServerSource is the Schema for the apiserversources API</p>
 </p>
 <table>
 <thead>
@@ -42,7 +48,7 @@ Resource Types:
 string</td>
 <td>
 <code>
-messaging.knative.dev/v1alpha1
+sources.knative.dev/v1alpha1
 </code>
 </td>
 </tr>
@@ -51,19 +57,18 @@ messaging.knative.dev/v1alpha1
 <code>kind</code></br>
 string
 </td>
-<td><code>Channel</code></td>
+<td><code>ApiServerSource</code></td>
 </tr>
 <tr>
 <td>
 <code>metadata</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
 </a>
 </em>
 </td>
 <td>
-<em>(Optional)</em>
 Refer to the Kubernetes API documentation for the fields of the
 <code>metadata</code> field.
 </td>
@@ -72,41 +77,64 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#messaging.knative.dev/v1alpha1.ChannelSpec">
-ChannelSpec
+<a href="#sources.knative.dev/v1alpha1.ApiServerSourceSpec">
+ApiServerSourceSpec
 </a>
 </em>
 </td>
 <td>
-<p>Spec defines the desired state of the Channel.</p>
 <br/>
 <br/>
 <table>
 <tr>
 <td>
-<code>channelTemplate</code></br>
+<code>resources</code></br>
 <em>
-<a href="#duck.knative.dev/v1alpha1.ChannelTemplateSpec">
-ChannelTemplateSpec
+<a href="#sources.knative.dev/v1alpha1.ApiServerResource">
+[]ApiServerResource
 </a>
 </em>
 </td>
 <td>
-<p>ChannelTemplate specifies which Channel CRD to use to create the CRD Channel backing this Channel.
-This is immutable after creation. Normally this is set by the Channel defaulter, not directly by the user.</p>
+<p>Resources is the list of resources to watch</p>
 </td>
 </tr>
 <tr>
 <td>
-<code>subscribable</code></br>
+<code>serviceAccountName</code></br>
 <em>
-<a href="#duck.knative.dev/v1alpha1.Subscribable">
-Subscribable
-</a>
+string
 </em>
 </td>
 <td>
-<p>Channel conforms to Duck type Subscribable.</p>
+<em>(Optional)</em>
+<p>ServiceAccountName is the name of the ServiceAccount to use to run this
+source.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>sink</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1beta1.Destination
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Sink is a reference to an object that will resolve to a domain name to use as the sink.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>mode</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>Mode is the mode the receive adapter controller runs under: Ref or Resource.
+<code>Ref</code> sends only the reference to the resource.
+<code>Resource</code> send the full resource.</p>
 </td>
 </tr>
 </table>
@@ -116,23 +144,25 @@ Subscribable
 <td>
 <code>status</code></br>
 <em>
-<a href="#messaging.knative.dev/v1alpha1.ChannelStatus">
-ChannelStatus
+<a href="#sources.knative.dev/v1alpha1.ApiServerSourceStatus">
+ApiServerSourceStatus
 </a>
 </em>
 </td>
 <td>
-<em>(Optional)</em>
-<p>Status represents the current state of the Channel. This data may be out of
-date.</p>
 </td>
 </tr>
 </tbody>
 </table>
-<h3 id="messaging.knative.dev/v1alpha1.InMemoryChannel">InMemoryChannel
+<h3 id="sources.knative.dev/v1alpha1.SinkBinding">SinkBinding
 </h3>
 <p>
-<p>InMemoryChannel is a resource representing an in memory channel</p>
+<p>SinkBinding describes a Binding that is also a Source.
+The <code>sink</code> (from the Source duck) is resolved to a URL and
+then projected into the <code>subject</code> by augmenting the runtime
+contract of the referenced containers to have a <code>K_SINK</code>
+environment variable holding the endpoint to which to send
+cloud events.</p>
 </p>
 <table>
 <thead>
@@ -148,7 +178,7 @@ date.</p>
 string</td>
 <td>
 <code>
-messaging.knative.dev/v1alpha1
+sources.knative.dev/v1alpha1
 </code>
 </td>
 </tr>
@@ -157,19 +187,18 @@ messaging.knative.dev/v1alpha1
 <code>kind</code></br>
 string
 </td>
-<td><code>InMemoryChannel</code></td>
+<td><code>SinkBinding</code></td>
 </tr>
 <tr>
 <td>
 <code>metadata</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
 </a>
 </em>
 </td>
 <td>
-<em>(Optional)</em>
 Refer to the Kubernetes API documentation for the fields of the
 <code>metadata</code> field.
 </td>
@@ -178,27 +207,39 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#messaging.knative.dev/v1alpha1.InMemoryChannelSpec">
-InMemoryChannelSpec
+<a href="#sources.knative.dev/v1alpha1.SinkBindingSpec">
+SinkBindingSpec
 </a>
 </em>
 </td>
 <td>
-<p>Spec defines the desired state of the Channel.</p>
 <br/>
 <br/>
 <table>
 <tr>
 <td>
-<code>subscribable</code></br>
+<code>SourceSpec</code></br>
 <em>
-<a href="#duck.knative.dev/v1alpha1.Subscribable">
-Subscribable
-</a>
+knative.dev/pkg/apis/duck/v1.SourceSpec
 </em>
 </td>
 <td>
-<p>Channel conforms to Duck type Subscribable.</p>
+<p>
+(Members of <code>SourceSpec</code> are embedded into this type.)
+</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>BindingSpec</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1alpha1.BindingSpec
+</em>
+</td>
+<td>
+<p>
+(Members of <code>BindingSpec</code> are embedded into this type.)
+</p>
 </td>
 </tr>
 </table>
@@ -208,28 +249,24 @@ Subscribable
 <td>
 <code>status</code></br>
 <em>
-<a href="#messaging.knative.dev/v1alpha1.InMemoryChannelStatus">
-InMemoryChannelStatus
+<a href="#sources.knative.dev/v1alpha1.SinkBindingStatus">
+SinkBindingStatus
 </a>
 </em>
 </td>
 <td>
-<em>(Optional)</em>
-<p>Status represents the current state of the Channel. This data may be out of
-date.</p>
 </td>
 </tr>
 </tbody>
 </table>
-<h3 id="messaging.knative.dev/v1alpha1.ChannelSpec">ChannelSpec
+<h3 id="sources.knative.dev/v1alpha1.ApiServerResource">ApiServerResource
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#messaging.knative.dev/v1alpha1.Channel">Channel</a>)
+<a href="#sources.knative.dev/v1alpha1.ApiServerSourceSpec">ApiServerSourceSpec</a>)
 </p>
 <p>
-<p>ChannelSpec defines which subscribers have expressed interest in receiving events from this Channel.
-It also defines the ChannelTemplate to use in order to create the CRD Channel backing this Channel.</p>
+<p>ApiServerResource defines the resource to watch</p>
 </p>
 <table>
 <thead>
@@ -241,41 +278,146 @@ It also defines the ChannelTemplate to use in order to create the CRD Channel ba
 <tbody>
 <tr>
 <td>
-<code>channelTemplate</code></br>
+<code>apiVersion</code></br>
 <em>
-<a href="#duck.knative.dev/v1alpha1.ChannelTemplateSpec">
-ChannelTemplateSpec
-</a>
+string
 </em>
 </td>
 <td>
-<p>ChannelTemplate specifies which Channel CRD to use to create the CRD Channel backing this Channel.
-This is immutable after creation. Normally this is set by the Channel defaulter, not directly by the user.</p>
+<p>API version of the resource to watch.</p>
 </td>
 </tr>
 <tr>
 <td>
-<code>subscribable</code></br>
+<code>kind</code></br>
 <em>
-<a href="#duck.knative.dev/v1alpha1.Subscribable">
-Subscribable
+string
+</em>
+</td>
+<td>
+<p>Kind of the resource to watch.
+More info: <a href="https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds">https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<code>labelSelector</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#labelselector-v1-meta">
+Kubernetes meta/v1.LabelSelector
 </a>
 </em>
 </td>
 <td>
-<p>Channel conforms to Duck type Subscribable.</p>
+<p>LabelSelector restricts this source to objects with the selected labels
+More info: <a href="http://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors">http://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<code>controllerSelector</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#ownerreference-v1-meta">
+Kubernetes meta/v1.OwnerReference
+</a>
+</em>
+</td>
+<td>
+<p>ControllerSelector restricts this source to objects with a controlling owner reference of the specified kind.
+Only apiVersion and kind are used. Both are optional.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>controller</code></br>
+<em>
+bool
+</em>
+</td>
+<td>
+<p>If true, send an event referencing the object controlling the resource</p>
 </td>
 </tr>
 </tbody>
 </table>
-<h3 id="messaging.knative.dev/v1alpha1.ChannelStatus">ChannelStatus
+<h3 id="sources.knative.dev/v1alpha1.ApiServerSourceSpec">ApiServerSourceSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#messaging.knative.dev/v1alpha1.Channel">Channel</a>)
+<a href="#sources.knative.dev/v1alpha1.ApiServerSource">ApiServerSource</a>)
 </p>
 <p>
-<p>ChannelStatus represents the current state of a Channel.</p>
+<p>ApiServerSourceSpec defines the desired state of ApiServerSource</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>resources</code></br>
+<em>
+<a href="#sources.knative.dev/v1alpha1.ApiServerResource">
+[]ApiServerResource
+</a>
+</em>
+</td>
+<td>
+<p>Resources is the list of resources to watch</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>serviceAccountName</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>ServiceAccountName is the name of the ServiceAccount to use to run this
+source.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>sink</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1beta1.Destination
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Sink is a reference to an object that will resolve to a domain name to use as the sink.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>mode</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>Mode is the mode the receive adapter controller runs under: Ref or Resource.
+<code>Ref</code> sends only the reference to the resource.
+<code>Resource</code> send the full resource.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sources.knative.dev/v1alpha1.ApiServerSourceStatus">ApiServerSourceStatus
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#sources.knative.dev/v1alpha1.ApiServerSource">ApiServerSource</a>)
+</p>
+<p>
+<p>ApiServerSourceStatus defines the observed state of ApiServerSource</p>
 </p>
 <table>
 <thead>
@@ -289,14 +431,385 @@ Subscribable
 <td>
 <code>Status</code></br>
 <em>
-knative.dev/pkg/apis/duck/v1beta1.Status
+knative.dev/pkg/apis/duck/v1.Status
 </em>
 </td>
 <td>
 <p>
 (Members of <code>Status</code> are embedded into this type.)
 </p>
-<p>inherits duck/v1beta1 Status, which currently provides:
+<p>inherits duck/v1 Status, which currently provides:
+* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
+* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>sinkUri</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>SinkURI is the current active sink URI that has been configured for the ApiServerSource.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sources.knative.dev/v1alpha1.SinkBindingSpec">SinkBindingSpec
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#sources.knative.dev/v1alpha1.SinkBinding">SinkBinding</a>)
+</p>
+<p>
+<p>SinkBindingSpec holds the desired state of the SinkBinding (from the client).</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>SourceSpec</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1.SourceSpec
+</em>
+</td>
+<td>
+<p>
+(Members of <code>SourceSpec</code> are embedded into this type.)
+</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>BindingSpec</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1alpha1.BindingSpec
+</em>
+</td>
+<td>
+<p>
+(Members of <code>BindingSpec</code> are embedded into this type.)
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sources.knative.dev/v1alpha1.SinkBindingStatus">SinkBindingStatus
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#sources.knative.dev/v1alpha1.SinkBinding">SinkBinding</a>)
+</p>
+<p>
+<p>SinkBindingStatus communicates the observed state of the SinkBinding (from the controller).</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>SourceStatus</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1.SourceStatus
+</em>
+</td>
+<td>
+<p>
+(Members of <code>SourceStatus</code> are embedded into this type.)
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="duck.knative.dev/v1alpha1">duck.knative.dev/v1alpha1</h2>
+<p>
+<p>Package v1alpha1 is the v1alpha1 version of the API.</p>
+</p>
+Resource Types:
+<ul></ul>
+<h3 id="duck.knative.dev/v1alpha1.BackoffPolicyType">BackoffPolicyType
+(<code>string</code> alias)</p></h3>
+<p>
+(<em>Appears on:</em>
+<a href="#duck.knative.dev/v1alpha1.DeliverySpec">DeliverySpec</a>)
+</p>
+<p>
+<p>BackoffPolicyType is the type for backoff policies</p>
+</p>
+<h3 id="duck.knative.dev/v1alpha1.ChannelDefaulter">ChannelDefaulter
+</h3>
+<p>
+<p>ChannelDefaulter sets the default Channel CRD and Arguments on Channels that do not
+specify any implementation.</p>
+</p>
+<h3 id="duck.knative.dev/v1alpha1.ChannelTemplateSpec">ChannelTemplateSpec
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#eventing.knative.dev/v1alpha1.BrokerSpec">BrokerSpec</a>, 
+<a href="#messaging.knative.dev/v1alpha1.ChannelSpec">ChannelSpec</a>, 
+<a href="#flows.knative.dev/v1alpha1.ParallelSpec">ParallelSpec</a>, 
+<a href="#messaging.knative.dev/v1alpha1.ParallelSpec">ParallelSpec</a>, 
+<a href="#messaging.knative.dev/v1alpha1.SequenceSpec">SequenceSpec</a>, 
+<a href="#flows.knative.dev/v1alpha1.SequenceSpec">SequenceSpec</a>)
+</p>
+<p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>spec</code></br>
+<em>
+k8s.io/apimachinery/pkg/runtime.RawExtension
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Spec defines the Spec to use for each channel created. Passed
+in verbatim to the Channel CRD as Spec section.</p>
+<br/>
+<br/>
+<table>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="duck.knative.dev/v1alpha1.ChannelTemplateSpecInternal">ChannelTemplateSpecInternal
+</h3>
+<p>
+<p>ChannelTemplateSpecInternal is an internal only version that includes ObjectMeta so that
+we can easily create new Channels off of it.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>metadata</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
+Kubernetes meta/v1.ObjectMeta
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+Refer to the Kubernetes API documentation for the fields of the
+<code>metadata</code> field.
+</td>
+</tr>
+<tr>
+<td>
+<code>spec</code></br>
+<em>
+k8s.io/apimachinery/pkg/runtime.RawExtension
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Spec defines the Spec to use for each channel created. Passed
+in verbatim to the Channel CRD as Spec section.</p>
+<br/>
+<br/>
+<table>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="duck.knative.dev/v1alpha1.Channelable">Channelable
+</h3>
+<p>
+<p>Channelable is a skeleton type wrapping Subscribable and Addressable in the manner we expect resource writers
+defining compatible resources to embed it. We will typically use this type to deserialize
+Channelable ObjectReferences and access their subscription and address data.  This is not a real resource.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>metadata</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
+Kubernetes meta/v1.ObjectMeta
+</a>
+</em>
+</td>
+<td>
+Refer to the Kubernetes API documentation for the fields of the
+<code>metadata</code> field.
+</td>
+</tr>
+<tr>
+<td>
+<code>spec</code></br>
+<em>
+<a href="#duck.knative.dev/v1alpha1.ChannelableSpec">
+ChannelableSpec
+</a>
+</em>
+</td>
+<td>
+<p>Spec is the part where the Channelable fulfills the Subscribable contract.</p>
+<br/>
+<br/>
+<table>
+<tr>
+<td>
+<code>SubscribableTypeSpec</code></br>
+<em>
+<a href="#duck.knative.dev/v1alpha1.SubscribableTypeSpec">
+SubscribableTypeSpec
+</a>
+</em>
+</td>
+<td>
+<p>
+(Members of <code>SubscribableTypeSpec</code> are embedded into this type.)
+</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>delivery</code></br>
+<em>
+<a href="#duck.knative.dev/v1alpha1.DeliverySpec">
+DeliverySpec
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>DeliverySpec contains options controlling the event delivery</p>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<code>status</code></br>
+<em>
+<a href="#duck.knative.dev/v1alpha1.ChannelableStatus">
+ChannelableStatus
+</a>
+</em>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="duck.knative.dev/v1alpha1.ChannelableSpec">ChannelableSpec
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#duck.knative.dev/v1alpha1.Channelable">Channelable</a>)
+</p>
+<p>
+<p>ChannelableSpec contains Spec of the Channelable object</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>SubscribableTypeSpec</code></br>
+<em>
+<a href="#duck.knative.dev/v1alpha1.SubscribableTypeSpec">
+SubscribableTypeSpec
+</a>
+</em>
+</td>
+<td>
+<p>
+(Members of <code>SubscribableTypeSpec</code> are embedded into this type.)
+</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>delivery</code></br>
+<em>
+<a href="#duck.knative.dev/v1alpha1.DeliverySpec">
+DeliverySpec
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>DeliverySpec contains options controlling the event delivery</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="duck.knative.dev/v1alpha1.ChannelableStatus">ChannelableStatus
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#duck.knative.dev/v1alpha1.Channelable">Channelable</a>)
+</p>
+<p>
+<p>ChannelableStatus contains the Status of a Channelable object.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>Status</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1.Status
+</em>
+</td>
+<td>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
+<p>inherits duck/v1 Status, which currently provides:
 * ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
 * Conditions - the latest available observations of a resource&rsquo;s current state.</p>
 </td>
@@ -312,10 +825,7 @@ knative.dev/pkg/apis/duck/v1alpha1.AddressStatus
 <p>
 (Members of <code>AddressStatus</code> are embedded into this type.)
 </p>
-<p>Channel is Addressable. It currently exposes the endpoint as a
-fully-qualified DNS name which will distribute traffic over the
-provided targets from inside the cluster.</p>
-<p>It generally has the form {channel}.{namespace}.svc.{cluster domain name}</p>
+<p>AddressStatus is the part where the Channelable fulfills the Addressable contract.</p>
 </td>
 </tr>
 <tr>
@@ -336,24 +846,132 @@ SubscribableTypeStatus
 </tr>
 <tr>
 <td>
-<code>channel</code></br>
+<code>errorChannel</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectreference-v1-core">
 Kubernetes core/v1.ObjectReference
 </a>
 </em>
 </td>
 <td>
-<p>Channel is an ObjectReference to the Channel CRD backing this Channel.</p>
+<em>(Optional)</em>
+<p>ErrorChannel is set by the channel when it supports native error handling via a channel</p>
 </td>
 </tr>
 </tbody>
 </table>
-<h3 id="messaging.knative.dev/v1alpha1.Choice">Choice
+<h3 id="duck.knative.dev/v1alpha1.DeliverySpec">DeliverySpec
 </h3>
 <p>
-<p>Choice defines conditional branches that will be wired in
-series through Channels and Subscriptions.</p>
+(<em>Appears on:</em>
+<a href="#eventing.knative.dev/v1alpha1.BrokerSpec">BrokerSpec</a>, 
+<a href="#duck.knative.dev/v1alpha1.ChannelableSpec">ChannelableSpec</a>, 
+<a href="#messaging.knative.dev/v1alpha1.SubscriptionSpec">SubscriptionSpec</a>)
+</p>
+<p>
+<p>DeliverySpec contains the delivery options for event senders,
+such as channelable and source.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>deadLetterSink</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1.Destination
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>DeadLetterSink is the sink receiving event that couldn&rsquo;t be sent to
+a destination.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>retry</code></br>
+<em>
+int32
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Retry is the minimum number of retries the sender should attempt when
+sending an event before moving it to the dead letter sink.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>backoffPolicy</code></br>
+<em>
+<a href="#duck.knative.dev/v1alpha1.BackoffPolicyType">
+BackoffPolicyType
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>BackoffPolicy is the retry backoff policy (linear, exponential)</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>backoffDelay</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>BackoffDelay is the delay before retrying.
+More information on Duration format: <a href="https://www.ietf.org/rfc/rfc3339.txt">https://www.ietf.org/rfc/rfc3339.txt</a></p>
+<p>For linear policy, backoff delay is the time interval between retries.
+For exponential policy , backoff delay is backoffDelay*2^<numberOfRetries></p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="duck.knative.dev/v1alpha1.DeliveryStatus">DeliveryStatus
+</h3>
+<p>
+<p>DeliveryStatus contains the Status of an object supporting delivery options.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>deadLetterChannel</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectreference-v1-core">
+Kubernetes core/v1.ObjectReference
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>DeadLetterChannel is the reference to the native, platform specific channel
+where failed events are sent to.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="duck.knative.dev/v1alpha1.Resource">Resource
+</h3>
+<p>
+<p>Resource is a skeleton type wrapping all Kubernetes resources. It is typically used to watch
+arbitrary other resources (such as any Source or Addressable). This is not a real resource.</p>
 </p>
 <table>
 <thead>
@@ -367,7 +985,428 @@ series through Channels and Subscriptions.</p>
 <td>
 <code>metadata</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
+Kubernetes meta/v1.ObjectMeta
+</a>
+</em>
+</td>
+<td>
+Refer to the Kubernetes API documentation for the fields of the
+<code>metadata</code> field.
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="duck.knative.dev/v1alpha1.Subscribable">Subscribable
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#messaging.knative.dev/v1alpha1.ChannelSpec">ChannelSpec</a>, 
+<a href="#messaging.knative.dev/v1alpha1.InMemoryChannelSpec">InMemoryChannelSpec</a>, 
+<a href="#duck.knative.dev/v1alpha1.SubscribableTypeSpec">SubscribableTypeSpec</a>)
+</p>
+<p>
+<p>Subscribable is the schema for the subscribable portion of the spec
+section of the resource.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>subscribers</code></br>
+<em>
+<a href="#duck.knative.dev/v1alpha1.SubscriberSpec">
+[]SubscriberSpec
+</a>
+</em>
+</td>
+<td>
+<p>This is the list of subscriptions for this subscribable.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="duck.knative.dev/v1alpha1.SubscribableStatus">SubscribableStatus
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#duck.knative.dev/v1alpha1.SubscribableTypeStatus">SubscribableTypeStatus</a>)
+</p>
+<p>
+<p>SubscribableStatus is the schema for the subscribable&rsquo;s status portion of the status
+section of the resource.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>subscribers</code></br>
+<em>
+<a href="#duck.knative.dev/v1alpha1.SubscriberStatus">
+[]SubscriberStatus
+</a>
+</em>
+</td>
+<td>
+<p>This is the list of subscription&rsquo;s statuses for this channel.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="duck.knative.dev/v1alpha1.SubscribableType">SubscribableType
+</h3>
+<p>
+<p>SubscribableType is a skeleton type wrapping Subscribable in the manner we expect resource writers
+defining compatible resources to embed it. We will typically use this type to deserialize
+SubscribableType ObjectReferences and access the Subscription data.  This is not a real resource.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>metadata</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
+Kubernetes meta/v1.ObjectMeta
+</a>
+</em>
+</td>
+<td>
+Refer to the Kubernetes API documentation for the fields of the
+<code>metadata</code> field.
+</td>
+</tr>
+<tr>
+<td>
+<code>spec</code></br>
+<em>
+<a href="#duck.knative.dev/v1alpha1.SubscribableTypeSpec">
+SubscribableTypeSpec
+</a>
+</em>
+</td>
+<td>
+<p>SubscribableTypeSpec is the part where Subscribable object is
+configured as to be compatible with Subscribable contract.</p>
+<br/>
+<br/>
+<table>
+<tr>
+<td>
+<code>subscribable</code></br>
+<em>
+<a href="#duck.knative.dev/v1alpha1.Subscribable">
+Subscribable
+</a>
+</em>
+</td>
+<td>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<code>status</code></br>
+<em>
+<a href="#duck.knative.dev/v1alpha1.SubscribableTypeStatus">
+SubscribableTypeStatus
+</a>
+</em>
+</td>
+<td>
+<p>SubscribableTypeStatus is the part where SubscribableStatus object is
+configured as to be compatible with Subscribable contract.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="duck.knative.dev/v1alpha1.SubscribableTypeSpec">SubscribableTypeSpec
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#duck.knative.dev/v1alpha1.ChannelableSpec">ChannelableSpec</a>, 
+<a href="#duck.knative.dev/v1alpha1.SubscribableType">SubscribableType</a>)
+</p>
+<p>
+<p>SubscribableTypeSpec shows how we expect folks to embed Subscribable in their Spec field.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>subscribable</code></br>
+<em>
+<a href="#duck.knative.dev/v1alpha1.Subscribable">
+Subscribable
+</a>
+</em>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="duck.knative.dev/v1alpha1.SubscribableTypeStatus">SubscribableTypeStatus
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#messaging.knative.dev/v1alpha1.ChannelStatus">ChannelStatus</a>, 
+<a href="#duck.knative.dev/v1alpha1.ChannelableStatus">ChannelableStatus</a>, 
+<a href="#messaging.knative.dev/v1alpha1.InMemoryChannelStatus">InMemoryChannelStatus</a>, 
+<a href="#duck.knative.dev/v1alpha1.SubscribableType">SubscribableType</a>)
+</p>
+<p>
+<p>SubscribableTypeStatus shows how we expect folks to embed Subscribable in their Status field.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>subscribableStatus</code></br>
+<em>
+<a href="#duck.knative.dev/v1alpha1.SubscribableStatus">
+SubscribableStatus
+</a>
+</em>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="duck.knative.dev/v1alpha1.SubscriberSpec">SubscriberSpec
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#duck.knative.dev/v1alpha1.Subscribable">Subscribable</a>)
+</p>
+<p>
+<p>SubscriberSpec defines a single subscriber to a Subscribable.
+Ref is a reference to the Subscription this SubscriberSpec was created for
+SubscriberURI is the endpoint for the subscriber
+ReplyURI is the endpoint for the reply
+At least one of SubscriberURI and ReplyURI must be present</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>uid</code></br>
+<em>
+k8s.io/apimachinery/pkg/types.UID
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>UID is used to understand the origin of the subscriber.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>generation</code></br>
+<em>
+int64
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Generation of the origin of the subscriber with uid:UID.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>subscriberURI</code></br>
+<em>
+knative.dev/pkg/apis.URL
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+</td>
+</tr>
+<tr>
+<td>
+<code>replyURI</code></br>
+<em>
+knative.dev/pkg/apis.URL
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+</td>
+</tr>
+<tr>
+<td>
+<code>deadLetterSink</code></br>
+<em>
+knative.dev/pkg/apis.URL
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="duck.knative.dev/v1alpha1.SubscriberStatus">SubscriberStatus
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#duck.knative.dev/v1alpha1.SubscribableStatus">SubscribableStatus</a>)
+</p>
+<p>
+<p>SubscriberStatus defines the status of a single subscriber to a Channel.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>uid</code></br>
+<em>
+k8s.io/apimachinery/pkg/types.UID
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>UID is used to understand the origin of the subscriber.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>observedGeneration</code></br>
+<em>
+int64
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Generation of the origin of the subscriber with uid:UID.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>ready</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#conditionstatus-v1-core">
+Kubernetes core/v1.ConditionStatus
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Status of the subscriber.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>message</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>A human readable message indicating details of Ready status.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="eventing.knative.dev/v1alpha1">eventing.knative.dev/v1alpha1</h2>
+<p>
+<p>Package v1alpha1 is the v1alpha1 version of the API.</p>
+</p>
+Resource Types:
+<ul><li>
+<a href="#eventing.knative.dev/v1alpha1.Broker">Broker</a>
+</li><li>
+<a href="#eventing.knative.dev/v1alpha1.EventType">EventType</a>
+</li><li>
+<a href="#eventing.knative.dev/v1alpha1.Trigger">Trigger</a>
+</li></ul>
+<h3 id="eventing.knative.dev/v1alpha1.Broker">Broker
+</h3>
+<p>
+<p>Broker collects a pool of events that are consumable using Triggers. Brokers
+provide a well-known endpoint for event delivery that senders can use with
+minimal knowledge of the event routing strategy. Receivers use Triggers to
+request delivery of events from a Broker&rsquo;s pool to a specific URL or
+Addressable endpoint.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>apiVersion</code></br>
+string</td>
+<td>
+<code>
+eventing.knative.dev/v1alpha1
+</code>
+</td>
+</tr>
+<tr>
+<td>
+<code>kind</code></br>
+string
+</td>
+<td><code>Broker</code></td>
+</tr>
+<tr>
+<td>
+<code>metadata</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
 </a>
 </em>
@@ -382,28 +1421,812 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#messaging.knative.dev/v1alpha1.ChoiceSpec">
-ChoiceSpec
+<a href="#eventing.knative.dev/v1alpha1.BrokerSpec">
+BrokerSpec
 </a>
 </em>
 </td>
 <td>
-<p>Spec defines the desired state of the Choice.</p>
+<p>Spec defines the desired state of the Broker.</p>
 <br/>
 <br/>
 <table>
 <tr>
 <td>
-<code>cases</code></br>
+<code>channelTemplateSpec</code></br>
 <em>
-<a href="#messaging.knative.dev/v1alpha1.ChoiceCase">
-[]ChoiceCase
+<a href="#duck.knative.dev/v1alpha1.ChannelTemplateSpec">
+ChannelTemplateSpec
 </a>
 </em>
 </td>
 <td>
-<p>Cases is the list of Filter/Subscribers pairs. Filters are evaluated in the order
-provided, until one pass (returns true)</p>
+<em>(Optional)</em>
+<p>ChannelTemplate specifies which Channel CRD to use to create all the Channels used internally by the
+Broker. If left unspecified, it is set to the default Channel CRD for the namespace (or cluster, in case there
+are no defaults for the namespace).</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>delivery</code></br>
+<em>
+<a href="#duck.knative.dev/v1alpha1.DeliverySpec">
+DeliverySpec
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Delivery is the delivery specification to be used internally by the broker to
+create subscriptions.</p>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<code>status</code></br>
+<em>
+<a href="#eventing.knative.dev/v1alpha1.BrokerStatus">
+BrokerStatus
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Status represents the current state of the Broker. This data may be out of
+date.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="eventing.knative.dev/v1alpha1.EventType">EventType
+</h3>
+<p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>apiVersion</code></br>
+string</td>
+<td>
+<code>
+eventing.knative.dev/v1alpha1
+</code>
+</td>
+</tr>
+<tr>
+<td>
+<code>kind</code></br>
+string
+</td>
+<td><code>EventType</code></td>
+</tr>
+<tr>
+<td>
+<code>metadata</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
+Kubernetes meta/v1.ObjectMeta
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+Refer to the Kubernetes API documentation for the fields of the
+<code>metadata</code> field.
+</td>
+</tr>
+<tr>
+<td>
+<code>spec</code></br>
+<em>
+<a href="#eventing.knative.dev/v1alpha1.EventTypeSpec">
+EventTypeSpec
+</a>
+</em>
+</td>
+<td>
+<p>Spec defines the desired state of the EventType.</p>
+<br/>
+<br/>
+<table>
+<tr>
+<td>
+<code>type</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>Type represents the CloudEvents type. It is authoritative.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>source</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>Source is a URI, it represents the CloudEvents source.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>schema</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Schema is a URI, it represents the CloudEvents schemaurl extension attribute.
+It may be a JSON schema, a protobuf schema, etc. It is optional.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>broker</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>Broker refers to the Broker that can provide the EventType.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>description</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Description is an optional field used to describe the EventType, in any meaningful way.</p>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<code>status</code></br>
+<em>
+<a href="#eventing.knative.dev/v1alpha1.EventTypeStatus">
+EventTypeStatus
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Status represents the current state of the EventType.
+This data may be out of date.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="eventing.knative.dev/v1alpha1.Trigger">Trigger
+</h3>
+<p>
+<p>Trigger represents a request to have events delivered to a consumer from a
+Broker&rsquo;s event pool.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>apiVersion</code></br>
+string</td>
+<td>
+<code>
+eventing.knative.dev/v1alpha1
+</code>
+</td>
+</tr>
+<tr>
+<td>
+<code>kind</code></br>
+string
+</td>
+<td><code>Trigger</code></td>
+</tr>
+<tr>
+<td>
+<code>metadata</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
+Kubernetes meta/v1.ObjectMeta
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+Refer to the Kubernetes API documentation for the fields of the
+<code>metadata</code> field.
+</td>
+</tr>
+<tr>
+<td>
+<code>spec</code></br>
+<em>
+<a href="#eventing.knative.dev/v1alpha1.TriggerSpec">
+TriggerSpec
+</a>
+</em>
+</td>
+<td>
+<p>Spec defines the desired state of the Trigger.</p>
+<br/>
+<br/>
+<table>
+<tr>
+<td>
+<code>broker</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>Broker is the broker that this trigger receives events from. If not specified, will default
+to &lsquo;default&rsquo;.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>filter</code></br>
+<em>
+<a href="#eventing.knative.dev/v1alpha1.TriggerFilter">
+TriggerFilter
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Filter is the filter to apply against all events from the Broker. Only events that pass this
+filter will be sent to the Subscriber. If not specified, will default to allowing all events.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>subscriber</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1.Destination
+</em>
+</td>
+<td>
+<p>Subscriber is the addressable that receives events from the Broker that pass the Filter. It
+is required.</p>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<code>status</code></br>
+<em>
+<a href="#eventing.knative.dev/v1alpha1.TriggerStatus">
+TriggerStatus
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Status represents the current state of the Trigger. This data may be out of
+date.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="eventing.knative.dev/v1alpha1.BrokerSpec">BrokerSpec
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#eventing.knative.dev/v1alpha1.Broker">Broker</a>)
+</p>
+<p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>channelTemplateSpec</code></br>
+<em>
+<a href="#duck.knative.dev/v1alpha1.ChannelTemplateSpec">
+ChannelTemplateSpec
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>ChannelTemplate specifies which Channel CRD to use to create all the Channels used internally by the
+Broker. If left unspecified, it is set to the default Channel CRD for the namespace (or cluster, in case there
+are no defaults for the namespace).</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>delivery</code></br>
+<em>
+<a href="#duck.knative.dev/v1alpha1.DeliverySpec">
+DeliverySpec
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Delivery is the delivery specification to be used internally by the broker to
+create subscriptions.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="eventing.knative.dev/v1alpha1.BrokerStatus">BrokerStatus
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#eventing.knative.dev/v1alpha1.Broker">Broker</a>)
+</p>
+<p>
+<p>BrokerStatus represents the current state of a Broker.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>Status</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1.Status
+</em>
+</td>
+<td>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
+<p>inherits duck/v1 Status, which currently provides:
+* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
+* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>address</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1alpha1.Addressable
+</em>
+</td>
+<td>
+<p>Broker is Addressable. It currently exposes the endpoint as a
+fully-qualified DNS name which will distribute traffic over the
+provided targets from inside the cluster.</p>
+<p>It generally has the form {broker}-router.{namespace}.svc.{cluster domain name}</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>triggerChannel</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectreference-v1-core">
+Kubernetes core/v1.ObjectReference
+</a>
+</em>
+</td>
+<td>
+<p>TriggerChannel is an objectref to the object for the TriggerChannel</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="eventing.knative.dev/v1alpha1.EventTypeSpec">EventTypeSpec
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#eventing.knative.dev/v1alpha1.EventType">EventType</a>)
+</p>
+<p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>type</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>Type represents the CloudEvents type. It is authoritative.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>source</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>Source is a URI, it represents the CloudEvents source.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>schema</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Schema is a URI, it represents the CloudEvents schemaurl extension attribute.
+It may be a JSON schema, a protobuf schema, etc. It is optional.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>broker</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>Broker refers to the Broker that can provide the EventType.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>description</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Description is an optional field used to describe the EventType, in any meaningful way.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="eventing.knative.dev/v1alpha1.EventTypeStatus">EventTypeStatus
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#eventing.knative.dev/v1alpha1.EventType">EventType</a>)
+</p>
+<p>
+<p>EventTypeStatus represents the current state of a EventType.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>Status</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1.Status
+</em>
+</td>
+<td>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
+<p>inherits duck/v1 Status, which currently provides:
+* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
+* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="eventing.knative.dev/v1alpha1.TriggerFilter">TriggerFilter
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#eventing.knative.dev/v1alpha1.TriggerSpec">TriggerSpec</a>)
+</p>
+<p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>sourceAndType</code></br>
+<em>
+<a href="#eventing.knative.dev/v1alpha1.TriggerFilterSourceAndType">
+TriggerFilterSourceAndType
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>DeprecatedSourceAndType filters events based on exact matches on the
+CloudEvents type and source attributes. This field has been replaced by the
+Attributes field.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>attributes</code></br>
+<em>
+<a href="#eventing.knative.dev/v1alpha1.TriggerFilterAttributes">
+TriggerFilterAttributes
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Attributes filters events by exact match on event context attributes.
+Each key in the map is compared with the equivalent key in the event
+context. An event passes the filter if all values are equal to the
+specified values.</p>
+<p>Nested context attributes are not supported as keys. Only string values are supported.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="eventing.knative.dev/v1alpha1.TriggerFilterAttributes">TriggerFilterAttributes
+(<code>map[string]string</code> alias)</p></h3>
+<p>
+(<em>Appears on:</em>
+<a href="#eventing.knative.dev/v1alpha1.TriggerFilter">TriggerFilter</a>)
+</p>
+<p>
+<p>TriggerFilterAttributes is a map of context attribute names to values for
+filtering by equality. Only exact matches will pass the filter. You can use the value &ldquo;
+to indicate all strings match.</p>
+</p>
+<h3 id="eventing.knative.dev/v1alpha1.TriggerFilterSourceAndType">TriggerFilterSourceAndType
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#eventing.knative.dev/v1alpha1.TriggerFilter">TriggerFilter</a>)
+</p>
+<p>
+<p>TriggerFilterSourceAndType filters events based on exact matches on the cloud event&rsquo;s type and
+source attributes. Only exact matches will pass the filter. Either or both type and source can
+use the value &ldquo; to indicate all strings match.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>type</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<code>source</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="eventing.knative.dev/v1alpha1.TriggerSpec">TriggerSpec
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#eventing.knative.dev/v1alpha1.Trigger">Trigger</a>)
+</p>
+<p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>broker</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>Broker is the broker that this trigger receives events from. If not specified, will default
+to &lsquo;default&rsquo;.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>filter</code></br>
+<em>
+<a href="#eventing.knative.dev/v1alpha1.TriggerFilter">
+TriggerFilter
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Filter is the filter to apply against all events from the Broker. Only events that pass this
+filter will be sent to the Subscriber. If not specified, will default to allowing all events.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>subscriber</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1.Destination
+</em>
+</td>
+<td>
+<p>Subscriber is the addressable that receives events from the Broker that pass the Filter. It
+is required.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="eventing.knative.dev/v1alpha1.TriggerStatus">TriggerStatus
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#eventing.knative.dev/v1alpha1.Trigger">Trigger</a>)
+</p>
+<p>
+<p>TriggerStatus represents the current state of a Trigger.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>Status</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1.Status
+</em>
+</td>
+<td>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
+<p>inherits duck/v1 Status, which currently provides:
+* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
+* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>subscriberURI</code></br>
+<em>
+knative.dev/pkg/apis.URL
+</em>
+</td>
+<td>
+<p>SubscriberURI is the resolved URI of the receiver for this Trigger.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="flows.knative.dev/v1alpha1">flows.knative.dev/v1alpha1</h2>
+<p>
+<p>Package v1alpha1 is the v1alpha1 version of the API.</p>
+</p>
+Resource Types:
+<ul></ul>
+<h3 id="flows.knative.dev/v1alpha1.Parallel">Parallel
+</h3>
+<p>
+<p>Parallel defines conditional branches that will be wired in
+series through Channels and Subscriptions.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>metadata</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
+Kubernetes meta/v1.ObjectMeta
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+Refer to the Kubernetes API documentation for the fields of the
+<code>metadata</code> field.
+</td>
+</tr>
+<tr>
+<td>
+<code>spec</code></br>
+<em>
+<a href="#flows.knative.dev/v1alpha1.ParallelSpec">
+ParallelSpec
+</a>
+</em>
+</td>
+<td>
+<p>Spec defines the desired state of the Parallel.</p>
+<br/>
+<br/>
+<table>
+<tr>
+<td>
+<code>branches</code></br>
+<em>
+<a href="#flows.knative.dev/v1alpha1.ParallelBranch">
+[]ParallelBranch
+</a>
+</em>
+</td>
+<td>
+<p>Branches is the list of Filter/Subscribers pairs.</p>
 </td>
 </tr>
 <tr>
@@ -425,22 +2248,13 @@ for the namespace (or cluster, in case there are no defaults for the namespace).
 <td>
 <code>reply</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
-Kubernetes core/v1.ObjectReference
-</a>
+knative.dev/pkg/apis/duck/v1.Destination
 </em>
 </td>
 <td>
 <em>(Optional)</em>
 <p>Reply is a Reference to where the result of a case Subscriber gets sent to
 when the case does not have a Reply</p>
-<p>You can specify only the following fields of the ObjectReference:
-- Kind
-- APIVersion
-- Name</p>
-<p>The resource pointed by this ObjectReference must meet the Addressable contract
-with a reference to the Addressable duck type. If the resource does not meet this contract,
-it will be reflected in the Subscription&rsquo;s status.</p>
 </td>
 </tr>
 </table>
@@ -450,24 +2264,24 @@ it will be reflected in the Subscription&rsquo;s status.</p>
 <td>
 <code>status</code></br>
 <em>
-<a href="#messaging.knative.dev/v1alpha1.ChoiceStatus">
-ChoiceStatus
+<a href="#flows.knative.dev/v1alpha1.ParallelStatus">
+ParallelStatus
 </a>
 </em>
 </td>
 <td>
 <em>(Optional)</em>
-<p>Status represents the current state of the Choice. This data may be out of
+<p>Status represents the current state of the Parallel. This data may be out of
 date.</p>
 </td>
 </tr>
 </tbody>
 </table>
-<h3 id="messaging.knative.dev/v1alpha1.ChoiceCase">ChoiceCase
+<h3 id="flows.knative.dev/v1alpha1.ParallelBranch">ParallelBranch
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#messaging.knative.dev/v1alpha1.ChoiceSpec">ChoiceSpec</a>)
+<a href="#flows.knative.dev/v1alpha1.ParallelSpec">ParallelSpec</a>)
 </p>
 <p>
 </p>
@@ -483,22 +2297,18 @@ date.</p>
 <td>
 <code>filter</code></br>
 <em>
-<a href="#eventing.knative.dev/v1alpha1.SubscriberSpec">
-SubscriberSpec
-</a>
+knative.dev/pkg/apis/duck/v1.Destination
 </em>
 </td>
 <td>
-<p>Filter is the expression guarding the branch/case</p>
+<p>Filter is the expression guarding the branch</p>
 </td>
 </tr>
 <tr>
 <td>
 <code>subscriber</code></br>
 <em>
-<a href="#eventing.knative.dev/v1alpha1.SubscriberSpec">
-SubscriberSpec
-</a>
+knative.dev/pkg/apis/duck/v1.Destination
 </em>
 </td>
 <td>
@@ -509,34 +2319,25 @@ SubscriberSpec
 <td>
 <code>reply</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
-Kubernetes core/v1.ObjectReference
-</a>
+knative.dev/pkg/apis/duck/v1.Destination
 </em>
 </td>
 <td>
 <em>(Optional)</em>
 <p>Reply is a Reference to where the result of Subscriber of this case gets sent to.
-If not specified, sent the result to the Choice Reply</p>
-<p>You can specify only the following fields of the ObjectReference:
-- Kind
-- APIVersion
-- Name</p>
-<p>The resource pointed by this ObjectReference must meet the Addressable contract
-with a reference to the Addressable duck type. If the resource does not meet this contract,
-it will be reflected in the Subscription&rsquo;s status.</p>
+If not specified, sent the result to the Parallel Reply</p>
 </td>
 </tr>
 </tbody>
 </table>
-<h3 id="messaging.knative.dev/v1alpha1.ChoiceCaseStatus">ChoiceCaseStatus
+<h3 id="flows.knative.dev/v1alpha1.ParallelBranchStatus">ParallelBranchStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#messaging.knative.dev/v1alpha1.ChoiceStatus">ChoiceStatus</a>)
+<a href="#flows.knative.dev/v1alpha1.ParallelStatus">ParallelStatus</a>)
 </p>
 <p>
-<p>ChoiceCaseStatus represents the current state of a Choice case</p>
+<p>ParallelBranchStatus represents the current state of a Parallel branch</p>
 </p>
 <table>
 <thead>
@@ -550,8 +2351,8 @@ it will be reflected in the Subscription&rsquo;s status.</p>
 <td>
 <code>filterSubscriptionStatus</code></br>
 <em>
-<a href="#messaging.knative.dev/v1alpha1.ChoiceSubscriptionStatus">
-ChoiceSubscriptionStatus
+<a href="#flows.knative.dev/v1alpha1.ParallelSubscriptionStatus">
+ParallelSubscriptionStatus
 </a>
 </em>
 </td>
@@ -563,8 +2364,8 @@ ChoiceSubscriptionStatus
 <td>
 <code>filterChannelStatus</code></br>
 <em>
-<a href="#messaging.knative.dev/v1alpha1.ChoiceChannelStatus">
-ChoiceChannelStatus
+<a href="#flows.knative.dev/v1alpha1.ParallelChannelStatus">
+ParallelChannelStatus
 </a>
 </em>
 </td>
@@ -576,8 +2377,8 @@ ChoiceChannelStatus
 <td>
 <code>subscriberSubscriptionStatus</code></br>
 <em>
-<a href="#messaging.knative.dev/v1alpha1.ChoiceSubscriptionStatus">
-ChoiceSubscriptionStatus
+<a href="#flows.knative.dev/v1alpha1.ParallelSubscriptionStatus">
+ParallelSubscriptionStatus
 </a>
 </em>
 </td>
@@ -587,12 +2388,12 @@ ChoiceSubscriptionStatus
 </tr>
 </tbody>
 </table>
-<h3 id="messaging.knative.dev/v1alpha1.ChoiceChannelStatus">ChoiceChannelStatus
+<h3 id="flows.knative.dev/v1alpha1.ParallelChannelStatus">ParallelChannelStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#messaging.knative.dev/v1alpha1.ChoiceCaseStatus">ChoiceCaseStatus</a>, 
-<a href="#messaging.knative.dev/v1alpha1.ChoiceStatus">ChoiceStatus</a>)
+<a href="#flows.knative.dev/v1alpha1.ParallelBranchStatus">ParallelBranchStatus</a>, 
+<a href="#flows.knative.dev/v1alpha1.ParallelStatus">ParallelStatus</a>)
 </p>
 <p>
 </p>
@@ -608,7 +2409,7 @@ ChoiceSubscriptionStatus
 <td>
 <code>channel</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectreference-v1-core">
 Kubernetes core/v1.ObjectReference
 </a>
 </em>
@@ -630,11 +2431,11 @@ knative.dev/pkg/apis.Condition
 </tr>
 </tbody>
 </table>
-<h3 id="messaging.knative.dev/v1alpha1.ChoiceSpec">ChoiceSpec
+<h3 id="flows.knative.dev/v1alpha1.ParallelSpec">ParallelSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#messaging.knative.dev/v1alpha1.Choice">Choice</a>)
+<a href="#flows.knative.dev/v1alpha1.Parallel">Parallel</a>)
 </p>
 <p>
 </p>
@@ -648,16 +2449,15 @@ knative.dev/pkg/apis.Condition
 <tbody>
 <tr>
 <td>
-<code>cases</code></br>
+<code>branches</code></br>
 <em>
-<a href="#messaging.knative.dev/v1alpha1.ChoiceCase">
-[]ChoiceCase
+<a href="#flows.knative.dev/v1alpha1.ParallelBranch">
+[]ParallelBranch
 </a>
 </em>
 </td>
 <td>
-<p>Cases is the list of Filter/Subscribers pairs. Filters are evaluated in the order
-provided, until one pass (returns true)</p>
+<p>Branches is the list of Filter/Subscribers pairs.</p>
 </td>
 </tr>
 <tr>
@@ -679,34 +2479,25 @@ for the namespace (or cluster, in case there are no defaults for the namespace).
 <td>
 <code>reply</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
-Kubernetes core/v1.ObjectReference
-</a>
+knative.dev/pkg/apis/duck/v1.Destination
 </em>
 </td>
 <td>
 <em>(Optional)</em>
 <p>Reply is a Reference to where the result of a case Subscriber gets sent to
 when the case does not have a Reply</p>
-<p>You can specify only the following fields of the ObjectReference:
-- Kind
-- APIVersion
-- Name</p>
-<p>The resource pointed by this ObjectReference must meet the Addressable contract
-with a reference to the Addressable duck type. If the resource does not meet this contract,
-it will be reflected in the Subscription&rsquo;s status.</p>
 </td>
 </tr>
 </tbody>
 </table>
-<h3 id="messaging.knative.dev/v1alpha1.ChoiceStatus">ChoiceStatus
+<h3 id="flows.knative.dev/v1alpha1.ParallelStatus">ParallelStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#messaging.knative.dev/v1alpha1.Choice">Choice</a>)
+<a href="#flows.knative.dev/v1alpha1.Parallel">Parallel</a>)
 </p>
 <p>
-<p>ChoiceStatus represents the current state of a Choice.</p>
+<p>ParallelStatus represents the current state of a Parallel.</p>
 </p>
 <table>
 <thead>
@@ -720,14 +2511,14 @@ it will be reflected in the Subscription&rsquo;s status.</p>
 <td>
 <code>Status</code></br>
 <em>
-knative.dev/pkg/apis/duck/v1beta1.Status
+knative.dev/pkg/apis/duck/v1.Status
 </em>
 </td>
 <td>
 <p>
 (Members of <code>Status</code> are embedded into this type.)
 </p>
-<p>inherits duck/v1alpha1 Status, which currently provides:
+<p>inherits duck/v1 Status, which currently provides:
 * ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
 * Conditions - the latest available observations of a resource&rsquo;s current state.</p>
 </td>
@@ -736,8 +2527,8 @@ knative.dev/pkg/apis/duck/v1beta1.Status
 <td>
 <code>ingressChannelStatus</code></br>
 <em>
-<a href="#messaging.knative.dev/v1alpha1.ChoiceChannelStatus">
-ChoiceChannelStatus
+<a href="#flows.knative.dev/v1alpha1.ParallelChannelStatus">
+ParallelChannelStatus
 </a>
 </em>
 </td>
@@ -747,41 +2538,41 @@ ChoiceChannelStatus
 </tr>
 <tr>
 <td>
-<code>caseStatuses</code></br>
+<code>branchStatuses</code></br>
 <em>
-<a href="#messaging.knative.dev/v1alpha1.ChoiceCaseStatus">
-[]ChoiceCaseStatus
+<a href="#flows.knative.dev/v1alpha1.ParallelBranchStatus">
+[]ParallelBranchStatus
 </a>
 </em>
 </td>
 <td>
-<p>CaseStatuses is an array of corresponding to cases status.
-Matches the Spec.Cases array in the order.</p>
+<p>BranchStatuses is an array of corresponding to branch statuses.
+Matches the Spec.Branches array in the order.</p>
 </td>
 </tr>
 <tr>
 <td>
 <code>AddressStatus</code></br>
 <em>
-knative.dev/pkg/apis/duck/v1alpha1.AddressStatus
+knative.dev/pkg/apis/duck/v1.AddressStatus
 </em>
 </td>
 <td>
 <p>
 (Members of <code>AddressStatus</code> are embedded into this type.)
 </p>
-<p>AddressStatus is the starting point to this Choice. Sending to this
+<p>AddressStatus is the starting point to this Parallel. Sending to this
 will target the first subscriber.
 It generally has the form {channel}.{namespace}.svc.{cluster domain name}</p>
 </td>
 </tr>
 </tbody>
 </table>
-<h3 id="messaging.knative.dev/v1alpha1.ChoiceSubscriptionStatus">ChoiceSubscriptionStatus
+<h3 id="flows.knative.dev/v1alpha1.ParallelSubscriptionStatus">ParallelSubscriptionStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#messaging.knative.dev/v1alpha1.ChoiceCaseStatus">ChoiceCaseStatus</a>)
+<a href="#flows.knative.dev/v1alpha1.ParallelBranchStatus">ParallelBranchStatus</a>)
 </p>
 <p>
 </p>
@@ -797,7 +2588,7 @@ It generally has the form {channel}.{namespace}.svc.{cluster domain name}</p>
 <td>
 <code>subscription</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectreference-v1-core">
 Kubernetes core/v1.ObjectReference
 </a>
 </em>
@@ -819,109 +2610,7 @@ knative.dev/pkg/apis.Condition
 </tr>
 </tbody>
 </table>
-<h3 id="messaging.knative.dev/v1alpha1.InMemoryChannelSpec">InMemoryChannelSpec
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#messaging.knative.dev/v1alpha1.InMemoryChannel">InMemoryChannel</a>)
-</p>
-<p>
-<p>InMemoryChannelSpec defines which subscribers have expressed interest in
-receiving events from this InMemoryChannel.
-arguments for a Channel.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>subscribable</code></br>
-<em>
-<a href="#duck.knative.dev/v1alpha1.Subscribable">
-Subscribable
-</a>
-</em>
-</td>
-<td>
-<p>Channel conforms to Duck type Subscribable.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="messaging.knative.dev/v1alpha1.InMemoryChannelStatus">InMemoryChannelStatus
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#messaging.knative.dev/v1alpha1.InMemoryChannel">InMemoryChannel</a>)
-</p>
-<p>
-<p>ChannelStatus represents the current state of a Channel.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>Status</code></br>
-<em>
-knative.dev/pkg/apis/duck/v1beta1.Status
-</em>
-</td>
-<td>
-<p>
-(Members of <code>Status</code> are embedded into this type.)
-</p>
-<p>inherits duck/v1beta1 Status, which currently provides:
-* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
-* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>AddressStatus</code></br>
-<em>
-knative.dev/pkg/apis/duck/v1alpha1.AddressStatus
-</em>
-</td>
-<td>
-<p>
-(Members of <code>AddressStatus</code> are embedded into this type.)
-</p>
-<p>InMemoryChannel is Addressable. It currently exposes the endpoint as a
-fully-qualified DNS name which will distribute traffic over the
-provided targets from inside the cluster.</p>
-<p>It generally has the form {channel}.{namespace}.svc.{cluster domain name}</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>SubscribableTypeStatus</code></br>
-<em>
-<a href="#duck.knative.dev/v1alpha1.SubscribableTypeStatus">
-SubscribableTypeStatus
-</a>
-</em>
-</td>
-<td>
-<p>
-(Members of <code>SubscribableTypeStatus</code> are embedded into this type.)
-</p>
-<p>Subscribers is populated with the statuses of each of the Channelable&rsquo;s subscribers.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="messaging.knative.dev/v1alpha1.Sequence">Sequence
+<h3 id="flows.knative.dev/v1alpha1.Sequence">Sequence
 </h3>
 <p>
 <p>Sequence defines a sequence of Subscribers that will be wired in
@@ -939,7 +2628,7 @@ series through Channels and Subscriptions.</p>
 <td>
 <code>metadata</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
 </a>
 </em>
@@ -954,7 +2643,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#messaging.knative.dev/v1alpha1.SequenceSpec">
+<a href="#flows.knative.dev/v1alpha1.SequenceSpec">
 SequenceSpec
 </a>
 </em>
@@ -968,13 +2657,11 @@ SequenceSpec
 <td>
 <code>steps</code></br>
 <em>
-<a href="#eventing.knative.dev/v1alpha1.SubscriberSpec">
-[]SubscriberSpec
-</a>
+[]knative.dev/pkg/apis/duck/v1.Destination
 </em>
 </td>
 <td>
-<p>Steps is the list of Subscribers (processors / functions) that will be called in the order
+<p>Steps is the list of Destinations (processors / functions) that will be called in the order
 provided.</p>
 </td>
 </tr>
@@ -997,21 +2684,12 @@ for the namespace (or cluster, in case there are no defaults for the namespace).
 <td>
 <code>reply</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
-Kubernetes core/v1.ObjectReference
-</a>
+knative.dev/pkg/apis/duck/v1.Destination
 </em>
 </td>
 <td>
 <em>(Optional)</em>
 <p>Reply is a Reference to where the result of the last Subscriber gets sent to.</p>
-<p>You can specify only the following fields of the ObjectReference:
-- Kind
-- APIVersion
-- Name</p>
-<p>The resource pointed by this ObjectReference must meet the Addressable contract
-with a reference to the Addressable duck type. If the resource does not meet this contract,
-it will be reflected in the Subscription&rsquo;s status.</p>
 </td>
 </tr>
 </table>
@@ -1021,7 +2699,7 @@ it will be reflected in the Subscription&rsquo;s status.</p>
 <td>
 <code>status</code></br>
 <em>
-<a href="#messaging.knative.dev/v1alpha1.SequenceStatus">
+<a href="#flows.knative.dev/v1alpha1.SequenceStatus">
 SequenceStatus
 </a>
 </em>
@@ -1034,11 +2712,11 @@ date.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="messaging.knative.dev/v1alpha1.SequenceChannelStatus">SequenceChannelStatus
+<h3 id="flows.knative.dev/v1alpha1.SequenceChannelStatus">SequenceChannelStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#messaging.knative.dev/v1alpha1.SequenceStatus">SequenceStatus</a>)
+<a href="#flows.knative.dev/v1alpha1.SequenceStatus">SequenceStatus</a>)
 </p>
 <p>
 </p>
@@ -1054,7 +2732,7 @@ date.</p>
 <td>
 <code>channel</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectreference-v1-core">
 Kubernetes core/v1.ObjectReference
 </a>
 </em>
@@ -1076,11 +2754,11 @@ knative.dev/pkg/apis.Condition
 </tr>
 </tbody>
 </table>
-<h3 id="messaging.knative.dev/v1alpha1.SequenceSpec">SequenceSpec
+<h3 id="flows.knative.dev/v1alpha1.SequenceSpec">SequenceSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#messaging.knative.dev/v1alpha1.Sequence">Sequence</a>)
+<a href="#flows.knative.dev/v1alpha1.Sequence">Sequence</a>)
 </p>
 <p>
 </p>
@@ -1096,13 +2774,11 @@ knative.dev/pkg/apis.Condition
 <td>
 <code>steps</code></br>
 <em>
-<a href="#eventing.knative.dev/v1alpha1.SubscriberSpec">
-[]SubscriberSpec
-</a>
+[]knative.dev/pkg/apis/duck/v1.Destination
 </em>
 </td>
 <td>
-<p>Steps is the list of Subscribers (processors / functions) that will be called in the order
+<p>Steps is the list of Destinations (processors / functions) that will be called in the order
 provided.</p>
 </td>
 </tr>
@@ -1125,30 +2801,21 @@ for the namespace (or cluster, in case there are no defaults for the namespace).
 <td>
 <code>reply</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
-Kubernetes core/v1.ObjectReference
-</a>
+knative.dev/pkg/apis/duck/v1.Destination
 </em>
 </td>
 <td>
 <em>(Optional)</em>
 <p>Reply is a Reference to where the result of the last Subscriber gets sent to.</p>
-<p>You can specify only the following fields of the ObjectReference:
-- Kind
-- APIVersion
-- Name</p>
-<p>The resource pointed by this ObjectReference must meet the Addressable contract
-with a reference to the Addressable duck type. If the resource does not meet this contract,
-it will be reflected in the Subscription&rsquo;s status.</p>
 </td>
 </tr>
 </tbody>
 </table>
-<h3 id="messaging.knative.dev/v1alpha1.SequenceStatus">SequenceStatus
+<h3 id="flows.knative.dev/v1alpha1.SequenceStatus">SequenceStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#messaging.knative.dev/v1alpha1.Sequence">Sequence</a>)
+<a href="#flows.knative.dev/v1alpha1.Sequence">Sequence</a>)
 </p>
 <p>
 <p>SequenceStatus represents the current state of a Sequence.</p>
@@ -1165,14 +2832,14 @@ it will be reflected in the Subscription&rsquo;s status.</p>
 <td>
 <code>Status</code></br>
 <em>
-knative.dev/pkg/apis/duck/v1beta1.Status
+knative.dev/pkg/apis/duck/v1.Status
 </em>
 </td>
 <td>
 <p>
 (Members of <code>Status</code> are embedded into this type.)
 </p>
-<p>inherits duck/v1alpha1 Status, which currently provides:
+<p>inherits duck/v1 Status, which currently provides:
 * ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
 * Conditions - the latest available observations of a resource&rsquo;s current state.</p>
 </td>
@@ -1181,7 +2848,7 @@ knative.dev/pkg/apis/duck/v1beta1.Status
 <td>
 <code>subscriptionStatuses</code></br>
 <em>
-<a href="#messaging.knative.dev/v1alpha1.SequenceSubscriptionStatus">
+<a href="#flows.knative.dev/v1alpha1.SequenceSubscriptionStatus">
 []SequenceSubscriptionStatus
 </a>
 </em>
@@ -1195,7 +2862,7 @@ Matches the Spec.Steps array in the order.</p>
 <td>
 <code>channelStatuses</code></br>
 <em>
-<a href="#messaging.knative.dev/v1alpha1.SequenceChannelStatus">
+<a href="#flows.knative.dev/v1alpha1.SequenceChannelStatus">
 []SequenceChannelStatus
 </a>
 </em>
@@ -1209,7 +2876,7 @@ Matches the Spec.Steps array in the order.</p>
 <td>
 <code>AddressStatus</code></br>
 <em>
-knative.dev/pkg/apis/duck/v1alpha1.AddressStatus
+knative.dev/pkg/apis/duck/v1.AddressStatus
 </em>
 </td>
 <td>
@@ -1223,11 +2890,11 @@ It generally has the form {channel}.{namespace}.svc.{cluster domain name}</p>
 </tr>
 </tbody>
 </table>
-<h3 id="messaging.knative.dev/v1alpha1.SequenceSubscriptionStatus">SequenceSubscriptionStatus
+<h3 id="flows.knative.dev/v1alpha1.SequenceSubscriptionStatus">SequenceSubscriptionStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#messaging.knative.dev/v1alpha1.SequenceStatus">SequenceStatus</a>)
+<a href="#flows.knative.dev/v1alpha1.SequenceStatus">SequenceStatus</a>)
 </p>
 <p>
 </p>
@@ -1243,7 +2910,7 @@ It generally has the form {channel}.{namespace}.svc.{cluster domain name}</p>
 <td>
 <code>subscription</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectreference-v1-core">
 Kubernetes core/v1.ObjectReference
 </a>
 </em>
@@ -1277,6 +2944,8 @@ Resource Types:
 <a href="#sources.eventing.knative.dev/v1alpha1.ContainerSource">ContainerSource</a>
 </li><li>
 <a href="#sources.eventing.knative.dev/v1alpha1.CronJobSource">CronJobSource</a>
+</li><li>
+<a href="#sources.eventing.knative.dev/v1alpha1.SinkBinding">SinkBinding</a>
 </li></ul>
 <h3 id="sources.eventing.knative.dev/v1alpha1.ApiServerSource">ApiServerSource
 </h3>
@@ -1310,9 +2979,22 @@ string
 </tr>
 <tr>
 <td>
+<code>Deprecated</code></br>
+<em>
+<a href="#sources.eventing.knative.dev/v1alpha1.Deprecated">
+Deprecated
+</a>
+</em>
+</td>
+<td>
+<p>Deprecated allows ApiServerSource to have a deprecated message.</p>
+</td>
+</tr>
+<tr>
+<td>
 <code>metadata</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
 </a>
 </em>
@@ -1365,9 +3047,7 @@ source.</p>
 <td>
 <code>sink</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
-Kubernetes core/v1.ObjectReference
-</a>
+knative.dev/pkg/apis/duck/v1beta1.Destination
 </em>
 </td>
 <td>
@@ -1437,9 +3117,22 @@ string
 </tr>
 <tr>
 <td>
+<code>Deprecated</code></br>
+<em>
+<a href="#sources.eventing.knative.dev/v1alpha1.Deprecated">
+Deprecated
+</a>
+</em>
+</td>
+<td>
+<p>Deprecated allows ContainerSource to have a deprecated message.</p>
+</td>
+</tr>
+<tr>
+<td>
 <code>metadata</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
 </a>
 </em>
@@ -1466,7 +3159,7 @@ ContainerSourceSpec
 <td>
 <code>template</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#podtemplatespec-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#podtemplatespec-v1-core">
 Kubernetes core/v1.PodTemplateSpec
 </a>
 </em>
@@ -1506,7 +3199,7 @@ When <code>Template</code> is set, this field is ignored.</p>
 <td>
 <code>env</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#envvar-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#envvar-v1-core">
 []Kubernetes core/v1.EnvVar
 </a>
 </em>
@@ -1538,13 +3231,10 @@ When <code>Template</code> is set, this field is ignored.</p>
 <td>
 <code>sink</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
-Kubernetes core/v1.ObjectReference
-</a>
+knative.dev/pkg/apis/duck/v1beta1.Destination
 </em>
 </td>
 <td>
-<em>(Optional)</em>
 <p>Sink is a reference to an object that will resolve to a domain name to use as the sink.</p>
 </td>
 </tr>
@@ -1597,9 +3287,22 @@ string
 </tr>
 <tr>
 <td>
+<code>Deprecated</code></br>
+<em>
+<a href="#sources.eventing.knative.dev/v1alpha1.Deprecated">
+Deprecated
+</a>
+</em>
+</td>
+<td>
+<p>Deprecated allows CronJobSource to have a deprecated message.</p>
+</td>
+</tr>
+<tr>
+<td>
 <code>metadata</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
 </a>
 </em>
@@ -1648,13 +3351,10 @@ string
 <td>
 <code>sink</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
-Kubernetes core/v1.ObjectReference
-</a>
+knative.dev/pkg/apis/duck/v1beta1.Destination
 </em>
 </td>
 <td>
-<em>(Optional)</em>
 <p>Sink is a reference to an object that will resolve to a domain name to use as the sink.</p>
 </td>
 </tr>
@@ -1700,6 +3400,124 @@ CronJobSourceStatus
 </tr>
 </tbody>
 </table>
+<h3 id="sources.eventing.knative.dev/v1alpha1.SinkBinding">SinkBinding
+</h3>
+<p>
+<p>SinkBinding describes a Binding that is also a Source.
+The <code>sink</code> (from the Source duck) is resolved to a URL and
+then projected into the <code>subject</code> by augmenting the runtime
+contract of the referenced containers to have a <code>K_SINK</code>
+environment variable holding the endpoint to which to send
+cloud events.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>apiVersion</code></br>
+string</td>
+<td>
+<code>
+sources.eventing.knative.dev/v1alpha1
+</code>
+</td>
+</tr>
+<tr>
+<td>
+<code>kind</code></br>
+string
+</td>
+<td><code>SinkBinding</code></td>
+</tr>
+<tr>
+<td>
+<code>Deprecated</code></br>
+<em>
+<a href="#sources.eventing.knative.dev/v1alpha1.Deprecated">
+Deprecated
+</a>
+</em>
+</td>
+<td>
+<p>Deprecated allows ApiServerSource to have a deprecated message.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>metadata</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
+Kubernetes meta/v1.ObjectMeta
+</a>
+</em>
+</td>
+<td>
+Refer to the Kubernetes API documentation for the fields of the
+<code>metadata</code> field.
+</td>
+</tr>
+<tr>
+<td>
+<code>spec</code></br>
+<em>
+<a href="#sources.eventing.knative.dev/v1alpha1.SinkBindingSpec">
+SinkBindingSpec
+</a>
+</em>
+</td>
+<td>
+<br/>
+<br/>
+<table>
+<tr>
+<td>
+<code>SourceSpec</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1.SourceSpec
+</em>
+</td>
+<td>
+<p>
+(Members of <code>SourceSpec</code> are embedded into this type.)
+</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>BindingSpec</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1alpha1.BindingSpec
+</em>
+</td>
+<td>
+<p>
+(Members of <code>BindingSpec</code> are embedded into this type.)
+</p>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<code>status</code></br>
+<em>
+<a href="#sources.eventing.knative.dev/v1alpha1.SinkBindingStatus">
+SinkBindingStatus
+</a>
+</em>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
 <h3 id="sources.eventing.knative.dev/v1alpha1.ApiServerResource">ApiServerResource
 </h3>
 <p>
@@ -1737,7 +3555,35 @@ string
 </td>
 <td>
 <p>Kind of the resource to watch.
-More info: <a href="https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds">https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds</a></p>
+More info: <a href="https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds">https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<code>labelSelector</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#labelselector-v1-meta">
+Kubernetes meta/v1.LabelSelector
+</a>
+</em>
+</td>
+<td>
+<p>LabelSelector restricts this source to objects with the selected labels
+More info: <a href="http://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors">http://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<code>controllerSelector</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#ownerreference-v1-meta">
+Kubernetes meta/v1.OwnerReference
+</a>
+</em>
+</td>
+<td>
+<p>ControllerSelector restricts this source to objects with a controlling owner reference of the specified kind.
+Only apiVersion and kind are used. Both are optional.</p>
 </td>
 </tr>
 <tr>
@@ -1800,9 +3646,7 @@ source.</p>
 <td>
 <code>sink</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
-Kubernetes core/v1.ObjectReference
-</a>
+knative.dev/pkg/apis/duck/v1beta1.Destination
 </em>
 </td>
 <td>
@@ -1846,14 +3690,14 @@ string
 <td>
 <code>Status</code></br>
 <em>
-knative.dev/pkg/apis/duck/v1beta1.Status
+knative.dev/pkg/apis/duck/v1.Status
 </em>
 </td>
 <td>
 <p>
 (Members of <code>Status</code> are embedded into this type.)
 </p>
-<p>inherits duck/v1beta1 Status, which currently provides:
+<p>inherits duck/v1 Status, which currently provides:
 * ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
 * Conditions - the latest available observations of a resource&rsquo;s current state.</p>
 </td>
@@ -1893,7 +3737,7 @@ string
 <td>
 <code>template</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#podtemplatespec-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#podtemplatespec-v1-core">
 Kubernetes core/v1.PodTemplateSpec
 </a>
 </em>
@@ -1933,7 +3777,7 @@ When <code>Template</code> is set, this field is ignored.</p>
 <td>
 <code>env</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#envvar-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#envvar-v1-core">
 []Kubernetes core/v1.EnvVar
 </a>
 </em>
@@ -1965,13 +3809,10 @@ When <code>Template</code> is set, this field is ignored.</p>
 <td>
 <code>sink</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
-Kubernetes core/v1.ObjectReference
-</a>
+knative.dev/pkg/apis/duck/v1beta1.Destination
 </em>
 </td>
 <td>
-<em>(Optional)</em>
 <p>Sink is a reference to an object that will resolve to a domain name to use as the sink.</p>
 </td>
 </tr>
@@ -1998,14 +3839,14 @@ Kubernetes core/v1.ObjectReference
 <td>
 <code>Status</code></br>
 <em>
-knative.dev/pkg/apis/duck/v1beta1.Status
+knative.dev/pkg/apis/duck/v1.Status
 </em>
 </td>
 <td>
 <p>
 (Members of <code>Status</code> are embedded into this type.)
 </p>
-<p>inherits duck/v1beta1 Status, which currently provides:
+<p>inherits duck/v1 Status, which currently provides:
 * ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
 * Conditions - the latest available observations of a resource&rsquo;s current state.</p>
 </td>
@@ -2185,13 +4026,10 @@ string
 <td>
 <code>sink</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
-Kubernetes core/v1.ObjectReference
-</a>
+knative.dev/pkg/apis/duck/v1beta1.Destination
 </em>
 </td>
 <td>
-<em>(Optional)</em>
 <p>Sink is a reference to an object that will resolve to a domain name to use as the sink.</p>
 </td>
 </tr>
@@ -2243,14 +4081,14 @@ CronJobResourceSpec
 <td>
 <code>Status</code></br>
 <em>
-knative.dev/pkg/apis/duck/v1beta1.Status
+knative.dev/pkg/apis/duck/v1.Status
 </em>
 </td>
 <td>
 <p>
 (Members of <code>Status</code> are embedded into this type.)
 </p>
-<p>inherits duck/v1beta1 Status, which currently provides:
+<p>inherits duck/v1 Status, which currently provides:
 * ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
 * Conditions - the latest available observations of a resource&rsquo;s current state.</p>
 </td>
@@ -2269,350 +4107,25 @@ string
 </tr>
 </tbody>
 </table>
-<hr/>
-<h2 id="duck.knative.dev/v1alpha1">duck.knative.dev/v1alpha1</h2>
-<p>
-<p>Package v1alpha1 is the v1alpha1 version of the API.</p>
-</p>
-Resource Types:
-<ul><li>
-<a href="#duck.knative.dev/v1alpha1.Channelable">Channelable</a>
-</li><li>
-<a href="#duck.knative.dev/v1alpha1.Resource">Resource</a>
-</li><li>
-<a href="#duck.knative.dev/v1alpha1.SubscribableType">SubscribableType</a>
-</li></ul>
-<h3 id="duck.knative.dev/v1alpha1.Channelable">Channelable
-</h3>
-<p>
-<p>Channelable is a skeleton type wrapping Subscribable and Addressable in the manner we expect resource writers
-defining compatible resources to embed it. We will typically use this type to deserialize
-Channelable ObjectReferences and access their subscription and address data.  This is not a real resource.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>apiVersion</code></br>
-string</td>
-<td>
-<code>
-duck.knative.dev/v1alpha1
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<code>kind</code></br>
-string
-</td>
-<td><code>Channelable</code></td>
-</tr>
-<tr>
-<td>
-<code>metadata</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
-Kubernetes meta/v1.ObjectMeta
-</a>
-</em>
-</td>
-<td>
-Refer to the Kubernetes API documentation for the fields of the
-<code>metadata</code> field.
-</td>
-</tr>
-<tr>
-<td>
-<code>spec</code></br>
-<em>
-<a href="#duck.knative.dev/v1alpha1.ChannelableSpec">
-ChannelableSpec
-</a>
-</em>
-</td>
-<td>
-<p>Spec is the part where the Channelable fulfills the Subscribable contract.</p>
-<br/>
-<br/>
-<table>
-<tr>
-<td>
-<code>SubscribableTypeSpec</code></br>
-<em>
-<a href="#duck.knative.dev/v1alpha1.SubscribableTypeSpec">
-SubscribableTypeSpec
-</a>
-</em>
-</td>
-<td>
-<p>
-(Members of <code>SubscribableTypeSpec</code> are embedded into this type.)
-</p>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-<tr>
-<td>
-<code>status</code></br>
-<em>
-<a href="#duck.knative.dev/v1alpha1.ChannelableStatus">
-ChannelableStatus
-</a>
-</em>
-</td>
-<td>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="duck.knative.dev/v1alpha1.Resource">Resource
-</h3>
-<p>
-<p>Resource is a skeleton type wrapping all Kubernetes resources. It is typically used to watch
-arbitrary other resources (such as any Importer or Addressable). This is not a real resource.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>apiVersion</code></br>
-string</td>
-<td>
-<code>
-duck.knative.dev/v1alpha1
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<code>kind</code></br>
-string
-</td>
-<td><code>Resource</code></td>
-</tr>
-<tr>
-<td>
-<code>metadata</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
-Kubernetes meta/v1.ObjectMeta
-</a>
-</em>
-</td>
-<td>
-Refer to the Kubernetes API documentation for the fields of the
-<code>metadata</code> field.
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="duck.knative.dev/v1alpha1.SubscribableType">SubscribableType
-</h3>
-<p>
-<p>SubscribableType is a skeleton type wrapping Subscribable in the manner we expect resource writers
-defining compatible resources to embed it. We will typically use this type to deserialize
-SubscribableType ObjectReferences and access the Subscription data.  This is not a real resource.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>apiVersion</code></br>
-string</td>
-<td>
-<code>
-duck.knative.dev/v1alpha1
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<code>kind</code></br>
-string
-</td>
-<td><code>SubscribableType</code></td>
-</tr>
-<tr>
-<td>
-<code>metadata</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
-Kubernetes meta/v1.ObjectMeta
-</a>
-</em>
-</td>
-<td>
-Refer to the Kubernetes API documentation for the fields of the
-<code>metadata</code> field.
-</td>
-</tr>
-<tr>
-<td>
-<code>spec</code></br>
-<em>
-<a href="#duck.knative.dev/v1alpha1.SubscribableTypeSpec">
-SubscribableTypeSpec
-</a>
-</em>
-</td>
-<td>
-<p>SubscribableTypeSpec is the part where Subscribable object is
-configured as to be compatible with Subscribable contract.</p>
-<br/>
-<br/>
-<table>
-<tr>
-<td>
-<code>subscribable</code></br>
-<em>
-<a href="#duck.knative.dev/v1alpha1.Subscribable">
-Subscribable
-</a>
-</em>
-</td>
-<td>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-<tr>
-<td>
-<code>status</code></br>
-<em>
-<a href="#duck.knative.dev/v1alpha1.SubscribableTypeStatus">
-SubscribableTypeStatus
-</a>
-</em>
-</td>
-<td>
-<p>SubscribableTypeStatus is the part where SubscribableStatus object is
-configured as to be compatible with Subscribable contract.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="duck.knative.dev/v1alpha1.ChannelDefaulter">ChannelDefaulter
-</h3>
-<p>
-<p>ChannelDefaulter sets the default Channel CRD and Arguments on Channels that do not
-specify any implementation.</p>
-</p>
-<h3 id="duck.knative.dev/v1alpha1.ChannelTemplateSpec">ChannelTemplateSpec
+<h3 id="sources.eventing.knative.dev/v1alpha1.Deprecated">Deprecated
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#eventing.knative.dev/v1alpha1.BrokerSpec">BrokerSpec</a>, 
-<a href="#messaging.knative.dev/v1alpha1.ChannelSpec">ChannelSpec</a>, 
-<a href="#messaging.knative.dev/v1alpha1.ChoiceSpec">ChoiceSpec</a>, 
-<a href="#messaging.knative.dev/v1alpha1.SequenceSpec">SequenceSpec</a>)
+<a href="#sources.eventing.knative.dev/v1alpha1.ApiServerSource">ApiServerSource</a>, 
+<a href="#sources.eventing.knative.dev/v1alpha1.ContainerSource">ContainerSource</a>, 
+<a href="#sources.eventing.knative.dev/v1alpha1.CronJobSource">CronJobSource</a>, 
+<a href="#sources.eventing.knative.dev/v1alpha1.SinkBinding">SinkBinding</a>)
 </p>
 <p>
 </p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>spec</code></br>
-<em>
-k8s.io/apimachinery/pkg/runtime.RawExtension
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Spec defines the Spec to use for each channel created. Passed
-in verbatim to the Channel CRD as Spec section.</p>
-<br/>
-<br/>
-<table>
-</table>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="duck.knative.dev/v1alpha1.ChannelTemplateSpecInternal">ChannelTemplateSpecInternal
-</h3>
-<p>
-<p>ChannelTemplateSpecInternal is an internal only version that includes ObjectMeta so that
-we can easily create new Channels off of it.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>metadata</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
-Kubernetes meta/v1.ObjectMeta
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-Refer to the Kubernetes API documentation for the fields of the
-<code>metadata</code> field.
-</td>
-</tr>
-<tr>
-<td>
-<code>spec</code></br>
-<em>
-k8s.io/apimachinery/pkg/runtime.RawExtension
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Spec defines the Spec to use for each channel created. Passed
-in verbatim to the Channel CRD as Spec section.</p>
-<br/>
-<br/>
-<table>
-</table>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="duck.knative.dev/v1alpha1.ChannelableSpec">ChannelableSpec
+<h3 id="sources.eventing.knative.dev/v1alpha1.SinkBindingSpec">SinkBindingSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#duck.knative.dev/v1alpha1.Channelable">Channelable</a>)
+<a href="#sources.eventing.knative.dev/v1alpha1.SinkBinding">SinkBinding</a>)
 </p>
 <p>
-<p>ChannelableSpec contains Spec of the Channelable object</p>
+<p>SinkBindingSpec holds the desired state of the SinkBinding (from the client).</p>
 </p>
 <table>
 <thead>
@@ -2624,29 +4137,40 @@ in verbatim to the Channel CRD as Spec section.</p>
 <tbody>
 <tr>
 <td>
-<code>SubscribableTypeSpec</code></br>
+<code>SourceSpec</code></br>
 <em>
-<a href="#duck.knative.dev/v1alpha1.SubscribableTypeSpec">
-SubscribableTypeSpec
-</a>
+knative.dev/pkg/apis/duck/v1.SourceSpec
 </em>
 </td>
 <td>
 <p>
-(Members of <code>SubscribableTypeSpec</code> are embedded into this type.)
+(Members of <code>SourceSpec</code> are embedded into this type.)
+</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>BindingSpec</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1alpha1.BindingSpec
+</em>
+</td>
+<td>
+<p>
+(Members of <code>BindingSpec</code> are embedded into this type.)
 </p>
 </td>
 </tr>
 </tbody>
 </table>
-<h3 id="duck.knative.dev/v1alpha1.ChannelableStatus">ChannelableStatus
+<h3 id="sources.eventing.knative.dev/v1alpha1.SinkBindingStatus">SinkBindingStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#duck.knative.dev/v1alpha1.Channelable">Channelable</a>)
+<a href="#sources.eventing.knative.dev/v1alpha1.SinkBinding">SinkBinding</a>)
 </p>
 <p>
-<p>ChannelableStatus contains the Status of a Channelable object.</p>
+<p>SinkBindingStatus communicates the observed state of the SinkBinding (from the controller).</p>
 </p>
 <table>
 <thead>
@@ -2658,367 +4182,36 @@ SubscribableTypeSpec
 <tbody>
 <tr>
 <td>
-<code>Status</code></br>
+<code>SourceStatus</code></br>
 <em>
-knative.dev/pkg/apis/duck/v1beta1.Status
+knative.dev/pkg/apis/duck/v1.SourceStatus
 </em>
 </td>
 <td>
 <p>
-(Members of <code>Status</code> are embedded into this type.)
+(Members of <code>SourceStatus</code> are embedded into this type.)
 </p>
-<p>inherits duck/v1beta1 Status, which currently provides:
-* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
-* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>AddressStatus</code></br>
-<em>
-knative.dev/pkg/apis/duck/v1alpha1.AddressStatus
-</em>
-</td>
-<td>
-<p>
-(Members of <code>AddressStatus</code> are embedded into this type.)
-</p>
-<p>AddressStatus is the part where the Channelable fulfills the Addressable contract.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>SubscribableTypeStatus</code></br>
-<em>
-<a href="#duck.knative.dev/v1alpha1.SubscribableTypeStatus">
-SubscribableTypeStatus
-</a>
-</em>
-</td>
-<td>
-<p>
-(Members of <code>SubscribableTypeStatus</code> are embedded into this type.)
-</p>
-<p>Subscribers is populated with the statuses of each of the Channelable&rsquo;s subscribers.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="duck.knative.dev/v1alpha1.Subscribable">Subscribable
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#messaging.knative.dev/v1alpha1.ChannelSpec">ChannelSpec</a>, 
-<a href="#eventing.knative.dev/v1alpha1.ChannelSpec">ChannelSpec</a>, 
-<a href="#messaging.knative.dev/v1alpha1.InMemoryChannelSpec">InMemoryChannelSpec</a>, 
-<a href="#duck.knative.dev/v1alpha1.SubscribableTypeSpec">SubscribableTypeSpec</a>)
-</p>
-<p>
-<p>Subscribable is the schema for the subscribable portion of the spec
-section of the resource.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>subscribers</code></br>
-<em>
-<a href="#duck.knative.dev/v1alpha1.SubscriberSpec">
-[]SubscriberSpec
-</a>
-</em>
-</td>
-<td>
-<p>This is the list of subscriptions for this subscribable.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="duck.knative.dev/v1alpha1.SubscribableStatus">SubscribableStatus
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#duck.knative.dev/v1alpha1.SubscribableTypeStatus">SubscribableTypeStatus</a>)
-</p>
-<p>
-<p>SubscribableStatus is the schema for the subscribable&rsquo;s status portion of the status
-section of the resource.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>subscribers</code></br>
-<em>
-<a href="#duck.knative.dev/v1alpha1.SubscriberStatus">
-[]SubscriberStatus
-</a>
-</em>
-</td>
-<td>
-<p>This is the list of subscription&rsquo;s statuses for this channel.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="duck.knative.dev/v1alpha1.SubscribableTypeSpec">SubscribableTypeSpec
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#duck.knative.dev/v1alpha1.SubscribableType">SubscribableType</a>, 
-<a href="#duck.knative.dev/v1alpha1.ChannelableSpec">ChannelableSpec</a>)
-</p>
-<p>
-<p>SubscribableTypeSpec shows how we expect folks to embed Subscribable in their Spec field.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>subscribable</code></br>
-<em>
-<a href="#duck.knative.dev/v1alpha1.Subscribable">
-Subscribable
-</a>
-</em>
-</td>
-<td>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="duck.knative.dev/v1alpha1.SubscribableTypeStatus">SubscribableTypeStatus
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#duck.knative.dev/v1alpha1.SubscribableType">SubscribableType</a>, 
-<a href="#messaging.knative.dev/v1alpha1.ChannelStatus">ChannelStatus</a>, 
-<a href="#eventing.knative.dev/v1alpha1.ChannelStatus">ChannelStatus</a>, 
-<a href="#duck.knative.dev/v1alpha1.ChannelableStatus">ChannelableStatus</a>, 
-<a href="#messaging.knative.dev/v1alpha1.InMemoryChannelStatus">InMemoryChannelStatus</a>)
-</p>
-<p>
-<p>SubscribableTypeStatus shows how we expect folks to embed Subscribable in their Status field.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>subscribablestatus</code></br>
-<em>
-<a href="#duck.knative.dev/v1alpha1.SubscribableStatus">
-SubscribableStatus
-</a>
-</em>
-</td>
-<td>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="duck.knative.dev/v1alpha1.SubscriberSpec">SubscriberSpec
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#duck.knative.dev/v1alpha1.Subscribable">Subscribable</a>)
-</p>
-<p>
-<p>SubscriberSpec defines a single subscriber to a Subscribable.
-Ref is a reference to the Subscription this SubscriberSpec was created for
-SubscriberURI is the endpoint for the subscriber
-ReplyURI is the endpoint for the reply
-At least one of SubscriberURI and ReplyURI must be present</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>ref</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
-Kubernetes core/v1.ObjectReference
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Deprecated: use UID.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>uid</code></br>
-<em>
-k8s.io/apimachinery/pkg/types.UID
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>UID is used to understand the origin of the subscriber.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>generation</code></br>
-<em>
-int64
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Generation of the origin of the subscriber with uid:UID.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>subscriberURI</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-</td>
-</tr>
-<tr>
-<td>
-<code>replyURI</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="duck.knative.dev/v1alpha1.SubscriberStatus">SubscriberStatus
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#duck.knative.dev/v1alpha1.SubscribableStatus">SubscribableStatus</a>)
-</p>
-<p>
-<p>SubscriberStatus defines the status of a single subscriber to a Channel.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>uid</code></br>
-<em>
-k8s.io/apimachinery/pkg/types.UID
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>UID is used to understand the origin of the subscriber.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>observedGeneration</code></br>
-<em>
-int64
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Generation of the origin of the subscriber with uid:UID.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>ready</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#conditionstatus-v1-core">
-Kubernetes core/v1.ConditionStatus
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Status of the subscriber.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>message</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>A human readable message indicating details of Ready status.</p>
 </td>
 </tr>
 </tbody>
 </table>
 <hr/>
-<h2 id="eventing.knative.dev/v1alpha1">eventing.knative.dev/v1alpha1</h2>
+<h2 id="messaging.knative.dev/v1alpha1">messaging.knative.dev/v1alpha1</h2>
 <p>
 <p>Package v1alpha1 is the v1alpha1 version of the API.</p>
 </p>
 Resource Types:
 <ul><li>
-<a href="#eventing.knative.dev/v1alpha1.Broker">Broker</a>
+<a href="#messaging.knative.dev/v1alpha1.Channel">Channel</a>
 </li><li>
-<a href="#eventing.knative.dev/v1alpha1.Channel">Channel</a>
+<a href="#messaging.knative.dev/v1alpha1.InMemoryChannel">InMemoryChannel</a>
 </li><li>
-<a href="#eventing.knative.dev/v1alpha1.ClusterChannelProvisioner">ClusterChannelProvisioner</a>
-</li><li>
-<a href="#eventing.knative.dev/v1alpha1.EventType">EventType</a>
-</li><li>
-<a href="#eventing.knative.dev/v1alpha1.Subscription">Subscription</a>
-</li><li>
-<a href="#eventing.knative.dev/v1alpha1.Trigger">Trigger</a>
+<a href="#messaging.knative.dev/v1alpha1.Subscription">Subscription</a>
 </li></ul>
-<h3 id="eventing.knative.dev/v1alpha1.Broker">Broker
+<h3 id="messaging.knative.dev/v1alpha1.Channel">Channel
 </h3>
 <p>
-<p>Broker collects a pool of events that are consumable using Triggers. Brokers
-provide a well-known endpoint for event delivery that senders can use with
-minimal knowledge of the event routing strategy. Receivers use Triggers to
-request delivery of events from a Broker&rsquo;s pool to a specific URL or
-Addressable endpoint.</p>
+<p>Channel represents a generic Channel. It is normally used when we want a Channel, but don&rsquo;t need a specific Channel implementation.</p>
 </p>
 <table>
 <thead>
@@ -3034,120 +4227,7 @@ Addressable endpoint.</p>
 string</td>
 <td>
 <code>
-eventing.knative.dev/v1alpha1
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<code>kind</code></br>
-string
-</td>
-<td><code>Broker</code></td>
-</tr>
-<tr>
-<td>
-<code>metadata</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
-Kubernetes meta/v1.ObjectMeta
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-Refer to the Kubernetes API documentation for the fields of the
-<code>metadata</code> field.
-</td>
-</tr>
-<tr>
-<td>
-<code>spec</code></br>
-<em>
-<a href="#eventing.knative.dev/v1alpha1.BrokerSpec">
-BrokerSpec
-</a>
-</em>
-</td>
-<td>
-<p>Spec defines the desired state of the Broker.</p>
-<br/>
-<br/>
-<table>
-<tr>
-<td>
-<code>channelTemplate</code></br>
-<em>
-<a href="#eventing.knative.dev/v1alpha1.ChannelSpec">
-ChannelSpec
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>DeprecatedChannelTemplate, if specified will be used to create all the Channels used internally by the
-Broker. Only Provisioner and Arguments may be specified. If left unspecified, the default
-Channel CRD for the namespace will be used using the channelTemplateSpec attribute.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>channelTemplateSpec</code></br>
-<em>
-<a href="#duck.knative.dev/v1alpha1.ChannelTemplateSpec">
-ChannelTemplateSpec
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>ChannelTemplate specifies which Channel CRD to use to create all the Channels used internally by the
-Broker. If left unspecified, it is set to the default Channel CRD for the namespace (or cluster, in case there
-are no defaults for the namespace).</p>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-<tr>
-<td>
-<code>status</code></br>
-<em>
-<a href="#eventing.knative.dev/v1alpha1.BrokerStatus">
-BrokerStatus
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Status represents the current state of the Broker. This data may be out of
-date.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="eventing.knative.dev/v1alpha1.Channel">Channel
-</h3>
-<p>
-<p>Channel is an abstract resource that implements the Addressable contract.
-The Provisioner provisions infrastructure to accepts events and
-deliver to Subscriptions.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>apiVersion</code></br>
-string</td>
-<td>
-<code>
-eventing.knative.dev/v1alpha1
+messaging.knative.dev/v1alpha1
 </code>
 </td>
 </tr>
@@ -3162,7 +4242,7 @@ string
 <td>
 <code>metadata</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
 </a>
 </em>
@@ -3177,7 +4257,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#eventing.knative.dev/v1alpha1.ChannelSpec">
+<a href="#messaging.knative.dev/v1alpha1.ChannelSpec">
 ChannelSpec
 </a>
 </em>
@@ -3189,43 +4269,16 @@ ChannelSpec
 <table>
 <tr>
 <td>
-<code>generation</code></br>
+<code>channelTemplate</code></br>
 <em>
-int64
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>TODO By enabling the status subresource metadata.generation should increment
-thus making this property obsolete.</p>
-<p>We should be able to drop this property with a CRD conversion webhook
-in the future</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>provisioner</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
-Kubernetes core/v1.ObjectReference
+<a href="#duck.knative.dev/v1alpha1.ChannelTemplateSpec">
+ChannelTemplateSpec
 </a>
 </em>
 </td>
 <td>
-<p>Provisioner defines the name of the Provisioner backing this channel.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>arguments</code></br>
-<em>
-k8s.io/apimachinery/pkg/runtime.RawExtension
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Arguments defines the arguments to pass to the Provisioner which
-provisions this Channel.</p>
+<p>ChannelTemplate specifies which Channel CRD to use to create the CRD Channel backing this Channel.
+This is immutable after creation. Normally this is set by the Channel defaulter, not directly by the user.</p>
 </td>
 </tr>
 <tr>
@@ -3248,7 +4301,7 @@ Subscribable
 <td>
 <code>status</code></br>
 <em>
-<a href="#eventing.knative.dev/v1alpha1.ChannelStatus">
+<a href="#messaging.knative.dev/v1alpha1.ChannelStatus">
 ChannelStatus
 </a>
 </em>
@@ -3261,11 +4314,10 @@ date.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="eventing.knative.dev/v1alpha1.ClusterChannelProvisioner">ClusterChannelProvisioner
+<h3 id="messaging.knative.dev/v1alpha1.InMemoryChannel">InMemoryChannel
 </h3>
 <p>
-<p>ClusterChannelProvisioner encapsulates a provisioning strategy for the
-backing resources required to realize a particular resource type.</p>
+<p>InMemoryChannel is a resource representing an in memory channel</p>
 </p>
 <table>
 <thead>
@@ -3281,7 +4333,7 @@ backing resources required to realize a particular resource type.</p>
 string</td>
 <td>
 <code>
-eventing.knative.dev/v1alpha1
+messaging.knative.dev/v1alpha1
 </code>
 </td>
 </tr>
@@ -3290,13 +4342,13 @@ eventing.knative.dev/v1alpha1
 <code>kind</code></br>
 string
 </td>
-<td><code>ClusterChannelProvisioner</code></td>
+<td><code>InMemoryChannel</code></td>
 </tr>
 <tr>
 <td>
 <code>metadata</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
 </a>
 </em>
@@ -3311,29 +4363,27 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#eventing.knative.dev/v1alpha1.ClusterChannelProvisionerSpec">
-ClusterChannelProvisionerSpec
+<a href="#messaging.knative.dev/v1alpha1.InMemoryChannelSpec">
+InMemoryChannelSpec
 </a>
 </em>
 </td>
 <td>
-<p>Spec defines the Types provisioned by this Provisioner.</p>
+<p>Spec defines the desired state of the Channel.</p>
 <br/>
 <br/>
 <table>
 <tr>
 <td>
-<code>generation</code></br>
+<code>subscribable</code></br>
 <em>
-int64
+<a href="#duck.knative.dev/v1alpha1.Subscribable">
+Subscribable
+</a>
 </em>
 </td>
 <td>
-<em>(Optional)</em>
-<p>TODO By enabling the status subresource metadata.generation should increment
-thus making this property obsolete.</p>
-<p>We should be able to drop this property with a CRD conversion webhook
-in the future</p>
+<p>Channel conforms to Duck type Subscribable.</p>
 </td>
 </tr>
 </table>
@@ -3343,155 +4393,20 @@ in the future</p>
 <td>
 <code>status</code></br>
 <em>
-<a href="#eventing.knative.dev/v1alpha1.ClusterChannelProvisionerStatus">
-ClusterChannelProvisionerStatus
+<a href="#messaging.knative.dev/v1alpha1.InMemoryChannelStatus">
+InMemoryChannelStatus
 </a>
 </em>
 </td>
 <td>
 <em>(Optional)</em>
-<p>Status is the current status of the Provisioner.</p>
+<p>Status represents the current state of the Channel. This data may be out of
+date.</p>
 </td>
 </tr>
 </tbody>
 </table>
-<h3 id="eventing.knative.dev/v1alpha1.EventType">EventType
-</h3>
-<p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>apiVersion</code></br>
-string</td>
-<td>
-<code>
-eventing.knative.dev/v1alpha1
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<code>kind</code></br>
-string
-</td>
-<td><code>EventType</code></td>
-</tr>
-<tr>
-<td>
-<code>metadata</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
-Kubernetes meta/v1.ObjectMeta
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-Refer to the Kubernetes API documentation for the fields of the
-<code>metadata</code> field.
-</td>
-</tr>
-<tr>
-<td>
-<code>spec</code></br>
-<em>
-<a href="#eventing.knative.dev/v1alpha1.EventTypeSpec">
-EventTypeSpec
-</a>
-</em>
-</td>
-<td>
-<p>Spec defines the desired state of the EventType.</p>
-<br/>
-<br/>
-<table>
-<tr>
-<td>
-<code>type</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<p>Type represents the CloudEvents type. It is authoritative.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>source</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<p>Source is a URI, it represents the CloudEvents source.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>schema</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Schema is a URI, it represents the CloudEvents schemaurl extension attribute.
-It may be a JSON schema, a protobuf schema, etc. It is optional.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>broker</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<p>Broker refers to the Broker that can provide the EventType.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>description</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Description is an optional field used to describe the EventType, in any meaningful way.</p>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-<tr>
-<td>
-<code>status</code></br>
-<em>
-<a href="#eventing.knative.dev/v1alpha1.EventTypeStatus">
-EventTypeStatus
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Status represents the current state of the EventType.
-This data may be out of date.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="eventing.knative.dev/v1alpha1.Subscription">Subscription
+<h3 id="messaging.knative.dev/v1alpha1.Subscription">Subscription
 </h3>
 <p>
 <p>Subscription routes events received on a Channel to a DNS name and
@@ -3511,7 +4426,7 @@ corresponds to the subscriptions.channels.knative.dev CRD.</p>
 string</td>
 <td>
 <code>
-eventing.knative.dev/v1alpha1
+messaging.knative.dev/v1alpha1
 </code>
 </td>
 </tr>
@@ -3526,7 +4441,7 @@ string
 <td>
 <code>metadata</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
 </a>
 </em>
@@ -3540,7 +4455,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#eventing.knative.dev/v1alpha1.SubscriptionSpec">
+<a href="#messaging.knative.dev/v1alpha1.SubscriptionSpec">
 SubscriptionSpec
 </a>
 </em>
@@ -3568,7 +4483,7 @@ in the future</p>
 <td>
 <code>channel</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectreference-v1-core">
 Kubernetes core/v1.ObjectReference
 </a>
 </em>
@@ -3587,31 +4502,41 @@ etc.)</p>
 <td>
 <code>subscriber</code></br>
 <em>
-<a href="#eventing.knative.dev/v1alpha1.SubscriberSpec">
-SubscriberSpec
-</a>
+knative.dev/pkg/apis/duck/v1.Destination
 </em>
 </td>
 <td>
 <em>(Optional)</em>
 <p>Subscriber is reference to (optional) function for processing events.
 Events from the Channel will be delivered here and replies are
-sent to a channel as specified by the Reply.</p>
+sent to a Destination as specified by the Reply.</p>
 </td>
 </tr>
 <tr>
 <td>
 <code>reply</code></br>
 <em>
-<a href="#eventing.knative.dev/v1alpha1.ReplyStrategy">
-ReplyStrategy
-</a>
+knative.dev/pkg/apis/duck/v1.Destination
 </em>
 </td>
 <td>
 <em>(Optional)</em>
 <p>Reply specifies (optionally) how to handle events returned from
 the Subscriber target.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>delivery</code></br>
+<em>
+<a href="#duck.knative.dev/v1alpha1.DeliverySpec">
+DeliverySpec
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Delivery configuration</p>
 </td>
 </tr>
 </table>
@@ -3621,7 +4546,7 @@ the Subscriber target.</p>
 <td>
 <code>status</code></br>
 <em>
-<a href="#eventing.knative.dev/v1alpha1.SubscriptionStatus">
+<a href="#messaging.knative.dev/v1alpha1.SubscriptionStatus">
 SubscriptionStatus
 </a>
 </em>
@@ -3631,134 +4556,15 @@ SubscriptionStatus
 </tr>
 </tbody>
 </table>
-<h3 id="eventing.knative.dev/v1alpha1.Trigger">Trigger
-</h3>
-<p>
-<p>Trigger represents a request to have events delivered to a consumer from a
-Broker&rsquo;s event pool.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>apiVersion</code></br>
-string</td>
-<td>
-<code>
-eventing.knative.dev/v1alpha1
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<code>kind</code></br>
-string
-</td>
-<td><code>Trigger</code></td>
-</tr>
-<tr>
-<td>
-<code>metadata</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta">
-Kubernetes meta/v1.ObjectMeta
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-Refer to the Kubernetes API documentation for the fields of the
-<code>metadata</code> field.
-</td>
-</tr>
-<tr>
-<td>
-<code>spec</code></br>
-<em>
-<a href="#eventing.knative.dev/v1alpha1.TriggerSpec">
-TriggerSpec
-</a>
-</em>
-</td>
-<td>
-<p>Spec defines the desired state of the Trigger.</p>
-<br/>
-<br/>
-<table>
-<tr>
-<td>
-<code>broker</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<p>Broker is the broker that this trigger receives events from. If not specified, will default
-to &lsquo;default&rsquo;.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>filter</code></br>
-<em>
-<a href="#eventing.knative.dev/v1alpha1.TriggerFilter">
-TriggerFilter
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Filter is the filter to apply against all events from the Broker. Only events that pass this
-filter will be sent to the Subscriber. If not specified, will default to allowing all events.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>subscriber</code></br>
-<em>
-<a href="#eventing.knative.dev/v1alpha1.SubscriberSpec">
-SubscriberSpec
-</a>
-</em>
-</td>
-<td>
-<p>Subscriber is the addressable that receives events from the Broker that pass the Filter. It
-is required.</p>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-<tr>
-<td>
-<code>status</code></br>
-<em>
-<a href="#eventing.knative.dev/v1alpha1.TriggerStatus">
-TriggerStatus
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Status represents the current state of the Trigger. This data may be out of
-date.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="eventing.knative.dev/v1alpha1.BrokerSpec">BrokerSpec
+<h3 id="messaging.knative.dev/v1alpha1.ChannelSpec">ChannelSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#eventing.knative.dev/v1alpha1.Broker">Broker</a>)
+<a href="#messaging.knative.dev/v1alpha1.Channel">Channel</a>)
 </p>
 <p>
+<p>ChannelSpec defines which subscribers have expressed interest in receiving events from this Channel.
+It also defines the ChannelTemplate to use in order to create the CRD Channel backing this Channel.</p>
 </p>
 <table>
 <thead>
@@ -3772,175 +4578,14 @@ date.</p>
 <td>
 <code>channelTemplate</code></br>
 <em>
-<a href="#eventing.knative.dev/v1alpha1.ChannelSpec">
-ChannelSpec
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>DeprecatedChannelTemplate, if specified will be used to create all the Channels used internally by the
-Broker. Only Provisioner and Arguments may be specified. If left unspecified, the default
-Channel CRD for the namespace will be used using the channelTemplateSpec attribute.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>channelTemplateSpec</code></br>
-<em>
 <a href="#duck.knative.dev/v1alpha1.ChannelTemplateSpec">
 ChannelTemplateSpec
 </a>
 </em>
 </td>
 <td>
-<em>(Optional)</em>
-<p>ChannelTemplate specifies which Channel CRD to use to create all the Channels used internally by the
-Broker. If left unspecified, it is set to the default Channel CRD for the namespace (or cluster, in case there
-are no defaults for the namespace).</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="eventing.knative.dev/v1alpha1.BrokerStatus">BrokerStatus
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#eventing.knative.dev/v1alpha1.Broker">Broker</a>)
-</p>
-<p>
-<p>BrokerStatus represents the current state of a Broker.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>Status</code></br>
-<em>
-knative.dev/pkg/apis/duck/v1beta1.Status
-</em>
-</td>
-<td>
-<p>
-(Members of <code>Status</code> are embedded into this type.)
-</p>
-<p>inherits duck/v1beta1 Status, which currently provides:
-* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
-* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>address</code></br>
-<em>
-knative.dev/pkg/apis/duck/v1alpha1.Addressable
-</em>
-</td>
-<td>
-<p>Broker is Addressable. It currently exposes the endpoint as a
-fully-qualified DNS name which will distribute traffic over the
-provided targets from inside the cluster.</p>
-<p>It generally has the form {broker}-router.{namespace}.svc.{cluster domain name}</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>triggerChannel</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
-Kubernetes core/v1.ObjectReference
-</a>
-</em>
-</td>
-<td>
-<p>TriggerChannel is an objectref to the object for the TriggerChannel</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>IngressChannel</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
-Kubernetes core/v1.ObjectReference
-</a>
-</em>
-</td>
-<td>
-<p>IngressChannel is an objectref to the object for the IngressChannel</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="eventing.knative.dev/v1alpha1.ChannelProvisionerDefaulter">ChannelProvisionerDefaulter
-</h3>
-<p>
-<p>ChannelProvisionerDefaulter sets the default Provisioner and Arguments on Channels that do not
-specify any Provisioner.</p>
-</p>
-<h3 id="eventing.knative.dev/v1alpha1.ChannelSpec">ChannelSpec
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#eventing.knative.dev/v1alpha1.Channel">Channel</a>, 
-<a href="#eventing.knative.dev/v1alpha1.BrokerSpec">BrokerSpec</a>)
-</p>
-<p>
-<p>ChannelSpec specifies the Provisioner backing a channel and the configuration
-arguments for a Channel.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>generation</code></br>
-<em>
-int64
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>TODO By enabling the status subresource metadata.generation should increment
-thus making this property obsolete.</p>
-<p>We should be able to drop this property with a CRD conversion webhook
-in the future</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>provisioner</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
-Kubernetes core/v1.ObjectReference
-</a>
-</em>
-</td>
-<td>
-<p>Provisioner defines the name of the Provisioner backing this channel.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>arguments</code></br>
-<em>
-k8s.io/apimachinery/pkg/runtime.RawExtension
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Arguments defines the arguments to pass to the Provisioner which
-provisions this Channel.</p>
+<p>ChannelTemplate specifies which Channel CRD to use to create the CRD Channel backing this Channel.
+This is immutable after creation. Normally this is set by the Channel defaulter, not directly by the user.</p>
 </td>
 </tr>
 <tr>
@@ -3958,11 +4603,11 @@ Subscribable
 </tr>
 </tbody>
 </table>
-<h3 id="eventing.knative.dev/v1alpha1.ChannelStatus">ChannelStatus
+<h3 id="messaging.knative.dev/v1alpha1.ChannelStatus">ChannelStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#eventing.knative.dev/v1alpha1.Channel">Channel</a>)
+<a href="#messaging.knative.dev/v1alpha1.Channel">Channel</a>)
 </p>
 <p>
 <p>ChannelStatus represents the current state of a Channel.</p>
@@ -3979,42 +4624,33 @@ Subscribable
 <td>
 <code>Status</code></br>
 <em>
-knative.dev/pkg/apis/duck/v1beta1.Status
+knative.dev/pkg/apis/duck/v1.Status
 </em>
 </td>
 <td>
 <p>
 (Members of <code>Status</code> are embedded into this type.)
 </p>
-<p>inherits duck/v1beta1 Status, which currently provides:
+<p>inherits duck/v1 Status, which currently provides:
 * ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
 * Conditions - the latest available observations of a resource&rsquo;s current state.</p>
 </td>
 </tr>
 <tr>
 <td>
-<code>address</code></br>
+<code>AddressStatus</code></br>
 <em>
-knative.dev/pkg/apis/duck/v1alpha1.Addressable
+knative.dev/pkg/apis/duck/v1alpha1.AddressStatus
 </em>
 </td>
 <td>
+<p>
+(Members of <code>AddressStatus</code> are embedded into this type.)
+</p>
 <p>Channel is Addressable. It currently exposes the endpoint as a
 fully-qualified DNS name which will distribute traffic over the
 provided targets from inside the cluster.</p>
 <p>It generally has the form {channel}.{namespace}.svc.{cluster domain name}</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>internal</code></br>
-<em>
-k8s.io/apimachinery/pkg/runtime.RawExtension
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Internal is status unique to each ClusterChannelProvisioner.</p>
 </td>
 </tr>
 <tr>
@@ -4030,18 +4666,34 @@ SubscribableTypeStatus
 <p>
 (Members of <code>SubscribableTypeStatus</code> are embedded into this type.)
 </p>
+<p>Subscribers is populated with the statuses of each of the Channelable&rsquo;s subscribers.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>channel</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectreference-v1-core">
+Kubernetes core/v1.ObjectReference
+</a>
+</em>
+</td>
+<td>
+<p>Channel is an ObjectReference to the Channel CRD backing this Channel.</p>
 </td>
 </tr>
 </tbody>
 </table>
-<h3 id="eventing.knative.dev/v1alpha1.ClusterChannelProvisionerSpec">ClusterChannelProvisionerSpec
+<h3 id="messaging.knative.dev/v1alpha1.InMemoryChannelSpec">InMemoryChannelSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#eventing.knative.dev/v1alpha1.ClusterChannelProvisioner">ClusterChannelProvisioner</a>)
+<a href="#messaging.knative.dev/v1alpha1.InMemoryChannel">InMemoryChannel</a>)
 </p>
 <p>
-<p>ClusterChannelProvisionerSpec is the spec for a ClusterChannelProvisioner resource.</p>
+<p>InMemoryChannelSpec defines which subscribers have expressed interest in
+receiving events from this InMemoryChannel.
+arguments for a Channel.</p>
 </p>
 <table>
 <thead>
@@ -4053,140 +4705,27 @@ SubscribableTypeStatus
 <tbody>
 <tr>
 <td>
-<code>generation</code></br>
+<code>subscribable</code></br>
 <em>
-int64
+<a href="#duck.knative.dev/v1alpha1.Subscribable">
+Subscribable
+</a>
 </em>
 </td>
 <td>
-<em>(Optional)</em>
-<p>TODO By enabling the status subresource metadata.generation should increment
-thus making this property obsolete.</p>
-<p>We should be able to drop this property with a CRD conversion webhook
-in the future</p>
+<p>Channel conforms to Duck type Subscribable.</p>
 </td>
 </tr>
 </tbody>
 </table>
-<h3 id="eventing.knative.dev/v1alpha1.ClusterChannelProvisionerStatus">ClusterChannelProvisionerStatus
+<h3 id="messaging.knative.dev/v1alpha1.InMemoryChannelStatus">InMemoryChannelStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#eventing.knative.dev/v1alpha1.ClusterChannelProvisioner">ClusterChannelProvisioner</a>)
+<a href="#messaging.knative.dev/v1alpha1.InMemoryChannel">InMemoryChannel</a>)
 </p>
 <p>
-<p>ClusterChannelProvisionerStatus is the status for a ClusterChannelProvisioner resource</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>Status</code></br>
-<em>
-knative.dev/pkg/apis/duck/v1beta1.Status
-</em>
-</td>
-<td>
-<p>
-(Members of <code>Status</code> are embedded into this type.)
-</p>
-<p>inherits duck/v1beta1 Status, which currently provides:
-* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
-* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="eventing.knative.dev/v1alpha1.EventTypeSpec">EventTypeSpec
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#eventing.knative.dev/v1alpha1.EventType">EventType</a>)
-</p>
-<p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>type</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<p>Type represents the CloudEvents type. It is authoritative.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>source</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<p>Source is a URI, it represents the CloudEvents source.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>schema</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Schema is a URI, it represents the CloudEvents schemaurl extension attribute.
-It may be a JSON schema, a protobuf schema, etc. It is optional.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>broker</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<p>Broker refers to the Broker that can provide the EventType.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>description</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Description is an optional field used to describe the EventType, in any meaningful way.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="eventing.knative.dev/v1alpha1.EventTypeStatus">EventTypeStatus
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#eventing.knative.dev/v1alpha1.EventType">EventType</a>)
-</p>
-<p>
-<p>EventTypeStatus represents the current state of a EventType.</p>
+<p>ChannelStatus represents the current state of a Channel.</p>
 </p>
 <table>
 <thead>
@@ -4200,33 +4739,276 @@ string
 <td>
 <code>Status</code></br>
 <em>
-knative.dev/pkg/apis/duck/v1beta1.Status
+knative.dev/pkg/apis/duck/v1.Status
 </em>
 </td>
 <td>
 <p>
 (Members of <code>Status</code> are embedded into this type.)
 </p>
-<p>inherits duck/v1beta1 Status, which currently provides:
+<p>inherits duck/v1 Status, which currently provides:
 * ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
 * Conditions - the latest available observations of a resource&rsquo;s current state.</p>
 </td>
 </tr>
+<tr>
+<td>
+<code>AddressStatus</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1alpha1.AddressStatus
+</em>
+</td>
+<td>
+<p>
+(Members of <code>AddressStatus</code> are embedded into this type.)
+</p>
+<p>InMemoryChannel is Addressable. It currently exposes the endpoint as a
+fully-qualified DNS name which will distribute traffic over the
+provided targets from inside the cluster.</p>
+<p>It generally has the form {channel}.{namespace}.svc.{cluster domain name}</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>SubscribableTypeStatus</code></br>
+<em>
+<a href="#duck.knative.dev/v1alpha1.SubscribableTypeStatus">
+SubscribableTypeStatus
+</a>
+</em>
+</td>
+<td>
+<p>
+(Members of <code>SubscribableTypeStatus</code> are embedded into this type.)
+</p>
+<p>Subscribers is populated with the statuses of each of the Channelable&rsquo;s subscribers.</p>
+</td>
+</tr>
 </tbody>
 </table>
-<h3 id="eventing.knative.dev/v1alpha1.HasSpec">HasSpec
+<h3 id="messaging.knative.dev/v1alpha1.Parallel">Parallel
 </h3>
 <p>
+<p>Parallel defines conditional branches that will be wired in
+series through Channels and Subscriptions.</p>
 </p>
-<h3 id="eventing.knative.dev/v1alpha1.ReplyStrategy">ReplyStrategy
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>metadata</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
+Kubernetes meta/v1.ObjectMeta
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+Refer to the Kubernetes API documentation for the fields of the
+<code>metadata</code> field.
+</td>
+</tr>
+<tr>
+<td>
+<code>spec</code></br>
+<em>
+<a href="#messaging.knative.dev/v1alpha1.ParallelSpec">
+ParallelSpec
+</a>
+</em>
+</td>
+<td>
+<p>Spec defines the desired state of the Parallel.</p>
+<br/>
+<br/>
+<table>
+<tr>
+<td>
+<code>branches</code></br>
+<em>
+<a href="#messaging.knative.dev/v1alpha1.ParallelBranch">
+[]ParallelBranch
+</a>
+</em>
+</td>
+<td>
+<p>Branches is the list of Filter/Subscribers pairs.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>channelTemplate</code></br>
+<em>
+<a href="#duck.knative.dev/v1alpha1.ChannelTemplateSpec">
+ChannelTemplateSpec
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>ChannelTemplate specifies which Channel CRD to use. If left unspecified, it is set to the default Channel CRD
+for the namespace (or cluster, in case there are no defaults for the namespace).</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>reply</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1.Destination
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Reply is a Reference to where the result of a case Subscriber gets sent to
+when the case does not have a Reply</p>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<code>status</code></br>
+<em>
+<a href="#messaging.knative.dev/v1alpha1.ParallelStatus">
+ParallelStatus
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Status represents the current state of the Parallel. This data may be out of
+date.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="messaging.knative.dev/v1alpha1.ParallelBranch">ParallelBranch
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#eventing.knative.dev/v1alpha1.SubscriptionSpec">SubscriptionSpec</a>)
+<a href="#messaging.knative.dev/v1alpha1.ParallelSpec">ParallelSpec</a>)
 </p>
 <p>
-<p>ReplyStrategy specifies the handling of the SubscriberSpec&rsquo;s returned replies.
-If no SubscriberSpec is specified, the identity function is assumed.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>filter</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1.Destination
+</em>
+</td>
+<td>
+<p>Filter is the expression guarding the branch</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>subscriber</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1.Destination
+</em>
+</td>
+<td>
+<p>Subscriber receiving the event when the filter passes</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>reply</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1.Destination
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Reply is a Reference to where the result of Subscriber of this case gets sent to.
+If not specified, sent the result to the Parallel Reply</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="messaging.knative.dev/v1alpha1.ParallelBranchStatus">ParallelBranchStatus
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#messaging.knative.dev/v1alpha1.ParallelStatus">ParallelStatus</a>)
+</p>
+<p>
+<p>ParallelBranchStatus represents the current state of a Parallel branch</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>filterSubscriptionStatus</code></br>
+<em>
+<a href="#messaging.knative.dev/v1alpha1.ParallelSubscriptionStatus">
+ParallelSubscriptionStatus
+</a>
+</em>
+</td>
+<td>
+<p>FilterSubscriptionStatus corresponds to the filter subscription status.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>filterChannelStatus</code></br>
+<em>
+<a href="#messaging.knative.dev/v1alpha1.ParallelChannelStatus">
+ParallelChannelStatus
+</a>
+</em>
+</td>
+<td>
+<p>FilterChannelStatus corresponds to the filter channel status.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>subscriberSubscriptionStatus</code></br>
+<em>
+<a href="#messaging.knative.dev/v1alpha1.ParallelSubscriptionStatus">
+ParallelSubscriptionStatus
+</a>
+</em>
+</td>
+<td>
+<p>SubscriptionStatus corresponds to the subscriber subscription status.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="messaging.knative.dev/v1alpha1.ParallelChannelStatus">ParallelChannelStatus
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#messaging.knative.dev/v1alpha1.ParallelBranchStatus">ParallelBranchStatus</a>, 
+<a href="#messaging.knative.dev/v1alpha1.ParallelStatus">ParallelStatus</a>)
+</p>
+<p>
 </p>
 <table>
 <thead>
@@ -4240,53 +5022,35 @@ If no SubscriberSpec is specified, the identity function is assumed.</p>
 <td>
 <code>channel</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectreference-v1-core">
 Kubernetes core/v1.ObjectReference
 </a>
 </em>
 </td>
 <td>
-<em>(Optional)</em>
-<p>You can specify only the following fields of the ObjectReference:
-- Kind
-- APIVersion
-- Name
-The resource pointed by this ObjectReference must meet the Addressable contract
-with a reference to the Addressable duck type. If the resource does not meet this contract,
-it will be reflected in the Subscription&rsquo;s status.</p>
+<p>Channel is the reference to the underlying channel.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>ready</code></br>
+<em>
+knative.dev/pkg/apis.Condition
+</em>
+</td>
+<td>
+<p>ReadyCondition indicates whether the Channel is ready or not.</p>
 </td>
 </tr>
 </tbody>
 </table>
-<h3 id="eventing.knative.dev/v1alpha1.SubscriberSpec">SubscriberSpec
+<h3 id="messaging.knative.dev/v1alpha1.ParallelSpec">ParallelSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#messaging.knative.dev/v1alpha1.ChoiceCase">ChoiceCase</a>, 
-<a href="#messaging.knative.dev/v1alpha1.SequenceSpec">SequenceSpec</a>, 
-<a href="#eventing.knative.dev/v1alpha1.SubscriptionSpec">SubscriptionSpec</a>, 
-<a href="#eventing.knative.dev/v1alpha1.TriggerSpec">TriggerSpec</a>)
+<a href="#messaging.knative.dev/v1alpha1.Parallel">Parallel</a>)
 </p>
 <p>
-<p>SubscriberSpec specifies the reference to an object that&rsquo;s expected to
-provide the resolved target of the action.
-Currently we inspect the objects Status and see if there&rsquo;s a predefined
-Status field that we will then use to dispatch events to be processed by
-the target. Currently must resolve to a k8s service.
-Note that in the future we should try to utilize subresources (/resolve ?) to
-make this cleaner, but CRDs do not support subresources yet, so we need
-to rely on a specified Status field today. By relying on this behaviour
-we can utilize a dynamic client instead of having to understand all
-kinds of different types of objects. As long as they adhere to this
-particular contract, they can be used as a Target.</p>
-<p>This ensures that we can support external targets and for ease of use
-we also allow for an URI to be specified.
-There of course is also a requirement for the resolved SubscriberSpec to
-behave properly at the data plane level.
-TODO: Add a pointer to a real spec for this.
-For now, this means: Receive an event payload, and respond with one of:
-success and an optional response event, or failure.
-Delivery failures may be retried by the channel</p>
 </p>
 <table>
 <thead>
@@ -4298,63 +5062,494 @@ Delivery failures may be retried by the channel</p>
 <tbody>
 <tr>
 <td>
-<code>ref</code></br>
+<code>branches</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
-Kubernetes core/v1.ObjectReference
+<a href="#messaging.knative.dev/v1alpha1.ParallelBranch">
+[]ParallelBranch
+</a>
+</em>
+</td>
+<td>
+<p>Branches is the list of Filter/Subscribers pairs.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>channelTemplate</code></br>
+<em>
+<a href="#duck.knative.dev/v1alpha1.ChannelTemplateSpec">
+ChannelTemplateSpec
 </a>
 </em>
 </td>
 <td>
 <em>(Optional)</em>
-<p>Reference to an object that will be used to find the target
-endpoint, which should implement the Addressable duck type.
-For example, this could be a reference to a Route resource
-or a Knative Service resource.
-TODO: Specify the required fields the target object must
-have in the status.
-You can specify only the following fields of the ObjectReference:
-- Kind
-- APIVersion
-- Name</p>
+<p>ChannelTemplate specifies which Channel CRD to use. If left unspecified, it is set to the default Channel CRD
+for the namespace (or cluster, in case there are no defaults for the namespace).</p>
 </td>
 </tr>
 <tr>
 <td>
-<code>dnsName</code></br>
+<code>reply</code></br>
 <em>
-string
+knative.dev/pkg/apis/duck/v1.Destination
 </em>
 </td>
 <td>
 <em>(Optional)</em>
-<p>Deprecated: Use URI instead.
-Reference to a &lsquo;known&rsquo; endpoint where no resolving is done.
-<a href="http://k8s-service">http://k8s-service</a> for example
-<a href="http://myexternalhandler.example.com/foo/bar">http://myexternalhandler.example.com/foo/bar</a></p>
-</td>
-</tr>
-<tr>
-<td>
-<code>uri</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Reference to a &lsquo;known&rsquo; endpoint where no resolving is done.
-<a href="http://k8s-service">http://k8s-service</a> for example
-<a href="http://myexternalhandler.example.com/foo/bar">http://myexternalhandler.example.com/foo/bar</a></p>
+<p>Reply is a Reference to where the result of a case Subscriber gets sent to
+when the case does not have a Reply</p>
 </td>
 </tr>
 </tbody>
 </table>
-<h3 id="eventing.knative.dev/v1alpha1.SubscriptionSpec">SubscriptionSpec
+<h3 id="messaging.knative.dev/v1alpha1.ParallelStatus">ParallelStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#eventing.knative.dev/v1alpha1.Subscription">Subscription</a>)
+<a href="#messaging.knative.dev/v1alpha1.Parallel">Parallel</a>)
+</p>
+<p>
+<p>ParallelStatus represents the current state of a Parallel.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>Status</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1.Status
+</em>
+</td>
+<td>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
+<p>inherits duck/v1 Status, which currently provides:
+* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
+* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>ingressChannelStatus</code></br>
+<em>
+<a href="#messaging.knative.dev/v1alpha1.ParallelChannelStatus">
+ParallelChannelStatus
+</a>
+</em>
+</td>
+<td>
+<p>IngressChannelStatus corresponds to the ingress channel status.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>branchStatuses</code></br>
+<em>
+<a href="#messaging.knative.dev/v1alpha1.ParallelBranchStatus">
+[]ParallelBranchStatus
+</a>
+</em>
+</td>
+<td>
+<p>BranchStatuses is an array of corresponding to branch statuses.
+Matches the Spec.Branches array in the order.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>AddressStatus</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1alpha1.AddressStatus
+</em>
+</td>
+<td>
+<p>
+(Members of <code>AddressStatus</code> are embedded into this type.)
+</p>
+<p>AddressStatus is the starting point to this Parallel. Sending to this
+will target the first subscriber.
+It generally has the form {channel}.{namespace}.svc.{cluster domain name}</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="messaging.knative.dev/v1alpha1.ParallelSubscriptionStatus">ParallelSubscriptionStatus
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#messaging.knative.dev/v1alpha1.ParallelBranchStatus">ParallelBranchStatus</a>)
+</p>
+<p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>subscription</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectreference-v1-core">
+Kubernetes core/v1.ObjectReference
+</a>
+</em>
+</td>
+<td>
+<p>Subscription is the reference to the underlying Subscription.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>ready</code></br>
+<em>
+knative.dev/pkg/apis.Condition
+</em>
+</td>
+<td>
+<p>ReadyCondition indicates whether the Subscription is ready or not.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="messaging.knative.dev/v1alpha1.Sequence">Sequence
+</h3>
+<p>
+<p>Sequence defines a sequence of Subscribers that will be wired in
+series through Channels and Subscriptions.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>metadata</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
+Kubernetes meta/v1.ObjectMeta
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+Refer to the Kubernetes API documentation for the fields of the
+<code>metadata</code> field.
+</td>
+</tr>
+<tr>
+<td>
+<code>spec</code></br>
+<em>
+<a href="#messaging.knative.dev/v1alpha1.SequenceSpec">
+SequenceSpec
+</a>
+</em>
+</td>
+<td>
+<p>Spec defines the desired state of the Sequence.</p>
+<br/>
+<br/>
+<table>
+<tr>
+<td>
+<code>steps</code></br>
+<em>
+[]knative.dev/pkg/apis/duck/v1.Destination
+</em>
+</td>
+<td>
+<p>Steps is the list of Destinations (processors / functions) that will be called in the order
+provided.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>channelTemplate</code></br>
+<em>
+<a href="#duck.knative.dev/v1alpha1.ChannelTemplateSpec">
+ChannelTemplateSpec
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>ChannelTemplate specifies which Channel CRD to use. If left unspecified, it is set to the default Channel CRD
+for the namespace (or cluster, in case there are no defaults for the namespace).</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>reply</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1.Destination
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Reply is a Reference to where the result of the last Subscriber gets sent to.</p>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<code>status</code></br>
+<em>
+<a href="#messaging.knative.dev/v1alpha1.SequenceStatus">
+SequenceStatus
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Status represents the current state of the Sequence. This data may be out of
+date.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="messaging.knative.dev/v1alpha1.SequenceChannelStatus">SequenceChannelStatus
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#messaging.knative.dev/v1alpha1.SequenceStatus">SequenceStatus</a>)
+</p>
+<p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>channel</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectreference-v1-core">
+Kubernetes core/v1.ObjectReference
+</a>
+</em>
+</td>
+<td>
+<p>Channel is the reference to the underlying channel.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>ready</code></br>
+<em>
+knative.dev/pkg/apis.Condition
+</em>
+</td>
+<td>
+<p>ReadyCondition indicates whether the Channel is ready or not.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="messaging.knative.dev/v1alpha1.SequenceSpec">SequenceSpec
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#messaging.knative.dev/v1alpha1.Sequence">Sequence</a>)
+</p>
+<p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>steps</code></br>
+<em>
+[]knative.dev/pkg/apis/duck/v1.Destination
+</em>
+</td>
+<td>
+<p>Steps is the list of Destinations (processors / functions) that will be called in the order
+provided.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>channelTemplate</code></br>
+<em>
+<a href="#duck.knative.dev/v1alpha1.ChannelTemplateSpec">
+ChannelTemplateSpec
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>ChannelTemplate specifies which Channel CRD to use. If left unspecified, it is set to the default Channel CRD
+for the namespace (or cluster, in case there are no defaults for the namespace).</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>reply</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1.Destination
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Reply is a Reference to where the result of the last Subscriber gets sent to.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="messaging.knative.dev/v1alpha1.SequenceStatus">SequenceStatus
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#messaging.knative.dev/v1alpha1.Sequence">Sequence</a>)
+</p>
+<p>
+<p>SequenceStatus represents the current state of a Sequence.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>Status</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1.Status
+</em>
+</td>
+<td>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
+<p>inherits duck/v1 Status, which currently provides:
+* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
+* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>subscriptionStatuses</code></br>
+<em>
+<a href="#messaging.knative.dev/v1alpha1.SequenceSubscriptionStatus">
+[]SequenceSubscriptionStatus
+</a>
+</em>
+</td>
+<td>
+<p>SubscriptionStatuses is an array of corresponding Subscription statuses.
+Matches the Spec.Steps array in the order.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>channelStatuses</code></br>
+<em>
+<a href="#messaging.knative.dev/v1alpha1.SequenceChannelStatus">
+[]SequenceChannelStatus
+</a>
+</em>
+</td>
+<td>
+<p>ChannelStatuses is an array of corresponding Channel statuses.
+Matches the Spec.Steps array in the order.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>AddressStatus</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1alpha1.AddressStatus
+</em>
+</td>
+<td>
+<p>
+(Members of <code>AddressStatus</code> are embedded into this type.)
+</p>
+<p>AddressStatus is the starting point to this Sequence. Sending to this
+will target the first subscriber.
+It generally has the form {channel}.{namespace}.svc.{cluster domain name}</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="messaging.knative.dev/v1alpha1.SequenceSubscriptionStatus">SequenceSubscriptionStatus
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#messaging.knative.dev/v1alpha1.SequenceStatus">SequenceStatus</a>)
+</p>
+<p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>subscription</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectreference-v1-core">
+Kubernetes core/v1.ObjectReference
+</a>
+</em>
+</td>
+<td>
+<p>Subscription is the reference to the underlying Subscription.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>ready</code></br>
+<em>
+knative.dev/pkg/apis.Condition
+</em>
+</td>
+<td>
+<p>ReadyCondition indicates whether the Subscription is ready or not.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="messaging.knative.dev/v1alpha1.SubscriptionSpec">SubscriptionSpec
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#messaging.knative.dev/v1alpha1.Subscription">Subscription</a>)
 </p>
 <p>
 <p>SubscriptionSpec specifies the Channel for incoming events, a Subscriber target
@@ -4397,7 +5592,7 @@ in the future</p>
 <td>
 <code>channel</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectreference-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectreference-v1-core">
 Kubernetes core/v1.ObjectReference
 </a>
 </em>
@@ -4416,25 +5611,21 @@ etc.)</p>
 <td>
 <code>subscriber</code></br>
 <em>
-<a href="#eventing.knative.dev/v1alpha1.SubscriberSpec">
-SubscriberSpec
-</a>
+knative.dev/pkg/apis/duck/v1.Destination
 </em>
 </td>
 <td>
 <em>(Optional)</em>
 <p>Subscriber is reference to (optional) function for processing events.
 Events from the Channel will be delivered here and replies are
-sent to a channel as specified by the Reply.</p>
+sent to a Destination as specified by the Reply.</p>
 </td>
 </tr>
 <tr>
 <td>
 <code>reply</code></br>
 <em>
-<a href="#eventing.knative.dev/v1alpha1.ReplyStrategy">
-ReplyStrategy
-</a>
+knative.dev/pkg/apis/duck/v1.Destination
 </em>
 </td>
 <td>
@@ -4443,13 +5634,27 @@ ReplyStrategy
 the Subscriber target.</p>
 </td>
 </tr>
+<tr>
+<td>
+<code>delivery</code></br>
+<em>
+<a href="#duck.knative.dev/v1alpha1.DeliverySpec">
+DeliverySpec
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Delivery configuration</p>
+</td>
+</tr>
 </tbody>
 </table>
-<h3 id="eventing.knative.dev/v1alpha1.SubscriptionStatus">SubscriptionStatus
+<h3 id="messaging.knative.dev/v1alpha1.SubscriptionStatus">SubscriptionStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#eventing.knative.dev/v1alpha1.Subscription">Subscription</a>)
+<a href="#messaging.knative.dev/v1alpha1.Subscription">Subscription</a>)
 </p>
 <p>
 <p>SubscriptionStatus (computed) for a subscription</p>
@@ -4466,14 +5671,14 @@ the Subscriber target.</p>
 <td>
 <code>Status</code></br>
 <em>
-knative.dev/pkg/apis/duck/v1beta1.Status
+knative.dev/pkg/apis/duck/v1.Status
 </em>
 </td>
 <td>
 <p>
 (Members of <code>Status</code> are embedded into this type.)
 </p>
-<p>inherits duck/v1beta1 Status, which currently provides:
+<p>inherits duck/v1 Status, which currently provides:
 * ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
 * Conditions - the latest available observations of a resource&rsquo;s current state.</p>
 </td>
@@ -4482,7 +5687,7 @@ knative.dev/pkg/apis/duck/v1beta1.Status
 <td>
 <code>physicalSubscription</code></br>
 <em>
-<a href="#eventing.knative.dev/v1alpha1.SubscriptionStatusPhysicalSubscription">
+<a href="#messaging.knative.dev/v1alpha1.SubscriptionStatusPhysicalSubscription">
 SubscriptionStatusPhysicalSubscription
 </a>
 </em>
@@ -4493,11 +5698,11 @@ SubscriptionStatusPhysicalSubscription
 </tr>
 </tbody>
 </table>
-<h3 id="eventing.knative.dev/v1alpha1.SubscriptionStatusPhysicalSubscription">SubscriptionStatusPhysicalSubscription
+<h3 id="messaging.knative.dev/v1alpha1.SubscriptionStatusPhysicalSubscription">SubscriptionStatusPhysicalSubscription
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#eventing.knative.dev/v1alpha1.SubscriptionStatus">SubscriptionStatus</a>)
+<a href="#messaging.knative.dev/v1alpha1.SubscriptionStatus">SubscriptionStatus</a>)
 </p>
 <p>
 <p>SubscriptionStatusPhysicalSubscription represents the fully resolved values for this
@@ -4515,7 +5720,7 @@ Subscription.</p>
 <td>
 <code>subscriberURI</code></br>
 <em>
-string
+knative.dev/pkg/apis.URL
 </em>
 </td>
 <td>
@@ -4526,220 +5731,22 @@ string
 <td>
 <code>replyURI</code></br>
 <em>
-string
+knative.dev/pkg/apis.URL
 </em>
 </td>
 <td>
 <p>ReplyURI is the fully resolved URI for the spec.reply.</p>
 </td>
 </tr>
-</tbody>
-</table>
-<h3 id="eventing.knative.dev/v1alpha1.TriggerFilter">TriggerFilter
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#eventing.knative.dev/v1alpha1.TriggerSpec">TriggerSpec</a>)
-</p>
-<p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
 <tr>
 <td>
-<code>sourceAndType</code></br>
+<code>deadLetterSinkURI</code></br>
 <em>
-<a href="#eventing.knative.dev/v1alpha1.TriggerFilterSourceAndType">
-TriggerFilterSourceAndType
-</a>
+knative.dev/pkg/apis.URL
 </em>
 </td>
 <td>
-<em>(Optional)</em>
-<p>DeprecatedSourceAndType filters events based on exact matches on the
-CloudEvents type and source attributes. This field has been replaced by the
-Attributes field.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>attributes</code></br>
-<em>
-<a href="#eventing.knative.dev/v1alpha1.TriggerFilterAttributes">
-TriggerFilterAttributes
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Attributes filters events by exact match on event context attributes.
-Each key in the map is compared with the equivalent key in the event
-context. An event passes the filter if all values are equal to the
-specified values.</p>
-<p>Nested context attributes are not supported as keys. Only string values are supported.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="eventing.knative.dev/v1alpha1.TriggerFilterAttributes">TriggerFilterAttributes
-(<code>map[string]string</code> alias)</p></h3>
-<p>
-(<em>Appears on:</em>
-<a href="#eventing.knative.dev/v1alpha1.TriggerFilter">TriggerFilter</a>)
-</p>
-<p>
-<p>TriggerFilterAttributes is a map of context attribute names to values for
-filtering by equality. Only exact matches will pass the filter. You can use the value &ldquo;
-to indicate all strings match.</p>
-</p>
-<h3 id="eventing.knative.dev/v1alpha1.TriggerFilterSourceAndType">TriggerFilterSourceAndType
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#eventing.knative.dev/v1alpha1.TriggerFilter">TriggerFilter</a>)
-</p>
-<p>
-<p>TriggerFilterSourceAndType filters events based on exact matches on the cloud event&rsquo;s type and
-source attributes. Only exact matches will pass the filter. Either or both type and source can
-use the value &ldquo; to indicate all strings match.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>type</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-</td>
-</tr>
-<tr>
-<td>
-<code>source</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="eventing.knative.dev/v1alpha1.TriggerSpec">TriggerSpec
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#eventing.knative.dev/v1alpha1.Trigger">Trigger</a>)
-</p>
-<p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>broker</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<p>Broker is the broker that this trigger receives events from. If not specified, will default
-to &lsquo;default&rsquo;.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>filter</code></br>
-<em>
-<a href="#eventing.knative.dev/v1alpha1.TriggerFilter">
-TriggerFilter
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Filter is the filter to apply against all events from the Broker. Only events that pass this
-filter will be sent to the Subscriber. If not specified, will default to allowing all events.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>subscriber</code></br>
-<em>
-<a href="#eventing.knative.dev/v1alpha1.SubscriberSpec">
-SubscriberSpec
-</a>
-</em>
-</td>
-<td>
-<p>Subscriber is the addressable that receives events from the Broker that pass the Filter. It
-is required.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="eventing.knative.dev/v1alpha1.TriggerStatus">TriggerStatus
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#eventing.knative.dev/v1alpha1.Trigger">Trigger</a>)
-</p>
-<p>
-<p>TriggerStatus represents the current state of a Trigger.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>Status</code></br>
-<em>
-knative.dev/pkg/apis/duck/v1beta1.Status
-</em>
-</td>
-<td>
-<p>
-(Members of <code>Status</code> are embedded into this type.)
-</p>
-<p>inherits duck/v1beta1 Status, which currently provides:
-* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
-* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>subscriberURI</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<p>SubscriberURI is the resolved URI of the receiver for this Trigger.</p>
+<p>ReplyURI is the fully resolved URI for the spec.delivery.deadLetterSink.</p>
 </td>
 </tr>
 </tbody>
@@ -4747,5 +5754,5 @@ string
 <hr/>
 <p><em>
 Generated with <code>gen-crd-api-reference-docs</code>
-on git commit <code>a59dae6f</code>.
+on git commit <code>8a92a8c9</code>.
 </em></p>

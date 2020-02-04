@@ -6,6 +6,7 @@ spec:
   schedule: "*/2 * * * *"
   data: '{"message": "Hello world!"}'
   sink:
-    apiVersion: messaging.knative.dev/v1alpha1
-    kind: Sequence
-    name: sequence
+    ref:
+      apiVersion: flows.knative.dev/v1alpha1
+      kind: Sequence
+      name: sequence

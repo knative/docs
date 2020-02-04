@@ -8,7 +8,7 @@ import (
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	log.Print("Hello world received a request.")
+	log.Print("helloworld: received a request")
 	target := os.Getenv("TARGET")
 	if target == "" {
 		target = "World"
@@ -17,7 +17,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	log.Print("Hello world sample started.")
+	log.Print("helloworld: starting server...")
 
 	http.HandleFunc("/", handler)
 
@@ -26,5 +26,6 @@ func main() {
 		port = "8080"
 	}
 
+	log.Printf("helloworld: listening on port %s", port)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
 }

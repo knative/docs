@@ -44,7 +44,7 @@ To label a route:
 kubectl label route ${ROUTE_NAME} serving.knative.dev/visibility=cluster-local
 ```
 
-For example, you can deploy the [Hello World sample](./samples/helloworld-go)
+For example, you can deploy the [Hello World sample](./samples/hello-world/helloworld-go/README.md)
 and then convert it to be an cluster-local service by labeling the service:
 
 ```shell

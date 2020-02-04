@@ -5,18 +5,22 @@ weight: 50
 type: "docs"
 ---
 
-Kubernetes Event Source example shows how to wire kubernetes cluster events for
-consumption by a function that has been implemented as a Knative Service. The
-code for the following files can be found in the
-[/kubernetes-event-source/](https://github.com/knative/docs/tree/master/docs/eventing/samples/kubernetes-event-source)
-directory.
+Kubernetes Event Source example shows how to wire Kubernetes cluster events for
+consumption by a function that has been implemented as a Knative Service. 
+
+## Before you begin
+
+1. You must have a Knative cluster running both the Serving and Eventing components.
+   To learn how to install the required components, see [Installing Knative](../../../install).
+1. You can follow the steps below to create new files, or you clone a copy from
+   the repo by running:
+
+   ```shell
+   git clone -b "release-0.9" https://github.com/knative/docs knative-docs
+   cd knative-docs/docs/eventing/samples/kubernetes-event-source
+   ```
 
 ## Deployment Steps
-
-### Prerequisites
-
-1. Setup [Knative Serving](../../../serving).
-1. Setup [Knative Eventing](../../../eventing).
 
 ### Broker
 
@@ -90,7 +94,7 @@ kubectl apply --filename serviceaccount.yaml
    block below into it.
 
 ```yaml
-apiVersion: sources.eventing.knative.dev/v1alpha1
+apiVersion: sources.knative.dev/v1alpha1
 kind: ApiServerSource
 metadata:
   name: testevents
@@ -102,9 +106,10 @@ spec:
     - apiVersion: v1
       kind: Event
   sink:
-    apiVersion: eventing.knative.dev/v1alpha1
-    kind: Broker
-    name: default
+    ref:
+      apiVersion: eventing.knative.dev/v1alpha1
+      kind: Broker
+      name: default
 ```
 
 If you want to consume events from a different namespace or use a different
@@ -133,14 +138,14 @@ metadata:
 spec:
   subscriber:
     ref:
-      apiVersion: serving.knative.dev/v1alpha1
+      apiVersion: serving.knative.dev/v1
       kind: Service
       name: event-display
 
 ---
 # This is a very simple Knative Service that writes the input request to its log.
 
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: event-display
@@ -150,8 +155,8 @@ spec:
     spec:
       containers:
         - # This corresponds to
-          # https://github.com/knative/eventing-contrib/blob/release-0.5/cmd/event_display/main.go
-          image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display@sha256:bf45b3eb1e7fc4cb63d6a5a6416cf696295484a7662e0cf9ccdf5c080542c21d
+          # https://github.com/knative/eventing-contrib/tree/master/cmd/event_display/main.go
+          image: gcr.io/knative-releases/github.com/knative/eventing-contrib/cmd/event_display
 ```
 
 1. If the deployed `ApiServerSource` is pointing at a `Broker` other than
@@ -189,21 +194,16 @@ kubectl logs -l serving.knative.dev/service=event-display -c user-container
 You should see log lines similar to:
 
 ```
-☁️  CloudEvent: valid ✅
+☁️  cloudevents.Event
+Validation: valid
 Context Attributes,
-  SpecVersion: 0.2
-  Type: dev.knative.apiserver.resource.add
-  Source: https://10.39.240.1:443
-  ID: 716d4536-3b92-4fbb-98d9-14bfcf94683f
-  Time: 2019-05-10T23:27:06.695575294Z
-  ContentType: application/json
-  Extensions:
-    knativehistory: default-broker-b7k2p-channel-z7mqq.default.svc.cluster.local
-    subject: /apis/v1/namespaces/default/events/busybox.159d7608e3a3572c
-Transport Context,
-  URI: /
-  Host: auto-event-display.default.svc.cluster.local
-  Method: POST
+  specversion: 1.0
+  type: dev.knative.apiserver.resource.update
+  source: https://10.96.0.1:443
+  subject: /apis/v1/namespaces/default/events/testevents.15dd3050eb1e6f50
+  id: e0447eb7-36b5-443b-9d37-faf4fe5c62f0
+  time: 2019-12-04T14:09:30.917608978Z
+  datacontenttype: application/json
 Data,
   {
     "apiVersion": "v1",

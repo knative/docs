@@ -30,7 +30,7 @@ git clone -b "{{< branch >}}" https://github.com/knative/eventing-contrib.git
 And then build a heartbeats image and publish to your image repo with
 
 ```
-ko publish github.com/knative/eventing-contrib/cmd/heartbeats
+ko publish knative.dev/eventing-contrib/cmd/heartbeats
 ```
 
 **Note**: `ko publish` requires:
@@ -46,7 +46,7 @@ In order to verify `ContainerSource` is working, we will create a Event Display
 Service that dumps incoming messages to its log.
 
 ```yaml
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: event-display
@@ -61,6 +61,15 @@ Use following command to create the service from `service.yaml`:
 
 ```shell
 kubectl apply --filename service.yaml
+```
+
+The status of the created service can be seen using:
+
+```shell
+kubectl get ksvc
+
+NAME            URL                                           LATESTCREATED         LATESTREADY           READY   REASON
+event-display   http://event-display.default.1.2.3.4.xip.io   event-display-gqjbw   event-display-gqjbw   True    
 ```
 
 ### Create a ContainerSource using the heartbeats image
@@ -91,7 +100,7 @@ spec:
             - name: POD_NAMESPACE
               value: "event-test"
   sink:
-    apiVersion: serving.knative.dev/v1alpha1
+    apiVersion: serving.knative.dev/v1
     kind: Service
     name: event-display
 ```
@@ -116,22 +125,19 @@ You should see log lines showing the request headers and body of the event
 message sent by the heartbeats source to the display function:
 
 ```
-☁️  CloudEvent: valid ✅
+☁️  cloudevents.Event
+Validation: valid
 Context Attributes,
-  SpecVersion: 0.2
-  Type: dev.knative.eventing.samples.heartbeat
-  Source: https://github.com/knative/eventing-contrib/cmd/heartbeats/#event-test/mypod
-  ID: cd1f5f24-12dd-489d-aff4-23302c6091fa
-  Time: 2019-04-04T08:38:24.833521851Z
-  ContentType: application/json
-  Extensions:
-    beats: true
-    heart: yes
-    the: 42
-Transport Context,
-  URI: /
-  Host: event-display.default.svc.cluster.local
-  Method: POST
+  specversion: 0.3
+  type: dev.knative.eventing.samples.heartbeat
+  source: https://knative.dev/eventing-contrib/cmd/heartbeats/#event-test/mypod
+  id: 2b72d7bf-c38f-4a98-a433-608fbcdd2596
+  time: 2019-10-18T15:23:20.809775386Z
+  contenttype: application/json
+Extensions,
+  beats: true
+  heart: yes
+  the: 42
 Data,
   {
     "id": 2,
@@ -169,6 +175,5 @@ event source is a sample for your reference.
 
 When the container image is ready, a YAML file will be used to create a concrete
 ContainerSource. Use [heartbeats-source.yaml](./heartbeats-source.yaml) as a
-sample for reference. You can get more details about ContainerSource
-specification
-[here](https://github.com/knative/docs/tree/master/docs/eventing#containersource).
+sample for reference. [Learn more about the ContainerSource
+specification](../../../eventing#containersource).

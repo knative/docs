@@ -27,4 +27,8 @@ View the set of Knative code samples that are actively tested and maintained:
 A list of links to Knative code samples that live outside of
 [https://knative.dev](https://knative.dev):
 
-- _Be the first to link your externally hosted Knative code sample._
+- [Image processing using Knative Eventing, Cloud Run on GKE (Knative Serving implementation) and Google Cloud Vision API](https://github.com/akashrv/knative-samples/blob/master/docs/image-processing.md)
+- [A potpourri of Knative Eventing Examples](https://github.com/lionelvillard/knative-examples)
+- [Knfun - a complete Knative example of three functions using Twitter and Watson API that use kn to deploy and manage functions](https://github.com/maximilien/knfun/blob/master/README.md)
+
+_Please add links to your externally hosted Knative code sample._
