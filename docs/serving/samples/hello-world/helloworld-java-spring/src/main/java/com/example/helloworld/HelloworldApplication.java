@@ -9,18 +9,20 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 public class HelloworldApplication {
 
-	@Value("${TARGET:World}")
-	String target;
+  @Value("${TARGET:World}")
+  String target;
 
-	@RestController
-	class HelloworldController {
-		@GetMapping("/")
-		String hello() {
-			return "Hello " + target + "!";
-		}
-	}
+  @RestController
+  class HelloworldController {
+    @GetMapping("/")
+    String hello() {
+      return "Hello " + target + "!";
+    }
+  }
 
-	public static void main(String[] args) {
-		SpringApplication.run(HelloworldApplication.class, args);
-	}
+  public static void main(String[] args) {
+    String port = System.getenv().getOrDefault("PORT", "8080");
+    System.setProperty("server.port", port);
+    SpringApplication.run(HelloworldApplication.class, args);
+  }
 }
