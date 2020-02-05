@@ -1,7 +1,20 @@
 ---
 title: "Installing Knative"
-weight: 15
+weight: 06
 type: "docs"
+aliases:
+  - /docs/install/knative-with-aks
+  - /docs/install/knative-with-ambassador
+  - /docs/install/knative-with-contour
+  - /docs/install/knative-with-docker-for-mac
+  - /docs/install/knative-with-gke
+  - /docs/install/knative-with-gardener
+  - /docs/install/knative-with-gloo
+  - /docs/install/knative-with-icp
+  - /docs/install/knative-with-iks
+  - /docs/install/knative-with-microk8s
+  - /docs/install/knative-with-minikube
+  - /docs/install/knative-with-pks
 ---
 
 This guide walks you through the installation of the latest version of Knative.
