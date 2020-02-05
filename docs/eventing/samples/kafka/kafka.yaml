@@ -15,18 +15,11 @@ spec:
       transaction.state.log.min.isr: 1
       log.message.format.version: "2.4"
     storage:
-      type: jbod
-      volumes:
-      - id: 0
-        type: persistent-claim
-        size: 100Gi
-        deleteClaim: false
+      type: ephemeral
   zookeeper:
-    replicas: 1
+    replicas: 3
     storage:
-      type: persistent-claim
-      size: 100Gi
-      deleteClaim: false
+      type: ephemeral
   entityOperator:
     topicOperator: {}
     userOperator: {}

@@ -42,18 +42,11 @@ If you want to run the Apache Kafka cluster on Kubernetes, the simplest option i
          transaction.state.log.min.isr: 1
          log.message.format.version: "2.4"
        storage:
-         type: jbod
-         volumes:
-         - id: 0
-           type: persistent-claim
-           size: 100Gi
-           deleteClaim: false
+         type: ephemeral
      zookeeper:
-       replicas: 1
+       replicas: 3
        storage:
-         type: persistent-claim
-         size: 100Gi
-         deleteClaim: false
+         type: ephemeral
      entityOperator:
        topicOperator: {}
        userOperator: {}
@@ -63,8 +56,8 @@ If you want to run the Apache Kafka cluster on Kubernetes, the simplest option i
    $ kubectl apply -n kafka -f kafka.yaml
    ```
 
-This will install a small, non-production, cluster of Apache Kafka, using one node for Apache Zookeeper and one node for Apache Kafka.
-To verify your installation, check if the pods for Strimzi are all up, in the `kafka` namespace:
+This will install a small, non-production, cluster of Apache Kafka. To verify your installation,
+check if the pods for Strimzi are all up, in the `kafka` namespace:
 
    ```shell
    $ kubectl get pods -n kafka
@@ -72,8 +65,12 @@ To verify your installation, check if the pods for Strimzi are all up, in the `k
    my-cluster-entity-operator-65995cf856-ld2zp   3/3     Running   0          102s
    my-cluster-kafka-0                            2/2     Running   0          2m8s
    my-cluster-zookeeper-0                        2/2     Running   0          2m39s
+   my-cluster-zookeeper-1                        2/2     Running   0          2m49s
+   my-cluster-zookeeper-2                        2/2     Running   0          2m59s
    strimzi-cluster-operator-77555d4b69-sbrt4     1/1     Running   0          3m14s
    ```
+
+> NOTE: For production ready installs check [Strimzi](https://strimzi.io).
 
 ### Installation script
 

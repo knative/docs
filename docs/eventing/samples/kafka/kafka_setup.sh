@@ -23,5 +23,5 @@ curl -L "https://github.com/strimzi/strimzi-kafka-operator/releases/download/${s
   | sed 's/namespace: .*/namespace: kafka/' \
   | kubectl -n kafka apply -f -
 header_text "Applying Strimzi Cluster file"
-kubectl -n kafka apply -f "https://raw.githubusercontent.com/strimzi/strimzi-kafka-operator/${strimzi_version}/examples/kafka/kafka-persistent-single.yaml"
+kubectl -n kafka apply -f "https://raw.githubusercontent.com/strimzi/strimzi-kafka-operator/${strimzi_version}/examples/kafka/kafka-ephemeral-single.yaml"
 
