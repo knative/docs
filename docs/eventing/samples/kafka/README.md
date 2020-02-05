@@ -11,11 +11,56 @@ All examples require:
 
 ### Setting up Apache Kafka
 
-If you want to run the Apache Kafka cluster on Kubernetes, the simplest option is to install it by using [Strimzi](https://strimzi.io),
-using the following script:
+If you want to run the Apache Kafka cluster on Kubernetes, the simplest option is to install it by using [Strimzi](https://strimzi.io).
 
+1. Create a namespace for your Apache Kafka installation, like `kafka`:
    ```shell
-   $ ./kafka_setup.sh
+   kubectl create namespace kafka
+   ```
+1. Install the Strimzi operator, like:
+   ```shell
+   curl -L "https://github.com/strimzi/strimzi-kafka-operator/releases/download/0.16.2/strimzi-cluster-operator-0.16.2.yaml" \
+     | sed 's/namespace: .*/namespace: kafka/' \
+     | kubectl -n kafka apply -f -
+   ```
+1. Describe the size of your Apache Kafka installation, like:
+   ```yaml
+   apiVersion: kafka.strimzi.io/v1beta1
+   kind: Kafka
+   metadata:
+     name: my-cluster
+   spec:
+     kafka:
+       version: 2.4.0
+       replicas: 1
+       listeners:
+         plain: {}
+         tls: {}
+       config:
+         offsets.topic.replication.factor: 1
+         transaction.state.log.replication.factor: 1
+         transaction.state.log.min.isr: 1
+         log.message.format.version: "2.4"
+       storage:
+         type: jbod
+         volumes:
+         - id: 0
+           type: persistent-claim
+           size: 100Gi
+           deleteClaim: false
+     zookeeper:
+       replicas: 1
+       storage:
+         type: persistent-claim
+         size: 100Gi
+         deleteClaim: false
+     entityOperator:
+       topicOperator: {}
+       userOperator: {}
+   ```
+1. Deploy the Apache Kafka cluster
+   ```
+   $ kubectl apply -n kafka -f kafka.yaml
    ```
 
 This will install a small, non-production, cluster of Apache Kafka, using one node for Apache Zookeeper and one node for Apache Kafka.
@@ -30,7 +75,15 @@ To verify your installation, check if the pods for Strimzi are all up, in the `k
    strimzi-cluster-operator-77555d4b69-sbrt4     1/1     Running   0          3m14s
    ```
 
-## Examples
+### Installation script
+
+If you want to install the latest version of Strimzi, in just one step, we have a [script](./kafka_setup.sh) for your convenience, which does exactly the same steps that are listed above:
+
+```shell
+$ ./kafka_setup.sh
+```
+
+## Examples of Apache Kafka and Knative
 
 A number of different examples, showing the `KafkaSource` and the `KafkaChannel` can be found here:
 
