@@ -54,9 +54,10 @@ spec:
   schedule: "*/2 * * * *"
   data: '{"message": "Hello world!"}'
   sink:
-    apiVersion: serving.knative.dev/v1
-    kind: Service
-    name: event-display
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: event-display
 ```
 
 Use following command to create the event source from `cronjob-source.yaml`:
