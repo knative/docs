@@ -445,20 +445,21 @@ To learn more about the Kafka source, try [our sample](../eventing/samples/kafka
 
 {{< /tab >}}
 
-{{% tab name="AWS SQS Source" %}}
-The following command installs the AWS SQS Source:
+{{% tab name="GCP Pub/Sub Source" %}}
+The following command installs the GCP Pub/Sub Source:
 
    ```bash
-   kubectl apply --filename https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/awssqs.yaml
+   # This installs both the Source and the Channel.
+   kubectl apply --filename https://github.com/google/knative-gcp/releases/download/{{< version >}}/cloud-run-events.yaml
    ```
 
-<!-- TODO: Link to docs on how to use AWS SQS Source -->
+To learn more about the GCP Pub/Sub source, try [our sample](../eventing/samples/gcp-pubsub-source/README.md)
 
 {{< /tab >}}
 
 <!-- TODO: couchdb source -->
 <!-- TODO: prometheus source -->
-<!-- TODO: GCP Pub/Sub source -->
+<!-- TODO: AWS SQS source  -->
 
 <!-- TODO(https://github.com/knative/docs/issues/2154): Add sources and other stuff here. -->
 
