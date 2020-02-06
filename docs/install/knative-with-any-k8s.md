@@ -1,7 +1,20 @@
 ---
 title: "Installing Knative"
-weight: 15
+weight: 06
 type: "docs"
+aliases:
+  - /docs/install/knative-with-aks
+  - /docs/install/knative-with-ambassador
+  - /docs/install/knative-with-contour
+  - /docs/install/knative-with-docker-for-mac
+  - /docs/install/knative-with-gke
+  - /docs/install/knative-with-gardener
+  - /docs/install/knative-with-gloo
+  - /docs/install/knative-with-icp
+  - /docs/install/knative-with-iks
+  - /docs/install/knative-with-microk8s
+  - /docs/install/knative-with-minikube
+  - /docs/install/knative-with-pks
 ---
 
 This guide walks you through the installation of the latest version of Knative.
@@ -344,6 +357,9 @@ The following command installs an implementation of Channel that runs in-memory.
 {{< /tab >}}
 
 <!-- TODO(https://github.com/knative/docs/issues/2153): Add more Channels here -->
+<!-- TODO: Kafka Channel -->
+<!-- TODO: NATSS Channel -->
+<!-- TODO: GCP Pub/Sub Channel -->
 
 {{< /tabs >}}
 
@@ -384,8 +400,6 @@ data:
 
 {{< /tab >}}
 
-<!-- TODO: Add more Brokers here, once they exist -->
-
 {{< /tabs >}}
 
 1. Monitor the Knative components until all of the components show a `STATUS` of
@@ -411,6 +425,55 @@ The following command enables the default Broker on a namespace (here `default`)
 
 {{< /tab >}}
 
+{{% tab name="Github Source" %}}
+The following command installs the Github Source:
+
+   ```bash
+   kubectl apply --filename https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/github.yaml
+   ```
+
+To learn more about the Github source, try [our sample](../eventing/samples/github-source/README.md)
+
+{{< /tab >}}
+
+{{% tab name="Camel Source" %}}
+The following command installs the Camel Source:
+
+   ```bash
+   kubectl apply --filename https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/camel.yaml
+   ```
+
+To learn more about the Camel source, try [our sample](../eventing/samples/apache-camel-source/README.md)
+
+{{< /tab >}}
+
+{{% tab name="Kafka Source" %}}
+The following command installs the Kafka Source:
+
+   ```bash
+   kubectl apply --filename https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/kafka-source.yaml
+   ```
+
+To learn more about the Kafka source, try [our sample](../eventing/samples/kafka/source/README.md)
+
+{{< /tab >}}
+
+{{% tab name="GCP Pub/Sub Source" %}}
+The following command installs the GCP Pub/Sub Source:
+
+   ```bash
+   # This installs both the Source and the Channel.
+   kubectl apply --filename https://github.com/google/knative-gcp/releases/download/{{< version >}}/cloud-run-events.yaml
+   ```
+
+To learn more about the GCP Pub/Sub source, try [our sample](../eventing/samples/gcp-pubsub-source/README.md)
+
+{{< /tab >}}
+
+<!-- TODO: couchdb source -->
+<!-- TODO: prometheus source -->
+<!-- TODO: AWS SQS source  -->
+
 <!-- TODO(https://github.com/knative/docs/issues/2154): Add sources and other stuff here. -->
 
 {{< /tabs >}}
@@ -425,19 +488,19 @@ You can find a number of sample on how to get started with Knative Eventing [her
 
 Knative provides a bundle of monitoring components that can be used to make the Serving and Eventing components more observable.
 
-- Install Prometheus and Grafana for metrics:
+- Install [Prometheus](https://prometheus.io/) and [Grafana](https://grafana.com/) for metrics:
 
    ```bash
    kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring-metrics-prometheus.yaml
    ```
 
-- Install the ELK stack (Elasticsearch, Logstash and Kibana) for logs:
+- Install the [ELK stack](https://www.elastic.co/what-is/elk-stack) (Elasticsearch, Logstash and Kibana) for logs:
 
    ```bash
    kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring-logs-elasticsearch.yaml
    ```
 
-- Install Jaeger for distributed tracing
+- Install [Jaeger](https://jaegertracing.io/) for distributed tracing
 
    <!-- This indentation is important for things to render properly. -->
    {{< tabs name="jaeger" default="In-Memory (standalone)" >}}
@@ -458,7 +521,7 @@ kubectl apply --filename https://github.com/knative/serving/releases/download/{{
 {{< /tab >}}
 {{< /tabs >}}
 
-- Install Zipkin for distributed tracing
+- Install [Zipkin](https://zipkin.io/) for distributed tracing
 
    <!-- This indentation is important for things to render properly. -->
    {{< tabs name="zipkin" default="In-Memory (standalone)" >}}
