@@ -19,17 +19,20 @@ Use this guide to learn how to create, send, and verify events in Knative. The s
 
 To complete this guide, you will need the following installed and running:
 
-- A [Kubernetes cluster](https://kubernetes.io/docs/concepts/cluster-administration/cluster-administration-overview/) running v1.15 or higher
+- A [Kubernetes cluster](https://kubernetes.io/docs/concepts/cluster-administration/cluster-administration-overview/) running v1.15 or higher.
 
 - [`kubectl` CLI tool](https://kubernetes.io/docs/reference/kubectl/overview/) within a minor version of your Kubernetes cluster.
 
-- [curl v7.65 or higher](https://curl.haxx.se/download.html)
+- [curl v7.65 or higher](https://curl.haxx.se/download.html).
 
-- Knative Eventing Component
+- Knative Eventing component.
 
-   - Knative Eventing In-memory channel 
+- Knative Eventing in-memory channel.
 
-### Installing Knative Eventing 
+**Important Note:** Some Knative Eventing features do not work when using Minikube due to [this](https://github.com/kubernetes/minikube/issues/1568) bug. For local testing you can use [kind](https://github.com/kubernetes-sigs/kind).
+
+
+### Installing Knative Eventing
 
 If you previously [created a Knative cluster](../install), you might already have Knative Eventing installed and running. You can check to see if the Eventing component exists on your cluster by running:
 
@@ -79,9 +82,9 @@ If the `knative-eventing` namespace or the `imc-controller-*` does not exist, us
     sources-controller-5847564f4f-z59xc             1/1     Running   0          29m
    ```
 
-## Setting up Knative Eventing Resources 
+## Setting up Knative Eventing Resources
 
-Before you start to manage events, you need to create the objects needed to transport the events. 
+Before you start to manage events, you need to create the objects needed to transport the events.
 
 
 ### Creating and configuring an Eventing namespace
@@ -232,7 +235,7 @@ Your event consumers receive the events sent by event producers. In this step, y
 
 ### Creating `Triggers`
 
-A [Trigger](./broker-trigger.md#trigger) defines the events that you want each of your event consumers 
+A [Trigger](./broker-trigger.md#trigger) defines the events that you want each of your event consumers
 to receive. Your `Broker` uses triggers to forward events to the right consumers. Each trigger can specify a filter to select relevant events based on the Cloud Event context attributes.
 
 
@@ -330,7 +333,7 @@ END
 
 Now that you've set up your Eventing cluster to send and consume events, you will use HTTP requests to manually send separate events and demonstrate how each of those events can target your individual event consumers in the next section.
 
-## Sending Events to the `Broker` 
+## Sending Events to the `Broker`
 
 Now that you've created the Pod, you can create an event by sending an HTTP request to the `Broker`. SSH into the `Pod` by running the following command:
 
@@ -339,7 +342,7 @@ Now that you've created the Pod, you can create an event by sending an HTTP requ
 ```
 
  You have sshed into the Pod, and can now make a HTTP request. A prompt similar to the one below will appear:
-    
+
 ```sh
     Defaulting container name to curl.
     Use 'kubectl describe pod/ -n event-example' to see all of the containers in this pod.
@@ -420,10 +423,10 @@ To show the various types of events you can send, you will make three requests:
     ```
 
 4. Exit SSH by typing `exit` into the command prompt.
-    
+
 You have sent two events to the `hello-display` event consumer and two events to the `goodbye-display` event consumer (note that `say-hello-goodbye` activates the trigger conditions for *both* `hello-display` and `goodbye-display`). You will verify that these events were received correctly in the next section.
 
-## Verifying events were received 
+## Verifying events were received
 
 After sending events, verify that your events were received by the appropriate `Subscribers`.
 
@@ -432,7 +435,7 @@ After sending events, verify that your events were received by the appropriate `
     ```sh
     kubectl --namespace event-example logs -l app=hello-display --tail=100
     ```
-   
+
     This returns the `Attributes` and `Data` of the events you sent to `hello-display`:
 
     ```sh
@@ -506,7 +509,7 @@ After sending events, verify that your events were received by the appropriate `
      Data,
       {
         "msg": "Hello Knative! Goodbye Knative!"
-      } 
+      }
    ```
 
 ## Cleaning up
@@ -524,7 +527,7 @@ kubectl delete namespace event-example
 This removes the namespace and all of its resources from your cluster.
 
 
-## What’s next 
+## What’s next
 
 You've learned the basics of the Knative Eventing workflow. Here are some additional resources to help you continue to build with the Knative Eventing component.
 
