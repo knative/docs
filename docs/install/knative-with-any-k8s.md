@@ -45,13 +45,13 @@ The following commands install the Knative Serving component.
 1. Install the [Custom Resource Definitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) (aka CRDs):
 
    ```bash
-   kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving-crds.yaml
+   kubectl apply --filename https://storage.googleapis.com/knative-releases/serving/latest/serving-crds.yaml
    ```
 
 1. Install the core components of Serving (see below for optional extensions):
 
    ```bash
-   kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving-core.yaml
+   kubectl apply --filename https://storage.googleapis.com/knative-releases/serving/latest/serving-core.yaml
    ```
 
 1. Pick a networking layer (alphabetical):
@@ -190,7 +190,7 @@ The following commands install Istio and enable its Knative integration.
 1. Install the Knative Istio controller:
 
    ```bash
-   kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving-istio.yaml
+   kubectl apply --filename https://storage.googleapis.com/knative-releases/serving/latest/serving-istio.yaml
    ```
 
 1. Fetch the External IP or CNAME:
@@ -240,7 +240,7 @@ The following commands install Kourier and enable its Knative integration.
 We ship a simple Kubernetes Job called "default domain" that will (see caveats) configure Knative Serving to use <a href="http://xip.io">xip.io</a> as the default DNS suffix.
 
 ```bash
-kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving-default-domain.yaml
+kubectl apply --filename https://storage.googleapis.com/knative-releases/serving/latest/serving-default-domain.yaml
 ```
 
 **Caveat**: This will only work if the cluster LoadBalancer service exposes an IPv4 address, so it will not work with IPv6 clusters, AWS, or local setups like Minikube.  For these, see "Real DNS".
@@ -296,7 +296,7 @@ for driving autoscaling decisions.  The following command will install the
 components needed to support HPA-class autoscaling:
 
 ```bash
-kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving-hpa.yaml
+kubectl apply --filename https://storage.googleapis.com/knative-releases/serving/latest/serving-hpa.yaml
 ```
 
 <!-- TODO(https://github.com/knative/docs/issues/2152): Link to a more in-depth guide on HPA-class autoscaling -->
@@ -312,7 +312,7 @@ Knative supports automatically provisioning TLS certificates via [cert-manager](
 2. Next, install the component that integrates Knative with cert-manager:
 
     ```bash
-    kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving-cert-manager.yaml
+    kubectl apply --filename https://storage.googleapis.com/knative-releases/serving/latest/serving-cert-manager.yaml
     ```
 
 3. Now configure Knative to [automatically configure TLS certificates](../serving/using-auto-tls.md).
@@ -323,7 +323,7 @@ Knative supports automatically provisioning TLS certificates via [cert-manager](
 If you plan to use cert-manager's support for provisioning wildcard certificates, then the most efficient way to provision certificates is with the namespace wildcard certificate controller.  The following command will install the components needed to provision wildcard certificates in each namespace:
 
 ```bash
-kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving-nscert.yaml
+kubectl apply --filename https://storage.googleapis.com/knative-releases/serving/latest/serving-nscert.yaml
 ```
 
 {{< /tab >}}
@@ -342,13 +342,13 @@ The following commands install the Knative Eventing component.
 1. Install the [Custom Resource Definitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) (aka CRDs):
 
    ```bash
-   kubectl apply --filename https://github.com/knative/eventing/releases/download/{{< version >}}/eventing-crds.yaml
+   kubectl apply --filename https://storage.googleapis.com/knative-releases/eventing/latest/eventing-crds.yaml
    ```
 
 1. Install the core components of Eventing (see below for optional extensions):
 
    ```bash
-   kubectl apply --filename https://github.com/knative/eventing/releases/download/{{< version >}}/eventing-core.yaml
+   kubectl apply --filename https://storage.googleapis.com/knative-releases/eventing/latest/eventing-core.yaml
    ```
 
 1. Install a default Channel (messaging) layer.
@@ -359,7 +359,7 @@ The following commands install the Knative Eventing component.
 The following command installs an implementation of Channel that runs in-memory.  This implementation is nice because it is simple and standalone, but it is unsuitable for production use cases.
 
    ```bash
-   kubectl apply --filename https://github.com/knative/eventing/releases/download/{{< version >}}/in-memory-channel.yaml
+   kubectl apply --filename https://storage.googleapis.com/knative-releases/eventing/latest/in-memory-channel.yaml
    ```
 
 {{< /tab >}}
@@ -379,7 +379,7 @@ The following command installs an implementation of Channel that runs in-memory.
 The following command installs an implementation of Broker that utilizes Channels:
 
    ```bash
-   kubectl apply --filename https://github.com/knative/eventing/releases/download/{{< version >}}/channel-broker.yaml
+   kubectl apply --filename https://storage.googleapis.com/knative-releases/eventing/latest/channel-broker.yaml
    ```
 
 To customize which channel implementation is used, update the following ConfigMap:
@@ -440,7 +440,7 @@ The following command enables the default Broker on a namespace (here `default`)
 The following command installs the Github Source:
 
    ```bash
-   kubectl apply --filename https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/github.yaml
+   kubectl apply --filename https://storage.googleapis.com/knative-releases/eventing-contrib/latest/github.yaml
    ```
 
 To learn more about the Github source, try [our sample](../eventing/samples/github-source/README.md)
@@ -451,7 +451,7 @@ To learn more about the Github source, try [our sample](../eventing/samples/gith
 The following command installs the Camel Source:
 
    ```bash
-   kubectl apply --filename https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/camel.yaml
+   kubectl apply --filename https://storage.googleapis.com/knative-releases/eventing-contrib/latest/camel.yaml
    ```
 
 To learn more about the Camel source, try [our sample](../eventing/samples/apache-camel-source/README.md)
@@ -462,7 +462,7 @@ To learn more about the Camel source, try [our sample](../eventing/samples/apach
 The following command installs the Kafka Source:
 
    ```bash
-   kubectl apply --filename https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/kafka-source.yaml
+   kubectl apply --filename https://storage.googleapis.com/knative-releases/eventing-contrib/latest/kafka-source.yaml
    ```
 
 To learn more about the Kafka source, try [our sample](../eventing/samples/kafka/source/README.md)
@@ -474,7 +474,7 @@ The following command installs the GCP Pub/Sub Source:
 
    ```bash
    # This installs both the Source and the Channel.
-   kubectl apply --filename https://github.com/google/knative-gcp/releases/download/{{< version >}}/cloud-run-events.yaml
+   kubectl apply --filename  https://github.com/google/knative-gcp/releases/download/{{< version >}}/cloud-run-events.yaml
    ```
 
 To learn more about the GCP Pub/Sub source, try [our sample](../eventing/samples/gcp-pubsub-source/README.md)
@@ -502,13 +502,13 @@ Knative provides a bundle of monitoring components that can be used to make the 
 - Install [Prometheus](https://prometheus.io/) and [Grafana](https://grafana.com/) for metrics:
 
    ```bash
-   kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring-metrics-prometheus.yaml
+   kubectl apply --filename https://storage.googleapis.com/knative-releases/serving/latest/monitoring-metrics-prometheus.yaml
    ```
 
 - Install the [ELK stack](https://www.elastic.co/what-is/elk-stack) (Elasticsearch, Logstash and Kibana) for logs:
 
    ```bash
-   kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring-logs-elasticsearch.yaml
+   kubectl apply --filename https://storage.googleapis.com/knative-releases/serving/latest/monitoring-logs-elasticsearch.yaml
    ```
 
 - Install [Jaeger](https://jaegertracing.io/) for distributed tracing
@@ -519,7 +519,7 @@ Knative provides a bundle of monitoring components that can be used to make the 
 To install the in-memory (standalone) version of Jaeger, run the following command:
 
 ```bash
-kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring-tracing-jaeger-in-mem.yaml
+kubectl apply --filename https://storage.googleapis.com/knative-releases/serving/latest/monitoring-tracing-jaeger-in-mem.yaml
 ```
 {{< /tab >}}
 
@@ -527,7 +527,7 @@ kubectl apply --filename https://github.com/knative/serving/releases/download/{{
 To install the ELK version of Jaeger (needs the ELK install above), run the following command:
 
 ```bash
-kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring-tracing-jaeger.yaml
+kubectl apply --filename https://storage.googleapis.com/knative-releases/serving/latest/monitoring-tracing-jaeger.yaml
 ```
 {{< /tab >}}
 {{< /tabs >}}
@@ -540,7 +540,7 @@ kubectl apply --filename https://github.com/knative/serving/releases/download/{{
 To install the in-memory (standalone) version of Zipkin, run the following command:
 
 ```bash
-kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring-tracing-zipkin-in-mem.yaml
+kubectl apply --filename https://storage.googleapis.com/knative-releases/serving/latest/monitoring-tracing-zipkin-in-mem.yaml
 ```
 {{< /tab >}}
 
@@ -548,7 +548,7 @@ kubectl apply --filename https://github.com/knative/serving/releases/download/{{
 To install the ELK version of Zipkin (needs the ELK install above), run the following command:
 
 ```bash
-kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/monitoring-tracing-zipkin.yaml
+kubectl apply --filename https://storage.googleapis.com/knative-releases/serving/latest/monitoring-tracing-zipkin.yaml
 ```
 {{< /tab >}}
 {{< /tabs >}}
