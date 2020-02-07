@@ -111,10 +111,18 @@ The following commands install Ambassador and enable its Knative integration.
 {{% tab name="Contour" %}}
 The following commands install Contour and enable its Knative integration.
 
-1. Install the Knative Contour controller (includes Contour):
+1. Install a properly configured Contour:
 
    ```bash
-   kubectl apply --filename https://raw.githubusercontent.com/knative/serving/{{< version >}}/third_party/contour-latest/contour.yaml
+   kubectl apply --filename https://github.com/knative/net-contour/releases/download/{{< version >}}/contour.yaml
+   ```
+
+   <!-- TODO(https://github.com/knative/net-contour/issues/11): We need a guide on how to use/modify a pre-existing install. -->
+
+1. Install the Knative Contour controller:
+
+   ```bash
+   kubectl apply --filename https://github.com/knative/net-contour/releases/download/{{< version >}}/net-contour.yaml
    ```
 
 1. To configure Knative Serving to use Contour by default:
