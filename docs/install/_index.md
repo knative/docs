@@ -1,5 +1,5 @@
 ---
-title: "Installing Knative"
+title: "Getting Started"
 linkTitle: ""
 weight: 05
 type: "docs"
