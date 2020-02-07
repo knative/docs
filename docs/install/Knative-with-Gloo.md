@@ -40,7 +40,7 @@ export PATH=$HOME/.gloo/bin:$PATH
 Verify the CLI is installed and running correctly with:
 
 ```shell
-glooctl --version
+glooctl version
 ```
 
 ### Deploying Gloo and Knative to your cluster
