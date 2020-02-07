@@ -376,35 +376,38 @@ The following command installs an implementation of Channel that runs in-memory.
    <!-- This indentation is important for things to render properly. -->
    {{< tabs name="eventing_brokers" default="Channel-based" >}}
 {{% tab name="Channel-based" %}}
+The following command installs an implementation of Broker that utilizes Channels:
 
-The core install above includes an implementation of Broker that uses Channels.
+   ```bash
+   kubectl apply --filename https://github.com/knative/eventing/releases/download/{{< version >}}/channel-broker.yaml
+   ```
 
 To customize which channel implementation is used, update the following ConfigMap:
 
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: default-ch-webhook
-  namespace: knative-eventing
-data:
-  default-ch-config: |
-    # This is the cluster-wide default channel.
-    clusterDefault:
-      apiVersion: messaging.knative.dev/v1alpha1
-      kind: InMemoryChannel
+   ```yaml
+   apiVersion: v1
+   kind: ConfigMap
+   metadata:
+     name: default-ch-webhook
+     namespace: knative-eventing
+   data:
+     default-ch-config: |
+       # This is the cluster-wide default channel.
+       clusterDefault:
+         apiVersion: messaging.knative.dev/v1alpha1
+         kind: InMemoryChannel
 
-    namespaceDefaults:
-      # This allows you to specify different defaults per-namespace,
-      # in this case the "some-namespace" namespace will use the Kafka
-      # channel by default.
-      some-namespace:
-        apiVersion: messaging.knative.dev/v1alpha1
-        kind: KafkaChannel
-        spec:
-          numPartitions: 2
-          replicationFactor: 1
-```
+       namespaceDefaults:
+         # This allows you to specify different defaults per-namespace,
+         # in this case the "some-namespace" namespace will use the Kafka
+         # channel by default.
+         some-namespace:
+           apiVersion: messaging.knative.dev/v1alpha1
+           kind: KafkaChannel
+           spec:
+             numPartitions: 2
+             replicationFactor: 1
+   ```
 
 {{< /tab >}}
 
