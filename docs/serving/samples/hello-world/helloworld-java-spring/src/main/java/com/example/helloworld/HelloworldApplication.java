@@ -21,8 +21,6 @@ public class HelloworldApplication {
   }
 
   public static void main(String[] args) {
-    String port = System.getenv().getOrDefault("PORT", "8080");
-    System.setProperty("server.port", port);
     SpringApplication.run(HelloworldApplication.class, args);
   }
 }

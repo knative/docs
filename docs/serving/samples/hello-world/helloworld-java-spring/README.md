@@ -76,8 +76,6 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
      }
 
      public static void main(String[] args) {
-       String port = System.getenv().getOrDefault("PORT", "8080");
-       System.setProperty("server.port", port);
        SpringApplication.run(HelloworldApplication.class, args);
      }
    }
