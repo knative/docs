@@ -1,7 +1,7 @@
 ---
 title: "Knative Eventing sources"
-linkTitle: "Eventing sources"
-weight: 20
+linkTitle: "Sources"
+weight: 10
 type: "docs"
 ---
 

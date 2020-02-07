@@ -1,6 +1,6 @@
 ---
 title: "Broker and Trigger"
-weight: 20
+weight: 30
 type: "docs"
 ---
 
@@ -51,7 +51,7 @@ spec:
 ### Trigger Filtering
 
 Exact match filtering on any number of CloudEvents attributes as well as extensions are
-supported. If your filter sets multiple attributes, an event must have all of the attributes for the Trigger to filter it. 
+supported. If your filter sets multiple attributes, an event must have all of the attributes for the Trigger to filter it.
 Note that we only support exact matching on string values.
 
 Example:
@@ -74,7 +74,7 @@ spec:
       name: my-service
 ```
 
-The example above filters events from the `default` Broker that are of type `dev.knative.foo.bar` AND 
+The example above filters events from the `default` Broker that are of type `dev.knative.foo.bar` AND
 have the extension `myextension` with the value `my-extension-value`.
 
 ## Usage
