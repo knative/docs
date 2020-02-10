@@ -68,20 +68,16 @@ added in-line with the
 
 ## Tabs
 
-How to include tabbed content in your page. Note that you can set a default tab.
-<pre>
-  <code>
-     {{< tabs name="tabs_example" default="Include example" >}}
-  {{% tab name="Regular example" %}}
-  Stuff
-  {{< /tab >}}
+How to include tabbed content in your page. Note that you can set a default tab. (See the install )
+   <code>{<code>{< tabs name="tabs_example" default="Include example" >}</code>}</code><br/>
+<code>{<code>{<% tab name="Regular example" %}</code>}</code><br>
+Stuff<br>
+<code>{<code>{< /tab >}</code>}</code><br>
 
-  {{% tab name="Include example" %}}
-  {{% readfile file="./docs/install/README.md" %}}
-  {{< /tab >}}
-  {{< /tabs >}}
-  </code>
-</pre>
+<code>{<code>{% tab name="Include example" %}</code>}</code><br>
+<code>{<code>{% readfile file="./docs/install/README.md" %}</code>}</code><br>
+<code>{<code>{< /tab >}</code>}</code><br>
+<code>{<code>{< /tabs >}</code>}</code><br>
 
    {{< tabs name="tabs_example" default="Include example" >}}
 {{% tab name="Regular example" %}}
