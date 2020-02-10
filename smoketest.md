@@ -1,6 +1,6 @@
 # Spacer Title
 
-<br>
+<br><br>
 
 # Hidden smoketest page
 
@@ -71,12 +71,12 @@ added in-line with the
 How to include tabbed content in your page. Note that you can set a default tab.
 
 ```
-   {{< tabs name="serving_networking" default="Istio" >}}
-{{% tab name="Contour" %}}
+{{< tabs name="tabs_example" default="Include example" >}}
+{{% tab name="Regular example" %}}
 Stuff
 {{< /tab >}}
 
-{{% tab name="Istio" %}}
+{{% tab name="Include example" %}}
 {{% readfile file="./docs/install/README.md" %}}
 {{< /tab >}}
 {{< /tabs >}}
