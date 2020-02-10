@@ -444,25 +444,25 @@ To learn more about the Github source, try [our sample](../eventing/samples/gith
 
 {{< /tab >}}
 
-{{% tab name="Camel Source" %}}
-The following command installs the Camel Source:
+{{% tab name="Apache Camel-K Source" %}}
+The following command installs the Apache Camel-K Source:
 
    ```bash
    kubectl apply --filename https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/camel.yaml
    ```
 
-To learn more about the Camel source, try [our sample](../eventing/samples/apache-camel-source/README.md)
+To learn more about the Apache Camel-K source, try [our sample](../eventing/samples/apache-camel-source/README.md)
 
 {{< /tab >}}
 
-{{% tab name="Kafka Source" %}}
-The following command installs the Kafka Source:
+{{% tab name="Apache Kafka Source" %}}
+The following command installs the Apache Kafka Source:
 
    ```bash
    kubectl apply --filename https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/kafka-source.yaml
    ```
 
-To learn more about the Kafka source, try [our sample](../eventing/samples/kafka/source/README.md)
+To learn more about the Apache Kafka source, try [our sample](../eventing/samples/kafka/source/README.md)
 
 {{< /tab >}}
 
