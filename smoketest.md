@@ -77,17 +77,17 @@ Stuff
 {{< /tab >}}
 
 {{% tab name="Istio" %}}
-{{% readfile file="./docs/README.md" %}}
+{{% readfile file="./docs/install/README.md" %}}
 {{< /tab >}}
 {{< /tabs >}}
 ```
 
-{{< tabs name="serving_networking" default="Istio" >}}
-{{% tab name="Include example" %}}
-Stuff
+   {{< tabs name="tabs_example" default="Include example" >}}
+{{% tab name="Regular example" %}}
+This is a regular example tab.
 {{< /tab >}}
 
-{{% tab name="Istio" %}}
-{{% readfile file="./docs/README.md" %}}
+{{% tab name="Include example" %}}
+{{% readfile file="./docs/install/README.md" %}}
 {{< /tab >}}
 {{< /tabs >}}
