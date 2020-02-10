@@ -72,14 +72,14 @@ How to include tabbed content in your page. Note that you can set a default tab.
 
 
    <code>{<code>{< tabs name="tabs_example" default="Include example" >}</code>}</code><br/>
-<code>{<code>{<% tab name="Regular example" %}</code>}</code><br/>
-Stuff<br/>
-<code>{<code>{< /tab >}</code>}</code><br/>
+<code>{<code>{<% tab name="Regular example" %}</code>}</code><br>
+Stuff<br>
+<code>{<code>{< /tab >}</code>}</code><br>
 
-<code>{<code>{% tab name="Include example" %}</code>}</code><br/>
-<code>{<code>{% readfile file="./docs/install/README.md" %}</code>}</code><br/>
-<code>{<code>{< /tab >}</code>}</code><br/>
-<code>{<code>{< /tabs >}</code>}</code><br/>
+<code>{<code>{% tab name="Include example" %}</code>}</code><br>
+<code>{<code>{% readfile file="./docs/install/README.md" %}</code>}</code><br>
+<code>{<code>{< /tab >}</code>}</code><br>
+<code>{<code>{< /tabs >}</code>}</code><br>
 
    {{< tabs name="tabs_example" default="Include example" >}}
 {{% tab name="Regular example" %}}
