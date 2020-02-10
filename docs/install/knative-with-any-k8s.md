@@ -364,8 +364,23 @@ The following command installs an implementation of Channel that runs in-memory.
 
 {{< /tab >}}
 
+{{% tab name="Apache Kafka Channel" %}}
+
+1. [Installing Apache Kafka for Kubernetes](../eventing/samples/kafka/README.md)
+
+1. Install the Apache Kafka Channel:
+
+   ```bash
+   curl -L "https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/kafka-channel.yaml" \
+    | sed 's/REPLACE_WITH_CLUSTER_URL/my-cluster-kafka-bootstrap.kafka:9092/' \
+    | kubectl apply --filename -
+   ```
+
+To learn more about the Apache Kafka channel, try [our sample](../eventing/samples/kafka/channel/README.md)
+
+{{< /tab >}}
+
 <!-- TODO(https://github.com/knative/docs/issues/2153): Add more Channels here -->
-<!-- TODO: Kafka Channel -->
 <!-- TODO: NATSS Channel -->
 <!-- TODO: GCP Pub/Sub Channel -->
 
