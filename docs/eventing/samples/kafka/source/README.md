@@ -157,18 +157,19 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
    ```
    $ kubectl logs --selector='serving.knative.dev/service=event-display' -c user-container
 
-    ☁️  cloudevents.Event
-    Validation: valid
-    Context Attributes,
-      specversion: 0.3
-      type: dev.knative.kafka.event
-      source: dubee
-      id: partition:0/offset:333
-      time: 2019-10-18T15:23:20.809775386Z
-      contenttype: application/json
-    Extensions,
-      key:
-    Data,
+  ☁️  cloudevents.Event
+  Validation: valid
+  Context Attributes,
+    specversion: 1.0
+    type: dev.knative.kafka.event
+    source: /apis/v1/namespaces/default/kafkasources/kafka-source#my-topic
+    subject: partion:0#564
+    id: partition:0/offset:564
+    time: 2020-02-10T18:10:23.861866615Z
+    datacontenttype: application/json
+  Extensions,
+    key:
+  Data,
       {
         "msg": "This is a test!"
       }
