@@ -237,6 +237,10 @@ spec:
       # Named route for v2 has been removed, since we don't need it anymore
 ```
 
+> Note: You can remove the first revision blue-green-demo-lcfrd instead of 0% of traffic
+> when you will not roll back the revision anymore.
+> Then the non-routeable revision object will be garbage collected.
+
 Save the file, then apply the updated route to your cluster:
 
 ```bash
