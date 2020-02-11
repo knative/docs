@@ -7,20 +7,6 @@ type: "docs"
 This page contains information about various tools and technologies that are
 useful to anyone developing on Knative.
 
-## Community Resources
-
-This section contains tools and technologies developed by members of the Knative
-community specifically for use with Knative.
-
-### [`knctl`](https://github.com/cppforlife/knctl)
-
-`knctl` is an under-development CLI for working with Knative.
-
-## Other Resources
-
-This section contains other tools and technologies that are useful when working
-with Knative.
-
 ### [`ko`](https://github.com/google/ko)
 
 `ko` is a tool designed to make development of Go apps on Kubernetes easier, by
