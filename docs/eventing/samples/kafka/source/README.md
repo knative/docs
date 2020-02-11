@@ -77,7 +77,25 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
 
 ### Create the Event Display service
 
-1. Build and deploy the Event Display Service.
+1. Build the Event Display Service (`even-display.yaml`)
+
+  ```yaml
+  apiVersion: serving.knative.dev/v1
+  kind: Service
+  metadata:
+    name: event-display
+    namespace: default
+  spec:
+    template:
+      spec:
+        containers:
+          - # This corresponds to
+            # https://github.com/knative/eventing-contrib/tree/master/cmd/event_display/main.go
+            image: gcr.io/knative-releases/github.com/knative/eventing-contrib/cmd/event_display
+  ```
+
+1. Deploy the Event Display Service
+
    ```
    $ kubectl apply --filename source/samples/event-display.yaml
    ...
@@ -163,7 +181,7 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
     specversion: 1.0
     type: dev.knative.kafka.event
     source: /apis/v1/namespaces/default/kafkasources/kafka-source#my-topic
-    subject: partion:0#564
+    subject: partition:0#564
     id: partition:0/offset:564
     time: 2020-02-10T18:10:23.861866615Z
     datacontenttype: application/json
