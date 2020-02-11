@@ -368,7 +368,7 @@ The following command installs an implementation of Channel that runs in-memory.
 
 1. First, [Install Apache Kafka for Kubernetes](../eventing/samples/kafka/README.md)
 
-1. Install the Apache Kafka Channel:
+1. Then install the Apache Kafka Channel:
 
    ```bash
    curl -L "https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/kafka-channel.yaml" \
