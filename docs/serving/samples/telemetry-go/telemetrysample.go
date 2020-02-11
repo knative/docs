@@ -41,7 +41,7 @@ import (
 
 var (
 	// Create a measurement to keep track of incoming request counts.
-	// For more information on measurements, see https://godoc.org/go.opencensus.io/stats
+	// For more information on measurements, see https://pkg.go.dev/go.opencensus.io/stats
 	requestCount = stats.Int64("request_count", "Total number of requests.", stats.UnitNone)
 
 	// Create a measurement to keep track of request durations.
@@ -49,7 +49,7 @@ var (
 
 	// Capture the HTTP response code in a tag so that we can aggregate and visualize
 	// this metric based on different response codes (see count of all 400 vs 200 for example).
-	// For more information on tags, see https://godoc.org/go.opencensus.io/tag
+	// For more information on tags, see https://pkg.go.dev/go.opencensus.io/tag
 	requestStatusTagKey tag.Key
 )
 

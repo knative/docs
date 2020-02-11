@@ -9,7 +9,7 @@ aliases:
 Knative uses a single shared autoscaler. This is, by default, the Knative Pod Autoscaler (KPA), which
 provides fast, request-based autoscaling capabilities out of the box.
 
-You can also configure Knative to use Horizontal Pod Autoscaler (HPA), or use your own autoscaler, by creating a [controller](https://kubernetes.io/docs/concepts/architecture/controller/) (also referred to as a [reconciler](https://godoc.org/k8s.io/kubernetes/pkg/controller/volume/attachdetach/reconciler)) for the Pod Autoscaler custom resource.
+You can also configure Knative to use Horizontal Pod Autoscaler (HPA), or use your own autoscaler, by creating a [controller](https://kubernetes.io/docs/concepts/architecture/controller/) (also referred to as a [reconciler](https://pkg.go.dev/k8s.io/kubernetes/pkg/controller/volume/attachdetach/reconciler)) for the Pod Autoscaler custom resource.
 
 # Modifying the ConfigMap for KPA
 
