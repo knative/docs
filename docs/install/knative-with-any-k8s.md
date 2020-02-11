@@ -366,7 +366,7 @@ The following command installs an implementation of Channel that runs in-memory.
 
 {{% tab name="Apache Kafka Channel" %}}
 
-1. [Installing Apache Kafka for Kubernetes](../eventing/samples/kafka/README.md)
+1. First, [Install Apache Kafka for Kubernetes](../eventing/samples/kafka/README.md)
 
 1. Install the Apache Kafka Channel:
 
