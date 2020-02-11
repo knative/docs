@@ -380,8 +380,19 @@ To learn more about the Apache Kafka channel, try [our sample](../eventing/sampl
 
 {{< /tab >}}
 
+{{% tab name="NATS Channel" %}}
+
+1. First, [Install NATS Streaming for Kubernetes](https://github.com/knative/eventing-contrib/blob/{{< version >}}/natss/config/broker/README.md)
+
+1. Then install the NATS Streaming Channel:
+
+   ```bash
+   kubectl apply --filename https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/natss-channel.yaml
+   ```
+
+{{< /tab >}}
+
 <!-- TODO(https://github.com/knative/docs/issues/2153): Add more Channels here -->
-<!-- TODO: NATSS Channel -->
 <!-- TODO: GCP Pub/Sub Channel -->
 
 {{< /tabs >}}
