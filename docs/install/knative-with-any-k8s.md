@@ -525,6 +525,12 @@ You can find a number of sample on how to get started with Knative Eventing [her
 
 Knative provides a bundle of monitoring components that can be used to make the Serving and Eventing components more observable.
 
+Before you install any specific monitoring components, you must first install the core monitoring pieces:
+
+```bash
+kubectl apply --filename {{< artifact repo="serving" file="monitoring-core.yaml" >}}
+```
+
 - Install [Prometheus](https://prometheus.io/) and [Grafana](https://grafana.com/) for metrics:
 
    ```bash
