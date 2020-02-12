@@ -221,7 +221,7 @@ The CloudPubSubSource fires a new event each time a message is published on a
   A reference to the target that should receive events.
 - `secret`:
   [SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#secretkeyselector-v1-core)
-  Credential to use to poll the Cloud Pub/Sub Subscription. It is not used to create or delete the Subscription, only to poll it. 
+  Credential to use to poll the Cloud Pub/Sub Subscription. It is not used to create or delete the Subscription, only to poll it.
   The value of the secret entry must be a service account key in the JSON format (see https://cloud.google.com/iam/docs/creating-managing-service-account-keys). Defaults to secret.name of 'google-cloud-key' and secret.key of 'key.json'.
 - `project`: `string` ID of the Google Cloud Project that the Pub/Sub Topic exists in. If omitted uses the Project ID from the GKE cluster metadata service.
 
@@ -229,8 +229,8 @@ See the [CloudPubSubSource](samples/cloudpubsubsource) example.
 
 ### CloudStorageSource
 
-Registers for events of the specified types on the specified 
-[Google Cloud Storage](https://cloud.google.com/storage/) bucket and optional object prefix. 
+Registers for events of the specified types on the specified
+[Google Cloud Storage](https://cloud.google.com/storage/) bucket and optional object prefix.
 Brings those events into Knative.
 
 **Spec fields**:
@@ -249,7 +249,7 @@ See the [CloudStorageSource](samples/cloudstoragesource) example.
 
 ### CloudSchedulerSource
 
-Create, update, and delete [Google Cloud Scheduler](https://cloud.google.com/scheduler/) Jobs. 
+Create, update, and delete [Google Cloud Scheduler](https://cloud.google.com/scheduler/) Jobs.
 When those jobs are triggered, receive the event inside Knative.
 
 **Spec fields**:
@@ -282,7 +282,7 @@ Registers for events of the specified types on the specified [Google Cloud Audit
   A reference to the target that should receive events.
 - `secret`:
   [SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#secretkeyselector-v1-core)
-  Credential used to pull Stackdriver audit log pubsub messages. 
+  Credential used to pull Stackdriver audit log pubsub messages.
   The value of the secret entry must be a service account key in the JSON format (see https://cloud.google.com/iam/docs/creating-managing-service-account-keys). Defaults to secret.name of 'google-cloud-key' and secret.key of 'key.json'.
 - `project`: `string` ID of the Google Cloud Project that the Pub/Sub Topic exists in. If omitted uses the Project ID from the GKE cluster metadata service.
 
