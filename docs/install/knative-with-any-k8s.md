@@ -22,10 +22,10 @@ This guide walks you through the installation of the latest version of Knative.
 Knative has two components, which can be installed and used independently or together.
 To help you pick and choose the pieces that are right for you, here is a brief
 description of each:
- - [**Serving**](#installing-the-serving-component) (_stable_) provides an abstraction for stateless request-based scale-to-zero services.
- - [**Eventing**](#installing-the-eventing-component) (_alpha_) provides abstractions to enable binding event sources (e.g. Github Webhooks, Kafka) and consumers (e.g. Kubernetes or Knative Services).
+ - [**Serving**](#installing-the-serving-component) {{< feature-state version="v0.9" state="stable" short=true >}} provides an abstraction for stateless request-based scale-to-zero services.
+ - [**Eventing**](#installing-the-eventing-component) {{< feature-state version="v0.2" state="alpha" short=true >}} provides abstractions to enable binding event sources (e.g. Github Webhooks, Kafka) and consumers (e.g. Kubernetes or Knative Services).
 
-Knative also has a [**Monitoring bundle**](#installing-the-monitoring-bundle) (_alpha_) which provides standard tooling that can be used to get visibility into the health of the software running on Knative.
+Knative also has a [**Monitoring bundle**](#installing-the-monitoring-bundle) {{< feature-state version="v0.1" state="alpha" short=true >}}  which provides standard tooling that can be used to get visibility into the health of the software running on Knative.
 
 ## Before you begin
 
@@ -39,6 +39,9 @@ need to be adjusted for use in a Windows environment.
 <!-- TODO: Link to provisioning guide for advanced installation -->
 
 ## Installing the Serving component
+
+{{< feature-state version="v0.9" state="stable" >}}
+
 
 The following commands install the Knative Serving component.
 
@@ -60,6 +63,8 @@ The following commands install the Knative Serving component.
    <!-- This indentation is important for things to render properly. -->
    {{< tabs name="serving_networking" default="Istio" >}}
 {{% tab name="Ambassador" %}}
+
+{{% feature-state version="v0.8" state="alpha" %}}
 
 The following commands install Ambassador and enable its Knative integration.
 
@@ -109,6 +114,9 @@ The following commands install Ambassador and enable its Knative integration.
 {{< /tab >}}
 
 {{% tab name="Contour" %}}
+
+{{% feature-state version="v0.12" state="alpha" %}}
+
 The following commands install Contour and enable its Knative integration.
 
 1. Install a properly configured Contour:
@@ -145,6 +153,9 @@ The following commands install Contour and enable its Knative integration.
 {{< /tab >}}
 
 {{% tab name="Gloo" %}}
+
+{{% feature-state version="v0.8" state="alpha" %}}
+
 _For a detailed guide on Gloo integration, see [Installing Gloo for Knative](https://docs.solo.io/gloo/latest/installation/knative/) in the Gloo documentation._
 
 The following commands install Gloo and enable its Knative integration.
@@ -181,6 +192,9 @@ The following commands install Gloo and enable its Knative integration.
 {{< /tab >}}
 
 {{% tab name="Istio" %}}
+
+{{% feature-state version="v0.9" state="stable" %}}
+
 The following commands install Istio and enable its Knative integration.
 
 <!-- TODO(https://github.com/knative/docs/issues/2166): Create streamlined instructions to inline -->
@@ -204,6 +218,9 @@ The following commands install Istio and enable its Knative integration.
 {{< /tab >}}
 
 {{% tab name="Kourier" %}}
+
+{{% feature-state version="v0.12" state="alpha" %}}
+
 The following commands install Kourier and enable its Knative integration.
 
 1. Install the Knative Kourier controller:
@@ -291,6 +308,8 @@ At this point, you have a basic installation of Knative Serving!
 {{< tabs name="serving_extensions" >}}
 {{% tab name="HPA autoscaling" %}}
 
+{{% feature-state version="v0.8" state="beta" %}}
+
 Knative also supports the use of the Kubernetes Horizontal Pod Autoscaler (HPA)
 for driving autoscaling decisions.  The following command will install the
 components needed to support HPA-class autoscaling:
@@ -304,6 +323,8 @@ kubectl apply --filename {{< artifact repo="serving" file="serving-hpa.yaml" >}}
 {{< /tab >}}
 
 {{% tab name="TLS with cert-manager" %}}
+
+{{% feature-state version="v0.6" state="alpha" %}}
 
 Knative supports automatically provisioning TLS certificates via [cert-manager](https://cert-manager.io/docs/).  The following commands will install the components needed to support the provisioning of TLS certificates via cert-manager.
 
@@ -319,6 +340,9 @@ Knative supports automatically provisioning TLS certificates via [cert-manager](
 {{< /tab >}}
 
 {{% tab name="TLS wildcard support" %}}
+
+<!-- This isn't where this was introduced, but we seem to have missed it in the release notes :( -->
+{{% feature-state version="v0.12" state="alpha" %}}
 
 If you plan to use cert-manager's support for provisioning wildcard certificates, then the most efficient way to provision certificates is with the namespace wildcard certificate controller.  The following command will install the components needed to provision wildcard certificates in each namespace:
 
@@ -336,6 +360,9 @@ Deploy your first app with the [getting started with Knative app deployment](../
 
 
 ## Installing the Eventing component
+
+{{< feature-state version="v0.2" state="alpha" >}}
+
 
 The following commands install the Knative Eventing component.
 
@@ -355,7 +382,6 @@ The following commands install the Knative Eventing component.
 
    <!-- This indentation is important for things to render properly. -->
    {{< tabs name="eventing_channels" default="In-Memory (standalone)" >}}
-
 {{% tab name="Apache Kafka Channel" %}}
 
 1. First, [Install Apache Kafka for Kubernetes](../eventing/samples/kafka/README.md)
@@ -373,6 +399,9 @@ To learn more about the Apache Kafka channel, try [our sample](../eventing/sampl
 {{< /tab >}}
 
 {{% tab name="In-Memory (standalone)" %}}
+
+{{< feature-state version="v0.2" state="alpha" >}}
+
 The following command installs an implementation of Channel that runs in-memory.  This implementation is nice because it is simple and standalone, but it is unsuitable for production use cases.
 
    ```bash
@@ -403,6 +432,8 @@ The following command installs an implementation of Channel that runs in-memory.
    <!-- This indentation is important for things to render properly. -->
    {{< tabs name="eventing_brokers" default="Channel-based" >}}
 {{% tab name="Channel-based" %}}
+{{< feature-state version="v0.5" state="alpha" >}}
+
 The following command installs an implementation of Broker that utilizes Channels:
 
    ```bash
@@ -455,6 +486,10 @@ At this point, you have a basic installation of Knative Eventing!
    <!-- This indentation is important for things to render properly. -->
    {{< tabs name="eventing_extensions" >}}
 {{% tab name="Enable Broker" %}}
+
+<!-- Unclear when this feature came in -->
+{{< feature-state version="v0.5" state="alpha" >}}
+
 The following command enables the default Broker on a namespace (here `default`):
 
    ```bash
@@ -464,6 +499,9 @@ The following command enables the default Broker on a namespace (here `default`)
 {{< /tab >}}
 
 {{% tab name="Github Source" %}}
+
+{{< feature-state version="v0.2" state="alpha" >}}
+
 The following command installs the Github Source:
 
    ```bash
@@ -475,6 +513,8 @@ To learn more about the Github source, try [our sample](../eventing/samples/gith
 {{< /tab >}}
 
 {{% tab name="Apache Camel-K Source" %}}
+{{< feature-state version="v0.5" state="alpha" >}}
+
 The following command installs the Apache Camel-K Source:
 
    ```bash
@@ -486,6 +526,9 @@ To learn more about the Apache Camel-K source, try [our sample](../eventing/samp
 {{< /tab >}}
 
 {{% tab name="Apache Kafka Source" %}}
+
+{{< feature-state version="v0.5" state="alpha" >}}
+
 The following command installs the Apache Kafka Source:
 
    ```bash
@@ -497,6 +540,9 @@ To learn more about the Apache Kafka source, try [our sample](../eventing/sample
 {{< /tab >}}
 
 {{% tab name="GCP Pub/Sub Source" %}}
+
+{{< feature-state version="v0.2" state="alpha" >}}
+
 The following command installs the GCP Pub/Sub Source:
 
    ```bash
@@ -523,6 +569,8 @@ You can find a number of sample on how to get started with Knative Eventing [her
 
 
 ## Installing the Monitoring bundle
+
+{{< feature-state version="v0.2" state="alpha" >}}
 
 Knative provides a bundle of monitoring components that can be used to make the Serving and Eventing components more observable.
 
