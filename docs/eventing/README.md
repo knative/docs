@@ -219,6 +219,11 @@ The CloudPubSubSource fires a new event each time a message is published on a
 - `sink`:
   [Destination](https://github.com/knative/pkg/blob/master/apis/duck/v1/destination.go)
   A reference to the target that should receive events.
+- `secret`:
+  [SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#secretkeyselector-v1-core)
+  Credential to use to poll the Cloud Pub/Sub Subscription. It is not used to create or delete the Subscription, only to poll it. 
+  The value of the secret entry must be a service account key in the JSON format (see https://cloud.google.com/iam/docs/creating-managing-service-account-keys). Defaults to secret.name of 'google-cloud-key' and secret.key of 'key.json'.
+- `project`: `string` ID of the Google Cloud Project that the Pub/Sub Topic exists in. If omitted uses the Project ID from the GKE cluster metadata service.
 
 See the [CloudPubSubSource](samples/cloudpubsubsource) example.
 
@@ -234,6 +239,11 @@ Brings those events into Knative.
 - `sink`:
   [Destination](https://github.com/knative/pkg/blob/master/apis/duck/v1/destination.go)
   A reference to the target that should receive events.
+- `secret`:
+  [SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#secretkeyselector-v1-core)
+  Credential to use for managing GCS notifications.
+  The value of the secret entry must be a service account key in the JSON format (see https://cloud.google.com/iam/docs/creating-managing-service-account-keys). Defaults to secret.name of 'google-cloud-key' and secret.key of 'key.json'.
+- `project`: `string` ID of the Google Cloud Project that the Pub/Sub Topic exists in. If omitted uses the Project ID from the GKE cluster metadata service.
 
 See the [CloudStorageSource](samples/cloudstoragesource) example.
 
@@ -250,6 +260,11 @@ When those jobs are triggered, receive the event inside Knative.
 - `sink`:
   [Destination](https://github.com/knative/pkg/blob/master/apis/duck/v1/destination.go)
   A reference to the target that should receive events.
+- `secret`:
+  [SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#secretkeyselector-v1-core)
+  Credential to use for managing Scheduler Jobs.
+  The value of the secret entry must be a service account key in the JSON format (see https://cloud.google.com/iam/docs/creating-managing-service-account-keys). Defaults to secret.name of 'google-cloud-key' and secret.key of 'key.json'.
+- `project`: `string` ID of the Google Cloud Project that the Pub/Sub Topic exists in. If omitted uses the Project ID from the GKE cluster metadata service.
 
 See the [CloudSchedulerSource](samples/cloudschedulersource) example.
 
@@ -265,6 +280,11 @@ Registers for events of the specified types on the specified [Google Cloud Audit
 - `sink`:
   [Destination](https://github.com/knative/pkg/blob/master/apis/duck/v1/destination.go)
   A reference to the target that should receive events.
+- `secret`:
+  [SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#secretkeyselector-v1-core)
+  Credential used to pull Stackdriver audit log pubsub messages. 
+  The value of the secret entry must be a service account key in the JSON format (see https://cloud.google.com/iam/docs/creating-managing-service-account-keys). Defaults to secret.name of 'google-cloud-key' and secret.key of 'key.json'.
+- `project`: `string` ID of the Google Cloud Project that the Pub/Sub Topic exists in. If omitted uses the Project ID from the GKE cluster metadata service.
 
 See the [CloudAuditLogsSource](samples/cloudauditlogssource) example.
 
