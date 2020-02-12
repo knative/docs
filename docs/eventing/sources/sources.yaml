@@ -53,12 +53,30 @@ sources:
     support: None
     description: >
       Uses an in-memory timer to produce events on the specified Cron schedule.
-  - name: GCP PubSub
-    url: https://github.com/google/knative-gcp/blob/master/pkg/apis/events/v1alpha1/pubsub_types.go
-    status: Proof of Concept
+  - name: CloudPubSubSource
+    url: https://github.com/google/knative-gcp/blob/master/docs/examples/cloudpubsubsource/README.md
+    status: Active Development
     support: None
     description: >
-      Brings [GCP PubSub](https://cloud.google.com/pubsub/) messages into Knative.
+      Brings [Cloud Pub/Sub](https://cloud.google.com/pubsub/) messages into Knative.
+  - name: CloudSchedulerSource
+    url: https://github.com/google/knative-gcp/blob/master/docs/examples/cloudschedulersource/README.md
+    status: Active Development
+    support: None
+    description: >
+      Create, update, and delete [Google Cloud Scheduler](https://cloud.google.com/scheduler/) Jobs. When those jobs are triggered, receive the event inside Knative.
+  - name: CloudStorageSource
+    url: https://github.com/google/knative-gcp/blob/master/docs/examples/cloudstoragesource/README.md
+    status: Active Development
+    support: None
+    description: >
+      Registers for events of the specified types on the specified [Google Cloud Storage](https://cloud.google.com/storage/) bucket and optional object prefix. Brings those events into Knative.
+  - name: CloudAuditLogsSource
+    url: https://github.com/google/knative-gcp/blob/master/docs/examples/cloudauditlogssource/README.md
+    status: Active Development
+    support: None
+    description: >
+      Registers for events of the specified types on the specified [Google Cloud Audit Logs](https://cloud.google.com/logging/docs/audit/). Brings those events into Knative.
   - name: GitHub
     url: https://github.com/knative/eventing-contrib/blob/master/github/pkg/apis/sources/v1alpha1/githubsource_types.go
     status: Proof of Concept
