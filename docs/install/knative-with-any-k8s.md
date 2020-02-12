@@ -523,7 +523,7 @@ You can find a number of sample on how to get started with Knative Eventing [her
 
 ## Installing the Monitoring bundle
 
-Knative provides a bundle of monitoring components that can be used to make the Serving and Eventing components more observable.
+Knative provides a bundle of monitoring components that can be used to make the Serving and Eventing components more observable. You will need to have a ```knative-monitoring``` namespace set up for installing the monitoring components. 
 
 - Install [Prometheus](https://prometheus.io/) and [Grafana](https://grafana.com/) for metrics:
 
