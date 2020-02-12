@@ -332,7 +332,7 @@ kubectl apply --filename {{< artifact repo="serving" file="serving-nscert.yaml" 
 
 ### Getting started with Serving
 
-Deploy your first app with the [getting started with Knative app deployment](../serving/getting-started-knative-app.md) guide.  You can also find a number of samples for Knative Serving [here](../eventing/samples/).
+Deploy your first app with the [getting started with Knative app deployment](../serving/getting-started-knative-app.md) guide.  You can also find a number of samples for Knative Serving [here](../serving/samples/).
 
 
 ## Installing the Eventing component
