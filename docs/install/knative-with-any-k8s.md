@@ -351,18 +351,10 @@ The following commands install the Knative Eventing component.
    kubectl apply --filename {{< artifact repo="eventing" file="eventing-core.yaml" >}}
    ```
 
-1. Install a default Channel (messaging) layer.
+1. Install a default Channel (messaging) layer (alphabetical).
 
    <!-- This indentation is important for things to render properly. -->
    {{< tabs name="eventing_channels" default="In-Memory (standalone)" >}}
-{{% tab name="In-Memory (standalone)" %}}
-The following command installs an implementation of Channel that runs in-memory.  This implementation is nice because it is simple and standalone, but it is unsuitable for production use cases.
-
-   ```bash
-   kubectl apply --filename {{< artifact repo="eventing" file="in-memory-channel.yaml" >}}
-   ```
-
-{{< /tab >}}
 
 {{% tab name="Apache Kafka Channel" %}}
 
@@ -371,12 +363,21 @@ The following command installs an implementation of Channel that runs in-memory.
 1. Then install the Apache Kafka Channel:
 
    ```bash
-   curl -L "https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/kafka-channel.yaml" \
+   curl -L "{{< artifact repo="eventing-contrib" file="kafka-channel.yaml" >}}" \
     | sed 's/REPLACE_WITH_CLUSTER_URL/my-cluster-kafka-bootstrap.kafka:9092/' \
     | kubectl apply --filename -
    ```
 
 To learn more about the Apache Kafka channel, try [our sample](../eventing/samples/kafka/channel/README.md)
+
+{{< /tab >}}
+
+{{% tab name="In-Memory (standalone)" %}}
+The following command installs an implementation of Channel that runs in-memory.  This implementation is nice because it is simple and standalone, but it is unsuitable for production use cases.
+
+   ```bash
+   kubectl apply --filename {{< artifact repo="eventing" file="in-memory-channel.yaml" >}}
+   ```
 
 {{< /tab >}}
 
@@ -387,7 +388,7 @@ To learn more about the Apache Kafka channel, try [our sample](../eventing/sampl
 1. Then install the NATS Streaming Channel:
 
    ```bash
-   kubectl apply --filename https://github.com/knative/eventing-contrib/releases/download/{{< version >}}/natss-channel.yaml
+   kubectl apply --filename {{< artifact repo="eventing-contrib" file="natss-channel.yaml" >}}
    ```
 
 {{< /tab >}}
@@ -397,7 +398,7 @@ To learn more about the Apache Kafka channel, try [our sample](../eventing/sampl
 
 {{< /tabs >}}
 
-1. Install a default Broker (eventing) layer into a namespace (in this example, default):
+1. Install a default Broker (eventing) layer:
 
    <!-- This indentation is important for things to render properly. -->
    {{< tabs name="eventing_brokers" default="Channel-based" >}}
@@ -405,7 +406,7 @@ To learn more about the Apache Kafka channel, try [our sample](../eventing/sampl
 The following command installs an implementation of Broker that utilizes Channels:
 
    ```bash
-   kubectl apply --filename https://github.com/knative/eventing/releases/download/{{< version >}}/channel-broker.yaml
+   kubectl apply --filename {{< artifact repo="eventing" file="channel-broker.yaml" >}}
    ```
 
 To customize which channel implementation is used, update the following ConfigMap:
