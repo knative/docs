@@ -565,7 +565,7 @@ To learn more about the GCP Pub/Sub source, try [our sample](../eventing/samples
 
 ### Getting started with Eventing
 
-You can find a number of sample on how to get started with Knative Eventing [here](../eventing/).
+You can find a number of samples for Knative Eventing [here](../eventing/samples/README.md). A quick-start guide is available [here](../eventing/getting-started.md).
 
 
 ## Installing the Monitoring bundle
