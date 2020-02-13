@@ -52,14 +52,14 @@ We also use a very simple
 trivial transformation of the incoming events to demonstrate they have passed
 through each stage.
 
-### [Sequence with no reply (terminal last Step)](./samples/sequence/sequence-terminal/README.md)
+### [Sequence with no reply (terminal last Step)](../samples/sequence/sequence-terminal/README.md)
 
 For the first example, we'll use a 3 Step `Sequence` that is wired directly into
 the `CronJobSource`. Each of the steps simply tacks on "- Handled by
 <STEP NUMBER>", for example the first Step in the `Sequence` will take the
 incoming message and append "- Handled by 0" to the incoming message.
 
-### [Sequence with reply (last Step produces output)](./samples/sequence/sequence-reply-to-event-display/README.md)
+### [Sequence with reply (last Step produces output)](../samples/sequence/sequence-reply-to-event-display/README.md)
 
 For the next example, we'll use the same 3 Step `Sequence` that is wired
 directly into the `CronJobSource`. Each of the steps simply tacks on "- Handled
@@ -69,7 +69,7 @@ incoming message and append "- Handled by 0" to the incoming message.
 The only difference is that we'll use the `Subscriber.Spec.Reply` field to wire
 the output of the last Step to an event display pod.
 
-### [Chaining Sequences together](./samples/sequence/sequence-reply-to-sequence/README.md)
+### [Chaining Sequences together](../samples/sequence/sequence-reply-to-sequence/README.md)
 
 For the next example, we'll use the same 3 Step `Sequence` that is wired
 directly into the `CronJobSource`. Each of the steps simply tacks on "- Handled
@@ -80,7 +80,7 @@ The only difference is that we'll use the `Subscriber.Spec.Reply` field to wire
 the output of the last Step to another `Sequence` that does the smae message
 modifications as the first pipeline (with different steps however).
 
-### [Using Sequence with Broker/Trigger model](./samples/sequence/sequence-with-broker-trigger/README.md)
+### [Using Sequence with Broker/Trigger model](../samples/sequence/sequence-with-broker-trigger/README.md)
 
 You can also create a Trigger which targets `Sequence`. This time we'll wire
 `CronJobSource` to send events to a `Broker` and then we'll have the `Sequence`
