@@ -1,6 +1,6 @@
 ---
 title: "Event Delivery"
-weight: 20
+weight: 40
 type: "docs"
 ---
 
