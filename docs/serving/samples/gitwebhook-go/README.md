@@ -33,7 +33,7 @@ You must meet the following requirements to run this sample:
 
    ```shell
    git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
-   cd knative-docs/serving/samples/gitwebhook-go
+   cd knative-docs/docs/serving/samples/gitwebhook-go
    ```
 
 1. Use Docker to build a container image for this service. Replace
