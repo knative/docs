@@ -225,7 +225,7 @@ The CloudPubSubSource fires a new event each time a message is published on a
   The value of the secret entry must be a service account key in the JSON format (see https://cloud.google.com/iam/docs/creating-managing-service-account-keys). Defaults to secret.name of 'google-cloud-key' and secret.key of 'key.json'.
 - `project`: `string` ID of the Google Cloud Project that the Pub/Sub Topic exists in. If omitted uses the Project ID from the GKE cluster metadata service.
 
-See the [CloudPubSubSource](samples/cloudpubsubsource) example.
+See the [CloudPubSubSource](samples/cloud-pubsub-source) example.
 
 ### CloudStorageSource
 
@@ -245,7 +245,7 @@ Brings those events into Knative.
   The value of the secret entry must be a service account key in the JSON format (see https://cloud.google.com/iam/docs/creating-managing-service-account-keys). Defaults to secret.name of 'google-cloud-key' and secret.key of 'key.json'.
 - `project`: `string` ID of the Google Cloud Project that the Pub/Sub Topic exists in. If omitted uses the Project ID from the GKE cluster metadata service.
 
-See the [CloudStorageSource](samples/cloudstoragesource) example.
+See the [CloudStorageSource](samples/cloud-storage-source) example.
 
 ### CloudSchedulerSource
 
@@ -266,7 +266,7 @@ When those jobs are triggered, receive the event inside Knative.
   The value of the secret entry must be a service account key in the JSON format (see https://cloud.google.com/iam/docs/creating-managing-service-account-keys). Defaults to secret.name of 'google-cloud-key' and secret.key of 'key.json'.
 - `project`: `string` ID of the Google Cloud Project that the Pub/Sub Topic exists in. If omitted uses the Project ID from the GKE cluster metadata service.
 
-See the [CloudSchedulerSource](samples/cloudschedulersource) example.
+See the [CloudSchedulerSource](samples/cloud-scheduler-source) example.
 
 ### CloudAuditLogsSource
 
@@ -286,7 +286,7 @@ Registers for events of the specified types on the specified [Google Cloud Audit
   The value of the secret entry must be a service account key in the JSON format (see https://cloud.google.com/iam/docs/creating-managing-service-account-keys). Defaults to secret.name of 'google-cloud-key' and secret.key of 'key.json'.
 - `project`: `string` ID of the Google Cloud Project that the Pub/Sub Topic exists in. If omitted uses the Project ID from the GKE cluster metadata service.
 
-See the [CloudAuditLogsSource](samples/cloudauditlogssource) example.
+See the [CloudAuditLogsSource](samples/cloud-audit-logs-source) example.
 
 ### AwsSqsSource
 
