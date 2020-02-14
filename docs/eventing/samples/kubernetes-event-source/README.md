@@ -1,12 +1,12 @@
 ---
-title: "Kubernetes Api Server Source"
+title: "API Server Source"
 linkTitle: "Kubernetes event"
 weight: 50
 type: "docs"
 ---
 
-Kubernetes Event Source example shows how to wire Kubernetes cluster events for
-consumption by a function that has been implemented as a Knative Service. 
+This example shows how to wire [Kubernetes cluster events](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.17/#event-v1-core), using the API Server Source, for
+consumption by a function that has been implemented as a Knative Service.
 
 ## Before you begin
 
@@ -244,7 +244,7 @@ Data,
 ### Cleanup
 
 You can remove the `ServiceAccount`, `ClusterRoles`, `ClusterRoleBinding`,
-`ApiSeverSource`, `Service` and `Trigger` via:
+`ApiServerSource`, `Service` and `Trigger` via:
 
 ```shell
 kubectl --namespace default delete --filename serviceaccount.yaml
