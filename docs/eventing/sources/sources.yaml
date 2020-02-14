@@ -30,7 +30,7 @@ metaSources:
     support: Knative
     description: >
       Used as reference implementation supporting
-      [Writing an Event Source from Scratch tutorial](../samples/writing-ra-source).
+      [Writing an Event Source from Scratch tutorial](../samples/writing-receive-adapter-source).
 
 
 # Sources are event sources that users can install and use directly.
