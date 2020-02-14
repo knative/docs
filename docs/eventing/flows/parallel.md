@@ -2,6 +2,8 @@
 title: "Parallel"
 weight: 20
 type: "docs"
+aliases:
+   - /docs/eventing/parallel.md
 ---
 
 Parallel CRD provides a way to easily define a list of branches, each receiving
