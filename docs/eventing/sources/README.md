@@ -1,7 +1,7 @@
 ---
 title: "Knative Eventing sources"
-linkTitle: "Sources"
-weight: 10
+linkTitle: "Eventing sources"
+weight: 20
 type: "docs"
 ---
 
@@ -46,8 +46,6 @@ Name | Status | Support | Description
 [Cron Job](https://github.com/knative/eventing/blob/master/pkg/apis/sources/v1alpha1/cron_job_types.go) | Proof of Concept | None | Uses an in-memory timer to produce events on the specified Cron schedule.
 [GitHub](https://github.com/knative/eventing-contrib/blob/master/github/pkg/apis/sources/v1alpha1/githubsource_types.go) | Proof of Concept | None | Registers for events of the specified types on the specified GitHub organization/repository. Brings those events into Knative.
 [GitLab](https://gitlab.com/triggermesh/gitlabsource) | Proof of Concept | None | Registers for events of the specified types on the specified GitLab repository. Brings those events into Knative.
-[Google Cloud Scheduler](https://github.com/google/knative-gcp/blob/master/pkg/apis/events/v1alpha1/scheduler_types.go) | Active Development | None | Create, update, and delete [Google Cloud Scheduler](https://cloud.google.com/scheduler/) Jobs. When those jobs are triggered, receive the event inside Knative.
-[Google Cloud Storage](https://github.com/google/knative-gcp/blob/master/pkg/apis/events/v1alpha1/storage_types.go) | Active Development | None | Registers for events of the specified types on the specified Google Cloud Storage bucket and optional object prefix. Brings those events into Knative.
 [Kubernetes](https://github.com/knative/eventing/blob/master/pkg/apis/sources/v1alpha1/apiserver_types.go) | Active Development | Knative | Brings Kubernetes API server events into Knative.
 
 

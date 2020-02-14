@@ -562,10 +562,13 @@ The following command installs the GCP Sources:
    kubectl apply --filename {{< artifact repo="knative-gcp" file="cloud-run-events.yaml" >}}
    ```
 
-To learn more about the Cloud Pub/Sub source, try [our sample](../eventing/samples/cloud-pubsub-source/README.md)
-To learn more about the Cloud Storage source, try [our sample](../eventing/samples/cloud-storage-source/README.md)
-To learn more about the Cloud Scheduler source, try [our sample](../eventing/samples/cloud-scheduler-source/README.md)
-To learn more about the Cloud Audit Logs source, try [our sample](../eventing/samples/cloud-audit-logs-source/README.md)
+To learn more about the Cloud Pub/Sub source, try [our sample](../eventing/samples/cloud-pubsub-source/README.md).
+
+To learn more about the Cloud Storage source, try [our sample](../eventing/samples/cloud-storage-source/README.md).
+
+To learn more about the Cloud Scheduler source, try [our sample](../eventing/samples/cloud-scheduler-source/README.md).
+
+To learn more about the Cloud Audit Logs source, try [our sample](../eventing/samples/cloud-audit-logs-source/README.md).
 
 {{< /tab >}}
 
