@@ -398,6 +398,19 @@ To learn more about the Apache Kafka channel, try [our sample](../eventing/sampl
 
 {{< /tab >}}
 
+{{% tab name="Google Cloud Pub/Sub Channel" %}}
+
+1. Install the Google Cloud Pub/Sub Channel:
+
+   ```bash
+   # This installs both the Channel and the Source.
+   kubectl apply --filename {{< artifact org="google" repo="knative-gcp" file="cloud-run-events.yaml" >}}
+   ```
+
+To learn more about the Google Cloud Pub/Sub Channel, try [our sample](https://github.com/google/knative-gcp/blob/master/docs/examples/channel/README.md)
+
+{{< /tab >}}
+
 {{% tab name="In-Memory (standalone)" %}}
 
 {{< feature-state version="v0.2" state="alpha" >}}
@@ -423,7 +436,6 @@ The following command installs an implementation of Channel that runs in-memory.
 {{< /tab >}}
 
 <!-- TODO(https://github.com/knative/docs/issues/2153): Add more Channels here -->
-<!-- TODO: GCP Pub/Sub Channel -->
 
 {{< /tabs >}}
 
@@ -547,7 +559,7 @@ The following command installs the GCP Pub/Sub Source:
 
    ```bash
    # This installs both the Source and the Channel.
-   kubectl apply --filename https://github.com/google/knative-gcp/releases/download/{{< version >}}/cloud-run-events.yaml
+   kubectl apply --filename {{< artifact org="google" repo="knative-gcp" file="cloud-run-events.yaml" >}}
    ```
 
 To learn more about the GCP Pub/Sub source, try [our sample](../eventing/samples/gcp-pubsub-source/README.md)
