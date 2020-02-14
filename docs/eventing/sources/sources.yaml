@@ -104,20 +104,6 @@ sources:
     support: Knative
     description: >
       Brings Kubernetes API server events into Knative.
-  - name: Google Cloud Scheduler
-    url: https://github.com/google/knative-gcp/blob/master/pkg/apis/events/v1alpha1/scheduler_types.go
-    status: Active Development
-    support: None
-    description: >
-      Create, update, and delete [Google Cloud Scheduler](https://cloud.google.com/scheduler/)
-      Jobs. When those jobs are triggered, receive the event inside Knative.
-  - name: Google Cloud Storage
-    url: https://github.com/google/knative-gcp/blob/master/pkg/apis/events/v1alpha1/storage_types.go
-    status: Active Development
-    support: None
-    description: >
-      Registers for events of the specified types on the specified Google Cloud Storage bucket and
-      optional object prefix. Brings those events into Knative.
   - name: Apache Kafka
     url: https://github.com/knative/eventing-contrib/blob/master/kafka/source/pkg/apis/sources/v1alpha1/kafka_types.go
     status: Proof of Concept
