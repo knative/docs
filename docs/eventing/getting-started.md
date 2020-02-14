@@ -27,7 +27,7 @@ To complete this guide, you will need the following installed and running:
 
 - Knative Eventing component.
 
-- Knative Eventing in-memory channel.
+  - Knative Eventing in-memory channel.
 
 **Important Note:** Some Knative Eventing features do not work when using Minikube due to [this](https://github.com/kubernetes/minikube/issues/1568) bug. For local testing you can use [kind](https://github.com/kubernetes-sigs/kind).
 
