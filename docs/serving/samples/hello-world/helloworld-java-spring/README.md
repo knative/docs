@@ -14,8 +14,8 @@ cluster. You can also download a working copy of the sample, by running the
 following commands:
 
 ```shell
-git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs cd
-knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
+git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
+cd knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
 ```
 
 ## Before you begin
@@ -64,20 +64,20 @@ knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
    @SpringBootApplication
    public class HelloworldApplication {
 
-      @Value("${TARGET:World}")
-      String target;
+     @Value("${TARGET:World}")
+     String target;
 
-      @RestController
-      class HelloworldController {
-          @GetMapping("/")
-          String hello() {
-              return "Hello " + target + "!";
-          }
-      }
+     @RestController
+     class HelloworldController {
+       @GetMapping("/")
+       String hello() {
+         return "Hello " + target + "!";
+       }
+     }
 
-      public static void main(String[] args) {
-          SpringApplication.run(HelloworldApplication.class, args);
-      }
+     public static void main(String[] args) {
+       SpringApplication.run(HelloworldApplication.class, args);
+     }
    }
    ```
 
@@ -119,7 +119,7 @@ knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
    COPY --from=builder /app/target/helloworld-*.jar /helloworld.jar
 
    # Run the web service on container startup.
-   CMD ["java","-Djava.security.egd=file:/dev/./urandom","-Dserver.port=${PORT}","-jar","/helloworld.jar"]
+   CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/helloworld.jar"]
    ```
 
 1. Create a new file, `service.yaml` and copy the following service definition

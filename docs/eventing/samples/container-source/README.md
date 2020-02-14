@@ -100,9 +100,10 @@ spec:
             - name: POD_NAMESPACE
               value: "event-test"
   sink:
-    apiVersion: serving.knative.dev/v1
-    kind: Service
-    name: event-display
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: event-display
 ```
 
 Use the following command to create the event source from

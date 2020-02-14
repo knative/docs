@@ -1,6 +1,6 @@
 ---
 title: "Event Delivery"
-weight: 20
+weight: 40
 type: "docs"
 ---
 
@@ -44,7 +44,7 @@ The `deadLetterSink` specifies where to send events that failed be consumed by `
 When present, events that failed to be consumed are sent to the `deadLetterSink`.
 In case of failure, the event is dropped and an error is logged into the system.
 
-The `deadLetterSink` value must be a [Destination](https://godoc.org/knative.dev/pkg/apis/duck/v1#Destination).
+The `deadLetterSink` value must be a [Destination](https://pkg.go.dev/knative.dev/pkg/apis/duck/v1#Destination).
 
 ```yaml
 spec:

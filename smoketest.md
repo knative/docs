@@ -1,6 +1,6 @@
 # Spacer Title
 
-<br>
+<br><br>
 
 # Hidden smoketest page
 
@@ -65,3 +65,19 @@ added in-line with the
 
    Example:
    `git clone -b "{{% branch override="release-0.NEXT" %}}" https://github.com/knative/docs knative-docs`
+
+## Tabs
+
+How to include tabbed content in your page. Note that you can set a default tab.
+
+(View the raw version of this page for example syntax; it doesn't render well here.)
+
+   {{< tabs name="tabs_example" default="Include example" >}}
+{{% tab name="Regular example" %}}
+This is a regular example tab.
+{{< /tab >}}
+
+{{% tab name="Include example" %}}
+{{% readfile file="./docs/install/README.md" %}}
+{{< /tab >}}
+{{< /tabs >}}

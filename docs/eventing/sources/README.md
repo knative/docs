@@ -1,7 +1,7 @@
 ---
 title: "Knative Eventing sources"
-linkTitle: "Eventing sources"
-weight: 20
+linkTitle: "Sources"
+weight: 10
 type: "docs"
 ---
 
@@ -39,8 +39,11 @@ Name | Status | Support | Description
 [Apache CouchDB](https://github.com/knative/eventing-contrib/tree/{{< branch >}}/couchdb) | Active Development | None | Brings [Apache CouchDB](https://couchdb.apache.org/) messages into Knative.
 [Apache Kafka](https://github.com/knative/eventing-contrib/blob/master/kafka/source/pkg/apis/sources/v1alpha1/kafka_types.go) | Proof of Concept | None | Brings [Apache Kafka](https://kafka.apache.org/) messages into Knative.
 [BitBucket](https://github.com/nachocano/bitbucket-source) | Proof of Concept | None | Registers for events of the specified types on the specified BitBucket organization/repository. Brings those events into Knative.
+[CloudAuditLogsSource](https://github.com/google/knative-gcp/blob/master/docs/examples/cloudauditlogssource/README.md) | Active Development | None | Registers for events of the specified types on the specified [Google Cloud Audit Logs](https://cloud.google.com/logging/docs/audit/). Brings those events into Knative.
+[CloudPubSubSource](https://github.com/google/knative-gcp/blob/master/docs/examples/cloudpubsubsource/README.md) | Active Development | None | Brings [Cloud Pub/Sub](https://cloud.google.com/pubsub/) messages into Knative.
+[CloudSchedulerSource](https://github.com/google/knative-gcp/blob/master/docs/examples/cloudschedulersource/README.md) | Active Development | None | Create, update, and delete [Google Cloud Scheduler](https://cloud.google.com/scheduler/) Jobs. When those jobs are triggered, receive the event inside Knative.
+[CloudStorageSource](https://github.com/google/knative-gcp/blob/master/docs/examples/cloudstoragesource/README.md) | Active Development | None | Registers for events of the specified types on the specified [Google Cloud Storage](https://cloud.google.com/storage/) bucket and optional object prefix. Brings those events into Knative.
 [Cron Job](https://github.com/knative/eventing/blob/master/pkg/apis/sources/v1alpha1/cron_job_types.go) | Proof of Concept | None | Uses an in-memory timer to produce events on the specified Cron schedule.
-[GCP PubSub](https://github.com/google/knative-gcp/blob/master/pkg/apis/events/v1alpha1/pubsub_types.go) | Proof of Concept | None | Brings [GCP PubSub](https://cloud.google.com/pubsub/) messages into Knative.
 [GitHub](https://github.com/knative/eventing-contrib/blob/master/github/pkg/apis/sources/v1alpha1/githubsource_types.go) | Proof of Concept | None | Registers for events of the specified types on the specified GitHub organization/repository. Brings those events into Knative.
 [GitLab](https://gitlab.com/triggermesh/gitlabsource) | Proof of Concept | None | Registers for events of the specified types on the specified GitLab repository. Brings those events into Knative.
 [Google Cloud Scheduler](https://github.com/google/knative-gcp/blob/master/pkg/apis/events/v1alpha1/scheduler_types.go) | Active Development | None | Create, update, and delete [Google Cloud Scheduler](https://cloud.google.com/scheduler/) Jobs. When those jobs are triggered, receive the event inside Knative.

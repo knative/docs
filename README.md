@@ -27,7 +27,7 @@ reading about how to contribute to the docs, you should take a moment to learn
 about the Knative code of conduct, governance, values, and the various working
 groups and committees.
 
-[Knative community and contributor guidelines](https://knative.dev/contributing/)
+[Knative community and contributor guidelines](https://knative.dev/community/contributing/)
 
 Source files for all Knative community and governance topics are located
 separately in the [knative/community](https://github.com/knative/community/)

@@ -98,8 +98,7 @@ event sources. Sources manage registration and delivery of events from external
 systems using Kubernetes
 [Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
 Learn more about Eventing development in the
-
-- [Eventing work group](../../contributing/WORKING-GROUPS.md#eventing).
+[Eventing work group](https://github.com/knative/community/tree/master/WORKING-GROUPS.md#eventing).
 
 ## Installation
 
@@ -157,22 +156,11 @@ If your code needs to send events as part of its business logic and doesn't fit
 the model of a Source, consider
 [feeding events directly to a Broker](https://knative.dev/docs/eventing/broker-trigger/#manual).
 
-### KubernetesEventSource
+### APIServerSource
 
-The KubernetesEventSource fires a new event each time a
-[Kubernetes Event](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#event-v1-core)
-is created or updated.
+The APIServerSource fires a new event each time a Kubernetes resource is created, updated or deleted.
 
-**Spec fields**:
-
-- `namespace`: `string` The namespace to watch for events.
-- `serviceAccountname`: `string` The name of the ServiceAccount used to connect
-  to the Kubernetes apiserver.
-- `sink`:
-  [ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#objectreference-v1-core)
-  A reference to the object that should receive events.
-
-See the [Kubernetes Event Source](samples/kubernetes-event-source) example.
+See the [Kubernetes API Server Source](samples/kubernetes-event-source) example.
 
 ### GitHubSource
 

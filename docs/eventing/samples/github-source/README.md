@@ -116,7 +116,7 @@ field to the spec specifying your GitHub enterprise API endpoint, see
 [here](../../README.md#githubsource)
 
 ```yaml
-apiVersion: sources.eventing.knative.dev/v1alpha1
+apiVersion: sources.knative.dev/v1alpha1
 kind: GitHubSource
 metadata:
   name: githubsourcesample
