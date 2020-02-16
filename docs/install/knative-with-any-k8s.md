@@ -403,8 +403,8 @@ To learn more about the Apache Kafka channel, try [our sample](../eventing/sampl
 1. Install the Google Cloud Pub/Sub Channel:
 
    ```bash
-   # This installs both the Channel and the Source.
-   kubectl apply --filename {{< artifact repo="knative-gcp" file="cloud-run-events.yaml" >}}
+   # This installs both the Channel and the GCP Sources.
+   kubectl apply --filename {{< artifact org="google" repo="knative-gcp" file="cloud-run-events.yaml" >}}
    ```
 
 To learn more about the Google Cloud Pub/Sub Channel, try [our sample](https://github.com/google/knative-gcp/blob/master/docs/examples/channel/README.md)
@@ -551,18 +551,24 @@ To learn more about the Apache Kafka source, try [our sample](../eventing/sample
 
 {{< /tab >}}
 
-{{% tab name="GCP Pub/Sub Source" %}}
+{{% tab name="GCP Sources" %}}
 
 {{< feature-state version="v0.2" state="alpha" >}}
 
-The following command installs the GCP Pub/Sub Source:
+The following command installs the GCP Sources:
 
    ```bash
-   # This installs both the Source and the Channel.
-   kubectl apply --filename {{< artifact repo="knative-gcp" file="cloud-run-events.yaml" >}}
+   # This installs both the Sources and the Channel.
+   kubectl apply --filename {{< artifact org="google" repo="knative-gcp" file="cloud-run-events.yaml" >}}
    ```
 
-To learn more about the GCP Pub/Sub source, try [our sample](../eventing/samples/gcp-pubsub-source/README.md)
+To learn more about the Cloud Pub/Sub source, try [our sample](../eventing/samples/cloud-pubsub-source/README.md).
+
+To learn more about the Cloud Storage source, try [our sample](../eventing/samples/cloud-storage-source/README.md).
+
+To learn more about the Cloud Scheduler source, try [our sample](../eventing/samples/cloud-scheduler-source/README.md).
+
+To learn more about the Cloud Audit Logs source, try [our sample](../eventing/samples/cloud-audit-logs-source/README.md).
 
 {{< /tab >}}
 

@@ -136,6 +136,6 @@ If the age of all your pods has been reset and all pods are up and running, the
 upgrade was completed successfully. You might notice a status of "Terminating"
 for the old pods as they are cleaned up.
 
-If necessary, repeat the upgrade process until your reach your desired minor
+If necessary, repeat the upgrade process until you reach your desired minor
 version number.
 
