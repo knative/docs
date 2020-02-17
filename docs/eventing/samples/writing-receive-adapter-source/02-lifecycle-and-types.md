@@ -13,6 +13,10 @@ well as what will be referenced in the controller using the source’s
 clientset and API
 
 ```go
+// +genclient
+// +genreconciler
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+// +k8s:openapi-gen=true
 type SampleSource struct {
 	metav1.TypeMeta `json:",inline"`
 	// +optional

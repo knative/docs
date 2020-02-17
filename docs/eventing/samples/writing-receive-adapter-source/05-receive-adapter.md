@@ -80,10 +80,10 @@ Verify the specified kubernetes resources are valid, and update the `Status` acc
 Assemble the ReceiveAdapterArgs
 ```go
 raArgs := resources.ReceiveAdapterArgs{
+		EventSource:   eventSource,
 		Image:         r.receiveAdapterImage,
 		Source:        src,
 		Labels:        resources.GetLabels(src.Name),
-		LoggingConfig: loggingConfig,
 		SinkURI:       sinkURI,
 	}
 ```

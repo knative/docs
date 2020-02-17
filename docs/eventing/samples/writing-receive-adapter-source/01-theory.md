@@ -59,7 +59,7 @@ Used for source &mdash; in this case, `samplesource` &mdash; specific config and
 To ease writing a new event source, the eventing subsystem has offloaded several core functionalities (via injection) to the `eventing-sources-controller`.
 
 
-![Simplified Controller](simplified-controller.png)
+![Simplified Controller](../simplified-controller.png)
 
 Fig 1. - Via shared [Knative Dependency Injection](https://docs.google.com/presentation/d/1aK5xCBv7wbfdDZAvnUE4vGWGk77EYZ6AbL0OR1vKPq8/edit#slide=id.g596dcbbefb_0_40)
 
