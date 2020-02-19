@@ -18,17 +18,13 @@ import (
 )
 
 func main() {
-	sharedmain.Main("sample-sourcecontroller",
-		reconciler.NewController,
+	sharedmain.Main("sample-source-controller",
+		reconciler.NewController
 	)
 }
 ```
 Define the NewController implementation, it will be passed a configmap.Watcher, as well as a context which the injected listers will use for the reconciler struct arguments
 ```go
-const (
-	controllerAgentName = "sample-source-controller"
-)
-
 func NewController(
 	ctx context.Context,
 	cmw configmap.Watcher,
@@ -37,7 +33,8 @@ func NewController(
 	sampleSourceInformer := samplesourceinformer.Get(ctx)
 
 	r := &Reconciler{
-		Base:                  reconciler.NewBase(ctx, controllerAgentName, cmw),
+		KubeClientSet:         kubeclient.Get(ctx),
+		EventingClientSet:     eventingclient.Get(ctx),
 		samplesourceLister:    sampleSourceInformer.Lister(),
 		deploymentLister:      deploymentInformer.Lister(),
 		samplesourceClientSet: samplesourceClient.Get(ctx),
