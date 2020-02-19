@@ -175,20 +175,19 @@ message sent by the heartbeats source to the display function:
 ☁️  cloudevents.Event
 Validation: valid
 Context Attributes,
-  specversion: 0.3
+  specversion: 1.0
   type: dev.knative.eventing.samples.heartbeat
-  source: https://knative.dev/eventing-contrib/cmd/heartbeats/#event-test/mypod
-  id: 2b72d7bf-c38f-4a98-a433-608fbcdd2596
-  time: 2019-10-18T15:23:20.809775386Z
-  contenttype: application/json
+  source: https://knative.dev/eventing-contrib/cmd/heartbeats/#default/heartbeat-cron-1582120020-75qrz
+  id: 5f4122be-ac6f-4349-a94f-4bfc6eb3f687
+  time: 2020-02-19T13:47:10.41428688Z
+  datacontenttype: application/json
 Extensions,
   beats: true
   heart: yes
-  sink: bound
   the: 42
 Data,
   {
-    "id": 2,
+    "id": 1,
     "label": ""
   }
 ```
