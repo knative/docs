@@ -19,6 +19,11 @@ You can update the configuration file for tracing in [config-tracing.yaml](https
 
 Follow the instructions in the file to set your configuration options. This file includes options such as sample rate (to determine what percentage of requests to trace), debug mode, and backend selection (zipkin or stackdriver).
 
+You can quickly explore and update the ConfigMap object with the following command:
+```shell
+kubectl -n knative-serving edit configmap config-tracing
+```
+
 ## Zipkin
 
 In order to access request traces, you use the Zipkin visualization tool.
@@ -61,5 +66,3 @@ In order to access request traces, you use the Jaeger visualization tool.
     traces. Click on a trace to see a detailed view of a specific call.
 
 <!--TODO: Consider adding a video here. -->
-
-
