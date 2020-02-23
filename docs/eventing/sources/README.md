@@ -69,12 +69,12 @@ These are containers intended to be used with `ContainerSource`.
 
 Name | Status | Support | Description
 --- | --- | --- | ---
-[AWS CodeCommit](https://github.com/triggermesh/knative-lambda-sources/tree/master/awscodecommit) | Active Development | TriggerMesh | Registers for events of the specified types on the specified AWS CodeCommit repository. Brings those events into Knative.
-[AWS Cognito](https://github.com/triggermesh/knative-lambda-sources/tree/master/awscognito) | Active Development | TriggerMesh | Registers for AWS Cognito events. Brings those events into Knative.
-[AWS DynamoDB](https://github.com/triggermesh/knative-lambda-sources/tree/master/awsdynamodb) | Active Development | TriggerMesh | Registers for events of on the specified AWS DynamoDB table. Brings those events into Knative.
-[AWS Kinesis](https://github.com/triggermesh/knative-lambda-sources/tree/master/awskinesis) | Active Development | TriggerMesh | Registers for events on the specified AWS Kinesis stream. Brings those events into Knative.
-[AWS SNS](https://github.com/triggermesh/knative-lambda-sources/tree/master/awssns) | Active Development | TriggerMesh | Registers for events of the specified AWS SNS endpoint. Brings those events into Knative.
-[AWS SQS](https://github.com/triggermesh/knative-lambda-sources/tree/master/awssqs) | Active Development | TriggerMesh | Registers for events of the specified AWS SQS queue. Brings those events into Knative.
+[AWS CodeCommit](https://github.com/triggermesh/knative-lambda-sources/tree/master/awscodecommit) | Supported | TriggerMesh | Registers for events of the specified types on the specified AWS CodeCommit repository. Brings those events into Knative.
+[AWS Cognito](https://github.com/triggermesh/knative-lambda-sources/tree/master/awscognito) | Supported | TriggerMesh | Registers for AWS Cognito events. Brings those events into Knative.
+[AWS DynamoDB](https://github.com/triggermesh/knative-lambda-sources/tree/master/awsdynamodb) | Supported | TriggerMesh | Registers for events of on the specified AWS DynamoDB table. Brings those events into Knative.
+[AWS Kinesis](https://github.com/triggermesh/knative-lambda-sources/tree/master/awskinesis) | Supported | TriggerMesh | Registers for events on the specified AWS Kinesis stream. Brings those events into Knative.
+[AWS SNS](https://github.com/triggermesh/knative-lambda-sources/tree/master/awssns) | Supported | TriggerMesh | Registers for events of the specified AWS SNS endpoint. Brings those events into Knative.
+[AWS SQS](https://github.com/triggermesh/knative-lambda-sources/tree/master/awssqs) | Supported | TriggerMesh | Registers for events of the specified AWS SQS queue. Brings those events into Knative.
 [FTP / SFTP](https://github.com/vaikas-google/ftp) | Proof of concept | None | Watches for files being uploaded into a FTP/SFTP and generates events for those.
 [Heartbeat](https://github.com/Harwayne/auto-container-source/tree/master/heartbeat-source) | Proof of Concept | None | Uses an in-memory timer to produce events as the specified interval. Uses AutoContainerSource for underlying infrastructure.
 [Heartbeats](https://github.com/knative/eventing-contrib/tree/{{< branch >}}/cmd/heartbeats) | Proof of Concept | None | Uses an in-memory timer to produce events at the specified interval.
