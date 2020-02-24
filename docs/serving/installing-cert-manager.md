@@ -35,7 +35,7 @@ Use the following steps to download, install, and configure cert-manager for
 your Knative cluster environment:
 
 1. Follow the steps in the official `cert-manager` website to download and install cert-manager
-   
+
    [Installation steps](https://cert-manager.io/docs/installation/kubernetes/)
 
 1. Configure which DNS provider is used to validate the DNS-01 challenge
