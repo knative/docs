@@ -129,7 +129,7 @@ TLS certificates and how the requests are validated with Cloud DNS.
                 serviceAccountSecretRef:
                   name: cloud-dns-key
                   key: key.json
-    EOF  
+    EOF
    ```
 
 1. Ensure that `letsencrypt-issuer` is created successfully by running the
