@@ -147,7 +147,7 @@ and which DNS provider validates those requests.
 1.  If `networking-certmanager` is not found, run the following command:
 
     ```shell
-    kubectl apply --filename https://github.com/knative/serving/releases/download/v{{< version >}}/serving-cert-manager.yaml
+    kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving-cert-manager.yaml
     ```
 
 ### Install networking-ns-cert component
@@ -164,7 +164,7 @@ running the following command:
 1. If `networking-ns-cert` deployment is not found, run the following command:
 
     ```shell
-    kubectl apply --filename https://github.com/knative/serving/releases/download/v{{< version >}}/serving-nscert.yaml
+    kubectl apply --filename https://github.com/knative/serving/releases/download/{{< version >}}/serving-nscert.yaml
     ```
 
 ### Configure config-certmanager ConfigMap
