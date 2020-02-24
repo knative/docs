@@ -105,33 +105,31 @@ TLS certificates and how the requests are validated with Cloud DNS.
    provider info, including your `cert-manager-cloud-dns-admin` service account.
 
    ```shell
-   kubectl apply --filename - <<EOF
-   apiVersion: certmanager.k8s.io/v1alpha1
-   kind: ClusterIssuer
-   metadata:
-     name: letsencrypt-issuer
-     namespace: cert-manager
-   spec:
-     acme:
-       server: https://acme-v02.api.letsencrypt.org/directory
-       # This will register an issuer with LetsEncrypt.  Replace
-       # with your admin email address.
-       email: myemail@gmail.com
-       privateKeySecretRef:
-         # Set privateKeySecretRef to any unused secret name.
-         name: letsencrypt-issuer
-       dns01:
-         providers:
-         - name: cloud-dns-provider
-           clouddns:
-             # Set this to your GCP project-id
-             project: $PROJECT_ID
-             # Set this to the secret that we publish our service account key
-             # in the previous step.
-             serviceAccountSecretRef:
-               name: cloud-dns-key
-               key: key.json
-   EOF
+    kubectl apply --filename - <<EOF
+    apiVersion: cert-manager.io/v1alpha2
+    kind: ClusterIssuer
+    metadata:
+      name: letsencrypt-issuer
+    spec:
+      acme:
+        server: https://acme-v02.api.letsencrypt.org/directory
+        # This will register an issuer with LetsEncrypt.  Replace
+        # with your admin email address.
+        email: myemail@gmail.com
+        privateKeySecretRef:
+          # Set privateKeySecretRef to any unused secret name.
+          name: letsencrypt-issuer
+        solvers:
+        - dns01:
+              clouddns:
+                # Set this to your GCP project-id
+                project: $PROJECT_ID
+                # Set this to the secret that we publish our service account key
+                # in the previous step.
+                serviceAccountSecretRef:
+                  name: cloud-dns-key
+                  key: key.json
+    EOF  
    ```
 
 1. Ensure that `letsencrypt-issuer` is created successfully by running the
@@ -167,45 +165,23 @@ exists.
    where `<your-domain.com>` is your domain:
 
    ```shell
-   # Change this value to the domain you want to use.
-   export DOMAIN=<your-domain.com>
+  # Change this value to the domain you want to use.
+  export DOMAIN=<your-domain.com>
 
-   kubectl apply --filename - <<EOF
-   apiVersion: certmanager.k8s.io/v1alpha1
-   kind: Certificate
-   metadata:
-     name: my-certificate
-     # Istio certs secret lives in the istio-system namespace, and
-     # a cert-manager Certificate is namespace-scoped.
-     namespace: istio-system
-   spec:
-     # Reference to the Istio default cert secret.
-     secretName: istio-ingressgateway-certs
-     acme:
-       config:
-       # Each certificate could rely on different ACME challenge
-       # solver.  In this example we are using one provider for all
-       # the domains.
-       - dns01:
-           provider: cloud-dns-provider
-         domains:
-         # Since certificate wildcards only allow one level, we will
-         # need to one for every namespace that Knative is used in.
-         # We don't need to use wildcard here, fully-qualified domains
-         # will work fine too.
-         - "*.default.$DOMAIN"
-         - "*.other-namespace.$DOMAIN"
-     # The certificate common name, use one from your domains.
-     commonName: "*.default.$DOMAIN"
-     dnsNames:
-     # Provide same list as `domains` section.
-     - "*.default.$DOMAIN"
-     - "*.other-namespace.$DOMAIN"
-     # Reference to the ClusterIssuer we created in the previous step.
-     issuerRef:
-       kind: ClusterIssuer
-       name: letsencrypt-issuer
-   EOF
+  kubectl apply --filename - <<EOF
+  apiVersion: cert-manager.io/v1alpha2
+  kind: Certificate
+  metadata:
+    name: my-certificate
+    namespace: istio-system
+  spec:
+    secretName: istio-ingressgateway-certs
+    issuerRef:
+      name: letsencrypt-issuer
+    dnsNames:
+    - "*.default.$DOMAIN"
+    - "*.other-namespace.$DOMAIN"
+  EOF
    ```
 
 1. Ensure that `my-certificate` is created successfully by running the following
