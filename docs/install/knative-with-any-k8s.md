@@ -145,7 +145,7 @@ The following commands install Contour and enable its Knative integration.
 1. Fetch the External IP or CNAME:
 
    ```bash
-   kubectl --namespace projectcontour get service envoy-external
+   kubectl --namespace contour-external get service envoy
    ```
 
    Save this for configuring DNS below.
