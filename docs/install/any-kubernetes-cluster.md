@@ -573,7 +573,21 @@ To learn more about the Cloud Audit Logs source, try [our sample](../eventing/sa
 
 {{< /tab >}}
 
-<!-- TODO: couchdb source -->
+{{% tab name="CouchDB Source" %}}
+
+{{< feature-state version="v0.10" state="alpha" >}}
+
+The following command installs the CouchDB Source:
+
+   ```bash
+   kubectl apply --filename {{< artifact repo="eventing-contrib" file="couchdb.yaml" >}}
+   ```
+
+To learn more about the CouchDB source, read [our documentation]((https://github.com/knative/eventing-contrib/blob/{{< version >}}/couchdb/README.md)
+
+{{< /tab >}}
+
+
 <!-- TODO: prometheus source -->
 <!-- TODO: AWS SQS source  -->
 
