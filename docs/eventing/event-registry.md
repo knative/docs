@@ -1,5 +1,5 @@
 ---
-title: "Event Registry"
+title: "Event registry"
 weight: 40
 type: "docs"
 ---
