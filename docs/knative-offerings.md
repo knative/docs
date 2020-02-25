@@ -18,6 +18,7 @@ Here is a list of commercial Knative products (alphabetically):
 - [Managed Knative for IBM Cloud Kubernetes Service](https://cloud.ibm.com/docs/containers?topic=containers-serverless-apps-knative): is a managed add-on for the [IBM Kubernetes Service](https://cloud.ibm.com/docs/containers?topic=containers-getting-started) that enables you to deploy and manage Knative based services on your own Kubernetes cluster.
 - [Openshift Serverless](https://access.redhat.com/documentation/en-us/openshift_container_platform/4.3/html-single/serverless_applications/index): on OpenShift Container Platform enables stateful, stateless, and serverless workloads to all run on a single multi-cloud container platform with automated operations. Developers can use a single platform for hosting their microservices, legacy, and serverless applications.
 - [Pivotal Function Service (PFS)](https://docs.pivotal.io/pfs): is a platform for building and running functions, applications, and containers on Kubernetes. PFS is based on the [riff](https://projectriff.io) open source project.
+- [TriggerMesh Cloud](https://cloud.triggermesh.io): A fully-managed Knative and Tekton cloud-native integration platform. With support for AWS, Azure and Google event sources and brokers.
 
 <!-- TODO: In which category do we put SAP/Kyma? -->
 
