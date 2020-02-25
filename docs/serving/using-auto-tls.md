@@ -40,8 +40,8 @@ You must meet the following prerequisites to enable auto TLS:
 - The following must be installed on your Knative cluter:
   - [Knative Serving](../install/).
   - [Istio with SDS, version 1.3 or higher](../install/installing-istio.md#installing-istio-with-SDS-to-secure-the-ingress-gateway),
-    [Contour, version 1.1 or higher](../install/Knative-with-Contour.md),
-    or [Gloo, version 0.18.16 or higher](../install/Knative-with-Gloo.md).
+    [Contour, version 1.1 or higher](../install/any-kubernetes-cluster.md#installing-the-serving-component),
+    or [Gloo, version 0.18.16 or higher](https://docs.solo.io/gloo/latest/installation/knative/).
     Note: Currently, [Ambassador](https://github.com/datawire/ambassador) is unsupported.
   - [cert-manager version `0.12.0` or higher](./installing-cert-manager.md).
 - Your Knative cluster must be configured to use a
@@ -65,7 +65,7 @@ and which DNS provider validates those requests.
     Use the cert-manager reference to determine how to configure your
     `ClusterIssuer` file:
     - See the generic
-      [`ClusterIssuer` example](https://docs.cert-manager.io/en/latest/tasks/issuers/setup-acme.html#creating-a-basic-acme-issuer)
+      [`ClusterIssuer` example](https://cert-manager.io/docs/configuration/acme/#creating-a-basic-acme-issuer)
     - Also see the
       [`DNS01` example](https://docs.cert-manager.io/en/latest/tasks/acme/configuring-dns01/index.html)
 
