@@ -88,7 +88,7 @@ without automatic sidecar injection.
    - [Installing Istio without sidecar injection](#installing-istio-without-sidecar-injection)(Recommended
      default installation)
    - [Installing Istio with sidecar injection](#installing-istio-with-sidecar-injection)
-   - [Installing Istio with SDS to secure the ingress gateway](#installing-istio-with-SDS-to-secure-the-ingress-gateway)
+   - [Installing Istio with SDS to secure the ingress gateway](#installing-istio-with-sds-to-secure-the-ingress-gateway)
 
 #### Installing Istio without sidecar injection
 
