@@ -144,18 +144,22 @@ EOF
 **Note:** This method is only for development purposes. The production readiness of the above 
 installation method is not ensured. For a production-ready installation, see the `helm` installation method above.
 
-If you follow either of the above steps, your service and deployment for the local gateway are both named `cluster-local-gateway`,
-and you do not need to update gateway configmap `config-istio` under `knative-serving` namespace, because Knative Serving
-can by default use the local gateway with the name `cluster-local-gateway`.
+After you install the cluster local gateway, your service and deployment for the local gateway are both named `cluster-local-gateway`.
+You do not need to update the `config-istio` configmap under `knative-serving` namespace, because Knative Serving can use
+this local gateway cluster-local-gateway by default.
+
+### Updating the `config-istio` configmap to use a non-default local gateway
 
 However, if you create custom service and deployment for local gateway with a name other than `cluster-local-gateway`, you
-need to update gateway configmap `config-istio` under `knative-serving` namespace. Run the following command:
+need to update gateway configmap `config-istio` under `knative-serving` namespace.
+
+1. Run the following command:
 
 ```shell
 kubectl edit configmap config-istio -n knative-serving
 ```
 
-Replace the `local-gateway.knative-serving.cluster-local-gateway` field with the custom service. If you name both
+2. Replace the `local-gateway.knative-serving.cluster-local-gateway` field with the custom service. If you name both
 of the service and deployment after `custom-local-gateway` under the namespace `istio-system`, it should be updated to:
 
 ```
