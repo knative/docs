@@ -11,16 +11,15 @@ be created without specifying an underlying implementation. This is useful for
 users that do not care about the properties a particular channel provides (e.g.,
 ordering, persistence, etc.), but are rather fine with using the  
 implementation selected by the the operator. The operator controls the default
-settings via a `ConfigMap`. For example, when `Brokers` or `Sequences` are
-created, an operator can configure a default channel to use for their underlying
-channel-based implementations.
+settings via a `ConfigMap`. For example, an operator can configure which channels
+to use  when `Channel Based Brokers` or `Sequences` are created.
 
 Even though this default channel mechanism aims to ease the usability of the
 system, users can still create their own channels directly by instantiating one
 of the supported channel objects (e.g., `InMemoryChannel`, `KafkaChannel`,
 etc.).
 
-## Setting the default channel configuration
+## Setting the default channel configuration for messaging layer
 
 The default channel configuration is specified in the `ConfigMap` named
 `default-ch-webhook` in the `knative-eventing` namespace. This `ConfigMap` may
@@ -107,6 +106,6 @@ underlying `KafkaChannel` instead (i.e., the default for that namespace).
 
 ## Defaults only apply on object creation
 
-Defaults are applied by the webhook only on `Channel`, `Broker`, or `Sequence`
+Defaults are applied by the webhook only on `Channel`, or `Sequence`
 creation. If the default settings change, the new defaults will only apply to
 newly-created channels, brokers, or sequences. Existing ones will not change.
