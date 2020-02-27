@@ -18,8 +18,8 @@ of semantics around durability of events, performance, etc. The `Broker` that is
 part of the Knative Eventing repo is used for these examples, it uses Knative
 [Channels](./channels/) for delivering events. Simple example showing a `Broker`
 where the configuration is specified in a `ConfigMap` config-br-default-channel,
-which uses `InMemoryChannel` and delivers failed events to a dlq-service.
-You can read more details about [Channel Based Broker](./channel-based-broker.md)
+which uses `InMemoryChannel`. You can read more details about
+[Channel Based Broker](./channel-based-broker.md)
 
 Example:
 
@@ -33,15 +33,32 @@ spec:
   config:
     apiVersion: v1
     kind: ConfigMap
-	name: config-br-default-channel
+    name: config-br-default-channel
+    namespace: knative-eventing
+```
+
+More complex example, showing the same `Broker` as above
+but with failed events being delivered to Knative Service called `dlq-service`
+
+```yaml
+apiVersion: eventing.knative.dev/v1beta1
+kind: Broker
+metadata:
+  name: default
+spec:
+  # Configuration specific to this broker.
+  config:
+    apiVersion: v1
+    kind: ConfigMap
+    name: config-br-default-channel
     namespace: knative-eventing
   # Where to deliver Events that failed to be processed.
   delivery:
     deadLetterSink:
-	  ref:
+      ref:
         apiVersion: serving.knative.dev/v1
-	    kind: Service
-		name: dlq-service
+        kind: Service
+        name: dlq-service
 ```
 
 ## Trigger

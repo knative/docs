@@ -200,7 +200,7 @@ spec:
     apiVersion: v1
     kind: ConfigMap
     namespace: knative-eventing
-	name: imc-channel
+    name: imc-channel
   # Deliver failed events here
   delivery:
     deadLetterSink:
