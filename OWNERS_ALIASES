@@ -2,7 +2,7 @@ aliases:
   eng-approvers:
   - evankanderson
   - mattmoor
-  - dgerd
+  - dprotaso
   - vaikas
   - rgregg
   - mchmarny
@@ -28,7 +28,6 @@ aliases:
   - yt3liu
 
   serving-eng-reviewers:
-  - dgerd
   - dprotaso
   - markusthoemmes
   - mattmoor
@@ -45,7 +44,6 @@ aliases:
   - lionelvillard
 
   install-eng-reviewers:
-  - dgerd
   - dprotaso
   - markusthoemmes
   - mattmoor
