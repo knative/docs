@@ -100,7 +100,7 @@ Validation: valid
 Context Attributes,
   specversion: 1.0
   type: dev.knative.sources.ping
-  source: /apis/v1/namespaces/default/cronjobsources/test-cronjob-source
+  source: /apis/v1/namespaces/default/pingsources/test-ping-source
   id: d8e761eb-30c7-49a3-a421-cd5895239f2d
   time: 2019-12-04T14:24:00.000702251Z
   datacontenttype: application/json
