@@ -132,16 +132,16 @@ Data,
 
 You can delete the PingSource instance by entering the following command:
 
-{{< tabs name="delete-source" default="By filename" >}}
-{{% tab name="By filename" %}}
-```shell
-kubectl delete --filename ping-source.yaml
-```
-{{< /tab >}}
-
+{{< tabs name="delete-source" default="By name" >}}
 {{% tab name="By name" %}}
 ```shell
 kubectl delete pingsources.sources.knative.dev test-ping-source
+```
+{{< /tab >}}
+
+{{% tab name="By filename" %}}
+```shell
+kubectl delete --filename ping-source.yaml
 ```
 {{< /tab >}}
 {{< /tabs >}}
@@ -149,16 +149,16 @@ kubectl delete pingsources.sources.knative.dev test-ping-source
 
 Similarly, you can delete the Service instance via:
 
-{{< tabs name="delete-service" default="By filename" >}}
+{{< tabs name="delete-service" default="By name" >}}
+{{% tab name="By name" %}}
+```shell
+kubectl delete service.serving.knative.dev event-display
+```
+{{< /tab >}}
 {{% tab name="By filename" %}}
 ```shell
 kubectl delete --filename service.yaml
 ```
 {{< /tab >}}
 
-{{% tab name="By name" %}}
-```shell
-kubectl delete service.serving.knative.dev event-display
-```
-{{< /tab >}}
 {{< /tabs >}}
