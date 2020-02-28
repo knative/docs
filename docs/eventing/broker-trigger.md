@@ -13,13 +13,15 @@ A Broker represents an 'event mesh'. Events are sent to the Broker's ingress and
 are then sent to any subscribers that are interested in that event. Once inside
 a Broker, all metadata other than the CloudEvent is stripped away (e.g. unless
 set as a CloudEvent attribute, there is no concept of how this event entered the
-Broker). There can be different classes of `Broker`s providing different kinds
-of semantics around durability of events, performance, etc. The `Broker` that is
+Broker).
+
+There can be different classes of Brokers providing different kinds
+of semantics around durability of events, performance, etc. The Broker that is
 part of the Knative Eventing repo is used for these examples, it uses Knative
-[Channels](./channels/) for delivering events. Simple example showing a `Broker`
+[Channels](./channels/) for delivering events. You can read more details about
+[Channel Based Broker](./channel-based-broker.md). Simple example showing a `Broker`
 where the configuration is specified in a `ConfigMap` config-br-default-channel,
-which uses `InMemoryChannel`. You can read more details about
-[Channel Based Broker](./channel-based-broker.md)
+which uses `InMemoryChannel`:
 
 Example:
 
@@ -65,8 +67,8 @@ spec:
 
 A Trigger represents a desire to subscribe to events from a specific Broker.
 
-Simple example which will receive all the events from a given (`default`) broker and
-delivers them to Knative Serving service `Service`:
+Simple example which will receive all the events from the given (`default`) broker and
+deliver them to Knative Serving service `my-service`:
 
 ```yaml
 apiVersion: eventing.knative.dev/v1beta1
@@ -116,12 +118,12 @@ have the extension `myextension` with the value `my-extension-value`.
 ### Broker setup
 
 We assume that you have installed a Broker in namespace `default`. If you haven't done that
-yet, [install it from here](./channel-based-broker.md)
+yet, [install it from here](./channel-based-broker.md).
 
 ### Subscriber
 
 Create a function to receive events. This document uses a Knative Service, but
-it could be anything that is [Addressable](https://github.com/knative/eventing/blob/master/docs/spec/interfaces.md).
+it could be anything that is [Callable](https://github.com/knative/eventing/blob/master/docs/spec/interfaces.md).
 
 ```yaml
 apiVersion: serving.knative.dev/v1

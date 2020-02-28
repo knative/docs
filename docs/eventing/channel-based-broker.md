@@ -181,14 +181,11 @@ spec:
 EOF
 ```
 
-Easiest way to create and control `Broker`s in your cluster is by using an automagic
-injection by labeling a namespace.
-
 ## Handling failed event delivery
 
-Broker allows you to specify what to in the case if failed event delivery, say
+Broker allows you to specify what to do in the case if failed event delivery, say
 you have a consumer (function for example) that's failing to process the event.
-You can use `DeliverySpec` for it:
+You can use `delivery` for it:
 
 ```yaml
 apiVersion: eventing.knative.dev/v1beta1
