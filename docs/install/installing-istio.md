@@ -150,7 +150,7 @@ this local gateway cluster-local-gateway by default.
 
 ### Updating the `config-istio` configmap to use a non-default local gateway
 
-However, if you create custom service and deployment for local gateway with a name other than `cluster-local-gateway`, you
+If you create custom service and deployment for local gateway with a name other than `cluster-local-gateway`, you
 need to update gateway configmap `config-istio` under `knative-serving` namespace.
 
 1. Run the following command:
