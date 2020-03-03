@@ -6,46 +6,52 @@ type: "docs"
 
 # Knative installations with Knative Operators
 
-As of v0.10.0, Knative started to release Knative operators as tools to install, configure and manage Knative. This
-guide will explain how to install and uninstall Knative with Knative operators.
+Knative provides operators as tools to install, configure and manage Knative. This guide explains how to install and
+uninstall Knative using Knative operators.
 
-There are two major components in Knative: Serving and Eventing. There are two operators: [Knative Serving Operator](https://github.com/knative/serving-operator)
-and [Knative Eventing Operator](https://github.com/knative/eventing-operator), respectively dedicated to each of them. Please make sure you have set up a Kubernetes
-cluster accessible to your local workstation.
-
-## Limitations of Knative Operators:
-
-Knative operators are still in Alpha phase. They only focus on Knative installation for the generic Kubernetes platform,
-which means Docker-Desktop Kubernetes on Mac and Minikube can be directly used as the Kubernetes clusters for you to install
-Knative with Knative operators, without any additional configuration out of the scope of the operator custom resource,
-but vendor-specific Kubernetes services, like Google Kubernetes Engine, IBM Kubernetes Service, OpenShift, etc, may need
-some additional configurations to work after the Knative is installed by the operator. In short, the Knative operators of
-the open source version only supports the following Kubernetes services, without additional configurations:
-
-   * Docker-Desktop Kubernetes on Mac
-   * Minikube
-
-The same to any other Kubernetes operator, Knative operators use custom resources as the sources of truth to configure
-your Knative. The current custom resources still have limited capabilities, which can not cover all the scenarios of
-how we can configure Knative to meet our needs, but Knative operators are making progress in extending their capabilities.
-One of the major missing points is that operators still lack of APIs for us to specify the parameters for high availability.
-If you rely on the HA capability, Knative operators are currently not helping with that.
-
-The open source versions of Knative operators have not been tested on any existing production environment. Please use
-them for development or test purpose. However, we encourage you to experiment Knative operators on top of the Kubernetes
-cluster for your production environment, helping us find out what we can potentially improve in Knative operators by
-reporting your issues.
+Each component in Knative has a separate operator for installation and configuration. This means that there is a [Serving operator](https://github.com/knative/serving-operator)
+and an [Eventing operator](https://github.com/knative/eventing-operator), and you can choose to install one or both independently.
 
 ## Prerequisites:
 
-Knative Serving needs an ingress or gateway to route inbound network traffic to the services. There are multiple options
-that can be used as the ingress candidates: Istio, Ambassador, Contour, Gloo, Kourier, etc. However, to install Knative
-with operators, we only support Istio as the ingress for now. Knative Operators are currently working on enabling the
-support for more ingress options. Since we talk about the installation on generic Kubernetes service, Istio can be
-installed with the following steps:
+### Set up a Kubernetes cluster
+
+Knative operators are still in Alpha phase. They focus on installation on a generic Kubernetes platform, such as
+Docker Desktop, Minikube, or kubeadm clusters, and the operators do not perform any platform specific customization.
+If you are not sure the customization of the Knative operators for vendor-specific platforms, use the generic Kubernetes
+platform.
+
+If you have only one node for your cluster, set CPUs to at least 6, Memory to at least 6.0 GB, Disk storage to at
+least 30 GB. If you have multiple nodes for your cluster, set CPUs to at least 2, Memory to at least 4.0 GB, Disk storage
+to at least 20 GB for each node.
+
+You need to make sure that your Kubernetes cluster is able to access the internet, since Knative operators download
+images online.
+
+Vendor-specific Kubernetes services, such as Google Kubernetes Engine, IBM Kubernetes Service, or OpenShift, may need
+some additional configurations, after the Knative is installed using the operators. In this tutorial, we do not introduce
+the customization or additional configurations, that may vary from platform to platform.
+
+### Install Istio
+
+Knative Serving needs an ingress or gateway to route inbound network traffic to the services. Knative Operators only support
+Istio in this release. Since we talk about the installation on generic Kubernetes service, Istio can be installed with
+the following steps:
 
 1. [Download and install Istio](https://knative.dev/development/install/installing-istio/#downloading-istio-and-installing-crds). Go through all the 4 sub-steps.
 2. [Update your Istio to use cluster local gateway](https://knative.dev/development/install/installing-istio/#updating-your-install-to-use-cluster-local-gateway).
+
+## Limitations of Knative Operators:
+
+Knative operators use custom resources as the sources of truth to configure your Knative. The current custom resources
+still have limited capabilities, which can not configure everything to meet Knative needs, but Knative operators are
+making progress in extending their capabilities. One of the major missing points is that Knative operators do not currently
+provide HA capabilities.
+
+The open source versions of Knative operators have not been tested on any existing production environment, so use
+them for development or test purpose. However, we encourage you to experiment Knative operators on top of the Kubernetes
+cluster for your production environment, helping us find out what we can potentially improve in Knative operators by
+reporting your issues.
 
 ## Install Knative Serving with Operator:
 
@@ -86,8 +92,8 @@ kubectl logs -f $(kubectl get pods -l name=knative-serving-operator -o name)
 If everything goes fine, it is time to install Knative Serving by installing the custom resource of Knative Serving
 operator. Operator supports to install Knative Serving under any namespace, which needs to be created as well. Then,
 we can create a custom resource with empty spec section. Technically, you can use any namespace, but we recommend you
-to use knative-serving. In the rest of this tutorial, we keep on using knative-servingas the namespace to create the
-Serving operator CR and all the other namspaced Serving resources. To create the CR, you can run the following command:
+to use `knative-serving`. In the rest of this tutorial, we keep on using `knative-serving` as the namespace to create the
+Serving operator CR and all the other namespaced Serving resources. To create the CR, you can run the following command:
 
 ```
 cat <<-EOF | kubectl apply -f -
@@ -150,8 +156,8 @@ kubectl logs -f $(kubectl get pods -l name=knative-eventing-operator -o name)
 
 If deployment of Knative Eventing operator is ready, it is time to install Knative Evenintg by installing the custom
 resource of Knative Eventing operator. The same to Knative Serving operator, you can use any namespace, but we recommend
-you to use knative-eventing for Knative eventing. In the rest of this tutorial, we keep on using knative-eventingas the
-namespace to create the Eventing operator CR and all the other namspaced Eventing resources. Run the following command:
+you to use `knative-eventing` for Knative eventing. In the rest of this tutorial, we keep on using `knative-eventing` as the
+namespace to create the Eventing operator CR and all the other namespaced Eventing resources. Run the following command:
 
 ```
 cat <<-EOF | kubectl apply -f -
