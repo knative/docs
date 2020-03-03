@@ -183,7 +183,7 @@ kubectl -n default logs -l serving.knative.dev/service=event-display -c user-con
 Validation: valid
 Context Attributes,
   specversion: 1.0
-  type: dev.knative.sources.ping
+  type: samples.http.mode3
   source: /apis/v1/namespaces/default/pingsources/ping-source
   id: e8fa7906-ab62-4e61-9c13-a9406e2130a9
   time: 2020-03-02T20:52:00.0004957Z

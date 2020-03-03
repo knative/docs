@@ -33,8 +33,6 @@ spec:
   template:
     spec:
       containers:
-      #- image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/appender
-      - image: docker.io/villardl/appender-1044a8b1233112bef9c65fffe6827471:latest
         env:
         - name: MESSAGE
           value: " - Handled by 2"
