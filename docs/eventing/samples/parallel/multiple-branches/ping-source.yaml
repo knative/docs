@@ -1,0 +1,12 @@
+apiVersion: sources.knative.dev/v1alpha2
+kind: PingSource
+metadata:
+  name: ping-source
+spec:
+  schedule: "*/1 * * * *"
+  jsonData: '{"message": "Even or odd?"}'
+  sink:
+    ref:
+      apiVersion: flows.knative.dev/v1beta1
+      kind: Parallel
+      name: odd-even-parallel
