@@ -33,9 +33,10 @@ spec:
   template:
     spec:
       containers:
-      - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/appender
         env:
         - name: MESSAGE
           value: " - Handled by 2"
+        - name: TYPE
+          value: "samples.http.mod3"
 
 ---

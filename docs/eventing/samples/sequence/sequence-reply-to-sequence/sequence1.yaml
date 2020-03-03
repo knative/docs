@@ -1,10 +1,10 @@
-apiVersion: flows.knative.dev/v1alpha1
+apiVersion: flows.knative.dev/v1beta1
 kind: Sequence
 metadata:
   name: first-sequence
 spec:
   channelTemplate:
-    apiVersion: messaging.knative.dev/v1alpha1
+    apiVersion: messaging.knative.dev/v1beta1
     kind: InMemoryChannel
   steps:
   - ref:
@@ -22,5 +22,5 @@ spec:
   reply:
     ref:
       kind: Sequence
-      apiVersion: flows.knative.dev/v1alpha1
+      apiVersion: flows.knative.dev/v1beta1
       name: second-sequence
