@@ -28,8 +28,9 @@ metadata:
   namespace: knative-eventing
   name: imc-channel
 data:
-  channelTemplateSpec.apiVersion: messaging.knative.dev/v1alpha1
-  channelTemplateSpec.kind: InMemoryChannel
+  channelTemplateSpec: |
+    apiVersion: messaging.knative.dev/v1alpha1
+    kind: InMemoryChannel
 ```
 
 ```yaml
@@ -42,9 +43,12 @@ metadata:
   name: kafka-channel
   namespace: knative-eventing
 data:
-  channelTemplateSpec.apiVersion: messaging.knative.dev/v1alpha1
-  channelTemplateSpec.kind: KafkaChannel
-  channelTemplateSpec.specJson: '{"numPartitions": 3, "replicationFactor": 1}'
+  channelTemplateSpec: |
+    apiVersion: messaging.knative.dev/v1alpha1
+    kind: KafkaChannel
+    spec: |
+      numPartitions: 3
+      replicationFactor: 1
 ```
 
 ```yaml
