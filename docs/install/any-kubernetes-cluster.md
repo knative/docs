@@ -3,6 +3,7 @@ title: "Installing Knative"
 weight: 06
 type: "docs"
 aliases:
+  - /docs/install/knative-with-any-k8s
   - /docs/install/knative-with-aks
   - /docs/install/knative-with-ambassador
   - /docs/install/knative-with-contour
