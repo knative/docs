@@ -591,13 +591,15 @@ You can find a number of samples for Knative Eventing [here](../eventing/samples
 
 {{< feature-state version="v0.2" state="alpha" >}}
 
-Knative provides a collection of observability components that can be used to make the Serving and Eventing components more observable.
+Install the following observability features to enable logging, metrics, and request tracing in your Serving and Eventing components.
 
-Before you install any specific observability components, you must first install the core:
+All observibility plugins require that you first install the core:
 
 ```bash
 kubectl apply --filename {{< artifact repo="serving" file="monitoring-core.yaml" >}}
 ```
+
+After the core is installed, you can choose to install one or all of the following observability plugins:
 
 - Install [Prometheus](https://prometheus.io/) and [Grafana](https://grafana.com/) for metrics:
 
