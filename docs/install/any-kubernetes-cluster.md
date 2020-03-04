@@ -26,7 +26,7 @@ description of each:
  - [**Serving**](#installing-the-serving-component) {{< feature-state version="v0.9" state="stable" short=true >}} provides an abstraction for stateless request-based scale-to-zero services.
  - [**Eventing**](#installing-the-eventing-component) {{< feature-state version="v0.2" state="alpha" short=true >}} provides abstractions to enable binding event sources (e.g. Github Webhooks, Kafka) and consumers (e.g. Kubernetes or Knative Services).
 
-Knative also has a [**Monitoring bundle**](#installing-the-monitoring-bundle) {{< feature-state version="v0.1" state="alpha" short=true >}}  which provides standard tooling that can be used to get visibility into the health of the software running on Knative.
+Knative also has an [**Observability plugin**](#installing-the-observability-plugin) {{< feature-state version="v0.1" state="alpha" short=true >}}  which provides standard tooling that can be used to get visibility into the health of the software running on Knative.
 
 ## Before you begin
 
@@ -587,17 +587,19 @@ To learn more about the Cloud Audit Logs source, try [our sample](../eventing/sa
 You can find a number of samples for Knative Eventing [here](../eventing/samples/README.md). A quick-start guide is available [here](../eventing/getting-started.md).
 
 
-## Installing the Monitoring bundle
+## Installing the Observability plugin
 
 {{< feature-state version="v0.2" state="alpha" >}}
 
-Knative provides a bundle of monitoring components that can be used to make the Serving and Eventing components more observable.
+Install the following observability features to enable logging, metrics, and request tracing in your Serving and Eventing components.
 
-Before you install any specific monitoring components, you must first install the core monitoring pieces:
+All observibility plugins require that you first install the core:
 
 ```bash
 kubectl apply --filename {{< artifact repo="serving" file="monitoring-core.yaml" >}}
 ```
+
+After the core is installed, you can choose to install one or all of the following observability plugins:
 
 - Install [Prometheus](https://prometheus.io/) and [Grafana](https://grafana.com/) for metrics:
 
