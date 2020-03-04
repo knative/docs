@@ -836,7 +836,7 @@ More info: <a href="https://git.k8s.io/community/contributors/devel/sig-architec
 <p>Ingress is a collection of rules that allow inbound connections to reach the endpoints defined
 by a backend. An Ingress can be configured to give services externally-reachable URLs, load
 balance traffic, offer name based virtual hosting, etc.</p>
-<p>This is heavily based on K8s Ingress <a href="https://pkg.go.dev/k8s.io/api/networking/v1beta1#Ingress">https://pkg.go.dev/k8s.io/api/networking/v1beta1#Ingress</a>
+<p>This is heavily based on K8s Ingress <a href="https://godoc.org/k8s.io/api/networking/v1beta1#Ingress">https://godoc.org/k8s.io/api/networking/v1beta1#Ingress</a>
 which some highlighted modifications.</p>
 </p>
 <table>
@@ -1342,7 +1342,7 @@ before forwarding a request to the destination service.</p>
 <td>
 <code>timeout</code></br>
 <em>
-<a href="https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#Duration">
+<a href="https://godoc.org/k8s.io/apimachinery/pkg/apis/meta/v1#Duration">
 Kubernetes meta/v1.Duration
 </a>
 </em>
@@ -1439,7 +1439,7 @@ int
 <td>
 <code>perTryTimeout</code></br>
 <em>
-<a href="https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#Duration">
+<a href="https://godoc.org/k8s.io/apimachinery/pkg/apis/meta/v1#Duration">
 Kubernetes meta/v1.Duration
 </a>
 </em>
@@ -2581,8 +2581,8 @@ ServiceStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1.Configuration">Configuration</a>, 
 <a href="#serving.knative.dev/v1beta1.Configuration">Configuration</a>, 
+<a href="#serving.knative.dev/v1.Configuration">Configuration</a>, 
 <a href="#serving.knative.dev/v1.ServiceSpec">ServiceSpec</a>)
 </p>
 <p>
@@ -2985,8 +2985,8 @@ revisions and configurations.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1beta1.Route">Route</a>, 
-<a href="#serving.knative.dev/v1.Route">Route</a>)
+<a href="#serving.knative.dev/v1.Route">Route</a>, 
+<a href="#serving.knative.dev/v1beta1.Route">Route</a>)
 </p>
 <p>
 <p>RouteStatus communicates the observed state of the Route (from the controller).</p>
@@ -5654,5 +5654,5 @@ ServiceStatus
 <hr/>
 <p><em>
 Generated with <code>gen-crd-api-reference-docs</code>
-on git commit <code>bf0a84876</code>.
+on git commit <code>804b3bb85</code>.
 </em></p>
