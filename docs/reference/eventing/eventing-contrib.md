@@ -1,31 +1,29 @@
 <p>Packages:</p>
 <ul>
 <li>
-<a href="#sources.eventing.knative.dev%2fv1alpha1">sources.eventing.knative.dev/v1alpha1</a>
+<a href="#sources.knative.dev%2fv1alpha1">sources.knative.dev/v1alpha1</a>
 </li>
 <li>
 <a href="#messaging.knative.dev%2fv1alpha1">messaging.knative.dev/v1alpha1</a>
 </li>
 </ul>
-<h2 id="sources.eventing.knative.dev/v1alpha1">sources.eventing.knative.dev/v1alpha1</h2>
+<h2 id="sources.knative.dev/v1alpha1">sources.knative.dev/v1alpha1</h2>
 <p>
 <p>Package v1alpha1 contains API Schema definitions for the sources v1alpha1 API group</p>
 </p>
 Resource Types:
 <ul><li>
-<a href="#sources.eventing.knative.dev/v1alpha1.AwsSqsSource">AwsSqsSource</a>
+<a href="#sources.knative.dev/v1alpha1.AwsSqsSource">AwsSqsSource</a>
 </li><li>
-<a href="#sources.eventing.knative.dev/v1alpha1.CamelSource">CamelSource</a>
+<a href="#sources.knative.dev/v1alpha1.CamelSource">CamelSource</a>
 </li><li>
-<a href="#sources.eventing.knative.dev/v1alpha1.CouchDbSource">CouchDbSource</a>
+<a href="#sources.knative.dev/v1alpha1.CouchDbSource">CouchDbSource</a>
 </li><li>
-<a href="#sources.eventing.knative.dev/v1alpha1.GitHubSource">GitHubSource</a>
+<a href="#sources.knative.dev/v1alpha1.GitHubSource">GitHubSource</a>
 </li><li>
-<a href="#sources.eventing.knative.dev/v1alpha1.KafkaSource">KafkaSource</a>
-</li><li>
-<a href="#sources.eventing.knative.dev/v1alpha1.PrometheusSource">PrometheusSource</a>
+<a href="#sources.knative.dev/v1alpha1.PrometheusSource">PrometheusSource</a>
 </li></ul>
-<h3 id="sources.eventing.knative.dev/v1alpha1.AwsSqsSource">AwsSqsSource
+<h3 id="sources.knative.dev/v1alpha1.AwsSqsSource">AwsSqsSource
 </h3>
 <p>
 <p>AwsSqsSource is the Schema for the AWS SQS API</p>
@@ -44,7 +42,7 @@ Resource Types:
 string</td>
 <td>
 <code>
-sources.eventing.knative.dev/v1alpha1
+sources.knative.dev/v1alpha1
 </code>
 </td>
 </tr>
@@ -73,7 +71,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#sources.eventing.knative.dev/v1alpha1.AwsSqsSourceSpec">
+<a href="#sources.knative.dev/v1alpha1.AwsSqsSourceSpec">
 AwsSqsSourceSpec
 </a>
 </em>
@@ -140,7 +138,7 @@ run the Receive Adapter Deployment.</p>
 <td>
 <code>status</code></br>
 <em>
-<a href="#sources.eventing.knative.dev/v1alpha1.AwsSqsSourceStatus">
+<a href="#sources.knative.dev/v1alpha1.AwsSqsSourceStatus">
 AwsSqsSourceStatus
 </a>
 </em>
@@ -150,7 +148,7 @@ AwsSqsSourceStatus
 </tr>
 </tbody>
 </table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.CamelSource">CamelSource
+<h3 id="sources.knative.dev/v1alpha1.CamelSource">CamelSource
 </h3>
 <p>
 <p>CamelSource is the Schema for the camelsources API</p>
@@ -169,7 +167,7 @@ AwsSqsSourceStatus
 string</td>
 <td>
 <code>
-sources.eventing.knative.dev/v1alpha1
+sources.knative.dev/v1alpha1
 </code>
 </td>
 </tr>
@@ -198,7 +196,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#sources.eventing.knative.dev/v1alpha1.CamelSourceSpec">
+<a href="#sources.knative.dev/v1alpha1.CamelSourceSpec">
 CamelSourceSpec
 </a>
 </em>
@@ -211,7 +209,7 @@ CamelSourceSpec
 <td>
 <code>source</code></br>
 <em>
-<a href="#sources.eventing.knative.dev/v1alpha1.CamelSourceOriginSpec">
+<a href="#sources.knative.dev/v1alpha1.CamelSourceOriginSpec">
 CamelSourceOriginSpec
 </a>
 </em>
@@ -252,7 +250,7 @@ modifications of the event sent to the sink.</p>
 <td>
 <code>status</code></br>
 <em>
-<a href="#sources.eventing.knative.dev/v1alpha1.CamelSourceStatus">
+<a href="#sources.knative.dev/v1alpha1.CamelSourceStatus">
 CamelSourceStatus
 </a>
 </em>
@@ -262,7 +260,7 @@ CamelSourceStatus
 </tr>
 </tbody>
 </table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.CouchDbSource">CouchDbSource
+<h3 id="sources.knative.dev/v1alpha1.CouchDbSource">CouchDbSource
 </h3>
 <p>
 <p>CouchDbSource is the Schema for the githubsources API</p>
@@ -281,7 +279,7 @@ CamelSourceStatus
 string</td>
 <td>
 <code>
-sources.eventing.knative.dev/v1alpha1
+sources.knative.dev/v1alpha1
 </code>
 </td>
 </tr>
@@ -310,7 +308,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#sources.eventing.knative.dev/v1alpha1.CouchDbSourceSpec">
+<a href="#sources.knative.dev/v1alpha1.CouchDbSourceSpec">
 CouchDbSourceSpec
 </a>
 </em>
@@ -352,7 +350,7 @@ Must be a secret. Only Name and Namespace are used.</p>
 <td>
 <code>feed</code></br>
 <em>
-<a href="#sources.eventing.knative.dev/v1alpha1.FeedType">
+<a href="#sources.knative.dev/v1alpha1.FeedType">
 FeedType
 </a>
 </em>
@@ -392,7 +390,7 @@ knative.dev/pkg/apis/duck/v1beta1.Destination
 <td>
 <code>status</code></br>
 <em>
-<a href="#sources.eventing.knative.dev/v1alpha1.CouchDbSourceStatus">
+<a href="#sources.knative.dev/v1alpha1.CouchDbSourceStatus">
 CouchDbSourceStatus
 </a>
 </em>
@@ -402,7 +400,7 @@ CouchDbSourceStatus
 </tr>
 </tbody>
 </table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.GitHubSource">GitHubSource
+<h3 id="sources.knative.dev/v1alpha1.GitHubSource">GitHubSource
 </h3>
 <p>
 <p>GitHubSource is the Schema for the githubsources API</p>
@@ -421,7 +419,7 @@ CouchDbSourceStatus
 string</td>
 <td>
 <code>
-sources.eventing.knative.dev/v1alpha1
+sources.knative.dev/v1alpha1
 </code>
 </td>
 </tr>
@@ -450,7 +448,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#sources.eventing.knative.dev/v1alpha1.GitHubSourceSpec">
+<a href="#sources.knative.dev/v1alpha1.GitHubSourceSpec">
 GitHubSourceSpec
 </a>
 </em>
@@ -508,7 +506,7 @@ correspond to the &ldquo;Webhook event name&rdquo; values listed at
 <td>
 <code>accessToken</code></br>
 <em>
-<a href="#sources.eventing.knative.dev/v1alpha1.SecretValueFromSource">
+<a href="#sources.knative.dev/v1alpha1.SecretValueFromSource">
 SecretValueFromSource
 </a>
 </em>
@@ -522,7 +520,7 @@ access token</p>
 <td>
 <code>secretToken</code></br>
 <em>
-<a href="#sources.eventing.knative.dev/v1alpha1.SecretValueFromSource">
+<a href="#sources.knative.dev/v1alpha1.SecretValueFromSource">
 SecretValueFromSource
 </a>
 </em>
@@ -576,7 +574,7 @@ bool
 <td>
 <code>status</code></br>
 <em>
-<a href="#sources.eventing.knative.dev/v1alpha1.GitHubSourceStatus">
+<a href="#sources.knative.dev/v1alpha1.GitHubSourceStatus">
 GitHubSourceStatus
 </a>
 </em>
@@ -586,163 +584,7 @@ GitHubSourceStatus
 </tr>
 </tbody>
 </table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.KafkaSource">KafkaSource
-</h3>
-<p>
-<p>KafkaSource is the Schema for the kafkasources API.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>apiVersion</code></br>
-string</td>
-<td>
-<code>
-sources.eventing.knative.dev/v1alpha1
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<code>kind</code></br>
-string
-</td>
-<td><code>KafkaSource</code></td>
-</tr>
-<tr>
-<td>
-<code>metadata</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
-Kubernetes meta/v1.ObjectMeta
-</a>
-</em>
-</td>
-<td>
-Refer to the Kubernetes API documentation for the fields of the
-<code>metadata</code> field.
-</td>
-</tr>
-<tr>
-<td>
-<code>spec</code></br>
-<em>
-<a href="#sources.eventing.knative.dev/v1alpha1.KafkaSourceSpec">
-KafkaSourceSpec
-</a>
-</em>
-</td>
-<td>
-<br/>
-<br/>
-<table>
-<tr>
-<td>
-<code>bootstrapServers</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<p>Bootstrap servers are the Kafka servers the consumer will connect to.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>topics</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<p>Topic topics to consume messages from</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>consumerGroup</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<p>ConsumerGroupID is the consumer group ID.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>net</code></br>
-<em>
-<a href="#sources.eventing.knative.dev/v1alpha1.KafkaSourceNetSpec">
-KafkaSourceNetSpec
-</a>
-</em>
-</td>
-<td>
-</td>
-</tr>
-<tr>
-<td>
-<code>sink</code></br>
-<em>
-knative.dev/pkg/apis/duck/v1beta1.Destination
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Sink is a reference to an object that will resolve to a domain name to use as the sink.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>serviceAccountName</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<p>ServiceAccoutName is the name of the ServiceAccount that will be used to run the Receive
-Adapter Deployment.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>resources</code></br>
-<em>
-<a href="#sources.eventing.knative.dev/v1alpha1.KafkaResourceSpec">
-KafkaResourceSpec
-</a>
-</em>
-</td>
-<td>
-<p>Resource limits and Request specifications of the Receive Adapter Deployment</p>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-<tr>
-<td>
-<code>status</code></br>
-<em>
-<a href="#sources.eventing.knative.dev/v1alpha1.KafkaSourceStatus">
-KafkaSourceStatus
-</a>
-</em>
-</td>
-<td>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.PrometheusSource">PrometheusSource
+<h3 id="sources.knative.dev/v1alpha1.PrometheusSource">PrometheusSource
 </h3>
 <p>
 <p>PrometheusSource is the Schema for the prometheussources API</p>
@@ -761,7 +603,7 @@ KafkaSourceStatus
 string</td>
 <td>
 <code>
-sources.eventing.knative.dev/v1alpha1
+sources.knative.dev/v1alpha1
 </code>
 </td>
 </tr>
@@ -790,7 +632,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#sources.eventing.knative.dev/v1alpha1.PrometheusSourceSpec">
+<a href="#sources.knative.dev/v1alpha1.PrometheusSourceSpec">
 PrometheusSourceSpec
 </a>
 </em>
@@ -905,7 +747,7 @@ name to use as the sink.</p>
 <td>
 <code>status</code></br>
 <em>
-<a href="#sources.eventing.knative.dev/v1alpha1.PrometheusSourceStatus">
+<a href="#sources.knative.dev/v1alpha1.PrometheusSourceStatus">
 PrometheusSourceStatus
 </a>
 </em>
@@ -915,11 +757,11 @@ PrometheusSourceStatus
 </tr>
 </tbody>
 </table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.AwsSqsSourceSpec">AwsSqsSourceSpec
+<h3 id="sources.knative.dev/v1alpha1.AwsSqsSourceSpec">AwsSqsSourceSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.AwsSqsSource">AwsSqsSource</a>)
+<a href="#sources.knative.dev/v1alpha1.AwsSqsSource">AwsSqsSource</a>)
 </p>
 <p>
 <p>AwsSqsSourceSpec defines the desired state of the source.</p>
@@ -985,11 +827,11 @@ run the Receive Adapter Deployment.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.AwsSqsSourceStatus">AwsSqsSourceStatus
+<h3 id="sources.knative.dev/v1alpha1.AwsSqsSourceStatus">AwsSqsSourceStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.AwsSqsSource">AwsSqsSource</a>)
+<a href="#sources.knative.dev/v1alpha1.AwsSqsSource">AwsSqsSource</a>)
 </p>
 <p>
 <p>AwsSqsSourceStatus defines the observed state of the source.</p>
@@ -1004,39 +846,31 @@ run the Receive Adapter Deployment.</p>
 <tbody>
 <tr>
 <td>
-<code>Status</code></br>
+<code>SourceStatus</code></br>
 <em>
-knative.dev/pkg/apis/duck/v1alpha1.Status
+knative.dev/pkg/apis/duck/v1.SourceStatus
 </em>
 </td>
 <td>
 <p>
-(Members of <code>Status</code> are embedded into this type.)
+(Members of <code>SourceStatus</code> are embedded into this type.)
 </p>
-<p>inherits duck/v1alpha1 Status, which currently provides:
-* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
-* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>sinkUri</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>SinkURI is the current active sink URI that has been configured for the source.</p>
+<p>inherits duck/v1 SourceStatus, which currently provides:
+* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last
+processed by the controller.
+* Conditions - the latest available observations of a resource&rsquo;s current
+state.
+* SinkURI - the current active sink URI that has been configured for the
+Source.</p>
 </td>
 </tr>
 </tbody>
 </table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.CamelSourceOriginSpec">CamelSourceOriginSpec
+<h3 id="sources.knative.dev/v1alpha1.CamelSourceOriginSpec">CamelSourceOriginSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.CamelSourceSpec">CamelSourceSpec</a>)
+<a href="#sources.knative.dev/v1alpha1.CamelSourceSpec">CamelSourceSpec</a>)
 </p>
 <p>
 <p>CamelSourceOriginSpec is the integration flow to run</p>
@@ -1053,7 +887,7 @@ string
 <td>
 <code>integration</code></br>
 <em>
-github.com/apache/camel-k/pkg/apis/camel/v1alpha1.IntegrationSpec
+github.com/apache/camel-k/pkg/apis/camel/v1.IntegrationSpec
 </em>
 </td>
 <td>
@@ -1064,7 +898,7 @@ github.com/apache/camel-k/pkg/apis/camel/v1alpha1.IntegrationSpec
 <td>
 <code>flow</code></br>
 <em>
-<a href="#sources.eventing.knative.dev/v1alpha1.Flow">
+<a href="#sources.knative.dev/v1alpha1.Flow">
 Flow
 </a>
 </em>
@@ -1075,11 +909,11 @@ Flow
 </tr>
 </tbody>
 </table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.CamelSourceSpec">CamelSourceSpec
+<h3 id="sources.knative.dev/v1alpha1.CamelSourceSpec">CamelSourceSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.CamelSource">CamelSource</a>)
+<a href="#sources.knative.dev/v1alpha1.CamelSource">CamelSource</a>)
 </p>
 <p>
 <p>CamelSourceSpec defines the desired state of CamelSource</p>
@@ -1096,7 +930,7 @@ Flow
 <td>
 <code>source</code></br>
 <em>
-<a href="#sources.eventing.knative.dev/v1alpha1.CamelSourceOriginSpec">
+<a href="#sources.knative.dev/v1alpha1.CamelSourceOriginSpec">
 CamelSourceOriginSpec
 </a>
 </em>
@@ -1132,11 +966,11 @@ modifications of the event sent to the sink.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.CamelSourceStatus">CamelSourceStatus
+<h3 id="sources.knative.dev/v1alpha1.CamelSourceStatus">CamelSourceStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.CamelSource">CamelSource</a>)
+<a href="#sources.knative.dev/v1alpha1.CamelSource">CamelSource</a>)
 </p>
 <p>
 <p>CamelSourceStatus defines the observed state of CamelSource</p>
@@ -1179,11 +1013,11 @@ string
 </tr>
 </tbody>
 </table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.CouchDbSourceSpec">CouchDbSourceSpec
+<h3 id="sources.knative.dev/v1alpha1.CouchDbSourceSpec">CouchDbSourceSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.CouchDbSource">CouchDbSource</a>)
+<a href="#sources.knative.dev/v1alpha1.CouchDbSource">CouchDbSource</a>)
 </p>
 <p>
 <p>CouchDbSourceSpec defines the desired state of CouchDbSource</p>
@@ -1229,7 +1063,7 @@ Must be a secret. Only Name and Namespace are used.</p>
 <td>
 <code>feed</code></br>
 <em>
-<a href="#sources.eventing.knative.dev/v1alpha1.FeedType">
+<a href="#sources.knative.dev/v1alpha1.FeedType">
 FeedType
 </a>
 </em>
@@ -1264,11 +1098,11 @@ knative.dev/pkg/apis/duck/v1beta1.Destination
 </tr>
 </tbody>
 </table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.CouchDbSourceStatus">CouchDbSourceStatus
+<h3 id="sources.knative.dev/v1alpha1.CouchDbSourceStatus">CouchDbSourceStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.CouchDbSource">CouchDbSource</a>)
+<a href="#sources.knative.dev/v1alpha1.CouchDbSource">CouchDbSource</a>)
 </p>
 <p>
 <p>CouchDbSourceStatus defines the observed state of CouchDbSource</p>
@@ -1312,29 +1146,29 @@ for the CouchDbSource.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.FeedType">FeedType
+<h3 id="sources.knative.dev/v1alpha1.FeedType">FeedType
 (<code>string</code> alias)</p></h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.CouchDbSourceSpec">CouchDbSourceSpec</a>)
+<a href="#sources.knative.dev/v1alpha1.CouchDbSourceSpec">CouchDbSourceSpec</a>)
 </p>
 <p>
 <p>FeedType is the type of Feed</p>
 </p>
-<h3 id="sources.eventing.knative.dev/v1alpha1.Flow">Flow
+<h3 id="sources.knative.dev/v1alpha1.Flow">Flow
 (<code>map[string]interface{}</code> alias)</p></h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.CamelSourceOriginSpec">CamelSourceOriginSpec</a>)
+<a href="#sources.knative.dev/v1alpha1.CamelSourceOriginSpec">CamelSourceOriginSpec</a>)
 </p>
 <p>
 <p>Flow is an unstructured object representing a Camel Flow in YAML/JSON DSL</p>
 </p>
-<h3 id="sources.eventing.knative.dev/v1alpha1.GitHubSourceSpec">GitHubSourceSpec
+<h3 id="sources.knative.dev/v1alpha1.GitHubSourceSpec">GitHubSourceSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.GitHubSource">GitHubSource</a>)
+<a href="#sources.knative.dev/v1alpha1.GitHubSource">GitHubSource</a>)
 </p>
 <p>
 <p>GitHubSourceSpec defines the desired state of GitHubSource</p>
@@ -1396,7 +1230,7 @@ correspond to the &ldquo;Webhook event name&rdquo; values listed at
 <td>
 <code>accessToken</code></br>
 <em>
-<a href="#sources.eventing.knative.dev/v1alpha1.SecretValueFromSource">
+<a href="#sources.knative.dev/v1alpha1.SecretValueFromSource">
 SecretValueFromSource
 </a>
 </em>
@@ -1410,7 +1244,7 @@ access token</p>
 <td>
 <code>secretToken</code></br>
 <em>
-<a href="#sources.eventing.knative.dev/v1alpha1.SecretValueFromSource">
+<a href="#sources.knative.dev/v1alpha1.SecretValueFromSource">
 SecretValueFromSource
 </a>
 </em>
@@ -1459,11 +1293,11 @@ bool
 </tr>
 </tbody>
 </table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.GitHubSourceStatus">GitHubSourceStatus
+<h3 id="sources.knative.dev/v1alpha1.GitHubSourceStatus">GitHubSourceStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.GitHubSource">GitHubSource</a>)
+<a href="#sources.knative.dev/v1alpha1.GitHubSource">GitHubSource</a>)
 </p>
 <p>
 <p>GitHubSourceStatus defines the observed state of GitHubSource</p>
@@ -1518,11 +1352,11 @@ for the GitHubSource.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.KafkaLimitsSpec">KafkaLimitsSpec
+<h3 id="sources.knative.dev/v1alpha1.KafkaLimitsSpec">KafkaLimitsSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.KafkaResourceSpec">KafkaResourceSpec</a>)
+<a href="#sources.knative.dev/v1alpha1.KafkaResourceSpec">KafkaResourceSpec</a>)
 </p>
 <p>
 </p>
@@ -1556,11 +1390,11 @@ string
 </tr>
 </tbody>
 </table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.KafkaRequestsSpec">KafkaRequestsSpec
+<h3 id="sources.knative.dev/v1alpha1.KafkaRequestsSpec">KafkaRequestsSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.KafkaResourceSpec">KafkaResourceSpec</a>)
+<a href="#sources.knative.dev/v1alpha1.KafkaResourceSpec">KafkaResourceSpec</a>)
 </p>
 <p>
 </p>
@@ -1594,11 +1428,11 @@ string
 </tr>
 </tbody>
 </table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.KafkaResourceSpec">KafkaResourceSpec
+<h3 id="sources.knative.dev/v1alpha1.KafkaResourceSpec">KafkaResourceSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.KafkaSourceSpec">KafkaSourceSpec</a>)
+<a href="#sources.knative.dev/v1alpha1.KafkaSourceSpec">KafkaSourceSpec</a>)
 </p>
 <p>
 </p>
@@ -1614,7 +1448,7 @@ string
 <td>
 <code>requests</code></br>
 <em>
-<a href="#sources.eventing.knative.dev/v1alpha1.KafkaRequestsSpec">
+<a href="#sources.knative.dev/v1alpha1.KafkaRequestsSpec">
 KafkaRequestsSpec
 </a>
 </em>
@@ -1626,7 +1460,7 @@ KafkaRequestsSpec
 <td>
 <code>limits</code></br>
 <em>
-<a href="#sources.eventing.knative.dev/v1alpha1.KafkaLimitsSpec">
+<a href="#sources.knative.dev/v1alpha1.KafkaLimitsSpec">
 KafkaLimitsSpec
 </a>
 </em>
@@ -1636,11 +1470,150 @@ KafkaLimitsSpec
 </tr>
 </tbody>
 </table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.KafkaSourceNetSpec">KafkaSourceNetSpec
+<h3 id="sources.knative.dev/v1alpha1.KafkaSource">KafkaSource
+</h3>
+<p>
+<p>KafkaSource is the Schema for the kafkasources API.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>metadata</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
+Kubernetes meta/v1.ObjectMeta
+</a>
+</em>
+</td>
+<td>
+Refer to the Kubernetes API documentation for the fields of the
+<code>metadata</code> field.
+</td>
+</tr>
+<tr>
+<td>
+<code>spec</code></br>
+<em>
+<a href="#sources.knative.dev/v1alpha1.KafkaSourceSpec">
+KafkaSourceSpec
+</a>
+</em>
+</td>
+<td>
+<br/>
+<br/>
+<table>
+<tr>
+<td>
+<code>bootstrapServers</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>Bootstrap servers are the Kafka servers the consumer will connect to.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>topics</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>Topic topics to consume messages from</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>consumerGroup</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>ConsumerGroupID is the consumer group ID.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>net</code></br>
+<em>
+<a href="#sources.knative.dev/v1alpha1.KafkaSourceNetSpec">
+KafkaSourceNetSpec
+</a>
+</em>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<code>sink</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1beta1.Destination
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Sink is a reference to an object that will resolve to a domain name to use as the sink.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>serviceAccountName</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>ServiceAccoutName is the name of the ServiceAccount that will be used to run the Receive
+Adapter Deployment.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>resources</code></br>
+<em>
+<a href="#sources.knative.dev/v1alpha1.KafkaResourceSpec">
+KafkaResourceSpec
+</a>
+</em>
+</td>
+<td>
+<p>Resource limits and Request specifications of the Receive Adapter Deployment</p>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<code>status</code></br>
+<em>
+<a href="#sources.knative.dev/v1alpha1.KafkaSourceStatus">
+KafkaSourceStatus
+</a>
+</em>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sources.knative.dev/v1alpha1.KafkaSourceNetSpec">KafkaSourceNetSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.KafkaSourceSpec">KafkaSourceSpec</a>)
+<a href="#sources.knative.dev/v1alpha1.KafkaSourceSpec">KafkaSourceSpec</a>)
 </p>
 <p>
 </p>
@@ -1656,7 +1629,7 @@ KafkaLimitsSpec
 <td>
 <code>sasl</code></br>
 <em>
-<a href="#sources.eventing.knative.dev/v1alpha1.KafkaSourceSASLSpec">
+<a href="#sources.knative.dev/v1alpha1.KafkaSourceSASLSpec">
 KafkaSourceSASLSpec
 </a>
 </em>
@@ -1668,7 +1641,7 @@ KafkaSourceSASLSpec
 <td>
 <code>tls</code></br>
 <em>
-<a href="#sources.eventing.knative.dev/v1alpha1.KafkaSourceTLSSpec">
+<a href="#sources.knative.dev/v1alpha1.KafkaSourceTLSSpec">
 KafkaSourceTLSSpec
 </a>
 </em>
@@ -1678,11 +1651,11 @@ KafkaSourceTLSSpec
 </tr>
 </tbody>
 </table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.KafkaSourceSASLSpec">KafkaSourceSASLSpec
+<h3 id="sources.knative.dev/v1alpha1.KafkaSourceSASLSpec">KafkaSourceSASLSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.KafkaSourceNetSpec">KafkaSourceNetSpec</a>)
+<a href="#sources.knative.dev/v1alpha1.KafkaSourceNetSpec">KafkaSourceNetSpec</a>)
 </p>
 <p>
 </p>
@@ -1708,7 +1681,7 @@ bool
 <td>
 <code>user</code></br>
 <em>
-<a href="#sources.eventing.knative.dev/v1alpha1.SecretValueFromSource">
+<a href="#sources.knative.dev/v1alpha1.SecretValueFromSource">
 SecretValueFromSource
 </a>
 </em>
@@ -1722,7 +1695,7 @@ SecretValueFromSource
 <td>
 <code>password</code></br>
 <em>
-<a href="#sources.eventing.knative.dev/v1alpha1.SecretValueFromSource">
+<a href="#sources.knative.dev/v1alpha1.SecretValueFromSource">
 SecretValueFromSource
 </a>
 </em>
@@ -1734,11 +1707,11 @@ SecretValueFromSource
 </tr>
 </tbody>
 </table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.KafkaSourceSpec">KafkaSourceSpec
+<h3 id="sources.knative.dev/v1alpha1.KafkaSourceSpec">KafkaSourceSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.KafkaSource">KafkaSource</a>)
+<a href="#sources.knative.dev/v1alpha1.KafkaSource">KafkaSource</a>)
 </p>
 <p>
 <p>KafkaSourceSpec defines the desired state of the KafkaSource.</p>
@@ -1788,7 +1761,7 @@ string
 <td>
 <code>net</code></br>
 <em>
-<a href="#sources.eventing.knative.dev/v1alpha1.KafkaSourceNetSpec">
+<a href="#sources.knative.dev/v1alpha1.KafkaSourceNetSpec">
 KafkaSourceNetSpec
 </a>
 </em>
@@ -1824,7 +1797,7 @@ Adapter Deployment.</p>
 <td>
 <code>resources</code></br>
 <em>
-<a href="#sources.eventing.knative.dev/v1alpha1.KafkaResourceSpec">
+<a href="#sources.knative.dev/v1alpha1.KafkaResourceSpec">
 KafkaResourceSpec
 </a>
 </em>
@@ -1835,11 +1808,11 @@ KafkaResourceSpec
 </tr>
 </tbody>
 </table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.KafkaSourceStatus">KafkaSourceStatus
+<h3 id="sources.knative.dev/v1alpha1.KafkaSourceStatus">KafkaSourceStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.KafkaSource">KafkaSource</a>)
+<a href="#sources.knative.dev/v1alpha1.KafkaSource">KafkaSource</a>)
 </p>
 <p>
 <p>KafkaSourceStatus defines the observed state of KafkaSource.</p>
@@ -1882,11 +1855,11 @@ string
 </tr>
 </tbody>
 </table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.KafkaSourceTLSSpec">KafkaSourceTLSSpec
+<h3 id="sources.knative.dev/v1alpha1.KafkaSourceTLSSpec">KafkaSourceTLSSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.KafkaSourceNetSpec">KafkaSourceNetSpec</a>)
+<a href="#sources.knative.dev/v1alpha1.KafkaSourceNetSpec">KafkaSourceNetSpec</a>)
 </p>
 <p>
 </p>
@@ -1912,7 +1885,7 @@ bool
 <td>
 <code>cert</code></br>
 <em>
-<a href="#sources.eventing.knative.dev/v1alpha1.SecretValueFromSource">
+<a href="#sources.knative.dev/v1alpha1.SecretValueFromSource">
 SecretValueFromSource
 </a>
 </em>
@@ -1926,7 +1899,7 @@ SecretValueFromSource
 <td>
 <code>key</code></br>
 <em>
-<a href="#sources.eventing.knative.dev/v1alpha1.SecretValueFromSource">
+<a href="#sources.knative.dev/v1alpha1.SecretValueFromSource">
 SecretValueFromSource
 </a>
 </em>
@@ -1940,7 +1913,7 @@ SecretValueFromSource
 <td>
 <code>caCert</code></br>
 <em>
-<a href="#sources.eventing.knative.dev/v1alpha1.SecretValueFromSource">
+<a href="#sources.knative.dev/v1alpha1.SecretValueFromSource">
 SecretValueFromSource
 </a>
 </em>
@@ -1952,11 +1925,11 @@ SecretValueFromSource
 </tr>
 </tbody>
 </table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.PrometheusSourceSpec">PrometheusSourceSpec
+<h3 id="sources.knative.dev/v1alpha1.PrometheusSourceSpec">PrometheusSourceSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.PrometheusSource">PrometheusSource</a>)
+<a href="#sources.knative.dev/v1alpha1.PrometheusSource">PrometheusSource</a>)
 </p>
 <p>
 <p>PrometheusSourceSpec defines the desired state of PrometheusSource</p>
@@ -2070,11 +2043,11 @@ name to use as the sink.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.PrometheusSourceStatus">PrometheusSourceStatus
+<h3 id="sources.knative.dev/v1alpha1.PrometheusSourceStatus">PrometheusSourceStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.PrometheusSource">PrometheusSource</a>)
+<a href="#sources.knative.dev/v1alpha1.PrometheusSource">PrometheusSource</a>)
 </p>
 <p>
 <p>PrometheusSourceStatus defines the observed state of PrometheusSource</p>
@@ -2118,12 +2091,12 @@ for the PrometheusSource.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.SecretValueFromSource">SecretValueFromSource
+<h3 id="sources.knative.dev/v1alpha1.SecretValueFromSource">SecretValueFromSource
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.KafkaSourceSASLSpec">KafkaSourceSASLSpec</a>, 
-<a href="#sources.eventing.knative.dev/v1alpha1.KafkaSourceTLSSpec">KafkaSourceTLSSpec</a>)
+<a href="#sources.knative.dev/v1alpha1.KafkaSourceSASLSpec">KafkaSourceSASLSpec</a>,
+<a href="#sources.knative.dev/v1alpha1.KafkaSourceTLSSpec">KafkaSourceTLSSpec</a>)
 </p>
 <p>
 <p>SecretValueFromSource represents the source of a secret value</p>
@@ -2151,11 +2124,11 @@ Kubernetes core/v1.SecretKeySelector
 </tr>
 </tbody>
 </table>
-<h3 id="sources.eventing.knative.dev/v1alpha1.SecretValueFromSource">SecretValueFromSource
+<h3 id="sources.knative.dev/v1alpha1.SecretValueFromSource">SecretValueFromSource
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.eventing.knative.dev/v1alpha1.GitHubSourceSpec">GitHubSourceSpec</a>)
+<a href="#sources.knative.dev/v1alpha1.GitHubSourceSpec">GitHubSourceSpec</a>)
 </p>
 <p>
 <p>SecretValueFromSource represents the source of a secret value</p>
@@ -2613,5 +2586,5 @@ knative.dev/eventing/pkg/apis/duck/v1alpha1.SubscribableTypeStatus
 <hr/>
 <p><em>
 Generated with <code>gen-crd-api-reference-docs</code>
-on git commit <code>395598e8</code>.
+on git commit <code>a49a7c73</code>.
 </em></p>
