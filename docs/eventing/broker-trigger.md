@@ -198,13 +198,13 @@ emits an event on a configured schedule. For this we'll configure it to emit
 events once a minute, saying, yes, you guessed it `Hello World!`.
 
 ```yaml
-apiVersion: sources.knative.dev/v1alpha1
+apiVersion: sources.knative.dev/v1alpha2
 kind: PingSource
 metadata:
   name: test-ping-source
 spec:
   schedule: "*/1 * * * *"
-  data: '{"message": "Hello world!"}'
+  jsonData: '{"message": "Hello world!"}'
   sink:
     ref:
       # Deliver events to Broker.
