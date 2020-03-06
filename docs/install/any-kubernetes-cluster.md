@@ -205,7 +205,7 @@ The following commands install Istio and enable its Knative integration.
 1. Install the Knative Istio controller:
 
    ```bash
-   kubectl apply --filename {{< artifact repo="serving" file="serving-istio.yaml" >}}
+   kubectl apply --filename {{< artifact repo="net-istio" file="release.yaml" >}}
    ```
 
 1. Fetch the External IP or CNAME:
