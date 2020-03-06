@@ -1,15 +1,14 @@
 ---
-title: "Migrating to the PingSource"
+title: "Migrating from CronJobSource to the PingSource"
 weight: 20
 type: "docs"
 aliases:
    - /docs/eventing/ping.md
 ---
 
-The _deprecated_ `CronJobsource` should be converted to the newer `PingSource`.
+The deprecated `CronJobsource` should be converted to the `PingSource`.
 
-Imagine you have a `CronJobSource` running in your cluster that emits its events to a Knative Serving Service.
-The installation YAML would look like:
+The YAML file for a `CronJobSource` that emits events to a Knative Serving service will look similar to this:
 
 ```yaml
 apiVersion: sources.eventing.knative.dev/v1alpha1
@@ -25,12 +24,12 @@ spec:
     name: event-display
 ```
 
-If you now want to migration to the newer `PingSource`, a couple of steps are needed:
+To migrate this source to a `PingSource`, the following steps are required::
 
-* different GVK (see `apiVersion` and `kind` differences) 
-* the `PingSources` does use `jsonData` instead of `data`
+* Different `apiVersion` and `kind` between the two
+* `PingSource` uses the `jsonData` attribute instead of the `data` attribute.
 
-The final result would looke like:
+The updated YAML for `PingSource` will look similar to the following:
 
 ```yaml
 apiVersion: sources.knative.dev/v1alpha2
