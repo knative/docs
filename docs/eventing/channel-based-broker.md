@@ -134,21 +134,23 @@ installed with Knative Eventing
 The `ServiceAccount` was created two commands prior. The `RoleBinding` is
 created with this command.
 
-Create RBAC permissions granting access to shared configmaps for logging,
-tracing, and metrics configuration.
-
-_These commands assume the shared Knative Eventing components are installed in
-the `knative-eventing` namespace. If you installed the shared Knative Eventing
-components in a different namespace, replace `knative-eventing` with the name of
-that namespace._
-
+The broker expects 3 configmaps to run properly: `eventing-config-logging`, `eventing-config-observability`
+and `eventing-config-tracing`. You can copy the corresponding configmaps under [`eventing/config/`](https://github.com/knative/eventing/tree/master/config).
+An easier way is to create a `ConfigMapPropagation` object and the configmaps will be automatically
+be propagated. To do so,
 ```shell
-kubectl -n knative-eventing create rolebinding eventing-config-reader-default-eventing-broker-ingress \
-  --clusterrole=eventing-config-reader \
-  --serviceaccount=default:eventing-broker-ingress
-kubectl -n knative-eventing create rolebinding eventing-config-reader-default-eventing-broker-filter \
-  --clusterrole=eventing-config-reader \
-  --serviceaccount=default:eventing-broker-filter
+cat << EOF | kubectl apply -f -
+apiVersion: configs.internal.knative.dev/v1alpha1
+kind: ConfigMapPropagation
+metadata:
+  namespace: default
+  name: eventing
+spec:
+  originalNamespace: knative-eventing
+  selector:
+    matchLabels:
+      knative.dev/config-category: eventing
+EOF
 ```
 
 Now we can create the `Broker`. Note that this example uses the name `default`,
