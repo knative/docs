@@ -1,6 +1,6 @@
 ---
 title: "Getting Started with Eventing"
-linkTitle: "Getting Started"
+linkTitle: "Getting started"
 weight: 9
 type: "docs"
 ---
