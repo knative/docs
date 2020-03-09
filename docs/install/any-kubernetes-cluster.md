@@ -15,6 +15,7 @@ aliases:
   - /docs/install/knative-with-iks
   - /docs/install/knative-with-microk8s
   - /docs/install/knative-with-minikube
+  - /docs/install/knative-with-minishift
   - /docs/install/knative-with-pks
 ---
 
