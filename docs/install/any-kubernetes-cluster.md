@@ -297,7 +297,7 @@ kubectl patch configmap/config-domain \
 {{% tab name="Temporary DNS" %}}
 If you are using `curl` to access the sample applications, or your own Knative app, and are unable to use the "Magic DNS (xip.io)" or "Real DNS" methods, there is a temporary approach. This is useful for those who wish to evaluate Knative without altering their DNS configuration, as per the "Real DNS" method, or cannot use the "Magic DNS" method due to using, for example, minikube locally or IPv6 clusters.
 
-To access your application using `curl` using this temporary method:
+To access your application using `curl` using this method:
 
 1. After starting your application, get the URL of your application:
 
@@ -324,7 +324,7 @@ To access your application using `curl` using this temporary method:
    Hello Go Sample v1!
    ```
 
-Please refer to the "Real DNS" method for a more permanent solution.
+Refer to the "Real DNS" method for a permanent solution.
 
 {{< /tab >}}
 
