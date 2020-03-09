@@ -41,7 +41,7 @@ spec:
   jsonData: '{"message": "Hello world!"}'
   sink:
     ref:
-    apiVersion: serving.knative.dev/v1
-    kind: Service
-    name: event-display
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: event-display
 ```
