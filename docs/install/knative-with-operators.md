@@ -4,7 +4,7 @@ weight: 10
 type: "docs"
 ---
 
-# Knative installations with Knative Operators
+# Installing Knative components using Operators
 
 Knative provides operators as tools to install, configure and manage Knative. This guide explains how to install and
 uninstall Knative using Knative operators.
@@ -25,11 +25,6 @@ Disk storage to at least 30 GB. If you have multiple nodes for your cluster, set
     - [Download and install Istio](https://knative.dev/development/install/installing-istio/#downloading-istio-and-installing-crds). Go through all the 4 sub-steps.
     - [Update your Istio to use cluster local gateway](https://knative.dev/development/install/installing-istio/#updating-your-install-to-use-cluster-local-gateway).
 
-Knative operators are still in Alpha phase. They focus on installation on a generic Kubernetes platform, such as
-Docker Desktop, Minikube, or kubeadm clusters, and the operators do not perform any platform specific customization.
-If you are not sure the customization of the Knative operators for vendor-specific platforms, use the generic Kubernetes
-platform.
-
 ## Limitations of Knative Operators:
 
 Knative Operators use custom resources (CRs) to configure your Knative deployment.
@@ -41,7 +36,7 @@ Knative Operators use custom resources (CRs) to configure your Knative deploymen
 
 Information about Knative Serving Operator releases can be found on the [Releases page](https://github.com/knative/serving-operator/releases).
 
-### Installling the Knative Serving Operator
+### Installing the Knative Serving Operator
 
 __From releases__:
 
@@ -128,7 +123,7 @@ webhook            1/1     1            1           19h
 
 Information about Knative Eventing Operator releases can be found on the [Releases page](https://github.com/knative/eventing-operator/releases).
 
-### Installling the Knative Eventing Operator
+### Installing the Knative Eventing Operator
 
 __From releases__:
 
