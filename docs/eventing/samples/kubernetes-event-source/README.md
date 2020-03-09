@@ -1,12 +1,12 @@
 ---
-title: "Kubernetes event using the API Server Source"
+title: "API Server Source"
 linkTitle: "Kubernetes event"
 weight: 50
 type: "docs"
 ---
 
-This example shows how to wire [Kubernetes cluster events](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.17/#event-v1-core),
-using the API Server Source, for consumption by a function that has been implemented as a Knative Service.
+This example shows how to wire [Kubernetes cluster events](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.17/#event-v1-core), using the API Server Source, for
+consumption by a function that has been implemented as a Knative Service.
 
 ## Before you begin
 
@@ -16,7 +16,7 @@ using the API Server Source, for consumption by a function that has been impleme
    the repo by running:
 
    ```shell
-   git clone -b "release-0.13" https://github.com/knative/docs knative-docs
+   git clone -b "release-0.9" https://github.com/knative/docs knative-docs
    cd knative-docs/docs/eventing/samples/kubernetes-event-source
    ```
 
@@ -24,15 +24,14 @@ using the API Server Source, for consumption by a function that has been impleme
 
 ### Broker
 
-These instructions assume the namespace `default`, which you can change to your
-preferred namespace. If you use a different namespace, you will need to modify
-all the YAML files deployed in this sample to point at that namespace.
+1. Create the `default` Broker in your namespace. These instructions assume the
+   namespace `default`, feel free to change to any other namespace you would
+   like to use instead. If you use a different namespace, you will need to
+   modify all the YAML files deployed in this sample to point at that namespace.
 
-1. Create the `default` Broker in your namespace:
-
-   ```shell
-   kubectl label namespace default knative-eventing-injection=enabled
-   ```
+```shell
+kubectl label namespace default knative-eventing-injection=enabled
+```
 
 ### Service Account
 
@@ -41,51 +40,52 @@ all the YAML files deployed in this sample to point at that namespace.
    Knative Eventing Broker. Create a file named `serviceaccount.yaml` and copy
    the code block below into it.
 
-   ```yaml
-   apiVersion: v1
-   kind: ServiceAccount
-   metadata:
-     name: events-sa
-     namespace: default
-   
-   ---
-   apiVersion: rbac.authorization.k8s.io/v1
-   kind: ClusterRole
-   metadata:
-     name: event-watcher
-   rules:
-     - apiGroups:
-         - ""
-       resources:
-         - events
-       verbs:
-         - get
-         - list
-         - watch
-   
-   ---
-   apiVersion: rbac.authorization.k8s.io/v1
-   kind: ClusterRoleBinding
-   metadata:
-     name: k8s-ra-event-watcher
-   roleRef:
-     apiGroup: rbac.authorization.k8s.io
-     kind: ClusterRole
-     name: event-watcher
-   subjects:
-     - kind: ServiceAccount
-       name: events-sa
-       namespace: default
-   ```
+```yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: events-sa
+  namespace: default
 
-   If you want to re-use an existing Service Account with the appropriate permissions,
-   you need to modify the `serviceaccount.yaml`.
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: event-watcher
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - events
+    verbs:
+      - get
+      - list
+      - watch
 
-2. Enter the following command to create the service account from `serviceaccount.yaml`:
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: k8s-ra-event-watcher
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: event-watcher
+subjects:
+  - kind: ServiceAccount
+    name: events-sa
+    namespace: default
+```
 
-   ```shell
-   kubectl apply --filename serviceaccount.yaml
-   ```
+If you want to re-use an existing Service Account with the appropriate
+permissions, you need to modify the `serviceaccount.yaml`.
+
+Enter the following command to create the service account from
+`serviceaccount.yaml`:
+
+```shell
+kubectl apply --filename serviceaccount.yaml
+```
 
 ### Create Event Source for Kubernetes Events
 
@@ -93,33 +93,33 @@ all the YAML files deployed in this sample to point at that namespace.
    specific namespace. Create a file named `k8s-events.yaml` and copy the code
    block below into it.
 
-   ```yaml
-   apiVersion: sources.knative.dev/v1alpha1
-   kind: ApiServerSource
-   metadata:
-     name: testevents
-     namespace: default
-   spec:
-     serviceAccountName: events-sa
-     mode: Resource
-     resources:
-       - apiVersion: v1
-         kind: Event
-     sink:
-       ref:
-         apiVersion: eventing.knative.dev/v1alpha1
-         kind: Broker
-         name: default
-   ```
+```yaml
+apiVersion: sources.knative.dev/v1alpha1
+kind: ApiServerSource
+metadata:
+  name: testevents
+  namespace: default
+spec:
+  serviceAccountName: events-sa
+  mode: Resource
+  resources:
+    - apiVersion: v1
+      kind: Event
+  sink:
+    ref:
+      apiVersion: eventing.knative.dev/v1alpha1
+      kind: Broker
+      name: default
+```
 
-   If you want to consume events from a different namespace or use a
-   different `Service Account`, you need to modify `k8s-events.yaml` accordingly.
+If you want to consume events from a different namespace or use a different
+`Service Account`, you need to modify `k8s-events.yaml` accordingly.
 
-2. Enter the following command to create the event source:
+Enter the following command to create the event source:
 
-   ```shell
-   kubectl apply --filename k8s-events.yaml
-   ```
+```shell
+kubectl apply --filename k8s-events.yaml
+```
 
 ### Trigger
 
@@ -127,52 +127,52 @@ In order to check the `ApiServerSource` is fully working, we will create a
 simple Knative Service that dumps incoming messages to its log and creates a
 `Trigger` from the `Broker` to that Knative Service.
 
-1. Create a file named `trigger.yaml` and copy the code block below into it.
+Create a file named `trigger.yaml` and copy the code block below into it.
 
-   ```yaml
-   apiVersion: eventing.knative.dev/v1alpha1
-   kind: Trigger
-   metadata:
-     name: testevents-trigger
-     namespace: default
-   spec:
-     subscriber:
-       ref:
-         apiVersion: serving.knative.dev/v1
-         kind: Service
-         name: event-display
+```yaml
+apiVersion: eventing.knative.dev/v1alpha1
+kind: Trigger
+metadata:
+  name: testevents-trigger
+  namespace: default
+spec:
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: event-display
 
-   ---
-   # This is a very simple Knative Service that writes the input request to its log.
-   
-   apiVersion: serving.knative.dev/v1
-   kind: Service
-   metadata:
-     name: event-display
-     namespace: default
-   spec:
-     template:
-       spec:
-         containers:
-           - # This corresponds to
-             # https://github.com/knative/eventing-contrib/tree/master/cmd/event_display/main.go
-             image: gcr.io/knative-releases/github.com/knative/eventing-contrib/cmd/event_display
-   ```
+---
+# This is a very simple Knative Service that writes the input request to its log.
+
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: event-display
+  namespace: default
+spec:
+  template:
+    spec:
+      containers:
+        - # This corresponds to
+          # https://github.com/knative/eventing-contrib/tree/master/cmd/event_display/main.go
+          image: gcr.io/knative-releases/github.com/knative/eventing-contrib/cmd/event_display
+```
 
 1. If the deployed `ApiServerSource` is pointing at a `Broker` other than
    `default`, modify `trigger.yaml` by adding `spec.broker` with the `Broker`'s
    name.
 
-1. Deploy `trigger.yaml`:
+1. Deploy `trigger.yaml`.
 
-   ```shell
-   kubectl apply --filename trigger.yaml
-   ```
+```shell
+kubectl apply --filename trigger.yaml
+```
 
 ### Create Events
 
-Create events by launching a pod in the default namespace. Create a `busybox`
-container and immediately delete it:
+Create events by launching a pod in the default namespace. Create a busybox
+container and immediately delete it.
 
 ```shell
 kubectl run busybox --image=busybox --restart=Never -- ls
@@ -183,8 +183,8 @@ kubectl delete pod busybox
 
 We will verify that the Kubernetes events were sent into the Knative eventing
 system by looking at our message dumper function logs. If you deployed the
-[Trigger](#trigger), continue using this section. If not, you will
-need to look downstream yourself:
+[Trigger](#trigger), then continue using this section. If not, then you will
+need to look downstream yourself.
 
 ```shell
 kubectl get pods
@@ -244,7 +244,7 @@ Data,
 ### Cleanup
 
 You can remove the `ServiceAccount`, `ClusterRoles`, `ClusterRoleBinding`,
-`ApiServerSource`, `Service` and `Trigger` using:
+`ApiServerSource`, `Service` and `Trigger` via:
 
 ```shell
 kubectl --namespace default delete --filename serviceaccount.yaml
