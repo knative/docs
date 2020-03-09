@@ -1,0 +1,12 @@
+apiVersion: sources.knative.dev/v1alpha1
+kind: PingSource
+metadata:
+  name: test-ping-source
+spec:
+  schedule: "*/2 * * * *"
+  data: '{"message": "Hello world!"}'
+  sink:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: event-display
