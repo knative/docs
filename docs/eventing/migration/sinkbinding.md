@@ -16,8 +16,8 @@ kind: ContainerSource
 metadata:
   name: urbanobservatory-event-source
 spec:
-  image: quay.io/openshift-knative/knative-eventing-sources-websocketsource:latest 
-  args: 
+  image: quay.io/openshift-knative/knative-eventing-sources-websocketsource:latest
+  args:
     - '--source=wss://api.usb.urbanobservatory.ac.uk/stream'
     - '--eventType=my.custom.event'
   sink:
@@ -72,7 +72,7 @@ spec:
       containers:
         - image: quay.io/openshift-knative/knative-eventing-sources-websocketsource:latest
           name: wss
-          args: 
+          args:
             - '--source=wss://api.usb.urbanobservatory.ac.uk/stream'
             - '--eventType=my.custom.event'
 ```
