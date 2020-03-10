@@ -10,13 +10,12 @@ metaSources:
       `K_CE_OVERRIDES` (JSON cloudevents attributes) environment variables into any Kubernetes
       resource which has a `spec.template` that looks like a Pod (aka PodSpeccable).
   - name: Container Source
-    url: https://github.com/knative/eventing/blob/master/pkg/apis/sources/v1alpha1/containersource_types.go
-    status: Active Development
+    url: https://knative.dev/docs/eventing/migration/sinkbinding
+    status: Deprecated, replaced by SinkBinding
     support: Knative
     description: >
-      Container Source is a generic controller. Given an Image URL, it will keep a single `Pod`
-      running with the specified image, environment, and arguments. It is used by multiple other
-      Sources as underlying infrastructure.
+      ContainerSource was an earlier version of SinkBinding which controlled the lifetime of a single
+      Pod which acted as an event source. SinkBinding is more flexible and is preferred.
   - name: Auto Container Source
     url: https://github.com/Harwayne/auto-container-source
     status: Proof of Concept
