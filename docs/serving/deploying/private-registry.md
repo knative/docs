@@ -27,7 +27,7 @@ You need:
 1. Create a `imagePullSecrets` that contains your credentials as a list of secrets:
 
     ```shell
-    kubectl create secret [REGISTRY-CRED-SECRETS] \
+    kubectl create secret docker-registry [REGISTRY-CRED-SECRETS] \
       --docker-server=[PRIVATE_REGISTRY_SERVER_URL] \
       --docker-email=[PRIVATE_REGISTRY_EMAIL] \
       --docker-username=[PRIVATE_REGISTRY_USER] \
