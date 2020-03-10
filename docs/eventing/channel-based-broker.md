@@ -101,6 +101,37 @@ For example, to delete the injected Broker from the foo namespace:
 kubectl -n foo delete broker default
 ```
 
+## Installing Broker by Trigger Annotation
+
+Besides the annotation of the namespace, there is an alternative approach to annotate
+one of the Triggers, with `knative-eventing-injection: enabled`:
+
+```yaml
+apiVersion: eventing.knative.dev/v1beta1
+kind: Trigger
+metadata:
+  annotations:
+    knative-eventing-injection: enabled
+  name: testevents-trigger0
+  namespace: default
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: dev.knative.sources.ping
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: broker-display
+```
+
+However, this approach only works _if_ the `Trigger` is coupled to the default `Broker`, and takes only effect
+when there is no default `Broker` already present.
+
+Deleting the `Trigger` does not delete the `Broker`. With this approach the same rules from the
+[namespace annotation](./#installing-broker-by-annotation) apply here.
+
 ## Installing Broker Manually
 
 In order to setup a `Broker` manually, we must first create the required
