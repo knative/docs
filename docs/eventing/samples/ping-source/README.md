@@ -57,13 +57,13 @@ Use following command to create the event source from STDIN:
 
 ```shell
 cat <<EOF | kubectl create -f -
-apiVersion: sources.knative.dev/v1alpha1
+apiVersion: sources.knative.dev/v1alpha2
 kind: PingSource
 metadata:
   name: test-ping-source
 spec:
   schedule: "*/2 * * * *"
-  data: '{"message": "Hello world!"}'
+  jsonData: '{"message": "Hello world!"}'
   sink:
     ref:
       apiVersion: serving.knative.dev/v1
