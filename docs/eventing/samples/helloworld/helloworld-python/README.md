@@ -54,7 +54,6 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-python
     ```bash
     Flask==1.1.1
     ```
-  
 1. In your project directory, create a file named `Dockerfile` and copy the code
    block below into it. For detailed instructions on dockerizing a Go app, see
    [Deploying Go servers with Docker](https://blog.golang.org/docker).
@@ -175,7 +174,6 @@ folder) you're ready to build and deploy the sample app.
     1. It deployed the helloworld-python app as a K8s Deployment and created a K8s service names helloworld-python. Verify using the following command.
         ```shell
         kubectl --namespace knative-samples get deployments helloworld-python
-        
         kubectl --namespace knative-samples get svc helloworld-python
         ```
     1. It created a Knative Eventing Trigger to route certain events to the helloworld-python application. Make sure that Ready=true
@@ -204,9 +202,9 @@ We can send an http request directly to the [Broker](../../../broker-trigger.md)
       -d '{"msg":"Hello World from the curl pod."}'
 
       exit
-      ``` 
+      ```
 ### Verify that event is received by helloworld-python app
-Helloworld-python app logs the context and the msg of the above event, and replies back with another event. 
+Helloworld-python app logs the context and the msg of the above event, and replies back with another event.
   1. Display helloworld-python app logs
       ```shell
       kubectl --namespace knative-samples logs -l app=helloworld-python --tail=50
@@ -270,7 +268,7 @@ Helloworld-python app logs the context and the msg of the above event, and repli
       metadata:
         name: event-display
         namespace: knative-samples
-      spec:          
+      spec:
         selector:
           app: event-display
         ports:
@@ -279,7 +277,6 @@ Helloworld-python app logs the context and the msg of the above event, and repli
             targetPort: 8080
       END
       ```
-  
   1. Create a trigger to deliver the event to the above service
       ```shell
       kubectl --namespace knative-samples apply --filename - << END
