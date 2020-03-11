@@ -330,7 +330,6 @@ Helloworld-python app logs the context and the msg of the above event, and repli
       ```
 
   **Note: You could use the above approach to test your applications too.**
- 
 
 
 ## Removing the sample app deployment
@@ -340,4 +339,3 @@ To remove the sample app from your cluster, delete the service record:
 ```shell
 kubectl delete --filename sample-app.yaml
 ```
-
