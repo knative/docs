@@ -27,6 +27,14 @@ git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
 cd knative-docs/docs/serving/samples/cloudevents/cloudevents-go
 ```
 
+After getting the sample code the go.mod and go.sum files need to be created so that the
+Dockerfile build will work.
+
+```shell
+go mod init cloudevents.go
+go test
+```
+
 ## Before you begin
 
 - A Kubernetes cluster with Knative installed and DNS configured. Follow the
