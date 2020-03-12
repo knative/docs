@@ -4,8 +4,6 @@ weight: 10
 type: "docs"
 ---
 
-# Installing Knative components using Operators
-
 Knative provides operators as tools to install, configure and manage Knative. This guide explains how to install and
 uninstall Knative using Knative operators.
 
@@ -51,7 +49,7 @@ __From source code__:
 
 You can also install Knative Operators from source using `ko`.
 
-1. Install the [ko]((https://github.com/google/ko)) build tool.
+1. Install the [ko](https://github.com/google/ko) build tool.
 1. Install the operator in the root directory of the source using the following command:
 
 ```
@@ -138,8 +136,8 @@ __From source code__:
 
 You can also install Knative Operators from source using `ko`.
 
-- Install the [ko]((https://github.com/google/ko)) build tool.
-- Install the operator in the root directory of the source using the following command:
+1. Install the [ko](https://github.com/google/ko) build tool.
+1. Install the operator in the root directory of the source using the following command:
 
 ```
 ko apply -f config/
