@@ -21,7 +21,7 @@ a Kubernetes cluster. If you have only one node for your cluster, set CPUs to at
 Disk storage to at least 30 GB. If you have multiple nodes for your cluster, set CPUs to at least 2, Memory to at least
 4.0 GB, Disk storage to at least 20 GB for each node.
 - The Kubernetes cluster must be able to access the internet, since Knative operators download images online.
-- Istio:
+- Istio installed:
     - [Download and install Istio](https://knative.dev/development/install/installing-istio/#downloading-istio-and-installing-crds). Go through all the 4 sub-steps.
     - [Update your Istio to use cluster local gateway](https://knative.dev/development/install/installing-istio/#updating-your-install-to-use-cluster-local-gateway).
 
@@ -40,11 +40,10 @@ Information about Knative Serving Operator releases can be found on the [Release
 
 __From releases__:
 
-Replace \<version\> with the latest version or the version you would like to install, and run the following command to
-install Knative Serving Operator:
+Run the following command to install Knative Serving Operator:
 
 ```
-kubectl apply -f https://github.com/knative/serving-operator/releases/download/<version>/serving-operator.yaml
+kubectl apply --filename {{< artifact repo="serving-operator" file="serving-operator.yaml" >}}
 ```
 
 __From source code__:
@@ -52,7 +51,8 @@ __From source code__:
 You can also install Knative Operators from source using `ko`.
 
 1. Install the [ko]((https://github.com/google/ko)) build tool.
-1. Install the operator in the root directory of the source using the following command:
+1. Clone the serving operator to `${GOROOT}/src/knative.dev/serving-operator`
+1. Install the operator from the root directory of the source using the following command:
 
 ```
 ko apply -f config/
@@ -127,19 +127,20 @@ Information about Knative Eventing Operator releases can be found on the [Releas
 
 __From releases__:
 
-Replace \<version\> with the latest version or the version you would like to install, and run the following command to
-install Knative Eventing Operator:
+Run the following command to install Knative Eventing Operator:
+
 
 ```
-kubectl apply -f https://github.com/knative/eventing-operator/releases/download/<version>/eventing-operator.yaml
+kubectl apply --filename {{< artifact repo="eventing-operator" file="eventing-operator.yaml" >}}
 ```
 
 __From source code__:
 
 You can also install Knative Operators from source using `ko`.
 
-- Install the [ko]((https://github.com/google/ko)) build tool.
-- Install the operator in the root directory of the source using the following command:
+1. Install the [ko]((https://github.com/google/ko)) build tool.
+1. Clone the serving operator to `${GOROOT}/src/knative.dev/serving-operator`
+1. Install the operator from the root directory of the source using the following command:
 
 ```
 ko apply -f config/
@@ -224,10 +225,8 @@ can still work.
 If you have installed Knative Serving using the Release page, remove the operator using the following command:
 
 ```
-kubectl delete -f https://github.com/knative/serving-operator/releases/download/<version>/serving-operator.yaml
+kubectl delete --filename {{< artifact repo="serving-operator" file="serving-operator.yaml" >}}
 ```
-
-Replace <version> with the version number of Knative Serving you have installed.
 
 If you have installed Knative Serving from source, uninstall it using the following command while in the root directory
 for the source:
@@ -251,10 +250,8 @@ Knative Eventing operator also prevents unsafe removal of Knative Eventing resou
 If you have installed Knative Eventing using the Release page, remove the operator using the following command:
 
 ```
-kubectl delete -f https://github.com/knative/eventing-operator/releases/download/<version>/eventing-operator.yaml
+kubectl delete --filename {{< artifact repo="eventing-operator" file="eventing-operator.yaml" >}}
 ```
-
-Replace <version> with the version number of Knative Eventing you have installed.
 
 If you have installed Knative Eventing from source, uninstall it using the following command while in the root directory
 for the source:
