@@ -4,8 +4,6 @@ weight: 10
 type: "docs"
 ---
 
-# Installing Knative components using Operators
-
 Knative provides operators as tools to install, configure and manage Knative. This guide explains how to install and
 uninstall Knative using Knative operators.
 
