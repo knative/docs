@@ -56,7 +56,6 @@ Tutorial on how to build and deploy a  [`RocketMQSource`](https://github.com/apa
       service.serving.knative.dev/event-display created
    ```
 1. Ensure that the Service pod is running. The pod name will be prefixed with `event-display`.
- 
    ```
    $ kubectl get pods
       NAME                                            READY     STATUS    RESTARTS   AGE
@@ -77,8 +76,8 @@ Tutorial on how to build and deploy a  [`RocketMQSource`](https://github.com/apa
     name: apacherocketmqsource
   spec:
       topic: test
-      namesrvAddr: xx.xx.xx.xx:9876 # nameserAddr of RocketMQ Cluster 
-      groupName: groupname 
+      namesrvAddr: xx.xx.xx.xx:9876 # nameserAddr of RocketMQ Cluster
+      groupName: groupname
       sink:
         apiVersion: serving.knative.dev/v1
         kind: Service
@@ -91,7 +90,6 @@ Tutorial on how to build and deploy a  [`RocketMQSource`](https://github.com/apa
    $ kubectl apply -f apacherocketmqsource.yaml
       rocketmqsource.sources.eventing.knative.dev/apacherocketmqsource created
    ```
-   
 1. Check that the event source pod is running. The pod name will be prefixed with `rocketmq`.
 
    ```
@@ -99,10 +97,8 @@ Tutorial on how to build and deploy a  [`RocketMQSource`](https://github.com/apa
       NAME                                                  READY     STATUS    RESTARTS   AGE
       rocketmq-apacherocketmqsource-p7tdw-67f468884b-n4b9j   1/1       Running   0          4s
    ```
-   
 1. Ensure the RocketMQ event source started with the necessary
    configuration.
-   
    ```
    $ kubectl logs --selector='knative-eventing-source-name=apacherocketmqsource'
     {"level":"info","ts":"2020-03-13T05:55:31.155Z","caller":"receive_adapter/main.go:80","msg":"Starting RocketMQ Receive Adapter. %v","adapter: ":{"K8sClient":{"LegacyPrefix":"/api"},"Namespace":"default","SecretName":"","SecretKey":"","Topic":"test2","NamesrvAddr":"101.200.125.226:9876","RNamespace":"","GroupName":"group2","SubscriptionID":"knative-eventing-default","SinkURI":"http://event-display2.default.svc/","AdCode":""}}
@@ -118,7 +114,6 @@ time="2020-03-13T05:55:31Z" level=info msg="the consumer start beginning" consum
       #Broker Name                      #QID  #Send Result            #MsgId
       iZ2ze56wd7v87vxqhdd3j6Z           0     SEND_OK                 7B3945ED000027C170F040CF8EBB0000
    ```
-   
 1. Check that the RocketMQSource consumed the message and sent it to
    its sink properly.
 
