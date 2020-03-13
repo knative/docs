@@ -1,0 +1,14 @@
+apiVersion: sources.eventing.knative.dev/v1alpha1
+kind: RocketMQSource
+metadata:
+  labels:
+    controller-tools.k8s.io: "1.0"
+  name: apacherocketmqsource
+spec:
+  topic: test
+  namesrvAddr: xx.xx.xx.xx:9876
+  groupName: group1
+  sink:
+    apiVersion: serving.knative.dev/v1
+    kind: Service
+    name: event-display

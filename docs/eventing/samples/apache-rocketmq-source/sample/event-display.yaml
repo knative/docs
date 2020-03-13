@@ -1,0 +1,10 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: event-display
+  namespace: default
+spec:
+  template:
+    spec:
+      containers:
+        - image: docker.io/apacherocketmq/event-display:1.0.0
