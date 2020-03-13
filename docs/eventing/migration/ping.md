@@ -6,7 +6,7 @@ aliases:
    - /docs/eventing/ping.md
 ---
 
-The deprecated `CronJobsource` should be converted to the `PingSource`.
+In 0.13, the deprecated `CronJobSource` should be converted to the `PingSource`.
 
 The YAML file for a `CronJobSource` that emits events to a Knative Serving service will look similar to this:
 
