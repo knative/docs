@@ -13,7 +13,7 @@ Tutorial on how to build and deploy a  [`RocketMQSource`](https://github.com/apa
 * A Kubernetes cluster
 * [Knative Eventing v0.9+](https://knative.dev/docs/install/any-kubernetes-cluster/)
 * [Knative Serving v0.9+](https://knative.dev/docs/install/any-kubernetes-cluster/)
-* [Apache RocketMQ cluster](http://rocketmq.apache.org/docs/quick-start/) 
+* [Apache RocketMQ cluster](http://rocketmq.apache.org/docs/quick-start/)
 
 
 ## Creating a `RocketMQSource` source CRD
@@ -37,8 +37,6 @@ Tutorial on how to build and deploy a  [`RocketMQSource`](https://github.com/apa
       NAME                                 READY     STATUS    RESTARTS   AGE
       rocketmqsource-controller-manager-0   1/1       Running   0          10s
    ```
-   
-   
 3. Check the `rocketmqsource-controller-manager-0` pod logs.
 
 
@@ -49,7 +47,6 @@ Tutorial on how to build and deploy a  [`RocketMQSource`](https://github.com/apa
       2020/03/13 04:37:57 Adding the RocketMQ Source controller.
       2020/03/13 04:37:57 Starting rocketmqsource controller.
    ```
-   
 ## Create the event display service
 
 1. Deploy the event display service
@@ -59,7 +56,6 @@ Tutorial on how to build and deploy a  [`RocketMQSource`](https://github.com/apa
       service.serving.knative.dev/event-display created
    ```
 1. Ensure that the Service pod is running. The pod name will be prefixed with `event-display`.
-   
  
    ```
    $ kubectl get pods
@@ -180,7 +176,6 @@ Data,
    $ kubectl delete -f apacherocketmqsource.yaml
       rocketmqsource.sources.eventing.knative.dev "apacherocketmqsource" deleted
    ```
-   
 2. Remove the event display
 
    ```
@@ -194,17 +189,16 @@ Data,
       customresourcedefinition.apiextensions.k8s.io "rocketmqsources.sources.eventing.knative.dev" deleted
    $ kubectl delete -f https://raw.githubusercontent.com/apache/rocketmq-externals/master/rocketmq-knative/source/config/400-controller-service.yaml
       service "rocketmq-controller" deleted
-   $ kubectl delete -f https://raw.githubusercontent.com/apache/rocketmq-externals/master/rocketmq-knative/source/config/500-controller.yaml  
+   $ kubectl delete -f https://raw.githubusercontent.com/apache/rocketmq-externals/master/rocketmq-knative/source/config/500-controller.yaml
       statefulset.apps "rocketmqsource-controller-manager" deleted
    $ kubectl delete -f https://raw.githubusercontent.com/apache/rocketmq-externals/master/rocketmq-knative/source/config/600-istioegress.yaml
      serviceentry.networking.istio.io "rocketmq-ext" deleted
    $ kubectl delete -f https://raw.githubusercontent.com/apache/rocketmq-externals/master/rocketmq-knative/source/config/202-clusterrolebinding.yaml
      clusterrolebinding.rbac.authorization.k8s.io "eventing-sources-rocketmq-controller" deleted
      clusterrolebinding.rbac.authorization.k8s.io "eventing-sources-rocketmq-resolver" deleted
-   $ kubectl delete -f https://raw.githubusercontent.com/apache/rocketmq-externals/master/rocketmq-knative/source/config/200-serviceaccount.yaml 
+   $ kubectl delete -f https://raw.githubusercontent.com/apache/rocketmq-externals/master/rocketmq-knative/source/config/200-serviceaccount.yaml
       serviceaccount "rocketmqsource-controller-manager" deleted
-   $ kubectl delete -f https://raw.githubusercontent.com/apache/rocketmq-externals/master/rocketmq-knative/source/config/201-clusterrole.yaml 
+   $ kubectl delete -f https://raw.githubusercontent.com/apache/rocketmq-externals/master/rocketmq-knative/source/config/201-clusterrole.yaml
       clusterrole.rbac.authorization.k8s.io "eventing-sources-rocketmq-controller" deleted
-   
    ```
 
