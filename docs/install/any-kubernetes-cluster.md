@@ -363,7 +363,7 @@ Deploy your first app with the [getting started with Knative app deployment](../
 
 ## Installing the Eventing component
 
-{{< feature-state version="v0.2" state="alpha" >}}
+{{< feature-state version="v0.13" state="beta" >}}
 
 
 The following commands install the Knative Eventing component.
@@ -415,7 +415,7 @@ To learn more about the Google Cloud Pub/Sub Channel, try [our sample](https://g
 
 {{% tab name="In-Memory (standalone)" %}}
 
-{{< feature-state version="v0.2" state="alpha" >}}
+{{< feature-state version="v0.13" state="beta" >}}
 
 The following command installs an implementation of Channel that runs in-memory.  This implementation is nice because it is simple and standalone, but it is unsuitable for production use cases.
 
@@ -446,7 +446,7 @@ The following command installs an implementation of Channel that runs in-memory.
    <!-- This indentation is important for things to render properly. -->
    {{< tabs name="eventing_brokers" default="Channel-based" >}}
 {{% tab name="Channel-based" %}}
-{{< feature-state version="v0.5" state="alpha" >}}
+{{< feature-state version="v0.13" state="beta" >}}
 
 The following command installs an implementation of Broker that utilizes Channels:
 
@@ -454,31 +454,33 @@ The following command installs an implementation of Broker that utilizes Channel
    kubectl apply --filename {{< artifact repo="eventing" file="channel-broker.yaml" >}}
    ```
 
-To customize which channel implementation is used, update the following ConfigMap:
+To customize which channel implementation is used, update the following ConfigMap to
+specify which configurations are used for which namespaces:
 
    ```yaml
    apiVersion: v1
    kind: ConfigMap
    metadata:
-     name: default-ch-webhook
+     name: config-br-defaults
      namespace: knative-eventing
    data:
-     default-ch-config: |
-       # This is the cluster-wide default channel.
+     default-br-config: |
+       # This is the cluster-wide default channel configuration.
        clusterDefault:
-         apiVersion: messaging.knative.dev/v1alpha1
-         kind: InMemoryChannel
-
+         apiVersion: v1
+         kind: ConfigMap
+         name: imc-channel
+         namespace: knative-eventing
+       # This allows you to specify different defaults per-namespace,
+       # in this case the "some-namespace" namespace will use the Kafka
+       # channel ConfigMap by default (only for example, you will need
+       # to install kafka also to make use of this).
        namespaceDefaults:
-         # This allows you to specify different defaults per-namespace,
-         # in this case the "some-namespace" namespace will use the Kafka
-         # channel by default.
          some-namespace:
-           apiVersion: messaging.knative.dev/v1alpha1
-           kind: KafkaChannel
-           spec:
-             numPartitions: 2
-             replicationFactor: 1
+           apiVersion: v1
+           kind: ConfigMap
+           name: kafka-channel
+           namespace: knative-eventing
    ```
 
 {{< /tab >}}
