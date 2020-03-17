@@ -1,7 +1,7 @@
 ---
 title: "Knative Eventing code samples"
 linkTitle: "Code samples"
-weight: 90
+weight: 100
 type: "docs"
 showlandingtoc: "true"
 ---
