@@ -476,7 +476,7 @@ The following command installs an implementation of Channel that runs in-memory.
 
 {{< /tabs >}}
 
-1. Install a default Broker (eventing) layer:
+1. Install a Broker (eventing) layer:
 
    <!-- This indentation is important for things to render properly. -->
    {{< tabs name="eventing_brokers" default="Channel-based" >}}
@@ -502,6 +502,7 @@ ConfigMap to specify which configurations are used for which namespaces:
      default-br-config: |
        # This is the cluster-wide default broker channel.
        clusterDefault:
+         brokerClass: ChannelBasedBroker
          apiVersion: v1
          kind: ConfigMap
          name: imc-channel
@@ -512,6 +513,51 @@ ConfigMap to specify which configurations are used for which namespaces:
        # to install kafka also to make use of this).
        namespaceDefaults:
          some-namespace:
+           brokerClass: ChannelBasedBroker
+           apiVersion: v1
+           kind: ConfigMap
+           name: kafka-channel
+           namespace: knative-eventing
+   ```
+
+{{< /tab >}}
+
+{{% tab name="MT-Channel-based" %}}
+{{< feature-state version="v0.14" state="alpha" >}}
+
+The following command installs an implementation of Broker that utilizes Channels
+just like the Channel Based one, but this broker runs event routing components
+in a System Namespace, providing a smaller and simpler installation.
+
+   ```bash
+   kubectl apply --filename {{< artifact repo="eventing" file="mt-channel-broker.yaml" >}}
+   ```
+
+To customize which broker channel implementation is used, update the following
+ConfigMap to specify which configurations are used for which namespaces:
+
+   ```yaml
+   apiVersion: v1
+   kind: ConfigMap
+   metadata:
+     name: config-br-defaults
+     namespace: knative-eventing
+   data:
+     default-br-config: |
+       # This is the cluster-wide default broker channel.
+       clusterDefault:
+         brokerClass: MTChannelBasedBroker
+         apiVersion: v1
+         kind: ConfigMap
+         name: imc-channel
+         namespace: knative-eventing
+       # This allows you to specify different defaults per-namespace,
+       # in this case the "some-namespace" namespace will use the Kafka
+       # channel ConfigMap by default (only for example, you will need
+       # to install kafka also to make use of this).
+       namespaceDefaults:
+         some-namespace:
+           brokerClass: MTChannelBasedBroker
            apiVersion: v1
            kind: ConfigMap
            name: kafka-channel
