@@ -454,8 +454,8 @@ The following command installs an implementation of Broker that utilizes Channel
    kubectl apply --filename {{< artifact repo="eventing" file="channel-broker.yaml" >}}
    ```
 
-To customize which channel implementation is used, update the following ConfigMap to
-specify which configurations are used for which namespaces:
+To customize which broker channel implementation is used, update the following
+ConfigMap to specify which configurations are used for which namespaces:
 
    ```yaml
    apiVersion: v1
@@ -465,7 +465,7 @@ specify which configurations are used for which namespaces:
      namespace: knative-eventing
    data:
      default-br-config: |
-       # This is the cluster-wide default channel configuration.
+       # This is the cluster-wide default broker channel.
        clusterDefault:
          apiVersion: v1
          kind: ConfigMap
