@@ -262,7 +262,7 @@ We ship a simple Kubernetes Job called "default domain" that will (see caveats) 
 kubectl apply --filename {{< artifact repo="serving" file="serving-default-domain.yaml" >}}
 ```
 
-**Caveat**: This will only work if the cluster LoadBalancer service exposes an IPv4 address, so it will not work with IPv6 clusters, AWS, or local setups like Minikube.  For these, see "Real DNS".
+**Caveat**: This will only work if the cluster LoadBalancer service exposes an IPv4 address, so it will not work with IPv6 clusters, AWS, or local setups like Minikube.  For these, see "Real DNS" or "Temporary DNS".
 {{< /tab >}}
 
 
@@ -294,6 +294,41 @@ kubectl patch configmap/config-domain \
 ```
 
 {{< /tab >}}
+
+{{% tab name="Temporary DNS" %}}
+If you are using `curl` to access the sample applications, or your own Knative app, and are unable to use the "Magic DNS (xip.io)" or "Real DNS" methods, there is a temporary approach. This is useful for those who wish to evaluate Knative without altering their DNS configuration, as per the "Real DNS" method, or cannot use the "Magic DNS" method due to using, for example, minikube locally or IPv6 clusters.
+
+To access your application using `curl` using this method:
+
+1. After starting your application, get the URL of your application:
+
+    ```bash
+    kubectl get ksvc
+    ```
+
+   The output should be similar to:
+
+   ```bash
+   NAME            URL                                        LATESTCREATED         LATESTREADY           READY   REASON
+   helloworld-go   http://helloworld-go.default.example.com   helloworld-go-vqjlf   helloworld-go-vqjlf   True    
+   ```
+
+1. Instruct `curl` to connect to the External IP or CNAME defined by the networking layer in section 3 above, and use the `-H "Host:"` command-line option to specify the Knative application's host name. For example, if the networking layer defines your External IP and port to be `http://192.168.39.228:32198` and you wish to access the above `helloworld-go` application, use:
+
+   ```bash
+   curl -H "Host: helloworld-go.default.example.com" http://192.168.39.228:32198
+   ```
+
+   In the case of the provided `helloworld-go` sample application, the output should, using the default configuration, be:
+
+   ```
+   Hello Go Sample v1!
+   ```
+
+Refer to the "Real DNS" method for a permanent solution.
+
+{{< /tab >}}
+
 {{< /tabs >}}
 
 1. Monitor the Knative components until all of the components show a `STATUS` of `Running` or `Completed`:
@@ -363,7 +398,7 @@ Deploy your first app with the [getting started with Knative app deployment](../
 
 ## Installing the Eventing component
 
-{{< feature-state version="v0.2" state="alpha" >}}
+{{< feature-state version="v0.13" state="beta" >}}
 
 
 The following commands install the Knative Eventing component.
@@ -415,7 +450,7 @@ To learn more about the Google Cloud Pub/Sub Channel, try [our sample](https://g
 
 {{% tab name="In-Memory (standalone)" %}}
 
-{{< feature-state version="v0.2" state="alpha" >}}
+{{< feature-state version="v0.13" state="beta" >}}
 
 The following command installs an implementation of Channel that runs in-memory.  This implementation is nice because it is simple and standalone, but it is unsuitable for production use cases.
 
@@ -446,7 +481,7 @@ The following command installs an implementation of Channel that runs in-memory.
    <!-- This indentation is important for things to render properly. -->
    {{< tabs name="eventing_brokers" default="Channel-based" >}}
 {{% tab name="Channel-based" %}}
-{{< feature-state version="v0.5" state="alpha" >}}
+{{< feature-state version="v0.13" state="beta" >}}
 
 The following command installs an implementation of Broker that utilizes Channels:
 
@@ -454,31 +489,33 @@ The following command installs an implementation of Broker that utilizes Channel
    kubectl apply --filename {{< artifact repo="eventing" file="channel-broker.yaml" >}}
    ```
 
-To customize which channel implementation is used, update the following ConfigMap:
+To customize which broker channel implementation is used, update the following
+ConfigMap to specify which configurations are used for which namespaces:
 
    ```yaml
    apiVersion: v1
    kind: ConfigMap
    metadata:
-     name: default-ch-webhook
+     name: config-br-defaults
      namespace: knative-eventing
    data:
-     default-ch-config: |
-       # This is the cluster-wide default channel.
+     default-br-config: |
+       # This is the cluster-wide default broker channel.
        clusterDefault:
-         apiVersion: messaging.knative.dev/v1alpha1
-         kind: InMemoryChannel
-
+         apiVersion: v1
+         kind: ConfigMap
+         name: imc-channel
+         namespace: knative-eventing
+       # This allows you to specify different defaults per-namespace,
+       # in this case the "some-namespace" namespace will use the Kafka
+       # channel ConfigMap by default (only for example, you will need
+       # to install kafka also to make use of this).
        namespaceDefaults:
-         # This allows you to specify different defaults per-namespace,
-         # in this case the "some-namespace" namespace will use the Kafka
-         # channel by default.
          some-namespace:
-           apiVersion: messaging.knative.dev/v1alpha1
-           kind: KafkaChannel
-           spec:
-             numPartitions: 2
-             replicationFactor: 1
+           apiVersion: v1
+           kind: ConfigMap
+           name: kafka-channel
+           namespace: knative-eventing
    ```
 
 {{< /tab >}}
@@ -574,7 +611,21 @@ To learn more about the Cloud Audit Logs source, try [our sample](../eventing/sa
 
 {{< /tab >}}
 
-<!-- TODO: couchdb source -->
+{{% tab name="Apache CouchDB Source" %}}
+
+{{< feature-state version="v0.10" state="alpha" >}}
+
+The following command installs the Apache CouchDB Source:
+
+   ```bash
+   kubectl apply --filename {{< artifact repo="eventing-contrib" file="couchdb.yaml" >}}
+   ```
+
+To learn more about the Apache CouchDB source, read [our documentation]((https://github.com/knative/eventing-contrib/blob/{{< version >}}/couchdb/README.md)
+
+{{< /tab >}}
+
+
 <!-- TODO: prometheus source -->
 <!-- TODO: AWS SQS source  -->
 

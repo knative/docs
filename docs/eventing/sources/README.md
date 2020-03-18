@@ -1,7 +1,7 @@
 ---
 title: "Knative Eventing sources"
 linkTitle: "Eventing sources"
-weight: 20
+weight: 30
 type: "docs"
 ---
 
@@ -43,10 +43,11 @@ Name | Status | Support | Description
 [CloudPubSubSource](https://github.com/google/knative-gcp/blob/master/docs/examples/cloudpubsubsource/README.md) | Active Development | None | Brings [Cloud Pub/Sub](https://cloud.google.com/pubsub/) messages into Knative.
 [CloudSchedulerSource](https://github.com/google/knative-gcp/blob/master/docs/examples/cloudschedulersource/README.md) | Active Development | None | Create, update, and delete [Google Cloud Scheduler](https://cloud.google.com/scheduler/) Jobs. When those jobs are triggered, receive the event inside Knative.
 [CloudStorageSource](https://github.com/google/knative-gcp/blob/master/docs/examples/cloudstoragesource/README.md) | Active Development | None | Registers for events of the specified types on the specified [Google Cloud Storage](https://cloud.google.com/storage/) bucket and optional object prefix. Brings those events into Knative.
-[Cron Job](https://github.com/knative/eventing/blob/master/pkg/apis/sources/v1alpha1/cron_job_types.go) | Proof of Concept | None | Uses an in-memory timer to produce events on the specified Cron schedule.
+[Cron Job](https://knative.dev/docs/eventing/migration/ping) | Replaced by PingSource | None | Deprecated, replace with [PingSource](https://knative.dev/docs/eventing/migration/ping) or a [CronJob using SinkBinding](https://knative.dev/docs/eventing/samples/sinkbinding/)
 [GitHub](https://github.com/knative/eventing-contrib/blob/master/github/pkg/apis/sources/v1alpha1/githubsource_types.go) | Proof of Concept | None | Registers for events of the specified types on the specified GitHub organization/repository. Brings those events into Knative.
 [GitLab](https://gitlab.com/triggermesh/gitlabsource) | Proof of Concept | None | Registers for events of the specified types on the specified GitLab repository. Brings those events into Knative.
 [Kubernetes](https://github.com/knative/eventing/blob/master/pkg/apis/sources/v1alpha1/apiserver_types.go) | Active Development | Knative | Brings Kubernetes API server events into Knative.
+[Ping](https://github.com/knative/eventing/blob/master/pkg/apis/sources/v1alpha2/ping_types.go) | In development | None | Uses an in-memory timer to produce events with a fixed payload on a specified cron schedule.
 
 
 
@@ -57,9 +58,10 @@ These are not directly usable, but make writing a Source much easier.
 Name | Status | Support | Description
 --- | --- | --- | ---
 [Auto Container Source](https://github.com/Harwayne/auto-container-source) | Proof of Concept | None | AutoContainerSource is a controller that allows the Source CRDs _without_ needing a controller. It notices CRDs with a specific label and starts controlling resources of that type. It utilizes Container Source as underlying infrastructure.
-[Container Source](https://github.com/knative/eventing/blob/master/pkg/apis/sources/v1alpha1/containersource_types.go) | Active Development | Knative | Container Source is a generic controller. Given an Image URL, it will keep a single `Pod` running with the specified image, environment, and arguments. It is used by multiple other Sources as underlying infrastructure.
+[Container Source](https://knative.dev/docs/eventing/migration/sinkbinding) | Deprecated, replaced by SinkBinding | Knative | ContainerSource was an earlier version of SinkBinding which controlled the lifetime of a single Pod which acted as an event source. SinkBinding is more flexible and is preferred.
 [Kubebuilder Sample Source](https://github.com/grantr/sample-source) | Proof of Concept | None | Kubebuilder SampleSource is a kubebuilder based implementation supporting the [Writing an Event Source the Hard Way tutorial](../samples/writing-a-source).
 [Sample Source](https://github.com/knative/sample-source) | Active Development | Knative | Used as reference implementation supporting [Writing an Event Source from Scratch tutorial](../samples/writing-receive-adapter-source).
+[SinkBinding](https://knative.dev/docs/eventing/samples/sinkbinding/) | Active Development | Knative | SinkBinding provides a framework for injecting `K_SINK` (destination address) and `K_CE_OVERRIDES` (JSON cloudevents attributes) environment variables into any Kubernetes resource which has a `spec.template` that looks like a Pod (aka PodSpeccable).
 
 
 

@@ -89,7 +89,7 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display
+        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
 ```
 
 Change `default` below to create the `Sequence` in the Namespace where you want
@@ -104,13 +104,13 @@ kubectl -n default create -f ./event-display.yaml
 The `parallel.yaml` file contains the specifications for creating the Parallel.
 
 ```yaml
-apiVersion: flows.knative.dev/v1alpha1
+apiVersion: flows.knative.dev/v1beta1
 kind: Parallel
 metadata:
   name: odd-even-parallel
 spec:
   channelTemplate:
-    apiVersion: messaging.knative.dev/v1alpha1
+    apiVersion: messaging.knative.dev/v1beta1
     kind: InMemoryChannel
   branches:
     - filter:
@@ -144,34 +144,34 @@ spec:
 kubectl create -f ./parallel.yaml
 ```
 
-### Create the CronJobSource targeting the Parallel
+### Create the PingSource targeting the Parallel
 
-This will create a CronJobSource which will send a CloudEvent with {"message":
-"Even or odd?"} as the data payload every minute.
+This will create a PingSource which will send a CloudEvent with `{"message":
+"Even or odd?"}` as the data payload every minute.
 
 ```yaml
-apiVersion: sources.eventing.knative.dev/v1alpha1
-kind: CronJobSource
+apiVersion: sources.knative.dev/v1alpha2
+kind: PingSource
 metadata:
-  name: cronjob-source
+  name: ping-source
 spec:
   schedule: "*/1 * * * *"
   data: '{"message": "Even or odd?"}'
   sink:
     ref:
-      apiVersion: flows.knative.dev/v1alpha1
+      apiVersion: flows.knative.dev/v1alpha2
       kind: Parallel
       name: odd-even-parallel
 ```
 
 ```shell
-kubectl create -f ./cron-source.yaml
+kubectl create -f ./ping-source.yaml
 ```
 
 ### Inspecting the results
 
 You can now see the final output by inspecting the logs of the event-display
-pods. Note that since we set the `CronJobSource` to emit every minute, it might
+pods. Note that since we set the `PingSource` to emit every minute, it might
 take some time for the events to show up in the logs.
 
 Let's look at the `event-display` log:
@@ -182,14 +182,15 @@ kubectl logs -l serving.knative.dev/service=event-display --tail=30 -c user-cont
 ☁️  cloudevents.Event
 Validation: valid
 Context Attributes,
-  specversion: 0.3
-  type: dev.knative.cronjob.event
-  source: /apis/v1/namespaces/default/cronjobsources/cronjob-source
-  id: 2884f4a3-53f2-4926-a32c-e696a6fb3697
-  time: 2019-07-31T18:10:00.000309586Z
+  specversion: 1.0
+  type: dev.knative.sources.ping
+  source: /apis/v1/namespaces/default/pingsources/ping-source
+  id: 015a4cf4-8a43-44a9-8702-3d4171d27ba5
+  time: 2020-03-03T21:24:00.0007254Z
   datacontenttype: application/json; charset=utf-8
 Extensions,
-  knativehistory: odd-even-parallel-kn-parallel-0-kn-channel.default.svc.cluster.local, odd-even-parallel-kn-parallel-kn-channel.default.svc.cluster.local
+  knativehistory: odd-even-parallel-kn-parallel-kn-channel.default.svc.cluster.local; odd-even-parallel-kn-parallel-0-kn-channel.default.svc.cluster.local
+  traceparent: 00-41a139bf073f3cfcba7bb7ce7f1488fc-68a891ace985221a-00
 Data,
   {
     "message": "we are even!"
@@ -197,14 +198,15 @@ Data,
 ☁️  cloudevents.Event
 Validation: valid
 Context Attributes,
-  specversion: 0.3
-  type: dev.knative.cronjob.event
-  source: /apis/v1/namespaces/default/cronjobsources/cronjob-source
-  id: 2e519f11-3b6f-401c-b196-73f8b235de58
-  time: 2019-07-31T18:11:00.002649881Z
+  specversion: 1.0
+  type: dev.knative.sources.ping
+  source: /apis/v1/namespaces/default/pingsources/ping-source
+  id: 52e6b097-f914-4b5a-8539-165650e85bcd
+  time: 2020-03-03T21:23:00.0004662Z
   datacontenttype: application/json; charset=utf-8
 Extensions,
-  knativehistory: odd-even-parallel-kn-parallel-1-kn-channel.default.svc.cluster.local, odd-even-parallel-kn-parallel-kn-channel.default.svc.cluster.local
+  knativehistory: odd-even-parallel-kn-parallel-kn-channel.default.svc.cluster.local; odd-even-parallel-kn-parallel-1-kn-channel.default.svc.cluster.local
+  traceparent: 00-58d371410d7daf2033be226860b4ee5d-05d686ee90c3226f-00
 Data,
   {
     "message": "this is odd!"

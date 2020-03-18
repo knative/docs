@@ -1,7 +1,7 @@
 ---
 title: "Accessing CloudEvent traces"
 #linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
-weight: 50
+weight: 85
 type: "docs"
 ---
 
