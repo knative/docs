@@ -1,12 +1,13 @@
 ---
-title: "Channel Based Broker"
+title: "MT Channel Based Broker"
 weight: 30
 type: "docs"
 ---
 
 NOTE: This doc assume the shared Knative Eventing components are installed in the `knative-eventing`
 namespace. If you installed the shared Knative Eventing components in a different namespace, replace
-`knative-eventing` with the name of that namespace.
+`knative-eventing` with the name of that namespace. Furthermore, you have to install the
+Multi Tenant Channel Based Broker.
 
 Knative provides a Multi Tenant `Broker` implementation that uses
 [Channels](./channels/) for event routing. You will need to have a Channel provider
@@ -103,7 +104,8 @@ kubectl -n default get broker mybroker
 You can also configure all aspects of your Broker by not relying on
 default behaviours, and just construct the entire object. For example,
 say you wanted to create a Broker that has a different Kafka configuration.
-You would first create the configuration you'd like to use, for example:
+You would first create the configuration you'd like to use, for example
+let's increase the number of partitions to 10:
 
 ```shell
 kubectl apply -f - <<EOF
@@ -121,7 +123,7 @@ data:
     kind: KafkaChannel
     spec:
       numPartitions: 10
-      replicationFactor: 3
+      replicationFactor: 1
 EOF
 ```
 
@@ -131,6 +133,7 @@ apiVersion: eventing.knative.dev/v1beta1
 kind: Broker
 metadata:
   name: my-other-broker
+  namespace: my-namespace
   annotations:
     eventing.knative.dev/broker.class: MTChannelBasedBroker
 spec:
