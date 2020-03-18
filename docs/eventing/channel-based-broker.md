@@ -4,8 +4,6 @@ weight: 30
 type: "docs"
 ---
 
-# Channel Based Broker
-
 NOTE: This doc assume the shared Knative Eventing components are installed in the `knative-eventing`
 namespace. If you installed the shared Knative Eventing components in a different namespace, replace
 `knative-eventing` with the name of that namespace.
