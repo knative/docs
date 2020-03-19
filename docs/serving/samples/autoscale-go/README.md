@@ -270,7 +270,3 @@ kubectl port-forward --namespace knative-monitoring $(kubectl get pods --namespa
 ```
 kubectl delete --filename docs/serving/samples/autoscale-go/service.yaml
 ```
-
-## Further reading
-
-[Autoscaling Developer Documentation](https://github.com/knative/serving/blob/master/docs/scaling/DEVELOPMENT.md)
