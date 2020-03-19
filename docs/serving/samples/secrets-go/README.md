@@ -16,7 +16,7 @@ following commands:
 
 ```shell
 git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
-cd knative-docs/serving/samples/secrets-go
+cd knative-docs/docs/serving/samples/secrets-go
 ```
 
 ## Before you begin
