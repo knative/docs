@@ -520,6 +520,13 @@ ConfigMap to specify which configurations are used for which namespaces:
            namespace: knative-eventing
    ```
 
+The following command enables the default Broker on a namespace (here `default`):
+
+   ```bash
+   kubectl label namespace default knative-eventing-injection=enabled
+   ```
+
+
 {{< /tab >}}
 
 {{% tab name="MT-Channel-based" %}}
@@ -564,6 +571,14 @@ ConfigMap to specify which configurations are used for which namespaces:
            namespace: knative-eventing
    ```
 
+This Broker implementation has a small enough incremental overhead that it
+creates a Broker for every namespace by default.  To opt particular namespaces
+out of this behavior you can label them with:
+
+   ```bash
+   kubectl label namespace default knative-eventing-injection=disabled
+   ```
+
 {{< /tab >}}
 
 {{< /tabs >}}
@@ -582,18 +597,6 @@ At this point, you have a basic installation of Knative Eventing!
 
    <!-- This indentation is important for things to render properly. -->
    {{< tabs name="eventing_extensions" >}}
-{{% tab name="Enable Broker" %}}
-
-<!-- Unclear when this feature came in -->
-{{< feature-state version="v0.5" state="alpha" >}}
-
-The following command enables the default Broker on a namespace (here `default`):
-
-   ```bash
-   kubectl label namespace default knative-eventing-injection=enabled
-   ```
-
-{{< /tab >}}
 
 {{% tab name="Github Source" %}}
 
