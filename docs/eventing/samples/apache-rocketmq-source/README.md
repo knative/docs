@@ -130,7 +130,7 @@ time="2020-03-13T05:55:31Z" level=info msg="the consumer start beginning" consum
   cloudevents.Event
 Validation: valid
 Context Attributes,
-  specversion: 0.2
+  specversion: 1.0
   type: RocketMQEventType
   source: rocketmq
   id: AC14000100002A9F0000000000028C49
