@@ -88,8 +88,8 @@ There are cases where you may want to utilize a set of co-operating functions
 together and for those use cases, Knative Eventing provides two additional
 resources:
 
-1. **[Sequence](./sequence.md)** provides a way to define an in-order list of functions.
-1. **[Parallel](./parallel.md)** provides a way to define a list of branches for events.
+1. **[Sequence](./flows/sequence.md)** provides a way to define an in-order list of functions.
+1. **[Parallel](./flows/parallel.md)** provides a way to define a list of branches for events.
 
 ### Future design goals
 
