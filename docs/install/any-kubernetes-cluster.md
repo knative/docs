@@ -376,16 +376,49 @@ Knative supports automatically provisioning TLS certificates via [cert-manager](
 3. Now configure Knative to [automatically configure TLS certificates](../serving/using-auto-tls.md).
 {{< /tab >}}
 
+{{% tab name="TLS via HTTP01" %}}
+
+{{% feature-state version="v0.14" state="alpha" %}}
+
+Knative supports automatically provisioning TLS certificates using Let's Encrypt HTTP01 challenges.  The following commands will install the components needed to support that.
+
+1. First, install the `net-http01` controller:
+
+    ```bash
+    kubectl apply --filename {{< artifact repo="net-http01" file="release.yaml" >}}
+    ```
+
+2. Next, configure the `certificate.class` to use this certificate type.
+
+    ```bash
+    kubectl patch configmap/config-network \
+      --namespace knative-serving \
+      --type merge \
+      --patch '{"data":{"certificate.class":"net-http01.certificate.networking.knative.dev"}}'
+    ```
+
+3. Lastly, enable auto-TLS.
+
+    ```bash
+    kubectl patch configmap/config-network \
+      --namespace knative-serving \
+      --type merge \
+      --patch '{"data":{"autoTLS":"Enabled"}}'
+    ```
+
+{{< /tab >}}
+
 {{% tab name="TLS wildcard support" %}}
 
-<!-- This isn't where this was introduced, but we seem to have missed it in the release notes :( -->
 {{% feature-state version="v0.12" state="alpha" %}}
 
-If you plan to use cert-manager's support for provisioning wildcard certificates, then the most efficient way to provision certificates is with the namespace wildcard certificate controller.  The following command will install the components needed to provision wildcard certificates in each namespace:
+If you are using a Certificate implementation that supports provisioning wildcard certificates (e.g. cert-manager with a DNS01 issuer), then the most efficient way to provision certificates is with the namespace wildcard certificate controller.  The following command will install the components needed to provision wildcard certificates in each namespace:
 
 ```bash
 kubectl apply --filename {{< artifact repo="serving" file="serving-nscert.yaml" >}}
 ```
+
+> Note this will not work with HTTP01 either via cert-manager or the net-http01 options.
 
 {{< /tab >}}
 {{< /tabs >}}
