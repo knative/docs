@@ -142,7 +142,7 @@ All Sources should be part of the `sources` category, so you can list all existi
 
 In addition to the sources explained below, there are
 [other sources](./sources/README.md) that you can install.
-If you need a Source not covered by the ones mentioned below nor by the other 
+If you need a Source not covered by the ones mentioned below nor by the other
 [available implementations](./sources/README.md), there is a
 [tutorial on writing your own Source with kubebuilder](./samples/writing-a-source/README.md) as
 well as an
@@ -188,7 +188,7 @@ See the [SinkBinding](samples/container-source) example for more details.
 
 ### Eventing Contrib Sources
 
-This is a non-exhaustive list of Sources supported by our community and maintained 
+This is a non-exhaustive list of Sources supported by our community and maintained
 in the [Knative Eventing-Contrib](https://github.com/knative/eventing-contrib) Github repo.
 
 #### GitHubSource
@@ -227,8 +227,8 @@ example.
 
 ### Google Cloud Sources
 
-In order to consume events from different GCP services, [Knative-GCP](https://github.com/google/knative-gcp) supports 
-different GCP Sources. 
+In order to consume events from different GCP services, [Knative-GCP](https://github.com/google/knative-gcp) supports
+different GCP Sources.
 
 #### CloudPubSubSource
 
@@ -254,7 +254,7 @@ See the [CloudSchedulerSource](samples/cloud-scheduler-source) example for furth
 
 #### CloudAuditLogsSource
 
-Registers for events of specific types on the specified [Google Cloud Audit Logs](https://cloud.google.com/logging/docs/audit/). 
+Registers for events of specific types on the specified [Google Cloud Audit Logs](https://cloud.google.com/logging/docs/audit/).
 Brings those events into Knative.
 
 Refer to the [CloudAuditLogsSource](samples/cloud-audit-logs-source) example for more details.

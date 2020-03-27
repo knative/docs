@@ -83,7 +83,7 @@ In YAML, these two options are equivalent:
                 - '--eventType=my.custom.event'
     ```
 
-    The `Deployment` is a standard Kubernetes Deployment, like you might have used before. However, the important part 
+    The `Deployment` is a standard Kubernetes Deployment, like you might have used before. However, the important part
     here is that it has the `app: wss` label, which is needed by the above `SinkBinding` in order to _bind_ the
     two components together.
 
