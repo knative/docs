@@ -142,7 +142,7 @@ All Sources should be part of the `sources` category, so you can list all existi
 
 In addition to the sources explained below, there are
 [other sources](./sources/README.md) that you can install.
-If you need a Source not covered by the ones mentioned below nor by the other 
+If you need a Source not covered by the ones mentioned below nor by the other
 [available implementations](./sources/README.md), there is a
 [tutorial on writing your own Source with kubebuilder](./samples/writing-a-source/README.md) as
 well as an
