@@ -254,7 +254,7 @@ See the [CloudSchedulerSource](samples/cloud-scheduler-source) example for furth
 
 #### CloudAuditLogsSource
 
-Registers for events of specific types on the specified [Google Cloud Audit Logs](https://cloud.google.com/logging/docs/audit/). 
+Registers for events of specific types on the specified [Google Cloud Audit Logs](https://cloud.google.com/logging/docs/audit/).
 Brings those events into Knative.
 
 Refer to the [CloudAuditLogsSource](samples/cloud-audit-logs-source) example for more details.
