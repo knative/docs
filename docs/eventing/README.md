@@ -227,7 +227,7 @@ example.
 
 ### Google Cloud Sources
 
-In order to consume events from different GCP services, [Knative-GCP](https://github.com/google/knative-gcp) supports 
+In order to consume events from different GCP services, [Knative-GCP](https://github.com/google/knative-gcp) supports
 different GCP Sources. 
 
 #### CloudPubSubSource
