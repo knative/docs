@@ -188,7 +188,7 @@ See the [SinkBinding](samples/container-source) example for more details.
 
 ### Eventing Contrib Sources
 
-This is a non-exhaustive list of Sources supported by our community and maintained 
+This is a non-exhaustive list of Sources supported by our community and maintained
 in the [Knative Eventing-Contrib](https://github.com/knative/eventing-contrib) Github repo.
 
 #### GitHubSource
