@@ -6,8 +6,9 @@ aliases:
    - /docs/eventing/sinkbinding.md
 ---
 
-`ContainerSource` can be seen as the combination of `SinkBinding`+`Deployment`. In fact, that 
-is exactly how it's implemented! 
+`ContainerSource` can be seen as the combination of
+`SinkBinding`+`Deployment`. In fact, that
+is exactly how it's implemented!
 
 In YAML, these two options are equivalent:
 
@@ -54,7 +55,8 @@ In YAML, these two options are equivalent:
           name: wss-event-display
     ```
 
-    Here the `SinkBinding`'s `subject` references to a Kubernetes `Deployment`, that is labeled with `app: wss`. 
+    Here the `SinkBinding`'s `subject` references to a Kubernetes
+    `Deployment`, that is labeled with `app: wss`.
     The YAML for the `Deployment` looks like:
 
     ```yaml
@@ -85,7 +87,8 @@ In YAML, these two options are equivalent:
     here is that it has the `app: wss` label, which is needed by the above `SinkBinding` in order to _bind_ the
     two components together.
 
-In both cases, the `image` is required to understand the semantics of the `K_SINK` environment variable, which holds 
+In both cases, the `image` is required to understand
+the semantics of the `K_SINK` environment variable, which holds
 the destination endpoint for sending CloudEvents.
 
 Running any of the above examples will give a log similar to:
@@ -105,7 +108,10 @@ Data,
 
 ## When to use SinkBinding?
 
-From the above options, `ContainerSource` is arguably the simplest one. 
-However, the true power of `SinkBinding` comes from the fact that it can work not just with `Deployments` 
-but with **any** PodSpecable (e.g., `StatefulSet`, `ReplicateSet`, `DaemonSet`, `Knative Service`, etc.). 
+From the above options, `ContainerSource` is probably the less
+verbose.
+However, the true power of `SinkBinding` comes from the fact that
+it can work not just with `Deployments` 
+but with **any** PodSpecable (e.g., `StatefulSet`, `ReplicateSet`,
+`DaemonSet`, `Knative Service`, etc.).
 If you do need that flexibility, we highly recommend you to use `SinkBinding`.

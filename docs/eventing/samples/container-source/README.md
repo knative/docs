@@ -160,7 +160,7 @@ any tools you like. Here are some basic guidelines:
 - The container image must have a `main` method to start with.
 - The `main` method will accept parameters from arguments and environment
   variables.
-- Two environments variables will be injected by the `ContainerSource` controller, 
+- Two environments variables will be injected by the `ContainerSource` controller,
 `K_SINK` and `K_CE_OVERRIDES`, resolved from `spec.sink` and `spec.ceOverrides` respectively.
 - The event messages shall be sent to the sink URI specified in `K_SINK`. The message can be any
   format.
