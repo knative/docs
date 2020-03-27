@@ -56,7 +56,11 @@ In YAML, these two options are equivalent:
     ```
 
     Here the `SinkBinding`'s `subject` references to a Kubernetes
-    `Deployment`, that is labeled with `app: wss`.
+    `Deployment`, that is labeled with `app: wss`. This is done with
+    the `subject.selector` field, which is a standard Kubernetes
+    Label Selector object. Note that you could explicitly set a
+    `Deployment` name and namespace in `subject` (i.e., `subject.name`
+    and `subject.namespace`) instead of using `subject.selector`.
     The YAML for the `Deployment` looks like:
 
     ```yaml
