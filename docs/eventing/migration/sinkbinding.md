@@ -111,7 +111,7 @@ Data,
 From the above options, `ContainerSource` is probably the less
 verbose.
 However, the true power of `SinkBinding` comes from the fact that
-it can work not just with `Deployments` 
+it can work not just with `Deployments`
 but with **any** PodSpecable (e.g., `StatefulSet`, `ReplicateSet`,
 `DaemonSet`, `Knative Service`, etc.).
 If you do need that flexibility, we highly recommend you to use `SinkBinding`.
