@@ -123,7 +123,6 @@ kind: CronJob
 metadata:
   name: heartbeat-cron
 spec:
-spec:
   # Run every minute
   schedule: "* * * * *"
   jobTemplate:

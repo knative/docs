@@ -8,14 +8,16 @@ metaSources:
     description: >
       SinkBinding provides a framework for injecting `K_SINK` (destination address) and
       `K_CE_OVERRIDES` (JSON cloudevents attributes) environment variables into any Kubernetes
-      resource which has a `spec.template` that looks like a Pod (aka PodSpeccable).
+      resource which has a `spec.template` that looks like a Pod (aka PodSpecable).
   - name: Container Source
     url: https://knative.dev/docs/eventing/migration/sinkbinding
-    status: Deprecated, replaced by SinkBinding
+    status: Active Development
     support: Knative
     description: >
-      ContainerSource was an earlier version of SinkBinding which controlled the lifetime of a single
-      Pod which acted as an event source. SinkBinding is more flexible and is preferred.
+      Given a `spec.template` with at least a container image specified, ContainerSource will keep a `Pod`
+      running with the specified image(s). `K_SINK` (destination address) and `KE_CE_OVERRIDES` (JSON
+      CloudEvents attributes) environment variables are injected into the running image(s). It is used by multiple
+      other Sources as underlying infrastructure.
   - name: Auto Container Source
     url: https://github.com/Harwayne/auto-container-source
     status: Proof of Concept

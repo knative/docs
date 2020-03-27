@@ -1,7 +1,7 @@
 ---
 title: "Knative Eventing sources"
 linkTitle: "Eventing sources"
-weight: 30
+weight: 20
 type: "docs"
 ---
 
@@ -58,10 +58,10 @@ These are not directly usable, but make writing a Source much easier.
 Name | Status | Support | Description
 --- | --- | --- | ---
 [Auto Container Source](https://github.com/Harwayne/auto-container-source) | Proof of Concept | None | AutoContainerSource is a controller that allows the Source CRDs _without_ needing a controller. It notices CRDs with a specific label and starts controlling resources of that type. It utilizes Container Source as underlying infrastructure.
-[Container Source](https://knative.dev/docs/eventing/migration/sinkbinding) | Deprecated, replaced by SinkBinding | Knative | ContainerSource was an earlier version of SinkBinding which controlled the lifetime of a single Pod which acted as an event source. SinkBinding is more flexible and is preferred.
+[Container Source](https://knative.dev/docs/eventing/migration/sinkbinding) | Active Development | Knative | Given a `spec.template` with at least a container image specified, ContainerSource will keep a `Pod` running with the specified image(s). `K_SINK` (destination address) and `KE_CE_OVERRIDES` (JSON CloudEvents attributes) environment variables are injected into the running image(s). It is used by multiple other Sources as underlying infrastructure.
 [Kubebuilder Sample Source](https://github.com/grantr/sample-source) | Proof of Concept | None | Kubebuilder SampleSource is a kubebuilder based implementation supporting the [Writing an Event Source the Hard Way tutorial](../samples/writing-a-source).
 [Sample Source](https://github.com/knative/sample-source) | Active Development | Knative | Used as reference implementation supporting [Writing an Event Source from Scratch tutorial](../samples/writing-receive-adapter-source).
-[SinkBinding](https://knative.dev/docs/eventing/samples/sinkbinding/) | Active Development | Knative | SinkBinding provides a framework for injecting `K_SINK` (destination address) and `K_CE_OVERRIDES` (JSON cloudevents attributes) environment variables into any Kubernetes resource which has a `spec.template` that looks like a Pod (aka PodSpeccable).
+[SinkBinding](https://knative.dev/docs/eventing/samples/sinkbinding/) | Active Development | Knative | SinkBinding provides a framework for injecting `K_SINK` (destination address) and `K_CE_OVERRIDES` (JSON cloudevents attributes) environment variables into any Kubernetes resource which has a `spec.template` that looks like a Pod (aka PodSpecable).
 
 
 
