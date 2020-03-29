@@ -5,13 +5,11 @@ weight: 20
 type: "docs"
 ---
 
-Tutorial on how to build and deploy a `KafkaSource`
-[Eventing source](../../../sources/README.md) using a Knative Serving `Service`.
+Tutorial on how to build and deploy a `KafkaSource` [Eventing source](../../../sources/README.md) using a Knative Serving `Service`.
 
 ## Prerequisites
 
-You must ensure that you meet the
-[prerequisites listed in the Apache Kafka overview](../README.md).
+You must ensure that you meet the [prerequisites listed in the Apache Kafka overview](../README.md).
 
 ## Creating a `KafkaSource` source CRD
 
@@ -188,12 +186,22 @@ You must ensure that you meet the
    $ kubectl logs --selector='serving.knative.dev/service=event-display' -c user-container
    ```
 
-☁️ cloudevents.Event Validation: valid Context Attributes, specversion: 1.0
-type: dev.knative.kafka.event source:
-/apis/v1/namespaces/default/kafkasources/kafka-source#my-topic subject:
-partition:0#564 id: partition:0/offset:564 time: 2020-02-10T18:10:23.861866615Z
-datacontenttype: application/json Extensions, key: Data, { "msg": "This is a
-test!" }
+☁️ cloudevents.Event
+Validation: valid
+Context Attributes,
+  specversion: 1.0
+  type: dev.knative.kafka.event
+  source: /apis/v1/namespaces/default/kafkasources/kafka-source#my-topic
+  subject: partition:0#564
+  id: partition:0/offset:564
+  time: 2020-02-10T18:10:23.861866615Z
+  datacontenttype: application/json
+Extensions,
+  key:
+Data,
+    {
+      "msg": "This is a test!"
+    }
 
 ```
 
@@ -216,8 +224,7 @@ test!" }
 3. Remove the Apache Kafka Event Controller
 ```
 
-\$ kubectl delete -f
-https://storage.googleapis.com/knative-releases/eventing-contrib/latest/kafka-source.yaml
+\$ kubectl delete -f https://storage.googleapis.com/knative-releases/eventing-contrib/latest/kafka-source.yaml
 serviceaccount "kafka-controller-manager" deleted
 clusterrole.rbac.authorization.k8s.io "eventing-sources-kafka-controller"
 deleted clusterrolebinding.rbac.authorization.k8s.io
