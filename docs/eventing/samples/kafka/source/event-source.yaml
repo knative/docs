@@ -29,7 +29,7 @@
 #   KAFKA_TLS_CA_CERT_SECRET_NAME: Name of secret containing server CA cert to use when connecting wtih TLS (optional)
 #   KAFKA_TLS_CA_CERT_SECRET_KEY: Key within secret containing server CA cert to use when connecting wtih TLS (optional)
 
-apiVersion: sources.eventing.knative.dev/v1alpha1
+apiVersion: sources.knative.dev/v1alpha1
 kind: KafkaSource
 metadata:
   name: kafka-source
