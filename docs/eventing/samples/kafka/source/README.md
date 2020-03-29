@@ -249,10 +249,10 @@ starting with `kafkaheader`.
 
 You can specify the key deserializer among four types:
 
-- `string` (default) for UTF-8 encoded strings
-- `int` for 32-bit & 64-bit signed integers
-- `float` for 32-bit & 64-bit floating points
-- `byte-array` for a Base64 encoded byte array
+* `string` (default) for UTF-8 encoded strings
+* `int` for 32-bit & 64-bit signed integers
+* `float` for 32-bit & 64-bit floating points
+* `byte-array` for a Base64 encoded byte array
 
 To specify it, add the label `kafkasources.sources.knative.dev/key-type` to the
 `KafkaSource` definition like:
