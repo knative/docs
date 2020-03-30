@@ -4,27 +4,29 @@ weight: 30
 type: "docs"
 ---
 
-NOTE: This doc assume the shared Knative Eventing components are installed in the `knative-eventing`
-namespace. If you installed the shared Knative Eventing components in a different namespace, replace
-`knative-eventing` with the name of that namespace. Furthermore, you have to install the
-Multi Tenant Channel Based Broker.
+Knative provides a Multi Tenant (MT) Broker implementation that uses [Channels](./channels/) for
+event routing.
 
-Knative provides a Multi Tenant `Broker` implementation that uses
-[Channels](../channels/) for event routing. You will need to have a Channel provider
-installed, for example InMemoryChannel (for development purposes), Kafka, Nats, etc. You can choose from
-list of [available channels](https://knative.dev/docs/eventing/channels/channels-crds/)
+**NOTE:** This guide assumes Knative Eventing is installed in the `knative-eventing`
+namespace. If you have installed Knative Eventing in a different namespace, replace
+`knative-eventing` with the name of that namespace.
 
-Once you have decided which Channel(s) you want to use and have installed them, you
-can configure the Broker by controlling which Channel(s) are used. You can choose
-this as a cluster level default, by namespace or by a specific Broker. These are
-configured by a `config-br-defaults` `ConfigMap` in knative-eventing namespace.
+## Before you begin
 
-Here's an example of a configuration that uses Kafka channel for all the
-Brokers except namespace `test-broker-6` which uses InMemoryChannels. First
-define the `ConfigMap`s to describe how the Channels of each type are created:
+Before you can use the MT Broker, you will need to have a Channel provider installed, for example, InMemoryChannel (for development purposes), Kafka or Nats.
+For more information on which Channels are available, see the list of [available Channels](https://knative.dev/docs/eventing/channels/channels-crds/).
+
+After you have installed the Channel provider that you will use in your Broker implementation, you must configure the ConfigMap for each Channel type.
+
+## Configure Channel ConfigMaps
+
+In the ConfigMap for each type of Channel that you will use, you must define the specifications for how each type of Channel will be created.
+
+### Example InMemoryChannel ConfigMap
+
+When you install the InMemoryChannel Channel provider, the following YAML file will be created automatically:
 
 ```yaml
-# Define how InMemoryChannels are created
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -36,10 +38,12 @@ data:
     kind: InMemoryChannel
 ```
 
+### Example Kafka Channel ConfigMap
+
+To use Kafka Channels, you must create a YAML file that specifies how these Channels will be created.
+You can copy the following sample code into your Kafka Channel ConfigMap:
+
 ```yaml
-# Define how Kafka channels are created. Note we specify
-# extra parameters that are particular to Kakfa Channels, namely
-# numPartitions as well as replicationFactor.
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -53,6 +57,18 @@ data:
       numPartitions: 3
       replicationFactor: 1
 ```
+
+**NOTE:** This example specifies two extra parameters that are specific to Kakfa Channels; `numPartitions` and `replicationFactor`.
+
+## Configuring the MT Broker
+
+After you have configured the ConfigMap for each Channel provider type, you can configure the MT Broker.
+You can configure which Channels are used as a cluster level default, by namespace or for a specific Broker.
+The Channels used are configured by a `config-br-defaults` ConfigMap in the `knative-eventing` namespace.
+
+The following example ConfigMap uses a Kafka channel for all Brokers, except for the `test-broker-6` namespace,  which uses InMemoryChannel.
+
+### Example `config-br-defaults` ConfigMap
 
 ```yaml
 kind: ConfigMap
@@ -77,6 +93,7 @@ data:
         namespace: knative-eventing
 ```
 
+<<<<<<< HEAD:docs/eventing/broker/mt-channel-based-broker.md
 
 ## Creating Broker using defaults
 
@@ -146,6 +163,9 @@ EOF
 ```
 
 ## Creating Broker by Annotation
+=======
+## Installing Broker by Annotation
+>>>>>>> [WIP] Updates to MT broker docs:docs/eventing/channel-based-broker.md
 
 The easiest way to get Broker installed, is to annotate your namespace
 (replace `default` with the desired namespace):
