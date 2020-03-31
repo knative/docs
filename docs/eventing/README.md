@@ -196,6 +196,14 @@ The GitHubSource fires a new event for selected
 
 See the [GitHub Source](samples/github-source) example for more details.
 
+#### GitLabSource
+
+The GitLabSource creates a webhooks for specified
+[event types](https://docs.gitlab.com/ee/user/project/integrations/webhooks.html#events),
+listens for incoming events and passes them to a consumer.
+
+See the [GitLab Source](samples/gitlab-source) example for more details.
+
 #### AwsSqsSource
 
 The AwsSqsSource fires a new event each time an event is published on an
