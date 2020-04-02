@@ -11,7 +11,7 @@ metadata:
 
 # The event source.
 
-apiVersion: sources.knative.dev/v1alpha1
+apiVersion: sources.knative.dev/v1alpha2
 kind: ApiServerSource
 metadata:
   name: src
