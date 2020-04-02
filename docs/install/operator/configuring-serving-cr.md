@@ -1,5 +1,16 @@
+---
+title: "Configuring the Serving Operator Custom Resource"
+weight: 10
+type: "docs"
+aliases:
+- /docs/operator/configuring-serving-cr/
+---
+
+The Knative Serving operator can be configured with these options:
+
 - [All the ConfigMaps](#all-the-configmaps)
 - [Private repository and private secret](#private-repository-and-private-secrets)
+- [SSL certificate for controller](#ssl-certificate-for-controller)
 
 __NOTE:__ Kubernetes spec level policies cannot be configured using the Knative operators.
 
@@ -228,3 +239,35 @@ spec:
       - name: regcred-2
       ...
 ```
+
+## SSL certificate for controller
+
+Knative Serving needs to access the container registry, based on the feature [enabling tag to digest resolution](https://knative.dev/development/serving/tag-resolution/). The
+Serving Operator CR allows you to specify either a custom ConfigMap or a Secret as a self-signed certificate for the
+deployment called `controller`. It enables the `controller` to trust registries with self-signed certificates.
+
+Under the section `spec` of the operator CR, you can create a section of `controller-custom-certs` to contain all the
+fields to define the certificate:
+
+- `name`: this field is used to specify the name of the ConfigMap or the Secret.
+- `type`: the value for this field can be either ConfigMap or Secret, indicating the type for the name.
+
+This section `controller-custom-certs` is used to access the user's images in private repositories with the appropriate
+certificate.
+
+If you create a configMap named `testCertas` as the certificate, you need to change your CR into:
+
+```
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  controller-custom-certs:
+    name: testCert
+    type: ConfigMap
+```
+
+It will make sure this custom certificate is mounted as a volume to the containers launched by the `Deployment` resource
+`controller`, and the environment variable is `SSL_CERT_DIR` set correctly.
