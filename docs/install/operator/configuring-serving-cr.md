@@ -12,6 +12,7 @@ The Knative Serving operator can be configured with these options:
 - [Private repository and private secret](#private-repository-and-private-secrets)
 - [SSL certificate for controller](#ssl-certificate-for-controller)
 - [Knative ingress gateway](#configuration-of-knative-ingress-gateway)
+- [Cluster local gateway](#configuration-of-cluster-local-gateway)
 
 __NOTE:__ Kubernetes spec level policies cannot be configured using the Knative operators.
 
@@ -319,3 +320,57 @@ spec:
 ```
 
 The key in `spec.config.istio` is in the format of `gateway.{{gateway_namespace}}.{{gateway_name}}`.
+
+## Configuration of cluster local gateway:
+
+We use the field `cluster-local-gateway` to override the the gateway cluster-local-gateway. We only support the field
+`selector` to define the selector for the local gateway.
+
+**Default local gateway name**:
+
+Go through the guide [here](https://knative.dev/development/install/installing-istio/#updating-your-install-to-use-cluster-local-gateway) to use local cluster gateway.
+
+After following the above step, your service and deployment for the local gateway are both named `cluster-local-gateway`.
+You only need to configure the operator CR as below:
+
+```
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  registry:
+    cluster-local-gateway:
+      selector:
+        istio: cluster-local-gateway
+```
+
+You can even skip the above change, since there is a gateway called `cluster-local-gateway`, which has
+`istio: cluster-local-gateway` as the default selector. If the operator CR does not define the section
+cluster-local-gateway, the default `istio: cluster-local-gateway` of the gateway cluster-local-gateway will be chosen.
+
+**Non-default local gateway name**:
+
+If you create custom service and deployment for local gateway with a name other than `cluster-local-gateway`, you need
+to update gateway configmap `config-istio` under the Knative Serving namespace, and change the selector for the gateway
+cluster-local-gateway.
+
+If you name both of the service and deployment after `custom-local-gateway` in the namespace `istio-system`, with the
+label `custom: custom-local-gateway`, the operator CR should be like:
+
+```
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  registry:
+    cluster-local-gateway:
+      selector:
+        custom: custom-local-gateway
+    config:
+      istio:
+        local-gateway.knative-serving.cluster-local-gateway: "custom-local-gateway.istio-system.svc.cluster.local"
+```
