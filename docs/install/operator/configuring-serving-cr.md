@@ -13,6 +13,7 @@ The Knative Serving operator can be configured with these options:
 - [SSL certificate for controller](#ssl-certificate-for-controller)
 - [Knative ingress gateway](#configuration-of-knative-ingress-gateway)
 - [Cluster local gateway](#configuration-of-cluster-local-gateway)
+- [High availability](#high-availability)
 
 __NOTE:__ Kubernetes spec level policies cannot be configured using the Knative operators.
 
@@ -373,4 +374,24 @@ spec:
     config:
       istio:
         local-gateway.knative-serving.cluster-local-gateway: "custom-local-gateway.istio-system.svc.cluster.local"
+```
+
+## High availability:
+
+Knative Serving Operator CR provides the capability to configure the high availability for the following `Deployment`
+resources: `controller`, `autoscaler-hpa` and `networking-istio`. A field named `high-availability` is defined under the
+section `spec` to configure the high availability control plane. In the latest release of Knative Serving Operator, you can
+specify the number of replicas that HA parts of the control plane will be scaled to.
+
+If you want to specify 3 as the number of replicas, that your `Deployment` resources can scale up to, change your CR into:
+
+```
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  high-availability:
+    replicas: 3
 ```
