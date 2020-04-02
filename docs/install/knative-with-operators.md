@@ -260,3 +260,7 @@ for the source:
 ```
 ko delete -f config/
 ```
+
+## What's next
+
+- [Configure Knative Serving using Operator](./operator/configuring-serving-cr.md)
