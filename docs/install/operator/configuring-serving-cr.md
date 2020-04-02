@@ -11,6 +11,7 @@ The Knative Serving operator can be configured with these options:
 - [All the ConfigMaps](#all-the-configmaps)
 - [Private repository and private secret](#private-repository-and-private-secrets)
 - [SSL certificate for controller](#ssl-certificate-for-controller)
+- [Knative ingress gateway](#configuration-of-knative-ingress-gateway)
 
 __NOTE:__ Kubernetes spec level policies cannot be configured using the Knative operators.
 
@@ -271,3 +272,50 @@ spec:
 
 It will make sure this custom certificate is mounted as a volume to the containers launched by the `Deployment` resource
 `controller`, and the environment variable is `SSL_CERT_DIR` set correctly.
+
+## Configuration of Knative ingress gateway
+
+To set up custom ingress gateway, follow “**Step 1: Create Gateway Service and Deployment Instance**” [here](https://knative.dev/development/serving/setting-up-custom-ingress-gateway/).
+
+**Step 2: Update the Knative gateway**
+
+We use the field `knative-ingress-gateway` to override the knative-ingress-gateway. We only support the field `selector`
+to define the selector for ingress-gateway.
+
+Instead of updating the gateway directly, we modify the operator CR as below:
+
+```
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  registry:
+    knative-ingress-gateway:
+      selector:
+        custom: ingressgateway
+```
+
+**Step 3: Update Gateway ConfigMap**
+
+As we explained, all ConfigMaps can be edited as editing the the operator CR. For this example, take the following content
+as your operator CR:
+
+```
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  registry:
+    knative-ingress-gateway:
+      selector:
+        custom: ingressgateway
+    config:
+      istio:
+        gateway.knative-serving.knative-ingress-gateway: "custom-ingressgateway.istio-system.svc.cluster.local"
+```
+
+The key in `spec.config.istio` is in the format of `gateway.{{gateway_namespace}}.{{gateway_name}}`.
