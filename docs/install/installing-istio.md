@@ -264,3 +264,4 @@ See the [Uninstall Istio](https://istio.io/docs/setup/install/istioctl/#uninstal
   https://istio.io/docs/setup/kubernetes/additional-setup/sidecar-injection/#automatic-sidecar-injection
 [3]: https://istio.io/docs/concepts/security/#mutual-tls-authentication
 [4]: https://istio.io/docs/tasks/security/authz-http/
+[4]: https://istio.io/docs/concepts/security/#mutual-tls-authentication
