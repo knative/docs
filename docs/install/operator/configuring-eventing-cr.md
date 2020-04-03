@@ -6,15 +6,35 @@ aliases:
 - /docs/operator/configuring-eventing-cr/
 ---
 
-Knative Eventing can only be configured using a private repository and private secret.
+The Knative Eventing operator can be configured with these options:
 
-The Knative Eventing operator CR is configured similarly to the Knative Serving operator CR. For more information,
+- [Private repository and private secret](#private-repository-and-private-secrets)
+
+__NOTE:__ Kubernetes spec level policies cannot be configured using the Knative operators.
+
+## Private repository and private secrets
+
+The Knative Eventing operator CR is configured the same way as the Knative Serving operator CR. For more information,
 see the documentation on “[Private repository and private secret](configuring-serving-cr.md#private-repository-and-private-secrets)” in Serving operator for detailed instruction.
-The difference is that Knative Eventing Operator only allows us to customize the images for all `deployment` resources:
-`eventing-controller`, `eventing-webhook`, `imc-controller`, `imc-dispatcher`, and `broker-controller`. You need to
-either use these names as your names of the images in the repository, or to map your image links on a one-on-one basis.
 
-## Download images in a predefined format without secrets:
+Knative Eventing also specifies only one container, within one `Deployment` resource. However, the container does not use
+the same name as its parent `Deployment`, which means the container name in Knative Eventing is not the unique identifier
+as in Knative Serving. Here is the list of containers within each `Deployment` resource:
+
+- Container in Deployment `eventing-controller`: eventing-controller
+- Container in Deployment `eventing-webhook`: eventing-webhook
+- Container in Deployment `broker-controller`: eventing-controller
+- Container in Deployment `imc-controller`: controller
+- Container in Deployment `imc-dispatcher`: dispatcher
+
+The `default` field can still be used to replace the images in a predefined format. However, if the container name is not
+a unique identifier, e.g. `eventing-controller`, you need to use the `override` field to replace it, by specifying
+`deployment/container` as the unique key.
+
+Some images are defined via environment variable in Knative Eventing. They can be replaced by taking advantage of the
+`override` field.
+
+## Download images in predefined format without secrets:
 
 This example shows how you can define custom image links that can be defined in the CR using the simplified format
 `docker.io/knative-images/${NAME}:{CUSTOM-TAG}`.
@@ -27,11 +47,11 @@ In the example below:
 
 First, you need to make sure your images are saved in the following link:
 
-- Image of `eventing-controller`: `docker.io/knative-images/eventing-controller:v0.13.0`.
+- Image of `eventing-controller` in the deployment `eventing-controller`: `docker.io/knative-images/eventing-controller:v0.13.0`.
 - Image of `eventing-webhook`: `docker.io/knative-images/eventing-webhook:v0.13.0`.
-- Image of `imc-controller`: `docker.io/knative-images/imc-controller:v0.13.0`.
-- Image of `imc-dispatcher`: `docker.io/knative-images/imc-dispatcher:v0.13.0`.
-- Image of `broker-controller`: `docker.io/knative-images/broker-controller:v0.13.0`.
+- Image of `controller`: `docker.io/knative-images/controller:v0.13.0`.
+- Image of `dispatcher`: `docker.io/knative-images/dispatcher:v0.13.0`.
+- Image of `eventing-controller` in the deployment `broker-controller`: `docker.io/knative-images/broker-eventing-controller:v0.13.0`.
 
 Then, you need to define your operator CR with following content:
 
@@ -46,9 +66,23 @@ spec:
     default: docker.io/knative-images/${NAME}:v0.13.0
 ```
 
-Replace `{CUSTOM-TAG}` with the custom tag `v0.13.0`. `${NAME}` needs to map the same name of each `Deployment` resource.
-The field `default` is used to define the image format for all `Deployment` resources, make sure you want to replace the
-images for all `Deployment` resources in Knative Eventing with your own images, by specifying this field `default`.
+Replace `{CUSTOM-TAG}` with the custom tag `v0.13.0`. `${NAME}` needs to map the container name in each `Deployment` resource.
+The field `default` is used to define the image format for all containers, except the container `eventing-controller` in
+the deployment `broker-controller`. To replace the image for this container, you need to take advatage of the `override`
+field to specify individually, by using `broker-controller/eventing-controller` as the key`. Change your CR into the following:
+
+```
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeEventing
+metadata:
+  name: knative-eventing
+  namespace: knative-eventing
+spec:
+  registry:
+    default: docker.io/knative-images/${NAME}:v0.13.0
+    override:
+      broker-controller/eventing-controller: docker.io/knative-images-repo1/broker-eventing-controller:v0.13.0
+```
 
 ## Download images from different repositories without secrets:
 
@@ -57,11 +91,12 @@ link in the CR.
 
 For example, to define the list of images:
 
-- Image of `eventing-controller`: `docker.io/knative-images-repo1/eventing-controller:v0.13.0`.
-- Image of `eventing-webhook`: `docker.io/knative-images-repo2/eventing-webhook:v0.13.0`.
-- Image of `imc-controller`: `docker.io/knative-images-repo3/imc-controller:v0.13.0`.
-- Image of `imc-dispatcher`: `docker.io/knative-images-repo4/imc-dispatcher:v0.13.0`.
-- Image of `broker-controller`: `docker.io/knative-images-repo5/broker-controller:v0.13.0`.
+- Image of `eventing-controller` in the deployment `eventing-controller`: `docker.io/knative-images/eventing-controller:v0.13.0`.
+- Image of `eventing-webhook`: `docker.io/knative-images/eventing-webhook:v0.13.0`.
+- Image of `controller`: `docker.io/knative-images/controller:v0.13.0`.
+- Image of `dispatcher`: `docker.io/knative-images/dispatcher:v0.13.0`.
+- Image of `eventing-controller` in the deployment `broker-controller`: `docker.io/knative-images/broker-eventing-controller:v0.13.0`.
+
 
 The operator CR should be modified to include the full list:
 
@@ -74,11 +109,32 @@ metadata:
 spec:
   registry:
     override:
-      eventing-controller: docker.io/knative-images-repo1/eventing-controller:v0.13.0
-      eventing-webhook: docker.io/knative-images-repo2/eventing-webhook:v0.13.0
-      imc-controller: docker.io/knative-images-repo3/imc-controller:v0.13.0
-      imc-dispatcher: docker.io/knative-images-repo4/imc-dispatcher:v0.13.0
-      broker-controller: docker.io/knative-images-repo5/broker-controller:v0.13.0
+      eventing-controller/eventing-controller: docker.io/knative-images-repo1/eventing-controller:v0.13.0
+      eventing-webhook/eventing-webhook: docker.io/knative-images-repo2/eventing-webhook:v0.13.0
+      imc-controller/controller: docker.io/knative-images-repo3/imc-controller:v0.13.0
+      imc-dispatcher/dispatcher: docker.io/knative-images-repo4/imc-dispatcher:v0.13.0
+      broker-controller/eventing-controller: docker.io/knative-images-repo5/broker-eventing-controller:v0.13.0
+```
+
+If you would like to replace the image defined by environment variable, e.g. the envorinment variable `DISPATCHER_IMAGE`
+in the container `controller` of the deployment `imc-controller`, you need to adjust your CR into the following, if the
+target image is `docker.io/knative-images-repo5/DISPATCHER_IMAGE:v0.13.0`:
+
+```
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  registry:
+    override:
+      eventing-controller/eventing-controller: docker.io/knative-images-repo1/eventing-controller:v0.13.0
+      eventing-webhook/eventing-webhook: docker.io/knative-images-repo2/eventing-webhook:v0.13.0
+      imc-controller/controller: docker.io/knative-images-repo3/imc-controller:v0.13.0
+      imc-dispatcher/dispatcher: docker.io/knative-images-repo4/imc-dispatcher:v0.13.0
+      broker-controller/eventing-controller: docker.io/knative-images-repo5/broker-eventing-controller:v0.13.0
+      DISPATCHER_IMAGE: docker.io/knative-images-repo5/DISPATCHER_IMAGE:v0.13.0
 ```
 
 ## Download images with secrets:
