@@ -108,15 +108,18 @@ the information about the private registry:
 - `default`: this field expects a string value, used to define image reference template for all Knative images. The format
 is in `example-registry.io/custom/path/${NAME}:{CUSTOM-TAG}`. Since all your private images can be saved in the same
 repository with the same tag, the only difference is the image name. `${NAME}` should be kept as it is, because this is
-a pre-defined container variable in operator. If you name the images after the names of the `Deployment` resources:
+a pre-defined container variable in operator. If you name the images after the container names within all `Deployment` resources:
 `activator`, `autoscaler`, `controller`, `webhook`, `autoscaler-hpa` & `networking-istio`, for all `Deployment` resources,
 and name the image after `queue-proxy`, for the `Image` resource, you do not need to do any further configuration in the
-next section `override`, because operator can automatically replace `${NAME}` with the corresponding name of the `Deployment`
-resource.
+next section `override`, because operator can automatically replace `${NAME}` with the corresponding container name. For
+serving-operator, there is only one container defined in each `Deployment` resource. The container shares the same as
+its parent deployment.
 
 - `override`: this field expects a map of key-value pairs, with container name or image name as the key, and the full image
 location as the value. We usually need to configure this section, when we do not have a common format for all the image
-links. This field is used alternatively with the previous field `default`.
+links. This field is used alternatively with the previous field `default`. If the image for a certain container or `Image`
+resource is specified in both this field and the `default` field, this `override` field takes precedence. This field can
+also be used as the supplement of the `default` field, if the image link can not match the predefined format.
 
 - `imagePullSecrets`: this field is used to define a list of secrets to be used when pulling the knative images. The secret
 must be created in the same namespace as the Knative Serving deployments. You do not need to define any secret here if
@@ -160,10 +163,10 @@ spec:
     default: docker.io/knative-images/${NAME}:v0.13.0
 ```
 
-Replace `{CUSTOM-TAG}` with the custom tag `v0.13.0`. `${NAME}` needs to map the same name of each `Deployment` resource.
-The field `default` is used to define the image format for all `Deployment` and `Image` resources, make sure you want to
-replace the images for all `Deployment` and `Image` resources in Knative Serving with your own images, by specifying
-the field `default`.
+Replace `{CUSTOM-TAG}` with the custom tag `v0.13.0`. `${NAME}` needs to map the same name of each container or each
+`Image` resource. The field `default` is used to define the image format for all containers and the `Image` resource.
+Make sure you want to replace the images for all containers and `Image` resources in Knative Serving with your own
+images, by specifying the field `default`.
 
 ### Download images individually without secrets:
 
