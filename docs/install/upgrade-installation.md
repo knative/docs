@@ -62,9 +62,9 @@ monitoring plug-in installed, upgrade it alongside Knative Serving and Eventing.
 
 ### Upgrade existing resources to the latest stored version
 
-Our custom resources are stored within Kubernetes at a particular version. 
-As we introduce newer and remove older versions you'll need to migrate our resources 
-to the designated stored version. This ensures removing older verions 
+Our custom resources are stored within Kubernetes at a particular version.
+As we introduce newer and remove older versions you'll need to migrate our resources
+to the designated stored version. This ensures removing older versions
 will succeed when upgrading.
 
 For the various subprojects - we have a K8s job to help operators perform this migration.
