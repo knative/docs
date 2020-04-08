@@ -29,6 +29,10 @@ description of each:
 
 Knative also has an [**Observability plugin**](#installing-the-observability-plugin) {{< feature-state version="v0.14" state="deprecated" short=true >}}  which provides standard tooling that can be used to get visibility into the health of the software running on Knative.
 
+Blah Bl;ah
+
+DO NOT SUBMIT
+
 ## Before you begin
 
 This guide assumes that you want to install an upstream Knative release on a Kubernetes cluster. A growing number of vendors have managed Knative offerings; see the [Knative Offerings](../knative-offerings.md) page for a full list.
@@ -310,7 +314,7 @@ To access your application using `curl` using this method:
 
    ```bash
    NAME            URL                                        LATESTCREATED         LATESTREADY           READY   REASON
-   helloworld-go   http://helloworld-go.default.example.com   helloworld-go-vqjlf   helloworld-go-vqjlf   True    
+   helloworld-go   http://helloworld-go.default.example.com   helloworld-go-vqjlf   helloworld-go-vqjlf   True
    ```
 
 1. Instruct `curl` to connect to the External IP or CNAME defined by the networking layer in section 3 above, and use the `-H "Host:"` command-line option to specify the Knative application's host name. For example, if the networking layer defines your External IP and port to be `http://192.168.39.228:32198` and you wish to access the above `helloworld-go` application, use:
