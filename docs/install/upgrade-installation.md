@@ -72,7 +72,7 @@ The release notes for each release will explicitly whether a migration is requir
 
 ie.
 ```bash
-kubectl apply --filename https://github.com/knative/serving/releases/download/v0.14.0/serving-storage-version-migration.yaml
+kubectl apply --filename kubectl apply --filename {{< artifact repo="serving" file="serving-storage-version-migration.yaml" >}}
 ```
 
 
