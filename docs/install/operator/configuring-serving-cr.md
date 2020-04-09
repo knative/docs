@@ -14,6 +14,7 @@ The Knative Serving operator can be configured with these options:
 - [Knative ingress gateway](#configuration-of-knative-ingress-gateway)
 - [Cluster local gateway](#configuration-of-cluster-local-gateway)
 - [High availability](#high-availability)
+- [Managing Resources for Containers](#managing-resources-for-containers)
 
 __NOTE:__ Kubernetes spec level policies cannot be configured using the Knative operators.
 
@@ -397,4 +398,90 @@ metadata:
 spec:
   high-availability:
     replicas: 3
+```
+
+## Managing resources for containers
+
+Knative Serving Operator CR allows you to configure the resources for the containers defined in the `Deployment` resource.
+Each `Deployment` resource has only one container with the same deployment name. The following containers can be configured
+in terms of the required and maximum resources to be allocated: `activator`, `autoscaler`, `controller`, `webhook`, `autoscaler-hpa`,
+`networking-istio` and `queue-proxy`. The field called `resources` holds the stanza of a list of containers for resource
+configuration. The field `require` defines how much resource the container requires. The field `limit` defines the maximum
+resource the container can use. Within each field, each container can be configured individually with the following
+parameters: `memory`, `cpu`, `storage` and `ephemeral-storage`. The value in `require` should always be smaller than the
+corresponding value in `limit`. The field `container` is used to specify the container name.
+
+Suppose you would like to configure the container called `activator` with the required resources:
+
+```
+cpu: 30m
+memory: 40Mi
+storage: 1Gi
+ephemeral-storage: 2Gi
+```
+
+, and the limit resources:
+
+```
+cpu: 300m
+memory: 4000Mi
+storage: 2Gi
+ephemeral-storage: 4Gi
+```
+
+Here is how you should write your CR:
+
+```
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  resources:
+  - container: activator
+      requests:
+        cpu: 30m
+        memory: 40Mi
+        storage: 1Gi
+        ephemeral-storage: 2Gi
+      limits:
+        cpu: 300m
+        memory: 400Mi
+        storage: 2Gi
+        ephemeral-storage: 4Gi
+```
+
+If you would like to add another container `autoscaler` with the same configuration, you need to change your CR as below:
+
+```
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  resources:
+  - container: activator
+      requests:
+        cpu: 30m
+        memory: 40Mi
+        storage: 1Gi
+        ephemeral-storage: 2Gi
+      limits:
+        cpu: 300m
+        memory: 400Mi
+        storage: 2Gi
+        ephemeral-storage: 4Gi
+  - container: autoscaler
+      requests:
+        cpu: 30m
+        memory: 40Mi
+        storage: 1Gi
+        ephemeral-storage: 2Gi
+      limits:
+        cpu: 300m
+        memory: 400Mi
+        storage: 2Gi
+        ephemeral-storage: 4Gi
 ```
