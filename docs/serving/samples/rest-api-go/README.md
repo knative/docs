@@ -1,10 +1,3 @@
----
-title: "Creating a RESTful Service - Go"
-linkTitle: "RESTful service - Go"
-weight: 1
-type: "docs"
----
-
 This "stock ticker" sample demonstrates how to create and run a simple RESTful
 service on Knative Serving. The exposed endpoint outputs the stock price for a
 given "[stock symbol](https://www.marketwatch.com/tools/quotes/lookup.asp)",

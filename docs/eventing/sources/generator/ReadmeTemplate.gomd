@@ -1,10 +1,3 @@
----
-title: "Knative Eventing sources"
-linkTitle: "Eventing sources"
-weight: 20
-type: "docs"
----
-
 {{ "" }}
 
 {{- /* This will be interpreted given a yamlSources object. */ -}}
@@ -18,7 +11,7 @@ procedure:
 
 2. Run the generator tool:
     ```shell
-    go run eventing/sources/generator/main.go
+    go run docs/eventing/sources/generator/main.go
     ```
 -->
 

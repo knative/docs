@@ -1,12 +1,3 @@
----
-title: "PingSource example"
-linkTitle: "PingSource"
-weight: 10
-type: "docs"
-aliases:
-  - ../cronjob-source
----
-
 This example shows how to configure PingSource as an event source for
 functions.
 

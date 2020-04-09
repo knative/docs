@@ -1,10 +1,3 @@
----
-title: "Apache Kafka Channel Example"
-linkTitle: "Channel Example"
-weight: 20
-type: "docs"
----
-
 You can install and configure the Apache Kafka CRD (`KafkaChannel`) as the default channel configuration in Knative Eventing. 
 
 ## Prerequisites

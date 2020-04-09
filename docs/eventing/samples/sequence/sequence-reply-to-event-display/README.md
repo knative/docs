@@ -1,10 +1,3 @@
----
-title: "Sequence wired to event-display"
-linkTitle: "Displaying sequence output"
-weight: 20
-type: "docs"
----
-
 We are going to create the following logical configuration. We create a
 PingSource, feeding events to a [`Sequence`](../../../flows/sequence.md), then
 taking the output of that `Sequence` and displaying the resulting output.

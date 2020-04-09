@@ -1,10 +1,3 @@
----
-title: "Kubernetes event using the API Server Source"
-linkTitle: "Kubernetes event"
-weight: 50
-type: "docs"
----
-
 This example shows how to wire [Kubernetes cluster events](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.17/#event-v1-core),
 using the API Server Source, for consumption by a function that has been implemented as a Knative Service.
 
