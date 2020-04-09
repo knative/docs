@@ -7,7 +7,8 @@ type: "docs"
 
 A simple machine learning model with API serving that is written in python and
 using [BentoML](https://github.com/bentoml/BentoML). BentoML is an open source
-framework for high performance ML model serving.
+framework for high performance ML model serving, which supports all major machine
+learning frameworks including Keras, Tensorflow, PyTorch, Fast.ai, XGBoost and etc.
 
 This sample will walk you through the steps of creating and deploying a machine learning
 model using python. It will use BentoML to package a classifier model trained
@@ -34,10 +35,11 @@ Knative deployment guide with BentoML is also available in the
 
 ## Recreating sample code
 
-1. This code defines a machine-learning service that requires a scikit-learn model with
-  BentoML. It asks BentoML to figure out the required pip dependencies, also defined an
-  API, which is the entry point for accessing this machine learning service. Save the
-  following code into a file named `iris_classifier.pyt`:
+1. BentoML creates a model API serving, via prediction service abstraction. This code
+  defines a prediction service that requires a scikit-learn model. It asks BentoML to
+  figure out the required pip dependencies, also defined an API, which is the entry
+  point for accessing this machine learning service. Save the
+  following code into a file named `iris_classifier.py`:
 
     ```python
     from bentoml import env, artifacts, api, BentoService
@@ -151,7 +153,7 @@ Knative deployment guide with BentoML is also available in the
 
 ## Building and deploying the sample
 
-BentoML auto generates a dockerfile for API server of the saved model.
+BentoML supports containerlization a dockerfile for API server of the saved model.
 
 1. Use Docker to build API server into docker image and push with Docker hub. Run these
   commands replacing `{username}` with your Docker Hub username.
@@ -159,7 +161,6 @@ BentoML auto generates a dockerfile for API server of the saved model.
     ```shell
     # jq might not be installed on your local system, please follow jq install
     # instruction at https://stedolan.github.io/jq/download/
-
     saved_path=$(bentoml get IrisClassifier:latest -q | jq -r ".uri.uri")
     # Build the container on your local machine
     docker build - t {username}/iris-classifier $saved_path
@@ -215,12 +216,6 @@ BentoML auto generates a dockerfile for API server of the saved model.
 
     ```shell
     kubectl get ksvc iris-classifier --output=custom-columns=NAME:.metadata.name,URL:.status.url
-    ```
-
-    Example:
-
-    ```shell
-    > kubectl get ksvc iris-classifier --output=custom-columns=NAME:.metadata.name,URL:.status.url
 
     NAME            URL
     iris-classifer   http://iris-classifer.default.example.com
@@ -235,16 +230,7 @@ BentoML auto generates a dockerfile for API server of the saved model.
       --request POST \
       --data '[[5.1, 3.5, 1.4, 0.2]]' \
       http://iris-classifier.default.example.com/predict
-    ```
 
-    Example:
-
-    ```shell
-    > curl -v -i \
-      --header "Content-Type: application/json" \
-      --request POST \
-      --data '[[5.1, 3.5, 1.4, 0.2]]' \
-      http://iris-classifier.default.example.com/predict
     [0]
     ```
 
