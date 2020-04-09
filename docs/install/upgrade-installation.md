@@ -63,14 +63,14 @@ monitoring plug-in installed, upgrade it alongside Knative Serving and Eventing.
 
 To upgrade, apply the `.yaml` files for the subsequent minor versions of all
 your installed Knative components and features, remembering to only
-upgrade by one minor version at a time. For a cluster running v0.10.0 of the
+upgrade by one minor version at a time. For a cluster running v0.12.1 of the
 Knative Serving and Eventing components and the monitoring plug-in, the
-following command upgrades the installation to v0.11.0:
+following command upgrades the installation to v0.13.0:
 
 ```bash
-kubectl apply --filename https://github.com/knative/serving/releases/download/v0.11.0/serving.yaml \
---filename https://github.com/knative/eventing/releases/download/v0.11.0/release.yaml \
---filename https://github.com/knative/serving/releases/download/v0.11.0/monitoring.yaml
+kubectl apply --filename https://github.com/knative/serving/releases/download/v0.13.0/serving.yaml \
+--filename https://github.com/knative/eventing/releases/download/v0.13.0/eventing.yaml \
+--filename https://github.com/knative/serving/releases/download/v0.13.0/monitoring.yaml
 ```
 
 ## Verifying the upgrade
