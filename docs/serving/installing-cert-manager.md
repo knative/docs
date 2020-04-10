@@ -27,7 +27,7 @@ You must meet the following requirements to install cert-manager for Knative:
   component, see the [Knative installation guides](../install/).
 - You must configure your Knative cluster to use a
   [custom domain](./using-a-custom-domain.md).
-- Knative currently supports cert-manager version `0.6.1` or higher.
+- Knative currently supports cert-manager version `0.12.0` or higher.
 
 ## Downloading and installing cert-manager
 
