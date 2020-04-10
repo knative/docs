@@ -72,7 +72,7 @@ The release notes for each release will explicitly whether a migration is requir
 
 ie.
 ```bash
-kubectl apply --filename kubectl apply --filename {{< artifact repo="serving" file="serving-storage-version-migration.yaml" >}}
+kubectl apply --filename {{< artifact repo="serving" file="serving-storage-version-migration.yaml" >}}
 ```
 
 
@@ -155,4 +155,3 @@ for the old pods as they are cleaned up.
 
 If necessary, repeat the upgrade process until you reach your desired minor
 version number.
-
