@@ -152,6 +152,18 @@
   version = "v1.4.0"
 
 [[projects]]
+  branch = "master"
+  digest = "1:94088928b5646e3ae08050eb5e1fda3ee590001d7ddb812ce8b6a858a00155a9"
+  name = "github.com/knative/docs"
+  packages = [
+    "docs/serving/samples/grpc-ping-go/proto",
+    "test",
+    "test/sampleapp",
+  ]
+  pruneopts = "NUT"
+  revision = "e8a4306a5d37d2ea18705dbd592ecf1fa9264191"
+
+[[projects]]
   digest = "1:5985ef4caf91ece5d54817c11ea25f182697534f8ae6521eadcd628c142ac4b6"
   name = "github.com/matttproud/golang_protobuf_extensions"
   packages = ["pbutil"]
@@ -465,14 +477,14 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:50482e6fd500cf50c4a29d640cda026206145c6716dff72e4368a5e57fdb7095"
+  digest = "1:dc73d65f40ea05b1d0db96ae5491b6ebc162bb59b3ac5a252cdf87848bc7a4b7"
   name = "knative.dev/test-infra"
   packages = [
     "scripts",
     "tools/dep-collector",
   ]
   pruneopts = "UT"
-  revision = "9fa5882b65c5fe7e177bb74874e9a5ac87b84e98"
+  revision = "5e04d955cdb9a460b5d3f2a699bddcab22c8af94"
 
 [solve-meta]
   analyzer-name = "dep"
@@ -487,6 +499,9 @@
     "github.com/google/uuid",
     "github.com/gorilla/mux",
     "github.com/kelseyhightower/envconfig",
+    "github.com/knative/docs/docs/serving/samples/grpc-ping-go/proto",
+    "github.com/knative/docs/test",
+    "github.com/knative/docs/test/sampleapp",
     "github.com/openzipkin/zipkin-go",
     "github.com/openzipkin/zipkin-go/reporter/http",
     "github.com/satori/go.uuid",
