@@ -20,10 +20,9 @@ import (
 	"encoding/json"
 	"fmt"
 	gb "go/build"
+	"os/exec"
 	"path/filepath"
 	"strings"
-
-	"knative.dev/pkg/test/cmd"
 )
 
 // https://golang.org/pkg/cmd/go/internal/modinfo/#ModulePublic
@@ -43,17 +42,19 @@ type gobuild struct {
 // Related: https://github.com/golang/go/issues/26504
 func moduleInfo() (*modInfo, error) {
 	// If `go list -m` returns an error, the project is not using Go modules.
-	_, err := cmd.RunCommands("go list -m")
+	c := exec.Command("go", "list", "-m")
+	_, err := c.Output()
 	if err != nil {
 		return nil, nil
 	}
 
-	output, err := cmd.RunCommand("go list -mod=readonly -m -json")
+	lc := exec.Command("go", "list", "-mod=readonly", "-m", "-json")
+	output, err := lc.Output()
 	if err != nil {
 		return nil, fmt.Errorf("failed getting module info: %v", err)
 	}
 	var info modInfo
-	if err := json.Unmarshal([]byte(output), &info); err != nil {
+	if err := json.Unmarshal(output, &info); err != nil {
 		return nil, fmt.Errorf("failed parsing module info %q: %v", output, err)
 	}
 	return &info, nil
