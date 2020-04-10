@@ -59,6 +59,23 @@ If you have a plug-in installed, make sure to upgrade it at the same time as
 you upgrade your Knative components. For example, if you have the
 monitoring plug-in installed, upgrade it alongside Knative Serving and Eventing.
 
+
+### Upgrade existing resources to the latest stored version
+
+Our custom resources are stored within Kubernetes at a particular version.
+As we introduce newer and remove older versions you'll need to migrate our resources
+to the designated stored version. This ensures removing older versions
+will succeed when upgrading.
+
+For the various subprojects - we have a K8s job to help operators perform this migration.
+The release notes for each release will explicitly whether a migration is required.
+
+ie.
+```bash
+kubectl apply --filename {{< artifact repo="serving" file="serving-storage-version-migration.yaml" >}}
+```
+
+
 ## Performing the upgrade
 
 To upgrade, apply the `.yaml` files for the subsequent minor versions of all
@@ -138,4 +155,3 @@ for the old pods as they are cleaned up.
 
 If necessary, repeat the upgrade process until you reach your desired minor
 version number.
-
