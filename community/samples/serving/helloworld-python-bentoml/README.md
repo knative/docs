@@ -26,7 +26,7 @@ Knative deployment guide with BentoML is also available in the
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured. Docker Hub will be used for a container registry).
 - Python 3.6 or above installed and running on your local machine.
-  - `scikit-learn` and `bentoml` packages, run command:
+  - Install `scikit-learn` and `bentoml` packages:
 
     ```shell
     pip install scikit-learn
@@ -35,53 +35,27 @@ Knative deployment guide with BentoML is also available in the
 
 ## Recreating sample code
 
-1. BentoML creates a model API serving, via prediction service abstraction. This code
-  defines a prediction service that requires a scikit-learn model. It asks BentoML to
-  figure out the required pip dependencies, also defined an API, which is the entry
-  point for accessing this machine learning service. Save the
-  following code into a file named `iris_classifier.py`:
+Run the following code on your local machine, to train a machine learning model and deploy it
+as API endpoint with KNative Serving.
 
-    ```python
-    from bentoml import env, artifacts, api, BentoService
-    from bentoml.handlers import DataframeHandler
-    from bentoml.artifact import SklearnModelArtifact
+1. BentoML creates a model API server, via prediction service abstraction. In
+  `iris_classifier.py`, it defines a prediction service that requires a scikit-learn
+  model, asks BentoML to figure out the required pip dependencies, also defines an
+  API, which is the entry point for accessing this machine learning service.
 
-    @env(auto_pip_dependencies=True)
-    @artifacts([SklearnModelArtifact('model')])
-    class IrisClassifier(BentoService):
+    {{% readfile file="iris_classifier.py" %}}
 
-        @api(DataframeHandler)
-        def predict(self, df):
-            return self.artifacts.model.predict(df)
-    ```
+2. In `main.py`, it uses the classic
+  [iris flower data set](https://en.wikipedia.org/wiki/Iris_flower_data_set)
+  to train a classification model which can predict the species of an iris flower with
+  given data and then save the model with BentoML to local disk.
 
-2. This code defines how to train a classifier model with iris dataset and how to save
-  the model with BentoML. Run the following code:
+    {{% readfile file="main.py" %}}
 
-    ```python
-    from sklearn import svm
-    from sklearn import datasets
+    Run the `main.py` file to train and save the model:
 
-    # import the class from the file that was created from the previous step
-    from iris_classifier import IrisCLassifier
-
-    if __name__ == "__main__":
-        # Load training data
-        iris = datasets.load_iris()
-        X, y = iris.data, iris.target
-
-        # Model Training
-        clf = svm.SVC(gamma='scale')
-        clf.fit(X, y)
-
-        # Create a iris classifier service instance
-        iris_classifier_service = IrisClassifier()
-
-        # Pack the newly trained model artifact
-        iris_classifier_service.pack('model', clf)
-
-        # Save the prediction service to disk for model serving
-        saved_path = iris_classifier_service.save()
+    ```shell
+    python main.py
     ```
 
 3. Use BentoML CLI to check saved model's information.
@@ -153,15 +127,17 @@ Knative deployment guide with BentoML is also available in the
 
 ## Building and deploying the sample
 
-BentoML supports containerlization a dockerfile for API server of the saved model.
+BentoML supports creating an API server docker image from its saved model directory, where
+a Dockerfile is automatically generated when saving the model.
 
-1. Use Docker to build API server into docker image and push with Docker hub. Run these
-  commands replacing `{username}` with your Docker Hub username.
+1. To build an API model server docker image, replace `{username}` with your Docker Hub
+  username and run the following commands.
 
     ```shell
     # jq might not be installed on your local system, please follow jq install
     # instruction at https://stedolan.github.io/jq/download/
     saved_path=$(bentoml get IrisClassifier:latest -q | jq -r ".uri.uri")
+
     # Build the container on your local machine
     docker build - t {username}/iris-classifier $saved_path
 
@@ -169,60 +145,34 @@ BentoML supports containerlization a dockerfile for API server of the saved mode
     docker push {username}/iris-classifier
     ```
 
-2. Save the following Knative serving configuration into a file named `service.yaml`.
-  Ensure the container image value matches the container you built in the previous step.
-  Apply the configuration with `kubectl`:
+2. In `service.yaml`, replace `{username}` with your Docker hub username, and then deploy
+  the service to Knative Serving with `kubectl`:
 
-    ```yaml
-    apiVersion: serving.knative.dev/v1
-    kind: Service
-    metadata:
-      name: iris-classifier
-      namespace: default
-    spec:
-      template:
-        spec:
-          containers:
-            - image: docker.io/{username}/iris-classifier
-              ports:
-              - containerPort: 5000 # Port to route to
-              livenessProbe:
-                httpGet:
-                  path: /healthz
-                initialDelaySeconds: 3
-                periodSeconds: 5
-              readinessProbe:
-                httpGet:
-                  path: /healthz
-                initialDelaySeconds: 3
-                periodSeconds: 5
-                failureThreshold: 3
-                timeoutSeconds: 60
-    ```
+    {{% readfile file="service.yaml" %}}
 
     ```shell
     kubectl apply --filename service.yaml
     ```
 
-    Now that your service is created, Knative performs the following steps:
+3. Now that your service is created, Knative performs the following steps:
 
-      - Create a new immutable revision for this version of the app.
-      - Network programming to create a route, ingress, service, and load
-        balance for your application.
-      - Automatically scale your pods up and down (including to zero active
-        pods).
+    - Create a new immutable revision for this version of the app.
+    - Network programming to create a route, ingress, service, and load
+      balance for your application.
+    - Automatically scale your pods up and down (including to zero active
+      pods).
 
-3. Run the following command to find the domain URL for your service:
+4. Run the following command to find the domain URL for your service:
 
     ```shell
     kubectl get ksvc iris-classifier --output=custom-columns=NAME:.metadata.name,URL:.status.url
 
-    NAME            URL
-    iris-classifer   http://iris-classifer.default.example.com
+    NAME              URL
+    iris-classifier   http://iris-classifer.default.example.com
     ```
 
-4. Now you can request your app and see the result. Replace
-  the URL below with the URL returned in the previous command.
+5. Replace the request URL with the URL return in the previous command, and execute the
+  command to get prediction result from the deployed model API endpoint.
 
     ```shell
     curl -v -i \
