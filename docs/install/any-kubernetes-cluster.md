@@ -228,7 +228,7 @@ The following commands install Kourier and enable its Knative integration.
 1. Install the Knative Kourier controller:
 
    ```bash
-   kubectl apply --filename https://raw.githubusercontent.com/knative/serving/{{< version >}}/third_party/kourier-latest/kourier.yaml
+   kubectl apply --filename {{< artifact repo="net-kourier" file="kourier.yaml" >}}
    ```
 
 1. To configure Knative Serving to use Kourier by default:
