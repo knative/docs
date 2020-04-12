@@ -84,7 +84,7 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
    cd knative-docs/docs/eventing/samples/kafka/source
    ```
 
-2. Build the Event Display Service (`even-display.yaml`)
+2. Build the Event Display Service (`event-display.yaml`)
 
    ```yaml
    apiVersion: serving.knative.dev/v1
