@@ -24,65 +24,46 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-go
    code creates a basic web server which listens on port 8080:
 
    ```go
-    package main
-
     import (
-      "context"
-      "fmt"
-      "log"
-      "net/http"
-      "os"
-
-      cloudevents "github.com/cloudevents/sdk-go"
-      "github.com/google/uuid"
+        "context"
+        "log"
+    
+        cloudevents "github.com/cloudevents/sdk-go/v2"
+        "github.com/google/uuid"
     )
-
-    type eventData struct {
-      Message string `json:"message,omitempty,string"`
+    
+    func receive(ctx context.Context, event cloudevents.Event) (*cloudevents.Event, cloudevents.Result) {
+        // Here is where your code to process the event will go.
+        // In this example we will log the event msg
+        log.Printf("Event received. \n%s\n", event)
+        data := &HelloWorld{}
+        if err := event.DataAs(data); err != nil {
+            log.Printf("Error while extracting cloudevent Data: %s\n", err.Error())
+            return nil, cloudevents.NewHTTPResult(400, "failed to convert data: %s", err)
+        }
+        log.Printf("Hello World Message from received event %q", data.Msg)
+    
+        // Respond with another event (optional)
+        // This is optional and is intended to show how to respond back with another event after processing.
+        // The response will go back into the knative eventing system just like any other event
+        newEvent := cloudevents.NewEvent()
+        newEvent.SetID(uuid.New().String())
+        newEvent.SetSource("knative/eventing/samples/hello-world")
+        newEvent.SetType("dev.knative.samples.hifromknative")
+        if err := newEvent.SetData(cloudevents.ApplicationJSON, HiFromKnative{Msg: "Hi from helloworld-go app!"}); err != nil {
+            return nil, cloudevents.NewHTTPResult(500, "failed to set response data: %s", err)
+        }
+        log.Printf("Responding with event\n%s\n", newEvent)
+        return &newEvent, nil
     }
-
-    func receive(ctx context.Context, event cloudevents.Event, response *cloudevents.EventResponse) error {
-      // Here is where your code to process the event will go.
-      // In this example we will log the event msg
-      log.Printf("Event Context: %+v\n", event.Context)
-      data := &HelloWorld{}
-      if err := event.DataAs(data); err != nil {
-        log.Printf("Error while extracting cloudevent Data: %s\n", err.Error())
-        return err
-      }
-      log.Printf("Hello World Message %q", data.Msg)
-
-      // Respond with another event (optional)
-      // This is optional and is intended to show how to respond back with another event after processing.
-      // The response will go back into the knative eventing system just like any other event
-      newEvent := cloudevents.NewEvent()
-      newEvent.SetID(uuid.New().String())
-      newEvent.SetSource("knative/eventing/samples/hello-world")
-      newEvent.SetType("dev.knative.samples.hifromknative")
-      newEvent.SetData(HiFromKnative{Msg: "Hi from Knative!"})
-      response.RespondWith(200, &newEvent)
-
-      log.Printf("Responded with event %v", newEvent)
-
-      return nil
-    }
-
-    func handler(w http.ResponseWriter, r *http.Request) {
-      log.Print("Hello world received a request.")
-      target := os.Getenv("TARGET")
-      if target == "" {
-        target = "World"
-      }
-      fmt.Fprintf(w, "Hello %s!\n", target)
-    }
-
+    
     func main() {
-      log.Print("Hello world sample started.")
-      c, err := cloudevents.NewDefaultClient()
-      if err != nil {
-        log.Fatalf("failed to create client, %v", err)
-      }
-      log.Fatal(c.StartReceiver(context.Background(), receive))
+        log.Print("Hello world sample started.")
+        c, err := cloudevents.NewDefaultClient()
+        if err != nil {
+            log.Fatalf("failed to create client, %v", err)
+        }
+        log.Fatal(c.StartReceiver(context.Background(), receive))
     }
    ```
 1. Create a new file named `eventschemas.go` and paste the following code. This defines the data schema of the CloudEvents.
@@ -254,7 +235,7 @@ We can send an http request directly to the [Broker](../../../broker-trigger.md)
       curl -v "default-broker.knative-samples.svc.cluster.local" \
       -X POST \
       -H "Ce-Id: 536808d3-88be-4077-9d7a-a3f162705f79" \
-      -H "Ce-specversion: 0.3" \
+      -H "Ce-Specversion: 1.0" \
       -H "Ce-Type: dev.knative.samples.helloworld" \
       -H "Ce-Source: dev.knative.samples/helloworldsource" \
       -H "Content-Type: application/json" \
@@ -271,8 +252,10 @@ Helloworld-go app logs the context and the msg of the above event, and replies b
       ```
       You should see something similar to:
       ```shell
-      Event received. Context: Context Attributes,
-        specversion: 0.3
+      Event received. 
+     Validation: valid
+      Context Attributes,
+        specversion: 1.0
         type: dev.knative.samples.helloworld
         source: dev.knative.samples/helloworldsource
         id: 536808d3-88be-4077-9d7a-a3f162705f79
@@ -282,14 +265,18 @@ Helloworld-go app logs the context and the msg of the above event, and replies b
         knativearrivaltime: 2019-10-04T22:35:26Z
         knativehistory: default-kn2-trigger-kn-channel.knative-samples.svc.cluster.local
         traceparent: 00-971d4644229653483d38c46e92a959c7-92c66312e4bb39be-00
-
+      Data,
+        {"msg":"Hello World from the curl pod."}
+  
       Hello World Message "Hello World from the curl pod."
-      Responded with event Validation: valid
+      Responded with event
+      Validation: valid
       Context Attributes,
         specversion: 0.2
         type: dev.knative.samples.hifromknative
         source: knative/eventing/samples/hello-world
         id: 37458d77-01f5-411e-a243-a459bbf79682
+        datacontenttype: application/json
       Data,
         {"msg":"Hi from Knative!"}
 

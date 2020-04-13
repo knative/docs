@@ -4,9 +4,8 @@ import (
 	"context"
 	"fmt"
 	"log"
-	"net/http"
 
-	cloudevents "github.com/cloudevents/sdk-go"
+	cloudevents "github.com/cloudevents/sdk-go/v2"
 	"github.com/kelseyhightower/envconfig"
 )
 
@@ -55,16 +54,15 @@ type Response struct {
 }
 
 // handle shared the logic for producing the Response event from the Request.
-func handle(req Request) (resp Response) {
-	resp.Message = fmt.Sprintf("Hello, %s", req.Name)
-	return
+func handle(req Request) Response {
+	return Response{Message:fmt.Sprintf("Hello, %s", req.Name)}
 }
 
 // ReceiveAndSend is invoked whenever we receive an event.
-func (recv *Receiver) ReceiveAndSend(ctx context.Context, event cloudevents.Event) error {
+func (recv *Receiver) ReceiveAndSend(ctx context.Context, event cloudevents.Event) cloudevents.Result {
 	req := Request{}
 	if err := event.DataAs(&req); err != nil {
-		return err
+		return cloudevents.NewHTTPResult(400, "failed to convert data: %s", err)
 	}
 	log.Printf("Got an event from: %q", req.Name)
 
@@ -74,19 +72,19 @@ func (recv *Receiver) ReceiveAndSend(ctx context.Context, event cloudevents.Even
 	r := cloudevents.NewEvent(cloudevents.VersionV1)
 	r.SetType("dev.knative.docs.sample")
 	r.SetSource("https://github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-go")
-	r.SetDataContentType("application/json")
-	r.SetData(resp)
+	if err := r.SetData("application/json", resp); err != nil {
+		return cloudevents.NewHTTPResult(500, "failed to set response data: %s", err)
+	}
 
 	ctx = cloudevents.ContextWithTarget(ctx, recv.Target)
-	_, _, err := recv.client.Send(ctx, r)
-	return err
+	return recv.client.Send(ctx, r)
 }
 
 // ReceiveAndReply is invoked whenever we receive an event.
-func (recv *Receiver) ReceiveAndReply(ctx context.Context, event cloudevents.Event, eventResp *cloudevents.EventResponse) error {
+func (recv *Receiver) ReceiveAndReply(ctx context.Context, event cloudevents.Event) (*cloudevents.Event, cloudevents.Result) {
 	req := Request{}
 	if err := event.DataAs(&req); err != nil {
-		return err
+		return nil, cloudevents.NewHTTPResult(400, "failed to convert data: %s", err)
 	}
 	log.Printf("Got an event from: %q", req.Name)
 
@@ -96,10 +94,9 @@ func (recv *Receiver) ReceiveAndReply(ctx context.Context, event cloudevents.Eve
 	r := cloudevents.NewEvent(cloudevents.VersionV1)
 	r.SetType("dev.knative.docs.sample")
 	r.SetSource("https://github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-go")
-	r.SetDataContentType("application/json")
-	r.SetData(resp)
+	if err := r.SetData("application/json", resp); err != nil {
+		return nil, cloudevents.NewHTTPResult(500, "failed to set response data: %s", err)
+	}
 
-	eventResp.RespondWith(http.StatusOK, &r)
-
-	return nil
+	return &r, nil
 }
