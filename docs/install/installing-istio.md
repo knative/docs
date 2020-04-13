@@ -339,5 +339,5 @@ rm -rf istio-${ISTIO_VERSION}
 [2]:
   https://istio.io/docs/setup/kubernetes/additional-setup/sidecar-injection/#manual-sidecar-injection
 [3]: https://istio.io/docs/tasks/traffic-management/ingress/secure-ingress-sds/
-[4]: https://istio.io/pt-br/docs/concepts/security/#mutual-tls-authentication
+[4]: https://istio.io/docs/concepts/security/#mutual-tls-authentication
 [5]: https://istio.io/docs/tasks/security/authz-http/
