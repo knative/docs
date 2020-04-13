@@ -378,7 +378,7 @@ kubectl edit svc $INGRESSGATEWAY --namespace istio-system
 ```
 
 This command opens your default text editor and allows you to add the annotation
-to `knative-ingressgateway` service. After you've added your annotation, your
+to `istio-ingressgateway` service. After you've added your annotation, your
 file may look similar to this (assuming your custom domain is
 `external-dns-test.my-org.do`):
 
@@ -405,7 +405,7 @@ You should see output similar to:
 ```
 NAME                            TYPE  TTL  DATA
 *.external-dns-test.my-org.do.  A     300  35.231.248.30
-*.external-dns-test.my-org.do.  TXT   300  "heritage=external-dns,external-dns/owner=my-identifier,external-dns/resource=service/istio-system/knative-ingressgateway"
+*.external-dns-test.my-org.do.  TXT   300  "heritage=external-dns,external-dns/owner=my-identifier,external-dns/resource=service/istio-system/istio-ingressgateway"
 ```
 
 ### Verify domain has been published

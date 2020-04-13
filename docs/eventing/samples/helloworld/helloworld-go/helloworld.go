@@ -2,27 +2,20 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"log"
-	"net/http"
-	"os"
 
-	cloudevents "github.com/cloudevents/sdk-go"
+	cloudevents "github.com/cloudevents/sdk-go/v2"
 	"github.com/google/uuid"
 )
 
-type eventData struct {
-	Message string `json:"message,omitempty,string"`
-}
-
-func receive(ctx context.Context, event cloudevents.Event, response *cloudevents.EventResponse) error {
+func receive(ctx context.Context, event cloudevents.Event) (*cloudevents.Event, cloudevents.Result) {
 	// Here is where your code to process the event will go.
 	// In this example we will log the event msg
-	log.Printf("Event received. Context: %v\n", event.Context)
+	log.Printf("Event received. \n%s\n", event)
 	data := &HelloWorld{}
 	if err := event.DataAs(data); err != nil {
 		log.Printf("Error while extracting cloudevent Data: %s\n", err.Error())
-		return err
+		return nil, cloudevents.NewHTTPResult(400, "failed to convert data: %s", err)
 	}
 	log.Printf("Hello World Message from received event %q", data.Msg)
 
@@ -33,21 +26,11 @@ func receive(ctx context.Context, event cloudevents.Event, response *cloudevents
 	newEvent.SetID(uuid.New().String())
 	newEvent.SetSource("knative/eventing/samples/hello-world")
 	newEvent.SetType("dev.knative.samples.hifromknative")
-	newEvent.SetData(HiFromKnative{Msg: "Hi from helloworld-go app!"})
-	response.RespondWith(200, &newEvent)
-
-	log.Printf("Responded with event %v", newEvent)
-
-	return nil
-}
-
-func handler(w http.ResponseWriter, r *http.Request) {
-	log.Print("Hello world received a request.")
-	target := os.Getenv("TARGET")
-	if target == "" {
-		target = "World"
+	if err := newEvent.SetData(cloudevents.ApplicationJSON, HiFromKnative{Msg: "Hi from helloworld-go app!"}); err != nil {
+		return nil, cloudevents.NewHTTPResult(500, "failed to set response data: %s", err)
 	}
-	fmt.Fprintf(w, "Hello %s!\n", target)
+	log.Printf("Responding with event\n%s\n", newEvent)
+	return &newEvent, nil
 }
 
 func main() {

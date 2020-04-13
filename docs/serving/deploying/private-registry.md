@@ -78,35 +78,13 @@ You need:
     of your Knative cluster are use by your revisions unless 
     [`serviceAccountName`](../spec/knative-api-specification-1.0.md) is specified.
 
-   1. Run the following command to edit your `default` service account:
+   1. Run the following command to modify your `default` service account:
    
+      For example, if you named your secrets `container-registry`, then you
+	  patch it with this.
+
        ```shell
-       kubectl edit serviceaccount default --namespace default
-       ```
-
-   1. Add the `imagePullSecrets` element in your `default` service account :
-
-       For example, if you named your secrets `container-registry`, then you
-       add the following lines to your service account configuration:
-
-       ```
-       imagePullSecrets:
-       - name: container-registry
-       ```
-
-      Example service account with `imagePullSecrets`:
-       
-       ```yaml
-       apiVersion: v1
-       kind: ServiceAccount
-       metadata:
-         name: default
-         namespace: default
-         ...
-       secrets:
-       - name: default-token-zd84v
-       imagePullSecrets:
-       - name: container-registry
+       kubectl patch serviceaccount default -p "{\"imagePullSecrets\": [{\"name\": \"container-registry\"}]}"
        ```
 
 1. Deploy the updated service account to your Knative cluster:

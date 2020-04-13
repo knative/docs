@@ -15,7 +15,7 @@ All examples are using the
 ## Examples
 
 For each of these examples below, we'll use
-[`CronJobSource`](../cronjob-source/README.md) as the source of events.
+[`PingSource`](../ping-source/README.md) as the source of events.
 
 We also use simple
 [functions](https://github.com/lionelvillard/knative-functions) to perform

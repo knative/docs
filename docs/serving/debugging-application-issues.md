@@ -56,7 +56,7 @@ helloworld-go   map[serving.knative.dev/route:helloworld-go serving.knative.dev/
 ```
 
 The labels `serving.knative.dev/route` and `serving.knative.dev/routeNamespace`
-indicate the Route in which the Ingress resource resides. Your Route and 
+indicate the Route in which the Ingress resource resides. Your Route and
 Ingress should be listed. If your Ingress does not exist, the route
 controller believes that the Revisions targeted by your Route/Service isn't
 ready. Please proceed to later sections to diagnose Revision readiness status.
@@ -97,9 +97,6 @@ To check the IP address of your Ingress, use
 ```shell
 kubectl get svc -n istio-system istio-ingressgateway
 ```
-
-Or replace that with `knative-ingressgateway` if you are using Knative release
-older than 0.3.
 
 If there is no external IP address, use
 

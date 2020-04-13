@@ -1,14 +1,23 @@
 # MetaSources are not intended to be used directly by a user. Rather they are to help make other
 # sources easy to write and maintain.
 metaSources:
-  - name: Container Source
-    url: https://github.com/knative/eventing/blob/master/pkg/apis/sources/v1alpha1/containersource_types.go
+  - name: SinkBinding
+    url: https://knative.dev/docs/eventing/samples/sinkbinding/
     status: Active Development
     support: Knative
     description: >
-      Container Source is a generic controller. Given an Image URL, it will keep a single `Pod`
-      running with the specified image, environment, and arguments. It is used by multiple other
-      Sources as underlying infrastructure.
+      SinkBinding provides a framework for injecting `K_SINK` (destination address) and
+      `K_CE_OVERRIDES` (JSON cloudevents attributes) environment variables into any Kubernetes
+      resource which has a `spec.template` that looks like a Pod (aka PodSpecable).
+  - name: Container Source
+    url: https://knative.dev/docs/eventing/migration/sinkbinding
+    status: Active Development
+    support: Knative
+    description: >
+      Given a `spec.template` with at least a container image specified, ContainerSource will keep a `Pod`
+      running with the specified image(s). `K_SINK` (destination address) and `KE_CE_OVERRIDES` (JSON
+      CloudEvents attributes) environment variables are injected into the running image(s). It is used by multiple
+      other Sources as underlying infrastructure.
   - name: Auto Container Source
     url: https://github.com/Harwayne/auto-container-source
     status: Proof of Concept
@@ -48,11 +57,17 @@ sources:
     description: >
       Brings [AWS Simple Queue Service](https://aws.amazon.com/sqs/) messages into Knative.
   - name: Cron Job
-    url: https://github.com/knative/eventing/blob/master/pkg/apis/sources/v1alpha1/cron_job_types.go
-    status: Proof of Concept
+    url: https://knative.dev/docs/eventing/migration/ping
+    status: Replaced by PingSource
     support: None
     description: >
-      Uses an in-memory timer to produce events on the specified Cron schedule.
+      Deprecated, replace with [PingSource](https://knative.dev/docs/eventing/migration/ping) or a [CronJob using SinkBinding](https://knative.dev/docs/eventing/samples/sinkbinding/)
+  - name: Ping
+    url: https://github.com/knative/eventing/blob/master/pkg/apis/sources/v1alpha2/ping_types.go
+    status: In development
+    support: None
+    description: >
+      Uses an in-memory timer to produce events with a fixed payload on a specified cron schedule.
   - name: CloudPubSubSource
     url: https://github.com/google/knative-gcp/blob/master/docs/examples/cloudpubsubsource/README.md
     status: Active Development

@@ -88,8 +88,8 @@ There are cases where you may want to utilize a set of co-operating functions
 together and for those use cases, Knative Eventing provides two additional
 resources:
 
-1. **[Sequence](./sequence.md)** provides a way to define an in-order list of functions.
-1. **[Parallel](./parallel.md)** provides a way to define a list of branches for events.
+1. **[Sequence](./flows/sequence.md)** provides a way to define an in-order list of functions.
+1. **[Parallel](./flows/parallel.md)** provides a way to define a list of branches for events.
 
 ### Future design goals
 
@@ -137,17 +137,13 @@ messaging protocols.
 
 Each source is a separate Kubernetes custom resource. This allows each type of
 Source to define the arguments and parameters needed to instantiate a source.
-Knative Eventing defines the following Sources in the
-`sources.eventing.knative.dev` API group. Types below are declared in golang
-format, but may be expressed as simple lists, etc in YAML. All Sources should be
-part of the `sources` category, so you can list all existing Sources with
-`kubectl get sources`. The currently-implemented Sources are described below.
+All Sources should be part of the `sources` category, so you can list all existing Sources with
+`kubectl get sources`.
 
-In addition to the core sources (explained below), there are
+In addition to the sources explained below, there are
 [other sources](./sources/README.md) that you can install.
-
-If you need a Source not covered by the
-[available Source implementations](./sources/README.md), there is a
+If you need a Source not covered by the ones mentioned below nor by the other
+[available implementations](./sources/README.md), there is a
 [tutorial on writing your own Source with kubebuilder](./samples/writing-a-source/README.md) as
 well as an
 [extended tutorial on writing a Source with Receive Adapter](./samples/writing-receive-adapter-source).
@@ -156,216 +152,67 @@ If your code needs to send events as part of its business logic and doesn't fit
 the model of a Source, consider
 [feeding events directly to a Broker](https://knative.dev/docs/eventing/broker-trigger/#manual).
 
-### APIServerSource
+### Core Sources
+
+These are the core sources that come out-of-the-box when installing Knative Eventing.
+
+#### APIServerSource
 
 The APIServerSource fires a new event each time a Kubernetes resource is created, updated or deleted.
 
-See the [Kubernetes API Server Source](samples/kubernetes-event-source) example.
+See the [Kubernetes API Server Source](samples/kubernetes-event-source) example for more details.
 
-### GitHubSource
+#### PingSource
+
+The PingSource fires events based on given
+[Cron](https://en.wikipedia.org/wiki/Cron) schedule.
+
+See the [Ping Source](samples/ping-source) example for more details.
+
+#### ContainerSource
+
+The ContainerSource will instantiate container image(s) that can generate events
+until the ContainerSource is deleted. This may be used (for example) to poll an
+FTP server for new files or generate events at a set time interval.
+
+Refer to the [Container Source](samples/container-source) example for more details.
+
+#### SinkBinding
+
+The SinkBinding can be used to author new event sources using any of the
+familiar compute abstractions that Kubernetes makes available (e.g. Deployment,
+Job, DaemonSet, StatefulSet), or Knative abstractions (e.g. Service,
+Configuration).
+
+See the [SinkBinding](samples/container-source) example for more details.
+
+### Eventing Contrib Sources
+
+This is a non-exhaustive list of Sources supported by our community and maintained
+in the [Knative Eventing-Contrib](https://github.com/knative/eventing-contrib) Github repo.
+
+#### GitHubSource
 
 The GitHubSource fires a new event for selected
 [GitHub event types](https://developer.github.com/v3/activity/events/types/).
 
-**Spec fields**:
+See the [GitHub Source](samples/github-source) example for more details.
 
-- `ownerAndRepository`: `string` The GitHub owner/org and repository to receive
-  events from. The repository may be left off to receive events from an entire
-  organization.
-- `eventTypes`: `[]string` A list of
-  [event types](https://developer.github.com/v3/activity/events/types/) in
-  "Webhook event name" format (lower_case).
-- `accessToken.secretKeyRef`:
-  [SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#secretkeyselector-v1-core)
-  containing a GitHub access token for configuring a GitHub webhook. One of this
-  or `secretToken` must be set.
-- `secretToken.secretKeyRef`:
-  [SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#secretkeyselector-v1-core)
-  containing a GitHub secret token for configuring a GitHub webhook. One of this
-  or `accessToken` must be set.
-- `serviceAccountName`: `string` The name of the ServiceAccount to run the
-  container as.
-- `sink`:
-  [ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#objectreference-v1-core)
-  A reference to the object that should receive events.
-- `githubAPIURL`: `string` Optional field to specify the base URL for API
-  requests. Defaults to the public GitHub API if not specified, but can be set
-  to a domain endpoint to use with GitHub Enterprise, for example,
-  `https://github.mycompany.com/api/v3/`. This base URL should always be
-  specified with a trailing slash.
-
-See the [GitHub Source](samples/github-source) example.
-
-### CloudPubSubSource
-
-The CloudPubSubSource fires a new event each time a message is published on a
-[Google Cloud Platform PubSub topic](https://cloud.google.com/pubsub/).
-
-**Spec fields**:
-
-- `topic`: `string` The name of the PubSub topic.
-- `sink`:
-  [Destination](https://github.com/knative/pkg/blob/master/apis/duck/v1/destination.go)
-  A reference to the target that should receive events.
-- `secret`:
-  [SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#secretkeyselector-v1-core)
-  Credential to use to poll the Cloud Pub/Sub Subscription. It is not used to create or delete the Subscription, only to poll it.
-  The value of the secret entry must be a service account key in the JSON format (see https://cloud.google.com/iam/docs/creating-managing-service-account-keys). Defaults to secret.name of 'google-cloud-key' and secret.key of 'key.json'.
-- `project`: `string` ID of the Google Cloud Project that the Pub/Sub Topic exists in. If omitted uses the Project ID from the GKE cluster metadata service.
-
-See the [CloudPubSubSource](samples/cloud-pubsub-source) example.
-
-### CloudStorageSource
-
-Registers for events of the specified types on the specified
-[Google Cloud Storage](https://cloud.google.com/storage/) bucket and optional object prefix.
-Brings those events into Knative.
-
-**Spec fields**:
-
-- `bucket`: `string` GCS bucket to subscribe to. For example my-test-bucket.
-- `sink`:
-  [Destination](https://github.com/knative/pkg/blob/master/apis/duck/v1/destination.go)
-  A reference to the target that should receive events.
-- `secret`:
-  [SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#secretkeyselector-v1-core)
-  Credential to use for managing GCS notifications.
-  The value of the secret entry must be a service account key in the JSON format (see https://cloud.google.com/iam/docs/creating-managing-service-account-keys). Defaults to secret.name of 'google-cloud-key' and secret.key of 'key.json'.
-- `project`: `string` ID of the Google Cloud Project that the Pub/Sub Topic exists in. If omitted uses the Project ID from the GKE cluster metadata service.
-
-See the [CloudStorageSource](samples/cloud-storage-source) example.
-
-### CloudSchedulerSource
-
-Create, update, and delete [Google Cloud Scheduler](https://cloud.google.com/scheduler/) Jobs.
-When those jobs are triggered, receive the event inside Knative.
-
-**Spec fields**:
-
-- `location`: `string` Location to create the Scheduler job in.
-- `data`: `string` Data to send in the payload of the Event.
-- `schedule`: `string` Frequency using the unix-cron format. Or App Engine Cron format.
-- `sink`:
-  [Destination](https://github.com/knative/pkg/blob/master/apis/duck/v1/destination.go)
-  A reference to the target that should receive events.
-- `secret`:
-  [SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#secretkeyselector-v1-core)
-  Credential to use for managing Scheduler Jobs.
-  The value of the secret entry must be a service account key in the JSON format (see https://cloud.google.com/iam/docs/creating-managing-service-account-keys). Defaults to secret.name of 'google-cloud-key' and secret.key of 'key.json'.
-- `project`: `string` ID of the Google Cloud Project that the Pub/Sub Topic exists in. If omitted uses the Project ID from the GKE cluster metadata service.
-
-See the [CloudSchedulerSource](samples/cloud-scheduler-source) example.
-
-### CloudAuditLogsSource
-
-Registers for events of the specified types on the specified [Google Cloud Audit Logs](https://cloud.google.com/logging/docs/audit/). Brings those events into Knative.
-
-**Spec fields**:
-
-- `serviceName`: `string` The GCP service providing audit logs.
-- `methodName`: `string` The name of the service method or operation. For API calls, this should be the name of the API method.
-- `resourceName`: `string` The resource or collection that is the target of the operation. The name is a scheme-less URI, not including the API service name. If omitted, audit log events matching service and method will be pulled for all resources.
-- `sink`:
-  [Destination](https://github.com/knative/pkg/blob/master/apis/duck/v1/destination.go)
-  A reference to the target that should receive events.
-- `secret`:
-  [SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#secretkeyselector-v1-core)
-  Credential used to pull Stackdriver audit log pubsub messages.
-  The value of the secret entry must be a service account key in the JSON format (see https://cloud.google.com/iam/docs/creating-managing-service-account-keys). Defaults to secret.name of 'google-cloud-key' and secret.key of 'key.json'.
-- `project`: `string` ID of the Google Cloud Project that the Pub/Sub Topic exists in. If omitted uses the Project ID from the GKE cluster metadata service.
-
-See the [CloudAuditLogsSource](samples/cloud-audit-logs-source) example.
-
-### AwsSqsSource
+#### AwsSqsSource
 
 The AwsSqsSource fires a new event each time an event is published on an
 [AWS SQS topic](https://aws.amazon.com/sqs/).
 
-**Spec fields**:
-
-- `queueURL`: URL of the SQS queue to pull events from.
-- `awsCredsSecret`: credential to use to poll the AWS SQS queue.
-- `sink`:
-  [ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#objectreference-v1-core)
-  A reference to the object that should receive events.
-- `serviceAccountName`: `string` The name of the ServiceAccount used to access
-  the `awsCredsSecret`.
-
-### ContainerSource
-
-The ContainerSource will instantiate a container image which can generate events
-until the ContainerSource is deleted. This may be used (for example) to poll an
-FTP server for new files or generate events at a set time interval.
-
-**Spec fields**:
-
-- `image` (**required**): `string` A docker image of the container to be run.
-- `args`: `[]string` Command-line arguments. If no `--sink` flag is provided,
-  one will be added and filled in with the DNS address of the `sink` object.
-- `env`: `map[string]string` Environment variables to be set in the container.
-- `serviceAccountName`: `string` The name of the ServiceAccount to run the
-  container as.
-- `sink`:
-  [ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#objectreference-v1-core)
-  A reference to the object that should receive events.
-
-### CronJobSource
-
-The CronJobSource fires events based on given
-[Cron](https://en.wikipedia.org/wiki/Cron) schedule.
-
-**Spec fields**:
-
-- `schedule` (**required**): `string` A
-  [Cron](https://en.wikipedia.org/wiki/Cron) format string, such as `0 * * * *`
-  or `@hourly`.
-- `data`: `string` Optional data sent to downstream receiver.
-- `serviceAccountName`: `string` The name of the ServiceAccount to run the
-  container as.
-- `sink`:
-  [ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#objectreference-v1-core)
-  A reference to the object that should receive events.
-
-See the [Cronjob Source](samples/cronjob-source) example.
-
-### KafkaSource
+#### KafkaSource
 
 The KafkaSource reads events from an Apache Kafka Cluster, and passes these to a
 Knative Serving application so that they can be consumed.
 
-**Spec fields**:
-
-- `consumerGroup`: `string` Name of a Kafka consumer group.
-- `bootstrapServers`: `string` Comma separated list of `hostname:port` pairs for
-  the Kafka Broker.
-- `topics`: `string` Name of the Kafka topic to consume messages from.
-- `net`: Optional network configuration.
-  - `sasl`: Optional SASL authentication configuration.
-    - `enable`: `boolean` If true, use SASL for authentication.
-    - `user.secretKeyRef`:
-      [`SecretKeySelector`](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#secretkeyselector-v1-core)
-      containing the SASL username to use.
-    - `password.secretKeyRef`:
-      [`SecretKeySelector`](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#secretkeyselector-v1-core)
-      containing the SASL password to use.
-  - `tls`: Optional TLS configuration.
-    - `enable`: `boolean` If true, use TLS when connecting.
-    - `cert.secretKeyRef`:
-      [`SecretKeySelector`](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#secretkeyselector-v1-core)
-      containing the client certificate to use.
-    - `key.secretKeyRef`:
-      [`SecretKeySelector`](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#secretkeyselector-v1-core)
-      containing the client key to use.
-    - `caCert.secretKeyRef`:
-      [`SecretKeySelector`](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#secretkeyselector-v1-core)
-      containing a server CA certificate to use when verifying the server
-      certificate.
-
 See the
 [Kafka Source](https://github.com/knative/eventing-contrib/tree/master/kafka/source)
-example.
+example for more details.
 
-### CamelSource
+#### CamelSource
 
 A CamelSource is an event source that can represent any existing
 [Apache Camel component](https://github.com/apache/camel/tree/master/components)
@@ -374,34 +221,49 @@ endpoint. Each Camel endpoint has the form of a URI where the scheme is the ID
 of the component to use.
 
 CamelSource requires [Camel-K](https://github.com/apache/camel-k#installation)
-to be installed into the current namespace.
-
-**Spec fields**:
-
-- source: information on the kind of Camel source that should be created.
-  - component: the default kind of source, enables creating an EventSource by
-    configuring a single Camel component.
-    - uri: `string` contains the Camel URI that should be used to push events
-      into the target sink.
-    - properties: `key/value map` contains Camel global options or component
-      specific configuration. Options are available in the documentation of each
-      existing Apache Camel component.
-- serviceAccountName: `string` an optional service account that can be used to
-  run the source pod.
-- image: `string` an optional base image to use for the source pod, mainly for
-  development purposes.
-
-See the
+to be installed into the current namespace. See the
 [CamelSource](https://github.com/knative/eventing-contrib/tree/master/camel/source/samples)
 example.
 
+### Google Cloud Sources
+
+In order to consume events from different GCP services, [Knative-GCP](https://github.com/google/knative-gcp) supports
+different GCP Sources.
+
+#### CloudPubSubSource
+
+The CloudPubSubSource fires a new event each time a message is published on a
+[Google Cloud Platform PubSub topic](https://cloud.google.com/pubsub/).
+
+See the [CloudPubSubSource](samples/cloud-pubsub-source) example for more details.
+
+#### CloudStorageSource
+
+Registers for events of specific types on the specified
+[Google Cloud Storage](https://cloud.google.com/storage/) bucket and optional object prefix.
+Brings those events into Knative.
+
+See the [CloudStorageSource](samples/cloud-storage-source) example.
+
+#### CloudSchedulerSource
+
+Creates, updates, and deletes [Google Cloud Scheduler](https://cloud.google.com/scheduler/) Jobs.
+When those jobs are triggered, receive the event inside Knative.
+
+See the [CloudSchedulerSource](samples/cloud-scheduler-source) example for further details.
+
+#### CloudAuditLogsSource
+
+Registers for events of specific types on the specified [Google Cloud Audit Logs](https://cloud.google.com/logging/docs/audit/).
+Brings those events into Knative.
+
+Refer to the [CloudAuditLogsSource](samples/cloud-audit-logs-source) example for more details.
+
+
 ## Getting Started
 
-- [Setup Knative Serving](../install/README.md)
 - [Install the Eventing component](#installation)
+- [Setup Knative Serving](../install/README.md)
 - [Run samples](./samples/)
-
-## Configuration
-
 - [Default Channels](./channels/default-channels.md) provide a way to choose the
   persistence strategy for Channels across the cluster.

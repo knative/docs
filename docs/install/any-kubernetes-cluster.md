@@ -27,7 +27,7 @@ description of each:
  - [**Serving**](#installing-the-serving-component) {{< feature-state version="v0.9" state="stable" short=true >}} provides an abstraction for stateless request-based scale-to-zero services.
  - [**Eventing**](#installing-the-eventing-component) {{< feature-state version="v0.2" state="alpha" short=true >}} provides abstractions to enable binding event sources (e.g. Github Webhooks, Kafka) and consumers (e.g. Kubernetes or Knative Services).
 
-Knative also has an [**Observability plugin**](#installing-the-observability-plugin) {{< feature-state version="v0.1" state="alpha" short=true >}}  which provides standard tooling that can be used to get visibility into the health of the software running on Knative.
+Knative also has an [**Observability plugin**](#installing-the-observability-plugin) {{< feature-state version="v0.14" state="deprecated" short=true >}}  which provides standard tooling that can be used to get visibility into the health of the software running on Knative.
 
 ## Before you begin
 
@@ -262,7 +262,7 @@ We ship a simple Kubernetes Job called "default domain" that will (see caveats) 
 kubectl apply --filename {{< artifact repo="serving" file="serving-default-domain.yaml" >}}
 ```
 
-**Caveat**: This will only work if the cluster LoadBalancer service exposes an IPv4 address, so it will not work with IPv6 clusters, AWS, or local setups like Minikube.  For these, see "Real DNS".
+**Caveat**: This will only work if the cluster LoadBalancer service exposes an IPv4 address, so it will not work with IPv6 clusters, AWS, or local setups like Minikube.  For these, see "Real DNS" or "Temporary DNS".
 {{< /tab >}}
 
 
@@ -294,6 +294,41 @@ kubectl patch configmap/config-domain \
 ```
 
 {{< /tab >}}
+
+{{% tab name="Temporary DNS" %}}
+If you are using `curl` to access the sample applications, or your own Knative app, and are unable to use the "Magic DNS (xip.io)" or "Real DNS" methods, there is a temporary approach. This is useful for those who wish to evaluate Knative without altering their DNS configuration, as per the "Real DNS" method, or cannot use the "Magic DNS" method due to using, for example, minikube locally or IPv6 clusters.
+
+To access your application using `curl` using this method:
+
+1. After starting your application, get the URL of your application:
+
+    ```bash
+    kubectl get ksvc
+    ```
+
+   The output should be similar to:
+
+   ```bash
+   NAME            URL                                        LATESTCREATED         LATESTREADY           READY   REASON
+   helloworld-go   http://helloworld-go.default.example.com   helloworld-go-vqjlf   helloworld-go-vqjlf   True    
+   ```
+
+1. Instruct `curl` to connect to the External IP or CNAME defined by the networking layer in section 3 above, and use the `-H "Host:"` command-line option to specify the Knative application's host name. For example, if the networking layer defines your External IP and port to be `http://192.168.39.228:32198` and you wish to access the above `helloworld-go` application, use:
+
+   ```bash
+   curl -H "Host: helloworld-go.default.example.com" http://192.168.39.228:32198
+   ```
+
+   In the case of the provided `helloworld-go` sample application, the output should, using the default configuration, be:
+
+   ```
+   Hello Go Sample v1!
+   ```
+
+Refer to the "Real DNS" method for a permanent solution.
+
+{{< /tab >}}
+
 {{< /tabs >}}
 
 1. Monitor the Knative components until all of the components show a `STATUS` of `Running` or `Completed`:
@@ -341,16 +376,49 @@ Knative supports automatically provisioning TLS certificates via [cert-manager](
 3. Now configure Knative to [automatically configure TLS certificates](../serving/using-auto-tls.md).
 {{< /tab >}}
 
+{{% tab name="TLS via HTTP01" %}}
+
+{{% feature-state version="v0.14" state="alpha" %}}
+
+Knative supports automatically provisioning TLS certificates using Let's Encrypt HTTP01 challenges.  The following commands will install the components needed to support that.
+
+1. First, install the `net-http01` controller:
+
+    ```bash
+    kubectl apply --filename {{< artifact repo="net-http01" file="release.yaml" >}}
+    ```
+
+2. Next, configure the `certificate.class` to use this certificate type.
+
+    ```bash
+    kubectl patch configmap/config-network \
+      --namespace knative-serving \
+      --type merge \
+      --patch '{"data":{"certificate.class":"net-http01.certificate.networking.knative.dev"}}'
+    ```
+
+3. Lastly, enable auto-TLS.
+
+    ```bash
+    kubectl patch configmap/config-network \
+      --namespace knative-serving \
+      --type merge \
+      --patch '{"data":{"autoTLS":"Enabled"}}'
+    ```
+
+{{< /tab >}}
+
 {{% tab name="TLS wildcard support" %}}
 
-<!-- This isn't where this was introduced, but we seem to have missed it in the release notes :( -->
 {{% feature-state version="v0.12" state="alpha" %}}
 
-If you plan to use cert-manager's support for provisioning wildcard certificates, then the most efficient way to provision certificates is with the namespace wildcard certificate controller.  The following command will install the components needed to provision wildcard certificates in each namespace:
+If you are using a Certificate implementation that supports provisioning wildcard certificates (e.g. cert-manager with a DNS01 issuer), then the most efficient way to provision certificates is with the namespace wildcard certificate controller.  The following command will install the components needed to provision wildcard certificates in each namespace:
 
 ```bash
 kubectl apply --filename {{< artifact repo="serving" file="serving-nscert.yaml" >}}
 ```
+
+> Note this will not work with HTTP01 either via cert-manager or the net-http01 options.
 
 {{< /tab >}}
 {{< /tabs >}}
@@ -363,7 +431,7 @@ Deploy your first app with the [getting started with Knative app deployment](../
 
 ## Installing the Eventing component
 
-{{< feature-state version="v0.2" state="alpha" >}}
+{{< feature-state version="v0.13" state="beta" >}}
 
 
 The following commands install the Knative Eventing component.
@@ -415,7 +483,7 @@ To learn more about the Google Cloud Pub/Sub Channel, try [our sample](https://g
 
 {{% tab name="In-Memory (standalone)" %}}
 
-{{< feature-state version="v0.2" state="alpha" >}}
+{{< feature-state version="v0.13" state="beta" >}}
 
 The following command installs an implementation of Channel that runs in-memory.  This implementation is nice because it is simple and standalone, but it is unsuitable for production use cases.
 
@@ -441,12 +509,12 @@ The following command installs an implementation of Channel that runs in-memory.
 
 {{< /tabs >}}
 
-1. Install a default Broker (eventing) layer:
+1. Install a Broker (eventing) layer:
 
    <!-- This indentation is important for things to render properly. -->
    {{< tabs name="eventing_brokers" default="Channel-based" >}}
 {{% tab name="Channel-based" %}}
-{{< feature-state version="v0.5" state="alpha" >}}
+{{< feature-state version="v0.13" state="beta" >}}
 
 The following command installs an implementation of Broker that utilizes Channels:
 
@@ -454,31 +522,79 @@ The following command installs an implementation of Broker that utilizes Channel
    kubectl apply --filename {{< artifact repo="eventing" file="channel-broker.yaml" >}}
    ```
 
-To customize which channel implementation is used, update the following ConfigMap:
+To customize which broker channel implementation is used, update the following
+ConfigMap to specify which configurations are used for which namespaces:
 
    ```yaml
    apiVersion: v1
    kind: ConfigMap
    metadata:
-     name: default-ch-webhook
+     name: config-br-defaults
      namespace: knative-eventing
    data:
-     default-ch-config: |
-       # This is the cluster-wide default channel.
+     default-br-config: |
+       # This is the cluster-wide default broker channel.
        clusterDefault:
-         apiVersion: messaging.knative.dev/v1alpha1
-         kind: InMemoryChannel
-
+         brokerClass: ChannelBasedBroker
+         apiVersion: v1
+         kind: ConfigMap
+         name: imc-channel
+         namespace: knative-eventing
+       # This allows you to specify different defaults per-namespace,
+       # in this case the "some-namespace" namespace will use the Kafka
+       # channel ConfigMap by default (only for example, you will need
+       # to install kafka also to make use of this).
        namespaceDefaults:
-         # This allows you to specify different defaults per-namespace,
-         # in this case the "some-namespace" namespace will use the Kafka
-         # channel by default.
          some-namespace:
-           apiVersion: messaging.knative.dev/v1alpha1
-           kind: KafkaChannel
-           spec:
-             numPartitions: 2
-             replicationFactor: 1
+           brokerClass: ChannelBasedBroker
+           apiVersion: v1
+           kind: ConfigMap
+           name: kafka-channel
+           namespace: knative-eventing
+   ```
+
+{{< /tab >}}
+
+{{% tab name="MT-Channel-based" %}}
+{{< feature-state version="v0.14" state="alpha" >}}
+
+The following command installs an implementation of Broker that utilizes Channels
+just like the Channel Based one, but this broker runs event routing components
+in a System Namespace, providing a smaller and simpler installation.
+
+   ```bash
+   kubectl apply --filename {{< artifact repo="eventing" file="mt-channel-broker.yaml" >}}
+   ```
+
+To customize which broker channel implementation is used, update the following
+ConfigMap to specify which configurations are used for which namespaces:
+
+   ```yaml
+   apiVersion: v1
+   kind: ConfigMap
+   metadata:
+     name: config-br-defaults
+     namespace: knative-eventing
+   data:
+     default-br-config: |
+       # This is the cluster-wide default broker channel.
+       clusterDefault:
+         brokerClass: MTChannelBasedBroker
+         apiVersion: v1
+         kind: ConfigMap
+         name: imc-channel
+         namespace: knative-eventing
+       # This allows you to specify different defaults per-namespace,
+       # in this case the "some-namespace" namespace will use the Kafka
+       # channel ConfigMap by default (only for example, you will need
+       # to install kafka also to make use of this).
+       namespaceDefaults:
+         some-namespace:
+           brokerClass: MTChannelBasedBroker
+           apiVersion: v1
+           kind: ConfigMap
+           name: kafka-channel
+           namespace: knative-eventing
    ```
 
 {{< /tab >}}
@@ -574,7 +690,21 @@ To learn more about the Cloud Audit Logs source, try [our sample](../eventing/sa
 
 {{< /tab >}}
 
-<!-- TODO: couchdb source -->
+{{% tab name="Apache CouchDB Source" %}}
+
+{{< feature-state version="v0.10" state="alpha" >}}
+
+The following command installs the Apache CouchDB Source:
+
+   ```bash
+   kubectl apply --filename {{< artifact repo="eventing-contrib" file="couchdb.yaml" >}}
+   ```
+
+To learn more about the Apache CouchDB source, read [our documentation]((https://github.com/knative/eventing-contrib/blob/{{< version >}}/couchdb/README.md)
+
+{{< /tab >}}
+
+
 <!-- TODO: prometheus source -->
 <!-- TODO: AWS SQS source  -->
 
@@ -590,7 +720,7 @@ You can find a number of samples for Knative Eventing [here](../eventing/samples
 
 ## Installing the Observability plugin
 
-{{< feature-state version="v0.2" state="alpha" >}}
+{{< feature-state version="v0.14" state="deprecated" >}}
 
 Install the following observability features to enable logging, metrics, and request tracing in your Serving and Eventing components.
 
