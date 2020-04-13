@@ -133,13 +133,6 @@ all the YAML files deployed in this sample to point at that namespace.
 
    {{< /tab >}} {{< /tabs >}}
 
-2) Enter the following command to create the service account from
-   `serviceaccount.yaml`:
-
-   ```shell
-   kubectl apply --filename serviceaccount.yaml
-   ```
-
 ### Create Event Source for Kubernetes Events
 
 In order to receive events, you have to create a concrete Event Source for a
