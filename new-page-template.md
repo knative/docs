@@ -35,7 +35,7 @@ this guide show you how to do?" and "why would someone want to do this?".
 
 You need:
 
-- A Kubernetes cluster with [Knative installed](../install/README.md). <!-- Update this relative link as needed,
+- A Kubernetes cluster with [Knative installed](docs/install/README.md). <!-- Update this relative link as needed,
 depending on where the new page is located in the file structure. -->
 - Anything else?
 
@@ -83,6 +83,6 @@ If your guide installs a sample application, show the user how to delete it.
 Provide links to other relevant topics, if applicable. Once someone has
 completed these steps, what might they want to do next?
 
-- [Link](./page.md) <!-- Always use relative links if linking to a page within the Docs repo. -->
-- [Link](./page.md)
-- [Link](./page.md)
+- [Link](./search.md) <!-- Always use relative links if linking to a page within the Docs repo. -->
+- [Link](./search.md)
+- [Link](./search.md)

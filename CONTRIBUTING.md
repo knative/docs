@@ -14,7 +14,7 @@ propose changes to this document in a pull request.
 
 ### Code of conduct
 
-Knative follows the [Knative Code of Conduct](../CODE-OF-CONDUCT.md). By
+Knative follows the [Knative Code of Conduct](https://github.com/knative/community/blob/master/CODE-OF-CONDUCT.md). By
 participating, you are expected to uphold this code. Please report unacceptable
 behavior to knative-code-of-conduct@googlegroups.com.
 
@@ -58,7 +58,7 @@ see a problem with the documentation, submit an issue using the following steps:
      When you create a bug report, include as many details as possible and
      include suggested fixes to the issue. If you know which Knative component
      your bug is related to, you can assign the appropriate
-     [Working Group Lead](../WORKING-GROUPS.md).
+     [Working Group Lead](https://github.com/knative/community/blob/master/working-groups/WORKING-GROUPS.md).
    - **Feature request**: For upcoming changes to the documentation or requests
      for more information on a particular subject.
 
@@ -71,7 +71,7 @@ issue in the [`knative/website`repo](https://github.com/knative/website/issues).
 
 ### Working group
 
-The [Knative Documentation Working Group](../WORKING-GROUPS.md#documentation)
+The [Knative Documentation Working Group](https://github.com/knative/community/blob/master/working-groups/WORKING-GROUPS.md#documentation)
 meets weekly on Tuesdays and alternates between a 9am PT and a 4:30pm PT time to
 accommodate contributors in both the EMEA and APAC timezones.
 [Click here](https://calendar.google.com/calendar/embed?src=google.com_18un4fuh6rokqf8hmfftm5oqq4%40group.calendar.google.com)
@@ -89,8 +89,8 @@ There are a couple different ways to jump in to the Knative doc set:
   in the backlog.
 
 - Try out Knative and send us feedback. For example, run through one of the
-  [install guides](https://github.com/knative/docs/tree/master/docs/install/README.md) and then try
-  [Getting Started with Knative Serving](https://github.com/knative/docs/tree/master/docs/install/getting-started-knative-app.md).
+  [install guides](docs/install/README.md) and then try
+  [Getting Started with Knative Serving](docs/serving/getting-started-knative-app.md).
 
   You should keep a
   [friction log](https://devrel.net/developer-experience/an-introduction-to-friction-logging)
@@ -284,7 +284,7 @@ Use the `/assign` command to set the owner. For example: `/assign @owner_id`
 For code samples, initially set the owner of your PR to the SME who should
 review for technical accuracy. If you don't know who the appropriate owner is,
 nor who your reviewers should be for your PR, you can assign the
-[current working group lead](../WORKING-GROUPS.md) of the related component.
+[current working group lead](https://github.com/knative/community/blob/master/working-groups/WORKING-GROUPS.md) of the related component.
 
 If you want to notify and include other stakeholders in your PR review, use the
 `/cc` command. For example: `/cc @stakeholder_id1 @stakeholder_id2`
@@ -295,7 +295,7 @@ Because contributing to the documentation requires a different skill set than
 contributing to the Knative code base, we've defined the roles of documentation
 contributors separately from the roles of code contributors.
 
-If you're looking for code contributor roles, see [ROLES](../ROLES.md).
+If you're looking for code contributor roles, see [ROLES](https://github.com/knative/community/blob/master/ROLES.md).
 
 ### Member
 
@@ -393,7 +393,7 @@ to the Docs repo.
     standpoint.
 
 - Expected to be responsive to review requests as per
-  [community expectations](REVIEWING.md).
+  [community expectations](https://github.com/knative/community/blob/master/REVIEWING.md).
 
 - Mentor members and contributors to improve their writing.
 
