@@ -41,7 +41,7 @@ depending on where the new page is located in the file structure. -->
 
 ## Break steps into logical sections
 
-Avoid nesting headings directly on top of each other with no text inbetween.
+Avoid nesting headings directly on top of each other with no text in between.
 
 1. Use ordered lists for steps.
 
@@ -56,7 +56,7 @@ Avoid nesting headings directly on top of each other with no text inbetween.
 
 ### You can use smaller sections within sections for related tasks
 
-Avoid nesting headings directly on top of each other with no text inbetween.
+Avoid nesting headings directly on top of each other with no text in between.
 
 Put code into a code block.
 

@@ -31,9 +31,9 @@ contribution becomes part of this project. So this agreement simply gives us
 permission to use and redistribute your contributions as part of the project.
 
 Note: Your contributions are verified using the email address for which you
-use to sign the CLA. Therefore, 
+use to sign the CLA. Therefore,
 [setting your GitHub account to private](https://help.github.com/en/articles/setting-your-commit-email-address)
-is unsupported because all commits from private accounts are sent from the `noreply` 
+is unsupported because all commits from private accounts are sent from the `noreply`
 email address.
 
 ### Style guide
@@ -268,7 +268,7 @@ in the product, or for a fix or update existing content.
       team members might be able to help handle the `git cherry-pick` in order
       to push the fix into the affected release branch(es).
 
-See a list of the available documentaion versions in the
+See a list of the available documentation versions in the
 [branches page](https://github.com/knative/docs/branches)
 of the `knative/docs` repo.
 
