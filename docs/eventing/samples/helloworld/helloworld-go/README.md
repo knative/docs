@@ -222,16 +222,20 @@ folder) you're ready to build and deploy the sample app.
    1. Above command created a namespace `knative-samples` and labelled it with
       `knative-eventing-injection=enabled`, to enable eventing in the namespace.
       Verify using the following command:
+
       ```shell
       kubectl get ns knative-samples --show-labels
       ```
+
    1. It deployed the helloworld-go app as a K8s Deployment and created a K8s
       service names helloworld-go. Verify using the following command.
+
       ```shell
       kubectl --namespace knative-samples get deployments helloworld-go
 
       kubectl --namespace knative-samples get svc helloworld-go
       ```
+
    1. It created a Knative Eventing Trigger to route certain events to the
       helloworld-go application. Make sure that Ready=true
       ```shell
@@ -253,20 +257,19 @@ with correct CloudEvent headers set.
    kubectl --namespace knative-samples run curl --image=radial/busyboxplus:curl -it
    ```
 1. Run the following in the SSH terminal
+
    ```shell
    curl -v "default-broker.knative-samples.svc.cluster.local" \
-   -X POST \
-   -H "Ce-Id: 536808d3-88be-4077-9d7a-a3f162705f79" \
-   -H "Ce-Specversion: 1.0" \
-   -H "Ce-Type: dev.knative.samples.helloworld" \
-   -H "Ce-Source: dev.knative.samples/helloworldsource" \
-   -H "Content-Type: application/json" \
-   -d '{"msg":"Hello World from the curl pod."}'
+       -X POST \
+       -H "Ce-Id: 536808d3-88be-4077-9d7a-a3f162705f79" \
+       -H "Ce-Specversion: 1.0" \
+       -H "Ce-Type: dev.knative.samples.helloworld" \
+       -H "Ce-Source: dev.knative.samples/helloworldsource" \
+       -H "Content-Type: application/json" \
+       -d '{"msg":"Hello World from the curl pod."}'
+
+   exit
    ```
-
-
-      exit
-      ```
 
 ### Verify that event is received by helloworld-go app
 
@@ -275,29 +278,38 @@ back with another event.
 
 1.  Display helloworld-go app logs
     `shell kubectl --namespace knative-samples logs -l app=helloworld-go --tail=50`
-    You should see something similar to: ```shell Event received. Validation:
-    valid Context Attributes, specversion: 1.0 type:
-    dev.knative.samples.helloworld source: dev.knative.samples/helloworldsource
-    id: 536808d3-88be-4077-9d7a-a3f162705f79 time: 2019-10-04T22:35:26.05871736Z
-    datacontenttype: application/json Extensions, knativearrivaltime:
-    2019-10-04T22:35:26Z knativehistory:
-    default-kn2-trigger-kn-channel.knative-samples.svc.cluster.local
-    traceparent: 00-971d4644229653483d38c46e92a959c7-92c66312e4bb39be-00 Data,
-    {"msg":"Hello World from the curl pod."}
+    You should see something similar to:
 
-        Hello World Message "Hello World from the curl pod."
-        Responded with event
-        Validation: valid
-        Context Attributes,
-          specversion: 0.2
-          type: dev.knative.samples.hifromknative
-          source: knative/eventing/samples/hello-world
-          id: 37458d77-01f5-411e-a243-a459bbf79682
-          datacontenttype: application/json
-        Data,
-          {"msg":"Hi from Knative!"}
+    ```shell
+    Event received.
+    Validation: valid
+    Context Attributes,
+     specversion: 1.0
+     type: dev.knative.samples.helloworld
+     source: dev.knative.samples/helloworldsource
+     id: 536808d3-88be-4077-9d7a-a3f162705f79
+     time: 2019-10-04T22:35:26.05871736Z
+     datacontenttype: application/json
+    Extensions,
+     knativearrivaltime: 2019-10-04T22:35:26Z
+     knativehistory: default-kn2-trigger-kn-channel.knative-samples.svc.cluster.local
+     traceparent: 00-971d4644229653483d38c46e92a959c7-92c66312e4bb39be-00
+    Data,
+      {"msg":"Hello World from the curl pod."}
 
-        ```
+    Hello World Message "Hello World from the curl pod."
+    Responded with event
+    Validation: valid
+    Context Attributes,
+      specversion: 1.0
+      type: dev.knative.samples.hifromknative
+      source: knative/eventing/samples/hello-world
+      id: 37458d77-01f5-411e-a243-a459bbf79682
+      datacontenttype: application/json
+    Data,
+      {"msg":"Hi from Knative!"}
+
+    ```
 
     Play around with the CloudEvent attributes in the curl command and the
     trigger specification to understand how
