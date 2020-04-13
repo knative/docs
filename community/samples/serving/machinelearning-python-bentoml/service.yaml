@@ -1,0 +1,24 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: iris-classifier
+  namespace: default
+spec:
+  template:
+    spec:
+      containers:
+        - image: docker.io/{username}/iris-classifier
+          ports:
+          - containerPort: 5000 # Port to route to
+          livenessProbe:
+            httpGet:
+              path: /healthz
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /healthz
+            initialDelaySeconds: 3
+            periodSeconds: 5
+            failureThreshold: 3
+            timeoutSeconds: 60

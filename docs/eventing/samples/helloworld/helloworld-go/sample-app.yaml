@@ -6,7 +6,7 @@ metadata:
   labels:
        knative-eventing-injection: enabled
 ---
-# Helloworld-go app deploment
+# Helloworld-go app deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -41,7 +41,7 @@ spec:
       targetPort: 8080
 ---
 # Knative Eventing Trigger to trigger the helloworld-go service
-apiVersion: eventing.knative.dev/v1alpha1
+apiVersion: eventing.knative.dev/v1beta1
 kind: Trigger
 metadata:
   name: helloworld-go

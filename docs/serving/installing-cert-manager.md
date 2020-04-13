@@ -27,49 +27,16 @@ You must meet the following requirements to install cert-manager for Knative:
   component, see the [Knative installation guides](../install/).
 - You must configure your Knative cluster to use a
   [custom domain](./using-a-custom-domain.md).
-- Knative currently supports cert-manager version `0.6.1` or higher.
+- Knative currently supports cert-manager version `0.12.0` or higher.
 
 ## Downloading and installing cert-manager
 
 Use the following steps to download, install, and configure cert-manager for
 your Knative cluster environment:
 
-1. Run the following commands to download and extract the `cert-manager`
-   installation package:
+1. Follow the steps in the official `cert-manager` website to download and install cert-manager
 
-   ```shell
-   CERT_MANAGER_VERSION=0.6.1
-   DOWNLOAD_URL=https://github.com/jetstack/cert-manager/archive/v${CERT_MANAGER_VERSION}.tar.gz
-
-   wget $DOWNLOAD_URL
-   tar xzf v${CERT_MANAGER_VERSION}.tar.gz
-
-   cd cert-manager-${CERT_MANAGER_VERSION}
-   ```
-
-1. Run the following commands to install cert-manager:
-
-   1. Install the cert-manager CRDs:
-
-      ```shell
-      kubectl apply -f deploy/manifests/00-crds.yaml
-      ```
-
-   1. Run one of the following commands to install the cert-manager plugin:
-
-      - For Knative clusters running Kubernetes version 1.13 or above:
-
-        ```shell
-        # If you are running cluster version 1.13 or above
-        kubectl apply -f deploy/manifests/cert-manager.yaml
-        ```
-
-      - For Knative clusters running Kubernetes version 1.12 or below:
-
-        ```shell
-        # If you are running cluster version 1.12 or below, you must append the --validate=false flag
-        kubectl apply -f deploy/manifests/cert-manager.yaml --validate=false
-        ```
+   [Installation steps](https://cert-manager.io/docs/installation/kubernetes/)
 
 1. Configure which DNS provider is used to validate the DNS-01 challenge
    requests.

@@ -27,7 +27,7 @@ description of each:
  - [**Serving**](#installing-the-serving-component) {{< feature-state version="v0.9" state="stable" short=true >}} provides an abstraction for stateless request-based scale-to-zero services.
  - [**Eventing**](#installing-the-eventing-component) {{< feature-state version="v0.2" state="alpha" short=true >}} provides abstractions to enable binding event sources (e.g. Github Webhooks, Kafka) and consumers (e.g. Kubernetes or Knative Services).
 
-Knative also has an [**Observability plugin**](#installing-the-observability-plugin) {{< feature-state version="v0.1" state="alpha" short=true >}}  which provides standard tooling that can be used to get visibility into the health of the software running on Knative.
+Knative also has an [**Observability plugin**](#installing-the-observability-plugin) {{< feature-state version="v0.14" state="deprecated" short=true >}}  which provides standard tooling that can be used to get visibility into the health of the software running on Knative.
 
 ## Before you begin
 
@@ -704,6 +704,20 @@ To learn more about the Apache CouchDB source, read [our documentation]((https:/
 
 {{< /tab >}}
 
+{{% tab name="VMware Sources and Bindings" %}}
+
+{{< feature-state version="v0.14" state="alpha" >}}
+
+The following command installs the VMware Sources and Bindings:
+
+   ```bash
+   kubectl apply --filename {{< artifact org="vmware-tanzu" repo="sources-for-knative" file="release.yaml" >}}
+   ```
+
+To learn more about the VMware sources and bindings, try [our samples](https://github.com/vmware-tanzu/sources-for-knative/tree/master/samples/README.md).
+
+{{< /tab >}}
+
 
 <!-- TODO: prometheus source -->
 <!-- TODO: AWS SQS source  -->
@@ -720,7 +734,7 @@ You can find a number of samples for Knative Eventing [here](../eventing/samples
 
 ## Installing the Observability plugin
 
-{{< feature-state version="v0.2" state="alpha" >}}
+{{< feature-state version="v0.14" state="deprecated" >}}
 
 Install the following observability features to enable logging, metrics, and request tracing in your Serving and Eventing components.
 
