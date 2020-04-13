@@ -704,6 +704,20 @@ To learn more about the Apache CouchDB source, read [our documentation]((https:/
 
 {{< /tab >}}
 
+{{% tab name="VMware Sources and Bindings" %}}
+
+{{< feature-state version="v0.14" state="alpha" >}}
+
+The following command installs the VMware Sources and Bindings:
+
+   ```bash
+   kubectl apply --filename {{< artifact org="vmware-tanzu" repo="sources-for-knative" file="release.yaml" >}}
+   ```
+
+To learn more about the VMware sources and bindings, try [our samples](https://github.com/vmware-tanzu/sources-for-knative/tree/master/samples/README.md).
+
+{{< /tab >}}
+
 
 <!-- TODO: prometheus source -->
 <!-- TODO: AWS SQS source  -->

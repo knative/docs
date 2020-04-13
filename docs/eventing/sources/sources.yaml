@@ -131,6 +131,12 @@ sources:
     support: None
     description: >
       Brings [Apache CouchDB](https://couchdb.apache.org/) messages into Knative.
+  - name: VMware
+    url: https://github.com/vmware-tanzu/sources-for-knative/tree/{{< branch >}}/pkg/apis/source/v1alpha1/vspheresource_types.go
+    status:  Active Development
+    support: None
+    description: >
+      Brings [vSphere](https://www.vmware.com/products/vsphere.html) events into Knative.
 
 # These are containers intended to be used with ContainerSource, but are not CRDs.
 containers:
