@@ -55,7 +55,7 @@ type Response struct {
 
 // handle shared the logic for producing the Response event from the Request.
 func handle(req Request) Response {
-	return Response{Message:fmt.Sprintf("Hello, %s", req.Name)}
+	return Response{Message: fmt.Sprintf("Hello, %s", req.Name)}
 }
 
 // ReceiveAndSend is invoked whenever we receive an event.
