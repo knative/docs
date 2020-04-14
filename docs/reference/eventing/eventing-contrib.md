@@ -21,6 +21,8 @@ Resource Types:
 </li><li>
 <a href="#sources.knative.dev/v1alpha1.GitHubSource">GitHubSource</a>
 </li><li>
+<a href="#sources.knative.dev/v1alpha1.GitLabSource">GitLabSource</a>
+</li><li>
 <a href="#sources.knative.dev/v1alpha1.PrometheusSource">PrometheusSource</a>
 </li></ul>
 <h3 id="sources.knative.dev/v1alpha1.AwsSqsSource">AwsSqsSource
@@ -101,7 +103,20 @@ Kubernetes core/v1.SecretKeySelector
 </em>
 </td>
 <td>
+<em>(Optional)</em>
 <p>AwsCredsSecret is the credential to use to poll the AWS SQS</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>annotations</code></br>
+<em>
+map[string]string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Annotations to add to the pod, mostly used for Kube2IAM role</p>
 </td>
 </tr>
 <tr>
@@ -375,7 +390,7 @@ string
 <td>
 <code>sink</code></br>
 <em>
-knative.dev/pkg/apis/duck/v1beta1.Destination
+knative.dev/pkg/apis/duck/v1.Destination
 </em>
 </td>
 <td>
@@ -534,7 +549,7 @@ secret token</p>
 <td>
 <code>sink</code></br>
 <em>
-knative.dev/pkg/apis/duck/v1beta1.Destination
+knative.dev/pkg/apis/duck/v1.Destination
 </em>
 </td>
 <td>
@@ -564,7 +579,10 @@ bool
 </td>
 <td>
 <em>(Optional)</em>
-<p>Secure can be set to true to configure the webhook to use https.</p>
+<p>Secure can be set to true to configure the webhook to use https,
+or false to use http.  Omitting it relies on the scheme of the
+Knative Service created (e.g. if auto-TLS is enabled it should
+do the right thing).</p>
 </td>
 </tr>
 </table>
@@ -576,6 +594,174 @@ bool
 <em>
 <a href="#sources.knative.dev/v1alpha1.GitHubSourceStatus">
 GitHubSourceStatus
+</a>
+</em>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sources.knative.dev/v1alpha1.GitLabSource">GitLabSource
+</h3>
+<p>
+<p>GitLabSource is the Schema for the gitlabsources API</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>apiVersion</code></br>
+string</td>
+<td>
+<code>
+sources.knative.dev/v1alpha1
+</code>
+</td>
+</tr>
+<tr>
+<td>
+<code>kind</code></br>
+string
+</td>
+<td><code>GitLabSource</code></td>
+</tr>
+<tr>
+<td>
+<code>metadata</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
+Kubernetes meta/v1.ObjectMeta
+</a>
+</em>
+</td>
+<td>
+Refer to the Kubernetes API documentation for the fields of the
+<code>metadata</code> field.
+</td>
+</tr>
+<tr>
+<td>
+<code>spec</code></br>
+<em>
+<a href="#sources.knative.dev/v1alpha1.GitLabSourceSpec">
+GitLabSourceSpec
+</a>
+</em>
+</td>
+<td>
+<br/>
+<br/>
+<table>
+<tr>
+<td>
+<code>serviceAccountName</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>ServiceAccountName holds the name of the Kubernetes service account
+as which the underlying K8s resources should be run. If unspecified
+this will default to the &ldquo;default&rdquo; service account for the namespace
+in which the GitLabSource exists.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>projectUrl</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>ProjectUrl is the url of the GitLab project for which we are interested
+to receive events from.
+Examples:
+<a href="https://knative.dev/eventing-contrib/gitlab">https://knative.dev/eventing-contrib/gitlab</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<code>eventTypes</code></br>
+<em>
+[]string
+</em>
+</td>
+<td>
+<p>EventType is the type of event to receive from Gitlab. These
+correspond to supported events to the add project hook
+<a href="https://docs.gitlab.com/ee/api/projects.html#add-project-hook">https://docs.gitlab.com/ee/api/projects.html#add-project-hook</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<code>accessToken</code></br>
+<em>
+<a href="#sources.knative.dev/v1alpha1.SecretValueFromSource">
+SecretValueFromSource
+</a>
+</em>
+</td>
+<td>
+<p>AccessToken is the Kubernetes secret containing the GitLab
+access token</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>secretToken</code></br>
+<em>
+<a href="#sources.knative.dev/v1alpha1.SecretValueFromSource">
+SecretValueFromSource
+</a>
+</em>
+</td>
+<td>
+<p>SecretToken is the Kubernetes secret containing the GitLab
+secret token</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>sslverify</code></br>
+<em>
+bool
+</em>
+</td>
+<td>
+<p>SslVerify if true configure webhook so the ssl verification is done when triggering the hook</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>sink</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1.Destination
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Sink is a reference to an object that will resolve to a domain
+name to use as the sink.</p>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<code>status</code></br>
+<em>
+<a href="#sources.knative.dev/v1alpha1.GitLabSourceStatus">
+GitLabSourceStatus
 </a>
 </em>
 </td>
@@ -731,7 +917,7 @@ Prometheus duration strings are of the form [0-9]+[smhdwy].</p>
 <td>
 <code>sink</code></br>
 <em>
-knative.dev/pkg/apis/duck/v1beta1.Destination
+knative.dev/pkg/apis/duck/v1.Destination
 </em>
 </td>
 <td>
@@ -795,7 +981,20 @@ Kubernetes core/v1.SecretKeySelector
 </em>
 </td>
 <td>
+<em>(Optional)</em>
 <p>AwsCredsSecret is the credential to use to poll the AWS SQS</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>annotations</code></br>
+<em>
+map[string]string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Annotations to add to the pod, mostly used for Kube2IAM role</p>
 </td>
 </tr>
 <tr>
@@ -1088,7 +1287,7 @@ string
 <td>
 <code>sink</code></br>
 <em>
-knative.dev/pkg/apis/duck/v1beta1.Destination
+knative.dev/pkg/apis/duck/v1.Destination
 </em>
 </td>
 <td>
@@ -1117,31 +1316,22 @@ knative.dev/pkg/apis/duck/v1beta1.Destination
 <tbody>
 <tr>
 <td>
-<code>Status</code></br>
+<code>SourceStatus</code></br>
 <em>
-knative.dev/pkg/apis/duck/v1beta1.Status
+knative.dev/pkg/apis/duck/v1.SourceStatus
 </em>
 </td>
 <td>
 <p>
-(Members of <code>Status</code> are embedded into this type.)
+(Members of <code>SourceStatus</code> are embedded into this type.)
 </p>
-<p>inherits duck/v1alpha1 Status, which currently provides:
-* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
-* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>sinkUri</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>SinkURI is the current active sink URI that has been configured
-for the CouchDbSource.</p>
+<p>inherits duck/v1 SourceStatus, which currently provides:
+* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last
+processed by the controller.
+* Conditions - the latest available observations of a resource&rsquo;s current
+state.
+* SinkURI - the current active sink URI that has been configured for the
+Source.</p>
 </td>
 </tr>
 </tbody>
@@ -1258,7 +1448,7 @@ secret token</p>
 <td>
 <code>sink</code></br>
 <em>
-knative.dev/pkg/apis/duck/v1beta1.Destination
+knative.dev/pkg/apis/duck/v1.Destination
 </em>
 </td>
 <td>
@@ -1288,7 +1478,10 @@ bool
 </td>
 <td>
 <em>(Optional)</em>
-<p>Secure can be set to true to configure the webhook to use https.</p>
+<p>Secure can be set to true to configure the webhook to use https,
+or false to use http.  Omitting it relies on the scheme of the
+Knative Service created (e.g. if auto-TLS is enabled it should
+do the right thing).</p>
 </td>
 </tr>
 </tbody>
@@ -1312,18 +1505,22 @@ bool
 <tbody>
 <tr>
 <td>
-<code>Status</code></br>
+<code>SourceStatus</code></br>
 <em>
-knative.dev/pkg/apis/duck/v1.Status
+knative.dev/pkg/apis/duck/v1.SourceStatus
 </em>
 </td>
 <td>
 <p>
-(Members of <code>Status</code> are embedded into this type.)
+(Members of <code>SourceStatus</code> are embedded into this type.)
 </p>
-<p>inherits duck/v1alpha1 Status, which currently provides:
-* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
-* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
+<p>inherits duck/v1 SourceStatus, which currently provides:
+* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last
+processed by the controller.
+* Conditions - the latest available observations of a resource&rsquo;s current
+state.
+* SinkURI - the current active sink URI that has been configured for the
+Source.</p>
 </td>
 </tr>
 <tr>
@@ -1337,17 +1534,167 @@ string
 <p>WebhookIDKey is the ID of the webhook registered with GitHub</p>
 </td>
 </tr>
+</tbody>
+</table>
+<h3 id="sources.knative.dev/v1alpha1.GitLabSourceSpec">GitLabSourceSpec
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#sources.knative.dev/v1alpha1.GitLabSource">GitLabSource</a>)
+</p>
+<p>
+<p>GitLabSourceSpec defines the desired state of GitLabSource</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td>
-<code>sinkUri</code></br>
+<code>serviceAccountName</code></br>
 <em>
 string
 </em>
 </td>
 <td>
 <em>(Optional)</em>
-<p>SinkURI is the current active sink URI that has been configured
-for the GitHubSource.</p>
+<p>ServiceAccountName holds the name of the Kubernetes service account
+as which the underlying K8s resources should be run. If unspecified
+this will default to the &ldquo;default&rdquo; service account for the namespace
+in which the GitLabSource exists.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>projectUrl</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>ProjectUrl is the url of the GitLab project for which we are interested
+to receive events from.
+Examples:
+<a href="https://knative.dev/eventing-contrib/gitlab">https://knative.dev/eventing-contrib/gitlab</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<code>eventTypes</code></br>
+<em>
+[]string
+</em>
+</td>
+<td>
+<p>EventType is the type of event to receive from Gitlab. These
+correspond to supported events to the add project hook
+<a href="https://docs.gitlab.com/ee/api/projects.html#add-project-hook">https://docs.gitlab.com/ee/api/projects.html#add-project-hook</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<code>accessToken</code></br>
+<em>
+<a href="#sources.knative.dev/v1alpha1.SecretValueFromSource">
+SecretValueFromSource
+</a>
+</em>
+</td>
+<td>
+<p>AccessToken is the Kubernetes secret containing the GitLab
+access token</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>secretToken</code></br>
+<em>
+<a href="#sources.knative.dev/v1alpha1.SecretValueFromSource">
+SecretValueFromSource
+</a>
+</em>
+</td>
+<td>
+<p>SecretToken is the Kubernetes secret containing the GitLab
+secret token</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>sslverify</code></br>
+<em>
+bool
+</em>
+</td>
+<td>
+<p>SslVerify if true configure webhook so the ssl verification is done when triggering the hook</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>sink</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1.Destination
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Sink is a reference to an object that will resolve to a domain
+name to use as the sink.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sources.knative.dev/v1alpha1.GitLabSourceStatus">GitLabSourceStatus
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#sources.knative.dev/v1alpha1.GitLabSource">GitLabSource</a>)
+</p>
+<p>
+<p>GitLabSourceStatus defines the observed state of GitLabSource</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>SourceStatus</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1.SourceStatus
+</em>
+</td>
+<td>
+<p>
+(Members of <code>SourceStatus</code> are embedded into this type.)
+</p>
+<p>inherits duck/v1 SourceStatus, which currently provides:
+* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last
+processed by the controller.
+* Conditions - the latest available observations of a resource&rsquo;s current
+state.
+* SinkURI - the current active sink URI that has been configured for the
+Source.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>Id</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>ID of the project hook registered with GitLab</p>
 </td>
 </tr>
 </tbody>
@@ -1559,7 +1906,7 @@ KafkaSourceNetSpec
 <td>
 <code>sink</code></br>
 <em>
-knative.dev/pkg/apis/duck/v1beta1.Destination
+knative.dev/pkg/apis/duck/v1.Destination
 </em>
 </td>
 <td>
@@ -1773,7 +2120,7 @@ KafkaSourceNetSpec
 <td>
 <code>sink</code></br>
 <em>
-knative.dev/pkg/apis/duck/v1beta1.Destination
+knative.dev/pkg/apis/duck/v1.Destination
 </em>
 </td>
 <td>
@@ -1827,30 +2174,22 @@ KafkaResourceSpec
 <tbody>
 <tr>
 <td>
-<code>Status</code></br>
+<code>SourceStatus</code></br>
 <em>
-knative.dev/pkg/apis/duck/v1.Status
+knative.dev/pkg/apis/duck/v1.SourceStatus
 </em>
 </td>
 <td>
 <p>
-(Members of <code>Status</code> are embedded into this type.)
+(Members of <code>SourceStatus</code> are embedded into this type.)
 </p>
-<p>inherits duck/v1alpha1 Status, which currently provides:
-* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
-* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>sinkUri</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>SinkURI is the current active sink URI that has been configured for the KafkaSource.</p>
+<p>inherits duck/v1 SourceStatus, which currently provides:
+* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last
+processed by the controller.
+* Conditions - the latest available observations of a resource&rsquo;s current
+state.
+* SinkURI - the current active sink URI that has been configured for the
+Source.</p>
 </td>
 </tr>
 </tbody>
@@ -2032,7 +2371,7 @@ Prometheus duration strings are of the form [0-9]+[smhdwy].</p>
 <td>
 <code>sink</code></br>
 <em>
-knative.dev/pkg/apis/duck/v1beta1.Destination
+knative.dev/pkg/apis/duck/v1.Destination
 </em>
 </td>
 <td>
@@ -2062,31 +2401,22 @@ name to use as the sink.</p>
 <tbody>
 <tr>
 <td>
-<code>Status</code></br>
+<code>SourceStatus</code></br>
 <em>
-knative.dev/pkg/apis/duck/v1.Status
+knative.dev/pkg/apis/duck/v1.SourceStatus
 </em>
 </td>
 <td>
 <p>
-(Members of <code>Status</code> are embedded into this type.)
+(Members of <code>SourceStatus</code> are embedded into this type.)
 </p>
-<p>inherits duck/v1 Status, which currently provides:
-* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
-* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>sinkUri</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>SinkURI is the current active sink URI that has been configured
-for the PrometheusSource.</p>
+<p>inherits duck/v1 SourceStatus, which currently provides:
+* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last
+processed by the controller.
+* Conditions - the latest available observations of a resource&rsquo;s current
+state.
+* SinkURI - the current active sink URI that has been configured for the
+Source.</p>
 </td>
 </tr>
 </tbody>
@@ -2095,7 +2425,7 @@ for the PrometheusSource.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.knative.dev/v1alpha1.KafkaSourceSASLSpec">KafkaSourceSASLSpec</a>,
+<a href="#sources.knative.dev/v1alpha1.KafkaSourceSASLSpec">KafkaSourceSASLSpec</a>, 
 <a href="#sources.knative.dev/v1alpha1.KafkaSourceTLSSpec">KafkaSourceTLSSpec</a>)
 </p>
 <p>
@@ -2129,6 +2459,38 @@ Kubernetes core/v1.SecretKeySelector
 <p>
 (<em>Appears on:</em>
 <a href="#sources.knative.dev/v1alpha1.GitHubSourceSpec">GitHubSourceSpec</a>)
+</p>
+<p>
+<p>SecretValueFromSource represents the source of a secret value</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>secretKeyRef</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#secretkeyselector-v1-core">
+Kubernetes core/v1.SecretKeySelector
+</a>
+</em>
+</td>
+<td>
+<p>The Secret key to select from.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sources.knative.dev/v1alpha1.SecretValueFromSource">SecretValueFromSource
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#sources.knative.dev/v1alpha1.GitLabSourceSpec">GitLabSourceSpec</a>)
 </p>
 <p>
 <p>SecretValueFromSource represents the source of a secret value</p>
@@ -2586,5 +2948,5 @@ knative.dev/eventing/pkg/apis/duck/v1alpha1.SubscribableTypeStatus
 <hr/>
 <p><em>
 Generated with <code>gen-crd-api-reference-docs</code>
-on git commit <code>a49a7c73</code>.
+on git commit <code>6ba61a66</code>.
 </em></p>
