@@ -13,9 +13,6 @@ installation. If your cloud platform offers a managed Istio installation, the
 [install guide](./README.md) for your specific platform will have those
 instructions.
 
-For example, the [GKE Install Guide](./Knative-with-GKE.md) includes the
-instructions for installing Istio on your cluster using `gcloud`.
-
 ## Before you begin
 
 You need:
@@ -57,7 +54,7 @@ without automatic sidecar injection.
 
    ```shell
    # Download and unpack Istio
-   export ISTIO_VERSION=1.3.6
+   export ISTIO_VERSION=1.4.6
    curl -L https://git.io/getLatestIstio | sh -
    cd istio-${ISTIO_VERSION}
    ```
@@ -342,5 +339,5 @@ rm -rf istio-${ISTIO_VERSION}
 [2]:
   https://istio.io/docs/setup/kubernetes/additional-setup/sidecar-injection/#manual-sidecar-injection
 [3]: https://istio.io/docs/tasks/traffic-management/ingress/secure-ingress-sds/
-[4]: https://istio.io/docs/tasks/security/mutual-tls/
+[4]: https://istio.io/docs/concepts/security/#mutual-tls-authentication
 [5]: https://istio.io/docs/tasks/security/authz-http/

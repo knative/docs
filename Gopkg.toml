@@ -14,3 +14,7 @@ required = [
 [[prune.project]]
   name = "knative.dev/test-infra"
   non-go = false
+
+[[constraint]]
+  name = "github.com/cloudevents/sdk-go"
+  version = "v2.0.0-RC1"

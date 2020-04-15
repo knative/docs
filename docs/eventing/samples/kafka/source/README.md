@@ -56,7 +56,7 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
 2. Deploy the `KafkaTopic`
 
    ```shell
-   $ kubectl apply -f kafka/source/samples/strimzi-topic.yaml
+   $ kubectl apply -f strimzi-topic.yaml
    kafkatopic.kafka.strimzi.io/knative-demo-topic created
    ```
 
@@ -70,7 +70,14 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
 
 ### Create the Event Display service
 
-1. Build the Event Display Service (`even-display.yaml`)
+1. Download a copy of the code:
+
+   ```shell
+   git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
+   cd knative-docs/docs/eventing/samples/kafka/source
+   ```
+
+2. Build the Event Display Service (`event-display.yaml`)
 
    ```yaml
    apiVersion: serving.knative.dev/v1
@@ -90,7 +97,7 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
 1. Deploy the Event Display Service
 
    ```
-   $ kubectl apply --filename source/samples/event-display.yaml
+   $ kubectl apply --filename event-display.yaml
    ...
    service.serving.knative.dev/event-display created
    ```
@@ -126,7 +133,7 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
 
 1. Deploy the event source.
    ```
-   $ kubectl apply -f kafka/source/samples/event-source.yaml
+   $ kubectl apply -f event-source.yaml
    ...
    kafkasource.sources.eventing.knative.dev/kafka-source created
    ```
@@ -211,7 +218,7 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
 4. (Optional) Remove the Apache Kafka Topic
 
    ```shell
-   $ kubectl delete -f kafka/source/samples/kafka-topic.yaml
+   $ kubectl delete -f kafka-topic.yaml
    kafkatopic.kafka.strimzi.io "knative-demo-topic" deleted
    ```
 

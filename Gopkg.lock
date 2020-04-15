@@ -26,25 +26,29 @@
   revision = "3a771d992973f24aa725d07868b467d1ddfceafb"
 
 [[projects]]
-  digest = "1:902544577dcb868a5ae31529d73a1ce5031e224923290caedf6176241ee304e0"
+  digest = "1:f2d3857204e90f618f155eef24533ac205b1ce7b3570e21502ad0f0c2f6c288e"
   name = "github.com/cloudevents/sdk-go"
   packages = [
-    ".",
-    "pkg/cloudevents",
-    "pkg/cloudevents/client",
-    "pkg/cloudevents/context",
-    "pkg/cloudevents/datacodec",
-    "pkg/cloudevents/datacodec/json",
-    "pkg/cloudevents/datacodec/text",
-    "pkg/cloudevents/datacodec/xml",
-    "pkg/cloudevents/observability",
-    "pkg/cloudevents/transport",
-    "pkg/cloudevents/transport/http",
-    "pkg/cloudevents/types",
+    "v2",
+    "v2/binding",
+    "v2/binding/format",
+    "v2/binding/spec",
+    "v2/client",
+    "v2/context",
+    "v2/event",
+    "v2/event/datacodec",
+    "v2/event/datacodec/json",
+    "v2/event/datacodec/text",
+    "v2/event/datacodec/xml",
+    "v2/extensions",
+    "v2/observability",
+    "v2/protocol",
+    "v2/protocol/http",
+    "v2/types",
   ]
   pruneopts = "NUT"
-  revision = "2fa4bb1fbb4aac4d906b0173a2a408f701439b82"
-  version = "v0.10.0"
+  revision = "6dc020a8df7f3ee38d729e53cde2193ea7edf12a"
+  version = "v2.0.0-preview8"
 
 [[projects]]
   digest = "1:7a6852b35eb5bbc184561443762d225116ae630c26a7c4d90546619f1e7d2ad2"
@@ -144,6 +148,14 @@
   version = "v1.6.2"
 
 [[projects]]
+  digest = "1:7fae9ec96d10b2afce0da23c378c8b3389319b7f92fa092f2621bba3078cfb4b"
+  name = "github.com/hashicorp/golang-lru"
+  packages = ["simplelru"]
+  pruneopts = "NUT"
+  revision = "14eae340515388ca95aa8e7b86f0de668e981f54"
+  version = "v0.5.4"
+
+[[projects]]
   digest = "1:08c58ac78a8c1f61e9a96350066d30fe194b8779799bd932a79932a5166a173f"
   name = "github.com/kelseyhightower/envconfig"
   packages = ["."]
@@ -162,6 +174,17 @@
   ]
   pruneopts = "NUT"
   revision = "e8a4306a5d37d2ea18705dbd592ecf1fa9264191"
+
+[[projects]]
+  branch = "master"
+  digest = "1:a12508addb76a16593d8a3cee41d782fdf738f727d421f0bcc2dd2ee76821c01"
+  name = "github.com/lightstep/tracecontext.go"
+  packages = [
+    "traceparent",
+    "tracestate",
+  ]
+  pruneopts = "NUT"
+  revision = "1757c391b1acf4147823503f13e003115ea4e5df"
 
 [[projects]]
   digest = "1:5985ef4caf91ece5d54817c11ea25f182697534f8ae6521eadcd628c142ac4b6"
@@ -185,6 +208,14 @@
   pruneopts = "NUT"
   revision = "f197ec29e729f226d23370ea60f0e49b8f44ccf4"
   version = "v0.1.0"
+
+[[projects]]
+  digest = "1:4047c378584616813d610c9f993bf90dd0d07aed8d94bd3bc299cd35ececdcba"
+  name = "github.com/pkg/errors"
+  packages = ["."]
+  pruneopts = "NUT"
+  revision = "614d223910a179a466c1767a985424175c39b465"
+  version = "v0.9.1"
 
 [[projects]]
   digest = "1:03bca087b180bf24c4f9060775f137775550a0834e18f0bca0520a868679dbd7"
@@ -247,7 +278,7 @@
   version = "v1.0.0"
 
 [[projects]]
-  digest = "1:bb38c0571e5ffeb394f2a7e4056fa5a7a6ea1acabb7fe71976340719fd104d02"
+  digest = "1:2fe273976b8123b7fcd5d49a7ecbf340b92f370a727bed427ded821f68584d63"
   name = "go.opencensus.io"
   packages = [
     ".",
@@ -255,8 +286,12 @@
     "exporter/zipkin",
     "internal",
     "internal/tagencoding",
+    "metric/metricdata",
+    "metric/metricproducer",
     "plugin/ochttp",
     "plugin/ochttp/propagation/b3",
+    "plugin/ochttp/propagation/tracecontext",
+    "resource",
     "stats",
     "stats/internal",
     "stats/view",
@@ -264,10 +299,11 @@
     "trace",
     "trace/internal",
     "trace/propagation",
+    "trace/tracestate",
   ]
   pruneopts = "NUT"
-  revision = "e262766cd0d230a1bb7c37281e345e465f19b41b"
-  version = "v0.14.0"
+  revision = "75c0cca22312e51bfd4fafdbe9197ae399e18b38"
+  version = "v0.20.2"
 
 [[projects]]
   digest = "1:cc9d86ec4e6e3bdf87e3a421273bfeed003cf8e21351c0302fe8b0eb7b10efe6"
@@ -491,7 +527,7 @@
   analyzer-version = 1
   input-imports = [
     "cloud.google.com/go/storage",
-    "github.com/cloudevents/sdk-go",
+    "github.com/cloudevents/sdk-go/v2",
     "github.com/dgrijalva/jwt-go",
     "github.com/eclipse/paho.mqtt.golang",
     "github.com/golang/protobuf/proto",

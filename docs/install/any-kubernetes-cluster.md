@@ -228,7 +228,7 @@ The following commands install Kourier and enable its Knative integration.
 1. Install the Knative Kourier controller:
 
    ```bash
-   kubectl apply --filename https://raw.githubusercontent.com/knative/serving/{{< version >}}/third_party/kourier-latest/kourier.yaml
+   kubectl apply --filename {{< artifact repo="net-kourier" file="kourier.yaml" >}}
    ```
 
 1. To configure Knative Serving to use Kourier by default:
@@ -701,6 +701,20 @@ The following command installs the Apache CouchDB Source:
    ```
 
 To learn more about the Apache CouchDB source, read [our documentation]((https://github.com/knative/eventing-contrib/blob/{{< version >}}/couchdb/README.md)
+
+{{< /tab >}}
+
+{{% tab name="VMware Sources and Bindings" %}}
+
+{{< feature-state version="v0.14" state="alpha" >}}
+
+The following command installs the VMware Sources and Bindings:
+
+   ```bash
+   kubectl apply --filename {{< artifact org="vmware-tanzu" repo="sources-for-knative" file="release.yaml" >}}
+   ```
+
+To learn more about the VMware sources and bindings, try [our samples](https://github.com/vmware-tanzu/sources-for-knative/tree/master/samples/README.md).
 
 {{< /tab >}}
 

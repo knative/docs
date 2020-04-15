@@ -1,15 +1,17 @@
 A simple web app written in Go that can receive and send Cloud Events that you
-can use for testing.  It supports running in two modes:
+can use for testing. It supports running in two modes:
+
 1. The default mode has the app reply to your input events with the output
-  event, which is simplest for demonstrating things working in isolation,
-  but is also the model for working for the Knative Eventing `Broker` concept.
+   event, which is simplest for demonstrating things working in isolation, but
+   is also the model for working for the Knative Eventing `Broker` concept.
 
-2. `K_SINK` mode has the app send events to the destination encoded in `$K_SINK`,
-  which is useful to demonstrate how folks can synthesize events to send to
-  a Service or Broker when not initiated by a Broker invocation (e.g.
-  implementing an event source)
+2. `K_SINK` mode has the app send events to the destination encoded in
+   `$K_SINK`, which is useful to demonstrate how folks can synthesize events to
+   send to a Service or Broker when not initiated by a Broker invocation (e.g.
+   implementing an event source)
 
-The application will use `$K_SINK`-mode whenever the environment variable is specified.
+The application will use `$K_SINK`-mode whenever the environment variable is
+specified.
 
 Follow the steps below to create the sample code and then deploy the app to your
 cluster. You can also download a working copy of the sample, by running the
@@ -34,20 +36,20 @@ cd knative-docs/docs/serving/samples/cloudevents/cloudevents-go
    different modes of operation:
 
    ```go
-   func (recv *Receiver) ReceiveAndSend(ctx context.Context, event cloudevents.Event) error {
+   func (recv *Receiver) ReceiveAndSend(ctx context.Context, event cloudevents.Event) cloudevents.Result {
      // This is called whenever an event is received if $K_SINK is set, and sends a new event
      // to the url in $K_SINK.
    }
 
-   func (recv *Receiver) ReceiveAndReply(ctx context.Context, event cloudevents.Event, eventResp *cloudevents.EventResponse) error {
+   func (recv *Receiver) ReceiveAndReply(ctx context.Context, event cloudevents.Event)  (*cloudevents.Event, cloudevents.Result) {
      // This is called whenever an event is received if $K_SINK is NOT set, and it replies with
      // the new event instead.
    }
    ```
 
-1. If you look in `Dockerfile`, you will see a method for pulling in the dependencies and
-   building a small Go container based on Alpine.  You can build and push this to your
-   registry of choice via:
+1. If you look in `Dockerfile`, you will see a method for pulling in the
+   dependencies and building a small Go container based on Alpine. You can build
+   and push this to your registry of choice via:
 
    ```shell
    docker build -t <image> .
@@ -102,7 +104,6 @@ You will get back:
 ```shell
 {"message":"Hello, Dave"}
 ```
-
 
 ## Removing the sample app deployment
 
