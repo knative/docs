@@ -20,8 +20,7 @@ Knative Serving sample apps.
 
 #### Eventing and Eventing Resources samples
 
-- _Be the first to contribute an Eventing or Eventing Sources code sample to the
-  community collection._
+| Hello World Eventing | A quick introduction to Knative Eventing with HTTP and Kafka Source binding using Cloud Events | [Blog Post](https://salaboy.com/2020/02/20/getting-started-with-knative-2020/), [Event Producer using Spring Cloud Streams & Kafka](https://github.com/salaboy/knative-spring-cloud-event-producer) and [HTTP Cloud Event producer using Spring Boot](https://github.com/salaboy/knative-event-producer) |
 
 ### Client samples
 
