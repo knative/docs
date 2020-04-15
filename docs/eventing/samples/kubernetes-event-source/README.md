@@ -151,7 +151,7 @@ metadata:
 spec:
   serviceAccountName: events-sa
   mode: Resource
- resources:
+  resources:
     - apiVersion: v1
       kind: Event
   sink:
