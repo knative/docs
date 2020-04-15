@@ -247,8 +247,8 @@ Alternatively, if you want to install the cluster local gateway for **developmen
 without `helm` for an easy installation:
 
 ```shell
-# Istio minor version should be 1.2 or 1.3
-export ISTIO_MINOR_VERSION=1.2
+# Istio minor version should be 1.4 or 1.5
+export ISTIO_MINOR_VERSION=1.4
 
 export VERSION=$(curl https://raw.githubusercontent.com/knative/serving/master/third_party/istio-${ISTIO_MINOR_VERSION}-latest)
 
