@@ -1,4 +1,4 @@
-Welcome to the Knative Community Meetup page! 
+Welcome to the Knative Community Meetup page!
 
 The virtual event is designed for end users, a space for our community to meet, get to know each other, and learn about uses and applications of Knative.
 
@@ -11,7 +11,7 @@ Video:
 
 Agenda:
 - Welcome! (5’)
-  - Announce recording of meeting. 
+  - Announce recording of meeting.
 - Update from the Steering Committee (5’)
   - TOC election announcement (Brenda Chan)
 - Working groups updates (15’-20’)
