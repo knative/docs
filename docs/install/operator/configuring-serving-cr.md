@@ -383,11 +383,13 @@ spec:
 ## High availability:
 
 Knative Serving Operator CR provides the capability to configure the high availability for the following `Deployment`
-resources: `controller`, `autoscaler-hpa` and `networking-istio`. A field named `high-availability` is defined under the
-section `spec` to configure the high availability control plane. In the latest release of Knative Serving Operator, you can
-specify the number of replicas that HA parts of the control plane will be scaled to.
+resources: `controller`, `autoscaler-hpa` & `networking-istio`, and all the `HorizontalPodAutoscaler` resources. A field
+named `high-availability` is defined under the section `spec` to configure the high availability control plane. In the
+latest release of Knative Serving Operator, you can specify the minimum number of replicas for the `Deployment` and
+`HorizontalPodAutoscaler` resources.
 
-If you want to specify 3 as the number of replicas, that your `Deployment` resources can scale up to, change your CR into:
+If you want to specify 3 as the minimum number of replicas for three of the `Deployment` resources and the `HorizontalPodAutoscaler`
+resources, change your CR into:
 
 ```
 apiVersion: operator.knative.dev/v1alpha1
