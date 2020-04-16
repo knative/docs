@@ -1,12 +1,439 @@
 <p>Packages:</p>
 <ul>
 <li>
-<a href="#sources.knative.dev%2fv1alpha1">sources.knative.dev/v1alpha1</a>
-</li>
-<li>
 <a href="#messaging.knative.dev%2fv1alpha1">messaging.knative.dev/v1alpha1</a>
 </li>
+<li>
+<a href="#sources.knative.dev%2fv1alpha1">sources.knative.dev/v1alpha1</a>
+</li>
 </ul>
+<h2 id="messaging.knative.dev/v1alpha1">messaging.knative.dev/v1alpha1</h2>
+<p>
+<p>Package v1alpha1 is the v1alpha1 version of the API.</p>
+</p>
+Resource Types:
+<ul><li>
+<a href="#messaging.knative.dev/v1alpha1.KafkaChannel">KafkaChannel</a>
+</li><li>
+<a href="#messaging.knative.dev/v1alpha1.NatssChannel">NatssChannel</a>
+</li></ul>
+<h3 id="messaging.knative.dev/v1alpha1.KafkaChannel">KafkaChannel
+</h3>
+<p>
+<p>KafkaChannel is a resource representing a Kafka Channel.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>apiVersion</code></br>
+string</td>
+<td>
+<code>
+messaging.knative.dev/v1alpha1
+</code>
+</td>
+</tr>
+<tr>
+<td>
+<code>kind</code></br>
+string
+</td>
+<td><code>KafkaChannel</code></td>
+</tr>
+<tr>
+<td>
+<code>metadata</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
+Kubernetes meta/v1.ObjectMeta
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+Refer to the Kubernetes API documentation for the fields of the
+<code>metadata</code> field.
+</td>
+</tr>
+<tr>
+<td>
+<code>spec</code></br>
+<em>
+<a href="#messaging.knative.dev/v1alpha1.KafkaChannelSpec">
+KafkaChannelSpec
+</a>
+</em>
+</td>
+<td>
+<p>Spec defines the desired state of the Channel.</p>
+<br/>
+<br/>
+<table>
+<tr>
+<td>
+<code>numPartitions</code></br>
+<em>
+int32
+</em>
+</td>
+<td>
+<p>NumPartitions is the number of partitions of a Kafka topic. By default, it is set to 1.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>replicationFactor</code></br>
+<em>
+int16
+</em>
+</td>
+<td>
+<p>ReplicationFactor is the replication factor of a Kafka topic. By default, it is set to 1.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>subscribable</code></br>
+<em>
+knative.dev/eventing/pkg/apis/duck/v1alpha1.Subscribable
+</em>
+</td>
+<td>
+<p>KafkaChannel conforms to Duck type Subscribable.</p>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<code>status</code></br>
+<em>
+<a href="#messaging.knative.dev/v1alpha1.KafkaChannelStatus">
+KafkaChannelStatus
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Status represents the current state of the KafkaChannel. This data may be out of
+date.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="messaging.knative.dev/v1alpha1.NatssChannel">NatssChannel
+</h3>
+<p>
+<p>NatssChannel is a resource representing a NATSS Channel.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>apiVersion</code></br>
+string</td>
+<td>
+<code>
+messaging.knative.dev/v1alpha1
+</code>
+</td>
+</tr>
+<tr>
+<td>
+<code>kind</code></br>
+string
+</td>
+<td><code>NatssChannel</code></td>
+</tr>
+<tr>
+<td>
+<code>metadata</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
+Kubernetes meta/v1.ObjectMeta
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+Refer to the Kubernetes API documentation for the fields of the
+<code>metadata</code> field.
+</td>
+</tr>
+<tr>
+<td>
+<code>spec</code></br>
+<em>
+<a href="#messaging.knative.dev/v1alpha1.NatssChannelSpec">
+NatssChannelSpec
+</a>
+</em>
+</td>
+<td>
+<p>Spec defines the desired state of the Channel.</p>
+<br/>
+<br/>
+<table>
+<tr>
+<td>
+<code>subscribable</code></br>
+<em>
+knative.dev/eventing/pkg/apis/duck/v1alpha1.Subscribable
+</em>
+</td>
+<td>
+<p>NatssChannel conforms to Duck type Subscribable.</p>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<code>status</code></br>
+<em>
+<a href="#messaging.knative.dev/v1alpha1.NatssChannelStatus">
+NatssChannelStatus
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Status represents the current state of the NatssChannel. This data may be out of
+date.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="messaging.knative.dev/v1alpha1.KafkaChannelSpec">KafkaChannelSpec
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#messaging.knative.dev/v1alpha1.KafkaChannel">KafkaChannel</a>)
+</p>
+<p>
+<p>KafkaChannelSpec defines the specification for a KafkaChannel.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>numPartitions</code></br>
+<em>
+int32
+</em>
+</td>
+<td>
+<p>NumPartitions is the number of partitions of a Kafka topic. By default, it is set to 1.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>replicationFactor</code></br>
+<em>
+int16
+</em>
+</td>
+<td>
+<p>ReplicationFactor is the replication factor of a Kafka topic. By default, it is set to 1.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>subscribable</code></br>
+<em>
+knative.dev/eventing/pkg/apis/duck/v1alpha1.Subscribable
+</em>
+</td>
+<td>
+<p>KafkaChannel conforms to Duck type Subscribable.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="messaging.knative.dev/v1alpha1.KafkaChannelStatus">KafkaChannelStatus
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#messaging.knative.dev/v1alpha1.KafkaChannel">KafkaChannel</a>)
+</p>
+<p>
+<p>KafkaChannelStatus represents the current state of a KafkaChannel.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>Status</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1beta1.Status
+</em>
+</td>
+<td>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
+<p>inherits duck/v1beta1 Status, which currently provides:
+* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
+* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>AddressStatus</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1alpha1.AddressStatus
+</em>
+</td>
+<td>
+<p>
+(Members of <code>AddressStatus</code> are embedded into this type.)
+</p>
+<p>KafkaChannel is Addressable. It currently exposes the endpoint as a
+fully-qualified DNS name which will distribute traffic over the
+provided targets from inside the cluster.</p>
+<p>It generally has the form {channel}.{namespace}.svc.{cluster domain name}</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>SubscribableTypeStatus</code></br>
+<em>
+knative.dev/eventing/pkg/apis/duck/v1alpha1.SubscribableTypeStatus
+</em>
+</td>
+<td>
+<p>
+(Members of <code>SubscribableTypeStatus</code> are embedded into this type.)
+</p>
+<p>Subscribers is populated with the statuses of each of the Channelable&rsquo;s subscribers.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="messaging.knative.dev/v1alpha1.NatssChannelSpec">NatssChannelSpec
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#messaging.knative.dev/v1alpha1.NatssChannel">NatssChannel</a>)
+</p>
+<p>
+<p>NatssChannelSpec defines the specification for a NatssChannel.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>subscribable</code></br>
+<em>
+knative.dev/eventing/pkg/apis/duck/v1alpha1.Subscribable
+</em>
+</td>
+<td>
+<p>NatssChannel conforms to Duck type Subscribable.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="messaging.knative.dev/v1alpha1.NatssChannelStatus">NatssChannelStatus
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#messaging.knative.dev/v1alpha1.NatssChannel">NatssChannel</a>)
+</p>
+<p>
+<p>NatssChannelStatus represents the current state of a NatssChannel.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>Status</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1beta1.Status
+</em>
+</td>
+<td>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
+<p>inherits duck/v1beta1 Status, which currently provides:
+* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
+* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>AddressStatus</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1alpha1.AddressStatus
+</em>
+</td>
+<td>
+<p>
+(Members of <code>AddressStatus</code> are embedded into this type.)
+</p>
+<p>NatssChannel is Addressable. It currently exposes the endpoint as a
+fully-qualified DNS name which will distribute traffic over the
+provided targets from inside the cluster.</p>
+<p>It generally has the form {channel}.{namespace}.svc.{cluster domain name}</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>SubscribableTypeStatus</code></br>
+<em>
+knative.dev/eventing/pkg/apis/duck/v1alpha1.SubscribableTypeStatus
+</em>
+</td>
+<td>
+<p>
+(Members of <code>SubscribableTypeStatus</code> are embedded into this type.)
+</p>
+<p>Subscribers is populated with the statuses of each of the Channelable&rsquo;s subscribers.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<hr/>
 <h2 id="sources.knative.dev/v1alpha1">sources.knative.dev/v1alpha1</h2>
 <p>
 <p>Package v1alpha1 contains API Schema definitions for the sources v1alpha1 API group</p>
@@ -685,7 +1112,7 @@ string
 <p>ProjectUrl is the url of the GitLab project for which we are interested
 to receive events from.
 Examples:
-<a href="https://knative.dev/eventing-contrib/gitlab">https://knative.dev/eventing-contrib/gitlab</a></p>
+<a href="https://github.com/knative/eventing-contrib/tree/{{% branch %}}/gitlab/">https://github.com/knative/eventing-contrib/tree/{{% branch %}}/gitlab/</a></p>
 </td>
 </tr>
 <tr>
@@ -1576,10 +2003,10 @@ string
 </em>
 </td>
 <td>
-<p>ProjectUrl is the url of the GitLab project for which we are interested
-to receive events from.
+<p>ProjectUrl is the url of the GitLab project which we are interested
+in receiving events from.
 Examples:
-<a href="https://knative.dev/eventing-contrib/gitlab">https://knative.dev/eventing-contrib/gitlab</a></p>
+<a href="https://github.com/knative/eventing-contrib/tree/{{% branch %}}/gitlab/samples">https://github.com/knative/eventing-contrib/tree/{{% branch %}}/gitlab/samples</a></p>
 </td>
 </tr>
 <tr>
@@ -2514,433 +2941,6 @@ Kubernetes core/v1.SecretKeySelector
 </td>
 <td>
 <p>The Secret key to select from.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<hr/>
-<h2 id="messaging.knative.dev/v1alpha1">messaging.knative.dev/v1alpha1</h2>
-<p>
-<p>Package v1alpha1 is the v1alpha1 version of the API.</p>
-</p>
-Resource Types:
-<ul><li>
-<a href="#messaging.knative.dev/v1alpha1.KafkaChannel">KafkaChannel</a>
-</li><li>
-<a href="#messaging.knative.dev/v1alpha1.NatssChannel">NatssChannel</a>
-</li></ul>
-<h3 id="messaging.knative.dev/v1alpha1.KafkaChannel">KafkaChannel
-</h3>
-<p>
-<p>KafkaChannel is a resource representing a Kafka Channel.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>apiVersion</code></br>
-string</td>
-<td>
-<code>
-messaging.knative.dev/v1alpha1
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<code>kind</code></br>
-string
-</td>
-<td><code>KafkaChannel</code></td>
-</tr>
-<tr>
-<td>
-<code>metadata</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
-Kubernetes meta/v1.ObjectMeta
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-Refer to the Kubernetes API documentation for the fields of the
-<code>metadata</code> field.
-</td>
-</tr>
-<tr>
-<td>
-<code>spec</code></br>
-<em>
-<a href="#messaging.knative.dev/v1alpha1.KafkaChannelSpec">
-KafkaChannelSpec
-</a>
-</em>
-</td>
-<td>
-<p>Spec defines the desired state of the Channel.</p>
-<br/>
-<br/>
-<table>
-<tr>
-<td>
-<code>numPartitions</code></br>
-<em>
-int32
-</em>
-</td>
-<td>
-<p>NumPartitions is the number of partitions of a Kafka topic. By default, it is set to 1.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>replicationFactor</code></br>
-<em>
-int16
-</em>
-</td>
-<td>
-<p>ReplicationFactor is the replication factor of a Kafka topic. By default, it is set to 1.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>subscribable</code></br>
-<em>
-knative.dev/eventing/pkg/apis/duck/v1alpha1.Subscribable
-</em>
-</td>
-<td>
-<p>KafkaChannel conforms to Duck type Subscribable.</p>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-<tr>
-<td>
-<code>status</code></br>
-<em>
-<a href="#messaging.knative.dev/v1alpha1.KafkaChannelStatus">
-KafkaChannelStatus
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Status represents the current state of the KafkaChannel. This data may be out of
-date.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="messaging.knative.dev/v1alpha1.NatssChannel">NatssChannel
-</h3>
-<p>
-<p>NatssChannel is a resource representing a NATSS Channel.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>apiVersion</code></br>
-string</td>
-<td>
-<code>
-messaging.knative.dev/v1alpha1
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<code>kind</code></br>
-string
-</td>
-<td><code>NatssChannel</code></td>
-</tr>
-<tr>
-<td>
-<code>metadata</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectmeta-v1-meta">
-Kubernetes meta/v1.ObjectMeta
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-Refer to the Kubernetes API documentation for the fields of the
-<code>metadata</code> field.
-</td>
-</tr>
-<tr>
-<td>
-<code>spec</code></br>
-<em>
-<a href="#messaging.knative.dev/v1alpha1.NatssChannelSpec">
-NatssChannelSpec
-</a>
-</em>
-</td>
-<td>
-<p>Spec defines the desired state of the Channel.</p>
-<br/>
-<br/>
-<table>
-<tr>
-<td>
-<code>subscribable</code></br>
-<em>
-knative.dev/eventing/pkg/apis/duck/v1alpha1.Subscribable
-</em>
-</td>
-<td>
-<p>NatssChannel conforms to Duck type Subscribable.</p>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-<tr>
-<td>
-<code>status</code></br>
-<em>
-<a href="#messaging.knative.dev/v1alpha1.NatssChannelStatus">
-NatssChannelStatus
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Status represents the current state of the NatssChannel. This data may be out of
-date.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="messaging.knative.dev/v1alpha1.KafkaChannelSpec">KafkaChannelSpec
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#messaging.knative.dev/v1alpha1.KafkaChannel">KafkaChannel</a>)
-</p>
-<p>
-<p>KafkaChannelSpec defines the specification for a KafkaChannel.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>numPartitions</code></br>
-<em>
-int32
-</em>
-</td>
-<td>
-<p>NumPartitions is the number of partitions of a Kafka topic. By default, it is set to 1.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>replicationFactor</code></br>
-<em>
-int16
-</em>
-</td>
-<td>
-<p>ReplicationFactor is the replication factor of a Kafka topic. By default, it is set to 1.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>subscribable</code></br>
-<em>
-knative.dev/eventing/pkg/apis/duck/v1alpha1.Subscribable
-</em>
-</td>
-<td>
-<p>KafkaChannel conforms to Duck type Subscribable.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="messaging.knative.dev/v1alpha1.KafkaChannelStatus">KafkaChannelStatus
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#messaging.knative.dev/v1alpha1.KafkaChannel">KafkaChannel</a>)
-</p>
-<p>
-<p>KafkaChannelStatus represents the current state of a KafkaChannel.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>Status</code></br>
-<em>
-knative.dev/pkg/apis/duck/v1beta1.Status
-</em>
-</td>
-<td>
-<p>
-(Members of <code>Status</code> are embedded into this type.)
-</p>
-<p>inherits duck/v1beta1 Status, which currently provides:
-* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
-* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>AddressStatus</code></br>
-<em>
-knative.dev/pkg/apis/duck/v1alpha1.AddressStatus
-</em>
-</td>
-<td>
-<p>
-(Members of <code>AddressStatus</code> are embedded into this type.)
-</p>
-<p>KafkaChannel is Addressable. It currently exposes the endpoint as a
-fully-qualified DNS name which will distribute traffic over the
-provided targets from inside the cluster.</p>
-<p>It generally has the form {channel}.{namespace}.svc.{cluster domain name}</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>SubscribableTypeStatus</code></br>
-<em>
-knative.dev/eventing/pkg/apis/duck/v1alpha1.SubscribableTypeStatus
-</em>
-</td>
-<td>
-<p>
-(Members of <code>SubscribableTypeStatus</code> are embedded into this type.)
-</p>
-<p>Subscribers is populated with the statuses of each of the Channelable&rsquo;s subscribers.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="messaging.knative.dev/v1alpha1.NatssChannelSpec">NatssChannelSpec
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#messaging.knative.dev/v1alpha1.NatssChannel">NatssChannel</a>)
-</p>
-<p>
-<p>NatssChannelSpec defines the specification for a NatssChannel.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>subscribable</code></br>
-<em>
-knative.dev/eventing/pkg/apis/duck/v1alpha1.Subscribable
-</em>
-</td>
-<td>
-<p>NatssChannel conforms to Duck type Subscribable.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="messaging.knative.dev/v1alpha1.NatssChannelStatus">NatssChannelStatus
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#messaging.knative.dev/v1alpha1.NatssChannel">NatssChannel</a>)
-</p>
-<p>
-<p>NatssChannelStatus represents the current state of a NatssChannel.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>Status</code></br>
-<em>
-knative.dev/pkg/apis/duck/v1beta1.Status
-</em>
-</td>
-<td>
-<p>
-(Members of <code>Status</code> are embedded into this type.)
-</p>
-<p>inherits duck/v1beta1 Status, which currently provides:
-* ObservedGeneration - the &lsquo;Generation&rsquo; of the Service that was last processed by the controller.
-* Conditions - the latest available observations of a resource&rsquo;s current state.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>AddressStatus</code></br>
-<em>
-knative.dev/pkg/apis/duck/v1alpha1.AddressStatus
-</em>
-</td>
-<td>
-<p>
-(Members of <code>AddressStatus</code> are embedded into this type.)
-</p>
-<p>NatssChannel is Addressable. It currently exposes the endpoint as a
-fully-qualified DNS name which will distribute traffic over the
-provided targets from inside the cluster.</p>
-<p>It generally has the form {channel}.{namespace}.svc.{cluster domain name}</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>SubscribableTypeStatus</code></br>
-<em>
-knative.dev/eventing/pkg/apis/duck/v1alpha1.SubscribableTypeStatus
-</em>
-</td>
-<td>
-<p>
-(Members of <code>SubscribableTypeStatus</code> are embedded into this type.)
-</p>
-<p>Subscribers is populated with the statuses of each of the Channelable&rsquo;s subscribers.</p>
 </td>
 </tr>
 </tbody>
