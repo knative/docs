@@ -2621,7 +2621,76 @@ Source.</p>
 </tr>
 </tbody>
 </table>
+<<<<<<< HEAD
 <h3 id="sources.knative.dev/v1alpha1.KafkaSourceTLSSpec">KafkaSourceTLSSpec
+=======
+<h3 id="sources.knative.dev/v1alpha1.SecretValueFromSource">SecretValueFromSource
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#sources.knative.dev/v1alpha1.KafkaSourceSASLSpec">KafkaSourceSASLSpec</a>,
+<a href="#sources.knative.dev/v1alpha1.KafkaSourceTLSSpec">KafkaSourceTLSSpec</a>)
+</p>
+<p>
+<p>SecretValueFromSource represents the source of a secret value</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>secretKeyRef</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#secretkeyselector-v1-core">
+Kubernetes core/v1.SecretKeySelector
+</a>
+</em>
+</td>
+<td>
+<p>The Secret key to select from.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sources.knative.dev/v1alpha1.SecretValueFromSource">SecretValueFromSource
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#sources.knative.dev/v1alpha1.GitHubSourceSpec">GitHubSourceSpec</a>)
+</p>
+<p>
+<p>SecretValueFromSource represents the source of a secret value</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>secretKeyRef</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#secretkeyselector-v1-core">
+Kubernetes core/v1.SecretKeySelector
+</a>
+</em>
+</td>
+<td>
+<p>The Secret key to select from.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sources.knative.dev/v1alpha1.SecretValueFromSource">SecretValueFromSource
+>>>>>>> 15673978d483a43af83f84279f409699774b4a97
 </h3>
 <p>
 (<em>Appears on:</em>
