@@ -9,6 +9,7 @@ aliases:
 The Knative Eventing operator can be configured with these options:
 
 - [Private repository and private secret](#private-repository-and-private-secrets)
+- [Configuring default broker class](#configuring-default-broker-class)
 
 __NOTE:__ Kubernetes spec level policies cannot be configured using the Knative operators.
 
@@ -34,7 +35,7 @@ a unique identifier, e.g. `eventing-controller`, you need to use the `override` 
 Some images are defined via environment variable in Knative Eventing. They can be replaced by taking advantage of the
 `override` field.
 
-## Download images in predefined format without secrets:
+### Download images in predefined format without secrets:
 
 This example shows how you can define custom image links that can be defined in the CR using the simplified format
 `docker.io/knative-images/${NAME}:{CUSTOM-TAG}`.
@@ -84,7 +85,7 @@ spec:
       broker-controller/eventing-controller: docker.io/knative-images-repo1/broker-eventing-controller:v0.13.0
 ```
 
-## Download images from different repositories without secrets:
+### Download images from different repositories without secrets:
 
 If your custom image links are not defined in a uniform format by default, you will need to individually include each
 link in the CR.
@@ -137,7 +138,7 @@ spec:
       DISPATCHER_IMAGE: docker.io/knative-images-repo5/DISPATCHER_IMAGE:v0.13.0
 ```
 
-## Download images with secrets:
+### Download images with secrets:
 
 If you use the default or override attributes to define image links, and the image links require private secrets for
 access, you must append the `imagePullSecrets` attribute.
@@ -173,4 +174,21 @@ spec:
       - name: regcred
       - name: regcred-2
       ...
+```
+
+## Configuring default broker class
+
+Knative Eventing support two types of default broker classes: `ChannelBasedBroker` and `MTChannelBasedBroker`. It is can
+be specified with the field called `defaultBrokerClass`. If this field is left empty, `ChannelBasedBroker` will be taken
+as the broker class. If we would like to specify the default broker class to `MTChannelBasedBroker`, the Eventing
+Operator CR should be:
+
+```
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeEventing
+metadata:
+  name: knative-eventing
+  namespace: knative-eventing
+spec:
+  defaultBrokerClass: MTChannelBasedBroker
 ```
