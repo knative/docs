@@ -2627,8 +2627,7 @@ Source.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.knative.dev/v1alpha1.KafkaSourceSASLSpec">KafkaSourceSASLSpec</a>,
-<a href="#sources.knative.dev/v1alpha1.KafkaSourceTLSSpec">KafkaSourceTLSSpec</a>)
+<a href="#sources.knative.dev/v1alpha1.GitHubSourceSpec">GitHubSourceSpec</a>)
 </p>
 <p>
 <p>SecretValueFromSource represents the source of a secret value</p>
@@ -2660,7 +2659,7 @@ Kubernetes core/v1.SecretKeySelector
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.knative.dev/v1alpha1.GitHubSourceSpec">GitHubSourceSpec</a>)
+<a href="#sources.knative.dev/v1alpha1.GitLabSourceSpec">GitLabSourceSpec</a>)
 </p>
 <p>
 <p>SecretValueFromSource represents the source of a secret value</p>
