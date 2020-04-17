@@ -244,7 +244,7 @@ spec:
 
 To set up custom ingress gateway, follow [**Step 1: Create Gateway Service and Deployment Instance**](https://knative.dev/development/serving/setting-up-custom-ingress-gateway/).
 
-**Step 2: Update the Knative gateway**
+### Step 2: Update the Knative gateway
 
 Update `spec.knative-ingress-gateway` to select the labels of the new ingress gateway:
 
