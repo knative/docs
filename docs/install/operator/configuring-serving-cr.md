@@ -260,7 +260,7 @@ spec:
       custom: ingressgateway
 ```
 
-**Step 3: Update Gateway ConfigMap**
+### Step 3: Update Gateway ConfigMap
 
 Additionally, you will need to update the Istio ConfigMap:
 
