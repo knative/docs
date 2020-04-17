@@ -8,17 +8,15 @@ aliases:
 
 The Knative Serving operator can be configured with these options:
 
-- [All the ConfigMaps](#all-the-configmaps)
+- [Service Configuration by ConfigMap](#service-configuration-by-configMap)
 - [Private repository and private secret](#private-repository-and-private-secrets)
 - [SSL certificate for controller](#ssl-certificate-for-controller)
 - [Knative ingress gateway](#configuration-of-knative-ingress-gateway)
 - [Cluster local gateway](#configuration-of-cluster-local-gateway)
 - [High availability](#high-availability)
-- [Managing Resources for Containers](#managing-resources-for-containers)
+- [System Resource Settings](#system-resource-settings)
 
-__NOTE:__ Kubernetes spec level policies cannot be configured using the Knative operators.
-
-## All the ConfigMaps
+## Service Configuration by ConfigMap
 
 Because the operator manages the Knative Serving installation, it will overwrite any updates to the `ConfigMaps` which are used to configure Knative Serving.
 The `KnativeServing` custom resource allows you to set values for these ConfigMaps via the operator. Knative Serving has multiple ConfigMaps named with the prefix
@@ -281,7 +279,7 @@ spec:
 
 The key in `spec.config.istio` is in the format of `gateway.{{gateway_namespace}}.{{gateway_name}}`.
 
-## Configuration of cluster local gateway:
+## Configuration of cluster local gateway
 
 Update `spec.cluster-local-gateway` to select the labels of the new cluster-local ingress gateway:
 
@@ -313,7 +311,7 @@ spec:
       local-gateway.knative-serving.cluster-local-gateway: "custom-local-gateway.istio-system.svc.cluster.local"
 ```
 
-## High availability:
+## High availability
 
 By default, Knative Serving runs a single instance of each controller. The `spec.high-availability` field allows you to configure the number of replicas for the following master-elected controllers: `controller`, `autoscaler-hpa`, `networking-istio`. This field also configures the `HorizontalPodAutoscaler` resources for the data plane (`activator`):
 
@@ -330,17 +328,17 @@ spec:
     replicas: 3
 ```
 
-## Managing resources for containers
+## System Resource Settings
 
-The operator custom resource allows you allows you to configure resource requests and limits for the Knative system containers.
-Requests and limits may be configured for the following containers: `activator`, `autoscaler`, `controller`, `webhook`, `autoscaler-hpa`,
+The operator custom resource allows you allows you to configure system resources for the Knative system containers.
+Requests and limits can be configured for the following containers: `activator`, `autoscaler`, `controller`, `webhook`, `autoscaler-hpa`,
 `networking-istio` and `queue-proxy`.
 
 To override resource settings for a specific container, create an entry in the `spec.resources` list with the container name and the [Kubernetes resource settings](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container).
 
 For example, the following KnativeServing resource configures the `activator` to request 0.3 CPU and 100MB of RAM, and sets hard limits of 1 CPU, 250MB RAM, and 4GB of local storage:
 
-\```
+```
 apiVersion: operator.knative.dev/v1alpha1
 kind: KnativeServing
 metadata:
@@ -356,7 +354,7 @@ spec:
       cpu: 1000m
       memory: 250Mi
       ephemeral-storage: 4Gi
-\```
+```
 
 If you would like to add another container `autoscaler` with the same configuration, you need to change your CR as below:
 
