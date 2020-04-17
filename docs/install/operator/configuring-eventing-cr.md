@@ -1,6 +1,6 @@
 ---
 title: "Configuring the Eventing Operator Custom Resource"
-weight: 10
+weight: 60
 type: "docs"
 aliases:
 - /docs/operator/configuring-eventing-cr/
@@ -35,7 +35,7 @@ a unique identifier, e.g. `eventing-controller`, you need to use the `override` 
 `deployment/container` as the unique key.
 
 Some images are defined via environment variable in Knative Eventing. They can be replaced by taking advantage of the
-`override` field.
+`override` field. As Knative does not have a consistent way to specify container images, we have a known issue [here](https://github.com/knative-sandbox/operator/issues/22).
 
 ### Download images in predefined format without secrets:
 
@@ -48,7 +48,7 @@ In the example below:
 - all image links are accessible without using secrets
 - images are defined in the accepted format `docker.io/knative-images/${NAME}:{CUSTOM-TAG}`
 
-First, you need to make sure your images are saved in the following link:
+First, you need to make sure your images are pushed to the following image tags:
 
 | Deployment | Container | Docker image |
 |----|----|----|
@@ -69,25 +69,14 @@ metadata:
 spec:
   registry:
     default: docker.io/knative-images/${NAME}:v0.13.0
-```
-
-Replace `{CUSTOM-TAG}` with the custom tag `v0.13.0`. `${NAME}` needs to map the container name in each `Deployment` resource.
-The field `default` is used to define the image format for all containers, except the container `eventing-controller` in
-the deployment `broker-controller`. To replace the image for this container, you need to take advatage of the `override`
-field to specify individually, by using `broker-controller/eventing-controller` as the key`. Change your CR into the following:
-
-```
-apiVersion: operator.knative.dev/v1alpha1
-kind: KnativeEventing
-metadata:
-  name: knative-eventing
-  namespace: knative-eventing
-spec:
-  registry:
-    default: docker.io/knative-images/${NAME}:v0.13.0
     override:
       broker-controller/eventing-controller: docker.io/knative-images-repo1/broker-eventing-controller:v0.13.0
 ```
+
+As indicated, you replace `{CUSTOM-TAG}` with the custom tag `v0.13.0`. `${NAME}` maps to the container name in each `Deployment` resource.
+The field `default` is used to define the image format for all containers, except the container `eventing-controller` in
+the deployment `broker-controller`. To replace the image for this container, you need to take advatage of the `override`
+field to specify individually, by using `broker-controller/eventing-controller` as the key`.
 
 ### Download images from different repositories without secrets:
 
@@ -146,11 +135,10 @@ spec:
 
 ### Download images with secrets:
 
-If your image repository requires private secrets for
-access, you must append the `imagePullSecrets` attribute.
+If your image repository requires private secrets for access, you must append the `imagePullSecrets` attribute.
 
-This example uses a secret named `regcred`. You must create your own private secrets if these are required. After you
-create this secret, edit your operator CR by appending the content below:
+This example uses a secret named `regcred`. Refer to [this guide](https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod) to create your own private secrets.
+After you create the secret, edit your operator CR by appending the content below:
 
 ```
 apiVersion: operator.knative.dev/v1alpha1

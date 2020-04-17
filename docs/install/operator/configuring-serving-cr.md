@@ -1,6 +1,6 @@
 ---
 title: "Configuring the Serving Operator Custom Resource"
-weight: 10
+weight: 20
 type: "docs"
 aliases:
 - /docs/operator/configuring-serving-cr/
@@ -57,12 +57,6 @@ spec:
       example.com: ""
 ```
 
-Next, save the CR into a file named `operator-cr.yaml`, and run the command:
-
-```
-kubectl apply -f operator-cr.yaml
-```
-
 You can apply values to multiple ConfigMaps. This example sets `stable-window` to 60s in `config-autoscaler` as well as specifying `config-domain`:
 
 ```
@@ -82,8 +76,7 @@ spec:
       stable-window: "60s"
 ```
 
-
-All the ConfigMaps should be defined under the same namespace as the operator CR. You can use the operator CR as the
+All the ConfigMaps are created in the same namespace as the operator CR. You can use the operator CR as the
 unique entry point to edit all of them.
 
 ## Private repository and private secrets
@@ -292,29 +285,12 @@ The key in `spec.config.istio` is in the format of `gateway.{{gateway_namespace}
 
 Update `spec.cluster-local-gateway` to select the labels of the new cluster-local ingress gateway:
 
-**Default local gateway name**:
+### Default local gateway name:
 
-Go through the guide [here](https://knative.dev/development/install/installing-istio/#updating-your-install-to-use-cluster-local-gateway) to use local cluster gateway.
+Go through the guide [here](https://knative.dev/development/install/installing-istio/#updating-your-install-to-use-cluster-local-gateway) to use local cluster gateway,
+if you use the default gateway called `cluster-local-gateway`.
 
-Configure the operator CR to match the labels on the cluster-local-gateway:
-
-```
-apiVersion: operator.knative.dev/v1alpha1
-kind: KnativeServing
-metadata:
-  name: knative-serving
-  namespace: knative-serving
-spec:
-  cluster-local-gateway:
-    selector:
-      istio: cluster-local-gateway
-```
-
-You can even skip the above change, since there is a gateway called `cluster-local-gateway`, which has
-`istio: cluster-local-gateway` as the default selector. If the operator CR does not define the section
-cluster-local-gateway, the default `istio: cluster-local-gateway` of the gateway cluster-local-gateway will be chosen.
-
-**Non-default local gateway name**:
+### Non-default local gateway name:
 
 If you create custom local gateway with a name other than `cluster-local-gateway`, update `config.istio` and the
 `cluster-local-gateway` selector:
@@ -341,8 +317,7 @@ spec:
 
 By default, Knative Serving runs a single instance of each controller. The `spec.high-availability` field allows you to configure the number of replicas for the following master-elected controllers: `controller`, `autoscaler-hpa`, `networking-istio`. This field also configures the `HorizontalPodAutoscaler` resources for the data plane (`activator`):
 
-If you want to specify 3 as the minimum number of replicas for three of the `Deployment` resources and the `HorizontalPodAutoscaler`
-resources, change your CR into:
+The following configuration specifies a replica count of 3 for the controllers and a minimum of 3 activators (which may scale higher if needed):
 
 ```
 apiVersion: operator.knative.dev/v1alpha1
