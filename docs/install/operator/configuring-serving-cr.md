@@ -369,25 +369,19 @@ metadata:
 spec:
   resources:
   - container: activator
-      requests:
-        cpu: 30m
-        memory: 40Mi
-        storage: 1Gi
-        ephemeral-storage: 2Gi
-      limits:
-        cpu: 300m
-        memory: 400Mi
-        storage: 2Gi
-        ephemeral-storage: 4Gi
+    requests:
+      cpu: 300m
+      memory: 100Mi
+    limits:
+      cpu: 1000m
+      memory: 250Mi
+      ephemeral-storage: 4Gi
   - container: autoscaler
-      requests:
-        cpu: 30m
-        memory: 40Mi
-        storage: 1Gi
-        ephemeral-storage: 2Gi
-      limits:
-        cpu: 300m
-        memory: 400Mi
-        storage: 2Gi
-        ephemeral-storage: 4Gi
+    requests:
+      cpu: 300m
+      memory: 100Mi
+    limits:
+      cpu: 1000m
+      memory: 250Mi
+      ephemeral-storage: 4Gi
 ```
