@@ -164,7 +164,7 @@ spec:
     override:
       activator: docker.io/knative-images-repo1/activator:v0.13.0
       autoscaler: docker.io/knative-images-repo2/autoscaler:v0.13.0
-        controller: docker.io/knative-images-repo3/controller:v0.13.0
+      controller: docker.io/knative-images-repo3/controller:v0.13.0
       webhook: docker.io/knative-images-repo4/webhook:v0.13.0
       autoscaler-hpa: docker.io/knative-images-repo5/autoscaler-hpa:v0.13.0
       networking-istio: docker.io/knative-images-repo6/prefix-networking-istio:v0.13.0
