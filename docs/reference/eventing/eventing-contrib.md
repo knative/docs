@@ -1109,8 +1109,7 @@ string
 </em>
 </td>
 <td>
-<p>ProjectUrl is the url of the GitLab project for which we are interested
-to receive events from.
+<p>ProjectUrl is the url of the GitLab project we want to receive events from.
 Examples:
 <a href="https://github.com/knative/eventing-contrib/tree/{{% branch %}}/gitlab/">https://github.com/knative/eventing-contrib/tree/{{% branch %}}/gitlab/</a></p>
 </td>
