@@ -18,15 +18,17 @@ __NOTE:__ Kubernetes spec level policies cannot be configured using the Knative 
 The Knative Eventing operator CR is configured the same way as the Knative Serving operator CR. For more information,
 see the documentation on “[Private repository and private secret](configuring-serving-cr.md#private-repository-and-private-secrets)” in Serving operator for detailed instruction.
 
-Knative Eventing also specifies only one container, within one `Deployment` resource. However, the container does not use
+Knative Eventing also specifies only one container within one `Deployment` resource. However, the container does not use
 the same name as its parent `Deployment`, which means the container name in Knative Eventing is not the unique identifier
 as in Knative Serving. Here is the list of containers within each `Deployment` resource:
 
-- Container in Deployment `eventing-controller`: eventing-controller
-- Container in Deployment `eventing-webhook`: eventing-webhook
-- Container in Deployment `broker-controller`: eventing-controller
-- Container in Deployment `imc-controller`: controller
-- Container in Deployment `imc-dispatcher`: dispatcher
+| Component | Deployment name | Container name |
+|-----------|-----------------|----------------|
+| Core eventing | `eventing-controller` | `eventing-controller` |
+| Core eventing | `eventing-webhook` | `eventing-webhook` |
+| Eventing Broker | `broker-controller` | `eventing-controller` |
+| In-Memory Channel | `imc-controller` | `controller` |
+| In-Memory Channel | `imc-dispatcher` | `dispatcher` |
 
 The `default` field can still be used to replace the images in a predefined format. However, if the container name is not
 a unique identifier, e.g. `eventing-controller`, you need to use the `override` field to replace it, by specifying
@@ -48,11 +50,13 @@ In the example below:
 
 First, you need to make sure your images are saved in the following link:
 
-- Image of `eventing-controller` in the deployment `eventing-controller`: `docker.io/knative-images/eventing-controller:v0.13.0`.
-- Image of `eventing-webhook`: `docker.io/knative-images/eventing-webhook:v0.13.0`.
-- Image of `controller`: `docker.io/knative-images/controller:v0.13.0`.
-- Image of `dispatcher`: `docker.io/knative-images/dispatcher:v0.13.0`.
-- Image of `eventing-controller` in the deployment `broker-controller`: `docker.io/knative-images/broker-eventing-controller:v0.13.0`.
+| Deployment | Container | Docker image |
+|----|----|----|
+| `eventing-controller` | `eventing-controller` | `docker.io/knative-images/eventing-controller:v0.13.0` |
+|  | `eventing-webhook` | `docker.io/knative-images/eventing-webhook:v0.13.0` |
+| `broker-controller` | `eventing-controller` | `docker.io/knative-images/broker-eventing-controller:v0.13.0` |
+|  | `controller` | `docker.io/knative-images/controller:v0.13.0` |
+|  | `dispatcher` | `docker.io/knative-images/dispatcher:v0.13.0` |
 
 Then, you need to define your operator CR with following content:
 
@@ -92,11 +96,13 @@ link in the CR.
 
 For example, to define the list of images:
 
-- Image of `eventing-controller` in the deployment `eventing-controller`: `docker.io/knative-images/eventing-controller:v0.13.0`.
-- Image of `eventing-webhook`: `docker.io/knative-images/eventing-webhook:v0.13.0`.
-- Image of `controller`: `docker.io/knative-images/controller:v0.13.0`.
-- Image of `dispatcher`: `docker.io/knative-images/dispatcher:v0.13.0`.
-- Image of `eventing-controller` in the deployment `broker-controller`: `docker.io/knative-images/broker-eventing-controller:v0.13.0`.
+| Deployment | Container | Docker Image |
+|----|----|----|
+| `eventing-controller` | `eventing-controller` | `docker.io/knative-images/eventing-controller:v0.13.0` |
+|  | `eventing-webhook` | `docker.io/knative-images/eventing-webhook:v0.13.0` |
+|  | `controller` | `docker.io/knative-images/controller:v0.13.0` |
+|  | `dispatcher` | `docker.io/knative-images/dispatcher:v0.13.0` |
+| `broker-controller` | `eventing-controller` | `docker.io/knative-images/broker-eventing-controller:v0.13.0` |
 
 
 The operator CR should be modified to include the full list:
@@ -140,11 +146,11 @@ spec:
 
 ### Download images with secrets:
 
-If you use the default or override attributes to define image links, and the image links require private secrets for
+If your image repository requires private secrets for
 access, you must append the `imagePullSecrets` attribute.
 
 This example uses a secret named `regcred`. You must create your own private secrets if these are required. After you
-create this secret, edit your operator CR by appending the content below ...:
+create this secret, edit your operator CR by appending the content below:
 
 ```
 apiVersion: operator.knative.dev/v1alpha1
@@ -178,10 +184,8 @@ spec:
 
 ## Configuring default broker class
 
-Knative Eventing support two types of default broker classes: `ChannelBasedBroker` and `MTChannelBasedBroker`. It is can
-be specified with the field called `defaultBrokerClass`. If this field is left empty, `ChannelBasedBroker` will be taken
-as the broker class. If we would like to specify the default broker class to `MTChannelBasedBroker`, the Eventing
-Operator CR should be:
+Knative Eventing allows you to define a default broker class when the user does not specify one. The operator ships with two broker classes: `ChannelBasedBroker` and `MTChannelBasedBroker`. The field `defaultBrokerClass` indicates which class to use; if empty, the `ChannelBasedBroker` will be used.
+Here is an example specifying `MTChannelBasedBroker` as the default:
 
 ```
 apiVersion: operator.knative.dev/v1alpha1
