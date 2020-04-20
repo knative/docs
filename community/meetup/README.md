@@ -4,10 +4,12 @@ The virtual event is designed for end users, a space for our community to meet, 
 
 Here we will list all the information related to past and future events.
 
-Stay tuned for new events by subscribing to our calendar and following the [@KnativeProject](https://twitter.com/KnativeProject) on Twitter.
+Stay tuned for new events by subscribing to our [calendar](https://calendar.google.com/calendar/embed?src=google.com_18un4fuh6rokqf8hmfftm5oqq4%40group.calendar.google.com) ([iCal export file](https://calendar.google.com/calendar/ical/google.com_18un4fuh6rokqf8hmfftm5oqq4@group.calendar.google.com/public/basic.ics)), [YouTube channel](https://www.youtube.com/channel/UCq7cipu-A1UHOkZ9fls1N8A) and following us on [Twitter](https://twitter.com/KnativeProject).
 
-## 2020-04-16
-Video:
+---
+
+### 2020-04-16 – Knative Community Meetup #1
+Video: https://www.youtube.com/watch?v=k0QJEyV4U-4
 
 Agenda:
 - Welcome! (5’)

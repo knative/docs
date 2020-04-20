@@ -1,6 +1,6 @@
 ---
 title: "Knative Community Meetup"
-linkTitle: "Meetup"
+linkTitle: "Community Meetup"
 weight: 40
 type: "docs"
 ---
