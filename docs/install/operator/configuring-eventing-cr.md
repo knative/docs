@@ -170,7 +170,7 @@ spec:
 
 ## Configuring default broker class
 
-Knative Eventing allows you to define a default broker class when the user does not specify one. The operator ships with two broker classes: `ChannelBasedBroker` and `MTChannelBasedBroker`. The field `defaultBrokerClass` indicates which class to use; if empty, the `ChannelBasedBroker` will be used.
+Knative Eventing allows you to define a default broker class when the user does not specify one. The operator ships with two broker classes: `ChannelBasedBroker` and `MTChannelBasedBroker`. The field `default-broker-class` indicates which class to use; if empty, the `ChannelBasedBroker` will be used.
 Here is an example specifying `MTChannelBasedBroker` as the default:
 
 ```
@@ -180,5 +180,5 @@ metadata:
   name: knative-eventing
   namespace: knative-eventing
 spec:
-  defaultBrokerClass: MTChannelBasedBroker
+  default-broker-class: MTChannelBasedBroker
 ```
