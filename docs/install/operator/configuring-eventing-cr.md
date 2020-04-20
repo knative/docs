@@ -11,8 +11,6 @@ The Knative Eventing operator can be configured with these options:
 - [Private repository and private secret](#private-repository-and-private-secrets)
 - [Configuring default broker class](#configuring-default-broker-class)
 
-__NOTE:__ Kubernetes spec level policies cannot be configured using the Knative operators.
-
 ## Private repository and private secrets
 
 The Knative Eventing operator CR is configured the same way as the Knative Serving operator CR. For more information,
