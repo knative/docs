@@ -21,7 +21,7 @@ Agenda:
   - Networking (Nghia Tran)
   - Operation (Vincent Hou)
   - Client (Roland Huss)
-- Demo - "Tracking the Bitcoin ledger" - by Johana Saladas (IBM) (30’)
+- [Demo - "Tracking the Bitcoin ledger" - by Johana Saladas (IBM) (30’)](https://www.youtube.com/watch?v=sGi_LuAaaT0)
 - Demo discussion / conversation (15’-20’)
 - Close (5’)
   - Take the [survey](https://docs.google.com/forms/d/e/1FAIpQLSebw2IOjmnStiUhPpnndpjyuBUoziZOw9PK9fnJeFBQX0QxWw/viewform)! (it’s good karma)
