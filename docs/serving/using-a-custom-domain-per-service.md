@@ -9,11 +9,11 @@ By default, Knative uses the `{route}.{namespace}.{default-domain}` fully qualif
 
 This guide documents the process to use a custom FQDN for a Service, like `my-service.example.com`, created by [@bsideup](https://bsideup.github.io/posts/knative_custom_domains/).
 
-> There is currently no formal process to set up a custom domain per Service. The topic is being discussed [here](https://github.com/knative/serving/issues/2985).
+> There is currently no official process to set up a custom domain per Service. The topic is being discussed [here](https://github.com/knative/serving/issues/2985).
 
 ## Edit using kubectl
 
-1. Edit the `domainTemplate` entry on the `config-network` configuration:
+1. Edit the `domainTemplate` entry on the `config-network` configuration. You can find more information about it [here](https://github.com/knative/serving/blob/master/config/core/configmaps/network.yaml#L89):
 
    ```shell
    kubectl edit cm config-network --namespace knative-serving
