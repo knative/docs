@@ -39,7 +39,7 @@ This guide documents the process to use a custom FQDN for a Service, like `my-se
 ## Edit the Service
 
 1. In a Service definition, add the `custom-hostname` annotation:
-   
+
    ```yaml
    apiVersion: serving.knative.dev/v1
    kind: Service
@@ -62,5 +62,5 @@ This guide documents the process to use a custom FQDN for a Service, like `my-se
   kubectl get ksvc hello-world
 
   NAME          URL                              LATESTCREATED       LATESTREADY         READY   REASON
-  hello-world   http://hello-world.example.com   hello-world-nfqh2   hello-world-nfqh2   True    
+  hello-world   http://hello-world.example.com   hello-world-nfqh2   hello-world-nfqh2   True
   ```
