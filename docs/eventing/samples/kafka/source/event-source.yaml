@@ -35,8 +35,10 @@ metadata:
   name: kafka-source
 spec:
   consumerGroup: KAFKA_CONSUMER_GROUP_NAME
-  bootstrapServers: KAFKA_BOOTSTRAP_SERVERS
-  topics: KAFKA_TOPICS
+  bootstrapServers:
+    - KAFKA_BOOTSTRAP_SERVERS
+  topics:
+    - KAFKA_TOPICS
   net:
     sasl:
       enable: KAFKA_SASL_ENABLE
