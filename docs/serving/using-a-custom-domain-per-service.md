@@ -1,7 +1,6 @@
 
 ---
 title: "Setting up a custom domain per Service"
-#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
 weight: 55
 type: "docs"
 ---
