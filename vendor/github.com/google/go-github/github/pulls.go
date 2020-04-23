@@ -9,6 +9,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"strings"
 	"time"
 )
 
@@ -23,18 +24,22 @@ type PullRequest struct {
 	ID                  *int64     `json:"id,omitempty"`
 	Number              *int       `json:"number,omitempty"`
 	State               *string    `json:"state,omitempty"`
+	Locked              *bool      `json:"locked,omitempty"`
 	Title               *string    `json:"title,omitempty"`
 	Body                *string    `json:"body,omitempty"`
 	CreatedAt           *time.Time `json:"created_at,omitempty"`
 	UpdatedAt           *time.Time `json:"updated_at,omitempty"`
 	ClosedAt            *time.Time `json:"closed_at,omitempty"`
 	MergedAt            *time.Time `json:"merged_at,omitempty"`
+	Labels              []*Label   `json:"labels,omitempty"`
 	User                *User      `json:"user,omitempty"`
+	Draft               *bool      `json:"draft,omitempty"`
 	Merged              *bool      `json:"merged,omitempty"`
 	Mergeable           *bool      `json:"mergeable,omitempty"`
 	MergeableState      *string    `json:"mergeable_state,omitempty"`
 	MergedBy            *User      `json:"merged_by,omitempty"`
 	MergeCommitSHA      *string    `json:"merge_commit_sha,omitempty"`
+	Rebaseable          *bool      `json:"rebaseable,omitempty"`
 	Comments            *int       `json:"comments,omitempty"`
 	Commits             *int       `json:"commits,omitempty"`
 	Additions           *int       `json:"additions,omitempty"`
@@ -46,21 +51,51 @@ type PullRequest struct {
 	StatusesURL         *string    `json:"statuses_url,omitempty"`
 	DiffURL             *string    `json:"diff_url,omitempty"`
 	PatchURL            *string    `json:"patch_url,omitempty"`
+	CommitsURL          *string    `json:"commits_url,omitempty"`
+	CommentsURL         *string    `json:"comments_url,omitempty"`
 	ReviewCommentsURL   *string    `json:"review_comments_url,omitempty"`
 	ReviewCommentURL    *string    `json:"review_comment_url,omitempty"`
+	ReviewComments      *int       `json:"review_comments,omitempty"`
 	Assignee            *User      `json:"assignee,omitempty"`
 	Assignees           []*User    `json:"assignees,omitempty"`
 	Milestone           *Milestone `json:"milestone,omitempty"`
 	MaintainerCanModify *bool      `json:"maintainer_can_modify,omitempty"`
 	AuthorAssociation   *string    `json:"author_association,omitempty"`
 	NodeID              *string    `json:"node_id,omitempty"`
+	RequestedReviewers  []*User    `json:"requested_reviewers,omitempty"`
 
-	Head *PullRequestBranch `json:"head,omitempty"`
-	Base *PullRequestBranch `json:"base,omitempty"`
+	// RequestedTeams is populated as part of the PullRequestEvent.
+	// See, https://developer.github.com/v3/activity/events/types/#pullrequestevent for an example.
+	RequestedTeams []*Team `json:"requested_teams,omitempty"`
+
+	Links *PRLinks           `json:"_links,omitempty"`
+	Head  *PullRequestBranch `json:"head,omitempty"`
+	Base  *PullRequestBranch `json:"base,omitempty"`
+
+	// ActiveLockReason is populated only when LockReason is provided while locking the pull request.
+	// Possible values are: "off-topic", "too heated", "resolved", and "spam".
+	ActiveLockReason *string `json:"active_lock_reason,omitempty"`
 }
 
 func (p PullRequest) String() string {
 	return Stringify(p)
+}
+
+// PRLink represents a single link object from Github pull request _links.
+type PRLink struct {
+	HRef *string `json:"href,omitempty"`
+}
+
+// PRLinks represents the "_links" object in a Github pull request.
+type PRLinks struct {
+	Self           *PRLink `json:"self,omitempty"`
+	HTML           *PRLink `json:"html,omitempty"`
+	Issue          *PRLink `json:"issue,omitempty"`
+	Comments       *PRLink `json:"comments,omitempty"`
+	ReviewComments *PRLink `json:"review_comments,omitempty"`
+	ReviewComment  *PRLink `json:"review_comment,omitempty"`
+	Commits        *PRLink `json:"commits,omitempty"`
+	Statuses       *PRLink `json:"statuses,omitempty"`
 }
 
 // PullRequestBranch represents a base or head branch in a GitHub pull request.
@@ -76,7 +111,7 @@ type PullRequestBranch struct {
 // PullRequestsService.List method.
 type PullRequestListOptions struct {
 	// State filters pull requests based on their state. Possible values are:
-	// open, closed. Default is "open".
+	// open, closed, all. Default is "open".
 	State string `url:"state,omitempty"`
 
 	// Head filters pull requests by head user and branch name in the format of:
@@ -101,9 +136,9 @@ type PullRequestListOptions struct {
 // List the pull requests for the specified repository.
 //
 // GitHub API docs: https://developer.github.com/v3/pulls/#list-pull-requests
-func (s *PullRequestsService) List(ctx context.Context, owner string, repo string, opt *PullRequestListOptions) ([]*PullRequest, *Response, error) {
+func (s *PullRequestsService) List(ctx context.Context, owner string, repo string, opts *PullRequestListOptions) ([]*PullRequest, *Response, error) {
 	u := fmt.Sprintf("repos/%v/%v/pulls", owner, repo)
-	u, err := addOptions(u, opt)
+	u, err := addOptions(u, opts)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -114,8 +149,38 @@ func (s *PullRequestsService) List(ctx context.Context, owner string, repo strin
 	}
 
 	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeGraphQLNodeIDPreview)
+	acceptHeaders := []string{mediaTypeLockReasonPreview, mediaTypeDraftPreview}
+	req.Header.Set("Accept", strings.Join(acceptHeaders, ", "))
 
+	var pulls []*PullRequest
+	resp, err := s.client.Do(ctx, req, &pulls)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return pulls, resp, nil
+}
+
+// ListPullRequestsWithCommit returns pull requests associated with a commit SHA.
+//
+// The results will include open and closed pull requests.
+//
+// GitHub API docs: https://developer.github.com/v3/repos/commits/#list-pull-requests-associated-with-commit
+func (s *PullRequestsService) ListPullRequestsWithCommit(ctx context.Context, owner, repo, sha string, opts *PullRequestListOptions) ([]*PullRequest, *Response, error) {
+	u := fmt.Sprintf("repos/%v/%v/commits/%v/pulls", owner, repo, sha)
+	u, err := addOptions(u, opts)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	req, err := s.client.NewRequest("GET", u, nil)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	// TODO: remove custom Accept header when this API fully launches.
+	acceptHeaders := []string{mediaTypeListPullsOrBranchesForCommitPreview, mediaTypeDraftPreview, mediaTypeLockReasonPreview}
+	req.Header.Set("Accept", strings.Join(acceptHeaders, ", "))
 	var pulls []*PullRequest
 	resp, err := s.client.Do(ctx, req, &pulls)
 	if err != nil {
@@ -136,7 +201,8 @@ func (s *PullRequestsService) Get(ctx context.Context, owner string, repo string
 	}
 
 	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeGraphQLNodeIDPreview)
+	acceptHeaders := []string{mediaTypeLockReasonPreview, mediaTypeDraftPreview}
+	req.Header.Set("Accept", strings.Join(acceptHeaders, ", "))
 
 	pull := new(PullRequest)
 	resp, err := s.client.Do(ctx, req, pull)
@@ -148,20 +214,22 @@ func (s *PullRequestsService) Get(ctx context.Context, owner string, repo string
 }
 
 // GetRaw gets a single pull request in raw (diff or patch) format.
-func (s *PullRequestsService) GetRaw(ctx context.Context, owner string, repo string, number int, opt RawOptions) (string, *Response, error) {
+//
+// GitHub API docs: https://developer.github.com/v3/pulls/#get-a-single-pull-request
+func (s *PullRequestsService) GetRaw(ctx context.Context, owner string, repo string, number int, opts RawOptions) (string, *Response, error) {
 	u := fmt.Sprintf("repos/%v/%v/pulls/%d", owner, repo, number)
 	req, err := s.client.NewRequest("GET", u, nil)
 	if err != nil {
 		return "", nil, err
 	}
 
-	switch opt.Type {
+	switch opts.Type {
 	case Diff:
 		req.Header.Set("Accept", mediaTypeV3Diff)
 	case Patch:
 		req.Header.Set("Accept", mediaTypeV3Patch)
 	default:
-		return "", nil, fmt.Errorf("unsupported raw type %d", opt.Type)
+		return "", nil, fmt.Errorf("unsupported raw type %d", opts.Type)
 	}
 
 	var buf bytes.Buffer
@@ -181,6 +249,7 @@ type NewPullRequest struct {
 	Body                *string `json:"body,omitempty"`
 	Issue               *int    `json:"issue,omitempty"`
 	MaintainerCanModify *bool   `json:"maintainer_can_modify,omitempty"`
+	Draft               *bool   `json:"draft,omitempty"`
 }
 
 // Create a new pull request on the specified repository.
@@ -194,9 +263,53 @@ func (s *PullRequestsService) Create(ctx context.Context, owner string, repo str
 	}
 
 	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeGraphQLNodeIDPreview)
+	acceptHeaders := []string{mediaTypeDraftPreview}
+	req.Header.Set("Accept", strings.Join(acceptHeaders, ", "))
 
 	p := new(PullRequest)
+	resp, err := s.client.Do(ctx, req, p)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return p, resp, nil
+}
+
+// PullRequestBranchUpdateOptions specifies the optional parameters to the
+// PullRequestsService.UpdateBranch method.
+type PullRequestBranchUpdateOptions struct {
+	// ExpectedHeadSHA specifies the most recent commit on the pull request's branch.
+	// Default value is the SHA of the pull request's current HEAD ref.
+	ExpectedHeadSHA *string `json:"expected_head_sha,omitempty"`
+}
+
+// PullRequestBranchUpdateResponse specifies the response of pull request branch update.
+type PullRequestBranchUpdateResponse struct {
+	Message *string `json:"message,omitempty"`
+	URL     *string `json:"url,omitempty"`
+}
+
+// UpdateBranch updates the pull request branch with latest upstream changes.
+//
+// This method might return an AcceptedError and a status code of
+// 202. This is because this is the status that GitHub returns to signify that
+// it has now scheduled the update of the pull request branch in a background task.
+// A follow up request, after a delay of a second or so, should result
+// in a successful request.
+//
+// GitHub API docs: https://developer.github.com/v3/pulls/#update-a-pull-request-branch
+func (s *PullRequestsService) UpdateBranch(ctx context.Context, owner, repo string, number int, opts *PullRequestBranchUpdateOptions) (*PullRequestBranchUpdateResponse, *Response, error) {
+	u := fmt.Sprintf("repos/%v/%v/pulls/%d/update-branch", owner, repo, number)
+
+	req, err := s.client.NewRequest("PUT", u, opts)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	// TODO: remove custom Accept header when this API fully launches.
+	req.Header.Set("Accept", mediaTypeUpdatePullRequestBranchPreview)
+
+	p := new(PullRequestBranchUpdateResponse)
 	resp, err := s.client.Do(ctx, req, p)
 	if err != nil {
 		return nil, resp, err
@@ -233,7 +346,10 @@ func (s *PullRequestsService) Edit(ctx context.Context, owner string, repo strin
 		State:               pull.State,
 		MaintainerCanModify: pull.MaintainerCanModify,
 	}
-	if pull.Base != nil {
+	// avoid updating the base branch when closing the Pull Request
+	// - otherwise the GitHub API server returns a "Validation Failed" error:
+	// "Cannot change base branch of closed pull request".
+	if pull.Base != nil && pull.GetState() != "closed" {
 		update.Base = pull.Base.Ref
 	}
 
@@ -243,7 +359,8 @@ func (s *PullRequestsService) Edit(ctx context.Context, owner string, repo strin
 	}
 
 	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeGraphQLNodeIDPreview)
+	acceptHeaders := []string{mediaTypeLockReasonPreview}
+	req.Header.Set("Accept", strings.Join(acceptHeaders, ", "))
 
 	p := new(PullRequest)
 	resp, err := s.client.Do(ctx, req, p)
@@ -257,9 +374,9 @@ func (s *PullRequestsService) Edit(ctx context.Context, owner string, repo strin
 // ListCommits lists the commits in a pull request.
 //
 // GitHub API docs: https://developer.github.com/v3/pulls/#list-commits-on-a-pull-request
-func (s *PullRequestsService) ListCommits(ctx context.Context, owner string, repo string, number int, opt *ListOptions) ([]*RepositoryCommit, *Response, error) {
+func (s *PullRequestsService) ListCommits(ctx context.Context, owner string, repo string, number int, opts *ListOptions) ([]*RepositoryCommit, *Response, error) {
 	u := fmt.Sprintf("repos/%v/%v/pulls/%d/commits", owner, repo, number)
-	u, err := addOptions(u, opt)
+	u, err := addOptions(u, opts)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -268,9 +385,6 @@ func (s *PullRequestsService) ListCommits(ctx context.Context, owner string, rep
 	if err != nil {
 		return nil, nil, err
 	}
-
-	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeGitSigningPreview)
 
 	var commits []*RepositoryCommit
 	resp, err := s.client.Do(ctx, req, &commits)
@@ -284,9 +398,9 @@ func (s *PullRequestsService) ListCommits(ctx context.Context, owner string, rep
 // ListFiles lists the files in a pull request.
 //
 // GitHub API docs: https://developer.github.com/v3/pulls/#list-pull-requests-files
-func (s *PullRequestsService) ListFiles(ctx context.Context, owner string, repo string, number int, opt *ListOptions) ([]*CommitFile, *Response, error) {
+func (s *PullRequestsService) ListFiles(ctx context.Context, owner string, repo string, number int, opts *ListOptions) ([]*CommitFile, *Response, error) {
 	u := fmt.Sprintf("repos/%v/%v/pulls/%d/files", owner, repo, number)
-	u, err := addOptions(u, opt)
+	u, err := addOptions(u, opts)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -337,7 +451,7 @@ type PullRequestOptions struct {
 }
 
 type pullRequestMergeRequest struct {
-	CommitMessage string `json:"commit_message"`
+	CommitMessage string `json:"commit_message,omitempty"`
 	CommitTitle   string `json:"commit_title,omitempty"`
 	MergeMethod   string `json:"merge_method,omitempty"`
 	SHA           string `json:"sha,omitempty"`
@@ -346,7 +460,7 @@ type pullRequestMergeRequest struct {
 // Merge a pull request (Merge Button™).
 // commitMessage is the title for the automatic commit message.
 //
-// GitHub API docs: https://developer.github.com/v3/pulls/#merge-a-pull-request-merge-buttontrade
+// GitHub API docs: https://developer.github.com/v3/pulls/#merge-a-pull-request-merge-button
 func (s *PullRequestsService) Merge(ctx context.Context, owner string, repo string, number int, commitMessage string, options *PullRequestOptions) (*PullRequestMergeResult, *Response, error) {
 	u := fmt.Sprintf("repos/%v/%v/pulls/%d/merge", owner, repo, number)
 

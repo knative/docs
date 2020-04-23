@@ -6,10 +6,14 @@
 package github
 
 import (
+	"bytes"
 	"context"
+	"errors"
 	"fmt"
 	"strings"
 	"time"
+
+	"golang.org/x/crypto/openpgp"
 )
 
 // SignatureVerification represents GPG signature verification.
@@ -27,7 +31,7 @@ type Commit struct {
 	Committer    *CommitAuthor          `json:"committer,omitempty"`
 	Message      *string                `json:"message,omitempty"`
 	Tree         *Tree                  `json:"tree,omitempty"`
-	Parents      []Commit               `json:"parents,omitempty"`
+	Parents      []*Commit              `json:"parents,omitempty"`
 	Stats        *CommitStats           `json:"stats,omitempty"`
 	HTMLURL      *string                `json:"html_url,omitempty"`
 	URL          *string                `json:"url,omitempty"`
@@ -38,6 +42,11 @@ type Commit struct {
 	// is only populated for requests that fetch GitHub data like
 	// Pulls.ListCommits, Repositories.ListCommits, etc.
 	CommentCount *int `json:"comment_count,omitempty"`
+
+	// SigningKey denotes a key to sign the commit with. If not nil this key will
+	// be used to sign the commit. The private key must be present and already
+	// decrypted. Ignored if Verification.Signature is defined.
+	SigningKey *openpgp.Entity `json:"-"`
 }
 
 func (c Commit) String() string {
@@ -59,7 +68,7 @@ func (c CommitAuthor) String() string {
 	return Stringify(c)
 }
 
-// GetCommit fetchs the Commit object for a given SHA.
+// GetCommit fetches the Commit object for a given SHA.
 //
 // GitHub API docs: https://developer.github.com/v3/git/commits/#get-a-commit
 func (s *GitService) GetCommit(ctx context.Context, owner string, repo string, sha string) (*Commit, *Response, error) {
@@ -68,10 +77,6 @@ func (s *GitService) GetCommit(ctx context.Context, owner string, repo string, s
 	if err != nil {
 		return nil, nil, err
 	}
-
-	// TODO: remove custom Accept headers when APIs fully launch.
-	acceptHeaders := []string{mediaTypeGitSigningPreview, mediaTypeGraphQLNodeIDPreview}
-	req.Header.Set("Accept", strings.Join(acceptHeaders, ", "))
 
 	c := new(Commit)
 	resp, err := s.client.Do(ctx, req, c)
@@ -89,6 +94,7 @@ type createCommit struct {
 	Message   *string       `json:"message,omitempty"`
 	Tree      *string       `json:"tree,omitempty"`
 	Parents   []string      `json:"parents,omitempty"`
+	Signature *string       `json:"signature,omitempty"`
 }
 
 // CreateCommit creates a new commit in a repository.
@@ -120,14 +126,21 @@ func (s *GitService) CreateCommit(ctx context.Context, owner string, repo string
 	if commit.Tree != nil {
 		body.Tree = commit.Tree.SHA
 	}
+	if commit.SigningKey != nil {
+		signature, err := createSignature(commit.SigningKey, body)
+		if err != nil {
+			return nil, nil, err
+		}
+		body.Signature = &signature
+	}
+	if commit.Verification != nil {
+		body.Signature = commit.Verification.Signature
+	}
 
 	req, err := s.client.NewRequest("POST", u, body)
 	if err != nil {
 		return nil, nil, err
 	}
-
-	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeGraphQLNodeIDPreview)
 
 	c := new(Commit)
 	resp, err := s.client.Do(ctx, req, c)
@@ -136,4 +149,52 @@ func (s *GitService) CreateCommit(ctx context.Context, owner string, repo string
 	}
 
 	return c, resp, nil
+}
+
+func createSignature(signingKey *openpgp.Entity, commit *createCommit) (string, error) {
+	if signingKey == nil || commit == nil {
+		return "", errors.New("createSignature: invalid parameters")
+	}
+
+	message, err := createSignatureMessage(commit)
+	if err != nil {
+		return "", err
+	}
+
+	writer := new(bytes.Buffer)
+	reader := bytes.NewReader([]byte(message))
+	if err := openpgp.ArmoredDetachSign(writer, signingKey, reader, nil); err != nil {
+		return "", err
+	}
+
+	return writer.String(), nil
+}
+
+func createSignatureMessage(commit *createCommit) (string, error) {
+	if commit == nil || commit.Message == nil || *commit.Message == "" || commit.Author == nil {
+		return "", errors.New("createSignatureMessage: invalid parameters")
+	}
+
+	var message []string
+
+	if commit.Tree != nil {
+		message = append(message, fmt.Sprintf("tree %s", *commit.Tree))
+	}
+
+	for _, parent := range commit.Parents {
+		message = append(message, fmt.Sprintf("parent %s", parent))
+	}
+
+	message = append(message, fmt.Sprintf("author %s <%s> %d %s", commit.Author.GetName(), commit.Author.GetEmail(), commit.Author.GetDate().Unix(), commit.Author.GetDate().Format("-0700")))
+
+	committer := commit.Committer
+	if committer == nil {
+		committer = commit.Author
+	}
+
+	// There needs to be a double newline after committer
+	message = append(message, fmt.Sprintf("committer %s <%s> %d %s\n", committer.GetName(), committer.GetEmail(), committer.GetDate().Unix(), committer.GetDate().Format("-0700")))
+	message = append(message, *commit.Message)
+
+	return strings.Join(message, "\n"), nil
 }

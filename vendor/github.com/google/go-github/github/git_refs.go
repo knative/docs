@@ -10,6 +10,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"net/url"
 	"strings"
 )
 
@@ -57,25 +58,35 @@ type updateRefRequest struct {
 // GitHub API docs: https://developer.github.com/v3/git/refs/#get-a-reference
 func (s *GitService) GetRef(ctx context.Context, owner string, repo string, ref string) (*Reference, *Response, error) {
 	ref = strings.TrimPrefix(ref, "refs/")
-	u := fmt.Sprintf("repos/%v/%v/git/refs/%v", owner, repo, ref)
+	u := fmt.Sprintf("repos/%v/%v/git/refs/%v", owner, repo, refURLEscape(ref))
 	req, err := s.client.NewRequest("GET", u, nil)
 	if err != nil {
 		return nil, nil, err
 	}
 
-	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeGraphQLNodeIDPreview)
-
 	r := new(Reference)
 	resp, err := s.client.Do(ctx, req, r)
 	if _, ok := err.(*json.UnmarshalTypeError); ok {
 		// Multiple refs, means there wasn't an exact match.
-		return nil, resp, errors.New("no exact match found for this ref")
+		return nil, resp, errors.New("multiple matches found for this ref")
+	} else if _, ok := err.(*ErrorResponse); ok && resp.StatusCode == 404 {
+		// No ref, there was no match for the ref
+		return nil, resp, errors.New("no match found for this ref")
 	} else if err != nil {
 		return nil, resp, err
 	}
 
 	return r, resp, nil
+}
+
+// refURLEscape escapes every path segment of the given ref. Those must
+// not contain escaped "/" - as "%2F" - or github will not recognize it.
+func refURLEscape(ref string) string {
+	parts := strings.Split(ref, "/")
+	for i, s := range parts {
+		parts[i] = url.PathEscape(s)
+	}
+	return strings.Join(parts, "/")
 }
 
 // GetRefs fetches a slice of Reference objects for a given Git ref.
@@ -91,14 +102,11 @@ func (s *GitService) GetRef(ctx context.Context, owner string, repo string, ref 
 // GitHub API docs: https://developer.github.com/v3/git/refs/#get-a-reference
 func (s *GitService) GetRefs(ctx context.Context, owner string, repo string, ref string) ([]*Reference, *Response, error) {
 	ref = strings.TrimPrefix(ref, "refs/")
-	u := fmt.Sprintf("repos/%v/%v/git/refs/%v", owner, repo, ref)
+	u := fmt.Sprintf("repos/%v/%v/git/refs/%v", owner, repo, refURLEscape(ref))
 	req, err := s.client.NewRequest("GET", u, nil)
 	if err != nil {
 		return nil, nil, err
 	}
-
-	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeGraphQLNodeIDPreview)
 
 	var rawJSON json.RawMessage
 	resp, err := s.client.Do(ctx, req, &rawJSON)
@@ -137,14 +145,14 @@ type ReferenceListOptions struct {
 // ListRefs lists all refs in a repository.
 //
 // GitHub API docs: https://developer.github.com/v3/git/refs/#get-all-references
-func (s *GitService) ListRefs(ctx context.Context, owner, repo string, opt *ReferenceListOptions) ([]*Reference, *Response, error) {
+func (s *GitService) ListRefs(ctx context.Context, owner, repo string, opts *ReferenceListOptions) ([]*Reference, *Response, error) {
 	var u string
-	if opt != nil && opt.Type != "" {
-		u = fmt.Sprintf("repos/%v/%v/git/refs/%v", owner, repo, opt.Type)
+	if opts != nil && opts.Type != "" {
+		u = fmt.Sprintf("repos/%v/%v/git/refs/%v", owner, repo, opts.Type)
 	} else {
 		u = fmt.Sprintf("repos/%v/%v/git/refs", owner, repo)
 	}
-	u, err := addOptions(u, opt)
+	u, err := addOptions(u, opts)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -153,9 +161,6 @@ func (s *GitService) ListRefs(ctx context.Context, owner, repo string, opt *Refe
 	if err != nil {
 		return nil, nil, err
 	}
-
-	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeGraphQLNodeIDPreview)
 
 	var rs []*Reference
 	resp, err := s.client.Do(ctx, req, &rs)
@@ -180,9 +185,6 @@ func (s *GitService) CreateRef(ctx context.Context, owner string, repo string, r
 		return nil, nil, err
 	}
 
-	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeGraphQLNodeIDPreview)
-
 	r := new(Reference)
 	resp, err := s.client.Do(ctx, req, r)
 	if err != nil {
@@ -206,9 +208,6 @@ func (s *GitService) UpdateRef(ctx context.Context, owner string, repo string, r
 		return nil, nil, err
 	}
 
-	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeGraphQLNodeIDPreview)
-
 	r := new(Reference)
 	resp, err := s.client.Do(ctx, req, r)
 	if err != nil {
@@ -223,7 +222,7 @@ func (s *GitService) UpdateRef(ctx context.Context, owner string, repo string, r
 // GitHub API docs: https://developer.github.com/v3/git/refs/#delete-a-reference
 func (s *GitService) DeleteRef(ctx context.Context, owner string, repo string, ref string) (*Response, error) {
 	ref = strings.TrimPrefix(ref, "refs/")
-	u := fmt.Sprintf("repos/%v/%v/git/refs/%v", owner, repo, ref)
+	u := fmt.Sprintf("repos/%v/%v/git/refs/%v", owner, repo, refURLEscape(ref))
 	req, err := s.client.NewRequest("DELETE", u, nil)
 	if err != nil {
 		return nil, err

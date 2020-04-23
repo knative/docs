@@ -56,9 +56,9 @@ type MilestoneListOptions struct {
 // ListMilestones lists all milestones for a repository.
 //
 // GitHub API docs: https://developer.github.com/v3/issues/milestones/#list-milestones-for-a-repository
-func (s *IssuesService) ListMilestones(ctx context.Context, owner string, repo string, opt *MilestoneListOptions) ([]*Milestone, *Response, error) {
+func (s *IssuesService) ListMilestones(ctx context.Context, owner string, repo string, opts *MilestoneListOptions) ([]*Milestone, *Response, error) {
 	u := fmt.Sprintf("repos/%v/%v/milestones", owner, repo)
-	u, err := addOptions(u, opt)
+	u, err := addOptions(u, opts)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -67,9 +67,6 @@ func (s *IssuesService) ListMilestones(ctx context.Context, owner string, repo s
 	if err != nil {
 		return nil, nil, err
 	}
-
-	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeGraphQLNodeIDPreview)
 
 	var milestones []*Milestone
 	resp, err := s.client.Do(ctx, req, &milestones)
@@ -90,9 +87,6 @@ func (s *IssuesService) GetMilestone(ctx context.Context, owner string, repo str
 		return nil, nil, err
 	}
 
-	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeGraphQLNodeIDPreview)
-
 	milestone := new(Milestone)
 	resp, err := s.client.Do(ctx, req, milestone)
 	if err != nil {
@@ -112,9 +106,6 @@ func (s *IssuesService) CreateMilestone(ctx context.Context, owner string, repo 
 		return nil, nil, err
 	}
 
-	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeGraphQLNodeIDPreview)
-
 	m := new(Milestone)
 	resp, err := s.client.Do(ctx, req, m)
 	if err != nil {
@@ -133,9 +124,6 @@ func (s *IssuesService) EditMilestone(ctx context.Context, owner string, repo st
 	if err != nil {
 		return nil, nil, err
 	}
-
-	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeGraphQLNodeIDPreview)
 
 	m := new(Milestone)
 	resp, err := s.client.Do(ctx, req, m)

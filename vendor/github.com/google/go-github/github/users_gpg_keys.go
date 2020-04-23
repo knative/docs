@@ -15,18 +15,18 @@ import (
 //
 // https://developer.github.com/changes/2016-04-04-git-signing-api-preview/
 type GPGKey struct {
-	ID                *int64     `json:"id,omitempty"`
-	PrimaryKeyID      *int64     `json:"primary_key_id,omitempty"`
-	KeyID             *string    `json:"key_id,omitempty"`
-	PublicKey         *string    `json:"public_key,omitempty"`
-	Emails            []GPGEmail `json:"emails,omitempty"`
-	Subkeys           []GPGKey   `json:"subkeys,omitempty"`
-	CanSign           *bool      `json:"can_sign,omitempty"`
-	CanEncryptComms   *bool      `json:"can_encrypt_comms,omitempty"`
-	CanEncryptStorage *bool      `json:"can_encrypt_storage,omitempty"`
-	CanCertify        *bool      `json:"can_certify,omitempty"`
-	CreatedAt         *time.Time `json:"created_at,omitempty"`
-	ExpiresAt         *time.Time `json:"expires_at,omitempty"`
+	ID                *int64      `json:"id,omitempty"`
+	PrimaryKeyID      *int64      `json:"primary_key_id,omitempty"`
+	KeyID             *string     `json:"key_id,omitempty"`
+	PublicKey         *string     `json:"public_key,omitempty"`
+	Emails            []*GPGEmail `json:"emails,omitempty"`
+	Subkeys           []*GPGKey   `json:"subkeys,omitempty"`
+	CanSign           *bool       `json:"can_sign,omitempty"`
+	CanEncryptComms   *bool       `json:"can_encrypt_comms,omitempty"`
+	CanEncryptStorage *bool       `json:"can_encrypt_storage,omitempty"`
+	CanCertify        *bool       `json:"can_certify,omitempty"`
+	CreatedAt         *time.Time  `json:"created_at,omitempty"`
+	ExpiresAt         *time.Time  `json:"expires_at,omitempty"`
 }
 
 // String stringifies a GPGKey.
@@ -45,14 +45,15 @@ type GPGEmail struct {
 // via Basic Auth or via OAuth with at least read:gpg_key scope.
 //
 // GitHub API docs: https://developer.github.com/v3/users/gpg_keys/#list-gpg-keys-for-a-user
-func (s *UsersService) ListGPGKeys(ctx context.Context, user string, opt *ListOptions) ([]*GPGKey, *Response, error) {
+// GitHub API docs: https://developer.github.com/v3/users/gpg_keys/#list-your-gpg-keys
+func (s *UsersService) ListGPGKeys(ctx context.Context, user string, opts *ListOptions) ([]*GPGKey, *Response, error) {
 	var u string
 	if user != "" {
 		u = fmt.Sprintf("users/%v/gpg_keys", user)
 	} else {
 		u = "user/gpg_keys"
 	}
-	u, err := addOptions(u, opt)
+	u, err := addOptions(u, opts)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -61,9 +62,6 @@ func (s *UsersService) ListGPGKeys(ctx context.Context, user string, opt *ListOp
 	if err != nil {
 		return nil, nil, err
 	}
-
-	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeGitSigningPreview)
 
 	var keys []*GPGKey
 	resp, err := s.client.Do(ctx, req, &keys)
@@ -84,9 +82,6 @@ func (s *UsersService) GetGPGKey(ctx context.Context, id int64) (*GPGKey, *Respo
 	if err != nil {
 		return nil, nil, err
 	}
-
-	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeGitSigningPreview)
 
 	key := &GPGKey{}
 	resp, err := s.client.Do(ctx, req, key)
@@ -110,9 +105,6 @@ func (s *UsersService) CreateGPGKey(ctx context.Context, armoredPublicKey string
 		return nil, nil, err
 	}
 
-	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeGitSigningPreview)
-
 	key := &GPGKey{}
 	resp, err := s.client.Do(ctx, req, key)
 	if err != nil {
@@ -132,9 +124,6 @@ func (s *UsersService) DeleteGPGKey(ctx context.Context, id int64) (*Response, e
 	if err != nil {
 		return nil, err
 	}
-
-	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeGitSigningPreview)
 
 	return s.client.Do(ctx, req, nil)
 }

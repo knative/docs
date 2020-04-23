@@ -85,12 +85,12 @@
   version = "v1.1.0"
 
 [[projects]]
-  digest = "1:51bee9f1987dcdb9f9a1b4c20745d78f6bf6f5f14ad4e64ca883eb64df4c0045"
+  digest = "1:de61be93d4e52022c2331a1c9272b14a7f80ac0388392931d771506352252fd0"
   name = "github.com/google/go-github"
   packages = ["github"]
   pruneopts = "NUT"
-  revision = "e48060a28fac52d0f1cb758bc8b87c07bac4a87d"
-  version = "v15.0.0"
+  revision = "e0066688b631702f66e0435ee1633f9d0091e4b9"
+  version = "v31.0.0"
 
 [[projects]]
   branch = "master"
@@ -326,6 +326,22 @@
 
 [[projects]]
   branch = "master"
+  digest = "1:07c9329a75451b6c0d49cfea8da6c1dd21a70bd06c3e538e34f5b0d763a223f7"
+  name = "golang.org/x/crypto"
+  packages = [
+    "cast5",
+    "openpgp",
+    "openpgp/armor",
+    "openpgp/elgamal",
+    "openpgp/errors",
+    "openpgp/packet",
+    "openpgp/s2k",
+  ]
+  pruneopts = "NUT"
+  revision = "44a6062868251b249d52ec1c39797568f724bdca"
+
+[[projects]]
+  branch = "master"
   digest = "1:2d25f30f1d407a44cceb154f434b3ef0a474316c1f945574d75c8b6bf142e2d2"
   name = "golang.org/x/net"
   packages = [
@@ -508,7 +524,7 @@
     "tools/dep-collector",
   ]
   pruneopts = "UT"
-  revision = "891d25bbf859bfc829b515068cc3e167a7fcc528"
+  revision = "1be83cfc7702b712d4dcec6209105b012e930308"
 
 [solve-meta]
   analyzer-name = "dep"

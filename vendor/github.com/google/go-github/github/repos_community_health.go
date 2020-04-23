@@ -21,10 +21,12 @@ type Metric struct {
 
 // CommunityHealthFiles represents the different files in the community health metrics response.
 type CommunityHealthFiles struct {
-	CodeOfConduct *Metric `json:"code_of_conduct"`
-	Contributing  *Metric `json:"contributing"`
-	License       *Metric `json:"license"`
-	Readme        *Metric `json:"readme"`
+	CodeOfConduct       *Metric `json:"code_of_conduct"`
+	Contributing        *Metric `json:"contributing"`
+	IssueTemplate       *Metric `json:"issue_template"`
+	PullRequestTemplate *Metric `json:"pull_request_template"`
+	License             *Metric `json:"license"`
+	Readme              *Metric `json:"readme"`
 }
 
 // CommunityHealthMetrics represents a response containing the community metrics of a repository.
@@ -36,7 +38,7 @@ type CommunityHealthMetrics struct {
 
 // GetCommunityHealthMetrics retrieves all the community health  metrics for a  repository.
 //
-// GitHub API docs: https://developer.github.com/v3/repos/community/#retrieve-community-health-metrics
+// GitHub API docs: https://developer.github.com/v3/repos/community/#retrieve-community-profile-metrics
 func (s *RepositoriesService) GetCommunityHealthMetrics(ctx context.Context, owner, repo string) (*CommunityHealthMetrics, *Response, error) {
 	u := fmt.Sprintf("repos/%v/%v/community/profile", owner, repo)
 	req, err := s.client.NewRequest("GET", u, nil)

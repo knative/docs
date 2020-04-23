@@ -12,6 +12,7 @@ import (
 
 // ReviewersRequest specifies users and teams for a pull request review request.
 type ReviewersRequest struct {
+	NodeID        *string  `json:"node_id,omitempty"`
 	Reviewers     []string `json:"reviewers,omitempty"`
 	TeamReviewers []string `json:"team_reviewers,omitempty"`
 }
@@ -32,9 +33,6 @@ func (s *PullRequestsService) RequestReviewers(ctx context.Context, owner, repo 
 		return nil, nil, err
 	}
 
-	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeTeamReviewPreview)
-
 	r := new(PullRequest)
 	resp, err := s.client.Do(ctx, req, r)
 	if err != nil {
@@ -47,9 +45,9 @@ func (s *PullRequestsService) RequestReviewers(ctx context.Context, owner, repo 
 // ListReviewers lists reviewers whose reviews have been requested on the specified pull request.
 //
 // GitHub API docs: https://developer.github.com/v3/pulls/review_requests/#list-review-requests
-func (s *PullRequestsService) ListReviewers(ctx context.Context, owner, repo string, number int, opt *ListOptions) (*Reviewers, *Response, error) {
+func (s *PullRequestsService) ListReviewers(ctx context.Context, owner, repo string, number int, opts *ListOptions) (*Reviewers, *Response, error) {
 	u := fmt.Sprintf("repos/%v/%v/pulls/%d/requested_reviewers", owner, repo, number)
-	u, err := addOptions(u, opt)
+	u, err := addOptions(u, opts)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -58,9 +56,6 @@ func (s *PullRequestsService) ListReviewers(ctx context.Context, owner, repo str
 	if err != nil {
 		return nil, nil, err
 	}
-
-	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeTeamReviewPreview)
 
 	reviewers := new(Reviewers)
 	resp, err := s.client.Do(ctx, req, reviewers)
@@ -80,9 +75,6 @@ func (s *PullRequestsService) RemoveReviewers(ctx context.Context, owner, repo s
 	if err != nil {
 		return nil, err
 	}
-
-	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeTeamReviewPreview)
 
 	return s.client.Do(ctx, req, nil)
 }

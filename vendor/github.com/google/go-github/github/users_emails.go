@@ -9,17 +9,18 @@ import "context"
 
 // UserEmail represents user's email address
 type UserEmail struct {
-	Email    *string `json:"email,omitempty"`
-	Primary  *bool   `json:"primary,omitempty"`
-	Verified *bool   `json:"verified,omitempty"`
+	Email      *string `json:"email,omitempty"`
+	Primary    *bool   `json:"primary,omitempty"`
+	Verified   *bool   `json:"verified,omitempty"`
+	Visibility *string `json:"visibility,omitempty"`
 }
 
 // ListEmails lists all email addresses for the authenticated user.
 //
 // GitHub API docs: https://developer.github.com/v3/users/emails/#list-email-addresses-for-a-user
-func (s *UsersService) ListEmails(ctx context.Context, opt *ListOptions) ([]*UserEmail, *Response, error) {
+func (s *UsersService) ListEmails(ctx context.Context, opts *ListOptions) ([]*UserEmail, *Response, error) {
 	u := "user/emails"
-	u, err := addOptions(u, opt)
+	u, err := addOptions(u, opts)
 	if err != nil {
 		return nil, nil, err
 	}

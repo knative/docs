@@ -19,31 +19,55 @@ type OrganizationsService service
 
 // Organization represents a GitHub organization account.
 type Organization struct {
-	Login             *string    `json:"login,omitempty"`
-	ID                *int64     `json:"id,omitempty"`
-	AvatarURL         *string    `json:"avatar_url,omitempty"`
-	HTMLURL           *string    `json:"html_url,omitempty"`
-	Name              *string    `json:"name,omitempty"`
-	Company           *string    `json:"company,omitempty"`
-	Blog              *string    `json:"blog,omitempty"`
-	Location          *string    `json:"location,omitempty"`
-	Email             *string    `json:"email,omitempty"`
-	Description       *string    `json:"description,omitempty"`
-	PublicRepos       *int       `json:"public_repos,omitempty"`
-	PublicGists       *int       `json:"public_gists,omitempty"`
-	Followers         *int       `json:"followers,omitempty"`
-	Following         *int       `json:"following,omitempty"`
-	CreatedAt         *time.Time `json:"created_at,omitempty"`
-	UpdatedAt         *time.Time `json:"updated_at,omitempty"`
-	TotalPrivateRepos *int       `json:"total_private_repos,omitempty"`
-	OwnedPrivateRepos *int       `json:"owned_private_repos,omitempty"`
-	PrivateGists      *int       `json:"private_gists,omitempty"`
-	DiskUsage         *int       `json:"disk_usage,omitempty"`
-	Collaborators     *int       `json:"collaborators,omitempty"`
-	BillingEmail      *string    `json:"billing_email,omitempty"`
-	Type              *string    `json:"type,omitempty"`
-	Plan              *Plan      `json:"plan,omitempty"`
-	NodeID            *string    `json:"node_id,omitempty"`
+	Login                       *string    `json:"login,omitempty"`
+	ID                          *int64     `json:"id,omitempty"`
+	NodeID                      *string    `json:"node_id,omitempty"`
+	AvatarURL                   *string    `json:"avatar_url,omitempty"`
+	HTMLURL                     *string    `json:"html_url,omitempty"`
+	Name                        *string    `json:"name,omitempty"`
+	Company                     *string    `json:"company,omitempty"`
+	Blog                        *string    `json:"blog,omitempty"`
+	Location                    *string    `json:"location,omitempty"`
+	Email                       *string    `json:"email,omitempty"`
+	Description                 *string    `json:"description,omitempty"`
+	PublicRepos                 *int       `json:"public_repos,omitempty"`
+	PublicGists                 *int       `json:"public_gists,omitempty"`
+	Followers                   *int       `json:"followers,omitempty"`
+	Following                   *int       `json:"following,omitempty"`
+	CreatedAt                   *time.Time `json:"created_at,omitempty"`
+	UpdatedAt                   *time.Time `json:"updated_at,omitempty"`
+	TotalPrivateRepos           *int       `json:"total_private_repos,omitempty"`
+	OwnedPrivateRepos           *int       `json:"owned_private_repos,omitempty"`
+	PrivateGists                *int       `json:"private_gists,omitempty"`
+	DiskUsage                   *int       `json:"disk_usage,omitempty"`
+	Collaborators               *int       `json:"collaborators,omitempty"`
+	BillingEmail                *string    `json:"billing_email,omitempty"`
+	Type                        *string    `json:"type,omitempty"`
+	Plan                        *Plan      `json:"plan,omitempty"`
+	TwoFactorRequirementEnabled *bool      `json:"two_factor_requirement_enabled,omitempty"`
+
+	// DefaultRepoPermission can be one of: "read", "write", "admin", or "none". (Default: "read").
+	// It is only used in OrganizationsService.Edit.
+	DefaultRepoPermission *string `json:"default_repository_permission,omitempty"`
+	// DefaultRepoSettings can be one of: "read", "write", "admin", or "none". (Default: "read").
+	// It is only used in OrganizationsService.Get.
+	DefaultRepoSettings *string `json:"default_repository_settings,omitempty"`
+
+	// MembersCanCreateRepos default value is true and is only used in Organizations.Edit.
+	MembersCanCreateRepos *bool `json:"members_can_create_repositories,omitempty"`
+
+	// https://developer.github.com/changes/2019-12-03-internal-visibility-changes/#rest-v3-api
+	MembersCanCreatePublicRepos   *bool `json:"members_can_create_public_repositories,omitempty"`
+	MembersCanCreatePrivateRepos  *bool `json:"members_can_create_private_repositories,omitempty"`
+	MembersCanCreateInternalRepos *bool `json:"members_can_create_internal_repositories,omitempty"`
+
+	// MembersAllowedRepositoryCreationType denotes if organization members can create repositories
+	// and the type of repositories they can create. Possible values are: "all", "private", or "none".
+	//
+	// Deprecated: Use MembersCanCreatePublicRepos, MembersCanCreatePrivateRepos, MembersCanCreateInternalRepos
+	// instead. The new fields overrides the existing MembersAllowedRepositoryCreationType during 'edit'
+	// operation and does not consider 'internal' repositories during 'get' operation
+	MembersAllowedRepositoryCreationType *string `json:"members_allowed_repository_creation_type,omitempty"`
 
 	// API URLs
 	URL              *string `json:"url,omitempty"`
@@ -53,6 +77,12 @@ type Organization struct {
 	MembersURL       *string `json:"members_url,omitempty"`
 	PublicMembersURL *string `json:"public_members_url,omitempty"`
 	ReposURL         *string `json:"repos_url,omitempty"`
+}
+
+// OrganizationInstallations represents GitHub app installations for an organization.
+type OrganizationInstallations struct {
+	TotalCount    *int            `json:"total_count,omitempty"`
+	Installations []*Installation `json:"installations,omitempty"`
 }
 
 func (o Organization) String() string {
@@ -65,6 +95,8 @@ type Plan struct {
 	Space         *int    `json:"space,omitempty"`
 	Collaborators *int    `json:"collaborators,omitempty"`
 	PrivateRepos  *int    `json:"private_repos,omitempty"`
+	FilledSeats   *int    `json:"filled_seats,omitempty"`
+	Seats         *int    `json:"seats,omitempty"`
 }
 
 func (p Plan) String() string {
@@ -75,8 +107,11 @@ func (p Plan) String() string {
 // OrganizationsService.ListAll method.
 type OrganizationsListOptions struct {
 	// Since filters Organizations by ID.
-	Since int `url:"since,omitempty"`
+	Since int64 `url:"since,omitempty"`
 
+	// Note: Pagination is powered exclusively by the Since parameter,
+	// ListOptions.Page has no effect.
+	// ListOptions.PerPage controls an undocumented GitHub API parameter.
 	ListOptions
 }
 
@@ -87,8 +122,8 @@ type OrganizationsListOptions struct {
 // as the opts.Since parameter for the next call.
 //
 // GitHub API docs: https://developer.github.com/v3/orgs/#list-all-organizations
-func (s *OrganizationsService) ListAll(ctx context.Context, opt *OrganizationsListOptions) ([]*Organization, *Response, error) {
-	u, err := addOptions("organizations", opt)
+func (s *OrganizationsService) ListAll(ctx context.Context, opts *OrganizationsListOptions) ([]*Organization, *Response, error) {
+	u, err := addOptions("organizations", opts)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -97,9 +132,6 @@ func (s *OrganizationsService) ListAll(ctx context.Context, opt *OrganizationsLi
 	if err != nil {
 		return nil, nil, err
 	}
-
-	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeGraphQLNodeIDPreview)
 
 	orgs := []*Organization{}
 	resp, err := s.client.Do(ctx, req, &orgs)
@@ -113,14 +145,15 @@ func (s *OrganizationsService) ListAll(ctx context.Context, opt *OrganizationsLi
 // organizations for the authenticated user.
 //
 // GitHub API docs: https://developer.github.com/v3/orgs/#list-user-organizations
-func (s *OrganizationsService) List(ctx context.Context, user string, opt *ListOptions) ([]*Organization, *Response, error) {
+// GitHub API docs: https://developer.github.com/v3/orgs/#oauth-scope-requirements
+func (s *OrganizationsService) List(ctx context.Context, user string, opts *ListOptions) ([]*Organization, *Response, error) {
 	var u string
 	if user != "" {
 		u = fmt.Sprintf("users/%v/orgs", user)
 	} else {
 		u = "user/orgs"
 	}
-	u, err := addOptions(u, opt)
+	u, err := addOptions(u, opts)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -129,9 +162,6 @@ func (s *OrganizationsService) List(ctx context.Context, user string, opt *ListO
 	if err != nil {
 		return nil, nil, err
 	}
-
-	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeGraphQLNodeIDPreview)
 
 	var orgs []*Organization
 	resp, err := s.client.Do(ctx, req, &orgs)
@@ -153,7 +183,7 @@ func (s *OrganizationsService) Get(ctx context.Context, org string) (*Organizati
 	}
 
 	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeGraphQLNodeIDPreview)
+	req.Header.Set("Accept", mediaTypeMemberAllowedRepoCreationTypePreview)
 
 	organization := new(Organization)
 	resp, err := s.client.Do(ctx, req, organization)
@@ -174,9 +204,6 @@ func (s *OrganizationsService) GetByID(ctx context.Context, id int64) (*Organiza
 		return nil, nil, err
 	}
 
-	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeGraphQLNodeIDPreview)
-
 	organization := new(Organization)
 	resp, err := s.client.Do(ctx, req, organization)
 	if err != nil {
@@ -188,7 +215,7 @@ func (s *OrganizationsService) GetByID(ctx context.Context, id int64) (*Organiza
 
 // Edit an organization.
 //
-// GitHub API docs: https://developer.github.com/v3/orgs/#edit-an-organization
+// GitHub API docs: https://developer.github.com/v3/orgs/#members_can_create_repositories
 func (s *OrganizationsService) Edit(ctx context.Context, name string, org *Organization) (*Organization, *Response, error) {
 	u := fmt.Sprintf("orgs/%v", name)
 	req, err := s.client.NewRequest("PATCH", u, org)
@@ -197,7 +224,7 @@ func (s *OrganizationsService) Edit(ctx context.Context, name string, org *Organ
 	}
 
 	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeGraphQLNodeIDPreview)
+	req.Header.Set("Accept", mediaTypeMemberAllowedRepoCreationTypePreview)
 
 	o := new(Organization)
 	resp, err := s.client.Do(ctx, req, o)
@@ -206,4 +233,32 @@ func (s *OrganizationsService) Edit(ctx context.Context, name string, org *Organ
 	}
 
 	return o, resp, nil
+}
+
+// ListInstallations lists installations for an organization.
+//
+// GitHub API docs: https://developer.github.com/v3/orgs/#list-installations-for-an-organization
+func (s *OrganizationsService) ListInstallations(ctx context.Context, org string, opts *ListOptions) (*OrganizationInstallations, *Response, error) {
+	u := fmt.Sprintf("orgs/%v/installations", org)
+
+	u, err := addOptions(u, opts)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	req, err := s.client.NewRequest("GET", u, nil)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	// TODO: remove custom Accept header when this API fully launches.
+	req.Header.Set("Accept", mediaTypeIntegrationPreview)
+
+	result := new(OrganizationInstallations)
+	resp, err := s.client.Do(ctx, req, result)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return result, resp, nil
 }

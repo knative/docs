@@ -28,9 +28,9 @@ type RepositoryInvitation struct {
 // ListInvitations lists all currently-open repository invitations.
 //
 // GitHub API docs: https://developer.github.com/v3/repos/invitations/#list-invitations-for-a-repository
-func (s *RepositoriesService) ListInvitations(ctx context.Context, owner, repo string, opt *ListOptions) ([]*RepositoryInvitation, *Response, error) {
+func (s *RepositoriesService) ListInvitations(ctx context.Context, owner, repo string, opts *ListOptions) ([]*RepositoryInvitation, *Response, error) {
 	u := fmt.Sprintf("repos/%v/%v/invitations", owner, repo)
-	u, err := addOptions(u, opt)
+	u, err := addOptions(u, opts)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -39,9 +39,6 @@ func (s *RepositoriesService) ListInvitations(ctx context.Context, owner, repo s
 	if err != nil {
 		return nil, nil, err
 	}
-
-	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeRepositoryInvitationsPreview)
 
 	invites := []*RepositoryInvitation{}
 	resp, err := s.client.Do(ctx, req, &invites)
@@ -62,9 +59,6 @@ func (s *RepositoriesService) DeleteInvitation(ctx context.Context, owner, repo 
 		return nil, err
 	}
 
-	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeRepositoryInvitationsPreview)
-
 	return s.client.Do(ctx, req, nil)
 }
 
@@ -84,9 +78,6 @@ func (s *RepositoriesService) UpdateInvitation(ctx context.Context, owner, repo 
 	if err != nil {
 		return nil, nil, err
 	}
-
-	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeRepositoryInvitationsPreview)
 
 	invite := &RepositoryInvitation{}
 	resp, err := s.client.Do(ctx, req, invite)

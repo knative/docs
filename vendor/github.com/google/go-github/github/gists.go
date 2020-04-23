@@ -96,15 +96,16 @@ type GistListOptions struct {
 // is authenticated, it will returns all gists for the authenticated
 // user.
 //
-// GitHub API docs: https://developer.github.com/v3/gists/#list-gists
-func (s *GistsService) List(ctx context.Context, user string, opt *GistListOptions) ([]*Gist, *Response, error) {
+// GitHub API docs: https://developer.github.com/v3/gists/#list-gists-for-a-user
+// GitHub API docs: https://developer.github.com/v3/gists/#list-gists-for-the-authenticated-user
+func (s *GistsService) List(ctx context.Context, user string, opts *GistListOptions) ([]*Gist, *Response, error) {
 	var u string
 	if user != "" {
 		u = fmt.Sprintf("users/%v/gists", user)
 	} else {
 		u = "gists"
 	}
-	u, err := addOptions(u, opt)
+	u, err := addOptions(u, opts)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -113,9 +114,6 @@ func (s *GistsService) List(ctx context.Context, user string, opt *GistListOptio
 	if err != nil {
 		return nil, nil, err
 	}
-
-	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeGraphQLNodeIDPreview)
 
 	var gists []*Gist
 	resp, err := s.client.Do(ctx, req, &gists)
@@ -128,9 +126,9 @@ func (s *GistsService) List(ctx context.Context, user string, opt *GistListOptio
 
 // ListAll lists all public gists.
 //
-// GitHub API docs: https://developer.github.com/v3/gists/#list-gists
-func (s *GistsService) ListAll(ctx context.Context, opt *GistListOptions) ([]*Gist, *Response, error) {
-	u, err := addOptions("gists/public", opt)
+// GitHub API docs: https://developer.github.com/v3/gists/#list-public-gists
+func (s *GistsService) ListAll(ctx context.Context, opts *GistListOptions) ([]*Gist, *Response, error) {
+	u, err := addOptions("gists/public", opts)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -139,9 +137,6 @@ func (s *GistsService) ListAll(ctx context.Context, opt *GistListOptions) ([]*Gi
 	if err != nil {
 		return nil, nil, err
 	}
-
-	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeGraphQLNodeIDPreview)
 
 	var gists []*Gist
 	resp, err := s.client.Do(ctx, req, &gists)
@@ -154,9 +149,9 @@ func (s *GistsService) ListAll(ctx context.Context, opt *GistListOptions) ([]*Gi
 
 // ListStarred lists starred gists of authenticated user.
 //
-// GitHub API docs: https://developer.github.com/v3/gists/#list-gists
-func (s *GistsService) ListStarred(ctx context.Context, opt *GistListOptions) ([]*Gist, *Response, error) {
-	u, err := addOptions("gists/starred", opt)
+// GitHub API docs: https://developer.github.com/v3/gists/#list-starred-gists
+func (s *GistsService) ListStarred(ctx context.Context, opts *GistListOptions) ([]*Gist, *Response, error) {
+	u, err := addOptions("gists/starred", opts)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -165,9 +160,6 @@ func (s *GistsService) ListStarred(ctx context.Context, opt *GistListOptions) ([
 	if err != nil {
 		return nil, nil, err
 	}
-
-	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeGraphQLNodeIDPreview)
 
 	var gists []*Gist
 	resp, err := s.client.Do(ctx, req, &gists)
@@ -180,16 +172,13 @@ func (s *GistsService) ListStarred(ctx context.Context, opt *GistListOptions) ([
 
 // Get a single gist.
 //
-// GitHub API docs: https://developer.github.com/v3/gists/#get-a-single-gist
+// GitHub API docs: https://developer.github.com/v3/gists/#get-a-gist
 func (s *GistsService) Get(ctx context.Context, id string) (*Gist, *Response, error) {
 	u := fmt.Sprintf("gists/%v", id)
 	req, err := s.client.NewRequest("GET", u, nil)
 	if err != nil {
 		return nil, nil, err
 	}
-
-	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeGraphQLNodeIDPreview)
 
 	gist := new(Gist)
 	resp, err := s.client.Do(ctx, req, gist)
@@ -210,9 +199,6 @@ func (s *GistsService) GetRevision(ctx context.Context, id, sha string) (*Gist, 
 		return nil, nil, err
 	}
 
-	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeGraphQLNodeIDPreview)
-
 	gist := new(Gist)
 	resp, err := s.client.Do(ctx, req, gist)
 	if err != nil {
@@ -232,9 +218,6 @@ func (s *GistsService) Create(ctx context.Context, gist *Gist) (*Gist, *Response
 		return nil, nil, err
 	}
 
-	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeGraphQLNodeIDPreview)
-
 	g := new(Gist)
 	resp, err := s.client.Do(ctx, req, g)
 	if err != nil {
@@ -246,16 +229,13 @@ func (s *GistsService) Create(ctx context.Context, gist *Gist) (*Gist, *Response
 
 // Edit a gist.
 //
-// GitHub API docs: https://developer.github.com/v3/gists/#edit-a-gist
+// GitHub API docs: https://developer.github.com/v3/gists/#update-a-gist
 func (s *GistsService) Edit(ctx context.Context, id string, gist *Gist) (*Gist, *Response, error) {
 	u := fmt.Sprintf("gists/%v", id)
 	req, err := s.client.NewRequest("PATCH", u, gist)
 	if err != nil {
 		return nil, nil, err
 	}
-
-	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeGraphQLNodeIDPreview)
 
 	g := new(Gist)
 	resp, err := s.client.Do(ctx, req, g)
@@ -269,9 +249,9 @@ func (s *GistsService) Edit(ctx context.Context, id string, gist *Gist) (*Gist, 
 // ListCommits lists commits of a gist.
 //
 // GitHub API docs: https://developer.github.com/v3/gists/#list-gist-commits
-func (s *GistsService) ListCommits(ctx context.Context, id string, opt *ListOptions) ([]*GistCommit, *Response, error) {
+func (s *GistsService) ListCommits(ctx context.Context, id string, opts *ListOptions) ([]*GistCommit, *Response, error) {
 	u := fmt.Sprintf("gists/%v/commits", id)
-	u, err := addOptions(u, opt)
+	u, err := addOptions(u, opts)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -280,9 +260,6 @@ func (s *GistsService) ListCommits(ctx context.Context, id string, opt *ListOpti
 	if err != nil {
 		return nil, nil, err
 	}
-
-	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeGraphQLNodeIDPreview)
 
 	var gistCommits []*GistCommit
 	resp, err := s.client.Do(ctx, req, &gistCommits)
@@ -353,9 +330,6 @@ func (s *GistsService) Fork(ctx context.Context, id string) (*Gist, *Response, e
 		return nil, nil, err
 	}
 
-	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeGraphQLNodeIDPreview)
-
 	g := new(Gist)
 	resp, err := s.client.Do(ctx, req, g)
 	if err != nil {
@@ -368,15 +342,17 @@ func (s *GistsService) Fork(ctx context.Context, id string) (*Gist, *Response, e
 // ListForks lists forks of a gist.
 //
 // GitHub API docs: https://developer.github.com/v3/gists/#list-gist-forks
-func (s *GistsService) ListForks(ctx context.Context, id string) ([]*GistFork, *Response, error) {
+func (s *GistsService) ListForks(ctx context.Context, id string, opts *ListOptions) ([]*GistFork, *Response, error) {
 	u := fmt.Sprintf("gists/%v/forks", id)
-	req, err := s.client.NewRequest("GET", u, nil)
+	u, err := addOptions(u, opts)
 	if err != nil {
 		return nil, nil, err
 	}
 
-	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeGraphQLNodeIDPreview)
+	req, err := s.client.NewRequest("GET", u, nil)
+	if err != nil {
+		return nil, nil, err
+	}
 
 	var gistForks []*GistFork
 	resp, err := s.client.Do(ctx, req, &gistForks)
