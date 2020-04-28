@@ -8,7 +8,9 @@ Knative provides operators as tools to install, configure and manage Knative. Th
 uninstall Knative using Knative operators.
 
 Each component in Knative has a separate operator for installation and configuration. This means that there is a [Serving operator](https://github.com/knative/serving-operator)
-and an [Eventing operator](https://github.com/knative/eventing-operator), and you can choose to install one or both independently.
+and an [Eventing operator](https://github.com/knative/eventing-operator). Knative also releases both of them together as
+the [All-In-One operator](https://github.com/knative-sandbox/operator). You can choose to install them in one bundle or
+separately.
 
 ## Before you begin
 
@@ -25,10 +27,55 @@ Disk storage to at least 30 GB. If you have multiple nodes for your cluster, set
 
 ## Limitations of Knative Operators:
 
-Knative Operators use custom resources (CRs) to configure your Knative deployment.
+Knative Operators use custom resources (CRs) to configure your Knative deployment. They have not been tested in a production
+environment, and should be used for development or test purposes only.
 
- - Currently, the CRs included with Knative Operators do not provide high availability (HA) capabilities.
- - Knative Operators have not been tested in a production environment, and should be used for development or test purposes only.
+## Install Knative with All-In-One operator
+
+Knative has released an All-In-One operator to install both Serving and Eventing components. You can find the information
+about the releases on the [Releases page](https://github.com/knative-sandbox/operator/releases).
+
+### Installing the All-In-One Knative Operator
+
+__From releases__:
+
+Install the latest Knative operator with the following command:
+
+```
+kubectl apply -f https://github.com/knative-sandbox/operator/releases/latest/download/operator.yaml
+```
+
+__From source code__:
+
+You can also install Knative Operators from source using `ko`.
+
+1. Install the [ko](https://github.com/google/ko) build tool.
+1. Download the source code using the following command:
+
+```
+git clone https://github.com/knative-sandbox/operator.git
+```
+
+1. Install the operator in the root directory of the source using the following command:
+
+```
+ko apply -f config/
+```
+
+The All-In-One operator installs both Serving and Eventing operators. Go through the following sections to verify your operator:
+
+- [Verify Knative Serving Operator](#verify-the-operator-installation)
+- [Verify Knative Eventing Operator](#verify-the-operator-installation-1)
+
+Install Knative Serving and Eventing with Operator CRs:
+
+- [Install Knative Serving](#installing-the-knative-serving-component)
+- [Install Knative Eventing](#installing-the-knative-eventing-component)
+
+If you would like to install Knative Serving and Knative Eventing separately, go through the following sections:
+
+- [Install Knative Serving using Operator](#installing-the-knative-serving-operator)
+- [Install Knative Eventing using Operator](#installing-the-knative-serving-operator)
 
 ## Install Knative Serving with Operator:
 
@@ -50,6 +97,12 @@ __From source code__:
 You can also install Knative Operators from source using `ko`.
 
 1. Install the [ko](https://github.com/google/ko) build tool.
+1. Download the source code using the following command:
+
+```
+git clone https://github.com/knative/serving-operator.git
+```
+
 1. Install the operator in the root directory of the source using the following command:
 
 ```
@@ -137,6 +190,12 @@ __From source code__:
 You can also install Knative Operators from source using `ko`.
 
 1. Install the [ko](https://github.com/google/ko) build tool.
+1. Download the source code using the following command:
+
+```
+git clone https://github.com/knative/eventing-operator.git
+```
+
 1. Install the operator in the root directory of the source using the following command:
 
 ```
