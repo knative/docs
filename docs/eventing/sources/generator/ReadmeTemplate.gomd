@@ -64,3 +64,13 @@ Name | Status | Support | Description
 {{ range .Containers -}}
 [{{ .Name }}]({{ .Url }}) | {{ .Status }} | {{ .Support }} | {{ .Description }}
 {{- end }}
+
+### SinkBindings
+
+These are containers intended to be used with `SinkBinding`.
+
+Name | Status | Support | Description
+--- | --- | --- | ---
+{{ range .SinkBindings -}}
+[{{ .Name }}]({{ .Url }}) | {{ .Status }} | {{ .Support }} | {{ .Description }}
+{{- end }}

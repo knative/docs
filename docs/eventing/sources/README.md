@@ -83,3 +83,11 @@ Name | Status | Support | Description
 [K8s](https://github.com/Harwayne/auto-container-source/tree/master/k8s-event-source) | Proof of Concept | None | Brings Kubernetes cluster events into Knative. Uses AutoContainerSource for underlying infrastructure.
 [WebSocket](https://github.com/knative/eventing-contrib/tree/{{< branch >}}/cmd/websocketsource) | Active Development | None | Opens a WebSocket to the specified source and packages each received message as a Knative event.
 
+
+### SinkBindings
+
+These are containers intended to be used with `SinkBinding`.
+
+Name | Status | Support | Description
+--- | --- | --- | ---
+[Konnek](https://konnek.github.io/docs/#/) | Active Development | None | Retrieves events from cloud platforms – like AWS and GCP –, transform them into CloudEvents and consume in Knative using SinkBinding.

@@ -57,6 +57,7 @@ func parseYaml() *yamlSources {
 	sortAlphabetically(sources.MetaSources)
 	sortAlphabetically(sources.Sources)
 	sortAlphabetically(sources.Containers)
+	sortAlphabetically(sources.SinkBindings)
 
 	return sources
 }
@@ -69,9 +70,10 @@ func sortAlphabetically(slice []source) {
 }
 
 type yamlSources struct {
-	MetaSources []source `yaml:"metaSources"`
-	Sources     []source `yaml:"sources"`
-	Containers  []source `yaml:"containers"`
+	MetaSources  []source `yaml:"metaSources"`
+	Sources      []source `yaml:"sources"`
+	Containers   []source `yaml:"containers"`
+	SinkBindings []source `yaml:"sinkBindings"`
 }
 
 type source struct {
