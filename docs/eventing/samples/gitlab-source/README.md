@@ -1,10 +1,3 @@
----
-title: "GitLab source"
-linkTitle: "GitLab source"
-weight: 30
-type: "docs"
----
-
 GitLab Source example shows how to wire GitLab events for consumption by a
 Knative Service.
 
