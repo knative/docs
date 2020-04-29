@@ -98,7 +98,7 @@ event sources. Sources manage registration and delivery of events from external
 systems using Kubernetes
 [Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
 Learn more about Eventing development in the
-[Eventing work group](https://github.com/knative/community/tree/master/WORKING-GROUPS.md#eventing).
+[Eventing work group](https://github.com/knative/community/blob/master/working-groups/WORKING-GROUPS.md#eventing).
 
 ## Installation
 
@@ -144,9 +144,7 @@ In addition to the sources explained below, there are
 [other sources](./sources/README.md) that you can install.
 If you need a Source not covered by the ones mentioned below nor by the other
 [available implementations](./sources/README.md), there is a
-[tutorial on writing your own Source with kubebuilder](./samples/writing-a-source/README.md) as
-well as an
-[extended tutorial on writing a Source with Receive Adapter](./samples/writing-receive-adapter-source).
+[tutorial on writing a Source with a Receive Adapter](./samples/writing-receive-adapter-source).
 
 If your code needs to send events as part of its business logic and doesn't fit
 the model of a Source, consider
@@ -197,6 +195,14 @@ The GitHubSource fires a new event for selected
 [GitHub event types](https://developer.github.com/v3/activity/events/types/).
 
 See the [GitHub Source](samples/github-source) example for more details.
+
+#### GitLabSource
+
+The GitLabSource creates a webhooks for specified
+[event types](https://docs.gitlab.com/ee/user/project/integrations/webhooks.html#events),
+listens for incoming events and passes them to a consumer.
+
+See the [GitLab Source](samples/gitlab-source) example for more details.
 
 #### AwsSqsSource
 

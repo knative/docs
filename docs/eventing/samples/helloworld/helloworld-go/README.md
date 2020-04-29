@@ -343,7 +343,8 @@ mesh via the Broker and can be delivered to other services using a Trigger
        spec:
          containers:
            - name: helloworld-go
-             image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display
+             # Source code: https://github.com/knative/eventing-contrib/tree/master/cmd/event_display
+             image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
    ---
    # Service that exposes event-display app.
    # This will be the subscriber for the Trigger

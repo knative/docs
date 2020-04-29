@@ -165,18 +165,6 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:94088928b5646e3ae08050eb5e1fda3ee590001d7ddb812ce8b6a858a00155a9"
-  name = "github.com/knative/docs"
-  packages = [
-    "docs/serving/samples/grpc-ping-go/proto",
-    "test",
-    "test/sampleapp",
-  ]
-  pruneopts = "NUT"
-  revision = "e8a4306a5d37d2ea18705dbd592ecf1fa9264191"
-
-[[projects]]
-  branch = "master"
   digest = "1:a12508addb76a16593d8a3cee41d782fdf738f727d421f0bcc2dd2ee76821c01"
   name = "github.com/lightstep/tracecontext.go"
   packages = [
@@ -513,14 +501,14 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:dc73d65f40ea05b1d0db96ae5491b6ebc162bb59b3ac5a252cdf87848bc7a4b7"
+  digest = "1:31bd9c0a200618a3325145139d59d17726c7ffaa2ae4d88480de3ee5137714bb"
   name = "knative.dev/test-infra"
   packages = [
     "scripts",
     "tools/dep-collector",
   ]
   pruneopts = "UT"
-  revision = "5e04d955cdb9a460b5d3f2a699bddcab22c8af94"
+  revision = "bf3e6802597ac31776a8e3e62b32d51744b2ae77"
 
 [solve-meta]
   analyzer-name = "dep"
@@ -535,9 +523,6 @@
     "github.com/google/uuid",
     "github.com/gorilla/mux",
     "github.com/kelseyhightower/envconfig",
-    "github.com/knative/docs/docs/serving/samples/grpc-ping-go/proto",
-    "github.com/knative/docs/test",
-    "github.com/knative/docs/test/sampleapp",
     "github.com/openzipkin/zipkin-go",
     "github.com/openzipkin/zipkin-go/reporter/http",
     "github.com/satori/go.uuid",
