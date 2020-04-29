@@ -14,9 +14,10 @@ propose changes to this document in a pull request.
 
 ### Code of conduct
 
-Knative follows the [Knative Code of Conduct](https://github.com/knative/community/blob/master/CODE-OF-CONDUCT.md). By
-participating, you are expected to uphold this code. Please report unacceptable
-behavior to knative-code-of-conduct@googlegroups.com.
+Knative follows the
+[Knative Code of Conduct](https://github.com/knative/community/blob/master/CODE-OF-CONDUCT.md).
+By participating, you are expected to uphold this code. Please report
+unacceptable behavior to knative-code-of-conduct@googlegroups.com.
 
 ### Contributor license agreements
 
@@ -30,16 +31,16 @@ necessary because you own the copyright to your changes, even after your
 contribution becomes part of this project. So this agreement simply gives us
 permission to use and redistribute your contributions as part of the project.
 
-Note: Your contributions are verified using the email address for which you
-use to sign the CLA. Therefore,
+Note: Your contributions are verified using the email address for which you use
+to sign the CLA. Therefore,
 [setting your GitHub account to private](https://help.github.com/en/articles/setting-your-commit-email-address)
-is unsupported because all commits from private accounts are sent from the `noreply`
-email address.
+is unsupported because all commits from private accounts are sent from the
+`noreply` email address.
 
 ### Style guide
 
 Knative documentation follows the
-[Google Developer Documentation Style Guide](https://developers.google.com/style/);
+[Google Developer Documentation Style Guide](https://developers.google.com/style/). Use this as a reference for writing style questions.
 use it as a reference for writing style questions.
 
 ## Contributing to the documentation
@@ -71,18 +72,19 @@ issue in the [`knative/website`repo](https://github.com/knative/website/issues).
 
 ### Working group
 
-The [Knative Documentation Working Group](https://github.com/knative/community/blob/master/working-groups/WORKING-GROUPS.md#documentation)
-meets weekly on Tuesdays and alternates between a 9am PT and a 4:30pm PT time to
-accommodate contributors in both the EMEA and APAC timezones.
+The
+[Knative Documentation Working Group](https://github.com/knative/community/blob/master/working-groups/WORKING-GROUPS.md#documentation)
+meets biweekly on Tuesdays at 9:30am PT.
 [Click here](https://calendar.google.com/calendar/embed?src=google.com_18un4fuh6rokqf8hmfftm5oqq4%40group.calendar.google.com)
-to see the exact dates on the Knative working group calendar. If you're
-interested in becoming more involved in Knative's documentation, start attending
-the working group meetings. You'll meet the writers currently steering our
-documentation efforts, who are happy to help you get started.
+to see the exact dates on the Knative working group calendar.
+
+If you're interested in becoming more involved in Knative's documentation, start
+attending the working group meetings. You'll meet the writers currently steering
+our documentation efforts, who are happy to help you get started.
 
 ### Getting started
 
-There are a couple different ways to jump in to the Knative doc set:
+There are a couple of different ways to get started with contributing to the Knative documentation:
 
 - Look for a
   [Good First Issue](https://github.com/knative/docs/labels/kind%2Fgood-first-issue)
@@ -96,25 +98,25 @@ There are a couple different ways to jump in to the Knative doc set:
   [friction log](https://devrel.net/developer-experience/an-introduction-to-friction-logging)
   of your experience and then use that to open your first set of PRs. Examples:
 
-  - What was hard for you?
-  - Did you stumble on something because it wasn't clear?
+  - What was difficult for you?
+  - Did you stumble on something because the steps weren't clear?
   - Was a dependency not mentioned?
 
 **A few pointers and other considerations**
 
-- Think about how you can improve the documentation as a whole. <br> For
-  example, how can you fix the issue you found so that others don't run into the
-  same challenges?
+- Think about how you can improve the documentation as a whole. For example, how
+  can you fix the issue you found so that others don't run into the same
+  challenges?
 
-- Are there multiple places that could be fixed?
+- Are there multiple places the issue could be fixed?
 
-  - Are there other pages that you should apply your update?
+  - Are there other pages which you should also update?
 
-  - Would it help if there was a link to more or related information on a the
-    page? On a related page?
+  - Would it help if there was a link to more or related information on a page?
+    On a related page?
 
 - Was the title or description misleading? Did you expect to find something
-  else?
+  different in that docs section?
 
 - If you find something and don't have the bandwidth to open a PR, make us aware
   of the pain point and open an
@@ -194,8 +196,8 @@ There are currently two categories of user-focused code samples, _Knative owned
 and maintained_ and _Community owned and maintained_.
 
 - **Knative owned and maintained**: Includes code samples that are actively
-  maintained and e2e tested. To ensure content currency and balance available
-  resource, only the code samples that meet the following requirements are
+  maintained and e2e tested. To ensure content is current and balance available
+  resources, only the code samples that meet the following requirements are
   located in the `docs/[*component*]/samples` folders of the `knative/docs`
   repo:
 
@@ -259,32 +261,34 @@ in the product, or for a fix or update existing content.
   1.  Add one or more `cherrypick-#.#` labels to that PR to indicate which of
       the past release branches should also be fixed. Generally, we only
       maintain the most recent numbered release.
-  1.  If you want to complete the fix yourself (**best practice**), you then open a
-      subsequent PR by running `git cherry-pick [COMMIT#]` against the
-      `release-0.5`.
-      Where  `[COMMIT#]` is the commit of the PR that you merged in `master`.
+  1.  If you want to complete the fix yourself (**best practice**), you then
+      open a subsequent PR by running `git cherry-pick [COMMIT#]` against the
+      `release-0.5`. Where `[COMMIT#]` is the commit of the PR that you merged
+      in `master`.
 
       Note: Depending on workload and available bandwidth, one of the Knative
       team members might be able to help handle the `git cherry-pick` in order
       to push the fix into the affected release branch(es).
 
 See a list of the available documentation versions in the
-[branches page](https://github.com/knative/docs/branches)
-of the `knative/docs` repo.
+[branches page](https://github.com/knative/docs/branches) of the `knative/docs`
+repo.
 
 ## Assigning owners and reviewers
 
 For both documentation and code samples, you should assign your PR to a single
-owner ("_Assignee_"). It's best to set the "Assignee" and include other
-stakeholders as "Reviewers" rather than leaving it unassigned or allowing
-[Prow](https://prow.k8s.io/command-help) to auto assign reviewers.
+owner ("_Assignee_") using the `/assign` Prow command. It's best to set the
+"Assignee" and include other stakeholders as "Reviewers" rather than leaving it
+unassigned or allowing [Prow](https://prow.k8s.io/command-help) to auto assign
+reviewers.
 
 Use the `/assign` command to set the owner. For example: `/assign @owner_id`
 
 For code samples, initially set the owner of your PR to the SME who should
 review for technical accuracy. If you don't know who the appropriate owner is,
 nor who your reviewers should be for your PR, you can assign the
-[current working group lead](https://github.com/knative/community/blob/master/working-groups/WORKING-GROUPS.md) of the related component.
+[current working group lead](https://github.com/knative/community/blob/master/working-groups/WORKING-GROUPS.md)
+of the related component.
 
 If you want to notify and include other stakeholders in your PR review, use the
 `/cc` command. For example: `/cc @stakeholder_id1 @stakeholder_id2`
@@ -295,7 +299,8 @@ Because contributing to the documentation requires a different skill set than
 contributing to the Knative code base, we've defined the roles of documentation
 contributors separately from the roles of code contributors.
 
-If you're looking for code contributor roles, see [ROLES](https://github.com/knative/community/blob/master/ROLES.md).
+If you're looking for code contributor roles, see
+[ROLES](https://github.com/knative/community/blob/master/ROLES.md).
 
 ### Member
 
@@ -409,4 +414,5 @@ to become an approver at a meeting of the Documentation Working Group.
 Once you feel you meet the criteria, you can ask one of the current approvers to
 nominate you to become an approver. If all existing approvers agree that you
 meet the criteria open a PR to add yourself as a docs-approver in the
-[OWNERS_ALIASES](https://github.com/knative/docs/tree/master/OWNERS_ALIASES) file.
+[OWNERS_ALIASES](https://github.com/knative/docs/tree/master/OWNERS_ALIASES)
+file.
