@@ -93,7 +93,7 @@ sources:
       Registers for events of the specified types on the specified GitHub organization/repository.
       Brings those events into Knative.
   - name: GitLab
-    url: https://gitlab.com/triggermesh/gitlabsource
+    url: https://github.com/knative/eventing-contrib/blob/master/gitlab/pkg/apis/sources/v1alpha1/gitlabsource_types.go
     status: Proof of Concept
     support: None
     description: >
