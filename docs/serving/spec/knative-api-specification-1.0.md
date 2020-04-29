@@ -1239,6 +1239,16 @@ constitutes a request.
    </td>
   </tr>
   <tr>
+   <td><code>containerStatuses</code>
+   </td>
+   <td>[]<a href="#containerStatuses">ContainerStatuses</a>
+   </td>
+   <td>The ContainerStatuses holds the resolved image digest for both serving and non serving containers.
+   </td>
+   <td>RECOMMENDED
+   </td>
+  </tr>
+  <tr>
    <td><code>imageDigest</code>
    </td>
    <td>string
@@ -1257,6 +1267,45 @@ core Kubernetes objects, there are additional limitations applied to ensure that
 created containers can statelessly autoscale. The set of fields that have been
 determined to be compatible with statelessly scaling are detailed below.
 Restrictions to the values of the field are noted in the Description column.
+
+## ContainerStatuses
+
+<table>
+  <tr>
+   <td><strong>FieldName</strong>
+   </td>
+   <td><strong>Field Type</strong>
+   </td>
+   <td><strong>Description</strong>
+   </td>
+   <td><strong>Schema Requirement</strong>
+   </td>
+  </tr>
+  <tr>
+   <td><code>name</code>
+   </td>
+   <td>string
+<p>
+(Optional)
+   </td>
+   <td>Name represents the container name and name must be a DNS_LABEL.
+   </td>
+   <td>REQUIRED
+   </td>
+  </tr>
+  <tr>
+   <td><code>imageDigest</code>
+   </td>
+   <td>string
+<p>
+(Optional)
+   </td>
+   <td>ImageDigest is the digest value for the container's image.
+   </td>
+   <td>REQUIRED
+   </td>
+  </tr>
+</table>
 
 ## TrafficTarget
 

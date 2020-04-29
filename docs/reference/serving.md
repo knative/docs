@@ -2859,6 +2859,23 @@ based on the revision url template specified in the controller&rsquo;s config.</
 </tr>
 <tr>
 <td>
+<code>containerStatuses</code></br>
+<a href="#serving.knative.dev/v1.ContainerStatuses">
+ContainerStatuses
+</a>
+</td>
+<td>
+<em>(Optional)</em>
+<p>ContainerStatuses is a slice of images present in .Spec.Container[*].Image
+to their respective digests and their container name.
+The digests are resolved during the creation of Revision.
+ContainerStatuses holds the container name and image digests
+for both serving and non serving containers.
+ref: http://bit.ly/image-digests.</p>
+</td>
+</tr>
+<tr>
+<td>
 <code>imageDigest</code></br>
 <em>
 string
@@ -3355,6 +3372,49 @@ knative.dev/pkg/apis.URL
 <p>URL displays the URL for accessing named traffic targets. URL is displayed in
 status, and is disallowed on spec. URL must contain a scheme (e.g. http://) and
 a hostname, but may not contain anything else (e.g. basic auth, url path, etc.)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="serving.knative.dev/v1.ContainerStatuses">ContainerStatuses
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#serving.knative.dev/v1.RevisionStatus">RevisionStatus</a>)
+</p>
+<p>
+<p>ContainerStatuses holds the container name and image digests for both serving and non serving containers.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>name</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Name represents the container name and name must be a DNS_LABEL.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>imageDigest</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>ImageDigest is the digest value for the container's image.</p>
 </td>
 </tr>
 </tbody>
@@ -4574,6 +4634,23 @@ based on the revision url template specified in the controller&rsquo;s config.</
 </tr>
 <tr>
 <td>
+<code>containerStatuses</code></br>
+<a href="#serving.knative.dev/v1alpha1.ContainerStatuses">
+ContainerStatuses
+</a>
+</td>
+<td>
+<em>(Optional)</em>
+<p>ContainerStatuses is a slice of images present in .Spec.Container[*].Image
+to their respective digests and their container name.
+The digests are resolved during the creation of Revision.
+ContainerStatuses holds the container name and image digests
+for both serving and non serving containers.
+ref: http://bit.ly/image-digests.</p>
+</td>
+</tr>
+<tr>
+<td>
 <code>imageDigest</code></br>
 <em>
 string
@@ -5220,6 +5297,49 @@ TrafficTarget
 </p>
 <p>We inherit most of our fields by inlining the v1 type.
 Ultimately all non-v1 fields will be deprecated.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="serving.knative.dev/v1alpha1.ContainerStatuses">ContainerStatuses
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#serving.knative.dev/v1alpha1.RevisionStatus">RevisionStatus</a>)
+</p>
+<p>
+<p>ContainerStatuses holds the container name and image digests for both serving and non serving containers.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>name</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Name represents the container name and name must be a DNS_LABEL.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>imageDigest</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>ImageDigest is the digest value for the container's image.</p>
 </td>
 </tr>
 </tbody>
