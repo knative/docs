@@ -162,7 +162,8 @@ When "Metric" is set to "concurrency", Knative Serving revisions are scaled on o
 
 Configuring a concurrency target is a little special because Knative Serving has a **soft** and a **hard** concurrency limit. As the name suggests, the hard limit is an enforced upper bound. If concurrency ever hits that bound, additional requests will be buffered and wait until enough capacity is free to execute the requests. The soft limit is only a target for the autoscaler. In some situations and especially on bursts this value can be exceeded by a given replica.
 
-**Note:** It is recommended to only use the hard limit if your application has a clear need for it. Low hard limit values can have an impact on the throughput and latency of the application.
+**Note:** It is recommended to only use the hard limit if your application has a clear need for it. Low hard limit values can have an impact on the throughput and latency of the application.\
+**Note:** If both a soft and a hard limit are specified, the smaller of the two values will be used as to not have the autoscaler target a value that's not even allowed into the replica by the hard limit.
 
 #### Soft Limit (target)
 
@@ -216,11 +217,7 @@ spec:
 
 #### Hard Limit (containerConcurrency)
 
-The hard limit has no global setting and is only specifiable per-revision. Its per-revision setting is also not an annotation but is actually present on the revision's spec itself as `containerConcurrency`.
-
-Container concurrency's default value is "0", which means an unlimited number of requests are allowed to flow into the replica. A value above "0" specifies the exact amount of requests allowed to the replica at a time.
-
-**Note:** If both a soft and a hard limit are specified, the smaller of the two values will be used as to not have the autoscaler target a value that's not even allowed into the replica by the hard limit.
+The hard limit has no global setting and is only specifiable per-revision. Its per-revision setting is also not an annotation but is actually present on the revision's spec itself as `containerConcurrency`. Its default value is "0", which means an unlimited number of requests are allowed to flow into the replica. A value above "0" specifies the exact amount of requests allowed to the replica at a time.
 
 * **Global key:** n/a
 * **Per-revision spec key:** `containerConcurrency`
