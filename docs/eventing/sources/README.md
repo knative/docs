@@ -45,7 +45,7 @@ Name | Status | Support | Description
 [CloudStorageSource](https://github.com/google/knative-gcp/blob/master/docs/examples/cloudstoragesource/README.md) | Active Development | None | Registers for events of the specified types on the specified [Google Cloud Storage](https://cloud.google.com/storage/) bucket and optional object prefix. Brings those events into Knative.
 [Cron Job](https://knative.dev/docs/eventing/migration/ping) | Replaced by PingSource | None | Deprecated, replace with [PingSource](https://knative.dev/docs/eventing/migration/ping) or a [CronJob using SinkBinding](https://knative.dev/docs/eventing/samples/sinkbinding/)
 [GitHub](https://github.com/knative/eventing-contrib/blob/master/github/pkg/apis/sources/v1alpha1/githubsource_types.go) | Proof of Concept | None | Registers for events of the specified types on the specified GitHub organization/repository. Brings those events into Knative.
-[GitLab](https://gitlab.com/triggermesh/gitlabsource) | Proof of Concept | None | Registers for events of the specified types on the specified GitLab repository. Brings those events into Knative.
+[GitLab](https://github.com/knative/eventing-contrib/blob/master/gitlab/pkg/apis/sources/v1alpha1/gitlabsource_types.go) | Proof of Concept | None | Registers for events of the specified types on the specified GitLab repository. Brings those events into Knative.
 [Kubernetes](https://github.com/knative/eventing/blob/master/pkg/apis/sources/v1alpha1/apiserver_types.go) | Active Development | Knative | Brings Kubernetes API server events into Knative.
 [Ping](https://github.com/knative/eventing/blob/master/pkg/apis/sources/v1alpha2/ping_types.go) | In development | None | Uses an in-memory timer to produce events with a fixed payload on a specified cron schedule.
 [VMware](https://github.com/vmware-tanzu/sources-for-knative/tree/{{< branch >}}/pkg/apis/source/v1alpha1/vspheresource_types.go) | Active Development | None | Brings [vSphere](https://www.vmware.com/products/vsphere.html) events into Knative.
@@ -71,12 +71,12 @@ These are containers intended to be used with `ContainerSource`.
 
 Name | Status | Support | Description
 --- | --- | --- | ---
-[AWS CodeCommit](https://github.com/triggermesh/knative-lambda-sources/tree/master/awscodecommit) | Supported | TriggerMesh | Registers for events of the specified types on the specified AWS CodeCommit repository. Brings those events into Knative.
-[AWS Cognito](https://github.com/triggermesh/knative-lambda-sources/tree/master/awscognito) | Supported | TriggerMesh | Registers for AWS Cognito events. Brings those events into Knative.
-[AWS DynamoDB](https://github.com/triggermesh/knative-lambda-sources/tree/master/awsdynamodb) | Supported | TriggerMesh | Registers for events of on the specified AWS DynamoDB table. Brings those events into Knative.
-[AWS Kinesis](https://github.com/triggermesh/knative-lambda-sources/tree/master/awskinesis) | Supported | TriggerMesh | Registers for events on the specified AWS Kinesis stream. Brings those events into Knative.
-[AWS SNS](https://github.com/triggermesh/knative-lambda-sources/tree/master/awssns) | Supported | TriggerMesh | Registers for events of the specified AWS SNS endpoint. Brings those events into Knative.
-[AWS SQS](https://github.com/triggermesh/knative-lambda-sources/tree/master/awssqs) | Supported | TriggerMesh | Registers for events of the specified AWS SQS queue. Brings those events into Knative.
+[AWS CodeCommit](https://github.com/triggermesh/aws-event-sources/blob/master/cmd/awscodecommitsource/README.md) | Supported | TriggerMesh | Registers for events of the specified types on the specified AWS CodeCommit repository. Brings those events into Knative.
+[AWS Cognito](https://github.com/triggermesh/aws-event-sources/blob/master/cmd/awscognitosource/README.md) | Supported | TriggerMesh | Registers for AWS Cognito events. Brings those events into Knative.
+[AWS DynamoDB](https://github.com/triggermesh/aws-event-sources/blob/master/cmd/awsdynamodbsource/README.md) | Supported | TriggerMesh | Registers for events of on the specified AWS DynamoDB table. Brings those events into Knative.
+[AWS Kinesis](https://github.com/triggermesh/aws-event-sources/tree/master/cmd/awskinesissource/README.md) | Supported | TriggerMesh | Registers for events on the specified AWS Kinesis stream. Brings those events into Knative.
+[AWS SNS](https://github.com/triggermesh/aws-event-sources/tree/master/cmd/awssnssource) | Supported | TriggerMesh | Registers for events of the specified AWS SNS endpoint. Brings those events into Knative.
+[AWS SQS](https://github.com/triggermesh/aws-event-sources/tree/master/cmd/awssqssource/README.md) | Supported | TriggerMesh | Registers for events of the specified AWS SQS queue. Brings those events into Knative.
 [FTP / SFTP](https://github.com/vaikas-google/ftp) | Proof of concept | None | Watches for files being uploaded into a FTP/SFTP and generates events for those.
 [Heartbeat](https://github.com/Harwayne/auto-container-source/tree/master/heartbeat-source) | Proof of Concept | None | Uses an in-memory timer to produce events as the specified interval. Uses AutoContainerSource for underlying infrastructure.
 [Heartbeats](https://github.com/knative/eventing-contrib/tree/{{< branch >}}/cmd/heartbeats) | Proof of Concept | None | Uses an in-memory timer to produce events at the specified interval.
