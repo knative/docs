@@ -15,11 +15,8 @@ aliases:
  
   docs-reviewers:
   - abrennan89
-<<<<<<< HEAD
   - mpetason
-=======
   - jonatasbaldin
->>>>>>> Add jonatasbaldin in docs-reviewers
  
   productivity-approvers:
   - chaodaiG
