@@ -137,7 +137,7 @@ spec:
       containers:
       -  # This corresponds to
          # https://github.com/knative/eventing-contrib/tree/master/cmd/event_display
-         - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display@sha256:a214514d6ba674d7393ec8448dd272472b2956207acb3f83152d3071f0ab1911
+         image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display@sha256:a214514d6ba674d7393ec8448dd272472b2956207acb3f83152d3071f0ab1911
 ```
 
 ### Trigger
