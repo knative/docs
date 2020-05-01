@@ -1,41 +1,35 @@
 ---
-title: "Installing Knative components using Operators"
+title: "Installing Knative components using Operator"
 weight: 10
 type: "docs"
 ---
 
-Knative provides operators as tools to install, configure and manage Knative. This guide explains how to install and
-uninstall Knative using Knative operators.
-
-Each component in Knative has a separate operator for installation and configuration. This means that there is a [Serving operator](https://github.com/knative/serving-operator)
-and an [Eventing operator](https://github.com/knative/eventing-operator). Knative also releases both of them together as
-the [All-In-One operator](https://github.com/knative-sandbox/operator). You can choose to install them in one bundle or
-separately.
+Knative provides operator as a tools to install, configure and manage Knative. This guide explains how to install and
+uninstall Knative using Knative operator. Knative releases an [All-In-One operator](https://github.com/knative-sandbox/operator) to install both Knative Serving and Eventing components.
 
 ## Before you begin
 
-Knative installation using Operators requires the following:
+Knative installation using Operator requires the following:
 
 - A Kubernetes cluster v1.15 or newer, as well as a compatible kubectl. This guide assumes that you've already created
 a Kubernetes cluster. If you have only one node for your cluster, set CPUs to at least 6, Memory to at least 6.0 GB,
 Disk storage to at least 30 GB. If you have multiple nodes for your cluster, set CPUs to at least 2, Memory to at least
 4.0 GB, Disk storage to at least 20 GB for each node.
-- The Kubernetes cluster must be able to access the internet, since Knative operators download images online.
+- The Kubernetes cluster must be able to access the internet, since Knative operator downloads images online.
 - Istio:
     - [Download and install Istio](https://knative.dev/development/install/installing-istio/#downloading-istio-and-installing-crds). Go through all the 4 sub-steps.
     - [Update your Istio to use cluster local gateway](https://knative.dev/development/install/installing-istio/#updating-your-install-to-use-cluster-local-gateway).
 
-## Limitations of Knative Operators:
+## Limitations of Knative Operator:
 
-Knative Operators are still in Alpha phase. They have not been tested in a production environment, and should be used
+Knative Operator is still in Alpha phase. They have not been tested in a production environment, and should be used
 for development or test purposes only.
 
-## Install Knative with All-In-One operator
+## Install Knative with Knative Operator
 
-Knative has released an All-In-One operator to install both Serving and Eventing components. You can find the information
-about the releases on the [Releases page](https://github.com/knative-sandbox/operator/releases).
+You can find the release information of Knative Operator on the [Releases page](https://github.com/knative-sandbox/operator/releases).
 
-### Installing the All-In-One Knative Operator
+### Installing the Knative Operator
 
 __From releases__:
 
@@ -47,7 +41,7 @@ kubectl apply -f https://github.com/knative-sandbox/operator/releases/latest/dow
 
 __From source code__:
 
-You can also install Knative Operators from source using `ko`.
+You can also install Knative Operator from source using `ko`.
 
 1. Install the [ko](https://github.com/google/ko) build tool.
 1. Download the source code using the following command:
@@ -62,66 +56,19 @@ git clone https://github.com/knative-sandbox/operator.git
 ko apply -f config/
 ```
 
-The All-In-One operator installs both Serving and Eventing operators. Go through the following sections to verify your operator:
-
-- [Verify Knative Serving Operator](#verify-the-operator-installation)
-- [Verify Knative Eventing Operator](#verify-the-operator-installation-1)
-
-Install Knative Serving and Eventing with Operator CRs:
-
-- [Install Knative Serving](#installing-the-knative-serving-component)
-- [Install Knative Eventing](#installing-the-knative-eventing-component)
-
-If you would like to install Knative Serving and Knative Eventing separately, go through the following sections:
-
-- [Install Knative Serving using Operator](#installing-the-knative-serving-operator)
-- [Install Knative Eventing using Operator](#installing-the-knative-serving-operator)
-
-## Install Knative Serving with Operator:
-
-Information about Knative Serving Operator releases can be found on the [Releases page](https://github.com/knative/serving-operator/releases).
-
-### Installing the Knative Serving Operator
-
-__From releases__:
-
-Replace \<version\> with the latest version or the version you would like to install, and run the following command to
-install Knative Serving Operator:
-
-```
-kubectl apply -f https://github.com/knative/serving-operator/releases/download/<version>/serving-operator.yaml
-```
-
-__From source code__:
-
-You can also install Knative Operators from source using `ko`.
-
-1. Install the [ko](https://github.com/google/ko) build tool.
-1. Download the source code using the following command:
-
-```
-git clone https://github.com/knative/serving-operator.git
-```
-
-1. Install the operator in the root directory of the source using the following command:
-
-```
-ko apply -f config/
-```
-
 ### Verify the operator installation
 
-Verify the installation of Knative Serving Operator using the command:
+Verify the installation of Knative Operator using the command:
 
 ```
-kubectl get deployment knative-serving-operator
+kubectl get deployment knative-operator
 ```
 
 If the operator is installed correctly, the deployment should show a `Ready` status. Here is a sample output:
 
 ```
-NAME                       READY   UP-TO-DATE   AVAILABLE   AGE
-knative-serving-operator   1/1     1            1           19h
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+knative-operator   1/1     1            1           19h
 ```
 
 ### Track the log
@@ -129,7 +76,7 @@ knative-serving-operator   1/1     1            1           19h
 Use the following command to track the log of the operator:
 
 ```
-kubectl logs -f $(kubectl get pods -l name=knative-serving-operator -o name)
+kubectl logs -f $(kubectl get pods -l name=knative-operator -o name)
 ```
 
 ### Installing the Knative Serving component
@@ -162,67 +109,26 @@ is a sample output:
 
 ```
 NAME               READY   UP-TO-DATE   AVAILABLE   AGE
-activator          1/1     1            1           19h
-autoscaler         1/1     1            1           19h
-autoscaler-hpa     1/1     1            1           19h
-controller         1/1     1            1           19h
-networking-istio   1/1     1            1           19h
-webhook            1/1     1            1           19h
+activator          1/1     1            1           18s
+autoscaler         1/1     1            1           18s
+autoscaler-hpa     1/1     1            1           14s
+controller         1/1     1            1           18s
+istio-webhook      1/1     1            1           12s
+networking-istio   1/1     1            1           12s
+webhook            1/1     1            1           17s
 ```
 
-## Install Knative Eventing with Operator:
-
-Information about Knative Eventing Operator releases can be found on the [Releases page](https://github.com/knative/eventing-operator/releases).
-
-### Installing the Knative Eventing Operator
-
-__From releases__:
-
-Replace \<version\> with the latest version or the version you would like to install, and run the following command to
-install Knative Eventing Operator:
+3. Check the status of Knative Serving Custom Resource:
 
 ```
-kubectl apply -f https://github.com/knative/eventing-operator/releases/download/<version>/eventing-operator.yaml
+kubectl get KnativeServing knative-serving -n knative-serving
 ```
 
-__From source code__:
-
-You can also install Knative Operators from source using `ko`.
-
-1. Install the [ko](https://github.com/google/ko) build tool.
-1. Download the source code using the following command:
+You should get, if you successfully install Knative Serving:
 
 ```
-git clone https://github.com/knative/eventing-operator.git
-```
-
-1. Install the operator in the root directory of the source using the following command:
-
-```
-ko apply -f config/
-```
-
-### Verify the operator installation
-
-Verify the installation of Knative Eventing Operator using the command:
-
-```
-kubectl get deployment knative-eventing-operator
-```
-
-If the operator is installed correctly, the deployment should show a `Ready` status. Here is a sample output:
-
-```
-NAME                       READY   UP-TO-DATE   AVAILABLE   AGE
-knative-eventing-operator   1/1     1            1           19h
-```
-
-### Track the log
-
-Use the following command to track the log of the operator:
-
-```
-kubectl logs -f $(kubectl get pods -l name=knative-eventing-operator -o name)
+NAME              VERSION             READY   REASON
+knative-serving   <version number>    True
 ```
 
 ### Installing the Knative Eventing component
@@ -255,11 +161,27 @@ is a sample output:
 
 ```
 NAME                  READY   UP-TO-DATE   AVAILABLE   AGE
-broker-controller     1/1     1            1           42h
-eventing-controller   1/1     1            1           42h
-eventing-webhook      1/1     1            1           42h
-imc-controller        1/1     1            1           42h
-imc-dispatcher        1/1     1            1           42h
+broker-controller      1/1     1            1           63s
+broker-filter          1/1     1            1           62s
+broker-ingress         1/1     1            1           62s
+eventing-controller    1/1     1            1           67s
+eventing-webhook       1/1     1            1           67s
+imc-controller         1/1     1            1           59s
+imc-dispatcher         1/1     1            1           59s
+mt-broker-controller   1/1     1            1           62s
+```
+
+3. Check the status of Knative Eventing Custom Resource:
+
+```
+kubectl get KnativeEventing knative-eventing -n knative-eventing
+```
+
+You should get, if you successfully install Knative Serving:
+
+```
+NAME               VERSION             READY   REASON
+knative-eventing   <version number>    True
 ```
 
 ## Uninstall Knative
@@ -272,27 +194,6 @@ Remove the Knative Serving CR:
 kubectl delete KnativeServing knative-serving -n knative-serving
 ```
 
-Knative Serving operator prevents unsafe removal of Knative serving resources. Even if the operator CR is successfully
-removed, all the CRDs in Knative Serving are still kept in the cluster. All your resources relying on Knative CRDs
-can still work.
-
-### Removing the Knative Serving Operator:
-
-If you have installed Knative Serving using the Release page, remove the operator using the following command:
-
-```
-kubectl delete -f https://github.com/knative/serving-operator/releases/download/<version>/serving-operator.yaml
-```
-
-Replace <version> with the version number of Knative Serving you have installed.
-
-If you have installed Knative Serving from source, uninstall it using the following command while in the root directory
-for the source:
-
-```
-ko delete -f config/
-```
-
 ### Removing Knative Eventing component
 
 Remove the Knative Eventing CR:
@@ -301,19 +202,19 @@ Remove the Knative Eventing CR:
 kubectl delete KnativeEventing knative-eventing -n knative-eventing
 ```
 
-Knative Eventing operator also prevents unsafe removal of Knative Eventing resources by keeping the Knative Eventing CRDs.
+Knative operator prevents unsafe removal of Knative resources. Even if the Knative Serving and Knative Eventing CRs are
+successfully removed, all the CRDs in Knative are still kept in the cluster. All your resources relying on Knative CRDs
+can still work.
 
-### Removing Knative Eventing Operator:
+### Removing the Knative Operator:
 
-If you have installed Knative Eventing using the Release page, remove the operator using the following command:
+If you have installed Knative using the Release page, remove the operator using the following command:
 
 ```
-kubectl delete -f https://github.com/knative/eventing-operator/releases/download/<version>/eventing-operator.yaml
+kubectl delete -f https://github.com/knative-sandbox/operator/releases/latest/download/operator.yaml
 ```
 
-Replace <version> with the version number of Knative Eventing you have installed.
-
-If you have installed Knative Eventing from source, uninstall it using the following command while in the root directory
+If you have installed Knative from source, uninstall it using the following command while in the root directory
 for the source:
 
 ```
