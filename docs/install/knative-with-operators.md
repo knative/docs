@@ -4,28 +4,29 @@ weight: 10
 type: "docs"
 ---
 
-Knative provides operator as a tools to install, configure and manage Knative. This guide explains how to install and
-uninstall Knative using Knative operator. Knative releases an [All-In-One operator](https://github.com/knative-sandbox/operator) to install both Knative Serving and Eventing components.
+Knative provides an [operator](https://github.com/knative-sandbox/operator)  as a tool to install, configure and manage Knative. The Knative operator leverages custom objects
+in the cluster to define and manage the installed Knative software. This guide explains how to install and uninstall
+Knative using Knative operator.
 
 ## Before you begin
 
-Knative installation using Operator requires the following:
+Knative installation using the Operator requires the following:
 
 - A Kubernetes cluster v1.15 or newer, as well as a compatible kubectl. This guide assumes that you've already created
 a Kubernetes cluster. If you have only one node for your cluster, set CPUs to at least 6, Memory to at least 6.0 GB,
 Disk storage to at least 30 GB. If you have multiple nodes for your cluster, set CPUs to at least 2, Memory to at least
 4.0 GB, Disk storage to at least 20 GB for each node.
-- The Kubernetes cluster must be able to access the internet, since Knative operator downloads images online.
+- The Kubernetes cluster must be able to access the internet, since the Knative operator downloads images online.
 - Istio:
     - [Download and install Istio](https://knative.dev/development/install/installing-istio/#downloading-istio-and-installing-crds). Go through all the 4 sub-steps.
     - [Update your Istio to use cluster local gateway](https://knative.dev/development/install/installing-istio/#updating-your-install-to-use-cluster-local-gateway).
 
 ## Limitations of Knative Operator:
 
-Knative Operator is still in Alpha phase. They have not been tested in a production environment, and should be used
+Knative Operator is still in Alpha phase. It has not been tested in a production environment, and should be used
 for development or test purposes only.
 
-## Install Knative with Knative Operator
+## Install Knative with the Knative Operator
 
 You can find the release information of Knative Operator on the [Releases page](https://github.com/knative-sandbox/operator/releases).
 
@@ -36,7 +37,7 @@ __From releases__:
 Install the latest Knative operator with the following command:
 
 ```
-kubectl apply -f https://github.com/knative-sandbox/operator/releases/latest/download/operator.yaml
+kubectl apply -f {{< artifact org="knative-sandbox" repo="operator" file="operator.yaml" >}}
 ```
 
 __From source code__:
@@ -76,7 +77,7 @@ knative-operator   1/1     1            1           19h
 Use the following command to track the log of the operator:
 
 ```
-kubectl logs -f $(kubectl get pods -l name=knative-operator -o name)
+kubectl logs -f deploy/knative-operator
 ```
 
 ### Installing the Knative Serving component
@@ -124,7 +125,7 @@ webhook            1/1     1            1           17s
 kubectl get KnativeServing knative-serving -n knative-serving
 ```
 
-You should get, if you successfully install Knative Serving:
+If Knative Serving is successfully installed, you should see:
 
 ```
 NAME              VERSION             READY   REASON
@@ -177,7 +178,7 @@ mt-broker-controller   1/1     1            1           62s
 kubectl get KnativeEventing knative-eventing -n knative-eventing
 ```
 
-You should get, if you successfully install Knative Serving:
+If Knative Eventing is successfully installed, you should see:
 
 ```
 NAME               VERSION             READY   REASON
@@ -211,7 +212,7 @@ can still work.
 If you have installed Knative using the Release page, remove the operator using the following command:
 
 ```
-kubectl delete -f https://github.com/knative-sandbox/operator/releases/latest/download/operator.yaml
+kubectl delete -f {{< artifact org="knative-sandbox" repo="operator" file="operator.yaml" >}}
 ```
 
 If you have installed Knative from source, uninstall it using the following command while in the root directory
