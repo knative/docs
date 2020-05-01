@@ -7,10 +7,8 @@ type: "docs"
 Knative provides operators as tools to install, configure and manage Knative. This guide explains how to install and
 uninstall Knative using Knative operators.
 
-Each component in Knative has a separate operator for installation and configuration. This means that there is a [Serving operator](https://github.com/knative/serving-operator)
-and an [Eventing operator](https://github.com/knative/eventing-operator). Knative also releases both of them together as
-the [All-In-One operator](https://github.com/knative-sandbox/operator). You can choose to install them in one bundle or
-separately.
+New in 0.14, Knative offers a [combined operator for managing both Serving and Eventing](https://github.com/knative-sandbox/operator). For release 0.14,
+you may **alternatively** choose to install the [Serving operator](https://github.com/knative/serving-operator) and [Eventing operator](https://github.com/knative/eventing-operator) instead of the combined operator.
 
 ## Before you begin
 
@@ -30,7 +28,7 @@ Disk storage to at least 30 GB. If you have multiple nodes for your cluster, set
 Knative Operators are still in Alpha phase. They have not been tested in a production environment, and should be used
 for development or test purposes only.
 
-## Install Knative with All-In-One operator
+## Option 1: Install Knative with All-In-One operator
 
 Knative has released an All-In-One operator to install both Serving and Eventing components. You can find the information
 about the releases on the [Releases page](https://github.com/knative-sandbox/operator/releases).
@@ -72,7 +70,10 @@ Install Knative Serving and Eventing with Operator CRs:
 - [Install Knative Serving](#installing-the-knative-serving-component)
 - [Install Knative Eventing](#installing-the-knative-eventing-component)
 
-If you would like to install Knative Serving and Knative Eventing separately, go through the following sections:
+## Option 2: Install Knative with separate operators
+
+Alternatively, if you would like to install Knative Serving and Knative Eventing Operators separately, go through the
+following sections:
 
 - [Install Knative Serving using Operator](#installing-the-knative-serving-operator)
 - [Install Knative Eventing using Operator](#installing-the-knative-serving-operator)
