@@ -27,8 +27,8 @@ Disk storage to at least 30 GB. If you have multiple nodes for your cluster, set
 
 ## Limitations of Knative Operators:
 
-Knative Operators use custom resources (CRs) to configure your Knative deployment. They have not been tested in a production
-environment, and should be used for development or test purposes only.
+Knative Operators are still in Alpha phase. They have not been tested in a production environment, and should be used
+for development or test purposes only.
 
 ## Install Knative with All-In-One operator
 
