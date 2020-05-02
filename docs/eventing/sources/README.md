@@ -67,7 +67,7 @@ Name | Status | Support | Description
 
 ### ContainerSource Containers
 
-These are containers intended to be used with `ContainerSource`.
+These are containers intended to be used with `ContainerSource`. See the docs [here](../samples/container-source/README.md).
 
 Name | Status | Support | Description
 --- | --- | --- | ---
@@ -86,8 +86,8 @@ Name | Status | Support | Description
 
 ### SinkBindings
 
-These are containers intended to be used with `SinkBinding`.
+These are containers intended to be used with `SinkBinding`. See the docs [here](../samples/sinkbinding/README.md).
 
 Name | Status | Support | Description
 --- | --- | --- | ---
-[Konnek](https://konnek.github.io/docs/#/) | Active Development | None | Retrieves events from cloud platforms – like AWS and GCP –, transform them into CloudEvents and consume in Knative using SinkBinding.
+[Konnek](https://konnek.github.io/docs/#/) | Active Development | None | Retrieves events from cloud platforms (like AWS and GCP) and transforms them into CloudEvents for consumption in Knative.
