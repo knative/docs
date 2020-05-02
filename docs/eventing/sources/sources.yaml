@@ -202,3 +202,12 @@ containers:
     support: None
     description: >
       Watches for files being uploaded into a FTP/SFTP and generates events for those.
+
+# These are intended to be used with SinkBinding, but are not CRDs.
+sinkBindings:
+  - name: Konnek
+    url: https://konnek.github.io/docs/#/
+    status: Active Development
+    support: None
+    description: >
+      Retrieves events from cloud platforms (like AWS and GCP) and transforms them into CloudEvents for consumption in Knative.
