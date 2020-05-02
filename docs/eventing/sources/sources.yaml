@@ -210,4 +210,4 @@ sinkBindings:
     status: Active Development
     support: None
     description: >
-      Retrieves events from cloud platforms – like AWS and GCP –, transform them into CloudEvents and consume in Knative using SinkBinding.
+      Retrieves events from cloud platforms (like AWS and GCP) and transforms them into CloudEvents for consumption in Knative.
