@@ -34,7 +34,8 @@ metadata:
 spec:
   template:
     metadata:
-      autoscaling.knative.dev/target: "70"
+      annotations:
+        autoscaling.knative.dev/target: "70"
     spec:
       containers:
         - image: gcr.io/knative-samples/helloworld-go
@@ -88,7 +89,8 @@ metadata:
 spec:
   template:
     metadata:
-      autoscaling.knative.dev/class: "kpa.autoscaling.knative.dev"
+      annotations:
+        autoscaling.knative.dev/class: "kpa.autoscaling.knative.dev"
     spec:
       containers:
         - image: gcr.io/knative-samples/helloworld-go
@@ -142,7 +144,8 @@ metadata:
 spec:
   template:
     metadata:
-      autoscaling.knative.dev/metric: "rps"
+      annotations:
+        autoscaling.knative.dev/metric: "rps"
     spec:
       containers:
         - image: gcr.io/knative-samples/helloworld-go
@@ -184,7 +187,8 @@ metadata:
 spec:
   template:
     metadata:
-      autoscaling.knative.dev/target: "200"
+      annotations:
+        autoscaling.knative.dev/target: "200"
     spec:
       containers:
         - image: gcr.io/knative-samples/helloworld-go
@@ -268,7 +272,8 @@ metadata:
 spec:
   template:
     metadata:
-      autoscaling.knative.dev/targetUtilizationPercentage: "80"
+      annotations:
+        autoscaling.knative.dev/targetUtilizationPercentage: "80"
     spec:
       containers:
         - image: gcr.io/knative-samples/helloworld-go
@@ -320,7 +325,8 @@ metadata:
 spec:
   template:
     metadata:
-      autoscaling.knative.dev/target: "150"
+      annotations:
+        autoscaling.knative.dev/target: "150"
     spec:
       containers:
         - image: gcr.io/knative-samples/helloworld-go
@@ -376,7 +382,8 @@ metadata:
 spec:
   template:
     metadata:
-      autoscaling.knative.dev/minScale: "3"
+      annotations:
+        autoscaling.knative.dev/minScale: "3"
     spec:
       containers:
         - image: gcr.io/knative-samples/helloworld-go
@@ -405,7 +412,8 @@ metadata:
 spec:
   template:
     metadata:
-      autoscaling.knative.dev/maxScale: "3"
+      annotations:
+        autoscaling.knative.dev/maxScale: "3"
     spec:
       containers:
         - image: gcr.io/knative-samples/helloworld-go
@@ -523,7 +531,8 @@ metadata:
 spec:
   template:
     metadata:
-      autoscaling.knative.dev/window: "40s"
+      annotations:
+        autoscaling.knative.dev/window: "40s"
     spec:
       containers:
         - image: gcr.io/knative-samples/helloworld-go
@@ -575,7 +584,8 @@ metadata:
 spec:
   template:
     metadata:
-      autoscaling.knative.dev/panicWindowPercentage: "20.0"
+      annotations:
+        autoscaling.knative.dev/panicWindowPercentage: "20.0"
     spec:
       containers:
         - image: gcr.io/knative-samples/helloworld-go
@@ -627,7 +637,8 @@ metadata:
 spec:
   template:
     metadata:
-      autoscaling.knative.dev/panicThresholdPercentage: "150.0"
+      annotations:
+        autoscaling.knative.dev/panicThresholdPercentage: "150.0"
     spec:
       containers:
         - image: gcr.io/knative-samples/helloworld-go
