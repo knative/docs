@@ -32,7 +32,7 @@ metadata:
   name: imc-channel
 data:
   channelTemplateSpec: |
-    apiVersion: messaging.knative.dev/v1alpha1
+    apiVersion: messaging.knative.dev/v1beta1
     kind: InMemoryChannel
 ```
 
