@@ -49,7 +49,10 @@ function pr_only_contains() {
 # List changed files in the current PR.
 # This is implemented as a function so it can be mocked in unit tests.
 function list_changed_files() {
-  /workspace/githubhelper -list-changed-files -github-token /etc/repoview-token/token
+  # Avoid warning when there are more than 1085 files renamed:
+  # https://stackoverflow.com/questions/7830728/warning-on-diff-renamelimit-variable-when-doing-git-push
+  git config diff.renames 0
+  git --no-pager diff --name-only ${PULL_BASE_SHA}..${PULL_SHA}
 }
 
 # Initialize flags and context for presubmit tests:
@@ -179,7 +182,7 @@ function default_build_test_runner() {
   fi
   # Get all build tags in go code (ignore /vendor and /hack)
   local tags="$(grep -r '// +build' . \
-      | grep -v '^./vendor/' | grep -v '^./hack/' | cut -f3 -d' ' | sort | uniq | tr '\n' ' ')"
+    | grep -v '^./vendor/' | grep -v '^./hack/' | cut -f3 -d' ' | sort | uniq | tr '\n' ' ')"
   local tagged_pkgs="$(grep -r '// +build' . \
     | grep -v '^./vendor/' | grep -v '^./hack/' | grep ":// +build " | cut -f1 -d: | xargs dirname \
     | sort | uniq | tr '\n' ' ')"
@@ -198,7 +201,7 @@ function default_build_test_runner() {
   create_junit_xml _build_tests Build_Go "${errors_go}"
   # Check that we don't have any forbidden licenses in our images.
   subheader "Checking for forbidden licenses"
-  report_build_test Check_Licenses check_licenses ${go_pkg_dirs} || failed=1
+  report_build_test Check_Licenses check_licenses || failed=1
   return ${failed}
 }
 

@@ -219,6 +219,42 @@ function wait_until_service_has_external_ip() {
   return 1
 }
 
+# Waits until the given service has an external address (IP/hostname) that allow HTTP connections.
+# Parameters: $1 - namespace.
+#             $2 - service name.
+function wait_until_service_has_external_http_address() {
+  local ns=$1
+  local svc=$2
+  local sleep_seconds=6
+  local attempts=150
+
+  echo -n "Waiting until service $ns/$svc has an external address (IP/hostname)"
+  for attempt in $(seq 1 $attempts); do  # timeout after 15 minutes
+    local address=$(kubectl get svc $svc -n $ns -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
+    if [[ -n "${address}" ]]; then
+      echo -e "Service $ns/$svc has IP $address"
+    else
+      address=$(kubectl get svc $svc -n $ns -o jsonpath="{.status.loadBalancer.ingress[0].hostname}")
+      if [[ -n "${address}" ]]; then
+        echo -e "Service $ns/$svc has hostname $address"
+      fi
+    fi
+    if [[ -n "${address}" ]]; then
+      local status=$(curl -s -o /dev/null -w "%{http_code}" http://"${address}")
+      if [[ $status != "" && $status != "000" ]]; then
+        echo -e "$address is ready: prober observed HTTP $status"
+        return 0
+      else
+        echo -e "$address is not ready: prober observed HTTP $status"
+      fi
+    fi
+    echo -n "."
+    sleep $sleep_seconds
+  done
+  echo -e "\n\nERROR: timeout waiting for service $ns/$svc to have an external HTTP address"
+  return 1
+}
+
 # Waits for the endpoint to be routable.
 # Parameters: $1 - External ingress IP address.
 #             $2 - cluster hostname.
@@ -357,7 +393,7 @@ function create_junit_xml() {
   local failure=""
   if [[ "$3" != "" ]]; then
     # Transform newlines into HTML code.
-    # Also escape `<` and `>` as here: https://github.com/golang/go/blob/50bd1c4d4eb4fac8ddeb5f063c099daccfb71b26/src/encoding/json/encode.go#L48, 
+    # Also escape `<` and `>` as here: https://github.com/golang/go/blob/50bd1c4d4eb4fac8ddeb5f063c099daccfb71b26/src/encoding/json/encode.go#L48,
     # this is temporary solution for fixing https://github.com/knative/test-infra/issues/1204,
     # which should be obsolete once Test-infra 2.0 is in place
     local msg="$(echo -n "$3" | sed 's/$/\&#xA;/g' | sed 's/</\\u003c/' | sed 's/>/\\u003e/' | sed 's/&/\\u0026/' | tr -d '\n')"
@@ -479,6 +515,10 @@ function start_latest_knative_eventing() {
 #             $3..$n - parameters passed to the tool.
 function run_go_tool() {
   local tool=$2
+  local action=get
+  [[ $1 =~ ^[\./].* ]] && action=install
+  # Avoid running `go get` from root dir of the repository, as it can change go.sum and go.mod files.
+  # See discussions in https://github.com/golang/go/issues/27643.
   if [[ -z "$(which ${tool})" ]]; then
     local action=get
     [[ $1 =~ ^[\./].* ]] && action=install
@@ -489,35 +529,36 @@ function run_go_tool() {
       local install_failed=0
       # Swallow the output as we are returning the stdout in the end.
       pushd "${temp_dir}" > /dev/null 2>&1
-      go ${action} $1 || install_failed=1
+      GOFLAGS="" go ${action} $1 || install_failed=1
       popd > /dev/null 2>&1
       (( install_failed )) && return ${install_failed}
     else
-      go ${action} $1
+      GOFLAGS="" go ${action} $1
     fi
   fi
   shift 2
   ${tool} "$@"
 }
 
-# Run dep-collector to update licenses.
+# Run go-licenses to update licenses.
 # Parameters: $1 - output file, relative to repo root dir.
-#             $2...$n - directories and files to inspect.
+#             $2 - directory to inspect.
 function update_licenses() {
-  cd ${REPO_ROOT_DIR} || return 1
+  cd "${REPO_ROOT_DIR}" || return 1
   local dst=$1
+  local dir=$2
   shift
-  run_go_tool knative.dev/test-infra/tools/dep-collector dep-collector $@ > ./${dst}
+  run_go_tool github.com/google/go-licenses go-licenses save "${dir}" --save_path="${dst}" --force || return 1
+  # Hack to make sure directories retain write permissions after save. This
+  # can happen if the directory being copied is a Go module.
+  # See https://github.com/google/go-licenses/issues/11
+  chmod -R +w "${dst}"
 }
 
-# Run dep-collector to check for forbidden liceses.
-# Parameters: $1...$n - directories and files to inspect.
+# Run go-licenses to check for forbidden licenses.
 function check_licenses() {
-  # Fetch the google/licenseclassifier for its license db
-  rm -fr ${GOPATH}/src/github.com/google/licenseclassifier
-  go get -u github.com/google/licenseclassifier
-  # Check that we don't have any forbidden licenses in our images.
-  run_go_tool knative.dev/test-infra/tools/dep-collector dep-collector -check $@
+  # Check that we don't have any forbidden licenses.
+  run_go_tool github.com/google/go-licenses go-licenses check "${REPO_ROOT_DIR}/..." || return 1
 }
 
 # Run the given linter on the given files, checking it exists first.
