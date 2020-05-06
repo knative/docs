@@ -501,14 +501,14 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:4873807593a0ddd71e64abd530bda23d5f7ed3ef7185ef70fe40effef39f5662"
+  digest = "1:4fc77d1a195bf1eceaa2842e03d195140c03415c7645a11a07bf8cabc3b2a65d"
   name = "knative.dev/test-infra"
   packages = [
     "scripts",
     "tools/dep-collector",
   ]
   pruneopts = "UT"
-  revision = "f7c1fafc1cdecbcf878b9768d27ff37a478fcd94"
+  revision = "e71b1288c15c09476899c526a0d0b0ef7d2d7f20"
 
 [solve-meta]
   analyzer-name = "dep"
