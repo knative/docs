@@ -256,10 +256,14 @@ with correct CloudEvent headers set.
    ```shell
    kubectl --namespace knative-samples run curl --image=radial/busyboxplus:curl -it
    ```
-1. Run the following in the SSH terminal
+1. Get the Broker URL
+   ```shell
+   kubectl --namespace knative-samples get broker default
+   ```
+1. Run the following in the SSH terminal. Please replace the URL with the URL of the default broker.
 
    ```shell
-   curl -v "default-broker.knative-samples.svc.cluster.local" \
+   curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/knative-samples/default" \
        -X POST \
        -H "Ce-Id: 536808d3-88be-4077-9d7a-a3f162705f79" \
        -H "Ce-Specversion: 1.0" \
@@ -277,7 +281,9 @@ Helloworld-go app logs the context and the msg of the above event, and replies
 back with another event.
 
 1.  Display helloworld-go app logs
-    `shell kubectl --namespace knative-samples logs -l app=helloworld-go --tail=50`
+    ```shell 
+    kubectl --namespace knative-samples logs -l app=helloworld-go --tail=50 
+    ```
     You should see something similar to:
 
     ```shell
