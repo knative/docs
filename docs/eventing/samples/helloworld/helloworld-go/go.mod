@@ -1,6 +1,6 @@
 module knative.dev/docs/docs/eventing/samples/helloworld/helloworld-go
 
-go 1.13
+go 1.14
 
 require (
 	github.com/cloudevents/sdk-go/v2 v2.0.0-RC2
