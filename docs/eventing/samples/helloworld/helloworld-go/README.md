@@ -281,8 +281,8 @@ Helloworld-go app logs the context and the msg of the above event, and replies
 back with another event.
 
 1.  Display helloworld-go app logs
-    ```shell 
-    kubectl --namespace knative-samples logs -l app=helloworld-go --tail=50 
+    ```shell
+    kubectl --namespace knative-samples logs -l app=helloworld-go --tail=50
     ```
     You should see something similar to:
 
