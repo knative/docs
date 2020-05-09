@@ -31,11 +31,9 @@ namespace CloudEventsSample
                 context.HttpContext.Response.Headers.TryAdd(header.Key, new StringValues(header.Value.ToArray()));
             }
 
-            await using (var stream = await this.content.ReadAsStreamAsync())
-            {
-                await stream.CopyToAsync(context.HttpContext.Response.Body);
-                await context.HttpContext.Response.Body.FlushAsync();
-            }
+            await using var stream = await this.content.ReadAsStreamAsync();
+            await stream.CopyToAsync(context.HttpContext.Response.Body);
+            await context.HttpContext.Response.Body.FlushAsync();
         }
     }
 }
