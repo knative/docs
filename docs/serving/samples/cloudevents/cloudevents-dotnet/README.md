@@ -1,6 +1,6 @@
 ---
-title: "Cloud Events - .Net Core 3.1"
-linkTitle: ".Net Core 3.1"
+title: "Cloud Events - C#"
+linkTitle: "C#"
 weight: 1
 type: "docs"
 ---
