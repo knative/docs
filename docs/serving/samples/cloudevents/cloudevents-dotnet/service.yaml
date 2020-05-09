@@ -1,0 +1,16 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: cloudevents-dotnet
+  namespace: default
+spec:
+  template:
+    spec:
+      containers:
+        - image: <image>
+          ports:
+          - containerPort: 80
+          # Uncomment below to send events somewhere.
+          #env:
+          #- name: K_SINK
+          #  value: http://default-broker.default.svc.cluster.local
