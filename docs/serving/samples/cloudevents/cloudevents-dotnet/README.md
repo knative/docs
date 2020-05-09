@@ -72,7 +72,7 @@ $ curl -X POST \
     -H "ce-type: curl.demo"  \
     -H "ce-id: 123-abc"  \
     -d '{"name":"Dave"}' \
-    http://cloudevents-dotnet.default.1.2.3.4.xip.io
+    http://cloudevents-dotnet.default.1.2.3.4.xip.io/api/events
 ```
 
 You will get back:
@@ -80,6 +80,9 @@ You will get back:
 ```shell
 {"message":"Hello, Dave"}
 ```
+
+To send a cloud event to another URL, replace the URL in the curl command with
+`http://cloudevents-dotnet.default.1.2.3.4.xip.io/api/events/sink`
 
 ## Removing the sample app deployment
 
