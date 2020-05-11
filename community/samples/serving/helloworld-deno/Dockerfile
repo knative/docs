@@ -1,7 +1,6 @@
 FROM hayd/alpine-deno:0.38.0
 EXPOSE 8080
 WORKDIR /app
- 
 # Prefer not to run as root.
 USER deno
  
