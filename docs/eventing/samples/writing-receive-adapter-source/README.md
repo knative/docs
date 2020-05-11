@@ -12,7 +12,7 @@ Just want to see the code? The reference project is
 ## Target Audience
 
 The target audience is already familiar with Kubernetes and Go development and
-wants to develope a new event source, importing their custom events via Knative
+wants to develop a new event source, importing their custom events via Knative
 Eventing into the Knative system.
 
 ## Before You Begin
