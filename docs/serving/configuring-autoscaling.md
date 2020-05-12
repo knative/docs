@@ -221,15 +221,26 @@ spec:
 
 #### Hard Limit (containerConcurrency)
 
-The hard limit has no global setting and is only specifiable per-revision. Its per-revision setting is also not an annotation but is actually present on the revision's spec itself as `containerConcurrency`. Its default value is "0", which means an unlimited number of requests are allowed to flow into the replica. A value above "0" specifies the exact amount of requests allowed to the replica at a time.
+The hard limit has its global setting in the `config-defaults` config map and can also be specifiable per-revision. Its per-revision setting is also not an annotation but is actually present on the revision's spec itself as `containerConcurrency`. Its default value is "0", which means an unlimited number of requests are allowed to flow into the replica. A value above "0" specifies the exact amount of requests allowed to the replica at a time.
 
-* **Global key:** n/a
+* **Global key:** `container-concurrency` (`config-defaults` config map)
 * **Per-revision spec key:** `containerConcurrency`
 * **Possible values:** integer
 * **Default:** `0`, which means unlimited
 
 **Example:**
 {{< tabs name="container-concurrency" default="Per Revision" >}}
+{{% tab name="Global (ConfigMap)" %}}
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+ name: config-defaults
+ namespace: knative-serving
+data:
+ container-concurrency: "50"
+```
+{{< /tab >}}
 {{% tab name="Per Revision" %}}
 ```yaml
 apiVersion: serving.knative.dev/v1
