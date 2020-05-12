@@ -12,7 +12,7 @@ Broker).
 There can be different classes of Brokers providing different kinds
 of semantics around durability of events, performance, etc. The Broker that is
 part of the Knative Eventing repo is used for these examples, it uses Knative
-[Channels](./channels/) for delivering events. You can read more details about
+[Channels](../channels/) for delivering events. You can read more details about
 [Channel Based Broker](./channel-based-broker.md). Simple example showing a `Broker`
 where the configuration is specified in a `ConfigMap` config-br-default-channel,
 which uses `InMemoryChannel`:
@@ -187,7 +187,7 @@ types, sources (or any other CloudEvents attribute), and subscribers.
 
 ### Emitting Events using Ping Source
 
-Knative Eventing comes with a [Ping Source](./samples/ping-source/README.md) which
+Knative Eventing comes with a [Ping Source](../samples/ping-source/README.md) which
 emits an event on a configured schedule. For this we'll configure it to emit
 events once a minute, saying, yes, you guessed it `Hello World!`.
 
