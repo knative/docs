@@ -221,9 +221,11 @@ spec:
 
 #### Hard Limit (containerConcurrency)
 
-The hard limit has no global setting and is only specifiable per-revision. Its per-revision setting is also not an annotation but is actually present on the revision's spec itself as `containerConcurrency`. Its default value is "0", which means an unlimited number of requests are allowed to flow into the replica. A value above "0" specifies the exact amount of requests allowed to the replica at a time.
+The per-revision setting for the hard limit is not an annotation but is actually present on the revision's spec itself as `containerConcurrency`. Its default value is "0", which means an unlimited number of requests are allowed to flow into the replica. A value above "0" specifies the exact amount of requests allowed to the replica at a time.
 
-* **Global key:** n/a
+In order to avoid changing existing revisions if the default is changed, the global default for the hard limit is configured via the `config-defaults.yaml` config map. If a revision does not specify a `containerConcurrency` the value from the `container-concurrency` property of the `config-defaults.yaml` config map is defaulted on to the revision. This avoids the value changing for the lifetime of the revision, even if the global default changes.
+
+* **Global key:** `container-concurrency` (in `config-defaults.yaml` config map)
 * **Per-revision spec key:** `containerConcurrency`
 * **Possible values:** integer
 * **Default:** `0`, which means unlimited
