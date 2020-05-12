@@ -2,24 +2,12 @@ You can install and configure the Apache Kafka CRD (`KafkaChannel`) as the defau
 
 ## Prerequisites
 
-You must ensure that you meet the [prerequisites listed in the Apache Kafka overview](../README.md).
-
-You must also have the following tools installed:
-- `curl`
-- `sed`
+- Ensure that you meet the [prerequisites listed in the Apache Kafka overview](../README.md).
+- A Kubernetes cluster with [Knative Kafka Channel installed](../../../../install/README.md).
 
 ## Creating a `KafkaChannel` channel CRD
 
-Install the `KafkaChannel` sub-component on your Knative Eventing cluster:
-   ```
-   curl -L "https://storage.googleapis.com/knative-releases/eventing-contrib/latest/kafka-channel.yaml" \
-    | sed 's/REPLACE_WITH_CLUSTER_URL/my-cluster-kafka-bootstrap.kafka:9092/' \
-    | kubectl apply --filename -
-   ```
-
-> Note: The above assumes that you have Apache Kafka installed in the `kafka`, as discussed [here](../README.md)!
-
-Once the `KafkaChannel` API is available, create a new object by configuring the YAML file as follows:
+Create a new object by configuring the YAML file as follows:
 
 ```
 cat <<-EOF | kubectl apply -f -
@@ -33,8 +21,6 @@ spec:
   replicationFactor: 1
 EOF
 ```
-
-You can now set the `KafkaChannel` CRD as the default channel configuration.
 
 ## Specifying the default channel configuration
 
@@ -69,7 +55,7 @@ Now that `KafkaChannel` is set as the default channel configuration, you can use
 ```
 cat <<-EOF | kubectl apply -f -
 ---
-apiVersion: messaging.knative.dev/v1alpha1
+apiVersion: messaging.knative.dev/v1beta1
 kind: Channel
 metadata:
   name: testchannel-one
@@ -126,7 +112,7 @@ To use the Apache Kafka based broker, let's take a look at a simple demo. Use th
     ```
 2. Install a source that publishes to the default broker
     ```
-    kubectl apply --filename 020-k8s-events.yaml
+    kubectl apply -f 020-k8s-events.yaml
     ```
 
 3. Create a trigger that routes the events to the `ksvc`:
