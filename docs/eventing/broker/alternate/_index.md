@@ -1,6 +1,5 @@
 ---
-title: "Vendor Specific Brokers"
-linkTitle: "Vendor Specific Brokers"
+title: "Alternate Brokers"
 weight: 60
 type: "docs"
 ---

@@ -1,9 +1,3 @@
----
-title: "Broker and Trigger"
-weight: 20
-type: "docs"
----
-
 Broker and Trigger are CRDs providing an event delivery mechanism that hides the
 details of event routing from the event producer and event consumer.
 

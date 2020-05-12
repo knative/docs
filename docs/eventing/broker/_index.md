@@ -1,8 +1,8 @@
 ---
-title: "Boker and Trigger"
-linkTitle: "Broker and Trigger"
+title: "Broker and Trigger"
 weight: 60
 type: "docs"
+showlandingtoc: "true"
 ---
 
-{{% readfile file="broker-trigger.md" %}}
+{{% readfile file="README.md" %}}
