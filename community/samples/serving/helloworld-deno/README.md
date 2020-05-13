@@ -29,7 +29,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-deno
 1. Create a new file named `deps.ts` and paste the following script:
 
    ```ts
-   export { serve } from "https://deno.land/std@v1.0.0-rc2/http/server.ts";
+   export { serve } from "https://deno.land/std@std@0.50.0/http/server.ts";
    ```
 
 1. Create a new file named `main.ts` and paste the following script:
