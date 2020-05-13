@@ -62,18 +62,19 @@ metadata:
 data:
   default-br-config: |
     clusterDefault:
+      brokerClass: ChannelBasedBroker
       apiVersion: v1
       kind: ConfigMap
       name: imc-channel
       namespace: knative-eventing
     namespaceDefaults:
+      brokerClass: ChannelBasedBroker
       test-broker-6:
         apiVersion: v1
         kind: ConfigMap
         name: kafka-channel
         namespace: knative-eventing
 ```
-
 
 ## Installing Broker by Annotation
 
