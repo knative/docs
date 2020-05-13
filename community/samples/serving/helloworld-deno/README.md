@@ -29,15 +29,16 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-deno
 1. Create a new file named `deps.ts` and paste the following script:
 
    ```ts
-   export { serve } from "https://deno.land/std@v0.38.0/http/server.ts";
+   export { serve } from "https://deno.land/std@v1.0.0-rc2/http/server.ts";
    ```
 
 1. Create a new file named `main.ts` and paste the following script:
 
    ```ts
    import { serve } from "./deps.ts";
+   import "https://deno.land/x/dotenv/mod.ts";
 
-   const PORT = 8080;
+   const PORT = Deno.env.get('PORT') || 8080;
    const s = serve(`0.0.0.0:${PORT}`);
    const body = new TextEncoder().encode("Hello Deno\n");
 
@@ -47,29 +48,18 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-deno
    }
    ```
 
-  1. Create a new file named `Dockerfile` and copy the code block below into it.
+1. Create a new file named `Dockerfile` and copy the code block below into it.
 
-    ```docker
-    FROM hayd/alpine-deno:0.38.0
-    EXPOSE 8080
-    WORKDIR /app
+   ```docker
+   FROM hayd/alpine-deno:1.0.0-rc2
+   WORKDIR /app
 
-    # Prefer not to run as root.
-    USER deno
+   # These steps will be re-run upon each file change in your working directory:
+   COPY . ./
 
-    # Cache the dependencies as a layer (the following two steps are re-run only when deps.ts is modified).
-    # Ideally fetch deps.ts will download and compile _all_ external files used in main.ts.
-    COPY deps.ts .
-    RUN deno fetch deps.ts
-
-    # These steps will be re-run upon each file change in your working directory:
-    ADD . .
-    # Compile the main app so that it doesn't need to be compiled each startup/entry.
-    RUN deno fetch main.ts
-
-    # Added to ENTRYPOINT of base image.
-    CMD ["--allow-net", "main.ts"]
-    ```
+   # Added to ENTRYPOINT of base image.
+   CMD ["run", "--allow-env", "--allow-net", "main.ts"]
+   ```
 
 1. Create a new file, `service.yaml` and copy the following service definition
    into the file. Make sure to replace `{username}` with your Docker Hub
