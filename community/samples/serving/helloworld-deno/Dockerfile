@@ -1,4 +1,4 @@
-FROM hayd/alpine-deno:0.38.0
+FROM hayd/alpine-deno:1.0.0-rc2
 WORKDIR /app
 
 # Cache the dependencies as a layer (the following two steps are re-run only when deps.ts is modified).
