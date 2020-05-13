@@ -3,7 +3,12 @@
 Welcome to the source file repository for our documentation on
 https://knative.dev.
 
-## View published documentation
+## Website
+
+The Knative documentation website is built with [hugo](https://gohugo.io/) templates in
+[Knative Website Repo](https://github.com/knative/website).
+
+### View published documentation
 
 View all Knative documentation and walk-through our code samples on the
 [website](https://knative.dev).
@@ -12,7 +17,11 @@ The Knative website includes versioned docs for recent releases, the Knative
 blog, links to all community resources, as well as Knative governance and
 contributor guidelines.
 
-## Website source files
+### Run website locally
+
+Refer to this [doc](https://github.com/knative/website/blob/master/DEVELOPMENT.md) in the website repo.
+
+### Website source files
 
 Source files for the documentation on the website are located within the
 [`/docs`](./docs) directory of this repo.
