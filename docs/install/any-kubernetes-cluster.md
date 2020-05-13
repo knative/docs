@@ -439,13 +439,14 @@ The following commands install the Knative Eventing component.
 1. Install the [Custom Resource Definitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) (aka CRDs):
 
    ```bash
-   kubectl apply --filename {{< artifact repo="eventing" file="eventing-crds.yaml" >}}
+   kubectl apply  --selector knative.dev/crd-install=true \
+   --filename {{< artifact repo="eventing" file="eventing.yaml" >}}
    ```
 
 1. Install the core components of Eventing (see below for optional extensions):
 
    ```bash
-   kubectl apply --filename {{< artifact repo="eventing" file="eventing-core.yaml" >}}
+   kubectl apply --filename {{< artifact repo="eventing" file="eventing.yaml" >}}
    ```
 
 1. Install a default Channel (messaging) layer (alphabetical).
