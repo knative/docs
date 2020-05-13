@@ -8,7 +8,7 @@ NOTE: This doc assume the shared Knative Eventing components are installed in th
 namespace. If you installed the shared Knative Eventing components in a different namespace, replace
 `knative-eventing` with the name of that namespace.
 
-Knative provides a `Broker` implementation that uses [Channels](./channels/) for
+Knative provides a `Broker` implementation that uses [Channels](../channels/) for
 event routing. You will need to have a Channel provider installed, for example
 InMemoryChannel (for development purposes), Kafka, Nats, etc. You can choose from
 list of [available channels](https://knative.dev/docs/eventing/channels/channels-crds/)

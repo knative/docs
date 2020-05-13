@@ -10,7 +10,7 @@ namespace. If you installed the shared Knative Eventing components in a differen
 Multi Tenant Channel Based Broker.
 
 Knative provides a Multi Tenant `Broker` implementation that uses
-[Channels](./channels/) for event routing. You will need to have a Channel provider
+[Channels](../channels/) for event routing. You will need to have a Channel provider
 installed, for example InMemoryChannel (for development purposes), Kafka, Nats, etc. You can choose from
 list of [available channels](https://knative.dev/docs/eventing/channels/channels-crds/)
 
