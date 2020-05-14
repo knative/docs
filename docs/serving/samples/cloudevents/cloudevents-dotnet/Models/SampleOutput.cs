@@ -6,10 +6,5 @@ namespace CloudEventsSample.Models
     {
         [JsonPropertyName("message")]
         public string Message { get; set; }
-
-        public override string ToString()
-        {
-            return $"Message: {this.Message}";
-        }
     }
 }

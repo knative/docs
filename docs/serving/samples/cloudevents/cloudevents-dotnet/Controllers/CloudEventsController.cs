@@ -12,7 +12,7 @@ using Microsoft.Extensions.Logging;
 namespace CloudEventsSample.Controllers
 {
     [ApiController]
-    [Route("api/events")]
+    [Route("")]
     public class CloudEventsController : ControllerBase
     {
         private readonly ILogger<CloudEventsController> logger;
@@ -23,48 +23,52 @@ namespace CloudEventsSample.Controllers
         }
 
         /// <summary>
-        /// Responds to the post request with a CloudEvent containing SampleOutput as the data.
+        /// Responds to the post request by calling ReceiveAndReply if K_SINK is not set,
+        /// or by calling ReceiveAndSend if K_SINK is set.
         /// </summary>
         [HttpPost]
-        public IActionResult Post([FromBody] CloudEvent receivedEvent)
+        public async Task<IActionResult> Post([FromBody] CloudEvent receivedEvent)
         {
-            this.logger?.LogInformation($"Received event {JsonSerializer.Serialize(receivedEvent)}");
             try
             {
-                var content = GetResponseForEvent(receivedEvent);
-                this.HttpContext.Response.RegisterForDispose(content);
-                return new CloudEventActionResult(HttpStatusCode.OK, content);
+                if (string.IsNullOrEmpty(Configuration.Instance.K_SINK))
+                {
+                    return this.ReceiveAndReply(receivedEvent);
+                }
+                else
+                {
+                    return await this.ReceiveAndSend(receivedEvent);
+                }
             }
-            catch (Exception ex)
+            catch (JsonException)
             {
-                return this.Problem($"Failed to process CloudEvent: {ex.Message}");
+                return this.BadRequest("Failed to read the JSON data.");
             }
         }
 
         /// <summary>
-        /// Sends a CloudEvent to the endpoint specified K_SINK environment variable and responds back with its result.
+        /// This is called whenever an event is received if $K_SINK is NOT set, and it replies with
+        /// the new event instead.
         /// </summary>
-        [HttpPost, Route("sink")]
-        public async Task<IActionResult> Sink([FromBody] CloudEvent receivedEvent)
+        private IActionResult ReceiveAndReply(CloudEvent receivedEvent)
         {
             this.logger?.LogInformation($"Received event {JsonSerializer.Serialize(receivedEvent)}");
-            try
-            {
-                var sinkUrl = Environment.GetEnvironmentVariable("K_SINK");
-                if (string.IsNullOrEmpty(sinkUrl))
-                {
-                    return this.Problem("K_SINK is not set");
-                }
+            var content = GetResponseForEvent(receivedEvent);
+            this.HttpContext.Response.RegisterForDispose(content);
+            return new CloudEventActionResult(HttpStatusCode.OK, content);
+        }
 
-                using var content = GetResponseForEvent(receivedEvent);
-                using var client = new HttpClient();
-                using var result = await client.PostAsync(sinkUrl, content);
-                return this.StatusCode((int)result.StatusCode, await result.Content.ReadAsStringAsync());
-            }
-            catch (Exception ex)
-            {
-                return this.Problem($"Failed to process CloudEvent: {ex.Message}");
-            }
+        /// <summary>
+        /// This is called whenever an event is received if $K_SINK is set, and sends a new event
+        /// to the url in $K_SINK.
+        /// </summary>
+        private async Task<IActionResult> ReceiveAndSend(CloudEvent receivedEvent)
+        {
+            this.logger?.LogInformation($"Received event {JsonSerializer.Serialize(receivedEvent)}");
+            using var content = GetResponseForEvent(receivedEvent);
+            using var client = new HttpClient();
+            using var result = await client.PostAsync(Configuration.Instance.K_SINK, content);
+            return this.StatusCode((int)result.StatusCode, await result.Content.ReadAsStringAsync());
         }
 
         /// <summary>

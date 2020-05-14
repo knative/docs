@@ -10,7 +10,7 @@ spec:
         - image: <image>
           ports:
           - containerPort: 80
-          # Replace the URL below with a correct one.
-          env:
-          - name: K_SINK
-            value: http://default-broker.default.svc.cluster.local
+          # Uncomment this to send events somewhere.
+          #env:
+          #- name: K_SINK
+          #  value: http://default-broker.default.svc.cluster.local
