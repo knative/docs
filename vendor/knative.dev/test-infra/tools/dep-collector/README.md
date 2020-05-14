@@ -1,5 +1,11 @@
 # dep-collector
 
+> Deprecation notice: the CI/CD flow has switched the license tool to
+> [go-licenses](https://github.com/google/go-licenses), and deprecated
+> `dep-collector`. We need to keep it for now as the old release branches are
+> still using it. It can be safely deleted after we only support branches >=
+> release-0.15.
+
 `dep-collector` is a tool for gathering up a collection of licenses for Go
 dependencies that have been pulled into the idiomatic `vendor/` directory. The
 resulting file from running `dep-collector` is intended for inclusion in
