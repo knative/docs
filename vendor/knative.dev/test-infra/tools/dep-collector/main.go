@@ -50,7 +50,7 @@ func main() {
 	}
 
 	if *check {
-		classifier, err := licenseclassifier.NewWithForbiddenLicenses(MatchThreshold)
+		classifier, err := licenseclassifier.New(MatchThreshold)
 		if err != nil {
 			log.Fatalf("Error creating license classifier: %v", err)
 		}
