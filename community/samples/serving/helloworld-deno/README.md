@@ -1,10 +1,3 @@
----
-title: "Hello World - Deno"
-linkTitle: "Deno"
-weight: 1
-type: "docs"
----
-
 A simple web app written in Deno.
 
 Follow the steps below to create the sample code and then deploy the app to your
