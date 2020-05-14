@@ -23,7 +23,7 @@ Per-revision settings are done by setting annotations on the revision. When you'
 **Note:** It's important that the annotation is set inside the template key so that it will appear on each revision as they are created. Setting it in the top-level metadata will not propagate them to the revision and thus will not have any effect on autoscaling.
 
 **Example:**
-{{< tabs name="example" >}}
+{{< tabs name="example" default="Per Revision" >}}
 {{% tab name="Per Revision" %}}
 ```yaml
 apiVersion: serving.knative.dev/v1
@@ -34,7 +34,8 @@ metadata:
 spec:
   template:
     metadata:
-      autoscaling.knative.dev/target: "70"
+      annotations:
+        autoscaling.knative.dev/target: "70"
     spec:
       containers:
         - image: gcr.io/knative-samples/helloworld-go
@@ -77,7 +78,7 @@ The KPA is the default and is tailored for serverless workloads. It has performa
 * **Default:** `"kpa.autoscaling.knative.dev"`
 
 **Example:**
-{{< tabs name="class" >}}
+{{< tabs name="class" default="Per Revision" >}}
 {{% tab name="Per Revision" %}}
 ```yaml
 apiVersion: serving.knative.dev/v1
@@ -88,7 +89,8 @@ metadata:
 spec:
   template:
     metadata:
-      autoscaling.knative.dev/class: "kpa.autoscaling.knative.dev"
+      annotations:
+        autoscaling.knative.dev/class: "kpa.autoscaling.knative.dev"
     spec:
       containers:
         - image: gcr.io/knative-samples/helloworld-go
@@ -131,7 +133,7 @@ The metric specifies which value is looked at and compared against the respectiv
 **Note:** `"cpu"` is only supported on revisions with the HPA class.
 
 **Example:**
-{{< tabs name="metric" >}}
+{{< tabs name="metric" default="Per Revision" >}}
 {{% tab name="Per Revision" %}}
 ```yaml
 apiVersion: serving.knative.dev/v1
@@ -142,7 +144,8 @@ metadata:
 spec:
   template:
     metadata:
-      autoscaling.knative.dev/metric: "rps"
+      annotations:
+        autoscaling.knative.dev/metric: "rps"
     spec:
       containers:
         - image: gcr.io/knative-samples/helloworld-go
@@ -173,7 +176,7 @@ Configuring a concurrency target is a little special because Knative Serving has
 * **Default:** `100`
 
 **Example:**
-{{< tabs name="target-concurrency" >}}
+{{< tabs name="target-concurrency" default="Per Revision" >}}
 {{% tab name="Per Revision" %}}
 ```yaml
 apiVersion: serving.knative.dev/v1
@@ -184,7 +187,8 @@ metadata:
 spec:
   template:
     metadata:
-      autoscaling.knative.dev/target: "200"
+      annotations:
+        autoscaling.knative.dev/target: "200"
     spec:
       containers:
         - image: gcr.io/knative-samples/helloworld-go
@@ -217,15 +221,15 @@ spec:
 
 #### Hard Limit (containerConcurrency)
 
-The hard limit has no global setting and is only specifiable per-revision. Its per-revision setting is also not an annotation but is actually present on the revision's spec itself as `containerConcurrency`. Its default value is "0", which means an unlimited number of requests are allowed to flow into the replica. A value above "0" specifies the exact amount of requests allowed to the replica at a time.
+The hard limit has its global setting in the `config-defaults` config map and can also be specified per-revision. Its per-revision setting is not an annotation but is actually present on the revision's spec itself as `containerConcurrency`. Its default value is "0", which means an unlimited number of requests are allowed to flow into the replica. A value above "0" specifies the exact amount of requests allowed to the replica at a time.
 
-* **Global key:** n/a
+* **Global key:** `container-concurrency` (`config-defaults` config map)
 * **Per-revision spec key:** `containerConcurrency`
 * **Possible values:** integer
 * **Default:** `0`, which means unlimited
 
 **Example:**
-{{< tabs name="container-concurrency" >}}
+{{< tabs name="container-concurrency" default="Per Revision" >}}
 {{% tab name="Per Revision" %}}
 ```yaml
 apiVersion: serving.knative.dev/v1
@@ -239,6 +243,29 @@ spec:
       containerConcurrency: 50
       containers:
         - image: gcr.io/knative-samples/helloworld-go
+```
+{{< /tab >}}
+{{% tab name="Global (ConfigMap)" %}}
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+ name: config-defaults
+ namespace: knative-serving
+data:
+ container-concurrency: "50"
+```
+{{< /tab >}}
+{{% tab name="Global (Operator)" %}}
+```yaml
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+spec:
+  config:
+    defaults:
+      container-concurrency: "50"
 ```
 {{< /tab >}}
 {{< /tabs >}}
@@ -257,7 +284,7 @@ In addition to the literal settings explained above, the concurrency values can 
 **Note:** If the activator is in the routing path, it will fully load all replicas up to `containerConcurrency`. It currently does not take target utilization into account.
 
 **Example:**
-{{< tabs name="target-utilization" >}}
+{{< tabs name="target-utilization" default="Per Revision" >}}
 {{% tab name="Per Revision" %}}
 ```yaml
 apiVersion: serving.knative.dev/v1
@@ -268,7 +295,8 @@ metadata:
 spec:
   template:
     metadata:
-      autoscaling.knative.dev/targetUtilizationPercentage: "80"
+      annotations:
+        autoscaling.knative.dev/targetUtilizationPercentage: "80"
     spec:
       containers:
         - image: gcr.io/knative-samples/helloworld-go
@@ -309,7 +337,7 @@ As the name suggests, this specifies a target requests-per-second per replica.
 * **Default:** `200`
 
 **Example:**
-{{< tabs name="rps-target" >}}
+{{< tabs name="rps-target" default="Per Revision" >}}
 {{% tab name="Per Revision" %}}
 ```yaml
 apiVersion: serving.knative.dev/v1
@@ -320,7 +348,8 @@ metadata:
 spec:
   template:
     metadata:
-      autoscaling.knative.dev/target: "150"
+      annotations:
+        autoscaling.knative.dev/target: "150"
     spec:
       containers:
         - image: gcr.io/knative-samples/helloworld-go
@@ -365,7 +394,7 @@ This value controls the minimum number of replicas each revision should have. Kn
 * **Default:** `0` if scale-to-zero is enabled and class KPA is used, `1` otherwise
 
 **Example:**
-{{< tabs name="min-scale" >}}
+{{< tabs name="min-scale" default="Per Revision" >}}
 {{% tab name="Per Revision" %}}
 ```yaml
 apiVersion: serving.knative.dev/v1
@@ -376,7 +405,8 @@ metadata:
 spec:
   template:
     metadata:
-      autoscaling.knative.dev/minScale: "3"
+      annotations:
+        autoscaling.knative.dev/minScale: "3"
     spec:
       containers:
         - image: gcr.io/knative-samples/helloworld-go
@@ -394,7 +424,7 @@ This value controls the maximum number of replicas each revision should have. Kn
 * **Default:** `0` which means unlimited
 
 **Example:**
-{{< tabs name="max-scale" >}}
+{{< tabs name="max-scale" default="Per Revision" >}}
 {{% tab name="Per Revision" %}}
 ```yaml
 apiVersion: serving.knative.dev/v1
@@ -405,7 +435,8 @@ metadata:
 spec:
   template:
     metadata:
-      autoscaling.knative.dev/maxScale: "3"
+      annotations:
+        autoscaling.knative.dev/maxScale: "3"
     spec:
       containers:
         - image: gcr.io/knative-samples/helloworld-go
@@ -433,7 +464,7 @@ The scale-to-zero values control whether Knative allows revisions to scale down 
 **Note:** If this is set to `false`, the behavior of the lower Scale Bounds configuration changes as described above.
 
 **Example:**
-{{< tabs name="scale-to-zero" >}}
+{{< tabs name="scale-to-zero" default="Global (ConfigMap)" >}}
 {{% tab name="Global (ConfigMap)" %}}
 ```yaml
 apiVersion: v1
@@ -469,7 +500,7 @@ This period is an upper bound amount of time the system waits internally for the
 * **Default:** `30s`
 
 **Example:**
-{{< tabs name="scale-to-zero-grace" >}}
+{{< tabs name="scale-to-zero-grace" default="Global (ConfigMap)" >}}
 {{% tab name="Global (ConfigMap)" %}}
 ```yaml
 apiVersion: v1
@@ -512,7 +543,7 @@ The KPA's implementation has two modes: **stable** and **panic**. The stable mod
 **Note:** The autoscaler will leave panic mode only after not seeing a reason to panic for the stable window's timeframe.
 
 **Example:**
-{{< tabs name="stable-window" >}}
+{{< tabs name="stable-window" default="Per Revision" >}}
 {{% tab name="Per Revision" %}}
 ```yaml
 apiVersion: serving.knative.dev/v1
@@ -523,7 +554,8 @@ metadata:
 spec:
   template:
     metadata:
-      autoscaling.knative.dev/window: "40s"
+      annotations:
+        autoscaling.knative.dev/window: "40s"
     spec:
       containers:
         - image: gcr.io/knative-samples/helloworld-go
@@ -564,7 +596,7 @@ The panic window is defined as a percentage of the stable window to assure they 
 * **Default:** `10.0`
 
 **Example:**
-{{< tabs name="panic-window" >}}
+{{< tabs name="panic-window" default="Per Revision" >}}
 {{% tab name="Per Revision" %}}
 ```yaml
 apiVersion: serving.knative.dev/v1
@@ -575,7 +607,8 @@ metadata:
 spec:
   template:
     metadata:
-      autoscaling.knative.dev/panicWindowPercentage: "20.0"
+      annotations:
+        autoscaling.knative.dev/panicWindowPercentage: "20.0"
     spec:
       containers:
         - image: gcr.io/knative-samples/helloworld-go
@@ -616,7 +649,7 @@ This threshold defines when the autoscaler will move from stable mode into panic
 * **Default:** `200.0`
 
 **Example:**
-{{< tabs name="panic-threshold" >}}
+{{< tabs name="panic-threshold" default="Per Revision" >}}
 {{% tab name="Per Revision" %}}
 ```yaml
 apiVersion: serving.knative.dev/v1
@@ -627,7 +660,8 @@ metadata:
 spec:
   template:
     metadata:
-      autoscaling.knative.dev/panicThresholdPercentage: "150.0"
+      annotations:
+        autoscaling.knative.dev/panicThresholdPercentage: "150.0"
     spec:
       containers:
         - image: gcr.io/knative-samples/helloworld-go
@@ -672,7 +706,7 @@ Maximum ratio of desired vs. observed pods, i.e. with a value of `2.0`, the revi
 * **Default:** `1000.0`
 
 **Example:**
-{{< tabs name="scale-up-rate" >}}
+{{< tabs name="scale-up-rate" default="Global (ConfigMap)" >}}
 {{% tab name="Global (ConfigMap)" %}}
 ```yaml
 apiVersion: v1
@@ -708,7 +742,7 @@ Maximum ratio of observed vs. desired pods, i.e. with a value of `2.0`, the revi
 * **Default:** `2.0`
 
 **Example:**
-{{< tabs name="scale-down-rate" >}}
+{{< tabs name="scale-down-rate" default="Global (ConfigMap)" >}}
 {{% tab name="Global (ConfigMap)" %}}
 ```yaml
 apiVersion: v1

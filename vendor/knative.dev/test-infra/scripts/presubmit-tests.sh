@@ -46,15 +46,6 @@ function pr_only_contains() {
   [[ -z "$(echo "${CHANGED_FILES}" | grep -v "\(${1// /\\|}\)$")" ]]
 }
 
-# List changed files in the current PR.
-# This is implemented as a function so it can be mocked in unit tests.
-function list_changed_files() {
-  # Avoid warning when there are more than 1085 files renamed:
-  # https://stackoverflow.com/questions/7830728/warning-on-diff-renamelimit-variable-when-doing-git-push
-  git config diff.renames 0
-  git --no-pager diff --name-only ${PULL_BASE_SHA}..${PULL_SHA}
-}
-
 # Initialize flags and context for presubmit tests:
 # CHANGED_FILES, IS_PRESUBMIT_EXEMPT_PR and IS_DOCUMENTATION_PR.
 function initialize_environment() {
@@ -180,11 +171,13 @@ function default_build_test_runner() {
     # Consider an error message everything that's not a package name.
     errors_go1="$(grep -v '^\(github\.com\|knative\.dev\)/' "${report}" | sort | uniq)"
   fi
-  # Get all build tags in go code (ignore /vendor and /hack)
+  # Get all build tags in go code (ignore /vendor, /hack and /third_party)
   local tags="$(grep -r '// +build' . \
-      | grep -v '^./vendor/' | grep -v '^./hack/' | cut -f3 -d' ' | sort | uniq | tr '\n' ' ')"
+    | grep -v '^./vendor/' | grep -v '^./hack/' | grep -v '^./third_party' \
+    | cut -f3 -d' ' | sort | uniq | tr '\n' ' ')"
   local tagged_pkgs="$(grep -r '// +build' . \
-    | grep -v '^./vendor/' | grep -v '^./hack/' | grep ":// +build " | cut -f1 -d: | xargs dirname \
+    | grep -v '^./vendor/' | grep -v '^./hack/' | grep -v '^./third_party' \
+    | grep ":// +build " | cut -f1 -d: | xargs dirname \
     | sort | uniq | tr '\n' ' ')"
   for pkg in ${tagged_pkgs}; do
     # `go test -c` lets us compile the tests but do not run them.

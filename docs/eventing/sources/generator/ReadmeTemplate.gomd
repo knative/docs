@@ -50,10 +50,20 @@ Name | Status | Support | Description
 
 ### ContainerSource Containers
 
-These are containers intended to be used with `ContainerSource`.
+These are containers intended to be used with `ContainerSource`. See the docs [here](../samples/container-source/README.md).
 
 Name | Status | Support | Description
 --- | --- | --- | ---
 {{ range .Containers -}}
+[{{ .Name }}]({{ .Url }}) | {{ .Status }} | {{ .Support }} | {{ .Description }}
+{{- end }}
+
+### SinkBindings
+
+These are containers intended to be used with `SinkBinding`. See the docs [here](../samples/sinkbinding/README.md).
+
+Name | Status | Support | Description
+--- | --- | --- | ---
+{{ range .SinkBindings -}}
 [{{ .Name }}]({{ .Url }}) | {{ .Status }} | {{ .Support }} | {{ .Description }}
 {{- end }}

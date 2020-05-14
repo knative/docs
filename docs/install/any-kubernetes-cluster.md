@@ -439,13 +439,14 @@ The following commands install the Knative Eventing component.
 1. Install the [Custom Resource Definitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) (aka CRDs):
 
    ```bash
-   kubectl apply --filename {{< artifact repo="eventing" file="eventing-crds.yaml" >}}
+   kubectl apply  --selector knative.dev/crd-install=true \
+   --filename {{< artifact repo="eventing" file="eventing.yaml" >}}
    ```
 
 1. Install the core components of Eventing (see below for optional extensions):
 
    ```bash
-   kubectl apply --filename {{< artifact repo="eventing" file="eventing-core.yaml" >}}
+   kubectl apply --filename {{< artifact repo="eventing" file="eventing.yaml" >}}
    ```
 
 1. Install a default Channel (messaging) layer (alphabetical).
@@ -553,6 +554,34 @@ ConfigMap to specify which configurations are used for which namespaces:
            namespace: knative-eventing
    ```
 
+The referenced `imc-channel` and `kafka-channel` example ConfigMaps would look like:
+   ```yaml
+   apiVersion: v1
+   kind: ConfigMap
+   metadata:
+     name: imc-channel
+     namespace: knative-eventing
+   data:
+     channelTemplateSpec: |
+       apiVersion: messaging.knative.dev/v1beta1
+       kind: InMemoryChannel
+   ---
+   apiVersion: v1
+   kind: ConfigMap
+   metadata:
+     name: kafka-channel
+     namespace: knative-eventing
+   data:
+     channelTemplateSpec: |
+       apiVersion: messaging.knative.dev/v1alpha1
+       kind: KafkaChannel
+       spec:
+         numPartitions: 3
+         replicationFactor: 1
+   ```
+
+_In order to use the KafkaChannel make sure it is installed on the cluster as discussed above._
+
 {{< /tab >}}
 
 {{% tab name="MT-Channel-based" %}}
@@ -596,6 +625,34 @@ ConfigMap to specify which configurations are used for which namespaces:
            name: kafka-channel
            namespace: knative-eventing
    ```
+
+The referenced `imc-channel` and `kafka-channel` example ConfigMaps would look like:
+   ```yaml
+   apiVersion: v1
+   kind: ConfigMap
+   metadata:
+     name: imc-channel
+     namespace: knative-eventing
+   data:
+     channelTemplateSpec: |
+       apiVersion: messaging.knative.dev/v1beta1
+       kind: InMemoryChannel
+   ---
+   apiVersion: v1
+   kind: ConfigMap
+   metadata:
+     name: kafka-channel
+     namespace: knative-eventing
+   data:
+     channelTemplateSpec: |
+       apiVersion: messaging.knative.dev/v1alpha1
+       kind: KafkaChannel
+       spec:
+         numPartitions: 3
+         replicationFactor: 1
+   ```
+
+_In order to use the KafkaChannel make sure it is installed on the cluster as discussed above._
 
 {{< /tab >}}
 

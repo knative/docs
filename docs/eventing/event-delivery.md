@@ -16,13 +16,13 @@ events to a dead letter sink.
 Knative Eventing offers fine-grained control on how events are delivered for each subscription by adding a `delivery` section. Consider this example:
 
 ```yaml
-apiVersion: messaging.knative.dev/v1alpha1
+apiVersion: messaging.knative.dev/v1beta1
 kind: Subscription
 metadata:
   name: with-dead-letter-sink
 spec:
   channel:
-    apiVersion: messaging.knative.dev/v1alpha1
+    apiVersion: messaging.knative.dev/v1beta1
     kind: InMemoryChannel
     name: default
   delivery:
