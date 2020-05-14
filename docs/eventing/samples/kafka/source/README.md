@@ -7,7 +7,6 @@ type: "docs"
 
 Tutorial on how to build and deploy a `KafkaSource` [Eventing source](../../../sources/README.md) using a Knative Serving `Service`.
 
-
 ## Prerequisites
 
 You must ensure that you meet the [prerequisites listed in the Apache Kafka overview](../README.md).
@@ -15,10 +14,12 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
 ## Creating a `KafkaSource` source CRD
 
 1. Install the `KafkaSource` sub-component to your Knative cluster:
+
    ```
    kubectl apply -f https://storage.googleapis.com/knative-releases/eventing-contrib/latest/kafka-source.yaml
 
    ```
+
 2. Check that the `kafka-controller-manager-0` pod is running.
    ```
    kubectl get pods --namespace knative-sources
@@ -36,8 +37,8 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
 
 ### Apache Kafka Topic (Optional)
 
-1. If using Strimzi, you can set a topic modifying
-   `source/kafka-topic.yaml` with your desired:
+1. If using Strimzi, you can set a topic modifying `source/kafka-topic.yaml`
+   with your desired:
 
 - Topic
 - Cluster Name
@@ -108,6 +109,7 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
    ...
    service.serving.knative.dev/event-display created
    ```
+
 1. Ensure that the Service pod is running. The pod name will be prefixed with
    `event-display`.
    ```
@@ -119,11 +121,11 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
 
 #### Apache Kafka Event Source
 
-1. Modify `source/event-source.yaml` accordingly with bootstrap
-   servers, topics, etc...:
+1. Modify `source/event-source.yaml` accordingly with bootstrap servers, topics,
+   etc...:
 
    ```yaml
-   apiVersion: sources.eventing.knative.dev/v1alpha1
+   apiVersion: sources.knative.dev/v1alpha1
    kind: KafkaSource
    metadata:
      name: kafka-source
@@ -142,7 +144,7 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
    ```
    $ kubectl apply -f event-source.yaml
    ...
-   kafkasource.sources.eventing.knative.dev/kafka-source created
+   kafkasource.sources.knative.dev/kafka-source created
    ```
 1. Check that the event source pod is running. The pod name will be prefixed
    with `kafka-source`.
@@ -160,7 +162,8 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
 
 ### Verify
 
-1. Produce a message (`{"msg": "This is a test!"}`) to the Apache Kafka topic, like shown below:
+1. Produce a message (`{"msg": "This is a test!"}`) to the Apache Kafka topic,
+   like shown below:
    ```
    kubectl -n kafka run kafka-producer -ti --image=strimzi/kafka:0.14.0-kafka-2.3.0 --rm=true --restart=Never -- bin/kafka-console-producer.sh --broker-list my-cluster-kafka-bootstrap:9092 --topic knative-demo-topic
    If you don't see a command prompt, try pressing enter.
@@ -181,47 +184,56 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
 
    ```
    $ kubectl logs --selector='serving.knative.dev/service=event-display' -c user-container
-
-   ☁️  cloudevents.Event
-   Validation: valid
-   Context Attributes,
-     specversion: 1.0
-     type: dev.knative.kafka.event
-     source: /apis/v1/namespaces/default/kafkasources/kafka-source#my-topic
-     subject: partition:0#564
-     id: partition:0/offset:564
-     time: 2020-02-10T18:10:23.861866615Z
-     datacontenttype: application/json
-   Extensions,
-     key:
-   Data,
-     {
-       "msg": "This is a test!"
-     }
    ```
+
+☁️ cloudevents.Event
+Validation: valid
+Context Attributes,
+  specversion: 1.0
+  type: dev.knative.kafka.event
+  source: /apis/v1/namespaces/default/kafkasources/kafka-source#my-topic
+  subject: partition:0#564
+  id: partition:0/offset:564
+  time: 2020-02-10T18:10:23.861866615Z
+  datacontenttype: application/json
+Extensions,
+  key:
+Data,
+    {
+      "msg": "This is a test!"
+    }
+
+```
 
 ## Teardown Steps
 
 1. Remove the Apache Kafka Event Source
-   ```
-   $ kubectl delete -f source/source.yaml
-   kafkasource.sources.eventing.knative.dev "kafka-source" deleted
-   ```
+```
+
+\$ kubectl delete -f source/source.yaml kafkasource.sources.knative.dev
+"kafka-source" deleted
+
+```
 2. Remove the Event Display
-   ```
-   $ kubectl delete -f source/event-display.yaml
-   service.serving.knative.dev "event-display" deleted
-   ```
+```
+
+\$ kubectl delete -f source/event-display.yaml service.serving.knative.dev
+"event-display" deleted
+
+```
 3. Remove the Apache Kafka Event Controller
-   ```
-   $ kubectl delete -f https://storage.googleapis.com/knative-releases/eventing-contrib/latest/kafka-source.yaml
-   serviceaccount "kafka-controller-manager" deleted
-   clusterrole.rbac.authorization.k8s.io "eventing-sources-kafka-controller" deleted
-   clusterrolebinding.rbac.authorization.k8s.io "eventing-sources-kafka-controller" deleted
-   customresourcedefinition.apiextensions.k8s.io "kafkasources.sources.eventing.knative.dev" deleted
-   service "kafka-controller" deleted
-   statefulset.apps "kafka-controller-manager" deleted
-   ```
+```
+
+\$ kubectl delete -f https://storage.googleapis.com/knative-releases/eventing-contrib/latest/kafka-source.yaml
+serviceaccount "kafka-controller-manager" deleted
+clusterrole.rbac.authorization.k8s.io "eventing-sources-kafka-controller"
+deleted clusterrolebinding.rbac.authorization.k8s.io
+"eventing-sources-kafka-controller" deleted
+customresourcedefinition.apiextensions.k8s.io "kafkasources.sources.knative.dev"
+deleted service "kafka-controller" deleted statefulset.apps
+"kafka-controller-manager" deleted
+
+````
 4. (Optional) Remove the Apache Kafka Topic
 
    ```shell
@@ -231,31 +243,34 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
 
 ## (Optional) Specify the key deserializer
 
-When `KafkaSource` receives a message from Kafka, it dumps the key in the Event extension called `Key` and dumps Kafka message headers in the extensions starting with `kafkaheader`.
+When `KafkaSource` receives a message from Kafka, it dumps the key in the Event
+extension called `Key` and dumps Kafka message headers in the extensions
+starting with `kafkaheader`.
 
 You can specify the key deserializer among four types:
 
-* `string` (default) for UTF-8 encoded strings 
+* `string` (default) for UTF-8 encoded strings
 * `int` for 32-bit & 64-bit signed integers
 * `float` for 32-bit & 64-bit floating points
 * `byte-array` for a Base64 encoded byte array
 
-To specify it, add the label `kafkasources.sources.eventing.knative.dev/key-type` to the `KafkaSource` definition like:
+To specify it, add the label `kafkasources.sources.knative.dev/key-type` to the
+`KafkaSource` definition like:
 
 ```yaml
-apiVersion: sources.eventing.knative.dev/v1alpha1
+apiVersion: sources.knative.dev/v1alpha1
 kind: KafkaSource
 metadata:
- name: kafka-source
- labels:
-  kafkasources.sources.eventing.knative.dev/key-type: int
+  name: kafka-source
+  labels:
+    kafkasources.sources.knative.dev/key-type: int
 spec:
- consumerGroup: knative-group
- bootstrapServers: my-cluster-kafka-bootstrap.kafka:9092 #note the kafka namespace
- topics: knative-demo-topic
- sink:
-   ref:
-     apiVersion: serving.knative.dev/v1
-     kind: Service
-     name: event-display
+  consumerGroup: knative-group
+  bootstrapServers: my-cluster-kafka-bootstrap.kafka:9092 #note the kafka namespace
+  topics: knative-demo-topic
+  sink:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: event-display
 ```
