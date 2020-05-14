@@ -74,7 +74,7 @@ func TestHugoBundles(t *testing.T) {
 				return nil
 			}
 		}
-		return fmt.Errorf("README.md missing bundle (you need an 'index.md' or '_index.md')in %q", path)
+		return fmt.Errorf("README.md missing bundle (you need an 'index.md' or '_index.md') in %q", path)
 	})
 
 	if err != nil {
