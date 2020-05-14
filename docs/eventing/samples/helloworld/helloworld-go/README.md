@@ -255,7 +255,7 @@ application and trigger are ready, let's send a CloudEvent.
 
 ### Send CloudEvent to the Broker
 
-We can send an http request directly to the [Broker](../../../broker-trigger.md)
+We can send an http request directly to the [Broker](../../../broker/README.md)
 with correct CloudEvent headers set.
 
 1. Deploy a curl pod and SSH into it
@@ -325,7 +325,7 @@ back with another event.
 
     Play around with the CloudEvent attributes in the curl command and the
     trigger specification to understand how
-    [Triggers work](../../../broker-trigger.md#trigger).
+    [Triggers work](../../../broker/README.md#trigger).
 
 ## Verify reply from helloworld-go app
 
