@@ -54,8 +54,8 @@ namespace CloudEventsSample.Controllers
         }
 
         /// <summary>
-        /// This is called whenever an event is received if $K_SINK is NOT set, and it replies with
-        /// the new event instead.
+        /// This is called whenever an event is received if K_SINK environment variable is NOT set.
+        /// Replies with a new event.
         /// </summary>
         private IActionResult ReceiveAndReply(CloudEvent receivedEvent)
         {
@@ -66,8 +66,8 @@ namespace CloudEventsSample.Controllers
         }
 
         /// <summary>
-        /// This is called whenever an event is received if $K_SINK is set, and sends a new event
-        /// to the url in $K_SINK.
+        /// This is called whenever an event is received if K_SINK environment variable is set.
+        /// Sends a new event to the url in K_SINK.
         /// </summary>
         private async Task<IActionResult> ReceiveAndSend(CloudEvent receivedEvent)
         {
