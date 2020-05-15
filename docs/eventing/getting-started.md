@@ -74,12 +74,15 @@ If the `knative-eventing` namespace or the `imc-controller-*` does not exist, us
     This will return the following result:
 
     ```sh
-    NAME                                            READY   STATUS    RESTARTS   AGE
-    eventing-controller-6cdf6ff785-44k98            1/1     Running   0          29m
-    eventing-webhook-6c4f6699d8-qclbx               1/1     Running   0          29m
-    imc-controller-85cdb4946b-h2msj                 1/1     Running   0          13m
-    imc-dispatcher-5f4689d868-fspt6                 1/1     Running   0          13m
-    sources-controller-5847564f4f-z59xc             1/1     Running   0          29m
+    NAME                                    READY   STATUS    RESTARTS   AGE
+    broker-controller-56b4d58667-fm979      1/1     Running   0          4m36s
+    broker-filter-5bdbc8d8dd-kpswx          1/1     Running   0          4m35s
+    broker-ingress-d896b6b46-4nbtr          1/1     Running   0          4m35s
+    eventing-controller-5fc5645584-qvspl    1/1     Running   0          4m36s
+    eventing-webhook-7674b867dc-zw9qh       1/1     Running   0          4m36s
+    imc-controller-6b548d6468-gnbkn         1/1     Running   0          4m35s
+    imc-dispatcher-655cdf6ff6-mkc29         1/1     Running   0          4m35s
+    mt-broker-controller-6d66c4c6f6-xdn7b   1/1     Running   0          4m35s
    ```
 
 ## Setting up Knative Eventing Resources
