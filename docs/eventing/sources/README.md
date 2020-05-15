@@ -1,10 +1,3 @@
----
-title: "Knative Eventing sources"
-linkTitle: "Eventing sources"
-weight: 20
-type: "docs"
----
-
 <!--
 This is a generated file and should not be changed manually. All changes should follow the
 procedure:
@@ -13,7 +6,7 @@ procedure:
 
 2. Run the generator tool:
     ```shell
-    go run eventing/sources/generator/main.go
+    go run docs/eventing/sources/generator/main.go
     ```
 -->
 

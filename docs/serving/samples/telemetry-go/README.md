@@ -1,10 +1,3 @@
----
-title: "Observability: Monitoring, logging, and tracing sample - Go"
-linkTitle: "Observability - Go"
-weight: 1
-type: "docs"
----
-
 This sample runs a simple web server that makes calls to other in-cluster
 services and responds to requests with "Hello World!". The purpose of this
 sample is to show generating [metrics](../../accessing-metrics.md),

@@ -1,10 +1,3 @@
----
-title: "Debugging Knative Eventing"
-linkTitle: "Debugging"
-weight: 80
-type: "docs"
----
-
 This is an evolving document on how to debug a non-working Knative Eventing
 setup.
 

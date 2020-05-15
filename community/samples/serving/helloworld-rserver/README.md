@@ -1,10 +1,3 @@
----
-title: "Hello World - R server"
-linkTitle: "R server"
-weight: 1
-type: "docs"
----
-
 A simple web app created with R package, [plumber](https://www.rplumber.io).
 plumber creates a REST API by adding annotations to your R code. The R script
 reads an environment variable `TARGET` and prints `Hello ${TARGET}!`. If the

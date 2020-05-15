@@ -1,10 +1,3 @@
----
-title: "Hello World - Python BentoML"
-linkTitle: "Python Bentoml"
-weight: 1
-type: "docs"
----
-
 A simple machine learning model with API serving that is written in python and
 using [BentoML](https://github.com/bentoml/BentoML). BentoML is an open source
 framework for high performance ML model serving, which supports all major machine

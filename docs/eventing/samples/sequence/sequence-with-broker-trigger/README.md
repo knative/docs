@@ -1,10 +1,3 @@
----
-title: "Using Sequence with Broker and Trigger"
-linkTitle: "Using with Broker and Trigger"
-weight: 20
-type: "docs"
----
-
 We are going to create the following logical configuration. We create a
 PingSource, feeding events into the Broker, then we create a `Filter` that
 wires those events into a [`Sequence`](../../../flows/sequence.md) consisting of 3

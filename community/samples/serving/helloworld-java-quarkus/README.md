@@ -1,10 +1,3 @@
----
-title: "Hello World - Java (Quarkus)"
-linkTitle: "Java (Quarkus)"
-weight: 1
-type: "docs"
----
-
 A simple [JAX-RS REST API](https://github.com/jax-rs) application that is
 written in Java and uses [Quarkus](https://quarkus.io/).
 
