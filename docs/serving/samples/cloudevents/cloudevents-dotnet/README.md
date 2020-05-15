@@ -37,7 +37,7 @@ cd knative-docs/docs/serving/samples/cloudevents/cloudevents-dotnet
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
 
-## The sample code.
+## The sample code
 
 1. If you look in `controllers\CloudEventsController.cs`, you will see two key functions for the
    different modes of operation:
@@ -76,8 +76,8 @@ Get the URL for your Service with:
 
 ```shell
 $ kubectl get ksvc
-NAME                 URL                                                LATESTCREATED              LATESTREADY                READY   REASON
-cloudevents-dotnet   http://cloudevents-dotnet.default.1.2.3.4.xip.io   cloudevents-dotnet-ss5pj   cloudevents-dotnet-ss5pj   True
+NAME                 URL                            LATESTCREATED              LATESTREADY                READY   REASON
+cloudevents-dotnet   http://cloudevents-dotnet...   cloudevents-dotnet-ss5pj   cloudevents-dotnet-ss5pj   True
 ```
 
 Then send a cloud event to it with:
