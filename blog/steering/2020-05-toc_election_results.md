@@ -1,4 +1,12 @@
-#Knative welcomes new TOC members
+---
+title: "Knative welcomes new TOC members"
+linkTitle: "Knative welcomes new TOC members"
+date: 2020-05-12
+description: "Knative welcomes new TOC members"
+type: "blog"
+aliases:
+  - /blog/2019/05/12/2020-toc-election-results/
+---
 
 This week, the Knative project successfully held its first TOC elections. The event constituted a milestone for the project’s governance, with 70% of voter turnout: 83 of the most active contributors to the project, representing companies like IBM, Pivotal, SAP, Google, VMWare, RedHat, and others participated in this election process. 
 
