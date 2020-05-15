@@ -4,15 +4,15 @@ This week, the Knative project successfully held its first TOC elections. The ev
 
 The new [technical stewardship](https://knative.dev/community/contributing/tech-oversight-committee/) for Knative now has more vendor diversity, with members representing RedHat, VMWare, and Google, as follows:
 
-*Nghia Tran (Google) _- new member_
+* Nghia Tran (Google) _- new member_
 
-*Markus Thömmes (Red Hat) - _new member_
+* Markus Thömmes (Red Hat) - _new member_
 
-*Grant Rodgers (Google) - _new member_
+* Grant Rodgers (Google) - _new member_
 
-*Matt Moore (VMWare) - _existing member_
+* Matt Moore (VMWare) - _existing member_
 
-*Evan Anderson (VMWare) - _existing member_
+* Evan Anderson (VMWare) - _existing member_
 
  
 Congratulations to the newly elected members!
