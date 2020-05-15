@@ -21,9 +21,9 @@ The new [technical stewardship](https://knative.dev/community/contributing/tech-
 * Matt Moore (VMWare) - _existing member_
 
 * Evan Anderson (VMWare) - _existing member_
-
  
 Congratulations to the newly elected members!
+
 
 Here is a brief introduction from the new members of the TOC: 
 
@@ -37,7 +37,6 @@ _Open-source is very dear to my heart so first and foremost I want to ensure tha
 
 **Grant Rodgers:**
 <br>_Before I started at Google, I worked at GitHub where one of my projects was building an event processing platform to run on Kubernetes, and in retrospect, it was a perfect use case for Knative. I think my experience of needing this set of tools we're building gives me some insight into how those tools could best serve the needs of our users. I hope to leverage it to build the right tools for them._
-
 
 Watch the presentation of the new members at the [last community meetup.](https://youtu.be/24owwOKj86E)
 
