@@ -79,6 +79,7 @@ Follow the links below to learn more about Knative.
 - [Getting started with app deployment](./serving/getting-started-knative-app.md)
 - [Getting started with serving](./serving)
 - [Getting started with eventing](./eventing)
+- [kn CLI reference docs](./client/kn-reference-commands.md)
 
 ### Configuration and networking
 
