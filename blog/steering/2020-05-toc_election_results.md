@@ -2,7 +2,7 @@
 title: "Knative welcomes new TOC members"
 linkTitle: "Knative welcomes new TOC members"
 date: 2020-05-12
-description: "Knative welcomes new TOC members"
+description: "Knative 2020 TOC Election results"
 type: "blog"
 aliases:
   - /blog/2019/05/12/2020-toc-election-results/
