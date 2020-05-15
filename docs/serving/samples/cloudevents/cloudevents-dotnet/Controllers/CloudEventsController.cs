@@ -15,6 +15,13 @@ namespace CloudEventsSample.Controllers
     [Route("")]
     public class CloudEventsController : ControllerBase
     {
+        private const string CloudEventResponseType = "dev.knative.docs.sample";
+        private const string CloudEventResponseUri =
+            "https://github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-dotnet";
+
+        private static readonly Lazy<string> SinkUri =
+            new Lazy<string>(() => Environment.GetEnvironmentVariable("K_SINK"));
+
         private readonly ILogger<CloudEventsController> logger;
 
         public CloudEventsController(ILogger<CloudEventsController> logger)
@@ -31,7 +38,7 @@ namespace CloudEventsSample.Controllers
         {
             try
             {
-                if (string.IsNullOrEmpty(Configuration.Instance.K_SINK))
+                if (string.IsNullOrEmpty(SinkUri.Value))
                 {
                     return this.ReceiveAndReply(receivedEvent);
                 }
@@ -67,7 +74,7 @@ namespace CloudEventsSample.Controllers
             this.logger?.LogInformation($"Received event {JsonSerializer.Serialize(receivedEvent)}");
             using var content = GetResponseForEvent(receivedEvent);
             using var client = new HttpClient();
-            using var result = await client.PostAsync(Configuration.Instance.K_SINK, content);
+            using var result = await client.PostAsync(SinkUri.Value, content);
             return this.StatusCode((int)result.StatusCode, await result.Content.ReadAsStringAsync());
         }
 
@@ -86,7 +93,7 @@ namespace CloudEventsSample.Controllers
             var input = JsonSerializer.Deserialize<SampleInput>(receivedEvent.Data.ToString());
             var content = new CloudEventContent
             (
-                new CloudEvent(Constants.ResponseType, new Uri(Constants.ResponseUri))
+                new CloudEvent(CloudEventResponseType, new Uri(CloudEventResponseUri))
                 {
                     DataContentType = new ContentType(MediaTypeNames.Application.Json),
                     Data = JsonSerializer.Serialize(new SampleOutput {Message = $"Hello, {input.Name}"}),
