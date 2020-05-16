@@ -279,11 +279,9 @@ KafkaSource expects these files to be in pem format, if it is in other format li
    $ kubectl create secret generic cacert --from-file=caroot.pem
    secret/cacert created
 
-   $ kubectl create secret generic key --from-file=key.pem
+   $ kubectl create secret tls kafka-secret --cert=certificate.pem --key=key.pem
    secret/key created
 
-   $ kubectl create secret generic cert --from-file=certificate.pem
-   secret/cert created 
 
    ```
 
@@ -299,12 +297,12 @@ KafkaSource expects these files to be in pem format, if it is in other format li
         enable: true
         cert:
           secretKeyRef:
-            key: certificate.pem
-            name: cert
+            key: tls.crt
+            name: kafka-secret
         key:
           secretKeyRef:
-            key: key.pem
-            name: key
+            key: tls.key
+            name: kafka-secret
         caCert:
           secretKeyRef:
             key: caroot.pem
