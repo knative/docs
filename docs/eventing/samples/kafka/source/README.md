@@ -266,7 +266,7 @@ To specify it, add the label `kafkasources.sources.knative.dev/key-type` to the 
 
 ## Connecting to a TLS enabled Kafka broker
 
-The KafkaSource supports TLS and SASL authentication methods. For enabling TLS authentication, please have the below files 
+The KafkaSource supports TLS and SASL authentication methods. For enabling TLS authentication, please have the below files
 
 * CA Certificate
 * Client Certificate and Key
@@ -316,3 +316,4 @@ KafkaSource expects these files to be in pem format, if it is in other format li
        kind: Service
        name: event-display
    ```
+   
