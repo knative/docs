@@ -175,8 +175,8 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
 
 1. Ensure the Event Display received the message sent to it by the Event Source.
 
-   ```
-   $ kubectl logs --selector='serving.knative.dev/service=event-display' -c user-container
+  ```
+  $ kubectl logs --selector='serving.knative.dev/service=event-display' -c user-container
 
   ☁️ cloudevents.Event
   Validation: valid
@@ -195,7 +195,7 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
         "msg": "This is a test!"
       }
 
-```
+  ```
 
 ## Teardown Steps
 
@@ -279,13 +279,13 @@ Kafka source expects these files to be in pem format, if it is in other format l
 1. Create the certificate files as secrets in the namespace where kafka source is going to be set up
 ```
 
-\$ kubectl create secret generic cacert --from-file=caroot.pem
+$ kubectl create secret generic cacert --from-file=caroot.pem
 secret/cacert created
 
-\$ kubectl create secret generic key --from-file=key.pem
+$ kubectl create secret generic key --from-file=key.pem
 secret/key created
 
-\$ kubectl create secret generic cert --from-file=certificate.pem
+$ kubectl create secret generic cert --from-file=certificate.pem
 secret/cert created 
 
 ```
