@@ -247,23 +247,23 @@ You can specify the key deserializer among four types:
 
 To specify it, add the label `kafkasources.sources.knative.dev/key-type` to the
 `KafkaSource` definition like:
-     ```yaml
-     apiVersion: sources.knative.dev/v1alpha1
-     kind: KafkaSource
-     metadata:
-       name: kafka-source
-       labels:
-         kafkasources.sources.knative.dev/key-type: int
-     spec:
-       consumerGroup: knative-group
-       bootstrapServers: my-cluster-kafka-bootstrap.kafka:9092 #note the kafka namespace
-       topics: knative-demo-topic
-       sink:
-         ref:
-           apiVersion: serving.knative.dev/v1
-           kind: Service
-           name: event-display
-     ```
+   ```yaml
+   apiVersion: sources.knative.dev/v1alpha1
+   kind: KafkaSource
+   metadata:
+    name: kafka-source
+    labels:
+      kafkasources.sources.knative.dev/key-type: int
+   spec:
+    consumerGroup: knative-group
+    bootstrapServers: my-cluster-kafka-bootstrap.kafka:9092 #note the kafka namespace
+    topics: knative-demo-topic
+    sink:
+      ref:
+        apiVersion: serving.knative.dev/v1
+        kind: Service
+        name: event-display
+   ```
 
 ## Connecting to a TLS enabled Kafka broker
 
@@ -289,33 +289,33 @@ KafkaSource expects these files to be in pem format, if it is in other format li
    ```
 
 2. Apply the KafkaSource, change bootstrap and topics accordingly.
-     ```yaml
-     apiVersion: sources.knative.dev/v1alpha1
-     kind: KafkaSource
-     metadata:
-       name: kafka-source-with-tls
-     spec:
-       net:
-         tls:
-           enable: true
-           cert:
-             secretKeyRef:
-               key: certificate.pem
-               name: cert
-           key:
-             secretKeyRef:
-               key: key.pem
-               name: key
-           caCert:
-             secretKeyRef:
-               key: caroot.pem
-               name: cacert
-      consumerGroup: knative-group
-      bootstrapServers: my-cluster-kafka-bootstrap.kafka:9092
-      topics: knative-demo-topic
-      sink:
-        ref:
-          apiVersion: serving.knative.dev/v1
-          kind: Service
-          name: event-display
-     ```
+   ```yaml
+   apiVersion: sources.knative.dev/v1alpha1
+   kind: KafkaSource
+   metadata:
+    name: kafka-source-with-tls
+   spec:
+    net:
+      tls:
+        enable: true
+        cert:
+          secretKeyRef:
+            key: certificate.pem
+            name: cert
+        key:
+          secretKeyRef:
+            key: key.pem
+            name: key
+        caCert:
+          secretKeyRef:
+            key: caroot.pem
+            name: cacert
+   consumerGroup: knative-group
+   bootstrapServers: my-cluster-kafka-bootstrap.kafka:9092
+   topics: knative-demo-topic
+   sink:
+     ref:
+       apiVersion: serving.knative.dev/v1
+       kind: Service
+       name: event-display
+   ```
