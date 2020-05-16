@@ -247,35 +247,34 @@ You can specify the key deserializer among four types:
 
 To specify it, add the label `kafkasources.sources.knative.dev/key-type` to the
 `KafkaSource` definition like:
-
-   ```yaml
-   apiVersion: sources.knative.dev/v1alpha1
-   kind: KafkaSource
-   metadata:
-     name: kafka-source
-     labels:
-       kafkasources.sources.knative.dev/key-type: int
-   spec:
-     consumerGroup: knative-group
-     bootstrapServers: my-cluster-kafka-bootstrap.kafka:9092 #note the kafka namespace
-     topics: knative-demo-topic
-     sink:
-       ref:
-         apiVersion: serving.knative.dev/v1
-         kind: Service
-         name: event-display
-   ```
+     ```yaml
+     apiVersion: sources.knative.dev/v1alpha1
+     kind: KafkaSource
+     metadata:
+       name: kafka-source
+       labels:
+         kafkasources.sources.knative.dev/key-type: int
+     spec:
+       consumerGroup: knative-group
+       bootstrapServers: my-cluster-kafka-bootstrap.kafka:9092 #note the kafka namespace
+       topics: knative-demo-topic
+       sink:
+         ref:
+           apiVersion: serving.knative.dev/v1
+           kind: Service
+           name: event-display
+     ```
 
 ## Connecting to a TLS enabled Kafka broker
 
-The Kafka source supports TLS and SASL authentication methods. For enabling TLS authentication, please have the below files 
+The KafkaSource supports TLS and SASL authentication methods. For enabling TLS authentication, please have the below files 
 
 * CA Certificate
 * Client Certificate and Key
 
-Kafka source expects these files to be in pem format, if it is in other format like jks , please convert to pem.
+KafkaSource expects these files to be in pem format, if it is in other format like jks , please convert to pem.
 
-1. Create the certificate files as secrets in the namespace where kafka source is going to be set up
+1. Create the certificate files as secrets in the namespace where KafkaSource is going to be set up
    ```
 
    $ kubectl create secret generic cacert --from-file=caroot.pem
@@ -289,7 +288,7 @@ Kafka source expects these files to be in pem format, if it is in other format l
 
    ```
 
-2. Apply the Kafka source, change bootstrap and topics accordingly.
+2. Apply the KafkaSource, change bootstrap and topics accordingly.
      ```yaml
      apiVersion: sources.knative.dev/v1alpha1
      kind: KafkaSource
