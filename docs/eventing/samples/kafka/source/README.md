@@ -308,7 +308,7 @@ KafkaSource expects these files to be in pem format, if it is in other format li
             key: caroot.pem
             name: cacert
    consumerGroup: knative-group
-   bootstrapServers: my-cluster-kafka-bootstrap.kafka:9092
+   bootstrapServers: my-secure-kafka-bootstrap.kafka:443
    topics: knative-demo-topic
    sink:
      ref:
