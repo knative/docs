@@ -7,64 +7,101 @@ type: "docs"
 
 ## Reconciler Functionality
 General steps the reconciliation process needs to cover:
-1. Target the specific samplesource via the `sampleServiceClientSet`:
+1. Update the `ObservedGeneration` and initialize the `Status` conditions (as defined in `samplesource_lifecycle.go` and `samplesource_types.go`)
 ```go
-// Get the resource with this namespace/name.
-original, err := r.Lister.SampleSources(namespace).Get(name)
+src.Status.InitializeConditions()
+src.Status.ObservedGeneration = src.Generation
 ```
-2. Update the ObservedGeneration
-Initialize the Status conditions (as defined in `samplesource_lifecycle.go` and `samplesource_types.go`)
-3. Reconcile the Sink and MarkSink with the result
-Create the Receive Adapter (detailed below)
-    3. If successful, update the Status and MarkDeployed
-4. Reconcile the EventTypes and corresponding Status
-Creation and deletion of the events is done with the inherited `EventingClientSet().EventingV1alpha1()` api
-5. Update the full status field from the resulting reconcile attempt via the source’s clientset and api
-`r.samplesourceClientSet.SamplesV1alpha1().SampleSources(desired.Namespace).UpdateStatus(existing)`
-
+2. Create/reconcile the Receive Adapter (detailed below)
+3. If successful, update the `Status` and `MarkDeployed`
+```go 
+src.Status.PropagateDeploymentAvailability(ra)
+```
+4. Create/reconcile the `SinkBinding` for the Receive Adapter targeting the `Sink` (detailed below)
+5. MarkSink with the result
+```go 
+src.Status.MarkSink(sb.Status.SinkURI)
+```
+6. Return a new reconciler event stating that the process is done
+```go 
+return pkgreconciler.NewEvent(corev1.EventTypeNormal, "SampleSourceReconciled", "SampleSource reconciled: \"%s/%s\"", namespace, name)
+```
 
 ## Reconcile/Create The Receive Adapter
 As part of the source reconciliation, we have to create and deploy
-(and update if necessary) the underlying receive adapter.  The two
-client sets used in this process is the `kubeClientSet` for the
-Deployment tracking, and the `EventingClientSet` for the event
-recording.
+(and update if necessary) the underlying receive adapter.
 
 Verify the specified kubernetes resources are valid, and update the `Status` accordingly
 
 Assemble the ReceiveAdapterArgs
 ```go
 raArgs := resources.ReceiveAdapterArgs{
-		EventSource:   eventSource,
-		Image:         r.receiveAdapterImage,
-		Source:        src,
-		Labels:        resources.GetLabels(src.Name),
-		SinkURI:       sinkURI,
+		EventSource:    src.Namespace + "/" + src.Name,
+        Image:          r.ReceiveAdapterImage,
+        Source:         src,
+        Labels:         resources.Labels(src.Name),
+        AdditionalEnvs: r.configAccessor.ToEnvVars(), // Grab config envs for tracing/logging/metrics
 	}
 ```
 NB The exact arguments may change based on functional requirements
 Create the underlying deployment from the arguments provided, matching pod templates, labels, owner references, etc as needed to fill out the deployment
-Example: [pkg/reconciler/resources/receive_adapter.go](https://github.com/knative/sample-source/tree/master/pkg/reconciler/resources/receive_adapter.go)
+Example: [pkg/reconciler/sample/resources/receive_adapter.go](https://github.com/knative/sample-source/blob/master/pkg/reconciler/sample/resources/receive_adapter.go)
 
 1. Fetch the existing receive adapter deployment
 ```go
-	ra, err := r.KubeClientSet.AppsV1().Deployments(src.Namespace).Get(expected.Name, metav1.GetOptions{})
+namespace := owner.GetObjectMeta().GetNamespace()
+ra, err := r.KubeClientSet.AppsV1().Deployments(namespace).Get(expected.Name, metav1.GetOptions{})	
 ```
 2. Otherwise, create the deployment
 ```go
-ra, err = r.KubeClientSet.AppsV1().Deployments(src.Namespace).Create(expected)
+ra, err = r.KubeClientSet.AppsV1().Deployments(namespace).Create(expected)
 ```
 3. Check if the expected vs existing spec is different, and update the deployment if required
 ```go
-} else if podSpecChanged(ra.Spec.Template.Spec, expected.Spec.Template.Spec) {
-		ra.Spec.Template.Spec = expected.Spec.Template.Spec
-		if ra, err = r.KubeClientSet.AppsV1().Deployments(src.Namespace).Update(ra); err != nil {
-			return ra, err
-        }
+} else if r.podSpecImageSync(expected.Spec.Template.Spec, ra.Spec.Template.Spec) {
+    ra.Spec.Template.Spec = expected.Spec.Template.Spec
+    if ra, err = r.KubeClientSet.AppsV1().Deployments(namespace).Update(ra); err != nil {
+        return ra, err
+    }
 ```
 4. If updated, record the event
 ```go
-		r.Recorder.Eventf(src, corev1.EventTypeNormal, samplesourceDeploymentUpdated, "Deployment updated")
-		return ra, nil
+return pkgreconciler.NewEvent(corev1.EventTypeNormal, "DeploymentUpdated", "updated deployment: \"%s/%s\"", namespace, name)
 ```
 
+## Reconcile/Create The SinkBinding
+Instead of directly giving the details of the sink to the receive adapter, use a `SinkBinding` to bind the receive adapter with the sink.
+
+Steps here are almost the same with the `Deployment` reconciliation above, but it is for another resource, `SinkBinding`.
+
+1. Create a `Reference` for the receive adapter deployment. This deployment will be `SinkBinding`'s source:
+```go
+tracker.Reference{
+    APIVersion: appsv1.SchemeGroupVersion.String(),
+    Kind:       "Deployment",
+    Namespace:  ra.Namespace,
+    Name:       ra.Name,
+}
+```
+2. Fetch the existing `SinkBinding`
+```go 
+namespace := owner.GetObjectMeta().GetNamespace()
+sb, err := r.EventingClientSet.SourcesV1alpha2().SinkBindings(namespace).Get(expected.Name, metav1.GetOptions{})
+```
+2. If it doesn't exist, create it
+```go 
+sb, err = r.EventingClientSet.SourcesV1alpha2().SinkBindings(namespace).Create(expected)
+
+```
+3. Check if the expected vs existing spec is different, and update the `SinkBinding` if required
+```go 
+else if r.specChanged(sb.Spec, expected.Spec) {
+    sb.Spec = expected.Spec
+    if sb, err = r.EventingClientSet.SourcesV1alpha2().SinkBindings(namespace).Update(sb); err != nil {
+        return sb, err
+    }
+```
+4. If updated, record the event
+```go
+return pkgreconciler.NewEvent(corev1.EventTypeNormal, "SinkBindingUpdated", "updated SinkBinding: \"%s/%s\"", namespace, name)
+``` 

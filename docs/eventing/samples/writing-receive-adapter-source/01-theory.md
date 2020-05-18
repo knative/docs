@@ -70,7 +70,7 @@ Specifically, the `clientset`, `cache`, `informers`, and `listers` can all be ge
 import (
     // ...
     sampleSourceClient "knative.dev/sample-source/pkg/client/injection/client"
-    samplesourceinformer “knative.dev/sample-source/pkg/client/injection/informers/samples/v1alpha1/samplesource"
+    samplesourceinformer "knative.dev/sample-source/pkg/client/injection/informers/samples/v1alpha1/samplesource"
 )
 // ...
 func NewController(ctx context.Context, cmw configmap.Watcher) *controller.Impl {
@@ -83,20 +83,32 @@ func NewController(ctx context.Context, cmw configmap.Watcher) *controller.Impl 
         // ...
 }
 ```
-Ensure that the specific source subdirectory has been added to the injection portion of the `hack/update-codegen.sh` script.
+
+To have these generated, ensure that the specific source subdirectories has been added to the injection portion of the 
+[`hack/update-codegen.sh`](https://github.com/knative/eventing-contrib/blob/master/hack/update-codegen.sh) script.
 
 ```patch
 
 # Sources
-+API_DIRS_SOURCES=(github/pkg camel/source/pkg kafka/source/pkg awssqs/pkg couchdb/source/pkg prometheus/pkg YourSourceHere/pkg)
--API_DIRS_SOURCES=(github/pkg camel/source/pkg kafka/source/pkg awssqs/pkg couchdb/source/pkg prometheus/pkg)
++API_DIRS_SOURCES=(camel/source/pkg awssqs/pkg couchdb/source/pkg prometheus/pkg YourSourceHere/pkg)
+-API_DIRS_SOURCES=(camel/source/pkg awssqs/pkg couchdb/source/pkg prometheus/pkg)
+
+# Knative Injection
+
+chmod +x ${KNATIVE_CODEGEN_PKG}/hack/generate-knative.sh
+${KNATIVE_CODEGEN_PKG}/hack/generate-knative.sh "injection" \
+-  knative.dev/sample-source/pkg/client knative.dev/sample-source/pkg/apis \
+-  "samples:v1alpha1" \
++  knative.dev/your-source/pkg/client knative.dev/your-source/pkg/apis \
++  "your-name:v1alpha1" \
+  --go-header-file ${REPO_ROOT}/hack/boilerplate/boilerplate.go.txt
 
 ```
 and
 ```patch
-  -i knative.dev/eventing-contrib/camel/source/pkg/apis \
-- -i knative.dev/eventing-contrib/github/pkg/apis
-+ -i knative.dev/eventing-contrib/github/pkg/apis \
+  -i knative.dev/eventing-contrib/github/pkg/apis \
+- -i knative.dev/eventing-contrib/gitlab/pkg/apis
++ -i knative.dev/eventing-contrib/gitlab/pkg/apis \
 + -i knative.dev/eventing-contrib/YourSourceHere/pkg/apis
 
 ```
