@@ -5,7 +5,7 @@ enables easy bootstrapping of a Kafka client.
 ## Create a Job that uses KafkaBinding
 
 In the below example a Kubernetes Job will be using the KafkaBinding to produce
-messages on a Kafka Topic, which will be recieved by the Event Display service
+messages on a Kafka Topic, which will be received by the Event Display service
 via Kafka Source
 
 ### Prerequisites
