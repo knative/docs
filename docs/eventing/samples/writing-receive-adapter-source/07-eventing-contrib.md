@@ -5,13 +5,13 @@ weight: 10
 type: "docs"
 ---
 
-If you would like to contribute Knative's [`eventing-contrib`](https://github.com/knative/eventing-contrib/), as a starting point you can 
-have a look at different sources there, such as  
-[`KafkaSource`](https://github.com/knative/eventing-contrib/tree/master/kafka/source), 
-[`GithubSource`](https://github.com/knative/eventing-contrib/tree/master/github) and 
+If you would like to contribute Knative's [`eventing-contrib`](https://github.com/knative/eventing-contrib/), as a starting point you can
+have a look at different sources there, such as
+[`KafkaSource`](https://github.com/knative/eventing-contrib/tree/master/kafka/source),
+[`GithubSource`](https://github.com/knative/eventing-contrib/tree/master/github) and
 [`AWSSQSSource`](https://github.com/knative/eventing-contrib/tree/master/awssqs).
 
-To generate and inject `clientset`, `cache`, `informers`, and `listers`, ensure that the specific source subdirectories has been added to the injection portion of the 
+To generate and inject `clientset`, `cache`, `informers`, and `listers`, ensure that the specific source subdirectories has been added to the injection portion of the
 [`hack/update-codegen.sh`](https://github.com/knative/eventing-contrib/blob/master/hack/update-codegen.sh) script.
 
 ```patch

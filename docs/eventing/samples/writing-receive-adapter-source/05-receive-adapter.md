@@ -25,8 +25,8 @@ func main() {
 ## Defining NewAdapter implementation and Start function
 The adapter's `pkg` implementation consists of two main functions;
 
-1. A `NewAdapter(ctx context.Context, aEnv adapter.EnvConfigAccessor, ceClient cloudevents.Client) adapter.Adapter {}` call, which creates the 
-new adapter with passed variables via the `EnvConfigAccessor`. The created adapter will be passed the cloudevents client (which is where the events are forwarded to). This is sometimes refered
+1. A `NewAdapter(ctx context.Context, aEnv adapter.EnvConfigAccessor, ceClient cloudevents.Client) adapter.Adapter {}` call, which creates the
+new adapter with passed variables via the `EnvConfigAccessor`. The created adapter will be passed the cloudevents client (which is where the events are forwarded to). This is sometimes referred
 to as a sink, or `ceClient` in the Knative ecosystem.  The return value is a reference to the adapter as defined by the adapter's local struct.
 
 In our `sample-source`'s case;

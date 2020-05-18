@@ -14,16 +14,16 @@ src.Status.ObservedGeneration = src.Generation
 ```
 2. Create/reconcile the Receive Adapter (detailed below)
 3. If successful, update the `Status` and `MarkDeployed`
-```go 
+```go
 src.Status.PropagateDeploymentAvailability(ra)
 ```
 4. Create/reconcile the `SinkBinding` for the Receive Adapter targeting the `Sink` (detailed below)
 5. MarkSink with the result
-```go 
+```go
 src.Status.MarkSink(sb.Status.SinkURI)
 ```
 6. Return a new reconciler event stating that the process is done
-```go 
+```go
 return pkgreconciler.NewEvent(corev1.EventTypeNormal, "SampleSourceReconciled", "SampleSource reconciled: \"%s/%s\"", namespace, name)
 ```
 
@@ -50,7 +50,7 @@ Example: [pkg/reconciler/sample/resources/receive_adapter.go](https://github.com
 1. Fetch the existing receive adapter deployment
 ```go
 namespace := owner.GetObjectMeta().GetNamespace()
-ra, err := r.KubeClientSet.AppsV1().Deployments(namespace).Get(expected.Name, metav1.GetOptions{})	
+ra, err := r.KubeClientSet.AppsV1().Deployments(namespace).Get(expected.Name, metav1.GetOptions{})
 ```
 2. Otherwise, create the deployment
 ```go
@@ -84,17 +84,17 @@ tracker.Reference{
 }
 ```
 2. Fetch the existing `SinkBinding`
-```go 
+```go
 namespace := owner.GetObjectMeta().GetNamespace()
 sb, err := r.EventingClientSet.SourcesV1alpha2().SinkBindings(namespace).Get(expected.Name, metav1.GetOptions{})
 ```
 2. If it doesn't exist, create it
-```go 
+```go
 sb, err = r.EventingClientSet.SourcesV1alpha2().SinkBindings(namespace).Create(expected)
 
 ```
 3. Check if the expected vs existing spec is different, and update the `SinkBinding` if required
-```go 
+```go
 else if r.specChanged(sb.Spec, expected.Spec) {
     sb.Spec = expected.Spec
     if sb, err = r.EventingClientSet.SourcesV1alpha2().SinkBindings(namespace).Update(sb); err != nil {
@@ -104,4 +104,4 @@ else if r.specChanged(sb.Spec, expected.Spec) {
 4. If updated, record the event
 ```go
 return pkgreconciler.NewEvent(corev1.EventTypeNormal, "SinkBindingUpdated", "updated SinkBinding: \"%s/%s\"", namespace, name)
-``` 
+```
