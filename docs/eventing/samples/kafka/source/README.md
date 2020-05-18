@@ -124,8 +124,10 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
      name: kafka-source
    spec:
      consumerGroup: knative-group
-     bootstrapServers: my-cluster-kafka-bootstrap.kafka:9092 #note the kafka namespace
-     topics: knative-demo-topic
+     bootstrapServers: 
+     - my-cluster-kafka-bootstrap.kafka:9092 #note the kafka namespace
+     topics: 
+     - knative-demo-topic
      sink:
        ref:
          apiVersion: serving.knative.dev/v1
@@ -259,8 +261,10 @@ metadata:
     kafkasources.sources.knative.dev/key-type: int
 spec:
   consumerGroup: knative-group
-  bootstrapServers: my-cluster-kafka-bootstrap.kafka:9092 #note the kafka namespace
-  topics: knative-demo-topic
+  bootstrapServers: 
+  - my-cluster-kafka-bootstrap.kafka:9092 #note the kafka namespace
+  topics: 
+  - knative-demo-topic
   sink:
     ref:
       apiVersion: serving.knative.dev/v1

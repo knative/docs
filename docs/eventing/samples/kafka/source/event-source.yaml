@@ -22,12 +22,12 @@
 #   KAFKA_SASL_PASSWORD_SECRET_NAME: Name of secret containing SASL password (optional)
 #   KAFKA_SASL_PASSWORD_SECRET_KEY: Key within secret containing SASL password (optional)
 #   KAFKA_TLS_ENABLE: Truthy to enable TLS, disabled by default (optional)
-#   KAFKA_TLS_CERT_SECRET_NAME: Name of secret containing client cert to use when connecting wtih TLS (optional)
-#   KAFKA_TLS_CERT_SECRET_KEY: Key within secret containing client cert to use when connecting wtih TLS (optional)
-#   KAFKA_TLS_KEY_SECRET_NAME: Name of secret containing client key to use when connecting wtih TLS (optional)
-#   KAFKA_TLS_KEY_SECRET_KEY: Key within secret containing client key to use when connecting wtih TLS (optional)
-#   KAFKA_TLS_CA_CERT_SECRET_NAME: Name of secret containing server CA cert to use when connecting wtih TLS (optional)
-#   KAFKA_TLS_CA_CERT_SECRET_KEY: Key within secret containing server CA cert to use when connecting wtih TLS (optional)
+#   KAFKA_TLS_CERT_SECRET_NAME: Name of secret containing client cert to use when connecting with TLS (optional)
+#   KAFKA_TLS_CERT_SECRET_KEY: Key within secret containing client cert to use when connecting with TLS (optional)
+#   KAFKA_TLS_KEY_SECRET_NAME: Name of secret containing client key to use when connecting with TLS (optional)
+#   KAFKA_TLS_KEY_SECRET_KEY: Key within secret containing client key to use when connecting with TLS (optional)
+#   KAFKA_TLS_CA_CERT_SECRET_NAME: Name of secret containing server CA cert to use when connecting with TLS (optional)
+#   KAFKA_TLS_CA_CERT_SECRET_KEY: Key within secret containing server CA cert to use when connecting with TLS (optional)
 
 apiVersion: sources.knative.dev/v1alpha1
 kind: KafkaSource

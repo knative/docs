@@ -32,6 +32,11 @@ via Kafka Source
 
 ### Create the Event Display service
 
+1. Source code for Event Display service
+
+   Get the source code of Event Display container image from
+   [here](https://github.com/knative/eventing-contrib/blob/master/cmd/event_display/main.go)
+
 1. Deploy the Event Display Service via kubectl:
 
    ```yaml
@@ -134,9 +139,13 @@ In this case, we will bind any `Job` with the labels `kafka.topic: "logs"`.
 
 ### Create Kubernetes Job
 
-1. Now we will use the kafka-publisher container to send events to kafka topic
-   when the Job runs. You can find the source of he kafka-publisher
+1. Source code for kafka-publisher service
+
+   Get the source code of kafka-publisher container image from
    [here](https://github.com/knative/eventing-contrib/blob/master/test/test_images/kafka-publisher/main.go)
+
+1. Now we will use the kafka-publisher container to send events to kafka topic
+   when the Job runs.
 
    ```yaml
    apiVersion: batch/v1
@@ -209,7 +218,7 @@ authentication, please have the below files
 These files are expected to be in pem format, if it is in other format like jks
 , please convert to pem.
 
-1. Create the certificate files as secrets in the namespace where Kafkabinding
+1. Create the certificate files as secrets in the namespace where KafkaBinding
    is going to be set up
 
    ```
@@ -221,8 +230,7 @@ These files are expected to be in pem format, if it is in other format like jks
 
    ```
 
-2. Apply the kafkabinding-tls.yaml, change bootstrapServers and topics
-   accordingly.
+2. Apply the kafkabinding-tls.yaml, change bootstrapServers accordingly.
    ```yaml
    apiVersion: sources.knative.dev/v1alpha1
    kind: KafkaBinding
@@ -251,5 +259,6 @@ These files are expected to be in pem format, if it is in other format like jks
             key: caroot.pem
             name: cacert
     consumerGroup: knative-group
-    bootstrapServers: my-secure-kafka-bootstrap.kafka:443
+    bootstrapServers:
+    - my-secure-kafka-bootstrap.kafka:443
    ```
