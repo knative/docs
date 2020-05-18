@@ -52,7 +52,7 @@ via Kafka Source
    service.serving.knative.dev/event-display created
    ```
 
-1. Deploy the Event Display Service via kn cli:
+1. (Optional) Deploy the Event Display Service via kn cli:
 
    Alernatively, you can create the knative service using the `kn` cli like
    below
