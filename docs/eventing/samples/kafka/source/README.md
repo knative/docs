@@ -1,8 +1,10 @@
-Tutorial on how to build and deploy a `KafkaSource` [Eventing source](../../../sources/README.md) using a Knative Serving `Service`.
+Tutorial on how to build and deploy a `KafkaSource`
+[Eventing source](../../../sources/README.md) using a Knative Serving `Service`.
 
 ## Prerequisites
 
-You must ensure that you meet the [prerequisites listed in the Apache Kafka overview](../README.md).
+You must ensure that you meet the
+[prerequisites listed in the Apache Kafka overview](../README.md).
 
 ## Creating a `KafkaSource` source CRD
 
@@ -95,7 +97,7 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
              image: gcr.io/knative-releases/github.com/knative/eventing-contrib/cmd/event_display
    ```
 
-1. Deploy the Event Display Service
+3. Deploy the Event Display Service
 
    ```
    $ kubectl apply --filename event-display.yaml
@@ -103,7 +105,7 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
    service.serving.knative.dev/event-display created
    ```
 
-1. Ensure that the Service pod is running. The pod name will be prefixed with
+4. Ensure that the Service pod is running. The pod name will be prefixed with
    `event-display`.
    ```
    $ kubectl get pods
@@ -124,10 +126,10 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
      name: kafka-source
    spec:
      consumerGroup: knative-group
-     bootstrapServers: 
-     - my-cluster-kafka-bootstrap.kafka:9092 #note the kafka namespace
-     topics: 
-     - knative-demo-topic
+     bootstrapServers:
+       - my-cluster-kafka-bootstrap.kafka:9092 #note the kafka namespace
+     topics:
+       - knative-demo-topic
      sink:
        ref:
          apiVersion: serving.knative.dev/v1
@@ -181,22 +183,12 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
    $ kubectl logs --selector='serving.knative.dev/service=event-display' -c user-container
    ```
 
-☁️ cloudevents.Event
-Validation: valid
-Context Attributes,
-  specversion: 1.0
-  type: dev.knative.kafka.event
-  source: /apis/v1/namespaces/default/kafkasources/kafka-source#my-topic
-  subject: partition:0#564
-  id: partition:0/offset:564
-  time: 2020-02-10T18:10:23.861866615Z
-  datacontenttype: application/json
-Extensions,
-  key:
-Data,
-    {
-      "msg": "This is a test!"
-    }
+☁️ cloudevents.Event Validation: valid Context Attributes, specversion: 1.0
+type: dev.knative.kafka.event source:
+/apis/v1/namespaces/default/kafkasources/kafka-source#my-topic subject:
+partition:0#564 id: partition:0/offset:564 time: 2020-02-10T18:10:23.861866615Z
+datacontenttype: application/json Extensions, key: Data, { "msg": "This is a
+test!" }
 
 ```
 
@@ -219,7 +211,8 @@ Data,
 3. Remove the Apache Kafka Event Controller
 ```
 
-\$ kubectl delete -f https://storage.googleapis.com/knative-releases/eventing-contrib/latest/kafka-source.yaml
+\$ kubectl delete -f
+https://storage.googleapis.com/knative-releases/eventing-contrib/latest/kafka-source.yaml
 serviceaccount "kafka-controller-manager" deleted
 clusterrole.rbac.authorization.k8s.io "eventing-sources-kafka-controller"
 deleted clusterrolebinding.rbac.authorization.k8s.io
@@ -261,9 +254,9 @@ metadata:
     kafkasources.sources.knative.dev/key-type: int
 spec:
   consumerGroup: knative-group
-  bootstrapServers: 
+  bootstrapServers:
   - my-cluster-kafka-bootstrap.kafka:9092 #note the kafka namespace
-  topics: 
+  topics:
   - knative-demo-topic
   sink:
     ref:
@@ -271,3 +264,4 @@ spec:
       kind: Service
       name: event-display
 ```
+````
