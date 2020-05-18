@@ -10,8 +10,9 @@ via Kafka Source
 
 ### Prerequisites
 
-You must ensure that you meet the
+1. You must ensure that you meet the
 [prerequisites listed in the Apache Kafka overview](../README.md).
+2. This feature is available from Knative Eventing 0.15+
 
 ### Creating a `KafkaSource` source CRD
 
@@ -53,9 +54,9 @@ You must ensure that you meet the
 
 Alernatively, you can create the knative service using the `kn` cli like below
 
-```
-kn service create event-display --image=gcr.io/knative-releases/github.com/knative/eventing-contrib/cmd/event_display
-```
+   ```
+   kn service create event-display --image=gcr.io/knative-releases/github.com/knative/eventing-contrib/cmd/event_display
+   ```
 
 1. Ensure that the Service pod is running. The pod name will be prefixed with
    `event-display`.
