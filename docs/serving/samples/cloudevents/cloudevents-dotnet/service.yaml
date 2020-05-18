@@ -8,9 +8,9 @@ spec:
     spec:
       containers:
         - image: <image>
-          ports:
-          - containerPort: 80
+          env:
+          - name: ASPNETCORE_URLS
+            value: http://*:8080
           # Uncomment this to send events somewhere.
-          #env:
           #- name: K_SINK
           #  value: http://default-broker.default.svc.cluster.local
