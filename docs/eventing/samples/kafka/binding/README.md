@@ -32,7 +32,7 @@ via Kafka Source
 
 ### Create the Event Display service
 
-1. Source code for Event Display service
+1. (Optional) Source code for Event Display service
 
    Get the source code of Event Display container image from
    [here](https://github.com/knative/eventing-contrib/blob/master/cmd/event_display/main.go)
@@ -59,7 +59,7 @@ via Kafka Source
 
 1. (Optional) Deploy the Event Display Service via kn cli:
 
-   Alernatively, you can create the knative service using the `kn` cli like
+   Alternatively, you can create the knative service using the `kn` cli like
    below
 
    ```

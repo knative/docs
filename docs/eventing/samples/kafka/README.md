@@ -25,7 +25,7 @@ is to install it by using [Strimzi](https://strimzi.io).
      | sed 's/namespace: .*/namespace: kafka/' \
      | kubectl -n kafka apply -f -
    ```
-1. Describe the size of your Apache Kafka installation, like:
+1. Describe the size of your Apache Kafka installation in `kafka.yaml`, like:
    ```yaml
    apiVersion: kafka.strimzi.io/v1beta1
    kind: Kafka
