@@ -83,7 +83,7 @@ $ curl -X POST \
     -H "ce-type: curl.demo"  \
     -H "ce-id: 123-abc"  \
     -d '{"name":"Dave"}' \
-    http://cloudevents-dotnet.default.1.2.3.4.xip.io
+    <URL from kubectl command above>
 ```
 
 You will get back:
