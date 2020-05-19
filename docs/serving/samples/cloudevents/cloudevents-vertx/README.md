@@ -40,7 +40,7 @@ Get the URL for your Service with:
 ```shell
 $ kubectl get ksvc
 NAME                URL                                            LATESTCREATED             LATESTREADY               READY   REASON
-cloudevents-vertx   http://cloudevents-vertx.default.example.com   cloudevents-vertx-86h28   cloudevents-vertx-86h28   True 
+cloudevents-vertx   http://cloudevents-vertx.default.example.com   cloudevents-vertx-86h28   cloudevents-vertx-86h28   True
 ```
 
 Then send a cloud event to it with:
