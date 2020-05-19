@@ -496,7 +496,7 @@ This period is an upper bound amount of time the system waits internally for the
 
 * **Global key:** `scale-to-zero-grace-period`
 * **Per-revision annotation key:** n/a
-* **Possible values:** Duration, at least 6s.
+* **Possible values:** Duration (must be at least 6s).
 * **Default:** `30s`
 
 **Example:**
@@ -529,7 +529,9 @@ spec:
 
 ### Scale To Zero Last Pod Retention Period
 
-This flag ensures that after the decision has been made by the Autoscaler to scale to 0 the last pod will remain active for at least this amount of timei, i.e minimum amount of time the last pod will linger. This is in contrast to `scale-to-zero-grace-period` flag, that determines the maximum amount of time that the last pod will stay alive.
+The `scale-to-zero-pod-retention-period` flag determines the **minimum** amount of time that the last pod will remain active after the Autoscaler has decided to scale pods to zero.
+
+This contrasts with the `scale-to-zero-grace-period` flag, which determines the **maximum** amount of time that the last pod will remain active after the Autoscaler has decided to scale pods to zero.
 
 * **Global key:** `scale-to-zero-pod-retention-period`
 * **Per-revision annotation key:** n/a
