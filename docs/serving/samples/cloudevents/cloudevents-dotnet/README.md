@@ -88,8 +88,18 @@ $ curl -X POST \
 
 You will get back:
 
-```shell
-{"message":"Hello, Dave"}
+```json
+{
+  "specversion": "1.0",
+  "type": "dev.knative.docs.sample",
+  "source": "https://github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-dotnet",
+  "id": "d662b6f6-35ff-4b98-bffd-5ae9eee23dab",
+  "time": "2020-05-19T01:26:23.3500138Z",
+  "datacontenttype": "application/json",
+  "data": {
+    "message": "Hello, Dave"
+  }
+}
 ```
 
 ## Removing the sample app deployment
