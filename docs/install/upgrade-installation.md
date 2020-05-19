@@ -75,6 +75,12 @@ ie.
 kubectl apply --filename {{< artifact repo="serving" file="serving-storage-version-migration.yaml" >}}
 ```
 
+for eventing:
+```bash
+kubectl apply --filename {{< artifact repo="eventing" file="storage-version-migration-v0.15.0.yaml" >}}
+```
+
+
 
 ## Performing the upgrade
 
