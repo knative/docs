@@ -496,7 +496,7 @@ This period is an upper bound amount of time the system waits internally for the
 
 * **Global key:** `scale-to-zero-grace-period`
 * **Per-revision annotation key:** n/a
-* **Possible values:** Duration
+* **Possible values:** Duration (must be at least 6s).
 * **Default:** `30s`
 
 **Example:**
@@ -522,6 +522,45 @@ spec:
   config:
     autoscaler:
       scale-to-zero-grace-period: "40s"
+```
+{{< /tab >}}
+{{< /tabs >}}
+
+
+### Scale To Zero Last Pod Retention Period
+
+The `scale-to-zero-pod-retention-period` flag determines the **minimum** amount of time that the last pod will remain active after the Autoscaler has decided to scale pods to zero.
+
+This contrasts with the `scale-to-zero-grace-period` flag, which determines the **maximum** amount of time that the last pod will remain active after the Autoscaler has decided to scale pods to zero.
+
+* **Global key:** `scale-to-zero-pod-retention-period`
+* **Per-revision annotation key:** n/a
+* **Possible values:** Non-negative duration string
+* **Default:** `0s`
+
+**Example:**
+{{< tabs name="scale-to-zero-grace" default="Global (ConfigMap)" >}}
+{{% tab name="Global (ConfigMap)" %}}
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+ name: config-autoscaler
+ namespace: knative-serving
+data:
+ scale-to-zero-pod-retention-period: "42s"
+```
+{{< /tab >}}
+{{% tab name="Global (Operator)" %}}
+```yaml
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+spec:
+  config:
+    autoscaler:
+      scale-to-zero-pod-retention-period: "42s"
 ```
 {{< /tab >}}
 {{< /tabs >}}
