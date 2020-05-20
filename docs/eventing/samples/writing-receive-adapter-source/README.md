@@ -11,7 +11,7 @@ well as receive adapter, which events can be viewed through a basic
 Just want to see the code? The reference project is
 [https://github.com/knative/sample-source](https://github.com/knative/sample-source).
 
-A variety of event sources are available in Knative [`eventing-contrib](https://github.com/knative/eventing-contrib/) such as
+A variety of event sources are available in Knative [`eventing-contrib`](https://github.com/knative/eventing-contrib/) such as
 [`KafkaSource`](https://github.com/knative/eventing-contrib/tree/master/kafka/source),
 [`GithubSource`](https://github.com/knative/eventing-contrib/tree/master/github) and
 [`AWSSQSSource`](https://github.com/knative/eventing-contrib/tree/master/awssqs) that can be used as a reference.
