@@ -370,7 +370,7 @@ Knative supports automatically provisioning TLS certificates via [cert-manager](
 2. Next, install the component that integrates Knative with cert-manager:
 
     ```bash
-    kubectl apply --filename {{< artifact repo="serving" file="serving-cert-manager.yaml" >}}
+    kubectl apply --filename {{< artifact repo="net-certmanager" file="release.yaml" >}}
     ```
 
 3. Now configure Knative to [automatically configure TLS certificates](../serving/using-auto-tls.md).
