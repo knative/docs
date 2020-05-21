@@ -262,7 +262,7 @@ metadata:
 spec:
   consumerGroup: knative-group
   bootstrapServers:
-  - my-cluster-kafka-bootstrap.kafka:9092 #note the kafka namespace
+  - my-cluster-kafka-bootstrap.kafka:9092 # note the kafka namespace
   topics:
   - knative-demo-topic
   sink:
