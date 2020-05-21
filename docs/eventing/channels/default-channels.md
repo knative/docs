@@ -42,11 +42,11 @@ metadata:
 data:
   default-ch-config: |
     clusterDefault:
-      apiVersion: messaging.knative.dev/v1beta1
+      apiVersion: messaging.knative.dev/v1alpha1
       kind: InMemoryChannel
     namespaceDefaults:
       some-namespace:
-        apiVersion: messaging.knative.dev/v1beta1
+        apiVersion: messaging.knative.dev/v1alpha1
         kind: KafkaChannel
         spec:
           numPartitions: 2
@@ -90,7 +90,7 @@ metadata:
   namespace: default
 spec:
   channelTemplate:
-    apiVersion: messaging.knative.dev/v1beta1
+    apiVersion: messaging.knative.dev/v1alpha1
 ￼    kind: InMemoryChannel
 ```
 
