@@ -124,9 +124,9 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
      name: kafka-source
    spec:
      consumerGroup: knative-group
-     bootstrapServers: 
+     bootstrapServers:
      - my-cluster-kafka-bootstrap.kafka:9092 # note the kafka namespace
-     topics: 
+     topics:
      - knative-demo-topic
      sink:
        ref:
@@ -257,9 +257,9 @@ To specify it, add the label `kafkasources.sources.knative.dev/key-type` to the 
       kafkasources.sources.knative.dev/key-type: int
    spec:
     consumerGroup: knative-group
-    bootstrapServers: 
+    bootstrapServers:
     - my-cluster-kafka-bootstrap.kafka:9092 # note the kafka namespace
-    topics: 
+    topics:
     - knative-demo-topic
     sink:
       ref:
@@ -312,9 +312,9 @@ KafkaSource expects these files to be in pem format, if it is in other format li
             key: caroot.pem
             name: cacert
    consumerGroup: knative-group
-   bootstrapServers: 
+   bootstrapServers:
    - my-secure-kafka-bootstrap.kafka:443
-   topics: 
+   topics:
    - knative-demo-topic
    sink:
      ref:
