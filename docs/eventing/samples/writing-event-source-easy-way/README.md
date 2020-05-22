@@ -1,10 +1,3 @@
----
-title: "Writing an Event Source using the easy way"
-linkTitle: "Event Source - easy way"
-weight: 10
-type: "docs"
----
-
 # Introduction
 
 As stated in [tutorial on writing a Source with a Receive Adapter](../writing-receive-adapter-source/README.md), there are multiple ways to
