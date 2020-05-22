@@ -169,7 +169,7 @@ running the following command:
 
 ### Configure config-certmanager ConfigMap
 
-Update your [`config-certmanager` ConfigMap](https://github.com/knative/serving/blob/master/config/config-certmanager.yaml)
+Update your [`config-certmanager` ConfigMap](https://github.com/knative/net-certmanager/blob/master/config/config.yaml)
 in the `knative-serving` namespace to reference your new `ClusterIssuer`.
 
 1.  Run the following command to edit your `config-certmanager` ConfigMap:
