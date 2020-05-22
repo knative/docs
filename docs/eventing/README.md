@@ -3,6 +3,31 @@ Knative Eventing is a system that is designed to address a common need for cloud
 native development and provides composable primitives to enable late-binding
 event sources and event consumers.
 
+## Functionality
+
+Knative Eventing supports multiple modes of usage. The following scenarios are
+well-supported by the existing components; since the system is modular, it's
+also possible to combine the components in novel ways.
+
+1. **I just want to publish events, I don't care who consumes them.** Send
+   events to a [Broker](broker/README.md) as an HTTP POST. The
+   [SinkBinding](samples/sinkbinding/README.md) can be useful to decouple the destination
+   configuration from your application.
+
+1. **I just want to consume events like X, I don't care how they are
+   published.** Use a [Trigger](broker/README.md) to consume events from a Broker based
+   on CloudEvents attributes. Your application will receive the events as an
+   HTTP POST.
+
+1. **I want to transform events through a series of steps.** Use [Channels and
+   Subscriptions](channels/README.md) to define complex message-passing topologies. For
+   simple pipelines, the [Sequence](flows/sequence.md) automates construction of
+   Channels and Subscriptions between each stage.
+
+Knative also supports some additional patterns such as
+[Parallel](flows/parallel.md) fanout of events, and routing response events from
+both Channels and Brokers.
+
 ## Design overview
 
 Knative Eventing is designed around the following goals:
@@ -42,23 +67,29 @@ generic interfaces that can be implemented by multiple Kubernetes resources:
 
 ### Event brokers and triggers
 
-As of v0.5, Knative Eventing defines Broker and Trigger objects to make it
-easier to filter events.
+Broker and Trigger objects make it easy to filter events based on event
+attributes.
 
 A Broker provides a bucket of events which can be selected by attribute. It
 receives events and forwards them to subscribers defined by one or more matching
-Triggers.
+Triggers. Since a Broker implements Addressable, event senders can submit events
+to the Broker by POSTing the event to the Broker's `status.address.url`.
 
 A Trigger describes a filter on event attributes which should be delivered to an
 Addressable. You can create as many Triggers as necessary.
+
+For most use cases, a single bucket (Broker) per namespace is sufficient, but
+there are serveral use cases where multiple buckets (Brokers) can simplify
+architecture. For example, separate Brokers for events containing Personally
+Identifiable Information (PII) and non-PII events can simplify audit and access
+control rules.
 
 ![Broker Trigger Diagram](./images/broker-trigger-overview.svg)
 
 ### Event registry
 
-As of v0.6, Knative Eventing defines an EventType object to make it easier for
-consumers to discover the types of events they can consume from the different
-Brokers.
+Knative Eventing defines an EventType object to make it easier for consumers to
+discover the types of events they can consume from Brokers.
 
 The registry consists of a collection of event types. The event types stored in
 the registry contain (all) the required information for a consumer to create a
@@ -66,6 +97,17 @@ Trigger without resorting to some other out-of-band mechanism.
 
 To learn how to use the registry, see the
 [Event Registry documentation](./event-registry.md).
+
+### Simplify event delivery
+
+The [SinkBinding](samples/sinkbinding/README.md) custom object supports decoupling event
+production from delivery addressing.
+
+When you create a SinkBinding, you reference an Addressable and a Kubernetes
+object which provides a PodTemplateSpec. The SinkBinding will inject environment
+variables (`$K_SINK` for the destination URL) into the PodTemplateSpec so that
+the application code does not need to interact with the Kubernetes API to locate
+the event destination.
 
 ### Event channels and subscriptions
 
@@ -106,34 +148,9 @@ Knative Eventing currently requires Knative Serving installed with either Istio 
 Contour version >=1.1, or Gloo version >=0.18.16.
 [Follow the instructions to install on the platform of your choice](../install/README.md).
 
-## Architecture
-
-The eventing infrastructure supports two forms of event delivery at the moment:
-
-1. Direct delivery from a source to a single Service (an Addressable endpoint,
-   including a Knative Service or a core Kubernetes Service). In this case, the
-   Source is responsible for retrying or queueing events if the destination
-   Service is not available.
-1. Fan-out delivery from a source or Service response to multiple endpoints
-   using
-   [Channels](https://github.com/knative/eventing/blob/master/pkg/apis/messaging/v1alpha1/channel_types.go#L57)
-   and
-   [Subscriptions](https://github.com/knative/eventing/blob/master/pkg/apis/messaging/v1alpha1/subscription_types.go).
-   In this case, the Channel implementation ensures that messages are delivered
-   to the requested destinations and should buffer the events if the destination
-   Service is unavailable.
-
-![Control plane object model](./images/control-plane.png)
-
-The actual message forwarding is implemented by multiple data plane components
-which provide observability, persistence, and translation between different
-messaging protocols.
-
-![Data plane implementation](./images/data-plane.png)
-
-<!-- TODO(evankanderson): add documentation for Kafka bus once it is available. -->
-
 ## Sources
+
+<!-- TODO(evankanderson): move this to just sources/ ? -->
 
 Each source is a separate Kubernetes custom resource. This allows each type of
 Source to define the arguments and parameters needed to instantiate a source.
