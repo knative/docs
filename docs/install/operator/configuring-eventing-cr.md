@@ -35,7 +35,7 @@ a unique identifier, e.g. `eventing-controller`, you need to use the `override` 
 `deployment/container` as the unique key.
 
 Some images are defined via environment variable in Knative Eventing. They can be replaced by taking advantage of the
-`override` field. As Knative does not have a consistent way to specify container images, we have a known issue [here](https://github.com/knative-sandbox/operator/issues/22).
+`override` field. As Knative does not have a consistent way to specify container images, we have a known issue [here](https://github.com/knative/operator/issues/22).
 
 ### Download images in predefined format without secrets:
 
