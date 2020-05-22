@@ -4,7 +4,7 @@ weight: 10
 type: "docs"
 ---
 
-Knative provides an [operator](https://github.com/knative-sandbox/operator)  as a tool to install, configure and manage Knative. The Knative operator leverages custom objects
+Knative provides an [operator](https://github.com/knative/operator) as a tool to install, configure and manage Knative. The Knative operator leverages custom objects
 in the cluster to define and manage the installed Knative software. This guide explains how to install and uninstall
 Knative using Knative operator.
 
@@ -28,7 +28,7 @@ for development or test purposes only.
 
 ## Install Knative with the Knative Operator
 
-You can find the release information of Knative Operator on the [Releases page](https://github.com/knative-sandbox/operator/releases).
+You can find the release information of Knative Operator on the [Releases page](https://github.com/knative/operator/releases).
 
 ### Installing the Knative Operator
 
@@ -37,7 +37,7 @@ __From releases__:
 Install the latest Knative operator with the following command:
 
 ```
-kubectl apply -f {{< artifact org="knative-sandbox" repo="operator" file="operator.yaml" >}}
+kubectl apply -f {{< artifact org="knative" repo="operator" file="operator.yaml" >}}
 ```
 
 __From source code__:
@@ -48,7 +48,7 @@ You can also install Knative Operator from source using `ko`.
 1. Download the source code using the following command:
 
 ```
-git clone https://github.com/knative-sandbox/operator.git
+git clone https://github.com/knative/operator.git
 ```
 
 1. Install the operator in the root directory of the source using the following command:
@@ -212,7 +212,7 @@ can still work.
 If you have installed Knative using the Release page, remove the operator using the following command:
 
 ```
-kubectl delete -f {{< artifact org="knative-sandbox" repo="operator" file="operator.yaml" >}}
+kubectl delete -f {{< artifact org="knative" repo="operator" file="operator.yaml" >}}
 ```
 
 If you have installed Knative from source, uninstall it using the following command while in the root directory
