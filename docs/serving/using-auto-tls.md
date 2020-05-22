@@ -217,7 +217,7 @@ in the `knative-serving` namespace to reference your new `ClusterIssuer`.
 ### Turn on Auto TLS
 
 Update the
-[`config-network` ConfigMap](https://github.com/knative/serving/blob/master/config/config-network.yaml)
+[`config-network` ConfigMap](https://github.com/knative/serving/blob/master/config/core/configmaps/network.yaml)
 in the `knative-serving` namespace to enable `autoTLS`and specify how HTTP
 requests are handled:
 
@@ -252,7 +252,7 @@ requests are handled:
     ```
 
 1.  Configure how HTTP and HTTPS requests are handled in the
-  [`httpProtocol`](https://github.com/knative/serving/blob/master/config/config-network.yaml#L110)
+  [`httpProtocol`](https://github.com/knative/serving/blob/master/config/core/configmaps/network.yaml#L109)
   attribute.
 
     By default, Knative ingress is configured to serve HTTP traffic
