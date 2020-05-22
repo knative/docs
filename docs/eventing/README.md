@@ -67,14 +67,22 @@ generic interfaces that can be implemented by multiple Kubernetes resources:
 
 ### Event brokers and triggers
 
-Broker and Trigger objects make it easy to filter events based on event attributes.
+Broker and Trigger objects make it easy to filter events based on event
+attributes.
 
 A Broker provides a bucket of events which can be selected by attribute. It
 receives events and forwards them to subscribers defined by one or more matching
-Triggers.
+Triggers. Since a Broker implements Addressable, event senders can submit events
+to the Broker by POSTing the event to the Broker's `status.address.url`.
 
 A Trigger describes a filter on event attributes which should be delivered to an
 Addressable. You can create as many Triggers as necessary.
+
+For most use cases, a single bucket (Broker) per namespace is sufficient, but
+there are serveral use cases where multiple buckets (Brokers) can simplify
+architecture. For example, separate Brokers for events containing Personally
+Identifiable Information (PII) and non-PII events can simplify audit and access
+control rules.
 
 ![Broker Trigger Diagram](./images/broker-trigger-overview.svg)
 
