@@ -114,7 +114,7 @@ In the next section, you will need to verify that the resources you added in thi
 
 ### Validating that the `Broker` is running
 
-The [`Broker`](./broker-trigger.md#broker) ensures that every event sent by event producers arrives at the correct event consumers. The `Broker` was created when you labeled your namespace as ready for eventing, but it is important to verify that your `Broker` is working correctly. In this guide, you will use the default broker.
+The [`Broker`](./broker/README.md#broker) ensures that every event sent by event producers arrives at the correct event consumers. The `Broker` was created when you labeled your namespace as ready for eventing, but it is important to verify that your `Broker` is working correctly. In this guide, you will use the default broker.
 
 1. Run the following command to verify that the `Broker` is in a healthy state:
 
@@ -238,7 +238,7 @@ Your event consumers receive the events sent by event producers. In this step, y
 
 ### Creating `Triggers`
 
-A [Trigger](./broker-trigger.md#trigger) defines the events that you want each of your event consumers
+A [Trigger](./broker/README.md#trigger) defines the events that you want each of your event consumers
 to receive. Your `Broker` uses triggers to forward events to the right consumers. Each trigger can specify a filter to select relevant events based on the Cloud Event context attributes.
 
 
@@ -534,5 +534,5 @@ This removes the namespace and all of its resources from your cluster.
 
 You've learned the basics of the Knative Eventing workflow. Here are some additional resources to help you continue to build with the Knative Eventing component.
 
-- [Broker and Trigger](./broker-trigger.md)
+- [Broker and Trigger](./broker/README.md)
 - [Eventing with a GitHub source](./samples/github-source/README.md)
