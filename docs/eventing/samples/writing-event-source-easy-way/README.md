@@ -110,7 +110,7 @@ spec:
   template:
     spec:
       containers:
-        - image: docker run --name event_display --rm -p 8080:8080 docker.io/aliok/event_display-864884f202126ec3150c5fcef437d90c@sha256:93cb4dcda8fee80a1f68662ae6bf20301471b046ede628f3c3f94f39752fbe08
+        - image: docker.io/aliok/event_display-864884f202126ec3150c5fcef437d90c@sha256:93cb4dcda8fee80a1f68662ae6bf20301471b046ede628f3c3f94f39752fbe08
 EOS
 ```
 
