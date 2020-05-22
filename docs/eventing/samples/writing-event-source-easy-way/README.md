@@ -7,33 +7,33 @@ type: "docs"
 
 # Introduction
 
-As stated in [tutorial on writing a Source with a Receive Adapter](../writing-receive-adapter-source/README.md), there are multiple ways to 
+As stated in [tutorial on writing a Source with a Receive Adapter](../writing-receive-adapter-source/README.md), there are multiple ways to
 create event sources. The way in that tutorial is to create an independent event source that has its own CRD.
 
-In this tutorial though, you will build an event source in Javascript and use it with 
+In this tutorial though, you will build an event source in Javascript and use it with
 [ContainerSource](../../../eventing/sources/README.md#meta-sources) and / or [SinkBinding](../../../eventing/sources/README.md#meta-sources).
 
-[ContainerSource](../../../eventing/sources/README.md#meta-sources) is an easy way to turn any dispatcher container into an Event Source. 
+[ContainerSource](../../../eventing/sources/README.md#meta-sources) is an easy way to turn any dispatcher container into an Event Source.
 Similarly, another option is using [SinkBinding](../../../eventing/sources/README.md#meta-sources)
-which provides a framework for injecting environment variables into any Kubernetes resource which has a `spec.template` that looks like a Pod (aka PodSpecable). 
+which provides a framework for injecting environment variables into any Kubernetes resource which has a `spec.template` that looks like a Pod (aka PodSpecable).
 
 Code for this tutorial is available at [Github](https://github.com/aliok/node-knative-heartbeat-source).
 
 # Bootstrapping
 
 Create the project and add the dependencies:
-```bash 
+```bash
 npm init
 npm install cloudevents-sdk --save
 ```
 
 ## Making use of ContainerSource
 
-`ContainerSource` and `SinkBinding` both work by injecting environment variables to an application. 
+`ContainerSource` and `SinkBinding` both work by injecting environment variables to an application.
 Injected environment variables at minimum contain the URL of a sink that will receive events.
 
 Following example emits an event to the sink every 1000 milliseconds.
-The sink URL to post the events will be made available to the application via the `K_SINK` environment variable by `ContainerSource`. 
+The sink URL to post the events will be made available to the application via the `K_SINK` environment variable by `ContainerSource`.
 
 ```javascript
 // File - index.js
@@ -79,8 +79,8 @@ setInterval(function () {
 }, 1000);
 ```
 
-```dockerfile 
-// File - Dockerfile
+```dockerfile
+# File - Dockerfile
 
 FROM node:10
 WORKDIR /usr/src/app
@@ -93,9 +93,9 @@ CMD [ "node", "index.js" ]
 ```
 
 Build and push the image:
-```bash 
+```bash
 docker build . -t path/to/image/registry/node-knative-heartbeat-source:v1
-docker push path/to/image/registry/node-knative-heartbeat-source:v1 
+docker push path/to/image/registry/node-knative-heartbeat-source:v1
 ```
 
 Create the event display service which simply logs any cloudevents posted to it.
@@ -155,8 +155,8 @@ Data,
 ```
 
 If you are interested in to see what is injected into the event source, check the logs of it:
-```bash 
-$ kubectl logs test-heartbeats-deployment-7575c888c7-85w5t 
+```bash
+$ kubectl logs test-heartbeats-deployment-7575c888c7-85w5t
 
 Sink URL is http://event-display.default.svc.cluster.local
 Emitting event #1
@@ -171,7 +171,7 @@ Simply change
 let binding = new v1.BinaryHTTPEmitter(config);
 ```
 with
-```javascript 
+```javascript
 let binding = new v1.StructuredHTTPEmitter(config);
 ```
 to employ structured mode.
@@ -208,7 +208,7 @@ EOS
 ```
 
 Create a Kubernetes deployment that runs the event source:
-```bash 
+```bash
 cat <<EOS |kubectl apply -f -
 ---
 apiVersion: apps/v1
@@ -272,10 +272,10 @@ EOS
 
 You will see the pods are recreated and this time the `K_SINK` environment variable is injected.
 
-Also note that since the `replicas` is set to 2, there will be 2 pods that are posting events to the sink. 
+Also note that since the `replicas` is set to 2, there will be 2 pods that are posting events to the sink.
 
 ```bash
-$ kubectl logs event-display-dpplv-deployment-67c9949cf9-bvjvk -c user-container  
+$ kubectl logs event-display-dpplv-deployment-67c9949cf9-bvjvk -c user-container
 
 ☁️  cloudevents.Event
 Validation: valid
