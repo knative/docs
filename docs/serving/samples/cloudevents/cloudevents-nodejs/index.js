@@ -48,7 +48,7 @@ const receiveAndSend = (cloudEvent, res) => {
     url: target
   })
   // Reply back to dispatcher/client as soon as possible
-  res.status(201).end()
+  res.status(202).end()
   // Send the new Event to the K_SINK
   emitter.send(newCloudEvent)
     .then((res) => {
