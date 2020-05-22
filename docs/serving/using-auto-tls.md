@@ -147,7 +147,7 @@ and which DNS provider validates those requests.
 1.  If `networking-certmanager` is not found, run the following command:
 
     ```shell
-    kubectl apply --filename {{< artifact repo="serving" file="serving-cert-manager.yaml" >}}
+    kubectl apply --filename {{< artifact repo="net-certmanager" file="release.yaml" >}}
     ```
 
 ### Install networking-ns-cert component
