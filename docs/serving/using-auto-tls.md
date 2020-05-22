@@ -94,14 +94,14 @@ and which DNS provider validates those requests.
             name: letsencrypt-dns-issuer
           solvers:
           - dns01:
-            clouddns:
-              # Set this to your GCP project-id
-              project: $PROJECT_ID
-              # Set this to the secret that we publish our service account key
-              # in the previous step.
-              serviceAccountSecretRef:
-                name: cloud-dns-key
-                key: key.json
+              clouddns:
+                # Set this to your GCP project-id
+                project: $PROJECT_ID
+                # Set this to the secret that we publish our service account key
+                # in the previous step.
+                serviceAccountSecretRef:
+                  name: cloud-dns-key
+                  key: key.json
       ```
 
     ####  ClusterIssuer for HTTP-01 challenge
