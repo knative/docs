@@ -17,7 +17,7 @@ In this tutorial though, you will build an event source in Javascript and use it
 Similarly, another option is using [SinkBinding](../../../eventing/sources/README.md#meta-sources)
 which provides a framework for injecting environment variables into any Kubernetes resource which has a `spec.template` that looks like a Pod (aka PodSpecable).
 
-Code for this tutorial is available at [Github](https://github.com/aliok/node-knative-heartbeat-source).
+Code for this tutorial is available [here](./).
 
 # Bootstrapping
 
