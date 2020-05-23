@@ -124,8 +124,10 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
      name: kafka-source
    spec:
      consumerGroup: knative-group
-     bootstrapServers: my-cluster-kafka-bootstrap.kafka:9092 #note the kafka namespace
-     topics: knative-demo-topic
+     bootstrapServers:
+     - my-cluster-kafka-bootstrap.kafka:9092 # note the kafka namespace
+     topics:
+     - knative-demo-topic
      sink:
        ref:
          apiVersion: serving.knative.dev/v1
@@ -177,56 +179,54 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
 
    ```
    $ kubectl logs --selector='serving.knative.dev/service=event-display' -c user-container
+
+   ☁️ cloudevents.Event
+   Validation: valid
+   Context Attributes,
+     specversion: 1.0
+     type: dev.knative.kafka.event
+     source: /apis/v1/namespaces/default/kafkasources/kafka-source#my-topic
+     subject: partition:0#564
+     id: partition:0/offset:564
+     time: 2020-02-10T18:10:23.861866615Z
+     datacontenttype: application/json
+   Extensions,
+     key:
+   Data,
+       {
+         "msg": "This is a test!"
+       }
    ```
-
-☁️ cloudevents.Event
-Validation: valid
-Context Attributes,
-  specversion: 1.0
-  type: dev.knative.kafka.event
-  source: /apis/v1/namespaces/default/kafkasources/kafka-source#my-topic
-  subject: partition:0#564
-  id: partition:0/offset:564
-  time: 2020-02-10T18:10:23.861866615Z
-  datacontenttype: application/json
-Extensions,
-  key:
-Data,
-    {
-      "msg": "This is a test!"
-    }
-
-```
 
 ## Teardown Steps
 
 1. Remove the Apache Kafka Event Source
-```
+   ```
 
-\$ kubectl delete -f source/source.yaml kafkasource.sources.knative.dev
-"kafka-source" deleted
+   \$ kubectl delete -f source/source.yaml kafkasource.sources.knative.dev
+   "kafka-source" deleted
 
-```
-2. Remove the Event Display
-```
+   ```
+   2. Remove the Event Display
+   ```
 
-\$ kubectl delete -f source/event-display.yaml service.serving.knative.dev
-"event-display" deleted
+   \$ kubectl delete -f source/event-display.yaml service.serving.knative.dev
+   "event-display" deleted
 
-```
-3. Remove the Apache Kafka Event Controller
-```
+   ```
+   3. Remove the Apache Kafka Event Controller
+   ```
 
-\$ kubectl delete -f https://storage.googleapis.com/knative-releases/eventing-contrib/latest/kafka-source.yaml
-serviceaccount "kafka-controller-manager" deleted
-clusterrole.rbac.authorization.k8s.io "eventing-sources-kafka-controller"
-deleted clusterrolebinding.rbac.authorization.k8s.io
-"eventing-sources-kafka-controller" deleted
-customresourcedefinition.apiextensions.k8s.io "kafkasources.sources.knative.dev"
-deleted service "kafka-controller" deleted statefulset.apps
-"kafka-controller-manager" deleted
+   \$ kubectl delete -f https://storage.googleapis.com/knative-releases/eventing-contrib/latest/kafka-source.yaml
+   serviceaccount "kafka-controller-manager" deleted
+   clusterrole.rbac.authorization.k8s.io "eventing-sources-kafka-controller"
+   deleted clusterrolebinding.rbac.authorization.k8s.io
+   "eventing-sources-kafka-controller" deleted
+   customresourcedefinition.apiextensions.k8s.io "kafkasources.sources.knative.dev"
+   deleted service "kafka-controller" deleted statefulset.apps
+   "kafka-controller-manager" deleted
 
-````
+   ```
 4. (Optional) Remove the Apache Kafka Topic
 
    ```shell
@@ -247,23 +247,79 @@ You can specify the key deserializer among four types:
 * `float` for 32-bit & 64-bit floating points
 * `byte-array` for a Base64 encoded byte array
 
-To specify it, add the label `kafkasources.sources.knative.dev/key-type` to the
-`KafkaSource` definition like:
+To specify it, add the label `kafkasources.sources.knative.dev/key-type` to the `KafkaSource` definition like:
+   ```yaml
+   apiVersion: sources.knative.dev/v1alpha1
+   kind: KafkaSource
+   metadata:
+    name: kafka-source
+    labels:
+      kafkasources.sources.knative.dev/key-type: int
+   spec:
+    consumerGroup: knative-group
+    bootstrapServers:
+    - my-cluster-kafka-bootstrap.kafka:9092 # note the kafka namespace
+    topics:
+    - knative-demo-topic
+    sink:
+      ref:
+        apiVersion: serving.knative.dev/v1
+        kind: Service
+        name: event-display
+   ```
 
-```yaml
-apiVersion: sources.knative.dev/v1alpha1
-kind: KafkaSource
-metadata:
-  name: kafka-source
-  labels:
-    kafkasources.sources.knative.dev/key-type: int
-spec:
-  consumerGroup: knative-group
-  bootstrapServers: my-cluster-kafka-bootstrap.kafka:9092 #note the kafka namespace
-  topics: knative-demo-topic
-  sink:
-    ref:
-      apiVersion: serving.knative.dev/v1
-      kind: Service
-      name: event-display
-```
+## Connecting to a TLS enabled Kafka broker
+
+The KafkaSource supports TLS and SASL authentication methods. For enabling TLS authentication, please have the below files
+
+* CA Certificate
+* Client Certificate and Key
+
+KafkaSource expects these files to be in pem format, if it is in other format like jks, please convert to pem.
+
+1. Create the certificate files as secrets in the namespace where KafkaSource is going to be set up
+   ```
+
+   $ kubectl create secret generic cacert --from-file=caroot.pem
+   secret/cacert created
+
+   $ kubectl create secret tls kafka-secret --cert=certificate.pem --key=key.pem
+   secret/key created
+
+
+   ```
+
+2. Apply the KafkaSource, change bootstrapServers and topics accordingly.
+   ```yaml
+   apiVersion: sources.knative.dev/v1alpha1
+   kind: KafkaSource
+   metadata:
+    name: kafka-source-with-tls
+   spec:
+    net:
+      tls:
+        enable: true
+        cert:
+          secretKeyRef:
+            key: tls.crt
+            name: kafka-secret
+        key:
+          secretKeyRef:
+            key: tls.key
+            name: kafka-secret
+        caCert:
+          secretKeyRef:
+            key: caroot.pem
+            name: cacert
+   consumerGroup: knative-group
+   bootstrapServers:
+   - my-secure-kafka-bootstrap.kafka:443
+   topics:
+   - knative-demo-topic
+   sink:
+     ref:
+       apiVersion: serving.knative.dev/v1
+       kind: Service
+       name: event-display
+   ```
+
