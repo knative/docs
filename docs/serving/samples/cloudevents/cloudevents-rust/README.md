@@ -109,7 +109,7 @@ You'll get as result:
 > ce-type: curl.demo
 > ce-id: 123-abc
 > Content-Length: 15
-> 
+>
 < HTTP/1.1 200 OK
 < content-length: 15
 < content-type: application/json
@@ -118,7 +118,7 @@ You'll get as result:
 < ce-type: dev.knative.docs.sample
 < ce-source: https://github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-rust
 < date: Sat, 23 May 2020 09:00:01 GMT
-< 
+<
 {"name":"Dave"}
 ```
 
