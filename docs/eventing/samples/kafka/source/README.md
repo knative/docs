@@ -322,4 +322,3 @@ KafkaSource expects these files to be in pem format, if it is in other format li
        kind: Service
        name: event-display
    ```
-   
