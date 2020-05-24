@@ -94,14 +94,14 @@ and which DNS provider validates those requests.
             name: letsencrypt-dns-issuer
           solvers:
           - dns01:
-            clouddns:
-              # Set this to your GCP project-id
-              project: $PROJECT_ID
-              # Set this to the secret that we publish our service account key
-              # in the previous step.
-              serviceAccountSecretRef:
-                name: cloud-dns-key
-                key: key.json
+              clouddns:
+                # Set this to your GCP project-id
+                project: $PROJECT_ID
+                # Set this to the secret that we publish our service account key
+                # in the previous step.
+                serviceAccountSecretRef:
+                  name: cloud-dns-key
+                  key: key.json
       ```
 
     ####  ClusterIssuer for HTTP-01 challenge
@@ -147,7 +147,7 @@ and which DNS provider validates those requests.
 1.  If `networking-certmanager` is not found, run the following command:
 
     ```shell
-    kubectl apply --filename {{< artifact repo="serving" file="serving-cert-manager.yaml" >}}
+    kubectl apply --filename {{< artifact repo="net-certmanager" file="release.yaml" >}}
     ```
 
 ### Install networking-ns-cert component
@@ -169,7 +169,7 @@ running the following command:
 
 ### Configure config-certmanager ConfigMap
 
-Update your [`config-certmanager` ConfigMap](https://github.com/knative/serving/blob/master/config/config-certmanager.yaml)
+Update your [`config-certmanager` ConfigMap](https://github.com/knative/net-certmanager/blob/master/config/config.yaml)
 in the `knative-serving` namespace to reference your new `ClusterIssuer`.
 
 1.  Run the following command to edit your `config-certmanager` ConfigMap:
@@ -217,7 +217,7 @@ in the `knative-serving` namespace to reference your new `ClusterIssuer`.
 ### Turn on Auto TLS
 
 Update the
-[`config-network` ConfigMap](https://github.com/knative/serving/blob/master/config/config-network.yaml)
+[`config-network` ConfigMap](https://github.com/knative/serving/blob/master/config/core/configmaps/network.yaml)
 in the `knative-serving` namespace to enable `autoTLS`and specify how HTTP
 requests are handled:
 
@@ -252,7 +252,7 @@ requests are handled:
     ```
 
 1.  Configure how HTTP and HTTPS requests are handled in the
-  [`httpProtocol`](https://github.com/knative/serving/blob/master/config/config-network.yaml#L110)
+  [`httpProtocol`](https://github.com/knative/serving/blob/master/config/core/configmaps/network.yaml#L109)
   attribute.
 
     By default, Knative ingress is configured to serve HTTP traffic
