@@ -18,7 +18,7 @@ instructions.
 You need:
 
 - A Kubernetes cluster created.
-- [`istioctl`](https://istio.io/docs/setup/install/istioctl/) (v1.5.2 or later) installed.
+- [`istioctl`](https://istio.io/docs/setup/install/istioctl/) (v1.5.4 or later) installed.
 
 ## Installing Istio
 
@@ -57,9 +57,6 @@ spec:
     global:
       proxy:
         autoInject: disabled
-      disablePolicyChecks: true
-      defaultPodDisruptionBudget:
-        enabled: false
       useMCP: false
       # The third-party-jwt is not enabled on all k8s.
       # See: https://istio.io/docs/ops/best-practices/security/#configure-third-party-service-account-tokens
@@ -75,27 +72,11 @@ spec:
     ingressGateways:
       - name: istio-ingressgateway
         enabled: true
-        k8s:
-          service:
-            type: LoadBalancer
-            ports:
-            - port: 15020
-              name: status-port
-            - port: 80
-              name: http2
-            - port: 443
-              name: https
-          overlays:
-            # Although we don't need this Gateway, we cannot remove it. Add "dummy" selector for the workaround.
-            # https://github.com/istio/istio/issues/22095
-            - kind: Gateway
-              name: istio-ingressgateway
-              patches:
-                - path: spec.selector.istio
-                  value:
-                    dummy
       - name: cluster-local-gateway
         enabled: true
+        label:
+          istio: cluster-local-gateway
+          app: cluster-local-gateway
         k8s:
           service:
             type: ClusterIP
@@ -106,51 +87,6 @@ spec:
               name: http2
             - port: 443
               name: https
-          overlays:
-            - kind: Service
-              name: cluster-local-gateway
-              patches:
-                - path: spec.selector.istio
-                  value:
-                    cluster-local-gateway
-                - path: spec.selector.app
-                  value:
-                    cluster-local-gateway
-                - path: metadata.labels.istio
-                  value:
-                    cluster-local-gateway
-                - path: metadata.labels.app
-                  value:
-                    cluster-local-gateway
-            - kind: Deployment
-              name: cluster-local-gateway
-              patches:
-                - path: metadata.labels.istio
-                  value:
-                    cluster-local-gateway
-                - path: metadata.labels.app
-                  value:
-                    cluster-local-gateway
-                - path: spec.selector.matchLabels.istio
-                  value:
-                    cluster-local-gateway
-                - path: spec.selector.matchLabels.app
-                  value:
-                    cluster-local-gateway
-                - path: spec.template.metadata.labels.istio
-                  value:
-                    cluster-local-gateway
-                - path: spec.template.metadata.labels.app
-                  value:
-                    cluster-local-gateway
-            # Although we don't need this Gateway, we cannot remove it. Add "dummy" selector for the workaround.
-            # https://github.com/istio/istio/issues/22095
-            - kind: Gateway
-              name: cluster-local-gateway
-              patches:
-                - path: spec.selector.istio
-                  value:
-                    dummy
 EOF
 
 istioctl manifest apply -f istio-minimal-operator.yaml
