@@ -2,33 +2,10 @@ Tutorial on how to build and deploy a `KafkaSource` [Eventing source](../../../s
 
 ## Prerequisites
 
-You must ensure that you meet the [prerequisites listed in the Apache Kafka overview](../README.md).
+- Ensure that you meet the [prerequisites listed in the Apache Kafka overview](../README.md).
+- A Kubernetes cluster with [Knative Kafka Source installed](../../../../install/README.md).
 
-## Creating a `KafkaSource` source CRD
-
-1. Install the `KafkaSource` sub-component to your Knative cluster:
-
-   ```
-   kubectl apply -f https://storage.googleapis.com/knative-releases/eventing-contrib/latest/kafka-source.yaml
-
-   ```
-
-2. Check that the `kafka-controller-manager-0` pod is running.
-   ```
-   kubectl get pods --namespace knative-sources
-   NAME                         READY     STATUS    RESTARTS   AGE
-   kafka-controller-manager-0   1/1       Running   0          42m
-   ```
-3. Check the `kafka-controller-manager-0` pod logs.
-   ```
-   $ kubectl logs kafka-controller-manager-0 -n knative-sources
-   2019/03/19 22:25:54 Registering Components.
-   2019/03/19 22:25:54 Setting up Controller.
-   2019/03/19 22:25:54 Adding the Apache Kafka Source controller.
-   2019/03/19 22:25:54 Starting Apache Kafka controller.
-   ```
-
-### Apache Kafka Topic (Optional)
+## Apache Kafka Topic (Optional)
 
 1. If using Strimzi, you can set a topic modifying `source/kafka-topic.yaml`
    with your desired:
@@ -69,7 +46,7 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
    knative-demo-topic   16s
    ```
 
-### Create the Event Display service
+## Create the Event Display service
 
 1. Download a copy of the code:
 
@@ -112,7 +89,7 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
    ...
    ```
 
-#### Apache Kafka Event Source
+### Apache Kafka Event Source
 
 1. Modify `source/event-source.yaml` accordingly with bootstrap servers, topics,
    etc...:
@@ -322,4 +299,3 @@ KafkaSource expects these files to be in pem format, if it is in other format li
        kind: Service
        name: event-display
    ```
-
