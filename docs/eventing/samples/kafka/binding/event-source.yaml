@@ -1,4 +1,4 @@
-# Copyright 2019 The Knative Authors
+# Copyright 2020 The Knative Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,8 +14,8 @@
 
 # Replace the following before applying this file:
 #   KAFKA_CONSUMER_GROUP_NAME: Name of Kafka consumer group
-#   KAFKA_BOOTSTRAP_SERVERS: Comma-separated list of bootstrap servers
-#   KAFKA_TOPICS: Comma-separated list of topics
+#   KAFKA_BOOTSTRAP_SERVERS: Array of bootstrap servers
+#   KAFKA_TOPICS: Array of topics
 #   KAFKA_SASL_ENABLE: Truthy value to enable/disable SASL, disabled by default (optional)
 #   KAFKA_SASL_USER_SECRET_NAME: Name of secret containing SASL user (optional)
 #   KAFKA_SASL_USER_SECRET_KEY: Key within secret containing SASL user (optional)
