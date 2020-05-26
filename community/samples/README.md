@@ -9,6 +9,14 @@ something isn't working, lend a helping hand and fix it in a PR.
 
 [**See all Knative code samples**](../../docs/samples.md)
 
+### Interactive serving sample
+
+Check out [this Katacoda
+tutorial](https://www.katacoda.com/swapb/scenarios/knative-intro) which will
+walk you through installing Knative and the `kn` command line tool, deploying a
+sample container, updating your deployment, and performing a traffic split
+between the two versions.
+
 ### Serving samples
 
 Knative Serving sample apps.
