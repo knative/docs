@@ -228,13 +228,12 @@ Your event consumers receive the events sent by event producers. In this step, y
     This lists the `hello-display` and `goodbye-display` consumers that you deployed:
 
     ```sh
-    NAME           DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-    hello-display    1         1         1            1           26s
-    NAME           DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-    goodbye-display    1         1         1            1           16s
+    NAME              READY   UP-TO-DATE   AVAILABLE   AGE
+    hello-display     1/1     1            1           26s
+    goodbye-display   1/1     1            1           16s
    ```
 
-    The number of replicas in your **DESIRED** column should match the number of replicas in your **AVAILABLE** column, which might take a few minutes. If after two minutes the numbers do not match, then see the [Debugging Guide](./debugging/README.md) to help troubleshoot the issue.
+    The number of replicas in your **READY** column should match the number of replicas in your **AVAILABLE** column, which might take a few minutes. If after two minutes the numbers do not match, then see the [Debugging Guide](./debugging/README.md) to help troubleshoot the issue.
 
 ### Creating `Triggers`
 
@@ -344,7 +343,7 @@ Now that you've created the Pod, you can create an event by sending an HTTP requ
   kubectl --namespace event-example attach curl -it
 ```
 
- You have sshed into the Pod, and can now make a HTTP request. A prompt similar to the one below will appear:
+ You have sshed into the Pod, and can now make an HTTP request. A prompt similar to the one below will appear:
 
 ```sh
     Defaulting container name to curl.
