@@ -34,6 +34,10 @@ You can use the `config-tracing` ConfigMap to configure the following Eventing s
  - Brokers
  - Triggers
  - InMemoryChannel
+ - ApiServerSource
+ - GitlabSource
+ - KafkaSource
+ - PrometheusSource
 
 **Example:**
 
