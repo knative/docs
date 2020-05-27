@@ -32,23 +32,27 @@ type SampleSource struct {
 
 // SampleSourceSpec holds the desired state of the SampleSource (from the client).
 type SampleSourceSpec struct {
-	// ServiceAccountName holds the name of the Kubernetes service account
-	// as which the underlying K8s resources should be run. If unspecified
-	// this will default to the "default" service account for the namespace
-	// in which the SampleSource exists.
-	// +optional
-	ServiceAccountName string `json:"serviceAccountName,omitempty"`
+	// inherits duck/v1 SourceSpec, which currently provides:
+    // * Sink - a reference to an object that will resolve to a domain name or
+    //   a URI directly to use as the sink.
+    // * CloudEventOverrides - defines overrides to control the output format
+    //   and modifications of the event sent to the sink.
+    duckv1.SourceSpec `json:",inline"`
 
-	// Interval is the time interval between events.
-	//
-	// The string format is a sequence of decimal numbers, each with optional
-	// fraction and a unit suffix, such as "300ms", "-1.5h" or "2h45m". Valid time
-	// units are "ns", "us" (or "µs"), "ms", "s", "m", "h".
-	Interval string `json:"interval"`
+    // ServiceAccountName holds the name of the Kubernetes service account
+    // as which the underlying K8s resources should be run. If unspecified
+    // this will default to the "default" service account for the namespace
+    // in which the SampleSource exists.
+    // +optional
+    ServiceAccountName string `json:"serviceAccountName,omitempty"`
 
-	// Sink is a reference to an object that will resolve to a host
-	// name to use as the sink.
-	Sink *duckv1.Destination `json:"sink"`
+    // Interval is the time interval between events.
+    //
+    // The string format is a sequence of decimal numbers, each with optional
+    // fraction and a unit suffix, such as "300ms", "-1.5h" or "2h45m". Valid time
+    // units are "ns", "us" (or "µs"), "ms", "s", "m", "h". If unspecified
+    // this will default to "10s".
+    Interval string `json:"interval"`
 }
 
 // SampleSourceStatus communicates the observed state of the SampleSource (from the controller).
@@ -72,7 +76,7 @@ const (
 
 ```
 Define the functions that will be called from the Reconciler functions to set the lifecycle conditions.  This is typically done in
-`pkg/apis/samples/VERSION/sampleservice_lifecycle.go`
+`pkg/apis/samples/VERSION/samplesource_lifecycle.go`
 
 ```go
 // InitializeConditions sets relevant unset conditions to Unknown state.

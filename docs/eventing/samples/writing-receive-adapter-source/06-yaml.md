@@ -10,13 +10,13 @@ type: "docs"
 Start a minikube cluster.
 
 _If you already have a Kubernetes cluster running, you can skip this step. The
-cluster must be 1.14+_
+cluster must be 1.15+_
 
 ```sh
 minikube start
 ```
 
-Setup ko to use the minikube docker instance and local registery
+Setup `ko` to use the minikube docker instance and local registry
 ```sh
 eval $(minikube docker-env)
 export KO_DOCKER_REPO=ko.local
