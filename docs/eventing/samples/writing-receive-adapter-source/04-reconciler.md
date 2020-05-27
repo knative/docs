@@ -91,7 +91,6 @@ sb, err := r.EventingClientSet.SourcesV1alpha2().SinkBindings(namespace).Get(exp
 2. If it doesn't exist, create it
 ```go
 sb, err = r.EventingClientSet.SourcesV1alpha2().SinkBindings(namespace).Create(expected)
-
 ```
 3. Check if the expected vs existing spec is different, and update the `SinkBinding` if required
 ```go
