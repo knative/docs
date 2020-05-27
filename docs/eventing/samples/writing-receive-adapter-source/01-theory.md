@@ -70,7 +70,7 @@ Specifically, the `clientset`, `cache`, `informers`, and `listers` can all be ge
 import (
     // ...
     sampleSourceClient "knative.dev/sample-source/pkg/client/injection/client"
-    samplesourceinformer “knative.dev/sample-source/pkg/client/injection/informers/samples/v1alpha1/samplesource"
+    samplesourceinformer "knative.dev/sample-source/pkg/client/injection/informers/samples/v1alpha1/samplesource"
 )
 // ...
 func NewController(ctx context.Context, cmw configmap.Watcher) *controller.Impl {
@@ -83,22 +83,21 @@ func NewController(ctx context.Context, cmw configmap.Watcher) *controller.Impl 
         // ...
 }
 ```
-Ensure that the specific source subdirectory has been added to the injection portion of the `hack/update-codegen.sh` script.
 
-```patch
+Sample source's [`update-codegen.sh`](https://github.com/knative/sample-source/blob/master/hack/update-codegen.sh) have the configuration
+to have the required things above generated and injected:
+```bash
+# Generation
+${CODEGEN_PKG}/generate-groups.sh "deepcopy,client,informer,lister" \
+  knative.dev/sample-source/pkg/client knative.dev/sample-source/pkg/apis \
+  "samples:v1alpha1" \
+  --go-header-file ${REPO_ROOT}/hack/boilerplate/boilerplate.go.txt
 
-# Sources
-+API_DIRS_SOURCES=(github/pkg camel/source/pkg kafka/source/pkg awssqs/pkg couchdb/source/pkg prometheus/pkg YourSourceHere/pkg)
--API_DIRS_SOURCES=(github/pkg camel/source/pkg kafka/source/pkg awssqs/pkg couchdb/source/pkg prometheus/pkg)
-
-```
-and
-```patch
-  -i knative.dev/eventing-contrib/camel/source/pkg/apis \
-- -i knative.dev/eventing-contrib/github/pkg/apis
-+ -i knative.dev/eventing-contrib/github/pkg/apis \
-+ -i knative.dev/eventing-contrib/YourSourceHere/pkg/apis
-
+# Injection
+${KNATIVE_CODEGEN_PKG}/hack/generate-knative.sh "injection" \
+  knative.dev/sample-source/pkg/client knative.dev/sample-source/pkg/apis \
+  "samples:v1alpha1" \
+  --go-header-file ${REPO_ROOT}/hack/boilerplate/boilerplate.go.txt
 ```
 
 File Layout & Hierarchy:
