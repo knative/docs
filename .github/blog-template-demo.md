@@ -1,7 +1,7 @@
 ---
 Title: ''
 Author: Your name here
-Author handle: Any links you want associated with your name 
+Author handle: Any links you want associated with your name
 Date: ''
 Description: one line about your blog
 Folder with media files: ''
