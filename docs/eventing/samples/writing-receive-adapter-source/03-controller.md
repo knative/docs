@@ -29,8 +29,8 @@ func NewController(
 ) *controller.Impl {
     // ...
 	deploymentInformer := deploymentinformer.Get(ctx)
-    sinkBindingInformer := sinkbindinginformer.Get(ctx)
-    sampleSourceInformer := samplesourceinformer.Get(ctx)
+	sinkBindingInformer := sinkbindinginformer.Get(ctx)
+	sampleSourceInformer := samplesourceinformer.Get(ctx)
 
 	r := &Reconciler{
         dr:  &reconciler.DeploymentReconciler{KubeClientSet: kubeclient.Get(ctx)},
@@ -63,4 +63,3 @@ Controller for the `SampleSource` uses `Deployment` and `SinkBinding` resources 
         Handler:    controller.HandleAll(impl.EnqueueControllerOf),
     })
 ```
-
