@@ -876,7 +876,7 @@ Kubernetes meta/v1.ObjectMeta
 <td>
 <em>(Optional)</em>
 <p>Standard object&rsquo;s metadata.
-More info: <a href="https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata">https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata</a></p>
+More info: <a href="https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata">https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata</a></p>
 Refer to the Kubernetes API documentation for the fields of the
 <code>metadata</code> field.
 </td>
@@ -893,7 +893,7 @@ IngressSpec
 <td>
 <em>(Optional)</em>
 <p>Spec is the desired state of the Ingress.
-More info: <a href="https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status">https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status</a></p>
+More info: <a href="https://git.k8s.io/community/contributors/devel/api-conventions.md#spec-and-status">https://git.k8s.io/community/contributors/devel/api-conventions.md#spec-and-status</a></p>
 <br/>
 <br/>
 <table>
@@ -973,7 +973,7 @@ IngressStatus
 <td>
 <em>(Optional)</em>
 <p>Status is the current state of the Ingress.
-More info: <a href="https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status">https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status</a></p>
+More info: <a href="https://git.k8s.io/community/contributors/devel/api-conventions.md#spec-and-status">https://git.k8s.io/community/contributors/devel/api-conventions.md#spec-and-status</a></p>
 </td>
 </tr>
 </tbody>
@@ -1023,7 +1023,7 @@ Kubernetes meta/v1.ObjectMeta
 <td>
 <em>(Optional)</em>
 <p>Standard object&rsquo;s metadata.
-More info: <a href="https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata">https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata</a></p>
+More info: <a href="https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata">https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata</a></p>
 Refer to the Kubernetes API documentation for the fields of the
 <code>metadata</code> field.
 </td>
@@ -1040,7 +1040,7 @@ ServerlessServiceSpec
 <td>
 <em>(Optional)</em>
 <p>Spec is the desired state of the ServerlessService.
-More info: <a href="https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status">https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status</a></p>
+More info: <a href="https://git.k8s.io/community/contributors/devel/api-conventions.md#spec-and-status">https://git.k8s.io/community/contributors/devel/api-conventions.md#spec-and-status</a></p>
 <br/>
 <br/>
 <table>
@@ -1111,7 +1111,7 @@ ServerlessServiceStatus
 <td>
 <em>(Optional)</em>
 <p>Status is the current state of the ServerlessService.
-More info: <a href="https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status">https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status</a></p>
+More info: <a href="https://git.k8s.io/community/contributors/devel/api-conventions.md#spec-and-status">https://git.k8s.io/community/contributors/devel/api-conventions.md#spec-and-status</a></p>
 </td>
 </tr>
 </tbody>
@@ -2642,8 +2642,8 @@ RevisionTemplateSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1beta1.Configuration">Configuration</a>, 
-<a href="#serving.knative.dev/v1.Configuration">Configuration</a>)
+<a href="#serving.knative.dev/v1.Configuration">Configuration</a>, 
+<a href="#serving.knative.dev/v1beta1.Configuration">Configuration</a>)
 </p>
 <p>
 <p>ConfigurationStatus communicates the observed state of the Configuration (from the controller).</p>
@@ -2734,12 +2734,51 @@ Configuration. It might not be ready yet, for that use LatestReadyRevisionName.<
 </tr>
 </tbody>
 </table>
+<h3 id="serving.knative.dev/v1.ContainerStatuses">ContainerStatuses
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#serving.knative.dev/v1.RevisionStatus">RevisionStatus</a>)
+</p>
+<p>
+<p>ContainerStatuses holds the information of container name and image digest value</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>name</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<code>imageDigest</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
 <h3 id="serving.knative.dev/v1.RevisionSpec">RevisionSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1beta1.Revision">Revision</a>, 
 <a href="#serving.knative.dev/v1.Revision">Revision</a>, 
+<a href="#serving.knative.dev/v1beta1.Revision">Revision</a>, 
 <a href="#serving.knative.dev/v1alpha1.RevisionSpec">RevisionSpec</a>, 
 <a href="#serving.knative.dev/v1.RevisionTemplateSpec">RevisionTemplateSpec</a>)
 </p>
@@ -2804,8 +2843,8 @@ be provided.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1beta1.Revision">Revision</a>, 
-<a href="#serving.knative.dev/v1.Revision">Revision</a>)
+<a href="#serving.knative.dev/v1.Revision">Revision</a>, 
+<a href="#serving.knative.dev/v1beta1.Revision">Revision</a>)
 </p>
 <p>
 <p>RevisionStatus communicates the observed state of the Revision (from the controller).</p>
@@ -2859,10 +2898,33 @@ based on the revision url template specified in the controller&rsquo;s config.</
 </tr>
 <tr>
 <td>
+<code>imageDigest</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>DeprecatedImageDigest holds the resolved digest for the image specified
+within .Spec.Container.Image. The digest is resolved during the creation
+of Revision. This field holds the digest value regardless of whether
+a tag or digest was originally specified in the Container object. It
+may be empty if the image comes from a registry listed to skip resolution.
+If multiple containers specified then DeprecatedImageDigest holds the digest
+for serving container.
+DEPRECATED: Use ContainerStatuses instead.
+TODO(savitaashture) Remove deprecatedImageDigest.
+ref <a href="https://kubernetes.io/docs/reference/using-api/deprecation-policy">https://kubernetes.io/docs/reference/using-api/deprecation-policy</a> for deprecation.</p>
+</td>
+</tr>
+<tr>
+<td>
 <code>containerStatuses</code></br>
+<em>
 <a href="#serving.knative.dev/v1.ContainerStatuses">
-ContainerStatuses
+[]ContainerStatuses
 </a>
+</em>
 </td>
 <td>
 <em>(Optional)</em>
@@ -2871,23 +2933,7 @@ to their respective digests and their container name.
 The digests are resolved during the creation of Revision.
 ContainerStatuses holds the container name and image digests
 for both serving and non serving containers.
-ref: http://bit.ly/image-digests.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>imageDigest</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>ImageDigest holds the resolved digest for the image specified
-within .Spec.Container.Image. The digest is resolved during the creation
-of Revision. This field holds the digest value regardless of whether
-a tag or digest was originally specified in the Container object. It
-may be empty if the image comes from a registry listed to skip resolution.</p>
+ref: <a href="http://bit.ly/image-digests">http://bit.ly/image-digests</a></p>
 </td>
 </tr>
 </tbody>
@@ -2992,8 +3038,8 @@ be provided.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1beta1.Route">Route</a>, 
 <a href="#serving.knative.dev/v1.Route">Route</a>, 
+<a href="#serving.knative.dev/v1beta1.Route">Route</a>, 
 <a href="#serving.knative.dev/v1.ServiceSpec">ServiceSpec</a>)
 </p>
 <p>
@@ -3028,8 +3074,8 @@ revisions and configurations.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1beta1.Route">Route</a>, 
-<a href="#serving.knative.dev/v1.Route">Route</a>)
+<a href="#serving.knative.dev/v1.Route">Route</a>, 
+<a href="#serving.knative.dev/v1beta1.Route">Route</a>)
 </p>
 <p>
 <p>RouteStatus communicates the observed state of the Route (from the controller).</p>
@@ -3376,49 +3422,6 @@ a hostname, but may not contain anything else (e.g. basic auth, url path, etc.)<
 </tr>
 </tbody>
 </table>
-<h3 id="serving.knative.dev/v1.ContainerStatuses">ContainerStatuses
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#serving.knative.dev/v1.RevisionStatus">RevisionStatus</a>)
-</p>
-<p>
-<p>ContainerStatuses holds the container name and image digests for both serving and non serving containers.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>name</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Name represents the container name and name must be a DNS_LABEL.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>imageDigest</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>ImageDigest is the digest value for the container's image.</p>
-</td>
-</tr>
-</tbody>
-</table>
 <hr/>
 <h2 id="serving.knative.dev/v1alpha1">serving.knative.dev/v1alpha1</h2>
 <p>
@@ -3693,52 +3696,6 @@ updated by the system.</p>
 </tr>
 <tr>
 <td>
-<code>concurrencyModel</code></br>
-<em>
-<a href="#serving.knative.dev/v1alpha1.DeprecatedRevisionRequestConcurrencyModelType">
-DeprecatedRevisionRequestConcurrencyModelType
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>DeprecatedConcurrencyModel specifies the desired concurrency model
-(Single or Multi) for the
-Revision. Defaults to Multi.
-Deprecated in favor of ContainerConcurrency.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>buildName</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>DeprecatedBuildName optionally holds the name of the Build responsible for
-producing the container image for its Revision.
-DEPRECATED: Use DeprecatedBuildRef instead.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>buildRef</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectreference-v1-core">
-Kubernetes core/v1.ObjectReference
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>DeprecatedBuildRef holds the reference to the build (if there is one) responsible
-for producing the container image for this Revision. Otherwise, nil</p>
-</td>
-</tr>
-<tr>
-<td>
 <code>container</code></br>
 <em>
 <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#container-v1-core">
@@ -3748,7 +3705,7 @@ Kubernetes core/v1.Container
 </td>
 <td>
 <em>(Optional)</em>
-<p>Container defines the unit of execution for this Revision.
+<p>DeprecatedContainer defines the unit of execution for this Revision.
 In the context of a Revision, we disallow a number of the fields of
 this Container, including: name and lifecycle.
 See also the runtime contract for more information about the execution
@@ -4302,18 +4259,45 @@ Configuration. It might not be ready yet, for that use LatestReadyRevisionName.<
 </tr>
 </tbody>
 </table>
-<h3 id="serving.knative.dev/v1alpha1.DeprecatedRevisionRequestConcurrencyModelType">DeprecatedRevisionRequestConcurrencyModelType
-(<code>string</code> alias)</p></h3>
+<h3 id="serving.knative.dev/v1alpha1.ContainerStatuses">ContainerStatuses
+</h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1alpha1.RevisionSpec">RevisionSpec</a>)
+<a href="#serving.knative.dev/v1alpha1.RevisionStatus">RevisionStatus</a>)
 </p>
 <p>
-<p>DeprecatedRevisionRequestConcurrencyModelType is an enumeration of the
-concurrency models supported by a Revision.
-DEPRECATED in favor of an integer based ContainerConcurrency setting.
-TODO(vagababov): retire completely in 0.9.</p>
+<p>ContainerStatuses holds the information of container name and image digest value</p>
 </p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>name</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<code>imageDigest</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
 <h3 id="serving.knative.dev/v1alpha1.DeprecatedRevisionServingStateType">DeprecatedRevisionServingStateType
 (<code>string</code> alias)</p></h3>
 <p>
@@ -4511,52 +4495,6 @@ updated by the system.</p>
 </tr>
 <tr>
 <td>
-<code>concurrencyModel</code></br>
-<em>
-<a href="#serving.knative.dev/v1alpha1.DeprecatedRevisionRequestConcurrencyModelType">
-DeprecatedRevisionRequestConcurrencyModelType
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>DeprecatedConcurrencyModel specifies the desired concurrency model
-(Single or Multi) for the
-Revision. Defaults to Multi.
-Deprecated in favor of ContainerConcurrency.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>buildName</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>DeprecatedBuildName optionally holds the name of the Build responsible for
-producing the container image for its Revision.
-DEPRECATED: Use DeprecatedBuildRef instead.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>buildRef</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectreference-v1-core">
-Kubernetes core/v1.ObjectReference
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>DeprecatedBuildRef holds the reference to the build (if there is one) responsible
-for producing the container image for this Revision. Otherwise, nil</p>
-</td>
-</tr>
-<tr>
-<td>
 <code>container</code></br>
 <em>
 <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#container-v1-core">
@@ -4566,7 +4504,7 @@ Kubernetes core/v1.Container
 </td>
 <td>
 <em>(Optional)</em>
-<p>Container defines the unit of execution for this Revision.
+<p>DeprecatedContainer defines the unit of execution for this Revision.
 In the context of a Revision, we disallow a number of the fields of
 this Container, including: name and lifecycle.
 See also the runtime contract for more information about the execution
@@ -4634,10 +4572,33 @@ based on the revision url template specified in the controller&rsquo;s config.</
 </tr>
 <tr>
 <td>
+<code>imageDigest</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>DeprecatedImageDigest holds the resolved digest for the image specified
+within .Spec.Container.Image. The digest is resolved during the creation
+of Revision. This field holds the digest value regardless of whether
+a tag or digest was originally specified in the Container object. It
+may be empty if the image comes from a registry listed to skip resolution.
+If multiple containers specified then DeprecatedImageDigest holds the digest
+for serving container.
+DEPRECATED: Use ContainerStatuses instead.
+TODO(savitaashture) Remove deprecatedImageDigest.
+ref <a href="https://kubernetes.io/docs/reference/using-api/deprecation-policy">https://kubernetes.io/docs/reference/using-api/deprecation-policy</a> for deprecation.</p>
+</td>
+</tr>
+<tr>
+<td>
 <code>containerStatuses</code></br>
+<em>
 <a href="#serving.knative.dev/v1alpha1.ContainerStatuses">
-ContainerStatuses
+[]ContainerStatuses
 </a>
+</em>
 </td>
 <td>
 <em>(Optional)</em>
@@ -4646,23 +4607,7 @@ to their respective digests and their container name.
 The digests are resolved during the creation of Revision.
 ContainerStatuses holds the container name and image digests
 for both serving and non serving containers.
-ref: http://bit.ly/image-digests.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>imageDigest</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>ImageDigest holds the resolved digest for the image specified
-within .Spec.Container.Image. The digest is resolved during the creation
-of Revision. This field holds the digest value regardless of whether
-a tag or digest was originally specified in the Container object. It
-may be empty if the image comes from a registry listed to skip resolution.</p>
+ref: <a href="http://bit.ly/image-digests">http://bit.ly/image-digests</a></p>
 </td>
 </tr>
 </tbody>
@@ -4764,52 +4709,6 @@ updated by the system.</p>
 </tr>
 <tr>
 <td>
-<code>concurrencyModel</code></br>
-<em>
-<a href="#serving.knative.dev/v1alpha1.DeprecatedRevisionRequestConcurrencyModelType">
-DeprecatedRevisionRequestConcurrencyModelType
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>DeprecatedConcurrencyModel specifies the desired concurrency model
-(Single or Multi) for the
-Revision. Defaults to Multi.
-Deprecated in favor of ContainerConcurrency.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>buildName</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>DeprecatedBuildName optionally holds the name of the Build responsible for
-producing the container image for its Revision.
-DEPRECATED: Use DeprecatedBuildRef instead.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>buildRef</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#objectreference-v1-core">
-Kubernetes core/v1.ObjectReference
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>DeprecatedBuildRef holds the reference to the build (if there is one) responsible
-for producing the container image for this Revision. Otherwise, nil</p>
-</td>
-</tr>
-<tr>
-<td>
 <code>container</code></br>
 <em>
 <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.15/#container-v1-core">
@@ -4819,7 +4718,7 @@ Kubernetes core/v1.Container
 </td>
 <td>
 <em>(Optional)</em>
-<p>Container defines the unit of execution for this Revision.
+<p>DeprecatedContainer defines the unit of execution for this Revision.
 In the context of a Revision, we disallow a number of the fields of
 this Container, including: name and lifecycle.
 See also the runtime contract for more information about the execution
@@ -5301,49 +5200,6 @@ Ultimately all non-v1 fields will be deprecated.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="serving.knative.dev/v1alpha1.ContainerStatuses">ContainerStatuses
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#serving.knative.dev/v1alpha1.RevisionStatus">RevisionStatus</a>)
-</p>
-<p>
-<p>ContainerStatuses holds the container name and image digests for both serving and non serving containers.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>name</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Name represents the container name and name must be a DNS_LABEL.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>imageDigest</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>ImageDigest is the digest value for the container's image.</p>
-</td>
-</tr>
-</tbody>
-</table>
 <hr/>
 <h2 id="serving.knative.dev/v1beta1">serving.knative.dev/v1beta1</h2>
 <p>
@@ -5800,5 +5656,5 @@ ServiceStatus
 <hr/>
 <p><em>
 Generated with <code>gen-crd-api-reference-docs</code>
-on git commit <code>f87352b72</code>.
+on git commit <code>12fd00119</code>.
 </em></p>
