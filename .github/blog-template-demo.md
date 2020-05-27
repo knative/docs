@@ -6,7 +6,7 @@ Date: ''
 Description: one line about your blog
 Folder with media files: ''
 Blog URL: ''
-Labels: Releases, Steering committee, Demo, Events 
+Labels: Releases, Steering committee, Demo, Events
 Reviewers: ''
 
 ---
