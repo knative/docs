@@ -33,11 +33,11 @@ func NewController(
 	sampleSourceInformer := samplesourceinformer.Get(ctx)
 
 	r := &Reconciler{
-        dr:  &reconciler.DeploymentReconciler{KubeClientSet: kubeclient.Get(ctx)},
-        sbr: &reconciler.SinkBindingReconciler{EventingClientSet: eventingclient.Get(ctx)},
-        // Config accessor takes care of tracing/config/logging config propagation to the receive adapter
-        configAccessor: reconcilersource.WatchConfigurations(ctx, "sample-source", cmw),
-    }
+	dr:  &reconciler.DeploymentReconciler{KubeClientSet: kubeclient.Get(ctx)},
+	sbr: &reconciler.SinkBindingReconciler{EventingClientSet: eventingclient.Get(ctx)},
+	// Config accessor takes care of tracing/config/logging config propagation to the receive adapter
+	configAccessor: reconcilersource.WatchConfigurations(ctx, "sample-source", cmw),
+}
 ```
 The base reconciler is imported from the knative.dev/pkg dependency:
 ```go
