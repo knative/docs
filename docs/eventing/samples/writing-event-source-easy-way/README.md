@@ -33,34 +33,30 @@ The sink URL to post the events will be made available to the application via th
 ```javascript
 // File - index.js
 
-const v1 = require("cloudevents-sdk/v1");
+const { CloudEvent, HTTPEmitter } = require("cloudevents-sdk");
 
 let sinkUrl = process.env['K_SINK'];
 
 console.log("Sink URL is " + sinkUrl);
 
-let config = {
-    method: "POST",
+let emitter = new HTTPEmitter({
     url: sinkUrl
-};
-
-// The binding instance
-let binding = new v1.BinaryHTTPEmitter(config);
+});
 
 let eventIndex = 0;
 setInterval(function () {
     console.log("Emitting event #" + ++eventIndex);
 
-    // create the event
-    let myevent = v1.event()
-        .id('your-event-id')
-        .type("your.event.source.type")
-        .source("urn:event:from:your-api/resource/123")
-        .dataContentType("application/json")
-        .data({"hello": "World " + eventIndex});
+    let myevent = new CloudEvent({
+        source: "urn:event:from:my-api/resource/123",
+        type: "your.event.source.type",
+        id: "your-event-id",
+        dataContentType: "application/json",
+        data: {"hello": "World " + eventIndex},
+    });
 
     // Emit the event
-    binding.emit(myevent)
+    emitter.send(myevent)
         .then(response => {
             // Treat the response
             console.log("Event posted successfully");

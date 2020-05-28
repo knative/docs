@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cloudevents-sdk": "^1.0.0"
+    "cloudevents-sdk": "git://github.com/cloudevents/sdk-javascript.git#0710166ce9397f402b835fae745923d11357d15e"
   }
 }
