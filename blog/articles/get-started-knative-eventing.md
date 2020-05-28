@@ -27,7 +27,7 @@ There is a github repository to accompany this demo [here](https://github.com/jo
 
 This demo was presented at the first Knative Community Meetup and there is a video demo [here](https://www.youtube.com/watch?v=sGi_LuAaaT0).
 
-## Step 1: Create the Namespace and create a broker
+## Step 1: Create the Namespace and create a Broker
 ```
 kubectl apply -f 001-namespace.yaml
 ```
