@@ -534,12 +534,29 @@ The `scale-to-zero-pod-retention-period` flag determines the **minimum** amount 
 This contrasts with the `scale-to-zero-grace-period` flag, which determines the **maximum** amount of time that the last pod will remain active after the Autoscaler has decided to scale pods to zero.
 
 * **Global key:** `scale-to-zero-pod-retention-period`
-* **Per-revision annotation key:** n/a
+* **Per-revision annotation key:** `autoscaling.knative.dev/scaleToZeroPodRetentionPeriod`
 * **Possible values:** Non-negative duration string
 * **Default:** `0s`
 
 **Example:**
 {{< tabs name="scale-to-zero-grace" default="Global (ConfigMap)" >}}
+{{% tab name="Per Revision" %}}
+```yaml
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: helloworld-go
+  namespace: default
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/scaleToZeroPodRetentionPeriod: "1m5s"
+    spec:
+      containers:
+        - image: gcr.io/knative-samples/helloworld-go
+```
+{{< /tab >}}
 {{% tab name="Global (ConfigMap)" %}}
 ```yaml
 apiVersion: v1
