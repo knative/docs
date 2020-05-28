@@ -15,7 +15,7 @@ I put together a simple demo to explore some of the key advantages of event-driv
 - Apply business logic while data is in motion.
 - Real time event-streams for data science — millisecond decisions e.g fraud detection.
 
-In this post, I’ll show you how to get an example eventing scenario up and running using some of the basic Knative eventing components; **broker, trigger, producer** and **consumer.** This demo shows streaming events in real-time, in-stream transformation and push-based front-ends in action and they can serve as a basis for you to explore further. You can use this as a basis and build out, exploring further with what is possible.
+In this post, I’ll show you how to get an example eventing scenario up and running using some of the basic Knative eventing components; **broker, trigger, producer** and **consumer.** This demo shows streaming events in real-time, in-stream transformation, and push-based front-ends in action. You can use this as a basis and build out, exploring further with what is possible.
 
 This scenario uses bitcoin transaction events as an example of an event stream. The events will be displayed in real-time via and UI front-end and also classified into sizes by another service based on their total transaction value.
 
