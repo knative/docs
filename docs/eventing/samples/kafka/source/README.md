@@ -142,7 +142,34 @@ Tutorial on how to build and deploy a `KafkaSource` [Eventing source](../../../s
    >{"msg": "This is a test!"}
    ```
 1. Check that the Apache Kafka Event Source consumed the message and sent it to
-   its sink properly.
+   its sink properly. Since these logs are captured in debug level, edit the `config-logging` configmap in `knative-sources` namespace to look   like this:
+   ```
+   data:
+     loglevel.controller: info
+     loglevel.webhook: info
+     zap-logger-config: |
+       {
+         "level": "debug",
+         "development": false,
+         "outputPaths": ["stdout"],
+         "errorOutputPaths": ["stderr"],
+         "encoding": "json",
+         "encoderConfig": {
+           "timeKey": "ts",
+           "levelKey": "level",
+           "nameKey": "logger",
+           "callerKey": "caller",
+           "messageKey": "msg",
+           "stacktraceKey": "stacktrace",
+           "lineEnding": "",
+           "levelEncoder": "",
+           "timeEncoder": "iso8601",
+           "durationEncoder": "",
+           "callerEncoder": ""
+         }  
+       } 
+
+   ```
 
    ```
    $ kubectl logs --selector='knative-eventing-source-name=kafka-source'
