@@ -17,7 +17,7 @@ I put together a simple demo to explore some of the key advantages of event-driv
 
 In this post, I’ll show you how to get an example eventing scenario up and running using some of the basic Knative eventing components; **broker, trigger, producer** and **consumer.** This demo shows streaming events in real-time, in-stream transformation, and push-based front-ends in action. You can use this as a basis and build out, exploring further with what is possible.
 
-This scenario uses bitcoin transaction events as an example of an event stream. The events will be displayed in real-time via and UI front-end and also classified into sizes by another service based on their total transaction value.
+This scenario uses Bitcoin transaction events as an example of an event stream. The events will be displayed in real-time via and UI front-end and also classified into sizes by another service based on their total transaction value.
 
 In the diagram below, you can see a plan of what we will deploy.
 
