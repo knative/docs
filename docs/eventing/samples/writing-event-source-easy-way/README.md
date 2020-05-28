@@ -149,7 +149,7 @@ Data,
   }
 ```
 
-If you are interested in to see what is injected into the event source as a `K_SINK`, you can check the logs:
+If you are interested in seeing what is injected into the event source as a `K_SINK`, you can check the logs:
 ```bash
 $ kubectl logs test-heartbeats-deployment-7575c888c7-85w5t
 
