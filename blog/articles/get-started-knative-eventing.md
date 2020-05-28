@@ -42,7 +42,7 @@ kubectl apply -f 010-deployment.yaml
 ```
 Our **event-source** is an application that takes (unconfirmed Bitcoin transaction) messages from the [blockchain.info websocket](https://www.blockchain.com/api/api_websocket) and then creates a new [CloudEvent.](https://cloudevents.io/) This is our producer of events and it *produces* events that other services *may or may not* be interested in subscribing to.
 
-In our case we tell it where we want it to send the events, using the **sink** variable. The sink is passed in as an environmental variable in the deployment and, in this case, it is our broker address. To get the broker url, you can use the following command:
+In our case we tell it where we want it to send the events, using the **sink** variable. The sink is passed in as an environmental variable in the deployment and, in this case, it is our Broker address. To get the Broker url, you can use the following command:
 ```
 kubectl get broker -n knative-eventing-websocket-source
 ```
