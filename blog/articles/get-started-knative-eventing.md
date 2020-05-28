@@ -56,7 +56,7 @@ kubectl — namespace knative-eventing-websocket-source logs -l app=wseventsourc
 kubectl apply -f 040-trigger.yaml
 ```
 
-A **trigger** provides a filter, by which it is determined which events should be delivered to a given service. There are three triggers specified for this scenario. The subscribing service does not need to be deployed yet in order for you to set up a trigger.
+A **Trigger** provides a filter which selects events matching certain attributes to deliver to the specified service. There are three Triggers specified for this scenario. The subscribing service does not need to be deployed yet in order for you to set up a Trigger.
 
 ## Step 4: Deploy our Consuming Services
 
