@@ -3,14 +3,16 @@
 As stated in [tutorial on writing a Source with a Receive Adapter](../writing-receive-adapter-source/README.md), there are multiple ways to
 create event sources. The way in that tutorial is to create an independent event source that has its own CRD.
 
-In this tutorial though, you will build an event source in Javascript and use it with
-[ContainerSource](../../../eventing/sources/README.md#meta-sources) and / or [SinkBinding](../../../eventing/sources/README.md#meta-sources).
+This tutorial provides a simpler mechanism to build an event source in Javascript and use it with
+[ContainerSource](../../../eventing/sources/README.md#meta-sources) and / or the [SinkBinding](../../../eventing/sources/README.md#meta-sources).
 
 [ContainerSource](../../../eventing/sources/README.md#meta-sources) is an easy way to turn any dispatcher container into an Event Source.
 Similarly, another option is using [SinkBinding](../../../eventing/sources/README.md#meta-sources)
 which provides a framework for injecting environment variables into any Kubernetes resource which has a `spec.template` that looks like a Pod (aka PodSpecable).
 
-Code for this tutorial is available [here](./).
+SinkBinding is a newer concept and it should be preferred over ContainerSource.
+
+Code for this tutorial is available [here](https://github.com/knative/docs/tree/master/docs/eventing/samples/writing-event-source-easy-way).
 
 # Bootstrapping
 
@@ -131,7 +133,7 @@ EOS
 
 Check the logs of the event display service. You will see a new message is pushed every second:
 ```bash
-$ kubectl logs event-display-dpplv-deployment-67c9949cf9-bvjvk -c user-container
+$ kubectl logs -l serving.knative.dev/service=event-display -c user-container
 
 ☁️  cloudevents.Event
 Validation: valid
@@ -147,7 +149,7 @@ Data,
   }
 ```
 
-If you are interested in to see what is injected into the event source, check the logs of it:
+If you are interested in seeing what is injected into the event source as a `K_SINK`, you can check the logs:
 ```bash
 $ kubectl logs test-heartbeats-deployment-7575c888c7-85w5t
 
