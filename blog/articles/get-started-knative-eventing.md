@@ -8,7 +8,7 @@ type: "blog"
 
 I’ve been exploring [Knative Eventing](https://knative.dev/docs/eventing/), a system that enables a cloud native eventing ecosystem to be easily deployed through the use of **event producers** and **event consumers.**
 
-As part of this I put together a simple demo that someone can use to explore, what I think are, some of the key advantages of event-driven architectures, such as:
+I put together a simple demo to explore some of the key advantages of event-driven architectures, such as:
 
 - Push-based messaging.
 - True decoupling of producers and consumers.
