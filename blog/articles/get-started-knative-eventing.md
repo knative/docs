@@ -1,6 +1,10 @@
-| Title  | LinkTitle | Date | Description | Type | Aliases
-| ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | 
-| Getting started with Knative Eventing using Bitcoin transaction data  | Get Started with Knative Eventing  | 2020-05-01  | Guided walkthrough on using Knative Eventing  | Blog  | /blog/2010-05-01-getting-started-knative-evetning  |
+---
+title: Getting started with Knaitve Eventing using Bitcoin transaction data
+linkTitle: Bitcoin transaction data and Eventing
+date: 2020-05-01
+description: Walkthrough of implementing a Bitcoin transaction data source for Knative Eventing
+type: "blog"
+---
 
 I’ve been exploring [Knative Eventing](https://knative.dev/docs/eventing/), a system that enables a cloud native eventing ecosystem to be easily deployed through the use of **event producers** and **event consumers.**
 
