@@ -50,7 +50,7 @@ Requested content:
 - Vendor specific how-to content
 - **Original content only**
 ```diff
-- This section needs review 
+- This section needs review
 ```
 
 Unsuitable Content:
