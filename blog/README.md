@@ -21,7 +21,7 @@ This section covers documentation, processes, and roles for the [Knative blog](h
 
 ## Submit a Post
 
-Anyone can write a blog post and submit it for review. 
+Anyone can write a blog post and submit it for review.
 ```diff
 - We have to decide here if we allow commercial blogposts or not. It would also be useful if we stablish a difference between that and vendor-specific how-to blogs
 ```
