@@ -77,7 +77,7 @@ Each blog post requires a `lgtm` label from one copy editor, technical editor\*,
 
 ### SLA
 
-Blog posts can take up to **2 weeks** to review. 
+Blog posts can take up to **2 weeks** to review.
 ```diff
 - We need to set up an email alias for docs / blog
 ```
