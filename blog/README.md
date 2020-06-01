@@ -28,7 +28,7 @@ Anyone can write a blog post and submit it for review.
 
 To submit a blog post, follow the steps below.
 
-1. [Sign the CLA](https://github.com/knative/community/blob/master/CONTRIBUTING.md#contributor-license-agreements) if you have not yet done so.
+1. [Sign the Contributor License Agreements](https://github.com/knative/community/blob/master/CONTRIBUTING.md#contributor-license-agreements) if you have not yet done so.
 1. Have a look at the Markdown format for existing blog posts in the [docs repository](https://github.com/knative/docs/tree/master/blog). Blogposts are categorized in different folders, so you will have to click through to find blog examples.
 1. Write out your blog post in a text editor of your choice.
 1. On the same link from step 2, click through one of the categories, and click the Create new file button. Paste your content into the editor. Name the file to match the proposed title of the blog post, but don’t put the date in the file name. The blog reviewers will work with you on the final file name and the date the blog will be published.
