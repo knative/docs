@@ -7,7 +7,7 @@ This section covers documentation, processes, and roles for the [Knative blog](h
 
 ## Leadership -- TBD - JUST A PROPOSAL FOR NOW
 
-- **Technical Editors:** [Lionel Villard](https://github.com/lionelvillard), [Evan Anderson](https://github.com/evankanderson) 
+- **Technical Editors:** [Lionel Villard](https://github.com/lionelvillard), [Evan Anderson](https://github.com/evankanderson)
 - **Copy Editors:** [Ashleigh Brennan](https://github.com/abrennan89), [Caroline Lee](https://github.com/carieshmarie), [María Cruz](https://github.com/macruzbar)
 - **Blog Community Managers:**  [María Cruz](https://github.com/macruzbar), [Jonatas Baldin](https://github.com/jonatasbaldin)
 
@@ -80,4 +80,3 @@ Blog posts can take up to **2 weeks** to review.
 ```diff
 - We need to set up an email alias for docs / blog
 ```
-
