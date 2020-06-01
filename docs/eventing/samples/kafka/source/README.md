@@ -142,7 +142,7 @@ Tutorial on how to build and deploy a `KafkaSource` [Eventing source](../../../s
    >{"msg": "This is a test!"}
    ```
 1. Check that the Apache Kafka Event Source consumed the message and sent it to
-   its sink properly. Since these logs are captured in debug level, edit the `config-logging` configmap in `knative-sources` namespace to look   like this:
+   its sink properly. Since these logs are captured in debug level, edit the key `level` of `config-logging` configmap in `knative-sources` namespace to look like this:
    ```
    data:
      loglevel.controller: info
@@ -170,7 +170,7 @@ Tutorial on how to build and deploy a `KafkaSource` [Eventing source](../../../s
        } 
 
    ```
-   Now manually delete the kafkasource deployment and allow the `kafka-controller-manager' deployment running in `knative-sources` namespace     to redploy it. Debug level logs should be visible now. 
+   Now manually delete the kafkasource deployment and allow the `kafka-controller-manager` deployment running in `native-sources` namespace to redploy it. Debug level logs should be visible now. 
    ```
    $ kubectl logs --selector='knative-eventing-source-name=kafka-source'
    ...
