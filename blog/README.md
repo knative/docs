@@ -69,7 +69,7 @@ Each blog post requires a `lgtm` label from one copy editor, technical editor\*,
 
 ### Embargoed Content
 
-The blog repository on GitHub is public, therefore any content that needs to remain confidential until a certain time (for example: release posts, security vulnerabilities) should be submitted via the form directly. 
+**IMPORTANT:** The blog repository on GitHub is public. Any content that needs to remain confidential until a certain time (for example: release posts, security vulnerabilities), should be submitted through the form directly. 
 
 ```diff
 - We need to set up this process
