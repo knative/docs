@@ -38,7 +38,7 @@ To submit a blog post, follow the steps below.
 
 ### Blog Guidelines
 
-Requested Content:
+Requested content:
 
 ```diff
 - Ideally, each of these links to a pull request with the specific blog template, see demo for example
