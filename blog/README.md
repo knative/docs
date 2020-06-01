@@ -63,7 +63,7 @@ Unsuitable Content:
 
 After a blog post is submitted as a PR, it is automatically assigned to a reviewer.
 
-Each blog post requires a LGTM from one copy editor, technical editor\*, and blog community manager. Once the necessary LGTMs are in place, one of the reviewers will schedule and approve the blog post.
+Each blog post requires a `lgtm` label from one copy editor, technical editor\*, and blog community manager. Once the necessary labels are in place, one of the reviewers will add an `approved` label, and schedule publication of the blog post.
 
 _If a blog post does not contain any technical content (for example, [Knative welcomes new TOC members](https://knative.dev/blog/2020/05/12/knative-welcomes-new-toc-members/)), the technical review can be omitted._
 
