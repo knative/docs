@@ -34,7 +34,7 @@ To submit a blog post, follow the steps below.
 1. Choose a directory in the [docs repository](https://github.com/knative/docs/tree/master/blog), and click **Create new file**.
 1. Paste your content into the editor and save it. Name the file to match the proposed title of the blog post, but don’t put the date in the file name. The blog reviewers will work with you on the final file name, and the date on which the blog will be published.
 1. When you save the file, GitHub will walk you through the pull request (PR) process.
-1. A blog post reviewer will review your submission and work with you on feedback and final details. When the blog post is approved, the blog will be scheduled for publication.
+1. A reviewer is assigned to all pull requests automatically. The reviewer checks your submission, and works with you on feedback and final details. When the pull request is approved, the blog will be scheduled for publication.
 
 ### Blog Guidelines
 
