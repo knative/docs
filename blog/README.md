@@ -14,7 +14,7 @@ This section covers documentation, processes, and roles for the [Knative blog](h
 ## Contact
 
 - Slack: [#docs](https://knative.slack.com/archives/C9CV04DNJ)
-- Open Community Issues/PRs: Link TBD 
+- Open Community Issues/PRs: Link TBD
 ```diff
 - Ideally we set up a query that brings up open PRs associated to the blog
 ```
