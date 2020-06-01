@@ -61,7 +61,7 @@ Unsuitable Content:
 
 ## Review Process
 
-Once a blog post is submitted via a PR, it will be routed to the editorial team for review either auto-assigning for a PR.
+After a blog post is submitted as a PR, it is automatically assigned to a reviewer.
 
 Each blog post requires a LGTM from one copy editor, technical editor\*, and blog community manager. Once the necessary LGTMs are in place, one of the reviewers will schedule and approve the blog post.
 
