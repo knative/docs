@@ -44,7 +44,7 @@ Requested content:
 - Ideally, each of these links to a pull request with the specific blog template, see demo for example
 ```
 
-- Knative new releases and projects updates
+- Knative new feature releases and project updates
 - Tutorials and demos [start a blog](https://github.com/knative/docs/pull/2511)
 - Use cases
 - Vendor specific how-to content
