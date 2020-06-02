@@ -19,8 +19,11 @@ Code for this tutorial is available [here](https://github.com/knative/docs/tree/
 Create the project and add the dependencies:
 ```bash
 npm init
-npm install cloudevents-sdk --save
+npm install cloudevents-sdk@2.0.1 --save
 ```
+
+Please note that because of a [bug](https://github.com/cloudevents/sdk-javascript/issues/191), you will
+need at least `2.0.1` version of the Javascript SDK.
 
 ## Making use of ContainerSource
 
