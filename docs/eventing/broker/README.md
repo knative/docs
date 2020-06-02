@@ -13,7 +13,7 @@ There can be different classes of Brokers providing different kinds
 of semantics around durability of events, performance, etc. The Broker that is
 part of the Knative Eventing repo is used for these examples, it uses Knative
 [Channels](../channels/) for delivering events. You can read more details about
-[Channel Based Broker](./channel-based-broker.md). Simple example showing a `Broker`
+[MT Channel Based Broker](./mt-channel-based-broker.md). Simple example showing a `Broker`
 where the configuration is specified in a `ConfigMap` config-br-default-channel,
 which uses `InMemoryChannel`:
 
@@ -112,7 +112,7 @@ have the extension `myextension` with the value `my-extension-value`.
 ### Broker setup
 
 We assume that you have installed a Broker in namespace `default`. If you haven't done that
-yet, [install it from here](./channel-based-broker.md).
+yet, [install it from here](./mt-channel-based-broker.md).
 
 ### Subscriber
 
