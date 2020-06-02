@@ -109,11 +109,11 @@ To see if your app has been deployed successfully, you need the URL created by K
 
    This will return something like
 
-   ```fence {MD031}
-   Name:       helloworld-go
-   Namespace:  default
-   Age:        12m
-   URL:        http://helloworld-go.default.34.83.80.117.xip.io
+   ```
+   Name        helloworld-go
+   Namespace   default
+   Age         12m
+   URL         http://helloworld-go.default.34.83.80.117.xip.io
 
    Revisions:
      100%  @latest (helloworld-go-dyqsj-1) [1] (39s)
@@ -124,7 +124,7 @@ To see if your app has been deployed successfully, you need the URL created by K
      ++ Ready                  25s
      ++ ConfigurationsReady    26s
      ++ RoutesReady            25s
-   ``` {MD031}
+   ```
 
    Alternatively, if you don't have `kn` installed you can also use `kubectl`:
 
