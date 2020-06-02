@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cloudevents-sdk": "^1.0.0"
+    "cloudevents-sdk": "^2.0.1"
   }
 }
