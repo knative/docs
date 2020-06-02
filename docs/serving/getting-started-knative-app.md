@@ -109,7 +109,7 @@ To see if your app has been deployed successfully, you need the URL created by K
 
    This will return something like
 
-   ```
+   ```fence {MD031}
    Name:       helloworld-go
    Namespace:  default
    Age:        12m
@@ -124,7 +124,7 @@ To see if your app has been deployed successfully, you need the URL created by K
      ++ Ready                  25s
      ++ ConfigurationsReady    26s
      ++ RoutesReady            25s
-   ```
+   ``` {MD031}
 
    Alternatively, if you don't have `kn` installed you can also use `kubectl`:
 
