@@ -98,7 +98,7 @@ You must ensure that you meet the [prerequisites listed in the Apache Kafka over
          containers:
            - # This corresponds to
              # https://github.com/knative/eventing-contrib/tree/master/cmd/event_display/main.go
-             image: gcr.io/knative-releases/github.com/knative/eventing-contrib/cmd/event_display
+             image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
    ```
 
 1. Deploy the Event Display Service
