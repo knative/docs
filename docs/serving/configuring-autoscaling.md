@@ -2,8 +2,6 @@
 title: "Configuring autoscaling "
 weight: 10
 type: "docs"
-aliases:
-- /docs/serving/configuring-the-autoscaler/
 ---
 
 Knative uses a single shared autoscaler. This is, by default, the Knative Pod Autoscaler (KPA), which
