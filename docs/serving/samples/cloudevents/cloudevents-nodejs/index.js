@@ -36,19 +36,22 @@ const handle = (data) => {
 
 // receiveAndSend responds with ack, and send a new event forward
 const receiveAndSend = (cloudEvent, res) => {
-  const data = handle(cloudEvent.getData())
-  const newCloudEvent = new CloudEvent()
-    .type('dev.knative.docs.sample')
-    .source('https://github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-nodejs')
-    .time(new Date())
-    .data(data)
+  const data = handle(cloudEvent.data)
+  const newCloudEvent = new CloudEvent({
+    type: 'dev.knative.docs.sample',
+    source: 'https://github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-nodejs',
+    time: new Date(),
+    data: data
+  })
 
   // With only an endpoint URL, this creates a v1 emitter
   const emitter = new HTTPEmitter({
     url: target
   })
+
   // Reply back to dispatcher/client as soon as possible
   res.status(202).end()
+
   // Send the new Event to the K_SINK
   emitter.send(newCloudEvent)
     .then((res) => {
@@ -60,23 +63,17 @@ const receiveAndSend = (cloudEvent, res) => {
 
 // receiveAndReply responds with new event
 const receiveAndReply = (cloudEvent, res) => {
-  const data = handle(cloudEvent.getData())
-  const newCloudEvent = new CloudEvent()
-    .type('dev.knative.docs.sample')
-    .source('https://github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-nodejs')
-    .time(new Date())
+  const data = handle(cloudEvent.data)
+  const headers = HTTPEmitter.headers(cloudEvent)
+  const newCloudEvent = new CloudEvent({
+    type: 'dev.knative.docs.sample',
+    source: 'https://github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-nodejs',
+    time: new Date()
+  })
 
   console.log(`Reply event: ${JSON.stringify(newCloudEvent.format(), null, 2)}`)
-  res.set(getHeaders(newCloudEvent))
+  res.set(headers)
   res.status(200).send(data)
-}
-
-const getHeaders = (cloudEvent) => {
-  /* TODO: SDK should provide a better way to get the headers from a cloudEvent, using fake url for now ¯\_(ツ)_/¯ */
-  const emitter = new HTTPEmitter({
-    url: 'http://example.com'
-  })
-  return emitter.headers(cloudEvent)
 }
 
 app.use((req, res, next) => {
