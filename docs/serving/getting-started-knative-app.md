@@ -46,7 +46,7 @@ The easiest way to deploy a Knative Service is by using the Knative CLI [kn](htt
 `kn` allows you to create a service interactively on the command line.
 Eventually, it will create a corresponding resource description internally as when using a YAML file directly.
 
-To create our service directly at the cluster, use:
+To create a Service directly at the cluster, use:
 
 ```shell
 # Create a Knative service with the Knatice CLI kn
