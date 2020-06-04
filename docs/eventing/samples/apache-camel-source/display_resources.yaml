@@ -36,4 +36,4 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display@sha256:f4628e97a836c77ed38bd3b6fd3d0b06de4d5e7db6704772fe674d48b20bd477
+        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display

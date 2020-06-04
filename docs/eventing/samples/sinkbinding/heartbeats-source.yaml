@@ -29,7 +29,7 @@ spec:
           restartPolicy: Never
           containers:
             # This corresponds to a heartbeats image uri you build and publish,
-            # e.g. gcr.io/[gcloud-project]/github.com/knative/eventing-contrib/cmd/heartbeats
+            # e.g. gcr.io/[gcloud-project]/knative.dev/eventing-contrib/cmd/heartbeats
             - name: single-heartbeat
               image: knative.dev/eventing-contrib/cmd/heartbeats
               args:
