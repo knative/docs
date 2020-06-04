@@ -185,7 +185,7 @@ Tutorial on how to build and deploy a `KafkaSource` [Eventing source](../../../s
    ```
    $ kubectl logs --selector='serving.knative.dev/service=event-display' -c user-container
 
-   ☁️ cloudevents.Eventi
+   ☁️ cloudevents.Event
    Validation: valid
    Context Attributes,
      specversion: 1.0
