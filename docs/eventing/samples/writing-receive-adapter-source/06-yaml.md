@@ -40,7 +40,7 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display@sha256:526fdb25f5c26d25506e88e86f22b122b5d56be7de31091bcb1a46e5e8e50615
+        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
 ---
 apiVersion: samples.knative.dev/v1alpha1
 kind: SampleSource
