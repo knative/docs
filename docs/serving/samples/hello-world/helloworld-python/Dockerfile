@@ -2,7 +2,7 @@
 # https://hub.docker.com/_/python
 FROM python:3.7-slim
 
-# Allow statements and log messages to immediately appear in the Cloud Run logs
+# Allow statements and log messages to immediately appear in the Knative logs
 ENV PYTHONUNBUFFERED True
 
 # Copy local code to the container image.
