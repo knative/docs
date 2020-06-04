@@ -39,7 +39,7 @@ The Hello World sample app reads in an `env` variable, `TARGET`, then prints "He
 
 ## Creating your Deployment with the Knative CLI
 
-The easiest way to create Knative service deployment is by using the Knative CLI [kn](https://github.com/knative/client).
+The easiest way to deploy a Knative Service is by using the Knative CLI [kn](https://github.com/knative/client).
 You can install the `kn` binary as described in [Installing the Knative CLI](../install/install-kn.md)
 
 `kn` allows you to create a service interactively on the command line.
