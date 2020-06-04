@@ -78,20 +78,12 @@ You need:
     of your Knative cluster are use by your revisions unless 
     [`serviceAccountName`](../spec/knative-api-specification-1.0.md) is specified.
 
-   1. Run the following command to modify your `default` service account:
-   
-      For example, if you named your secrets `container-registry`, then you
-	  patch it with this.
+   Run the following command to modify your `default` service account, assuming
+   you named your secrets `container-registry`:
 
-       ```shell
-       kubectl patch serviceaccount default -p "{\"imagePullSecrets\": [{\"name\": \"container-registry\"}]}"
-       ```
-
-1. Deploy the updated service account to your Knative cluster:
-
-    ```bash
-   kubectl apply --filename service-account.yaml
-   ```
+    ```shell
+    kubectl patch serviceaccount default -p "{\"imagePullSecrets\": [{\"name\": \"container-registry\"}]}"
+    ```
 
 Now, all the new pods that are created in the `default` namespace will include
 your credentials and have access to your container images in the private registry.
