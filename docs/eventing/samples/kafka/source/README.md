@@ -129,7 +129,7 @@ Tutorial on how to build and deploy a `KafkaSource` [Eventing source](../../../s
    configuration.
    ```
    $ kubectl logs --selector='knative-eventing-source-name=kafka-source'
-   {"level":"info","ts":"2019-04-01T19:09:32.164Z","caller":"receive_adapter/main.go:97","msg":"Starting Apache Kafka Receive Adapter...","Bootstrap Server":"...","Topics":".","ConsumerGroup":"...","SinkURI":"...","TLS":false}
+   {"level":"info","ts":"2020-05-28T10:39:42.104Z","caller":"adapter/adapter.go:81","msg":"Starting with config: ","Topics":".","ConsumerGroup":"...","SinkURI":"...","Name":".","Namespace":"."}
    ```
 
 ### Verify
@@ -142,14 +142,42 @@ Tutorial on how to build and deploy a `KafkaSource` [Eventing source](../../../s
    >{"msg": "This is a test!"}
    ```
 1. Check that the Apache Kafka Event Source consumed the message and sent it to
-   its sink properly.
+   its sink properly. Since these logs are captured in debug level, edit the key `level` of `config-logging` configmap in `knative-sources` namespace to look like this:
+   ```
+   data:
+     loglevel.controller: info
+     loglevel.webhook: info
+     zap-logger-config: |
+       {
+         "level": "debug",
+         "development": false,
+         "outputPaths": ["stdout"],
+         "errorOutputPaths": ["stderr"],
+         "encoding": "json",
+         "encoderConfig": {
+           "timeKey": "ts",
+           "levelKey": "level",
+           "nameKey": "logger",
+           "callerKey": "caller",
+           "messageKey": "msg",
+           "stacktraceKey": "stacktrace",
+           "lineEnding": "",
+           "levelEncoder": "",
+           "timeEncoder": "iso8601",
+           "durationEncoder": "",
+           "callerEncoder": ""
+         }
+       }
+
+   ```
+   Now manually delete the kafkasource deployment and allow the `kafka-controller-manager` deployment running in `native-sources` namespace to redploy it. Debug level logs should be visible now.
 
    ```
    $ kubectl logs --selector='knative-eventing-source-name=kafka-source'
    ...
-   {"level":"info","ts":"2019-04-15T20:37:24.702Z","caller":"receive_adapter/main.go:99","msg":"Starting Apache Kafka Receive Adapter...","bootstrap_server":"...","Topics":"knative-demo-topic","ConsumerGroup":"knative-group","SinkURI":"...","TLS":false}
-   {"level":"info","ts":"2019-04-15T20:37:24.702Z","caller":"adapter/adapter.go:100","msg":"Starting with config: ","bootstrap_server":"...","Topics":"knative-demo-topic","ConsumerGroup":"knative-group","SinkURI":"...","TLS":false}
-   {"level":"info","ts":1553034726.546107,"caller":"adapter/adapter.go:154","msg":"Successfully sent event to sink"}
+
+   {"level":"debug","ts":"2020-05-28T10:40:29.400Z","caller":"kafka/consumer_handler.go:77","msg":"Message claimed","topic":".","value":"."}
+   {"level":"debug","ts":"2020-05-28T10:40:31.722Z","caller":"kafka/consumer_handler.go:89","msg":"Message marked","topic":".","value":"."}
    ```
 
 1. Ensure the Event Display received the message sent to it by the Event Source.
@@ -157,7 +185,7 @@ Tutorial on how to build and deploy a `KafkaSource` [Eventing source](../../../s
    ```
    $ kubectl logs --selector='serving.knative.dev/service=event-display' -c user-container
 
-   ☁️ cloudevents.Event
+   ☁️ cloudevents.Eventi
    Validation: valid
    Context Attributes,
      specversion: 1.0
