@@ -57,6 +57,56 @@ spec:
         name: dlq-service
 ```
 
+### Creating a broker by annotation
+
+You can create a broker annotate your namespace:
+
+```shell
+kubectl label namespace <namespace> knative-eventing-injection=enabled
+```
+
+This will automatically create a broker named `default`, which is configured to use
+Kafka channels, in the specified namespace.
+
+```shell
+kubectl -n default get broker default
+```
+
+**NOTE:** Brokers created due by annotation will not be removed if you remove the
+annotation. You must manually remove these brokers.
+
+To delete the injected broker:
+
+```shell
+kubectl -n <namespace> delete broker default
+```
+
+### Creating a broker by trigger annotation
+
+If you have a trigger that is coupled to the `default` broker, and there is no existing `default` broker, you can also annotate using triggers to create a broker:
+
+```yaml
+apiVersion: eventing.knative.dev/v1beta1
+kind: Trigger
+metadata:
+  annotations:
+    knative-eventing-injection: enabled
+  name: testevents-trigger0
+  namespace: default
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: dev.knative.sources.ping
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: broker-display
+```
+
+**NOTE:** Deleting a trigger will not delete any brokers created using by annotating that trigger. You must delete these brokers manually.
+
 ## Trigger
 
 A Trigger represents a desire to subscribe to events from a specific Broker.
@@ -108,6 +158,7 @@ The example above filters events from the `default` Broker that are of type `dev
 have the extension `myextension` with the value `my-extension-value`.
 
 ## Complete end-to-end example
+<!-- TODO: review + clean this section up-->
 
 ### Broker setup
 

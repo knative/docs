@@ -23,6 +23,8 @@ namespace. If you have installed Knative Eventing in a different namespace, repl
 
 You can define specifications for how each type of channel will be created, by modifying the ConfigMap for each channel type.
 
+<!-- TODO: Split these configmaps out and document them properly in a section for each channel, then just link from here-->
+
 ### Example InMemoryChannel ConfigMap
 
 When you install the InMemoryChannel Channel provider, the following YAML file is created automatically:
@@ -118,9 +120,9 @@ namespace.
 kubectl -n default get broker mybroker
 ```
 
-## Creating a custom MT broker without default configurations
+## Creating a custom MT broker using custom configurations
 
-You can construct an entire custom broker object to suit your use case, without using any of the default configurations.
+You can construct a custom broker object to suit your use case, without using the default configurations.
 
 For example, to create a broker that has a different Kafka configuration, you can create a custom configuration as shown in the example.
 In this example, the number of partitions has been increased to 10.
@@ -159,65 +161,3 @@ spec:
     namespace: my-namespace
 EOF
 ```
-
-## Installing Broker by Annotation
-
-The easiest way to get Broker installed, is to annotate your namespace
-(replace `default` with the desired namespace):
-
-```shell
-kubectl label namespace default knative-eventing-injection=enabled
-```
-
-This will automatically create a `Broker` named `default` in the `default`
-namespace. As per above configuration, it would be configured to use Kafka
-channels.
-
-```shell
-kubectl -n default get broker default
-```
-
-_NOTE_ `Broker`s created due to annotation will not be removed if you remove the
-annotation. For example, if you annotate the namespace, which will then create
-the `Broker` as described above. If you now remove the annotation, the `Broker`
-will not be removed, you have to manually delete it.
-
-For example, to delete the injected Broker from the foo namespace:
-
-```shell
-kubectl -n foo delete broker default
-```
-
-## Creating Broker by Trigger Annotation
-
-Besides the annotation of the namespace, there is an alternative approach to annotate
-one of the Triggers, with `knative-eventing-injection: enabled`:
-
-```yaml
-apiVersion: eventing.knative.dev/v1beta1
-kind: Trigger
-metadata:
-  annotations:
-    knative-eventing-injection: enabled
-  name: testevents-trigger0
-  namespace: default
-spec:
-  broker: default
-  filter:
-    attributes:
-      type: dev.knative.sources.ping
-  subscriber:
-    ref:
-      apiVersion: serving.knative.dev/v1
-      kind: Service
-      name: broker-display
-```
-
-However, this approach only works _if_ the `Trigger` is coupled to the default `Broker`, and takes only effect
-when there is no default `Broker` already present.
-
-Deleting the `Trigger` does not delete the `Broker`. With this approach the same rules from the
-[namespace annotation](./#installing-broker-by-annotation) apply here.
-
-
-You can find out more about delivery spec details [here](https://knative.dev/docs/eventing/event-delivery/).
