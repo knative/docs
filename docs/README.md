@@ -85,7 +85,7 @@ Follow the links below to learn more about Knative.
 - [Using a custom domain](./serving/using-a-custom-domain.md)
 - [Assigning a static IP address for Knative on Google Kubernetes Engine](./serving/gke-assigning-static-ip-address.md)
 - [Configuring HTTPS with a custom certificate](./serving/using-a-tls-cert.md)
-- [Configuring high availability](./config-ha.md)
+- [Configuring high availability](./serving/config-ha.md)
 
 ### Samples and demos
 
