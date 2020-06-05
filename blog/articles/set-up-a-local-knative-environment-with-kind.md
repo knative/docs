@@ -1,5 +1,5 @@
 ---
-Title: 'How to set up a local Knative environment up in no time flat'
+Title: 'How to set up a local Knative environment with KinD and without DNS headaches'
 Author: Leon Stigter
 Author handle: https://twitter.com/retgits
 Date: ''
@@ -46,6 +46,8 @@ nodes:
 EOF
 ```
 
+The values for the container ports are randomly chosen and are used later on to configure a NodePort service with these values. The values for the host ports are where you'll send cURL requests to as you deploy applications to the cluster.
+
 With that cluster configuration file, you can create a cluster with the below command. Your `kubeconfig` will automatically be updated and the default cluster will be set to your new cluster.
 
 ```bash
@@ -70,6 +72,7 @@ Now that the cluster is running, you can add the Knative components starting wit
 
 ```bash
 $ kubectl apply --filename https://github.com/knative/serving/releases/download/v0.15.0/serving-crds.yaml
+
 customresourcedefinition.apiextensions.k8s.io/certificates.networking.internal.knative.dev created
 customresourcedefinition.apiextensions.k8s.io/configurations.serving.knative.dev created
 customresourcedefinition.apiextensions.k8s.io/ingresses.networking.internal.knative.dev created
@@ -86,6 +89,7 @@ After the CRDs, the core components are next to be installed on your cluster. Fo
 
 ```bash
 $ kubectl apply --filename https://github.com/knative/serving/releases/download/v0.15.0/serving-core.yaml
+
 namespace/knative-serving created
 serviceaccount/controller created
 clusterrole.rbac.authorization.k8s.io/knative-serving-admin created
@@ -161,6 +165,7 @@ To install the Kourier controller, run:
 
 ```bash
 $ kubectl apply --filename kourier.yaml
+
 namespace/kourier-system created
 configmap/config-logging created
 configmap/config-observability created
@@ -183,6 +188,7 @@ $ kubectl patch configmap/config-network \
   --namespace knative-serving \
   --type merge \
   --patch '{"data":{"ingress.class":"kourier.ingress.networking.knative.dev"}}'
+
 configmap/config-network patched
 ```
 
@@ -287,7 +293,7 @@ helloworld-go   http://helloworld-go.default.127.0.0.1.nip.io   helloworld-go-fq
 $ kubectl get ksvc
 NAME            URL                                             LATESTCREATED         LATESTREADY           READY   REASON
 helloworld-go   http://helloworld-go.default.127.0.0.1.nip.io   helloworld-go-fqqs6   helloworld-go-fqqs6   True
-``` 
+```
 
 A running and ready service leaves one final step… checking that the code returns what you expect. To do that, you can send a cURL request to the URL listed above. Because you’ve mapped port 80 of the host to be forwarded to the cluster, and set the DNS, you can use that exact URL.
 
@@ -303,7 +309,6 @@ To stop your cluster and remove all the resources you’ve created, you can run 
 kind delete cluster --name knative
 Deleting cluster "knative" ...
 ```
-
 
 ## About the author
 As a Product Manager, Leon is very passionate and outspoken when it comes to serverless and container technologies. He believes that "devs wanna dev" and that drives his passion to help build better products. He enjoys writing code, speaking at conferences and meetups, and blogging about that.
