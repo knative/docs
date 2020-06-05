@@ -1,7 +1,6 @@
 ---
 title: "Configuring high-availability components"
-linkTitle: "Configuring high-availability components"
-weight: 20
+weight: 50
 type: "docs"
 ---
 
