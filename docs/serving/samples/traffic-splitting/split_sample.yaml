@@ -31,7 +31,6 @@ spec:
           httpGet:
             path: /
           initialDelaySeconds: 0
-          periodSeconds: 3
   traffic:
   - tag: current
     revisionName: stock-service-example-first
