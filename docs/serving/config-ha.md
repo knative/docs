@@ -37,7 +37,7 @@ $ kubectl patch configmap/config-leader-election \
 
 1. Restart the controllers:
 ```
-$ kubectl rollout restart deployment -n knative-serving
+$ kubectl rollout restart deployment <deployment-name> -n knative-serving
 ```
 
   **NOTE:** You will experience temporary control plane downtime during this step.
@@ -48,7 +48,7 @@ $ kubectl rollout restart deployment -n knative-serving
 
 1. After the controllers have been configured to use leader election, the control plane can be scaled up:
 ```
-$ kubectl scale --replicas=N <deployment-name>
+$ kubectl -n knative-serving scale deployment <deployment-name> --replicas=2
 ```
 
 ## Scaling the control plane
@@ -68,7 +68,7 @@ Optionally installed deployments:
 
 Scale up the deployment(s):
 ```
-$ kubectl scale --replicas=2 <deployment-name>
+$ kubectl -n knative-serving scale deployment <deployment-name> --replicas=2
 ```
 
 - Setting `--replicas` to a value of `2` enables HA.
