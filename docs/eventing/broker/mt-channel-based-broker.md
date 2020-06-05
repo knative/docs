@@ -4,7 +4,7 @@ weight: 30
 type: "docs"
 ---
 
-Knative provides a Multi Tenant (MT) Broker implementation that uses [Channels](./channels/) for
+Knative provides a Multi Tenant (MT) Broker implementation that uses [Channels](../channels/) for
 event routing.
 
 **NOTE:** This guide assumes Knative Eventing is installed in the `knative-eventing`
@@ -93,8 +93,6 @@ data:
         namespace: knative-eventing
 ```
 
-<<<<<<< HEAD:docs/eventing/broker/mt-channel-based-broker.md
-
 ## Creating Broker using defaults
 
 To create the Broker assuming above mentioned default configuration.
@@ -163,9 +161,8 @@ EOF
 ```
 
 ## Creating Broker by Annotation
-=======
+
 ## Installing Broker by Annotation
->>>>>>> [WIP] Updates to MT broker docs:docs/eventing/channel-based-broker.md
 
 The easiest way to get Broker installed, is to annotate your namespace
 (replace `default` with the desired namespace):
