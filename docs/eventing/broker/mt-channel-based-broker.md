@@ -62,7 +62,7 @@ data:
       replicationFactor: 1
 ```
 
-**NOTE:** This example specifies two extra parameters that are specific to Kakfa Channels; `numPartitions` and `replicationFactor`.
+**NOTE:** This example specifies two extra parameters that are specific to Kafka Channels; `numPartitions` and `replicationFactor`.
 
 ## Configuring the MT broker
 
@@ -72,7 +72,7 @@ Channels can be configured as a cluster level default, by namespace, or for a sp
 
 The channels used by the MT broker can be configured in the `config-br-defaults` ConfigMap in the `knative-eventing` namespace.
 
-The following example ConfigMap uses a Kafka channel for all brokers, except for the `example-ns` namespace,  which uses InMemoryChannel.
+The following example ConfigMap uses a Kafka channel for all brokers, except for the `example-ns` namespace, which uses InMemoryChannel.
 
 ### Example `config-br-defaults` ConfigMap
 

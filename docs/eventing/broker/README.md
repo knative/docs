@@ -57,7 +57,7 @@ spec:
         name: dlq-service
 ```
 
-### Creating a broker by annotation
+### Creating a broker using annotation
 
 You can create a broker annotate your namespace:
 
@@ -81,7 +81,7 @@ To delete the injected broker:
 kubectl -n <namespace> delete broker default
 ```
 
-### Creating a broker by trigger annotation
+### Creating a broker using trigger annotation
 
 If you have a trigger that is coupled to the `default` broker, and there is no existing `default` broker, you can also annotate using triggers to create a broker:
 
