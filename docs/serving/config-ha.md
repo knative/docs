@@ -37,7 +37,7 @@ $ kubectl patch configmap/config-leader-election \
 
 1. Restart the controllers:
 ```
-  $ kubectl rollout restart deployment -n knative-serving
+$ kubectl rollout restart deployment -n knative-serving
 ```
 
   **NOTE:** You will experience temporary control plane downtime during this step.
@@ -48,7 +48,7 @@ $ kubectl patch configmap/config-leader-election \
 
 1. After the controllers have been configured to use leader election, the control plane can be scaled up:
 ```
-$ kubectl rollouts restart deployment -n knative-serving controller
+$ kubectl scale --replicas=N <deployment-name>
 ```
 
 ## Scaling the control plane
