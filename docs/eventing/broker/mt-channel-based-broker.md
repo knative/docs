@@ -4,27 +4,28 @@ weight: 30
 type: "docs"
 ---
 
-Knative provides a Multi Tenant (MT) Broker implementation that uses [Channels](../channels/) for
+Knative provides a Multi Tenant (MT) Broker implementation that uses [channels](../channels/) for
 event routing.
+
+## Before you begin
+
+Before you can use the MT Broker, you will need to have a channel provider installed, for example, InMemoryChannel (for development purposes), Kafka or Nats.
+
+For more information on which channels are available, see the list of [available channels](https://knative.dev/docs/eventing/channels/channels-crds/).
+
+After you have installed the channel provider that you will use in your broker implementation, you must configure the ConfigMap for each channel type.
 
 **NOTE:** This guide assumes Knative Eventing is installed in the `knative-eventing`
 namespace. If you have installed Knative Eventing in a different namespace, replace
 `knative-eventing` with the name of that namespace.
 
-## Before you begin
-
-Before you can use the MT Broker, you will need to have a Channel provider installed, for example, InMemoryChannel (for development purposes), Kafka or Nats.
-For more information on which Channels are available, see the list of [available Channels](https://knative.dev/docs/eventing/channels/channels-crds/).
-
-After you have installed the Channel provider that you will use in your Broker implementation, you must configure the ConfigMap for each Channel type.
-
 ## Configure Channel ConfigMaps
 
-In the ConfigMap for each type of Channel that you will use, you must define the specifications for how each type of Channel will be created.
+You can define specifications for how each type of channel will be created, by modifying the ConfigMap for each channel type.
 
 ### Example InMemoryChannel ConfigMap
 
-When you install the InMemoryChannel Channel provider, the following YAML file will be created automatically:
+When you install the InMemoryChannel Channel provider, the following YAML file is created automatically:
 
 ```yaml
 apiVersion: v1
@@ -40,8 +41,9 @@ data:
 
 ### Example Kafka Channel ConfigMap
 
-To use Kafka Channels, you must create a YAML file that specifies how these Channels will be created.
-You can copy the following sample code into your Kafka Channel ConfigMap:
+To use Kafka channels, you must create a YAML file that specifies how these channels will be created.
+
+You can copy the following sample code into your Kafka channel ConfigMap:
 
 ```yaml
 apiVersion: v1
@@ -60,13 +62,15 @@ data:
 
 **NOTE:** This example specifies two extra parameters that are specific to Kakfa Channels; `numPartitions` and `replicationFactor`.
 
-## Configuring the MT Broker
+## Configuring the MT broker
 
 After you have configured the ConfigMap for each Channel provider type, you can configure the MT Broker.
-You can configure which Channels are used as a cluster level default, by namespace or for a specific Broker.
-The Channels used are configured by a `config-br-defaults` ConfigMap in the `knative-eventing` namespace.
 
-The following example ConfigMap uses a Kafka channel for all Brokers, except for the `test-broker-6` namespace,  which uses InMemoryChannel.
+Channels can be configured as a cluster level default, by namespace, or for a specific broker.
+
+The channels used by the MT broker can be configured in the `config-br-defaults` ConfigMap in the `knative-eventing` namespace.
+
+The following example ConfigMap uses a Kafka channel for all brokers, except for the `example-ns` namespace,  which uses InMemoryChannel.
 
 ### Example `config-br-defaults` ConfigMap
 
@@ -86,16 +90,16 @@ data:
       namespace: knative-eventing
     namespaceDefaults:
       brokerClass: MTChannelBasedBroker
-      test-broker-6:
+      example-ns:
         apiVersion: v1
         kind: ConfigMap
         name: kafka-channel
         namespace: knative-eventing
 ```
 
-## Creating Broker using defaults
+## Creating the MT broker using default configurations
 
-To create the Broker assuming above mentioned default configuration.
+To create the MT broker using the default configuration, use the command:
 
 ```shell
 kubectl apply -f - <<EOF
@@ -106,27 +110,23 @@ metadata:
 EOF
 ```
 
-This creates a `Broker` named `mybroker` in the `default`
-namespace. As per above configuration, it would be configured to use
-InMemoryChannel.
+This creates a broker named `mybroker`,  which is configured to use
+InMemoryChannel, in the `default`
+namespace.
 
 ```shell
 kubectl -n default get broker mybroker
 ```
 
-## Creating Broker without defaults
+## Creating a custom MT broker without default configurations
 
-You can also configure all aspects of your Broker by not relying on
-default behaviours, and just construct the entire object. For example,
-say you wanted to create a Broker that has a different Kafka configuration.
-You would first create the configuration you'd like to use, for example
-let's increase the number of partitions to 10:
+You can construct an entire custom broker object to suit your use case, without using any of the default configurations.
+
+For example, to create a broker that has a different Kafka configuration, you can create a custom configuration as shown in the example.
+In this example, the number of partitions has been increased to 10.
 
 ```shell
 kubectl apply -f - <<EOF
-# Define how Kafka channels are created. Note we specify
-# extra parameters that are particular to Kakfa Channels, namely
-# numPartitions as well as replicationFactor.
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -159,8 +159,6 @@ spec:
     namespace: my-namespace
 EOF
 ```
-
-## Creating Broker by Annotation
 
 ## Installing Broker by Annotation
 
