@@ -105,31 +105,31 @@ TLS certificates and how the requests are validated with Cloud DNS.
    provider info, including your `cert-manager-cloud-dns-admin` service account.
 
    ```shell
-    kubectl apply --filename - <<EOF
-    apiVersion: cert-manager.io/v1alpha2
-    kind: ClusterIssuer
-    metadata:
-      name: letsencrypt-issuer
-    spec:
-      acme:
-        server: https://acme-v02.api.letsencrypt.org/directory
-        # This will register an issuer with LetsEncrypt.  Replace
-        # with your admin email address.
-        email: myemail@gmail.com
-        privateKeySecretRef:
-          # Set privateKeySecretRef to any unused secret name.
-          name: letsencrypt-issuer
-        solvers:
-        - dns01:
-              clouddns:
-                # Set this to your GCP project-id
-                project: $PROJECT_ID
-                # Set this to the secret that we publish our service account key
-                # in the previous step.
-                serviceAccountSecretRef:
-                  name: cloud-dns-key
-                  key: key.json
-    EOF
+   kubectl apply --filename - <<EOF
+   apiVersion: cert-manager.io/v1alpha2
+   kind: ClusterIssuer
+   metadata:
+     name: letsencrypt-issuer
+   spec:
+     acme:
+       server: https://acme-v02.api.letsencrypt.org/directory
+       # This will register an issuer with LetsEncrypt.  Replace
+       # with your admin email address.
+       email: myemail@gmail.com
+       privateKeySecretRef:
+         # Set privateKeySecretRef to any unused secret name.
+         name: letsencrypt-issuer
+       solvers:
+       - dns01:
+         clouddns:
+           # Set this to your GCP project-id
+           project: $PROJECT_ID
+           # Set this to the secret that we publish our service account key
+           # in the previous step.
+           serviceAccountSecretRef:
+             name: cloud-dns-key
+             key: key.json
+   EOF
    ```
 
 1. Ensure that `letsencrypt-issuer` is created successfully by running the
@@ -163,25 +163,26 @@ exists.
 
 1. Run the following commands to create the `my-certificate` `Certificate`,
    where `<your-domain.com>` is your domain:
-
+   
    ```shell
-  # Change this value to the domain you want to use.
-  export DOMAIN=<your-domain.com>
+   # Change this value to the domain you want to use.
+   export DOMAIN=<your-domain.com>
 
-  kubectl apply --filename - <<EOF
-  apiVersion: cert-manager.io/v1alpha2
-  kind: Certificate
-  metadata:
-    name: my-certificate
-    namespace: istio-system
-  spec:
-    secretName: istio-ingressgateway-certs
-    issuerRef:
-      name: letsencrypt-issuer
-    dnsNames:
-    - "*.default.$DOMAIN"
-    - "*.other-namespace.$DOMAIN"
-  EOF
+   kubectl apply --filename - <<EOF
+   apiVersion: cert-manager.io/v1alpha2
+   kind: Certificate
+   metadata:
+     name: my-certificate
+     namespace: istio-system
+   spec:
+     secretName: istio-ingressgateway-certs
+     issuerRef:
+       name: letsencrypt-issuer
+       kind: ClusterIssuer
+     dnsNames:
+     - "*.default.$DOMAIN"
+     - "*.other-namespace.$DOMAIN"
+   EOF
    ```
 
 1. Ensure that `my-certificate` is created successfully by running the following
