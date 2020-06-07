@@ -163,7 +163,7 @@ exists.
 
 1. Run the following commands to create the `my-certificate` `Certificate`,
    where `<your-domain.com>` is your domain:
-   
+
    ```shell
    # Change this value to the domain you want to use.
    export DOMAIN=<your-domain.com>
