@@ -46,7 +46,7 @@ nodes:
 EOF
 ```
 
-The values for the container ports are randomly chosen, and are used later on to configure a NodePort service with these values. 
+The values for the container ports are randomly chosen, and are used later on to configure a NodePort service with these values.
 The values for the host ports are where you'll send cURL requests to as you deploy applications to the cluster.
 
 After the cluster configuration file has been created, you can create a cluster. Your `kubeconfig` will automatically be updated, and the default cluster will be set to your new cluster.
@@ -142,7 +142,7 @@ To install Kourier and make it available as a service leveraging the node ports,
 curl -Lo kourier.yaml https://github.com/knative/net-kourier/releases/download/v0.15.0/kourier.yaml
 ```
 
-By default, the Kourier service is set to be of type `LoadBalancer`. On local machines, this type doesn’t work, so you’ll have to change the type to `NodePort` and add `nodePort` elements to the two listed ports. 
+By default, the Kourier service is set to be of type `LoadBalancer`. On local machines, this type doesn’t work, so you’ll have to change the type to `NodePort` and add `nodePort` elements to the two listed ports.
 
 The complete Service portion (which runs from line 75 to line 94 in the document), should be replaced with:
 
