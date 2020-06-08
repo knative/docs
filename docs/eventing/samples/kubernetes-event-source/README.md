@@ -1,4 +1,4 @@
-This example shows how to wire [Kubernetes cluster events](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.17/#event-v1-core),
+This example shows how to wire [Kubernetes cluster events](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#event-v1-core),
 using the API Server Source, for consumption by a function that has been implemented as a Knative Service.
 
 ## Before you begin
