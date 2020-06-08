@@ -219,6 +219,37 @@ The following commands install Istio and enable its Knative integration.
 
 {{< /tab >}}
 
+{{% tab name="Kong" %}}
+
+{{% feature-state version="v0.13" state="" %}}
+
+The following commands install Kong and enable its Knative integration.
+
+1. Install Kong Ingress Controller:
+
+   ```bash
+   kubectl apply --filename https://raw.githubusercontent.com/Kong/kubernetes-ingress-controller/0.9.x/deploy/single/all-in-one-dbless.yaml
+   ```
+
+1. To configure Knative Serving to use Kong by default:
+
+    ```bash
+    kubectl patch configmap/config-network \
+      --namespace knative-serving \
+      --type merge \
+      --patch '{"data":{"ingress.class":"kong"}}'
+    ```
+
+1. Fetch the External IP or CNAME:
+
+   ```bash
+   kubectl --namespace kong get service kong-proxy
+   ```
+
+   Save this for configuring DNS below.
+
+{{< /tab >}}
+
 {{% tab name="Kourier" %}}
 
 {{% feature-state version="v0.12" state="alpha" %}}
