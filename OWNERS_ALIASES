@@ -1,18 +1,21 @@
 aliases:
   eng-approvers:
-  - evankanderson
-  - mattmoor
-  - dprotaso
-  - vaikas
-  - rgregg
-  - mchmarny
   - averikitsch
- 
+  - dprotaso
+  - evankanderson
+  - grantr
+  - markusthoemmes
+  - mattmoor
+  - mchmarny
+  - rgregg
+  - tcnghia
+  - vaikas
+
   docs-approvers:
   - carieshmarie
   - samodell
   - richieescarez
- 
+
   docs-reviewers:
   - abrennan89
   - mpetason
@@ -20,7 +23,7 @@ aliases:
 
   blog-approvers:
   - macruzbar
- 
+
   productivity-approvers:
   - chaodaiG
   - chizhg
