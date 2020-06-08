@@ -15,12 +15,12 @@ Reviewers: ''
 | @retgits  | 2020-06-03  |:+1:|
 | <!-- Your Github handle here --> |   |  |
 
-Knative builds on top of Kubernetes. For developers, it abstracts away complexity and enables them to focus on delivering value to their business. The complex, and sometimes boring, parts of building apps to run on Kubernetes are managed by Knative. Setting up a Kubernetes cluster and starting with Knative on your local machine can still be complex. In this post, let’s focus on setting up a lightweight environment to help you modern apps faster.
+Knative builds on Kubernetes to abstract away complexity for developers, and enables them to focus on delivering value to their business. The complex (and sometimes boring) parts of building apps to run on Kubernetes are managed by Knative. In this post, we will focus on setting up a lightweight environment to help you to develop modern apps faster using Knative.
 
-## KinD
-If you want to create a Kubernetes cluster on your local machine, you have a bunch of options. Because you’re running containers in your Kubernetes cluster anyway, let’s also use containers for the actual cluster itself. Kubernetes IN Docker, or `kind` for short, enables developers to spin up a Kubernetes cluster where each “node” is a container.
+## Step 1: Setting up your Kubernetes deployment using KinD
+There are many options for creating a Kubernetes cluster on your local machine. However, since we are running containers in the Kubernetes cluster anyway, let’s also use containers for the cluster itself. Kubernetes IN Docker, or _KinD_ for short, enables developers to spin up a Kubernetes cluster where each cluster node is a container.
 
-You can install `kind` on your machine, by running the commands below:
+You can install KinD on your machine by running the following commands:
 
 ```bash
 curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.8.1/kind-$(uname)-amd64
@@ -28,7 +28,7 @@ chmod +x ./kind
 mv ./kind /some-dir-in-your-PATH/kind
 ```
 
-The next step is to create a Kubernetes cluster using `kind`. While you can certainly use `kubectl port-forward` to get traffic into the cluster, a nicer way is to expose the ports the ingress gateway will listen on to the host. To do that, you can pass in a file with cluster configuration parameters:
+Next, create a Kubernetes cluster using KinD, and expose the ports the ingress gateway to listen on the host. To do this, you can pass in a file with the following cluster configuration parameters:
 
 ```bash
 cat > clusterconfig.yaml <<EOF
@@ -46,12 +46,16 @@ nodes:
 EOF
 ```
 
-The values for the container ports are randomly chosen and are used later on to configure a NodePort service with these values. The values for the host ports are where you'll send cURL requests to as you deploy applications to the cluster.
+The values for the container ports are randomly chosen, and are used later on to configure a NodePort service with these values. 
+The values for the host ports are where you'll send cURL requests to as you deploy applications to the cluster.
 
-With that cluster configuration file, you can create a cluster with the below command. Your `kubeconfig` will automatically be updated and the default cluster will be set to your new cluster.
+After the cluster configuration file has been created, you can create a cluster. Your `kubeconfig` will automatically be updated, and the default cluster will be set to your new cluster.
 
 ```bash
 $ kind create cluster --name knative --config clusterconfig.yaml
+```
+
+```bash
 Creating cluster "knative" ...
  ✓ Ensuring node image (kindest/node:v1.18.2) 🖼
  ✓ Preparing nodes 📦
@@ -67,12 +71,14 @@ kubectl cluster-info --context kind-knative
 Have a nice day! 👋
 ```
 
-## Knative Serving
-Now that the cluster is running, you can add the Knative components starting with Knative CRDs. At the time of writing the latest available version is `0.15`
+## Step 2: Install Knative Serving
+Now that the cluster is running, you can add Knative components using the Knative CRDs. At the time of writing, the latest available version is 0.15.
 
 ```bash
 $ kubectl apply --filename https://github.com/knative/serving/releases/download/v0.15.0/serving-crds.yaml
+```
 
+```bash
 customresourcedefinition.apiextensions.k8s.io/certificates.networking.internal.knative.dev created
 customresourcedefinition.apiextensions.k8s.io/configurations.serving.knative.dev created
 customresourcedefinition.apiextensions.k8s.io/ingresses.networking.internal.knative.dev created
@@ -89,7 +95,9 @@ After the CRDs, the core components are next to be installed on your cluster. Fo
 
 ```bash
 $ kubectl apply --filename https://github.com/knative/serving/releases/download/v0.15.0/serving-core.yaml
+```
 
+```bash
 namespace/knative-serving created
 serviceaccount/controller created
 clusterrole.rbac.authorization.k8s.io/knative-serving-admin created
@@ -125,8 +133,8 @@ mutatingwebhookconfiguration.admissionregistration.k8s.io/webhook.serving.knativ
 validatingwebhookconfiguration.admissionregistration.k8s.io/validation.webhook.serving.knative.dev created
 ```
 
-## Networking
-The next step is to choose a networking layer. While the docs have a lot of available options, Kourier is the option with the lowest resource requirements. Kourier connects to Envoy and the Knative Ingress CRDs directly.
+## Step 3: Set up networking using Kourier
+Next, choose a networking layer. This example uses Kourier. Kourier is the option with the lowest resource requirements, and connects to Envoy and the Knative Ingress CRDs directly.
 
 To install Kourier and make it available as a service leveraging the node ports, you’ll need to download the YAML file first and make a few changes.
 
@@ -134,7 +142,9 @@ To install Kourier and make it available as a service leveraging the node ports,
 curl -Lo kourier.yaml https://github.com/knative/net-kourier/releases/download/v0.15.0/kourier.yaml
 ```
 
-By default, the Kourier service is set to be of type LoadBalancer. On local machines, this type doesn’t work so you’ll have to change that to NodePort and add nodePort elements to the two listed ports. The complete Service portion (which runs from line 75 to line 94 in the document), should be replaced with:
+By default, the Kourier service is set to be of type `LoadBalancer`. On local machines, this type doesn’t work, so you’ll have to change the type to `NodePort` and add `nodePort` elements to the two listed ports. 
+
+The complete Service portion (which runs from line 75 to line 94 in the document), should be replaced with:
 
 ```yaml
 apiVersion: v1
@@ -161,11 +171,13 @@ spec:
   type: NodePort
 ```
 
-To install the Kourier controller, run:
+To install the Kourier controller, enter the command:
 
 ```bash
 $ kubectl apply --filename kourier.yaml
+```
 
+```bash
 namespace/kourier-system created
 configmap/config-logging created
 configmap/config-observability created
@@ -181,21 +193,22 @@ service/kourier-control created
 configmap/kourier-bootstrap created
 ```
 
-The next step is to let Knative Serving know it should use Kourier as the default networking layer
+Now you will need to set Kourier as the default networking layer for Knative Serving. You can do this by entering the command:
 
 ```bash
 $ kubectl patch configmap/config-network \
   --namespace knative-serving \
   --type merge \
   --patch '{"data":{"ingress.class":"kourier.ingress.networking.knative.dev"}}'
-
-configmap/config-network patched
 ```
 
-If you want to validate the patch command was successful, you can run:
+If you want to validate that the patch command was successful, run the command:
 
 ```bash
 $ kubectl describe configmap/config-network --namespace knative-serving
+```
+
+```bash
 ... (abbreviated for readability)
 ingress.class:
 ----
@@ -203,20 +216,26 @@ kourier.ingress.networking.knative.dev
 ...
 ```
 
-To get the same experience as with a full-blown cluster that has DNS names set up, you can add a “magic” DNS provider. In this case, `nip.io` provides a wildcard DNS setup that will automatically resolve to the IP address you put in front of  `nip.io`. To patch the domain configuration for Knative Serving to make use of `nip.io`, you can run:
+To get the same experience that you would when using a cluster that has DNS names set up, you can add a “magic” DNS provider.
+
+_nip.io_ provides a wildcard DNS setup that will automatically resolve to the IP address you put in front of nip.io.
+
+To patch the domain configuration for Knative Serving using nip.io, enter the command:
 
 ```bash
 $ kubectl patch configmap/config-domain \
   --namespace knative-serving \
   --type merge \
   --patch '{"data":{"127.0.0.1.nip.io":""}}'
-configmap/config-domain patched
 ```
 
-If you want to validate the patch command was successful, you can run:
+If you want to validate that the patch command was successful, run the command:
 
 ```bash
 $ kubectl describe configmap/config-domain --namespace knative-serving
+```
+
+```bash
 ... (abbreviated for readability)
 Data
 ====
@@ -225,38 +244,57 @@ Data
 ...
 ```
 
-By now, all pods in the knative-serving and kourier-system namespaces should be running:
+By now, all pods in the knative-serving and kourier-system namespaces should be running.
+You can check this by entering the commands:
 
 ```bash
 $ kubectl get pods --namespace knative-serving
+```
+
+```bash
 NAME                          READY   STATUS    RESTARTS   AGE
 activator-6d9f95b7f8-w6m68    1/1     Running   0          12m
 autoscaler-597fd8d69d-gmh9s   1/1     Running   0          12m
 controller-7479cc984d-492fm   1/1     Running   0          12m
 webhook-bf465f954-4c7wq       1/1     Running   0          12m
+```
 
+```bash
 $ kubectl get pods --namespace kourier-system
+```
+
+```bash
 NAME                                      READY   STATUS    RESTARTS   AGE
 3scale-kourier-control-699cbc695-ztswk    1/1     Running   0          10m
 3scale-kourier-gateway-7df98bb5db-5bw79   1/1     Running   0          10m
 ```
 
-To validate your cluster gateway is in the right state and using the right ports, you can run:
+To validate your cluster gateway is in the right state and using the right ports, enter the command:
 
 ```bash
 $ kubectl --namespace kourier-system get service kourier
+```
+
+```bash
 NAME      TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)                      AGE
 kourier   NodePort   10.98.179.178   <none>        80:31080/TCP,443:31443/TCP   87m
+```
 
+```bash
 $ docker ps -a
+```
+
+```bash
 CONTAINER ID        IMAGE                  COMMAND                  CREATED             STATUS              PORTS                                                                      NAMES
 d53c275d7461        kindest/node:v1.18.2   "/usr/local/bin/entr…"   4 hours ago         Up 4 hours          127.0.0.1:49350->6443/tcp, 0.0.0.0:80->31080/tcp, 0.0.0.0:443->31443/tcp   knative-control-plane
 ```
 
 The ports, and how they’re tied to the host, should be the same as you’ve defined in the clusterconfig file. For example, port 31380 in the cluster is exposed as port 80.
 
-## Your first app
-Everyone enjoys a good “hello world” example as the first app you deploy, so let’s do that here too. The cluster, Knative, and the networking components are ready so the last part is to deploy an app. The straightforward [Go app](https://knative.dev/docs/eventing/samples/helloworld/helloworld-go/) that already exists, is an excellent candidate to deploy. The first step there is to create a yaml file with the hello world service definition.
+## Step 4: Deploying your first app
+Now that the cluster, Knative, and the networking components are ready, you can deploy an app.
+The straightforward [Go app](https://knative.dev/docs/eventing/samples/helloworld/helloworld-go/) that already exists, is an excellent example app to deploy.
+The first step is to create a yaml file with the hello world service definition:
 
 ```bash
 cat > service.yaml <<EOF
@@ -276,38 +314,46 @@ spec:
 EOF
 ```
 
-To deploy your app to Knative, run
+To deploy your app to Knative, enter the command:
 
 ```bash
 $ kubectl apply --filename service.yaml
-service.serving.knative.dev/helloworld-go created
 ```
 
-To validate your deployment, you can use  `kubectl get ksvc`. While your cluster is taking care of the configuration of the different elements that make up the service the output of that command will show that the revision is missing. After some time, you’ll see *ready* change to true.
+To validate your deployment, you can use `kubectl get ksvc`.
+**NOTE:** While your cluster is configuring the components that make up the service, the output of the `kubectl get ksvc` command will show that the revision is missing. The status **ready** eventually changes to **true**.
 
 ```bash
 $ kubectl get ksvc
+```
+
+```bash
 NAME            URL                                             LATESTCREATED         LATESTREADY   READY     REASON
 helloworld-go   http://helloworld-go.default.127.0.0.1.nip.io   helloworld-go-fqqs6                 Unknown   RevisionMissing
+```
 
-$ kubectl get ksvc
+```bash
 NAME            URL                                             LATESTCREATED         LATESTREADY           READY   REASON
 helloworld-go   http://helloworld-go.default.127.0.0.1.nip.io   helloworld-go-fqqs6   helloworld-go-fqqs6   True
 ```
 
-A running and ready service leaves one final step… checking that the code returns what you expect. To do that, you can send a cURL request to the URL listed above. Because you’ve mapped port 80 of the host to be forwarded to the cluster, and set the DNS, you can use that exact URL.
+The final step is to test your application, by checking that the code returns what you expect. You can do this by sending a cURL request to the URL listed above.
+
+Because this example mapped port 80 of the host to be forwarded to the cluster and set the DNS, you can use the exact URL.
 
 ```bash
 $ curl -v http://helloworld-go.default.127.0.0.1.nip.io
+```
+
+```bash
 Hello Knative Serving is up and running with Kourier!!
 ```
 
-## Cleaning up
-To stop your cluster and remove all the resources you’ve created, you can run the below command:
+## Step 5: Cleaning up
+You can stop your cluster and remove all the resources you’ve created by entering the command:
 
 ```bash
 kind delete cluster --name knative
-Deleting cluster "knative" ...
 ```
 
 ## About the author
