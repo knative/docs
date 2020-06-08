@@ -1,4 +1,4 @@
-apiVersion: eventing.knative.dev/v1alpha1
+apiVersion: eventing.knative.dev/v1beta1
 kind: Trigger
 metadata:
   name: iot-demo

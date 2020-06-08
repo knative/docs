@@ -196,7 +196,7 @@ spec:
       containers:
         - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/appender
 ---
-apiVersion: eventing.knative.dev/v1alpha1
+apiVersion: eventing.knative.dev/v1beta1
 kind: Trigger
 metadata:
   name: display-trigger

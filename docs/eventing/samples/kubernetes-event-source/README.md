@@ -100,7 +100,7 @@ all the YAML files deployed in this sample to point at that namespace.
          kind: Event
      sink:
        ref:
-         apiVersion: eventing.knative.dev/v1alpha1
+         apiVersion: eventing.knative.dev/v1beta1
          kind: Broker
          name: default
    ```
@@ -123,7 +123,7 @@ simple Knative Service that dumps incoming messages to its log and creates a
 1. Create a file named `trigger.yaml` and copy the code block below into it.
 
    ```yaml
-   apiVersion: eventing.knative.dev/v1alpha1
+   apiVersion: eventing.knative.dev/v1beta1
    kind: Trigger
    metadata:
      name: testevents-trigger

@@ -13,6 +13,6 @@ spec:
   googleCloudProject: PROJECT_ID
   topic: TOPIC_NAME
   sink:
-    apiVersion: eventing.knative.dev/v1alpha1
+    apiVersion: eventing.knative.dev/v1beta1
     kind: Broker
     name: default
