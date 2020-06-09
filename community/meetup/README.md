@@ -31,7 +31,6 @@ Video: https://youtu.be/24owwOKj86E
 - Grant Rodgers (Google) - new member
 - Matt Moore (VMWare) - existing member
 - Evan Anderson (VMWare) - existing member
- 
 Congratulations to the newly elected members! ✨
 
 ## Working group updates
