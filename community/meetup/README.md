@@ -16,7 +16,7 @@ Video: https://youtu.be/24owwOKj86E
 
 ## Agenda
 - Welcome! (5’)
-  - Announce recording of meeting. 
+  - Announce recording of meeting.
 - Update from the Steering Committee (15’)
   - TOC election results (Tomas Isdal)
 - Working groups updates (5’)
