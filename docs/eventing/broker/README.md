@@ -253,7 +253,7 @@ spec:
   sink:
     ref:
       # Deliver events to Broker.
-      apiVersion: eventing.knative.dev/v1alpha1
+      apiVersion: eventing.knative.dev/v1beta1
       kind: Broker
       name: default
 ```

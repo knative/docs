@@ -21,6 +21,6 @@ spec:
               constant: application/json
   sink:
     ref:
-      apiVersion: messaging.knative.dev/v1alpha1
+      apiVersion: messaging.knative.dev/v1beta1
       kind: InMemoryChannel
       name: camel-test

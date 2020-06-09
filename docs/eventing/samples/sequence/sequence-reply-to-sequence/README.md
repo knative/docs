@@ -144,7 +144,7 @@ spec:
   reply:
     ref:
       kind: Sequence
-      apiVersion: flows.knative.dev/v1alpha1
+      apiVersion: flows.knative.dev/v1beta1
       name: second-sequence
 ```
 

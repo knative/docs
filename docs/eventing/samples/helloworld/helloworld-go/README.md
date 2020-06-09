@@ -181,7 +181,7 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-go
           targetPort: 8080
     ---
     # Knative Eventing Trigger to trigger the helloworld-go service
-    apiVersion: eventing.knative.dev/v1alpha1
+    apiVersion: eventing.knative.dev/v1beta1
     kind: Trigger
     metadata:
       name: helloworld-go
@@ -379,7 +379,7 @@ mesh via the Broker and can be delivered to other services using a Trigger
 
    ```shell
    kubectl --namespace knative-samples apply --filename - << END
-   apiVersion: eventing.knative.dev/v1alpha1
+   apiVersion: eventing.knative.dev/v1beta1
    kind: Trigger
    metadata:
      name: event-display

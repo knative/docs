@@ -113,11 +113,11 @@ the event destination.
 
 Knative Eventing also defines an event forwarding and persistence layer, called
 a
-[**Channel**](https://github.com/knative/eventing/blob/master/pkg/apis/messaging/v1alpha1/channel_types.go#L57).
+[**Channel**](https://github.com/knative/eventing/blob/master/pkg/apis/messaging/v1beta1/channel_types.go#L57).
 Each channel is a separate Kubernetes [Custom Resource](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
 Events are delivered to Services or forwarded to other channels
 (possibly of a different type) using
-[Subscriptions](https://github.com/knative/eventing/blob/master/pkg/apis/messaging/v1alpha1/subscription_types.go).
+[Subscriptions](https://github.com/knative/eventing/blob/master/pkg/apis/messaging/v1beta1/subscription_types.go).
 This allows message delivery in a cluster to vary based on requirements, so that
 some events might be handled by an in-memory implementation while others would
 be persisted using Apache Kafka or NATS Streaming.
@@ -165,7 +165,7 @@ If you need a Source not covered by the ones mentioned below nor by the other
 
 If your code needs to send events as part of its business logic and doesn't fit
 the model of a Source, consider
-[feeding events directly to a Broker](https://knative.dev/docs/eventing/broker-trigger/#manual).
+[feeding events directly to a Broker](https://knative.dev/docs/eventing/broker/).
 
 ### Core Sources
 
