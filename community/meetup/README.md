@@ -45,7 +45,7 @@ Congratulations to the newly elected members! ✨
 
 ## Eventing
 - Update on Brokers
-  - https://github.com/knative/eventing/issues/3139 
+  - https://github.com/knative/eventing/issues/3139
 
 ---
 
