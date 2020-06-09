@@ -25,7 +25,7 @@ Video: https://youtu.be/24owwOKj86E
 - Close (5’)
 - Take the [survey](https://docs.google.com/forms/d/e/1FAIpQLSebw2IOjmnStiUhPpnndpjyuBUoziZOw9PK9fnJeFBQX0QxWw/viewform)! (it’s good karma)
 
-## TOC Election results 
+## TOC Election results
 - Nghia Tran (Google) - new member
 - Markus Thömmes (Red Hat) - new member
 - Grant Rodgers (Google) - new member
