@@ -1,6 +1,21 @@
 # Vert.x + CloudEvents + Knative
 
 A simple web app written in Java using Vert.x that can receive CloudEvents.
+It supports running in two modes:
+                                                                          
+1. The default mode has the app reply to your input events with the output
+ event, which is simplest for demonstrating things working in isolation, but
+ is also the model for working for the Knative Eventing `Broker` concept.
+ The input event is modified assigning a new source and type attribute.
+
+2. `K_SINK` mode has the app send events to the destination encoded in
+ `$K_SINK`, which is useful to demonstrate how folks can synthesize events to
+ send to a Service or Broker when not initiated by a Broker invocation (e.g.
+ implementing an event source).
+ The input event is modified assigning a new source and type attribute.
+
+The application will use `$K_SINK`-mode whenever the environment variable is
+specified.
 
 Follow the steps below to create the sample code and then deploy the app to your
 cluster. You can also download a working copy of the sample, by running the
@@ -40,28 +55,61 @@ Get the URL for your Service with:
 ```shell
 $ kubectl get ksvc
 NAME                URL                                            LATESTCREATED             LATESTREADY               READY   REASON
-cloudevents-vertx   http://cloudevents-vertx.default.example.com   cloudevents-vertx-86h28   cloudevents-vertx-86h28   True
+cloudevents-vertx   http://cloudevents-java.xip.io                 cloudevents-vertx-86h28   cloudevents-vertx-86h28   True
 ```
 
-Then send a cloud event to it with:
+Then send a CloudEvent to it with:
+
+```shell
+$ curl \
+    -X POST -v \
+    -H "content-type: application/json"  \
+    -H "ce-specversion: 1.0"  \
+    -H "ce-source: http://curl-command"  \
+    -H "ce-type: curl.demo"  \
+    -H "ce-id: 123-abc"  \
+    -d '{"name":"Dave"}' \
+    http://cloudevents-java.xip.io
+```
+
+You can also send CloudEvents spawning a temporary curl pod in your cluster with:
 
 ```shell
 $ kubectl run curl \
     --image=curlimages/curl --rm=true --restart=Never -ti -- \
-    -X POST \
+    -X POST -v \
     -H "content-type: application/json"  \
     -H "ce-specversion: 1.0"  \
-    -H "ce-source: curl-command"  \
+    -H "ce-source: http://curl-command"  \
     -H "ce-type: curl.demo"  \
     -H "ce-id: 123-abc"  \
     -d '{"name":"Dave"}' \
-    http://cloudevents-vertx.default.svc
+    http://cloudevents-java.default.svc
 ```
 
-You'll see on the cloudevents-vertx deployed pod:
+You'll see on the console:
 
 ```shell
-Received event: CloudEvent{attributes=Attibutes V1.0 [id=123-abc, source=curl-command, type=curl.demo, datacontenttype=application/json, dataschema=null, subject=null, time=null], data={"name":"Dave"}, extensions={}}
+> POST / HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/7.69.1
+> Accept: */*
+> content-type: application/json
+> ce-specversion: 1.0
+> ce-source: http://curl-command
+> ce-type: curl.demo
+> ce-id: 123-abc
+> Content-Length: 15
+> 
+< HTTP/1.1 202 Accepted
+< ce-specversion: 1.0
+< ce-id: 123-abc
+< ce-source: https://github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-vertx
+< ce-type: curl.demo
+< content-type: application/json
+< content-length: 15
+< 
+{"name":"Dave"}
 ```
 
 ## Removing the sample app deployment

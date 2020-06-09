@@ -10,9 +10,15 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <vertx.verticle>org.knative.examples.cloudevents.vertx.CloudEventSampleVerticle</vertx.verticle>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>io.cloudevents</groupId>
+            <artifactId>cloudevents-core</artifactId>
+            <version>2.0.0-SNAPSHOT</version>
+        </dependency>
         <dependency>
             <groupId>io.cloudevents</groupId>
             <artifactId>cloudevents-http-vertx</artifactId>
@@ -39,9 +45,15 @@
                         <jvmFlags>
                             <jvmFlag>-Dorg.slf4j.simpleLogger.defaultLogLevel=warn</jvmFlag>
                         </jvmFlags>
-                        <mainClass>org.knative.examples.cloudevents.vertx.CloudEventReceiverVerticle</mainClass>
+                        <mainClass>org.knative.examples.cloudevents.vertx.CloudEventSampleVerticle</mainClass>
                     </container>
                 </configuration>
+            </plugin>
+            <!-- With this plugin you can locally test the application using `mvn vertx:run` -->
+            <plugin>
+                <groupId>io.reactiverse</groupId>
+                <artifactId>vertx-maven-plugin</artifactId>
+                <version>1.0.22</version>
             </plugin>
         </plugins>
     </build>
