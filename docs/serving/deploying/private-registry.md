@@ -10,7 +10,7 @@ container registry.
 
 To share access to your private container images across multiple services and 
 revisions, you create a list of Kubernetes secrets
-([`imagePullSecrets`](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.16/#pod-v1-core))
+([`imagePullSecrets`](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#pod-v1-core))
 using your registry credentials, add that `imagePullSecrets` to your default
 [service account](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/),
 and then deploy those configurations to your Knative cluster.
