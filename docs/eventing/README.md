@@ -58,7 +58,7 @@ generic interfaces that can be implemented by multiple Kubernetes resources:
 1. **Addressable** objects are able to receive and acknowledge an event
    delivered over HTTP to an address defined in their `status.address.url`
    field. As a special case, the core
-   [Kubernetes Service object](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#service-v1-core)
+   [Kubernetes Service object](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#service-v1-core)
    also fulfils the Addressable interface.
 1. **Callable** objects are able to receive an event delivered over HTTP and
    transform the event, returning 0 or 1 new events in the HTTP response. These
@@ -165,7 +165,7 @@ If you need a Source not covered by the ones mentioned below nor by the other
 
 If your code needs to send events as part of its business logic and doesn't fit
 the model of a Source, consider
-[feeding events directly to a Broker](https://knative.dev/docs/eventing/broker-trigger/#manual).
+[feeding events directly to a Broker](https://knative.dev/docs/eventing/broker/).
 
 ### Core Sources
 

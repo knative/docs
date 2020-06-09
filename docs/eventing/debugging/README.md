@@ -28,7 +28,7 @@ kubectl apply --filename example.yaml
 ## Triggering Events
 
 Knative events will occur whenever a Kubernetes
-[`Event`](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.11/#event-v1-core)
+[`Event`](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#event-v1-core)
 occurs in the `knative-debug` namespace. We can cause this to occur with the
 following commands:
 
