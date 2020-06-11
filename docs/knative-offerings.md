@@ -13,7 +13,7 @@ vendors for what is or is not supported.
 
 Here is a list of commercial Knative products (alphabetically):
 
-- [Gardener](https://gardener.cloud/050-tutorials/content/howto/knative-install/): Install Knative in Gardener's vanilla Kubernetes clusters to add an extra layer of serverless runtime.
+- [Gardener](https://gardener.cloud/documentation/050-tutorials/content/howto/knative-install/): Install Knative in Gardener's vanilla Kubernetes clusters to add an extra layer of serverless runtime.
 - [Google Cloud Run for Anthos](https://cloud.google.com/run/docs/gke/setup): extend Google Kubernetes Engine with a flexible serverless development platform. With Cloud Run for Anthos, you get the operational flexibility of Kubernetes with the developer experience of Serverless, allowing you to deploy and manage Knative based services on your own cluster.
 - [Google Cloud Run](https://cloud.google.com/run/docs/setup): A fully-managed Knative-based serverless platform. With no Kubernetes cluster to manage, Cloud Run lets you go from container to production in seconds.
 - [Managed Knative for IBM Cloud Kubernetes Service](https://cloud.ibm.com/docs/containers?topic=containers-serverless-apps-knative): is a managed add-on for the [IBM Kubernetes Service](https://cloud.ibm.com/docs/containers?topic=containers-getting-started) that enables you to deploy and manage Knative based services on your own Kubernetes cluster.
