@@ -141,9 +141,6 @@ spec:
 EOF
 ```
 
-**Note:** This installation method is not production ready and is for development purposes only. For a more stable method,
-use Helm. For more information about the Helm installation method, see [Installing Helm](https://helm.sh/docs/intro/install/).
-
 After you install the cluster local gateway, your service and deployment for the local gateway are both named `cluster-local-gateway`.
 You do not need to update the `config-istio` configmap under the `knative-serving` namespace, because Knative Serving can use
 the local gateway cluster-local-gateway by default.
@@ -203,9 +200,10 @@ kubectl get pods --namespace istio-system
 
 ### Configuring DNS
 
-You must configure your DNS settings to allow Knative to dispatch services based on
-their hostname. To do this, you must look up the external IP address received by Istio
-by entering the following command:
+Knative dispatches to different services based on their hostname, so it greatly
+simplifies things to have DNS properly configured. For this, we must look up the
+external IP address that Istio received. This can be done with the following
+command:
 
 ```
 $ kubectl get svc -nistio-system
@@ -264,4 +262,3 @@ See the [Uninstall Istio](https://istio.io/docs/setup/install/istioctl/#uninstal
   https://istio.io/docs/setup/kubernetes/additional-setup/sidecar-injection/#automatic-sidecar-injection
 [3]: https://istio.io/docs/concepts/security/#mutual-tls-authentication
 [4]: https://istio.io/docs/tasks/security/authz-http/
-[4]: https://istio.io/docs/concepts/security/#mutual-tls-authentication
