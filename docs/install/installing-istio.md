@@ -160,7 +160,7 @@ external IP address that Istio received. This can be done with the following
 command:
 
 ```
-$ kubectl get svc -nistio-system
+$ kubectl get svc -n istio-system
 NAME                    TYPE           CLUSTER-IP   EXTERNAL-IP    PORT(S)                                      AGE
 cluster-local-gateway   ClusterIP      10.0.2.216   <none>         15020/TCP,80/TCP,443/TCP                     2m14s
 istio-ingressgateway    LoadBalancer   10.0.2.24    34.83.80.117   15020:32206/TCP,80:30742/TCP,443:30996/TCP   2m14s
