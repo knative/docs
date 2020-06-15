@@ -293,7 +293,7 @@ We ship a simple Kubernetes Job called "default domain" that will (see caveats) 
 kubectl apply --filename {{< artifact repo="serving" file="serving-default-domain.yaml" >}}
 ```
 
-**Caveat**: This will only work if the cluster LoadBalancer service exposes an IPv4 address, so it will not work with IPv6 clusters, AWS, or local setups like Minikube.  For these, see "Real DNS" or "Temporary DNS".
+**Caveat**: This will only work if the cluster LoadBalancer service exposes an IPv4 address or hostname, so it will not work with IPv6 clusters or local setups like Minikube.  For these, see "Real DNS" or "Temporary DNS".
 {{< /tab >}}
 
 
