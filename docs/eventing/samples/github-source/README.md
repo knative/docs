@@ -25,7 +25,7 @@ Github Event source lives in the [knative/eventing-contrib](https://github.com/k
 You can install it by running the following (this is currently the latest released version (0.11.2))
 
 ```shell
-kubectl apply -f https://github.com/knative/eventing-contrib/releases/download/v0.11.2/github.yaml
+kubectl apply -f https://github.com/knative/eventing-contrib/releases/download/v0.15.0/github.yaml
 ```
 
 ### Create a Knative Service
