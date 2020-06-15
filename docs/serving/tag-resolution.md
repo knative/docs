@@ -23,7 +23,7 @@ If you're using a registry that has a self-signed certificate, you'll need to
 convince the serving controller to trust that certificate. We respect the
 [`SSL_CERT_FILE` and `SSL_CERT_DIR`](https://golang.org/pkg/crypto/x509/#pkg-overview)
 environment variables, so you can trust them by mounting the certificates into
-the controller's deployment and setting the environment variable appropriatel,
+the controller's deployment and setting the environment variable appropriately,
 assuming you have a `custom-certs` secret containing your CA certs:
 
 ```yaml
