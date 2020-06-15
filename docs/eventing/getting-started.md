@@ -125,8 +125,8 @@ The [`Broker`](./broker/README.md#broker) ensures that every event sent by event
    This shows the `Broker` that you created:
 
     ```sh
-    NAME      READY   REASON   URL                                                        AGE
-    default   True             http://default-broker.event-example.svc.cluster.local      1m
+    NAME      READY   REASON   URL                                                                                 AGE
+    default   True             http://broker-ingress.knative-eventing.svc.cluster.local/event-example/default      1m
     ```
 
     When the `Broker` has the `READY=True` state, it can begin to manage any events it receives.
@@ -357,7 +357,7 @@ To show the various types of events you can send, you will make three requests:
 1. To make the first request, which creates an event that has the `type` `greeting`, run the following in the SSH terminal:
 
     ```sh
-    curl -v "http://default-broker.event-example.svc.cluster.local" \
+    curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/event-example/default" \
       -X POST \
       -H "Ce-Id: say-hello" \
       -H "Ce-Specversion: 0.3" \
@@ -381,7 +381,7 @@ To show the various types of events you can send, you will make three requests:
 1. To make the second request, which creates an event that has the `source` `sendoff`, run the following in the SSH terminal:
 
     ```sh
-    curl -v "http://default-broker.event-example.svc.cluster.local" \
+    curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/event-example/default" \
       -X POST \
       -H "Ce-Id: say-goodbye" \
       -H "Ce-Specversion: 0.3" \
@@ -404,7 +404,7 @@ To show the various types of events you can send, you will make three requests:
 1. To make the third request, which creates an event that has the `type` `greeting` and the`source` `sendoff`, run the following in the SSH terminal:
 
     ```sh
-    curl -v "http://default-broker.event-example.svc.cluster.local" \
+    curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/event-example/default" \
       -X POST \
       -H "Ce-Id: say-hello-goodbye" \
       -H "Ce-Specversion: 0.3" \
