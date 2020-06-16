@@ -5,7 +5,7 @@ type: "docs"
 ---
 
 When you deployed app to Knative Serving, serving system pods such as activator and autoscaler access to your app.
-Hence, you have to allow the requests to your app when you configure security features such as istio authorization policy.
+If you have configured additional security features, such as Istio's authorization policy, you must enable access to your Knative service for these system pods.
 
 > Tip: This example assumes that your application enabled istio sidecar injection.
 >
@@ -56,14 +56,14 @@ $ curl http://hello-example.default.52.76.125.95.nip.io
 (hang up)
 ```
 
-To access your application, you need to configure "whitelist" for the requests from system pods.
-There are several solutions but this section is going to explain two typical solutions
-[Allow access from system pods by paths](#allow-access-from-system-pods-by-paths) and
-[Allow access from system pods by namespace](#allow-access-from-system-pods-by-namespace).
+To enable access to your application for requests from system pods, you must whitelist the system pods in your Istio AuthorizationPolicy.
+You can enable access by:
+[Allowing access from system pods by paths](#allow-access-from-system-pods-by-paths).
+[Allowing access from system pods by namespace](#allow-access-from-system-pods-by-namespace).
 
-### Allow access from system pods by paths
+### Allowing access from system pods by paths
 
-Knative system pods access to your applcation by using the following paths.
+Knative system pods access your application using the following paths:
 
 - `/metrics`
 - `/health`
@@ -91,7 +91,7 @@ spec:
 EOF
 ```
 
-### Allow access from system pods by namespace
+### Allowing access from system pods by namespace
 
 You can allow access for all pods in the `knative-serving` namespace, as shown in the example:
 
