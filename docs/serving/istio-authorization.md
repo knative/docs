@@ -65,10 +65,13 @@ There are several solutions but this section is going to explain two typical sol
 
 Knative system pods access to your applcation by using the following paths.
 
-- `/metrics` is a path to collect metrics (e.g. autoscaler)
-- `/health` is a path to probe the service (e.g. activator, autoscaler, KIngres's probe)
+- `/metrics`
+- `/health`
 
-Hence you can add `/metrics` and `/healthz` to the whitelist.
+The /metrics path allows the autoscaler pod to collect metrics.
+The /health path allows system pods to probe the service."
+
+You can add the `/metrics` and `/health` paths to the AuthorizationPolicy as shown in the example:
 
 ```
 $ cat <<EOF | kubectl apply -f -
@@ -90,7 +93,7 @@ EOF
 
 ### Allow access from system pods by namespace
 
-As an alternative, You can allow all access from serving system namespace knative-serving. It also make your applications work.
+You can allow access for all pods in the `knative-serving` namespace, as shown in the example:
 
 ```
 $ cat <<EOF | kubectl apply -f -
