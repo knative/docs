@@ -50,8 +50,6 @@ After a blog post is submitted as a PR, it is automatically assigned to a review
 
 Each blog post requires a `lgtm` label from at least one person in the editorial team. Once the necessary labels are in place, one of the reviewers will add an `approved` label, and schedule publication of the blog post.
 
-**NOTE:** If a blog post does not contain any technical content (for example, [Knative welcomes new TOC members](https://knative.dev/blog/2020/05/12/knative-welcomes-new-toc-members/)), the technical review can be omitted.
-
 ### Service level agreement (SLA)
 
 Blog posts can take up to **1 week** to review. If you'd like to request an expedited review, please say so on your message when you ping the editorial team on Slack.
