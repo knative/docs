@@ -4,7 +4,7 @@ The Knative blog is owned by the [Documentation working group](https://knative.d
 
 This section covers documentation, processes, and roles for the [Knative blog](https://knative.dev/blog/).
 
-## Leadership 
+## Leadership
 
 - **Technical Editors:** [Lionel Villard](https://github.com/lionelvillard), [Evan Anderson](https://github.com/evankanderson)
 - **Copy Editors:** [Ashleigh Brennan](https://github.com/abrennan89), [Caroline Lee](https://github.com/carieshmarie), [María Cruz](https://github.com/macruzbar)
