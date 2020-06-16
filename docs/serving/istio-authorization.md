@@ -4,7 +4,7 @@ weight: 25
 type: "docs"
 ---
 
-When you deployed app to Knative Serving, serving system pods such as activator and autoscaler access to your app.
+Knative Serving system pods, such as the activator and autoscaler components, require access to your deployed Knative services.
 If you have configured additional security features, such as Istio's authorization policy, you must enable access to your Knative service for these system pods.
 
 > Tip: This example assumes that your application enabled istio sidecar injection.
@@ -52,7 +52,7 @@ It generally works with Kubernetes application, but it does not work with Knativ
 
 ```
 $ kn service create hello-example --image=gcr.io/knative-samples/helloworld-go
-$ curl http://hello-example.default.52.76.125.95.nip.io
+$ curl http://hello-example.default.1.2.3.4.nip.io
 (hang up)
 ```
 
