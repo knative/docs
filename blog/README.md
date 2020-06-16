@@ -37,7 +37,7 @@ To submit a blog post, follow the steps below.
 - Knative new feature releases and project updates
 - Tutorials and demos [start a blog](https://github.com/knative/docs/pull/2511)
 - Use cases
-- Content that is specific to a vendor or platform about Knative installation and use 
+- Content that is specific to a vendor or platform about Knative installation and use
 
 #### Unsuitable Content:
 - Blogs that do not address Knative in any way
