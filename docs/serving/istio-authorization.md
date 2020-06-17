@@ -41,12 +41,12 @@ You can enable access by:
 Knative system pods access your application using the following paths:
 
 - `/metrics`
-- `/health`
+- `/healthz`
 
 The /metrics path allows the autoscaler pod to collect metrics.
-The /health path allows system pods to probe the service."
+The /healthz path allows system pods to probe the service."
 
-You can add the `/metrics` and `/health` paths to the AuthorizationPolicy as shown in the example:
+You can add the `/metrics` and `/healthz` paths to the AuthorizationPolicy as shown in the example:
 
 ```
 $ cat <<EOF | kubectl apply -f -
