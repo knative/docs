@@ -8,10 +8,42 @@ aliases:
 
 The Knative Eventing operator can be configured with these options:
 
+- [Service Configuration by ConfigMap](#service-configuration-by-configMap)
 - [Private repository and private secret](#private-repository-and-private-secrets)
 - [Configuring default broker class](#configuring-default-broker-class)
 
 __NOTE:__ Kubernetes spec level policies cannot be configured using the Knative operators.
+
+## Service Configuration by ConfigMap
+
+The Knative Eventing operator CR is configured the same way as the Knative Serving operator CR. Because the operator manages
+the Knative Eventing installation, it will overwrite any updates to the `ConfigMaps` which are used to configure Knative
+Eventing. The `KnativeEventing` custom resource allows you to set values for these ConfigMaps via the operator. Knative
+Eventing has multiple ConfigMaps named with the prefix `config-`. The `spec.config` in `KnativeEventing` has one entry
+`<name>` for each ConfigMap named `config-<name>`, with a value which will be used for the ConfigMap's `data`.
+
+For example, if you would like to change your default channel from `InMemoryChannel` into `KafkaChannel`, here is what
+your Eventing CR looks like, to modify the ConfigMap `config-br-default-channel`:
+
+```
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeEventing
+metadata:
+  name: knative-eventing
+  namespace: knative-eventing
+spec:
+  config:
+    br-default-channel:
+      channelTemplateSpec: |
+        apiVersion: messaging.knative.dev/v1alpha1
+        kind: KafkaChannel
+        spec:
+          numPartitions: 10
+          replicationFactor: 1
+```
+
+All the ConfigMaps are created in the same namespace as the operator CR. You can use the operator CR as the unique entry
+point to edit all of them.
 
 ## Private repository and private secrets
 
