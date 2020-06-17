@@ -98,10 +98,10 @@ The operator CR should be modified to include the full list:
 
 ```
 apiVersion: operator.knative.dev/v1alpha1
-kind: KnativeServing
+kind: KnativeEventing
 metadata:
-  name: knative-serving
-  namespace: knative-serving
+  name: knative-eventing
+  namespace: knative-eventing
 spec:
   registry:
     override:
@@ -118,10 +118,10 @@ target image is `docker.io/knative-images-repo5/DISPATCHER_IMAGE:v0.13.0`:
 
 ```
 apiVersion: operator.knative.dev/v1alpha1
-kind: KnativeServing
+kind: KnativeEventing
 metadata:
-  name: knative-serving
-  namespace: knative-serving
+  name: knative-eventing
+  namespace: knative-eventing
 spec:
   registry:
     override:
