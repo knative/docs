@@ -409,7 +409,7 @@ mesh via the Broker and can be delivered to other services using a Trigger
      cloudevents.Event
      Validation: valid
      Context Attributes,
-       specversion: 0.3
+       specversion: 1.0
        type: dev.knative.samples.hifromknative
        source: knative/eventing/samples/hello-world
        id: 8a7384b9-8bbe-4634-bf0f-ead07e450b2a

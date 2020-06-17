@@ -23,6 +23,8 @@ func receive(ctx context.Context, event cloudevents.Event) (*cloudevents.Event, 
 	// This is optional and is intended to show how to respond back with another event after processing.
 	// The response will go back into the knative eventing system just like any other event
 	newEvent := cloudevents.NewEvent()
+	// Setting the ID here is not necessary. When using NewDefaultClient the ID is set
+	// automatically. We set the ID anyway so it appears in the log below.
 	newEvent.SetID(uuid.New().String())
 	newEvent.SetSource("knative/eventing/samples/hello-world")
 	newEvent.SetType("dev.knative.samples.hifromknative")
