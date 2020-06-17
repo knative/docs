@@ -83,10 +83,8 @@ spec:
   - from:
     - source:
        namespaces: ["knative-serving"]
-  rules:
-  - to:
-    - operation:
-        paths:
-        - /     # The path for your application.
 EOF
 ```
+
+Some rule like from.source.namespace above needs to require mTLS enabled.
+Please refer to Istio [Authorization Policy](https://istio.io/latest/docs/reference/config/security/authorization-policy/) for details.
