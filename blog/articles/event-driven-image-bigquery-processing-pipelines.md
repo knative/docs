@@ -7,7 +7,7 @@ processing pipelines"
 type: "blog"
 ---
 
-In this blog post, I want to outline two event-driven processing pipelines that I
+In this blog post, I will outline two event-driven processing pipelines that I
 recently built with Knative Eventing. Along the way, I’ll tell you about event sources,
 custom events and other components provided by Knative that greatly simplifies
 development of event-driven architectures.
