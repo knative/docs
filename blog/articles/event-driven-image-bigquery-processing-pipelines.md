@@ -140,9 +140,9 @@ my development. More specifially:
    [CloudEvents](https://cloudevents.io/). It's useful to have a standard format
    for events and various SDKs to read/write them. Knative supports
    custom events and event replies. Any service can receive an event, do some
-   processing, create a custom event with new data and reply back to `Broker`
-   for other services to read the custom event. This is very useful in pipelines
-   where each service does a little bit of work and passes on the message forward.
+   processing, create a custom event with new data, and reply back to the broker
+   so that other services can read the custom event. This is useful in pipelines,
+   where each service does a little bit of work and passes the message forward to the next service.
 
 This wraps up my post. As I already mentioned, if you want more detailed instructions,
 you can check out
