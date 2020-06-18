@@ -1,18 +1,18 @@
 # Vert.x + CloudEvents + Knative
 
-A simple web app written in Java using Vert.x that can receive CloudEvents.
-It supports running in two modes:
-                                                                          
+A simple web app written in Java using Vert.x that can receive CloudEvents. It
+supports running in two modes:
+
 1. The default mode has the app reply to your input events with the output
- event, which is simplest for demonstrating things working in isolation, but
- is also the model for working for the Knative Eventing `Broker` concept.
- The input event is modified assigning a new source and type attribute.
+   event, which is simplest for demonstrating things working in isolation, but
+   is also the model for working for the Knative Eventing `Broker` concept. The
+   input event is modified assigning a new source and type attribute.
 
 2. `K_SINK` mode has the app send events to the destination encoded in
- `$K_SINK`, which is useful to demonstrate how folks can synthesize events to
- send to a Service or Broker when not initiated by a Broker invocation (e.g.
- implementing an event source).
- The input event is modified assigning a new source and type attribute.
+   `$K_SINK`, which is useful to demonstrate how folks can synthesize events to
+   send to a Service or Broker when not initiated by a Broker invocation (e.g.
+   implementing an event source). The input event is modified assigning a new
+   source and type attribute.
 
 The application will use `$K_SINK`-mode whenever the environment variable is
 specified.
@@ -42,7 +42,8 @@ To build the image, run:
 mvn compile jib:build -Dimage=<image_name>
 ```
 
-To deploy the Knative Service, look in the `service.yaml` and replace `<image>` with the deployed image name. Then run:
+To deploy the Knative Service, look in the `service.yaml` and replace `<image>`
+with the deployed image name. Then run:
 
 ```shell
 kubectl apply -f service.yaml
@@ -72,7 +73,8 @@ $ curl \
     http://cloudevents-java.xip.io
 ```
 
-You can also send CloudEvents spawning a temporary curl pod in your cluster with:
+You can also send CloudEvents spawning a temporary curl pod in your cluster
+with:
 
 ```shell
 $ kubectl run curl \
@@ -100,7 +102,7 @@ You'll see on the console:
 > ce-type: curl.demo
 > ce-id: 123-abc
 > Content-Length: 15
-> 
+>
 < HTTP/1.1 202 Accepted
 < ce-specversion: 1.0
 < ce-id: 123-abc
@@ -108,7 +110,7 @@ You'll see on the console:
 < ce-type: curl.demo
 < content-type: application/json
 < content-length: 15
-< 
+<
 {"name":"Dave"}
 ```
 
