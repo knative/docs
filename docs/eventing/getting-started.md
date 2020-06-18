@@ -360,7 +360,7 @@ To show the various types of events you can send, you will make three requests:
     curl -v "http://default-broker.event-example.svc.cluster.local" \
       -X POST \
       -H "Ce-Id: say-hello" \
-      -H "Ce-Specversion: 0.3" \
+      -H "Ce-Specversion: 1.0" \
       -H "Ce-Type: greeting" \
       -H "Ce-Source: not-sendoff" \
       -H "Content-Type: application/json" \
@@ -384,7 +384,7 @@ To show the various types of events you can send, you will make three requests:
     curl -v "http://default-broker.event-example.svc.cluster.local" \
       -X POST \
       -H "Ce-Id: say-goodbye" \
-      -H "Ce-Specversion: 0.3" \
+      -H "Ce-Specversion: 1.0" \
       -H "Ce-Type: not-greeting" \
       -H "Ce-Source: sendoff" \
       -H "Content-Type: application/json" \
@@ -407,7 +407,7 @@ To show the various types of events you can send, you will make three requests:
     curl -v "http://default-broker.event-example.svc.cluster.local" \
       -X POST \
       -H "Ce-Id: say-hello-goodbye" \
-      -H "Ce-Specversion: 0.3" \
+      -H "Ce-Specversion: 1.0" \
       -H "Ce-Type: greeting" \
       -H "Ce-Source: sendoff" \
       -H "Content-Type: application/json" \
@@ -444,7 +444,7 @@ After sending events, verify that your events were received by the appropriate `
     ☁️  cloudevents.Event
     Validation: valid
     Context Attributes,
-      specversion: 0.3
+      specversion: 1.0
       type: greeting
       source: not-sendoff
       id: say-hello
@@ -459,7 +459,7 @@ After sending events, verify that your events were received by the appropriate `
     ☁️  cloudevents.Event
     Validation: valid
     Context Attributes,
-      specversion: 0.3
+      specversion: 1.0
       type: greeting
       source: sendoff
       id: say-hello-goodbye
@@ -485,7 +485,7 @@ After sending events, verify that your events were received by the appropriate `
     ☁️  cloudevents.Event
     Validation: valid
     Context Attributes,
-       specversion: 0.3
+       specversion: 1.0
        type: not-greeting
        source: sendoff
        id: say-goodbye
@@ -500,7 +500,7 @@ After sending events, verify that your events were received by the appropriate `
      ☁️  cloudevents.Event
      Validation: valid
      Context Attributes,
-       specversion: 0.3
+       specversion: 1.0
        type: greeting
        source: sendoff
        id: say-hello-goodbye
