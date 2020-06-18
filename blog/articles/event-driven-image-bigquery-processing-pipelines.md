@@ -12,7 +12,7 @@ recently built with Knative Eventing. Along the way, I will explain event source
 custom events and other components provided by Knative that greatly simplifies
 development of event-driven architectures.
 
-Both of these pipelines are on GitHub with code, configuration and detailed
+Both of these pipelines are available on GitHub, including source code, configurations, and detailed
 instructions, as part of my [Knative Tutorial](https://github.com/meteatamel/knative-tutorial).
 
 ## Image Processing Pipeline
