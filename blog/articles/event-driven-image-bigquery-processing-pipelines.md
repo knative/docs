@@ -137,7 +137,7 @@ my development. More specifially:
    eventing backbone where right events are delivered to right event consumers
    without producers or consumers having to know about how the events are routed.
 3. **Custom events and event replies**: In Knative, all events are
-   [CloudEvents](https://cloudevents.io/). It's useful to have a standard format
+   [CloudEvents](https://cloudevents.io/), so it's useful to have a standard format
    for events and various SDKs to read/write them. Knative supports
    custom events and event replies. Any service can receive an event, do some
    processing, create a custom event with new data, and reply back to the broker
