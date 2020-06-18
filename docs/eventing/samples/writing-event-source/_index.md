@@ -1,5 +1,5 @@
 ---
-title: "Writing an event source with Receive Adapter"
+title: "Writing an Event Source"
 weight: 60
 type: "docs"
 ---
