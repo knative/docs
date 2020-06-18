@@ -138,7 +138,7 @@ my development. More specifially:
    without producers or consumers having to know about how the events are routed.
 3. **Custom events and event replies**: In Knative, all events are
    [CloudEvents](https://cloudevents.io/). It's useful to have a standard format
-   for events and various SDKs to read/write them. Moreover, Knative supports
+   for events and various SDKs to read/write them. Knative supports
    custom events and event replies. Any service can receive an event, do some
    processing, create a custom event with new data and reply back to `Broker`
    for other services to read the custom event. This is very useful in pipelines
