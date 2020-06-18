@@ -1,11 +1,9 @@
 package org.knative.examples.cloudevents.vertx;
 
-import io.cloudevents.core.builder.CloudEventBuilder;
 import io.cloudevents.CloudEvent;
+import io.cloudevents.core.builder.CloudEventBuilder;
 import io.cloudevents.core.message.MessageReader;
-import io.cloudevents.http.vertx.VertxHttpClientRequestMessageWriter;
-import io.cloudevents.http.vertx.VertxHttpServerResponseMessageWriter;
-import io.cloudevents.http.vertx.VertxMessageReaderFactory;
+import io.cloudevents.http.vertx.VertxMessageFactory;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Handler;
 import io.vertx.core.Promise;
@@ -57,8 +55,8 @@ public class CloudEventSampleVerticle extends AbstractVerticle {
   public static Handler<HttpServerRequest> generateEchoHandler() {
     return request -> {
       // Transform the HttpRequest to Event
-      VertxMessageReaderFactory
-          .fromHttpServerRequest(request)
+      VertxMessageFactory
+          .createReader(request)
           .map(MessageReader::toEvent)
           .onComplete(asyncResult -> {
             if (asyncResult.succeeded()) {
@@ -77,8 +75,8 @@ public class CloudEventSampleVerticle extends AbstractVerticle {
                   .setStatusCode(202);
 
               // Reply with the event in binary mode
-              VertxHttpServerResponseMessageWriter
-                  .create(response)
+              VertxMessageFactory
+                  .createWriter(response)
                   .writeBinary(outputEvent);
             } else {
               System.out.println("Error while decoding the event: " + asyncResult.cause());
@@ -99,8 +97,8 @@ public class CloudEventSampleVerticle extends AbstractVerticle {
   public static Handler<HttpServerRequest> generateSinkHandler(HttpClient client, URI sink) {
     return serverRequest -> {
       // Transform the HttpRequest to Event
-      VertxMessageReaderFactory
-          .fromHttpServerRequest(serverRequest)
+      VertxMessageFactory
+          .createReader(serverRequest)
           .map(MessageReader::toEvent)
           .onComplete(asyncResult -> {
             if (asyncResult.succeeded()) {
@@ -133,8 +131,8 @@ public class CloudEventSampleVerticle extends AbstractVerticle {
               });
 
               // Send the event to K_SINK
-              VertxHttpClientRequestMessageWriter
-                  .create(sinkRequest)
+              VertxMessageFactory
+                  .createWriter(sinkRequest)
                   .writeBinary(event);
             } else {
               System.out.println("Error while decoding the event: " + asyncResult.cause());
