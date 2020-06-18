@@ -136,7 +136,7 @@ my development. More specifially:
 2. [Broker and Trigger](https://knative.dev/docs/eventing/broker/) provide an
    eventing backbone where right events are delivered to right event consumers
    without producers or consumers having to know about how the events are routed.
-3. **Custom Events and Event Replies**: In Knative, all events are
+3. **Custom events and event replies**: In Knative, all events are
    [CloudEvents](https://cloudevents.io/). It's useful to have a standard format
    for events and various SDKs to read/write them. Moreover, Knative supports
    custom events and event replies. Any service can receive an event, do some
