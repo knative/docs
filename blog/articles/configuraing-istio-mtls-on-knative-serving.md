@@ -59,14 +59,14 @@ spec:
         autoInject: enabled
 ```
 
-Additionally `enableAutoMtls` is set to `false` in this post.
+Additionally `enableAutoMtls` is set to `true` in this post.
 
 ```yaml
   meshConfig:
-    enableAutoMtls: false
+    enableAutoMtls: true
 ```
 
-If you set it to `true`, you can skip configuring DestinationRules described in the [Step 3: Enable DestinationRule on the user namespace](#step-3-enable-destinationrule-on-the-user-namespace) below.
+If you set it to `false`, you need to configuring DestinationRules for each outbound mutual TLS traffic to the service.
 
 The full IstioOperator could be found [here](https://gist.github.com/nak3/1f533b1a8be1bdd891e9b2fd8bebb40a).
 By the way, you can install Knative Serving by using [Installing Knative](https://knative.dev/docs/install/any-kubernetes-cluster/) as usual.
@@ -83,6 +83,13 @@ NAME              STATUS   AGE   LABELS
 knative-serving   Active   19m   istio-injection=enabled,serving.knative.dev/release=devel
 ```
 
+As webhook and istio-webhook are accessed by Kubernetes which is non mesh world, let's disable the sidecar injection on them.
+
+```
+kubectl patch deployments.apps -n knative-serving webhook -p '{"spec":{"template":{"metadata":{"annotations":{"sidecar.istio.io/inject":"false"}}}}}'
+kubectl patch deployments.apps -n knative-serving istio-webhook -p '{"spec":{"template":{"metadata":{"annotations":{"sidecar.istio.io/inject":"false"}}}}}'
+```
+
 You can check your system pods are running with sidecar by the output of `2/2` for `READY` column. If not, please restart pods in knative-serving namespace.
 
 _e.g. command to confirm system pods have sidecar_
@@ -94,15 +101,15 @@ activator-7f77bdbcdb-xh79h            2/2     Running   0          18m
 autoscaler-546dd95779-mqtjh           2/2     Running   0          18m
 autoscaler-hpa-56b5bf5998-qlp7k       2/2     Running   0          18m
 controller-5844b9575d-qqgbg           2/2     Running   0          18m
-istio-webhook-5c5c7569fc-hnk4k        2/2     Running   0          18m
+istio-webhook-5c5c7569fc-hnk4k        1/1     Running   0          18m
 networking-istio-59ff77d49f-kglsw     1/1     Running   0          18m
 networking-ns-cert-849b87d778-2b9sw   2/2     Running   0          18m
-webhook-754f8bc47f-wghnv              2/2     Running   1          17m
+webhook-754f8bc47f-wghnv              1/1     Running   1          17m
 ```
 
 Please note that networking-istio pod disabled the injection by its manifest.
 
-We need to enable the injection on your application namespace with same way. The following example uses `serving-tests` namespace for test.
+We need to enable the injection on your application namespace with the same way. The following example uses `serving-tests` namespace for test.
 
 _e.g. command to create user namespace with injection label_
 
@@ -111,7 +118,7 @@ $ kubectl create namespace serving-tests
 $ kubectl label namespace serving-tests istio-injection=enabled
 ```
 
-### Step 2: Enable STRICT mTLS on entire mesh and PERMISSIVE on the system namespace
+### Step 2: Enable STRICT mTLS on entire mesh
 
 To apply mTLS STRICT mode globally, you can create `PeerAuthentication` with name `default` in `istio-system` namespace.
 
@@ -130,89 +137,9 @@ spec:
 EOF
 ```
 
-> NOTE: It might take a few seconds to apply mTLS rule after creating the PeerAuthentication.
+### Step 3: Access to your application
 
-Let's try to create Knative application. You will get the following error. This is because the communication from Kubernetes to knative-serving's webhook fails as it is an access from "non-istio service".
-
-_e.g error message when creating knative app_
-
-```bash
-$ kn service create hello-example --image=gcr.io/knative-samples/helloworld-go -n serving-tests
-Internal error occurred: failed calling webhook "webhook.serving.knative.dev": Post https://webhook.knative-serving.svc:443/defaulting?timeout=10s: x509: certificate is not valid for any names, but wanted to match webhook.knative-serving.svc
-```
-
-To fix it, We set mTLS mode on knative-serving namespace to `PERMISSIVE` mode.
-
-_e.g. command to enable mTLS permissive mode in system namespace_
-
-```bash
-$ cat <<EOF | kubectl apply -f -
-apiVersion: "security.istio.io/v1beta1"
-kind: "PeerAuthentication"
-metadata:
-  name: "default"
-  namespace: "knative-serving"
-spec:
-  mtls:
-    mode: PERMISSIVE
-EOF
-```
-
-### Step 3: Enable DestinationRule on the user namespace
-
-Now you can deploy your Knative application. Let's run the same deploy command again.
-
-_e.g command to create knative app_
-
-```bash
-$ kn service create hello-example --image=gcr.io/knative-samples/helloworld-go -n serving-tests
-```
-
-And send a request from another pod.
-
-_e.g command to request from another pod to knative app_
-
-```bash
-$ wget https://raw.githubusercontent.com/istio/istio/1.6.1/samples/sleep/sleep.yaml
-$ kubectl apply -f <(istioctl kube-inject -f sleep.yaml)
-$ POD=$(kubectl get pod -l app=sleep -o jsonpath={.items..metadata.name})
-
-$ kubectl exec $POD -c sleep -- curl -s hello-example.serving-tests.svc.cluster.local
-  (Time out or 503 error)
-```
-
-The access to your knative service is still failing. In fact, system pods such as activator and autoscaler are printing following error.
-
-_e.g error logs in autoscaler and activator_
-
-```bash
-$ kubectl  -n knative-serving logs autoscaler-597fd8d69d-d5vt4 -c autoscaler
-{"level":"error","ts":"2020-06-14T04:44:53.434Z","logger":"autoscaler.collector","caller":"metrics/collector.go:316","msg":"Failed to scrape metrics","commit":"12fd001","knative.dev/key":"serving-tests/hello-example-cjjdb-1","error":"unsuccessful scrape, sampleSize=1: GET request for URL \"http://hello-example-cjjdb-1-private.serving-tests:9090/metrics\" returned HTTP status 503","stacktrace":"knative.dev/serving/pkg/autoscaler/metrics.newCollection.func1\n\tknative.dev/serving/pkg/autoscaler/metrics/collector.go:316"}
-
-$ kubectl  -n knative-serving logs activator-6d9f95b7f8-jxv64 -c activator
-{"level":"error","ts":"2020-06-14T04:45:58.642Z","logger":"activator","caller":"net/revision_backends.go:324","msg":"Failed to probe clusterIP 172.20.5.15:80","commit":"12fd001","knative.dev/controller":"activator","knative.dev/pod":"activator-6d9f95b7f8-jxv64","knative.dev/key":{"key":"hello-example-cjjdb-1"},"error":"unexpected body: want \"queue\", got \"upstream connect error or disconnect/reset before headers. reset reason: connection termination\"","stacktrace":"knative.dev/serving/pkg/activator/net.(*revisionWatcher).checkDests\n\tknative.dev/serving/pkg/activator/net/revision_backends.go:324\nknative.dev/serving/pkg/activator/net.(*revisionWatcher).run\n\tknative.dev/serving/pkg/activator/net/revision_backends.go:368"}
-```
-
-The reason is that we haven't configured the DestinationRule yet. We need the policy for outbound mutual TLS traffic to the service. Let's configure the destination rule in the application namespace.
-
-_e.g destinationrule in user namespace_
-
-```bash
-$ cat <<EOF | kubectl apply -f -
-apiVersion: "networking.istio.io/v1alpha3"
-kind: "DestinationRule"
-metadata:
-  name: "knative-serving"
-  namespace: serving-tests
-spec:
-  host: "*.local"
-  trafficPolicy:
-    tls:
-      mode: ISTIO_MUTUAL
-EOF
-```
-
-Finally you can access to your application.
+Now you can deploy your Knative application. Let's access to it.
 
 _e.g command to request from another pod to knative app_
 
