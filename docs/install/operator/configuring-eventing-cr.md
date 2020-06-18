@@ -8,13 +8,13 @@ aliases:
 
 The Knative Eventing operator can be configured with these options:
 
-- [Service Configuration by ConfigMap](#service-configuration-by-configMap)
+- [Eventing Configuration by ConfigMap](#eventing-configuration-by-configMap)
 - [Private repository and private secret](#private-repository-and-private-secrets)
 - [Configuring default broker class](#configuring-default-broker-class)
 
 __NOTE:__ Kubernetes spec level policies cannot be configured using the Knative operators.
 
-## Service Configuration by ConfigMap
+## Eventing Configuration by ConfigMap
 
 The Knative Eventing operator CR is configured the same way as the Knative Serving operator CR. Because the operator manages
 the Knative Eventing installation, it will overwrite any updates to the `ConfigMaps` which are used to configure Knative
