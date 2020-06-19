@@ -308,7 +308,7 @@ be able to handle HTTPS traffic.
 
 1.  Run the following comand to create a Knative Service:
     ```shell
-    kubectl apply -f https://raw.githubusercontent.com/knative/docs/master/docs/serving/samples/autoscale-go/service.yaml
+    kubectl apply -f https://raw.githubusercontent.com/knative/docs/master/docs/serving/autoscaling/autoscale-go/service.yaml
     ```
 
 1.  When the certificate is provisioned (which could take up to several minutes depending on 
