@@ -6,16 +6,19 @@ description: Walkthrough of implementing a Bitcoin transaction data source for K
 type: "blog"
 ---
 
-I’ve been exploring [Knative Eventing](https://knative.dev/docs/eventing/), a system that enables a cloud native eventing ecosystem to be easily deployed through the use of **event producers** and **event consumers.**
+I’ve been exploring [Knative Eventing](https://knative.dev/docs/eventing/), a system that enables a cloud native eventing ecosystem to be easily deployed through the use of **event producers** and **event consumers.** Most of the work on this demo has been done in version 0.11, and I have also run it in version 0.13, and now it also works on version 0.15.
+
+This demo was presented at the first Knative Community Meetup, so you can also watch the video version here: 
+{{< youtube sGi_LuAaaT0 >}}
 
 I put together a simple demo to explore some of the key advantages of event-driven architectures, such as:
 
 - Push-based messaging.
-- True decoupling of producers and consumers.
+- Decoupling of producers and consumers.
 - Apply business logic while data is in motion.
 - Real time event-streams for data science — millisecond decisions e.g fraud detection.
 
-In this post, I’ll show you how to get an example eventing scenario up and running using some of the basic Knative eventing components; **broker, trigger, producer** and **consumer.** This demo shows streaming events in real-time, in-stream transformation, and push-based front-ends in action. You can use this as a basis and build out, exploring further with what is possible.
+In this post, I’ll show you how to get an example eventing scenario up and running using some of the basic Knative eventing components; **Broker, Trigger, producer** and **consumer.** This demo shows streaming events in real-time, in-stream transformation, and push-based front-ends in action. You can use this as a basis and build out, exploring further with what is possible.
 
 This scenario uses Bitcoin transaction events as an example of an event stream. The events will be displayed in real-time via and UI front-end and also classified into sizes by another service based on their total transaction value.
 
@@ -25,8 +28,6 @@ In the diagram below, you can see a plan of what we will deploy.
 
 There is a github repository to accompany this demo [here](https://github.com/josiemundi/knative-eventing-blockchain-demo). The source code for all of the individual services is available in the github repo. If you want to use the pre-built images from Docker hub then you will only need the files in the yaml directory.
 
-This demo was presented at the first Knative Community Meetup and there is a video demo [here](https://www.youtube.com/watch?v=sGi_LuAaaT0).
-
 ## Step 1: Create the Namespace and create a Broker
 ```
 kubectl apply -f 001-namespace.yaml
@@ -34,7 +35,7 @@ kubectl apply -f 001-namespace.yaml
 
 The first step is to deploy the 001-namespace.yaml, which creates a kubernetes namespace and automatically adds the label knative-eventing-injection=enabled. This creates a Knative Eventing **broker**.
 
-The **Broker** is where events are sent to from an event-source or **producer.** It is a messaging channel, which by default is in-memory but can be something else (like a Kafka channel). From here they can be consumed by those services that are interested.
+The **Broker** is where events are sent to from an event-source or **producer.** It may be backed as a messaging channel, which by default is in-memory but can be something else (like a Kafka channel). From here they can be consumed by those services that are interested. 
 
 ## Step 2: Deploy the Bitcoin event-source
 ```
@@ -48,7 +49,7 @@ kubectl get broker -n knative-eventing-websocket-source
 ```
 Once you have deployed the event-source, you can verify it is running by getting the logs:
 ```
-kubectl — namespace knative-eventing-websocket-source logs -l app=wseventsource — tail=100 -f
+kubectl —namespace knative-eventing-websocket-source logs -l app=wseventsource — tail=100 -f
 ```
 
 ## Step 3: Subscribe event-display to the Bitcoin events
