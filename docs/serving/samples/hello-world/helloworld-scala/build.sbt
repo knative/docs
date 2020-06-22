@@ -41,7 +41,7 @@ dockerBaseImage := "openjdk"
 // If you want to supply specific JVM parameters, do that here:
 // javaOptions in Universal ++= Seq()
 
-// If you change this, set this to an email address in the format of: "Name <email adress>"
+// If you change this, set this to an email address in the format of: "Name <email address>"
 maintainer := ""
 
 // To use your Docker Hub repository set this to "docker.io/yourusername/yourreponame".
