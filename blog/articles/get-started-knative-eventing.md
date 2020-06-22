@@ -35,7 +35,7 @@ kubectl apply -f 001-namespace.yaml
 
 The first step is to deploy the 001-namespace.yaml, which creates a kubernetes namespace and automatically adds the label knative-eventing-injection=enabled. This creates a Knative Eventing **broker**.
 
-The **Broker** is where events are sent to from an event-source or **producer.** It may be backed as a messaging channel, which by default is in-memory but can be something else (like a Kafka channel). From here they can be consumed by those services that are interested. 
+The **Broker** is where events are sent to from an event-source or **producer.** It may be backed as a messaging channel, which by default is in-memory but can be something else (like a Kafka channel). From here they can be consumed by those services that are interested.
 
 ## Step 2: Deploy the Bitcoin event-source
 ```
