@@ -8,7 +8,7 @@ type: "blog"
 
 I’ve been exploring [Knative Eventing](https://knative.dev/docs/eventing/), a system that enables a cloud native eventing ecosystem to be easily deployed through the use of **event producers** and **event consumers.** Most of the work on this demo has been done in version 0.11, and I have also run it in version 0.13, and now it also works on version 0.15.
 
-This demo was presented at the first Knative Community Meetup, so you can also watch the video version here: 
+This demo was presented at the first Knative Community Meetup, so you can also watch the video version here:
 {{< youtube sGi_LuAaaT0 >}}
 
 I put together a simple demo to explore some of the key advantages of event-driven architectures, such as:
