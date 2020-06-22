@@ -15,7 +15,7 @@ that are active when running Knative Serving.
    instructions on how to do this are located
    [here](https://knative.dev/docs/install/knative-custom-install/).
 2. Verify that you have the proper components in your cluster. To view the
-   services installed in your cluster, use the commmand:
+   services installed in your cluster, use the command:
 
    ```sh
    $ kubectl get services -n knative-serving

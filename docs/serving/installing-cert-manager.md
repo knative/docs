@@ -16,7 +16,7 @@ automatic certificate provisioning are provided in
 [Enabling automatic TLS cert provisioning](./using-auto-tls.md).
 
 Regardless of if your want to manually obtain certificates, or configure Knative
-for automatic provisioning, you can use the follwoing steps to install
+for automatic provisioning, you can use the following steps to install
 cert-manager.
 
 ## Before you begin
