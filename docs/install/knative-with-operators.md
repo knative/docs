@@ -17,9 +17,7 @@ a Kubernetes cluster. If you have only one node for your cluster, set CPUs to at
 Disk storage to at least 30 GB. If you have multiple nodes for your cluster, set CPUs to at least 2, Memory to at least
 4.0 GB, Disk storage to at least 20 GB for each node.
 - The Kubernetes cluster must be able to access the internet, since the Knative operator downloads images online.
-- Istio:
-    - [Download and install Istio](https://knative.dev/development/install/installing-istio/#downloading-istio-and-installing-crds). Go through all the 4 sub-steps.
-    - [Update your Istio to use cluster local gateway](https://knative.dev/development/install/installing-istio/#updating-your-install-to-use-cluster-local-gateway).
+- [Download and install Istio](https://knative.dev/development/install/installing-istio).
 
 ## Limitations of Knative Operator:
 
