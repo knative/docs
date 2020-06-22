@@ -11,12 +11,12 @@ If you have configured additional security features, such as Istio's authorizati
 
 You must meet the following prerequisites to use Istio AuthorizationPolicy:
 
-- [Enabling istio sidecar injection](https://istio.io/latest/docs/setup/additional-setup/sidecar-injection/).
-- Using net-istio for your Knative Ingress.
+- [Istio sidecar injection must be enabled](https://istio.io/latest/docs/setup/additional-setup/sidecar-injection/).
+- [Using Istio for your Knative Ingress](https://knative.dev/docs/install/any-kubernetes-cluster/#installing-the-serving-component).
 
 ## Enabling Istio AuthorizationPolicy
 
-For example, the following authorization policy denies all requests to workloads in namespace serving-tests.
+For example, the following authorization policy denies all requests to workloads in namespace `serving-tests`.
 
 ```
 $ cat <<EOF | kubectl apply -f -
@@ -30,11 +30,10 @@ spec:
 EOF
 ```
 
-In addition to allowing your application path, you must whitelist the system pods in your Istio AuthorizationPolicy
-to enable access to your application for requests from system pods.
-You can enable access by:
-[Allowing access from system pods by paths](#allow-access-from-system-pods-by-paths).
-[Allowing access from system pods by namespace](#allow-access-from-system-pods-by-namespace).
+In addition to allowing your application path, you must configure Istio AuthorizationPolicy
+to allow access, such as health checking and metrics collection, to your applications from system pods.
+You can allow access from system pods
+[by paths](#allow-access-from-system-pods-by-paths) or [by namespace](#allow-access-from-system-pods-by-namespace).
 
 ## Allowing access from system pods by paths
 
@@ -43,8 +42,8 @@ Knative system pods access your application using the following paths:
 - `/metrics`
 - `/healthz`
 
-The /metrics path allows the autoscaler pod to collect metrics.
-The /healthz path allows system pods to probe the service."
+The `/metrics` path allows the autoscaler pod to collect metrics.
+The `/healthz` path allows system pods to probe the service."
 
 You can add the `/metrics` and `/healthz` paths to the AuthorizationPolicy as shown in the example:
 
@@ -53,7 +52,7 @@ $ cat <<EOF | kubectl apply -f -
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
-  name: whitelist-by-paths
+  name: allowlist-by-paths
   namespace: serving-tests
 spec:
   action: ALLOW
@@ -75,7 +74,7 @@ $ cat <<EOF | kubectl apply -f -
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
-  name: whitelist-by-namespace
+  name: allowlist-by-namespace
   namespace: serving-tests
 spec:
   action: ALLOW
@@ -86,5 +85,5 @@ spec:
 EOF
 ```
 
-Some rule like from.source.namespace above needs to require mTLS enabled.
+Some rules like `from.source.namespace` above require mTLS to be enabled.
 Please refer to Istio [Authorization Policy](https://istio.io/latest/docs/reference/config/security/authorization-policy/) for details.
