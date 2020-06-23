@@ -8,7 +8,7 @@ aliases:
 
 The Knative Serving operator can be configured with these options:
 
-- [Service Configuration by ConfigMap](#service-configuration-by-configMap)
+- [Serving Configuration by ConfigMap](#serving-configuration-by-configMap)
 - [Private repository and private secret](#private-repository-and-private-secrets)
 - [SSL certificate for controller](#ssl-certificate-for-controller)
 - [Knative ingress gateway](#configuration-of-knative-ingress-gateway)
@@ -16,7 +16,7 @@ The Knative Serving operator can be configured with these options:
 - [High availability](#high-availability)
 - [System Resource Settings](#system-resource-settings)
 
-## Service Configuration by ConfigMap
+## Serving Configuration by ConfigMap
 
 Because the operator manages the Knative Serving installation, it will overwrite any updates to the `ConfigMaps` which are used to configure Knative Serving.
 The `KnativeServing` custom resource allows you to set values for these ConfigMaps via the operator. Knative Serving has multiple ConfigMaps named with the prefix
