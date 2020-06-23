@@ -32,8 +32,7 @@ EOF
 
 In addition to allowing your application path, you'll need to configure Istio AuthorizationPolicy
 to allow health checking and metrics collection to your applications from system pods.
-You can allow access from system pods
-[by paths](#allow-access-from-system-pods-by-paths) or [by namespace](#allow-access-from-system-pods-by-namespace).
+You can allow access from system pods [by paths](#allow-access-from-system-pods-by-paths).
 
 ## Allowing access from system pods by paths
 
@@ -64,26 +63,3 @@ spec:
         - /healthz   # The path to probe by system pod.
 EOF
 ```
-
-## Allowing access from system pods by namespace
-
-You can allow access for all pods in the `knative-serving` namespace, as shown in the example:
-
-```
-$ cat <<EOF | kubectl apply -f -
-apiVersion: security.istio.io/v1beta1
-kind: AuthorizationPolicy
-metadata:
-  name: allowlist-by-namespace
-  namespace: serving-tests
-spec:
-  action: ALLOW
-  rules:
-  - from:
-    - source:
-       namespaces: ["knative-serving"]
-EOF
-```
-
-Some rules like `from.source.namespace` above require mTLS to be enabled.
-Please refer to Istio [Authorization Policy](https://istio.io/latest/docs/reference/config/security/authorization-policy/) for details.
