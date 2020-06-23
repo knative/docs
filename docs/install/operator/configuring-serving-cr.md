@@ -285,7 +285,7 @@ Update `spec.cluster-local-gateway` to select the labels of the new cluster-loca
 
 ### Default local gateway name:
 
-Go through the guide [here](https://knative.dev/development/install/installing-istio/#updating-your-install-to-use-cluster-local-gateway) to use local cluster gateway,
+Go through the guide [here](https://knative.dev/development/install/installing-istio/#installing-istio-without-sidecar-injection) to use local cluster gateway,
 if you use the default gateway called `cluster-local-gateway`.
 
 ### Non-default local gateway name:
