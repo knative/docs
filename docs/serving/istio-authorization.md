@@ -11,8 +11,8 @@ If you have configured additional security features, such as Istio's authorizati
 
 You must meet the following prerequisites to use Istio AuthorizationPolicy:
 
+- [Istio must be used for your Knative Ingress](https://knative.dev/docs/install/any-kubernetes-cluster/#installing-the-serving-component).
 - [Istio sidecar injection must be enabled](https://istio.io/latest/docs/setup/additional-setup/sidecar-injection/).
-- [Using Istio for your Knative Ingress](https://knative.dev/docs/install/any-kubernetes-cluster/#installing-the-serving-component).
 
 ## Enabling Istio AuthorizationPolicy
 
@@ -30,8 +30,8 @@ spec:
 EOF
 ```
 
-In addition to allowing your application path, you must configure Istio AuthorizationPolicy
-to allow access, such as health checking and metrics collection, to your applications from system pods.
+In addition to allowing your application path, you'll need to configure Istio AuthorizationPolicy
+to allow health checking and metrics collection to your applications from system pods.
 You can allow access from system pods
 [by paths](#allow-access-from-system-pods-by-paths) or [by namespace](#allow-access-from-system-pods-by-namespace).
 
@@ -43,7 +43,7 @@ Knative system pods access your application using the following paths:
 - `/healthz`
 
 The `/metrics` path allows the autoscaler pod to collect metrics.
-The `/healthz` path allows system pods to probe the service."
+The `/healthz` path allows system pods to probe the service.
 
 You can add the `/metrics` and `/healthz` paths to the AuthorizationPolicy as shown in the example:
 
