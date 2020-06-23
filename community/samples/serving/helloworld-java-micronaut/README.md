@@ -26,7 +26,7 @@ You must meet the following requirements to complete this sample:
 
 **Tip**: You can clone the [Knatve/docs repo](https://github.com/knative/docs)
 and then modify the source files. Alternatively, learn more by manually creating
-the files youself.
+the files yourself.
 
 ## Creating and configuring the sample code
 

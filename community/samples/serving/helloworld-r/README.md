@@ -70,7 +70,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-r
    1. Create a new file named `Dockerfile` and copy the code block below into it.
 
       ```docker
-      # Use the offical Golang image to create a build artifact.
+      # Use the official Golang image to create a build artifact.
       # This is based on Debian and sets the GOPATH to /go.
       # https://hub.docker.com/_/golang
       FROM golang:1.12 as builder
