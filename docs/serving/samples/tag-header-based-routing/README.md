@@ -26,6 +26,13 @@ This feature is disabled by default. To enable this feature, run the following c
 kubectl patch cm config-network -n knative-serving -p '{"data":{"tagHeaderBasedRouting":"Enabled"}}'
 ```
 
+## Build Images
+
+Follow the instruction in [helloworld-go](../hello-world/helloworld-go) to build the helloworld image and upload it
+to your container repository.
+
+Modify [sample.yaml](./sample.yaml) to replace `{username}` with your Docker Hub username.
+
 ## Setting up the revisions with tag
 
 In this sample, two revisions are created. The first revision is tagged with "rev1".
@@ -44,20 +51,30 @@ kubectl apply -f docs/serving/samples/tag-header-based-routing/sample.yaml
 
 ## Check the created resources
 
-Check two revisions become ready using the following command. It may take one or two minutes for the revisions
-to become ready.
-
+Check created two revisions using the following command
 ```
 kubectl get revisions
 ```
 
-Check the Knative Service becomes ready and is configured correctly
+You should see two revisions: `tag-header-revision-1` and `tag-header-revision-2`. It may take one or two minutes 
+for the revisions to become ready.
+
+
+Check the Knative Service using the following command
 
 ```
 kubectl get ksvc tag-header -oyaml
 ```
 
-You should see the following block which indicates the tag is successfully added to the first revision.
+You should see the following block which indicates the tag `rev1` is successfully added to the first revision.
+
+```
+  - revisionName: tag-header-revision-1
+    percent: 0
+    tag: rev1
+  - revisionName: tag-header-revision-2
+    percent: 100
+```
 
 
 ## Sending request with tag header
@@ -65,27 +82,36 @@ You should see the following block which indicates the tag is successfully added
 1. Run the following command to send request to the first revision.
 
 ```
+curl ${INGRESS_IP} -H "Host:tag-header.default.example.com" -H "Knative-Serving-Tag:rev1"
 ```
+where ${INGRESS_IP} is the IP of your Ingress.
 
 You should get response
+
 ```
+Hello First Revision!
 ```
 
 1. Run the following command to send requests without "Knative-Serving-Tag" header
 
 ```
+curl ${INGRESS_IP} -H "Host:tag-header.default.example.com"
 ```
 
 You should get the response from the second revision, which is 
+
 ```
+Hello Second Revision!
 ```
 
 1. Run the following command to send requests with incorrect "Knative-Serving-Tag" header
 
 ```
+curl ${INGRESS_IP} -H "Host:tag-header.default.example.com" -H "Knative-Serving-Tag:wrongHeader"
 ```
 
-You should get the response from the second revision too, which is 
-```
-```
+You should get the response from the second revision too, which is
 
+```
+Hello Second Revision!
+```

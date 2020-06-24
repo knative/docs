@@ -11,4 +11,40 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: tag-header
+  namespace: default
+spec:
+  template:
+    metadata:
+      name: tag-header-revision-1
+    spec:
+      containers:
+      - image: docker.io/{username}/helloworld-go
+        env:
+        - name: TARGET
+          value: "First Revision"
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: tag-header
+  namespace: default
+spec:
+  template:
+    metadata:
+      name: tag-header-revision-2
+    spec:
+      containers:
+      - image: docker.io/{username}/helloworld-go
+        env:
+        - name: TARGET
+          value: "Second Revision"
+  traffic:
+  - revisionName: tag-header-revision-1
+    percent: 0
+    tag: rev1
+  - revisionName: tag-header-revision-2
+    percent: 100
