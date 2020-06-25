@@ -1,9 +1,9 @@
 ---
-title: "Event-driven Image and BigQuery processing pipelines with Knative"
-linkTitle: "Event-driven image and BigQuery processing pipelines with Knative"
+title: "Event-driven Image and BigQuery processing pipelines with Knative on
+Google Cloud"
 date: 2020-06-19
 description: "Using Knative Eventing to build event-driven image and BigQuery
-processing pipelines"
+processing pipelines on Google Cloud"
 type: "blog"
 ---
 
