@@ -3,14 +3,14 @@ This sample illustrates the feature "Tag Header Based Routing".
 ## Tag Header Based Routing Feature
 
 The feature "Tag Header Based Routing" allows users to send requests directly to specific tagged Revisions with
-the same URL of Knative Service. In order to achieve this, users only need to specific header "Knative-Serving-Tag:
+the same URL of Knative Service. In order to achieve this, users only need to set the specific header "Knative-Serving-Tag:
 {revision-tag}" into the request.
 
 Currently Istio and Contour Ingress support this feature.
 
 ## Prerequestie
 
-1. A Knative cluster having Istio Ingress controller or Contour Ingress controller installed
+1. A Knative cluster that has an Istio Ingress controller or Contour Ingress controller installed
 with Knative version 0.16 and above.
 
 1. Move into the docs directory:
@@ -29,7 +29,7 @@ kubectl patch cm config-network -n knative-serving -p '{"data":{"tagHeaderBasedR
 
 ## Build Images
 
-Follow the instruction in [helloworld-go](../hello-world/helloworld-go) to build the `helloworld` image and upload it
+Follow the instructions in [helloworld-go](../hello-world/helloworld-go) to build the `helloworld` image and upload it
 to your container repository.
 
 Replace `{username}` in the [sample.yaml](./sample.yaml) with your Docker Hub username.
@@ -40,7 +40,7 @@ In this sample, two Revisions are created. The first Revision is tagged with "re
 With this configuration, users should be able to send requests directly to the first Revision
 with the URL of Knative Service plus the header "Knative-Serving-Tag: rev1".
 
-The Knative Service are configured to route 100% traffic to the second Revision, which means if users do not
+The Knative Service is configured to route 100% traffic to the second Revision, which means if users do not
 provide "Knative-Serving-Tag" or provide an incorrect value for "Knative-Serving-Tag", the requests will be
 routed to the second Revision.
 
