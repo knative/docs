@@ -105,7 +105,7 @@ To create the MT broker using the default configuration, use the command:
 
 ```shell
 kubectl apply -f - <<EOF
-apiVersion: eventing.knative.dev/v1beta1
+apiVersion: eventing.knative.dev/v1
 kind: Broker
 metadata:
   name: mybroker
@@ -146,7 +146,7 @@ EOF
 
 ```shell
 kubectl apply -f - <<EOF
-apiVersion: eventing.knative.dev/v1beta1
+apiVersion: eventing.knative.dev/v1
 kind: Broker
 metadata:
   name: my-other-broker

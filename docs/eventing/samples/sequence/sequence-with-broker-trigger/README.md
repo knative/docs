@@ -115,7 +115,7 @@ spec:
   reply:
     ref:
       kind: Broker
-      apiVersion: eventing.knative.dev/v1beta1
+      apiVersion: eventing.knative.dev/v1
       name: default
 ```
 
@@ -141,7 +141,7 @@ spec:
   jsonData: '{"message": "Hello world!"}'
   sink:
     ref:
-      apiVersion: eventing.knative.dev/v1beta1
+      apiVersion: eventing.knative.dev/v1
       kind: Broker
       name: default
 ```
@@ -160,7 +160,7 @@ kubectl -n default create -f ./ping-source.yaml
 ### Create the Trigger targeting the Sequence
 
 ```yaml
-apiVersion: eventing.knative.dev/v1beta1
+apiVersion: eventing.knative.dev/v1
 kind: Trigger
 metadata:
   name: sequence-trigger
@@ -196,7 +196,7 @@ spec:
       containers:
         - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/appender
 ---
-apiVersion: eventing.knative.dev/v1beta1
+apiVersion: eventing.knative.dev/v1
 kind: Trigger
 metadata:
   name: display-trigger

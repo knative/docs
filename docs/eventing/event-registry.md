@@ -120,7 +120,7 @@ Here are a few example Triggers that subscribe to events using exact matching on
 1. Subscribes to GitHub _pushes_ from any source.
 
    ```yaml
-   apiVersion: eventing.knative.dev/v1beta1
+   apiVersion: eventing.knative.dev/v1
    kind: Trigger
    metadata:
      name: push-trigger
@@ -145,7 +145,7 @@ Here are a few example Triggers that subscribe to events using exact matching on
 1. Subscribes to GitHub _pull requests_ from _knative's eventing_ repository.
 
    ```yaml
-   apiVersion: eventing.knative.dev/v1beta1
+   apiVersion: eventing.knative.dev/v1
    kind: Trigger
    metadata:
      name: gh-knative-eventing-pull-trigger
@@ -166,7 +166,7 @@ Here are a few example Triggers that subscribe to events using exact matching on
 1. Subscribes to Kafka messages sent to the _knative-demo_ topic
 
    ```yaml
-   apiVersion: eventing.knative.dev/v1beta1
+   apiVersion: eventing.knative.dev/v1
    kind: Trigger
    metadata:
      name: kafka-knative-demo-trigger
@@ -188,7 +188,7 @@ Here are a few example Triggers that subscribe to events using exact matching on
    _testing_ topic
 
    ```yaml
-   apiVersion: eventing.knative.dev/v1beta1
+   apiVersion: eventing.knative.dev/v1
    kind: Trigger
    metadata:
      name: gcp-pubsub-knative-testing-trigger
@@ -251,7 +251,7 @@ the next topic: How do we actually populate the registry in the first place?
     bootstrapServers: my-cluster-kafka-bootstrap.kafka:9092
     topics: knative-demo,news
     sink:
-      apiVersion: eventing.knative.dev/v1beta1
+      apiVersion: eventing.knative.dev/v1
       kind: Broker
       name: default
   ```

@@ -91,7 +91,7 @@ metadata:
 spec:
   channelTemplate:
     apiVersion: messaging.knative.dev/v1beta1
-￼    kind: InMemoryChannel
+    kind: InMemoryChannel
 ```
 
 When this mechanism is used, two objects are created, a generic `Channel` and an

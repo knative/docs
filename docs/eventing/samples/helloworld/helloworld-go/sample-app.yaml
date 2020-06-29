@@ -41,7 +41,7 @@ spec:
       targetPort: 8080
 ---
 # Knative Eventing Trigger to trigger the helloworld-go service
-apiVersion: eventing.knative.dev/v1beta1
+apiVersion: eventing.knative.dev/v1
 kind: Trigger
 metadata:
   name: helloworld-go
