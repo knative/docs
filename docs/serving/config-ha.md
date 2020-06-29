@@ -12,16 +12,21 @@ When using a leader election HA pattern, instances of controllers are already sc
 
 HA functionality is available on Knative for the following components:
 
-- `autoscaler-hpa`
-- `controller`
 - `activator`
+- `controller`
+- `webhook`
+- (optional) `hpaautoscaler` (if HPA autoscaling)
+- (optional) `istiocontroller` (if `net-istio`)
+- (optional) `contour-ingress-controller` (if `net-contour`)
+- (optional) `kourier` (if `net-kourier`)
+- (optional) `nscontroller` (if using wildcard certificates)
+- (optional) `certcontroller` (if using `net-certmanager`)
+
+Note that `net-kourier` runs in `kourier-system`, so similar commands to what's below should be run against the configmaps and deployments in that namespace.
 
 HA functionality is not currently available for the following components:
 
 - `autoscaler`
-- `webhook`
-- `queueproxy`
-- `net-kourier`
 
 ## Enabling leader election
 
@@ -32,7 +37,7 @@ HA functionality is not currently available for the following components:
 $ kubectl patch configmap/config-leader-election \
   --namespace knative-serving \
   --type merge \
-  --patch '{"data":{"enabledComponents": "controller,hpaautoscaler,certcontroller,istiocontroller,nscontroller"}}'
+  --patch '{"data":{"enabledComponents": "controller,contour-ingress-controller,hpaautoscaler,certcontroller,istiocontroller,net-http01,nscontroller,webhook"}}'
 ```
 
 1. Restart the controllers:
@@ -58,13 +63,16 @@ The following serving controller deployments can be scaled up once leader electi
 Standard deployments:
 
 - `controller`
-- `networking-istio` (if Istio is installed)
+- `webhook`
 
 Optionally installed deployments:
 
 - `autoscaler-hpa`
+- `contour-ingress-controller`
+- `networking-istio`
 - `networking-ns-cert`
 - `networking-certmanager`
+- `3scale-kourier-control` (in `kourier-system`)
 
 Scale up the deployment(s):
 ```
