@@ -8,7 +8,7 @@ spec:
       containers:
       - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
 ---
-apiVersion: eventing.knative.dev/v1beta1
+apiVersion: eventing.knative.dev/v1
 kind: Trigger
 metadata:
   name: display-trigger

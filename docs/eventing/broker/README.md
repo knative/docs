@@ -20,7 +20,7 @@ which uses `InMemoryChannel`:
 Example:
 
 ```yaml
-apiVersion: eventing.knative.dev/v1beta1
+apiVersion: eventing.knative.dev/v1
 kind: Broker
 metadata:
   name: default
@@ -37,7 +37,7 @@ More complex example, showing the same `Broker` as above
 but with failed events being delivered to Knative Service called `dlq-service`
 
 ```yaml
-apiVersion: eventing.knative.dev/v1beta1
+apiVersion: eventing.knative.dev/v1
 kind: Broker
 metadata:
   name: default
@@ -86,7 +86,7 @@ kubectl -n <namespace> delete broker default
 If you have a trigger that is coupled to the `default` broker, and there is no existing `default` broker, you can also annotate using triggers to create a broker:
 
 ```yaml
-apiVersion: eventing.knative.dev/v1beta1
+apiVersion: eventing.knative.dev/v1
 kind: Trigger
 metadata:
   annotations:
@@ -115,7 +115,7 @@ Simple example which will receive all the events from the given (`default`) brok
 deliver them to Knative Serving service `my-service`:
 
 ```yaml
-apiVersion: eventing.knative.dev/v1beta1
+apiVersion: eventing.knative.dev/v1
 kind: Trigger
 metadata:
   name: my-service-trigger
@@ -137,7 +137,7 @@ Note that we only support exact matching on string values.
 Example:
 
 ```yaml
-apiVersion: eventing.knative.dev/v1beta1
+apiVersion: eventing.knative.dev/v1
 kind: Trigger
 metadata:
   name: my-service-trigger
@@ -192,7 +192,7 @@ created above (`my-service`). For this example, we use Ping Source, and it
 emits events types `dev.knative.sources.ping`.
 
 ```yaml
-apiVersion: eventing.knative.dev/v1beta1
+apiVersion: eventing.knative.dev/v1
 kind: Trigger
 metadata:
   name: my-service-trigger
@@ -216,7 +216,7 @@ unspecified.
 The Webhook will default the YAML above to:
 
 ```yaml
-apiVersion: eventing.knative.dev/v1beta1
+apiVersion: eventing.knative.dev/v1
 kind: Trigger
 metadata:
   name: my-service-trigger
@@ -253,7 +253,7 @@ spec:
   sink:
     ref:
       # Deliver events to Broker.
-      apiVersion: eventing.knative.dev/v1beta1
+      apiVersion: eventing.knative.dev/v1
       kind: Broker
       name: default
 ```
