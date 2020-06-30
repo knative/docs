@@ -15,6 +15,27 @@ development of event-driven architectures.
 Both of these pipelines are available on GitHub, including source code, configurations, and detailed
 instructions, as part of my [Knative Tutorial](https://github.com/meteatamel/knative-tutorial).
 
+## Knative components used
+
+When creating these example pipelines, I relied on a few Knative components that greatly simplified
+my development. More specifially:
+
+1. [Event sources](https://knative.dev/docs/eventing/sources/) allow you to
+   read external events in your cluster. [Knative-GCP
+   Sources](https://github.com/google/knative-gcp#knative-gcp-sources) provide a
+   number of eventing sources ready to read events from various Google Cloud
+   sources.
+2. [Broker and triggers](https://knative.dev/docs/eventing/broker/) provide an
+   eventing backbone where right events are delivered to right event consumers
+   without producers or consumers having to know about how the events are routed.
+3. **Custom events and event replies**: In Knative, all events are
+   [CloudEvents](https://cloudevents.io/), so it's useful to have a standard format
+   for events and various SDKs to read/write them. Knative supports
+   custom events and event replies. Any service can receive an event, do some
+   processing, create a custom event with new data, and reply back to the broker
+   so that other services can read the custom event. This is useful in pipelines,
+   where each service does a little bit of work and passes the message forward to the next service.
+
 ## Image Processing Pipeline
 
 In this image processing pipeline example, users upload an image to a storage
@@ -122,27 +143,6 @@ gcloud scheduler jobs run cre-scheduler-2bcb33d8-3165-4eca-9428-feb99bc320e2
 You should get an email with with a chart similar to this in a few minutes:
 
 ![Chart - United Kingdom](https://atamel.dev/img/2020/chart-unitedkingdom.png)
-
-## Knative Goodness
-
-When creating these example pipelines, I relied on a few Knative components that greatly simplified
-my development. More specifially:
-
-1. [Event sources](https://knative.dev/docs/eventing/sources/) allow you to
-   read external events in your cluster. [Knative-GCP
-   Sources](https://github.com/google/knative-gcp#knative-gcp-sources) provide a
-   number of eventing sources ready to read events from various Google Cloud
-   sources.
-2. [Broker and triggers](https://knative.dev/docs/eventing/broker/) provide an
-   eventing backbone where right events are delivered to right event consumers
-   without producers or consumers having to know about how the events are routed.
-3. **Custom events and event replies**: In Knative, all events are
-   [CloudEvents](https://cloudevents.io/), so it's useful to have a standard format
-   for events and various SDKs to read/write them. Knative supports
-   custom events and event replies. Any service can receive an event, do some
-   processing, create a custom event with new data, and reply back to the broker
-   so that other services can read the custom event. This is useful in pipelines,
-   where each service does a little bit of work and passes the message forward to the next service.
 
 This wraps up my post. As I already mentioned, if you want more detailed instructions,
 you can check out
