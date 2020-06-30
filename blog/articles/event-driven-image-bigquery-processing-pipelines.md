@@ -17,7 +17,7 @@ instructions, as part of my [Knative Tutorial](https://github.com/meteatamel/kna
 
 ## Image Processing Pipeline
 
-This is an image processing pipeline where users upload an image to a storage
+In this image processing pipeline example, users upload an image to a storage
 bucket on Google Cloud, get the image processed with a number of different Knative
 services and the processed images are saved to an output bucket.
 
