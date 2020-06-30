@@ -95,7 +95,7 @@ Tutorial on how to build and deploy a `KafkaSource` [Eventing source](../../../s
    etc...:
 
    ```yaml
-   apiVersion: sources.knative.dev/v1alpha1
+   apiVersion: sources.knative.dev/v1beta1
    kind: KafkaSource
    metadata:
      name: kafka-source
@@ -254,7 +254,7 @@ You can specify the key deserializer among four types:
 
 To specify it, add the label `kafkasources.sources.knative.dev/key-type` to the `KafkaSource` definition like:
    ```yaml
-   apiVersion: sources.knative.dev/v1alpha1
+   apiVersion: sources.knative.dev/v1beta1
    kind: KafkaSource
    metadata:
     name: kafka-source
@@ -296,7 +296,7 @@ KafkaSource expects these files to be in pem format, if it is in other format li
 
 2. Apply the KafkaSource, change bootstrapServers and topics accordingly.
    ```yaml
-   apiVersion: sources.knative.dev/v1alpha1
+   apiVersion: sources.knative.dev/v1beta1
    kind: KafkaSource
    metadata:
     name: kafka-source-with-tls
