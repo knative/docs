@@ -24,7 +24,7 @@ services, and save the processed image to an output bucket.
 I defined two requirements for the pipeline:
 
 1. Uploaded images are filtered before they are sent
-   through the pipeline.
+   through the pipeline. For example, no adult themed or violent images are allowed.
 2. Pipeline can contain any number of processing services that can be added or
    removed as needed.
 
