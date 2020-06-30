@@ -25,9 +25,9 @@ my development. More specifially:
    Sources](https://github.com/google/knative-gcp#knative-gcp-sources) provide a
    number of eventing sources ready to read events from various Google Cloud
    sources.
-2. [Broker and triggers](https://knative.dev/docs/eventing/broker/) provide an
-   eventing backbone where right events are delivered to right event consumers
-   without producers or consumers having to know about how the events are routed.
+2. [Broker and triggers](https://knative.dev/docs/eventing/broker/) provide 
+   event delivery without producers or consumers needing to know about how the 
+   events are routed.
 3. **Custom events and event replies**: In Knative, all events are
    [CloudEvents](https://cloudevents.io/), so it's useful to have a standard format
    for events and various SDKs to read/write them. Knative supports
