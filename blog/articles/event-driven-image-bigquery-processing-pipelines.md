@@ -94,7 +94,7 @@ Here's the architecture of the pipeline.
    COVID-19 data set, and saves the results in a separate BigQuery table. After this is
    done, the QueryRunner service returns a custom CloudEvent of type
    `dev.knative.samples.querycompleted`.
-3. `ChartCreator` service written in Python. It receives the `querycompleted`
+3. The ChartCreator service receives the `querycompleted`
    event, creates a chart from BigQuery data using `Matplotlib` and saves it to
    a Cloud Storage bucket.
 4. `Notifier` is another Python service that receives the
