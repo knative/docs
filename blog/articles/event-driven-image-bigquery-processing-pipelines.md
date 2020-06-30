@@ -40,7 +40,7 @@ Google Kubernetes Engine (GKE) on Google Cloud.
    [CloudStorageSource](https://github.com/google/knative-gcp/blob/master/docs/examples/cloudstoragesource/README.md).
 3. A filter service receives the Cloud Storage event. It uses the Vision API to
    determine whether the image is safe or should be filtered. If the image is safe, the filter service creates a custom CloudEvent of
-   type `dev.knative.samples.fileuploaded` and passes it back to `Broker`.
+   type `dev.knative.samples.fileuploaded` and passes it back to the broker.
 4. Resizer service receives the `fileuploaded` event, resizes the image using
    [ImageSharp](https://github.com/SixLabors/ImageSharp) library, saves to the
    resized image to the output bucket, creates a custom `CloudEvent` of type
