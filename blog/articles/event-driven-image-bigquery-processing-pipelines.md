@@ -95,7 +95,7 @@ Here's the architecture of the pipeline.
    done, the QueryRunner service returns a custom CloudEvent of type
    `dev.knative.samples.querycompleted`.
 3. The ChartCreator service receives the `querycompleted`
-   event, creates a chart from BigQuery data using `Matplotlib` and saves it to
+   CloudEvent, creates a chart from BigQuery data using `Matplotlib`, and saves it to
    a Cloud Storage bucket.
 4. `Notifier` is another Python service that receives the
    `com.google.cloud.storage.object.finalize` event from the bucket via a
