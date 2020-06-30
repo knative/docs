@@ -49,7 +49,7 @@ Google Kubernetes Engine (GKE) on Google Cloud.
    image using the [ImageSharp](https://github.com/SixLabors/ImageSharp) library, and
    saves the image to the output bucket.
 6. The labeler receives the `fileuploaded` event, extracts labels from the image using the
-   Vision API and saves the labels to the output bucket.
+   Vision API, and saves the labels to the output bucket.
 
 ### Test the pipeline
 
