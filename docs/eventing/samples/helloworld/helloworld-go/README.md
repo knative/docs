@@ -198,6 +198,11 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-go
           kind: Service
           name: helloworld-go
    ```
+1. Use the go tool to create a [`go.mod`](https://github.com/golang/go/wiki/Modules#gomod) manifest.
+
+   ```shell
+   go mod init github.com/knative/docs/docs/serving/samples/hello-world/helloworld-go
+   ```
 
 ## Building and deploying the sample
 
