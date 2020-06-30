@@ -36,7 +36,7 @@ Google Kubernetes Engine (GKE) on Google Cloud.
 ![Image processing pipeline architecture](https://atamel.dev/img/2020/image-processing-pipeline.png)
 
 1. An image is saved to an input Cloud Storage bucket.
-2. Cloud Storage update event is read into Knative by
+2. A Cloud Storage update event is read into Knative by
    [CloudStorageSource](https://github.com/google/knative-gcp/blob/master/docs/examples/cloudstoragesource/README.md).
 3. Filter service receives the Cloud Storage event. It uses Vision API to
    determine if the image is safe. If so, it creates a custom `CloudEvent` of
