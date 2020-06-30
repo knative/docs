@@ -25,7 +25,7 @@ I defined two requirements for the pipeline:
 
 1. Uploaded images are filtered before they are sent
    through the pipeline. For example, no adult themed or violent images are allowed.
-2. Pipeline can contain any number of processing services that can be added or
+2. The pipeline can contain any number of processing services that can be added or
    removed as needed.
 
 ### Architecture
