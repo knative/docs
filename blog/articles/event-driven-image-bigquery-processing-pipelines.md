@@ -38,7 +38,7 @@ Google Kubernetes Engine (GKE) on Google Cloud.
 1. An image is saved to an input Cloud Storage bucket.
 2. A Cloud Storage update event is read into Knative by
    [CloudStorageSource](https://github.com/google/knative-gcp/blob/master/docs/examples/cloudstoragesource/README.md).
-3. Filter service receives the Cloud Storage event. It uses Vision API to
+3. A filter service receives the Cloud Storage event. It uses the Vision API to
    determine if the image is safe. If so, it creates a custom `CloudEvent` of
    type `dev.knative.samples.fileuploaded` and passes it back to `Broker`.
 4. Resizer service receives the `fileuploaded` event, resizes the image using
