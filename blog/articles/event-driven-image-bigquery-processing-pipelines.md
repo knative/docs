@@ -125,7 +125,7 @@ You should get an email with with a chart similar to this in a few minutes:
 
 ## Knative Goodness
 
-In these pipelines, I relied on a few Knative components that greatly simplified
+When creating these example pipelines, I relied on a few Knative components that greatly simplified
 my development. More specifially:
 
 1. [Eventing Sources](https://knative.dev/docs/eventing/sources/) allow you to
