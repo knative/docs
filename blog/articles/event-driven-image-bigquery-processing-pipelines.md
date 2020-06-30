@@ -77,7 +77,7 @@ the resized and watermarked image:
 ## BigQuery Processing Pipeline
 
 This pipeline example is a schedule driven pipeline, which queries
-find the daily COVID-19 cases for a couple of countries. I use a public COVID-19
+and finds the daily number of COVID-19 cases for the UK and Cyprus. I used a public COVID-19
 dataset on BigQuery to get the data, generate some charts and send myself an
 email for each country once a day with those charts.
 
