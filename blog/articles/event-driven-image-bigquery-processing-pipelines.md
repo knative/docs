@@ -87,7 +87,7 @@ Here's the architecture of the pipeline.
 
 ![BigQuery processing pipeline architecture](https://atamel.dev/img/2020/bigquery-processing-pipeline.png)
 
-1. Two `CloudSchedulerSources` are setup for two countries (United Kingdom and
+1. I setup two `CloudSchedulerSources` for two countries (United Kingdom and
    Cyprus) to call the `QueryRunner` service once a day.
 2. The QueryRunner service receives the scheduler events for the UK and Cyprus,
    queries COVID-19 cases for each of them using BigQuery's public
