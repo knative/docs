@@ -89,7 +89,7 @@ Here's the architecture of the pipeline.
 
 1. Two `CloudSchedulerSources` are setup for two countries (United Kingdom and
    Cyprus) to call the `QueryRunner` service once a day.
-2. `QueryRunner` service written in C#. It receives the scheduler event for both
+2. The QueryRunner service receives the scheduler events for the UK and Cyprus,
    countries, queries Covid-19 cases for the country using BigQuery's public
    Covid-19 dataset and saves the result in a separate BigQuery table. Once
    done, `QueryRunner` returns a custom `CloudEvent` of type
