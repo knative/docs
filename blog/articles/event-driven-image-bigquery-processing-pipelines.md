@@ -19,7 +19,7 @@ instructions, as part of my [Knative Tutorial](https://github.com/meteatamel/kna
 
 In this image processing pipeline example, users upload an image to a storage
 bucket on Google Cloud, process the image with a number of different Knative
-services and the processed images are saved to an output bucket.
+services, and save the processed image to an output bucket.
 
 I had 2 main requirements:
 
