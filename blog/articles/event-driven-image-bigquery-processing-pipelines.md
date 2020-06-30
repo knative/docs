@@ -42,7 +42,7 @@ Google Kubernetes Engine (GKE) on Google Cloud.
    determine whether the image is safe or should be filtered. If the image is safe, the filter service creates a custom CloudEvent of
    type `dev.knative.samples.fileuploaded` and passes it back to the broker.
 4. The resizer service receives the `fileuploaded` event, and then resizes the image using the
-   [ImageSharp](https://github.com/SixLabors/ImageSharp) library, saves to the
+   [ImageSharp](https://github.com/SixLabors/ImageSharp) library. The service then saves the
    resized image to the output bucket, creates a custom `CloudEvent` of type
    `dev.knative.samples.fileresized` and passes the event back to `Broker`.
 5. Watermark service receives the `fileresized` event, adds a watermark to the
