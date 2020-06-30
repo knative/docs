@@ -97,7 +97,7 @@ Here's the architecture of the pipeline.
 3. The ChartCreator service receives the `querycompleted`
    CloudEvent, creates a chart from BigQuery data using `Matplotlib`, and saves it to
    a Cloud Storage bucket.
-4. `Notifier` is another Python service that receives the
+4. The notifier service is another receives the
    `com.google.cloud.storage.object.finalize` event from the bucket via a
    `CloudStorageSource` and sends an email notification to users using SendGrid.
 
