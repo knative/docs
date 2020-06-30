@@ -103,7 +103,7 @@ Here's the architecture of the pipeline.
 
 ### Test the pipeline
 
-`CloudSchedulerSource` creates `CloudScheduler` Jobs under the covers:
+The CloudSchedulerSource creates CloudScheduler jobs:
 
 ```bash
 gcloud scheduler jobs list
