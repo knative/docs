@@ -30,6 +30,6 @@ spec:
               simple: "${body.text}"
   sink:
     ref:
-      apiVersion: messaging.knative.dev/v1beta1
+      apiVersion: messaging.knative.dev/v1
       kind: InMemoryChannel
       name: camel-test

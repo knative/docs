@@ -98,7 +98,7 @@ metadata:
   name: me-odd-even-parallel
 spec:
   channelTemplate:
-    apiVersion: messaging.knative.dev/v1beta1
+    apiVersion: messaging.knative.dev/v1
     kind: InMemoryChannel
   branches:
     - filter:
