@@ -46,7 +46,7 @@ Google Kubernetes Engine (GKE) on Google Cloud.
    resized image to the output bucket, creates a custom CloudEvent of type
    `dev.knative.samples.fileresized`, and passes the event back to the broker.
 5. The watermark service receives the `fileresized` event, adds a watermark to the
-   image using [ImageSharp](https://github.com/SixLabors/ImageSharp) library and
+   image using the [ImageSharp](https://github.com/SixLabors/ImageSharp) library, and
    saves the image to the output bucket.
 6. Labeler receives the `fileuploaded` event, extracts labels of the image with
    Vision API and saves the labels to the output bucket.
