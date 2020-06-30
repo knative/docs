@@ -99,7 +99,7 @@ Here's the architecture of the pipeline.
    a Cloud Storage bucket.
 4. The notifier service is another receives the
    `com.google.cloud.storage.object.finalize` CloudEvent from the bucket through a
-   `CloudStorageSource` and sends an email notification to users using SendGrid.
+   CloudStorageSource, and sends an email notification to users using SendGrid.
 
 ### Test the pipeline
 
