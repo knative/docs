@@ -30,7 +30,7 @@ I defined two requirements for the pipeline:
 
 ### Architecture
 
-Here's the architecture of the image processing pipeline. It's deployed to
+This section explains the architecture of the image processing pipeline. The pipeline is deployed to
 Google Kubernetes Engine (GKE) on Google Cloud:
 
 ![Image processing pipeline architecture](https://atamel.dev/img/2020/image-processing-pipeline.png)
