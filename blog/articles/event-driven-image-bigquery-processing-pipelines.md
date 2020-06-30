@@ -21,7 +21,7 @@ In this image processing pipeline example, users upload an image to a storage
 bucket on Google Cloud, process the image with a number of different Knative
 services, and save the processed image to an output bucket.
 
-I had 2 main requirements:
+I defined two requirements for the pipeline:
 
 1. Uploaded images are filtered (eg. no adult or violent images) before sending
    through the pipeline.
