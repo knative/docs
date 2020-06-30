@@ -78,7 +78,7 @@ the resized and watermarked image:
 
 This pipeline example is a schedule driven pipeline, which queries
 and finds the daily number of COVID-19 cases for the UK and Cyprus. I used a public COVID-19
-dataset on BigQuery to get the data, generate some charts and send myself an
+dataset on BigQuery to get the data, generate charts, and send myself one
 email for each country once a day with those charts.
 
 ### Architecture
