@@ -91,7 +91,7 @@ Here's the architecture of the pipeline.
    Cyprus) to call the `QueryRunner` service once a day.
 2. The QueryRunner service receives the scheduler events for the UK and Cyprus,
    queries COVID-19 cases for each of them using BigQuery's public
-   Covid-19 dataset and saves the result in a separate BigQuery table. Once
+   COVID-19 data set, and saves the results in a separate BigQuery table. After this is 
    done, `QueryRunner` returns a custom `CloudEvent` of type
    `dev.knative.samples.querycompleted`.
 3. `ChartCreator` service written in Python. It receives the `querycompleted`
