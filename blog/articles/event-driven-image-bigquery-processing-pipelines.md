@@ -58,7 +58,7 @@ Ipanema in Rio de Janeiro, to the bucket:
 
 ![Beach with sunset](https://atamel.dev/img/2020/beach.jpg)
 
-After a few seconds, I see 3 files in my output bucket:
+After a few seconds, I saw 3 files in my output bucket:
 
 ```sh
 gsutil ls gs://knative-atamel-images-output
