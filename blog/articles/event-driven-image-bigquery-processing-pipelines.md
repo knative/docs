@@ -54,7 +54,7 @@ Google Kubernetes Engine (GKE) on Google Cloud.
 ### Test the pipeline
 
 To test the pipeline, I uploaded a picture from my favorite beach,
-(Ipanema in Rio de Janeiro) to the bucket:
+Ipanema in Rio de Janeiro, to the bucket:
 
 ![Beach with sunset](https://atamel.dev/img/2020/beach.jpg)
 
