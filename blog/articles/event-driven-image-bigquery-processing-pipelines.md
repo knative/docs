@@ -48,7 +48,7 @@ Google Kubernetes Engine (GKE) on Google Cloud.
 5. The watermark service receives the `fileresized` event, adds a watermark to the
    image using the [ImageSharp](https://github.com/SixLabors/ImageSharp) library, and
    saves the image to the output bucket.
-6. Labeler receives the `fileuploaded` event, extracts labels of the image with
+6. The labeler receives the `fileuploaded` event, extracts labels from the image using the
    Vision API and saves the labels to the output bucket.
 
 ### Test the pipeline
