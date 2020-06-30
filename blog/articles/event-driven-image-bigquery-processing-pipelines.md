@@ -129,7 +129,7 @@ When creating these example pipelines, I relied on a few Knative components that
 my development. More specifially:
 
 1. [Eventing Sources](https://knative.dev/docs/eventing/sources/) allow you to
-   read external events in your cluster and [Knative-GCP
+   read external events in your cluster. [Knative-GCP
    Sources](https://github.com/google/knative-gcp#knative-gcp-sources) provide a
    number of eventing sources ready to read events from various Google Cloud
    sources.
