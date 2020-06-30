@@ -69,7 +69,7 @@ gs://knative-atamel-images-output/beach-labels.txt
 ```
 
 We can see the labels `Sky,Body of
-water,Sea,Nature,Coast,Water,Sunset,Horizon,Cloud,Shore` in the text file and
+water,Sea,Nature,Coast,Water,Sunset,Horizon,Cloud,Shore` in the text file, and
 the following resized and watermarked image:
 
 ![Beach with sunset](https://atamel.dev/img/2020/beach-400x400-watermark.jpeg)
