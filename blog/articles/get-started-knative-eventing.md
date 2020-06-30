@@ -1,5 +1,5 @@
 ---
-title: Getting started with Knaitve Eventing using Bitcoin transaction data
+title: Getting started with Knative Eventing using Bitcoin transaction data
 linkTitle: Bitcoin transaction data and Eventing
 author: [Johana Saladas](https://twitter.com/developing4data), software engineer at IBM. 
 date: 2020-05-01
