@@ -19,7 +19,9 @@ aliases:
   - /docs/install/knative-with-pks
 ---
 
-This guide walks you through the installation of the latest version of Knative.
+This guide walks you through the installation of the latest version of
+Knative. Note if you are upgrading an existing installation, follow the
+[instructions here](./upgrade-installation.md).
 
 Knative has two components, which can be installed and used independently or together.
 To help you pick and choose the pieces that are right for you, here is a brief
