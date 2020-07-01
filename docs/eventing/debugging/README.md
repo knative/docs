@@ -186,7 +186,7 @@ kubectl --namespace knative-debug get apiserversource src -o jsonpath='{.spec.si
 ```
 
 Which should return
-`map[apiVersion:messaging.knative.dev/v1beta1 kind:Channel name:chan]`. If it
+`map[apiVersion:messaging.knative.dev/v1 kind:Channel name:chan]`. If it
 doesn't, then `src` was setup incorrectly and its `spec` needs to be fixed.
 Fixing should be as simple as updating its `spec` to have the correct `sink`
 (see [example.yaml](example.yaml)).

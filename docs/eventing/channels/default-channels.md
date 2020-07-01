@@ -42,7 +42,7 @@ metadata:
 data:
   default-ch-config: |
     clusterDefault:
-      apiVersion: messaging.knative.dev/v1beta1
+      apiVersion: messaging.knative.dev/v1
       kind: InMemoryChannel
     namespaceDefaults:
       some-namespace:
@@ -65,7 +65,7 @@ the operator has selected for you.
 For example, this is a valid `Channel` object:
 
 ```yaml
-apiVersion: messaging.knative.dev/v1beta1
+apiVersion: messaging.knative.dev/v1
 kind: Channel
 metadata:
   name: my-channel
@@ -83,14 +83,14 @@ For example, this is the output when the default channel is set using the above
 `ConfigMap` configuration:
 
 ```yaml
-apiVersion: messaging.knative.dev/v1beta1
+apiVersion: messaging.knative.dev/v1
 kind: Channel
 metadata:
   name: my-channel
   namespace: default
 spec:
   channelTemplate:
-    apiVersion: messaging.knative.dev/v1beta1
+    apiVersion: messaging.knative.dev/v1
     kind: InMemoryChannel
 ```
 

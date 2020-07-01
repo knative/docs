@@ -55,7 +55,7 @@ Now that `KafkaChannel` is set as the default channel configuration, you can use
 ```
 cat <<-EOF | kubectl apply -f -
 ---
-apiVersion: messaging.knative.dev/v1beta1
+apiVersion: messaging.knative.dev/v1
 kind: Channel
 metadata:
   name: testchannel-one

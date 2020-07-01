@@ -55,7 +55,7 @@ looks like:
 Omitting irrelevant fields:
 
 ```yaml
-apiVersion: eventing.knative.dev/v1beta1
+apiVersion: eventing.knative.dev/v1
 kind: EventType
 metadata:
   name: dev.knative.source.github.push-34cnb

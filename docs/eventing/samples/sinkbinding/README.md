@@ -111,7 +111,7 @@ Now we will use the heartbeats container to send events to `$K_SINK` every time
 the CronJob runs:
 
 ```yaml
-apiVersion: batch/v1beta1
+apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: heartbeat-cron
