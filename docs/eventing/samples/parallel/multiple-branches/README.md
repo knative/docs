@@ -104,7 +104,7 @@ kubectl -n default create -f ./event-display.yaml
 The `parallel.yaml` file contains the specifications for creating the Parallel.
 
 ```yaml
-apiVersion: flows.knative.dev/v1beta1
+apiVersion: flows.knative.dev/v1
 kind: Parallel
 metadata:
   name: odd-even-parallel
@@ -146,8 +146,8 @@ kubectl create -f ./parallel.yaml
 
 ### Create the PingSource targeting the Parallel
 
-This will create a PingSource which will send a CloudEvent with `{"message":
-"Even or odd?"}` as the data payload every minute.
+This will create a PingSource which will send a CloudEvent with
+`{"message": "Even or odd?"}` as the data payload every minute.
 
 ```yaml
 apiVersion: sources.knative.dev/v1alpha2
@@ -159,7 +159,7 @@ spec:
   data: '{"message": "Even or odd?"}'
   sink:
     ref:
-      apiVersion: flows.knative.dev/v1alpha2
+      apiVersion: flows.knative.dev/v1
       kind: Parallel
       name: odd-even-parallel
 ```

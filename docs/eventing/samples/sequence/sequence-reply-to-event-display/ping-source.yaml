@@ -7,6 +7,6 @@ spec:
   jsonData: '{"message": "Hello world!"}'
   sink:
     ref:
-      apiVersion: flows.knative.dev/v1beta1
+      apiVersion: flows.knative.dev/v1
       kind: Sequence
       name: sequence
