@@ -15,8 +15,11 @@ a class of events from a particular software system. Since different event sourc
 by different Custom Resources, this page provides an index of the available source resource types as
 well as links to installation instructions.
 
-This is a non-exhaustive list of Event sources for Knative.
+For details how to write an Event Source consult one of the following tutorials:
+* [Write an EventSource using ContainerSource](../write-event-source-easy-way)
+* [Write an EventSource Controller](../write-event-source)
 
+Below is a non-exhaustive list of Event sources for Knative.
 
 ### Inclusion in this list is not an endorsement, nor does it imply any level of support.
 
@@ -84,3 +87,4 @@ These are containers intended to be used with `SinkBinding`. See the docs [here]
 Name | Status | Support | Description
 --- | --- | --- | ---
 [Konnek](https://konnek.github.io/docs/#/) | Active Development | None | Retrieves events from cloud platforms (like AWS and GCP) and transforms them into CloudEvents for consumption in Knative.
+
