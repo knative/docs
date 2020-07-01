@@ -1,6 +1,5 @@
 ---
-title: "Writing an Event Source using the easy way"
-linkTitle: "Event Source - easy way"
+title: "Writing an Event Source using ContainerSource"
 weight: 10
 type: "docs"
 ---

@@ -1,5 +1,5 @@
 ---
-title: "Writing an Event Source"
+title: "Writing an Event Source controller"
 weight: 60
 type: "docs"
 ---
