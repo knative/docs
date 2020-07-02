@@ -81,7 +81,7 @@ via Kafka Source
    etc...:
 
    ```yaml
-   apiVersion: sources.knative.dev/v1alpha1
+   apiVersion: sources.knative.dev/v1beta1
    kind: KafkaSource
    metadata:
      name: kafka-source
@@ -120,7 +120,7 @@ Create the KafkaBinding that will inject kafka bootstrap information into select
 1. Modify `kafka-binding.yaml` accordingly with bootstrap servers etc...:
 
    ```yaml
-   apiVersion: bindings.knative.dev/v1alpha1
+   apiVersion: bindings.knative.dev/v1beta1
    kind: KafkaBinding
    metadata:
      name: kafka-binding-test
@@ -232,7 +232,7 @@ These files are expected to be in pem format, if it is in other format like jks
 
 2. Apply the kafkabinding-tls.yaml, change bootstrapServers accordingly.
    ```yaml
-   apiVersion: sources.knative.dev/v1alpha1
+   apiVersion: sources.knative.dev/v1beta1
    kind: KafkaBinding
    metadata:
     name: kafka-source-with-tls

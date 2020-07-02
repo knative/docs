@@ -241,15 +241,17 @@ the next topic: How do we actually populate the registry in the first place?
   like.
 
   ```yaml
-  apiVersion: sources.eventing.knative.dev/v1alpha1
+  apiVersion: sources.knative.dev/v1beta1
   kind: KafkaSource
   metadata:
     name: kafka-sample
     namespace: default
   spec:
-    consumerGroup: knative-group
-    bootstrapServers: my-cluster-kafka-bootstrap.kafka:9092
-    topics: knative-demo,news
+    bootstrapServers:
+     - my-cluster-kafka-bootstrap.kafka:9092
+    topics:
+     - knative-demo
+      - news
     sink:
       apiVersion: eventing.knative.dev/v1
       kind: Broker
