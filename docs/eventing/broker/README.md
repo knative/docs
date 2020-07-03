@@ -198,6 +198,7 @@ metadata:
   name: my-service-trigger
   namespace: default
 spec:
+  broker: default
   filter:
     attributes:
       type: dev.knative.sources.ping
@@ -222,7 +223,7 @@ metadata:
   name: my-service-trigger
   namespace: default
 spec:
-  broker: default # Defaulted by the Webhook.
+  broker: default
   filter:
     attributes:
       type: dev.knative.sources.ping

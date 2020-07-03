@@ -129,6 +129,7 @@ simple Knative Service that dumps incoming messages to its log and creates a
      name: testevents-trigger
      namespace: default
    spec:
+     broker: default
      subscriber:
        ref:
          apiVersion: serving.knative.dev/v1

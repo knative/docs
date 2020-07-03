@@ -4,6 +4,7 @@ metadata:
   name: iot-demo
   namespace: default
 spec:
+  broker: default
   subscriber:
     ref:
       apiVersion: serving.knative.dev/v1
