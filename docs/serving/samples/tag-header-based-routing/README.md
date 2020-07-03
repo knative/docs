@@ -6,7 +6,7 @@ The feature "Tag Header Based Routing" allows users to send requests directly to
 the same URL of Knative Service. In order to achieve this, users only need to set the specific header "Knative-Serving-Tag:
 {revision-tag}" into the request.
 
-Currently Istio and Contour Ingress support this feature.
+Currently Istio, Contour and Kourier Ingress support this feature.
 
 ## Prerequestie
 
