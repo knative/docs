@@ -182,7 +182,6 @@ Kubernetes secret and then configure the `knative-ingress-gateway`:
       configuration:
 
       ```yaml
-      ---
       tls:
         mode: SIMPLE
         privateKey: /etc/istio/ingressgateway-certs/tls.key
