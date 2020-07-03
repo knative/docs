@@ -250,6 +250,7 @@ to receive. Your `Broker` uses triggers to forward events to the right consumers
     metadata:
       name: hello-display
     spec:
+      broker: default
       filter:
         attributes:
           type: greeting
@@ -272,6 +273,7 @@ to receive. Your `Broker` uses triggers to forward events to the right consumers
     metadata:
       name: goodbye-display
     spec:
+      broker: default
       filter:
         attributes:
           source: sendoff

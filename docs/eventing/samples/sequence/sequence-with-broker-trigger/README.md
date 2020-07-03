@@ -165,6 +165,7 @@ kind: Trigger
 metadata:
   name: sequence-trigger
 spec:
+  broker: default
   filter:
     attributes:
       type: dev.knative.sources.ping
@@ -201,6 +202,7 @@ kind: Trigger
 metadata:
   name: display-trigger
 spec:
+  broker: default
   filter:
     attributes:
       type: samples.http.mod3
