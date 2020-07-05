@@ -41,7 +41,6 @@ all the YAML files deployed in this sample to point at that namespace.
      name: events-sa
      namespace: default
    
-   ---
    apiVersion: rbac.authorization.k8s.io/v1
    kind: ClusterRole
    metadata:
@@ -56,7 +55,6 @@ all the YAML files deployed in this sample to point at that namespace.
          - list
          - watch
    
-   ---
    apiVersion: rbac.authorization.k8s.io/v1
    kind: ClusterRoleBinding
    metadata:
@@ -136,7 +134,6 @@ simple Knative Service that dumps incoming messages to its log and creates a
          kind: Service
          name: event-display
 
-   ---
    # This is a very simple Knative Service that writes the input request to its log.
    
    apiVersion: serving.knative.dev/v1
