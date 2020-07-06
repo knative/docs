@@ -32,77 +32,13 @@ To complete this guide, you will need the following installed and running:
 
 - Knative Eventing component.
 
-  - Knative Eventing in-memory channel.
-
 **Important Note:** Some Knative Eventing features do not work when using
 Minikube due to [this](https://github.com/kubernetes/minikube/issues/1568) bug.
 For local testing you can use [kind](https://github.com/kubernetes-sigs/kind).
 
 ### Installing Knative Eventing
 
-If you previously [created a Knative cluster](../install), you might already
-have Knative Eventing installed and running. You can check to see if the
-Eventing component exists on your cluster by running:
-
-```sh
-kubectl get pods --namespace knative-eventing
-```
-
-If the `knative-eventing` namespace or the `imc-controller-*` does not exist,
-use the following steps to install Knative Eventing with the in-memory channel:
-
-1. Make sure that you have a functioning Kubernetes cluster. See the
-   [Comprehensive Install guide](../install) for more information.
-
-   - Old versions of Knative Serving doesn't necessarily work well with latest
-     Knative Eventing, so try to install the latest version of Knative Serving.
-
-   - If your Kubernetes cluster comes with pre-installed Istio, make sure it has
-     `cluster-local-gateway`
-     [deployed](https://github.com/knative/serving/blob/master/DEVELOPMENT.md#deploy-istio).
-     Depending on which Istio version you have, you'd need to apply the
-     `istio-knative-extras.yaml` in the corresponding version folder at
-     [here](https://github.com/knative/serving/tree/{{< branch >}}/third_party).
-
-1. Install the Eventing CRDs by running the following command:
-
-   ```sh
-   kubectl apply --selector knative.dev/crd-install=true \
-   --filename {{< artifact repo="eventing" file="eventing.yaml" >}}
-   ```
-
-1. Finish installing Eventing resources by running the following command:
-
-   ```sh
-   kubectl apply --filename {{< artifact repo="eventing" file="eventing.yaml" >}}
-   ```
-
-   Installing the CRDs first can prevent race conditions, which might cause
-   failures during the install. Race conditions exist during install because a
-   CRD must be defined before an instance of that resource can be created.
-   Defining all CRDs before continuing with the rest of the installation
-   prevents this problem.
-
-1. Confirm that Knative Eventing is correctly installed by running the following
-   command:
-
-   ```sh
-   kubectl get pods --namespace knative-eventing
-   ```
-
-   This will return the following result:
-
-   ```sh
-   NAME                                    READY   STATUS    RESTARTS   AGE
-   broker-controller-56b4d58667-fm979      1/1     Running   0          4m36s
-   broker-filter-5bdbc8d8dd-kpswx          1/1     Running   0          4m35s
-   broker-ingress-d896b6b46-4nbtr          1/1     Running   0          4m35s
-   eventing-controller-5fc5645584-qvspl    1/1     Running   0          4m36s
-   eventing-webhook-7674b867dc-zw9qh       1/1     Running   0          4m36s
-   imc-controller-6b548d6468-gnbkn         1/1     Running   0          4m35s
-   imc-dispatcher-655cdf6ff6-mkc29         1/1     Running   0          4m35s
-   mt-broker-controller-6d66c4c6f6-xdn7b   1/1     Running   0          4m35s
-   ```
+Install the [Knative Eventing](https://knative.dev/development/install/any-kubernetes-cluster/#installing-the-eventing-component).
 
 ## Setting up Knative Eventing Resources
 
