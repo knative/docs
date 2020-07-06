@@ -144,7 +144,8 @@ eventing resources you need to manage events.
 
 #### Optional Sugar Controller
 
-When installed, the [Sugar Controller for Knative Eventing](../install#optional-eventing-extensions)
+When installed, the
+[Sugar Controller for Knative Eventing](../install#optional-eventing-extensions)
 will add a controller that reacts to special labels and annotations for your
 resources, you can skip manually creating a Broker in the above step and instead
 label a namespace:
@@ -369,9 +370,10 @@ events based on the Cloud Event context attributes.
    ```
 
    If the triggers are correctly configured, they will be ready and pointing to
-   the correct **Broker** (the default broker) and **SUBSCRIBER_URI**
-   (triggerName.namespaceName.svc.cluster.local). If this is not the case, see
-   the [Debugging Guide](./debugging/README.md) to help troubleshoot the issue.
+   the correct **Broker** (the default broker) and **SUBSCRIBER_URI** has a
+   value similar to (triggerName.namespaceName.svc.cluster.local) _exact value
+   dependent on Broker implementation_. If this is not the case, see the
+   [Debugging Guide](./debugging/README.md) to help troubleshoot the issue.
 
 You have now created all of the resources needed to receive and manage events.
 You created the `Broker`, which manages the events sent to event consumers with
