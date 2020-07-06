@@ -144,7 +144,7 @@ eventing resources you need to manage events.
 
 #### Optional Sugar Controller
 
-When installed, the [Sugar Controller for Knative Eventing](TODO:: Link TBD)
+When installed, the [Sugar Controller for Knative Eventing](../install#optional-eventing-extensions)
 will add a controller that reacts to special labels and annotations for your
 resources, you can skip manually creating a Broker in the above step and instead
 label a namespace:

@@ -634,15 +634,28 @@ At this point, you have a basic installation of Knative Eventing!
 
    <!-- This indentation is important for things to render properly. -->
    {{< tabs name="eventing_extensions" >}}
-{{% tab name="Enable Broker" %}}
+{{% tab name="Sugar Controller" %}}
 
 <!-- Unclear when this feature came in -->
-{{< feature-state version="v0.5" state="alpha" >}}
+{{< feature-state version="v0.16" state="alpha" >}}
+
+The following command installs the Github Source:
+
+   ```bash
+   kubectl apply --filename {{< artifact repo="eventing" file="eventing-sugar-controller.yaml" >}}
+   ```
+
+The Knative Eventing Sugar Controller will react to special labels and annotations and produce Eventing resources. For example:
+
+ - When a Namespace is labeled with `eventing.knative.dev/injection=enabled`, the controller will create a default broker
+   in that namespace.
+ - When a Trigger is annotated with `eventing.knative.dev/injection=enabled`, the controller will create a Broker named 
+   by that Trigger in the Trigger's Namespace. 
 
 The following command enables the default Broker on a namespace (here `default`):
 
    ```bash
-   kubectl label namespace default knative-eventing-injection=enabled
+   kubectl label namespace default eventing.knative.dev/injection=enabled
    ```
 
 {{< /tab >}}
