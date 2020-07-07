@@ -138,13 +138,18 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-go
    Hub username.
 
    ```yaml
-   # Namespace for sample application with eventing enabled
+    # Namespace for sample application
     apiVersion: v1
     kind: Namespace
     metadata:
       name: knative-samples
-      labels:
-          knative-eventing-injection: enabled
+    ---
+    # A default broker
+    apiVersion: eventing.knative.dev/v1
+    kind: Broker
+    metadata:
+      name: default
+    spec: {}
     ---
     # Helloworld-go app deploment
     apiVersion: apps/v1
@@ -230,13 +235,14 @@ folder) you're ready to build and deploy the sample app.
    kubectl apply --filename sample-app.yaml
    ```
 
-   1. Above command created a namespace `knative-samples` and labelled it with
-      `knative-eventing-injection=enabled`, to enable eventing in the namespace.
+   1. Above command created a namespace `knative-samples` and create a default Broker it.
       Verify using the following command:
 
       ```shell
-      kubectl get ns knative-samples --show-labels
+      kubectl get broker --namespace knative-samples
       ```
+      
+      _Note_: you can also use injection based on labels with the [Eventing Sugar Controller](../../../../install/any-kubernetes-cluster.md). 
 
    1. It deployed the helloworld-go app as a K8s Deployment and created a K8s
       service names helloworld-go. Verify using the following command.

@@ -24,7 +24,12 @@ all the YAML files deployed in this sample to point at that namespace.
 1. Create the `default` Broker in your namespace:
 
    ```shell
-   kubectl label namespace default knative-eventing-injection=enabled
+   kubectl create -f - <<EOF
+   apiVersion: eventing.knative.dev/v1
+   kind: Broker
+   metadata:
+    name: default
+   EOF
    ```
 
 ### Service Account

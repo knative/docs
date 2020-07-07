@@ -1,10 +1,15 @@
-# Namespace for sample application with eventing enabled
+# Namespace for sample application
 apiVersion: v1
 kind: Namespace
 metadata:
   name: knative-samples
-  labels:
-       knative-eventing-injection: enabled
+---
+# A default broker
+apiVersion: eventing.knative.dev/v1
+kind: Broker
+metadata:
+  name: default
+spec: {}
 ---
 # Helloworld-go app deployment
 apiVersion: apps/v1

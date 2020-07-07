@@ -22,10 +22,15 @@ The functions used in these examples live in
 
 ### Creating the Broker
 
-The easiest way to create a Broker is to annotate your namespace:
+To create the cluster default Broker type:
 
 ```shell
-kubectl label namespace default knative-eventing-injection=enabled
+kubectl create -f - <<EOF
+apiVersion: eventing.knative.dev/v1
+kind: Broker
+metadata:
+ name: default
+EOF
 ```
 
 ### Create the Knative Services

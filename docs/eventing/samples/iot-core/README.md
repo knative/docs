@@ -90,7 +90,12 @@ export IOTCORE_TOPIC_DEVICE="iot-demo-device-pubsub-topic"
 1. Install the default `Broker`.
 
    ```shell
-   kubectl label namespace default knative-eventing-injection=enabled
+   kubectl create -f - <<EOF
+   apiVersion: eventing.knative.dev/v1
+   kind: Broker
+   metadata:
+    name: default
+   EOF
    ```
 
 #### GCP PubSub Source

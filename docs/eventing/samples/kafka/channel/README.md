@@ -80,10 +80,15 @@ The Apache Kafka topic that is created by the channel implementation is prefixed
 
 ## Configuring the Knative broker for Apache Kafka channels
 
-To setup a broker that will use the new default Kafka channels, you must inject a new _default_ broker, using the command:
+To setup a broker that will use the new default Kafka channels, you must create a new _default_ broker, using the command:
 
-```
-kubectl label namespace default knative-eventing-injection=enabled
+```shell
+kubectl create -f - <<EOF
+apiVersion: eventing.knative.dev/v1
+kind: Broker
+metadata:
+ name: default
+EOF
 ```
 
 This will give you two pods, such as:
