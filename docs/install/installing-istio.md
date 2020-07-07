@@ -46,6 +46,8 @@ Istio without automatic sidecar injection. This install is also recommended for
 users who don't need the Istio service mesh, or who want to enable the service
 mesh by [manually injecting the Istio sidecars][1].
 
+#### Installing Istio without sidecar injection
+
 Enter the following command to install Istio:
 
 ```shell
