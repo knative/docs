@@ -138,70 +138,70 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-go
    Hub username.
 
    ```yaml
-    # Namespace for sample application
-    apiVersion: v1
-    kind: Namespace
-    metadata:
-      name: knative-samples
-    ---
-    # A default broker
-    apiVersion: eventing.knative.dev/v1
-    kind: Broker
-    metadata:
-      name: default
-    spec: {}
-    ---
-    # Helloworld-go app deploment
-    apiVersion: apps/v1
-    kind: Deployment
-    metadata:
-      name: helloworld-go
-    spec:
-      replicas: 1
-      selector:
-        matchLabels: &labels
-          app: helloworld-go
-      template:
-        metadata:
-          labels: *labels
-        spec:
-          containers:
-            - name: helloworld-go
-              image: docker.io/{username}/helloworld-go
+   # Namespace for sample application
+   apiVersion: v1
+   kind: Namespace
+   metadata:
+     name: knative-samples
+   ---
+   # A default broker
+   apiVersion: eventing.knative.dev/v1
+   kind: Broker
+   metadata:
+     name: default
+   spec: {}
+   ---
+   # Helloworld-go app deploment
+   apiVersion: apps/v1
+   kind: Deployment
+   metadata:
+     name: helloworld-go
+   spec:
+     replicas: 1
+     selector:
+       matchLabels: &labels
+         app: helloworld-go
+     template:
+       metadata:
+         labels: *labels
+       spec:
+         containers:
+           - name: helloworld-go
+             image: docker.io/{username}/helloworld-go
 
-    ---
+   ---
 
-    # Service that exposes helloworld-go app.
-    # This will be the subscriber for the Trigger
-      kind: Service
-      apiVersion: v1
-      metadata:
-        name: helloworld-go
-      spec:
-        selector:
-          app: helloworld-go
-        ports:
-        - protocol: TCP
-          port: 80
-          targetPort: 8080
-    ---
-    # Knative Eventing Trigger to trigger the helloworld-go service
-    apiVersion: eventing.knative.dev/v1
-    kind: Trigger
-    metadata:
-      name: helloworld-go
-      namespace: knative-samples
-    spec:
-      broker: default
-      filter:
-        attributes:
-          type: dev.knative.samples.helloworld
-          source: dev.knative.samples/helloworldsource
-      subscriber:
-        ref:
-          apiVersion: v1
-          kind: Service
-          name: helloworld-go
+   # Service that exposes helloworld-go app.
+   # This will be the subscriber for the Trigger
+   kind: Service
+   apiVersion: v1
+   metadata:
+     name: helloworld-go
+   spec:
+     selector:
+       app: helloworld-go
+     ports:
+     - protocol: TCP
+       port: 80
+       targetPort: 8080
+   ---
+   # Knative Eventing Trigger to trigger the helloworld-go service
+   apiVersion: eventing.knative.dev/v1
+   kind: Trigger
+   metadata:
+     name: helloworld-go
+     namespace: knative-samples
+   spec:
+     broker: default
+     filter:
+       attributes:
+         type: dev.knative.samples.helloworld
+         source: dev.knative.samples/helloworldsource
+     subscriber:
+       ref:
+         apiVersion: v1
+         kind: Service
+         name: helloworld-go
    ```
 1. Use the go tool to create a [`go.mod`](https://github.com/golang/go/wiki/Modules#gomod) manifest.
 
