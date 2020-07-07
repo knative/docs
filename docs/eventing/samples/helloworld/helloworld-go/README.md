@@ -170,7 +170,6 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-go
              image: docker.io/{username}/helloworld-go
 
    ---
-
    # Service that exposes helloworld-go app.
    # This will be the subscriber for the Trigger
    kind: Service
@@ -181,9 +180,9 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-go
      selector:
        app: helloworld-go
      ports:
-     - protocol: TCP
-       port: 80
-       targetPort: 8080
+       - protocol: TCP
+         port: 80
+         targetPort: 8080
    ---
    # Knative Eventing Trigger to trigger the helloworld-go service
    apiVersion: eventing.knative.dev/v1
@@ -203,7 +202,9 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-go
          kind: Service
          name: helloworld-go
    ```
-1. Use the go tool to create a [`go.mod`](https://github.com/golang/go/wiki/Modules#gomod) manifest.
+
+1. Use the go tool to create a
+   [`go.mod`](https://github.com/golang/go/wiki/Modules#gomod) manifest.
 
    ```shell
    go mod init github.com/knative/docs/docs/serving/samples/hello-world/helloworld-go
@@ -235,14 +236,15 @@ folder) you're ready to build and deploy the sample app.
    kubectl apply --filename sample-app.yaml
    ```
 
-   1. Above command created a namespace `knative-samples` and create a default Broker it.
-      Verify using the following command:
+   1. Above command created a namespace `knative-samples` and create a default
+      Broker it. Verify using the following command:
 
       ```shell
       kubectl get broker --namespace knative-samples
       ```
-      
-      _Note_: you can also use injection based on labels with the [Eventing Sugar Controller](../../../../install/any-kubernetes-cluster.md). 
+
+      _Note_: you can also use injection based on labels with the
+      [Eventing Sugar Controller](../../../../install/any-kubernetes-cluster.md).
 
    1. It deployed the helloworld-go app as a K8s Deployment and created a K8s
       service names helloworld-go. Verify using the following command.
@@ -277,7 +279,8 @@ with correct CloudEvent headers set.
    ```shell
    kubectl --namespace knative-samples get broker default
    ```
-1. Run the following in the SSH terminal. Please replace the URL with the URL of the default broker.
+1. Run the following in the SSH terminal. Please replace the URL with the URL of
+   the default broker.
 
    ```shell
    curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/knative-samples/default" \
@@ -298,9 +301,11 @@ Helloworld-go app logs the context and the msg of the above event, and replies
 back with another event.
 
 1.  Display helloworld-go app logs
+
     ```shell
     kubectl --namespace knative-samples logs -l app=helloworld-go --tail=50
     ```
+
     You should see something similar to:
 
     ```shell
