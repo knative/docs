@@ -149,6 +149,7 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-go
    kind: Broker
    metadata:
      name: default
+     namespace: knative-samples
    spec: {}
    ---
    # Helloworld-go app deploment
@@ -156,6 +157,7 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-go
    kind: Deployment
    metadata:
      name: helloworld-go
+     namespace: knative-samples
    spec:
      replicas: 1
      selector:
@@ -176,6 +178,7 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-go
    apiVersion: v1
    metadata:
      name: helloworld-go
+     namespace: knative-samples
    spec:
      selector:
        app: helloworld-go
