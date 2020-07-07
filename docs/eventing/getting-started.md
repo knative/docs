@@ -245,7 +245,7 @@ events based on the Cloud Event context attributes.
 
    ```sh
    kubectl --namespace event-example apply --filename - << END
-   apiVersion: eventing.knative.dev/v1alpha1
+   apiVersion: eventing.knative.dev/v1
    kind: Trigger
    metadata:
      name: hello-display
@@ -269,7 +269,7 @@ events based on the Cloud Event context attributes.
 
    ```sh
    kubectl --namespace event-example apply --filename - << END
-   apiVersion: eventing.knative.dev/v1alpha1
+   apiVersion: eventing.knative.dev/v1
    kind: Trigger
    metadata:
      name: goodbye-display

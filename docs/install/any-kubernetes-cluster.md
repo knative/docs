@@ -659,7 +659,7 @@ metadata:
   namespace: knative-eventing
 data:
   channelTemplateSpec: |
-    apiVersion: messaging.knative.dev/v1beta1
+    apiVersion: messaging.knative.dev/v1
     kind: InMemoryChannel
 ---
 apiVersion: v1
