@@ -50,4 +50,4 @@ EOF
 
 The example above filters events from the `default` Broker that are of type
 `dev.knative.foo.bar` AND have the extension `myextension` with the value
-`my-extension-value`. 
+`my-extension-value`.
