@@ -12,7 +12,7 @@ Create a new object by configuring the YAML file as follows:
 ```
 cat <<-EOF | kubectl apply -f -
 ---
-apiVersion: messaging.knative.dev/v1alpha1
+apiVersion: messaging.knative.dev/v1beta1
 kind: KafkaChannel
 metadata:
   name: my-kafka-channel
@@ -40,7 +40,7 @@ data:
   # Configuration for defaulting channels that do not specify CRD implementations.
   default-ch-config: |
     clusterDefault:
-      apiVersion: messaging.knative.dev/v1alpha1
+      apiVersion: messaging.knative.dev/v1beta1
       kind: KafkaChannel
       spec:
         numPartitions: 3

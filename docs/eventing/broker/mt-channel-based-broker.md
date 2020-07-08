@@ -85,7 +85,7 @@ metadata:
   namespace: knative-eventing
 data:
   channelTemplateSpec: |
-    apiVersion: messaging.knative.dev/v1alpha1
+    apiVersion: messaging.knative.dev/v1beta1
     kind: KafkaChannel
     spec:
       numPartitions: 3
