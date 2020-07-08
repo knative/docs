@@ -2,8 +2,6 @@
 title: "Configuring autoscaling "
 weight: 10
 type: "docs"
-aliases:
-- /docs/serving/configuring-the-autoscaler/
 ---
 
 One of the main properties of serverless platforms is their ability to scale an application to closely match its incoming demand. That requires watching load as it flows into the application and adjusting the scale based on the respective metrics. It's the job of the autoscaling component of Knative Serving to do exactly that.
