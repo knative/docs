@@ -2,8 +2,6 @@
 title: "Sequence"
 weight: 20
 type: "docs"
-aliases:
-   - /docs/eventing/sequence.md
 ---
 
 Sequence CRD provides a way to define an in-order list of functions that will be
@@ -46,8 +44,7 @@ Sequence has four parts for the Status:
 ## Examples
 
 For each of these examples below, we'll use
-[`CronJobSource`](https://knative.dev/docs/eventing/samples/cronjob-source/) as
-the source of events.
+CronJobSource as the source of events.
 
 We also use a very simple
 [transformer](https://github.com/vaikas-google/transformer) which performs very
