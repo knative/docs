@@ -1165,7 +1165,7 @@ ServiceStatus
 <p>
 (<em>Appears on:</em>
 <a href="#serving.knative.dev/v1beta1.Configuration">Configuration</a>, 
-<a href="#serving.knative.dev/v1.Configuration">Configuration</a>, 
+<a href="#serving.knative.dev/v1.Configuration">Configuration</a>,
 <a href="#serving.knative.dev/v1.ServiceSpec">ServiceSpec</a>)
 </p>
 <p>
