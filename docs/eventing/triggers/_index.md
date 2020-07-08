@@ -1,6 +1,6 @@
 ---
-title: "Brokers"
-weight: 60
+title: "Triggers"
+weight: 70
 type: "docs"
 ---
 
