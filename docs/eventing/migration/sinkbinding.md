@@ -2,8 +2,6 @@
 title: "SinkBinding alternative to ContainerSource"
 weight: 20
 type: "docs"
-aliases:
-   - /docs/eventing/sinkbinding.md
 ---
 
 `ContainerSource` can be seen as the combination of
