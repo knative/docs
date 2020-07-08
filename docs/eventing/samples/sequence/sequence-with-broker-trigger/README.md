@@ -1,14 +1,15 @@
 We are going to create the following logical configuration. We create a
-PingSource, feeding events into the Broker, then we create a `Filter` that
-wires those events into a [`Sequence`](../../../flows/sequence.md) consisting of 3
+PingSource, feeding events into the Broker, then we create a `Filter` that wires
+those events into a [`Sequence`](../../../flows/sequence.md) consisting of 3
 steps. Then we take the end of the Sequence and feed newly minted events back
 into the Broker and create another Trigger which will then display those events.
 
 ## Prerequisites
 
-For this example, we'll assume you have set up an `InMemoryChannel` as well as Knative Serving (for our functions). The examples
-use `default` namespace, again, if your broker lives in another Namespace, you
-will need to modify the examples to reflect this.
+For this example, we'll assume you have set up an `InMemoryChannel` as well as
+Knative Serving (for our functions). The examples use `default` namespace,
+again, if your broker lives in another Namespace, you will need to modify the
+examples to reflect this.
 
 If you want to use different type of `Channel`, you will have to modify the
 `Sequence.Spec.ChannelTemplate` to create the appropriate Channel resources.
@@ -22,10 +23,15 @@ The functions used in these examples live in
 
 ### Creating the Broker
 
-The easiest way to create a Broker is to annotate your namespace:
+To create the cluster default Broker type:
 
 ```shell
-kubectl label namespace default knative-eventing-injection=enabled
+kubectl create -f - <<EOF
+apiVersion: eventing.knative.dev/v1
+kind: Broker
+metadata:
+ name: default
+EOF
 ```
 
 ### Create the Knative Services

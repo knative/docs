@@ -1,10 +1,13 @@
-This example shows how to wire [Kubernetes cluster events](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#event-v1-core),
-using the API Server Source, for consumption by a function that has been implemented as a Knative Service.
+This example shows how to wire
+[Kubernetes cluster events](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#event-v1-core),
+using the API Server Source, for consumption by a function that has been
+implemented as a Knative Service.
 
 ## Before you begin
 
-1. You must have a Knative cluster running both the Serving and Eventing components.
-   To learn how to install the required components, see [Installing Knative](../../../install).
+1. You must have a Knative cluster running both the Serving and Eventing
+   components. To learn how to install the required components, see
+   [Installing Knative](../../../install).
 1. You can follow the steps below to create new files, or you clone a copy from
    the repo by running:
 
@@ -24,7 +27,12 @@ all the YAML files deployed in this sample to point at that namespace.
 1. Create the `default` Broker in your namespace:
 
    ```shell
-   kubectl label namespace default knative-eventing-injection=enabled
+   kubectl create -f - <<EOF
+   apiVersion: eventing.knative.dev/v1
+   kind: Broker
+   metadata:
+    name: default
+   EOF
    ```
 
 ### Service Account
@@ -40,7 +48,7 @@ all the YAML files deployed in this sample to point at that namespace.
    metadata:
      name: events-sa
      namespace: default
-   
+
    ---
    apiVersion: rbac.authorization.k8s.io/v1
    kind: ClusterRole
@@ -55,7 +63,7 @@ all the YAML files deployed in this sample to point at that namespace.
          - get
          - list
          - watch
-   
+
    ---
    apiVersion: rbac.authorization.k8s.io/v1
    kind: ClusterRoleBinding
@@ -71,10 +79,11 @@ all the YAML files deployed in this sample to point at that namespace.
        namespace: default
    ```
 
-   If you want to re-use an existing Service Account with the appropriate permissions,
-   you need to modify the `serviceaccount.yaml`.
+   If you want to re-use an existing Service Account with the appropriate
+   permissions, you need to modify the `serviceaccount.yaml`.
 
-2. Enter the following command to create the service account from `serviceaccount.yaml`:
+2. Enter the following command to create the service account from
+   `serviceaccount.yaml`:
 
    ```shell
    kubectl apply --filename serviceaccount.yaml
@@ -105,8 +114,8 @@ all the YAML files deployed in this sample to point at that namespace.
          name: default
    ```
 
-   If you want to consume events from a different namespace or use a
-   different `Service Account`, you need to modify `k8s-events.yaml` accordingly.
+   If you want to consume events from a different namespace or use a different
+   `Service Account`, you need to modify `k8s-events.yaml` accordingly.
 
 2. Enter the following command to create the event source:
 
@@ -138,7 +147,7 @@ simple Knative Service that dumps incoming messages to its log and creates a
 
    ---
    # This is a very simple Knative Service that writes the input request to its log.
-   
+
    apiVersion: serving.knative.dev/v1
    kind: Service
    metadata:
@@ -177,8 +186,8 @@ kubectl delete pod busybox
 
 We will verify that the Kubernetes events were sent into the Knative eventing
 system by looking at our message dumper function logs. If you deployed the
-[Trigger](#trigger), continue using this section. If not, you will
-need to look downstream yourself:
+[Trigger](#trigger), continue using this section. If not, you will need to look
+downstream yourself:
 
 ```shell
 kubectl get pods
