@@ -2,8 +2,6 @@
 title: "Migrating from CronJobSource to the PingSource"
 weight: 20
 type: "docs"
-aliases:
-   - /docs/eventing/ping.md
 ---
 
 In 0.13, the deprecated `CronJobSource` should be converted to the `PingSource`.
