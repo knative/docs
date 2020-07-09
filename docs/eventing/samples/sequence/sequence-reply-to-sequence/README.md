@@ -120,7 +120,7 @@ If you are using a different type of Channel, you need to change the
 spec.channelTemplate to point to your desired Channel.
 
 ```yaml
-apiVersion: flows.knative.dev/v1beta1
+apiVersion: flows.knative.dev/v1
 kind: Sequence
 metadata:
   name: first-sequence
@@ -144,7 +144,7 @@ spec:
   reply:
     ref:
       kind: Sequence
-      apiVersion: flows.knative.dev/v1beta1
+      apiVersion: flows.knative.dev/v1
       name: second-sequence
 ```
 
@@ -162,7 +162,7 @@ If you are using a different type of Channel, you need to change the
 spec.channelTemplate to point to your desired Channel.
 
 ```yaml
-apiVersion: flows.knative.dev/v1beta1
+apiVersion: flows.knative.dev/v1
 kind: Sequence
 metadata:
   name: second-sequence
@@ -189,7 +189,6 @@ spec:
       apiVersion: serving.knative.dev/v1
       name: event-display
 ```
-
 
 ```shell
 kubectl -n default create -f ./sequence2.yaml
@@ -218,8 +217,8 @@ kubectl -n default create -f ./event-display.yaml
 
 ### Create the PingSource targeting the first Sequence
 
-This will create a PingSource which will send a CloudEvent with `{"message":
-"Hello world!"}` as the data payload every 2 minutes.
+This will create a PingSource which will send a CloudEvent with
+`{"message": "Hello world!"}` as the data payload every 2 minutes.
 
 ```yaml
 apiVersion: sources.knative.dev/v1alpha2

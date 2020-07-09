@@ -7,6 +7,6 @@ spec:
   jsonData: '{"message": "Even or odd?"}'
   sink:
     ref:
-      apiVersion: flows.knative.dev/v1beta1
+      apiVersion: flows.knative.dev/v1
       kind: Parallel
       name: me-odd-even-parallel

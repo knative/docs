@@ -6,10 +6,10 @@ into the Broker and create another Trigger which will then display those events.
 
 ## Prerequisites
 
-For this example, we'll assume you have set up an `InMemoryChannel` as well as
-Knative Serving (for our functions). The examples use `default` namespace,
-again, if your broker lives in another Namespace, you will need to modify the
-examples to reflect this.
+- Knative Serving
+- `InMemoryChannel`
+
+**NOTE:** The examples use the `default` namespace.
 
 If you want to use different type of `Channel`, you will have to modify the
 `Sequence.Spec.ChannelTemplate` to create the appropriate Channel resources.
@@ -97,7 +97,7 @@ spec.channelTemplate to point to your desired Channel.
 Also, change the spec.reply.name to point to your `Broker`
 
 ```yaml
-apiVersion: flows.knative.dev/v1beta1
+apiVersion: flows.knative.dev/v1
 kind: Sequence
 metadata:
   name: sequence
@@ -177,7 +177,7 @@ spec:
       type: dev.knative.sources.ping
   subscriber:
     ref:
-      apiVersion: flows.knative.dev/v1beta1
+      apiVersion: flows.knative.dev/v1
       kind: Sequence
       name: sequence
 ```

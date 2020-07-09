@@ -2,10 +2,10 @@ In this example, we are going to see how we can create a Parallel with mutually
 exclusive branches.
 
 This example is the same as the
-[multiple branches example](../multiple-branches/README.md) except that we are now
-going to rely on the Knative
-[switch](https://github.com/lionelvillard/knative-functions#switch) function
-to provide a soft mutual exclusivity guarantee.
+[multiple branches example](../multiple-branches/README.md) except that we are
+now going to rely on the Knative
+[switch](https://github.com/lionelvillard/knative-functions#switch) function to
+provide a soft mutual exclusivity guarantee.
 
 NOTE: this example must be deployed in the default namespace.
 
@@ -89,10 +89,11 @@ kubectl -n default create -f ./event-display.yaml
 
 ### Create the Parallel object
 
-The `parallel.yaml` file contains the specifications for creating the Parallel object.
+The `parallel.yaml` file contains the specifications for creating the Parallel
+object.
 
 ```yaml
-apiVersion: flows.knative.dev/v1beta1
+apiVersion: flows.knative.dev/v1
 kind: Parallel
 metadata:
   name: me-odd-even-parallel
@@ -128,8 +129,8 @@ kubectl create -f ./parallel.yaml
 
 ### Create the PingSource targeting the Parallel object
 
-This will create a PingSource which will send a CloudEvent with `{"message":
-"Even or odd?"}` as the data payload every minute.
+This will create a PingSource which will send a CloudEvent with
+`{"message": "Even or odd?"}` as the data payload every minute.
 
 ```yaml
 apiVersion: sources.knative.dev/v1alpha2
@@ -141,7 +142,7 @@ spec:
   jsonData: '{"message": "Even or odd?"}'
   sink:
     ref:
-      apiVersion: flows.knative.dev/v1beta1
+      apiVersion: flows.knative.dev/v1
       kind: Parallel
       name: me-odd-even-parallel
 ```
@@ -153,8 +154,8 @@ kubectl create -f ./ping-source.yaml
 ### Inspecting the results
 
 You can now see the final output by inspecting the logs of the
-`me-event-display` pods. Note that since we set the `PingSource` to emit
-every minute, it might take some time for the events to show up in the logs.
+`me-event-display` pods. Note that since we set the `PingSource` to emit every
+minute, it might take some time for the events to show up in the logs.
 
 Let's look at the `me-event-display` log:
 
