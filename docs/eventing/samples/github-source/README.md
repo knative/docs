@@ -22,11 +22,32 @@ You will need:
 ### Install Github Event Source
 
 Github Event source lives in the [knative/eventing-contrib](https://github.com/knative/eventing-contrib).
-You can install it by running the following (this is currently the latest released version (0.11.2))
+
+{{< tabs name="install-github-source" default="single-tenant" >}}
+{{% tab name="single-tenant" %}}
+
+The following command install the single-tenant GitHub source:
 
 ```shell
-kubectl apply -f https://github.com/knative/eventing-contrib/releases/download/v0.15.0/github.yaml
+kubectl apply -f {{< artifact repo="eventing-contrib" file="github.yaml" >}}
 ```
+
+The single-tenant GitHub source creates one Knative service per GitHub source.
+
+{{< /tab >}}
+
+{{% tab name="multi-tenant" %}}
+
+The following command install the multi-tenant GitHub source:
+
+```shell
+kubectl apply -f {{< artifact repo="eventing-contrib" file="mt-github.yaml" >}}
+```
+
+{{< /tab >}}
+
+The multi-tenant GitHub source creates only one Knative service handling all
+GitHub sources in the cluster.
 
 ### Create a Knative Service
 
