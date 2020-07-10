@@ -1,128 +1,64 @@
 ---
-title: "Getting Started with Eventing"
+title: "Getting Started with Knative Eventing"
 linkTitle: "Getting started"
 weight: 9
 type: "docs"
 ---
 
-Use this guide to learn how to create, send, and verify events in Knative. The
-steps in this guide demonstrate a basic developer flow for managing events in
-Knative, including:
+After you install Knative Eventing, you can create, send, and verify events.
 
-1. [Installing the Knative Eventing component](#installing-knative-eventing)
+This guide shows how you can use a basic workflow for managing events in Knative:
 
 1. [Creating and configuring Knative Eventing Resources](#setting-up-knative-eventing-resources)
-
 1. [Sending events with HTTP requests](#sending-events-to-the-broker)
-
 1. [Verifying events were sent correctly](#verifying-events-were-received)
 
-## Before you begin
+## Setting up Knative Eventing resources
 
-To complete this guide, you will need the following installed and running:
-
-- A
-  [Kubernetes cluster](https://kubernetes.io/docs/concepts/cluster-administration/cluster-administration-overview/)
-  running v1.15 or higher.
-
-- [`kubectl` CLI tool](https://kubernetes.io/docs/reference/kubectl/overview/)
-  within a minor version of your Kubernetes cluster.
-
-- [curl v7.65 or higher](https://curl.haxx.se/download.html).
-
-- Knative Eventing component.
-
-**Important Note:** Some Knative Eventing features do not work when using
-Minikube due to [this](https://github.com/kubernetes/minikube/issues/1568) bug.
-For local testing you can use [kind](https://github.com/kubernetes-sigs/kind).
-
-### Installing Knative Eventing
-
-Install the [Knative Eventing](https://knative.dev/development/install/any-kubernetes-cluster/#installing-the-eventing-component).
-
-## Setting up Knative Eventing Resources
-
-Before you start to manage events, you need to create the objects needed to
+Before you start to manage events, you must create the objects needed to
 transport the events.
 
-### Creating and configuring an Eventing namespace
+### Creating a Knative Eventing namespace
 
-In this section you create the `event-example` namespace and add a Broker to
-that namespace. You use namespaces to group together and organize your Knative
-resources, including the Eventing subcomponents.
+You use namespaces to group together and organize your Knative
+resources.
+<!--TODO: Add documentation about namespaces to core docs?-->
 
-1. Run the following command to create a namespace called `event-example`:
+1. Create a namespace called `event-example` by entering the following command:
 
-   ```sh
-   kubectl create namespace event-example
-   ```
+  ```sh
+  kubectl create namespace event-example
+  ```
+This creates an empty namespace called `event-example`.
 
-   This creates an empty namespace called `event-example`.
+### Add a broker to the namespace
 
-1. Add a Broker named `default` to your namespace with the following command:
+The [`broker`](./broker/README.md#broker) allows you to route events to different event sinks or consumers.
 
-   ```sh
-   kubectl create -f - <<EOF
-   apiVersion: eventing.knative.dev/v1
-   kind: Broker
-   metadata:
-     name: default
-     namespace: event-example
-   EOF
-   ```
+1. Add a broker named `default` to your namespace by entering the following command:
 
-   This creates the default Broker for the namespace based on config. The Broker
-   is a resource that will allow you to manage your events.
-
-In the next section, you will need to verify that the resources you added in
-this section are running correctly. Then, you can create the rest of the
-eventing resources you need to manage events.
-
-#### Optional Sugar Controller
-
-When installed, the
-[Sugar Controller for Knative Eventing](../install#optional-eventing-extensions)
-will add a controller that reacts to special labels and annotations for your
-resources, you can skip manually creating a Broker in the above step and instead
-label a namespace:
-
-```sh
-kubectl label namespace event-example eventing.knative.dev/injection=enabled
+ ```sh
+kubectl create -f - <<EOF
+apiVersion: eventing.knative.dev/v1
+kind: Broker
+metadata:
+ name: default
+ namespace: event-example
+EOF
 ```
 
-This gives the `event-example` namespace the `eventing.knative.dev/injection`
-label, which adds resources that will allow you to manage your events.
+1. Enter the following command to verify that the broker is working correctly:
+```sh
+kubectl --namespace event-example get Broker default
+```
+This shows information about your broker. If the broker is working correctly, it shows a `READY` status of `True`:
+```sh
+NAME      READY   REASON   URL                                                        AGE
+default   True             http://default-broker.event-example.svc.cluster.local      1m
+```
 
-### Validating that the `Broker` is running
-
-The [`Broker`](./broker/README.md#broker) ensures that every event sent by event
-producers arrives at the correct event consumers. The `Broker` was created when
-you labeled your namespace as ready for eventing, but it is important to verify
-that your `Broker` is working correctly. In this guide, you will use the default
-broker.
-
-1. Run the following command to verify that the `Broker` is in a healthy state:
-
-   ```sh
-   kubectl --namespace event-example get Broker default
-   ```
-
-   This shows the `Broker` that you created:
-
-   ```sh
-   NAME      READY   REASON   URL                                                        AGE
-   default   True             http://default-broker.event-example.svc.cluster.local      1m
-   ```
-
-   When the `Broker` has the `READY=True` state, it can begin to manage any
-   events it receives.
-
-1. If `READY=False`, wait 2 minutes and re-run the command. If you continue to
-   receive the `READY=False`, see the [Debugging Guide](./debugging/README.md)
-   to help troubleshoot the issue.
-
-Now that your `Broker` is ready to manage events, you can create and configure
-your event producers and consumers.
+If `READY` is `False`, wait 2 minutes and re-run the command.
+If you continue to receive the `False` status, see the [Debugging Guide](./debugging/README.md) to troubleshoot the issue.
 
 ### Creating event consumers
 
@@ -571,12 +507,3 @@ kubectl delete namespace event-example
 ```
 
 This removes the namespace and all of its resources from your cluster.
-
-## What’s next
-
-You've learned the basics of the Knative Eventing workflow. Here are some
-additional resources to help you continue to build with the Knative Eventing
-component.
-
-- [Broker and Trigger](./broker/README.md)
-- [Eventing with a GitHub source](./samples/github-source/README.md)
