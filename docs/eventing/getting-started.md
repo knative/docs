@@ -37,17 +37,18 @@ The [`broker`](./broker/README.md#broker) allows you to route events to differen
 
 1. Add a broker named `default` to your namespace by entering the following command:
 
- ```sh
-kubectl create -f - <<EOF
-apiVersion: eventing.knative.dev/v1
-kind: Broker
-metadata:
- name: default
- namespace: event-example
-EOF
-```
+  ```sh
+  kubectl create -f - <<EOF
+  apiVersion: eventing.knative.dev/v1
+  kind: Broker
+  metadata:
+   name: default
+   namespace: event-example
+  EOF
+  ```
 
-1. Enter the following command to verify that the broker is working correctly:
+1. Verify that the broker is working correctly, by entering the following command:
+
 ```sh
 kubectl --namespace event-example get Broker default
 ```
