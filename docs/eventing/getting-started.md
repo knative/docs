@@ -16,12 +16,11 @@ transport the events.
 Namespaces are used to group together and organize your Knative resources.
 <!--TODO: Add documentation about namespaces to core docs?-->
 
-1. Create a namespace called `event-example` by entering the following command:
+1. Create a new namespace called `event-example` by entering the following command:
 
     ```
     kubectl create namespace event-example
     ```
-  This creates an empty namespace called `event-example`.
 
 ## Add a broker to the namespace
 
@@ -52,7 +51,7 @@ The [broker](./broker/README.md#broker) allows you to route events to different 
     default   True             http://default-broker.event-example.svc.cluster.local      1m
     ```
 
-    If `READY` is `False`, wait 2 minutes and re-run the command.
+    If `READY` is `False`, wait a few moments and then run the command again.
     If you continue to receive the `False` status, see the [Debugging Guide](./debugging/README.md) to troubleshoot the issue.
 
 ## Creating event consumers
@@ -138,16 +137,16 @@ demonstrate how you can configure your event producers to target a specific cons
      ```
 
 1. Verify that the event consumers are working by entering the following command:
-   ```
-   kubectl --namespace event-example get deployments hello-display goodbye-display
-   ```
+     ```
+     kubectl --namespace event-example get deployments hello-display goodbye-display
+     ```
    This lists the `hello-display` and `goodbye-display` consumers that you
    deployed:
-   ```
-   NAME              READY   UP-TO-DATE   AVAILABLE   AGE
-   hello-display     1/1     1            1           26s
-   goodbye-display   1/1     1            1           16s
-   ```
+     ```
+     NAME              READY   UP-TO-DATE   AVAILABLE   AGE
+     hello-display     1/1     1            1           26s
+     goodbye-display   1/1     1            1           16s
+     ```
    The number of replicas in the **READY** column should match the number of replicas in the **AVAILABLE** column.
    If the numbers do not match, see the [Debugging Guide](./debugging/README.md) to troubleshoot the issue.
 
@@ -178,6 +177,7 @@ Each trigger can specify a filter that enables selection of relevant events base
    ```
    The command creates a trigger that sends all events of type `greeting` to
    your event consumer named `hello-display`.
+
 1. To add a second trigger, enter the following command:
    ```
    kubectl --namespace event-example apply --filename - << END
@@ -199,6 +199,7 @@ Each trigger can specify a filter that enables selection of relevant events base
    ```
    The command creates a trigger that sends all events of source `sendoff` to
    your event consumer named `goodbye-display`.
+
 1. Verify that the triggers are working correctly by running the following
    command:
    ```
@@ -212,11 +213,11 @@ Each trigger can specify a filter that enables selection of relevant events base
    hello-display          True             default   http://hello-display.event-example.svc.cluster.local/                          16s
    ```
 
-If the triggers are correctly configured, they will be ready and pointing to the correct broker (`default`) and `SUBSCRIBER_URI`.
+  If the triggers are correctly configured, they will be ready and pointing to the correct broker (`default`) and `SUBSCRIBER_URI`.
 
-The `SUBSCRIBER_URI` has a value similar to `triggerName.namespaceName.svc.cluster.local`.
-The exact value depends on the broker implementation.
-If this value looks incorrect, see the [Debugging Guide](./debugging/README.md) to troubleshoot the issue.
+  The `SUBSCRIBER_URI` has a value similar to `triggerName.namespaceName.svc.cluster.local`.
+  The exact value depends on the broker implementation.
+  If this value looks incorrect, see the [Debugging Guide](./debugging/README.md) to troubleshoot the issue.
 
 ## Creating event producers
 
