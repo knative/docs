@@ -87,17 +87,17 @@ specific consumer.
 
    ---
 
-   kind: Service
-   apiVersion: v1
-   metadata:
-     name: hello-display
-   spec:
-     selector:
-       app: hello-display
-     ports:
-     - protocol: TCP
-       port: 80
-       targetPort: 8080
+     kind: Service
+     apiVersion: v1
+     metadata:
+       name: hello-display
+     spec:
+       selector:
+         app: hello-display
+       ports:
+       - protocol: TCP
+         port: 80
+         targetPort: 8080
    END
    ```
 1. To deploy the `goodbye-display` consumer to your cluster, run the following
