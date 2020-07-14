@@ -148,10 +148,8 @@ specific consumer.
    hello-display     1/1     1            1           26s
    goodbye-display   1/1     1            1           16s
    ```
-   The number of replicas in the **READY** column should match the number of
-   replicas in the **AVAILABLE** column, which might take a few minutes. If
-   after two minutes the numbers do not match, see the
-   [Debugging Guide](./debugging/README.md) to troubleshoot the issue.
+   The number of replicas in the **READY** column should match the number of replicas in the **AVAILABLE** column, which might take a few minutes.
+   If the numbers do not match, see the [Debugging Guide](./debugging/README.md) to troubleshoot the issue.
 
 ## Creating triggers
 
