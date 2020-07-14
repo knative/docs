@@ -93,20 +93,18 @@ specific consumer.
              image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
 
    ---
-
-   # Service pointing at the previous Deployment. This will be the target for event
-   # consumption.
-     kind: Service
-     apiVersion: v1
-     metadata:
-       name: hello-display
-     spec:
-       selector:
-         app: hello-display
-       ports:
-       - protocol: TCP
-         port: 80
-         targetPort: 8080
+   
+   kind: Service
+   apiVersion: v1
+   metadata:
+     name: hello-display
+   spec:
+     selector:
+       app: hello-display
+     ports:
+     - protocol: TCP
+       port: 80
+       targetPort: 8080
    END
    ```
 
