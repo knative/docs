@@ -288,7 +288,7 @@ END
   - To make the second request, which creates an event that has the `source`
      `sendoff`, run the following in the SSH terminal:
 
-     ```sh
+     ```
      curl -v "http://default-broker.event-example.svc.cluster.local" \
        -X POST \
        -H "Ce-Id: say-goodbye" \
