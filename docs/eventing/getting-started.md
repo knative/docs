@@ -148,7 +148,7 @@ demonstrate how you can configure your event producers to target a specific cons
    hello-display     1/1     1            1           26s
    goodbye-display   1/1     1            1           16s
    ```
-   The number of replicas in the **READY** column should match the number of replicas in the **AVAILABLE** column, which might take a few minutes.
+   The number of replicas in the **READY** column should match the number of replicas in the **AVAILABLE** column.
    If the numbers do not match, see the [Debugging Guide](./debugging/README.md) to troubleshoot the issue.
 
 ## Creating triggers
