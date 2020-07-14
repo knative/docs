@@ -263,71 +263,71 @@ END
     ```
 
 1. Make a HTTP request to the broker. To show the various types of events you can send, you will make three requests:
-  - To make the first request, which creates an event that has the `type`
-     `greeting`, run the following in the SSH terminal:
-     ```
-     curl -v "http://default-broker.event-example.svc.cluster.local" \
-       -X POST \
-       -H "Ce-Id: say-hello" \
-       -H "Ce-Specversion: 1.0" \
-       -H "Ce-Type: greeting" \
-       -H "Ce-Source: not-sendoff" \
-       -H "Content-Type: application/json" \
-       -d '{"msg":"Hello Knative!"}'
-     ```
-     When the `Broker` receives your event, `hello-display` will activate and send
-     it to the event consumer of the same name.
-     If the event has been received, you will receive a `202 Accepted` response
-     similar to the one below:
+    - To make the first request, which creates an event that has the `type`
+       `greeting`, run the following in the SSH terminal:
+       ```
+       curl -v "http://default-broker.event-example.svc.cluster.local" \
+         -X POST \
+         -H "Ce-Id: say-hello" \
+         -H "Ce-Specversion: 1.0" \
+         -H "Ce-Type: greeting" \
+         -H "Ce-Source: not-sendoff" \
+         -H "Content-Type: application/json" \
+         -d '{"msg":"Hello Knative!"}'
+       ```
+       When the `Broker` receives your event, `hello-display` will activate and send
+       it to the event consumer of the same name.
+       If the event has been received, you will receive a `202 Accepted` response
+       similar to the one below:
 
-     ```
-     < HTTP/1.1 202 Accepted
-     < Content-Length: 0
-     < Date: Mon, 12 Aug 2019 19:48:18 GMT
-     ```
-  - To make the second request, which creates an event that has the `source`
-     `sendoff`, run the following in the SSH terminal:
+       ```
+       < HTTP/1.1 202 Accepted
+       < Content-Length: 0
+       < Date: Mon, 12 Aug 2019 19:48:18 GMT
+       ```
+    - To make the second request, which creates an event that has the `source`
+       `sendoff`, run the following in the SSH terminal:
 
-     ```
-     curl -v "http://default-broker.event-example.svc.cluster.local" \
-       -X POST \
-       -H "Ce-Id: say-goodbye" \
-       -H "Ce-Specversion: 1.0" \
-       -H "Ce-Type: not-greeting" \
-       -H "Ce-Source: sendoff" \
-       -H "Content-Type: application/json" \
-       -d '{"msg":"Goodbye Knative!"}'
-     ```
-     When the `Broker` receives your event, `goodbye-display` will activate and
-     send the event to the event consumer of the same name.
-     If the event has been received, you will receive a `202 Accepted` response
-     similar to the one below:
-     ```
-     < HTTP/1.1 202 Accepted
-     < Content-Length: 0
-     < Date: Mon, 12 Aug 2019 19:48:18 GMT
-     ```
-  - To make the third request, which creates an event that has the `type`
-     `greeting` and the`source` `sendoff`, run the following in the SSH terminal:
-     ```
-     curl -v "http://default-broker.event-example.svc.cluster.local" \
-       -X POST \
-       -H "Ce-Id: say-hello-goodbye" \
-       -H "Ce-Specversion: 1.0" \
-       -H "Ce-Type: greeting" \
-       -H "Ce-Source: sendoff" \
-       -H "Content-Type: application/json" \
-       -d '{"msg":"Hello Knative! Goodbye Knative!"}'
-     ```
-     When the broker receives your event, `hello-display` and `goodbye-display`
-     will activate and send the event to the event consumer of the same name.
-     If the event has been received, you will receive a `202 Accepted` response
-     similar to the one below:
-     ```
-     < HTTP/1.1 202 Accepted
-     < Content-Length: 0
-     < Date: Mon, 12 Aug 2019 19:48:18 GMT
-     ```
+       ```
+       curl -v "http://default-broker.event-example.svc.cluster.local" \
+         -X POST \
+         -H "Ce-Id: say-goodbye" \
+         -H "Ce-Specversion: 1.0" \
+         -H "Ce-Type: not-greeting" \
+         -H "Ce-Source: sendoff" \
+         -H "Content-Type: application/json" \
+         -d '{"msg":"Goodbye Knative!"}'
+       ```
+       When the `Broker` receives your event, `goodbye-display` will activate and
+       send the event to the event consumer of the same name.
+       If the event has been received, you will receive a `202 Accepted` response
+       similar to the one below:
+       ```
+       < HTTP/1.1 202 Accepted
+       < Content-Length: 0
+       < Date: Mon, 12 Aug 2019 19:48:18 GMT
+       ```
+    - To make the third request, which creates an event that has the `type`
+       `greeting` and the`source` `sendoff`, run the following in the SSH terminal:
+       ```
+       curl -v "http://default-broker.event-example.svc.cluster.local" \
+         -X POST \
+         -H "Ce-Id: say-hello-goodbye" \
+         -H "Ce-Specversion: 1.0" \
+         -H "Ce-Type: greeting" \
+         -H "Ce-Source: sendoff" \
+         -H "Content-Type: application/json" \
+         -d '{"msg":"Hello Knative! Goodbye Knative!"}'
+       ```
+       When the broker receives your event, `hello-display` and `goodbye-display`
+       will activate and send the event to the event consumer of the same name.
+       If the event has been received, you will receive a `202 Accepted` response
+       similar to the one below:
+       ```
+       < HTTP/1.1 202 Accepted
+       < Content-Length: 0
+       < Date: Mon, 12 Aug 2019 19:48:18 GMT
+       ```
 
 1.  Exit SSH by typing `exit` into the command prompt.
 
