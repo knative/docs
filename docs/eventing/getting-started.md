@@ -135,8 +135,6 @@ specific consumer.
 
    ---
 
-   # Service pointing at the previous Deployment. This will be the target for event
-   # consumption.
    kind: Service
    apiVersion: v1
    metadata:
@@ -249,20 +247,13 @@ If this value looks incorrect, see the [Debugging Guide](./debugging/README.md) 
 
 ### Creating event producers
 
-In this section you will create an event producer that you can use to interact
-with the Knative Eventing subcomponents you created earlier. Most events are
-created systematically, but this guide uses `curl` to manually send individual
-events and demonstrate how these events are received by the correct event
-consumer. Because you can only access the `Broker` from within your Eventing
-cluster, you must create a `Pod` within that cluster to act as your event
-producer.
+This guide uses `curl` commands to manually send individual events as HTTP requests to the broker, and demonstrate how these events are received by the correct event consumer.
 
-In the following step, you will create a `Pod` that executes your `curl`
-commands to send events to the `Broker` in your Eventing cluster.
+The broker can only be accessed from within the cluster where Knative Eventing is installed. You must create a pod within that cluster to act as an event producer that will execute the `curl` commands.
 
-To create the `Pod`, run the following command:
+To create a pod, enter the following command:
 
-```sh
+```
 kubectl --namespace event-example apply --filename - << END
 apiVersion: v1
 kind: Pod
@@ -284,132 +275,123 @@ spec:
 END
 ```
 
-Now that you've set up your Eventing cluster to send and consume events, you
-will use HTTP requests to manually send separate events and demonstrate how each
-of those events can target your individual event consumers in the next section.
+## Sending events to the broker
 
-## Sending Events to the `Broker`
+1. SSH into the pod by running the following command:
 
-Now that you've created the Pod, you can create an event by sending an HTTP
-request to the `Broker`. SSH into the `Pod` by running the following command:
+  ```
+    kubectl --namespace event-example attach curl -it
+  ```
+  You will see a prompt similar to the following:
+  ```
+      Defaulting container name to curl.
+      Use 'kubectl describe pod/ -n event-example' to see all of the containers in this pod.
+      If you don't see a command prompt, try pressing enter.
+      [ root@curl:/ ]$
+  ```
 
-```sh
-  kubectl --namespace event-example attach curl -it
-```
+1. Make a HTTP request to the broker. To show the various types of events you can send, you will make three requests:
 
-You have sshed into the Pod, and can now make an HTTP request. A prompt similar
-to the one below will appear:
+  - To make the first request, which creates an event that has the `type`
+     `greeting`, run the following in the SSH terminal:
 
-```sh
-    Defaulting container name to curl.
-    Use 'kubectl describe pod/ -n event-example' to see all of the containers in this pod.
-    If you don't see a command prompt, try pressing enter.
-    [ root@curl:/ ]$
-```
+     ```
+     curl -v "http://default-broker.event-example.svc.cluster.local" \
+       -X POST \
+       -H "Ce-Id: say-hello" \
+       -H "Ce-Specversion: 1.0" \
+       -H "Ce-Type: greeting" \
+       -H "Ce-Source: not-sendoff" \
+       -H "Content-Type: application/json" \
+       -d '{"msg":"Hello Knative!"}'
+     ```
 
-To show the various types of events you can send, you will make three requests:
+     When the `Broker` receives your event, `hello-display` will activate and send
+     it to the event consumer of the same name.
 
-1. To make the first request, which creates an event that has the `type`
-   `greeting`, run the following in the SSH terminal:
+     If the event has been received, you will receive a `202 Accepted` response
+     similar to the one below:
 
-   ```sh
-   curl -v "http://default-broker.event-example.svc.cluster.local" \
-     -X POST \
-     -H "Ce-Id: say-hello" \
-     -H "Ce-Specversion: 1.0" \
-     -H "Ce-Type: greeting" \
-     -H "Ce-Source: not-sendoff" \
-     -H "Content-Type: application/json" \
-     -d '{"msg":"Hello Knative!"}'
-   ```
+     ```
+     < HTTP/1.1 202 Accepted
+     < Content-Length: 0
+     < Date: Mon, 12 Aug 2019 19:48:18 GMT
+     ```
 
-   When the `Broker` receives your event, `hello-display` will activate and send
-   it to the event consumer of the same name.
+  - To make the second request, which creates an event that has the `source`
+     `sendoff`, run the following in the SSH terminal:
 
-   If the event has been received, you will receive a `202 Accepted` response
-   similar to the one below:
+     ```sh
+     curl -v "http://default-broker.event-example.svc.cluster.local" \
+       -X POST \
+       -H "Ce-Id: say-goodbye" \
+       -H "Ce-Specversion: 1.0" \
+       -H "Ce-Type: not-greeting" \
+       -H "Ce-Source: sendoff" \
+       -H "Content-Type: application/json" \
+       -d '{"msg":"Goodbye Knative!"}'
+     ```
 
-   ```sh
-   < HTTP/1.1 202 Accepted
-   < Content-Length: 0
-   < Date: Mon, 12 Aug 2019 19:48:18 GMT
-   ```
+     When the `Broker` receives your event, `goodbye-display` will activate and
+     send the event to the event consumer of the same name.
 
-1) To make the second request, which creates an event that has the `source`
-   `sendoff`, run the following in the SSH terminal:
+     If the event has been received, you will receive a `202 Accepted` response
+     similar to the one below:
 
-   ```sh
-   curl -v "http://default-broker.event-example.svc.cluster.local" \
-     -X POST \
-     -H "Ce-Id: say-goodbye" \
-     -H "Ce-Specversion: 1.0" \
-     -H "Ce-Type: not-greeting" \
-     -H "Ce-Source: sendoff" \
-     -H "Content-Type: application/json" \
-     -d '{"msg":"Goodbye Knative!"}'
-   ```
+     ```sh
+     < HTTP/1.1 202 Accepted
+     < Content-Length: 0
+     < Date: Mon, 12 Aug 2019 19:48:18 GMT
+     ```
 
-   When the `Broker` receives your event, `goodbye-display` will activate and
-   send the event to the event consumer of the same name.
+  - To make the third request, which creates an event that has the `type`
+     `greeting` and the`source` `sendoff`, run the following in the SSH terminal:
 
-   If the event has been received, you will receive a `202 Accepted` response
-   similar to the one below:
+     ```sh
+     curl -v "http://default-broker.event-example.svc.cluster.local" \
+       -X POST \
+       -H "Ce-Id: say-hello-goodbye" \
+       -H "Ce-Specversion: 1.0" \
+       -H "Ce-Type: greeting" \
+       -H "Ce-Source: sendoff" \
+       -H "Content-Type: application/json" \
+       -d '{"msg":"Hello Knative! Goodbye Knative!"}'
+     ```
 
-   ```sh
-   < HTTP/1.1 202 Accepted
-   < Content-Length: 0
-   < Date: Mon, 12 Aug 2019 19:48:18 GMT
-   ```
+     When the broker receives your event, `hello-display` and `goodbye-display`
+     will activate and send the event to the event consumer of the same name.
 
-1) To make the third request, which creates an event that has the `type`
-   `greeting` and the`source` `sendoff`, run the following in the SSH terminal:
+     If the event has been received, you will receive a `202 Accepted` response
+     similar to the one below:
 
-   ```sh
-   curl -v "http://default-broker.event-example.svc.cluster.local" \
-     -X POST \
-     -H "Ce-Id: say-hello-goodbye" \
-     -H "Ce-Specversion: 1.0" \
-     -H "Ce-Type: greeting" \
-     -H "Ce-Source: sendoff" \
-     -H "Content-Type: application/json" \
-     -d '{"msg":"Hello Knative! Goodbye Knative!"}'
-   ```
+     ```sh
+     < HTTP/1.1 202 Accepted
+     < Content-Length: 0
+     < Date: Mon, 12 Aug 2019 19:48:18 GMT
+     ```
 
-   When the `Broker` receives your event, `hello-display` and `goodbye-display`
-   will activate and send the event to the event consumer of the same name.
-
-   If the event has been received, you will receive a `202 Accepted` response
-   similar to the one below:
-
-   ```sh
-   < HTTP/1.1 202 Accepted
-   < Content-Length: 0
-   < Date: Mon, 12 Aug 2019 19:48:18 GMT
-   ```
-
-1) Exit SSH by typing `exit` into the command prompt.
+1.  Exit SSH by typing `exit` into the command prompt.
 
 You have sent two events to the `hello-display` event consumer and two events to
 the `goodbye-display` event consumer (note that `say-hello-goodbye` activates
 the trigger conditions for _both_ `hello-display` and `goodbye-display`). You
 will verify that these events were received correctly in the next section.
 
-## Verifying events were received
+## Verifying that events were received
 
-After sending events, verify that your events were received by the appropriate
-`Subscribers`.
+After you send the events, verify that the events were received by the correct subscribers.
 
-1. Look at the logs for the `hello-display` event consumer by running the
+1. Look at the logs for the `hello-display` event consumer by entering the
    following command:
 
-   ```sh
+   ```
    kubectl --namespace event-example logs -l app=hello-display --tail=100
    ```
 
    This returns the `Attributes` and `Data` of the events you sent to
    `hello-display`:
 
-   ```sh
+   ```
    ☁️  cloudevents.Event
    Validation: valid
    Context Attributes,
@@ -442,17 +424,17 @@ After sending events, verify that your events were received by the appropriate
     }
    ```
 
-1. Look at the logs for the `goodbye-display` event consumer by running the
+1. Look at the logs for the `goodbye-display` event consumer by entering the
    following command:
 
-   ```sh
+   ```
    kubectl --namespace event-example logs -l app=goodbye-display --tail=100
    ```
 
    This returns the `Attributes` and `Data` of the events you sent to
    `goodbye-display`:
 
-   ```sh
+   ```
    ☁️  cloudevents.Event
    Validation: valid
    Context Attributes,
@@ -485,20 +467,12 @@ After sending events, verify that your events were received by the appropriate
      }
    ```
 
-## Cleaning up
+## Cleaning up example resources
 
-After you finish this guide, delete your namespace to conserve resources if you
-do not plan to use them.
+You can delete the `event-example` namespace and its associated resources from your cluster if you do not plan to use it again in the future.
 
-Note: If you plan to continue learning about Knative Eventing with one of our
-[code samples](./samples/), check the requirements of the sample and make sure
-you do not need a namespace before you delete `event-example`. You can always
-reuse your namespaces.
+Delete the `event-example` namespace and all of its resources from your cluster by entering the following command:
 
-Run the following command to delete `event-example`:
-
-```sh
+```
 kubectl delete namespace event-example
 ```
-
-This removes the namespace and all of its resources from your cluster.
