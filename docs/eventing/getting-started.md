@@ -22,7 +22,7 @@ Create a new namespace called `event-example` by entering the following command:
 kubectl create namespace event-example
 ```
 
-## Add a broker to the namespace
+## Adding a broker to the namespace
 
 The [broker](./broker/README.md#broker) allows you to route events to different event sinks or consumers.
 
