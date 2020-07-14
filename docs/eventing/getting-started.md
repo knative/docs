@@ -26,7 +26,7 @@ resources.
 
 1. Create a namespace called `event-example` by entering the following command:
 
-  ```sh
+  ```
   kubectl create namespace event-example
   ```
 This creates an empty namespace called `event-example`.
@@ -37,7 +37,7 @@ The [`broker`](./broker/README.md#broker) allows you to route events to differen
 
 1. Add a broker named `default` to your namespace by entering the following command:
 
-  ```sh
+  ```
   kubectl create -f - <<EOF
   apiVersion: eventing.knative.dev/v1
   kind: Broker
@@ -49,17 +49,18 @@ The [`broker`](./broker/README.md#broker) allows you to route events to differen
 
 1. Verify that the broker is working correctly, by entering the following command:
 
-```sh
-kubectl --namespace event-example get Broker default
-```
+  ```
+  kubectl --namespace event-example get Broker default
+  ```
 This shows information about your broker. If the broker is working correctly, it shows a `READY` status of `True`:
-```sh
-NAME      READY   REASON   URL                                                        AGE
-default   True             http://default-broker.event-example.svc.cluster.local      1m
-```
 
-If `READY` is `False`, wait 2 minutes and re-run the command.
-If you continue to receive the `False` status, see the [Debugging Guide](./debugging/README.md) to troubleshoot the issue.
+  ```
+  NAME      READY   REASON   URL                                                        AGE
+  default   True             http://default-broker.event-example.svc.cluster.local      1m
+  ```
+
+  If `READY` is `False`, wait 2 minutes and re-run the command.
+  If you continue to receive the `False` status, see the [Debugging Guide](./debugging/README.md) to troubleshoot the issue.
 
 ### Creating event consumers
 
@@ -71,7 +72,7 @@ specific consumer.
 1. To deploy the `hello-display` consumer to your cluster, run the following
    command:
 
-   ```sh
+   ```
    kubectl --namespace event-example apply --filename - << END
    apiVersion: apps/v1
    kind: Deployment
@@ -112,7 +113,7 @@ specific consumer.
 1. To deploy the `goodbye-display` consumer to your cluster, run the following
    command:
 
-   ```sh
+   ```
    kubectl --namespace event-example apply --filename - << END
    apiVersion: apps/v1
    kind: Deployment
@@ -150,37 +151,35 @@ specific consumer.
    END
    ```
 
-1. Just like you did with the `Broker`, verify that your event consumers are
-   working by running the following command:
+1. Verify that the event consumers are working by entering the following command:
 
-   ```sh
+   ```
    kubectl --namespace event-example get deployments hello-display goodbye-display
    ```
 
    This lists the `hello-display` and `goodbye-display` consumers that you
    deployed:
 
-   ```sh
+   ```
    NAME              READY   UP-TO-DATE   AVAILABLE   AGE
    hello-display     1/1     1            1           26s
    goodbye-display   1/1     1            1           16s
    ```
 
-   The number of replicas in your **READY** column should match the number of
-   replicas in your **AVAILABLE** column, which might take a few minutes. If
-   after two minutes the numbers do not match, then see the
-   [Debugging Guide](./debugging/README.md) to help troubleshoot the issue.
+   The number of replicas in the **READY** column should match the number of
+   replicas in the **AVAILABLE** column, which might take a few minutes. If
+   after two minutes the numbers do not match, see the
+   [Debugging Guide](./debugging/README.md) to troubleshoot the issue.
 
-### Creating `Triggers`
+### Creating triggers
 
-A [Trigger](./broker/README.md#trigger) defines the events that you want each of
-your event consumers to receive. Your `Broker` uses triggers to forward events
-to the right consumers. Each trigger can specify a filter to select relevant
-events based on the Cloud Event context attributes.
+A [trigger](./broker/README.md#trigger) defines the events that each event consumer receives.
+Brokers use triggers to forward events to the correct consumers.
+Each trigger can specify a filter that enables selection of relevant events based on the Cloud Event context attributes.
 
-1. To create the first `Trigger`, run the following command:
+1. Create a trigger by entering the following command:
 
-   ```sh
+   ```
    kubectl --namespace event-example apply --filename - << END
    apiVersion: eventing.knative.dev/v1
    kind: Trigger
@@ -202,9 +201,9 @@ events based on the Cloud Event context attributes.
    The command creates a trigger that sends all events of type `greeting` to
    your event consumer named `hello-display`.
 
-1. To add the second `Trigger`, run the following command:
+1. To add a second trigger, enter the following command:
 
-   ```sh
+   ```
    kubectl --namespace event-example apply --filename - << END
    apiVersion: eventing.knative.dev/v1
    kind: Trigger
@@ -229,29 +228,24 @@ events based on the Cloud Event context attributes.
 1. Verify that the triggers are working correctly by running the following
    command:
 
-   ```sh
+   ```
    kubectl --namespace event-example get triggers
    ```
 
    This returns the `hello-display` and `goodbye-display` triggers that you
    created:
 
-   ```sh
+   ```
    NAME                   READY   REASON   BROKER    SUBSCRIBER_URI                                                                 AGE
    goodbye-display        True             default   http://goodbye-display.event-example.svc.cluster.local/                        9s
    hello-display          True             default   http://hello-display.event-example.svc.cluster.local/                          16s
    ```
 
-   If the triggers are correctly configured, they will be ready and pointing to
-   the correct **Broker** (the default broker) and **SUBSCRIBER_URI** has a
-   value similar to (triggerName.namespaceName.svc.cluster.local) _exact value
-   dependent on Broker implementation_. If this is not the case, see the
-   [Debugging Guide](./debugging/README.md) to help troubleshoot the issue.
+If the triggers are correctly configured, they will be ready and pointing to the correct broker (`default`) and `SUBSCRIBER_URI`.
 
-You have now created all of the resources needed to receive and manage events.
-You created the `Broker`, which manages the events sent to event consumers with
-the help of triggers. In the next section, you will make the event producer that
-will be used to create your events.
+The `SUBSCRIBER_URI` has a value similar to `triggerName.namespaceName.svc.cluster.local`.
+The exact value depends on the broker implementation.
+If this value looks incorrect, see the [Debugging Guide](./debugging/README.md) to troubleshoot the issue.
 
 ### Creating event producers
 
