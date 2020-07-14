@@ -253,7 +253,7 @@ END
   ```
     kubectl --namespace event-example attach curl -it
   ```
-    You will see a prompt similar to the following:
+  You will see a prompt similar to the following:
   ```
       Defaulting container name to curl.
       Use 'kubectl describe pod/ -n event-example' to see all of the containers in this pod.
