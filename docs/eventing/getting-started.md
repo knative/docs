@@ -6,12 +6,7 @@ type: "docs"
 ---
 
 After you install Knative Eventing, you can create, send, and verify events.
-
-This guide shows how you can use a basic workflow for managing events in Knative:
-
-1. [Creating and configuring Knative Eventing Resources](#setting-up-knative-eventing-resources)
-1. [Sending events with HTTP requests](#sending-events-to-the-broker)
-1. [Verifying events were sent correctly](#verifying-events-were-received)
+This guide shows how you can use a basic workflow for managing events.
 
 # Setting up Knative Eventing resources
 
@@ -20,21 +15,22 @@ transport the events.
 
 ## Creating a Knative Eventing namespace
 
-You use namespaces to group together and organize your Knative
-resources.
+Namespaces are used to group together and organize your Knative resources.
 <!--TODO: Add documentation about namespaces to core docs?-->
 
 1. Create a namespace called `event-example` by entering the following command:
+
   ```
   kubectl create namespace event-example
   ```
-This creates an empty namespace called `event-example`.
+  This creates an empty namespace called `event-example`.
 
 ## Add a broker to the namespace
 
-The [`broker`](./broker/README.md#broker) allows you to route events to different event sinks or consumers.
+The [broker](./broker/README.md#broker) allows you to route events to different event sinks or consumers.
 
 1. Add a broker named `default` to your namespace by entering the following command:
+
   ```
   kubectl create -f - <<EOF
   apiVersion: eventing.knative.dev/v1
@@ -44,27 +40,30 @@ The [`broker`](./broker/README.md#broker) allows you to route events to differen
    namespace: event-example
   EOF
   ```
+
 1. Verify that the broker is working correctly, by entering the following command:
+
   ```
   kubectl --namespace event-example get Broker default
   ```
-This shows information about your broker. If the broker is working correctly, it shows a `READY` status of `True`:
+  This shows information about your broker. If the broker is working correctly, it shows a `READY` status of `True`:
+
   ```
   NAME      READY   REASON   URL                                                        AGE
   default   True             http://default-broker.event-example.svc.cluster.local      1m
   ```
+
   If `READY` is `False`, wait 2 minutes and re-run the command.
   If you continue to receive the `False` status, see the [Debugging Guide](./debugging/README.md) to troubleshoot the issue.
 
 ## Creating event consumers
 
-Your event consumers receive the events sent by event producers. In this step,
-you will create two event consumers, `hello-display` and `goodbye-display`, to
-demonstrate how you can configure your event producers to selectively target a
-specific consumer.
+In this step, you create two event consumers, `hello-display` and `goodbye-display`, to
+demonstrate how you can configure your event producers to target a specific consumer.
 
 1. To deploy the `hello-display` consumer to your cluster, run the following
    command:
+
    ```
    kubectl --namespace event-example apply --filename - << END
    apiVersion: apps/v1
@@ -82,26 +81,27 @@ specific consumer.
        spec:
          containers:
            - name: event-display
-             # Source code: https://github.com/knative/eventing-contrib/tree/master/cmd/event_display
              image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
 
    ---
 
-     kind: Service
-     apiVersion: v1
-     metadata:
-       name: hello-display
-     spec:
-       selector:
-         app: hello-display
-       ports:
-       - protocol: TCP
-         port: 80
-         targetPort: 8080
+   kind: Service
+   apiVersion: v1
+   metadata:
+     name: hello-display
+   spec:
+     selector:
+       app: hello-display
+     ports:
+     - protocol: TCP
+       port: 80
+       targetPort: 8080
    END
    ```
+
 1. To deploy the `goodbye-display` consumer to your cluster, run the following
    command:
+
    ```
    kubectl --namespace event-example apply --filename - << END
    apiVersion: apps/v1
@@ -137,6 +137,7 @@ specific consumer.
        targetPort: 8080
    END
    ```
+
 1. Verify that the event consumers are working by entering the following command:
    ```
    kubectl --namespace event-example get deployments hello-display goodbye-display
