@@ -16,11 +16,11 @@ transport the events.
 Namespaces are used to group together and organize your Knative resources.
 <!--TODO: Add documentation about namespaces to core docs?-->
 
-1. Create a new namespace called `event-example` by entering the following command:
+Create a new namespace called `event-example` by entering the following command:
 
-    ```
-    kubectl create namespace event-example
-    ```
+```
+kubectl create namespace event-example
+```
 
 ## Add a broker to the namespace
 
@@ -212,14 +212,13 @@ Each trigger can specify a filter that enables selection of relevant events base
    goodbye-display        True             default   http://goodbye-display.event-example.svc.cluster.local/                        9s
    hello-display          True             default   http://hello-display.event-example.svc.cluster.local/                          16s
    ```
+    If the triggers are correctly configured, they will be ready and pointing to the correct broker (`default`) and `SUBSCRIBER_URI`.
 
-  If the triggers are correctly configured, they will be ready and pointing to the correct broker (`default`) and `SUBSCRIBER_URI`.
+    The `SUBSCRIBER_URI` has a value similar to `triggerName.namespaceName.svc.cluster.local`.
+    The exact value depends on the broker implementation.
+    If this value looks incorrect, see the [Debugging Guide](./debugging/README.md) to troubleshoot the issue.
 
-  The `SUBSCRIBER_URI` has a value similar to `triggerName.namespaceName.svc.cluster.local`.
-  The exact value depends on the broker implementation.
-  If this value looks incorrect, see the [Debugging Guide](./debugging/README.md) to troubleshoot the issue.
-
-## Creating event producers
+## Creating a pod as an event producer
 
 This guide uses `curl` commands to manually send individual events as HTTP requests to the broker, and demonstrate how these events are received by the correct event consumer.
 
@@ -248,19 +247,20 @@ spec:
 END
 ```
 
-# Sending events to the broker
+## Sending events to the broker
 
 1. SSH into the pod by running the following command:
   ```
     kubectl --namespace event-example attach curl -it
   ```
-  You will see a prompt similar to the following:
+    You will see a prompt similar to the following:
   ```
       Defaulting container name to curl.
       Use 'kubectl describe pod/ -n event-example' to see all of the containers in this pod.
       If you don't see a command prompt, try pressing enter.
       [ root@curl:/ ]$
   ```
+
 1. Make a HTTP request to the broker. To show the various types of events you can send, you will make three requests:
   - To make the first request, which creates an event that has the `type`
      `greeting`, run the following in the SSH terminal:
@@ -327,6 +327,7 @@ END
      < Content-Length: 0
      < Date: Mon, 12 Aug 2019 19:48:18 GMT
      ```
+
 1.  Exit SSH by typing `exit` into the command prompt.
 
 You have sent two events to the `hello-display` event consumer and two events to
@@ -334,7 +335,7 @@ the `goodbye-display` event consumer (note that `say-hello-goodbye` activates
 the trigger conditions for _both_ `hello-display` and `goodbye-display`). You
 will verify that these events were received correctly in the next section.
 
-# Verifying that events were received
+## Verifying that events were received
 
 After you send the events, verify that the events were received by the correct subscribers.
 
@@ -417,7 +418,7 @@ After you send the events, verify that the events were received by the correct s
      }
    ```
 
-# Cleaning up example resources
+## Cleaning up example resources
 
 You can delete the `event-example` namespace and its associated resources from your cluster if you do not plan to use it again in the future.
 
