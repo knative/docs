@@ -253,7 +253,6 @@ END
   ```
     kubectl --namespace event-example attach curl -it
   ```
-
   You will see a prompt similar to the following:
   ```
       Defaulting container name to curl.
