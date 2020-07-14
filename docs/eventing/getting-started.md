@@ -8,8 +8,6 @@ type: "docs"
 After you install Knative Eventing, you can create, send, and verify events.
 This guide shows how you can use a basic workflow for managing events.
 
-# Setting up Knative Eventing resources
-
 Before you start to manage events, you must create the objects needed to
 transport the events.
 
@@ -20,9 +18,9 @@ Namespaces are used to group together and organize your Knative resources.
 
 1. Create a namespace called `event-example` by entering the following command:
 
-  ```
-  kubectl create namespace event-example
-  ```
+    ```
+    kubectl create namespace event-example
+    ```
   This creates an empty namespace called `event-example`.
 
 ## Add a broker to the namespace
@@ -31,30 +29,31 @@ The [broker](./broker/README.md#broker) allows you to route events to different 
 
 1. Add a broker named `default` to your namespace by entering the following command:
 
-  ```
-  kubectl create -f - <<EOF
-  apiVersion: eventing.knative.dev/v1
-  kind: Broker
-  metadata:
-   name: default
-   namespace: event-example
-  EOF
-  ```
+    ```
+    kubectl create -f - <<EOF
+    apiVersion: eventing.knative.dev/v1
+    kind: Broker
+    metadata:
+     name: default
+     namespace: event-example
+    EOF
+    ```
 
 1. Verify that the broker is working correctly, by entering the following command:
 
-  ```
-  kubectl --namespace event-example get Broker default
-  ```
-  This shows information about your broker. If the broker is working correctly, it shows a `READY` status of `True`:
+    ```
+    kubectl --namespace event-example get Broker default
+    ```
 
-  ```
-  NAME      READY   REASON   URL                                                        AGE
-  default   True             http://default-broker.event-example.svc.cluster.local      1m
-  ```
+    This shows information about your broker. If the broker is working correctly, it shows a `READY` status of `True`:
 
-  If `READY` is `False`, wait 2 minutes and re-run the command.
-  If you continue to receive the `False` status, see the [Debugging Guide](./debugging/README.md) to troubleshoot the issue.
+    ```
+    NAME      READY   REASON   URL                                                        AGE
+    default   True             http://default-broker.event-example.svc.cluster.local      1m
+    ```
+
+    If `READY` is `False`, wait 2 minutes and re-run the command.
+    If you continue to receive the `False` status, see the [Debugging Guide](./debugging/README.md) to troubleshoot the issue.
 
 ## Creating event consumers
 
@@ -64,79 +63,79 @@ demonstrate how you can configure your event producers to target a specific cons
 1. To deploy the `hello-display` consumer to your cluster, run the following
    command:
 
-   ```
-   kubectl --namespace event-example apply --filename - << END
-   apiVersion: apps/v1
-   kind: Deployment
-   metadata:
-     name: hello-display
-   spec:
-     replicas: 1
-     selector:
-       matchLabels: &labels
+     ```
+     kubectl --namespace event-example apply --filename - << END
+     apiVersion: apps/v1
+     kind: Deployment
+     metadata:
+       name: hello-display
+     spec:
+       replicas: 1
+       selector:
+         matchLabels: &labels
+           app: hello-display
+       template:
+         metadata:
+           labels: *labels
+         spec:
+           containers:
+             - name: event-display
+               image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+
+     ---
+
+     kind: Service
+     apiVersion: v1
+     metadata:
+       name: hello-display
+     spec:
+       selector:
          app: hello-display
-     template:
-       metadata:
-         labels: *labels
-       spec:
-         containers:
-           - name: event-display
-             image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
-
-   ---
-
-   kind: Service
-   apiVersion: v1
-   metadata:
-     name: hello-display
-   spec:
-     selector:
-       app: hello-display
-     ports:
-     - protocol: TCP
-       port: 80
-       targetPort: 8080
-   END
-   ```
+       ports:
+       - protocol: TCP
+         port: 80
+         targetPort: 8080
+     END
+     ```
 
 1. To deploy the `goodbye-display` consumer to your cluster, run the following
    command:
 
-   ```
-   kubectl --namespace event-example apply --filename - << END
-   apiVersion: apps/v1
-   kind: Deployment
-   metadata:
-     name: goodbye-display
-   spec:
-     replicas: 1
-     selector:
-       matchLabels: &labels
+     ```
+     kubectl --namespace event-example apply --filename - << END
+     apiVersion: apps/v1
+     kind: Deployment
+     metadata:
+       name: goodbye-display
+     spec:
+       replicas: 1
+       selector:
+         matchLabels: &labels
+           app: goodbye-display
+       template:
+         metadata:
+           labels: *labels
+         spec:
+           containers:
+             - name: event-display
+               # Source code: https://github.com/knative/eventing-contrib/tree/master/cmd/event_display
+               image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+
+     ---
+
+     kind: Service
+     apiVersion: v1
+     metadata:
+       name: goodbye-display
+     spec:
+       selector:
          app: goodbye-display
-     template:
-       metadata:
-         labels: *labels
-       spec:
-         containers:
-           - name: event-display
-             # Source code: https://github.com/knative/eventing-contrib/tree/master/cmd/event_display
-             image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
-
-   ---
-
-   kind: Service
-   apiVersion: v1
-   metadata:
-     name: goodbye-display
-   spec:
-     selector:
-       app: goodbye-display
-     ports:
-     - protocol: TCP
-       port: 80
-       targetPort: 8080
-   END
-   ```
+       ports:
+       - protocol: TCP
+         port: 80
+         targetPort: 8080
+     END
+     ```
 
 1. Verify that the event consumers are working by entering the following command:
    ```
