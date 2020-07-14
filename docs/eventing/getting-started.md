@@ -250,16 +250,17 @@ END
 ## Sending events to the broker
 
 1. SSH into the pod by running the following command:
-  ```
+    ```
     kubectl --namespace event-example attach curl -it
-  ```
-  You will see a prompt similar to the following:
-  ```
-      Defaulting container name to curl.
-      Use 'kubectl describe pod/ -n event-example' to see all of the containers in this pod.
-      If you don't see a command prompt, try pressing enter.
-      [ root@curl:/ ]$
-  ```
+    ```
+
+    You will see a prompt similar to the following:
+    ```
+    Defaulting container name to curl.
+    Use 'kubectl describe pod/ -n event-example' to see all of the containers in this pod.
+    If you don't see a command prompt, try pressing enter.
+    [ root@curl:/ ]$
+    ```
 
 1. Make a HTTP request to the broker. To show the various types of events you can send, you will make three requests:
   - To make the first request, which creates an event that has the `type`
