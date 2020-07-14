@@ -13,30 +13,28 @@ This guide shows how you can use a basic workflow for managing events in Knative
 1. [Sending events with HTTP requests](#sending-events-to-the-broker)
 1. [Verifying events were sent correctly](#verifying-events-were-received)
 
-## Setting up Knative Eventing resources
+# Setting up Knative Eventing resources
 
 Before you start to manage events, you must create the objects needed to
 transport the events.
 
-### Creating a Knative Eventing namespace
+## Creating a Knative Eventing namespace
 
 You use namespaces to group together and organize your Knative
 resources.
 <!--TODO: Add documentation about namespaces to core docs?-->
 
 1. Create a namespace called `event-example` by entering the following command:
-
   ```
   kubectl create namespace event-example
   ```
 This creates an empty namespace called `event-example`.
 
-### Add a broker to the namespace
+## Add a broker to the namespace
 
 The [`broker`](./broker/README.md#broker) allows you to route events to different event sinks or consumers.
 
 1. Add a broker named `default` to your namespace by entering the following command:
-
   ```
   kubectl create -f - <<EOF
   apiVersion: eventing.knative.dev/v1
@@ -46,23 +44,19 @@ The [`broker`](./broker/README.md#broker) allows you to route events to differen
    namespace: event-example
   EOF
   ```
-
 1. Verify that the broker is working correctly, by entering the following command:
-
   ```
   kubectl --namespace event-example get Broker default
   ```
 This shows information about your broker. If the broker is working correctly, it shows a `READY` status of `True`:
-
   ```
   NAME      READY   REASON   URL                                                        AGE
   default   True             http://default-broker.event-example.svc.cluster.local      1m
   ```
-
   If `READY` is `False`, wait 2 minutes and re-run the command.
   If you continue to receive the `False` status, see the [Debugging Guide](./debugging/README.md) to troubleshoot the issue.
 
-### Creating event consumers
+## Creating event consumers
 
 Your event consumers receive the events sent by event producers. In this step,
 you will create two event consumers, `hello-display` and `goodbye-display`, to
@@ -71,7 +65,6 @@ specific consumer.
 
 1. To deploy the `hello-display` consumer to your cluster, run the following
    command:
-
    ```
    kubectl --namespace event-example apply --filename - << END
    apiVersion: apps/v1
@@ -93,7 +86,7 @@ specific consumer.
              image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
 
    ---
-   
+
    kind: Service
    apiVersion: v1
    metadata:
@@ -107,10 +100,8 @@ specific consumer.
        targetPort: 8080
    END
    ```
-
 1. To deploy the `goodbye-display` consumer to your cluster, run the following
    command:
-
    ```
    kubectl --namespace event-example apply --filename - << END
    apiVersion: apps/v1
@@ -146,35 +137,29 @@ specific consumer.
        targetPort: 8080
    END
    ```
-
 1. Verify that the event consumers are working by entering the following command:
-
    ```
    kubectl --namespace event-example get deployments hello-display goodbye-display
    ```
-
    This lists the `hello-display` and `goodbye-display` consumers that you
    deployed:
-
    ```
    NAME              READY   UP-TO-DATE   AVAILABLE   AGE
    hello-display     1/1     1            1           26s
    goodbye-display   1/1     1            1           16s
    ```
-
    The number of replicas in the **READY** column should match the number of
    replicas in the **AVAILABLE** column, which might take a few minutes. If
    after two minutes the numbers do not match, see the
    [Debugging Guide](./debugging/README.md) to troubleshoot the issue.
 
-### Creating triggers
+## Creating triggers
 
 A [trigger](./broker/README.md#trigger) defines the events that each event consumer receives.
 Brokers use triggers to forward events to the correct consumers.
 Each trigger can specify a filter that enables selection of relevant events based on the Cloud Event context attributes.
 
 1. Create a trigger by entering the following command:
-
    ```
    kubectl --namespace event-example apply --filename - << END
    apiVersion: eventing.knative.dev/v1
@@ -193,12 +178,9 @@ Each trigger can specify a filter that enables selection of relevant events base
         name: hello-display
    END
    ```
-
    The command creates a trigger that sends all events of type `greeting` to
    your event consumer named `hello-display`.
-
 1. To add a second trigger, enter the following command:
-
    ```
    kubectl --namespace event-example apply --filename - << END
    apiVersion: eventing.knative.dev/v1
@@ -217,20 +199,15 @@ Each trigger can specify a filter that enables selection of relevant events base
         name: goodbye-display
    END
    ```
-
    The command creates a trigger that sends all events of source `sendoff` to
    your event consumer named `goodbye-display`.
-
 1. Verify that the triggers are working correctly by running the following
    command:
-
    ```
    kubectl --namespace event-example get triggers
    ```
-
    This returns the `hello-display` and `goodbye-display` triggers that you
    created:
-
    ```
    NAME                   READY   REASON   BROKER    SUBSCRIBER_URI                                                                 AGE
    goodbye-display        True             default   http://goodbye-display.event-example.svc.cluster.local/                        9s
@@ -243,14 +220,13 @@ The `SUBSCRIBER_URI` has a value similar to `triggerName.namespaceName.svc.clust
 The exact value depends on the broker implementation.
 If this value looks incorrect, see the [Debugging Guide](./debugging/README.md) to troubleshoot the issue.
 
-### Creating event producers
+## Creating event producers
 
 This guide uses `curl` commands to manually send individual events as HTTP requests to the broker, and demonstrate how these events are received by the correct event consumer.
 
 The broker can only be accessed from within the cluster where Knative Eventing is installed. You must create a pod within that cluster to act as an event producer that will execute the `curl` commands.
 
 To create a pod, enter the following command:
-
 ```
 kubectl --namespace event-example apply --filename - << END
 apiVersion: v1
@@ -273,10 +249,9 @@ spec:
 END
 ```
 
-## Sending events to the broker
+# Sending events to the broker
 
 1. SSH into the pod by running the following command:
-
   ```
     kubectl --namespace event-example attach curl -it
   ```
@@ -287,12 +262,9 @@ END
       If you don't see a command prompt, try pressing enter.
       [ root@curl:/ ]$
   ```
-
 1. Make a HTTP request to the broker. To show the various types of events you can send, you will make three requests:
-
   - To make the first request, which creates an event that has the `type`
      `greeting`, run the following in the SSH terminal:
-
      ```
      curl -v "http://default-broker.event-example.svc.cluster.local" \
        -X POST \
@@ -303,10 +275,8 @@ END
        -H "Content-Type: application/json" \
        -d '{"msg":"Hello Knative!"}'
      ```
-
      When the `Broker` receives your event, `hello-display` will activate and send
      it to the event consumer of the same name.
-
      If the event has been received, you will receive a `202 Accepted` response
      similar to the one below:
 
@@ -315,7 +285,6 @@ END
      < Content-Length: 0
      < Date: Mon, 12 Aug 2019 19:48:18 GMT
      ```
-
   - To make the second request, which creates an event that has the `source`
      `sendoff`, run the following in the SSH terminal:
 
@@ -329,23 +298,18 @@ END
        -H "Content-Type: application/json" \
        -d '{"msg":"Goodbye Knative!"}'
      ```
-
      When the `Broker` receives your event, `goodbye-display` will activate and
      send the event to the event consumer of the same name.
-
      If the event has been received, you will receive a `202 Accepted` response
      similar to the one below:
-
-     ```sh
+     ```
      < HTTP/1.1 202 Accepted
      < Content-Length: 0
      < Date: Mon, 12 Aug 2019 19:48:18 GMT
      ```
-
   - To make the third request, which creates an event that has the `type`
      `greeting` and the`source` `sendoff`, run the following in the SSH terminal:
-
-     ```sh
+     ```
      curl -v "http://default-broker.event-example.svc.cluster.local" \
        -X POST \
        -H "Ce-Id: say-hello-goodbye" \
@@ -355,19 +319,15 @@ END
        -H "Content-Type: application/json" \
        -d '{"msg":"Hello Knative! Goodbye Knative!"}'
      ```
-
      When the broker receives your event, `hello-display` and `goodbye-display`
      will activate and send the event to the event consumer of the same name.
-
      If the event has been received, you will receive a `202 Accepted` response
      similar to the one below:
-
-     ```sh
+     ```
      < HTTP/1.1 202 Accepted
      < Content-Length: 0
      < Date: Mon, 12 Aug 2019 19:48:18 GMT
      ```
-
 1.  Exit SSH by typing `exit` into the command prompt.
 
 You have sent two events to the `hello-display` event consumer and two events to
@@ -375,20 +335,17 @@ the `goodbye-display` event consumer (note that `say-hello-goodbye` activates
 the trigger conditions for _both_ `hello-display` and `goodbye-display`). You
 will verify that these events were received correctly in the next section.
 
-## Verifying that events were received
+# Verifying that events were received
 
 After you send the events, verify that the events were received by the correct subscribers.
 
 1. Look at the logs for the `hello-display` event consumer by entering the
    following command:
-
    ```
    kubectl --namespace event-example logs -l app=hello-display --tail=100
    ```
-
    This returns the `Attributes` and `Data` of the events you sent to
    `hello-display`:
-
    ```
    ☁️  cloudevents.Event
    Validation: valid
@@ -421,17 +378,13 @@ After you send the events, verify that the events were received by the correct s
       "msg": "Hello Knative! Goodbye Knative!"
     }
    ```
-
 1. Look at the logs for the `goodbye-display` event consumer by entering the
    following command:
-
    ```
    kubectl --namespace event-example logs -l app=goodbye-display --tail=100
    ```
-
    This returns the `Attributes` and `Data` of the events you sent to
    `goodbye-display`:
-
    ```
    ☁️  cloudevents.Event
    Validation: valid
@@ -465,12 +418,11 @@ After you send the events, verify that the events were received by the correct s
      }
    ```
 
-## Cleaning up example resources
+# Cleaning up example resources
 
 You can delete the `event-example` namespace and its associated resources from your cluster if you do not plan to use it again in the future.
 
 Delete the `event-example` namespace and all of its resources from your cluster by entering the following command:
-
 ```
 kubectl delete namespace event-example
 ```
