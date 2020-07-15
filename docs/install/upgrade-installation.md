@@ -82,7 +82,7 @@ The release notes for each release will explicitly whether a migration is requir
 
 ie.
 ```bash
-kubectl apply --filename {{< artifact repo="serving" file="serving-storage-version-migration.yaml" >}}
+kubectl create --filename {{< artifact repo="serving" file="serving-post-install-jobs.yaml" >}}
 ```
 
 ## Performing the upgrade
