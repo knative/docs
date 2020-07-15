@@ -31,7 +31,7 @@ The [broker](./broker/README.md#broker) allows you to route events to different 
     ```
     kubectl create -f - <<EOF
     apiVersion: eventing.knative.dev/v1
-    kind: Broker
+    kind: broker
     metadata:
      name: default
      namespace: event-example
@@ -41,7 +41,7 @@ The [broker](./broker/README.md#broker) allows you to route events to different 
 1. Verify that the broker is working correctly, by entering the following command:
 
     ```
-    kubectl --namespace event-example get Broker default
+    kubectl -n event-example get broker default
     ```
 
     This shows information about your broker. If the broker is working correctly, it shows a `READY` status of `True`:
@@ -63,7 +63,7 @@ demonstrate how you can configure your event producers to target a specific cons
    command:
 
      ```
-     kubectl --namespace event-example apply --filename - << END
+     kubectl -n event-example apply -f << EOF
      apiVersion: apps/v1
      kind: Deployment
      metadata:
@@ -94,14 +94,14 @@ demonstrate how you can configure your event producers to target a specific cons
        - protocol: TCP
          port: 80
          targetPort: 8080
-     END
+     EOF
      ```
 
 1. To deploy the `goodbye-display` consumer to your cluster, run the following
    command:
 
      ```
-     kubectl --namespace event-example apply --filename - << END
+     kubectl -n event-example apply -f - << EOF
      apiVersion: apps/v1
      kind: Deployment
      metadata:
@@ -133,12 +133,12 @@ demonstrate how you can configure your event producers to target a specific cons
        - protocol: TCP
          port: 80
          targetPort: 8080
-     END
+     EOF
      ```
 
 1. Verify that the event consumers are working by entering the following command:
      ```
-     kubectl --namespace event-example get deployments hello-display goodbye-display
+     kubectl -n event-example get deployments hello-display goodbye-display
      ```
    This lists the `hello-display` and `goodbye-display` consumers that you
    deployed:
@@ -158,7 +158,7 @@ Each trigger can specify a filter that enables selection of relevant events base
 
 1. Create a trigger by entering the following command:
    ```
-   kubectl --namespace event-example apply --filename - << END
+   kubectl -n event-example apply -f - << EOF
    apiVersion: eventing.knative.dev/v1
    kind: Trigger
    metadata:
@@ -173,14 +173,14 @@ Each trigger can specify a filter that enables selection of relevant events base
         apiVersion: v1
         kind: Service
         name: hello-display
-   END
+   EOF
    ```
    The command creates a trigger that sends all events of type `greeting` to
    your event consumer named `hello-display`.
 
 1. To add a second trigger, enter the following command:
    ```
-   kubectl --namespace event-example apply --filename - << END
+   kubectl -n event-example apply -f - << EOF
    apiVersion: eventing.knative.dev/v1
    kind: Trigger
    metadata:
@@ -195,7 +195,7 @@ Each trigger can specify a filter that enables selection of relevant events base
         apiVersion: v1
         kind: Service
         name: goodbye-display
-   END
+   EOF
    ```
    The command creates a trigger that sends all events of source `sendoff` to
    your event consumer named `goodbye-display`.
@@ -203,7 +203,7 @@ Each trigger can specify a filter that enables selection of relevant events base
 1. Verify that the triggers are working correctly by running the following
    command:
    ```
-   kubectl --namespace event-example get triggers
+   kubectl -n event-example get triggers
    ```
    This returns the `hello-display` and `goodbye-display` triggers that you
    created:
@@ -226,7 +226,7 @@ The broker can only be accessed from within the cluster where Knative Eventing i
 
 To create a pod, enter the following command:
 ```
-kubectl --namespace event-example apply --filename - << END
+kubectl -n event-example apply -f - << EOF
 apiVersion: v1
 kind: Pod
 metadata:
@@ -244,14 +244,14 @@ spec:
     terminationMessagePath: /dev/termination-log
     terminationMessagePolicy: File
     tty: true
-END
+EOF
 ```
 
 ## Sending events to the broker
 
 1. SSH into the pod by running the following command:
     ```
-    kubectl --namespace event-example attach curl -it
+    kubectl -n event-example attach curl -it
     ```
 
     You will see a prompt similar to the following:
@@ -275,7 +275,7 @@ END
          -H "Content-Type: application/json" \
          -d '{"msg":"Hello Knative!"}'
        ```
-       When the `Broker` receives your event, `hello-display` will activate and send
+       When the broker receives your event, `hello-display` will activate and send
        it to the event consumer of the same name.
        If the event has been received, you will receive a `202 Accepted` response
        similar to the one below:
@@ -298,7 +298,7 @@ END
          -H "Content-Type: application/json" \
          -d '{"msg":"Goodbye Knative!"}'
        ```
-       When the `Broker` receives your event, `goodbye-display` will activate and
+       When the broker receives your event, `goodbye-display` will activate and
        send the event to the event consumer of the same name.
        If the event has been received, you will receive a `202 Accepted` response
        similar to the one below:
@@ -343,7 +343,7 @@ After you send the events, verify that the events were received by the correct s
 1. Look at the logs for the `hello-display` event consumer by entering the
    following command:
    ```
-   kubectl --namespace event-example logs -l app=hello-display --tail=100
+   kubectl -n event-example logs -l app=hello-display --tail=100
    ```
    This returns the `Attributes` and `Data` of the events you sent to
    `hello-display`:
@@ -382,7 +382,7 @@ After you send the events, verify that the events were received by the correct s
 1. Look at the logs for the `goodbye-display` event consumer by entering the
    following command:
    ```
-   kubectl --namespace event-example logs -l app=goodbye-display --tail=100
+   kubectl -n event-example logs -l app=goodbye-display --tail=100
    ```
    This returns the `Attributes` and `Data` of the events you sent to
    `goodbye-display`:
