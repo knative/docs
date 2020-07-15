@@ -1,5 +1,5 @@
 ---
-title: "defaults-br-config"
+title: "Default config (config-br-defaults)"
 weight: 30
 type: "docs"
 ---
@@ -35,9 +35,9 @@ data:
       namespace: knative-eventing
 ```
 
-This means that any Broker created without a specific BrokerClass annotation or
-`spec.config` will use a `MTChannelBasedBroker` implementation and the Broker
-will have spec.config like so:
+This means that any Broker created without a specific BrokerClass annotation
+will use `MTChannelBasedBroker`, and any Broker without a `spec.config`
+will have `spec.config` like so:
 
 ```
 spec:
@@ -56,7 +56,7 @@ If you have installed a different Broker, or multiple, you can change the
 default Broker used at the cluster level and by namespace. If you for example
 have installed MT Channel Based Broker as well as `YourBroker` and would prefer
 that by default any Broker created uses `YourBroker` you could modify the
-configmap to look like this:
+`ConfigMap` to look like this:
 
 ```yaml
 apiVersion: v1
@@ -75,15 +75,15 @@ data:
 
 Now every Broker created in the cluster without the BrokerClass annotation will
 be using `YourBroker` as the Broker implementation. Note that you can always use
-a different implementation by explicity specifying the BrokerClass annotation
+a different implementation by explicitly specifying the BrokerClass annotation
 when you create a Broker.
 
 ### Changing the default BrokerClass for namespaces
 
 As mentioned, you can also control the defaulting behaviour for some set of
-namespaces. So, if for example, you wanted to use YourBroker for all the other
-Brokers created, but wanted to use MTChannelBasedBroker for the following
-namespaces: namespace1 and namespace2. You would modify the config map like
+namespaces. So, if for example, you wanted to use `YourBroker` for all the other
+Brokers created, but wanted to use `MTChannelBasedBroker` for the following
+namespaces: `namespace1` and `namespace2`. You would modify the config map like
 this:
 
 ```yaml
@@ -138,7 +138,7 @@ data:
 ```
 
 Now every Broker created in the cluster without spec.config will be configured
-to use `config-kafka-channel` ConfigMap. Note that you can always still
+to use `config-kafka-channel` `ConfigMap`. Note that you can always still
 explicitly specify a different configuration for any given Broker by specifying
 it in the `spec.config`.
 
@@ -146,10 +146,10 @@ it in the `spec.config`.
 ### Changing the default configuration for namespaces
 
 As mentioned, you can also control the defaulting behaviour for some set of
-namespaces. So, if for example, you wanted to use config-kafka-channel for all
-the other Brokers created, but wanted to use config-br-default-channel config the
-following namespaces: namespace3 and namespace4. You would modify the config map like
-this:
+namespaces. So, if for example, you wanted to use `config-kafka-channel` for all
+the other Brokers created, but wanted to use `config-br-default-channel` config
+the following namespaces: `namespace3` and `namespace4`. You would modify the
+`ConfigMap` like this:
 
 
 ```yaml
