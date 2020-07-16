@@ -139,7 +139,7 @@ Next, choose a networking layer. This example uses Kourier. Kourier is the optio
 To install Kourier and make it available as a service leveraging the node ports, you’ll need to download the YAML file first and make a few changes.
 
 ```bash
-curl -Lo kourier.yaml https://github.com/knative/net-kourier/releases/download/v0.15.0/kourier.yaml
+curl -Lo kourier.yaml https://github.com/knative-sandbox/net-kourier/releases/download/v0.15.0/kourier.yaml
 ```
 
 By default, the Kourier service is set to be of type `LoadBalancer`. On local machines, this type doesn’t work, so you’ll have to change the type to `NodePort` and add `nodePort` elements to the two listed ports.
