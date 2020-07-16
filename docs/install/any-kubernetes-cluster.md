@@ -551,7 +551,7 @@ The following command installs an implementation of Channel that runs in-memory.
 The following command installs an implementation of Broker that utilizes Channels:
 
    ```bash
-   kubectl apply --filename {{< artifact repo="eventing" file="channel-broker.yaml" >}}
+   kubectl apply --filename {{< artifact repo="eventing" file="deprecated-channel-broker.yaml" >}}
    ```
 
 To customize which broker channel implementation is used, update the following
