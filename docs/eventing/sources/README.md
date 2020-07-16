@@ -1,31 +1,16 @@
-<!--
-This is a generated file and should not be changed manually. All changes should follow the
-procedure:
-
-1. Update the information in [`sources.yaml`](./sources.yaml).
-
-2. Run the generator tool:
-    ```shell
-    go run docs/eventing/sources/generator/main.go
-    ```
--->
-
 Event Sources are Kubernetes Custom Resources which provide a mechanism for registering interest in
-a class of events from a particular software system. Since different event sources may be described
-by different Custom Resources, this page provides an index of the available source resource types as
-well as links to installation instructions.
+a class of events from a particular software system. 
 
-This is a non-exhaustive list of Event sources for Knative.
+This page provides an index of the available source resource types as well as links to 
+their documentation.
 
+Name | API Version | Organization | Description
+--- | --- | --- | ---
+[PingSource](./pingsource/README.md) | v1alpha2 | Knative | Produces events with a fixed payload on a specified cron schedule.
 
-### Inclusion in this list is not an endorsement, nor does it imply any level of support.
-
-
-## Sources
-
-These are sources that are installed as `CRD`s.
-
-Name | Status | Support | Description
+<--  TODO: update
+ 
+Name | API Version | Organization | Description
 --- | --- | --- | ---
 [AWS SQS](https://github.com/knative/eventing-contrib/blob/master/awssqs/pkg/apis/sources/v1alpha1/aws_sqs_types.go) | Proof of Concept | None | Brings [AWS Simple Queue Service](https://aws.amazon.com/sqs/) messages into Knative.
 [Apache Camel](https://github.com/knative/eventing-contrib/blob/master/camel/source/pkg/apis/sources/v1alpha1/camelsource_types.go) | Proof of Concept | None | Allows to use [Apache Camel](https://github.com/apache/camel) components for pushing events into Knative.
@@ -43,8 +28,6 @@ Name | Status | Support | Description
 [Ping](https://github.com/knative/eventing/blob/master/pkg/apis/sources/v1alpha2/ping_types.go) | In development | None | Uses an in-memory timer to produce events with a fixed payload on a specified cron schedule.
 [VMware](https://github.com/vmware-tanzu/sources-for-knative/tree/{{< branch >}}/pkg/apis/source/v1alpha1/vspheresource_types.go) | Active Development | None | Brings [vSphere](https://www.vmware.com/products/vsphere.html) events into Knative.
 
-
-
 ## Meta Sources
 
 These are not directly usable, but make writing a Source much easier.
@@ -55,8 +38,6 @@ Name | Status | Support | Description
 [Container Source](https://knative.dev/docs/eventing/migration/sinkbinding) | Active Development | Knative | Given a `spec.template` with at least a container image specified, ContainerSource will keep a `Pod` running with the specified image(s). `K_SINK` (destination address) and `KE_CE_OVERRIDES` (JSON CloudEvents attributes) environment variables are injected into the running image(s). It is used by multiple other Sources as underlying infrastructure.
 [Sample Source](https://github.com/knative/sample-source) | Active Development | Knative | Used as reference implementation supporting [Writing an Event Source from Scratch tutorial](../samples/writing-receive-adapter-source).
 [SinkBinding](https://knative.dev/docs/eventing/samples/sinkbinding/) | Active Development | Knative | SinkBinding provides a framework for injecting `K_SINK` (destination address) and `K_CE_OVERRIDES` (JSON cloudevents attributes) environment variables into any Kubernetes resource which has a `spec.template` that looks like a Pod (aka PodSpecable).
-
-
 
 ### ContainerSource Containers
 
@@ -84,3 +65,4 @@ These are containers intended to be used with `SinkBinding`. See the docs [here]
 Name | Status | Support | Description
 --- | --- | --- | ---
 [Konnek](https://konnek.github.io/docs/#/) | Active Development | None | Retrieves events from cloud platforms (like AWS and GCP) and transforms them into CloudEvents for consumption in Knative.
+-->
