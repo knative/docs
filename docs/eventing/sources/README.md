@@ -33,7 +33,7 @@ Source as underlying infrastructure.
 [AWS CodeCommit](https://github.com/triggermesh/aws-event-sources/blob/master/cmd/awscodecommitsource/README.md)
 | Supported | TriggerMesh | Registers for events of the specified types on the
 specified AWS CodeCommit repository. Brings those events into Knative.
-[AWS Cognito](https://github.com/triggermesh/aws-event-sources/blob/master/cmd/awscognitosource/README.md)
+[AWS Cognito](https://github.com/triggermesh/aws-event-sources/tree/master/cmd/awscognitoidentitysource/README.md)
 | Supported | TriggerMesh | Registers for AWS Cognito events. Brings those
 events into Knative.
 [AWS DynamoDB](https://github.com/triggermesh/aws-event-sources/blob/master/cmd/awsdynamodbsource/README.md)
@@ -78,6 +78,6 @@ into CloudEvents for consumption in Knative.
 [K8s](https://github.com/Harwayne/auto-container-source/tree/master/k8s-event-source)
 | Proof of Concept | None | Brings Kubernetes cluster events into Knative. Uses
 AutoContainerSource for underlying infrastructure.
-[VMware](https://github.com/vmware-tanzu/sources-for-knative/tree/master/pkg/apis/source/v1alpha1/vspheresource_types.go)
+[VMware](https://github.com/vmware-tanzu/sources-for-knative/blob/master/pkg/apis/sources/v1alpha1/vspheresource_types.go)
 | Active Development | None | Brings
 [vSphere](https://www.vmware.com/products/vsphere.html) events into Knative.
