@@ -156,7 +156,7 @@ kubectl delete namespace pingsource-example
 ## Reference Documentation
 
 See
-[the specification](../../../../reference/eventing/eventing#sources.knative.dev/v1alpha2.PingSource).
+[the specification](../../reference/eventing/eventing.md#sources.knative.dev/v1alpha2.PingSource).
 
 ## Contact
 
