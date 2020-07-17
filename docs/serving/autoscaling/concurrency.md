@@ -113,8 +113,6 @@ Requests numbered 7 to 10 will still be sent to the existing replicas, but this 
 * **Possible values:** float
 * **Default:** `70`
 
-**Note:** If the activator is in the routing path, it will fully load all replicas up to `containerConcurrency`. It currently does not take target utilization into account.
-
 **Example:**
 {{< tabs name="target-utilization" default="Per Revision" >}}
 {{% tab name="Per Revision" %}}
