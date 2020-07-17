@@ -112,6 +112,17 @@ data:
  container-concurrency: "50"
 ```
 {{< /tab >}}
+{{% tab name="Global (Operator)" %}}
+```yaml
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+spec:
+  config:
+    defaults:
+      container-concurrency: "50"
+```
 {{< /tabs >}}
 
 ## Target utilization
