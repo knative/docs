@@ -18,11 +18,11 @@ Flags can have the following values:
 * Disabled: the feature cannot be enabled.
 
 These three states don't make sense for all features.
-Let's consider two types of features: `multi-container` and `kubernetes/podspec-dryrun`.
+Let's consider two types of features: `multi-container` and `kubernetes.podspec-dryrun`.
 
 `multi-container` allows the user to specify more than one container in the Knative Service spec. In this case, `Enabled` and `Allowed` are equivalent because using this feature requires to actually use it in the Knative Service spec. If a single container is specified, whether the feature is enabled or not doesn't change anything.
 
-`kubernetes/podspec-dryrun` changes the behavior of the Kubernetes implementation of the Knative API, but it has nothing to do with the Knative API itself. In this case, `Enabled` means the feature will be enabled unconditionally, `Allowed` means that the feature will be enabled only when specified with an annotation, and `Disabled` means that the feature cannot be used at all.
+`kubernetes.podspec-dryrun` changes the behavior of the Kubernetes implementation of the Knative API, but it has nothing to do with the Knative API itself. In this case, `Enabled` means the feature will be enabled unconditionally, `Allowed` means that the feature will be enabled only when specified with an annotation, and `Disabled` means that the feature cannot be used at all.
 
 ## Lifecyle
 Features and extensions go through 3 similar phases (Alpha, Beta, GA) but with important differences.
