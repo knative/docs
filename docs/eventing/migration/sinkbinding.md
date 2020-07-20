@@ -15,7 +15,7 @@ In YAML, these two options are equivalent:
 1. `ContainerSource` that emits events to a `Knative Service`:
 
     ```yaml
-    apiVersion: sources.knative.dev/v1alpha2
+    apiVersion: sources.knative.dev/v1beta1
     kind: ContainerSource
     metadata:
       name: urbanobservatory-event-source
