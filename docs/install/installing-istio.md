@@ -142,29 +142,27 @@ EOF
 ```
 
 After you install the cluster local gateway, your service and deployment for the local gateway are both named `cluster-local-gateway`.
-You do not need to update the `config-istio` configmap under the `knative-serving` namespace, because Knative Serving can use
-the local gateway cluster-local-gateway by default.
 
 ### Updating the `config-istio` configmap to use a non-default local gateway
 
 If you create a custom service and deployment for local gateway with a name other than `cluster-local-gateway`, you
 need to update gateway configmap `config-istio` under the `knative-serving` namespace.
 
-1. Edit the 1config-istio1 configmap:
+1. Edit the `config-istio` configmap:
 
 ```shell
 kubectl edit configmap config-istio -n knative-serving
 ```
 
-2. Replace the `local-gateway.knative-serving.cluster-local-gateway` field with the custom service. If you name both
+2. Replace the `local-gateway.knative-serving.cluster-local-gateway` field with the custom service. As an example, if you name both
 the service and deployment `custom-local-gateway` under the namespace `istio-system`, it should be updated to:
 
 ```
 custom-local-gateway.istio-system.svc.cluster.local
 ```
 
-If both the custom service and deployment are labeled with `custom: custom-local-gateway`, not the default
-`istio: cluster-local-gateway`, you need to update gateway instance `cluster-local-gateway` in the `knative-serving` namespace:
+As an example, if both the custom service and deployment are labeled with `custom: custom-local-gateway`, not the default
+`istio: cluster-local-gateway`, you must update gateway instance `cluster-local-gateway` in the `knative-serving` namespace:
 
 ```shell
 kubectl edit gateway cluster-local-gateway -n knative-serving
@@ -200,10 +198,9 @@ kubectl get pods --namespace istio-system
 
 ### Configuring DNS
 
-Knative dispatches to different services based on their hostname, so it greatly
-simplifies things to have DNS properly configured. For this, we must look up the
-external IP address that Istio received. This can be done with the following
-command:
+Knative dispatches to different services based on their hostname, so it is recommended to have DNS properly configured.
+
+To do this, begin by looking up the external IP address that Istio received:
 
 ```
 $ kubectl get svc -nistio-system
@@ -213,10 +210,10 @@ istio-ingressgateway    LoadBalancer   10.0.2.24    34.83.80.117   15020:32206/T
 istio-pilot             ClusterIP      10.0.3.27    <none>         15010/TCP,15011/TCP,8080/TCP,15014/TCP       2m14s
 ```
 
-This external IP can be used with your DNS provider with a wildcard `A` record;
-however, for a basic functioning DNS setup (not suitable for production!) this
-external IP address can be used with `xip.io` in the `config-domain` ConfigMap
-in `knative-serving`. You can edit this with the following command:
+This external IP can be used with your DNS provider with a wildcard `A` record. However, for a basic non-production set
+up, this external IP address can be used with `xip.io` in the `config-domain` ConfigMap in `knative-serving`.
+
+You can edit this by using the following command:
 
 ```
 kubectl edit cm config-domain --namespace knative-serving
