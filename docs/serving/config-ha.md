@@ -10,71 +10,16 @@ Active/passive HA in Knative is available through leader election, which can be 
 
 When using a leader election HA pattern, instances of controllers are already scheduled and running inside the cluster before they are required. These controller instances compete to use a shared resource, known as the leader election lock. The instance of the controller that has access to the leader election lock resource at any given time is referred to as the leader.
 
-HA functionality is available on Knative for the following components:
+HA functionality is enabled by default for all Knative Serving components except `autoscaler`.
 
-- `activator`
-- `controller`
-- `webhook`
-- (optional) `hpaautoscaler` (if HPA autoscaling)
-- (optional) `istiocontroller` (if `net-istio`)
-- (optional) `contour-ingress-controller` (if `net-contour`)
-- (optional) `kourier` (if `net-kourier`)
-- (optional) `nscontroller` (if using wildcard certificates)
-- (optional) `certcontroller` (if using `net-certmanager`)
+## Disabling leader election
 
-Note that `net-kourier` runs in `kourier-system`, so similar commands to what's below should be run against the configmaps and deployments in that namespace.
-
-HA functionality is not currently available for the following components:
-
-- `autoscaler`
-
-## Enabling leader election
-
-**NOTE:** Leader election functionality is still an alpha phase feature currently in development.
-
-1. Enable leader election for the control plane controllers:
-```
-$ kubectl patch configmap/config-leader-election \
-  --namespace knative-serving \
-  --type merge \
-  --patch '{"data":{"enabledComponents": "controller,contour-ingress-controller,hpaautoscaler,certcontroller,istiocontroller,net-http01,nscontroller,webhook"}}'
-```
-
-1. Restart the controllers:
-```
-$ kubectl rollout restart deployment <deployment-name> -n knative-serving
-```
-
-  **NOTE:** You will experience temporary control plane downtime during this step.
-
-  When your controllers come back up, they should be running as leader-elected.
-  At this point, we've configured the controllers to use leader election and we
-  can scale the control plane up!
-
-1. After the controllers have been configured to use leader election, the control plane can be scaled up:
-```
-$ kubectl -n knative-serving scale deployment <deployment-name> --replicas=2
-```
+For components leveraging leader election to achieve HA, this capability can be disabled by passing the flag: `--disable-ha`.  This option will go away when HA graduates to "stable".
 
 ## Scaling the control plane
 
-The following serving controller deployments can be scaled up once leader election is enabled.
+With the notable exception of the `autoscaler` you can scale up any deployment running in `knative-serving` (or `kourier-system`) with a command like:
 
-Standard deployments:
-
-- `controller`
-- `webhook`
-
-Optionally installed deployments:
-
-- `autoscaler-hpa`
-- `contour-ingress-controller`
-- `networking-istio`
-- `networking-ns-cert`
-- `networking-certmanager`
-- `3scale-kourier-control` (in `kourier-system`)
-
-Scale up the deployment(s):
 ```
 $ kubectl -n knative-serving scale deployment <deployment-name> --replicas=2
 ```
@@ -82,3 +27,4 @@ $ kubectl -n knative-serving scale deployment <deployment-name> --replicas=2
 - Setting `--replicas` to a value of `2` enables HA.
 - You can use a higher value if you have a use case that requires more replicas of a deployment. For example, if you require a minimum of 3 `controller` deployments, set `--replicas=3`.
 - Setting `--replicas=1` disables HA.
+- Passing `--disable-ha` to the controller process disables leader election.
