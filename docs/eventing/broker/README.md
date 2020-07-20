@@ -64,7 +64,7 @@ it comes configured to create
 [MT Channel Based Brokers](./mt-channel-based-broker.md). If you are using a
 different Broker implementation, you should modify the `ConfigMap`
 accordingly. You can read more details on how to use
-[default-br-config config map ](./defaults-br-config.md)
+[default-br-config config map ](./config-br-defaults.md)
 
 ```yaml
 apiVersion: v1
