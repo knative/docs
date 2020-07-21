@@ -61,11 +61,11 @@ spec:
 Knative Eventing provides a `ConfigMap` which by default lives in
 `knative-eventing` namespace and is called `config-br-defaults`. Out of the box
 it comes configured to create
-[MT Channel Based Brokers](./mt-channel-based-broker.md) as well In Memory
+[MT Channel Based Brokers](./mt-channel-based-broker.md) as well as In Memory
 Channels. If you are using a different Broker implementation, or want to use
-different channel implementation, you should modify the `ConfigMap`
+a different channel implementation, you should modify the `ConfigMap`
 accordingly. You can read more details on how to use
-[default-br-config configmap ](./config-br-defaults.md)
+[config-br-defaults `ConfigMap`](./config-br-defaults.md)
 
 ```yaml
 apiVersion: v1
