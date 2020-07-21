@@ -170,7 +170,7 @@ Tutorial on how to build and deploy a `KafkaSource` [Eventing source](../../../s
        }
 
    ```
-   Now manually delete the kafkasource deployment and allow the `kafka-controller-manager` deployment running in `native-sources` namespace to redploy it. Debug level logs should be visible now.
+   Now manually delete the kafkasource deployment and allow the `kafka-controller-manager` deployment running in `knative-sources` namespace to redeploy it. Debug level logs should be visible now.
 
    ```
    $ kubectl logs --selector='knative-eventing-source-name=kafka-source'
