@@ -34,9 +34,8 @@ spec:
 
 If the field `spec.version` is not specified, Knative Operator will install Knative Serving of the latest version available
 in the operator. If users specify an invalid or unavailable version, Knative Operator will do nothing. Knative Operator
-does not bundle Knative components with the version, 2 Minor versions or more earlier than the current operator version.
-For example, if the version of Knative operator is 0.16.x, the earliest version of Knative Serving is 0.14.0, as available in
-this operator.
+always includes 3 minor releases. For example, if the version of Knative operator is 0.16.x, the earliest version of
+Knative Serving is 0.14.0, as available in this operator.
 
 ## Serving Configuration by ConfigMap
 
