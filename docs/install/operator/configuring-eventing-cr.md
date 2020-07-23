@@ -8,11 +8,33 @@ aliases:
 
 The Knative Eventing operator can be configured with these options:
 
+- [Version Configuration](#version-configuration)
 - [Eventing Configuration by ConfigMap](#eventing-configuration-by-configMap)
 - [Private repository and private secret](#private-repository-and-private-secrets)
 - [Configuring default broker class](#configuring-default-broker-class)
 
 __NOTE:__ Kubernetes spec level policies cannot be configured using the Knative operators.
+
+## Version Configuration
+
+As of 0.16.0, Knative users are able to install Knative Eventing of a specific version via the field `spec.version`. For
+example, if you want to install Knative Eventing 0.16.0, you can apply the following `KnativeEventing` custom resource:
+
+```
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeEventing
+metadata:
+  name: knative-eventing
+  namespace: knative-eventing
+spec:
+  version: 0.16.0
+```
+
+If the field `spec.version` is not specified, Knative Operator will install Knative Eventing of the latest version available
+in the operator. If users specify an invalid or unavailable version, Knative Operator will do nothing. Knative Operator
+does not bundle Knative components with the version, 2 Minor versions or more earlier than the current operator version.
+For example, if the version of Knative operator is 0.16.x, the earliest version of Knative Eventing is 0.14.0, as available
+in this operator.
 
 ## Eventing Configuration by ConfigMap
 

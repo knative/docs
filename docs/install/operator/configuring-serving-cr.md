@@ -8,6 +8,7 @@ aliases:
 
 The Knative Serving operator can be configured with these options:
 
+- [Version Configuration](#version-configuration)
 - [Serving Configuration by ConfigMap](#serving-configuration-by-configMap)
 - [Private repository and private secret](#private-repository-and-private-secrets)
 - [SSL certificate for controller](#ssl-certificate-for-controller)
@@ -15,6 +16,27 @@ The Knative Serving operator can be configured with these options:
 - [Cluster local gateway](#configuration-of-cluster-local-gateway)
 - [High availability](#high-availability)
 - [System Resource Settings](#system-resource-settings)
+
+## Version Configuration
+
+As of 0.16.0, Knative users are able to install Knative Serving of a specific version via the field `spec.version`. For
+example, if you want to install Knative Serving 0.16.0, you can apply the following `KnativeServing` custom resource:
+
+```
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  version: 0.16.0
+```
+
+If the field `spec.version` is not specified, Knative Operator will install Knative Serving of the latest version available
+in the operator. If users specify an invalid or unavailable version, Knative Operator will do nothing. Knative Operator
+does not bundle Knative components with the version, 2 Minor versions or more earlier than the current operator version.
+For example, if the version of Knative operator is 0.16.x, the earliest version of Knative Serving is 0.14.0, as available in
+this operator.
 
 ## Serving Configuration by ConfigMap
 
