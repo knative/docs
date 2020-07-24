@@ -37,6 +37,11 @@ in the operator. If users specify an invalid or unavailable version, Knative Ope
 always includes 3 minor releases. For example, if the version of Knative operator is 0.16.x, the earliest version of
 Knative Serving is 0.14.0, as available in this operator.
 
+If there has been Knative Serving already installed by the operator, applying the `KnativeServing` CR with a different
+`spec.version` means upgrading or downgrading the Knative Serving. However, Knative operator only allows version migration
+from the existing version to the adjacent minor releases. For example, if the existing Knative Serving is in 0.14.x, you
+can only upgrade to 0.15.x.
+
 ## Serving Configuration by ConfigMap
 
 Because the operator manages the Knative Serving installation, it will overwrite any updates to the `ConfigMaps` which are used to configure Knative Serving.

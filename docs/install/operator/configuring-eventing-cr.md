@@ -35,6 +35,11 @@ in the operator. If users specify an invalid or unavailable version, Knative Ope
 always includes 3 minor releases. For example, if the version of Knative operator is 0.16.x, the earliest version of
 Knative Eventing is 0.14.0, as available in this operator.
 
+If there has been Knative Eventing already installed by the operator, applying the `KnativeEventing` CR with a different
+`spec.version` means upgrading or downgrading the Knative Eventing. However, Knative operator only allows version migration
+from the existing version to the adjacent minor releases. For example, if the existing Knative Eventing is in 0.14.x, you
+can only upgrade to 0.15.x.
+
 ## Eventing Configuration by ConfigMap
 
 The Knative Eventing operator CR is configured the same way as the Knative Serving operator CR. Because the operator manages
