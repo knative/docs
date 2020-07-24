@@ -551,7 +551,7 @@ The following command installs an implementation of Channel that runs in-memory.
 The following command installs an implementation of Broker that utilizes Channels:
 
    ```bash
-   kubectl apply --filename {{< artifact repo="eventing" file="channel-broker.yaml" >}}
+   kubectl apply --filename {{< artifact repo="eventing" file="mt-channel-broker.yaml" >}}
    ```
 
 To customize which broker channel implementation is used, update the following
@@ -567,7 +567,7 @@ ConfigMap to specify which configurations are used for which namespaces:
      default-br-config: |
        # This is the cluster-wide default broker channel.
        clusterDefault:
-         brokerClass: ChannelBasedBroker
+         brokerClass: MTChannelBasedBroker
          apiVersion: v1
          kind: ConfigMap
          name: imc-channel
