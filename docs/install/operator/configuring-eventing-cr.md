@@ -17,7 +17,7 @@ __NOTE:__ Kubernetes spec level policies cannot be configured using the Knative 
 
 ## Version Configuration
 
-As of 0.16.0, Knative users are able to install Knative Eventing of a specific version via the field `spec.version`. For
+As of 0.16.0, Knative administrators are able to install Knative Eventing of a specific version via the field `spec.version`. For
 example, if you want to install Knative Eventing 0.16.0, you can apply the following `KnativeEventing` custom resource:
 
 ```
@@ -33,12 +33,12 @@ spec:
 If the field `spec.version` is not specified, Knative Operator will install Knative Eventing of the latest version available
 in the operator. If users specify an invalid or unavailable version, Knative Operator will do nothing. Knative Operator
 always includes 3 minor releases. For example, if the version of Knative operator is 0.16.x, the earliest version of
-Knative Eventing is 0.14.0, as available in this operator.
+Knative Eventing is 0.14.2, as available in this operator.
 
-If there has been Knative Eventing already installed by the operator, applying the `KnativeEventing` CR with a different
-`spec.version` means upgrading or downgrading the Knative Eventing. However, Knative operator only allows version migration
-from the existing version to the adjacent minor releases. For example, if the existing Knative Eventing is in 0.14.x, you
-can only upgrade to 0.15.x.
+If Knative Eventing is already managed by the operator, updating the `spec.version` field in the `KnativeEventing` resource
+allows upgrading or downgrading the Knative Eventing version without needing to change the operator. Note that the Knative operator only allows
+upgrade or downgrade by a single minor release at this time. For example, if the existing Knative Eventing is in 0.14.x, you
+must upgrade to 0.15.x, before upgrading to 0.16.x.
 
 ## Eventing Configuration by ConfigMap
 
