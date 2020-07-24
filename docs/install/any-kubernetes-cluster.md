@@ -570,7 +570,7 @@ ConfigMap to specify which configurations are used for which namespaces:
          brokerClass: MTChannelBasedBroker
          apiVersion: v1
          kind: ConfigMap
-         name: imc-channel
+         name: config-br-default-channel
          namespace: knative-eventing
        # This allows you to specify different defaults per-namespace,
        # in this case the "some-namespace" namespace will use the Kafka
@@ -578,7 +578,7 @@ ConfigMap to specify which configurations are used for which namespaces:
        # to install kafka also to make use of this).
        namespaceDefaults:
          some-namespace:
-           brokerClass: ChannelBasedBroker
+           brokerClass: MTChannelBasedBroker
            apiVersion: v1
            kind: ConfigMap
            name: kafka-channel
