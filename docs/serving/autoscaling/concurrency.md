@@ -74,17 +74,20 @@ spec:
 
 ### Hard limit
 
-The hard limit has no global setting and can only be specified [per revision](./autoscaling-concepts.md).
-This particular per-revision setting is not an annotation; it is present on the revision's spec itself as `containerConcurrency`.
+The hard limit is specified [per Revision](./autoscaling-concepts.md) using the `containerConcurrency` field on the Revision spec. This setting is not an annotation.
+
+There is no global setting for the hard limit in the autoscaling ConfigMap, because `containerConcurrency` has implications outside of autoscaling, such as on buffering and queuing of requests. However, a default value can be set for the Revision's `containerConcurrency` field in `config-defaults.yaml`.
 
 * The default value is `0`, meaning that there is no limit on the number of requests that are allowed to flow into the revision.
 * A value greater than `0` specifies the exact number of requests that are allowed to flow to the replica at any one time.
 
-* **Global key:** No global key.
+* **Global key:** `container-concurrency` (in `config-defaults.yaml`)
 * **Per-revision spec key:** `containerConcurrency`
 * **Possible values:** integer
 * **Default:** `0`, meaning no limit
 
+{{< tabs name="container-concurrency" default="Per Revision" >}}
+{{% tab name="Per Revision" %}}
 **Example:**
 ```yaml
 apiVersion: serving.knative.dev/v1
@@ -97,6 +100,30 @@ spec:
     spec:
       containerConcurrency: 50
 ```
+{{< /tab >}}
+{{% tab name="Global (Defaults ConfigMap)" %}}
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+ name: config-defaults
+ namespace: knative-serving
+data:
+ container-concurrency: "50"
+```
+{{< /tab >}}
+{{% tab name="Global (Operator)" %}}
+```yaml
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+spec:
+  config:
+    defaults:
+      container-concurrency: "50"
+```
+{{< /tabs >}}
 
 ## Target utilization
 
