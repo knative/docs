@@ -97,6 +97,7 @@ The following commands install Ambassador and enable its Knative integration.
 
    ```bash
    kubectl apply --namespace ambassador \
+     --filename https://getambassador.io/yaml/ambassador/ambassador-crds.yaml \
      --filename https://getambassador.io/yaml/ambassador/ambassador-rbac.yaml \
      --filename https://getambassador.io/yaml/ambassador/ambassador-service.yaml
    ```
