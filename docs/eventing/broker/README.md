@@ -20,7 +20,7 @@ Triggers are used to filter which events are sent from the Broker to a Subscribe
 
 ## Default Broker configuration
 
-Knative Eventing provides a `config-br-defaults` ConfigMap, which lives in the `knative-eventing` namespace, and provides default configuration settings to enable the creation of [multi-tenant Brokers](./mt-channel-based-broker.md) and InMemoryChannel type Channels.
+Knative Eventing provides a `config-br-defaults` ConfigMap, which lives in the `knative-eventing` namespace, and provides default configuration settings to enable the creation of multi-tenant Brokers and InMemoryChannel type Channels.
 <!-- TODO: Add link to Channel docs-->
 **NOTE:** If you are using a different Broker or Channel implementation, you will need to modify the ConfigMap accordingly. For more information, see the [`config-br-defaults`](./config-br-defaults.md) ConfigMap documentation.
 
