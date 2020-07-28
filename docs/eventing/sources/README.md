@@ -7,7 +7,7 @@ links to their documentation.
 
 | Name | API Version | Maintainer | Description |
 | -- | -- | -- | -- |
-| [APIServerSource](https://github.com/knative/eventing/blob/master/pkg/apis/sources/v1alpha1/apiserver_types.go) | v1alpha2 | Knative  | Brings Kubernetes API server events into Knative. |
+| [APIServerSource](./apiserversource.md) | v1alpha2 | Knative  | Brings Kubernetes API server events into Knative. |
 | [AWS SQS](https://github.com/knative/eventing-contrib/blob/master/awssqs/pkg/apis/sources/v1alpha1/aws_sqs_types.go)  | v1alpha1 | Knative | Brings [AWS Simple Queue Service](https://aws.amazon.com/sqs/) messages into Knative.  |
 | [Apache Camel](https://github.com/knative/eventing-contrib/blob/master/camel/source/pkg/apis/sources/v1alpha1/camelsource_types.go) | v1alpha1   | Knative    | Allows to use [Apache Camel](https://github.com/apache/camel) components for pushing events into Knative. |
 | [Apache CouchDB](https://github.com/knative/eventing-contrib/blob/master/couchdb)                                                   | v1alpha1 | Knative    | Brings [Apache CouchDB](https://couchdb.apache.org/) messages into Knative.  |

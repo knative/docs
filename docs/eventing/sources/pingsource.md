@@ -31,7 +31,7 @@ kubectl create namespace pingsource-example
 In this step, you create one event consumer, `event-display` to verify that
 `PingSource` is properly working.
 
-To deploy the `event-display` con sumer to your cluster, run the following
+To deploy the `event-display` consumer to your cluster, run the following
 command:
 
 ```shell
