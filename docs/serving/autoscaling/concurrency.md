@@ -74,9 +74,9 @@ spec:
 
 ### Hard limit
 
-The hard limit is always specified [per revision](./autoscaling-concepts.md) via the `containerConcurrency` field on the revision spec. This particular per-revision setting is not an annotation; it is present on the revision's spec itself as `containerConcurrency`.
+The hard limit is specified [per Revision](./autoscaling-concepts.md) using the `containerConcurrency` field on the Revision spec. This setting is not an annotation.
 
-There is no global setting for the hard limit in the autoscaling config map (because `containerConcurrency` has implications outside of autoscaling, such as on buffering and queuing of requests), but a default value can be set for the Revision's `containerConcurrency` field in `config-defaults.yaml`.
+There is no global setting for the hard limit in the autoscaling ConfigMap, because `containerConcurrency` has implications outside of autoscaling, such as on buffering and queuing of requests. However, a default value can be set for the Revision's `containerConcurrency` field in `config-defaults.yaml`.
 
 * The default value is `0`, meaning that there is no limit on the number of requests that are allowed to flow into the revision.
 * A value greater than `0` specifies the exact number of requests that are allowed to flow to the replica at any one time.
