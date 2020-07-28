@@ -157,6 +157,10 @@ extensions MUST NOT contradict the semantics defined within this specification.
 
 There are several ways in which implementations can extend the model:
 * Annotations and Labels<br>
+  _Note_: Because this mechanism allows new controllers to be added to the
+  system without requiring code changes to the core Knative components, it is
+  the preferred mechanism for extending the Knative interface.
+
   Allowing end users to include annotations or labels on the Knative resources
   allows for them to indicate that they would like some additional semantics
   applied to those resources. When defining annotations, or labels, it
@@ -165,11 +169,6 @@ There are several ways in which implementations can extend the model:
   annotations defined by the specification. For more information on
   annotations and labels, see
   [here](https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#label-selector-and-annotation-conventions).
-
-  Note that this would allow for new controllers to be added to the system,
-  to detect these annotations/labels and act upon them, without requiring
-  code changes to the core Knative components. As such, when possible, this
-  mechanism is preferred.
 
 * Additional Properties<br>
   There might be times when annotations and labels can not be used to
@@ -182,6 +181,27 @@ There are several ways in which implementations can extend the model:
   to clearly indicate their scope and purpose. Choosing a name that
   is too generic might lead to conflicts with other vendor extensions
    or future changes to the specification.
+
+  For example, adding authentication on a per-tag basis via annotations
+  might look like:
+  ```
+  annotations:
+    knative.vendor.com/per-tag-auth: "{'cannary': true, 'latest': true}"
+  ```
+  but, that is not as user-friendly as extending the `traffic` section itself:
+  ```
+  spec:
+    traffic:
+    - revisionName: a
+      tag: foo
+      knative.vendor.com/auth: true
+    - revisonName: b
+      percent: 100
+      tag: stable
+    - configurationName: this
+      tag: latest
+      knative.vendor.com/auth: true
+  ```
 
 ## Service
 
@@ -1420,14 +1440,9 @@ Min: 0
 <br>
 Max: 100
    </td>
-   <td>The
-
-<a href="#request-routing">Percent is optionally used to specify the percentage of requests which should be allocated from
-the main Route domain name</a> to the specified <code>revisionName</code> or
-<code>configurationName</code>.
-
+   <td>The <code>percent</code> is optionally used to specify the percentage of requests which should be allocated from the main Route domain name to the specified <code>revisionName</code> or <code>configurationName</code>.
 <p>
-When percentage based routing is being used, all <code>traffic</code> sections for a single Service MUST have a <code>percent</code> value, and all values MUST sum to 100.
+To indicate that percetage based routing is to be used, all <code>traffic</code> sections for a single Service MUST have a <code>percent</code> value, and all values MUST sum to 100.
    </td>
    <td>OPTIONAL
    </td>
