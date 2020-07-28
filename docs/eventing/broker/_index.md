@@ -1,5 +1,5 @@
 ---
-title: "Brokers"
+title: "Broker"
 weight: 60
 type: "docs"
 ---
