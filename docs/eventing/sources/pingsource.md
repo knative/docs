@@ -7,16 +7,15 @@ type: "docs"
 
 ![version](https://img.shields.io/badge/API_Version-v1alpha2-red?style=flat-square)
 
-`PingSource` produces events with a fixed payload on a specified cron schedule.
+A PingSource produces events with a fixed payload on a specified cron schedule.
 
 ## Installation
 
-`PingSource` is pre-installed with Knative Eventing.
+The PingSource source type is enabled by default when you install Knative Eventing.
 
 ## Example
 
-This example shows how to send an event every second to the event display
-service.
+This example shows how to send an event every second to a Knative Service.
 
 ### Creating a namespace
 
@@ -26,8 +25,6 @@ command:
 ```shell
 kubectl create namespace pingsource-example
 ```
-
-This will help us with cleaning up all the resources you are about to create.
 
 ### Creating the event display service
 
@@ -80,8 +77,6 @@ You can now create the `PingSource` sending an event containing
 {{< tabs name="create-source" default="YAML" >}}
 {{% tab name="YAML" %}}
 
-Add the PingSource by using the following command:
-
 ```shell
 kubectl create -n pingsource-example -f - <<EOF
 apiVersion: sources.knative.dev/v1alpha2
@@ -103,8 +98,6 @@ EOF
 
 {{% tab name="kn" %}}
 
-Add the PingSource by using the following command:
-
 ```shell
 kn source ping create test-ping-source \
   --namespace pingsource-example
@@ -118,15 +111,14 @@ kn source ping create test-ping-source \
 
 ### Verify
 
-Wait a bit and look at the logs for the `event-display` event consumer by
+View the logs for the `event-display` event consumer by
 entering the following command:
 
 ```shell
 kubectl -n pingsource-example logs -l app=event-display --tail=100
 ```
 
-This returns the `Attributes` and `Data` of the events the `PingSource` sent to
-`event-display`:
+This returns the `Attributes` and `Data` of the events that the PingSource sent to the `event-display` Service:
 
 ```shell
 ☁️  cloudevents.Event
@@ -155,8 +147,7 @@ kubectl delete namespace pingsource-example
 
 ## Reference Documentation
 
-See
-[the specification](../../reference/eventing/eventing.md#sources.knative.dev/v1alpha2.PingSource).
+See the [PingSource specification](../../reference/eventing/eventing.md#sources.knative.dev/v1alpha2.PingSource).
 
 ## Contact
 

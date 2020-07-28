@@ -1,6 +1,4 @@
-A Knative Eventing Source consists of a set of configuration parameters
-for producing or registering interest in a class of events and
-for relaying these events to another endpoint via [CloudEvents](https://cloudevents.io).
+An event source is a resource object that acts as a link between an event producer and an event _sink_. A sink can be a Knative Service, Channel, or Broker that receives events from an event source.
 
 This page provides an index of the available source resource types as well as
 links to their documentation.
