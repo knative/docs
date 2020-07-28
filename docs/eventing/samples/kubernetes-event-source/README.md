@@ -205,14 +205,20 @@ Context Attributes,
   source: https://10.96.0.1:443
   subject: /apis/v1/namespaces/default/events/testevents.15dd3050eb1e6f50
   id: e0447eb7-36b5-443b-9d37-faf4fe5c62f0
-  time: 2019-12-04T14:09:30.917608978Z
+  time: 2020-07-28T16:35:14.172979816Z
   datacontenttype: application/json
+Extensions,
+  kind: Event
+  knativearrivaltime: 2020-07-28T16:35:14.173381505Z
+  knativehistory: default-kne-trigger-kn-channel.default.svc.cluster.local
+  name: busybox.1625f7cfa4cd12f8
+  namespace: default
 Data,
   {
     "apiVersion": "v1",
     "count": 1,
     "eventTime": null,
-    "firstTimestamp": "2019-05-10T23:27:06Z",
+    "firstTimestamp": "2020-07-28T16:35:14Z",
     "involvedObject": {
       "apiVersion": "v1",
       "fieldPath": "spec.containers{busybox}",
@@ -223,15 +229,15 @@ Data,
       "uid": "1efb342a-737b-11e9-a6c5-42010a8a00ed"
     },
     "kind": "Event",
-    "lastTimestamp": "2019-05-10T23:27:06Z",
+    "lastTimestamp": "2020-07-28T16:35:14Z",
     "message": "Started container",
     "metadata": {
-      "creationTimestamp": "2019-05-10T23:27:06Z",
-      "name": "busybox.159d7608e3a3572c",
+      "creationTimestamp": "2020-07-28T16:35:14Z",
+      "name": "busybox.1625f7cfa4cd12f8",
       "namespace": "default",
       "resourceVersion": "506088",
-      "selfLink": "/api/v1/namespaces/default/events/busybox.159d7608e3a3572c",
-      "uid": "2005af47-737b-11e9-a6c5-42010a8a00ed"
+      "selfLink": "/api/v1/namespaces/default/events/busybox.1625f7cfa4cd12f8",
+      "uid": "7f841049-7979-48db-9cbc-93ed2346a1b5",
     },
     "reason": "Started",
     "reportingComponent": "",
