@@ -17,7 +17,7 @@ links to their documentation.
 | [GitLab](https://github.com/knative/eventing-contrib/blob/master/gitlab/pkg/apis/sources/v1alpha1/gitlabsource_types.go) | v1alpha1 | Knative    | Registers for events of the specified types on the specified GitLab repository. Brings those events into Knative.  |
 | [Heartbeats](https://github.com/knative/eventing-contrib/tree/master/cmd/heartbeats) |  N/A | Knative    | Uses an in-memory timer to produce events at the specified interval. |
 | [PingSource](./pingsource.md) | v1alpha2  | Knative    | Produces events with a fixed payload on a specified cron schedule. |
-| [SinkBinding](https://knative.dev/docs/eventing/samples/sinkbinding/)                                                               | v1alpha2           | Knative    | SinkBinding provides a framework for injecting `K_SINK` (destination address) and `K_CE_OVERRIDES` (JSON cloudevents attributes) environment variables into any Kubernetes resource which has a `spec.template` that looks like a Pod (aka PodSpecable). |
+| [SinkBinding](./sinkbinding.md) | v1alpha2           | Knative    | SinkBinding provides a framework for injecting `K_SINK` (destination address) and `K_CE_OVERRIDES` (JSON cloudevents attributes) environment variables into any Kubernetes resource which has a `spec.template` that looks like a Pod (aka PodSpecable). |
 | [WebSocket](https://github.com/knative/eventing-contrib/tree/master/cmd/websocketsource)                                            | N/A | Knative    | Opens a WebSocket to the specified source and packages each received message as a Knative event.  |
 
 ## Third-Party Sources

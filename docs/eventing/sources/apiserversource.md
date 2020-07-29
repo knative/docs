@@ -90,6 +90,8 @@ EOF
 
 In order to receive kubernetes events, you need to create a concrete APIServerSource for the namespace.
 
+{{< tabs name="create-source" default="YAML" >}}
+{{% tab name="YAML" %}}
 ```shell
 kubectl -n apiserversource-example apply -f - << EOF
 apiVersion: sources.knative.dev/v1beta1
@@ -110,6 +112,22 @@ spec:
      name: default
 EOF
 ```
+
+{{< /tab >}}
+
+{{% tab name="kn" %}}
+
+```shell
+kn source apiserver create testevents \
+  --namespace apiserversource-example \
+  --mode "Resource" \
+  --resource "Event:v1" \
+  --service-account events-sa \
+  --sink  http://broker-ingress.knative-eventing.svc.cluster.local/apiserversource-example/default
+```
+
+{{< /tab >}}
+{{< /tabs >}}
 
 ### Create a Trigger
 
