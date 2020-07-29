@@ -66,8 +66,8 @@ generic interfaces that can be implemented by multiple Kubernetes resources:
    external event source are processed.
 
 ### Event sources
-<!--Event sources inclustion test-->
-{{% readfile file="sources/README.md" %}}
+
+To learn about using event sources, see the [event sources](./sources/README.md) documentation.
 
 ### Event brokers and triggers
 
