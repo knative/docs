@@ -184,7 +184,7 @@ folder) you're ready to build and deploy the sample app.
 Once you have deployed the application and verified that the namespace, sample application and trigger are ready, let's send a CloudEvent.
 
 ### Send CloudEvent to the Broker
-We can send an http request directly to the [Broker](../../../broker-trigger.md) with correct CloudEvent headers set.
+We can send an http request directly to the [Broker](../../../broker/README.md) with correct CloudEvent headers set.
 
    1. Deploy a curl pod and SSH into it
       ```shell
@@ -234,7 +234,7 @@ Helloworld-python app logs the context and the msg of the above event, and repli
         {"msg":"Hi from Knative!"}
 
       ```
-  Play around with the CloudEvent attributes in the curl command and the trigger specification to understand how [Triggers work](../../../broker-trigger.md#trigger).
+  Play around with the CloudEvent attributes in the curl command and the trigger specification to understand how [Triggers work](../../../broker/README.md#trigger).
 
 ## Verify reply from helloworld-python app
 `helloworld-python` app replies back with an event of `type= dev.knative.samples.hifromknative`, and `source=knative/eventing/samples/hello-world`. This event enters the eventing mesh via the Broker and can be delivered to other services using a Trigger
