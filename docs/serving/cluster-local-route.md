@@ -47,7 +47,7 @@ kubectl label route ${ROUTE_NAME} serving.knative.dev/visibility=cluster-local
 To label a Kubernetes service:
 
 ```shell
-kubectl label route ${SERVICE_NAME} serving.knative.dev/visibility=cluster-local
+kubectl label service ${SERVICE_NAME} serving.knative.dev/visibility=cluster-local
 ```
 
 By labeling the Kubernetes service it allows you to restrict visibility in a more
