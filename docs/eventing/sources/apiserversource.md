@@ -37,15 +37,36 @@ command:
 
 ```shell
 kubectl -n apiserversource-example apply -f - << EOF
-apiVersion: serving.knative.dev/v1
-kind: Service
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: event-display
 spec:
+  replicas: 1
+  selector:
+    matchLabels: &labels
+      app: event-display
   template:
+    metadata:
+      labels: *labels
     spec:
       containers:
-        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+        - name: event-display
+          image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: event-display
+spec:
+  selector:
+    app: event-display
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
 EOF
 ```
 
@@ -115,7 +136,7 @@ spec:
      kind: Event
  sink:
    ref:
-     apiVersion: serving.knative.dev/v1
+     apiVersion: v1
      kind: Service
      name: event-display
 EOF
@@ -153,7 +174,7 @@ We will verify that the Kubernetes events were sent into the Knative eventing
 system by looking at our message dumper function logs.
 
 ```shell
-kubectl -n apiserversource-example logs -l serving.knative.dev/service=event-display -c user-container --tail=200
+kubectl -n apiserversource-example logs -l app=event-display --tail=100
 ```
 
 You should see log lines similar to:

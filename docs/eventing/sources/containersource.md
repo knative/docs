@@ -57,15 +57,36 @@ Service that dumps incoming messages to its log.
 
 ```shell
 kubectl -n containersource-example apply -f - << EOF
-apiVersion: serving.knative.dev/v1
-kind: Service
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: event-display
 spec:
+  replicas: 1
+  selector:
+    matchLabels: &labels
+      app: event-display
   template:
+    metadata:
+      labels: *labels
     spec:
       containers:
-        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+        - name: event-display
+          image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: event-display
+spec:
+  selector:
+    app: event-display
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
 EOF
 ```
 
@@ -102,7 +123,7 @@ spec:
               value: "event-test"
   sink:
     ref:
-      apiVersion: serving.knative.dev/v1
+      apiVersion: v1
       kind: Service
       name: event-display
 EOF
@@ -114,7 +135,7 @@ View the logs for the `event-display` event consumer by
 entering the following command:
 
 ```shell
-kubectl -n containersource-example logs -l serving.knative.dev/service=event-display -c user-container --since=10m
+kubectl -n containersource-example logs -l app=event-display --tail=200
 ```
 
 This returns the `Attributes` and `Data` of the events that the ContainerSource sent to the `event-display` Service:

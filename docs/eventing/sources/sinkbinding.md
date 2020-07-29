@@ -58,15 +58,36 @@ command:
 
 ```shell
 kubectl -n sinkbinding-example apply -f - << EOF
-apiVersion: serving.knative.dev/v1
-kind: Service
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: event-display
 spec:
+  replicas: 1
+  selector:
+    matchLabels: &labels
+      app: event-display
   template:
+    metadata:
+      labels: *labels
     spec:
       containers:
-        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+        - name: event-display
+          image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: event-display
+spec:
+  selector:
+    app: event-display
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
 EOF
 ```
 
@@ -94,7 +115,7 @@ spec:
 
   sink:
     ref:
-      apiVersion: serving.knative.dev/v1
+      apiVersion: v1
       kind: Service
       name: event-display
   ceOverrides:
@@ -146,7 +167,7 @@ spec:
             - name: single-heartbeat
               # This corresponds to a heartbeats image uri you build and publish in the previous step
               # e.g. gcr.io/[gcloud-project]/knative.dev/eventing-contrib/cmd/heartbeats
-              image: us.gcr.io/danyinggu-knative-dev/heartbeats-007104604b758f52b70a5535e662802b@sha256:8cf364420c545da404298413c45fa844bb6d90ac2d3845a555821f607a7e9339
+              image: <heartbeats_image_uri>
               args:
                 - --period=1
               env:
@@ -170,7 +191,7 @@ View the logs for the `event-display` event consumer by
 entering the following command:
 
 ```shell
-kubectl -n sinkbinding-example logs -l serving.knative.dev/service=event-display -c user-container --tail=200
+kubectl -n sinkbinding-example logs -l app=event-display --tail=200
 ```
 You should see log lines showing the request headers and body of the event
 message sent by the heartbeats source to the display function:
