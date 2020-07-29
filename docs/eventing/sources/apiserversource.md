@@ -30,7 +30,7 @@ kubectl create namespace apiserversource-example
 ### Creating the event display service
 
 In this step, you create one event consumer, `event-display` to verify that
-`SinkBinding` is properly working.
+`APIServerSource` is properly working.
 
 To deploy the `event-display` consumer to your cluster, run the following
 command:
