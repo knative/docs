@@ -47,7 +47,7 @@ This guide assumes that you want to install an upstream Knative release on a
 Kubernetes cluster. A growing number of vendors have managed Knative offerings;
 see the [Knative Offerings](../knative-offerings.md) page for a full list.
 
-Knative {{< version >}} requires a Kubernetes cluster v1.15 or newer, as well as
+Knative {{< version >}} requires a Kubernetes cluster v1.16 or newer, as well as
 a compatible `kubectl`. This guide assumes that you've already created a
 Kubernetes cluster, and that you are using bash in a Mac or Linux environment;
 some commands will need to be adjusted for use in a Windows environment.
