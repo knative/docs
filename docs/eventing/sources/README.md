@@ -5,11 +5,24 @@ Event sources are created by instantiating a CR from a Source object.
 The Source object defines the arguments and parameters needed to instantiate a CR.
 
 All Sources are part of the `sources` category.
-You can list existing event sources on your cluster by entering the following command:
-```
+
+{{< tabs name="List event sources" default="kubectl" >}} {{% tab name="kubectl" %}}
+You can list existing event sources on your cluster by entering the ommand:
+
+```shell
 kubectl get sources
 ```
-<!-- TODO(abrennan89): Add tab with kn commands-->
+
+{{< /tab >}}
+
+{{% tab name="kn" %}}
+You can list existing event sources on your cluster by entering the kn command:
+
+```shell
+kn source list
+```
+
+{{< /tab >}} {{< /tabs >}}
 
 ## Knative Sources
 
@@ -60,3 +73,4 @@ in the [Knative Eventing-Contrib](https://github.com/knative/eventing-contrib) G
 
 - For information about creating your own Source type, see the [tutorial on writing a Source with a Receive Adapter](../samples/writing-event-source).
 - If your code needs to send events as part of its business logic and doesn't fit the model of a Source, consider [feeding events directly to a Broker](https://knative.dev/docs/eventing/broker/).
+- For more information about using `kn` Source related commands, see the [`kn source` reference documentation](https://github.com/knative/client/blob/master/docs/cmd/kn_source.md).
