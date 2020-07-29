@@ -5,7 +5,7 @@ weight: 31
 type: "docs"
 ---
 
-![version](https://img.shields.io/badge/API_Version-v1alpha2-red?style=flat-square)
+![version](https://img.shields.io/badge/API_Version-v1beta1-red?style=flat-square)
 
 An APIServerSource brings Kubernetes API server events into Knative.
 
@@ -259,7 +259,7 @@ kubectl delete namespace apiserversource-example
 
 ## Reference Documentation
 
-See the [APIServerSource specification](../../reference/eventing/#sources.knative.dev/v1alpha2.APIServerSource).
+See the [APIServerSource specification](../../reference/eventing/#sources.knative.dev/v1beta1.APIServerSource).
 
 ## Contact
 

@@ -7,7 +7,7 @@
 <a href="#messaging.knative.dev%2fv1beta1">messaging.knative.dev/v1beta1</a>
 </li>
 <li>
-<a href="#sources.knative.dev%2fv1alpha2">sources.knative.dev/v1alpha2</a>
+<a href="#sources.knative.dev%2fv1beta1">sources.knative.dev/v1beta1</a>
 </li>
 <li>
 <a href="#configs.internal.knative.dev%2fv1alpha1">configs.internal.knative.dev/v1alpha1</a>
@@ -1689,21 +1689,21 @@ knative.dev/pkg/apis.URL
 </tbody>
 </table>
 <hr/>
-<h2 id="sources.knative.dev/v1alpha2">sources.knative.dev/v1alpha2</h2>
+<h2 id="sources.knative.dev/v1beta1">sources.knative.dev/v1beta1</h2>
 <p>
-<p>Package v1alpha2 contains API Schema definitions for the sources v1beta1 API group</p>
+<p>Package v1beta1 contains API Schema definitions for the sources v1beta1 API group</p>
 </p>
 Resource Types:
 <ul><li>
-<a href="#sources.knative.dev/v1alpha2.ApiServerSource">ApiServerSource</a>
+<a href="#sources.knative.dev/v1beta1.ApiServerSource">ApiServerSource</a>
 </li><li>
-<a href="#sources.knative.dev/v1alpha2.ContainerSource">ContainerSource</a>
+<a href="#sources.knative.dev/v1beta1.ContainerSource">ContainerSource</a>
 </li><li>
-<a href="#sources.knative.dev/v1alpha2.PingSource">PingSource</a>
+<a href="#sources.knative.dev/v1beta1.PingSource">PingSource</a>
 </li><li>
-<a href="#sources.knative.dev/v1alpha2.SinkBinding">SinkBinding</a>
+<a href="#sources.knative.dev/v1beta1.SinkBinding">SinkBinding</a>
 </li></ul>
-<h3 id="sources.knative.dev/v1alpha2.ApiServerSource">ApiServerSource
+<h3 id="sources.knative.dev/v1beta1.ApiServerSource">ApiServerSource
 </h3>
 <p>
 <p>ApiServerSource is the Schema for the apiserversources API</p>
@@ -1722,7 +1722,7 @@ Resource Types:
 string</td>
 <td>
 <code>
-sources.knative.dev/v1alpha2
+sources.knative.dev/v1beta1
 </code>
 </td>
 </tr>
@@ -1751,7 +1751,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#sources.knative.dev/v1alpha2.ApiServerSourceSpec">
+<a href="#sources.knative.dev/v1beta1.ApiServerSourceSpec">
 ApiServerSourceSpec
 </a>
 </em>
@@ -1782,7 +1782,7 @@ and modifications of the event sent to the sink.</p>
 <td>
 <code>resources</code></br>
 <em>
-<a href="#sources.knative.dev/v1alpha2.APIVersionKindSelector">
+<a href="#sources.knative.dev/v1beta1.APIVersionKindSelector">
 []APIVersionKindSelector
 </a>
 </em>
@@ -1797,7 +1797,7 @@ selector to help filter.</p>
 <td>
 <code>owner</code></br>
 <em>
-<a href="#sources.knative.dev/v1alpha2.APIVersionKind">
+<a href="#sources.knative.dev/v1beta1.APIVersionKind">
 APIVersionKind
 </a>
 </em>
@@ -1844,7 +1844,7 @@ source. Defaults to default if not set.</p>
 <td>
 <code>status</code></br>
 <em>
-<a href="#sources.knative.dev/v1alpha2.ApiServerSourceStatus">
+<a href="#sources.knative.dev/v1beta1.ApiServerSourceStatus">
 ApiServerSourceStatus
 </a>
 </em>
@@ -1854,7 +1854,7 @@ ApiServerSourceStatus
 </tr>
 </tbody>
 </table>
-<h3 id="sources.knative.dev/v1alpha2.ContainerSource">ContainerSource
+<h3 id="sources.knative.dev/v1beta1.ContainerSource">ContainerSource
 </h3>
 <p>
 <p>ContainerSource is the Schema for the containersources API</p>
@@ -1873,7 +1873,7 @@ ApiServerSourceStatus
 string</td>
 <td>
 <code>
-sources.knative.dev/v1alpha2
+sources.knative.dev/v1beta1
 </code>
 </td>
 </tr>
@@ -1902,7 +1902,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#sources.knative.dev/v1alpha2.ContainerSourceSpec">
+<a href="#sources.knative.dev/v1beta1.ContainerSourceSpec">
 ContainerSourceSpec
 </a>
 </em>
@@ -1949,7 +1949,7 @@ Kubernetes core/v1.PodTemplateSpec
 <td>
 <code>status</code></br>
 <em>
-<a href="#sources.knative.dev/v1alpha2.ContainerSourceStatus">
+<a href="#sources.knative.dev/v1beta1.ContainerSourceStatus">
 ContainerSourceStatus
 </a>
 </em>
@@ -1959,7 +1959,7 @@ ContainerSourceStatus
 </tr>
 </tbody>
 </table>
-<h3 id="sources.knative.dev/v1alpha2.PingSource">PingSource
+<h3 id="sources.knative.dev/v1beta1.PingSource">PingSource
 </h3>
 <p>
 <p>PingSource is the Schema for the PingSources API.</p>
@@ -1978,7 +1978,7 @@ ContainerSourceStatus
 string</td>
 <td>
 <code>
-sources.knative.dev/v1alpha2
+sources.knative.dev/v1beta1
 </code>
 </td>
 </tr>
@@ -2007,7 +2007,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#sources.knative.dev/v1alpha2.PingSourceSpec">
+<a href="#sources.knative.dev/v1beta1.PingSourceSpec">
 PingSourceSpec
 </a>
 </em>
@@ -2067,7 +2067,7 @@ to &ldquo;application/json&rdquo;.</p>
 <td>
 <code>status</code></br>
 <em>
-<a href="#sources.knative.dev/v1alpha2.PingSourceStatus">
+<a href="#sources.knative.dev/v1beta1.PingSourceStatus">
 PingSourceStatus
 </a>
 </em>
@@ -2077,7 +2077,7 @@ PingSourceStatus
 </tr>
 </tbody>
 </table>
-<h3 id="sources.knative.dev/v1alpha2.SinkBinding">SinkBinding
+<h3 id="sources.knative.dev/v1beta1.SinkBinding">SinkBinding
 </h3>
 <p>
 <p>SinkBinding describes a Binding that is also a Source.
@@ -2101,7 +2101,7 @@ cloud events.</p>
 string</td>
 <td>
 <code>
-sources.knative.dev/v1alpha2
+sources.knative.dev/v1beta1
 </code>
 </td>
 </tr>
@@ -2130,7 +2130,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#sources.knative.dev/v1alpha2.SinkBindingSpec">
+<a href="#sources.knative.dev/v1beta1.SinkBindingSpec">
 SinkBindingSpec
 </a>
 </em>
@@ -2161,7 +2161,7 @@ and modifications of the event sent to the sink.</p>
 <td>
 <code>BindingSpec</code></br>
 <em>
-knative.dev/pkg/apis/duck/v1alpha1.BindingSpec
+knative.dev/pkg/apis/duck/v1beta1.BindingSpec
 </em>
 </td>
 <td>
@@ -2180,7 +2180,7 @@ should be augmented by Binding implementations.</p>
 <td>
 <code>status</code></br>
 <em>
-<a href="#sources.knative.dev/v1alpha2.SinkBindingStatus">
+<a href="#sources.knative.dev/v1beta1.SinkBindingStatus">
 SinkBindingStatus
 </a>
 </em>
@@ -2190,11 +2190,11 @@ SinkBindingStatus
 </tr>
 </tbody>
 </table>
-<h3 id="sources.knative.dev/v1alpha2.APIVersionKind">APIVersionKind
+<h3 id="sources.knative.dev/v1beta1.APIVersionKind">APIVersionKind
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.knative.dev/v1alpha2.ApiServerSourceSpec">ApiServerSourceSpec</a>, 
+<a href="#sources.knative.dev/v1beta1.ApiServerSourceSpec">ApiServerSourceSpec</a>, 
 <a href="#sources.knative.dev/v1alpha1.ApiServerSourceSpec">ApiServerSourceSpec</a>)
 </p>
 <p>
@@ -2233,11 +2233,11 @@ More info: <a href="https://git.k8s.io/community/contributors/devel/sig-architec
 </tr>
 </tbody>
 </table>
-<h3 id="sources.knative.dev/v1alpha2.APIVersionKindSelector">APIVersionKindSelector
+<h3 id="sources.knative.dev/v1beta1.APIVersionKindSelector">APIVersionKindSelector
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.knative.dev/v1alpha2.ApiServerSourceSpec">ApiServerSourceSpec</a>)
+<a href="#sources.knative.dev/v1beta1.ApiServerSourceSpec">ApiServerSourceSpec</a>)
 </p>
 <p>
 <p>APIVersionKindSelector is an APIVersion Kind tuple with a LabelSelector.</p>
@@ -2291,11 +2291,11 @@ More info: <a href="http://kubernetes.io/docs/concepts/overview/working-with-obj
 </tr>
 </tbody>
 </table>
-<h3 id="sources.knative.dev/v1alpha2.ApiServerSourceSpec">ApiServerSourceSpec
+<h3 id="sources.knative.dev/v1beta1.ApiServerSourceSpec">ApiServerSourceSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.knative.dev/v1alpha2.ApiServerSource">ApiServerSource</a>)
+<a href="#sources.knative.dev/v1beta1.ApiServerSource">ApiServerSource</a>)
 </p>
 <p>
 <p>ApiServerSourceSpec defines the desired state of ApiServerSource</p>
@@ -2330,7 +2330,7 @@ and modifications of the event sent to the sink.</p>
 <td>
 <code>resources</code></br>
 <em>
-<a href="#sources.knative.dev/v1alpha2.APIVersionKindSelector">
+<a href="#sources.knative.dev/v1beta1.APIVersionKindSelector">
 []APIVersionKindSelector
 </a>
 </em>
@@ -2345,7 +2345,7 @@ selector to help filter.</p>
 <td>
 <code>owner</code></br>
 <em>
-<a href="#sources.knative.dev/v1alpha2.APIVersionKind">
+<a href="#sources.knative.dev/v1beta1.APIVersionKind">
 APIVersionKind
 </a>
 </em>
@@ -2387,11 +2387,11 @@ source. Defaults to default if not set.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="sources.knative.dev/v1alpha2.ApiServerSourceStatus">ApiServerSourceStatus
+<h3 id="sources.knative.dev/v1beta1.ApiServerSourceStatus">ApiServerSourceStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.knative.dev/v1alpha2.ApiServerSource">ApiServerSource</a>)
+<a href="#sources.knative.dev/v1beta1.ApiServerSource">ApiServerSource</a>)
 </p>
 <p>
 <p>ApiServerSourceStatus defines the observed state of ApiServerSource</p>
@@ -2426,11 +2426,11 @@ Source.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="sources.knative.dev/v1alpha2.ContainerSourceSpec">ContainerSourceSpec
+<h3 id="sources.knative.dev/v1beta1.ContainerSourceSpec">ContainerSourceSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.knative.dev/v1alpha2.ContainerSource">ContainerSource</a>)
+<a href="#sources.knative.dev/v1beta1.ContainerSource">ContainerSource</a>)
 </p>
 <p>
 <p>ContainerSourceSpec defines the desired state of ContainerSource</p>
@@ -2476,11 +2476,11 @@ Kubernetes core/v1.PodTemplateSpec
 </tr>
 </tbody>
 </table>
-<h3 id="sources.knative.dev/v1alpha2.ContainerSourceStatus">ContainerSourceStatus
+<h3 id="sources.knative.dev/v1beta1.ContainerSourceStatus">ContainerSourceStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.knative.dev/v1alpha2.ContainerSource">ContainerSource</a>)
+<a href="#sources.knative.dev/v1beta1.ContainerSource">ContainerSource</a>)
 </p>
 <p>
 <p>ContainerSourceStatus defines the observed state of ContainerSource</p>
@@ -2515,11 +2515,11 @@ Source.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="sources.knative.dev/v1alpha2.PingSourceSpec">PingSourceSpec
+<h3 id="sources.knative.dev/v1beta1.PingSourceSpec">PingSourceSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.knative.dev/v1alpha2.PingSource">PingSource</a>)
+<a href="#sources.knative.dev/v1beta1.PingSource">PingSource</a>)
 </p>
 <p>
 <p>PingSourceSpec defines the desired state of the PingSource.</p>
@@ -2578,11 +2578,11 @@ to &ldquo;application/json&rdquo;.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="sources.knative.dev/v1alpha2.PingSourceStatus">PingSourceStatus
+<h3 id="sources.knative.dev/v1beta1.PingSourceStatus">PingSourceStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.knative.dev/v1alpha2.PingSource">PingSource</a>)
+<a href="#sources.knative.dev/v1beta1.PingSource">PingSource</a>)
 </p>
 <p>
 <p>PingSourceStatus defines the observed state of PingSource.</p>
@@ -2617,11 +2617,11 @@ Source.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="sources.knative.dev/v1alpha2.SinkBindingSpec">SinkBindingSpec
+<h3 id="sources.knative.dev/v1beta1.SinkBindingSpec">SinkBindingSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.knative.dev/v1alpha2.SinkBinding">SinkBinding</a>)
+<a href="#sources.knative.dev/v1beta1.SinkBinding">SinkBinding</a>)
 </p>
 <p>
 <p>SinkBindingSpec holds the desired state of the SinkBinding (from the client).</p>
@@ -2670,11 +2670,11 @@ should be augmented by Binding implementations.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="sources.knative.dev/v1alpha2.SinkBindingStatus">SinkBindingStatus
+<h3 id="sources.knative.dev/v1beta1.SinkBindingStatus">SinkBindingStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.knative.dev/v1alpha2.SinkBinding">SinkBinding</a>)
+<a href="#sources.knative.dev/v1beta1.SinkBinding">SinkBinding</a>)
 </p>
 <p>
 <p>SinkBindingStatus communicates the observed state of the SinkBinding (from the controller).</p>
@@ -8130,7 +8130,7 @@ modifications of the event sent to the sink.</p>
 <td>
 <code>owner</code></br>
 <em>
-<a href="#sources.knative.dev/v1alpha2.APIVersionKind">
+<a href="#sources.knative.dev/v1beta1.APIVersionKind">
 APIVersionKind
 </a>
 </em>
@@ -8581,7 +8581,7 @@ modifications of the event sent to the sink.</p>
 <td>
 <code>owner</code></br>
 <em>
-<a href="#sources.knative.dev/v1alpha2.APIVersionKind">
+<a href="#sources.knative.dev/v1beta1.APIVersionKind">
 APIVersionKind
 </a>
 </em>

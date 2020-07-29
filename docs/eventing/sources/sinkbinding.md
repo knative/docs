@@ -5,7 +5,7 @@ weight: 31
 type: "docs"
 ---
 
-![version](https://img.shields.io/badge/API_Version-v1alpha2-red?style=flat-square)
+![version](https://img.shields.io/badge/API_Version-v1beta1-red?style=flat-square)
 
 A SinkBinding provides a framework for injecting `K_SINK` (destination address) and `K_CE_OVERRIDES` (JSON cloudevents attributes) 
 environment variables into any Kubernetes resource which has a `spec.template` that looks like a Pod (aka PodSpecable).
@@ -208,7 +208,7 @@ kubectl delete namespace sinkbinding-example
 
 ## Reference Documentation
 
-See the [SinkBinding specification](../../reference/eventing/#sources.knative.dev/v1alpha2.SinkBinding).
+See the [SinkBinding specification](../../reference/eventing/#sources.knative.dev/v1beta1.SinkBinding).
 
 ## Contact
 

@@ -7,7 +7,7 @@ links to their documentation.
 
 | Name | API Version | Maintainer | Description |
 | -- | -- | -- | -- |
-| [APIServerSource](./apiserversource.md) | v1alpha2 | Knative  | Brings Kubernetes API server events into Knative. |
+| [APIServerSource](./apiserversource.md) | v1beta1 | Knative  | Brings Kubernetes API server events into Knative. |
 | [AWS SQS](https://github.com/knative/eventing-contrib/blob/master/awssqs/pkg/apis/sources/v1alpha1/aws_sqs_types.go)  | v1alpha1 | Knative | Brings [AWS Simple Queue Service](https://aws.amazon.com/sqs/) messages into Knative.  |
 | [Apache Camel](https://github.com/knative/eventing-contrib/blob/master/camel/source/pkg/apis/sources/v1alpha1/camelsource_types.go) | v1alpha1   | Knative    | Allows to use [Apache Camel](https://github.com/apache/camel) components for pushing events into Knative. |
 | [Apache CouchDB](https://github.com/knative/eventing-contrib/blob/master/couchdb)                                                   | v1alpha1 | Knative    | Brings [Apache CouchDB](https://couchdb.apache.org/) messages into Knative.  |
@@ -16,8 +16,8 @@ links to their documentation.
 | [GitHub](https://github.com/knative/eventing-contrib/blob/master/github/pkg/apis/sources/v1alpha1/githubsource_types.go)            | v1alpha1 | Knative    | Registers for events of the specified types on the specified GitHub organization/repository. Brings those events into Knative.  |
 | [GitLab](https://github.com/knative/eventing-contrib/blob/master/gitlab/pkg/apis/sources/v1alpha1/gitlabsource_types.go) | v1alpha1 | Knative    | Registers for events of the specified types on the specified GitLab repository. Brings those events into Knative.  |
 | [Heartbeats](https://github.com/knative/eventing-contrib/tree/master/cmd/heartbeats) |  N/A | Knative    | Uses an in-memory timer to produce events at the specified interval. |
-| [PingSource](./pingsource.md) | v1alpha2  | Knative    | Produces events with a fixed payload on a specified cron schedule. |
-| [SinkBinding](./sinkbinding.md) | v1alpha2           | Knative    | SinkBinding provides a framework for injecting `K_SINK` (destination address) and `K_CE_OVERRIDES` (JSON cloudevents attributes) environment variables into any Kubernetes resource which has a `spec.template` that looks like a Pod (aka PodSpecable). |
+| [PingSource](./pingsource.md) | v1beta1 | Knative    | Produces events with a fixed payload on a specified cron schedule. |
+| [SinkBinding](./sinkbinding.md) | v1beta1          | Knative    | SinkBinding provides a framework for injecting `K_SINK` (destination address) and `K_CE_OVERRIDES` (JSON cloudevents attributes) environment variables into any Kubernetes resource which has a `spec.template` that looks like a Pod (aka PodSpecable). |
 | [WebSocket](https://github.com/knative/eventing-contrib/tree/master/cmd/websocketsource)                                            | N/A | Knative    | Opens a WebSocket to the specified source and packages each received message as a Knative event.  |
 
 ## Third-Party Sources

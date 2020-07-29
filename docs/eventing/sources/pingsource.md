@@ -5,7 +5,7 @@ weight: 31
 type: "docs"
 ---
 
-![version](https://img.shields.io/badge/API_Version-v1alpha2-red?style=flat-square)
+![version](https://img.shields.io/badge/API_Version-v1beta1-red?style=flat-square)
 
 A PingSource produces events with a fixed payload on a specified cron schedule.
 
@@ -147,7 +147,7 @@ kubectl delete namespace pingsource-example
 
 ## Reference Documentation
 
-See the [PingSource specification](../../reference/eventing/#sources.knative.dev/v1alpha2.PingSource).
+See the [PingSource specification](../../reference/eventing/#sources.knative.dev/v1beta1.PingSource).
 
 ## Contact
 

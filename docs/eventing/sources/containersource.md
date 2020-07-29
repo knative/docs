@@ -1,11 +1,11 @@
 ---
-title: "ContainergSource"
-linkTitle: "ContainergSource"
+title: "ContainerSource"
+linkTitle: "ContainerSource"
 weight: 31
 type: "docs"
 ---
 
-![version](https://img.shields.io/badge/API_Version-v1alpha2-red?style=flat-square)
+![version](https://img.shields.io/badge/API_Version-v1beta1-red?style=flat-square)
 
 ContainerSource will start a container image which will generate events under
 certain situations and send messages to a sink URI. It also can be an easy way
@@ -151,7 +151,7 @@ kubectl delete namespace containersource-example
 
 ## Reference Documentation
 
-See the [ContainerSource specification](../../reference/eventing/#sources.knative.dev/v1alpha2.ContainerSource).
+See the [ContainerSource specification](../../reference/eventing/#sources.knative.dev/v1beta1.ContainerSource).
 
 ## Contact
 
