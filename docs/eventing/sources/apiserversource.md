@@ -27,19 +27,27 @@ command:
 kubectl create namespace apiserversource-example
 ```
 
-### Create a Broker
+### Creating the event display service
 
-Create the `default` Broker in the namespace:
+In this step, you create one event consumer, `event-display` to verify that
+`SinkBinding` is properly working.
 
-   ```shell
-   kubectl create -f - <<EOF
-   apiVersion: eventing.knative.dev/v1
-   kind: Broker
-   metadata:
-    name: default
-    namespace: apiserversource-example
-   EOF
-   ```
+To deploy the `event-display` consumer to your cluster, run the following
+command:
+
+```shell
+kubectl -n apiserversource-example apply -f - << EOF
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: event-display
+spec:
+  template:
+    spec:
+      containers:
+        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+EOF
+```
 
 ### Create a Service Account
 
@@ -107,9 +115,9 @@ spec:
      kind: Event
  sink:
    ref:
-     apiVersion: eventing.knative.dev/v1
-     kind: Broker
-     name: default
+     apiVersion: serving.knative.dev/v1
+     kind: Service
+     name: event-display
 EOF
 ```
 
@@ -123,52 +131,11 @@ kn source apiserver create testevents \
   --mode "Resource" \
   --resource "Event:v1" \
   --service-account events-sa \
-  --sink  http://broker-ingress.knative-eventing.svc.cluster.local/apiserversource-example/default
+  --sink  --sink http://event-display.svc.cluster.local
 ```
 
 {{< /tab >}}
 {{< /tabs >}}
-
-### Create a Trigger
-
-In order to check the `ApiServerSource` is fully working, we will create a
-simple Knative Service that dumps incoming messages to its log and creates a
-`Trigger` from the `Broker` to that Knative Service.
-
-Create a file named `trigger.yaml` and copy the code block below into it.
-
-```shell
-kubectl -n apiserversource-example apply -f - << EOF
-apiVersion: eventing.knative.dev/v1
-kind: Trigger
-metadata:
- name: testevents-trigger
- namespace: apiserversource-example
-spec:
- broker: default
- subscriber:
-   ref:
-     apiVersion: serving.knative.dev/v1
-     kind: Service
-     name: event-display
-
----
-# This is a very simple Knative Service that writes the input request to its log.
-
-apiVersion: serving.knative.dev/v1
-kind: Service
-metadata:
- name: event-display
- namespace: apiserversource-example
-spec:
- template:
-   spec:
-     containers:
-       - # This corresponds to
-         # https://github.com/knative/eventing-contrib/tree/master/cmd/event_display/main.go
-         image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
-EOF
-```
 
 ### Create Events
 
@@ -183,12 +150,9 @@ kubectl -n apiserversource-example delete pod busybox
 ### Verify
 
 We will verify that the Kubernetes events were sent into the Knative eventing
-system by looking at our message dumper function logs. If you deployed the
-[Trigger](#trigger), continue using this section. If not, you will need to look
-downstream yourself:
+system by looking at our message dumper function logs.
 
 ```shell
-kubectl -n apiserversource-example get pods
 kubectl -n apiserversource-example logs -l serving.knative.dev/service=event-display -c user-container --tail=200
 ```
 
@@ -207,8 +171,6 @@ Context Attributes,
   datacontenttype: application/json
 Extensions,
   kind: Event
-  knativearrivaltime: 2020-07-28T19:14:54.720059098Z
-  knativehistory: default-kne-trigger-kn-channel.apiserversource-example.svc.cluster.local
   name: busybox.1626008649e617e3
   namespace: apiserversource-example
 Data,
