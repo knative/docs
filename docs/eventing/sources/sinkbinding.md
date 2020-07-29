@@ -12,7 +12,7 @@ environment variables into any Kubernetes resource which has a `spec.template` t
 
 ### Prerequisites
 - Install [ko](https://github.com/google/ko)
-- Set [`KO_DOCKER_REPO`](https://github.com/knative/serving/blob/master/DEVELOPMENT.md#environment-setup)
+- Set `KO_DOCKER_REPO`
  (e.g. `gcr.io/[gcloud-project]` or `docker.io/<username>`)
 - Authenticated with your `KO_DOCKER_REPO`
 - Install [`docker`](https://docs.docker.com/install/)
