@@ -22,7 +22,7 @@ function knative_setup() {
 
 # Script entry point.
 
-initialize $@
+initialize $@ --skip-istio-addon
 
 go_test_e2e ./test/e2e || fail_test
 
