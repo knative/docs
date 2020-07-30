@@ -5,7 +5,7 @@ weight: 31
 type: "docs"
 ---
 
-![version](https://img.shields.io/badge/API_Version-v1alpha2-red?style=flat-square)
+![version](https://img.shields.io/badge/API_Version-v1beta1-red?style=flat-square)
 
 A PingSource produces events with a fixed payload on a specified cron schedule.
 
@@ -15,7 +15,7 @@ The PingSource source type is enabled by default when you install Knative Eventi
 
 ## Example
 
-This example shows how to send an event every second to a Knative Service.
+This example shows how to send an event every second to a Event Display Service.
 
 ### Creating a namespace
 
@@ -26,12 +26,12 @@ command:
 kubectl create namespace pingsource-example
 ```
 
-### Creating the event display service
+### Creating the Event Display Service
 
 In this step, you create one event consumer, `event-display` to verify that
 `PingSource` is properly working.
 
-To deploy the `event-display` con sumer to your cluster, run the following
+To deploy the `event-display` consumer to your cluster, run the following
 command:
 
 ```shell
@@ -88,7 +88,7 @@ spec:
   jsonData: '{"message": "Hello world!"}'
   sink:
     ref:
-      apiVersion: serving.knative.dev/v1
+      apiVersion: v1
       kind: Service
       name: event-display
 EOF
@@ -147,7 +147,7 @@ kubectl delete namespace pingsource-example
 
 ## Reference Documentation
 
-See the [PingSource specification](../../reference/eventing/#sources.knative.dev/v1alpha2.PingSource).
+See the [PingSource specification](../../reference/eventing/#sources.knative.dev/v1beta1.PingSource).
 
 ## Contact
 
