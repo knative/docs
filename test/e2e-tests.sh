@@ -17,14 +17,14 @@
 source $(dirname $0)/../vendor/knative.dev/test-infra/scripts/e2e-tests.sh
 
 function install_istio() {
-  ISTIO_STABLE=$(curl https://raw.githubusercontent.com/knative/serving/master/third_party/istio-stable)
+  ISTIO_VERSION=$(curl https://raw.githubusercontent.com/knative/serving/master/third_party/istio-1.5-latest)
   echo ">> Bringing up Istio"
   echo ">> Running Istio CRD installer"
-  kubectl apply -f "https://raw.githubusercontent.com/knative/serving/master/third_party/${ISTIO_STABLE}/istio-crds.yaml" || return 1
+  kubectl apply -f "https://raw.githubusercontent.com/knative/serving/master/third_party/${ISTIO_VERSION}/istio-crds.yaml" || return 1
   wait_until_batch_job_complete istio-system || return 1
   
   echo ">> Running Istio"  
-  kubectl apply -f "https://raw.githubusercontent.com/knative/serving/master/third_party/${ISTIO_STABLE}/istio-ci-no-mesh.yaml" || return 1
+  kubectl apply -f "https://raw.githubusercontent.com/knative/serving/master/third_party/${ISTIO_VERSION}/istio-ci-no-mesh.yaml" || return 1
   wait_until_pods_running istio-system || return 1
 }
 
