@@ -23,7 +23,7 @@ The SinkBinding type is enabled by default when you install Knative Eventing.
 
 ## Example
 
-This example shows the SinkBinding that injects`$K_SINK` and `$K_CE_OVERRIDES` into select `Jobs` and direct events to a Knative Service.
+This example shows the SinkBinding that injects`$K_SINK` and `$K_CE_OVERRIDES` into select `Jobs` and direct events to the Event Display Service.
 
 ### Prepare the heartbeats image
 Knative [event-sources](https://github.com/knative/eventing-contrib) has a
@@ -48,7 +48,7 @@ command:
 kubectl create namespace sinkbinding-example
 ```
 
-### Creating the event display service
+### Creating the Event Display Service
 
 In this step, you create one event consumer, `event-display` to verify that
 `SinkBinding` is properly working.
@@ -141,7 +141,7 @@ kn source binding create bind-heartbeat \
 
 In this case, we will bind any `Job` with the labels `app: heartbeat-cron`.
 
-### Create the CronJob
+### Creating the CronJob
 
 Now we will use the heartbeats container to send events to `$K_SINK` every time
 the CronJob runs:

@@ -16,7 +16,7 @@ The APIServerSource source type is enabled by default when you install Knative E
 ## Example
 
 This example shows how to create an APIServerSource that listens to Kubernetes Events and
-send CloudEvents to a Knative Service.
+send CloudEvents to the Event Display Service.
 
 ### Creating a namespace
 
@@ -27,7 +27,7 @@ command:
 kubectl create namespace apiserversource-example
 ```
 
-### Creating the event display service
+### Creating the Event Display Service
 
 In this step, you create one event consumer, `event-display` to verify that
 `APIServerSource` is properly working.
@@ -70,7 +70,7 @@ spec:
 EOF
 ```
 
-### Create a Service Account
+### Creating a Service Account
 
 Create a Service Account that the `ApiServerSource` runs as. The
 `ApiServerSource` watches for Kubernetes events and forwards them to the
@@ -115,7 +115,7 @@ subjects:
 EOF
 ```
 
-### Create the APIServerSource
+### Creating the APIServerSource
 
 In order to receive kubernetes events, you need to create a concrete APIServerSource for the namespace.
 
@@ -158,7 +158,7 @@ kn source apiserver create testevents \
 {{< /tab >}}
 {{< /tabs >}}
 
-### Create Events
+### Creating Events
 
 Create events by launching a pod in the default namespace. Create a `busybox`
 container and immediately delete it:

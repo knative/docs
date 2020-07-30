@@ -26,9 +26,9 @@ The ContainerSource source type is enabled by default when you install Knative E
 
 ## Example
 
-This example shows how the heartbeats container sends events to a Knative Service.
+This example shows how the heartbeats container sends events to the Event Display Service.
 
-### Prepare the heartbeats image
+### Preparing the heartbeats image
 Knative [event-sources](https://github.com/knative/eventing-contrib) has a
 sample of heartbeats event source. You could clone the source codes by
 
@@ -50,7 +50,7 @@ command:
 kubectl create namespace containersource-example
 ```
 
-### Create a Knative Service
+### Creating the Event Display Service
 
 In order to verify `ContainerSource` is working, we will create a Event Display
 Service that dumps incoming messages to its log.
@@ -91,7 +91,7 @@ EOF
 ```
 
 
-### Create a ContainerSource using the heartbeats image
+### Creating the ContainerSource using the heartbeats image
 
 In order to run the heartbeats container as an event source, you have to create
 a concrete ContainerSource with specific arguments and environment settings. Be

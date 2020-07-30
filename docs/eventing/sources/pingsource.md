@@ -15,7 +15,7 @@ The PingSource source type is enabled by default when you install Knative Eventi
 
 ## Example
 
-This example shows how to send an event every second to a Knative Service.
+This example shows how to send an event every second to a Event Display Service.
 
 ### Creating a namespace
 
@@ -26,7 +26,7 @@ command:
 kubectl create namespace pingsource-example
 ```
 
-### Creating the event display service
+### Creating the Event Display Service
 
 In this step, you create one event consumer, `event-display` to verify that
 `PingSource` is properly working.
