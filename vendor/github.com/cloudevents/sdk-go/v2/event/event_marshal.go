@@ -3,11 +3,8 @@ package event
 import (
 	"context"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"strings"
-
-	errors2 "github.com/pkg/errors"
 
 	"github.com/cloudevents/sdk-go/v2/observability"
 )
@@ -31,7 +28,7 @@ func (e Event) MarshalJSON() ([]byte, error) {
 	case CloudEventsVersionV1:
 		b, err = JsonEncode(e)
 	default:
-		return nil, fmt.Errorf("unnknown spec version: %q", e.SpecVersion())
+		return nil, ValidationError{"specversion": fmt.Errorf("unknown : %q", e.SpecVersion())}
 	}
 
 	// Report the observable
@@ -64,7 +61,7 @@ func (e *Event) UnmarshalJSON(b []byte) error {
 	case CloudEventsVersionV1:
 		err = e.JsonDecodeV1(b, raw)
 	default:
-		return fmt.Errorf("unnknown spec version: %q", version)
+		return ValidationError{"specversion": fmt.Errorf("unknown : %q", version)}
 	}
 
 	// Report the observable
@@ -89,12 +86,12 @@ func versionFromRawMessage(raw map[string]json.RawMessage) string {
 	return ""
 }
 
-// JsonEncode
+// JsonEncode encodes an event to JSON
 func JsonEncode(e Event) ([]byte, error) {
 	return jsonEncode(e.Context, e.DataEncoded, e.DataBase64)
 }
 
-// JsonEncodeLegacy
+// JsonEncodeLegacy performs legacy JSON encoding
 func JsonEncodeLegacy(e Event) ([]byte, error) {
 	isBase64 := e.Context.DeprecatedGetDataContentEncoding() == Base64
 	return jsonEncode(e.Context, e.DataEncoded, isBase64)
@@ -206,7 +203,7 @@ func (e *Event) JsonDecodeV03(body []byte, raw map[string]json.RawMessage) error
 				return err
 			}
 			if err := ec.SetExtension(k, tmp); err != nil {
-				return errors2.Wrap(err, "Cannot set extension with key "+k)
+				return fmt.Errorf("%w: Cannot set extension with key %s", err, k)
 			}
 		}
 	}
@@ -263,7 +260,7 @@ func (e *Event) JsonDecodeV1(body []byte, raw map[string]json.RawMessage) error 
 	delete(raw, "data_base64")
 
 	if data != nil && dataBase64 != nil {
-		return errors.New("parsing error: JSON decoder found both 'data', and 'data_base64' in JSON payload")
+		return ValidationError{"data": fmt.Errorf("found both 'data', and 'data_base64' in JSON payload")}
 	}
 	if data != nil {
 		e.DataEncoded = data
@@ -283,7 +280,7 @@ func (e *Event) JsonDecodeV1(body []byte, raw map[string]json.RawMessage) error 
 				return err
 			}
 			if err := ec.SetExtension(k, tmp); err != nil {
-				return errors2.Wrap(err, "Cannot set extension with key "+k)
+				return fmt.Errorf("%w: Cannot set extension with key %s", err, k)
 			}
 		}
 	}

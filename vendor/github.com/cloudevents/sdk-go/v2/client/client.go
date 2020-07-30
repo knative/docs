@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"runtime"
 	"sync"
 
 	"go.uber.org/zap"
@@ -47,7 +48,10 @@ type Client interface {
 // New produces a new client with the provided transport object and applied
 // client options.
 func New(obj interface{}, opts ...Option) (Client, error) {
-	c := &ceClient{}
+	c := &ceClient{
+		// Running runtime.GOMAXPROCS(0) doesn't update the value, just returns the current one
+		pollGoroutines: runtime.GOMAXPROCS(0),
+	}
 
 	if p, ok := obj.(protocol.Sender); ok {
 		c.sender = p
@@ -83,6 +87,7 @@ type ceClient struct {
 	invoker                   Invoker
 	receiverMu                sync.Mutex
 	eventDefaulterFns         []EventDefaulter
+	pollGoroutines            int
 }
 
 func (c *ceClient) applyOptions(opts ...Option) error {
@@ -144,18 +149,17 @@ func (c *ceClient) Request(ctx context.Context, e event.Event) (*event.Event, pr
 			}
 		}()
 	}
+	if protocol.IsUndelivered(err) {
+		return nil, err
+	}
 
 	// try to turn msg into an event, it might not work and that is ok.
 	if rs, rserr := binding.ToEvent(ctx, msg); rserr != nil {
 		cecontext.LoggerFrom(ctx).Debugw("response: failed calling ToEvent", zap.Error(rserr), zap.Any("resp", msg))
-		if err != nil {
-			err = fmt.Errorf("%w; failed to convert response into event: %s", err, rserr)
-		} else {
-			// If the protocol returns no error, it is an ACK on the request, but we had
-			// issues turning the response into an event, so make an ACK Result and pass
-			// down the ToEvent error as well.
-			err = fmt.Errorf("%w; failed to convert response into event: %s", protocol.ResultACK, rserr)
-		}
+		// If the protocol returns no error, it is an ACK on the request, but we had
+		// issues turning the response into an event, so make an ACK Result and pass
+		// down the ToEvent error as well.
+		err = protocol.NewReceipt(true, "failed to convert response into event: %s\n%w", rserr.Error(), err)
 	} else {
 		resp = rs
 	}
@@ -185,6 +189,10 @@ func (c *ceClient) StartReceiver(ctx context.Context, fn interface{}) error {
 	}
 	c.invoker = invoker
 
+	if c.responder == nil && c.receiver == nil {
+		return errors.New("responder nor receiver set")
+	}
+
 	defer func() {
 		c.invoker = nil
 	}()
@@ -192,31 +200,50 @@ func (c *ceClient) StartReceiver(ctx context.Context, fn interface{}) error {
 	// Start the opener, if set.
 	if c.opener != nil {
 		go func() {
-			// TODO: handle error correctly here.
 			if err := c.opener.OpenInbound(ctx); err != nil {
-				panic(err)
+				cecontext.LoggerFrom(ctx).Errorf("Error while opening the inbound connection: %s", err)
 			}
 		}()
 	}
 
-	var msg binding.Message
-	var respFn protocol.ResponseFn
 	// Start Polling.
-	for {
-		if c.responder != nil {
-			msg, respFn, err = c.responder.Respond(ctx)
-		} else if c.receiver != nil {
-			msg, err = c.receiver.Receive(ctx)
-		} else {
-			return errors.New("responder nor receiver set")
-		}
+	wg := sync.WaitGroup{}
+	for i := 0; i < c.pollGoroutines; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			for {
+				var msg binding.Message
+				var respFn protocol.ResponseFn
+				var err error
 
-		if err == io.EOF { // Normal close
-			return nil
-		}
+				if c.responder != nil {
+					msg, respFn, err = c.responder.Respond(ctx)
+				} else if c.receiver != nil {
+					msg, err = c.receiver.Receive(ctx)
+					respFn = noRespFn
+				}
 
-		if err := c.invoker.Invoke(ctx, msg, respFn); err != nil {
-			return err
-		}
+				if err == io.EOF { // Normal close
+					return
+				}
+
+				if err != nil {
+					cecontext.LoggerFrom(ctx).Warnf("Error while receiving a message: %s", err)
+					continue
+				}
+
+				if err := c.invoker.Invoke(ctx, msg, respFn); err != nil {
+					cecontext.LoggerFrom(ctx).Warnf("Error while handling a message: %s", err)
+				}
+			}
+		}()
 	}
+	wg.Wait()
+	return nil
+}
+
+// noRespFn is used to simply forward the protocol.Result for receivers that aren't responders
+func noRespFn(_ context.Context, _ binding.Message, r protocol.Result, _ ...binding.Transformer) error {
+	return r
 }

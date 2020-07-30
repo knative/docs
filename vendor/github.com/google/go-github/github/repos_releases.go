@@ -36,6 +36,7 @@ type RepositoryRelease struct {
 	ZipballURL      *string        `json:"zipball_url,omitempty"`
 	TarballURL      *string        `json:"tarball_url,omitempty"`
 	Author          *User          `json:"author,omitempty"`
+	NodeID          *string        `json:"node_id,omitempty"`
 }
 
 func (r RepositoryRelease) String() string {
@@ -56,6 +57,7 @@ type ReleaseAsset struct {
 	UpdatedAt          *Timestamp `json:"updated_at,omitempty"`
 	BrowserDownloadURL *string    `json:"browser_download_url,omitempty"`
 	Uploader           *User      `json:"uploader,omitempty"`
+	NodeID             *string    `json:"node_id,omitempty"`
 }
 
 func (r ReleaseAsset) String() string {

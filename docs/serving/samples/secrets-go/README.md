@@ -94,16 +94,9 @@ cd knative-docs/docs/serving/samples/secrets-go
    # https://hub.docker.com/_/golang
    FROM golang as builder
 
-   # Install dep
-   RUN go get -u github.com/golang/dep/cmd/dep
-
    # Copy local code to the container image.
    WORKDIR /go/src/github.com/knative/docs/hellosecrets
    COPY . .
-
-   # Fetch dependencies
-   RUN dep init
-   RUN dep ensure
 
    # Build the output command inside the container.
    RUN CGO_ENABLED=0 GOOS=linux go build -v -o hellosecrets

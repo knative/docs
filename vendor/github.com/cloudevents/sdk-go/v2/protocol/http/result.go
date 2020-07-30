@@ -30,18 +30,26 @@ var _ error = (*Result)(nil)
 // Is returns if the target error is a Result type checking target.
 func (e *Result) Is(target error) bool {
 	if o, ok := target.(*Result); ok {
-		if e.StatusCode == o.StatusCode {
+		return e.StatusCode == o.StatusCode
+	}
+
+	// Special case for nil == ACK
+	if o, ok := target.(*protocol.Receipt); ok {
+		if e == nil && o.ACK {
 			return true
 		}
-		return false
 	}
+
 	// Allow for wrapped errors.
-	err := fmt.Errorf(e.Format, e.Args...)
-	return errors.Is(err, target)
+	if e != nil {
+		err := fmt.Errorf(e.Format, e.Args...)
+		return errors.Is(err, target)
+	}
+	return false
 }
 
 // Error returns the string that is formed by using the format string with the
 // provided args.
 func (e *Result) Error() string {
-	return fmt.Sprintf("%d: %s", e.StatusCode, fmt.Sprintf(e.Format, e.Args...))
+	return fmt.Sprintf("%d: %v", e.StatusCode, fmt.Errorf(e.Format, e.Args...))
 }

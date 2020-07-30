@@ -21,6 +21,10 @@
 # GCP project where all tests related resources live
 readonly KNATIVE_TESTS_PROJECT=knative-tests
 
+# Default GKE version to be used with Knative Serving
+readonly SERVING_GKE_VERSION=gke-latest
+readonly SERVING_GKE_IMAGE=cos
+
 # Conveniently set GOPATH if unset
 if [[ ! -v GOPATH ]]; then
   export GOPATH="$(go env GOPATH)"
@@ -61,7 +65,7 @@ fi
 # Print error message and exit 1
 # Parameters: $1..$n - error message to be displayed
 function abort() {
-  echo "error: $*"
+  echo "error: $@"
   exit 1
 }
 
@@ -130,9 +134,7 @@ function wait_until_pods_running() {
   echo -n "Waiting until all pods in namespace $1 are up"
   local failed_pod=""
   for i in {1..150}; do  # timeout after 5 minutes
-    # List all pods. Ignore Terminating pods as those have either been replaced through
-    # a deployment or terminated on purpose (through chaosduck for example).
-    local pods="$(kubectl get pods --no-headers -n $1 2>/dev/null | grep -v Terminating)"
+    local pods="$(kubectl get pods --no-headers -n $1 2>/dev/null)"
     # All pods must be running (ignore ImagePull error to allow the pod to retry)
     local not_running_pods=$(echo "${pods}" | grep -v Running | grep -v Completed | grep -v ErrImagePull | grep -v ImagePullBackOff)
     if [[ -n "${pods}" ]] && [[ -z "${not_running_pods}" ]]; then
@@ -387,48 +389,60 @@ function mktemp_with_extension() {
 #             $2 - check name as an identifier (e.g., GoBuild)
 #             $3 - failure message (can contain newlines), optional (means success)
 function create_junit_xml() {
-  local xml
-  xml="$(mktemp_with_extension "${ARTIFACTS}"/junit_XXXXXXXX xml)"
-  echo "JUnit file ${xml} is created for reporting the test result"
-  run_kntest junit --suite="$1" --name="$2" --err-msg="$3" --dest="${xml}" || return 1
+  local xml="$(mktemp_with_extension ${ARTIFACTS}/junit_XXXXXXXX xml)"
+  local failure=""
+  if [[ "$3" != "" ]]; then
+    # Transform newlines into HTML code.
+    # Also escape `<` and `>` as here: https://github.com/golang/go/blob/50bd1c4d4eb4fac8ddeb5f063c099daccfb71b26/src/encoding/json/encode.go#L48,
+    # this is temporary solution for fixing https://github.com/knative/test-infra/issues/1204,
+    # which should be obsolete once Test-infra 2.0 is in place
+    local msg="$(echo -n "$3" | sed 's/$/\&#xA;/g' | sed 's/</\\u003c/' | sed 's/>/\\u003e/' | sed 's/&/\\u0026/' | tr -d '\n')"
+    failure="<failure message=\"Failed\" type=\"\">${msg}</failure>"
+  fi
+  cat << EOF > "${xml}"
+<testsuites>
+	<testsuite tests="1" failures="1" time="0.000" name="$1">
+		<testcase classname="" name="$2" time="0.0">
+			${failure}
+		</testcase>
+	</testsuite>
+</testsuites>
+EOF
 }
 
 # Runs a go test and generate a junit summary.
 # Parameters: $1... - parameters to go test
 function report_go_test() {
-  local go_test_args=( "$@" )
-  # Install gotestsum if necessary.
-  run_go_tool gotest.tools/gotestsum gotestsum --help > /dev/null 2>&1
-  # Capture the test output to the report file.
-  local report
-  report="$(mktemp)"
-  local xml
-  xml="$(mktemp_with_extension "${ARTIFACTS}"/junit_XXXXXXXX xml)"
-  local json
-  json="$(mktemp_with_extension "${ARTIFACTS}"/json_XXXXXXXX json)"
-  echo "Running go test with args: ${go_test_args[*]}"
-  # TODO(chizhg): change to `--format testname`?
-  capture_output "${report}" gotestsum --format standard-verbose \
-    --junitfile "${xml}" --junitfile-testsuite-name relative --junitfile-testcase-classname relative \
-    --jsonfile "${json}" \
-    -- "${go_test_args[@]}"
+  # Run tests in verbose mode to capture details.
+  # go doesn't like repeating -v, so remove if passed.
+  local args=" $@ "
+  local go_test="go test -v ${args/ -v / }"
+  # Just run regular go tests if not on Prow.
+  echo "Running tests with '${go_test}'"
+  local report="$(mktemp)"
+  capture_output "${report}" ${go_test}
   local failed=$?
   echo "Finished run, return code is ${failed}"
-
+  # Install go-junit-report if necessary.
+  run_go_tool github.com/jstemmer/go-junit-report go-junit-report --help > /dev/null 2>&1
+  local xml="$(mktemp_with_extension ${ARTIFACTS}/junit_XXXXXXXX xml)"
+  cat ${report} \
+      | go-junit-report \
+      | sed -e "s#\"\(github\.com/knative\|knative\.dev\)/${REPO_NAME}/#\"#g" \
+      > ${xml}
   echo "XML report written to ${xml}"
-  if [[ -n "$(grep '<testsuites></testsuites>' "${xml}")" ]]; then
+  if [[ -n "$(grep '<testsuites></testsuites>' ${xml})" ]]; then
     # XML report is empty, something's wrong; use the output as failure reason
-    create_junit_xml _go_tests "GoTests" "$(cat "${report}")"
+    create_junit_xml _go_tests "GoTests" "$(cat ${report})"
   fi
   # Capture and report any race condition errors
-  local race_errors
-  race_errors="$(sed -n '/^WARNING: DATA RACE$/,/^==================$/p' "${report}")"
+  local race_errors="$(sed -n '/^WARNING: DATA RACE$/,/^==================$/p' ${report})"
   create_junit_xml _go_tests "DataRaceAnalysis" "${race_errors}"
   if (( ! IS_PROW )); then
     # Keep the suffix, so files are related.
     local logfile=${xml/junit_/go_test_}
     logfile=${logfile/.xml/.log}
-    cp "${report}" "${logfile}"
+    cp ${report} ${logfile}
     echo "Test log written to ${logfile}"
   fi
   return ${failed}
@@ -501,27 +515,6 @@ function start_latest_knative_eventing() {
   start_knative_eventing "${KNATIVE_EVENTING_RELEASE}"
 }
 
-# Install Knative Eventing extension in the current cluster.
-# Parameters: $1 - Knative Eventing extension manifest.
-#             $2 - Namespace to look for ready pods into
-function start_knative_eventing_extension() {
-  header "Starting Knative Eventing Extension"
-  echo "Installing Extension CRDs from $1"
-  kubectl apply -f "$1"
-  wait_until_pods_running "$2" || return 1
-}
-
-# Install the stable release of eventing extension sugar controller in the current cluster.
-# Parameters: $1 - Knative Eventing release version, e.g. 0.16.0
-function start_release_eventing_sugar_controller() {
-  start_knative_eventing_extension "https://storage.googleapis.com/knative-releases/eventing/previous/v$1/eventing-sugar-controller.yaml" "knative-eventing"
-}
-
-# Install the sugar cotroller eventing extension
-function start_latest_eventing_sugar_controller() {
-  start_knative_eventing_extension "${KNATIVE_EVENTING_SUGAR_CONTROLLER_RELEASE}" "knative-eventing"
-}
-
 # Run a go tool, installing it first if necessary.
 # Parameters: $1 - tool package/dir for go get/install.
 #             $2 - tool to run.
@@ -547,36 +540,6 @@ function run_go_tool() {
   (( install_failed )) && return ${install_failed}
   shift 2
   ${tool} "$@"
-}
-
-# Add function call to trap
-# Parameters: $1 - Function to call
-#             $2...$n - Signals for trap
-function add_trap {
-  local cmd=$1
-  shift
-  for trap_signal in "$@"; do
-    local current_trap
-    current_trap="$(trap -p "$trap_signal" | cut -d\' -f2)"
-    local new_cmd="($cmd)"
-    [[ -n "${current_trap}" ]] && new_cmd="${current_trap};${new_cmd}"
-    trap -- "${new_cmd}" "$trap_signal"
-  done
-}
-
-# Run kntest tool, error out and ask users to install it if it's not currently installed.
-# Parameters: $1..$n - parameters passed to the tool.
-function run_kntest() {
-  # If the current repo is test-infra, run kntest from source.
-  if [[ "${REPO_NAME}" == "test-infra" ]]; then
-    go run "${REPO_ROOT_DIR}"/kntest/cmd/kntest "$@"
-  # Otherwise kntest must be installed.
-  else
-    if [[ ! -x "$(command -v kntest)" ]]; then
-      echo "--- FAIL: kntest not installed, please clone test-infra repo and run \`go install ./kntest/cmd/kntest\` to install it"; return 1;
-    fi
-    kntest "$@"
-  fi
 }
 
 # Run go-licenses to update licenses.
@@ -679,9 +642,9 @@ function remove_broken_symlinks() {
     local target="$(ls -l ${link})"
     target="${target##* -> }"
     [[ ${target} == /* ]] || target="./${target}"
-    target="$(cd `dirname "${link}"` && cd "${target%/*}" && echo "$PWD"/"${target##*/}")"
+    target="$(cd `dirname ${link}` && cd ${target%/*} && echo $PWD/${target##*/})"
     if [[ ${target} != *github.com/knative/* && ${target} != *knative.dev/* ]]; then
-      unlink "${link}"
+      unlink ${link}
       continue
     fi
   done
@@ -695,7 +658,7 @@ function get_canonical_path() {
   local path=$1
   local pwd=${2:-.}
   [[ ${path} == /* ]] || path="${pwd}/${path}"
-  echo "$(cd "${path%/*}" && echo "$PWD"/"${path##*/}")"
+  echo "$(cd ${path%/*} && echo $PWD/${path##*/})"
 }
 
 # List changed files in the current PR.
@@ -706,7 +669,7 @@ function list_changed_files() {
     # Avoid warning when there are more than 1085 files renamed:
     # https://stackoverflow.com/questions/7830728/warning-on-diff-renamelimit-variable-when-doing-git-push
     git config diff.renames 0
-    git --no-pager diff --name-only "${PULL_BASE_SHA}".."${PULL_PULL_SHA}"
+    git --no-pager diff --name-only ${PULL_BASE_SHA}..${PULL_PULL_SHA}
   else
     # Do our best if not running in Prow
     git diff --name-only HEAD^
@@ -741,7 +704,7 @@ function get_latest_knative_yaml_source() {
     local major_minor="${branch_name##release-}"
     # Find the latest release manifest with the same major&minor version.
     local yaml_source_path="$(
-      gsutil ls "gs://knative-releases/${repo_name}/previous/v${major_minor}.*/${yaml_name}.yaml" 2> /dev/null \
+      gsutil ls gs://knative-releases/${repo_name}/previous/v${major_minor}.*/${yaml_name}.yaml 2> /dev/null \
       | sort \
       | tail -n 1 \
       | cut -b6-)"
@@ -781,8 +744,8 @@ function shellcheck_new_files() {
 # Initializations that depend on previous functions.
 # These MUST come last.
 
-readonly _TEST_INFRA_SCRIPTS_DIR="$(dirname $(get_canonical_path "${BASH_SOURCE[0]}"))"
-readonly REPO_NAME_FORMATTED="Knative $(capitalize "${REPO_NAME//-/ }")"
+readonly _TEST_INFRA_SCRIPTS_DIR="$(dirname $(get_canonical_path ${BASH_SOURCE[0]}))"
+readonly REPO_NAME_FORMATTED="Knative $(capitalize ${REPO_NAME//-/ })"
 
 # Public latest nightly or release yaml files.
 readonly KNATIVE_SERVING_RELEASE_CRDS="$(get_latest_knative_yaml_source "serving" "serving-crds")"
@@ -790,4 +753,3 @@ readonly KNATIVE_SERVING_RELEASE_CORE="$(get_latest_knative_yaml_source "serving
 readonly KNATIVE_NET_ISTIO_RELEASE="$(get_latest_knative_yaml_source "net-istio" "net-istio")"
 readonly KNATIVE_EVENTING_RELEASE="$(get_latest_knative_yaml_source "eventing" "eventing")"
 readonly KNATIVE_MONITORING_RELEASE="$(get_latest_knative_yaml_source "serving" "monitoring")"
-readonly KNATIVE_EVENTING_SUGAR_CONTROLLER_RELEASE="$(get_latest_knative_yaml_source "eventing" "eventing-sugar-controller")"
