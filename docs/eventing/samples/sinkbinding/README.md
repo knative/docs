@@ -72,10 +72,10 @@ event-display   http://event-display.default.1.2.3.4.xip.io   event-display-gqjb
 ### Create our SinkBinding
 
 In order to direct events to our Event Display, we will first create a
-SinkBinding that will inject `$K_SINK` and "$K_CE_OVERRIDES" into select `Jobs`:
+SinkBinding that will inject `$K_SINK` and `$K_CE_OVERRIDES` into select `Jobs`:
 
 ```yaml
-apiVersion: sources.knative.dev/v1alpha1
+apiVersion: sources.knative.dev/v1beta1
 kind: SinkBinding
 metadata:
   name: bind-heartbeat
@@ -192,7 +192,7 @@ together.  For example, the [`cloudevents-go`
 sample](../../../serving/samples/cloudevents/cloudevents-go) may be bound with:
 
 ```yaml
-apiVersion: sources.knative.dev/v1alpha1
+apiVersion: sources.knative.dev/v1beta1
 kind: SinkBinding
 metadata:
   name: bind-heartbeat

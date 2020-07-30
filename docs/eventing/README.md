@@ -144,8 +144,6 @@ Learn more about Eventing development in the
 
 ## Installation
 
-Knative Eventing currently requires Knative Serving installed with either Istio version >=1.0,
-Contour version >=1.1, or Gloo version >=0.18.16.
 [Follow the instructions to install on the platform of your choice](../install/README.md).
 
 ## Sources
@@ -161,7 +159,7 @@ In addition to the sources explained below, there are
 [other sources](./sources/README.md) that you can install.
 If you need a Source not covered by the ones mentioned below nor by the other
 [available implementations](./sources/README.md), there is a
-[tutorial on writing a Source with a Receive Adapter](./samples/writing-receive-adapter-source/).
+[tutorial on writing a Source with a Receive Adapter](./samples/writing-event-source).
 
 If your code needs to send events as part of its business logic and doesn't fit
 the model of a Source, consider

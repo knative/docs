@@ -5,9 +5,9 @@ type: "docs"
 ---
 
 To upgrade your Knative components and plugins, run the `kubectl apply` command
-to install the subsequent release. We recommend upgrading by a single
-[minor](https://semver.org/) version number. For example, if you have v0.6.0 installed,
-you should upgrade to v0.7.0 before attempting to upgrade to v0.8.0. To verify the version
+to install the subsequent release. We support upgrading by a single
+[minor](https://semver.org/) version number. For example, if you have v0.14.0 installed,
+you must upgrade to v0.15.0 before attempting to upgrade to v0.16.0. To verify the version
 number you currently have installed, see
 [Checking your installation version](./check-install-version.md).
 
@@ -60,6 +60,16 @@ you upgrade your Knative components. For example, if you have the
 monitoring plug-in installed, upgrade it alongside Knative Serving and Eventing.
 
 
+### Run pre-install tools before upgrade
+
+In some upgrades there are some steps that must happen before the actual
+upgrade, and these are identified in the release notes. For example, upgrading
+from v0.15.0 to v0.16.0 for Eventing you have to run:
+
+```bash
+kubectl apply --filename {{< artifact repo="eventing" file="eventing-pre-install-jobs.yaml" >}}
+```
+
 ### Upgrade existing resources to the latest stored version
 
 Our custom resources are stored within Kubernetes at a particular version.
@@ -72,28 +82,31 @@ The release notes for each release will explicitly whether a migration is requir
 
 ie.
 ```bash
-kubectl apply --filename {{< artifact repo="serving" file="serving-storage-version-migration.yaml" >}}
+kubectl create --filename {{< artifact repo="serving" file="serving-post-install-jobs.yaml" >}}
 ```
-
-for eventing:
-```bash
-kubectl apply --filename {{< artifact repo="eventing" file="storage-version-migration-v0.15.0.yaml" >}}
-```
-
-
 
 ## Performing the upgrade
 
 To upgrade, apply the `.yaml` files for the subsequent minor versions of all
 your installed Knative components and features, remembering to only
-upgrade by one minor version at a time. For a cluster running v0.12.1 of the
+upgrade by one minor version at a time. For a cluster running v0.15.2 of the
 Knative Serving and Eventing components and the monitoring plug-in, the
-following command upgrades the installation to v0.13.0:
+following command upgrades the installation to v0.16.0:
 
 ```bash
-kubectl apply --filename https://github.com/knative/serving/releases/download/v0.13.0/serving.yaml \
---filename https://github.com/knative/eventing/releases/download/v0.13.0/eventing.yaml \
---filename https://github.com/knative/serving/releases/download/v0.13.0/monitoring.yaml
+kubectl apply --filename https://github.com/knative/serving/releases/download/v0.16.0/serving.yaml \
+--filename https://github.com/knative/eventing/releases/download/v0.16.0/eventing.yaml \
+--filename https://github.com/knative/serving/releases/download/v0.16.0/monitoring.yaml
+```
+
+### Run post-install tools after the upgrade
+
+In some upgrades there are some steps that must happen after the actual
+upgrade, and these are identified in the release notes. For example, after
+upgrading from v0.15.0 to v0.16.0 for Eventing you should run:
+
+```bash
+kubectl apply --filename {{< artifact repo="eventing" file="eventing-post-install-jobs.yaml" >}}
 ```
 
 ## Verifying the upgrade

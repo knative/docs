@@ -7,7 +7,7 @@ type: "docs"
 
 Knative uses a shared ingress Gateway to serve all incoming traffic within
 Knative service mesh, which is the `knative-ingress-gateway` Gateway under
-`knative-serving` namespace. By default, we use Istio gateway service
+the `knative-serving` namespace. By default, we use Istio gateway service
 `istio-ingressgateway` under `istio-system` namespace as its underlying service.
 You can replace the service with that of your own as follows.
 

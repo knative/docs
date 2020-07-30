@@ -75,7 +75,7 @@ file. Note that arguments and environment variables are set and will be passed
 to the container.
 
 ```yaml
-apiVersion: sources.knative.dev/v1alpha2
+apiVersion: sources.knative.dev/v1beta1
 kind: ContainerSource
 metadata:
   name: test-heartbeats

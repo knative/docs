@@ -46,7 +46,7 @@ data:
       kind: InMemoryChannel
     namespaceDefaults:
       some-namespace:
-        apiVersion: messaging.knative.dev/v1alpha1
+        apiVersion: messaging.knative.dev/v1beta1
         kind: KafkaChannel
         spec:
           numPartitions: 2
