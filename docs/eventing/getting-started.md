@@ -63,7 +63,7 @@ demonstrate how you can configure your event producers to target a specific cons
    command:
 
      ```
-     kubectl -n event-example apply -f << EOF
+     kubectl -n event-example apply -f - << EOF
      apiVersion: apps/v1
      kind: Deployment
      metadata:
