@@ -7,6 +7,10 @@ type: "docs"
 
 To apply upper and lower bounds to autoscaling behavior, you can specify scale bounds in both directions.
 
+You can also specify the initial target scale of a revision after creation, with either its cluster-wide flag or annotation.
+
+If both `minScale` annotation and initial scale (global or per-revision) are specified, and `minScale` is greater than the calculated initial scale, the initial scale will be ignored.
+
 ## Lower bound
 
 This value controls the minimum number of replicas that each revision should have.
@@ -68,6 +72,62 @@ spec:
       containers:
         - image: gcr.io/knative-samples/helloworld-go
 ```
+{{< /tab >}}
+{{< /tabs >}}
+
+## Initial scale
+
+This value controls the initial target scale of a revision after creation.
+
+* **Global key:** `initial-scale` in combination with `allow-zero-initial-scale`
+* **Per-revision annotation key:** `autoscaling.knative.dev/initialScale`
+* **Possible values:** integer
+* **Default:** `1`
+
+**Example:**
+{{< tabs name="initial-scale" default="Per Revision" >}}
+{{% tab name="Per Revision" %}}
+```yaml
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: helloworld-go
+  namespace: default
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/initialScale: "0"
+    spec:
+      containers:
+        - image: gcr.io/knative-samples/helloworld-go
+```
+{{< /tab >}}
+{{% tab name="Global (ConfigMap)" %}}
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-autoscaler
+  namespace: knative-serving
+data:
+  initial-scale: "0"
+  allow-zero-initial-scale: "true"
+```
+{{< /tab >}}
+{{% tab name="Global (Operator)" %}}
+```yaml
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+spec:
+  config:
+    autoscaler:
+      initial-scale: "0"
+      allow-zero-initial-scale: "true"
+```
+
 {{< /tab >}}
 {{< /tabs >}}
 
