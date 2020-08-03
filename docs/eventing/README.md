@@ -65,6 +65,10 @@ generic interfaces that can be implemented by multiple Kubernetes resources:
    returned events may be further processed in the same way that events from an
    external event source are processed.
 
+### Event sources
+
+To learn about using event sources, see the [event sources](./sources/README.md) documentation.
+
 ### Event brokers and triggers
 
 Broker and Trigger objects make it easy to filter events based on event
@@ -145,141 +149,6 @@ Learn more about Eventing development in the
 ## Installation
 
 [Follow the instructions to install on the platform of your choice](../install/README.md).
-
-## Sources
-
-<!-- TODO(evankanderson): move this to just sources/ ? -->
-
-Each source is a separate Kubernetes custom resource. This allows each type of
-Source to define the arguments and parameters needed to instantiate a source.
-All Sources should be part of the `sources` category, so you can list all existing Sources with
-`kubectl get sources`.
-
-In addition to the sources explained below, there are
-[other sources](./sources/README.md) that you can install.
-If you need a Source not covered by the ones mentioned below nor by the other
-[available implementations](./sources/README.md), there is a
-[tutorial on writing a Source with a Receive Adapter](./samples/writing-event-source).
-
-If your code needs to send events as part of its business logic and doesn't fit
-the model of a Source, consider
-[feeding events directly to a Broker](https://knative.dev/docs/eventing/broker/).
-
-### Core Sources
-
-These are the core sources that come out-of-the-box when installing Knative Eventing.
-
-#### APIServerSource
-
-The APIServerSource fires a new event each time a Kubernetes resource is created, updated or deleted.
-
-See the [Kubernetes API Server Source](samples/kubernetes-event-source) example for more details.
-
-#### PingSource
-
-The PingSource fires events based on given
-[Cron](https://en.wikipedia.org/wiki/Cron) schedule.
-
-See the [Ping Source](samples/ping-source) example for more details.
-
-#### ContainerSource
-
-The ContainerSource will instantiate container image(s) that can generate events
-until the ContainerSource is deleted. This may be used (for example) to poll an
-FTP server for new files or generate events at a set time interval.
-
-Refer to the [Container Source](samples/container-source) example for more details.
-
-#### SinkBinding
-
-The SinkBinding can be used to author new event sources using any of the
-familiar compute abstractions that Kubernetes makes available (e.g. Deployment,
-Job, DaemonSet, StatefulSet), or Knative abstractions (e.g. Service,
-Configuration).
-
-See the [SinkBinding](samples/container-source) example for more details.
-
-### Eventing Contrib Sources
-
-This is a non-exhaustive list of Sources supported by our community and maintained
-in the [Knative Eventing-Contrib](https://github.com/knative/eventing-contrib) Github repo.
-
-#### GitHubSource
-
-The GitHubSource fires a new event for selected
-[GitHub event types](https://developer.github.com/v3/activity/events/types/).
-
-See the [GitHub Source](samples/github-source) example for more details.
-
-#### GitLabSource
-
-The GitLabSource creates a webhooks for specified
-[event types](https://docs.gitlab.com/ee/user/project/integrations/webhooks.html#events),
-listens for incoming events and passes them to a consumer.
-
-See the [GitLab Source](samples/gitlab-source) example for more details.
-
-#### AwsSqsSource
-
-The AwsSqsSource fires a new event each time an event is published on an
-[AWS SQS topic](https://aws.amazon.com/sqs/).
-
-#### KafkaSource
-
-The KafkaSource reads events from an Apache Kafka Cluster, and passes these to a
-Knative Serving application so that they can be consumed.
-
-See the
-[Kafka Source](https://github.com/knative/eventing-contrib/tree/master/kafka/source)
-example for more details.
-
-#### CamelSource
-
-A CamelSource is an event source that can represent any existing
-[Apache Camel component](https://github.com/apache/camel/tree/master/components)
-that provides a consumer side, and enables publishing events to an addressable
-endpoint. Each Camel endpoint has the form of a URI where the scheme is the ID
-of the component to use.
-
-CamelSource requires [Camel-K](https://github.com/apache/camel-k#installation)
-to be installed into the current namespace. See the
-[CamelSource](https://github.com/knative/eventing-contrib/tree/master/camel/source/samples)
-example.
-
-### Google Cloud Sources
-
-In order to consume events from different GCP services, [Knative-GCP](https://github.com/google/knative-gcp) supports
-different GCP Sources.
-
-#### CloudPubSubSource
-
-The CloudPubSubSource fires a new event each time a message is published on a
-[Google Cloud Platform PubSub topic](https://cloud.google.com/pubsub/).
-
-See the [CloudPubSubSource](samples/cloud-pubsub-source) example for more details.
-
-#### CloudStorageSource
-
-Registers for events of specific types on the specified
-[Google Cloud Storage](https://cloud.google.com/storage/) bucket and optional object prefix.
-Brings those events into Knative.
-
-See the [CloudStorageSource](samples/cloud-storage-source) example.
-
-#### CloudSchedulerSource
-
-Creates, updates, and deletes [Google Cloud Scheduler](https://cloud.google.com/scheduler/) Jobs.
-When those jobs are triggered, receive the event inside Knative.
-
-See the [CloudSchedulerSource](samples/cloud-scheduler-source) example for further details.
-
-#### CloudAuditLogsSource
-
-Registers for events of specific types on the specified [Google Cloud Audit Logs](https://cloud.google.com/logging/docs/audit/).
-Brings those events into Knative.
-
-Refer to the [CloudAuditLogsSource](samples/cloud-audit-logs-source) example for more details.
-
 
 ## Getting Started
 
