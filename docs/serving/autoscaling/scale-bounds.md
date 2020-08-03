@@ -9,7 +9,7 @@ To apply upper and lower bounds to autoscaling behavior, you can specify scale b
 
 You can also specify the initial target scale of a revision after creation, with either its cluster-wide flag or annotation.
 
-If both `minScale` annotation and initial scale (global or per-revision) are specified, and `minScale` is greater than the calculated initial scale, the initial scale will be ignored.
+If both `minScale` annotation and `initial-scale` ConfigMap value or `autoscaling.knative.dev/initialScale` annotation are specified, and `minScale` is greater than the calculated initial scale, the initial scale will be ignored.
 
 ## Lower bound
 
