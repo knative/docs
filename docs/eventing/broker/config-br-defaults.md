@@ -4,16 +4,11 @@ weight: 30
 type: "docs"
 ---
 
-Knative Eventing provides a `config-br-defaults` ConfigMap, which lives in the `knative-eventing` namespace, and provides default configuration settings to enable the creation of [multi-tenant Brokers](./_index.md) and InMemoryChannel type Channels.
+**NOTE:** This guide assumes Knative Eventing is installed in the `knative-eventing` namespace. If you have installed Knative Eventing in a different namespace, replace `default` with the name of that namespace.
+
+Knative Eventing provides a `config-br-defaults` ConfigMap, which provides default configuration settings to enable the creation of [Knative Channel-based Brokers](./_index.md) and InMemoryChannel type Channels.
 <!-- TODO: Add link to Channel docs-->
 **NOTE:** If you are using a different Broker or Channel implementation, you will need to modify the ConfigMap accordingly.
-
-Knative provides a `ConfigMap` which makes it easier to create Brokers by
-providing default values when Brokers are created. You can control which Broker
-implementations are used and how they are configured by modifying this file. You
-have the flexibility to control the defaults both at the cluster level (each
-Broker created in the cluster) as well as at the namespace level (override the
-behaviour for certain namespaces).
 
 If you are using the `config-br-defaults` ConfigMap default configuration, the example below will create a Broker called `default` in the default namespace, and uses `MTChannelBasedBroker` as the
 implementation.

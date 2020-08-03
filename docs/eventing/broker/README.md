@@ -1,6 +1,6 @@
 Knative provides a multi-tenant, channel-based broker implementation that uses channels for event routing.
 
-Before you can use the Knative Broker, you must install a channel provider, such as InMemoryChannel, Kafka or Nats.
+Before you can use the Knative Channel-based Broker, you must install a channel provider, such as InMemoryChannel, Kafka or Nats.
 
 **NOTE:** InMemoryChannel channels are for development use only and must not be used in a production deployment.
 
@@ -9,14 +9,13 @@ see the list of [available channels](https://knative.dev/docs/eventing/channels/
 
 ## How it works
 <!--TODO: Add a diagram that shows this-->
-When an Event is sent to the Broker, all metadata other than the `CloudEvent` data is stripped away.
+When an Event is sent to the Broker, all request metadata other than the CloudEvent data and context attributes is stripped away.
 Unless the information existed as a `CloudEvent` attribute, no information is retained about how this Event entered the Broker.
 
-Once an Event has entered the Broker, it can be forwarded to event Channels by using Subscrbers and Triggers.
+Once an Event has entered the Broker, it can be forwarded to event Channels by using subscrbers and Triggers.
 This event delivery mechanism hides details of event routing from the event producer and event consumer.
 
-Subscribers register the interest of an event sink in a particular class of events, so that the sink will receive the type of events specified.
-Triggers are used to filter which events are sent from the Broker to a Subscriber.
+Triggers register a subscriber's interest in a particular class of events, so that the subscriber's event sink will receive events that match the Trigger's filter.
 
 ## Default Broker configuration
 
