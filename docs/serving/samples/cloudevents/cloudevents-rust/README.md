@@ -1,4 +1,4 @@
-# Vert.x + Rust + Actix-web
+# Rust + Actix web + CloudEvents + Knative
 
 A simple web app written in Rust using [Actix web](https://github.com/actix/actix-web)
 that can receive CloudEvents. It supports running in two modes:
