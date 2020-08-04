@@ -10,6 +10,12 @@ The following are guidelines for contributing to the Knative documentation.
 These are just guidelines, not rules. Use your best judgment, and feel free to
 propose changes to this document in a pull request.
 
+**First off, thanks for taking the time to contribute!**
+
+The following are guidelines for contributing to the Knative documentation.
+These are just guidelines, not rules. Use your best judgment, and feel free to
+propose changes to this document in a pull request.
+
 ## Before you begin
 
 ### Code of conduct
@@ -48,7 +54,8 @@ use it as a reference for writing style questions.
 ### Reporting documentation issues
 
 Knative uses Github issues to track documentation issues and requests. If you
-see a problem with the documentation, submit an issue using the following steps:
+see a problem with the documentation that you're not sure how to fix, submit an
+issue using the following steps:
 
 1. Check the [Knative docs issues list](https://github.com/knative/docs/issues)
    before creating an issue to avoid making a duplicate.
@@ -90,9 +97,10 @@ There are a couple of different ways to get started with contributing to the Kna
   [Good First Issue](https://github.com/knative/docs/labels/kind%2Fgood-first-issue)
   in the backlog.
 
-- Try out Knative and send us feedback. For example, run through one of the
-  [install guides](docs/install/README.md) and then try
-  [Getting Started with Knative Serving](docs/serving/getting-started-knative-app.md).
+- Try out Knative and send us feedback. For example, run through the
+  [install guides](docs/install/) and then try
+  [Getting Started with Knative Serving](docs/serving/getting-started-knative-app.md)
+  or [Getting Started With Eventing](docs/eventing/getting-started.md).
 
   You should keep a
   [friction log](https://devrel.net/developer-experience/an-introduction-to-friction-logging)
@@ -110,7 +118,7 @@ There are a couple of different ways to get started with contributing to the Kna
 
 - Are there multiple places the issue could be fixed?
 
-  - Are there other pages which you should also update?
+  - Are there other pages that you should apply your update?
 
   - Would it help if there was a link to more or related information on a page?
     On a related page?
@@ -147,9 +155,9 @@ repo:
      clarity, and organization standards (see [Style Guide](#style-guide)).
 
 We appreciate contributions to the docs, so if you open a PR we will help you
-get it merged. You can also post in the `#docs`
-[Slack channel](https://knative.slack.com/) to get input on your ideas before
-creating a PR.
+get it merged. You can also post in the `#docs` [Slack
+channel](https://knative.slack.com/) to get input on your ideas or find areas to
+contribute before creating a PR.
 
 ### Putting your docs in the right place
 
@@ -239,7 +247,7 @@ archived into the last release branch where it worked.
 #### Choosing the correct branch
 
 It is likely that your docs contribution is either for new or changed features
-in the product, or for a fix or update existing content.
+in the product, or for a fix or update to existing content.
 
 - **New or changed features**: If you are adding or updating documentation for a
   new or changed feature, you likely want to open your PR against the `master`
@@ -349,15 +357,12 @@ Members should be proficient in at least one of these review areas.
 
 ### Becoming a member
 
-First, reach out to an approver and ask them to sponsor you so that you can
-become a member. The easiest way to do this is using Slack.
+Add yourself (by sending a PR) to the `members` list in the [Peribolos
+configuration in the `knative/community`
+repo](https://github.com/knative/community/blob/master/peribolos/knative.yaml).
 
-If they are supportive of your membership, your sponsor will reach out to the
-Knative Steering committee to ask that you be added as a member of the Knative
-org.
-
-Once your sponsor notifies you that you've been added to the Knative org, open a
-PR to add yourself as a docs-reviewer in the
+Once you've been added to the Knative org, open a PR to add yourself as a
+docs-reviewer in the
 [OWNERS_ALIASES](https://github.com/knative/docs/tree/master/OWNERS_ALIASES)
 file.
 
