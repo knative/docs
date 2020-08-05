@@ -2155,7 +2155,7 @@ Max: 1
 <br>
 (Optional)
    </td>
-   <td>Must be one of "http1" or "h2c" (if supported). Defaults to "http1".
+   <td>If specified, this must be an IANA_SVC_NAME. The only allowed values are "http1" or "h2c" (if supported). Defaults to "http1".
    </td>
    <td>REQUIRED
    </td>
