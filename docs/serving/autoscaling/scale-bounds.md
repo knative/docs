@@ -75,9 +75,9 @@ spec:
 
 ## Initial scale
 
-This value controls the initial target scale of a revision after creation. This is the target scale a revision must reach, immediately after first creation, before being marked Ready. Once the revision has reached this scale once, this value is ignored (e.g. the revision will scale down after the initial target scale is reached if the traffic received only needs a smaller scale).
+This value controls the initial target scale of a revision after creation. This is the target scale a revision must reach, immediately after creation, before being marked Ready. Once the revision has reached this scale once, this value is ignored (e.g. the revision will scale down after the initial target scale is reached if the traffic received only needs a smaller scale).
 
-If lower bound is set and is greater than the initial scale, the initial scale will be ignored.
+During creation the revision, the larger of initial scale and lower bound is picked as the target scale.
 
 * **Global key:** `initial-scale` in combination with `allow-zero-initial-scale`
 * **Per-revision annotation key:** `autoscaling.knative.dev/initialScale`
