@@ -8,6 +8,7 @@ aliases:
 
 The Knative Serving operator can be configured with these options:
 
+- [Version Configuration](#version-configuration)
 - [Serving Configuration by ConfigMap](#serving-configuration-by-configMap)
 - [Private repository and private secret](#private-repository-and-private-secrets)
 - [SSL certificate for controller](#ssl-certificate-for-controller)
@@ -15,6 +16,32 @@ The Knative Serving operator can be configured with these options:
 - [Cluster local gateway](#configuration-of-cluster-local-gateway)
 - [High availability](#high-availability)
 - [System Resource Settings](#system-resource-settings)
+
+## Version Configuration
+
+Cluster administrators can install a specific version of Knative Serving by using the `spec.version` field. For example,
+if you want to install Knative Serving 0.16.0, you can apply the following `KnativeServing` custom resource:
+
+```
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  version: 0.16.0
+```
+
+If `spec.version` is not specified, the Knative Operator will install the latest available version of Knative Serving.
+If users specify an invalid or unavailable version, the Knative Operator will do nothing. The Knative Operator always
+includes the latest 3 minor release versions. For example, if the current version of the Knative Operator is 0.16.x, the
+earliest version of Knative Serving available through the Operator is 0.14.0.
+
+If Knative Serving is already managed by the Operator, updating the `spec.version` field in the `KnativeServing` resource
+enables upgrading or downgrading the Knative Serving version, without needing to change the Operator.
+
+Note that the Knative Operator only permits upgrades or downgrades by one minor release version at a time. For example,
+if the current Knative Serving deployment is version 0.14.x, you must upgrade to 0.15.x before upgrading to 0.16.x.
 
 ## Serving Configuration by ConfigMap
 
