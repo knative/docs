@@ -7,7 +7,7 @@ type: "docs"
 
 To apply upper and lower bounds to autoscaling behavior, you can specify scale bounds in both directions.
 
-You can also specify the initial target scale of a revision after creation, with either its cluster-wide flag or annotation.
+You can also specify the initial scale a revision is scaled to immediately after creation, either as a default for all revisions, or for a specific revision using an annotation.
 
 ## Lower bound
 
@@ -75,7 +75,9 @@ spec:
 
 ## Initial scale
 
-This value controls the initial target scale of a revision after creation. If lower bound is set and is greater than the initial scale, the initial scale will be ignored.
+This value controls the initial target scale of a revision after creation. This is the target scale a revision must reach, immediately after first creation, before being marked Ready. Once the revision has reached this scale once, this value is ignored (e.g. the revision will scale down after the initial target scale is reached if the traffic received only needs a smaller scale).
+
+If lower bound is set and is greater than the initial scale, the initial scale will be ignored.
 
 * **Global key:** `initial-scale` in combination with `allow-zero-initial-scale`
 * **Per-revision annotation key:** `autoscaling.knative.dev/initialScale`
