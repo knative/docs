@@ -5,13 +5,14 @@ weight: 50
 type: "docs"
 ---
 
-To apply upper and lower bounds to autoscaling behavior, you can specify scale bounds in both directions.
+You can configure upper and lower bounds to control autoscaling behavior.
 
-You can also specify the initial scale a revision is scaled to immediately after creation, either as a default for all revisions, or for a specific revision using an annotation.
+You can also specify the initial scale that a Revision is scaled to immediately after creation.
+This can be a default configuration for all Revisions, or for a specific Revision using an annotation.
 
 ## Lower bound
 
-This value controls the minimum number of replicas that each revision should have.
+This value controls the minimum number of replicas that each Revision should have.
 Knative will attempt to never have less than this number of replicas at any one point in time.
 
 * **Global key:** n/a
@@ -75,9 +76,10 @@ spec:
 
 ## Initial scale
 
-This value controls the initial target scale of a revision after creation. This is the target scale a revision must reach, immediately after creation, before being marked Ready. Once the revision has reached this scale once, this value is ignored (e.g. the revision will scale down after the initial target scale is reached if the traffic received only needs a smaller scale).
+This value controls the initial target scale a Revision must reach immediately after it is created before it is marked as `Ready`.
+After the Revision has reached this scale one time, this value is ignored. This means that the Revision will scale down after the initial target scale is reached if the actual traffic received only needs a smaller scale.
 
-During the creation of the revision, the larger of initial scale and lower bound is picked as the target scale.
+When the Revision is created, the larger of initial scale and lower bound is automatically chosen as the initial target scale.
 
 * **Global key:** `initial-scale` in combination with `allow-zero-initial-scale`
 * **Per-revision annotation key:** `autoscaling.knative.dev/initialScale`
