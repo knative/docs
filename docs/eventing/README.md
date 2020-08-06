@@ -3,6 +3,65 @@ Knative Eventing is a system that is designed to address a common need for cloud
 native development and provides composable primitives to enable late-binding
 event sources and event consumers.
 
+## Conceptual Overview
+
+### So you want to process events?
+
+Perfect, you’re in the right place. The resources in this section will guide you
+through some use cases and get you started in no time flat. There are different ways to go
+about handling event-driven architectures. In the resources in this section, we’ll share use
+cases and architecture examples ranging from straightforward to more complex.
+You can go through these resources in any order or only read the sections that you
+need. As a starting point, though, we’ll go over some terminology.
+
+#### What is event-driven
+
+Microservices, and functions, usually get their input from something else. That
+“something else” is the trigger for a microservice to take care of business. The
+piece of information that is sent across is called an event. The microservices
+in an event-driven architecture are constantly reacting to events and producing
+events themselves. As an example, think about your version control system. When
+you make changes to a project and want to merge it into the main branch, you
+need to create a Pull Request (PR). When you create that PR, it could trigger a
+bunch of other actions like code linting, quality tests, and update tickets.
+All those actions are started by events and the actions consume (act on) that
+data.
+
+#### Traditional Pub/Sub Model
+To get event data to consumers, one model you can use is the traditional
+“Pub/Sub” model. This model was made popular with the rise of
+service-oriented architecture, where events are placed on channels
+(or “topics”) and all subscribers receive are notified. Modern tools that fit
+in this category are Amazon SNS, Azure Service Bus, and Google Cloud Pub/Sub.
+
+#### Event-Driven Functions
+In the traditional serverless experience, users package their code (the
+functions they want to deploy) and associate them with the event source that
+should start those functions (invoke them). This pattern was made popular by
+hosted Function-as-a-Service platforms like AWS Lambda, Azure Functions, and
+Google Cloud Function.
+
+#### Modern Event Mesh
+As the serverless industry evolved and technology matured, the industry started
+to build architectures where the producers and consumers were even more
+separated. At the same time, the delivery of the events is governed by
+high-level routing and event data is captured in a standard format (like Cloud
+Events). These architectures are facilitated by so called brokers like AWS
+EventBridge and Azure Event Grid.
+
+### Use cases
+
+* When this happens do that (1:1 event delivery): The most straightforward use case is that whenever events are products, you want some code to handle that event. (Read more - coming soon)
+
+* When any of these happen do that (N:1 event delivery): Your functions might be able to handle multiple events. With a standard format for events, like Cloud Events, your function already knows how to handle receiving the event and you’ll only need to update your business logic to handle processing the new data type. (Read more - coming soon)
+
+* When this happens do these (1:N event delivery): Similar to the first scenario, you can have multiple consumers that are all interested in the same event. By leveraging channels we make handling this scenario simple. (Read more - coming soon)
+
+* When this happens do this thing and then another (pipe / tee): When you’re building functionality, it can be useful to split up functionality into smaller chunks. For example, in Unix operating systems the idea is that each command like tool does only one thing. Using the concepts of pipe and tee, you can string these commands together. (Read more - coming soon)
+
+
+* When these things happen do these things and then some (N:M:Z event delivery): So, there’s a lot of things we can do with the constructs introduced in the use cases above, but the one downside with them is that for more complex use cases, where there are a multitude of Sources sending events, Functions consuming/transforming and so forth, it can get a bit unwieldy to keep track of which Channel is handling which events. Furthermore, sometimes you might only want to consume only some events, but with the constructs introduced so far, you would have to receive all of them, and throw out the ones you’re not interested in. To make these kinds of interactions easier and allow the user to only focus on declaring which events they are interested in and where to send them, there is an easier way to reason about them. This is where _Broker_ and _Trigger_ are meant to provide a straightforward user experience. (Read more - coming soon)
+
 ## Functionality
 
 Knative Eventing supports multiple modes of usage. The following scenarios are
