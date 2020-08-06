@@ -20,34 +20,29 @@ extern crate log;
 use actix_web::dev::HttpResponseBuilder;
 use actix_web::http::StatusCode;
 use actix_web::{post, web, App, HttpRequest, HttpResponse, HttpServer};
-use cloudevents::event::EventBuilderV10;
-use reqwest;
-use url::Url;
+use cloudevents::{EventBuilder, EventBuilderV10};
+use cloudevents_sdk_actix_web::{RequestExt, HttpResponseBuilderExt};
+use cloudevents_sdk_reqwest::RequestBuilderExt;
 
 #[post("/")]
 async fn reply_event(
     req: HttpRequest,
     payload: web::Payload,
 ) -> Result<HttpResponse, actix_web::Error> {
-    let request_event = cloudevents_sdk_actix_web::request_to_event(&req, payload).await?;
+    let request_event = req.into_event(payload).await?;
     info!("Received Event: {:?}", request_event);
 
     // Build response event cloning the original event and setting the new type and source
     let response_event = EventBuilderV10::from(request_event)
-        .source(
-            Url::parse(
-                "https://github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-rust",
-            )
-            .unwrap(),
-        )
+        .source("https://github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-rust")
         .ty("dev.knative.docs.sample")
-        .build();
+        .build()
+        // If i can't build the event, fail with internal server error
+        .map_err(actix_web::error::ErrorInternalServerError)?;
 
-    cloudevents_sdk_actix_web::event_to_response(
-        response_event,
-        HttpResponseBuilder::new(StatusCode::OK),
-    )
-    .await
+    HttpResponseBuilder::new(StatusCode::OK)
+        .event(response_event)
+        .await
 }
 
 #[post("/")]
@@ -58,23 +53,20 @@ async fn forward_event(
 ) -> Result<HttpResponse, actix_web::Error> {
     let sink_url: &str = &sink_url;
 
-    let request_event = cloudevents_sdk_actix_web::request_to_event(&req, payload).await?;
+    let request_event = req.into_event(payload).await?;
     info!("Received Event: {:?}", request_event);
 
     // Build response event cloning the original event and setting the new type and source
     let forward_event = EventBuilderV10::from(request_event)
-        .source(
-            Url::parse(
-                "https://github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-rust",
-            )
-            .unwrap(),
-        )
+        .source("https://github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-rust")
         .ty("dev.knative.docs.sample")
-        .build();
+        .build()
+        // If i can't build the event, fail with internal server error
+        .map_err(actix_web::error::ErrorInternalServerError)?;
 
     let client = reqwest::Client::new();
-    let response = cloudevents_sdk_reqwest::event_to_request(forward_event, client.post(sink_url))
-        // If i can't build the request, fail with internal server error
+    let response = client.post(sink_url)
+        .event(forward_event)
         .map_err(actix_web::error::ErrorInternalServerError)?
         .send()
         .await
