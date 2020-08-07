@@ -6,7 +6,7 @@ type: "docs"
 
 ## Exclude Namespaces from Webhook
 
-Certain situations may come up that require bypassing the Knative Webhook in a cluster for specific namespaces. A namespace can use the label `webhooks.knative.dev/exclude` to bypass the Knative Webhook. 
+A namespace can use the label `webhooks.knative.dev/exclude` to bypass the Knative Webhook.
 
 ``` yaml
 apiVersion: v1
@@ -16,3 +16,5 @@ metadata:
   labels: 
     webhooks.knative.dev/exclude: "true"
 ```
+
+By default the webhook will examine resources that are created/read/updated/deleted. This includes system namespaces which can cause issues during an upgrade if the webhook is not responding.  Cluster administrators may want to disable the Knative Webhook on system namespaces to prevent issues during upgrades.
