@@ -48,7 +48,7 @@ spec:
 This value controls the maximum number of replicas that each revision should have.
 Knative will attempt to never have more than this number of replicas running, or in the process of being created, at any one point in time.
 
-* **Global key:** n/a
+* **Global key:** `max-scale`
 * **Per-revision annotation key:** `autoscaling.knative.dev/maxScale`
 * **Possible values:** integer
 * **Default:** `0` which means unlimited
@@ -71,6 +71,31 @@ spec:
       containers:
         - image: gcr.io/knative-samples/helloworld-go
 ```
+{{< /tab >}}
+
+{{% tab name="Global (ConfigMap)" %}}
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-autoscaler
+  namespace: knative-serving
+data:
+  max-scale: "3"
+```
+{{< /tab >}}
+{{% tab name="Global (Operator)" %}}
+```yaml
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+spec:
+  config:
+    autoscaler:
+      max-scale: "3"
+```
+
 {{< /tab >}}
 {{< /tabs >}}
 
