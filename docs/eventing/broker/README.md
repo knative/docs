@@ -12,16 +12,15 @@ see the list of [available channels](https://knative.dev/docs/eventing/channels/
 When an Event is sent to the Broker, all request metadata other than the CloudEvent data and context attributes is stripped away.
 Unless the information existed as a `CloudEvent` attribute, no information is retained about how this Event entered the Broker.
 
-Once an Event has entered the Broker, it can be forwarded to event Channels by using subscrbers and Triggers.
+Once an Event has entered the Broker, it can be forwarded to event Channels by using Triggers.
 This event delivery mechanism hides details of event routing from the event producer and event consumer.
 
 Triggers register a subscriber's interest in a particular class of events, so that the subscriber's event sink will receive events that match the Trigger's filter.
 
 ## Default Broker configuration
 
-Knative Eventing provides a `config-br-defaults` ConfigMap, which lives in the `knative-eventing` namespace, and provides default configuration settings to enable the creation of multi-tenant Brokers and InMemoryChannel type Channels.
-<!-- TODO: Add link to Channel docs-->
-**NOTE:** If you are using a different Broker or Channel implementation, you will need to modify the ConfigMap accordingly. For more information, see the [`config-br-defaults`](./config-br-defaults.md) ConfigMap documentation.
+Knative Eventing provides a `config-br-defaults` ConfigMap, which lives in the `knative-eventing` namespace, and provides default configuration settings to enable the creation of Brokers and Channels.
+For more information, see the [`config-br-defaults`](./config-br-defaults.md) ConfigMap documentation.
 
 Create a Broker using the default settings:
 
