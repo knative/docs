@@ -132,22 +132,6 @@
   version = "v2.0.3"
 
 [[projects]]
-  digest = "1:c01767916c59f084bb7c41a7d5877c0f3099b1595cfa066e84ec6ad6b084dd89"
-  name = "github.com/gorilla/context"
-  packages = ["."]
-  pruneopts = "NUT"
-  revision = "08b5f424b9271eedf6f9f0ce86cb9396ed337a42"
-  version = "v1.1.1"
-
-[[projects]]
-  digest = "1:bf5cf1d53d703332e9bd8984c69784645b73a938317bf5ace9aadf20ac49379a"
-  name = "github.com/gorilla/mux"
-  packages = ["."]
-  pruneopts = "NUT"
-  revision = "e3702bed27f0d39777b0b37b664b6280e8ef8fbf"
-  version = "v1.6.2"
-
-[[projects]]
   digest = "1:7fae9ec96d10b2afce0da23c378c8b3389319b7f92fa092f2621bba3078cfb4b"
   name = "github.com/hashicorp/golang-lru"
   packages = ["simplelru"]
@@ -441,7 +425,7 @@
   revision = "ae2f86662275e140f395167f1dab7081a5bd5fa8"
 
 [[projects]]
-  digest = "1:638e6e596d67d0a0c8aeb76ebdcf73561b701ea43f21963b1db231d96ed7db68"
+  digest = "1:2f9394e986f9bc396e819f48ba3d30ca57f64b6ca5999ef50d5281a9f2cd65d0"
   name = "google.golang.org/grpc"
   packages = [
     ".",
@@ -469,6 +453,8 @@
     "metadata",
     "naming",
     "peer",
+    "reflection",
+    "reflection/grpc_reflection_v1alpha",
     "resolver",
     "resolver/dns",
     "resolver/passthrough",
@@ -501,14 +487,14 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:3688e9109c04da2eac034acbc05cd0831d70287ce43d06bc7ec90192addc5df5"
+  digest = "1:033047ee371ef0a6061e9a53ddca0de424274d9dbf8fa87caaaf21f1ef0b6cb8"
   name = "knative.dev/test-infra"
   packages = [
     "scripts",
     "tools/dep-collector",
   ]
   pruneopts = "UT"
-  revision = "7220df1de9de9215ee32ce302d815a018c3e4d9b"
+  revision = "72f8c9f3e9334613c2dcff922d333fc81e721806"
 
 [solve-meta]
   analyzer-name = "dep"
@@ -521,7 +507,6 @@
     "github.com/golang/protobuf/proto",
     "github.com/google/go-github/github",
     "github.com/google/uuid",
-    "github.com/gorilla/mux",
     "github.com/kelseyhightower/envconfig",
     "github.com/openzipkin/zipkin-go",
     "github.com/openzipkin/zipkin-go/reporter/http",
@@ -538,6 +523,7 @@
     "golang.org/x/oauth2",
     "google.golang.org/grpc",
     "google.golang.org/grpc/credentials",
+    "google.golang.org/grpc/reflection",
     "gopkg.in/go-playground/webhooks.v3",
     "gopkg.in/go-playground/webhooks.v3/github",
     "gopkg.in/yaml.v2",
