@@ -6,3 +6,7 @@ implementations provided by Knative Eventing.
 
 ## GCP Broker
 The GCP Broker is optimized for running in GCP. For more details, refer to the [doc](https://github.com/google/knative-gcp/blob/master/docs/install/install-gcp-broker.md).
+
+## Apache Kafka Broker
+
+For information about the Apache Kafka broker, see [link](../kafka-broker.md).

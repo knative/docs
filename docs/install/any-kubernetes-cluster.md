@@ -605,8 +605,19 @@ kubectl apply --filename {{< artifact repo="eventing" file="in-memory-channel.ya
 1. Install a Broker (eventing) layer:
 
       <!-- This indentation is important for things to render properly. -->
-
    {{< tabs name="eventing_brokers" default="MT-Channel-based" >}}
+   {{% tab name="Apache Kafka Broker" %}}
+   {{< feature-state version="v0.17" state="alpha" >}}
+The following command installs the Apache Kafka broker, and runs event routing in a system namespace,
+`knative-eventing`, by default.
+
+```bash
+kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-kafka-broker" file="eventing-kafka-broker.yaml" >}}
+```
+
+For more information, see the [Kafka Broker](./../eventing/broker/kafka-broker.md) documentation.
+{{< /tab >}}
+
    {{% tab name="MT-Channel-based" %}}
    {{< feature-state version="v0.16" state="stable" >}}
 
