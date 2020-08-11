@@ -156,11 +156,11 @@ continue below for instructions about manually adding a certificate.
 {{< tabs name="serving_networking" default="Istio" >}}
 {{% tab name="Contour" %}}
 
-To manually add a TLS certificate to your Knative cluster, you create a
-Kubernetes secret and then configure the `net-contour`
+To manually add a TLS certificate to your Knative cluster, you must create a
+Kubernetes secret and then configure the Knative Contour plugin
 
-1. Run the following command to create a Kubernetes secret to hold your TLS
-   certificate, `cert.pem`, and the private key, `cert.pk`:
+1. Create a Kubernetes secret to hold your TLS certificate, `cert.pem`, and the
+   private key, `cert.pk`, by entering the following command:
 
    ```shell
    kubectl create --namespace contour-external tls default-cert \
@@ -170,10 +170,11 @@ Kubernetes secret and then configure the `net-contour`
 
    where `key.pem` and `cert.pem` are your private key and certificate files.
 
-   You'll need to keep note of the namespace and secret name for the next two
-   steps.
+   **IMPORTANT** Take note of the namespace and secret name. You will need these
+   in future steps.
 
-1. Create a delegation to allow the secret to be used by your developers
+1. Contour requires you to create a delegation to use this certificate and private
+   key in different namespaces. This can be done by creating the following resource:
 
    ```yaml
    apiVersion: projectcontour.io/v1
@@ -188,16 +189,11 @@ Kubernetes secret and then configure the `net-contour`
          - "*"
    ```
 
-1. Update net-contour settings to leverage the secret
+1. Update the Knative Contour plugin to start using the certificate as a fallback
+   when auto-TLS is disabled. This can be done with the following patch:
 
    ```shell
-   kubectl edit cm config-contour -n knative-serving
-   ```
-
-   add the following data property
-
-   ```yaml
-   default-tls-secret: "contour-external/default-cert"
+   kubectl patch cm config-contour -n knative-serving -p '{"data":{"default-tls-secret":"default-cert"}}'
    ```
 
 {{< /tab >}}
