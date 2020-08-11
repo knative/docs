@@ -94,7 +94,7 @@ Knative Serving and Eventing components and the monitoring plug-in, the
 following command upgrades the installation to v0.16.0:
 
 ```bash
-kubectl apply --filename https://github.com/knative/serving/releases/download/v0.16.0/serving.yaml \
+kubectl apply --filename https://github.com/knative/serving/releases/download/v0.16.0/serving-core.yaml \
 --filename https://github.com/knative/eventing/releases/download/v0.16.0/eventing.yaml \
 --filename https://github.com/knative/serving/releases/download/v0.16.0/monitoring.yaml
 ```
