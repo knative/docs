@@ -170,11 +170,11 @@ Kubernetes secret and then configure the `net-contour`
 
    where `cert.pem` and `cert.pem` are your certificate and private key files.
 
-   You'll need to keep note of the namespace and secret name for the next two 
+   You'll need to keep note of the namespace and secret name for the next two
    steps.
 
 1. Create a delegation to allow the secret to be used by your developers
-   
+
    ```yaml
    apiVersion: projectcontour.io/v1
    kind: TLSCertificateDelegation
@@ -188,8 +188,8 @@ Kubernetes secret and then configure the `net-contour`
          - "*"
    ```
 
-1. Update net-contour settings to leverage the secret 
-   
+1. Update net-contour settings to leverage the secret
+
    ```shell
    kubectl edit cm config-contour -n knative-serving
    ```
@@ -197,7 +197,7 @@ Kubernetes secret and then configure the `net-contour`
    add the following data property
 
    ```yaml
-   default-tls-secret-name: "contour-external/default-cert"
+   default-tls-secret: "contour-external/default-cert"
    ```
 
 {{< /tab >}}
