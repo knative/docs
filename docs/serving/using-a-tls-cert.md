@@ -164,11 +164,11 @@ Kubernetes secret and then configure the `net-contour`
 
    ```shell
    kubectl create --namespace contour-external tls default-cert \
-     --key cert.pem \
+     --key key.pem \
      --cert cert.pem
    ```
 
-   where `cert.pem` and `cert.pem` are your certificate and private key files.
+   where `key.pem` and `cert.pem` are your private key and certificate files.
 
    You'll need to keep note of the namespace and secret name for the next two
    steps.
@@ -211,11 +211,11 @@ Kubernetes secret and then configure the `knative-ingress-gateway`:
 
    ```shell
    kubectl create --namespace istio-system secret tls istio-ingressgateway-certs \
-     --key cert.pk \
+     --key key.pem \
      --cert cert.pem
    ```
 
-   where `cert.pk` and `cert.pem` are your certificate and private key files.
+   where `key.pem` and `cert.pem` are your private key and certificate files.
    Note that the `istio-ingressgateway-certs` secret name is required.
 
 1. Configure Knative to use the new secret that you created for HTTPS
