@@ -150,13 +150,13 @@ This will create a PingSource which will send a CloudEvent with
 `{"message": "Even or odd?"}` as the data payload every minute.
 
 ```yaml
-apiVersion: sources.knative.dev/v1alpha2
+apiVersion: sources.knative.dev/v1beta1
 kind: PingSource
 metadata:
   name: ping-source
 spec:
   schedule: "*/1 * * * *"
-  data: '{"message": "Even or odd?"}'
+  jsonData: '{"message": "Even or odd?"}'
   sink:
     ref:
       apiVersion: flows.knative.dev/v1

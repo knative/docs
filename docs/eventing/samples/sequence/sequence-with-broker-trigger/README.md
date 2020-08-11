@@ -138,7 +138,7 @@ This will create a PingSource which will send a CloudEvent with {"message":
 "Hello world!"} as the data payload every 2 minutes.
 
 ```yaml
-apiVersion: sources.knative.dev/v1alpha2
+apiVersion: sources.knative.dev/v1beta1
 kind: PingSource
 metadata:
   name: ping-source
