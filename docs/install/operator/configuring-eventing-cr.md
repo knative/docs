@@ -12,6 +12,7 @@ The Knative Eventing operator can be configured with these options:
 - [Eventing Configuration by ConfigMap](#eventing-configuration-by-configmap)
 - [Private repository and private secret](#private-repository-and-private-secrets)
 - [Configuring default broker class](#configuring-default-broker-class)
+- [System Resource Settings](#system-resource-settings)
 
 __NOTE:__ Kubernetes spec level policies cannot be configured using the Knative operators.
 
@@ -242,4 +243,38 @@ metadata:
   namespace: knative-eventing
 spec:
   defaultBrokerClass: MTChannelBasedBroker
+```
+
+## System Resource Settings
+
+The operator custom resource allows you to configure system resources for the Knative system containers.
+Requests and limits can be configured for the following containers:
+
+- `eventing-controller`
+- `eventing-webhook`
+- `imc-controller`
+- `imc-dispatcher`
+- `mt-broker-ingress`
+- `mt-broker-ingress`
+- `mt-broker-controller`
+
+To override resource settings for a specific container, create an entry in the `spec.resources` list with the container name and the [Kubernetes resource settings](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container).
+
+For example, the following KnativeEventing resource configures the `eventing-webhook` container to request 0.3 CPU and 100MB of RAM, and sets hard limits of 1 CPU, 250MB RAM, and 4GB of local storage:
+
+```
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeEventing
+metadata:
+  name: knative-eventing
+  namespace: knative-eventing
+spec:
+  resources:
+  - container: eventing-webhook
+    requests:
+      cpu: 300m
+      memory: 100Mi
+    limits:
+      cpu: 1000m
+      memory: 250Mi
 ```
