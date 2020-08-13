@@ -153,19 +153,63 @@ For instructions about enabling Knative for automatic certificate provisioning,
 see [Enabling automatic TLS cert provisioning](./using-auto-tls.md). Otherwise,
 continue below for instructions about manually adding a certificate.
 
-To manually add a TLS certificate to your Knative cluster, you create a
-Kubernetes secret and then configure the `knative-ingress-gateway`:
+{{< tabs name="serving_networking" default="Istio" >}}
+{{% tab name="Contour" %}}
 
-1. Run the following command to create a Kubernetes secret to hold your TLS
-   certificate, `cert.pem`, and the private key, `cert.pk`:
+To manually add a TLS certificate to your Knative cluster, you must create a
+Kubernetes secret and then configure the Knative Contour plugin
+
+1. Create a Kubernetes secret to hold your TLS certificate, `cert.pem`, and the
+   private key, `key.pem`, by entering the following command:
 
    ```shell
-   kubectl create --namespace istio-system secret tls istio-ingressgateway-certs \
-     --key cert.pk \
+   kubectl create --namespace contour-external tls default-cert \
+     --key key.pem \
      --cert cert.pem
    ```
 
-   where `cert.pk` and `cert.pem` are your certificate and private key files.
+   **IMPORTANT** Take note of the namespace and secret name. You will need these
+   in future steps.
+
+1. Contour requires you to create a delegation to use this certificate and private
+   key in different namespaces. This can be done by creating the following resource:
+
+   ```yaml
+   apiVersion: projectcontour.io/v1
+   kind: TLSCertificateDelegation
+   metadata:
+     name: default-delegation
+     namespace: contour-external
+   spec:
+     delegations:
+       - secretName: default-cert
+         targetNamespaces:
+         - "*"
+   ```
+
+1. Update the Knative Contour plugin to start using the certificate as a fallback
+   when auto-TLS is disabled. This can be done with the following patch:
+
+   ```shell
+   kubectl patch cm config-contour -n knative-serving \
+     -p '{"data":{"default-tls-secret":"contour-external/default-cert"}}'
+   ```
+
+{{< /tab >}}
+
+{{% tab name="Istio" %}}
+To manually add a TLS certificate to your Knative cluster, you create a
+Kubernetes secret and then configure the `knative-ingress-gateway`:
+
+1. Create a Kubernetes secret to hold your TLS certificate, `cert.pem`, and the
+   private key, `key.pem`, by entering the following command:
+
+   ```shell
+   kubectl create --namespace istio-system secret tls istio-ingressgateway-certs \
+     --key key.pem \
+     --cert cert.pem
+   ```
+
    Note that the `istio-ingressgateway-certs` secret name is required.
 
 1. Configure Knative to use the new secret that you created for HTTPS
@@ -219,6 +263,9 @@ Kubernetes secret and then configure the `knative-ingress-gateway`:
               privateKey: /etc/istio/ingressgateway-certs/tls.key
               serverCertificate: /etc/istio/ingressgateway-certs/tls.crt
       ```
+{{< /tab >}}
+{{< /tabs >}}
+
 
 ## What's next:
 
