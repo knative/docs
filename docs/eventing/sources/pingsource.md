@@ -79,7 +79,7 @@ You can now create the `PingSource` sending an event containing
 
 ```shell
 kubectl create -n pingsource-example -f - <<EOF
-apiVersion: sources.knative.dev/v1alpha2
+apiVersion: sources.knative.dev/v1beta1
 kind: PingSource
 metadata:
   name: test-ping-source

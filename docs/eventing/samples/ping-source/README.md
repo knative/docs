@@ -1,5 +1,5 @@
-This example shows how to configure PingSource as an event source for
-functions.
+This example shows how to configure PingSource as an event source targeting
+a Knative Service.
 
 ## Before you begin
 
@@ -50,7 +50,7 @@ Use following command to create the event source from STDIN:
 
 ```shell
 cat <<EOF | kubectl create -f -
-apiVersion: sources.knative.dev/v1alpha2
+apiVersion: sources.knative.dev/v1beta1
 kind: PingSource
 metadata:
   name: test-ping-source
