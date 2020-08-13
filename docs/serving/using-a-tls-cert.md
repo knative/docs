@@ -191,7 +191,8 @@ Kubernetes secret and then configure the Knative Contour plugin
    when auto-TLS is disabled. This can be done with the following patch:
 
    ```shell
-   kubectl patch cm config-contour -n knative-serving -p '{"data":{"default-tls-secret":"default-cert"}}'
+   kubectl patch cm config-contour -n knative-serving \
+     -p '{"data":{"default-tls-secret":"contour-external/default-cert"}}'
    ```
 
 {{< /tab >}}
