@@ -10,11 +10,6 @@ The following are guidelines for contributing to the Knative documentation.
 These are just guidelines, not rules. Use your best judgment, and feel free to
 propose changes to this document in a pull request.
 
-**First off, thanks for taking the time to contribute!**
-
-The following are guidelines for contributing to the Knative documentation.
-These are just guidelines, not rules. Use your best judgment, and feel free to
-propose changes to this document in a pull request.
 
 ## Before you begin
 
