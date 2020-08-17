@@ -76,7 +76,7 @@ Now, if Ingress shows status `Ready`, there must be a corresponding
 VirtualService. Run the following command:
 
 ```shell
-kubectl get virtualservice <INGRESS_NAME> -n <INGRESS_NAMESPACE> --output yaml
+kubectl get virtualservice -l networking.internal.knative.dev/ingress=<INGRESS_NAME> -n <INGRESS_NAMESPACE> --output yaml
 ```
 
 the network configuration in VirtualService must match that of Ingress
