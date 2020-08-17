@@ -40,9 +40,9 @@ The Hello World sample app does the following:
     spec:
      containers:
       - image: gcr.io/knative-samples/helloworld-go
-       env:
-        - name: TARGET
-         value: "Go Sample v1"
+        env:
+          - name: TARGET
+            value: "Go Sample v1"
   ```
   * `apiVersion`: The current Knative version.
   * `name`(metadata): The name of the application.
