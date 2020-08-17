@@ -746,7 +746,7 @@ kubectl apply --filename {{< artifact repo="eventing-contrib" file="mt-github.ya
 ```
 
 The multi-tenant GitHub source creates only one Knative service handling all
-GitHub sources in the cluster. This source does not support logging and tracing
+GitHub sources in the cluster. This source does not support logging or tracing
 configuration yet.
 
 To learn more about the Github source, try

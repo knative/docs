@@ -1,59 +1,20 @@
 GitHub Source example shows how to wire GitHub events for consumption
 by a Knative Service.
 
-## Deployment Steps
+## Before you beging
 
-### Prerequisites
-
-You will need:
-
-1. An internet-accessible Kubernetes cluster with Knative Serving
-   installed. Follow the [installation instructions](../../../install/README.md)
-   if you need to create one.
+1. Set up [Knative Serving](../../../serving).
 1. Ensure Knative Serving is [configured with a domain
    name](../../../serving/using-a-custom-domain.md)
    that allows GitHub to call into the cluster.
 1. If you're using GKE, you'll also want to [assign a static IP address](../../../serving/gke-assigning-static-ip-address.md).
-1. Install [Knative
-   Eventing](../../../eventing). Those
-   instructions also install the default eventing sources, including
-   the `GitHubSource` we'll use.
-
-### Install Github Event Source
-
-Github Event source lives in the [knative/eventing-contrib](https://github.com/knative/eventing-contrib).
-
-{{< tabs name="install-github-source" default="single-tenant" >}}
-{{% tab name="single-tenant" %}}
-
-The following command install the single-tenant GitHub source:
-
-```shell
-kubectl apply -f {{< artifact repo="eventing-contrib" file="github.yaml" >}}
-```
-
-The single-tenant GitHub source creates one Knative service per GitHub source.
-
-{{< /tab >}}
-
-{{% tab name="multi-tenant" %}}
-
-The following command install the multi-tenant GitHub source:
-
-```shell
-kubectl apply -f {{< artifact repo="eventing-contrib" file="mt-github.yaml" >}}
-```
-
-{{< /tab >}}
-
-The multi-tenant GitHub source creates only one Knative service handling all
-GitHub sources in the cluster.
+1. Set up [Knative Eventing](../../../eventing) with the GitHub source.
 
 ### Create a Knative Service
 
-To verify the `GitHubSource` is working, we will create a simple Knative
-`Service` that dumps incoming messages to its log. The `service.yaml` file
-defines this basic service.
+To verify the GitHub source is working, create a simple Knative
+Service that dumps incoming messages to its log. The `service.yaml` file
+defines this basic Service.
 
 ```yaml
 apiVersion: serving.knative.dev/v1
