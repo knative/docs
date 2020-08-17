@@ -137,67 +137,67 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-go
    definition into the file. Make sure to replace `{username}` with your Docker
    Hub username.
 
-   ```yaml
-   # Namespace for sample application with eventing enabled
-    apiVersion: v1
-    kind: Namespace
-    metadata:
-      name: knative-samples
-      labels:
-          knative-eventing-injection: enabled
-    ---
-    # Helloworld-go app deploment
-    apiVersion: apps/v1
-    kind: Deployment
-    metadata:
-      name: helloworld-go
-    spec:
-      replicas: 1
-      selector:
-        matchLabels: &labels
-          app: helloworld-go
-      template:
-        metadata:
-          labels: *labels
-        spec:
-          containers:
-            - name: helloworld-go
-              image: docker.io/{username}/helloworld-go
-
-    ---
-
-    # Service that exposes helloworld-go app.
-    # This will be the subscriber for the Trigger
-      kind: Service
+      ```yaml
+      # Namespace for sample application with eventing enabled
       apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: knative-samples
+        labels:
+            knative-eventing-injection: enabled
+      ---
+      # Helloworld-go app deploment
+      apiVersion: apps/v1
+      kind: Deployment
       metadata:
         name: helloworld-go
       spec:
+        replicas: 1
         selector:
-          app: helloworld-go
-        ports:
-        - protocol: TCP
-          port: 80
-          targetPort: 8080
-    ---
-    # Knative Eventing Trigger to trigger the helloworld-go service
-    apiVersion: eventing.knative.dev/v1
-    kind: Trigger
-    metadata:
-      name: helloworld-go
-      namespace: knative-samples
-    spec:
-      broker: default
-      filter:
-        attributes:
-          type: dev.knative.samples.helloworld
-          source: dev.knative.samples/helloworldsource
-      subscriber:
-        ref:
-          apiVersion: v1
-          kind: Service
+          matchLabels: &labels
+            app: helloworld-go
+        template:
+          metadata:
+            labels: *labels
+          spec:
+            containers:
+              - name: helloworld-go
+                image: docker.io/{username}/helloworld-go
+
+      ---
+
+      # Service that exposes helloworld-go app.
+      # This will be the subscriber for the Trigger
+        kind: Service
+        apiVersion: v1
+        metadata:
           name: helloworld-go
-   ```
+        spec:
+          selector:
+            app: helloworld-go
+          ports:
+          - protocol: TCP
+            port: 80
+            targetPort: 8080
+      ---
+      # Knative Eventing Trigger to trigger the helloworld-go service
+      apiVersion: eventing.knative.dev/v1
+      kind: Trigger
+      metadata:
+        name: helloworld-go
+        namespace: knative-samples
+      spec:
+        broker: default
+        filter:
+          attributes:
+            type: dev.knative.samples.helloworld
+            source: dev.knative.samples/helloworldsource
+        subscriber:
+          ref:
+            apiVersion: v1
+            kind: Service
+            name: helloworld-go
+      ```
 1. Use the go tool to create a [`go.mod`](https://github.com/golang/go/wiki/Modules#gomod) manifest.
 
    ```shell
@@ -341,44 +341,44 @@ mesh via the Broker and can be delivered to other services using a Trigger
 
 1. Deploy a pod that receives any CloudEvent and logs the event to its output.
 
-   ```shell
-   kubectl --namespace knative-samples apply --filename - << END
-   # event-display app deploment
-   apiVersion: apps/v1
-   kind: Deployment
-   metadata:
-     name: event-display
-     namespace: knative-samples
-   spec:
-     replicas: 1
-     selector:
-       matchLabels: &labels
-         app: event-display
-     template:
-       metadata:
-         labels: *labels
-       spec:
-         containers:
-           - name: helloworld-go
-             # Source code: https://github.com/knative/eventing-contrib/tree/master/cmd/event_display
-             image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
-   ---
-   # Service that exposes event-display app.
-   # This will be the subscriber for the Trigger
-   kind: Service
-   apiVersion: v1
-   metadata:
-     name: event-display
-     namespace: knative-samples
-   spec:
-     selector:
-       app: event-display
-     ports:
-       - protocol: TCP
-         port: 80
-         targetPort: 8080
-   END
-   ```
+      ```shell
+      kubectl --namespace knative-samples apply --filename - << END
+      # event-display app deploment
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: event-display
+        namespace: knative-samples
+      spec:
+        replicas: 1
+        selector:
+          matchLabels: &labels
+            app: event-display
+        template:
+          metadata:
+            labels: *labels
+          spec:
+            containers:
+              - name: helloworld-go
+                # Source code: https://github.com/knative/eventing-contrib/tree/master/cmd/event_display
+                image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+      ---
+      # Service that exposes event-display app.
+      # This will be the subscriber for the Trigger
+      kind: Service
+      apiVersion: v1
+      metadata:
+        name: event-display
+        namespace: knative-samples
+      spec:
+        selector:
+          app: event-display
+        ports:
+          - protocol: TCP
+            port: 80
+            targetPort: 8080
+      END
+      ```
 
 1. Create a trigger to deliver the event to the above service
 
