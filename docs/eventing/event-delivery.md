@@ -39,6 +39,8 @@ The `deadLetterSink` specifies where to send events that failed be consumed by `
 
 ## Common Delivery Parameters
 
+The `delivery` value must be a [Delivery Spec](https://pkg.go.dev/knative.dev/eventing/pkg/apis/duck/v1?tab=doc#DeliverySpec)
+
 ### deadLetterSink
 
 When present, events that failed to be consumed are sent to the `deadLetterSink`.
@@ -50,6 +52,9 @@ The `deadLetterSink` value must be a [Destination](https://pkg.go.dev/knative.de
 spec:
   delivery:
     deadLetterSink: <Destination>
+    retry: <number of retries>
+    backoffPolicy: <linerar or exponential>
+    backoffDelay: <ISO8601 duration>
 ```
 
 ## Channel Support
@@ -58,7 +63,7 @@ The table below summarizes what delivery parameters are supported for each chann
 
 | Channel Type | Supported Delivery Parameters |
 | - | - |
-| In-Memory | `deadLetterSink` |
-| Kafka | none |
+| In-Memory | `deadLetterSink`, `retry`, `backoffPolicy`, `backoffDelay` |
+| Kafka | `deadLetterSink`, `retry`, `backoffPolicy`, `backoffDelay` |
 | Natss | none |
 | GCP PubSub | none |
