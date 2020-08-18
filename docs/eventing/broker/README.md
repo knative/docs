@@ -36,6 +36,50 @@ metadata:
 EOF
 ```
 
+## Explicit Broker configuration
+
+You can of course create a Broker without relying on the defaults (as described
+above) by specifying the `BrokerClass` by using an annotation to specify which
+Broker implementation you'd like to use:
+
+```yaml
+kind: Broker
+metadata:
+  annotations:
+    eventing.knative.dev/broker.class: MTChannelBasedBroker
+```
+
+and explicitly configuring the spec.config, for example:
+```yaml
+kind: Broker	kind: Broker
+spec:
+  config:
+    apiVersion: v1
+    kind: ConfigMap
+    name: config-br-default-channel
+    namespace: knative-eventing
+```
+
+A full example could look something like this:
+
+```shell
+kubectl create -f - <<EOF
+apiVersion: eventing.knative.dev/v1
+kind: Broker
+metadata:
+  annotations:
+    eventing.knative.dev/broker.class: MTChannelBasedBroker
+  name: default
+  namespace: default
+spec:
+  config:
+    apiVersion: v1
+    kind: ConfigMap
+    name: config-br-default-channel
+    namespace: knative-eventing
+EOF
+```
+
 ## Next steps
 
 After you have created a Broker, you can complete the following tasks to finish setting up event delivery.
