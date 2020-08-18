@@ -51,7 +51,7 @@ metadata:
 
 and explicitly configuring the spec.config, for example:
 ```yaml
-kind: Broker	kind: Broker
+kind: Broker
 spec:
   config:
     apiVersion: v1
