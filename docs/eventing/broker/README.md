@@ -71,8 +71,7 @@ spec:
 
 A full example combined into a fully specified resource could look like this:
 
-```shell
-kubectl create -f - <<EOF
+```yaml
 apiVersion: eventing.knative.dev/v1
 kind: Broker
 metadata:
@@ -86,7 +85,6 @@ spec:
     kind: ConfigMap
     name: config-br-default-channel
     namespace: knative-eventing
-EOF
 ```
 
 ## Next steps
