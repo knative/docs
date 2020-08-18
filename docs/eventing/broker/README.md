@@ -36,6 +36,57 @@ metadata:
 EOF
 ```
 
+## Configuring broker classes
+
+You can configure Knative Eventing so that when you create a broker, it uses a
+different type of broker than the default Knative channel-based broker. To
+configure a different broker type, or *class*, you must modify the
+`eventing.knative.dev/broker.class` annotation and `spec.config` for the Broker
+object. `MTChannelBasedBroker` is the broker class default.
+
+### Procedure
+
+1. Modify the `eventing.knative.dev/broker.class` annotation. Replace
+`MTChannelBasedBroker` with the class type you want to use:
+
+```yaml
+kind: Broker
+metadata:
+  annotations:
+    eventing.knative.dev/broker.class: MTChannelBasedBroker
+```
+
+1. Configure the `spec.config` with the details of the ConfigMap that defines
+the backing channel for the broker class:
+
+```yaml
+kind: Broker
+spec:
+  config:
+    apiVersion: v1
+    kind: ConfigMap
+    name: config-br-default-channel
+    namespace: knative-eventing
+```
+
+A full example combined into a fully specified resource could look like this:
+
+```yaml
+apiVersion: eventing.knative.dev/v1
+kind: Broker
+metadata:
+  annotations:
+    eventing.knative.dev/broker.class: MTChannelBasedBroker
+  name: default
+  namespace: default
+spec:
+  config:
+    apiVersion: v1
+    kind: ConfigMap
+    name: config-br-default-channel
+    namespace: knative-eventing
+```
+
 ## Next steps
 
 After you have created a Broker, you can complete the following tasks to finish setting up event delivery.
