@@ -53,7 +53,7 @@ spec:
   delivery:
     deadLetterSink: <Destination>
     retry: <number of retries>
-    backoffPolicy: <linerar or exponential>
+    backoffPolicy: <linear or exponential>
     backoffDelay: <ISO8601 duration>
 ```
 
