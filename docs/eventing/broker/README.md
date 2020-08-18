@@ -36,11 +36,18 @@ metadata:
 EOF
 ```
 
-## Explicit Broker configuration
+## Configuring broker classes
 
-You can of course create a Broker without relying on the defaults (as described
-above) by specifying the `BrokerClass` by using an annotation to specify which
-Broker implementation you'd like to use:
+You can configure Knative Eventing so that when you create a broker, it uses a
+different type of broker than the default Knative channel-based broker. To
+configure a different broker type, or *class*, you must modify the
+`eventing.knative.dev/broker.class` annotation and `spec.config` for the Broker
+object. `MTChannelBasedBroker` is the broker class default.
+
+### Procedure
+
+1. Modify the `eventing.knative.dev/broker.class` annotation. Replace
+`MTChannelBasedBroker` with the class type you want to use:
 
 ```yaml
 kind: Broker
@@ -49,7 +56,9 @@ metadata:
     eventing.knative.dev/broker.class: MTChannelBasedBroker
 ```
 
-and explicitly configuring the spec.config, for example:
+1. Configure the `spec.config` with the details of the ConfigMap that defines
+the backing channel for the broker class: 
+
 ```yaml
 kind: Broker
 spec:
@@ -60,7 +69,7 @@ spec:
     namespace: knative-eventing
 ```
 
-A full example could look something like this:
+A full example combined into a fully specified resource could look like this:
 
 ```shell
 kubectl create -f - <<EOF
