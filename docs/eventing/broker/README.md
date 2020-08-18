@@ -19,7 +19,9 @@ Triggers register a subscriber's interest in a particular class of events, so th
 
 ## Default Broker configuration
 
-Knative Eventing provides a `config-br-defaults` ConfigMap, which lives in the `knative-eventing` namespace, and provides default configuration settings to enable the creation of Brokers and Channels.
+Knative Eventing provides a `config-br-defaults` ConfigMap, which lives in the
+`knative-eventing` namespace, and provides default configuration settings to
+enable the creation of Brokers and Channels by using defaults.
 For more information, see the [`config-br-defaults`](./config-br-defaults.md) ConfigMap documentation.
 
 Create a Broker using the default settings:
@@ -29,16 +31,8 @@ kubectl create -f - <<EOF
 apiVersion: eventing.knative.dev/v1
 kind: Broker
 metadata:
-  annotations:
-    eventing.knative.dev/broker.class: MTChannelBasedBroker
   name: default
   namespace: default
-spec:
-  config:
-    apiVersion: v1
-    kind: ConfigMap
-    name: config-br-default-channel
-    namespace: knative-eventing
 EOF
 ```
 
