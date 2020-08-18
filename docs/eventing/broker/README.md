@@ -57,7 +57,7 @@ metadata:
 ```
 
 1. Configure the `spec.config` with the details of the ConfigMap that defines
-the backing channel for the broker class: 
+the backing channel for the broker class:
 
 ```yaml
 kind: Broker
