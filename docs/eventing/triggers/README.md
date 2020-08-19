@@ -1,5 +1,7 @@
 A Trigger represents a desire to subscribe to events from a specific Broker.
 
+The `subscriber` value must be a [Destination](https://pkg.go.dev/knative.dev/pkg/apis/duck/v1#Destination).
+
 Simple example which will receive all the events from the given (`default`) broker and
 deliver them to Knative Serving service `my-service`:
 
@@ -16,6 +18,26 @@ spec:
       apiVersion: serving.knative.dev/v1
       kind: Service
       name: my-service
+EOF
+```
+
+Simple example which will receive all the events from the given (`default`) broker and
+deliver them to the custom path `/my-custom-path` for the Kubernetes service `my-service`:
+
+```shell
+kubectl create -f - <<EOF
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: my-service-trigger
+spec:
+  broker: default
+  subscriber:
+    ref:
+      apiVersion: v1
+      kind: Service
+      name: my-service
+    uri: /my-custom-path
 EOF
 ```
 
