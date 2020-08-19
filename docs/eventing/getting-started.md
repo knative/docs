@@ -47,8 +47,8 @@ The [broker](./broker/README.md#broker) allows you to route events to different 
     This shows information about your broker. If the broker is working correctly, it shows a `READY` status of `True`:
 
     ```
-    NAME      READY   REASON   URL                                                        AGE
-    default   True             http://default-broker.event-example.svc.cluster.local      1m
+    NAME      READY   REASON   URL                                                                                 AGE
+    default   True             http://broker-ingress.knative-eventing.svc.cluster.local/event-example/default      1m
     ```
 
     If `READY` is `False`, wait a few moments and then run the command again.
@@ -266,7 +266,7 @@ EOF
     - To make the first request, which creates an event that has the `type`
        `greeting`, run the following in the SSH terminal:
        ```
-       curl -v "http://default-broker.event-example.svc.cluster.local" \
+       curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/event-example/default" \
          -X POST \
          -H "Ce-Id: say-hello" \
          -H "Ce-Specversion: 1.0" \
@@ -289,7 +289,7 @@ EOF
        `sendoff`, run the following in the SSH terminal:
 
        ```
-       curl -v "http://default-broker.event-example.svc.cluster.local" \
+       curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/event-example/default" \
          -X POST \
          -H "Ce-Id: say-goodbye" \
          -H "Ce-Specversion: 1.0" \
@@ -310,7 +310,7 @@ EOF
     - To make the third request, which creates an event that has the `type`
        `greeting` and the`source` `sendoff`, run the following in the SSH terminal:
        ```
-       curl -v "http://default-broker.event-example.svc.cluster.local" \
+       curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/event-example/default" \
          -X POST \
          -H "Ce-Id: say-hello-goodbye" \
          -H "Ce-Specversion: 1.0" \
