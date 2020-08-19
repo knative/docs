@@ -1,7 +1,7 @@
 <p>Packages:</p>
 <ul>
 <li>
-<a href="#autoscaling.internal.knative.dev%2fv1alpha1">autoscaling.internal.knative.dev/v1alpha1</a>
+<a href="#serving.knative.dev%2fv1beta1">serving.knative.dev/v1beta1</a>
 </li>
 <li>
 <a href="#serving.knative.dev%2fv1">serving.knative.dev/v1</a>
@@ -9,24 +9,28 @@
 <li>
 <a href="#serving.knative.dev%2fv1alpha1">serving.knative.dev/v1alpha1</a>
 </li>
-<li>
-<a href="#serving.knative.dev%2fv1beta1">serving.knative.dev/v1beta1</a>
-</li>
 </ul>
-<h2 id="autoscaling.internal.knative.dev/v1alpha1">autoscaling.internal.knative.dev/v1alpha1</h2>
+<h2 id="serving.knative.dev/v1beta1">serving.knative.dev/v1beta1</h2>
 <p>
 </p>
 Resource Types:
 <ul><li>
-<a href="#autoscaling.internal.knative.dev/v1alpha1.PodAutoscaler">PodAutoscaler</a>
+<a href="#serving.knative.dev/v1beta1.Configuration">Configuration</a>
+</li><li>
+<a href="#serving.knative.dev/v1beta1.Revision">Revision</a>
+</li><li>
+<a href="#serving.knative.dev/v1beta1.Route">Route</a>
+</li><li>
+<a href="#serving.knative.dev/v1beta1.Service">Service</a>
 </li></ul>
-<h3 id="autoscaling.internal.knative.dev/v1alpha1.PodAutoscaler">PodAutoscaler
+<h3 id="serving.knative.dev/v1beta1.Configuration">Configuration
 </h3>
 <p>
-<p>PodAutoscaler is a Knative abstraction that encapsulates the interface by which Knative
-components instantiate autoscalers.  This definition is an abstraction that may be backed
-by multiple definitions.  For more information, see the Knative Pluggability presentation:
-<a href="https://docs.google.com/presentation/d/10KWynvAJYuOEWy69VBa6bHJVCqIsz1TNdEKosNvcpPY/edit">https://docs.google.com/presentation/d/10KWynvAJYuOEWy69VBa6bHJVCqIsz1TNdEKosNvcpPY/edit</a></p>
+<p>Configuration represents the &ldquo;floating HEAD&rdquo; of a linear history of Revisions.
+Users create new Revisions by updating the Configuration&rsquo;s spec.
+The &ldquo;latest created&rdquo; revision&rsquo;s name is available under status, as is the
+&ldquo;latest ready&rdquo; revision&rsquo;s name.
+See also: <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#configuration">https://github.com/knative/serving/blob/master/docs/spec/overview.md#configuration</a></p>
 </p>
 <table>
 <thead>
@@ -42,7 +46,7 @@ by multiple definitions.  For more information, see the Knative Pluggability pre
 string</td>
 <td>
 <code>
-autoscaling.internal.knative.dev/v1alpha1
+serving.knative.dev/v1beta1
 </code>
 </td>
 </tr>
@@ -51,7 +55,7 @@ autoscaling.internal.knative.dev/v1alpha1
 <code>kind</code></br>
 string
 </td>
-<td><code>PodAutoscaler</code></td>
+<td><code>Configuration</code></td>
 </tr>
 <tr>
 <td>
@@ -72,31 +76,123 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#autoscaling.internal.knative.dev/v1alpha1.PodAutoscalerSpec">
-PodAutoscalerSpec
+<a href="#serving.knative.dev/v1.ConfigurationSpec">
+ConfigurationSpec
 </a>
 </em>
 </td>
 <td>
 <em>(Optional)</em>
-<p>Spec holds the desired state of the PodAutoscaler (from the client).</p>
 <br/>
 <br/>
 <table>
 <tr>
 <td>
-<code>generation</code></br>
+<code>template</code></br>
 <em>
-int64
+<a href="#serving.knative.dev/v1.RevisionTemplateSpec">
+RevisionTemplateSpec
+</a>
 </em>
 </td>
 <td>
 <em>(Optional)</em>
-<p>DeprecatedGeneration was used prior in Kubernetes versions <1.11
-when metadata.generation was not being incremented by the api server</p>
-<p>This property will be dropped in future Knative releases and should
-not be used - use metadata.generation</p>
-<p>Tracking issue: <a href="https://github.com/knative/serving/issues/643">https://github.com/knative/serving/issues/643</a></p>
+<p>Template holds the latest specification for the Revision to be stamped out.</p>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<code>status</code></br>
+<em>
+<a href="#serving.knative.dev/v1.ConfigurationStatus">
+ConfigurationStatus
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="serving.knative.dev/v1beta1.Revision">Revision
+</h3>
+<p>
+<p>Revision is an immutable snapshot of code and configuration.  A revision
+references a container image. Revisions are created by updates to a
+Configuration.</p>
+<p>See also: <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#revision">https://github.com/knative/serving/blob/master/docs/spec/overview.md#revision</a></p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>apiVersion</code></br>
+string</td>
+<td>
+<code>
+serving.knative.dev/v1beta1
+</code>
+</td>
+</tr>
+<tr>
+<td>
+<code>kind</code></br>
+string
+</td>
+<td><code>Revision</code></td>
+</tr>
+<tr>
+<td>
+<code>metadata</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectmeta-v1-meta">
+Kubernetes meta/v1.ObjectMeta
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+Refer to the Kubernetes API documentation for the fields of the
+<code>metadata</code> field.
+</td>
+</tr>
+<tr>
+<td>
+<code>spec</code></br>
+<em>
+<a href="#serving.knative.dev/v1.RevisionSpec">
+RevisionSpec
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<br/>
+<br/>
+<table>
+<tr>
+<td>
+<code>PodSpec</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#podspec-v1-core">
+Kubernetes core/v1.PodSpec
+</a>
+</em>
+</td>
+<td>
+<p>
+(Members of <code>PodSpec</code> are embedded into this type.)
+</p>
 </td>
 </tr>
 <tr>
@@ -108,49 +204,24 @@ int64
 </td>
 <td>
 <em>(Optional)</em>
-<p>ContainerConcurrency specifies the maximum allowed
-in-flight (concurrent) requests per container of the Revision.
-Defaults to <code>0</code> which means unlimited concurrency.</p>
+<p>ContainerConcurrency specifies the maximum allowed in-flight (concurrent)
+requests per container of the Revision.  Defaults to <code>0</code> which means
+concurrency to the application is not limited, and the system decides the
+target concurrency for the autoscaler.</p>
 </td>
 </tr>
 <tr>
 <td>
-<code>scaleTargetRef</code></br>
+<code>timeoutSeconds</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectreference-v1-core">
-Kubernetes core/v1.ObjectReference
-</a>
-</em>
-</td>
-<td>
-<p>ScaleTargetRef defines the /scale-able resource that this PodAutoscaler
-is responsible for quickly right-sizing.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>reachability</code></br>
-<em>
-<a href="#autoscaling.internal.knative.dev/v1alpha1.ReachabilityType">
-ReachabilityType
-</a>
+int64
 </em>
 </td>
 <td>
 <em>(Optional)</em>
-<p>Reachable specifies whether or not the <code>ScaleTargetRef</code> can be reached (ie. has a route).
-Defaults to <code>ReachabilityUnknown</code></p>
-</td>
-</tr>
-<tr>
-<td>
-<code>protocolType</code></br>
-<em>
-knative.dev/networking/pkg/apis/networking.ProtocolType
-</em>
-</td>
-<td>
-<p>The application-layer protocol. Matches <code>ProtocolType</code> inferred from the revision spec.</p>
+<p>TimeoutSeconds holds the max duration the instance is allowed for
+responding to a request.  If unspecified, a system default will
+be provided.</p>
 </td>
 </tr>
 </table>
@@ -160,22 +231,26 @@ knative.dev/networking/pkg/apis/networking.ProtocolType
 <td>
 <code>status</code></br>
 <em>
-<a href="#autoscaling.internal.knative.dev/v1alpha1.PodAutoscalerStatus">
-PodAutoscalerStatus
+<a href="#serving.knative.dev/v1.RevisionStatus">
+RevisionStatus
 </a>
 </em>
 </td>
 <td>
 <em>(Optional)</em>
-<p>Status communicates the observed state of the PodAutoscaler (from the controller).</p>
 </td>
 </tr>
 </tbody>
 </table>
-<h3 id="autoscaling.internal.knative.dev/v1alpha1.Metric">Metric
+<h3 id="serving.knative.dev/v1beta1.Route">Route
 </h3>
 <p>
-<p>Metric represents a resource to configure the metric collector with.</p>
+<p>Route is responsible for configuring ingress over a collection of Revisions.
+Some of the Revisions a Route distributes traffic over may be specified by
+referencing the Configuration responsible for creating them; in these cases
+the Route is additionally responsible for monitoring the Configuration for
+&ldquo;latest ready revision&rdquo; changes, and smoothly rolling out latest revisions.
+See also: <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#route">https://github.com/knative/serving/blob/master/docs/spec/overview.md#route</a></p>
 </p>
 <table>
 <thead>
@@ -185,6 +260,23 @@ PodAutoscalerStatus
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<code>apiVersion</code></br>
+string</td>
+<td>
+<code>
+serving.knative.dev/v1beta1
+</code>
+</td>
+</tr>
+<tr>
+<td>
+<code>kind</code></br>
+string
+</td>
+<td><code>Route</code></td>
+</tr>
 <tr>
 <td>
 <code>metadata</code></br>
@@ -204,48 +296,30 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#autoscaling.internal.knative.dev/v1alpha1.MetricSpec">
-MetricSpec
+<a href="#serving.knative.dev/v1.RouteSpec">
+RouteSpec
 </a>
 </em>
 </td>
 <td>
 <em>(Optional)</em>
-<p>Spec holds the desired state of the Metric (from the client).</p>
+<p>Spec holds the desired state of the Route (from the client).</p>
 <br/>
 <br/>
 <table>
 <tr>
 <td>
-<code>stableWindow</code></br>
+<code>traffic</code></br>
 <em>
-time.Duration
+<a href="#serving.knative.dev/v1.TrafficTarget">
+[]TrafficTarget
+</a>
 </em>
 </td>
 <td>
-<p>StableWindow is the aggregation window for metrics in a stable state.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>panicWindow</code></br>
-<em>
-time.Duration
-</em>
-</td>
-<td>
-<p>PanicWindow is the aggregation window for metrics where quick reactions are needed.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>scrapeTarget</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<p>ScrapeTarget is the K8s service that publishes the metric endpoint.</p>
+<em>(Optional)</em>
+<p>Traffic specifies how to distribute traffic over a collection of
+revisions and configurations.</p>
 </td>
 </tr>
 </table>
@@ -255,26 +329,31 @@ string
 <td>
 <code>status</code></br>
 <em>
-<a href="#autoscaling.internal.knative.dev/v1alpha1.MetricStatus">
-MetricStatus
+<a href="#serving.knative.dev/v1.RouteStatus">
+RouteStatus
 </a>
 </em>
 </td>
 <td>
 <em>(Optional)</em>
-<p>Status communicates the observed state of the Metric (from the controller).</p>
+<p>Status communicates the observed state of the Route (from the controller).</p>
 </td>
 </tr>
 </tbody>
 </table>
-<h3 id="autoscaling.internal.knative.dev/v1alpha1.MetricSpec">MetricSpec
+<h3 id="serving.knative.dev/v1beta1.Service">Service
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#autoscaling.internal.knative.dev/v1alpha1.Metric">Metric</a>)
-</p>
-<p>
-<p>MetricSpec contains all values a metric collector needs to operate.</p>
+<p>Service acts as a top-level container that manages a Route and Configuration
+which implement a network service. Service exists to provide a singular
+abstraction which can be access controlled, reasoned about, and which
+encapsulates software lifecycle decisions such as rollout policy and
+team resource ownership. Service acts only as an orchestrator of the
+underlying Routes and Configurations (much as a kubernetes Deployment
+orchestrates ReplicaSets), and its usage is optional but recommended.</p>
+<p>The Service&rsquo;s controller will track the statuses of its owned Configuration
+and Route, reflecting their statuses and conditions as its own.</p>
+<p>See also: <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#service">https://github.com/knative/serving/blob/master/docs/spec/overview.md#service</a></p>
 </p>
 <table>
 <thead>
@@ -286,255 +365,21 @@ MetricStatus
 <tbody>
 <tr>
 <td>
-<code>stableWindow</code></br>
-<em>
-time.Duration
-</em>
-</td>
+<code>apiVersion</code></br>
+string</td>
 <td>
-<p>StableWindow is the aggregation window for metrics in a stable state.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>panicWindow</code></br>
-<em>
-time.Duration
-</em>
-</td>
-<td>
-<p>PanicWindow is the aggregation window for metrics where quick reactions are needed.</p>
+<code>
+serving.knative.dev/v1beta1
+</code>
 </td>
 </tr>
 <tr>
 <td>
-<code>scrapeTarget</code></br>
-<em>
+<code>kind</code></br>
 string
-</em>
 </td>
-<td>
-<p>ScrapeTarget is the K8s service that publishes the metric endpoint.</p>
-</td>
+<td><code>Service</code></td>
 </tr>
-</tbody>
-</table>
-<h3 id="autoscaling.internal.knative.dev/v1alpha1.MetricStatus">MetricStatus
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#autoscaling.internal.knative.dev/v1alpha1.Metric">Metric</a>)
-</p>
-<p>
-<p>MetricStatus reflects the status of metric collection for this specific entity.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>Status</code></br>
-<em>
-knative.dev/pkg/apis/duck/v1.Status
-</em>
-</td>
-<td>
-<p>
-(Members of <code>Status</code> are embedded into this type.)
-</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="autoscaling.internal.knative.dev/v1alpha1.PodAutoscalerSpec">PodAutoscalerSpec
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#autoscaling.internal.knative.dev/v1alpha1.PodAutoscaler">PodAutoscaler</a>)
-</p>
-<p>
-<p>PodAutoscalerSpec holds the desired state of the PodAutoscaler (from the client).</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>generation</code></br>
-<em>
-int64
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>DeprecatedGeneration was used prior in Kubernetes versions <1.11
-when metadata.generation was not being incremented by the api server</p>
-<p>This property will be dropped in future Knative releases and should
-not be used - use metadata.generation</p>
-<p>Tracking issue: <a href="https://github.com/knative/serving/issues/643">https://github.com/knative/serving/issues/643</a></p>
-</td>
-</tr>
-<tr>
-<td>
-<code>containerConcurrency</code></br>
-<em>
-int64
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>ContainerConcurrency specifies the maximum allowed
-in-flight (concurrent) requests per container of the Revision.
-Defaults to <code>0</code> which means unlimited concurrency.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>scaleTargetRef</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectreference-v1-core">
-Kubernetes core/v1.ObjectReference
-</a>
-</em>
-</td>
-<td>
-<p>ScaleTargetRef defines the /scale-able resource that this PodAutoscaler
-is responsible for quickly right-sizing.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>reachability</code></br>
-<em>
-<a href="#autoscaling.internal.knative.dev/v1alpha1.ReachabilityType">
-ReachabilityType
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Reachable specifies whether or not the <code>ScaleTargetRef</code> can be reached (ie. has a route).
-Defaults to <code>ReachabilityUnknown</code></p>
-</td>
-</tr>
-<tr>
-<td>
-<code>protocolType</code></br>
-<em>
-knative.dev/networking/pkg/apis/networking.ProtocolType
-</em>
-</td>
-<td>
-<p>The application-layer protocol. Matches <code>ProtocolType</code> inferred from the revision spec.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="autoscaling.internal.knative.dev/v1alpha1.PodAutoscalerStatus">PodAutoscalerStatus
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#autoscaling.internal.knative.dev/v1alpha1.PodAutoscaler">PodAutoscaler</a>)
-</p>
-<p>
-<p>PodAutoscalerStatus communicates the observed state of the PodAutoscaler (from the controller).</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>Status</code></br>
-<em>
-knative.dev/pkg/apis/duck/v1.Status
-</em>
-</td>
-<td>
-<p>
-(Members of <code>Status</code> are embedded into this type.)
-</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>serviceName</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<p>ServiceName is the K8s Service name that serves the revision, scaled by this PA.
-The service is created and owned by the ServerlessService object owned by this PA.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>metricsServiceName</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-<p>MetricsServiceName is the K8s Service name that provides revision metrics.
-The service is managed by the PA object.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>desiredScale</code></br>
-<em>
-int32
-</em>
-</td>
-<td>
-<p>DesiredScale shows the current desired number of replicas for the revision.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>actualScale</code></br>
-<em>
-int32
-</em>
-</td>
-<td>
-<p>ActualScale shows the actual number of replicas for the revision.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="autoscaling.internal.knative.dev/v1alpha1.PodScalable">PodScalable
-</h3>
-<p>
-<p>PodScalable is a duck type that the resources referenced by the
-PodAutoscaler&rsquo;s ScaleTargetRef must implement.  They must also
-implement the <code>/scale</code> sub-resource for use with <code>/scale</code> based
-implementations (e.g. HPA), but this further constrains the shape
-the referenced resources may take.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
 <tr>
 <td>
 <code>metadata</code></br>
@@ -545,6 +390,7 @@ Kubernetes meta/v1.ObjectMeta
 </em>
 </td>
 <td>
+<em>(Optional)</em>
 Refer to the Kubernetes API documentation for the fields of the
 <code>metadata</code> field.
 </td>
@@ -553,47 +399,49 @@ Refer to the Kubernetes API documentation for the fields of the
 <td>
 <code>spec</code></br>
 <em>
-<a href="#autoscaling.internal.knative.dev/v1alpha1.PodScalableSpec">
-PodScalableSpec
+<a href="#serving.knative.dev/v1.ServiceSpec">
+ServiceSpec
 </a>
 </em>
 </td>
 <td>
+<em>(Optional)</em>
 <br/>
 <br/>
 <table>
 <tr>
 <td>
-<code>replicas</code></br>
+<code>ConfigurationSpec</code></br>
 <em>
-int32
-</em>
-</td>
-<td>
-</td>
-</tr>
-<tr>
-<td>
-<code>selector</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#labelselector-v1-meta">
-Kubernetes meta/v1.LabelSelector
+<a href="#serving.knative.dev/v1.ConfigurationSpec">
+ConfigurationSpec
 </a>
 </em>
 </td>
 <td>
+<p>
+(Members of <code>ConfigurationSpec</code> are embedded into this type.)
+</p>
+<p>ServiceSpec inlines an unrestricted ConfigurationSpec.</p>
 </td>
 </tr>
 <tr>
 <td>
-<code>template</code></br>
+<code>RouteSpec</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#podtemplatespec-v1-core">
-Kubernetes core/v1.PodTemplateSpec
+<a href="#serving.knative.dev/v1.RouteSpec">
+RouteSpec
 </a>
 </em>
 </td>
 <td>
+<p>
+(Members of <code>RouteSpec</code> are embedded into this type.)
+</p>
+<p>ServiceSpec inlines RouteSpec and restricts/defaults its fields
+via webhook.  In particular, this spec can only reference this
+Service&rsquo;s configuration and revisions (which also influences
+defaults).</p>
 </td>
 </tr>
 </table>
@@ -603,110 +451,17 @@ Kubernetes core/v1.PodTemplateSpec
 <td>
 <code>status</code></br>
 <em>
-<a href="#autoscaling.internal.knative.dev/v1alpha1.PodScalableStatus">
-PodScalableStatus
+<a href="#serving.knative.dev/v1.ServiceStatus">
+ServiceStatus
 </a>
 </em>
 </td>
 <td>
+<em>(Optional)</em>
 </td>
 </tr>
 </tbody>
 </table>
-<h3 id="autoscaling.internal.knative.dev/v1alpha1.PodScalableSpec">PodScalableSpec
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#autoscaling.internal.knative.dev/v1alpha1.PodScalable">PodScalable</a>)
-</p>
-<p>
-<p>PodScalableSpec is the specification for the desired state of a
-PodScalable (or at least our shared portion).</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>replicas</code></br>
-<em>
-int32
-</em>
-</td>
-<td>
-</td>
-</tr>
-<tr>
-<td>
-<code>selector</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#labelselector-v1-meta">
-Kubernetes meta/v1.LabelSelector
-</a>
-</em>
-</td>
-<td>
-</td>
-</tr>
-<tr>
-<td>
-<code>template</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#podtemplatespec-v1-core">
-Kubernetes core/v1.PodTemplateSpec
-</a>
-</em>
-</td>
-<td>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="autoscaling.internal.knative.dev/v1alpha1.PodScalableStatus">PodScalableStatus
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#autoscaling.internal.knative.dev/v1alpha1.PodScalable">PodScalable</a>)
-</p>
-<p>
-<p>PodScalableStatus is the observed state of a PodScalable (or at
-least our shared portion).</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>replicas</code></br>
-<em>
-int32
-</em>
-</td>
-<td>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="autoscaling.internal.knative.dev/v1alpha1.ReachabilityType">ReachabilityType
-(<code>string</code> alias)</p></h3>
-<p>
-(<em>Appears on:</em>
-<a href="#autoscaling.internal.knative.dev/v1alpha1.PodAutoscalerSpec">PodAutoscalerSpec</a>)
-</p>
-<p>
-<p>ReachabilityType is the enumeration type for the different states of reachability
-to the <code>ScaleTarget</code> of a <code>PodAutoscaler</code></p>
-</p>
 <hr/>
 <h2 id="serving.knative.dev/v1">serving.knative.dev/v1</h2>
 <p>
@@ -1165,7 +920,7 @@ ServiceStatus
 <p>
 (<em>Appears on:</em>
 <a href="#serving.knative.dev/v1beta1.Configuration">Configuration</a>, 
-<a href="#serving.knative.dev/v1.Configuration">Configuration</a>,
+<a href="#serving.knative.dev/v1.Configuration">Configuration</a>, 
 <a href="#serving.knative.dev/v1.ServiceSpec">ServiceSpec</a>)
 </p>
 <p>
@@ -1199,8 +954,8 @@ RevisionTemplateSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1.Configuration">Configuration</a>, 
-<a href="#serving.knative.dev/v1beta1.Configuration">Configuration</a>)
+<a href="#serving.knative.dev/v1beta1.Configuration">Configuration</a>, 
+<a href="#serving.knative.dev/v1.Configuration">Configuration</a>)
 </p>
 <p>
 <p>ConfigurationStatus communicates the observed state of the Configuration (from the controller).</p>
@@ -1334,8 +1089,8 @@ string
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1.Revision">Revision</a>, 
 <a href="#serving.knative.dev/v1beta1.Revision">Revision</a>, 
+<a href="#serving.knative.dev/v1.Revision">Revision</a>, 
 <a href="#serving.knative.dev/v1alpha1.RevisionSpec">RevisionSpec</a>, 
 <a href="#serving.knative.dev/v1.RevisionTemplateSpec">RevisionTemplateSpec</a>)
 </p>
@@ -1400,8 +1155,8 @@ be provided.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1.Revision">Revision</a>, 
-<a href="#serving.knative.dev/v1beta1.Revision">Revision</a>)
+<a href="#serving.knative.dev/v1beta1.Revision">Revision</a>, 
+<a href="#serving.knative.dev/v1.Revision">Revision</a>)
 </p>
 <p>
 <p>RevisionStatus communicates the observed state of the Revision (from the controller).</p>
@@ -1595,8 +1350,8 @@ be provided.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1.Route">Route</a>, 
 <a href="#serving.knative.dev/v1beta1.Route">Route</a>, 
+<a href="#serving.knative.dev/v1.Route">Route</a>, 
 <a href="#serving.knative.dev/v1.ServiceSpec">ServiceSpec</a>)
 </p>
 <p>
@@ -1631,8 +1386,8 @@ revisions and configurations.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1.Route">Route</a>, 
-<a href="#serving.knative.dev/v1beta1.Route">Route</a>)
+<a href="#serving.knative.dev/v1beta1.Route">Route</a>, 
+<a href="#serving.knative.dev/v1.Route">Route</a>)
 </p>
 <p>
 <p>RouteStatus communicates the observed state of the Route (from the controller).</p>
@@ -1739,12 +1494,17 @@ LatestReadyRevisionName that we last observed.</p>
 </tr>
 </tbody>
 </table>
+<h3 id="serving.knative.dev/v1.RoutingState">RoutingState
+(<code>string</code> alias)</p></h3>
+<p>
+<p>RoutingState represents states of a revision with regards to serving a route.</p>
+</p>
 <h3 id="serving.knative.dev/v1.ServiceSpec">ServiceSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1.Service">Service</a>, 
-<a href="#serving.knative.dev/v1beta1.Service">Service</a>)
+<a href="#serving.knative.dev/v1beta1.Service">Service</a>, 
+<a href="#serving.knative.dev/v1.Service">Service</a>)
 </p>
 <p>
 <p>ServiceSpec represents the configuration for the Service object.
@@ -1804,8 +1564,8 @@ defaults).</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1.Service">Service</a>, 
-<a href="#serving.knative.dev/v1beta1.Service">Service</a>)
+<a href="#serving.knative.dev/v1beta1.Service">Service</a>, 
+<a href="#serving.knative.dev/v1.Service">Service</a>)
 </p>
 <p>
 <p>ServiceStatus represents the Status stanza of the Service resource.</p>
@@ -3758,460 +3518,7 @@ Ultimately all non-v1 fields will be deprecated.</p>
 </tbody>
 </table>
 <hr/>
-<h2 id="serving.knative.dev/v1beta1">serving.knative.dev/v1beta1</h2>
-<p>
-</p>
-Resource Types:
-<ul><li>
-<a href="#serving.knative.dev/v1beta1.Configuration">Configuration</a>
-</li><li>
-<a href="#serving.knative.dev/v1beta1.Revision">Revision</a>
-</li><li>
-<a href="#serving.knative.dev/v1beta1.Route">Route</a>
-</li><li>
-<a href="#serving.knative.dev/v1beta1.Service">Service</a>
-</li></ul>
-<h3 id="serving.knative.dev/v1beta1.Configuration">Configuration
-</h3>
-<p>
-<p>Configuration represents the &ldquo;floating HEAD&rdquo; of a linear history of Revisions.
-Users create new Revisions by updating the Configuration&rsquo;s spec.
-The &ldquo;latest created&rdquo; revision&rsquo;s name is available under status, as is the
-&ldquo;latest ready&rdquo; revision&rsquo;s name.
-See also: <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#configuration">https://github.com/knative/serving/blob/master/docs/spec/overview.md#configuration</a></p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>apiVersion</code></br>
-string</td>
-<td>
-<code>
-serving.knative.dev/v1beta1
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<code>kind</code></br>
-string
-</td>
-<td><code>Configuration</code></td>
-</tr>
-<tr>
-<td>
-<code>metadata</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectmeta-v1-meta">
-Kubernetes meta/v1.ObjectMeta
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-Refer to the Kubernetes API documentation for the fields of the
-<code>metadata</code> field.
-</td>
-</tr>
-<tr>
-<td>
-<code>spec</code></br>
-<em>
-<a href="#serving.knative.dev/v1.ConfigurationSpec">
-ConfigurationSpec
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<br/>
-<br/>
-<table>
-<tr>
-<td>
-<code>template</code></br>
-<em>
-<a href="#serving.knative.dev/v1.RevisionTemplateSpec">
-RevisionTemplateSpec
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Template holds the latest specification for the Revision to be stamped out.</p>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-<tr>
-<td>
-<code>status</code></br>
-<em>
-<a href="#serving.knative.dev/v1.ConfigurationStatus">
-ConfigurationStatus
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="serving.knative.dev/v1beta1.Revision">Revision
-</h3>
-<p>
-<p>Revision is an immutable snapshot of code and configuration.  A revision
-references a container image. Revisions are created by updates to a
-Configuration.</p>
-<p>See also: <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#revision">https://github.com/knative/serving/blob/master/docs/spec/overview.md#revision</a></p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>apiVersion</code></br>
-string</td>
-<td>
-<code>
-serving.knative.dev/v1beta1
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<code>kind</code></br>
-string
-</td>
-<td><code>Revision</code></td>
-</tr>
-<tr>
-<td>
-<code>metadata</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectmeta-v1-meta">
-Kubernetes meta/v1.ObjectMeta
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-Refer to the Kubernetes API documentation for the fields of the
-<code>metadata</code> field.
-</td>
-</tr>
-<tr>
-<td>
-<code>spec</code></br>
-<em>
-<a href="#serving.knative.dev/v1.RevisionSpec">
-RevisionSpec
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<br/>
-<br/>
-<table>
-<tr>
-<td>
-<code>PodSpec</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#podspec-v1-core">
-Kubernetes core/v1.PodSpec
-</a>
-</em>
-</td>
-<td>
-<p>
-(Members of <code>PodSpec</code> are embedded into this type.)
-</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>containerConcurrency</code></br>
-<em>
-int64
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>ContainerConcurrency specifies the maximum allowed in-flight (concurrent)
-requests per container of the Revision.  Defaults to <code>0</code> which means
-concurrency to the application is not limited, and the system decides the
-target concurrency for the autoscaler.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>timeoutSeconds</code></br>
-<em>
-int64
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>TimeoutSeconds holds the max duration the instance is allowed for
-responding to a request.  If unspecified, a system default will
-be provided.</p>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-<tr>
-<td>
-<code>status</code></br>
-<em>
-<a href="#serving.knative.dev/v1.RevisionStatus">
-RevisionStatus
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="serving.knative.dev/v1beta1.Route">Route
-</h3>
-<p>
-<p>Route is responsible for configuring ingress over a collection of Revisions.
-Some of the Revisions a Route distributes traffic over may be specified by
-referencing the Configuration responsible for creating them; in these cases
-the Route is additionally responsible for monitoring the Configuration for
-&ldquo;latest ready revision&rdquo; changes, and smoothly rolling out latest revisions.
-See also: <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#route">https://github.com/knative/serving/blob/master/docs/spec/overview.md#route</a></p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>apiVersion</code></br>
-string</td>
-<td>
-<code>
-serving.knative.dev/v1beta1
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<code>kind</code></br>
-string
-</td>
-<td><code>Route</code></td>
-</tr>
-<tr>
-<td>
-<code>metadata</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectmeta-v1-meta">
-Kubernetes meta/v1.ObjectMeta
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-Refer to the Kubernetes API documentation for the fields of the
-<code>metadata</code> field.
-</td>
-</tr>
-<tr>
-<td>
-<code>spec</code></br>
-<em>
-<a href="#serving.knative.dev/v1.RouteSpec">
-RouteSpec
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Spec holds the desired state of the Route (from the client).</p>
-<br/>
-<br/>
-<table>
-<tr>
-<td>
-<code>traffic</code></br>
-<em>
-<a href="#serving.knative.dev/v1.TrafficTarget">
-[]TrafficTarget
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Traffic specifies how to distribute traffic over a collection of
-revisions and configurations.</p>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-<tr>
-<td>
-<code>status</code></br>
-<em>
-<a href="#serving.knative.dev/v1.RouteStatus">
-RouteStatus
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Status communicates the observed state of the Route (from the controller).</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="serving.knative.dev/v1beta1.Service">Service
-</h3>
-<p>
-<p>Service acts as a top-level container that manages a Route and Configuration
-which implement a network service. Service exists to provide a singular
-abstraction which can be access controlled, reasoned about, and which
-encapsulates software lifecycle decisions such as rollout policy and
-team resource ownership. Service acts only as an orchestrator of the
-underlying Routes and Configurations (much as a kubernetes Deployment
-orchestrates ReplicaSets), and its usage is optional but recommended.</p>
-<p>The Service&rsquo;s controller will track the statuses of its owned Configuration
-and Route, reflecting their statuses and conditions as its own.</p>
-<p>See also: <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#service">https://github.com/knative/serving/blob/master/docs/spec/overview.md#service</a></p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>apiVersion</code></br>
-string</td>
-<td>
-<code>
-serving.knative.dev/v1beta1
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<code>kind</code></br>
-string
-</td>
-<td><code>Service</code></td>
-</tr>
-<tr>
-<td>
-<code>metadata</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectmeta-v1-meta">
-Kubernetes meta/v1.ObjectMeta
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-Refer to the Kubernetes API documentation for the fields of the
-<code>metadata</code> field.
-</td>
-</tr>
-<tr>
-<td>
-<code>spec</code></br>
-<em>
-<a href="#serving.knative.dev/v1.ServiceSpec">
-ServiceSpec
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<br/>
-<br/>
-<table>
-<tr>
-<td>
-<code>ConfigurationSpec</code></br>
-<em>
-<a href="#serving.knative.dev/v1.ConfigurationSpec">
-ConfigurationSpec
-</a>
-</em>
-</td>
-<td>
-<p>
-(Members of <code>ConfigurationSpec</code> are embedded into this type.)
-</p>
-<p>ServiceSpec inlines an unrestricted ConfigurationSpec.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>RouteSpec</code></br>
-<em>
-<a href="#serving.knative.dev/v1.RouteSpec">
-RouteSpec
-</a>
-</em>
-</td>
-<td>
-<p>
-(Members of <code>RouteSpec</code> are embedded into this type.)
-</p>
-<p>ServiceSpec inlines RouteSpec and restricts/defaults its fields
-via webhook.  In particular, this spec can only reference this
-Service&rsquo;s configuration and revisions (which also influences
-defaults).</p>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-<tr>
-<td>
-<code>status</code></br>
-<em>
-<a href="#serving.knative.dev/v1.ServiceStatus">
-ServiceStatus
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-</td>
-</tr>
-</tbody>
-</table>
-<hr/>
 <p><em>
 Generated with <code>gen-crd-api-reference-docs</code>
-on git commit <code>d74ecbeb1</code>.
+on git commit <code>427b2bf86</code>.
 </em></p>
