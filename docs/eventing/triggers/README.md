@@ -22,7 +22,7 @@ EOF
 ```
 
 Simple example which will receive all the events from the given (`default`) broker and
-deliver them to Kubernetes service `my-service` to a custom path `/my-custom-path`:
+deliver them to the custom path `/my-custom-path` for the Kubernetes service `my-service`:
 
 ```shell
 kubectl create -f - <<EOF
