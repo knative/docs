@@ -86,7 +86,7 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-python
     metadata:
       name: knative-samples
       labels:
-           knative-eventing-injection: enabled
+           eventing.knative.dev/injection: enabled
     ---
     # Helloworld-python app deploment
     apiVersion: apps/v1
