@@ -1,7 +1,7 @@
 GitHub Source example shows how to wire GitHub events for consumption
 by a Knative Service.
 
-## Before you beging
+## Before you begin
 
 1. Set up [Knative Serving](../../../serving).
 1. Ensure Knative Serving is [configured with a domain
