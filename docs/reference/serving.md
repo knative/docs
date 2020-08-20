@@ -1503,7 +1503,7 @@ LatestReadyRevisionName that we last observed.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1beta1.Service">Service</a>, 
+<a href="#serving.knative.dev/v1beta1.Service">Service</a>,
 <a href="#serving.knative.dev/v1.Service">Service</a>)
 </p>
 <p>
