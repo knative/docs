@@ -1155,7 +1155,7 @@ be provided.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1beta1.Revision">Revision</a>, 
+<a href="#serving.knative.dev/v1beta1.Revision">Revision</a>,
 <a href="#serving.knative.dev/v1.Revision">Revision</a>)
 </p>
 <p>
