@@ -1090,7 +1090,7 @@ string
 <p>
 (<em>Appears on:</em>
 <a href="#serving.knative.dev/v1beta1.Revision">Revision</a>, 
-<a href="#serving.knative.dev/v1.Revision">Revision</a>, 
+<a href="#serving.knative.dev/v1.Revision">Revision</a>,
 <a href="#serving.knative.dev/v1alpha1.RevisionSpec">RevisionSpec</a>, 
 <a href="#serving.knative.dev/v1.RevisionTemplateSpec">RevisionTemplateSpec</a>)
 </p>
