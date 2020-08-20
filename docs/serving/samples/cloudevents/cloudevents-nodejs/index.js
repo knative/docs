@@ -15,11 +15,10 @@ limitations under the License.
 */
 
 const express = require('express')
-const { CloudEvent, HTTPEmitter, HTTPReceiver } = require('cloudevents-sdk')
+const { CloudEvent, Emitter, Receiver, headersFor } = require('cloudevents')
 const PORT = process.env.PORT || 8080
 const target = process.env.K_SINK
 const app = express()
-const receiver = new HTTPReceiver()
 
 const main = () => {
   app.listen(PORT, function () {
@@ -41,11 +40,11 @@ const receiveAndSend = (cloudEvent, res) => {
     type: 'dev.knative.docs.sample',
     source: 'https://github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-nodejs',
     time: new Date(),
-    data: data
+    data
   })
 
   // With only an endpoint URL, this creates a v1 emitter
-  const emitter = new HTTPEmitter({
+  const emitter = new Emitter({
     url: target
   })
 
@@ -55,7 +54,7 @@ const receiveAndSend = (cloudEvent, res) => {
   // Send the new Event to the K_SINK
   emitter.send(newCloudEvent)
     .then((res) => {
-      console.log(`Sent event: ${JSON.stringify(newCloudEvent.format(), null, 2)}`)
+      console.log(`Sent event: ${JSON.stringify(newCloudEvent, null, 2)}`)
       console.log(`K_SINK responded: ${JSON.stringify({ status: res.status, headers: res.headers, data: res.data }, null, 2)}`)
     })
     .catch(console.error)
@@ -64,16 +63,17 @@ const receiveAndSend = (cloudEvent, res) => {
 // receiveAndReply responds with new event
 const receiveAndReply = (cloudEvent, res) => {
   const data = handle(cloudEvent.data)
-  const headers = HTTPEmitter.headers(cloudEvent)
+  const headers = headersFor(cloudEvent)
   const newCloudEvent = new CloudEvent({
     type: 'dev.knative.docs.sample',
     source: 'https://github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-nodejs',
-    time: new Date()
+    time: new Date(),
+    data
   })
 
-  console.log(`Reply event: ${JSON.stringify(newCloudEvent.format(), null, 2)}`)
+  console.log(`Reply event: ${JSON.stringify(newCloudEvent, null, 2)}`)
   res.set(headers)
-  res.status(200).send(data)
+  res.status(200).send(newCloudEvent)
 }
 
 app.use((req, res, next) => {
@@ -90,8 +90,8 @@ app.use((req, res, next) => {
 
 app.post('/', function (req, res) {
   try {
-    const event = receiver.accept(req.headers, req.body)
-    console.log(`Accepted event: ${JSON.stringify(event.format(), null, 2)}`)
+    const event = Receiver.accept(req.headers, req.body)
+    console.log(`Accepted event: ${JSON.stringify(event, null, 2)}`)
     target ? receiveAndSend(event, res) : receiveAndReply(event, res)
   } catch (err) {
     console.error(err)
