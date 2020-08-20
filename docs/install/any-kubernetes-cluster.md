@@ -742,11 +742,23 @@ kubectl label namespace default eventing.knative.dev/injection=enabled
 
 {{< feature-state version="v0.2" state="alpha" >}}
 
-The following command installs the Github Source:
+The following command installs the single-tenant Github source:
 
 ```bash
 kubectl apply --filename {{< artifact repo="eventing-contrib" file="github.yaml" >}}
 ```
+
+The single-tenant GitHub source creates one Knative service per GitHub source.
+
+The following command installs the multi-tenant GitHub source:
+
+```bash
+kubectl apply --filename {{< artifact repo="eventing-contrib" file="mt-github.yaml" >}}
+```
+
+The multi-tenant GitHub source creates only one Knative service handling all
+GitHub sources in the cluster. This source does not support logging or tracing
+configuration yet.
 
 To learn more about the Github source, try
 [our sample](../eventing/samples/github-source/README.md)
