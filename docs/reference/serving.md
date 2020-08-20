@@ -1351,7 +1351,7 @@ be provided.</p>
 <p>
 (<em>Appears on:</em>
 <a href="#serving.knative.dev/v1beta1.Route">Route</a>, 
-<a href="#serving.knative.dev/v1.Route">Route</a>, 
+<a href="#serving.knative.dev/v1.Route">Route</a>,
 <a href="#serving.knative.dev/v1.ServiceSpec">ServiceSpec</a>)
 </p>
 <p>
