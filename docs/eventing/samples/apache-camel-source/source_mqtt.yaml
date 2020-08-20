@@ -4,7 +4,7 @@
 #
 # List of available Apache Camel components: https://camel.apache.org/components/latest/
 #
-apiVersion: sources.eventing.knative.dev/v1alpha1
+apiVersion: sources.knative.dev/v1alpha1
 kind: CamelSource
 metadata:
   name: camel-mqtt-source
