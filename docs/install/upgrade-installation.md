@@ -64,7 +64,7 @@ monitoring plug-in installed, upgrade it alongside Knative Serving and Eventing.
 
 In some upgrades there are some steps that must happen before the actual
 upgrade, and these are identified in the release notes. For example, upgrading
-from v0.15.0 to v0.16.0 for Eventing you have to run:
+from v0.16.0 to v0.17.0 for Eventing you have to run:
 
 ```bash
 kubectl apply --filename {{< artifact repo="eventing" file="eventing-pre-install-jobs.yaml" >}}
