@@ -19,7 +19,7 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 1. Deploy the [sample](./service.yaml) Knative Service:
 
    ```
-   kubectl apply --filename docs/serving/samples/autoscale-go/service.yaml
+   kubectl apply --filename docs/serving/autoscaling/autoscale-go/service.yaml
    ```
 
 1. Obtain the URL of the service (once `Ready`):
