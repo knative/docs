@@ -11,7 +11,7 @@ In 0.13, the deprecated `CronJobSource` should be converted to the `PingSource`.
 The YAML file for a `CronJobSource` that emits events to a Knative Serving service will look similar to this:
 
 ```yaml
-apiVersion: sources.eventing.knative.dev/v1alpha1
+apiVersion: sources.knative.dev/v1alpha1
 kind: CronJobSource
 metadata:
   name: cronjob-source
