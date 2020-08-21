@@ -12,7 +12,7 @@ Notable features are:
 
 - Control plane High Availability
 - Horizontally scalable data plane
-- [Extensively configurable](#Kafka-Producer-and-Consumer-configurations)
+- [Extensively configurable](#kafka-producer-and-consumer-configurations)
 - Ordered delivery of events based on [CloudEvents partitioning extension](https://github.com/cloudevents/spec/blob/master/extensions/partitioning.md)
 - Support any Kafka version, see [compatibility matrix](https://cwiki.apache.org/confluence/display/KAFKA/Compatibility+Matrix)
 
@@ -106,12 +106,7 @@ you can apply global settings by modifying the `config-br-defaults` ConfigMap in
 This allows you to avoid configuring individual or per-namespace settings for each broker,
 such as `metadata.annotations.eventing.knative.dev/broker.class` or `spec.config`.
 
-<<<<<<< HEAD
-The following YAML is an example of a config-br-defaults ConfigMap using Kafka broker as the default implementation.
-=======
-This allows you to avoid configuring individual or per-namespace settings for each broker, such as `metadata.annotations.eventing.knative.dev/broker.class` or
-`spec.config`.
->>>>>>> 26ab7c8d... lint
+The following YAML is an example of a `config-br-defaults` ConfigMap using Kafka broker as the default implementation.
 
 ```yaml
 apiVersion: v1
