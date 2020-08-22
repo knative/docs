@@ -91,7 +91,7 @@ spec:
               name: https
 EOF
 
-istioctl manifest apply -f istio-minimal-operator.yaml
+istioctl manifest install -f istio-minimal-operator.yaml --set values.gateways.istio-ingressgateway.runAsRoot=true
 ```
 
 #### Installing Istio with sidecar injection
