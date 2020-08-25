@@ -260,7 +260,7 @@ Kubernetes secret and then configure the `knative-ingress-gateway`:
               mode: SIMPLE
               credentialName: tls-cert
       ```
-      In above example, `TLS_HOSTS` represents the hosts of your TLS certificate. It could be single host, multiple hosts, or wildcard host.
+      In above example, `TLS_HOSTS` represents the hosts of your TLS certificate. It can be single host, multiple hosts, or wildcard host.
       For detailed instructions, please refer [Istio documentation](https://istio.io/latest/docs/tasks/traffic-management/ingress/secure-ingress/)
 {{< /tab >}}
 {{< /tabs >}}
