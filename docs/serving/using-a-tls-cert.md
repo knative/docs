@@ -205,12 +205,11 @@ Kubernetes secret and then configure the `knative-ingress-gateway`:
    private key, `key.pem`, by entering the following command:
 
    ```shell
-   kubectl create --namespace istio-system secret tls istio-ingressgateway-certs \
+   kubectl create --namespace istio-system secret tls tls-cert \
      --key key.pem \
      --cert cert.pem
    ```
 
-   Note that the `istio-ingressgateway-certs` secret name is required.
 
 1. Configure Knative to use the new secret that you created for HTTPS
    connections:
@@ -228,8 +227,7 @@ Kubernetes secret and then configure the `knative-ingress-gateway`:
       ```yaml
       tls:
         mode: SIMPLE
-        privateKey: /etc/istio/ingressgateway-certs/tls.key
-        serverCertificate: /etc/istio/ingressgateway-certs/tls.crt
+        credentialName: tls-cert
       ```
 
       Example:
@@ -253,16 +251,17 @@ Kubernetes secret and then configure the `knative-ingress-gateway`:
               number: 80
               protocol: HTTP
           - hosts:
-              - "*"
+              - TLS_HOSTS
             port:
               name: https
               number: 443
               protocol: HTTPS
             tls:
               mode: SIMPLE
-              privateKey: /etc/istio/ingressgateway-certs/tls.key
-              serverCertificate: /etc/istio/ingressgateway-certs/tls.crt
+              credentialName: tls-cert
       ```
+      In above example, `TLS_HOSTS` represents the hosts of your TLS certificate. It could be single host, multiple hosts, or wildcard host.
+      For detailed instructions, please refer [Istio documentation](https://istio.io/latest/docs/tasks/traffic-management/ingress/secure-ingress/)
 {{< /tab >}}
 {{< /tabs >}}
 
