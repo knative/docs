@@ -11,8 +11,9 @@ a Knative Service.
 To verify that `PingSource` is working, create a simple Knative
 Service that dumps incoming messages to its log.
 
-{{< tabs name="create-service" default="By YAML" >}}
-{{% tab name="By YAML" %}}
+   {{< tabs name="create-service" default="By YAML" >}}
+   {{% tab name="By YAML" %}}
+
 Use following command to create the service from STDIN:
 
 ```shell
@@ -28,6 +29,7 @@ spec:
         - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
 EOF
 ```
+
 {{< /tab >}}
 
 {{% tab name="By filename" %}}
@@ -44,8 +46,9 @@ kubectl apply --filename service.yaml
 For each set of ping events that you want to request, create an Event
 Source in the same namespace as the destination.
 
-{{< tabs name="create-source" default="By YAML" >}}
-{{% tab name="By YAML" %}}
+   {{< tabs name="create-source" default="By YAML" >}}
+   {{% tab name="By YAML" %}}
+
 Use following command to create the event source from STDIN:
 
 ```shell
@@ -81,8 +84,8 @@ kubectl apply --filename ping-source.yaml
 Verify that the message was sent to the Knative eventing system by
 looking at message dumper logs.
 
-{{< tabs name="view-event" default="kubectl" >}}
-{{% tab name="kubectl" %}}
+   {{< tabs name="view-event" default="kubectl" >}}
+   {{% tab name="kubectl" %}}
 
 Use following command to view the logs of the event-display service:
 
