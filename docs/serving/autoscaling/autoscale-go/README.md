@@ -112,7 +112,7 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 Knative Serving autoscaling is based on the average number of in-flight requests
 per pod (concurrency). The system has a default
 [target concurrency of 100](https://github.com/knative/serving/blob/master/config/core/configmaps/autoscaler.yaml)(Search for container-concurrency-target-default)
-but [we used 10](service.yaml#L25-L26) for our service. We loaded the service
+but [we used 10](https://github.com/knative/docs/blob/master/docs/serving/autoscaling/autoscale-go/service.yaml#L23-L24) for our service. We loaded the service
 with 50 concurrent requests so the autoscaler created 5 pods
 (`50 concurrent requests / target of 10 = 5 pods`)
 
