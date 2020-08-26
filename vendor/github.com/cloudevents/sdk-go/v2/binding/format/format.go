@@ -44,8 +44,15 @@ func init() {
 	Add(JSON)
 }
 
-// Lookup returns the format for mediaType, or nil if not found.
-func Lookup(mediaType string) Format { return formats[mediaType] }
+// Lookup returns the format for contentType, or nil if not found.
+func Lookup(contentType string) Format {
+	i := strings.IndexRune(contentType, ';')
+	if i == -1 {
+		i = len(contentType)
+	}
+	contentType = strings.TrimSpace(strings.ToLower(contentType[0:i]))
+	return formats[contentType]
+}
 
 func unknown(mediaType string) error {
 	return fmt.Errorf("unknown event format media-type %#v", mediaType)

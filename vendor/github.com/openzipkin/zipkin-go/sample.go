@@ -1,3 +1,17 @@
+// Copyright 2019 The OpenZipkin Authors
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package zipkin
 
 import (
@@ -12,14 +26,20 @@ import (
 // traceID.
 type Sampler func(id uint64) bool
 
-func neverSample(_ uint64) bool { return false }
+// NeverSample will always return false. If used by a service it will not allow
+// the service to start traces but will still allow the service to participate
+// in traces started upstream.
+func NeverSample(_ uint64) bool { return false }
 
-func alwaysSample(_ uint64) bool { return true }
+// AlwaysSample will always return true. If used by a service it will always start
+// traces if no upstream trace has been propagated. If an incoming upstream trace
+// is not sampled the service will adhere to this and only propagate the context.
+func AlwaysSample(_ uint64) bool { return true }
 
 // NewModuloSampler provides a generic type Sampler.
 func NewModuloSampler(mod uint64) Sampler {
 	if mod < 2 {
-		return alwaysSample
+		return AlwaysSample
 	}
 	return func(id uint64) bool {
 		return (id % mod) == 0
@@ -31,10 +51,10 @@ func NewModuloSampler(mod uint64) Sampler {
 // It defends against nodes in the cluster selecting exactly the same ids.
 func NewBoundarySampler(rate float64, salt int64) (Sampler, error) {
 	if rate == 0.0 {
-		return neverSample, nil
+		return NeverSample, nil
 	}
 	if rate == 1.0 {
-		return alwaysSample, nil
+		return AlwaysSample, nil
 	}
 	if rate < 0.0001 || rate > 1 {
 		return nil, fmt.Errorf("rate should be 0.0 or between 0.0001 and 1: was %f", rate)
@@ -55,10 +75,10 @@ func NewBoundarySampler(rate float64, salt int64) (Sampler, error) {
 // on trace id).
 func NewCountingSampler(rate float64) (Sampler, error) {
 	if rate == 0.0 {
-		return neverSample, nil
+		return NeverSample, nil
 	}
 	if rate == 1.0 {
-		return alwaysSample, nil
+		return AlwaysSample, nil
 	}
 	if rate < 0.01 || rate > 1 {
 		return nil, fmt.Errorf("rate should be 0.0 or between 0.01 and 1: was %f", rate)

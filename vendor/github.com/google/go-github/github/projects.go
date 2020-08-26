@@ -26,6 +26,7 @@ type Project struct {
 	Number    *int       `json:"number,omitempty"`
 	CreatedAt *Timestamp `json:"created_at,omitempty"`
 	UpdatedAt *Timestamp `json:"updated_at,omitempty"`
+	NodeID    *string    `json:"node_id,omitempty"`
 
 	// The User object that generated the project.
 	Creator *User `json:"creator,omitempty"`
@@ -45,7 +46,7 @@ func (s *ProjectsService) GetProject(ctx context.Context, id int64) (*Project, *
 		return nil, nil, err
 	}
 
-	// TODO: remove custom Accept header when this API fully launches.
+	// TODO: remove custom Accept headers when APIs fully launch.
 	req.Header.Set("Accept", mediaTypeProjectsPreview)
 
 	project := &Project{}
@@ -83,7 +84,7 @@ func (s *ProjectsService) UpdateProject(ctx context.Context, id int64, opt *Proj
 		return nil, nil, err
 	}
 
-	// TODO: remove custom Accept header when this API fully launches.
+	// TODO: remove custom Accept headers when APIs fully launch.
 	req.Header.Set("Accept", mediaTypeProjectsPreview)
 
 	project := &Project{}
@@ -120,6 +121,7 @@ type ProjectColumn struct {
 	ProjectURL *string    `json:"project_url,omitempty"`
 	CreatedAt  *Timestamp `json:"created_at,omitempty"`
 	UpdatedAt  *Timestamp `json:"updated_at,omitempty"`
+	NodeID     *string    `json:"node_id,omitempty"`
 }
 
 // ListProjectColumns lists the columns of a GitHub Project for a repo.
@@ -137,7 +139,7 @@ func (s *ProjectsService) ListProjectColumns(ctx context.Context, projectID int6
 		return nil, nil, err
 	}
 
-	// TODO: remove custom Accept header when this API fully launches.
+	// TODO: remove custom Accept headers when APIs fully launch.
 	req.Header.Set("Accept", mediaTypeProjectsPreview)
 
 	columns := []*ProjectColumn{}
@@ -159,7 +161,7 @@ func (s *ProjectsService) GetProjectColumn(ctx context.Context, id int64) (*Proj
 		return nil, nil, err
 	}
 
-	// TODO: remove custom Accept header when this API fully launches.
+	// TODO: remove custom Accept headers when APIs fully launch.
 	req.Header.Set("Accept", mediaTypeProjectsPreview)
 
 	column := &ProjectColumn{}
@@ -189,7 +191,7 @@ func (s *ProjectsService) CreateProjectColumn(ctx context.Context, projectID int
 		return nil, nil, err
 	}
 
-	// TODO: remove custom Accept header when this API fully launches.
+	// TODO: remove custom Accept headers when APIs fully launch.
 	req.Header.Set("Accept", mediaTypeProjectsPreview)
 
 	column := &ProjectColumn{}
@@ -211,7 +213,7 @@ func (s *ProjectsService) UpdateProjectColumn(ctx context.Context, columnID int6
 		return nil, nil, err
 	}
 
-	// TODO: remove custom Accept header when this API fully launches.
+	// TODO: remove custom Accept headers when APIs fully launch.
 	req.Header.Set("Accept", mediaTypeProjectsPreview)
 
 	column := &ProjectColumn{}
@@ -275,15 +277,27 @@ type ProjectCard struct {
 	Creator    *User      `json:"creator,omitempty"`
 	CreatedAt  *Timestamp `json:"created_at,omitempty"`
 	UpdatedAt  *Timestamp `json:"updated_at,omitempty"`
+	NodeID     *string    `json:"node_id,omitempty"`
+	Archived   *bool      `json:"archived,omitempty"`
 
 	// The following fields are only populated by Webhook events.
 	ColumnID *int64 `json:"column_id,omitempty"`
 }
 
+// ProjectCardListOptions specifies the optional parameters to the
+// ProjectsService.ListProjectCards method.
+type ProjectCardListOptions struct {
+	// ArchivedState is used to list all, archived, or not_archived project cards.
+	// Defaults to not_archived when you omit this parameter.
+	ArchivedState *string `url:"archived_state,omitempty"`
+
+	ListOptions
+}
+
 // ListProjectCards lists the cards in a column of a GitHub Project.
 //
 // GitHub API docs: https://developer.github.com/v3/projects/cards/#list-project-cards
-func (s *ProjectsService) ListProjectCards(ctx context.Context, columnID int64, opt *ListOptions) ([]*ProjectCard, *Response, error) {
+func (s *ProjectsService) ListProjectCards(ctx context.Context, columnID int64, opt *ProjectCardListOptions) ([]*ProjectCard, *Response, error) {
 	u := fmt.Sprintf("projects/columns/%v/cards", columnID)
 	u, err := addOptions(u, opt)
 	if err != nil {
@@ -295,7 +309,7 @@ func (s *ProjectsService) ListProjectCards(ctx context.Context, columnID int64, 
 		return nil, nil, err
 	}
 
-	// TODO: remove custom Accept header when this API fully launches.
+	// TODO: remove custom Accept headers when APIs fully launch.
 	req.Header.Set("Accept", mediaTypeProjectsPreview)
 
 	cards := []*ProjectCard{}
@@ -317,7 +331,7 @@ func (s *ProjectsService) GetProjectCard(ctx context.Context, columnID int64) (*
 		return nil, nil, err
 	}
 
-	// TODO: remove custom Accept header when this API fully launches.
+	// TODO: remove custom Accept headers when APIs fully launch.
 	req.Header.Set("Accept", mediaTypeProjectsPreview)
 
 	card := &ProjectCard{}
@@ -340,6 +354,9 @@ type ProjectCardOptions struct {
 	ContentID int64 `json:"content_id,omitempty"`
 	// The type of content to associate with this card. Possible values are: "Issue".
 	ContentType string `json:"content_type,omitempty"`
+	// Use true to archive a project card.
+	// Specify false if you need to restore a previously archived project card.
+	Archived *bool `json:"archived,omitempty"`
 }
 
 // CreateProjectCard creates a card in the specified column of a GitHub Project.
@@ -352,7 +369,7 @@ func (s *ProjectsService) CreateProjectCard(ctx context.Context, columnID int64,
 		return nil, nil, err
 	}
 
-	// TODO: remove custom Accept header when this API fully launches.
+	// TODO: remove custom Accept headers when APIs fully launch.
 	req.Header.Set("Accept", mediaTypeProjectsPreview)
 
 	card := &ProjectCard{}
@@ -374,7 +391,7 @@ func (s *ProjectsService) UpdateProjectCard(ctx context.Context, cardID int64, o
 		return nil, nil, err
 	}
 
-	// TODO: remove custom Accept header when this API fully launches.
+	// TODO: remove custom Accept headers when APIs fully launch.
 	req.Header.Set("Accept", mediaTypeProjectsPreview)
 
 	card := &ProjectCard{}

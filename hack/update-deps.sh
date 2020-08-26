@@ -22,26 +22,40 @@ source $(dirname $0)/../vendor/knative.dev/test-infra/scripts/library.sh
 
 cd ${REPO_ROOT_DIR}
 
+# We need these flags for things to work properly.
+export GO111MODULE=on
+
+# This controls the release branch we track.
+VERSION="master"
+
 # The list of dependencies that we track at HEAD and periodically
 # float forward in this repository.
 FLOATING_DEPS=(
-  "knative.dev/test-infra"
+  "knative.dev/test-infra@${VERSION}"
 )
 
-# Parse flags to determine any we should pass to dep.
-DEP_FLAGS=()
+# Parse flags to determine any we should pass to Go mod.
+GO_GET=0
 while [[ $# -ne 0 ]]; do
   parameter=$1
   case ${parameter} in
-    --upgrade) DEP_FLAGS=( -update ${FLOATING_DEPS[@]} ) ;;
+    --upgrade) GO_GET=1 ;;
     *) abort "unknown option ${parameter}" ;;
   esac
   shift
 done
-readonly DEP_FLAGS
+readonly GO_GET
 
-# Ensure we have everything we need under vendor/
-dep ensure ${DEP_FLAGS[@]}
+if (( GO_GET )); then
+  go get -d ${FLOATING_DEPS[@]}
+fi
 
-# Remove the cmd dir from eventing.
-rm -rf vendor/github.com/knative/eventing/cmd/
+
+# Prune modules.
+go mod tidy
+go mod vendor
+
+echo "Removing unwanted vendor files"
+
+# Remove unwanted vendor files
+find vendor/ \( -name "OWNERS" -o -name "*_test.go" \) -print0 | xargs -0 rm -f
