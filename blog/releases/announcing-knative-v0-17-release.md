@@ -124,7 +124,7 @@ metadata:
 - DeadLetterChannel was being dropped when converting between v1beta1<->v1 ([#3574](https://github.com/knative/eventing/pull/3574), [@vaikas](https://github.com/vaikas)
 - Not all the conditions were being properly converted between v1beta1<->v1. Basically only the Ready was.
 - Extend the terminationGracePeriod to fix issues shutting down the webhook. ([#3596](https://github.com/knative/eventing/pull/3596), [@mattmoor](https://github.com/mattmoor)
-- v1 and v1beta1 DeliverySpec.BackoffDelay accept ISO8601 duration ([#3619](https://github.com/knative/eventing/pull/3619), [@pierDipi](pierDipi)
+- v1 and v1beta1 DeliverySpec.BackoffDelay accept ISO8601 duration ([#3619](https://github.com/knative/eventing/pull/3619), [@pierDipi](https://github.com/pierDipi)
 - PingSource does not lose events anymore when being shutdown close to the minute ([#3831](https://github.com/knative/eventing/pull/3831), [@lionelvillard](https://github.com/lionelvillard)
 
 </details>
