@@ -28,7 +28,7 @@ It remains **1.16**, but we may bump to 1.17 in the coming release depending on 
 
 <details><summary>Autoscaling</summary>
 
-- Launched the initial scale with possibility of starting with 0 
+- Launched the initial scale with possibility of starting with 0
 (thanks [@taragu](https://github.com/taragu) [[#8613](https://github.com/knative/serving/pull/8613), [#8846](https://github.com/knative/serving/pull/8846)]
 - Launched new KPA statuses, which permit significant simplification of the state machine in revision and KPA itself:
     - Initial scale reached (thanks [@markusthoemmes](https://github.com/markusthoemmes) & [@taragu](https://github.com/taragu)
