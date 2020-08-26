@@ -34,7 +34,7 @@ It remains **1.16**, but we may bump to 1.17 in the coming release depending on 
     - Initial scale reached (thanks [@markusthoemmes](https://github.com/markusthoemmes) & [@taragu](https://github.com/taragu)
     - SKS ready (thanks [@vagababov](https://github.com/vagababov)
 - Concurrency & stat reporting rewrite in Activator (thanks [@markusthoemmes](https://github.com/markusthoemmes) [[#8787](https://github.com/knative/serving/pull/8787), [#8796](https://github.com/knative/serving/pull/8796) ]
-- Configurable idle conns/conns per host (thanks [@vagababov](https://github.com/vagababov) & [@julz](julz) [[#8810](https://github.com/knative/serving/pull/8810), [#9027](https://github.com/knative/serving/pull/9027)]
+- Configurable idle conns/conns per host (thanks [@vagababov](https://github.com/vagababov) & [@julz](https://github.com/julz) [[#8810](https://github.com/knative/serving/pull/8810), [#9027](https://github.com/knative/serving/pull/9027)]
 - Optimize pod counting in KPA (3 passes over pods to 1) (thanks [@vagababov](https://github.com/vagababov) [[#8759](https://github.com/knative/serving/pull/8759), [#8762](https://github.com/knative/serving/pull/8762)]
 - Tricky optimization of returned lambda in activator saving 16b allocations per every request in activator (thanks [@julz](https://github.com/julz) ([#8851](https://github.com/knative/serving/pull/8851)
 - Lots of new benchmarks thanks [[@julz](https://github.com/julz) & [@markusthoemmes](https://github.com/markusthoemmes)]
@@ -112,31 +112,31 @@ metadata:
 
 <details><summary>Bug Fixes</summary>
 
-- Fixes issue where migration jobs would fail on Istio cluster with auto-inject enabled ([#3534](https://github.com/knative/eventing/pull/3534), [@vayyappaneni](https://github.com/vayyappaneni))
-- For ApiServerSource, the Kubernetes event "ApiServerSourceReconciled" is no longer produced for clean runs of the ReconcileKind method. ([#3693](https://github.com/knative/eventing/pull/3693), [@n3wscott](https://github.com/n3wscott))
-- For Channel, the Kubernetes event "ChannelReconciled" is no longer produced for clean runs of the ReconcileKind method. ([#3694](https://github.com/knative/eventing/pull/3694), [@n3wscott](https://github.com/n3wscott))
-- For EventType, the Kubernetes event "EventTypeReconciled" is no longer produced for clean runs of the ReconcileKind method. ([#3696](https://github.com/knative/eventing/pull/3696), [@n3wscott](https://github.com/n3wscott))
-- For MTBroker, the Kubernetes event "BrokerReconciled" is no longer produced for clean runs of the FinalizeKind method. ([#3697](https://github.com/knative/eventing/pull/3697), [@n3wscott](https://github.com/n3wscott))
-- For Parallel, the Kubernetes event "ParallelReconciled" is no longer produced for clean runs of the ReconcileKind method. ([#3698](https://github.com/knative/eventing/pull/3698), [@n3wscott](https://github.com/n3wscott))
+- Fixes issue where migration jobs would fail on Istio cluster with auto-inject enabled ([#3534](https://github.com/knative/eventing/pull/3534), [@vayyappaneni](https://github.com/vayyappaneni)
+- For ApiServerSource, the Kubernetes event "ApiServerSourceReconciled" is no longer produced for clean runs of the ReconcileKind method. ([#3693](https://github.com/knative/eventing/pull/3693), [@n3wscott](https://github.com/n3wscott)
+- For Channel, the Kubernetes event "ChannelReconciled" is no longer produced for clean runs of the ReconcileKind method. ([#3694](https://github.com/knative/eventing/pull/3694), [@n3wscott](https://github.com/n3wscott)
+- For EventType, the Kubernetes event "EventTypeReconciled" is no longer produced for clean runs of the ReconcileKind method. ([#3696](https://github.com/knative/eventing/pull/3696), [@n3wscott](https://github.com/n3wscott)
+- For MTBroker, the Kubernetes event "BrokerReconciled" is no longer produced for clean runs of the FinalizeKind method. ([#3697](https://github.com/knative/eventing/pull/3697), [@n3wscott](https://github.com/n3wscott)
+- For Parallel, the Kubernetes event "ParallelReconciled" is no longer produced for clean runs of the ReconcileKind method. ([#3698](https://github.com/knative/eventing/pull/3698), [@n3wscott](https://github.com/n3wscott)
 - For PingSource, the Kubernetes event "PingSourceReconciled" is no longer produced for clean runs of the ReconcileKind method.
-- For Sequence, the Kubernetes event "SequenceReconciled" is no longer produced for clean runs of the ReconcileKind method. ([#3699](https://github.com/knative/eventing/pull/3699), [@n3wscott](https://github.com/n3wscott))
-- For Subscription, the Kubernetes event "SubscriptionReconciled" is no longer produced for clean runs of the ReconcileKind method. ([#3695](https://github.com/knative/eventing/pull/3695), [@n3wscott](https://github.com/n3wscott))
-- DeadLetterChannel was being dropped when converting between v1beta1<->v1 ([#3574](https://github.com/knative/eventing/pull/3574), [@vaikas](https://github.com/vaikas))
+- For Sequence, the Kubernetes event "SequenceReconciled" is no longer produced for clean runs of the ReconcileKind method. ([#3699](https://github.com/knative/eventing/pull/3699), [@n3wscott](https://github.com/n3wscott)
+- For Subscription, the Kubernetes event "SubscriptionReconciled" is no longer produced for clean runs of the ReconcileKind method. ([#3695](https://github.com/knative/eventing/pull/3695), [@n3wscott](https://github.com/n3wscott)
+- DeadLetterChannel was being dropped when converting between v1beta1<->v1 ([#3574](https://github.com/knative/eventing/pull/3574), [@vaikas](https://github.com/vaikas)
 - Not all the conditions were being properly converted between v1beta1<->v1. Basically only the Ready was.
-- Extend the terminationGracePeriod to fix issues shutting down the webhook. ([#3596](https://github.com/knative/eventing/pull/3596), [@mattmoor](mattmoor))
-- v1 and v1beta1 DeliverySpec.BackoffDelay accept ISO8601 duration ([#3619](https://github.com/knative/eventing/pull/3619), [@pierDipi](pierDipi))
-- PingSource does not lose events anymore when being shutdown close to the minute ([#3831](https://github.com/knative/eventing/pull/3831), [@lionelvillard](lionelvillard))
+- Extend the terminationGracePeriod to fix issues shutting down the webhook. ([#3596](https://github.com/knative/eventing/pull/3596), [@mattmoor](https://github.com/mattmoor)
+- v1 and v1beta1 DeliverySpec.BackoffDelay accept ISO8601 duration ([#3619](https://github.com/knative/eventing/pull/3619), [@pierDipi](pierDipi)
+- PingSource does not lose events anymore when being shutdown close to the minute ([#3831](https://github.com/knative/eventing/pull/3831), [@lionelvillard](https://github.com/lionelvillard)
 
 </details>
 
 
 <details><summary>Other Changes</summary>
 
-- Add missing "leases" RBAC to controller and webhook to support leader election. ([#3562](https://github.com/knative/eventing/pull/3562), [@mattmoor](https://github.com/mattmoor))
-- Control plane components now specify anti-affinity so that replicas will not be colocated. ([#3795](https://github.com/knative/eventing/pull/3795), [@mattmoor](https://github.com/mattmoor))
-- The multi-tenant PingSource adapter consumes less resources. ([#3451](https://github.com/knative/eventing/pull/3451), [@lionelvillard](https://github.com/lionelvillard))
-- Reconcile eventing.{Broker,Trigger} using v1 api shape. Operate on dependent resources (Subscriptions, etc.) using their v1 shapes. ([#3587](https://github.com/knative/eventing/pull/3587), [@vaikas](https://github.com/vaikas))
-- When Trigger is reconciled, do not emit an event for it ([#3643](https://github.com/knative/eventing/pull/3643), [@vaikas](https://github.com/vaikas))
+- Add missing "leases" RBAC to controller and webhook to support leader election. ([#3562](https://github.com/knative/eventing/pull/3562), [@mattmoor](https://github.com/mattmoor)
+- Control plane components now specify anti-affinity so that replicas will not be colocated. ([#3795](https://github.com/knative/eventing/pull/3795), [@mattmoor](https://github.com/mattmoor)
+- The multi-tenant PingSource adapter consumes less resources. ([#3451](https://github.com/knative/eventing/pull/3451), [@lionelvillard](https://github.com/lionelvillard)
+- Reconcile eventing.{Broker,Trigger} using v1 api shape. Operate on dependent resources (Subscriptions, etc.) using their v1 shapes. ([#3587](https://github.com/knative/eventing/pull/3587), [@vaikas](https://github.com/vaikas)
+- When Trigger is reconciled, do not emit an event for it ([#3643](https://github.com/knative/eventing/pull/3643), [@vaikas](https://github.com/vaikas)
 
 </details>
 
