@@ -1,5 +1,3 @@
-// +build tools
-
 /*
 Copyright 2018 The Knative Authors
 
@@ -16,4 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+// Package scripts is a placeholder that allows us to pull the shell scripts
+// via go mod vendor.
 package scripts
