@@ -51,7 +51,7 @@ The only mandatory flag for creating a Service is `--image` with the container i
 To create a Service directly at the cluster, use:
 
 ```shell
-# Create a Knative service with the Knatice CLI kn
+# Create a Knative service with the Knative CLI kn
 kn service create helloworld-go --image gcr.io/knative-samples/helloworld-go --env TARGET="Go Sample v1"
 ```
 
