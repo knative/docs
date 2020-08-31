@@ -19,7 +19,7 @@ git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
 
 ## Recreating the sample code
 
-Multi container will have more than one container, so for testing we have taken two containers one will be the serving and another will be the sidecar
+Multi container has more than one container, For testing, we will create two containers, the serving container and sidecar container.
 ### ServingContainer
 1. `cd knative-docs/docs/serving/samples/multi-container/servingcontainer`
 1. Create a new file named `servingcontainer.go` and paste the following code. This
