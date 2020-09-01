@@ -20,59 +20,62 @@ Remember to check the [upgrade docs](https://knative.dev/docs/install/upgrade-in
 ### [Serving v0.17](https://github.com/knative/serving/releases/tag/v0.17.2)
 
 **InitialScale annotation to control the initial deployment size**
+
 There is a new annotation that can be used to control the number of pods that are initially deployed when new Revisions are rolled out.
 
 **net-contour and net-kourier have moved to Beta**
+
 In addition to net-istio, Knative now supports three other networking layers that are in Beta status.
 
 **Kubernetes minimum version has NOT changed**
+
 Kubernetes **1.16** remains as the minimum version.
 
 <details><summary>Autoscaling</summary>
 
 - Launched the initial scale with possibility of starting with 0
-(thanks [@taragu](https://github.com/taragu) [[#8613](https://github.com/knative/serving/pull/8613), [#8846](https://github.com/knative/serving/pull/8846)]
+(thanks [@taragu](https://github.com/taragu)) [[#8613](https://github.com/knative/serving/pull/8613), [#8846](https://github.com/knative/serving/pull/8846)]
 - Launched new KPA statuses, which permit significant simplification of the state machine in revision and KPA itself:
-    - Initial scale reached (thanks [@markusthoemmes](https://github.com/markusthoemmes) & [@taragu](https://github.com/taragu)
-    - SKS ready (thanks [@vagababov](https://github.com/vagababov)
-- Concurrency & stat reporting rewrite in Activator (thanks [@markusthoemmes](https://github.com/markusthoemmes) [[#8787](https://github.com/knative/serving/pull/8787), [#8796](https://github.com/knative/serving/pull/8796) ]
-- Configurable idle conns/conns per host (thanks [@vagababov](https://github.com/vagababov) & [@julz](https://github.com/julz) [[#8810](https://github.com/knative/serving/pull/8810), [#9027](https://github.com/knative/serving/pull/9027)]
-- Optimize pod counting in KPA (3 passes over pods to 1) (thanks [@vagababov](https://github.com/vagababov) [[#8759](https://github.com/knative/serving/pull/8759), [#8762](https://github.com/knative/serving/pull/8762)]
-- Tricky optimization of returned lambda in activator saving 16b allocations per every request in activator (thanks [@julz](https://github.com/julz) ([#8851](https://github.com/knative/serving/pull/8851)
-- Lots of new benchmarks thanks [[@julz](https://github.com/julz) & [@markusthoemmes](https://github.com/markusthoemmes)]
-- Various cleanups, test stability, code optimizations, etc [thanks [@julz](https://github.com/julz), [@markusthoemmes](https://github.com/markusthoemmes), [@vagababov](https://github.com/vagababov), [@skonto](https://github.com/skonto)]
+    - Initial scale reached (thanks [@markusthoemmes](https://github.com/markusthoemmes) & [@taragu](https://github.com/taragu))
+    - SKS ready (thanks [@vagababov](https://github.com/vagababov))
+- Concurrency & stat reporting rewrite in Activator (thanks [@markusthoemmes](https://github.com/markusthoemmes)) [[#8787](https://github.com/knative/serving/pull/8787), [#8796](https://github.com/knative/serving/pull/8796) ]
+- Configurable idle conns/conns per host (thanks [@vagababov](https://github.com/vagababov) & [@julz](https://github.com/julz)) [[#8810](https://github.com/knative/serving/pull/8810), [#9027](https://github.com/knative/serving/pull/9027)]
+- Optimize pod counting in KPA (3 passes over pods to 1) (thanks [@vagababov](https://github.com/vagababov)) [[#8759](https://github.com/knative/serving/pull/8759), [#8762](https://github.com/knative/serving/pull/8762)]
+- Tricky optimization of returned lambda in activator saving 16b allocations per every request in activator (thanks [@julz](https://github.com/julz)) ([#8851](https://github.com/knative/serving/pull/8851)
+- Lots of new benchmarks (thanks [@julz](https://github.com/julz) & [@markusthoemmes](https://github.com/markusthoemmes))
+- Various cleanups, test stability, code optimizations, etc (thanks [@julz](https://github.com/julz), [@markusthoemmes](https://github.com/markusthoemmes), [@vagababov](https://github.com/vagababov), [@skonto](https://github.com/skonto))
 </details>
 
 
 <details><summary>Core API</summary>
 
-- Leader Election enabled by default (thanks [@mattmoor](https://github.com/mattmoor)
+- Leader Election enabled by default (thanks [@mattmoor](https://github.com/mattmoor))
     - By default control plane components now enable leader election, which can be disabled (for now) with --disable-ha.
 - New feature flags are now available - see config-features for details
-    - Enable affinity, nodeSelector and tolerations. [#8645](https://github.com/knative/serving/pull/8645) (thanks [@emaildanwilson](https://github.com/emaildanwilson)
-    - Enable additional container & pod security context attributes. [#9060](https://github.com/knative/serving/pull/9060) (thanks [@dprotaso](https://github.com/dprotaso)
-- Adopt a two-lane work queue for our controllers to prevent starvation during global re-syncs [pkg#1512](https://github.com/knative/pkg/pull/1512) (thanks [@vagababov](https://github.com/vagababov)
-- Add config knob "max-value," which allows for setting a cluster-wide value for the max scale of any revision that doesn't have the "autoscaling.knative.dev/maxScale" annotation. [#8951](https://github.com/knative/serving/pull/8951) (thanks [@arturenault](https://github.com/arturenault)
-- Adds a 60 second timeout for image digest resolution to guard against slow registries [#8724](https://github.com/knative/serving/pull/8724) (thanks [@julz](https://github.com/julz)
-- Implemented new garbage collector that allows for either time-based or min/max count bounds for automatic deletion of old revisions. [#8621](https://github.com/knative/serving/pull/8621) (thanks [@whaught](https://github.com/whaught)
+    - Enable affinity, nodeSelector and tolerations. [#8645](https://github.com/knative/serving/pull/8645) (thanks [@emaildanwilson](https://github.com/emaildanwilson))
+    - Enable additional container & pod security context attributes. [#9060](https://github.com/knative/serving/pull/9060) (thanks [@dprotaso](https://github.com/dprotaso))
+- Adopt a two-lane work queue for our controllers to prevent starvation during global re-syncs [pkg#1512](https://github.com/knative/pkg/pull/1512) (thanks [@vagababov](https://github.com/vagababov))
+- Add config knob "max-value," which allows for setting a cluster-wide value for the max scale of any revision that doesn't have the "autoscaling.knative.dev/maxScale" annotation. [#8951](https://github.com/knative/serving/pull/8951) (thanks [@arturenault](https://github.com/arturenault))
+- Adds a 60 second timeout for image digest resolution to guard against slow registries [#8724](https://github.com/knative/serving/pull/8724) (thanks [@julz](https://github.com/julz))
+- Implemented new garbage collector that allows for either time-based or min/max count bounds for automatic deletion of old revisions. [#8621](https://github.com/knative/serving/pull/8621) (thanks [@whaught](https://github.com/whaught))
     - To enable this a new v2 Labeler populates RoutingState and RoutingStateModified annotations on Revisions
-- PodSpec DryRun also validates unparented (service-less) Configurations. [#8828](https://github.com/knative/serving/pull/8828) (thanks [@whaught](https://github.com/whaught)
-- Users can specify the size of the initial deployment with both cluster-wide flag initial-scale, and annotation "autoscaling.internal.knative.dev/initialScale". Cluster-wide flag allow-zero-initial-scale controls whether the cluster-wide and revision initial scale can be zero. [#8846](https://github.com/knative/serving/pull/8846), (thanks [@taragu](https://github.com/taragu)
-- When enabled, the ResponsiveGC feature flag disables lastPinned annotation timestamp refreshes [#8757](https://github.com/knative/serving/pull/8757) (thanks [@whaught](https://github.com/whaught)
-- Added a workaround so Knative will work on AKS 1.17+ [pkg#1592](https://github.com/knative/pkg/pull/1592) (thanks [@n3wscott](https://github.com/n3wscott)
-- Webhooks now drain for longer when shutting down [pkg#1517](https://github.com/knative/pkg/pull/1517) (thanks [@mattmoor](https://github.com/mattmoor)
+- PodSpec DryRun also validates unparented (service-less) Configurations. [#8828](https://github.com/knative/serving/pull/8828) (thanks [@whaught](https://github.com/whaught))
+- Users can specify the size of the initial deployment with both cluster-wide flag initial-scale, and annotation "autoscaling.internal.knative.dev/initialScale". Cluster-wide flag allow-zero-initial-scale controls whether the cluster-wide and revision initial scale can be zero. [#8846](https://github.com/knative/serving/pull/8846), (thanks [@taragu](https://github.com/taragu))
+- When enabled, the ResponsiveGC feature flag disables lastPinned annotation timestamp refreshes [#8757](https://github.com/knative/serving/pull/8757) (thanks [@whaught](https://github.com/whaught))
+- Added a workaround so Knative will work on AKS 1.17+ [pkg#1592](https://github.com/knative/pkg/pull/1592) (thanks [@n3wscott](https://github.com/n3wscott))
+- Webhooks now drain for longer when shutting down [pkg#1517](https://github.com/knative/pkg/pull/1517) (thanks [@mattmoor](https://github.com/mattmoor))
 </details>
 
 <details><summary>Networking</summary>
 
-- Net-contour is moved to Beta stage [#2737](https://github.com/knative/serving/pull/2737) (thanks [@mattmoor](https://github.com/mattmoor)
-- Net-kourier is moved to Beta stage [#2738](https://github.com/knative/serving/pull/2738) (thanks [@mattmoor](https://github.com/mattmoor)
-- The default Kingress timeout is increased to 48 hours to prevent gRPC stream timeout [#8965](https://github.com/knative/serving/pull/8965) (thanks [@tcnghia](https://github.com/tcnghia)
-- Code in knative/serving/pkg/network is completely moved to knative/networking repo (thanks [@tcnghia](https://github.com/tcnghia)
-- Placeholder service's labels and annotations are propagated from Route. [#8798](https://github.com/knative/serving/pull/8798) (thanks [@nak3](https://github.com/nak3)
+- Net-contour is moved to Beta stage [#2737](https://github.com/knative/serving/pull/2737) (thanks [@mattmoor](https://github.com/mattmoor))
+- Net-kourier is moved to Beta stage [#2738](https://github.com/knative/serving/pull/2738) (thanks [@mattmoor](https://github.com/mattmoor))
+- The default Kingress timeout is increased to 48 hours to prevent gRPC stream timeout [#8965](https://github.com/knative/serving/pull/8965) (thanks [@tcnghia](https://github.com/tcnghia))
+- Code in knative/serving/pkg/network is completely moved to knative/networking repo (thanks [@tcnghia](https://github.com/tcnghia))
+- Placeholder service's labels and annotations are propagated from Route. [#8798](https://github.com/knative/serving/pull/8798) (thanks [@nak3](https://github.com/nak3))
 - When auto TLS is enabled, now net-istio controller generates Istio TLS Gateway per Kingress instead of reconciling the knative-ingress-gateway Gateway [knative-sandbox/net-istio#170](https://github.com/knative-sandbox/net-istio/pull/170) (thanks [@ZhiminXiang](https://github.com/ZhiminXiang)
-- Kingress (net-istio) introduces RewriteHost feature [knative-sandbox/net-istio#174](https://github.com/knative-sandbox/net-istio/pull/174) (thanks [@julz](https://github.com/julz)
-- Kingress prober improvement for net-istio: probing a single host instead of every host to improve the throughput of the prober queue [knative-sandbox/net-istio##190](https://github.com/knative-sandbox/net-istio/pull/190) (thanks [@JRBANCEL](https://github.com/JRBANCEL)
+- Kingress (net-istio) introduces RewriteHost feature [knative-sandbox/net-istio#174](https://github.com/knative-sandbox/net-istio/pull/174) (thanks [@julz](https://github.com/julz))
+- Kingress prober improvement for net-istio: probing a single host instead of every host to improve the throughput of the prober queue [knative-sandbox/net-istio##190](https://github.com/knative-sandbox/net-istio/pull/190) (thanks [@JRBANCEL](https://github.com/JRBANCEL))
 </details>
 
 ### [Eventing v0.17](https://github.com/knative/eventing/releases/tag/v0.17.2)
