@@ -29,15 +29,13 @@ If user wants to update code, dockerfile or service yaml they can follow below s
    code creates a basic web server which listens on port 8881:
 
    ```go
-   package main
-   
+   package main   
    import (
    	"fmt"
    	"io/ioutil"
    	"log"
    	"net/http"
    )
-   
    func handler(w http.ResponseWriter, r *http.Request) {
    	log.Println("serving container received a request.")
    	res, err := http.Get("http://127.0.0.1:8882")
@@ -50,14 +48,12 @@ If user wants to update code, dockerfile or service yaml they can follow below s
    	}
    	fmt.Fprintln(w, string(resp))
    }
-   
    func main() {
    	log.Print("serving container started...")
    	http.HandleFunc("/", handler)
    	log.Fatal(http.ListenAndServe(":8881", nil))
    }
    ```
-
 1. In your project directory, update a file named `Dockerfile` and copy the code
    block below into it. For detailed instructions on dockerizing a Go app, see
    [Deploying Go servers with Docker](https://blog.golang.org/docker).
@@ -104,18 +100,15 @@ If user wants to update code, dockerfile or service yaml they can follow below s
 
    ```go
    package main
-   
    import (
    	"fmt"
    	"log"
    	"net/http"
    )
-   
    func handler(w http.ResponseWriter, r *http.Request) {
    	log.Println("sidecar container received a request.")
    	fmt.Fprintln(w, "Yay!! multi-container works")
    }
-   
    func main() {
    	log.Print("sidecar container started...")
    	http.HandleFunc("/", handler)
