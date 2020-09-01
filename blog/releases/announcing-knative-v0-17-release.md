@@ -11,8 +11,11 @@ image: knative-eventing.png
 ## Announcing Knative v0.17 Release
 
 A new version of Knative is now available across multiple components.
-Serving continues their journey with test and benchmark optimizations on the already v1 API version.
-Eventing now provides ContainerSource and PingSource as v1beta1.
+Follow the instructions in the documentation [Installing Knative](https://knative.dev/docs/install/) for the respective component.
+- Serving continues their journey with test and benchmark optimizations on the already v1 API version.
+- Eventing now provides ContainerSource and PingSource as v1beta1.
+- `kn` CLI continues the journey to full Eventing support adding Channel resources.
+- Operator adds support of customized manifests for Knative installation.
 
 Remember to check the [upgrade docs](https://knative.dev/docs/install/upgrade-installation/) for any concerns applicable to your current version before you upgrade to the latest version.
 
@@ -160,7 +163,7 @@ This release adds full support for managing Channel resources [#967](https://git
 **Plugin Inline Support**
 
 - [#902](https://github.com/knative/client/pull/902) It is possible now to create custom variations of kn that can inline golang based plugins into a single binary. See the [plugin README](https://github.com/knative/client/tree/master/docs/plugins#plugin-inlining) for a brief explanation about the mechanics. More documentation and examples pending.
-- It is important to note, that kn as released from the [client repository](https://github.com/knative/client) will not inline any plugins. It just provides the hooks for enabling plugin inlining.
+    - It is important to note, that kn as released from the [client repository](https://github.com/knative/client) will not inline any plugins. It just provides the hooks for enabling plugin inlining.
 
 <details><summary>New Features</summary>
 
@@ -188,9 +191,30 @@ This release adds full support for managing Channel resources [#967](https://git
 </details>
 
 
-### Operator
+### Operator v0.17
 
-TODO: check when is the operator 0.17 release cut
+
+This new version of the Operator enables the support of customized manifests for Knative installation. The field `spec.manifests` is introduced in the operator CRD's to specify the links of Knative component to install. This field is usually used together with the field `spec.version`.
+
+<details><summary>Bug Fixes</summary>
+
+- [#236](https://github.com/knative/operator/pull/236) Adding istio ignore annotation transformer for jobs (thanks [@AceHack](https://github.com/AceHack))
+- [#224](https://github.com/knative/operator/pull/224) Update to latest manifestival to fix an issue on CRD/v1 transformer (thanks [@jimoosciuc](https://github.com/jimoosciuc)])
+- [#147](https://github.com/knative/operator/pull/147) Add the support to specify customized yamls (thanks [@houshengbo](https://github.com/houshengbo))
+- [#246](https://github.com/knative/operator/pull/246) Validate whether spec.version matches the version of manifests (thanks [@houshengbo](https://github.com/houshengbo))
+- [#255](https://github.com/knative/operator/pull/255) `sinkBindingSelectionMode` in CR spec (thanks [@aliok](https://github.com/aliok))
+
+</details>
+
+<details><summary>Other Changes</summary>
+
+- [#220](https://github.com/knative/operator/pull/220) Make clear that deployments are not the only override-able container (thanks [@jcrossley3](https://github.com/jcrossley3))
+- [#211](https://github.com/knative/operator/pull/211) Assorted linting fixes (thanks [@markusthoemmes](https://github.com/markusthoemmes))
+- [#235](https://github.com/knative/operator/pull/235) Add the postdowngrade tests (thanks [@houshengbo](https://github.com/houshengbo))
+- [#257](https://github.com/knative/operator/pull/257) Add the label operator.knative.dev/release into the operator resource for release (thanks [@houshengbo](https://github.com/houshengbo))
+
+</details>
+
 
 ### Learn more
 Knative is an open source project that anyone in the [community](https://knative.dev/community/) can use, improve, and enjoy. We'd love you to join us!
