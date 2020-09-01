@@ -167,15 +167,15 @@ This release adds full support for managing Channel resources [#967](https://git
 
 <details><summary>New Features</summary>
 
-- [#980](https://github.com/knative/client/pull/980) kn source list use now an own list type for heterogeneous lists 
+- [#980](https://github.com/knative/client/pull/980) kn source list use now an own list type for heterogeneous lists
 - [#951](https://github.com/knative/client/pull/951) NAMESPACE header column has been added to kn source list -A
-- [#937](https://github.com/knative/client/pull/937) Add support to combine kn service create --filename with other options 
+- [#937](https://github.com/knative/client/pull/937) Add support to combine kn service create --filename with other options
 
 </details>
 
 <details><summary>Bug Fixes</summary>
 
-- [#975](https://github.com/knative/client/pull/975) Client side volume name generation has been fixed 
+- [#975](https://github.com/knative/client/pull/975) Client side volume name generation has been fixed
 - [#948](https://github.com/knative/client/pull/948) List only built-in sources if access to CRDs is restricted
 
 </details>
