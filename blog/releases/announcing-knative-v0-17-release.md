@@ -156,11 +156,11 @@ TODO: check when is the operator 0.17 release cut
 ### Learn more
 Knative is an open source project that anyone in the [community](https://knative.dev/community/) can use, improve, and enjoy. We'd love you to join us!
 
-- [Welcome to Knative](https://www.knative.dev/docs#welcome-to-knative)
-- [Getting started documentation](https://www.knative.dev/docs#documentation)
-- [Samples and demos](https://www.knative.dev/docs#samples-and-demos)
-- [Knative meetings and work groups](https://www.knative.dev/contributing/#meetings-and-work-groups)
-- [Questions and issues](https://www.knative.dev/contributing/#questions-and-issues)
+- [Welcome to Knative](https://knative.dev/docs#welcome-to-knative)
+- [Getting started documentation](https://knative.dev/docs/#getting-started)
+- [Samples and demos](https://knative.dev/docs#samples-and-demos)
+- [Knative meetings and work groups](https://knative.dev/contributing/#working-group)
+- [Questions and issues](https://knative.dev/contributing/#questions-and-issues)
 - [Knative User Mailing List](https://groups.google.com/forum/#!forum/knative-users)
 - [Knative Development Mailing List](https://groups.google.com/forum/#!forum/knative-dev)
 - Knative on Twitter ([@KnativeProject](https://twitter.com/KnativeProject)
