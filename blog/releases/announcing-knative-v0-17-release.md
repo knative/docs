@@ -26,7 +26,7 @@ There is a new annotation that can be used to control the number of pods that ar
 In addition to net-istio, Knative now supports three other networking layers that are in Beta status.
 
 **Kubernetes minimum version has NOT changed**
-It remains **1.16**, but we may bump to 1.17 in the coming release depending on its availability for qualification testing (per our release principles).
+Kubernetes **1.16** remains as the minimum version.
 
 <details><summary>Autoscaling</summary>
 
