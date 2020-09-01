@@ -17,13 +17,13 @@ Eventing now provides ContainerSource and PingSource as v1beta1.
 Remember to check the [upgrade docs](https://knative.dev/docs/install/upgrade-installation/) for any concerns applicable to your current version before you upgrade to the latest version.
 
 
-### [Serving v0.17.1](https://github.com/knative/serving/releases/tag/v0.17.1)
+### [Serving v0.17](https://github.com/knative/serving/releases/tag/v0.17.2)
 
 **InitialScale annotation to control the initial deployment size**
 There is a new annotation that can be used to control the number of pods that are initially deployed when new Revisions are rolled out.
 
 **net-contour and net-kourier have moved to Beta**
-In addition to net-istio, we now have three networking layers that we classify as (at least) Beta.
+In addition to net-istio, Knative now supports three other networking layers that are in Beta status.
 
 **Kubernetes minimum version has NOT changed**
 It remains **1.16**, but we may bump to 1.17 in the coming release depending on its availability for qualification testing (per our release principles).
@@ -75,7 +75,7 @@ It remains **1.16**, but we may bump to 1.17 in the coming release depending on 
 - Kingress prober improvement for net-istio: probing a single host instead of every host to improve the throughput of the prober queue [knative-sandbox/net-istio##190](https://github.com/knative-sandbox/net-istio/pull/190) (thanks [@JRBANCEL](https://github.com/JRBANCEL)
 </details>
 
-### [Eventing v0.17.2](https://github.com/knative/eventing/releases/tag/v0.17.2)
+### [Eventing v0.17](https://github.com/knative/eventing/releases/tag/v0.17.2)
 
 **Action Required**
 - High availability is now enabled by default on control-plane components; it can be disabled with --disable-ha for now. ([#3564](https://github.com/knative/eventing/pull/3564), [@mattmoor](https://github.com/mattmoor)
