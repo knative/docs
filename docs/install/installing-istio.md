@@ -34,7 +34,7 @@ cover a few useful Istio configurations and their benefits.
 
 ### Choosing an Istio installation
 
-You can install Istio with or without sidecar proxies:
+You can install Istio with or without sidecar injection:
 
 - [Installing Istio without sidecar injection](#installing-istio-without-sidecar-injection)(Recommended
      default installation)
