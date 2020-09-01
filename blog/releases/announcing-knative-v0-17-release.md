@@ -2,7 +2,7 @@
 title: "Version v0.17 release"
 linkTitle: "Version 0.17 release"
 date: 2020-08-24
-description: "The Knative v0.17 release announcement"
+description: "Knative v0.17 release announcement"
 type: "blog"
 image: knative-eventing.png
 ---
