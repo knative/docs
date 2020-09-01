@@ -17,7 +17,7 @@ Eventing now provides ContainerSource and PingSource as v1beta1.
 Remember to check the [upgrade docs](https://knative.dev/docs/install/upgrade-installation/) for any concerns applicable to your current version before you upgrade to the latest version.
 
 
-### [Serving v0.17](https://github.com/knative/serving/releases/tag/v0.17.2)
+### Serving v0.17
 
 **InitialScale annotation to control the initial deployment size**
 
@@ -78,7 +78,7 @@ Kubernetes **1.16** remains as the minimum version.
 - Kingress prober improvement for net-istio: probing a single host instead of every host to improve the throughput of the prober queue [knative-sandbox/net-istio##190](https://github.com/knative-sandbox/net-istio/pull/190) (thanks [@JRBANCEL](https://github.com/JRBANCEL))
 </details>
 
-### [Eventing v0.17](https://github.com/knative/eventing/releases/tag/v0.17.2)
+### Eventing v0.17
 
 **Action Required**
 - High availability is now enabled by default on control-plane components; it can be disabled with --disable-ha for now. ([#3564](https://github.com/knative/eventing/pull/3564), [@mattmoor](https://github.com/mattmoor)
@@ -145,9 +145,48 @@ metadata:
 
 </details>
 
-### Client
+### Client v0.17
 
-TODO: check when is the kn cli 0.17 release cut
+CLI (Command Line Interface) continues the journey to full Eventing support and adds some additional goodies for this release.
+
+**Meta**
+
+The compile dependencies have been updated to Knative Serving 0.17.0 and Knative Eventing 0.17.0.
+
+**Eventing support**
+
+This release adds full support for managing Channel resources [#967](https://github.com/knative/client/pull/967). It allows you to specify the channel type during creation and also to add some mappings of GVK coordinates to symbolic names in your configuration.
+
+**Plugin Inline Support**
+
+- [#902](https://github.com/knative/client/pull/902) It is possible now to create custom variations of kn that can inline golang based plugins into a single binary. See the [plugin README](https://github.com/knative/client/tree/master/docs/plugins#plugin-inlining) for a brief explanation about the mechanics. More documentation and examples pending.
+- It is important to note, that kn as released from the [client repository](https://github.com/knative/client) will not inline any plugins. It just provides the hooks for enabling plugin inlining.
+
+<details><summary>New Features</summary>
+
+- [#980](https://github.com/knative/client/pull/980) kn source list use now an own list type for heterogeneous lists 
+- [#951](https://github.com/knative/client/pull/951) NAMESPACE header column has been added to kn source list -A
+- [#937](https://github.com/knative/client/pull/937) Add support to combine kn service create --filename with other options 
+
+</details>
+
+<details><summary>Bug Fixes</summary>
+
+- [#975](https://github.com/knative/client/pull/975) Client side volume name generation has been fixed 
+- [#948](https://github.com/knative/client/pull/948) List only built-in sources if access to CRDs is restricted
+
+</details>
+
+<details><summary>Other Changes</summary>
+
+- [#974](https://github.com/knative/client/pull/974) Build test images for e2e tests, add `.ko.yaml` specifying base image
+- [#972](https://github.com/knative/client/pull/972) Add mock test client for dynamic client
+- [#971](https://github.com/knative/client/pull/971) Fix exit code for `kn service delete` and `kn revision delete` failures
+- [#957](https://github.com/knative/client/pull/957) Allow the kn test image to be customized via environment variable
+- [#943](https://github.com/knative/client/pull/943) Separate PodSpecFlags from Service ConfigurationEditFlags
+
+</details>
+
 
 ### Operator
 
@@ -163,7 +202,7 @@ Knative is an open source project that anyone in the [community](https://knative
 - [Questions and issues](https://knative.dev/contributing/#questions-and-issues)
 - [Knative User Mailing List](https://groups.google.com/forum/#!forum/knative-users)
 - [Knative Development Mailing List](https://groups.google.com/forum/#!forum/knative-dev)
-- Knative on Twitter ([@KnativeProject](https://twitter.com/KnativeProject)
+- Knative on Twitter [@KnativeProject](https://twitter.com/KnativeProject)
 - Knative on [StackOverflow](https://stackoverflow.com/questions/tagged/knative)
 - Knative [Slack](https://slack.knative.dev)
 - Knative on [YouTube](https://www.youtube.com/channel/UCq7cipu-A1UHOkZ9fls1N8A)
