@@ -10,9 +10,11 @@ image: knative-eventing.png
 
 ## Announcing Knative v0.17 Release
 
-As Knative maintains its predictable release cadence, it's time to cut another stable release across components. Be aware for the next release we are planning to make Kubernetes 1.17 the minimum version. Serving continues their journey with test and benchmark optimizations on the already v1 API version. For Eventing now ContainerSource and PingSource are available as v1beta1.
+A new version of Knative is now available across multiple components.
+Serving continues their journey with test and benchmark optimizations on the already v1 API version.
+Eventing now provides ContainerSource and PingSource as v1beta1.
 
-Remember to check [the upgrade docs](https://knative.dev/docs/install/upgrade-installation/) for any upgrades concerns applicable to your current version before you upgrade to the new version v0.17
+Remember to check the [upgrade docs](https://knative.dev/docs/install/upgrade-installation/) for any concerns applicable to your current version before you upgrade to the latest version.
 
 
 ### [Serving v0.17.1](https://github.com/knative/serving/releases/tag/v0.17.1)
