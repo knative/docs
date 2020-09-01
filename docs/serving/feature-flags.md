@@ -66,3 +66,203 @@ An extension may surface details of a specific Knative implementation or feature
 
 ## GA
 * Allowed by default.
+
+# Available Flags
+
+## Multi Containers
+* **Type**: feature
+* **ConfigMap key:** `multi-container`
+
+This flag allows specifying multiple "user containers" in a Knative Service spec.
+Only one container can handle the requests. Knative picks the first container with a port specified.
+
+```yaml
+apiVersion: serving.knative.dev/v1
+kind: Service
+...
+spec:
+  template:
+    spec:
+      containers:
+        - name: first-container
+          image: gcr.io/knative-samples/helloworld-go
+          ports:
+            - containerPort: 8080
+        - name: second-container
+          image: gcr.io/knative-samples/helloworld-java
+```
+
+## Kubernetes Node Affinity
+* **Type**: extension
+* **ConfigMap key:** `kubernetes.podspec-affinity`
+
+This extension controls whether [node affinity](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity) can be specified.
+
+```yaml
+apiVersion: serving.knative.dev/v1
+kind: Service
+...
+spec:
+  template:
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/e2e-az-name
+                operator: In
+                values:
+                - e2e-az1
+                - e2e-az2
+```
+
+## Kubernetes Node Selector
+* **Type**: extension
+* **ConfigMap key:** `kubernetes.podspec-nodeselector`
+
+This flag controls whether [node selector](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector) can be specified.
+
+```yaml
+apiVersion: serving.knative.dev/v1
+kind: Service
+...
+spec:
+  template:
+    spec:
+      nodeSelector:
+        labelName: labelValue
+```
+
+## Kubernetes Toleration
+* **Type**: extension
+* **ConfigMap key:** `kubernetes.podspec-tolerations`
+
+This flag controls whether [node selector](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) can be specified.
+
+```yaml
+apiVersion: serving.knative.dev/v1
+kind: Service
+...
+spec:
+  template:
+    spec:
+      tolerations:
+      - key: "example-key"
+        operator: "Exists"
+        effect: "NoSchedule"
+```
+
+## Kubernetes FieldRef
+* **Type**: extension
+* **ConfigMap key:** `kubernetes.podspec-fieldref`
+
+This flag controls whether the [Downward API (env based)](https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/) can be specified.
+
+```yaml
+apiVersion: serving.knative.dev/v1
+kind: Service
+...
+spec:
+  template:
+    spec:
+      containers:
+        - name: user-container
+          image: gcr.io/knative-samples/helloworld-go
+          env:
+            - name: MY_NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+```
+
+## Kubernetes Dry Run
+* **Type**: extension
+* **ConfigMap key:** `kubernetes.podspec-dryrun`
+
+This flag controls whether Knative will try to validate the Pod spec derived from the Knative Service spec using the Kubernetes API server before accepting the object.
+
+When "enabled", the server will always run the extra validation.
+When "allowed", the server will not run the dry-run validation by default.
+However, clients may enable the behavior on an individual Service by
+attaching the following metadata annotation: "features.knative.dev/podspec-dryrun":"enabled".
+
+```yaml
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  annotations: features.knative.dev/podspec-dryrun":"enabled
+...
+spec:
+  template:
+    spec:
+    ...
+```
+
+## Kubernetes Runtime Class
+* **Type**: extension
+* **ConfigMap key:** `kubernetes.podspec-runtimeclass`
+
+This flag controls whether the [runtime class](https://kubernetes.io/docs/concepts/containers/runtime-class/) can be used or not.
+
+```yaml
+apiVersion: serving.knative.dev/v1
+kind: Service
+...
+spec:
+  template:
+    spec:
+      runtimeClassName: myclass
+      ...
+```
+
+## Kubernetes Security Context
+* **Type**: extension
+* **ConfigMap key:** `kubernetes.podspec-securitycontext`
+
+This flag controls whether a subset of the [security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) can be used.
+
+When set to "enabled" or "allowed" it allows the following
+PodSecurityContext properties:
+- FSGroup
+- RunAsGroup
+- RunAsNonRoot
+- SupplementalGroups
+- RunAsUser
+
+When set to "enabled" or "allowed" it allows the following
+Container SecurityContext properties:
+- RunAsNonRoot
+- RunAsGroup
+- RunAsUser (already allowed without this flag)
+
+This flag should be used with caution as the PodSecurityContext
+properties may have a side-effect on non-user sidecar containers that come
+from Knative or your service mesh
+
+```yaml
+apiVersion: serving.knative.dev/v1
+kind: Service
+...
+spec:
+  template:
+    spec:
+      securityContext:
+        runAsUser: 1000
+        ...
+```
+
+## Responsive Revision Garbage Collector
+* **Type**: extension
+* **ConfigMap key:** `responsive-revision-gc`
+
+This flag controls whether new responsive garbage collection is enabled. This
+feature labels revisions in real-time as they become referenced and
+dereferenced by Routes. This allows us to reap revisions shortly after
+they are no longer active.
+
+## Tag Header Based Routing
+* **Type**: extension
+* **ConfigMap key:** `tag-header-based-routing`
+
+This flags controls whether [tag header based routing](https://knative.dev/development/serving/samples/tag-header-based-routing/) is enabled.
