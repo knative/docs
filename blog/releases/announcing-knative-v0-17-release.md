@@ -154,7 +154,7 @@ TODO: check when is the kn cli 0.17 release cut
 TODO: check when is the operator 0.17 release cut
 
 ### Learn more
-Knative is an open source project that anyone in the [community](https://knative.dev/community/) can use, improve, and enjoy. We'd love ❣ you to join us!
+Knative is an open source project that anyone in the [community](https://knative.dev/community/) can use, improve, and enjoy. We'd love you to join us!
 
 - [Welcome to Knative](https://www.knative.dev/docs#welcome-to-knative)
 - [Getting started documentation](https://www.knative.dev/docs#documentation)
