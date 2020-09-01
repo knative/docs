@@ -121,7 +121,7 @@ metadata:
   name: knative-serving
   namespace: knative-serving
 spec:
-  version: ma.mi.pa
+  version: {{spec.version}}
   manifests:
     - URL: https://github.com/knative/serving/releases/download/v${VERSION}/serving-core.yaml
     - URL: https://github.com/knative/serving/releases/download/v{VERSION}/serving-hpa.yaml
@@ -129,7 +129,7 @@ spec:
     - URL: https://github.com/knative/net-istio/releases/download/v0.17.0/net-istio.yaml
 ```
 
-The field `spec.version` is used to set the version of Knative Serving. Replace `ma.mi.pa` with the correct version number.
+The field `spec.version` is used to set the version of Knative Serving. Replace `{{spec.version}}` with the correct version number.
 The tag `${VERSION}` is automatically replaced with the version number from `spec.version` by the operator.
 
 The field `spec.manifests` is used to specify one or multiple URL links of Knative Serving component. Do not forget to
@@ -143,7 +143,7 @@ Put the manifest you want to apply first on the top.
 Knative Serving based your own requirements. As long as the manifests of customized Knative Serving are accessible to
 the operator, they can be installed.
 
-For example, the version of the customized Knative Serving is `ma.mi.pa`, and it is available at `https://my-serving/serving.yaml`.
+For example, the version of the customized Knative Serving is `{{spec.version}}`, and it is available at `https://my-serving/serving.yaml`.
 You choose `net-istio` as the ingress plugin, which is available at `https://my-net-istio/net-istio.yaml`.
 You can create the content of Serving CR as below:
 
@@ -159,7 +159,7 @@ metadata:
   name: knative-serving
   namespace: knative-serving
 spec:
-  version: ma.mi.pa
+  version: {{spec.version}}
   manifests:
     - URL: https://my-serving/serving.yaml
     - URL: https://my-net-istio/net-istio.yaml
@@ -235,7 +235,7 @@ If you do not specify a version by using spec.version, the operator defaults to 
 {{< /tab >}}
 
 {{% tab name="Install Future Knative Eventing" %}} You do not need to upgrade the operator to a newer version to install
-new releases of Knative Eventing. If Knative Eventing launches a new version, e.g. `ma.mi.pa`, you can install it by
+new releases of Knative Eventing. If Knative Eventing launches a new version, e.g. `{{spec.version}}`, you can install it by
 applying a YAML file containing the following:
 
 ```
@@ -250,13 +250,13 @@ metadata:
   name: knative-eventing
   namespace: knative-eventing
 spec:
-  version: ma.mi.pa
+  version: {{spec.version}}
   manifests:
     - URL: https://github.com/knative/eventing/releases/download/v${VERSION}/eventing.yaml
     - URL: https://github.com/knative/eventing/releases/download/v{VERSION}/eventing-post-install-jobs.yaml
 ```
 
-The field `spec.version` is used to set the version of Knative Eventing. Replace `ma.mi.pa` with the correct version number.
+The field `spec.version` is used to set the version of Knative Eventing. Replace `{{spec.version}}` with the correct version number.
 The tag `${VERSION}` is automatically replaced with the version number from `spec.version` by the operator.
 
 The field `spec.manifests` is used to specify one or multiple URL links of Knative Eventing component. Do not forget to
@@ -269,7 +269,7 @@ to apply first on the top.
 Knative Eventing based your own requirements. As long as the manifests of customized Knative Eventing are accessible to
 the operator, they can be installed.
 
-For example, the version of the customized Knative Eventing is `ma.mi.pa`, and it is available at `https://my-eventing/eventing.yaml`.
+For example, the version of the customized Knative Eventing is `{{spec.version}}`, and it is available at `https://my-eventing/eventing.yaml`.
 You can create the content of Eventing CR as below:
 
 ```
@@ -284,7 +284,7 @@ metadata:
   name: knative-eventing
   namespace: knative-eventing
 spec:
-  version: ma.mi.pa
+  version: {{spec.version}}
   manifests:
     - URL: https://my-eventing/eventing.yaml
 ```
