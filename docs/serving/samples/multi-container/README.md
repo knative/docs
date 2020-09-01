@@ -2,13 +2,13 @@ A simple web app written in Go that you can use for multi container testing.
 
 Follow the steps below to create the sample code and then deploy the app to your
 cluster. You can also download a working copy of the sample, by running the
-following commands:
+following command:
 
 ```shell
 git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
 ```
 
-## Before you begin
+## Prerequisites
 
 - A Kubernetes cluster with Knative installed and DNS configured. Follow the
   [installation instructions](../../../install/README.md) if you need to
@@ -19,10 +19,13 @@ git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
 
 ## Recreating the sample code
 
-Multi container has more than one container, For testing, we will create two containers, the serving container and sidecar container.
-### ServingContainer
+Multi container has more than one container. For testing, we will create two containers: a serving container and a sidecar container.
+The `multi-container` directory already exist with predefined code and dockerfile for serving and sidecar container with service yaml.
+If user wants to update code, dockerfile or service yaml they can follow below steps.
+
+### Serving Container
 1. `cd knative-docs/docs/serving/samples/multi-container/servingcontainer`
-1. Create a new file named `servingcontainer.go` and paste the following code. This
+1. Update a file named `servingcontainer.go` and copy the code block below into it. This
    code creates a basic web server which listens on port 8881:
 
    ```go
@@ -55,7 +58,7 @@ Multi container has more than one container, For testing, we will create two con
    }
    ```
 
-1. In your project directory, create a file named `Dockerfile` and copy the code
+1. In your project directory, update a file named `Dockerfile` and copy the code
    block below into it. For detailed instructions on dockerizing a Go app, see
    [Deploying Go servers with Docker](https://blog.golang.org/docker).
 
@@ -93,12 +96,10 @@ Multi container has more than one container, For testing, we will create two con
    CMD ["/servingcontainer"]
    ```
 
-### SidecarContainer
-1. ```shell
-   cd -
-   cd knative-docs/docs/serving/samples/multi-container/sidecarcontainer
-   ```
-1. Create a new file named `sidecarcontainer.go` and paste the following code. This
+### Sidecar Container
+1. Navigate to cloned code directory `cd -`
+1. `cd knative-docs/docs/serving/samples/multi-container/sidecarcontainer`
+1. Update a file named `sidecarcontainer.go` and copy the code block below into it. This
    code creates a basic web server which listens on port 8882:
 
    ```go
@@ -122,7 +123,7 @@ Multi container has more than one container, For testing, we will create two con
    }
    ```
 
-1. In your project directory, create a file named `Dockerfile` and copy the code
+1. In your project directory, update a file named `Dockerfile` and copy the code
    block below into it. For detailed instructions on dockerizing a Go app, see
    [Deploying Go servers with Docker](https://blog.golang.org/docker).
 
@@ -160,14 +161,13 @@ Multi container has more than one container, For testing, we will create two con
    CMD ["/sidecarcontainer"]
    ```
 
-Go to multi-conatiner directory
+### Writing Knative Service YAML
 
-  ```shell
-  cd - 
-  cd knative-docs/docs/serving/samples/multi-container/
-  ```
+1. Go to multi-container directory where `service.yaml` already exist
+   1. `cd -`
+   2. `cd knative-docs/docs/serving/samples/multi-container/`
 
-1. Create a new file, `service.yaml` and copy the following service definition
+1. Update a file, `service.yaml` and copy the following service definition
    into the file. Make sure to replace `{username}` with your Docker Hub
    username.
 
@@ -202,8 +202,8 @@ Go to multi-conatiner directory
 
 ## Building and deploying the sample
 
-Once you have recreated the sample code files (or used the files in the sample
-folder) you're ready to build and deploy the sample app.
+Once you have recreated the sample code files, or used the files in the sample
+folder, you're ready to build and deploy the sample app.
 
 1. Use Docker to build the sample code into a container. To build and push with
    Docker Hub, run these commands replacing `{username}` with your Docker Hub
@@ -224,7 +224,7 @@ folder) you're ready to build and deploy the sample app.
    docker push {username}/sidecarcontainer
    ```
 
-1. After the build has completed and the container is pushed to docker hub, you
+1. After the build has completed and the container is pushed to Docker Hub, you
    can deploy the app into your cluster. Ensure that the container image value
    in `service.yaml` matches the container you built in the previous step. Apply
    the configuration using `kubectl`:
