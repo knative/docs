@@ -166,25 +166,25 @@ This release adds full support for managing Channel resources [#967](https://git
 
 <details><summary>New Features</summary>
 
-- [#980](https://github.com/knative/client/pull/980) kn source list use now an own list type for heterogeneous lists (thanks [@]())
-- [#951](https://github.com/knative/client/pull/951) NAMESPACE header column has been added to kn source list -A (thanks [@]())
+- [#980](https://github.com/knative/client/pull/980) kn source list use now an own list type for heterogeneous lists (thanks [@navidshaikh](https://github.com/navidshaikh))
+- [#951](https://github.com/knative/client/pull/951) NAMESPACE header column has been added to kn source list -A (thanks [@Kaustubh-pande](https://github.com/Kaustubh-pande))
 - [#937](https://github.com/knative/client/pull/937) Add support to combine kn service create --filename with other options (thanks [@dsimansk](https://github.com/dsimansk))
 
 </details>
 
 <details><summary>Bug Fixes</summary>
 
-- [#975](https://github.com/knative/client/pull/975) Client side volume name generation has been fixed (thanks [@]())
+- [#975](https://github.com/knative/client/pull/975) Client side volume name generation has been fixed (thanks [@navidshaikh](https://github.com/navidshaikh))
 - [#948](https://github.com/knative/client/pull/948) List only built-in sources if access to CRDs is restricted (thanks [@navidshaikh](https://github.com/navidshaikh))
 
 </details>
 
 <details><summary>Other Changes</summary>
 
-- [#974](https://github.com/knative/client/pull/974) Build test images for e2e tests, add `.ko.yaml` specifying base image (thanks [@]())
-- [#972](https://github.com/knative/client/pull/972) Add mock test client for dynamic client (thanks [@]())
-- [#971](https://github.com/knative/client/pull/971) Fix exit code for `kn service delete` and `kn revision delete` failures (thanks [@]())
-- [#957](https://github.com/knative/client/pull/957) Allow the kn test image to be customized via environment variable (thanks [@]())
+- [#974](https://github.com/knative/client/pull/974) Build test images for e2e tests, add `.ko.yaml` specifying base image (thanks [@itsmurugappan](https://github.com/itsmurugappan))
+- [#972](https://github.com/knative/client/pull/972) Add mock test client for dynamic client (thanks [@priyshar01](https://github.com/priyshar01))
+- [#971](https://github.com/knative/client/pull/971) Fix exit code for `kn service delete` and `kn revision delete` failures (thanks [@hemanrnjn](https://github.com/hemanrnjn))
+- [#957](https://github.com/knative/client/pull/957) Allow the kn test image to be customized via environment variable (thanks [@mvinkler](https://github.com/mvinkler))
 - [#943](https://github.com/knative/client/pull/943) Separate PodSpecFlags from Service ConfigurationEditFlags (thanks [@daisy-ycguo](https://github.com/daisy-ycguo))
 
 </details>
