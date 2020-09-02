@@ -85,14 +85,14 @@ Kubernetes **1.16** remains as the minimum version.
 ### Eventing v0.17
 
 **Action Required**
-- [#3564](https://github.com/knative/eventing/pull/3564) High availability is now enabled by default on control-plane components; it can be disabled with --disable-ha for now. (thanks [@mattmoor](https://github.com/mattmoor)
+- [#3564](https://github.com/knative/eventing/pull/3564) High availability is now enabled by default on control-plane components; it can be disabled with --disable-ha for now. (thanks [@mattmoor](https://github.com/mattmoor))
     - You must manually delete the (previously scaled to 0) Deployment:
     ```yaml
     metadata:
     name: broker-controller
     namespace: knative-eventing
     ```
-- [#3547](https://github.com/knative/eventing/pull/3547) kubectl delete deployment -n knative-eventing broker-controller (thanks [@vaikas](https://github.com/vaikas)
+- [#3547](https://github.com/knative/eventing/pull/3547) kubectl delete deployment -n knative-eventing broker-controller (thanks [@vaikas](https://github.com/vaikas))
 
 
 <details><summary>New Features</summary>
@@ -157,7 +157,7 @@ The compile dependencies have been updated to Knative Serving 0.17.0 and Knative
 
 **Eventing support**
 
-This release adds full support for managing Channel resources [#967](https://github.com/knative/client/pull/967). It allows you to specify the channel type during creation and also to add some mappings of GVK coordinates to symbolic names in your configuration.
+- [#967](https://github.com/knative/client/pull/967) This release adds full support for managing Channel resources . It allows you to specify the channel type during creation and also to add some mappings of GVK coordinates to symbolic names in your configuration.
 
 **Plugin Inline Support**
 
