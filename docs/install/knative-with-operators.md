@@ -106,7 +106,7 @@ If you do not specify a version by using spec.version, the operator defaults to 
 {{< /tab >}}
 
 {{% tab name="Install Future Knative Serving" %}} You do not need to upgrade the operator to a newer version to install
-new releases of Knative Serving. If Knative Serving launches a new version, e.g. `ma.mi.pa`, you can install it by
+new releases of Knative Serving. If Knative Serving launches a new version, e.g. `{{spec.version}}`, you can install it by
 applying a YAML file containing the following:
 
 ```
@@ -124,8 +124,8 @@ spec:
   version: {{spec.version}}
   manifests:
     - URL: https://github.com/knative/serving/releases/download/v${VERSION}/serving-core.yaml
-    - URL: https://github.com/knative/serving/releases/download/v{VERSION}/serving-hpa.yaml
-    - URL: https://github.com/knative/serving/releases/download/v{VERSION}/serving-post-install-jobs.yaml
+    - URL: https://github.com/knative/serving/releases/download/v${VERSION}/serving-hpa.yaml
+    - URL: https://github.com/knative/serving/releases/download/v${VERSION}/serving-post-install-jobs.yaml
     - URL: https://github.com/knative/net-istio/releases/download/v0.17.0/net-istio.yaml
 ```
 
@@ -253,7 +253,7 @@ spec:
   version: {{spec.version}}
   manifests:
     - URL: https://github.com/knative/eventing/releases/download/v${VERSION}/eventing.yaml
-    - URL: https://github.com/knative/eventing/releases/download/v{VERSION}/eventing-post-install-jobs.yaml
+    - URL: https://github.com/knative/eventing/releases/download/v${VERSION}/eventing-post-install-jobs.yaml
 ```
 
 The field `spec.version` is used to set the version of Knative Eventing. Replace `{{spec.version}}` with the correct version number.
