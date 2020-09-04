@@ -147,6 +147,31 @@ Kubernetes **1.16** remains as the minimum version.
 
 </details>
 
+### Eventing Contributions v0.17
+
+Eventing Contributions include source and channels references implementations.
+Sources with v1beta1 APIs get improvements and bug fixes.
+
+<details><summary>New Features</summary>
+
+- [#1409](https://github.com/knative/eventing-contrib/pull/1409) Kafka Channel retries sending events (thanks [@pierDipi](https://github.com/pierDipi))
+
+</details>
+
+<details><summary>Bug Fixes</summary>
+
+- [#1155](https://github.com/knative/eventing-contrib/pull/1155) KafkaChannel now correctly implements tracing using eventing-wise tracing configuration from config-tracing ( thanks [@slinkydeveloper](https://github.com/slinkydeveloper))
+- [#1398](https://github.com/knative/eventing-contrib/pull/1398) KafkaChannel conversion v1beta1<>v1alpha1 is fixed (thanks [@aliok](https://github.com/aliok))
+
+</details>
+
+<details><summary>Other Changes</summary>
+
+- [#1407](https://github.com/knative/eventing-contrib/pull/1407) Reconcile KafkaChannel using v1beta1 api shape. Operate on dependent resources (Subscriptions, etc.) using their v1 shapes. (thanks [@aliok](https://github.com/aliok))
+- [#1405](https://github.com/knative/eventing-contrib/pull/1405) Reconcile KafkaSource and KafkaBinding using v1beta1 API shape. Operate on dependent resources (Subscriptions, etc.) using their v1 shapes. Note that `resource` and `serviceAccountName` fields are removed from the types in v1beta1. (thanks [@aliok](https://github.com/aliok))
+
+</details>
+
 ### Client v0.17
 
 CLI (Command Line Interface) continues the journey to full Eventing support and adds some additional goodies for this release.
