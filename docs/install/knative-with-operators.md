@@ -12,7 +12,7 @@ Knative using Knative operator.
 
 Knative installation using the Operator requires the following:
 
-- A Kubernetes cluster v1.15 or newer, as well as a compatible kubectl. This guide assumes that you've already created
+- A Kubernetes cluster v1.16 or newer, as well as a compatible kubectl. This guide assumes that you've already created
 a Kubernetes cluster. If you have only one node for your cluster, set CPUs to at least 6, Memory to at least 6.0 GB,
 Disk storage to at least 30 GB. If you have multiple nodes for your cluster, set CPUs to at least 2, Memory to at least
 4.0 GB, Disk storage to at least 20 GB for each node.
