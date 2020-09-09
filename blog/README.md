@@ -34,7 +34,7 @@ To submit a blog post, follow the steps below.
 
 #### Suitable content:
 - **Original content only**
-- Knative new feature releases and project updates
+- Knative [new feature releases and project updates](## Communicating new project releases)
 - Tutorials and demos [start a blog](https://github.com/knative/docs/pull/2511)
 - Use cases
 - Content that is specific to a vendor or platform about Knative installation and use
@@ -43,6 +43,10 @@ To submit a blog post, follow the steps below.
 - Blogs that do not address Knative in any way
 - Content that doesn't interact with Knative APIs or interfaces
 - Vendor pitches
+
+## Communicating new project releases
+**Scheduled releases (every 6 weeks).** Knative project has a release every 6 weeks, and we need your help communicating new changes to our community! If you would like to contribute a blogpost to the Knative blog, please consider writing about the latest changes to the project. Ideally, we should have a single blogpost for every release *number*, for example, 0.17; 0.18; 0.19. The title convention should be: *Version [version number] release - [date]*. Release blog contributors should write a summary of the changes, which can be organized by working groups if this makes sense, and select up to 3 highlights of the current release. 
+**Big changes to the project.** Big changes to the project require a deep dive blog that describe the new feature in detail and give examples of the new functionality.  
 
 ## Review Process
 
