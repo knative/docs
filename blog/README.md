@@ -45,7 +45,7 @@ To submit a blog post, follow the steps below.
 - Vendor pitches
 
 ## Communicating new project releases
-**Scheduled releases (every 6 weeks).** Knative project has a release every 6 weeks, and we need your help communicating new changes to our community! If you would like to contribute a blogpost to the Knative blog, please consider writing about the latest changes to the project. Ideally, we should have a single blogpost for every release *number*, for example, 0.17; 0.18; 0.19. The title convention should be: *Version [version number] release - [date]*. Release blog contributors should write a summary of the changes, which can be organized by working groups if this makes sense, and select up to 3 highlights of the current release. 
+**Scheduled releases:** The Knative project has a release every 6 weeks, and we need your help communicating new changes to our community! If you would like to contribute a blog post to the Knative blog, please consider writing about the latest changes to the project. Ideally, there should be a single blog post for every release version, for example, 0.17; 0.18; 0.19. The title convention should be: *Version [version number] release - [date]*. Release blog contributors should write a summary of the changes and select up to 3 highlights of the current release to write about.
 **Big changes to the project.** Big changes to the project require a deep dive blog that describe the new feature in detail and give examples of the new functionality.  
 
 ## Review Process
