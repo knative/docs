@@ -115,9 +115,9 @@ func TestDocSrc(t *testing.T) {
 		t.Fatalf("Failed reading config file %s: '%v'", configFile, err)
 	}
 
-	whitelist := test.GetWhitelistedLanguages()
+	allowed := test.GetAllowedLanguages()
 	for _, lc := range lcs.Languages {
-		if _, ok := whitelist[lc.Language]; len(whitelist) > 0 && !ok {
+		if _, ok := allowed[lc.Language]; len(allowed) > 0 && !ok {
 			continue
 		}
 		lc.UseDefaultIfNotProvided()

@@ -340,7 +340,7 @@ spec:
 
 ## High availability
 
-By default, Knative Serving runs a single instance of each controller. The `spec.high-availability` field allows you to configure the number of replicas for the following master-elected controllers: `controller`, `autoscaler-hpa`, `networking-istio`. This field also configures the `HorizontalPodAutoscaler` resources for the data plane (`activator`):
+By default, Knative Serving runs a single instance of each controller. The `spec.high-availability` field allows you to configure the number of replicas for the following leader-elected controllers: `controller`, `autoscaler-hpa`, `networking-istio`. This field also configures the `HorizontalPodAutoscaler` resources for the data plane (`activator`):
 
 The following configuration specifies a replica count of 3 for the controllers and a minimum of 3 activators (which may scale higher if needed):
 
