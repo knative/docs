@@ -9,7 +9,7 @@ well as receive adapter, which events can be viewed through a basic
 `event_display` Knative Service.
 
 Just want to see the code? The reference project is
-[https://github.com/knative/sample-source](https://github.com/knative/sample-source).
+[https://github.com/knative-sandbox/sample-source](https://github.com/knative-sandbox/sample-source).
 
 A variety of event sources are available in Knative [`eventing-contrib`](https://github.com/knative/eventing-contrib/) such as
 [`KafkaSource`](https://github.com/knative/eventing-contrib/tree/master/kafka/source),
@@ -45,7 +45,7 @@ You'll need these tools installed:
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) (optional)
 - [minikube](https://github.com/kubernetes/minikube) (optional)
 
-You're encouraged to clone the [sample source](https://github.com/knative/sample-source) and make changes there.
+You're encouraged to clone the [sample source](https://github.com/knative-sandbox/sample-source) and make changes there.
 
 ## Steps
 
