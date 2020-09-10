@@ -10,7 +10,7 @@ type: "docs"
 Start a minikube cluster.
 
 _If you already have a Kubernetes cluster running, you can skip this step. The
-cluster must be 1.15+_
+cluster must be 1.16+_
 
 ```sh
 minikube start
