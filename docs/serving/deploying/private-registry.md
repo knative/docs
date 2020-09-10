@@ -43,7 +43,7 @@ You need:
 
        Examples:
        - Google Container Registry: [https://gcr.io/](https://gcr.io/)
-       - DockerHub [https://index.docker.io/v1/](https://index.docker.io/v1/)
+       - DockerHub [https://docker.io/](https://docker.io/)
 
     * `[PRIVATE_REGISTRY_EMAIL]` is your email address that is associated with
       the private registry.
