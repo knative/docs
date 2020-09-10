@@ -34,7 +34,7 @@ type EnvironmentFlags struct {
 	DockerRepo  string // Docker repo (defaults to $KO_DOCKER_REPO)
 	EmitMetrics bool   // Emit metrics
 	Tag         string // Docker image tag
-	Languages   string // Whitelisted languages to run
+	Languages   string // Allowed languages to run
 }
 
 func initializeFlags() *EnvironmentFlags {
@@ -63,13 +63,13 @@ func ImagePath(name string) string {
 	return fmt.Sprintf("%s/%s:%s", Flags.DockerRepo, name, Flags.Tag)
 }
 
-// GetWhitelistedLanguages is a helper function to return a map of whitelisted languages based on Languages filter
-func GetWhitelistedLanguages() map[string]bool {
-	whitelist := make(map[string]bool)
+// GetAllowedLanguages is a helper function to return a map of allowed languages based on Languages filter
+func GetAllowedLanguages() map[string]bool {
+	allowed := make(map[string]bool)
 	if "" != Flags.Languages {
 		for _, l := range strings.Split(Flags.Languages, ",") {
-			whitelist[l] = true
+			allowed[l] = true
 		}
 	}
-	return whitelist
+	return allowed
 }

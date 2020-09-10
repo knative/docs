@@ -89,7 +89,7 @@ enough, or that the Kubernetes cluster is out of requested resources.
 
 A large gap between the requested pod count and the desired pod count indicates
 that the Knative Serving autoscaler is unable to communicate with the Kubernetes
-master to make the request.
+API to make the request.
 
 In the preceding example, the autoscaler requested 18 pods to optimally serve
 the traffic but was only granted 8 pods because the cluster is out of resources.
