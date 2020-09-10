@@ -291,9 +291,9 @@ checksum = "b585a98a234c46fc563103e9278c9391fde1f4e6850334da895d27edb9580f62"
 
 [[package]]
 name = "async-trait"
-version = "0.1.31"
+version = "0.1.36"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "26c4f3195085c36ea8d24d32b2f828d23296a9370a28aa39d111f6f16bef9f3b"
+checksum = "a265e3abeffdce30b2e26b7a11b222fe37c6067404001b434101457d0385eb92"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -453,15 +453,14 @@ dependencies = [
 
 [[package]]
 name = "cloudevents-sdk"
-version = "0.1.0"
+version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7a971dc6acd87980d58a5bab97f27dc62508bd0aa4fb057333d351c48304d556"
+checksum = "7c814591b300c224c5705c7579a4c80d68aa3472c0d9f0da8c20a74ce40b4bed"
 dependencies = [
  "base64 0.12.1",
  "chrono",
  "delegate",
  "hostname",
- "lazy_static",
  "serde",
  "serde-value",
  "serde_json",
@@ -473,30 +472,30 @@ dependencies = [
 
 [[package]]
 name = "cloudevents-sdk-actix-web"
-version = "0.1.0"
+version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "55ca203e31e58bb17bc857700a9ee696b2c599076d10896f14720b5db59071fb"
+checksum = "8d0b874f8f39a3c09b9d114c4d8e9976e23e95c1a9bce7842eca3b54ca13b413"
 dependencies = [
  "actix-rt",
  "actix-web",
+ "async-trait",
  "bytes",
  "cloudevents-sdk",
  "futures",
  "lazy_static",
- "serde_json",
 ]
 
 [[package]]
 name = "cloudevents-sdk-reqwest"
-version = "0.1.0"
+version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2f92f4beec5ec951c579a4a9f9d121d3936a5945242893ccc757d617f0c90f51"
+checksum = "99cd21a76c14f95331e162fcf6bbafb13d02c5fd5098c1c3e0424f9dddac929c"
 dependencies = [
+ "async-trait",
  "bytes",
  "cloudevents-sdk",
  "lazy_static",
  "reqwest",
- "serde_json",
 ]
 
 [[package]]
