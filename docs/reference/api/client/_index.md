@@ -1,7 +1,7 @@
 ---
 title: "Client (Kn)"
 linkTitle: "Client (Kn)"
-weight: 10
+weight: 30
 type: "docs"
 ---
 

@@ -2,6 +2,8 @@
 title: "Resources"
 weight: 10
 type: "docs"
+aliases:
+   - /docs/concepts/resources.md
 ---
 
 This page contains information about various tools and technologies that are
