@@ -63,31 +63,24 @@ If user wants to update code, dockerfile or service yaml they can follow below s
    # This is based on Debian and sets the GOPATH to /go.
    # https://hub.docker.com/_/golang
    FROM golang:1.13 as builder
-   
    # Create and change to the app directory.
    WORKDIR /app
-   
    # Retrieve application dependencies using go modules.
    # Allows container builds to reuse downloaded dependencies.
    COPY go.* ./
    RUN go mod download
-   
    # Copy local code to the container image.
    COPY . ./
-   
    # Build the binary.
    # -mod=readonly ensures immutable go.mod and go.sum in container builds.
    RUN CGO_ENABLED=0 GOOS=linux go build -mod=readonly -v -o servingcontainer
-   
    # Use the official Alpine image for a lean production container.
    # https://hub.docker.com/_/alpine
    # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
    FROM alpine:3
    RUN apk add --no-cache ca-certificates
-   
    # Copy the binary to the production image from the builder stage.
    COPY --from=builder /app/servingcontainer /servingcontainer
-   
    # Run the web service on container startup.
    CMD ["/servingcontainer"]
    ```
@@ -125,31 +118,24 @@ If user wants to update code, dockerfile or service yaml they can follow below s
    # This is based on Debian and sets the GOPATH to /go.
    # https://hub.docker.com/_/golang
    FROM golang:1.13 as builder
-   
    # Create and change to the app directory.
    WORKDIR /app
-   
    # Retrieve application dependencies using go modules.
    # Allows container builds to reuse downloaded dependencies.
    COPY go.* ./
    RUN go mod download
-   
    # Copy local code to the container image.
    COPY . ./
-   
    # Build the binary.
    # -mod=readonly ensures immutable go.mod and go.sum in container builds.
    RUN CGO_ENABLED=0 GOOS=linux go build -mod=readonly -v -o sidecarcontainer
-   
    # Use the official Alpine image for a lean production container.
    # https://hub.docker.com/_/alpine
    # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
    FROM alpine:3
-   RUN apk add --no-cache ca-certificates
-   
+   RUN apk add --no-cache ca-certificates   
    # Copy the binary to the production image from the builder stage.
-   COPY --from=builder /app/sidecarcontainer /sidecarcontainer
-   
+   COPY --from=builder /app/sidecarcontainer /sidecarcontainer   
    # Run the web service on container startup.
    CMD ["/sidecarcontainer"]
    ```
@@ -187,7 +173,6 @@ If user wants to update code, dockerfile or service yaml they can follow below s
    cd -
    cd knative-docs/docs/serving/samples/multi-container/servingcontainer
    go mod init github.com/knative/docs/docs/serving/samples/multi-container/servingcontainer
-   
    cd -
    cd knative-docs/docs/serving/samples/multi-container/sidecarcontainer
    go mod init github.com/knative/docs/docs/serving/samples/multi-container/sidecarcontainer
@@ -207,11 +192,9 @@ folder, you're ready to build and deploy the sample app.
    cd -
    cd knative-docs/docs/serving/samples/multi-container/servingcontainer
    docker build -t {username}/servingcontainer .
-   
    cd -
    cd knative-docs/docs/serving/samples/multi-container/sidecarcontainer
    docker build -t {username}/sidecarcontainer .
-
    # Push the container to docker registry
    docker push {username}/servingcontainer
    docker push {username}/sidecarcontainer
