@@ -135,7 +135,7 @@ The following commands install Ambassador and enable its Knative integration.
 
 {{% tab name="Contour" %}}
 
-{{% feature-state version="v0.17" state="beta" %}}
+{{% feature-state version="v0.18" state="stable" %}}
 
 The following commands install Contour and enable its Knative integration.
 
