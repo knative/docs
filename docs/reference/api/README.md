@@ -1,5 +1,3 @@
-# Knative API Reference documentation
-
 ## View the latest release
 
 The reference documentation for the latest release of the Knative is available
