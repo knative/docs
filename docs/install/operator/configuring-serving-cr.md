@@ -9,7 +9,7 @@ aliases:
 The Knative Serving operator can be configured with these options:
 
 - [Version Configuration](#version-configuration)
-- [Serving Configuration by ConfigMap](#serving-configuration-by-configMap)
+- [Serving Configuration by ConfigMap](#serving-configuration-by-configmap)
 - [Private repository and private secret](#private-repository-and-private-secrets)
 - [SSL certificate for controller](#ssl-certificate-for-controller)
 - [Knative ingress gateway](#configuration-of-knative-ingress-gateway)
