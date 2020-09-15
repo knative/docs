@@ -22,13 +22,19 @@ Notable features are:
 
 ## Installation
 
-1. Install the Kafka broker by entering the following command:
+1. Install the Kafka controller by entering the following command:
+
+    ```bash
+    kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-kafka-broker" file="eventing-kafka-controller.yaml" >}}
+    ```
+
+1. Install the Kafka Broker data plane by entering the following command:
 
     ```bash
     kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-kafka-broker" file="eventing-kafka-broker.yaml" >}}
     ```
 
-2. Verify that `kafka-broker-controller`, `kafka-broker-receiver` and `kafka-broker-dispatcher` are running,
+2. Verify that `kafka-controller`, `kafka-broker-receiver` and `kafka-broker-dispatcher` are running,
 by entering the following command:
 
     ```bash
@@ -41,7 +47,7 @@ by entering the following command:
     NAME                           READY   UP-TO-DATE   AVAILABLE   AGE
     eventing-controller            1/1     1            1           10s
     eventing-webhook               1/1     1            1           9s
-    kafka-broker-controller        1/1     1            1           3s
+    kafka-controller        1/1     1            1           3s
     kafka-broker-dispatcher        1/1     1            1           4s
     kafka-broker-receiver          1/1     1            1           5s
     ```
@@ -158,7 +164,7 @@ installation step:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: kafka-broker-config-logging
+  name: kafka-config-logging
   namespace: knative-eventing
 data:
   config.xml: |
@@ -174,14 +180,14 @@ data:
 
 To change the logging level to `DEBUG`, you need to: 
 
-1. Apply the following `kafka-broker-config-logging` `ConfigMap` or replace `level="INFO"` with `level="DEBUG"` to the
-`ConfigMap` `kafka-broker-config-logging`:
+1. Apply the following `kafka-config-logging` `ConfigMap` or replace `level="INFO"` with `level="DEBUG"` to the
+`ConfigMap` `kafka-config-logging`:
 
     ```yaml
     apiVersion: v1
     kind: ConfigMap
     metadata:
-      name: kafka-broker-config-logging
+      name: kafka-config-logging
       namespace: knative-eventing
     data:
       config.xml: |
