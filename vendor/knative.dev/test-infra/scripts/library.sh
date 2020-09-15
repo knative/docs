@@ -65,22 +65,6 @@ function abort() {
   exit 1
 }
 
-# Build a resource name based on $REPO_NAME, a suffix and $BUILD_NUMBER.
-# Restricts the name length to 40 chars (the limit for resource names in GCP).
-# Name will have the form $REPO_NAME-<PREFIX>$BUILD_NUMBER.
-# Parameters: $1 - name suffix
-function build_resource_name() {
-  local prefix=${REPO_NAME}-$1
-  local suffix=${BUILD_NUMBER}
-  # Restrict suffix length to 20 chars
-  if [[ -n "${suffix}" ]]; then
-    suffix=${suffix:${#suffix}<20?0:-20}
-  fi
-  local name="${prefix:0:20}${suffix}"
-  # Ensure name doesn't end with "-"
-  echo "${name%-}"
-}
-
 # Display a box banner.
 # Parameters: $1 - character to use for the box.
 #             $2 - banner message.
@@ -325,44 +309,6 @@ function dump_app_logs() {
     echo ">>> Pod: $pod"
     kubectl -n "$2" logs "$pod" --all-containers
   done
-}
-
-# Sets the given user as cluster admin.
-# Parameters: $1 - user
-#             $2 - cluster name
-#             $3 - cluster region
-#             $4 - cluster zone, optional
-function acquire_cluster_admin_role() {
-  echo "Acquiring cluster-admin role for user '$1'"
-  local geoflag="--region=$3"
-  [[ -n $4 ]] && geoflag="--zone=$3-$4"
-  # Get the password of the admin and use it, as the service account (or the user)
-  # might not have the necessary permission.
-  local password=$(gcloud --format="value(masterAuth.password)" \
-      container clusters describe $2 ${geoflag})
-  if [[ -n "${password}" ]]; then
-    # Cluster created with basic authentication
-    kubectl config set-credentials cluster-admin \
-        --username=admin --password=${password}
-  else
-    local cert=$(mktemp)
-    local key=$(mktemp)
-    echo "Certificate in ${cert}, key in ${key}"
-    gcloud --format="value(masterAuth.clientCertificate)" \
-      container clusters describe $2 ${geoflag} | base64 --decode > ${cert}
-    gcloud --format="value(masterAuth.clientKey)" \
-      container clusters describe $2 ${geoflag} | base64 --decode > ${key}
-    kubectl config set-credentials cluster-admin \
-      --client-certificate=${cert} --client-key=${key}
-  fi
-  kubectl config set-context $(kubectl config current-context) \
-      --user=cluster-admin
-  kubectl create clusterrolebinding cluster-admin-binding \
-      --clusterrole=cluster-admin \
-      --user=$1
-  # Reset back to the default account
-  gcloud container clusters get-credentials \
-      $2 ${geoflag} --project $(gcloud config get-value project)
 }
 
 # Run a command through tee and capture its output.
