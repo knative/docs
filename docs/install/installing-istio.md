@@ -93,7 +93,7 @@ spec:
               name: https
 EOF
 
-istioctl manifest install -f istio-minimal-operator.yaml
+istioctl install -f istio-minimal-operator.yaml
 ```
 
 #### Installing Istio with sidecar injection
