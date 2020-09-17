@@ -30,10 +30,9 @@ cd knative-docs/docs/serving/samples/cloudevents/cloudevents-nodejs
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
 
-## The sample code.
+## The Sample Code
 
-1. If you look in `index.js`, you will see two key functions for the
-   different modes of operation:
+In `index.js`, you will see two key functions for the different modes of operation:
 
    ```js
    const receiveAndSend = (cloudEvent, res) => {
@@ -47,7 +46,9 @@ cd knative-docs/docs/serving/samples/cloudevents/cloudevents-nodejs
    }
    ```
 
-1. If you look in `Dockerfile`, you will see how the dependencies are installed using npm.
+## Build and Deploy the Application
+
+In the `Dockerfile`, you will see how the dependencies are installed using npm.
   You can build and push this to your registry of choice via:
 
    ```shell
@@ -55,12 +56,23 @@ cd knative-docs/docs/serving/samples/cloudevents/cloudevents-nodejs
    docker push <image>
    ```
 
-1. If you look in `service.yaml`, take the `<image>` name above and insert it
-   into the `image:`.
+{{< tabs name="cloudevents_rust_deploy" default="kn" >}} {{% tab name="yaml" %}}
+
+To deploy the Knative service, look in `service.yaml` and replace `<registry/repository/image:tag>` with the image just created.
 
    ```shell
    kubectl apply -f service.yaml
    ```
+
+{{< /tab >}} {{% tab name="kn" %}}
+
+To deploy using the `kn` CLI:
+
+```shell
+kn service create cloudevents-nodejs --image=<image>
+```
+
+{{ /tab }}{{ /tabs }}
 
 ## Testing the sample
 
@@ -93,8 +105,22 @@ You will get back:
 
 ## Removing the sample app deployment
 
-To remove the sample app from your cluster, delete the service record:
+To remove the sample app from your cluster, delete the service.
+
+{{< tabs name="cloudevents_rust_delete" default="kn" >}} {{% tab name="yaml" %}}
+
+Run:
 
 ```shell
 kubectl delete --filename service.yaml
 ```
+
+{{< /tab >}} {{% tab name="kn" %}}
+
+Run:
+
+```shell
+kn service delete cloudevents-nodejs
+```
+
+{{ /tab }}{{ /tabs }}
