@@ -17,7 +17,7 @@
 source $(dirname $0)/../vendor/knative.dev/test-infra/scripts/e2e-tests.sh
 
 function install_istio() {
-  ISTIO_VERSION=$(curl https://raw.githubusercontent.com/knative-sandbox/net-istio/master/third_party/istio-stable)
+  ISTIO_VERSION=istio-stable
   echo ">> Bringing up Istio"
   echo ">> Running Istio CRD installer"
   kubectl apply -f "https://raw.githubusercontent.com/knative-sandbox/net-istio/master/third_party/${ISTIO_VERSION}/istio-crds.yaml" || return 1
