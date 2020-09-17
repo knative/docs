@@ -123,6 +123,7 @@ spec:
     defaults:
       container-concurrency: "50"
 ```
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Target utilization
