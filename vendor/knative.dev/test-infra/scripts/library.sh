@@ -69,12 +69,12 @@ function abort() {
 # Parameters: $1 - character to use for the box.
 #             $2 - banner message.
 function make_banner() {
-    local msg="$1$1$1$1 $2 $1$1$1$1"
-    local border="${msg//[-0-9A-Za-z _.,\/()\']/$1}"
-    echo -e "${border}\n${msg}\n${border}"
-    # TODO(adrcunha): Remove once logs have timestamps on Prow
-    # For details, see https://github.com/kubernetes/test-infra/issues/10100
-    echo -e "$1$1$1$1 $(TZ='America/Los_Angeles' date)\n${border}"
+  local msg="$1$1$1$1 $2 $1$1$1$1"
+  local border="${msg//[-0-9A-Za-z _.,\/()\']/$1}"
+  echo -e "${border}\n${msg}\n${border}"
+  # TODO(adrcunha): Remove once logs have timestamps on Prow
+  # For details, see https://github.com/kubernetes/test-infra/issues/10100
+  echo -e "$1$1$1$1 $(TZ='America/Los_Angeles' date)\n${border}"
 }
 
 # Simple header for logging purposes.
@@ -127,70 +127,20 @@ function wait_until_object_does_not_exist() {
 # Waits until all pods are running in the given namespace.
 # Parameters: $1 - namespace.
 function wait_until_pods_running() {
-  echo -n "Waiting until all pods in namespace $1 are up"
-  local failed_pod=""
-  for i in {1..150}; do  # timeout after 5 minutes
-    # List all pods. Ignore Terminating pods as those have either been replaced through
-    # a deployment or terminated on purpose (through chaosduck for example).
-    local pods="$(kubectl get pods --no-headers -n $1 2>/dev/null | grep -v Terminating)"
-    # All pods must be running (ignore ImagePull error to allow the pod to retry)
-    local not_running_pods=$(echo "${pods}" | grep -v Running | grep -v Completed | grep -v ErrImagePull | grep -v ImagePullBackOff)
-    if [[ -n "${pods}" ]] && [[ -z "${not_running_pods}" ]]; then
-      # All Pods are running or completed. Verify the containers on each Pod.
-      local all_ready=1
-      while read pod ; do
-        local status=(`echo -n ${pod} | cut -f2 -d' ' | tr '/' ' '`)
-        # Set this Pod as the failed_pod. If nothing is wrong with it, then after the checks, set
-        # failed_pod to the empty string.
-        failed_pod=$(echo -n "${pod}" | cut -f1 -d' ')
-        # All containers must be ready
-        [[ -z ${status[0]} ]] && all_ready=0 && break
-        [[ -z ${status[1]} ]] && all_ready=0 && break
-        [[ ${status[0]} -lt 1 ]] && all_ready=0 && break
-        [[ ${status[1]} -lt 1 ]] && all_ready=0 && break
-        [[ ${status[0]} -ne ${status[1]} ]] && all_ready=0 && break
-        # All the tests passed, this is not a failed pod.
-        failed_pod=""
-      done <<< "$(echo "${pods}" | grep -v Completed)"
-      if (( all_ready )); then
-        echo -e "\nAll pods are up:\n${pods}"
-        return 0
-      fi
-    elif [[ -n "${not_running_pods}" ]]; then
-      # At least one Pod is not running, just save the first one's name as the failed_pod.
-      failed_pod="$(echo "${not_running_pods}" | head -n 1 | cut -f1 -d' ')"
-    fi
-    echo -n "."
-    sleep 2
-  done
-  echo -e "\n\nERROR: timeout waiting for pods to come up\n${pods}"
-  if [[ -n "${failed_pod}" ]]; then
-    echo -e "\n\nFailed Pod (data in YAML format) - ${failed_pod}\n"
-    kubectl -n $1 get pods "${failed_pod}" -oyaml
-    echo -e "\n\nPod Logs\n"
-    kubectl -n $1 logs "${failed_pod}" --all-containers
+  echo "Waiting until all pods in namespace $1 are up"
+  kubectl wait pod --for=condition=Ready -n "$1" -l '!job-name' --timeout=5m || return 1
+  # Also wait for all the job pods to be completed.
+  # This is mainly for maintaining backward compatibility.
+  if [[ $(kubectl get jobs --ignore-not-found=true -n "$1") ]]; then
+    kubectl wait job --for=condition=Complete --all -n "$1" --timeout=5m || return 1
   fi
-  return 1
 }
 
 # Waits until all batch jobs complete in the given namespace.
 # Parameters: $1 - namespace.
 function wait_until_batch_job_complete() {
-  echo -n "Waiting until all batch jobs in namespace $1 run to completion."
-  for i in {1..150}; do  # timeout after 5 minutes
-    local jobs=$(kubectl get jobs -n $1 --no-headers \
-                 -ocustom-columns='n:{.metadata.name},c:{.spec.completions},s:{.status.succeeded}')
-    # All jobs must be complete
-    local not_complete=$(echo "${jobs}" | awk '{if ($2!=$3) print $0}' | wc -l)
-    if [[ ${not_complete} -eq 0 ]]; then
-      echo -e "\nAll jobs are complete:\n${jobs}"
-      return 0
-    fi
-    echo -n "."
-    sleep 2
-  done
-  echo -e "\n\nERROR: timeout waiting for jobs to complete\n${jobs}"
-  return 1
+  echo "Waiting until all batch jobs in namespace $1 run to completion."
+  kubectl wait job --for=condition=Complete --all -n "$1" --timeout=5m || return 1
 }
 
 # Waits until the given service has an external address (IP/hostname).
