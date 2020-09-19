@@ -201,7 +201,7 @@ folder) you're ready to build and deploy the sample app.
    Example:
 
    ```shell
-   NAME                URL
+   NAME                      URL
    helloworld-java-spring    http://helloworld-java-spring.default.1.2.3.4.xip.io
    ```
 
