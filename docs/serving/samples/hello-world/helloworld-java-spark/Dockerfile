@@ -16,9 +16,12 @@ RUN mvn package -DskipTests
 FROM openjdk:8-jre-alpine
 
 # Copy the jar to the production image from the builder stage.
-COPY --from=builder /app/target/helloworld-0.0.1-SNAPSHOT-jar-with-dependencies.jar /helloworld.jar
+COPY --from=builder /app/target/helloworld-0.0.1-SNAPSHOT-jar-with-dependencies.jar helloworld.jar
 
+ENV PORT 8080
+
+EXPOSE 8080
 
 # Run the web service on container startup.
-CMD ["java","-Dserver.port=${PORT}","-jar","/helloworld.jar"]
+CMD ["java","-jar","helloworld.jar"]
 
