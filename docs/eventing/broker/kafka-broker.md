@@ -47,7 +47,7 @@ by entering the following command:
     NAME                           READY   UP-TO-DATE   AVAILABLE   AGE
     eventing-controller            1/1     1            1           10s
     eventing-webhook               1/1     1            1           9s
-    kafka-controller        1/1     1            1           3s
+    kafka-controller               1/1     1            1           3s
     kafka-broker-dispatcher        1/1     1            1           4s
     kafka-broker-receiver          1/1     1            1           5s
     ```
