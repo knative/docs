@@ -56,7 +56,7 @@ In the `Dockerfile`, you will see how the dependencies are installed using npm.
    docker push <image>
    ```
 
-{{< tabs name="cloudevents_rust_deploy" default="kn" >}} {{% tab name="yaml" %}}
+{{< tabs name="cloudevents_nodejs_deploy" default="kn" >}} {{% tab name="yaml" %}}
 
 To deploy the Knative service, look in `service.yaml` and replace `<registry/repository/image:tag>` with the image just created.
 
@@ -107,7 +107,7 @@ You will get back:
 
 To remove the sample app from your cluster, delete the service.
 
-{{< tabs name="cloudevents_rust_delete" default="kn" >}} {{% tab name="yaml" %}}
+{{< tabs name="cloudevents_nodejs_delete" default="kn" >}} {{% tab name="yaml" %}}
 
 Run:
 
