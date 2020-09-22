@@ -133,7 +133,7 @@ folder) you're ready to build and deploy the sample app.
    ```
 ## Deploying
 
-1. After the build has completed and the container is pushed to docker hub, you
+1. After the build has completed and the container is pushed to Docker Hub, you
    can deploy the app into your cluster.
 
    {{< tabs name="helloworld_java_spring" default="kn" >}}
