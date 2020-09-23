@@ -1,6 +1,6 @@
 ---
-title: "Resources"
-weight: 10
+title: "Additional resources"
+weight: 100
 type: "docs"
 aliases:
    - /docs/concepts/resources
