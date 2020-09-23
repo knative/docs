@@ -69,6 +69,7 @@ kn source list
 [Heartbeat](https://github.com/Harwayne/auto-container-source/tree/master/heartbeat-source) | Proof of Concept | None | Uses an in-memory timer to produce events as the specified interval. Uses AutoContainerSource for underlying infrastructure.
 [Konnek](https://konnek.github.io/docs/#/) | Active Development | None | Retrieves events from cloud platforms (like AWS and GCP) and transforms them into CloudEvents for consumption in Knative.
 [K8s](https://github.com/Harwayne/auto-container-source/tree/master/k8s-event-source) | Proof of Concept | None | Brings Kubernetes cluster events into Knative. Uses AutoContainerSource for underlying infrastructure.
+[RedisSource](https://github.com/lionelvillard/eventing-redis/tree/master/source) | v1alpha1 | None | Brings Redis Stream into Knative.
 [VMware](https://github.com/vmware-tanzu/sources-for-knative/blob/master/pkg/apis/sources/v1alpha1/vspheresource_types.go) | Active Development | None | Brings [vSphere](https://www.vmware.com/products/vsphere.html) events into Knative.
 
 ## Additional resources
