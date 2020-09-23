@@ -92,7 +92,7 @@ about requesting changes in the `knative/docs` repo.
 
 ### Example
 
-<!--TODO: UPDATE THIX EXAMPLE VERSION-->
+<!--TODO: UPDATE THIS EXAMPLE VERSION-->
 To build a set of Knative API docs for v0.3, you can use the `v0.3.0` the tags
 from each of the Knative component repositories, like
 [Serving v0.3.0](https://github.com/knative/serving/tree/v0.3.0). If you want to
