@@ -1,5 +1,3 @@
-# Knative API Reference documentation
-
 ## View the latest release
 
 The reference documentation for the latest release of the Knative is available
@@ -16,7 +14,7 @@ The API source files are located at:
 ## Updating API Reference docs (for Knative maintainers)
 
 The Knative API reference documentation is manually generated using the
-[`gen-api-reference-docs.sh`](../../hack/) tool. If you need to generate a new
+[`gen-api-reference-docs.sh`](../../../hack/) tool. If you need to generate a new
 version of the API docs for a recent update or for a new release, you can use
 the following steps.
 
@@ -67,7 +65,7 @@ To generate a version of the API:
 
    ```
    cd hack
-   
+
    KNATIVE_SERVING_COMMIT=[commit_or_tag] \
    KNATIVE_EVENTING_COMMIT=[commit_or_tag] \
    KNATIVE_EVENTING_CONTRIB_COMMIT=[commit_or_tag] \
@@ -94,6 +92,7 @@ about requesting changes in the `knative/docs` repo.
 
 ### Example
 
+<!--TODO: UPDATE THIS EXAMPLE VERSION-->
 To build a set of Knative API docs for v0.3, you can use the `v0.3.0` the tags
 from each of the Knative component repositories, like
 [Serving v0.3.0](https://github.com/knative/serving/tree/v0.3.0). If you want to
