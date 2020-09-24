@@ -163,6 +163,8 @@ contribute before creating a PR.
 
 1. Cherrypicking - WIP (not an expert on this)
 
+1. Other Issues/Unsure - reach out in the #docs slack channel and someone will be happy to help out. 
+
 ### Putting your docs in the right place
 
 There are currently two general types of Knative docs, either contributor
