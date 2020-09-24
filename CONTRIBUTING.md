@@ -153,7 +153,7 @@ get it merged. You can also post in the `#docs` [Slack
 channel](https://knative.slack.com/) to get input on your ideas or find areas to
 contribute before creating a PR.
 
-## Common Troubleshooting issues 
+### Common Troubleshooting issues for PRs
 
 1. CLA fails even though you have signed a CLA. This can happen if someone accepts and commits suggestions due to the email address not matching the address on record for the CLA. 
 
