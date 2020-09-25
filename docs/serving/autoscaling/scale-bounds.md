@@ -158,4 +158,63 @@ spec:
 {{< /tab >}}
 {{< /tabs >}}
 
+## Scale Down Delay
+
+Scale Down Delay specifies a time window which must pass at reduced concurrency
+before a scale-down decision is applied. This can be useful, for example, to
+keep containers around for a configurable duration to avoid a cold start
+penalty if new requests come in. Unlike setting a Lower Bound, the revision
+will eventually be scaled down if reduced concurrency is maintained for the
+delay period.
+
+* **Global key:** `scale-down-delay`
+* **Per-revision annotation key:** `autoscaling.knative.dev/scaleDownDelay`
+* **Possible values:** Duration, `0s` <= value <= `1h`
+* **Default:** `0s` (no delay)
+
+**Example:**
+{{< tabs name="scale-down-delay" default="Per Revision" >}}
+{{% tab name="Per Revision" %}}
+```yaml
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: helloworld-go
+  namespace: default
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/scaleDownDelay: "15m"
+    spec:
+      containers:
+        - image: gcr.io/knative-samples/helloworld-go
+```
+{{< /tab >}}
+{{% tab name="Global (ConfigMap)" %}}
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-autoscaler
+  namespace: knative-serving
+data:
+  scale-down-delay: "15m"
+```
+{{< /tab >}}
+{{% tab name="Global (Operator)" %}}
+```yaml
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+spec:
+  config:
+    autoscaler:
+      scale-down-delay: "15m"
+```
+
+{{< /tab >}}
+{{< /tabs >}}
+
 ---
