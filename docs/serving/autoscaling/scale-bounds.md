@@ -163,7 +163,7 @@ spec:
 Scale Down Delay specifies a time window which must pass at reduced concurrency
 before a scale-down decision is applied. This can be useful, for example, to
 keep containers around for a configurable duration to avoid a cold start
-penalty if new requests come in. Unlike setting a Lower Bound, the revision
+penalty if new requests come in. Unlike setting a lower bound, the revision
 will eventually be scaled down if reduced concurrency is maintained for the
 delay period.
 
