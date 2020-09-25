@@ -48,7 +48,8 @@ spec:
 This value controls the maximum number of replicas that each revision should have.
 Knative will attempt to never have more than this number of replicas running, or in the process of being created, at any one point in time.
 
-If global key `max-scale-limit` is set, both global max scale and per-revision max scale annotation for new Revisions will be verified to not exceed it.
+If global key `max-scale-limit` is set, both global max scale and per-revision max scale annotation for new revisions will be verified to not exceed it.
+When `max-scale-limit` is set to a positive value, a revision with a max scale above that value (including 0, which means unlimited) is disallowed.
 
 * **Global key:** `max-scale`
 * **Per-revision annotation key:** `autoscaling.knative.dev/maxScale`
