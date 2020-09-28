@@ -3,7 +3,6 @@ You can configure load balancing on Knative to place the activator in the reques
 This guide explains how you can configure load balancing for your Knative system using the activator.
 
 ## Prerequisites
-- Ensure that load balancing using an ingress gateway (for example, Istio or Kourier) is not enabled.
 - Ensure that individual pod addressability is enabled.
 
 ## Activator pod selection
@@ -12,9 +11,9 @@ In general, the system will perform best if the number of existing pods is large
 Knative assigns a subset of activators for each revision, depending on the revision size. More revision pods will mean a greater number of activators for that revision. Activators are scaled horizontally, so there may be multiple activators in a deployment.
 
 The activator load balancing algorithm works as follows:
-- If concurrency is unlimited, the request is sent to a random pod.
-- If concurrency is set to a limited value, the activator will send the request to the first pod that has capacity.
-
+- If concurrency is unlimited, the request is sent to the better of two random choices.
+- If concurrency is set to a very low, limited value, the activator will send the request to the first pod that has capacity. Otherwise, if container concurrency is larger, requests will be balanced in a round robin fashion
+<!--TODO: Still think we need to better explain what's low vs a large value here-->
 For more information, see the documentation on [concurrency](../../serving/autoscaling/concurrency.md).
 
 ## Configuring target burst capacity
