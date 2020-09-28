@@ -319,3 +319,25 @@ be able to handle HTTPS traffic.
     ```
 
     Note that the URL will be **https** in this case.
+
+### Disable Auto TLS per service or route
+
+If you have Auto TLS enabled in your cluster, you can choose to disable Auto TLS for individual services or routes by adding the annotation `networking.knative.dev/disableAutoTLS: true`.
+
+Using the previous `autoscale-go` example:
+
+1. Edit the service using `kubectl edit service.serving.knative.dev/autoscale-go -n default` and add the annotation:
+```yaml
+ apiVersion: serving.knative.dev/v1
+ kind: Service
+ metadata:
+   annotations:
+    ...
+     networking.knative.dev/disableAutoTLS: "true"
+    ...
+```
+2. The service URL should now be **http**, indicating that AutoTLS is disabled:
+```
+NAME           URL                                          LATEST               AGE     CONDITIONS   READY   REASON
+autoscale-go   http://autoscale-go.default.1.arenault.dev   autoscale-go-dd42t   8m17s   3 OK / 3     True    
+```
