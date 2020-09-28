@@ -41,10 +41,7 @@ With a clear project scope, lightweight governance model, and clean lines of
 separation between pluggable components, the Knative project establishes an
 efficient contributor workflow.
 
-Knative is a diverse, open, and inclusive community. To get involved, see
-[CONTRIBUTING.md](https://github.com/knative/community/tree/master/CONTRIBUTING.md) and join the
-[Knative community](../community/).
-
+Knative is a diverse, open, and inclusive community.
 Your own path to becoming a Knative contributor can begin in any of the
 following components:
 
