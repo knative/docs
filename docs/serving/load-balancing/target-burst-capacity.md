@@ -70,7 +70,7 @@ spec:
 
 - If `autoscaling.knative.dev/targetBurstCapacity` is set to `0`, the activator is only added to the request path during scale from zero scenarios, and ingress load balancing will be applied.
 
-  **NOTE:** Ingress gateway load balancing requires additional configuration. For more information about load balancing using an ingress gateway, see the [Serving API](../../reference/serving-api.md) documentation.
+  **NOTE:** Ingress gateway load balancing requires additional configuration. For more information about load balancing using an ingress gateway, see the [Serving API](../../reference/api/serving.md) documentation.
 
 - If `autoscaling.knative.dev/targetBurstCapacity` is set to `-1`, the activator is always in the request path, regardless of the revision size.
 
