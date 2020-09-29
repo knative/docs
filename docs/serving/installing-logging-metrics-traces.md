@@ -5,7 +5,7 @@ weight: 40
 type: "docs"
 ---
 
-**DEPRECATED:** The monitoring tools released by Knative community are deprecated. Knative community will stop releasing them in a coming release.
+{{< feature-state version="v0.14" state="deprecated" >}}
 
 If you followed one of the
 [comprehensive install guides](../install/README.md#install-guides) or you
