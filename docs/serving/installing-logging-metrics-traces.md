@@ -5,6 +5,8 @@ weight: 40
 type: "docs"
 ---
 
+**DEPRECATED:** The monitoring tools released by Knative community are deprecated. Knative community will stop releasing them in a coming release.
+
 If you followed one of the
 [comprehensive install guides](../install/README.md#install-guides) or you
 performed a custom installation and included the `monitoring.yaml` file in your
@@ -14,6 +16,12 @@ can skip down to the
 
 If you have not yet installed any observability plugins, continue to the next
 sections to do so now.
+
+All observibility plugins require that you first install the core:
+
+```bash
+kubectl apply --filename {{< artifact repo="serving" file="monitoring-core.yaml" >}}
+```
 
 ## Metrics
 
