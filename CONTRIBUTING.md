@@ -92,9 +92,9 @@ There are a couple of different ways to get started with contributing to the Kna
   in the backlog.
 
 - Try out Knative and send us feedback. For example, run through the
-  [install guides](docs/install/) and then try
-  [Getting Started with Knative Serving](docs/serving/getting-started-knative-app.md)
-  or [Getting Started With Eventing](docs/eventing/getting-started.md).
+  [install guides](https://knative.dev/docs/install/) and then try
+  [Getting Started with Knative Serving](https://knative.dev/docs/serving/getting-started-knative-app/)
+  or [Getting Started With Eventing](https://knative.dev/docs/eventing/getting-started/).
 
   You should keep a
   [friction log](https://devrel.net/developer-experience/an-introduction-to-friction-logging)
