@@ -636,8 +636,8 @@ string
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1.Revision">Revision</a>, 
 <a href="#serving.knative.dev/v1beta1.Revision">Revision</a>, 
+<a href="#serving.knative.dev/v1.Revision">Revision</a>, 
 <a href="#serving.knative.dev/v1alpha1.RevisionSpec">RevisionSpec</a>, 
 <a href="#serving.knative.dev/v1.RevisionTemplateSpec">RevisionTemplateSpec</a>)
 </p>
@@ -933,8 +933,8 @@ revisions and configurations.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1.Route">Route</a>, 
-<a href="#serving.knative.dev/v1beta1.Route">Route</a>)
+<a href="#serving.knative.dev/v1beta1.Route">Route</a>, 
+<a href="#serving.knative.dev/v1.Route">Route</a>)
 </p>
 <p>
 <p>RouteStatus communicates the observed state of the Route (from the controller).</p>
@@ -1111,8 +1111,8 @@ defaults).</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1beta1.Service">Service</a>, 
-<a href="#serving.knative.dev/v1.Service">Service</a>)
+<a href="#serving.knative.dev/v1.Service">Service</a>, 
+<a href="#serving.knative.dev/v1beta1.Service">Service</a>)
 </p>
 <p>
 <p>ServiceStatus represents the Status stanza of the Service resource.</p>
