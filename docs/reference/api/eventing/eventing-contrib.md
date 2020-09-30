@@ -828,7 +828,7 @@ Resource Types:
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#bindings.knative.dev/v1alpha1.KafkaBindingSpec">KafkaBindingSpec</a>, 
+<a href="#bindings.knative.dev/v1alpha1.KafkaBindingSpec">KafkaBindingSpec</a>,
 <a href="#sources.knative.dev/v1alpha1.KafkaSourceSpec">KafkaSourceSpec</a>)
 </p>
 <p>
@@ -1202,7 +1202,7 @@ SecretValueFromSource
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#bindings.knative.dev/v1alpha1.KafkaSASLSpec">KafkaSASLSpec</a>, 
+<a href="#bindings.knative.dev/v1alpha1.KafkaSASLSpec">KafkaSASLSpec</a>,
 <a href="#bindings.knative.dev/v1alpha1.KafkaTLSSpec">KafkaTLSSpec</a>)
 </p>
 <p>
@@ -1242,7 +1242,7 @@ Resource Types:
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#bindings.knative.dev/v1beta1.KafkaBindingSpec">KafkaBindingSpec</a>, 
+<a href="#bindings.knative.dev/v1beta1.KafkaBindingSpec">KafkaBindingSpec</a>,
 <a href="#sources.knative.dev/v1beta1.KafkaSourceSpec">KafkaSourceSpec</a>)
 </p>
 <p>
@@ -1616,7 +1616,7 @@ SecretValueFromSource
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#bindings.knative.dev/v1beta1.KafkaSASLSpec">KafkaSASLSpec</a>, 
+<a href="#bindings.knative.dev/v1beta1.KafkaSASLSpec">KafkaSASLSpec</a>,
 <a href="#bindings.knative.dev/v1beta1.KafkaTLSSpec">KafkaTLSSpec</a>)
 </p>
 <p>

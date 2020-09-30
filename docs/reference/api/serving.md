@@ -466,8 +466,8 @@ ServiceStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1.Configuration">Configuration</a>, 
-<a href="#serving.knative.dev/v1beta1.Configuration">Configuration</a>, 
+<a href="#serving.knative.dev/v1.Configuration">Configuration</a>,
+<a href="#serving.knative.dev/v1beta1.Configuration">Configuration</a>,
 <a href="#serving.knative.dev/v1.ServiceSpec">ServiceSpec</a>)
 </p>
 <p>
@@ -501,7 +501,7 @@ RevisionTemplateSpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1.Configuration">Configuration</a>, 
+<a href="#serving.knative.dev/v1.Configuration">Configuration</a>,
 <a href="#serving.knative.dev/v1beta1.Configuration">Configuration</a>)
 </p>
 <p>
@@ -549,7 +549,7 @@ ConfigurationStatusFields
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1.ConfigurationStatus">ConfigurationStatus</a>, 
+<a href="#serving.knative.dev/v1.ConfigurationStatus">ConfigurationStatus</a>,
 <a href="#serving.knative.dev/v1.ServiceStatus">ServiceStatus</a>)
 </p>
 <p>
@@ -636,9 +636,9 @@ string
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1beta1.Revision">Revision</a>, 
-<a href="#serving.knative.dev/v1.Revision">Revision</a>, 
-<a href="#serving.knative.dev/v1alpha1.RevisionSpec">RevisionSpec</a>, 
+<a href="#serving.knative.dev/v1beta1.Revision">Revision</a>,
+<a href="#serving.knative.dev/v1.Revision">Revision</a>,
+<a href="#serving.knative.dev/v1alpha1.RevisionSpec">RevisionSpec</a>,
 <a href="#serving.knative.dev/v1.RevisionTemplateSpec">RevisionTemplateSpec</a>)
 </p>
 <p>
@@ -702,7 +702,7 @@ be provided.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1.Revision">Revision</a>, 
+<a href="#serving.knative.dev/v1.Revision">Revision</a>,
 <a href="#serving.knative.dev/v1beta1.Revision">Revision</a>)
 </p>
 <p>
@@ -897,8 +897,8 @@ be provided.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1.Route">Route</a>, 
-<a href="#serving.knative.dev/v1beta1.Route">Route</a>, 
+<a href="#serving.knative.dev/v1.Route">Route</a>,
+<a href="#serving.knative.dev/v1beta1.Route">Route</a>,
 <a href="#serving.knative.dev/v1.ServiceSpec">ServiceSpec</a>)
 </p>
 <p>
@@ -933,7 +933,7 @@ revisions and configurations.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1beta1.Route">Route</a>, 
+<a href="#serving.knative.dev/v1beta1.Route">Route</a>,
 <a href="#serving.knative.dev/v1.Route">Route</a>)
 </p>
 <p>
@@ -981,7 +981,7 @@ RouteStatusFields
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1.RouteStatus">RouteStatus</a>, 
+<a href="#serving.knative.dev/v1.RouteStatus">RouteStatus</a>,
 <a href="#serving.knative.dev/v1.ServiceStatus">ServiceStatus</a>)
 </p>
 <p>
@@ -1050,7 +1050,7 @@ LatestReadyRevisionName that we last observed.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1.Service">Service</a>, 
+<a href="#serving.knative.dev/v1.Service">Service</a>,
 <a href="#serving.knative.dev/v1beta1.Service">Service</a>)
 </p>
 <p>
@@ -1111,7 +1111,7 @@ defaults).</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1.Service">Service</a>, 
+<a href="#serving.knative.dev/v1.Service">Service</a>,
 <a href="#serving.knative.dev/v1beta1.Service">Service</a>)
 </p>
 <p>
@@ -1178,8 +1178,8 @@ specific to RouteStatus.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1.RouteSpec">RouteSpec</a>, 
-<a href="#serving.knative.dev/v1.RouteStatusFields">RouteStatusFields</a>, 
+<a href="#serving.knative.dev/v1.RouteSpec">RouteSpec</a>,
+<a href="#serving.knative.dev/v1.RouteStatusFields">RouteStatusFields</a>,
 <a href="#serving.knative.dev/v1alpha1.TrafficTarget">TrafficTarget</a>)
 </p>
 <p>
@@ -1947,10 +1947,10 @@ string
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1alpha1.Configuration">Configuration</a>, 
-<a href="#serving.knative.dev/v1alpha1.PinnedType">PinnedType</a>, 
-<a href="#serving.knative.dev/v1alpha1.ReleaseType">ReleaseType</a>, 
-<a href="#serving.knative.dev/v1alpha1.RunLatestType">RunLatestType</a>, 
+<a href="#serving.knative.dev/v1alpha1.Configuration">Configuration</a>,
+<a href="#serving.knative.dev/v1alpha1.PinnedType">PinnedType</a>,
+<a href="#serving.knative.dev/v1alpha1.ReleaseType">ReleaseType</a>,
+<a href="#serving.knative.dev/v1alpha1.RunLatestType">RunLatestType</a>,
 <a href="#serving.knative.dev/v1alpha1.ServiceSpec">ServiceSpec</a>)
 </p>
 <p>
@@ -2079,7 +2079,7 @@ ConfigurationStatusFields
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1alpha1.ConfigurationStatus">ConfigurationStatus</a>, 
+<a href="#serving.knative.dev/v1alpha1.ConfigurationStatus">ConfigurationStatus</a>,
 <a href="#serving.knative.dev/v1alpha1.ServiceStatus">ServiceStatus</a>)
 </p>
 <p>
@@ -2295,7 +2295,7 @@ come from a single configuration.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1alpha1.Revision">Revision</a>, 
+<a href="#serving.knative.dev/v1alpha1.Revision">Revision</a>,
 <a href="#serving.knative.dev/v1alpha1.RevisionTemplateSpec">RevisionTemplateSpec</a>)
 </p>
 <p>
@@ -2599,7 +2599,7 @@ environment:
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1alpha1.Route">Route</a>, 
+<a href="#serving.knative.dev/v1alpha1.Route">Route</a>,
 <a href="#serving.knative.dev/v1alpha1.ServiceSpec">ServiceSpec</a>)
 </p>
 <p>
@@ -2696,7 +2696,7 @@ RouteStatusFields
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1alpha1.RouteStatus">RouteStatus</a>, 
+<a href="#serving.knative.dev/v1alpha1.RouteStatus">RouteStatus</a>,
 <a href="#serving.knative.dev/v1alpha1.ServiceStatus">ServiceStatus</a>)
 </p>
 <p>
@@ -3018,7 +3018,7 @@ ConfigurationStatusFields
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1alpha1.RouteSpec">RouteSpec</a>, 
+<a href="#serving.knative.dev/v1alpha1.RouteSpec">RouteSpec</a>,
 <a href="#serving.knative.dev/v1alpha1.RouteStatusFields">RouteStatusFields</a>)
 </p>
 <p>

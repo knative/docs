@@ -85,6 +85,9 @@ To generate a version of the API:
 1. Copy the generated API files into the `docs/reference` directory of your
    knative/docs clone.
 
+1. The linter now fails for content with trailing whitespaces. Use a tool of your choice to 
+remove all trailing whitespace. For example, search for and remove: `\s+$`
+
 You can now perform the necessary steps to open a PR, complete a review, and
 merge the new API files into the appropriate branch of the `knative/docs` repo.
 See the [contributor flow](https://github.com/knative/community/blob/master/docs/DOCS-CONTRIBUTING.md) for details
@@ -92,19 +95,18 @@ about requesting changes in the `knative/docs` repo.
 
 ### Example
 
-<!--TODO: UPDATE THIS EXAMPLE VERSION-->
-To build a set of Knative API docs for v0.3, you can use the `v0.3.0` the tags
+To build a set of Knative API docs for v0.18, you can use the `v0.18.0` the tags
 from each of the Knative component repositories, like
-[Serving v0.3.0](https://github.com/knative/serving/tree/v0.3.0). If you want to
-use a commit for Serving v0.3.0, you would use
-[4d198d](https://github.com/knative/serving/commit/4d198db8756db2f8a3c228302a97fb3a216a9475).
+[Serving v0.18.0](https://github.com/knative/serving/tree/v0.18.0). If you want to
+use a commit for Serving v0.18.0, you would use
+[850b7c](https://github.com/knative/serving/commit/850b7cca7d7701b052420a030f2308d19938d45e).
 
 Using tags from each repo, you would run the following command to generate the
-v0.3.0 API source files:
+v0.18.0 API source files:
 
 ```
-KNATIVE_SERVING_COMMIT=v0.3.0 \
-KNATIVE_EVENTING_COMMIT=v0.3.0 \
-KNATIVE_EVENTING_CONTRIB_COMMIT=v0.3.0 \
+KNATIVE_SERVING_COMMIT=v0.18.0 \
+KNATIVE_EVENTING_COMMIT=v0.18.0 \
+KNATIVE_EVENTING_CONTRIB_COMMIT=v0.18.0 \
 ./gen-api-reference-docs.sh
 ```
