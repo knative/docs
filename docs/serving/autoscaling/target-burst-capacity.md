@@ -15,11 +15,11 @@ Target burst capacity can be configured using a combination of the following par
 
 * Setting the targeted concurrency limits for the revision. For more information, see the documentation on [concurrency](./concurrency.md).
 * Setting the target utilization parameters. For more information, see the documentation on [target utilization](./concurrency.md#target-utilization).
-* Setting the target burst capacity per revision.
+* Setting the target burst capacity.
 
-## Setting the target burst capacity per revision
+## Setting the target burst capacity
 
-* **Global key:** No global key.
+* **Global key:** `target-burst-capacity`
 * **Per-revision annotation key:** `autoscaling.knative.dev/targetBurstCapacity`
 * **Possible values:** float
 * **Default:** `70`
@@ -40,8 +40,30 @@ spec:
   template:
     metadata:
       annotations:
-        autoscaling.knative.dev/minScale: "2"
-        autoscaling.knative.dev/targetBurstCapacity: "70"
+        autoscaling.knative.dev/targetBurstCapacity: "150"
+```
+{{< /tab >}}
+{{% tab name="Global (ConfigMap)" %}}
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-autoscaler
+  namespace: knative-serving
+data:
+  target-burst-capacity: "150"
+```
+{{< /tab >}}
+{{% tab name="Global (Operator)" %}}
+```yaml
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+spec:
+  config:
+    autoscaler:
+      target-burst-capacity: "150"
 ```
 {{< /tab >}}
 {{< /tabs >}}
