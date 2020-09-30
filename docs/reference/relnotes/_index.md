@@ -3,6 +3,7 @@ title: "Knative Release Notes"
 linkTitle: "Release notes"
 weight: 10
 type: "docs"
+showlandingtoc: "false"
 ---
 
 For details about the Knative releases, see the following pages:
