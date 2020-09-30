@@ -1,6 +1,6 @@
 ---
 title: "Knative API Reference Documentation"
 linkTitle: "API"
-weight: 100
+weight: 50
 type: "docs"
 ---
