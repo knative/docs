@@ -85,8 +85,8 @@ To generate a version of the API:
 1. Copy the generated API files into the `docs/reference` directory of your
    knative/docs clone.
 
-1. The linter now fails for content with trailing whitespaces. Use a tool of your choice to 
-remove all trailing whitespace. For example, search for and remove: `\s+$`
+1. The linter now fails for content with trailing whitespaces. Use a tool of your choice to
+   remove all trailing whitespace. For example, search for and remove: `\s+$`
 
 You can now perform the necessary steps to open a PR, complete a review, and
 merge the new API files into the appropriate branch of the `knative/docs` repo.
