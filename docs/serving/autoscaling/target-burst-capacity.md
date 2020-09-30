@@ -21,8 +21,8 @@ Target burst capacity can be configured using a combination of the following par
 
 * **Global key:** `target-burst-capacity`
 * **Per-revision annotation key:** `autoscaling.knative.dev/targetBurstCapacity`
-* **Possible values:** float
-* **Default:** `70`
+* **Possible values:** float (`0` means the Activator is only in path when scaled to 0, `-1` means the Activator is always in path)
+* **Default:** `200`
 
 **Note:** If the activator is in the routing path, it will fully load all replicas up to `containerConcurrency`. It currently applies target utilization only on revision level.
 
@@ -40,7 +40,7 @@ spec:
   template:
     metadata:
       annotations:
-        autoscaling.knative.dev/targetBurstCapacity: "150"
+        autoscaling.knative.dev/targetBurstCapacity: "70"
 ```
 {{< /tab >}}
 {{% tab name="Global (ConfigMap)" %}}
@@ -51,7 +51,7 @@ metadata:
   name: config-autoscaler
   namespace: knative-serving
 data:
-  target-burst-capacity: "150"
+  target-burst-capacity: "70"
 ```
 {{< /tab >}}
 {{% tab name="Global (Operator)" %}}
@@ -63,7 +63,7 @@ metadata:
 spec:
   config:
     autoscaler:
-      target-burst-capacity: "150"
+      target-burst-capacity: "70"
 ```
 {{< /tab >}}
 {{< /tabs >}}
