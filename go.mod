@@ -19,7 +19,7 @@ require (
 	gopkg.in/go-playground/assert.v1 v1.2.1 // indirect
 	gopkg.in/go-playground/webhooks.v3 v3.13.0
 	gopkg.in/yaml.v2 v2.3.0
-	knative.dev/test-infra v0.0.0-20200928013644-9dea929019ff
+	knative.dev/test-infra v0.0.0-20200929224429-f46f815aa607
 )
 
 replace go.opencensus.io => go.opencensus.io v0.20.2
