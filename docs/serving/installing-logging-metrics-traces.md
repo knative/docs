@@ -17,7 +17,7 @@ can skip down to the
 If you have not yet installed any observability plugins, continue to the next
 sections to do so now.
 
-All observibility plugins require that you first install the core:
+All observability plugins require that you first install the core:
 
 ```bash
 kubectl apply --filename {{< artifact repo="serving" file="monitoring-core.yaml" >}}
