@@ -148,7 +148,7 @@ spec:
   subscriber:
     uri: http://zeebe-cloud-events-router.default.svc.cluster.local/message
 
----    
+---
 apiVersion: eventing.knative.dev/v1
 kind: Trigger
 metadata:
@@ -162,7 +162,7 @@ spec:
   subscriber:
     uri: http://zeebe-cloud-events-router.default.svc.cluster.local/message
 
----    
+---
 apiVersion: eventing.knative.dev/v1
 kind: Trigger
 metadata:
