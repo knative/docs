@@ -1,13 +1,5 @@
 A simple web app written in Go that you can use for multi container testing.
 
-Follow the steps below to create the sample code and then deploy the app to your
-cluster. You can also download a working copy of the sample, by running the
-following command:
-
-```shell
-git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
-```
-
 ## Prerequisites
 
 - A Kubernetes cluster with Knative installed and DNS configured. Follow the
@@ -17,16 +9,30 @@ git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
   and a Docker Hub account configured (we'll use it for a container registry).
 - Make sure multi-container flag is enabled as part of `config-features` configmap.
 
-## Recreating the sample code
+The following steps show how you can use the sample code and deploy the app to your
+cluster.
 
-Multi container has more than one container. For testing, we will create two containers: a serving container and a sidecar container.
-The `multi-container` directory already exist with predefined code and dockerfile for serving and sidecar container with service yaml.
-If user wants to update code, dockerfile or service yaml they can follow below steps.
+You can download a working copy of the sample, by entering the
+following command:
+
+```shell
+git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
+```
+
+## Using the sample code
+
+To test multi container functionality, you must create two containers: a serving container, and a sidecar container.
+
+The `multi-container` directory is provided in the sample code, and contains predefined code and dockerfiles for creating the containers.
+
+You can update the default files and YAML by using the steps outlined in this section.
 
 ### Serving Container
-1. `cd knative-docs/docs/serving/samples/multi-container/servingcontainer`
-1. Update a file named `servingcontainer.go` and copy the code block below into it. This
-   code creates a basic web server which listens on port 8881:
+1. After you have cloned the sample repository, navigate to the servingcontainer directory:
+
+   `cd knative-docs/docs/serving/samples/multi-container/servingcontainer`
+1. Create a basic web server which listens on port 8881.
+You can do this by copying the following code into the `servingcontainer.go` file:
 
    ```go
    package main   
@@ -54,15 +60,13 @@ If user wants to update code, dockerfile or service yaml they can follow below s
    	log.Fatal(http.ListenAndServe(":8881", nil))
    }
    ```
-1. In your project directory, update a file named `Dockerfile` and copy the code
-   block below into it. For detailed instructions on dockerizing a Go app, see
-   [Deploying Go servers with Docker](https://blog.golang.org/docker).
+1. Copy the following code into the `Dockerfile` file:
 
    ```docker
    # Use the official Golang image to create a build artifact.
    # This is based on Debian and sets the GOPATH to /go.
    # https://hub.docker.com/_/golang
-   FROM golang:1.13 as builder
+   FROM golang:1.15 as builder
    # Create and change to the app directory.
    WORKDIR /app
    # Retrieve application dependencies using go modules.
@@ -86,10 +90,14 @@ If user wants to update code, dockerfile or service yaml they can follow below s
    ```
 
 ### Sidecar Container
-1. Navigate to cloned code directory `cd -`
-1. `cd knative-docs/docs/serving/samples/multi-container/sidecarcontainer`
-1. Update a file named `sidecarcontainer.go` and copy the code block below into it. This
-   code creates a basic web server which listens on port 8882:
+1. After you have cloned the sample repository, navigate to the sidecarcontainer directory:
+   ```text
+   cd -
+   cd knative-docs/docs/serving/samples/multi-container/sidecarcontainer
+   ``` 
+
+1. Create a basic web server which listens on port 8882.
+You can do this by copying the following code into the `sidecarcontainer.go` file:
 
    ```go
    package main
@@ -109,15 +117,13 @@ If user wants to update code, dockerfile or service yaml they can follow below s
    }
    ```
 
-1. In your project directory, update a file named `Dockerfile` and copy the code
-   block below into it. For detailed instructions on dockerizing a Go app, see
-   [Deploying Go servers with Docker](https://blog.golang.org/docker).
+1. Copy the following code into the `Dockerfile` file:
 
    ```docker
    # Use the official Golang image to create a build artifact.
    # This is based on Debian and sets the GOPATH to /go.
    # https://hub.docker.com/_/golang
-   FROM golang:1.13 as builder
+   FROM golang:1.15 as builder
    # Create and change to the app directory.
    WORKDIR /app
    # Retrieve application dependencies using go modules.
@@ -142,13 +148,11 @@ If user wants to update code, dockerfile or service yaml they can follow below s
 
 ### Writing Knative Service YAML
 
-1. Go to multi-container directory where `service.yaml` already exist
+1. After you have cloned the sample repository, navigate to the `multi-container` directory:
    1. `cd -`
    2. `cd knative-docs/docs/serving/samples/multi-container/`
 
-1. Update a file, `service.yaml` and copy the following service definition
-   into the file. Make sure to replace `{username}` with your Docker Hub
-   username.
+1. Copy the following YAML service definition into the `service.yaml` file:
 
    ```yaml
    apiVersion: serving.knative.dev/v1
@@ -166,13 +170,19 @@ If user wants to update code, dockerfile or service yaml they can follow below s
          - image: docker.io/{username}/sidecarcontainer
    ```
 
-1. Use the go tool to create a
-   [`go.mod`](https://github.com/golang/go/wiki/Modules#gomod) manifest.
+**NOTE:** Replace `{username}` with your Docker Hub username.
 
+1. Use Go tool to create a
+   [`go.mod`](https://github.com/golang/go/wiki/Modules#gomod) manifest:
+   
+   servingcontainer
    ```shell
    cd -
    cd knative-docs/docs/serving/samples/multi-container/servingcontainer
-   go mod init github.com/knative/docs/docs/serving/samples/multi-container/servingcontainer
+   go mod init github.com/knative/docs/docs/serving/samples/multi-container/servingcontainer 
+   ```
+   sidecarcontainer
+   ```shell
    cd -
    cd knative-docs/docs/serving/samples/multi-container/sidecarcontainer
    go mod init github.com/knative/docs/docs/serving/samples/multi-container/sidecarcontainer
@@ -180,8 +190,7 @@ If user wants to update code, dockerfile or service yaml they can follow below s
 
 ## Building and deploying the sample
 
-Once you have recreated the sample code files, or used the files in the sample
-folder, you're ready to build and deploy the sample app.
+After you have modified the sample code files you can build and deploy the sample app.
 
 1. Use Docker to build the sample code into a container. To build and push with
    Docker Hub, run these commands replacing `{username}` with your Docker Hub
