@@ -3,9 +3,6 @@
 <li>
 <a href="#serving.knative.dev%2fv1">serving.knative.dev/v1</a>
 </li>
-<li>
-<a href="#serving.knative.dev%2fv1alpha1">serving.knative.dev/v1alpha1</a>
-</li>
 </ul>
 <h2 id="serving.knative.dev/v1">serving.knative.dev/v1</h2>
 <p>
@@ -1269,47 +1266,6 @@ knative.dev/pkg/apis.URL
 <p>URL displays the URL for accessing named traffic targets. URL is displayed in
 status, and is disallowed on spec. URL must contain a scheme (e.g. http://) and
 a hostname, but may not contain anything else (e.g. basic auth, url path, etc.)</p>
-</td>
-</tr>
-</tbody>
-</table>
-<hr/>
-<h2 id="serving.knative.dev/v1alpha1">serving.knative.dev/v1alpha1</h2>
-<p>
-</p>
-Resource Types:
-<ul></ul>
-<h3 id="serving.knative.dev/v1alpha1.CannotConvertError">CannotConvertError
-</h3>
-<p>
-<p>CannotConvertError is returned when a field cannot be converted.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>Message</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-</td>
-</tr>
-<tr>
-<td>
-<code>Field</code></br>
-<em>
-string
-</em>
-</td>
-<td>
 </td>
 </tr>
 </tbody>
