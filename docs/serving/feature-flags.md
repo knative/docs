@@ -266,4 +266,4 @@ they are no longer active.
 * **Type**: extension
 * **ConfigMap key:** `tag-header-based-routing`
 
-This flags controls whether [tag header based routing](https://knative.dev/development/serving/samples/tag-header-based-routing/) is enabled.
+This flags controls whether [tag header based routing](./samples/tag-header-based-routing/README.md) is enabled.
