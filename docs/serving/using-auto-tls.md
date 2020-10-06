@@ -154,6 +154,10 @@ and which DNS provider validates those requests.
 
 If you choose to use the mode of provisioning certificate per namespace, you need to install `networking-ns-cert` components.
 
+** Note that provisioning certificate per namespace only works with DNS-01
+ challenge. If you choose to use HTTP-01 challenge, you must NOT install this
+ component **
+
 1. Determine if `networking-ns-cert` deployment is already installed by 
 running the following command:
 
