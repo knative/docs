@@ -123,7 +123,7 @@ In order to receive kubernetes events, you need to create a concrete APIServerSo
 {{% tab name="YAML" %}}
 ```shell
 kubectl -n apiserversource-example apply -f - << EOF
-apiVersion: sources.knative.dev/v1beta1
+apiVersion: sources.knative.dev/v1
 kind: ApiServerSource
 metadata:
  name: testevents
