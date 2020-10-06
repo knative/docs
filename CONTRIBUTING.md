@@ -153,16 +153,6 @@ get it merged. You can also post in the `#docs` [Slack
 channel](https://knative.slack.com/) to get input on your ideas or find areas to
 contribute before creating a PR.
 
-### Common Troubleshooting issues for PRs
-
-1. The CLA check fails even though you have signed the CLA. This may occur if you accept and commit suggestions in a pull request from another person's account, because the email address of that account doesn't match the address on record for the CLA.
-
-1. One or more tests are failing. If you do not see a specific error related to a change you made, and instead the errors are related to timeouts, try rerunning the test at a later time. There are running tasks that could result in timeouts or rate limiting if your test runs at the same time.
-
-1. Previews are not working - WIP (not sure what's causing this)
-
-1. Other Issues/Unsure - reach out in the #docs slack channel and someone will be happy to help out.
-
 ### Putting your docs in the right place
 
 There are currently two general types of Knative docs, either contributor
