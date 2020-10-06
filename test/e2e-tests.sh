@@ -20,7 +20,8 @@ function install_istio() {
   ISTIO_VERSION=istio-stable
   echo ">> Bringing up Istio"
   echo ">> Running Istio installer"
-  ./vendor/knative.dev/net-istio/third_party/istio-stable/istio-ci-no-mesh.yaml istio-ci-no-mesh.yaml || return 1
+  chmod +x ./vendor/knative.dev/net-istio/third_party/istio-stable/install-istio.sh
+  ./vendor/knative.dev/net-istio/third_party/istio-stable/install-istio.sh istio-ci-no-mesh.yaml || return 1
 }
 
 function test_setup() {
