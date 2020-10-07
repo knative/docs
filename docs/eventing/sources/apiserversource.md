@@ -5,7 +5,7 @@ weight: 31
 type: "docs"
 ---
 
-![version](https://img.shields.io/badge/API_Version-v1beta1-red?style=flat-square)
+![version](https://img.shields.io/badge/API_Version-v1-red?style=flat-square)
 
 An APIServerSource brings Kubernetes API server events into Knative.
 
@@ -123,7 +123,7 @@ In order to receive kubernetes events, you need to create a concrete APIServerSo
 {{% tab name="YAML" %}}
 ```shell
 kubectl -n apiserversource-example apply -f - << EOF
-apiVersion: sources.knative.dev/v1beta1
+apiVersion: sources.knative.dev/v1
 kind: ApiServerSource
 metadata:
  name: testevents
