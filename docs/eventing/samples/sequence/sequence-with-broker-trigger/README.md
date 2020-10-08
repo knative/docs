@@ -79,7 +79,8 @@ spec:
           env:
             - name: MESSAGE
               value: " - Handled by 2"
-
+            - name: TYPE
+              value: "samples.http.mod3"
 ---
 
 ```
