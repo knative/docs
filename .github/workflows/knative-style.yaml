@@ -179,7 +179,7 @@ jobs:
           echo '::group:: Flagging missing EOF newlines with reviewdog 🐶 ...'
           # Don't fail because of misspell
           set +o pipefail
-          for x in $(find . -type f -not -path './vendor/*' -not -path './third_party/*' -not -path './.git/*'); do
+          for x in $(find . -type f -not -name '*.ai' -not -path './vendor/*' -not -path './third_party/*' -not -path './.git/*'); do
             # Based on https://stackoverflow.com/questions/34943632/linux-check-if-there-is-an-empty-line-at-the-end-of-a-file
             if [[ -f $x && ! ( -s "$x" && -z "$(tail -c 1 $x)" ) ]]; then
               # We add 1 to `wc -l` here because of this limitation (from the man page):
