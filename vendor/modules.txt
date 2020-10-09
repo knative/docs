@@ -298,7 +298,7 @@ gopkg.in/go-playground/webhooks.v3/github
 # gopkg.in/yaml.v2 v2.3.0
 ## explicit
 gopkg.in/yaml.v2
-# knative.dev/test-infra v0.0.0-20200929224429-f46f815aa607
+# knative.dev/test-infra v0.0.0-20201009190921-622088de6f36
 ## explicit
 knative.dev/test-infra/scripts
 # go.opencensus.io => go.opencensus.io v0.20.2
