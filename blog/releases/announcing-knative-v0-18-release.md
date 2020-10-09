@@ -85,24 +85,24 @@ Eventing APIs graduated from v1beta1 to v1
 
 <details><summary>Action Required for Upgrades</summary>
 
-- [#4031](https://github.com/knative/eventing/pull/4031) You must run pre-install job prior to upgrading to get apiserversource to v1beta1 API. (#4031, @capri-xiyue)
+- [#4031](https://github.com/knative/eventing/pull/4031) You must run pre-install job prior to upgrading to get apiserversource to v1beta1 API.
 - [#3936](https://github.com/knative/eventing/pull/3936) Change storage version of remaining messaging.- resources from v1beta1 to v1:
     - “Subscriptions.messaging.knative.dev”
-    - You must run pre-install job prior to upgrading to get messaging.- resources to v1 API. (#3936, @aliok)
+    - You must run pre-install job prior to upgrading to get messaging.- resources to v1 API.
 - [#3951](https://github.com/knative/eventing/pull/3951) Change storage versions of pingsource resource from v1alpha2 to v1beta1 API
-    - You must run pre-install job prior to upgrading to get pingsource resources to v1beta2 API. (#3951, @aavarghese)
+    - You must run pre-install job prior to upgrading to get pingsource resources to v1beta2 API.
 - [#3923](https://github.com/knative/eventing/pull/3923) Change storage versions of eventing.- resources from v1beta1 to v1:
     - “brokers.eventing.knative.dev”
     - “Triggers.eventing.knative.dev”
-    - You must run pre-install job prior to upgrading to get eventing.- resources to v1 API. (#3923, @aliok)
+    - You must run pre-install job prior to upgrading to get eventing.- resources to v1 API.
 - [#3925](https://github.com/knative/eventing/pull/3925) Change storage versions of flows.- resources from v1beta1 to v1:
     - “Channels.messaging.knative.dev”
     - “Inmemorychannels.messaging.knative.dev”
-    - You must run pre-install job prior to upgrading to get messaging.- resources to v1 API. (#3925, @aliok)
+    - You must run pre-install job prior to upgrading to get messaging.- resources to v1 API.
 - [#3924](https://github.com/knative/eventing/pull/3924) Change storage versions of flows.- resources from v1beta1 to v1:
     - “Parallels.flows.knative.dev”
     - “Sequences.flows.knative.dev”
-    - You must run pre-install job prior to upgrading to get flows.- resources to v1 API. (#3924, @aliok)
+    - You must run pre-install job prior to upgrading to get flows.- resources to v1 API.
 
 </details>
 
@@ -228,7 +228,7 @@ The new operator can now deploy the new version `v0.18` of serving and eventing 
 <details><summary>Bug Fixes</summary>
 
 - [#202](https://github.com/knative/operator/pull/202) Docs for publishing the operator in OperatorHub
-- [#299](https://github.com/knative/operator/pull/299) Don't wait for Ksvc to scale to zero #299 (thanks @cardil)
+- [#299](https://github.com/knative/operator/pull/299) Don't wait for Ksvc to scale to zero
 
 </details>
 
