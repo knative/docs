@@ -10,8 +10,7 @@ well-supported by the existing components; since the system is modular, it's
 also possible to combine the components in novel ways.
 
 1. **I just want to publish events, I don't care who consumes them.** Send
-   events to a [Broker](broker/README.md) as an HTTP POST. The
-   [SinkBinding](samples/sinkbinding/README.md) can be useful to decouple the destination
+   events to a [Broker](broker/README.md) as an HTTP POST. [Sink binding](./sources/sinkbinding) can be useful to decouple the destination
    configuration from your application.
 
 1. **I just want to consume events like X, I don't care how they are
@@ -101,17 +100,6 @@ Trigger without resorting to some other out-of-band mechanism.
 
 To learn how to use the registry, see the
 [Event Registry documentation](./event-registry.md).
-
-### Simplify event delivery
-
-The [SinkBinding](samples/sinkbinding/README.md) custom object supports decoupling event
-production from delivery addressing.
-
-When you create a SinkBinding, you reference an Addressable and a Kubernetes
-object which provides a PodTemplateSpec. The SinkBinding will inject environment
-variables (`$K_SINK` for the destination URL) into the PodTemplateSpec so that
-the application code does not need to interact with the Kubernetes API to locate
-the event destination.
 
 ### Event channels and subscriptions
 
