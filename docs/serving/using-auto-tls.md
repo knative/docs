@@ -31,7 +31,8 @@ Knative supports the following Auto TLS modes:
 
     - In this type, your cluster does not need to be able to talk to your DNS server. You just 
     need to map your domain to the IP of the cluser ingress.
-    - When using HTTP-01 challenge, **a certificate will be provisioned per Knative Service.** Certificate provision per namespace is not supported when using HTTP-01 challenge. 
+    - When using HTTP-01 challenge, **a certificate will be provisioned per Knative Service.**
+    - **HTTP-01 does not support provisioning a certificate per namespace.**
 
 ## Before you begin
 
@@ -154,9 +155,8 @@ and which DNS provider validates those requests.
 
 If you choose to use the mode of provisioning certificate per namespace, you need to install `networking-ns-cert` components.
 
-**Note that provisioning certificate per namespace only works with DNS-01
- challenge. If you choose to use HTTP-01 challenge, you must NOT install this
- component**
+**IMPORTANT:** Provisioning a certificate per namespace only works with DNS-01
+ challenge. This component cannot be used with HTTP-01 challenge.
 
 1. Determine if `networking-ns-cert` deployment is already installed by 
 running the following command:
