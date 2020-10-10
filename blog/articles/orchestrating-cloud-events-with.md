@@ -3,7 +3,7 @@ title: Orchestrating CloudEvents (with Knative and Zeebe)
 linkTitle: Orchestrating CloudEvents
 author: "[Mauricio Salatino "Salaboy"](https://twitter.com/salaboy), Principal Software Engineer @ [Camunda](http://camunda.com) and [LearnK8s](http://learnk8s.io) Instructor."
 date: 2020-10-10
-description: Knative Eventing and Workflow Engine Integration for gaining visibility, decoration and orchestration scenarios. 
+description: Knative Eventing and Workflow Engine Integration for gaining visibility, decoration and orchestration scenarios.
 type: "blog"
 ---
 
@@ -101,7 +101,7 @@ As you can see in the above model, the exclusive gateway is being used to choose
 
 From an architectural perspective, the integration between the Workflow Engine and Knative is quite simple. It relies on **CloudEvents** and a component that is in charge to route the events to the right workflows, and the other way around.
 
-The [Zeebe CloudEvents Router](https://github.com/zeebe-io/zeebe-cloud-events-router) is in charge of exposing an endpoint where events can be forwarded and, at the same time, understand where to push events if workflow models are emitting events.
+The [Zeebe CloudEvents Router](https://github.com/zeebe-io/zeebe-cloud-events-router) is in charge of exposing an endpoint where events can be forwarded and, at the same time, understand where to push events from workflow models.
 
 ![Knative and Zeebe Detailed](https://github.com/salaboy/orchestrating-cloud-events/blob/master/imgs/tickets-service-knative-zeebe-detailed.png?raw=true)
 
