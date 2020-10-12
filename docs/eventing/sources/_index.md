@@ -70,7 +70,9 @@ kn source list
 [Konnek](https://konnek.github.io/docs/#/) | Active Development | None | Retrieves events from cloud platforms (like AWS and GCP) and transforms them into CloudEvents for consumption in Knative.
 [K8s](https://github.com/Harwayne/auto-container-source/tree/master/k8s-event-source) | Proof of Concept | None | Brings Kubernetes cluster events into Knative. Uses AutoContainerSource for underlying infrastructure.
 [RedisSource](https://github.com/lionelvillard/eventing-redis/tree/master/source) | v1alpha1 | None | Brings Redis Stream into Knative.
+[SlackSource](https://github.com/triggermesh/knative-sources/tree/master/slack) | v1alpha1 | TriggerMesh | Brings Slack into Knative.
 [VMware](https://github.com/vmware-tanzu/sources-for-knative/blob/master/pkg/apis/sources/v1alpha1/vspheresource_types.go) | Active Development | None | Brings [vSphere](https://www.vmware.com/products/vsphere.html) events into Knative.
+[ZenDesk](https://github.com/triggermesh/knative-sources/tree/master/zendesk) | v1alpha1 | TriggerMesh | Brings ZenDesk into Knative.
 
 ## Additional resources
 
