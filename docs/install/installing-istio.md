@@ -92,12 +92,14 @@ spec:
             - port: 15020
               name: status-port
             - port: 80
+              targetPort: 8080
               name: http2
             - port: 443
+              targetPort: 8443
               name: https
 EOF
 
-istioctl manifest apply -f istio-minimal-operator.yaml
+istioctl install -f istio-minimal-operator.yaml
 ```
 
 #### Installing Istio with sidecar injection
