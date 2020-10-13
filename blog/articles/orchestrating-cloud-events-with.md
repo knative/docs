@@ -55,7 +55,7 @@ Now that you have the power of a workflow engine, you can leverage some of its f
 
 ![Workflow model v2](https://github.com/salaboy/orchestrating-cloud-events/blob/master/imgs/tickets-v2.png?raw=true)
 
-Now when the customer reaches the **Payment Sent** state, meaning that they have already made a reservation, the model wait for the **Payment Sent** CloudEvent to arrive.
+Now when the customer reaches the **Payment Sent** state, meaning that they have already made a reservation, the model waits for the **Payment Sent** CloudEvent to arrive.
 
 ![timers](https://github.com/salaboy/orchestrating-cloud-events/blob/master/imgs/tickets-v2-timers.png?raw=true)
 
