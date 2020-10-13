@@ -83,7 +83,7 @@ resolution via the `registriesSkippingTagResolving` configmap field:
 kubectl -n knative-serving edit configmap config-deployment
 ```
 
-E.g., to disable tag resolution for `registry.example.com`:
+E.g., to disable tag resolution for `registry.example.com` (note: This is not a complete configmap, it is a snippet showing registriesSkippingTagResolving):
 
 ```yaml
 apiVersion: v1

@@ -20,4 +20,7 @@ package tools
 
 import (
 	_ "knative.dev/test-infra/scripts"
+
+	// For istio installation
+	_ "knative.dev/net-istio/third_party/istio-stable"
 )

@@ -127,13 +127,50 @@ function wait_until_object_does_not_exist() {
 # Waits until all pods are running in the given namespace.
 # Parameters: $1 - namespace.
 function wait_until_pods_running() {
-  echo "Waiting until all pods in namespace $1 are up"
-  kubectl wait pod --for=condition=Ready -n "$1" -l '!job-name' --timeout=5m || return 1
-  # Also wait for all the job pods to be completed.
-  # This is mainly for maintaining backward compatibility.
-  if [[ $(kubectl get jobs --ignore-not-found=true -n "$1") ]]; then
-    kubectl wait job --for=condition=Complete --all -n "$1" --timeout=5m || return 1
+  echo -n "Waiting until all pods in namespace $1 are up"
+  local failed_pod=""
+  for i in {1..150}; do  # timeout after 5 minutes
+    # List all pods. Ignore Terminating pods as those have either been replaced through
+    # a deployment or terminated on purpose (through chaosduck for example).
+    local pods="$(kubectl get pods --no-headers -n $1 2>/dev/null | grep -v Terminating)"
+    # All pods must be running (ignore ImagePull error to allow the pod to retry)
+    local not_running_pods=$(echo "${pods}" | grep -v Running | grep -v Completed | grep -v ErrImagePull | grep -v ImagePullBackOff)
+    if [[ -n "${pods}" ]] && [[ -z "${not_running_pods}" ]]; then
+      # All Pods are running or completed. Verify the containers on each Pod.
+      local all_ready=1
+      while read pod ; do
+        local status=(`echo -n ${pod} | cut -f2 -d' ' | tr '/' ' '`)
+        # Set this Pod as the failed_pod. If nothing is wrong with it, then after the checks, set
+        # failed_pod to the empty string.
+        failed_pod=$(echo -n "${pod}" | cut -f1 -d' ')
+        # All containers must be ready
+        [[ -z ${status[0]} ]] && all_ready=0 && break
+        [[ -z ${status[1]} ]] && all_ready=0 && break
+        [[ ${status[0]} -lt 1 ]] && all_ready=0 && break
+        [[ ${status[1]} -lt 1 ]] && all_ready=0 && break
+        [[ ${status[0]} -ne ${status[1]} ]] && all_ready=0 && break
+        # All the tests passed, this is not a failed pod.
+        failed_pod=""
+      done <<< "$(echo "${pods}" | grep -v Completed)"
+      if (( all_ready )); then
+        echo -e "\nAll pods are up:\n${pods}"
+        return 0
+      fi
+    elif [[ -n "${not_running_pods}" ]]; then
+      # At least one Pod is not running, just save the first one's name as the failed_pod.
+      failed_pod="$(echo "${not_running_pods}" | head -n 1 | cut -f1 -d' ')"
+    fi
+    echo -n "."
+    sleep 2
+  done
+  echo -e "\n\nERROR: timeout waiting for pods to come up\n${pods}"
+  if [[ -n "${failed_pod}" ]]; then
+    echo -e "\n\nFailed Pod (data in YAML format) - ${failed_pod}\n"
+    kubectl -n $1 get pods "${failed_pod}" -oyaml
+    echo -e "\n\nPod Logs\n"
+    kubectl -n $1 logs "${failed_pod}" --all-containers
   fi
+  return 1
 }
 
 # Waits until all batch jobs complete in the given namespace.
@@ -476,6 +513,65 @@ function add_trap {
   done
 }
 
+# Update go deps.
+# Parameters (parsed as flags):
+#   "--upgrade", bool, do upgrade.
+#   "--release <version>" used with upgrade. The release version to upgrade
+#                         Knative components. ex: --release v0.18. Defaults to
+#                         "master".
+# Additional dependencies can be included in the upgrade by providing them in a
+# global env var: FLOATING_DEPS
+function go_update_deps() {
+  cd "${REPO_ROOT_DIR}" || return 1
+
+  export GO111MODULE=on
+  export GOFLAGS=""
+
+  echo "=== Update Deps for Golang"
+
+  local UPGRADE=0
+  local VERSION="master"
+  while [[ $# -ne 0 ]]; do
+    parameter=$1
+    case ${parameter} in
+      --upgrade) UPGRADE=1 ;;
+      --release) shift; VERSION="$1" ;;
+      *) abort "unknown option ${parameter}" ;;
+    esac
+    shift
+  done
+
+  if (( UPGRADE )); then
+    echo "--- Upgrading to ${VERSION}"
+    FLOATING_DEPS+=( $(run_go_tool knative.dev/test-infra/buoy buoy float ${REPO_ROOT_DIR}/go.mod --release ${VERSION} --domain knative.dev) )
+    if (( ${#FLOATING_DEPS[@]} )); then
+      echo "Floating deps to ${FLOATING_DEPS[@]}"
+      go get -d ${FLOATING_DEPS[@]}
+    else
+      echo "Nothing to upgrade."
+    fi
+  fi
+
+  echo "--- Go mod tidy and vendor"
+
+  # Prune modules.
+  go mod tidy
+  go mod vendor
+
+  echo "--- Removing unwanted vendor files"
+
+  # Remove unwanted vendor files
+  find vendor/ \( -name "OWNERS" -o -name "OWNERS_ALIASES" -o -name "BUILD" -o -name "BUILD.bazel" -o -name "*_test.go" \) -print0 | xargs -0 rm -f
+
+  export GOFLAGS=-mod=vendor
+
+  echo "--- Updating licenses"
+  update_licenses third_party/VENDOR-LICENSE "./..."
+
+  echo "--- Removing broken symlinks"
+  remove_broken_symlinks ./vendor
+}
+
 # Run kntest tool, error out and ask users to install it if it's not currently installed.
 # Parameters: $1..$n - parameters passed to the tool.
 function run_kntest() {
@@ -512,45 +608,6 @@ function check_licenses() {
   # Check that we don't have any forbidden licenses.
   run_go_tool github.com/google/go-licenses go-licenses check "${REPO_ROOT_DIR}/..." || \
     { echo "--- FAIL: go-licenses failed the license check"; return 1; }
-}
-
-# Run the given linter on the given files, checking it exists first.
-# Parameters: $1 - tool
-#             $2 - tool purpose (for error message if tool not installed)
-#             $3 - tool parameters (quote if multiple parameters used)
-#             $4..$n - files to run linter on
-function run_lint_tool() {
-  local checker=$1
-  local params=$3
-  if ! hash ${checker} 2>/dev/null; then
-    warning "${checker} not installed, not $2"
-    return 127
-  fi
-  shift 3
-  local failed=0
-  for file in $@; do
-    ${checker} ${params} ${file} || failed=1
-  done
-  return ${failed}
-}
-
-# Check links in the given markdown files.
-# Parameters: $1...$n - files to inspect
-function check_links_in_markdown() {
-  # https://github.com/raviqqe/liche
-  local config="${REPO_ROOT_DIR}/test/markdown-link-check-config.rc"
-  [[ ! -e ${config} ]] && config="${_TEST_INFRA_SCRIPTS_DIR}/markdown-link-check-config.rc"
-  local options="$(grep '^-' ${config} | tr \"\n\" ' ')"
-  run_lint_tool liche "checking links in markdown files" "-d ${REPO_ROOT_DIR} ${options}" $@
-}
-
-# Check format of the given markdown files.
-# Parameters: $1..$n - files to inspect
-function lint_markdown() {
-  # https://github.com/markdownlint/markdownlint
-  local config="${REPO_ROOT_DIR}/test/markdown-lint-config.rc"
-  [[ ! -e ${config} ]] && config="${_TEST_INFRA_SCRIPTS_DIR}/markdown-lint-config.rc"
-  run_lint_tool mdl "linting markdown files" "-c ${config}" $@
 }
 
 # Return whether the given parameter is an integer.
