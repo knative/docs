@@ -87,7 +87,7 @@ Version 3 of the Workflow Model shows a more complex diagram, where a subprocess
 
 The worfklow can react on the CloudEvent **Customer Abandoned Queue** at any given time inside the **Customer Buying Tickets** stage. This will trigger the Customer **Clean Up** event to garbage collect all the data related with the Customer Session from all the services caching data.
 
-In the following screenshot you can see how inside Camunda Operate, you can quickly visualize how many instances of the workflows are at a given stage as well as how many workflows have finished, and in which state they finished:
+In the following screenshot, inside Camunda Operate, you can quickly visualize how many instances of the workflows are at a given stage as well as how many workflows have finished, and in which state they finished:
 
 ![Workflow Model V3 in Operate](https://github.com/salaboy/orchestrating-cloud-events/blob/master/imgs/tickets-v3-operate-stage.png?raw=true)
 
