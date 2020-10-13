@@ -188,7 +188,8 @@ As mentioned before, further integrations should deal with more advanced topolog
 ## Sum up
 
 In this blog post, I’ve spent some time describing the wonders of what you can do with a Workflow Engine like Zeebe on top of Knative Applications. I’ve personally had a lot of fun while working with Knative, as the abstractions provided helped me to build a very robust application that I can move to different cloud providers easily, without changing any of my services.
-
+Watch this demo live here: 
+{{< youtube msDDdqmyEFA >}}
 The projects and the integration shown in this blog post are in active development, so if you are interested or want to get involved please reach out via twitter: [@salaboy](http://twitter.com/salaboy) or join our slack channel: [zeebe-io.slack.com](http://zeebe-io.slack.com)
 
 If you want to run this demo in your own Kubernetes Cluster you can find the instructions here: [https://github.com/salaboy/orchestrating-cloud-events/](https://github.com/salaboy/orchestrating-cloud-events/) and if you feel like giving the repository a star we will appreciate it :)
