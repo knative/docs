@@ -91,7 +91,7 @@ In the following screenshot, inside Camunda Operate, you can quickly visualize h
 
 ![Workflow Model V3 in Operate](https://github.com/salaboy/orchestrating-cloud-events/blob/master/imgs/tickets-v3-operate-stage.png?raw=true)
 
-Another advantage of using a workflow engine is flow control. By using Flow Control elements such as Exclusive Gateways, you can delegate some high-level decisions (usually encoding business logic) to the workflow engine:
+Another advantage of using a workflow engine is flow control. By using flow control elements such as Exclusive Gateways, you can delegate some high-level decisions (usually encoding business logic) to the workflow engine:
 
 ![Workfloe Model V4](https://github.com/salaboy/orchestrating-cloud-events/blob/master/imgs/tickets-v4.png?raw=true)
 
