@@ -7,7 +7,7 @@ description: Knative Eventing and Workflow Engine Integration for gaining visibi
 type: "blog"
 ---
 
-A couple of weeks ago, I presented at the **Knative Meetup** ([Video](https://www.youtube.com/watch?v=vOSsHp-6gto), [Slides](https://www.slideshare.net/salaboy/orchestrating-cloud-events-knative-meetup-2020)) about how you can leverage the Cloud Native workflow engine [Zeebe](http://zeebe.io) to understand, enhance and orchestrate your applications that are already using [CloudEvents](https://cloudevents.io).
+A couple of weeks ago, I presented at the **Knative Meetup** ([Video](https://www.youtube.com/watch?v=msDDdqmyEFA&list=PLQjzPfIiEQLIEpoCPxBYAVrjqy6LxLtQ8), [Slides](https://www.slideshare.net/salaboy/orchestrating-cloud-events-knative-meetup-2020)) about how you can leverage the Cloud Native workflow engine [Zeebe](http://zeebe.io) to understand, enhance and orchestrate your applications that are already using [CloudEvents](https://cloudevents.io).
 
 I wanted to expand a bit on how these tools can help you gain a deeper understanding of how your distributed applications are working.
 
