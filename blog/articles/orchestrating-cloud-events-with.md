@@ -59,7 +59,7 @@ Now when the customer reaches the **Payment Sent** state, meaning that they have
 
 ![timers](https://github.com/salaboy/orchestrating-cloud-events/blob/master/imgs/tickets-v2-timers.png?raw=true)
 
-As you can see above, two timer boundary events have been associated with the **Payment Sent** state. The bottom one, with dashed lines, is a non-interrupting event, meaning that it will not disrupt the actual flow, it will be just triggered in a fire-and-forget fashion. This result in the Payment Reminder being sent and, because it can be configured as a recurring timer, it will trigger every X amount of time (for the presentation this was set to 10 seconds).
+As you can see above, two timer boundary events have been associated with the **Payment Sent** state. The bottom one, with dashed lines, is a non-interrupting event, meaning that it will not disrupt the actual flow, it will be just triggered in a fire-and-forget fashion. This results in the Payment Reminder being sent and, because it can be configured as a recurring timer, it will trigger every X amount of time (for the presentation this was set to 10 seconds).
 
 ![Websockets push notification](https://github.com/salaboy/orchestrating-cloud-events/blob/master/imgs/tickets-push-notification-websocket.png?raw=true)
 
