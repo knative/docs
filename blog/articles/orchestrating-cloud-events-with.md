@@ -77,7 +77,7 @@ A big difference between these timers and [Cronjobs (for example in Kubernetes)]
 
 ## Orchestrate
 
-The **Payment Reminder** and **Reservation Time Out** states, shown in the model above, represent when we cross the line from simply listening to events to actually emitting CloudEvents from a workflow model. Now the workflow model is not only helping you to visualize and understand what your Cloud Native applications are doing but driving and interacting with your services.
+The **Payment Reminder** and **Reservation Time Out** status, shown in the model above, represent when we cross the line from simply listening to events to actually emitting CloudEvents from a workflow model. Now the workflow model is not only helping you to visualize and understand what your Cloud Native applications are doing but driving and interacting with your services.
 
 While using a workflow engine to orchestrate CloudEvents, you have a bunch of new tools at your fingertips to deal with more complex scenarios.
 
