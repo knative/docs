@@ -159,7 +159,7 @@ folder) you're ready to build and deploy the sample app.
    docker push {username}/helloworld-python
    ```
 
-1. After the build has completed and the container is pushed to docker hub, you
+1. After the build has completed and the container is pushed to Docker Hub, you
    can deploy the sample application into your cluster. Ensure that the container image value
    in `sample-app.yaml` matches the container you built in the previous step. Apply
    the configuration using `kubectl`:
