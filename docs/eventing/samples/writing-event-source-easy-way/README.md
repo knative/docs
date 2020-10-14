@@ -112,7 +112,7 @@ Create the `ContainerSource`:
 ```bash
 cat <<EOS |kubectl apply -f -
 ---
-apiVersion: sources.knative.dev/v1alpha2
+apiVersion: sources.knative.dev/v1
 kind: ContainerSource
 metadata:
   name: test-heartbeats
