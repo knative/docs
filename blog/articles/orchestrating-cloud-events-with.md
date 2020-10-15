@@ -1,7 +1,7 @@
 ---
 title: Orchestrating CloudEvents (with Knative and Zeebe)
 linkTitle: Orchestrating CloudEvents
-author: "[Mauricio Salatino "Salaboy"](https://twitter.com/salaboy), Principal Software Engineer @ [Camunda](http://camunda.com) and [LearnK8s](http://learnk8s.io) Instructor."
+author: "[Mauricio Salatino (Salaboy)](https://twitter.com/salaboy), Principal Software Engineer @ [Camunda](http://camunda.com) and [LearnK8s](http://learnk8s.io) Instructor."
 date: 2020-10-10
 description: Knative Eventing and Workflow Engine Integration for gaining visibility, decoration and orchestration scenarios.
 type: "blog"
