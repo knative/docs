@@ -18,10 +18,6 @@ Before submitting a PR, see also [CONTRIBUTING.md](./CONTRIBUTING.md).
 Start by creating [a GitHub account](https://github.com/join), then setup
 [GitHub access via SSH](https://help.github.com/articles/connecting-to-github-with-ssh/).
 
-### Install requirements
-
-### Setup your environment
-
 ### Checkout your fork
 
 To check out this repository:
