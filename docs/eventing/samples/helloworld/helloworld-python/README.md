@@ -87,7 +87,6 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-python
       name: knative-samples
       labels:
            eventing.knative.dev/injection: enabled
-    
     ---
     # Create a Broker using the default settings
     apiVersion: eventing.knative.dev/v1
@@ -95,7 +94,6 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-python
     metadata:
       name: default
       namespace: knative-samples
- 
     ---
     # Helloworld-python app deploment
     apiVersion: apps/v1
@@ -213,7 +211,7 @@ We can send an http request directly to the Broker with correct CloudEvent heade
 
       exit
       ```
-      
+
 **Note** : For v0.18 or above, use `http://broker-ingress.knative-eventing.svc.cluster.local/knative-samples/default` as the address insteed of `default-broker.knative-samples.svc.cluster.local` . Your can view the addree by :
 
 ```shell
