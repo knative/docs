@@ -163,7 +163,7 @@ golang.org/x/text/secure/bidirule
 golang.org/x/text/transform
 golang.org/x/text/unicode/bidi
 golang.org/x/text/unicode/norm
-# golang.org/x/tools v0.0.0-20200828161849-5deb26317202
+# golang.org/x/tools v0.0.0-20200916195026-c9a70fc28ce3
 golang.org/x/tools/cmd/goimports
 golang.org/x/tools/go/ast/astutil
 golang.org/x/tools/go/gcexportdata
@@ -298,10 +298,10 @@ gopkg.in/go-playground/webhooks.v3/github
 # gopkg.in/yaml.v2 v2.3.0
 ## explicit
 gopkg.in/yaml.v2
-# knative.dev/net-istio v0.18.1-0.20201012033616-9e988bf8ae1b
+# knative.dev/net-istio v0.18.1-0.20201014235231-72870cffbc01
 ## explicit
 knative.dev/net-istio/third_party/istio-stable
-# knative.dev/test-infra v0.0.0-20201009204121-322fb08edae7
+# knative.dev/test-infra v0.0.0-20201015231956-d236fb0ea9ff
 ## explicit
 knative.dev/test-infra/scripts
 # go.opencensus.io => go.opencensus.io v0.20.2
