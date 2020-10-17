@@ -212,7 +212,7 @@ We can send an http request directly to the Broker with correct CloudEvent heade
       exit
       ```
 
-**Note** : For v0.18 or above, use `http://broker-ingress.knative-eventing.svc.cluster.local/knative-samples/default` as the address insteed of `default-broker.knative-samples.svc.cluster.local` . Your can view the addree by :
+**Note** : For v0.18 or above, use `http://broker-ingress.knative-eventing.svc.cluster.local/knative-samples/default` as the address instead of `default-broker.knative-samples.svc.cluster.local`. You can view the address by:
 
 ```shell
 $ kubectl -n knative-samples get broker
