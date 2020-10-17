@@ -98,7 +98,7 @@ This contrasts with the `scale-to-zero-grace-period` flag, which determines the 
 * **Default:** `0s`
 
 **Example:**
-{{< tabs name="scale-to-zero-grace" default="Global (ConfigMap)" >}}
+{{< tabs name="scale-to-zero-retention" default="Per Revision" >}}
 {{% tab name="Per Revision" %}}
 ```yaml
 apiVersion: serving.knative.dev/v1
