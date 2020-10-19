@@ -31,13 +31,13 @@ github.com/cloudevents/sdk-go/v2/observability
 github.com/cloudevents/sdk-go/v2/protocol
 github.com/cloudevents/sdk-go/v2/protocol/http
 github.com/cloudevents/sdk-go/v2/types
-# github.com/dgrijalva/jwt-go v3.2.0+incompatible
-## explicit
-github.com/dgrijalva/jwt-go
 # github.com/eclipse/paho.mqtt.golang v1.1.1
 ## explicit
 github.com/eclipse/paho.mqtt.golang
 github.com/eclipse/paho.mqtt.golang/packets
+# github.com/form3tech-oss/jwt-go v3.2.2+incompatible
+## explicit
+github.com/form3tech-oss/jwt-go
 # github.com/golang/protobuf v1.4.2
 ## explicit
 github.com/golang/protobuf/internal/gengogrpc
@@ -54,6 +54,7 @@ github.com/google/go-github/github
 # github.com/google/go-querystring v1.0.0
 github.com/google/go-querystring/query
 # github.com/google/uuid v1.1.1
+## explicit
 github.com/google/uuid
 # github.com/googleapis/gax-go/v2 v2.0.5
 github.com/googleapis/gax-go/v2
@@ -93,9 +94,6 @@ github.com/prometheus/common/model
 github.com/prometheus/procfs
 github.com/prometheus/procfs/internal/fs
 github.com/prometheus/procfs/internal/util
-# github.com/satori/go.uuid v1.2.0
-## explicit
-github.com/satori/go.uuid
 # go.opencensus.io v0.22.4 => go.opencensus.io v0.20.2
 ## explicit
 go.opencensus.io
