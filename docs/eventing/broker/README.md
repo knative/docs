@@ -188,3 +188,5 @@ spec:
         kind: Service
         name: dlq-service
 ```
+
+See also: [Delivery Parameters](../event-delivery.md#configuring-broker-delivery)
