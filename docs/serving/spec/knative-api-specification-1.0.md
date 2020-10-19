@@ -180,7 +180,7 @@ There are several ways in which implementations can extend the model:
   STRONGLY RECOMMENDED that they be named, or prefixed, in such a way
   to clearly indicate their scope and purpose. Choosing a name that
   is too generic might lead to conflicts with other vendor extensions
-   or future changes to the specification.
+  or future changes to the specification.
 
   For example, adding authentication on a per-tag basis via annotations
   might look like:
@@ -1364,7 +1364,7 @@ Restrictions to the values of the field are noted in the Description column.
 
 ## TrafficTarget
 
-This resource specifies the how the network traffic for a particular
+This resource specifies how the network traffic for a particular
 Revision or Configuration is to be configured.
 
 <table>
