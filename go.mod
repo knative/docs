@@ -5,13 +5,13 @@ go 1.14
 require (
 	cloud.google.com/go/storage v1.10.0
 	github.com/cloudevents/sdk-go/v2 v2.2.0
-	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/eclipse/paho.mqtt.golang v1.1.1
+	github.com/form3tech-oss/jwt-go v3.2.2+incompatible
 	github.com/golang/protobuf v1.4.2
 	github.com/google/go-github v17.0.0+incompatible
+	github.com/google/uuid v1.1.1
 	github.com/kelseyhightower/envconfig v1.4.0
 	github.com/openzipkin/zipkin-go v0.2.2
-	github.com/satori/go.uuid v1.2.0
 	go.opencensus.io v0.22.4
 	golang.org/x/net v0.0.0-20200904194848-62affa334b73
 	golang.org/x/oauth2 v0.0.0-20200107190931-bf48bf16ab8d
