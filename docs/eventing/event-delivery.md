@@ -107,6 +107,19 @@ The table below summarizes what delivery parameters are supported for each Broke
 
 | Broker Class | Supported Delivery Parameters |
 | - | - |
+| googlecloud | `deadLetterSink` [^1], `retry`, `backoffPolicy`, `backoffDelay` [^2] |
 | Kafka | `deadLetterSink`, `retry`, `backoffPolicy`, `backoffDelay` |
 | MTChannelBasedBroker | depends on the underlying channel |
 | RabbitMQBroker | `deadLetterSink`, `retry`, `backoffPolicy`, `backoffDelay` |
+
+[^1]: deadLetterSink must be a GCP Pub/Sub topic uri:
+    ```yaml
+    deadLetterSink:
+      uri: pubsub://dead-letter-topic
+    ```
+
+    Please see the
+    [config-br-delivery](https://github.com/google/knative-gcp/blob/master/config/core/configmaps/br-delivery.yaml)
+    ConfigMap for a complete example.
+
+[^2]: The googlecloud broker only supports the `exponential` backoffPolicy.
