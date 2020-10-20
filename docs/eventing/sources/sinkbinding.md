@@ -227,6 +227,10 @@ cluster by entering the following command:
 kubectl delete namespace sinkbinding-example
 ```
 
+## Reference Documentation
+
+See the [PingSource specification](../../reference/api/eventing/#sources.knative.dev/v1.SinkBinding).
+
 ## Contact
 
 For any inquiries about this source, please reach out on to the

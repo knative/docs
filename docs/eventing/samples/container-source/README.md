@@ -62,7 +62,7 @@ The status of the created service can be seen using:
 kubectl get ksvc
 
 NAME            URL                                           LATESTCREATED         LATESTREADY           READY   REASON
-event-display   http://event-display.default.1.2.3.4.xip.io   event-display-gqjbw   event-display-gqjbw   True    
+event-display   http://event-display.default.1.2.3.4.xip.io   event-display-gqjbw   event-display-gqjbw   True
 ```
 
 ### Create a ContainerSource using the heartbeats image
@@ -75,7 +75,7 @@ file. Note that arguments and environment variables are set and will be passed
 to the container.
 
 ```yaml
-apiVersion: sources.knative.dev/v1beta1
+apiVersion: sources.knative.dev/v1
 kind: ContainerSource
 metadata:
   name: test-heartbeats
