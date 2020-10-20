@@ -9,10 +9,6 @@ Depending on the request tracing tool that you have installed on your Knative
 Serving cluster, see the corresponding section for details about how to
 visualize and trace your requests.
 
-If you have not yet installed the logging and monitoring components, go through
-the [installation instructions](./installing-logging-metrics-traces.md) to set
-up the necessary components.
-
 ## Configuring Traces
 
 You can update the configuration file for tracing in [config-tracing.yaml](https://github.com/knative/serving/blob/master/config/core/configmaps/tracing.yaml).
