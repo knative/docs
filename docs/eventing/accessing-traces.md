@@ -34,10 +34,14 @@ With the exception of importers, the Knative Eventing tracing is configured thro
 Most importers do _not_ use the ConfigMap and instead, use a static 1% sampling rate.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 You can use the `config-tracing` ConfigMap to configure the following Eventing components:
 =======
 You can use the `config-tracing` ConfigMap to configure the following Eventing subcomponents:
 >>>>>>> 1f0ef3c... re-add traces file
+=======
+You can use the `config-tracing` ConfigMap to configure the following Eventing components:
+>>>>>>> d848751... readd lines
  - Brokers
  - Triggers
  - InMemoryChannel
@@ -99,6 +103,9 @@ kubectl -n knative-eventing edit configmap config-tracing
 ```
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> d848751... readd lines
 ## Accessing traces in Eventing
 
 To access the traces, you use either the Zipkin or Jaeger tool. Details about using these tools to access
@@ -107,8 +114,11 @@ traces are provided in the Knative Serving observability section:
  - [Zipkin](./../serving/accessing-traces.md#zipkin)
  - [Jaeger](./../serving/accessing-traces.md#jaeger)
 
+<<<<<<< HEAD
 =======
 >>>>>>> 1f0ef3c... re-add traces file
+=======
+>>>>>>> d848751... readd lines
 ### Example
 
 The following demonstrates how to trace requests in Knative Eventing with Zipkin, using the
