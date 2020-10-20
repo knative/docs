@@ -13,6 +13,7 @@ visualize and trace your requests.
 
 You must have a Knative cluster running with the Eventing component installed. [Learn more](../install/README.md)
 
+<<<<<<< HEAD
 ## Installing observability plugins
 
 Knative Eventing uses the same tracing plugin as Knative Serving. See the
@@ -23,6 +24,8 @@ Knative Serving component itself.
 To enable request tracing in Knative Eventing,
 you must install Elasticsearch and either the Zipkin or Jaeger plugins.
 
+=======
+>>>>>>> 1f0ef3c... re-add traces file
 ## Configuring tracing
 
 With the exception of importers, the Knative Eventing tracing is configured through the
@@ -30,7 +33,11 @@ With the exception of importers, the Knative Eventing tracing is configured thro
 
 Most importers do _not_ use the ConfigMap and instead, use a static 1% sampling rate.
 
+<<<<<<< HEAD
 You can use the `config-tracing` ConfigMap to configure the following Eventing components:
+=======
+You can use the `config-tracing` ConfigMap to configure the following Eventing subcomponents:
+>>>>>>> 1f0ef3c... re-add traces file
  - Brokers
  - Triggers
  - InMemoryChannel
@@ -91,6 +98,7 @@ To edit and then immediately deploy changes to your ConfigMap, run the following
 kubectl -n knative-eventing edit configmap config-tracing
 ```
 
+<<<<<<< HEAD
 ## Accessing traces in Eventing
 
 To access the traces, you use either the Zipkin or Jaeger tool. Details about using these tools to access
@@ -99,6 +107,8 @@ traces are provided in the Knative Serving observability section:
  - [Zipkin](./../serving/accessing-traces.md#zipkin)
  - [Jaeger](./../serving/accessing-traces.md#jaeger)
 
+=======
+>>>>>>> 1f0ef3c... re-add traces file
 ### Example
 
 The following demonstrates how to trace requests in Knative Eventing with Zipkin, using the
