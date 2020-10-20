@@ -81,6 +81,14 @@ To edit and then immediately deploy changes to your ConfigMap, run the following
 kubectl -n knative-eventing edit configmap config-tracing
 ```
 
+## Accessing traces in Eventing
+
+To access the traces, you use either the Zipkin or Jaeger tool. Details about using these tools to access
+traces are provided in the Knative Serving observability section:
+
+ - [Zipkin](./../serving/accessing-traces.md#zipkin)
+ - [Jaeger](./../serving/accessing-traces.md#jaeger)
+
 ### Example
 
 The following demonstrates how to trace requests in Knative Eventing with Zipkin, using the
