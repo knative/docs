@@ -30,7 +30,7 @@ With the exception of importers, the Knative Eventing tracing is configured thro
 
 Most importers do _not_ use the ConfigMap and instead, use a static 1% sampling rate.
 
-You can use the `config-tracing` ConfigMap to configure the following Eventing subcomponents:
+You can use the `config-tracing` ConfigMap to configure the following Eventing components:
  - Brokers
  - Triggers
  - InMemoryChannel
