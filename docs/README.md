@@ -39,15 +39,6 @@ Follow the links below to learn more about Knative.
 - [All samples for serving](./serving/samples/)
 - [All samples for eventing](./eventing/samples/)
 
-### Logging and metrics
-
-- [Installing logging, metrics and traces](./serving/installing-logging-metrics-traces.md)
-- [Accessing logs](./serving/accessing-logs.md)
-- [Accessing metrics](./serving/accessing-metrics.md)
-- [Accessing traces](./serving/accessing-traces.md)
-- [Setting up a logging plugin](./serving/setting-up-a-logging-plugin.md)
-
 ### Debugging
 
 - [Debugging application issues](./serving/debugging-application-issues.md)
-- [Debugging performance issues](./serving/debugging-performance-issues.md)
