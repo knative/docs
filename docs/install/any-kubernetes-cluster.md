@@ -83,7 +83,7 @@ The following commands install the Knative Serving component.
    {{< tabs name="serving_networking" default="Istio" >}}
    {{% tab name="Ambassador" %}}
 
-{{% feature-state version="v0.8" state="alpha" %}}
+{{% feature-state version="v0.18" state="beta" %}}
 
 The following commands install Ambassador and enable its Knative integration.
 
@@ -111,7 +111,7 @@ The following commands install Ambassador and enable its Knative integration.
 1. Enable Knative support in Ambassador:
 
    ```bash
-   kubectl set env --namespace ambassador  deployments/ambassador AMBASSADOR_KNATIVE_SUPPORT=true
+   kubectl set env --namespace ambassador deployments/ambassador AMBASSADOR_KNATIVE_SUPPORT=true
    ```
 
 1. To configure Knative Serving to use Ambassador by default:
