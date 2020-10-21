@@ -26,4 +26,5 @@ initialize $@
 
 go_test_e2e ./test/e2e || fail_test
 
+# testing
 success
