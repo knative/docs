@@ -59,18 +59,9 @@ in the Knative Serving repository.
 
 - [Knative Serving code samples](./samples/README.md)
 
-## Setting up Logging and Metrics
-
-- [Installing Logging, Metrics and Traces](./installing-logging-metrics-traces.md)
-- [Accessing Logs](./accessing-logs.md)
-- [Accessing Metrics](./accessing-metrics.md)
-- [Accessing Traces](./accessing-traces.md)
-- [Setting up a logging plugin](./setting-up-a-logging-plugin.md)
-
 ## Debugging Knative Serving issues
 
 - [Debugging Application Issues](./debugging-application-issues.md)
-- [Debugging Performance Issues](./debugging-performance-issues.md)
 
 ## Configuration and Networking
 
