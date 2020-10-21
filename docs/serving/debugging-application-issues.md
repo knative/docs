@@ -27,11 +27,6 @@ for: "STDIN": Internal error occurred: admission webhook "webhook.knative.dev" d
 ERROR: Non-zero return code '1' from command: Process exited with status 1
 ```
 
-## Check application logs
-
-Knative Serving provides default out-of-the-box logs for your application.
-Access your application logs using [Accessing Logs](./accessing-logs.md) page.
-
 ## Check Route status
 
 Run the following command to get the `status` of the `Route` object with which
@@ -169,6 +164,3 @@ Choose one and use the following command to see detailed information for its
 kubectl get pod <pod-name> --output yaml
 
 ```
-
-If you see issues with "user-container" container in the containerStatuses,
-check your application logs as described below.
