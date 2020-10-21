@@ -20,11 +20,11 @@ function install_istio() {
   ISTIO_VERSION=istio-stable
   echo ">> Bringing up Istio"
   echo ">> Running Istio CRD installer"
-  kubectl apply -f "https://raw.githubusercontent.com/knative-sandbox/net-istio/master/third_party/${ISTIO_VERSION}/istio-crds.yaml" || return 1
+  kubectl apply -f "https://raw.githubusercontent.com/knative-sandbox/net-istio/release-0.18/third_party/${ISTIO_VERSION}/istio-crds.yaml" || return 1
   wait_until_batch_job_complete istio-system || return 1
 
   echo ">> Running Istio"
-  kubectl apply -f "https://raw.githubusercontent.com/knative-sandbox/net-istio/master/third_party/${ISTIO_VERSION}/istio-ci-no-mesh.yaml" || return 1
+  kubectl apply -f "https://raw.githubusercontent.com/knative-sandbox/net-istio/release-0.18/third_party/${ISTIO_VERSION}/istio-ci-no-mesh.yaml" || return 1
   wait_until_pods_running istio-system || return 1
 }
 
