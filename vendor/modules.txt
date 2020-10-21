@@ -9,10 +9,6 @@ cloud.google.com/go/internal/version
 # cloud.google.com/go/storage v1.10.0
 ## explicit
 cloud.google.com/go/storage
-# github.com/beorn7/perks v1.0.1
-github.com/beorn7/perks/quantile
-# github.com/cespare/xxhash/v2 v2.1.1
-github.com/cespare/xxhash/v2
 # github.com/cloudevents/sdk-go/v2 v2.2.0
 ## explicit
 github.com/cloudevents/sdk-go/v2
@@ -70,35 +66,8 @@ github.com/kelseyhightower/envconfig
 # github.com/lightstep/tracecontext.go v0.0.0-20181129014701-1757c391b1ac
 github.com/lightstep/tracecontext.go/traceparent
 github.com/lightstep/tracecontext.go/tracestate
-# github.com/matttproud/golang_protobuf_extensions v1.0.1
-github.com/matttproud/golang_protobuf_extensions/pbutil
-# github.com/openzipkin/zipkin-go v0.2.2
-## explicit
-github.com/openzipkin/zipkin-go
-github.com/openzipkin/zipkin-go/idgenerator
-github.com/openzipkin/zipkin-go/model
-github.com/openzipkin/zipkin-go/propagation
-github.com/openzipkin/zipkin-go/reporter
-github.com/openzipkin/zipkin-go/reporter/http
-# github.com/prometheus/client_golang v1.6.0
-github.com/prometheus/client_golang/prometheus
-github.com/prometheus/client_golang/prometheus/internal
-github.com/prometheus/client_golang/prometheus/promhttp
-# github.com/prometheus/client_model v0.2.0
-github.com/prometheus/client_model/go
-# github.com/prometheus/common v0.9.1
-github.com/prometheus/common/expfmt
-github.com/prometheus/common/internal/bitbucket.org/ww/goautoneg
-github.com/prometheus/common/model
-# github.com/prometheus/procfs v0.0.11
-github.com/prometheus/procfs
-github.com/prometheus/procfs/internal/fs
-github.com/prometheus/procfs/internal/util
 # go.opencensus.io v0.22.4 => go.opencensus.io v0.20.2
-## explicit
 go.opencensus.io
-go.opencensus.io/exporter/prometheus
-go.opencensus.io/exporter/zipkin
 go.opencensus.io/internal
 go.opencensus.io/internal/tagencoding
 go.opencensus.io/metric/metricdata
@@ -155,7 +124,6 @@ golang.org/x/oauth2/jwt
 # golang.org/x/sys v0.0.0-20200905004654-be1d3432aa8f
 golang.org/x/sys/internal/unsafeheader
 golang.org/x/sys/unix
-golang.org/x/sys/windows
 # golang.org/x/text v0.3.3
 golang.org/x/text/secure/bidirule
 golang.org/x/text/transform
@@ -296,10 +264,10 @@ gopkg.in/go-playground/webhooks.v3/github
 # gopkg.in/yaml.v2 v2.3.0
 ## explicit
 gopkg.in/yaml.v2
-# knative.dev/net-istio v0.18.1-0.20201014235231-72870cffbc01
+# knative.dev/net-istio v0.18.1-0.20201021044017-91100a5459fb
 ## explicit
 knative.dev/net-istio/third_party/istio-stable
-# knative.dev/test-infra v0.0.0-20201015231956-d236fb0ea9ff
+# knative.dev/test-infra v0.0.0-20201020210659-8f5dc4814ac3
 ## explicit
 knative.dev/test-infra/scripts
 # go.opencensus.io => go.opencensus.io v0.20.2
