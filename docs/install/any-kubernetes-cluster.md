@@ -592,7 +592,7 @@ kubectl apply --filename {{< artifact repo="eventing" file="in-memory-channel.ya
 1. Then install the NATS Streaming Channel:
 
    ```bash
-   kubectl apply --filename https://github.com/knative-sandbox/eventing-natss/blob/master/config/300-natss-channel.yaml
+   kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-natss" file="300-natss-channel.yaml" >}}
    ```
 
 {{< /tab >}}
