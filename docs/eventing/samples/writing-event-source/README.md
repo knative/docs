@@ -11,7 +11,7 @@ well as receive adapter, which events can be viewed through a basic
 Just want to see the code? The reference project is
 [https://github.com/knative-sandbox/sample-source](https://github.com/knative-sandbox/sample-source).
 
-[Knative Sources](../../sources/_index.md#knative-sources) can be used as a reference.
+[Knative Sources](../../sources/#knative-sources) can be used as a reference.
 
 ## Other ways
 
