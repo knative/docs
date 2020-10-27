@@ -17,8 +17,8 @@ require (
 	gopkg.in/go-playground/assert.v1 v1.2.1 // indirect
 	gopkg.in/go-playground/webhooks.v3 v3.13.0
 	gopkg.in/yaml.v2 v2.3.0
-	knative.dev/net-istio v0.18.1-0.20201021044017-91100a5459fb
-	knative.dev/test-infra v0.0.0-20201022003632-7d3ea6019158
+	knative.dev/net-istio v0.18.1-0.20201026073641-0bcca76646fc
+	knative.dev/test-infra v0.0.0-20201026182042-46291de4ab66
 )
 
 replace go.opencensus.io => go.opencensus.io v0.20.2
