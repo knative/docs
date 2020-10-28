@@ -38,7 +38,7 @@ func TestHugoBundles(t *testing.T) {
 		t.Errorf("Unable to switch to top-level docs directory: %w", err)
 	}
 
-	skipNames := []string{"hack", "test", "vendor"}
+	skipNames := []string{"hack", "test", "vendor", "third_party"}
 	skipped := make([]os.FileInfo, len(skipNames))
 	for i, s := range skipNames {
 		fi, err := os.Stat(s)
