@@ -91,7 +91,6 @@ Follow the links below to learn more about Knative.
 
 - [Autoscaling](./serving/autoscaling/autoscale-go/)
 - [Binding running services to eventing ecosystems](./eventing/samples/kubernetes-event-source/)
-- [Telemetry](./serving/samples/telemetry-go/README.md)
 - [REST API sample](./serving/samples/rest-api-go/README.md)
 - [All samples for serving](./serving/samples/)
 - [All samples for eventing](./eventing/samples/)
