@@ -94,12 +94,14 @@ RELEASE_NOTES=""
 RELEASE_BRANCH=""
 RELEASE_GCS_BUCKET="knative-nightly/${REPO_NAME}"
 RELEASE_DIR=""
-KO_FLAGS="-P"
+KO_FLAGS="-P --platform=all"
 VALIDATION_TESTS="./test/presubmit-tests.sh"
 ARTIFACTS_TO_PUBLISH=""
 FROM_NIGHTLY_RELEASE=""
 FROM_NIGHTLY_RELEASE_GCS=""
 export KO_DOCKER_REPO="gcr.io/knative-nightly"
+# Build stripped binary to reduce size
+export GOFLAGS="-ldflags=-s -ldflags=-w"
 export GITHUB_TOKEN=""
 
 # Convenience function to run the hub tool.
