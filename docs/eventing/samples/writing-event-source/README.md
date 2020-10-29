@@ -31,10 +31,6 @@ The target audience is already familiar with Kubernetes and Go development and
 wants to develop a new event source, importing their custom events via Knative
 Eventing into the Knative system.
 
-This tutorial is for having your event source in an independent repository.
-If you would like to contribute Knative's [`eventing-contrib`](https://github.com/knative/eventing-contrib/) and have your source
-there, there are some instructions at [Adding the event source to `eventing-contrib`](./07-eventing-contrib.md).
-
 ## Before You Begin
 
 You'll need these tools installed:
@@ -55,4 +51,4 @@ You're encouraged to clone the [sample source](https://github.com/knative-sandbo
 4. [Reconciler](./04-reconciler.md)
 5. [Receive Adapter](./05-receive-adapter.md)
 6. [Example YAML](./06-yaml.md)
-7. [Adding the event source to `eventing-contrib`](./07-eventing-contrib.md)
+7. [Moving the event source to the `knative-sandbox` organization](./07-knative-sandbox.md)
