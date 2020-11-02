@@ -46,11 +46,44 @@ if the current Knative Eventing deployment is version 0.14.x, you must upgrade t
 The Knative Eventing operator CR is configured the same way as the Knative Serving operator CR. Because the operator manages
 the Knative Eventing installation, it will overwrite any updates to the `ConfigMaps` which are used to configure Knative
 Eventing. The `KnativeEventing` custom resource allows you to set values for these ConfigMaps via the operator. Knative
-Eventing has multiple ConfigMaps named with the prefix `config-`. The `spec.config` in `KnativeEventing` has one entry
+Eventing has multiple ConfigMaps, most of them are named with the prefix `config-`. The `spec.config` in `KnativeEventing` has one entry
 `<name>` for each ConfigMap named `config-<name>`, with a value which will be used for the ConfigMap's `data`.
 
+### Setting the default channel
+
 For example, if you would like to change your default channel from `InMemoryChannel` into `KafkaChannel`, here is what
-your Eventing CR looks like, to modify the ConfigMap `config-br-default-channel`:
+your Eventing CR looks like, to modify the ConfigMap `default-ch-webhook`:
+
+```
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeEventing
+metadata:
+  name: knative-eventing
+  namespace: knative-eventing
+spec:
+  config:
+    default-ch-webhook:
+      default-ch-config: |
+        clusterDefault:
+          apiVersion: messaging.knative.dev/v1beta1
+          kind: KafkaChannel
+          spec:
+            numPartitions: 10
+            replicationFactor: 1
+        namespaceDefaults:
+          my-namespace:
+            apiVersion: messaging.knative.dev/v1beta1
+            kind: KafkaChannel
+            spec:
+              numPartitions: 10
+              replicationFactor: 1
+```
+
+The `clusterDefault` sets the global, cluster based default. Inside the `namespaceDefaults` you can configure the channel defaults on a per namespace base.
+
+### Setting the default channel for the broker
+
+For example, if you are using a Channel-based Broker and you would like to change the brokers default channel from `InMemoryChannel` into `KafkaChannel`, here is what your Eventing CR looks like, to modify the ConfigMap `config-br-default-channel`:
 
 ```
 apiVersion: operator.knative.dev/v1alpha1
