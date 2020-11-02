@@ -83,7 +83,7 @@ The `clusterDefault` sets the global, cluster based default. Inside the `namespa
 
 ### Setting the default channel for the broker
 
-If you are using a Channel-based Broker and you would like to change the brokers default channel from `InMemoryChannel` into `KafkaChannel`, here is what your Eventing CR looks like, to modify the ConfigMap `config-br-default-channel`:
+If you are using a channel-based broker and you would like to change the brokers default channel from `InMemoryChannel` into `KafkaChannel`, here is what your Eventing CR looks like, to modify the ConfigMap `config-br-default-channel`:
 
 ```
 apiVersion: operator.knative.dev/v1alpha1
