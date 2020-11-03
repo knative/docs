@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 const express = require('express')
-const { CloudEvent, Emitter, Receiver, headersFor } = require('cloudevents')
+const { CloudEvent, Emitter, HTTP, headersFor } = require('cloudevents')
 const PORT = process.env.PORT || 8080
 const target = process.env.K_SINK
 const app = express()
@@ -63,7 +63,6 @@ const receiveAndSend = (cloudEvent, res) => {
 // receiveAndReply responds with new event
 const receiveAndReply = (cloudEvent, res) => {
   const data = handle(cloudEvent.data)
-  const headers = headersFor(cloudEvent)
   const newCloudEvent = new CloudEvent({
     type: 'dev.knative.docs.sample',
     source: 'https://github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-nodejs',
@@ -72,8 +71,9 @@ const receiveAndReply = (cloudEvent, res) => {
   })
 
   console.log(`Reply event: ${JSON.stringify(newCloudEvent, null, 2)}`)
-  res.set(headers)
-  res.status(200).send(newCloudEvent)
+  const message = HTTP.binary(newCloudEvent);
+  res.set(message.headers)
+  res.status(200).send(message.body)
 }
 
 app.use((req, res, next) => {
@@ -90,7 +90,7 @@ app.use((req, res, next) => {
 
 app.post('/', function (req, res) {
   try {
-    const event = Receiver.accept(req.headers, req.body)
+    const event = HTTP.toEvent({headers: req.headers, body: req.body})
     console.log(`Accepted event: ${JSON.stringify(event, null, 2)}`)
     target ? receiveAndSend(event, res) : receiveAndReply(event, res)
   } catch (err) {
