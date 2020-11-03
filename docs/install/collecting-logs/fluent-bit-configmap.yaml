@@ -57,7 +57,7 @@ data:
         Host            log-collector.logging
         Port            24224
         Require_ack_response  True
-        
+
   parsers.conf: |
     [PARSER]
         Name   apache

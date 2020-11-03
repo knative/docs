@@ -39,7 +39,7 @@ data:
       Name      rewrite_tag
       Match     kube.*
       Rule      $kubernetes['labels']['serving.knative.dev/configuration'] ^(.+)$ knative.$kubernetes['namespace_name'].$1.log false
-  
+
     [FILTER]
       Name      rewrite_tag
       Match     kube.*
