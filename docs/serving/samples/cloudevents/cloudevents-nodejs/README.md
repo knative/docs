@@ -32,7 +32,8 @@ cd knative-docs/docs/serving/samples/cloudevents/cloudevents-nodejs
 
 ## The Sample Code
 
-In `index.js`, you will see two key functions for the different modes of operation:
+In the `index.js` file, you will see two key functions for the different modes
+of operation:
 
    ```js
    const receiveAndSend = (cloudEvent, res) => {
@@ -48,7 +49,7 @@ In `index.js`, you will see two key functions for the different modes of operati
 
 ## Build and Deploy the Application
 
-In the `Dockerfile`, you will see how the dependencies are installed using npm.
+In the `Dockerfile`, you can see how the dependencies are installed using npm.
   You can build and push this to your registry of choice via:
 
    ```shell
@@ -58,7 +59,8 @@ In the `Dockerfile`, you will see how the dependencies are installed using npm.
 
 {{< tabs name="cloudevents_nodejs_deploy" default="kn" >}} {{% tab name="yaml" %}}
 
-To deploy the Knative service, look in `service.yaml` and replace `<registry/repository/image:tag>` with the image just created.
+To deploy the Knative service, edit the `service.yaml` file and replace
+`<registry/repository/image:tag>` with the image you have just created.
 
    ```shell
    kubectl apply -f service.yaml
