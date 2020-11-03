@@ -780,7 +780,7 @@ To learn more about the Github source, try
 The following command installs the Apache Camel-K Source:
 
 ```bash
-kubectl apply --filename {{< artifact repo="eventing-contrib" file="camel.yaml" >}}
+kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-camel" file="camel.yaml" >}}
 ```
 
 To learn more about the Apache Camel-K source, try
@@ -835,7 +835,7 @@ To learn more about the Cloud Audit Logs source, try
 The following command installs the Apache CouchDB Source:
 
 ```bash
-kubectl apply --filename {{< artifact repo="eventing-contrib" file="couchdb.yaml" >}}
+kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-couchdb" file="couchdb.yaml" >}}
 ```
 
 To learn more about the Apache CouchDB source, read [our
