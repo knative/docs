@@ -29,6 +29,7 @@ Name | Status | Support | Description
 [GCP PubSub](https://github.com/google/knative-gcp) | Proof of Concept | None | Channels are backed by [GCP PubSub](https://cloud.google.com/pubsub/).
 [InMemoryChannel](https://github.com/knative/eventing/tree/{{< branch >}}/config/channels/in-memory-channel/README.md) | Proof of Concept | None | In-memory channels are a best effort Channel. They should NOT be used in Production. They are useful for development.
 [KafkaChannel](https://github.com/knative/eventing-contrib/tree/{{< branch >}}/kafka/channel/README.md) | Proof of Concept | None | Channels are backed by [Apache Kafka](http://kafka.apache.org/) topics.
+[Knative sandbox channel that uses Confluent Go Client, and the librdkafka C library](https://github.com/knative-sandbox/eventing-kafka) | Proof of Concept | None | Kafka Channel implementation, contributed by SAP's Kyma project, is a Knative Eventing implementation of a Kafka backed channel which provides advanced functionality and production grade qualities as an alternative to what the eventing-contrib/kafka implementation offers.
 [NatssChannel](https://github.com/knative-sandbox/eventing-natss/tree/{{< branch >}}/config/README.md) | Proof of Concept | None | Channels are backed by [NATS Streaming](https://github.com/nats-io/nats-streaming-server#configuring).
 
 
