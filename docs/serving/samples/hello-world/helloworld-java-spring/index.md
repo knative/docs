@@ -7,7 +7,7 @@ type: "docs"
 
 This guide describes the steps required to create the `helloworld-java-spring` sample app and deploy it to your cluster.
 
-The sample app reads a TARGET environment variable, and prints Hello ${TARGET}!. If TARGET is not specified, World is used as the default value.
+The sample app reads a `TARGET` environment variable, and prints `Hello ${TARGET}!`. If `TARGET` is not specified, `World` is used as the default value.
 
 You can also download a working copy of the sample, by running the following commands:
 
@@ -22,11 +22,11 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
   [installation instructions](../../../../install/README.md).
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured.
-- (optional) The Knatice CLI client [kn](https://github.com/knative/client/releases) that simplifies the deployment. Alternative you can also use `kubectl` and apply resource files directly.
+- (optional) The Knative CLI client [kn](https://github.com/knative/client/releases) can be used to simplify the deployment. Alternatively, you can use `kubectl`, and apply resource files directly.
 
-## Build
+## Building the sample app
 
-1. From the console, create a new empty web project using the curl and unzip
+1. From the console, create a new, empty web project by using the curl and unzip
    commands:
 
    ```shell
@@ -38,7 +38,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
    unzip helloworld.zip
    ```
 
-   If you don't have curl installed, you can accomplish the same by visiting the
+   If you don't have `curl` installed, you can accomplish the same by visiting the
    [Spring Initializr](https://start.spring.io/) page. Specify Artifact as
    `helloworld` and add the `Web` dependency. Then click `Generate Project`,
    download and unzip the sample archive.
@@ -46,7 +46,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
 1. Update the `SpringBootApplication` class in
    `src/main/java/com/example/helloworld/HelloworldApplication.java` by adding a
    `@RestController` to handle the "/" mapping and also add a `@Value` field to
-   provide the TARGET environment variable:
+   provide the `TARGET` environment variable:
 
    ```java
    package com.example.helloworld;
@@ -85,12 +85,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
 
    Go to `http://localhost:8080/` to see your `Hello World!` message.
 
-1. In your project directory, create a file named `Dockerfile` and copy the code
-   block below into it. For detailed instructions on dockerizing a Spring Boot
-   app, see
-   [Spring Boot with Docker](https://spring.io/guides/gs/spring-boot-docker/).
-   For additional information on multi-stage docker builds for Java see
-   [Creating Smaller Java Image using Docker Multi-stage Build](http://blog.arungupta.me/smaller-java-image-docker-multi-stage-build/).
+1. In your project directory, create a file named `Dockerfile` and copy the code block below into it:
 
    ```docker
    # Use the official maven/Java 8 image to create a build artifact.
@@ -117,12 +112,13 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
    # Run the web service on container startup.
    CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/helloworld.jar"]
    ```
-Once you have recreated the sample code files (or used the files in the sample
-folder) you're ready to build and deploy the sample app.
+For detailed instructions on dockerizing a Spring Boot app, see [Spring Boot with Docker](https://spring.io/guides/gs/spring-boot-docker/).
 
-1. Use Docker to build the sample code into a container. To build and push with
-   Docker Hub, run these commands replacing `{username}` with your Docker Hub
-   username:
+For additional information on multi-stage docker builds for Java see [Creating Smaller Java Image using Docker Multi-stage Build](http://blog.arungupta.me/smaller-java-image-docker-multi-stage-build/).
+
+**NOTE:** Use Docker to build the sample code into a container. To build and push with Docker Hub, run these commands replacing `{username}` with your Docker Hub username.
+
+1. Use Docker to build the sample code into a container, then push the container to the Docker registry:
 
    ```shell
    # Build the container on your local machine
@@ -131,10 +127,9 @@ folder) you're ready to build and deploy the sample app.
    # Push the container to docker registry
    docker push {username}/helloworld-java-spring
    ```
-## Deploying
+## Deploying the app
 
-1. After the build has completed and the container is pushed to Docker Hub, you
-   can deploy the app into your cluster.
+After the build has completed and the container is pushed to Docker Hub, you can deploy the app into your cluster.
 
    {{< tabs name="helloworld_java_spring" default="kn" >}}
    {{% tab name="yaml" %}}
@@ -186,11 +181,11 @@ folder) you're ready to build and deploy the sample app.
    - Create a new immutable revision for this version of the app.
    - Network programming to create a route, ingress, service, and load balance
      for your app.
-   - Automatically scale your pods up and down (including to zero active pods).
+   - Automatically scale your pods up and down, including scaling down to zero active pods.
 
 ## Verification
 
-1. Run one of the followings commands to find the domain URL for your service.
+1. Find the domain URL for your service:
 
    {{< tabs name="service_url" default="kn" >}}
    {{% tab name="kubectl" %}}
@@ -220,7 +215,7 @@ folder) you're ready to build and deploy the sample app.
    {{< /tab >}}
    {{< /tabs >}}
 
-1. Now you can make a request to your app and see the result. Replace
+1. Make a request to your app and observe the result. Replace
    the URL below with the URL returned in the previous command.
 
    Example:
