@@ -9,7 +9,7 @@ aliases:
 The Knative Eventing operator can be configured with these options:
 
 - [Version Configuration](#version-configuration)
-- [Eventing Configuration by ConfigMap](#eventing-configuration-by-configMap)
+- [Eventing Configuration by ConfigMap](#eventing-configuration-by-configmap)
 - [Private repository and private secret](#private-repository-and-private-secrets)
 - [Configuring default broker class](#configuring-default-broker-class)
 

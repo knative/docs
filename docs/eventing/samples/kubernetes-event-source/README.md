@@ -96,7 +96,7 @@ all the YAML files deployed in this sample to point at that namespace.
    block below into it.
 
    ```yaml
-   apiVersion: sources.knative.dev/v1beta1
+   apiVersion: sources.knative.dev/v1
    kind: ApiServerSource
    metadata:
      name: testevents

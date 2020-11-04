@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"log"
 	"net/http"
 	"os"
 	"sync/atomic"
@@ -16,8 +17,8 @@ var (
 	ip          = flag.String("ip", "", "ip address of knative ingress")
 	port        = flag.String("port", "80", "port of call")
 	host        = flag.String("host", "autoscale-go.default.example.com", "host name of revision under test")
-	qps         = flag.Int("qps", 10, "max requests per second")
-	concurrency = flag.Int("concurrency", 10, "max in-flight requests")
+	qps         = flag.Int64("qps", 10, "max requests per second")
+	concurrency = flag.Int64("concurrency", 10, "max in-flight requests")
 	duration    = flag.Duration("duration", time.Minute, "duration of the test")
 	verbose     = flag.Bool("verbose", false, "verbose output for debugging")
 )
@@ -25,22 +26,21 @@ var (
 type result struct {
 	success    bool
 	statusCode int
-	latency    int64
+	latency    time.Duration
 }
 
 func get(url string, client *http.Client, report chan *result) {
 	start := time.Now()
 	result := &result{}
 	defer func() {
-		end := time.Now()
-		result.latency = end.UnixNano() - start.UnixNano()
+		result.latency = time.Since(start)
 		report <- result
 	}()
 
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		if *verbose {
-			fmt.Printf("%v\n", err)
+			fmt.Println("NewRequest:", err)
 		}
 		return
 	}
@@ -48,7 +48,7 @@ func get(url string, client *http.Client, report chan *result) {
 	res, err := client.Do(req)
 	if err != nil {
 		if *verbose {
-			fmt.Printf("%v\n", err)
+			fmt.Println("Do:", err)
 		}
 		return
 	}
@@ -56,7 +56,7 @@ func get(url string, client *http.Client, report chan *result) {
 	result.statusCode = res.StatusCode
 	if result.statusCode != http.StatusOK {
 		if *verbose {
-			fmt.Printf("%+v\n", res)
+			fmt.Printf("Response: %+v\n", res)
 		}
 		return
 	}
@@ -66,10 +66,10 @@ func get(url string, client *http.Client, report chan *result) {
 func reporter(stopCh <-chan time.Time, report chan *result, inflight *int64) {
 	tickerCh := time.NewTicker(time.Second).C
 	var (
-		total       int64
-		count       int64
-		nanoseconds int64
-		successful  int64
+		total         int
+		count         float64
+		successful    float64
+		totalDuration time.Duration
 	)
 	fmt.Println("REQUEST STATS:")
 	for {
@@ -79,17 +79,18 @@ func reporter(stopCh <-chan time.Time, report chan *result, inflight *int64) {
 		case <-tickerCh:
 			fmt.Printf("Total: %v\tInflight: %v\tDone: %v ", total, atomic.LoadInt64(inflight), count)
 			if count > 0 {
-				fmt.Printf("\tSuccess Rate: %.2f%%\tAvg Latency: %.4f sec\n", float64(successful)/float64(count)*100, float64(nanoseconds)/float64(count)/(1000000000))
+				fmt.Printf("\tSuccess Rate: %.2f%%\tAvg Latency: %.4f sec\n",
+					successful/count*100, totalDuration.Seconds()/count)
 			} else {
 				fmt.Printf("\n")
 			}
 			count = 0
-			nanoseconds = 0
+			totalDuration = 0
 			successful = 0
 		case r := <-report:
 			total++
 			count++
-			nanoseconds += r.latency
+			totalDuration += r.latency
 			if r.success {
 				successful++
 			}
@@ -104,7 +105,7 @@ func main() {
 		ip = &ipAddress
 	}
 	if *ip == "" {
-		panic("need either $IP_ADDRESS env var or --ip flag")
+		log.Fatal("Need either $IP_ADDRESS env var or --ip flag")
 	}
 	url := fmt.Sprintf(
 		"http://%v:%v?sleep=%v&prime=%v&bloat=%v",
@@ -117,13 +118,13 @@ func main() {
 
 	go reporter(stopCh, report, &inflight)
 
-	qpsCh := time.NewTicker(time.Duration(time.Second.Nanoseconds() / int64(*qps))).C
+	qpsCh := time.NewTicker(time.Duration(time.Second.Nanoseconds() / *qps)).C
 	for {
 		select {
 		case <-stopCh:
 			return
 		case <-qpsCh:
-			if atomic.LoadInt64(&inflight) < int64(*concurrency) {
+			if atomic.LoadInt64(&inflight) < *concurrency {
 				atomic.AddInt64(&inflight, 1)
 				go func() {
 					get(url, client, report)

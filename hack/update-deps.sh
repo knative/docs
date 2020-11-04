@@ -32,6 +32,7 @@ VERSION="master"
 # float forward in this repository.
 FLOATING_DEPS=(
   "knative.dev/test-infra@${VERSION}"
+  "knative.dev/net-istio@${VERSION}"
 )
 
 # Parse flags to determine any we should pass to Go mod.

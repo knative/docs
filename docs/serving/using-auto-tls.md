@@ -31,7 +31,8 @@ Knative supports the following Auto TLS modes:
 
     - In this type, your cluster does not need to be able to talk to your DNS server. You just 
     need to map your domain to the IP of the cluser ingress.
-    - When using HTTP-01 challenge, **a certificate will be provisioned per Knative Service.** Certificate provision per namespace is not supported when using HTTP-01 challenge. 
+    - When using HTTP-01 challenge, **a certificate will be provisioned per Knative Service.**
+    - **HTTP-01 does not support provisioning a certificate per namespace.**
 
 ## Before you begin
 
@@ -153,6 +154,9 @@ and which DNS provider validates those requests.
 ### Install networking-ns-cert component
 
 If you choose to use the mode of provisioning certificate per namespace, you need to install `networking-ns-cert` components.
+
+**IMPORTANT:** Provisioning a certificate per namespace only works with DNS-01
+ challenge. This component cannot be used with HTTP-01 challenge.
 
 1. Determine if `networking-ns-cert` deployment is already installed by 
 running the following command:
@@ -319,3 +323,25 @@ be able to handle HTTPS traffic.
     ```
 
     Note that the URL will be **https** in this case.
+
+### Disable Auto TLS per service or route
+
+If you have Auto TLS enabled in your cluster, you can choose to disable Auto TLS for individual services or routes by adding the annotation `networking.knative.dev/disableAutoTLS: true`.
+
+Using the previous `autoscale-go` example:
+
+1. Edit the service using `kubectl edit service.serving.knative.dev/autoscale-go -n default` and add the annotation:
+```yaml
+ apiVersion: serving.knative.dev/v1
+ kind: Service
+ metadata:
+   annotations:
+    ...
+     networking.knative.dev/disableAutoTLS: "true"
+    ...
+```
+2. The service URL should now be **http**, indicating that AutoTLS is disabled:
+```
+NAME           URL                                          LATEST               AGE     CONDITIONS   READY   REASON
+autoscale-go   http://autoscale-go.default.1.arenault.dev   autoscale-go-dd42t   8m17s   3 OK / 3     True    
+```
