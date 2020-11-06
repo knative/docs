@@ -25,6 +25,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-go
   create one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
+- (optional) The Knatice CLI client [kn](https://github.com/knative/client/releases) that simplifies the deployment. Alternative you can also use `kubectl` and apply resource files directly.
 
 ## Recreating the sample code
 
