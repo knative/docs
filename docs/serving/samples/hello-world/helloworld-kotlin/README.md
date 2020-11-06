@@ -51,7 +51,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-kotlin
       embeddedServer(Netty, port.toInt()) {
           routing {
               get("/") {
-                  call.respondText("Hello $target!", ContentType.Text.Html)
+                  call.respondText("Hello $target!\n", ContentType.Text.Html)
               }
           }
       }.start(wait = true)
