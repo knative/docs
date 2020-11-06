@@ -1,0 +1,40 @@
+# This uses the OpenTelemetry operator:
+# kubectl apply -f https://github.com/open-telemetry/opentelemetry-operator/releases/latest/download/opentelemetry-operator.yaml
+
+apiVersion: opentelemetry.io/v1alpha1
+kind: OpenTelemetryCollector
+metadata:
+  name: otel
+  namespace: metrics
+spec:
+  config: |
+    receivers:
+      jaeger:
+        protocols:
+          grpc:
+      opencensus:
+        endpoint: "0.0.0.0:55678"
+
+    processors:
+      queued_retry: {}
+
+    exporters:
+      logging:
+      prometheus:
+        endpoint: "localhost:8889"
+        send_timestamps: true
+
+    service:
+      extensions:
+        health_check:
+        pprof:
+        zpages:
+      pipelines:
+        metrics:
+          receivers: [opencensus]
+          exporters: [prometheus]
+        traces:
+          receivers: [jaeger]
+          processors: [queued_retry]
+          exporters: [logging]
+
