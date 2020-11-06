@@ -542,7 +542,7 @@ The following commands install the Knative Eventing component.
 1. Then install the Apache Kafka Channel:
 
    ```bash
-   curl -L "{{< artifact org="knative-sandbox" artifact repo="eventing-kafka" file="channel-consolidated.yaml" >}}" \
+   curl -L "{{< artifact org="knative-sandbox" repo="eventing-kafka" file="channel-consolidated.yaml" >}}" \
     | sed 's/REPLACE_WITH_CLUSTER_URL/my-cluster-kafka-bootstrap.kafka:9092/' \
     | kubectl apply --filename -
    ```
@@ -790,7 +790,7 @@ To learn more about the Apache Camel-K source, try
 The following command installs the Apache Kafka Source:
 
 ```bash
-kubectl apply --filename {{< artifact org="knative-sandbox" artifact repo="eventing-kafka" file="source.yaml" >}}
+kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-kafka" file="source.yaml" >}}
 ```
 
 To learn more about the Apache Kafka source, try
