@@ -25,9 +25,9 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-shell
   [installation instructions](../../../../install/README.md).
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured.
-- (optional) The Knatice CLI client [kn](https://github.com/knative/client/releases) that simplifies the deployment. Alternative you can also use [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) and apply resource files directly.
+- Optional: You can use the Knative CLI client [`kn`](https://github.com/knative/client/releases) to simplify resource creation and deployment. Alternatively, you can use `kubectl` to apply resource files directly.
 
-## Build
+## Building
 
 1. Create a new file named `script.sh` and paste the script below. This will run netcat (`nc`) in an endless loop, returning a friendly welcome message.
 
