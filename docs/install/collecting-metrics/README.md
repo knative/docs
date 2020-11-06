@@ -25,26 +25,31 @@ instance using the
 [Collector]<-scrape[Prometheus]
 -->
 
+1. The OpenTelemetry Operator requires [cert-manager](https://cert-manager.io/).
+   Typically, Knative installations will already have cert-manager for auto-TLS,
+   but if not,
+   [install from these instructions](https://cert-manager.io/docs/installation/kubernetes/).
+
 1. The first step is to install the operator:
 
    ```shell
    kubectl apply --filename https://github.com/open-telemetry/opentelemetry-operator/releases/latest/download/opentelemetry-operator.yaml
    ```
 
-2. Next, create a namespace for the collector to run in:
+1. Next, create a namespace for the collector to run in:
 
    ```shell
    kubectl create namespace metrics
    ```
 
-3. And then create an OpenTelemetryCollector object to store the configuration
+1. And then create an OpenTelemetryCollector object to store the configuration
    for the collector:
 
    ```shell
    kubectl apply --filename collector.yaml
    ```
 
-4. Finally, update the `config-observability` ConfigMap in Knative Serving and
+1. Finally, update the `config-observability` ConfigMap in Knative Serving and
    Eventing
    ```shell
    kubectl patch --namespace knative-serving configmap/config-observability \
