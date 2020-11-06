@@ -5,32 +5,21 @@ weight: 1
 type: "docs"
 ---
 
-A simple web app written in Go that you can use for testing. It reads in an env
-variable `TARGET` and prints `Hello ${TARGET}!`. If `TARGET` is not specified,
-it will use `World` as the `TARGET`.
+This guide describes the steps required to to create the `helloworld-go` sample app
+and deploy it to your cluster.
+The sample app reads a `TARGET` environment variable, and prints `Hello ${TARGET}!`.
+If `TARGET` is not specified, `World` is used as the default value.
 
-Follow the steps below to create the sample code and then deploy the app to your
-cluster. You can also download a working copy of the sample, by running the
-following commands:
+## Prerequisites
 
-```shell
-git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
-cd knative-docs/docs/serving/samples/hello-world/helloworld-go
-```
-
-## Before you begin
-
-- A Kubernetes cluster with Knative installed and DNS configured. Follow the
-  [installation instructions](../../../../install/README.md) if you need to
-  create one.
-- [Docker](https://www.docker.com) installed and running on your local machine,
-  and a Docker Hub account configured (we'll use it for a container registry).
+You will need:
+- A Kubernetes cluster with [Knative installed and DNS configured](../../../../install/README.md).
+- [Docker](https://www.docker.com) installed and running on your local machine, and a Docker Hub account configured.
 - (optional) The Knatice CLI client [kn](https://github.com/knative/client/releases) that simplifies the deployment. Alternative you can also use `kubectl` and apply resource files directly.
 
-## Recreating the sample code
+## Build
 
-1. Create a new file named `helloworld.go` and paste the following code. This
-   code creates a basic web server which listens on port 8080:
+1. Create a basic web server which listens on port 8080, by copying the following code into a new file named `helloworld-go`:
 
    ```go
    package main
@@ -66,14 +55,20 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-go
    }
    ```
 
-1. In your project directory, create a file named `Dockerfile` and copy the code
-   block below into it. For detailed instructions on dockerizing a Go app, see
-   [Deploying Go servers with Docker](https://blog.golang.org/docker).
+   You can also download a working copy of the sample, by running the
+   following commands:
+
+   ```shell
+   git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
+   cd knative-docs/docs/serving/samples/hello-world/helloworld-go
+   ```
+
+
+1. Navigate to your project directory and copy the following code into a new file named `Dockerfile`:
 
    ```docker
    # Use the official Golang image to create a build artifact.
    # This is based on Debian and sets the GOPATH to /go.
-   # https://hub.docker.com/_/golang
    FROM golang:1.13 as builder
 
    # Create and change to the app directory.
@@ -104,21 +99,16 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-go
    CMD ["/server"]
    ```
 
-1. Use the go tool to create a
+1. Use the Go tool to create a
    [`go.mod`](https://github.com/golang/go/wiki/Modules#gomod) manifest.
 
    ```shell
    go mod init github.com/knative/docs/docs/serving/samples/hello-world/helloworld-go
    ```
 
-## Building and deploying the sample
+## Deploying
 
-Once you have recreated the sample code files (or used the files in the sample
-folder) you're ready to build and deploy the sample app.
-
-1. Use Docker to build the sample code into a container. To build and push with
-   Docker Hub, run these commands replacing `{username}` with your Docker Hub
-   username:
+1. To build the sample code into a container, and push using Docker Hub, enter the following commands and replace `{username}` with your Docker Hub username:
 
    ```shell
    # Build the container on your local machine
@@ -129,74 +119,93 @@ folder) you're ready to build and deploy the sample app.
    ```
 
 1. After the build has completed and the container is pushed to docker hub, you
-   can deploy the app into your cluster.  Pick one of the following methods:
+   can deploy the app into your cluster.  Choose one of the following methods:
 
 
    {{< tabs name="helloworld_go" default="kn" >}}
    {{% tab name="yaml" %}}
 
-   Create a new file, `service.yaml` and copy the following service definition
-   into the file. Make sure to replace `{username}` with your Docker Hub
-   username.
+   1. Create a new file, `service.yaml` and copy the following service definition
+      into the file. Make sure to replace `{username}` with your Docker Hub
+      username.
 
-   ```yaml
-   apiVersion: serving.knative.dev/v1
-   kind: Service
-   metadata:
-     name: helloworld-go
-     namespace: default
-   spec:
-     template:
-       spec:
-         containers:
-           - image: docker.io/{username}/helloworld-go
-             env:
-               - name: TARGET
-                 value: "Go Sample v1"
-   ```
+      ```yaml
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      metadata:
+        name: helloworld-go
+        namespace: default
+      spec:
+        template:
+          spec:
+            containers:
+              - image: docker.io/{username}/helloworld-go
+                env:
+                  - name: TARGET
+                    value: "Go Sample v1"
+      ```
 
-   Ensure that the container image value
-   in `service.yaml` matches the container you built in the previous step. Apply
-   the configuration using `kubectl`:
+      Check that the container image value in the `service.yaml` file matches the container you built in the previous step.
 
-   ```shell
-   kubectl apply --filename service.yaml
-   ```
+   1. Apply the configuration using `kubectl`:
 
-   Now that your service is created, Knative will perform the following steps:
+      ```shell
+      kubectl apply --filename service.yaml
+      ```
 
-   - Create a new immutable revision for this version of the app.
-   - Network programming to create a route, ingress, service, and load balance
-     for your app.
-   - Automatically scale your pods up and down (including to zero active pods).
+      After your service is created, Knative will perform the following steps:
 
-   Run the following command to find the domain URL for your service:
+      - Create a new immutable revision for this version of the app.
+      - Network programming to create a route, ingress, service, and load balance
+        for your app.
+      - Automatically scale your pods up and down (including to zero active pods).
 
-   ```shell
-   kubectl get ksvc helloworld-go  --output=custom-columns=NAME:.metadata.name,URL:.status.url
-   ```
+   1. Run the following command to find the domain URL for your service:
 
-   Example:
+      ```shell
+      kubectl get ksvc helloworld-go  --output=custom-columns=NAME:.metadata.name,URL:.status.url
+      ```
 
-   ```shell
-    NAME                URL
-    helloworld-go       http://helloworld-go.default.1.2.3.4.xip.io
-   ```
+      Example:
+
+      ```shell
+       NAME                URL
+       helloworld-go       http://helloworld-go.default.1.2.3.4.xip.io
+      ```
 
    {{< /tab >}}
    {{% tab name="kn" %}}
 
-   If using `kn` to deploy:
+   Use `kn` to deploy the service:
 
    ```shell
    kn service create helloworld-go --image=docker.io/{username}/helloworld-go --env TARGET="Go Sample v1"
    ```
 
-   This will block until your service is deployed and ready, and ultimately it will print the URL through which you can access the service.
+   You should see output like this:
+   ```shell
+   Creating service 'helloworld-go' in namespace 'default':
+
+     0.031s The Configuration is still working to reflect the latest desired specification.
+     0.051s The Route is still working to reflect the latest desired specification.
+     0.076s Configuration "helloworld-go" is waiting for a Revision to become ready.
+    15.694s ...
+    15.738s Ingress has not yet been reconciled.
+    15.784s Waiting for Envoys to receive Endpoints data.
+    16.066s Waiting for load balancer to be ready
+    16.237s Ready to serve.
+
+   Service 'helloworld-go' created to latest revision 'helloworld-go-jjzgd-1' is available at URL:
+   http://helloworld-go.default.1.2.3.4.xip.io
+   ```
+
+   You can then access your service through the resulting URL.
 
    {{< /tab >}}
    {{< /tabs >}}
 
+
+## Verifying
 
 1. Now you can make a request to your app and see the result. Replace
    the URL below with the URL returned in the previous command.
@@ -208,10 +217,19 @@ folder) you're ready to build and deploy the sample app.
 
    > Note: Add `-v` option to get more detail if the `curl` command failed.
 
-## Removing the sample app deployment
+## Removing
 
 To remove the sample app from your cluster, delete the service record:
 
+{{< tabs name="service_url" default="kn" >}}
+{{% tab name="kubectl" %}}
 ```shell
-kubectl delete ksvc helloworld-go
+kubectl delete --filename service.yaml
 ```
+{{< /tab >}}
+{{% tab name="kn" %}}
+```shell
+kn service delete helloworld-go
+```
+{{< /tab >}}
+{{< /tabs >}}
