@@ -26,6 +26,7 @@ spec:
     metadata:
       annotations:
         autoscaling.knative.dev/target: "150"
+        autoscaling.knative.dev/metric: "rps"
     spec:
       containers:
         - image: gcr.io/knative-samples/helloworld-go
