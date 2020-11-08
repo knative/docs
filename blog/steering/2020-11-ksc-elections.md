@@ -4,7 +4,7 @@ linkTitle: "Democracy is a beautiful thing"
 Author: [Carlos Santana](https://twitter.com/csantanapr)
 Author handle: https://github.com/csantanapr
 date: 2020-11-06
-description: "Knative Steering Committee Elections"
+description: "KSC Elections: Nominations"
 type: "blog"
 ---
 
@@ -18,9 +18,10 @@ This election will shape the future of Knative as a community and project.
 The Knative Steering Committee (KSC) is
 responsible for the general health of the Knative community, and this is the first general election for that body.
 
-The process already started on October 27th with the announcement of the elections to the mailing list. The next milestone is to have a complete list of candidates, and nominations close on November 9th at 0000 UTC (5pm Pacific).
+The process already started on October 27th with the announcement of the elections to the mailing list.
+The next milestone is to have a complete list of candidates, and nominations close on November 9th at 0000 UTC (5pm Pacific).
 
-If you want to stand for election, open a PR against the
+If you are eligible and want to stand for election, the process is simple just open a PR against the
 [knative/community repository](https://github.com/knative/community) to include
 your candidate profile in the `/elections/2020/SC` folder, with your name as the
 filename.  This profile should include:
@@ -48,4 +49,4 @@ This is the schedule for the elections if you want to follow along.
 
 You can read the current [Knative Steering Committee Election - 2020 Voters Guide](https://github.com/knative/community/blob/master/elections/2020/SC/README.md) for all the details.
 
-And remember if you have the right to vote, speak your mind and vote because every vote counts!
+And remember if you have the right to vote, then speak your mind by voting because every vote counts!
