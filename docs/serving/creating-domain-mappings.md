@@ -7,7 +7,7 @@ type: "docs"
 
 If the Domain Mapping feature is installed, you can serve
 custom domains backed by Knative Services. For example, if you
-own the "MyDomain.com" domain name, you can point DNS at your
+own the "mydomain.com" domain name, you can point DNS at your
 Knative cluster, and have this domain name be served by a
 Knative Service.
 
