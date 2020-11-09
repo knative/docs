@@ -26,6 +26,11 @@ to service requests.
 You will also need to point the domain name at your Knative cluster using the
 tools provided by your domain registrar.
 
+Domain Mappings map a single, non-wildcard domain to a specific Knative
+Service. For example in the example yaml below, the "mydomain.com" Domain
+Mapping maps only "mydomain.com" and not "www.mydomain.com". You can create
+multiple Domain Mappings to map multiple domains.
+
 ### Procedure
 
 1. Create a new file named `domainmapping.yaml` containing the following information.
