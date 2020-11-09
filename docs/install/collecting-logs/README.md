@@ -62,6 +62,63 @@ tools:
 kubectl exec --namespace logging --stdin --tty --container nginx log-collector-0
 ```
 
+## Local collector
+
+If you are using a local Kubernetes cluster for development (Kind, Docker
+Desktop, or Minikube), you can create a `hostPath` PersistentVolume to store the
+logs on your desktop OS. This will allow you to use all your normal desktop
+tools on the files without needing Kubernetes-specific tools.
+
+The PersistentVolumeClaim will look something like this, but the `hostPath` will
+vary based on your Kubernetes software and host operating system. Some example
+values are documented below.
+
+```yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: shared-logs
+  labels:
+    app: logs-collector
+spec:
+  accessModes:
+      - "ReadWriteOnce"
+  storageClassName: manual
+  claimRef:
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    name: logs-log-collector-0
+    namespace: logging
+  capacity:
+    storage: 5Gi
+  hostPath:
+    path:  /run/desktop/mnt/host/c/Users/evank/logs/
+```
+
+And then you'll need to update the StatefulSet's `volumeClaimTemplates` to
+reference the `shared-logs` volume, like this fragment of yaml:
+
+```yaml
+  volumeClaimTemplates:
+    metadata:
+      name: logs
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      volumeName: shared-logs
+```
+
+Here are some known shared volume combinations to a `logs` directory in the home
+directory for `$USER`:
+
+| Host OS  | Kubernetes     | `hostPath` |
+| Mac OS   | Kind           | `TODO` |
+| Mac OS   | Minikube       | `TODO` |
+| Mac OS   | Docker Desktop | `TODO` |
+| Windows  | Kind           | `/run/desktop/mnt/host/c/Users/${USER}/` |
+| Windows  | Minikube       | `/run/desktop/mnt/host/c/Users/${USER}/` |
+| Windows  | Docker Desktop | `/run/desktop/mnt/host/c/Users/${USER}/` |
+
+
 ## Setting up the forwarders
 
 For the most part, you can follow the
@@ -86,3 +143,4 @@ If you are using a different log collection infrastructure (Splunk, for
 example),
 [follow the directions in the FluentBit documentation](https://docs.fluentbit.io/manual/pipeline/outputs)
 on how to configure your forwarders.
+
