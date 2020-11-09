@@ -1,7 +1,7 @@
 ---
 title: "Democracy is a beautiful thing"
 linkTitle: "Democracy is a beautiful thing"
-Author: [Carlos Santana](https://twitter.com/csantanapr)
+Author: "[Carlos Santana](https://twitter.com/csantanapr)"
 Author handle: https://github.com/csantanapr
 date: 2020-11-06
 description: "KSC Elections: Nominations"
