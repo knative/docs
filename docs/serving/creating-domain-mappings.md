@@ -36,7 +36,7 @@ tools provided by your domain registrar.
    name: mydomain.com
    namespace: default
   spec:
-   ref: 
+   ref:
      name: helloworld-go
      kind: Service
      apiVersion: serving.knative.dev/v1
