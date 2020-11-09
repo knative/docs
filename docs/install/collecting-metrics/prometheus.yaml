@@ -1,92 +1,134 @@
 apiVersion: v1
-kind: Service
-metadata:
-  name: otel-prom
-  namespace: metrics
-  labels:
-    app.kubernetes.io/name: otel-collector
-spec:
-  ports:
-  - name: prom-export
-    port: 8889
-    targetPort: 8889
-  selector:
-    app.kubernetes.io/name: otel-collector
-    app.kubernetes.io/component: opentelemetry-collector
-  type: ClusterIP
----
-apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
-metadata:
-  name: otel-collector
-  namespace: metrics
-  labels:
-    source: otel
-spec:
-  selector:
-    matchLabels:
-      app.kubernetes.io/name: otel-collector
-  endpoints:
-  - port: prom-export
-    path: "/metrics"
-    honorTimestamps: true
-    honorLabels: true
----
-apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: prometheus
   namespace: metrics
 ---
-apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: ClusterRole
+# Note: For general cluster use, you may want to use a ClusteRole and
+# ClusterRoleBinding to grant Prometheus the ability to list all services and
+# pods in the cluster. For this use case, we only need to grant access to the
+# same namespace, and can use a Role and RoleBinding.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
 metadata:
-  name: prometheus
+  name: watch-services-and-pods
+  namespace: metrics
 rules:
-- apiGroups: [""]
-  resources:
-  - nodes
-  - nodes/metrics
-  - services
-  - endpoints
-  - pods
-  verbs: ["get", "list", "watch"]
-- apiGroups: [""]
-  resources:
-  - configmaps
-  verbs: ["get"]
 - apiGroups:
-  - networking.k8s.io
-  resources:
-  - ingresses
-  verbs: ["get", "list", "watch"]
-- nonResourceURLs: ["/metrics"]
-  verbs: ["get"]
+  - resources:
+    - services
+    - endpoints
+    - pods
+    verbs: ["get", "list", "watch"]
 ---
-apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
 metadata:
-  name: prometheus
+  name: prom-watch-services-and-pods
+  namespace: metrics
 roleRef:
   apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: prometheus
+  kind: Role
+  name: watch-services-and-pods
 subjects:
-- kind: ServiceAccount
-  name: prometheus
-  namespace: metrics
+  - kind: ServiceAccount
+    name: prometheus
 ---
-apiVersion: monitoring.coreos.com/v1
-kind: Prometheus
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prom-config
+  namespace: metrics
+data:
+  config/prometheus.yaml: |
+    global:
+      scrape_interval: 30s
+      scrape_timeout: 10s
+      evaluation_interval: 30s
+
+    rule_files:
+    - /etc/prometheus/rules/prometheus-rules-*.yaml
+
+    scrape_configs:
+    - job_name: otel-collector
+      honor_labels: true
+      honor_timestamps: true
+      metrics_path: /metrics
+      # Note that we *don't want* to use relabel to collect labels here,
+      # because these are the labels of the opentelemetry collector.
+      relabel_configs:
+      - action: keep
+        source_labels: [__meta_kubernetes_service_label_app]
+        regex: otel-collector
+      - action: keep
+        source_labels: [__meta_kubernetes_endpoint_port_name]
+        regex: prom-export
+      kubernetes_sd_configs:
+      - role: endpoints
+        namespaces:
+          names:
+          - metrics
+        selectors:
+          - role: endpoints
+            label: "app:otel-export"
+---
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: prometheus
   namespace: metrics
 spec:
-  serviceAccountName: prometheus
-  serviceMonitorSelector:
+  selector:
     matchLabels:
-      source: otel
-  resources:
-    requests:
-      memory: 200Mi
-  enableAdminAPI: true
+      app: prometheus
+  replicas: 1  # Each replica will hold all data in memory.
+  template:
+    metadata:
+      labels:
+        app: prometheus
+    spec:
+      containers:
+      - name: prometheus
+        image: quay.io/prometheus/prometheus
+        args:
+        - --config.file=/etc/prometheus/config/prometheus.yaml
+        - --storage.tsdb.path=/prometheus
+        - --storage.tsdb.retention.time=24h
+        - --storage.tsdb.no-lockfile
+        - --web.console.templates=/etc/prometheus/consoles
+        - --web.console.libraries=/etc/prometheus/console_libraries
+        - --web.enable-admin-api
+        - --web.enable-lifecycle
+        - --web.route-prefix=/
+        resources:
+          # This is a small sizing; adjust as needed for your environment.
+          requests:
+            memory: 200Mi
+            cpu: 50m
+        ports:
+        - name: ui
+          containerPort: 9090
+        volumeMounts:
+        - name: config
+          mountPath: /etc/prometheus
+        - name: prometheus-emptydir
+          mountPath: /prometheus
+    volumes:
+    - name: config
+      ConfigMap:
+        name: prom-config
+    - name: prometheus-emptydir
+      emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus
+  namespace: metrics
+spec:
+  selector:
+    matchLabels:
+      app: prometheus
+  ports:
+  - name: ui
+    targetPort: 9090

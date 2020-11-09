@@ -1,28 +1,18 @@
-# This uses the OpenTelemetry operator:
-# kubectl apply -f https://github.com/open-telemetry/opentelemetry-operator/releases/latest/download/opentelemetry-operator.yaml
-
-apiVersion: opentelemetry.io/v1alpha1
-kind: OpenTelemetryCollector
+apiVersion: v1
+kind: ConfigMap
 metadata:
-  name: otel
-  namespace: metrics
-spec:
-  config: |
+  name: otel-collector-config
+  namespace: 
+data:
+  collector.yaml: |
     receivers:
-      jaeger:
-        protocols:
-          grpc:
       opencensus:
         endpoint: "0.0.0.0:55678"
-
-    processors:
-      queued_retry: {}
 
     exporters:
       logging:
       prometheus:
-        endpoint: "localhost:8889"
-        send_timestamps: true
+        endpoint: "0.0.0.0:8889"
 
     service:
       extensions:
@@ -32,9 +22,77 @@ spec:
       pipelines:
         metrics:
           receivers: [opencensus]
+          processors: []
           exporters: [prometheus]
-        traces:
-          receivers: [jaeger]
-          processors: [queued_retry]
-          exporters: [logging]
-
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: otel-collector
+  namespace: metrics
+  labels:
+    app: otel-collector
+spec:
+  selector:
+    matchLabels:
+      app: otel-collector
+  replicas: 1  # This can be increased for a larger system.
+  template:
+    metadata:
+      labels:
+        app: otel-collector
+    spec:
+      containers:
+      - name: collector
+        args:
+        - --config=/conf/collector.yaml
+        image: otel/opentelemetry-collector:latest
+        resources:
+          requests:  # Note: these are suitable for a small instance, but may need to be increased for a large instance.
+            memory: 100Mi
+            cpu: 50m
+        ports:
+        - name: otel
+          containerPort: 55678
+        - name: prom-export
+          containerPort: 8889
+        - name: zpages  # A /debug page
+          containerPort: 55679
+        volumeMounts:
+          - mountPath: /conf
+            name: config
+      volumes:
+      - name: config
+        configMap:
+          name: otel-collector-config
+          items:
+            - key: collector.yaml
+              path: collector.yaml
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: otel-collector
+  namespace: metrics
+spec:
+  selector:
+    matchLabels:
+      app: otel-collector
+  ports:
+  - port: 55678
+    name: otel
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: otel-export
+  namespace: metrics
+  labels:
+    app: otel-export
+spec:
+  selector:
+    matchLabels:
+      app: otel-collector
+  ports:
+  - port: 8889
+    name: prom-export

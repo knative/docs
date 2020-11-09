@@ -13,38 +13,35 @@ rebuild or reconfigure the Knative binaries.
 The collector provides a long-lived location where various Knative components
 can push metrics (and eventually traces) to be retained and collected by a
 monitoring service. For this example, we'll configure a single collector
-instance using the
-[opentelemetry-operator](https://github.com/open-telemetry/opentelemetry-operator).
+instance using a ConfigMap and a Deployment. For more complex deployments, some
+of this can be automated using the
+[opentelemetry-operator](https://github.com/open-telemetry/opentelemetry-operator),
+but it's also easy to manage this service directly.
 
-![Diagram of components reporting to collector, which is scrapde by Prometheus](./system-diagram.svg)
+![Diagram of components reporting to collector, which is scraped by Prometheus](./system-diagram.svg)
 
 <!-- yuml.me UML rendering of:
 [queue-proxy1]->[Collector]
 [queue-proxy2]->[Collector]
 [autoscaler]->[Collector]
+[controller]->[Collector]
 [Collector]<-scrape[Prometheus]
 -->
 
-1. The first step is to install the operator:
-
-   ```shell
-   kubectl apply --filename https://github.com/open-telemetry/opentelemetry-operator/releases/latest/download/opentelemetry-operator.yaml
-   ```
-
-2. Next, create a namespace for the collector to run in:
+1. First, create a namespace for the collector to run in:
 
    ```shell
    kubectl create namespace metrics
    ```
 
-3. And then create an OpenTelemetryCollector object to store the configuration
+2. And then create an OpenTelemetryCollector object to store the configuration
    for the collector:
 
    ```shell
-   kubectl apply --filename collector.yaml
+   kubectl apply --filename https://raw.githubusercontent.com/knative/docs/master/docs/install/collecting-metrics/collector.yaml
    ```
 
-4. Finally, update the `config-observability` ConfigMap in Knative Serving and
+3. Finally, update the `config-observability` ConfigMap in Knative Serving and
    Eventing
    ```shell
    kubectl patch --namespace knative-serving configmap/config-observability \
