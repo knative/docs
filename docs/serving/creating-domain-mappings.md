@@ -1,0 +1,57 @@
+---
+title: "Creating a Mapping between a Custom Domain Name and a Knative Service (Alpha)"
+linkTitle: "Creating Domain Mappings (Alpha)"
+weight: 64
+type: "docs"
+---
+
+If the Domain Mapping feature is installed, you can serve
+custom domains backed by Knative Services. For example, if you
+own the "MyDomain.com" domain name, you can point DNS at your
+Knative cluster, and have this domain name be served by a
+Knative Service.
+
+## Before you begin
+
+To map a custom domain to a Knative Service, you should first [create a Knative
+Service](https://knative.dev/docs/serving/creating-services/).
+
+## Creating a Domain Mapping
+
+To create a mapping from a custom domain to a Knative Service, you need to
+create a YAML file that defines a Domain Mapping.
+This YAML file specifies the domain name to map and the Knative Service to use
+to service requests.
+
+You will also need to point the domain name at your Knative cluster using the
+tools provided by your domain registrar.
+
+### Procedure
+
+1. Create a new file named `domainmapping.yaml` containing the following information.
+  ```yaml
+  apiVersion: serving.knative.dev/v1alpha1
+  kind: DomainMapping
+  metadata:
+   name: mydomain.com
+   namespace: default
+  spec:
+   ref: 
+     name: helloworld-go
+     kind: Service
+     apiVersion: serving.knative.dev/v1
+  ```
+  * `name`(metadata): The domain name you wish to map to the Knative Service.
+  * `namespace`: The namespace that both the DomainMapping and Knative Service use.
+  * `name`(ref): The Knative Service which should be used to service requests
+    for the custom domain name.
+
+1. From the directory where the new `domainmapping.yaml` file was created,
+   deploy the domain mapping by applying the `domainmapping.yaml` file.
+ ```
+ kubectl apply --filename domainmapping.yaml
+ ```
+
+1. You will also need to point the "mydomain.com" domain name at the IP address
+   of your Knative cluster. Details of this step differ depending on your
+   domain registrar.
