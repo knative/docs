@@ -4,9 +4,9 @@ name := "helloworld-scala"
 
 version := "0.0.1"
 
-scalaVersion := "2.12.8"
+scalaVersion := "2.12.12"
 
-mainClass in Compile := Some("klang.HelloWorldScala")
+mainClass in Compile := Some("example.HelloWorldScala")
 
 scalacOptions ++= Seq("-encoding", "UTF-8")
 

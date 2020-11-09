@@ -27,7 +27,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-scala
 
 ## Configuring the Service descriptor
 
-Importantly, in [helloworld-scala.yaml](./helloworld-scala.yaml) **change the
+Importantly, in [service.yaml](./service.yaml) **change the
 image reference to match up with your designated repository**, i.e. replace
 `{username}` with your Dockerhub username in the example below.
 

@@ -1,4 +1,4 @@
-package klang
+package example
 
 import akka.actor.ActorSystem
 import akka.event.LoggingAdapter
@@ -25,7 +25,7 @@ object HelloWorldScala {
     val config = system.settings.config
 
     // These are read from the application.conf file under `resources`
-    val message = config.getString("helloworld.message")
+    val target = config.getString("helloworld.target")
     val host = config.getString("helloworld.host")
     val port = config.getInt("helloworld.port")
 
@@ -34,7 +34,7 @@ object HelloWorldScala {
       path("") {
         get {
           log.info("Received request to HelloWorldScala")
-          complete(HttpEntity(`text/html(UTF-8)`, message))
+          complete(HttpEntity(`text/html(UTF-8)`, s"Hello $target!"))
         }
       }
 
