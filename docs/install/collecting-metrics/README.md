@@ -34,14 +34,13 @@ but it's also easy to manage this service directly.
    kubectl create namespace metrics
    ```
 
-2. And then create an OpenTelemetryCollector object to store the configuration
-   for the collector:
+1. And then create a Deployment, Service, and ConfigMap for the collector:
 
    ```shell
    kubectl apply --filename https://raw.githubusercontent.com/knative/docs/master/docs/install/collecting-metrics/collector.yaml
    ```
 
-3. Finally, update the `config-observability` ConfigMap in Knative Serving and
+1. Finally, update the `config-observability` ConfigMap in Knative Serving and
    Eventing
    ```shell
    kubectl patch --namespace knative-serving configmap/config-observability \
