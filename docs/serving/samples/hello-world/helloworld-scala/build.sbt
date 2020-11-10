@@ -8,7 +8,7 @@ scalaVersion := "2.13.3"
 
 mainClass in Compile := Some("example.HelloWorldScala")
 
-scalacOptions ++= Seq("-encoding", "UTF-8", "-deprecation")
+scalacOptions ++= Seq("-encoding", "UTF-8")
 
 lazy val akkaVersion = "2.6.10"
 lazy val akkaHttpVersion = "10.2.1"
