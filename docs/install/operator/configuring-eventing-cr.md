@@ -72,11 +72,13 @@ spec:
             replicationFactor: 1
         namespaceDefaults:
           my-namespace:
-            apiVersion: messaging.knative.dev/v1beta1
-            kind: KafkaChannel
+            apiVersion: messaging.knative.dev/v1
+            kind: InMemoryChannel
             spec:
-              numPartitions: 1
-              replicationFactor: 1
+              delivery:
+                backoffDelay: PT0.5S
+                backoffPolicy: exponential
+                retry: 5
 ```
 
 The `clusterDefault` sets the global, cluster based default. Inside the `namespaceDefaults` you can configure the channel defaults on a per namespace base.
