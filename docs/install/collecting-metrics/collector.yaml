@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: otel-collector-config
-  namespace: 
+  namespace: metrics
 data:
   collector.yaml: |
     receivers:
@@ -76,8 +76,7 @@ metadata:
   namespace: metrics
 spec:
   selector:
-    matchLabels:
-      app: otel-collector
+    app: "otel-collector"
   ports:
   - port: 55678
     name: otel
@@ -91,8 +90,7 @@ metadata:
     app: otel-export
 spec:
   selector:
-    matchLabels:
-      app: otel-collector
+    app: otel-collector
   ports:
   - port: 8889
     name: prom-export

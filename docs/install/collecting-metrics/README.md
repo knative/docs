@@ -45,7 +45,7 @@ but it's also easy to manage this service directly.
    ```shell
    kubectl patch --namespace knative-serving configmap/config-observability \
      --type merge \
-     --patch '{"data":{"metrics.backend-destination":"opencensus","metrics.opencensus-address":"otel-collector.metrics:55678"}}'
+     --patch '{"data":{"metrics.backend-destination":"opencensus","request-metrics-backend-destination":"opencensus","metrics.opencensus-address":"otel-collector.metrics:55678"}}'
    kubectl patch --namespace knative-eventing configmap/config-observability \
      --type merge \
      --patch '{"data":{"metrics.backend-destination":"opencensus","metrics.opencensus-address":"otel-collector.metrics:55678"}}'
