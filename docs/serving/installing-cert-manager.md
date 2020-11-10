@@ -31,9 +31,6 @@ You must meet the following requirements to install cert-manager for Knative:
 
 ## Downloading and installing cert-manager
 
-Use the following steps to download, install, and configure cert-manager for
-your Knative cluster environment:
-
 Follow the steps in the official `cert-manager` website to download and install cert-manager
 
    [Installation steps](https://cert-manager.io/docs/installation/kubernetes/)
