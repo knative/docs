@@ -81,7 +81,7 @@ spec:
                 retry: 5
 ```
 
-The `clusterDefault` sets the global, cluster based default. Inside the `namespaceDefaults` you can configure the channel defaults on a per namespace base.
+The `clusterDefault` sets the global, cluster based default. Inside the `namespaceDefaults` you can configure the channel defaults on a per namespace basis.
 
 ### Setting the default channel for the broker
 
