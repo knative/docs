@@ -82,7 +82,7 @@ metadata:
     app: logs-collector
 spec:
   accessModes:
-      - "ReadWriteOnce"
+    - "ReadWriteOnce"
   storageClassName: manual
   claimRef:
     apiVersion: v1
@@ -92,32 +92,54 @@ spec:
   capacity:
     storage: 5Gi
   hostPath:
-    path:  /run/desktop/mnt/host/c/Users/evank/logs/
+    path: /run/desktop/mnt/host/c/Users/evank/logs/
 ```
 
 And then you'll need to update the StatefulSet's `volumeClaimTemplates` to
 reference the `shared-logs` volume, like this fragment of yaml:
 
 ```yaml
-  volumeClaimTemplates:
-    metadata:
-      name: logs
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      volumeName: shared-logs
+volumeClaimTemplates:
+  metadata:
+    name: logs
+  spec:
+    accessModes: ["ReadWriteOnce"]
+    volumeName: shared-logs
 ```
 
-Here are some known shared volume combinations to a `logs` directory in the home
-directory for `$USER`:
+### Kind
 
-| Host OS  | Kubernetes     | `hostPath` |
-| Mac OS   | Kind           | `TODO` |
-| Mac OS   | Minikube       | `TODO` |
-| Mac OS   | Docker Desktop | `TODO` |
-| Windows  | Kind           | `/run/desktop/mnt/host/c/Users/${USER}/` |
-| Windows  | Minikube       | `/run/desktop/mnt/host/c/Users/${USER}/` |
-| Windows  | Docker Desktop | `/run/desktop/mnt/host/c/Users/${USER}/` |
+When creating your cluster, you'll need to use a `kind-config.yaml` when
+creating your cluster and specify `extraMounts` for each node, like so:
 
+```yaml
+apiversion: kind.x-k8s.io/v1alpha4
+kind: Cluster
+nodes:
+  - role: control-plane
+    extraMounts:
+      - hostPath: ./logs
+        containerPath: /shared/logs
+  - role: worker
+    extraMounts:
+      - hostPath: ./logs
+        containerPath: /shared/logs
+```
+
+You can then use `/shared/logs` as the `spec.hostPath.path` in your
+PersistentVolume. Note that the directory path `./logs` is relative to the
+directory that the Kind cluster was created in.
+
+### Docker Desktop
+
+Docker desktop automatically creates some shared mounts between the host and the
+guest operating systems, so you only need to know the path to your home
+directory. Here are some examples for different operating systems:
+
+| Host OS | `hostPath` | | Mac OS | `/Users/${USER}` | | Windows |
+`/run/desktop/mnt/host/c/Users/${USER}/` | | Linux | `/home/${USER}` |
+
+<!-- TODO: Minikube from someone who uses that. -->
 
 ## Setting up the forwarders
 
@@ -143,4 +165,3 @@ If you are using a different log collection infrastructure (Splunk, for
 example),
 [follow the directions in the FluentBit documentation](https://docs.fluentbit.io/manual/pipeline/outputs)
 on how to configure your forwarders.
-

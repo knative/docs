@@ -1,4 +1,4 @@
-package klang
+package example
 
 import akka.actor.ActorSystem
 import akka.event.LoggingAdapter
@@ -15,8 +15,6 @@ object HelloWorldScala {
   def main(args: Array[String]): Unit = {
     // Creates and initializes an Akka Actor System
     implicit val system: ActorSystem = ActorSystem("HelloWorldScala")
-    // Creates and initializes a Materializer to be used for the Akka HTTP Server
-    implicit val mat: Materializer = ActorMaterializer()
     // Specifies where any Futures in this code will execute
     implicit val ec: ExecutionContext = system.dispatcher
     // Obtains a logger to be used for the sample
@@ -25,7 +23,7 @@ object HelloWorldScala {
     val config = system.settings.config
 
     // These are read from the application.conf file under `resources`
-    val message = config.getString("helloworld.message")
+    val target = config.getString("helloworld.target")
     val host = config.getString("helloworld.host")
     val port = config.getInt("helloworld.port")
 
@@ -34,13 +32,13 @@ object HelloWorldScala {
       path("") {
         get {
           log.info("Received request to HelloWorldScala")
-          complete(HttpEntity(`text/html(UTF-8)`, message))
+          complete(HttpEntity(`text/html(UTF-8)`, s"Hello $target!"))
         }
       }
 
     // Here we create the Http server, and bind it to the host and the port,
     // so we can serve requests using the route(s) we defined previously.
-    val binding = Http().bindAndHandle(serviceRoute, host, port) andThen {
+    val binding = Http().newServerAt(host, port).bind(serviceRoute) andThen {
       case Success(sb) =>
         log.info("Bound: {}", sb)
       case Failure(t) =>

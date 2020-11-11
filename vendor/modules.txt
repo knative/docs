@@ -265,10 +265,10 @@ gopkg.in/go-playground/webhooks.v3/github
 # gopkg.in/yaml.v2 v2.3.0
 ## explicit
 gopkg.in/yaml.v2
-# knative.dev/hack v0.0.0-20201028205534-fe80f1c8af68
+# knative.dev/hack v0.0.0-20201103151104-3d5abc3a0075
 ## explicit
 knative.dev/hack
-# knative.dev/net-istio v0.18.1-0.20201029032834-e6aad9b17020
+# knative.dev/net-istio v0.18.1-0.20201106015007-40b599209108
 ## explicit
 knative.dev/net-istio/third_party/istio-stable
 # go.opencensus.io => go.opencensus.io v0.20.2

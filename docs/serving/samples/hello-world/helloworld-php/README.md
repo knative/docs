@@ -33,7 +33,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-php
    ```php
    <?php
    $target = getenv('TARGET', true) ?: 'World';
-   echo sprintf("Hello %s!", $target);
+   echo sprintf("Hello %s!\n", $target);
    ```
 
 1. Create a file named `Dockerfile` and copy the code block below into it. See

@@ -35,11 +35,7 @@ a brief description of each:
   abstractions to enable binding event sources (e.g. Github Webhooks, Kafka) and
   consumers (e.g. Kubernetes or Knative Services).
 
-Knative also has an
-[**Observability plugin**](#installing-the-observability-plugin)
-{{< feature-state version="v0.14" state="deprecated" short=true >}} which
-provides standard tooling that can be used to get visibility into the health of
-the software running on Knative.
+<!-- TODO: Mention CLI here too and point to CLI docs?-->
 
 ## Before you begin
 
@@ -546,7 +542,7 @@ The following commands install the Knative Eventing component.
 1. Then install the Apache Kafka Channel:
 
    ```bash
-   curl -L "{{< artifact repo="eventing-contrib" file="kafka-channel.yaml" >}}" \
+   curl -L "{{< artifact org="knative-sandbox" repo="eventing-kafka" file="channel-consolidated.yaml" >}}" \
     | sed 's/REPLACE_WITH_CLUSTER_URL/my-cluster-kafka-bootstrap.kafka:9092/' \
     | kubectl apply --filename -
    ```
@@ -587,13 +583,12 @@ kubectl apply --filename {{< artifact repo="eventing" file="in-memory-channel.ya
 {{% tab name="NATS Channel" %}}
 
 1. First, [Install NATS Streaming for
-   Kubernetes](https://github.com/knative/eventing-contrib/blob/{{<
-   version >}}/natss/config/broker/README.md)
+   Kubernetes](https://github.com/knative-sandbox/eventing-natss/tree/master/config)
 
 1. Then install the NATS Streaming Channel:
 
    ```bash
-   kubectl apply --filename {{< artifact repo="eventing-contrib" file="natss-channel.yaml" >}}
+   kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-natss" file="300-natss-channel.yaml" >}}
    ```
 
 {{< /tab >}}
@@ -780,7 +775,7 @@ To learn more about the Github source, try
 The following command installs the Apache Camel-K Source:
 
 ```bash
-kubectl apply --filename {{< artifact repo="eventing-contrib" file="camel.yaml" >}}
+kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-camel" file="camel.yaml" >}}
 ```
 
 To learn more about the Apache Camel-K source, try
@@ -795,7 +790,7 @@ To learn more about the Apache Camel-K source, try
 The following command installs the Apache Kafka Source:
 
 ```bash
-kubectl apply --filename {{< artifact repo="eventing-contrib" file="kafka-source.yaml" >}}
+kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-kafka" file="source.yaml" >}}
 ```
 
 To learn more about the Apache Kafka source, try
@@ -835,12 +830,10 @@ To learn more about the Cloud Audit Logs source, try
 The following command installs the Apache CouchDB Source:
 
 ```bash
-kubectl apply --filename {{< artifact repo="eventing-contrib" file="couchdb.yaml" >}}
+kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-couchdb" file="couchdb.yaml" >}}
 ```
 
-To learn more about the Apache CouchDB source, read [our
-documentation]((https://github.com/knative/eventing-contrib/blob/{{<
-version >}}/couchdb/README.md)
+To learn more about the Apache CouchDB source, read the [documentation](https://github.com/knative-sandbox/eventing-couchdb/blob/master/source/README.md).
 
 {{< /tab >}}
 
