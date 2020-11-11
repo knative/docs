@@ -20,7 +20,8 @@ Highlights:
 - Improvements for cold start by adding a scale down delay.
 - No longer mounting `/var/log` this allows certain images like `docker.io/nginx` that use this directory to be use as Knative Service.
 - New Alpha feature that allows for domain name mapping at namespace scope.
-
+- You specify delivery spec defaults for brokers in Eventing configmap `config-br-defaults`
+- Eventing keeps improving stability by squashing bugs.
 
 ### Serving v0.19
 
@@ -47,7 +48,35 @@ Highlights:
 
 ### Eventing v0.19
 
-TODO
+💫 New Features & Changes
+- Config-br-defaults support setting delivery spec defaults ([#4328](https://github.com/knative/eventing/pull/4328))
+
+🐞 Bug Fixes
+- Fix a bug which could cause eventing-webhook to crashloop on initial creation. ([#4168](https://github.com/knative/eventing/pull/4168))
+- Change the image pull policy so sinkbinding source tests work with kind. ([#4317](https://github.com/knative/eventing/pull/4317))
+- Dependency readiness could sometimes be missed because mismatched informer/lister was being used in the trigger reconciler. ([#4296](https://github.com/knative/eventing/pull/4296))
+- Dispatcher was incorrectly behaving like a normal reconciler instead of skipping status updates. I wonder if this was causing grief battling the normal reconciler. ([#4280](https://github.com/knative/eventing/pull/4280))
+- Fix issue [#4375](https://github.com/knative/eventing/issues/4375) where we would not reconcile changes to reconcile policy or duration. ([#4405](https://github.com/knative/eventing/pull/4405))
+- Only update the subscriber statuses in IMC after they have been added to handlers. Reduces failures where the
+  subscribers have been marked before the dataplane has been actually configured. ([#4435](https://github.com/knative/eventing/pull/4435))
+- Retry on network failures ([#4454](https://github.com/knative/eventing/pull/4454))
+- ingress / filter now handle proper k8s lifecycle. ([#3917](https://github.com/knative/eventing/pull/3917))
+- KnativeHistory extension is not added anymore to events going through channels ([#4366](https://github.com/knative/eventing/pull/4366))
+
+🧹 Clean up
+- Move fuzzer (test related code) to test files so they don't get baked into our binaries. Small reduction in binary size. ([#4399](https://github.com/knative/eventing/pull/4399))
+- DeliverySpec validation rejects a negative retry config. ([#4216](https://github.com/knative/eventing/pull/4216))
+- Just clean up some unused fields from the mtbroker reconciler struct. ([#4318](https://github.com/knative/eventing/pull/4318))
+- Point to Broker ref instead of using a hard coded path. Also makes things little easier to reuse against other brokers. ([#4278](https://github.com/knative/eventing/pull/4278)))
+- Reducing places where we pull in fuzzers. ([#4447](https://github.com/knative/eventing/pull/4447))
+- Simplify the IMC implementation, reduce churn due to global resyncs. ([#4359](https://github.com/knative/eventing/pull/4359))
+- Use github action to run codecov. ([#4237](https://github.com/knative/eventing/pull/4237))
+- remove all knative fuzzers from our binaries. ([#4402](https://github.com/knative/eventing/pull/4402))
+- Move ContainerSource to v1 API. ([#4257](https://github.com/knative/eventing/pull/4257))
+- Eventing now tests the supported Kubernetes version range pre-submit. ([#4273](https://github.com/knative/eventing/pull/4273)))
+- Run kind e2e tests every 4 hours on Github actions. ([#4412](https://github.com/knative/eventing/pull/4412))
+- Updated go-retryablehttp to v0.6.7 ([#4423](https://github.com/knative/eventing/pull/4423))
+
 
 ### Eventing Contributions v0.19
 
@@ -66,12 +95,18 @@ TODO
 Thanks to these contributors who contributed to v0.19!
 
 - @dprotaso
+- @eclipselu
+- @ian-mi
 - @joshuawilson
 - @julz
 - @markusthoemmes
 - @mattmoor
 - @nak3
+- @pierDipi
+- @runzexia
+- @slinkydeveloper
 - @taragu
+- @vaikas
 - @whaught
 - @yanweiguo
 
