@@ -16,12 +16,14 @@ A new version of Knative is now available across multiple components.
 Follow the instructions in the documentation [Installing Knative](https://knative.dev/docs/install/) for the respective component.
 
 Highlights:
+- All components built by Knative are now multi architecture incuding `arm64` which is the architecture used in ARM based machines like the [Raspberry pi](https://www.raspberrypi.org/).
 - The monitoring bundle has been removed and the git repository archived.
 - Improvements for cold start by adding a scale down delay.
 - No longer mounting `/var/log` this allows certain images like `docker.io/nginx` that use this directory to be use as Knative Service.
 - New Alpha feature that allows for domain name mapping at namespace scope.
 - You specify delivery spec defaults for brokers in Eventing configmap `config-br-defaults`
 - Eventing keeps improving stability by squashing bugs.
+- The CLI now offers `arm64` binary, and introduce two new commands `kn service apply` and `kn service import`
 
 ### Serving v0.19
 
@@ -142,7 +144,62 @@ Release Notes for [eventing-rabbitmq](https://github.com/knative-sandbox/eventin
 
 ### Client v0.19
 
-TODO
+- The `kn` 0.19.0 introduces two new commands (`kn service apply` and `kn service import`) and removes some deprecated options, in addition to bug fixes and some other goodies described below.
+- You can find the full list of changes in the [CHANGELOG](https://github.com/knative/client/blob/master/CHANGELOG.adoc).
+
+🚨 Breaking
+
+The following deprecated options have been removed:
+
+-  `--async` for all CRUD commands. Use `--no-wait` instead
+-  `--requests-cpu`, `--request-memory`, `--limits-cpu` and `--limits-memory` when managing services. The replacement is to use `--limit memory=..` and `--limit cpu=...` (same for `--request`). Both options can be combined as in `--limit memory=256Mi,cpu=500m`
+
+💫 New Features & Changes
+
+#### `kn service apply`
+
+- A new `kn service apply` command has been added to allow a _declarative management_ for your Knative service.
+    This new command is especially useful in can CI/CD context to allow for idempotent operations when creating or updating services.
+    It works much like `kubectl apply` and used a client-side 3-way merge algorithm to update service. The kubectl merge algorithm is directly reused here.
+    As `apply` operates on Knative's custom resource types, it suffers the same limitation as the client-side merge algorithm in `kubectl apply` when dealing with CRDs.
+    I.e. arrays can't be merged but are just overwritten by an update.
+    This limitation affects all containers specific parameters.
+
+- For the future, we plan to add a better merge algorithm that supports a full strategic 3-way merge like the support of `kubectl apply` has for intrinsic K8s resources.
+
+- It is important to note that `kn service apply` is fundamentally different to `kn service update` as with `kn service apply` the full configuration needs to be provided as command-line options or within a declaration file when used with `--filename`.
+With `kn service update` you only specify the parts to be updated and don't touch any other service configuration.
+This characteristic of `apply` also implies that you always have to provide the image as the only mandatory parameter with `kn service apply`.
+
+- For example:
+    ```
+    # Initially apply a service with the given image and env var
+    kn service apply random --image rhuss/random:1.0 --env foo=bar
+
+    # Update the service to add a ying=yang env var to the already existing one
+    kn service update random --env ying=yang
+
+    # Apply a full new configuration. Note that foo=bar will be removed
+    # because it is not specified here.
+    kn service apply random --image rhuss/random:1.0 --env ying=yang
+    ```
+
+#### `kn service import`
+
+- `kn service import` is the counterpart to `kn service export` and allows you to import a Service and all active revision that has been exported.
+_Active revisions_ are revisions that are referenced in a traffic-split.
+
+- This command is still marked experimental, and there are some known issues in the import how the `generation` of revision are created.
+Please gives us feedback on how we can improve the support for this feature.
+
+## Other CLI Features
+
+The following other features have been added, too:
+
+-  An `arm64` flavour has been added to the released artefacts, as well as a `checksum.txt` which caries the sha256sum of all artefacts.
+-  A `channel:` prefix has been added for `--sink` parameters, so that channels can be directly addressed by name.
+-  Aliases are now appearing correctly in the help messages
+- The [Client API](https://github.com/knative/client/blob/b93ca9b34d56621350e43a714a79ba32bd20d7b0/pkg/serving/v1/client.go#L49-L117) as a new list filter `WithLabel()` which can be used when listing services.
 
 ### Operator v0.19
 
