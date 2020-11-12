@@ -10,12 +10,12 @@ image: knative-eventing.png
 ---
 
 
-## Announcing Knative v0.19 Release
+### Announcing Knative v0.19 Release
 
 A new version of Knative is now available across multiple components.
 Follow the instructions in the documentation [Installing Knative](https://knative.dev/docs/install/) for the respective component.
 
-**Table of Contents**
+#### Table of Contents
 - [Serving v0.19](#serving-v019)
 - [Eventing v0.19](#eventing-v019)
 - Eventing Extentions
@@ -26,7 +26,7 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
 - [Thank you contributors v0.19](#thank-you-contributors-v0.19)
 
 
-## Highlights
+### Highlights
 
 - All components built by Knative are now multi architecture incuding `arm64` which is the architecture used in ARM based machines like the [Raspberry pi](https://www.raspberrypi.org/).
 - The monitoring bundle has been removed and the git repository archived.
@@ -220,10 +220,10 @@ TODO
 ### Thank you contributors v0.19
 
 - [@antoineco](https://github.com/antoineco)
+- [@daisy-ycguo](https://github.com/daisy-ycguo)
+- [@danielhelfand](https://github.com/danielhelfand)
 - [@dprotaso](https://github.com/dprotaso)
 - [@dsimansk](https://github.com/dsimansk)
-- [@danielhelfand](https://github.com/danielhelfand)
-- [@daisy-ycguo](https://github.com/daisy-ycguo)
 - [@eclipselu](https://github.com/eclipselu)
 - [@ian-mi](https://github.com/ian-mi)
 - [@joshuawilson](https://github.com/joshuawilson)
@@ -233,8 +233,8 @@ TODO
 - [@nak3](https://github.com/nak3)
 - [@navidshaikh](https://github.com/navidshaikh)
 - [@pierDipi](https://github.com/pierDipi)
-- [@runzexia](https://github.com/runzexia)
 - [@rhuss](https://github.com/rhuss)
+- [@runzexia](https://github.com/runzexia)
 - [@sheetalsingala](https://github.com/sheetalsingala)
 - [@slinkydeveloper](https://github.com/slinkydeveloper)
 - [@taragu](https://github.com/taragu)
