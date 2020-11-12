@@ -9,7 +9,7 @@ aliases:
 The Knative Eventing operator can be configured with these options:
 
 - [Version Configuration](#version-configuration)
-- [Eventing Configuration by ConfigMap](#eventing-configuration-by-configmap)
+- [Configuring Knative Eventing using ConfigMaps](#configuring-knative-eventing-using-configmaps)
 - [Private repository and private secret](#private-repository-and-private-secrets)
 - [Configuring default broker class](#configuring-default-broker-class)
 - [System Resource Settings](#system-resource-settings)
@@ -42,47 +42,11 @@ enables upgrading or downgrading the Knative Eventing version, without needing t
 Note that the Knative Operator only permits upgrades or downgrades by one minor release version at a time. For example,
 if the current Knative Eventing deployment is version 0.14.x, you must upgrade to 0.15.x before upgrading to 0.16.x.
 
-## Eventing Configuration by ConfigMap
+## Configuring Knative Eventing using ConfigMaps
 
-The Knative Eventing operator CR is configured the same way as the Knative Serving operator CR. Because the operator manages
-the Knative Eventing installation, it will overwrite any updates to the `ConfigMaps` which are used to configure Knative
-Eventing. The `KnativeEventing` custom resource allows you to set values for these ConfigMaps via the operator. Knative
-Eventing has multiple ConfigMaps, most of them are named with the prefix `config-`. The `spec.config` in `KnativeEventing` has one entry
-`<name>` for each ConfigMap named `config-<name>`, with a value which will be used for the ConfigMap's `data`.
-
-### Setting the default channel
-
-For example, if you would like to change your default channel from `InMemoryChannel` into `KafkaChannel`, here is what
-your Eventing CR looks like, to modify the ConfigMap `default-ch-webhook`:
-
-```
-apiVersion: operator.knative.dev/v1alpha1
-kind: KnativeEventing
-metadata:
-  name: knative-eventing
-  namespace: knative-eventing
-spec:
-  config:
-    default-ch-webhook:
-      default-ch-config: |
-        clusterDefault:
-          apiVersion: messaging.knative.dev/v1beta1
-          kind: KafkaChannel
-          spec:
-            numPartitions: 10
-            replicationFactor: 1
-        namespaceDefaults:
-          my-namespace:
-            apiVersion: messaging.knative.dev/v1
-            kind: InMemoryChannel
-            spec:
-              delivery:
-                backoffDelay: PT0.5S
-                backoffPolicy: exponential
-                retry: 5
-```
-
-The `clusterDefault` sets the global, cluster based default. Inside the `namespaceDefaults` you can configure the channel defaults on a per namespace basis.
+The Knative Operator manages the Knative Eventing installation, and therefore overwrites any updates to the `ConfigMaps` which are used to configure Knative Eventing.
+The `KnativeEventing` custom resource allows you to set values for these ConfigMaps via the Operator, so that they are not overwritten.
+<!--TODO: Explain how they use the KnativeEventing custom resource to set these values?-->
 
 ### Setting the default channel for the broker
 
