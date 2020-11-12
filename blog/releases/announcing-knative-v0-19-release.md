@@ -204,7 +204,7 @@ _Active revisions_ are revisions that are referenced in a traffic-split.
 - This command is still marked experimental, and there are some known issues in the import how the `generation` of revision are created.
 Please gives us feedback on how we can improve the support for this feature.
 
-## Other CLI Features
+#### Other CLI Features
 
 The following other features have been added, too:
 
