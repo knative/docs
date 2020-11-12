@@ -493,6 +493,19 @@ kubectl apply --filename {{< artifact repo="serving" file="serving-nscert.yaml" 
 > Note this will not work with HTTP01 either via cert-manager or the net-http01
 > options.
 
+{{% tab name="DomainMapping CRD" %}}
+
+{{% feature-state version="v0.19" state="alpha" %}}
+
+The `DomainMapping` CRD allows a user to map a Domain Name that they own to a
+specific Knative Service.
+
+```bash
+kubectl apply --filename {{< artifact repo="serving" file="serving-domainmapping-crds.yaml" >}}
+kubectl wait --for=condition=Established --all crd
+kubectl apply --filename {{< artifact repo="serving" file="serving-domainmapping.yaml" >}}
+```
+
 {{< /tab >}} {{< /tabs >}}
 
 ### Getting started with Serving
