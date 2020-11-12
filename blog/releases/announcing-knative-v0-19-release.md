@@ -80,11 +80,12 @@ Highlights:
 
 ### Eventing Contributions v0.19
 
-#### Eventing Kafka Broker
+#### Eventing Kafka Broker v0.19
+
+Release Notes for [eventing-kafka-broker](https://github.com/knative-sandbox/eventing-kafka-broker)
 
 **Actions Required (pre-upgrade)**
 - Run `kubectl delete configmap -n knative-eventing kafka-broker-brokers-triggers`
-
 
 🚨 Breaking
 - Default replication factor is 3 (1 previously) ([#375](https://github.com/knative-sandbox/eventing-kafka-broker/pull/375))
@@ -110,6 +111,29 @@ Highlights:
 - `KafkaSink` usage: https://gist.github.com/matzew/e2c2fcd2696a346f25b8bc9e64bfd0fa
 
 
+#### Eventing Gitlab v0.19
+
+Release Notes for [eventing-gitlab](https://github.com/knative-sandbox/eventing-gitlab)
+
+💫 New Features & Changes
+- Declare event types emitted by a GitLabSource instance so they are propagated as Knative EventTypes. ([#24](https://github.com/knative-sandbox/eventing-gitlab/pull/24))
+🐞 Bug Fixes
+- Sanitize the type attribute of emitted CloudEvents so it doesn't contain spaces and capital letters. ([#24](https://github.com/knative-sandbox/eventing-gitlab/pull/24))
+🧹 Clean up
+- Ensure the source attribute of emitted CloudEvents is stable and predictable. ([#24](https://github.com/knative-sandbox/eventing-gitlab/pull/24))
+
+
+#### Eventing RabbitMQ v0.19
+
+Release Notes for [eventing-rabbitmq](https://github.com/knative-sandbox/eventing-rabbitmq)
+
+💫 New Features & Changes
+- Implement Dead Letter Queue
+🐞 Bug Fixes
+- Fix a bug where Trigger Dependency would not be always tracked correctly
+- Fix bug where in non-default cluster names the network names would be incorrect
+🧹 Clean up
+- Use Kind for e2e tests as well as use common github actions from Knative.
 
 
 ### Client v0.19
@@ -124,22 +148,23 @@ TODO
 
 Thanks to these contributors who contributed to v0.19!
 
-- @dprotaso
-- @eclipselu
-- @ian-mi
-- @joshuawilson
-- @julz
-- @markusthoemmes
-- @mattmoor
-- @nak3
-- @pierDipi
-- @runzexia
-- @sheetalsingala
-- @slinkydeveloper
-- @taragu
-- @vaikas
-- @whaught
-- @yanweiguo
+- [@antoineco](https://github.com/antoineco)
+- [@dprotaso](https://github.com/dprotaso)
+- [@eclipselu](https://github.com/eclipselu)
+- [@ian-mi](https://github.com/ian-mi)
+- [@joshuawilson](https://github.com/joshuawilson)
+- [@julz](https://github.com/julz)
+- [@markusthoemmes](https://github.com/markusthoemmes)
+- [@mattmoor](https://github.com/mattmoor)
+- [@nak3](https://github.com/nak3)
+- [@pierDipi](https://github.com/pierDipi)
+- [@runzexia](https://github.com/runzexia)
+- [@sheetalsingala](https://github.com/sheetalsingala)
+- [@slinkydeveloper](https://github.com/slinkydeveloper)
+- [@taragu](https://github.com/taragu)
+- [@vaikas](https://github.com/vaikas)
+- [@whaught](https://github.com/whaught)
+- [@yanweiguo](https://github.com/yanweiguo)
 
 
 
