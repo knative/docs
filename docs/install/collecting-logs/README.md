@@ -109,8 +109,8 @@ volumeClaimTemplates:
 
 ### Kind
 
-When creating your cluster, you'll need to use a `kind-config.yaml` when
-creating your cluster and specify `extraMounts` for each node, like so:
+When creating your cluster, you'll need to use a `kind-config.yaml` and specify
+`extraMounts` for each node, like so:
 
 ```yaml
 apiversion: kind.x-k8s.io/v1alpha4
@@ -136,8 +136,11 @@ Docker desktop automatically creates some shared mounts between the host and the
 guest operating systems, so you only need to know the path to your home
 directory. Here are some examples for different operating systems:
 
-| Host OS | `hostPath` | | Mac OS | `/Users/${USER}` | | Windows |
-`/run/desktop/mnt/host/c/Users/${USER}/` | | Linux | `/home/${USER}` |
+| Host OS | `hostPath`                               |
+| ------- | ---------------------------------------- |
+| Mac OS  | `/Users/${USER}`                         |
+| Windows | `/run/desktop/mnt/host/c/Users/${USER}/` |
+| Linux   | `/home/${USER}`                          |
 
 <!-- TODO: Minikube from someone who uses that. -->
 
