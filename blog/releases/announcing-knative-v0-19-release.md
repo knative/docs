@@ -117,8 +117,10 @@ Release Notes for [eventing-gitlab](https://github.com/knative-sandbox/eventing-
 
 💫 New Features & Changes
 - Declare event types emitted by a GitLabSource instance so they are propagated as Knative EventTypes. ([#24](https://github.com/knative-sandbox/eventing-gitlab/pull/24))
+
 🐞 Bug Fixes
 - Sanitize the type attribute of emitted CloudEvents so it doesn't contain spaces and capital letters. ([#24](https://github.com/knative-sandbox/eventing-gitlab/pull/24))
+
 🧹 Clean up
 - Ensure the source attribute of emitted CloudEvents is stable and predictable. ([#24](https://github.com/knative-sandbox/eventing-gitlab/pull/24))
 
@@ -129,9 +131,11 @@ Release Notes for [eventing-rabbitmq](https://github.com/knative-sandbox/eventin
 
 💫 New Features & Changes
 - Implement Dead Letter Queue
+
 🐞 Bug Fixes
 - Fix a bug where Trigger Dependency would not be always tracked correctly
 - Fix bug where in non-default cluster names the network names would be incorrect
+
 🧹 Clean up
 - Use Kind for e2e tests as well as use common github actions from Knative.
 
