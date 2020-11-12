@@ -15,7 +15,19 @@ image: knative-eventing.png
 A new version of Knative is now available across multiple components.
 Follow the instructions in the documentation [Installing Knative](https://knative.dev/docs/install/) for the respective component.
 
-Highlights:
+**Table of Contents**
+- [Serving v0.19](#serving-v019)
+- [Eventing v0.19](#eventing-v019)
+- Eventing Extentions
+    - [Eventing Kafka Broker v0.19](#eventing-kafka-broker-v019)
+    - [Eventing Gitlab v0.19](#eventing-gitlab-v019)
+- [CLI v0.19](#client-v019)
+- [Operator v0.19](#operator-v019)
+- [Thank you contributors v0.19](#thank-you-contributors-v0.19)
+
+
+## Highlights
+
 - All components built by Knative are now multi architecture incuding `arm64` which is the architecture used in ARM based machines like the [Raspberry pi](https://www.raspberrypi.org/).
 - The monitoring bundle has been removed and the git repository archived.
 - Improvements for cold start by adding a scale down delay.
@@ -205,12 +217,13 @@ The following other features have been added, too:
 
 TODO
 
-### Thanks
-
-Thanks to these contributors who contributed to v0.19!
+### Thank you contributors v0.19
 
 - [@antoineco](https://github.com/antoineco)
 - [@dprotaso](https://github.com/dprotaso)
+- [@dsimansk](https://github.com/dsimansk)
+- [@danielhelfand](https://github.com/danielhelfand)
+- [@daisy-ycguo](https://github.com/daisy-ycguo)
 - [@eclipselu](https://github.com/eclipselu)
 - [@ian-mi](https://github.com/ian-mi)
 - [@joshuawilson](https://github.com/joshuawilson)
@@ -218,14 +231,17 @@ Thanks to these contributors who contributed to v0.19!
 - [@markusthoemmes](https://github.com/markusthoemmes)
 - [@mattmoor](https://github.com/mattmoor)
 - [@nak3](https://github.com/nak3)
+- [@navidshaikh](https://github.com/navidshaikh)
 - [@pierDipi](https://github.com/pierDipi)
 - [@runzexia](https://github.com/runzexia)
+- [@rhuss](https://github.com/rhuss)
 - [@sheetalsingala](https://github.com/sheetalsingala)
 - [@slinkydeveloper](https://github.com/slinkydeveloper)
 - [@taragu](https://github.com/taragu)
 - [@vaikas](https://github.com/vaikas)
 - [@whaught](https://github.com/whaught)
 - [@yanweiguo](https://github.com/yanweiguo)
+- [@zroubalik](https://github.com/zroubalik)
 
 
 
