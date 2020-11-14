@@ -69,7 +69,7 @@ in particular, [Producer configurations](https://kafka.apache.org/documentation/
 
 ## Enable debug logging for data plane components
 
-You enable debug logging for data plane components by changing the logging level to `DEBUG` in the `kafka-config-logging` ConfigMap.
+To enable debug logging for data plane components change the logging level to `DEBUG` in the `kafka-config-logging` ConfigMap.
 
 1. Apply the following `kafka-config-logging` ConfigMap:
 
