@@ -58,7 +58,8 @@ spec:
 
 ## Kafka Producer configurations
 
-Knative exposes all available Kafka producer configurations that can be modified to suit your workloads.
+A Kafka Producer is the component responsible for sending events to the Apache Kafka cluster.
+Knative exposes all available Kafka Producer configurations that can be modified to suit your workloads.
 
 You can change these configurations by modifying the `config-kafka-sink-data-plane` `ConfigMap` in
 the `knative-eventing` namespace.
