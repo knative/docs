@@ -44,7 +44,7 @@ You must meet the following prerequisites to enable auto TLS:
     [Contour, version 1.1 or higher](../install/any-kubernetes-cluster.md#installing-the-serving-component),
     or [Gloo, version 0.18.16 or higher](https://docs.solo.io/gloo/latest/installation/knative/).
     Note: Currently, [Ambassador](https://github.com/datawire/ambassador) is unsupported.
-- [cert-manager version `1.0.0` or higher](./installing-cert-manager.md).
+- [cert-manager version `1.0.0` and higher](./installing-cert-manager.md).
 - Your Knative cluster must be configured to use a
   [custom domain](./using-a-custom-domain.md).
 - Your DNS provider must be setup and configured to your domain.
@@ -140,8 +140,8 @@ and which DNS provider validates those requests.
 If you choose to use DNS-01 challenge, configure which DNS provider is used to
 validate the DNS-01 challenge requests.
 
-Instructions about configuring cert-manager for any of the supported DNS
-providers are provided in
+Instructions about configuring cert-manager, for all the supported DNS
+providers, are provided in
 [DNS01 challenge providers and configuration instructions](https://cert-manager.io/docs/configuration/acme/dns01/#supported-dns01-providers).
 
 Example:
