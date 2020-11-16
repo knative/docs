@@ -9,7 +9,6 @@ The API source files are located at:
 
 - [Serving API](./serving.md)
 - [Eventing API](./eventing/eventing.md)
-- [Eventing-contrib resources API](./eventing/eventing-contrib.md)
 
 ## Updating API Reference docs (for Knative maintainers)
 
@@ -57,7 +56,6 @@ To generate a version of the API:
 
    - [Serving](https://github.com/knative/serving/releases/)
    - [Eventing](https://github.com/knative/eventing/releases/)
-   - [Eventing-contrib resources](https://github.com/knative/eventing-contrib/releases/)
 
 1. To run the `gen-api-reference-docs.sh` command from the `hack` directory, you
    specify the commits or tags for each of the corresponding Knative component
@@ -68,7 +66,6 @@ To generate a version of the API:
 
    KNATIVE_SERVING_COMMIT=[commit_or_tag] \
    KNATIVE_EVENTING_COMMIT=[commit_or_tag] \
-   KNATIVE_EVENTING_CONTRIB_COMMIT=[commit_or_tag] \
    ./gen-api-reference-docs.sh
    ```
 
@@ -107,6 +104,5 @@ v0.18.0 API source files:
 ```
 KNATIVE_SERVING_COMMIT=v0.18.0 \
 KNATIVE_EVENTING_COMMIT=v0.18.0 \
-KNATIVE_EVENTING_CONTRIB_COMMIT=v0.18.0 \
 ./gen-api-reference-docs.sh
 ```

@@ -35,10 +35,10 @@ KNATIVE_EVENTING_IMPORT_PATH="knative.dev/eventing"
 KNATIVE_EVENTING_COMMIT="${KNATIVE_EVENTING_COMMIT:?specify the \$KNATIVE_EVENTING_COMMIT variable}"
 KNATIVE_EVENTING_OUT_FILE="eventing/eventing.md"
 
-KNATIVE_EVENTING_CONTRIB_REPO="github.com/knative/eventing-contrib"
-KNATIVE_EVENTING_CONTRIB_IMPORT_PATH="knative.dev/eventing-contrib"
-KNATIVE_EVENTING_CONTRIB_COMMIT="${KNATIVE_EVENTING_CONTRIB_COMMIT:?specify the \$KNATIVE_EVENTING_CONTRIB_COMMIT variable}"
-KNATIVE_EVENTING_CONTRIB_OUT_FILE="eventing/eventing-contrib.md"
+# KNATIVE_EVENTING_CONTRIB_REPO="github.com/knative/eventing-contrib"
+# KNATIVE_EVENTING_CONTRIB_IMPORT_PATH="knative.dev/eventing-contrib"
+# KNATIVE_EVENTING_CONTRIB_COMMIT="${KNATIVE_EVENTING_CONTRIB_COMMIT:?specify the \$KNATIVE_EVENTING_CONTRIB_COMMIT variable}"
+# KNATIVE_EVENTING_CONTRIB_OUT_FILE="eventing/eventing-contrib.md"
 
 cleanup_refdocs_root=
 cleanup_repo_clone_root=
@@ -166,12 +166,12 @@ main() {
     gen_refdocs "${refdocs_bin}" "${clone_root}" "${template_dir}" \
         "${out_dir}/${KNATIVE_EVENTING_OUT_FILE}" "${knative_eventing_root}" "./pkg/apis"
 
-    local knative_eventing_contrib_root
-    knative_eventing_contrib_root="${clone_root}/src/${KNATIVE_EVENTING_CONTRIB_IMPORT_PATH}"
-    clone_at_commit "https://${KNATIVE_EVENTING_CONTRIB_REPO}.git" "${KNATIVE_EVENTING_CONTRIB_COMMIT}" \
-        "${knative_eventing_contrib_root}"
-    gen_refdocs "${refdocs_bin}" "${clone_root}" "${template_dir}" \
-        "${out_dir}/${KNATIVE_EVENTING_CONTRIB_OUT_FILE}" "${knative_eventing_contrib_root}" "."
+    # local knative_eventing_contrib_root
+    # knative_eventing_contrib_root="${clone_root}/src/${KNATIVE_EVENTING_CONTRIB_IMPORT_PATH}"
+    # clone_at_commit "https://${KNATIVE_EVENTING_CONTRIB_REPO}.git" "${KNATIVE_EVENTING_CONTRIB_COMMIT}" \
+    #     "${knative_eventing_contrib_root}"
+    # gen_refdocs "${refdocs_bin}" "${clone_root}" "${template_dir}" \
+    #     "${out_dir}/${KNATIVE_EVENTING_CONTRIB_OUT_FILE}" "${knative_eventing_contrib_root}" "."
 
     log "SUCCESS: Generated docs written to ${out_dir}/."
     log "Opening the ${out_dir}/ directory. You can now copy these API files"
