@@ -539,8 +539,8 @@ To access your application using `curl` using this method:
    curl -H "Host: helloworld-go.default.example.com" http://192.168.39.228:32198
    ```
 
-   In the case of the provided `helloworld-go` sample application, the output
-   should, using the default configuration, be:
+   In the case of the provided `helloworld-go` sample application, using the default
+   configuration, the output should be:
 
    ```
    Hello Go Sample v1!
