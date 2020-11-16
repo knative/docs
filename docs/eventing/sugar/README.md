@@ -148,7 +148,7 @@ spec:
         - image: <some image>
 ```
 
-The Sugar Controller will notice AutoTrigger is enabled, and produce a trigger subscribing "hello-sugar" to the Knative Service, the cluster will have a Trigger like:
+The Sugar Controller will notice AutoTrigger is enabled for that resource, and produce a trigger subscribing "hello-sugar" to the Knative Service, the cluster will have a Trigger like:
 
 ```yaml
 apiVersion: eventing.knative.dev/v1
@@ -169,4 +169,146 @@ spec:
       name: hello-sugar
 ```
 
+If filters are added to the Service, 
 
+```yaml
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: hello-sugar
+  namespace: candyland
+  labels:
+    eventing.knative.dev/autotrigger: enabled
+  annotations:
+    trigger.eventing.knative.dev/filter.attributes: |
+      [{"type":"gumdrops", "sticky":"yes"}]
+...
+```
+
+A Trigger with filters will be replace the original:
+
+```yaml
+kind: Trigger
+...
+spec:
+  ...
+  filter:
+    attributes:
+      type: gumdrops
+      sticky: "yes"
+```
+
+### Multiple Triggers Example
+
+More than one Trigger could be configured in the filter annotaiton, when the following Knative Service is created: 
+
+```yaml
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: hello-sugar
+  namespace: candyland
+  labels:
+    eventing.knative.dev/autotrigger: enabled
+  annotations:
+    trigger.eventing.knative.dev/filter.attributes: |
+      [{"type":"gumdrops"}, {"subject":"lollipops"}]
+spec:
+  template:
+    spec:
+      containers:
+        - image: <some image>
+```
+
+Two Triggers will be created like:
+
+```yaml
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: hello-sugar-abc123
+  namespace: candyland
+  ownerReferences:
+    - apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: hello-sugar
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: gumdrops
+  subscriber:
+    ref:
+      apiVersion: v1
+      kind: Service
+      name: hello-sugar
+
+---
+
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: hello-sugar-efg456
+  namespace: candyland
+  ownerReferences:
+    - apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: hello-sugar
+spec:
+  broker: default
+  filter:
+    attributes:
+      subject: lollipops
+  subscriber:
+    ref:
+      apiVersion: v1
+      kind: Service
+      name: hello-sugar
+```
+
+### Broker Named Trigger Example
+
+More than one Trigger could be configured in the filter annotation, when the following Knative Service is created: 
+
+```yaml
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: hello-sugar
+  namespace: candyland
+  labels:
+    eventing.knative.dev/autotrigger: enabled
+  annotations:
+    autotrigger.eventing.knative.dev/broker: gloppy
+    autotrigger.eventing.knative.dev/filter.attributes: |
+      [{"type":"gumdrops"}]
+spec:
+  template:
+    spec:
+      containers:
+        - image: <some image>
+```
+
+A Trigger with the Broker name of "gloppy" will be created like:
+
+```yaml
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: hello-sugar-abc123
+  namespace: candyland
+  ownerReferences:
+    - apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: hello-sugar
+spec:
+  broker: gloppy
+  filter:
+    attributes:
+      type: gumdrops
+  subscriber:
+    ref:
+      apiVersion: v1
+      kind: Service
+      name: hello-sugar
+```
