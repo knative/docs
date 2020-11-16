@@ -6,7 +6,7 @@ showlandingtoc: "false"
 type: "docs"
 ---
 
-The [Knatice Community Calendar](https://calendar.google.com/calendar/u/0/embed?src=c_tcut0tbk016g22csq1ced9lqd8@group.calendar.google.com) contain events that provides the opportunity to learn more about Knative and meet other Knative users and contributors.
+The [Knative Community Calendar](https://calendar.google.com/calendar/u/0/embed?src=c_tcut0tbk016g22csq1ced9lqd8@group.calendar.google.com) contain events that provides the opportunity to learn more about Knative and meet other Knative users and contributors.
 
 Events don't have to be organized by the Knative project to be added to the calendar. If you want to add an event to the calendar please send an email to [knative-steering@googlegroups.com](mailto:knative-steering@googlegroups.com) or post to the #community channel in the Knative [Slack](https://slack.knative.dev) workspace.
 
