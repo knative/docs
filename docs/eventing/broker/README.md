@@ -148,13 +148,14 @@ events once a minute, saying, yes, you guessed it `Hello World!`.
 
 ```shell
 kubectl create -f - <<EOF
-apiVersion: sources.knative.dev/v1alpha2
+apiVersion: sources.knative.dev/v1beta2
 kind: PingSource
 metadata:
   name: test-ping-source
 spec:
   schedule: "*/1 * * * *"
-  jsonData: '{"message": "Hello world!"}'
+  contentType: "application/json"
+  data: '{"message": "Hello world!"}'
   sink:
     ref:
       # Deliver events to Broker.
