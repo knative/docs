@@ -79,6 +79,24 @@ To generate a version of the API:
    After a successful build, the tool automatically opens that folder in the
    `tmp` directory.
 
+   If the script fails, there are a couple possible causes.
+
+   * If you get the
+     `F1116 15:21:23.549503   63473 main.go:129] no API packages found in ./pkg/apis`
+     error, check if a new version of the script is available:
+      https://github.com/ahmetb/gen-crd-api-reference-docs/tags
+
+      The script is kept up-to-date with changes that go into the Kubernetes API.
+      As Knative adds support for those APIs, you might need make sure the
+      corresponding
+      [script `gen-crd-api-reference-docs` version](https://github.com/knative/docs/blob/master/hack/gen-api-reference-docs.sh#L26)
+      is used.
+
+   * If you get the
+     `F0807 13:58:20.621526 168834 main.go:444] type invalid type has kind=Unsupported which is unhandled`
+     error, the import target might have moved. For more details and an example,
+     see [#2054](https://github.com/knative/docs/pull/2054) (and the linked Issues).
+
 1. Copy the generated API files into the `docs/reference` directory of your
    knative/docs clone.
 

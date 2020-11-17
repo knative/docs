@@ -1,244 +1,15 @@
 <p>Packages:</p>
 <ul>
 <li>
-<a href="#serving.knative.dev%2fv1alpha1">serving.knative.dev/v1alpha1</a>
-</li>
-<li>
 <a href="#autoscaling.internal.knative.dev%2fv1alpha1">autoscaling.internal.knative.dev/v1alpha1</a>
 </li>
 <li>
 <a href="#serving.knative.dev%2fv1">serving.knative.dev/v1</a>
 </li>
+<li>
+<a href="#serving.knative.dev%2fv1alpha1">serving.knative.dev/v1alpha1</a>
+</li>
 </ul>
-<h2 id="serving.knative.dev/v1alpha1">serving.knative.dev/v1alpha1</h2>
-<p>
-<p>Package v1alpha1 contains the v1alpha1 versions of the serving apis.
-Api versions allow the api contract for a resource to be changed while keeping
-backward compatibility by support multiple concurrent versions
-of the same resource</p>
-</p>
-Resource Types:
-<ul><li>
-<a href="#serving.knative.dev/v1alpha1.DomainMapping">DomainMapping</a>
-</li></ul>
-<h3 id="serving.knative.dev/v1alpha1.DomainMapping">DomainMapping
-</h3>
-<p>
-<p>DomainMapping is a mapping from a custom hostname to an Addressable.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>apiVersion</code></br>
-string</td>
-<td>
-<code>
-serving.knative.dev/v1alpha1
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<code>kind</code></br>
-string
-</td>
-<td><code>DomainMapping</code></td>
-</tr>
-<tr>
-<td>
-<code>metadata</code></br>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#objectmeta-v1-meta">
-Kubernetes meta/v1.ObjectMeta
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Standard object&rsquo;s metadata.
-More info: <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#metadata">https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#metadata</a></p>
-Refer to the Kubernetes API documentation for the fields of the
-<code>metadata</code> field.
-</td>
-</tr>
-<tr>
-<td>
-<code>spec</code></br>
-<em>
-<a href="#serving.knative.dev/v1alpha1.DomainMappingSpec">
-DomainMappingSpec
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Spec is the desired state of the DomainMapping.
-More info: <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#spec-and-status">https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#spec-and-status</a></p>
-<br/>
-<br/>
-<table>
-<tr>
-<td>
-<code>ref</code></br>
-<em>
-knative.dev/pkg/apis/duck/v1.KReference
-</em>
-</td>
-<td>
-<p>Ref points to an Addressable.
-Currently, Ref must be a KSvc.</p>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-<tr>
-<td>
-<code>status</code></br>
-<em>
-<a href="#serving.knative.dev/v1alpha1.DomainMappingStatus">
-DomainMappingStatus
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Status is the current state of the DomainMapping.
-More info: <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#spec-and-status">https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#spec-and-status</a></p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="serving.knative.dev/v1alpha1.CannotConvertError">CannotConvertError
-</h3>
-<p>
-<p>CannotConvertError is returned when a field cannot be converted.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>Message</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-</td>
-</tr>
-<tr>
-<td>
-<code>Field</code></br>
-<em>
-string
-</em>
-</td>
-<td>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="serving.knative.dev/v1alpha1.DomainMappingSpec">DomainMappingSpec
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#serving.knative.dev/v1alpha1.DomainMapping">DomainMapping</a>)
-</p>
-<p>
-<p>DomainMappingSpec describes the DomainMapping the user wishes to exist.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>ref</code></br>
-<em>
-knative.dev/pkg/apis/duck/v1.KReference
-</em>
-</td>
-<td>
-<p>Ref points to an Addressable.
-Currently, Ref must be a KSvc.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="serving.knative.dev/v1alpha1.DomainMappingStatus">DomainMappingStatus
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#serving.knative.dev/v1alpha1.DomainMapping">DomainMapping</a>)
-</p>
-<p>
-<p>DomainMappingStatus describes the current state of the DomainMapping.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>Status</code></br>
-<em>
-knative.dev/pkg/apis/duck/v1.Status
-</em>
-</td>
-<td>
-<p>
-(Members of <code>Status</code> are embedded into this type.)
-</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>url</code></br>
-<em>
-knative.dev/pkg/apis.URL
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>URL is the URL of this DomainMapping.</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>address</code></br>
-<em>
-knative.dev/pkg/apis/duck/v1.Addressable
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Address holds the information needed for a DomainMapping to be the target of an event.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<hr/>
 <h2 id="autoscaling.internal.knative.dev/v1alpha1">autoscaling.internal.knative.dev/v1alpha1</h2>
 <p>
 <p>Package v1alpha1 contains the Autoscaling v1alpha1 API types.</p>
@@ -284,7 +55,7 @@ string
 <td>
 <code>metadata</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#objectmeta-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
 </a>
 </em>
@@ -328,7 +99,7 @@ Defaults to <code>0</code> which means unlimited concurrency.</p>
 <td>
 <code>scaleTargetRef</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#objectreference-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectreference-v1-core">
 Kubernetes core/v1.ObjectReference
 </a>
 </em>
@@ -400,7 +171,7 @@ PodAutoscalerStatus
 <td>
 <code>metadata</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#objectmeta-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
 </a>
 </em>
@@ -597,7 +368,7 @@ Defaults to <code>0</code> which means unlimited concurrency.</p>
 <td>
 <code>scaleTargetRef</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#objectreference-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectreference-v1-core">
 Kubernetes core/v1.ObjectReference
 </a>
 </em>
@@ -734,7 +505,7 @@ the referenced resources may take.</p>
 <td>
 <code>metadata</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#objectmeta-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
 </a>
 </em>
@@ -771,7 +542,7 @@ int32
 <td>
 <code>selector</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#labelselector-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#labelselector-v1-meta">
 Kubernetes meta/v1.LabelSelector
 </a>
 </em>
@@ -783,7 +554,7 @@ Kubernetes meta/v1.LabelSelector
 <td>
 <code>template</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#podtemplatespec-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#podtemplatespec-v1-core">
 Kubernetes core/v1.PodTemplateSpec
 </a>
 </em>
@@ -840,7 +611,7 @@ int32
 <td>
 <code>selector</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#labelselector-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#labelselector-v1-meta">
 Kubernetes meta/v1.LabelSelector
 </a>
 </em>
@@ -852,7 +623,7 @@ Kubernetes meta/v1.LabelSelector
 <td>
 <code>template</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#podtemplatespec-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#podtemplatespec-v1-core">
 Kubernetes core/v1.PodTemplateSpec
 </a>
 </em>
@@ -955,7 +726,7 @@ string
 <td>
 <code>metadata</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#objectmeta-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
 </a>
 </em>
@@ -1049,7 +820,7 @@ string
 <td>
 <code>metadata</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#objectmeta-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
 </a>
 </em>
@@ -1078,7 +849,7 @@ RevisionSpec
 <td>
 <code>PodSpec</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#podspec-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#podspec-v1-core">
 Kubernetes core/v1.PodSpec
 </a>
 </em>
@@ -1175,7 +946,7 @@ string
 <td>
 <code>metadata</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#objectmeta-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
 </a>
 </em>
@@ -1278,7 +1049,7 @@ string
 <td>
 <code>metadata</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#objectmeta-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
 </a>
 </em>
@@ -1546,7 +1317,7 @@ string
 <td>
 <code>PodSpec</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#podspec-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#podspec-v1-core">
 Kubernetes core/v1.PodSpec
 </a>
 </em>
@@ -1708,7 +1479,7 @@ Based on: <a href="https://github.com/kubernetes/api/blob/e771f807/core/v1/types
 <td>
 <code>metadata</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#objectmeta-v1-meta">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
 </a>
 </em>
@@ -1737,7 +1508,7 @@ RevisionSpec
 <td>
 <code>PodSpec</code></br>
 <em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#podspec-v1-core">
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#podspec-v1-core">
 Kubernetes core/v1.PodSpec
 </a>
 </em>
@@ -2166,6 +1937,235 @@ knative.dev/pkg/apis.URL
 <p>URL displays the URL for accessing named traffic targets. URL is displayed in
 status, and is disallowed on spec. URL must contain a scheme (e.g. http://) and
 a hostname, but may not contain anything else (e.g. basic auth, url path, etc.)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="serving.knative.dev/v1alpha1">serving.knative.dev/v1alpha1</h2>
+<p>
+<p>Package v1alpha1 contains the v1alpha1 versions of the serving apis.
+Api versions allow the api contract for a resource to be changed while keeping
+backward compatibility by support multiple concurrent versions
+of the same resource</p>
+</p>
+Resource Types:
+<ul><li>
+<a href="#serving.knative.dev/v1alpha1.DomainMapping">DomainMapping</a>
+</li></ul>
+<h3 id="serving.knative.dev/v1alpha1.DomainMapping">DomainMapping
+</h3>
+<p>
+<p>DomainMapping is a mapping from a custom hostname to an Addressable.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>apiVersion</code></br>
+string</td>
+<td>
+<code>
+serving.knative.dev/v1alpha1
+</code>
+</td>
+</tr>
+<tr>
+<td>
+<code>kind</code></br>
+string
+</td>
+<td><code>DomainMapping</code></td>
+</tr>
+<tr>
+<td>
+<code>metadata</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectmeta-v1-meta">
+Kubernetes meta/v1.ObjectMeta
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Standard object&rsquo;s metadata.
+More info: <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#metadata">https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#metadata</a></p>
+Refer to the Kubernetes API documentation for the fields of the
+<code>metadata</code> field.
+</td>
+</tr>
+<tr>
+<td>
+<code>spec</code></br>
+<em>
+<a href="#serving.knative.dev/v1alpha1.DomainMappingSpec">
+DomainMappingSpec
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Spec is the desired state of the DomainMapping.
+More info: <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#spec-and-status">https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#spec-and-status</a></p>
+<br/>
+<br/>
+<table>
+<tr>
+<td>
+<code>ref</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1.KReference
+</em>
+</td>
+<td>
+<p>Ref points to an Addressable.
+Currently, Ref must be a KSvc.</p>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<code>status</code></br>
+<em>
+<a href="#serving.knative.dev/v1alpha1.DomainMappingStatus">
+DomainMappingStatus
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Status is the current state of the DomainMapping.
+More info: <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#spec-and-status">https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#spec-and-status</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="serving.knative.dev/v1alpha1.CannotConvertError">CannotConvertError
+</h3>
+<p>
+<p>CannotConvertError is returned when a field cannot be converted.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>Message</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<code>Field</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="serving.knative.dev/v1alpha1.DomainMappingSpec">DomainMappingSpec
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#serving.knative.dev/v1alpha1.DomainMapping">DomainMapping</a>)
+</p>
+<p>
+<p>DomainMappingSpec describes the DomainMapping the user wishes to exist.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>ref</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1.KReference
+</em>
+</td>
+<td>
+<p>Ref points to an Addressable.
+Currently, Ref must be a KSvc.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="serving.knative.dev/v1alpha1.DomainMappingStatus">DomainMappingStatus
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#serving.knative.dev/v1alpha1.DomainMapping">DomainMapping</a>)
+</p>
+<p>
+<p>DomainMappingStatus describes the current state of the DomainMapping.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>Status</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1.Status
+</em>
+</td>
+<td>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>url</code></br>
+<em>
+knative.dev/pkg/apis.URL
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>URL is the URL of this DomainMapping.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>address</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1.Addressable
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Address holds the information needed for a DomainMapping to be the target of an event.</p>
 </td>
 </tr>
 </tbody>
