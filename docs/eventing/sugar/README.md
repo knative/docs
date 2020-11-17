@@ -6,19 +6,20 @@ longer needed.
 
 Brokers can be managed via the Sugar Controller in the following ways:
 
-| Kind      | Key                                        | Values                                             |
-| --------- | ------------------------------------------ | -------------------------------------------------- |
-| Namespace | label: eventing.knative.dev/injection      | enabled - enables Broker creation from Namespaces. |
-| Trigger   | annotation: eventing.knative.dev/injection | enabled - enables Broker creation from Triggers.   |
+| Kind      | Key                                        | Values                                                                     |
+| --------- | ------------------------------------------ | -------------------------------------------------------------------------- |
+| Namespace | label: eventing.knative.dev/injection      | String, "enabled" or "disabled" - Enables Broker creation from Namespaces. |
+| Trigger   | annotation: eventing.knative.dev/injection | String, "enabled" or "disabled" - Enables Broker creation from Triggers.   |
 
 See [Automatic Broker Creation](#automatic-broker-creation).
 
 Triggers can be managed via the Sugar Controller in the following ways:
 
-| Kind        | Key                                                            | Values                                     |
-| ----------- | -------------------------------------------------------------- | ------------------------------------------ |
-| Addressable | label: eventing.knative.dev/autotrigger                        | enabled - Enables Trigger creation.        |
-| Addressable | annotation: autotrigger.eventing.knative.dev/filter.attributes | JSON array of any map of string to string. |
+| Kind        | Key                                                            | Values                                                                                                                        |
+| ----------- | -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| Addressable | label: eventing.knative.dev/autotrigger                        | String, "enabled" or "disabled" - Enables Trigger creation.                                                                   |
+| Addressable | annotation: autotrigger.eventing.knative.dev/filter.attributes | JSON array of any map of string to string. Default: no filters.                                                               |
+| Addressable | annotation: autotrigger.eventing.knative.dev/broker            | String, "<broker-name>" - The name of the Broker to be used by all Triggers created from the Addressable. Default: "default". |
 
 See [Automatic Trigger Creation](#automatic-trigger-creation).
 
@@ -122,9 +123,9 @@ definition) or the [Discovery](TODO: link to the discovery documentation)
 ClusterDuckType
 [addressables.duck.knative.dev](https://github.com/knative-sandbox/discovery/blob/master/config/knative/addressables.duck.knative.dev.yaml).
 
-For any addressable that is found, the Sugar Controller will react to resources
-that have been labeled with the special label
-`eventing.knative.dev/autotrigger=enabled`.
+For any addressable that has been labeled with
+`eventing.knative.dev/autotrigger=enabled`, the Sugar Controller will manage the
+Trigger(s) for it.
 
 To manage one or more triggers automatically, provide the annotation:
 
@@ -188,8 +189,8 @@ spec:
 ```
 
 The Sugar Controller will notice AutoTrigger is enabled for that resource, and
-produce a trigger subscribing "hello-sugar" to the Knative Service, the cluster
-will have a Trigger like:
+create a trigger subscribing the Knative Service "hello-sugar" to all events
+send to the "default" Broker, the cluster will have a Trigger like:
 
 ```yaml
 apiVersion: eventing.knative.dev/v1
@@ -308,8 +309,9 @@ spec:
 
 ### Broker Named Trigger Example
 
-More than one Trigger could be configured in the filter annotation, when the
-following Knative Service is created:
+Using the `autotrigger.eventing.knative.dev/broker` annotation, the Addressable
+can control which Broker name is used in the spec of the managed Trigger
+(spec.broker), when the following Knative Service is created:
 
 ```yaml
 apiVersion: serving.knative.dev/v1
@@ -330,7 +332,7 @@ spec:
         - image: <some image>
 ```
 
-A Trigger with the Broker name of "gloppy" will be created like:
+A Trigger using the Broker name of "gloppy" will be created like:
 
 ```yaml
 apiVersion: eventing.knative.dev/v1
