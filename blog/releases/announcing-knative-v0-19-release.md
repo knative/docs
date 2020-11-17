@@ -18,7 +18,7 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
 #### Table of Contents
 - [Serving v0.19](#serving-v019)
 - [Eventing v0.19](#eventing-v019)
-- Eventing Extentions
+- Eventing Extensions
     - [Eventing Kafka Broker v0.19](#eventing-kafka-broker-v019)
     - [Eventing Gitlab v0.19](#eventing-gitlab-v019)
 - [CLI v0.19](#client-v019)
@@ -28,7 +28,7 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
 
 ### Highlights
 
-- All components built by Knative are now multi architecture incuding `arm64` which is the architecture used in ARM based machines like the [Raspberry pi](https://www.raspberrypi.org/).
+- All components built by Knative are now multi architecture including `arm64` which is the architecture used in ARM based machines like the [Raspberry pi](https://www.raspberrypi.org/).
 - The monitoring bundle has been removed and the git repository archived.
 - Improvements for cold start by adding a scale down delay.
 - No longer mounting `/var/log` this allows certain images like `docker.io/nginx` that use this directory to be use as Knative Service.
