@@ -12,6 +12,26 @@ The following command installs the Eventing Sugar Controller:
 kubectl apply --filename {{< artifact repo="eventing" file="eventing-sugar-controller.yaml" >}}
 ```
 
+## Overview
+
+Brokers can be managed via the Sugar Controller in the following ways:
+
+| Kind      | Key                                        | Values                                             |
+| --------- | ------------------------------------------ | -------------------------------------------------- |
+| Namespace | label: eventing.knative.dev/injection      | enabled - enables Broker creation from Namespaces. |
+| Trigger   | annotation: eventing.knative.dev/injection | enabled - enables Broker creation from Triggers.   |
+
+See [Automatic Broker Creation](#automatic-broker-creation).
+
+Triggers can be managed via the Sugar Controller in the following ways:
+
+| Kind        | Key                                                            | Values                                     |
+| ----------- | -------------------------------------------------------------- | ------------------------------------------ |
+| Addressable | label: eventing.knative.dev/autotrigger                        | enabled - Enables Trigger creation.        |
+| Addressable | annotation: autotrigger.eventing.knative.dev/filter.attributes | JSON array of any map of string to string. |
+
+See [Automatic Trigger Creation](#automatic-trigger-creation).
+
 ## Automatic Broker Creation
 
 One way to create a Broker is to manually apply a resource to a cluster using
@@ -90,8 +110,8 @@ EOF
 > _Note_: If the named Broker already exists, the Sugar controller will do
 > nothing, and the Trigger will not own the existing Broker.
 
-This will make a Broker called "gumdrops" in the Namespace "candyland", and attempt to
-send events to the "event-display" service.
+This will make a Broker called "gumdrops" in the Namespace "candyland", and
+attempt to send events to the "event-display" service.
 
 If the Broker of the given name already exists in the Namespace, the Sugar
 Controller will do nothing.
@@ -108,7 +128,7 @@ For any addressable that is found, the Sugar Controller will react to resources
 that have been labeled with the special label
 `eventing.knative.dev/autotrigger=enabled`.
 
-To produce one or more triggers automatically, provide the annotation:
+To manage one or more triggers automatically, provide the annotation:
 
 ```
 annotations:
@@ -118,7 +138,8 @@ annotations:
 
 `autotrigger.eventing.knative.dev/filter.attributes` is a JSON array of any map
 of string to string. Any valid CloudEvents attribute name and value are allowed.
-For each map in the array, a new Trigger will be created.
+For each map in the array, a new Trigger will be created. If this property is
+omitted, a Trigger with no filters will be created for the Addressable.
 
 Triggers produced by the Sugar Controller automatically create owner-refs to the
 original Addressable resource. When the labeled resource is deleted, the
@@ -161,9 +182,6 @@ metadata:
   namespace: candyland
   labels:
     eventing.knative.dev/autotrigger: enabled
-  annotations:
-    trigger.eventing.knative.dev/filter.attributes: |
-      [{}]
 spec:
   template:
     spec:
@@ -224,7 +242,7 @@ spec:
 
 ### Multiple Triggers Example
 
-More than one Trigger could be configured in the filter annotaiton, when the
+More than one Trigger could be configured in the filter annotation, when the
 following Knative Service is created:
 
 ```yaml
