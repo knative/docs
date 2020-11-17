@@ -4,16 +4,6 @@ cluster operators and developers to focus on creating fewer resources, and the
 underlying eventing infrastructure is created on-demand, and cleaned up when no
 longer needed.
 
-## Installing
-
-The following command installs the Eventing Sugar Controller:
-
-```bash
-kubectl apply --filename {{< artifact repo="eventing" file="eventing-sugar-controller.yaml" >}}
-```
-
-## Overview
-
 Brokers can be managed via the Sugar Controller in the following ways:
 
 | Kind      | Key                                        | Values                                             |
@@ -31,6 +21,14 @@ Triggers can be managed via the Sugar Controller in the following ways:
 | Addressable | annotation: autotrigger.eventing.knative.dev/filter.attributes | JSON array of any map of string to string. |
 
 See [Automatic Trigger Creation](#automatic-trigger-creation).
+
+## Installing
+
+The following command installs the Eventing Sugar Controller:
+
+```bash
+kubectl apply --filename {{< artifact repo="eventing" file="eventing-sugar-controller.yaml" >}}
+```
 
 ## Automatic Broker Creation
 
