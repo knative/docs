@@ -1,5 +1,8 @@
 Knative Eventing Sugar Controller will react to special labels and annotations
-to produce or control eventing resources in a cluster or namespace.
+to produce or control eventing resources in a cluster or namespace. This allows
+cluster operators and developers to focus on creating fewer resources, and the
+underlying eventing infrastructure is created on-demand, and cleaned up when no
+longer needed.
 
 ## Installing
 
@@ -63,8 +66,7 @@ Controller will do nothing.
 
 ### Trigger Examples
 
-To create a Broker if none exists for the provided Broker name in the Namespace
-of the Trigger resource:
+Create a Broker named by a Trigger (`spec.broker`) in the Trigger's Namespace:
 
 ```shell
 kubectl apply -f - << EOF
@@ -84,6 +86,9 @@ spec:
       name: event-display
 EOF
 ```
+
+> _Note_: If the named Broker already exists, the Sugar controller will do
+> nothing, and the Trigger will not own the existing Broker.
 
 This will make a Broker called "sugar" in the Namespace "hello", and attempt to
 send events to the "event-display" service.
