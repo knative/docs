@@ -118,7 +118,7 @@ Controller will do nothing.
 ## Automatic Trigger Creation
 
 The Sugar Controller can also watch for any resource that conforms to the duck
-type "Addressable", see [the defintion](TODO: add a link for Addressable
+type "Addressable", see [the definition](TODO: add a link for Addressable
 definition) or the [Discovery](TODO: link to the discovery documentation)
 ClusterDuckType
 [addressables.duck.knative.dev](https://github.com/knative-sandbox/discovery/blob/master/config/knative/addressables.duck.knative.dev.yaml).
