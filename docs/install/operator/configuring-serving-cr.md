@@ -32,11 +32,11 @@ spec:
   version: "0.19"
 ```
 
-Knative versions is compliant with the semantic versioning format. You can specify the field `spec.version` with a version in
+Knative versions are compliant with the semantic versioning format. You can specify the field `spec.version` with a version in
 the format of either `Major.Minor.Patch` or `Major.Minor`. If `spec.version` is not specified, the Knative Operator will
 install the latest available version of Knative Serving. If `spec.version` is specified in the format of `Major.Minor`,
 Knative Operator will install the latest available version of Knative Serving under the same `Major.Minor` number. For
-example, if `spec.version` is set to "0.19", Knative Operator will install the latest "0.19.x", which is available in the
+example, if `spec.version` is set to "0.19", Knative Operator will install the latest "0.19.x" version that is available in the
 operator.
 
 If users specify an invalid or unavailable version, the Knative Operator will do nothing. The Knative Operator always
