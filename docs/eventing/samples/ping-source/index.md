@@ -87,13 +87,13 @@ kubectl apply --filename ping-source.yaml
 
 ## (Optional) Create a PingSource with binary data
 
-Sometimes you might want to send binary data that cannot be directly serialized in yaml to downstream. This can be achieved by using `dataBase64` as the payload, as the name suggests, `dataBase64` should carry data that is base64 encoded.
+Sometimes you may want to send binary data, which cannot be directly serialized in yaml, to downstream. This can be achieved by using `dataBase64` as the payload. As the name suggests, `dataBase64` should carry data that is base64 encoded.
 
 Please note that `data` and `dataBase64` cannot co-exist.
 
 {{< tabs name="create-source" default="By YAML" >}}
 {{% tab name="By YAML" %}}
-Use following command to create the event source with binary data from STDIN:
+Use the following command to create the event source with binary data from STDIN:
 
 ```shell
 cat <<EOF | kubectl create -f -
@@ -115,7 +115,7 @@ EOF
 {{< /tab >}}
 
 {{% tab name="By filename" %}}
-Use following command to create the event source from the `ping-source-binary.yaml` file:
+Use the following command to create the event source from the `ping-source-binary.yaml` file:
 
 ```shell
 kubectl apply --filename ping-source-binary.yaml
