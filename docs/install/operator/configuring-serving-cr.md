@@ -20,7 +20,7 @@ The Knative Serving operator can be configured with these options:
 ## Version Configuration
 
 Cluster administrators can install a specific version of Knative Serving by using the `spec.version` field. For example,
-if you want to install Knative Serving 0.16.0, you can apply the following `KnativeServing` custom resource:
+if you want to install Knative Serving 0.19, you can apply the following `KnativeServing` custom resource:
 
 ```
 apiVersion: operator.knative.dev/v1alpha1
@@ -29,19 +29,25 @@ metadata:
   name: knative-serving
   namespace: knative-serving
 spec:
-  version: 0.16.0
+  version: "0.19"
 ```
 
-If `spec.version` is not specified, the Knative Operator will install the latest available version of Knative Serving.
+Knative versions is compliant with the semantic versioning format. You can specify the field `spec.version` with a version in
+the format of either `Major.Minor.Patch` or `Major.Minor`. If `spec.version` is not specified, the Knative Operator will
+install the latest available version of Knative Serving. If `spec.version` is specified in the format of `Major.Minor`,
+Knative Operator will install the latest available version of Knative Serving under the same `Major.Minor` number. For
+example, if `spec.version` is set to "0.19", Knative Operator will install the latest "0.19.x", which is available in the
+operator.
+
 If users specify an invalid or unavailable version, the Knative Operator will do nothing. The Knative Operator always
-includes the latest 3 minor release versions. For example, if the current version of the Knative Operator is 0.16.x, the
-earliest version of Knative Serving available through the Operator is 0.14.0.
+includes the latest 3 minor release versions. For example, if the current version of the Knative Operator is 0.19.x, the
+earliest version of Knative Serving available through the Operator is 0.16.0.
 
 If Knative Serving is already managed by the Operator, updating the `spec.version` field in the `KnativeServing` resource
 enables upgrading or downgrading the Knative Serving version, without needing to change the Operator.
 
 Note that the Knative Operator only permits upgrades or downgrades by one minor release version at a time. For example,
-if the current Knative Serving deployment is version 0.14.x, you must upgrade to 0.15.x before upgrading to 0.16.x.
+if the current Knative Serving deployment is version 0.17.x, you must upgrade to 0.18.x before upgrading to 0.19.x.
 
 ## Serving Configuration by ConfigMap
 
