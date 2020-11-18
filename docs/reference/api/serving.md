@@ -1,11 +1,682 @@
 <p>Packages:</p>
 <ul>
 <li>
+<a href="#autoscaling.internal.knative.dev%2fv1alpha1">autoscaling.internal.knative.dev/v1alpha1</a>
+</li>
+<li>
 <a href="#serving.knative.dev%2fv1">serving.knative.dev/v1</a>
 </li>
+<li>
+<a href="#serving.knative.dev%2fv1alpha1">serving.knative.dev/v1alpha1</a>
+</li>
 </ul>
+<h2 id="autoscaling.internal.knative.dev/v1alpha1">autoscaling.internal.knative.dev/v1alpha1</h2>
+<p>
+<p>Package v1alpha1 contains the Autoscaling v1alpha1 API types.</p>
+</p>
+Resource Types:
+<ul><li>
+<a href="#autoscaling.internal.knative.dev/v1alpha1.PodAutoscaler">PodAutoscaler</a>
+</li></ul>
+<h3 id="autoscaling.internal.knative.dev/v1alpha1.PodAutoscaler">PodAutoscaler
+</h3>
+<p>
+<p>PodAutoscaler is a Knative abstraction that encapsulates the interface by which Knative
+components instantiate autoscalers.  This definition is an abstraction that may be backed
+by multiple definitions.  For more information, see the Knative Pluggability presentation:
+<a href="https://docs.google.com/presentation/d/10KWynvAJYuOEWy69VBa6bHJVCqIsz1TNdEKosNvcpPY/edit">https://docs.google.com/presentation/d/10KWynvAJYuOEWy69VBa6bHJVCqIsz1TNdEKosNvcpPY/edit</a></p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>apiVersion</code></br>
+string</td>
+<td>
+<code>
+autoscaling.internal.knative.dev/v1alpha1
+</code>
+</td>
+</tr>
+<tr>
+<td>
+<code>kind</code></br>
+string
+</td>
+<td><code>PodAutoscaler</code></td>
+</tr>
+<tr>
+<td>
+<code>metadata</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectmeta-v1-meta">
+Kubernetes meta/v1.ObjectMeta
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+Refer to the Kubernetes API documentation for the fields of the
+<code>metadata</code> field.
+</td>
+</tr>
+<tr>
+<td>
+<code>spec</code></br>
+<em>
+<a href="#autoscaling.internal.knative.dev/v1alpha1.PodAutoscalerSpec">
+PodAutoscalerSpec
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Spec holds the desired state of the PodAutoscaler (from the client).</p>
+<br/>
+<br/>
+<table>
+<tr>
+<td>
+<code>containerConcurrency</code></br>
+<em>
+int64
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>ContainerConcurrency specifies the maximum allowed
+in-flight (concurrent) requests per container of the Revision.
+Defaults to <code>0</code> which means unlimited concurrency.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>scaleTargetRef</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectreference-v1-core">
+Kubernetes core/v1.ObjectReference
+</a>
+</em>
+</td>
+<td>
+<p>ScaleTargetRef defines the /scale-able resource that this PodAutoscaler
+is responsible for quickly right-sizing.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>reachability</code></br>
+<em>
+<a href="#autoscaling.internal.knative.dev/v1alpha1.ReachabilityType">
+ReachabilityType
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Reachability specifies whether or not the <code>ScaleTargetRef</code> can be reached (ie. has a route).
+Defaults to <code>ReachabilityUnknown</code></p>
+</td>
+</tr>
+<tr>
+<td>
+<code>protocolType</code></br>
+<em>
+knative.dev/networking/pkg/apis/networking.ProtocolType
+</em>
+</td>
+<td>
+<p>The application-layer protocol. Matches <code>ProtocolType</code> inferred from the revision spec.</p>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<code>status</code></br>
+<em>
+<a href="#autoscaling.internal.knative.dev/v1alpha1.PodAutoscalerStatus">
+PodAutoscalerStatus
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Status communicates the observed state of the PodAutoscaler (from the controller).</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="autoscaling.internal.knative.dev/v1alpha1.Metric">Metric
+</h3>
+<p>
+<p>Metric represents a resource to configure the metric collector with.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>metadata</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectmeta-v1-meta">
+Kubernetes meta/v1.ObjectMeta
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+Refer to the Kubernetes API documentation for the fields of the
+<code>metadata</code> field.
+</td>
+</tr>
+<tr>
+<td>
+<code>spec</code></br>
+<em>
+<a href="#autoscaling.internal.knative.dev/v1alpha1.MetricSpec">
+MetricSpec
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Spec holds the desired state of the Metric (from the client).</p>
+<br/>
+<br/>
+<table>
+<tr>
+<td>
+<code>stableWindow</code></br>
+<em>
+time.Duration
+</em>
+</td>
+<td>
+<p>StableWindow is the aggregation window for metrics in a stable state.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>panicWindow</code></br>
+<em>
+time.Duration
+</em>
+</td>
+<td>
+<p>PanicWindow is the aggregation window for metrics where quick reactions are needed.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>scrapeTarget</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>ScrapeTarget is the K8s service that publishes the metric endpoint.</p>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<code>status</code></br>
+<em>
+<a href="#autoscaling.internal.knative.dev/v1alpha1.MetricStatus">
+MetricStatus
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Status communicates the observed state of the Metric (from the controller).</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="autoscaling.internal.knative.dev/v1alpha1.MetricSpec">MetricSpec
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#autoscaling.internal.knative.dev/v1alpha1.Metric">Metric</a>)
+</p>
+<p>
+<p>MetricSpec contains all values a metric collector needs to operate.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>stableWindow</code></br>
+<em>
+time.Duration
+</em>
+</td>
+<td>
+<p>StableWindow is the aggregation window for metrics in a stable state.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>panicWindow</code></br>
+<em>
+time.Duration
+</em>
+</td>
+<td>
+<p>PanicWindow is the aggregation window for metrics where quick reactions are needed.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>scrapeTarget</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>ScrapeTarget is the K8s service that publishes the metric endpoint.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="autoscaling.internal.knative.dev/v1alpha1.MetricStatus">MetricStatus
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#autoscaling.internal.knative.dev/v1alpha1.Metric">Metric</a>)
+</p>
+<p>
+<p>MetricStatus reflects the status of metric collection for this specific entity.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>Status</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1.Status
+</em>
+</td>
+<td>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="autoscaling.internal.knative.dev/v1alpha1.PodAutoscalerSpec">PodAutoscalerSpec
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#autoscaling.internal.knative.dev/v1alpha1.PodAutoscaler">PodAutoscaler</a>)
+</p>
+<p>
+<p>PodAutoscalerSpec holds the desired state of the PodAutoscaler (from the client).</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>containerConcurrency</code></br>
+<em>
+int64
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>ContainerConcurrency specifies the maximum allowed
+in-flight (concurrent) requests per container of the Revision.
+Defaults to <code>0</code> which means unlimited concurrency.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>scaleTargetRef</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectreference-v1-core">
+Kubernetes core/v1.ObjectReference
+</a>
+</em>
+</td>
+<td>
+<p>ScaleTargetRef defines the /scale-able resource that this PodAutoscaler
+is responsible for quickly right-sizing.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>reachability</code></br>
+<em>
+<a href="#autoscaling.internal.knative.dev/v1alpha1.ReachabilityType">
+ReachabilityType
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Reachability specifies whether or not the <code>ScaleTargetRef</code> can be reached (ie. has a route).
+Defaults to <code>ReachabilityUnknown</code></p>
+</td>
+</tr>
+<tr>
+<td>
+<code>protocolType</code></br>
+<em>
+knative.dev/networking/pkg/apis/networking.ProtocolType
+</em>
+</td>
+<td>
+<p>The application-layer protocol. Matches <code>ProtocolType</code> inferred from the revision spec.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="autoscaling.internal.knative.dev/v1alpha1.PodAutoscalerStatus">PodAutoscalerStatus
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#autoscaling.internal.knative.dev/v1alpha1.PodAutoscaler">PodAutoscaler</a>)
+</p>
+<p>
+<p>PodAutoscalerStatus communicates the observed state of the PodAutoscaler (from the controller).</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>Status</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1.Status
+</em>
+</td>
+<td>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>serviceName</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>ServiceName is the K8s Service name that serves the revision, scaled by this PA.
+The service is created and owned by the ServerlessService object owned by this PA.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>metricsServiceName</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>MetricsServiceName is the K8s Service name that provides revision metrics.
+The service is managed by the PA object.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>desiredScale</code></br>
+<em>
+int32
+</em>
+</td>
+<td>
+<p>DesiredScale shows the current desired number of replicas for the revision.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>actualScale</code></br>
+<em>
+int32
+</em>
+</td>
+<td>
+<p>ActualScale shows the actual number of replicas for the revision.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="autoscaling.internal.knative.dev/v1alpha1.PodScalable">PodScalable
+</h3>
+<p>
+<p>PodScalable is a duck type that the resources referenced by the
+PodAutoscaler&rsquo;s ScaleTargetRef must implement.  They must also
+implement the <code>/scale</code> sub-resource for use with <code>/scale</code> based
+implementations (e.g. HPA), but this further constrains the shape
+the referenced resources may take.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>metadata</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectmeta-v1-meta">
+Kubernetes meta/v1.ObjectMeta
+</a>
+</em>
+</td>
+<td>
+Refer to the Kubernetes API documentation for the fields of the
+<code>metadata</code> field.
+</td>
+</tr>
+<tr>
+<td>
+<code>spec</code></br>
+<em>
+<a href="#autoscaling.internal.knative.dev/v1alpha1.PodScalableSpec">
+PodScalableSpec
+</a>
+</em>
+</td>
+<td>
+<br/>
+<br/>
+<table>
+<tr>
+<td>
+<code>replicas</code></br>
+<em>
+int32
+</em>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<code>selector</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#labelselector-v1-meta">
+Kubernetes meta/v1.LabelSelector
+</a>
+</em>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<code>template</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#podtemplatespec-v1-core">
+Kubernetes core/v1.PodTemplateSpec
+</a>
+</em>
+</td>
+<td>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<code>status</code></br>
+<em>
+<a href="#autoscaling.internal.knative.dev/v1alpha1.PodScalableStatus">
+PodScalableStatus
+</a>
+</em>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="autoscaling.internal.knative.dev/v1alpha1.PodScalableSpec">PodScalableSpec
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#autoscaling.internal.knative.dev/v1alpha1.PodScalable">PodScalable</a>)
+</p>
+<p>
+<p>PodScalableSpec is the specification for the desired state of a
+PodScalable (or at least our shared portion).</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>replicas</code></br>
+<em>
+int32
+</em>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<code>selector</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#labelselector-v1-meta">
+Kubernetes meta/v1.LabelSelector
+</a>
+</em>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<code>template</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#podtemplatespec-v1-core">
+Kubernetes core/v1.PodTemplateSpec
+</a>
+</em>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="autoscaling.internal.knative.dev/v1alpha1.PodScalableStatus">PodScalableStatus
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#autoscaling.internal.knative.dev/v1alpha1.PodScalable">PodScalable</a>)
+</p>
+<p>
+<p>PodScalableStatus is the observed state of a PodScalable (or at
+least our shared portion).</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>replicas</code></br>
+<em>
+int32
+</em>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="autoscaling.internal.knative.dev/v1alpha1.ReachabilityType">ReachabilityType
+(<code>string</code> alias)</p></h3>
+<p>
+(<em>Appears on:</em>
+<a href="#autoscaling.internal.knative.dev/v1alpha1.PodAutoscalerSpec">PodAutoscalerSpec</a>)
+</p>
+<p>
+<p>ReachabilityType is the enumeration type for the different states of reachability
+to the <code>ScaleTarget</code> of a <code>PodAutoscaler</code></p>
+</p>
+<hr/>
 <h2 id="serving.knative.dev/v1">serving.knative.dev/v1</h2>
 <p>
+<p>Package v1 contains the Serving v1 API types.</p>
 </p>
 Resource Types:
 <ul><li>
@@ -460,7 +1131,7 @@ ServiceStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1.Configuration">Configuration</a>, 
+<a href="#serving.knative.dev/v1.Configuration">Configuration</a>,
 <a href="#serving.knative.dev/v1.ServiceSpec">ServiceSpec</a>)
 </p>
 <p>
@@ -541,7 +1212,7 @@ ConfigurationStatusFields
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1.ConfigurationStatus">ConfigurationStatus</a>, 
+<a href="#serving.knative.dev/v1.ConfigurationStatus">ConfigurationStatus</a>,
 <a href="#serving.knative.dev/v1.ServiceStatus">ServiceStatus</a>)
 </p>
 <p>
@@ -628,7 +1299,7 @@ string
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1.Revision">Revision</a>, 
+<a href="#serving.knative.dev/v1.Revision">Revision</a>,
 <a href="#serving.knative.dev/v1.RevisionTemplateSpec">RevisionTemplateSpec</a>)
 </p>
 <p>
@@ -886,7 +1557,7 @@ be provided.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1.Route">Route</a>, 
+<a href="#serving.knative.dev/v1.Route">Route</a>,
 <a href="#serving.knative.dev/v1.ServiceSpec">ServiceSpec</a>)
 </p>
 <p>
@@ -968,7 +1639,7 @@ RouteStatusFields
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1.RouteStatus">RouteStatus</a>, 
+<a href="#serving.knative.dev/v1.RouteStatus">RouteStatus</a>,
 <a href="#serving.knative.dev/v1.ServiceStatus">ServiceStatus</a>)
 </p>
 <p>
@@ -1163,7 +1834,7 @@ specific to RouteStatus.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1.RouteSpec">RouteSpec</a>, 
+<a href="#serving.knative.dev/v1.RouteSpec">RouteSpec</a>,
 <a href="#serving.knative.dev/v1.RouteStatusFields">RouteStatusFields</a>)
 </p>
 <p>
@@ -1271,7 +1942,236 @@ a hostname, but may not contain anything else (e.g. basic auth, url path, etc.)<
 </tbody>
 </table>
 <hr/>
+<h2 id="serving.knative.dev/v1alpha1">serving.knative.dev/v1alpha1</h2>
+<p>
+<p>Package v1alpha1 contains the v1alpha1 versions of the serving apis.
+Api versions allow the api contract for a resource to be changed while keeping
+backward compatibility by support multiple concurrent versions
+of the same resource</p>
+</p>
+Resource Types:
+<ul><li>
+<a href="#serving.knative.dev/v1alpha1.DomainMapping">DomainMapping</a>
+</li></ul>
+<h3 id="serving.knative.dev/v1alpha1.DomainMapping">DomainMapping
+</h3>
+<p>
+<p>DomainMapping is a mapping from a custom hostname to an Addressable.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>apiVersion</code></br>
+string</td>
+<td>
+<code>
+serving.knative.dev/v1alpha1
+</code>
+</td>
+</tr>
+<tr>
+<td>
+<code>kind</code></br>
+string
+</td>
+<td><code>DomainMapping</code></td>
+</tr>
+<tr>
+<td>
+<code>metadata</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectmeta-v1-meta">
+Kubernetes meta/v1.ObjectMeta
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Standard object&rsquo;s metadata.
+More info: <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#metadata">https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#metadata</a></p>
+Refer to the Kubernetes API documentation for the fields of the
+<code>metadata</code> field.
+</td>
+</tr>
+<tr>
+<td>
+<code>spec</code></br>
+<em>
+<a href="#serving.knative.dev/v1alpha1.DomainMappingSpec">
+DomainMappingSpec
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Spec is the desired state of the DomainMapping.
+More info: <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#spec-and-status">https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#spec-and-status</a></p>
+<br/>
+<br/>
+<table>
+<tr>
+<td>
+<code>ref</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1.KReference
+</em>
+</td>
+<td>
+<p>Ref points to an Addressable.
+Currently, Ref must be a KSvc.</p>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<code>status</code></br>
+<em>
+<a href="#serving.knative.dev/v1alpha1.DomainMappingStatus">
+DomainMappingStatus
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Status is the current state of the DomainMapping.
+More info: <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#spec-and-status">https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#spec-and-status</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="serving.knative.dev/v1alpha1.CannotConvertError">CannotConvertError
+</h3>
+<p>
+<p>CannotConvertError is returned when a field cannot be converted.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>Message</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<code>Field</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="serving.knative.dev/v1alpha1.DomainMappingSpec">DomainMappingSpec
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#serving.knative.dev/v1alpha1.DomainMapping">DomainMapping</a>)
+</p>
+<p>
+<p>DomainMappingSpec describes the DomainMapping the user wishes to exist.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>ref</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1.KReference
+</em>
+</td>
+<td>
+<p>Ref points to an Addressable.
+Currently, Ref must be a KSvc.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="serving.knative.dev/v1alpha1.DomainMappingStatus">DomainMappingStatus
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#serving.knative.dev/v1alpha1.DomainMapping">DomainMapping</a>)
+</p>
+<p>
+<p>DomainMappingStatus describes the current state of the DomainMapping.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>Status</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1.Status
+</em>
+</td>
+<td>
+<p>
+(Members of <code>Status</code> are embedded into this type.)
+</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>url</code></br>
+<em>
+knative.dev/pkg/apis.URL
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>URL is the URL of this DomainMapping.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>address</code></br>
+<em>
+knative.dev/pkg/apis/duck/v1.Addressable
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Address holds the information needed for a DomainMapping to be the target of an event.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<hr/>
 <p><em>
 Generated with <code>gen-crd-api-reference-docs</code>
-on git commit <code>af83e581d</code>.
+on git commit <code>db4879e0f</code>.
 </em></p>
