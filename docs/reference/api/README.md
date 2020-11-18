@@ -94,7 +94,7 @@ To generate a version of the API:
 
    * If you get the
      `F0807 13:58:20.621526 168834 main.go:444] type invalid type has kind=Unsupported which is unhandled`
-     error, the import target might have moved. There might be other causes for that error buy see
+     error, the import target might have moved. There might be other causes for that error but view
      [#2054](https://github.com/knative/docs/pull/2054) (and the linked Issues) for details about how we handled that error
      in the past.
 
