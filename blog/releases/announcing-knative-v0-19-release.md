@@ -215,7 +215,21 @@ The following other features have been added, too:
 
 ### Operator v0.19
 
-TODO
+The new operator can now deploy the new version `v0.19` of serving and eventing components.
+
+🐞 Bug Fixes
+- Add validation to the field spec.version ([#319](https://github.com/knative/operator/pull/319))
+- Add support of the major.minor format for spec.version ([#326](https://github.com/knative/operator/pull/326))
+- Removing incorrect pre-job for 0.17.0 ([#325](https://github.com/knative/operator/pull/325))
+
+🧹 Clean up
+- Update to pkg test/KubeClient changes ([#304](https://github.com/knative/operator/pull/304))
+- Lint: previous condition includes return statement, pop else statement ([#305](https://github.com/knative/operator/pull/305))
+- Drop istio dependency and replace with unstructured operations ([#311](https://github.com/knative/operator/pull/311))
+- Drop dependency on pkg/errors ([#310](https://github.com/knative/operator/pull/310))
+- Validate the major.minor as the version matching mechanism for customized manifests ([#320](https://github.com/knative/operator/pull/320))
+- Use the hack repository for scripts ([#333](https://github.com/knative/operator/pull/333))
+- Use the new update_deps script ([#332](https://github.com/knative/operator/pull/332))
 
 ### Thank you contributors v0.19
 
@@ -225,12 +239,16 @@ TODO
 - [@dprotaso](https://github.com/dprotaso)
 - [@dsimansk](https://github.com/dsimansk)
 - [@eclipselu](https://github.com/eclipselu)
+- [@houshengbo](https://github.com/houshengbo)
 - [@ian-mi](https://github.com/ian-mi)
 - [@itsmurugappan](https://github.com/itsmurugappan)
 - [@joshuawilson](https://github.com/joshuawilson)
 - [@julz](https://github.com/julz)
+- [@lberk](https://github.com/lberk)
 - [@markusthoemmes](https://github.com/markusthoemmes)
 - [@mattmoor](https://github.com/mattmoor)
+- [@matzew](https://github.com/matzew)
+- [@n3wscott](https://github.com/n3wscott)
 - [@nak3](https://github.com/nak3)
 - [@navidshaikh](https://github.com/navidshaikh)
 - [@pierDipi](https://github.com/pierDipi)
