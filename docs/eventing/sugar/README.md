@@ -1,6 +1,6 @@
 Knative Eventing Sugar Controller will react to special labels and annotations
 to produce or control eventing resources in a cluster or namespace. This allows
-cluster operators and developers to focus on creating fewer resources, and the
+cluster operators and developers to focus on creating fewer resources. The
 underlying eventing infrastructure is created on-demand, and cleaned up when no
 longer needed.
 
@@ -15,11 +15,11 @@ See [Automatic Broker Creation](#automatic-broker-creation).
 
 Triggers can be managed via the Sugar Controller in the following ways:
 
-| Kind        | Key                                                            | Values                                                                                                                        |
-| ----------- | -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| Addressable | label: eventing.knative.dev/autotrigger                        | String, "enabled" or "disabled" - Enables Trigger creation.                                                                   |
-| Addressable | annotation: autotrigger.eventing.knative.dev/filter.attributes | JSON array of any map of string to string. Default: no filters.                                                               |
-| Addressable | annotation: autotrigger.eventing.knative.dev/broker            | String, "<broker-name>" - The name of the Broker to be used by all Triggers created from the Addressable. Default: "default". |
+| Kind        | Key                                                            | Values                                                                                                                                 |
+| ----------- | -------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| Addressable | label: eventing.knative.dev/autotrigger                        | String, "enabled" or "disabled" - Enables Trigger creation.                                                                            |
+| Addressable | annotation: autotrigger.eventing.knative.dev/filter.attributes | JSON array of any map of string to string. Default: no filters.                                                                        |
+| Addressable | annotation: autotrigger.eventing.knative.dev/broker            | String, "<broker-name>" - The name of the Broker to be used by all Triggers created from the Addressable resource. Default: "default". |
 
 See [Automatic Trigger Creation](#automatic-trigger-creation).
 
@@ -118,12 +118,12 @@ Controller will do nothing.
 ## Automatic Trigger Creation
 
 The Sugar Controller can also watch for any resource that conforms to the duck
-type "Addressable", see [the defintion](TODO: add a link for addressable
+type "Addressable", see [the defintion](TODO: add a link for Addressable
 definition) or the [Discovery](TODO: link to the discovery documentation)
 ClusterDuckType
 [addressables.duck.knative.dev](https://github.com/knative-sandbox/discovery/blob/master/config/knative/addressables.duck.knative.dev.yaml).
 
-For any addressable that has been labeled with
+For any Addressable resource that has been labeled with
 `eventing.knative.dev/autotrigger=enabled`, the Sugar Controller will manage the
 Trigger(s) for it.
 
@@ -138,7 +138,7 @@ annotations:
 `autotrigger.eventing.knative.dev/filter.attributes` is a JSON array of any map
 of string to string. Any valid CloudEvents attribute name and value are allowed.
 For each map in the array, a new Trigger will be created. If this property is
-omitted, a Trigger with no filters will be created for the Addressable.
+omitted, a Trigger with no filters will be created for the Addressable resource.
 
 Triggers produced by the Sugar Controller automatically create owner-refs to the
 original Addressable resource. When the labeled resource is deleted, the
@@ -159,15 +159,16 @@ annotations:
   autotrigger.eventing.knative.dev/broker: hello-sugar
 ```
 
-It is not supported to use more than one broker name with AutoTrigger.
+Using more than one Broker name is not supported for sugar'ed Addressable
+resources.
 
 The Sugar Controller uses the label to enable or disable the AutoTrigger
 feature, and the annotations to provide the configuration. In this way, you are
 able to enable/disable the feature without editing the configuration.
 
 The Sugar Controller does not clean up Triggers if the
-`eventing.knative.dev/autotrigger` label is removed, and Trigger filters will no
-longer be updated.
+`eventing.knative.dev/autotrigger` label is removed, and the Trigger filters
+will no longer be updated.
 
 ### Simple AutoTrigger Example
 
@@ -188,9 +189,9 @@ spec:
         - image: <some image>
 ```
 
-The Sugar Controller will notice AutoTrigger is enabled for that resource, and
-create a trigger subscribing the Knative Service "hello-sugar" to all events
-send to the "default" Broker, the cluster will have a Trigger like:
+The Sugar Controller will notice AutoTrigger is enabled for that resource. It
+will create a trigger subscribing the Knative Service "hello-sugar" to all
+events sent to the "default" Broker. The Trigger will resemble the example:
 
 ```yaml
 apiVersion: eventing.knative.dev/v1
@@ -226,7 +227,7 @@ metadata:
       [{"type":"gumdrops", "sticky":"yes"}]
 ```
 
-A Trigger with filters will be replace the original:
+A Trigger with filters will replace the original:
 
 ```yaml
 kind: Trigger
@@ -310,8 +311,8 @@ spec:
 ### Broker Named Trigger Example
 
 Using the `autotrigger.eventing.knative.dev/broker` annotation, the Addressable
-can control which Broker name is used in the spec of the managed Trigger
-(spec.broker), when the following Knative Service is created:
+resource can control which Broker name is used in the spec of the managed
+Trigger (spec.broker), when the following Knative Service is created:
 
 ```yaml
 apiVersion: serving.knative.dev/v1
