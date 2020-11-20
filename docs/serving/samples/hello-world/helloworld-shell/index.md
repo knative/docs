@@ -29,7 +29,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-shell
 
 ## Building
 
-1. Create a new file named `cgi.sh` and paste the script below. This will run BusyBox' `http` returning a friendly welcome message as `plain/text` plus some extra information:
+1. Create a new file named `script.sh` and paste the script below. This will run BusyBox' `http` returning a friendly welcome message as `plain/text` plus some extra information:
 
   ```shell
   #!/bin/sh
@@ -39,23 +39,11 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-shell
   # for the full CGI specification
   echo -e "Content-Type: text/plain\n"
 
-  # Welcome message tagen from the environment or a default value
-  echo "Welcome to the ${TAGET:=hello-world example}!"
+  # Use environment variable TARGET or "World" if not set
+  echo "Hello ${TARGET:=World}!"
 
-  # Some CGI Info
-  cat <<EOT
-
-  Localtime:           $(date)
-  CGI Environment:
-    Query String:      $QUERY_STRING
-    Remote Address:    $REMOTE_ADDR
-    Server Software:   $SERVER_SOFTWARE
-
-  EOT
-
-  # Print all Knative relevant environment variables
-  echo "Knative Environment:"
-  env | grep "^K_" | sed -e 's/^K_/  K_/'
+  # In this script you can perform more dynamic actions, too.
+  # Like printing the date, checking CGI environment variables, ...
   ```
 
 1. Create a new file named `Dockerfile` and copy the code block below into it.
@@ -73,7 +61,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-shell
    RUN echo "::sysinit:httpd -vv -p 8080 -u daemon -h /var/www" > /etc/inittab
 
    # Copy over our CGI script and make it executable
-   COPY --chown=daemon:daemon cgi.sh cgi-bin/index.cgi
+   COPY --chown=daemon:daemon script.sh cgi-bin/index.cgi
    RUN chmod 755 cgi-bin/index.cgi
 
    # Startup init which in turn starts httpd
