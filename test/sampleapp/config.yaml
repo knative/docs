@@ -59,6 +59,6 @@ languages:
   - language: "shell"
     expectedOutput: "Hello Shell Sample v1!"
     copies:
-      - "script.sh"
+      - "cgi.sh"
       - "service.yaml"
       - "Dockerfile"
