@@ -1,6 +1,6 @@
 Knative provides a multi-tenant, channel-based broker implementation that uses channels for event routing.
 
-Before you can use the Knative Channel-based Broker, you must install a channel provider, such as InMemoryChannel, Kafka or Nats.
+Before you can use the Knative Channel-based Broker, you must install a channel provider, such as InMemoryChannel, RabbitMQ, Kafka or Nats.
 
 **NOTE:** InMemoryChannel channels are for development use only and must not be used in a production deployment.
 
