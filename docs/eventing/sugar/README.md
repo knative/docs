@@ -15,11 +15,12 @@ See [Automatic Broker Creation](#automatic-broker-creation).
 
 Triggers can be managed via the Sugar Controller in the following ways:
 
-| Kind        | Key                                                            | Values                                                                                                                                 |
-| ----------- | -------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| Addressable | label: eventing.knative.dev/autotrigger                        | String, "enabled" or "disabled" - Enables Trigger creation.                                                                            |
-| Addressable | annotation: autotrigger.eventing.knative.dev/filter.attributes | JSON array of any map of string to string. Default: no filters.                                                                        |
-| Addressable | annotation: autotrigger.eventing.knative.dev/broker            | String, "<broker-name>" - The name of the Broker to be used by all Triggers created from the Addressable resource. Default: "default". |
+| Kind        | Key                                                            | Values                                                                                                                                                                       |
+| ----------- | -------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Addressable | label: eventing.knative.dev/autotrigger                        | String, "enabled" or "disabled" - Enables Trigger creation.                                                                                                                  |
+| Addressable | annotation: autotrigger.eventing.knative.dev/filter.attributes | JSON array of any map of string to string. Default: no filters.                                                                                                              |
+| Addressable | annotation: autotrigger.eventing.knative.dev/broker            | String, "<broker-name>" - The name of the Broker to be used by all Triggers created from the Addressable resource. Default: "default".                                       |
+| Addressable | annotation: eventing.knative.dev/injection                     | String, "enabled" or "disabled" - This label is propagated to Triggers created by the Sugar Controller. Use this to control the automatic creation of Brokers from Triggers. |
 
 See [Automatic Trigger Creation](#automatic-trigger-creation).
 
@@ -162,6 +163,13 @@ annotations:
 
 Using more than one Broker name is not supported for sugar'ed Addressable
 resources.
+
+To automatically create a Broker from a Trigger created by the Sugar Controller:
+
+```
+annotations:
+  eventing.knative.dev/injection: enabled
+```
 
 The Sugar Controller uses the label to enable or disable the AutoTrigger
 feature, and the annotations to provide the configuration. In this way, you are
@@ -357,3 +365,67 @@ spec:
       kind: Service
       name: hello-sugar
 ```
+
+### Broker and Trigger Creation Example
+
+It is possible to create both the Broker and Trigger based on annotations on the
+Addressable:
+
+```yaml
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: hello-sugar
+  namespace: candyland
+  labels:
+    eventing.knative.dev/autotrigger: enabled
+  annotations:
+    eventing.knative.dev/injection: enabled
+    autotrigger.eventing.knative.dev/broker: gloppy
+    autotrigger.eventing.knative.dev/filter.attributes: |
+      [{"type":"gumdrops"}]
+spec:
+  template:
+    spec:
+      containers:
+        - image: <some image>
+```
+
+A Trigger using the Broker name of "gloppy" will be created like:
+
+```yaml
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: hello-sugar-abc123
+  namespace: candyland
+  annotations:
+    eventing.knative.dev/injection: enabled
+  ownerReferences:
+    - apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: hello-sugar
+spec:
+  broker: gloppy
+  filter:
+    attributes:
+      type: gumdrops
+  subscriber:
+    ref:
+      apiVersion: v1
+      kind: Service
+      name: hello-sugar
+```
+
+This Trigger will create a Broker like:
+
+```yaml
+apiVersion: eventing.knative.dev/v1
+kind: Broker
+metadata:
+  name: gloppy
+  namespace: candyland
+spec:
+```
+
+See also: [Automatic Broker Creation](#automatic-broker-creation).
