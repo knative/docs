@@ -51,7 +51,8 @@ namespace creation, or on Trigger creation. The Sugar controller enables those
 use-cases:
 
 - When a Namespace is labeled with `eventing.knative.dev/injection=enabled`, the
-  controller will create a default broker in that namespace.
+  sugar controller will create a default Broker named "default" in that
+  namespace.
 - When a Trigger is annotated with `eventing.knative.dev/injection=enabled`, the
   controller will create a Broker named by that Trigger in the Trigger's
   Namespace.

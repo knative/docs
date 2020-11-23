@@ -59,13 +59,14 @@ Use following command to create the event source from STDIN:
 
 ```shell
 cat <<EOF | kubectl create -f -
-apiVersion: sources.knative.dev/v1beta1
+apiVersion: sources.knative.dev/v1beta2
 kind: PingSource
 metadata:
   name: test-ping-source
 spec:
   schedule: "*/2 * * * *"
-  jsonData: '{"message": "Hello world!"}'
+  contentType: "application/json"
+  data: '{"message": "Hello world!"}'
   sink:
     ref:
       apiVersion: serving.knative.dev/v1
@@ -80,6 +81,44 @@ Use following command to create the event source from the `ping-source.yaml` fil
 
 ```shell
 kubectl apply --filename ping-source.yaml
+```
+{{< /tab >}}
+{{< /tabs >}}
+
+## (Optional) Create a PingSource with binary data
+
+Sometimes you may want to send binary data, which cannot be directly serialized in yaml, to downstream. This can be achieved by using `dataBase64` as the payload. As the name suggests, `dataBase64` should carry data that is base64 encoded.
+
+Please note that `data` and `dataBase64` cannot co-exist.
+
+{{< tabs name="create-source" default="By YAML" >}}
+{{% tab name="By YAML" %}}
+Use the following command to create the event source with binary data from STDIN:
+
+```shell
+cat <<EOF | kubectl create -f -
+apiVersion: sources.knative.dev/v1beta2
+kind: PingSource
+metadata:
+  name: test-ping-source-binary
+spec:
+  schedule: "*/2 * * * *"
+  contentType: "text/plain"
+  dataBase64: "ZGF0YQ=="
+  sink:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: event-display
+EOF
+```
+{{< /tab >}}
+
+{{% tab name="By filename" %}}
+Use the following command to create the event source from the `ping-source-binary.yaml` file:
+
+```shell
+kubectl apply --filename ping-source-binary.yaml
 ```
 {{< /tab >}}
 {{< /tabs >}}
@@ -114,7 +153,7 @@ kail -l serving.knative.dev/service=event-display -c user-container --since=10m
 
 You should see log lines showing the request headers and body from the source:
 
-```
+```shell
 ☁️  cloudevents.Event
 Validation: valid
 Context Attributes,
@@ -130,6 +169,22 @@ Data,
   }
 ```
 
+If you created a PingSource with binary data, you should also see the following:
+
+```shell
+☁️  cloudevents.Event
+Validation: valid
+Context Attributes,
+  specversion: 1.0
+  type: dev.knative.sources.ping
+  source: /apis/v1/namespaces/default/pingsources/test-ping-source-binary
+  id: a195be33-ff65-49af-9045-0e0711d05e94
+  time: 2020-11-17T19:48:00.48334181Z
+  datacontenttype: text/plain
+Data,
+  ZGF0YQ==
+```
+
 ## Cleanup
 
 You can delete the PingSource instance by entering the following command:
@@ -138,12 +193,14 @@ You can delete the PingSource instance by entering the following command:
 {{% tab name="By name" %}}
 ```shell
 kubectl delete pingsources.sources.knative.dev test-ping-source
+kubectl delete pingsources.sources.knative.dev test-ping-source-binary
 ```
 {{< /tab >}}
 
 {{% tab name="By filename" %}}
 ```shell
 kubectl delete --filename ping-source.yaml
+kubectl delete --filename ping-source-binary.yaml
 ```
 {{< /tab >}}
 {{< /tabs >}}
