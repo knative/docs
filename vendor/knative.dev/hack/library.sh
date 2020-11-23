@@ -353,13 +353,10 @@ function report_go_test() {
   report="$(mktemp)"
   local xml
   xml="$(mktemp_with_extension "${ARTIFACTS}"/junit_XXXXXXXX xml)"
-  local json
-  json="$(mktemp_with_extension "${ARTIFACTS}"/json_XXXXXXXX json)"
   echo "Running go test with args: ${go_test_args[*]}"
   # TODO(chizhg): change to `--format testname`?
   capture_output "${report}" gotestsum --format "${GO_TEST_VERBOSITY:-standard-verbose}" \
     --junitfile "${xml}" --junitfile-testsuite-name relative --junitfile-testcase-classname relative \
-    --jsonfile "${json}" \
     -- "${go_test_args[@]}"
   local failed=$?
   echo "Finished run, return code is ${failed}"
@@ -517,7 +514,7 @@ function go_update_deps() {
   echo "=== Update Deps for Golang"
 
   local UPGRADE=0
-  local VERSION="master"
+  local VERSION="v9000.1" # release v9000 is so far in the future, it will always pick the default branch.
   local DOMAIN="knative.dev"
   while [[ $# -ne 0 ]]; do
     parameter=$1
@@ -554,8 +551,11 @@ function go_update_deps() {
   echo "--- Go mod tidy and vendor"
 
   # Prune modules.
-  go mod tidy
-  go mod vendor
+  local orig_pipefail_opt=$(shopt -p -o pipefail)
+  set -o pipefail
+  go mod tidy 2>&1 | grep -v "ignoring symlink" || true
+  go mod vendor 2>&1 |  grep -v "ignoring symlink" || true
+  eval "$orig_pipefail_opt"
 
   echo "--- Removing unwanted vendor files"
 
@@ -742,6 +742,14 @@ function shellcheck_new_files() {
   if [[ ${failed} -eq 1 ]]; then
     fail_script "shellcheck failures"
   fi
+}
+
+function latest_version() {
+  local semver=$(git describe --match "v[0-9]*" --abbrev=0)
+  local major_minor=$(echo "$semver" | cut -d. -f1-2)
+
+  # Get the latest patch release for the major minor
+  git tag -l "${major_minor}*" | sort -r --version-sort | head -n1
 }
 
 # Initializations that depend on previous functions.
