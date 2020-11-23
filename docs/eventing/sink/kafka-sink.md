@@ -42,7 +42,7 @@ This page shows how to install and configure Apache Kafka Sink.
 
 ## Kafka Sink
 
-A Kafka Sink object looks like this:
+A `KafkaSink` object looks like this:
 
 ```yaml
 apiVersion: eventing.knative.dev/v1alpha1
@@ -61,18 +61,18 @@ spec:
 A Kafka Producer is the component responsible for sending events to the Apache Kafka cluster.
 Knative exposes all available Kafka Producer configurations that can be modified to suit your workloads.
 
-You can change these configurations by modifying the `config-kafka-sink-data-plane` `ConfigMap` in
+You can change these configurations by modifying the `config-kafka-sink-data-plane` config map in
 the `knative-eventing` namespace.
 
-Documentation for the settings available in this `ConfigMap` is available on the
+Documentation for the settings available in this config map is available on the
 [Apache Kafka website](https://kafka.apache.org/documentation/),
 in particular, [Producer configurations](https://kafka.apache.org/documentation/#producerconfigs).
 
 ## Enable debug logging for data plane components
 
-To enable debug logging for data plane components change the logging level to `DEBUG` in the `kafka-config-logging` ConfigMap.
+To enable debug logging for data plane components change the logging level to `DEBUG` in the `kafka-config-logging` config map.
 
-1. Apply the following `kafka-config-logging` ConfigMap:
+1. Apply the following `kafka-config-logging` config map:
 
     ```yaml
     apiVersion: v1

@@ -1,7 +1,7 @@
-A Sink is an Addressable resource that acts as a link
+A sink is an Addressable resource that acts as a link
 between the Eventing mesh and an entity or system.
 
-We can connect any `Source` to a `Sink`, like `PingSource` and `KafkaSink`:
+We can connect any source to a sink, such as `PingSource` and `KafkaSink` objects:
 
 ```yaml
 apiVersion: sources.knative.dev/v1beta1
@@ -18,7 +18,7 @@ spec:
       name: my-kafka-sink
 ```
 
-We can connect a `Trigger` to the `Sink`, so that we can filter events, before sending them to a `Sink`:
+We can connect a `Trigger` object to a sink, so that we can filter events, before sending them to a sink:
 
 ```yaml
 apiVersion: eventing.knative.dev/v1
