@@ -717,7 +717,29 @@ At this point, you have a basic installation of Knative Eventing!
 
    <!-- This indentation is important for things to render properly. -->
 
-{{< tabs name="eventing_extensions" >}} {{% tab name="Sugar Controller" %}}
+{{< tabs name="eventing_extensions" >}}
+
+{{% tab name="Apache Kafka Sink" %}}
+
+{{< feature-state version="v0.18" state="alpha" >}}
+
+1. Install the Kafka controller:
+
+    ```bash
+    kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-kafka-broker" file="eventing-kafka-controller.yaml" >}}
+    ```
+
+1. Install the Kafka Sink data plane:
+
+    ```bash
+    kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-kafka-broker" file="eventing-kafka-sink.yaml" >}}
+    ```
+
+For more information, see the [Kafka Sink](./../eventing/sink/kafka-sink.md) documentation.
+
+{{< /tab >}}
+
+{{% tab name="Sugar Controller" %}}
 
 <!-- Unclear when this feature came in -->
 
