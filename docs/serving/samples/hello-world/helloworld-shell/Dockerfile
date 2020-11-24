@@ -3,10 +3,15 @@
 FROM busybox
 
 # Serve from this directory
-WORKDIR /httpd
+WORKDIR /var/www
 
-# Copy over the service script
-COPY script.sh /httpd
+# Prepare httpd command for being started via init
+# This indirection is required for proper SIGTERM handling
+RUN echo "::sysinit:httpd -vv -p 8080 -u daemon -h /var/www" > /etc/inittab
 
-# Start up the webserver
-CMD [ "/bin/sh", "/httpd/script.sh" ]
+# Copy over our CGI script and make it executable
+COPY --chown=daemon:daemon script.sh cgi-bin/index.cgi
+RUN chmod 755 cgi-bin/index.cgi
+
+# Startup init which in turn starts httpd
+CMD init
