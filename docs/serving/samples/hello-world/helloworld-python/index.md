@@ -8,8 +8,9 @@ type: "docs"
 This guide describes the steps required to create the `helloworld-python` sample
 app and deploy it to your cluster.
 
-The sample app reads a TARGET environment variable, and prints Hello
-\${TARGET}!. If TARGET is not specified, World is used as the default value.
+The sample app reads a `TARGET` environment variable, and prints
+`Hello ${TARGET}!`. If `TARGET` is not specified, `World` is used as the default
+value.
 
 You can also download a working copy of the sample, by running the following
 commands:
@@ -25,9 +26,9 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-python
   [installation instructions](../../../../install/README.md).
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured.
-- (optional) The Knatice CLI client
-  [kn](https://github.com/knative/client/releases) that simplifies the
-  deployment. Alternative you can also use `kubectl` and apply resource files
+- (optional) The Knative CLI client
+  [kn](https://github.com/knative/client/releases) can be used to simplify the
+  deployment. Alternatively, you can use `kubectl`, and apply resource files
   directly.
 
 ## Build
@@ -98,12 +99,12 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-python
    __pycache__
    ```
 
-Once you have recreated the sample code files (or used the files in the sample
-folder) you're ready to build and deploy the sample app.
+**NOTE:** Use Docker to build the sample code into a container. To build and
+push with Docker Hub, run these commands replacing `{username}` with your Docker
+Hub username.
 
-1. Use Docker to build the sample code into a container. To build and push with
-   Docker Hub, run these commands replacing `{username}` with your Docker Hub
-   username:
+1. Use Docker to build the sample code into a container, then push the container
+   to the Docker registry:
 
    ```shell
    # Build the container on your local machine
@@ -165,7 +166,8 @@ folder) you're ready to build and deploy the sample app.
    - Create a new immutable revision for this version of the app.
    - Network programming to create a route, ingress, service, and load balance
      for your app.
-   - Automatically scale your pods up and down (including to zero active pods).
+   - Automatically scale your pods up and down, including scaling down to zero
+     active pods.
 
 ## Verification
 
