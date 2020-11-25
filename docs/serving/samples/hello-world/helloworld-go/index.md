@@ -19,7 +19,7 @@ You will need:
 
 ## Building
 
-1. Create a basic web server which listens on port 8080, by copying the following code into a new file named `helloworld-go`:
+1. Create a basic web server which listens on port 8080, by copying the following code into a new file named `helloworld.go`:
 
    ```go
    package main
