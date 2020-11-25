@@ -84,7 +84,7 @@ A source based on Paho (like the provided [MQTT CamelSource](source_mqtt.yaml)) 
 automatically converting IoT messages to Cloudevents.
 
 To use the MQTT source, you need a MQTT broker running and reachable from your cluster.
-For example, it's possible to run a [Mosquitto MQTT Broker](https://mosquitto.org/) for testing purposes.  
+For example, it's possible to run a [Mosquito MQTT Broker](https://mosquitto.org/) for testing purposes.  
 
 First, edit the [MQTT CamelSource](source_mqtt.yaml) and put the
 correct address of the MQTT broker in the `brokerUrl` field.

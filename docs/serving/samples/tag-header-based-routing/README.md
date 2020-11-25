@@ -24,7 +24,7 @@ cd $GOPATH/src/github.com/knative/docs
 This feature is disabled by default. To enable this feature, run the following command:
 
 ```
-kubectl patch cm config-network -n knative-serving -p '{"data":{"tagHeaderBasedRouting":"Enabled"}}'
+kubectl patch cm config-features -n knative-serving -p '{"data":{"tag-header-based-routing":"Enabled"}}'
 ```
 
 ## Build images

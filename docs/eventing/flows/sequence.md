@@ -79,7 +79,7 @@ by <STEP NUMBER>", for example the first Step in the `Sequence` will take the
 incoming message and append "- Handled by 0" to the incoming message.
 
 The only difference is that we'll use the `Subscriber.Spec.Reply` field to wire
-the output of the last Step to another `Sequence` that does the smae message
+the output of the last Step to another `Sequence` that does the same message
 modifications as the first pipeline (with different steps however).
 
 ### [Using Sequence with Broker/Trigger model](../samples/sequence/sequence-with-broker-trigger/README.md)

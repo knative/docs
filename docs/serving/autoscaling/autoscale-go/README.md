@@ -4,8 +4,6 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 
 1. A Kubernetes cluster with [Knative Serving](../../../install/README.md)
    installed.
-1. A [metrics installation](../../installing-logging-metrics-traces.md) for
-   viewing scaling graphs (optional).
 1. The `hey` load generator installed (`go get -u github.com/rakyll/hey`).
 1. Clone this repository, and move into the sample directory:
 
@@ -19,7 +17,7 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 1. Deploy the [sample](./service.yaml) Knative Service:
 
    ```
-   kubectl apply --filename docs/serving/samples/autoscale-go/service.yaml
+   kubectl apply --filename docs/serving/autoscaling/autoscale-go/service.yaml
    ```
 
 1. Obtain the URL of the service (once `Ready`):
@@ -207,18 +205,6 @@ autoscaler classes built into Knative:
 View the [Kubecon Demo](https://youtu.be/OPSIPr-Cybs) of Knative autoscaler
 customization (32 minutes).
 
-### Dashboards
-
-View the Knative Serving Scaling and Request dashboards (if configured).
-
-```
-kubectl port-forward --namespace knative-monitoring $(kubectl get pods --namespace knative-monitoring --selector=app=grafana  --output=jsonpath="{.items..metadata.name}") 3000
-```
-
-![scale dashboard](./scale-dashboard.png)
-
-![request dashboard](./request-dashboard.png)
-
 ### Other Experiments
 
 1. Send 60 seconds of traffic maintaining 100 concurrent requests.
@@ -261,7 +247,7 @@ kubectl port-forward --namespace knative-monitoring $(kubectl get pods --namespa
 ## Cleanup
 
 ```
-kubectl delete --filename docs/serving/samples/autoscale-go/service.yaml
+kubectl delete --filename docs/serving/autoscaling/autoscale-go/service.yaml
 ```
 
 ## Further reading

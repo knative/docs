@@ -79,7 +79,8 @@ spec:
           env:
             - name: MESSAGE
               value: " - Handled by 2"
-
+            - name: TYPE
+              value: "samples.http.mod3"
 ---
 
 ```
@@ -138,13 +139,14 @@ This will create a PingSource which will send a CloudEvent with {"message":
 "Hello world!"} as the data payload every 2 minutes.
 
 ```yaml
-apiVersion: sources.knative.dev/v1beta1
+apiVersion: sources.knative.dev/v1beta2
 kind: PingSource
 metadata:
   name: ping-source
 spec:
   schedule: "*/2 * * * *"
-  jsonData: '{"message": "Hello world!"}'
+  contentType: "application/json"
+  data: '{"message": "Hello world!"}'
   sink:
     ref:
       apiVersion: eventing.knative.dev/v1

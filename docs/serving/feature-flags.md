@@ -74,7 +74,8 @@ An extension may surface details of a specific Knative implementation or feature
 * **ConfigMap key:** `multi-container`
 
 This flag allows specifying multiple "user containers" in a Knative Service spec.
-Only one container can handle the requests. Knative picks the first container with a port specified.
+Only one container can handle the requests, and therefore exactly one container must
+have a `port` specified.
 
 ```yaml
 apiVersion: serving.knative.dev/v1
@@ -265,4 +266,4 @@ they are no longer active.
 * **Type**: extension
 * **ConfigMap key:** `tag-header-based-routing`
 
-This flags controls whether [tag header based routing](https://knative.dev/development/serving/samples/tag-header-based-routing/) is enabled.
+This flags controls whether [tag header based routing](./samples/tag-header-based-routing/README.md) is enabled.

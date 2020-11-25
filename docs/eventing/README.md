@@ -15,7 +15,7 @@ also possible to combine the components in novel ways.
    configuration from your application.
 
 1. **I just want to consume events like X, I don't care how they are
-   published.** Use a [Trigger](broker/README.md) to consume events from a Broker based
+   published.** Use a [Trigger](triggers/README.md) to consume events from a Broker based
    on CloudEvents attributes. Your application will receive the events as an
    HTTP POST.
 

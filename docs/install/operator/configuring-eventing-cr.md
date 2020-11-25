@@ -9,9 +9,10 @@ aliases:
 The Knative Eventing operator can be configured with these options:
 
 - [Version Configuration](#version-configuration)
-- [Eventing Configuration by ConfigMap](#eventing-configuration-by-configMap)
+- [Eventing Configuration by ConfigMap](#eventing-configuration-by-configmap)
 - [Private repository and private secret](#private-repository-and-private-secrets)
 - [Configuring default broker class](#configuring-default-broker-class)
+- [System Resource Settings](#system-resource-settings)
 
 __NOTE:__ Kubernetes spec level policies cannot be configured using the Knative operators.
 
@@ -46,11 +47,46 @@ if the current Knative Eventing deployment is version 0.14.x, you must upgrade t
 The Knative Eventing operator CR is configured the same way as the Knative Serving operator CR. Because the operator manages
 the Knative Eventing installation, it will overwrite any updates to the `ConfigMaps` which are used to configure Knative
 Eventing. The `KnativeEventing` custom resource allows you to set values for these ConfigMaps via the operator. Knative
-Eventing has multiple ConfigMaps named with the prefix `config-`. The `spec.config` in `KnativeEventing` has one entry
+Eventing has multiple ConfigMaps, most of them are named with the prefix `config-`. The `spec.config` in `KnativeEventing` has one entry
 `<name>` for each ConfigMap named `config-<name>`, with a value which will be used for the ConfigMap's `data`.
 
+### Setting the default channel
+
 For example, if you would like to change your default channel from `InMemoryChannel` into `KafkaChannel`, here is what
-your Eventing CR looks like, to modify the ConfigMap `config-br-default-channel`:
+your Eventing CR looks like, to modify the ConfigMap `default-ch-webhook`:
+
+```
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeEventing
+metadata:
+  name: knative-eventing
+  namespace: knative-eventing
+spec:
+  config:
+    default-ch-webhook:
+      default-ch-config: |
+        clusterDefault:
+          apiVersion: messaging.knative.dev/v1beta1
+          kind: KafkaChannel
+          spec:
+            numPartitions: 10
+            replicationFactor: 1
+        namespaceDefaults:
+          my-namespace:
+            apiVersion: messaging.knative.dev/v1
+            kind: InMemoryChannel
+            spec:
+              delivery:
+                backoffDelay: PT0.5S
+                backoffPolicy: exponential
+                retry: 5
+```
+
+The `clusterDefault` sets the global, cluster based default. Inside the `namespaceDefaults` you can configure the channel defaults on a per namespace basis.
+
+### Setting the default channel for the broker
+
+If you are using a channel-based broker and you would like to change the brokers default channel, from `InMemoryChannel` to `KafkaChannel`, here is an example of what your Eventing CR would look like when modifying the ConfigMap `config-br-default-channel`:
 
 ```
 apiVersion: operator.knative.dev/v1alpha1
@@ -65,7 +101,7 @@ spec:
         apiVersion: messaging.knative.dev/v1beta1
         kind: KafkaChannel
         spec:
-          numPartitions: 10
+          numPartitions: 5
           replicationFactor: 1
 ```
 
@@ -242,4 +278,38 @@ metadata:
   namespace: knative-eventing
 spec:
   defaultBrokerClass: MTChannelBasedBroker
+```
+
+## System Resource Settings
+
+The operator custom resource allows you to configure system resources for the Knative system containers.
+Requests and limits can be configured for the following containers:
+
+- `eventing-controller`
+- `eventing-webhook`
+- `imc-controller`
+- `imc-dispatcher`
+- `mt-broker-ingress`
+- `mt-broker-ingress`
+- `mt-broker-controller`
+
+To override resource settings for a specific container, create an entry in the `spec.resources` list with the container name and the [Kubernetes resource settings](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container).
+
+For example, the following KnativeEventing resource configures the `eventing-webhook` container to request 0.3 CPU and 100MB of RAM, and sets hard limits of 1 CPU, 250MB RAM, and 4GB of local storage:
+
+```
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeEventing
+metadata:
+  name: knative-eventing
+  namespace: knative-eventing
+spec:
+  resources:
+  - container: eventing-webhook
+    requests:
+      cpu: 300m
+      memory: 100Mi
+    limits:
+      cpu: 1000m
+      memory: 250Mi
 ```

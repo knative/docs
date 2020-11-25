@@ -7,13 +7,13 @@ channels:
     description: >
       In-memory channels are a best effort Channel. They should NOT be used in Production. They are useful for development.
   - name: KafkaChannel
-    url: https://github.com/knative/eventing-contrib/tree/{{< branch >}}/kafka/channel/README.md
+    url: https://github.com/knative-sandbox/eventing-kafka/tree/{{< branch >}}/pkg/channel/consolidated/README.md
     status: Proof of Concept
     support: None
     description: >
       Channels are backed by [Apache Kafka](http://kafka.apache.org/) topics.
   - name: NatssChannel
-    url: https://github.com/knative/eventing-contrib/tree/{{< branch >}}/natss/config/README.md
+    url: https://github.com/knative-sandbox/eventing-natss/tree/{{< branch >}}/config/README.md
     status: Proof of Concept
     support: None
     description: >
@@ -30,4 +30,3 @@ channels:
     support: None
     description: >
       Kafka Channel implementation, contributed by SAP's Kyma project, is a Knative Eventing implementation of a Kafka backed channel which provides advanced functionality and production grade qualities as an alternative to what the eventing-contrib/kafka implementation offers.
-

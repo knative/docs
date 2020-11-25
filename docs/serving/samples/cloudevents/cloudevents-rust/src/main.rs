@@ -21,7 +21,7 @@ use actix_web::dev::HttpResponseBuilder;
 use actix_web::http::StatusCode;
 use actix_web::{post, web, App, HttpRequest, HttpResponse, HttpServer};
 use cloudevents::{EventBuilder, EventBuilderV10};
-use cloudevents_sdk_actix_web::{RequestExt, HttpResponseBuilderExt};
+use cloudevents_sdk_actix_web::{HttpRequestExt, HttpResponseBuilderExt};
 use cloudevents_sdk_reqwest::RequestBuilderExt;
 
 #[post("/")]
@@ -29,8 +29,8 @@ async fn reply_event(
     req: HttpRequest,
     payload: web::Payload,
 ) -> Result<HttpResponse, actix_web::Error> {
-    let request_event = req.into_event(payload).await?;
-    info!("Received Event: {:?}", request_event);
+    let request_event = req.to_event(payload).await?;
+    info!("{}", request_event);
 
     // Build response event cloning the original event and setting the new type and source
     let response_event = EventBuilderV10::from(request_event)
@@ -53,8 +53,8 @@ async fn forward_event(
 ) -> Result<HttpResponse, actix_web::Error> {
     let sink_url: &str = &sink_url;
 
-    let request_event = req.into_event(payload).await?;
-    info!("Received Event: {:?}", request_event);
+    let request_event = req.to_event(payload).await?;
+    info!("{}", request_event);
 
     // Build response event cloning the original event and setting the new type and source
     let forward_event = EventBuilderV10::from(request_event)

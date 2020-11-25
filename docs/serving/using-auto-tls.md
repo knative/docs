@@ -31,7 +31,8 @@ Knative supports the following Auto TLS modes:
 
     - In this type, your cluster does not need to be able to talk to your DNS server. You just 
     need to map your domain to the IP of the cluser ingress.
-    - When using HTTP-01 challenge, **a certificate will be provisioned per Knative Service.** Certificate provision per namespace is not supported when using HTTP-01 challenge. 
+    - When using HTTP-01 challenge, **a certificate will be provisioned per Knative Service.**
+    - **HTTP-01 does not support provisioning a certificate per namespace.**
 
 ## Before you begin
 
@@ -43,7 +44,7 @@ You must meet the following prerequisites to enable auto TLS:
     [Contour, version 1.1 or higher](../install/any-kubernetes-cluster.md#installing-the-serving-component),
     or [Gloo, version 0.18.16 or higher](https://docs.solo.io/gloo/latest/installation/knative/).
     Note: Currently, [Ambassador](https://github.com/datawire/ambassador) is unsupported.
-  - [cert-manager version `0.12.0` or higher](./installing-cert-manager.md).
+- [cert-manager version `1.0.0` and higher](./installing-cert-manager.md).
 - Your Knative cluster must be configured to use a
   [custom domain](./using-a-custom-domain.md).
 - Your DNS provider must be setup and configured to your domain.
@@ -134,6 +135,20 @@ and which DNS provider validates those requests.
 
     Result: The `Status.Conditions` should include `Ready=True`.
 
+### DNS-01 challenge only: Configure your DNS provider
+
+If you choose to use DNS-01 challenge, configure which DNS provider is used to
+validate the DNS-01 challenge requests.
+
+Instructions about configuring cert-manager, for all the supported DNS
+providers, are provided in
+[DNS01 challenge providers and configuration instructions](https://cert-manager.io/docs/configuration/acme/dns01/#supported-dns01-providers).
+
+Example:
+
+See how the Google Cloud DNS is defined as the provider:
+[Configuring HTTPS with cert-manager and Google Cloud DNS](./using-cert-manager-on-gcp.md#creating-a-service-account-and-using-a-kubernetes-secret)
+
 
 ### Install networking-certmanager deployment
 
@@ -153,6 +168,9 @@ and which DNS provider validates those requests.
 ### Install networking-ns-cert component
 
 If you choose to use the mode of provisioning certificate per namespace, you need to install `networking-ns-cert` components.
+
+**IMPORTANT:** Provisioning a certificate per namespace only works with DNS-01
+ challenge. This component cannot be used with HTTP-01 challenge.
 
 1. Determine if `networking-ns-cert` deployment is already installed by 
 running the following command:
@@ -319,3 +337,25 @@ be able to handle HTTPS traffic.
     ```
 
     Note that the URL will be **https** in this case.
+
+### Disable Auto TLS per service or route
+
+If you have Auto TLS enabled in your cluster, you can choose to disable Auto TLS for individual services or routes by adding the annotation `networking.knative.dev/disableAutoTLS: true`.
+
+Using the previous `autoscale-go` example:
+
+1. Edit the service using `kubectl edit service.serving.knative.dev/autoscale-go -n default` and add the annotation:
+```yaml
+ apiVersion: serving.knative.dev/v1
+ kind: Service
+ metadata:
+   annotations:
+    ...
+     networking.knative.dev/disableAutoTLS: "true"
+    ...
+```
+2. The service URL should now be **http**, indicating that AutoTLS is disabled:
+```
+NAME           URL                                          LATEST               AGE     CONDITIONS   READY   REASON
+autoscale-go   http://autoscale-go.default.1.arenault.dev   autoscale-go-dd42t   8m17s   3 OK / 3     True    
+```

@@ -48,6 +48,9 @@ spec:
 This value controls the maximum number of replicas that each revision should have.
 Knative will attempt to never have more than this number of replicas running, or in the process of being created, at any one point in time.
 
+If the `max-scale-limit` global key is set, Knative ensures that neither the global max scale nor the per-revision max scale for new revisions exceed this value.
+When `max-scale-limit` is set to a positive value, a revision with a max scale above that value (including 0, which means unlimited) is disallowed.
+
 * **Global key:** `max-scale`
 * **Per-revision annotation key:** `autoscaling.knative.dev/maxScale`
 * **Possible values:** integer
@@ -82,6 +85,7 @@ metadata:
   namespace: knative-serving
 data:
   max-scale: "3"
+  max-scale-limit: "100"
 ```
 {{< /tab >}}
 {{% tab name="Global (Operator)" %}}
@@ -94,6 +98,7 @@ spec:
   config:
     autoscaler:
       max-scale: "3"
+      max-scale-limit: "100"
 ```
 
 {{< /tab >}}
@@ -153,6 +158,65 @@ spec:
     autoscaler:
       initial-scale: "0"
       allow-zero-initial-scale: "true"
+```
+
+{{< /tab >}}
+{{< /tabs >}}
+
+## Scale Down Delay
+
+Scale Down Delay specifies a time window which must pass at reduced concurrency
+before a scale-down decision is applied. This can be useful, for example, to
+keep containers around for a configurable duration to avoid a cold start
+penalty if new requests come in. Unlike setting a lower bound, the revision
+will eventually be scaled down if reduced concurrency is maintained for the
+delay period.
+
+* **Global key:** `scale-down-delay`
+* **Per-revision annotation key:** `autoscaling.knative.dev/scaleDownDelay`
+* **Possible values:** Duration, `0s` <= value <= `1h`
+* **Default:** `0s` (no delay)
+
+**Example:**
+{{< tabs name="scale-down-delay" default="Per Revision" >}}
+{{% tab name="Per Revision" %}}
+```yaml
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: helloworld-go
+  namespace: default
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/scaleDownDelay: "15m"
+    spec:
+      containers:
+        - image: gcr.io/knative-samples/helloworld-go
+```
+{{< /tab >}}
+{{% tab name="Global (ConfigMap)" %}}
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-autoscaler
+  namespace: knative-serving
+data:
+  scale-down-delay: "15m"
+```
+{{< /tab >}}
+{{% tab name="Global (Operator)" %}}
+```yaml
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+spec:
+  config:
+    autoscaler:
+      scale-down-delay: "15m"
 ```
 
 {{< /tab >}}

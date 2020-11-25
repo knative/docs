@@ -27,45 +27,14 @@ You must meet the following requirements to install cert-manager for Knative:
   component, see the [Knative installation guides](../install/).
 - You must configure your Knative cluster to use a
   [custom domain](./using-a-custom-domain.md).
-- Knative currently supports cert-manager version `0.12.0` or higher.
+- Knative currently supports cert-manager version `1.0.0` and higher.
 
 ## Downloading and installing cert-manager
 
-Use the following steps to download, install, and configure cert-manager for
-your Knative cluster environment:
-
-1. Follow the steps in the official `cert-manager` website to download and install cert-manager
+Follow the steps from the official `cert-manager` website to download and install cert-manager
 
    [Installation steps](https://cert-manager.io/docs/installation/kubernetes/)
 
-1. Configure which DNS provider is used to validate the DNS-01 challenge
-   requests.
-
-   By default, the [Let's Encrypt](https://letsencrypt.org) is used to
-   demonstrate how to configure cert-manager, but you can use other supported
-   CA's that issue certificates with the ACME protocol. However, you must use
-   the
-   [`DNS-01` challenge type](https://letsencrypt.org/docs/challenge-types/#dns-01-challenge)
-   to validate requests.
-
-   Instructions about configuring cert-manager for any of the supported DNS
-   providers are provided in
-   [DNS01 challenge providers and configuration instructions](https://docs.cert-manager.io/en/latest/tasks/acme/configuring-dns01/index.html#supported-dns01-providers).
-
-   Example:
-
-   See how the Google Cloud DNS is defined as the provider:
-   [Configuring HTTPS with cert-manager and Google Cloud DNS](./using-cert-manager-on-gcp.md#adding-your-service-account-to-cert-manager)
-
-1. Post-install cleanup
-
-   Run the following commands to remove the cert-manager install packages:
-
-   ```shell
-   cd ../
-   rm -rf cert-manager-${CERT_MANAGER_VERSION}
-   rm v${CERT_MANAGER_VERSION}.tar.gz
-   ```
 
 ## Completing the Knative configuration for TLS support
 
