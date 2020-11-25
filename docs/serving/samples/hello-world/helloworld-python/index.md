@@ -114,7 +114,7 @@ Hub username.
    docker push {username}/helloworld-python
    ```
 
-## Deploying
+## Deploying the app
 
 1. After the build has completed and the container is pushed to Docker Hub, you
    can deploy the app into your cluster.

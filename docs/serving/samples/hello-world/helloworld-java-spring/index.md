@@ -127,7 +127,7 @@ For additional information on multi-stage docker builds for Java see [Creating S
    # Push the container to docker registry
    docker push {username}/helloworld-java-spring
    ```
-## Deploying
+## Deploying the app
 
 After the build has completed and the container is pushed to Docker Hub, you can deploy the app into your cluster.
 
