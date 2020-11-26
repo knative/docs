@@ -163,10 +163,10 @@ Hub username.
 
    During the creation of your service, Knative performs the following steps:
 
-   - Create a new immutable revision for this version of the app.
+   - Creates a new immutable revision for this version of the app.
    - Network programming to create a route, ingress, service, and load balance
      for your app.
-   - Automatically scale your pods up and down, including scaling down to zero
+   - Automatically scales your pods up and down, including scaling down to zero
      active pods.
 
 ## Verification
