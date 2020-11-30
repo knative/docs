@@ -96,7 +96,7 @@ The Knative Service creates the following child resources:
 - Knative Configuration
 - Knative Revision
 - Kubernetes Deployment
-- Kuberentes Service
+- Kubernetes Service
 
 You can inspect the created resources with the following `kubectl` commands:
 
