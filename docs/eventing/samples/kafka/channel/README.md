@@ -151,3 +151,75 @@ Now you can see the events in the log of the `ksvc` using the command:
 ```
 kubectl logs --selector='serving.knative.dev/service=broker-kafka-display' -c user-container
 ```
+
+## Authentication against an Apache Kafka broker
+
+The KafkaSource supports TLS and SASL authentication methods.
+
+### TLS authentication
+
+
+To use TLS authentication you must create:
+
+* A CA certificate
+* A client certificate and key
+
+**NOTE:** Kafka channels require these files to be in `.pem` format. If your files are in a different format, you must convert them to `.pem`.
+
+
+1. Create the certificate files as secrets in the namespace of your choice, like:
+```
+$ kubectl create secret --namespace knative-eventing generic my-tls-secret \
+  --from-file=ca.crt=caroot.pem \
+  --from-file=user.crt=certificate.pem \
+  --from-file=user.key=key.pem
+ ```
+
+*NOTE:* It is important to use the same keys (`ca.crt`, `user.crt` and `user.key`).
+
+Now all you need is to reference your secret and its namespace on the `config-kafka` ConfigMap:
+```
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-kafka
+  namespace: knative-eventing
+data:
+  #bootstrapServers: REPLACE_WITH_CLUSTER_URL
+  #authSecretName: name-of-your-secret-for-kafka-auth
+  #authSecretNamespace: namespace-of-your-secret-for-kafka-auth
+ ```
+
+### SASL authentication
+
+To use SASL authentication, you will need the following information:
+
+* A username and password.
+* The type of SASL mechanism you wish to use. For example; `PLAIN`, `SCRAM-SHA-256` or `SCRAM-SHA-512`.
+
+**NOTE:** It is recommended to also enable TLS. If you enable this, you will also need the `ca.crt` certificate as described in the previous section.
+
+1. Create the certificate files as secrets in the namespace of your choice, like:
+```
+$ kubectl create secret --namespace knative-eventing generic my-sasl-secret \
+  --from-file=ca.crt=caroot.pem \
+  --from-literal=password="SecretPassword" \
+  --from-literal=saslType="SCRAM-SHA-512" \
+  --from-literal=user="my-sasl-user"
+```
+
+*NOTE:* It is important to use the same keys; `user`, `password` and `saslType`.
+
+Now all you need is to reference your secret and its namespace on the `config-kafka` ConfigMap:
+
+```
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-kafka
+  namespace: knative-eventing
+data:
+  #bootstrapServers: REPLACE_WITH_CLUSTER_URL
+  #authSecretName: name-of-your-secret-for-kafka-auth
+  #authSecretNamespace: namespace-of-your-secret-for-kafka-auth
+```
