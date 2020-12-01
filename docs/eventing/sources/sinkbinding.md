@@ -49,6 +49,7 @@ Create a Knative service:
 {{% tab name="yaml" %}}
 
     1. Copy the sample YAML into a `service.yaml` file:
+
     ```yaml
     apiVersion: serving.knative.dev/v1
     kind: Service
@@ -61,7 +62,8 @@ Create a Knative service:
             - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
     ```
     1. Apply the file:
-    ```shell
+
+    ```
     kubectl apply --filename service.yaml
     ```
 {{< /tab >}}
@@ -84,13 +86,10 @@ sample heartbeats event source.
 #### Procedure
 
 1. Clone the `event-contib` repository:
-
   ```
   $ git clone -b "{{< branch >}}" https://github.com/knative/eventing-contrib.git
   ```
-
 1. Build a heartbeats image, and publish the image to your image repository:
-
   ```
   $ ko publish knative.dev/eventing-contrib/cmd/heartbeats
   ```
@@ -105,6 +104,7 @@ Create a `CronJob` object:
 {{% tab name="yaml" %}}
 
     1. Copy the sample YAML into a `cronjob.yaml` file:
+
       ```yaml
       apiVersion: batch/v1
       kind: CronJob
@@ -140,7 +140,8 @@ Create a `CronJob` object:
       ```
 
     1. Apply the file:
-      ```shell
+
+      ```
       kubectl apply --filename heartbeats-source.yaml
       ```
 
@@ -226,8 +227,9 @@ Create a sink binding:
 
 ## Cleanup
 
-- Delete the `sinkbinding-example` namespace and all of its resources from your
+Delete the `sinkbinding-example` namespace and all of its resources from your
 cluster:
+
   ```
   $ kubectl delete namespace sinkbinding-example
   ```
