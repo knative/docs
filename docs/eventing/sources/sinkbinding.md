@@ -47,9 +47,7 @@ Create a Knative service:
   ```
 {{< /tab >}}
 {{% tab name="yaml" %}}
-
     1. Copy the sample YAML into a `service.yaml` file:
-
     ```yaml
     apiVersion: serving.knative.dev/v1
     kind: Service
@@ -62,7 +60,6 @@ Create a Knative service:
             - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
     ```
     1. Apply the file:
-
     ```
     kubectl apply --filename service.yaml
     ```
