@@ -197,30 +197,30 @@ Create a sink binding:
 ## Verification steps
 
 1. Verify that a message was sent to the Knative eventing system by looking at the `event-display` service logs:
-  ```
-  $ kubectl logs -l serving.knative.dev/service=event-display -c user-container --since=10m
-  ```
+    ```
+    $ kubectl logs -l serving.knative.dev/service=event-display -c user-container --since=10m
+    ```
 1. Observe the lines showing the request headers and body of the event message, sent by the heartbeats source to the display function:
-  ```
-    ☁️  cloudevents.Event
-    Validation: valid
-    Context Attributes,
-      specversion: 1.0
-      type: dev.knative.eventing.samples.heartbeat
-      source: https://knative.dev/eventing-contrib/cmd/heartbeats/#default/heartbeat-cron-1582120020-75qrz
-      id: 5f4122be-ac6f-4349-a94f-4bfc6eb3f687
-      time: 2020-02-19T13:47:10.41428688Z
-      datacontenttype: application/json
-    Extensions,
-      beats: true
-      heart: yes
-      the: 42
-    Data,
-      {
-        "id": 1,
-        "label": ""
-      }
-  ```
+    ```
+      ☁️  cloudevents.Event
+      Validation: valid
+      Context Attributes,
+        specversion: 1.0
+        type: dev.knative.eventing.samples.heartbeat
+        source: https://knative.dev/eventing-contrib/cmd/heartbeats/#default/heartbeat-cron-1582120020-75qrz
+        id: 5f4122be-ac6f-4349-a94f-4bfc6eb3f687
+        time: 2020-02-19T13:47:10.41428688Z
+        datacontenttype: application/json
+      Extensions,
+        beats: true
+        heart: yes
+        the: 42
+      Data,
+        {
+          "id": 1,
+          "label": ""
+        }
+    ```
 
 ## Cleanup
 
