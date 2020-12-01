@@ -493,6 +493,8 @@ kubectl apply --filename {{< artifact repo="serving" file="serving-nscert.yaml" 
 > Note this will not work with HTTP01 either via cert-manager or the net-http01
 > options.
 
+{{< /tab >}}
+
 {{% tab name="DomainMapping CRD" %}}
 
 {{% feature-state version="v0.19" state="alpha" %}}
