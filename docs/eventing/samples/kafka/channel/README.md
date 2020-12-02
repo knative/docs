@@ -152,7 +152,7 @@ Now you can see the events in the log of the `ksvc` using the command:
 kubectl logs --selector='serving.knative.dev/service=broker-kafka-display' -c user-container
 ```
 
-## Authentication against an Apache Kafka broker
+## Authentication against an Apache Kafka
 
 The KafkaSource supports TLS and SASL authentication methods.
 
@@ -169,7 +169,7 @@ To use TLS authentication you must create:
 
 1. Create the certificate files as secrets in the namespace of your choice, like:
 ```
-$ kubectl create secret --namespace knative-eventing generic my-tls-secret \
+$ kubectl create secret --namespace <namespace> generic <kafka-auth-secret> \
   --from-file=ca.crt=caroot.pem \
   --from-file=user.crt=certificate.pem \
   --from-file=user.key=key.pem
@@ -185,9 +185,9 @@ metadata:
   name: config-kafka
   namespace: knative-eventing
 data:
-  #bootstrapServers: REPLACE_WITH_CLUSTER_URL
-  #authSecretName: name-of-your-secret-for-kafka-auth
-  #authSecretNamespace: namespace-of-your-secret-for-kafka-auth
+  bootstrapServers: <bootstrapServers>
+  authSecretName: <kafka-auth-secret>
+  authSecretNamespace: <namespace>
  ```
 
 ### SASL authentication
@@ -201,7 +201,7 @@ To use SASL authentication, you will need the following information:
 
 1. Create the certificate files as secrets in the namespace of your choice, like:
 ```
-$ kubectl create secret --namespace knative-eventing generic my-sasl-secret \
+$ kubectl create secret --namespace <namespace> generic <kafka-auth-secret> \
   --from-file=ca.crt=caroot.pem \
   --from-literal=password="SecretPassword" \
   --from-literal=saslType="SCRAM-SHA-512" \
@@ -219,7 +219,7 @@ metadata:
   name: config-kafka
   namespace: knative-eventing
 data:
-  #bootstrapServers: REPLACE_WITH_CLUSTER_URL
-  #authSecretName: name-of-your-secret-for-kafka-auth
-  #authSecretNamespace: namespace-of-your-secret-for-kafka-auth
+  bootstrapServers: <bootstrapServers>
+  authSecretName: <kafka-auth-Secret>
+  authSecretNamespace: <namespace>
 ```
