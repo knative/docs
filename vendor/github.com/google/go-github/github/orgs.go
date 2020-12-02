@@ -21,6 +21,7 @@ type OrganizationsService service
 type Organization struct {
 	Login             *string    `json:"login,omitempty"`
 	ID                *int64     `json:"id,omitempty"`
+	NodeID            *string    `json:"node_id,omitempty"`
 	AvatarURL         *string    `json:"avatar_url,omitempty"`
 	HTMLURL           *string    `json:"html_url,omitempty"`
 	Name              *string    `json:"name,omitempty"`
@@ -43,7 +44,6 @@ type Organization struct {
 	BillingEmail      *string    `json:"billing_email,omitempty"`
 	Type              *string    `json:"type,omitempty"`
 	Plan              *Plan      `json:"plan,omitempty"`
-	NodeID            *string    `json:"node_id,omitempty"`
 
 	// API URLs
 	URL              *string `json:"url,omitempty"`
@@ -75,8 +75,11 @@ func (p Plan) String() string {
 // OrganizationsService.ListAll method.
 type OrganizationsListOptions struct {
 	// Since filters Organizations by ID.
-	Since int `url:"since,omitempty"`
+	Since int64 `url:"since,omitempty"`
 
+	// Note: Pagination is powered exclusively by the Since parameter,
+	// ListOptions.Page has no effect.
+	// ListOptions.PerPage controls an undocumented GitHub API parameter.
 	ListOptions
 }
 
@@ -97,9 +100,6 @@ func (s *OrganizationsService) ListAll(ctx context.Context, opt *OrganizationsLi
 	if err != nil {
 		return nil, nil, err
 	}
-
-	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeGraphQLNodeIDPreview)
 
 	orgs := []*Organization{}
 	resp, err := s.client.Do(ctx, req, &orgs)
@@ -130,9 +130,6 @@ func (s *OrganizationsService) List(ctx context.Context, user string, opt *ListO
 		return nil, nil, err
 	}
 
-	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeGraphQLNodeIDPreview)
-
 	var orgs []*Organization
 	resp, err := s.client.Do(ctx, req, &orgs)
 	if err != nil {
@@ -151,9 +148,6 @@ func (s *OrganizationsService) Get(ctx context.Context, org string) (*Organizati
 	if err != nil {
 		return nil, nil, err
 	}
-
-	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeGraphQLNodeIDPreview)
 
 	organization := new(Organization)
 	resp, err := s.client.Do(ctx, req, organization)
@@ -174,9 +168,6 @@ func (s *OrganizationsService) GetByID(ctx context.Context, id int64) (*Organiza
 		return nil, nil, err
 	}
 
-	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeGraphQLNodeIDPreview)
-
 	organization := new(Organization)
 	resp, err := s.client.Do(ctx, req, organization)
 	if err != nil {
@@ -195,9 +186,6 @@ func (s *OrganizationsService) Edit(ctx context.Context, name string, org *Organ
 	if err != nil {
 		return nil, nil, err
 	}
-
-	// TODO: remove custom Accept header when this API fully launches.
-	req.Header.Set("Accept", mediaTypeGraphQLNodeIDPreview)
 
 	o := new(Organization)
 	resp, err := s.client.Do(ctx, req, o)

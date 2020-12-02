@@ -1,12 +1,18 @@
-# Namespace for sample application with eventing enabled
+# Namespace for sample application
 apiVersion: v1
 kind: Namespace
 metadata:
   name: knative-samples
-  labels:
-       knative-eventing-injection: enabled
 ---
-# Helloworld-go app deploment
+# A default broker
+apiVersion: eventing.knative.dev/v1
+kind: Broker
+metadata:
+  name: default
+  namespace: knative-samples
+spec: {}
+---
+# Helloworld-go app deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -41,7 +47,7 @@ spec:
       targetPort: 8080
 ---
 # Knative Eventing Trigger to trigger the helloworld-go service
-apiVersion: eventing.knative.dev/v1alpha1
+apiVersion: eventing.knative.dev/v1
 kind: Trigger
 metadata:
   name: helloworld-go

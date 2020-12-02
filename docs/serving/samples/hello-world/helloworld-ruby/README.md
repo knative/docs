@@ -1,10 +1,3 @@
----
-title: "Hello World - Ruby"
-linkTitle: "Ruby"
-weight: 1
-type: "docs"
----
-
 A simple web app written in Ruby that you can use for testing. It reads in an
 env variable `TARGET` and prints "Hello \${TARGET}!". If TARGET is not
 specified, it will use "World" as the TARGET.
@@ -55,13 +48,13 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-ruby
    ```docker
    # Use the official lightweight Ruby image.
    # https://hub.docker.com/_/ruby
-   FROM ruby:2.5-slim
+   FROM ruby:2.6-slim
 
    # Install production dependencies.
    WORKDIR /usr/src/app
    COPY Gemfile Gemfile.lock ./
    ENV BUNDLE_FROZEN=true
-   RUN bundle install
+   RUN gem install bundler && bundle install
 
    # Copy local code to the container image.
    COPY . ./

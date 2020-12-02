@@ -1,21 +1,15 @@
----
-title: "Using Sequence with Broker and Trigger"
-linkTitle: "Using with Broker and Trigger"
-weight: 20
-type: "docs"
----
-
 We are going to create the following logical configuration. We create a
-PingSource, feeding events into the Broker, then we create a `Filter` that
-wires those events into a [`Sequence`](../../../flows/sequence.md) consisting of 3
+PingSource, feeding events into the Broker, then we create a `Filter` that wires
+those events into a [`Sequence`](../../../flows/sequence.md) consisting of 3
 steps. Then we take the end of the Sequence and feed newly minted events back
 into the Broker and create another Trigger which will then display those events.
 
 ## Prerequisites
 
-For this example, we'll assume you have set up an `InMemoryChannel` as well as Knative Serving (for our functions). The examples
-use `default` namespace, again, if your broker lives in another Namespace, you
-will need to modify the examples to reflect this.
+- Knative Serving
+- `InMemoryChannel`
+
+**NOTE:** The examples use the `default` namespace.
 
 If you want to use different type of `Channel`, you will have to modify the
 `Sequence.Spec.ChannelTemplate` to create the appropriate Channel resources.
@@ -29,10 +23,15 @@ The functions used in these examples live in
 
 ### Creating the Broker
 
-The easiest way to create a Broker is to annotate your namespace:
+To create the cluster default Broker type:
 
 ```shell
-kubectl label namespace default knative-eventing-injection=enabled
+kubectl create -f - <<EOF
+apiVersion: eventing.knative.dev/v1
+kind: Broker
+metadata:
+ name: default
+EOF
 ```
 
 ### Create the Knative Services
@@ -80,7 +79,8 @@ spec:
           env:
             - name: MESSAGE
               value: " - Handled by 2"
-
+            - name: TYPE
+              value: "samples.http.mod3"
 ---
 
 ```
@@ -98,13 +98,13 @@ spec.channelTemplate to point to your desired Channel.
 Also, change the spec.reply.name to point to your `Broker`
 
 ```yaml
-apiVersion: flows.knative.dev/v1beta1
+apiVersion: flows.knative.dev/v1
 kind: Sequence
 metadata:
   name: sequence
 spec:
   channelTemplate:
-    apiVersion: messaging.knative.dev/v1beta1
+    apiVersion: messaging.knative.dev/v1
     kind: InMemoryChannel
   steps:
     - ref:
@@ -122,7 +122,7 @@ spec:
   reply:
     ref:
       kind: Broker
-      apiVersion: eventing.knative.dev/v1beta1
+      apiVersion: eventing.knative.dev/v1
       name: default
 ```
 
@@ -139,16 +139,17 @@ This will create a PingSource which will send a CloudEvent with {"message":
 "Hello world!"} as the data payload every 2 minutes.
 
 ```yaml
-apiVersion: sources.knative.dev/v1alpha1
+apiVersion: sources.knative.dev/v1beta2
 kind: PingSource
 metadata:
   name: ping-source
 spec:
   schedule: "*/2 * * * *"
+  contentType: "application/json"
   data: '{"message": "Hello world!"}'
   sink:
     ref:
-      apiVersion: eventing.knative.dev/v1beta1
+      apiVersion: eventing.knative.dev/v1
       kind: Broker
       name: default
 ```
@@ -167,17 +168,18 @@ kubectl -n default create -f ./ping-source.yaml
 ### Create the Trigger targeting the Sequence
 
 ```yaml
-apiVersion: eventing.knative.dev/v1beta1
+apiVersion: eventing.knative.dev/v1
 kind: Trigger
 metadata:
   name: sequence-trigger
 spec:
+  broker: default
   filter:
     attributes:
       type: dev.knative.sources.ping
   subscriber:
     ref:
-      apiVersion: flows.knative.dev/v1beta1
+      apiVersion: flows.knative.dev/v1
       kind: Sequence
       name: sequence
 ```
@@ -203,11 +205,12 @@ spec:
       containers:
         - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/appender
 ---
-apiVersion: eventing.knative.dev/v1alpha1
+apiVersion: eventing.knative.dev/v1
 kind: Trigger
 metadata:
   name: display-trigger
 spec:
+  broker: default
   filter:
     attributes:
       type: samples.http.mod3

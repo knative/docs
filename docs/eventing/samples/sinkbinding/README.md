@@ -1,10 +1,3 @@
----
-title: "Sink Binding Example"
-linkTitle: "Sink Binding"
-weight: 10
-type: "docs"
----
-
 A SinkBinding is responsible for linking together "addressable" Kubernetes
 resources that may receive events (aka the event "sink") with Kubernetes
 resources that embed a PodSpec (as `spec.template.spec`) and want to produce
@@ -58,7 +51,7 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/knative-releases/github.com/knative/eventing-contrib/cmd/event_display
+        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
 ```
 
 Use following command to create the service from `service.yaml`:
@@ -79,10 +72,10 @@ event-display   http://event-display.default.1.2.3.4.xip.io   event-display-gqjb
 ### Create our SinkBinding
 
 In order to direct events to our Event Display, we will first create a
-SinkBinding that will inject `$K_SINK` and "$K_CE_OVERRIDES" into select `Jobs`:
+SinkBinding that will inject `$K_SINK` and `$K_CE_OVERRIDES` into select `Jobs`:
 
 ```yaml
-apiVersion: sources.knative.dev/v1alpha1
+apiVersion: sources.knative.dev/v1
 kind: SinkBinding
 metadata:
   name: bind-heartbeat
@@ -118,11 +111,10 @@ Now we will use the heartbeats container to send events to `$K_SINK` every time
 the CronJob runs:
 
 ```yaml
-apiVersion: batch/v1beta1
+apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: heartbeat-cron
-spec:
 spec:
   # Run every minute
   schedule: "* * * * *"
@@ -175,20 +167,19 @@ message sent by the heartbeats source to the display function:
 ☁️  cloudevents.Event
 Validation: valid
 Context Attributes,
-  specversion: 0.3
+  specversion: 1.0
   type: dev.knative.eventing.samples.heartbeat
-  source: https://knative.dev/eventing-contrib/cmd/heartbeats/#event-test/mypod
-  id: 2b72d7bf-c38f-4a98-a433-608fbcdd2596
-  time: 2019-10-18T15:23:20.809775386Z
-  contenttype: application/json
+  source: https://knative.dev/eventing-contrib/cmd/heartbeats/#default/heartbeat-cron-1582120020-75qrz
+  id: 5f4122be-ac6f-4349-a94f-4bfc6eb3f687
+  time: 2020-02-19T13:47:10.41428688Z
+  datacontenttype: application/json
 Extensions,
   beats: true
   heart: yes
-  sink: bound
   the: 42
 Data,
   {
-    "id": 2,
+    "id": 1,
     "label": ""
   }
 ```
@@ -201,7 +192,7 @@ together.  For example, the [`cloudevents-go`
 sample](../../../serving/samples/cloudevents/cloudevents-go) may be bound with:
 
 ```yaml
-apiVersion: sources.knative.dev/v1alpha1
+apiVersion: sources.knative.dev/v1
 kind: SinkBinding
 metadata:
   name: bind-heartbeat

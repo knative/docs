@@ -1,7 +1,7 @@
 ---
-title: "Accessing CloudEvent Traces"
+title: "Accessing CloudEvent traces"
 #linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
-weight: 50
+weight: 85
 type: "docs"
 ---
 
@@ -13,16 +13,6 @@ visualize and trace your requests.
 
 You must have a Knative cluster running with the Eventing component installed. [Learn more](../install/README.md)
 
-## Installing observability plugins
-
-Knative Eventing uses the same tracing plugin as Knative Serving. See the
-[Tracing installation instructions](./../serving/installing-logging-metrics-traces.md#end-to-end-request-tracing)
-in the Knative Serving section for details. Note that you do not need to install the
-Knative Serving component itself.
-
-To enable request tracing in Knative Eventing,
-you must install Elasticsearch and either the Zipkin or Jaeger plugins.
-
 ## Configuring tracing
 
 With the exception of importers, the Knative Eventing tracing is configured through the
@@ -30,10 +20,14 @@ With the exception of importers, the Knative Eventing tracing is configured thro
 
 Most importers do _not_ use the ConfigMap and instead, use a static 1% sampling rate.
 
-You can use the `config-tracing` ConfigMap to configure the following Eventing subcomponents:
+You can use the `config-tracing` ConfigMap to configure the following Eventing components:
  - Brokers
  - Triggers
  - InMemoryChannel
+ - ApiServerSource
+ - GitlabSource
+ - KafkaSource
+ - PrometheusSource
 
 **Example:**
 

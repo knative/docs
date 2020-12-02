@@ -38,7 +38,7 @@ To label the KService:
 kubectl label kservice ${KSVC_NAME} serving.knative.dev/visibility=cluster-local
 ```
 
-To label a route:
+To label a route when you used Route directly without KService:
 
 ```shell
 kubectl label route ${ROUTE_NAME} serving.knative.dev/visibility=cluster-local
@@ -47,7 +47,7 @@ kubectl label route ${ROUTE_NAME} serving.knative.dev/visibility=cluster-local
 To label a Kubernetes service:
 
 ```shell
-kubectl label route ${SERVICE_NAME} serving.knative.dev/visibility=cluster-local
+kubectl label service ${SERVICE_NAME} serving.knative.dev/visibility=cluster-local
 ```
 
 By labeling the Kubernetes service it allows you to restrict visibility in a more

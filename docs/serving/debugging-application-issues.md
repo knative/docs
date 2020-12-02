@@ -27,11 +27,6 @@ for: "STDIN": Internal error occurred: admission webhook "webhook.knative.dev" d
 ERROR: Non-zero return code '1' from command: Process exited with status 1
 ```
 
-## Check application logs
-
-Knative Serving provides default out-of-the-box logs for your application.
-Access your application logs using [Accessing Logs](./accessing-logs.md) page.
-
 ## Check Route status
 
 Run the following command to get the `status` of the `Route` object with which
@@ -56,7 +51,7 @@ helloworld-go   map[serving.knative.dev/route:helloworld-go serving.knative.dev/
 ```
 
 The labels `serving.knative.dev/route` and `serving.knative.dev/routeNamespace`
-indicate the Route in which the Ingress resource resides. Your Route and 
+indicate the Route in which the Ingress resource resides. Your Route and
 Ingress should be listed. If your Ingress does not exist, the route
 controller believes that the Revisions targeted by your Route/Service isn't
 ready. Please proceed to later sections to diagnose Revision readiness status.
@@ -76,7 +71,7 @@ Now, if Ingress shows status `Ready`, there must be a corresponding
 VirtualService. Run the following command:
 
 ```shell
-kubectl get virtualservice <INGRESS_NAME> -n <INGRESS_NAMESPACE> --output yaml
+kubectl get virtualservice -l networking.internal.knative.dev/ingress=<INGRESS_NAME> -n <INGRESS_NAMESPACE> --output yaml
 ```
 
 the network configuration in VirtualService must match that of Ingress
@@ -97,9 +92,6 @@ To check the IP address of your Ingress, use
 ```shell
 kubectl get svc -n istio-system istio-ingressgateway
 ```
-
-Or replace that with `knative-ingressgateway` if you are using Knative release
-older than 0.3.
 
 If there is no external IP address, use
 
@@ -172,6 +164,3 @@ Choose one and use the following command to see detailed information for its
 kubectl get pod <pod-name> --output yaml
 
 ```
-
-If you see issues with "user-container" container in the containerStatuses,
-check your application logs as described below.

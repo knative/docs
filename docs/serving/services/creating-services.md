@@ -23,8 +23,8 @@ This YAML file specifies metadata about the application, points to the hosted im
 This guide uses the [Hello World sample app in Go](https://knative.dev/docs/serving/samples/hello-world/helloworld-go) to demonstrate the structure of a Service YAML file and the basic workflow for deploying an app. These steps can be adapted for your own application if you have an image of it available on Docker Hub, Google Container Registry, or another container image registry.
 
 The Hello World sample app does the following:
-1. Reads an environment variable, `TARGET`, from the configuration .yaml file
-1. Prints `Hello World: \${TARGET}!`. If `TARGET` is not defined, it will print `NOT SPECIFIED`.
+1. Reads an environment variable `TARGET`.
+2. Prints `Hello ${TARGET}!`. If `TARGET` is not defined, it will use `World` as the `TARGET`.
 
 ### Procedure
 
@@ -40,9 +40,9 @@ The Hello World sample app does the following:
     spec:
      containers:
       - image: gcr.io/knative-samples/helloworld-go
-       env:
-        - name: TARGET
-         value: "Go Sample v1"
+        env:
+          - name: TARGET
+            value: "Go Sample v1"
   ```
   * `apiVersion`: The current Knative version.
   * `name`(metadata): The name of the application.

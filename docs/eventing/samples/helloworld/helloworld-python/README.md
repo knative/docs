@@ -86,7 +86,7 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-python
     metadata:
       name: knative-samples
       labels:
-           knative-eventing-injection: enabled
+           eventing.knative.dev/injection: enabled
     ---
     # Helloworld-python app deploment
     apiVersion: apps/v1
@@ -124,7 +124,7 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-python
           targetPort: 8080
     ---
     # Knative Eventing Trigger to trigger the helloworld-python service
-    apiVersion: eventing.knative.dev/v1alpha1
+    apiVersion: eventing.knative.dev/v1
     kind: Trigger
     metadata:
       name: helloworld-python
@@ -280,7 +280,7 @@ Helloworld-python app logs the context and the msg of the above event, and repli
   1. Create a trigger to deliver the event to the above service
       ```shell
       kubectl --namespace knative-samples apply --filename - << END
-      apiVersion: eventing.knative.dev/v1alpha1
+      apiVersion: eventing.knative.dev/v1
       kind: Trigger
       metadata:
         name: event-display

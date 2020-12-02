@@ -1,10 +1,3 @@
----
-title: "Container Source Example"
-linkTitle: "Container source"
-weight: 10
-type: "docs"
----
-
 ContainerSource will start a container image which will generate events under
 certain situations and send messages to a sink URI. It also can be an easy way
 to support your own event sources in Knative. This guide shows how to configure
@@ -54,7 +47,7 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display
+        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
 ```
 
 Use following command to create the service from `service.yaml`:
@@ -69,7 +62,7 @@ The status of the created service can be seen using:
 kubectl get ksvc
 
 NAME            URL                                           LATESTCREATED         LATESTREADY           READY   REASON
-event-display   http://event-display.default.1.2.3.4.xip.io   event-display-gqjbw   event-display-gqjbw   True    
+event-display   http://event-display.default.1.2.3.4.xip.io   event-display-gqjbw   event-display-gqjbw   True
 ```
 
 ### Create a ContainerSource using the heartbeats image
@@ -82,7 +75,7 @@ file. Note that arguments and environment variables are set and will be passed
 to the container.
 
 ```yaml
-apiVersion: sources.eventing.knative.dev/v1alpha1
+apiVersion: sources.knative.dev/v1
 kind: ContainerSource
 metadata:
   name: test-heartbeats
@@ -129,7 +122,7 @@ message sent by the heartbeats source to the display function:
 ☁️  cloudevents.Event
 Validation: valid
 Context Attributes,
-  specversion: 0.3
+  specversion: 1.0
   type: dev.knative.eventing.samples.heartbeat
   source: https://knative.dev/eventing-contrib/cmd/heartbeats/#event-test/mypod
   id: 2b72d7bf-c38f-4a98-a433-608fbcdd2596
@@ -160,11 +153,9 @@ any tools you like. Here are some basic guidelines:
 - The container image must have a `main` method to start with.
 - The `main` method will accept parameters from arguments and environment
   variables.
-- The arguments may include a `sink` if a flag `--sink` is set or a Sink object
-  is provided in the ContainerSource YAML file.
-- The environment variables may include a `SINK` if a `SINK` variable is set in
-  the `env` or a Sink object is provided in the ContainerSource YAML file.
-- The event messages shall be sent to the sink uri. The message can be any
+- Two environments variables will be injected by the `ContainerSource` controller,
+`K_SINK` and `K_CE_OVERRIDES`, resolved from `spec.sink` and `spec.ceOverrides` respectively.
+- The event messages shall be sent to the sink URI specified in `K_SINK`. The message can be any
   format.
   [CloudEvents](https://github.com/cloudevents/spec/blob/master/spec.md#design-goals)
   format is recommended.
@@ -175,6 +166,6 @@ event source is a sample for your reference.
 ### Create the ContainerSource using this container image
 
 When the container image is ready, a YAML file will be used to create a concrete
-ContainerSource. Use [heartbeats-source.yaml](./heartbeats-source.yaml) as a
+`ContainerSource`. Use [heartbeats-source.yaml](./heartbeats-source.yaml) as a
 sample for reference. [Learn more about the ContainerSource
 specification](../../../eventing#containersource).

@@ -5,7 +5,7 @@ and scales to support advanced scenarios.
 The Knative Serving project provides middleware primitives that enable:
 
 - Rapid deployment of serverless containers
-- Automatic scaling up and down to zero
+- [Automatic scaling up and down to zero](./autoscaling/README.md)
 - Routing and network programming for Istio components
 - Point-in-time snapshots of deployed code and configurations
 
@@ -36,7 +36,7 @@ serverless workload behaves on the cluster:
   are immutable objects and can be retained for as long as useful. Knative
   Serving Revisions can be automatically scaled up and down according to
   incoming traffic. See
-  [Configuring the Autoscaler](./configuring-autoscaling.md) for more
+  [Configuring the Autoscaler](./autoscaling) for more
   information.
 
 ![Diagram that displays how the Serving resources coordinate with each other.](https://github.com/knative/serving/raw/master/docs/spec/images/object_model.png)
@@ -59,18 +59,9 @@ in the Knative Serving repository.
 
 - [Knative Serving code samples](./samples/README.md)
 
-## Setting up Logging and Metrics
-
-- [Installing Logging, Metrics and Traces](./installing-logging-metrics-traces.md)
-- [Accessing Logs](./accessing-logs.md)
-- [Accessing Metrics](./accessing-metrics.md)
-- [Accessing Traces](./accessing-traces.md)
-- [Setting up a logging plugin](./setting-up-a-logging-plugin.md)
-
 ## Debugging Knative Serving issues
 
 - [Debugging Application Issues](./debugging-application-issues.md)
-- [Debugging Performance Issues](./debugging-performance-issues.md)
 
 ## Configuration and Networking
 
@@ -83,5 +74,3 @@ in the Knative Serving repository.
 
 See the [Knative Serving Issues](https://github.com/knative/serving/issues) page
 for a full list of known issues.
-
-

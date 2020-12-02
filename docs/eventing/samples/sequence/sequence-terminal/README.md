@@ -1,13 +1,7 @@
----
-title: "Sequence terminal"
-linkTitle: "Create additional events"
-weight: 20
-type: "docs"
----
-
 We are going to create the following logical configuration. We create a
-CronJobSource, feeding events to a [`Sequence`](../../../flows/sequence.md). Sequence
-can then do either external work, or out of band create additional events.
+PingSource, feeding events to a [`Sequence`](../../../flows/sequence.md).
+Sequence can then do either external work, or out of band create additional
+events.
 
 ![Logical Configuration](./sequence-terminal.png)
 
@@ -85,13 +79,13 @@ If you are using a different type of Channel, you need to change the
 spec.channelTemplate to point to your desired Channel.
 
 ```yaml
-apiVersion: flows.knative.dev/v1beta1
+apiVersion: flows.knative.dev/v1
 kind: Sequence
 metadata:
   name: sequence
 spec:
   channelTemplate:
-    apiVersion: messaging.knative.dev/v1beta1
+    apiVersion: messaging.knative.dev/v1
     kind: InMemoryChannel
   steps:
     - ref:
@@ -117,20 +111,21 @@ kubectl -n default create -f ./sequence.yaml
 
 ### Create the PingSource targeting the Sequence
 
-This will create a PingSource which will send a CloudEvent with `{"message":
-"Hello world!"}` as the data payload every 2 minutes.
+This will create a PingSource which will send a CloudEvent with
+`{"message": "Hello world!"}` as the data payload every 2 minutes.
 
 ```yaml
-apiVersion: sources.knative.dev/v1alpha1
+apiVersion: sources.knative.dev/v1beta2
 kind: PingSource
 metadata:
   name: ping-source
 spec:
   schedule: "*/2 * * * *"
+  contentType: "application/json"
   data: '{"message": "Hello world!"}'
   sink:
     ref:
-      apiVersion: flows.knative.dev/v1beta1
+      apiVersion: flows.knative.dev/v1
       kind: Sequence
       name: sequence
 ```
@@ -145,8 +140,8 @@ kubectl -n default create -f ./ping-source.yaml
 ### Inspecting the results
 
 You can now see the final output by inspecting the logs of the event-display
-pods. Note that since we set the `PingSource` to emit every 2 minutes, it
-might take some time for the events to show up in the logs.
+pods. Note that since we set the `PingSource` to emit every 2 minutes, it might
+take some time for the events to show up in the logs.
 
 ```shell
 kubectl -n default get pods

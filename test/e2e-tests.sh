@@ -14,15 +14,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-source $(dirname $0)/../vendor/knative.dev/test-infra/scripts/e2e-tests.sh
+source $(dirname $0)/../vendor/knative.dev/hack/e2e-tests.sh
 
-function knative_setup() {
+function install_istio() {
+  ISTIO_VERSION=istio-stable
+  echo ">> Bringing up Istio"
+  echo ">> Running Istio installer"
+  chmod +x ./vendor/knative.dev/net-istio/third_party/istio-stable/install-istio.sh
+  ./vendor/knative.dev/net-istio/third_party/istio-stable/install-istio.sh istio-ci-no-mesh.yaml || return 1
+}
+
+function test_setup() {
+  install_istio
   start_latest_knative_serving
 }
 
 # Script entry point.
 
-initialize $@
+initialize $@ --skip-istio-addon
 
 go_test_e2e ./test/e2e || fail_test
 

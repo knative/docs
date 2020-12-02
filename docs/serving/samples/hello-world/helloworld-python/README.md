@@ -1,10 +1,3 @@
----
-title: "Hello World - Python"
-linkTitle: "Python"
-weight: 1
-type: "docs"
----
-
 A simple web app written in Python that you can use for testing. It reads in an
 env variable `TARGET` and prints "Hello \${TARGET}!". If TARGET is not
 specified, it will use "World" as the TARGET.
@@ -62,6 +55,9 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-python
    # https://hub.docker.com/_/python
    FROM python:3.7-slim
 
+   # Allow statements and log messages to immediately appear in the Knative logs
+   ENV PYTHONUNBUFFERED True
+
    # Copy local code to the container image.
    ENV APP_HOME /app
    WORKDIR $APP_HOME
@@ -74,7 +70,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-python
    # webserver, with one worker process and 8 threads.
    # For environments with multiple CPU cores, increase the number of workers
    # to be equal to the cores available.
-   CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 app:app
+   CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 app:app
    ```
 
 1. Create a `.dockerignore` file to ensure that any files related to a local

@@ -1,10 +1,3 @@
----
-title: "GitHub webhook sample - Go"
-linkTitle: "GitHub Webhook - Go"
-weight: 1
-type: "docs"
----
-
 A handler written in Go that demonstrates interacting with GitHub through a
 webhook.
 
@@ -72,7 +65,7 @@ You must meet the following requirements to run this sample:
    1. Copy the encoded access token into `github-secret.yaml` next to
       `personalAccessToken:`.
 
-   1. Create a webhook secert value unique to this sample, base64 encode it, and
+   1. Create a webhook secret value unique to this sample, base64 encode it, and
       copy it into `github-secret.yaml` next to `webhookSecret:`:
 
       ```shell

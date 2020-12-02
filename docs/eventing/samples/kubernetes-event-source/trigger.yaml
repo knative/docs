@@ -1,9 +1,10 @@
-apiVersion: eventing.knative.dev/v1alpha1
+apiVersion: eventing.knative.dev/v1
 kind: Trigger
 metadata:
   name: testevents-trigger
   namespace: default
 spec:
+  broker: default
   subscriber:
     ref:
       apiVersion: serving.knative.dev/v1
@@ -25,4 +26,4 @@ spec:
       containers:
       - # This corresponds to
         # https://github.com/knative/eventing-contrib/tree/master/cmd/event_display/main.go
-        image: gcr.io/knative-releases/github.com/knative/eventing-contrib/cmd/event_display
+        image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display

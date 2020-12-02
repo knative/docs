@@ -1,11 +1,4 @@
----
-title: "Hello World - PHP"
-linkTitle: "PHP"
-weight: 1
-type: "docs"
----
-
-A simple web app written in Go that you can use for testing. It reads in an env
+A simple web app written in PHP that you can use for testing. It reads in an env
 variable `TARGET` and prints `Hello ${TARGET}!`. If `TARGET` is not specified,
 it will use `World` as the `TARGET`.
 
@@ -40,7 +33,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-php
    ```php
    <?php
    $target = getenv('TARGET', true) ?: 'World';
-   echo sprintf("Hello %s!", $target);
+   echo sprintf("Hello %s!\n", $target);
    ```
 
 1. Create a file named `Dockerfile` and copy the code block below into it. See

@@ -1,10 +1,3 @@
----
-title: "Hello World - Java (Micronaut)"
-linkTitle: "Java (Micronaut)"
-weight: 1
-type: "docs"
----
-
 Learn how to deploy a simple web app that is written in Java and uses Micronaut.
 
 This samples uses Docker to build locally. The app reads in a `TARGET` env
@@ -33,7 +26,7 @@ You must meet the following requirements to complete this sample:
 
 **Tip**: You can clone the [Knatve/docs repo](https://github.com/knative/docs)
 and then modify the source files. Alternatively, learn more by manually creating
-the files youself.
+the files yourself.
 
 ## Creating and configuring the sample code
 

@@ -1,10 +1,3 @@
----
-title: "Sequence wired to another Sequence"
-linkTitle: "Using Sequences in series"
-weight: 20
-type: "docs"
----
-
 We are going to create the following logical configuration. We create a
 PingSource, feeding events to a [`Sequence`](../../../flows/sequence.md), then
 taking the output of that `Sequence` and sending it to a second `Sequence` and
@@ -127,13 +120,13 @@ If you are using a different type of Channel, you need to change the
 spec.channelTemplate to point to your desired Channel.
 
 ```yaml
-apiVersion: flows.knative.dev/v1beta1
+apiVersion: flows.knative.dev/v1
 kind: Sequence
 metadata:
   name: first-sequence
 spec:
   channelTemplate:
-    apiVersion: messaging.knative.dev/v1beta1
+    apiVersion: messaging.knative.dev/v1
     kind: InMemoryChannel
   steps:
     - ref:
@@ -151,7 +144,7 @@ spec:
   reply:
     ref:
       kind: Sequence
-      apiVersion: flows.knative.dev/v1alpha1
+      apiVersion: flows.knative.dev/v1
       name: second-sequence
 ```
 
@@ -169,13 +162,13 @@ If you are using a different type of Channel, you need to change the
 spec.channelTemplate to point to your desired Channel.
 
 ```yaml
-apiVersion: flows.knative.dev/v1beta1
+apiVersion: flows.knative.dev/v1
 kind: Sequence
 metadata:
   name: second-sequence
 spec:
   channelTemplate:
-    apiVersion: messaging.knative.dev/v1beta1
+    apiVersion: messaging.knative.dev/v1
     kind: InMemoryChannel
   steps:
     - ref:
@@ -196,7 +189,6 @@ spec:
       apiVersion: serving.knative.dev/v1
       name: event-display
 ```
-
 
 ```shell
 kubectl -n default create -f ./sequence2.yaml
@@ -225,20 +217,21 @@ kubectl -n default create -f ./event-display.yaml
 
 ### Create the PingSource targeting the first Sequence
 
-This will create a PingSource which will send a CloudEvent with `{"message":
-"Hello world!"}` as the data payload every 2 minutes.
+This will create a PingSource which will send a CloudEvent with
+`{"message": "Hello world!"}` as the data payload every 2 minutes.
 
 ```yaml
-apiVersion: sources.knative.dev/v1alpha1
+apiVersion: sources.knative.dev/v1beta2
 kind: PingSource
 metadata:
   name: ping-source
 spec:
   schedule: "*/2 * * * *"
+  contentType: "application/json"
   data: '{"message": "Hello world!"}'
   sink:
     ref:
-      apiVersion: flows.knative.dev/v1beta1
+      apiVersion: flows.knative.dev/v1
       kind: Sequence
       name: first-sequence
 ```

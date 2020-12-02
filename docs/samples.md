@@ -30,5 +30,8 @@ A list of links to Knative code samples that live outside of
 - [Image processing using Knative Eventing, Cloud Run on GKE (Knative Serving implementation) and Google Cloud Vision API](https://github.com/akashrv/knative-samples/blob/master/docs/image-processing.md)
 - [A potpourri of Knative Eventing Examples](https://github.com/lionelvillard/knative-examples)
 - [Knfun - a complete Knative example of three functions using Twitter and Watson API that use kn to deploy and manage functions](https://github.com/maximilien/knfun/blob/master/README.md)
+- [Knative Eventing (Cloud Events) example using spring-boot and spring-cloud-streams + Kafka](https://salaboy.com/2020/02/20/getting-started-with-knative-2020/)
+- [Image processing pipeline using Knative Eventing on GKE, Google Cloud Vision API and ImageSharp library](https://github.com/meteatamel/knative-tutorial/blob/master/docs/image-processing-pipeline.md)
+- [BigQuery processing pipeline using Knative Eventing on GKE, Cloud Scheduler, BigQuery, mathplotlib and SendGrid](https://github.com/meteatamel/knative-tutorial/blob/master/docs/bigquery-processing-pipeline.md)
 
 _Please add links to your externally hosted Knative code sample._

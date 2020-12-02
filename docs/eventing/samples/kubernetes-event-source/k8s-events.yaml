@@ -1,4 +1,4 @@
-apiVersion: sources.knative.dev/v1alpha1
+apiVersion: sources.knative.dev/v1
 kind: ApiServerSource
 metadata:
   name: testevents
@@ -11,6 +11,6 @@ spec:
     kind: Event
   sink:
     ref:
-      apiVersion: eventing.knative.dev/v1alpha1
+      apiVersion: eventing.knative.dev/v1
       kind: Broker
       name: default

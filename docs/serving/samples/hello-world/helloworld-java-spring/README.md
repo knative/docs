@@ -1,10 +1,3 @@
----
-title: "Hello World - Spring Boot Java"
-linkTitle: "Java (Spring)"
-weight: 1
-type: "docs"
----
-
 A simple web app written in Java using Spring Boot 2.0 that you can use for
 testing. It reads in an env variable `TARGET` and prints "Hello \${TARGET}!". If
 TARGET is not specified, it will use "World" as the TARGET.
@@ -109,11 +102,10 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
    # Build a release artifact.
    RUN mvn package -DskipTests
 
-   # Use AdoptOpenJDK for base image.
-   # It's important to use OpenJDK 8u191 or above that has container support enabled.
-   # https://hub.docker.com/r/adoptopenjdk/openjdk8
+   # Use the Official OpenJDK image for a lean production stage of our multi-stage build.
+   # https://hub.docker.com/_/openjdk
    # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
-   FROM adoptopenjdk/openjdk8:jdk8u202-b08-alpine-slim
+   FROM openjdk:8-jre-alpine
 
    # Copy the jar to the production image from the builder stage.
    COPY --from=builder /app/target/helloworld-*.jar /helloworld.jar

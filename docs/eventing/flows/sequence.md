@@ -18,7 +18,7 @@ Sequence has three parts for the Spec:
 
 1. `Steps` which defines the in-order list of `Subscriber`s, aka, which
    functions are executed in the listed order. These are specified using the
-   `eventingv1alpha1.SubscriberSpec` just like you would when creating
+   `messaging.v1.SubscriberSpec` just like you would when creating
    `Subscription`. Each step should be `Addressable`.
 1. `ChannelTemplate` defines the Template which will be used to create
    `Channel`s between the steps.
@@ -46,7 +46,7 @@ Sequence has four parts for the Status:
 ## Examples
 
 For each of these examples below, we'll use
-[`CronJobSource`](https://knative.dev/docs/eventing/samples/cronjob-source/) as
+[`PingSource`](https://knative.dev/docs/eventing/samples/ping-source/) as
 the source of events.
 
 We also use a very simple
@@ -57,14 +57,14 @@ through each stage.
 ### [Sequence with no reply (terminal last Step)](../samples/sequence/sequence-terminal/README.md)
 
 For the first example, we'll use a 3 Step `Sequence` that is wired directly into
-the `CronJobSource`. Each of the steps simply tacks on "- Handled by
+the `PingSource`. Each of the steps simply tacks on "- Handled by
 <STEP NUMBER>", for example the first Step in the `Sequence` will take the
 incoming message and append "- Handled by 0" to the incoming message.
 
 ### [Sequence with reply (last Step produces output)](../samples/sequence/sequence-reply-to-event-display/README.md)
 
 For the next example, we'll use the same 3 Step `Sequence` that is wired
-directly into the `CronJobSource`. Each of the steps simply tacks on "- Handled
+directly into the `PingSource`. Each of the steps simply tacks on "- Handled
 by <STEP NUMBER>", for example the first Step in the `Sequence` will take the
 incoming message and append "- Handled by 0" to the incoming message.
 
@@ -74,17 +74,17 @@ the output of the last Step to an event display pod.
 ### [Chaining Sequences together](../samples/sequence/sequence-reply-to-sequence/README.md)
 
 For the next example, we'll use the same 3 Step `Sequence` that is wired
-directly into the `CronJobSource`. Each of the steps simply tacks on "- Handled
+directly into the `PingSource`. Each of the steps simply tacks on "- Handled
 by <STEP NUMBER>", for example the first Step in the `Sequence` will take the
 incoming message and append "- Handled by 0" to the incoming message.
 
 The only difference is that we'll use the `Subscriber.Spec.Reply` field to wire
-the output of the last Step to another `Sequence` that does the smae message
+the output of the last Step to another `Sequence` that does the same message
 modifications as the first pipeline (with different steps however).
 
 ### [Using Sequence with Broker/Trigger model](../samples/sequence/sequence-with-broker-trigger/README.md)
 
 You can also create a Trigger which targets `Sequence`. This time we'll wire
-`CronJobSource` to send events to a `Broker` and then we'll have the `Sequence`
+`PingSource` to send events to a `Broker` and then we'll have the `Sequence`
 emit the resulting Events back into the Broker so that the results of the
 `Sequence` can be observed by other `Trigger`s.

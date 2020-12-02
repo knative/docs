@@ -1,10 +1,3 @@
----
-title: "Hello world - .NET Core"
-linkTitle: ".NET"
-weight: 1
-type: "docs"
----
-
 A simple web app written in C# using .NET Core 3.1 that you can use for testing.
 It reads in an env variable `TARGET` and prints "Hello \${TARGET}!". If TARGET
 is not specified, it will use "World" as the TARGET.
@@ -81,8 +74,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-csharp
 
    ```docker
    # Use Microsoft's official build .NET image.
-   # https://hub.docker.com/_/microsoft-dotnet-core-sdk/
-   FROM mcr.microsoft.com/dotnet/core/sdk:3.1-alpine AS build
+   FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
    WORKDIR /app
  
    # Install production dependencies.
@@ -98,8 +90,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-csharp
    RUN dotnet publish -c Release -o out
 
    # Use Microsoft's official runtime .NET image.
-   # https://hub.docker.com/_/microsoft-dotnet-core-aspnet/
-   FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-alpine AS runtime
+   FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS runtime
    WORKDIR /app
    COPY --from=build /app/out ./
 
