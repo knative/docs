@@ -13,7 +13,7 @@ The Source object defines the arguments and parameters needed to instantiate a C
 All Sources are part of the `sources` category.
 
 {{< tabs name="List event sources" default="kubectl" >}} {{% tab name="kubectl" %}}
-You can list existing event sources on your cluster by entering the ommand:
+You can list existing event sources on your cluster by entering the command:
 
 ```shell
 kubectl get sources
@@ -45,7 +45,7 @@ kn source list
 | [Heartbeats](https://github.com/knative/eventing-contrib/tree/master/cmd/heartbeats) |  N/A | Knative    | Uses an in-memory timer to produce events at the specified interval. |
 | [PingSource](./pingsource) |  	v1beta2  | Knative    | Produces events with a fixed payload on a specified [Cron](https://en.wikipedia.org/wiki/Cron) schedule. See the [Ping Source](../samples/ping-source) example for more details. |
 | [RabbitMQ](https://github.com/knative-sandbox/eventing-rabbitmq) | Active development | None | Brings [RabbitMQ](https://www.rabbitmq.com/) messages into Knative.
-| [SinkBinding](https://knative.dev/docs/eventing/samples/sinkbinding/)                                                               |  	v1           | Knative    | The SinkBinding can be used to author new event sources using any of the familiar compute abstractions that Kubernetes makes available (e.g. Deployment, Job, DaemonSet, StatefulSet), or Knative abstractions (e.g. Service, Configuration). SinkBinding provides a framework for injecting `K_SINK` (destination address) and `K_CE_OVERRIDES` (JSON cloudevents attributes) environment variables into any Kubernetes resource which has a `spec.template` that looks like a Pod (aka PodSpecable). See the [SinkBinding](../samples/container-source) example for more details. |
+| [SinkBinding](./sinkbinding/)                                                               |  	v1           | Knative    | The SinkBinding can be used to author new event sources using any of the familiar compute abstractions that Kubernetes makes available (e.g. Deployment, Job, DaemonSet, StatefulSet), or Knative abstractions (e.g. Service, Configuration). SinkBinding provides a framework for injecting `K_SINK` (destination address) and `K_CE_OVERRIDES` (JSON cloudevents attributes) environment variables into any Kubernetes resource which has a `spec.template` that looks like a Pod (aka PodSpecable). See the [SinkBinding](../samples/container-source) example for more details. |
 | [WebSocket](https://github.com/knative/eventing-contrib/tree/master/cmd/websocketsource)                                            | N/A | Knative    | Opens a WebSocket to the specified source and packages each received message as a Knative event.  |
 
 ## Third-Party Sources
@@ -79,4 +79,3 @@ kn source list
 - For information about creating your own Source type, see the [tutorial on writing a Source with a Receive Adapter](../samples/writing-event-source).
 - If your code needs to send events as part of its business logic and doesn't fit the model of a Source, consider [feeding events directly to a Broker](https://knative.dev/docs/eventing/broker/).
 - For more information about using `kn` Source related commands, see the [`kn source` reference documentation](https://github.com/knative/client/blob/master/docs/cmd/kn_source.md).
-
