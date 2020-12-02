@@ -71,40 +71,13 @@ kn service create hello --image gcr.io/knative-releases/knative.dev/eventing-con
 {{< /tab >}}
 {{< /tabs >}}
 
-### Creating a heartbeat cron job
+### Creating a cron job
 
 Create a cron job if you do not have an existing event source that you want to connect to the sink binding.
 
-Knative [event-contrib](https://github.com/knative/eventing-contrib) contains a
-sample heartbeats event source.
-
-#### Prerequisites
-
-- Ensure that `ko publish` is set up correctly:
-  - [`KO_DOCKER_REPO`](https://github.com/knative/serving/blob/master/DEVELOPMENT.md#environment-setup)
-  must be set. For example, `gcr.io/[gcloud-project]` or `docker.io/<username>`.
-  - You must have authenticated with your `KO_DOCKER_REPO`.
-
-#### Procedure
-
-1. Clone the `event-contib` repository:
-    ```bash
-    $ git clone -b "{{< branch >}}" https://github.com/knative/eventing-contrib.git
-    ```
-2. Build a heartbeats image, and publish the image to your image repository:
-    ```bash
-    $ ko publish knative.dev/eventing-contrib/cmd/heartbeats
-    ```
-<!-- TODO: Add tabs if there are kn commands etc to do this also-->
-
-#### Creating a cron job
-<!--TODO: Add CLI command-->
-
+<!-- TODO: Add kn command-->
 Create a `CronJob` object:
-<!-- TODO: Add tabs once there's a kn command
-{{< tabs name="knative_cronjob" default="yaml" >}}
-{{% tab name="yaml" %}}
--->
+
 1. Copy the sample YAML into a `cronjob.yaml` file:
     ```yaml
     apiVersion: batch/v1
@@ -143,10 +116,30 @@ Create a `CronJob` object:
     ```bash
     kubectl apply --filename heartbeats-source.yaml
     ```
-<!-- TODO: Add tabs back when there's a `kn` command
-{{< /tab >}}
-{{< /tabs >}}
--->
+
+#### Cloning a sample heartbeat cron job
+
+Knative [event-contrib](https://github.com/knative/eventing-contrib) contains a
+sample heartbeats event source.
+
+##### Prerequisites
+
+- Ensure that `ko publish` is set up correctly:
+  - [`KO_DOCKER_REPO`](https://github.com/knative/serving/blob/master/DEVELOPMENT.md#environment-setup)
+  must be set. For example, `gcr.io/[gcloud-project]` or `docker.io/<username>`.
+  - You must have authenticated with your `KO_DOCKER_REPO`.
+
+##### Procedure
+
+1. Clone the `event-contib` repository:
+    ```bash
+    $ git clone -b "{{< branch >}}" https://github.com/knative/eventing-contrib.git
+    ```
+2. Build a heartbeats image, and publish the image to your image repository:
+    ```bash
+    $ ko publish knative.dev/eventing-contrib/cmd/heartbeats
+    ```
+<!-- TODO: Add tabs if there are kn commands etc to do this also-->
 
 ## Creating a SinkBinding object
 
