@@ -357,7 +357,7 @@ spec:
 
 ## System Resource Settings
 
-The operator custom resource allows you allows you to configure system resources for the Knative system containers.
+The operator custom resource allows you to configure system resources for the Knative system containers.
 Requests and limits can be configured for the following containers: `activator`, `autoscaler`, `controller`, `webhook`, `autoscaler-hpa`,
 `networking-istio` and `queue-proxy`.
 
