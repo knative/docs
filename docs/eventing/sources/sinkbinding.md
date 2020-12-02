@@ -24,10 +24,11 @@ The following procedures show how you can create a sink binding and connect it t
 
 ### Creating a namespace
 
-Create a new namespace called `sinkbinding-example`:
-```
-$ kubectl create namespace sinkbinding-example
-```
+Create a namespace called `sinkbinding-example`:
+
+  ```bash
+  kubectl create namespace sinkbinding-example
+  ```
 
 ### Creating a Knative service
 
@@ -40,31 +41,35 @@ Create a Knative service if you do not have an existing event sink that you want
 #### Procedure
 Create a Knative service:
 
-{{< tabs name="knative_service" default="kn" >}}
-{{% tab name="kn" %}}
+  {{< tabs name="knative_service" default="kn" >}}
+  {{% tab name="kn" %}}
+
+```
+kn service create hello --image gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display --env RESPONSE="Hello Serverless!"
+```
+
+  {{< /tab >}}
+  {{% tab name="yaml" %}}
+
+1. Copy the sample YAML into a `service.yaml` file:
+  ```yaml
+  apiVersion: serving.knative.dev/v1
+  kind: Service
+  metadata:
+    name: event-display
+  spec:
+    template:
+      spec:
+        containers:
+          - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
   ```
-  kn service create hello --image gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display --env RESPONSE="Hello Serverless!"
+1. Apply the file:
+  ```bash
+  kubectl apply --filename service.yaml
   ```
-{{< /tab >}}
-{{% tab name="yaml" %}}
-    1. Copy the sample YAML into a `service.yaml` file:
-    ```yaml
-    apiVersion: serving.knative.dev/v1
-    kind: Service
-    metadata:
-      name: event-display
-    spec:
-      template:
-        spec:
-          containers:
-            - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
-    ```
-    1. Apply the file:
-    ```
-    kubectl apply --filename service.yaml
-    ```
-{{< /tab >}}
-{{< /tabs >}}
+
+  {{< /tab >}}
+  {{< /tabs >}}
 
 ### Creating a heartbeat cron job
 
@@ -83,13 +88,13 @@ sample heartbeats event source.
 #### Procedure
 
 1. Clone the `event-contib` repository:
-  ```
-  $ git clone -b "{{< branch >}}" https://github.com/knative/eventing-contrib.git
-  ```
+    ```
+    $ git clone -b "{{< branch >}}" https://github.com/knative/eventing-contrib.git
+    ```
 1. Build a heartbeats image, and publish the image to your image repository:
-  ```
-  $ ko publish knative.dev/eventing-contrib/cmd/heartbeats
-  ```
+    ```
+    $ ko publish knative.dev/eventing-contrib/cmd/heartbeats
+    ```
 <!-- TODO: Add tabs if there are kn commands etc to do this also-->
 
 #### Creating a cron job
@@ -101,47 +106,43 @@ Create a `CronJob` object:
 {{% tab name="yaml" %}}
 
     1. Copy the sample YAML into a `cronjob.yaml` file:
-
-      ```yaml
-      apiVersion: batch/v1
-      kind: CronJob
-      metadata:
-        name: heartbeat-cron
-      spec:
-        # Run every minute
-        schedule: "* * * * *"
-        jobTemplate:
-          metadata:
-            labels:
-              app: heartbeat-cron
-          spec:
-            template:
-              spec:
-                restartPolicy: Never
-                containers:
-                  - name: single-heartbeat
-                    image: <FILL IN YOUR IMAGE HERE>
-                    args:
-                      - --period=1
-                    env:
-                      - name: ONE_SHOT
-                        value: "true"
-                      - name: POD_NAME
-                        valueFrom:
-                          fieldRef:
-                            fieldPath: metadata.name
-                      - name: POD_NAMESPACE
-                        valueFrom:
-                          fieldRef:
-                            fieldPath: metadata.namespace
-      ```
-
+        ```yaml
+        apiVersion: batch/v1
+        kind: CronJob
+        metadata:
+          name: heartbeat-cron
+        spec:
+          # Run every minute
+          schedule: "* * * * *"
+          jobTemplate:
+            metadata:
+              labels:
+                app: heartbeat-cron
+            spec:
+              template:
+                spec:
+                  restartPolicy: Never
+                  containers:
+                    - name: single-heartbeat
+                      image: <FILL IN YOUR IMAGE HERE>
+                      args:
+                        - --period=1
+                      env:
+                        - name: ONE_SHOT
+                          value: "true"
+                        - name: POD_NAME
+                          valueFrom:
+                            fieldRef:
+                              fieldPath: metadata.name
+                        - name: POD_NAMESPACE
+                          valueFrom:
+                            fieldRef:
+                              fieldPath: metadata.namespace
+        ```
     1. Apply the file:
-
-      ```
-      kubectl apply --filename heartbeats-source.yaml
-      ```
-
+        ```
+        kubectl apply --filename heartbeats-source.yaml
+        ```
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -160,37 +161,33 @@ Create a sink binding:
 
 {{< tabs name="sinkbinding" default="kn" >}}
 {{% tab name="kn" %}}
-
-    ```
-    $ kn source binding create bind-heartbeat \
-      --namespace sinkbinding-example \
-      --subject "Job:batch/v1:app=heartbeat-cron" \
-      --sink http://event-display.svc.cluster.local \
-      --ce-override "sink=bound"
-    ```
-
+      ```
+      $ kn source binding create bind-heartbeat \
+        --namespace sinkbinding-example \
+        --subject "Job:batch/v1:app=heartbeat-cron" \
+        --sink http://event-display.svc.cluster.local \
+        --ce-override "sink=bound"
+      ```
 {{< /tab >}}
 {{% tab name="yaml" %}}
-
-    ```yaml
-    apiVersion: sources.knative.dev/v1alpha1
-    kind: SinkBinding
-    metadata:
-      name: bind-heartbeat
-    spec:
-      subject:
-        apiVersion: batch/v1
-        kind: Job
-        selector:
-          matchLabels:
-            app: heartbeat-cron
-        sink:
-        ref:
-          apiVersion: serving.knative.dev/v1
-          kind: Service
-          name: event-display
-      ```
-
+      ```yaml
+      apiVersion: sources.knative.dev/v1alpha1
+      kind: SinkBinding
+      metadata:
+        name: bind-heartbeat
+      spec:
+        subject:
+          apiVersion: batch/v1
+          kind: Job
+          selector:
+            matchLabels:
+              app: heartbeat-cron
+          sink:
+          ref:
+            apiVersion: serving.knative.dev/v1
+            kind: Service
+            name: event-display
+        ```
 {{< /tab >}}
 {{< /tabs >}}
 

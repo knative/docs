@@ -13,7 +13,7 @@ The Source object defines the arguments and parameters needed to instantiate a C
 All Sources are part of the `sources` category.
 
 {{< tabs name="List event sources" default="kubectl" >}} {{% tab name="kubectl" %}}
-You can list existing event sources on your cluster by entering the ommand:
+You can list existing event sources on your cluster by entering the command:
 
 ```shell
 kubectl get sources
