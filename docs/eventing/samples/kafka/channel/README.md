@@ -154,10 +154,9 @@ kubectl logs --selector='serving.knative.dev/service=broker-kafka-display' -c us
 
 ## Authentication against an Apache Kafka
 
-The KafkaSource supports TLS and SASL authentication methods.
+In production enviornments it is common that the Apache Kafka cluster is secured using [TLS](http://kafka.apache.org/documentation/#security_ssl) or [SASL](http://kafka.apache.org/documentation/#security_sasl). This section shows how to confiugure the `KafkaChannel` to work against a protected Apache Kafka cluster, with the two supported TLS and SASL authentication methods.
 
 ### TLS authentication
-
 
 To use TLS authentication you must create:
 
@@ -167,7 +166,7 @@ To use TLS authentication you must create:
 **NOTE:** Kafka channels require these files to be in `.pem` format. If your files are in a different format, you must convert them to `.pem`.
 
 
-1. Create the certificate files as secrets in the namespace of your choice, like:
+1. Create the certificate files as secrets in your chosen namespace:
 ```
 $ kubectl create secret --namespace <namespace> generic <kafka-auth-secret> \
   --from-file=ca.crt=caroot.pem \
@@ -177,7 +176,7 @@ $ kubectl create secret --namespace <namespace> generic <kafka-auth-secret> \
 
 *NOTE:* It is important to use the same keys (`ca.crt`, `user.crt` and `user.key`).
 
-Now all you need is to reference your secret and its namespace on the `config-kafka` ConfigMap:
+Reference your secret and the namespace of the secret in the `config-kafka` ConfigMap:
 ```
 apiVersion: v1
 kind: ConfigMap
@@ -185,7 +184,7 @@ metadata:
   name: config-kafka
   namespace: knative-eventing
 data:
-  bootstrapServers: <bootstrapServers>
+  bootstrapServers: <bootstrap-servers>
   authSecretName: <kafka-auth-secret>
   authSecretNamespace: <namespace>
  ```
@@ -199,7 +198,7 @@ To use SASL authentication, you will need the following information:
 
 **NOTE:** It is recommended to also enable TLS. If you enable this, you will also need the `ca.crt` certificate as described in the previous section.
 
-1. Create the certificate files as secrets in the namespace of your choice, like:
+1. Create the certificate files as secrets in your chosen namespace:
 ```
 $ kubectl create secret --namespace <namespace> generic <kafka-auth-secret> \
   --from-file=ca.crt=caroot.pem \
@@ -210,8 +209,7 @@ $ kubectl create secret --namespace <namespace> generic <kafka-auth-secret> \
 
 *NOTE:* It is important to use the same keys; `user`, `password` and `saslType`.
 
-Now all you need is to reference your secret and its namespace on the `config-kafka` ConfigMap:
-
+Reference your secret and the namespace of the secret in the `config-kafka` ConfigMap:
 ```
 apiVersion: v1
 kind: ConfigMap
@@ -219,7 +217,7 @@ metadata:
   name: config-kafka
   namespace: knative-eventing
 data:
-  bootstrapServers: <bootstrapServers>
+  bootstrapServers: <bootstrap-servers>
   authSecretName: <kafka-auth-Secret>
   authSecretNamespace: <namespace>
 ```
