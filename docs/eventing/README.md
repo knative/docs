@@ -31,7 +31,7 @@ both Channels and Brokers.
 
 Knative Eventing is designed around the following goals:
 
-1. Knative Eventing services are loosely coupled. These services can be
+1. The Knative Eventing resources are loosely coupled. These resources can be
    developed and deployed independently on, and across a variety of platforms
    (for example Kubernetes, VMs, SaaS or FaaS).
 1. Event producers and event consumers are independent. Any producer (or
