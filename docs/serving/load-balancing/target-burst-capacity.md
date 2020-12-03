@@ -14,8 +14,8 @@ The Activator service is responsible for receiving and buffering requests for in
 
 Target burst capacity can be configured using a combination of the following parameters:
 
-- Setting the targeted concurrency limits for the revision. See [concurrency](../../serving/autoscaling/concurrency.md).
-- Setting the target utilization parameters. See [target utilization](../../serving/autoscaling/concurrency.md#target-utilization).
+- Setting the targeted concurrency limits for the revision. See [concurrency](../../serving/autoscaling/concurrency).
+- Setting the target utilization parameters. See [target utilization](../../serving/autoscaling/concurrency#target-utilization).
 - Setting the target burst capacity. You can configure target burst capacity using the `autoscaling.knative.dev/targetBurstCapacity` annotation key in the `config-autoscaler` ConfigMap. See [Setting the target burst capacity](#setting-the-target-burst-capacity).
 
 ## Setting the target burst capacity
@@ -71,7 +71,7 @@ spec:
 
 - If `autoscaling.knative.dev/targetBurstCapacity` is set to `0`, the activator is only added to the request path during scale from zero scenarios, and ingress load balancing will be applied.
 
-  **NOTE:** Ingress gateway load balancing requires additional configuration. For more information about load balancing using an ingress gateway, see the [Serving API](../../reference/api/serving.md) documentation.
+  **NOTE:** Ingress gateway load balancing requires additional configuration. For more information about load balancing using an ingress gateway, see the [Serving API](../../reference/api/serving-api) documentation.
 
 - If `autoscaling.knative.dev/targetBurstCapacity` is set to `-1`, the activator is always in the request path, regardless of the revision size.
 
