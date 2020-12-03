@@ -140,8 +140,7 @@ Learn more about Eventing development in the
 
 ## Getting Started
 
-- [Install the Eventing component](#installation)
-- [Setup Knative Serving](../install/README.md)
+- [Install Knative](../install/README.md)
 - [Run samples](./samples/)
 - [Default Channels](./channels/default-channels.md) provide a way to choose the
   persistence strategy for Channels across the cluster.
