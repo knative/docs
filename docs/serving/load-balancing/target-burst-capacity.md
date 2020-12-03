@@ -7,7 +7,7 @@ aliases:
     - /docs/serving/autoscaling/target-burst-capacity
 ---
 
-_Target burst capacity_ is a [global and per-revision](./autoscaling-concepts.md) integer setting that determines the size of traffic burst a Knative application can handle without buffering.
+_Target burst capacity_ is a [global and per-revision](../../serving/autoscaling/autoscaling-concepts.md) integer setting that determines the size of traffic burst a Knative application can handle without buffering.
 If a traffic burst is too large for the application to handle, the _Activator_ service will be placed in the request path to protect the revision and optimize request load balancing.
 
 The Activator service is responsible for receiving and buffering requests for inactive revisions, or for revisions where a traffic burst is larger than the limits of what can be handled without buffering for that revision. It can also quickly spin up additional pods for capacity, and throttle how quickly requests are sent to pods.
@@ -39,7 +39,7 @@ spec:
   template:
     metadata:
       annotations:
-        autoscaling.knative.dev/targetBurstCapacity: "70"
+        autoscaling.knative.dev/targetBurstCapacity: "200"
 ```
 {{< /tab >}}
 {{% tab name="Global (ConfigMap)" %}}
@@ -50,7 +50,7 @@ metadata:
   name: config-autoscaler
   namespace: knative-serving
 data:
-  target-burst-capacity: "70"
+  target-burst-capacity: "200"
 ```
 {{< /tab >}}
 {{% tab name="Global (Operator)" %}}
@@ -62,7 +62,7 @@ metadata:
 spec:
   config:
     autoscaler:
-      target-burst-capacity: "70"
+      target-burst-capacity: "200"
 ```
 {{< /tab >}}
 {{< /tabs >}}
