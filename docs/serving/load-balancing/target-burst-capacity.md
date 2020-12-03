@@ -13,9 +13,9 @@ The Activator service is responsible for receiving and buffering requests for in
 
 Target burst capacity can be configured using a combination of the following parameters:
 
-* Setting the targeted concurrency limits for the revision. For more information, see the documentation on [concurrency](./concurrency.md).
-* Setting the target utilization parameters. For more information, see the documentation on [target utilization](./concurrency.md#target-utilization).
-* Setting the target burst capacity. You can configure target burst capacity using the `autoscaling.knative.dev/targetBurstCapacity` annotation key in `config-autoscaler` ConfigMap.
+* Setting the targeted concurrency limits for the revision. See [concurrency](./concurrency.md).
+* Setting the target utilization parameters. See [target utilization](./concurrency.md#target-utilization).
+* Setting the target burst capacity. You can configure target burst capacity using the `autoscaling.knative.dev/targetBurstCapacity` annotation key in the `config-autoscaler` ConfigMap. See [Setting the target burst capacity](#setting-the-target-burst-capacity).
 
 ## Setting the target burst capacity
 
