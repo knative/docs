@@ -11,10 +11,7 @@ well as receive adapter, which events can be viewed through a basic
 Just want to see the code? The reference project is
 [https://github.com/knative-sandbox/sample-source](https://github.com/knative-sandbox/sample-source).
 
-A variety of event sources are available in Knative [`eventing-contrib`](https://github.com/knative/eventing-contrib/) such as
-[`KafkaSource`](https://github.com/knative/eventing-contrib/tree/master/kafka/source),
-[`GithubSource`](https://github.com/knative/eventing-contrib/tree/master/github) and
-[`AWSSQSSource`](https://github.com/knative/eventing-contrib/tree/master/awssqs) that can be used as a reference.
+[Knative Sources](../../sources/#knative-sources) can be used as a reference.
 
 ## Other ways
 
@@ -23,7 +20,6 @@ With the approach in this tutorial, you will create a CRD and a controller for t
 You can also write your own event source using a [ContainerSource](../../../eventing/sources/README.md#meta-sources) which
 is an easy way to turn any dispatcher container into an Event Source. Similarly, another option is using [SinkBinding](../../../eventing/sources/README.md#meta-sources)
 which provides a framework for injecting environment variables into any Kubernetes resource which has a `spec.template` that looks like a Pod (aka PodSpecable).
-
 
 ## Target Audience
 
