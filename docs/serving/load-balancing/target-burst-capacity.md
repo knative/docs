@@ -25,8 +25,6 @@ Target burst capacity can be configured using a combination of the following par
 - **Possible values:** float (`0` means the Activator is only in path when scaled to 0, `-1` means the Activator is always in path)
 - **Default:** `200`
 
-**NOTE:** If the Activator is in the routing path, it will fully load all replicas up to `containerConcurrency`. It currently applies target utilization only on revision level.
-
 **Example:**
 {{< tabs name="targetBurstCapacity" default="Per Revision" >}}
 {{% tab name="Per Revision" %}}
