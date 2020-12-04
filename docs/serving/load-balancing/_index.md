@@ -18,13 +18,13 @@ Knative assigns a subset of Activators for each revision, depending on the revis
 The Activator load balancing algorithm works as follows:
 
 - If concurrency is unlimited, the request is sent to the better of two random choices.
-- If concurrency is set to a value less or equal than 3, the activator will send the request to the first pod that has capacity. Otherwise, requests will be balanced in a round robin fashion, with respect to container concurrency.
+- If concurrency is set to a value less or equal than 3, the Activator will send the request to the first pod that has capacity. Otherwise, requests will be balanced in a round robin fashion, with respect to container concurrency.
 
 For more information, see the documentation on [concurrency](../../serving/autoscaling/concurrency).
 
 ## Configuring target burst capacity
 
-Target burst capacity is mainly responsible for determining whether the activator is in the request path outside of scale-from-zero scenarios.
+Target burst capacity is mainly responsible for determining whether the Activator is in the request path outside of scale-from-zero scenarios.
 
 Target burst capacity can be configured using a combination of the following parameters:
 
