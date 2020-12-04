@@ -20,10 +20,6 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-scala
 - [Docker](https://www.docker.com) installed locally, and running, optionally a
   Docker Hub account configured or some other Docker Repository installed
   locally.
-- [Java JDK8 or later](https://adoptopenjdk.net/installation.html) installed
-  locally.
-- [Scala's](https://scala-lang.org/) standard build tool
-  [sbt](https://www.scala-sbt.org/) installed locally.
 
 ## Configuring the Service descriptor
 
@@ -41,12 +37,10 @@ spec:
   template:
     spec:
       containers:
-        - image: docker.io/{username}/helloworld-scala
-          env:
-            - name: MESSAGE
-              value: "Scala & Akka on Knative says hello!"
-            - name: HOST
-              value: "localhost"
+      - image: docker.io/{username}/helloworld-scala
+        env:
+        - name: TARGET
+          value: "Scala Sample v1"
 ```
 
 ## Publishing to Docker
@@ -63,10 +57,10 @@ docker push {username}/helloworld-scala
 
 ## Deploying to Knative Serving
 
-Apply the [Service yaml definition](./helloworld-scala.yaml):
+Apply the [Service yaml definition](./service.yaml):
 
 ```shell
-kubectl apply --filename helloworld-scala.yaml
+kubectl apply --filename service.yaml
 ```
 
 Then find the service host:
@@ -89,9 +83,5 @@ curl -v http://helloworld-scala.default.1.2.3.4.xip.io
 ## Cleanup
 
 ```shell
-kubectl delete --filename helloworld-scala.yaml
-```
-
-```
-kubetl delete --filename helloworld-scala.yaml
+kubectl delete --filename service.yaml
 ```
