@@ -33,7 +33,7 @@ apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   annotations:
-  name: s3
+  name: <service_name>
   namespace: default
 spec:
   template:
