@@ -139,7 +139,7 @@ spec:
 * **Type**: extension
 * **ConfigMap key:** `kubernetes.podspec-tolerations`
 
-This flag controls whether [node selector](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) can be specified.
+This flag controls whether [tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) can be specified.
 
 ```yaml
 apiVersion: serving.knative.dev/v1
