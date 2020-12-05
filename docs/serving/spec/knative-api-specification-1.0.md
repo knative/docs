@@ -641,7 +641,7 @@ Configuration or Route, as follows:
 - Additional `labels` and `annotations` on the Configuration and Route not
   specified above MUST be removed.
 - See the documentation of `spec` in the
-  [detailed resource fields section](#detailed-resources--v1beta1) for the
+  [detailed resource fields section](#detailed-resources--v1) for the
   mapping of specific `spec` fields to the corresponding fields in Configuration
   and Route.
 
@@ -729,7 +729,7 @@ to Knative request routing:
   weight distributions). Developers SHOULD NOT assume that subsequent requests
   from the same client will reach the same application instance.
 
-# Detailed Resources – v1beta1
+# Detailed Resources – v1
 
 The following schema defines a set of REQUIRED or RECOMMENDED resource fields on
 the Knative resource types. Whether a field is REQUIRED or RECOMMENDED is
@@ -1260,7 +1260,7 @@ constitutes a request.
   </tr>
 </table>
 
-# Detailed Resource Types - v1beta1
+# Detailed Resource Types - v1
 
 Although `container,` `volumes,` and types that they reference are based upon
 core Kubernetes objects, there are additional limitations applied to ensure that
@@ -2744,7 +2744,7 @@ Max: 1
   </tr>
 </table>
 
-## [Addressable](https://github.com/knative/pkg/blob/master/apis/duck/v1beta1/addressable_types.go) (Interface)
+## [Addressable](https://github.com/knative/pkg/blob/master/apis/duck/v1/addressable_types.go) (Interface)
 
 <table>
   <tr>

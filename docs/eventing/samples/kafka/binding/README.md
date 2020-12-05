@@ -154,7 +154,6 @@ In this case, we will bind any `Job` with the labels `kafka.topic: "logs"`.
      labels:
        kafka.topic: "logs"
      name: kafka-publisher-job
-     namespace: test-alpha
    spec:
      backoffLimit: 1
      completions: 1
@@ -177,6 +176,12 @@ In this case, we will bind any `Job` with the labels `kafka.topic: "logs"`.
                - name: KAFKA_VALUE
                  value: '{"msg":"This is a test!"}'
              name: kafka-publisher
+   ```
+1. Check that the Job has run successfully.
+   ```
+   $ kubectl get jobs
+   NAME                  COMPLETIONS   DURATION   AGE
+   kafka-publisher-job   1/1          7s         7s
    ```
 
 ### Verify

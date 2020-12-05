@@ -21,11 +21,11 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-cloudevents-sdk = "0.2.0"
-cloudevents-sdk-actix-web = "0.2.0"
-cloudevents-sdk-reqwest = "0.2.0"
+cloudevents-sdk = "0.3.0"
+cloudevents-sdk-actix-web = "0.3.0"
+cloudevents-sdk-reqwest = "0.3.0"
 reqwest = { version = "0.10.4", default-features = false, features = ["rustls-tls"] }
-actix-web = "2"
+actix-web = "^3"
 actix-rt = "1"
 serde_json = "^1.0"
 url = "^2.1"

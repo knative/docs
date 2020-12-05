@@ -37,8 +37,7 @@ respective repositories in GitHub.
 
 Before upgrading, view the status of the pods for the namespaces you plan on
 upgrading. This allows you to compare the before and after state of your
-namespace. For example, if you are upgrading Knative Serving, Eventing, and the
-monitoring plug-in, enter the following commands to see the current state of
+namespace. For example, if you are upgrading Knative Serving and Eventing, enter the following commands to see the current state of
 each namespace:
 
 ```bash
@@ -49,16 +48,10 @@ kubectl get pods --namespace knative-serving
 kubectl get pods --namespace knative-eventing
 ```
 
-```bash
-kubectl get pods --namespace knative-monitoring
-```
-
 ### Upgrading plug-ins
 
 If you have a plug-in installed, make sure to upgrade it at the same time as
-you upgrade your Knative components. For example, if you have the
-monitoring plug-in installed, upgrade it alongside Knative Serving and Eventing.
-
+you upgrade your Knative components.
 
 ### Run pre-install tools before upgrade
 
@@ -90,13 +83,12 @@ kubectl create --filename {{< artifact repo="serving" file="serving-post-install
 To upgrade, apply the `.yaml` files for the subsequent minor versions of all
 your installed Knative components and features, remembering to only
 upgrade by one minor version at a time. For a cluster running v0.15.2 of the
-Knative Serving and Eventing components and the monitoring plug-in, the
+Knative Serving and Eventing components, the
 following command upgrades the installation to v0.16.0:
 
 ```bash
 kubectl apply --filename https://github.com/knative/serving/releases/download/v0.16.0/serving-core.yaml \
 --filename https://github.com/knative/eventing/releases/download/v0.16.0/eventing.yaml \
---filename https://github.com/knative/serving/releases/download/v0.16.0/monitoring.yaml
 ```
 
 ### Run post-install tools after the upgrade
@@ -111,11 +103,9 @@ kubectl apply --filename {{< artifact repo="eventing" file="eventing-post-instal
 
 ## Verifying the upgrade
 
-To confirm that your components and plugins have successfully upgraded, view the
-status of their pods in the relevant namespaces. All pods will restart during
-the upgrade and their age will reset. If you upgraded Knative Serving, Eventing,
-and the monitoring plug-in, enter the following commands to get information
-about the pods for each namespace:
+To confirm that your components and plugins have successfully upgraded, view the status of their pods in the relevant namespaces.
+All pods will restart during the upgrade and their age will reset.
+If you upgraded Knative Serving and Eventing, enter the following commands to get information about the pods for each namespace:
 
 ```bash
 kubectl get pods --namespace knative-serving
@@ -123,10 +113,6 @@ kubectl get pods --namespace knative-serving
 
 ```bash
 kubectl get pods --namespace knative-eventing
-```
-
-```bash
-kubectl get pods --namespace knative-monitoring
 ```
 
 These commands return something similar to:
@@ -150,27 +136,7 @@ imc-dispatcher-f59b7c57-q9xcl          1/1     Running   0          80s
 sources-controller-8596684d7b-jxkmd    1/1     Running   0          83s
 ```
 
-```bash
-NAME                                READY   STATUS        RESTARTS   AGE
-NAME                                  READY   STATUS    RESTARTS   AGE
-elasticsearch-logging-0               1/1     Running   0          117s
-elasticsearch-logging-1               1/1     Running   0          83s
-fluentd-ds-dqzr7                      1/1     Running   0          116s
-fluentd-ds-dspjc                      1/1     Running   0          116s
-fluentd-ds-x9xg7                      1/1     Running   0          116s
-grafana-59568f8f48-bz2ll              1/1     Running   0          111s
-kibana-logging-b5d75f556-pwzkg        1/1     Running   0          116s
-kube-state-metrics-5cb5c6986b-qp6pw   1/1     Running   0          116s
-node-exporter-bgtsb                   2/2     Running   0          112s
-node-exporter-cqrqv                   2/2     Running   0          112s
-node-exporter-xwv7f                   2/2     Running   0          112s
-prometheus-system-0                   1/1     Running   0          110s
-prometheus-system-1                   1/1     Running   0          110s
-```
+If the age of all your pods has been reset and all pods are up and running, the upgrade was completed successfully.
+You might notice a status of `Terminating` for the old pods as they are cleaned up.
 
-If the age of all your pods has been reset and all pods are up and running, the
-upgrade was completed successfully. You might notice a status of "Terminating"
-for the old pods as they are cleaned up.
-
-If necessary, repeat the upgrade process until you reach your desired minor
-version number.
+If necessary, repeat the upgrade process until you reach your desired minor version number.

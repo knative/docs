@@ -54,7 +54,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-nodejs
      console.log('Hello world received a request.');
 
      const target = process.env.TARGET || 'World';
-     res.send(`Hello ${target}!`);
+     res.send(`Hello ${target}!\n`);
    });
 
    const port = process.env.PORT || 8080;

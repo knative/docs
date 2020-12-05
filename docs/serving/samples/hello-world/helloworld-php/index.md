@@ -41,6 +41,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-php
    <?php
    $target = getenv('TARGET', true) ?: 'World';
    echo sprintf("Hello %s!", $target);
+   ?>
    ```
 
 1. Create a file named `Dockerfile` and copy the code block below into it. See
@@ -68,9 +69,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-php
    build do not affect the container that you build for deployment.
 
    ```ignore
-   Dockerfile
    README.md
-   vendor
    ```
 
 1. Create a new file, `service.yaml` and copy the following service definition
@@ -156,7 +155,7 @@ folder) you're ready to build and deploy the sample app.
 1. Now that your service is created, Knative will perform the following steps:
 
    - Create a new immutable revision for this version of the app.
-   - Network programming to create a route, ingress, service, and load balance
+   - Network programming to create a route, ingress, service, and a load balancer
      for your app.
    - Automatically scale your pods up and down (including to zero active pods).
 

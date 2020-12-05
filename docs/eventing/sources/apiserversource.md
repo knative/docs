@@ -242,7 +242,7 @@ kubectl delete namespace apiserversource-example
 
 ## Reference Documentation
 
-See the [APIServerSource specification](../../reference/eventing/#sources.knative.dev/v1beta1.APIServerSource).
+See the [APIServerSource specification](../../reference/api/eventing/#sources.knative.dev/v1.APIServerSource).
 
 ## Contact
 

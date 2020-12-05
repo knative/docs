@@ -79,13 +79,14 @@ You can now create the `PingSource` sending an event containing
 
 ```shell
 kubectl create -n pingsource-example -f - <<EOF
-apiVersion: sources.knative.dev/v1beta1
+apiVersion: sources.knative.dev/v1beta2
 kind: PingSource
 metadata:
   name: test-ping-source
 spec:
   schedule: "*/1 * * * *"
-  jsonData: '{"message": "Hello world!"}'
+  contentType: "application/json"
+  data: '{"message": "Hello world!"}'
   sink:
     ref:
       apiVersion: v1
@@ -108,6 +109,30 @@ kn source ping create test-ping-source \
 
 {{< /tab >}}
 {{< /tabs >}}
+
+## (Optional) Create a PingSource with binary data
+
+Sometimes you may want to send binary data, which cannot be directly serialized in yaml, to downstream. This can be achieved by using `dataBase64` as the payload. As the name suggests, `dataBase64` should carry data that is base64 encoded.
+
+Please note that `data` and `dataBase64` cannot co-exist.
+
+```shell
+cat <<EOF | kubectl create -f -
+apiVersion: sources.knative.dev/v1beta2
+kind: PingSource
+metadata:
+  name: test-ping-source-binary
+spec:
+  schedule: "*/2 * * * *"
+  contentType: "text/plain"
+  dataBase64: "ZGF0YQ=="
+  sink:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: event-display
+EOF
+```
 
 ### Verify
 
@@ -136,6 +161,22 @@ Data,
   }
 ```
 
+If you created a PingSource with binary data, you should also see the following:
+
+```shell
+☁️  cloudevents.Event
+Validation: valid
+Context Attributes,
+  specversion: 1.0
+  type: dev.knative.sources.ping
+  source: /apis/v1/namespaces/default/pingsources/test-ping-source-binary
+  id: a195be33-ff65-49af-9045-0e0711d05e94
+  time: 2020-11-17T19:48:00.48334181Z
+  datacontenttype: text/plain
+Data,
+  ZGF0YQ==
+```
+
 ### Cleanup
 
 Delete the `pingsource-example` namespace and all of its resources from your
@@ -147,7 +188,7 @@ kubectl delete namespace pingsource-example
 
 ## Reference Documentation
 
-See the [PingSource specification](../../reference/eventing/#sources.knative.dev/v1beta1.PingSource).
+See the [PingSource specification](../../reference/api/eventing/#sources.knative.dev/v1beta2.PingSource).
 
 ## Contact
 

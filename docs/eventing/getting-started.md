@@ -320,7 +320,7 @@ EOF
          -d '{"msg":"Hello Knative! Goodbye Knative!"}'
        ```
        When the broker receives your event, `hello-display` and `goodbye-display`
-       will activate and send the event to the event consumer of the same name.
+       will activate and send the event to the event consumers of the same name.
        If the event has been received, you will receive a `202 Accepted` response
        similar to the one below:
        ```

@@ -27,9 +27,9 @@ import (
 	"math/rand"
 	"time"
 
-	jwt "github.com/dgrijalva/jwt-go"
 	MQTT "github.com/eclipse/paho.mqtt.golang"
-	uuid "github.com/satori/go.uuid"
+	jwt "github.com/form3tech-oss/jwt-go"
+	uuid "github.com/google/uuid"
 )
 
 const (
@@ -87,7 +87,7 @@ func main() {
 
 	token := jwt.New(jwt.SigningMethodRS256)
 	token.Claims = jwt.StandardClaims{
-		Audience:  *projectID,
+		Audience:  []string{*projectID},
 		IssuedAt:  time.Now().Unix(),
 		ExpiresAt: time.Now().Add(24 * time.Hour).Unix(),
 	}
@@ -158,7 +158,7 @@ func makeEvent() string {
 		Metric   float32 `json:"metric"`
 	}{
 		SourceID: *eventSrc,
-		EventID:  fmt.Sprintf("%s-%s", idPrefix, uuid.NewV4().String()),
+		EventID:  fmt.Sprintf("%s-%s", idPrefix, uuid.New().String()),
 		EventTs:  time.Now().UTC().Unix(),
 		Metric:   r1.Float32(),
 	}

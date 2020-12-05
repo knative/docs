@@ -139,7 +139,7 @@ spec:
 * **Type**: extension
 * **ConfigMap key:** `kubernetes.podspec-tolerations`
 
-This flag controls whether [node selector](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) can be specified.
+This flag controls whether [tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) can be specified.
 
 ```yaml
 apiVersion: serving.knative.dev/v1
@@ -266,4 +266,4 @@ they are no longer active.
 * **Type**: extension
 * **ConfigMap key:** `tag-header-based-routing`
 
-This flags controls whether [tag header based routing](https://knative.dev/development/serving/samples/tag-header-based-routing/) is enabled.
+This flags controls whether [tag header based routing](./samples/tag-header-based-routing/README.md) is enabled.
