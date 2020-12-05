@@ -163,7 +163,7 @@ Kubernetes secret and then configure the Knative Contour plugin
    private key, `key.pem`, by entering the following command:
 
    ```shell
-   kubectl create --namespace contour-external tls default-cert \
+   kubectl create --namespace contour-external secret tls default-cert \
      --key key.pem \
      --cert cert.pem
    ```

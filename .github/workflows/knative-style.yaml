@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # This file is automagically synced here from github.com/knative-sandbox/.github
-# repo by knobots: https://github.com/mattmoor/knobots and will be overwritten.
+# repo by knobots: https://github.com/knative-sandbox/knobots and will be overwritten.
 
 name: Code Style
 
@@ -57,8 +57,14 @@ jobs:
 
       - name: ${{ matrix.tool }} ${{ matrix.options }}
         shell: bash
-        run: |
-          ${{ matrix.tool }} ${{ matrix.options }} -w $(find . -path './vendor' -prune -o -path './third_party' -prune -o -name '*.pb.go' -prune -o -type f -name '*.go' -print)
+        run: >
+          ${{ matrix.tool }} ${{ matrix.options }} -w
+          $(find .
+          -path './vendor' -prune
+          -o -path './third_party' -prune
+          -o -name '*.pb.go' -prune
+          -o -name 'wire_gen.go' -prune
+          -o -type f -name '*.go' -print)
 
       - name: Verify ${{ matrix.tool }}
         shell: bash
@@ -93,6 +99,8 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install Tools
+        env:
+          WOKE_VERSION: v0.1.15
         run: |
           TEMP_PATH="$(mktemp -d)"
           cd $TEMP_PATH
@@ -109,7 +117,7 @@ jobs:
           curl -sfL https://raw.githubusercontent.com/get-woke/woke/main/install.sh | sh -s -- -b "${TEMP_PATH}" "${WOKE_VERSION}" 2>&1
           echo '::endgroup::'
 
-          echo "::add-path::${TEMP_PATH}"
+          echo "${TEMP_PATH}" >> $GITHUB_PATH
 
       - id: golangci_configuration
         uses: andstor/file-existence-action@v1
@@ -119,7 +127,7 @@ jobs:
         if: steps.golangci_configuration.outputs.files_exists == 'true'
         uses: golangci/golangci-lint-action@v2
         with:
-          version: v1.30
+          version: v1.32
 
       - name: misspell
         shell: bash
@@ -179,7 +187,12 @@ jobs:
           echo '::group:: Flagging missing EOF newlines with reviewdog 🐶 ...'
           # Don't fail because of misspell
           set +o pipefail
-          for x in $(find . -type f -not -path './vendor/*' -not -path './third_party/*' -not -path './.git/*'); do
+          # Lint exclude rule:
+          #  - nothing in vendor/
+          #  - nothing in third_party
+          #  - nothing in .git/
+          #  - no *.ai (Adobe Illustrator) files.
+          for x in $(find . -type f -not -name '*.ai' -not -path './vendor/*' -not -path './third_party/*' -not -path './.git/*'); do
             # Based on https://stackoverflow.com/questions/34943632/linux-check-if-there-is-an-empty-line-at-the-end-of-a-file
             if [[ -f $x && ! ( -s "$x" && -z "$(tail -c 1 $x)" ) ]]; then
               # We add 1 to `wc -l` here because of this limitation (from the man page):
@@ -219,8 +232,22 @@ jobs:
               file=$(echo $ent | cut -d':' -f 1);
               line=$(echo $ent | cut -d':' -f 2);
               ch=$(echo $ent | cut -d':' -f3-);
-              err=$(echo $ch | sed -E 's/([^.]+\.)(Fatal|Error|Warn|Info|Debug|Log|Sprint|Print|Fprint)f([^\%]+)(%[^wq]",)([^,]+)/\1\2\3",\5/');
-              echo "$file:$line: Please consider avoiding tail format like this:%0A$err"
+              err="Unknown printer tool, please file an issue in knative-sandbox/.github and assign to @vagababov: $ch"
+              if echo $ch | grep --quiet -E "^t.(Errorf|Fatalf|Logf)" ; then
+                err=$(echo $ch | sed  -E 's/(^t\.)(Fatal|Error|Log)f([^\%]+)( %[^Tqx]",)([^,]+)/\1\2\3",\5/')
+                # Not a test. Here we deal with various loggers and fmt helpers.
+              elif echo $ch | grep --quiet "log" ; then
+                # Capture (x)?log(er)?.
+                err=$(echo $ch | sed -E 's/(.*log.*\.)(Print|Fatal|Error|Info|Warn)f([^\%]+)(%[^Tq]",)([^,]+)/\1\2\3",\5/')
+              elif echo $ch | grep --quiet -E "fmt\.Sprintf" ; then
+                # Always space after sprintf
+                err=$(echo $ch | sed -E 's/(fmt\.)(Sprint)f([^%]+) (%s",)([^,]+)/\1\2\3 ",\5/')
+              elif echo $ch | grep --quiet -E "fmt\." ; then  # all other fmt. printers.
+                err=$(echo $ch | sed -E 's/(fmt\.)(Print|Fprint)f([^%]+) (%[^sTxq]",)([^,]+)/\1\2\3",\5/')
+              fi
+              # Trim spaces.
+              ch=$(echo $ch | xargs)
+              echo "$file:$line: Please consider avoiding tail format like this:%0A- $ch%0A+ $err"
           done |
           reviewdog -efm="%f:%l: %m" \
                 -name="Redundant Format" \
@@ -237,7 +264,6 @@ jobs:
         shell: bash
         env:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ github.token }}
-          WOKE_VERSION: v0.1.11
         run: |
           set -e
           cd "${GITHUB_WORKSPACE}" || exit 1

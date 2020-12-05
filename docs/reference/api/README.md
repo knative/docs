@@ -9,7 +9,6 @@ The API source files are located at:
 
 - [Serving API](./serving.md)
 - [Eventing API](./eventing/eventing.md)
-- [Eventing-contrib resources API](./eventing/eventing-contrib.md)
 
 ## Updating API Reference docs (for Knative maintainers)
 
@@ -57,7 +56,6 @@ To generate a version of the API:
 
    - [Serving](https://github.com/knative/serving/releases/)
    - [Eventing](https://github.com/knative/eventing/releases/)
-   - [Eventing-contrib resources](https://github.com/knative/eventing-contrib/releases/)
 
 1. To run the `gen-api-reference-docs.sh` command from the `hack` directory, you
    specify the commits or tags for each of the corresponding Knative component
@@ -68,7 +66,6 @@ To generate a version of the API:
 
    KNATIVE_SERVING_COMMIT=[commit_or_tag] \
    KNATIVE_EVENTING_COMMIT=[commit_or_tag] \
-   KNATIVE_EVENTING_CONTRIB_COMMIT=[commit_or_tag] \
    ./gen-api-reference-docs.sh
    ```
 
@@ -81,6 +78,25 @@ To generate a version of the API:
    The `gen-api-reference-docs.sh` tool generates the API in a `tmp` folder.
    After a successful build, the tool automatically opens that folder in the
    `tmp` directory.
+
+   If the script fails, there are a couple possible causes.
+
+   * If you get the
+     `F1116 15:21:23.549503   63473 main.go:129] no API packages found in ./pkg/apis`
+     error, check if a new version of the script is available:
+      https://github.com/ahmetb/gen-crd-api-reference-docs/tags
+
+      The script is kept up-to-date with changes that go into the Kubernetes API.
+      As Knative adds support for those APIs, you might need to make sure the
+      corresponding
+      [script `gen-crd-api-reference-docs` version](https://github.com/knative/docs/blob/master/hack/gen-api-reference-docs.sh#L26)
+      is used.
+
+   * If you get the
+     `F0807 13:58:20.621526 168834 main.go:444] type invalid type has kind=Unsupported which is unhandled`
+     error, the import target might have moved. There might be other causes for that error but view
+     [#2054](https://github.com/knative/docs/pull/2054) (and the linked Issues) for details about how we handled that error
+     in the past.
 
 1. Copy the generated API files into the `docs/reference` directory of your
    knative/docs clone.
@@ -107,6 +123,5 @@ v0.18.0 API source files:
 ```
 KNATIVE_SERVING_COMMIT=v0.18.0 \
 KNATIVE_EVENTING_COMMIT=v0.18.0 \
-KNATIVE_EVENTING_CONTRIB_COMMIT=v0.18.0 \
 ./gen-api-reference-docs.sh
 ```

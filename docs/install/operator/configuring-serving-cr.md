@@ -9,7 +9,7 @@ aliases:
 The Knative Serving operator can be configured with these options:
 
 - [Version Configuration](#version-configuration)
-- [Serving Configuration by ConfigMap](#serving-configuration-by-configMap)
+- [Serving Configuration by ConfigMap](#serving-configuration-by-configmap)
 - [Private repository and private secret](#private-repository-and-private-secrets)
 - [SSL certificate for controller](#ssl-certificate-for-controller)
 - [Knative ingress gateway](#configuration-of-knative-ingress-gateway)
@@ -49,7 +49,7 @@ Because the operator manages the Knative Serving installation, it will overwrite
 The `KnativeServing` custom resource allows you to set values for these ConfigMaps via the operator. Knative Serving has multiple ConfigMaps named with the prefix
 `config-`. The `spec.config` in `KnativeServing` has one entry `<name>` for each ConfigMap named `config-<name>`, with a value which will be used for the ConfigMap's `data`.
 
-In the [setup a custom domain example](https://knative.dev/development/serving/using-a-custom-domain/), you can see the content of the ConfigMap
+In the [setup a custom domain example](./../../serving/using-a-custom-domain.md), you can see the content of the ConfigMap
 `config-domain` is:
 
 ```
@@ -119,7 +119,7 @@ location. This section is only needed when the registry images do not match the 
 
 - `imagePullSecrets`: a list of Secret names used when pulling Knative container images. The Secrets
 must be created in the same namespace as the Knative Serving Deployments. See [deploying images
-from a private container registry](https://knative.dev/development/serving/deploying/private-registry/) for configuration details.
+from a private container registry](./../../serving/deploying/private-registry.md) for configuration details.
 
 
 ### Download images in a predefined format without secrets:
@@ -241,7 +241,7 @@ spec:
 
 ## SSL certificate for controller
 
-To [enable tag to digest resolution](https://knative.dev/development/serving/tag-resolution/), the Knative Serving controller needs to access the container registry.
+To [enable tag to digest resolution](./../../serving/tag-resolution.md), the Knative Serving controller needs to access the container registry.
 To allow the controller to trust a self-signed registry cert, you can use the Operator to specify the certificate using a ConfigMap or Secret.
 
 Specify the following fields in `spec.controller-custom-certs` to select a custom registry certificate:
@@ -267,7 +267,7 @@ spec:
 
 ## Configuration of Knative ingress gateway
 
-To set up custom ingress gateway, follow [**Step 1: Create Gateway Service and Deployment Instance**](https://knative.dev/development/serving/setting-up-custom-ingress-gateway/).
+To set up custom ingress gateway, follow [**Step 1: Create Gateway Service and Deployment Instance**](./../../serving/setting-up-custom-ingress-gateway.md).
 
 ### Step 2: Update the Knative gateway
 
@@ -312,7 +312,7 @@ Update `spec.cluster-local-gateway` to select the labels of the new cluster-loca
 
 ### Default local gateway name:
 
-Go through the guide [here](https://knative.dev/development/install/installing-istio/#installing-istio-without-sidecar-injection) to use local cluster gateway,
+Go through the guide [here](./../installing-istio.md/#installing-istio-without-sidecar-injection) to use local cluster gateway,
 if you use the default gateway called `cluster-local-gateway`.
 
 ### Non-default local gateway name:
@@ -357,7 +357,7 @@ spec:
 
 ## System Resource Settings
 
-The operator custom resource allows you allows you to configure system resources for the Knative system containers.
+The operator custom resource allows you to configure system resources for the Knative system containers.
 Requests and limits can be configured for the following containers: `activator`, `autoscaler`, `controller`, `webhook`, `autoscaler-hpa`,
 `networking-istio` and `queue-proxy`.
 

@@ -35,11 +35,7 @@ a brief description of each:
   abstractions to enable binding event sources (e.g. Github Webhooks, Kafka) and
   consumers (e.g. Kubernetes or Knative Services).
 
-Knative also has an
-[**Observability plugin**](#installing-the-observability-plugin)
-{{< feature-state version="v0.14" state="deprecated" short=true >}} which
-provides standard tooling that can be used to get visibility into the health of
-the software running on Knative.
+<!-- TODO: Mention CLI here too and point to CLI docs?-->
 
 ## Before you begin
 
@@ -497,6 +493,21 @@ kubectl apply --filename {{< artifact repo="serving" file="serving-nscert.yaml" 
 > Note this will not work with HTTP01 either via cert-manager or the net-http01
 > options.
 
+{{< /tab >}}
+
+{{% tab name="DomainMapping CRD" %}}
+
+{{% feature-state version="v0.19" state="alpha" %}}
+
+The `DomainMapping` CRD allows a user to map a Domain Name that they own to a
+specific Knative Service.
+
+```bash
+kubectl apply --filename {{< artifact repo="serving" file="serving-domainmapping-crds.yaml" >}}
+kubectl wait --for=condition=Established --all crd
+kubectl apply --filename {{< artifact repo="serving" file="serving-domainmapping.yaml" >}}
+```
+
 {{< /tab >}} {{< /tabs >}}
 
 ### Getting started with Serving
@@ -546,7 +557,7 @@ The following commands install the Knative Eventing component.
 1. Then install the Apache Kafka Channel:
 
    ```bash
-   curl -L "{{< artifact repo="eventing-contrib" file="kafka-channel.yaml" >}}" \
+   curl -L "{{< artifact org="knative-sandbox" repo="eventing-kafka" file="channel-consolidated.yaml" >}}" \
     | sed 's/REPLACE_WITH_CLUSTER_URL/my-cluster-kafka-bootstrap.kafka:9092/' \
     | kubectl apply --filename -
    ```
@@ -587,13 +598,12 @@ kubectl apply --filename {{< artifact repo="eventing" file="in-memory-channel.ya
 {{% tab name="NATS Channel" %}}
 
 1. First, [Install NATS Streaming for
-   Kubernetes](https://github.com/knative/eventing-contrib/blob/{{<
-   version >}}/natss/config/broker/README.md)
+   Kubernetes](https://github.com/knative-sandbox/eventing-natss/tree/master/config)
 
 1. Then install the NATS Streaming Channel:
 
    ```bash
-   kubectl apply --filename {{< artifact repo="eventing-contrib" file="natss-channel.yaml" >}}
+   kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-natss" file="300-natss-channel.yaml" >}}
    ```
 
 {{< /tab >}}
@@ -717,7 +727,29 @@ At this point, you have a basic installation of Knative Eventing!
 
    <!-- This indentation is important for things to render properly. -->
 
-{{< tabs name="eventing_extensions" >}} {{% tab name="Sugar Controller" %}}
+{{< tabs name="eventing_extensions" >}}
+
+{{% tab name="Apache Kafka Sink" %}}
+
+{{< feature-state version="v0.18" state="alpha" >}}
+
+1. Install the Kafka controller:
+
+    ```bash
+    kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-kafka-broker" file="eventing-kafka-controller.yaml" >}}
+    ```
+
+1. Install the Kafka Sink data plane:
+
+    ```bash
+    kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-kafka-broker" file="eventing-kafka-sink.yaml" >}}
+    ```
+
+For more information, see the [Kafka Sink](./../eventing/sink/kafka-sink.md) documentation.
+
+{{< /tab >}}
+
+{{% tab name="Sugar Controller" %}}
 
 <!-- Unclear when this feature came in -->
 
@@ -754,7 +786,7 @@ kubectl label namespace default eventing.knative.dev/injection=enabled
 The following command installs the single-tenant Github source:
 
 ```bash
-kubectl apply --filename {{< artifact repo="eventing-contrib" file="github.yaml" >}}
+kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-github" file="github.yaml" >}}
 ```
 
 The single-tenant GitHub source creates one Knative service per GitHub source.
@@ -762,7 +794,7 @@ The single-tenant GitHub source creates one Knative service per GitHub source.
 The following command installs the multi-tenant GitHub source:
 
 ```bash
-kubectl apply --filename {{< artifact repo="eventing-contrib" file="mt-github.yaml" >}}
+kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-github" file="mt-github.yaml" >}}
 ```
 
 The multi-tenant GitHub source creates only one Knative service handling all
@@ -780,7 +812,7 @@ To learn more about the Github source, try
 The following command installs the Apache Camel-K Source:
 
 ```bash
-kubectl apply --filename {{< artifact repo="eventing-contrib" file="camel.yaml" >}}
+kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-camel" file="camel.yaml" >}}
 ```
 
 To learn more about the Apache Camel-K source, try
@@ -795,7 +827,7 @@ To learn more about the Apache Camel-K source, try
 The following command installs the Apache Kafka Source:
 
 ```bash
-kubectl apply --filename {{< artifact repo="eventing-contrib" file="kafka-source.yaml" >}}
+kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-kafka" file="source.yaml" >}}
 ```
 
 To learn more about the Apache Kafka source, try
@@ -835,12 +867,10 @@ To learn more about the Cloud Audit Logs source, try
 The following command installs the Apache CouchDB Source:
 
 ```bash
-kubectl apply --filename {{< artifact repo="eventing-contrib" file="couchdb.yaml" >}}
+kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-couchdb" file="couchdb.yaml" >}}
 ```
 
-To learn more about the Apache CouchDB source, read [our
-documentation]((https://github.com/knative/eventing-contrib/blob/{{<
-version >}}/couchdb/README.md)
+To learn more about the Apache CouchDB source, read the [documentation](https://github.com/knative-sandbox/eventing-couchdb/blob/master/source/README.md).
 
 {{< /tab >}}
 
@@ -871,79 +901,3 @@ To learn more about the VMware sources and bindings, try
 You can find a number of samples for Knative Eventing
 [here](../eventing/samples/README.md). A quick-start guide is available
 [here](../eventing/getting-started.md).
-
-## Installing the Observability plugin
-
-{{< feature-state version="v0.14" state="deprecated" >}}
-
-Install the following observability features to enable logging, metrics, and
-request tracing in your Serving and Eventing components.
-
-All observibility plugins require that you first install the core:
-
-```bash
-kubectl apply --filename {{< artifact repo="serving" file="monitoring-core.yaml" >}}
-```
-
-After the core is installed, you can choose to install one or all of the
-following observability plugins:
-
-- Install [Prometheus](https://prometheus.io/) and
-  [Grafana](https://grafana.com/) for metrics:
-
-  ```bash
-  kubectl apply --filename {{< artifact repo="serving" file="monitoring-metrics-prometheus.yaml" >}}
-  ```
-
-- Install the [ELK stack](https://www.elastic.co/what-is/elk-stack)
-  (Elasticsearch, Logstash and Kibana) for logs:
-
-  ```bash
-  kubectl apply --filename {{< artifact repo="serving" file="monitoring-logs-elasticsearch.yaml" >}}
-  ```
-
-- Install [Jaeger](https://jaegertracing.io/) for distributed tracing
-
-     <!-- This indentation is important for things to render properly. -->
-
-  {{< tabs name="jaeger" default="In-Memory (standalone)" >}}
-  {{% tab name="In-Memory (standalone)" %}} To install the in-memory
-  (standalone) version of Jaeger, run the following command:
-
-```bash
-kubectl apply --filename {{< artifact repo="serving" file="monitoring-tracing-jaeger-in-mem.yaml" >}}
-```
-
-{{< /tab >}}
-
-{{% tab name="ELK stack" %}} To install the ELK version of Jaeger (needs the ELK
-install above), run the following command:
-
-```bash
-kubectl apply --filename {{< artifact repo="serving" file="monitoring-tracing-jaeger.yaml" >}}
-```
-
-{{< /tab >}} {{< /tabs >}}
-
-- Install [Zipkin](https://zipkin.io/) for distributed tracing
-
-     <!-- This indentation is important for things to render properly. -->
-
-  {{< tabs name="zipkin" default="In-Memory (standalone)" >}}
-  {{% tab name="In-Memory (standalone)" %}} To install the in-memory
-  (standalone) version of Zipkin, run the following command:
-
-```bash
-kubectl apply --filename {{< artifact repo="serving" file="monitoring-tracing-zipkin-in-mem.yaml" >}}
-```
-
-{{< /tab >}}
-
-{{% tab name="ELK stack" %}} To install the ELK version of Zipkin (needs the ELK
-install above), run the following command:
-
-```bash
-kubectl apply --filename {{< artifact repo="serving" file="monitoring-tracing-zipkin.yaml" >}}
-```
-
-{{< /tab >}} {{< /tabs >}}

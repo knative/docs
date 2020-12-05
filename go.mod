@@ -5,22 +5,20 @@ go 1.14
 require (
 	cloud.google.com/go/storage v1.10.0
 	github.com/cloudevents/sdk-go/v2 v2.2.0
-	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/eclipse/paho.mqtt.golang v1.1.1
-	github.com/golang/protobuf v1.4.2
+	github.com/form3tech-oss/jwt-go v3.2.2+incompatible
+	github.com/golang/protobuf v1.4.3
 	github.com/google/go-github v17.0.0+incompatible
+	github.com/google/uuid v1.1.2
 	github.com/kelseyhightower/envconfig v1.4.0
-	github.com/openzipkin/zipkin-go v0.2.2
-	github.com/satori/go.uuid v1.2.0
-	go.opencensus.io v0.22.4
 	golang.org/x/net v0.0.0-20200904194848-62affa334b73
-	golang.org/x/oauth2 v0.0.0-20200107190931-bf48bf16ab8d
-	google.golang.org/grpc v1.31.1
+	golang.org/x/oauth2 v0.0.0-20200902213428-5d25da1a8d43
+	google.golang.org/grpc v1.33.1
 	gopkg.in/go-playground/assert.v1 v1.2.1 // indirect
 	gopkg.in/go-playground/webhooks.v3 v3.13.0
 	gopkg.in/yaml.v2 v2.3.0
-	knative.dev/net-istio v0.0.0-20201006023220-688757f22274
-	knative.dev/test-infra v0.0.0-20201002164834-8c07ff018549
+	knative.dev/hack v0.0.0-20201120192952-353db687ec5b
+	knative.dev/net-istio v0.19.1-0.20201121020252-76ca6614fd8c
 )
 
 replace go.opencensus.io => go.opencensus.io v0.20.2

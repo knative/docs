@@ -19,6 +19,7 @@ spec:
     global:
       proxy:
         autoInject: enabled
+        clusterDomain: cluster.local
       useMCP: false
       # The third-party-jwt is not enabled on all k8s.
       # See: https://istio.io/docs/ops/best-practices/security/#configure-third-party-service-account-tokens
@@ -56,24 +57,3 @@ spec:
             requests:
               cpu: 100m
               memory: 256Mi
-      - name: cluster-local-gateway
-        enabled: true
-        label:
-          istio: cluster-local-gateway
-          app: cluster-local-gateway
-        k8s:
-          resources:
-            requests:
-              cpu: 100m
-              memory: 256Mi
-          service:
-            type: ClusterIP
-            ports:
-            - port: 15020
-              name: status-port
-            - port: 80
-              targetPort: 8080
-              name: http2
-            - port: 443
-              targetPort: 8443
-              name: https
