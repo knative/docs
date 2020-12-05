@@ -1,10 +1,3 @@
----
-title: "Knative Secrets - Go"
-linkTitle: "Secrets - Go"
-weight: 1
-type: "docs"
----
-
 A simple web app written in Go that you can use for testing. It demonstrates how
 to use a Kubernetes secret as a Volume with Knative. We will create a new Google
 Service Account and place it into a Kubernetes secret, then we will mount it
@@ -16,7 +9,7 @@ following commands:
 
 ```shell
 git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
-cd knative-docs/serving/samples/secrets-go
+cd knative-docs/docs/serving/samples/secrets-go
 ```
 
 ## Before you begin
@@ -56,7 +49,7 @@ cd knative-docs/serving/samples/secrets-go
     log.Print("Secrets sample started.")
 
     // This sets up the standard GCS storage client, which will pull
-    // credentials from GOOGLE_APPLICATION_DEFAULT if specified.
+    // credentials from GOOGLE_APPLICATION_CREDENTIALS if specified.
     ctx := context.Background()
     client, err := storage.NewClient(ctx)
     if err != nil {
@@ -96,21 +89,14 @@ cd knative-docs/serving/samples/secrets-go
    [Deploying Go servers with Docker](https://blog.golang.org/docker).
 
    ```docker
-   # Use the offical Golang image to create a build artifact.
+   # Use the official Golang image to create a build artifact.
    # This is based on Debian and sets the GOPATH to /go.
    # https://hub.docker.com/_/golang
    FROM golang as builder
 
-   # Install dep
-   RUN go get -u github.com/golang/dep/cmd/dep
-
    # Copy local code to the container image.
    WORKDIR /go/src/github.com/knative/docs/hellosecrets
    COPY . .
-
-   # Fetch dependencies
-   RUN dep init
-   RUN dep ensure
 
    # Build the output command inside the container.
    RUN CGO_ENABLED=0 GOOS=linux go build -v -o hellosecrets
@@ -184,7 +170,7 @@ cd knative-docs/serving/samples/secrets-go
                #  - `robot.json` is determined by the "key" that is used to hold the
                #   secret content in the Kubernetes secret.  This can be changed
                #   if both places are changed.
-               - name: GOOGLE_APPLICATION_DEFAULT
+               - name: GOOGLE_APPLICATION_CREDENTIALS
                  value: /var/secret/robot.json
 
              # This section specified where in the container we want the
@@ -248,7 +234,7 @@ folder) you're ready to build and deploy the sample app.
    ```
 
 1. Now you can make a request to your app and see the result. Replace
-   the URL below the with URL returned in the previous command.
+   the URL below with the URL returned in the previous command.
 
    ```shell
    curl http://secrets-go.default.1.2.3.4.xip.io

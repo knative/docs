@@ -1,10 +1,3 @@
----
-title: "Binding running services to an IoT core"
-linkTitle: "IoT core"
-weight: 40
-type: "docs"
----
-
 This sample shows how to bind a running service to an
 [IoT core](https://cloud.google.com/iot-core/) using
 [GCP PubSub](https://cloud.google.com/pubsub/) as the event source. With minor
@@ -97,7 +90,12 @@ export IOTCORE_TOPIC_DEVICE="iot-demo-device-pubsub-topic"
 1. Install the default `Broker`.
 
    ```shell
-   kubectl label namespace default knative-eventing-injection=enabled
+   kubectl create -f - <<EOF
+   apiVersion: eventing.knative.dev/v1
+   kind: Broker
+   metadata:
+    name: default
+   EOF
    ```
 
 #### GCP PubSub Source

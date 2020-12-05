@@ -1,18 +1,12 @@
----
-title: "Sequence terminal"
-linkTitle: "Create additional events"
-weight: 20
-type: "docs"
----
-
 We are going to create the following logical configuration. We create a
-CronJobSource, feeding events to a [`Sequence`](../../../sequence.md). Sequence
-can then do either external work, or out of band create additional events.
+PingSource, feeding events to a [`Sequence`](../../../flows/sequence.md).
+Sequence can then do either external work, or out of band create additional
+events.
 
 ![Logical Configuration](./sequence-terminal.png)
 
 The functions used in these examples live in
-(https://github.com/vaikas/transformer)[https://github.com/vaikas/transformer]
+[https://github.com/knative/eventing-contrib/blob/master/cmd/appender/main.go](https://github.com/knative/eventing-contrib/blob/master/cmd/appender/main.go).
 
 ## Prerequisites
 
@@ -39,10 +33,10 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/vaikas-knative/cmd-736bbd9d5a42b6282732cf4569e3c0ff@sha256:f069e4e58d6b420d66304d3bbde019160eb12ca17bb98fc3b88e0de5ad2cacd1
+        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/appender
           env:
-            - name: STEP
-              value: "0"
+            - name: MESSAGE
+              value: " - Handled by 0"
 
 ---
 apiVersion: serving.knative.dev/v1
@@ -53,10 +47,10 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/vaikas-knative/cmd-736bbd9d5a42b6282732cf4569e3c0ff@sha256:f069e4e58d6b420d66304d3bbde019160eb12ca17bb98fc3b88e0de5ad2cacd1
+        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/appender
           env:
-            - name: STEP
-              value: "1"
+            - name: MESSAGE
+              value: " - Handled by 1"
 ---
 apiVersion: serving.knative.dev/v1
 kind: Service
@@ -66,10 +60,10 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/vaikas-knative/cmd-736bbd9d5a42b6282732cf4569e3c0ff@sha256:f069e4e58d6b420d66304d3bbde019160eb12ca17bb98fc3b88e0de5ad2cacd1
+        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/appender
           env:
-            - name: STEP
-              value: "2"
+            - name: MESSAGE
+              value: " - Handled by 2"
 ---
 
 ```
@@ -85,13 +79,13 @@ If you are using a different type of Channel, you need to change the
 spec.channelTemplate to point to your desired Channel.
 
 ```yaml
-apiVersion: flows.knative.dev/v1alpha1
+apiVersion: flows.knative.dev/v1
 kind: Sequence
 metadata:
   name: sequence
 spec:
   channelTemplate:
-    apiVersion: messaging.knative.dev/v1alpha1
+    apiVersion: messaging.knative.dev/v1
     kind: InMemoryChannel
   steps:
     - ref:
@@ -115,22 +109,23 @@ the resources to be created.
 kubectl -n default create -f ./sequence.yaml
 ```
 
-### Create the CronJobSource targeting the Sequence
+### Create the PingSource targeting the Sequence
 
-This will create a CronJobSource which will send a CloudEvent with {"message":
-"Hello world!"} as the data payload every 2 minutes.
+This will create a PingSource which will send a CloudEvent with
+`{"message": "Hello world!"}` as the data payload every 2 minutes.
 
 ```yaml
-apiVersion: sources.eventing.knative.dev/v1alpha1
-kind: CronJobSource
+apiVersion: sources.knative.dev/v1beta2
+kind: PingSource
 metadata:
-  name: cronjob-source
+  name: ping-source
 spec:
   schedule: "*/2 * * * *"
+  contentType: "application/json"
   data: '{"message": "Hello world!"}'
   sink:
     ref:
-      apiVersion: flows.knative.dev/v1alpha1
+      apiVersion: flows.knative.dev/v1
       kind: Sequence
       name: sequence
 ```
@@ -139,14 +134,14 @@ Here, if you are using different type of Channel, you need to change the
 spec.channelTemplate to point to your desired Channel.
 
 ```shell
-kubectl -n default create -f ./cron-source.yaml
+kubectl -n default create -f ./ping-source.yaml
 ```
 
 ### Inspecting the results
 
 You can now see the final output by inspecting the logs of the event-display
-pods. Note that since we set the `CronJobSource` to emit every 2 minutes, it
-might take some time for the events to show up in the logs.
+pods. Note that since we set the `PingSource` to emit every 2 minutes, it might
+take some time for the events to show up in the logs.
 
 ```shell
 kubectl -n default get pods
@@ -155,104 +150,41 @@ kubectl -n default get pods
 Let's look at the logs for the first `Step` in the `Sequence`:
 
 ```shell
-kubectl -n default logs --tail=50 -l serving.knative.dev/service=first -c user-container
-Got Event Context: Context Attributes,
-  specversion: 0.2
-  type: dev.knative.cronjob.event
-  source: /apis/v1/namespaces/default/cronjobsources/cronjob-source
-  id: 2fdf69ec-0480-463a-92fb-8d1259550f32
-  time: 2019-06-18T14:38:00.000379084Z
-  contenttype: application/json
-Extensions,
-  knativehistory: sequence-kn-sequence-0-kn-channel.default.svc.cluster.local
-2019/06/18 14:38:14 http: superfluous response.WriteHeader call from github.com/vaikas-google/transformer/vendor/github.com/cloudevents/sdk-go/pkg/cloudevents/transport/http.(*Transport).ServeHTTP (transport.go:446)
+kubectl -n default logs -l serving.knative.dev/service=first -c user-container --tail=-1
 
-Got Data: &{Sequence:0 Message:Hello world!}
-Got Transport Context: Transport Context,
-  URI: /
-  Host: first.default.svc.cluster.local
-  Method: POST
-  Header:
-    X-Request-Id: 9b51bcaa-10bc-97a5-a288-dde9b97f6e1e
-    Content-Length: 26
-    K-Proxy-Request: activator
-    X-Forwarded-For: 10.16.3.77, 127.0.0.1, 127.0.0.1
-    X-Forwarded-Proto: http
-    Ce-Knativehistory: sequence-kn-sequence-0-kn-channel.default.svc.cluster.local
-    X-B3-Spanid: 42bcd58bd1ea8191
-    X-B3-Parentspanid: c63efd989dcf5dc5
-    X-B3-Sampled: 0
-    X-B3-Traceid: 4a1da6622ecbbdea0c75ae32e065cfcb
-
-----------------------------
+2020/03/02 21:28:00 listening on 8080, appending " - Handled by 0" to events
+2020/03/02 21:28:01 Received a new event:
+2020/03/02 21:28:01 [2020-03-02T21:28:00.0010247Z] /apis/v1/namespaces/default/pingsources/ping-source dev.knative.sources.ping: &{Sequence:0 Message:Hello world!}
+2020/03/02 21:28:01 Transform the event to:
+2020/03/02 21:28:01 [2020-03-02T21:28:00.0010247Z] /apis/v1/namespaces/default/pingsources/ping-source dev.knative.sources.ping: &{Sequence:0 Message:Hello world! - Handled by 0}
 ```
 
 Then we can look at the output of the second Step in the `Sequence`:
 
 ```shell
-kubectl -n default logs --tail=50 -l serving.knative.dev/service=second -c user-container
-Got Event Context: Context Attributes,
-  cloudEventsVersion: 0.1
-  eventType: samples.http.mod3
-  source: /transformer/0
-  eventID: 5a9ec173-5224-41a2-9c83-50786651bcd5
-  eventTime: 2019-06-18T14:38:14.657008072Z
-  contentType: application/json
+kubectl -n default logs -l serving.knative.dev/service=second -c user-container --tail=-1
 
-Got Data: &{Sequence:0 Message:Hello world! - Handled by 0}
-Got Transport Context: Transport Context,
-  URI: /
-  Host: second.default.svc.cluster.local
-  Method: POST
-  Header:
-    X-Forwarded-For: 10.16.3.77, 127.0.0.1, 127.0.0.1
-    X-Forwarded-Proto: http
-    Content-Length: 48
-    X-B3-Sampled: 0
-    Ce-Knativehistory: sequence-kn-sequence-1-kn-channel.default.svc.cluster.local
-    X-B3-Parentspanid: 4fba491a605b2391
-    K-Proxy-Request: activator
-    X-B3-Spanid: 56e4150c4e1d679b
-    X-B3-Traceid: fb468aa8ec035a66153ce3f4929aa2fe
-    X-Request-Id: d60e7109-3853-9ca1-83e2-c70f8cbfbb93
-
-----------------------------
+2020/03/02 21:28:02 listening on 8080, appending " - Handled by 1" to events
+2020/03/02 21:28:02 Received a new event:
+2020/03/02 21:28:02 [2020-03-02T21:28:00.0010247Z] /apis/v1/namespaces/default/pingsources/ping-source dev.knative.sources.ping: &{Sequence:0 Message:Hello world! - Handled by 0}
+2020/03/02 21:28:02 Transform the event to:
+2020/03/02 21:28:02 [2020-03-02T21:28:00.0010247Z] /apis/v1/namespaces/default/pingsources/ping-source dev.knative.sources.ping: &{Sequence:0 Message:Hello world! - Handled by 0 - Handled by 1}
 ```
 
-And you can see that the initial Cron Source message ("Hello World!") has now
+And you can see that the initial PingSource message `("Hello World!")` has now
 been modified by the first step in the Sequence to include " - Handled by 0".
 Exciting :)
 
 Then we can look at the output of the last Step in the `Sequence`:
 
 ```shell
-kubectl -n default logs --tail=50 -l serving.knative.dev/service=third -c user-container
-Got Event Context: Context Attributes,
-  cloudEventsVersion: 0.1
-  eventType: samples.http.mod3
-  source: /transformer/1
-  eventID: 5747fb77-66a2-4e78-944b-43192aa879fb
-  eventTime: 2019-06-18T14:38:32.688345694Z
-  contentType: application/json
+kubectl -n default logs -l serving.knative.dev/service=third -c user-container --tail=-1
 
-Got Data: &{Sequence:0 Message:Hello world! - Handled by 0 - Handled by 1}
-Got Transport Context: Transport Context,
-  URI: /
-  Host: third.default.svc.cluster.local
-  Method: POST
-  Header:
-    X-B3-Sampled: 0
-    X-B3-Traceid: 64a9c48c219375476ffcdd5eb14ec6e0
-    X-Forwarded-For: 10.16.3.77, 127.0.0.1, 127.0.0.1
-    X-Forwarded-Proto: http
-    Ce-Knativehistory: sequence-kn-sequence-2-kn-channel.default.svc.cluster.local
-    K-Proxy-Request: activator
-    X-Request-Id: 505ff620-2822-9e7d-8855-53d02a2e36e2
-    Content-Length: 63
-    X-B3-Parentspanid: 9e822f378ead293c
-    X-B3-Spanid: a56ee81909c767e6
-
-----------------------------
+2020/03/02 21:28:03 listening on 8080, appending " - Handled by 2" to events
+2020/03/02 21:28:03 Received a new event:
+2020/03/02 21:28:03 [2020-03-02T21:28:00.0010247Z] /apis/v1/namespaces/default/pingsources/ping-source dev.knative.sources.ping: &{Sequence:0 Message:Hello world! - Handled by 0 - Handled by 1}
+2020/03/02 21:28:03 Transform the event to:
+2020/03/02 21:28:03 [2020-03-02T21:28:00.0010247Z] /apis/v1/namespaces/default/pingsources/ping-source dev.knative.sources.ping: &{Sequence:0 Message:Hello world! - Handled by 0 - Handled by 1 - Handled by 2}
 ```
 
 And as expected it's now been handled by both the first and second Step as

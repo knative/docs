@@ -1,10 +1,3 @@
----
-title: "Hello World - R"
-linkTitle: "R"
-weight: 1
-type: "docs"
----
-
 A simple web app that executes an R script. The R script reads an env
 variable `TARGET` and prints `Hello ${TARGET}!`. If the `TARGET` environment
 variable is not specified, the script uses `World`.
@@ -77,7 +70,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-r
    1. Create a new file named `Dockerfile` and copy the code block below into it.
 
       ```docker
-      # Use the offical Golang image to create a build artifact.
+      # Use the official Golang image to create a build artifact.
       # This is based on Debian and sets the GOPATH to /go.
       # https://hub.docker.com/_/golang
       FROM golang:1.12 as builder
@@ -173,7 +166,7 @@ folder) you're ready to build and deploy the sample app.
    ```
 
 1. Now you can make a request to your app and see the result. Replace
-   the URL below the with URL returned in the previous command.
+   the URL below with the URL returned in the previous command.
 
    ```shell
    curl http://helloworld-r.default.1.2.3.4.xip.io

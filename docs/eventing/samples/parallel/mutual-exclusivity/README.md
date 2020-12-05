@@ -2,10 +2,10 @@ In this example, we are going to see how we can create a Parallel with mutually
 exclusive branches.
 
 This example is the same as the
-[multiple branches example](../multiple-branches/README.md) except that we are now
-going to rely on the Knative
-[switch](https://github.com/lionelvillard/knative-functions#switch) function
-to provide a soft mutual exclusivity guarantee.
+[multiple branches example](../multiple-branches/README.md) except that we are
+now going to rely on the Knative
+[switch](https://github.com/lionelvillard/knative-functions#switch) function to
+provide a soft mutual exclusivity guarantee.
 
 NOTE: this example must be deployed in the default namespace.
 
@@ -69,7 +69,7 @@ spec:
 kubectl create -f ./switcher.yaml -f ./transformers.yaml
 ```
 
-### Create the Service displaying the events created by Sequence
+### Create the Service displaying the events created by Parallel
 
 ```yaml
 apiVersion: serving.knative.dev/v1
@@ -80,11 +80,8 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display
+        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
 ```
-
-Change `default` below to create the `Sequence` in the Namespace where you want
-your resources to be created.
 
 ```shell
 kubectl -n default create -f ./event-display.yaml
@@ -92,16 +89,17 @@ kubectl -n default create -f ./event-display.yaml
 
 ### Create the Parallel object
 
-The `parallel.yaml` file contains the specifications for creating the Parallel object.
+The `parallel.yaml` file contains the specifications for creating the Parallel
+object.
 
 ```yaml
-apiVersion: flows.knative.dev/v1alpha1
+apiVersion: flows.knative.dev/v1
 kind: Parallel
 metadata:
   name: me-odd-even-parallel
 spec:
   channelTemplate:
-    apiVersion: messaging.knative.dev/v1alpha1
+    apiVersion: messaging.knative.dev/v1
     kind: InMemoryChannel
   branches:
     - filter:
@@ -129,52 +127,54 @@ spec:
 kubectl create -f ./parallel.yaml
 ```
 
-### Create the CronJobSource targeting the Parallel object
+### Create the PingSource targeting the Parallel object
 
-This will create a CronJobSource which will send a CloudEvent with {"message":
-"Even or odd?"} as the data payload every minute.
+This will create a PingSource which will send a CloudEvent with
+`{"message": "Even or odd?"}` as the data payload every minute.
 
 ```yaml
-apiVersion: sources.eventing.knative.dev/v1alpha1
-kind: CronJobSource
+apiVersion: sources.knative.dev/v1beta2
+kind: PingSource
 metadata:
-  name: me-cronjob-source
+  name: me-ping-source
 spec:
   schedule: "*/1 * * * *"
+  contentType: "application/json"
   data: '{"message": "Even or odd?"}'
   sink:
     ref:
-      apiVersion: flows.knative.dev/v1alpha1
+      apiVersion: flows.knative.dev/v1
       kind: Parallel
       name: me-odd-even-parallel
 ```
 
 ```shell
-kubectl create -f ./cron-source.yaml
+kubectl create -f ./ping-source.yaml
 ```
 
 ### Inspecting the results
 
 You can now see the final output by inspecting the logs of the
-`me-event-display` pods. Note that since we set the `CronJobSource` to emit
-every minute, it might take some time for the events to show up in the logs.
+`me-event-display` pods. Note that since we set the `PingSource` to emit every
+minute, it might take some time for the events to show up in the logs.
 
 Let's look at the `me-event-display` log:
 
 ```shell
-kubectl logs -l serving.knative.dev/service=me-event-display --tail=30 -c user-container
+kubectl logs -l serving.knative.dev/service=me-event-display --tail=50 -c user-container
 
 ☁️  cloudevents.Event
 Validation: valid
 Context Attributes,
-  specversion: 0.3
-  type: dev.knative.cronjob.event
-  source: /apis/v1/namespaces/default/cronjobsources/me-cronjob-source
-  id: 48eea348-8cfd-4aba-9ead-cb024ce16a48
-  time: 2019-07-31T20:56:00.000477587Z
+  specversion: 1.0
+  type: dev.knative.sources.ping
+  source: /apis/v1/namespaces/default/pingsources/me-ping-source
+  id: 0b0db15c-9b36-4388-8eaa-8c23a9dc2707
+  time: 2020-03-03T21:30:00.0007292Z
   datacontenttype: application/json; charset=utf-8
 Extensions,
-  knativehistory: me-odd-even-parallel-kn-parallel-kn-channel.default.svc.cluster.local, me-odd-even-parallel-kn-parallel-0-kn-channel.default.svc.cluster.local
+  knativehistory: me-odd-even-parallel-kn-parallel-kn-channel.default.svc.cluster.local; me-odd-even-parallel-kn-parallel-0-kn-channel.default.svc.cluster.local
+  traceparent: 00-e8b17109cd21d4fa66a86633b5a614c7-ba96d220fe13211c-00
 Data,
   {
     "message": "we are even!"
@@ -182,14 +182,15 @@ Data,
 ☁️  cloudevents.Event
 Validation: valid
 Context Attributes,
-  specversion: 0.3
-  type: dev.knative.cronjob.event
-  source: /apis/v1/namespaces/default/cronjobsources/me-cronjob-source
-  id: 42717dcf-b194-4b36-a094-3ea20e565ad5
-  time: 2019-07-31T20:57:00.000312243Z
+  specversion: 1.0
+  type: dev.knative.sources.ping
+  source: /apis/v1/namespaces/default/pingsources/me-ping-source
+  id: 321170d1-dea7-4b18-9290-28adb1de089b
+  time: 2020-03-03T21:31:00.0007847Z
   datacontenttype: application/json; charset=utf-8
 Extensions,
-  knativehistory: me-odd-even-parallel-kn-parallel-1-kn-channel.default.svc.cluster.local, me-odd-even-parallel-kn-parallel-kn-channel.default.svc.cluster.local
+  knativehistory: me-odd-even-parallel-kn-parallel-kn-channel.default.svc.cluster.local; me-odd-even-parallel-kn-parallel-1-kn-channel.default.svc.cluster.local
+  traceparent: 00-78d8b044d23c85789f0a13fd3679ac24-1d69ddde56d620c7-00
 Data,
   {
     "message": "this is odd!"

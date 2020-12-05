@@ -1,10 +1,3 @@
----
-title: "Hello World - Node.js"
-linkTitle: "Node.js"
-weight: 1 
-type: "docs"
----
-
 A simple web app written in Node.js that you can use for testing. It reads in an
 env variable `TARGET` and prints "Hello \${TARGET}!". If TARGET is not
 specified, it will use "World" as the TARGET.
@@ -61,7 +54,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-nodejs
      console.log('Hello world received a request.');
 
      const target = process.env.TARGET || 'World';
-     res.send(`Hello ${target}!`);
+     res.send(`Hello ${target}!\n`);
    });
 
    const port = process.env.PORT || 8080;
@@ -189,7 +182,7 @@ folder) you're ready to build and deploy the sample app.
    ```
 
 1. Now you can make a request to your app and see the result. Replace
-   the URL below the with URL returned in the previous command.
+   the URL below with the URL returned in the previous command.
 
    ```shell
    curl http://helloworld-nodejs.default.1.2.3.4.xip.io

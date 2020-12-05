@@ -1,10 +1,3 @@
----
-title: "Hello World - Kotlin"
-linkTitle: "Kotlin"
-weight: 1
-type: "docs"
----
-
 A simple web app written in Kotlin using [Ktor](https://ktor.io/) that you can
 use for testing. It reads in an env variable `TARGET` and prints "Hello
 \${TARGET}". If TARGET is not specified, it will use "World" as the TARGET.
@@ -58,7 +51,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-kotlin
       embeddedServer(Netty, port.toInt()) {
           routing {
               get("/") {
-                  call.respondText("Hello $target!", ContentType.Text.Html)
+                  call.respondText("Hello $target!\n", ContentType.Text.Html)
               }
           }
       }.start(wait = true)
@@ -70,35 +63,10 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-kotlin
 4. Create a new file, `build.gradle` and copy the following setting
 
    ```groovy
-   buildscript {
-       ext.kotlin_version = '1.2.61'
-       ext.ktor_version = '0.9.4'
-
-       repositories {
-           mavenCentral()
-       }
-       dependencies {
-           classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-       }
+   plugins {
+       id "org.jetbrains.kotlin.jvm" version "1.4.10"
    }
-
-   apply plugin: 'java'
-   apply plugin: 'kotlin'
    apply plugin: 'application'
-
-   sourceCompatibility = 1.8
-   compileKotlin {
-       kotlinOptions.jvmTarget = "1.8"
-   }
-
-   compileTestKotlin {
-       kotlinOptions.jvmTarget = "1.8"
-   }
-
-   repositories {
-       jcenter()
-       maven { url "https://dl.bintray.com/kotlin/ktor" }
-   }
 
    mainClassName = 'com.example.hello.MainKt'
 
@@ -106,13 +74,15 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-kotlin
        manifest {
            attributes 'Main-Class': mainClassName
        }
-      from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+       from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+   }
+
+   repositories {
+       mavenCentral()
    }
 
    dependencies {
-       compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-       compile "io.ktor:ktor-server-netty:$ktor_version"
-       testCompile group: 'junit', name: 'junit', version: '4.12'
+       compile "io.ktor:ktor-server-netty:1.3.1"
    }
    ```
 
@@ -121,7 +91,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-kotlin
    ```docker
    # Use the official gradle image to create a build artifact.
    # https://hub.docker.com/_/gradle
-   FROM gradle:4.10 as builder
+   FROM gradle:6.7 as builder
 
    # Copy local code to the container image.
    COPY build.gradle .
@@ -130,11 +100,10 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-kotlin
    # Build a release artifact.
    RUN gradle clean build --no-daemon
 
-   # Use AdoptOpenJDK for base image.
-   # It's important to use OpenJDK 8u191 or above that has container support enabled.
-   # https://hub.docker.com/r/adoptopenjdk/openjdk8
+   # Use the Official OpenJDK image for a lean production stage of our multi-stage build.
+   # https://hub.docker.com/_/openjdk
    # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
-   FROM adoptopenjdk/openjdk8:jdk8u202-b08-alpine-slim
+   FROM openjdk:8-jre-alpine
 
    # Copy the jar to the production image from the builder stage.
    COPY --from=builder /home/gradle/build/libs/gradle.jar /helloworld.jar
@@ -206,7 +175,7 @@ folder) you're ready to build and deploy the sample app.
    ```
 
 1. Now you can make a request to your app and see the result. Replace
-   the URL below the with URL returned in the previous command.
+   the URL below with the URL returned in the previous command.
 
    ```shell
    curl http://helloworld-kotlin.default.1.2.3.4.xip.io

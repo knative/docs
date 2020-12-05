@@ -1,10 +1,3 @@
----
-title: "Routing across multiple Knative services - Go"
-linkTitle: "Routing services - Go"
-weight: 1
-type: "docs"
----
-
 This example shows how to map multiple Knative services to different paths under
 a single domain name using the Istio VirtualService concept. Istio is a
 general-purpose reverse proxy, therefore these directions can also be used to
@@ -210,7 +203,7 @@ kubectl get VirtualService entry-route --output yaml
 
 3.  Send a request to the `Search` service and the `Login` service by using
     corresponding URIs. You should get the same results as directly accessing
-    these services. \_ Get the ingress IP:
+    these services. Get the ingress IP:
 
     ```shell
     INGRESSGATEWAY=istio-ingressgateway

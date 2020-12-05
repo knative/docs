@@ -1,0 +1,10 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: cloudevents-vertx
+  namespace: default
+spec:
+  template:
+    spec:
+      containers:
+        - image: <image>

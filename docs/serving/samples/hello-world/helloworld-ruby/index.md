@@ -111,8 +111,8 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-ruby
 1. After the build has completed and the container is pushed to Docker Hub, you
    can deploy the app into your cluster.
 
-   {{< tabs name="helloworld_ruby" default="kn" >}}
-   {{% tab name="yaml" %}}
+{{< tabs name="helloworld_ruby" default="kn" >}}
+{{% tab name="yaml" %}}
 
    1. Create a new file, `service.yaml` and copy the following service definition
       into the file. Make sure to replace `{username}` with your Docker Hub
@@ -170,8 +170,8 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-ruby
   http://helloworld-ruby.default.1.2.3.4.xip.io
   ```
 
-   {{< /tab >}}
-   {{< /tabs >}}
+{{< /tab >}}
+{{< /tabs >}}
 
    During the creation of your service, Knative performs the following steps:
 
@@ -184,8 +184,8 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-ruby
 
 1. Run one of the followings commands to find the domain URL for your service.
 
-   {{< tabs name="service_url" default="kn" >}}
-   {{% tab name="kubectl" %}}
+{{< tabs name="service_url" default="kn" >}}
+{{% tab name="kubectl" %}}
    ```shell
    kubectl get ksvc helloworld-ruby  --output=custom-columns=NAME:.metadata.name,URL:.status.url
    ```
@@ -197,8 +197,8 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-ruby
    helloworld-ruby    http://helloworld-ruby.default.1.2.3.4.xip.io
    ```
 
-   {{< /tab >}}
-   {{% tab name="kn" %}}
+{{< /tab >}}
+{{% tab name="kn" %}}
 
    ```shell
    kn service describe helloworld-ruby -o url
@@ -233,13 +233,16 @@ To remove the sample app from your cluster, delete the service record.
 
 {{< tabs name="service_url" default="kn" >}}
 {{% tab name="kubectl" %}}
-```shell
-kubectl delete --filename service.yaml
-```
+
+  ```shell
+  kubectl delete --filename service.yaml
+  ```
 {{< /tab >}}
 {{% tab name="kn" %}}
-```shell
-kn service delete helloworld-ruby
-```
+
+  ```shell
+  kn service delete helloworld-ruby
+  ```
+
 {{< /tab >}}
 {{< /tabs >}}

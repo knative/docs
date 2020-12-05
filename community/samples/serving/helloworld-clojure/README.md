@@ -1,10 +1,3 @@
----
-title: "Hello World - Clojure"
-linkTitle: "Clojure"
-weight: 1
-type: "docs"
----
-
 A simple web app written in Clojure that you can use for testing. It reads in an
 env variable `TARGET` and prints "Hello \${TARGET}!". If TARGET is not
 specified, it will use "World" as the TARGET.
@@ -146,7 +139,7 @@ folder) you're ready to build and deploy the sample app.
    ```
 
 1. Now you can make a request to your app and see the result. Replace
-   the URL below the with URL returned in the previous command.
+   the URL below with the URL returned in the previous command.
 
    ```shell
    curl http://helloworld-clojure.default.1.2.3.4.xip.io

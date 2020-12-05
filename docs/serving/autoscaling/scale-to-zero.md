@@ -1,0 +1,142 @@
+---
+title: "Configuring scale to zero"
+linkTitle: "Configuring scale to zero"
+weight: 20
+type: "docs"
+---
+
+**IMPORTANT:** Scale to zero can only be enabled if you are using the Knative Pod Autoscaler (KPA), and can only be configured globally. For more information about using KPA or global configuration, see the documentation on [Autoscaling concepts](./autoscaling-concepts.md).
+
+## Enable scale to zero
+
+The scale to zero value controls whether Knative allows replicas to scale down to zero (if set to `true`), or stop at 1 replica if set to `false`.
+
+**NOTE:** For more information about scale bounds configuration per revision, see the documentation on [Configuring scale bounds](./scale-bounds.md).
+
+* **Global key:** `enable-scale-to-zero`
+* **Per-revision annotation key:** No per-revision setting.
+* **Possible values:** boolean
+* **Default:** `true`
+
+**Example:**
+{{< tabs name="scale-to-zero" default="Global (ConfigMap)" >}}
+{{% tab name="Global (ConfigMap)" %}}
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+ name: config-autoscaler
+ namespace: knative-serving
+data:
+ enable-scale-to-zero: "false"
+```
+{{< /tab >}}
+{{% tab name="Global (Operator)" %}}
+```yaml
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+spec:
+  config:
+    autoscaler:
+      enable-scale-to-zero: "false"
+```
+{{< /tab >}}
+{{< /tabs >}}
+
+## Scale to zero grace period
+
+This setting specifies an upper bound time limit that the system will wait internally for scale-from-zero machinery to be in place before the last replica is removed.
+
+**IMPORTANT:** This is a value that controls how long internal network programming is allowed to take, and should only be adjusted if you have experienced issues with requests being dropped while a revision was scaling to zero replicas.
+
+This setting does not adjust how long the last replica will be kept after traffic ends, and it does not guarantee that the replica will actually be kept for this entire duration.
+
+* **Global key:** `scale-to-zero-grace-period`
+* **Per-revision annotation key:** n/a
+* **Possible values:** Duration
+* **Default:** `30s`
+
+**Example:**
+{{< tabs name="scale-to-zero-grace" default="Global (ConfigMap)" >}}
+{{% tab name="Global (ConfigMap)" %}}
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+ name: config-autoscaler
+ namespace: knative-serving
+data:
+ scale-to-zero-grace-period: "40s"
+```
+{{< /tab >}}
+{{% tab name="Global (Operator)" %}}
+```yaml
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+spec:
+  config:
+    autoscaler:
+      scale-to-zero-grace-period: "40s"
+```
+{{< /tab >}}
+{{< /tabs >}}
+
+
+## Scale to zero last pod retention period
+
+The `scale-to-zero-pod-retention-period` flag determines the minimum amount of time that the last pod will remain active after the Autoscaler decides to scale pods to zero.
+
+This contrasts with the `scale-to-zero-grace-period` flag, which determines the maximum amount of time that the last pod will remain active after the Autoscaler decides to scale pods to zero.
+
+* **Global key:** `scale-to-zero-pod-retention-period`
+* **Per-revision annotation key:** `autoscaling.knative.dev/scaleToZeroPodRetentionPeriod`
+* **Possible values:** Non-negative duration string
+* **Default:** `0s`
+
+**Example:**
+{{< tabs name="scale-to-zero-grace" default="Global (ConfigMap)" >}}
+{{% tab name="Per Revision" %}}
+```yaml
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: helloworld-go
+  namespace: default
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/scaleToZeroPodRetentionPeriod: "1m5s"
+    spec:
+      containers:
+        - image: gcr.io/knative-samples/helloworld-go
+```
+{{< /tab >}}
+{{% tab name="Global (ConfigMap)" %}}
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+ name: config-autoscaler
+ namespace: knative-serving
+data:
+ scale-to-zero-pod-retention-period: "42s"
+```
+{{< /tab >}}
+{{% tab name="Global (Operator)" %}}
+```yaml
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+spec:
+  config:
+    autoscaler:
+      scale-to-zero-pod-retention-period: "42s"
+```
+{{< /tab >}}
+{{< /tabs >}}

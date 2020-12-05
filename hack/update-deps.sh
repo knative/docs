@@ -18,12 +18,6 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-source $(dirname $0)/../vendor/knative.dev/test-infra/scripts/library.sh
+source $(dirname "$0")/../vendor/knative.dev/hack/library.sh
 
-cd ${REPO_ROOT_DIR}
-
-# Ensure we have everything we need under vendor/
-dep ensure
-
-# Remove the cmd dir from eventing.
-rm -rf vendor/github.com/knative/eventing/cmd/
+go_update_deps "$@"

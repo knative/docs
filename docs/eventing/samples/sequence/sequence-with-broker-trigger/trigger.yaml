@@ -1,14 +1,14 @@
-apiVersion: eventing.knative.dev/v1alpha1
+apiVersion: eventing.knative.dev/v1
 kind: Trigger
 metadata:
   name: sequence-trigger
 spec:
   broker: default
   filter:
-    sourceAndType:
-      type: dev.knative.cronjob.event
+    attributes:
+      type: dev.knative.sources.ping
   subscriber:
     ref:
-      apiVersion: flows.knative.dev/v1alpha1
+      apiVersion: flows.knative.dev/v1
       kind: Sequence
       name: sequence

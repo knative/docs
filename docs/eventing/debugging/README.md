@@ -1,10 +1,3 @@
----
-title: "Debugging Knative Eventing"
-linkTitle: "Debugging"
-weight: 100
-type: "docs"
----
-
 This is an evolving document on how to debug a non-working Knative Eventing
 setup.
 
@@ -35,7 +28,7 @@ kubectl apply --filename example.yaml
 ## Triggering Events
 
 Knative events will occur whenever a Kubernetes
-[`Event`](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.11/#event-v1-core)
+[`Event`](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#event-v1-core)
 occurs in the `knative-debug` namespace. We can cause this to occur with the
 following commands:
 
@@ -184,7 +177,7 @@ something went wrong during `chan` reconciliation. See
 ##### `src`
 
 `src` is a
-[`ApiServerSource`](https://github.com/knative/eventing/blob/master/pkg/apis/sources/v1alpha1/apiserver_types.go).
+[`ApiServerSource`](https://github.com/knative/eventing/blob/master/pkg/apis/sources/v1/apiserver_types.go).
 
 First we will verify that `src` is writing to `chan`.
 
@@ -193,7 +186,7 @@ kubectl --namespace knative-debug get apiserversource src -o jsonpath='{.spec.si
 ```
 
 Which should return
-`map[apiVersion:messaging.knative.dev/v1alpha1 kind:Channel name:chan]`. If it
+`map[apiVersion:messaging.knative.dev/v1 kind:Channel name:chan]`. If it
 doesn't, then `src` was setup incorrectly and its `spec` needs to be fixed.
 Fixing should be as simple as updating its `spec` to have the correct `sink`
 (see [example.yaml](example.yaml)).

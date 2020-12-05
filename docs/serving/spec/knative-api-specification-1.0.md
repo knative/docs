@@ -615,7 +615,7 @@ general Kubernetes model is that of
 In several of the following sections, resources are said to "own" another
 resource. Ownership indicates that the owned resource is being managed by the
 owning resource and MUST be recorded using an
-[OwnerReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#ownerreference-v1-meta)
+[OwnerReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#ownerreference-v1-meta)
 in `metadata.ownerReferences` on the owned resource with `controller` set to
 `True` and `uid` set to the UID of the owning resource.
 
@@ -641,7 +641,7 @@ Configuration or Route, as follows:
 - Additional `labels` and `annotations` on the Configuration and Route not
   specified above MUST be removed.
 - See the documentation of `spec` in the
-  [detailed resource fields section](#detailed-resources--v1beta1) for the
+  [detailed resource fields section](#detailed-resources--v1) for the
   mapping of specific `spec` fields to the corresponding fields in Configuration
   and Route.
 
@@ -729,7 +729,7 @@ to Knative request routing:
   weight distributions). Developers SHOULD NOT assume that subsequent requests
   from the same client will reach the same application instance.
 
-# Detailed Resources – v1beta1
+# Detailed Resources – v1
 
 The following schema defines a set of REQUIRED or RECOMMENDED resource fields on
 the Knative resource types. Whether a field is REQUIRED or RECOMMENDED is
@@ -747,7 +747,7 @@ implementations and implementations which implement validation of field names.
 ### Metadata:
 
 Standard Kubernetes
-[meta.v1/ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#objectmeta-v1-meta)
+[meta.v1/ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectmeta-v1-meta)
 resource.
 
 Service `labels` and `annotations` MUST be copied to the `labels` and
@@ -891,7 +891,7 @@ the name of the Service.
 ### Metadata:
 
 Standard Kubernetes
-[meta.v1/ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#objectmeta-v1-meta)
+[meta.v1/ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectmeta-v1-meta)
 resource.
 
 Configuration `labels` and `annotations` MUST NOT be copied to the `labels` and
@@ -997,7 +997,7 @@ was created.
 ### Metadata:
 
 Standard Kubernetes
-[meta.v1/ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#objectmeta-v1-meta)
+[meta.v1/ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectmeta-v1-meta)
 resource.
 
 ### Spec:
@@ -1100,7 +1100,7 @@ resource.
 ### Metadata:
 
 Standard Kubernetes
-[meta.v1/ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#objectmeta-v1-meta)
+[meta.v1/ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectmeta-v1-meta)
 resource.
 
 ### Spec:
@@ -1239,6 +1239,16 @@ constitutes a request.
    </td>
   </tr>
   <tr>
+   <td><code>containerStatuses</code>
+   </td>
+   <td>[]<a href="#containerStatuses">ContainerStatuses</a>
+   </td>
+   <td>The ContainerStatuses holds the resolved image digest for both serving and non serving containers.
+   </td>
+   <td>RECOMMENDED
+   </td>
+  </tr>
+  <tr>
    <td><code>imageDigest</code>
    </td>
    <td>string
@@ -1250,13 +1260,52 @@ constitutes a request.
   </tr>
 </table>
 
-# Detailed Resource Types - v1beta1
+# Detailed Resource Types - v1
 
 Although `container,` `volumes,` and types that they reference are based upon
 core Kubernetes objects, there are additional limitations applied to ensure that
 created containers can statelessly autoscale. The set of fields that have been
 determined to be compatible with statelessly scaling are detailed below.
 Restrictions to the values of the field are noted in the Description column.
+
+## ContainerStatuses
+
+<table>
+  <tr>
+   <td><strong>FieldName</strong>
+   </td>
+   <td><strong>Field Type</strong>
+   </td>
+   <td><strong>Description</strong>
+   </td>
+   <td><strong>Schema Requirement</strong>
+   </td>
+  </tr>
+  <tr>
+   <td><code>name</code>
+   </td>
+   <td>string
+<p>
+(Optional)
+   </td>
+   <td>Name represents the container name and name must be a DNS_LABEL.
+   </td>
+   <td>REQUIRED
+   </td>
+  </tr>
+  <tr>
+   <td><code>imageDigest</code>
+   </td>
+   <td>string
+<p>
+(Optional)
+   </td>
+   <td>ImageDigest is the digest value for the container's image.
+   </td>
+   <td>REQUIRED
+   </td>
+  </tr>
+</table>
 
 ## TrafficTarget
 
@@ -1418,7 +1467,7 @@ All <code>percent</code> values in <code>traffic</code> MUST sum to 100.
 <p>
 (Optional)
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#container-v1-core">core/v1.Container</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#container-v1-core">core/v1.Container</a>.
    </td>
    <td>REQUIRED
    </td>
@@ -1430,7 +1479,7 @@ All <code>percent</code> values in <code>traffic</code> MUST sum to 100.
 <p>
 (Optional)
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#container-v1-core">core/v1.Container</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#container-v1-core">core/v1.Container</a>.
    </td>
    <td>REQUIRED
    </td>
@@ -1442,7 +1491,7 @@ All <code>percent</code> values in <code>traffic</code> MUST sum to 100.
 <p>
 (Optional)
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#container-v1-core">core/v1.Container</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#container-v1-core">core/v1.Container</a>.
    </td>
    <td>REQUIRED
    </td>
@@ -1454,7 +1503,7 @@ All <code>percent</code> values in <code>traffic</code> MUST sum to 100.
 <p>
 (Optional)
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#container-v1-core">core/v1.Container</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#container-v1-core">core/v1.Container</a>.
    </td>
    <td>RECOMMENDED
    </td>
@@ -1466,7 +1515,7 @@ All <code>percent</code> values in <code>traffic</code> MUST sum to 100.
 <p>
 (Required)
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#container-v1-core">core/v1.Container</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#container-v1-core">core/v1.Container</a>.
    </td>
    <td>REQUIRED
    </td>
@@ -1478,7 +1527,7 @@ All <code>percent</code> values in <code>traffic</code> MUST sum to 100.
 <p>
 (Optional)
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#container-v1-core">core/v1.Container</a>. However, Knative resolves the image to a digest. The pull policy will be applied against the digest of the resolved image and not the image tag.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#container-v1-core">core/v1.Container</a>. However, Knative resolves the image to a digest. The pull policy will be applied against the digest of the resolved image and not the image tag.
    </td>
    <td>RECOMMENDED
    </td>
@@ -1491,7 +1540,7 @@ All <code>percent</code> values in <code>traffic</code> MUST sum to 100.
 <p>
 (Optional)
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#container-v1-core">core/v1.Container</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#container-v1-core">core/v1.Container</a>.
    </td>
    <td>RECOMMENDED
    </td>
@@ -1503,7 +1552,7 @@ All <code>percent</code> values in <code>traffic</code> MUST sum to 100.
 <p>
 (Optional)
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#container-v1-core">core/v1.Container</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#container-v1-core">core/v1.Container</a>.
    </td>
    <td>RECOMMENDED
    </td>
@@ -1532,7 +1581,7 @@ Max: 1
 <br>
 (Optional)
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#container-v1-core">core/v1.Container</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#container-v1-core">core/v1.Container</a>.
    </td>
    <td>RECOMMENDED
    </td>
@@ -1545,7 +1594,7 @@ Max: 1
 <br>
 (Optional)
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#container-v1-core">core/v1.Container</a>. 
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#container-v1-core">core/v1.Container</a>. 
    </td>
    <td>REQUIRED
    </td>
@@ -1570,7 +1619,7 @@ Max: 1
 <br>
 (Optional)
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#container-v1-core">core/v1.Container</a>. 
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#container-v1-core">core/v1.Container</a>. 
    </td>
    <td>RECOMMENDED
    </td>
@@ -1582,7 +1631,7 @@ Max: 1
 <br>
 (Optional)
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#container-v1-core">core/v1.Container</a>. 
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#container-v1-core">core/v1.Container</a>. 
    </td>
    <td>RECOMMENDED
    </td>
@@ -1606,7 +1655,7 @@ Max: 1
 <br>
 (Optional)
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#container-v1-core">core/v1.Container</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#container-v1-core">core/v1.Container</a>.
    </td>
    <td>REQUIRED
    </td>
@@ -1633,7 +1682,7 @@ Max: 1
 <br>
 (Required)
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#envvar-v1-core">core/v1.EnvVar</a>
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#envvar-v1-core">core/v1.EnvVar</a>
    </td>
    <td>REQUIRED
    </td>
@@ -1645,7 +1694,7 @@ Max: 1
 <br>
 (Optional)
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#envvar-v1-core">core/v1.EnvVar</a>. Must have one of value or valueFrom.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#envvar-v1-core">core/v1.EnvVar</a>. Must have one of value or valueFrom.
    </td>
    <td>REQUIRED
    </td>
@@ -1658,7 +1707,7 @@ Max: 1
 <br>
 (Optional)
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#envvar-v1-core">core/v1.EnvVar</a>. Must have one of value or valueFrom.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#envvar-v1-core">core/v1.EnvVar</a>. Must have one of value or valueFrom.
    </td>
    <td>RECOMMENDED
    </td>
@@ -1686,7 +1735,7 @@ Max: 1
 <br>
 (Optional)
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#envvarsource-v1-core">core/v1.EnvVarSource</a>. Must have one of configMapKeyRef or secretKeyRef.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#envvarsource-v1-core">core/v1.EnvVarSource</a>. Must have one of configMapKeyRef or secretKeyRef.
    </td>
    <td>REQUIRED, if valueFrom is supported.
    </td>
@@ -1699,7 +1748,7 @@ Max: 1
 <br>
 (Optional)
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#envvarsource-v1-core">core/v1.EnvVarSource</a>. Must have one of configMapKeyRef or secretKeyRef.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#envvarsource-v1-core">core/v1.EnvVarSource</a>. Must have one of configMapKeyRef or secretKeyRef.
    </td>
    <td>RECOMMENDED
    </td>
@@ -1724,7 +1773,7 @@ Max: 1
    </td>
    <td>string
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#configmapkeyselector-v1-core">core/v1.ConfigMapKeySelector</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#configmapkeyselector-v1-core">core/v1.ConfigMapKeySelector</a>.
    </td>
    <td>REQUIRED, if configMapKeyRef is supported
    </td>
@@ -1734,7 +1783,7 @@ Max: 1
    </td>
    <td>string
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#configmapkeyselector-v1-core">core/v1.ConfigMapKeySelector</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#configmapkeyselector-v1-core">core/v1.ConfigMapKeySelector</a>.
    </td>
    <td>REQUIRED, if configMapKeyRef is supported
    </td>
@@ -1744,7 +1793,7 @@ Max: 1
    </td>
    <td>boolean
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#configmapkeyselector-v1-core">core/v1.ConfigMapKeySelector</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#configmapkeyselector-v1-core">core/v1.ConfigMapKeySelector</a>.
    </td>
    <td>REQUIRED, if configMapKeyRef is supported
    </td>
@@ -1769,7 +1818,7 @@ Max: 1
    </td>
    <td>string
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#secretkeyselector-v1-core">core/v1.SecretKeySelector</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#secretkeyselector-v1-core">core/v1.SecretKeySelector</a>.
    </td>
    <td>REQUIRED, if secretKeyRef is supported
    </td>
@@ -1779,7 +1828,7 @@ Max: 1
    </td>
    <td>string
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#secretkeyselector-v1-core">core/v1.SecretKeySelector</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#secretkeyselector-v1-core">core/v1.SecretKeySelector</a>.
    </td>
    <td>REQUIRED, if secretKeyRef is supported
    </td>
@@ -1789,7 +1838,7 @@ Max: 1
    </td>
    <td>boolean
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#secretkeyselector-v1-core">core/v1.SecretKeySelector</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#secretkeyselector-v1-core">core/v1.SecretKeySelector</a>.
    </td>
    <td>REQUIRED, if secretKeyRef is supported
    </td>
@@ -1817,7 +1866,7 @@ Max: 1
 <a href="#execaction">ExecAction</a>
 
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#probe-v1-core">core/v1.Probe</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#probe-v1-core">core/v1.Probe</a>.
    </td>
    <td>RECOMMENDED
    </td>
@@ -1827,7 +1876,7 @@ Max: 1
    </td>
    <td>string
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#probe-v1-core">core/v1.Probe</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#probe-v1-core">core/v1.Probe</a>.
    </td>
    <td>REQUIRED, if livenessProbe or readinessProbe is supported
    </td>
@@ -1840,7 +1889,7 @@ Max: 1
 <a href="#httpgetaction">HTTPGetAction</a>
 
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#probe-v1-core">core/v1.Probe</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#probe-v1-core">core/v1.Probe</a>.
    </td>
    <td>REQUIRED, if livenessProbe or readinessProbe is supported
    </td>
@@ -1850,7 +1899,7 @@ Max: 1
    </td>
    <td>int
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#probe-v1-core">core/v1.Probe</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#probe-v1-core">core/v1.Probe</a>.
    </td>
    <td>REQUIRED, if livenessProbe or readinessProbe is supported
    </td>
@@ -1860,7 +1909,7 @@ Max: 1
    </td>
    <td>int
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#probe-v1-core">core/v1.Probe</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#probe-v1-core">core/v1.Probe</a>.
    </td>
    <td>REQUIRED, if livenessProbe or readinessProbe is supported
    </td>
@@ -1873,7 +1922,7 @@ Max: 1
 <a href="#tcpsocketaction">TCPSocketAction</a>
 
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#probe-v1-core">core/v1.Probe</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#probe-v1-core">core/v1.Probe</a>.
    </td>
    <td>REQUIRED, if livenessProbe or readinessProbe is supported
    </td>
@@ -1883,7 +1932,7 @@ Max: 1
    </td>
    <td>int
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#probe-v1-core">core/v1.Probe</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#probe-v1-core">core/v1.Probe</a>.
    </td>
    <td>REQUIRED, if livenessProbe or readinessProbe is supported
    </td>
@@ -1911,7 +1960,7 @@ Max: 1
 <a href="#configmapenvsource">ConfigMapEnvSource</a>
 
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#envfromsource-v1-core">core/v1.EnvFromSource</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#envfromsource-v1-core">core/v1.EnvFromSource</a>.
    </td>
    <td>REQUIRED, if envFrom is supported
    </td>
@@ -1921,7 +1970,7 @@ Max: 1
    </td>
    <td>string
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#envfromsource-v1-core">core/v1.EnvFromSource</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#envfromsource-v1-core">core/v1.EnvFromSource</a>.
    </td>
    <td>REQUIRED, if envFrom is supported
    </td>
@@ -1934,7 +1983,7 @@ Max: 1
 <a href="#secretenvsource">SecretEnvSource</a>
 
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#envfromsource-v1-core">core/v1.EnvFromSource</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#envfromsource-v1-core">core/v1.EnvFromSource</a>.
    </td>
    <td>RECOMMENDED
    </td>
@@ -1961,7 +2010,7 @@ Max: 1
 <br>
 (Required)
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#execaction-v1-core">core/v1.ExecAction</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#execaction-v1-core">core/v1.ExecAction</a>.
    </td>
    <td>REQUIRED, if exec is supported
    </td>
@@ -1986,7 +2035,7 @@ Max: 1
    </td>
    <td>string
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#httpgetaction-v1-core">core/v1.HTTPGetAction</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#httpgetaction-v1-core">core/v1.HTTPGetAction</a>.
    </td>
    <td>REQUIRED, if livenessProbe or readinessProbe is supported
    </td>
@@ -1999,7 +2048,7 @@ Max: 1
 <a href="#httpheader">HTTPHeader</a>
 
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#httpgetaction-v1-core">core/v1.HTTPGetAction</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#httpgetaction-v1-core">core/v1.HTTPGetAction</a>.
    </td>
    <td>REQUIRED, if livenessProbe or readinessProbe is supported
    </td>
@@ -2009,7 +2058,7 @@ Max: 1
    </td>
    <td>string
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#httpgetaction-v1-core">core/v1.HTTPGetAction</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#httpgetaction-v1-core">core/v1.HTTPGetAction</a>.
    </td>
    <td>REQUIRED, if livenessProbe or readinessProbe is supported
    </td>
@@ -2019,7 +2068,7 @@ Max: 1
    </td>
    <td>string
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#httpgetaction-v1-core">core/v1.HTTPGetAction</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#httpgetaction-v1-core">core/v1.HTTPGetAction</a>.
    </td>
    <td>REQUIRED, if livenessProbe or readinessProbe is supported
    </td>
@@ -2044,7 +2093,7 @@ Max: 1
    </td>
    <td>string
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#tcpsocketaction-v1-core">core/v1.TCPSocketAction</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#tcpsocketaction-v1-core">core/v1.TCPSocketAction</a>.
    </td>
    <td>REQUIRED, if livenessProbe or readinessProbe is supported
    </td>
@@ -2069,7 +2118,7 @@ Max: 1
    </td>
    <td>string
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#httpheader-v1-core">core/v1.HTTPHeader</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#httpheader-v1-core">core/v1.HTTPHeader</a>.
    </td>
    <td>REQUIRED, if livenessProbe or readinessProbe is supported
    </td>
@@ -2079,7 +2128,7 @@ Max: 1
    </td>
    <td>string
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#httpheader-v1-core">core/v1.HTTPHeader</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#httpheader-v1-core">core/v1.HTTPHeader</a>.
    </td>
    <td>REQUIRED, if livenessProbe or readinessProbe is supported
    </td>
@@ -2153,7 +2202,7 @@ Max: 1
    </td>
    <td>string
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#configmapenvsource-v1-core">core/v1.ConfigMapEnvSource</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#configmapenvsource-v1-core">core/v1.ConfigMapEnvSource</a>.
    </td>
    <td>REQUIRED, if envFrom is supported
    </td>
@@ -2163,7 +2212,7 @@ Max: 1
    </td>
    <td>boolean
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#configmapenvsource-v1-core">core/v1.ConfigMapEnvSource</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#configmapenvsource-v1-core">core/v1.ConfigMapEnvSource</a>.
    </td>
    <td>REQUIRED, if envFrom is supported
    </td>
@@ -2188,7 +2237,7 @@ Max: 1
    </td>
    <td>string
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#secretenvsource-v1-core">core/v1.SecretEnvSource</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#secretenvsource-v1-core">core/v1.SecretEnvSource</a>.
    </td>
    <td>REQUIRED, if secretRef is supported
    </td>
@@ -2198,7 +2247,7 @@ Max: 1
    </td>
    <td>boolean
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#secretenvsource-v1-core">core/v1.SecretEnvSource</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#secretenvsource-v1-core">core/v1.SecretEnvSource</a>.
    </td>
    <td>REQUIRED, if secretRef is supported
    </td>
@@ -2258,7 +2307,7 @@ Max: 1
    </td>
    <td>int
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#securitycontext-v1-core">core/v1.SecurityContext</a>
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#securitycontext-v1-core">core/v1.SecurityContext</a>
    </td>
    <td>REQUIRED, if securityContext is supported.
    </td>
@@ -2283,7 +2332,7 @@ Max: 1
    </td>
    <td>string
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#volumemount-v1-core">core/v1.VolumeMount</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#volumemount-v1-core">core/v1.VolumeMount</a>.
    </td>
    <td>REQUIRED, if volumes is supported.
    </td>
@@ -2293,7 +2342,7 @@ Max: 1
    </td>
    <td>string
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#volumemount-v1-core">core/v1.VolumeMount</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#volumemount-v1-core">core/v1.VolumeMount</a>.
    </td>
    <td>REQUIRED, if volumes is supported.
    </td>
@@ -2303,7 +2352,7 @@ Max: 1
    </td>
    <td>string
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#volumemount-v1-core">core/v1.VolumeMount</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#volumemount-v1-core">core/v1.VolumeMount</a>.
    </td>
    <td>REQUIRED, if volumes is supported.
    </td>
@@ -2341,7 +2390,7 @@ Max: 1
 <a href="#configmapvolumesource">ConfigMapVolumeSource</a>
 
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#volume-v1-core">core/v1.Volume</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#volume-v1-core">core/v1.Volume</a>.
    </td>
    <td>REQUIRED, if volumes is supported.
    </td>
@@ -2354,7 +2403,7 @@ Max: 1
 <a href="#secretvolumesource">SecretVolumeSource</a>
 
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#volume-v1-core">core/v1.Volume</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#volume-v1-core">core/v1.Volume</a>.
    </td>
    <td>RECOMMENDED
    </td>
@@ -2367,7 +2416,7 @@ Max: 1
 <a href="#projectedvolumesource">ProjectedVolumeSource</a>
 
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#volume-v1-core">core/v1.Volume</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#volume-v1-core">core/v1.Volume</a>.
    </td>
    <td>RECOMMENDED
    </td>
@@ -2392,7 +2441,7 @@ Max: 1
    </td>
    <td>int
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#configmapvolumesource-v1-core">core/v1.ConfigMapVolumeSource</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#configmapvolumesource-v1-core">core/v1.ConfigMapVolumeSource</a>.
    </td>
    <td>REQUIRED, if volumes is supported.
    </td>
@@ -2402,7 +2451,7 @@ Max: 1
    </td>
    <td>[]<a href="#keytopath">KeyToPath</a>
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#configmapvolumesource-v1-core">core/v1.ConfigMapVolumeSource</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#configmapvolumesource-v1-core">core/v1.ConfigMapVolumeSource</a>.
    </td>
    <td>REQUIRED, if volumes is supported.
    </td>
@@ -2412,7 +2461,7 @@ Max: 1
    </td>
    <td>string
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#configmapvolumesource-v1-core">core/v1.ConfigMapVolumeSource</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#configmapvolumesource-v1-core">core/v1.ConfigMapVolumeSource</a>.
    </td>
    <td>REQUIRED, if volumes is supported.
    </td>
@@ -2422,7 +2471,7 @@ Max: 1
    </td>
    <td>bool
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#configmapvolumesource-v1-core">core/v1.ConfigMapVolumeSource</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#configmapvolumesource-v1-core">core/v1.ConfigMapVolumeSource</a>.
    </td>
    <td>REQUIRED, if volumes is supported.
    </td>
@@ -2447,7 +2496,7 @@ Max: 1
    </td>
    <td>int
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#secretvolumesource-v1-core">core/v1.SecretVolumeSource</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#secretvolumesource-v1-core">core/v1.SecretVolumeSource</a>.
    </td>
    <td>REQUIRED, if secret is supported.
    </td>
@@ -2457,7 +2506,7 @@ Max: 1
    </td>
    <td>[]<a href="#keytopath">KeyToPath</a>
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#secretvolumesource-v1-core">core/v1.SecretVolumeSource</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#secretvolumesource-v1-core">core/v1.SecretVolumeSource</a>.
    </td>
    <td>REQUIRED, if secret is supported.
    </td>
@@ -2467,7 +2516,7 @@ Max: 1
    </td>
    <td>string
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#secretvolumesource-v1-core">core/v1.SecretVolumeSource</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#secretvolumesource-v1-core">core/v1.SecretVolumeSource</a>.
    </td>
    <td>REQUIRED, if secret is supported.
    </td>
@@ -2477,7 +2526,7 @@ Max: 1
    </td>
    <td>bool
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#secretvolumesource-v1-core">core/v1.SecretVolumeSource</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#secretvolumesource-v1-core">core/v1.SecretVolumeSource</a>.
    </td>
    <td>REQUIRED, if secret is supported.
    </td>
@@ -2502,7 +2551,7 @@ Max: 1
    </td>
    <td>int
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#projectedvolumesource-v1-core">core/v1.ProjectedVolumeSource</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#projectedvolumesource-v1-core">core/v1.ProjectedVolumeSource</a>.
    </td>
    <td>REQUIRED, if projected is supported.
    </td>
@@ -2512,7 +2561,7 @@ Max: 1
    </td>
    <td>[]<a href="#volumeprojection">VolumeProjection</a>
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#projectedvolumesource-v1-core">core/v1.ProjectedVolumeSource</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#projectedvolumesource-v1-core">core/v1.ProjectedVolumeSource</a>.
    </td>
    <td>REQUIRED, if projected is supported.
    </td>
@@ -2537,7 +2586,7 @@ Max: 1
    </td>
    <td>string
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#keytopath-v1-core">core/v1.KeyToPath</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#keytopath-v1-core">core/v1.KeyToPath</a>.
    </td>
    <td>REQUIRED, if volumes is supported.
    </td>
@@ -2547,7 +2596,7 @@ Max: 1
    </td>
    <td>int
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#keytopath-v1-core">core/v1.KeyToPath</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#keytopath-v1-core">core/v1.KeyToPath</a>.
    </td>
    <td>REQUIRED, if volumes is supported.
    </td>
@@ -2557,7 +2606,7 @@ Max: 1
    </td>
    <td>string
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#keytopath-v1-core">core/v1.KeyToPath</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#keytopath-v1-core">core/v1.KeyToPath</a>.
    </td>
    <td>REQUIRED, if volumes is supported.
    </td>
@@ -2585,7 +2634,7 @@ Max: 1
 <a href="#configmapprojection">ConfigMapProjection</a>
 
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#volumeprojection-v1-core">core/v1.VolumeProjection.</a>
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#volumeprojection-v1-core">core/v1.VolumeProjection.</a>
    </td>
    <td>REQUIRED, if projected is supported.
    </td>
@@ -2598,7 +2647,7 @@ Max: 1
 <a href="#secretprojection">SecretProjection</a>
 
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#volumeprojection-v1-core">core/v1.VolumeProjection.</a>
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#volumeprojection-v1-core">core/v1.VolumeProjection.</a>
    </td>
    <td>REQUIRED, if projected is supported.
    </td>
@@ -2623,7 +2672,7 @@ Max: 1
    </td>
    <td>[]<a href="#keytopath">KeyToPath</a>
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#configmapprojection-v1-core">core/v1.ConfigMapProjection.</a>
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#configmapprojection-v1-core">core/v1.ConfigMapProjection.</a>
    </td>
    <td>REQUIRED, if projected is supported.
    </td>
@@ -2633,7 +2682,7 @@ Max: 1
    </td>
    <td>string
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#configmapprojection-v1-core">core/v1.ConfigMapProjection.</a>
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#configmapprojection-v1-core">core/v1.ConfigMapProjection.</a>
    </td>
    <td>REQUIRED, if projected is supported.
    </td>
@@ -2643,7 +2692,7 @@ Max: 1
    </td>
    <td>boolean
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#configmapprojection-v1-core">core/v1.ConfigMapProjection.</a>
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#configmapprojection-v1-core">core/v1.ConfigMapProjection.</a>
    </td>
    <td>REQUIRED, if projected is supported.
    </td>
@@ -2668,7 +2717,7 @@ Max: 1
    </td>
    <td>[]<a href="#keytopath">KeyToPath</a>
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#secretprojection-v1-core">core/v1.SecretProjection.</a>
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#secretprojection-v1-core">core/v1.SecretProjection.</a>
    </td>
    <td>REQUIRED, if projected is supported.
    </td>
@@ -2678,7 +2727,7 @@ Max: 1
    </td>
    <td>string
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#secretprojection-v1-core">core/v1.SecretProjection.</a>
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#secretprojection-v1-core">core/v1.SecretProjection.</a>
    </td>
    <td>REQUIRED, if projected is supported.
    </td>
@@ -2688,14 +2737,14 @@ Max: 1
    </td>
    <td>boolean
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#secretprojection-v1-core">core/v1.SecretProjection.</a>
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#secretprojection-v1-core">core/v1.SecretProjection.</a>
    </td>
    <td>REQUIRED, if projected is supported.
    </td>
   </tr>
 </table>
 
-## [Addressable](https://github.com/knative/pkg/blob/master/apis/duck/v1beta1/addressable_types.go) (Interface)
+## [Addressable](https://github.com/knative/pkg/blob/master/apis/duck/v1/addressable_types.go) (Interface)
 
 <table>
   <tr>
@@ -2738,7 +2787,7 @@ Max: 1
    </td>
    <td>string
    </td>
-   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#localobjectreference-v1-core">core/v1.LocalObjectReference</a>.
+   <td>As specified in Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#localobjectreference-v1-core">core/v1.LocalObjectReference</a>.
    </td>
    <td>REQUIRED, if imagePullSecrets is supported.
    </td>

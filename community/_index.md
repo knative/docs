@@ -1,8 +1,12 @@
 ---
-title: Community
-type: "community"
+title: "Join the Knative community"
+linkTitle: "Community"
+type: "docs"
+showlandingtoc: "false"
 ---
 
-<!--add blocks of content here to add more sections to the community page -->
+Knative is an open source project that anyone in the community can use, improve, and enjoy. We'd love ❣ you to join us!
 
-<!--Note: This page layout is from the Docsy template. See params.toml for link configuration.  -->
+Here are a few ways to find out what's happening and get involved.
+
+{{< showpartial "community_links.html" >}}

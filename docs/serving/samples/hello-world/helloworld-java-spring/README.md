@@ -1,10 +1,3 @@
----
-title: "Hello World - Spring Boot Java"
-linkTitle: "Java (Spring)"
-weight: 1
-type: "docs"
----
-
 A simple web app written in Java using Spring Boot 2.0 that you can use for
 testing. It reads in an env variable `TARGET` and prints "Hello \${TARGET}!". If
 TARGET is not specified, it will use "World" as the TARGET.
@@ -14,8 +7,8 @@ cluster. You can also download a working copy of the sample, by running the
 following commands:
 
 ```shell
-git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs cd
-knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
+git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
+cd knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
 ```
 
 ## Before you begin
@@ -64,20 +57,20 @@ knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
    @SpringBootApplication
    public class HelloworldApplication {
 
-      @Value("${TARGET:World}")
-      String target;
+     @Value("${TARGET:World}")
+     String target;
 
-      @RestController
-      class HelloworldController {
-          @GetMapping("/")
-          String hello() {
-              return "Hello " + target + "!";
-          }
-      }
+     @RestController
+     class HelloworldController {
+       @GetMapping("/")
+       String hello() {
+         return "Hello " + target + "!";
+       }
+     }
 
-      public static void main(String[] args) {
-          SpringApplication.run(HelloworldApplication.class, args);
-      }
+     public static void main(String[] args) {
+       SpringApplication.run(HelloworldApplication.class, args);
+     }
    }
    ```
 
@@ -109,17 +102,16 @@ knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
    # Build a release artifact.
    RUN mvn package -DskipTests
 
-   # Use AdoptOpenJDK for base image.
-   # It's important to use OpenJDK 8u191 or above that has container support enabled.
-   # https://hub.docker.com/r/adoptopenjdk/openjdk8
+   # Use the Official OpenJDK image for a lean production stage of our multi-stage build.
+   # https://hub.docker.com/_/openjdk
    # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
-   FROM adoptopenjdk/openjdk8:jdk8u202-b08-alpine-slim
+   FROM openjdk:8-jre-alpine
 
    # Copy the jar to the production image from the builder stage.
    COPY --from=builder /app/target/helloworld-*.jar /helloworld.jar
 
    # Run the web service on container startup.
-   CMD ["java","-Djava.security.egd=file:/dev/./urandom","-Dserver.port=${PORT}","-jar","/helloworld.jar"]
+   CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/helloworld.jar"]
    ```
 
 1. Create a new file, `service.yaml` and copy the following service definition
@@ -186,7 +178,7 @@ folder) you're ready to build and deploy the sample app.
    ```
 
 1. Now you can make a request to your app and see the result. Replace
-   the URL below the with URL returned in the previous command.
+   the URL below with the URL returned in the previous command.
 
    ```shell
    curl http://helloworld-java-spring.default.1.2.3.4.xip.io

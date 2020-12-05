@@ -1,10 +1,3 @@
----
-title: "Hello World - Eclipse Vert.x"
-linkTitle: "Eclipse Vert.x"
-weight: 1
-type: "docs"
----
-
 Learn how to deploy a simple web app that is written in Java and uses Eclipse
 Vert.x. This samples uses Docker to build locally. The app reads in a `TARGET`
 env variable and then prints "Hello World: \${TARGET}!". If a value for `TARGET`
@@ -233,7 +226,7 @@ To verify that your sample app has been successfully deployed:
    ```
 
 1. Now you can make a request to your app and see the result. Replace
-   the URL below the with URL returned in the previous command.
+   the URL below with the URL returned in the previous command.
 
    ```shell
    curl http://helloworld-vertx.default.1.2.3.4.xip.io

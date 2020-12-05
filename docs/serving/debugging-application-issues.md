@@ -27,11 +27,6 @@ for: "STDIN": Internal error occurred: admission webhook "webhook.knative.dev" d
 ERROR: Non-zero return code '1' from command: Process exited with status 1
 ```
 
-## Check application logs
-
-Knative Serving provides default out-of-the-box logs for your application.
-Access your application logs using [Accessing Logs](./accessing-logs.md) page.
-
 ## Check Route status
 
 Run the following command to get the `status` of the `Route` object with which
@@ -43,22 +38,21 @@ kubectl get route <route-name> --output yaml
 
 The `conditions` in `status` provide the reason if there is any failure. For
 details, see Knative
-[Error Conditions and Reporting](https://github.com/knative/serving/blob/master/docs/spec/errors.md)(currently
-some of them are not implemented yet).
+[Error Conditions and Reporting](https://github.com/knative/docs/blob/master/docs/serving/spec/knative-api-specification-1.0.md#error-signalling).
 
-### Check ClusterIngress/Istio routing
+### Check Ingress/Istio routing
 
-Run the following command to list all the cluster ingress, with their labels
+To list all Ingress resources and their corresponding labels, run the following command:
 
 ```shell
-kubectl get clusteringress -o=custom-columns='NAME:.metadata.name,LABELS:.metadata.labels'
-NAME                   LABELS
-helloworld-go-h5kd4    map[serving.knative.dev/route:helloworld-go serving.knative.dev/routeNamespace:default]
+kubectl get ingresses.networking.internal.knative.dev -o=custom-columns='NAME:.metadata.name,LABELS:.metadata.labels'
+NAME            LABELS
+helloworld-go   map[serving.knative.dev/route:helloworld-go serving.knative.dev/routeNamespace:default serving.knative.dev/service:helloworld-go]
 ```
 
 The labels `serving.knative.dev/route` and `serving.knative.dev/routeNamespace`
-will tell exactly which Route a ClusterIngress is a child resource of. Find the
-one corresponding to your Route. If a ClusterIngress does not exist, the route
+indicate the Route in which the Ingress resource resides. Your Route and
+Ingress should be listed. If your Ingress does not exist, the route
 controller believes that the Revisions targeted by your Route/Service isn't
 ready. Please proceed to later sections to diagnose Revision readiness status.
 
@@ -66,23 +60,23 @@ Otherwise, run the following command to look at the ClusterIngress created for
 your Route
 
 ```
-kubectl get clusteringress <CLUSTERINGRESS_NAME> --output yaml
+kubectl get ingresses.networking.internal.knative.dev <INGRESS_NAME> --output yaml
 ```
 
-particularly, look at the `status:` section. If the ClusterIngress is working
+particularly, look at the `status:` section. If the Ingress is working
 correctly, we should see the condition with `type=Ready` to have `status=True`.
 Otherwise, there will be error messages.
 
-Now, if ClusterIngress shows status Ready, there must be a corresponding
+Now, if Ingress shows status `Ready`, there must be a corresponding
 VirtualService. Run the following command:
 
 ```shell
-kubectl get virtualservice <CLUSTERINGRESS_NAME> -n knative-serving --output yaml
+kubectl get virtualservice -l networking.internal.knative.dev/ingress=<INGRESS_NAME> -n <INGRESS_NAMESPACE> --output yaml
 ```
 
-the network configuration in VirtualService must match that of ClusterIngress
+the network configuration in VirtualService must match that of Ingress
 and Route. VirtualService currently doesn't expose a Status field, so if one
-exists and have matching configurations with ClusterIngress and Route, you may
+exists and have matching configurations with Ingress and Route, you may
 want to wait a little bit for those settings to propagate.
 
 If you are familar with Istio and `istioctl`, you may try using `istioctl` to
@@ -98,9 +92,6 @@ To check the IP address of your Ingress, use
 ```shell
 kubectl get svc -n istio-system istio-ingressgateway
 ```
-
-Or replace that with `knative-ingressgateway` if you are using Knative release
-older than 0.3.
 
 If there is no external IP address, use
 
@@ -173,6 +164,3 @@ Choose one and use the following command to see detailed information for its
 kubectl get pod <pod-name> --output yaml
 
 ```
-
-If you see issues with "user-container" container in the containerStatuses,
-check your application logs as described below.

@@ -18,6 +18,7 @@ package sampleconsistency
 
 import (
 	"bufio"
+	"fmt"
 	"os"
 	"path"
 	"strings"
@@ -94,17 +95,35 @@ func checkContains(t *testing.T, rl []string, src string) {
 		best = 0
 	}
 	if best != len(sl) {
-		t.Fatalf("README.md file is missing line %d ('%s') from file '%s'\nAdditional info:\n%s", best, sl[best], src, sampleapp.ActionMsg)
+		t.Fatalf("README.md/index.md file is missing line %d ('%s') from file '%s'\nAdditional info:\n%s", best, sl[best], src, sampleapp.ActionMsg)
 	}
 }
 
 func checkDoc(t *testing.T, lc sampleapp.LanguageConfig) {
-	readme := path.Join(lc.SrcDir, "README.md")
+	readme, err := getDocFile(lc.SrcDir)
+	if err != nil {
+		t.Fatalf("Error: %v.", err)
+		return
+	}
 	rl := readlines(t, readme)
 	for _, f := range lc.Copies {
 		src := path.Join(lc.SrcDir, f)
 		checkContains(t, rl, src)
 	}
+}
+
+func getDocFile(dir string) (string, error) {
+	for _, f := range []string{"README.md", "index.md"} {
+		path := path.Join(dir, f)
+		_, err := os.Stat(path)
+		if err == nil {
+			return path, nil
+		}
+		if !os.IsNotExist(err) {
+			return "", nil
+		}
+	}
+	return "", fmt.Errorf("cannot find README.md or index.md in %s", dir)
 }
 
 // TestDocSrc checks content of README.md files, and ensures that the real code of the samples
@@ -115,9 +134,9 @@ func TestDocSrc(t *testing.T) {
 		t.Fatalf("Failed reading config file %s: '%v'", configFile, err)
 	}
 
-	whitelist := test.GetWhitelistedLanguages()
+	allowed := test.GetAllowedLanguages()
 	for _, lc := range lcs.Languages {
-		if _, ok := whitelist[lc.Language]; len(whitelist) > 0 && !ok {
+		if _, ok := allowed[lc.Language]; len(allowed) > 0 && !ok {
 			continue
 		}
 		lc.UseDefaultIfNotProvided()

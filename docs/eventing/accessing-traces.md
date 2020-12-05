@@ -1,7 +1,7 @@
 ---
-title: "Accessing CloudEvent Traces"
+title: "Accessing CloudEvent traces"
 #linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
-weight: 15
+weight: 85
 type: "docs"
 ---
 
@@ -13,27 +13,21 @@ visualize and trace your requests.
 
 You must have a Knative cluster running with the Eventing component installed. [Learn more](../install/README.md)
 
-## Installing observability plugins
-
-Knative Eventing uses the same tracing plugin as Knative Serving. See the 
-[Tracing installation instructions](./../serving/installing-logging-metrics-traces.md#end-to-end-request-tracing)
-in the Knative Serving section for details. Note that you do not need to install the 
-Knative Serving component itself. 
-
-To enable request tracing in Knative Eventing, 
-you must install Elasticsearch and either the Zipkin or Jaeger plugins.
-
 ## Configuring tracing
 
-With the exception of importers, the Knative Eventing tracing is configured through the 
-`config-tracing` ConfigMap in the `knative-eventing` namespace. 
+With the exception of importers, the Knative Eventing tracing is configured through the
+`config-tracing` ConfigMap in the `knative-eventing` namespace.
 
 Most importers do _not_ use the ConfigMap and instead, use a static 1% sampling rate.
 
-You can use the `config-tracing` ConfigMap to configure the following Eventing subcomponents:
+You can use the `config-tracing` ConfigMap to configure the following Eventing components:
  - Brokers
  - Triggers
  - InMemoryChannel
+ - ApiServerSource
+ - GitlabSource
+ - KafkaSource
+ - PrometheusSource
 
 **Example:**
 
@@ -57,19 +51,19 @@ You can configure your `config-tracing` with following options:
 
  * `backend`: Valid values are `zipkin`, `stackdriver`, or `none`. The default is `none`.
 
- * `zipkin-endpoint`: Specifies the URL to the zipkin collector where you want to send the traces. 
+ * `zipkin-endpoint`: Specifies the URL to the zipkin collector where you want to send the traces.
    Must be set if backend is set to `zipkin`.
 
- * `stackdriver-project-id`: Specifies the GCP project ID into which the Stackdriver traces are written. 
-   You must specify the `backend` as `stackdriver`. If `backend`is unspecified, the GCP project ID is read 
+ * `stackdriver-project-id`: Specifies the GCP project ID into which the Stackdriver traces are written.
+   You must specify the `backend` as `stackdriver`. If `backend`is unspecified, the GCP project ID is read
    from GCP metadata when running on GCP.
 
- * `sample-rate`: Specifies the sampling rate. Valid values are decimals from `0` to `1` 
+ * `sample-rate`: Specifies the sampling rate. Valid values are decimals from `0` to `1`
    (interpreted as a float64), which indicate the probability that any given request is sampled.
    An example value is `0.5`, which gives each request a 50% sampling probablity.
 
  * `debug`: Enables debugging. Valid values are `true` or `false`. Defaults to `false` when not specified.
-   Set to `true` to enable debug mode, which forces the `sample-rate` to `1.0` and sends all spans to 
+   Set to `true` to enable debug mode, which forces the `sample-rate` to `1.0` and sends all spans to
    the server.
 
 ### Viewing your `config-tracing` ConfigMap
@@ -105,10 +99,10 @@ For this example, assume the following details:
 - Everything happens in the `includes-incoming-trace-id-2qszn` namespace.
 - The Broker is named `br`.
 - There are two Triggers that are associated with the Broker:
-    - `transformer` - Filters to only allow events whose type is `transformer`. 
-      Sends the event to the Kubernetes Service `transformer`, which will reply with an 
+    - `transformer` - Filters to only allow events whose type is `transformer`.
+      Sends the event to the Kubernetes Service `transformer`, which will reply with an
       identical event, except the replied event's type will be `logger`.
-    - `logger` - Filters to only allow events whose type is `logger`. Sends the event to 
+    - `logger` - Filters to only allow events whose type is `logger`. Sends the event to
       the Kubernetes Service `logger`.
 - An event is sent to the Broker with the type `transformer`, by the Pod named `sender`.
 

@@ -12,6 +12,7 @@ import (
 	ping "github.com/knative/docs/docs/serving/samples/grpc-ping-go/proto"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 )
 
 var port = 8080
@@ -61,6 +62,7 @@ func main() {
 	// The grpcServer is currently configured to serve h2c traffic by default.
 	// To configure credentials or encryption, see: https://grpc.io/docs/guides/auth.html#go
 	grpcServer := grpc.NewServer()
+	reflection.Register(grpcServer)
 	ping.RegisterPingServiceServer(grpcServer, pingServer)
 	grpcServer.Serve(lis)
 }

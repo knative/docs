@@ -1,26 +1,82 @@
 aliases:
   eng-approvers:
-  - evankanderson
-  - mattmoor
-  - dgerd
-  - vaikas-google
-  - vaikas
-  - rgregg
-  - mchmarny
   - averikitsch
+  - dprotaso
+  - evankanderson
+  - grantr
+  - markusthoemmes
+  - mattmoor
+  - tcnghia
+  - vaikas
+  - csantanapr
+
   docs-approvers:
   - carieshmarie
-  - samodell
   - richieescarez
+  - abrennan89
+
   docs-reviewers:
-  - gyliu513
+  - abrennan89
+  - mpetason
+  - jonatasbaldin
+
+  blog-approvers:
+  - macruzbar
+
   productivity-approvers:
-  - adrcunha
   - chaodaiG
+  - chizhg
+
   productivity-reviewers:
-  - adrcunha
   - chaodaiG
   - coryrc
   - chizhg
   - steuhs
   - yt3liu
+
+  serving-eng-reviewers:
+  - dprotaso
+  - markusthoemmes
+  - mattmoor
+  - tcnghia
+  - vagababov
+
+  eventing-eng-approvers:
+  - grantr
+  - lionelvillard
+  - vaikas
+
+  eventing-eng-reviewers:
+  - evankanderson
+  - grantr
+  - lionelvillard
+  - matzew
+  - n3wscott
+  - nachocano
+  - vaikas
+
+  eventing-channels-eng-approvers:
+  - Harwayne
+  - matzew
+
+  eventing-sources-eng-approvers:
+  - lionelvillard
+  - n3wscott
+  - nachocano
+  - vaikas
+
+  install-eng-reviewers:
+  - dprotaso
+  - markusthoemmes
+  - mattmoor
+  - tcnghia
+  - vagababov
+  - evankanderson
+  - grantr
+  - vaikas
+  - n3wscott
+  - matzew
+  - nachocano
+  - lionelvillard
+  - bbrowning
+  - houshengbo

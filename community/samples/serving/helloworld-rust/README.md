@@ -1,10 +1,3 @@
----
-title: "Hello World - Rust"
-linkTitle: "Rust"
-weight: 1
-type: "docs"
----
-
 A simple web app written in Rust that you can use for testing. It reads in an
 env variable `TARGET` and prints "Hello \${TARGET}!". If
 
@@ -170,7 +163,7 @@ folder) you're ready to build and deploy the sample app.
    ```
 
 1. Now you can make a request to your app and see the result. Replace
-   the URL below the with URL returned in the previous command.
+   the URL below with the URL returned in the previous command.
 
    ```shell
    curl http://helloworld-rust.default.1.2.3.4.xip.io

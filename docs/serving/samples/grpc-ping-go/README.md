@@ -1,10 +1,3 @@
----
-title: "gRPC Server - Go"
-#linkTitle: ""
-weight: 1
-type: "docs"
----
-
 A [gRPC](https://grpc.io) server written in Go.
 
 This sample can be used to try out gRPC, HTTP/2, and custom port configuration

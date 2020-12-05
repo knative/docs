@@ -1,10 +1,3 @@
----
-title: "Hello World - Java (Quarkus)"
-linkTitle: "Java (Quarkus)"
-weight: 1
-type: "docs"
----
-
 A simple [JAX-RS REST API](https://github.com/jax-rs) application that is
 written in Java and uses [Quarkus](https://quarkus.io/).
 
@@ -89,7 +82,7 @@ which you update and create the necessary build and configuration files:
    ```
 
 1. Update `src/main/resources/application.properties` to configuration the
-   application to default to port 8080, but allow the port to be overriden by
+   application to default to port 8080, but allow the port to be overridden by
    the `PORT` environmental variable:
 
    ```
@@ -259,7 +252,7 @@ folder) you're ready to build and deploy the sample app.
    ```
 
 1. Now you can make a request to your app and see the result. Replace
-   the URL below the with URL returned in the previous command.
+   the URL below with the URL returned in the previous command.
 
    ```shell
    curl http://helloworld-java-quarkus.default.1.2.3.4.xip.io

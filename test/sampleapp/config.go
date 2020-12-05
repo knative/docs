@@ -46,7 +46,7 @@ const (
 
 // AllConfigs contains all LanguageConfig
 type AllConfigs struct {
-	Languages []LanguageConfig `yaml:"languages`
+	Languages []LanguageConfig `yaml:"languages"`
 }
 
 // LanguageConfig contains all information for building/deploying an app
