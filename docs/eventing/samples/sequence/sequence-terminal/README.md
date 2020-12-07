@@ -105,6 +105,9 @@ spec:
 Change `default` below to create the `Sequence` in the Namespace where you want
 the resources to be created.
 
+Here, if you are using different type of Channel, you need to change the
+spec.channelTemplate to point to your desired Channel.
+
 ```shell
 kubectl -n default create -f ./sequence.yaml
 ```
@@ -129,9 +132,6 @@ spec:
       kind: Sequence
       name: sequence
 ```
-
-Here, if you are using different type of Channel, you need to change the
-spec.channelTemplate to point to your desired Channel.
 
 ```shell
 kubectl -n default create -f ./ping-source.yaml
