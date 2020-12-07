@@ -43,7 +43,7 @@ There are also two different classes of developer to consider:
 1. A "contributor" knows about the foreign protocol but is not a Knative expert.
 2. Knative Eventing expert knows how Knative Eventing components are implemented, configured and deployed, but is not an expert in all the foreign protocols that sources may implement.
 
-These two roles will often not be the same person.  We want to confine the job of the "contributor" to implementing the `Receive Adapter`, and specifying what configuration their adapter needs connect, subscribe, or do whatever it does.
+These two roles will often not be the same person.  We want to confine the job of the "contributor" to implementing the `Receive Adapter`, and specifying what configuration their adapter needs to connect, subscribe, or do whatever it does.
 
 The Knative Eventing developer exposes the protocol configuration as part of the Source `CRD`, and the controller passes any required configuration (which may include resolved data like URLs) to the `Receive Adapter`.
 
