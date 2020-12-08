@@ -22,6 +22,7 @@ spec:
       annotations:
         # Target 10 in-flight-requests per pod.
         autoscaling.knative.dev/target: "10"
+        autoscaling.knative.dev/targetUtilizationPercentage: "100"
     spec:
       containers:
       - image: gcr.io/knative-samples/autoscale-go:0.1
