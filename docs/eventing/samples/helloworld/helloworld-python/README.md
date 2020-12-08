@@ -184,7 +184,7 @@ folder) you're ready to build and deploy the sample app.
 After you have deployed the application, and have verified that the namespace, sample application and trigger are ready, you can send a CloudEvent.
 
 ### Send CloudEvent to the Broker
-We can send an http request directly to the [Broker](../../../broker-trigger.md) with correct CloudEvent headers set.
+You can send an HTTP request directly to the Knative [broker](../../../broker-trigger.md) if the correct CloudEvent headers are set.
 
    1. Deploy a curl pod and SSH into it
       ```shell
