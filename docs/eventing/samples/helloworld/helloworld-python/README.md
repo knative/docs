@@ -181,7 +181,7 @@ folder) you're ready to build and deploy the sample app.
         kubectl --namespace knative-samples get trigger helloworld-python
         ```
 ## Send and verify CloudEvents
-Once you have deployed the application and verified that the namespace, sample application and trigger are ready, let's send a CloudEvent.
+After you have deployed the application, and have verified that the namespace, sample application and trigger are ready, you can send a CloudEvent.
 
 ### Send CloudEvent to the Broker
 We can send an http request directly to the [Broker](../../../broker-trigger.md) with correct CloudEvent headers set.
