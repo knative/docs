@@ -73,8 +73,6 @@ spec:
   addonComponents:
     pilot:
       enabled: true
-    prometheus:
-      enabled: false
 
   components:
     ingressGateways:
