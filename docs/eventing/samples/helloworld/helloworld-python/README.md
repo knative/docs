@@ -237,7 +237,7 @@ Helloworld-python app logs the context and the msg of the above event, and repli
   Try the CloudEvent attributes in the curl command and the trigger specification to understand how [triggers](../../../broker-trigger.md#trigger) work.
 
 ## Verify reply from helloworld-python app
-`helloworld-python` app replies back with an event of `type= dev.knative.samples.hifromknative`, and `source=knative/eventing/samples/hello-world`. This event enters the eventing mesh via the Broker and can be delivered to other services using a Trigger
+The `helloworld-python` app replies with an event type `type= dev.knative.samples.hifromknative`, and source `source=knative/eventing/samples/hello-world`. The event enters the eventing mesh through the broker, and can be delivered to event sinks using a trigger
 
   1. Deploy a pod that receives any CloudEvent and logs the event to its output.
       ```shell
