@@ -104,8 +104,8 @@ File Layout & Hierarchy:
 
 * `cmd/controller/main.go` - Pass source’s NewController implementation to the shared main
 * `cmd/receive_adapter/main.go` - Translate resource variables to underlying adapter struct (to eventually be passed into the serverless system) 
-* `pkg/reconciler/controller.go` - NewController implementation to pass to sharedmain
-* `pkg/reconciler/samplesource.go` - reconciliation functions for the receive adapter
+* `pkg/reconciler/sample/controller.go` - NewController implementation to pass to sharedmain
+* `pkg/reconciler/sample/samplesource.go` - reconciliation functions for the receive adapter
 * `pkg/apis/samples/VERSION/samplesource_types.go` - schema for the underlying api types (variables to be defined in the resource yaml)
 * `pkg/apis/samples/VERSION/samplesource_lifecycle.go` - status updates for the source’s reconciliation details
   * Source ready
