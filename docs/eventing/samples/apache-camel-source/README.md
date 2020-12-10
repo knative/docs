@@ -20,7 +20,7 @@ All Camel Sources use [Apache Camel K](https://github.com/apache/camel-k) as the
    environments, including development clusters.
 
 1. Install the Camel Source from the `camel.yaml` in the
-   [Eventing Sources release page](https://github.com/knative/eventing-contrib/releases):
+   [Eventing Camel release page](https://github.com/knative-sandbox/eventing-camel/releases):
 
    ```shell
    kubectl apply --filename camel.yaml
