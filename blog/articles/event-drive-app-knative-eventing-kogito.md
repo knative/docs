@@ -2,18 +2,17 @@
 Title: 'Orchestrating Events with Knative and Kogito'
 Author: Ricardo Zanini and Tihomir Surdilovic
 Author handle: https://twitter.com/zaninirica, https://twitter.com/tsurdilo
-Date: ''
+Date: '2020-12-11'
 Description: A brief introduction of Knative Eventing integration with Kogito implementation of the Serverless Workflow specification
 Folder with media files: 'images/kogito'
 Blog URL: ''
 Labels: Demo
-Reviewers: ''
+Reviewers: 'abrennan89'
 
 ---
-| Reviewer  | Date | Approval |
+| Reviewer      | Date          | Approval      |
 | ------------- | ------------- | ------------- |
-| <!-- Your Github handle here -->  |   |:+1:, :monocle_face:, :-1:  |
-| <!-- Your Github handle here --> |   |  |
+| abrennan89    | 2020-12-09    | :+1:          |
 
 [Kogito](https://kogito.kie.org/) is a platform for the development of cloud-native business automation applications. Kogito is designed targeting cloud-native architectures, and it comes with a series of features to make it easy for architects and developers to create business applications.
 
@@ -27,7 +26,7 @@ To demonstrate how the Kogito workflow implementation works on event-driven arch
 
 The following image taken from the [specification examples page](https://github.com/serverlessworkflow/specification/blob/master/examples/examples.md#New-Patient-Onboarding) illustrates this workflow:
 
-![Patient Onboarding workflow representation](https://raw.githubusercontent.com/serverlessworkflow/specification/master/media/examples/example-patientonboarding.png)*Patient Onboarding workflow representation*
+![Patient onboarding workflow representation](https://raw.githubusercontent.com/serverlessworkflow/specification/master/media/examples/example-patientonboarding.png)*Patient Onboarding workflow representation*
 
 The workflow starts after receiving a [CloudEvent](https://github.com/cloudevents/spec) object that contains patient information. Three functions are then called by the spec in a sequence which: (1) stores the patient information, (2) assigns the patient to a doctor based on their symptoms, and (3) schedules an appointment with the assigned doctor for that patient.
 
@@ -68,9 +67,9 @@ functions:
   resource: classpath:openapi.json#schedulePatientAppointment
 ```
 
-The above workflow definition is based on three parts. The first part is the “states” array which includes the workflow control-flow logic, in our case the “event” state which receives the new patient event and performs our three actions (service invocations).
+The above workflow definition is based on three parts. The first part is the `states` array, which includes the workflow control flow logic. In this case, is an `event`, which receives the new patient cloud event, and performs the three functions mentioned previously.
 
-The second part is our event definitions (the “events” array), which are based on the CloudEvents specification, so there is a clear 1-1 mapping between how the events are defined in the workflows, and how they are represented with the CloudEvents format.
+The second part of the workflow is the `events` array, which contains event definitions that are based on the CloudEvent specification. There is a 1:1 mapping between how the events are defined in the workflows, and how they are represented with the CloudEvent format.
 
 The third part, the `functions` array, contains the function definitions that give more information to the runtime about how to execute the required services.
 
