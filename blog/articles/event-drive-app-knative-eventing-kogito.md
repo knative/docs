@@ -14,7 +14,7 @@ Reviewers: 'abrennan89'
 | ------------- | ------------- | ------------- |
 | abrennan89    | 2020-12-09    | :+1:          |
 
-[Kogito](https://kogito.kie.org/) is a platform for the development of cloud-native business automation applications. Kogito is designed targeting cloud-native architectures, and it comes with a series of features to make it easy for architects and developers to create business applications.
+[Kogito](https://kogito.kie.org/) is a platform for the development of cloud-native business automation applications. It is designed targeting cloud-native architectures, and it comes with a series of features to make it easy for architects and developers to create business applications.
 
 Kogito implements the [CNCF Serverless Workflow Project](https://github.com/serverlessworkflow/specification), which is a specification for defining workflow models that orchestrate event-driven, serverless applications. It focuses on defining a vendor-neutral, platform-independent, and declarative workflow model for orchestrating services that can be used across multiple cloud and container platforms. To date, the Serverless Workflow specification is a CNCF sandbox project.
 
@@ -22,7 +22,7 @@ As part of the Serverless Workflow implementation, Kogito offers a Kubernetes Op
 
 ### Kogito Serverless Workflow
 
-To demonstrate how the Kogito workflow implementation works on event-driven architectures, we will use the [patient onboarding example](https://github.com/kiegroup/kogito-examples/tree/master/serverless-workflow-functions-events-quarkus). In this example, we simulate a workflow used in hospitals to onboard new patients and assign them to the correct doctor.
+To demonstrate how the Kogito workflow implementation works on Knative's event-driven architecture, we will use the [patient onboarding example](https://github.com/kiegroup/kogito-examples/tree/master/serverless-workflow-functions-events-quarkus). In this example, we simulate a workflow used in hospitals to onboard new patients and assign them to the correct doctor.
 
 The following image taken from the [specification examples page](https://github.com/serverlessworkflow/specification/blob/master/examples/examples.md#New-Patient-Onboarding) illustrates this workflow:
 
@@ -114,7 +114,9 @@ The same concept also applies to [events produced by the workflow engine](https:
 
 The Serverless Workflow specification can help us define complex workflows that can be used across many platforms and cloud providers. In this post, we shared how to use the specification with Kogito and the possibilities of integration with Knative as the serverless platform.
 
-The specification implementation is ongoing work on the Kogito project, but we are aiming for a platform fully compliant with standards and the specification.
+While the specification implementation is ongoing work on the Kogito project, our goal is to have a platform fully compliant with standards and the specification.
+
+You can try the [example we demonstrated](https://github.com/kiegroup/kogito-examples/tree/master/serverless-workflow-functions-events-quarkus) in this article in your local environment. If you are looking for a more sophisticated scenario, take a look at our [Github Bot example with Kogito and Knative Eventing](https://github.com/kiegroup/kogito-examples/tree/master/serverless-workflow-github-showcase).
 
 ## Further Reading
 
