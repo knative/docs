@@ -2,17 +2,19 @@
 Title: 'Orchestrating Events with Knative and Kogito'
 Author: Ricardo Zanini and Tihomir Surdilovic
 Author handle: https://twitter.com/zaninirica, https://twitter.com/tsurdilo
-Date: '2020-12-11'
+Date: '2020-12-17'
 Description: A brief introduction of Knative Eventing integration with Kogito implementation of the Serverless Workflow specification
 Folder with media files: 'images/kogito'
 Blog URL: ''
 Labels: Demo
-Reviewers: 'abrennan89'
+Reviewers: 'abrennan89, macruzbar, lberk'
 
 ---
 | Reviewer      | Date          | Approval      |
 | ------------- | ------------- | ------------- |
 | abrennan89    | 2020-12-09    | :+1:          |
+| macruzbar     | 2020-12-14    | :+1:          |
+| lberk         | 2020-12-17    | :+1:          |
 
 [Kogito](https://kogito.kie.org/) is a platform for the development of cloud-native business automation applications. It is designed targeting cloud-native architectures, and it comes with a series of features to make it easy for architects and developers to create business applications.
 
