@@ -1,12 +1,13 @@
 ---
-title: "Configuring the Eventing Operator Custom Resource"
+title: "Configuring the Eventing Operator custom resource"
 weight: 60
 type: "docs"
 aliases:
 - /docs/operator/configuring-eventing-cr/
 ---
 
-The Knative Eventing operator can be configured with these options:
+The Knative Eventing Operator can be configured with these options:
+<!-- TODO: decide to use either KnativeEventing CR or Knative Eventing Operator consistently if they really mean the same thing, switching all the time seems confusing. Or else properly explain the relationship and what the Operator really is.-->
 
 - [Version Configuration](#version-configuration)
 - [Configuring Knative Eventing using ConfigMaps](#configuring-knative-eventing-using-configmaps)
@@ -19,7 +20,7 @@ __NOTE:__ Kubernetes spec level policies cannot be configured using the Knative 
 ## Version Configuration
 
 Cluster administrators can install a specific version of Knative Eventing by using the `spec.version` field. For example,
-if you want to install Knative Eventing 0.16.0, you can apply the following `KnativeEventing` custom resource:
+if you want to install Knative Eventing v0.19.0, you can apply the following KnativeEventing custom resource:
 
 ```
 apiVersion: operator.knative.dev/v1alpha1
@@ -28,7 +29,7 @@ metadata:
   name: knative-eventing
   namespace: knative-eventing
 spec:
-  version: 0.16.0
+  version: 0.19.0
 ```
 
 If `spec.version` is not specified, the Knative Operator will install the latest available version of Knative Eventing.
