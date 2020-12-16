@@ -111,7 +111,7 @@ point to edit all of them.
 ## Private repository and private secrets
 
 The Knative Eventing operator CR is configured the same way as the Knative Serving operator CR. For more information,
-see the documentation on “[Private repository and private secret](configuring-serving-cr.md#private-repository-and-private-secrets)” in Serving operator for detailed instruction.
+see the documentation on “[Private repository and private secret](./configuring-serving-cr.md#private-repository-and-private-secrets)” in Serving operator for detailed instruction.
 
 Knative Eventing also specifies only one container within one `Deployment` resource. However, the container does not use
 the same name as its parent `Deployment`, which means the container name in Knative Eventing is not the unique identifier
