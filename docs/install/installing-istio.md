@@ -8,10 +8,8 @@ This guide walks you through manually installing and customizing Istio for use
 with Knative.
 
 If your cloud platform offers a managed Istio installation, we recommend
-installing Istio that way, unless you need the ability to customize your
-installation. If your cloud platform offers a managed Istio installation, the
-[install guide](./README.md) for your specific platform will have those
-instructions.
+installing Istio that way, unless you need to customize your
+installation.
 
 ## Before you begin
 
