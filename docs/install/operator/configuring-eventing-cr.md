@@ -43,7 +43,7 @@ if the current Knative Eventing deployment is version 0.17.x, you must upgrade t
 
 ## Configuring Knative Eventing using ConfigMaps
 
-The Operator manages the Knative Serving installation. It overwrites any updates to ConfigMaps which are used to configure Knative Eventing.
+The Operator manages the Knative Eventing installation. It overwrites any updates to ConfigMaps which are used to configure Knative Eventing.
 The KnativeEventing custom resource (CR) allows you to set values for these ConfigMaps by using the Operator.
 Knative Eventing has multiple ConfigMaps that are named with the prefix `config-`.
 The `spec.config` in the KnativeEventing CR has one `<name>` entry for each ConfigMap, named `config-<name>`, with a value which will be used for the ConfigMap `data`.
