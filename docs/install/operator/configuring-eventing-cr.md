@@ -1,13 +1,12 @@
 ---
-title: "Configuring the Eventing Operator custom resource"
+title: "Configuring the KnativeEventing custom resource"
 weight: 60
 type: "docs"
 aliases:
 - /docs/operator/configuring-eventing-cr/
 ---
 
-The Knative Eventing Operator can be configured with these options:
-<!-- TODO: decide to use either KnativeEventing CR or Knative Eventing Operator consistently if they really mean the same thing, switching all the time seems confusing. Or else properly explain the relationship and what the Operator really is.-->
+The KnativeEventing custom resource (CR) can be configured with the following options:
 
 - [Version Configuration](#version-configuration)
 - [Configuring Knative Eventing using ConfigMaps](#configuring-knative-eventing-using-configmaps)
@@ -15,12 +14,12 @@ The Knative Eventing Operator can be configured with these options:
 - [Configuring default broker class](#configuring-default-broker-class)
 - [System Resource Settings](#system-resource-settings)
 
-__NOTE:__ Kubernetes spec level policies cannot be configured using the Knative Operators.
+__NOTE:__ Kubernetes spec level policies cannot be configured by using the KnativeEventing CR.
 
 ## Installing a specific version of Eventing
 
 Cluster administrators can install a specific version of Knative Eventing by using the `spec.version` field. For example,
-if you want to install Knative Eventing v0.19.0, you can apply the following KnativeEventing custom resource:
+if you want to install Knative Eventing v0.19.0, you can apply the following KnativeEventing CR:
 
 ```
 apiVersion: operator.knative.dev/v1alpha1
@@ -36,22 +35,21 @@ If `spec.version` is not specified, the Knative Operator will install the latest
 If users specify an invalid or unavailable version, the Knative Operator will do nothing. The Knative Operator always
 includes the latest 3 minor release versions.
 
-If Knative Eventing is already managed by the Operator, updating the `spec.version` field in the `KnativeEventing` resource
-enables upgrading or downgrading the Knative Eventing version, without needing to change the Operator.
+If Knative Eventing is already managed by the Operator, updating the `spec.version` field in the KnativeEventing CR enables upgrading or downgrading the Knative Eventing version, without the need to modify the Operator.
 
-Note that the Knative Operator only permits upgrades or downgrades by one minor release version at a time. For example,
-if the current Knative Eventing deployment is version 0.17.x, you must upgrade to 0.18.x before upgrading to 0.19.x.
+**NOTE:** The Knative Operator only permits upgrades or downgrades by one minor release version at a time. For example, if the current Knative Eventing deployment is version 0.17.x, you must upgrade to 0.18.x before upgrading to 0.19.x.
 
 ## Configuring Knative Eventing using ConfigMaps
 
-The Operator manages the Knative Eventing installation. It overwrites any updates to ConfigMaps which are used to configure Knative Eventing.
-The KnativeEventing custom resource (CR) allows you to set values for these ConfigMaps by using the Operator.
+The Knative Operator manages the Knative Eventing installation. It overwrites any updates to ConfigMaps which are used to configure Knative Eventing.
+The KnativeEventing CR allows you to set values for these ConfigMaps by using the Operator.
 Knative Eventing has multiple ConfigMaps that are named with the prefix `config-`.
 The `spec.config` in the KnativeEventing CR has one `<name>` entry for each ConfigMap, named `config-<name>`, with a value which will be used for the ConfigMap `data`.
+All Knative Eventing ConfigMaps are created in the same namespace as the KnativeEventing CR. You can use the KnativeEventing CR as a unique entry point to edit all ConfigMaps.
 
 ### Setting the default channel for the broker
 
-If you are using a channel-based broker, you can change the brokers default channel from `InMemoryChannel` to `KafkaChannel`, by adding the following configuration to the KnativeEventing CR. This will update the ConfigMap `config-br-default-channel`:
+If you are using a channel-based broker, you can change the brokers default channel from `InMemoryChannel` to `KafkaChannel` by adding the following configuration to the KnativeEventing CR. This will update the `config-br-default-channel` ConfigMap:
 
 ```yaml
 apiVersion: operator.knative.dev/v1alpha1
@@ -80,13 +78,10 @@ spec:
                 retry: 5
 ```
 
-**NOTE:** The `clusterDefault` sets the global, cluster-wide default. Inside the `namespaceDefaults`, you can configure the channel defaults on a per-namespace basis.
-
-All Knative Eventing ConfigMaps are created in the same namespace as the KnativeEventing CR. You can use the KnativeEventing CR as a unique entry point to edit all ConfigMaps.
+**NOTE:** `clusterDefault` sets the global, cluster-wide channel default. `namespaceDefaults` configures channel defaults on a per-namespace basis.
 
 ## Private repository and private secrets
 
-The Knative Eventing Operator CR is configured the same way as the Knative Serving Operator CR.
 See the documentation on [Private repository and private secret](configuring-serving-cr.md#private-repository-and-private-secrets).
 
 Knative Eventing also specifies only one container within one Deployment resource. However, the container does not use
@@ -129,7 +124,7 @@ In the example below:
   |  | `controller` | `docker.io/knative-images/controller:latest` |
   |  | `dispatcher` | `docker.io/knative-images/dispatcher:latest` |
 
-2. Define your Knative Eventing Operator CR with following content:
+2. Define the KnativeEventing CR with following content:
 
   ```
   apiVersion: operator.knative.dev/v1alpha1
@@ -165,7 +160,7 @@ For example, to define the list of images:
 | `broker-controller` | `eventing-controller` | `docker.io/knative-images/broker-eventing-controller:latest` |
 
 
-The Knative Eventing Operator CR should be modified to include the full list. For example:
+The KnativeEventing CR should be modified to include the full list. For example:
 
 ```yaml
 apiVersion: operator.knative.dev/v1alpha1
@@ -183,8 +178,8 @@ spec:
       broker-controller/eventing-controller: docker.io/knative-images-repo5/broker-eventing-controller:latest
 ```
 
-If you would like to replace the image defined by environment variable, e.g. the envorinment variable `DISPATCHER_IMAGE`
-in the container `controller` of the deployment `imc-controller`, you need to adjust your CR into the following, if the
+If you want to replace the image defined by environment variable, for example, the environment variable `DISPATCHER_IMAGE`
+in the container `controller` of the deployment `imc-controller`, you must modify the CR as follows, if the
 target image is `docker.io/knative-images-repo5/DISPATCHER_IMAGE:latest`:
 
 ```
