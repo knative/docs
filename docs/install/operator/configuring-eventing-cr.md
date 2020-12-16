@@ -33,26 +33,26 @@ spec:
 
 If `spec.version` is not specified, the Knative Operator will install the latest available version of Knative Eventing.
 If users specify an invalid or unavailable version, the Knative Operator will do nothing. The Knative Operator always
-includes the latest 3 minor release versions. For example, if the current version of the Knative Operator is 0.16.x, the
-earliest version of Knative Eventing available through the Operator is 0.14.0.
+includes the latest 3 minor release versions.
 
 If Knative Eventing is already managed by the Operator, updating the `spec.version` field in the `KnativeEventing` resource
 enables upgrading or downgrading the Knative Eventing version, without needing to change the Operator.
 
 Note that the Knative Operator only permits upgrades or downgrades by one minor release version at a time. For example,
-if the current Knative Eventing deployment is version 0.14.x, you must upgrade to 0.15.x before upgrading to 0.16.x.
+if the current Knative Eventing deployment is version 0.17.x, you must upgrade to 0.18.x before upgrading to 0.19.x.
 
 ## Configuring Knative Eventing using ConfigMaps
 
-The Knative Operator manages the Knative Eventing installation, and therefore overwrites any updates to the `ConfigMaps` which are used to configure Knative Eventing.
-The `KnativeEventing` custom resource allows you to set values for these ConfigMaps via the Operator, so that they are not overwritten.
-<!--TODO: Explain how they use the KnativeEventing custom resource to set these values?-->
+The Operator manages the Knative Serving installation. It overwrites any updates to ConfigMaps which are used to configure Knative Eventing.
+The KnativeEventing custom resource (CR) allows you to set values for these ConfigMaps by using the Operator.
+Knative Eventing has multiple ConfigMaps that are named with the prefix `config-`.
+The `spec.config` in the KnativeEventing CR has one `<name>` entry for each ConfigMap, named `config-<name>`, with a value which will be used for the ConfigMap `data`.
 
 ### Setting the default channel for the broker
 
-If you are using a channel-based broker and you would like to change the brokers default channel, from `InMemoryChannel` to `KafkaChannel`, here is an example of what your Eventing CR would look like when modifying the ConfigMap `config-br-default-channel`:
+If you are using a channel-based broker, you can change the brokers default channel from `InMemoryChannel` to `KafkaChannel`, by adding the following configuration to the KnativeEventing CR. This will update the ConfigMap `config-br-default-channel`:
 
-```
+```yaml
 apiVersion: operator.knative.dev/v1alpha1
 kind: KnativeEventing
 metadata:
@@ -60,17 +60,28 @@ metadata:
   namespace: knative-eventing
 spec:
   config:
-    br-default-channel:
-      channelTemplateSpec: |
-        apiVersion: messaging.knative.dev/v1beta1
-        kind: KafkaChannel
-        spec:
-          numPartitions: 5
-          replicationFactor: 1
+    default-ch-webhook:
+      default-ch-config: |
+        clusterDefault:
+          apiVersion: messaging.knative.dev/v1beta1
+          kind: KafkaChannel
+          spec:
+            numPartitions: 10
+            replicationFactor: 1
+        namespaceDefaults:
+          my-namespace:
+            apiVersion: messaging.knative.dev/v1
+            kind: InMemoryChannel
+            spec:
+              delivery:
+                backoffDelay: PT0.5S
+                backoffPolicy: exponential
+                retry: 5
 ```
 
-All the ConfigMaps are created in the same namespace as the operator CR. You can use the operator CR as the unique entry
-point to edit all of them.
+**NOTE:** The `clusterDefault` sets the global, cluster-wide default. Inside the `namespaceDefaults`, you can configure the channel defaults on a per-namespace basis.
+
+All Knative Eventing ConfigMaps are created in the same namespace as the KnativeEventing CR. You can use the KnativeEventing CR as a unique entry point to edit all ConfigMaps.
 
 ## Private repository and private secrets
 

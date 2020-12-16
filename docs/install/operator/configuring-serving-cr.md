@@ -45,9 +45,10 @@ if the current Knative Serving deployment is version 0.14.x, you must upgrade to
 
 ## Serving Configuration by ConfigMap
 
-Because the operator manages the Knative Serving installation, it will overwrite any updates to the `ConfigMaps` which are used to configure Knative Serving.
-The `KnativeServing` custom resource allows you to set values for these ConfigMaps via the operator. Knative Serving has multiple ConfigMaps named with the prefix
-`config-`. The `spec.config` in `KnativeServing` has one entry `<name>` for each ConfigMap named `config-<name>`, with a value which will be used for the ConfigMap's `data`.
+The Operator manages the Knative Serving installation. It overwrites any updates to ConfigMaps which are used to configure Knative Serving.
+The KnativeServing custom resource (CR) allows you to set values for these ConfigMaps by using the Operator.
+Knative Serving has multiple ConfigMaps that are named with the prefix `config-`.
+The `spec.config` in the KnativeServing CR has one `<name>` entry for each ConfigMap, named `config-<name>`, with a value which will be used for the ConfigMap `data`.
 
 In the [setup a custom domain example](./../../serving/using-a-custom-domain.md), you can see the content of the ConfigMap
 `config-domain` is:
