@@ -18,6 +18,13 @@ For example, `Deployment`, `Job`, `DaemonSet`, or `StatefulSet` objects, or Knat
 
 Sink binding injects environment variables into the `PodTemplateSpec` of the event sink, so that the application code does not need to interact directly with the Kubernetes API to locate the event destination.
 
+Sink binding operates in one of two modes; `Inclusion` or `Exclusion`.
+You can set the mode by modifying the `SINK_BINDING_SELECTION_MODE` of the `eventing-webhook` deployment accordingly. The mode determines the default scope of the webhook.
+
+By default, the webhook is set to `exclusion` mode, which means that any namespace that does not have the label `bindings.knative.dev/exclude: true` will be subject to mutation evalutation.
+
+If `SINK_BINDING_SELECTION_MODE` is set to `inclusion`, only the resources in a namespace labelled with `bindings.knative.dev/include: true` will be considered.  In `inclusion` mode, any SinkBinding resource created will automatically label the `subject` namespace with `bindings.knative.dev/include: true` for inclusion in the potential environment variable inclusions.
+
 ## Getting started
 
 The following procedures show how you can create a sink binding and connect it to a service and event source in your cluster.
