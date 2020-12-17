@@ -30,7 +30,7 @@ APPROVED</p>
 
    </td>
    <td><p style="text-align: right">
-2019-11-04</p>
+2020-12-16</p>
 
    </td>
   </tr>
@@ -38,7 +38,7 @@ APPROVED</p>
    <td><p style="text-align: right">
 <strong>Version</strong></p>
    </td>
-   <td> 1.0.1  </td>
+   <td> 1.0.2  </td>
   </tr>
 </table>
 
@@ -193,7 +193,7 @@ There are several ways in which implementations can extend the model:
   spec:
     traffic:
     - revisionName: a
-      tag: foo
+      tag: cannary
       knative.vendor.com/auth: true
     - revisonName: b
       percent: 100
