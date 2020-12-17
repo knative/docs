@@ -10,11 +10,13 @@ Labels: Demo
 Reviewers: 'abrennan89, macruzbar, lberk'
 
 ---
+<!--
 | Reviewer      | Date          | Approval      |
 | ------------- | ------------- | ------------- |
 | abrennan89    | 2020-12-09    | :+1:          |
 | macruzbar     | 2020-12-14    | :+1:          |
 | lberk         | 2020-12-17    | :+1:          |
+-->
 
 [Kogito](https://kogito.kie.org/) is a platform for the development of cloud-native business automation applications. It is designed targeting cloud-native architectures, and it comes with a series of features to make it easy for architects and developers to create business applications.
 
@@ -28,7 +30,7 @@ To demonstrate how the Kogito workflow implementation works on Knative's event-d
 
 The following image taken from the [specification examples page](https://github.com/serverlessworkflow/specification/blob/master/examples/examples.md#New-Patient-Onboarding) illustrates this workflow:
 
-![Patient onboarding workflow representation](https://raw.githubusercontent.com/serverlessworkflow/specification/master/media/examples/example-patientonboarding.png)
+![Patient onboarding workflow representation](images/kogito-example-patientonboarding.png)
 *Patient Onboarding workflow representation*
 
 The workflow starts after receiving a [CloudEvent](https://github.com/cloudevents/spec) object that contains patient information. Three functions are then called by the spec in a sequence which: (1) stores the patient information, (2) assigns the patient to a doctor based on their symptoms, and (3) schedules an appointment with the assigned doctor for that patient.
@@ -84,7 +86,7 @@ Note that the specification allows for both JSON and YAML workflow formats. This
 
 During compilation, the Kogito runtime will parse this YAML file and will generate Java code that represents this workflow definition. The generated code is based on the Quarkus framework. The outcome is an OpenAPI standard REST service that can be deployed anywhere in your architecture.
 
-![Kogito Runtime workflow parse process](images/kogito/kogito-process-workflow-file.png)
+![Kogito Runtime workflow parse process](images/kogito-process-workflow-file.png)
 *Kogito Runtime parsing flow*
 
 In this example, we have also added the [Knative Kogito Eventing plugin](https://docs.jboss.org/kogito/release/latest/html_single/#con-knative-eventing_kogito-developing-process-services) to the project, which means that it can accept CloudEvent objects through HTTP on the root path. For example:
@@ -108,14 +110,14 @@ There's much more included in this example. For comprehensive instructions on ho
 
 Based on this generated service, you can build [an image](https://docs.jboss.org/kogito/release/latest/html_single/#proc-kogito-deploying-on-kubernetes_kogito-deploying-on-openshift) to be deployed with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#con-kogito-operator-and-cli_kogito-deploying-on-openshift) on a Kubernetes cluster with [Knative Eventing](https://knative.dev/docs/eventing/) installed. The Operator will create all the necessary Knative resources to configure this service and subscribe it to the Knative [broker](https://knative.dev/docs/eventing/broker/).
 
-![Knative and Kogito integration](images/kogito/knative-eventing-kogito-operator.png)
+![Knative and Kogito integration](images/kogito-knative-eventing-kogito-operator.png)
 *Knative Eventing and Kogito Operator integration*
 
 The Kogito Operator creates a Knative [Trigger](https://knative.dev/docs/eventing/triggers/) resource, that links the service and the broker together. In this example, it will filter events of type `new.patients.events`. This means that every time a new event of this type comes to the broker, it will be redirected to the Kogito service.
 
 The same concept also applies to [events produced by the workflow engine](https://docs.jboss.org/kogito/release/latest/html_single/#con-knative-eventing_kogito-developing-process-services). In this case, the operator will create a Knative [SinkBinding](https://knative.dev/docs/eventing/samples/sinkbinding/) resource, and will bind it to the Knative broker. Each time an event is produced by the service, a CloudEvent representing it will be sent to the broker. The image below ilustrates the implementation detail of a Kogito service emitting events to the Knative broker via SinkBinding.
 
-![Knative and Kogito integration](images/kogito/kogito-knative-impl-producing-event.png)
+![Knative and Kogito integration](images/kogito-knative-impl-producing-event.png)
 *Knative Eventing and Kogito service event producers*
 
 ### Conclusion
