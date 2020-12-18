@@ -3,6 +3,7 @@ title: "Monitoring"
 linkTitle: "Monitoring"
 weight: 10
 type: "docs"
+showlandingtoc: "false"
 ---
 
 After you have installed Knative Serving or Eventing, you can monitor your deployment to see information about different Knative components, such as readiness status and resource consumption.

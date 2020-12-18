@@ -6,6 +6,7 @@ type: "docs"
 aliases:
   - /docs/serving/accessing-traces
   - /docs/eventing/accessing-traces
+showlandingtoc: "false"
 ---
 
 After you have installed Knative Serving or Eventing, you can access request traces if you have a request tracing tool installed on your cluster.
