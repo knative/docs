@@ -14,21 +14,83 @@ You must meet the following prerequisites to use Istio AuthorizationPolicy:
 - [Istio must be used for your Knative Ingress](https://knative.dev/docs/install/any-kubernetes-cluster/#installing-the-serving-component).
 - [Istio sidecar injection must be enabled](https://istio.io/latest/docs/setup/additional-setup/sidecar-injection/).
 
-## Enabling Istio AuthorizationPolicy
+## Mutual TLS in Knative
 
-For example, the following authorization policy denies all requests to workloads in namespace `serving-tests`.
+Because Knative requests are frequently routed through activator, some considerations need to be made when using mutual TLS.
+
+![Knative request flow](./images/architecture.png)
+
+Generally, mutual TLS can be configured normally as [in Istio's documentation](https://istio.io/latest/docs/tasks/security/authentication/mtls-migration/). However, since the activator can be in the request path of Knative services, it must have sidecars injected. The simplest way to do this is to label the `knative-serving` namespace:
 
 ```
-$ cat <<EOF | kubectl apply -f -
+kubectl label namespace knative-serving istio-injection=enabled
+```
+
+If the activator isn't injected:
+
+- In PERMISSIVE mode, you'll see requests appear without the expected `X-Forwarded-Client-Cert` header when forwarded by the activator.
+
+```
+$ kubectl exec deployment/httpbin -c httpbin -it -- curl -s http://httpbin.knative.svc.cluster.local/headers
+{
+  "headers": {
+    "Accept": "*/*",
+    "Accept-Encoding": "gzip",
+    "Forwarded": "for=10.72.0.30;proto=http",
+    "Host": "httpbin.knative.svc.cluster.local",
+    "K-Proxy-Request": "activator",
+    "User-Agent": "curl/7.58.0",
+    "X-B3-Parentspanid": "b240bdb1c29ae638",
+    "X-B3-Sampled": "0",
+    "X-B3-Spanid": "416960c27be6d484",
+    "X-B3-Traceid": "750362ce9d878281b240bdb1c29ae638",
+    "X-Envoy-Attempt-Count": "1",
+    "X-Envoy-Internal": "true"
+  }
+}
+```
+
+- In STRICT mode, requests will simply be rejected.
+
+To understand when requests are forwarded through the activator, see [documentation](https://knative.dev/docs/serving/autoscaling/target-burst-capacity/) on the `TargetBurstCapacity` setting.
+
+This also means that many Istio AuthorizationPolicies won't work as expected. For example, if you set up a rule allowing requests from a particular source into a Knative service, you will see requests being rejected if they are forwarded by the activator.
+
+For example, the following policy allows requests from within pods in the `serving-tests` namespace to other pods in the `serving-tests` namespace.
+
+```
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
-  name: deny-all
-  namespace: serving-tests
+ name: allow-serving-tests
+ namespace: serving-tests
 spec:
-  {}
-EOF
+ action: ALLOW
+ rules:
+ - from:
+   - source:
+      namespaces: ["serving-tests"]
 ```
+
+Requests here will fail when forwarded by the activator, because the Istio proxy at the destination service will see the source namespace of the requests as `knative-serving`, which is the namespace of the activator.
+
+Currently, the easiest way around this is to explicitly allow requests from the `knative-serving` namespace, for example by adding it to the list in the above policy:
+
+```
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+ name: allow-serving-tests
+ namespace: serving-tests
+spec:
+ action: ALLOW
+ rules:
+ - from:
+   - source:
+      namespaces: ["serving-tests"]
+```
+
+## Health checking and metrics collection
 
 In addition to allowing your application path, you'll need to configure Istio AuthorizationPolicy
 to allow health checking and metrics collection to your applications from system pods.
