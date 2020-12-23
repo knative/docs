@@ -16,7 +16,7 @@ You must meet the following prerequisites to use Istio AuthorizationPolicy:
 
 ## Mutual TLS in Knative
 
-There are some important considerations when using mutual TLS in Knative; because Knative requests are frequently routed through activator, some considerations need to be made.
+Because Knative requests are frequently routed through activator, some considerations need to be made when using mutual TLS.
 
 ![Knative request flow](./images/architecture.png)
 
