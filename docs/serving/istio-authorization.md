@@ -18,7 +18,7 @@ You must meet the following prerequisites to use Istio AuthorizationPolicy:
 
 There are some important considerations when using mutual TLS in Knative; because Knative requests are frequently routed through activator, some considerations need to be made.
 
-![Knative request flow](TODO: ADD URL)
+![Knative request flow](./images/architecture.png)
 
 Generally, mutual TLS can be configured normally as [in Istio's documentation](https://istio.io/latest/docs/tasks/security/authentication/mtls-migration/). However, since the activator can be in the request path of Knative services, it must have sidecars injected. The simplest way to do this is to label the `knative-serving` namespace:
 
@@ -34,17 +34,17 @@ If the activator isn't injected:
 $ kubectl exec deployment/httpbin -c httpbin -it -- curl -s http://httpbin.knative.svc.cluster.local/headers
 {
   "headers": {
-    "Accept": "*/*", 
-    "Accept-Encoding": "gzip", 
-    "Forwarded": "for=10.72.0.30;proto=http", 
-    "Host": "httpbin.knative.svc.cluster.local", 
-    "K-Proxy-Request": "activator", 
-    "User-Agent": "curl/7.58.0", 
-    "X-B3-Parentspanid": "b240bdb1c29ae638", 
-    "X-B3-Sampled": "0", 
-    "X-B3-Spanid": "416960c27be6d484", 
-    "X-B3-Traceid": "750362ce9d878281b240bdb1c29ae638", 
-    "X-Envoy-Attempt-Count": "1", 
+    "Accept": "*/*",
+    "Accept-Encoding": "gzip",
+    "Forwarded": "for=10.72.0.30;proto=http",
+    "Host": "httpbin.knative.svc.cluster.local",
+    "K-Proxy-Request": "activator",
+    "User-Agent": "curl/7.58.0",
+    "X-B3-Parentspanid": "b240bdb1c29ae638",
+    "X-B3-Sampled": "0",
+    "X-B3-Spanid": "416960c27be6d484",
+    "X-B3-Traceid": "750362ce9d878281b240bdb1c29ae638",
+    "X-Envoy-Attempt-Count": "1",
     "X-Envoy-Internal": "true"
   }
 }
@@ -54,7 +54,7 @@ $ kubectl exec deployment/httpbin -c httpbin -it -- curl -s http://httpbin.knati
 
 To understand when requests are forwarded through the activator, see [documentation](https://knative.dev/docs/serving/autoscaling/target-burst-capacity/) on the `TargetBurstCapacity` setting.
 
-This also means that many Istio AuthorizationPolicies won't work as expected. For example, if you set up a rule allowing requests from a particular source into a Knative service, you will see requests being rejected if they are forwarded by the activator. 
+This also means that many Istio AuthorizationPolicies won't work as expected. For example, if you set up a rule allowing requests from a particular source into a Knative service, you will see requests being rejected if they are forwarded by the activator.
 
 For example, the following policy allows requests from within pods in the `serving-tests` namespace to other pods in the `serving-tests` namespace.
 
