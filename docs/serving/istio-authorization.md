@@ -87,7 +87,7 @@ spec:
  rules:
  - from:
    - source:
-      namespaces: ["serving-tests"]
+      namespaces: ["serving-tests", "knative-serving"]
 ```
 
 ## Health checking and metrics collection
