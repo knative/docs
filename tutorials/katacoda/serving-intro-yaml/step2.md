@@ -33,7 +33,7 @@ INGRESS_PORT=$(kubectl get svc envoy --namespace contour-external --output 'json
 ```{{execute}}
 Then invoke the application using curl:
 ```
-curl http://$MINIKUBE_IP:$INGRESS_PORT/ -H 'Host: demo.default.example.com'
+curl http://$MINIKUBE_IP:$INGRESS_PORT/ -H 'Host: helloworld-go.default.example.com'
 ```{{execute T1}}
 
 ### Scale down to zero
