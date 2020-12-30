@@ -39,7 +39,7 @@ metadata:
 spec:
   template:
     metadata:
-      name: helloworld-green
+      name: helloworld-go-green
     spec:
       containers:
       - env:
@@ -48,10 +48,10 @@ spec:
         image: gcr.io/knative-samples/helloworld-go
   traffic:
   - tag: current
-    revisionName: helloworld-green
+    revisionName: helloworld-go-green
     percent: 50
   - tag: candidate
-    revisionName: helloworld-blue
+    revisionName: helloworld-go-blue
     percent: 50
   - tag: latest
     latestRevision: true

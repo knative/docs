@@ -15,7 +15,7 @@ metadata:
 spec:
   template:
     metadata:
-      name: helloworld-blue
+      name: helloworld-go-blue
     spec:
       containers:
       - env:
