@@ -23,7 +23,7 @@ case "${OSTYPE}" in
 esac
 
 # Download and unpack Istio
-ISTIO_VERSION=1.7.5
+ISTIO_VERSION=1.7.6
 ISTIO_TARBALL=istio-${ISTIO_VERSION}-${ARCH}.tar.gz
 DOWNLOAD_URL=https://github.com/istio/istio/releases/download/${ISTIO_VERSION}/${ISTIO_TARBALL}
 SYSTEM_NAMESPACE="${SYSTEM_NAMESPACE:-"knative-serving"}"
@@ -41,7 +41,6 @@ tar xzf ${ISTIO_TARBALL}
 # Enable mTLS STRICT in mesh mode
 if [[ $MESH -eq 1 ]]; then
   kubectl apply -f "$(dirname $0)/extra/global-mtls.yaml"
-  kubectl patch configmap/config-istio -n ${SYSTEM_NAMESPACE} --patch='{"data":{"local-gateway.mesh":"mesh"}}'
 fi
 
 # Clean up
