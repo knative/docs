@@ -5,15 +5,20 @@ weight: 64
 type: "docs"
 ---
 
-If the Domain Mapping feature is installed, you can serve
-custom domains backed by Knative Services. For example, if you
-own the "mydomain.com" domain name, you can point DNS at your
-Knative cluster, and have this domain name be served by a
-Knative Service.
+Knative Services are automatically given a default domain name based on the
+cluster configuration, e.g. "mysvc.mynamespace.mydomain". You can also map a
+single custom domain name that you own to a specific Knative Service using the
+Domain Mapping feature, if enabled.
+
+For example, if you own the "mydomain.com" domain name, and configure its DNS
+to reference your Knative cluster, you can use the DomainMapping feature to
+have this domain be served by a Knative Service.
 
 ## Before you begin
 
-To map a custom domain to a Knative Service, you should first [create a Knative
+1. You need to enable the DomainMapping feature (and a supported Knative
+   Ingress implementation) to use it. See [the Install instructions](../install/).
+1. To map a custom domain to a Knative Service, you should first [create a Knative
 Service](https://knative.dev/docs/serving/creating-services/).
 
 ## Creating a Domain Mapping
