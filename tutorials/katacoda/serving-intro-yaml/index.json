@@ -1,5 +1,5 @@
 {
-  "title": "Getting Started with Knative (yaml)",
+  "title": "Getting Started with Knative Serving (yaml)",
   "description": "Introduction to Knative by installing knative serving and deploy an application",
   "difficulty": "Beginner",
   "time": "20",
