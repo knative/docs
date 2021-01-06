@@ -1,0 +1,94 @@
+### 1:N Event Delivery
+
+Similar to the first scenario, you can have multiple consumers that are all interested in the same event. You might want
+to run multiple checks or update multiple systems with the new event. There are two ways you can handle this scenario.
+The first way to handle this is an extension of the first diagram. Each consumer is directly tied to the producer.
+![1toN](./assets/1toN.png)
+
+This manner of handling multiple consumers for an event, also called the fanout pattern, introduces a bunch of complex
+problems (like retries, timeouts, and persistence) for our application architecture. Rather than burdening the producers
+to handle these problems, Knative Eventing introduces the concept of a Channel.
+![channel](./assets/channel.png)
+
+### Channel
+
+There are several kinds of channels, but they all implement the capability to deliver events to all consumers and persist
+the events. When you create the channel, you can choose which kind of channel is most appropriate for your use case.
+For development, an “in memory” channel may be sufficient, but for production persistence, retry, and replay capabilities
+may be needed for reliability and/or compliance.
+
+### Subscription
+Consumers of the events need to let the channel know they’re interested to receive events by creating a subscription.
+ 
+Let's see this in action now. First we install and create an in-memory channel:
+1. Install an in-memory channel. (Knative also supports Apache Kafka Channel, Google Cloud Pub/Sub Channel and NATS Channel as options)
+    ```
+    kubectl apply --filename https://github.com/knative/eventing/releases/download/v0.19.0/in-memory-channel.yaml
+    ```{{execute}}
+1. Create an in-memory channel: InMemory channels are great for testing because they add very little overhead and require
+almost no resources. The downside, though, is that you have no persistence and retries. For this example, an InMemory channel is well suited.
+    ```
+    cat <<EOF | kubectl create -f -
+    apiVersion: messaging.knative.dev/v1alpha1
+    kind: InMemoryChannel
+    metadata:
+      name: pingevents
+    EOF
+    ```{{execute}}
+1. Create 3 consumers
+    ```
+    for i in 1 2 3; do
+    cat <<EOF | kubectl create -f -
+    apiVersion: serving.knative.dev/v1
+    kind: Service
+    metadata:
+      name: event-display${i}
+    spec:
+      template:
+        spec:
+          containers:
+            - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+    EOF
+    done
+    ```{{execute}}
+1. Create subscription for the consumers: Now that the channel and the consumers exist, you’ll need to create the subscriptions
+to make sure the consumers can get the messages.
+    ```
+    for i in 1 2 3; do
+    cat <<EOF | kubectl create -f -
+    apiVersion: messaging.knative.dev/v1alpha1
+    kind: Subscription
+    metadata:
+        name: subscriber-${i}
+    spec:
+        channel:
+            apiVersion: messaging.knative.dev/v1alpha1
+            kind: InMemoryChannel
+            name: pingevents
+        subscriber:
+            ref:
+                apiVersion: serving.knative.dev/v1
+                kind: Service
+                name: event-display${i}
+    EOF
+    done
+    ```{{execute}}
+1. create the Producer: We will create a PingSource producer. The “sink” element describes where to send
+events. Rather than sending the events to a service, events are sent to a channel with the name “pingevents” which means
+there’s no longer a tight coupling between the producer and consumer.
+    ```
+    cat <<EOF | kubectl create -f -
+    apiVersion: sources.knative.dev/v1alpha2
+    kind: PingSource
+    metadata:
+      name: test-ping-source-channel
+    spec:
+      schedule: "*/1 * * * *"
+      jsonData: '{"message": "Message from Channel!"}'
+      sink:
+        ref:
+          apiVersion: messaging.knative.dev/v1alpha1
+          kind: InMemoryChannel
+          name: pingevents
+    EOF
+    ```{{execute}}
