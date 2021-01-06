@@ -21,12 +21,14 @@ may be needed for reliability and/or compliance.
 Consumers of the events need to let the channel know they’re interested to receive events by creating a subscription.
  
 Let's see this in action now. First we install and create an in-memory channel:
-1. Install an in-memory channel. (Knative also supports Apache Kafka Channel, Google Cloud Pub/Sub Channel and NATS Channel as options)
-    ```
-    kubectl apply --filename https://github.com/knative/eventing/releases/download/v0.19.0/in-memory-channel.yaml
-    ```{{execute}}
-1. Create an in-memory channel: InMemory channels are great for testing because they add very little overhead and require
+Install an in-memory channel. (Knative also supports Apache Kafka Channel, Google Cloud Pub/Sub Channel and NATS Channel as options)
+```
+kubectl apply --filename https://github.com/knative/eventing/releases/download/v0.19.0/in-memory-channel.yaml
+```{{execute}}
+
+Now, create an in-memory channel: InMemory channels are great for testing because they add very little overhead and require 
 almost no resources. The downside, though, is that you have no persistence and retries. For this example, an InMemory channel is well suited.
+
 ```
 cat <<EOF | kubectl create -f -
 apiVersion: messaging.knative.dev/v1alpha1
@@ -35,7 +37,9 @@ metadata:
   name: pingevents
 EOF
 ```{{execute}}
-1. Create 3 consumers
+
+We will now create 3 consumers:
+
 ```
 for i in 1 2 3; do
 cat <<EOF | kubectl create -f -
@@ -51,8 +55,10 @@ spec:
 EOF
 done
 ```{{execute}}
-1. Create subscription for the consumers: Now that the channel and the consumers exist, you’ll need to create the subscriptions
+
+Now that the channel and the consumers exist, we will need to create the subscriptions
 to make sure the consumers can get the messages.
+
 ```
 for i in 1 2 3; do
 cat <<EOF | kubectl create -f -
@@ -73,22 +79,31 @@ spec:
 EOF
 done
 ```{{execute}}
-1. create the Producer: We will create a PingSource producer. The “sink” element describes where to send
+
+Finally, we create the Producers. As before, we will create a PingSource producer. The “sink” element describes where to send
 events. Rather than sending the events to a service, events are sent to a channel with the name “pingevents” which means
 there’s no longer a tight coupling between the producer and consumer.
-    ```
-    cat <<EOF | kubectl create -f -
-    apiVersion: sources.knative.dev/v1alpha2
-    kind: PingSource
-    metadata:
-      name: test-ping-source-channel
-    spec:
-      schedule: "*/1 * * * *"
-      jsonData: '{"message": "Message from Channel!"}'
-      sink:
-        ref:
-          apiVersion: messaging.knative.dev/v1alpha1
-          kind: InMemoryChannel
-          name: pingevents
-    EOF
-    ```{{execute}}
+
+```
+cat <<EOF | kubectl create -f -
+apiVersion: sources.knative.dev/v1alpha2
+kind: PingSource
+metadata:
+  name: test-ping-source-channel
+spec:
+  schedule: "*/1 * * * *"
+  jsonData: '{"message": "Message from Channel!"}'
+  sink:
+    ref:
+      apiVersion: messaging.knative.dev/v1alpha1
+      kind: InMemoryChannel
+      name: pingevents
+EOF
+```{{execute}}
+
+To verify event delivery, you can check the logs of all three consumers with the following command:
+```
+for i in 1 2 3; do
+kubectl logs -l serving.knative.dev/service=event-display${i} -c user-container --since=10m
+done
+```{{execute}}

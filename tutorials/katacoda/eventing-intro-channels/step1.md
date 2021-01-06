@@ -1,5 +1,5 @@
 ## Installation
-> The startup script running on the right will wait for kubernetes to start and knative serving to be installed.
+> The startup script running on the right will wait for kubernetes to start and knative serving to be installed. (Although Serving is not required for Eventing to work).
 > Once you see a prompt, you can click on the commands below at your own pace, and they will be copied and run for you in the terminal on the right.
 
 1. Install Knative Eventing's core components

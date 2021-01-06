@@ -74,7 +74,13 @@ spec:
       name: event-display
 EOF
 ```{{execute}}
-    
+
+To verify event delivery, you can check the logs of the consumer with the following command:
+
+```
+kubectl logs -l serving.knative.dev/service=event-display -c user-container --since=10m
+```{{execute}}
+
 ### Caveats
 - There is a tight coupling between the producer and the consumer.
 - Both retries and timeouts completely depend on the producer. Events might get dropped due to errors or timeouts and
