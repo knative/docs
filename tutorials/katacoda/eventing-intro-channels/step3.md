@@ -27,52 +27,52 @@ Let's see this in action now. First we install and create an in-memory channel:
     ```{{execute}}
 1. Create an in-memory channel: InMemory channels are great for testing because they add very little overhead and require
 almost no resources. The downside, though, is that you have no persistence and retries. For this example, an InMemory channel is well suited.
-    ```
-    cat <<EOF | kubectl create -f -
-    apiVersion: messaging.knative.dev/v1alpha1
-    kind: InMemoryChannel
-    metadata:
-      name: pingevents
-    EOF
-    ```{{execute}}
+```
+cat <<EOF | kubectl create -f -
+apiVersion: messaging.knative.dev/v1alpha1
+kind: InMemoryChannel
+metadata:
+  name: pingevents
+EOF
+```{{execute}}
 1. Create 3 consumers
-    ```
-    for i in 1 2 3; do
-    cat <<EOF | kubectl create -f -
-    apiVersion: serving.knative.dev/v1
-    kind: Service
-    metadata:
-      name: event-display${i}
+```
+for i in 1 2 3; do
+cat <<EOF | kubectl create -f -
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: event-display${i}
+spec:
+  template:
     spec:
-      template:
-        spec:
-          containers:
-            - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
-    EOF
-    done
-    ```{{execute}}
+      containers:
+        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+EOF
+done
+```{{execute}}
 1. Create subscription for the consumers: Now that the channel and the consumers exist, you’ll need to create the subscriptions
 to make sure the consumers can get the messages.
-    ```
-    for i in 1 2 3; do
-    cat <<EOF | kubectl create -f -
-    apiVersion: messaging.knative.dev/v1alpha1
-    kind: Subscription
-    metadata:
-        name: subscriber-${i}
-    spec:
-        channel:
-            apiVersion: messaging.knative.dev/v1alpha1
-            kind: InMemoryChannel
-            name: pingevents
-        subscriber:
-            ref:
-                apiVersion: serving.knative.dev/v1
-                kind: Service
-                name: event-display${i}
-    EOF
-    done
-    ```{{execute}}
+```
+for i in 1 2 3; do
+cat <<EOF | kubectl create -f -
+apiVersion: messaging.knative.dev/v1alpha1
+kind: Subscription
+metadata:
+    name: subscriber-${i}
+spec:
+    channel:
+        apiVersion: messaging.knative.dev/v1alpha1
+        kind: InMemoryChannel
+        name: pingevents
+    subscriber:
+        ref:
+            apiVersion: serving.knative.dev/v1
+            kind: Service
+            name: event-display${i}
+EOF
+done
+```{{execute}}
 1. create the Producer: We will create a PingSource producer. The “sink” element describes where to send
 events. Rather than sending the events to a service, events are sent to a channel with the name “pingevents” which means
 there’s no longer a tight coupling between the producer and consumer.
