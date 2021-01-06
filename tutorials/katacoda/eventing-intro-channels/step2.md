@@ -8,46 +8,46 @@ The most straightforward use case is that whenever events are produced, you want
 Looking at the diagram above, we’ll create the components in the reverse order.
 Let's create a consumer that will display the events that are sent to it:
 
-    ```
-    cat <<EOF | kubectl create -f -
-    apiVersion: serving.knative.dev/v1
-    kind: Service
-    metadata:
-      name: event-display
+```
+cat <<EOF | kubectl create -f -
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: event-display
+spec:
+  template:
     spec:
-      template:
-        spec:
-          containers:
-            - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
-    EOF
-    ```{{execute}}
+      containers:
+        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+EOF
+```{{execute}}
 
 For creating the producer, we will use the PingSource that will create events every minute.
 The “sink” element describes where to send events. In this case, events are sent to a service with the name “event-display”
-which means there’s a tight connection between the producer and consumer.
+which means there's a tight connection between the producer and consumer.
 
-    ```
-    cat <<EOF | kubectl create -f -
-    apiVersion: sources.knative.dev/v1alpha2
-    kind: PingSource
-    metadata:
-      name: test-ping-source
-    spec:
-      schedule: "*/1 * * * *"
-      jsonData: '{"message": "1 to 1 delivery!"}'
-      sink:
-        ref:
-          apiVersion: serving.knative.dev/v1
-          kind: Service
-          name: event-display
-    EOF
-    ```{{execute}}
+```
+cat <<EOF | kubectl create -f -
+apiVersion: sources.knative.dev/v1alpha2
+kind: PingSource
+metadata:
+  name: test-ping-source
+spec:
+  schedule: "*/1 * * * *"
+  jsonData: '{"message": "1 to 1 delivery!"}'
+  sink:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: event-display
+EOF
+```{{execute}}
 
 To verify event delivery, you can check the logs of the consumer with the following command:
 
-    ```
-    kubectl logs -l serving.knative.dev/service=event-display -c user-container --since=10m
-    ```{{execute}}
+```
+kubectl logs -l serving.knative.dev/service=event-display -c user-container --since=10m
+```{{execute}}
 
 ### N:1 Event Delivery
 With a standard format for events, like Cloud Events, your function already knows how to handle
@@ -58,22 +58,22 @@ same consumer. In the diagram below, you can see an updated drawing where a new 
 
 Let us create the second producer:
 
-    ```
-    cat <<EOF | kubectl create -f -
-    apiVersion: sources.knative.dev/v1alpha2
-    kind: PingSource
-    metadata:
-      name: test-ping-source2
-    spec:
-      schedule: "*/1 * * * *"
-      jsonData: '{"note": "multiple events to the same function works!"}'
-      sink:
-        ref:
-          apiVersion: serving.knative.dev/v1
-          kind: Service
-          name: event-display
-    EOF
-    ```{{execute}}
+```
+cat <<EOF | kubectl create -f -
+apiVersion: sources.knative.dev/v1alpha2
+kind: PingSource
+metadata:
+  name: test-ping-source2
+spec:
+  schedule: "*/1 * * * *"
+  jsonData: '{"note": "multiple events to the same function works!"}'
+  sink:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: event-display
+EOF
+```{{execute}}
     
 ### Caveats
 - There is a tight coupling between the producer and the consumer.
