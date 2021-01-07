@@ -16,7 +16,7 @@ Now, update the env variable to `green`:
 kn service update demo --env TARGET=green
 ```{{execute T1}}
 
-This will result in a new `revision` being created. verify this by running `kn revision list`{{execute T1}}.
+This will result in a new `revision` being created. Verify this by running `kn revision list`{{execute T1}}.
 Both these revisions are capable of serving requests, we now need to split our traffic between the two revisions.
 ```
 kn service update demo --traffic blue=50,@latest=50

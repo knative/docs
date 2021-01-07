@@ -27,7 +27,7 @@ spec:
 EOF
 ```{{execute T1}}
 
-This will result in a new `revision` being created. verify this by running `kubectl get revisions`{{execute T1}}.
+This will result in a new `revision` being created. Verify this by running `kubectl get revisions`{{execute T1}}.
 Both these revisions are capable of serving requests. By default all traffic will be routed to the latest revision. You can test that by running the `curl` command again.
 We will now split our traffic between the two revisions by using the `traffic` block in the Service definition.
 ```

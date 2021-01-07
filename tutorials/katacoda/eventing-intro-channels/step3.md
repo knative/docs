@@ -14,8 +14,7 @@ to handle these problems, Knative Eventing introduces the concept of a Channel.
 
 There are several kinds of channels, but they all implement the capability to deliver events to all consumers and persist
 the events. When you create the channel, you can choose which kind of channel is most appropriate for your use case.
-For development, an “in memory” channel may be sufficient, but for production persistence, retry, and replay capabilities
-may be needed for reliability and/or compliance.
+For development, an “in memory” channel may be sufficient, but for production you may need persistence, retry, and replay capabilities for reliability and/or compliance.
 
 ### Subscription
 Consumers of the events need to let the channel know they’re interested to receive events by creating a subscription.
