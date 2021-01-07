@@ -48,7 +48,7 @@ that are active when running Knative Serving.
    networking-istio         1         1         1            1           1h
    webhook                  1         1         1            1           1h
    ```
-The networking deployment (in our case, `networking-istio`) may be called something 
+The networking deployment (in our case, `networking-istio`) may be called something
 different depending on what networking layer you chose to use when [installing Knative](../install/README.md).
 
 
