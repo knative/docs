@@ -84,9 +84,9 @@ and validates and mutates Kubernetes API calls.
 
 The certmanager reconciles cluster ingresses into cert manager objects.
 
-### Deployment: networking-istio/contour-ingress-controller/etc.
+### Deployment: networking
 
-The networking layer deployment (eg. networking-istio, contour-ingress-controller, etc.) reconciles a cluster’s ingress into the appropriate networking layer primitives. In the example shown above, we've chosen to use Istio (which reconciles into a [Istio Virtual Service](https://istio.io/latest/docs/reference/config/networking/virtual-service/), but any networking layer deployment will do.
+The networking layer deployment (eg. networking-istio, contour-ingress-controller, etc.) reconciles a cluster’s ingress into the appropriate networking layer primitives. In the example shown above, we've chosen to use Istio (which reconciles into a [Istio Virtual Service](https://istio.io/latest/docs/reference/config/networking/virtual-service/).
 
 ## What's Next
 
