@@ -117,7 +117,7 @@ the event destination.
 
 Knative Eventing also defines an event forwarding and persistence layer, called
 a
-[**Channel**](https://github.com/knative/eventing/blob/master/pkg/apis/messaging/v1/channel_types.go#L57).
+[**Channel**](channels/README.md).
 Each channel is a separate Kubernetes [Custom Resource](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
 Events are delivered to Services or forwarded to other channels
 (possibly of a different type) using
