@@ -53,7 +53,7 @@ different depending on what networking layer you chose to use when [installing K
 
 
 These services and deployments are installed by the `serving.yaml` file during
-install. The next section describes their function. 
+install. The next section describes their function.
 ## Components
 
 ### Service: activator
