@@ -9,10 +9,7 @@ Knative serving resolves image tags to a digest when you create a revision. This
 gives knative revisions some very nice properties, e.g. your deployments will be
 consistent, you don't have to worry about "immutable tags", etc. For more info,
 see
-[Why we resolve tags in Knative](https://docs.google.com/presentation/d/1gjcVniYD95H1DmGM_n7dYJ69vD9d6KgJiA-D9dydWGU/edit?usp=sharing)
-(join
-[`knative-users@googlegroups.com`](https://groups.google.com/d/forum/knative-users)
-for access).
+[Why we resolve tags in Knative](https://docs.google.com/presentation/d/e/2PACX-1vTgyp2lGDsLr_bohx3Ym_2mrTcMoFfzzd6jocUXdmWQFdXydltnraDMoLxvEe6WY9pNPpUUvM-geJ-g/pub).
 
 Unfortunately, this means that the knative serving controller needs to be
 configured to access your container registry.

@@ -24,7 +24,7 @@ Resource Types:
 <p>PodAutoscaler is a Knative abstraction that encapsulates the interface by which Knative
 components instantiate autoscalers.  This definition is an abstraction that may be backed
 by multiple definitions.  For more information, see the Knative Pluggability presentation:
-<a href="https://docs.google.com/presentation/d/10KWynvAJYuOEWy69VBa6bHJVCqIsz1TNdEKosNvcpPY/edit">https://docs.google.com/presentation/d/10KWynvAJYuOEWy69VBa6bHJVCqIsz1TNdEKosNvcpPY/edit</a></p>
+<a href="https://docs.google.com/presentation/d/e/2PACX-1vQ4kT92QNXvBF9dJzVfF_zqUROoG1wZXf-ATMKi8d43htvt3Osq6k-1YUWAO9M27gZ8C-cGBQA8-bwJ/pub">https://docs.google.com/presentation/d/e/2PACX-1vQ4kT92QNXvBF9dJzVfF_zqUROoG1wZXf-ATMKi8d43htvt3Osq6k-1YUWAO9M27gZ8C-cGBQA8-bwJ/pub</a></p>
 </p>
 <table>
 <thead>

@@ -6,7 +6,7 @@ Catch up with past community meetups on our [YouTube channel](https://www.youtub
 
 Here we will list all the information related to past and future events.
 
-Stay tuned for new events by subscribing to our [calendar](https://calendar.google.com/calendar/embed?src=google.com_18un4fuh6rokqf8hmfftm5oqq4%40group.calendar.google.com) ([iCal export file](https://calendar.google.com/calendar/ical/google.com_18un4fuh6rokqf8hmfftm5oqq4@group.calendar.google.com/public/basic.ics)) and following us on [Twitter](https://twitter.com/KnativeProject).
+Stay tuned for new events by subscribing to our [calendar](https://calendar.google.com/calendar/embed?src=knative.team_9q83bg07qs5b9rrslp5jor4l6s%40group.calendar.google.com&ctz=America%2FLos_Angeles) ([iCal export file](https://calendar.google.com/calendar/ical/knative.team_9q83bg07qs5b9rrslp5jor4l6s%40group.calendar.google.com/public/basic.ics)) and following us on [Twitter](https://twitter.com/KnativeProject).
 
 ---
 
