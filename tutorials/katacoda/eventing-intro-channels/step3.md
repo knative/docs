@@ -31,7 +31,7 @@ almost no resources. The downside, though, is that you have no persistence and r
 
 ```
 cat <<EOF | kubectl create -f -
-apiVersion: messaging.knative.dev/v1alpha1
+apiVersion: messaging.knative.dev/v1
 kind: InMemoryChannel
 metadata:
   name: pingevents
@@ -62,13 +62,13 @@ to make sure the consumers can get the messages.
 ```
 for i in 1 2 3; do
 cat <<EOF | kubectl create -f -
-apiVersion: messaging.knative.dev/v1alpha1
+apiVersion: messaging.knative.dev/v1
 kind: Subscription
 metadata:
     name: subscriber-${i}
 spec:
     channel:
-        apiVersion: messaging.knative.dev/v1alpha1
+        apiVersion: messaging.knative.dev/v1
         kind: InMemoryChannel
         name: pingevents
     subscriber:
@@ -95,15 +95,15 @@ spec:
   jsonData: '{"message": "Message from Channel!"}'
   sink:
     ref:
-      apiVersion: messaging.knative.dev/v1alpha1
+      apiVersion: messaging.knative.dev/v1
       kind: InMemoryChannel
       name: pingevents
 EOF
 ```{{execute}}
 
-To verify event delivery, you can check the logs of all three consumers with the following command:
+To verify event delivery, you can check the logs of all three consumers:
 ```
-for i in 1 2 3; do
-kubectl logs -l serving.knative.dev/service=event-display${i} -c user-container --since=10m
-done
+kubectl logs -l serving.knative.dev/service=event-display1 -c user-container --since=10m
+kubectl logs -l serving.knative.dev/service=event-display2 -c user-container --since=10m
+kubectl logs -l serving.knative.dev/service=event-display3 -c user-container --since=10m
 ```{{execute}}
