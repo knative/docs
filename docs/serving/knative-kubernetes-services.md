@@ -49,7 +49,7 @@ that are active when running Knative Serving.
    webhook                  1         1         1            1           1h
    ```
 The networking deployment (in our case, `networking-istio`) may be called something 
-different depending on what networking layer you chose to use when [installing Knative](https://knative.dev/docs/install/any-kubernetes-cluster/).
+different depending on what networking layer you chose to use when [installing Knative](../install/README.md).
 
 
 These services and deployments are installed by the `serving.yaml` file during
