@@ -60,7 +60,7 @@ kubectl exec post-event -- curl -v "http://broker-ingress.knative-eventing.svc.c
   -H "Ce-Type: orange" \
   -H "Ce-Source: kata-tutorial" \
   -H "Content-Type: application/json" \
-  -d '{"msg":"The event is orange!"}
+  -d '{"msg":"The event is orange!"}'
 ```{{execute}}
 
 Verify that the correct events are delivered using the command:

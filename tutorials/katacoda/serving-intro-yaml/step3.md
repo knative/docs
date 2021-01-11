@@ -5,7 +5,8 @@ The Knative `service` resource creates additional resources "route, configuratio
 
 You can list those resources by running ```kubectl get ksvc,configuration,route,revision```{{execute T1}} or by using the `kn` cli
 
-We will now update the service to change the `TARGET` env variable to `green`.
+We will now update the service to change the `TARGET` env variable to `green`. Note that the name of the service is the same, we have updated the value of the environment
+variable and `.spec.template.metadata.name`
 
 ```
 cat <<EOF | kubectl apply -f -

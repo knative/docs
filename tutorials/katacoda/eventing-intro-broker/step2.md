@@ -1,6 +1,6 @@
 ## Use Case
 The broker and trigger model is useful for complex event delivery topologies like N:M:Z, i.e. there are a multitude of Sources sending events, Functions
-consuming/transforming and so forth, it can get a bit unwieldy to keep track of which Channel is having which events, and furthermore, sometimes you might only want to
+consuming/transforming which are then processed by even more functions and so on, it can get a bit unwieldy to keep track of which Channel is having which events, and furthermore, sometimes you might only want to
 consume only some of them, you would have to receive all of them, and throw out the ones you’re not interested in. To make these kinds of interactions easier and allow the
 user to only focus on declaring which events they are interested in and where to send them is an easier way to reason about them. This is where Broker and Trigger are meant
 to provide a straightforward user experience.

@@ -24,7 +24,7 @@ EOF
 
 For creating the producer, we will use the PingSource that will create events every minute.
 The “sink” element describes where to send events. In this case, events are sent to a service with the name “event-display”
-which means there's a tight connection between the producer and consumer.
+which means there's a tight coupling between the producer and consumer.
 
 ```
 cat <<EOF | kubectl create -f -
@@ -43,7 +43,7 @@ spec:
 EOF
 ```{{execute}}
 
-To verify event delivery, you can check the logs of the consumer with the following command:
+To verify event delivery, you can check the logs of the consumer with the following command (You will not see an event there for a minute after creating the producer):
 
 ```
 kubectl logs -l serving.knative.dev/service=event-display -c user-container --since=10m
