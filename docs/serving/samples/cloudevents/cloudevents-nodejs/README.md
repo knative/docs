@@ -70,9 +70,9 @@ To deploy the Knative service, edit the `service.yaml` file and replace
 
 To deploy using the `kn` CLI:
 
-```shell
-kn service create cloudevents-nodejs --image=<image>
-```
+   ```shell
+   kn service create cloudevents-nodejs --image=<image>
+   ```
 
 {{ /tab }}{{ /tabs }}
 
