@@ -251,7 +251,7 @@ the next topic: How do we actually populate the registry in the first place?
      - my-cluster-kafka-bootstrap.kafka:9092
     topics:
      - knative-demo
-      - news
+     - news
     sink:
       apiVersion: eventing.knative.dev/v1
       kind: Broker
