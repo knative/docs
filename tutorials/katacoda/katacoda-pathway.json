@@ -1,0 +1,29 @@
+{
+    "title": "Getting Started with Knative",
+    "description": "Introduction to Knative Serving and Eventing",
+    "icon": "fa-katacoda",
+    "courses": 
+    [
+      {
+        "course_id": "serving-intro",
+        "title": "Getting Started with Knative Serving (kn cli)",
+        "description": "Introduction to Knative by installing knative serving and deploy an application"
+      },
+      {
+        "course_id": "serving-intro-yaml",
+        "title": "Getting Started with Knative Serving (yaml)",
+        "description": "Introduction to Knative by installing knative serving and deploy an application"
+      },
+      {
+        "course_id": "eventing-intro-channels",
+        "title": "Getting Started with Knative Eventing 1",
+        "description": "Introduction to Knative by installing knative eventing and implementing various event-processing topologies"
+      },
+      {
+        "course_id": "eventing-intro-broker",
+        "title": "Getting Started with Knative Eventing 2",
+        "description": "Introduction to Broker-Trigger model in Knative Eventing"
+      }
+    ]
+  }
+  
