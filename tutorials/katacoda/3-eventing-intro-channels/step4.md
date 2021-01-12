@@ -90,8 +90,12 @@ spec:
 EOF
 ```{{execute}}
 
-Verify that the sequence was executed and the message was updated by running:
+Verify that the sequence was executed and the message was updated by running the below command
+(You will not see an event there for a minute after creating the producer):
 
 ```
-kubectl -n default logs -l serving.knative.dev/service=event-display-chain -c user-container --since=10m
+# it is likely that is pod is still being created after scaling down to zero
+kubectl wait --for=condition=ready pod -l serving.knative.dev/service=event-display-chain
+# see the logs
+kubectl -n default logs -l serving.knative.dev/service=event-display-chain -c user-container --since=10m --tail=50
 ```{{execute}}

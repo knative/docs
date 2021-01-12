@@ -1,6 +1,6 @@
 {
   "title": "Getting Started with Knative Serving (kn cli)",
-  "description": "Introduction to Knative by installing knative serving and deploy an application",
+  "description": "Introduction to Knative by installing knative serving and deploy an application (If you want to script your workflow, or really don't like yaml)",
   "difficulty": "Beginner",
   "time": "20",
   "details": {

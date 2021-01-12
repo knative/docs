@@ -66,6 +66,10 @@ kubectl exec post-event -- curl -v "http://broker-ingress.knative-eventing.svc.c
 Verify that the correct events are delivered using the command:
 
 ```
-kubectl logs -l serving.knative.dev/service=consumer1 -c user-container --since=10m
-kubectl logs -l serving.knative.dev/service=consumer2 -c user-container --since=10m
+# it is likely that is pod is still being created after scaling down to zero
+kubectl wait --for=condition=ready pod -l serving.knative.dev/service=consumer1
+kubectl wait --for=condition=ready pod -l serving.knative.dev/service=consumer2
+# see the logs
+kubectl logs -l serving.knative.dev/service=consumer1 -c user-container --since=10m --tail=50
+kubectl logs -l serving.knative.dev/service=consumer2 -c user-container --since=10m --tail=50
 ```{{execute}}

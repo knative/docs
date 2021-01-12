@@ -46,7 +46,10 @@ EOF
 To verify event delivery, you can check the logs of the consumer with the following command (You will not see an event there for a minute after creating the producer):
 
 ```
-kubectl logs -l serving.knative.dev/service=event-display -c user-container --since=10m
+# it is likely that is pod is still being created after scaling down to zero
+kubectl wait --for=condition=ready pod -l serving.knative.dev/service=event-display
+# get the logs
+kubectl logs -l serving.knative.dev/service=event-display -c user-container --since=10m --tail=50
 ```{{execute}}
 
 ### N:1 Event Delivery
@@ -75,10 +78,13 @@ spec:
 EOF
 ```{{execute}}
 
-To verify event delivery, you can check the logs of the consumer with the following command:
+To verify event delivery, you can check the logs of the consumer with the following command (You will not see an event there for a minute after creating the producer):
 
 ```
-kubectl logs -l serving.knative.dev/service=event-display -c user-container --since=10m
+# it is likely that is pod is still being created after scaling down to zero
+kubectl wait --for=condition=ready pod -l serving.knative.dev/service=event-display
+# see the logs
+kubectl logs -l serving.knative.dev/service=event-display -c user-container --since=10m --tail=50
 ```{{execute}}
 
 ### Caveats
