@@ -46,6 +46,8 @@ dev.knative.kafka.event-tdt48                dev.knative.kafka.event            
 google.pubsub.topic.publish-hrxhh            google.pubsub.topic.publish             //pubsub.googleapis.com/knative/topics/testing                                     dev                        False     BrokerIsNotReady
 ```
 
+**NOTE:** This assumes that the Sources, emitting those events reference a `broker` as their _sink_.
+
 We can see that there are seven different EventTypes in the registry of the
 `default` namespace. Let's pick the first one and see what the EventType yaml
 looks like:
@@ -60,7 +62,8 @@ kind: EventType
 metadata:
   name: dev.knative.source.github.push-34cnb
   namespace: default
-  generateName: dev.knative.source.github.push-
+  labels:
+    eventing.knative.dev/sourceName: github-sample
 spec:
   type: dev.knative.source.github.push
   source: https://github.com/knative/eventing
