@@ -61,7 +61,7 @@ To ease writing a new event source, the eventing subsystem has offloaded several
 
 ![Simplified Controller](https://raw.githubusercontent.com/knative/docs/master/docs/eventing/samples/writing-event-source/simplified-controller.png)
 
-Fig 1. - Via shared [Knative Dependency Injection](https://docs.google.com/presentation/d/1aK5xCBv7wbfdDZAvnUE4vGWGk77EYZ6AbL0OR1vKPq8/edit#slide=id.g596dcbbefb_0_40)
+Fig 1. - Via shared [Knative Dependency Injection](https://docs.google.com/presentation/d/e/2PACX-1vQbpISBvY7jqzu2wy2t1_0R4LSBEBS0JrUS7M7V3BMVqy2K1Zk_0Xhy7WPPaeANLHE0yqtz1DuWlSAl/pub?resourcekey=0-mf6dN2vu9SS3bo2TUeCk9Q&slide=id.g596dcbbefb_0_40)
 
 
 Specifically, the `clientset`, `cache`, `informers`, and `listers` can all be generated and shared. Thus, they can be generated, imported, and assigned to the underlying reconciler when creating a new controller source implementation:

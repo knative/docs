@@ -76,7 +76,7 @@ issue in the [`knative/website` repo](https://github.com/knative/website/issues)
 The
 [Knative Documentation Working Group](https://github.com/knative/community/blob/master/working-groups/WORKING-GROUPS.md#documentation)
 meets biweekly on Tuesdays at 9:30am PT.
-[Click here](https://calendar.google.com/calendar/embed?src=google.com_18un4fuh6rokqf8hmfftm5oqq4%40group.calendar.google.com)
+[Click here](https://calendar.google.com/calendar/embed?src=knative.team_9q83bg07qs5b9rrslp5jor4l6s%40group.calendar.google.com)
 to see the exact dates on the Knative working group calendar.
 
 If you're interested in becoming more involved in Knative's documentation, start
