@@ -25,7 +25,7 @@ spec:
 
 EOF
 ```{{execute}}
-Check the status of the service by running `kubectl get ksvc`{{execute}}. When `READY` becomes `True` the service is ready to serve traffic.
+Check the status of the service by running `watch kubectl get ksvc`{{execute T2}}. When `READY` becomes `True` the service is ready to serve traffic.
 
 We can now invoke the application using `curl`. We first need to figure out the IP address of minikube and ingress port.
 ```

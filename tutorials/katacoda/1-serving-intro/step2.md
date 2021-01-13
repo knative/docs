@@ -1,6 +1,6 @@
 ## Deploy and autoscale application
 
-We are going to deploy the [Hello world sample application](https://knative.dev/docs/serving/samples/hello-world/helloworld-go/). This application reads in an env variable TARGET and prints `Hello ${TARGET}!`. If TARGET is not specified, it will use `World` as the TARGET.
+We are going to deploy the [Hello world sample web application](https://knative.dev/docs/serving/samples/hello-world/helloworld-go/). This basic web application reads in an env variable TARGET and prints `Hello ${TARGET}!`. If TARGET is not specified, it will use `World` as the TARGET.
 
 We will now deploy the application by specifying the image location and the `TARGET` env variable.
 

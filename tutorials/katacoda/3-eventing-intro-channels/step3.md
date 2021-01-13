@@ -6,14 +6,16 @@ The first way to handle this is an extension of the first diagram. Each consumer
 ![1toN](./assets/1toN.png)
 
 This manner of handling multiple consumers for an event, also called the fanout pattern, introduces a bunch of complex
-problems (like retries, timeouts, and persistence) for our application architecture. Rather than burdening the producers
-to handle these problems, Knative Eventing introduces the concept of a Channel.
+problems (like what if the producer crashes after delivering event to only a subset of consumers?
+what if a client was temporarily un-available, how does it get the messages it missed? etc.) for our application architecture.
+Rather than burdening the producers to handle these problems, Knative Eventing introduces the concept of a Channel.
 ![channel](./assets/channel.png)
 
 ### Channel
 
-There are several kinds of channels, but they all implement the capability to deliver events to all consumers and persist
-the events. When you create the channel, you can choose which kind of channel is most appropriate for your use case.
+Channels help de-couple the Producers from Consumers. The Producer only publishes to the channel and the consumer registers a `Subscription` to get events from the channel.
+There are several kinds of channels, but they all implement the capability to deliver events to all consumers and persist the events. This resolves both the problems (producer crashing, clients temporarily offline) mentioned above.
+When you create the channel, you can choose which kind of channel is most appropriate for your use case.
 For development, an “in memory” channel may be sufficient, but for production you may need persistence, retry, and replay capabilities for reliability and/or compliance.
 
 ### Subscription

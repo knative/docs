@@ -22,9 +22,11 @@ spec:
     terminationMessagePolicy: File
     tty: true
 EOF
+# wait for it to be ready
+kubectl wait pods/post-event --for=condition=ContainersReady
 ```{{execute}}
 
-Publish red events using the command:
+Let us publish some [cloudevents](https://cloudevents.io/). The command below adds some cloud-events specific headers to the curl command. Publish red events using the command:
 
 ```
 kubectl exec post-event -- curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/default/default" \
@@ -63,7 +65,7 @@ kubectl exec post-event -- curl -v "http://broker-ingress.knative-eventing.svc.c
   -d '{"msg":"The event is orange!"}'
 ```{{execute}}
 
-Verify that the correct events are delivered using the command:
+Verify that consumer1 receives blue and orange events and consumer2 receives red events:
 
 ```
 # it is likely that is pod is still being created after scaling down to zero
