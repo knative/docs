@@ -1,5 +1,5 @@
 ## What is Knative?
-Knative brings "serverless" experience to kubernetes. It also tries to codify common patterns and best practices for running applications while hiding away the complexity of doing that on kubernetes. It does so by providing two components:
+Knative brings the "serverless" experience to kubernetes. It also tries to codify common patterns and best practices for running applications while hiding the complexity of doing so on kubernetes. It does so by providing two components:
 - Eventing - Management and delivery of events
 - Serving - Request-driven compute that can scale to zero
 
