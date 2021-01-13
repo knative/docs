@@ -1150,7 +1150,7 @@ ServiceStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1.Configuration">Configuration</a>, 
+<a href="#serving.knative.dev/v1.Configuration">Configuration</a>,
 <a href="#serving.knative.dev/v1.ServiceSpec">ServiceSpec</a>)
 </p>
 <p>
@@ -1231,7 +1231,7 @@ ConfigurationStatusFields
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1.ConfigurationStatus">ConfigurationStatus</a>, 
+<a href="#serving.knative.dev/v1.ConfigurationStatus">ConfigurationStatus</a>,
 <a href="#serving.knative.dev/v1.ServiceStatus">ServiceStatus</a>)
 </p>
 <p>
@@ -1318,7 +1318,7 @@ string
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1.Revision">Revision</a>, 
+<a href="#serving.knative.dev/v1.Revision">Revision</a>,
 <a href="#serving.knative.dev/v1.RevisionTemplateSpec">RevisionTemplateSpec</a>)
 </p>
 <p>
@@ -1576,7 +1576,7 @@ be provided.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1.Route">Route</a>, 
+<a href="#serving.knative.dev/v1.Route">Route</a>,
 <a href="#serving.knative.dev/v1.ServiceSpec">ServiceSpec</a>)
 </p>
 <p>
@@ -1658,7 +1658,7 @@ RouteStatusFields
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1.RouteStatus">RouteStatus</a>, 
+<a href="#serving.knative.dev/v1.RouteStatus">RouteStatus</a>,
 <a href="#serving.knative.dev/v1.ServiceStatus">ServiceStatus</a>)
 </p>
 <p>
@@ -1877,7 +1877,7 @@ specific to RouteStatus.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1.RouteSpec">RouteSpec</a>, 
+<a href="#serving.knative.dev/v1.RouteSpec">RouteSpec</a>,
 <a href="#serving.knative.dev/v1.RouteStatusFields">RouteStatusFields</a>)
 </p>
 <p>

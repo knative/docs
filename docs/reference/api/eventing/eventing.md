@@ -461,9 +461,9 @@ ChannelableStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#duck.knative.dev/v1.Channelable">Channelable</a>, 
-<a href="#messaging.knative.dev/v1.ChannelSpec">ChannelSpec</a>, 
-<a href="#messaging.knative.dev/v1.ChannelTemplateSpecInternalSpec">ChannelTemplateSpecInternalSpec</a>, 
+<a href="#duck.knative.dev/v1.Channelable">Channelable</a>,
+<a href="#messaging.knative.dev/v1.ChannelSpec">ChannelSpec</a>,
+<a href="#messaging.knative.dev/v1.ChannelTemplateSpecInternalSpec">ChannelTemplateSpecInternalSpec</a>,
 <a href="#messaging.knative.dev/v1.InMemoryChannelSpec">InMemoryChannelSpec</a>)
 </p>
 <p>
@@ -514,8 +514,8 @@ global delivery spec.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#duck.knative.dev/v1.Channelable">Channelable</a>, 
-<a href="#messaging.knative.dev/v1.ChannelStatus">ChannelStatus</a>, 
+<a href="#duck.knative.dev/v1.Channelable">Channelable</a>,
+<a href="#messaging.knative.dev/v1.ChannelStatus">ChannelStatus</a>,
 <a href="#messaging.knative.dev/v1.InMemoryChannelStatus">InMemoryChannelStatus</a>)
 </p>
 <p>
@@ -594,11 +594,11 @@ Failed messages are delivered here.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#duck.knative.dev/v1.ChannelableSpec">ChannelableSpec</a>, 
-<a href="#duck.knative.dev/v1.SubscriberSpec">SubscriberSpec</a>, 
-<a href="#eventing.knative.dev/v1.BrokerSpec">BrokerSpec</a>, 
-<a href="#flows.knative.dev/v1.ParallelBranch">ParallelBranch</a>, 
-<a href="#flows.knative.dev/v1.SequenceStep">SequenceStep</a>, 
+<a href="#duck.knative.dev/v1.ChannelableSpec">ChannelableSpec</a>,
+<a href="#duck.knative.dev/v1.SubscriberSpec">SubscriberSpec</a>,
+<a href="#eventing.knative.dev/v1.BrokerSpec">BrokerSpec</a>,
+<a href="#flows.knative.dev/v1.ParallelBranch">ParallelBranch</a>,
+<a href="#flows.knative.dev/v1.SequenceStep">SequenceStep</a>,
 <a href="#messaging.knative.dev/v1.SubscriptionSpec">SubscriptionSpec</a>)
 </p>
 <p>
@@ -780,7 +780,7 @@ configured as to be compatible with Subscribable contract.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#duck.knative.dev/v1.ChannelableSpec">ChannelableSpec</a>, 
+<a href="#duck.knative.dev/v1.ChannelableSpec">ChannelableSpec</a>,
 <a href="#duck.knative.dev/v1.Subscribable">Subscribable</a>)
 </p>
 <p>
@@ -813,7 +813,7 @@ configured as to be compatible with Subscribable contract.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#duck.knative.dev/v1.ChannelableStatus">ChannelableStatus</a>, 
+<a href="#duck.knative.dev/v1.ChannelableStatus">ChannelableStatus</a>,
 <a href="#duck.knative.dev/v1.Subscribable">Subscribable</a>)
 </p>
 <p>
@@ -1659,8 +1659,8 @@ configured as to be compatible with Subscribable contract.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#duck.knative.dev/v1alpha1.ChannelableCombinedSpec">ChannelableCombinedSpec</a>, 
-<a href="#duck.knative.dev/v1alpha1.ChannelableSpec">ChannelableSpec</a>, 
+<a href="#duck.knative.dev/v1alpha1.ChannelableCombinedSpec">ChannelableCombinedSpec</a>,
+<a href="#duck.knative.dev/v1alpha1.ChannelableSpec">ChannelableSpec</a>,
 <a href="#duck.knative.dev/v1alpha1.SubscribableType">SubscribableType</a>)
 </p>
 <p>
@@ -1692,8 +1692,8 @@ Subscribable
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#duck.knative.dev/v1alpha1.ChannelableCombinedStatus">ChannelableCombinedStatus</a>, 
-<a href="#duck.knative.dev/v1alpha1.ChannelableStatus">ChannelableStatus</a>, 
+<a href="#duck.knative.dev/v1alpha1.ChannelableCombinedStatus">ChannelableCombinedStatus</a>,
+<a href="#duck.knative.dev/v1alpha1.ChannelableStatus">ChannelableStatus</a>,
 <a href="#duck.knative.dev/v1alpha1.SubscribableType">SubscribableType</a>)
 </p>
 <p>
@@ -1938,8 +1938,8 @@ ChannelableStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#duck.knative.dev/v1beta1.Channelable">Channelable</a>, 
-<a href="#messaging.knative.dev/v1beta1.ChannelSpec">ChannelSpec</a>, 
+<a href="#duck.knative.dev/v1beta1.Channelable">Channelable</a>,
+<a href="#messaging.knative.dev/v1beta1.ChannelSpec">ChannelSpec</a>,
 <a href="#messaging.knative.dev/v1beta1.InMemoryChannelSpec">InMemoryChannelSpec</a>)
 </p>
 <p>
@@ -1988,8 +1988,8 @@ DeliverySpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#duck.knative.dev/v1beta1.Channelable">Channelable</a>, 
-<a href="#messaging.knative.dev/v1beta1.ChannelStatus">ChannelStatus</a>, 
+<a href="#duck.knative.dev/v1beta1.Channelable">Channelable</a>,
+<a href="#messaging.knative.dev/v1beta1.ChannelStatus">ChannelStatus</a>,
 <a href="#messaging.knative.dev/v1beta1.InMemoryChannelStatus">InMemoryChannelStatus</a>)
 </p>
 <p>
@@ -2068,14 +2068,14 @@ Failed messages are delivered here.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#duck.knative.dev/v1alpha1.ChannelableCombinedSpec">ChannelableCombinedSpec</a>, 
-<a href="#duck.knative.dev/v1alpha1.ChannelableSpec">ChannelableSpec</a>, 
-<a href="#duck.knative.dev/v1alpha1.SubscriberSpec">SubscriberSpec</a>, 
-<a href="#duck.knative.dev/v1beta1.ChannelableSpec">ChannelableSpec</a>, 
-<a href="#duck.knative.dev/v1beta1.SubscriberSpec">SubscriberSpec</a>, 
-<a href="#eventing.knative.dev/v1beta1.BrokerSpec">BrokerSpec</a>, 
-<a href="#flows.knative.dev/v1beta1.ParallelBranch">ParallelBranch</a>, 
-<a href="#flows.knative.dev/v1beta1.SequenceStep">SequenceStep</a>, 
+<a href="#duck.knative.dev/v1alpha1.ChannelableCombinedSpec">ChannelableCombinedSpec</a>,
+<a href="#duck.knative.dev/v1alpha1.ChannelableSpec">ChannelableSpec</a>,
+<a href="#duck.knative.dev/v1alpha1.SubscriberSpec">SubscriberSpec</a>,
+<a href="#duck.knative.dev/v1beta1.ChannelableSpec">ChannelableSpec</a>,
+<a href="#duck.knative.dev/v1beta1.SubscriberSpec">SubscriberSpec</a>,
+<a href="#eventing.knative.dev/v1beta1.BrokerSpec">BrokerSpec</a>,
+<a href="#flows.knative.dev/v1beta1.ParallelBranch">ParallelBranch</a>,
+<a href="#flows.knative.dev/v1beta1.SequenceStep">SequenceStep</a>,
 <a href="#messaging.knative.dev/v1beta1.SubscriptionSpec">SubscriptionSpec</a>)
 </p>
 <p>
@@ -2257,8 +2257,8 @@ configured as to be compatible with Subscribable contract.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#duck.knative.dev/v1alpha1.ChannelableCombinedSpec">ChannelableCombinedSpec</a>, 
-<a href="#duck.knative.dev/v1beta1.ChannelableSpec">ChannelableSpec</a>, 
+<a href="#duck.knative.dev/v1alpha1.ChannelableCombinedSpec">ChannelableCombinedSpec</a>,
+<a href="#duck.knative.dev/v1beta1.ChannelableSpec">ChannelableSpec</a>,
 <a href="#duck.knative.dev/v1beta1.Subscribable">Subscribable</a>)
 </p>
 <p>
@@ -2291,8 +2291,8 @@ configured as to be compatible with Subscribable contract.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#duck.knative.dev/v1alpha1.ChannelableCombinedStatus">ChannelableCombinedStatus</a>, 
-<a href="#duck.knative.dev/v1beta1.ChannelableStatus">ChannelableStatus</a>, 
+<a href="#duck.knative.dev/v1alpha1.ChannelableCombinedStatus">ChannelableCombinedStatus</a>,
+<a href="#duck.knative.dev/v1beta1.ChannelableStatus">ChannelableStatus</a>,
 <a href="#duck.knative.dev/v1beta1.Subscribable">Subscribable</a>)
 </p>
 <p>
@@ -2408,7 +2408,7 @@ DeliverySpec
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#duck.knative.dev/v1alpha1.SubscribableStatus">SubscribableStatus</a>, 
+<a href="#duck.knative.dev/v1alpha1.SubscribableStatus">SubscribableStatus</a>,
 <a href="#duck.knative.dev/v1beta1.SubscribableStatus">SubscribableStatus</a>)
 </p>
 <p>
@@ -3970,7 +3970,7 @@ ParallelSubscriptionStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#flows.knative.dev/v1.ParallelBranchStatus">ParallelBranchStatus</a>, 
+<a href="#flows.knative.dev/v1.ParallelBranchStatus">ParallelBranchStatus</a>,
 <a href="#flows.knative.dev/v1.ParallelStatus">ParallelStatus</a>)
 </p>
 <p>
@@ -4804,7 +4804,7 @@ ParallelSubscriptionStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#flows.knative.dev/v1beta1.ParallelBranchStatus">ParallelBranchStatus</a>, 
+<a href="#flows.knative.dev/v1beta1.ParallelBranchStatus">ParallelBranchStatus</a>,
 <a href="#flows.knative.dev/v1beta1.ParallelStatus">ParallelStatus</a>)
 </p>
 <p>
@@ -5861,8 +5861,8 @@ knative.dev/pkg/apis/duck/v1.KReference
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#flows.knative.dev/v1.ParallelSpec">ParallelSpec</a>, 
-<a href="#flows.knative.dev/v1.SequenceSpec">SequenceSpec</a>, 
+<a href="#flows.knative.dev/v1.ParallelSpec">ParallelSpec</a>,
+<a href="#flows.knative.dev/v1.SequenceSpec">SequenceSpec</a>,
 <a href="#messaging.knative.dev/v1.ChannelSpec">ChannelSpec</a>)
 </p>
 <p>
@@ -6726,8 +6726,8 @@ knative.dev/pkg/apis/duck/v1.KReference
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#flows.knative.dev/v1beta1.ParallelSpec">ParallelSpec</a>, 
-<a href="#flows.knative.dev/v1beta1.SequenceSpec">SequenceSpec</a>, 
+<a href="#flows.knative.dev/v1beta1.ParallelSpec">ParallelSpec</a>,
+<a href="#flows.knative.dev/v1beta1.SequenceSpec">SequenceSpec</a>,
 <a href="#messaging.knative.dev/v1beta1.ChannelSpec">ChannelSpec</a>)
 </p>
 <p>
@@ -8952,7 +8952,7 @@ SinkBindingStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#sources.knative.dev/v1alpha1.ApiServerSourceSpec">ApiServerSourceSpec</a>, 
+<a href="#sources.knative.dev/v1alpha1.ApiServerSourceSpec">ApiServerSourceSpec</a>,
 <a href="#sources.knative.dev/v1alpha2.ApiServerSourceSpec">ApiServerSourceSpec</a>)
 </p>
 <p>
