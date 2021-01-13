@@ -19,8 +19,8 @@ also possible to combine the components in novel ways.
    on CloudEvents attributes. Your application will receive the events as an
    HTTP POST.
 
-1. **I want to transform events through a series of steps.** Use [Channels and
-   Subscriptions](channels/README.md) to define complex message-passing topologies. For
+1. **I want to transform events through a series of steps.** Use [Channels](channels/README.md) and
+   Subscriptions to define complex message-passing topologies. For
    simple pipelines, the [Sequence](flows/sequence.md) automates construction of
    Channels and Subscriptions between each stage.
 
@@ -117,7 +117,7 @@ the event destination.
 
 Knative Eventing also defines an event forwarding and persistence layer, called
 a
-[**Channel**](https://github.com/knative/eventing/blob/master/pkg/apis/messaging/v1/channel_types.go#L57).
+[**Channel**](channels/README.md).
 Each channel is a separate Kubernetes [Custom Resource](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
 Events are delivered to Services or forwarded to other channels
 (possibly of a different type) using
