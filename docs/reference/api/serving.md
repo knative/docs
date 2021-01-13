@@ -24,7 +24,7 @@ Resource Types:
 <p>PodAutoscaler is a Knative abstraction that encapsulates the interface by which Knative
 components instantiate autoscalers.  This definition is an abstraction that may be backed
 by multiple definitions.  For more information, see the Knative Pluggability presentation:
-<a href="https://docs.google.com/presentation/d/e/2PACX-1vQ4kT92QNXvBF9dJzVfF_zqUROoG1wZXf-ATMKi8d43htvt3Osq6k-1YUWAO9M27gZ8C-cGBQA8-bwJ/pub">https://docs.google.com/presentation/d/e/2PACX-1vQ4kT92QNXvBF9dJzVfF_zqUROoG1wZXf-ATMKi8d43htvt3Osq6k-1YUWAO9M27gZ8C-cGBQA8-bwJ/pub</a></p>
+<a href="https://docs.google.com/presentation/d/10KWynvAJYuOEWy69VBa6bHJVCqIsz1TNdEKosNvcpPY/edit">https://docs.google.com/presentation/d/10KWynvAJYuOEWy69VBa6bHJVCqIsz1TNdEKosNvcpPY/edit</a></p>
 </p>
 <table>
 <thead>
@@ -673,6 +673,25 @@ int32
 <p>ReachabilityType is the enumeration type for the different states of reachability
 to the <code>ScaleTarget</code> of a <code>PodAutoscaler</code></p>
 </p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr><td><p>&#34;Reachable&#34;</p></td>
+<td><p>ReachabilityReachable means the <code>ScaleTarget</code> is reachable, ie. it has an active route.</p>
+</td>
+</tr><tr><td><p>&#34;&#34;</p></td>
+<td><p>ReachabilityUnknown means the reachability of the <code>ScaleTarget</code> is unknown.
+Used when the reachability cannot be determined, eg. during activation.</p>
+</td>
+</tr><tr><td><p>&#34;Unreachable&#34;</p></td>
+<td><p>ReachabilityUnreachable means the <code>ScaleTarget</code> is not reachable, ie. it does not have an active route.</p>
+</td>
+</tr></tbody>
+</table>
 <hr/>
 <h2 id="serving.knative.dev/v1">serving.knative.dev/v1</h2>
 <p>
@@ -1704,6 +1723,30 @@ LatestReadyRevisionName that we last observed.</p>
 <p>
 <p>RoutingState represents states of a revision with regards to serving a route.</p>
 </p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr><td><p>&#34;active&#34;</p></td>
+<td><p>RoutingStateActive is a state for a revision which are actively referenced by a Route.</p>
+</td>
+</tr><tr><td><p>&#34;pending&#34;</p></td>
+<td><p>RoutingStatePending is a state after a revision is created, but before
+its routing state has been determined. It is treated like active for the purposes
+of revision garbage collection.</p>
+</td>
+</tr><tr><td><p>&#34;reserve&#34;</p></td>
+<td><p>RoutingStateReserve is a state for a revision which is no longer referenced by a Route,
+and is scaled down, but may be rapidly pinned to a route to be made active again.</p>
+</td>
+</tr><tr><td><p>&#34;&#34;</p></td>
+<td><p>RoutingStateUnset is the empty value for routing state, this state is unexpected.</p>
+</td>
+</tr></tbody>
+</table>
 <h3 id="serving.knative.dev/v1.ServiceSpec">ServiceSpec
 </h3>
 <p>
@@ -2173,5 +2216,5 @@ knative.dev/pkg/apis/duck/v1.Addressable
 <hr/>
 <p><em>
 Generated with <code>gen-crd-api-reference-docs</code>
-on git commit <code>db4879e0f</code>.
+on git commit <code>560a4f678</code>.
 </em></p>
