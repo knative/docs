@@ -29,25 +29,25 @@ inside the cluster:
 
 To configure a KService to only be available on the cluster-local network (and
 not on the public Internet), you can apply the
-`serving.knative.dev/visibility=cluster-local` label to the KService, Route or 
+`networking.knative.dev/visibility=cluster-local` label to the KService, Route or
 Kubernetes Service object.
 
 To label the KService:
 
 ```shell
-kubectl label kservice ${KSVC_NAME} serving.knative.dev/visibility=cluster-local
+kubectl label kservice ${KSVC_NAME} networking.knative.dev/visibility=cluster-local
 ```
 
 To label a route when you used Route directly without KService:
 
 ```shell
-kubectl label route ${ROUTE_NAME} serving.knative.dev/visibility=cluster-local
+kubectl label route ${ROUTE_NAME} networking.knative.dev/visibility=cluster-local
 ```
 
 To label a Kubernetes service:
 
 ```shell
-kubectl label service ${SERVICE_NAME} serving.knative.dev/visibility=cluster-local
+kubectl label service ${SERVICE_NAME} networking.knative.dev/visibility=cluster-local
 ```
 
 By labeling the Kubernetes service it allows you to restrict visibility in a more
@@ -58,7 +58,7 @@ For example, you can deploy the [Hello World sample](./samples/hello-world/hello
 and then convert it to be an cluster-local service by labeling the service:
 
 ```shell
-kubectl label kservice helloworld-go serving.knative.dev/visibility=cluster-local
+kubectl label kservice helloworld-go networking.knative.dev/visibility=cluster-local
 ```
 
 You can then verify that the change has been made by verifying the URL for the
