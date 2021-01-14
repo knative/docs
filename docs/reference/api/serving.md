@@ -23,8 +23,10 @@ Resource Types:
 <p>
 <p>PodAutoscaler is a Knative abstraction that encapsulates the interface by which Knative
 components instantiate autoscalers.  This definition is an abstraction that may be backed
-by multiple definitions.  For more information, see the Knative Pluggability presentation:
-<a href="https://docs.google.com/presentation/d/10KWynvAJYuOEWy69VBa6bHJVCqIsz1TNdEKosNvcpPY/edit">https://docs.google.com/presentation/d/10KWynvAJYuOEWy69VBa6bHJVCqIsz1TNdEKosNvcpPY/edit</a></p>
+by multiple definitions.  
+
+For more information on Knative Autoscalers and Pluggability,
+<a href="https://docs.google.com/presentation/d/10KWynvAJYuOEWy69VBa6bHJVCqIsz1TNdEKosNvcpPY/edit">see the Knative Pluggability presentation.</a></p>
 </p>
 <table>
 <thead>
@@ -707,14 +709,18 @@ Resource Types:
 </li><li>
 <a href="#serving.knative.dev/v1.Service">Service</a>
 </li></ul>
+<p>For an overview of the different Resource Types in Knative Serving and how they interact with one another, see <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#configuration">this explanation of Resource Types</a></p>
+
 <h3 id="serving.knative.dev/v1.Configuration">Configuration
 </h3>
+
 <p>
 <p>Configuration represents the &ldquo;floating HEAD&rdquo; of a linear history of Revisions.
 Users create new Revisions by updating the Configuration&rsquo;s spec.
 The &ldquo;latest created&rdquo; revision&rsquo;s name is available under status, as is the
 &ldquo;latest ready&rdquo; revision&rsquo;s name.
-See also: <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#configuration">https://github.com/knative/serving/blob/master/docs/spec/overview.md#configuration</a></p>
+  
+For more information on how Configuration interacts with other Resource Types, see the "Configuration" sub-heading <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#configuration">in the Resource Types Overview.</a></p>
 </p>
 <table>
 <thead>
@@ -808,7 +814,8 @@ ConfigurationStatus
 <p>Revision is an immutable snapshot of code and configuration.  A revision
 references a container image. Revisions are created by updates to a
 Configuration.</p>
-<p>See also: <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#revision">https://github.com/knative/serving/blob/master/docs/spec/overview.md#revision</a></p>
+
+<p>For more information on how Revision interacts with other Resource Types, see  the "Revision" sub-heading <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#revision">in the Resource Types Overview.</a></p>
 </p>
 <table>
 <thead>
@@ -934,7 +941,8 @@ Some of the Revisions a Route distributes traffic over may be specified by
 referencing the Configuration responsible for creating them; in these cases
 the Route is additionally responsible for monitoring the Configuration for
 &ldquo;latest ready revision&rdquo; changes, and smoothly rolling out latest revisions.
-See also: <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#route">https://github.com/knative/serving/blob/master/docs/spec/overview.md#route</a></p>
+
+For more information on how Route interacts with other Resource Types, see the "Route" sub-heading <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#route">in the Resource Types Overview.</a></p>
 </p>
 <table>
 <thead>
@@ -1037,7 +1045,8 @@ underlying Routes and Configurations (much as a kubernetes Deployment
 orchestrates ReplicaSets), and its usage is optional but recommended.</p>
 <p>The Service&rsquo;s controller will track the statuses of its owned Configuration
 and Route, reflecting their statuses and conditions as its own.</p>
-<p>See also: <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#service">https://github.com/knative/serving/blob/master/docs/spec/overview.md#service</a></p>
+
+<p>For more information on how Service interacts with other Resource Types, see the "Service" sub-heading <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#service">in the Resource Types Overview.</a></p>
 </p>
 <table>
 <thead>
