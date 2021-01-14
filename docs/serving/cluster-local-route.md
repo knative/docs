@@ -29,7 +29,7 @@ inside the cluster:
 
 To configure a KService to only be available on the cluster-local network (and
 not on the public Internet), you can apply the
-`networking.knative.dev/visibility=cluster-local` label to the KService, Route or 
+`networking.knative.dev/visibility=cluster-local` label to the KService, Route or
 Kubernetes Service object.
 
 To label the KService:
