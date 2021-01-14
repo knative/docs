@@ -23,7 +23,7 @@ Resource Types:
 <p>
 <p>PodAutoscaler is a Knative abstraction that encapsulates the interface by which Knative
 components instantiate autoscalers.  This definition is an abstraction that may be backed
-by multiple definitions.  
+by multiple definitions.
 
 For more information on Knative Autoscalers and Pluggability,
 <a href="https://docs.google.com/presentation/d/10KWynvAJYuOEWy69VBa6bHJVCqIsz1TNdEKosNvcpPY/edit">see the Knative Pluggability presentation.</a></p>
@@ -719,7 +719,7 @@ Resource Types:
 Users create new Revisions by updating the Configuration&rsquo;s spec.
 The &ldquo;latest created&rdquo; revision&rsquo;s name is available under status, as is the
 &ldquo;latest ready&rdquo; revision&rsquo;s name.
-  
+
 For more information on how Configuration interacts with other Resource Types, see the "Configuration" sub-heading <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#configuration">in the Resource Types Overview.</a></p>
 </p>
 <table>
