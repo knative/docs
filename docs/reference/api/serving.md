@@ -1461,7 +1461,7 @@ If multiple containers specified then DeprecatedImageDigest holds the digest
 for serving container.
 DEPRECATED: Use ContainerStatuses instead.
 TODO(savitaashture) Remove deprecatedImageDigest.
-ref <a href="https://kubernetes.io/docs/reference/using-api/deprecation-policy">https://kubernetes.io/docs/reference/using-api/deprecation-policy</a> for deprecation.</p>
+(see <a href="https://kubernetes.io/docs/reference/using-api/deprecation-policy">Kubernetes Deprecation Policy</a>) for deprecation.</p>
 </td>
 </tr>
 <tr>
@@ -1480,7 +1480,7 @@ to their respective digests and their container name.
 The digests are resolved during the creation of Revision.
 ContainerStatuses holds the container name and image digests
 for both serving and non serving containers.
-ref: <a href="http://bit.ly/image-digests">http://bit.ly/image-digests</a></p>
+See the  <a href="http://bit.ly/image-digests">Proposal for multiple containers in a revision</a> for some context on this field.</p>
 </td>
 </tr>
 </tbody>
@@ -1493,7 +1493,7 @@ ref: <a href="http://bit.ly/image-digests">http://bit.ly/image-digests</a></p>
 </p>
 <p>
 <p>RevisionTemplateSpec describes the data a revision should have when created from a template.
-Based on: <a href="https://github.com/kubernetes/api/blob/e771f807/core/v1/types.go#L3179-L3190">https://github.com/kubernetes/api/blob/e771f807/core/v1/types.go#L3179-L3190</a></p>
+Based on <a href="https://github.com/kubernetes/api/blob/e771f807/core/v1/types.go#L3179-L3190">the PodTemplateSpec in Kubernetes</a></p>
 </p>
 <table>
 <thead>
@@ -2047,9 +2047,7 @@ Kubernetes meta/v1.ObjectMeta
 <td>
 <em>(Optional)</em>
 <p>Standard object&rsquo;s metadata.
-More info: <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#metadata">https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#metadata</a></p>
-Refer to the Kubernetes API documentation for the fields of the
-<code>metadata</code> field.
+Refer to the <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#metadata">Kubernetes API documentation</a> for the fields of the <code>metadata</code> field.
 </td>
 </tr>
 <tr>
@@ -2064,7 +2062,7 @@ DomainMappingSpec
 <td>
 <em>(Optional)</em>
 <p>Spec is the desired state of the DomainMapping.
-More info: <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#spec-and-status">https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#spec-and-status</a></p>
+Refer to the <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#spec-and-status">Kubernetes API documentation</a> for more info on the <code>DomainMappingSpec</code> field.
 <br/>
 <br/>
 <table>
@@ -2095,7 +2093,7 @@ DomainMappingStatus
 <td>
 <em>(Optional)</em>
 <p>Status is the current state of the DomainMapping.
-More info: <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#spec-and-status">https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#spec-and-status</a></p>
+Refer to the <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#spec-and-status">Kubernetes API documentation</a> for more info on the <code>DomainMappingStatus</code> field.</p>
 </td>
 </tr>
 </tbody>
