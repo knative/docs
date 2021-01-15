@@ -199,7 +199,7 @@ The following commands install Gloo and enable its Knative integration.
 
 The following commands install Istio and enable its Knative integration.
 
-1. Install a properly configured Istio
+1. Install a properly configured Istio ([Advanced installation](./installing-istio.md))
 
    ```bash
    kubectl apply --filename {{< artifact repo="net-istio" file="istio.yaml" >}}
