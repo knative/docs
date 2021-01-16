@@ -48,7 +48,7 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
 - Profiling port is now configurable via the env var `PROFILING_PORT` ([knative/pkg#1950](https://github.com/knative/pkg/pull/1950))
 - Gradual traffic rollout of the configuration targets is now available in Knative. Right now it is driven by the `rolloutDuration` entry in the `config-network` configmap. When positive this setting will move the traffic gradually from the previous to the current revision over this period of time. It can handle several rollouts at the same time in three dimensions:
     - different tags can be rolled out independently if they are pointing at different configs
-    - diferent percentages for the same configuration target will roll out at different speeds (but will finish around the same deadline)
+    - different percentages for the same configuration target will roll out at different speeds (but will finish around the same deadline)
     - if new revisions were created while previous rollouts have not yet finished, the system will drain them and move everything to the newest revision.
 
 #### 🐞 Bug Fixes
@@ -94,12 +94,14 @@ Release Notes for [eventing-kafka-broker](https://github.com/knative-sandbox/eve
 
 ### Client v0.20
 
--
+TODO
 
 🚨 Breaking
 
 
 💫 New Features & Changes
+🐞 Bug Fixes
+🧹 Clean up
 
 
 #### Other CLI Features
@@ -109,8 +111,10 @@ Release Notes for [eventing-kafka-broker](https://github.com/knative-sandbox/eve
 
 The new operator can now deploy the new version `v0.20` of serving and eventing components.
 
-🐞 Bug Fixes
+TODO
 
+💫 New Features & Changes
+🐞 Bug Fixes
 🧹 Clean up
 
 ### Thank you contributors v0.20
