@@ -20,8 +20,6 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
 - [Eventing v0.20](#eventing-v020)
 - Eventing Extensions
     - [Eventing Kafka Broker v0.20](#eventing-kafka-broker-v020)
-    - [Eventing Gitlab v0.20](#eventing-gitlab-v020)
-    - [Eventing RabbitMQ v0.20](#eventing-rabbitmq-v020)
 - [CLI v0.20](#client-v020)
 - [Operator v0.20](#operator-v020)
 - [Thank you contributors v0.20](#thank-you-contributors-v0.20)
@@ -29,7 +27,10 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
 
 ### Highlights
 
-- Serving continues to polish DomainMapping, and a new gradual traffic rollout featured is introduced.
+- Serving continues to polish DomainMapping
+- Gradual traffic rollout featured is introduced.
+- Propagation of delivery spec down to subscription is now added in Eventing.
+- Eventing Kafka Broker enhanced with multiple observability related to metrics and tracing.
 
 ### Serving v0.20
 
@@ -57,52 +58,39 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
 
 ### Eventing v0.20
 
-💫 New Features & Changes
+#### 💫 New Features & Changes
+- Now setting the channel spec delivery field defaults every subscription to that particular delivery spec ([#4652](https://github.com/knative/eventing/pull/4652))
 
-🐞 Bug Fixes
+#### 🐞 Bug Fixes
+- Allow scaling the in-memory Channel dispatcher without disabling high availability. ([#4675](https://github.com/knative/eventing/pull/4675))
 
-🧹 Clean up
+#### 🧹 Clean up
+- Webhook no longer has Cluster-wide Secret permissions. Now the Webhook's Secret permissions are restricted to the `knative-eventing` namespace. ([#4684](https://github.com/knative/eventing/pull/4684))
+- bump the name of the broker on each test iteration ([#4716](https://github.com/knative/eventing/pull/4716))
+- Message receiver supports customized liveness and readiness check ([#4707](https://github.com/knative/eventing/pull/4707))
+- You need to run the storage migration tool after the upgrade to migrate from v1beta1 to v1 `apiserversources.sources.knative.dev` resources. ([#4655](https://github.com/knative/eventing/pull/4655))
+- You need to run the storage migration tool after the upgrade to migrate from v1beta1 to v1 `containersources.sources.knative.dev` resources. ([#4657](https://github.com/knative/eventing/pull/4657))
+- You need to run the storage migration tool after the upgrade to migrate from v1beta1 to v1 `sinkbindings.sources.knative.dev` resources. ([#4658](https://github.com/knative/eventing/pull/4658))
 
-
-### Eventing Contributions v0.20
+### Eventing Extensions
 
 #### Eventing Kafka Broker v0.20
 
 Release Notes for [eventing-kafka-broker](https://github.com/knative-sandbox/eventing-kafka-broker)
 
-**Actions Required (pre-upgrade)**
-- Run `kubectl delete configmap -n knative-eventing kafka-broker-brokers-triggers`
+#### 💫 New Features & Changes
+- `kafka-broker-receiver`, `kafka-broker-dispatcher`, and `kafka-sink-receiver` expose Kafka client metrics. ([#435](https://github.com/knative-sandbox/eventing-kafka-broker/pull/435))
+- `kafka-broker-receiver`, `kafka-broker-dispatcher`, and `kafka-sink-receiver` expose JVM metrics (disabled by default) ([#435](https://github.com/knative-sandbox/eventing-kafka-broker/pull/435))
+- Data plane pods produce distributed tracing spans. ([#421](https://github.com/knative-sandbox/eventing-kafka-broker/pull/421))
+- Receivers now specify anti-affinity so that replicas will not be colocated ([#483](https://github.com/knative-sandbox/eventing-kafka-broker/pull/483))
+#### 🐞 Bug Fixes
+- Controllers resync state when managed resources change. ([#420](https://github.com/knative-sandbox/eventing-kafka-broker/pull/420))
+- Leader election transition improvements ([#449](https://github.com/knative-sandbox/eventing-kafka-broker/pull/449))
 
-🚨 Breaking
-
-💫 New Features & Changes
-
-🐞 Bug Fixes
-
-🧹 Clean up
-
-
-#### Eventing Gitlab v0.20
-
-Release Notes for [eventing-gitlab](https://github.com/knative-sandbox/eventing-gitlab)
-
-💫 New Features & Changes
-
-🐞 Bug Fixes
-
-🧹 Clean up
-
-
-#### Eventing RabbitMQ v0.20
-
-Release Notes for [eventing-rabbitmq](https://github.com/knative-sandbox/eventing-rabbitmq)
-
-💫 New Features & Changes
-
-🐞 Bug Fixes
-
-🧹 Clean up
-
+#### 🧹 Clean up
+- The data plane is completely non-blocking. ([#438](https://github.com/knative-sandbox/eventing-kafka-broker/pull/438))
+- Skip ConfigMap update when there are no changes ([#511](https://github.com/knative-sandbox/eventing-kafka-broker/pull/511))
+- Change release labels from eventing.knative.dev to kafka.eventing.knative.dev. ([#480](https://github.com/knative-sandbox/eventing-kafka-broker/pull/480))
 
 ### Client v0.20
 
@@ -127,37 +115,21 @@ The new operator can now deploy the new version `v0.20` of serving and eventing 
 
 ### Thank you contributors v0.20
 
-*- [@arghya88](https://github.com/arghya88)
+- [@arghya88](https://github.com/arghya88)
 - [@antoineco](https://github.com/antoineco)
-- [@daisy-ycguo](https://github.com/daisy-ycguo)
-- [@danielhelfand](https://github.com/danielhelfand)
-*- [@dprotaso](https://github.com/dprotaso)
-- [@dsimansk](https://github.com/dsimansk)
-- [@eclipselu](https://github.com/eclipselu)
-- [@emaildanwilson](https://github.com/emaildanwilson)
-- [@houshengbo](https://github.com/houshengbo)
-- [@ian-mi](https://github.com/ian-mi)
-- [@itsmurugappan](https://github.com/itsmurugappan)
-- [@joshuawilson](https://github.com/joshuawilson)
-*- [@julz](https://github.com/julz)
-- [@lberk](https://github.com/lberk)
-*- [@markusthoemmes](https://github.com/markusthoemmes)
-*- [@mattmoor](https://github.com/mattmoor)
-- [@matzew](https://github.com/matzew)
-- [@n3wscott](https://github.com/n3wscott)
-*- [@nak3](https://github.com/nak3)
-- [@navidshaikh](https://github.com/navidshaikh)
+- [@dprotaso](https://github.com/dprotaso)
+- [@grac3gao](https://github.com/grac3gao)
+- [@Harwayne](https://github.com/Harwayne)
+- [@julz](https://github.com/julz)
+- [@markusthoemmes](https://github.com/markusthoemmes)
+- [@mattmoor](https://github.com/mattmoor)
+- [@nak3](https://github.com/nak3)
 - [@pierDipi](https://github.com/pierDipi)
 - [@rhuss](https://github.com/rhuss)
-- [@runzexia](https://github.com/runzexia)
-- [@sheetalsingala](https://github.com/sheetalsingala)
 - [@slinkydeveloper](https://github.com/slinkydeveloper)
-- [@taragu](https://github.com/taragu)
-*- [@tcnghia](https://github.com/tcnghia)
+- [@tcnghia](https://github.com/tcnghia)
 - [@vaikas](https://github.com/vaikas)
-- [@whaught](https://github.com/whaught)
-- [@yanweiguo](https://github.com/yanweiguo)
-- [@zroubalik](https://github.com/zroubalik)
+
 
 
 
