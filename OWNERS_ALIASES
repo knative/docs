@@ -35,13 +35,6 @@ aliases:
   - steuhs
   - yt3liu
 
-  serving-eng-reviewers:
-  - dprotaso
-  - markusthoemmes
-  - mattmoor
-  - tcnghia
-  - vagababov
-
   eventing-eng-approvers:
   - grantr
   - lionelvillard
