@@ -23,7 +23,7 @@ SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 REFDOCS_PKG="github.com/ahmetb/gen-crd-api-reference-docs"
 REFDOCS_REPO="https://${REFDOCS_PKG}.git"
-REFDOCS_VER="df869c1245d4ba97142a224ab81e5ced86094bba"
+REFDOCS_VER="v0.3.0"
 
 KNATIVE_SERVING_REPO="github.com/knative/serving"
 KNATIVE_SERVING_IMPORT_PATH="knative.dev/serving"
@@ -69,16 +69,6 @@ repo_tarball_url() {
     repo="$1"
     commit="$2"
     echo "https://$repo/archive/$commit.tar.gz"
-}
-
-dl_and_extract() {
-    # TODO(ahmetb) remove this function. no longer dl'ing tarballs since they
-    # won't have a .git dir to infer the commit ID from to be used by refdocs.
-    local url dest
-    url="$1"
-    dest="$2"
-    mkdir -p "${dest}"
-    curl -sSLf "$url" | tar zxf - --directory="$dest"  --strip 1
 }
 
 clone_at_commit() {
