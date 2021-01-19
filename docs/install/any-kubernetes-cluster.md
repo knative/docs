@@ -216,14 +216,17 @@ The following commands install Gloo and enable its Knative integration.
 
 The following commands install Istio and enable its Knative integration.
 
-<!-- TODO(https://github.com/knative/docs/issues/2166): Create streamlined instructions to inline -->
+1. Install a properly configured Istio ([Advanced installation](./installing-istio.md))
 
-1. [Installing Istio for Knative](./installing-istio.md)
+   ```bash
+   kubectl apply --filename {{< artifact repo="net-istio" file="istio.yaml" >}}
+   ```
+
 
 1. Install the Knative Istio controller:
 
    ```bash
-   kubectl apply --filename {{< artifact repo="net-istio" file="release.yaml" >}}
+   kubectl apply --filename {{< artifact repo="net-istio" file="net-istio.yaml" >}}
    ```
 
 1. Fetch the External IP or CNAME:
