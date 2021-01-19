@@ -269,7 +269,7 @@ The following commands install Kong and enable its Knative integration.
 
 {{% tab name="Kourier" %}}
 
-{{% feature-state version="v0.17" state="beta" %}}
+{{% feature-state version="v0.21" state="stable" %}}
 
 The following commands install Kourier and enable its Knative integration.
 
