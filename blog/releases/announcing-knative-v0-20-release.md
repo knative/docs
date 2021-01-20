@@ -27,10 +27,11 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
 
 ### Highlights
 
-- Serving continues to polish DomainMapping
+- Serving continues to polish DomainMapping.
 - Gradual traffic rollout featured is introduced.
 - Propagation of delivery spec down to subscription is now added in Eventing.
 - Eventing Kafka Broker enhanced with multiple observability related to metrics and tracing.
+- The `kn` CLI introduces a new experimental offline mode (--target) for `kn service create` that allows creating Knative services locally in resource files.
 
 ### Serving v0.20
 
@@ -94,18 +95,45 @@ Release Notes for [eventing-kafka-broker](https://github.com/knative-sandbox/eve
 
 ### Client v0.20
 
-TODO
+- `kn` v0.20.0 introduces a new experimental offline mode (`--target`) for `kn service create` that allows creating Knative services locally in resource files and without the need to be connected to a cluster. In addition, the usual bug fixes and some smaller features have been added.
 
-🚨 Breaking
+#### 💫 New Features & Changes
+
+**Offline mode**
+
+A new experimental offline mode has been added to `kn service create`. You enable it by using the option `--target` which can point to an existing directory or a filename. When provided `kn` will create a resource file that can be used with `kn service create -f`, `kn service apply -f` or even directly with kubectl. If the argument to `--target` is a filename or a non-existing path then a single file will be created. The file format (YAML or JSON) is determined by the file extension. If the argument to `--target` is a directory then the resource file is created within this directory by creating subdirectories for the namespace and type, using the service name as the filename's basename.
+
+Examples:
+```bash
+# Create a YAML resource file "myservice.yml" with the custom resource definition of
+# the specified Knative service
+kn service create myservice --image quay.io/myuser/myservice:latest --target ./myservice.yml
+
+# Create a YAML resource file with the service definition in "service-dir/default/ksvc/myservice.yml"
+# The directory "service-dir/" must already exist
+kn service create myservice --image gcr.io/myproject/myservice:latest --target service-dir/
+```
+
+**Scale option**
+
+The `--scale` option for `kn service create` and `kn service update` allows now also ranges as values:
+- `--scale 1..5` : Scale down to a minimal 1 replica and up to 5 replicas
+- `--scale 1.. ` : Set scale-min to to 1 but leave scale-max untouched (when used for a service update)
+- `--scale ..5 ` : Set scale-max to 5 but leave scale-min untouched (when used for a service update)
+- `--scale 5..5` : Set scale-min and scale-max both to 5 (same as `--scale 5`)
+
+**Support for new architectures**
+
+`linux/s390x` and `linux/ppc64le` has been added to the list of supported architectures, which is contains now
+the following platforms: `darwin/amd64`, `linux/amd64`, `linux/arm64`, `linux/ppc64le`, `linux/s390x` and `windows/amd64`.
 
 
-💫 New Features & Changes
-🐞 Bug Fixes
-🧹 Clean up
-
+#### 🧹 Clean up
+- Fixes for the help and error message have been applied.
 
 #### Other CLI Features
-
+- `-o url` is now supported in `kn broker describe` and `kn channel describe`.
+- Machine-readable output (e.g. `-o json`) has been added to the commands where it has been missing.
 
 ### Operator v0.20
 
@@ -119,20 +147,28 @@ TODO
 
 ### Thank you contributors v0.20
 
-- [@arghya88](https://github.com/arghya88)
-- [@antoineco](https://github.com/antoineco)
-- [@dprotaso](https://github.com/dprotaso)
-- [@grac3gao](https://github.com/grac3gao)
+- [@BbolroC](https://github.com/BbolroC)
 - [@Harwayne](https://github.com/Harwayne)
+- [@akerekes](https://github.com/akerekes)
+- [@antoineco](https://github.com/antoineco)
+- [@arghya88](https://github.com/arghya88)
+- [@dprotaso](https://github.com/dprotaso)
+- [@dsimansk](https://github.com/dsimansk)
+- [@grac3gao](https://github.com/grac3gao)
+- [@itsmurugappan](https://github.com/itsmurugappan)
 - [@julz](https://github.com/julz)
 - [@markusthoemmes](https://github.com/markusthoemmes)
 - [@mattmoor](https://github.com/mattmoor)
+- [@mpetason](https://github.com/mpetason)
+- [@n3wscott](https://github.com/n3wscott)
 - [@nak3](https://github.com/nak3)
+- [@navidshaikh](https://github.com/navidshaikh)
 - [@pierDipi](https://github.com/pierDipi)
 - [@rhuss](https://github.com/rhuss)
 - [@slinkydeveloper](https://github.com/slinkydeveloper)
 - [@tcnghia](https://github.com/tcnghia)
 - [@vaikas](https://github.com/vaikas)
+- [@yselkowitz](https://github.com/yselkowitz)
 
 
 
