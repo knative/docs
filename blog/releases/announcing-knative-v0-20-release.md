@@ -139,12 +139,14 @@ the following platforms: `darwin/amd64`, `linux/amd64`, `linux/arm64`, `linux/pp
 
 The new operator can now deploy the new version `v0.20` of serving and eventing components.
 
-TODO
+#### 🐞 Bug Fixes
+- Preserve the values of the environment variables for the pingsource-mt-adapter deploy resource, ([#394](https://github.com/knative/operator/pull/394))
+- Implement the additional manifests for customized yamls. ([#374](https://github.com/knative/operator/pull/394)
 
-💫 New Features & Changes
-🐞 Bug Fixes
-🧹 Clean up
-
+#### 🧹 Clean up
+- Update attributes to describe which files are generated and/or vendored. ([#423](https://github.com/knative/operator/pull/423))
+- Enable code autogen for config generation ([#417](https://github.com/knative/operator/pull/417))
+- Add a tool to automatically fetch releases and stage them in kodata. ([#360](https://github.com/knative/operator/pull/360))
 ### Thank you contributors v0.20
 
 - [@BbolroC](https://github.com/BbolroC)
@@ -154,7 +156,9 @@ TODO
 - [@arghya88](https://github.com/arghya88)
 - [@dprotaso](https://github.com/dprotaso)
 - [@dsimansk](https://github.com/dsimansk)
+- [@evankanderson](https://github.com/evankanderson)
 - [@grac3gao](https://github.com/grac3gao)
+- [@houshengbo](https://github.com/houshengbo)
 - [@itsmurugappan](https://github.com/itsmurugappan)
 - [@julz](https://github.com/julz)
 - [@markusthoemmes](https://github.com/markusthoemmes)
@@ -169,10 +173,6 @@ TODO
 - [@tcnghia](https://github.com/tcnghia)
 - [@vaikas](https://github.com/vaikas)
 - [@yselkowitz](https://github.com/yselkowitz)
-
-
-
-
 
 
 ### Learn more
