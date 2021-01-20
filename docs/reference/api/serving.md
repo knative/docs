@@ -36,7 +36,7 @@ by multiple definitions.  For more information, see the Knative Pluggability pre
 <tbody>
 <tr>
 <td>
-<code>apiVersion</code></br>
+<code>apiVersion</code><br/>
 string</td>
 <td>
 <code>
@@ -46,14 +46,14 @@ autoscaling.internal.knative.dev/v1alpha1
 </tr>
 <tr>
 <td>
-<code>kind</code></br>
+<code>kind</code><br/>
 string
 </td>
 <td><code>PodAutoscaler</code></td>
 </tr>
 <tr>
 <td>
-<code>metadata</code></br>
+<code>metadata</code><br/>
 <em>
 <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
@@ -68,7 +68,7 @@ Refer to the Kubernetes API documentation for the fields of the
 </tr>
 <tr>
 <td>
-<code>spec</code></br>
+<code>spec</code><br/>
 <em>
 <a href="#autoscaling.internal.knative.dev/v1alpha1.PodAutoscalerSpec">
 PodAutoscalerSpec
@@ -83,7 +83,7 @@ PodAutoscalerSpec
 <table>
 <tr>
 <td>
-<code>containerConcurrency</code></br>
+<code>containerConcurrency</code><br/>
 <em>
 int64
 </em>
@@ -97,7 +97,7 @@ Defaults to <code>0</code> which means unlimited concurrency.</p>
 </tr>
 <tr>
 <td>
-<code>scaleTargetRef</code></br>
+<code>scaleTargetRef</code><br/>
 <em>
 <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectreference-v1-core">
 Kubernetes core/v1.ObjectReference
@@ -111,7 +111,7 @@ is responsible for quickly right-sizing.</p>
 </tr>
 <tr>
 <td>
-<code>reachability</code></br>
+<code>reachability</code><br/>
 <em>
 <a href="#autoscaling.internal.knative.dev/v1alpha1.ReachabilityType">
 ReachabilityType
@@ -126,7 +126,7 @@ Defaults to <code>ReachabilityUnknown</code></p>
 </tr>
 <tr>
 <td>
-<code>protocolType</code></br>
+<code>protocolType</code><br/>
 <em>
 knative.dev/networking/pkg/apis/networking.ProtocolType
 </em>
@@ -140,7 +140,7 @@ knative.dev/networking/pkg/apis/networking.ProtocolType
 </tr>
 <tr>
 <td>
-<code>status</code></br>
+<code>status</code><br/>
 <em>
 <a href="#autoscaling.internal.knative.dev/v1alpha1.PodAutoscalerStatus">
 PodAutoscalerStatus
@@ -169,7 +169,7 @@ PodAutoscalerStatus
 <tbody>
 <tr>
 <td>
-<code>metadata</code></br>
+<code>metadata</code><br/>
 <em>
 <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
@@ -184,7 +184,7 @@ Refer to the Kubernetes API documentation for the fields of the
 </tr>
 <tr>
 <td>
-<code>spec</code></br>
+<code>spec</code><br/>
 <em>
 <a href="#autoscaling.internal.knative.dev/v1alpha1.MetricSpec">
 MetricSpec
@@ -199,7 +199,7 @@ MetricSpec
 <table>
 <tr>
 <td>
-<code>stableWindow</code></br>
+<code>stableWindow</code><br/>
 <em>
 time.Duration
 </em>
@@ -210,7 +210,7 @@ time.Duration
 </tr>
 <tr>
 <td>
-<code>panicWindow</code></br>
+<code>panicWindow</code><br/>
 <em>
 time.Duration
 </em>
@@ -221,7 +221,7 @@ time.Duration
 </tr>
 <tr>
 <td>
-<code>scrapeTarget</code></br>
+<code>scrapeTarget</code><br/>
 <em>
 string
 </em>
@@ -235,7 +235,7 @@ string
 </tr>
 <tr>
 <td>
-<code>status</code></br>
+<code>status</code><br/>
 <em>
 <a href="#autoscaling.internal.knative.dev/v1alpha1.MetricStatus">
 MetricStatus
@@ -268,7 +268,7 @@ MetricStatus
 <tbody>
 <tr>
 <td>
-<code>stableWindow</code></br>
+<code>stableWindow</code><br/>
 <em>
 time.Duration
 </em>
@@ -279,7 +279,7 @@ time.Duration
 </tr>
 <tr>
 <td>
-<code>panicWindow</code></br>
+<code>panicWindow</code><br/>
 <em>
 time.Duration
 </em>
@@ -290,7 +290,7 @@ time.Duration
 </tr>
 <tr>
 <td>
-<code>scrapeTarget</code></br>
+<code>scrapeTarget</code><br/>
 <em>
 string
 </em>
@@ -320,7 +320,7 @@ string
 <tbody>
 <tr>
 <td>
-<code>Status</code></br>
+<code>Status</code><br/>
 <em>
 knative.dev/pkg/apis/duck/v1.Status
 </em>
@@ -352,7 +352,7 @@ knative.dev/pkg/apis/duck/v1.Status
 <tbody>
 <tr>
 <td>
-<code>containerConcurrency</code></br>
+<code>containerConcurrency</code><br/>
 <em>
 int64
 </em>
@@ -366,7 +366,7 @@ Defaults to <code>0</code> which means unlimited concurrency.</p>
 </tr>
 <tr>
 <td>
-<code>scaleTargetRef</code></br>
+<code>scaleTargetRef</code><br/>
 <em>
 <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectreference-v1-core">
 Kubernetes core/v1.ObjectReference
@@ -380,7 +380,7 @@ is responsible for quickly right-sizing.</p>
 </tr>
 <tr>
 <td>
-<code>reachability</code></br>
+<code>reachability</code><br/>
 <em>
 <a href="#autoscaling.internal.knative.dev/v1alpha1.ReachabilityType">
 ReachabilityType
@@ -395,7 +395,7 @@ Defaults to <code>ReachabilityUnknown</code></p>
 </tr>
 <tr>
 <td>
-<code>protocolType</code></br>
+<code>protocolType</code><br/>
 <em>
 knative.dev/networking/pkg/apis/networking.ProtocolType
 </em>
@@ -425,7 +425,7 @@ knative.dev/networking/pkg/apis/networking.ProtocolType
 <tbody>
 <tr>
 <td>
-<code>Status</code></br>
+<code>Status</code><br/>
 <em>
 knative.dev/pkg/apis/duck/v1.Status
 </em>
@@ -438,7 +438,7 @@ knative.dev/pkg/apis/duck/v1.Status
 </tr>
 <tr>
 <td>
-<code>serviceName</code></br>
+<code>serviceName</code><br/>
 <em>
 string
 </em>
@@ -450,7 +450,7 @@ The service is created and owned by the ServerlessService object owned by this P
 </tr>
 <tr>
 <td>
-<code>metricsServiceName</code></br>
+<code>metricsServiceName</code><br/>
 <em>
 string
 </em>
@@ -462,7 +462,7 @@ The service is managed by the PA object.</p>
 </tr>
 <tr>
 <td>
-<code>desiredScale</code></br>
+<code>desiredScale</code><br/>
 <em>
 int32
 </em>
@@ -473,7 +473,7 @@ int32
 </tr>
 <tr>
 <td>
-<code>actualScale</code></br>
+<code>actualScale</code><br/>
 <em>
 int32
 </em>
@@ -503,7 +503,7 @@ the referenced resources may take.</p>
 <tbody>
 <tr>
 <td>
-<code>metadata</code></br>
+<code>metadata</code><br/>
 <em>
 <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
@@ -517,7 +517,7 @@ Refer to the Kubernetes API documentation for the fields of the
 </tr>
 <tr>
 <td>
-<code>spec</code></br>
+<code>spec</code><br/>
 <em>
 <a href="#autoscaling.internal.knative.dev/v1alpha1.PodScalableSpec">
 PodScalableSpec
@@ -530,7 +530,7 @@ PodScalableSpec
 <table>
 <tr>
 <td>
-<code>replicas</code></br>
+<code>replicas</code><br/>
 <em>
 int32
 </em>
@@ -540,7 +540,7 @@ int32
 </tr>
 <tr>
 <td>
-<code>selector</code></br>
+<code>selector</code><br/>
 <em>
 <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#labelselector-v1-meta">
 Kubernetes meta/v1.LabelSelector
@@ -552,7 +552,7 @@ Kubernetes meta/v1.LabelSelector
 </tr>
 <tr>
 <td>
-<code>template</code></br>
+<code>template</code><br/>
 <em>
 <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#podtemplatespec-v1-core">
 Kubernetes core/v1.PodTemplateSpec
@@ -567,7 +567,7 @@ Kubernetes core/v1.PodTemplateSpec
 </tr>
 <tr>
 <td>
-<code>status</code></br>
+<code>status</code><br/>
 <em>
 <a href="#autoscaling.internal.knative.dev/v1alpha1.PodScalableStatus">
 PodScalableStatus
@@ -599,7 +599,7 @@ PodScalable (or at least our shared portion).</p>
 <tbody>
 <tr>
 <td>
-<code>replicas</code></br>
+<code>replicas</code><br/>
 <em>
 int32
 </em>
@@ -609,7 +609,7 @@ int32
 </tr>
 <tr>
 <td>
-<code>selector</code></br>
+<code>selector</code><br/>
 <em>
 <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#labelselector-v1-meta">
 Kubernetes meta/v1.LabelSelector
@@ -621,7 +621,7 @@ Kubernetes meta/v1.LabelSelector
 </tr>
 <tr>
 <td>
-<code>template</code></br>
+<code>template</code><br/>
 <em>
 <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#podtemplatespec-v1-core">
 Kubernetes core/v1.PodTemplateSpec
@@ -653,7 +653,7 @@ least our shared portion).</p>
 <tbody>
 <tr>
 <td>
-<code>replicas</code></br>
+<code>replicas</code><br/>
 <em>
 int32
 </em>
@@ -726,7 +726,7 @@ See also: <a href="https://github.com/knative/serving/blob/master/docs/spec/over
 <tbody>
 <tr>
 <td>
-<code>apiVersion</code></br>
+<code>apiVersion</code><br/>
 string</td>
 <td>
 <code>
@@ -736,14 +736,14 @@ serving.knative.dev/v1
 </tr>
 <tr>
 <td>
-<code>kind</code></br>
+<code>kind</code><br/>
 string
 </td>
 <td><code>Configuration</code></td>
 </tr>
 <tr>
 <td>
-<code>metadata</code></br>
+<code>metadata</code><br/>
 <em>
 <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
@@ -758,7 +758,7 @@ Refer to the Kubernetes API documentation for the fields of the
 </tr>
 <tr>
 <td>
-<code>spec</code></br>
+<code>spec</code><br/>
 <em>
 <a href="#serving.knative.dev/v1.ConfigurationSpec">
 ConfigurationSpec
@@ -772,7 +772,7 @@ ConfigurationSpec
 <table>
 <tr>
 <td>
-<code>template</code></br>
+<code>template</code><br/>
 <em>
 <a href="#serving.knative.dev/v1.RevisionTemplateSpec">
 RevisionTemplateSpec
@@ -789,7 +789,7 @@ RevisionTemplateSpec
 </tr>
 <tr>
 <td>
-<code>status</code></br>
+<code>status</code><br/>
 <em>
 <a href="#serving.knative.dev/v1.ConfigurationStatus">
 ConfigurationStatus
@@ -820,7 +820,7 @@ Configuration.</p>
 <tbody>
 <tr>
 <td>
-<code>apiVersion</code></br>
+<code>apiVersion</code><br/>
 string</td>
 <td>
 <code>
@@ -830,14 +830,14 @@ serving.knative.dev/v1
 </tr>
 <tr>
 <td>
-<code>kind</code></br>
+<code>kind</code><br/>
 string
 </td>
 <td><code>Revision</code></td>
 </tr>
 <tr>
 <td>
-<code>metadata</code></br>
+<code>metadata</code><br/>
 <em>
 <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
@@ -852,7 +852,7 @@ Refer to the Kubernetes API documentation for the fields of the
 </tr>
 <tr>
 <td>
-<code>spec</code></br>
+<code>spec</code><br/>
 <em>
 <a href="#serving.knative.dev/v1.RevisionSpec">
 RevisionSpec
@@ -866,7 +866,7 @@ RevisionSpec
 <table>
 <tr>
 <td>
-<code>PodSpec</code></br>
+<code>PodSpec</code><br/>
 <em>
 <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#podspec-v1-core">
 Kubernetes core/v1.PodSpec
@@ -881,7 +881,7 @@ Kubernetes core/v1.PodSpec
 </tr>
 <tr>
 <td>
-<code>containerConcurrency</code></br>
+<code>containerConcurrency</code><br/>
 <em>
 int64
 </em>
@@ -896,7 +896,7 @@ target concurrency for the autoscaler.</p>
 </tr>
 <tr>
 <td>
-<code>timeoutSeconds</code></br>
+<code>timeoutSeconds</code><br/>
 <em>
 int64
 </em>
@@ -913,7 +913,7 @@ be provided.</p>
 </tr>
 <tr>
 <td>
-<code>status</code></br>
+<code>status</code><br/>
 <em>
 <a href="#serving.knative.dev/v1.RevisionStatus">
 RevisionStatus
@@ -946,7 +946,7 @@ See also: <a href="https://github.com/knative/serving/blob/master/docs/spec/over
 <tbody>
 <tr>
 <td>
-<code>apiVersion</code></br>
+<code>apiVersion</code><br/>
 string</td>
 <td>
 <code>
@@ -956,14 +956,14 @@ serving.knative.dev/v1
 </tr>
 <tr>
 <td>
-<code>kind</code></br>
+<code>kind</code><br/>
 string
 </td>
 <td><code>Route</code></td>
 </tr>
 <tr>
 <td>
-<code>metadata</code></br>
+<code>metadata</code><br/>
 <em>
 <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
@@ -978,7 +978,7 @@ Refer to the Kubernetes API documentation for the fields of the
 </tr>
 <tr>
 <td>
-<code>spec</code></br>
+<code>spec</code><br/>
 <em>
 <a href="#serving.knative.dev/v1.RouteSpec">
 RouteSpec
@@ -993,7 +993,7 @@ RouteSpec
 <table>
 <tr>
 <td>
-<code>traffic</code></br>
+<code>traffic</code><br/>
 <em>
 <a href="#serving.knative.dev/v1.TrafficTarget">
 []TrafficTarget
@@ -1011,7 +1011,7 @@ revisions and configurations.</p>
 </tr>
 <tr>
 <td>
-<code>status</code></br>
+<code>status</code><br/>
 <em>
 <a href="#serving.knative.dev/v1.RouteStatus">
 RouteStatus
@@ -1049,7 +1049,7 @@ and Route, reflecting their statuses and conditions as its own.</p>
 <tbody>
 <tr>
 <td>
-<code>apiVersion</code></br>
+<code>apiVersion</code><br/>
 string</td>
 <td>
 <code>
@@ -1059,14 +1059,14 @@ serving.knative.dev/v1
 </tr>
 <tr>
 <td>
-<code>kind</code></br>
+<code>kind</code><br/>
 string
 </td>
 <td><code>Service</code></td>
 </tr>
 <tr>
 <td>
-<code>metadata</code></br>
+<code>metadata</code><br/>
 <em>
 <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
@@ -1081,7 +1081,7 @@ Refer to the Kubernetes API documentation for the fields of the
 </tr>
 <tr>
 <td>
-<code>spec</code></br>
+<code>spec</code><br/>
 <em>
 <a href="#serving.knative.dev/v1.ServiceSpec">
 ServiceSpec
@@ -1095,7 +1095,7 @@ ServiceSpec
 <table>
 <tr>
 <td>
-<code>ConfigurationSpec</code></br>
+<code>ConfigurationSpec</code><br/>
 <em>
 <a href="#serving.knative.dev/v1.ConfigurationSpec">
 ConfigurationSpec
@@ -1111,7 +1111,7 @@ ConfigurationSpec
 </tr>
 <tr>
 <td>
-<code>RouteSpec</code></br>
+<code>RouteSpec</code><br/>
 <em>
 <a href="#serving.knative.dev/v1.RouteSpec">
 RouteSpec
@@ -1133,7 +1133,7 @@ defaults).</p>
 </tr>
 <tr>
 <td>
-<code>status</code></br>
+<code>status</code><br/>
 <em>
 <a href="#serving.knative.dev/v1.ServiceStatus">
 ServiceStatus
@@ -1150,7 +1150,7 @@ ServiceStatus
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1.Configuration">Configuration</a>,
+<a href="#serving.knative.dev/v1.Configuration">Configuration</a>, 
 <a href="#serving.knative.dev/v1.ServiceSpec">ServiceSpec</a>)
 </p>
 <p>
@@ -1166,7 +1166,7 @@ ServiceStatus
 <tbody>
 <tr>
 <td>
-<code>template</code></br>
+<code>template</code><br/>
 <em>
 <a href="#serving.knative.dev/v1.RevisionTemplateSpec">
 RevisionTemplateSpec
@@ -1199,7 +1199,7 @@ RevisionTemplateSpec
 <tbody>
 <tr>
 <td>
-<code>Status</code></br>
+<code>Status</code><br/>
 <em>
 knative.dev/pkg/apis/duck/v1.Status
 </em>
@@ -1212,7 +1212,7 @@ knative.dev/pkg/apis/duck/v1.Status
 </tr>
 <tr>
 <td>
-<code>ConfigurationStatusFields</code></br>
+<code>ConfigurationStatusFields</code><br/>
 <em>
 <a href="#serving.knative.dev/v1.ConfigurationStatusFields">
 ConfigurationStatusFields
@@ -1231,7 +1231,7 @@ ConfigurationStatusFields
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1.ConfigurationStatus">ConfigurationStatus</a>,
+<a href="#serving.knative.dev/v1.ConfigurationStatus">ConfigurationStatus</a>, 
 <a href="#serving.knative.dev/v1.ServiceStatus">ServiceStatus</a>)
 </p>
 <p>
@@ -1249,7 +1249,7 @@ other types can readily consume these fields via duck typing.</p>
 <tbody>
 <tr>
 <td>
-<code>latestReadyRevisionName</code></br>
+<code>latestReadyRevisionName</code><br/>
 <em>
 string
 </em>
@@ -1262,7 +1262,7 @@ from this Configuration that has had its &ldquo;Ready&rdquo; condition become &l
 </tr>
 <tr>
 <td>
-<code>latestCreatedRevisionName</code></br>
+<code>latestCreatedRevisionName</code><br/>
 <em>
 string
 </em>
@@ -1294,7 +1294,7 @@ Configuration. It might not be ready yet, for that use LatestReadyRevisionName.<
 <tbody>
 <tr>
 <td>
-<code>name</code></br>
+<code>name</code><br/>
 <em>
 string
 </em>
@@ -1304,7 +1304,7 @@ string
 </tr>
 <tr>
 <td>
-<code>imageDigest</code></br>
+<code>imageDigest</code><br/>
 <em>
 string
 </em>
@@ -1318,7 +1318,7 @@ string
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1.Revision">Revision</a>,
+<a href="#serving.knative.dev/v1.Revision">Revision</a>, 
 <a href="#serving.knative.dev/v1.RevisionTemplateSpec">RevisionTemplateSpec</a>)
 </p>
 <p>
@@ -1334,7 +1334,7 @@ string
 <tbody>
 <tr>
 <td>
-<code>PodSpec</code></br>
+<code>PodSpec</code><br/>
 <em>
 <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#podspec-v1-core">
 Kubernetes core/v1.PodSpec
@@ -1349,7 +1349,7 @@ Kubernetes core/v1.PodSpec
 </tr>
 <tr>
 <td>
-<code>containerConcurrency</code></br>
+<code>containerConcurrency</code><br/>
 <em>
 int64
 </em>
@@ -1364,7 +1364,7 @@ target concurrency for the autoscaler.</p>
 </tr>
 <tr>
 <td>
-<code>timeoutSeconds</code></br>
+<code>timeoutSeconds</code><br/>
 <em>
 int64
 </em>
@@ -1397,7 +1397,7 @@ be provided.</p>
 <tbody>
 <tr>
 <td>
-<code>Status</code></br>
+<code>Status</code><br/>
 <em>
 knative.dev/pkg/apis/duck/v1.Status
 </em>
@@ -1410,7 +1410,7 @@ knative.dev/pkg/apis/duck/v1.Status
 </tr>
 <tr>
 <td>
-<code>serviceName</code></br>
+<code>serviceName</code><br/>
 <em>
 string
 </em>
@@ -1423,7 +1423,7 @@ load balances over the pods backing this Revision.</p>
 </tr>
 <tr>
 <td>
-<code>logUrl</code></br>
+<code>logUrl</code><br/>
 <em>
 string
 </em>
@@ -1436,7 +1436,7 @@ based on the revision url template specified in the controller&rsquo;s config.</
 </tr>
 <tr>
 <td>
-<code>imageDigest</code></br>
+<code>imageDigest</code><br/>
 <em>
 string
 </em>
@@ -1457,7 +1457,7 @@ ref <a href="https://kubernetes.io/docs/reference/using-api/deprecation-policy">
 </tr>
 <tr>
 <td>
-<code>containerStatuses</code></br>
+<code>containerStatuses</code><br/>
 <em>
 <a href="#serving.knative.dev/v1.ContainerStatus">
 []ContainerStatus
@@ -1496,7 +1496,7 @@ Based on: <a href="https://github.com/kubernetes/api/blob/e771f807/core/v1/types
 <tbody>
 <tr>
 <td>
-<code>metadata</code></br>
+<code>metadata</code><br/>
 <em>
 <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
@@ -1511,7 +1511,7 @@ Refer to the Kubernetes API documentation for the fields of the
 </tr>
 <tr>
 <td>
-<code>spec</code></br>
+<code>spec</code><br/>
 <em>
 <a href="#serving.knative.dev/v1.RevisionSpec">
 RevisionSpec
@@ -1525,7 +1525,7 @@ RevisionSpec
 <table>
 <tr>
 <td>
-<code>PodSpec</code></br>
+<code>PodSpec</code><br/>
 <em>
 <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#podspec-v1-core">
 Kubernetes core/v1.PodSpec
@@ -1540,7 +1540,7 @@ Kubernetes core/v1.PodSpec
 </tr>
 <tr>
 <td>
-<code>containerConcurrency</code></br>
+<code>containerConcurrency</code><br/>
 <em>
 int64
 </em>
@@ -1555,7 +1555,7 @@ target concurrency for the autoscaler.</p>
 </tr>
 <tr>
 <td>
-<code>timeoutSeconds</code></br>
+<code>timeoutSeconds</code><br/>
 <em>
 int64
 </em>
@@ -1576,7 +1576,7 @@ be provided.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1.Route">Route</a>,
+<a href="#serving.knative.dev/v1.Route">Route</a>, 
 <a href="#serving.knative.dev/v1.ServiceSpec">ServiceSpec</a>)
 </p>
 <p>
@@ -1592,7 +1592,7 @@ be provided.</p>
 <tbody>
 <tr>
 <td>
-<code>traffic</code></br>
+<code>traffic</code><br/>
 <em>
 <a href="#serving.knative.dev/v1.TrafficTarget">
 []TrafficTarget
@@ -1626,7 +1626,7 @@ revisions and configurations.</p>
 <tbody>
 <tr>
 <td>
-<code>Status</code></br>
+<code>Status</code><br/>
 <em>
 knative.dev/pkg/apis/duck/v1.Status
 </em>
@@ -1639,7 +1639,7 @@ knative.dev/pkg/apis/duck/v1.Status
 </tr>
 <tr>
 <td>
-<code>RouteStatusFields</code></br>
+<code>RouteStatusFields</code><br/>
 <em>
 <a href="#serving.knative.dev/v1.RouteStatusFields">
 RouteStatusFields
@@ -1658,7 +1658,7 @@ RouteStatusFields
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1.RouteStatus">RouteStatus</a>,
+<a href="#serving.knative.dev/v1.RouteStatus">RouteStatus</a>, 
 <a href="#serving.knative.dev/v1.ServiceStatus">ServiceStatus</a>)
 </p>
 <p>
@@ -1676,7 +1676,7 @@ other types can readily consume these fields via duck typing.</p>
 <tbody>
 <tr>
 <td>
-<code>url</code></br>
+<code>url</code><br/>
 <em>
 knative.dev/pkg/apis.URL
 </em>
@@ -1689,7 +1689,7 @@ It generally has the form http[s]://{route-name}.{route-namespace}.{cluster-leve
 </tr>
 <tr>
 <td>
-<code>address</code></br>
+<code>address</code><br/>
 <em>
 knative.dev/pkg/apis/duck/v1.Addressable
 </em>
@@ -1701,7 +1701,7 @@ knative.dev/pkg/apis/duck/v1.Addressable
 </tr>
 <tr>
 <td>
-<code>traffic</code></br>
+<code>traffic</code><br/>
 <em>
 <a href="#serving.knative.dev/v1.TrafficTarget">
 []TrafficTarget
@@ -1772,7 +1772,7 @@ the appropriate &ldquo;run latest&rdquo; spec.</p>
 <tbody>
 <tr>
 <td>
-<code>ConfigurationSpec</code></br>
+<code>ConfigurationSpec</code><br/>
 <em>
 <a href="#serving.knative.dev/v1.ConfigurationSpec">
 ConfigurationSpec
@@ -1788,7 +1788,7 @@ ConfigurationSpec
 </tr>
 <tr>
 <td>
-<code>RouteSpec</code></br>
+<code>RouteSpec</code><br/>
 <em>
 <a href="#serving.knative.dev/v1.RouteSpec">
 RouteSpec
@@ -1826,7 +1826,7 @@ defaults).</p>
 <tbody>
 <tr>
 <td>
-<code>Status</code></br>
+<code>Status</code><br/>
 <em>
 knative.dev/pkg/apis/duck/v1.Status
 </em>
@@ -1839,7 +1839,7 @@ knative.dev/pkg/apis/duck/v1.Status
 </tr>
 <tr>
 <td>
-<code>ConfigurationStatusFields</code></br>
+<code>ConfigurationStatusFields</code><br/>
 <em>
 <a href="#serving.knative.dev/v1.ConfigurationStatusFields">
 ConfigurationStatusFields
@@ -1856,7 +1856,7 @@ specific to ConfigurationStatus.</p>
 </tr>
 <tr>
 <td>
-<code>RouteStatusFields</code></br>
+<code>RouteStatusFields</code><br/>
 <em>
 <a href="#serving.knative.dev/v1.RouteStatusFields">
 RouteStatusFields
@@ -1877,7 +1877,7 @@ specific to RouteStatus.</p>
 </h3>
 <p>
 (<em>Appears on:</em>
-<a href="#serving.knative.dev/v1.RouteSpec">RouteSpec</a>,
+<a href="#serving.knative.dev/v1.RouteSpec">RouteSpec</a>, 
 <a href="#serving.knative.dev/v1.RouteStatusFields">RouteStatusFields</a>)
 </p>
 <p>
@@ -1893,7 +1893,7 @@ specific to RouteStatus.</p>
 <tbody>
 <tr>
 <td>
-<code>tag</code></br>
+<code>tag</code><br/>
 <em>
 string
 </em>
@@ -1906,7 +1906,7 @@ this target exclusively.</p>
 </tr>
 <tr>
 <td>
-<code>revisionName</code></br>
+<code>revisionName</code><br/>
 <em>
 string
 </em>
@@ -1919,7 +1919,7 @@ traffic.  This is mutually exclusive with ConfigurationName.</p>
 </tr>
 <tr>
 <td>
-<code>configurationName</code></br>
+<code>configurationName</code><br/>
 <em>
 string
 </em>
@@ -1936,7 +1936,7 @@ RevisionName.</p>
 </tr>
 <tr>
 <td>
-<code>latestRevision</code></br>
+<code>latestRevision</code><br/>
 <em>
 bool
 </em>
@@ -1951,7 +1951,7 @@ empty; it must be false when RevisionName is non-empty.</p>
 </tr>
 <tr>
 <td>
-<code>percent</code></br>
+<code>percent</code><br/>
 <em>
 int64
 </em>
@@ -1970,7 +1970,7 @@ that particular Revision or Configuration</p>
 </tr>
 <tr>
 <td>
-<code>url</code></br>
+<code>url</code><br/>
 <em>
 knative.dev/pkg/apis.URL
 </em>
@@ -2011,7 +2011,7 @@ Resource Types:
 <tbody>
 <tr>
 <td>
-<code>apiVersion</code></br>
+<code>apiVersion</code><br/>
 string</td>
 <td>
 <code>
@@ -2021,14 +2021,14 @@ serving.knative.dev/v1alpha1
 </tr>
 <tr>
 <td>
-<code>kind</code></br>
+<code>kind</code><br/>
 string
 </td>
 <td><code>DomainMapping</code></td>
 </tr>
 <tr>
 <td>
-<code>metadata</code></br>
+<code>metadata</code><br/>
 <em>
 <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectmeta-v1-meta">
 Kubernetes meta/v1.ObjectMeta
@@ -2045,7 +2045,7 @@ Refer to the Kubernetes API documentation for the fields of the
 </tr>
 <tr>
 <td>
-<code>spec</code></br>
+<code>spec</code><br/>
 <em>
 <a href="#serving.knative.dev/v1alpha1.DomainMappingSpec">
 DomainMappingSpec
@@ -2061,7 +2061,7 @@ More info: <a href="https://github.com/kubernetes/community/blob/master/contribu
 <table>
 <tr>
 <td>
-<code>ref</code></br>
+<code>ref</code><br/>
 <em>
 knative.dev/pkg/apis/duck/v1.KReference
 </em>
@@ -2076,7 +2076,7 @@ Currently, Ref must be a KSvc.</p>
 </tr>
 <tr>
 <td>
-<code>status</code></br>
+<code>status</code><br/>
 <em>
 <a href="#serving.knative.dev/v1alpha1.DomainMappingStatus">
 DomainMappingStatus
@@ -2106,7 +2106,7 @@ More info: <a href="https://github.com/kubernetes/community/blob/master/contribu
 <tbody>
 <tr>
 <td>
-<code>Message</code></br>
+<code>Message</code><br/>
 <em>
 string
 </em>
@@ -2116,7 +2116,7 @@ string
 </tr>
 <tr>
 <td>
-<code>Field</code></br>
+<code>Field</code><br/>
 <em>
 string
 </em>
@@ -2145,7 +2145,7 @@ string
 <tbody>
 <tr>
 <td>
-<code>ref</code></br>
+<code>ref</code><br/>
 <em>
 knative.dev/pkg/apis/duck/v1.KReference
 </em>
@@ -2176,7 +2176,7 @@ Currently, Ref must be a KSvc.</p>
 <tbody>
 <tr>
 <td>
-<code>Status</code></br>
+<code>Status</code><br/>
 <em>
 knative.dev/pkg/apis/duck/v1.Status
 </em>
@@ -2189,7 +2189,7 @@ knative.dev/pkg/apis/duck/v1.Status
 </tr>
 <tr>
 <td>
-<code>url</code></br>
+<code>url</code><br/>
 <em>
 knative.dev/pkg/apis.URL
 </em>
@@ -2201,7 +2201,7 @@ knative.dev/pkg/apis.URL
 </tr>
 <tr>
 <td>
-<code>address</code></br>
+<code>address</code><br/>
 <em>
 knative.dev/pkg/apis/duck/v1.Addressable
 </em>
