@@ -90,6 +90,21 @@ spec:
     backoffDelay: <ISO8601 duration>
 ```
 
+Failed events may, depending on the specific Channel implementation, be
+enhanced with an extension attribute prior to forwarding to the`deadLetterSink`.
+The attribute is named `ce-knativedispatcherr` and will contain the HTTP
+Response **StatusCode** and **Body** bytes from the failed dispatch attempt as
+an encoded JSON string such as 
+`eyJjb2RlIjogNTAwLCAiZGF0YSI6ICJTVzUwWlhKdVlXd2dVMlZ5ZG1WeUlFVnljbTl5In0=`
+which can be decoded as...
+
+```json
+{"code": 500, "data": "SW50ZXJuYWwgU2VydmVyIEVycm9y"}
+```
+
+...where the **data** bytes representing the HTTP Response Body can be further
+decoded as `Internal Server Error`.
+
 ## Channel Support
 
 The table below summarizes what delivery parameters are supported for each channel implementation.
