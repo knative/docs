@@ -90,20 +90,31 @@ spec:
     backoffDelay: <ISO8601 duration>
 ```
 
-Failed events may, depending on the specific Channel implementation, be
-enhanced with an extension attribute prior to forwarding to the`deadLetterSink`.
-The attribute is named `ce-knativedispatcherr` and will contain the HTTP
-Response **StatusCode** and **Body** bytes from the failed dispatch attempt as
-an encoded JSON string such as
-`eyJjb2RlIjogNTAwLCAiZGF0YSI6ICJTVzUwWlhKdVlXd2dVMlZ5ZG1WeUlFVnljbTl5In0=`
-which can be decoded as...
+Failed events may, depending on the specific Channel implementation in use, be
+enhanced with extension attributes prior to forwarding to the`deadLetterSink`.
+These extension attributes are as follows...
 
-```json
-{"code": 500, "data": "SW50ZXJuYWwgU2VydmVyIEVycm9y"}
-```
+- **knativeerrorcode**
+    - **Type:** Int
+    - **Description:** The HTTP Response **StatusCode** from the final event
+      dispatch attempt.
+    - **Constraints:** Should always be present as every HTTP Response contains
+      a **StatusCode**.
+    - **Examples:**
+        - "500"
+        - ...any HTTP StatusCode...
 
-...where the **data** bytes representing the HTTP Response Body can be further
-decoded as `Internal Server Error`.
+- **knativeerrordata**
+    - **Type:** String
+    - **Description:** The HTTP Response **Body** from the final event dispatch
+      attempt.
+    - **Constraints:** Will not be present if the HTTP Response **Body** was
+      empty. Will be truncated to a maximum length of 1024 bytes which could
+      render JSON payloads invalid / incomplete.
+    - **Examples:**
+        - 'Internal Server Error: Failed to process event.'
+        - '{"key": "value"}'
+        - ...any HTTP Response Body...
 
 ## Channel Support
 
