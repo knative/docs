@@ -250,7 +250,7 @@ in the product, or for a fix or update to existing content.
 
 - **Fixes and updates**: If you find an issue in a past release, for example a
   typo or out-of-date content, you likely need to open multiple and subsequent
-  PRs. If not a followup PR, at least add the "`cherrypick` labels" to your
+  PRs. If not a followup PR, at least add the "`/cherrypick release-#.#` comment" to your
   original PR to indicate in which of the past release that your change affects.
 
   For example, if you find a typo in a page of the `v0.5` release, then that
@@ -260,7 +260,7 @@ in the product, or for a fix or update to existing content.
 
   1.  Open a PR against the
       [`master`](https://github.com/knative/docs/tree/master/) branch.
-  1.  Add one or more `cherrypick-#.#` labels to that PR to indicate which of
+  1.  Add one or more comments `/cherrypick release-#.#` to that PR to indicate which of
       the past release branches should also be fixed. Generally, we only
       maintain the most recent numbered release.
   1.  If you want to complete the fix yourself (**best practice**), you then
