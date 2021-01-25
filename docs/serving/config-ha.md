@@ -38,14 +38,14 @@ The scale of the `activator` component is governed by the Kubernetes HPA compone
 $ kubectl get hpa activator -n knative-serving
 ```
 
-The possible ouput will be something like:
+The possible output will be something like:
 
 ```
 NAME        REFERENCE              TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
 activator   Deployment/activator   2%/100%   5         15        11         346d
 ```
 
-By default `minReplicas` and `maxReplicas` are set to `1` and `20`, correspondingly. If those values are not desireable for some reason, then, for example, you can change those values to `minScale=9` and `maxScale=19` using the following command:
+By default `minReplicas` and `maxReplicas` are set to `1` and `20`, correspondingly. If those values are not desirable for some reason, then, for example, you can change those values to `minScale=9` and `maxScale=19` using the following command:
 
 ```
 $ kubectl patch hpa activator -n knative-serving -p '{"spec":{"minReplicas":9,"maxReplicas":19}}'
