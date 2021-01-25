@@ -87,13 +87,13 @@ Create a `CronJob` object:
 
 1. Copy the sample YAML into a `cronjob.yaml` file:
     ```yaml
-    apiVersion: batch/v1
+     apiVersion: batch/v1beta1
     kind: CronJob
     metadata:
       name: heartbeat-cron
     spec:
       # Run every minute
-      schedule: "* * * * *"
+      schedule: "*/1 * * * *"
       jobTemplate:
         metadata:
           labels:
@@ -104,9 +104,11 @@ Create a `CronJob` object:
               restartPolicy: Never
               containers:
                 - name: single-heartbeat
-                  image: <FILL IN YOUR IMAGE HERE>
+                  image: busybox # Or your preferred image
                   args:
-                    - --period=1
+                  - /bin/sh
+                  - -c
+                  - date; echo "Heartbeat from $POD_NAME"
                   env:
                     - name: ONE_SHOT
                       value: "true"
