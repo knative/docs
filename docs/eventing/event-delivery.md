@@ -92,7 +92,7 @@ spec:
 
 Failed events may, depending on the specific Channel implementation in use, be
 enhanced with extension attributes prior to forwarding to the`deadLetterSink`.
-These extension attributes are as follows...
+These extension attributes are as follows:
 
 - **knativeerrorcode**
     - **Type:** Int
@@ -108,9 +108,8 @@ These extension attributes are as follows...
     - **Type:** String
     - **Description:** The HTTP Response **Body** from the final event dispatch
       attempt.
-    - **Constraints:** Will not be present if the HTTP Response **Body** was
-      empty. Will be truncated to a maximum length of 1024 bytes which could
-      render JSON payloads invalid / incomplete.
+    - **Constraints:** Will be empty if the HTTP Response **Body** was empty,
+      and might be truncated if the length is excessive.
     - **Examples:**
         - 'Internal Server Error: Failed to process event.'
         - '{"key": "value"}'
