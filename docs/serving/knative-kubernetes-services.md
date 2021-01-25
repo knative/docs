@@ -48,10 +48,12 @@ that are active when running Knative Serving.
    networking-istio         1         1         1            1           1h
    webhook                  1         1         1            1           1h
    ```
+The networking deployment (in our case, `networking-istio`) may be called something
+different depending on what networking layer you chose to use when [installing Knative](../install/README.md).
+
 
 These services and deployments are installed by the `serving.yaml` file during
 install. The next section describes their function.
-
 ## Components
 
 ### Service: activator
@@ -82,10 +84,9 @@ and validates and mutates Kubernetes API calls.
 
 The certmanager reconciles cluster ingresses into cert manager objects.
 
-### Deployment: networking-istio
+### Deployment: networking
 
-The networking-istio deployment reconciles a cluster's ingress into an
-[Istio virtual service](https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/).
+The networking layer deployment (eg. networking-istio, contour-ingress-controller, etc.) reconciles a cluster’s ingress into the appropriate networking layer primitives. In the example shown above, we've chosen to use Istio (which reconciles into a [Istio Virtual Service](https://istio.io/latest/docs/reference/config/networking/virtual-service/).
 
 ## What's Next
 
