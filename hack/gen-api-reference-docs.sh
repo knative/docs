@@ -149,12 +149,16 @@ main() {
     gen_refdocs "${refdocs_bin}" "${clone_root}" "${template_dir}" \
         "${out_dir}/${KNATIVE_SERVING_OUT_FILE}" "${knative_serving_root}" "./pkg/apis"
 
+    cp "${out_dir}/${KNATIVE_SERVING_OUT_FILE}" "$SCRIPTDIR/../docs/reference/api/${KNATIVE_SERVING_OUT_FILE}"
+
     local knative_eventing_root
     knative_eventing_root="${clone_root}/src/${KNATIVE_EVENTING_IMPORT_PATH}"
     clone_at_commit "https://${KNATIVE_EVENTING_REPO}.git" "${KNATIVE_EVENTING_COMMIT}" \
         "${knative_eventing_root}"
     gen_refdocs "${refdocs_bin}" "${clone_root}" "${template_dir}" \
         "${out_dir}/${KNATIVE_EVENTING_OUT_FILE}" "${knative_eventing_root}" "./pkg/apis"
+
+    cp "${out_dir}/${KNATIVE_EVENTING_OUT_FILE}" "$SCRIPTDIR/../docs/reference/api/${KNATIVE_EVENTING_OUT_FILE}"
 
     # local knative_eventing_contrib_root
     # knative_eventing_contrib_root="${clone_root}/src/${KNATIVE_EVENTING_CONTRIB_IMPORT_PATH}"
@@ -163,14 +167,8 @@ main() {
     # gen_refdocs "${refdocs_bin}" "${clone_root}" "${template_dir}" \
     #     "${out_dir}/${KNATIVE_EVENTING_CONTRIB_OUT_FILE}" "${knative_eventing_contrib_root}" "."
 
-    log "SUCCESS: Generated docs written to ${out_dir}/."
-    log "Opening the ${out_dir}/ directory. You can now copy these API files"
-    log "from ${out_dir}/, into the 'docs/reference/' directory of knative/docs."
-    if command -v xdg-open >/dev/null; then
-        xdg-open "${out_dir}/"
-    elif command -v open >/dev/null; then
-        open "${out_dir}/"
-    fi
+    echo "Applying patches..."
+    git apply $SCRIPTDIR/patches/*.patch
 }
 
 main "$@"
