@@ -10,7 +10,7 @@ Active/passive HA in Knative is available through leader election, which can be 
 
 When using a leader election HA pattern, instances of controllers are already scheduled and running inside the cluster before they are required. These controller instances compete to use a shared resource, known as the leader election lock. The instance of the controller that has access to the leader election lock resource at any given time is referred to as the leader.
 
-HA functionality is enabled by default for all Knative Serving components except `autoscaler`.
+HA functionality is enabled by default for all Knative Serving components except for the `autoscaler` component.
 
 ## Disabling leader election
 
@@ -18,7 +18,7 @@ For components leveraging leader election to achieve HA, this capability can be 
 
 ## Scaling the control plane
 
-With the exception of `activator` component you can scale up any deployment running in `knative-serving` (or `kourier-system`) with a command like:
+With the exception of the `activator` component you can scale up any deployment running in `knative-serving` (or `kourier-system`) with a command like:
 
 ```
 $ kubectl -n knative-serving scale deployment <deployment-name> --replicas=2
@@ -32,13 +32,13 @@ $ kubectl -n knative-serving scale deployment <deployment-name> --replicas=2
 
 ## Scaling the data plane
 
-The scale of the `activator` component namespace is governed by Kubernetes HPA component. You can see the current HPA scale limits and current scale by running:
+The scale of the `activator` component is governed by the Kubernetes HPA component. You can see the current HPA scale limits and the current scale by running:
 
 ```
 $ kubectl get hpa activator -n knative-serving
 ```
 
-The output should be something like:
+The possible ouput will be something like:
 
 ```
 NAME        REFERENCE              TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
@@ -51,5 +51,7 @@ By default `minReplicas` and `maxReplicas` are set to `1` and `20`, correspondin
 $ kubectl patch hpa activator -n knative-serving -p '{"spec":{"minReplicas":9,"maxReplicas":19}}'
 ```
 
-It is recommended for production deployments to run at least 3 activator instances for redundancy and avoiding single point of failure if a Knative service needs to be scaled from 0.
+To set the activator scale to a particular value, just set `minScale` and `maxScale` to the same desired value.
+
+It is recommended for production deployments to run at least 3 `activator` instances for redundancy and avoiding single point of failure if a Knative service needs to be scaled from 0.
 
