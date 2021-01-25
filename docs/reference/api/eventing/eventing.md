@@ -161,8 +161,7 @@ This data may be out of date.</p>
 <h3 id="configs.internal.knative.dev/v1alpha1.ConfigMapPropagationSpec">ConfigMapPropagationSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#configs.internal.knative.dev/v1alpha1.ConfigMapPropagation">ConfigMapPropagation</a>)
+(<em>Appears on:</em><a href="#configs.internal.knative.dev/v1alpha1.ConfigMapPropagation">ConfigMapPropagation</a>)
 </p>
 <p>
 </p>
@@ -204,8 +203,7 @@ Kubernetes meta/v1.LabelSelector
 <h3 id="configs.internal.knative.dev/v1alpha1.ConfigMapPropagationStatus">ConfigMapPropagationStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#configs.internal.knative.dev/v1alpha1.ConfigMapPropagation">ConfigMapPropagation</a>)
+(<em>Appears on:</em><a href="#configs.internal.knative.dev/v1alpha1.ConfigMapPropagation">ConfigMapPropagation</a>)
 </p>
 <p>
 <p>ConfigMapPropagationStatus represents the current state of a ConfigMapPropagation.</p>
@@ -253,8 +251,7 @@ knative.dev/pkg/apis/duck/v1.Status
 <h3 id="configs.internal.knative.dev/v1alpha1.ConfigMapPropagationStatusCopyConfigMap">ConfigMapPropagationStatusCopyConfigMap
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#configs.internal.knative.dev/v1alpha1.ConfigMapPropagationStatus">ConfigMapPropagationStatus</a>)
+(<em>Appears on:</em><a href="#configs.internal.knative.dev/v1alpha1.ConfigMapPropagationStatus">ConfigMapPropagationStatus</a>)
 </p>
 <p>
 <p>ConfigMapPropagationStatusCopyConfigMap represents the status of a copied configmap</p>
@@ -345,8 +342,7 @@ Resource Types:
 <h3 id="duck.knative.dev/v1.BackoffPolicyType">BackoffPolicyType
 (<code>string</code> alias)</p></h3>
 <p>
-(<em>Appears on:</em>
-<a href="#duck.knative.dev/v1.DeliverySpec">DeliverySpec</a>)
+(<em>Appears on:</em><a href="#duck.knative.dev/v1.DeliverySpec">DeliverySpec</a>)
 </p>
 <p>
 <p>BackoffPolicyType is the type for backoff policies</p>
@@ -460,11 +456,7 @@ ChannelableStatus
 <h3 id="duck.knative.dev/v1.ChannelableSpec">ChannelableSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#duck.knative.dev/v1.Channelable">Channelable</a>, 
-<a href="#messaging.knative.dev/v1.ChannelSpec">ChannelSpec</a>, 
-<a href="#messaging.knative.dev/v1.ChannelTemplateSpecInternalSpec">ChannelTemplateSpecInternalSpec</a>, 
-<a href="#messaging.knative.dev/v1.InMemoryChannelSpec">InMemoryChannelSpec</a>)
+(<em>Appears on:</em><a href="#duck.knative.dev/v1.Channelable">Channelable</a>, <a href="#messaging.knative.dev/v1.ChannelSpec">ChannelSpec</a>, <a href="#messaging.knative.dev/v1.InMemoryChannelSpec">InMemoryChannelSpec</a>)
 </p>
 <p>
 <p>ChannelableSpec contains Spec of the Channelable object</p>
@@ -513,10 +505,7 @@ global delivery spec.</p>
 <h3 id="duck.knative.dev/v1.ChannelableStatus">ChannelableStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#duck.knative.dev/v1.Channelable">Channelable</a>, 
-<a href="#messaging.knative.dev/v1.ChannelStatus">ChannelStatus</a>, 
-<a href="#messaging.knative.dev/v1.InMemoryChannelStatus">InMemoryChannelStatus</a>)
+(<em>Appears on:</em><a href="#duck.knative.dev/v1.Channelable">Channelable</a>, <a href="#messaging.knative.dev/v1.ChannelStatus">ChannelStatus</a>, <a href="#messaging.knative.dev/v1.InMemoryChannelStatus">InMemoryChannelStatus</a>)
 </p>
 <p>
 <p>ChannelableStatus contains the Status of a Channelable object.</p>
@@ -593,13 +582,7 @@ Failed messages are delivered here.</p>
 <h3 id="duck.knative.dev/v1.DeliverySpec">DeliverySpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#duck.knative.dev/v1.ChannelableSpec">ChannelableSpec</a>, 
-<a href="#duck.knative.dev/v1.SubscriberSpec">SubscriberSpec</a>, 
-<a href="#eventing.knative.dev/v1.BrokerSpec">BrokerSpec</a>, 
-<a href="#flows.knative.dev/v1.ParallelBranch">ParallelBranch</a>, 
-<a href="#flows.knative.dev/v1.SequenceStep">SequenceStep</a>, 
-<a href="#messaging.knative.dev/v1.SubscriptionSpec">SubscriptionSpec</a>)
+(<em>Appears on:</em><a href="#duck.knative.dev/v1.ChannelableSpec">ChannelableSpec</a>, <a href="#duck.knative.dev/v1.SubscriberSpec">SubscriberSpec</a>, <a href="#eventing.knative.dev/v1.BrokerSpec">BrokerSpec</a>, <a href="#flows.knative.dev/v1.ParallelBranch">ParallelBranch</a>, <a href="#flows.knative.dev/v1.SequenceStep">SequenceStep</a>, <a href="#messaging.knative.dev/v1.SubscriptionSpec">SubscriptionSpec</a>)
 </p>
 <p>
 <p>DeliverySpec contains the delivery options for event senders,
@@ -779,9 +762,7 @@ configured as to be compatible with Subscribable contract.</p>
 <h3 id="duck.knative.dev/v1.SubscribableSpec">SubscribableSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#duck.knative.dev/v1.ChannelableSpec">ChannelableSpec</a>, 
-<a href="#duck.knative.dev/v1.Subscribable">Subscribable</a>)
+(<em>Appears on:</em><a href="#duck.knative.dev/v1.ChannelableSpec">ChannelableSpec</a>, <a href="#duck.knative.dev/v1.Subscribable">Subscribable</a>)
 </p>
 <p>
 <p>SubscribableSpec shows how we expect folks to embed Subscribable in their Spec field.</p>
@@ -812,9 +793,7 @@ configured as to be compatible with Subscribable contract.</p>
 <h3 id="duck.knative.dev/v1.SubscribableStatus">SubscribableStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#duck.knative.dev/v1.ChannelableStatus">ChannelableStatus</a>, 
-<a href="#duck.knative.dev/v1.Subscribable">Subscribable</a>)
+(<em>Appears on:</em><a href="#duck.knative.dev/v1.ChannelableStatus">ChannelableStatus</a>, <a href="#duck.knative.dev/v1.Subscribable">Subscribable</a>)
 </p>
 <p>
 <p>SubscribableStatus is the schema for the subscribable&rsquo;s status portion of the status
@@ -846,8 +825,7 @@ section of the resource.</p>
 <h3 id="duck.knative.dev/v1.SubscriberSpec">SubscriberSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#duck.knative.dev/v1.SubscribableSpec">SubscribableSpec</a>)
+(<em>Appears on:</em><a href="#duck.knative.dev/v1.SubscribableSpec">SubscribableSpec</a>)
 </p>
 <p>
 <p>SubscriberSpec defines a single subscriber to a Subscribable.</p>
@@ -928,8 +906,7 @@ DeliverySpec
 <h3 id="duck.knative.dev/v1.SubscriberStatus">SubscriberStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#duck.knative.dev/v1.SubscribableStatus">SubscribableStatus</a>)
+(<em>Appears on:</em><a href="#duck.knative.dev/v1.SubscribableStatus">SubscribableStatus</a>)
 </p>
 <p>
 <p>SubscriberStatus defines the status of a single subscriber to a Channel.</p>
@@ -1200,8 +1177,7 @@ ChannelableCombinedStatus
 <h3 id="duck.knative.dev/v1alpha1.ChannelableCombinedSpec">ChannelableCombinedSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#duck.knative.dev/v1alpha1.ChannelableCombined">ChannelableCombined</a>)
+(<em>Appears on:</em><a href="#duck.knative.dev/v1alpha1.ChannelableCombined">ChannelableCombined</a>)
 </p>
 <p>
 <p>ChannelableSpec contains Spec of the Channelable object</p>
@@ -1265,8 +1241,7 @@ DeliverySpec
 <h3 id="duck.knative.dev/v1alpha1.ChannelableCombinedStatus">ChannelableCombinedStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#duck.knative.dev/v1alpha1.ChannelableCombined">ChannelableCombined</a>)
+(<em>Appears on:</em><a href="#duck.knative.dev/v1alpha1.ChannelableCombined">ChannelableCombined</a>)
 </p>
 <p>
 <p>ChannelableStatus contains the Status of a Channelable object.</p>
@@ -1360,8 +1335,7 @@ Kubernetes core/v1.ObjectReference
 <h3 id="duck.knative.dev/v1alpha1.ChannelableSpec">ChannelableSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#duck.knative.dev/v1alpha1.Channelable">Channelable</a>)
+(<em>Appears on:</em><a href="#duck.knative.dev/v1alpha1.Channelable">Channelable</a>)
 </p>
 <p>
 <p>ChannelableSpec contains Spec of the Channelable object</p>
@@ -1408,8 +1382,7 @@ DeliverySpec
 <h3 id="duck.knative.dev/v1alpha1.ChannelableStatus">ChannelableStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#duck.knative.dev/v1alpha1.Channelable">Channelable</a>)
+(<em>Appears on:</em><a href="#duck.knative.dev/v1alpha1.Channelable">Channelable</a>)
 </p>
 <p>
 <p>ChannelableStatus contains the Status of a Channelable object.</p>
@@ -1517,8 +1490,7 @@ Refer to the Kubernetes API documentation for the fields of the
 <h3 id="duck.knative.dev/v1alpha1.Subscribable">Subscribable
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#duck.knative.dev/v1alpha1.SubscribableTypeSpec">SubscribableTypeSpec</a>)
+(<em>Appears on:</em><a href="#duck.knative.dev/v1alpha1.SubscribableTypeSpec">SubscribableTypeSpec</a>)
 </p>
 <p>
 <p>Subscribable is the schema for the subscribable portion of the spec
@@ -1550,8 +1522,7 @@ section of the resource.</p>
 <h3 id="duck.knative.dev/v1alpha1.SubscribableStatus">SubscribableStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#duck.knative.dev/v1alpha1.SubscribableTypeStatus">SubscribableTypeStatus</a>)
+(<em>Appears on:</em><a href="#duck.knative.dev/v1alpha1.SubscribableTypeStatus">SubscribableTypeStatus</a>)
 </p>
 <p>
 <p>SubscribableStatus is the schema for the subscribable&rsquo;s status portion of the status
@@ -1658,10 +1629,7 @@ configured as to be compatible with Subscribable contract.</p>
 <h3 id="duck.knative.dev/v1alpha1.SubscribableTypeSpec">SubscribableTypeSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#duck.knative.dev/v1alpha1.ChannelableCombinedSpec">ChannelableCombinedSpec</a>, 
-<a href="#duck.knative.dev/v1alpha1.ChannelableSpec">ChannelableSpec</a>, 
-<a href="#duck.knative.dev/v1alpha1.SubscribableType">SubscribableType</a>)
+(<em>Appears on:</em><a href="#duck.knative.dev/v1alpha1.ChannelableCombinedSpec">ChannelableCombinedSpec</a>, <a href="#duck.knative.dev/v1alpha1.ChannelableSpec">ChannelableSpec</a>, <a href="#duck.knative.dev/v1alpha1.SubscribableType">SubscribableType</a>)
 </p>
 <p>
 <p>SubscribableTypeSpec shows how we expect folks to embed Subscribable in their Spec field.</p>
@@ -1691,10 +1659,7 @@ Subscribable
 <h3 id="duck.knative.dev/v1alpha1.SubscribableTypeStatus">SubscribableTypeStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#duck.knative.dev/v1alpha1.ChannelableCombinedStatus">ChannelableCombinedStatus</a>, 
-<a href="#duck.knative.dev/v1alpha1.ChannelableStatus">ChannelableStatus</a>, 
-<a href="#duck.knative.dev/v1alpha1.SubscribableType">SubscribableType</a>)
+(<em>Appears on:</em><a href="#duck.knative.dev/v1alpha1.ChannelableCombinedStatus">ChannelableCombinedStatus</a>, <a href="#duck.knative.dev/v1alpha1.ChannelableStatus">ChannelableStatus</a>, <a href="#duck.knative.dev/v1alpha1.SubscribableType">SubscribableType</a>)
 </p>
 <p>
 <p>SubscribableTypeStatus shows how we expect folks to embed Subscribable in their Status field.</p>
@@ -1724,8 +1689,7 @@ SubscribableStatus
 <h3 id="duck.knative.dev/v1alpha1.SubscriberSpec">SubscriberSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#duck.knative.dev/v1alpha1.Subscribable">Subscribable</a>)
+(<em>Appears on:</em><a href="#duck.knative.dev/v1alpha1.Subscribable">Subscribable</a>)
 </p>
 <p>
 <p>SubscriberSpec defines a single subscriber to a Subscribable.
@@ -1824,8 +1788,7 @@ Resource Types:
 <h3 id="duck.knative.dev/v1beta1.BackoffPolicyType">BackoffPolicyType
 (<code>string</code> alias)</p></h3>
 <p>
-(<em>Appears on:</em>
-<a href="#duck.knative.dev/v1beta1.DeliverySpec">DeliverySpec</a>)
+(<em>Appears on:</em><a href="#duck.knative.dev/v1beta1.DeliverySpec">DeliverySpec</a>)
 </p>
 <p>
 <p>BackoffPolicyType is the type for backoff policies</p>
@@ -1937,10 +1900,7 @@ ChannelableStatus
 <h3 id="duck.knative.dev/v1beta1.ChannelableSpec">ChannelableSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#duck.knative.dev/v1beta1.Channelable">Channelable</a>, 
-<a href="#messaging.knative.dev/v1beta1.ChannelSpec">ChannelSpec</a>, 
-<a href="#messaging.knative.dev/v1beta1.InMemoryChannelSpec">InMemoryChannelSpec</a>)
+(<em>Appears on:</em><a href="#duck.knative.dev/v1beta1.Channelable">Channelable</a>, <a href="#messaging.knative.dev/v1beta1.ChannelSpec">ChannelSpec</a>, <a href="#messaging.knative.dev/v1beta1.InMemoryChannelSpec">InMemoryChannelSpec</a>)
 </p>
 <p>
 <p>ChannelableSpec contains Spec of the Channelable object</p>
@@ -1987,10 +1947,7 @@ DeliverySpec
 <h3 id="duck.knative.dev/v1beta1.ChannelableStatus">ChannelableStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#duck.knative.dev/v1beta1.Channelable">Channelable</a>, 
-<a href="#messaging.knative.dev/v1beta1.ChannelStatus">ChannelStatus</a>, 
-<a href="#messaging.knative.dev/v1beta1.InMemoryChannelStatus">InMemoryChannelStatus</a>)
+(<em>Appears on:</em><a href="#duck.knative.dev/v1beta1.Channelable">Channelable</a>, <a href="#messaging.knative.dev/v1beta1.ChannelStatus">ChannelStatus</a>, <a href="#messaging.knative.dev/v1beta1.InMemoryChannelStatus">InMemoryChannelStatus</a>)
 </p>
 <p>
 <p>ChannelableStatus contains the Status of a Channelable object.</p>
@@ -2067,16 +2024,7 @@ Failed messages are delivered here.</p>
 <h3 id="duck.knative.dev/v1beta1.DeliverySpec">DeliverySpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#duck.knative.dev/v1alpha1.ChannelableCombinedSpec">ChannelableCombinedSpec</a>, 
-<a href="#duck.knative.dev/v1alpha1.ChannelableSpec">ChannelableSpec</a>, 
-<a href="#duck.knative.dev/v1alpha1.SubscriberSpec">SubscriberSpec</a>, 
-<a href="#duck.knative.dev/v1beta1.ChannelableSpec">ChannelableSpec</a>, 
-<a href="#duck.knative.dev/v1beta1.SubscriberSpec">SubscriberSpec</a>, 
-<a href="#eventing.knative.dev/v1beta1.BrokerSpec">BrokerSpec</a>, 
-<a href="#flows.knative.dev/v1beta1.ParallelBranch">ParallelBranch</a>, 
-<a href="#flows.knative.dev/v1beta1.SequenceStep">SequenceStep</a>, 
-<a href="#messaging.knative.dev/v1beta1.SubscriptionSpec">SubscriptionSpec</a>)
+(<em>Appears on:</em><a href="#duck.knative.dev/v1alpha1.ChannelableCombinedSpec">ChannelableCombinedSpec</a>, <a href="#duck.knative.dev/v1alpha1.ChannelableSpec">ChannelableSpec</a>, <a href="#duck.knative.dev/v1alpha1.SubscriberSpec">SubscriberSpec</a>, <a href="#duck.knative.dev/v1beta1.ChannelableSpec">ChannelableSpec</a>, <a href="#duck.knative.dev/v1beta1.SubscriberSpec">SubscriberSpec</a>, <a href="#eventing.knative.dev/v1beta1.BrokerSpec">BrokerSpec</a>, <a href="#flows.knative.dev/v1beta1.ParallelBranch">ParallelBranch</a>, <a href="#flows.knative.dev/v1beta1.SequenceStep">SequenceStep</a>, <a href="#messaging.knative.dev/v1beta1.SubscriptionSpec">SubscriptionSpec</a>)
 </p>
 <p>
 <p>DeliverySpec contains the delivery options for event senders,
@@ -2256,10 +2204,7 @@ configured as to be compatible with Subscribable contract.</p>
 <h3 id="duck.knative.dev/v1beta1.SubscribableSpec">SubscribableSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#duck.knative.dev/v1alpha1.ChannelableCombinedSpec">ChannelableCombinedSpec</a>, 
-<a href="#duck.knative.dev/v1beta1.ChannelableSpec">ChannelableSpec</a>, 
-<a href="#duck.knative.dev/v1beta1.Subscribable">Subscribable</a>)
+(<em>Appears on:</em><a href="#duck.knative.dev/v1alpha1.ChannelableCombinedSpec">ChannelableCombinedSpec</a>, <a href="#duck.knative.dev/v1beta1.ChannelableSpec">ChannelableSpec</a>, <a href="#duck.knative.dev/v1beta1.Subscribable">Subscribable</a>)
 </p>
 <p>
 <p>SubscribableSpec shows how we expect folks to embed Subscribable in their Spec field.</p>
@@ -2290,10 +2235,7 @@ configured as to be compatible with Subscribable contract.</p>
 <h3 id="duck.knative.dev/v1beta1.SubscribableStatus">SubscribableStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#duck.knative.dev/v1alpha1.ChannelableCombinedStatus">ChannelableCombinedStatus</a>, 
-<a href="#duck.knative.dev/v1beta1.ChannelableStatus">ChannelableStatus</a>, 
-<a href="#duck.knative.dev/v1beta1.Subscribable">Subscribable</a>)
+(<em>Appears on:</em><a href="#duck.knative.dev/v1alpha1.ChannelableCombinedStatus">ChannelableCombinedStatus</a>, <a href="#duck.knative.dev/v1beta1.ChannelableStatus">ChannelableStatus</a>, <a href="#duck.knative.dev/v1beta1.Subscribable">Subscribable</a>)
 </p>
 <p>
 <p>SubscribableStatus is the schema for the subscribable&rsquo;s status portion of the status
@@ -2325,8 +2267,7 @@ section of the resource.</p>
 <h3 id="duck.knative.dev/v1beta1.SubscriberSpec">SubscriberSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#duck.knative.dev/v1beta1.SubscribableSpec">SubscribableSpec</a>)
+(<em>Appears on:</em><a href="#duck.knative.dev/v1beta1.SubscribableSpec">SubscribableSpec</a>)
 </p>
 <p>
 <p>SubscriberSpec defines a single subscriber to a Subscribable.</p>
@@ -2407,9 +2348,7 @@ DeliverySpec
 <h3 id="duck.knative.dev/v1beta1.SubscriberStatus">SubscriberStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#duck.knative.dev/v1alpha1.SubscribableStatus">SubscribableStatus</a>, 
-<a href="#duck.knative.dev/v1beta1.SubscribableStatus">SubscribableStatus</a>)
+(<em>Appears on:</em><a href="#duck.knative.dev/v1alpha1.SubscribableStatus">SubscribableStatus</a>, <a href="#duck.knative.dev/v1beta1.SubscribableStatus">SubscribableStatus</a>)
 </p>
 <p>
 <p>SubscriberStatus defines the status of a single subscriber to a Channel.</p>
@@ -2717,8 +2656,7 @@ date.</p>
 <h3 id="eventing.knative.dev/v1.BrokerSpec">BrokerSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#eventing.knative.dev/v1.Broker">Broker</a>)
+(<em>Appears on:</em><a href="#eventing.knative.dev/v1.Broker">Broker</a>)
 </p>
 <p>
 </p>
@@ -2764,8 +2702,7 @@ This includes things like retries, DLQ, etc.</p>
 <h3 id="eventing.knative.dev/v1.BrokerStatus">BrokerStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#eventing.knative.dev/v1.Broker">Broker</a>)
+(<em>Appears on:</em><a href="#eventing.knative.dev/v1.Broker">Broker</a>)
 </p>
 <p>
 <p>BrokerStatus represents the current state of a Broker.</p>
@@ -2811,8 +2748,7 @@ delivered into the Broker mesh.</p>
 <h3 id="eventing.knative.dev/v1.TriggerFilter">TriggerFilter
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#eventing.knative.dev/v1.TriggerSpec">TriggerSpec</a>)
+(<em>Appears on:</em><a href="#eventing.knative.dev/v1.TriggerSpec">TriggerSpec</a>)
 </p>
 <p>
 </p>
@@ -2847,8 +2783,7 @@ specified values.</p>
 <h3 id="eventing.knative.dev/v1.TriggerFilterAttributes">TriggerFilterAttributes
 (<code>map[string]string</code> alias)</p></h3>
 <p>
-(<em>Appears on:</em>
-<a href="#eventing.knative.dev/v1.TriggerFilter">TriggerFilter</a>)
+(<em>Appears on:</em><a href="#eventing.knative.dev/v1.TriggerFilter">TriggerFilter</a>)
 </p>
 <p>
 <p>TriggerFilterAttributes is a map of context attribute names to values for
@@ -2858,8 +2793,7 @@ to indicate all strings match.</p>
 <h3 id="eventing.knative.dev/v1.TriggerSpec">TriggerSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#eventing.knative.dev/v1.Trigger">Trigger</a>)
+(<em>Appears on:</em><a href="#eventing.knative.dev/v1.Trigger">Trigger</a>)
 </p>
 <p>
 </p>
@@ -2914,8 +2848,7 @@ is required.</p>
 <h3 id="eventing.knative.dev/v1.TriggerStatus">TriggerStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#eventing.knative.dev/v1.Trigger">Trigger</a>)
+(<em>Appears on:</em><a href="#eventing.knative.dev/v1.Trigger">Trigger</a>)
 </p>
 <p>
 <p>TriggerStatus represents the current state of a Trigger.</p>
@@ -3359,8 +3292,7 @@ date.</p>
 <h3 id="eventing.knative.dev/v1beta1.BrokerSpec">BrokerSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#eventing.knative.dev/v1beta1.Broker">Broker</a>)
+(<em>Appears on:</em><a href="#eventing.knative.dev/v1beta1.Broker">Broker</a>)
 </p>
 <p>
 </p>
@@ -3406,8 +3338,7 @@ This includes things like retries, DLQ, etc.</p>
 <h3 id="eventing.knative.dev/v1beta1.BrokerStatus">BrokerStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#eventing.knative.dev/v1beta1.Broker">Broker</a>)
+(<em>Appears on:</em><a href="#eventing.knative.dev/v1beta1.Broker">Broker</a>)
 </p>
 <p>
 <p>BrokerStatus represents the current state of a Broker.</p>
@@ -3453,8 +3384,7 @@ delivered into the Broker mesh.</p>
 <h3 id="eventing.knative.dev/v1beta1.EventTypeSpec">EventTypeSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#eventing.knative.dev/v1beta1.EventType">EventType</a>)
+(<em>Appears on:</em><a href="#eventing.knative.dev/v1beta1.EventType">EventType</a>)
 </p>
 <p>
 </p>
@@ -3546,8 +3476,7 @@ string
 <h3 id="eventing.knative.dev/v1beta1.EventTypeStatus">EventTypeStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#eventing.knative.dev/v1beta1.EventType">EventType</a>)
+(<em>Appears on:</em><a href="#eventing.knative.dev/v1beta1.EventType">EventType</a>)
 </p>
 <p>
 <p>EventTypeStatus represents the current state of a EventType.</p>
@@ -3581,8 +3510,7 @@ knative.dev/pkg/apis/duck/v1.Status
 <h3 id="eventing.knative.dev/v1beta1.TriggerFilter">TriggerFilter
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#eventing.knative.dev/v1beta1.TriggerSpec">TriggerSpec</a>)
+(<em>Appears on:</em><a href="#eventing.knative.dev/v1beta1.TriggerSpec">TriggerSpec</a>)
 </p>
 <p>
 </p>
@@ -3617,8 +3545,7 @@ specified values.</p>
 <h3 id="eventing.knative.dev/v1beta1.TriggerFilterAttributes">TriggerFilterAttributes
 (<code>map[string]string</code> alias)</p></h3>
 <p>
-(<em>Appears on:</em>
-<a href="#eventing.knative.dev/v1beta1.TriggerFilter">TriggerFilter</a>)
+(<em>Appears on:</em><a href="#eventing.knative.dev/v1beta1.TriggerFilter">TriggerFilter</a>)
 </p>
 <p>
 <p>TriggerFilterAttributes is a map of context attribute names to values for
@@ -3628,8 +3555,7 @@ to indicate all strings match.</p>
 <h3 id="eventing.knative.dev/v1beta1.TriggerSpec">TriggerSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#eventing.knative.dev/v1beta1.Trigger">Trigger</a>)
+(<em>Appears on:</em><a href="#eventing.knative.dev/v1beta1.Trigger">Trigger</a>)
 </p>
 <p>
 </p>
@@ -3685,8 +3611,7 @@ is required.</p>
 <h3 id="eventing.knative.dev/v1beta1.TriggerStatus">TriggerStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#eventing.knative.dev/v1beta1.Trigger">Trigger</a>)
+(<em>Appears on:</em><a href="#eventing.knative.dev/v1beta1.Trigger">Trigger</a>)
 </p>
 <p>
 <p>TriggerStatus represents the current state of a Trigger.</p>
@@ -3842,8 +3767,7 @@ date.</p>
 <h3 id="flows.knative.dev/v1.ParallelBranch">ParallelBranch
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#flows.knative.dev/v1.ParallelSpec">ParallelSpec</a>)
+(<em>Appears on:</em><a href="#flows.knative.dev/v1.ParallelSpec">ParallelSpec</a>)
 </p>
 <p>
 </p>
@@ -3911,8 +3835,7 @@ This includes things like retries, DLQ, etc.</p>
 <h3 id="flows.knative.dev/v1.ParallelBranchStatus">ParallelBranchStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#flows.knative.dev/v1.ParallelStatus">ParallelStatus</a>)
+(<em>Appears on:</em><a href="#flows.knative.dev/v1.ParallelStatus">ParallelStatus</a>)
 </p>
 <p>
 <p>ParallelBranchStatus represents the current state of a Parallel branch</p>
@@ -3969,9 +3892,7 @@ ParallelSubscriptionStatus
 <h3 id="flows.knative.dev/v1.ParallelChannelStatus">ParallelChannelStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#flows.knative.dev/v1.ParallelBranchStatus">ParallelBranchStatus</a>, 
-<a href="#flows.knative.dev/v1.ParallelStatus">ParallelStatus</a>)
+(<em>Appears on:</em><a href="#flows.knative.dev/v1.ParallelBranchStatus">ParallelBranchStatus</a>, <a href="#flows.knative.dev/v1.ParallelStatus">ParallelStatus</a>)
 </p>
 <p>
 </p>
@@ -4012,8 +3933,7 @@ knative.dev/pkg/apis.Condition
 <h3 id="flows.knative.dev/v1.ParallelSpec">ParallelSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#flows.knative.dev/v1.Parallel">Parallel</a>)
+(<em>Appears on:</em><a href="#flows.knative.dev/v1.Parallel">Parallel</a>)
 </p>
 <p>
 </p>
@@ -4071,8 +3991,7 @@ when the case does not have a Reply</p>
 <h3 id="flows.knative.dev/v1.ParallelStatus">ParallelStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#flows.knative.dev/v1.Parallel">Parallel</a>)
+(<em>Appears on:</em><a href="#flows.knative.dev/v1.Parallel">Parallel</a>)
 </p>
 <p>
 <p>ParallelStatus represents the current state of a Parallel.</p>
@@ -4149,8 +4068,7 @@ It generally has the form {channel}.{namespace}.svc.{cluster domain name}</p>
 <h3 id="flows.knative.dev/v1.ParallelSubscriptionStatus">ParallelSubscriptionStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#flows.knative.dev/v1.ParallelBranchStatus">ParallelBranchStatus</a>)
+(<em>Appears on:</em><a href="#flows.knative.dev/v1.ParallelBranchStatus">ParallelBranchStatus</a>)
 </p>
 <p>
 </p>
@@ -4295,8 +4213,7 @@ date.</p>
 <h3 id="flows.knative.dev/v1.SequenceChannelStatus">SequenceChannelStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#flows.knative.dev/v1.SequenceStatus">SequenceStatus</a>)
+(<em>Appears on:</em><a href="#flows.knative.dev/v1.SequenceStatus">SequenceStatus</a>)
 </p>
 <p>
 </p>
@@ -4337,8 +4254,7 @@ knative.dev/pkg/apis.Condition
 <h3 id="flows.knative.dev/v1.SequenceSpec">SequenceSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#flows.knative.dev/v1.Sequence">Sequence</a>)
+(<em>Appears on:</em><a href="#flows.knative.dev/v1.Sequence">Sequence</a>)
 </p>
 <p>
 </p>
@@ -4396,8 +4312,7 @@ knative.dev/pkg/apis/duck/v1.Destination
 <h3 id="flows.knative.dev/v1.SequenceStatus">SequenceStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#flows.knative.dev/v1.Sequence">Sequence</a>)
+(<em>Appears on:</em><a href="#flows.knative.dev/v1.Sequence">Sequence</a>)
 </p>
 <p>
 <p>SequenceStatus represents the current state of a Sequence.</p>
@@ -4475,8 +4390,7 @@ It generally has the form {channel}.{namespace}.svc.{cluster domain name}</p>
 <h3 id="flows.knative.dev/v1.SequenceStep">SequenceStep
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#flows.knative.dev/v1.SequenceSpec">SequenceSpec</a>)
+(<em>Appears on:</em><a href="#flows.knative.dev/v1.SequenceSpec">SequenceSpec</a>)
 </p>
 <p>
 </p>
@@ -4522,8 +4436,7 @@ This includes things like retries, DLQ, etc.</p>
 <h3 id="flows.knative.dev/v1.SequenceSubscriptionStatus">SequenceSubscriptionStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#flows.knative.dev/v1.SequenceStatus">SequenceStatus</a>)
+(<em>Appears on:</em><a href="#flows.knative.dev/v1.SequenceStatus">SequenceStatus</a>)
 </p>
 <p>
 </p>
@@ -4675,8 +4588,7 @@ date.</p>
 <h3 id="flows.knative.dev/v1beta1.ParallelBranch">ParallelBranch
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#flows.knative.dev/v1beta1.ParallelSpec">ParallelSpec</a>)
+(<em>Appears on:</em><a href="#flows.knative.dev/v1beta1.ParallelSpec">ParallelSpec</a>)
 </p>
 <p>
 </p>
@@ -4745,8 +4657,7 @@ Needed for Roundtripping v1alpha1 &lt;-&gt; v1beta1.</p>
 <h3 id="flows.knative.dev/v1beta1.ParallelBranchStatus">ParallelBranchStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#flows.knative.dev/v1beta1.ParallelStatus">ParallelStatus</a>)
+(<em>Appears on:</em><a href="#flows.knative.dev/v1beta1.ParallelStatus">ParallelStatus</a>)
 </p>
 <p>
 <p>ParallelBranchStatus represents the current state of a Parallel branch</p>
@@ -4803,9 +4714,7 @@ ParallelSubscriptionStatus
 <h3 id="flows.knative.dev/v1beta1.ParallelChannelStatus">ParallelChannelStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#flows.knative.dev/v1beta1.ParallelBranchStatus">ParallelBranchStatus</a>, 
-<a href="#flows.knative.dev/v1beta1.ParallelStatus">ParallelStatus</a>)
+(<em>Appears on:</em><a href="#flows.knative.dev/v1beta1.ParallelBranchStatus">ParallelBranchStatus</a>, <a href="#flows.knative.dev/v1beta1.ParallelStatus">ParallelStatus</a>)
 </p>
 <p>
 </p>
@@ -4846,8 +4755,7 @@ knative.dev/pkg/apis.Condition
 <h3 id="flows.knative.dev/v1beta1.ParallelSpec">ParallelSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#flows.knative.dev/v1beta1.Parallel">Parallel</a>)
+(<em>Appears on:</em><a href="#flows.knative.dev/v1beta1.Parallel">Parallel</a>)
 </p>
 <p>
 </p>
@@ -4905,8 +4813,7 @@ when the case does not have a Reply</p>
 <h3 id="flows.knative.dev/v1beta1.ParallelStatus">ParallelStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#flows.knative.dev/v1beta1.Parallel">Parallel</a>)
+(<em>Appears on:</em><a href="#flows.knative.dev/v1beta1.Parallel">Parallel</a>)
 </p>
 <p>
 <p>ParallelStatus represents the current state of a Parallel.</p>
@@ -4983,8 +4890,7 @@ It generally has the form {channel}.{namespace}.svc.{cluster domain name}</p>
 <h3 id="flows.knative.dev/v1beta1.ParallelSubscriptionStatus">ParallelSubscriptionStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#flows.knative.dev/v1beta1.ParallelBranchStatus">ParallelBranchStatus</a>)
+(<em>Appears on:</em><a href="#flows.knative.dev/v1beta1.ParallelBranchStatus">ParallelBranchStatus</a>)
 </p>
 <p>
 </p>
@@ -5129,8 +5035,7 @@ date.</p>
 <h3 id="flows.knative.dev/v1beta1.SequenceChannelStatus">SequenceChannelStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#flows.knative.dev/v1beta1.SequenceStatus">SequenceStatus</a>)
+(<em>Appears on:</em><a href="#flows.knative.dev/v1beta1.SequenceStatus">SequenceStatus</a>)
 </p>
 <p>
 </p>
@@ -5171,8 +5076,7 @@ knative.dev/pkg/apis.Condition
 <h3 id="flows.knative.dev/v1beta1.SequenceSpec">SequenceSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#flows.knative.dev/v1beta1.Sequence">Sequence</a>)
+(<em>Appears on:</em><a href="#flows.knative.dev/v1beta1.Sequence">Sequence</a>)
 </p>
 <p>
 </p>
@@ -5230,8 +5134,7 @@ knative.dev/pkg/apis/duck/v1.Destination
 <h3 id="flows.knative.dev/v1beta1.SequenceStatus">SequenceStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#flows.knative.dev/v1beta1.Sequence">Sequence</a>)
+(<em>Appears on:</em><a href="#flows.knative.dev/v1beta1.Sequence">Sequence</a>)
 </p>
 <p>
 <p>SequenceStatus represents the current state of a Sequence.</p>
@@ -5309,8 +5212,7 @@ It generally has the form {channel}.{namespace}.svc.{cluster domain name}</p>
 <h3 id="flows.knative.dev/v1beta1.SequenceStep">SequenceStep
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#flows.knative.dev/v1beta1.SequenceSpec">SequenceSpec</a>)
+(<em>Appears on:</em><a href="#flows.knative.dev/v1beta1.SequenceSpec">SequenceSpec</a>)
 </p>
 <p>
 </p>
@@ -5356,8 +5258,7 @@ This includes things like retries, DLQ, etc.</p>
 <h3 id="flows.knative.dev/v1beta1.SequenceSubscriptionStatus">SequenceSubscriptionStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#flows.knative.dev/v1beta1.SequenceStatus">SequenceStatus</a>)
+(<em>Appears on:</em><a href="#flows.knative.dev/v1beta1.SequenceStatus">SequenceStatus</a>)
 </p>
 <p>
 </p>
@@ -5764,8 +5665,7 @@ specify any implementation.</p>
 <h3 id="messaging.knative.dev/v1.ChannelSpec">ChannelSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#messaging.knative.dev/v1.Channel">Channel</a>)
+(<em>Appears on:</em><a href="#messaging.knative.dev/v1.Channel">Channel</a>)
 </p>
 <p>
 <p>ChannelSpec defines which subscribers have expressed interest in receiving events from this Channel.
@@ -5814,8 +5714,7 @@ ChannelableSpec
 <h3 id="messaging.knative.dev/v1.ChannelStatus">ChannelStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#messaging.knative.dev/v1.Channel">Channel</a>)
+(<em>Appears on:</em><a href="#messaging.knative.dev/v1.Channel">Channel</a>)
 </p>
 <p>
 <p>ChannelStatus represents the current state of a Channel.</p>
@@ -5860,10 +5759,7 @@ knative.dev/pkg/apis/duck/v1.KReference
 <h3 id="messaging.knative.dev/v1.ChannelTemplateSpec">ChannelTemplateSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#flows.knative.dev/v1.ParallelSpec">ParallelSpec</a>, 
-<a href="#flows.knative.dev/v1.SequenceSpec">SequenceSpec</a>, 
-<a href="#messaging.knative.dev/v1.ChannelSpec">ChannelSpec</a>)
+(<em>Appears on:</em><a href="#flows.knative.dev/v1.ParallelSpec">ParallelSpec</a>, <a href="#flows.knative.dev/v1.SequenceSpec">SequenceSpec</a>, <a href="#messaging.knative.dev/v1.ChannelSpec">ChannelSpec</a>)
 </p>
 <p>
 </p>
@@ -5894,106 +5790,10 @@ in verbatim to the Channel CRD as Spec section.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="messaging.knative.dev/v1.ChannelTemplateSpecInternal">ChannelTemplateSpecInternal
-</h3>
-<p>
-<p>ChannelTemplateSpecInternal is an internal only version that includes ObjectMeta so that
-we can easily create new Channels off of it.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>metadata</code><br/>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectmeta-v1-meta">
-Kubernetes meta/v1.ObjectMeta
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-Refer to the Kubernetes API documentation for the fields of the
-<code>metadata</code> field.
-</td>
-</tr>
-<tr>
-<td>
-<code>spec</code><br/>
-<em>
-<a href="#messaging.knative.dev/v1.ChannelTemplateSpecInternalSpec">
-ChannelTemplateSpecInternalSpec
-</a>
-</em>
-</td>
-<td>
-<p>Spec includes the Channel CR ChannelableSpec and the physical channel spec.
-In order to create a new ChannelTemplateSpecInternalSpec, you must use NewChannelTemplateSpecInternalSpec</p>
-<br/>
-<br/>
-<table>
-</table>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="messaging.knative.dev/v1.ChannelTemplateSpecInternalSpec">ChannelTemplateSpecInternalSpec
-</h3>
-<p>
-(<em>Appears on:</em>
-<a href="#messaging.knative.dev/v1.ChannelTemplateSpecInternal">ChannelTemplateSpecInternal</a>)
-</p>
-<p>
-<p>ChannelTemplateSpecInternalSpec merges the &ldquo;general&rdquo; spec from Channel CR and the template of the physical channel spec.
-Note that this struct properly implements only Marshalling, unmarshalling doesn&rsquo;t work!</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>ChannelableSpec</code><br/>
-<em>
-<a href="#duck.knative.dev/v1.ChannelableSpec">
-ChannelableSpec
-</a>
-</em>
-</td>
-<td>
-<p>ChannelableSpec includes the fields from the Channel Spec section</p>
-</td>
-</tr>
-<tr>
-<td>
-<code>PhysicalChannelSpec</code><br/>
-<em>
-k8s.io/apimachinery/pkg/runtime.RawExtension
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>PhysicalChannelSpec includes the fields from the physical channel Spec. Passed
-in verbatim to the Channel CRD as Spec section.</p>
-</td>
-</tr>
-</tbody>
-</table>
 <h3 id="messaging.knative.dev/v1.InMemoryChannelSpec">InMemoryChannelSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#messaging.knative.dev/v1.InMemoryChannel">InMemoryChannel</a>)
+(<em>Appears on:</em><a href="#messaging.knative.dev/v1.InMemoryChannel">InMemoryChannel</a>)
 </p>
 <p>
 <p>InMemoryChannelSpec defines which subscribers have expressed interest in
@@ -6029,8 +5829,7 @@ ChannelableSpec
 <h3 id="messaging.knative.dev/v1.InMemoryChannelStatus">InMemoryChannelStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#messaging.knative.dev/v1.InMemoryChannel">InMemoryChannel</a>)
+(<em>Appears on:</em><a href="#messaging.knative.dev/v1.InMemoryChannel">InMemoryChannel</a>)
 </p>
 <p>
 <p>ChannelStatus represents the current state of a Channel.</p>
@@ -6064,8 +5863,7 @@ ChannelableStatus
 <h3 id="messaging.knative.dev/v1.SubscriptionSpec">SubscriptionSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#messaging.knative.dev/v1.Subscription">Subscription</a>)
+(<em>Appears on:</em><a href="#messaging.knative.dev/v1.Subscription">Subscription</a>)
 </p>
 <p>
 <p>SubscriptionSpec specifies the Channel for incoming events, a Subscriber target
@@ -6162,8 +5960,7 @@ DeliverySpec
 <h3 id="messaging.knative.dev/v1.SubscriptionStatus">SubscriptionStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#messaging.knative.dev/v1.Subscription">Subscription</a>)
+(<em>Appears on:</em><a href="#messaging.knative.dev/v1.Subscription">Subscription</a>)
 </p>
 <p>
 <p>SubscriptionStatus (computed) for a subscription</p>
@@ -6210,8 +6007,7 @@ SubscriptionStatusPhysicalSubscription
 <h3 id="messaging.knative.dev/v1.SubscriptionStatusPhysicalSubscription">SubscriptionStatusPhysicalSubscription
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#messaging.knative.dev/v1.SubscriptionStatus">SubscriptionStatus</a>)
+(<em>Appears on:</em><a href="#messaging.knative.dev/v1.SubscriptionStatus">SubscriptionStatus</a>)
 </p>
 <p>
 <p>SubscriptionStatusPhysicalSubscription represents the fully resolved values for this
@@ -6629,8 +6425,7 @@ specify any implementation.</p>
 <h3 id="messaging.knative.dev/v1beta1.ChannelSpec">ChannelSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#messaging.knative.dev/v1beta1.Channel">Channel</a>)
+(<em>Appears on:</em><a href="#messaging.knative.dev/v1beta1.Channel">Channel</a>)
 </p>
 <p>
 <p>ChannelSpec defines which subscribers have expressed interest in receiving events from this Channel.
@@ -6679,8 +6474,7 @@ ChannelableSpec
 <h3 id="messaging.knative.dev/v1beta1.ChannelStatus">ChannelStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#messaging.knative.dev/v1beta1.Channel">Channel</a>)
+(<em>Appears on:</em><a href="#messaging.knative.dev/v1beta1.Channel">Channel</a>)
 </p>
 <p>
 <p>ChannelStatus represents the current state of a Channel.</p>
@@ -6725,10 +6519,7 @@ knative.dev/pkg/apis/duck/v1.KReference
 <h3 id="messaging.knative.dev/v1beta1.ChannelTemplateSpec">ChannelTemplateSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#flows.knative.dev/v1beta1.ParallelSpec">ParallelSpec</a>, 
-<a href="#flows.knative.dev/v1beta1.SequenceSpec">SequenceSpec</a>, 
-<a href="#messaging.knative.dev/v1beta1.ChannelSpec">ChannelSpec</a>)
+(<em>Appears on:</em><a href="#flows.knative.dev/v1beta1.ParallelSpec">ParallelSpec</a>, <a href="#flows.knative.dev/v1beta1.SequenceSpec">SequenceSpec</a>, <a href="#messaging.knative.dev/v1beta1.ChannelSpec">ChannelSpec</a>)
 </p>
 <p>
 </p>
@@ -6740,54 +6531,6 @@ knative.dev/pkg/apis/duck/v1.KReference
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>
-<code>spec</code><br/>
-<em>
-k8s.io/apimachinery/pkg/runtime.RawExtension
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-<p>Spec defines the Spec to use for each channel created. Passed
-in verbatim to the Channel CRD as Spec section.</p>
-<br/>
-<br/>
-<table>
-</table>
-</td>
-</tr>
-</tbody>
-</table>
-<h3 id="messaging.knative.dev/v1beta1.ChannelTemplateSpecInternal">ChannelTemplateSpecInternal
-</h3>
-<p>
-<p>ChannelTemplateSpecInternal is an internal only version that includes ObjectMeta so that
-we can easily create new Channels off of it.</p>
-</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>metadata</code><br/>
-<em>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectmeta-v1-meta">
-Kubernetes meta/v1.ObjectMeta
-</a>
-</em>
-</td>
-<td>
-<em>(Optional)</em>
-Refer to the Kubernetes API documentation for the fields of the
-<code>metadata</code> field.
-</td>
-</tr>
 <tr>
 <td>
 <code>spec</code><br/>
@@ -6810,8 +6553,7 @@ in verbatim to the Channel CRD as Spec section.</p>
 <h3 id="messaging.knative.dev/v1beta1.InMemoryChannelSpec">InMemoryChannelSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#messaging.knative.dev/v1beta1.InMemoryChannel">InMemoryChannel</a>)
+(<em>Appears on:</em><a href="#messaging.knative.dev/v1beta1.InMemoryChannel">InMemoryChannel</a>)
 </p>
 <p>
 <p>InMemoryChannelSpec defines which subscribers have expressed interest in
@@ -6847,8 +6589,7 @@ ChannelableSpec
 <h3 id="messaging.knative.dev/v1beta1.InMemoryChannelStatus">InMemoryChannelStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#messaging.knative.dev/v1beta1.InMemoryChannel">InMemoryChannel</a>)
+(<em>Appears on:</em><a href="#messaging.knative.dev/v1beta1.InMemoryChannel">InMemoryChannel</a>)
 </p>
 <p>
 <p>ChannelStatus represents the current state of a Channel.</p>
@@ -6882,8 +6623,7 @@ ChannelableStatus
 <h3 id="messaging.knative.dev/v1beta1.SubscriptionSpec">SubscriptionSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#messaging.knative.dev/v1beta1.Subscription">Subscription</a>)
+(<em>Appears on:</em><a href="#messaging.knative.dev/v1beta1.Subscription">Subscription</a>)
 </p>
 <p>
 <p>SubscriptionSpec specifies the Channel for incoming events, a Subscriber target
@@ -6980,8 +6720,7 @@ DeliverySpec
 <h3 id="messaging.knative.dev/v1beta1.SubscriptionStatus">SubscriptionStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#messaging.knative.dev/v1beta1.Subscription">Subscription</a>)
+(<em>Appears on:</em><a href="#messaging.knative.dev/v1beta1.Subscription">Subscription</a>)
 </p>
 <p>
 <p>SubscriptionStatus (computed) for a subscription</p>
@@ -7028,8 +6767,7 @@ SubscriptionStatusPhysicalSubscription
 <h3 id="messaging.knative.dev/v1beta1.SubscriptionStatusPhysicalSubscription">SubscriptionStatusPhysicalSubscription
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#messaging.knative.dev/v1beta1.SubscriptionStatus">SubscriptionStatus</a>)
+(<em>Appears on:</em><a href="#messaging.knative.dev/v1beta1.SubscriptionStatus">SubscriptionStatus</a>)
 </p>
 <p>
 <p>SubscriptionStatusPhysicalSubscription represents the fully resolved values for this
@@ -7463,8 +7201,7 @@ SinkBindingStatus
 <h3 id="sources.knative.dev/v1.APIVersionKind">APIVersionKind
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#sources.knative.dev/v1.ApiServerSourceSpec">ApiServerSourceSpec</a>)
+(<em>Appears on:</em><a href="#sources.knative.dev/v1.ApiServerSourceSpec">ApiServerSourceSpec</a>)
 </p>
 <p>
 <p>APIVersionKind is an APIVersion and Kind tuple.</p>
@@ -7505,8 +7242,7 @@ More info: <a href="https://git.k8s.io/community/contributors/devel/sig-architec
 <h3 id="sources.knative.dev/v1.APIVersionKindSelector">APIVersionKindSelector
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#sources.knative.dev/v1.ApiServerSourceSpec">ApiServerSourceSpec</a>)
+(<em>Appears on:</em><a href="#sources.knative.dev/v1.ApiServerSourceSpec">ApiServerSourceSpec</a>)
 </p>
 <p>
 <p>APIVersionKindSelector is an APIVersion Kind tuple with a LabelSelector.</p>
@@ -7563,8 +7299,7 @@ More info: <a href="http://kubernetes.io/docs/concepts/overview/working-with-obj
 <h3 id="sources.knative.dev/v1.ApiServerSourceSpec">ApiServerSourceSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#sources.knative.dev/v1.ApiServerSource">ApiServerSource</a>)
+(<em>Appears on:</em><a href="#sources.knative.dev/v1.ApiServerSource">ApiServerSource</a>)
 </p>
 <p>
 <p>ApiServerSourceSpec defines the desired state of ApiServerSource</p>
@@ -7659,8 +7394,7 @@ source. Defaults to default if not set.</p>
 <h3 id="sources.knative.dev/v1.ApiServerSourceStatus">ApiServerSourceStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#sources.knative.dev/v1.ApiServerSource">ApiServerSource</a>)
+(<em>Appears on:</em><a href="#sources.knative.dev/v1.ApiServerSource">ApiServerSource</a>)
 </p>
 <p>
 <p>ApiServerSourceStatus defines the observed state of ApiServerSource</p>
@@ -7698,8 +7432,7 @@ Source.</p>
 <h3 id="sources.knative.dev/v1.ContainerSourceSpec">ContainerSourceSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#sources.knative.dev/v1.ContainerSource">ContainerSource</a>)
+(<em>Appears on:</em><a href="#sources.knative.dev/v1.ContainerSource">ContainerSource</a>)
 </p>
 <p>
 <p>ContainerSourceSpec defines the desired state of ContainerSource</p>
@@ -7748,8 +7481,7 @@ Kubernetes core/v1.PodTemplateSpec
 <h3 id="sources.knative.dev/v1.ContainerSourceStatus">ContainerSourceStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#sources.knative.dev/v1.ContainerSource">ContainerSource</a>)
+(<em>Appears on:</em><a href="#sources.knative.dev/v1.ContainerSource">ContainerSource</a>)
 </p>
 <p>
 <p>ContainerSourceStatus defines the observed state of ContainerSource</p>
@@ -7787,8 +7519,7 @@ Source.</p>
 <h3 id="sources.knative.dev/v1.SinkBindingSpec">SinkBindingSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#sources.knative.dev/v1.SinkBinding">SinkBinding</a>)
+(<em>Appears on:</em><a href="#sources.knative.dev/v1.SinkBinding">SinkBinding</a>)
 </p>
 <p>
 <p>SinkBindingSpec holds the desired state of the SinkBinding (from the client).</p>
@@ -7840,8 +7571,7 @@ should be augmented by Binding implementations.</p>
 <h3 id="sources.knative.dev/v1.SinkBindingStatus">SinkBindingStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#sources.knative.dev/v1.SinkBinding">SinkBinding</a>)
+(<em>Appears on:</em><a href="#sources.knative.dev/v1.SinkBinding">SinkBinding</a>)
 </p>
 <p>
 <p>SinkBindingStatus communicates the observed state of the SinkBinding (from the controller).</p>
@@ -8149,8 +7879,7 @@ SinkBindingStatus
 <h3 id="sources.knative.dev/v1alpha1.ApiServerResource">ApiServerResource
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#sources.knative.dev/v1alpha1.ApiServerSourceSpec">ApiServerSourceSpec</a>)
+(<em>Appears on:</em><a href="#sources.knative.dev/v1alpha1.ApiServerSourceSpec">ApiServerSourceSpec</a>)
 </p>
 <p>
 <p>ApiServerResource defines the resource to watch</p>
@@ -8234,8 +7963,7 @@ v1alpha2, please use Spec.Owner as a GKV.</p>
 <h3 id="sources.knative.dev/v1alpha1.ApiServerSourceSpec">ApiServerSourceSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#sources.knative.dev/v1alpha1.ApiServerSource">ApiServerSource</a>)
+(<em>Appears on:</em><a href="#sources.knative.dev/v1alpha1.ApiServerSource">ApiServerSource</a>)
 </p>
 <p>
 <p>ApiServerSourceSpec defines the desired state of ApiServerSource</p>
@@ -8333,8 +8061,7 @@ string
 <h3 id="sources.knative.dev/v1alpha1.ApiServerSourceStatus">ApiServerSourceStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#sources.knative.dev/v1alpha1.ApiServerSource">ApiServerSource</a>)
+(<em>Appears on:</em><a href="#sources.knative.dev/v1alpha1.ApiServerSource">ApiServerSource</a>)
 </p>
 <p>
 <p>ApiServerSourceStatus defines the observed state of ApiServerSource</p>
@@ -8372,8 +8099,7 @@ Source.</p>
 <h3 id="sources.knative.dev/v1alpha1.SinkBindingSpec">SinkBindingSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#sources.knative.dev/v1alpha1.SinkBinding">SinkBinding</a>)
+(<em>Appears on:</em><a href="#sources.knative.dev/v1alpha1.SinkBinding">SinkBinding</a>)
 </p>
 <p>
 <p>SinkBindingSpec holds the desired state of the SinkBinding (from the client).</p>
@@ -8417,8 +8143,7 @@ knative.dev/pkg/apis/duck/v1alpha1.BindingSpec
 <h3 id="sources.knative.dev/v1alpha1.SinkBindingStatus">SinkBindingStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#sources.knative.dev/v1alpha1.SinkBinding">SinkBinding</a>)
+(<em>Appears on:</em><a href="#sources.knative.dev/v1alpha1.SinkBinding">SinkBinding</a>)
 </p>
 <p>
 <p>SinkBindingStatus communicates the observed state of the SinkBinding (from the controller).</p>
@@ -8951,9 +8676,7 @@ SinkBindingStatus
 <h3 id="sources.knative.dev/v1alpha2.APIVersionKind">APIVersionKind
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#sources.knative.dev/v1alpha1.ApiServerSourceSpec">ApiServerSourceSpec</a>, 
-<a href="#sources.knative.dev/v1alpha2.ApiServerSourceSpec">ApiServerSourceSpec</a>)
+(<em>Appears on:</em><a href="#sources.knative.dev/v1alpha1.ApiServerSourceSpec">ApiServerSourceSpec</a>, <a href="#sources.knative.dev/v1alpha2.ApiServerSourceSpec">ApiServerSourceSpec</a>)
 </p>
 <p>
 <p>APIVersionKind is an APIVersion and Kind tuple.</p>
@@ -8994,8 +8717,7 @@ More info: <a href="https://git.k8s.io/community/contributors/devel/sig-architec
 <h3 id="sources.knative.dev/v1alpha2.APIVersionKindSelector">APIVersionKindSelector
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#sources.knative.dev/v1alpha2.ApiServerSourceSpec">ApiServerSourceSpec</a>)
+(<em>Appears on:</em><a href="#sources.knative.dev/v1alpha2.ApiServerSourceSpec">ApiServerSourceSpec</a>)
 </p>
 <p>
 <p>APIVersionKindSelector is an APIVersion Kind tuple with a LabelSelector.</p>
@@ -9052,8 +8774,7 @@ More info: <a href="http://kubernetes.io/docs/concepts/overview/working-with-obj
 <h3 id="sources.knative.dev/v1alpha2.ApiServerSourceSpec">ApiServerSourceSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#sources.knative.dev/v1alpha2.ApiServerSource">ApiServerSource</a>)
+(<em>Appears on:</em><a href="#sources.knative.dev/v1alpha2.ApiServerSource">ApiServerSource</a>)
 </p>
 <p>
 <p>ApiServerSourceSpec defines the desired state of ApiServerSource</p>
@@ -9148,8 +8869,7 @@ source. Defaults to default if not set.</p>
 <h3 id="sources.knative.dev/v1alpha2.ApiServerSourceStatus">ApiServerSourceStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#sources.knative.dev/v1alpha2.ApiServerSource">ApiServerSource</a>)
+(<em>Appears on:</em><a href="#sources.knative.dev/v1alpha2.ApiServerSource">ApiServerSource</a>)
 </p>
 <p>
 <p>ApiServerSourceStatus defines the observed state of ApiServerSource</p>
@@ -9187,8 +8907,7 @@ Source.</p>
 <h3 id="sources.knative.dev/v1alpha2.ContainerSourceSpec">ContainerSourceSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#sources.knative.dev/v1alpha2.ContainerSource">ContainerSource</a>)
+(<em>Appears on:</em><a href="#sources.knative.dev/v1alpha2.ContainerSource">ContainerSource</a>)
 </p>
 <p>
 <p>ContainerSourceSpec defines the desired state of ContainerSource</p>
@@ -9237,8 +8956,7 @@ Kubernetes core/v1.PodTemplateSpec
 <h3 id="sources.knative.dev/v1alpha2.ContainerSourceStatus">ContainerSourceStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#sources.knative.dev/v1alpha2.ContainerSource">ContainerSource</a>)
+(<em>Appears on:</em><a href="#sources.knative.dev/v1alpha2.ContainerSource">ContainerSource</a>)
 </p>
 <p>
 <p>ContainerSourceStatus defines the observed state of ContainerSource</p>
@@ -9276,8 +8994,7 @@ Source.</p>
 <h3 id="sources.knative.dev/v1alpha2.PingSourceSpec">PingSourceSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#sources.knative.dev/v1alpha2.PingSource">PingSource</a>)
+(<em>Appears on:</em><a href="#sources.knative.dev/v1alpha2.PingSource">PingSource</a>)
 </p>
 <p>
 <p>PingSourceSpec defines the desired state of the PingSource.</p>
@@ -9339,8 +9056,7 @@ to &ldquo;application/json&rdquo;.</p>
 <h3 id="sources.knative.dev/v1alpha2.PingSourceStatus">PingSourceStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#sources.knative.dev/v1alpha2.PingSource">PingSource</a>)
+(<em>Appears on:</em><a href="#sources.knative.dev/v1alpha2.PingSource">PingSource</a>)
 </p>
 <p>
 <p>PingSourceStatus defines the observed state of PingSource.</p>
@@ -9378,8 +9094,7 @@ Source.</p>
 <h3 id="sources.knative.dev/v1alpha2.SinkBindingSpec">SinkBindingSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#sources.knative.dev/v1alpha2.SinkBinding">SinkBinding</a>)
+(<em>Appears on:</em><a href="#sources.knative.dev/v1alpha2.SinkBinding">SinkBinding</a>)
 </p>
 <p>
 <p>SinkBindingSpec holds the desired state of the SinkBinding (from the client).</p>
@@ -9431,8 +9146,7 @@ should be augmented by Binding implementations.</p>
 <h3 id="sources.knative.dev/v1alpha2.SinkBindingStatus">SinkBindingStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#sources.knative.dev/v1alpha2.SinkBinding">SinkBinding</a>)
+(<em>Appears on:</em><a href="#sources.knative.dev/v1alpha2.SinkBinding">SinkBinding</a>)
 </p>
 <p>
 <p>SinkBindingStatus communicates the observed state of the SinkBinding (from the controller).</p>
@@ -9986,8 +9700,7 @@ SinkBindingStatus
 <h3 id="sources.knative.dev/v1beta1.APIVersionKind">APIVersionKind
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#sources.knative.dev/v1beta1.ApiServerSourceSpec">ApiServerSourceSpec</a>)
+(<em>Appears on:</em><a href="#sources.knative.dev/v1beta1.ApiServerSourceSpec">ApiServerSourceSpec</a>)
 </p>
 <p>
 <p>APIVersionKind is an APIVersion and Kind tuple.</p>
@@ -10028,8 +9741,7 @@ More info: <a href="https://git.k8s.io/community/contributors/devel/sig-architec
 <h3 id="sources.knative.dev/v1beta1.APIVersionKindSelector">APIVersionKindSelector
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#sources.knative.dev/v1beta1.ApiServerSourceSpec">ApiServerSourceSpec</a>)
+(<em>Appears on:</em><a href="#sources.knative.dev/v1beta1.ApiServerSourceSpec">ApiServerSourceSpec</a>)
 </p>
 <p>
 <p>APIVersionKindSelector is an APIVersion Kind tuple with a LabelSelector.</p>
@@ -10086,8 +9798,7 @@ More info: <a href="http://kubernetes.io/docs/concepts/overview/working-with-obj
 <h3 id="sources.knative.dev/v1beta1.ApiServerSourceSpec">ApiServerSourceSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#sources.knative.dev/v1beta1.ApiServerSource">ApiServerSource</a>)
+(<em>Appears on:</em><a href="#sources.knative.dev/v1beta1.ApiServerSource">ApiServerSource</a>)
 </p>
 <p>
 <p>ApiServerSourceSpec defines the desired state of ApiServerSource</p>
@@ -10182,8 +9893,7 @@ source. Defaults to default if not set.</p>
 <h3 id="sources.knative.dev/v1beta1.ApiServerSourceStatus">ApiServerSourceStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#sources.knative.dev/v1beta1.ApiServerSource">ApiServerSource</a>)
+(<em>Appears on:</em><a href="#sources.knative.dev/v1beta1.ApiServerSource">ApiServerSource</a>)
 </p>
 <p>
 <p>ApiServerSourceStatus defines the observed state of ApiServerSource</p>
@@ -10221,8 +9931,7 @@ Source.</p>
 <h3 id="sources.knative.dev/v1beta1.ContainerSourceSpec">ContainerSourceSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#sources.knative.dev/v1beta1.ContainerSource">ContainerSource</a>)
+(<em>Appears on:</em><a href="#sources.knative.dev/v1beta1.ContainerSource">ContainerSource</a>)
 </p>
 <p>
 <p>ContainerSourceSpec defines the desired state of ContainerSource</p>
@@ -10271,8 +9980,7 @@ Kubernetes core/v1.PodTemplateSpec
 <h3 id="sources.knative.dev/v1beta1.ContainerSourceStatus">ContainerSourceStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#sources.knative.dev/v1beta1.ContainerSource">ContainerSource</a>)
+(<em>Appears on:</em><a href="#sources.knative.dev/v1beta1.ContainerSource">ContainerSource</a>)
 </p>
 <p>
 <p>ContainerSourceStatus defines the observed state of ContainerSource</p>
@@ -10310,8 +10018,7 @@ Source.</p>
 <h3 id="sources.knative.dev/v1beta1.PingSourceSpec">PingSourceSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#sources.knative.dev/v1beta1.PingSource">PingSource</a>)
+(<em>Appears on:</em><a href="#sources.knative.dev/v1beta1.PingSource">PingSource</a>)
 </p>
 <p>
 <p>PingSourceSpec defines the desired state of the PingSource.</p>
@@ -10387,8 +10094,7 @@ to &ldquo;application/json&rdquo;.</p>
 <h3 id="sources.knative.dev/v1beta1.PingSourceStatus">PingSourceStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#sources.knative.dev/v1beta1.PingSource">PingSource</a>)
+(<em>Appears on:</em><a href="#sources.knative.dev/v1beta1.PingSource">PingSource</a>)
 </p>
 <p>
 <p>PingSourceStatus defines the observed state of PingSource.</p>
@@ -10426,8 +10132,7 @@ Source.</p>
 <h3 id="sources.knative.dev/v1beta1.SinkBindingSpec">SinkBindingSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#sources.knative.dev/v1beta1.SinkBinding">SinkBinding</a>)
+(<em>Appears on:</em><a href="#sources.knative.dev/v1beta1.SinkBinding">SinkBinding</a>)
 </p>
 <p>
 <p>SinkBindingSpec holds the desired state of the SinkBinding (from the client).</p>
@@ -10479,8 +10184,7 @@ should be augmented by Binding implementations.</p>
 <h3 id="sources.knative.dev/v1beta1.SinkBindingStatus">SinkBindingStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#sources.knative.dev/v1beta1.SinkBinding">SinkBinding</a>)
+(<em>Appears on:</em><a href="#sources.knative.dev/v1beta1.SinkBinding">SinkBinding</a>)
 </p>
 <p>
 <p>SinkBindingStatus communicates the observed state of the SinkBinding (from the controller).</p>
@@ -10683,8 +10387,7 @@ PingSourceStatus
 <h3 id="sources.knative.dev/v1beta2.PingSourceSpec">PingSourceSpec
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#sources.knative.dev/v1beta2.PingSource">PingSource</a>)
+(<em>Appears on:</em><a href="#sources.knative.dev/v1beta2.PingSource">PingSource</a>)
 </p>
 <p>
 <p>PingSourceSpec defines the desired state of the PingSource.</p>
@@ -10784,8 +10487,7 @@ Mutually exclusive with Data.</p>
 <h3 id="sources.knative.dev/v1beta2.PingSourceStatus">PingSourceStatus
 </h3>
 <p>
-(<em>Appears on:</em>
-<a href="#sources.knative.dev/v1beta2.PingSource">PingSource</a>)
+(<em>Appears on:</em><a href="#sources.knative.dev/v1beta2.PingSource">PingSource</a>)
 </p>
 <p>
 <p>PingSourceStatus defines the observed state of PingSource.</p>
@@ -10823,5 +10525,5 @@ Source.</p>
 <hr/>
 <p><em>
 Generated with <code>gen-crd-api-reference-docs</code>
-on git commit <code>a414aee50</code>.
+on git commit <code>86bc23919</code>.
 </em></p>
