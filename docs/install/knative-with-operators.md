@@ -126,7 +126,7 @@ spec:
     - URL: https://github.com/knative/serving/releases/download/v${VERSION}/serving-core.yaml
     - URL: https://github.com/knative/serving/releases/download/v${VERSION}/serving-hpa.yaml
     - URL: https://github.com/knative/serving/releases/download/v${VERSION}/serving-post-install-jobs.yaml
-    - URL: https://github.com/knative/net-istio/releases/download/v0.17.0/net-istio.yaml
+    - URL: https://github.com/knative/net-istio/releases/download/v${VERSION}/net-istio.yaml
 ```
 
 The field `spec.version` is used to set the version of Knative Serving. Replace `{{spec.version}}` with the correct version number.
