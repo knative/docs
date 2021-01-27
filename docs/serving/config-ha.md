@@ -10,7 +10,7 @@ Active/passive HA in Knative is available through leader election, which can be 
 
 When using a leader election HA pattern, instances of controllers are already scheduled and running inside the cluster before they are required. These controller instances compete to use a shared resource, known as the leader election lock. The instance of the controller that has access to the leader election lock resource at any given time is referred to as the leader.
 
-HA functionality is enabled by default for all Knative Serving components.
+HA functionality is allowed but not enabled by default for all Knative Serving components.
 
 ## Disabling leader election
 
@@ -30,9 +30,8 @@ $ kubectl -n knative-serving scale deployment <deployment-name> --replicas=2
 - Passing `--disable-ha` to the controller process disables leader election.
 
 NOTE: if you scale down the `autoscaler` component, you may get inaccurate autoscaling results for a subset of your Revisions for a period, which can
-be up to `stable-window` time. This is because when an `autoscaler` pod is terminating, the ownership of the currently owned Revisions will be acquired by
-other standby `autoscaler` pods. The new leader `autoscaler` pods will need then `stable-window` time to build the scaling metrics state for those revisions.
-owned Revisions.  
+be up to the `stable-window` time. This is because when an `autoscaler` pod is terminating, the ownership of the currently owned Revisions will be acquired by
+other standby `autoscaler` pods. The new leader `autoscaler` pods will need the `stable-window` time to build the scaling metrics state for those Revisions.
 
 ## Scaling the data plane
 
