@@ -28,9 +28,7 @@ $ kubectl -n knative-serving scale deployment <deployment-name> --replicas=2
 - You can use a higher value if you have a use case that requires more replicas of a deployment. For example, if you require a minimum of 3 `controller` deployments, set `--replicas=3`.
 - Setting `--replicas=1` disables HA.
 
-NOTE: if you scale down the `autoscaler` component, you may get inaccurate autoscaling results for a subset of your Revisions for a period, which can
-be up to the `stable-window` time. This is because when an `autoscaler` pod is terminating, the ownership of the currently owned Revisions will be acquired by
-other standby `autoscaler` pods. The new leader `autoscaler` pods will need the `stable-window` time to build the scaling metrics state for those Revisions.
+**NOTE:** If you scale down the `autoscaler` component, you may observe inaccurate autoscaling results for some revisions for a period of time up to the `stable-window` value. This is because when an `autoscaler` pod is terminating, ownership of the revisions belonging to that pod is passed to other `autoscaler` pods that are on stand by. The `autoscaler` pods that take over ownership of those revisions use the `stable-window` time to build the scaling metrics state for those revisions.
 
 ## Scaling the data plane
 
