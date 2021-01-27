@@ -6,8 +6,6 @@ type: "docs"
 
 Active/passive high availability (HA) is a standard feature of Kubernetes APIs that helps to ensure that APIs stay operational if a disruption occurs. In an HA deployment, if an active controller crashes or is deleted, another controller is available to take over processing of the APIs that were being serviced by the controller that is now unavailable.
 
-Active/passive HA in Knative is available through leader election, which can be enabled after Knative Serving control plane is installed.
-
 When using a leader election HA pattern, instances of controllers are already scheduled and running inside the cluster before they are required. These controller instances compete to use a shared resource, known as the leader election lock. The instance of the controller that has access to the leader election lock resource at any given time is referred to as the leader.
 
 Leader election is enabled but HA functionanlity is disabled with 1 replica by default for all Knative Serving components.
