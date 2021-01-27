@@ -29,7 +29,7 @@ $ kubectl -n knative-serving scale deployment <deployment-name> --replicas=2
 - Setting `--replicas=1` disables HA.
 - Passing `--disable-ha` to the controller process disables leader election.
 
-If you scale down the `autoscaler` component, you may get inaccurate autoscaling results for a subset of your Revisions for a peroid, which can
+NOTE: if you scale down the `autoscaler` component, you may get inaccurate autoscaling results for a subset of your Revisions for a period, which can
 be up to `stable-window` time. This is because when an `autoscaler` pods is terminating, the leadership of its owned Revisions will be gained by
 other standby `autoscaler` pods. The new leader `autoscaler` pods need `stable-window` time to build the scaling metrics state for its newly
 owned Revisions.  
@@ -58,4 +58,3 @@ $ kubectl patch hpa activator -n knative-serving -p '{"spec":{"minReplicas":9,"m
 To set the activator scale to a particular value, just set `minScale` and `maxScale` to the same desired value.
 
 It is recommended for production deployments to run at least 3 `activator` instances for redundancy and avoiding single point of failure if a Knative service needs to be scaled from 0.
-
