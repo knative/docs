@@ -31,7 +31,7 @@ $ kubectl -n knative-serving scale deployment <deployment-name> --replicas=2
 
 NOTE: if you scale down the `autoscaler` component, you may get inaccurate autoscaling results for a subset of your Revisions for a period, which can
 be up to `stable-window` time. This is because when an `autoscaler` pod is terminating, the ownership of the currently owned Revisions will be acquired by
-other standby `autoscaler` pods. The new leader `autoscaler` pods need `stable-window` time to build the scaling metrics state for its newly
+other standby `autoscaler` pods. The new leader `autoscaler` pods will need then `stable-window` time to build the scaling metrics state for those revisions.
 owned Revisions.  
 
 ## Scaling the data plane
