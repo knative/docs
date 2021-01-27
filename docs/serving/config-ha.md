@@ -8,7 +8,8 @@ Active/passive high availability (HA) is a standard feature of Kubernetes APIs t
 
 When using a leader election HA pattern, instances of controllers are already scheduled and running inside the cluster before they are required. These controller instances compete to use a shared resource, known as the leader election lock. The instance of the controller that has access to the leader election lock resource at any given time is referred to as the leader.
 
-Leader election is enabled but HA functionanlity is disabled with 1 replica by default for all Knative Serving components.
+Leader election is enabled by default for all Knative Serving components.
+HA functionality is disabled by default for all Knative Serving components, which are configured with only one replica.
 
 ## Disabling leader election
 
