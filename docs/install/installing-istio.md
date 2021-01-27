@@ -71,30 +71,11 @@ spec:
   addonComponents:
     pilot:
       enabled: true
-    prometheus:
-      enabled: false
 
   components:
     ingressGateways:
       - name: istio-ingressgateway
         enabled: true
-      - name: cluster-local-gateway
-        enabled: true
-        label:
-          istio: cluster-local-gateway
-          app: cluster-local-gateway
-        k8s:
-          service:
-            type: ClusterIP
-            ports:
-            - port: 15020
-              name: status-port
-            - port: 80
-              targetPort: 8080
-              name: http2
-            - port: 443
-              targetPort: 8443
-              name: https
 EOF
 
 istioctl install -f istio-minimal-operator.yaml
