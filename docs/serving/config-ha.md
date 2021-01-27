@@ -10,7 +10,7 @@ Active/passive HA in Knative is available through leader election, which can be 
 
 When using a leader election HA pattern, instances of controllers are already scheduled and running inside the cluster before they are required. These controller instances compete to use a shared resource, known as the leader election lock. The instance of the controller that has access to the leader election lock resource at any given time is referred to as the leader.
 
-HA functionality is allowed but not enabled by default for all Knative Serving components.
+Leader election is enabled but HA functionanlity is disabled with 1 replica by default for all Knative Serving components.
 
 ## Disabling leader election
 
@@ -27,7 +27,6 @@ $ kubectl -n knative-serving scale deployment <deployment-name> --replicas=2
 - Setting `--replicas` to a value of `2` enables HA.
 - You can use a higher value if you have a use case that requires more replicas of a deployment. For example, if you require a minimum of 3 `controller` deployments, set `--replicas=3`.
 - Setting `--replicas=1` disables HA.
-- Passing `--disable-ha` to the controller process disables leader election.
 
 NOTE: if you scale down the `autoscaler` component, you may get inaccurate autoscaling results for a subset of your Revisions for a period, which can
 be up to the `stable-window` time. This is because when an `autoscaler` pod is terminating, the ownership of the currently owned Revisions will be acquired by
