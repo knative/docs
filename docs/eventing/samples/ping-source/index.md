@@ -20,8 +20,8 @@ a Knative Service.
 To verify that `PingSource` is working, create a simple Knative
 Service that dumps incoming messages to its log.
 
-{{< tabs name="create-service" default="By YAML" >}}
-{{% tab name="By YAML" %}}
+{{< tabs name="create-service" default="YAML" >}}
+{{% tab name="YAML" %}}
 Use following command to create the service from STDIN:
 
 ```shell
@@ -39,11 +39,11 @@ EOF
 ```
 {{< /tab >}}
 
-{{% tab name="By filename" %}}
-Use following command to create the service from the `service.yaml` file:
+{{% tab name="kn" %}}
+Use following command to create the service using the kn cli:
 
 ```shell
-kubectl apply --filename service.yaml
+kn service create event-display --image gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
 ```
 {{< /tab >}}
 {{< /tabs >}}
@@ -53,8 +53,8 @@ kubectl apply --filename service.yaml
 For each set of ping events that you want to request, create an Event
 Source in the same namespace as the destination.
 
-{{< tabs name="create-source" default="By YAML" >}}
-{{% tab name="By YAML" %}}
+{{< tabs name="create-source" default="YAML" >}}
+{{% tab name="YAML" %}}
 Use following command to create the event source from STDIN:
 
 ```shell
@@ -76,11 +76,14 @@ EOF
 ```
 {{< /tab >}}
 
-{{% tab name="By filename" %}}
+{{% tab name="kn" %}}
 Use following command to create the event source from the `ping-source.yaml` file:
 
 ```shell
-kubectl apply --filename ping-source.yaml
+kn source ping create test-ping-source \
+  --schedule "*/2 * * * *" --data \
+  '{ "message": "Hello world!" }' \
+  --sink ksvc:event-display
 ```
 {{< /tab >}}
 {{< /tabs >}}
@@ -91,8 +94,6 @@ Sometimes you may want to send binary data, which cannot be directly serialized 
 
 Please note that `data` and `dataBase64` cannot co-exist.
 
-{{< tabs name="create-source" default="By YAML" >}}
-{{% tab name="By YAML" %}}
 Use the following command to create the event source with binary data from STDIN:
 
 ```shell
@@ -112,17 +113,6 @@ spec:
       name: event-display
 EOF
 ```
-{{< /tab >}}
-
-{{% tab name="By filename" %}}
-Use the following command to create the event source from the `ping-source-binary.yaml` file:
-
-```shell
-kubectl apply --filename ping-source-binary.yaml
-```
-{{< /tab >}}
-{{< /tabs >}}
-
 
 ## Verify
 
@@ -189,18 +179,18 @@ Data,
 
 You can delete the PingSource instance by entering the following command:
 
-{{< tabs name="delete-source" default="By name" >}}
-{{% tab name="By name" %}}
+{{< tabs name="delete-source" default="kubectl" >}}
+{{% tab name="kubectl" %}}
 ```shell
 kubectl delete pingsources.sources.knative.dev test-ping-source
 kubectl delete pingsources.sources.knative.dev test-ping-source-binary
 ```
 {{< /tab >}}
 
-{{% tab name="By filename" %}}
+{{% tab name="kn" %}}
 ```shell
-kubectl delete --filename ping-source.yaml
-kubectl delete --filename ping-source-binary.yaml
+kn source ping delete test-ping-source
+kn source ping delete test-ping-source-binary
 ```
 {{< /tab >}}
 {{< /tabs >}}
@@ -208,15 +198,15 @@ kubectl delete --filename ping-source-binary.yaml
 
 Similarly, you can delete the Service instance via:
 
-{{< tabs name="delete-service" default="By name" >}}
-{{% tab name="By name" %}}
+{{< tabs name="delete-service" default="kubectl" >}}
+{{% tab name="kubectl" %}}
 ```shell
 kubectl delete service.serving.knative.dev event-display
 ```
 {{< /tab >}}
-{{% tab name="By filename" %}}
+{{% tab name="kn" %}}
 ```shell
-kubectl delete --filename service.yaml
+kn service delete event-display
 ```
 {{< /tab >}}
 
