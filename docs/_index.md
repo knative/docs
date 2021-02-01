@@ -3,31 +3,31 @@ title: "Welcome to Knative"
 linkTitle: "Documentation"
 weight: 10
 type: "docs"
+showlandingtoc: "false"
 aliases:
    - /docs/concepts/overview.md
 ---
 
-The Knative project provides a set of [Kubernetes controllers](https://kubernetes.io/docs/concepts/architecture/controller/) that help to simplify developer and administrator experiences on [Kubernetes](https://kubernetes.io) clusters, by introducing an event-driven, serverless architecture.
+The Knative project provides a set of [Kubernetes](https://kubernetes.io) components that introduce event-driven, serverless capabilities for Kubernetes clusters.
 
-There are two core Knative components, that can be installed and used together or independently to provide different functions:
+Knative APIs build on existing Kubernetes APIs, so that Knative resources are compatible with other Kubernetes-native resources, and can be managed by cluster administrators using existing Kubernetes tools.
 
-* [Knative Serving](https://knative.dev/docs/serving/): Run stateless services more easily on Kubernetes,
-   by making autoscaling, networking and rollouts easier.
-
-* [Knative Eventing](https://knative.dev/docs/eventing/): Create subscriptions to event sources declaratively,
-   and route events to Kubernetes endpoints.
-
-These components are delivered as Kubernetes custom resource definitions (CRDs), which can be configured by a cluster administrator to provide default settings for developer-created applications and event workflow components.
-
-**Note**: Earlier versions of Knative included a Build component.  That component has been broken out into its own
-project, [Tekton Pipelines](https://tekton.dev/).
-
-Knative registers its own API types to the Kubernetes API, enabling developers and cluster administrators to use familiar languages and frameworks to solve common use cases, such as:
+Common languages and frameworks, which include Kubernetes-friendly tooling, work smoothly with Knative to reduce the time spent solving common deployment issues, such as:
 
 - [Deploying a container](./serving/getting-started-knative-app.md)
 - [Routing and managing traffic with blue/green deployment](./serving/samples/blue-green-deployment.md)
 - [Scaling automatically and sizing workloads based on demand](./serving/autoscaling)
 - [Binding running services to eventing ecosystems](./eventing/getting-started.md)
+
+There are two core Knative components that can be installed and used together or independently to provide different functions:
+
+* [Knative Serving](https://knative.dev/docs/serving/): Easily manage stateless services on Kubernetes by reducing the developer effort required for autoscaling, networking, and rollouts.
+
+* [Knative Eventing](https://knative.dev/docs/eventing/): Easily route events between on-cluster and off-cluster components by exposing event routing as configuration rather than embedded in code.
+
+These components are delivered as Kubernetes custom resource definitions (CRDs), which can be configured by a cluster administrator to provide default settings for developer-created applications and event workflow components.
+
+**Note**: Earlier versions of Knative included a build component.  That component has since evolved into the separate [Tekton Pipelines](https://tekton.dev/) project.
 
 ### Getting started
 
