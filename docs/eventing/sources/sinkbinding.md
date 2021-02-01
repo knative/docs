@@ -87,7 +87,7 @@ Create a `CronJob` object:
 
 1. Copy the sample YAML into a `cronjob.yaml` file:
     ```yaml
-     apiVersion: batch/v1beta1
+    apiVersion: batch/v1beta1
     kind: CronJob
     metadata:
       name: heartbeat-cron
