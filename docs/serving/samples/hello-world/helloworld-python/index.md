@@ -99,9 +99,8 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-python
    __pycache__
    ```
 
-**NOTE:** Use Docker to build the sample code into a container. To build and
-push with Docker Hub, run these commands replacing `{username}` with your Docker
-Hub username.
+  **NOTE:** Use Docker to build the sample code into a container. To build and
+  push with Docker Hub or container registry of your choice, run these commands replacing `{username}` with your Docker Hub username or the url of the container registry.
 
 1. Use Docker to build the sample code into a container, then push the container
    to the Docker registry:
@@ -123,7 +122,7 @@ Hub username.
 
    1. Create a new file, `service.yaml` and copy the following service
       definition into the file. Make sure to replace `{username}` with your
-      Docker Hub username.
+      Docker Hub username or with the URL provided by your container registry
 
       ```yaml
       apiVersion: serving.knative.dev/v1
@@ -172,6 +171,8 @@ Hub username.
 ## Verification
 
 1. Run one of the followings commands to find the domain URL for your service.
+   > Note: If your URL includes `example.com` then consult the setup instructions for
+   > configuring DNS (e.g. with `xip.io`), or [using a Custom Domain](../serving/using-a-custom-domain.md).
 
    {{< tabs name="service_url" default="kn" >}} {{% tab name="kubectl" %}}
 
@@ -219,7 +220,7 @@ Hub username.
 
 To remove the sample app from your cluster, delete the service record.
 
-{{< tabs name="service_url" default="kn" >}} {{% tab name="kubectl" %}}
+{{< tabs name="delete" default="kn" >}} {{% tab name="kubectl" %}}
 
 ```shell
 kubectl delete --filename service.yaml
