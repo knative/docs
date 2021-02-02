@@ -104,11 +104,9 @@ Create a `CronJob` object:
               restartPolicy: Never
               containers:
                 - name: single-heartbeat
-                  image: busybox # Or your preferred image
+                  image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/heartbeats
                   args:
-                  - /bin/sh
-                  - -c
-                  - date; echo "Heartbeat from $POD_NAME"
+                  - --period=1
                   env:
                     - name: ONE_SHOT
                       value: "true"
