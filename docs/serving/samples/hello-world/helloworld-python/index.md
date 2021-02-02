@@ -100,7 +100,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-python
    ```
 
   **NOTE:** Use Docker to build the sample code into a container. To build and
-  push with Docker Hub or container registry of your choice, run these commands replacing `{username}` with your Docker Hub username or the url of the container registry.
+  push to Docker Hub or container registry of your choice, run these commands replacing `{username}` with your Docker Hub username or the URL of the container registry.
 
 1. Use Docker to build the sample code into a container, then push the container
    to the Docker registry:
