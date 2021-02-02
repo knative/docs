@@ -11,14 +11,14 @@ require (
 	github.com/google/go-github v17.0.0+incompatible
 	github.com/google/uuid v1.1.2
 	github.com/kelseyhightower/envconfig v1.4.0
-	golang.org/x/net v0.0.0-20200904194848-62affa334b73
-	golang.org/x/oauth2 v0.0.0-20200902213428-5d25da1a8d43
-	google.golang.org/grpc v1.33.1
+	golang.org/x/net v0.0.0-20201209123823-ac852fbbde11
+	golang.org/x/oauth2 v0.0.0-20201208152858-08078c50e5b5
+	google.golang.org/grpc v1.34.0
 	gopkg.in/go-playground/assert.v1 v1.2.1 // indirect
 	gopkg.in/go-playground/webhooks.v3 v3.13.0
 	gopkg.in/yaml.v2 v2.3.0
-	knative.dev/hack v0.0.0-20201120192952-353db687ec5b
-	knative.dev/net-istio v0.19.1-0.20201121020252-76ca6614fd8c
+	knative.dev/hack v0.0.0-20210120165453-8d623a0af457
+	knative.dev/net-istio v0.20.1-0.20210121182253-79a9f7f6a067
 )
 
 replace go.opencensus.io => go.opencensus.io v0.20.2

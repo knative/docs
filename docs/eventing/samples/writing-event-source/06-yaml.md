@@ -62,7 +62,7 @@ ko apply -f example.yaml
 Once reconciled, you can confirm the `ksvc` is outputting valid cloudevents every `10s` to align with our specified interval.
 
 ```sh
-% k logs -n knative-samples event-display-zrjgm-deployment-84f6bfdfc6-2jc67 user-container -f
+% kubectl -n knative-samples logs -l serving.knative.dev/service=event-display -c user-container -f
 ```
 ```
 ☁️  cloudevents.Event

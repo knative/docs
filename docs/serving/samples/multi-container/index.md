@@ -1,6 +1,8 @@
 ---
 title: "Knative multi-container samples"
-linkTitle: "A simple golang web app"
+linkTitle: "multi-container samples"
 weight: 1
 type: "docs"
 ---
+
+{{% readfile file="README.md" %}}

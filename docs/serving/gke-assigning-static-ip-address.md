@@ -94,4 +94,4 @@ xxxxxxx-ingressgateway   LoadBalancer   12.34.567.890   98.765.43.210   80:32380
 
 The [external IP address](https://console.cloud.google.com/networking/addresses/list) should have a value now in the `In use by` column and should not be `None` anymore:
 
-![External IP address assigned](gke-assigning-static-ip-address.png)
+![External IP address assigned](./images/gke-assigning-static-ip-address.png)

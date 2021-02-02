@@ -126,7 +126,7 @@ spec:
     - URL: https://github.com/knative/serving/releases/download/v${VERSION}/serving-core.yaml
     - URL: https://github.com/knative/serving/releases/download/v${VERSION}/serving-hpa.yaml
     - URL: https://github.com/knative/serving/releases/download/v${VERSION}/serving-post-install-jobs.yaml
-    - URL: https://github.com/knative/net-istio/releases/download/v0.17.0/net-istio.yaml
+    - URL: https://github.com/knative/net-istio/releases/download/v${VERSION}/net-istio.yaml
 ```
 
 The field `spec.version` is used to set the version of Knative Serving. Replace `{{spec.version}}` with the correct version number.
@@ -143,9 +143,15 @@ Put the manifest you want to apply first on the top.
 Knative Serving based your own requirements. As long as the manifests of customized Knative Serving are accessible to
 the operator, they can be installed.
 
-For example, the version of the customized Knative Serving is `{{spec.version}}`, and it is available at `https://my-serving/serving.yaml`.
-You choose `net-istio` as the ingress plugin, which is available at `https://my-net-istio/net-istio.yaml`.
-You can create the content of Serving CR as below:
+There are two modes available for you to install the customized manifests: overwrite mode and append mode. With the
+overwrite mode, you need to define all the manifests for Knative Serving to install, because the operator will no long
+install any available default manifests. With the append mode, you only need to define your customized manifests, and
+the customized manifests are installed, after default manifests are applied.
+
+1. You can use the overwrite mode to customize all the Knative Serving manifests. For example, the version of the customized
+Knative Serving is `{{spec.version}}`, and it is available at `https://my-serving/serving.yaml`. You choose `net-istio`
+as the ingress plugin, which is available at `https://my-net-istio/net-istio.yaml`. You can create the content of Serving
+CR as below to install your Knative Serving and the istio ingress:
 
 ```
 apiVersion: v1
@@ -169,6 +175,30 @@ You can make the customized Knative Serving available in one or multiple links, 
 of links. The ordering of the URLs is critical. Put the manifest you want to apply first on the top. We strongly recommend
 you to specify the version and the valid links to the customized Knative Serving, by leveraging both `spec.version`
 and `spec.manifests`. Do not skip either field.
+
+1. You can use the append mode to add your customized manifests into the default manifests. For example, you only customize
+a few resources, and make them available at `https://my-serving/serving-custom.yaml`. You still need to install the default
+Knative Serving. In this case, you can create the content of Serving CR as below:
+
+```
+apiVersion: v1
+kind: Namespace
+metadata:
+ name: knative-serving
+---
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  version: {{spec.version}}
+  additionalManifests:
+    - URL: https://my-serving/serving-custom.yaml
+```
+
+Knative operator will install the default manifests of Knative Serving at the version `{{spec.version}}`, and then install
+your customized manifests based on them.
 
 {{< /tab >}}
 
@@ -621,8 +651,14 @@ to apply first on the top.
 Knative Eventing based your own requirements. As long as the manifests of customized Knative Eventing are accessible to
 the operator, they can be installed.
 
-For example, the version of the customized Knative Eventing is `{{spec.version}}`, and it is available at `https://my-eventing/eventing.yaml`.
-You can create the content of Eventing CR as below:
+There are two modes available for you to install the customized manifests: overwrite mode and append mode. With the
+overwrite mode, you need to define all the manifests for Knative Eventing to install, because the operator will no long
+install any available default manifests. With the append mode, you only need to define your customized manifests, and
+the customized manifests are installed, after default manifests are applied.
+
+1. You can use the overwrite mode to customize all the Knative Eventing manifests. For example, the version of the customized
+   Knative Eventing is `{{spec.version}}`, and it is available at `https://my-eventing/eventing.yaml`. You can create the
+   content of Eventing CR as below to install your Knative Eventing:
 
 ```
 apiVersion: v1
@@ -645,6 +681,30 @@ You can make the customized Knative Eventing available in one or multiple links,
 of links. The ordering of the URLs is critical. Put the manifest you want to apply first on the top. We strongly recommend
 you to specify the version and the valid links to the customized Knative Eventing, by leveraging both `spec.version`
 and `spec.manifests`. Do not skip either field.
+
+1. You can use the append mode to add your customized manifests into the default manifests. For example, you only customize
+   a few resources, and make them available at `https://my-eventing/eventing-custom.yaml`. You still need to install the default
+   Knative eventing. In this case, you can create the content of Eventing CR as below:
+
+```
+apiVersion: v1
+kind: Namespace
+metadata:
+ name: knative-eventing
+---
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeEventing
+metadata:
+  name: knative-eventing
+  namespace: knative-eventing
+spec:
+  version: {{spec.version}}
+  additionalManifests:
+    - URL: https://my-eventing/eventing-custom.yaml
+```
+
+Knative operator will install the default manifests of Knative Eventing at the version `{{spec.version}}`, and then install
+your customized manifests based on them.
 
 {{< /tab >}}
 

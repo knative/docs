@@ -8,10 +8,8 @@ This guide walks you through manually installing and customizing Istio for use
 with Knative.
 
 If your cloud platform offers a managed Istio installation, we recommend
-installing Istio that way, unless you need the ability to customize your
-installation. If your cloud platform offers a managed Istio installation, the
-[install guide](./README.md) for your specific platform will have those
-instructions.
+installing Istio that way, unless you need to customize your
+installation.
 
 ## Before you begin
 
@@ -73,30 +71,11 @@ spec:
   addonComponents:
     pilot:
       enabled: true
-    prometheus:
-      enabled: false
 
   components:
     ingressGateways:
       - name: istio-ingressgateway
         enabled: true
-      - name: cluster-local-gateway
-        enabled: true
-        label:
-          istio: cluster-local-gateway
-          app: cluster-local-gateway
-        k8s:
-          service:
-            type: ClusterIP
-            ports:
-            - port: 15020
-              name: status-port
-            - port: 80
-              targetPort: 8080
-              name: http2
-            - port: 443
-              targetPort: 8443
-              name: https
 EOF
 
 istioctl install -f istio-minimal-operator.yaml

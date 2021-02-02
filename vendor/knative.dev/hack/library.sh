@@ -98,6 +98,37 @@ function function_exists() {
   [[ "$(type -t $1)" == "function" ]]
 }
 
+# GitHub Actions aware output grouping.
+function group() {
+  # End the group is there is already a group.
+  if [ -z ${__GROUP_TRACKER+x} ]; then
+    export __GROUP_TRACKER="grouping"
+    trap end_group EXIT
+  else
+    end_group
+  fi
+  # Start a new group.
+  start_group "$@"
+}
+
+# GitHub Actions aware output grouping.
+function start_group() {
+  if [[ -n ${GITHUB_WORKFLOW:-} ]]; then
+    echo "::group::$@"
+    trap end_group EXIT
+  else
+    echo "--- $@"
+  fi
+}
+
+# GitHub Actions aware end of output grouping.
+function end_group() {
+  if [[ -n ${GITHUB_WORKFLOW:-} ]]; then
+    echo "::endgroup::"
+  fi
+}
+
+
 # Waits until the given object doesn't exist.
 # Parameters: $1 - the kind of the object.
 #             $2 - object's name.
@@ -354,8 +385,7 @@ function report_go_test() {
   local xml
   xml="$(mktemp_with_extension "${ARTIFACTS}"/junit_XXXXXXXX xml)"
   echo "Running go test with args: ${go_test_args[*]}"
-  # TODO(chizhg): change to `--format testname`?
-  capture_output "${report}" gotestsum --format "${GO_TEST_VERBOSITY:-standard-verbose}" \
+  capture_output "${report}" gotestsum --format "${GO_TEST_VERBOSITY:-testname}" \
     --junitfile "${xml}" --junitfile-testsuite-name relative --junitfile-testcase-classname relative \
     -- "${go_test_args[@]}"
   local failed=$?
@@ -528,7 +558,7 @@ function go_update_deps() {
   done
 
   if [[ $UPGRADE == 1 ]]; then
-    echo "--- Upgrading to ${VERSION}"
+    group "Upgrading to ${VERSION}"
     # From shell parameter expansion:
     # ${parameter:+word}
     # If parameter is null or unset, nothing is substituted, otherwise the expansion of word is substituted.
@@ -548,7 +578,7 @@ function go_update_deps() {
     fi
   fi
 
-  echo "--- Go mod tidy and vendor"
+  group "Go mod tidy and vendor"
 
   # Prune modules.
   local orig_pipefail_opt=$(shopt -p -o pipefail)
@@ -557,7 +587,7 @@ function go_update_deps() {
   go mod vendor 2>&1 |  grep -v "ignoring symlink" || true
   eval "$orig_pipefail_opt"
 
-  echo "--- Removing unwanted vendor files"
+  group "Removing unwanted vendor files"
 
   # Remove unwanted vendor files
   find vendor/ \( -name "OWNERS" \
@@ -568,11 +598,30 @@ function go_update_deps() {
 
   export GOFLAGS=-mod=vendor
 
-  echo "--- Updating licenses"
+  group "Updating licenses"
   update_licenses third_party/VENDOR-LICENSE "./..."
 
-  echo "--- Removing broken symlinks"
+  group "Removing broken symlinks"
   remove_broken_symlinks ./vendor
+}
+
+# Return the go module name of the current module.
+# Intended to be used like:
+#   export MODULE_NAME=$(go_mod_module_name)
+function go_mod_module_name() {
+  go mod graph | cut -d' ' -f 1 | grep -v '@' | head -1
+}
+
+# Return a GOPATH to a temp directory. Works around the out-of-GOPATH issues
+# for k8s client gen mixed with go mod.
+# Intended to be used like:
+#   export GOPATH=$(go_mod_gopath_hack)
+function go_mod_gopath_hack() {
+  local TMP_DIR="$(mktemp -d)"
+  local TMP_REPO_PATH="${TMP_DIR}/src/$(go_mod_module_name)"
+  mkdir -p "$(dirname "${TMP_REPO_PATH}")" && ln -s "${REPO_ROOT_DIR}" "${TMP_REPO_PATH}"
+
+  echo "${TMP_DIR}"
 }
 
 # Run kntest tool, error out and ask users to install it if it's not currently installed.
@@ -745,11 +794,32 @@ function shellcheck_new_files() {
 }
 
 function latest_version() {
-  local semver=$(git describe --match "v[0-9]*" --abbrev=0)
-  local major_minor=$(echo "$semver" | cut -d. -f1-2)
+  # This function works "best effort" and works on Prow but not necessarily locally.
+  # The problem is finding the latest release. If a release occurs on the same commit which
+  # was branched from master, then the tag will be an ancestor to any commit derived from master.
+  # That was the original logic. Additionally in a release branch, the tag is always an ancestor.
+  # However, if the release commit ends up not the first commit from master, then the tag is not
+  # an ancestor of master, so we can't use `git describe` to find the most recent versioned tag. So
+  # we just sort all the tags and find the newest versioned one.
+  # But when running locally, we cannot(?) know if the current branch is a fork of master or a fork
+  # of a release branch. That's where this function will malfunction when the last release did not
+  # occur on the first commit -- it will try to run the upgrade tests from an older version instead
+  # of the most recent release.
+  # Workarounds include:
+  # Tag the first commit of the release branch. Say release-0.75 released v0.75.0 from the second commit
+  # Then tag the first commit in common between master and release-0.75 with `v0.75`.
+  # Always name your local fork master or main.
+  if [ $(current_branch) = "master" ] || [ $(current_branch) = "main" ]; then
+    # For main branch, simply use git tag without major version, this will work even
+    # if the release tag is not in the main
+    git tag -l "v[0-9]*" | sort -r --version-sort | head -n1
+  else
+    local semver=$(git describe --match "v[0-9]*" --abbrev=0)
+    local major_minor=$(echo "$semver" | cut -d. -f1-2)
 
-  # Get the latest patch release for the major minor
-  git tag -l "${major_minor}*" | sort -r --version-sort | head -n1
+    # Get the latest patch release for the major minor
+    git tag -l "${major_minor}*" | sort -r --version-sort | head -n1
+  fi
 }
 
 # Initializations that depend on previous functions.

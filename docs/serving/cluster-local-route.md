@@ -27,27 +27,27 @@ inside the cluster:
 
 ## Label a service to be cluster-local
 
-To configure a KService to only be available on the cluster-local network (and
+To configure a Knative service to only be available on the cluster-local network (and
 not on the public Internet), you can apply the
-`serving.knative.dev/visibility=cluster-local` label to the KService, Route or 
-Kubernetes Service object.
+`networking.knative.dev/visibility=cluster-local` label to the Knative service, route or
+Kubernetes service object.
 
-To label the KService:
+To label the Knative service:
 
 ```shell
-kubectl label kservice ${KSVC_NAME} serving.knative.dev/visibility=cluster-local
+kubectl label kservice ${KSVC_NAME} networking.knative.dev/visibility=cluster-local
 ```
 
-To label a route when you used Route directly without KService:
+To label a route when the route is used directly without a Knative service:
 
 ```shell
-kubectl label route ${ROUTE_NAME} serving.knative.dev/visibility=cluster-local
+kubectl label route ${ROUTE_NAME} networking.knative.dev/visibility=cluster-local
 ```
 
 To label a Kubernetes service:
 
 ```shell
-kubectl label service ${SERVICE_NAME} serving.knative.dev/visibility=cluster-local
+kubectl label service ${SERVICE_NAME} networking.knative.dev/visibility=cluster-local
 ```
 
 By labeling the Kubernetes service it allows you to restrict visibility in a more
@@ -58,14 +58,14 @@ For example, you can deploy the [Hello World sample](./samples/hello-world/hello
 and then convert it to be an cluster-local service by labeling the service:
 
 ```shell
-kubectl label kservice helloworld-go serving.knative.dev/visibility=cluster-local
+kubectl label kservice helloworld-go networking.knative.dev/visibility=cluster-local
 ```
 
 You can then verify that the change has been made by verifying the URL for the
 helloworld-go service:
 
 ```shell
-kubectl get ksvc helloworld-go
+kubectl get kservice helloworld-go
 
 NAME            URL                                              LATESTCREATED         LATESTREADY           READY   REASON
 helloworld-go   http://helloworld-go.default.svc.cluster.local   helloworld-go-2bz5l   helloworld-go-2bz5l   True

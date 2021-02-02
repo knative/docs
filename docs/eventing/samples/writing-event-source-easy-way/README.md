@@ -1,6 +1,6 @@
 # Introduction
 
-As stated in [tutorial on writing a Source with a Receive Adapter](../writing-receive-adapter-source/README.md), there are multiple ways to
+As stated in [tutorial on writing a Source with a Receive Adapter](../writing-event-source/README.md), there are multiple ways to
 create event sources. The way in that tutorial is to create an independent event source that has its own CRD.
 
 This tutorial provides a simpler mechanism to build an event source in Javascript and use it with

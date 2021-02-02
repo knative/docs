@@ -76,7 +76,7 @@ issue in the [`knative/website` repo](https://github.com/knative/website/issues)
 The
 [Knative Documentation Working Group](https://github.com/knative/community/blob/master/working-groups/WORKING-GROUPS.md#documentation)
 meets biweekly on Tuesdays at 9:30am PT.
-[Click here](https://calendar.google.com/calendar/embed?src=google.com_18un4fuh6rokqf8hmfftm5oqq4%40group.calendar.google.com)
+[Click here](https://calendar.google.com/calendar/embed?src=knative.team_9q83bg07qs5b9rrslp5jor4l6s%40group.calendar.google.com)
 to see the exact dates on the Knative working group calendar.
 
 If you're interested in becoming more involved in Knative's documentation, start
@@ -250,7 +250,7 @@ in the product, or for a fix or update to existing content.
 
 - **Fixes and updates**: If you find an issue in a past release, for example a
   typo or out-of-date content, you likely need to open multiple and subsequent
-  PRs. If not a followup PR, at least add the "`cherrypick` labels" to your
+  PRs. If not a followup PR, at least add the "`/cherrypick release-#.#` comment" to your
   original PR to indicate in which of the past release that your change affects.
 
   For example, if you find a typo in a page of the `v0.5` release, then that
@@ -260,7 +260,7 @@ in the product, or for a fix or update to existing content.
 
   1.  Open a PR against the
       [`master`](https://github.com/knative/docs/tree/master/) branch.
-  1.  Add one or more `cherrypick-#.#` labels to that PR to indicate which of
+  1.  Add one or more comments `/cherrypick release-#.#` to that PR to indicate which of
       the past release branches should also be fixed. Generally, we only
       maintain the most recent numbered release.
   1.  If you want to complete the fix yourself (**best practice**), you then

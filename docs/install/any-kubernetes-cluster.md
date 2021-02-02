@@ -43,7 +43,7 @@ This guide assumes that you want to install an upstream Knative release on a
 Kubernetes cluster. A growing number of vendors have managed Knative offerings;
 see the [Knative Offerings](../knative-offerings.md) page for a full list.
 
-Knative {{< version >}} requires a Kubernetes cluster v1.16 or newer, as well as
+Knative {{< version >}} requires a Kubernetes cluster v1.17 or newer, as well as
 a compatible `kubectl`. This guide assumes that you've already created a
 Kubernetes cluster, and that you are using bash in a Mac or Linux environment;
 some commands will need to be adjusted for use in a Windows environment.
@@ -216,14 +216,17 @@ The following commands install Gloo and enable its Knative integration.
 
 The following commands install Istio and enable its Knative integration.
 
-<!-- TODO(https://github.com/knative/docs/issues/2166): Create streamlined instructions to inline -->
+1. Install a properly configured Istio ([Advanced installation](./installing-istio.md))
 
-1. [Installing Istio for Knative](./installing-istio.md)
+   ```bash
+   kubectl apply --filename {{< artifact repo="net-istio" file="istio.yaml" >}}
+   ```
+
 
 1. Install the Knative Istio controller:
 
    ```bash
-   kubectl apply --filename {{< artifact repo="net-istio" file="release.yaml" >}}
+   kubectl apply --filename {{< artifact repo="net-istio" file="net-istio.yaml" >}}
    ```
 
 1. Fetch the External IP or CNAME:
@@ -269,7 +272,7 @@ The following commands install Kong and enable its Knative integration.
 
 {{% tab name="Kourier" %}}
 
-{{% feature-state version="v0.17" state="beta" %}}
+{{% feature-state version="v0.21" state="stable" %}}
 
 The following commands install Kourier and enable its Knative integration.
 
@@ -492,6 +495,8 @@ kubectl apply --filename {{< artifact repo="serving" file="serving-nscert.yaml" 
 
 > Note this will not work with HTTP01 either via cert-manager or the net-http01
 > options.
+
+{{< /tab >}}
 
 {{% tab name="DomainMapping CRD" %}}
 

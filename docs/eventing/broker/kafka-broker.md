@@ -18,7 +18,8 @@ Notable features are:
 
 ## Prerequisites
 
-[Knative Eventing installation](./../../install/any-kubernetes-cluster.md#installing-the-eventing-component).
+1. [Knative Eventing installation](./../../install/any-kubernetes-cluster.md#installing-the-eventing-component).
+2. An Apache Kafka cluster (if you're just getting started you can follow [Strimzi Quickstart page](https://strimzi.io/quickstarts/)).
 
 ## Installation
 
