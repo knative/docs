@@ -235,7 +235,7 @@ metadata:
   name: curl
 spec:
   containers:
-    # This could be any image that we can SSH into and has curl.
+    # This could be any image which has curl and a shell we can attach to
   - image: radial/busyboxplus:curl
     imagePullPolicy: IfNotPresent
     name: curl
@@ -249,7 +249,7 @@ EOF
 
 ## Sending events to the broker
 
-1. SSH into the pod by running the following command:
+1. Open a shell in the pod you created by running the following command:
     ```
     kubectl -n event-example attach curl -it
     ```
@@ -264,7 +264,7 @@ EOF
 
 1. Make a HTTP request to the broker. To show the various types of events you can send, you will make three requests:
     - To make the first request, which creates an event that has the `type`
-       `greeting`, run the following in the SSH terminal:
+       `greeting`, run the following in the shell:
        ```
        curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/event-example/default" \
          -X POST \
@@ -286,7 +286,7 @@ EOF
        < Date: Mon, 12 Aug 2019 19:48:18 GMT
        ```
     - To make the second request, which creates an event that has the `source`
-       `sendoff`, run the following in the SSH terminal:
+       `sendoff`, run the following in the shell:
 
        ```
        curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/event-example/default" \
@@ -308,7 +308,7 @@ EOF
        < Date: Mon, 12 Aug 2019 19:48:18 GMT
        ```
     - To make the third request, which creates an event that has the `type`
-       `greeting` and the`source` `sendoff`, run the following in the SSH terminal:
+       `greeting` and the`source` `sendoff`, run the following in the shell:
        ```
        curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/event-example/default" \
          -X POST \
@@ -329,7 +329,7 @@ EOF
        < Date: Mon, 12 Aug 2019 19:48:18 GMT
        ```
 
-1.  Exit SSH by typing `exit` into the command prompt.
+1.  Exit the pod by typing `exit` into the command prompt.
 
 You have sent two events to the `hello-display` event consumer and two events to
 the `goodbye-display` event consumer (note that `say-hello-goodbye` activates
