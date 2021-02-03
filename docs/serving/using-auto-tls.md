@@ -40,7 +40,7 @@ You must meet the following prerequisites to enable auto TLS:
 
 - The following must be installed on your Knative cluter:
   - [Knative Serving](../install/).
-  - [Istio with SDS, version 1.3 or higher](../install/installing-istio.md#installing-istio-with-SDS-to-secure-the-ingress-gateway),
+  - A Networking layer such as [Kourier](../install/any-kubernetes-cluster.md#installing-the-serving-component), [Istio with SDS, version 1.3 or higher](../install/installing-istio.md#installing-istio-with-SDS-to-secure-the-ingress-gateway),
     [Contour, version 1.1 or higher](../install/any-kubernetes-cluster.md#installing-the-serving-component),
     or [Gloo, version 0.18.16 or higher](https://docs.solo.io/gloo/latest/installation/knative/).
     Note: Currently, [Ambassador](https://github.com/datawire/ambassador) is unsupported.
