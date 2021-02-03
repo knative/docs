@@ -8,11 +8,11 @@ aliases:
    - /docs/concepts/overview.md
 ---
 
-The Knative project provides a set of [Kubernetes](https://kubernetes.io) components that introduce event-driven, serverless capabilities for Kubernetes clusters.
+The Knative project provides a set of [Kubernetes](https://kubernetes.io) components that introduce event-driven and serverless capabilities for Kubernetes clusters.
 
 Knative APIs build on existing Kubernetes APIs, so that Knative resources are compatible with other Kubernetes-native resources, and can be managed by cluster administrators using existing Kubernetes tools.
 
-Common languages and frameworks, which include Kubernetes-friendly tooling, work smoothly with Knative to reduce the time spent solving common deployment issues, such as:
+Common languages and frameworks that include Kubernetes-friendly tooling work smoothly with Knative to reduce the time spent solving common deployment issues, such as:
 
 - [Deploying a container](./serving/getting-started-knative-app.md)
 - [Routing and managing traffic with blue/green deployment](./serving/samples/blue-green-deployment.md)
