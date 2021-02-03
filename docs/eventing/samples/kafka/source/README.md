@@ -208,21 +208,21 @@ Tutorial on how to build and deploy a `KafkaSource` [Eventing source](../../../s
 1. Remove the Apache Kafka Event Source
    ```
 
-   \$ kubectl delete -f source/source.yaml kafkasource.sources.knative.dev
+   $ kubectl delete -f source/source.yaml kafkasource.sources.knative.dev
    "kafka-source" deleted
 
    ```
    2. Remove the Event Display
    ```
 
-   \$ kubectl delete -f source/event-display.yaml service.serving.knative.dev
+   $ kubectl delete -f source/event-display.yaml service.serving.knative.dev
    "event-display" deleted
 
    ```
    3. Remove the Apache Kafka Event Controller
    ```
 
-   \$ kubectl delete -f https://storage.googleapis.com/knative-releases/eventing-contrib/latest/kafka-source.yaml
+   $ kubectl delete -f https://storage.googleapis.com/knative-releases/eventing-contrib/latest/kafka-source.yaml
    serviceaccount "kafka-controller-manager" deleted
    clusterrole.rbac.authorization.k8s.io "eventing-sources-kafka-controller"
    deleted clusterrolebinding.rbac.authorization.k8s.io
