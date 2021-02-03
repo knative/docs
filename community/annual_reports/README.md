@@ -3,3 +3,4 @@ Welcome to the Knative Annual Reports page. Feedback and comments are welcome at
 | Annual Reports |
 | -------------- |
 | [2019](https://github.com/knative/community/tree/master/annual_reports/Knative%202019%20Annual%20Report.pdf) |
+| [2020](https://github.com/knative/community/tree/master/annual_reports/Knative%202020%20Annual%20Report.pdf) |
