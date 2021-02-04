@@ -6,7 +6,7 @@ type: "docs"
 
 If your traffic configuration points to a Configuration target, rather than revision target, it means that when a new Revision is created and ready 100% of that target's traffic will be immediately shifted to the new revision, which might not be ready to accept that scale with a single pod and with cold starts taking some time it is possible to end up in a situation where a lot of requests are backed up either at QP or Activator and after a while they might expire or QP might outright reject the requests.
 
-To mitigate this problem Knative as of 0.20 release Knative provides users with a possibility to gradually shift the traffic to the latest revision. 
+To mitigate this problem Knative as of 0.20 release Knative provides users with a possibility to gradually shift the traffic to the latest revision.
 This is governed by a single parameter which denotes `rollout-duration`.
 
 The affected Configuration targets will be rolled out to 1% of traffic first and then in equal incremental steps for the rest of the assigned traffic. Note, that the rollout is purely time based and does not interact with the Autoscaling subsystem.
@@ -96,7 +96,7 @@ traffic:
   revisionName: config-00005 # Pinned to a specific Revision.
 ```
 
-and so on until final state is achived:
+and so on until final state is achieved:
 
 ```yaml
 traffic:
