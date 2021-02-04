@@ -9,7 +9,7 @@ If your traffic configuration points to a Configuration target, rather than revi
 To mitigate this problem Knative as of 0.20 release Knative provides users with a possibility to gradually shift the traffic to the latest revision. 
 This is governed by a single parameter which denotes `rollout-duration`.
 
-The affected Configuration targets will be rolled out to 1% of traffic first and then in equal incremental steps for the rest of the assigned traffic.
+The affected Configuration targets will be rolled out to 1% of traffic first and then in equal incremental steps for the rest of the assigned traffic. Note, that the rollout is purely time based and does not interact with the Autoscaling subsystem.
 
 
 This feature is available to untagged and tagged traffic targets configured for both  Kservices and Kservice-less Routes.
@@ -40,7 +40,7 @@ metadata:
  name: config-network
  namespace: knative-serving
 data:
-  rolloutDuration: "0"  # Value in seconds.
+  rolloutDuration: "380s"  # Value in seconds.
 ```
 {{< /tab >}}
 {{% tab name="Global (Operator)" %}}
@@ -52,7 +52,7 @@ metadata:
 spec:
   config:
     network:
-       rolloutDuration: "0"
+       rolloutDuration: "380s"
 ```
 {{< /tab >}}
 {{< /tabs >}}
