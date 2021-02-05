@@ -1,5 +1,5 @@
 ---
-title: "Gradually rolling out latest Revisions
+title: "Gradually rolling out latest Revisions"
 weight: 20
 type: "docs"
 ---
