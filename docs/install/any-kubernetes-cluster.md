@@ -27,11 +27,9 @@ Knative has two components, which can be installed and used independently or
 together. To help you pick and choose the pieces that are right for you, here is
 a brief description of each:
 
-- [**Serving**](#installing-the-serving-component)
-  {{< feature-state version="v0.9" state="stable" short=true >}} provides an
+- [**Serving**](#installing-the-serving-component) provides an
   abstraction for stateless request-based scale-to-zero services.
-- [**Eventing**](#installing-the-eventing-component)
-  {{< feature-state version="v0.16" state="stable" short=true >}} provides
+- [**Eventing**](#installing-the-eventing-component) provides
   abstractions to enable binding event sources (e.g. Github Webhooks, Kafka) and
   consumers (e.g. Kubernetes or Knative Services).
 
@@ -51,10 +49,6 @@ some commands will need to be adjusted for use in a Windows environment.
 <!-- TODO: Link to provisioning guide for advanced installation -->
 
 ## Installing the Serving component
-
-{{< feature-state version="v0.9" state="stable" >}}
-
-The following commands install the Knative Serving component.
 
 1. Install the
    [Custom Resource Definitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
@@ -78,8 +72,6 @@ The following commands install the Knative Serving component.
 
    {{< tabs name="serving_networking" default="Istio" >}}
    {{% tab name="Ambassador" %}}
-
-{{% feature-state version="v0.8" state="alpha" %}}
 
 The following commands install Ambassador and enable its Knative integration.
 
@@ -131,8 +123,6 @@ The following commands install Ambassador and enable its Knative integration.
 
 {{% tab name="Contour" %}}
 
-{{% feature-state version="v0.18" state="stable" %}}
-
 The following commands install Contour and enable its Knative integration.
 
 1. Install a properly configured Contour:
@@ -169,8 +159,6 @@ The following commands install Contour and enable its Knative integration.
 {{< /tab >}}
 
 {{% tab name="Gloo" %}}
-
-{{% feature-state version="v0.8" state="alpha" %}}
 
 _For a detailed guide on Gloo integration, see
 [Installing Gloo for Knative](https://docs.solo.io/gloo/latest/installation/knative/)
@@ -212,8 +200,6 @@ The following commands install Gloo and enable its Knative integration.
 
 {{% tab name="Istio" %}}
 
-{{% feature-state version="v0.9" state="stable" %}}
-
 The following commands install Istio and enable its Knative integration.
 
 1. Install a properly configured Istio ([Advanced installation](./installing-istio.md))
@@ -240,8 +226,6 @@ The following commands install Istio and enable its Knative integration.
 {{< /tab >}}
 
 {{% tab name="Kong" %}}
-
-{{% feature-state version="v0.13" state="" %}}
 
 The following commands install Kong and enable its Knative integration.
 
@@ -271,8 +255,6 @@ The following commands install Kong and enable its Knative integration.
 {{< /tab >}}
 
 {{% tab name="Kourier" %}}
-
-{{% feature-state version="v0.21" state="stable" %}}
 
 The following commands install Kourier and enable its Knative integration.
 
@@ -409,8 +391,6 @@ At this point, you have a basic installation of Knative Serving!
 
 {{< tabs name="serving_extensions" >}} {{% tab name="HPA autoscaling" %}}
 
-{{% feature-state version="v0.8" state="beta" %}}
-
 Knative also supports the use of the Kubernetes Horizontal Pod Autoscaler (HPA)
 for driving autoscaling decisions. The following command will install the
 components needed to support HPA-class autoscaling:
@@ -424,8 +404,6 @@ kubectl apply --filename {{< artifact repo="serving" file="serving-hpa.yaml" >}}
 {{< /tab >}}
 
 {{% tab name="TLS with cert-manager" %}}
-
-{{% feature-state version="v0.6" state="alpha" %}}
 
 Knative supports automatically provisioning TLS certificates via
 [cert-manager](https://cert-manager.io/docs/). The following commands will
@@ -446,8 +424,6 @@ via cert-manager.
    {{< /tab >}}
 
 {{% tab name="TLS via HTTP01" %}}
-
-{{% feature-state version="v0.14" state="alpha" %}}
 
 Knative supports automatically provisioning TLS certificates using Let's Encrypt
 HTTP01 challenges. The following commands will install the components needed to
@@ -481,8 +457,6 @@ support that.
 
 {{% tab name="TLS wildcard support" %}}
 
-{{% feature-state version="v0.12" state="alpha" %}}
-
 If you are using a Certificate implementation that supports provisioning
 wildcard certificates (e.g. cert-manager with a DNS01 issuer), then the most
 efficient way to provision certificates is with the namespace wildcard
@@ -499,8 +473,6 @@ kubectl apply --filename {{< artifact repo="serving" file="serving-nscert.yaml" 
 {{< /tab >}}
 
 {{% tab name="DomainMapping CRD" %}}
-
-{{% feature-state version="v0.19" state="alpha" %}}
 
 The `DomainMapping` CRD allows a user to map a Domain Name that they own to a
 specific Knative Service.
@@ -521,10 +493,6 @@ guide. You can also find a number of samples for Knative Serving
 [here](../serving/samples/).
 
 ## Installing the Eventing component
-
-{{< feature-state version="v0.16" state="stable" >}}
-
-The following commands install the Knative Eventing component.
 
 1. Install the
    [Custom Resource Definitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
@@ -586,8 +554,6 @@ To learn more about the Google Cloud Pub/Sub Channel, try
 
 {{% tab name="In-Memory (standalone)" %}}
 
-{{< feature-state version="v0.16" state="stable" >}}
-
 The following command installs an implementation of Channel that runs in-memory.
 This implementation is nice because it is simple and standalone, but it is
 unsuitable for production use cases.
@@ -620,7 +586,6 @@ kubectl apply --filename {{< artifact repo="eventing" file="in-memory-channel.ya
       <!-- This indentation is important for things to render properly. -->
    {{< tabs name="eventing_brokers" default="MT-Channel-based" >}}
    {{% tab name="Apache Kafka Broker" %}}
-   {{< feature-state version="v0.17" state="alpha" >}}
 
 The following commands install the Apache Kafka broker, and run event routing in a system namespace,
 `knative-eventing`, by default.
@@ -641,7 +606,6 @@ For more information, see the [Kafka Broker](./../eventing/broker/kafka-broker.m
 {{< /tab >}}
 
    {{% tab name="MT-Channel-based" %}}
-   {{< feature-state version="v0.16" state="stable" >}}
 
 The following command installs an implementation of Broker that utilizes
 Channels and runs event routing components in a System Namespace, providing a
@@ -734,8 +698,6 @@ At this point, you have a basic installation of Knative Eventing!
 
 {{% tab name="Apache Kafka Sink" %}}
 
-{{< feature-state version="v0.18" state="alpha" >}}
-
 1. Install the Kafka controller:
 
     ```bash
@@ -755,8 +717,6 @@ For more information, see the [Kafka Sink](./../eventing/sink/kafka-sink.md) doc
 {{% tab name="Sugar Controller" %}}
 
 <!-- Unclear when this feature came in -->
-
-{{< feature-state version="v0.16" state="alpha" >}}
 
 The following command installs the Eventing Sugar Controller:
 
@@ -784,8 +744,6 @@ kubectl label namespace default eventing.knative.dev/injection=enabled
 
 {{% tab name="Github Source" %}}
 
-{{< feature-state version="v0.2" state="alpha" >}}
-
 The following command installs the single-tenant Github source:
 
 ```bash
@@ -810,7 +768,6 @@ To learn more about the Github source, try
 {{< /tab >}}
 
 {{% tab name="Apache Camel-K Source" %}}
-{{< feature-state version="v0.5" state="alpha" >}}
 
 The following command installs the Apache Camel-K Source:
 
@@ -825,8 +782,6 @@ To learn more about the Apache Camel-K source, try
 
 {{% tab name="Apache Kafka Source" %}}
 
-{{< feature-state version="v0.5" state="alpha" >}}
-
 The following command installs the Apache Kafka Source:
 
 ```bash
@@ -839,8 +794,6 @@ To learn more about the Apache Kafka source, try
 {{< /tab >}}
 
 {{% tab name="GCP Sources" %}}
-
-{{< feature-state version="v0.2" state="alpha" >}}
 
 The following command installs the GCP Sources:
 
@@ -865,8 +818,6 @@ To learn more about the Cloud Audit Logs source, try
 
 {{% tab name="Apache CouchDB Source" %}}
 
-{{< feature-state version="v0.10" state="alpha" >}}
-
 The following command installs the Apache CouchDB Source:
 
 ```bash
@@ -879,8 +830,6 @@ To learn more about the Apache CouchDB source, read the [documentation](https://
 
 {{% tab name="VMware Sources and Bindings" %}}
 
-{{< feature-state version="v0.14" state="alpha" >}}
-
 The following command installs the VMware Sources and Bindings:
 
 ```bash
@@ -891,11 +840,6 @@ To learn more about the VMware sources and bindings, try
 [our samples](https://github.com/vmware-tanzu/sources-for-knative/tree/master/samples/README.md).
 
 {{< /tab >}}
-
-<!-- TODO: prometheus source -->
-<!-- TODO: AWS SQS source  -->
-
-<!-- TODO(https://github.com/knative/docs/issues/2154): Add sources and other stuff here. -->
 
 {{< /tabs >}}
 
