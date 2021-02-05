@@ -1,7 +1,7 @@
 ---
 title: "Available Channels"
 #linkTitle: "Channels"
-weight: 40
+weight: 100
 type: "docs"
 ---
 
@@ -31,5 +31,3 @@ Name | Status | Support | Description
 [KafkaChannel - Consolidated](https://github.com/knative-sandbox/eventing-kafka/tree/{{< branch >}}/pkg/channel/consolidated/README.md) | Proof of Concept | None | Channels are backed by [Apache Kafka](http://kafka.apache.org/) topics. The original Knative KafkaChannel implementation which utilizes a single combined Kafka Producer / Consumer deployment.
 [KafkaChannel - Distributed](https://github.com/knative-sandbox/eventing-kafka/tree/{{< branch >}}/pkg/channel/distributed/README.md) | Proof of Concept | None | Channels are backed by [Apache Kafka](http://kafka.apache.org/) topics. An alternate KafkaChannel implementation, contributed by SAP's [Kyma](https://kyma-project.io/) project, which provides a more granular deployment of Producers / Consumers.
 [NatssChannel](https://github.com/knative-sandbox/eventing-natss/tree/{{< branch >}}/config/README.md) | Proof of Concept | None | Channels are backed by [NATS Streaming](https://github.com/nats-io/nats-streaming-server#configuring).
-
-
