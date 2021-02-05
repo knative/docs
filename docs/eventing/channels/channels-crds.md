@@ -1,7 +1,7 @@
 ---
 title: "Available Channels"
 #linkTitle: "Channels"
-weight: 40
+weight: 100
 type: "docs"
 ---
 
@@ -31,5 +31,3 @@ Name | Status | Support | Description
 [KafkaChannel](https://github.com/knative-sandbox/eventing-kafka/tree/{{< branch >}}/pkg/channel/consolidated/README.md) | Proof of Concept | None | Channels are backed by [Apache Kafka](http://kafka.apache.org/) topics.
 [Knative sandbox channel that uses Confluent Go Client, and the librdkafka C library](https://github.com/knative-sandbox/eventing-kafka) | Proof of Concept | None | Kafka Channel implementation, contributed by SAP's Kyma project, is a Knative Eventing implementation of a Kafka backed channel which provides advanced functionality and production grade qualities as an alternative to what the eventing-contrib/kafka implementation offers.
 [NatssChannel](https://github.com/knative-sandbox/eventing-natss/tree/{{< branch >}}/config/README.md) | Proof of Concept | None | Channels are backed by [NATS Streaming](https://github.com/nats-io/nats-streaming-server#configuring).
-
-
