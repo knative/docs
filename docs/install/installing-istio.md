@@ -141,7 +141,7 @@ need to update gateway configmap `config-istio` under the `knative-serving` name
 kubectl edit configmap config-istio -n knative-serving
 ```
 
-2. Replace the `local-gateway.knative-serving.cluster-local-gateway` field with the custom service. As an example, if you name both
+2. Replace the `local-gateway.knative-serving.knative-local-gateway` field with the custom service. As an example, if you name both
 the service and deployment `custom-local-gateway` under the namespace `istio-system`, it should be updated to:
 
 ```
