@@ -246,8 +246,6 @@ Knative Serving with different ingresses:
    {{< tabs name="serving_networking" default="Ambassador" >}}
    {{% tab name="Ambassador" %}}
 
-{{% feature-state version="v0.8" state="alpha" %}}
-
 The following commands install Ambassador and enable its Knative integration.
 
 1. Create a namespace to install Ambassador in:
@@ -305,8 +303,6 @@ The following commands install Ambassador and enable its Knative integration.
 
 {{% tab name="Contour" %}}
 
-{{% feature-state version="v0.18" state="stable" %}}
-
 The following commands install Contour and enable its Knative integration.
 
 1. Install a properly configured Contour:
@@ -348,8 +344,6 @@ The following commands install Contour and enable its Knative integration.
 {{< /tab >}}
 
 {{% tab name="Gloo" %}}
-
-{{% feature-state version="v0.8" state="alpha" %}}
 
 _For a detailed guide on Gloo integration, see
 [Installing Gloo for Knative](https://docs.solo.io/gloo/latest/installation/knative/)
@@ -407,8 +401,6 @@ The following commands install Gloo and enable its Knative integration.
 
 {{% tab name="Kong" %}}
 
-{{% feature-state version="v0.13" state="" %}}
-
 The following commands install Kong and enable its Knative integration.
 
 1. Install Kong Ingress Controller:
@@ -444,8 +436,6 @@ The following commands install Kong and enable its Knative integration.
 {{< /tab >}}
 
 {{% tab name="Kourier" %}}
-
-{{% feature-state version="v0.17" state="beta" %}}
 
 The following commands install Kourier and enable its Knative integration.
 
