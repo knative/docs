@@ -98,13 +98,13 @@ EOF
 {{< /tab >}}
 
 {{% tab name="kn" %}}
-
+Notice that the namespace is specified in two places in the command in `--namespace` and the `--sink` hostname
 ```shell
 kn source ping create test-ping-source \
-  --namespace pingsource-example
+  --namespace pingsource-example \
   --schedule "*/1 * * * *" \
   --data '{"message": "Hello world!"}' \
-  --sink http://event-display.svc.cluster.local
+  --sink http://event-display.pingsource-example.svc.cluster.local
 ```
 
 {{< /tab >}}
