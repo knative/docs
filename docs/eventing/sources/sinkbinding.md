@@ -189,10 +189,10 @@ kn source binding create bind-heartbeat \
           matchLabels:
             app: heartbeat-cron
         sink:
-        ref:
-          apiVersion: serving.knative.dev/v1
-          kind: Service
-          name: event-display
+          ref:
+            apiVersion: serving.knative.dev/v1
+            kind: Service
+            name: event-display
     ```
 2. Apply the file:
     ```bash
