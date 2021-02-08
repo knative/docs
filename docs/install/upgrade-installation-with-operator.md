@@ -21,7 +21,7 @@ current version of the Operator is 0.19.x, it bundles and supports the installat
 
 Knative Operator maximizes the automation for the upgrade process, all you need to know is the current version of your
 Knative, and the target version of your Knative. You need to know the namespaces for your Knative installation. In the
-following instruction, we use `knative-serving` as the name of the Serving CR && the namespace of Knative Serving and 
+following instruction, we use `knative-serving` as the name of the Serving CR && the namespace of Knative Serving and
 `knative-eventing` as the name of th Eventing CR && the namespace of Knative Eventing.
 
 ### Check the current version of the installed Knative
