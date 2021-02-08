@@ -7,6 +7,8 @@ showlandingtoc: "true"
 
 Knative provides the InMemoryChannel channel implementation by default. This default implementation is useful for developers who do not want to configure a specific implementation type, such as Apache Kafka or NATSS channels.
 
+**NOTE:** InMemoryChannel channels should not be used in production environments.
+
 The default channel implementation is specified in the `default-ch-webhook` ConfigMap in the `knative-eventing` namespace.
 For more information about modifying ConfigMaps, see [Configuring the Eventing Operator custom resource](./docs/install/configuring-eventing-cr/).
 
