@@ -111,7 +111,7 @@ spec:
 
 ## Verifying the upgrade
 
-To confirm that your components and plugins have successfully upgraded, view the status of their pods in the relevant namespaces.
+To confirm that your Knative components have successfully upgraded, view the status of their pods in the relevant namespaces.
 All pods will restart during the upgrade and their age will reset.
 If you upgraded Knative Serving and Eventing, enter the following commands to get information about the pods for each namespace:
 
