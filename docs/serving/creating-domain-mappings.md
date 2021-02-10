@@ -18,8 +18,8 @@ have this domain be served by a Knative Service.
 
 1. You need to enable the DomainMapping feature (and a supported Knative
    Ingress implementation) to use it. See [the Install instructions](../install/any-kubernetes-cluster/#optional-serving-extensions).
-1. To map a custom domain to a Knative Service, you should first [create a Knative
-Service](https://knative.dev/docs/serving/creating-services/).
+1. To map a custom domain to a Knative Service, you must first [create a Knative
+Service](../serving/services/creating-services).
 1. You will need a Domain Name to map, and the ability to change its DNS to
    point to your Knative Cluster. The details of this step are dependant on
    your domain registrar.
