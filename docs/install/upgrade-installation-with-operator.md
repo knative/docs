@@ -4,7 +4,7 @@ weight: 21
 type: "docs"
 ---
 
-The upgrade is relatively more straightforward, if you install Knative with the Knative Operator. We support upgrading
+The Knative operator supports a straightforward upgrade process. It supports upgrading the Knative component
 by a single [minor](https://semver.org/) version number. For example, if you have v0.17 installed, you must upgrade to
 v0.18 before attempting to upgrade to v0.19. The attribute `spec.version` is the only field you need to change in the
 Serving or Eventing CR to perform an upgrade. You do not need to specify the version in terms of the `patch` number,
@@ -20,9 +20,9 @@ current version of the Operator is 0.19.x, it bundles and supports the installat
 ## Before you begin
 
 Knative Operator maximizes the automation for the upgrade process, all you need to know is the current version of your
-Knative, and the target version of your Knative. You need to know the namespaces for your Knative installation. In the
-following instruction, we use `knative-serving` as the name of the Serving CR && the namespace of Knative Serving and
-`knative-eventing` as the name of th Eventing CR && the namespace of Knative Eventing.
+Knative, the target version of your Knative, and the namespaces for your Knative installation. In the
+following instruction, Knative Serving and the Serving custom resource are installed in the `knative-serving` namespace,
+and  Knative Eventing and the Eventing custom resource are installed in the `knative-eventing` namespace.
 
 ### Check the current version of the installed Knative
 
