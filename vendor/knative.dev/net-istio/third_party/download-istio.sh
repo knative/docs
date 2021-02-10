@@ -24,9 +24,21 @@ function download_istio() {
   esac
 
   # Download and unpack Istio
-  ISTIO_VERSION=$1
+
+  if [ $1 = "HEAD" ]; then
+    ISTIO_VERSION=$(curl https://storage.googleapis.com/istio-build/dev/latest)
+  else
+    ISTIO_VERSION=$1
+  fi
+
   ISTIO_TARBALL=istio-${ISTIO_VERSION}-${ARCH}.tar.gz
-  DOWNLOAD_URL=https://github.com/istio/istio/releases/download/${ISTIO_VERSION}/${ISTIO_TARBALL}
+
+  if [ $1 = "HEAD" ]; then
+    DOWNLOAD_URL=https://storage.googleapis.com/istio-build/dev/${ISTIO_VERSION}/${ISTIO_TARBALL}
+  else
+    DOWNLOAD_URL=https://github.com/istio/istio/releases/download/${ISTIO_VERSION}/${ISTIO_TARBALL}
+  fi
+
   SYSTEM_NAMESPACE="${SYSTEM_NAMESPACE:-"knative-serving"}"
 
   ISTIO_TMP=$(mktemp -d)
@@ -38,7 +50,7 @@ function download_istio() {
   fi
   tar xzf ${ISTIO_TARBALL}
   ISTIO_DIR="${ISTIO_TMP}/istio-${ISTIO_VERSION}"
-  echo "Istio was downloaded to ${ISTIO_TMP}"
+  echo "Istio was downloaded to ${ISTIO_DIR}"
   popd
 }
 
