@@ -51,7 +51,6 @@ aliases:
   - vaikas
 
   eventing-channels-eng-approvers:
-  - Harwayne
   - matzew
 
   eventing-sources-eng-approvers:
