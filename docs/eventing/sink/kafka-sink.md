@@ -56,6 +56,86 @@ spec:
    - my-cluster-kafka-bootstrap.kafka:9092
 ```
 
+## Security
+
+Apache Kafka supports different security features, Knative supports the followings:
+
+- [Authentication using `SASL` without encryption](#authentication-using-sasl)
+- [Authentication using `SASL` and encryption using `SSL`](#authentication-using-sasl-and-encryption-using-ssl)
+- [Authentication and encryption using `SSL`](#authentication-and-encryption-using-ssl)
+- [Encryption using `SSL` without client authentication](#encryption-using-ssl-without-client-authentication)
+
+To enable security features, in the `KafkaSink` spec, we can reference a `Secret`:
+
+```yaml
+apiVersion: eventing.knative.dev/v1alpha1
+kind: KafkaSink
+metadata:
+   name: my-kafka-sink
+   namespace: default
+spec:
+   topic: mytopic
+   bootstrapServers:
+      - my-cluster-kafka-bootstrap.kafka:9092
+   auth.secret.ref.name: my_secret
+```
+
+The `Secret` `my_secret` must exist in the same namespace of the `KafkaSink`, in this case: `default`.
+
+_Note: Certificates and keys must be in [`PEM` format](https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail)._
+
+### Authentication using SASL
+
+Knative supports the following SASL mechanisms:
+
+- `PLAIN`
+- `SCRAM-SHA-256`
+- `SCRAM-SHA-512`
+
+To use a specific SASL mechanism replace `<sasl_mechanism>` with the mechanism of your choice.
+
+### Authentication using SASL without encryption
+
+```bash
+kubectl create secret --namespace <namespace> generic <my_secret> \
+  --from-literal=protocol=SASL_PLAINTEXT \
+  --from-literal=sasl.mechanism=<sasl_mechanism> \
+  --from-literal=user=<my_user> \
+  --from-literal=password=<my_password>
+```
+
+### Authentication using SASL and encryption using SSL
+
+```bash
+kubectl create secret --namespace <namespace> generic <my_secret> \
+  --from-literal=protocol=SASL_SSL \
+  --from-literal=sasl.mechanism=<sasl_mechanism> \
+  --from-file=ca.crt=caroot.pem \
+  --from-literal=user=<my_user> \
+  --from-literal=password=<my_password>
+```
+
+### Encryption using SSL without client authentication
+
+```bash
+kubectl create secret --namespace <namespace> generic <my_secret> \
+  --from-literal=protocol=SSL \
+  --from-file=ca.crt=<my_caroot.pem_file_path> \
+  --from-literal=user.skip=true
+```
+
+### Authentication and encryption using SSL
+
+```bash
+kubectl create secret --namespace <namespace> generic <my_secret> \
+  --from-literal=protocol=SSL \
+  --from-file=ca.crt=<my_caroot.pem_file_path> \
+  --from-file=user.crt=<my_cert.pem_file_path> \
+  --from-file=user.key=<my_key.pem_file_path>
+```
+
+_NOTE: `ca.crt` can be omitted to fallback to use system's root CA set._
+
 ## Kafka Producer configurations
 
 A Kafka Producer is the component responsible for sending events to the Apache Kafka cluster.
