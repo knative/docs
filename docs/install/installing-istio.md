@@ -20,9 +20,9 @@ You need:
 
 ## Supported Istio versions
 
-The current known-to-be-stable version of Istio tested in conjunction with Knative is **v1.7.1**.
-Versions in the 1.7 line generally be fine too.
-Versions above the 1.7 line are under test but have not stabilized yet.
+The current known-to-be-stable version of Istio tested in conjunction with Knative is **v1.8.2**.
+Versions in the 1.7 line are generally fine too.
+1.8.0 and 1.8.1 have bugs that don't work with Knative.
 
 ## Installing Istio
 
