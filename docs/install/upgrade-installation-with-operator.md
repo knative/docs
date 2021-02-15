@@ -1,5 +1,5 @@
 ---
-title: "Upgrading your installation"
+title: "Upgrading your installation with Knative operator"
 weight: 21
 type: "docs"
 ---
