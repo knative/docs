@@ -1,6 +1,6 @@
 # Knative Serving API Specification
 
-Authors: [argent@google.com](mailto:argent@google.com),
+Authors: [evana@vmware.com](mailto:evana@vmware.com),
 [dangerd@google.com](mailto:dangerd@google.com)
 
 <table>
