@@ -1,7 +1,5 @@
 # Knative Serving API Specification
 
-Authors: [evana@vmware.com](mailto:evana@vmware.com),
-[dangerd@google.com](mailto:dangerd@google.com)
 
 <table>
   <tr>
@@ -2847,3 +2845,9 @@ Max: 1
   </tr>
 
 </table>
+
+## Authors
+
+[Dan Gerdesmeier](mailto:dangerd@google.com)
+[Doug Davis](dug@us.ibm.com)
+[Evan Anderson](mailto:evana@vmware.com),
