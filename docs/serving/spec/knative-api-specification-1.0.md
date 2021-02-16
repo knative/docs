@@ -2850,4 +2850,4 @@ Max: 1
 
 [Dan Gerdesmeier](mailto:dangerd@google.com)
 [Doug Davis](dug@us.ibm.com)
-[Evan Anderson](mailto:evana@vmware.com),
+[Evan Anderson](mailto:evana@vmware.com)
