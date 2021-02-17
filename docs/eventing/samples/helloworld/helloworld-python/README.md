@@ -159,7 +159,7 @@ folder) you're ready to build and deploy the sample app.
    docker push {username}/helloworld-python
    ```
 
-1. After the build has completed and the container is pushed to docker hub, you
+1. After the build has completed and the container is pushed to Docker Hub, you
    can deploy the sample application into your cluster. Ensure that the container image value
    in `sample-app.yaml` matches the container you built in the previous step. Apply
    the configuration using `kubectl`:
@@ -181,11 +181,10 @@ folder) you're ready to build and deploy the sample app.
         kubectl --namespace knative-samples get trigger helloworld-python
         ```
 ## Send and verify CloudEvents
-Once you have deployed the application and verified that the namespace, sample application and trigger are ready, let's send a CloudEvent.
+After you have deployed the application, and have verified that the namespace, sample application and trigger are ready, you can send a CloudEvent.
 
 ### Send CloudEvent to the Broker
-
-We can send an http request directly to the Broker with correct CloudEvent headers set.
+You can send an HTTP request directly to the Knative [broker](../../../broker-trigger.md) if the correct CloudEvent headers are set.
 
    1. Deploy a curl pod and SSH into it
       ```shell
@@ -235,10 +234,10 @@ Helloworld-python app logs the context and the msg of the above event, and repli
         {"msg":"Hi from Knative!"}
 
       ```
-  Play around with the CloudEvent attributes in the curl command and the trigger specification to understand how Triggers work.
+  Try the CloudEvent attributes in the curl command and the trigger specification to understand how [triggers](../../../broker-trigger.md#trigger) work.
 
 ## Verify reply from helloworld-python app
-`helloworld-python` app replies back with an event of `type= dev.knative.samples.hifromknative`, and `source=knative/eventing/samples/hello-world`. This event enters the eventing mesh via the Broker and can be delivered to other services using a Trigger
+The `helloworld-python` app replies with an event type `type= dev.knative.samples.hifromknative`, and source `source=knative/eventing/samples/hello-world`. The event enters the eventing mesh through the broker, and can be delivered to event sinks using a trigger
 
   1. Deploy a pod that receives any CloudEvent and logs the event to its output.
       ```shell
