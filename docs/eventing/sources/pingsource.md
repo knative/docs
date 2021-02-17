@@ -15,7 +15,7 @@ The PingSource source type is enabled by default when you install Knative Eventi
 
 ## Example
 
-This example shows how to send an event every second to a Event Display Service.
+This example shows how to send an event every minute to a Event Display Service.
 
 ### Creating a namespace
 
@@ -72,7 +72,7 @@ EOF
 ### Creating the PingSource
 
 You can now create the `PingSource` sending an event containing
-`{"message": "Hello world!"}` every second.
+`{"message": "Hello world!"}` every minute.
 
 {{< tabs name="create-source" default="YAML" >}}
 {{% tab name="YAML" %}}
