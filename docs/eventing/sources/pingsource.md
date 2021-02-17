@@ -72,7 +72,7 @@ EOF
 ### Creating the PingSource
 
 You can now create the `PingSource` sending an event containing
-`{"message": "Hello world!"}` every second.
+`{"message": "Hello world!"}` every minute.
 
 {{< tabs name="create-source" default="YAML" >}}
 {{% tab name="YAML" %}}
