@@ -15,7 +15,7 @@ The PingSource source type is enabled by default when you install Knative Eventi
 
 ## Example
 
-This example shows how to send an event every second to a Event Display Service.
+This example shows how to send an event every minute to a Event Display Service.
 
 ### Creating a namespace
 
