@@ -260,7 +260,7 @@ Helloworld-python app logs the context and the msg of the above event, and repli
           spec:
             containers:
               - name: helloworld-python
-                image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display
+                image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
       ---
       # Service that exposes event-display app.
       # This will be the subscriber for the Trigger
