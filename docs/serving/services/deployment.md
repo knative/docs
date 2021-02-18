@@ -42,5 +42,5 @@ metadata:
   namespace: knative-serving
 data:
 ...
-  progressDeadline: "10m"
+  progressDeadline: "600s"
 ...
