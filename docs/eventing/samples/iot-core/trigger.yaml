@@ -23,6 +23,4 @@ spec:
   template:
     spec:
       containers:
-      - # This corresponds to
-        # https://github.com/knative/eventing-contrib/blob/release-0.5/cmd/event_display/main.go
-        image: gcr.io/knative-releases/knative.dev/eventing-sources/cmd/event_display
+        image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display

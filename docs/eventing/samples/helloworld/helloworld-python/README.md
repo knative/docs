@@ -259,7 +259,7 @@ The `helloworld-python` app replies with an event type `type= dev.knative.sample
           spec:
             containers:
               - name: helloworld-python
-                image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display
+                image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
       ---
       # Service that exposes event-display app.
       # This will be the subscriber for the Trigger
