@@ -272,7 +272,7 @@ gopkg.in/yaml.v2
 # knative.dev/hack v0.0.0-20210203173706-8368e1f6eacf
 ## explicit
 knative.dev/hack
-# knative.dev/net-istio v0.20.1-0.20210211111923-d78daae8ad93
+# knative.dev/net-istio v0.20.1-0.20210219212303-59b2af9679f7
 ## explicit
 knative.dev/net-istio/third_party
 knative.dev/net-istio/third_party/istio-stable
