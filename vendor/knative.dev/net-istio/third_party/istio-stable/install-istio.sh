@@ -17,13 +17,13 @@
 source $(dirname $0)/../download-istio.sh
 
 # Download Istio
-download_istio 1.7.7
+download_istio 1.8.2
 trap cleanup_istio EXIT
 
-# Install Istio
-${ISTIO_DIR}/bin/istioctl install -f "$(dirname $0)/$1"
+${ISTIO_DIR}/bin/istioctl install -f "$(dirname $0)/$1" -y
 
+# Temporarily disable this (https://github.com/knative-sandbox/net-istio/issues/503)
 # Enable mTLS STRICT in mesh mode
-if [[ $MESH -eq 1 ]]; then
-  kubectl apply -f "$(dirname $0)/extra/global-mtls.yaml"
-fi
+# if [[ $MESH -eq 1 ]]; then
+#   kubectl apply -f "$(dirname $0)/extra/global-mtls.yaml"
+# fi

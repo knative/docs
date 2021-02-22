@@ -1099,10 +1099,11 @@ k8s.io/utils v0.0.0-20200324210504-a9aa75ae1b89/go.mod h1:sZAwmy6armz5eXlNoLmJcl
 k8s.io/utils v0.0.0-20200729134348-d5654de09c73/go.mod h1:jPW/WVKK9YHAvNhRxK0md/EJ228hCsBRufyofKtW8HA=
 knative.dev/hack v0.0.0-20210203173706-8368e1f6eacf h1:u4cY4jr2LYvhoz/1HBWEPsMiLkm0HMdDTfmmw1RE8zE=
 knative.dev/hack v0.0.0-20210203173706-8368e1f6eacf/go.mod h1:PHt8x8yX5Z9pPquBEfIj0X66f8iWkWfR0S/sarACJrI=
-knative.dev/net-istio v0.20.1-0.20210211111923-d78daae8ad93 h1:0yFVF+TkIUNTZGE6SbaBgyHrVtM/yI5s9C1rzHO9LeA=
-knative.dev/net-istio v0.20.1-0.20210211111923-d78daae8ad93/go.mod h1:AcZrCQtvvbLbiacGSsDO7kYvvlR5WlUAybKmGuVDKRg=
-knative.dev/networking v0.0.0-20210209171856-855092348016/go.mod h1:NQPUbkM8iJDoeOnSq/LnLfgIq8nID5uPEjstTPWujKE=
-knative.dev/pkg v0.0.0-20210208175252-a02dcff9ee26/go.mod h1:TJSdebQOWX5N2bszohOYVi0H1QtXbtlYLuMghAFBMhY=
+knative.dev/net-istio v0.20.1-0.20210219212303-59b2af9679f7 h1:gvSi8xifF84Bvgye0LjFECXNeNbJd7kqJ6+x8Clk3IM=
+knative.dev/net-istio v0.20.1-0.20210219212303-59b2af9679f7/go.mod h1:QyRaEKLeUgHuFi8g6HAy+4cquaNLYqD/9mhT+Nnqj1U=
+knative.dev/networking v0.0.0-20210216014426-94bfc013982b/go.mod h1:Crdn87hxdFd3Jj6PIyrjzGnr8OGHX35k5xo9jlOrjjA=
+knative.dev/pkg v0.0.0-20210215165523-84c98f3c3e7a/go.mod h1:TJSdebQOWX5N2bszohOYVi0H1QtXbtlYLuMghAFBMhY=
+knative.dev/pkg v0.0.0-20210216013737-584933f8280b/go.mod h1:TJSdebQOWX5N2bszohOYVi0H1QtXbtlYLuMghAFBMhY=
 pgregory.net/rapid v0.3.3/go.mod h1:UYpPVyjFHzYBGHIxLFoupi8vwk6rXNzRY9OMvVxFIOU=
 rsc.io/binaryregexp v0.2.0/go.mod h1:qTv7/COck+e2FymRvadv62gMdZztPaShugOCi3I+8D8=
 rsc.io/quote/v3 v3.1.0/go.mod h1:yEA65RcK8LyAZtP9Kv3t0HmxON59tX3rD+tICJqUlj0=
