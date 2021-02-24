@@ -43,7 +43,7 @@ We appreciate contributions to the docs, so if you open a PR we will help you ge
 
 ////
 This could use a pass to reduce the overhead for filing new issues,
-and to consolide items more easily during issue triage.
+and to consolidate items more easily during issue triage.
 ////
 
 Knative uses Github issues to track documentation issues and requests. If you see a problem with the documentation that you’re not sure how to fix, submit an issue using the following steps:
@@ -118,7 +118,7 @@ The https://github.com/kubernetes/test-infra/tree/master/prow/external-plugins/c
 
 === Tools and Style
 
-Knative documentation follows the https://developers.google.com/style/[Google Developer Documentation Style Guide]. Use this as a reference for writing style questions. use it as a reference for writing style questions.
+Knative documentation follows the https://developers.google.com/style/[Google Developer Documentation Style Guide]. Use this as a reference for writing style questions.
 
 Knative uses several sets of tools to manage pull requests (PR)s and issues in a more fine-grained way than GitHub permissions allow. In particular, you'll regularly interact with https://github.com/kubernetes/test-infra/tree/master/prow[Prow] to categorize and manage issues and PRs. Prow allows control of specific GitHub functionality without granting full "write" access to the repo (which would allow rewriting history and other dangerous operations). You'll most often use the following commands, but Prow will also chime in on most bugs and PRs with a link to all the known commands:
 
