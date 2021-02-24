@@ -16,6 +16,7 @@ The Knative Serving operator can be configured with these options:
 - [Cluster local gateway](#configuration-of-cluster-local-gateway)
 - [High availability](#high-availability)
 - [System Resource Settings](#system-resource-settings)
+- [Override system deployments](#override-system-deployments)
 
 ## Version Configuration
 
@@ -411,3 +412,31 @@ spec:
       memory: 250Mi
       ephemeral-storage: 4Gi
 ```
+
+## Override system deployments
+
+If you would like to override some configurations for a specific deployment, you can override the configuration by using `spec.deployments` in CR.
+Currently `replicas`, `labels` and `annotations` are supported.
+
+For example, the following KnativeServing resource overrides the `webhook` to have `3` replicass, `mylabel: foo` labels and `myannotataions: bar` annotations,
+while other system deployments have `2` replicas by `spec.high-availability`.
+
+```
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: ks
+  namespace: knative-serving
+spec:
+  high-availability:
+    replicas: 2
+  deployments:
+  - name: webhook
+    replicas: 3
+    labels:
+      mylabel: foo
+    annotations:
+      myannotataions: bar
+```
+
+**NOTE:** The labels and annotations settings override webhook's labels and annotations in deployment and pod both.
