@@ -582,7 +582,7 @@ Failed messages are delivered here.</p>
 <h3 id="duck.knative.dev/v1.DeliverySpec">DeliverySpec
 </h3>
 <p>
-(<em>Appears on:</em><a href="#duck.knative.dev/v1.ChannelableSpec">ChannelableSpec</a>, <a href="#duck.knative.dev/v1.SubscriberSpec">SubscriberSpec</a>, <a href="#eventing.knative.dev/v1.BrokerSpec">BrokerSpec</a>, <a href="#flows.knative.dev/v1.ParallelBranch">ParallelBranch</a>, <a href="#flows.knative.dev/v1.SequenceStep">SequenceStep</a>, <a href="#messaging.knative.dev/v1.SubscriptionSpec">SubscriptionSpec</a>)
+(<em>Appears on:</em><a href="#duck.knative.dev/v1.ChannelableSpec">ChannelableSpec</a>, <a href="#duck.knative.dev/v1.SubscriberSpec">SubscriberSpec</a>, <a href="#eventing.knative.dev/v1.BrokerSpec">BrokerSpec</a>, <a href="#eventing.knative.dev/v1.TriggerSpec">TriggerSpec</a>, <a href="#eventing.knative.dev/v1beta1.TriggerSpec">TriggerSpec</a>, <a href="#flows.knative.dev/v1.ParallelBranch">ParallelBranch</a>, <a href="#flows.knative.dev/v1.SequenceStep">SequenceStep</a>, <a href="#messaging.knative.dev/v1.SubscriptionSpec">SubscriptionSpec</a>)
 </p>
 <p>
 <p>DeliverySpec contains the delivery options for event senders,
@@ -2511,8 +2511,9 @@ DeliverySpec
 </td>
 <td>
 <em>(Optional)</em>
-<p>Delivery is the delivery specification for Events within the Broker mesh.
-This includes things like retries, DLQ, etc.</p>
+<p>Delivery contains the delivery spec for each trigger
+to this Broker. Each trigger delivery spec, if any, overrides this
+global delivery spec.</p>
 </td>
 </tr>
 </table>
@@ -2633,6 +2634,20 @@ knative.dev/pkg/apis/duck/v1.Destination
 is required.</p>
 </td>
 </tr>
+<tr>
+<td>
+<code>delivery</code><br/>
+<em>
+<a href="#duck.knative.dev/v1.DeliverySpec">
+DeliverySpec
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Delivery contains the delivery spec for this specific trigger.</p>
+</td>
+</tr>
 </table>
 </td>
 </tr>
@@ -2693,8 +2708,9 @@ DeliverySpec
 </td>
 <td>
 <em>(Optional)</em>
-<p>Delivery is the delivery specification for Events within the Broker mesh.
-This includes things like retries, DLQ, etc.</p>
+<p>Delivery contains the delivery spec for each trigger
+to this Broker. Each trigger delivery spec, if any, overrides this
+global delivery spec.</p>
 </td>
 </tr>
 </tbody>
@@ -2841,6 +2857,20 @@ knative.dev/pkg/apis/duck/v1.Destination
 <td>
 <p>Subscriber is the addressable that receives events from the Broker that pass the Filter. It
 is required.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>delivery</code><br/>
+<em>
+<a href="#duck.knative.dev/v1.DeliverySpec">
+DeliverySpec
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Delivery contains the delivery spec for this specific trigger.</p>
 </td>
 </tr>
 </tbody>
@@ -3269,6 +3299,20 @@ knative.dev/pkg/apis/duck/v1.Destination
 is required.</p>
 </td>
 </tr>
+<tr>
+<td>
+<code>delivery</code><br/>
+<em>
+<a href="#duck.knative.dev/v1.DeliverySpec">
+DeliverySpec
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Delivery contains the delivery spec for this specific trigger.</p>
+</td>
+</tr>
 </table>
 </td>
 </tr>
@@ -3604,6 +3648,20 @@ knative.dev/pkg/apis/duck/v1.Destination
 <td>
 <p>Subscriber is the addressable that receives events from the Broker that pass the Filter. It
 is required.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>delivery</code><br/>
+<em>
+<a href="#duck.knative.dev/v1.DeliverySpec">
+DeliverySpec
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Delivery contains the delivery spec for this specific trigger.</p>
 </td>
 </tr>
 </tbody>
@@ -10363,7 +10421,7 @@ string
 </td>
 <td>
 <em>(Optional)</em>
-<p>DataBase64 is base64 encoded binary data used as the body of the event posted to the sink. Default is empty.
+<p>DataBase64 is the base64-encoded string of the actual event&rsquo;s body posted to the sink. Default is empty.
 Mutually exclusive with Data.</p>
 </td>
 </tr>
@@ -10478,7 +10536,7 @@ string
 </td>
 <td>
 <em>(Optional)</em>
-<p>DataBase64 is base64 encoded binary data used as the body of the event posted to the sink. Default is empty.
+<p>DataBase64 is the base64-encoded string of the actual event&rsquo;s body posted to the sink. Default is empty.
 Mutually exclusive with Data.</p>
 </td>
 </tr>
@@ -10525,5 +10583,5 @@ Source.</p>
 <hr/>
 <p><em>
 Generated with <code>gen-crd-api-reference-docs</code>
-on git commit <code>86bc23919</code>.
+on git commit <code>207aa2673</code>.
 </em></p>

@@ -23,10 +23,8 @@ Resource Types:
 <p>
 <p>PodAutoscaler is a Knative abstraction that encapsulates the interface by which Knative
 components instantiate autoscalers.  This definition is an abstraction that may be backed
-by multiple definitions.
-
-For more information on Knative Autoscalers and Pluggability,
-<a href="https://docs.google.com/presentation/d/10KWynvAJYuOEWy69VBa6bHJVCqIsz1TNdEKosNvcpPY/edit">see the Knative Pluggability presentation.</a></p>
+by multiple definitions.  For more information, see the Knative Pluggability presentation:
+<a href="https://docs.google.com/presentation/d/10KWynvAJYuOEWy69VBa6bHJVCqIsz1TNdEKosNvcpPY/edit">https://docs.google.com/presentation/d/10KWynvAJYuOEWy69VBa6bHJVCqIsz1TNdEKosNvcpPY/edit</a></p>
 </p>
 <table>
 <thead>
@@ -702,18 +700,14 @@ Resource Types:
 </li><li>
 <a href="#serving.knative.dev/v1.Service">Service</a>
 </li></ul>
-<p>For an overview of the different Resource Types in Knative Serving and how they interact with one another, see <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#configuration">this explanation of Resource Types</a></p>
-
 <h3 id="serving.knative.dev/v1.Configuration">Configuration
 </h3>
-
 <p>
 <p>Configuration represents the &ldquo;floating HEAD&rdquo; of a linear history of Revisions.
 Users create new Revisions by updating the Configuration&rsquo;s spec.
 The &ldquo;latest created&rdquo; revision&rsquo;s name is available under status, as is the
 &ldquo;latest ready&rdquo; revision&rsquo;s name.
-
-For more information on how Configuration interacts with other Resource Types, see the "Configuration" sub-heading <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#configuration">in the Resource Types Overview.</a></p>
+See also: <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#configuration">https://github.com/knative/serving/blob/master/docs/spec/overview.md#configuration</a></p>
 </p>
 <table>
 <thead>
@@ -807,8 +801,7 @@ ConfigurationStatus
 <p>Revision is an immutable snapshot of code and configuration.  A revision
 references a container image. Revisions are created by updates to a
 Configuration.</p>
-
-<p>For more information on how Revision interacts with other Resource Types, see  the "Revision" sub-heading <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#revision">in the Resource Types Overview.</a></p>
+<p>See also: <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#revision">https://github.com/knative/serving/blob/master/docs/spec/overview.md#revision</a></p>
 </p>
 <table>
 <thead>
@@ -903,9 +896,9 @@ int64
 </td>
 <td>
 <em>(Optional)</em>
-<p>TimeoutSeconds holds the max duration the instance is allowed for
-responding to a request.  If unspecified, a system default will
-be provided.</p>
+<p>TimeoutSeconds is the maximum duration in seconds that the request routing
+layer will wait for a request delivered to a container to begin replying
+(send network traffic). If unspecified, a system default will be provided.</p>
 </td>
 </tr>
 </table>
@@ -934,8 +927,7 @@ Some of the Revisions a Route distributes traffic over may be specified by
 referencing the Configuration responsible for creating them; in these cases
 the Route is additionally responsible for monitoring the Configuration for
 &ldquo;latest ready revision&rdquo; changes, and smoothly rolling out latest revisions.
-
-For more information on how Route interacts with other Resource Types, see the "Route" sub-heading <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#route">in the Resource Types Overview.</a></p>
+See also: <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#route">https://github.com/knative/serving/blob/master/docs/spec/overview.md#route</a></p>
 </p>
 <table>
 <thead>
@@ -1038,8 +1030,7 @@ underlying Routes and Configurations (much as a kubernetes Deployment
 orchestrates ReplicaSets), and its usage is optional but recommended.</p>
 <p>The Service&rsquo;s controller will track the statuses of its owned Configuration
 and Route, reflecting their statuses and conditions as its own.</p>
-
-<p>For more information on how Service interacts with other Resource Types, see the "Service" sub-heading <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#service">in the Resource Types Overview.</a></p>
+<p>See also: <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#service">https://github.com/knative/serving/blob/master/docs/spec/overview.md#service</a></p>
 </p>
 <table>
 <thead>
@@ -1365,9 +1356,9 @@ int64
 </td>
 <td>
 <em>(Optional)</em>
-<p>TimeoutSeconds holds the max duration the instance is allowed for
-responding to a request.  If unspecified, a system default will
-be provided.</p>
+<p>TimeoutSeconds is the maximum duration in seconds that the request routing
+layer will wait for a request delivered to a container to begin replying
+(send network traffic). If unspecified, a system default will be provided.</p>
 </td>
 </tr>
 </tbody>
@@ -1411,7 +1402,11 @@ string
 <td>
 <em>(Optional)</em>
 <p>ServiceName holds the name of a core Kubernetes Service resource that
-load balances over the pods backing this Revision.</p>
+load balances over the pods backing this Revision.
+Deprecated: revision service name is effectively equal to the revision name,
+as per #10540.
+0.23 — stop populating
+0.25 — remove.</p>
 </td>
 </tr>
 <tr>
@@ -1445,7 +1440,7 @@ If multiple containers specified then DeprecatedImageDigest holds the digest
 for serving container.
 DEPRECATED: Use ContainerStatuses instead.
 TODO(savitaashture) Remove deprecatedImageDigest.
-(see <a href="https://kubernetes.io/docs/reference/using-api/deprecation-policy">Kubernetes Deprecation Policy</a>) for deprecation.</p>
+ref <a href="https://kubernetes.io/docs/reference/using-api/deprecation-policy">https://kubernetes.io/docs/reference/using-api/deprecation-policy</a> for deprecation.</p>
 </td>
 </tr>
 <tr>
@@ -1464,7 +1459,7 @@ to their respective digests and their container name.
 The digests are resolved during the creation of Revision.
 ContainerStatuses holds the container name and image digests
 for both serving and non serving containers.
-See the  <a href="http://bit.ly/image-digests">Proposal for multiple containers in a revision</a> for some context on this field.</p>
+ref: <a href="http://bit.ly/image-digests">http://bit.ly/image-digests</a></p>
 </td>
 </tr>
 </tbody>
@@ -1476,7 +1471,7 @@ See the  <a href="http://bit.ly/image-digests">Proposal for multiple containers 
 </p>
 <p>
 <p>RevisionTemplateSpec describes the data a revision should have when created from a template.
-Based on <a href="https://github.com/kubernetes/api/blob/e771f807/core/v1/types.go#L3179-L3190">the PodTemplateSpec in Kubernetes</a></p>
+Based on: <a href="https://github.com/kubernetes/api/blob/e771f807/core/v1/types.go#L3179-L3190">https://github.com/kubernetes/api/blob/e771f807/core/v1/types.go#L3179-L3190</a></p>
 </p>
 <table>
 <thead>
@@ -1554,9 +1549,9 @@ int64
 </td>
 <td>
 <em>(Optional)</em>
-<p>TimeoutSeconds holds the max duration the instance is allowed for
-responding to a request.  If unspecified, a system default will
-be provided.</p>
+<p>TimeoutSeconds is the maximum duration in seconds that the request routing
+layer will wait for a request delivered to a container to begin replying
+(send network traffic). If unspecified, a system default will be provided.</p>
 </td>
 </tr>
 </table>
@@ -1718,7 +1713,7 @@ LatestReadyRevisionName that we last observed.</p>
 </tr>
 </thead>
 <tbody><tr><td><p>&#34;active&#34;</p></td>
-<td><p>RoutingStateActive is a state for a revision which are actively referenced by a Route.</p>
+<td><p>RoutingStateActive is a state for a revision which is actively referenced by a Route.</p>
 </td>
 </tr><tr><td><p>&#34;pending&#34;</p></td>
 <td><p>RoutingStatePending is a state after a revision is created, but before
@@ -2021,7 +2016,9 @@ Kubernetes meta/v1.ObjectMeta
 <td>
 <em>(Optional)</em>
 <p>Standard object&rsquo;s metadata.
-Refer to the <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#metadata">Kubernetes API documentation</a> for the fields of the <code>metadata</code> field.
+More info: <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#metadata">https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#metadata</a></p>
+Refer to the Kubernetes API documentation for the fields of the
+<code>metadata</code> field.
 </td>
 </tr>
 <tr>
@@ -2036,7 +2033,7 @@ DomainMappingSpec
 <td>
 <em>(Optional)</em>
 <p>Spec is the desired state of the DomainMapping.
-Refer to the <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#spec-and-status">Kubernetes API documentation</a> for more info on the <code>DomainMappingSpec</code> field.
+More info: <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#spec-and-status">https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#spec-and-status</a></p>
 <br/>
 <br/>
 <table>
@@ -2072,7 +2069,7 @@ DomainMappingStatus
 <td>
 <em>(Optional)</em>
 <p>Status is the current state of the DomainMapping.
-Refer to the <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#spec-and-status">Kubernetes API documentation</a> for more info on the <code>DomainMappingStatus</code> field.</p>
+More info: <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#spec-and-status">https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#spec-and-status</a></p>
 </td>
 </tr>
 </tbody>
@@ -2205,5 +2202,5 @@ knative.dev/pkg/apis/duck/v1.Addressable
 <hr/>
 <p><em>
 Generated with <code>gen-crd-api-reference-docs</code>
-on git commit <code>6dba44a70</code>.
+on git commit <code>b9576f56c</code>.
 </em></p>
