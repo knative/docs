@@ -110,7 +110,7 @@ The goal of adding new content is to get technically correct documentation into 
 
 === Refining and Reviewing Content
 
-Once the raw documentation has made it into the repo, tech writers and other communications experts will review and revise the documentation to make it easier to consume. This will be done as a second PR; it's often easier for the tech writers to clean up or rewrite a section of prose than to teach an engineer what to do, and most engineers would prefer to get back to working on code.
+Once the raw documentation has made it into the repo, tech writers and other communications experts will review and revise the documentation to make it easier to consume. This will be done as a second PR; it's often easier for the tech writers to clean up or rewrite a section of prose than to teach an engineer what to do, and most engineers trust the wordsmithing the tech writers produce more than their own.
 
 When revising the content, the tech writer will create a new PR and send it to the original author to ensure that the content is technically correct; they may also ask a few clarifying questions, or add details such as diagrams or notes if needed. It's not necessarily expected that tech writers will actually execute the steps of a tutorial -- it's expected that the SME is responsible for a working tutorial or how-to.
 
