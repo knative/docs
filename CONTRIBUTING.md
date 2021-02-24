@@ -37,7 +37,7 @@ Knative requires the [Google CLA](https://cla.developers.google.com). Important:
 You must fill out the CLA with the same email address that you used to create
 your GitHub account.
 
-Once you are CLA’ed, we’ll be able to accept your pull requests. This is
+Once you are CLA'ed, we'll be able to accept your pull requests. This is
 necessary because you own the copyright to your changes, even after your
 contribution becomes part of this project. So this agreement simply gives us
 permission to use and redistribute your contributions as part of the project.
@@ -52,7 +52,7 @@ is unsupported because all commits from private accounts are sent from the
 
 <!-- This could use a pass to be more focused on what a PR submitter should do at the start of the process. -->
 
-Here’s what generally happens when you open a PR against the `knative/docs`
+Here's what generally happens when you open a PR against the `knative/docs`
 repo:
 
 1.  One of the assigned repo maintainers will triage the PR by assigning
@@ -87,7 +87,7 @@ areas to contribute before creating a PR.
 and to consolidate items more easily during issue triage. -->
 
 Knative uses Github issues to track documentation issues and requests. If you
-see a problem with the documentation that you’re not sure how to fix, submit an
+see a problem with the documentation that you're not sure how to fix, submit an
 issue using the following steps:
 
 1.  Check the [Knative docs issues list](https://github.com/knative/docs/issues)
@@ -96,7 +96,7 @@ issue using the following steps:
 2.  Use the [correct template](https://github.com/knative/docs/issues/new) for
     your new issue. There are two templates available:
 
-    - **Bug report**: If you’re reporting an error in the existing
+    - **Bug report**: If you're reporting an error in the existing
       documentation, use this template. This could be anything from broken
       samples to typos. When you create a bug report, include as many details as
       possible and include suggested fixes to the issue. If you know which
@@ -134,7 +134,7 @@ Knative documentation:
   first set of PRs. Examples:
 
   - What was difficult for you?
-  - Did you stumble on something because the steps weren’t clear?
+  - Did you stumble on something because the steps weren't clear?
   - Was a dependency not mentioned?
 
 ## Working group meetings
@@ -166,18 +166,18 @@ When writing new content, keep the following in mind:
 - If possible, follow the style/template of other documents of the same type.
 
 - Focus mostly on technical correctness; structure and language should be
-  roughly correct, but don’t need heavy review in this phase.
+  roughly correct, but don't need heavy review in this phase.
 
 The goal of adding new content is to get technically correct documentation into
 the repo before it is lost. Tech Writers may provide some quick guidance on
-getting documentation into the correct location, but won’t be providing a
+getting documentation into the correct location, but won't be providing a
 detailed list of items to change.
 
 ## Refining and Reviewing Content
 
 Once the raw documentation has made it into the repo, tech writers and other
 communications experts will review and revise the documentation to make it
-easier to consume. This will be done as a second PR; it’s often easier for the
+easier to consume. This will be done as a second PR; it's often easier for the
 tech writers to clean up or rewrite a section of prose than to teach an engineer
 what to do, and most engineers trust the wordsmithing the tech writers produce
 more than their own.
@@ -185,8 +185,8 @@ more than their own.
 When revising the content, the tech writer will create a new PR and send it to
 the original author to ensure that the content is technically correct; they may
 also ask a few clarifying questions, or add details such as diagrams or notes if
-needed. It’s not necessarily expected that tech writers will actually execute
-the steps of a tutorial — it’s expected that the SME is responsible for a
+needed. It's not necessarily expected that tech writers will actually execute
+the steps of a tutorial — it's expected that the SME is responsible for a
 working tutorial or how-to.
 
 # Tech Writer Guide
@@ -201,7 +201,7 @@ types.
 ## Documentation Structure
 
 **TODO: link to intended documentation layout.** A general warning about
-[Conway’s Law](https://en.wikipedia.org/wiki/Conway%27s_law): documents will
+[Conway's Law](https://en.wikipedia.org/wiki/Conway%27s_law): documents will
 naturally tend to be distributed by team that produced them. Try to fight this,
 and organize documents based on where the _reader_ will look for them. (i.e. all
 tutorials together, maybe with indications as to which components they use,
@@ -227,7 +227,7 @@ Knative attempts to
 By default, new documentation should be written on the `master` branch and then
 cherry-picked to the release branches if needed. Note that the default view of
 <https://knative.dev/> is of the most recent release branch, which means that
-changes to `master` don’t show up unless explicitly cherrypicked. This also
+changes to `master` don't show up unless explicitly cherrypicked. This also
 means that documentation changes for a release _should be made during the
 development cycle_, rather than at the last minute or after the release.
 
@@ -243,12 +243,12 @@ Knative documentation follows the
 Use this as a reference for writing style questions.
 
 Knative uses several sets of tools to manage pull requests (PR)s and issues in a
-more fine-grained way than GitHub permissions allow. In particular, you’ll
+more fine-grained way than GitHub permissions allow. In particular, you'll
 regularly interact with
 [Prow](https://github.com/kubernetes/test-infra/tree/master/prow) to categorize
 and manage issues and PRs. Prow allows control of specific GitHub functionality
 without granting full "write" access to the repo (which would allow rewriting
-history and other dangerous operations). You’ll most often use the following
+history and other dangerous operations). You'll most often use the following
 commands, but Prow will also chime in on most bugs and PRs with a link to all
 the known commands:
 
@@ -282,13 +282,13 @@ related content, or external-facing user content.
 
 - _Documentation_: Includes content that is component specific and relevant only
   to contributors of a given component. Contributor focused documentation is
-  located in the corresponding `docs` folder of that component’s repository. For
+  located in the corresponding `docs` folder of that component's repository. For
   example, if you contribute code to the Knative Serving component, you might
   need to add contributor focused information into the `docs` folder of the
   [knative/serving repo](https://github.com/knative/serving/tree/master/docs/).
 
 - _Code samples_: Includes contributor related code or samples. Code or samples
-  that are contributor focused also belong in their corresponding component’s
+  that are contributor focused also belong in their corresponding component's
   repo. For example, Eventing specific test code is located in the
   [knative/eventing tests](https://github.com/knative/eventing/tree/master/test)
   folder.
@@ -325,12 +325,12 @@ related content, or external-facing user content.
       `docs/[*component*]/samples` folders must align with (and pass) the
       [`e2e` tests](https://github.com/knative/docs/tree/master/test).
 
-  - **Community owned and maintained samples**: For sample code which doesn’t
+  - **Community owned and maintained samples**: For sample code which doesn't
     meet the above criteria, put the code in a separate repository and link to
     it [from this document](community/samples/README.md). These samples might
     not receive regular maintenance. It is possible that a sample is no longer
     current and is not actively maintained by its original author. While we
-    encourage a contributor to maintain their content, we acknowledge that it’s
+    encourage a contributor to maintain their content, we acknowledge that it's
     not always possible for certain reasons, for example other commitments and
     time constraints.
 
