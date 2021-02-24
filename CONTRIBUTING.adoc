@@ -23,23 +23,6 @@ Once you are CLA’ed, we’ll be able to accept your pull requests. This is nec
 
 Note: Your contributions are verified using the email address for which you use to sign the CLA. Therefore, https://help.github.com/en/articles/setting-your-commit-email-address[setting your GitHub account to private] is unsupported because all commits from private accounts are sent from the `noreply` email address.
 
-=== Reporting Issues
-
-////
-This could use a pass to reduce the overhead for filing new issues,
-and to consolide items more easily during issue triage.
-////
-
-Knative uses Github issues to track documentation issues and requests. If you see a problem with the documentation that you’re not sure how to fix, submit an issue using the following steps:
-
-. Check the https://github.com/knative/docs/issues[Knative docs issues list] before creating an issue to avoid making a duplicate.
-. Use the https://github.com/knative/docs/issues/new[correct template] for your new issue. There are two templates available:
-* *Bug report*: If you’re reporting an error in the existing documentation, use this template. This could be anything from broken samples to typos. When you create a bug report, include as many details as possible and include suggested fixes to the issue. If you know which Knative component your bug is related to, you can assign the appropriate https://github.com/knative/community/blob/master/working-groups/WORKING-GROUPS.md[Working Group Lead].
-* *Feature request*: For upcoming changes to the documentation or requests for more information on a particular subject.
-
-Note that code issues should be filed against the http://github.com/knative[individual Knative repositories], while documentation issues should go in the https://github.com/knative/docs/issues[`knative/docs` repo]. If the issue is specific to the https://knative.dev website, open the issue in the https://github.com/knative/website/issues[`knative/website` repo].
-
-
 === Fixing Issues (Pull Requests)
 
 ////
@@ -56,41 +39,40 @@ Here’s what generally happens when you open a PR against the `knative/docs` re
 
 We appreciate contributions to the docs, so if you open a PR we will help you get it merged. You can also post in the `#docs` https://knative.slack.com/[Slack channel] to get input on your ideas or find areas to contribute before creating a PR.
 
+=== Reporting Issues
+
+////
+This could use a pass to reduce the overhead for filing new issues,
+and to consolide items more easily during issue triage.
+////
+
+Knative uses Github issues to track documentation issues and requests. If you see a problem with the documentation that you’re not sure how to fix, submit an issue using the following steps:
+
+. Check the https://github.com/knative/docs/issues[Knative docs issues list] before creating an issue to avoid making a duplicate.
+. Use the https://github.com/knative/docs/issues/new[correct template] for your new issue. There are two templates available:
+* *Bug report*: If you’re reporting an error in the existing documentation, use this template. This could be anything from broken samples to typos. When you create a bug report, include as many details as possible and include suggested fixes to the issue. If you know which Knative component your bug is related to, you can assign the appropriate https://github.com/knative/community/blob/master/working-groups/WORKING-GROUPS.md[Working Group Lead].
+* *Feature request*: For upcoming changes to the documentation or requests for more information on a particular subject.
+
+Note that code issues should be filed against the http://github.com/knative[individual Knative repositories], while documentation issues should go in the https://github.com/knative/docs/issues[`knative/docs` repo]. If the issue is specific to the https://knative.dev website, open the issue in the https://github.com/knative/website/issues[`knative/website` repo].
+
 == Getting involved
 
 There are a couple of different ways to get started with contributing to the Knative documentation:
 
 * Look for a https://github.com/knative/docs/labels/kind%2Fgood-first-issue[Good First Issue] in the backlog.
 
-* Try out Knative and send us feedback. For example, run through the link:./docs/install/[install guides] and then try link:./docs/serving/getting-started-knative-app.md[Getting Started with Knative Serving] or link:./docs/eventing/getting-started.md[Getting Started With Eventing].
+* Try out Knative and https://github.com/knative/docs/issues/new?template=docs-feature-request.md[send us feedback]. For example, run through the link:./docs/install/[install guides] and then try link:./docs/serving/getting-started-knative-app.md[Getting Started with Knative Serving] or link:./docs/eventing/getting-started.md[Getting Started With Eventing].
 +
-Keep a https://devrel.net/developer-experience/an-introduction-to-friction-logging[friction log] of your experience and then use that to open your first set of PRs. Examples:
+Keep a https://devrel.net/developer-experience/an-introduction-to-friction-logging[friction log] of your experience and attach it to a feature request, or use it to open your first set of PRs. Examples:
 ** What was difficult for you?
 ** Did you stumble on something because the steps weren’t clear?
 ** Was a dependency not mentioned?
-
-*A few pointers and other considerations*
-
-* Think about how you can improve the documentation as a whole. For example, how can you fix the issue you found so that others don’t run into the same challenges?
-* Are there multiple places the issue could be fixed?
-** Are there other pages that you should apply your update?
-** Would it help if there was a link to more or related information on a page? On a related page?
-* Was the title or description misleading? Did you expect to find something different in that docs section?
-* If you find something and don’t have the bandwidth to open a PR, make us aware of the pain point and open an https://github.com/knative/docs/issues/new[Issue]
 
 === Working group meetings
 
 The https://github.com/knative/community/blob/master/working-groups/WORKING-GROUPS.md#documentation[Knative Documentation Working Group] meets biweekly on Tuesdays at 9:30am PT. https://calendar.google.com/calendar/embed?src=knative.team_9q83bg07qs5b9rrslp5jor4l6s%40group.calendar.google.com[Click here] to see the exact dates on the Knative working group calendar.
 
 The Working Group meetings are used to discuss documentation strategy and policy; we expect individual PR review to happen mostly asynchronously via GitHub, and https://slack.knative.dev[Slack].
-
-=== Team interface
-
-Documentation is a collaboration between several different disciplines, including engineers writing code, technical writers providing clarity and structure, product managers and marketers providing vision and comparisons, and readers who may contribute ideas and requests for clarification or additional edits.
-
-With many different types of contributors, it’s useful to establish a ``team API'' or process for the contributors interacting. Note that this ``API contract'' is a living document, and records the current best practices for operating efficiently across timezones without requiring too much coordination.
-
-Generally, we expect the tech writing team to own much of the process and results of the documentation process, harnessing the energy of other contributors and using tech writers as expert resources to improve the quality of existing documentation rather than writing content from scratch.
 
 == Workflow
 
@@ -104,7 +86,7 @@ When writing new content, keep the following in mind:
 
 * Write one <<type of documentation>> per page.
 * If possible, follow the style/template of other documents of the same type.
-* Focus mostly on technical correctness; structure and language should be roughly correct, but don't need heavy review.
+* Focus mostly on technical correctness; structure and language should be roughly correct, but don't need heavy review in this phase.
 
 The goal of adding new content is to get technically correct documentation into the repo before it is lost. Tech Writers may provide some quick guidance on getting documentation into the correct location, but won't be providing a detailed list of items to change.
 
@@ -116,7 +98,6 @@ When revising the content, the tech writer will create a new PR and send it to t
 
 == Tech Writer Guide
 
-
 === Type of documentation
 
 Keep in mind the audience (Developers or Administrators) and type of document when organizing and reviewing documentation. See https://documentation.divio.com/ for a more in-depth discussion of documentation types.
@@ -124,6 +105,8 @@ Keep in mind the audience (Developers or Administrators) and type of document wh
 === Documentation Structure
 
 TODO: link to intended documentation layout. A general warning about https://en.wikipedia.org/wiki/Conway%27s_law[Conway's Law]: documents will naturally tend to be distributed by team that produced them. Try to fight this, and organize documents based on where the _reader_ will look for them. (i.e. all tutorials together, maybe with indications as to which components they use, rather than putting all serving tutorials in one place)
+
+Note that some reference documentation may be automatically generated and checked in to the docs repo. This _should_ be indicated by both a `README.md` in the top-level directory where the generation happens, and by a header at the top of the documentation. The `README.md` should include documentation on the original source material for the documentation as well as the commands needed to regenerate the documentation. If possible, the generation of documentation the should be performed automatically via nightly (GitHub actions) automation.
 
 In some cases, the right place for a document may not be on the docs website -- a blog post, documentation within a code repo, or a vendor site may be the right place. Be generous with offering to link to such locations; documents in the main documentation come with an ongoing cost of keeping up to date.
 
@@ -144,18 +127,6 @@ Knative uses several sets of tools to manage pull requests (PR)s and issues in a
 * Both Prow (legacy) and GitHub actions (preferred) can run tests on PRs; once all tests are passing and a PR has the `lgtm` and `approved` labels, Prow will submit the PR automatically.
 * You can also use Prow to manage labels on PRs with `/kind ...`, `/good-first-issue`, or `/area ...`
 * See <<branches>> for details on the `/cherrypick` command.
-
-[NOTE]
-====
-As an experimental process, tag tech writer rewritten documents with `reviewed: $DATE` (fill in the date of starting the PR). This allows finding documents which have not been reviewed with the `find` command (Mac and Linux):
-[source,shell]
-----
-find docs -type f -exec /bin/bash -c 'head -1 {} | grep ^--- >/dev/null && grep -L reviewed: {}' \;
-----
-(This currently finds all documents, but as docs are reviewed, will become more useful.)
-In the future, we may also be able to use this metadata to provide freshness information on the website.
-
-====
 
 == Engineer Guide
 
