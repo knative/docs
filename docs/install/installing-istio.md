@@ -128,11 +128,11 @@ spec:
 EOF
 ```
 
-After you install the cluster local gateway, your service and deployment for the local gateway are both named `cluster-local-gateway`.
+After you install the cluster local gateway, your service and deployment for the local gateway is named `knative-local-gateway`.
 
 ### Updating the `config-istio` configmap to use a non-default local gateway
 
-If you create a custom service and deployment for local gateway with a name other than `cluster-local-gateway`, you
+If you create a custom service and deployment for local gateway with a name other than `knative-local-gateway`, you
 need to update gateway configmap `config-istio` under the `knative-serving` namespace.
 
 1. Edit the `config-istio` configmap:
@@ -149,16 +149,16 @@ custom-local-gateway.istio-system.svc.cluster.local
 ```
 
 As an example, if both the custom service and deployment are labeled with `custom: custom-local-gateway`, not the default
-`istio: cluster-local-gateway`, you must update gateway instance `cluster-local-gateway` in the `knative-serving` namespace:
+`istio: knative-local-gateway`, you must update gateway instance `knative-local-gateway` in the `knative-serving` namespace:
 
 ```shell
-kubectl edit gateway cluster-local-gateway -n knative-serving
+kubectl edit gateway knative-local-gateway -n knative-serving
 ```
 
 Replace the label selector with the label of your service:
 
 ```
-istio: cluster-local-gateway
+istio: knative-local-gateway
 ```
 
 For the service above, it should be updated to:
@@ -168,7 +168,7 @@ custom: custom-local-gateway
 ```
 
 If there is a change in service ports (compared to that of
-`cluster-local-gateway`), update the port info in the gateway accordingly.
+`knative-local-gateway`), update the port info in the gateway accordingly.
 
 ### Verifying your Istio install
 
@@ -192,7 +192,6 @@ To do this, begin by looking up the external IP address that Istio received:
 ```
 $ kubectl get svc -nistio-system
 NAME                    TYPE           CLUSTER-IP   EXTERNAL-IP    PORT(S)                                      AGE
-cluster-local-gateway   ClusterIP      10.0.2.216   <none>         15020/TCP,80/TCP,443/TCP                     2m14s
 istio-ingressgateway    LoadBalancer   10.0.2.24    34.83.80.117   15020:32206/TCP,80:30742/TCP,443:30996/TCP   2m14s
 istio-pilot             ClusterIP      10.0.3.27    <none>         15010/TCP,15011/TCP,8080/TCP,15014/TCP       2m14s
 ```

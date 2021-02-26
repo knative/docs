@@ -287,10 +287,12 @@ The following commands install Kourier and enable its Knative integration.
 
       <!-- This indentation is important for things to render properly. -->
 
-   {{< tabs name="serving_dns" >}} {{% tab name="Magic DNS (xip.io)" %}} We ship
-   a simple Kubernetes Job called "default domain" that will (see caveats)
-   configure Knative Serving to use <a href="http://xip.io">xip.io</a> as the
-   default DNS suffix.
+   {{< tabs name="serving_dns" default="Magic DNS (xip.io)" >}}
+   {{% tab name="Magic DNS (xip.io)" %}}
+
+We ship a simple Kubernetes Job called "default domain" that will (see caveats)
+configure Knative Serving to use <a href="http://xip.io">xip.io</a> as the
+default DNS suffix.
 
 ```bash
 kubectl apply --filename {{< artifact repo="serving" file="serving-default-domain.yaml" >}}
@@ -298,9 +300,13 @@ kubectl apply --filename {{< artifact repo="serving" file="serving-default-domai
 
 **Caveat**: This will only work if the cluster LoadBalancer service exposes an
 IPv4 address or hostname, so it will not work with IPv6 clusters or local setups
-like Minikube. For these, see "Real DNS" or "Temporary DNS". {{< /tab >}}
+like Minikube. For these, see "Real DNS" or "Temporary DNS".
 
-{{% tab name="Real DNS" %}} To configure DNS for Knative, take the External IP
+{{< /tab >}}
+
+{{% tab name="Real DNS" %}}
+
+To configure DNS for Knative, take the External IP
 or CNAME from setting up networking, and configure it with your DNS provider as
 follows:
 
@@ -332,7 +338,9 @@ kubectl patch configmap/config-domain \
 
 {{< /tab >}}
 
-{{% tab name="Temporary DNS" %}} If you are using `curl` to access the sample
+{{% tab name="Temporary DNS" %}}
+
+If you are using `curl` to access the sample
 applications, or your own Knative app, and are unable to use the "Magic DNS
 (xip.io)" or "Real DNS" methods, there is a temporary approach. This is useful
 for those who wish to evaluate Knative without altering their DNS configuration,
@@ -374,9 +382,7 @@ To access your application using `curl` using this method:
 
 Refer to the "Real DNS" method for a permanent solution.
 
-{{< /tab >}}
-
-{{< /tabs >}}
+{{< /tab >}} {{< /tabs >}}
 
 1. Monitor the Knative components until all of the components show a `STATUS` of
    `Running` or `Completed`:
@@ -389,7 +395,9 @@ At this point, you have a basic installation of Knative Serving!
 
 ### Optional Serving extensions
 
-{{< tabs name="serving_extensions" >}} {{% tab name="HPA autoscaling" %}}
+{{< tabs name="serving_extensions" default="TLS via HTTP01" >}}
+
+{{% tab name="HPA autoscaling" %}}
 
 Knative also supports the use of the Kubernetes Horizontal Pod Autoscaler (HPA)
 for driving autoscaling decisions. The following command will install the
