@@ -16,14 +16,15 @@ A new version of Knative is now available across multiple components.
 Follow the instructions in the documentation [Installing Knative](https://knative.dev/docs/install/) for the respective component.
 
 #### Table of Contents
-- [Serving v0.21](#serving-v020)
-- [Eventing v0.21](#eventing-v020)
+- [Serving v0.21](#serving-v021)
+- [Eventing v0.21](#eventing-v021)
 - Eventing Extensions
     - [Eventing RabbitMQ v0.21](#eventing-rabbitmq-v021)
     - [Eventing Kafka Source, Channel v0.21](#eventing-kafka-source-channel-v021)
     - [Eventing Kafka Broker v0.21](#eventing-kafka-broker-v021)
-- [CLI v0.21](#client-v020)
-- [Operator v0.21](#operator-v020)
+- `kn` [CLI v0.21](#client-v021)
+    - `kn` [CLI Plugins](#cli-plugins)
+- [Operator v0.21](#operator-v021)
 - [Thank you contributors v0.21](#thank-you-contributors-v0.21)
 
 
@@ -35,6 +36,7 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
 - Fix for DomainMapping when using Kourier with AutoTLS
 - Eventing Source **PingSource** binary mode has breaking changes.
 - Eventing sync has the ability to know when to reply, see the [event reply header contract](https://github.com/knative/eventing/blob/release-0.21/docs/spec/data-plane.md#event-reply-contract) specification for more details.
+- The CLI `kn` 0.21.0 comes with some bug fixes and minor feature enhancements. It's mostly a polishing release. It is also the first release that brings two kn plugins to the Knative release train.
 
 
 
@@ -168,7 +170,50 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
 
 ### Client v0.21
 
+#### 🚨 Breaking or Notable
+
+**Revision naming**
+
+In this version, kn changes the default of how revisions are named. Up to now, the name was selected by the client itself, leveraging the "bring-your-own" (BYO) revision name support of Knative serving.
+
+However, it turned out that this mode has several severe drawbacks:
+
+- If you create a service with client-side revision naming, you have to provide a new revision name on every update. This is especially tedious if using other clients than kn, like editing the resource directly in the cluster or you tools like the OpenShift Developer console. Assuming that kn is the only client to be used is a bit of a too bold attitude.
+- `SinkBinding` [do not work with BYO revision names](https://github.com/knative/serving/issues/9544)
+- `kn service apply` can't use client-generated revision names, so kn service apply ignore `--revision-name` option and always uses server-side generated revision names. The same is true if you want to use `kubectl apply` after you have created a service with BYO revision name mode with `kn`.
+- Revision name's are random and do not reflect a certain generational order as for server-side generated revision names
+- There are issues with new revision created when updated with the same image name again (see [#398](https://github.com/knative/client/issues/398#issuecomment-779654440))
+
+Please refer to issue [#1144](https://github.com/knative/client/issues/1144) (and issues referencing this issue) for more details about the reasoning for this breaking change.
+
+**ACTION REQUIRED**
+
+If you rely on client-side revision naming, you have to add `--revision-name {{.Service}}-{{.Random 5}}-{{.Generation}}` to `kn service create` to get back the previous default behaviour. However, in most of all cases, you shound not worry about whether the revision names are created by `kn` or by the Knative serving controller.
+
+In case of issues with this change, please let us know and we will fix it asap. We are committed to supporting you with any issues caused by this change.
+
+#### 💫 New Features & Changes
+
+- Options `--context` and `--cluster` allow you to select the parameters for connecting to your Kubernetes cluster. Those options work the same as for kubectl.
+- Some cleanup of cluster-specific runtime information when doing a kn export.
+
+
 ### CLI Plugins
+
+#### 💫 New Features & Changes
+
+CLI `kn` [Plugins](https://github.com/knative/client/blob/master/docs/plugins/README.md) jump on the release train
+
+With release v0.21, Knative ships also it first set of kn plugins, that are aligned with respect to their dependencies, so that they can be easily [inlined](https://github.com/knative/client/blob/master/docs/plugins/README.md#plugin-inlining).
+
+The plugins included in version `v0.21` are:
+
+- [kn-plugin-admin](https://github.com/knative-sandbox/kn-plugin-admin) for managing Knative installations that are running on Kubernetes | [download](https://github.com/knative-sandbox/kn-plugin-admin/releases/tag/v0.21.0)
+- [kn-plugin-source-kafka](https://github.com/knative-sandbox/kn-plugin-source-kafka) for managing a Kafka Source that has been installed via [eventing-kafka](https://github.com/knative-sandbox/eventing-kafka) on the backend | [download](https://github.com/knative-sandbox/kn-plugin-source-kafka/releases/tag/v0.21.0)
+
+To give those plugins a try, just download them and put the binary into your execution path. You then get help with kn admin --help and kn source kafka --help, respectively.
+
+
 
 #### 💫 New Features & Changes
 
