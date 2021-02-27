@@ -19,7 +19,9 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
 - [Serving v0.21](#serving-v020)
 - [Eventing v0.21](#eventing-v020)
 - Eventing Extensions
-    - [Eventing Kafka Source v0.21](#eventing-kafka-source-v020)
+    - [Eventing RabbitMQ v0.21](#eventing-rabbitmq-v021)
+    - [Eventing Kafka Source, Channel v0.21](#eventing-kafka-source-channel-v021)
+    - [Eventing Kafka Broker v0.21](#eventing-kafka-broker-v021)
 - [CLI v0.21](#client-v020)
 - [Operator v0.21](#operator-v020)
 - [Thank you contributors v0.21](#thank-you-contributors-v0.21)
