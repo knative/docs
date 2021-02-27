@@ -243,41 +243,40 @@ The latest network ingress v0.21.0 artifacts, bundled within the image of this o
 
 ### Thank you contributors v0.21
 
-https://github.com/csantanapr
-https://github.com/whaught
-https://github.com/Harwayne
-https://github.com/julz
-https://github.com/senthilnathan
-https://github.com/shinigambit
-https://github.com/vagababov
-https://github.com/arturenault
-https://github.com/mattmoor
-https://github.com/markusthoemmes
-https://github.com/skonto
-https://github.com/eclipselu
-https://github.com/matzew
-https://github.com/zhongduo
-https://github.com/Shashankft9
-https://github.com/travis-minke-sap
-https://github.com/grac3gao
-https://github.com/xtreme-sameer-vohra
-https://github.com/slinkydeveloper
-https://github.com/vaikas
-https://github.com/lionelvillard
-https://github.com/devguyio
-https://github.com/larhauga
-https://github.com/matzew
-https://github.com/aliok
-https://github.com/pierDipi
-https://github.com/evankanderson
-https://github.com/dsimansk
-https://github.com/cardil
-https://github.com/navidshaikh
-https://github.com/rhuss
-https://github.com/nak3
-https://github.com/skonto
-https://github.com/houshengbo
-https://github.com/BbolroC
+- [BbolroC](https://github.com/BbolroC)
+- [Harwayne](https://github.com/Harwayne)
+- [Shashankft9](https://github.com/Shashankft9)
+- [aliok](https://github.com/aliok)
+- [arturenault](https://github.com/arturenault)
+- [cardil](https://github.com/cardil)
+- [csantanapr](https://github.com/csantanapr)
+- [devguyio](https://github.com/devguyio)
+- [dsimansk](https://github.com/dsimansk)
+- [eclipselu](https://github.com/eclipselu)
+- [evankanderson](https://github.com/evankanderson)
+- [grac3gao](https://github.com/grac3gao)
+- [houshengbo](https://github.com/houshengbo)
+- [julz](https://github.com/julz)
+- [larhauga](https://github.com/larhauga)
+- [lionelvillard](https://github.com/lionelvillard)
+- [markusthoemmes](https://github.com/markusthoemmes)
+- [mattmoor](https://github.com/mattmoor)
+- [matzew](https://github.com/matzew)
+- [matzew](https://github.com/matzew)
+- [nak3](https://github.com/nak3)
+- [navidshaikh](https://github.com/navidshaikh)
+- [pierDipi](https://github.com/pierDipi)
+- [rhuss](https://github.com/rhuss)
+- [senthilnathan](https://github.com/senthilnathan)
+- [shinigambit](https://github.com/shinigambit)
+- [skonto](https://github.com/skonto)
+- [slinkydeveloper](https://github.com/slinkydeveloper)
+- [travis-minke-sap](https://github.com/travis-minke-sap)
+- [vagababov](https://github.com/vagababov)
+- [vaikas](https://github.com/vaikas)
+- [whaught](https://github.com/whaught)
+- [xtreme-sameer-vohra](https://github.com/xtreme-sameer-vohra)
+- [zhongduo](https://github.com/zhongduo)
 
 ### Learn more
 
