@@ -164,7 +164,7 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
 - Consume topic from the earliest offset ([#557](https://github.com/knative-sandbox/eventing-kafka-broker/pull/557))
 - Fix offset management ([#557](https://github.com/knative-sandbox/eventing-kafka-broker/pull/557))
 - Data plane reconciler handles failed reconciliation. ([#568](https://github.com/knative-sandbox/eventing-kafka-broker/pull/568))
-- Fix TimeoutException and DnsNameResolverTimeoutException. (#539](https://github.com/knative-sandbox/eventing-kafka-broker/pull/539))
+- Fix TimeoutException and DnsNameResolverTimeoutException. ([#539](https://github.com/knative-sandbox/eventing-kafka-broker/pull/539))
 
 ### Client v0.21
 
