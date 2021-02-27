@@ -213,14 +213,6 @@ The plugins included in version `v0.21` are:
 
 To give those plugins a try, just download them and put the binary into your execution path. You then get help with kn admin --help and kn source kafka --help, respectively.
 
-
-
-#### 💫 New Features & Changes
-
-#### 🧹 Clean up
-
-#### Other CLI Features
-
 ### Operator v0.21
 
 #### 🐞 Bug Fixes
@@ -255,8 +247,10 @@ https://github.com/matzew
 https://github.com/aliok
 https://github.com/pierDipi
 https://github.com/evankanderson
-
-
+https://github.com/dsimansk
+https://github.com/cardil
+https://github.com/navidshaikh
+https://github.com/rhuss
 
 
 
