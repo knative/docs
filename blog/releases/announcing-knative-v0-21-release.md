@@ -28,6 +28,7 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
 - [Thank you contributors v0.21](#thank-you-contributors-v0.21)
 
 
+
 ### Highlights
 
 - Kubernetes minimum version has changed to v1.18
@@ -37,7 +38,8 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
 - Eventing Source **PingSource** binary mode has breaking changes.
 - Eventing sync has the ability to know when to reply, see the [event reply header contract](https://github.com/knative/eventing/blob/release-0.21/docs/spec/data-plane.md#event-reply-contract) specification for more details.
 - The CLI `kn` 0.21.0 comes with some bug fixes and minor feature enhancements. It's mostly a polishing release. It is also the first release that brings two kn plugins to the Knative release train.
-
+- The Knative Operator now supports net-kourier
+- The Knative Opertor now supports a version of `latest` as a special version supported by the operator
 
 
 ### Serving v0.21
@@ -215,12 +217,33 @@ To give those plugins a try, just download them and put the binary into your exe
 
 ### Operator v0.21
 
+#### 💫 New Features & Changes
+
+The latest network ingress v0.21.0 artifacts, bundled within the image of this operator, include net-istio.yaml, net-contour.yaml and kourier.yaml.
+
+- Allow to configure Kourier gateway service-type ([#470](https://github.com/knative/operator/pull/470))
+- Adds support for extension custom manifests ([#468](https://github.com/knative/operator/pull/468))
+- Add HA support for autoscaler ([#480](https://github.com/knative/operator/pull/480))
+- Support spec.deployments to override configuration of system deployments ([#472](https://github.com/knative/operator/pull/472))
+- Add ha eventing master ([#444](https://github.com/knative/operator/pull/444))
+
 #### 🐞 Bug Fixes
+
+- Transition to the new upgrade framework for upgrade tests ([#437](https://github.com/knative/operator/pull/437))
+- Add ingress configuration support ([#312](https://github.com/knative/operator/pull/312))
 
 #### 🧹 Clean up
 
+- Add `latest` as a special version supported by the operator ([#443](https://github.com/knative/operator/pull/443))
+- Rewrite the tests for serving and eventing upgrade ([#441](https://github.com/knative/operator/pull/441))
+- Allow to specify build platform for test images ([#451](https://github.com/knative/operator/pull/451))
+- Bump a few assorted dependencies to their latest versions ([#463](https://github.com/knative/operator/pull/463))
+- Align all used YAML modules ([#462](https://github.com/knative/operator/pull/462))
+- Move istio gateway's override setting into spec.ingress.istio ([#469](https://github.com/knative/operator/pull/469))
+
 ### Thank you contributors v0.21
 
+https://github.com/csantanapr
 https://github.com/whaught
 https://github.com/Harwayne
 https://github.com/julz
@@ -251,8 +274,10 @@ https://github.com/dsimansk
 https://github.com/cardil
 https://github.com/navidshaikh
 https://github.com/rhuss
-
-
+https://github.com/nak3
+https://github.com/skonto
+https://github.com/houshengbo
+https://github.com/BbolroC
 
 ### Learn more
 
