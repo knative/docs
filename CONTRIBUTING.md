@@ -1,3 +1,6 @@
+(This guide only appears on GitHub, not the website, because it
+**intentionally** does not include YAML front-matter.)
+
 - [Your first contribution](#your-first-contribution)
   - [Code of conduct](#code-of-conduct)
   - [Contributor license agreements](#contributor-license-agreements)
