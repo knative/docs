@@ -272,7 +272,7 @@ To set up custom ingress gateway, follow [**Step 1: Create Gateway Service and D
 
 ### Step 2: Update the Knative gateway
 
-Update `spec.knative-ingress-gateway` to select the labels of the new ingress gateway:
+Update `spec.ingress.istio.knative-ingress-gateway` to select the labels of the new ingress gateway:
 
 ```
 apiVersion: operator.knative.dev/v1alpha1
@@ -281,9 +281,12 @@ metadata:
   name: knative-serving
   namespace: knative-serving
 spec:
-  knative-ingress-gateway:
-    selector:
-      custom: ingressgateway
+  ingress:
+    istio:
+      enabled: true
+      knative-ingress-gateway:
+        selector:
+          custom: ingressgateway
 ```
 
 ### Step 3: Update Gateway ConfigMap
@@ -297,9 +300,12 @@ metadata:
   name: knative-serving
   namespace: knative-serving
 spec:
-  knative-ingress-gateway:
-    selector:
-      custom: ingressgateway
+  ingress:
+    istio:
+      enabled: true
+      knative-ingress-gateway:
+        selector:
+          custom: ingressgateway
   config:
     istio:
       gateway.knative-serving.knative-ingress-gateway: "custom-ingressgateway.istio-system.svc.cluster.local"
@@ -309,19 +315,19 @@ The key in `spec.config.istio` is in the format of `gateway.{{gateway_namespace}
 
 ## Configuration of cluster local gateway
 
-Update `spec.cluster-local-gateway` to select the labels of the new cluster-local ingress gateway:
+Update `spec.ingress.istio.knative-local-gateway` to select the labels of the new cluster-local ingress gateway:
 
 ### Default local gateway name:
 
 Go through the guide [here](./../installing-istio.md/#installing-istio-without-sidecar-injection) to use local cluster gateway,
-if you use the default gateway called `cluster-local-gateway`.
+if you use the default gateway called `knative-local-gateway`.
 
 ### Non-default local gateway name:
 
-If you create custom local gateway with a name other than `cluster-local-gateway`, update `config.istio` and the
-`cluster-local-gateway` selector:
+If you create custom local gateway with a name other than `knative-local-gateway`, update `config.istio` and the
+`knative-local-gateway` selector:
 
-This example shows a service and deployment `custom-local-gateway` in the namespace `istio-system`, with the
+This example shows a service and deployment `knative-local-gateway` in the namespace `istio-system`, with the
 label `custom: custom-local-gw`:
 
 ```
@@ -331,12 +337,15 @@ metadata:
   name: knative-serving
   namespace: knative-serving
 spec:
-  cluster-local-gateway:
-    selector:
-      custom: custom-local-gateway
+  ingress:
+    istio:
+      enabled: true
+      knative-local-gateway:
+        selector:
+          custom: custom-local-gateway
   config:
     istio:
-      local-gateway.knative-serving.cluster-local-gateway: "custom-local-gateway.istio-system.svc.cluster.local"
+      local-gateway.knative-serving.knative-local-gateway: "custom-local-gateway.istio-system.svc.cluster.local"
 ```
 
 ## High availability
