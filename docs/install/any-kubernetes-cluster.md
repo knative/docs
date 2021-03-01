@@ -1,6 +1,6 @@
 ---
-title: "Installing Knative"
-weight: 06
+title: "YAML-based installation"
+weight: 01
 type: "docs"
 aliases:
   - /docs/install/knative-with-any-k8s
@@ -17,36 +17,17 @@ aliases:
   - /docs/install/knative-with-minikube
   - /docs/install/knative-with-minishift
   - /docs/install/knative-with-pks
+showlandingtoc: "false"
 ---
 
-This guide walks you through the installation of the latest version of Knative.
-Note if you are upgrading an existing installation, follow the
-[instructions here](./upgrade-installation.md).
+You can install Knative by applying YAML files using the `kubectl` CLI.
 
-Knative has two components, which can be installed and used independently or
-together. To help you pick and choose the pieces that are right for you, here is
-a brief description of each:
+## Prerequisites
 
-- [**Serving**](#installing-the-serving-component) provides an
-  abstraction for stateless request-based scale-to-zero services.
-- [**Eventing**](#installing-the-eventing-component) provides
-  abstractions to enable binding event sources (e.g. Github Webhooks, Kafka) and
-  consumers (e.g. Kubernetes or Knative Services).
-
-<!-- TODO: Mention CLI here too and point to CLI docs?-->
-
-## Before you begin
-
-This guide assumes that you want to install an upstream Knative release on a
-Kubernetes cluster. A growing number of vendors have managed Knative offerings;
-see the [Knative Offerings](../knative-offerings.md) page for a full list.
-
-Knative {{< version >}} requires a Kubernetes cluster v1.17 or newer, as well as
-a compatible `kubectl`. This guide assumes that you've already created a
-Kubernetes cluster, and that you are using bash in a Mac or Linux environment;
-some commands will need to be adjusted for use in a Windows environment.
-
-<!-- TODO: Link to provisioning guide for advanced installation -->
+- You have a cluster that uses Kubernetes v1.17 or newer.
+- You have installed the [`kubectl` CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
+- If you have only one node in your cluster, you will need at least 6 CPUs, 6 GB of memory, and 30 GB of disk storage.
+- If you have multiple nodes in your cluster, for each node you will need at least 2 CPUs, 4 GB of memory, and 20 GB of disk storage.
 
 ## Installing the Serving component
 
@@ -493,13 +474,6 @@ kubectl apply --filename {{< artifact repo="serving" file="serving-domainmapping
 
 {{< /tab >}} {{< /tabs >}}
 
-### Getting started with Serving
-
-Deploy your first app with the
-[getting started with Knative app deployment](../serving/getting-started-knative-app.md)
-guide. You can also find a number of samples for Knative Serving
-[here](../serving/samples/).
-
 ## Installing the Eventing component
 
 1. Install the
@@ -850,9 +824,3 @@ To learn more about the VMware sources and bindings, try
 {{< /tab >}}
 
 {{< /tabs >}}
-
-### Getting started with Eventing
-
-You can find a number of samples for Knative Eventing
-[here](../eventing/samples/README.md). A quick-start guide is available
-[here](../eventing/getting-started.md).
