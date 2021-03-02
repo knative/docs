@@ -35,12 +35,12 @@ You must place the executable binary in your system path, and make sure that it 
    cd client/
    ```
 1. Build an executable binary:
-  
+
    ```bash
    hack/build.sh -f
    ```
 1. Move `kn` into your system path, and verify that `kn` commands are working properly. For example:
-  
+
    ```bash
    kn version
    ```
