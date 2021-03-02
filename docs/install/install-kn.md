@@ -29,18 +29,21 @@ You must place the executable binary in your system path, and make sure that it 
 ## Install `kn` using Go
 **Prerequisite:** Building `kn` requires Go v1.14 or newer. You will first need a working Go environment.
 1. Check out the [Client repository](https://github.com/knative/client):
-  ```bash
-  git clone https://github.com/knative/client.git
-  cd client/
-  ```
+
+   ```bash
+   git clone https://github.com/knative/client.git
+   cd client/
+   ```
 1. Build an executable binary:
-  ```bash
-  hack/build.sh -f
-  ```
+
+   ```bash
+   hack/build.sh -f
+   ```
 1. Move `kn` into your system path, and verify that `kn` commands are working properly. For example:
-  ```bash
-  kn version
-  ```
+
+   ```bash
+   kn version
+   ```
 
 ## Install `kn` using brew
 
@@ -56,6 +59,7 @@ Links to either the nightly container image or the latest stable container image
 - [Latest release](https://gcr.io/knative-releases/knative.dev/client/cmd/kn)
 
 You can run `kn` from a container image. For example:
+
   ```bash
   docker run --rm -v "$HOME/.kube/config:/root/.kube/config" gcr.io/knative-releases/knative.dev/client/cmd/kn:latest service list
   ```
