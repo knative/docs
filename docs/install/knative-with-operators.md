@@ -1,84 +1,74 @@
 ---
-title: "Installing Knative components using Operator"
-weight: 10
+title: "Knative Operator installation"
+weight: 02
 type: "docs"
+showlandingtoc: "false"
 ---
 
-Knative provides an [operator](https://github.com/knative/operator) as a tool to install, configure and manage Knative. The Knative operator leverages custom objects
-in the cluster to define and manage the installed Knative software. This guide explains how to install and uninstall
-Knative using Knative operator.
+Knative provides a [Kubernetes Operator](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/) to install, configure and manage Knative.
 
-## Before you begin
-
-Knative installation using the Operator requires the following:
-
-- A Kubernetes cluster v1.16 or newer, as well as a compatible kubectl. This guide assumes that you've already created
-a Kubernetes cluster. If you have only one node for your cluster, set CPUs to at least 6, Memory to at least 6.0 GB,
-Disk storage to at least 30 GB. If you have multiple nodes for your cluster, set CPUs to at least 2, Memory to at least
-4.0 GB, Disk storage to at least 20 GB for each node.
-- The Kubernetes cluster must be able to access the internet, since the Knative operator downloads images online.
-- [Download and install Istio](./installing-istio.md).
-
-## Limitations of Knative Operator:
-
-Knative Operator is still in Alpha phase. It has not been tested in a production environment, and should be used
+**NOTE:** The Knative Operator is still in Alpha phase. It has not been tested in a production environment, and should be used
 for development or test purposes only.
 
-## Install Knative with the Knative Operator
+## Prerequisites
 
-You can find the release information of Knative Operator on the [Releases page](https://github.com/knative/operator/releases).
+- You have a cluster that uses Kubernetes v1.17 or newer.
+- You have installed the `kubectl` CLI.
+- If you have only one node in your cluster, you will need at least 6 CPUs, 6 GB of memory, and 30 GB of disk storage.
+- If you have multiple nodes in your cluster, for each node you will need at least 2 CPUs, 4 GB of memory, and 20 GB of disk storage.
+- Your Kubernetes cluster must have access to the internet, since the Knative Operator must download images.
+- You have installed [Istio](./installing-istio.md).
 
-### Installing the Knative Operator
+## Installing the latest release
 
-__From releases__:
+You can find the release information about the Knative Operator on the [Releases page](https://github.com/knative/operator/releases).
 
-Install the latest Knative operator with the following command:
+To install the latest stable Operator release, enter:
 
 ```
 kubectl apply -f {{< artifact org="knative" repo="operator" file="operator.yaml" >}}
 ```
 
-__From source code__:
+## Installing from source
 
-You can also install Knative Operator from source using `ko`.
+You can install the Knative Operator from the source code using the [ko](https://github.com/google/ko) build tool.
 
-1. Install the [ko](https://github.com/google/ko) build tool.
-1. Download the source code using the following command:
+1. Download the source code:
 
-```
-git clone https://github.com/knative/operator.git
-```
+    ```
+    git clone https://github.com/knative/operator.git
+    ```
 
-1. Install the operator in the root directory of the source using the following command:
+1. Install the Operator in the root directory of the source:
 
-```
-ko apply -f config/
-```
+    ```
+    ko apply -f config/
+    ```
 
-### Verify the operator installation
+## Verify your installation
 
-Verify the installation of Knative Operator using the command:
+Verify your installation:
 
 ```
 kubectl get deployment knative-operator
 ```
 
-If the operator is installed correctly, the deployment should show a `Ready` status. Here is a sample output:
+If the operator is installed correctly, the deployment shows a `Ready` status:
 
 ```
 NAME               READY   UP-TO-DATE   AVAILABLE   AGE
 knative-operator   1/1     1            1           19h
 ```
 
-### Track the log
+## Track the log
 
-Use the following command to track the log of the operator:
+Track the log of the operator:
 
 ```
 kubectl logs -f deploy/knative-operator
 ```
 
-### Installing the Knative Serving component
+## Installing the Knative Serving component
 
 1. Create and apply the Knative Serving CR:
 
@@ -579,7 +569,7 @@ Refer to the "Real DNS" method for a permanent solution.
    kubectl get pods --namespace knative-serving
    ```
 
-### Installing the Knative Eventing component
+## Installing the Knative Eventing component
 
 1. Create and apply the Knative Eventing CR:
 
