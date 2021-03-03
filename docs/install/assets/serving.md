@@ -4,7 +4,7 @@
 | --- | --- | --- |
 | serving-core.yaml | Knative Serving core components. | serving-crds.yaml |
 | serving-crds.yaml | Knative Serving core CRDs. | none |
-| serving-default-domain.yaml | Configures Knative Serving to use [http://xip.io](xip.io) as the default DNS suffix. | serving-core.yaml |
+| serving-default-domain.yaml | Configures Knative Serving to use [http://xip.io](http://xip.io) as the default DNS suffix. | serving-core.yaml |
 | serving-domainmapping-crds.yaml | CRDs required by the Domain Mapping feature. | none |
 | serving-domainmapping.yaml | Componnents required by the Domain Mapping feature. | serving-domainmapping-crds.yaml |
 | serving-hpa.yaml | Components to autoscale Knative revisions through the Kubernetes Horizontal Pod Autoscaler. | serving-core.yaml |
