@@ -488,13 +488,6 @@ kubectl apply -f {{< artifact repo="serving" file="serving-domainmapping.yaml" >
    kubectl apply -f {{< artifact repo="eventing" file="eventing-core.yaml" >}}
    ```
 
-   _Note_: If your Kubernetes cluster comes with pre-installed Istio, make sure
-   it has `cluster-local-gateway`
-   [deployed](https://github.com/knative/serving/blob/master/DEVELOPMENT.md#deploy-istio).
-   Depending on which Istio version you have, you'd need to apply the
-   `istio-knative-extras.yaml` in the corresponding version folder at
-   [here](https://github.com/knative/serving/tree/{{< branch >}}/third_party).
-
 1. Install a default Channel (messaging) layer (alphabetical).
 
       <!-- This indentation is important for things to render properly. -->
