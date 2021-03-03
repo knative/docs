@@ -12,38 +12,23 @@ for development or test purposes only.
 
 ## Prerequisites
 
-- You have a cluster that uses Kubernetes v1.17 or newer.
+- You have a cluster that uses Kubernetes v1.18 or newer.
 - You have installed the `kubectl` CLI.
 - If you have only one node in your cluster, you will need at least 6 CPUs, 6 GB of memory, and 30 GB of disk storage.
 - If you have multiple nodes in your cluster, for each node you will need at least 2 CPUs, 4 GB of memory, and 20 GB of disk storage.
-- Your Kubernetes cluster must have access to the internet, since the Knative Operator must download images.
+- Your Kubernetes cluster must have access to the internet, since Kubernetes needs to be able to fetch images, such as `gcr.io/knative-releases/knative.dev/operator/cmd/operator:<version>`.
+<!--TODO: Verify these requirements-->
 - You have installed [Istio](./installing-istio.md).
 
 ## Installing the latest release
 
-You can find the release information about the Knative Operator on the [Releases page](https://github.com/knative/operator/releases).
+You can find information about the different released versions of the Knative Operator on the [Releases page](https://github.com/knative/operator/releases).
 
-To install the latest stable Operator release, enter:
+Install the latest stable Operator release:
 
 ```
 kubectl apply -f {{< artifact org="knative" repo="operator" file="operator.yaml" >}}
 ```
-
-## Installing from source
-
-You can install the Knative Operator from the source code using the [ko](https://github.com/google/ko) build tool.
-
-1. Download the source code:
-
-    ```
-    git clone https://github.com/knative/operator.git
-    ```
-
-1. Install the Operator in the root directory of the source:
-
-    ```
-    ko apply -f config/
-    ```
 
 ## Verify your installation
 

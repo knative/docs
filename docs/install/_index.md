@@ -13,7 +13,7 @@ You can install the Serving component, Eventing component, or both on your clust
 
 You can also [upgrade an existing Knative installation](./upgrade-installation).
 
-**NOTE:** Currently Knative instructions are only provided for Mac and Linux environments.
+**NOTE:** Knative installation instructions assume you are running Mac or Linux with a bash shell.
 <!-- TODO: Link to provisioning guide for advanced installation -->
 
 ## Next steps
