@@ -22,7 +22,7 @@ for development or test purposes only.
 
 ## Installing the latest release
 
-You can information about the different released versions of the Knative Operator on the [Releases page](https://github.com/knative/operator/releases).
+You can find information about the different released versions of the Knative Operator on the [Releases page](https://github.com/knative/operator/releases).
 
 Install the latest stable Operator release:
 
