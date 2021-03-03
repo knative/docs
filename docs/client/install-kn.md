@@ -1,12 +1,12 @@
 ---
-title: "Installing kn"
+title: "Setting up kn"
 weight: 10
 type: "docs"
 aliases:
   - /docs/install/install-kn
 ---
 
-This guide provides details about how you can install the Knative `kn` CLI.
+This guide provides details about how you can set up the Knative `kn` CLI.
 
 ## Install kn using a binary
 
@@ -51,7 +51,7 @@ Links to the latest nightly-built executable binaries are available here:
 
 For macOs, you can install `kn` by using <a href="https://github.com/knative/homebrew-client" target="_blank">brew</a>.
 
-## Installing kn using container images
+## Running kn using container images
 
 **WARNING:** Nightly container images include features which may not be included in the latest Knative release and are not considered to be stable.
 
@@ -65,6 +65,8 @@ You can run `kn` from a container image. For example:
 ```
 docker run --rm -v "$HOME/.kube/config:/root/.kube/config" gcr.io/knative-releases/knative.dev/client/cmd/kn:latest service list
 ```
+
+**NOTE:** Running `kn` from a container image does not place the binary on a permanent path. This procedure must be repeated each time you want to use `kn`.
 
 ## Using kn with Tekton
 
