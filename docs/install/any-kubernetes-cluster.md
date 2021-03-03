@@ -33,18 +33,16 @@ You can install Knative by applying YAML files using the `kubectl` CLI.
 
 ## Installing the Serving component
 
-1. Install the
-   [custom resource definitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
-   (CRDs):
+1. Install the required custom resources:
 
    ```bash
-   kubectl apply --filename {{< artifact repo="serving" file="serving-crds.yaml" >}}
+   kubectl apply -f {{< artifact repo="serving" file="serving-crds.yaml" >}}
    ```
 
 1. Install the core components of Serving (see below for optional extensions):
 
    ```bash
-   kubectl apply --filename {{< artifact repo="serving" file="serving-core.yaml" >}}
+   kubectl apply -f {{< artifact repo="serving" file="serving-core.yaml" >}}
    ```
 
 1. Pick a networking layer (alphabetical):
@@ -68,9 +66,9 @@ The following commands install Ambassador and enable its Knative integration.
 
    ```bash
    kubectl apply --namespace ambassador \
-     --filename https://getambassador.io/yaml/ambassador/ambassador-crds.yaml \
-     --filename https://getambassador.io/yaml/ambassador/ambassador-rbac.yaml \
-     --filename https://getambassador.io/yaml/ambassador/ambassador-service.yaml
+     -f https://getambassador.io/yaml/ambassador/ambassador-crds.yaml \
+     -f https://getambassador.io/yaml/ambassador/ambassador-rbac.yaml \
+     -f https://getambassador.io/yaml/ambassador/ambassador-service.yaml
    ```
 
 1. Give Ambassador the required permissions:
@@ -111,7 +109,7 @@ The following commands install Contour and enable its Knative integration.
 1. Install a properly configured Contour:
 
    ```bash
-   kubectl apply --filename {{< artifact repo="net-contour" file="contour.yaml" >}}
+   kubectl apply -f {{< artifact repo="net-contour" file="contour.yaml" >}}
    ```
 
    <!-- TODO(https://github.com/knative-sandbox/net-contour/issues/11): We need a guide on how to use/modify a pre-existing install. -->
@@ -119,7 +117,7 @@ The following commands install Contour and enable its Knative integration.
 1. Install the Knative Contour controller:
 
    ```bash
-   kubectl apply --filename {{< artifact repo="net-contour" file="net-contour.yaml" >}}
+   kubectl apply -f {{< artifact repo="net-contour" file="net-contour.yaml" >}}
    ```
 
 1. To configure Knative Serving to use Contour by default:
@@ -188,14 +186,14 @@ The following commands install Istio and enable its Knative integration.
 1. Install a properly configured Istio ([Advanced installation](./installing-istio.md))
 
    ```bash
-   kubectl apply --filename {{< artifact repo="net-istio" file="istio.yaml" >}}
+   kubectl apply -f {{< artifact repo="net-istio" file="istio.yaml" >}}
    ```
 
 
 1. Install the Knative Istio controller:
 
    ```bash
-   kubectl apply --filename {{< artifact repo="net-istio" file="net-istio.yaml" >}}
+   kubectl apply -f {{< artifact repo="net-istio" file="net-istio.yaml" >}}
    ```
 
 1. Fetch the External IP or CNAME:
@@ -215,7 +213,7 @@ The following commands install Kong and enable its Knative integration.
 1. Install Kong Ingress Controller:
 
    ```bash
-   kubectl apply --filename https://raw.githubusercontent.com/Kong/kubernetes-ingress-controller/0.9.x/deploy/single/all-in-one-dbless.yaml
+   kubectl apply -f https://raw.githubusercontent.com/Kong/kubernetes-ingress-controller/0.9.x/deploy/single/all-in-one-dbless.yaml
    ```
 
 1. To configure Knative Serving to use Kong by default:
@@ -244,7 +242,7 @@ The following commands install Kourier and enable its Knative integration.
 1. Install the Knative Kourier controller:
 
    ```bash
-   kubectl apply --filename {{< artifact repo="net-kourier" file="kourier.yaml" >}}
+   kubectl apply -f {{< artifact repo="net-kourier" file="kourier.yaml" >}}
    ```
 
 1. To configure Knative Serving to use Kourier by default:
@@ -278,7 +276,7 @@ configure Knative Serving to use <a href="http://xip.io">xip.io</a> as the
 default DNS suffix.
 
 ```bash
-kubectl apply --filename {{< artifact repo="serving" file="serving-default-domain.yaml" >}}
+kubectl apply -f {{< artifact repo="serving" file="serving-default-domain.yaml" >}}
 ```
 
 **Caveat**: This will only work if the cluster LoadBalancer service exposes an
@@ -387,7 +385,7 @@ for driving autoscaling decisions. The following command will install the
 components needed to support HPA-class autoscaling:
 
 ```bash
-kubectl apply --filename {{< artifact repo="serving" file="serving-hpa.yaml" >}}
+kubectl apply -f {{< artifact repo="serving" file="serving-hpa.yaml" >}}
 ```
 
 <!-- TODO(https://github.com/knative/docs/issues/2152): Link to a more in-depth guide on HPA-class autoscaling -->
@@ -407,7 +405,7 @@ via cert-manager.
 2. Next, install the component that integrates Knative with cert-manager:
 
    ```bash
-   kubectl apply --filename {{< artifact repo="net-certmanager" file="release.yaml" >}}
+   kubectl apply -f {{< artifact repo="net-certmanager" file="release.yaml" >}}
    ```
 
 3. Now configure Knative to
@@ -423,7 +421,7 @@ support that.
 1. First, install the `net-http01` controller:
 
    ```bash
-   kubectl apply --filename {{< artifact repo="net-http01" file="release.yaml" >}}
+   kubectl apply -f {{< artifact repo="net-http01" file="release.yaml" >}}
    ```
 
 2. Next, configure the `certificate.class` to use this certificate type.
@@ -455,7 +453,7 @@ certificate controller. The following command will install the components needed
 to provision wildcard certificates in each namespace:
 
 ```bash
-kubectl apply --filename {{< artifact repo="serving" file="serving-nscert.yaml" >}}
+kubectl apply -f {{< artifact repo="serving" file="serving-nscert.yaml" >}}
 ```
 
 > Note this will not work with HTTP01 either via cert-manager or the net-http01
@@ -469,27 +467,25 @@ The `DomainMapping` CRD allows a user to map a Domain Name that they own to a
 specific Knative Service.
 
 ```bash
-kubectl apply --filename {{< artifact repo="serving" file="serving-domainmapping-crds.yaml" >}}
+kubectl apply -f {{< artifact repo="serving" file="serving-domainmapping-crds.yaml" >}}
 kubectl wait --for=condition=Established --all crd
-kubectl apply --filename {{< artifact repo="serving" file="serving-domainmapping.yaml" >}}
+kubectl apply -f {{< artifact repo="serving" file="serving-domainmapping.yaml" >}}
 ```
 
 {{< /tab >}} {{< /tabs >}}
 
 ## Installing the Eventing component
 
-1. Install the
-   [Custom Resource Definitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
-   (aka CRDs):
+1. Install the required custom resources:
 
    ```bash
-   kubectl apply --filename {{< artifact repo="eventing" file="eventing-crds.yaml" >}}
+   kubectl apply -f {{< artifact repo="eventing" file="eventing-crds.yaml" >}}
    ```
 
 1. Install the core components of Eventing (see below for optional extensions):
 
    ```bash
-   kubectl apply --filename {{< artifact repo="eventing" file="eventing-core.yaml" >}}
+   kubectl apply -f {{< artifact repo="eventing" file="eventing-core.yaml" >}}
    ```
 
    _Note_: If your Kubernetes cluster comes with pre-installed Istio, make sure
@@ -514,7 +510,7 @@ kubectl apply --filename {{< artifact repo="serving" file="serving-domainmapping
    ```bash
    curl -L "{{< artifact org="knative-sandbox" repo="eventing-kafka" file="channel-consolidated.yaml" >}}" \
     | sed 's/REPLACE_WITH_CLUSTER_URL/my-cluster-kafka-bootstrap.kafka:9092/' \
-    | kubectl apply --filename -
+    | kubectl apply -f -
    ```
 
 To learn more about the Apache Kafka channel, try
@@ -528,7 +524,7 @@ To learn more about the Apache Kafka channel, try
 
    ```bash
    # This installs both the Channel and the GCP Sources.
-   kubectl apply --filename {{< artifact org="google" repo="knative-gcp" file="cloud-run-events.yaml" >}}
+   kubectl apply -f {{< artifact org="google" repo="knative-gcp" file="cloud-run-events.yaml" >}}
    ```
 
 To learn more about the Google Cloud Pub/Sub Channel, try
@@ -543,7 +539,7 @@ This implementation is nice because it is simple and standalone, but it is
 unsuitable for production use cases.
 
 ```bash
-kubectl apply --filename {{< artifact repo="eventing" file="in-memory-channel.yaml" >}}
+kubectl apply -f {{< artifact repo="eventing" file="in-memory-channel.yaml" >}}
 ```
 
 {{< /tab >}}
@@ -556,7 +552,7 @@ kubectl apply --filename {{< artifact repo="eventing" file="in-memory-channel.ya
 1. Then install the NATS Streaming Channel:
 
    ```bash
-   kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-natss" file="300-natss-channel.yaml" >}}
+   kubectl apply -f {{< artifact org="knative-sandbox" repo="eventing-natss" file="300-natss-channel.yaml" >}}
    ```
 
 {{< /tab >}}
@@ -577,13 +573,13 @@ The following commands install the Apache Kafka broker, and run event routing in
 1. Install the Kafka controller by entering the following command:
 
     ```bash
-    kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-kafka-broker" file="eventing-kafka-controller.yaml" >}}
+    kubectl apply -f {{< artifact org="knative-sandbox" repo="eventing-kafka-broker" file="eventing-kafka-controller.yaml" >}}
     ```
 
 1. Install the Kafka Broker data plane by entering the following command:
 
     ```bash
-    kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-kafka-broker" file="eventing-kafka-broker.yaml" >}}
+    kubectl apply -f {{< artifact org="knative-sandbox" repo="eventing-kafka-broker" file="eventing-kafka-broker.yaml" >}}
     ```
 
 For more information, see the [Kafka Broker](./../eventing/broker/kafka-broker.md) documentation.
@@ -596,7 +592,7 @@ Channels and runs event routing components in a System Namespace, providing a
 smaller and simpler installation.
 
 ```bash
-kubectl apply --filename {{< artifact repo="eventing" file="mt-channel-broker.yaml" >}}
+kubectl apply -f {{< artifact repo="eventing" file="mt-channel-broker.yaml" >}}
 ```
 
 To customize which broker channel implementation is used, update the following
@@ -685,13 +681,13 @@ At this point, you have a basic installation of Knative Eventing!
 1. Install the Kafka controller:
 
     ```bash
-    kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-kafka-broker" file="eventing-kafka-controller.yaml" >}}
+    kubectl apply -f {{< artifact org="knative-sandbox" repo="eventing-kafka-broker" file="eventing-kafka-controller.yaml" >}}
     ```
 
 1. Install the Kafka Sink data plane:
 
     ```bash
-    kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-kafka-broker" file="eventing-kafka-sink.yaml" >}}
+    kubectl apply -f {{< artifact org="knative-sandbox" repo="eventing-kafka-broker" file="eventing-kafka-sink.yaml" >}}
     ```
 
 For more information, see the [Kafka Sink](./../eventing/sink/kafka-sink.md) documentation.
@@ -705,7 +701,7 @@ For more information, see the [Kafka Sink](./../eventing/sink/kafka-sink.md) doc
 The following command installs the Eventing Sugar Controller:
 
 ```bash
-kubectl apply --filename {{< artifact repo="eventing" file="eventing-sugar-controller.yaml" >}}
+kubectl apply -f {{< artifact repo="eventing" file="eventing-sugar-controller.yaml" >}}
 ```
 
 The Knative Eventing Sugar Controller will react to special labels and
@@ -731,7 +727,7 @@ kubectl label namespace default eventing.knative.dev/injection=enabled
 The following command installs the single-tenant Github source:
 
 ```bash
-kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-github" file="github.yaml" >}}
+kubectl apply -f {{< artifact org="knative-sandbox" repo="eventing-github" file="github.yaml" >}}
 ```
 
 The single-tenant GitHub source creates one Knative service per GitHub source.
@@ -739,7 +735,7 @@ The single-tenant GitHub source creates one Knative service per GitHub source.
 The following command installs the multi-tenant GitHub source:
 
 ```bash
-kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-github" file="mt-github.yaml" >}}
+kubectl apply -f {{< artifact org="knative-sandbox" repo="eventing-github" file="mt-github.yaml" >}}
 ```
 
 The multi-tenant GitHub source creates only one Knative service handling all
@@ -756,7 +752,7 @@ To learn more about the Github source, try
 The following command installs the Apache Camel-K Source:
 
 ```bash
-kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-camel" file="camel.yaml" >}}
+kubectl apply -f {{< artifact org="knative-sandbox" repo="eventing-camel" file="camel.yaml" >}}
 ```
 
 To learn more about the Apache Camel-K source, try
@@ -769,7 +765,7 @@ To learn more about the Apache Camel-K source, try
 The following command installs the Apache Kafka Source:
 
 ```bash
-kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-kafka" file="source.yaml" >}}
+kubectl apply -f {{< artifact org="knative-sandbox" repo="eventing-kafka" file="source.yaml" >}}
 ```
 
 To learn more about the Apache Kafka source, try
@@ -783,7 +779,7 @@ The following command installs the GCP Sources:
 
 ```bash
 # This installs both the Sources and the Channel.
-kubectl apply --filename {{< artifact org="google" repo="knative-gcp" file="cloud-run-events.yaml" >}}
+kubectl apply -f {{< artifact org="google" repo="knative-gcp" file="cloud-run-events.yaml" >}}
 ```
 
 To learn more about the Cloud Pub/Sub source, try
@@ -805,7 +801,7 @@ To learn more about the Cloud Audit Logs source, try
 The following command installs the Apache CouchDB Source:
 
 ```bash
-kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-couchdb" file="couchdb.yaml" >}}
+kubectl apply -f {{< artifact org="knative-sandbox" repo="eventing-couchdb" file="couchdb.yaml" >}}
 ```
 
 To learn more about the Apache CouchDB source, read the [documentation](https://github.com/knative-sandbox/eventing-couchdb/blob/master/source/README.md).
@@ -817,7 +813,7 @@ To learn more about the Apache CouchDB source, read the [documentation](https://
 The following command installs the VMware Sources and Bindings:
 
 ```bash
-kubectl apply --filename {{< artifact org="vmware-tanzu" repo="sources-for-knative" file="release.yaml" >}}
+kubectl apply -f {{< artifact org="vmware-tanzu" repo="sources-for-knative" file="release.yaml" >}}
 ```
 
 To learn more about the VMware sources and bindings, try
