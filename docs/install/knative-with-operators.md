@@ -311,12 +311,6 @@ The following commands install Contour and enable its Knative integration.
    kubectl apply --filename {{< artifact repo="net-contour" file="contour.yaml" >}}
    ```
 
-1. Install the Knative Contour controller:
-
-   ```bash
-   kubectl apply --filename {{< artifact repo="net-contour" file="net-contour.yaml" >}}
-   ```
-
 1. To configure Knative Serving to use Contour, apply the content of the Serving CR as below:
 
    ```bash
@@ -327,6 +321,9 @@ The following commands install Contour and enable its Knative integration.
      name: knative-serving
      namespace: knative-serving
    spec:
+     ingress:
+       contour:
+         enabled: true
      config:
        network:
          ingress.class: "contour.ingress.networking.knative.dev"
@@ -382,12 +379,10 @@ The following commands install Gloo and enable its Knative integration.
    metadata:
      name: knative-serving
      namespace: knative-serving
-   spec:
-     ingress:
-       gloo:
-         enabled: true
    EOF
    ```
+
+   You do not need to configure the ingress class to use Gloo.
 
 1. Fetch the External IP or CNAME:
 
@@ -439,12 +434,6 @@ The following commands install Kong and enable its Knative integration.
 
 The following commands install Kourier and enable its Knative integration.
 
-1. Install the Knative Kourier controller:
-
-   ```bash
-   kubectl apply --filename {{< artifact repo="net-kourier" file="kourier.yaml" >}}
-   ```
-
 1. To configure Knative Serving to use Kourier, apply the content of the Serving CR as below:
 
    ```bash
@@ -455,6 +444,9 @@ The following commands install Kourier and enable its Knative integration.
      name: knative-serving
      namespace: knative-serving
    spec:
+     ingress:
+       kourier:
+         enabled: true
      config:
        network:
          ingress.class: "kourier.ingress.networking.knative.dev"
