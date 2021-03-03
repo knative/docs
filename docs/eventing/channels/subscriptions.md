@@ -44,7 +44,7 @@ This example command creates a channel named `mysubscription`, that routes event
       namespace: default
     spec:
       channel:
-        apiVersion: messaging.knative.dev/v1beta1
+        apiVersion: messaging.knative.dev/v1
         kind: Channel
         name: <channel_name> # Configuration settings for the channel that the subscription connects to.
       delivery:
