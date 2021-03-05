@@ -5,7 +5,7 @@ Note: It is possible that one or more samples might become outdated or the
 original author is unable to maintain their contribution. If you find that
 something isn't working, lend a helping hand and fix it in a PR.
 
-[Learn more about the lifespan of samples](https://knative.dev/community/contributing/docs/docs-contributing/#determining-where-to-add-user-focused-code-samples)
+[Learn more about the lifespan of samples](https://github.com/knative/docs/tree/master/CONTRIBUTING.md#user-focused-content)
 
 [**See all Knative code samples**](../../docs/samples.md)
 

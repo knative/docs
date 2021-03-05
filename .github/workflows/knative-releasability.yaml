@@ -36,8 +36,8 @@ jobs:
     env:
       #########################################
       #   Update this section each release.   #
-      RELEASE: 'v0.19'
-      SLACK_CHANNEL: 'release-19'
+      RELEASE: 'v0.21'
+      SLACK_CHANNEL: 'release-21'
       #########################################
 
     steps:
@@ -49,6 +49,9 @@ jobs:
           fi
           if [[ "${{ github.event.inputs.slackChannel }}" != "" ]]; then
             echo "SLACK_CHANNEL=${{ github.event.inputs.slackChannel }}" >> $GITHUB_ENV
+          fi
+          if [[ "${{ secrets.SLACK_WEBHOOK }}" != "" ]]; then
+            echo "SLACK_WEBHOOK=exists" >> $GITHUB_ENV
           fi
 
       - name: Set up Go 1.15.x
@@ -80,7 +83,7 @@ jobs:
           # The following pushes the stdout of buoy into $CHECK_MESSAGE
           CHECK=0
           echo 'CHECK_MESSAGE<<EOF' >> $GITHUB_ENV
-          buoy check go.mod --release ${RELEASE} --domain knative.dev --verbose >> $GITHUB_ENV || CHECK=$?
+          buoy check go.mod --release ${RELEASE} --domain knative.dev --verbose >> $GITHUB_ENV 2>&1 || CHECK=$?
           echo 'EOF' >> $GITHUB_ENV
 
           # We just captured the return code of the buoy call, test it to see
@@ -104,8 +107,25 @@ jobs:
       - name: Verify
         if: steps.exists.outputs.release-branch == 'false' && env.current == 'true'
         run: |
+          # If we don't run `git status` before the "git diff-index" it seems
+          # to list every file that's been touched by codegen.
+          git status
+          FOUND_DIFF=0
+          for x in $(git diff-index --name-only HEAD --); do
+            if [ "$(basename $x)" = "go.mod" ]; then
+              continue
+            elif [ "$(basename $x)" = "go.sum" ]; then
+              continue
+            elif [ "$(basename $x)" = "modules.txt" ]; then
+              continue
+            fi
+            echo "Found non-module diff: $x"
+            FOUND_DIFF=1
+            break
+          done
+
           # If we see no changes after the upgrade, then we are up to date.
-          if [[ -z "$(git status --porcelain)" ]]; then
+          if [[ "$FOUND_DIFF" -eq "0"  ]]; then
               echo "VERIFY_MESSAGE=${{ github.repository }} up to date." >> $GITHUB_ENV
           else
               echo "VERIFY_MESSAGE=${{ github.repository }} is out of date." >> $GITHUB_ENV
@@ -125,7 +145,8 @@ jobs:
           echo 'SLACK_TITLE=Releasability for ${{ github.repository }} @ ${{ env.RELEASE }} is NO-GO!' >> $GITHUB_ENV
 
       - name: Post status to Slack
-        if: steps.exists.outputs.release-branch == 'false'
+        # Note: using env.SLACK_WEBHOOK here because secrets are not allowed in the if block.
+        if: env.SLACK_WEBHOOK != '' && steps.exists.outputs.release-branch == 'false'
         uses: rtCamp/action-slack-notify@v2.1.0
         env:
           SLACK_ICON: http://github.com/knative.png?size=48
@@ -136,3 +157,11 @@ jobs:
             ${{ env.CHECK_MESSAGE }}
             ${{ env.VERIFY_MESSAGE }}
             For detailed logs: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+      - name: Fail if NO-GO
+        if: steps.exists.outputs.release-branch == 'false' && env.current == 'false'
+        run: |
+          # When we have figured out that things are NO-GO, we intentionally fail the job
+          # so that the status badge shows up red and we can use the badges to create a
+          # releasability dashboard for all of the repos.
+          exit 1

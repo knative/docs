@@ -1,0 +1,12 @@
+# Target dir
+**/target/
+
+# Idea files
+**/*.iml
+**/.idea/
+
+# Eclipse
+.settings/
+.classpath
+.project
+bin/

@@ -19,7 +19,7 @@ name: Code Style
 
 on:
   pull_request:
-    branches: [ 'master', 'release-*' ]
+    branches: [ 'main', 'master', 'release-*' ]
 
 jobs:
 
@@ -57,8 +57,14 @@ jobs:
 
       - name: ${{ matrix.tool }} ${{ matrix.options }}
         shell: bash
-        run: |
-          ${{ matrix.tool }} ${{ matrix.options }} -w $(find . -path './vendor' -prune -o -path './third_party' -prune -o -name '*.pb.go' -prune -o -type f -name '*.go' -print)
+        run: >
+          ${{ matrix.tool }} ${{ matrix.options }} -w
+          $(find .
+          -path './vendor' -prune
+          -o -path './third_party' -prune
+          -o -name '*.pb.go' -prune
+          -o -name 'wire_gen.go' -prune
+          -o -type f -name '*.go' -print)
 
       - name: Verify ${{ matrix.tool }}
         shell: bash
@@ -94,7 +100,7 @@ jobs:
 
       - name: Install Tools
         env:
-          WOKE_VERSION: v0.1.15
+          WOKE_VERSION: v0.5.0
         run: |
           TEMP_PATH="$(mktemp -d)"
           cd $TEMP_PATH
@@ -121,7 +127,7 @@ jobs:
         if: steps.golangci_configuration.outputs.files_exists == 'true'
         uses: golangci/golangci-lint-action@v2
         with:
-          version: v1.32
+          version: v1.35
 
       - name: misspell
         shell: bash
@@ -135,7 +141,12 @@ jobs:
           echo '::group:: Running github.com/client9/misspell with reviewdog 🐶 ...'
           # Don't fail because of misspell
           set +o pipefail
-          find . -type f -not -path './vendor/*' -not -path './third_party/*' -not -path './.git/*' |
+          # Exclude generated and vendored files, plus some legacy
+          # paths until we update all .gitattributes
+          git ls-files |
+          git check-attr --stdin linguist-generated | grep -Ev ': (set|true)$' | cut -d: -f1 |
+          git check-attr --stdin linguist-vendored | grep -Ev ': (set|true)$' | cut -d: -f1 |
+          grep -Ev '^(vendor/|third_party/|.git)' |
           xargs misspell -error |
           reviewdog -efm="%f:%l:%c: %m" \
                 -name="github.com/client9/misspell" \
@@ -158,7 +169,13 @@ jobs:
           echo '::group:: Flagging trailing whitespace with reviewdog 🐶 ...'
           # Don't fail because of grep
           set +o pipefail
-          find . -type f -not -path './vendor/*' -not -path './third_party/*' -not -path './.git/*' |
+          
+          # Exclude generated and vendored files, plus some legacy
+          # paths until we update all .gitattributes
+          git ls-files |
+          git check-attr --stdin linguist-generated | grep -Ev ': (set|true)$' | cut -d: -f1 |
+          git check-attr --stdin linguist-vendored | grep -Ev ': (set|true)$' | cut -d: -f1 |
+          grep -Ev '^(vendor/|third_party/|.git)' |
           xargs grep -nE " +$" |
           reviewdog -efm="%f:%l:%m" \
                 -name="trailing whitespace" \
@@ -186,7 +203,13 @@ jobs:
           #  - nothing in third_party
           #  - nothing in .git/
           #  - no *.ai (Adobe Illustrator) files.
-          for x in $(find . -type f -not -name '*.ai' -not -path './vendor/*' -not -path './third_party/*' -not -path './.git/*'); do
+          LINT_FILES=$(git ls-files |
+          git check-attr --stdin linguist-generated | grep -Ev ': (set|true)$' | cut -d: -f1 |
+          git check-attr --stdin linguist-vendored | grep -Ev ': (set|true)$' | cut -d: -f1 |
+          grep -Ev '^(vendor/|third_party/|.git)' |
+          grep -v '\.ai$')
+
+          for x in $LINT_FILES; do
             # Based on https://stackoverflow.com/questions/34943632/linux-check-if-there-is-an-empty-line-at-the-end-of-a-file
             if [[ -f $x && ! ( -s "$x" && -z "$(tail -c 1 $x)" ) ]]; then
               # We add 1 to `wc -l` here because of this limitation (from the man page):
@@ -201,52 +224,6 @@ jobs:
                 -fail-on-error="true" \
                 -level="error"
 
-          echo '::endgroup::'
-
-      - name: Redundant Format
-        shell: bash
-        if: ${{ always() }}
-        env:
-          REVIEWDOG_GITHUB_API_TOKEN: ${{ github.token }}
-        run: |
-          set -e
-          cd "${GITHUB_WORKSPACE}" || exit 1
-
-          echo '::group:: Flagging possibly unnecessary format calls for trailing argument with reviewdog 🐶 ...'
-          # Don't fail because of misspell
-          set +o pipefail
-          # For all look for formatting calls and extract the ones that
-          # have only a single formatting argument and that argument is in the last position.
-          # But exclude the `fmt.Errorf` calls since there's no `fmt.Error` and `errors.New` is not
-          # as versatile.
-          # Also ignore `%T` — to print the type and `%q` to quote the final string.
-          fn=$(find . -path './vendor' -prune -o -path './third_party' -prune -o -name '*.pb.go' -prune -o -type f -name '*.go' -print)
-          grep -nE '[^.]+\.(Fatalf|Errorf|Warnf|Infof|Debugf|Logf|Sprintf|Fprintf|Printf)[^\%]+%[^Tqx]",[^,]+' $fn | grep -v "fmt.Errorf" |
-            while read -r ent ; do
-              file=$(echo $ent | cut -d':' -f 1);
-              line=$(echo $ent | cut -d':' -f 2);
-              ch=$(echo $ent | cut -d':' -f3-);
-              err="Unknown printer tool, please file an issue in knative-sandbox/.github and assign to @vagababov: $ch"
-              if echo $ch | grep --quiet -E "^t.(Errorf|Fatalf|Logf)" ; then
-                err=$(echo $ch | sed  -E 's/([^.fm]+t\.)(Fatal|Error|Log)f([^\%]+)( %[^Tq]",)([^,]+)/\1\2\3",\5/')
-                # Not a test. Here we deal with various loggers and fmt helpers.
-              elif echo $ch | grep --quiet "log" ; then
-                # Capture (x)?log(er)?.
-                err=$(echo $ch | sed -E 's/(.*log.*\.)(Print|Fatal|Error|Info|Warn)f([^\%]+)(%[^Tq]",)([^,]+)/\1\2\3",\5/')
-              elif echo $ch | grep --quiet -E "fmt\.Sprintf" ; then
-                # Always space after sprintf
-                err=$(echo $ch | sed -E 's/(fmt\.)(Sprint)f([^%]+) (%s",)([^,]+)/\1\2\3 ",\5/')
-              elif echo $ch | grep --quiet -E "fmt\." ; then  # all other fmt. printers.
-                err=$(echo $ch | sed -E 's/(fmt\.)(Print|Fprint)f([^%]+) (%[^sTxq]",)([^,]+)/\1\2\3",\5/')
-              fi
-              echo "$file:$line: Please consider avoiding tail format like this:%0A$err"
-          done |
-          reviewdog -efm="%f:%l: %m" \
-                -name="Redundant Format" \
-                -reporter="github-pr-check" \
-                -filter-mode="added" \
-                -fail-on-error="true" \
-                -level="error"
           echo '::endgroup::'
 
       # This is mostly copied from https://github.com/get-woke/woke-action-reviewdog/blob/main/entrypoint.sh

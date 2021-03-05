@@ -25,6 +25,7 @@ You can use the `config-tracing` ConfigMap to configure the following Eventing c
  - Triggers
  - InMemoryChannel
  - ApiServerSource
+ - PingSource
  - GitlabSource
  - KafkaSource
  - PrometheusSource

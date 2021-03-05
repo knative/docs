@@ -10,12 +10,11 @@ well-supported by the existing components; since the system is modular, it's
 also possible to combine the components in novel ways.
 
 1. **I just want to publish events, I don't care who consumes them.** Send
-   events to a [Broker](broker/README.md) as an HTTP POST. The
-   [SinkBinding](samples/sinkbinding/README.md) can be useful to decouple the destination
+   events to a [Broker](broker/README.md) as an HTTP POST. [Sink binding](./sources/sinkbinding) can be useful to decouple the destination
    configuration from your application.
 
 1. **I just want to consume events like X, I don't care how they are
-   published.** Use a [Trigger](broker/README.md) to consume events from a Broker based
+   published.** Use a [Trigger](triggers/README.md) to consume events from a Broker based
    on CloudEvents attributes. Your application will receive the events as an
    HTTP POST.
 
@@ -32,7 +31,7 @@ both Channels and Brokers.
 
 Knative Eventing is designed around the following goals:
 
-1. Knative Eventing services are loosely coupled. These services can be
+1. The Knative Eventing resources are loosely coupled. These resources can be
    developed and deployed independently on, and across a variety of platforms
    (for example Kubernetes, VMs, SaaS or FaaS).
 1. Event producers and event consumers are independent. Any producer (or
@@ -102,17 +101,6 @@ Trigger without resorting to some other out-of-band mechanism.
 To learn how to use the registry, see the
 [Event Registry documentation](./event-registry.md).
 
-### Simplify event delivery
-
-The [SinkBinding](samples/sinkbinding/README.md) custom object supports decoupling event
-production from delivery addressing.
-
-When you create a SinkBinding, you reference an Addressable and a Kubernetes
-object which provides a PodTemplateSpec. The SinkBinding will inject environment
-variables (`$K_SINK` for the destination URL) into the PodTemplateSpec so that
-the application code does not need to interact with the Kubernetes API to locate
-the event destination.
-
 ### Event channels and subscriptions
 
 Knative Eventing also defines an event forwarding and persistence layer, called
@@ -152,8 +140,7 @@ Learn more about Eventing development in the
 
 ## Getting Started
 
-- [Install the Eventing component](#installation)
-- [Setup Knative Serving](../install/README.md)
+- [Install Knative](../install/README.md)
 - [Run samples](./samples/)
 - [Default Channels](./channels/default-channels.md) provide a way to choose the
   persistence strategy for Channels across the cluster.

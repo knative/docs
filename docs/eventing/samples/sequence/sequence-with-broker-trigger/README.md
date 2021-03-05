@@ -36,9 +36,6 @@ EOF
 
 ### Create the Knative Services
 
-Change `default` below to create the steps in the Namespace where you have
-configured your `Broker`
-
 ```yaml
 apiVersion: serving.knative.dev/v1
 kind: Service
@@ -85,6 +82,9 @@ spec:
 
 ```
 
+Change the `default` namespace below to create the services in the namespace where you have
+configured your broker.
+
 ```shell
 kubectl -n default create -f ./steps.yaml
 ```
@@ -126,8 +126,8 @@ spec:
       name: default
 ```
 
-Change `default` below to create the `Sequence` in the Namespace where you have
-configured your `Broker`.
+Change the `default` namespace below to create the sequence in the namespace where you have
+configured your broker.
 
 ```shell
 kubectl -n default create -f ./sequence.yaml
@@ -139,13 +139,14 @@ This will create a PingSource which will send a CloudEvent with {"message":
 "Hello world!"} as the data payload every 2 minutes.
 
 ```yaml
-apiVersion: sources.knative.dev/v1beta1
+apiVersion: sources.knative.dev/v1beta2
 kind: PingSource
 metadata:
   name: ping-source
 spec:
   schedule: "*/2 * * * *"
-  jsonData: '{"message": "Hello world!"}'
+  contentType: "application/json"
+  data: '{"message": "Hello world!"}'
   sink:
     ref:
       apiVersion: eventing.knative.dev/v1
@@ -153,12 +154,8 @@ spec:
       name: default
 ```
 
-Here, if you are using different type of Channel, you need to change the
-spec.channelTemplate to point to your desired Channel. Also, change the
-spec.reply.name to point to your `Broker`
-
-Change `default` below to create the `Sequence` in the Namespace where you have
-configured your `Broker`.
+Change the `default` namespace below to create the PingSource in the namespace where you have
+configured your broker and sequence.
 
 ```shell
 kubectl -n default create -f ./ping-source.yaml
@@ -183,8 +180,8 @@ spec:
       name: sequence
 ```
 
-Change `default` below to create the `Sequence` in the Namespace where you have
-configured your `Broker`.
+Change the `default` namespace below to create the trigger in the namespace where you have
+configured your broker and sequence.
 
 ```shell
 kubectl -n default create -f ./trigger.yaml
@@ -222,8 +219,8 @@ spec:
 
 ```
 
-Change `default` below to create the `Service` and `Trigger` in the Namespace
-where you have configured your `Broker`.
+Change `default` namespace below to create the service and trigger in the namespace
+where you have configured your broker.
 
 ```shell
 kubectl -n default create -f ./display-trigger.yaml
@@ -231,14 +228,14 @@ kubectl -n default create -f ./display-trigger.yaml
 
 ### Inspecting the results
 
-You can now see the final output by inspecting the logs of the event-display
+You can now see the final output by inspecting the logs of the sequence-display
 pods.
 
 ```shell
 kubectl -n default get pods
 ```
 
-Then look at the logs for the event-display pod:
+View the logs for the `sequence-display` pod:
 
 ```shell
 kubectl -n default logs -l serving.knative.dev/service=sequence-display -c user-container --tail=-1

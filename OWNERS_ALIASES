@@ -1,12 +1,14 @@
 aliases:
   eng-approvers:
   - averikitsch
+  - csantanapr
   - dprotaso
   - evankanderson
   - grantr
   - markusthoemmes
   - mattmoor
   - tcnghia
+  - vagababov
   - vaikas
 
   docs-approvers:
@@ -18,6 +20,7 @@ aliases:
   - abrennan89
   - mpetason
   - jonatasbaldin
+  - omerbensaadon
 
   blog-approvers:
   - macruzbar
@@ -32,13 +35,6 @@ aliases:
   - chizhg
   - steuhs
   - yt3liu
-
-  serving-eng-reviewers:
-  - dprotaso
-  - markusthoemmes
-  - mattmoor
-  - tcnghia
-  - vagababov
 
   eventing-eng-approvers:
   - grantr
@@ -55,7 +51,6 @@ aliases:
   - vaikas
 
   eventing-channels-eng-approvers:
-  - Harwayne
   - matzew
 
   eventing-sources-eng-approvers:
@@ -66,16 +61,14 @@ aliases:
 
   install-eng-reviewers:
   - dprotaso
-  - markusthoemmes
-  - mattmoor
-  - tcnghia
-  - vagababov
   - evankanderson
   - grantr
-  - vaikas
-  - n3wscott
-  - matzew
-  - nachocano
-  - lionelvillard
-  - bbrowning
   - houshengbo
+  - lionelvillard
+  - markusthoemmes
+  - mattmoor
+  - matzew
+  - n3wscott
+  - tcnghia
+  - vagababov
+  - vaikas

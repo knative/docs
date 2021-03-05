@@ -16,6 +16,7 @@ The Knative Serving operator can be configured with these options:
 - [Cluster local gateway](#configuration-of-cluster-local-gateway)
 - [High availability](#high-availability)
 - [System Resource Settings](#system-resource-settings)
+- [Override system deployments](#override-system-deployments)
 
 ## Version Configuration
 
@@ -45,11 +46,12 @@ if the current Knative Serving deployment is version 0.14.x, you must upgrade to
 
 ## Serving Configuration by ConfigMap
 
-Because the operator manages the Knative Serving installation, it will overwrite any updates to the `ConfigMaps` which are used to configure Knative Serving.
-The `KnativeServing` custom resource allows you to set values for these ConfigMaps via the operator. Knative Serving has multiple ConfigMaps named with the prefix
-`config-`. The `spec.config` in `KnativeServing` has one entry `<name>` for each ConfigMap named `config-<name>`, with a value which will be used for the ConfigMap's `data`.
+The Operator manages the Knative Serving installation. It overwrites any updates to ConfigMaps which are used to configure Knative Serving.
+The KnativeServing custom resource (CR) allows you to set values for these ConfigMaps by using the Operator.
+Knative Serving has multiple ConfigMaps that are named with the prefix `config-`.
+The `spec.config` in the KnativeServing CR has one `<name>` entry for each ConfigMap, named `config-<name>`, with a value which will be used for the ConfigMap `data`.
 
-In the [setup a custom domain example](https://knative.dev/development/serving/using-a-custom-domain/), you can see the content of the ConfigMap
+In the [setup a custom domain example](./../../serving/using-a-custom-domain.md), you can see the content of the ConfigMap
 `config-domain` is:
 
 ```
@@ -119,7 +121,7 @@ location. This section is only needed when the registry images do not match the 
 
 - `imagePullSecrets`: a list of Secret names used when pulling Knative container images. The Secrets
 must be created in the same namespace as the Knative Serving Deployments. See [deploying images
-from a private container registry](https://knative.dev/development/serving/deploying/private-registry/) for configuration details.
+from a private container registry](./../../serving/deploying/private-registry.md) for configuration details.
 
 
 ### Download images in a predefined format without secrets:
@@ -241,7 +243,7 @@ spec:
 
 ## SSL certificate for controller
 
-To [enable tag to digest resolution](https://knative.dev/development/serving/tag-resolution/), the Knative Serving controller needs to access the container registry.
+To [enable tag to digest resolution](./../../serving/tag-resolution.md), the Knative Serving controller needs to access the container registry.
 To allow the controller to trust a self-signed registry cert, you can use the Operator to specify the certificate using a ConfigMap or Secret.
 
 Specify the following fields in `spec.controller-custom-certs` to select a custom registry certificate:
@@ -267,11 +269,11 @@ spec:
 
 ## Configuration of Knative ingress gateway
 
-To set up custom ingress gateway, follow [**Step 1: Create Gateway Service and Deployment Instance**](https://knative.dev/development/serving/setting-up-custom-ingress-gateway/).
+To set up custom ingress gateway, follow [**Step 1: Create Gateway Service and Deployment Instance**](./../../serving/setting-up-custom-ingress-gateway.md).
 
 ### Step 2: Update the Knative gateway
 
-Update `spec.knative-ingress-gateway` to select the labels of the new ingress gateway:
+Update `spec.ingress.istio.knative-ingress-gateway` to select the labels of the new ingress gateway:
 
 ```
 apiVersion: operator.knative.dev/v1alpha1
@@ -280,9 +282,12 @@ metadata:
   name: knative-serving
   namespace: knative-serving
 spec:
-  knative-ingress-gateway:
-    selector:
-      custom: ingressgateway
+  ingress:
+    istio:
+      enabled: true
+      knative-ingress-gateway:
+        selector:
+          custom: ingressgateway
 ```
 
 ### Step 3: Update Gateway ConfigMap
@@ -296,9 +301,12 @@ metadata:
   name: knative-serving
   namespace: knative-serving
 spec:
-  knative-ingress-gateway:
-    selector:
-      custom: ingressgateway
+  ingress:
+    istio:
+      enabled: true
+      knative-ingress-gateway:
+        selector:
+          custom: ingressgateway
   config:
     istio:
       gateway.knative-serving.knative-ingress-gateway: "custom-ingressgateway.istio-system.svc.cluster.local"
@@ -308,19 +316,19 @@ The key in `spec.config.istio` is in the format of `gateway.{{gateway_namespace}
 
 ## Configuration of cluster local gateway
 
-Update `spec.cluster-local-gateway` to select the labels of the new cluster-local ingress gateway:
+Update `spec.ingress.istio.knative-local-gateway` to select the labels of the new cluster-local ingress gateway:
 
 ### Default local gateway name:
 
-Go through the guide [here](https://knative.dev/development/install/installing-istio/#installing-istio-without-sidecar-injection) to use local cluster gateway,
-if you use the default gateway called `cluster-local-gateway`.
+Go through the guide [here](./../installing-istio.md/#installing-istio-without-sidecar-injection) to use local cluster gateway,
+if you use the default gateway called `knative-local-gateway`.
 
 ### Non-default local gateway name:
 
-If you create custom local gateway with a name other than `cluster-local-gateway`, update `config.istio` and the
-`cluster-local-gateway` selector:
+If you create custom local gateway with a name other than `knative-local-gateway`, update `config.istio` and the
+`knative-local-gateway` selector:
 
-This example shows a service and deployment `custom-local-gateway` in the namespace `istio-system`, with the
+This example shows a service and deployment `knative-local-gateway` in the namespace `istio-system`, with the
 label `custom: custom-local-gw`:
 
 ```
@@ -330,12 +338,15 @@ metadata:
   name: knative-serving
   namespace: knative-serving
 spec:
-  cluster-local-gateway:
-    selector:
-      custom: custom-local-gateway
+  ingress:
+    istio:
+      enabled: true
+      knative-local-gateway:
+        selector:
+          custom: custom-local-gateway
   config:
     istio:
-      local-gateway.knative-serving.cluster-local-gateway: "custom-local-gateway.istio-system.svc.cluster.local"
+      local-gateway.knative-serving.knative-local-gateway: "custom-local-gateway.istio-system.svc.cluster.local"
 ```
 
 ## High availability
@@ -357,7 +368,7 @@ spec:
 
 ## System Resource Settings
 
-The operator custom resource allows you allows you to configure system resources for the Knative system containers.
+The operator custom resource allows you to configure system resources for the Knative system containers.
 Requests and limits can be configured for the following containers: `activator`, `autoscaler`, `controller`, `webhook`, `autoscaler-hpa`,
 `networking-istio` and `queue-proxy`.
 
@@ -410,3 +421,31 @@ spec:
       memory: 250Mi
       ephemeral-storage: 4Gi
 ```
+
+## Override system deployments
+
+If you would like to override some configurations for a specific deployment, you can override the configuration by using `spec.deployments` in CR.
+Currently `replicas`, `labels` and `annotations` are supported.
+
+For example, the following KnativeServing resource overrides the `webhook` to have `3` replicass, `mylabel: foo` labels and `myannotataions: bar` annotations,
+while other system deployments have `2` replicas by `spec.high-availability`.
+
+```
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: ks
+  namespace: knative-serving
+spec:
+  high-availability:
+    replicas: 2
+  deployments:
+  - name: webhook
+    replicas: 3
+    labels:
+      mylabel: foo
+    annotations:
+      myannotataions: bar
+```
+
+**NOTE:** The labels and annotations settings override webhook's labels and annotations in deployment and pod both.

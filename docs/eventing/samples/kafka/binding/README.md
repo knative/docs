@@ -142,7 +142,7 @@ In this case, we will bind any `Job` with the labels `kafka.topic: "logs"`.
 1. Source code for kafka-publisher service
 
    Get the source code of kafka-publisher container image from
-   [here](https://github.com/knative/eventing-contrib/blob/master/test/test_images/kafka-publisher/main.go)
+   [here](https://github.com/knative-sandbox/eventing-kafka/blob/master/test/test_images/kafka-publisher/main.go)
 
 1. Now we will use the kafka-publisher container to send events to kafka topic
    when the Job runs.
@@ -154,7 +154,6 @@ In this case, we will bind any `Job` with the labels `kafka.topic: "logs"`.
      labels:
        kafka.topic: "logs"
      name: kafka-publisher-job
-     namespace: test-alpha
    spec:
      backoffLimit: 1
      completions: 1
@@ -177,6 +176,12 @@ In this case, we will bind any `Job` with the labels `kafka.topic: "logs"`.
                - name: KAFKA_VALUE
                  value: '{"msg":"This is a test!"}'
              name: kafka-publisher
+   ```
+1. Check that the Job has run successfully.
+   ```
+   $ kubectl get jobs
+   NAME                  COMPLETIONS   DURATION   AGE
+   kafka-publisher-job   1/1          7s         7s
    ```
 
 ### Verify

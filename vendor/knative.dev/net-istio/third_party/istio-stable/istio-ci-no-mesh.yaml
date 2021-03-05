@@ -36,8 +36,6 @@ spec:
   addonComponents:
     pilot:
       enabled: true
-    prometheus:
-      enabled: false
 
   components:
     ingressGateways:
@@ -51,27 +49,3 @@ spec:
             requests:
               cpu: 1000m
               memory: 1024Mi
-      - name: cluster-local-gateway
-        enabled: true
-        label:
-          istio: cluster-local-gateway
-          app: cluster-local-gateway
-        k8s:
-          resources:
-            limits:
-              cpu: 3000m
-              memory: 2048Mi
-            requests:
-              cpu: 1000m
-              memory: 1024Mi
-          service:
-            type: ClusterIP
-            ports:
-            - port: 15020
-              name: status-port
-            - port: 80
-              targetPort: 8080
-              name: http2
-            - port: 443
-              targetPort: 8443
-              name: https

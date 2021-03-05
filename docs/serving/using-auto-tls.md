@@ -38,13 +38,13 @@ Knative supports the following Auto TLS modes:
 
 You must meet the following prerequisites to enable auto TLS:
 
-- The following must be installed on your Knative cluter:
+- The following must be installed on your Knative cluster:
   - [Knative Serving](../install/).
-  - [Istio with SDS, version 1.3 or higher](../install/installing-istio.md#installing-istio-with-SDS-to-secure-the-ingress-gateway),
+  - A Networking layer such as [Kourier](../install/any-kubernetes-cluster.md#installing-the-serving-component), [Istio with SDS, version 1.3 or higher](../install/installing-istio.md#installing-istio-with-SDS-to-secure-the-ingress-gateway),
     [Contour, version 1.1 or higher](../install/any-kubernetes-cluster.md#installing-the-serving-component),
     or [Gloo, version 0.18.16 or higher](https://docs.solo.io/gloo/latest/installation/knative/).
     Note: Currently, [Ambassador](https://github.com/datawire/ambassador) is unsupported.
-  - [cert-manager version `0.12.0` or higher](./installing-cert-manager.md).
+- [cert-manager version `1.0.0` and higher](./installing-cert-manager.md).
 - Your Knative cluster must be configured to use a
   [custom domain](./using-a-custom-domain.md).
 - Your DNS provider must be setup and configured to your domain.
@@ -134,6 +134,20 @@ and which DNS provider validates those requests.
     ```
 
     Result: The `Status.Conditions` should include `Ready=True`.
+
+### DNS-01 challenge only: Configure your DNS provider
+
+If you choose to use DNS-01 challenge, configure which DNS provider is used to
+validate the DNS-01 challenge requests.
+
+Instructions about configuring cert-manager, for all the supported DNS
+providers, are provided in
+[DNS01 challenge providers and configuration instructions](https://cert-manager.io/docs/configuration/acme/dns01/#supported-dns01-providers).
+
+Example:
+
+See how the Google Cloud DNS is defined as the provider:
+[Configuring HTTPS with cert-manager and Google Cloud DNS](./using-cert-manager-on-gcp.md#creating-a-service-account-and-using-a-kubernetes-secret)
 
 
 ### Install networking-certmanager deployment

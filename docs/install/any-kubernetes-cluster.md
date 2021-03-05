@@ -1,6 +1,6 @@
 ---
-title: "Installing Knative"
-weight: 06
+title: "YAML-based installation"
+weight: 01
 type: "docs"
 aliases:
   - /docs/install/knative-with-any-k8s
@@ -17,48 +17,19 @@ aliases:
   - /docs/install/knative-with-minikube
   - /docs/install/knative-with-minishift
   - /docs/install/knative-with-pks
+showlandingtoc: "false"
 ---
 
-This guide walks you through the installation of the latest version of Knative.
-Note if you are upgrading an existing installation, follow the
-[instructions here](./upgrade-installation.md).
+You can install Knative by applying YAML files using the `kubectl` CLI.
 
-Knative has two components, which can be installed and used independently or
-together. To help you pick and choose the pieces that are right for you, here is
-a brief description of each:
+## Prerequisites
 
-- [**Serving**](#installing-the-serving-component)
-  {{< feature-state version="v0.9" state="stable" short=true >}} provides an
-  abstraction for stateless request-based scale-to-zero services.
-- [**Eventing**](#installing-the-eventing-component)
-  {{< feature-state version="v0.16" state="stable" short=true >}} provides
-  abstractions to enable binding event sources (e.g. Github Webhooks, Kafka) and
-  consumers (e.g. Kubernetes or Knative Services).
-
-Knative also has an
-[**Observability plugin**](#installing-the-observability-plugin)
-{{< feature-state version="v0.14" state="deprecated" short=true >}} which
-provides standard tooling that can be used to get visibility into the health of
-the software running on Knative.
-
-## Before you begin
-
-This guide assumes that you want to install an upstream Knative release on a
-Kubernetes cluster. A growing number of vendors have managed Knative offerings;
-see the [Knative Offerings](../knative-offerings.md) page for a full list.
-
-Knative {{< version >}} requires a Kubernetes cluster v1.16 or newer, as well as
-a compatible `kubectl`. This guide assumes that you've already created a
-Kubernetes cluster, and that you are using bash in a Mac or Linux environment;
-some commands will need to be adjusted for use in a Windows environment.
-
-<!-- TODO: Link to provisioning guide for advanced installation -->
+- You have a cluster that uses Kubernetes v1.17 or newer.
+- You have installed the [`kubectl` CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
+- If you have only one node in your cluster, you will need at least 6 CPUs, 6 GB of memory, and 30 GB of disk storage.
+- If you have multiple nodes in your cluster, for each node you will need at least 2 CPUs, 4 GB of memory, and 20 GB of disk storage.
 
 ## Installing the Serving component
-
-{{< feature-state version="v0.9" state="stable" >}}
-
-The following commands install the Knative Serving component.
 
 1. Install the
    [Custom Resource Definitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
@@ -82,8 +53,6 @@ The following commands install the Knative Serving component.
 
    {{< tabs name="serving_networking" default="Istio" >}}
    {{% tab name="Ambassador" %}}
-
-{{% feature-state version="v0.8" state="alpha" %}}
 
 The following commands install Ambassador and enable its Knative integration.
 
@@ -135,8 +104,6 @@ The following commands install Ambassador and enable its Knative integration.
 
 {{% tab name="Contour" %}}
 
-{{% feature-state version="v0.18" state="stable" %}}
-
 The following commands install Contour and enable its Knative integration.
 
 1. Install a properly configured Contour:
@@ -173,8 +140,6 @@ The following commands install Contour and enable its Knative integration.
 {{< /tab >}}
 
 {{% tab name="Gloo" %}}
-
-{{% feature-state version="v0.8" state="alpha" %}}
 
 _For a detailed guide on Gloo integration, see
 [Installing Gloo for Knative](https://docs.solo.io/gloo/latest/installation/knative/)
@@ -216,18 +181,19 @@ The following commands install Gloo and enable its Knative integration.
 
 {{% tab name="Istio" %}}
 
-{{% feature-state version="v0.9" state="stable" %}}
-
 The following commands install Istio and enable its Knative integration.
 
-<!-- TODO(https://github.com/knative/docs/issues/2166): Create streamlined instructions to inline -->
+1. Install a properly configured Istio ([Advanced installation](./installing-istio.md))
 
-1. [Installing Istio for Knative](./installing-istio.md)
+   ```bash
+   kubectl apply --filename {{< artifact repo="net-istio" file="istio.yaml" >}}
+   ```
+
 
 1. Install the Knative Istio controller:
 
    ```bash
-   kubectl apply --filename {{< artifact repo="net-istio" file="release.yaml" >}}
+   kubectl apply --filename {{< artifact repo="net-istio" file="net-istio.yaml" >}}
    ```
 
 1. Fetch the External IP or CNAME:
@@ -241,8 +207,6 @@ The following commands install Istio and enable its Knative integration.
 {{< /tab >}}
 
 {{% tab name="Kong" %}}
-
-{{% feature-state version="v0.13" state="" %}}
 
 The following commands install Kong and enable its Knative integration.
 
@@ -272,8 +236,6 @@ The following commands install Kong and enable its Knative integration.
 {{< /tab >}}
 
 {{% tab name="Kourier" %}}
-
-{{% feature-state version="v0.17" state="beta" %}}
 
 The following commands install Kourier and enable its Knative integration.
 
@@ -306,10 +268,12 @@ The following commands install Kourier and enable its Knative integration.
 
       <!-- This indentation is important for things to render properly. -->
 
-   {{< tabs name="serving_dns" >}} {{% tab name="Magic DNS (xip.io)" %}} We ship
-   a simple Kubernetes Job called "default domain" that will (see caveats)
-   configure Knative Serving to use <a href="http://xip.io">xip.io</a> as the
-   default DNS suffix.
+   {{< tabs name="serving_dns" default="Magic DNS (xip.io)" >}}
+   {{% tab name="Magic DNS (xip.io)" %}}
+
+We ship a simple Kubernetes Job called "default domain" that will (see caveats)
+configure Knative Serving to use <a href="http://xip.io">xip.io</a> as the
+default DNS suffix.
 
 ```bash
 kubectl apply --filename {{< artifact repo="serving" file="serving-default-domain.yaml" >}}
@@ -317,9 +281,13 @@ kubectl apply --filename {{< artifact repo="serving" file="serving-default-domai
 
 **Caveat**: This will only work if the cluster LoadBalancer service exposes an
 IPv4 address or hostname, so it will not work with IPv6 clusters or local setups
-like Minikube. For these, see "Real DNS" or "Temporary DNS". {{< /tab >}}
+like Minikube. For these, see "Real DNS" or "Temporary DNS".
 
-{{% tab name="Real DNS" %}} To configure DNS for Knative, take the External IP
+{{< /tab >}}
+
+{{% tab name="Real DNS" %}}
+
+To configure DNS for Knative, take the External IP
 or CNAME from setting up networking, and configure it with your DNS provider as
 follows:
 
@@ -351,7 +319,9 @@ kubectl patch configmap/config-domain \
 
 {{< /tab >}}
 
-{{% tab name="Temporary DNS" %}} If you are using `curl` to access the sample
+{{% tab name="Temporary DNS" %}}
+
+If you are using `curl` to access the sample
 applications, or your own Knative app, and are unable to use the "Magic DNS
 (xip.io)" or "Real DNS" methods, there is a temporary approach. This is useful
 for those who wish to evaluate Knative without altering their DNS configuration,
@@ -393,9 +363,7 @@ To access your application using `curl` using this method:
 
 Refer to the "Real DNS" method for a permanent solution.
 
-{{< /tab >}}
-
-{{< /tabs >}}
+{{< /tab >}} {{< /tabs >}}
 
 1. Monitor the Knative components until all of the components show a `STATUS` of
    `Running` or `Completed`:
@@ -408,9 +376,9 @@ At this point, you have a basic installation of Knative Serving!
 
 ### Optional Serving extensions
 
-{{< tabs name="serving_extensions" >}} {{% tab name="HPA autoscaling" %}}
+{{< tabs name="serving_extensions" default="TLS via HTTP01" >}}
 
-{{% feature-state version="v0.8" state="beta" %}}
+{{% tab name="HPA autoscaling" %}}
 
 Knative also supports the use of the Kubernetes Horizontal Pod Autoscaler (HPA)
 for driving autoscaling decisions. The following command will install the
@@ -425,8 +393,6 @@ kubectl apply --filename {{< artifact repo="serving" file="serving-hpa.yaml" >}}
 {{< /tab >}}
 
 {{% tab name="TLS with cert-manager" %}}
-
-{{% feature-state version="v0.6" state="alpha" %}}
 
 Knative supports automatically provisioning TLS certificates via
 [cert-manager](https://cert-manager.io/docs/). The following commands will
@@ -447,8 +413,6 @@ via cert-manager.
    {{< /tab >}}
 
 {{% tab name="TLS via HTTP01" %}}
-
-{{% feature-state version="v0.14" state="alpha" %}}
 
 Knative supports automatically provisioning TLS certificates using Let's Encrypt
 HTTP01 challenges. The following commands will install the components needed to
@@ -482,8 +446,6 @@ support that.
 
 {{% tab name="TLS wildcard support" %}}
 
-{{% feature-state version="v0.12" state="alpha" %}}
-
 If you are using a Certificate implementation that supports provisioning
 wildcard certificates (e.g. cert-manager with a DNS01 issuer), then the most
 efficient way to provision certificates is with the namespace wildcard
@@ -497,20 +459,22 @@ kubectl apply --filename {{< artifact repo="serving" file="serving-nscert.yaml" 
 > Note this will not work with HTTP01 either via cert-manager or the net-http01
 > options.
 
+{{< /tab >}}
+
+{{% tab name="DomainMapping CRD" %}}
+
+The `DomainMapping` CRD allows a user to map a Domain Name that they own to a
+specific Knative Service.
+
+```bash
+kubectl apply --filename {{< artifact repo="serving" file="serving-domainmapping-crds.yaml" >}}
+kubectl wait --for=condition=Established --all crd
+kubectl apply --filename {{< artifact repo="serving" file="serving-domainmapping.yaml" >}}
+```
+
 {{< /tab >}} {{< /tabs >}}
 
-### Getting started with Serving
-
-Deploy your first app with the
-[getting started with Knative app deployment](../serving/getting-started-knative-app.md)
-guide. You can also find a number of samples for Knative Serving
-[here](../serving/samples/).
-
 ## Installing the Eventing component
-
-{{< feature-state version="v0.16" state="stable" >}}
-
-The following commands install the Knative Eventing component.
 
 1. Install the
    [Custom Resource Definitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
@@ -546,7 +510,7 @@ The following commands install the Knative Eventing component.
 1. Then install the Apache Kafka Channel:
 
    ```bash
-   curl -L "{{< artifact repo="eventing-contrib" file="kafka-channel.yaml" >}}" \
+   curl -L "{{< artifact org="knative-sandbox" repo="eventing-kafka" file="channel-consolidated.yaml" >}}" \
     | sed 's/REPLACE_WITH_CLUSTER_URL/my-cluster-kafka-bootstrap.kafka:9092/' \
     | kubectl apply --filename -
    ```
@@ -572,8 +536,6 @@ To learn more about the Google Cloud Pub/Sub Channel, try
 
 {{% tab name="In-Memory (standalone)" %}}
 
-{{< feature-state version="v0.16" state="stable" >}}
-
 The following command installs an implementation of Channel that runs in-memory.
 This implementation is nice because it is simple and standalone, but it is
 unsuitable for production use cases.
@@ -587,13 +549,12 @@ kubectl apply --filename {{< artifact repo="eventing" file="in-memory-channel.ya
 {{% tab name="NATS Channel" %}}
 
 1. First, [Install NATS Streaming for
-   Kubernetes](https://github.com/knative/eventing-contrib/blob/{{<
-   version >}}/natss/config/broker/README.md)
+   Kubernetes](https://github.com/knative-sandbox/eventing-natss/tree/master/config)
 
 1. Then install the NATS Streaming Channel:
 
    ```bash
-   kubectl apply --filename {{< artifact repo="eventing-contrib" file="natss-channel.yaml" >}}
+   kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-natss" file="300-natss-channel.yaml" >}}
    ```
 
 {{< /tab >}}
@@ -607,7 +568,6 @@ kubectl apply --filename {{< artifact repo="eventing" file="in-memory-channel.ya
       <!-- This indentation is important for things to render properly. -->
    {{< tabs name="eventing_brokers" default="MT-Channel-based" >}}
    {{% tab name="Apache Kafka Broker" %}}
-   {{< feature-state version="v0.17" state="alpha" >}}
 
 The following commands install the Apache Kafka broker, and run event routing in a system namespace,
 `knative-eventing`, by default.
@@ -628,7 +588,6 @@ For more information, see the [Kafka Broker](./../eventing/broker/kafka-broker.m
 {{< /tab >}}
 
    {{% tab name="MT-Channel-based" %}}
-   {{< feature-state version="v0.16" state="stable" >}}
 
 The following command installs an implementation of Broker that utilizes
 Channels and runs event routing components in a System Namespace, providing a
@@ -717,11 +676,29 @@ At this point, you have a basic installation of Knative Eventing!
 
    <!-- This indentation is important for things to render properly. -->
 
-{{< tabs name="eventing_extensions" >}} {{% tab name="Sugar Controller" %}}
+{{< tabs name="eventing_extensions" >}}
+
+{{% tab name="Apache Kafka Sink" %}}
+
+1. Install the Kafka controller:
+
+    ```bash
+    kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-kafka-broker" file="eventing-kafka-controller.yaml" >}}
+    ```
+
+1. Install the Kafka Sink data plane:
+
+    ```bash
+    kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-kafka-broker" file="eventing-kafka-sink.yaml" >}}
+    ```
+
+For more information, see the [Kafka Sink](./../eventing/sink/kafka-sink.md) documentation.
+
+{{< /tab >}}
+
+{{% tab name="Sugar Controller" %}}
 
 <!-- Unclear when this feature came in -->
-
-{{< feature-state version="v0.16" state="alpha" >}}
 
 The following command installs the Eventing Sugar Controller:
 
@@ -749,8 +726,6 @@ kubectl label namespace default eventing.knative.dev/injection=enabled
 
 {{% tab name="Github Source" %}}
 
-{{< feature-state version="v0.2" state="alpha" >}}
-
 The following command installs the single-tenant Github source:
 
 ```bash
@@ -775,12 +750,11 @@ To learn more about the Github source, try
 {{< /tab >}}
 
 {{% tab name="Apache Camel-K Source" %}}
-{{< feature-state version="v0.5" state="alpha" >}}
 
 The following command installs the Apache Camel-K Source:
 
 ```bash
-kubectl apply --filename {{< artifact repo="eventing-contrib" file="camel.yaml" >}}
+kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-camel" file="camel.yaml" >}}
 ```
 
 To learn more about the Apache Camel-K source, try
@@ -790,12 +764,10 @@ To learn more about the Apache Camel-K source, try
 
 {{% tab name="Apache Kafka Source" %}}
 
-{{< feature-state version="v0.5" state="alpha" >}}
-
 The following command installs the Apache Kafka Source:
 
 ```bash
-kubectl apply --filename {{< artifact repo="eventing-contrib" file="kafka-source.yaml" >}}
+kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-kafka" file="source.yaml" >}}
 ```
 
 To learn more about the Apache Kafka source, try
@@ -804,8 +776,6 @@ To learn more about the Apache Kafka source, try
 {{< /tab >}}
 
 {{% tab name="GCP Sources" %}}
-
-{{< feature-state version="v0.2" state="alpha" >}}
 
 The following command installs the GCP Sources:
 
@@ -830,23 +800,17 @@ To learn more about the Cloud Audit Logs source, try
 
 {{% tab name="Apache CouchDB Source" %}}
 
-{{< feature-state version="v0.10" state="alpha" >}}
-
 The following command installs the Apache CouchDB Source:
 
 ```bash
-kubectl apply --filename {{< artifact repo="eventing-contrib" file="couchdb.yaml" >}}
+kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-couchdb" file="couchdb.yaml" >}}
 ```
 
-To learn more about the Apache CouchDB source, read [our
-documentation]((https://github.com/knative/eventing-contrib/blob/{{<
-version >}}/couchdb/README.md)
+To learn more about the Apache CouchDB source, read the [documentation](https://github.com/knative-sandbox/eventing-couchdb/blob/master/source/README.md).
 
 {{< /tab >}}
 
 {{% tab name="VMware Sources and Bindings" %}}
-
-{{< feature-state version="v0.14" state="alpha" >}}
 
 The following command installs the VMware Sources and Bindings:
 
@@ -859,15 +823,4 @@ To learn more about the VMware sources and bindings, try
 
 {{< /tab >}}
 
-<!-- TODO: prometheus source -->
-<!-- TODO: AWS SQS source  -->
-
-<!-- TODO(https://github.com/knative/docs/issues/2154): Add sources and other stuff here. -->
-
 {{< /tabs >}}
-
-### Getting started with Eventing
-
-You can find a number of samples for Knative Eventing
-[here](../eventing/samples/README.md). A quick-start guide is available
-[here](../eventing/getting-started.md).

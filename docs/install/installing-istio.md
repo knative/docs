@@ -8,10 +8,8 @@ This guide walks you through manually installing and customizing Istio for use
 with Knative.
 
 If your cloud platform offers a managed Istio installation, we recommend
-installing Istio that way, unless you need the ability to customize your
-installation. If your cloud platform offers a managed Istio installation, the
-[install guide](./README.md) for your specific platform will have those
-instructions.
+installing Istio that way, unless you need to customize your
+installation.
 
 ## Before you begin
 
@@ -22,9 +20,9 @@ You need:
 
 ## Supported Istio versions
 
-The current known-to-be-stable version of Istio tested in conjunction with Knative is **v1.7.1**.
-Versions in the 1.7 line generally be fine too.
-Versions above the 1.7 line are under test but have not stabilized yet.
+The current known-to-be-stable version of Istio tested in conjunction with Knative is **v1.8.2**.
+Versions in the 1.7 line are generally fine too.
+1.8.0 and 1.8.1 have bugs that don't work with Knative.
 
 ## Installing Istio
 
@@ -73,30 +71,11 @@ spec:
   addonComponents:
     pilot:
       enabled: true
-    prometheus:
-      enabled: false
 
   components:
     ingressGateways:
       - name: istio-ingressgateway
         enabled: true
-      - name: cluster-local-gateway
-        enabled: true
-        label:
-          istio: cluster-local-gateway
-          app: cluster-local-gateway
-        k8s:
-          service:
-            type: ClusterIP
-            ports:
-            - port: 15020
-              name: status-port
-            - port: 80
-              targetPort: 8080
-              name: http2
-            - port: 443
-              targetPort: 8443
-              name: https
 EOF
 
 istioctl install -f istio-minimal-operator.yaml
@@ -149,11 +128,11 @@ spec:
 EOF
 ```
 
-After you install the cluster local gateway, your service and deployment for the local gateway are both named `cluster-local-gateway`.
+After you install the cluster local gateway, your service and deployment for the local gateway is named `knative-local-gateway`.
 
 ### Updating the `config-istio` configmap to use a non-default local gateway
 
-If you create a custom service and deployment for local gateway with a name other than `cluster-local-gateway`, you
+If you create a custom service and deployment for local gateway with a name other than `knative-local-gateway`, you
 need to update gateway configmap `config-istio` under the `knative-serving` namespace.
 
 1. Edit the `config-istio` configmap:
@@ -162,7 +141,7 @@ need to update gateway configmap `config-istio` under the `knative-serving` name
 kubectl edit configmap config-istio -n knative-serving
 ```
 
-2. Replace the `local-gateway.knative-serving.cluster-local-gateway` field with the custom service. As an example, if you name both
+2. Replace the `local-gateway.knative-serving.knative-local-gateway` field with the custom service. As an example, if you name both
 the service and deployment `custom-local-gateway` under the namespace `istio-system`, it should be updated to:
 
 ```
@@ -170,16 +149,16 @@ custom-local-gateway.istio-system.svc.cluster.local
 ```
 
 As an example, if both the custom service and deployment are labeled with `custom: custom-local-gateway`, not the default
-`istio: cluster-local-gateway`, you must update gateway instance `cluster-local-gateway` in the `knative-serving` namespace:
+`istio: knative-local-gateway`, you must update gateway instance `knative-local-gateway` in the `knative-serving` namespace:
 
 ```shell
-kubectl edit gateway cluster-local-gateway -n knative-serving
+kubectl edit gateway knative-local-gateway -n knative-serving
 ```
 
 Replace the label selector with the label of your service:
 
 ```
-istio: cluster-local-gateway
+istio: knative-local-gateway
 ```
 
 For the service above, it should be updated to:
@@ -189,7 +168,7 @@ custom: custom-local-gateway
 ```
 
 If there is a change in service ports (compared to that of
-`cluster-local-gateway`), update the port info in the gateway accordingly.
+`knative-local-gateway`), update the port info in the gateway accordingly.
 
 ### Verifying your Istio install
 
@@ -213,7 +192,6 @@ To do this, begin by looking up the external IP address that Istio received:
 ```
 $ kubectl get svc -nistio-system
 NAME                    TYPE           CLUSTER-IP   EXTERNAL-IP    PORT(S)                                      AGE
-cluster-local-gateway   ClusterIP      10.0.2.216   <none>         15020/TCP,80/TCP,443/TCP                     2m14s
 istio-ingressgateway    LoadBalancer   10.0.2.24    34.83.80.117   15020:32206/TCP,80:30742/TCP,443:30996/TCP   2m14s
 istio-pilot             ClusterIP      10.0.3.27    <none>         15010/TCP,15011/TCP,8080/TCP,15014/TCP       2m14s
 ```

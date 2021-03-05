@@ -105,6 +105,9 @@ spec:
 Change `default` below to create the `Sequence` in the Namespace where you want
 the resources to be created.
 
+Here, if you are using different type of Channel, you need to change the
+spec.channelTemplate to point to your desired Channel.
+
 ```shell
 kubectl -n default create -f ./sequence.yaml
 ```
@@ -115,22 +118,20 @@ This will create a PingSource which will send a CloudEvent with
 `{"message": "Hello world!"}` as the data payload every 2 minutes.
 
 ```yaml
-apiVersion: sources.knative.dev/v1beta1
+apiVersion: sources.knative.dev/v1beta2
 kind: PingSource
 metadata:
   name: ping-source
 spec:
   schedule: "*/2 * * * *"
-  jsonData: '{"message": "Hello world!"}'
+  contentType: "application/json"
+  data: '{"message": "Hello world!"}'
   sink:
     ref:
       apiVersion: flows.knative.dev/v1
       kind: Sequence
       name: sequence
 ```
-
-Here, if you are using different type of Channel, you need to change the
-spec.channelTemplate to point to your desired Channel.
 
 ```shell
 kubectl -n default create -f ./ping-source.yaml
@@ -157,6 +158,9 @@ kubectl -n default logs -l serving.knative.dev/service=first -c user-container -
 2020/03/02 21:28:01 Transform the event to:
 2020/03/02 21:28:01 [2020-03-02T21:28:00.0010247Z] /apis/v1/namespaces/default/pingsources/ping-source dev.knative.sources.ping: &{Sequence:0 Message:Hello world! - Handled by 0}
 ```
+And you can see that the initial PingSource message `("Hello World!")` has now
+been modified by the first step in the Sequence to include " - Handled by 0".
+Exciting :)
 
 Then we can look at the output of the second Step in the `Sequence`:
 
@@ -169,10 +173,8 @@ kubectl -n default logs -l serving.knative.dev/service=second -c user-container 
 2020/03/02 21:28:02 Transform the event to:
 2020/03/02 21:28:02 [2020-03-02T21:28:00.0010247Z] /apis/v1/namespaces/default/pingsources/ping-source dev.knative.sources.ping: &{Sequence:0 Message:Hello world! - Handled by 0 - Handled by 1}
 ```
-
-And you can see that the initial PingSource message `("Hello World!")` has now
-been modified by the first step in the Sequence to include " - Handled by 0".
-Exciting :)
+And as expected it's now been handled by both the first and second Step as
+reflected by the Message being now: "Hello world! - Handled by 0 - Handled by 1"
 
 Then we can look at the output of the last Step in the `Sequence`:
 
@@ -186,5 +188,4 @@ kubectl -n default logs -l serving.knative.dev/service=third -c user-container -
 2020/03/02 21:28:03 [2020-03-02T21:28:00.0010247Z] /apis/v1/namespaces/default/pingsources/ping-source dev.knative.sources.ping: &{Sequence:0 Message:Hello world! - Handled by 0 - Handled by 1 - Handled by 2}
 ```
 
-And as expected it's now been handled by both the first and second Step as
-reflected by the Message being now: "Hello world! - Handled by 0 - Handled by 1"
+

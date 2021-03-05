@@ -1,7 +1,7 @@
 ---
 title: "Moving the event source to knative-sandbox"
 linkTitle: "Moving to knative-sandbox"
-weight: 10
+weight: 70
 type: "docs"
 ---
 

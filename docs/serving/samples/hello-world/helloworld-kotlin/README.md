@@ -51,7 +51,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-kotlin
       embeddedServer(Netty, port.toInt()) {
           routing {
               get("/") {
-                  call.respondText("Hello $target!", ContentType.Text.Html)
+                  call.respondText("Hello $target!\n", ContentType.Text.Html)
               }
           }
       }.start(wait = true)
@@ -63,35 +63,10 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-kotlin
 4. Create a new file, `build.gradle` and copy the following setting
 
    ```groovy
-   buildscript {
-       ext.kotlin_version = '1.2.61'
-       ext.ktor_version = '0.9.4'
-
-       repositories {
-           mavenCentral()
-       }
-       dependencies {
-           classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-       }
+   plugins {
+       id "org.jetbrains.kotlin.jvm" version "1.4.10"
    }
-
-   apply plugin: 'java'
-   apply plugin: 'kotlin'
    apply plugin: 'application'
-
-   sourceCompatibility = 1.8
-   compileKotlin {
-       kotlinOptions.jvmTarget = "1.8"
-   }
-
-   compileTestKotlin {
-       kotlinOptions.jvmTarget = "1.8"
-   }
-
-   repositories {
-       jcenter()
-       maven { url "https://dl.bintray.com/kotlin/ktor" }
-   }
 
    mainClassName = 'com.example.hello.MainKt'
 
@@ -99,13 +74,15 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-kotlin
        manifest {
            attributes 'Main-Class': mainClassName
        }
-      from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+       from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+   }
+
+   repositories {
+       mavenCentral()
    }
 
    dependencies {
-       compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-       compile "io.ktor:ktor-server-netty:$ktor_version"
-       testCompile group: 'junit', name: 'junit', version: '4.12'
+       compile "io.ktor:ktor-server-netty:1.3.1"
    }
    ```
 
@@ -114,7 +91,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-kotlin
    ```docker
    # Use the official gradle image to create a build artifact.
    # https://hub.docker.com/_/gradle
-   FROM gradle:4.10 as builder
+   FROM gradle:6.7 as builder
 
    # Copy local code to the container image.
    COPY build.gradle .
