@@ -45,15 +45,14 @@ You can also install Knative Operator from source using `ko`.
 1. Install the [ko](https://github.com/google/ko) build tool.
 1. Download the source code using the following command:
 
-```
-git clone https://github.com/knative/operator.git
-```
-
+   ```
+   git clone https://github.com/knative/operator.git
+   ```
 1. Install the operator in the root directory of the source using the following command:
 
-```
-ko apply -f config/
-```
+   ```
+   ko apply -f config/
+   ```
 
 ### Verify the operator installation
 
