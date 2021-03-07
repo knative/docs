@@ -1,6 +1,6 @@
 A Trigger represents a desire to subscribe to events from a specific Broker.
 
-The `subscriber` value must be a [Destination](https://pkg.go.dev/knative.dev/pkg/apis/duck/v1#Destination).
+The `subscriber` value must be a Destination.
 
 Simple example which will receive all the events from the given (`default`) broker and
 deliver them to Knative Serving service `my-service`:
