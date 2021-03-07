@@ -72,14 +72,14 @@ after the specified number of retries.
 
 ## Common Delivery Parameters
 
-The `delivery` value must be a [Delivery Spec](https://pkg.go.dev/knative.dev/eventing/pkg/apis/duck/v1?tab=doc#DeliverySpec)
+The `delivery` value must be a Delivery Spec.
 
 ### deadLetterSink
 
 When present, events that failed to be consumed are sent to the `deadLetterSink`.
 In case of failure, the event is dropped and an error is logged into the system.
 
-The `deadLetterSink` value must be a [Destination](https://pkg.go.dev/knative.dev/pkg/apis/duck/v1#Destination).
+The `deadLetterSink` value must be a Destination.
 
 ```yaml
 spec:
