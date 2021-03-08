@@ -45,7 +45,7 @@ You can install Knative by applying YAML files using the `kubectl` CLI.
    kubectl apply -f {{< artifact repo="serving" file="serving-core.yaml" >}}
    ```
 
-1. Pick a networking layer (alphabetical):
+### Installing a Networking Layer (Listed Alphabetically):
 
       <!-- TODO: Link to document/diagram describing what is a networking layer.  -->
 
@@ -264,7 +264,7 @@ The following commands install Kourier and enable its Knative integration.
 
 {{< /tab >}} {{< /tabs >}}
 
-1. Configure DNS
+### Configuring DNS
 
       <!-- This indentation is important for things to render properly. -->
 
@@ -488,7 +488,7 @@ kubectl apply -f {{< artifact repo="serving" file="serving-domainmapping.yaml" >
    kubectl apply -f {{< artifact repo="eventing" file="eventing-core.yaml" >}}
    ```
 
-1. Install a default Channel (messaging) layer (alphabetical).
+### Installing a Default Channel (Messaging) Layer (Listed Alphabetically).
 
       <!-- This indentation is important for things to render properly. -->
 
@@ -554,7 +554,7 @@ kubectl apply -f {{< artifact repo="eventing" file="in-memory-channel.yaml" >}}
 
 {{< /tabs >}}
 
-1. Install a Broker (eventing) layer:
+### Installing a Broker (Eventing) Layer:
 
       <!-- This indentation is important for things to render properly. -->
    {{< tabs name="eventing_brokers" default="MT-Channel-based" >}}
