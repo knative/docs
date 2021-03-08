@@ -40,7 +40,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-php
    ```php
    <?php
    $target = getenv('TARGET', true) ?: 'World';
-   echo sprintf("Hello %s!", $target);
+   echo sprintf("Hello %s!\n", $target);
    ?>
    ```
 
@@ -210,4 +210,3 @@ kn service delete helloworld-php
 ```
 {{< /tab >}}
 {{< /tabs >}}
-
