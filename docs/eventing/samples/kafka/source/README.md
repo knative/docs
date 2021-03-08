@@ -316,11 +316,11 @@ KafkaSource expects these files to be in pem format, if it is in other format li
           secretKeyRef:
             key: caroot.pem
             name: cacert
-   consumerGroup: knative-group
-   bootstrapServers:
-   - my-secure-kafka-bootstrap.kafka:443
-   topics:
-   - knative-demo-topic
+    consumerGroup: knative-group
+    bootstrapServers:
+    - my-secure-kafka-bootstrap.kafka:443
+    topics:
+    - knative-demo-topic
    sink:
      ref:
        apiVersion: serving.knative.dev/v1
