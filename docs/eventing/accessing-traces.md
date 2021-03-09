@@ -92,7 +92,7 @@ traces are provided in the Knative Serving observability section:
 ### Example
 
 The following demonstrates how to trace requests in Knative Eventing with Zipkin, using the
-[`TestBrokerTracing`](https://github.com/knative/eventing/blob/master/test/conformance/broker_tracing_test.go)
+[`TestBrokerTracing`](https://github.com/knative/eventing/blob/main/test/conformance/broker_tracing_test.go)
 End-to-End test.
 
 For this example, assume the following details:

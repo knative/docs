@@ -25,4 +25,4 @@ files in the following branches:
 
   The `master` branch includes pre-release content for the next Knative version:
 
-  - [**`master`**](https://github.com/knative/docs/tree/master)
+  - [**`master`**](https://github.com/knative/docs/tree/main)

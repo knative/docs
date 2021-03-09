@@ -132,7 +132,7 @@ sample heartbeats event source.
 ##### Prerequisites
 
 - Ensure that `ko publish` is set up correctly:
-  - [`KO_DOCKER_REPO`](https://github.com/knative/serving/blob/master/DEVELOPMENT.md#environment-setup)
+  - [`KO_DOCKER_REPO`](https://github.com/knative/serving/blob/main/DEVELOPMENT.md#environment-setup)
   must be set. For example, `gcr.io/[gcloud-project]` or `docker.io/<username>`.
   - You must have authenticated with your `KO_DOCKER_REPO`.
 

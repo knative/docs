@@ -539,7 +539,7 @@ The following commands install the Knative Eventing component.
 
    _Note_: If your Kubernetes cluster comes with pre-installed Istio, make sure
    it has `cluster-local-gateway`
-   [deployed](https://github.com/knative/serving/blob/master/DEVELOPMENT.md#deploy-istio).
+   [deployed](https://github.com/knative/serving/blob/main/DEVELOPMENT.md#deploy-istio).
    Depending on which Istio version you have, you'd need to apply the
    `istio-knative-extras.yaml` in the corresponding version folder at
    [here](https://github.com/knative/serving/tree/{{< branch >}}/third_party).
@@ -598,7 +598,7 @@ kubectl apply --filename {{< artifact repo="eventing" file="in-memory-channel.ya
 {{% tab name="NATS Channel" %}}
 
 1. First, [Install NATS Streaming for
-   Kubernetes](https://github.com/knative-sandbox/eventing-natss/tree/master/config)
+   Kubernetes](https://github.com/knative-sandbox/eventing-natss/tree/main/config)
 
 1. Then install the NATS Streaming Channel:
 
@@ -870,7 +870,7 @@ The following command installs the Apache CouchDB Source:
 kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-couchdb" file="couchdb.yaml" >}}
 ```
 
-To learn more about the Apache CouchDB source, read the [documentation](https://github.com/knative-sandbox/eventing-couchdb/blob/master/source/README.md).
+To learn more about the Apache CouchDB source, read the [documentation](https://github.com/knative-sandbox/eventing-couchdb/blob/main/source/README.md).
 
 {{< /tab >}}
 

@@ -49,4 +49,4 @@ spec:
 | Name | Maintainer | Description |
 | -- | -- | -- |
 | [KafkaSink](./kafka-sink.md)  | Knative  | Send events to a Kafka topic |
-| [RedisSink](https://github.com/knative-sandbox/eventing-redis/tree/master/sink)  | Knative  | Send events to a Redis Stream |
+| [RedisSink](https://github.com/knative-sandbox/eventing-redis/tree/main/sink)  | Knative  | Send events to a Redis Stream |

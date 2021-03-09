@@ -38,7 +38,7 @@ kubectl get route <route-name> --output yaml
 
 The `conditions` in `status` provide the reason if there is any failure. For
 details, see Knative
-[Error Conditions and Reporting](https://github.com/knative/docs/blob/master/docs/serving/spec/knative-api-specification-1.0.md#error-signalling).
+[Error Conditions and Reporting](https://github.com/knative/docs/blob/main/docs/serving/spec/knative-api-specification-1.0.md#error-signalling).
 
 ### Check Ingress/Istio routing
 
@@ -137,7 +137,7 @@ If you see this condition, check the following to continue debugging:
 - [Check Istio routing](#check-clusteringressistio-routing)
 
 If you see other conditions, look up the meaning of the conditions in Knative
-[Error Conditions and Reporting](https://github.com/knative/serving/blob/master/docs/spec/errors.md).
+[Error Conditions and Reporting](https://github.com/knative/serving/blob/main/docs/spec/errors.md).
 Note: some of them are not implemented yet. An alternative is to
 [check Pod status](#check-pod-status).
 

@@ -45,7 +45,7 @@ raArgs := resources.ReceiveAdapterArgs{
 ```
 NB The exact arguments may change based on functional requirements
 Create the underlying deployment from the arguments provided, matching pod templates, labels, owner references, etc as needed to fill out the deployment
-Example: [pkg/reconciler/sample/resources/receive_adapter.go](https://github.com/knative-sandbox/sample-source/blob/master/pkg/reconciler/sample/resources/receive_adapter.go)
+Example: [pkg/reconciler/sample/resources/receive_adapter.go](https://github.com/knative-sandbox/sample-source/blob/main/pkg/reconciler/sample/resources/receive_adapter.go)
 
 1. Fetch the existing receive adapter deployment
 ```go

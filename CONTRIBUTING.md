@@ -15,7 +15,7 @@ propose changes to this document in a pull request.
 ### Code of conduct
 
 Knative follows the
-[Knative Code of Conduct](https://github.com/knative/community/blob/master/CODE-OF-CONDUCT.md).
+[Knative Code of Conduct](https://github.com/knative/community/blob/main/CODE-OF-CONDUCT.md).
 By participating, you are expected to uphold this code. Please report
 unacceptable behavior to knative-code-of-conduct@googlegroups.com.
 
@@ -60,7 +60,7 @@ issue using the following steps:
      When you create a bug report, include as many details as possible and
      include suggested fixes to the issue. If you know which Knative component
      your bug is related to, you can assign the appropriate
-     [Working Group Lead](https://github.com/knative/community/blob/master/working-groups/WORKING-GROUPS.md).
+     [Working Group Lead](https://github.com/knative/community/blob/main/working-groups/WORKING-GROUPS.md).
    - **Feature request**: For upcoming changes to the documentation or requests
      for more information on a particular subject.
 
@@ -74,7 +74,7 @@ issue in the [`knative/website` repo](https://github.com/knative/website/issues)
 ### Working group
 
 The
-[Knative Documentation Working Group](https://github.com/knative/community/blob/master/working-groups/WORKING-GROUPS.md#documentation)
+[Knative Documentation Working Group](https://github.com/knative/community/blob/main/working-groups/WORKING-GROUPS.md#documentation)
 meets biweekly on Tuesdays at 9:30am PT.
 [Click here](https://calendar.google.com/calendar/embed?src=google.com_18un4fuh6rokqf8hmfftm5oqq4%40group.calendar.google.com)
 to see the exact dates on the Knative working group calendar.
@@ -144,7 +144,7 @@ repo:
      `lgtm` label.
 
    - The
-     [Knative technical writers](https://github.com/knative/docs/blob/master/OWNERS_ALIASES)
+     [Knative technical writers](https://github.com/knative/docs/blob/main/OWNERS_ALIASES)
      are who provide the `approved` label when the content meets quality,
      clarity, and organization standards (see [Style Guide](#style-guide)).
 
@@ -172,12 +172,12 @@ etc.) or in `knative/docs`, the Knative documentation repo.
     repository. For example, if you contribute code to the Knative Serving
     component, you might need to add contributor focused information into the
     `docs` folder of the
-    [knative/serving repo](https://github.com/knative/serving/tree/master/docs/).
+    [knative/serving repo](https://github.com/knative/serving/tree/main/docs/).
 
   - _Code samples_: Includes contributor related code or samples. Code or
     samples that are contributor focused also belong in their corresponding
     component's repo. For example, Eventing specific test code is located in the
-    [knative/eventing tests](https://github.com/knative/eventing/tree/master/test)
+    [knative/eventing tests](https://github.com/knative/eventing/tree/main/test)
     folder.
 
 - **User-focused content**
@@ -209,19 +209,19 @@ and maintained_ and _Community owned and maintained_.
   - _Receives regular traffic_ - To avoid hosting and maintaining unused or
     stale content, if code samples are not being viewed and fail to receive
     attention or use, those samples will be moved into the
-    "[community maintained](https://github.com/knative/docs/tree/master/community/samples)"
+    "[community maintained](https://github.com/knative/docs/tree/main/community/samples)"
     set of samples.
   - _Passes e2e testing_ - All code samples within `docs/[*component*]/samples`
     folders must align with (and pass) the
-    [`e2e` tests](https://github.com/knative/docs/tree/master/test).
+    [`e2e` tests](https://github.com/knative/docs/tree/main/test).
 
   Depending on the Knative component covered by the code sample that you want to
   contribute, your PR should add that sample in one of the following folders:
 
   - Eventing samples:
-    [`/docs/eventing/samples`](https://github.com/knative/docs/tree/master/docs/eventing/samples)
+    [`/docs/eventing/samples`](https://github.com/knative/docs/tree/main/docs/eventing/samples)
   - Serving samples:
-    [`/docs/serving/samples`](https://github.com/knative/docs/tree/master/docs/serving/samples)
+    [`/docs/serving/samples`](https://github.com/knative/docs/tree/main/docs/serving/samples)
 
 - **Community owned and maintained samples**: Code samples that have been
   contributed by Knative community members. These samples might not receive
@@ -246,7 +246,7 @@ in the product, or for a fix or update to existing content.
 - **New or changed features**: If you are adding or updating documentation for a
   new or changed feature, you likely want to open your PR against the `master`
   branch. All pre-release content for active Knative development belongs in
-  [`master`](https://github.com/knative/docs/tree/master/).
+  [`master`](https://github.com/knative/docs/tree/main/).
 
 - **Fixes and updates**: If you find an issue in a past release, for example a
   typo or out-of-date content, you likely need to open multiple and subsequent
@@ -259,7 +259,7 @@ in the product, or for a fix or update to existing content.
   To fix the typo:
 
   1.  Open a PR against the
-      [`master`](https://github.com/knative/docs/tree/master/) branch.
+      [`master`](https://github.com/knative/docs/tree/main/) branch.
   1.  Add one or more `cherrypick-#.#` labels to that PR to indicate which of
       the past release branches should also be fixed. Generally, we only
       maintain the most recent numbered release.
@@ -289,7 +289,7 @@ Use the `/assign` command to set the owner. For example: `/assign @owner_id`
 For code samples, initially set the owner of your PR to the SME who should
 review for technical accuracy. If you don't know who the appropriate owner is,
 nor who your reviewers should be for your PR, you can assign the
-[current working group lead](https://github.com/knative/community/blob/master/working-groups/WORKING-GROUPS.md)
+[current working group lead](https://github.com/knative/community/blob/main/working-groups/WORKING-GROUPS.md)
 of the related component.
 
 If you want to notify and include other stakeholders in your PR review, use the
@@ -302,7 +302,7 @@ contributing to the Knative code base, we've defined the roles of documentation
 contributors separately from the roles of code contributors.
 
 If you're looking for code contributor roles, see
-[ROLES](https://github.com/knative/community/blob/master/ROLES.md).
+[ROLES](https://github.com/knative/community/blob/main/ROLES.md).
 
 ### Member
 
@@ -353,11 +353,11 @@ Members should be proficient in at least one of these review areas.
 
 Add yourself (by sending a PR) to the `members` list in the [Peribolos
 configuration in the `knative/community`
-repo](https://github.com/knative/community/blob/master/peribolos/knative.yaml).
+repo](https://github.com/knative/community/blob/main/peribolos/knative.yaml).
 
 Once you've been added to the Knative org, open a PR to add yourself as a
 docs-reviewer in the
-[OWNERS_ALIASES](https://github.com/knative/docs/tree/master/OWNERS_ALIASES)
+[OWNERS_ALIASES](https://github.com/knative/docs/tree/main/OWNERS_ALIASES)
 file.
 
 ## Approver
@@ -397,7 +397,7 @@ to the Docs repo.
     standpoint.
 
 - Expected to be responsive to review requests as per
-  [community expectations](https://github.com/knative/community/blob/master/REVIEWING.md).
+  [community expectations](https://github.com/knative/community/blob/main/REVIEWING.md).
 
 - Mentor members and contributors to improve their writing.
 
@@ -413,5 +413,5 @@ to become an approver at a meeting of the Documentation Working Group.
 Once you feel you meet the criteria, you can ask one of the current approvers to
 nominate you to become an approver. If all existing approvers agree that you
 meet the criteria open a PR to add yourself as a docs-approver in the
-[OWNERS_ALIASES](https://github.com/knative/docs/tree/master/OWNERS_ALIASES)
+[OWNERS_ALIASES](https://github.com/knative/docs/tree/main/OWNERS_ALIASES)
 file.

@@ -695,7 +695,7 @@ Resource Types:
 Users create new Revisions by updating the Configuration&rsquo;s spec.
 The &ldquo;latest created&rdquo; revision&rsquo;s name is available under status, as is the
 &ldquo;latest ready&rdquo; revision&rsquo;s name.
-See also: <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#configuration">https://github.com/knative/serving/blob/master/docs/spec/overview.md#configuration</a></p>
+See also: <a href="https://github.com/knative/serving/blob/main/docs/spec/overview.md#configuration">https://github.com/knative/serving/blob/main/docs/spec/overview.md#configuration</a></p>
 </p>
 <table>
 <thead>
@@ -789,7 +789,7 @@ ConfigurationStatus
 <p>Revision is an immutable snapshot of code and configuration.  A revision
 references a container image. Revisions are created by updates to a
 Configuration.</p>
-<p>See also: <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#revision">https://github.com/knative/serving/blob/master/docs/spec/overview.md#revision</a></p>
+<p>See also: <a href="https://github.com/knative/serving/blob/main/docs/spec/overview.md#revision">https://github.com/knative/serving/blob/main/docs/spec/overview.md#revision</a></p>
 </p>
 <table>
 <thead>
@@ -915,7 +915,7 @@ Some of the Revisions a Route distributes traffic over may be specified by
 referencing the Configuration responsible for creating them; in these cases
 the Route is additionally responsible for monitoring the Configuration for
 &ldquo;latest ready revision&rdquo; changes, and smoothly rolling out latest revisions.
-See also: <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#route">https://github.com/knative/serving/blob/master/docs/spec/overview.md#route</a></p>
+See also: <a href="https://github.com/knative/serving/blob/main/docs/spec/overview.md#route">https://github.com/knative/serving/blob/main/docs/spec/overview.md#route</a></p>
 </p>
 <table>
 <thead>
@@ -1018,7 +1018,7 @@ underlying Routes and Configurations (much as a kubernetes Deployment
 orchestrates ReplicaSets), and its usage is optional but recommended.</p>
 <p>The Service&rsquo;s controller will track the statuses of its owned Configuration
 and Route, reflecting their statuses and conditions as its own.</p>
-<p>See also: <a href="https://github.com/knative/serving/blob/master/docs/spec/overview.md#service">https://github.com/knative/serving/blob/master/docs/spec/overview.md#service</a></p>
+<p>See also: <a href="https://github.com/knative/serving/blob/main/docs/spec/overview.md#service">https://github.com/knative/serving/blob/main/docs/spec/overview.md#service</a></p>
 </p>
 <table>
 <thead>

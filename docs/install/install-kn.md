@@ -65,5 +65,5 @@ You can run `kn` from a container image. For example:
 You can also [run kn using Tekton](https://github.com/tektoncd/catalog/tree/master/kn).
 
 ## What's next
-To learn more about using `kn`, see the [documentation](https://github.com/knative/client/blob/master/docs/cmd/kn.md).
+To learn more about using `kn`, see the [documentation](https://github.com/knative/client/blob/main/docs/cmd/kn.md).
 

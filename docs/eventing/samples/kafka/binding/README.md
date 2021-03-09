@@ -35,7 +35,7 @@ via Kafka Source
 1. (Optional) Source code for Event Display service
 
    Get the source code of Event Display container image from
-   [here](https://github.com/knative/eventing-contrib/blob/master/cmd/event_display/main.go)
+   [here](https://github.com/knative/eventing-contrib/blob/main/cmd/event_display/main.go)
 
 1. Deploy the Event Display Service via kubectl:
 
@@ -142,7 +142,7 @@ In this case, we will bind any `Job` with the labels `kafka.topic: "logs"`.
 1. Source code for kafka-publisher service
 
    Get the source code of kafka-publisher container image from
-   [here](https://github.com/knative/eventing-contrib/blob/master/test/test_images/kafka-publisher/main.go)
+   [here](https://github.com/knative/eventing-contrib/blob/main/test/test_images/kafka-publisher/main.go)
 
 1. Now we will use the kafka-publisher container to send events to kafka topic
    when the Job runs.
