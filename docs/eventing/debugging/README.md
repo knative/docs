@@ -176,7 +176,7 @@ something went wrong during `chan` reconciliation. See
 
 ##### `src`
 
-`src` is a [`ApiServerSource`](https://github.com/knative/docs/blob/master/docs/eventing/sources/apiserversource.md).
+`src` is a [`ApiServerSource`](../sources/apiserversource.md).
 
 First we will verify that `src` is writing to `chan`.
 
