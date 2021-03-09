@@ -488,7 +488,7 @@ kubectl apply -f {{< artifact repo="serving" file="serving-domainmapping.yaml" >
    kubectl apply -f {{< artifact repo="eventing" file="eventing-core.yaml" >}}
    ```
 
-### Installing a Default Channel (Messaging) Layer (Listed Alphabetically)
+### Installing a default Channel (messaging) layer
 
       <!-- This indentation is important for things to render properly. -->
 
