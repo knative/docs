@@ -384,7 +384,7 @@ At this point, you have a basic installation of Knative Serving!
 
 ### Optional Serving extensions
 
-Follow the steps for any Serving extensions you want to install: 
+Follow the steps for any Serving extensions you want to install:
 
 {{< tabs name="serving_extensions" default="TLS via HTTP01" >}}
 
@@ -681,7 +681,7 @@ At this point, you have a basic installation of Knative Eventing!
 
 ### Optional Eventing extensions
 
-Follow the steps for any Eventing extensions you want to install: 
+Follow the steps for any Eventing extensions you want to install:
 
    <!-- This indentation is important for things to render properly. -->
 
