@@ -45,7 +45,7 @@ You can install Knative by applying YAML files using the `kubectl` CLI.
    kubectl apply -f {{< artifact repo="serving" file="serving-core.yaml" >}}
    ```
 
-### Install a Networking Layer (Listed Alphabetically)
+### Installing a networking layer
 
       <!-- TODO: Link to document/diagram describing what is a networking layer.  -->
 
