@@ -24,6 +24,8 @@ You can install Knative by applying YAML files using the `kubectl` CLI.
 
 ## Prerequisites
 
+Before installation, you must meet the following prerequisites:
+
 - You have a cluster that uses Kubernetes v1.18 or newer.
 - You have installed the [`kubectl` CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
 - If you have only one node in your cluster, you will need at least 6 CPUs, 6 GB of memory, and 30 GB of disk storage.
@@ -32,6 +34,8 @@ You can install Knative by applying YAML files using the `kubectl` CLI.
 - Your Kubernetes cluster must have access to the internet, since Kubernetes needs to be able to fetch images.
 
 ## Installing the Serving component
+
+To install the serving component:
 
 1. Install the required custom resources:
 
@@ -46,6 +50,8 @@ You can install Knative by applying YAML files using the `kubectl` CLI.
    ```
 
 ### Installing a networking layer
+
+Follow the procedure for the networking layer of your choice:
 
       <!-- TODO: Link to document/diagram describing what is a networking layer.  -->
 
@@ -266,6 +272,8 @@ The following commands install Kourier and enable its Knative integration.
 
 ### Configuring DNS
 
+Follow the procedure for the DNS of your choice:
+
       <!-- This indentation is important for things to render properly. -->
 
    {{< tabs name="serving_dns" default="Magic DNS (xip.io)" >}}
@@ -376,6 +384,8 @@ At this point, you have a basic installation of Knative Serving!
 
 ### Optional Serving extensions
 
+Follow the steps for any Serving extensions you want to install: 
+
 {{< tabs name="serving_extensions" default="TLS via HTTP01" >}}
 
 {{% tab name="HPA autoscaling" %}}
@@ -476,6 +486,8 @@ kubectl apply -f {{< artifact repo="serving" file="serving-domainmapping.yaml" >
 
 ## Installing the Eventing component
 
+To install the Eventing component:
+
 1. Install the required custom resources:
 
    ```bash
@@ -489,6 +501,8 @@ kubectl apply -f {{< artifact repo="serving" file="serving-domainmapping.yaml" >
    ```
 
 ### Installing a default Channel (messaging) layer
+
+To install a default Channel (messaging) layer:
 
       <!-- This indentation is important for things to render properly. -->
 
@@ -555,6 +569,8 @@ kubectl apply -f {{< artifact repo="eventing" file="in-memory-channel.yaml" >}}
 {{< /tabs >}}
 
 ### Installing a Broker (Eventing) layer:
+
+To install a Broker (Eventing) layer:
 
       <!-- This indentation is important for things to render properly. -->
    {{< tabs name="eventing_brokers" default="MT-Channel-based" >}}
@@ -664,6 +680,8 @@ discussed above._
 At this point, you have a basic installation of Knative Eventing!
 
 ### Optional Eventing extensions
+
+Follow the steps for any Eventing extensions you want to install: 
 
    <!-- This indentation is important for things to render properly. -->
 
