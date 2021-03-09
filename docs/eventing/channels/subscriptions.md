@@ -22,13 +22,27 @@ kn subscription create <subscription_name> \
   --sink-dead-letter <sink_prefix>:<sink_name>
 ```
 
-Example command:
 
+- `--channel` specifies the source for cloud events that should be processed. You must provide the channel name. If you are not using the default channel that is backed by the Channel resource, you must prefix the channel name with the `<Group:Version:Kind>` for the specified channel type. For example, this will be `messaging.knative.dev:v1beta1:KafkaChannel` for a Kafka backed channel.
+
+- `--sink` specifies the target destination to which the event should be delivered. By default, the `<sink_name>` is interpreted as a Knative service of this name, in the same namespace as the subscription. You can specify the type of the sink by using one of the following prefixes:
+
+    - `ksvc`: A Knative service.
+    - `svc`: A Kubernetes Service.
+    - `channel`: A channel that should be used as destination. Only default channel types can be referenced here.
+    - `broker`: An Eventing broker.
+\
+&nbsp;
+- `--sink-reply` and `--sink-dead-letter` are optional arguments. They can be used to specify where the sink reply will be sent to, and where to send the cloud event in case of a failure, respectively. Both use the same naming conventions for specifying the sink as the `--sink` flag.
+
+Example command:
 ```
 kn subscription create mysubscription --channel mychannel --sink ksvc:myservice
 ```
 
-This example command creates a channel named `mysubscription`, that routes events from a channel named `mychannel` to a service named `myservice`.
+This example command creates a channel named `mysubscription`, that routes events from a channel named `mychannel` to a Knative service named `myservice`.
+
+**NOTE:** The sink prefix is optional. It is also possible to specify the service for `--sink` as just `--sink <service_name>` and omit the `ksvc` prefix.
 
 {{< /tab >}}
 
@@ -73,7 +87,7 @@ This example command creates a channel named `mysubscription`, that routes event
 
 {{< /tab >}} {{< /tabs >}}
 
-## List subscriptions
+## Listing subscriptions
 
 You can list all existing subscriptions by using the `kn` CLI tool.
 
@@ -88,7 +102,7 @@ You can list all existing subscriptions by using the `kn` CLI tool.
     kn subscription list -o yaml
     ```
 
-## Describe a subscription
+## Describing a subscription
 
 You can print details about a subscription by using the `kn` CLI tool:
 
@@ -114,7 +128,7 @@ kn subscription delete <subscription_name>
 {{% tab name="kubectl" %}}
 
 ```
-kubectl delete <custom_resource_filename>
+kubectl subscription delete <subscription_name>
 ```
 
 {{< /tab >}} {{< /tabs >}}
