@@ -554,7 +554,7 @@ kubectl apply -f {{< artifact repo="eventing" file="in-memory-channel.yaml" >}}
 
 {{< /tabs >}}
 
-### Installing a Broker (Eventing) Layer:
+### Installing a Broker (Eventing) layer:
 
       <!-- This indentation is important for things to render properly. -->
    {{< tabs name="eventing_brokers" default="MT-Channel-based" >}}
