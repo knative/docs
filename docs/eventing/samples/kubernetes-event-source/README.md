@@ -158,7 +158,7 @@ simple Knative Service that dumps incoming messages to its log and creates a
        spec:
          containers:
            - # This corresponds to
-             # https://github.com/knative/eventing-contrib/tree/master/cmd/event_display/main.go
+             # https://github.com/knative/eventing-contrib/tree/main/cmd/event_display/main.go
              image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
    ```
 

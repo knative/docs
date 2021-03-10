@@ -16,7 +16,7 @@ A new version of Knative is now available across multiple components.
 Follow the instructions in the documentation [Installing Knative](https://knative.dev/docs/install/) for the respective component.
 
 - Kubernetes minimum version has changed to v1.17
-  - See our [K8s minimum version principle](https://github.com/knative/community/blob/master/mechanics/RELEASE-VERSIONING-PRINCIPLES.md#k8s-minimum-version-principle)
+  - See our [K8s minimum version principle](https://github.com/knative/community/blob/main/mechanics/RELEASE-VERSIONING-PRINCIPLES.md#k8s-minimum-version-principle)
 - Eventing APIs gradauted from v1beta1 to v1
 - Eventing Contribution sources are moved to a new github organization [knative-sandbox](https://github.com/knative-sandbox)
 - The `kn` CLI now has alias for commands and other new features.
@@ -28,7 +28,7 @@ Remember to check the [upgrade docs](https://knative.dev/docs/install/upgrade-in
 
 **Serving v1alpha1 & v1beta1 will EOL in our next release (v0.19)**
 - This applies to the resources: Service, Route, Revision, Configuration
-- You will want to migrate your storage version for these resources to v1 using our [post-install job](https://github.com/knative/serving/blob/master/config/post-install/storage-version-migration.yaml)
+- You will want to migrate your storage version for these resources to v1 using our [post-install job](https://github.com/knative/serving/blob/main/config/post-install/storage-version-migration.yaml)
 
 **Breaking EnableVarLogCollection behaviour**
 - We always mount a emptyDir volume at /var/log in our user-containers. This impacts some popular containers images (ie. nginx) preventing them from starting.

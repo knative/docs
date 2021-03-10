@@ -19,7 +19,7 @@ contributor guidelines.
 
 ### Run website locally
 
-Refer to this [doc](https://github.com/knative/website/blob/master/DEVELOPMENT.md) in the website repo.
+Refer to this [doc](https://github.com/knative/website/blob/main/DEVELOPMENT.md) in the website repo.
 
 ### Website source files
 
@@ -67,7 +67,7 @@ We're excited that you're interested in contributing to the Knative documentatio
   is the best place to go if you have questions about making changes to the
   documentation. We're happy to help!
 
-- [Documentation working group](https://github.com/knative/community/blob/master/working-groups/WORKING-GROUPS.md#documentation) -- Come join
+- [Documentation working group](https://github.com/knative/community/blob/main/working-groups/WORKING-GROUPS.md#documentation) -- Come join
   us in the working group to meet other docs contributors and ask any questions
   you might have.
 

@@ -11,7 +11,7 @@ visualize and trace your requests.
 
 ## Configuring Traces
 
-You can update the configuration file for tracing in [config-tracing.yaml](https://github.com/knative/serving/blob/master/config/core/configmaps/tracing.yaml).
+You can update the configuration file for tracing in [config-tracing.yaml](https://github.com/knative/serving/blob/main/config/core/configmaps/tracing.yaml).
 
 Follow the instructions in the file to set your configuration options. This file includes options such as sample rate (to determine what percentage of requests to trace), debug mode, and backend selection (zipkin or stackdriver).
 

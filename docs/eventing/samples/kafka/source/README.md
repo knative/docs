@@ -68,7 +68,7 @@ Tutorial on how to build and deploy a `KafkaSource` [Eventing source](../../../s
        spec:
          containers:
            - # This corresponds to
-             # https://github.com/knative/eventing-contrib/tree/master/cmd/event_display/main.go
+             # https://github.com/knative/eventing-contrib/tree/main/cmd/event_display/main.go
              image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
    ```
 
