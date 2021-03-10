@@ -270,9 +270,10 @@ The following commands install Kourier and enable its Knative integration.
 
 {{< /tab >}} {{< /tabs >}}
 
-### Configuring DNS
+### Optional: Configuring DNS
 
-Follow the procedure for the DNS of your choice:
+You can configure DNS to prevent the need to run curl commands with a host header.
+To configure DNS, follow the procedure for the DNS of your choice below:
 
       <!-- This indentation is important for things to render properly. -->
 
@@ -500,7 +501,7 @@ To install the Eventing component:
    kubectl apply -f {{< artifact repo="eventing" file="eventing-core.yaml" >}}
    ```
 
-### Installing a default Channel (messaging) layer
+### Optional: Installing a default Channel (messaging) layer
 
 To install a default Channel (messaging) layer:
 
@@ -568,7 +569,7 @@ kubectl apply -f {{< artifact repo="eventing" file="in-memory-channel.yaml" >}}
 
 {{< /tabs >}}
 
-### Installing a Broker (Eventing) layer:
+### Optional: Installing a Broker (Eventing) layer:
 
 To install a Broker (Eventing) layer:
 
