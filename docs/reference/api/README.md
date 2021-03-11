@@ -89,7 +89,7 @@ To generate a version of the API:
       The script is kept up-to-date with changes that go into the Kubernetes API.
       As Knative adds support for those APIs, you might need to make sure the
       corresponding
-      [script `gen-crd-api-reference-docs` version](https://github.com/knative/docs/blob/master/hack/gen-api-reference-docs.sh#L26)
+      [script `gen-crd-api-reference-docs` version](https://github.com/knative/docs/blob/main/hack/gen-api-reference-docs.sh#L26)
       is used.
 
    * If you get the
