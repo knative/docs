@@ -2,7 +2,7 @@
 
 An example template that you can use to start drafting an entry to post on the Knative blog.
 
-[Copy a version of template without instructions](#copy-the-template)
+[**Copy a version of this template without the instructions**](#copy-the-template)
 
 ## Frontmatter
 
