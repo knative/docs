@@ -98,7 +98,8 @@ backoffPolicy: exponential
 #
 # For linear policy, backoff delay is backoffDelay*<numberOfRetries>.
 # For exponential policy, backoff delay is backoffDelay*2^<numberOfRetries>.
-backoffDelay: PT2S```
+backoffDelay: PT2S
+```
 
 ### deadLetterSink
 
@@ -108,12 +109,14 @@ In case of failure, the event is dropped and an error is logged into the system.
 The `deadLetterSink` value must be a Destination.
 
 ```yaml
-spec:
-  delivery:
-    deadLetterSink: <Destination>
-    retry: <number of retries>
-    backoffPolicy: <linear or exponential>
-    backoffDelay: <ISO8601 duration>
+# DeadLetterSink is the sink receiving event that could not be sent to
+# a destination.
+deadLetterSink:
+  ref:
+    apiVersion: v1
+    kind: Service
+    name: my-service
+  uri: /my-path
 ```
 
 Failed events may, depending on the specific Channel implementation in use, be
