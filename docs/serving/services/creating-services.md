@@ -72,5 +72,5 @@ The Service must include conditions of`RoutesReady` and `ConfigurationsReady` in
 
 ## What's next?
 
-* For more information about the Knative Service object, see the [Resource Types](https://github.com/knative/serving/blob/master/docs/spec/overview.md#service) documentation.
+* For more information about the Knative Service object, see the [Resource Types](https://github.com/knative/serving/blob/main/docs/spec/overview.md#service) documentation.
 * For more information about getting started with deploying a Knative application, see the [Getting Started with App Deployment](https://knative.dev/docs/serving/getting-started-knative-app/) documentation.

@@ -21,7 +21,7 @@ To change the {default-domain} value there are a few steps involved:
    ```
 
    This command opens your default text editor and allows you to edit the [config
-   map](https://github.com/knative/serving/blob/master/config/core/configmaps/domain.yaml).
+   map](https://github.com/knative/serving/blob/main/config/core/configmaps/domain.yaml).
 
    ```yaml
    apiVersion: v1

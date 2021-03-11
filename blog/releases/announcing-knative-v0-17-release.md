@@ -188,7 +188,7 @@ The compile dependencies have been updated to Knative Serving 0.17.0 and Knative
 
 **Plugin Inline Support**
 
-- [#902](https://github.com/knative/client/pull/902) It is possible now to create custom variations of kn that can inline golang based plugins into a single binary. See the [plugin README](https://github.com/knative/client/tree/master/docs/plugins#plugin-inlining) for a brief explanation about the mechanics. More documentation and examples pending. (thanks [@rhuss](https://github.com/rhuss))
+- [#902](https://github.com/knative/client/pull/902) It is possible now to create custom variations of kn that can inline golang based plugins into a single binary. See the [plugin README](https://github.com/knative/client/tree/main/docs/plugins#plugin-inlining) for a brief explanation about the mechanics. More documentation and examples pending. (thanks [@rhuss](https://github.com/rhuss))
     - It is important to note, that kn as released from the [client repository](https://github.com/knative/client) will not inline any plugins. It just provides the hooks for enabling plugin inlining.
 
 <details><summary>New Features</summary>

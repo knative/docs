@@ -13,7 +13,7 @@ This guide documents the process to use a custom FQDN for a Service, like `my-se
 
 ## Edit using kubectl
 
-1. Edit the `domainTemplate` entry on the `config-network` configuration. You can find more information about it [here](https://github.com/knative/serving/blob/master/config/core/configmaps/network.yaml#L89):
+1. Edit the `domainTemplate` entry on the `config-network` configuration. You can find more information about it [here](https://github.com/knative/serving/blob/main/config/core/configmaps/network.yaml#L89):
 
    ```shell
    kubectl edit cm config-network --namespace knative-serving

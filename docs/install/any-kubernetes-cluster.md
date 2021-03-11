@@ -555,7 +555,7 @@ kubectl apply -f {{< artifact repo="eventing" file="in-memory-channel.yaml" >}}
 {{% tab name="NATS Channel" %}}
 
 1. First, [Install NATS Streaming for
-   Kubernetes](https://github.com/knative-sandbox/eventing-natss/tree/master/config)
+   Kubernetes](https://github.com/knative-sandbox/eventing-natss/tree/main/config)
 
 1. Then install the NATS Streaming Channel:
 
@@ -816,7 +816,7 @@ The following command installs the Apache CouchDB Source:
 kubectl apply -f {{< artifact org="knative-sandbox" repo="eventing-couchdb" file="couchdb.yaml" >}}
 ```
 
-To learn more about the Apache CouchDB source, read the [documentation](https://github.com/knative-sandbox/eventing-couchdb/blob/master/source/README.md).
+To learn more about the Apache CouchDB source, read the [documentation](https://github.com/knative-sandbox/eventing-couchdb/blob/main/source/README.md).
 
 {{< /tab >}}
 

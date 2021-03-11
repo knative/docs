@@ -37,7 +37,7 @@ Congratulations to the newly elected members! ✨
 - Autoscaling WG
   - Big improvements to the autoscaling documentation, both internally and user-facing. Go check them out!
   - User facing docs: https://knative.dev/docs/serving/configuring-autoscaling/
-  - Technical docs: https://github.com/knative/serving/blob/master/docs/scaling/SYSTEM.md
+  - Technical docs: https://github.com/knative/serving/blob/main/docs/scaling/SYSTEM.md
 - A lot of improvements to the loadbalancing in Knative has landed, vastly improving latency for concurrency-limited revisions. Give HEAD a whirl if you’re seeing issues there.
 - Speaking of issues: We need your input!
   - We’re preparing a questionnaire to gather structured feedback regarding the types of workloads you’re running and which settings you find yourself tweaking to make autoscaling work in your favor.
