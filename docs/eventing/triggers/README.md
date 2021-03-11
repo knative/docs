@@ -2,6 +2,17 @@ A Trigger represents a desire to subscribe to events from a specific Broker.
 
 The `subscriber` value must be a Destination.
 
+```yaml
+# DeadLetterSink is the sink receiving event that could not be sent to
+# a destination.
+deadLetterSink:
+  ref:
+    apiVersion: v1
+    kind: Service
+    name: my-service
+  uri: /my-path
+```
+
 Simple example which will receive all the events from the given (`default`) broker and
 deliver them to Knative Serving service `my-service`:
 
