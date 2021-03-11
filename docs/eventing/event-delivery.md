@@ -72,7 +72,33 @@ after the specified number of retries.
 
 ## Common Delivery Parameters
 
-The `delivery` value must be a Delivery Spec.
+The `delivery` value must be a Delivery Spec, which is a partial schema that is embedded in resources like `Broker`, `Trigger` and `Subscription`.
+
+```yaml
+# DeadLetterSink is the sink receiving event that could not be sent to
+# a destination.
+deadLetterSink:
+  ref:
+    apiVersion: v1
+    kind: Service
+    name: my-service
+  uri: /my-path
+
+# Retry is the minimum number of retries the sender should attempt when
+# sending an event before moving it to the dead letter sink.
+retry: 5
+
+// BackoffPolicy is the retry backoff policy (linear, exponential).
+backoffPolicy: exponential
+
+# BackoffDelay is the delay before retrying.
+# More information on Duration format:
+#  - https://www.iso.org/iso-8601-date-and-time-format.html
+#  - https://en.wikipedia.org/wiki/ISO_8601
+#
+# For linear policy, backoff delay is backoffDelay*<numberOfRetries>.
+# For exponential policy, backoff delay is backoffDelay*2^<numberOfRetries>.
+backoffDelay: PT2S```
 
 ### deadLetterSink
 
