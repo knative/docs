@@ -385,6 +385,10 @@ At this point, you have a basic installation of Knative Serving!
 
 ### Optional Serving extensions
 
+You can apply extensions to customize your Knative Serving installation.
+For more information about the extensions you can apply, see
+[Custom Installation Reference](./custom-install/custom-install.md#knative-serving-installation-files).
+
 Follow the steps for any Serving extensions you want to install:
 
 {{< tabs name="serving_extensions" default="TLS via HTTP01" >}}
@@ -681,6 +685,10 @@ discussed above._
 At this point, you have a basic installation of Knative Eventing!
 
 ### Optional Eventing extensions
+
+You can apply extensions to customize your Knative Eventing installation.
+For more information about the extensions you can apply, see
+[Custom Installation Reference](./custom-install/custom-install.md#knative-eventing-installation-files).
 
 Follow the steps for any Eventing extensions you want to install:
 
