@@ -94,19 +94,19 @@ Introductory statement to define the goal of this sub-task and why its important
 
 ```
 <!--
-Put code into code blocks.
--->
-```
+Put code into code blocks. 
+Markdown formatting: Use spaces, not tabs to indent code blocks, and leave one blank line before and after the block.
+Examples:-->
+<!--
 1. Here's a code snippet:
-   <!-- Use spaces and not tabs to indent code blocks, and leave one blank line before and after the block. -->
-   ```bash
-   kubectl apply --filename test.yaml
-   ```
-1. Another code snippet:
 
    ```bash
-   kubectl apply --filename test2.yaml
-   ```
+   kubectl apply --filename test.yaml
+   ```-->
+<!--
+1. Another inline code snippet with the `kubectl apply` command.
+-->
+```
 
 ## Cleaning up
 ```
@@ -207,19 +207,18 @@ Avoid nesting headings directly on top of each other without text/explanation/co
 Introductory statement to define the goal of this sub-task and why its important:
 
 <!--
-Put code into code blocks.
--->
-
+Put code into code blocks. 
+Markdown formatting: Use spaces, not tabs to indent code blocks, and leave one blank line before and after the block.
+Examples:-->
+<!--
 1. Here's a code snippet:
-   <!-- Use spaces and not tabs to indent code blocks, and leave one blank line before and after the block. -->
+
    ```bash
    kubectl apply --filename test.yaml
-   ```
-1. Another code snippet:
-
-   ```bash
-   kubectl apply --filename test2.yaml
-   ```
+   ```-->
+<!--
+1. Another inline code snippet with the `kubectl apply` command.
+-->
 
 ## Cleaning up
 <!--
