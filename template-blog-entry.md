@@ -67,7 +67,7 @@ Don't forget to link to any new or related concepts that you mention here.
 -->
 ```
 
-### Example step/section 3: 
+### Example step/section 3:
 ```
 <!--
 An introductory sentence about this step or section (ie. why its important, how it relates to the one before, and what the result is)
@@ -84,7 +84,7 @@ Tie it all together and briefly revisit the main key points and then the overall
 
 ## Further reading
 ```
-<!-- 
+<!--
 Add any links to other related resources that users might find useful.
 What's the next step?
 -->
