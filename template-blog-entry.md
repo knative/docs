@@ -27,7 +27,7 @@ keywords: Releases, Steering committee, Demo, Events # Meta keywords for the con
 ---
 ```
 
-Include a commented-out table with tracking info about reviews and approvals: 
+Include a commented-out table with tracking info about reviews and approvals:
 ```
 <!--
 | Reviewer           | Date       | Approval      |
@@ -51,7 +51,7 @@ Introduce the feature you are going to explain:
 ```
 <!-- Add/create as many distinct Steps or Sections as needed. -->
 ```
-### Example step/section 1: 
+### Example step/section 1:
 ```
 <!--
 An introductory sentence about this step or section (ie. why its important and what the result is).
@@ -104,7 +104,7 @@ Add a short bio of yourself here
 title: ""
 linkTitle: ""
 author: ""
-authorHandle: "" 
+authorHandle: ""
 date: "" # Publishing date
 description: "" # A short one-liner describing this blog entry
 folderWithMediaFiles: "./images/<new-feature-name>" # The relative file path (ie. new folder) to any images, etc.
@@ -127,7 +127,7 @@ keywords: Releases, Steering committee, Demo, Events # Meta keywords for the con
 -->
 
 <!-- Add/create as many distinct Steps or Sections as needed. -->
-### Example step/section 1: 
+### Example step/section 1:
 <!--
 An introductory sentence about this step or section (ie. why its important and what the result is).
 Don't forget to link to any new or related concepts that you mention here.
@@ -139,7 +139,7 @@ An introductory sentence about this step or section (ie. why its important, how 
 Don't forget to link to any new or related concepts that you mention here.
 -->
 
-### Example step/section 3: 
+### Example step/section 3:
 <!--
 An introductory sentence about this step or section (ie. why its important, how it relates to the one before, and what the result is)
 Don't forget to link to any new or related concepts that you mention here.
@@ -151,7 +151,7 @@ Tie it all together and briefly revisit the main key points and then the overall
 -->
 
 ## Further reading
-<!-- 
+<!--
 Add any links to related resources that users might find useful.
 What's the next step?
 -->
