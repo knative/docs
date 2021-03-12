@@ -28,7 +28,7 @@ type: "docs" # You won't need to update this.
 ---
 ```
 
-Learn how to do something very cool. 
+Learn how to do something very cool.
 
 ```
 <!--
@@ -37,8 +37,8 @@ content** and the value proposition for the user (why is this important?).
 Example:
 Learn how to use X to reduce/improve/etc. your Y and Z.
 
-Generally, make sure you answer the questions: 
-- "what does this guide show you how to do?" 
+Generally, make sure you answer the questions:
+- "what does this guide show you how to do?"
 - "why would someone want to do this?"
 -->
 ```
@@ -46,14 +46,14 @@ Generally, make sure you answer the questions:
 ## Before you begin
 ```
 <!--
-State all the requirements in this this section of the document. 
+State all the requirements in this this section of the document.
 Define any assumptions made (avoid tripping up the user and distracting them from the Knative feature you are trying to explain).
 This is where you get past any of the non-Knative items so that you can focus on Knative-specific stuff below. For example:
 -->
 ```
 To complete the steps in this task, you must ..... meet/have/install/create/? the following:
 
-- A Kubernetes cluster with [Knative installed](./docs/install/README.md). 
+- A Kubernetes cluster with [Knative installed](./docs/install/README.md).
   <!-- Make sue to use relative links. -->
 - The latest version of ... running?
 - Privileges to .....
@@ -94,7 +94,7 @@ Introductory statement to define the goal of this sub-task and why its important
 
 ```
 <!--
-Put code into code blocks. 
+Put code into code blocks.
 Markdown formatting: Use spaces, not tabs to indent code blocks, and leave one blank line before and after the block.
 Examples:-->
 <!--
@@ -148,7 +148,7 @@ type: "docs" # You won't need to update this.
 # Has the page ever moved? If yes, include the prior location above, starting with path from the site root (for example /docs/, /blog/, or /community/). The old URL will redirect to this new file. For a new pages, "aliases" are not required.
 ---
 
-Learn how to do something very cool. 
+Learn how to do something very cool.
 
 <!--
 Make sure to state the goal of this **task-oriented
@@ -156,22 +156,22 @@ content** and the value proposition for the user (why is this important?).
 Example:
 Learn how to use X to reduce/improve/etc. your Y and Z.
 
-Generally, make sure you answer the questions: 
-- "what does this guide show you how to do?" 
+Generally, make sure you answer the questions:
+- "what does this guide show you how to do?"
 - "why would someone want to do this?"
 -->
 
 
 ## Before you begin
 <!--
-State all the requirements in this this section of the document. 
+State all the requirements in this this section of the document.
 Define any assumptions made (avoid tripping up the user and distracting them from the Knative feature you are trying to explain).
 This is where you get past any of the non-Knative items so that you can focus on Knative-specific stuff below. For example:
 -->
 
 To complete the steps in this task, you must ..... meet/have/install/create/? the following:
 
-- A Kubernetes cluster with [Knative installed](./docs/install/README.md). 
+- A Kubernetes cluster with [Knative installed](./docs/install/README.md).
   <!-- Make sue to use relative links. -->
 - The latest version of ... running?
 - Privileges to .....
@@ -207,7 +207,7 @@ Avoid nesting headings directly on top of each other without text/explanation/co
 Introductory statement to define the goal of this sub-task and why its important:
 
 <!--
-Put code into code blocks. 
+Put code into code blocks.
 Markdown formatting: Use spaces, not tabs to indent code blocks, and leave one blank line before and after the block.
 Examples:-->
 <!--
