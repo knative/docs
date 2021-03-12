@@ -58,7 +58,7 @@ We're excited that you're interested in contributing to the Knative documentatio
   to contribute and outlines the roles for Docs contributors.
 
 - New content templates:
-  - [Documenation](./template-docs-page.md) -- Instructions and a template that
+  - [Documentation](./template-docs-page.md) -- Instructions and a template that
     you can use to help you add new documentation.
   - [Blog](./template-blog-entry.md) -- Instructions and a template that
     you can use to help you post to the Knative blog.
