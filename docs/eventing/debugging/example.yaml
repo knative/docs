@@ -95,9 +95,7 @@ spec:
     spec:
       containers:
         - name: user-container
-          # This corresponds to
-          # https://github.com/knative/eventing-contrib/blob/v0.2.1/cmd/message_dumper/dumper.go.
-          image: gcr.io/knative-releases/knative.dev/eventing-sources/cmd/message_dumper
+          image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
           ports:
             - containerPort: 8080
 

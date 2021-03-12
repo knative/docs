@@ -87,13 +87,13 @@ Create a `CronJob` object:
 
 1. Copy the sample YAML into a `cronjob.yaml` file:
     ```yaml
-    apiVersion: batch/v1
+    apiVersion: batch/v1beta1
     kind: CronJob
     metadata:
       name: heartbeat-cron
     spec:
       # Run every minute
-      schedule: "* * * * *"
+      schedule: "*/1 * * * *"
       jobTemplate:
         metadata:
           labels:
@@ -104,9 +104,9 @@ Create a `CronJob` object:
               restartPolicy: Never
               containers:
                 - name: single-heartbeat
-                  image: <FILL IN YOUR IMAGE HERE>
+                  image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/heartbeats
                   args:
-                    - --period=1
+                  - --period=1
                   env:
                     - name: ONE_SHOT
                       value: "true"
@@ -132,7 +132,7 @@ sample heartbeats event source.
 ##### Prerequisites
 
 - Ensure that `ko publish` is set up correctly:
-  - [`KO_DOCKER_REPO`](https://github.com/knative/serving/blob/master/DEVELOPMENT.md#environment-setup)
+  - [`KO_DOCKER_REPO`](https://github.com/knative/serving/blob/main/DEVELOPMENT.md#environment-setup)
   must be set. For example, `gcr.io/[gcloud-project]` or `docker.io/<username>`.
   - You must have authenticated with your `KO_DOCKER_REPO`.
 
@@ -189,10 +189,10 @@ kn source binding create bind-heartbeat \
           matchLabels:
             app: heartbeat-cron
         sink:
-        ref:
-          apiVersion: serving.knative.dev/v1
-          kind: Service
-          name: event-display
+          ref:
+            apiVersion: serving.knative.dev/v1
+            kind: Service
+            name: event-display
     ```
 2. Apply the file:
     ```bash

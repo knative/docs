@@ -43,21 +43,6 @@ spec:
         namespace: custom-ns
         label:
           istio: custom-gateway
-      - name: cluster-local-gateway
-        enabled: true
-        label:
-          istio: cluster-local-gateway
-          app: cluster-local-gateway
-        k8s:
-          service:
-            type: ClusterIP
-            ports:
-            - port: 15020
-              name: status-port
-            - port: 80
-              name: http2
-            - port: 443
-              name: https
 ```
 
 ## Step 2: Update Knative Gateway

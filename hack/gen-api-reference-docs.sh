@@ -23,7 +23,7 @@ SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 REFDOCS_PKG="github.com/ahmetb/gen-crd-api-reference-docs"
 REFDOCS_REPO="https://${REFDOCS_PKG}.git"
-REFDOCS_VER="v0.2.0"
+REFDOCS_VER="v0.3.0"
 
 KNATIVE_SERVING_REPO="github.com/knative/serving"
 KNATIVE_SERVING_IMPORT_PATH="knative.dev/serving"
@@ -69,16 +69,6 @@ repo_tarball_url() {
     repo="$1"
     commit="$2"
     echo "https://$repo/archive/$commit.tar.gz"
-}
-
-dl_and_extract() {
-    # TODO(ahmetb) remove this function. no longer dl'ing tarballs since they
-    # won't have a .git dir to infer the commit ID from to be used by refdocs.
-    local url dest
-    url="$1"
-    dest="$2"
-    mkdir -p "${dest}"
-    curl -sSLf "$url" | tar zxf - --directory="$dest"  --strip 1
 }
 
 clone_at_commit() {
@@ -159,12 +149,16 @@ main() {
     gen_refdocs "${refdocs_bin}" "${clone_root}" "${template_dir}" \
         "${out_dir}/${KNATIVE_SERVING_OUT_FILE}" "${knative_serving_root}" "./pkg/apis"
 
+    cp "${out_dir}/${KNATIVE_SERVING_OUT_FILE}" "$SCRIPTDIR/../docs/reference/api/${KNATIVE_SERVING_OUT_FILE}"
+
     local knative_eventing_root
     knative_eventing_root="${clone_root}/src/${KNATIVE_EVENTING_IMPORT_PATH}"
     clone_at_commit "https://${KNATIVE_EVENTING_REPO}.git" "${KNATIVE_EVENTING_COMMIT}" \
         "${knative_eventing_root}"
     gen_refdocs "${refdocs_bin}" "${clone_root}" "${template_dir}" \
         "${out_dir}/${KNATIVE_EVENTING_OUT_FILE}" "${knative_eventing_root}" "./pkg/apis"
+
+    cp "${out_dir}/${KNATIVE_EVENTING_OUT_FILE}" "$SCRIPTDIR/../docs/reference/api/${KNATIVE_EVENTING_OUT_FILE}"
 
     # local knative_eventing_contrib_root
     # knative_eventing_contrib_root="${clone_root}/src/${KNATIVE_EVENTING_CONTRIB_IMPORT_PATH}"
@@ -173,14 +167,8 @@ main() {
     # gen_refdocs "${refdocs_bin}" "${clone_root}" "${template_dir}" \
     #     "${out_dir}/${KNATIVE_EVENTING_CONTRIB_OUT_FILE}" "${knative_eventing_contrib_root}" "."
 
-    log "SUCCESS: Generated docs written to ${out_dir}/."
-    log "Opening the ${out_dir}/ directory. You can now copy these API files"
-    log "from ${out_dir}/, into the 'docs/reference/' directory of knative/docs."
-    if command -v xdg-open >/dev/null; then
-        xdg-open "${out_dir}/"
-    elif command -v open >/dev/null; then
-        open "${out_dir}/"
-    fi
+    echo "Applying patches..."
+    git apply $SCRIPTDIR/patches/*.patch
 }
 
 main "$@"

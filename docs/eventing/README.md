@@ -105,11 +105,11 @@ To learn how to use the registry, see the
 
 Knative Eventing also defines an event forwarding and persistence layer, called
 a
-[**Channel**](https://github.com/knative/eventing/blob/master/pkg/apis/messaging/v1/channel_types.go#L57).
+[**Channel**](https://github.com/knative/eventing/blob/main/pkg/apis/messaging/v1/channel_types.go#L57).
 Each channel is a separate Kubernetes [Custom Resource](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
 Events are delivered to Services or forwarded to other channels
 (possibly of a different type) using
-[Subscriptions](https://github.com/knative/eventing/blob/master/pkg/apis/messaging/v1/subscription_types.go).
+[Subscriptions](https://github.com/knative/eventing/blob/main/pkg/apis/messaging/v1/subscription_types.go).
 This allows message delivery in a cluster to vary based on requirements, so that
 some events might be handled by an in-memory implementation while others would
 be persisted using Apache Kafka or NATS Streaming.
@@ -132,7 +132,7 @@ event sources. Sources manage registration and delivery of events from external
 systems using Kubernetes
 [Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
 Learn more about Eventing development in the
-[Eventing work group](https://github.com/knative/community/blob/master/working-groups/WORKING-GROUPS.md#eventing).
+[Eventing work group](https://github.com/knative/community/blob/main/working-groups/WORKING-GROUPS.md#eventing).
 
 ## Installation
 

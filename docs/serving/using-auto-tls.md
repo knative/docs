@@ -38,9 +38,9 @@ Knative supports the following Auto TLS modes:
 
 You must meet the following prerequisites to enable auto TLS:
 
-- The following must be installed on your Knative cluter:
+- The following must be installed on your Knative cluster:
   - [Knative Serving](../install/).
-  - [Istio with SDS, version 1.3 or higher](../install/installing-istio.md#installing-istio-with-SDS-to-secure-the-ingress-gateway),
+  - A Networking layer such as [Kourier](../install/any-kubernetes-cluster.md#installing-the-serving-component), [Istio with SDS, version 1.3 or higher](../install/installing-istio.md#installing-istio-with-SDS-to-secure-the-ingress-gateway),
     [Contour, version 1.1 or higher](../install/any-kubernetes-cluster.md#installing-the-serving-component),
     or [Gloo, version 0.18.16 or higher](https://docs.solo.io/gloo/latest/installation/knative/).
     Note: Currently, [Ambassador](https://github.com/datawire/ambassador) is unsupported.
@@ -187,7 +187,7 @@ running the following command:
 
 ### Configure config-certmanager ConfigMap
 
-Update your [`config-certmanager` ConfigMap](https://github.com/knative-sandbox/net-certmanager/blob/master/config/config.yaml)
+Update your [`config-certmanager` ConfigMap](https://github.com/knative-sandbox/net-certmanager/blob/main/config/config.yaml)
 in the `knative-serving` namespace to reference your new `ClusterIssuer`.
 
 1.  Run the following command to edit your `config-certmanager` ConfigMap:
@@ -235,7 +235,7 @@ in the `knative-serving` namespace to reference your new `ClusterIssuer`.
 ### Turn on Auto TLS
 
 Update the
-[`config-network` ConfigMap](https://github.com/knative/serving/blob/master/config/core/configmaps/network.yaml)
+[`config-network` ConfigMap](https://github.com/knative/serving/blob/main/config/core/configmaps/network.yaml)
 in the `knative-serving` namespace to enable `autoTLS`and specify how HTTP
 requests are handled:
 
@@ -270,7 +270,7 @@ requests are handled:
     ```
 
 1.  Configure how HTTP and HTTPS requests are handled in the
-  [`httpProtocol`](https://github.com/knative/serving/blob/master/config/core/configmaps/network.yaml#L109)
+  [`httpProtocol`](https://github.com/knative/serving/blob/main/config/core/configmaps/network.yaml#L109)
   attribute.
 
     By default, Knative ingress is configured to serve HTTP traffic
@@ -326,7 +326,7 @@ be able to handle HTTPS traffic.
 
 1.  Run the following comand to create a Knative Service:
     ```shell
-    kubectl apply -f https://raw.githubusercontent.com/knative/docs/master/docs/serving/autoscaling/autoscale-go/service.yaml
+    kubectl apply -f https://raw.githubusercontent.com/knative/docs/main/docs/serving/autoscaling/autoscale-go/service.yaml
     ```
 
 1.  When the certificate is provisioned (which could take up to several minutes depending on 

@@ -28,7 +28,7 @@ Below are a set of site elements that have causes issues in the past.
 ## Code samples
 
 The following use the
-[`readfile` shortcode](https://github.com/knative/website/blob/master/layouts/shortcodes/readfile.md)
+[`readfile` shortcode](https://github.com/knative/website/blob/main/layouts/shortcodes/readfile.md)
 
 {{< readfile file="../hack/reference-docs-gen-config.json" code="true" lang="json" >}}
 
@@ -38,9 +38,9 @@ The following use the
 
 Examples of how the manual and dynamic version number or branch name can be
 added in-line with the
-[`version` shortcode](https://github.com/knative/website/blob/master/layouts/shortcodes/version.md)
+[`version` shortcode](https://github.com/knative/website/blob/main/layouts/shortcodes/version.md)
 (uses the define values from
-[config/\_default/params.toml](https://github.com/knative/website/blob/master/config/_default/params.toml))
+[config/\_default/params.toml](https://github.com/knative/website/blob/main/config/_default/params.toml))
 
 1. Shortcode: <code>{<code>{% version %}</code>}</code>
 

@@ -90,6 +90,31 @@ spec:
     backoffDelay: <ISO8601 duration>
 ```
 
+Failed events may, depending on the specific Channel implementation in use, be
+enhanced with extension attributes prior to forwarding to the`deadLetterSink`.
+These extension attributes are as follows:
+
+- **knativeerrorcode**
+    - **Type:** Int
+    - **Description:** The HTTP Response **StatusCode** from the final event
+      dispatch attempt.
+    - **Constraints:** Should always be present as every HTTP Response contains
+      a **StatusCode**.
+    - **Examples:**
+        - "500"
+        - ...any HTTP StatusCode...
+
+- **knativeerrordata**
+    - **Type:** String
+    - **Description:** The HTTP Response **Body** from the final event dispatch
+      attempt.
+    - **Constraints:** Will be empty if the HTTP Response **Body** was empty,
+      and might be truncated if the length is excessive.
+    - **Examples:**
+        - 'Internal Server Error: Failed to process event.'
+        - '{"key": "value"}'
+        - ...any HTTP Response Body...
+
 ## Channel Support
 
 The table below summarizes what delivery parameters are supported for each channel implementation.

@@ -5,7 +5,7 @@ weight: 31
 type: "docs"
 ---
 
-![version](https://img.shields.io/badge/API_Version-v1beta1-red?style=flat-square)
+![version](https://img.shields.io/badge/API_Version-v1beta2-red?style=flat-square)
 
 A PingSource produces events with a fixed payload on a specified cron schedule.
 
@@ -15,7 +15,7 @@ The PingSource source type is enabled by default when you install Knative Eventi
 
 ## Example
 
-This example shows how to send an event every second to a Event Display Service.
+This example shows how to send an event every minute to a Event Display Service.
 
 ### Creating a namespace
 
@@ -72,7 +72,7 @@ EOF
 ### Creating the PingSource
 
 You can now create the `PingSource` sending an event containing
-`{"message": "Hello world!"}` every second.
+`{"message": "Hello world!"}` every minute.
 
 {{< tabs name="create-source" default="YAML" >}}
 {{% tab name="YAML" %}}
@@ -98,13 +98,13 @@ EOF
 {{< /tab >}}
 
 {{% tab name="kn" %}}
-
+Notice that the namespace is specified in two places in the command in `--namespace` and the `--sink` hostname
 ```shell
 kn source ping create test-ping-source \
-  --namespace pingsource-example
+  --namespace pingsource-example \
   --schedule "*/1 * * * *" \
   --data '{"message": "Hello world!"}' \
-  --sink http://event-display.svc.cluster.local
+  --sink http://event-display.pingsource-example.svc.cluster.local
 ```
 
 {{< /tab >}}

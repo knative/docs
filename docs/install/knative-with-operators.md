@@ -1,84 +1,59 @@
 ---
-title: "Installing Knative components using Operator"
-weight: 10
+title: "Knative Operator installation"
+weight: 02
 type: "docs"
+showlandingtoc: "false"
 ---
 
-Knative provides an [operator](https://github.com/knative/operator) as a tool to install, configure and manage Knative. The Knative operator leverages custom objects
-in the cluster to define and manage the installed Knative software. This guide explains how to install and uninstall
-Knative using Knative operator.
+Knative provides a [Kubernetes Operator](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/) to install, configure and manage Knative.
 
-## Before you begin
-
-Knative installation using the Operator requires the following:
-
-- A Kubernetes cluster v1.16 or newer, as well as a compatible kubectl. This guide assumes that you've already created
-a Kubernetes cluster. If you have only one node for your cluster, set CPUs to at least 6, Memory to at least 6.0 GB,
-Disk storage to at least 30 GB. If you have multiple nodes for your cluster, set CPUs to at least 2, Memory to at least
-4.0 GB, Disk storage to at least 20 GB for each node.
-- The Kubernetes cluster must be able to access the internet, since the Knative operator downloads images online.
-- [Download and install Istio](./installing-istio.md).
-
-## Limitations of Knative Operator:
-
-Knative Operator is still in Alpha phase. It has not been tested in a production environment, and should be used
+**NOTE:** The Knative Operator is still in Alpha phase. It has not been tested in a production environment, and should be used
 for development or test purposes only.
 
-## Install Knative with the Knative Operator
+## Prerequisites
 
-You can find the release information of Knative Operator on the [Releases page](https://github.com/knative/operator/releases).
+- You have a cluster that uses Kubernetes v1.18 or newer.
+- You have installed the `kubectl` CLI.
+- If you have only one node in your cluster, you will need at least 6 CPUs, 6 GB of memory, and 30 GB of disk storage.
+- If you have multiple nodes in your cluster, for each node you will need at least 2 CPUs, 4 GB of memory, and 20 GB of disk storage.
+- Your Kubernetes cluster must have access to the internet, since Kubernetes needs to be able to fetch images, such as `gcr.io/knative-releases/knative.dev/operator/cmd/operator:<version>`.
+<!--TODO: Verify these requirements-->
+- You have installed [Istio](./installing-istio.md).
 
-### Installing the Knative Operator
+## Installing the latest release
 
-__From releases__:
+You can find information about the different released versions of the Knative Operator on the [Releases page](https://github.com/knative/operator/releases).
 
-Install the latest Knative operator with the following command:
+Install the latest stable Operator release:
 
 ```
 kubectl apply -f {{< artifact org="knative" repo="operator" file="operator.yaml" >}}
 ```
 
-__From source code__:
+## Verify your installation
 
-You can also install Knative Operator from source using `ko`.
-
-1. Install the [ko](https://github.com/google/ko) build tool.
-1. Download the source code using the following command:
-
-```
-git clone https://github.com/knative/operator.git
-```
-
-1. Install the operator in the root directory of the source using the following command:
-
-```
-ko apply -f config/
-```
-
-### Verify the operator installation
-
-Verify the installation of Knative Operator using the command:
+Verify your installation:
 
 ```
 kubectl get deployment knative-operator
 ```
 
-If the operator is installed correctly, the deployment should show a `Ready` status. Here is a sample output:
+If the operator is installed correctly, the deployment shows a `Ready` status:
 
 ```
 NAME               READY   UP-TO-DATE   AVAILABLE   AGE
 knative-operator   1/1     1            1           19h
 ```
 
-### Track the log
+## Track the log
 
-Use the following command to track the log of the operator:
+Track the log of the operator:
 
 ```
 kubectl logs -f deploy/knative-operator
 ```
 
-### Installing the Knative Serving component
+## Installing the Knative Serving component
 
 1. Create and apply the Knative Serving CR:
 
@@ -126,7 +101,7 @@ spec:
     - URL: https://github.com/knative/serving/releases/download/v${VERSION}/serving-core.yaml
     - URL: https://github.com/knative/serving/releases/download/v${VERSION}/serving-hpa.yaml
     - URL: https://github.com/knative/serving/releases/download/v${VERSION}/serving-post-install-jobs.yaml
-    - URL: https://github.com/knative/net-istio/releases/download/v0.17.0/net-istio.yaml
+    - URL: https://github.com/knative/net-istio/releases/download/v${VERSION}/net-istio.yaml
 ```
 
 The field `spec.version` is used to set the version of Knative Serving. Replace `{{spec.version}}` with the correct version number.
@@ -246,8 +221,6 @@ Knative Serving with different ingresses:
    {{< tabs name="serving_networking" default="Ambassador" >}}
    {{% tab name="Ambassador" %}}
 
-{{% feature-state version="v0.8" state="alpha" %}}
-
 The following commands install Ambassador and enable its Knative integration.
 
 1. Create a namespace to install Ambassador in:
@@ -305,20 +278,12 @@ The following commands install Ambassador and enable its Knative integration.
 
 {{% tab name="Contour" %}}
 
-{{% feature-state version="v0.18" state="stable" %}}
-
 The following commands install Contour and enable its Knative integration.
 
 1. Install a properly configured Contour:
 
    ```bash
    kubectl apply --filename {{< artifact repo="net-contour" file="contour.yaml" >}}
-   ```
-
-1. Install the Knative Contour controller:
-
-   ```bash
-   kubectl apply --filename {{< artifact repo="net-contour" file="net-contour.yaml" >}}
    ```
 
 1. To configure Knative Serving to use Contour, apply the content of the Serving CR as below:
@@ -331,6 +296,9 @@ The following commands install Contour and enable its Knative integration.
      name: knative-serving
      namespace: knative-serving
    spec:
+     ingress:
+       contour:
+         enabled: true
      config:
        network:
          ingress.class: "contour.ingress.networking.knative.dev"
@@ -348,8 +316,6 @@ The following commands install Contour and enable its Knative integration.
 {{< /tab >}}
 
 {{% tab name="Gloo" %}}
-
-{{% feature-state version="v0.8" state="alpha" %}}
 
 _For a detailed guide on Gloo integration, see
 [Installing Gloo for Knative](https://docs.solo.io/gloo/latest/installation/knative/)
@@ -388,12 +354,10 @@ The following commands install Gloo and enable its Knative integration.
    metadata:
      name: knative-serving
      namespace: knative-serving
-   spec:
-     ingress:
-       gloo:
-         enabled: true
    EOF
    ```
+
+   There is no need to configure the ingress class to use the gloo.
 
 1. Fetch the External IP or CNAME:
 
@@ -406,8 +370,6 @@ The following commands install Gloo and enable its Knative integration.
 {{< /tab >}}
 
 {{% tab name="Kong" %}}
-
-{{% feature-state version="v0.13" state="" %}}
 
 The following commands install Kong and enable its Knative integration.
 
@@ -445,15 +407,7 @@ The following commands install Kong and enable its Knative integration.
 
 {{% tab name="Kourier" %}}
 
-{{% feature-state version="v0.17" state="beta" %}}
-
 The following commands install Kourier and enable its Knative integration.
-
-1. Install the Knative Kourier controller:
-
-   ```bash
-   kubectl apply --filename {{< artifact repo="net-kourier" file="kourier.yaml" >}}
-   ```
 
 1. To configure Knative Serving to use Kourier, apply the content of the Serving CR as below:
 
@@ -465,6 +419,9 @@ The following commands install Kourier and enable its Knative integration.
      name: knative-serving
      namespace: knative-serving
    spec:
+     ingress:
+       kourier:
+         enabled: true
      config:
        network:
          ingress.class: "kourier.ingress.networking.knative.dev"
@@ -589,7 +546,7 @@ Refer to the "Real DNS" method for a permanent solution.
    kubectl get pods --namespace knative-serving
    ```
 
-### Installing the Knative Eventing component
+## Installing the Knative Eventing component
 
 1. Create and apply the Knative Eventing CR:
 

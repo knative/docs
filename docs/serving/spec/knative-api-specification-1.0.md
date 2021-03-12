@@ -1,7 +1,5 @@
 # Knative Serving API Specification
 
-Authors: [argent@google.com](mailto:argent@google.com),
-[dangerd@google.com](mailto:dangerd@google.com)
 
 <table>
   <tr>
@@ -30,7 +28,7 @@ APPROVED</p>
 
    </td>
    <td><p style="text-align: right">
-2019-11-04</p>
+2020-12-16</p>
 
    </td>
   </tr>
@@ -38,7 +36,7 @@ APPROVED</p>
    <td><p style="text-align: right">
 <strong>Version</strong></p>
    </td>
-   <td> 1.0.1  </td>
+   <td> 1.0.2  </td>
   </tr>
 </table>
 
@@ -72,7 +70,7 @@ additional constraints beyond the general Kubernetes model:
   namespaces or any cluster-level resources.
 
 This document does not define the
-[runtime contract (see this document)](https://github.com/knative/serving/blob/master/docs/runtime-contract.md)
+[runtime contract (see this document)](https://github.com/knative/serving/blob/main/docs/runtime-contract.md)
 nor prescribe specific implementations of supporting services such as access
 control, observability, or resource management.
 
@@ -147,6 +145,61 @@ low-level scaling and routing objects, Knative Serving provides a high-level
 Service object to reduce the cognitive overhead for application developers – the
 Service object should provide sufficient controls to cover most of application
 deployment scenarios (by frequency).
+
+## Extensions
+
+Extending the Knative resource model allows for custom semantics to be
+offered by implementions of the specification. Unless otherwise noted,
+implementations of this specification MAY define extensions but those
+extensions MUST NOT contradict the semantics defined within this specification.
+
+There are several ways in which implementations can extend the model:
+* Annotations and Labels<br>
+  _Note_: Because this mechanism allows new controllers to be added to the
+  system without requiring code changes to the core Knative components, it is
+  the preferred mechanism for extending the Knative interface.
+
+  Allowing end users to include annotations or labels on the Knative resources
+  allows for them to indicate that they would like some additional semantics
+  applied to those resources. When defining annotations, or labels, it
+  is STRONGLY RECOMMENDED that they have some vendor-specific prefix to
+  avoid any potential naming conflict with other extensions or future
+  annotations defined by the specification. For more information on
+  annotations and labels, see
+  [here](https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#label-selector-and-annotation-conventions).
+
+* Additional Properties<br>
+  There might be times when annotations and labels can not be used to
+  properly (or easily) allow end users to convey their desired semantics,
+  in which case additional well-defined properties might need to be
+  defined by implementations.
+
+  In these cases vendor-specific properties MAY be defined and it is
+  STRONGLY RECOMMENDED that they be named, or prefixed, in such a way
+  to clearly indicate their scope and purpose. Choosing a name that
+  is too generic might lead to conflicts with other vendor extensions
+  or future changes to the specification.
+
+  For example, adding authentication on a per-tag basis via annotations
+  might look like:
+  ```
+  annotations:
+    knative.vendor.com/per-tag-auth: "{'cannary': true, 'latest': true}"
+  ```
+  but, that is not as user-friendly as extending the `traffic` section itself:
+  ```
+  spec:
+    traffic:
+    - revisionName: a
+      tag: cannary
+      knative.vendor.com/auth: true
+    - revisonName: b
+      percent: 100
+      tag: stable
+    - configurationName: this
+      tag: latest
+      knative.vendor.com/auth: true
+  ```
 
 ## Service
 
@@ -1309,6 +1362,9 @@ Restrictions to the values of the field are noted in the Description column.
 
 ## TrafficTarget
 
+This resource specifies how the network traffic for a particular
+Revision or Configuration is to be configured.
+
 <table>
   <tr>
    <td><strong>FieldName</strong>
@@ -1376,22 +1432,17 @@ Restrictions to the values of the field are noted in the Description column.
    </td>
    <td>int
 <br>
-(Required)
+(Optional)
 <br>
 Min: 0
 <br>
 Max: 100
    </td>
-   <td>The
-
-<a href="#request-routing">percentage of requests which should be allocated from
-the main Route domain name</a> to the specified <code>revisionName</code> or
-<code>configurationName</code>.
-
+   <td>The <code>percent</code> is optionally used to specify the percentage of requests which should be allocated from the main Route domain name to the specified <code>revisionName</code> or <code>configurationName</code>.
 <p>
-All <code>percent</code> values in <code>traffic</code> MUST sum to 100.
+To indicate that percentage based routing is to be used, at least one <code>traffic</code> section MUST have a non-zero <code>percent</code> value, and all values MUST sum to 100. Note, a missing <code>precent</code> value implies zero.
    </td>
-   <td>REQUIRED
+   <td>OPTIONAL
    </td>
   </tr>
   <tr>
@@ -1568,7 +1619,7 @@ Min: 0
 <br>
 Max: 1
    </td>
-   <td>Only a single <code>port</code> may be specified. The port must be named <a href="https://github.com/knative/serving/blob/master/docs/runtime-contract.md#protocols-and-ports">as described in the runtime contract</a>.
+   <td>Only a single <code>port</code> may be specified. The port must be named <a href="https://github.com/knative/serving/blob/main/docs/runtime-contract.md#protocols-and-ports">as described in the runtime contract</a>.
    </td>
    <td>REQUIRED
    </td>
@@ -1643,7 +1694,7 @@ Max: 1
 <br>
 (Optional)
    </td>
-   <td><code>volumeMounts</code> MUST correspond to a volume and specify an absolute mount path which does not shadow <a href="https://github.com/knative/serving/blob/master/docs/runtime-contract.md#default-filesystems">the runtime contract directories</a>.
+   <td><code>volumeMounts</code> MUST correspond to a volume and specify an absolute mount path which does not shadow <a href="https://github.com/knative/serving/blob/main/docs/runtime-contract.md#default-filesystems">the runtime contract directories</a>.
    </td>
    <td>REQUIRED, if volumes is supported.
    </td>
@@ -2744,7 +2795,7 @@ Max: 1
   </tr>
 </table>
 
-## [Addressable](https://github.com/knative/pkg/blob/master/apis/duck/v1/addressable_types.go) (Interface)
+## [Addressable](https://github.com/knative/pkg/blob/main/apis/duck/v1/addressable_types.go) (Interface)
 
 <table>
   <tr>
@@ -2760,7 +2811,7 @@ Max: 1
   <tr>
    <td><code>url</code>
    </td>
-   <td>string (<a href="https://github.com/knative/pkg/blob/master/apis/url.go">apis.URL</a>)
+   <td>string (<a href="https://github.com/knative/pkg/blob/main/apis/url.go">apis.URL</a>)
    </td>
    <td>A generic mechanism for a custom resource definition to indicate a destination for message delivery.
    </td>
@@ -2794,3 +2845,9 @@ Max: 1
   </tr>
 
 </table>
+
+## Authors
+
+[Dan Gerdesmeier](mailto:dangerd@google.com)
+[Doug Davis](dug@us.ibm.com)
+[Evan Anderson](mailto:evana@vmware.com)
