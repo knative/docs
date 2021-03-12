@@ -57,9 +57,11 @@ We're excited that you're interested in contributing to the Knative documentatio
 - [How to contribute](./CONTRIBUTING.md) -- Contains information about how
   to contribute and outlines the roles for Docs contributors.
 
-- [Template page](./new-page-template.md) -- A blank documentation page that
-  demonstrates how to format a new page and includes tips on structuring your
-  documentation.
+- New content templates:
+  - [Documentation](./template-docs-page.md) -- Instructions and a template that
+    you can use to help you add new documentation.
+  - [Blog](./template-blog-entry.md) -- Instructions and a template that
+    you can use to help you post to the Knative blog.
 
 ## Getting help
 
