@@ -62,7 +62,7 @@ To complete the steps in this task, you must ..... meet/have/install/create/? th
 ## Break steps into logical sections
 ```
 <!--
-Avoid nesting headings directly on top of each other without text/explanation/context inbetween.
+Avoid nesting headings directly on top of each other without text/explanation/context between.
 -->
 ```
 
@@ -86,7 +86,7 @@ Introductory statement to define the goal of these steps and the role they play 
 ### Use a sub-section to group related sub-tasks
 ```
 <!--
-Avoid nesting headings directly on top of each other without text/explanation/context inbetween.
+Avoid nesting headings directly on top of each other without text/explanation/context between.
 -->
 ```
 
@@ -179,7 +179,7 @@ To complete the steps in this task, you must ..... meet/have/install/create/? th
 
 ## Break steps into logical sections
 <!--
-Avoid nesting headings directly on top of each other without text/explanation/context inbetween.
+Avoid nesting headings directly on top of each other without text/explanation/context between.
 -->
 
 Introductory statement to define the goal of these steps and the role they play in this document (why its important?):
@@ -201,7 +201,7 @@ Introductory statement to define the goal of these steps and the role they play 
 
 ### Use a sub-section to group related sub-tasks
 <!--
-Avoid nesting headings directly on top of each other without text/explanation/context inbetween.
+Avoid nesting headings directly on top of each other without text/explanation/context between.
 -->
 
 Introductory statement to define the goal of this sub-task and why its important:
