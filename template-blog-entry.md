@@ -39,7 +39,7 @@ Include a commented-out table with tracking info about reviews and approvals:
 
 ## Blog content body
 ```
-<!-- 
+<!--
 Introduce the feature you are going to explain:
  * state what the goal of this blog entry is
  * how you use the feature
@@ -102,8 +102,8 @@ Add a short bio of yourself here
 ```
 ---
 title: ""
-linkTitle: "" 
-author: "" 
+linkTitle: ""
+author: ""
 authorHandle: "" 
 date: "" # Publishing date
 description: "" # A short one-liner describing this blog entry
