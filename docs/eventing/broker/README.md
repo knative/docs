@@ -95,7 +95,7 @@ After you have created a Broker, you can complete the following tasks to finish 
 
 Create a function to receive events. This document uses a Knative Service, but
 it could be anything that is
-[Callable](https://github.com/knative/eventing/blob/master/docs/spec/interfaces.md).
+[Callable](https://github.com/knative/eventing/blob/main/docs/spec/interfaces.md).
 
 ```shell
 kubectl create -f - <<EOF
@@ -109,7 +109,7 @@ spec:
     spec:
       containers:
       -  # This corresponds to
-         # https://github.com/knative/eventing-contrib/tree/master/cmd/event_display
+         # https://github.com/knative/eventing-contrib/tree/main/cmd/event_display
          image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
 EOF
 ```

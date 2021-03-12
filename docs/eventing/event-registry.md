@@ -7,7 +7,7 @@ type: "docs"
 ## Overview
 
 The event registry maintains a catalog of event types that can be consumed
-from different brokers. It introduces the [EventType custom resource](https://github.com/knative/eventing/blob/master/pkg/apis/eventing/v1beta1/eventtype_types.go) in order to persist the event
+from different brokers. It introduces the [EventType custom resource](https://github.com/knative/eventing/blob/main/pkg/apis/eventing/v1beta1/eventtype_types.go) in order to persist the event
 type information in the cluster data store.
 
 ## Before you begin

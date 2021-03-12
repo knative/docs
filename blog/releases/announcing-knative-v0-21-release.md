@@ -32,7 +32,7 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
 ### Highlights
 
 - Kubernetes minimum version has changed to v1.18
-    - See our [K8s minimum version principle](https://github.com/knative/community/blob/master/mechanics/RELEASE-VERSIONING-PRINCIPLES.md#k8s-minimum-version-principle)
+    - See our [K8s minimum version principle](https://github.com/knative/community/blob/main/mechanics/RELEASE-VERSIONING-PRINCIPLES.md#k8s-minimum-version-principle)
 - Now Serving supports Istio 1.9 and Contour 1.12
 - Fix for DomainMapping when using Kourier with AutoTLS
 - Eventing Source **PingSource** binary mode has breaking changes.
@@ -47,7 +47,7 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
 #### 🚨 Breaking or Notable
 
 - Kubernetes minimum version has changed to v1.18
-    - See our [K8s minimum version principle](https://github.com/knative/community/blob/master/mechanics/RELEASE-VERSIONING-PRINCIPLES.md#k8s-minimum-version-principle)
+    - See our [K8s minimum version principle](https://github.com/knative/community/blob/main/mechanics/RELEASE-VERSIONING-PRINCIPLES.md#k8s-minimum-version-principle)
 - GC v1 and Labeler v1 deprecated and removed from the code base
 - Webhooks certificates now use Ed25519 instead of RSA/2048 and have an expiry of one week ([knative/pkg#1998](https://github.com/knative/pkg/pull/1998))
 
@@ -204,9 +204,9 @@ In case of issues with this change, please let us know and we will fix it asap. 
 
 #### 💫 New Features & Changes
 
-CLI `kn` [Plugins](https://github.com/knative/client/blob/master/docs/plugins/README.md) jump on the release train
+CLI `kn` [Plugins](https://github.com/knative/client/blob/main/docs/plugins/README.md) jump on the release train
 
-With release v0.21, Knative ships also it first set of kn plugins, that are aligned with respect to their dependencies, so that they can be easily [inlined](https://github.com/knative/client/blob/master/docs/plugins/README.md#plugin-inlining).
+With release v0.21, Knative ships also it first set of kn plugins, that are aligned with respect to their dependencies, so that they can be easily [inlined](https://github.com/knative/client/blob/main/docs/plugins/README.md#plugin-inlining).
 
 The plugins included in version `v0.21` are:
 

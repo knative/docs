@@ -30,7 +30,7 @@ propose changes to this document in a pull request.
 ## Code of conduct
 
 Knative follows the
-[Knative Code of Conduct](https://github.com/knative/community/blob/master/CODE-OF-CONDUCT.md).
+[Knative Code of Conduct](https://github.com/knative/community/blob/main/CODE-OF-CONDUCT.md).
 By participating, you are expected to uphold this code. Please report
 unacceptable behavior to <knative-code-of-conduct@googlegroups.com>.
 
@@ -75,7 +75,7 @@ repo:
       `lgtm` label.
 
     - The
-      [Knative technical writers](https://github.com/knative/docs/blob/master/OWNERS_ALIASES)
+      [Knative technical writers](https://github.com/knative/docs/blob/main/OWNERS_ALIASES)
       are who provide the `approved` label when the content meets quality,
       clarity, and organization standards (see [Style Guide](#style-guide)).
 
@@ -104,7 +104,7 @@ issue using the following steps:
       samples to typos. When you create a bug report, include as many details as
       possible and include suggested fixes to the issue. If you know which
       Knative component your bug is related to, you can assign the appropriate
-      [Working Group Lead](https://github.com/knative/community/blob/master/working-groups/WORKING-GROUPS.md).
+      [Working Group Lead](https://github.com/knative/community/blob/main/working-groups/WORKING-GROUPS.md).
 
     - **Feature request**: For upcoming changes to the documentation or requests
       for more information on a particular subject.
@@ -143,7 +143,7 @@ Knative documentation:
 ## Working group meetings
 
 The
-[Knative Documentation Working Group](https://github.com/knative/community/blob/master/working-groups/WORKING-GROUPS.md#documentation)
+[Knative Documentation Working Group](https://github.com/knative/community/blob/main/working-groups/WORKING-GROUPS.md#documentation)
 meeting info and times.
 [Click here](https://calendar.google.com/calendar/embed?src=knative.team_9q83bg07qs5b9rrslp5jor4l6s%40group.calendar.google.com)
 
@@ -225,17 +225,17 @@ main documentation come with an ongoing cost of keeping up to date.
 ## Branches
 
 Knative attempts to
-[support the last 4 releases](https://github.com/knative/community/blob/master/mechanics/RELEASE-VERSIONING-PRINCIPLES.md).
-By default, new documentation should be written on the `master` branch and then
+[support the last 4 releases](https://github.com/knative/community/blob/main/mechanics/RELEASE-VERSIONING-PRINCIPLES.md).
+By default, new documentation should be written on the `main` branch and then
 cherry-picked to the release branches if needed. Note that the default view of
 <https://knative.dev/> is of the most recent release branch, which means that
-changes to `master` don't show up unless explicitly cherrypicked. This also
+changes to `main` don't show up unless explicitly cherrypicked. This also
 means that documentation changes for a release _should be made during the
 development cycle_, rather than at the last minute or after the release.
 
 The
 [`/cherrypick` tool](https://github.com/kubernetes/test-infra/tree/master/prow/external-plugins/cherrypicker)
-can be use to automatically pull back changes from `master` to previous releases
+can be use to automatically pull back changes from `main` to previous releases
 if necessary.
 
 ## Tools and Style
@@ -287,12 +287,12 @@ related content, or external-facing user content.
   located in the corresponding `docs` folder of that component's repository. For
   example, if you contribute code to the Knative Serving component, you might
   need to add contributor focused information into the `docs` folder of the
-  [knative/serving repo](https://github.com/knative/serving/tree/master/docs/).
+  [knative/serving repo](https://github.com/knative/serving/tree/main/docs/).
 
 - _Code samples_: Includes contributor related code or samples. Code or samples
   that are contributor focused also belong in their corresponding component's
   repo. For example, Eventing specific test code is located in the
-  [knative/eventing tests](https://github.com/knative/eventing/tree/master/test)
+  [knative/eventing tests](https://github.com/knative/eventing/tree/main/test)
   folder.
 
 ### User-focused content
@@ -320,12 +320,12 @@ related content, or external-facing user content.
     - _Receives regular traffic_ - To avoid hosting and maintaining unused or
       stale content, if code samples are not being viewed and fail to receive
       attention or use, those samples will be moved into the
-      “[community maintained](https://github.com/knative/docs/tree/master/community/samples)”
+      “[community maintained](https://github.com/knative/docs/tree/main/community/samples)”
       set of samples.
 
     - _Passes e2e testing_ - All code samples within
       `docs/[*component*]/samples` folders must align with (and pass) the
-      [`e2e` tests](https://github.com/knative/docs/tree/master/test).
+      [`e2e` tests](https://github.com/knative/docs/tree/main/test).
 
   - **Community owned and maintained samples**: For sample code which doesn't
     meet the above criteria, put the code in a separate repository and link to

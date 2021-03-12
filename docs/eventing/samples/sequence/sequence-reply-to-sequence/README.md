@@ -6,7 +6,7 @@ finally displaying the resulting output.
 ![Logical Configuration](./sequence-reply-to-sequence.png)
 
 The functions used in these examples live in
-[https://github.com/knative/eventing-contrib/blob/master/cmd/appender/main.go](https://github.com/knative/eventing-contrib/blob/master/cmd/appender/main.go).
+[https://github.com/knative/eventing-contrib/blob/main/cmd/appender/main.go](https://github.com/knative/eventing-contrib/blob/main/cmd/appender/main.go).
 
 ## Prerequisites
 

@@ -158,7 +158,7 @@ Release Notes for [eventing-rabbitmq](https://github.com/knative-sandbox/eventin
 ### Client v0.19
 
 - The `kn` 0.19.0 introduces two new commands (`kn service apply` and `kn service import`) and removes some deprecated options, in addition to bug fixes and some other goodies described below.
-- You can find the full list of changes in the [CHANGELOG](https://github.com/knative/client/blob/master/CHANGELOG.adoc).
+- You can find the full list of changes in the [CHANGELOG](https://github.com/knative/client/blob/main/CHANGELOG.adoc).
 
 🚨 Breaking
 

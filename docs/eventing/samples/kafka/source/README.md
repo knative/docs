@@ -68,7 +68,7 @@ Tutorial on how to build and deploy a `KafkaSource` [Eventing source](../../../s
        spec:
          containers:
            - # This corresponds to
-             # https://github.com/knative/eventing-contrib/tree/master/cmd/event_display/main.go
+             # https://github.com/knative/eventing-contrib/tree/main/cmd/event_display/main.go
              image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
    ```
 
@@ -295,7 +295,7 @@ KafkaSource expects these files to be in pem format, if it is in other format li
    ```
 
 2. Apply the KafkaSource, change bootstrapServers and topics accordingly.
-   ```yaml
+```yaml
    apiVersion: sources.knative.dev/v1beta1
    kind: KafkaSource
    metadata:
@@ -316,14 +316,14 @@ KafkaSource expects these files to be in pem format, if it is in other format li
           secretKeyRef:
             key: caroot.pem
             name: cacert
-   consumerGroup: knative-group
-   bootstrapServers:
-   - my-secure-kafka-bootstrap.kafka:443
-   topics:
-   - knative-demo-topic
-   sink:
-     ref:
-       apiVersion: serving.knative.dev/v1
-       kind: Service
-       name: event-display
+    consumerGroup: knative-group
+    bootstrapServers:
+    - my-secure-kafka-bootstrap.kafka:443
+    topics:
+    - knative-demo-topic
+    sink:
+      ref:
+        apiVersion: serving.knative.dev/v1
+        kind: Service
+        name: event-display
    ```
