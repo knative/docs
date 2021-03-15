@@ -105,8 +105,7 @@ The above `ConfigMap` is installed in the cluster. You can edit
 the configuration or create a new one with the same values
 depending on your needs.
 
-_Note: `default.topic.replication.factor` must be less than or equal to the number of
-brokers of your Kafka cluster._
+**NOTE:** The `default.topic.replication.factor` value must be less than or equal to the number of Kafka broker instances in your cluster. For example, if you only have one Kafka broker, the `default.topic.replication.factor` value should not be more than `1`.
 
 ## Set as default broker implementation
 
