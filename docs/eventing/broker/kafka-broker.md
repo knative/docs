@@ -105,6 +105,9 @@ The above `ConfigMap` is installed in the cluster. You can edit
 the configuration or create a new one with the same values
 depending on your needs.
 
+_Note: `default.topic.replication.factor` must be less than or equal to the number of
+brokers of your Kafka cluster._
+
 ## Set as default broker implementation
 
 To set the Kafka broker as the default implementation for all brokers in the Knative deployment,
