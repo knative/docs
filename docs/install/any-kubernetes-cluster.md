@@ -53,9 +53,8 @@ To install the serving component:
 
 Follow the procedure for the networking layer of your choice:
 
-      <!-- TODO: Link to document/diagram describing what is a networking layer.  -->
-
-      <!-- This indentation is important for things to render properly. -->
+<!-- TODO: Link to document/diagram describing what is a networking layer.  -->
+<!-- This indentation is important for things to render properly. -->
 
    {{< tabs name="serving_networking" default="Istio" >}}
    {{% tab name="Ambassador" %}}
@@ -117,8 +116,7 @@ The following commands install Contour and enable its Knative integration.
    ```bash
    kubectl apply -f {{< artifact repo="net-contour" file="contour.yaml" >}}
    ```
-
-   <!-- TODO(https://github.com/knative-sandbox/net-contour/issues/11): We need a guide on how to use/modify a pre-existing install. -->
+<!-- TODO(https://github.com/knative-sandbox/net-contour/issues/11): We need a guide on how to use/modify a pre-existing install. -->
 
 1. Install the Knative Contour controller:
 
@@ -270,12 +268,21 @@ The following commands install Kourier and enable its Knative integration.
 
 {{< /tab >}} {{< /tabs >}}
 
+
+### Verify the installation
+
+Monitor the Knative components until all of the components show a `STATUS` of `Running` or `Completed`:
+
+```bash
+kubectl get pods --namespace knative-serving
+```
+
 ### Optional: Configuring DNS
 
 You can configure DNS to prevent the need to run curl commands with a host header.
 To configure DNS, follow the procedure for the DNS of your choice below:
 
-      <!-- This indentation is important for things to render properly. -->
+<!-- This indentation is important for things to render properly. -->
 
    {{< tabs name="serving_dns" default="Magic DNS (xip.io)" >}}
    {{% tab name="Magic DNS (xip.io)" %}}
@@ -328,7 +335,7 @@ kubectl patch configmap/config-domain \
 
 {{< /tab >}}
 
-{{% tab name="Temporary DNS" %}}
+    {{% tab name="Temporary DNS" %}}
 
 If you are using `curl` to access the sample
 applications, or your own Knative app, and are unable to use the "Magic DNS
@@ -372,16 +379,7 @@ To access your application using `curl` using this method:
 
 Refer to the "Real DNS" method for a permanent solution.
 
-{{< /tab >}} {{< /tabs >}}
-
-1. Monitor the Knative components until all of the components show a `STATUS` of
-   `Running` or `Completed`:
-
-   ```bash
-   kubectl get pods --namespace knative-serving
-   ```
-
-At this point, you have a basic installation of Knative Serving!
+    {{< /tab >}} {{< /tabs >}}
 
 ### Optional Serving extensions
 
@@ -501,11 +499,18 @@ To install the Eventing component:
    kubectl apply -f {{< artifact repo="eventing" file="eventing-core.yaml" >}}
    ```
 
+### Verify the installation
+
+Monitor the Knative components until all of the components show a `STATUS` of `Running`:
+
+```bash
+kubectl get pods --namespace knative-eventing
+```
+
 ### Optional: Installing a default Channel (messaging) layer
 
 To install a default Channel (messaging) layer:
-
-      <!-- This indentation is important for things to render properly. -->
+<!-- This indentation is important for things to render properly. -->
 
    {{< tabs name="eventing_channels" default="In-Memory (standalone)" >}}
    {{% tab name="Apache Kafka Channel" %}}
@@ -572,8 +577,7 @@ kubectl apply -f {{< artifact repo="eventing" file="in-memory-channel.yaml" >}}
 ### Optional: Installing a Broker (Eventing) layer:
 
 To install a Broker (Eventing) layer:
-
-      <!-- This indentation is important for things to render properly. -->
+<!-- This indentation is important for things to render properly. -->
    {{< tabs name="eventing_brokers" default="MT-Channel-based" >}}
    {{% tab name="Apache Kafka Broker" %}}
 
@@ -664,27 +668,16 @@ data:
       replicationFactor: 1
 ```
 
-_In order to use the KafkaChannel make sure it is installed on the cluster as
-discussed above._
+**NOTE:** In order to use the KafkaChannel make sure it is installed on the cluster as discussed above.
 
 {{< /tab >}}
 
 {{< /tabs >}}
 
-1. Monitor the Knative components until all of the components show a `STATUS` of
-   `Running`:
-
-   ```bash
-   kubectl get pods --namespace knative-eventing
-   ```
-
-At this point, you have a basic installation of Knative Eventing!
-
 ### Optional Eventing extensions
 
 Follow the steps for any Eventing extensions you want to install:
-
-   <!-- This indentation is important for things to render properly. -->
+<!-- This indentation is important for things to render properly. -->
 
 {{< tabs name="eventing_extensions" >}}
 
