@@ -53,9 +53,9 @@ To install the serving component:
 
 Follow the procedure for the networking layer of your choice:
 
-      <!-- TODO: Link to document/diagram describing what is a networking layer.  -->
+<!-- TODO: Link to document/diagram describing what is a networking layer.  -->
 
-      <!-- This indentation is important for things to render properly. -->
+<!-- This indentation is important for things to render properly. -->
 
    {{< tabs name="serving_networking" default="Istio" >}}
    {{% tab name="Ambassador" %}}
@@ -275,7 +275,7 @@ The following commands install Kourier and enable its Knative integration.
 You can configure DNS to prevent the need to run curl commands with a host header.
 To configure DNS, follow the procedure for the DNS of your choice below:
 
-      <!-- This indentation is important for things to render properly. -->
+<!-- This indentation is important for things to render properly. -->
 
    {{< tabs name="serving_dns" default="Magic DNS (xip.io)" >}}
    {{% tab name="Magic DNS (xip.io)" %}}
@@ -505,7 +505,7 @@ To install the Eventing component:
 
 To install a default Channel (messaging) layer:
 
-      <!-- This indentation is important for things to render properly. -->
+<!-- This indentation is important for things to render properly. -->
 
    {{< tabs name="eventing_channels" default="In-Memory (standalone)" >}}
    {{% tab name="Apache Kafka Channel" %}}
@@ -573,7 +573,7 @@ kubectl apply -f {{< artifact repo="eventing" file="in-memory-channel.yaml" >}}
 
 To install a Broker (Eventing) layer:
 
-      <!-- This indentation is important for things to render properly. -->
+<!-- This indentation is important for things to render properly. -->
    {{< tabs name="eventing_brokers" default="MT-Channel-based" >}}
    {{% tab name="Apache Kafka Broker" %}}
 
@@ -684,7 +684,7 @@ At this point, you have a basic installation of Knative Eventing!
 
 Follow the steps for any Eventing extensions you want to install:
 
-   <!-- This indentation is important for things to render properly. -->
+<!-- This indentation is important for things to render properly. -->
 
 {{< tabs name="eventing_extensions" >}}
 
