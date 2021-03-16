@@ -12,7 +12,7 @@ which provides a framework for injecting environment variables into any Kubernet
 
 SinkBinding is a newer concept and it should be preferred over ContainerSource.
 
-Code for this tutorial is available [here](https://github.com/knative/docs/tree/master/docs/eventing/samples/writing-event-source-easy-way).
+Code for this tutorial is available [here](https://github.com/knative/docs/tree/main/docs/eventing/samples/writing-event-source-easy-way).
 
 # Bootstrapping
 

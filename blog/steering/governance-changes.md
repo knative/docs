@@ -1,6 +1,6 @@
 ---
 Title: 'Changes to the Knative Project Governance'
-Author: "[Paul Morie](https://github.com/pmorie), on behalf of the [Knative Steering Committee](https://github.com/knative/community/blob/master/STEERING-COMMITTEE.md)"
+Author: "[Paul Morie](https://github.com/pmorie), on behalf of the [Knative Steering Committee](https://github.com/knative/community/blob/main/STEERING-COMMITTEE.md)"
 Author handle: https://github.com/pmorie
 Description: Summary of governance changes to steering and trademark committees.
 Folder with media files: 'N/A'

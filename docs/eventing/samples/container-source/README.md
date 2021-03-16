@@ -28,7 +28,7 @@ ko publish knative.dev/eventing-contrib/cmd/heartbeats
 
 **Note**: `ko publish` requires:
 
-- [`KO_DOCKER_REPO`](https://github.com/knative/serving/blob/master/DEVELOPMENT.md#environment-setup)
+- [`KO_DOCKER_REPO`](https://github.com/knative/serving/blob/main/DEVELOPMENT.md#environment-setup)
   to be set. (e.g. `gcr.io/[gcloud-project]` or `docker.io/<username>`)
 - you to be authenticated with your `KO_DOCKER_REPO`
 - [`docker`](https://docs.docker.com/install/) to be installed
@@ -160,7 +160,7 @@ any tools you like. Here are some basic guidelines:
   [CloudEvents](https://github.com/cloudevents/spec/blob/master/spec.md#design-goals)
   format is recommended.
 
-[heartbeats](https://github.com/knative/eventing-contrib/blob/master/cmd/heartbeats/main.go)
+[heartbeats](https://github.com/knative/eventing-contrib/blob/main/cmd/heartbeats/main.go)
 event source is a sample for your reference.
 
 ### Create the ContainerSource using this container image

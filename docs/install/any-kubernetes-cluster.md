@@ -24,6 +24,8 @@ You can install Knative by applying YAML files using the `kubectl` CLI.
 
 ## Prerequisites
 
+Before installation, you must meet the following prerequisites:
+
 - You have a cluster that uses Kubernetes v1.18 or newer.
 - You have installed the [`kubectl` CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
 - If you have only one node in your cluster, you will need at least 6 CPUs, 6 GB of memory, and 30 GB of disk storage.
@@ -32,6 +34,8 @@ You can install Knative by applying YAML files using the `kubectl` CLI.
 - Your Kubernetes cluster must have access to the internet, since Kubernetes needs to be able to fetch images.
 
 ## Installing the Serving component
+
+To install the serving component:
 
 1. Install the required custom resources:
 
@@ -45,11 +49,12 @@ You can install Knative by applying YAML files using the `kubectl` CLI.
    kubectl apply -f {{< artifact repo="serving" file="serving-core.yaml" >}}
    ```
 
-1. Pick a networking layer (alphabetical):
+### Installing a networking layer
 
-      <!-- TODO: Link to document/diagram describing what is a networking layer.  -->
+Follow the procedure for the networking layer of your choice:
 
-      <!-- This indentation is important for things to render properly. -->
+<!-- TODO: Link to document/diagram describing what is a networking layer.  -->
+<!-- This indentation is important for things to render properly. -->
 
    {{< tabs name="serving_networking" default="Istio" >}}
    {{% tab name="Ambassador" %}}
@@ -111,8 +116,7 @@ The following commands install Contour and enable its Knative integration.
    ```bash
    kubectl apply -f {{< artifact repo="net-contour" file="contour.yaml" >}}
    ```
-
-   <!-- TODO(https://github.com/knative-sandbox/net-contour/issues/11): We need a guide on how to use/modify a pre-existing install. -->
+<!-- TODO(https://github.com/knative-sandbox/net-contour/issues/11): We need a guide on how to use/modify a pre-existing install. -->
 
 1. Install the Knative Contour controller:
 
@@ -264,9 +268,21 @@ The following commands install Kourier and enable its Knative integration.
 
 {{< /tab >}} {{< /tabs >}}
 
-1. Configure DNS
 
-      <!-- This indentation is important for things to render properly. -->
+### Verify the installation
+
+Monitor the Knative components until all of the components show a `STATUS` of `Running` or `Completed`:
+
+```bash
+kubectl get pods --namespace knative-serving
+```
+
+### Optional: Configuring DNS
+
+You can configure DNS to prevent the need to run curl commands with a host header.
+To configure DNS, follow the procedure for the DNS of your choice below:
+
+<!-- This indentation is important for things to render properly. -->
 
    {{< tabs name="serving_dns" default="Magic DNS (xip.io)" >}}
    {{% tab name="Magic DNS (xip.io)" %}}
@@ -319,7 +335,7 @@ kubectl patch configmap/config-domain \
 
 {{< /tab >}}
 
-{{% tab name="Temporary DNS" %}}
+    {{% tab name="Temporary DNS" %}}
 
 If you are using `curl` to access the sample
 applications, or your own Knative app, and are unable to use the "Magic DNS
@@ -363,18 +379,11 @@ To access your application using `curl` using this method:
 
 Refer to the "Real DNS" method for a permanent solution.
 
-{{< /tab >}} {{< /tabs >}}
-
-1. Monitor the Knative components until all of the components show a `STATUS` of
-   `Running` or `Completed`:
-
-   ```bash
-   kubectl get pods --namespace knative-serving
-   ```
-
-At this point, you have a basic installation of Knative Serving!
+    {{< /tab >}} {{< /tabs >}}
 
 ### Optional Serving extensions
+
+Follow the steps for any Serving extensions you want to install:
 
 {{< tabs name="serving_extensions" default="TLS via HTTP01" >}}
 
@@ -476,6 +485,8 @@ kubectl apply -f {{< artifact repo="serving" file="serving-domainmapping.yaml" >
 
 ## Installing the Eventing component
 
+To install the Eventing component:
+
 1. Install the required custom resources:
 
    ```bash
@@ -488,9 +499,18 @@ kubectl apply -f {{< artifact repo="serving" file="serving-domainmapping.yaml" >
    kubectl apply -f {{< artifact repo="eventing" file="eventing-core.yaml" >}}
    ```
 
-1. Install a default Channel (messaging) layer (alphabetical).
+### Verify the installation
 
-      <!-- This indentation is important for things to render properly. -->
+Monitor the Knative components until all of the components show a `STATUS` of `Running`:
+
+```bash
+kubectl get pods --namespace knative-eventing
+```
+
+### Optional: Installing a default Channel (messaging) layer
+
+To install a default Channel (messaging) layer:
+<!-- This indentation is important for things to render properly. -->
 
    {{< tabs name="eventing_channels" default="In-Memory (standalone)" >}}
    {{% tab name="Apache Kafka Channel" %}}
@@ -540,7 +560,7 @@ kubectl apply -f {{< artifact repo="eventing" file="in-memory-channel.yaml" >}}
 {{% tab name="NATS Channel" %}}
 
 1. First, [Install NATS Streaming for
-   Kubernetes](https://github.com/knative-sandbox/eventing-natss/tree/master/config)
+   Kubernetes](https://github.com/knative-sandbox/eventing-natss/tree/main/config)
 
 1. Then install the NATS Streaming Channel:
 
@@ -554,9 +574,10 @@ kubectl apply -f {{< artifact repo="eventing" file="in-memory-channel.yaml" >}}
 
 {{< /tabs >}}
 
-1. Install a Broker (eventing) layer:
+### Optional: Installing a Broker (Eventing) layer:
 
-      <!-- This indentation is important for things to render properly. -->
+To install a Broker (Eventing) layer:
+<!-- This indentation is important for things to render properly. -->
    {{< tabs name="eventing_brokers" default="MT-Channel-based" >}}
    {{% tab name="Apache Kafka Broker" %}}
 
@@ -647,25 +668,16 @@ data:
       replicationFactor: 1
 ```
 
-_In order to use the KafkaChannel make sure it is installed on the cluster as
-discussed above._
+**NOTE:** In order to use the KafkaChannel make sure it is installed on the cluster as discussed above.
 
 {{< /tab >}}
 
 {{< /tabs >}}
 
-1. Monitor the Knative components until all of the components show a `STATUS` of
-   `Running`:
-
-   ```bash
-   kubectl get pods --namespace knative-eventing
-   ```
-
-At this point, you have a basic installation of Knative Eventing!
-
 ### Optional Eventing extensions
 
-   <!-- This indentation is important for things to render properly. -->
+Follow the steps for any Eventing extensions you want to install:
+<!-- This indentation is important for things to render properly. -->
 
 {{< tabs name="eventing_extensions" >}}
 
@@ -797,7 +809,7 @@ The following command installs the Apache CouchDB Source:
 kubectl apply -f {{< artifact org="knative-sandbox" repo="eventing-couchdb" file="couchdb.yaml" >}}
 ```
 
-To learn more about the Apache CouchDB source, read the [documentation](https://github.com/knative-sandbox/eventing-couchdb/blob/master/source/README.md).
+To learn more about the Apache CouchDB source, read the [documentation](https://github.com/knative-sandbox/eventing-couchdb/blob/main/source/README.md).
 
 {{< /tab >}}
 

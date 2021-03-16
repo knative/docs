@@ -31,7 +31,7 @@ filename.  This profile should include:
 * Your contributions to Knative
 * Why you are running
 
-You can find [a sample template in the folder](https://github.com/knative/community/blob/master/elections/2020/SC/candidate-template.md).
+You can find [a sample template in the folder](https://github.com/knative/community/blob/main/elections/2020/SC/candidate-template.md).
 
 
 This is the schedule for the elections if you want to follow along.
@@ -47,6 +47,6 @@ This is the schedule for the elections if you want to follow along.
 | December 3   | Announcement of Results at Knative Steering Meeting |
 
 
-You can read the current [Knative Steering Committee Election - 2020 Voters Guide](https://github.com/knative/community/blob/master/elections/2020/SC/README.md) for all the details.
+You can read the current [Knative Steering Committee Election - 2020 Voters Guide](https://github.com/knative/community/blob/main/elections/2020/SC/README.md) for all the details.
 
 And remember if you have the right to vote, then speak your mind by voting because every vote counts!

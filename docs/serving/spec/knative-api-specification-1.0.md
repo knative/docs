@@ -70,7 +70,7 @@ additional constraints beyond the general Kubernetes model:
   namespaces or any cluster-level resources.
 
 This document does not define the
-[runtime contract (see this document)](https://github.com/knative/serving/blob/master/docs/runtime-contract.md)
+[runtime contract (see this document)](https://github.com/knative/serving/blob/main/docs/runtime-contract.md)
 nor prescribe specific implementations of supporting services such as access
 control, observability, or resource management.
 
@@ -1619,7 +1619,7 @@ Min: 0
 <br>
 Max: 1
    </td>
-   <td>Only a single <code>port</code> may be specified. The port must be named <a href="https://github.com/knative/serving/blob/master/docs/runtime-contract.md#protocols-and-ports">as described in the runtime contract</a>.
+   <td>Only a single <code>port</code> may be specified. The port must be named <a href="https://github.com/knative/serving/blob/main/docs/runtime-contract.md#protocols-and-ports">as described in the runtime contract</a>.
    </td>
    <td>REQUIRED
    </td>
@@ -1694,7 +1694,7 @@ Max: 1
 <br>
 (Optional)
    </td>
-   <td><code>volumeMounts</code> MUST correspond to a volume and specify an absolute mount path which does not shadow <a href="https://github.com/knative/serving/blob/master/docs/runtime-contract.md#default-filesystems">the runtime contract directories</a>.
+   <td><code>volumeMounts</code> MUST correspond to a volume and specify an absolute mount path which does not shadow <a href="https://github.com/knative/serving/blob/main/docs/runtime-contract.md#default-filesystems">the runtime contract directories</a>.
    </td>
    <td>REQUIRED, if volumes is supported.
    </td>
@@ -2795,7 +2795,7 @@ Max: 1
   </tr>
 </table>
 
-## [Addressable](https://github.com/knative/pkg/blob/master/apis/duck/v1/addressable_types.go) (Interface)
+## [Addressable](https://github.com/knative/pkg/blob/main/apis/duck/v1/addressable_types.go) (Interface)
 
 <table>
   <tr>
@@ -2811,7 +2811,7 @@ Max: 1
   <tr>
    <td><code>url</code>
    </td>
-   <td>string (<a href="https://github.com/knative/pkg/blob/master/apis/url.go">apis.URL</a>)
+   <td>string (<a href="https://github.com/knative/pkg/blob/main/apis/url.go">apis.URL</a>)
    </td>
    <td>A generic mechanism for a custom resource definition to indicate a destination for message delivery.
    </td>

@@ -37,7 +37,7 @@ monitoring configuration in a namespace called `logging`. You can apply the
 configuration with:
 
 ```bash
-kubectl apply --filename https://github.com/knative/docs/raw/master/docs/install/collecting-logs/fluent-bit-collector.yaml
+kubectl apply --filename https://github.com/knative/docs/raw/main/docs/install/collecting-logs/fluent-bit-collector.yaml
 ```
 
 The default configuration will classify logs into Knative, apps (pods with an

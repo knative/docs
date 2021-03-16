@@ -28,7 +28,7 @@ What are the personas and critical paths?
 Quick Introduction to Knative Eventing Sources
 A Knative Source is Kubernetes Custom Resource that generates or imports an event and pushes that event to another endpoint on the cluster via a [CloudEvents](https://github.com/cloudevents/spec/blob/v1.0/primer.md).
 
-[The specification](https://github.com/knative/eventing/blob/master/docs/spec/sources.md)
+[The specification](https://github.com/knative/eventing/blob/main/docs/spec/sources.md)
 for Knative Eventing Sources contains a number of requirements that
 together define a well-behaved Knative Source.
 
@@ -59,7 +59,7 @@ Used for source &mdash; in this case, `samplesource` &mdash; specific config and
 To ease writing a new event source, the eventing subsystem has offloaded several core functionalities (via injection) to the `eventing-sources-controller`.
 
 
-![Simplified Controller](https://raw.githubusercontent.com/knative/docs/master/docs/eventing/samples/writing-event-source/simplified-controller.png)
+![Simplified Controller](https://raw.githubusercontent.com/knative/docs/main/docs/eventing/samples/writing-event-source/simplified-controller.png)
 
 Fig 1. - Via shared [Knative Dependency Injection](https://docs.google.com/presentation/d/e/2PACX-1vQbpISBvY7jqzu2wy2t1_0R4LSBEBS0JrUS7M7V3BMVqy2K1Zk_0Xhy7WPPaeANLHE0yqtz1DuWlSAl/pub?resourcekey=0-mf6dN2vu9SS3bo2TUeCk9Q&slide=id.g596dcbbefb_0_40)
 
@@ -84,7 +84,7 @@ func NewController(ctx context.Context, cmw configmap.Watcher) *controller.Impl 
 }
 ```
 
-Sample source's [`update-codegen.sh`](https://github.com/knative-sandbox/sample-source/blob/master/hack/update-codegen.sh) have the configuration
+Sample source's [`update-codegen.sh`](https://github.com/knative-sandbox/sample-source/blob/main/hack/update-codegen.sh) have the configuration
 to have the required things above generated and injected:
 ```bash
 # Generation

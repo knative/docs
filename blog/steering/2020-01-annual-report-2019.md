@@ -9,7 +9,7 @@ aliases:
 ---
 
 We have created a 2019 Knative annual report for the community. The report can
-be viewed [here](https://github.com/knative/community/tree/master/annual_reports/Knative%202019%20Annual%20Report.pdf).
+be viewed [here](https://github.com/knative/community/tree/main/annual_reports/Knative%202019%20Annual%20Report.pdf).
 
 We just want to say *thank you* to all our community members for contributing and
 helping us grow our community. We definitely could not have done it without you!

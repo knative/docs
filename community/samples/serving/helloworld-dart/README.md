@@ -24,13 +24,12 @@ be created using the following instructions.
    ```yaml
    name: hello_world_dart
    publish_to: none # let's not accidentally publish this to pub.dartlang.org
-   description: Hello world server example in Dart
 
    environment:
-     sdk: ">=2.1.0 <3.0.0"
+     sdk: ">=2.12.0 <3.0.0"
 
    dependencies:
-     shelf: ^0.7.3
+     shelf: ^1.0.0
    ```
 
 2. If you want to run locally, install dependencies. If you only want to run in
@@ -50,16 +49,16 @@ be created using the following instructions.
 
    Future main() async {
      // Find port to listen on from environment variable.
-     var port = int.tryParse(Platform.environment['PORT'] ?? '8080');
+     final port = int.parse(Platform.environment['PORT'] ?? '8080');
 
      // Read $TARGET from environment variable.
-     var target = Platform.environment['TARGET'] ?? 'World';
+     final target = Platform.environment['TARGET'] ?? 'World';
 
      Response handler(Request request) => Response.ok('Hello $target');
 
      // Serve handler on given port.
-     var server = await serve(
-       Pipeline().addMiddleware(logRequests()).addHandler(handler),
+     final server = await serve(
+       const Pipeline().addMiddleware(logRequests()).addHandler(handler),
        InternetAddress.anyIPv4,
        port,
      );
