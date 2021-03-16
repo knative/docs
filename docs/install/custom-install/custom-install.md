@@ -1,5 +1,6 @@
 ---
-title: "Custom Installation Reference"
+title: "Knative installation files and dependencies"
+linkTitle: "Install files and dependencies"
 weight: 20
 type: "docs"
 ---
