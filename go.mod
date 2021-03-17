@@ -13,12 +13,12 @@ require (
 	github.com/kelseyhightower/envconfig v1.4.0
 	golang.org/x/net v0.0.0-20201209123823-ac852fbbde11
 	golang.org/x/oauth2 v0.0.0-20201208152858-08078c50e5b5
-	google.golang.org/grpc v1.35.0
+	google.golang.org/grpc v1.36.0
 	gopkg.in/go-playground/assert.v1 v1.2.1 // indirect
 	gopkg.in/go-playground/webhooks.v3 v3.13.0
 	gopkg.in/yaml.v2 v2.3.0
-	knative.dev/hack v0.0.0-20210203173706-8368e1f6eacf
-	knative.dev/net-istio v0.20.1-0.20210219212303-59b2af9679f7
+	knative.dev/hack v0.0.0-20210309141825-9b73a256fd9a
+	knative.dev/net-istio v0.21.1-0.20210316183142-f9ffb013940a
 )
 
 replace go.opencensus.io => go.opencensus.io v0.20.2
