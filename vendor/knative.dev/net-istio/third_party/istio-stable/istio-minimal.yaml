@@ -32,3 +32,7 @@ spec:
     ingressGateways:
       - name: istio-ingressgateway
         enabled: true
+        k8s:
+          env:
+            - name: 'TERMINATION_DRAIN_DURATION_SECONDS'
+              value: '20'
