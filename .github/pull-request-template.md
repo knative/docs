@@ -9,7 +9,7 @@ your original PR has been merged into the main branch. Once the cherry-pick PR
 has merged, remove the cherry-pick label from the original PR.
 
 Use one of the new content templates:
-  - [Documenation](./template-docs-page.md) -- Instructions and a template that
+  - [Documentation](./template-docs-page.md) -- Instructions and a template that
     you can use to help you add new documentation.
   - [Blog](./template-blog-entry.md) -- Instructions and a template that
     you can use to help you post to the Knative blog.
