@@ -21,6 +21,7 @@ showlandingtoc: "false"
 ---
 
 You can install Knative by applying YAML files using the `kubectl` CLI.
+You can install the Serving component, Eventing component, or both on your cluster.
 
 ## Prerequisites
 
