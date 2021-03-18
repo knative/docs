@@ -387,7 +387,7 @@ At this point, you have a basic installation of Knative Serving!
 
 You can apply extensions to customize your Knative Serving installation.
 For more information about the extensions you can apply, see
-[Knative installation files and dependencies](./custom-install/custom-install.md#knative-serving-installation-files).
+[Installation files](./custom-install/custom-install.md#knative-serving-installation-files).
 
 Follow the steps for any Serving extensions you want to install:
 
@@ -688,7 +688,7 @@ At this point, you have a basic installation of Knative Eventing!
 
 You can apply extensions to customize your Knative Eventing installation.
 For more information about the extensions you can apply, see
-[Knative installation files and dependencies](./custom-install/custom-install.md#knative-eventing-installation-files).
+[Installation files](./custom-install/custom-install.md#knative-eventing-installation-files).
 
 Follow the steps for any Eventing extensions you want to install:
 

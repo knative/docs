@@ -1,6 +1,5 @@
 ---
-title: "Knative installation files and dependencies"
-linkTitle: "Install files and dependencies"
+title: "Installation files"
 weight: 20
 type: "docs"
 ---
