@@ -1,4 +1,11 @@
-# Introduction
+---
+title: "Writing an Event Source using the easy way"
+linkTitle: "Event Source - easy way"
+weight: 10
+type: "docs"
+aliases:
+  - /docs/eventing/samples/writing-event-source-easy-way
+---
 
 As stated in [tutorial on writing a Source with a Receive Adapter](../writing-event-source/README.md), there are multiple ways to
 create event sources. The way in that tutorial is to create an independent event source that has its own CRD.

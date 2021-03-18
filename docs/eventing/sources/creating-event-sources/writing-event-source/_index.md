@@ -1,5 +1,6 @@
 ---
-title: "Creating an event source by using the sample repository"
+title: "Creating an event source by using the sample event source"
+linkTitle: "Using the sample event source"
 weight: 60
 type: "docs"
 showlandingtoc: "false"
