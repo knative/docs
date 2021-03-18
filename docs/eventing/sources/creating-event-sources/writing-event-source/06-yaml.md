@@ -3,6 +3,8 @@ title: "Publishing to your Kubernetes cluster"
 linkTitle: "Publishing to your cluster"
 weight: 60
 type: "docs"
+aliases:
+  - /docs/eventing/samples/writing-event-source/06-yaml
 ---
 
 ## Run the sample source locally
