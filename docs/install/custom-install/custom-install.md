@@ -13,7 +13,7 @@ The YAML files in the releases include:
 - The custom resource definitions (CRDs) and core components required to install Knative.
 - Optional components that you can apply to customize your installation.
 
-For how to install these files, see [YAML-based installation](../any-kubernetes-cluster.md).
+For information about installing these files, see [YAML-based installation](../any-kubernetes-cluster.md).
 
 ## Knative Serving installation files
 
