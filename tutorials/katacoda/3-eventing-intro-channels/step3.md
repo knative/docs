@@ -27,7 +27,7 @@ Install an in-memory channel. (Knative also supports Apache Kafka Channel, Googl
 kubectl apply --filename https://github.com/knative/eventing/releases/download/${latest_version}/in-memory-channel.yaml
 ```{{execute}}
 
-Now, create an in-memory channel: InMemory channels are great for testing because they add very little overhead and require 
+Now, create an in-memory channel: InMemory channels are great for testing because they add very little overhead and require
 almost no resources. The downside, though, is that you have no persistence and retries. For this example, an InMemory channel is well suited.
 
 ```

@@ -1,5 +1,5 @@
 ## Sequences
-The unix philosophy states: 
+The unix philosophy states:
 > Write programs that do one thing and do it well. Write programs to work together.
 
 In an event driven architecture too, it is useful to split up functionality into smaller chunks. These chunks can then be implemented as either microservices

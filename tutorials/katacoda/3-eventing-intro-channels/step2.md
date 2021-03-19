@@ -4,7 +4,7 @@ We will walk through the topologies from the simplest and towards more complicat
 ### 1:1 Event Delivery
 The most straightforward use case is that whenever events are produced, you want some code to handle that event.
 
-![1to1](./assets/1to1.png)  
+![1to1](./assets/1to1.png)
 Looking at the diagram above, we’ll create the components in the reverse order.
 Let's create a consumer that will display the events that are sent to it:
 
