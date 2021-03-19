@@ -293,6 +293,35 @@ To change the logging level to `DEBUG`, you need to:
     kubectl rollout restart deployment -n knative-eventing kafka-broker-dispatcher
     ```
 
+## Events Delivery order
+
+When dispatching events, Kafka Broker supports two different ordering guarantees:
+
+* `unordered`: Unordered consumer is a non-blocking consumer that potentially deliver messages unordered, while preserving proper offset management. 
+* `ordered`: Ordered consumer is a per-partition blocking consumer that deliver messages in order.
+
+`unordered` is the default ordering guarantee, while **`ordered` is considered unstable, use with caution**.
+
+You can configure the delivery order guarantee using the `kafka.eventing.knative.dev/delivery.order` annotation on the `Trigger` instance. 
+
+For example:
+
+```yaml
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: my-service-trigger
+  annotations:
+     kafka.eventing.knative.dev/delivery.order: ordered
+spec:
+  broker: my-kafka-broker
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: my-service
+```
+
 ### Additional information
 
 - To report bugs or add feature requests, open an issue in the [eventing-kafka-broker repository](https://github.com/knative-sandbox/eventing-kafka-broker).
