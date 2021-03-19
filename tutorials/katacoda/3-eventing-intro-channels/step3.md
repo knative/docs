@@ -20,7 +20,7 @@ For development, an “in memory” channel may be sufficient, but for productio
 
 ### Subscription
 Consumers of the events need to let the channel know they’re interested to receive events by creating a subscription.
- 
+
 Let's see this in action now. First we install and create an in-memory channel:
 Install an in-memory channel. (Knative also supports Apache Kafka Channel, Google Cloud Pub/Sub Channel and NATS Channel as options)
 ```
