@@ -24,7 +24,7 @@ Consumers of the events need to let the channel know they’re interested to rec
 Let's see this in action now. First we install and create an in-memory channel:
 Install an in-memory channel. (Knative also supports Apache Kafka Channel, Google Cloud Pub/Sub Channel and NATS Channel as options)
 ```
-kubectl apply --filename https://github.com/knative/eventing/releases/download/v0.19.0/in-memory-channel.yaml
+kubectl apply --filename https://github.com/knative/eventing/releases/download/${latest_version}/in-memory-channel.yaml
 ```{{execute}}
 
 Now, create an in-memory channel: InMemory channels are great for testing because they add very little overhead and require 

@@ -3,13 +3,13 @@
 
 1. Install Knative Serving's core components
     ```
-    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.19.0/serving-crds.yaml
-    kubectl apply --filename https://github.com/knative/serving/releases/download/v0.19.0/serving-core.yaml
+    kubectl apply --filename https://github.com/knative/serving/releases/download/${latest_version}/serving-crds.yaml
+    kubectl apply --filename https://github.com/knative/serving/releases/download/${latest_version}/serving-core.yaml
     ```{{execute}}
 1. Install contour as the networking layer. (Knative also supports Courier, Gloo, Istio and Kourier as options)
     ```
-    kubectl apply --filename https://github.com/knative/net-contour/releases/download/v0.19.0/contour.yaml
-    kubectl apply --filename https://github.com/knative/net-contour/releases/download/v0.19.0/net-contour.yaml
+    kubectl apply --filename https://github.com/knative/net-contour/releases/download/${latest_version}/contour.yaml
+    kubectl apply --filename https://github.com/knative/net-contour/releases/download/${latest_version}/net-contour.yaml
     ```{{execute}}
 1. Configure Knative Serving to use Contour by default
     ```

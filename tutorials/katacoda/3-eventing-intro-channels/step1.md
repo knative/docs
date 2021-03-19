@@ -4,8 +4,8 @@
 
 1. Install Knative Eventing's core components
     ```
-    kubectl apply --filename https://github.com/knative/eventing/releases/download/v0.19.0/eventing-crds.yaml
-    kubectl apply --filename https://github.com/knative/eventing/releases/download/v0.19.0/eventing-core.yaml
+    kubectl apply --filename https://github.com/knative/eventing/releases/download/${latest_version}/eventing-crds.yaml
+    kubectl apply --filename https://github.com/knative/eventing/releases/download/${latest_version}/eventing-core.yaml
     ```{{execute}}
 
 ## Event Driven Architecture

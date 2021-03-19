@@ -4,16 +4,16 @@
 
 1. Install Knative Eventing's core components
     ```
-    kubectl apply --filename https://github.com/knative/eventing/releases/download/v0.19.0/eventing-crds.yaml
-    kubectl apply --filename https://github.com/knative/eventing/releases/download/v0.19.0/eventing-core.yaml
+    kubectl apply --filename https://github.com/knative/eventing/releases/download/${latest_version}/eventing-crds.yaml
+    kubectl apply --filename https://github.com/knative/eventing/releases/download/${latest_version}/eventing-core.yaml
     ```{{execute}}
 1. Install an in-memory channel. (Knative also supports Apache Kafka Channel, Google Cloud Pub/Sub Channel and NATS Channel as options)
     ```
-    kubectl apply --filename https://github.com/knative/eventing/releases/download/v0.19.0/in-memory-channel.yaml
+    kubectl apply --filename https://github.com/knative/eventing/releases/download/${latest_version}/in-memory-channel.yaml
     ```{{execute}}
 1. Install a Broker
     ```
-    kubectl apply --filename https://github.com/knative/eventing/releases/download/v0.19.0/mt-channel-broker.yaml
+    kubectl apply --filename https://github.com/knative/eventing/releases/download/${latest_version}/mt-channel-broker.yaml
     ```{{execute}}
 
 
