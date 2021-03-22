@@ -297,12 +297,12 @@ To change the logging level to `DEBUG`, you need to:
 
 When dispatching events, Kafka Broker supports two different ordering guarantees:
 
-* `unordered`: Unordered consumer is a non-blocking consumer that potentially delivers messages unordered, while preserving proper offset management. 
+* `unordered`: Unordered consumer is a non-blocking consumer that potentially delivers messages unordered, while preserving proper offset management.
 * `ordered`: Ordered consumer is a per-partition blocking consumer that delivers messages in order.
 
 `unordered` is the default ordering guarantee, while **`ordered` is considered unstable, use with caution**.
 
-You can configure the delivery order guarantee using the `kafka.eventing.knative.dev/delivery.order` annotation on the `Trigger` instance. 
+You can configure the delivery order guarantee using the `kafka.eventing.knative.dev/delivery.order` annotation on the `Trigger` instance.
 
 For example:
 
