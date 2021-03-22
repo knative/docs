@@ -1,57 +1,123 @@
 ---
-title: Work with GitHub
----
----
-title: "Docs workflow in GitHub"
+title: "GitHub workflow for Knative documentation"
 linkTitle: "Using GitHub"
-weight: 30
-type: "authoring"
+weight: 10
+type: "docs"
 ---
 
-The Knative documentation follows the standard [GitHub collaboration flow](https://guides.github.com/introduction/flow/)
-for Pull Requests (PRs). This well-established collaboration model helps open
-source projects manage the following types of contributions:
+Learn how to use GitHub and contribute to the `knative/docs` repo.
 
-- [Add](/about/contribute/add-content) new files to the repository.
-- [Edit](#quick-edit) existing files.
-- [Review](/about/contribute/review) the added or modified files.
-- Manage multiple release or development [branches](#branching-strategy).
+At a high-level, you must setup and know the following to get started:
 
-The contribution guides assume you can complete the following tasks:
+- [Set up your local machine](#clone)
+- [Open Issues](#issues)
+- [Create Pull Requests](#prs)
+- [Manage PRs and Issues with Prow](#prow)
 
-- Fork the [knative/docs repository](https://github.com/knative/docs).
-- Create a branch for your changes.
-- Add commits to that branch.
-- Open a PR to share your contribution.
 
-## Before you begin
+## Set up your local machine{#clone}
 
-To contribute to the Knative documentation, you need to:
+To check out your fork of the `knative/docs` repository:
 
-1. Create a [GitHub account](https://github.com).
+1. Create your own
+   [fork of the `knative/docs` repo](https://help.github.com/articles/fork-a-repo/)
+1. Configure
+   [GitHub access through SSH](https://help.github.com/articles/connecting-to-github-with-ssh/).
+1. Clone your fork to your machine and set the `upstream` remote to the
+   `knative/docs` repository:
 
-1. Sign the [Contributor License Agreement](https://github.com/Knative/community/blob/master/CONTRIBUTING.md#contributor-license-agreements).
+    ```shell
+    mkdir -p ${GOPATH}/src/knative.dev
+    cd ${GOPATH}/src/knative.dev
+    git clone git@github.com:${YOUR_GITHUB_USERNAME}/docs.git
+    cd docs
+    git remote add upstream https://github.com/knative/docs.git
+    git remote set-url --push upstream no_push
+    ```
 
-1. Install [Docker](https://www.docker.com/get-started) on your authoring system
-   to preview and test your changes.
+You are now able to open PRs, start reviews, and contribute fixes the
+`knative/docs` repo. See the following sections to learn more.
 
-The Knative documentation is published under the
-[Apache 2.0](https://github.com/Knative/community/blob/master/LICENSE) license.
+**Important**: Remember to regularly
+[syncing your fork](https://help.github.com/articles/syncing-a-fork/).
 
-## Opening documentation pull requests
+
+## Reporting documentation issues{#issues}
+
+<!-- This could use a pass to reduce the overhead for filing new issues,
+and to consolidate items more easily during issue triage. -->
+
+Knative uses Github issues to track documentation issues and requests. If you
+see a problem with the documentation that you're not sure how to fix, submit an
+issue using the following steps:
+
+1.  Check the [Knative docs issues list](https://github.com/knative/docs/issues)
+    before creating an issue to avoid making a duplicate.
+
+2.  Use the [correct template](https://github.com/knative/docs/issues/new) for
+    your new issue. There are two templates available:
+
+    - **Bug report**: If you're reporting an error in the existing
+      documentation, use this template. This could be anything from broken
+      samples to typos. When you create a bug report, include as many details as
+      possible and include suggested fixes to the issue. If you know which
+      Knative component your bug is related to, you can assign the appropriate
+      [Working Group Lead](https://github.com/knative/community/blob/main/working-groups/WORKING-GROUPS.md).
+
+    - **Feature request**: For upcoming changes to the documentation or requests
+      for more information on a particular subject.
+
+Note that product behavior or code issues should be filed against the
+[individual Knative repositories](http://github.com/knative).
+
+Documentation issues should go in the
+[`knative/docs` repo](https://github.com/knative/docs/issues) but if the issue
+is specific to the look or behavior of the <https://knative.dev> website, open
+the issue in the
+[`knative/website` repo](https://github.com/knative/website/issues).
+
+
+## Fixing documentation issues (Opening PRs){#prs}
+
+The Knative documentation follows the standard
+[GitHub collaboration flow](https://guides.github.com/introduction/flow/)
+for Pull Requests (PRs).
 
 General details about how to open a PR are covered in the
-[Knative guidelines](https://github.com/knative/community/blob/main/CONTRIBUTING.md).
+[Knative guidelines](https://github.com/knative/community/).
 
-**Best practice**: Make sure that you correctly
-[assign an owner to PR](#assigning-owners-and-reviewers).
-
-## Fixing Issues (Pull Requests)
+Note that PRs for fixes to the look or behavior of the <https://knative.dev>
+website, must be opened the
+[`knative/website` repo](https://github.com/knative/website/pulls).
 
 <!-- This could use a pass to be more focused on what a PR submitter should do at the start of the process. -->
 
-Here's what generally happens when you open a PR against the `knative/docs`
-repo:
+1. [Create a branch in your fork](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-and-deleting-branches-within-your-repository).
+
+1. Locate or create the file that you want to fix:
+
+   - If you are updating an existing page, locate that file and begin making
+     changes.
+
+     For example, from any page on `knative.dev`, you can click the
+     pencil icon in the upper right corner to open that page in GitHub.
+
+   - If you are adding new content, you must follow the
+     "new docs" instructions.
+
+1. To edit a file, use the new branch that you created in your fork.
+
+   - Navigate to that same file within your fork using the GitHub UI.
+
+   - Open that file from in your local clone.
+
+1. Create the Pull Request in the
+   [`knative/docs` repo](https://github.com/knative/docs/pulls).
+
+1. [Assign an owner to the PR](#assigning-owners-and-reviewers)
+   to request a review.
+
+Here's what generally happens after you send the PR for review:
 
 1.  One of the assigned repo maintainers will triage the PR by assigning
     relative priority, adding appropriate labels, and performing an initial
@@ -98,72 +164,39 @@ If you want to notify and include other stakeholders in your PR review, use the
 `/cc` command. For example: `/cc @stakeholder_id1 @stakeholder_id2`
 
 
-## Perform quick edits {#quick-edit}
+## Reviewing PRs
 
-Anyone with a GitHub account who signs the CLA can contribute a quick
-edit to any page on the Knative website. The process is very simple:
+[See the Knative community guidelines about reviewing PRs](https://github.com/knative/community/blob/main/reviewing.md)
 
-1. Visit the page you wish to edit.
-1. Add `preliminary` to the beginning of the URL. For example, to edit
-   `https://istio.io/about`, the new URL should be
-   `https://preliminary.istio.io/about`
-1. Click the pencil icon in the lower right corner.
-1. Perform your edits on the GitHub UI.
-1. Submit a Pull Request with your changes.
 
-Please see our guides on how to [contribute new content](/about/contribute/add-content)
-or [review content](/about/contribute/review) to learn more about submitting more
-substantial changes.
+## Using Prow to manage PRs and Issues{#prow}
 
-## Branching strategy {#branching-strategy}
+Knative uses several sets of tools to manage pull requests (PR)s and issues in a
+more fine-grained way than GitHub permissions allow. In particular, you'll
+regularly interact with
+[Prow](https://github.com/kubernetes/test-infra/tree/master/prow) to categorize
+and manage issues and PRs. Prow allows control of specific GitHub functionality
+without granting full "write" access to the repo (which would allow rewriting
+history and other dangerous operations). You'll most often use the following
+commands, but Prow will also chime in on most bugs and PRs with a link to all
+the known commands:
 
-Active content development takes place using the master branch of the
-`istio/istio.io` repository. On the day of an Istio release, we create a release
-branch of master for that release. The following button takes you to the
-repository on GitHub:
+- `/assign @user1 @user2` to assign an issue or PR to specific people for review
+  or approval.
 
-<a class="btn"
-href="https://github.com/istio/istio.io/">Browse this site's source
-code</a>
+- `/lgtm` and `/approve` to approve a PR. Note that _anyone_ may `/lgtm` a PR,
+  but only someone listed in an `OWNERS` file may `/approve` the PR. A PR needs
+  both an approval and an LGTM — the `/lgtm` review is a good opportunity for
+  non-approvers to practice and develop reviewing skills. `/lgtm` is removed
+  when a PR is updated, but `/approve` is sticky — once applied, anyone can
+  supply an `/lgtm`.
 
-The Knative documentation repository uses multiple branches to publish
-documentation for all Knative releases. Each Knative release has a corresponding
-documentation branch. For example, there are branches called `release-1.0`,
-`release-1.1`, `release-1.2` and so forth. These branches were created on the
-day of the corresponding release. To view the documentation for a specific
-release, see the [archive page](https://archive.istio.io/).
+- Both Prow (legacy) and GitHub actions (preferred) can run tests on PRs; once
+  all tests are passing and a PR has the `lgtm` and `approved` labels, Prow will
+  submit the PR automatically.
 
-This branching strategy allows us to provide the following Knative online resources:
+- You can also use Prow to manage labels on PRs with `/kind ...`,
+  `/good-first-issue`, or `/area ...`
 
-- The [public site](/docs/) shows the content from the current
-  release branch.
-
-- The preliminary site at `https://preliminary.istio.io` shows the content from
-  the master branch.
-
-- The [archive site](https://archive.istio.io) shows the content from all prior
-  release branches.
-
-Given how branching works, if you submit a change into the master branch,
-that change won't appear on `istio.io` until the next major Knative release
-happens. If your documentation change is relevant to the current Knative release,
-then it's probably worth also applying your change to the current release branch.
-You can do this easily and automatically by using the special cherry-pick labels
-on your documentation PR. For example, if you introduce a correction in a PR to
-the master branch, you can apply the `cherrypick/release-1.4` label in order to
-merge this change to the `release-1.4` branch.
-
-When your initial PR is merged, automation creates a new PR in the release
-branch which includes your changes. You may need to add a comment to the PR
-that reads `@googlebot I consent` in order to satisfy the `CLA` bot that we
-use.
-
-On rare occasions, automatic cherry picks don't work. When that happens, the
-automation leaves a note in the original PR indicating it failed. When
-that happens, you must manually create the cherry pick and deal
-with the merge issues that prevented the process from working automatically.
-
-Note that we only ever cherry pick changes into the current release branch,
-and never to older branches. Older branches are considered to be archived and
-generally no longer receive any changes.
-
+- See the [Branches](./structure/#branches) section for details about how
+  to use the `/cherrypick` command.

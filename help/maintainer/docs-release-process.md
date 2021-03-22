@@ -2,11 +2,11 @@
 title: "Releasing a version of the Knative documentation"
 linkTitle: "Release process"
 weight: 75
-type: "authoring"
+type: "docs"
 ---
 
 Learn how to promote the current in-development version of the knative/docs
-repo (`master`), to a released version by creating a dedicated `release-#.#`
+repo (`main`), to a released version by creating a dedicated `release-#.#`
 branch and corresponding section knative.dev.
 
 ## Before you begin
@@ -40,31 +40,31 @@ https://github.com/knative/<repo-name>/releases/
 ## Create matching branch for Knative docs
 Once there are release branches for the three code repos, make a matching doc repo release.
 
-### Prepare master
-Make sure master is in correct state:
-* [Generate the latest set of API reference docs](https://github.com/knative/docs/tree/master/docs/reference#updating-api-reference-docs-for-knative-maintainers) locally
+### Prepare the 'main' branch
+Make sure main is in correct state:
+* [Generate the latest set of API reference docs](https://github.com/knative/docs/tree/main/docs/reference#updating-api-reference-docs-for-knative-maintainers) locally
   * Clone the docs repo: git clone git@github.com:knative/docs.git
   * Find the gen-api-reference-docs.sh script in the /docs/hack directory
   * Follow the instructions in the linked doc above. This creates a small set of files that document the APIs in this
     release. Be aware that if there have been significant changes, the script may take hours to run to completion.
 *  Push to your personal GitHub repository.
-*  Create a PR and check into the Knative master repository.
-* At this point the updated versions of the API docs are in knative/master
-* Check to make sure all changes, including install changes, have been merged into master and all hard-coded version numbers are updated. This is to make sure that any docs that have been committed outside of the normal process don't have mechanical errors in them. This is, alas, a manual step.
+*  Create a PR and check into the Knative main repository.
+* At this point the updated versions of the API docs are in knative/docs main
+* Check to make sure all changes, including install changes, have been merged into main and all hard-coded version numbers are updated. This is to make sure that any docs that have been committed outside of the normal process don't have mechanical errors in them. This is, alas, a manual step.
 
-### Create branch from updated master
-Once everything that needs to be in master is in master you need to create the release branch, using the GitHub UI.
+### Create branch from updated main
+Once everything that needs to be in main is in main you need to create the release branch, using the GitHub UI.
 
 1. Make sure you are logged into GitHub.
 2. Select the Code tab in the Knative/docs repo.
-3. Click and open the Branch drop-down menu. Make sure that master is selected. This is the source for the new release.
+3. Click and open the Branch drop-down menu. Make sure that main is selected. This is the source for the new release.
 4. In the Find or create a branch text field, enter the name of the new branch you want to create: release-#.#
 ![branch](https://user-images.githubusercontent.com/35748459/87461583-804c4c80-c5c3-11ea-8105-f9b34988c9af.png)
 The branch is created.
 
 ### Update links
 Make sure all links in new release branch announcement point to the appropriate peer Knative repos
-* Update all hard coded URLs to repos from "tree/master" to "tree/release-0.#"
+* Update all hard coded URLs to repos from "tree/main" to "tree/release-0.#"
   * For Serving, Eventing, and Eventing-contrib
 
 ### Demote the previous release to archive
@@ -100,14 +100,14 @@ Not all files will have aliases on them.  You just have to go through them manua
 
 ## Configure the /website build
 
-Update the build configuration to include the new version and remove the oldest by editing the following .toml  (Tom's Obvious, Minimal Language) files.  Tom's files aren't really obvious, but tastes vary.  There are also some traditional script files. Use the github UI In the /website master branch.  Click the link to go to the page to edit and insert the appropriate
+Update the build configuration to include the new version and remove the oldest by editing the following .toml  (Tom's Obvious, Minimal Language) files.  Tom's files aren't really obvious, but tastes vary.  There are also some traditional script files. Use the github UI In the /website main branch.  Click the link to go to the page to edit and insert the appropriate
  values:
 
-* Configure defaults: [/website/config/_default/params.toml](https://github.com/knative/website/blob/master/config/_default/params.toml)
+* Configure defaults: [/website/config/_default/params.toml](https://github.com/knative/website/blob/main/config/_default/params.toml)
 
   This lets the build know what the "default" release is.  Add the release version you just created.
 ![default](https://user-images.githubusercontent.com/35748459/87463577-81cb4400-c5c6-11ea-8a69-3023b07adba0.png)
-* Configure production builds: [/website/confi/production/params.toml]( https://github.com/knative/website/blob/master/config/production/params.toml)
+* Configure production builds: [/website/confi/production/params.toml]( https://github.com/knative/website/blob/main/config/production/params.toml)
 
   We build four versions of the docs every time - the version you just created, and the previous three versions.
   Set the version on line 41 to the version you just created. Set the "Archived versions" to the three previous versions.
@@ -118,28 +118,28 @@ Update the build configuration to include the new version and remove the oldest 
   This is really just for builds you do on your machine, but update it on github as well to keep everything in sync. Set line 20
    to the version you just created.
 ![local](https://user-images.githubusercontent.com/35748459/87464508-13878100-c5c8-11ea-840f-25e4ab80e372.png)
-* Configure staging builds: [/website/config/staging/params.toml](https://github.com/knative/website/blob/master/config/staging/params.toml)
+* Configure staging builds: [/website/config/staging/params.toml](https://github.com/knative/website/blob/main/config/staging/params.toml)
 
   Set line 19 to the version you just created.
 ![staging](https://user-images.githubusercontent.com/35748459/87464866-afb18800-c5c8-11ea-9ce0-74331523d651.png)
-* Define the default branch variable:[/website/scripts/docs-version-settings.sh](https://github.com/knative/website/blob/master/scripts/processsourcefiles.sh)
+* Define the default branch variable:[/website/scripts/docs-version-settings.sh](https://github.com/knative/website/blob/main/scripts/processsourcefiles.sh)
 
   This variable should be set to the version you just created.
 ![doc-version](https://user-images.githubusercontent.com/35748459/87465326-4bdb8f00-c5c9-11ea-95c7-8a9e3b8abecd.png)
-* Tell Netlify how to get the previous three releases by updating the three git clone commands to point to those three releases: [/website/scripts/processsourcefiles.sh](https://github.com/knative/website/blob/master/scripts/processsourcefiles.sh)
+* Tell Netlify how to get the previous three releases by updating the three git clone commands to point to those three releases: [/website/scripts/processsourcefiles.sh](https://github.com/knative/website/blob/main/scripts/processsourcefiles.sh)
 ![processsource](https://user-images.githubusercontent.com/35748459/87465528-ad9bf900-c5c9-11ea-8364-d391c1926332.png)
 
 * Add the just created version to line 24 of the Netlify toml file.  The :splat keeps the links to the three previous versions
   alive, so the current version + the previous 3 versions that are still being built. The bottom release that fell out of the top
   four should be added to the redirects below line 29.  Any links to these versions are redirected back to the most current
-  version: [/website/netlify.toml](https://github.com/knative/website/blob/master/netlify.toml)
+  version: [/website/netlify.toml](https://github.com/knative/website/blob/main/netlify.toml)
 ![netlify](https://user-images.githubusercontent.com/35748459/87465963-54809500-c5ca-11ea-8372-3fbcfc965e20.png)
 
 ## Do a local sanity check
 * Update your local versions of the build config files to run a local build.
 * Run a local build using from the /website directory: scripts/localbuild.sh. Follow the extensive instructions at the top of the script file.
 * Check to make sure everything looks okay.
-* Sync your changes to the staging branch with git pull --rebase upstream master and git push upstream staging. {need more detail}
+* Sync your changes to the staging branch with git pull --rebase upstream main and git push upstream staging. {need more detail}
 
 ## Check the staging (Deploy Preview) build on Netlify
 * Go to [https://app.netlify.com/sites/knative/deploys]( https://app.netlify.com/sites/knative/deploys

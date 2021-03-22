@@ -1,8 +1,7 @@
 ---
-title: "New docs page template instructions"
-linkTitle: "Docs"
+linkTitle: "Docs template"
 weight: "10"
-type: "help"
+type: "docs"
 aliases:
  - "/template-docs-page"
  - "/help/contributor/templates/template-docs-page"

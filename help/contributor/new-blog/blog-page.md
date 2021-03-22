@@ -1,8 +1,7 @@
 ---
-title: "New blog entry template instructions"
-linkTitle: "Blog"
+linkTitle: "Blog template"
 weight: "30"
-type: "help"
+type: "docs"
 aliases:
  - "/template-blog-page"
  - "/help/contributor/templates/template-blog-page"

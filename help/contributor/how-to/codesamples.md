@@ -2,7 +2,7 @@
 title: "Code samples"
 linkTitle: ""
 weight: 100
-type: "authoring"
+type: "docs"
 ---
 
 There are currently two general types of content that focus on code samples,
@@ -57,12 +57,12 @@ either internal contributor content, or external-facing user content.
 
   - **Community owned and maintained samples**: For sample code which doesn't
     meet the above criteria, put the code in a separate repository and link to
-    it [from this document](https://github.com/knative/docs/tree/main/community/samples/README.md). These samples might
-    not receive regular maintenance. It is possible that a sample is no longer
-    current and is not actively maintained by its original author. While we
-    encourage a contributor to maintain their content, we acknowledge that it's
-    not always possible for certain reasons, for example other commitments and
-    time constraints.
+    it [from this page](https://github.com/knative/docs/tree/main/community/samples/README.md).
+    These samples might not receive regular maintenance. It is possible that a
+    sample is no longer current and is not actively maintained by its original
+    author. While we encourage a contributor to maintain their content, we
+    acknowledge that it's not always possible for certain reasons, for example
+    other commitments and time constraints.
 
 While a sample might be out of date, it could still provide assistance and help
 you get up-and-running with certain use-cases. If you find that something is not

@@ -1,8 +1,8 @@
 ---
 title: "Formatting standards and conventions"
 linkTitle: "Formatting standards"
-weight: 60
-type: "authoring"
+weight: 40
+type: "docs"
 ---
 
 This page shows the formatting standards for the Knative documentation. Knative uses
@@ -10,6 +10,37 @@ Markdown to markup the content and Hugo with the Docsy template, to build the we
 consistency across our documentation, we have agreed on these formatting standards.
 
 [Learn about the Hugo/Docsy requirements for each page](./frontmatter.md)
+
+## Linking: Use relative URLs
+
+For all links within the Knative content, use relative linking (also know as
+[relative URLs](https://www.w3.org/TR/WD-html40-970917/htmlweb.html#h-5.1.2)).
+
+Linking conventions:
+
+ - Links between files in the same directory must be prefixed with: `./`
+
+    Example: `[Shortcodes](./shortcodes.md)` renders as [Shortcodes](./shortcodes.md)
+
+ - To link across folders, add `../` for each directory that you must travel
+   towards the root docs directory.
+
+    Example: `[FAQs](../../faqs.md)` renders as [FAQs](../../faqs.md)
+
+#### Background
+
+Early on in the content development, all of the documentation was author in the
+GitHub repos and since then, there are many contributors who value the ability
+to consume the documentation from within the repo. In addition, the main
+Markdown editor and renderer when authoring Knative docs is the GitHub UI.
+Therefore, we continue to **use relative URLs throughout** to ensure that all
+the links work as expected, both when clicke in the GitHub UI and on knative.dev.
+
+Hugo has it's own syntax for linking across your content and treats
+the content across the site as a single version of docs (including a Hugo
+specific definition of relative links: *relative to the website domain*).
+Unfortunately, that type of linking renders markdown content unusable from with
+the GitHub repos and does not allow for easy versioning/archiving.
 
 ## Don't use capitalization for emphasis
 

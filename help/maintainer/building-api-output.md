@@ -2,7 +2,7 @@
 title: "Building API docs from the Knative component repos"
 linkTitle: "Generating API docs"
 weight: 85
-type: "authoring"
+type: "docs"
 ---
 
 The Knative API docs are built from the code in the Knative
@@ -98,7 +98,7 @@ To generate a version of the API:
       The script is kept up-to-date with changes that go into the Kubernetes API.
       As Knative adds support for those APIs, you might need to make sure the
       corresponding
-      [script `gen-crd-api-reference-docs` version](https://github.com/knative/docs/blob/master/hack/gen-api-reference-docs.sh#L26)
+      [script `gen-crd-api-reference-docs` version](https://github.com/knative/docs/blob/main/hack/gen-api-reference-docs.sh#L26)
       is used.
 
    * If you get the
@@ -117,7 +117,7 @@ To generate a version of the API:
 
 You can now perform the necessary steps to open a PR, complete a review, and
 merge the new API files into the appropriate branch of the `knative/docs` repo.
-See the [contributor flow](https://github.com/knative/community/blob/master/docs/DOCS-CONTRIBUTING.md) for details
+See the [contributor flow](https://github.com/knative/community/blob/main/docs/DOCS-CONTRIBUTING.md) for details
 about requesting changes in the `knative/docs` repo.
 
 ### Example

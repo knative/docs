@@ -1,20 +1,20 @@
 ---
 title: "Front matter"
 linkTitle: ""
-weight: 50
-type: "authoring"
+weight: 30
+type: "docs"
 ---
 
 The front matter is YAML code in between triple-dashed lines at the top of each
 file and provides important management options for our content. For example, the
 front matter allows us to ensure that existing links continue to work for pages
-that are moved or deleted entirely. This page explains the features currently
-available for front matters in Istio.
+that are moved or deleted entirely. This page explains the front matter
+features that are currently available in knative.dev.
 
 The following example shows a front matter with all the required fields
 filled by placeholders:
 
-
+```
 ---
 title: <title>
 description: <description>
@@ -23,22 +23,23 @@ keywords: [<keyword1>,<keyword2>,...]
 aliases:
     - <previously-published-at-this-URL>
 ---
+```
 
+More details and options for Hugo frontmatter: https://gohugo.io/content-management/front-matter/#predefined
 
-You can copy the example above and replace all the placeholders with the
-appropriate values for your page.
 
 ## Required front matter fields
 
 The following table shows descriptions for all the **required** fields:
 
+
 |Field              | Description
 |-------------------|------------
 |`title`            | The page's title.
-|`description`      | A one-line description of the content on the page.
 |`weight`           | The order of the page relative to the other pages in the directory.
-|`keywords`         | The keywords on the page. Hugo uses this list to create the links under "See Also".
-|`aliases`          | Past URLs where the page was published. See [Renaming, moving, or deleting pages](#rename-move-or-delete-pages) below for details on this item
+|`type`             | Specify `docs`. Required for our docs versioning process.
+|`aliases`          | Past URLs where the page was published.
+
 
 ### Rename, move, or delete pages
 
@@ -51,78 +52,60 @@ old URL to the new URL for our users.
 On the _target page_, which is the page where you want users to land, add the `<path>`
 of the _original page_ to the front-matter as follows:
 
+```
 aliases:
-    - <path>
+    - </path/from/root>
+```
 
-For example, you could find our FAQ page in the past under `/help/faq`. To help our users find the FAQ page, we moved the page one level up to `/faq/` and changed the front matter as follows:
+### Example
 
+In this example, the following file is deleted: `/docs/install/knative-with-any-k8s.md`
+
+To ensure that anyone who tries to navigate to the deleted file get redirected
+to its replacement, you must add `/docs/install/knative-with-any-k8s.md` as an
+`aliase`.
+
+For example, in the `/docs/install/_index.md` file, you add each file that you
+want to redirect to this file as `aliase` starting with the path from root:
+
+```
 ---
-title: Frequently Asked Questions
-description: Questions Asked Frequently.
-weight: 13
+title: "Installing Knative"
+weight: 05
+type: "docs"
 aliases:
-    - /help/faq
+  - /docs/install/knative-with-any-k8s
+  - /docs/install/knative-with-aks
+  - /docs/install/knative-with-ambassador
+  - /docs/install/knative-with-contour
+  - /docs/install/knative-with-docker-for-mac
+  - /docs/install/knative-with-gke
+  - /docs/install/knative-with-gardener
+  - /docs/install/knative-with-gloo
+  - /docs/install/knative-with-icp
+  - /docs/install/knative-with-iks
+  - /docs/install/knative-with-microk8s
+  - /docs/install/knative-with-minikube
+  - /docs/install/knative-with-minishift
+  - /docs/install/knative-with-pks
+  - /docs/install/any-kubernetes-cluster
+showlandingtoc: "false"
 ---
+```
 
-The change above allows any user to access the FAQ when they visit `https://istio.io/faq/` or `https://istio.io/help/faq/`.
-
-Multiple redirects are supported, for example:
-
----
-title: Frequently Asked Questions
-description: Questions Asked Frequently.
-weight: 13
-aliases:
-    - /faq
-    - /faq2
-    - /faq3
----
+View the
+[`docs/install/_index.md`](https://raw.githubusercontent.com/knative/docs/main/docs/install/_index.md)
+file in the repository.
 
 ## Optional front matter fields
 
 However, Hugo supports many front matter fields and this page only covers those
-implemented on istio.io.
+implemented on knative.dev.
 
 The following table shows the most commonly used **optional** fields:
 
 |Field              | Description
 |-------------------|------------
-|`linktitle`        | A shorter version of the title that is used for links to the page.
-|`subtitle`         | A subtitle displayed below the main title.
-|`icon`             | A path to the image that appears next to the title.
-|`draft`            | If true, the page is not shown in the site's navigation.
-|`skip_byline`      | If true, Hugo doesn't show a byline under the main title.
-|`skip_seealso`     | If true, Hugo doesn't generate a  "See also" section for the page.
+|`linkTitle`        | A shorter version of the title that is used to ensure that the text fits within the left navigation menu.
+|`showlandingtoc`.  | For `_index.md` files only. By default, an in-page TOC is added to the body of the page. Specify `"false"` to hide the in-page TOC.
 
-Some front matter fields control the auto-generated table of contents (ToC).
-The following table shows the fields and explains how to use them:
-
-|Field               | Description
-|--------------------|------------
-|`skip_toc`          | If true, Hugo doesn't generate a ToC for the page.
-|`force_inline_toc`  | If true, Hugo inserts an auto-generated ToC in the text instead of in the sidebar to the right.
-|`max_toc_level`     | Sets the heading levels used in the ToC. Values can go from 2 to 6.
-|`remove_toc_prefix` | Hugo removes this string from the beginning of every entry in the ToC
-
-Some front matter fields only apply to so-called _bundle pages_. You can
-identify bundle pages because their file names begin with an underscore `_`, for
-example `_index.md`. In Istio, we use bundle pages as our section landing pages.
-The following table shows the front matter fields pertinent to bundle pages.
-
-|Field                 | Description
-|----------------------|------------
-|`skip_list`           | If true, Hugo doesn't auto-generate the content tiles of a section page.
-|`simple_list`         | If true, Hugo uses a simple list for the auto-generated content of a section page.
-|`list_below`          | If true, Hugo inserts the auto-generated content below the manually-written content.
-|`list_by_publishdate` | If true, Hugo sorts the auto-generated content by publication date, instead of by weight.
-
-Similarly, some front matter fields apply specifically to blog posts. The
-following table shows those fields:
-
-|Field            | Description
-|-----------------|------------
-|`publishdate`    | Date of the post's original publication
-|`last_update`    | Date when the post last received a major revision
-|`attribution`    | Optional name of the post's author
-|`twitter`        | Optional Twitter handle of the post's author
-|`target_release` | The release used on this blog. Normally, this value is the current major Istio release at the time the blog is authored or updated.

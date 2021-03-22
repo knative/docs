@@ -1,27 +1,26 @@
 ---
 title: "Adding new documentation"
 linkTitle: "New docs"
-weight: 30
-type: "authoring"
+weight: 20
+type: "docs"
+showlandingtoc: "false"
 ---
 
-To contribute new documentation to Knative, just follow these steps:
+To contribute new documentation, follow these steps:
 
 1. Identify the audience and intended use for the information.
 1. Choose the [type of content](#content-types) you wish to contribute.
-1. [Choose a title](#choosing-a-title).
-1. Write your contribution following our [documentation contribution guides](/about/contribute).
-1. Submit your contribution to the [knative/docs GitHub repository](https://github.com/knative/docs).
-1. Follow our [review process](/about/contribute/review) until your contribution
-   is merged.
-
-
-- New content templates:
-  - [Documenation](./template-docs-page.md) -- Instructions and a template that
-    you can use to help you add new documentation.
-  - [Blog](./template-blog-entry.md) -- Instructions and a template that
-    you can use to help you post to the Knative blog.
-
+1. You can use a template to get started:
+   * [New docs file](./docs-page.md)
+   * [New `_index.md` file](./index-page.md)
+1. [Choose appropriate titles and filenames](#choosing-titles-and-filenames).
+1. Write your new content. See the [How-to guides](/help/contributor/how-to/)
+   to help you with this process. Feel free to reach out to the
+   [Docs Working Group](/help/contributor/gettingstarted.md#get-help-from-the-community)
+   with any questions.
+1. Open a PR in the [knative/docs GitHub repository](https://github.com/knative/docs)
+   to kick off the review process. For details, see our
+   [Using GitHub help](/help/contributor/how-to/github/#prs).
 
 ## Identify the audience and intended use
 
@@ -59,7 +58,7 @@ giving readers all the information you have, because you are unsure about
 what information they need.
 
 If you need help identifying the audience for you content, we are happy to help
-and answer all your questions during the [Docs Working Group](https://github.com/knative/community/blob/master/working-groups/WORKING-GROUPS.md)
+and answer all your questions during the [Docs Working Group](https://github.com/knative/community/blob/main/working-groups/WORKING-GROUPS.md)
 biweekly meetings.
 
 ## Content types
@@ -164,19 +163,32 @@ their intended audiences, and the goals each type strives to achieve:
     </tr>
   </table>
 
-## Choosing a title
+## Choosing titles and filenames
 
-Choose a title for your topic that has the keywords you want search engines to
-find. All content files in Knative are named `index.md`, but each content file is
-within a folder that uses the keywords in the topic's title,
-separated by hyphens, all in lowercase. Keep folder names as short as possible
-to make cross-references easier to create and maintain.
+Choose a title for your new content, either a new page title or a title for
+a section that you want to add. Make sure it includes the keywords you want
+search engines to find and use sentence style capitalization.
+
+#### New files
+
+The filename of your new content should reflect that the title.
+
+#### New files and folders
+
+If the content that you add include a new folder, name that folder using
+the keywords that cover the scope of the content in the folder, separated by
+hyphens, all in lowercase. Keep folder names as short as possible to make
+cross-references easier to create and maintain. You should only need to create
+a new folder if you are adding multiple topics/files, or if you are grouping
+related content. The names for each file do not need to repeat the folder name
+since that context is already established.
+
+For more guidance, see the
+[Headings and titles](https://developers.google.com/style/headings) section in
+the style guide.
+
 
 ## Submit your contribution to GitHub
 
-If you are not familiar with GitHub, see our [working with GitHub guide](/about/contribute/github)
+If you are not familiar with GitHub, see our [working with GitHub guide](../how-to/github.md)
 to learn how to submit documentation changes.
-
-If you want to learn more about how and when your contributions are published,
-see the [section on branching](/about/contribute/github#branching-strategy) to understand
-how we use branches and cherry picking to publish our content.

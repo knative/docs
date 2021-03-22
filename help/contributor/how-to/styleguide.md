@@ -1,8 +1,8 @@
 ---
-title: Style guide
+title: "Style guide"
 linkTitle: ""
-weight: 40
-type: "authoring"
+weight: 30
+type: "docs"
 ---
 
 All content accepted into the Knative documentation must be **clear** and
@@ -15,15 +15,9 @@ Guide](https://developers.google.com/style/).
 
 **Start here**:
 
-1. [highlights](https://developers.google.com/style/highlights)
-2. [general principles](https://developers.google.com/style/tone)
+1. [Highlights](https://developers.google.com/style/highlights)
+2. [General principles](https://developers.google.com/style/tone)
 3. Use the sections below as reference.
-
-- New content templates:
-  - [Documenation](./template-docs-page.md) -- Instructions and a template that
-    you can use to help you add new documentation.
-  - [Blog](./template-blog-entry.md) -- Instructions and a template that
-    you can use to help you post to the Knative blog.
 
 ## Use sentence case for titles and headings
 
@@ -57,11 +51,11 @@ meaning. This exception is extremely rare and should be avoided.
 Use simple and direct language. Avoid using unnecessary phrases, such as saying
 "please."
 
-|Do                          | Don't
-|----------------------------|------
-|To create a `ReplicaSet`, ... | In order to create a `ReplicaSet`, ...
-|See the configuration file. | Please see the configuration file.
-|View the Pods.              | With this next command, we'll view the Pods.
+|Do                          | |Don't
+|----------------------------|--|----
+|To create a `ReplicaSet`, ... | | In order to create a `ReplicaSet`, ...
+|See the configuration file. |  | Please see the configuration file.
+|View the Pods.              |  | With this next command, we'll view the Pods.
 
 ## Address the reader as "you"
 
