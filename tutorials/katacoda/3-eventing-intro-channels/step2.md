@@ -1,5 +1,5 @@
 ## Event Topologies
-We will walk through the topologies from the simplest and towards more complicated
+We will walk through the simplest to more complicated topologies
 
 ### 1:1 Event Delivery
 The most straightforward use case is that whenever events are produced, you want some code to handle that event.

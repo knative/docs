@@ -46,7 +46,7 @@ spec:
 EOF
 ```{{execute}}
 
-Now, let's create the Sequence to execute the service "first" and then pass it's result to the service "event-display-chain"
+Now, let's create the Sequence to execute the service "first" and then pass its result to the service "event-display-chain"
 
 ```
 cat <<EOF | kubectl create -f -

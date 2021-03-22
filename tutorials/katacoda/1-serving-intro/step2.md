@@ -10,7 +10,7 @@ Knative defines a `service.serving.knative.dev` CRD to control the lifecycle of 
 kn service create demo --image gcr.io/knative-samples/helloworld-go --env TARGET=blue
 ```{{execute}}
 
-We can now invoke the application using `curl`. We first need to figure out the IP address of minikube and ingress port.
+We can now invoke the application using `curl`. We first need to figure out the IP address of minikube and the ingress port.
 ```
 MINIKUBE_IP=$(minikube ip)
 INGRESS_PORT=$(kubectl get svc envoy --namespace contour-external --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
