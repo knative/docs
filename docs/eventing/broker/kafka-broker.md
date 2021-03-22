@@ -297,8 +297,8 @@ To change the logging level to `DEBUG`, you need to:
 
 When dispatching events, Kafka Broker supports two different ordering guarantees:
 
-* `unordered`: Unordered consumer is a non-blocking consumer that potentially deliver messages unordered, while preserving proper offset management. 
-* `ordered`: Ordered consumer is a per-partition blocking consumer that deliver messages in order.
+* `unordered`: Unordered consumer is a non-blocking consumer that potentially delivers messages unordered, while preserving proper offset management. 
+* `ordered`: Ordered consumer is a per-partition blocking consumer that delivers messages in order.
 
 `unordered` is the default ordering guarantee, while **`ordered` is considered unstable, use with caution**.
 
