@@ -6,8 +6,9 @@ The first way to handle this is an extension of the first diagram. Each consumer
 ![1toN](./assets/1toN.png)
 
 This manner of handling multiple consumers for an event, also called the fanout pattern, introduces a bunch of complex
-problems (like what if the producer crashes after delivering an event to only a subset of consumers?
-what if a client was temporarily un-available, how does it get the messages it missed? etc.) for our application architecture.
+problems for our application architecture. Problems like what if the producer crashes after delivering an event to only a subset of consumers?
+what if a client was temporarily un-available, how does it get the messages it missed? etc.
+
 Rather than burdening the producers to handle these problems, Knative Eventing introduces the concept of a Channel.
 ![channel](./assets/channel.png)
 
