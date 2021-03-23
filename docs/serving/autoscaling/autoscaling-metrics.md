@@ -13,7 +13,7 @@ For [per-revision](./autoscaling-concepts.md) configuration, this is determined 
 The possible metric types that can be configured per revision depend on the type of Autoscaler implementation you are using:
 
 * The default KPA Autoscaler supports the `concurrency` and `rps` metrics.
-* The HPA Autoscaler supports the `concurrency`, `rps` and `cpu` metrics.
+* The HPA Autoscaler supports the `cpu` metric.
 
 <!-- TODO: Add details about different metrics types, how concurrency and rps differ. Explain cpu. -->
 
