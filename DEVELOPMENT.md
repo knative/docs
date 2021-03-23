@@ -38,6 +38,10 @@ git remote set-url --push upstream no_push
 _Adding the `upstream` remote sets you up nicely for regularly
 [syncing your fork](https://help.github.com/articles/syncing-a-fork/)._
 
+### Run website locally
+
+Refer to this [doc](https://github.com/knative/website/blob/main/DEVELOPMENT.md) in the website repo.
+
 ### Common Troubleshooting issues for PRs
 
 1. The CLA check fails even though you have signed the CLA. This may occur if you accept and commit suggestions in a pull request from another person's account, because the email address of that account doesn't match the address on record for the CLA. The commit will show up as co-authored, which can cause issues if your public email address has not signed the CLA.
