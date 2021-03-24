@@ -384,6 +384,10 @@ Refer to the "Real DNS" method for a permanent solution.
 
 ### Optional Serving extensions
 
+You can apply extensions to customize your Knative Serving installation.
+For more information about the extensions you can apply, see
+[Installation files](./custom-install/installation-files.md#knative-serving-installation-files).
+
 Follow the steps for any Serving extensions you want to install:
 
 {{< tabs name="serving_extensions" default="TLS via HTTP01" >}}
@@ -676,6 +680,10 @@ data:
 {{< /tabs >}}
 
 ### Optional Eventing extensions
+
+You can apply extensions to customize your Knative Eventing installation.
+For more information about the extensions you can apply, see
+[Installation files](./custom-install/installation-files.md#knative-eventing-installation-files).
 
 Follow the steps for any Eventing extensions you want to install:
 <!-- This indentation is important for things to render properly. -->
