@@ -57,7 +57,7 @@ Follow the procedure for the networking layer of your choice:
 <!-- TODO: Link to document/diagram describing what is a networking layer.  -->
 <!-- This indentation is important for things to render properly. -->
 
-   {{< tabs name="serving_networking" default="Istio" >}}
+   {{< tabs name="serving_networking" default="Kourier" >}}
    {{% tab name="Ambassador" %}}
 
 The following commands install Ambassador and enable its Knative integration.
@@ -392,7 +392,7 @@ For information about the YAML files in the Knative Serving release, see
 
 Follow the steps for any Serving extensions you want to install:
 
-{{< tabs name="serving_extensions" default="TLS via HTTP01" >}}
+{{< tabs name="serving_extensions" >}}
 
 {{% tab name="HPA autoscaling" %}}
 
