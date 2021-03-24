@@ -382,11 +382,13 @@ Refer to the "Real DNS" method for a permanent solution.
 
     {{< /tab >}} {{< /tabs >}}
 
-### Optional Serving extensions
+### Optional: Install Serving extensions
 
-You can apply extensions to customize your Knative Serving installation.
-For more information about the extensions you can apply, see
-[Installation files](./custom-install/installation-files.md#knative-serving-installation-files).
+To add extra features to your Knative Serving installation, you can install extensions
+by applying YAML files using the `kubectl` CLI.
+
+For information about the YAML files in the Knative Serving release, see
+[Installation files](./installation-files#knative-serving-installation-files).
 
 Follow the steps for any Serving extensions you want to install:
 
@@ -679,11 +681,13 @@ data:
 
 {{< /tabs >}}
 
-### Optional Eventing extensions
+### Optional: Install Eventing extensions
 
-You can apply extensions to customize your Knative Eventing installation.
-For more information about the extensions you can apply, see
-[Installation files](./custom-install/installation-files.md#knative-eventing-installation-files).
+To add extra features to your Knative Eventing installation, you can install extensions
+by applying YAML files using the `kubectl` CLI.
+
+For information about the YAML files in the Knative Eventing release, see
+[Installation files](./installation-files#knative-eventing-installation-files).
 
 Follow the steps for any Eventing extensions you want to install:
 <!-- This indentation is important for things to render properly. -->

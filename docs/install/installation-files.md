@@ -16,7 +16,7 @@ For information about installing these files, see [YAML-based installation](../a
 
 ## Knative Serving installation files
 
-The table below describes the installation files available in the Knative Serving release:
+The table below describes the installation files in the Knative Serving release:
 
 | File name | Description | Dependencies|
 | --- | --- | --- |
@@ -33,7 +33,7 @@ The table below describes the installation files available in the Knative Servin
 
 ## Knative Eventing installation files
 
-The table below describes the installation files available in the Knative Eventing release:
+The table below describes the installation files in the Knative Eventing release:
 
 | File name | Description | Dependencies|
 | --- | --- | --- |
