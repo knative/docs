@@ -11,8 +11,8 @@ COPY src ./src
 RUN mvn package -DskipTests
 
 # Use the Official OpenJDK image for a lean production stage of our multi-stage build.
-# https://hub.docker.com/_/openjdk
-# https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
+# https://hub.docker.com/_/openjdk.
+# https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds.
 FROM openjdk:8-jre-alpine
 
 # Copy the jar to the production image from the builder stage.
