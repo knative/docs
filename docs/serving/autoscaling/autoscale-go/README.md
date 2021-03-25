@@ -8,20 +8,18 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 1. Clone this repository, and move into the sample directory:
 
    ```shell
-   git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
+   git clone -b "{{ git.tag }}" https://github.com/knative/docs knative-docs
    cd knative-docs
    ```
 
 ## Deploy the Service
 
 1. Deploy the [sample](./service.yaml) Knative Service:
-
    ```
    kubectl apply --filename docs/serving/autoscaling/autoscale-go/service.yaml
    ```
 
 1. Obtain the URL of the service (once `Ready`):
-
    ```
    $ kubectl get ksvc autoscale-go
    NAME            URL                                                LATESTCREATED         LATESTREADY           READY   REASON
@@ -31,7 +29,6 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 ## Load the Service
 
 1. Make a request to the autoscale app to see it consume some resources.
-
    ```shell
    curl "http://autoscale-go.default.1.2.3.4.xip.io?sleep=100&prime=10000&bloat=5"
    ```
@@ -43,7 +40,6 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
    ```
 
 1. Send 30 seconds of traffic maintaining 50 in-flight requests.
-
    ```shell
    hey -z 30s -c 50 \
      "http://autoscale-go.default.1.2.3.4.xip.io?sleep=100&prime=10000&bloat=5" \
@@ -150,7 +146,6 @@ autoscaler classes built into Knative:
    autoscales on CPU usage.
 
    Example of a Service scaled on CPU:
-
    ```yaml
    apiVersion: serving.knative.dev/v1
    kind: Service
@@ -171,7 +166,6 @@ autoscaler classes built into Knative:
 
    Additionally the autoscaler targets and scaling bounds can be specified in
    annotations. Example of a Service with custom targets and scale bounds:
-
    ```yaml
    apiVersion: serving.knative.dev/v1
    kind: Service
@@ -208,21 +202,18 @@ customization (32 minutes).
 ### Other Experiments
 
 1. Send 60 seconds of traffic maintaining 100 concurrent requests.
-
    ```shell
    hey -z 60s -c 100 \
      "http://autoscale-go.default.1.2.3.4.xip.io?sleep=100&prime=10000&bloat=5"
    ```
 
 1. Send 60 seconds of traffic maintaining 100 qps with short requests (10 ms).
-
    ```shell
    hey -z 60s -q 100 \
      "http://autoscale-go.default.1.2.3.4.xip.io?sleep=10"
    ```
 
 1. Send 60 seconds of traffic maintaining 100 qps with long requests (1 sec).
-
    ```shell
    hey -z 60s -q 100 \
      "http://autoscale-go.default.1.2.3.4.xip.io?sleep=1000"
@@ -230,7 +221,6 @@ customization (32 minutes).
 
 1. Send 60 seconds of traffic with heavy CPU usage (~1 cpu/sec/request, total
    100 cpus).
-
    ```shell
    hey -z 60s -q 100 \
      "http://autoscale-go.default.1.2.3.4.xip.io?prime=40000000"
@@ -238,7 +228,6 @@ customization (32 minutes).
 
 1. Send 60 seconds of traffic with heavy memory usage (1 gb/request, total 5
    gb).
-
    ```shell
    hey -z 60s -c 5 \
      "http://autoscale-go.default.1.2.3.4.xip.io?bloat=1000"

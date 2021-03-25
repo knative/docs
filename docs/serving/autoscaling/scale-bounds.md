@@ -23,25 +23,22 @@ Knative will attempt to never have less than this number of replicas at any one 
 **NOTE:** For more information about scale-to-zero configuration, see the documentation on [Configuring scale to zero](./scale-to-zero.md).
 
 **Example:**
-{{< tabs name="min-scale" default="Per Revision" >}}
-{{% tab name="Per Revision" %}}
-```yaml
-apiVersion: serving.knative.dev/v1
-kind: Service
-metadata:
-  name: helloworld-go
-  namespace: default
-spec:
-  template:
+=== "Per Revision"
+    ```yaml
+    apiVersion: serving.knative.dev/v1
+    kind: Service
     metadata:
-      annotations:
-        autoscaling.knative.dev/minScale: "3"
+      name: helloworld-go
+      namespace: default
     spec:
-      containers:
-        - image: gcr.io/knative-samples/helloworld-go
-```
-{{< /tab >}}
-{{< /tabs >}}
+      template:
+        metadata:
+          annotations:
+            autoscaling.knative.dev/minScale: "3"
+        spec:
+          containers:
+            - image: gcr.io/knative-samples/helloworld-go
+    ```
 
 ## Upper bound
 
@@ -57,52 +54,45 @@ When `max-scale-limit` is set to a positive value, a revision with a max scale a
 * **Default:** `0` which means unlimited
 
 **Example:**
-{{< tabs name="max-scale" default="Per Revision" >}}
-{{% tab name="Per Revision" %}}
-```yaml
-apiVersion: serving.knative.dev/v1
-kind: Service
-metadata:
-  name: helloworld-go
-  namespace: default
-spec:
-  template:
+=== "Per Revision"
+    ```yaml
+    apiVersion: serving.knative.dev/v1
+    kind: Service
     metadata:
-      annotations:
-        autoscaling.knative.dev/maxScale: "3"
+      name: helloworld-go
+      namespace: default
     spec:
-      containers:
-        - image: gcr.io/knative-samples/helloworld-go
-```
-{{< /tab >}}
-
-{{% tab name="Global (ConfigMap)" %}}
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: config-autoscaler
-  namespace: knative-serving
-data:
-  max-scale: "3"
-  max-scale-limit: "100"
-```
-{{< /tab >}}
-{{% tab name="Global (Operator)" %}}
-```yaml
-apiVersion: operator.knative.dev/v1alpha1
-kind: KnativeServing
-metadata:
-  name: knative-serving
-spec:
-  config:
-    autoscaler:
+      template:
+        metadata:
+          annotations:
+            autoscaling.knative.dev/maxScale: "3"
+        spec:
+          containers:
+            - image: gcr.io/knative-samples/helloworld-go
+    ```
+=== "Global (ConfigMap)"
+    ```yaml
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: config-autoscaler
+      namespace: knative-serving
+    data:
       max-scale: "3"
       max-scale-limit: "100"
-```
-
-{{< /tab >}}
-{{< /tabs >}}
+    ```
+=== "Global (Operator)"
+    ```yaml
+    apiVersion: operator.knative.dev/v1alpha1
+    kind: KnativeServing
+    metadata:
+      name: knative-serving
+    spec:
+      config:
+        autoscaler:
+          max-scale: "3"
+          max-scale-limit: "100"
+    ```
 
 ## Initial scale
 
@@ -117,51 +107,45 @@ When the Revision is created, the larger of initial scale and lower bound is aut
 * **Default:** `1`
 
 **Example:**
-{{< tabs name="initial-scale" default="Per Revision" >}}
-{{% tab name="Per Revision" %}}
-```yaml
-apiVersion: serving.knative.dev/v1
-kind: Service
-metadata:
-  name: helloworld-go
-  namespace: default
-spec:
-  template:
+=== "Per Revision"
+    ```yaml
+    apiVersion: serving.knative.dev/v1
+    kind: Service
     metadata:
-      annotations:
-        autoscaling.knative.dev/initialScale: "0"
+      name: helloworld-go
+      namespace: default
     spec:
-      containers:
-        - image: gcr.io/knative-samples/helloworld-go
-```
-{{< /tab >}}
-{{% tab name="Global (ConfigMap)" %}}
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: config-autoscaler
-  namespace: knative-serving
-data:
-  initial-scale: "0"
-  allow-zero-initial-scale: "true"
-```
-{{< /tab >}}
-{{% tab name="Global (Operator)" %}}
-```yaml
-apiVersion: operator.knative.dev/v1alpha1
-kind: KnativeServing
-metadata:
-  name: knative-serving
-spec:
-  config:
-    autoscaler:
+      template:
+        metadata:
+          annotations:
+            autoscaling.knative.dev/initialScale: "0"
+        spec:
+          containers:
+            - image: gcr.io/knative-samples/helloworld-go
+    ```
+=== "Global (ConfigMap)"
+    ```yaml
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: config-autoscaler
+      namespace: knative-serving
+    data:
       initial-scale: "0"
       allow-zero-initial-scale: "true"
-```
-
-{{< /tab >}}
-{{< /tabs >}}
+    ```
+=== "Global (Operator)"
+    ```yaml
+    apiVersion: operator.knative.dev/v1alpha1
+    kind: KnativeServing
+    metadata:
+      name: knative-serving
+    spec:
+      config:
+        autoscaler:
+          initial-scale: "0"
+          allow-zero-initial-scale: "true"
+    ```
 
 ## Scale Down Delay
 
@@ -178,48 +162,40 @@ delay period.
 * **Default:** `0s` (no delay)
 
 **Example:**
-{{< tabs name="scale-down-delay" default="Per Revision" >}}
-{{% tab name="Per Revision" %}}
-```yaml
-apiVersion: serving.knative.dev/v1
-kind: Service
-metadata:
-  name: helloworld-go
-  namespace: default
-spec:
-  template:
+=== "Per Revision"
+    ```yaml
+    apiVersion: serving.knative.dev/v1
+    kind: Service
     metadata:
-      annotations:
-        autoscaling.knative.dev/scaleDownDelay: "15m"
+      name: helloworld-go
+      namespace: default
     spec:
-      containers:
-        - image: gcr.io/knative-samples/helloworld-go
-```
-{{< /tab >}}
-{{% tab name="Global (ConfigMap)" %}}
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: config-autoscaler
-  namespace: knative-serving
-data:
-  scale-down-delay: "15m"
-```
-{{< /tab >}}
-{{% tab name="Global (Operator)" %}}
-```yaml
-apiVersion: operator.knative.dev/v1alpha1
-kind: KnativeServing
-metadata:
-  name: knative-serving
-spec:
-  config:
-    autoscaler:
+      template:
+        metadata:
+          annotations:
+            autoscaling.knative.dev/scaleDownDelay: "15m"
+        spec:
+          containers:
+            - image: gcr.io/knative-samples/helloworld-go
+    ```
+=== "Global (ConfigMap)"
+    ```yaml
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: config-autoscaler
+      namespace: knative-serving
+    data:
       scale-down-delay: "15m"
-```
-
-{{< /tab >}}
-{{< /tabs >}}
-
----
+    ```
+=== "Global (Operator)"
+    ```yaml
+    apiVersion: operator.knative.dev/v1alpha1
+    kind: KnativeServing
+    metadata:
+      name: knative-serving
+    spec:
+      config:
+        autoscaler:
+          scale-down-delay: "15m"
+    ```

@@ -1,5 +1,5 @@
 ---
-title: "Feature/Extension Flags"
+title: "Feature Flags"
 weight: 50
 type: "docs"
 ---
@@ -13,9 +13,10 @@ This document introduces two concepts:
 ## Control
 Features and extensions are controlled by flags defined in the `config-features` ConfigMap in the `knative-serving` namespace.
 Flags can have the following values:
-* Enabled: the feature is enabled.
-* Allowed: the feature may be enabled (e.g. using an annotation or looser validation).
-* Disabled: the feature cannot be enabled.
+
+ * Enabled: the feature is enabled.
+ * Allowed: the feature may be enabled (e.g. using an annotation or looser validation).
+ * Disabled: the feature cannot be enabled.
 
 These three states don't make sense for all features.
 Let's consider two types of features: `multi-container` and `kubernetes.podspec-dryrun`.
@@ -28,50 +29,53 @@ Let's consider two types of features: `multi-container` and `kubernetes.podspec-
 Features and extensions go through 3 similar phases (Alpha, Beta, GA) but with important differences.
 
 Alpha means:
-* Might be buggy. Enabling the feature may expose bugs.
-* Support for feature may be dropped at any time without notice.
-* The API may change in incompatible ways in a later software release without notice.
-* Recommended for use only in short-lived testing clusters, due to increased risk of bugs and lack of long-term support.
+
+ * Might be buggy. Enabling the feature may expose bugs.
+ * Support for feature may be dropped at any time without notice.
+ * The API may change in incompatible ways in a later software release without notice.
+ * Recommended for use only in short-lived testing clusters, due to increased risk of bugs and lack of long-term support.
 
 Beta means:
-* The feature is well tested. Enabling the feature is considered safe.
-* Support for the overall feature will not be dropped, though details may change.
-* The schema and/or semantics of objects may change in incompatible ways in a subsequent beta or stable release. When this happens, we will provide instructions for migrating to the next version. This may require deleting, editing, or re-creating API objects. The editing process may require some thought. This may require downtime for applications that rely on the feature.
-* Recommended for only non-business-critical uses because of potential for incompatible changes in subsequent releases. If you have multiple clusters that can be upgraded independently, you may be able to relax this restriction.
+
+ * The feature is well tested. Enabling the feature is considered safe.
+ * Support for the overall feature will not be dropped, though details may change.
+ * The schema and/or semantics of objects may change in incompatible ways in a subsequent beta or stable release. When this happens, we will provide instructions for migrating to the next version. This may require deleting, editing, or re-creating API objects. The editing process may require some thought. This may require downtime for applications that rely on the feature.
+ * Recommended for only non-business-critical uses because of potential for incompatible changes in subsequent releases. If you have multiple clusters that can be upgraded independently, you may be able to relax this restriction.
 
 General Availability (GA) means:
-* Stable versions of features/extensions will appear in released software for many subsequent versions.
+
+ * Stable versions of features/extensions will appear in released software for many subsequent versions.
 
 # Feature
 Features use flags to safely introduce new changes to the Knative API. Eventually, each feature will graduate to become fully part of the Knative API, and the flag guard will be removed.
 
 ## Alpha
-* Disabled by default.
+ * Disabled by default.
 
 ## Beta
-* Enabled by default.
+ * Enabled by default.
 
 ## GA
-* The feature is always enabled; you cannot disable it.
-* The corresponding feature flag is no longer needed.
+ * The feature is always enabled; you cannot disable it.
+ * The corresponding feature flag is no longer needed.
 
 # Extension
 An extension may surface details of a specific Knative implementation or features of the underlying environment. It is never intended for inclusion in the core Knative API due to its lack of portability. Each extension will always be controlled by a flag and never enabled by default.
 
 ## Alpha
-* Disabled by default.
+ * Disabled by default.
 
 ## Beta
-* Allowed by default.
+ * Allowed by default.
 
 ## GA
-* Allowed by default.
+ * Allowed by default.
 
 # Available Flags
 
 ## Multi Containers
-* **Type**: feature
-* **ConfigMap key:** `multi-container`
+ * **Type**: feature
+ * **ConfigMap key:** `multi-container`
 
 This flag allows specifying multiple "user containers" in a Knative Service spec.
 Only one container can handle the requests, and therefore exactly one container must
@@ -94,8 +98,8 @@ spec:
 ```
 
 ## Kubernetes Node Affinity
-* **Type**: extension
-* **ConfigMap key:** `kubernetes.podspec-affinity`
+ * **Type**: extension
+ * **ConfigMap key:** `kubernetes.podspec-affinity`
 
 This extension controls whether [node affinity](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity) can be specified.
 
@@ -119,8 +123,8 @@ spec:
 ```
 
 ## Kubernetes Host Aliases
-* **Type**: extension
-* **ConfigMap key:** `kubernetes.podspec-hostaliases`
+ * **Type**: extension
+ * **ConfigMap key:** `kubernetes.podspec-hostaliases`
 
 This flag controls whether [host aliases](https://kubernetes.io/docs/concepts/services-networking/add-entries-to-pod-etc-hosts-with-host-aliases/) can be specified.
 
@@ -139,8 +143,8 @@ spec:
 ```
 
 ## Kubernetes Node Selector
-* **Type**: extension
-* **ConfigMap key:** `kubernetes.podspec-nodeselector`
+ * **Type**: extension
+ * **ConfigMap key:** `kubernetes.podspec-nodeselector`
 
 This flag controls whether [node selector](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector) can be specified.
 
@@ -156,8 +160,8 @@ spec:
 ```
 
 ## Kubernetes Toleration
-* **Type**: extension
-* **ConfigMap key:** `kubernetes.podspec-tolerations`
+ * **Type**: extension
+ * **ConfigMap key:** `kubernetes.podspec-tolerations`
 
 This flag controls whether [tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) can be specified.
 
@@ -175,8 +179,8 @@ spec:
 ```
 
 ## Kubernetes FieldRef
-* **Type**: extension
-* **ConfigMap key:** `kubernetes.podspec-fieldref`
+ * **Type**: extension
+ * **ConfigMap key:** `kubernetes.podspec-fieldref`
 
 This flag controls whether the [Downward API (env based)](https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/) can be specified.
 
@@ -198,8 +202,8 @@ spec:
 ```
 
 ## Kubernetes Dry Run
-* **Type**: extension
-* **ConfigMap key:** `kubernetes.podspec-dryrun`
+ * **Type**: extension
+ * **ConfigMap key:** `kubernetes.podspec-dryrun`
 
 This flag controls whether Knative will try to validate the Pod spec derived from the Knative Service spec using the Kubernetes API server before accepting the object.
 
@@ -221,8 +225,8 @@ spec:
 ```
 
 ## Kubernetes Runtime Class
-* **Type**: extension
-* **ConfigMap key:** `kubernetes.podspec-runtimeclass`
+ * **Type**: extension
+ * **ConfigMap key:** `kubernetes.podspec-runtimeclass`
 
 This flag controls whether the [runtime class](https://kubernetes.io/docs/concepts/containers/runtime-class/) can be used or not.
 
@@ -238,8 +242,8 @@ spec:
 ```
 
 ## Kubernetes Security Context
-* **Type**: extension
-* **ConfigMap key:** `kubernetes.podspec-securitycontext`
+ * **Type**: extension
+ * **ConfigMap key:** `kubernetes.podspec-securitycontext`
 
 This flag controls whether a subset of the [security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) can be used.
 
@@ -274,8 +278,8 @@ spec:
 ```
 
 ## Responsive Revision Garbage Collector
-* **Type**: extension
-* **ConfigMap key:** `responsive-revision-gc`
+ * **Type**: extension
+ * **ConfigMap key:** `responsive-revision-gc`
 
 This flag controls whether new responsive garbage collection is enabled. This
 feature labels revisions in real-time as they become referenced and
@@ -283,7 +287,7 @@ dereferenced by Routes. This allows us to reap revisions shortly after
 they are no longer active.
 
 ## Tag Header Based Routing
-* **Type**: extension
-* **ConfigMap key:** `tag-header-based-routing`
+ * **Type**: extension
+ * **ConfigMap key:** `tag-header-based-routing`
 
 This flags controls whether [tag header based routing](./samples/tag-header-based-routing/README.md) is enabled.

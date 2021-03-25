@@ -41,6 +41,5 @@ metadata:
   name: config-deployment
   namespace: knative-serving
 data:
-...
   progressDeadline: "10m"
-...
+```

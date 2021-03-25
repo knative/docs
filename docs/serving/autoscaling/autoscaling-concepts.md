@@ -11,7 +11,8 @@ This section covers conceptual information about which Autoscaler types are supp
 
 Knative Serving supports the implementation of Knative Pod Autoscaler (KPA) and Kubernetes' Horizontal Pod Autoscaler (HPA). The features and limitations of each of these Autoscalers are listed below.
 
-**IMPORTANT:** If you want to use Kubernetes Horizontal Pod Autoscaler (HPA), you must install it after you install [Knative Serving](../../install/any-kubernetes-cluster.md#optional-serving-extensions).
+!!! danger "Note"
+    If you want to use Kubernetes Horizontal Pod Autoscaler (HPA), you must install it after you install [Knative Serving](../../install/any-kubernetes-cluster.md#optional-serving-extensions).
 
 ### Knative Pod Autoscaler (KPA)
 
@@ -35,48 +36,43 @@ The type of Autoscaler implementation (KPA or HPA) can be configured by using th
 * **Default:** `"kpa.autoscaling.knative.dev"`
 
 **Example:**
-{{< tabs name="class" default="Per Revision" >}}
-{{% tab name="Per Revision" %}}
-```yaml
-apiVersion: serving.knative.dev/v1
-kind: Service
-metadata:
-  name: helloworld-go
-  namespace: default
-spec:
-  template:
+=== "Per Revision"
+    ```yaml
+    apiVersion: serving.knative.dev/v1
+    kind: Service
     metadata:
-      annotations:
-        autoscaling.knative.dev/class: "kpa.autoscaling.knative.dev"
+      name: helloworld-go
+      namespace: default
     spec:
-      containers:
-        - image: gcr.io/knative-samples/helloworld-go
-```
-{{< /tab >}}
-{{% tab name="Global (ConfigMap)" %}}
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
- name: config-autoscaler
- namespace: knative-serving
-data:
- pod-autoscaler-class: "kpa.autoscaling.knative.dev"
-```
-{{< /tab >}}
-{{% tab name="Global (Operator)" %}}
-```yaml
-apiVersion: operator.knative.dev/v1alpha1
-kind: KnativeServing
-metadata:
-  name: knative-serving
-spec:
-  config:
-    autoscaler:
-      pod-autoscaler-class: "kpa.autoscaling.knative.dev"
-```
-{{< /tab >}}
-{{< /tabs >}}
+      template:
+        metadata:
+          annotations:
+            autoscaling.knative.dev/class: "kpa.autoscaling.knative.dev"
+        spec:
+          containers:
+            - image: gcr.io/knative-samples/helloworld-go
+    ```
+=== "Global (ConfigMap)"
+    ```yaml
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+    name: config-autoscaler
+    namespace: knative-serving
+    data:
+    pod-autoscaler-class: "kpa.autoscaling.knative.dev"
+    ```
+=== "Global (Operator)"
+    ```yaml
+    apiVersion: operator.knative.dev/v1alpha1
+    kind: KnativeServing
+    metadata:
+      name: knative-serving
+    spec:
+      config:
+        autoscaler:
+          pod-autoscaler-class: "kpa.autoscaling.knative.dev"
+    ```
 
 ## Global versus per-revision settings
 
@@ -131,5 +127,7 @@ spec:
         autoscaling.knative.dev/target: "70"
 ```
 
-**IMPORTANT:** If you are creating revisions by using a service or configuration, you must set the annotations in the _revision template_ so that any modifications will be applied to each revision as they are created.
-Setting annotations in the top level metadata of a single revision will not propagate the changes to other revisions and will not apply changes to the autoscaling configuration for your application.
+!!! danger  "IMPORTANT"
+
+    If you are creating revisions by using a service or configuration, you must set the annotations in the _revision template_ so that any modifications will be applied to each revision as they are created.
+    Setting annotations in the top level metadata of a single revision will not propagate the changes to other revisions and will not apply changes to the autoscaling configuration for your application.

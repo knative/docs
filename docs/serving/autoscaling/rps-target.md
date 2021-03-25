@@ -13,46 +13,41 @@ This setting specifies a target for requests-per-second per replica of an applic
 * **Default:** `"200"`
 
 **Example:**
-{{< tabs name="rps-target" default="Per Revision" >}}
-{{% tab name="Per Revision" %}}
-```yaml
-apiVersion: serving.knative.dev/v1
-kind: Service
-metadata:
-  name: helloworld-go
-  namespace: default
-spec:
-  template:
+=== "Per Revision"
+    ```yaml
+    apiVersion: serving.knative.dev/v1
+    kind: Service
     metadata:
-      annotations:
-        autoscaling.knative.dev/target: "150"
-        autoscaling.knative.dev/metric: "rps"
+      name: helloworld-go
+      namespace: default
     spec:
-      containers:
-        - image: gcr.io/knative-samples/helloworld-go
-```
-{{< /tab >}}
-{{% tab name="Global (ConfigMap)" %}}
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
- name: config-autoscaler
- namespace: knative-serving
-data:
- requests-per-second-target-default: "150"
-```
-{{< /tab >}}
-{{% tab name="Global (Operator)" %}}
-```yaml
-apiVersion: operator.knative.dev/v1alpha1
-kind: KnativeServing
-metadata:
-  name: knative-serving
-spec:
-  config:
-    autoscaler:
-      requests-per-second-target-default: "150"
-```
-{{< /tab >}}
-{{< /tabs >}}
+      template:
+        metadata:
+          annotations:
+            autoscaling.knative.dev/target: "150"
+            autoscaling.knative.dev/metric: "rps"
+        spec:
+          containers:
+            - image: gcr.io/knative-samples/helloworld-go
+    ```
+=== "Global (ConfigMap)"
+    ```yaml
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+    name: config-autoscaler
+    namespace: knative-serving
+    data:
+    requests-per-second-target-default: "150"
+    ```
+=== "Global (Operator)"
+    ```yaml
+    apiVersion: operator.knative.dev/v1alpha1
+    kind: KnativeServing
+    metadata:
+      name: knative-serving
+    spec:
+      config:
+        autoscaler:
+          requests-per-second-target-default: "150"
+    ```

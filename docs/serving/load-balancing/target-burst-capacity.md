@@ -26,46 +26,41 @@ Target burst capacity can be configured using a combination of the following par
 - **Default:** `200`
 
 **Example:**
-{{< tabs name="targetBurstCapacity" default="Per Revision" >}}
-{{% tab name="Per Revision" %}}
-```yaml
-apiVersion: serving.knative.dev/v1
-kind: Service
-metadata:
-  annotations:
-  name: <service_name>
-  namespace: default
-spec:
-  template:
+=== "Per Revision"
+    ```yaml
+    apiVersion: serving.knative.dev/v1
+    kind: Service
     metadata:
       annotations:
-        autoscaling.knative.dev/targetBurstCapacity: "200"
-```
-{{< /tab >}}
-{{% tab name="Global (ConfigMap)" %}}
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: config-autoscaler
-  namespace: knative-serving
-data:
-  target-burst-capacity: "200"
-```
-{{< /tab >}}
-{{% tab name="Global (Operator)" %}}
-```yaml
-apiVersion: operator.knative.dev/v1alpha1
-kind: KnativeServing
-metadata:
-  name: knative-serving
-spec:
-  config:
-    autoscaler:
+      name: <service_name>
+      namespace: default
+    spec:
+      template:
+        metadata:
+          annotations:
+            autoscaling.knative.dev/targetBurstCapacity: "200"
+    ```
+=== "Global (ConfigMap)"
+    ```yaml
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: config-autoscaler
+      namespace: knative-serving
+    data:
       target-burst-capacity: "200"
-```
-{{< /tab >}}
-{{< /tabs >}}
+    ```
+=== "Global (Operator)"
+    ```yaml
+    apiVersion: operator.knative.dev/v1alpha1
+    kind: KnativeServing
+    metadata:
+      name: knative-serving
+    spec:
+      config:
+        autoscaler:
+          target-burst-capacity: "200"
+    ```
 
 - If `autoscaling.knative.dev/targetBurstCapacity` is set to `0`, the Activator is only added to the request path during scale from zero scenarios, and ingress load balancing will be applied.
 

@@ -266,9 +266,11 @@ To configure DNS, follow the procedure for the DNS of your choice below:
         kubectl apply -f {{ artifact(repo="serving",file="serving-default-domain.yaml")}}
         ```
 
-        **Caveat**: This will only work if the cluster LoadBalancer service exposes an
-        IPv4 address or hostname, so it will not work with IPv6 clusters or local setups
-        like Minikube. For these, see "Real DNS" or "Temporary DNS".
+        !!! warning 
+
+            **Caveat**: This will only work if the cluster LoadBalancer service exposes an
+            IPv4 address or hostname, so it will not work with IPv6 clusters or local setups
+            like Minikube. For these, see "Real DNS" or "Temporary DNS".
 
     === "Real DNS"
 

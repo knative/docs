@@ -23,50 +23,45 @@ For more information about KPA and HPA, see the documentation on [Supported Auto
 * **Possible values:** `"concurrency"`, `"rps"` or `"cpu"`, depending on your Autoscaler type. The `cpu` metric is only supported on revisions with the HPA class.
 * **Default:** `"concurrency"`
 
-{{< tabs name="Examples of configuring metric types per revision" default="Per-revision concurrency configuration" >}}
-{{% tab name="Per-revision concurrency configuration" %}}
-```yaml
-apiVersion: serving.knative.dev/v1
-kind: Service
-metadata:
-  name: helloworld-go
-  namespace: default
-spec:
-  template:
+=== "Per-revision concurrency configuration"
+    ```yaml
+    apiVersion: serving.knative.dev/v1
+    kind: Service
     metadata:
-      annotations:
-        autoscaling.knative.dev/metric: "concurrency"
-```
-{{< /tab >}}
-{{% tab name="Per-revision rps configuration" %}}
-```yaml
-apiVersion: serving.knative.dev/v1
-kind: Service
-metadata:
-  name: helloworld-go
-  namespace: default
-spec:
-  template:
+      name: helloworld-go
+      namespace: default
+    spec:
+      template:
+        metadata:
+          annotations:
+            autoscaling.knative.dev/metric: "concurrency"
+    ```
+=== "Per-revision rps configuration"
+    ```yaml
+    apiVersion: serving.knative.dev/v1
+    kind: Service
     metadata:
-      annotations:
-        autoscaling.knative.dev/metric: "rps"
-```
-{{< /tab >}}
-{{% tab name="Per-revision cpu configuration" %}}
-```yaml
-apiVersion: serving.knative.dev/v1
-kind: Service
-metadata:
-  name: helloworld-go
-  namespace: default
-spec:
-  template:
+      name: helloworld-go
+      namespace: default
+    spec:
+      template:
+        metadata:
+          annotations:
+            autoscaling.knative.dev/metric: "rps"
+    ```
+=== "Per-revision cpu configuration"
+    ```yaml
+    apiVersion: serving.knative.dev/v1
+    kind: Service
     metadata:
-      annotations:
-        autoscaling.knative.dev/metric: "cpu"
-```
-{{< /tab >}}
-{{< /tabs >}}
+      name: helloworld-go
+      namespace: default
+    spec:
+      template:
+        metadata:
+          annotations:
+            autoscaling.knative.dev/metric: "cpu"
+    ```
 
 ## Next steps
 

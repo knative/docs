@@ -153,118 +153,113 @@ For instructions about enabling Knative for automatic certificate provisioning,
 see [Enabling automatic TLS cert provisioning](./using-auto-tls.md). Otherwise,
 continue below for instructions about manually adding a certificate.
 
-{{< tabs name="serving_networking" default="Istio" >}}
-{{% tab name="Contour" %}}
+=== "Contour"
 
-To manually add a TLS certificate to your Knative cluster, you must create a
-Kubernetes secret and then configure the Knative Contour plugin
+    To manually add a TLS certificate to your Knative cluster, you must create a
+    Kubernetes secret and then configure the Knative Contour plugin
 
-1. Create a Kubernetes secret to hold your TLS certificate, `cert.pem`, and the
-   private key, `key.pem`, by entering the following command:
-
-   ```shell
-   kubectl create --namespace contour-external secret tls default-cert \
-     --key key.pem \
-     --cert cert.pem
-   ```
-
-   **IMPORTANT** Take note of the namespace and secret name. You will need these
-   in future steps.
-
-1. Contour requires you to create a delegation to use this certificate and private
-   key in different namespaces. This can be done by creating the following resource:
-
-   ```yaml
-   apiVersion: projectcontour.io/v1
-   kind: TLSCertificateDelegation
-   metadata:
-     name: default-delegation
-     namespace: contour-external
-   spec:
-     delegations:
-       - secretName: default-cert
-         targetNamespaces:
-         - "*"
-   ```
-
-1. Update the Knative Contour plugin to start using the certificate as a fallback
-   when auto-TLS is disabled. This can be done with the following patch:
-
-   ```shell
-   kubectl patch cm config-contour -n knative-serving \
-     -p '{"data":{"default-tls-secret":"contour-external/default-cert"}}'
-   ```
-
-{{< /tab >}}
-
-{{% tab name="Istio" %}}
-To manually add a TLS certificate to your Knative cluster, you create a
-Kubernetes secret and then configure the `knative-ingress-gateway`:
-
-1. Create a Kubernetes secret to hold your TLS certificate, `cert.pem`, and the
-   private key, `key.pem`, by entering the following command:
-
-   ```shell
-   kubectl create --namespace istio-system secret tls tls-cert \
-     --key key.pem \
-     --cert cert.pem
-   ```
-
-
-1. Configure Knative to use the new secret that you created for HTTPS
-   connections:
-
-   1. Run the following command to open the Knative shared `gateway` in edit
-      mode:
+    1. Create a Kubernetes secret to hold your TLS certificate, `cert.pem`, and the
+      private key, `key.pem`, by entering the following command:
 
       ```shell
-      kubectl edit gateway knative-ingress-gateway --namespace knative-serving
+      kubectl create --namespace contour-external secret tls default-cert \
+        --key key.pem \
+        --cert cert.pem
       ```
 
-   1. Update the `gateway` to include the following `tls:` section and
-      configuration:
+      **IMPORTANT** Take note of the namespace and secret name. You will need these
+      in future steps.
+
+    1. Contour requires you to create a delegation to use this certificate and private
+      key in different namespaces. This can be done by creating the following resource:
 
       ```yaml
-      tls:
-        mode: SIMPLE
-        credentialName: tls-cert
-      ```
-
-      Example:
-
-      ```yaml
-      # Please edit the object below. Lines beginning with a '#' will be ignored.
-      # and an empty file will abort the edit. If an error occurs while saving this
-      # file will be reopened with the relevant failures.
-      apiVersion: networking.istio.io/v1alpha3
-      kind: Gateway
+      apiVersion: projectcontour.io/v1
+      kind: TLSCertificateDelegation
       metadata:
-        # ... skipped ...
+        name: default-delegation
+        namespace: contour-external
       spec:
-        selector:
-          istio: ingressgateway
-        servers:
-          - hosts:
-              - "*"
-            port:
-              name: http
-              number: 80
-              protocol: HTTP
-          - hosts:
-              - TLS_HOSTS
-            port:
-              name: https
-              number: 443
-              protocol: HTTPS
-            tls:
-              mode: SIMPLE
-              credentialName: tls-cert
+        delegations:
+          - secretName: default-cert
+            targetNamespaces:
+            - "*"
       ```
-      In the example above, `TLS_HOSTS` represents the hosts of your TLS certificate. It can be a single host, multiple hosts, or a wildcard host.
-      For detailed instructions, please refer [Istio documentation](https://istio.io/latest/docs/tasks/traffic-management/ingress/secure-ingress/)
-{{< /tab >}}
-{{< /tabs >}}
 
+    1. Update the Knative Contour plugin to start using the certificate as a fallback
+      when auto-TLS is disabled. This can be done with the following patch:
+
+      ```shell
+      kubectl patch cm config-contour -n knative-serving \
+        -p '{"data":{"default-tls-secret":"contour-external/default-cert"}}'
+      ```
+
+=== "Istio"
+
+    To manually add a TLS certificate to your Knative cluster, you create a
+    Kubernetes secret and then configure the `knative-ingress-gateway`:
+
+    1. Create a Kubernetes secret to hold your TLS certificate, `cert.pem`, and the
+      private key, `key.pem`, by entering the following command:
+
+      ```shell
+      kubectl create --namespace istio-system secret tls tls-cert \
+        --key key.pem \
+        --cert cert.pem
+      ```
+
+
+    1. Configure Knative to use the new secret that you created for HTTPS
+      connections:
+
+      1. Run the following command to open the Knative shared `gateway` in edit
+          mode:
+
+          ```shell
+          kubectl edit gateway knative-ingress-gateway --namespace knative-serving
+          ```
+
+      1. Update the `gateway` to include the following `tls:` section and
+          configuration:
+
+          ```yaml
+          tls:
+            mode: SIMPLE
+            credentialName: tls-cert
+          ```
+
+          Example:
+
+          ```yaml
+          # Please edit the object below. Lines beginning with a '#' will be ignored.
+          # and an empty file will abort the edit. If an error occurs while saving this
+          # file will be reopened with the relevant failures.
+          apiVersion: networking.istio.io/v1alpha3
+          kind: Gateway
+          metadata:
+            # ... skipped ...
+          spec:
+            selector:
+              istio: ingressgateway
+            servers:
+              - hosts:
+                  - "*"
+                port:
+                  name: http
+                  number: 80
+                  protocol: HTTP
+              - hosts:
+                  - TLS_HOSTS
+                port:
+                  name: https
+                  number: 443
+                  protocol: HTTPS
+                tls:
+                  mode: SIMPLE
+                  credentialName: tls-cert
+          ```
+          In the example above, `TLS_HOSTS` represents the hosts of your TLS certificate. It can be a single host, multiple hosts, or a wildcard host.
+          For detailed instructions, please refer [Istio documentation](https://istio.io/latest/docs/tasks/traffic-management/ingress/secure-ingress/)
 
 ## What's next:
 
