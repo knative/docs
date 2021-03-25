@@ -18,4 +18,4 @@ You can also [upgrade an existing Knative installation](./upgrade-installation).
 
 ## Next steps
 
-- Install the [Knative CLI](../client/install-kn) to use `kn` commands.
+- Install the [Knative CLI](../client/install-kn.md) to use `kn` commands.

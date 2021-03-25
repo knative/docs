@@ -15,7 +15,7 @@ like `AAPL`,`AMZN`, `GOOG`, `MSFT`, etc.
 1. Download a copy of the code:
 
    ```shell
-   git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
+   git clone -b "{{ git.tag }}" https://github.com/knative/docs knative-docs
    cd knative-docs
    ```
 

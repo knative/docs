@@ -66,7 +66,7 @@ Now that you have deployed the service, Knative will perform the following steps
 - Automatically scale your pods up and down based on traffic, including to zero
   active pods.
 
-## Creating your Deployment with YAML
+## Optional: Creating your Deployment with YAML
 
 Alternatively, to deploy an app using Knative, you can also create the configuration in a YAML file that defines a service. For more information about the Service object, see the
 [Resource Types documentation](https://github.com/knative/serving/blob/main/docs/spec/overview.md#service).
@@ -116,72 +116,69 @@ Now that you have deployed the service, Knative will perform the following steps
 
 To see if your app has been deployed successfully, you need the URL created by Knative.
 
-1. To find the URL for your service, use either `kn` or `kubectl`
+### Find the URL of your Service
 
-  {{< tabs name="create" default="kn">}}
-  {{% tab name="kn" %}}
+To find the URL for your service, use either `kn` or `kubectl`
 
-   ```shell
-   kn service describe helloworld-go
-   ```
+=== "Kn"
 
-   This will return something like
+    ```shell
+    kn service describe helloworld-go
+    ```
 
-   ```
-   Name        helloworld-go
-   Namespace   default
-   Age         12m
-   URL         http://helloworld-go.default.34.83.80.117.xip.io
+    This will return something like
 
-   Revisions:
-     100%  @latest (helloworld-go-dyqsj-1) [1] (39s)
-           Image:  gcr.io/knative-samples/helloworld-go (pinned to 946b7c)
+    ```
+    Name        helloworld-go
+    Namespace   default
+    Age         12m
+    URL         http://helloworld-go.default.34.83.80.117.xip.io
 
-   Conditions:
-     OK TYPE                   AGE REASON
-     ++ Ready                  25s
-     ++ ConfigurationsReady    26s
-     ++ RoutesReady            25s
-   ```
+    Revisions:
+      100%  @latest (helloworld-go-dyqsj-1) [1] (39s)
+            Image:  gcr.io/knative-samples/helloworld-go (pinned to 946b7c)
 
-  {{< /tab >}}
-  {{% tab name="kubectl" %}}
+    Conditions:
+      OK TYPE                   AGE REASON
+      ++ Ready                  25s
+      ++ ConfigurationsReady    26s
+      ++ RoutesReady            25s
+    ```
 
-   ```shell
-   kubectl get ksvc helloworld-go
-   ```
+=== "Kubectl"
 
-   The command will return the following:
+    ```shell
+    kubectl get ksvc helloworld-go
+    ```
 
-   ```shell
-   NAME            URL                                                LATESTCREATED         LATESTREADY           READY   REASON
-   helloworld-go   http://helloworld-go.default.34.83.80.117.xip.io   helloworld-go-96dtk   helloworld-go-96dtk   True
-   ```
+    The command will return the following:
 
-  {{< /tab >}}
-  {{< /tabs >}}
+    ```shell
+    NAME            URL                                                LATESTCREATED         LATESTREADY           READY   REASON
+    helloworld-go   http://helloworld-go.default.34.83.80.117.xip.io   helloworld-go-96dtk   helloworld-go-96dtk   True
+    ```
 
-   > Note: If your URL includes `example.com` then consult the setup instructions for
-   > configuring DNS (e.g. with `xip.io`), or [using a Custom Domain](../serving/using-a-custom-domain.md).
+!!! warning "Note: If your URL includes `example.com` then consult the setup instructions for configuring DNS (e.g. with `xip.io`), or [using a Custom Domain](../serving/using-a-custom-domain.md)."
 
-   If you changed the name from `helloworld-go` to something else when creating
-   the `.yaml` file, replace `helloworld-go` in the above commands with the name you entered.
+If you changed the name from `helloworld-go` to something else when creating
+the `.yaml` file, replace `helloworld-go` in the above commands with the name you entered.
 
-1. Now you can make a request to your app and see the results. Replace
-   the URL with the one returned by the command in the previous step.
+### Make a Request to your App
 
-   ```shell
-   # curl http://helloworld-go.default.34.83.80.117.xip.io
-   Hello World: Go Sample v1!
-   ```
+Now you can make a request to your app and see the results. Replace
+the URL with the one returned by the command in the previous step.
 
-   If you deployed your app, you might want to customize this cURL request
-   to interact with your application.
+```shell
+# curl http://helloworld-go.default.34.83.80.117.xip.io
+Hello World: Go Sample v1!
+```
+If you deployed your app, you might want to customize this cURL request
+to interact with your application.
 
-   It can take a few seconds for Knative to scale up your application and return
-   a response.
+It can take a few seconds for Knative to scale up your application and return
+a response.
 
-   > Note: Add `-v` option to get more detail if the `curl` command failed.
+!!! tip "Note: Add `-v` option to get more detail if the `curl` command failed."
 
 You've successfully deployed your first application using Knative!
 

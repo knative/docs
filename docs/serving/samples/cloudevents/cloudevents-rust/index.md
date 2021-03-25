@@ -27,7 +27,7 @@ cluster. You can also download a working copy of the sample by running the
 following commands:
 
 ```shell
-git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
+git clone -b "{{ git.tag }}" https://github.com/knative/docs knative-docs
 cd knative-docs/docs/serving/samples/cloudevents/cloudevents-rust
 ```
 
@@ -56,26 +56,21 @@ This will build a statically linked binary, in order to create an image from scr
 docker build -t <image> .
 ```
 
-{{< tabs name="cloudevents_rust_deploy" default="kn" >}}
-{{% tab name="yaml" %}}
+=== "YAML"
 
-To deploy the Knative Service, look in the `service.yaml` and replace `<image>` with the deployed image name. Then run:
+    To deploy the Knative Service, look in the `service.yaml` and replace `<image>` with the deployed image name. Then run:
 
-```shell
-kubectl apply -f service.yaml
-```
+    ```shell
+    kubectl apply -f service.yaml
+    ```
 
-{{< /tab >}}
-{{% tab name="kn" %}}
+=== "Kn"
 
-If using `kn` to deploy:
+    If using `kn` to deploy:
 
-```shell
-kn service create cloudevents-rust --image=<image>
-```
-
-{{< /tab >}}
-{{< /tabs >}}
+    ```shell
+    kn service create cloudevents-rust --image=<image>
+    ```
 
 ## Testing the sample
 
@@ -146,22 +141,18 @@ You'll get as result:
 
 To remove the sample app from your cluster, delete the service.
 
-{{< tabs name="cloudevents_rust_delete" default="kn" >}}
-{{% tab name="yaml" %}}
+=== "YAML"
 
-Run:
+    Run:
 
-```shell
-kubectl delete --filename service.yaml
-```
+    ```shell
+    kubectl delete --filename service.yaml
+    ```
 
-{{< /tab >}}
-{{% tab name="kn" %}}
+=== "Kn"
 
-Run:
+    Run:
 
-```shell
-kn service delete cloudevents-rust
-```
-
-{{< /tab >}}
+    ```shell
+    kn service delete cloudevents-rust
+    ```

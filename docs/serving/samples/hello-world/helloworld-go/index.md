@@ -20,7 +20,6 @@ You will need:
 ## Building
 
 1. Create a basic web server which listens on port 8080, by copying the following code into a new file named `helloworld.go`:
-
    ```go
    package main
 
@@ -55,17 +54,14 @@ You will need:
    }
    ```
 
-   You can also download a working copy of the sample, by running the
-   following commands:
-
-   ```shell
-   git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
-   cd knative-docs/docs/serving/samples/hello-world/helloworld-go
-   ```
-
+    You can also download a working copy of the sample, by running the
+    following commands:
+    ```shell
+    git clone -b "{{ git.tag }}" https://github.com/knative/docs knative-docs
+    cd knative-docs/docs/serving/samples/hello-world/helloworld-go
+    ```
 
 1. Navigate to your project directory and copy the following code into a new file named `Dockerfile`:
-
    ```docker
    # Use the official Golang image to create a build artifact.
    # This is based on Debian and sets the GOPATH to /go.
@@ -99,9 +95,7 @@ You will need:
    CMD ["/server"]
    ```
 
-1. Use the Go tool to create a
-   [`go.mod`](https://github.com/golang/go/wiki/Modules#gomod) manifest.
-
+1. Use the Go tool to create a [`go.mod`](https://github.com/golang/go/wiki/Modules#gomod) manifest.
    ```shell
    go mod init github.com/knative/docs/docs/serving/samples/hello-world/helloworld-go
    ```
@@ -109,7 +103,6 @@ You will need:
 ## Deploying
 
 1. To build the sample code into a container, and push using Docker Hub, enter the following commands and replace `{username}` with your Docker Hub username:
-
    ```shell
    # Build the container on your local machine
    docker build -t {username}/helloworld-go .
@@ -121,94 +114,83 @@ You will need:
 1. After the build has completed and the container is pushed to docker hub, you
    can deploy the app into your cluster.  Choose one of the following methods:
 
+    === "YAML"
 
-   {{< tabs name="helloworld_go" default="kn" >}}
-   {{% tab name="yaml" %}}
+        1. Create a new file, `service.yaml` and copy the following service definition
+            into the file. Make sure to replace `{username}` with your Docker Hub
+            username.
+            ```yaml
+            apiVersion: serving.knative.dev/v1
+            kind: Service
+            metadata:
+              name: helloworld-go
+              namespace: default
+            spec:
+              template:
+                spec:
+                  containers:
+                    - image: docker.io/{username}/helloworld-go
+                      env:
+                        - name: TARGET
+                          value: "Go Sample v1"
+            ```
 
-   1. Create a new file, `service.yaml` and copy the following service definition
-      into the file. Make sure to replace `{username}` with your Docker Hub
-      username.
+            Check that the container image value in the `service.yaml` file matches the container you built in the previous step.
 
-      ```yaml
-      apiVersion: serving.knative.dev/v1
-      kind: Service
-      metadata:
-        name: helloworld-go
-        namespace: default
-      spec:
-        template:
-          spec:
-            containers:
-              - image: docker.io/{username}/helloworld-go
-                env:
-                  - name: TARGET
-                    value: "Go Sample v1"
-      ```
+        1. Apply the configuration using `kubectl`:
+            ```shell
+            kubectl apply --filename service.yaml
+            ```
 
-      Check that the container image value in the `service.yaml` file matches the container you built in the previous step.
+            After your service is created, Knative will perform the following steps:
 
-   1. Apply the configuration using `kubectl`:
+            - Create a new immutable revision for this version of the app.
+            - Network programming to create a route, ingress, service, and load balance
+              for your app.
+            - Automatically scale your pods up and down (including to zero active pods).
 
-      ```shell
-      kubectl apply --filename service.yaml
-      ```
+        1. Run the following command to find the domain URL for your service:
+            ```shell
+            kubectl get ksvc helloworld-go  --output=custom-columns=NAME:.metadata.name,URL:.status.url
+            ```
 
-      After your service is created, Knative will perform the following steps:
+            Example:
+            ```shell
+            NAME                URL
+            helloworld-go       http://helloworld-go.default.1.2.3.4.xip.io
+            ```
 
-      - Create a new immutable revision for this version of the app.
-      - Network programming to create a route, ingress, service, and load balance
-        for your app.
-      - Automatically scale your pods up and down (including to zero active pods).
+    === "Kn"
 
-   1. Run the following command to find the domain URL for your service:
+        Use `kn` to deploy the service:
 
-      ```shell
-      kubectl get ksvc helloworld-go  --output=custom-columns=NAME:.metadata.name,URL:.status.url
-      ```
+        ```shell
+        kn service create helloworld-go --image=docker.io/{username}/helloworld-go --env TARGET="Go Sample v1"
+        ```
 
-      Example:
+        You should see output like this:
+        ```shell
+        Creating service 'helloworld-go' in namespace 'default':
 
-      ```shell
-       NAME                URL
-       helloworld-go       http://helloworld-go.default.1.2.3.4.xip.io
-      ```
+          0.031s The Configuration is still working to reflect the latest desired specification.
+          0.051s The Route is still working to reflect the latest desired specification.
+          0.076s Configuration "helloworld-go" is waiting for a Revision to become ready.
+          15.694s ...
+          15.738s Ingress has not yet been reconciled.
+          15.784s Waiting for Envoys to receive Endpoints data.
+          16.066s Waiting for load balancer to be ready
+          16.237s Ready to serve.
 
-   {{< /tab >}}
-   {{% tab name="kn" %}}
+        Service 'helloworld-go' created to latest revision 'helloworld-go-jjzgd-1' is available at URL:
+        http://helloworld-go.default.1.2.3.4.xip.io
+        ```
 
-   Use `kn` to deploy the service:
-
-   ```shell
-   kn service create helloworld-go --image=docker.io/{username}/helloworld-go --env TARGET="Go Sample v1"
-   ```
-
-   You should see output like this:
-   ```shell
-   Creating service 'helloworld-go' in namespace 'default':
-
-     0.031s The Configuration is still working to reflect the latest desired specification.
-     0.051s The Route is still working to reflect the latest desired specification.
-     0.076s Configuration "helloworld-go" is waiting for a Revision to become ready.
-    15.694s ...
-    15.738s Ingress has not yet been reconciled.
-    15.784s Waiting for Envoys to receive Endpoints data.
-    16.066s Waiting for load balancer to be ready
-    16.237s Ready to serve.
-
-   Service 'helloworld-go' created to latest revision 'helloworld-go-jjzgd-1' is available at URL:
-   http://helloworld-go.default.1.2.3.4.xip.io
-   ```
-
-   You can then access your service through the resulting URL.
-
-   {{< /tab >}}
-   {{< /tabs >}}
-
+        You can then access your service through the resulting URL.
 
 ## Verifying
 
-1. Now you can make a request to your app and see the result. Replace
-   the URL below with the URL returned in the previous command.
+Now you can make a request to your app and see the result. Replace
+the URL below with the URL returned in the previous command.
 
    ```shell
    curl http://helloworld-go.default.1.2.3.4.xip.io
@@ -221,15 +203,14 @@ You will need:
 
 To remove the sample app from your cluster, delete the service record:
 
-{{< tabs name="service_url" default="kn" >}}
-{{% tab name="kubectl" %}}
-```shell
-kubectl delete --filename service.yaml
-```
-{{< /tab >}}
-{{% tab name="kn" %}}
-```shell
-kn service delete helloworld-go
-```
-{{< /tab >}}
-{{< /tabs >}}
+=== "YAML"
+
+    ```shell
+    kubectl delete --filename service.yaml
+    ```
+
+=== "Kn"
+
+    ```shell
+    kn service delete helloworld-go
+    ```

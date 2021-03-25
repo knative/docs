@@ -1,0 +1,58 @@
+site_name: Knative Docs
+site_url: https://knative.dev/docs
+site_description: Knative Documentation
+
+repo_url: https://github.com/knative/docs
+
+nav:
+    - Home: index.md
+    - Installing Knative:
+        - Overview: install/index.md
+        - Installing using YAML: install/any-kubernetes-cluster.md
+        - Installing with the Operator: install/knative-with-operators.md
+        - Using a Knative-based Offering: install/knative-offerings.md
+    - Serving Component:
+        - Getting Started: serving/getting-started-knative-app.md
+        - Knative Kubernetes Components: serving/knative-kubernetes-services.md
+        - Samples:
+          - Overview: serving/samples/README.md
+          - Hello World:
+            - Hello World Go: serving/samples/hello-world/helloworld-go/index.md
+          - Rest API: serving/samples/rest-api-go/README.md
+          - Cloud Events:
+            - NodeJS: serving/samples/cloudevents/cloudevents-nodejs/README.md
+            - Java (Vert.x): serving/samples/cloudevents/cloudevents-vertx/README.md
+            - Rust: serving/samples/cloudevents/cloudevents-rust/index.md
+          - Blue Green Deployment: serving/samples/blue-green-deployment.md
+    - Eventing Component:
+        - Samples: eventing/samples.md
+    - Samples: samples.md
+    - Client:
+        - Installing the Client: client/install-kn.md
+        - Using the Client: client/_index.md
+    - Community: todo
+
+theme:
+  name: material
+  logo: images/logo/rgb/knative-logo-rgb.png
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.indexes
+    - navigation.top
+    - toc.integrate
+
+plugins:
+  - search
+  - macros
+
+markdown_extensions:
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - pymdownx.details
+  - admonition
+  - toc:
+      permalink: true
+
+extra:
+  version: v0.21.0
