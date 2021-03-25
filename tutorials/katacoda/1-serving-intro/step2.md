@@ -7,7 +7,7 @@ We will now deploy the application by specifying the image location and the `TAR
 Knative defines a `service.serving.knative.dev` CRD to control the lifecycle of the application (not to be confused with kubernetes service). We will use the `kn` cli to create the Knative service:
 
 ```
-kn service create demo --image gcr.io/knative-samples/helloworld-go --env TARGET=blue
+kn service create demo --image gcr.io/knative-samples/helloworld-go --env TARGET=blue --autoscale-window 15s
 ```{{execute}}
 
 We can now invoke the application using `curl`. We first need to figure out the IP address of minikube and the ingress port.
