@@ -2,7 +2,8 @@ Knative provides a multi-tenant, channel-based broker implementation that uses c
 
 Before you can use the Knative Channel-based Broker, you must install a channel provider, such as InMemoryChannel, Kafka or Nats.
 
-**NOTE:** InMemoryChannel channels are for development use only and must not be used in a production deployment.
+!!! warning
+    InMemoryChannel channels are for development use only and must not be used in a production deployment.
 
 For more information on which channels are available and how to install them,
 see the list of [available channels](https://knative.dev/docs/eventing/channels/channels-crds/).

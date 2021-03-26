@@ -9,7 +9,7 @@ following commands:
 
 ```shell
 # Clone the relevant branch version such as "release-0.13"
-git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
+git clone -b "{{ git.tag }}" https://github.com/knative/docs knative-docs
 cd knative-docs/docs/eventing/samples/helloworld/helloworld-python
 ```
 

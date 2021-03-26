@@ -46,7 +46,8 @@ dev.knative.kafka.event-tdt48                dev.knative.kafka.event            
 google.pubsub.topic.publish-hrxhh            google.pubsub.topic.publish             //pubsub.googleapis.com/knative/topics/testing                                     dev                        False     BrokerIsNotReady
 ```
 
-**NOTE:** This assumes that the event sources emitting the events reference a broker as their sink.
+!!! note
+    This assumes that the event sources emitting the events reference a broker as their sink.
 
 There are seven different EventType objects in the registry of the
 `default` namespace.
@@ -124,7 +125,6 @@ Here are a few example Triggers that subscribe to events using exact matching on
 `type` and/or `source`, based on the above registry output:
 
 1. Subscribes to GitHub _pushes_ from any source.
-
    ```yaml
    apiVersion: eventing.knative.dev/v1
    kind: Trigger
@@ -149,7 +149,6 @@ Here are a few example Triggers that subscribe to events using exact matching on
    consume them.
 
 1. Subscribes to GitHub _pull requests_ from _knative's eventing_ repository.
-
    ```yaml
    apiVersion: eventing.knative.dev/v1
    kind: Trigger
@@ -170,7 +169,6 @@ Here are a few example Triggers that subscribe to events using exact matching on
    ```
 
 1. Subscribes to Kafka messages sent to the _knative-demo_ topic
-
    ```yaml
    apiVersion: eventing.knative.dev/v1
    kind: Trigger
@@ -192,7 +190,6 @@ Here are a few example Triggers that subscribe to events using exact matching on
 
 1. Subscribes to PubSub messages from GCP's _knative_ project sent to the
    _testing_ topic
-
    ```yaml
    apiVersion: eventing.knative.dev/v1
    kind: Trigger

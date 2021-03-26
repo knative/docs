@@ -9,7 +9,7 @@ longer needed.
 The following command installs the Eventing Sugar Controller:
 
 ```bash
-kubectl apply --filename {{< artifact repo="eventing" file="eventing-sugar-controller.yaml" >}}
+kubectl apply --filename http://github.com/knative/eventing/releases/download/{{knative_version}}/eventing-sugar-controller.yaml
 ```
 
 ## Automatic Broker Creation
@@ -88,8 +88,9 @@ spec:
 EOF
 ```
 
-> _Note_: If the named Broker already exists, the Sugar controller will do
-> nothing, and the Trigger will not own the existing Broker.
+!!! warning
+    If the named Broker already exists, the Sugar controller will do
+    nothing, and the Trigger will not own the existing Broker.
 
 This will make a Broker called "sugar" in the Namespace "hello", and attempt to
 send events to the "event-display" service.

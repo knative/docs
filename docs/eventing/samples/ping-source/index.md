@@ -20,73 +20,63 @@ a Knative Service.
 To verify that `PingSource` is working, create a simple Knative
 Service that dumps incoming messages to its log.
 
-{{< tabs name="create-service" default="YAML" >}}
-{{% tab name="YAML" %}}
-Use following command to create the service from STDIN:
+=== "Kubectl"
+    Use following command to create the service from STDIN:
 
-```shell
-cat <<EOF | kubectl create -f -
-apiVersion: serving.knative.dev/v1
-kind: Service
-metadata:
-  name: event-display
-spec:
-  template:
+    ```shell
+    cat <<EOF | kubectl create -f -
+    apiVersion: serving.knative.dev/v1
+    kind: Service
+    metadata:
+      name: event-display
     spec:
-      containers:
-        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
-EOF
-```
-{{< /tab >}}
+      template:
+        spec:
+          containers:
+            - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+    EOF
+    ```
+=== "Kn"
+    Use following command to create the service using the kn cli:
 
-{{% tab name="kn" %}}
-Use following command to create the service using the kn cli:
-
-```shell
-kn service create event-display --image gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
-```
-{{< /tab >}}
-{{< /tabs >}}
+    ```shell
+    kn service create event-display --image gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+    ```
 
 ## Create a PingSource
 
 For each set of ping events that you want to request, create an Event
 Source in the same namespace as the destination.
 
-{{< tabs name="create-source" default="YAML" >}}
-{{% tab name="YAML" %}}
-Use following command to create the event source from STDIN:
+=== "Kubectl"
+    Use following command to create the event source from STDIN:
 
-```shell
-cat <<EOF | kubectl create -f -
-apiVersion: sources.knative.dev/v1beta2
-kind: PingSource
-metadata:
-  name: test-ping-source
-spec:
-  schedule: "*/2 * * * *"
-  contentType: "application/json"
-  data: '{"message": "Hello world!"}'
-  sink:
-    ref:
-      apiVersion: serving.knative.dev/v1
-      kind: Service
-      name: event-display
-EOF
-```
-{{< /tab >}}
+    ```shell
+    cat <<EOF | kubectl create -f -
+    apiVersion: sources.knative.dev/v1beta2
+    kind: PingSource
+    metadata:
+      name: test-ping-source
+    spec:
+      schedule: "*/2 * * * *"
+      contentType: "application/json"
+      data: '{"message": "Hello world!"}'
+      sink:
+        ref:
+          apiVersion: serving.knative.dev/v1
+          kind: Service
+          name: event-display
+    EOF
+    ```
+=== "Kn"
+    Use following command to create the event source from the `ping-source.yaml` file:
 
-{{% tab name="kn" %}}
-Use following command to create the event source from the `ping-source.yaml` file:
-
-```shell
-kn source ping create test-ping-source \
-  --schedule "*/2 * * * *" --data \
-  '{ "message": "Hello world!" }' \
-  --sink ksvc:event-display
-```
-{{< /tab >}}
-{{< /tabs >}}
+    ```shell
+    kn source ping create test-ping-source \
+      --schedule "*/2 * * * *" --data \
+      '{ "message": "Hello world!" }' \
+      --sink ksvc:event-display
+    ```
 
 ## (Optional) Create a PingSource with binary data
 
@@ -119,27 +109,22 @@ EOF
 Verify that the message was sent to the Knative eventing system by
 looking at message dumper logs.
 
-{{< tabs name="view-event" default="kubectl" >}}
-{{% tab name="kubectl" %}}
+=== "Kubectl"
 
-Use following command to view the logs of the event-display service:
+    Use following command to view the logs of the event-display service:
 
-```shell
-kubectl logs -l serving.knative.dev/service=event-display -c user-container --since=10m
-```
+    ```shell
+    kubectl logs -l serving.knative.dev/service=event-display -c user-container --since=10m
+    ```
 
-{{< /tab >}}
-{{% tab name="kail" %}}
+=== "Kail"
 
-You can also use [`kail`](https://github.com/boz/kail) instead of `kubectl logs`
-to tail the logs of the subscriber.
+    You can also use [`kail`](https://github.com/boz/kail) instead of `kubectl logs`
+    to tail the logs of the subscriber.
 
-```shell
-kail -l serving.knative.dev/service=event-display -c user-container --since=10m
-```
-
-{{< /tab >}}
-{{< /tabs >}}
+    ```shell
+    kail -l serving.knative.dev/service=event-display -c user-container --since=10m
+    ```
 
 You should see log lines showing the request headers and body from the source:
 
@@ -179,35 +164,24 @@ Data,
 
 You can delete the PingSource instance by entering the following command:
 
-{{< tabs name="delete-source" default="kubectl" >}}
-{{% tab name="kubectl" %}}
-```shell
-kubectl delete pingsources.sources.knative.dev test-ping-source
-kubectl delete pingsources.sources.knative.dev test-ping-source-binary
-```
-{{< /tab >}}
-
-{{% tab name="kn" %}}
-```shell
-kn source ping delete test-ping-source
-kn source ping delete test-ping-source-binary
-```
-{{< /tab >}}
-{{< /tabs >}}
-
+=== "Kubectl"
+    ```shell
+    kubectl delete pingsources.sources.knative.dev test-ping-source
+    kubectl delete pingsources.sources.knative.dev test-ping-source-binary
+    ```
+=== "Kn"
+    ```shell
+    kn source ping delete test-ping-source
+    kn source ping delete test-ping-source-binary
+    ```
 
 Similarly, you can delete the Service instance via:
 
-{{< tabs name="delete-service" default="kubectl" >}}
-{{% tab name="kubectl" %}}
-```shell
-kubectl delete service.serving.knative.dev event-display
-```
-{{< /tab >}}
-{{% tab name="kn" %}}
-```shell
-kn service delete event-display
-```
-{{< /tab >}}
-
-{{< /tabs >}}
+=== "Kubectl"
+    ```shell
+    kubectl delete service.serving.knative.dev event-display
+    ```
+=== "Kn"
+    ```shell
+    kn service delete event-display
+    ```

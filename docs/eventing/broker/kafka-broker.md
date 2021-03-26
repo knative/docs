@@ -4,6 +4,10 @@ weight: 30
 type: "docs"
 ---
 
+{% macro artifact(repo, file='', org='knative') -%}
+    http://github.com/{{org}}/{{repo}}/releases/download/{{knative_version}}/{{file}}
+{%- endmacro %}
+
 The Apache Kafka Broker is a native Broker implementation, that reduces
 network hops, supports any Kafka version, and has a better integration
 with Apache Kafka for the Knative Broker and Trigger model.
@@ -26,13 +30,13 @@ Notable features are:
 1. Install the Kafka controller by entering the following command:
 
     ```bash
-    kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-kafka-broker" file="eventing-kafka-controller.yaml" >}}
+    kubectl apply --filename {{ artifact(org="knative-sandbox",repo="eventing-kafka-broker",file="eventing-kafka-controller.yaml")}}
     ```
 
 1. Install the Kafka Broker data plane by entering the following command:
 
     ```bash
-    kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-kafka-broker" file="eventing-kafka-broker.yaml" >}}
+    kubectl apply --filename {{ artifact(org="knative-sandbox",repo="eventing-kafka-broker",file="eventing-kafka-broker.yaml")}}
     ```
 
 2. Verify that `kafka-controller`, `kafka-broker-receiver` and `kafka-broker-dispatcher` are running,

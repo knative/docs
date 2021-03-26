@@ -10,21 +10,21 @@ well-supported by the existing components; since the system is modular, it's
 also possible to combine the components in novel ways.
 
 1. **I just want to publish events, I don't care who consumes them.** Send
-   events to a [Broker](broker/README.md) as an HTTP POST. [Sink binding](./sources/sinkbinding) can be useful to decouple the destination
+   events to a [Broker](./broker/) as an HTTP POST. [Sink binding](./sources/sinkbinding) can be useful to decouple the destination
    configuration from your application.
 
 1. **I just want to consume events like X, I don't care how they are
-   published.** Use a [Trigger](triggers/README.md) to consume events from a Broker based
+   published.** Use a [Trigger](./triggers/) to consume events from a Broker based
    on CloudEvents attributes. Your application will receive the events as an
    HTTP POST.
 
 1. **I want to transform events through a series of steps.** Use [Channels and
-   Subscriptions](channels/README.md) to define complex message-passing topologies. For
-   simple pipelines, the [Sequence](flows/sequence.md) automates construction of
+   Subscriptions](./channels/) to define complex message-passing topologies. For
+   simple pipelines, the [Sequence](./flows/sequence.md) automates construction of
    Channels and Subscriptions between each stage.
 
 Knative also supports some additional patterns such as
-[Parallel](flows/parallel.md) fanout of events, and routing response events from
+[Parallel](./flows/parallel.md) fanout of events, and routing response events from
 both Channels and Brokers.
 
 ## Design overview

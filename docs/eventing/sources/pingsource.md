@@ -74,41 +74,37 @@ EOF
 You can now create the `PingSource` sending an event containing
 `{"message": "Hello world!"}` every minute.
 
-{{< tabs name="create-source" default="YAML" >}}
-{{% tab name="YAML" %}}
+=== "YAML"
 
-```shell
-kubectl create -n pingsource-example -f - <<EOF
-apiVersion: sources.knative.dev/v1beta2
-kind: PingSource
-metadata:
-  name: test-ping-source
-spec:
-  schedule: "*/1 * * * *"
-  contentType: "application/json"
-  data: '{"message": "Hello world!"}'
-  sink:
-    ref:
-      apiVersion: v1
-      kind: Service
-      name: event-display
-EOF
-```
+    ```shell
+    kubectl create -n pingsource-example -f - <<EOF
+    apiVersion: sources.knative.dev/v1beta2
+    kind: PingSource
+    metadata:
+      name: test-ping-source
+    spec:
+      schedule: "*/1 * * * *"
+      contentType: "application/json"
+      data: '{"message": "Hello world!"}'
+      sink:
+        ref:
+          apiVersion: v1
+          kind: Service
+          name: event-display
+    EOF
+    ```
 
-{{< /tab >}}
+=== "Kn"
+    ```shell
+    kn source ping create test-ping-source \
+      --namespace pingsource-example \
+      --schedule "*/1 * * * *" \
+      --data '{"message": "Hello world!"}' \
+      --sink http://event-display.pingsource-example.svc.cluster.local
+    ```
+    !!! warning
+        Notice that the namespace is specified in two places in the command in `--namespace` and the `--sink` hostname
 
-{{% tab name="kn" %}}
-Notice that the namespace is specified in two places in the command in `--namespace` and the `--sink` hostname
-```shell
-kn source ping create test-ping-source \
-  --namespace pingsource-example \
-  --schedule "*/1 * * * *" \
-  --data '{"message": "Hello world!"}' \
-  --sink http://event-display.pingsource-example.svc.cluster.local
-```
-
-{{< /tab >}}
-{{< /tabs >}}
 
 ## (Optional) Create a PingSource with binary data
 

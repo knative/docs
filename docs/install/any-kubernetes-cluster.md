@@ -24,7 +24,7 @@ You can install Knative by applying YAML files using the `kubectl` CLI.
 You can install the Serving component, Eventing component, or both on your cluster.
 
 {% macro artifact(repo, file='', org='knative') -%}
-    http://github.com/{{org}}/{{repo}}/releases/download/{{version}}/{{file}}
+    http://github.com/{{org}}/{{repo}}/releases/download/{{knative_version}}/{{file}}
 {%- endmacro %}
 
 ## Prerequisites

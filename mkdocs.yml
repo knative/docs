@@ -8,11 +8,12 @@ edit_uri: edit/main/docs
 nav:
     - Home: index.md
     - Installing Knative:
-        - Overview: install/index.md
+        - Introduction: install/index.md
         - Installing using YAML: install/any-kubernetes-cluster.md
         - Installing with the Operator: install/knative-with-operators.md
         - Using a Knative-based Offering: install/knative-offerings.md
     - Serving Component:
+        - Overview: serving/README.md
         - Getting Started: serving/getting-started-knative-app.md
         - Knative Services: 
           - Creating Knative Services: serving/services/creating-services.md
@@ -68,10 +69,74 @@ nav:
             - Rust: serving/samples/cloudevents/cloudevents-rust/index.md
           - Blue Green Deployment: serving/samples/blue-green-deployment.md
     - Eventing Component:
-        - Samples: eventing/samples.md
+        - Overview: eventing/README.md
+        - Getting Started: eventing/getting-started.md
+        - Event Sources: 
+          - Overview: eventing/sources/index.md
+          - APIServerSource: eventing/sources/apiserversource.md
+          - ContainerSource: eventing/sources/containersource.md
+          - PingSource: eventing/sources/pingsource.md
+          - Sink Binding: eventing/sources/sinkbinding.md
+        - Event Registry: eventing/event-registry.md
+        - Flows:
+          - Overview: eventing/flows/README.md
+          - Sequence: eventing/flows/sequence.md
+          - Parallel: eventing/flows/parallel.md
+        - Channels:
+          - Overview: eventing/channels/index.md
+          - Channel Types and Defaults: eventing/channels/channel-types-defaults.md
+          - Creating Channels: eventing/channels/create-default-channel.md
+          - Available Channels: eventing/channels/channels-crds.md
+        - Sugar: eventing/sugar/README.md
+        - Event Delivery: eventing/event-delivery.md
+        - Broker:
+          - Overview: eventing/broker/README.md
+          - Kafka Broker: eventing/broker/kafka-broker.md
+          - Default Broker ConfigMap: eventing/broker/config-br-defaults.md
+          - Kafka Channel ConfigMap: eventing/broker/kafka-configmap.md
+          - Alternate Brokers: eventing/broker/alternate.md
+        - Sink:
+          - Overview: eventing/sink/README.md
+          - Apache Kafka Sink: eventing/sink/kafka-sink.md
+        - Triggers: eventing/triggers/index.md
+        - Debugging: eventing/debugging/README.md
+        - Accessing CloudEvent Traces: eventing/accessing-traces.md
+        - Samples:
+          - Apache Camel Source: eventing/samples/apache-camel-source/README.md
+          - Kafka: 
+            - Overview: eventing/samples/kafka/README.md
+            - Binding Example: eventing/samples/kafka/binding/README.md
+            - Channel Example: eventing/samples/kafka/channel/README.md
+            - Source Example: eventing/samples/kafka/source/README.md
+          - Container Source: eventing/samples/container-source/README.md
+          - Writing an Event Source: eventing/samples/writing-event-source/README.md
+          - Writing an Event Source - Easy Way: eventing/samples/writing-event-source-easy-way/README.md
+          - Hello World:
+            - Overview: eventing/samples/helloworld/README.md
+            - Go: eventing/samples/helloworld/helloworld-go/README.md
+            - Python: eventing/samples/helloworld/helloworld-python/README.md
+          - Sequences:
+            - Create Additional Events: eventing/samples/sequence/sequence-terminal/README.md
+            - Displaying Sequence Output: eventing/samples/sequence/sequence-reply-to-event-display/README.md
+            - Using Sequences in Series: eventing/samples/sequence/sequence-reply-to-sequence/README.md
+            - Using Broker and Trigger: eventing/samples/sequence/sequence-with-broker-trigger/README.md
+          - Parallel:
+            - Overview: eventing/samples/parallel/README.md
+            - Multiple Cases: eventing/samples/parallel/multiple-branches/README.md
+            - Mutual Exclusivity: eventing/samples/parallel/mutual-exclusivity/README.md
+          - Ping Source: eventing/samples/ping-source/index.md
+          - GCP Sources:
+            - CloudAuditLogsSource: eventing/samples/cloud-audit-logs-source/README.md
+            - CloudPubSubSource: eventing/samples/cloud-pubsub-source/README.md
+            - CloudSchedulerSource: eventing/samples/cloud-scheduler-source/README.md
+            - CloudStorageSource: eventing/samples/cloud-storage-source/README.md
+          - Github Source: eventing/samples/github-source/README.md
+          - Gitlab Source: eventing/samples/gitlab-source/README.md
+          - IoT Core: eventing/samples/iot-core/README.md
+          - Kubernetes Event Source: eventing/samples/kubernetes-event-source/README.md
     - Client:
         - Installing the Client: client/install-kn.md
-        - Using the Client: client/_index.md
+        - Using the Client: client/index.md
     - Reference: 
       - Serving: reference/api/serving.md
       - Eventing: reference/api/eventing/eventing.md
@@ -100,4 +165,6 @@ markdown_extensions:
       permalink: true
 
 extra:
-  version: v0.21.0
+  knative_version: v0.20.0
+  version:
+    provider: mike

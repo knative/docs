@@ -10,7 +10,7 @@ by a Knative Service.
 1. If you're using GKE, you'll also want to [assign a static IP address](../../../serving/gke-assigning-static-ip-address.md).
 1. Set up [Knative Eventing](../../../eventing) with the GitHub source.
 
-### Create a Knative Service
+## Create a Knative Service
 
 To verify the GitHub source is working, create a simple Knative
 Service that dumps incoming messages to its log. The `service.yaml` file
@@ -34,7 +34,7 @@ Enter the following command to create the service from `service.yaml`:
 kubectl --namespace default apply --filename service.yaml
 ```
 
-### Create GitHub Tokens
+## Create GitHub Tokens
 
 Create a [personal access token](https://github.com/settings/tokens)
 for GitHub that the GitHub source can use to register webhooks with
@@ -79,7 +79,7 @@ Then, apply the githubsecret using `kubectl`:
 kubectl --namespace default apply --filename githubsecret.yaml
 ```
 
-### Create Event Source for GitHub Events
+## Create Event Source for GitHub Events
 
 In order to receive GitHub events, you have to create a concrete Event
 Source for a specific namespace. Be sure to replace the
@@ -129,7 +129,7 @@ check mark to the left of the hook URL, as shown below.
 
 ![GitHub Webhook](webhook_created.png "GitHub webhook screenshot")
 
-### Create Events
+## Create Events
 
 Create a pull request in your GitHub repository. We will verify
 that the GitHub events were sent into the Knative eventing system
@@ -167,7 +167,7 @@ X-Request-Id: 8a2201af-5075-9447-b593-ec3a243aff52
 {"action":"opened","number":1,"pull_request": ...}
 ```
 
-### Cleanup
+## Cleanup
 
 You can remove the Github webhook by deleting the Github source:
 
