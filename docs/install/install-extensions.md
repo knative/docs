@@ -13,6 +13,13 @@ For information about the YAML files in the Knative Serving release, see
 [Installation files](./installation-files.md).
 
 
+# Prerequisites
+
+Before you install any optional extensions, you must install Knative Serving or Eventing.
+See [Installing Serving using YAML files](./../../install/install-serving-with-yaml.md)
+and [Installing Eventing using YAML files](./../../install/install-eventing-with-yaml.md).
+
+
 ## Install optional Serving extensions
 
 The tabs below expand to show instructions for installing each Serving extension.
@@ -114,6 +121,7 @@ kubectl apply -f {{< artifact repo="serving" file="serving-domainmapping.yaml" >
 ```
 
 {{< /tab >}} {{< /tabs >}}
+
 
 ## Install optional Eventing extensions
 
