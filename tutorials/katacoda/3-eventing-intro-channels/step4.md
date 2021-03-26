@@ -50,7 +50,7 @@ Now, let's create the Sequence to execute the service "first" and then pass its 
 
 ```
 cat <<EOF | kubectl create -f -
-apiVersion: flows.knative.dev/v1beta1
+apiVersion: flows.knative.dev/v1
 kind: Sequence
 metadata:
   name: sequence
@@ -75,13 +75,13 @@ Finally, create the producer to create the event:
 
 ```
 cat <<EOF | kubectl create -f -
-apiVersion: sources.knative.dev/v1alpha2
+apiVersion: sources.knative.dev/v1beta2
 kind: PingSource
 metadata:
   name: ping-source-sequence
 spec:
   schedule: "*/1 * * * *"
-  jsonData: '{"message": "Hello Sequence!"}'
+  data: '{"message": "Hello Sequence!"}'
   sink:
     ref:
       apiVersion: flows.knative.dev/v1beta1

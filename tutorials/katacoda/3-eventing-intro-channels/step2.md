@@ -28,13 +28,13 @@ which means there's a tight coupling between the producer and consumer.
 
 ```
 cat <<EOF | kubectl create -f -
-apiVersion: sources.knative.dev/v1alpha2
+apiVersion: sources.knative.dev/v1beta2
 kind: PingSource
 metadata:
   name: test-ping-source
 spec:
   schedule: "*/1 * * * *"
-  jsonData: '{"message": "1 to 1 delivery!"}'
+  data: '{"message": "1 to 1 delivery!"}'
   sink:
     ref:
       apiVersion: serving.knative.dev/v1
@@ -63,13 +63,13 @@ Let us create the second producer:
 
 ```
 cat <<EOF | kubectl create -f -
-apiVersion: sources.knative.dev/v1alpha2
+apiVersion: sources.knative.dev/v1beta2
 kind: PingSource
 metadata:
   name: test-ping-source2
 spec:
   schedule: "*/1 * * * *"
-  jsonData: '{"note": "multiple events to the same function works!"}'
+  data: '{"note": "multiple events to the same function works!"}'
   sink:
     ref:
       apiVersion: serving.knative.dev/v1

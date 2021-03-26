@@ -88,13 +88,13 @@ there’s no longer a tight coupling between the producer and consumer.
 
 ```
 cat <<EOF | kubectl create -f -
-apiVersion: sources.knative.dev/v1alpha2
+apiVersion: sources.knative.dev/v1beta2
 kind: PingSource
 metadata:
   name: test-ping-source-channel
 spec:
   schedule: "*/1 * * * *"
-  jsonData: '{"message": "Message from Channel!"}'
+  data: '{"message": "Message from Channel!"}'
   sink:
     ref:
       apiVersion: messaging.knative.dev/v1
