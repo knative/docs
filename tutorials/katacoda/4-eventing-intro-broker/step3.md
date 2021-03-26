@@ -26,7 +26,9 @@ EOF
 kubectl wait pods/post-event --for=condition=ContainersReady
 ```{{execute}}
 
-Let us publish some [cloudevents](https://cloudevents.io/). The command below adds some cloud-events specific headers to the curl command. Publish red events using the command:
+Let us publish some [cloudevents](https://cloudevents.io/). The command below adds some cloud-events specific headers to the curl command.
+
+Publish `red` events using the command:
 
 ```
 kubectl exec post-event -- curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/default/default" \
@@ -39,7 +41,7 @@ kubectl exec post-event -- curl -v "http://broker-ingress.knative-eventing.svc.c
   -d '{"msg":"The event is red!"}'
 ```{{execute}}
 
-Publish blue events using the command:
+Publish `blue` events using the command:
 
 ```
 kubectl exec post-event -- curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/default/default" \
@@ -52,7 +54,7 @@ kubectl exec post-event -- curl -v "http://broker-ingress.knative-eventing.svc.c
   -d '{"msg":"The event is blue!"}'
 ```{{execute}}
 
-Publish orange events using the command:
+Publish `orange` events using the command:
 
 ```
 kubectl exec post-event -- curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/default/default" \
