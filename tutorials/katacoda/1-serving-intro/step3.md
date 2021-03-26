@@ -32,17 +32,16 @@ We now need to split our traffic between the two revisions.
 ```
 kn service update demo --traffic demo-v1=50,@latest=50
 ```{{execute T1}}
-Then proceed by issuing the curl command multiple times
+Then proceed by issuing the curl command multiple times to see that the traffic is split between the two revisions.
 ```
 curl http://$MINIKUBE_IP:$INGRESS_PORT/ -H 'Host: demo.default.example.com'
 ```{{execute T1}}
-to see that the traffic is split between the two revisions.
 
 We can now make all traffic go to the `green` revision:
 ```
 kn service update demo --traffic @latest=100
 ```{{execute T1}}
-Then proceed by issuing the curl command multiple times
+Then proceed by issuing the curl command multiple times to see that all traffic is routed to `green` revision.
 ```
 curl http://$MINIKUBE_IP:$INGRESS_PORT/ -H 'Host: demo.default.example.com'
 ```{{execute T1}}

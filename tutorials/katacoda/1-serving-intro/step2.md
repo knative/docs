@@ -21,6 +21,6 @@ curl http://$MINIKUBE_IP:$INGRESS_PORT/ -H 'Host: demo.default.example.com'
 ```{{execute T1}}
 
 ### Scale down to zero
-You can run `watch kubectl get pods`{{execute "T2"}} in a new Terminal tab to see a pod created to serve the requests. Knative will scale this pod down to zero if there are no incoming requests, we have configured this window to be 15 seconds above.
+You can run `watch kubectl get pods`{{execute T2}} (may need two clicks) in a new Terminal tab to see a pod created to serve the requests. Knative will scale this pod down to zero if there are no incoming requests, we have configured this window to be 15 seconds above.
 
 You can wait for the pods to scale down to zero and then issue the above `curl` again to see the pod spin up and serve the request.
