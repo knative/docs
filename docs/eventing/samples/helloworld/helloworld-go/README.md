@@ -246,8 +246,10 @@ folder) you're ready to build and deploy the sample app.
       kubectl get broker --namespace knative-samples
       ```
 
-      _Note_: you can also use injection based on labels with the
-      [Eventing Sugar Controller](../../../../install/any-kubernetes-cluster.md).
+      **Note:** you can also use injection based on labels with the
+      Eventing Sugar Controller.
+      For how to install the Eventing Sugar Controller, see
+      [Install optional Eventing extensions](../../../../install/install-extensions.md#install-optional-eventing-extensions).
 
    1. It deployed the helloworld-go app as a K8s Deployment and created a K8s
       service names helloworld-go. Verify using the following command.

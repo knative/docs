@@ -18,7 +18,7 @@ Notable features are:
 
 ## Prerequisites
 
-1. [Knative Eventing installation](./../../install/any-kubernetes-cluster.md#installing-the-eventing-component).
+1. [Installing Eventing using YAML files](./../../install/install-eventing-with-yaml.md).
 2. An Apache Kafka cluster (if you're just getting started you can follow [Strimzi Quickstart page](https://strimzi.io/quickstarts/)).
 
 ## Installation
@@ -263,7 +263,7 @@ data:
     </configuration>
 ```
 
-To change the logging level to `DEBUG`, you need to: 
+To change the logging level to `DEBUG`, you need to:
 
 1. Apply the following `kafka-config-logging` `ConfigMap` or replace `level="INFO"` with `level="DEBUG"` to the
 `ConfigMap` `kafka-config-logging`:
