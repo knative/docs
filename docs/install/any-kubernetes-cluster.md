@@ -23,13 +23,15 @@ showlandingtoc: "false"
 You can install Knative by applying YAML files using the `kubectl` CLI.
 You can install the Serving component, Eventing component, or both on your cluster.
 
-## System Minimum Requirements
-For prototyping purposes, Knative can work on local deployments of Kubernetes (minikube, kind, etc.).
+## Recommended System Requirement 
+For prototyping purposes, Knative will work on most local deployments of Kubernetes. For example, you shouldn't have any issues spinning up a local one node clister with 2 CPU and 4GB of memory. 
 
 For production purposes, we recommend:
 - If you have only one node in your cluster, you will need at least 6 CPUs, 6 GB of memory, and 30 GB of disk storage.
 - If you have multiple nodes in your cluster, for each node you will need at least 2 CPUs, 4 GB of memory, and 20 GB of disk storage.
 <!--TODO: Verify these requirements-->
+
+These "Recommended System Requirements" are just that, recommendations. Your mileage may vary depending on your choice of Networking layer, whether or not you use a service mesh, etc.
 
 ## Prerequisites
 
