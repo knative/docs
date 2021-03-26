@@ -61,8 +61,38 @@ spec:
 EOF
 
 ```{{execute T1}}
-Then proceed by issuing the curl command multiple times
+Then proceed by issuing the curl command multiple times to see that the traffic is split between the two revisions:
 ```
 curl http://$MINIKUBE_IP:$INGRESS_PORT/ -H 'Host: helloworld-go.default.example.com'
 ```{{execute T1}}
-to see that the traffic is split between the two revisions.
+
+
+Once you are satisfied with the new revision, all the traffic can be moved to the new `green` revision
+```
+cat <<EOF | kubectl apply -f -
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: helloworld-go
+spec:
+  template:
+    metadata:
+      name: helloworld-go-green
+    spec:
+      containers:
+      - env:
+        - name: TARGET
+          value: green
+        image: gcr.io/knative-samples/helloworld-go
+  traffic:
+  - tag: latest
+    latestRevision: true
+    percent: 100
+
+EOF
+```{{execute T1}}
+
+Then proceed by issuing the curl command multiple times to see that the traffic is goes to the new revision:
+```
+curl http://$MINIKUBE_IP:$INGRESS_PORT/ -H 'Host: helloworld-go.default.example.com'
+```{{execute T1}}
