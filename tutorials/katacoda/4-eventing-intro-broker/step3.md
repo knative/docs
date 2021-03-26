@@ -23,7 +23,7 @@ spec:
     tty: true
 EOF
 # wait for it to be ready
-kubectl wait pods/post-event --for=condition=ContainersReady
+kubectl wait pods/post-event --for=condition=ContainersReady --timeout=90s
 ```{{execute}}
 
 Let us publish some [cloudevents](https://cloudevents.io/). The command below adds some cloud-events specific headers to the curl command.
@@ -71,8 +71,8 @@ Verify that consumer1 receives blue and orange events and consumer2 receives red
 
 ```
 # it is likely that is pod is still being created after scaling down to zero
-kubectl wait --for=condition=ready pod -l serving.knative.dev/service=consumer1
-kubectl wait --for=condition=ready pod -l serving.knative.dev/service=consumer2
+kubectl wait --for=condition=ready pod -l serving.knative.dev/service=consumer1 --timeout=90s
+kubectl wait --for=condition=ready pod -l serving.knative.dev/service=consumer2 --timeout=90s
 # see the logs
 kubectl logs -l serving.knative.dev/service=consumer1 -c user-container --since=10m --tail=50
 kubectl logs -l serving.knative.dev/service=consumer2 -c user-container --since=10m --tail=50

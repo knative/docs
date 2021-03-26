@@ -95,7 +95,7 @@ Verify that the sequence was executed and the message was updated by running the
 
 ```
 # it is likely that is pod is still being created after scaling down to zero
-kubectl wait --for=condition=ready pod -l serving.knative.dev/service=event-display-chain
+kubectl wait --for=condition=ready pod -l serving.knative.dev/service=event-display-chain --timeout=90s
 # see the logs
 kubectl -n default logs -l serving.knative.dev/service=event-display-chain -c user-container --since=10m --tail=50
 ```{{execute}}

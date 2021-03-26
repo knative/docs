@@ -47,7 +47,7 @@ To verify event delivery, you can check the logs of the consumer with the follow
 
 ```
 # it is likely that is pod is still being created after scaling down to zero
-kubectl wait --for=condition=ready pod -l serving.knative.dev/service=event-display
+kubectl wait --for=condition=ready pod -l serving.knative.dev/service=event-display --timeout=90s
 # get the logs
 kubectl logs -l serving.knative.dev/service=event-display -c user-container --since=10m --tail=50
 ```{{execute}}
@@ -82,7 +82,7 @@ To verify event delivery, you can check the logs of the consumer with the follow
 
 ```
 # it is likely that is pod is still being created after scaling down to zero
-kubectl wait --for=condition=ready pod -l serving.knative.dev/service=event-display
+kubectl wait --for=condition=ready pod -l serving.knative.dev/service=event-display --timeout=90s
 # see the logs
 kubectl logs -l serving.knative.dev/service=event-display -c user-container --since=10m --tail=50
 ```{{execute}}
