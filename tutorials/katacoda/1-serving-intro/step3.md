@@ -7,22 +7,42 @@ You can list those resources by running `kubectl get ksvc,configuration,route,re
 
 We will now update the service to change the `TARGET` env variable to `green`.
 
-But, before we do that, let us add a `blue` tag to our existing revision.
+But, before we do that, let us update the revision name to "hello-v1", so that we can direct traffic to it.
 ```
-kn service update demo --tag $(kn revision list -o 'jsonpath={.items[0].metadata.name}')=blue
-```{{execute T1}}
-Now, update the env variable to `green`:
+kn service update demo --revision-name="demo-v1"```{{execute T1}}
+
+Now, let's update the env variable to `green`, but let's do it as a dark launch i.e. zero traffic will go to this new revision:
 ```
-kn service update demo --env TARGET=green
+kn service update demo --env TARGET=green --revision-name="demo-v2" --traffic demo-v1=100,demo-v2=0
 ```{{execute T1}}
 
 This will result in a new `revision` being created. Verify this by running `kn revision list`{{execute T1}}.
-Both these revisions are capable of serving requests, we now need to split our traffic between the two revisions.
+
+All these revisions are capable of serving requests. Let's tag the `green` revision, so as to get a custom hostname to be able to access the revision.
 ```
-kn service update demo --traffic blue=50,@latest=50
+kn service update demo --tag demo-v2=v2
+```{{execute T1}}
+
+You can now test the `green` revision like so: (This hostname can  be listed with `kn route describe demo` command).
+```
+curl http://$MINIKUBE_IP:$INGRESS_PORT/ -H 'Host: v2-demo.default.example.com'
+```{{execute T1}}
+
+We now need to split our traffic between the two revisions.
+```
+kn service update demo --traffic demo-v1=50,@latest=50
 ```{{execute T1}}
 Then proceed by issuing the curl command multiple times
 ```
 curl http://$MINIKUBE_IP:$INGRESS_PORT/ -H 'Host: demo.default.example.com'
 ```{{execute T1}}
 to see that the traffic is split between the two revisions.
+
+We can now make all traffic go to the `green` revision:
+```
+kn service update demo --traffic @latest=100
+```{{execute T1}}
+Then proceed by issuing the curl command multiple times
+```
+curl http://$MINIKUBE_IP:$INGRESS_PORT/ -H 'Host: demo.default.example.com'
+```{{execute T1}}
