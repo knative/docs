@@ -9,7 +9,7 @@ aliases:
 ---
 
 This guide explains how to create your own event source for Knative
-Eventing by using a [sample repository](https://github.com/knative-sandbox/sample-source), and explains the key concepts behind each required component. Documentation for the default [Knative event sources](../../sources/#knative-sources) can be used as an additional reference.
+Eventing by using a [sample repository](https://github.com/knative-sandbox/sample-source), and explains the key concepts behind each required component. Documentation for the default [Knative event sources](../../sources/) can be used as an additional reference.
 
 After completing the provided tutorial, you will have created a basic event source controller and a receive adapter. Events can be viewed by using the `event_display` Knative service.
 <!--TODO: Provide links to docs about what the event source controller and receiver adapter are-->
@@ -33,10 +33,10 @@ Optional:
 
 ## Steps
 
-1. [Separation of Concerns](./01-theory.md)
-2. [API Definition](./02-lifecycle-and-types.md)
-3. [Controller](./03-controller.md)
-4. [Reconciler](./04-reconciler.md)
-5. [Receive Adapter](./05-receive-adapter.md)
-6. [Example YAML](./06-yaml.md)
-7. [Moving the event source to the `knative-sandbox` organization](./07-knative-sandbox.md)
+1. [Separation of Concerns](./01-theory)
+2. [API Definition](./02-lifecycle-and-types)
+3. [Controller](./03-controller)
+4. [Reconciler](./04-reconciler)
+5. [Receive Adapter](./05-receive-adapter)
+6. [Example YAML](./06-yaml)
+7. [Moving the event source to the `knative-sandbox` organization](./07-knative-sandbox)
