@@ -2,6 +2,7 @@
 title: "Getting started"
 weight: 01
 type: "docs"
+showlandingtoc: "false"
 aliases:
   - /docs/eventing/samples/kubernetes-event-source
 ---
@@ -14,11 +15,13 @@ Before you can create an API server source, you must install Knative Eventing an
 
 1. Optional: Create a namespace for the API server source instance:
 
-    ```
+    ```shell
     kubectl create namespace <new_namespace_name>
     ```
 
-    Creating a namespace for your API server source and related components allows you to view changes and events for this workflow more easily, since these are isolated from the many other components that may exist in your `default` namespace. It also makes removing the source easier, since you can simply delete the namespace to remove all of the resources.
+    Creating a namespace for your API server source and related components allows you to view changes and events for this workflow more easily, since these are isolated from the many other components that may exist in your `default` namespace.
+
+    It also makes removing the source easier, since you can simply delete the namespace to remove all of the resources.
 
 1. Create a service account:
 
@@ -65,66 +68,66 @@ Before you can create an API server source, you must install Knative Eventing an
       namespace: <your_namespace>
     ```
 
-1. Create a `ApiServerSource` object:
+1. Create an ApiServerSource object:
 
     {{< tabs name="create-source" default="YAML" >}}
     {{% tab name="YAML" %}}
 
-    ```yaml
-    apiVersion: sources.knative.dev/v1
-    kind: ApiServerSource
-    metadata:
-     name: <source_name>
-     namespace: <your_namespace>
-    spec:
-     serviceAccountName: <your_service_account>
-     mode: Resource
-     resources:
-       - apiVersion: v1
-         kind: Event
-     sink:
-       ref:
-         apiVersion: v1
-         kind: Service # Service is an example, you can use any PodSpecable object
-         name: <sink_name>
-    ```
+```yaml
+apiVersion: sources.knative.dev/v1
+kind: ApiServerSource
+metadata:
+ name: <source_name>
+ namespace: <your_namespace>
+spec:
+ serviceAccountName: <your_service_account>
+ mode: Resource
+ resources:
+   - apiVersion: v1
+     kind: Event
+ sink:
+   ref:
+     apiVersion: v1
+     kind: Service # Service is an example, you can use any PodSpecable object
+     name: <sink_name>
+```
 
     {{< /tab >}}
     {{% tab name="kn" %}}
 
-    ```
-    kn source apiserver create testevents \
-      --namespace apiserversource-example \
-      --mode "Resource" \
-      --resource "Event:v1" \
-      --service-account events-sa \
-      --sink  --sink http://event-display.svc.cluster.local
-    ```
+```shell
+kn source apiserver create <source_name> \
+  --namespace <your_namespace> \
+  --mode "Resource" \
+  --resource "Event:v1" \
+  --service-account <your_service_account> \
+  --sink <your_sink>
+```
 
     {{< /tab >}}
     {{< /tabs >}}
 
 1. Create events by launching a test pod in your namespace:
 
-    ```
+    ```shell
     kubectl run busybox --image=busybox --namespace=<your_namespace> --restart=Never -- ls
     ```
 
 1. Delete the test pod:
 
-    ```
+    ```shell
     kubectl --namespace=<your_namespace> delete pod busybox
     ```
 
 1. View the logs to verify that Kubernetes events were sent to the Knative Eventing system:
 
-    ```
+    ```shell
     kubectl logs --namespace=<your_namespace> -l app=<your_sink_name> --tail=100
     ```
 
     Example log output:
 
-    ```
+    ```shell
     ☁️  cloudevents.Event
     Validation: valid
     Context Attributes,
@@ -179,6 +182,6 @@ Before you can create an API server source, you must install Knative Eventing an
 
 Deleting the namespace removes the API server source and all of the related resources that were created in this namespace:
 
-```
+```shell
 kubectl delete namespace <your_namespace>
 ```
