@@ -3,6 +3,8 @@ title: "Receive Adapter Implementation and Design"
 linkTitle: "Receive Adapter Implementation"
 weight: 50
 type: "docs"
+aliases:
+  - /docs/eventing/samples/writing-event-source/05-receive-adapter
 ---
 
 ## Receive Adapter cmd

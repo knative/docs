@@ -3,6 +3,8 @@ title: "Reconciler Implementation and Design"
 linkTitle: "Reconciler Implementation"
 weight: 40
 type: "docs"
+aliases:
+  - /docs/eventing/samples/writing-event-source/04-reconciler
 ---
 
 ## Reconciler Functionality

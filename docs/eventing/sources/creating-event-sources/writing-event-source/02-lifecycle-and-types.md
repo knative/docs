@@ -3,6 +3,8 @@ title: "Sample Source Lifecycle and Types"
 linkTitle: "Lifecycle and Types"
 weight: 20
 type: "docs"
+aliases:
+  - /docs/eventing/samples/writing-event-source/02-lifecycle-and-types
 ---
 
 ## API Definition

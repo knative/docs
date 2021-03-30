@@ -3,6 +3,8 @@ title: "Controller Implementation and Design"
 linkTitle: "Controller Implemetation"
 weight: 30
 type: "docs"
+aliases:
+  - /docs/eventing/samples/writing-event-source/03-controller
 ---
 
 # Controller Implementation
