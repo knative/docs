@@ -21,7 +21,7 @@ See [Knative Prerequisites](./prerequisites.md).
 
 To install the Eventing component:
 
-1. Install the required custom resources:
+1. Install the required custom resource definitions (CRDs):
 
    ```bash
    kubectl apply -f {{< artifact repo="eventing" file="eventing-crds.yaml" >}}
