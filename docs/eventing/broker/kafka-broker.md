@@ -263,7 +263,7 @@ data:
     </configuration>
 ```
 
-To change the logging level to `DEBUG`, you need to:
+To change the logging level to `DEBUG`, you must:
 
 1. Apply the following `kafka-config-logging` `ConfigMap` or replace `level="INFO"` with `level="DEBUG"` to the
 `ConfigMap` `kafka-config-logging`:
