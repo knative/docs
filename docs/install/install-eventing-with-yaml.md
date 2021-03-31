@@ -43,10 +43,10 @@ kubectl get pods --namespace knative-eventing
 ```
 
 
-## Optional: Install a default Channel (messaging) layer
+## Optional: Install a default channel (messaging) layer
 
-The tabs below expand to show instructions for installing a default Channel (messaging) layer.
-Follow the procedure for the Channel of your choice:
+The tabs below expand to show instructions for installing a default channel layer.
+Follow the procedure for the channel of your choice:
 
 <!-- This indentation is important for things to render properly. -->
 
@@ -56,7 +56,7 @@ Follow the procedure for the Channel of your choice:
 1. First,
    [Install Apache Kafka for Kubernetes](../eventing/samples/kafka/README.md)
 
-1. Then install the Apache Kafka Channel:
+1. Then install the Apache Kafka channel:
 
    ```bash
    curl -L "{{< artifact org="knative-sandbox" repo="eventing-kafka" file="channel-consolidated.yaml" >}}" \
@@ -71,21 +71,21 @@ To learn more about the Apache Kafka channel, try
 
 {{% tab name="Google Cloud Pub/Sub Channel" %}}
 
-1. Install the Google Cloud Pub/Sub Channel:
+1. Install the Google Cloud Pub/Sub channel:
 
    ```bash
    # This installs both the Channel and the GCP Sources.
    kubectl apply -f {{< artifact org="google" repo="knative-gcp" file="cloud-run-events.yaml" >}}
    ```
 
-To learn more about the Google Cloud Pub/Sub Channel, try
+To learn more about the Google Cloud Pub/Sub channel, try
 [our sample](https://github.com/google/knative-gcp/blob/master/docs/examples/channel/README.md)
 
 {{< /tab >}}
 
 {{% tab name="In-Memory (standalone)" %}}
 
-The following command installs an implementation of Channel that runs in-memory.
+The following command installs an implementation of channel that runs in-memory.
 This implementation is nice because it is simple and standalone, but it is
 unsuitable for production use cases.
 
@@ -100,7 +100,7 @@ kubectl apply -f {{< artifact repo="eventing" file="in-memory-channel.yaml" >}}
 1. First, [Install NATS Streaming for
    Kubernetes](https://github.com/knative-sandbox/eventing-natss/tree/main/config)
 
-1. Then install the NATS Streaming Channel:
+1. Then install the NATS Streaming channel:
 
    ```bash
    kubectl apply -f {{< artifact org="knative-sandbox" repo="eventing-natss" file="300-natss-channel.yaml" >}}
@@ -113,10 +113,10 @@ kubectl apply -f {{< artifact repo="eventing" file="in-memory-channel.yaml" >}}
 {{< /tabs >}}
 
 
-## Optional: Install a Broker (Eventing) layer:
+## Optional: Install a broker layer:
 
-The tabs below expand to show instructions for installing the Broker (Eventing) layer.
-Follow the procedure for the Broker of your choice:
+The tabs below expand to show instructions for installing the broker layer.
+Follow the procedure for the broker of your choice:
 
 <!-- This indentation is important for things to render properly. -->
    {{< tabs name="eventing_brokers" default="MT-Channel-based" >}}
@@ -131,19 +131,19 @@ The following commands install the Apache Kafka broker, and run event routing in
     kubectl apply -f {{< artifact org="knative-sandbox" repo="eventing-kafka-broker" file="eventing-kafka-controller.yaml" >}}
     ```
 
-1. Install the Kafka Broker data plane by entering the following command:
+1. Install the Kafka broker data plane by entering the following command:
 
     ```bash
     kubectl apply -f {{< artifact org="knative-sandbox" repo="eventing-kafka-broker" file="eventing-kafka-broker.yaml" >}}
     ```
 
-For more information, see the [Kafka Broker](./../eventing/broker/kafka-broker.md) documentation.
+For more information, see the [Kafka broker](./../eventing/broker/kafka-broker.md) documentation.
 {{< /tab >}}
 
    {{% tab name="MT-Channel-based" %}}
 
-The following command installs an implementation of Broker that utilizes
-Channels and runs event routing components in a System Namespace, providing a
+The following command installs an implementation of broker that utilizes
+channels and runs event routing components in a System Namespace, providing a
 smaller and simpler installation.
 
 ```bash
