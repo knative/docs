@@ -9,7 +9,7 @@ showlandingtoc: "false"
 To add extra features to your Knative Serving or Eventing installation, you can install extensions
 by applying YAML files using the `kubectl` CLI.
 
-For information about the YAML files in the Knative Serving release, see
+For information about the YAML files in the Knative Serving and Eventing releases, see
 [Installation files](./installation-files.md).
 
 

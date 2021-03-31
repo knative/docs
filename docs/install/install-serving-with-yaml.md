@@ -377,3 +377,4 @@ After installing Knative Serving:
 
 - If you want to add extra features to your installation, see [Installing optional extensions](./install-extensions.md).
 - If you want to install the Knative Eventing component, see [Installing Eventing using YAML files](./install-eventing-with-yaml.md)
+- Install the [Knative CLI](./install-kn) to use `kn` commands.

@@ -23,7 +23,7 @@ For how to install HPA, see [Install optional Eventing extensions](../../install
 
 ### Horizontal Pod Autoscaler (HPA)
 
-* Not part of the Knative Serving core, and must be enabled after.
+* Not part of the Knative Serving core, and you must install Knative Serving first.
 * Does not support scale to zero functionality.
 * Supports CPU-based autoscaling.
 
