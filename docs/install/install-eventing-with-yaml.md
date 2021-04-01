@@ -8,8 +8,6 @@ showlandingtoc: "false"
 
 This topic describes how to install Knative Eventing by applying YAML files using the `kubectl` CLI.
 
-When installing Knative, you can install the Serving component, Eventing component, or both on your cluster.
-For how to install the Serving component, see [Installing Serving using YAML files](./install-serving-with-yaml.md)
 
 ## Prerequisites
 
