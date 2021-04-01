@@ -8,7 +8,7 @@ This page shows how to install and configure Apache Kafka Sink.
 
 ## Prerequisites
 
-[Knative Eventing installation](./../../install/any-kubernetes-cluster.md#installing-the-eventing-component).
+[Installing Eventing using YAML files](./../../install/install-eventing-with-yaml.md).
 
 ## Installation
 
