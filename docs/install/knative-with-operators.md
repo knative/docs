@@ -702,43 +702,6 @@ NAME               VERSION             READY   REASON
 knative-eventing   <version number>    True
 ```
 
-## Uninstall Knative
-
-### Removing the Knative Serving component
-
-Remove the Knative Serving CR:
-
-```
-kubectl delete KnativeServing knative-serving -n knative-serving
-```
-
-### Removing Knative Eventing component
-
-Remove the Knative Eventing CR:
-
-```
-kubectl delete KnativeEventing knative-eventing -n knative-eventing
-```
-
-Knative operator prevents unsafe removal of Knative resources. Even if the Knative Serving and Knative Eventing CRs are
-successfully removed, all the CRDs in Knative are still kept in the cluster. All your resources relying on Knative CRDs
-can still work.
-
-### Removing the Knative Operator:
-
-If you have installed Knative using the Release page, remove the operator using the following command:
-
-```
-kubectl delete -f {{< artifact org="knative" repo="operator" file="operator.yaml" >}}
-```
-
-If you have installed Knative from source, uninstall it using the following command while in the root directory
-for the source:
-
-```
-ko delete -f config/
-```
-
 ## What's next
 
 - [Configure Knative Serving using Operator](./operator/configuring-serving-cr.md)
