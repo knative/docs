@@ -295,7 +295,7 @@ To change the logging level to `DEBUG`, you need to:
 
 ## Configuring the order of delivered events
 
-When dispatching events, the Kafka broker can be configured to support different delivery ordering guarantees. 
+When dispatching events, the Kafka broker can be configured to support different delivery ordering guarantees.
 
 You can configure the delivery order of events using the `kafka.eventing.knative.dev/delivery.order` annotation on the `Trigger` object:
 
