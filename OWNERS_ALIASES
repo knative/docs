@@ -88,6 +88,13 @@ aliases:
   - pmorie
   - thisisnotapril
   - vaikas
+
+  technical-oversight-committee:
+  - evankanderson
+  - grantr
+  - markusthoemmes
+  - rhuss
+
   ux-wg-leads:
   - csantanapr
   - omerbensaadon
