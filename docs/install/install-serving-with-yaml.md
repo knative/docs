@@ -371,6 +371,8 @@ Refer to the "Real DNS" method for a permanent solution.
 
 ## Next steps
 
+After installing Knative Serving:
+
 - [Installing Knative Eventing using YAML files](./install-eventing-with-yaml.md)
 
 - **If you're not interested in installing Knative Eventing (recommended)** and looking for things like TLS for Knative Serving, see [Installing optional extensions](./install-extensions.md).
