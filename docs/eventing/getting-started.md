@@ -68,6 +68,7 @@ demonstrate how you can configure your event producers to target a specific cons
      kind: Deployment
      metadata:
        name: hello-display
+       namespace: event-example
      spec:
        replicas: 1
        selector:
@@ -87,6 +88,7 @@ demonstrate how you can configure your event producers to target a specific cons
      apiVersion: v1
      metadata:
        name: hello-display
+       namespace: event-example
      spec:
        selector:
          app: hello-display
@@ -106,6 +108,7 @@ demonstrate how you can configure your event producers to target a specific cons
      kind: Deployment
      metadata:
        name: goodbye-display
+       namespace: event-example
      spec:
        replicas: 1
        selector:
@@ -126,6 +129,7 @@ demonstrate how you can configure your event producers to target a specific cons
      apiVersion: v1
      metadata:
        name: goodbye-display
+       namespace: event-example
      spec:
        selector:
          app: goodbye-display
@@ -163,6 +167,7 @@ Each trigger can specify a filter that enables selection of relevant events base
    kind: Trigger
    metadata:
      name: hello-display
+     namespace: event-example
    spec:
      broker: default
      filter:
@@ -185,6 +190,7 @@ Each trigger can specify a filter that enables selection of relevant events base
    kind: Trigger
    metadata:
      name: goodbye-display
+     namespace: event-example
    spec:
      broker: default
      filter:
@@ -233,6 +239,7 @@ metadata:
   labels:
     run: curl
   name: curl
+  namespace: event-example
 spec:
   containers:
     # This could be any image that we can SSH into and has curl.
