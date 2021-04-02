@@ -37,7 +37,7 @@ For macOS, you can install `kn` by using <a href="https://github.com/knative/hom
 brew install kn
 ```
 
-For other installation options, see the [Setting up kn](./install-kn) 
+For other options for installing the `kn` CLI, see the [Setting up kn](./install-kn) 
 
 ## Install Knative Serving and Eventing
 
