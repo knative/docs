@@ -31,6 +31,9 @@ To install the Eventing component:
    kubectl apply -f {{< artifact repo="eventing" file="eventing-core.yaml" >}}
    ```
 
+For information about the YAML files in the Knative Serving and Eventing releases, see
+[Installation files](./installation-files.md).
+
 
 ## Verify the installation
 
