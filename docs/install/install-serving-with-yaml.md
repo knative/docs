@@ -375,4 +375,4 @@ After installing Knative Serving:
 
 - [Installing Knative Eventing using YAML files](./install-eventing-with-yaml.md)
 
-- **If you're not interested in installing Knative Eventing (recommended)** and looking for things like TLS for Knative Serving, see [Installing optional extensions](./install-extensions.md).
+- If you want to add extra features to your installation (like TLS), see [Installing optional extensions](./install-extensions.md).
