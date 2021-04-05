@@ -25,7 +25,7 @@ To install the serving component:
    kubectl apply -f {{< artifact repo="serving" file="serving-crds.yaml" >}}
    ```
 
-1. Install the core components of Serving:
+1. Install the core components of Knative Serving:
 
    ```bash
    kubectl apply -f {{< artifact repo="serving" file="serving-core.yaml" >}}
@@ -378,3 +378,5 @@ After installing Knative Serving:
 - [Installing Knative Eventing using YAML files](./install-eventing-with-yaml.md)
 
 - If you want to add extra features to your installation, see [Installing optional extensions](./install-extensions.md).
+
+- To easily interact with Knative Services, [download the `kn` CLI](/docs/client/install-kn.md)
