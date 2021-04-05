@@ -8,15 +8,6 @@ aliases:
 
 This guide provides details about how you can set up the Knative `kn` CLI.
 
-## Install kn using brew
-
-For macOS, you can install `kn` by using <a href="https://github.com/knative/homebrew-client" target="_blank">Homebrew</a>.
-
-```
-brew install kn
-```
-
-
 ## Install kn using a binary
 
 You can install `kn` by downloading the executable binary for your system and placing it in the system path.
@@ -55,6 +46,10 @@ Links to the latest nightly-built executable binaries are available here:
       ```
       kn version
       ```
+
+## Install kn using brew
+
+For macOs, you can install `kn` by using <a href="https://github.com/knative/homebrew-client" target="_blank">brew</a>.
 
 ## Running kn using container images
 
