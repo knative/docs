@@ -276,3 +276,7 @@ To learn more about the VMware sources and bindings, try
 {{< /tab >}}
 
 {{< /tabs >}}
+
+## Next steps
+
+- To easily interact with Knative Services and Eventing Components, [download the `kn` CLI](/docs/client/install-kn.md)
