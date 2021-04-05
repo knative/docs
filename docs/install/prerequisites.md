@@ -26,18 +26,7 @@ Before installation, you must meet the following prerequisites:
 
 - You have a cluster that uses Kubernetes v1.18 or newer.
 - You have installed the [`kubectl` CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
-- You have installed the [`kn` CLI](./install-kn). (See below)
 - Your Kubernetes cluster must have access to the internet, since Kubernetes needs to be able to fetch images. (To pull from a private registry, see [Deploying images from a private container registry](https://knative.dev/docs/serving/deploying/private-registry/))
-
-## Install the Knative CLI
-
-For macOS, you can install `kn` by using <a href="https://github.com/knative/homebrew-client" target="_blank">Homebrew</a>.
-
-```
-brew install kn
-```
-
-For other options for installing the `kn` CLI, see the [Setting up kn](./install-kn)
 
 ## Install Knative Serving and Eventing
 

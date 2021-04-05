@@ -222,5 +222,7 @@ data:
 After installing Knative Eventing:
 
 - To easily interact with Knative Eventing Components, [download the `kn` CLI](/docs/client/install-kn.md)
+
 - If you want to add optional enhancements to your installation, see [Installing optional extensions](./install-extensions.md)
+
 - [Installing Knative Serving using YAML files](./install-serving-with-yaml.md)
