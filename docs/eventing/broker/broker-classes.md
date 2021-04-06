@@ -1,6 +1,6 @@
 ---
 title: "Broker classes"
-weight: 03
+weight: 02
 type: "docs"
 showlandingtoc: "false"
 ---

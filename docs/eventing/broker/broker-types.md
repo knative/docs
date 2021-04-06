@@ -12,7 +12,6 @@ The following broker types are available for use with Knative Eventing.
 ## Knative Eventing broker
 
 Knative Eventing provides a multi-tenant, channel-based broker implementation that uses channels for event routing.
-<!--TODO: explain how channels are used for routing-->
 
 For more information, see the [Knative Eventing broker](./mt-broker) documentation.
 
