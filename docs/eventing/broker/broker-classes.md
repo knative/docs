@@ -5,7 +5,7 @@ type: "docs"
 showlandingtoc: "false"
 ---
 
-To configure a default broker type, or *class*, you must modify the
+To configure a default broker type, or _class_, you must modify the
 `eventing.knative.dev/broker.class` annotation and `spec.config` for the Broker
 object. `MTChannelBasedBroker` is the broker class default.
 

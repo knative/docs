@@ -1,33 +1,27 @@
 ---
 title: "Broker types"
-weight: 02
+weight: 01
 type: "docs"
 showlandingtoc: "false"
 aliases:
   - docs/eventing/broker/alternate
 ---
 
-The following broker types are supported for use with Knative Eventing.
+The following broker types are available for use with Knative Eventing.
 
-## Multi-tenant channel-based broker
+## Knative Eventing broker
 
-Knative provides a default multi-tenant, channel-based broker implementation that uses channels for event routing.
+Knative Eventing provides a multi-tenant, channel-based broker implementation that uses channels for event routing.
 <!--TODO: explain how channels are used for routing-->
 
-Before you can use the Knative Channel-based Broker, you must install a channel provider, such as InMemoryChannel, Kafka or Nats.
-
-**NOTE:** InMemoryChannel channels are for development use only and must not be used in a production deployment.
-
-For more information on which channels are available and how to install them,
-see the list of [available channels](https://knative.dev/docs/eventing/channels/channels-crds/).
+For more information, see the [Knative Eventing broker](./mt-broker) documentation.
 
 ## Alternative broker implementations
 
 In the Knative Eventing ecosystem, alternate Broker implementations are welcome as long as they
-respect the [Broker Conformance Spec](https://github.com/knative/eventing/blob/main/docs/spec/broker.md).
+respect the [broker conformance spec](https://github.com/knative/eventing/blob/main/docs/spec/broker.md).
 
-Below is a list of brokers provided by the community or vendors in addition to the default broker
-implementations provided by Knative Eventing.
+The following is a list of brokers provided by the community or vendors:
 
 ### GCP Broker
 
@@ -35,4 +29,4 @@ The GCP Broker is optimized for running in GCP. For more details, refer to the [
 
 ### Apache Kafka Broker
 
-For information about the Apache Kafka broker, see [link](../kafka-broker.md).
+For information about the Apache Kafka broker, see [link](./kafka-broker).
