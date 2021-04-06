@@ -1462,6 +1462,30 @@ for both serving and non serving containers.
 ref: <a href="http://bit.ly/image-digests">http://bit.ly/image-digests</a></p>
 </td>
 </tr>
+<tr>
+<td>
+<code>actualReplicas</code><br/>
+<em>
+int32
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>ActualReplicas reflects the amount of ready pods running this revision.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>desiredReplicas</code><br/>
+<em>
+int32
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>DesiredReplicas reflects the desired amount of pods running this revision.</p>
+</td>
+</tr>
 </tbody>
 </table>
 <h3 id="serving.knative.dev/v1.RevisionTemplateSpec">RevisionTemplateSpec
@@ -2202,5 +2226,5 @@ knative.dev/pkg/apis/duck/v1.Addressable
 <hr/>
 <p><em>
 Generated with <code>gen-crd-api-reference-docs</code>
-on git commit <code>b9576f56c</code>.
+on git commit <code>813aa6596</code>.
 </em></p>
