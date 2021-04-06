@@ -2,6 +2,8 @@
 title: "Apache Kafka Broker"
 weight: 30
 type: "docs"
+aliases:
+  - docs/eventing/broker/kafka-broker
 ---
 
 The Apache Kafka Broker is a native Broker implementation, that reduces
