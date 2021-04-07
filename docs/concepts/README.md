@@ -56,7 +56,7 @@ status:
   weight: 70
 ```
 
-When the `Example` resource needs to do it's work, it only acts on the
+When the `Example` resource needs to do its work, it only acts on the
 information included in the "Sizable" duck type shape, and the `Dog`
 implementation is free to have the information that makes the most sense for
 that resource. The power of duck typing is apparent when we extend the system
