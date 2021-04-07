@@ -11,9 +11,9 @@ choose to opt-in or be opt'ed-in to multiple duck types.
 
 <!-- TODO: point to Discovery ClusterDuckType documentation. -->
 
-The most basic usage of duck typing in Knative is our usage of object refs in
-resource specs to "point" to another resource. The contract of the object
-holding the ref will prescribe the expected duck type of the "pointee".
+A fundamental use of duck typing in Knative is the use of object references in
+resource _specs_ to point to another resource. The definition of the object
+containing the reference prescribes the expected duck type of the resource being referenced.
 
 In the following example, a Knative `Example` resource named `pointer` references a
 `Dog` resource named `pointee` in its spec:
