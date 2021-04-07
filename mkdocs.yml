@@ -1,6 +1,8 @@
-site_name: Knative Docs
+site_name: Knative
 site_url: https://knative.dev/docs
 site_description: Knative Documentation
+extra_css:
+  - stylesheets/extra.css
 
 repo_url: https://github.com/knative/docs
 edit_uri: edit/main/docs
@@ -145,6 +147,7 @@ nav:
 theme:
   name: material
   logo: images/logo/rgb/knative-logo-rgb.png
+  custom_dir: overrides
   features:
     - navigation.tabs
     - navigation.tabs.sticky
@@ -160,6 +163,8 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.tabbed
   - pymdownx.details
+  - pymdownx.tasklist:
+      custom_checkbox: true
   - admonition
   - toc:
       permalink: true

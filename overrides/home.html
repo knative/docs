@@ -1,0 +1,212 @@
+{% extends "main.html" %}
+
+{% block tabs %}
+  {{ super() }}
+  <style>.md-header{position:initial}.md-main__inner{margin:0}.md-content{display:none}@media screen and (min-width:60em){.md-sidebar--secondary{display:none}}@media screen and (min-width:76.25em){.md-sidebar--primary{display:none}}</style>
+  <style>
+    .home-container {
+        padding-top: 5em;
+        background: linear-gradient(to bottom, var(--md-primary-fg-color), #3A8BD6 84%, #3A8BD6 94%, #fff 100%);
+        background: linear-gradient(to bottom, var(--md-primary-fg-color), #5063D0 84%, #5063D0 94%, #fff 100%);
+        background: linear-gradient(to bottom, var(--md-primary-fg-color), #0071c7 24%, #0071c7 94%, #fff 100%);
+        background: linear-gradient(to bottom, var(--md-primary-fg-color), var(--home-color) 20%, var(--home-color) 99%, #fff 100%);
+        min-height: 300px;
+        justify-content: center;
+        color: #fff;
+    }
+
+    body {
+      color: #fff;
+      background: var(--md-primary-fg-color);
+      background: #5063D0;
+      background: #0071c7;
+      background: var(--home-color);
+    }
+
+    .calltoaction-container, .usedby-container, .home-container, .features-container, .intro-container {
+      padding-botom: 1em;
+      margin: 0;
+      border: 0;
+      padding-bottom: 4em;
+    }
+
+    .home-container .md-button {
+        margin-top: .5rem;
+        margin-right: .5rem;
+        color: var(--md-primary-bg-color)
+    }
+
+    .home-container .md-button--primary {
+        background-color: var(--md-primary-bg-color);
+        color: hsla(280deg, 37%, 48%, 1);
+        border-color: var(--md-primary-bg-color)
+    }
+
+    .home-container h1 {
+      color: #fff;
+      font-weight: bolder;
+      margin-top: 2em;
+      margin-bottom: 0;
+    }
+
+    .home-container h2 {
+      margin: 0;
+    }
+
+    .calltoaction-container {
+      color: #fff;
+      background: #1B2F52;
+    }
+
+    .usedby-container {
+      background: #fff;
+      color: #000;
+      display: flex;
+      justify-content: center;
+      padding-bottom: 4em;
+      padding-top: 2em;
+    }
+
+    .components-container {
+      padding-bottom: 6em;
+      padding-top: 4em;
+    }
+
+    .features-container {
+      color: #000;
+      background: #114678;
+      background: #28477A;
+      background: #1B2F52;
+      background: #fff;
+      padding-bottom: 6em;
+      padding-top: 4em;
+    }
+
+    .col {
+      width: 25%;
+      margin: 2em;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+    }
+  </style>
+
+  <section class="home-container">
+    <div class="md-grid md-typeset">
+      <div class="mdx-hero">
+        <div>
+          <h1>Welcome, Knative!</h1>
+          <h2>Kubernetes-based platform to deploy and manage modern serverless workloads.</h2>
+          <p style="display: block; margin-left: 1em">
+          <a href="{{ page.next_page.url | url }}" title="{{ page.next_page.title | e }}" class="md-button md-button--primary">
+            Quick start
+          </a>
+          <a href="{{ 'install/any-kubernetes-cluster' | url }}" class="md-button">
+            Custom YAML-Based Install
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="usedby-container">
+    <div class="md-grid md-typeset">
+      <div style="display: flex; justify-content: center">
+      <h4>Trusted by:</h4>
+      </div>
+      <div style="display: inline-flex; justify-content: center; flex-gap: 2em">
+        <p style="margin: 0.6em">Google</p>
+        <p style="margin: 0.6em">Red Hat</p>
+        <p style="margin: 0.6em">VMware</p>
+        <p style="margin: 0.6em">IBM</p>
+        <p style="margin: 0.6em">Triggermesh</p>
+      </div>
+    </div>
+  </section>
+  <section class="intro-container">
+    <div class="md-grid md-typeset">
+    <div style="display: flex; align-items: center">
+    <div>
+    <h2 style="font-size: larger; font-weight: bolder">Make your developers more productive</h2>
+    <p style="max-width: 700px">Knative components build on top of Kubernetes, <b>abstracting away
+      the complex details and enabling developers to focus on what matters</b>.
+    Built by codifying the best practices shared by successful real-world
+    implementations, Knative solves the "boring but difficult" parts of
+    deploying and managing cloud native services so you don't have to.
+    </p>
+    </div>
+    <img src="images/rocket.svg" alt="" width="400" height="200" draggable="false">
+    </div>
+    </div>
+  </section>
+  <section class="features-container">
+    <div class="md-grid md-typeset">
+    <h2>Highlights</h2>
+    <ul class="task-list-control" style="columns: 2">
+      <li class="task-list-item">
+        <input type="checkbox" checked disabled />
+        <span class="task-list-indicator"></span>
+        Focused API with higher level abstractions for common app use-cases.
+      </li>
+      <li class="task-list-item"><input type="checkbox" checked disabled /><span class="task-list-indicator"></span>Stand up a scalable, secure, stateless service in seconds.</li>
+      <li class="task-list-item"><input type="checkbox" checked disabled /><span class="task-list-indicator"></span>Loosely coupled features let you use the pieces you need.</li>
+      <li class="task-list-item"><input type="checkbox" checked disabled /><span class="task-list-indicator"></span>Pluggable components let you bring your own logging and monitoring, networking, and service mesh.</li>
+      <li class="task-list-item"><input type="checkbox" checked disabled /><span class="task-list-indicator"></span>Knative is portable: run it anywhere Kubernetes runs, never worry about vendor lock-in.</li>
+      <li class="task-list-item"><input type="checkbox" checked disabled /><span class="task-list-indicator"></span>Idiomatic developer experience, supporting common patterns such as
+        GitOps, DockerOps, ManualOps.
+      </li>
+      <li class="task-list-item"><input type="checkbox" checked disabled /><span class="task-list-indicator"></span>Knative can be used with common tools and
+        frameworks such as Django, Ruby on Rails, Spring, and many more.
+      </li>
+    </ul>
+    </div>
+  </section>
+  <section class="components-container">
+    <div class="md-grid md-typeset">
+      <div>
+        <h2 style="font-size: larger; font-weight: bolder">Knative Features</h2>
+      </div>
+			<div style="display: flex">
+				<div style="margin: 2em; margin-top: 0">
+            <div><h4><a style="color: white" href="{{ 'serving' | url }}">Serving ›</a></h4></div>
+						<p>Run serverless containers on Kubernetes with ease, Knative takes care of the details of networking, autoscaling (even to zero), and revision tracking. You just have to focus on your core logic.</p>
+				</div>
+				<div style="margin: 2em; margin-top: 0">
+          <div><h4><a style="color: white" href="{{ 'eventing' | url }}">Eventing ›</a></h4></div>
+						<p>Universal subscription, delivery, and management of events. Build
+							modern apps by attaching compute to a data stream with declarative event
+						connectivity and developer-friendly object model. </p>
+				</div>
+			</div>
+    </div>
+  </section>
+  <section class="calltoaction-container" style="padding: 2em">
+    <div class="md-grid md-typeset">
+      <h2>What's Next?</h2>
+      <div style="display: flex; justify-content: center; width: 100%">
+        <div class="col">
+          <h4>Talk to us on Slack</h4>
+          <a href="https://slack.knative.dev" title="Slack Link" class="md-button">Talk</a>
+          <p>Interested in learning more, speaking to other contributors, or finding answers?</p>
+        </div>
+        <div class="col">
+          <h4>Contributions Welcome</h4>
+          <a href="./contributing/" title="Contributing Link" class="md-button">Contribute</a>
+          <p>Want to join the fun on Github? New users are always welcome!</p>
+        </div>
+        <div class="col">
+          <h4>Follow us on Twitter</h4>
+          <a href="https://twitter.com/KnativeProject" title="Twitter Link" class="md-button">Follow</a>
+          <p>For features announcements, interesting Knative news, and other great things.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% endblock %}
+
+<!-- Content -->
+{% block content %}{% endblock %}
+
+<!-- Application footer -->
+{% block footer %}{% endblock %}
+
