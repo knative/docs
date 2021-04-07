@@ -377,6 +377,6 @@ After installing Knative Serving:
 
 - [Installing Knative Eventing using YAML files](./install-eventing-with-yaml.md)
 
-- If you want to add optional enhancements to your installation, see [Installing optional extensions](./install-extensions.md).
+- To add optional enhancements to your installation, see [Installing optional extensions](./install-extensions.md).
 
 - To easily interact with Knative Services, [download the `kn` CLI](/docs/client/install-kn.md)
