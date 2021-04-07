@@ -93,7 +93,7 @@ knowlage of `Human` or `Dog`.
 
 ## Knative Duck Types
 
-Knative defines Several duck type contracts that are in use across the project:
+Knative defines several duck type contracts that are in use across the project:
 
 - [Addressable](#addressable)
 - [Binding](#binding)
