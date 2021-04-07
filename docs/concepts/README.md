@@ -6,8 +6,8 @@ reasoning about a resource's control plane shape and behaviors based on a common
 definition of that contact. If a resource has the same fields in the same schema
 locations as the contract specifies, and the control/data plane behaviors as the
 common definition specifies, Knative can use that resource as if it is the generic duck
-type with little specific knowledge about the resource type. Some resources may
-choose to opt-in or be opt'ed-in to multiple duck types.
+type, without specific knowledge about the resource type. Some resources may
+choose to opt-in to multiple duck types.
 
 <!-- TODO: point to Discovery ClusterDuckType documentation. -->
 
