@@ -15,8 +15,8 @@ The most basic usage of duck typing in Knative is our usage of object refs in
 resource specs to "point" to another resource. The contract of the object
 holding the ref will prescribe the expected duck type of the "pointee".
 
-For example, take this example Knative resource `pointer` that is pointing to a
-`Dog` named `pointee`:
+In the following example, a Knative `Example` resource named `pointer` references a
+`Dog` resource named `pointee` in its spec:
 
 ```yaml
 apiVersion: sample.knative.dev/v1
