@@ -28,7 +28,7 @@ Before installation, you must meet the following prerequisites:
 - You have installed the [`kubectl` CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
 - Your Kubernetes cluster must have access to the internet, since Kubernetes needs to be able to fetch images. (To pull from a private registry, see [Deploying images from a private container registry](https://knative.dev/docs/serving/deploying/private-registry/))
 
-## Install Knative Serving and Eventing
+## Next Steps: Install Knative Serving and Eventing
 
 You can install the Serving component, Eventing component, or both on your cluster. If you're planning on installing both, **we recommend starting with Knative Serving.**
 
