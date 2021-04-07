@@ -46,9 +46,9 @@ All Knative Eventing ConfigMaps are created in the same namespace as the Knative
 Knative Eventing has multiple ConfigMaps that are named with the prefix `config-`.
 The `spec.config` in the KnativeEventing CR has one `<name>` entry for each ConfigMap, named `config-<name>`, with a value which will be used for the ConfigMap `data`.
 
-### Setting the default channel for the broker
+### Setting a default channel
 
-If you are using a channel-based broker, you can change the default channel type for the broker from InMemoryChannel to KafkaChannel, by updating the `config-br-default-channel` ConfigMap. You can do this by modifying the KnativeEventing CR:
+If you are using different channel implementations, like the KafkaChannel, or you want a specific configuration of the InMemoryChannel to be default you can change the default behavior by updating the `default-ch-webhook` ConfigMap. You can do this by modifying the KnativeEventing CR:
 
 ```yaml
 apiVersion: operator.knative.dev/v1alpha1
@@ -78,6 +78,27 @@ spec:
 ```
 
 **NOTE:** The `clusterDefault` setting determines the global, cluster-wide default channel type. You can configure channel defaults for individual namespaces by using the `namespaceDefaults` setting.
+
+### Setting the default channel for the broker
+
+If you are using a channel-based broker, you can change the default channel type for the broker from InMemoryChannel to KafkaChannel, by updating the `config-br-default-channel` ConfigMap. You can do this by modifying the KnativeEventing CR:
+
+```yaml
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeEventing
+metadata:
+  name: knative-eventing
+  namespace: knative-eventing
+spec:
+  config:
+    config-br-default-channel:
+      channelTemplateSpec: |
+        apiVersion: messaging.knative.dev/v1beta1
+        kind: KafkaChannel
+        spec:
+          numPartitions: 6
+          replicationFactor: 1
+```
 
 ## Private repository and private secrets
 
