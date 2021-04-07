@@ -23,13 +23,11 @@ Uninstall any Serving extensions you have installed by following the relevant st
 
 Knative also supports the use of the Kubernetes Horizontal Pod Autoscaler (HPA) for driving
 autoscaling decisions.
-The following command will install the components needed to support HPA-class autoscaling:
+The following command will uninstall the components needed to support HPA-class autoscaling:
 
 ```bash
 kubectl delete -f {{< artifact repo="serving" file="serving-hpa.yaml" >}}
 ```
-
-<!-- TODO(https://github.com/knative/docs/issues/2152): Link to a more in-depth guide on HPA-class autoscaling -->
 
 {{< /tab >}}
 
@@ -68,7 +66,7 @@ kubectl delete -f {{< artifact repo="serving" file="serving-nscert.yaml" >}}
 
 {{% tab name="DomainMapping CRD" %}}
 
-To uninstall the `DomainMapping` CRD run:
+To uninstall the `DomainMapping` components run:
 
 ```bash
 kubectl delete -f {{< artifact repo="serving" file="serving-domainmapping.yaml" >}}
@@ -77,14 +75,6 @@ kubectl delete -f {{< artifact repo="serving" file="serving-domainmapping-crds.y
 
 {{< /tab >}} {{< /tabs >}}
 
-
-### Uninstalling Magic DNS
-
-If you installed Magic DNS (xip.io), uninstall it by running:
-
-```
-kubectl delete -f https://storage.googleapis.com/knative-nightly/serving/latest/serving-default-domain.yaml
-```
 
 ### Uninstalling a networking layer
 
@@ -96,7 +86,7 @@ Follow the relevant procedure to uninstall the networking layer you installed:
    {{< tabs name="serving_networking" default="Kourier" >}}
    {{% tab name="Ambassador" %}}
 
-The following commands install Ambassador and enable its Knative integration.
+The following commands uninstall Ambassador and enable its Knative integration.
 
 1. Uninstall Ambassador by running:
 
@@ -117,7 +107,7 @@ The following commands install Ambassador and enable its Knative integration.
 
 {{% tab name="Contour" %}}
 
-The following commands install Contour and enable its Knative integration.
+The following commands uninstall Contour and enable its Knative integration.
 
 1. Uninstall the Knative Contour controller by running:
 
@@ -125,7 +115,7 @@ The following commands install Contour and enable its Knative integration.
     kubectl delete -f {{< artifact repo="net-contour" file="net-contour.yaml" >}}
     ```
 
-1. Install a properly configured Contour:
+1. Uninstall Contour:
 
     ```bash
     kubectl delete -f {{< artifact repo="net-contour" file="contour.yaml" >}}
@@ -138,14 +128,14 @@ The following commands install Contour and enable its Knative integration.
 Uninstall Gloo and the Knative integration by running:
 
    ```bash
-   glooctl install knative --install-knative=false
+   glooctl uninstall knative
    ```
 
 {{< /tab >}}
 
 {{% tab name="Istio" %}}
 
-The following commands install Istio and enable its Knative integration.
+The following commands uninstall Istio and enable its Knative integration.
 
 1. Uninstall the Knative Istio controller by running:
 
@@ -333,9 +323,9 @@ kubectl delete -f {{< artifact repo="eventing" file="mt-channel-broker.yaml" >}}
 {{< /tabs >}}
 
 
-### Uninstalling an optional default Channel (messaging) layer
+### Uninstalling optional channel (messaging) layers
 
-If you installed a default Channel (messaging) layer, uninstall it:
+Uninstall each channel layer you have installed:
 
 <!-- This indentation is important for things to render properly. -->
 
@@ -379,7 +369,7 @@ kubectl delete -f {{< artifact repo="eventing" file="in-memory-channel.yaml" >}}
 1. Uninstall the NATS Streaming channel by running:
 
     ```bash
-    kubectl apply -f {{< artifact org="knative-sandbox" repo="eventing-natss" file="300-natss-channel.yaml" >}}
+    kubectl delete -f {{< artifact org="knative-sandbox" repo="eventing-natss" file="300-natss-channel.yaml" >}}
     ```
 
 1. Uninstall NATS Streaming for Kubernetes. For more information, see the [eventing-natss](https://github.com/knative-sandbox/eventing-natss/tree/main/config) repository in GitHub.
