@@ -1,12 +1,22 @@
 # Duck Typing
 
-Knative uses duck typing to keep various components loosely coupled, but [what is duck typing](https://en.wikipedia.org/wiki/Duck_typing)? It is reasoning about a resource's control plane shape and behaviors based on a common definition of that contact. If a resource has the same fields in the same schema locations as the contract specifies, and the control/data plane behaviors as the contract specifies, Knative can use that resource as if it is the generic duck type with little specific knowledge about the resource type. Some resources may choose to opt-in or be opt'ed-in to multiple duck types.
+Knative uses duck typing to keep various components loosely coupled, but
+[what is duck typing](https://en.wikipedia.org/wiki/Duck_typing)? It is
+reasoning about a resource's control plane shape and behaviors based on a common
+definition of that contact. If a resource has the same fields in the same schema
+locations as the contract specifies, and the control/data plane behaviors as the
+contract specifies, Knative can use that resource as if it is the generic duck
+type with little specific knowledge about the resource type. Some resources may
+choose to opt-in or be opt'ed-in to multiple duck types.
 
 <!-- TODO: point to Discovery ClusterDuckType documentation. -->
 
-The most basic usage of duck typing in Knative is our usage of object refs in resource specs to "point" to another resource. The contract of the object holding the ref will prescribe the expected duck type of the "pointee". 
+The most basic usage of duck typing in Knative is our usage of object refs in
+resource specs to "point" to another resource. The contract of the object
+holding the ref will prescribe the expected duck type of the "pointee".
 
-For example, take this example Knative resource `pointer` that is pointing to a `Dog` named `pointee`:
+For example, take this example Knative resource `pointer` that is pointing to a
+`Dog` named `pointee`:
 
 ```yaml
 apiVersion: sample.knative.dev/v1
@@ -18,14 +28,15 @@ spec:
     apiVersion: extension.example.com/v1
     kind: Dog
     name: pointee
-````
+```
 
-Assume the expected shape of a "Sizable" duck type is that in the status, we expect the following schema shape:
+Assume the expected shape of a "Sizable" duck type is that in the status, we
+expect the following schema shape:
 
 ```yaml
 <standard metadata>
 <spec ignored for Sizable>
-status: 
+status:
   height: <in inches>
   weight: <in pounds>
 ```
@@ -40,7 +51,7 @@ metadata:
 spec:
   owner: Smith Family
   etc: more here
-status: 
+status:
   lastFeeding: 2 hours ago
   hungry: true
   age: 2
@@ -48,7 +59,12 @@ status:
   weight: 70
 ```
 
-When the `Example` resource needs to do it's work, it only acts on the information included in the "Sizable" duck type shape, and the `Dog` implementation is free to have the information that makes the most sense for that resource. The power of duck typing is apparent when we extend the system with a new type, say, `Human`. Assuming the new resource adheres to the contract set by the "Sizable".
+When the `Example` resource needs to do it's work, it only acts on the
+information included in the "Sizable" duck type shape, and the `Dog`
+implementation is free to have the information that makes the most sense for
+that resource. The power of duck typing is apparent when we extend the system
+with a new type, say, `Human`. Assuming the new resource adheres to the contract
+set by the "Sizable".
 
 ```yaml
 apiVersion: sample.knative.dev/v1
@@ -67,15 +83,16 @@ metadata:
   name: pointee
 spec:
   etc: even more here
-status: 
+status:
   college: true
   hungry: true
   age: 22
   height: 62
   weight: 120
-````
+```
 
-The `Example` resource was able to do the logic it is set to do without explicit knowlage of `Human` or `Dog`.
+The `Example` resource was able to do the logic it is set to do without explicit
+knowlage of `Human` or `Dog`.
 
 ## Knative Duck Types
 
