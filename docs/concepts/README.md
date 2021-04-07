@@ -5,7 +5,7 @@ Knative uses duck typing to keep various components loosely coupled, but
 reasoning about a resource's control plane shape and behaviors based on a common
 definition of that contact. If a resource has the same fields in the same schema
 locations as the contract specifies, and the control/data plane behaviors as the
-contract specifies, Knative can use that resource as if it is the generic duck
+common definition specifies, Knative can use that resource as if it is the generic duck
 type with little specific knowledge about the resource type. Some resources may
 choose to opt-in or be opt'ed-in to multiple duck types.
 
