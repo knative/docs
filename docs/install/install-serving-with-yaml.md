@@ -24,12 +24,12 @@ This topic describes how to install Knative Serving by applying YAML files using
 
 To install the serving component:
 
-- [x] Install the required custom resources:
+1. Install the required custom resources:
    ```bash
    kubectl apply -f {{ artifact(repo="serving",file="serving-crds.yaml")}}
    ```
 
-- [x] Install the core components of Knative Serving:
+1. Install the core components of Knative Serving:
    ```bash
    kubectl apply -f {{ artifact(repo="serving",file="serving-core.yaml")}}
    ```
@@ -49,12 +49,12 @@ Follow the procedure for the networking layer of your choice:
 
     The following commands install Kourier and enable its Knative integration.
 
-    - [x] Install the Knative Kourier controller:
+    1. Install the Knative Kourier controller:
     ```bash
     kubectl apply -f {{ artifact(repo="net-kourier",file="kourier.yaml")}}
     ```
 
-    - [x] To configure Knative Serving to use Kourier by default:
+    1. To configure Knative Serving to use Kourier by default:
       ```bash
       kubectl patch configmap/config-network \
         --namespace knative-serving \
@@ -62,26 +62,26 @@ Follow the procedure for the networking layer of your choice:
         --patch '{"data":{"ingress.class":"kourier.ingress.networking.knative.dev"}}'
       ```
 
-    - [x] Fetch the External IP or CNAME:
-
-        !!! tip inline end
-            Save this for configuring DNS in the next section.
+    1. Fetch the External IP or CNAME:
 
         ```bash
         kubectl --namespace kourier-system get service kourier
         ```
 
+        !!! tip
+            Save this for configuring DNS in the next section.
+
 === "Ambassador"
 
     The following commands install Ambassador and enable its Knative integration.
 
-    - [x] Create a namespace to install Ambassador in:
+    1. Create a namespace to install Ambassador in:
 
         ```bash
         kubectl create namespace ambassador
         ```
 
-    - [x] Install Ambassador:
+    1. Install Ambassador:
 
         ```bash
         kubectl apply --namespace ambassador \
@@ -90,19 +90,19 @@ Follow the procedure for the networking layer of your choice:
           -f https://getambassador.io/yaml/ambassador/ambassador-service.yaml
         ```
 
-    - [x] Give Ambassador the required permissions:
+    1. Give Ambassador the required permissions:
 
         ```bash
         kubectl patch clusterrolebinding ambassador -p '{"subjects":[{"kind": "ServiceAccount", "name": "ambassador", "namespace": "ambassador"}]}'
         ```
 
-    - [x] Enable Knative support in Ambassador:
+    1. Enable Knative support in Ambassador:
 
         ```bash
         kubectl set env --namespace ambassador  deployments/ambassador AMBASSADOR_KNATIVE_SUPPORT=true
         ```
 
-    - [x] To configure Knative Serving to use Ambassador by default:
+    1. To configure Knative Serving to use Ambassador by default:
 
         ```bash
         kubectl patch configmap/config-network \
@@ -111,7 +111,7 @@ Follow the procedure for the networking layer of your choice:
           --patch '{"data":{"ingress.class":"ambassador.ingress.networking.knative.dev"}}'
         ```
 
-    - [x] Fetch the External IP or CNAME:
+    1. Fetch the External IP or CNAME:
 
         !!! tip inline end
             Save this for configuring DNS in the next section.
@@ -124,19 +124,19 @@ Follow the procedure for the networking layer of your choice:
 
     The following commands install Contour and enable its Knative integration.
 
-    - [x] Install a properly configured Contour:
+    1. Install a properly configured Contour:
 
-      ```bash
-      kubectl apply -f {{ artifact(repo="net-contour",file="contour.yaml")}}
-      ```
-    <!-- TODO(https://github.com/knative-sandbox/net-contour/issues/11): We need a guide on how to use/modify a pre-existing install. -->
+        ```bash
+        kubectl apply -f {{ artifact(repo="net-contour",file="contour.yaml")}}
+        ```
+        <!-- TODO(https://github.com/knative-sandbox/net-contour/issues/11): We need a guide on how to use/modify a pre-existing install. -->
 
-    - [x] Install the Knative Contour controller:
+    1. Install the Knative Contour controller:
       ```bash
       kubectl apply -f {{ artifact(repo="net-contour",file="net-contour.yaml")}}
       ```
 
-    - [x] To configure Knative Serving to use Contour by default:
+    1. To configure Knative Serving to use Contour by default:
       ```bash
       kubectl patch configmap/config-network \
         --namespace knative-serving \
@@ -144,7 +144,7 @@ Follow the procedure for the networking layer of your choice:
         --patch '{"data":{"ingress.class":"contour.ingress.networking.knative.dev"}}'
       ```
 
-    - [x] Fetch the External IP or CNAME:
+    1. Fetch the External IP or CNAME:
 
         !!! tip inline end
             Save this for configuring DNS in the next section.
@@ -161,7 +161,7 @@ Follow the procedure for the networking layer of your choice:
 
     The following commands install Gloo and enable its Knative integration.
 
-    - [x] Make sure `glooctl` is installed (version 1.3.x and higher recommended):
+    1. Make sure `glooctl` is installed (version 1.3.x and higher recommended):
 
         ```bash
         glooctl version
@@ -176,12 +176,12 @@ Follow the procedure for the networking layer of your choice:
         Or following the
         [Gloo CLI install instructions](https://docs.solo.io/gloo/latest/installation/knative/#install-command-line-tool-cli).
 
-    - [x] Install Gloo and the Knative integration:
+    1. Install Gloo and the Knative integration:
       ```bash
       glooctl install knative --install-knative=false
       ```
 
-    - [x] Fetch the External IP or CNAME:
+    1. Fetch the External IP or CNAME:
 
         !!! tip inline end
             Save this for configuring DNS in the next section.
@@ -195,19 +195,19 @@ Follow the procedure for the networking layer of your choice:
 
     The following commands install Istio and enable its Knative integration.
 
-    - [x] Install a properly configured Istio ([Advanced installation](./installing-istio.md))
+    1. Install a properly configured Istio ([Advanced installation](./installing-istio.md))
 
         ```bash
         kubectl apply -f {{ artifact(repo="net-istio",file="istio.yaml")}}
         ```
 
-    - [x] Install the Knative Istio controller:
+    1. Install the Knative Istio controller:
 
         ```bash
         kubectl apply -f {{ artifact(repo="net-istio",file="net-istio.yaml")}}
         ```
 
-    - [x] Fetch the External IP or CNAME:
+    1. Fetch the External IP or CNAME:
 
         !!! tip inline end
             Save this for configuring DNS in the next section.
@@ -220,13 +220,13 @@ Follow the procedure for the networking layer of your choice:
 
     The following commands install Kong and enable its Knative integration.
 
-    - [x] Install Kong Ingress Controller:
+    1. Install Kong Ingress Controller:
 
         ```bash
         kubectl apply -f https://raw.githubusercontent.com/Kong/kubernetes-ingress-controller/0.9.x/deploy/single/all-in-one-dbless.yaml
         ```
 
-    - [x] To configure Knative Serving to use Kong by default:
+    1. To configure Knative Serving to use Kong by default:
 
         ```bash
         kubectl patch configmap/config-network \
@@ -235,7 +235,7 @@ Follow the procedure for the networking layer of your choice:
           --patch '{"data":{"ingress.class":"kong"}}'
         ```
 
-    - [x] Fetch the External IP or CNAME:
+    1. Fetch the External IP or CNAME:
 
         !!! tip inline end
             Save this for configuring DNS in the next section.
@@ -284,21 +284,21 @@ Follow the procedure for the DNS of your choice:
     or CNAME from setting up networking, and configure it with your DNS provider as
     follows:
 
-    - [x] If the networking layer produced an External IP address, then configure a
+    1. If the networking layer produced an External IP address, then configure a
       wildcard `A` record for the domain:
       ```bash
       # Here knative.example.com is the domain suffix for your cluster
       *.knative.example.com == A 35.233.41.212
       ```
 
-    - [x] If the networking layer produced a CNAME, then configure a CNAME record for
+    1. If the networking layer produced a CNAME, then configure a CNAME record for
       the domain:
         ```bash
         # Here knative.example.com is the domain suffix for your cluster
         *.knative.example.com == CNAME a317a278525d111e89f272a164fd35fb-1510370581.eu-central-1.elb.amazonaws.com
         ```
 
-    - [x] Once your DNS provider has been configured, direct Knative to use that domain:
+    1. Once your DNS provider has been configured, direct Knative to use that domain:
         ```bash
         # Replace knative.example.com with your domain suffix
         kubectl patch configmap/config-domain \
@@ -319,7 +319,7 @@ Follow the procedure for the DNS of your choice:
 
     To access your application using `curl` using this method:
 
-    - [x] After starting your application, get the URL of your application:
+    1. After starting your application, get the URL of your application:
         ```bash
         kubectl get ksvc
         ```
@@ -331,7 +331,7 @@ Follow the procedure for the DNS of your choice:
             helloworld-go   http://helloworld-go.default.example.com   helloworld-go-vqjlf   helloworld-go-vqjlf   True
             ```
 
-    - [x] Instruct `curl` to connect to the External IP or CNAME defined by the
+    1. Instruct `curl` to connect to the External IP or CNAME defined by the
       networking layer in section 3 above, and use the `-H "Host:"` command-line
       option to specify the Knative application's host name. For example, if the
       networking layer defines your External IP and port to be
