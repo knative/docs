@@ -69,10 +69,10 @@ kn source list
 [CloudStorageSource](https://github.com/google/knative-gcp/blob/main/docs/examples/cloudstoragesource/README.md) | v1 | Google | Registers for events of the specified types on the specified [Google Cloud Storage](https://cloud.google.com/storage/) bucket and optional object prefix. Brings those events into Knative. See the [CloudStorageSource](../samples/cloud-storage-source) example.
 [DockerHubSource](https://github.com/tom24d/eventing-dockerhub) | v1alpha1 | None | Retrieves events from [Docker Hub Webhooks](https://docs.docker.com/docker-hub/webhooks/) and transforms them into CloudEvents for consumption in Knative.
 [FTP / SFTP](https://github.com/vaikas-google/ftp) | Proof of concept | None | Watches for files being uploaded into a FTP/SFTP and generates events for those.
-[Heartbeat](https://github.com/Harwayne/auto-container-source/tree/main/heartbeat-source) | Proof of Concept | None | Uses an in-memory timer to produce events as the specified interval. Uses AutoContainerSource for underlying infrastructure.
+[Heartbeat](https://github.com/Harwayne/auto-container-source/tree/master/heartbeat-source) | Proof of Concept | None | Uses an in-memory timer to produce events as the specified interval. Uses AutoContainerSource for underlying infrastructure.
 [Konnek](https://konnek.github.io/docs/#/) | Active Development | None | Retrieves events from cloud platforms (like AWS and GCP) and transforms them into CloudEvents for consumption in Knative.
-[K8s](https://github.com/Harwayne/auto-container-source/tree/main/k8s-event-source) | Proof of Concept | None | Brings Kubernetes cluster events into Knative. Uses AutoContainerSource for underlying infrastructure.
-[RedisSource](https://github.com/lionelvillard/eventing-redis/tree/main/source) | v1alpha1 | None | Brings Redis Stream into Knative.
+[K8s](https://github.com/Harwayne/auto-container-source/tree/master/k8s-event-source) | Proof of Concept | None | Brings Kubernetes cluster events into Knative. Uses AutoContainerSource for underlying infrastructure.
+[RedisSource](https://github.com/knative-sandbox/eventing-redis/tree/main/source) | v1alpha1 | None | Brings Redis Stream into Knative.
 [Slack](https://github.com/triggermesh/knative-sources) | v1alpha1 | TriggerMesh | Subscribes to events from Slack.
 [VMware](https://github.com/vmware-tanzu/sources-for-knative/blob/main/README.md) | Active Development | None | Brings [vSphere](https://www.vmware.com/products/vsphere.html) events into Knative.
 [Zendesk](https://github.com/triggermesh/knative-sources) | v1alpha1 | TriggerMesh | Subscribes to events from Zendesk.
