@@ -11,7 +11,10 @@ nav:
     - Home: index.md
     - Installing Knative:
         - Introduction: install/index.md
-        - Installing using YAML: install/any-kubernetes-cluster.md
+        - Installing using YAML:
+          - Prerequisites: install/prerequisites.md
+          - Install Serving with YAML: install/install-serving-with-yaml.md
+          - Install Eventing with YAML: install/install-eventing-with-yaml.md
         - Installing with the Operator: install/knative-with-operators.md
         - Using a Knative-based Offering: install/knative-offerings.md
     - Serving Component:
