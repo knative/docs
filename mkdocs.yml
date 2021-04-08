@@ -151,6 +151,7 @@ nav:
 theme:
   name: material
   logo: images/knative-sm.png
+  favicon: images/knative-sm.png
   custom_dir: overrides
   features:
     - navigation.tabs
