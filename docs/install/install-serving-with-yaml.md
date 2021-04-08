@@ -67,12 +67,13 @@ Follow the procedure for the networking layer of your choice:
 
     1. Fetch the External IP or CNAME:
 
-        !!! tip inline end
-            Save this to use in the `Configure DNS` section.
-
         ```bash
         kubectl --namespace kourier-system get service kourier
         ```
+
+        !!! tip
+            Save this to use in the `Configure DNS` section.
+
 
 === "Ambassador"
 
@@ -116,12 +117,13 @@ Follow the procedure for the networking layer of your choice:
 
     1. Fetch the External IP or CNAME:
 
-        !!! tip inline end
-            Save this to use in the `Configure DNS` section.
-
         ```bash
         kubectl --namespace ambassador get service ambassador
         ```
+
+        !!! tip
+            Save this to use in the `Configure DNS` section.
+
 
 === "Contour"
 
@@ -149,12 +151,13 @@ Follow the procedure for the networking layer of your choice:
 
     1. Fetch the External IP or CNAME:
 
-        !!! tip inline end
-            Save this to use in the `Configure DNS` section.
-
         ```bash
         kubectl --namespace contour-external get service envoy
         ```
+
+        !!! tip
+            Save this to use in the `Configure DNS` section.
+
 
 === "Gloo"
 
@@ -186,12 +189,12 @@ Follow the procedure for the networking layer of your choice:
 
     1. Fetch the External IP or CNAME:
 
-        !!! tip inline end
-            Save this to use in the `Configure DNS` section.
-
         ```bash
         glooctl proxy url --name knative-external-proxy
         ```
+
+        !!! tip
+            Save this to use in the `Configure DNS` section.
 
 
 === "Istio"
@@ -212,12 +215,13 @@ Follow the procedure for the networking layer of your choice:
 
     1. Fetch the External IP or CNAME:
 
-        !!! tip inline end
-            Save this to use in the `Configure DNS` section.
-
         ```bash
         kubectl --namespace istio-system get service istio-ingressgateway
         ```
+
+        !!! tip
+            Save this to use in the `Configure DNS` section.
+
 
 === "Kong"
 
@@ -240,12 +244,13 @@ Follow the procedure for the networking layer of your choice:
 
     1. Fetch the External IP or CNAME:
 
-        !!! tip inline end
-            Save this to use in the `Configure DNS` section.
-
         ```bash
         kubectl --namespace kong get service kong-proxy
         ```
+
+        !!! tip
+            Save this to use in the `Configure DNS` section.
+
 
 
 ## Verify the installation
