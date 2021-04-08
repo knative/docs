@@ -93,6 +93,6 @@ in the product, or for a fix or update existing content.
       team members might be able to help handle the `git cherry-pick` in order
       to push the fix into the affected release branch(es).
 
-See a list of the available documentaion versions in the
+See a list of the available documentation versions in the
 [branches page](https://github.com/knative/docs/branches) of the `knative/docs`
 repo.

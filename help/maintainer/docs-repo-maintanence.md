@@ -29,7 +29,7 @@ Both branches are identical but all PRs get merged into `main`. They can drift
 apart since staging only builds the PR owners fork and branch. It's best to keep
 in sync to avoid dealing with merge conflicts.
 
-Two branches are used only to align with and use Netlify's built-in continous
+Two branches are used only to align with and use Netlify's built-in continuous
 site deployment configuration:
 
 `main` - triggered when any PR gets pushed into knative/docs

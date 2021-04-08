@@ -135,7 +135,7 @@ Update the build configuration to include the new version and remove the oldest 
   version: [/website/netlify.toml](https://github.com/knative/website/blob/main/netlify.toml)
 ![netlify](https://user-images.githubusercontent.com/35748459/87465963-54809500-c5ca-11ea-8372-3fbcfc965e20.png)
 
-## Do a local sanity check
+## Test the content
 * Update your local versions of the build config files to run a local build.
 * Run a local build using from the /website directory: scripts/localbuild.sh. Follow the extensive instructions at the top of the script file.
 * Check to make sure everything looks okay.

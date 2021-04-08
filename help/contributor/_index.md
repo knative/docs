@@ -1,5 +1,5 @@
 ---
-title: "Knative documenation contributor guides"
+title: "Knative documentation contributor guides"
 linkTitle: "Contributor guides"
 weight: "10"
 type: "docs"
