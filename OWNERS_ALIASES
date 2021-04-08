@@ -24,7 +24,7 @@ aliases:
   - RichardJJG
   - snneji
 
-  productivity-writers
+  productivity-writers:
   - chizhg
   - n3wscott
 
@@ -49,7 +49,7 @@ aliases:
   - vaikas
   - zhongduo
 
-  eventing-wg-leads
+  eventing-wg-leads:
   - grantr
   - lionelvillard
   - vaikas
@@ -58,7 +58,7 @@ aliases:
   - matzew
   - slinkydeveloper
 
-  source-wg-leads
+  source-wg-leads:
   - lionelvillard
   - n3wscott
   - vaikas
@@ -101,4 +101,3 @@ aliases:
   ux-wg-leads:
   - csantanapr
   - omerbensaadon
-
