@@ -6,19 +6,18 @@ type: "docs"
 showlandingtoc: "false"
 ---
 
-# Install Knative Serving using YAML files
-
-This topic describes how to install Knative Serving by applying YAML files using the `kubectl` CLI.
-
 {% macro artifact(repo, file='', org='knative') -%}
     http://github.com/{{org}}/{{repo}}/releases/download/{{knative_version}}/{{file}}
 {%- endmacro %}
 
-!!! warning "Prerequisites"
+# Install Knative Serving using YAML files
 
-    Before installation, you must meet the prerequisites.
-    See [Knative Prerequisites](./prerequisites.md).
+This topic describes how to install Knative Serving by applying YAML files using the `kubectl` CLI.
 
+## Prerequisites
+
+Before installation, you must meet the prerequisites.
+See [Knative Prerequisites](./prerequisites.md).
 
 ## Install the Serving component
 
@@ -33,8 +32,10 @@ To install the serving component:
    ```bash
    kubectl apply -f {{ artifact(repo="serving",file="serving-core.yaml")}}
    ```
-For information about the YAML files in the Knative Serving and Eventing releases, see
-[Installation files](./installation-files.md).
+
+   !!! info
+      For information about the YAML files in the Knative Serving and Eventing releases, see
+      [Installation files](./installation-files.md).
 
 
 ## Install a networking layer
