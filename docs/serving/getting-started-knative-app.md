@@ -21,7 +21,7 @@ You need:
 ## Sample application
 
 This guide demonstrates the basic workflow for deploying the
-[Hello World sample app (Go)](../serving/samples/hello-world/helloworld-go) from the
+[Hello World sample app (Go)](../serving/samples/hello-world/helloworld-go/index.md) from the
 [Google Container Registry](https://cloud.google.com/container-registry/docs/pushing-and-pulling).
 You can use these steps as a guide for deploying your container images from other
 registries like [Docker Hub](https://docs.docker.com/docker-hub/repos/).

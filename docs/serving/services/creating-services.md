@@ -12,8 +12,10 @@ For more information about Kubernetes Services, see the [Kubernetes documentatio
 ## Before you begin
 
 To create a Knative Service, you will need:
-* A Kubernetes cluster with [Knative installed](https://knative.dev/docs/install/index.html).
-* [Custom domains](https://knative.dev/docs/serving/using-a-custom-domain/) set up for Knative Services.
+
+ * A Kubernetes cluster with [Knative installed](../../install/index.md).
+
+ * [Custom domains](../using-a-custom-domain.md) set up for Knative Services.
 
 ## Creating a Knative Service
 
