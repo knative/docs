@@ -15,6 +15,7 @@ nav:
           - Prerequisites: install/prerequisites.md
           - Install Serving with YAML: install/install-serving-with-yaml.md
           - Install Eventing with YAML: install/install-eventing-with-yaml.md
+          - Install optional extensions: install/install-extensions.md
           - Installation Files: install/installation-files.md
         - Installing with the Operator: install/knative-with-operators.md
         - Using a Knative-based Offering: install/knative-offerings.md
