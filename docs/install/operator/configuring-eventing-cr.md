@@ -48,7 +48,9 @@ The `spec.config` in the KnativeEventing CR has one `<name>` entry for each Conf
 
 ### Setting a default channel
 
-If you are using different channel implementations, like the KafkaChannel, or you want a specific configuration of the InMemoryChannel to be default you can change the default behavior by updating the `default-ch-webhook` ConfigMap. You can do this by modifying the KnativeEventing CR:
+If you are using different channel implementations, like the KafkaChannel, or you want a specific configuration of the InMemoryChannel to be the default configuration, you can change the default behavior by updating the `default-ch-webhook` ConfigMap. 
+
+You can do this by modifying the KnativeEventing CR:
 
 ```yaml
 apiVersion: operator.knative.dev/v1alpha1
