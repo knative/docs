@@ -5,22 +5,6 @@ type: "docs"
 showlandingtoc: "false"
 ---
 
-Knative Eventing provides a `config-br-defaults` ConfigMap, which lives in the
-`knative-eventing` namespace, and provides default configuration settings to
-enable the creation of Brokers and Channels by using defaults.
-For more information, see the [`config-br-defaults`](./config-br-defaults.md) ConfigMap documentation.
-
-Create a Broker using the default settings:
-
-```shell
-kubectl create -f - <<EOF
-apiVersion: eventing.knative.dev/v1
-kind: Broker
-metadata:
-  name: default
-  namespace: default
-EOF
-```
 
 The following example is more complex, and demonstrates the use of `deadLetterSink` configuration to send failed events to Knative Service called `dlq-service`:
 

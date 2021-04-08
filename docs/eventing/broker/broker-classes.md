@@ -21,7 +21,7 @@ metadata:
     eventing.knative.dev/broker.class: MTChannelBasedBroker
 ```
 
-1. Configure the `spec.config` with the details of the ConfigMap that defines
+2. Configure the `spec.config` with the details of the ConfigMap that defines
 the backing channel for the broker class:
 
 ```yaml
@@ -33,6 +33,8 @@ spec:
     name: config-br-default-channel
     namespace: knative-eventing
 ```
+
+### Example
 
 A full example combined into a fully specified resource could look like this:
 

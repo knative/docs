@@ -9,15 +9,15 @@ aliases:
 
 The following broker types are available for use with Knative Eventing.
 
-## Knative Eventing broker
+## Multi-tenant channel-based broker
 
-Knative Eventing provides a multi-tenant, channel-based broker implementation that uses channels for event routing.
+Knative Eventing provides a multi-tenant (MT) channel-based broker implementation that uses channels for event routing.
 
-For more information, see the [Knative Eventing broker](./mt-broker) documentation.
+For more information, see the [MT channel-based broker](./mt-broker) documentation.
 
 ## Alternative broker implementations
 
-In the Knative Eventing ecosystem, alternate Broker implementations are welcome as long as they
+In the Knative Eventing ecosystem, alternate broker implementations are welcome as long as they
 respect the [broker conformance spec](https://github.com/knative/eventing/blob/main/docs/spec/broker.md).
 
 The following is a list of brokers provided by the community or vendors:

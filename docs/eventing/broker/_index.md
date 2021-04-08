@@ -23,6 +23,5 @@ control rules.
 
 ## Next steps
 
-- Learn about [supported broker types](broker-types)
-- Create a [broker](create-broker)
-- Create a [trigger](create-triggers)
+- Learn about [supported broker types](/broker-types).
+- Configure [default broker settings](/configuring-broker-defaults).
