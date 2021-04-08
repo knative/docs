@@ -279,4 +279,4 @@ To learn more about the VMware sources and bindings, try
 
 ## Next steps
 
-- To easily interact with Knative Services and Eventing Components, [download the `kn` CLI](/docs/client/install-kn.md)
+- To easily interact with Knative Services and Eventing components, [install the `kn` CLI](/docs/client/install-kn.md)
