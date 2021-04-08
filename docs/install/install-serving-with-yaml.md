@@ -64,12 +64,12 @@ Follow the procedure for the networking layer of your choice:
 
     1. Fetch the External IP or CNAME:
 
+        !!! tip inline end
+            Save this to use in the `Configure DNS` section.
+
         ```bash
         kubectl --namespace kourier-system get service kourier
         ```
-
-        !!! tip
-            Save this for configuring DNS in the next section.
 
 === "Ambassador"
 
@@ -114,7 +114,7 @@ Follow the procedure for the networking layer of your choice:
     1. Fetch the External IP or CNAME:
 
         !!! tip inline end
-            Save this for configuring DNS in the next section.
+            Save this to use in the `Configure DNS` section.
 
         ```bash
         kubectl --namespace ambassador get service ambassador
@@ -147,7 +147,7 @@ Follow the procedure for the networking layer of your choice:
     1. Fetch the External IP or CNAME:
 
         !!! tip inline end
-            Save this for configuring DNS in the next section.
+            Save this to use in the `Configure DNS` section.
 
         ```bash
         kubectl --namespace contour-external get service envoy
@@ -184,7 +184,7 @@ Follow the procedure for the networking layer of your choice:
     1. Fetch the External IP or CNAME:
 
         !!! tip inline end
-            Save this for configuring DNS in the next section.
+            Save this to use in the `Configure DNS` section.
 
         ```bash
         glooctl proxy url --name knative-external-proxy
@@ -210,7 +210,7 @@ Follow the procedure for the networking layer of your choice:
     1. Fetch the External IP or CNAME:
 
         !!! tip inline end
-            Save this for configuring DNS in the next section.
+            Save this to use in the `Configure DNS` section.
 
         ```bash
         kubectl --namespace istio-system get service istio-ingressgateway
@@ -238,7 +238,7 @@ Follow the procedure for the networking layer of your choice:
     1. Fetch the External IP or CNAME:
 
         !!! tip inline end
-            Save this for configuring DNS in the next section.
+            Save this to use in the `Configure DNS` section.
 
         ```bash
         kubectl --namespace kong get service kong-proxy
