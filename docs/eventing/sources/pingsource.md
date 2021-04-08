@@ -113,18 +113,18 @@ Sometimes you may want to send binary data, which cannot be directly serialized 
 Please note that `data` and `dataBase64` cannot co-exist.
 
 ```shell
-cat <<EOF | kubectl create -f -
+kubectl create -n pingsource-example -f - <<EOF
 apiVersion: sources.knative.dev/v1beta2
 kind: PingSource
 metadata:
   name: test-ping-source-binary
 spec:
-  schedule: "*/2 * * * *"
+  schedule: "*/1 * * * *"
   contentType: "text/plain"
   dataBase64: "ZGF0YQ=="
   sink:
     ref:
-      apiVersion: serving.knative.dev/v1
+      apiVersion: v1
       kind: Service
       name: event-display
 EOF
@@ -147,9 +147,9 @@ Validation: valid
 Context Attributes,
   specversion: 1.0
   type: dev.knative.sources.ping
-  source: /apis/v1/namespaces/default/pingsources/test-ping-source
-  id: d8e761eb-30c7-49a3-a421-cd5895239f2d
-  time: 2019-12-04T14:24:00.000702251Z
+  source: /apis/v1/namespaces/pingsource-example/pingsources/test-ping-source
+  id: 49f04fe2-7708-453d-ae0a-5fbaca9586a8
+  time: 2021-03-25T19:41:00.444508332Z
   datacontenttype: application/json
 Data,
   {
@@ -165,12 +165,12 @@ Validation: valid
 Context Attributes,
   specversion: 1.0
   type: dev.knative.sources.ping
-  source: /apis/v1/namespaces/default/pingsources/test-ping-source-binary
-  id: a195be33-ff65-49af-9045-0e0711d05e94
-  time: 2020-11-17T19:48:00.48334181Z
+  source: /apis/v1/namespaces/pingsource-example/pingsources/test-ping-source-binary
+  id: ddd7bad2-9b6a-42a7-8f9b-b64494a6ce43
+  time: 2021-03-25T19:38:00.455013472Z
   datacontenttype: text/plain
 Data,
-  ZGF0YQ==
+  data
 ```
 
 ### Cleanup

@@ -11,7 +11,7 @@ aliases:
   - vagababov
   - vaikas
 
-  docs-approvers:
+  docs-writers:
   - carieshmarie
   - richieescarez
   - abrennan89
@@ -24,41 +24,43 @@ aliases:
   - RichardJJG
   - snneji
 
-  blog-approvers:
-  - macruzbar
-
-  productivity-approvers:
-  - chaodaiG
+  productivity-writers
   - chizhg
+  - n3wscott
 
   productivity-reviewers:
-  - chaodaiG
   - coryrc
-  - chizhg
+  - efiturri
+  - evankanderson
+  - peterfeifanchen
   - steuhs
   - yt3liu
 
-  eventing-eng-approvers:
+  eventing-writers:
+  - akashrv
+  - antoineco
+  - devguyio
+  - grantr
+  - lberk
+  - lionelvillard
+  - matzew
+  - n3wscott
+  - slinkydeveloper
+  - vaikas
+  - zhongduo
+
+  eventing-wg-leads
   - grantr
   - lionelvillard
   - vaikas
 
-  eventing-eng-reviewers:
-  - evankanderson
-  - grantr
-  - lionelvillard
+  channel-wg-leads:
   - matzew
-  - n3wscott
-  - nachocano
-  - vaikas
+  - slinkydeveloper
 
-  eventing-channels-eng-approvers:
-  - matzew
-
-  eventing-sources-eng-approvers:
+  source-wg-leads
   - lionelvillard
   - n3wscott
-  - nachocano
   - vaikas
 
   install-eng-reviewers:
@@ -74,3 +76,29 @@ aliases:
   - tcnghia
   - vagababov
   - vaikas
+
+  serving-writers:
+  - ZhiminXiang
+  - dprotaso
+  - markusthoemmes
+  - nak3
+  - tcnghia
+  - vagababov
+
+  steering-committee:
+  - bsnchan
+  - mbehrendt
+  - pmorie
+  - thisisnotapril
+  - vaikas
+
+  technical-oversight-committee:
+  - evankanderson
+  - grantr
+  - markusthoemmes
+  - rhuss
+
+  ux-wg-leads:
+  - csantanapr
+  - omerbensaadon
+

@@ -1,6 +1,6 @@
 ---
 title: "Knative Operator installation"
-weight: 02
+weight: 05
 type: "docs"
 showlandingtoc: "false"
 ---
