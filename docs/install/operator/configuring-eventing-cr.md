@@ -83,7 +83,9 @@ spec:
 
 ### Setting the default channel for the broker
 
-If you are using a channel-based broker, you can change the default channel type for the broker from InMemoryChannel to KafkaChannel, by updating the `config-br-default-channel` ConfigMap. You can do this by modifying the KnativeEventing CR:
+If you are using a channel-based broker, you can change the default channel type for the broker from InMemoryChannel to KafkaChannel, by updating the `config-br-default-channel` ConfigMap. 
+
+You can do this by modifying the KnativeEventing CR:
 
 ```yaml
 apiVersion: operator.knative.dev/v1alpha1
