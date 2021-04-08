@@ -22,38 +22,19 @@ nav:
     - Serving Component:
         - Overview: serving/README.md
         - Getting Started: serving/getting-started-knative-app.md
-        - Knative Services: 
+        - Developer Topics:
           - Creating Knative Services: serving/services/creating-services.md
-          - Configuring the Knative Deployment: serving/services/deployment.md
-        - Knative Kubernetes Components: serving/knative-kubernetes-services.md
-        - Using a Private Registry: serving/deploying/private-registry.md
-        - Accessing Request Traces: serving/accessing-traces.md
-        - Configuing Cluster-Local Services: serving/cluster-local-route.md
-        - Creating and Using Sub-Routes: serving/using-subroutes.md
-        - Gradually Rolling out Revisions: serving/rolling-out-latest-revision.md
-        - Debugging Issues with your Application: serving/debugging-application-issues.md
-        - Enabling tag to digest resolution: serving/tag-resolution.md 
-        - Configuring high-availability components: serving/config-ha.md
-        - Feature Flags: serving/feature-flags.md
-        - Configuring HTTPS Connections: serving/using-a-tls-cert.md
-        - Setting up Cert-Manager:
-          - Installing cert-manager for TLS Certificates: serving/installing-cert-manager.md
-          - Configuring HTTPS with cert-manager and Google Cloud DNS: serving//using-cert-manager-on-gcp.md
-          - Enabling automatic TLS certificate provisioning: serving/using-auto-tls.md
-        - Exclude namespaces from the Knative webhook: serving/webhook-customizations.md
-        - GKE-Specific Customization:
-          - Assigning Static IPs in GKE: serving/gke-assigning-static-ip-address.md
-          - Using ExternalDNS on Google Cloud Platform to automate DNS setup: serving/using-external-dns-on-gcp.md
-        - Custom Domains:
-          - Setting up a Custom Domain: serving/using-a-custom-domain.md
-          - Setting up a Custom Domain per Service: serving/using-a-custom-domain-per-service.md
-          - Creating Domain Mappings: serving/creating-domain-mappings.md
-        - Using Knative Load Balancing: 
-          - Overview: serving/load-balancing/index.md
-          - Target Burst Capacity: serving/load-balancing/target-burst-capacity.md
-        - Istio-Specific Configuration:
-          - Setting up custom ingress gateway: serving/setting-up-custom-ingress-gateway.md
-          - Enabling requests to Knative services when additional authorization policies are enabled: serving/istio-authorization.md
+          - Creating and Using Sub-Routes: serving/using-subroutes.md
+          - Using a Private Registry: serving/deploying/private-registry.md
+          - Debugging Issues with your Application: serving/debugging-application-issues.md
+          - Gradually Rolling out Revisions: serving/rolling-out-latest-revision.md
+          - Custom Domains:
+            - Setting up a Custom Domain: serving/using-a-custom-domain.md
+            - Setting up a Custom Domain per Service: serving/using-a-custom-domain-per-service.md
+            - Creating Domain Mappings: serving/creating-domain-mappings.md
+          - Using Knative Load Balancing:
+            - Overview: serving/load-balancing/index.md
+            - Target Burst Capacity: serving/load-balancing/target-burst-capacity.md
         - Autoscaling: 
           - Overview: serving/autoscaling/README.md
           - Concepts: serving/autoscaling/autoscaling-concepts.md
@@ -65,6 +46,26 @@ nav:
           - Configuring RPS Target: serving/autoscaling/rps-target.md
           - KPA-Specific Configuration: serving/autoscaling/kpa-specific.md
           - Autoscaling Sample App: serving/autoscaling/autoscale-go/README.md
+        - Administrator Topics:
+          - Configuring the Knative Deployment: serving/services/deployment.md
+          - Accessing Request Traces: serving/accessing-traces.md
+          - Knative Kubernetes Components: serving/knative-kubernetes-services.md
+          - Enabling tag to digest resolution: serving/tag-resolution.md 
+          - Configuing Cluster-Local Services: serving/cluster-local-route.md
+          - Configuring high-availability components: serving/config-ha.md
+          - Feature Flags: serving/feature-flags.md
+          - Exclude namespaces from the Knative webhook: serving/webhook-customizations.md
+          - Configuring HTTPS Connections: serving/using-a-tls-cert.md
+          - Setting up Cert-Manager:
+            - Installing cert-manager for TLS Certificates: serving/installing-cert-manager.md
+            - Configuring HTTPS with cert-manager and Google Cloud DNS: serving//using-cert-manager-on-gcp.md
+            - Enabling automatic TLS certificate provisioning: serving/using-auto-tls.md
+        - GKE-Specific Customization:
+          - Assigning Static IPs in GKE: serving/gke-assigning-static-ip-address.md
+          - Using ExternalDNS on Google Cloud Platform to automate DNS setup: serving/using-external-dns-on-gcp.md
+        - Istio-Specific Configuration:
+          - Setting up custom ingress gateway: serving/setting-up-custom-ingress-gateway.md
+          - Enabling requests to Knative services when additional authorization policies are enabled: serving/istio-authorization.md
         - Samples:
           - Overview: serving/samples/README.md
           - Hello World:
