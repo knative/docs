@@ -24,18 +24,20 @@ See [Knative Prerequisites](./prerequisites.md).
 To install the serving component:
 
 1. Install the required custom resources:
-   ```bash
-   kubectl apply -f {{ artifact(repo="serving",file="serving-crds.yaml")}}
-   ```
+
+    ```bash
+    kubectl apply -f {{ artifact(repo="serving",file="serving-crds.yaml")}}
+    ```
 
 1. Install the core components of Knative Serving:
-   ```bash
-   kubectl apply -f {{ artifact(repo="serving",file="serving-core.yaml")}}
-   ```
 
-   !!! info
-      For information about the YAML files in the Knative Serving and Eventing releases, see
-      [Installation files](./installation-files.md).
+    ```bash
+    kubectl apply -f {{ artifact(repo="serving",file="serving-core.yaml")}}
+    ```
+
+    !!! info
+        For information about the YAML files in the Knative Serving and Eventing releases, see
+        [Installation files](./installation-files.md).
 
 
 ## Install a networking layer
