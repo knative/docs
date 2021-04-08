@@ -13,4 +13,6 @@ The API source files are located at:
 
 ### Generating API docs
 
-[See the API maintainer instructions](../../../authoring/building-api-output.md).
+See the
+[API build instructions](https://www.knative.dev/help/maintainer/building-api-output)
+in the Knative documentation maintainer section.
