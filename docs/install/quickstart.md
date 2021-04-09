@@ -1,4 +1,4 @@
-The fastest way to get started with knative locally is to use the [Konk](https://konk.dev) (Knative-on-kind) script.
+The fastest way to get started with knative locally is to use the <a href= "https://konk.dev" target="blank_">Konk (Knative-on-kind) script.</a>
 
 This script installs a local knative installation on your local machine's `Docker` daemon using [Kind](https://kind.sigs.k8s.io/). You will need to have Docker installed.
 
