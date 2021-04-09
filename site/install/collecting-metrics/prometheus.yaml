@@ -1,0 +1,144 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: prometheus
+  namespace: metrics
+---
+# Note: For general cluster use, you may want to use a ClusteRole and
+# ClusterRoleBinding to grant Prometheus the ability to list all services and
+# pods in the cluster. For this use case, we only need to grant access to the
+# same namespace, and can use a Role and RoleBinding.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: watch-services-and-pods
+  namespace: metrics
+rules:
+- apiGroups:
+  - ""
+  resources:
+    - services
+    - endpoints
+    - pods
+  verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: prom-watch-services-and-pods
+  namespace: metrics
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: watch-services-and-pods
+subjects:
+  - kind: ServiceAccount
+    name: prometheus
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prom-config
+  namespace: metrics
+data:
+  prometheus.yaml: |
+    global:
+      scrape_interval: 30s
+      scrape_timeout: 10s
+      evaluation_interval: 30s
+
+    rule_files:
+    - /etc/prometheus/config/prometheus-rules-*.yaml
+
+    scrape_configs:
+    - job_name: otel-collector
+      honor_labels: true
+      honor_timestamps: true
+      metrics_path: /metrics
+      # Note that we *don't want* to use relabel to collect labels here,
+      # because these are the labels of the opentelemetry collector.
+      relabel_configs:
+      - action: keep
+        source_labels: [__meta_kubernetes_service_label_app]
+        regex: otel-export
+      - action: keep
+        source_labels: [__meta_kubernetes_endpoint_port_name]
+        regex: prom-export
+      kubernetes_sd_configs:
+      - role: endpoints
+        namespaces:
+          names:
+          - metrics
+  prometheus-rules-example.yaml: |
+    groups:
+    - name: example
+      rules:
+      - record: pod:http_requests:irate5m
+        expr: label_replace(rate(knative_dev_internal_serving_revision_app_request_latencies_count[5m]), "service", "$1", "pod_name", "(.*)-deployment-.+-.+")
+      - record: service:http_requests:irate5m
+        expr: sum(pod:http_requests:irate5m) by (service)
+      - record: pod:http_latency:buckets5m
+        expr: sum(label_replace(rate(knative_dev_internal_serving_revision_app_request_latencies_bucket[5m]), "service", "$1", "pod_name", "(.*)-deployment-.+-.+")) by (pod_name,service,le)
+      - record: service:http_latency:buckets5m
+        expr: sum by (service,le)(pod:http_latency:buckets5m) / ignoring(le) group_left service:http_requests:irate5m
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus
+  namespace: metrics
+spec:
+  selector:
+    matchLabels:
+      app: prometheus
+  replicas: 1  # Each replica will hold all data in memory.
+  template:
+    metadata:
+      labels:
+        app: prometheus
+    spec:
+      containers:
+      - name: prometheus
+        image: quay.io/prometheus/prometheus
+        args:
+        - --config.file=/etc/prometheus/config/prometheus.yaml
+        - --storage.tsdb.path=/prometheus
+        - --storage.tsdb.retention.time=24h
+        - --storage.tsdb.no-lockfile
+        - --web.console.templates=/etc/prometheus/consoles
+        - --web.console.libraries=/etc/prometheus/console_libraries
+        - --web.enable-admin-api
+        - --web.enable-lifecycle
+        - --web.route-prefix=/
+        resources:
+          # This is a small sizing; adjust as needed for your environment.
+          requests:
+            memory: 200Mi
+            cpu: 50m
+        ports:
+        - name: ui
+          containerPort: 9090
+        volumeMounts:
+        - name: config
+          mountPath: etc/prometheus/config
+        - name: prometheus-emptydir
+          mountPath: /prometheus
+      volumes:
+      - name: config
+        configMap:
+          name: prom-config
+      - name: prometheus-emptydir
+        emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus
+  namespace: metrics
+spec:
+  selector:
+    app: prometheus
+  ports:
+  - name: ui
+    port: 9090
+    targetPort: 9090
