@@ -98,11 +98,14 @@
           <h1>Welcome, Knative!</h1>
           <h2>Kubernetes-based platform to deploy and manage modern serverless workloads.</h2>
           <p style="display: block; margin-left: 1em">
-          <a href="{{ page.next_page.url | url }}" title="{{ page.next_page.title | e }}" class="md-button md-button--primary">
-            Quick start
+          <a href="https://github.com/csantanapr/knative-kind" target="_blank" class="md-button md-button--primary">
+            Quick Install
           </a>
           <a href="{{ 'install/' | url }}" class="md-button">
             Custom YAML-Based Install
+          </a>
+          <a href="https://katacoda.com/knative-tutorials/scenarios/2-serving-intro-yaml" class="md-button">
+            💻 &nbsp Try Knative in browser
           </a>
         </div>
       </div>
@@ -111,14 +114,24 @@
   <section class="usedby-container">
     <div class="md-grid md-typeset">
       <div style="display: flex; justify-content: center">
-      <h4>Trusted by:</h4>
+      <h2>Trusted by:</h2>
       </div>
       <div style="display: inline-flex; justify-content: center; flex-gap: 2em">
-        <p style="margin: 0.6em">Google</p>
-        <p style="margin: 0.6em">Red Hat</p>
-        <p style="margin: 0.6em">VMware</p>
-        <p style="margin: 0.6em">IBM</p>
-        <p style="margin: 0.6em">Triggermesh</p>
+        <div class="col">
+        <img src="images/Google.png" alt="" width="200" height="100" draggable="false">
+        </div>
+        <div class="col">
+        <img src="images/Tanzu.png" alt="" width="200" height="100" draggable="false">
+        </div>
+        <div class="col">
+        <img src="images/IBM.png" alt="" width="200" height="100" draggable="false">
+        </div>
+        <div class="col">
+        <img src="images/Triggermesh.png" alt="" width="200" height="100" draggable="false">
+        </div>
+        <div class="col">
+        <img src="images/Redhat.png" alt="" width="200" height="100" draggable="false">
+        </div>
       </div>
     </div>
   </section>
@@ -209,4 +222,3 @@
 
 <!-- Application footer -->
 {% block footer %}{% endblock %}
-

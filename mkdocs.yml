@@ -39,7 +39,7 @@ nav:
           - Configuring the Knative Deployment: serving/services/deployment.md
           - Accessing Request Traces: serving/accessing-traces.md
           - Knative Kubernetes Components: serving/knative-kubernetes-services.md
-          - Enabling tag to digest resolution: serving/tag-resolution.md 
+          - Enabling tag to digest resolution: serving/tag-resolution.md
           - Configuing Cluster-Local Services: serving/cluster-local-route.md
           - Configuring high-availability components: serving/config-ha.md
           - Feature Flags: serving/feature-flags.md
@@ -79,7 +79,7 @@ nav:
     - Eventing Component:
         - Overview: eventing/README.md
         - Getting Started: eventing/getting-started.md
-        - Event Sources: 
+        - Event Sources:
           - Overview: eventing/sources/index.md
           - APIServerSource: eventing/sources/apiserversource.md
           - ContainerSource: eventing/sources/containersource.md
@@ -111,7 +111,7 @@ nav:
         - Accessing CloudEvent Traces: eventing/accessing-traces.md
         - Samples:
           - Apache Camel Source: eventing/samples/apache-camel-source/README.md
-          - Kafka: 
+          - Kafka:
             - Overview: eventing/samples/kafka/README.md
             - Binding Example: eventing/samples/kafka/binding/README.md
             - Channel Example: eventing/samples/kafka/channel/README.md
@@ -145,7 +145,7 @@ nav:
     - Client:
         - Installing the Client: client/install-kn.md
         - Using the Client: client/index.md
-    - Reference: 
+    - Reference:
       - Serving: reference/api/serving.md
       - Eventing: reference/api/eventing/eventing.md
     - Community: todo
@@ -167,6 +167,10 @@ plugins:
   - macros
 
 markdown_extensions:
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - attr_list
   - pymdownx.superfences
   - pymdownx.tabbed
   - pymdownx.details
@@ -175,6 +179,7 @@ markdown_extensions:
   - admonition
   - toc:
       permalink: true
+
 
 extra:
   knative_version: v0.20.0
