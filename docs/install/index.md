@@ -21,6 +21,9 @@ aliases:
 showlandingtoc: "false"
 ---
 
+!!! tip
+    If you're looking for an easy way to install a local distribution of Knative for prototyping, check out our <a href="https://github.com/csantanapr/knative-kind" target="_blank">Quick Install w/ KonK</a>
+
 You can install the Serving component, Eventing component, or both on your cluster by using one of the following deployment options:
 
 - Using a [YAML-based installation](./prerequisites)

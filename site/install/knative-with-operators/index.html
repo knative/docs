@@ -1,0 +1,3310 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Knative Documentation">
+      
+      
+      
+      
+        <link rel="canonical" href="https://knative.dev/docs/install/knative-with-operators/">
+      
+      <link rel="icon" href="../../images/knative-sm.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.0">
+    
+    
+      
+        <title>Knative Operator installation - Knative</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.33e2939f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ef6f36e2.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#prerequisites" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Knative" class="md-header__button md-logo" aria-label="Knative" data-md-component="logo">
+      
+  <img src="../../images/knative-sm.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Knative
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Knative Operator installation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/knative/docs/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../.." class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link md-tabs__link--active">
+        Installing Knative
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../serving/" class="md-tabs__link">
+        Serving Component
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../eventing/" class="md-tabs__link">
+        Eventing Component
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../client/install-kn/" class="md-tabs__link">
+        Client
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../reference/api/serving/" class="md-tabs__link">
+        Reference
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../todo" class="md-tabs__link">
+      Community
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Knative" class="md-nav__button md-logo" aria-label="Knative" data-md-component="logo">
+      
+  <img src="../../images/knative-sm.png" alt="logo">
+
+    </a>
+    Knative
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/knative/docs/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      <label class="md-nav__link" for="__nav_2">
+        Installing Knative
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Installing Knative" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Installing Knative
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" >
+      
+      <label class="md-nav__link" for="__nav_2_2">
+        Installing using YAML
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Installing using YAML" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Installing using YAML
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../prerequisites/" class="md-nav__link">
+        Prerequisites
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install-serving-with-yaml/" class="md-nav__link">
+        Install Serving with YAML
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install-eventing-with-yaml/" class="md-nav__link">
+        Install Eventing with YAML
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install-extensions/" class="md-nav__link">
+        Install optional extensions
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation-files/" class="md-nav__link">
+        Installation Files
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Installing with the Operator
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Installing with the Operator
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-the-latest-release" class="md-nav__link">
+    Installing the latest release
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verify-your-installation" class="md-nav__link">
+    Verify your installation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#track-the-log" class="md-nav__link">
+    Track the log
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-the-knative-serving-component" class="md-nav__link">
+    Installing the Knative Serving component
+  </a>
+  
+    <nav class="md-nav" aria-label="Installing the Knative Serving component">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-and-apply-the-knative-serving-cr" class="md-nav__link">
+    Create and apply the Knative Serving CR:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify-the-knative-serving-deployment" class="md-nav__link">
+    Verify the Knative Serving deployment:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installing-with-different-networking-layers" class="md-nav__link">
+    Installing with Different Networking Layers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-dns" class="md-nav__link">
+    Configure DNS
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-the-knative-eventing-component" class="md-nav__link">
+    Installing the Knative Eventing component
+  </a>
+  
+    <nav class="md-nav" aria-label="Installing the Knative Eventing component">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#verify-the-knative-eventing-deployment" class="md-nav__link">
+    Verify the Knative Eventing deployment:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check-the-status-of-knative-eventing-custom-resource" class="md-nav__link">
+    Check the status of Knative Eventing Custom Resource:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uninstall-knative" class="md-nav__link">
+    Uninstall Knative
+  </a>
+  
+    <nav class="md-nav" aria-label="Uninstall Knative">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#removing-the-knative-serving-component" class="md-nav__link">
+    Removing the Knative Serving component
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removing-knative-eventing-component" class="md-nav__link">
+    Removing Knative Eventing component
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removing-the-knative-operator" class="md-nav__link">
+    Removing the Knative Operator:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-next" class="md-nav__link">
+    What's next
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../knative-offerings/" class="md-nav__link">
+        Using a Knative-based Offering
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        Serving Component
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Serving Component" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Serving Component
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/getting-started-knative-app/" class="md-nav__link">
+        Getting Started
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_3" type="checkbox" id="__nav_3_3" >
+      
+      <label class="md-nav__link" for="__nav_3_3">
+        Developer Topics
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Developer Topics" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          Developer Topics
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/services/creating-services/" class="md-nav__link">
+        Creating Knative Services
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/using-subroutes/" class="md-nav__link">
+        Creating and Using Sub-Routes
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/deploying/private-registry/" class="md-nav__link">
+        Using a Private Registry
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/debugging-application-issues/" class="md-nav__link">
+        Debugging Issues with your Application
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/rolling-out-latest-revision/" class="md-nav__link">
+        Gradually Rolling out Revisions
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_3_6" type="checkbox" id="__nav_3_3_6" >
+      
+      <label class="md-nav__link" for="__nav_3_3_6">
+        Custom Domains
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Custom Domains" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_3_6">
+          <span class="md-nav__icon md-icon"></span>
+          Custom Domains
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/using-a-custom-domain/" class="md-nav__link">
+        Setting up a Custom Domain
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/using-a-custom-domain-per-service/" class="md-nav__link">
+        Setting up a Custom Domain per Service
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/creating-domain-mappings/" class="md-nav__link">
+        Creating Domain Mappings
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_3_7" type="checkbox" id="__nav_3_3_7" >
+      
+      <label class="md-nav__link" for="__nav_3_3_7">
+        Using Knative Load Balancing
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Using Knative Load Balancing" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_3_7">
+          <span class="md-nav__icon md-icon"></span>
+          Using Knative Load Balancing
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/load-balancing/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/load-balancing/target-burst-capacity/" class="md-nav__link">
+        Target Burst Capacity
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_4" type="checkbox" id="__nav_3_4" >
+      
+      <label class="md-nav__link" for="__nav_3_4">
+        Administrator Topics
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Administrator Topics" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          Administrator Topics
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/services/deployment/" class="md-nav__link">
+        Configuring the Knative Deployment
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/accessing-traces/" class="md-nav__link">
+        Accessing Request Traces
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/knative-kubernetes-services/" class="md-nav__link">
+        Knative Kubernetes Components
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/tag-resolution/" class="md-nav__link">
+        Enabling tag to digest resolution
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/cluster-local-route/" class="md-nav__link">
+        Configuing Cluster-Local Services
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/config-ha/" class="md-nav__link">
+        Configuring high-availability components
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/feature-flags/" class="md-nav__link">
+        Feature Flags
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/webhook-customizations/" class="md-nav__link">
+        Exclude namespaces from the Knative webhook
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/using-a-tls-cert/" class="md-nav__link">
+        Configuring HTTPS Connections
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_4_10" type="checkbox" id="__nav_3_4_10" >
+      
+      <label class="md-nav__link" for="__nav_3_4_10">
+        Setting up Cert-Manager
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Setting up Cert-Manager" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_4_10">
+          <span class="md-nav__icon md-icon"></span>
+          Setting up Cert-Manager
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/installing-cert-manager/" class="md-nav__link">
+        Installing cert-manager for TLS Certificates
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/using-cert-manager-on-gcp/" class="md-nav__link">
+        Configuring HTTPS with cert-manager and Google Cloud DNS
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/using-auto-tls/" class="md-nav__link">
+        Enabling automatic TLS certificate provisioning
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_5" type="checkbox" id="__nav_3_5" >
+      
+      <label class="md-nav__link" for="__nav_3_5">
+        Autoscaling
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Autoscaling" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_5">
+          <span class="md-nav__icon md-icon"></span>
+          Autoscaling
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/autoscaling/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/autoscaling/autoscaling-concepts/" class="md-nav__link">
+        Concepts
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/autoscaling/autoscaling-metrics/" class="md-nav__link">
+        Metrics
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/autoscaling/autoscaling-targets/" class="md-nav__link">
+        Targets
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/autoscaling/scale-to-zero/" class="md-nav__link">
+        Configuring Scale-to-zero
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/autoscaling/concurrency/" class="md-nav__link">
+        Configuring Concurrency
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/autoscaling/scale-bounds/" class="md-nav__link">
+        Configuring Scale Bounds
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/autoscaling/rps-target/" class="md-nav__link">
+        Configuring RPS Target
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/autoscaling/kpa-specific/" class="md-nav__link">
+        KPA-Specific Configuration
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/autoscaling/autoscale-go/" class="md-nav__link">
+        Autoscaling Sample App
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_6" type="checkbox" id="__nav_3_6" >
+      
+      <label class="md-nav__link" for="__nav_3_6">
+        GKE-Specific Customization
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="GKE-Specific Customization" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_6">
+          <span class="md-nav__icon md-icon"></span>
+          GKE-Specific Customization
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/gke-assigning-static-ip-address/" class="md-nav__link">
+        Assigning Static IPs in GKE
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/using-external-dns-on-gcp/" class="md-nav__link">
+        Using ExternalDNS on Google Cloud Platform to automate DNS setup
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_7" type="checkbox" id="__nav_3_7" >
+      
+      <label class="md-nav__link" for="__nav_3_7">
+        Istio-Specific Configuration
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Istio-Specific Configuration" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_7">
+          <span class="md-nav__icon md-icon"></span>
+          Istio-Specific Configuration
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/setting-up-custom-ingress-gateway/" class="md-nav__link">
+        Setting up custom ingress gateway
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/istio-authorization/" class="md-nav__link">
+        Enabling requests to Knative services when additional authorization policies are enabled
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_8" type="checkbox" id="__nav_3_8" >
+      
+      <label class="md-nav__link" for="__nav_3_8">
+        Samples
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Samples" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_8">
+          <span class="md-nav__icon md-icon"></span>
+          Samples
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/samples/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_8_2" type="checkbox" id="__nav_3_8_2" >
+      
+      <label class="md-nav__link" for="__nav_3_8_2">
+        Hello World
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Hello World" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_8_2">
+          <span class="md-nav__icon md-icon"></span>
+          Hello World
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/samples/hello-world/helloworld-go/" class="md-nav__link">
+        Hello World Go
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/samples/rest-api-go/" class="md-nav__link">
+        Rest API
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_8_4" type="checkbox" id="__nav_3_8_4" >
+      
+      <label class="md-nav__link" for="__nav_3_8_4">
+        Cloud Events
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Cloud Events" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_8_4">
+          <span class="md-nav__icon md-icon"></span>
+          Cloud Events
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/samples/cloudevents/cloudevents-nodejs/" class="md-nav__link">
+        NodeJS
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/samples/cloudevents/cloudevents-vertx/" class="md-nav__link">
+        Java (Vert.x)
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/samples/cloudevents/cloudevents-rust/" class="md-nav__link">
+        Rust
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serving/samples/blue-green-deployment/" class="md-nav__link">
+        Blue Green Deployment
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      <label class="md-nav__link" for="__nav_4">
+        Eventing Component
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Eventing Component" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Eventing Component
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/getting-started/" class="md-nav__link">
+        Getting Started
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_3" type="checkbox" id="__nav_4_3" >
+      
+      <label class="md-nav__link" for="__nav_4_3">
+        Event Sources
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Event Sources" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          Event Sources
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/sources/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/sources/apiserversource/" class="md-nav__link">
+        APIServerSource
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/sources/containersource/" class="md-nav__link">
+        ContainerSource
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/sources/pingsource/" class="md-nav__link">
+        PingSource
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/sources/sinkbinding/" class="md-nav__link">
+        Sink Binding
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/event-registry/" class="md-nav__link">
+        Event Registry
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_5" type="checkbox" id="__nav_4_5" >
+      
+      <label class="md-nav__link" for="__nav_4_5">
+        Flows
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Flows" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_5">
+          <span class="md-nav__icon md-icon"></span>
+          Flows
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/flows/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/flows/sequence/" class="md-nav__link">
+        Sequence
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/flows/parallel/" class="md-nav__link">
+        Parallel
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_6" type="checkbox" id="__nav_4_6" >
+      
+      <label class="md-nav__link" for="__nav_4_6">
+        Channels
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Channels" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_6">
+          <span class="md-nav__icon md-icon"></span>
+          Channels
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/channels/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/channels/channel-types-defaults/" class="md-nav__link">
+        Channel Types and Defaults
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/channels/create-default-channel/" class="md-nav__link">
+        Creating Channels
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/channels/channels-crds/" class="md-nav__link">
+        Available Channels
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/sugar/README.md" class="md-nav__link">
+        Sugar
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/event-delivery/" class="md-nav__link">
+        Event Delivery
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_9" type="checkbox" id="__nav_4_9" >
+      
+      <label class="md-nav__link" for="__nav_4_9">
+        Broker
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Broker" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_9">
+          <span class="md-nav__icon md-icon"></span>
+          Broker
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/broker/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/broker/kafka-broker/" class="md-nav__link">
+        Kafka Broker
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/broker/config-br-defaults/" class="md-nav__link">
+        Default Broker ConfigMap
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/broker/kafka-configmap/" class="md-nav__link">
+        Kafka Channel ConfigMap
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/broker/alternate.md" class="md-nav__link">
+        Alternate Brokers
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_10" type="checkbox" id="__nav_4_10" >
+      
+      <label class="md-nav__link" for="__nav_4_10">
+        Sink
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Sink" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_10">
+          <span class="md-nav__icon md-icon"></span>
+          Sink
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/sink/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/sink/kafka-sink/" class="md-nav__link">
+        Apache Kafka Sink
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/triggers/" class="md-nav__link">
+        Triggers
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/debugging/" class="md-nav__link">
+        Debugging
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/accessing-traces/" class="md-nav__link">
+        Accessing CloudEvent Traces
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_14" type="checkbox" id="__nav_4_14" >
+      
+      <label class="md-nav__link" for="__nav_4_14">
+        Samples
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Samples" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_14">
+          <span class="md-nav__icon md-icon"></span>
+          Samples
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/samples/apache-camel-source/" class="md-nav__link">
+        Apache Camel Source
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_14_2" type="checkbox" id="__nav_4_14_2" >
+      
+      <label class="md-nav__link" for="__nav_4_14_2">
+        Kafka
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Kafka" data-md-level="3">
+        <label class="md-nav__title" for="__nav_4_14_2">
+          <span class="md-nav__icon md-icon"></span>
+          Kafka
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/samples/kafka/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/samples/kafka/binding/" class="md-nav__link">
+        Binding Example
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/samples/kafka/channel/" class="md-nav__link">
+        Channel Example
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/samples/kafka/source/" class="md-nav__link">
+        Source Example
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/samples/container-source/" class="md-nav__link">
+        Container Source
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/samples/writing-event-source/README.md" class="md-nav__link">
+        Writing an Event Source
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/samples/writing-event-source-easy-way/README.md" class="md-nav__link">
+        Writing an Event Source - Easy Way
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_14_6" type="checkbox" id="__nav_4_14_6" >
+      
+      <label class="md-nav__link" for="__nav_4_14_6">
+        Hello World
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Hello World" data-md-level="3">
+        <label class="md-nav__title" for="__nav_4_14_6">
+          <span class="md-nav__icon md-icon"></span>
+          Hello World
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/samples/helloworld/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/samples/helloworld/helloworld-go/" class="md-nav__link">
+        Go
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/samples/helloworld/helloworld-python/" class="md-nav__link">
+        Python
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_14_7" type="checkbox" id="__nav_4_14_7" >
+      
+      <label class="md-nav__link" for="__nav_4_14_7">
+        Sequences
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Sequences" data-md-level="3">
+        <label class="md-nav__title" for="__nav_4_14_7">
+          <span class="md-nav__icon md-icon"></span>
+          Sequences
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/samples/sequence/sequence-terminal/" class="md-nav__link">
+        Create Additional Events
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/samples/sequence/sequence-reply-to-event-display/" class="md-nav__link">
+        Displaying Sequence Output
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/samples/sequence/sequence-reply-to-sequence/" class="md-nav__link">
+        Using Sequences in Series
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/samples/sequence/sequence-with-broker-trigger/" class="md-nav__link">
+        Using Broker and Trigger
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_14_8" type="checkbox" id="__nav_4_14_8" >
+      
+      <label class="md-nav__link" for="__nav_4_14_8">
+        Parallel
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Parallel" data-md-level="3">
+        <label class="md-nav__title" for="__nav_4_14_8">
+          <span class="md-nav__icon md-icon"></span>
+          Parallel
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/samples/parallel/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/samples/parallel/multiple-branches/" class="md-nav__link">
+        Multiple Cases
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/samples/parallel/mutual-exclusivity/" class="md-nav__link">
+        Mutual Exclusivity
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/samples/ping-source/" class="md-nav__link">
+        Ping Source
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_14_10" type="checkbox" id="__nav_4_14_10" >
+      
+      <label class="md-nav__link" for="__nav_4_14_10">
+        GCP Sources
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="GCP Sources" data-md-level="3">
+        <label class="md-nav__title" for="__nav_4_14_10">
+          <span class="md-nav__icon md-icon"></span>
+          GCP Sources
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/samples/cloud-audit-logs-source/" class="md-nav__link">
+        CloudAuditLogsSource
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/samples/cloud-pubsub-source/" class="md-nav__link">
+        CloudPubSubSource
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/samples/cloud-scheduler-source/" class="md-nav__link">
+        CloudSchedulerSource
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/samples/cloud-storage-source/" class="md-nav__link">
+        CloudStorageSource
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/samples/github-source/" class="md-nav__link">
+        Github Source
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/samples/gitlab-source/" class="md-nav__link">
+        Gitlab Source
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/samples/iot-core/" class="md-nav__link">
+        IoT Core
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eventing/samples/kubernetes-event-source/" class="md-nav__link">
+        Kubernetes Event Source
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      <label class="md-nav__link" for="__nav_5">
+        Client
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Client" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Client
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../client/install-kn/" class="md-nav__link">
+        Installing the Client
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../client/" class="md-nav__link">
+        Using the Client
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      <label class="md-nav__link" for="__nav_6">
+        Reference
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Reference" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/api/serving/" class="md-nav__link">
+        Serving
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/api/eventing/eventing/" class="md-nav__link">
+        Eventing
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../todo" class="md-nav__link">
+        Community
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/knative/docs/edit/main/docs/install/knative-with-operators.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  <h1>Installing with the Operator</h1>
+                
+                <p>Knative provides a <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/operator/">Kubernetes Operator</a> to install, configure and manage Knative.
+You can install the Serving component, Eventing component, or both on your cluster.</p>
+<p><strong>NOTE:</strong> The Knative Operator is still in Alpha phase. It has not been tested in a production environment, and should be used
+for development or test purposes only.</p>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<ul>
+<li>You have a cluster that uses Kubernetes v1.18 or newer.</li>
+<li>You have installed the <code>kubectl</code> CLI.</li>
+<li>If you have only one node in your cluster, you will need at least 6 CPUs, 6 GB of memory, and 30 GB of disk storage.</li>
+<li>If you have multiple nodes in your cluster, for each node you will need at least 2 CPUs, 4 GB of memory, and 20 GB of disk storage.</li>
+<li>Your Kubernetes cluster must have access to the internet, since Kubernetes needs to be able to fetch images, such as <code>gcr.io/knative-releases/knative.dev/operator/cmd/operator:&lt;version&gt;</code>.</li>
+</ul>
+<!--TODO: Verify these requirements-->
+<ul>
+<li>You have installed <a href="../installing-istio/">Istio</a>.</li>
+</ul>
+<h2 id="installing-the-latest-release">Installing the latest release<a class="headerlink" href="#installing-the-latest-release" title="Permanent link">&para;</a></h2>
+<p>You can find information about the different released versions of the Knative Operator on the <a href="https://github.com/knative/operator/releases">Releases page</a>.</p>
+<p>Install the latest stable Operator release:</p>
+<div class="highlight"><pre><span></span><code>kubectl apply -f http://github.com/knative/operator/releases/download/{&#39;provider&#39;: &#39;mike&#39;}/operator.yaml
+</code></pre></div>
+<h2 id="verify-your-installation">Verify your installation<a class="headerlink" href="#verify-your-installation" title="Permanent link">&para;</a></h2>
+<p>Verify your installation:</p>
+<div class="highlight"><pre><span></span><code>kubectl get deployment knative-operator
+</code></pre></div>
+<p>If the operator is installed correctly, the deployment shows a <code>Ready</code> status:</p>
+<div class="highlight"><pre><span></span><code>NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+knative-operator   1/1     1            1           19h
+</code></pre></div>
+<h2 id="track-the-log">Track the log<a class="headerlink" href="#track-the-log" title="Permanent link">&para;</a></h2>
+<p>Track the log of the operator:</p>
+<div class="highlight"><pre><span></span><code>kubectl logs -f deploy/knative-operator
+</code></pre></div>
+<h2 id="installing-the-knative-serving-component">Installing the Knative Serving component<a class="headerlink" href="#installing-the-knative-serving-component" title="Permanent link">&para;</a></h2>
+<h3 id="create-and-apply-the-knative-serving-cr">Create and apply the Knative Serving CR:<a class="headerlink" href="#create-and-apply-the-knative-serving-cr" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Install Current Serving</p>
+<div class="tabbed-set" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Install Current Serving (default)</label><div class="tabbed-content">
+<p>You can install the latest available Knative Serving in the
+operator by applying a YAML file containing the following:</p>
+<div class="highlight"><pre><span></span><code>apiVersion: v1
+kind: Namespace
+metadata:
+name: knative-serving
+---
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+</code></pre></div>
+<p>If you do not specify a version by using spec_version, the operator defaults to the latest available version.</p>
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Install Future Knative Serving</label><div class="tabbed-content">
+<p>You do not need to upgrade the operator to a newer version to install
+new releases of Knative Serving. If Knative Serving launches a new version, e.g. <code>$spec_version</code>, you can install it by
+applying a YAML file containing the following:</p>
+<div class="highlight"><pre><span></span><code>apiVersion: v1
+kind: Namespace
+metadata:
+name: knative-serving
+---
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  version: $spec_version
+  manifests:
+    - URL: https://github.com/knative/serving/releases/download/v${VERSION}/serving-core.yaml
+    - URL: https://github.com/knative/serving/releases/download/v${VERSION}/serving-hpa.yaml
+    - URL: https://github.com/knative/serving/releases/download/v${VERSION}/serving-post-install-jobs.yaml
+    - URL: https://github.com/knative/net-istio/releases/download/v${VERSION}/net-istio.yaml
+</code></pre></div>
+<p>The field <code>$spec_version</code> is used to set the version of Knative Serving. Replace <code>$spec_version</code> with the correct version number.
+The tag <code>${VERSION}</code> is automatically replaced with the version number from <code>spec_version</code> by the operator.</p>
+<p>The field <code>spec.manifests</code> is used to specify one or multiple URL links of Knative Serving component. Do not forget to
+add the valid URL of the Knative network ingress plugin. Knative Serving component is still tightly-coupled with a network
+ingress plugin in the operator. As in the above example, you can use <code>net-istio</code>. The ordering of the URLs is critical.
+Put the manifest you want to apply first on the top.</p>
+</div>
+<input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">Install Customized Knative Serving</label><div class="tabbed-content">
+<p>The operator provides you the flexibility to install customized
+Knative Serving based your own requirements. As long as the manifests of customized Knative Serving are accessible to
+the operator, they can be installed.</p>
+<p>There are two modes available for you to install the customized manifests: overwrite mode and append mode. With the
+overwrite mode, you need to define all the manifests for Knative Serving to install, because the operator will no long
+install any available default manifests. With the append mode, you only need to define your customized manifests, and
+the customized manifests are installed, after default manifests are applied.</p>
+<ol>
+<li>You can use the overwrite mode to customize all the Knative Serving manifests. For example, the version of the customized
+Knative Serving is <code>$spec_version</code>, and it is available at <code>https://my-serving/serving.yaml</code>. You choose <code>net-istio</code>
+as the ingress plugin, which is available at <code>https://my-net-istio/net-istio.yaml</code>. You can create the content of Serving
+CR as below to install your Knative Serving and the istio ingress:
+<div class="highlight"><pre><span></span><code>apiVersion: v1
+kind: Namespace
+metadata:
+name: knative-serving
+---
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  version: $spec_version
+  manifests:
+    - URL: https://my-serving/serving.yaml
+    - URL: https://my-net-istio/net-istio.yaml
+</code></pre></div></li>
+</ol>
+<p>You can make the customized Knative Serving available in one or multiple links, as the <code>spec.manifests</code> supports a list
+of links. The ordering of the URLs is critical. Put the manifest you want to apply first on the top. We strongly recommend
+you to specify the version and the valid links to the customized Knative Serving, by leveraging both <code>spec_version</code>
+and <code>spec.manifests</code>. Do not skip either field.</p>
+<ol>
+<li>You can use the append mode to add your customized manifests into the default manifests. For example, you only customize
+a few resources, and make them available at <code>https://my-serving/serving-custom.yaml</code>. You still need to install the default
+Knative Serving. In this case, you can create the content of Serving CR as below:
+<div class="highlight"><pre><span></span><code>apiVersion: v1
+kind: Namespace
+metadata:
+name: knative-serving
+---
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  version: $spec_version
+  additionalManifests:
+    - URL: https://my-serving/serving-custom.yaml
+</code></pre></div></li>
+</ol>
+<p>Knative operator will install the default manifests of Knative Serving at the version <code>$spec_version</code>, and then install
+your customized manifests based on them.</p>
+</div>
+</div>
+</div>
+<h3 id="verify-the-knative-serving-deployment">Verify the Knative Serving deployment:<a class="headerlink" href="#verify-the-knative-serving-deployment" title="Permanent link">&para;</a></h3>
+<pre><code>```
+kubectl get deployment -n knative-serving
+```
+
+If Knative Serving has been successfully deployed, all deployments of the Knative Serving will show `READY` status. Here
+is a sample output:
+
+```
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+activator          1/1     1            1           18s
+autoscaler         1/1     1            1           18s
+autoscaler-hpa     1/1     1            1           14s
+controller         1/1     1            1           18s
+istio-webhook      1/1     1            1           12s
+networking-istio   1/1     1            1           12s
+webhook            1/1     1            1           17s
+```
+
+3. Check the status of Knative Serving Custom Resource:
+
+```
+kubectl get KnativeServing knative-serving -n knative-serving
+```
+
+If Knative Serving is successfully installed, you should see:
+
+```
+NAME              VERSION             READY   REASON
+knative-serving   &lt;version number&gt;    True
+```
+</code></pre>
+<h3 id="installing-with-different-networking-layers">Installing with Different Networking Layers<a class="headerlink" href="#installing-with-different-networking-layers" title="Permanent link">&para;</a></h3>
+<details><summary>Installing the Knative Serving component with different network layers</summary><p>Knative Operator can configure Knative Serving component with different network layer options. Istio is the default network
+layer, if the ingress is not specified in the Knative Serving CR. Click on each tab below to see how you can configure
+Knative Serving with different ingresses:</p>
+<div class="tabbed-set" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">Ambassador</label><div class="tabbed-content">
+<p>The following commands install Ambassador and enable its Knative integration.</p>
+<ol>
+<li>
+<p>Create a namespace to install Ambassador in:
+  <div class="highlight"><pre><span></span><code>kubectl create namespace ambassador
+</code></pre></div></p>
+</li>
+<li>
+<p>Install Ambassador:
+  <div class="highlight"><pre><span></span><code>kubectl apply --namespace ambassador <span class="se">\</span>
+  --filename https://getambassador.io/yaml/ambassador/ambassador-crds.yaml <span class="se">\</span>
+  --filename https://getambassador.io/yaml/ambassador/ambassador-rbac.yaml <span class="se">\</span>
+  --filename https://getambassador.io/yaml/ambassador/ambassador-service.yaml
+</code></pre></div></p>
+</li>
+<li>
+<p>Give Ambassador the required permissions:
+  <div class="highlight"><pre><span></span><code>kubectl patch clusterrolebinding ambassador -p <span class="s1">&#39;{&quot;subjects&quot;:[{&quot;kind&quot;: &quot;ServiceAccount&quot;, &quot;name&quot;: &quot;ambassador&quot;, &quot;namespace&quot;: &quot;ambassador&quot;}]}&#39;</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>Enable Knative support in Ambassador:
+  <div class="highlight"><pre><span></span><code>kubectl <span class="nb">set</span> env --namespace ambassador  deployments/ambassador <span class="nv">AMBASSADOR_KNATIVE_SUPPORT</span><span class="o">=</span><span class="nb">true</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>To configure Knative Serving to use Ambassador, apply the content of the Serving CR as below:
+  <div class="highlight"><pre><span></span><code>cat <span class="s">&lt;&lt;-EOF | kubectl apply -f -</span>
+<span class="s">apiVersion: operator.knative.dev/v1alpha1</span>
+<span class="s">kind: KnativeServing</span>
+<span class="s">metadata:</span>
+<span class="s">  name: knative-serving</span>
+<span class="s">  namespace: knative-serving</span>
+<span class="s">spec:</span>
+<span class="s">  config:</span>
+<span class="s">    network:</span>
+<span class="s">      ingress.class: &quot;ambassador.ingress.networking.knative.dev&quot;</span>
+<span class="s">EOF</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>Fetch the External IP or CNAME:
+  <div class="highlight"><pre><span></span><code>kubectl --namespace ambassador get service ambassador
+</code></pre></div></p>
+</li>
+</ol>
+<p>Save this for configuring DNS below.</p>
+</div>
+<input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">Contour</label><div class="tabbed-content">
+<p>The following commands install Contour and enable its Knative integration.</p>
+<ol>
+<li>
+<p>Install a properly configured Contour:
+  <div class="highlight"><pre><span></span><code>kubectl apply --filename http://github.com/knative/net-contour/releases/download/<span class="o">{</span><span class="s1">&#39;provider&#39;</span>: <span class="s1">&#39;mike&#39;</span><span class="o">}</span>/contour.yaml
+</code></pre></div></p>
+</li>
+<li>
+<p>To configure Knative Serving to use Contour, apply the content of the Serving CR as below:
+  <div class="highlight"><pre><span></span><code>cat <span class="s">&lt;&lt;-EOF | kubectl apply -f -</span>
+<span class="s">apiVersion: operator.knative.dev/v1alpha1</span>
+<span class="s">kind: KnativeServing</span>
+<span class="s">metadata:</span>
+<span class="s">  name: knative-serving</span>
+<span class="s">  namespace: knative-serving</span>
+<span class="s">spec:</span>
+<span class="s">  ingress:</span>
+<span class="s">    contour:</span>
+<span class="s">      enabled: true</span>
+<span class="s">  config:</span>
+<span class="s">    network:</span>
+<span class="s">      ingress.class: &quot;contour.ingress.networking.knative.dev&quot;</span>
+<span class="s">EOF</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>Fetch the External IP or CNAME:
+  <div class="highlight"><pre><span></span><code>kubectl --namespace contour-external get service envoy
+</code></pre></div></p>
+</li>
+</ol>
+<p>Save this for configuring DNS below.</p>
+</div>
+<input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><label for="__tabbed_2_3">Gloo</label><div class="tabbed-content">
+<p><em>For a detailed guide on Gloo integration, see
+<a href="https://docs.solo.io/gloo/latest/installation/knative/">Installing Gloo for Knative</a>
+in the Gloo documentation.</em></p>
+<p>The following commands install Gloo and enable its Knative integration.</p>
+<ol>
+<li>Make sure <code>glooctl</code> is installed (version 1.3.x and higher recommended):
+  <div class="highlight"><pre><span></span><code>glooctl version
+</code></pre></div></li>
+</ol>
+<p>If it is not installed, you can install the latest version using:
+  <div class="highlight"><pre><span></span><code>curl -sL https://run.solo.io/gloo/install <span class="p">|</span> sh
+<span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$HOME</span>/.gloo/bin:<span class="nv">$PATH</span>
+</code></pre></div></p>
+<p>Or following the
+  <a href="https://docs.solo.io/gloo/latest/installation/knative/#install-command-line-tool-cli">Gloo CLI install instructions</a>.</p>
+<ol>
+<li>
+<p>Install Gloo and the Knative integration:
+  <div class="highlight"><pre><span></span><code>glooctl install knative --install-knative<span class="o">=</span><span class="nb">false</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>To configure Knative Serving to use Gloo, apply the content of the Serving CR as below:
+  <div class="highlight"><pre><span></span><code>cat <span class="s">&lt;&lt;-EOF | kubectl apply -f -</span>
+<span class="s">apiVersion: operator.knative.dev/v1alpha1</span>
+<span class="s">kind: KnativeServing</span>
+<span class="s">metadata:</span>
+<span class="s">  name: knative-serving</span>
+<span class="s">  namespace: knative-serving</span>
+<span class="s">EOF</span>
+</code></pre></div></p>
+</li>
+</ol>
+<p>There is no need to configure the ingress class to use the gloo.</p>
+<ol>
+<li>Fetch the External IP or CNAME:
+  <div class="highlight"><pre><span></span><code>glooctl proxy url --name knative-external-proxy
+</code></pre></div></li>
+</ol>
+<p>Save this for configuring DNS below.</p>
+</div>
+<input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><label for="__tabbed_2_4">Kong</label><div class="tabbed-content">
+<p>The following commands install Kong and enable its Knative integration.</p>
+<ol>
+<li>
+<p>Install Kong Ingress Controller:
+  <div class="highlight"><pre><span></span><code>kubectl apply --filename https://raw.githubusercontent.com/Kong/kubernetes-ingress-controller/0.9.x/deploy/single/all-in-one-dbless.yaml
+</code></pre></div></p>
+</li>
+<li>
+<p>To configure Knative Serving to use Kong, apply the content of the Serving CR as below:
+  <div class="highlight"><pre><span></span><code>cat <span class="s">&lt;&lt;-EOF | kubectl apply -f -</span>
+<span class="s">apiVersion: operator.knative.dev/v1alpha1</span>
+<span class="s">kind: KnativeServing</span>
+<span class="s">metadata:</span>
+<span class="s">  name: knative-serving</span>
+<span class="s">  namespace: knative-serving</span>
+<span class="s">spec:</span>
+<span class="s">  config:</span>
+<span class="s">    network:</span>
+<span class="s">      ingress.class: &quot;kong&quot;</span>
+<span class="s">EOF</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>Fetch the External IP or CNAME:
+  <div class="highlight"><pre><span></span><code>kubectl --namespace kong get service kong-proxy
+</code></pre></div></p>
+</li>
+</ol>
+<p>Save this for configuring DNS below.</p>
+</div>
+<input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><label for="__tabbed_2_5">Kourier</label><div class="tabbed-content">
+<p>The following commands install Kourier and enable its Knative integration.</p>
+<ol>
+<li>
+<p>To configure Knative Serving to use Kourier, apply the content of the Serving CR as below:
+  <div class="highlight"><pre><span></span><code>cat <span class="s">&lt;&lt;-EOF | kubectl apply -f -</span>
+<span class="s">apiVersion: operator.knative.dev/v1alpha1</span>
+<span class="s">kind: KnativeServing</span>
+<span class="s">metadata:</span>
+<span class="s">  name: knative-serving</span>
+<span class="s">  namespace: knative-serving</span>
+<span class="s">spec:</span>
+<span class="s">  ingress:</span>
+<span class="s">    kourier:</span>
+<span class="s">      enabled: true</span>
+<span class="s">  config:</span>
+<span class="s">    network:</span>
+<span class="s">      ingress.class: &quot;kourier.ingress.networking.knative.dev&quot;</span>
+<span class="s">EOF</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>Fetch the External IP or CNAME:
+  <div class="highlight"><pre><span></span><code>kubectl --namespace knative-serving get service kourier
+</code></pre></div></p>
+</li>
+</ol>
+<p>Save this for configuring DNS below.</p>
+</div>
+</div>
+</details>
+<h3 id="configure-dns">Configure DNS<a class="headerlink" href="#configure-dns" title="Permanent link">&para;</a></h3>
+<div class="tabbed-set" data-tabs="3:3"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">Magic DNS (xip.io)</label><div class="tabbed-content">
+<p>We ship a simple Kubernetes Job called "default domain" that will (see caveats)
+  configure Knative Serving to use <a href="http://xip.io">xip.io</a> as the
+  default DNS suffix.</p>
+<div class="highlight"><pre><span></span><code>kubectl apply --filename http://github.com/knative/serving/releases/download/<span class="o">{</span><span class="s1">&#39;provider&#39;</span>: <span class="s1">&#39;mike&#39;</span><span class="o">}</span>/serving-default-domain.yaml
+</code></pre></div>
+<p><strong>Caveat</strong>: This will only work if the cluster LoadBalancer service exposes an
+IPv4 address or hostname, so it will not work with IPv6 clusters or local setups
+like Minikube. For these, see "Real DNS" or "Temporary DNS".</p>
+</div>
+<input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><label for="__tabbed_3_2">Real DNS</label><div class="tabbed-content">
+<p>To configure DNS for Knative, take the External IP
+or CNAME from setting up networking, and configure it with your DNS provider as
+follows:</p>
+<ul>
+<li>If the networking layer produced an External IP address, then configure a
+  wildcard <code>A</code> record for the domain:</li>
+</ul>
+<div class="highlight"><pre><span></span><code># Here knative.example.com is the domain suffix for your cluster
+*.knative.example.com == A 35.233.41.212
+</code></pre></div>
+<ul>
+<li>If the networking layer produced a CNAME, then configure a CNAME record for
+  the domain:</li>
+</ul>
+<div class="highlight"><pre><span></span><code># Here knative.example.com is the domain suffix for your cluster
+*.knative.example.com == CNAME a317a278525d111e89f272a164fd35fb-1510370581.eu-central-1.elb.amazonaws.com
+</code></pre></div>
+<p>Once your DNS provider has been configured, add the following section into your existing Serving CR, and apply it:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Replace knative.example.com with your domain suffix</span>
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  config:
+    domain:
+      <span class="s2">&quot;knative.example.com&quot;</span>: <span class="s2">&quot;&quot;</span>
+  ...
+</code></pre></div>
+</div>
+<input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><label for="__tabbed_3_3">Temporary DNS</label><div class="tabbed-content">
+<p>If you are using <code>curl</code> to access the sample
+applications, or your own Knative app, and are unable to use the "Magic DNS
+(xip.io)" or "Real DNS" methods, there is a temporary approach. This is useful
+for those who wish to evaluate Knative without altering their DNS configuration,
+as per the "Real DNS" method, or cannot use the "Magic DNS" method due to using,
+for example, minikube locally or IPv6 clusters.</p>
+<p>To access your application using <code>curl</code> using this method:</p>
+<ol>
+<li>After starting your application, get the URL of your application:</li>
+</ol>
+<div class="highlight"><pre><span></span><code>kubectl get ksvc
+</code></pre></div>
+<p>The output should be similar to:</p>
+<div class="highlight"><pre><span></span><code>NAME            URL                                        LATESTCREATED         LATESTREADY           READY   REASON
+helloworld-go   http://helloworld-go.default.example.com   helloworld-go-vqjlf   helloworld-go-vqjlf   True
+</code></pre></div>
+<ol>
+<li>Instruct <code>curl</code> to connect to the External IP or CNAME defined by the
+  networking layer in section 3 above, and use the <code>-H "Host:"</code> command-line
+  option to specify the Knative application's host name. For example, if the
+  networking layer defines your External IP and port to be
+  <code>http://192.168.39.228:32198</code> and you wish to access the above
+  <code>helloworld-go</code> application, use:</li>
+</ol>
+<div class="highlight"><pre><span></span><code>curl -H <span class="s2">&quot;Host: helloworld-go.default.example.com&quot;</span> http://192.168.39.228:32198
+</code></pre></div>
+<p>In the case of the provided <code>helloworld-go</code> sample application, using the default
+  configuration, the output should be:</p>
+<div class="highlight"><pre><span></span><code>Hello Go Sample v1!
+</code></pre></div>
+<p>Refer to the "Real DNS" method for a permanent solution.</p>
+</div>
+</div>
+<ol>
+<li>Monitor the Knative components until all of the components show a <code>STATUS</code> of
+   <code>Running</code> or <code>Completed</code>:</li>
+</ol>
+<div class="highlight"><pre><span></span><code>kubectl get pods --namespace knative-serving
+</code></pre></div>
+<h2 id="installing-the-knative-eventing-component">Installing the Knative Eventing component<a class="headerlink" href="#installing-the-knative-eventing-component" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>Create and apply the Knative Eventing CR:</p>
+<p>You can install the latest available Knative Eventing in the
+operator by applying a YAML file containing the following:</p>
+<div class="tabbed-set" data-tabs="4:3"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><label for="__tabbed_4_1">Install Current Evenintg (default)</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>apiVersion: v1
+kind: Namespace
+metadata:
+name: knative-eventing
+---
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeEventing
+metadata:
+  name: knative-eventing
+  namespace: knative-eventing
+</code></pre></div>
+<p>If you do not specify a version by using spec.version, the operator defaults to the latest available version.</p>
+</div>
+<input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><label for="__tabbed_4_2">Install Future Knative Eventing</label><div class="tabbed-content">
+<p>You do not need to upgrade the operator to a newer version to install
+new releases of Knative Eventing. If Knative Eventing launches a new version, e.g. <code>$spec_version</code>, you can install it by
+applying a YAML file containing the following:</p>
+<div class="highlight"><pre><span></span><code>apiVersion: v1
+kind: Namespace
+metadata:
+name: knative-eventing
+---
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeEventing
+metadata:
+  name: knative-eventing
+  namespace: knative-eventing
+spec:
+  version: $spec_version
+  manifests:
+    - URL: https://github.com/knative/eventing/releases/download/v${VERSION}/eventing.yaml
+    - URL: https://github.com/knative/eventing/releases/download/v${VERSION}/eventing-post-install-jobs.yaml
+</code></pre></div>
+<p>The field <code>spec.version</code> is used to set the version of Knative Eventing. Replace <code>$spec_version</code> with the correct version number.
+The tag <code>${VERSION}</code> is automatically replaced with the version number from <code>spec.version</code> by the operator.</p>
+<p>The field <code>spec.manifests</code> is used to specify one or multiple URL links of Knative Eventing component. Do not forget to
+add the valid URL of the Knative network ingress plugin. The ordering of the URLs is critical. Put the manifest you want
+to apply first on the top.</p>
+</div>
+<input id="__tabbed_4_3" name="__tabbed_4" type="radio" /><label for="__tabbed_4_3">Install Customized Knative Evening</label><div class="tabbed-content">
+<p>The operator provides you the flexibility to install customized
+Knative Eventing based your own requirements. As long as the manifests of customized Knative Eventing are accessible to
+the operator, they can be installed.</p>
+<p>There are two modes available for you to install the customized manifests: overwrite mode and append mode. With the
+overwrite mode, you need to define all the manifests for Knative Eventing to install, because the operator will no long
+install any available default manifests. With the append mode, you only need to define your customized manifests, and
+the customized manifests are installed, after default manifests are applied.</p>
+<ol>
+<li>You can use the overwrite mode to customize all the Knative Eventing manifests. For example, the version of the customized
+  Knative Eventing is <code>$spec_version</code>, and it is available at <code>https://my-eventing/eventing.yaml</code>. You can create the
+  content of Eventing CR as below to install your Knative Eventing:</li>
+</ol>
+<div class="highlight"><pre><span></span><code>apiVersion: v1
+kind: Namespace
+metadata:
+name: knative-eventing
+---
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeEventing
+metadata:
+  name: knative-eventing
+  namespace: knative-eventing
+spec:
+  version: $spec_version
+  manifests:
+    - URL: https://my-eventing/eventing.yaml
+</code></pre></div>
+<p>You can make the customized Knative Eventing available in one or multiple links, as the <code>spec.manifests</code> supports a list
+of links. The ordering of the URLs is critical. Put the manifest you want to apply first on the top. We strongly recommend
+you to specify the version and the valid links to the customized Knative Eventing, by leveraging both <code>spec.version</code>
+and <code>spec.manifests</code>. Do not skip either field.</p>
+<ol>
+<li>You can use the append mode to add your customized manifests into the default manifests. For example, you only customize
+  a few resources, and make them available at <code>https://my-eventing/eventing-custom.yaml</code>. You still need to install the default
+  Knative eventing. In this case, you can create the content of Eventing CR as below:</li>
+</ol>
+<div class="highlight"><pre><span></span><code>apiVersion: v1
+kind: Namespace
+metadata:
+name: knative-eventing
+---
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeEventing
+metadata:
+  name: knative-eventing
+  namespace: knative-eventing
+spec:
+  version: $spec_version
+  additionalManifests:
+    - URL: https://my-eventing/eventing-custom.yaml
+</code></pre></div>
+<p>Knative operator will install the default manifests of Knative Eventing at the version <code>$spec_version</code>, and then install
+your customized manifests based on them.</p>
+</div>
+</div>
+</li>
+</ol>
+<h3 id="verify-the-knative-eventing-deployment">Verify the Knative Eventing deployment:<a class="headerlink" href="#verify-the-knative-eventing-deployment" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>kubectl get deployment -n knative-eventing
+</code></pre></div>
+<p>If Knative Eventing has been successfully deployed, all deployments of the Knative Eventing will show <code>READY</code> status. Here
+is a sample output:</p>
+<div class="highlight"><pre><span></span><code>NAME                  READY   UP-TO-DATE   AVAILABLE   AGE
+broker-controller      1/1     1            1           63s
+broker-filter          1/1     1            1           62s
+broker-ingress         1/1     1            1           62s
+eventing-controller    1/1     1            1           67s
+eventing-webhook       1/1     1            1           67s
+imc-controller         1/1     1            1           59s
+imc-dispatcher         1/1     1            1           59s
+mt-broker-controller   1/1     1            1           62s
+</code></pre></div>
+<h3 id="check-the-status-of-knative-eventing-custom-resource">Check the status of Knative Eventing Custom Resource:<a class="headerlink" href="#check-the-status-of-knative-eventing-custom-resource" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>kubectl get KnativeEventing knative-eventing -n knative-eventing
+</code></pre></div>
+<p>If Knative Eventing is successfully installed, you should see:</p>
+<div class="highlight"><pre><span></span><code>NAME               VERSION             READY   REASON
+knative-eventing   &lt;version number&gt;    True
+</code></pre></div>
+<h2 id="uninstall-knative">Uninstall Knative<a class="headerlink" href="#uninstall-knative" title="Permanent link">&para;</a></h2>
+<h3 id="removing-the-knative-serving-component">Removing the Knative Serving component<a class="headerlink" href="#removing-the-knative-serving-component" title="Permanent link">&para;</a></h3>
+<p>Remove the Knative Serving CR:</p>
+<div class="highlight"><pre><span></span><code>kubectl delete KnativeServing knative-serving -n knative-serving
+</code></pre></div>
+<h3 id="removing-knative-eventing-component">Removing Knative Eventing component<a class="headerlink" href="#removing-knative-eventing-component" title="Permanent link">&para;</a></h3>
+<p>Remove the Knative Eventing CR:</p>
+<div class="highlight"><pre><span></span><code>kubectl delete KnativeEventing knative-eventing -n knative-eventing
+</code></pre></div>
+<p>Knative operator prevents unsafe removal of Knative resources. Even if the Knative Serving and Knative Eventing CRs are
+successfully removed, all the CRDs in Knative are still kept in the cluster. All your resources relying on Knative CRDs
+can still work.</p>
+<h3 id="removing-the-knative-operator">Removing the Knative Operator:<a class="headerlink" href="#removing-the-knative-operator" title="Permanent link">&para;</a></h3>
+<p>If you have installed Knative using the Release page, remove the operator using the following command:</p>
+<div class="highlight"><pre><span></span><code>kubectl delete -f http://github.com/knative/operator/releases/download/{&#39;provider&#39;: &#39;mike&#39;}/operator.yaml
+</code></pre></div>
+<p>If you have installed Knative from source, uninstall it using the following command while in the root directory
+for the source:</p>
+<div class="highlight"><pre><span></span><code>ko delete -f config/
+</code></pre></div>
+<h2 id="whats-next">What's next<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../operator/configuring-serving-cr/">Configure Knative Serving using Operator</a></li>
+<li><a href="../operator/configuring-eventing-cr/">Configure Knative Eventing using Operator</a></li>
+</ul>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+          </a>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        <a href="../installation-files/" class="md-footer__link md-footer__link--prev" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Installation Files
+            </div>
+          </div>
+        </a>
+      
+      
+        <a href="../knative-offerings/" class="md-footer__link md-footer__link--next" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Using a Knative-based Offering
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "navigation.top", "toc.integrate"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../assets/javascripts/workers/search.fe42c31b.min.js", "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d892486b.min.js"></script>
+      
+    
+  </body>
+</html>
