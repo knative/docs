@@ -10,7 +10,7 @@ edit_uri: edit/main/docs
 nav:
     - Home: index.md
     - Installing Knative:
-        - Introduction: install/index.md
+        - Quickstart: install/quickstart.md
         - Installing using YAML:
           - Prerequisites: install/prerequisites.md
           - Install Serving with YAML: install/install-serving-with-yaml.md
@@ -167,15 +167,15 @@ plugins:
   - macros
 
 markdown_extensions:
-  - pymdownx.emoji:
-      emoji_index: !!python/name:materialx.emoji.twemoji
-      emoji_generator: !!python/name:materialx.emoji.to_svg
   - attr_list
   - pymdownx.superfences
   - pymdownx.tabbed
   - pymdownx.details
   - pymdownx.tasklist:
       custom_checkbox: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
   - admonition
   - toc:
       permalink: true
