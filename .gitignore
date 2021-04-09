@@ -3,6 +3,8 @@
 .vscode/
 .history/
 
+site/
+
 
 .settings/
 .classpath
