@@ -44,6 +44,16 @@
       }
     }
 
+    @media only screen and (max-width: 800px) {
+      .component-flex {
+        flex-wrap: wrap;
+      }
+
+      .col {
+        min-width: 100%;
+      }
+    }
+
     .home-container .md-button {
         margin-top: .5rem;
         margin-right: .5rem;
@@ -162,7 +172,7 @@
   </section>
   <section class="intro-container">
     <div class="md-grid md-typeset">
-    <div style="display: flex; align-items: center; height: 260px; position: relative">
+    <div style="display: flex; align-items: center; min-height: 260px; position: relative">
     <img src="images/rocket.svg" class="rocket" alt="" width="140" draggable="false" style="position: absolute; right: 200px">
     <div>
     <h2 style="font-size: larger; font-weight: bolder">Make your developers more productive</h2>
@@ -203,7 +213,7 @@
       <div>
         <h2 style="font-size: larger; font-weight: bolder">Knative Components</h2>
       </div>
-			<div style="display: flex">
+			<div style="display: flex" class="component-flex">
 				<div style="margin: 2em; margin-top: 0">
             <div><h4><a style="color: white" href="{{ 'serving' | url }}">Serving ›</a></h4></div>
 						<p>Run serverless containers on Kubernetes with ease, Knative takes care of the details of networking, autoscaling (even to zero), and revision tracking. You just have to focus on your core logic.</p>
@@ -220,7 +230,7 @@
   <section class="calltoaction-container" style="padding: 2em">
     <div class="md-grid md-typeset">
       <h2>What's Next?</h2>
-      <div style="display: flex; justify-content: center; width: 100%">
+      <div style="display: flex; justify-content: center; width: 100%; flex-wrap: wrap">
         <div class="col">
           <h4>Talk to us on Slack</h4>
           <a href="https://slack.knative.dev" title="Slack Link" class="md-button">Talk</a>
