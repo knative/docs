@@ -9,7 +9,7 @@ Brokers are Kubernetes [custom resources](https://kubernetes.io/docs/concepts/ex
 
 Event delivery mechanics are an implementation detail that depend on the configured [broker class](./broker-classes). Using brokers and triggers abstracts the details of event routing from the event producer and event consumer.
 
-<img src="images/broker-workflow.png" width="80%">
+<img src="images/broker-workflow.svg" width="70%">
 
 Once an event has entered a broker, it can be forwarded to subscribers by using triggers. Triggers allow events to be filtered by attributes, so that events of a particular class can be sent to subscribers that have registered interest in that class of events.
 
@@ -23,5 +23,5 @@ control rules.
 
 ## Next steps
 
-- Learn about [supported broker types](/broker-types).
-- Configure [default broker settings](/configuring-broker-defaults).
+- Learn about [supported broker types](./broker-types).
+- Configure [default broker settings](./configuring-broker-defaults).
