@@ -19,4 +19,4 @@ This script installs a local Knative deployment on your local machine's `Docker`
     If you decide to use an installation method other than KonK, you will need DNS configured on Knative Serving and a broker installed for Knative Eventing to successfully complete the "Getting Started" tutorial.
 
 ## Other Installation Options
-  - If you would like to customize the Knative installation or install it on a remote cluster, start by [Checking the Pre-Requisites](./install/prerequisites.md).
+  - If you would like to customize the Knative installation or install it on a remote cluster, start by [Checking the Pre-Requisites](../install/prerequisites.md).
