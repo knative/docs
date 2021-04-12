@@ -30,6 +30,30 @@
       padding-bottom: 4em;
     }
 
+    @media only screen and (max-width: 1240px) {
+      .components-container, .calltoaction-container, .usedby-container, .home-container, .features-container, .intro-container {
+        padding: 40px;
+      }
+
+      .rocket {
+        left: -190px;
+      }
+
+      .intro-container {
+        padding-left: 180px;
+      }
+    }
+
+    @media only screen and (max-width: 800px) {
+      .component-flex {
+        flex-wrap: wrap;
+      }
+
+      .col {
+        min-width: 100%;
+      }
+    }
+
     .home-container .md-button {
         margin-top: .5rem;
         margin-right: .5rem;
@@ -45,7 +69,7 @@
     .home-container h1 {
       color: #fff;
       font-weight: bolder;
-      margin-top: 2em;
+      margin-top: 1em;
       margin-bottom: 0;
     }
 
@@ -63,7 +87,7 @@
       color: #000;
       display: flex;
       justify-content: center;
-      padding-bottom: 4em;
+      padding-bottom: 6em;
       padding-top: 2em;
     }
 
@@ -79,7 +103,7 @@
       background: #1B2F52;
       background: #fff;
       padding-bottom: 6em;
-      padding-top: 4em;
+      padding-top: 2em;
     }
 
     .col {
@@ -89,6 +113,14 @@
       justify-content: center;
       flex-direction: column;
     }
+
+    .logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 1.2em;
+    }
+
   </style>
 
   <section class="home-container">
@@ -97,6 +129,7 @@
         <div>
           <h1>Welcome, Knative!</h1>
           <h2>Kubernetes-based platform to deploy and manage modern serverless workloads.</h2>
+
           <p style="display: block; margin-left: 1em">
           <a href="{{ 'getting-started/getting-started/' | url }}" class="md-button md-button--primary">
             Get Started
@@ -105,7 +138,7 @@
             Custom YAML-Based Install
           </a>
           <a href="https://katacoda.com/knative-tutorials/scenarios/2-serving-intro-yaml" class="md-button" style="border: none">
-            💻 &nbsp Try Knative in a browser ›
+            💻 &nbsp Try in your Browser ›
           </a>
         </div>
       </div>
@@ -131,7 +164,8 @@
   </section>
   <section class="intro-container">
     <div class="md-grid md-typeset">
-    <div style="display: flex; align-items: center">
+    <div style="display: flex; align-items: center; min-height: 260px; position: relative">
+    <img src="images/rocket.svg" class="rocket" alt="" width="140" draggable="false" style="position: absolute; right: 200px">
     <div>
     <h2 style="font-size: larger; font-weight: bolder">Make your developers more productive</h2>
     <p style="max-width: 700px">Knative components build on top of Kubernetes, <b>abstracting away
@@ -141,32 +175,31 @@
     deploying and managing cloud native services so you don't have to.
     </p>
     </div>
-    <img src="images/rocket.svg" alt="" width="400" height="200" draggable="false">
     </div>
     </div>
   </section>
   <section class="usedby-container">
-    <div class="md-grid md-typeset">
+    <div class="md-grid md-typeset" style="width: 100%">
       <div style="display: flex; justify-content: center">
       <h3 style="margin-bottom: 0">Trusted by:</h3>
       </div>
-      <div style="display: inline-flex; justify-content: center; flex-gap: 2em">
-        <div class="col">
-        <img src="images/Google.png" alt="" width="220" height="110" draggable="false">
+      <div style="display: inline-flex; justify-content: center; flex-gap: 2em; flex-wrap: wrap">
+        <div class="logo">
+        <img src="images/Google.png" alt="" width="220" draggable="false">
         </div>
-        <div class="col">
-        <img src="images/Tanzu.png" alt="" width="220" height="110" draggable="false">
+        <div class="logo">
+        <img src="images/Tanzu.png" alt="" width="220" draggable="false">
         </div>
-        <div class="col">
-        <img src="images/IBM.png" alt="" width="150" height="75" draggable="false">
+        <div class="logo">
+        <img src="images/IBM.png" alt="" width="150" draggable="false">
         </div>
-        <div class="col">
-        <img src="images/Redhat.png" alt="" width="150" height="75" draggable="false">
+        <div class="logo">
+        <img src="images/Redhat.png" alt="" width="150" draggable="false">
         </div>
-        <div class="col">
-        <img src="images/Triggermesh.png" alt="" width="100" height="50" draggable="false">
+        <div class="logo">
+        <img src="images/Triggermesh.png" alt="" width="100" draggable="false">
         </div>
-        <div class="col">
+        <div class="logo" style="font-style: italic; font-size: smaller; color: #999">
           ..and more!
         </div>
       </div>
@@ -175,9 +208,9 @@
   <section class="components-container">
     <div class="md-grid md-typeset">
       <div>
-        <h2 style="font-size: larger; font-weight: bolder">Knative Features</h2>
+        <h2 style="font-size: larger; font-weight: bolder">Knative Components</h2>
       </div>
-			<div style="display: flex">
+			<div style="display: flex" class="component-flex">
 				<div style="margin: 2em; margin-top: 0">
             <div><h4><a style="color: white" href="{{ 'serving' | url }}">Serving ›</a></h4></div>
 						<p>Run serverless containers on Kubernetes with ease, Knative takes care of the details of networking, autoscaling (even to zero), and revision tracking. You just have to focus on your core logic.</p>
@@ -194,7 +227,7 @@
   <section class="calltoaction-container" style="padding: 2em">
     <div class="md-grid md-typeset">
       <h2>What's Next?</h2>
-      <div style="display: flex; justify-content: center; width: 100%">
+      <div style="display: flex; justify-content: center; width: 100%; flex-wrap: wrap">
         <div class="col">
           <h4>Talk to us on Slack</h4>
           <a href="https://slack.knative.dev" title="Slack Link" class="md-button">Talk</a>

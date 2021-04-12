@@ -8,7 +8,7 @@ This script installs a local Knative deployment on your local machine's `Docker`
 
 ### Prerequisites
 - You will need to have [Docker installed.](https://docs.docker.com/get-docker/)
-- You will need to have [Kind v.10 installed.](https://kind.sigs.k8s.io/docs/user/quick-start/)
+- You will need to have [Kind installed.](https://kind.sigs.k8s.io/docs/user/quick-start/)
 
 !!! success "Install Knative and Kubernetes on a local Docker Daemon using Konk"
     ```
