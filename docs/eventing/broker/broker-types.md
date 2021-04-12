@@ -13,7 +13,10 @@ The following broker types are available for use with Knative Eventing.
 
 Knative Eventing provides a multi-tenant (MT) channel-based broker implementation that uses channels for event routing.
 
-For more information, see the [MT channel-based broker](./mt-broker) documentation.
+Before you can use the multi-tenant (MT) channel-based broker implementation, you must install a [channel provider](../channels/channel-types-defaults).
+<!--TODO: explain how channels are used for routing-->
+
+**NOTE:** InMemoryChannel channels are for development use only and must not be used in a production deployment.
 
 ## Alternative broker implementations
 

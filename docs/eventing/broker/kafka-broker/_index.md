@@ -20,7 +20,7 @@ Notable features are:
 
 ## Prerequisites
 
-1. [Installing Eventing using YAML files](./../../install/install-eventing-with-yaml.md).
+1. [Installing Eventing using YAML files](../../../install/install-eventing-with-yaml.md).
 2. An Apache Kafka cluster (if you're just getting started you can follow [Strimzi Quickstart page](https://strimzi.io/quickstarts/)).
 
 ## Installation
@@ -37,7 +37,7 @@ Notable features are:
     kubectl apply --filename {{< artifact org="knative-sandbox" repo="eventing-kafka-broker" file="eventing-kafka-broker.yaml" >}}
     ```
 
-2. Verify that `kafka-controller`, `kafka-broker-receiver` and `kafka-broker-dispatcher` are running,
+1. Verify that `kafka-controller`, `kafka-broker-receiver` and `kafka-broker-dispatcher` are running,
 by entering the following command:
 
     ```bash
