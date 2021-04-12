@@ -129,9 +129,9 @@ metadata:
 EOF
 ```
 
-### Configuring the default broker class
+### Configuring the broker class
 
-To configure a default broker type, or _class_, you can modify the
+To configure a broker class, you can modify the
 `eventing.knative.dev/broker.class` annotation and `spec.config` for the Broker
 object. `MTChannelBasedBroker` is the broker class default.
 
@@ -167,11 +167,11 @@ the backing channel for the broker class:
         namespace: knative-eventing
     ```
 
-#### Configuring the default BrokerClass for the cluster
+### Configuring the default BrokerClass for the cluster
 ​
 You can configure the `clusterDefault` broker class so that any broker created in the cluster that does not have a `BrokerClass` annotation uses this default class.
 
-##### Example
+#### Example
 
 ```yaml
 apiVersion: v1
