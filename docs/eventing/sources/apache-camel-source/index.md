@@ -1,7 +1,7 @@
 ---
 title: "Apache Camel source"
 linkTitle: "Camel source"
-weight: 5
+weight: 100
 type: "docs"
 aliases:
   - /docs/eventing/samples/apache-camel-source
