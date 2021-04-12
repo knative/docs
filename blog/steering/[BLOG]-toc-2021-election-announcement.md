@@ -27,7 +27,7 @@ Here are a few important deadlines to keep in mind:
 - May 11: Election Closes
 - May 13: Announcement of Results
 
-For this election, we will be trying a new voting tool called Elekto.
+For this election, we will be trying a new voting tool called [Elekto](https://github.com/elekto-io/elekto).
 Commissioned by the CNCF for the Kubernetes project, Elekto has the advantage of
 not requiring any email for voting, just your Github login.  However, this will
 be the first time a project other than Kubernetes is using Elekto, so please be
@@ -35,7 +35,8 @@ prepared for some hiccups.
 
 For more details, please visit the [TOC election](
 https://github.com/knative/community/tree/main/elections/2021-TOC) document in
-our GitHub repository.
+our GitHub repository, and if you have questions for us, please reach out
+by emailing elections@knative.team.
 
 Dawn Foster and Josh Berkus, TOC Election Officers
 
