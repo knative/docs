@@ -1,5 +1,14 @@
+---
+title: "Apache Camel source"
+linkTitle: "Camel source"
+weight: 100
+type: "docs"
+aliases:
+  - /docs/eventing/samples/apache-camel-source
+---
+
 These samples show how to configure Camel Sources. These event sources are highly dynamic and allow you to
-generate events from a variety of systems (cloud platforms, social networks, datastores, message brokers, legacy systems, etc.), 
+generate events from a variety of systems (cloud platforms, social networks, datastores, message brokers, legacy systems, etc.),
 leveraging all the [300+ components provided by Apache Camel](https://camel.apache.org/components/latest/).
 
 All Camel Sources use [Apache Camel K](https://github.com/apache/camel-k) as the runtime engine.
@@ -20,7 +29,7 @@ All Camel Sources use [Apache Camel K](https://github.com/apache/camel-k) as the
    environments, including development clusters.
 
 1. Install the Camel Source from the `camel.yaml` in the
-   [Eventing Sources release page](https://github.com/knative/eventing-contrib/releases):
+   [Knative Eventing Camel release page](https://github.com/knative-sandbox/eventing-camel/releases):
 
    ```shell
    kubectl apply --filename camel.yaml
@@ -51,7 +60,7 @@ events.
 The simplest example of `CamelSource`, that does not require additional
 configuration, is the timer source.
 
-The timer source periodically generates "Hello world!" events and forwards them to the provided destination. 
+The timer source periodically generates "Hello world!" events and forwards them to the provided destination.
 
 If you want, you can customize the source behavior using options available in
 the Apache Camel documentation for the
@@ -77,7 +86,7 @@ If you have deployed the timer source, you should see new log lines appearing ev
 
 ### Run a MQTT CamelSource
 
-One of the 300+ Camel components that you can leverage is [Camel-Paho](https://camel.apache.org/components/latest/paho-component.html), 
+One of the 300+ Camel components that you can leverage is [Camel-Paho](https://camel.apache.org/components/latest/paho-component.html),
 based on the [Eclipse Paho](https://www.eclipse.org/paho/) open source project.
 
 A source based on Paho (like the provided [MQTT CamelSource](source_mqtt.yaml)) allows to bridge any MQTT broker to a Knative resource,
@@ -160,10 +169,10 @@ kubectl logs --selector serving.knative.dev/service=camel-event-display -c user-
 
 ### Run an HTTP Poller CamelSource
 
-CamelSources are not limited to using a single Camel component. For example, 
+CamelSources are not limited to using a single Camel component. For example,
 you can combine the [Camel Timer component](https://camel.apache.org/components/latest/timer-component.html)
 with the [Camel HTTP component](https://camel.apache.org/components/latest/http-component.html)
-to periodically fetch an external API, transform the result into a Cloudevent and forward it to a 
+to periodically fetch an external API, transform the result into a Cloudevent and forward it to a
 given destination.
 
 The example will retrieve a static JSON file from a remote URL, but you can edit the
