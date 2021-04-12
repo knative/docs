@@ -9,8 +9,12 @@ edit_uri: edit/main/docs
 
 nav:
     - Home: index.md
+    - Getting Started:
+        - Getting Started with Knative: getting-started/getting-started.md
+        - Installing a CLI: getting-started/install-cli.md
+        - Getting Started with Knative Serving: getting-started/getting-started-serving.md
+        - Getting Started with Knative Eventing: getting-started/getting-started-eventing.md
     - Installing Knative:
-        - Quickstart: install/quickstart.md
         - Installing using YAML:
           - Prerequisites: install/prerequisites.md
           - Install Serving with YAML: install/install-serving-with-yaml.md
@@ -21,7 +25,6 @@ nav:
         - Using a Knative-based Offering: install/knative-offerings.md
     - Serving Component:
         - Overview: serving/README.md
-        - Getting Started: serving/getting-started-knative-app.md
         - Developer Topics:
           - Creating Knative Services: serving/services/creating-services.md
           - Creating and Using Sub-Routes: serving/using-subroutes.md
@@ -142,9 +145,6 @@ nav:
           - Gitlab Source: eventing/samples/gitlab-source/README.md
           - IoT Core: eventing/samples/iot-core/README.md
           - Kubernetes Event Source: eventing/samples/kubernetes-event-source/README.md
-    - Client:
-        - Installing the Client: client/install-kn.md
-        - Using the Client: client/index.md
     - Reference:
       - Serving: reference/api/serving.md
       - Eventing: reference/api/eventing/eventing.md
