@@ -12,7 +12,7 @@ This script installs a local Knative deployment on your local machine's `Docker`
 
 !!! success "Install Knative and Kubernetes on a local Docker Daemon using Konk"
     ```
-    curl -sL get.konk.dev | bash
+    curl -sL install.konk.dev | bash
     ```
 
 !!! warning

@@ -55,7 +55,6 @@ Hello Knative!
     kn service update hello-example \
     --env TARGET=Serving
     ```
-
 === "YAML"
 
     ``` bash
