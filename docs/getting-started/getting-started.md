@@ -8,15 +8,16 @@ This script installs a local Knative deployment on your local machine's `Docker`
 
 ### Prerequisites
 - You will need to have [Docker installed.](https://docs.docker.com/get-docker/)
-- You will need to have [Kind installed.](https://kind.sigs.k8s.io/docs/user/quick-start/)
+- You will need to have [Kind v.10 installed.](https://kind.sigs.k8s.io/docs/user/quick-start/)
 
 !!! success "Install Knative and Kubernetes on a local Docker Daemon using Konk"
     ```
     curl -sL install.konk.dev | bash
     ```
 
-!!! warning
-    If you decide to use an installation method other than KonK, you will need DNS configured on Knative Serving and a broker installed for Knative Eventing to successfully complete the "Getting Started" tutorial.
-
+??? question "Need to upgrade Kind?""
+    ```
+    brew upgrade kind
+    ```
 ## Other Installation Options
   - If you would like to customize the Knative installation or install it on a remote cluster, start by [Checking the Pre-Requisites](./install/prerequisites.md).
