@@ -1,14 +1,14 @@
 It’s time to kick off the Knative Technical Oversight Committee (TOC) elections
-again for 2021, and we are ready to accept nominations! 
+again for 2021, and we are ready to accept nominations!
 
 This election will shape the future of Knative as a community and project. While
 WGs help shape the individual direction of the project, the [TOC covers the
 technical direction, health of the project and community as a
-whole](https://github.com/knative/community/blob/main/TECH-OVERSIGHT-COMMITTEE.md#charter). 
+whole](https://github.com/knative/community/blob/main/TECH-OVERSIGHT-COMMITTEE.md#charter).
 There are 2
 seats up for election and each of those seats will be held for two year terms.
 
-Right now, there are 2 things we need each Knative community member to do: 
+Right now, there are 2 things we need each Knative community member to do:
 
 1) If you want to stand for election, we have [detailed instructions for the
 nomination
@@ -20,11 +20,11 @@ in the voters.yaml file, and if not, please use the [voter exception
 process](https://github.com/knative/community/tree/main/elections/2021-TOC)
 in our voting tool, Elekto.
 
-Here are a few important deadlines to keep in mind: 
+Here are a few important deadlines to keep in mind:
 
-- April 23: All candidate nominations and voting exceptions due 
-- April 27: Election Begins 
-- May 11: Election Closes 
+- April 23: All candidate nominations and voting exceptions due
+- April 27: Election Begins
+- May 11: Election Closes
 - May 13: Announcement of Results
 
 For this election, we will be trying a new voting tool called Elekto.
