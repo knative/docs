@@ -167,6 +167,53 @@ the backing channel for the broker class:
         namespace: knative-eventing
     ```
 
+#### Configuring the default BrokerClass for the cluster
+​
+You can configure the `clusterDefault` broker class so that any broker created in the cluster that does not have a `BrokerClass` annotation uses this default class.
+
+##### Example
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-br-defaults
+  namespace: knative-eventing
+  labels:
+    eventing.knative.dev/release: devel
+data:
+  # Configuration for defaulting channels that do not specify CRD implementations.
+  default-br-config: |
+    clusterDefault:
+      brokerClass: MTChannelBasedBroker
+```
+​
+### Configuring the default BrokerClass for namespaces
+​
+You can modify the default broker class for one or more namespaces.
+
+For example, if you want to use a `KafkaBroker` class for all other brokers created on the cluster, but you want to use the `MTChannelBasedBroker` class for brokers created in `namespace-1` and `namespace-2`, you would use the following ConfigMap settings:
+​
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-br-defaults
+  namespace: knative-eventing
+  labels:
+    eventing.knative.dev/release: devel
+data:
+  # Configuration for defaulting channels that do not specify CRD implementations.
+  default-br-config: |
+    clusterDefault:
+      brokerClass: KafkaBroker
+    namespaceDefaults:
+      namespace1:
+        brokerClass: MTChannelBasedBroker
+      namespace2:
+        brokerClass: MTChannelBasedBroker
+```
+​
 ## Configuring event delivery
 
 The following example demonstrates the use of `deadLetterSink` configuration to send failed events to a Knative service named `dlq-service`:
