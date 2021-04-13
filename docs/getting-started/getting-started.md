@@ -3,7 +3,7 @@
 
 This script installs a local Knative deployment on your local machine's `Docker` daemon using <a href= "https://kind.sigs.k8s.io/" target="blank_">Kind</a>.
 
-### Prerequisites
+## Prerequisites
 - You will need to have <a href= "https://docs.docker.com/get-docker/" target="blank_">Docker installed</a>.
 - You will need to have <a href= "https://kind.sigs.k8s.io/docs/user/quick-start/" target="blank_">Kind installed</a>.
 

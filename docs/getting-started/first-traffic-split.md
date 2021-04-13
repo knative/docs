@@ -43,15 +43,15 @@ Instead of "world," let's have our Knative Service "hello" greet "Knative." You 
 
 As before, Knative spits out some helpful information to the CLI:
 ```bash
-Service hello created to latest revision {REVISION_NAME} is available at URL:
-{SERVICE_URL}
+Service hello created to latest revision <revision-name> is available at URL:
+<service-url>
 ```
 
 Notice, since we are updating an existing Knative Service, the URL doesn't change, but your `Revision` should have incremented by one (something like "hello-xxxxx-2").
 
 Let's ping our Knative Service again to see the change:
 ```
-curl $SERVICE_URL
+curl <service-url>
 ```
 
 **The output should be:**
@@ -122,11 +122,11 @@ By default, when Knative creates a brand new Service it directs 100% of traffic 
     kubectl apply -f hello.yaml
     ```
 
-Now when we curl our Service URL...
+Now when we curl our Knative Service URL...
 ```bash
-[...] curl SERVICE_URL
+[...] curl <service-url>
 Hello Knative!
-[...] curl SERVICE_URL
+[...] curl <service-url>
 Hello world!
 ```
 
