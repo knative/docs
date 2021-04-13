@@ -1,18 +1,33 @@
-# Installing a Command Line Interfact (CLI)
+# Installing a Command Line Interface (CLI) Tools
 
-## kn
+
+## (Required) kubectl
+
+You can use `kubectl` to apply the YAML files required to install Knative components, and also to create Knative resources, such as Knative Services and event sources using YAML.
+
+!!! example "Installing the `kubectl` CLI"
+
+    === "Using Homebrew"
+        If you are on macOS and using [Homebrew](brew.sh) package manager, you can install kubectl with Homebrew.
+        ``` bash
+        brew install kubectl
+        ```
+    === "From the Kubernetes Website"
+        See <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/" target="_blank">Install and Set Up `kubectl`</a>.
+
+## (Recommended) kn
 
 **`kn` provides a quick and easy interface for creating Knative resources** such as Knative Services and event sources, without the need to create or modify YAML files directly. `kn` also simplifies completion of otherwise complex procedures such as autoscaling and traffic splitting.
 
 
 
-!!! example "Installing the kn CLI"
+!!! example "Installing the `kn` CLI"
 
     === "Using Homebrew"
         For macOS, you can install `kn` by using <a href="https://github.com/knative/homebrew-client" target="_blank">Homebrew</a>.
 
         ```
-        brew install kn
+        brew install knative/client/kn
         ```
 
     === "Using a binary"
@@ -58,21 +73,5 @@
         ```
 
         **NOTE:** Running `kn` from a container image does not place the binary on a permanent path. This procedure must be repeated each time you want to use `kn`.
-
-    === "Install kn using the nightly-built binary"
-        Nightly-built executable binaries are available for users who want to install the latest pre-release build of `kn`.
-
-        **WARNING:** Nightly-built executable binaries include features which may not be included in the latest Knative release and are not considered to be stable.
-
-        Links to the latest nightly-built executable binaries are available here:
-
-        - <a href="https://storage.googleapis.com/knative-nightly/client/latest/kn-darwin-amd64" target="_blank">macOS</a>
-        - <a href="https://storage.googleapis.com/knative-nightly/client/latest/kn-linux-amd64" target="_blank">Linux</a>
-        - <a href="https://storage.googleapis.com/knative-nightly/client/latest/kn-windows-amd64.exe" target="_blank">Windows</a>
-
-
-## kubectl
-
-You can use `kubectl` to apply the YAML files required to install Knative components, and also to create Knative resources, such as Knative Services and event sources using YAML.
-
-See <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/" target="_blank">Install and Set Up `kubectl`</a>.
+!!! tip
+    For more complex installations, such as nightly releases, see [Install `kn`](../client/install-kn.md)
