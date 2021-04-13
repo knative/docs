@@ -7,6 +7,8 @@ aliases:
   - ../cronjob-source
 ---
 
+# PingSource example
+
 This example shows how to configure PingSource as an event source targeting
 a Knative Service.
 

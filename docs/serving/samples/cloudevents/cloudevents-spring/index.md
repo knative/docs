@@ -5,6 +5,8 @@ weight: 1
 type: "docs"
 ---
 
+# Cloud Events - Java and Spring
+
 A simple web app written in Java using Spring Cloud Function that can receive CloudEvents. It
 supports running in two modes:
 

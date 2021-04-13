@@ -5,6 +5,8 @@ weight: 64
 type: "docs"
 ---
 
+# Creating a Mapping between a Custom Domain Name and a Knative Service (Alpha)
+
 Knative Services are automatically given a default domain name based on the
 cluster configuration, e.g. "mysvc.mynamespace.mydomain". You can also map a
 single custom domain name that you own to a specific Knative Service using the

@@ -7,4 +7,6 @@ aliases:
    - /docs/reference/serving-api
 ---
 
+# Knative Serving Component
+
 {{< readfile file="serving.md" >}}

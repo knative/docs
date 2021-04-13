@@ -5,6 +5,8 @@ type: "docs"
 showlandingtoc: "false"
 ---
 
+# Subscriptions
+
 After you have created a channel and a sink, you can create a subscription to enable event delivery.
 
 ## Creating a subscription

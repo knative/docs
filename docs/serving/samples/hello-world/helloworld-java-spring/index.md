@@ -5,6 +5,8 @@ weight: 1
 type: "docs"
 ---
 
+# Hello World - Spring Boot Java
+
 This guide describes the steps required to create the `helloworld-java-spring` sample app and deploy it to your cluster.
 
 The sample app reads a `TARGET` environment variable, and prints `Hello ${TARGET}!`. If `TARGET` is not specified, `World` is used as the default value.

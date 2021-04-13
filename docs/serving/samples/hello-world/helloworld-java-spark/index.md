@@ -5,6 +5,8 @@ weight: 1
 type: "docs"
 ---
 
+# Hello World - Spark Java Framework
+
 A simple web app written in Java using Spark Java Framework that you can use for
 testing.
 This guide describes the steps required to to create the `helloworld-java` sample app and deploy it to your cluster.

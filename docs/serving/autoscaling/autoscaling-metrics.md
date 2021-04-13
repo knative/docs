@@ -5,6 +5,8 @@ weight: 03
 type: "docs"
 ---
 
+# Metrics
+
 The metric configuration defines which metric type is watched by the Autoscaler.
 
 ## Setting metrics per revision

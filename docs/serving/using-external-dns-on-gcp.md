@@ -5,6 +5,8 @@ weight: 70
 type: "docs"
 ---
 
+# Using ExternalDNS on Google Cloud Platform to automate DNS setup
+
 [ExternalDNS](https://github.com/kubernetes-incubator/external-dns) is a tool
 that synchronizes exposed Kubernetes Services and Ingresses with DNS providers.
 

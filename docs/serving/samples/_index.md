@@ -5,4 +5,6 @@ weight: 100
 type: "docs"
 ---
 
+# Knative Serving code samples
+
 {{% readfile file="README.md" %}}

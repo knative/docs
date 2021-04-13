@@ -4,6 +4,8 @@ weight: 20
 type: "docs"
 ---
 
+# Creating and using Subroutes
+
 Subroutes are most effective when used with multiple revisions. When defining a Knative service/route, the traffic section of the spec can split between the different revisions. For example:
 
 ```yaml

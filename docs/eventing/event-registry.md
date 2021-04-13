@@ -4,6 +4,8 @@ weight: 25
 type: "docs"
 ---
 
+# Event registry
+
 ## Overview
 
 The event registry maintains a catalog of event types that can be consumed

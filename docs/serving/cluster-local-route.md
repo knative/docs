@@ -5,6 +5,8 @@ weight: 20
 type: "docs"
 ---
 
+# Creating a private cluster-local service
+
 By default services deployed through Knative are published to an external IP
 address, making them public services on a public IP address and with a
 [public URL](./using-a-custom-domain.md).

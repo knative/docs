@@ -5,6 +5,8 @@ weight: 75
 type: "docs"
 ---
 
+# Enabling tag to digest resolution
+
 Knative serving resolves image tags to a digest when you create a revision. This
 gives knative revisions some very nice properties, e.g. your deployments will be
 consistent, you don't have to worry about "immutable tags", etc. For more info,

@@ -6,6 +6,8 @@ type: "docs"
 showlandingtoc: "false"
 ---
 
+# Installing Knative Serving using YAML files
+
 {% macro artifact(repo, file='', org='knative') -%}
     http://github.com/{{org}}/{{repo}}/releases/download/{{knative_version}}/{{file}}
 {%- endmacro %}

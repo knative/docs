@@ -5,4 +5,6 @@ weight: 50
 type: "docs"
 ---
 
+# Collecting Logs with Fluentbit
+
 {{% readfile file="README.md" %}}

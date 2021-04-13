@@ -6,4 +6,6 @@ type: "docs"
 showlandingtoc: "true"
 ---
 
+# Knative Eventing code samples
+
 {{% readfile file="README.md" %}}

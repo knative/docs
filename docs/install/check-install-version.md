@@ -5,6 +5,8 @@ weight: 20
 type: "docs"
 ---
 
+# Checking the version of your Knative components
+
 To obtain the version of the Knative component that you have running on your cluster, you query for the
 `[component].knative.dev/release` label with the following commands:
 

@@ -4,6 +4,8 @@ weight: 20
 type: "docs"
 ---
 
+# Event sources
+
 An event source is a Kubernetes custom resource (CR), created by a developer or cluster administrator, that acts as a link between an event producer and an event _sink_.
 A sink can be a k8s service, including Knative Services, a Channel, or a Broker that receives events from an event source.
 

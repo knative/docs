@@ -7,4 +7,6 @@ aliases:
    - /docs/reference/eventing/eventing
 ---
 
+# Knative Eventing Component
+
 {{< readfile file="eventing.md" >}}

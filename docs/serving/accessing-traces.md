@@ -5,6 +5,8 @@ weight: 15
 type: "docs"
 ---
 
+# Accessing request traces
+
 Depending on the request tracing tool that you have installed on your Knative
 Serving cluster, see the corresponding section for details about how to
 visualize and trace your requests.

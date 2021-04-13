@@ -4,6 +4,8 @@ weight: 21
 type: "docs"
 ---
 
+# Upgrading your installation
+
 To upgrade your Knative components and plugins, run the `kubectl apply` command
 to install the subsequent release. We support upgrading by a single
 [minor](https://semver.org/) version number. For example, if you have v0.14.0 installed,

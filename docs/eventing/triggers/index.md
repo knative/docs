@@ -4,6 +4,8 @@ weight: 70
 type: "docs"
 ---
 
+# Triggers
+
 A Trigger represents a desire to subscribe to events from a specific Broker.
 
 The `subscriber` value must be a [Destination](https://pkg.go.dev/knative.dev/pkg/apis/duck/v1#Destination).

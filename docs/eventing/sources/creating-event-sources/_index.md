@@ -4,6 +4,8 @@ weight: 100
 type: "docs"
 ---
 
+# Creating an event source
+
 You can create your own event source for use with Knative Eventing components by using the following methods:
 
 - Build an event source in Javascript, and implement it using a ContainerSource or SinkBinding.
