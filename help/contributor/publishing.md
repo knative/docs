@@ -130,7 +130,7 @@ The two local docs build options:
 
   - This method provides the following local build and test build options:
     - test your locally cloned files
-    - build and test other user's remote forks (ie. locally build their PRs `./scripts/build.sh -f repofork -b branchname -s)
+    - build and test other user's remote forks (ie. locally build their PRs `./scripts/build.sh -f repofork -b branchname -s`)
     - option to build only a specific branch or all branches (and also from any speicifed fork)
     - fully functioning site links
     - [See all command options in localbuild.sh](https://github.com/knative/website/blob/main/scripts/localbuild.sh)
