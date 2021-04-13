@@ -34,7 +34,7 @@ GitHub repos and since then, there are many contributors who value the ability
 to consume the documentation from within the repo. In addition, the main
 Markdown editor and renderer when authoring Knative docs is the GitHub UI.
 Therefore, we continue to **use relative URLs throughout** to ensure that all
-the links work as expected, both when clicke in the GitHub UI and on knative.dev.
+the links work as expected, both when clicked in the GitHub UI and on knative.dev.
 
 Hugo has it's own syntax for linking across your content and treats
 the content across the site as a single version of docs (including a Hugo
