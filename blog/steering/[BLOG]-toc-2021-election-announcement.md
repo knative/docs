@@ -13,10 +13,7 @@ nomination
 process](https://github.com/knative/community/tree/main/elections/2021-TOC#candidacy-process).
 2) If
 you want to vote in the election, please read the [eligibility
-criteria](https://github.com/knative/community/blob/main/mechanics/TOC.md#voter-eligibility). If you think you are eligible to vote, please make sure that your GitHub id appears
-in the voters.yaml file, and if not, please use the [voter exception
-process](https://github.com/knative/community/tree/main/elections/2021-TOC)
-in our voting tool, Elekto.
+criteria](https://github.com/knative/community/blob/main/mechanics/TOC.md#voter-eligibility). If you think you are eligible to vote, please check the Elekto application to see if you are eligible, and if not, [request a voter exception](https://test.elekto.io/app/elections/2021-TOC/exception).  See the [voter guide](https://github.com/knative/community/tree/main/elections/2021-TOC) for more information on how voting works.
 
 Here are a few important deadlines to keep in mind:
 
@@ -38,4 +35,3 @@ our GitHub repository, and if you have questions for us, please reach out
 by emailing elections@knative.team.
 
 Dawn Foster and Josh Berkus, TOC Election Officers
-
