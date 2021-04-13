@@ -92,6 +92,8 @@ website, must be opened the
 
 <!-- This could use a pass to be more focused on what a PR submitter should do at the start of the process. -->
 
+1. [Ensure that your fork is up-to-date](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/syncing-a-fork).
+
 1. [Create a branch in your fork](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-and-deleting-branches-within-your-repository).
 
 1. Locate or create the file that you want to fix:

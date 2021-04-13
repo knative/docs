@@ -21,12 +21,17 @@ https://app.netlify.com/sites/knative/deploys
 
 This is currently a manual process.
 
-The build log is in the order of most recent to oldest. You must click to view
-the build log and then scroll down to see the `PR#`. When you find the build
-for your PR, click the [Preview] button to view the unique build preview for
-your PR. Each "event" in the PR triggers a new/unique build preview. Therefore,
-if you push a new commit, a new build with those changes will appear at the top
-of https://app.netlify.com/sites/knative/deploys.
+1. Navigate to https://app.netlify.com/sites/knative/deploys
+1. Click to view a build log. The list of build logs are ordered from
+   most recent to oldest. If you just pushed to your PR, then that build log is
+   near the top.
+1. Scroll down to see the `PR#` in the log and verify that it's for your PR.
+1. When you find the build log for your PR, click the **[Preview]** button to
+   view the unique build preview for your PR.
+
+   **Important**: Each "event" in a Knative PR triggers a new/unique build
+   (Preview). Therefore, if you push a new commit, a new build with those
+   changes will appear at the top of https://app.netlify.com/sites/knative/deploys.
 
 ### Local preview builds
 

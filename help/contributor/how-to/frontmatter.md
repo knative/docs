@@ -16,10 +16,10 @@ filled by placeholders:
 
 ```
 ---
-title: <title>
-description: <description>
+title: "<page_title>"
+linkTitle: "<optional_shorter_menu_title>"
 weight: <weight>
-keywords: [<keyword1>,<keyword2>,...]
+type: "docs"
 aliases:
     - <previously-published-at-this-URL>
 ---
@@ -35,11 +35,13 @@ The following table shows descriptions for all the **required** fields:
 
 |Field              | Description
 |-------------------|------------
-|`title`            | The page's title.
-|`weight`           | The order of the page relative to the other pages in the directory.
-|`type`             | Specify `docs`. Required for our docs versioning process.
-|`aliases`          | Past URLs where the page was published.
+| `title`           | The page's title.
+| `linkTitle`       | Optional: A short version of the page title that renders nicely in the navigation menu.
+| `weight`          | The order of the page relative to the other pages in the directory.
+| `type`            | Specify `docs`. Required for our docs versioning process.
+| `aliases`         | Optional: URLs of past pages that you want redirected to "this" page.
 
+[See how to define the Knative front matter](../new-docs/docs-page.md).
 
 ### Rename, move, or delete pages
 
@@ -61,12 +63,13 @@ aliases:
 
 In this example, the following file is deleted: `/docs/install/knative-with-any-k8s.md`
 
-To ensure that anyone who tries to navigate to the deleted file get redirected
-to its replacement, you must add `/docs/install/knative-with-any-k8s.md` as an
-`aliase`.
+To ensure that anyone who tries to navigate to the deleted file gets redirected
+to its replacement, you must add `/docs/install/knative-with-any-k8s.md` under
+`aliases`.
 
-For example, in the `/docs/install/_index.md` file, you add each file that you
-want to redirect to this file as `aliase` starting with the path from root:
+In the `/docs/install/_index.md` file, you add the
+`/docs/install/knative-with-any-k8s` URL path without the file type suffix,
+under `aliases`:
 
 ```
 ---
@@ -92,6 +95,10 @@ aliases:
 showlandingtoc: "false"
 ---
 ```
+
+Notice that mulitple files redirect to the
+`/docs/install/_index.md` file, all indented under `aliases`, prefixed with `-`,
+and with paths starting from root.
 
 View the
 [`docs/install/_index.md`](https://raw.githubusercontent.com/knative/docs/main/docs/install/_index.md)

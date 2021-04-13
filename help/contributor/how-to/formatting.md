@@ -101,7 +101,9 @@ Use code-blocks for commands you intend readers to execute. Only use inline code
 and commands to mention specific labels, flags, values, functions, objects,
 variables, modules, or commands.
 
-* [Learn how to include code snippets from source files]().
+* Learn how to include code snippets from source files using the
+  [`readfile`](https://github.com/knative/website/blob/main/layouts/shortcodes/readfile.md)
+  shortcode. See an [example](https://knative.dev/docs/smoketest/#code-samples).
 
 ## Use `back-ticks` around object field names
 
