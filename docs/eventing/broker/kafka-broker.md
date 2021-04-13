@@ -4,6 +4,8 @@ weight: 30
 type: "docs"
 ---
 
+# Apache Kafka Broker
+
 {% macro artifact(repo, file='', org='knative') -%}
     http://github.com/{{org}}/{{repo}}/releases/download/{{knative_version}}/{{file}}
 {%- endmacro %}

@@ -6,6 +6,8 @@ aliases:
 - /docs/operator/configuring-eventing-cr/
 ---
 
+# Configuring the Eventing Operator custom resource
+
 You can configure the Knative Eventing operator by modifying settings in the KnativeEventing custom resource (CR).
 
 **NOTE:** Kubernetes spec level policies cannot be configured using the Knative Operators.

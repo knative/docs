@@ -5,6 +5,8 @@ weight: 03
 type: "docs"
 ---
 
+# Modifying the Deployment Config Map
+
 The `config-deployment` ConfigMap is located in the `knative-serving` namespace.
 This ConfigMap, known as the Deployment ConfigMap, contains settings that determine how Kubernetes `Deployment` resources, that back Knative services, are configured.
 

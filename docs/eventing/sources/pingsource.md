@@ -5,6 +5,8 @@ weight: 31
 type: "docs"
 ---
 
+# PingSource
+
 ![version](https://img.shields.io/badge/API_Version-v1beta2-red?style=flat-square)
 
 A PingSource produces events with a fixed payload on a specified cron schedule.

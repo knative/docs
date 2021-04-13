@@ -21,6 +21,8 @@ aliases:
 showlandingtoc: "false"
 ---
 
+# Installing Knative
+
 !!! tip
     If you're looking for an easy way to install a local distribution of Knative for prototyping, check out our <a href="https://github.com/csantanapr/knative-kind" target="_blank">Quick Install w/ KonK</a>
 

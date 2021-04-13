@@ -4,6 +4,8 @@ weight: 20
 type: "docs"
 ---
 
+# Installation files
+
 This guide provides reference information about the YAML files in the Knative
 Serving and Eventing releases.
 

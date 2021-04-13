@@ -4,6 +4,8 @@ weight: 21
 type: "docs"
 ---
 
+# Upgrading your installation with Knative operator
+
 The Knative operator supports a straightforward upgrade process. It supports upgrading the Knative component
 by a single [minor](https://semver.org/) version number. For example, if you have v0.17 installed, you must upgrade to
 v0.18 before attempting to upgrade to v0.19. The attribute `spec.version` is the only field you need to change in the

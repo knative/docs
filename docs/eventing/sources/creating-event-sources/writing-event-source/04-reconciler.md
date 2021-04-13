@@ -7,6 +7,8 @@ aliases:
   - /docs/eventing/samples/writing-event-source/04-reconciler
 ---
 
+# Reconciler Implementation and Design
+
 ## Reconciler Functionality
 General steps the reconciliation process needs to cover:
 1. Update the `ObservedGeneration` and initialize the `Status` conditions (as defined in `samplesource_lifecycle.go` and `samplesource_types.go`)

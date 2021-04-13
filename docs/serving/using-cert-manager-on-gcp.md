@@ -5,6 +5,8 @@ weight: 63
 type: "docs"
 ---
 
+# Configuring HTTPS with cert-manager and Google Cloud DNS
+
 You can use cert-manager with Knative to automatically provision TLS
 certificates from Let's Encrypt and use
 [Google Cloud DNS](https://cloud.google.com/dns/) to handle HTTPS requests and

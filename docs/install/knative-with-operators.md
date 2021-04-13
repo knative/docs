@@ -5,6 +5,8 @@ type: "docs"
 showlandingtoc: "false"
 ---
 
+# Knative Operator installation
+
 {% macro artifact(repo, file='', org='knative') -%}
     http://github.com/{{org}}/{{repo}}/releases/download/{{version}}/{{file}}
 {%- endmacro %}

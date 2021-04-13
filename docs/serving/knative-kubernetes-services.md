@@ -5,6 +5,8 @@ weight: 9
 type: "docs"
 ---
 
+# Knative Kubernetes Services
+
 This guide describes the
 [Kubernetes Services](https://kubernetes.io/docs/concepts/services-networking/service/)
 that are active when running Knative Serving.

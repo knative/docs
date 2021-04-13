@@ -5,6 +5,8 @@ weight: 1
 type: "docs"
 ---
 
+# Hello World - Go
+
 This guide describes the steps required to to create the `helloworld-go` sample app
 and deploy it to your cluster.
 The sample app reads a `TARGET` environment variable, and prints `Hello ${TARGET}!`.

@@ -5,6 +5,8 @@ weight: 04
 type: "docs"
 ---
 
+# Targets
+
 Configuring a target provide the Autoscaler with a value that it tries to maintain for the configured metric for a revision.
 See the [metrics](./autoscaling-metrics.md) documentation for more information about configurable metric types.
 

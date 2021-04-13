@@ -6,6 +6,8 @@ type: "docs"
 showlandingtoc: "false"
 ---
 
+# Knative Release Notes
+
 For details about the Knative releases, see the following pages:
 
 - [Knative Serving releases](https://github.com/knative/serving/releases)

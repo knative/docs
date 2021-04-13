@@ -4,6 +4,8 @@ weight: 30
 type: "docs"
 ---
 
+# Default Broker ConfigMap
+
 **NOTE:** This guide assumes Knative Eventing is installed in the `knative-eventing` namespace. If you have installed Knative Eventing in a different namespace, replace `default` with the name of that namespace.
 
 Knative Eventing provides a `config-br-defaults` ConfigMap, which provides default configuration settings to enable the creation of Brokers and Channels.

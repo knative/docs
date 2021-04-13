@@ -5,6 +5,8 @@ weight: 64
 type: "docs"
 ---
 
+# Enabling automatic TLS certificate provisioning
+
 {% macro artifact(repo, file='', org='knative') -%}
     http://github.com/{{org}}/{{repo}}/releases/download/{{version}}/{{file}}
 {%- endmacro %}

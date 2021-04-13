@@ -5,4 +5,6 @@ weight: 10
 type: "docs"
 ---
 
+# Knative Eventing - Hello World app
+
 {{% readfile file="README.md" %}}

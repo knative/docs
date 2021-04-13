@@ -4,6 +4,8 @@ weight: 50
 type: "docs"
 ---
 
+# Event delivery
+
 ## Overview
 
 Knative Eventing provides various configuration parameters to control the delivery

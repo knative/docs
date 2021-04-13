@@ -7,4 +7,6 @@ aliases:
     - /docs/serving/configuring-autoscaling/
 ---
 
+# Autoscaling
+
 {{% readfile file="README.md" %}}

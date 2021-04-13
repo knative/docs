@@ -5,6 +5,8 @@ weight: 50
 type: "docs"
 ---
 
+# Configuring the requests per second (RPS) target
+
 This setting specifies a target for requests-per-second per replica of an application.
 
 * **Global key:** `requests-per-second-target-default`

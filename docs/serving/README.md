@@ -5,6 +5,8 @@ weight: 20
 type: "docs"
 ---
 
+# Knative Serving
+
 Knative Serving builds on Kubernetes and Istio to support deploying and serving
 of serverless applications and functions. Serving is easy to get started with
 and scales to support advanced scenarios.

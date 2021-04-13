@@ -4,6 +4,8 @@ weight: 55
 type: "docs"
 ---
 
+# Setting up a custom domain per Service
+
 By default, Knative uses the `{route}.{namespace}.{default-domain}` fully qualified domain name for the Service, where `default-domain` is `example.com`. You are able to change the `default-domain` following the [Setting up a custom domain](./using-a-custom-domain.md) guide.
 
 This guide documents the process to use a custom FQDN for a Service, like `my-service.example.com`, created by [@bsideup](https://bsideup.github.io/posts/knative_custom_domains/).

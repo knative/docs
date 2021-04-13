@@ -8,6 +8,8 @@ aliases:
   - /docs/eventing/samples/writing-event-source
 ---
 
+# Creating an event source by using the sample event source
+
 This guide explains how to create your own event source for Knative
 Eventing by using a [sample repository](https://github.com/knative-sandbox/sample-source), and explains the key concepts behind each required component. Documentation for the default [Knative event sources](../../sources/) can be used as an additional reference.
 

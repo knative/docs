@@ -6,6 +6,8 @@ type: "docs"
 showlandingtoc: "true"
 ---
 
+# Creating a channel using cluster or namespace defaults
+
 Developers can create channels of any supported implementation type by creating an instance of a Channel object.
 
 1. Create a Channel object:
