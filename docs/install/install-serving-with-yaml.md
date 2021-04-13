@@ -36,6 +36,16 @@ For information about the YAML files in the Knative Serving and Eventing release
 
 ## Install a networking layer
 
+The networking layer in Knative Serving is responsible for incoming requests and the associated
+responses for your Knative installation.
+Knative enables you to choose a networking layer and then translates Knative’s resources
+into the specific configuration for your chosen networking solution.
+
+You can choose a networking layer based on what you are familiar with, what is
+already installed on your cluster, or what is suitable for your use case.
+For prototyping purposes, if you have no preference for a networking layer, choose Kourier.
+For production use cases, Istio is a common choice.
+
 The tabs below expand to show instructions for installing a networking layer.
 Follow the procedure for the networking layer of your choice:
 
