@@ -37,17 +37,21 @@ For those of you familiar with other **source-to-url** tools, this may seem fami
     kubectl apply -f hello.yaml
     ```
 
-#### Expected Output
+### Expected Output
 After Knative has successfully created your service, you should see the following:
 ```bash
-Service hello created to latest revision {REVISION_NAME} is available at URL:
-{SERVICE_URL}
+Service hello created to latest revision <revision-name> is available at URL:
+<service-url>
 ```
-#### Testing your deployment
+Where `<revision-name>` is the name of the `Revision` you've just created (we'll talk more about these later).
+Where `<service-url>` is the URL where your Knative Service can be reached.
+
+### Testing your deployment
 
 ```
-curl $SERVICE_URL
+curl <service-url>
 ```
+Where `<service-url>` is the URL returned to you by the previous command.
 
 **The output should be:**
 ```
