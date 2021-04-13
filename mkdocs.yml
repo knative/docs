@@ -12,7 +12,9 @@ nav:
     - Getting Started:
         - Getting Started with Knative: getting-started/getting-started.md
         - Installing a CLI: getting-started/install-cli.md
-        - Getting Started with Knative Serving: getting-started/getting-started-serving.md
+        - Deploying your first Knative Service: getting-started/first-service.md
+        - Autoscaling in Action: getting-started/first-autoscale.md
+        - First Traffic Split: getting-started/first-traffic-split.md
         - Getting Started with Knative Eventing: getting-started/getting-started-eventing.md
     - Installing Knative:
         - Installing using YAML:
@@ -148,6 +150,9 @@ nav:
     - Reference:
       - Serving: reference/api/serving.md
       - Eventing: reference/api/eventing/eventing.md
+    - Client:
+        - CLI tools: client/index.md
+        - Install kn: client/install-kn.md
     - Community: todo
 
 theme:
@@ -176,11 +181,9 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.tabbed
   - pymdownx.details
+  - pymdownx.keys
   - pymdownx.tasklist:
       custom_checkbox: true
-  - pymdownx.emoji:
-      emoji_index: !!python/name:materialx.emoji.twemoji
-      emoji_generator: !!python/name:materialx.emoji.to_svg
   - admonition
   - toc:
       permalink: true
