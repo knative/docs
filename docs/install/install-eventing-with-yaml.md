@@ -12,8 +12,6 @@ showlandingtoc: "false"
     http://github.com/{{org}}/{{repo}}/releases/download/{{knative_version}}/{{file}}
 {%- endmacro %}
 
-# Install Knative Eventing using YAML files
-
 This topic describes how to install Knative Eventing by applying YAML files using the `kubectl` CLI.
 
 ## Prerequisites

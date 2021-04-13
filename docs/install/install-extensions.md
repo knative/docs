@@ -12,8 +12,6 @@ showlandingtoc: "false"
     http://github.com/{{org}}/{{repo}}/releases/download/{{knative_version}}/{{file}}
 {%- endmacro %}
 
-# Installing optional extensions
-
 To add extra features to your Knative Serving or Eventing installation, you can install extensions
 by applying YAML files using the `kubectl` CLI.
 
