@@ -13,7 +13,7 @@ consistency across our documentation, we have agreed on these formatting standar
 
 ## Linking: Use relative URLs
 
-For all links within the Knative content, use relative linking (also know as
+For all links within the Knative content, use relative linking (also known as
 [relative URLs](https://www.w3.org/TR/WD-html40-970917/htmlweb.html#h-5.1.2)).
 
 Linking conventions:
