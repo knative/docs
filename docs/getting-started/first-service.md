@@ -1,8 +1,8 @@
 # Getting Started with Knative Serving
 
-**In this tutorial, we are going to use [KonK](konk.dev) to deploy a "Hello world" Service!**
+**In this tutorial, we are going to use [KonK](konk.dev) to deploy a "Hello world" Service!**This service will accept an environment variable, `TARGET`, and print "`Hello $TARGET`."
 
-This service will accept an environment variable, `TARGET`, and print "`Hello $TARGET`", since our "Hello world" Service is being deployed as a Knative Service, it gets some super powers (scale-to-zero, traffic-splitting) out of the box :rocket:.
+For those of you familiar with other **source-to-url** tools, this may seem familiar. However, since our "Hello world" Service is being deployed as a Knative Service, it gets some **super powers (scale-to-zero, traffic-splitting) out of the box** :rocket:.
 
 ## Deploying a your first Knative Service: "Hello world!"
 === "kn"
@@ -17,7 +17,6 @@ This service will accept an environment variable, `TARGET`, and print "`Hello $T
 === "YAML"
 
     ``` bash
-    kubectl apply -f -
     apiVersion: serving.knative.dev/v1
     kind: Service
     metadata:
@@ -33,11 +32,15 @@ This service will accept an environment variable, `TARGET`, and print "`Hello $T
                 - name: TARGET
                   value: "world"
     ```
+    Once you've created your YAML file (named something like "hello.yaml"):
+    ``` bash
+    kubectl apply -f hello.yaml
+    ```
 
 #### Expected Output
 After Knative has successfully created your service, you should see the following:
-```
-Service 'hello' created to latest revision '{REVISION_NAME}' is available at URL:
+```bash
+Service hello created to latest revision {REVISION_NAME} is available at URL:
 {SERVICE_URL}
 ```
 #### Testing your deployment
@@ -51,5 +54,7 @@ curl $SERVICE_URL
 Hello world!
 ```
 
-## Up Next
-Congratulations, you've just created your first Knative Service! :tada: Next, we'll take a look at Autoscaling, click "Next" 
+Congratulations :tada:, you've just created your first Knative Service!
+
+!!! tip
+    Hit "n"++ / "."++ on your keyboard to move forward in the tutorial. Use "p"++ / ","++ to go back at any time.
