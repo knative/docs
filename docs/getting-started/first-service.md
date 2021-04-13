@@ -57,4 +57,4 @@ Hello world!
 Congratulations :tada:, you've just created your first Knative Service!
 
 !!! tip
-    Hit "n"++ / "."++ on your keyboard to move forward in the tutorial. Use "p"++ / ","++ to go back at any time.
+    Hit ++"n"++ on your keyboard to move forward in the tutorial. Use ++"p"++ to go back at any time.
