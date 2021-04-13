@@ -24,7 +24,7 @@ This is currently a manual process.
 The build log is in the order of most recent to oldest. You must click to view
 the build log and then scroll down to see the `PR#`. When you find the build
 for your PR, click the [Preview] button to view the unique build preview for
-your PR. Each "event" in the PR triggers a new/unique build preview. Thefore,
+your PR. Each "event" in the PR triggers a new/unique build preview. Therefore,
 if you push a new commit, a new build with those changes will appear at the top
 of https://app.netlify.com/sites/knative/deploys.
 
@@ -180,4 +180,3 @@ ulimit -n 65535
 sudo sysctl -w kern.maxfiles=100000
 sudo sysctl -w kern.maxfilesperproc=65535
 ```
-
