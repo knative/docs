@@ -16,7 +16,7 @@ This script installs a local Knative deployment on your local machine's `Docker`
     ```
     brew upgrade kind
     ```
-# Other Installation Options
+## Other Installation Options
   - If you would like to customize the Knative installation or install it on a remote cluster, start by [Checking the Pre-Requisites](./install/prerequisites.md) then come back here to finish the remaining steps!
 
 !!! warning
