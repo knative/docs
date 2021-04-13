@@ -22,5 +22,5 @@ A collection of FAQs from other docs contributors.
 
 ### General troubleshooting
 
-1. Other Issues/Unsure - reach out in the #docs slack channel and someone will
+1. Other Issues/Unsure - reach out in the #docs Slack channel and someone will
    be happy to help out.
