@@ -34,7 +34,8 @@ To install the serving component:
 
 ## Install a networking layer
 
-The networking layer in Knative Serving routes incoming and outgoing traffic for your Knative installation.
+The networking layer in Knative Serving is responsible for incoming requests and the associated
+responses for your Knative installation.
 Knative enables you to choose a networking layer and then translates Knative’s resources
 into the specific configuration for your chosen networking solution.
 
