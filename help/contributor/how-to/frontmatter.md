@@ -96,7 +96,7 @@ showlandingtoc: "false"
 ---
 ```
 
-Notice that mulitple files redirect to the
+Notice that multiple files redirect to the
 `/docs/install/_index.md` file, all indented under `aliases`, prefixed with `-`,
 and with paths starting from root.
 
