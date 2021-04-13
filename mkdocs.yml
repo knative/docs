@@ -14,7 +14,7 @@ nav:
         - Installing a CLI: getting-started/install-cli.md
         - Deploying your first Knative Service: getting-started/first-service.md
         - Autoscaling in Action: getting-started/first-autoscale.md
-        - First Traffic Split: getting-started/first-traffic-split.md
+        - Traffic Splitting: getting-started/first-traffic-split.md
         - Getting Started with Knative Eventing: getting-started/getting-started-eventing.md
     - Installing Knative:
         - Installing using YAML:
