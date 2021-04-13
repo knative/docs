@@ -32,7 +32,7 @@ For more information about contributing to the Knative project, see the
 
    Knative requires the [Google CLA](https://cla.developers.google.com).
 
-   Important: You must fill out the CLA with the same email address that you
+   **Important:** You must fill out the CLA with the same email address that you
    used to create your GitHub account. Also see the note about private accounts.
 
    Once you are CLA'ed, we'll be able to accept your pull requests. This is
