@@ -10,12 +10,17 @@ edit_uri: edit/main/docs
 nav:
     - Home: index.md
     - Getting Started:
-        - Getting Started with Knative: getting-started/getting-started.md
-        - Installing a CLI: getting-started/install-cli.md
-        - Deploying your first Knative Service: getting-started/first-service.md
-        - Autoscaling in Action: getting-started/first-autoscale.md
-        - Traffic Splitting: getting-started/first-traffic-split.md
-        - Getting Started with Knative Eventing: getting-started/getting-started-eventing.md
+        - Installing Knative:
+          - Installing Knative Serving and Eventing: getting-started/getting-started.md
+          - Installing a CLI: getting-started/install-cli.md
+        - Getting Started with Knative Serving:
+          - Deploying your first Knative Service: getting-started/first-service.md
+          - Autoscaling in Action: getting-started/first-autoscale.md
+          - Traffic Splitting: getting-started/first-traffic-split.md
+        - Getting Started with Knative Eventing:
+          - Background and CloudEvents: getting-started/first-cloud-event.md
+          - Examining the Broker: getting-started/first-broker.md
+          - Routing CloudEvents with Sources, Brokers and Triggers: getting-started/first-source-trigger.md
     - Installing Knative:
         - Installing using YAML:
           - Prerequisites: install/prerequisites.md
