@@ -1,7 +1,6 @@
 ---
-title: "Knative Kubernetes Services"
-#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
-weight: 9
+title: "Kubernetes Services"
+weight: 03
 type: "docs"
 ---
 
