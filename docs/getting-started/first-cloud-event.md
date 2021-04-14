@@ -1,4 +1,5 @@
-# Getting Started with Knative Eventing
+# Eventing Background and CloudEvents
+
 ## Background
 **With Knative Serving, we have a powerful tool which can take our containerized code and deploy it with relative ease.**
 

@@ -1,4 +1,5 @@
-# Creating your first Knative Service
+# Deploying your first Knative Service
+
 !!! tip
     Hit ++"n"++ / ++"."++ on your keyboard to move forward in the tutorial. Use ++"p"++ / ++","++ to go back at any time.
 
@@ -6,7 +7,7 @@
 
 For those of you familiar with other **source-to-url** tools, this may seem familiar. However, since our "Hello world" Service is being deployed as a Knative Service, it gets some **super powers (scale-to-zero, traffic-splitting) out of the box** :rocket:.
 
-## Deploying a your first Knative Service: "Hello world!"
+## Deploying your first Knative Service: "Hello world!"
 === "kn"
 
     ``` bash
