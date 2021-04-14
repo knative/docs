@@ -28,11 +28,13 @@ Before you can create an API server source, you must install Knative Eventing an
 1. Create a service account:
 
     ```yaml
+    kubectl create -f - <<EOF
     apiVersion: v1
     kind: ServiceAccount
     metadata:
       name: <service-account>
       namespace: <namespace>
+    EOF
     ```
     where;
     - `<service-account>` is the name of the service account that you want to create.
@@ -41,6 +43,7 @@ Before you can create an API server source, you must install Knative Eventing an
 1. Create a cluster role:
 
     ```yaml
+    kubectl create -f - <<EOF
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRole
     metadata:
@@ -54,6 +57,7 @@ Before you can create an API server source, you must install Knative Eventing an
       - get
       - list
       - watch
+    EOF
     ```
     where;
     - `<cluster-role>` is the name of the cluster role that you want to create.
@@ -61,6 +65,7 @@ Before you can create an API server source, you must install Knative Eventing an
 1. Create a cluster role binding:
 
     ```yaml
+    kubectl create -f - <<EOF
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRoleBinding
     metadata:
@@ -73,6 +78,7 @@ Before you can create an API server source, you must install Knative Eventing an
     - kind: ServiceAccount
       name: <service-account>
       namespace: <namespace>
+    EOF
     ```
     where;
     - `<cluster-role-binding>` is the name of the cluster role binding that you want to create.
@@ -86,6 +92,7 @@ Before you can create an API server source, you must install Knative Eventing an
     {{% tab name="YAML" %}}
 
 ```yaml
+kubectl create -f - <<EOF
 apiVersion: sources.knative.dev/v1
 kind: ApiServerSource
 metadata:
@@ -102,6 +109,7 @@ spec:
      apiVersion: v1
      kind: Service
      name: <sink>
+EOF
 ```
 where;
 - `<apiserversource>` is the name of the source that you want to create.
