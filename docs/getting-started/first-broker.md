@@ -1,5 +1,5 @@
 ## Background
-In the pervious step, we talked a bit about CloudEvents and their role in Knative, specifically their ability to transport bits of information within our Knative deployment. But how does a CloudEvent get where it needs to go? If you "emit" (produce) a CloudEvent, how can you ensure that it arrives at its destination?
+In the previous step, we talked a bit about CloudEvents and their role in Knative, specifically their ability to transport bits of information within our Knative deployment. But how does a CloudEvent get where it needs to go? If you "emit" (produce) a CloudEvent, how can you ensure that it arrives at its destination?
 
 That's where `Brokers` come in. `Brokers` are a fault-tolerant way to intake CloudEvents from `Sources` (which emit CloudEvents) and send them to the correct `Sink` (which consume CloudEvents).
 
