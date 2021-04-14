@@ -94,4 +94,4 @@ In review, you have created a Knative Service (the CloudEvents Player) as your `
 ??? info "Architecture Diagram"
     //TODO
 
-Some people call this **"Event-Driven Architecture"** which can be used to create your own **"Fucntions as a Service"** on Kubernetes :tada: :taco: :fire:
+Some people call this **"Event-Driven Architecture"** which can be used to create your own **"Functions as a Service"** on Kubernetes :tada: :taco: :fire:
