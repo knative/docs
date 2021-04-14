@@ -1,10 +1,3 @@
----
-title: "Getting Started with Knative Eventing"
-linkTitle: "Getting started"
-weight: 9
-type: "docs"
----
-
 # Getting Started with Knative Eventing
 
 After you install Knative Eventing, you can create, send, and verify events.
