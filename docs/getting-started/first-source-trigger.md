@@ -46,7 +46,7 @@ Fill out the form with whatever you data you would like to and hit the "SEND EVE
 You should see this:
 ![screencapture-cloudevents-player-default-127-0-0-1-nip-io-2021-04-14-07_42_26](https://user-images.githubusercontent.com/16281246/114704777-fcabc180-9cf4-11eb-8cd8-ae85ca32101e.png)
 
-!!! tip Clicking the :fontawesome-solid-envelope: will show you the CloudEvent as the `Broker` sees it.
+!!! tip "Tip: Clicking the :fontawesome-solid-envelope: will show you the CloudEvent as the `Broker` sees it."
 
 The :material-send: icon in the "Status" column implies that the event has been sent to our `Broker` which we specified through the environment variable `BROKER_URL`. But where has the event gone? Well, right now, nowhere!
 
