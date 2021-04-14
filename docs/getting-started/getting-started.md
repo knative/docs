@@ -3,7 +3,7 @@
 
 This script installs a local Knative deployment on your local machine's `Docker` daemon using <a href= "https://kind.sigs.k8s.io/" target="blank_">Kind</a>.
 
-## Prerequisites
+## Pre-Requisites
 - You will need to have <a href= "https://docs.docker.com/get-docker/" target="blank_">Docker installed</a>.
 - You will need to have <a href= "https://kind.sigs.k8s.io/docs/user/quick-start/" target="blank_">Kind installed</a>.
 
@@ -16,8 +16,9 @@ This script installs a local Knative deployment on your local machine's `Docker`
     ```
     brew upgrade kind
     ```
+    Or follow the "Kind" link in the Pre-Requisites above
 ## Other Installation Options
-  - If you would like to customize the Knative installation or install it on a remote cluster, start by [Checking the Pre-Requisites](./install/prerequisites.md) then come back here to finish the remaining steps!
+  - If you would like to customize the Knative installation or install it on a remote cluster, start by [Checking the Pre-Requisites](../install/prerequisites.md) then come back here to finish the remaining steps!
 
 !!! warning
     You will need `networking layer` and `DNS` for Knative Serving as well as a `broker` for Knative Eventing if you want to follow this tutorial.
