@@ -1,7 +1,7 @@
 ## Creating your first Source
 Now that we have a `Broker`, let's send some CloudEvents to using a `Source`.
 
-A `Source` is Kubernetes custom resource (CR) that emits CloudEvents to a specified location (in our case, a `Broker`). Basically, a `Source` is exactly what it sounds like: it's a "source" of CloudEvents.
+A `Source` is a Kubernetes custom resource (CR) that emits CloudEvents to a specified location (in our case, a `Broker`). Basically, a `Source` is exactly what it sounds like: it's a "source" of CloudEvents.
 
 You can check the current state of sources in your deployment by running the following command:
 
