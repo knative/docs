@@ -44,8 +44,54 @@ In the "Create Event" form, we are greeted by a number of fields, all of which a
 Fill out the form with whatever you data you would like to and hit the "SEND EVENT" button.
 
 You should see this:
-![Screen Shot 2021-04-13 at 9 34 24 PM](https://user-images.githubusercontent.com/16281246/114641562-5504a400-9ca0-11eb-944a-13a2251b3488.png)
+![screencapture-cloudevents-player-default-127-0-0-1-nip-io-2021-04-14-07_42_26](https://user-images.githubusercontent.com/16281246/114704777-fcabc180-9cf4-11eb-8cd8-ae85ca32101e.png)
+
+!!! tip Clicking the :fontawesome-solid-envelope: will show you the CloudEvent as the `Broker` sees it.
 
 The :material-send: icon in the "Status" column implies that the event has been sent to our `Broker` which we specified through the environment variable `BROKER_URL`. But where has the event gone? Well, right now, nowhere!
 
-A `Broker` is simply a receptacle for events. In order for our events to be sent somewhere, we must create a `Trigger` which listens for our events.
+A `Broker` is simply a receptacle for events. In order for your events to be sent somewhere, you must create a `Trigger` which listens for your events and places them somewhere.
+
+## Creating your first `Trigger`
+A [`Trigger`](../eventing/triggers/) represents a desire to subscribe to events from a specific broker.
+
+If, for example, you wanted to intake the CloudEvents our CloudEvents Player was emitting to our `Broker` you could create a `Trigger`, like so:
+
+```bash
+    kn trigger create cloudevents-player --sink cloudevents-player
+```
+Notice that you specified a `Sink` in the creation of our `Trigger` which tells Knative where to put the Events this `Trigger` is listening for.
+
+You should see:
+```bash
+Trigger 'cloudevents-player' successfully created in namespace 'default'.
+```
+
+??? question "What CloudEvents is my `Trigger` listening for?"
+    Since we didn't specify a `--filter` in our `kn` command, our Trigger is listening for any CloudEvents coming into the `Broker`.
+
+Now, when we go back to the CloudEvents Player and send an Event, we see that CloudEvents are both sent and received:
+
+![screencapture-cloudevents-player-default-127-0-0-1-nip-io-2021-04-14-07_39_08](https://user-images.githubusercontent.com/16281246/114704377-8909b480-9cf4-11eb-9db0-815223199b5b.png)
+
+
+??? question "What if I want to filter on CloudEvent attributes?"
+    First, delete your existing Trigger:
+    ```bash
+      kn trigger delete cloudevents-player
+    ```
+    Now let's add a Trigger that listens for a certain CloudEvent Type
+    ```bash
+      kn trigger create cloudevents-player --sink cloudevents-player --filter type=com.example
+    ```
+
+    If you send a CloudEvent with type "com.example," it will be reflected in the CloudEvents Player UI. Any other types will be ignored by the `Trigger`.
+
+    You can filter on any aspect of the CloudEvent you would like to.
+
+In review, you have created a Knative Service (the CloudEvents Player) as your `Source` of CloudEvents which are sent through the `Broker`, routed by the `Trigger` and received by that same Knative Service which is *also* acting as a `Sink` for CloudEvents.
+
+??? info "Architecture Diagram"
+    //TODO
+
+Some people call this **"Event-Driven Architecture"** :tada: :taco: :fire:
