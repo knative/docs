@@ -33,4 +33,4 @@ hello-xxxxx-1                           1/2     Running
 hello-xxxxx-1                           2/2     Running
 ```
 
-Some people call this **Serverless** 🎉 🌮 🔥
+Some people call this **Serverless** :tada: :taco: :fire:
