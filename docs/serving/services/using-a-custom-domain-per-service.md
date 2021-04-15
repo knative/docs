@@ -43,8 +43,8 @@ You can change the `default-domain` by [Setting up a custom domain](../using-a-c
        metadata:
        name: hello-world
        annotations:
-       # the Service FQDN will become hello-world.{default-domain}
-    custom-hostname: hello-world
+           # the Service FQDN will become hello-world.{default-domain}
+           custom-hostname: hello-world
     spec:
     [...]
     ```
