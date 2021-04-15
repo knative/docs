@@ -242,3 +242,4 @@ spec:
 ```
 
 See also: [Delivery Parameters](../event-delivery.md#configuring-broker-delivery)
+See also: [Broker Specifications](https://github.com/knative/specs/blob/main/specs/eventing/broker.md)
