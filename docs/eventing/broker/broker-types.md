@@ -20,8 +20,7 @@ Before you can use the multi-tenant (MT) channel-based broker implementation, yo
 
 ## Alternative broker implementations
 
-In the Knative Eventing ecosystem, alternate broker implementations are welcome as long as they
-respect the [broker conformance spec](https://github.com/knative/eventing/blob/main/docs/spec/broker.md).
+In the Knative Eventing ecosystem, alternative broker implementations are welcome as long as they respect the [broker conformance spec](https://github.com/knative/eventing/blob/main/docs/spec/broker.md).
 
 The following is a list of brokers provided by the community or vendors:
 
