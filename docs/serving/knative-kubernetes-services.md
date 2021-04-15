@@ -1,5 +1,5 @@
 ---
-title: "Kubernetes Services"
+title: "Kubernetes services"
 weight: 03
 type: "docs"
 ---

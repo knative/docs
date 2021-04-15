@@ -54,15 +54,11 @@ multiple Domain Mappings to map multiple domains and subdomains.
        kind: Service
        apiVersion: serving.knative.dev/v1
     ```
-    * `name`(metadata): The domain name you wish to map to the Knative Service.
-    * `namespace`: The namespace that both the DomainMapping and Knative Service use.
-    * `name`(ref): The Knative Service which should be used to service requests
+    * `name`(metadata): The domain name you wish to map to the Knative service.
+    * `namespace`: The namespace that both domain mapping and the Knative service use.
+    * `name`(ref): The Knative service which should be used to service requests
         for the custom domain name. You can also map to other targets as long as
-        they conform to the Addressable contract and their resolved URL is of the
-        form `{name}.{namespace}.{clusterdomain}` where `{name}` and `{namespace}`
-        are the name and namespace of a Kubernetes service, and `{clusterdomain}`
-        is the cluster domain. Objects conforming to this contract include Knative
-        Services and Routes, and Kubernetes Services.
+        they conform to the Addressable contract and their resolved URL is of the form `{name}.{namespace}.{clusterdomain}` where `{name}` and `{namespace}`are the name and namespace of a Kubernetes service, and `{clusterdomain}`is the cluster domain. Objects conforming to this contract include Knative services and Routes, and Kubernetes services.
 
 1. From the directory where the new `domainmapping.yaml` file was created,
    deploy the domain mapping by applying the `domainmapping.yaml` file.

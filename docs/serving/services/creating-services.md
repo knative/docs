@@ -5,7 +5,7 @@ weight: 02
 type: "docs"
 ---
 
-To create an application, you need to create a YAML file that defines a Knative service. This YAML file specifies metadata about the application, points to the hosted image of the app and allows the service to be configured.
+To create an application using Knative, you must create a YAML file that defines a Knative service. This YAML file specifies metadata about the application, points to the hosted image of the app and allows the service to be configured.
 
 This guide uses the [Hello World sample app in Go](../samples/hello-world/helloworld-go) to demonstrate the structure of a Service YAML file and the basic workflow for deploying an app. These steps can be adapted for your own application if you have an image of it available on Docker Hub, Google Container Registry, or another container image registry.
 
@@ -41,7 +41,7 @@ To create a Knative service, you will need:
     * `apiVersion`: The current Knative version.
     * `name`(metadata): The name of the application.
     * `namespace`: The namespace that the application will use.
-    * `image`: The URL to the image of the application.
+    * `image`: The URL of the image container.
     * `name`(env): The environment variable printed out by the sample application.
 
     **NOTE:** If you’re deploying an image of your own app, update the name of the app and the URL of the image accordingly.
