@@ -10,7 +10,7 @@ This script installs a local Knative deployment on your local machine's `Docker`
 ??? todo "Installing the `kubectl` CLI"
 
     === "Using Homebrew"
-        If you are on macOS and using [Homebrew](brew.sh) package manager, you can install kubectl with Homebrew.
+        If you are on macOS and using [Homebrew](http://brew.sh) package manager, you can install kubectl with Homebrew.
         ``` bash
         brew install kubectl
         ```

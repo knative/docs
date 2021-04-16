@@ -16,7 +16,7 @@ You can download a working copy of the sample, by entering the
 following command:
 
 ```shell
-git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
+git clone -b "{{ git.tag }}" https://github.com/knative/docs knative-docs
 ```
 
 ## Using the sample code

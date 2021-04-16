@@ -6,6 +6,10 @@ type: "docs"
 
 # Upgrading your installation
 
+{% macro artifact(repo, file='', org='knative') -%}
+    http://github.com/{{org}}/{{repo}}/releases/download/{{knative_version}}/{{file}}
+{%- endmacro %}
+
 To upgrade your Knative components and plugins, run the `kubectl apply` command
 to install the subsequent release. We support upgrading by a single
 [minor](https://semver.org/) version number. For example, if you have v0.14.0 installed,
@@ -62,7 +66,7 @@ upgrade, and these are identified in the release notes. For example, upgrading
 from v0.15.0 to v0.16.0 for Eventing you have to run:
 
 ```bash
-kubectl apply --filename {{< artifact repo="eventing" file="eventing-pre-install-jobs.yaml" >}}
+kubectl apply --filename {{ artifact(repo="eventing",file="eventing-pre-install-jobs.yaml")}}
 ```
 
 ### Upgrade existing resources to the latest stored version
@@ -77,7 +81,7 @@ The release notes for each release will explicitly whether a migration is requir
 
 ie.
 ```bash
-kubectl create --filename {{< artifact repo="serving" file="serving-post-install-jobs.yaml" >}}
+kubectl create --filename {{ artifact( repo="serving", file="serving-post-install-jobs.yaml" )}}
 ```
 
 ## Performing the upgrade
@@ -100,7 +104,7 @@ upgrade, and these are identified in the release notes. For example, after
 upgrading from v0.15.0 to v0.16.0 for Eventing you should run:
 
 ```bash
-kubectl apply --filename {{< artifact repo="eventing" file="eventing-post-install-jobs.yaml" >}}
+kubectl apply --filename {{ artifact(repo="eventing",file="eventing-post-install-jobs.yaml")}}
 ```
 
 ## Verifying the upgrade

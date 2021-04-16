@@ -32,7 +32,7 @@ Use this method to clone and then immediate run the sample. To clone the sample
 code, run the following commands:
 
 ```
-git clone -b "{{< branch >}}" https://github.com/knative/docs.git knative/docs
+git clone -b "{{ git.tag }}" https://github.com/knative/docs.git knative/docs
 cd knative/docs/community/samples/serving/helloworld-java-quarkus
 ```
 

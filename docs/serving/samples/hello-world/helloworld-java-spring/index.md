@@ -14,7 +14,7 @@ The sample app reads a `TARGET` environment variable, and prints `Hello ${TARGET
 You can also download a working copy of the sample, by running the following commands:
 
 ```shell
-git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
+git clone -b "{{ git.tag }}" https://github.com/knative/docs knative-docs
 cd knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
 ```
 

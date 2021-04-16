@@ -89,9 +89,10 @@ nav:
           - Blue Green Deployment: serving/samples/blue-green-deployment.md
     - Eventing Component:
         - Overview: eventing/README.md
-        - Getting Started: eventing/getting-started.md
         - Event Sources:
           - Overview: eventing/sources/index.md
+          - Writing an Event Source: eventing/sources/creating-event-sources/writing-event-source/README.md
+          - Writing an Event Source - Easy Way: eventing/sources/creating-event-sources/writing-event-source-easy-way/README.md
           - APIServerSource: eventing/sources/apiserversource.md
           - ContainerSource: eventing/sources/containersource.md
           - PingSource: eventing/sources/pingsource.md
@@ -113,7 +114,7 @@ nav:
           - Kafka Broker: eventing/broker/kafka-broker.md
           - Default Broker ConfigMap: eventing/broker/config-br-defaults.md
           - Kafka Channel ConfigMap: eventing/broker/kafka-configmap.md
-          - Alternate Brokers: eventing/broker/alternate.md
+          - Alternate Brokers: eventing/broker/alternate/README.md
         - Sink:
           - Overview: eventing/sink/README.md
           - Apache Kafka Sink: eventing/sink/kafka-sink.md
@@ -128,8 +129,6 @@ nav:
             - Channel Example: eventing/samples/kafka/channel/README.md
             - Source Example: eventing/samples/kafka/source/README.md
           - Container Source: eventing/samples/container-source/README.md
-          - Writing an Event Source: eventing/samples/writing-event-source/README.md
-          - Writing an Event Source - Easy Way: eventing/samples/writing-event-source-easy-way/README.md
           - Hello World:
             - Overview: eventing/samples/helloworld/README.md
             - Go: eventing/samples/helloworld/helloworld-go/README.md
@@ -178,8 +177,39 @@ theme:
 plugins:
   - search
   - macros
+  - exclude:
+      glob:
+        # Exclude files that contain hugo specific shortcodes
+        # (either the include shortcode or not-converted-yet tabs).
+        - smoketest.md
+        - "*/serving-api.md" # shortcode to serving.md
+        - "*/_index.md" # pretty much all shortcodes
+        - "*/traffic-splitting/index.md" # shortcode to README
+        - "*/secrets-go/index.md" # shortcode to README
+        - "*/tag-header-based-routing/index.md" # shortcode to README
+        - "*/knative-routing-go/index.md" # shortcode to README
+        - "*/helloworld-scala/index.md" # shortcode to README
+        - "*/helloworld-python/index.md" # shortcode to README
+        - "*/helloworld-php/index.md" # shortcode to README
+        - "*/helloworld-nodejs/index.md" # shortcode to README
+        - "*/helloworld-csharp/index.md" # shortcode to README
+        - "*/helloworld-kotlin/index.md" # shortcode to README
+        - "*/cloudevents-dotnet/index.md" # shortcode to README
+        - "*/grpc-ping-go/index.md" # shortcode to README
+        - "*/gitwebhook-go/index.md" # shortcode to README
+        - "*/multi-container/index.md" # shortcode to README
+        - "*/helloworld-java-spring/index.md" # tabs need converting
+        - "*/hello-world-scala/index.md" # tabs need converting
+        - "*/hello-world-python/index.md" # tabs need converting
+        - "*/helloworld-shell/index.md" # tabs need converting
+        - "*/helloworld-ruby/index.md" # tabs need converting
+        - "*/helloworld-java-spark/index.md" # tabs need converting
+        - "*/cloudevents-spring/index.md" # tabs need converting
+        - "*/cloudevents-go/index.md" # tabs need converting
 
 markdown_extensions:
+  # - mdx_include:
+  #     base_path: docs
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg
