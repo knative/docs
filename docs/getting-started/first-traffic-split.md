@@ -44,7 +44,7 @@ Instead of "world," let's have our Knative Service "hello" greet "Knative." You 
     ```
 
 As before, Knative spits out some helpful information to the CLI:
-```bash
+```{ .bash .no-copy }
 Service hello created to latest revision 'hello-knative' is available at URL:
 <service-url>
 ```
@@ -57,7 +57,7 @@ curl <service-url>
 ```
 
 **The output should be:**
-```
+```{ .bash .no-copy }
 Hello Knative!
 ```
 
@@ -80,7 +80,7 @@ We can easily see a list of our existing revisions with the `kn` CLI:
     ```
 
     **The output should be:**
-```bash
+```{ .bash .no-copy }
 NAME            SERVICE   TRAFFIC   TAGS   GENERATION   AGE   CONDITIONS   READY   REASON
 hello-knative   hello     100%             2            30s   3 OK / 4     True    
 hello-world     hello                      1            5m    3 OK / 4     True    
@@ -119,10 +119,11 @@ By default, when Knative creates a brand new Service it directs 100% of traffic 
     ```
 
 Now when we curl our Knative Service URL...
-```bash
-      curl <service-url>
+```{ .bash .no-copy }
+curl <service-url>
 Hello Knative!
-      curl <service-url>
+      
+curl <service-url>
 Hello world!
 ```
 

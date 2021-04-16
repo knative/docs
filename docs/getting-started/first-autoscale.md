@@ -16,7 +16,7 @@ kubectl get pod -l serving.knative.dev/service=hello -w
 ```
 
 The output should look like this:
-```bash
+```{ .bash .no-copy }
 NAME                                     READY   STATUS
 hello-world                              2/2     Running
 hello-world                              2/2     Terminating
@@ -25,7 +25,7 @@ hello-world                              0/2     Terminating
 ```
 
 Try to access the url again, and you will see a new pod running again.
-```bash
+```{ .bash .no-copy }
 NAME                                     READY   STATUS
 hello-world                              0/2     Pending
 hello-world                              0/2     ContainerCreating

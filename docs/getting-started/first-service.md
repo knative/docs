@@ -59,7 +59,7 @@ curl <service-url>
 Where `<service-url>` is the URL returned to you by the previous command.
 
 **The output should be:**
-```
+```{ .bash .no-copy }
 Hello world!
 ```
 
