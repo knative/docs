@@ -5,6 +5,17 @@ This script installs a local Knative deployment on your local machine's `Docker`
 
 ## Pre-Requisites
 - You will need to have <a href= "https://kind.sigs.k8s.io/docs/user/quick-start/" target="blank_">Kind installed</a>.
+- You will need to have `kubectl` installed.
+
+??? todo "Installing the `kubectl` CLI"
+
+    === "Using Homebrew"
+        If you are on macOS and using [Homebrew](brew.sh) package manager, you can install kubectl with Homebrew.
+        ``` bash
+        brew install kubectl
+        ```
+    === "From the Kubernetes Website"
+        See <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/" target="_blank">Install and Set Up `kubectl`</a>.
 
 !!! success "Install Knative and Kubernetes on a local Docker Daemon using Konk"
     ```

@@ -1,23 +1,8 @@
-# Installing a Command Line Interface (CLI) Tools
+# Installing the Knative CLI
 
+## (Recommended) `kn`
 
-## (Required) kubectl
-
-You can use `kubectl` to apply the YAML files required to install Knative components, and also to create Knative resources, such as Knative Services and event sources using YAML.
-
-!!! example "Installing the `kubectl` CLI"
-
-    === "Using Homebrew"
-        If you are on macOS and using [Homebrew](brew.sh) package manager, you can install kubectl with Homebrew.
-        ``` bash
-        brew install kubectl
-        ```
-    === "From the Kubernetes Website"
-        See <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/" target="_blank">Install and Set Up `kubectl`</a>.
-
-## (Recommended) kn
-
-**`kn` provides a quick and easy interface for creating Knative resources** such as Knative Services and event sources, without the need to create or modify YAML files directly. `kn` also simplifies completion of otherwise complex procedures such as autoscaling and traffic splitting.
+**The Knative CLI provides a quick and easy interface for creating Knative resources** such as Knative Services and event sources, without the need to create or modify YAML files directly. `kn` also simplifies completion of otherwise complex procedures such as autoscaling and traffic splitting.
 
 
 

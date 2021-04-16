@@ -1,24 +1,25 @@
 # Eventing Background and CloudEvents
 
 ## Background
-**With Knative Serving, we have a powerful tool which can take our containerized code and deploy it with relative ease.**
+**With Knative Serving, we have a powerful tool which can take our containerized code and deploy it with relative ease.** With Knative Eventing, you gain a few new super powers :rocket:.
 
-Nowadays, modern infrastructure demands we deploy many services to do many different things and, often times, these services have dependency on one another. *Your hypothetical "Inventory Management" Knative Service would like to know when your "Point-Of-Sale" Knative Service preforms an action (i.e. makes a sale) so it can preform its own relevant actions.*
+Namely, the ability to easily communicate between Knative Services, plug external data sources into your Kubernetes cluster and even create your own "Functions as a Service" on top of Kubernetes. **In short, Knative Eventing provides a scalable, fault-tolerant infrastructure for communication between workloads.**
 
-Knative Eventing provides the basis for communicating these sorts of actions, whether those actions are coming from within your Kubernetes deployment or from some outside source. **For the purposes of this tutorial, we will focus on four components for building this communication infrastructure (`Source`, `Trigger`, `Broker`, and `Sink`)**, but there are many other tools in the Knative Eventing toolbox which can be used to create your own "Functions as a Service" (FaaS) on top of Kubernetes.
+
+For the purposes of this tutorial, we will focus on four components for building this communication infrastructure **(`Source`, `Trigger`, `Broker`, and `Sink`)**, but there are many other tools in the Knative Eventing toolbox.
 
 ??? question "What other components exist in Knative Eventing?"
-    If you want to find out more about the different components of Knative Eventing, like Channels, Sequences, Parallels, etc. check out the ["Eventing Components."](../eventing/README.md)
+    If you want to find out more about the different components of Knative Eventing, like Channels, Sequences, Parallels, etc. check out ["Eventing Components."](../eventing/README.md)
 
 
 ## Introducing CloudEvents
-As the name suggests, Knative Eventing communicates these actions in the form of "Events" and the format Knative uses for these Events is <a href="https://github.com/cloudevents/spec/blob/master/primer.md" target="blank_">CloudEvents</a>.
+Knative Eventing uses <a href="https://github.com/cloudevents/spec/blob/master/primer.md" target="blank_">CloudEvents</a> to communicate between workloads.
 
 For our purposes, the only thing you need to know about CloudEvents are:
 
-1. CloudEvents follow a specification (a specific format), with required and optional attributes.
-1. CloudEvents can be "emitted" (created) by almost anything. This includes Knative Services, as well as data sources that exist outside of your Kubernetes deployment.
-1. CloudEvents can carry some attributes (things like `id`, `source`, `type`, etc) as well as payloads (JSON, plaintext, reference to data that lives elsewhere, etc).
+1. CloudEvents follow the <a href = "https://github.com/cloudevents/spec" target="_blank">CloudEvents 1.0 Specification</a>, with required and optional attributes.
+1. CloudEvents can be "emitted" by almost anything and can be transported to anywhere in your deployment.  
+1. CloudEvents can carry some attributes (things like `id`, `source`, `type`, etc) as well as data payloads (JSON, plaintext, reference to data that lives elsewhere, etc).
 
 ??? question "Want to find out more about CloudEvents?"
     Check out the [CloudEvents website](https://cloudevents.io/)!
