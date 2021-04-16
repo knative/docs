@@ -37,3 +37,7 @@ data:
 Default channels can be configured for the cluster, a namespace on the cluster, or both.
 
 **NOTE:** If a default channel implementation is configured for a namespace, this will overwrite the configuration for the cluster.
+
+## Next steps
+
+- Create an [InMemoryChannel](/create-default-channel)

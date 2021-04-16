@@ -2,9 +2,12 @@
 title: "Triggers"
 weight: 70
 type: "docs"
+showlandingtoc: "false"
+aliases:
+  - docs/eventing/triggers
 ---
 
-A Trigger represents a desire to subscribe to events from a specific Broker.
+A trigger represents a desire to subscribe to events from a specific broker.
 
 The `subscriber` value must be a [Destination](https://pkg.go.dev/knative.dev/pkg/apis/duck/v1#Destination).
 
@@ -47,14 +50,18 @@ spec:
 EOF
 ```
 
-### Trigger Filtering
+### Trigger filtering
 
 Exact match filtering on any number of CloudEvents attributes as well as
 extensions are supported. If your filter sets multiple attributes, an event must
-have all of the attributes for the Trigger to filter it. Note that we only
+have all of the attributes for the trigger to filter it. Note that we only
 support exact matching on string values.
 
-Example:
+#### Example
+
+This example filters events from the `default` broker that are of type
+`dev.knative.foo.bar` and have the extension `myextension` with the value
+`my-extension-value`.
 
 ```shell
 kubectl create -f - <<EOF
@@ -75,7 +82,3 @@ spec:
       name: my-service
 EOF
 ```
-
-The example above filters events from the `default` Broker that are of type
-`dev.knative.foo.bar` AND have the extension `myextension` with the value
-`my-extension-value`.

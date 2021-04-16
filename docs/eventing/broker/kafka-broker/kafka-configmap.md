@@ -2,6 +2,8 @@
 title: "Kafka Channel ConfigMap"
 weight: 30
 type: "docs"
+aliases:
+  - docs/eventing/broker/kafka-configmap
 ---
 
 **NOTE:** This guide assumes Knative Eventing is installed in the `knative-eventing`
