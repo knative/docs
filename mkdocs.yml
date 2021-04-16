@@ -12,7 +12,7 @@ nav:
     - Getting Started:
         - Installing Knative:
           - Installing Knative Serving and Eventing: getting-started/getting-started.md
-          - Installing a CLI: getting-started/install-cli.md
+          - Installing the Knative CLI: getting-started/install-cli.md
         - Creating your first Service with Knative Serving:
           - Deploying your first Knative Service: getting-started/first-service.md
           - Autoscaling in Action: getting-started/first-autoscale.md
