@@ -12,7 +12,7 @@ type: "docs"
 | request_count | The number of requests that are routed to Activator.<br>These are requests that have been fulfilled from the activator handler. | Counter | configuration_name<br>container_name<br>namespace_name<br>pod_name<br>response_code<br>response_code_class<br>revision_name<br>service_name | Dimensionless | Stable |
 | request_latencies | The response time in millisecond for the fulfilled routed requests | Histogram | configuration_name<br>container_name<br>namespace_name<br>pod_name<br>response_code<br>response_code_class<br>revision_name<br>service_name | Milliseconds | Stable |
 
-### Autoscaler  
+### Autoscaler
 
 Generic
 
