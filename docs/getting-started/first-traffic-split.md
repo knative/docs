@@ -125,6 +125,7 @@ curl http://hello.default.127.0.0.1.nip.io
 Hello Knative!
 
 curl http://hello.default.127.0.0.1.nip.io
-
+Hello World!
+```
 
 Congratulations, :tada: you've successfully split traffic between 2 different `Revisions`. Up next, Knative Eventing!
