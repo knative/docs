@@ -1,9 +1,11 @@
 # Installing the Knative CLI
 
+!!! tip
+    Hit ++"n"++ / ++"."++ on your keyboard to move forward in the tutorial. Use ++"p"++ / ++","++ to go back at any time.
+    
 ## (Recommended) `kn`
 
-**The Knative CLI provides a quick and easy interface for creating Knative resources** such as Knative Services and event sources, without the need to create or modify YAML files directly. `kn` also simplifies completion of otherwise complex procedures such as autoscaling and traffic splitting.
-
+==**The Knative CLI provides a quick and easy interface for creating Knative resources**== such as Knative Services and event sources, without the need to create or modify YAML files directly. `kn` also simplifies completion of otherwise complex procedures such as autoscaling and traffic splitting.
 
 
 !!! example "Installing the `kn` CLI"
@@ -58,5 +60,4 @@
         ```
 
         **NOTE:** Running `kn` from a container image does not place the binary on a permanent path. This procedure must be repeated each time you want to use `kn`.
-!!! tip
     For more complex installations, such as nightly releases, see [Install `kn`](../client/install-kn.md)
