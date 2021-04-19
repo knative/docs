@@ -1,10 +1,22 @@
 # Installing Knative with KonK (Knative on Kind)
-**The fastest way to get started with Knative locally** is to use the <a href= "https://konk.dev" target="blank_">Konk (Knative-on-kind) script.</a>
 
-This script installs a local Knative deployment on your local machine's `Docker` daemon using <a href= "https://kind.sigs.k8s.io/" target="blank_">Kind</a>.
-
-## Pre-Requisites
+## Before you begin
 - You will need to have <a href= "https://kind.sigs.k8s.io/docs/user/quick-start/" target="blank_">Kind installed</a>.
+
+??? todo "Installing Kind"
+
+    === "Using Homebrew"
+        ```bash
+        brew install kind
+        ```
+
+    === "Upgrade Kind using Homebrew"
+        ```bash
+        brew upgrade kind
+        ```
+
+    === "From the Kind website"
+        See <a href= "https://kind.sigs.k8s.io/docs/user/quick-start/" target="blank_">Kind website</a> for other installation options.
 - You will need to have `kubectl` installed.
 
 ??? todo "Installing the `kubectl` CLI"
@@ -14,21 +26,22 @@ This script installs a local Knative deployment on your local machine's `Docker`
         ``` bash
         brew install kubectl
         ```
-    === "From the Kubernetes Website"
-        See <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/" target="_blank">Install and Set Up `kubectl`</a>.
+    === "From the Kubernetes website"
+        See <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/" target="_blank">the Kubernetes docs</a> for other installation options.
 
-!!! success "Install Knative and Kubernetes on a local Docker Daemon using Konk"
+## Installing Knative on Kind (KonK)
+==**The fastest way to get started with Knative locally** is to use the <a href= "https://konk.dev" target="blank_">Konk (Knative-on-kind) script.</a>==
+
+!!! todo "Install Knative and Kubernetes on a local Docker Daemon using Konk"
     ```
     curl -sL install.konk.dev | bash
     ```
 
-??? question "Need to upgrade Kind?"
-    ```
-    brew upgrade kind
-    ```
-    Or follow the "Kind" link in the Pre-Requisites above
-## Other Installation Options
-  - If you would like to customize the Knative installation or install it on a remote cluster, start by [Checking the Pre-Requisites](../install/prerequisites.md) then come back here to finish the remaining steps!
+??? question "What does the KonK script actually do?"
+    Knative on Kind (KonK) is a shell script which:
 
-!!! warning
-    You will need `networking layer` and `DNS` for Knative Serving as well as a `broker` for Knative Eventing if you want to follow this tutorial.
+      1. Checks to see that you have Kind installed and creates a Cluster called "knative" via **[`01-kind.sh`](https://github.com/csantanapr/knative-kind/blob/master/01-kind.sh)**
+
+      2. Installs **Knative Serving** with **Kourier** as the networking layer and **nip.io** as the DNS + some port-forwarding magic on the "knative" Cluster via **[`02-serving.sh`](https://github.com/csantanapr/knative-kind/blob/master/02-serving.sh)**
+
+      3. Installs **Knative Eventing** with an In-Memory **Channels** and In-Memory **Broker** on the "knative" Cluster via **[`04-eventing.sh`](https://github.com/csantanapr/knative-kind/blob/master/04-eventing.sh)**
