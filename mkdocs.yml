@@ -198,7 +198,18 @@ markdown_extensions:
       permalink: true
 
 
+copyright: "Copyright © 2021 The Knative Authors"
+
 extra:
-  knative_version: v0.20.0
+  knative_version: v0.21.0
+  social:
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/KnativeProject
+    - icon: fontawesome/brands/github
+      link: https://github.com/knative/community
+      name: Knative Community on Github
+    - icon: fontawesome/brands/slack
+      link: https://slack.knative.dev
+      name: Slack
   version:
     provider: mike

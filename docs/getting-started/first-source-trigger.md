@@ -6,25 +6,25 @@ A `Source` is a Kubernetes custom resource (CR) that emits CloudEvents to a spec
 You can check the current state of sources in your deployment by running the following command:
 
 ```bash
-    kn source list
+kn source list
 ```
 
 You should get:
-```bash
-    No sources found.
+```{ .bash .no-copy }
+No sources found.
 ```
 
 You haven't deployed any `Sources` to your Knative deployment, so there shouldn't be any present when `kn` checks for them. **Let's remedy this by creating our first Knative `Source`.**
 ```bash
-    kn service create cloudevents-player \
-    --image ruromero/cloudevents-player:latest \
-    --env BROKER_URL=<broker-url>
+kn service create cloudevents-player \
+--image ruromero/cloudevents-player:latest \
+--env BROKER_URL=<broker-url>
 ```
 Where `<broker-url>` is the URL of your In-Memory Broker which we discovered in the previous step.
 
 You should get:
-```bash
-    ... 'cloudevents-player-xxxxx-``' is available at URL: <service-url>
+```{ .bash .no-copy }
+... 'cloudevents-player-xxxxx-``' is available at URL: <service-url>
 ```
 Where `<service-url>` is the location where your Knative Service is hosted.
 
@@ -58,12 +58,12 @@ A [`Trigger`](../eventing/triggers/) represents a desire to subscribe to events 
 If, for example, you wanted to intake the CloudEvents our CloudEvents Player was emitting to our `Broker` you could create a `Trigger`, like so:
 
 ```bash
-    kn trigger create cloudevents-player --sink cloudevents-player
+kn trigger create cloudevents-player --sink cloudevents-player
 ```
 Notice that you specified a `Sink` in the creation of our `Trigger` which tells Knative where to put the Events this `Trigger` is listening for.
 
 You should see:
-```bash
+```{ .bash .no-copy }
 Trigger 'cloudevents-player' successfully created in namespace 'default'.
 ```
 

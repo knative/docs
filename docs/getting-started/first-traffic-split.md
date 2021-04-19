@@ -44,7 +44,7 @@ Instead of "world," let's have our Knative Service "hello" greet "Knative." You 
     ```
 
 As before, Knative spits out some helpful information to the CLI:
-```bash
+```{ .bash .no-copy }
 Service hello created to latest revision 'hello-knative' is available at URL:
 http://hello.default.127.0.0.1.nip.io
 ```
@@ -57,7 +57,7 @@ curl http://hello.default.127.0.0.1.nip.io
 ```
 
 **The output should be:**
-```
+```{ .bash .no-copy }
 Hello Knative!
 ```
 
@@ -79,8 +79,8 @@ We can easily see a list of our existing revisions with the `kn` CLI:
     kubectl get revisions
     ```
 
-    **The output should be:**
-```bash
+**The output should be:**
+```{ .bash .no-copy }
 NAME            SERVICE   TRAFFIC   TAGS   GENERATION   AGE   CONDITIONS   READY   REASON
 hello-knative   hello     100%             2            30s   3 OK / 4     True    
 hello-world     hello                      1            5m    3 OK / 4     True    
@@ -120,12 +120,11 @@ By default, when Knative creates a brand new `Revision` it directs 100% of traff
     ```
 
 Now when we curl our Knative Service URL...
-```bash
+```{ .bash .no-copy }
 curl http://hello.default.127.0.0.1.nip.io
 Hello Knative!
 
 curl http://hello.default.127.0.0.1.nip.io
-Hello world!
-```
+
 
 Congratulations, :tada: you've successfully split traffic between 2 different `Revisions`. Up next, Knative Eventing!
