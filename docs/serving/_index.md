@@ -77,6 +77,10 @@ in the Knative Serving repository.
 - [Assigning a static IP address for Knative on Google Kubernetes Engine](./gke-assigning-static-ip-address.md)
 - [Using subroutes](./using-subroutes.md)
 
+## Observability
+
+- [Serving Metrics API](./metrics.md)
+
 ## Known Issues
 
 See the [Knative Serving Issues](https://github.com/knative/serving/issues) page
