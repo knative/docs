@@ -31,7 +31,7 @@ To install the serving component:
    kubectl apply -f {{< artifact repo="serving" file="serving-core.yaml" >}}
    ```
 For information about the YAML files in the Knative Serving and Eventing releases, see
-[Installation files](./installation-files.md).
+[Installation files](./installation-files).
 
 
 ## Install a networking layer
