@@ -7,8 +7,7 @@ aliases:
   - ../cronjob-source
 ---
 
-This topic explains event-driven architecture in terms of producers and consumers and, to that end,
-shows how to configure PingSource as an event source targeting a Knative Service.
+This topic explains event-driven architecture in terms of producers and consumers, and shows how to configure PingSource as an event source targeting a Knative service.
 
 ## Before you begin
 
