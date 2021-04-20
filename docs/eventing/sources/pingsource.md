@@ -188,7 +188,7 @@ Data,
   }
 ```
 
-If you created a PingSource with binary data, you also see the following:
+If you created a PingSource with binary data, the output will be similar to the following:
 
 ```shell
 ☁️  cloudevents.Event
