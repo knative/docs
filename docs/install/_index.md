@@ -23,7 +23,7 @@ showlandingtoc: "false"
 
 You can install the Serving component, Eventing component, or both on your cluster by using one of the following deployment options:
 
-- Using a [YAML-based installation](./prerequisites.md)
+- Using a [YAML-based installation](./prerequisites)
 - Using the [Knative Operator](./knative-with-operators).
 - Following the documentation for vendor managed [Knative offerings](../knative-offerings).
 
