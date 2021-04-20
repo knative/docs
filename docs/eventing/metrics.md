@@ -4,6 +4,11 @@ weight: 99
 type: "docs"
 ---
 
+<br>
+
+**NOTE:** The metrics API may change in the future, this serves as a snapshot of the current metrics.
+
+
 ## Eventing sources
 
 Every source exposes by default a number of metrics to help user monitor events dispatched. Use the following metrics
@@ -49,4 +54,4 @@ By aggregating the metrics over the http code, events can be separated into two 
 | event_dispatch_latencies | The time spent dispatching an event from a in-memory Channel | Histogram | container_name<br>event_type<br>namespace_name=<br>response_code<br>response_code_class<br>unique_name | Milliseconds | Stable
 
 
-Note: A number of metrics eg. controller, Go runtime and others are omitted here as they are common across most components. For more about these metrics check the [Serving metrics API section](../serving/metrics/).
+**NOTE:** A number of metrics eg. controller, Go runtime and others are omitted here as they are common across most components. For more about these metrics check the [Serving metrics API section](../serving/metrics.md#controller).

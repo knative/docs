@@ -4,7 +4,12 @@ weight: 99
 type: "docs"
 ---
 
-### Activator
+<br>
+
+**NOTE:** The metrics API may change in the future, this serves as a snapshot of the current metrics.
+
+
+## Activator
 
 | Metric Name | Description | Type | Tags | Unit | Status |
 |:-|:-|:-|:-|:-|:-|
@@ -12,7 +17,7 @@ type: "docs"
 | request_count | The number of requests that are routed to Activator.<br>These are requests that have been fulfilled from the activator handler. | Counter | configuration_name<br>container_name<br>namespace_name<br>pod_name<br>response_code<br>response_code_class<br>revision_name<br>service_name | Dimensionless | Stable |
 | request_latencies | The response time in millisecond for the fulfilled routed requests | Histogram | configuration_name<br>container_name<br>namespace_name<br>pod_name<br>response_code<br>response_code_class<br>revision_name<br>service_name | Milliseconds | Stable |
 
-### Autoscaler
+## Autoscaler
 
 Generic
 
@@ -38,7 +43,7 @@ KPA
 | pending_pods | Number of pods that are pending currently | Gauge | configuration_name<br>namespace_name<br>revision_name<br>service_name | Dimensionless | Stable |
 | terminating_pods | Number of pods that are terminating currently | Gauge | configuration_name<br>namespace_name<br>revision_name<br>service_name<br> | Dimensionless | Stable |
 
-### QUEUE proxy
+## Queue proxy
 
 Requests endpoint
 
@@ -51,7 +56,7 @@ Requests endpoint
 | revision_queue_depth | The current number of items in the serving and waiting queue, or not reported if unlimited concurrency | Gauge | configuration_name<br>event-display<br>container_name<br>namespace_name<br>pod_name<br>response_code_class<br>revision_name<br>service_name | Dimensionless | Stable |
 
 
-### Controller
+## Controller
 
 | Metric Name | Description | Type | Tags | Unit | Status |
 |:-|:-|:-|:-|:-|:-|
@@ -66,14 +71,14 @@ Requests endpoint
 | workqueue_unfinished_work_seconds | How long in seconds the outstanding workqueue items have been in flight (total). | Histogram | name | Seconds | Stable |
 | workqueue_longest_running_processor_seconds | How long in seconds the longest outstanding workqueue item has been in flight | Histogram | name | Seconds | Stable |
 
-### Webhook
+## Webhook
 
 | Metric Name | Description | Type | Tags | Unit | Status |
 |:-|:-|:-|:-|:-|:-|
 | request_count | The number of requests that are routed to webhook | Counter |  admission_allowed<br>kind_group<br>kind_kind<br>kind_version<br>request_operation<br>resource_group<br>resource_namespace<br>resource_resource<br>resource_version | Dimensionless | Stable |
 | request_latencies | The response time in milliseconds | Histogram |  admission_allowed<br>kind_group<br>kind_kind<br>kind_version<br>request_operation<br>resource_group<br>resource_namespace<br>resource_resource<br>resource_version | Milliseconds | Stable |
 
-### Go Runtime - memstats
+## Go Runtime - memstats
 
 Each process emits a number of memory statistics from the go runtime.
 
@@ -107,4 +112,4 @@ Each process emits a number of memory statistics from the go runtime.
 | go_num_forced_gc | The number of GC cycles that were forced by the application calling the GC function. | Gauge | name | Dimensionless | Stable |
 | go_gc_cpu_fraction | The fraction of this program's available CPU time used by the GC since the program started | Gauge | name | Dimensionless | Stable |
 
-Note: name tag is empty.
+**NOTE:** name tag is empty.
