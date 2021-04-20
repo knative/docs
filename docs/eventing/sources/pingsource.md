@@ -105,7 +105,7 @@ EOF
 {{< /tab >}}
 
 {{% tab name="kn" %}}
-Create the event source from the `ping-source.yaml` file by running:
+Create a PingSource by using the `kn` CLI:
 
 ```shell
 kn source ping create test-ping-source \
