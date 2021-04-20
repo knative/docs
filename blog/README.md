@@ -1,3 +1,9 @@
+---
+_build:
+  render: never
+  list: never
+---
+
 # Knative blog
 
 The Knative blog is owned by the [Documentation working group](https://knative.dev/community/contributing/working-groups/working-groups/#documentation) and run by the [Editorial Team](#leadership).
