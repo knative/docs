@@ -52,33 +52,10 @@ mesh by [manually injecting the Istio sidecars][1].
 
 #### Installing Istio without sidecar injection
 
-Enter the following command to install Istio:
+Run the following comand to install Istio.
 
 ```shell
-cat << EOF > ./istio-minimal-operator.yaml
-apiVersion: install.istio.io/v1alpha1
-kind: IstioOperator
-spec:
-  values:
-    global:
-      proxy:
-        autoInject: disabled
-      useMCP: false
-      # The third-party-jwt is not enabled on all k8s.
-      # See: https://istio.io/docs/ops/best-practices/security/#configure-third-party-service-account-tokens
-      jwtPolicy: first-party-jwt
-
-  addonComponents:
-    pilot:
-      enabled: true
-
-  components:
-    ingressGateways:
-      - name: istio-ingressgateway
-        enabled: true
-EOF
-
-istioctl install -f istio-minimal-operator.yaml
+istioctl install -y
 ```
 
 #### Installing Istio with sidecar injection
