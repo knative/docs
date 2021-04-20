@@ -4,120 +4,42 @@ weight: 50
 type: "docs"
 ---
 
-## Overview
+You can configure event delivery parameters for Knative Eventing components that are applied in cases where an event fails to be delivered
 
-Knative Eventing provides various configuration parameters to control the delivery
-of events in case of failure. For instance, you can decide to retry sending events
-that failed to be consumed, and if this didn't work you can decide to forward those
-events to a dead letter sink.
+## Configuring subscription event delivery
 
-## Configuring Subscription Delivery
-
-Knative Eventing offers fine-grained control on how events are delivered for each subscription by adding a `delivery` section. Consider this example:
+You can configure how events are delivered for each subscription by adding a `delivery` spec to the `Subscription` object, as shown in the following example:
 
 ```yaml
 apiVersion: messaging.knative.dev/v1
 kind: Subscription
 metadata:
-  name: with-dead-letter-sink
+  name: example-subscription
+  namespace: example-namespace
 spec:
-  channel:
-    apiVersion: messaging.knative.dev/v1
-    kind: InMemoryChannel
-    name: default
   delivery:
     deadLetterSink:
       ref:
         apiVersion: serving.knative.dev/v1
         kind: Service
-        name: error-handler
-  subscriber:
-    uri: http://doesnotexist.default.svc.cluster.local
+        name: example-sink
+    backoffDelay: <duration>
+    backoffPolicy: <policy-type>
+    retry: <integer>
 ```
 
-The `deadLetterSink` specifies where to send events that failed be consumed by `subscriber`.
+Where
 
-## Configuring Broker Delivery
+- The `deadLetterSink` spec contains configuration settings to enable using a dead letter sink. This tells the subscription what happens to events that cannot be delivered to the subscriber. When this is configured, events that fail to be delivered are sent to the dead letter sink destination. The destination can be a Knative service or a URI. In the example, the destination is a `Service` object, or Knative service, named `example-sink`.
+- The `backoffDelay` delivery parameter specifies the time delay before an event delivery retry is attempted after a failure. The duration of the `backoffDelay` parameter is specified using the ISO 8601 format. For example, `PT1S` specifies a 1 second delay.
+- The `backoffPolicy` delivery parameter can be used to specify the retry back off policy. The policy can be specified as either `linear` or `exponential`. When using the `linear` back off policy, the back off delay is the time interval specified between retries. When using the `exponential` back off policy, the back off delay is equal to `backoffDelay*2^<numberOfRetries>`.
+- `retry` specifies the number of times that event delivery is retried before the event is sent to the dead letter sink.
 
-Knative Eventing offers fine-grained control on how events are delivered for each broker by adding a `delivery` section. Consider this example:
+## Broker event delivery
 
-```yaml
-apiVersion: messaging.knative.dev/v1
-kind: Subscription
-metadata:
-  name: with-dead-letter-sink
-spec:
-  channel:
-    apiVersion: messaging.knative.dev/v1
-    kind: InMemoryChannel
-    name: default
-  delivery:
-    retry: 5
-    backoffPolicy: exponential # or linear
-    backoffDelay: "PT0.5S"     # or ISO8601 duration
-    deadLetterSink:
-      ref:
-        apiVersion: serving.knative.dev/v1
-        kind: Service
-        name: error-handler
-  subscriber:
-    uri: http://doesnotexist.default.svc.cluster.local
-```
+See the [broker](./broker/broker-event-delivery) documentation.
 
-The Broker will retry sending events 5 times with a backoff delay of 500 milliseconds
-and exponential backoff policy.
-
-The `deadLetterSink` specifies where to send events that failed to be consumed by `subscriber`
-after the specified number of retries.
-
-## Common Delivery Parameters
-
-The `delivery` value must be a Delivery Spec, which is a partial schema that is embedded in resources like `Broker`, `Trigger` and `Subscription`.
-
-```yaml
-# DeadLetterSink is the sink receiving event that could not be sent to
-# a destination.
-deadLetterSink:
-  ref:
-    apiVersion: v1
-    kind: Service
-    name: my-service
-  uri: /my-path
-
-# Retry is the minimum number of retries the sender should attempt when
-# sending an event before moving it to the dead letter sink.
-retry: 5
-
-// BackoffPolicy is the retry backoff policy (linear, exponential).
-backoffPolicy: exponential
-
-# BackoffDelay is the delay before retrying.
-# More information on Duration format:
-#  - https://www.iso.org/iso-8601-date-and-time-format.html
-#  - https://en.wikipedia.org/wiki/ISO_8601
-#
-# For linear policy, backoff delay is backoffDelay*<numberOfRetries>.
-# For exponential policy, backoff delay is backoffDelay*2^<numberOfRetries>.
-backoffDelay: PT2S
-```
-
-### deadLetterSink
-
-When present, events that failed to be consumed are sent to the `deadLetterSink`.
-In case of failure, the event is dropped and an error is logged into the system.
-
-The `deadLetterSink` value must be a Destination.
-
-```yaml
-# DeadLetterSink is the sink receiving event that could not be sent to
-# a destination.
-deadLetterSink:
-  ref:
-    apiVersion: v1
-    kind: Service
-    name: my-service
-  uri: /my-path
-```
+## Channel event delivery
 
 Failed events may, depending on the specific Channel implementation in use, be
 enhanced with extension attributes prior to forwarding to the`deadLetterSink`.
@@ -144,7 +66,7 @@ These extension attributes are as follows:
         - '{"key": "value"}'
         - ...any HTTP Response Body...
 
-## Channel Support
+### Channel Support
 
 The table below summarizes what delivery parameters are supported for each channel implementation.
 
@@ -154,26 +76,3 @@ The table below summarizes what delivery parameters are supported for each chann
 | In-Memory | `deadLetterSink`, `retry`, `backoffPolicy`, `backoffDelay` |
 | Kafka | `deadLetterSink`, `retry`, `backoffPolicy`, `backoffDelay` |
 | Natss | none |
-
-## Broker Support
-
-The table below summarizes what delivery parameters are supported for each Broker implementation.
-
-| Broker Class | Supported Delivery Parameters |
-| - | - |
-| googlecloud | `deadLetterSink` [^1], `retry`, `backoffPolicy`, `backoffDelay` [^2] |
-| Kafka | `deadLetterSink`, `retry`, `backoffPolicy`, `backoffDelay` |
-| MTChannelBasedBroker | depends on the underlying channel |
-| RabbitMQBroker | `deadLetterSink`, `retry`, `backoffPolicy`, `backoffDelay` |
-
-[^1]: deadLetterSink must be a GCP Pub/Sub topic uri:
-    ```yaml
-    deadLetterSink:
-      uri: pubsub://dead-letter-topic
-    ```
-
-    Please see the
-    [config-br-delivery](https://github.com/google/knative-gcp/blob/master/config/core/configmaps/br-delivery.yaml)
-    ConfigMap for a complete example.
-
-[^2]: The googlecloud broker only supports the `exponential` backoffPolicy.

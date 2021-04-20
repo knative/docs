@@ -1,6 +1,6 @@
 ---
-title: "Configuring brokers"
-weight: 02
+title: "ConfigMaps"
+weight: 101
 type: "docs"
 showlandingtoc: "false"
 aliases:
@@ -213,33 +213,3 @@ data:
       namespace2:
         brokerClass: MTChannelBasedBroker
 ```
-​
-## Configuring event delivery
-
-The following example demonstrates the use of `deadLetterSink` configuration to send failed events to a Knative service named `dlq-service`:
-
-```yaml
-apiVersion: eventing.knative.dev/v1
-kind: Broker
-metadata:
-  annotations:
-    eventing.knative.dev/broker.class: MTChannelBasedBroker
-  name: default
-spec:
-  # Configuration specific to this broker.
-  config:
-    apiVersion: v1
-    kind: ConfigMap
-    name: config-br-default-channel
-    namespace: knative-eventing
-  # Where to deliver Events that failed to be processed.
-  delivery:
-    deadLetterSink:
-      ref:
-        apiVersion: serving.knative.dev/v1
-        kind: Service
-        name: dlq-service
-```
-
-See also: [Delivery Parameters](../event-delivery.md#configuring-broker-delivery)
-See also: [Broker Specifications](https://github.com/knative/specs/blob/main/specs/eventing/broker.md)
