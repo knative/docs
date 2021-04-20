@@ -10,14 +10,14 @@ To add extra features to your Knative Serving or Eventing installation, you can 
 by applying YAML files using the `kubectl` CLI.
 
 For information about the YAML files in the Knative Serving and Eventing releases, see
-[Installation files](./installation-files.md).
+[Installation files](./installation-files).
 
 
 # Prerequisites
 
 Before you install any optional extensions, you must install Knative Serving or Eventing.
-See [Installing Serving using YAML files](./install-serving-with-yaml.md)
-and [Installing Eventing using YAML files](./install-eventing-with-yaml.md).
+See [Installing Serving using YAML files](./install-serving-with-yaml)
+and [Installing Eventing using YAML files](./install-eventing-with-yaml).
 
 
 ## Install optional Serving extensions
@@ -279,4 +279,4 @@ To learn more about the VMware sources and bindings, try
 
 ## Next steps
 
-- To easily interact with Knative Services and Eventing components, [install the `kn` CLI](/docs/client/install-kn.md)
+- To easily interact with Knative Services and Eventing components, [install the `kn` CLI](/docs/client/install-kn)
