@@ -12,7 +12,7 @@ This topic describes how to install Knative Serving by applying YAML files using
 ## Prerequisites
 
 Before installation, you must meet the prerequisites.
-See [Knative Prerequisites](./prerequisites.md).
+See [Knative Prerequisites](./prerequisites).
 
 
 ## Install the Serving component
@@ -375,8 +375,8 @@ Refer to the "Real DNS" method for a permanent solution.
 
 After installing Knative Serving:
 
-- [Installing Knative Eventing using YAML files](./install-eventing-with-yaml.md)
+- [Installing Knative Eventing using YAML files](./install-eventing-with-yaml)
 
-- To add optional enhancements to your installation, see [Installing optional extensions](./install-extensions.md).
+- To add optional enhancements to your installation, see [Installing optional extensions](./install-extensions).
 
-- To easily interact with Knative Services, [install the `kn` CLI](/docs/client/install-kn.md)
+- To easily interact with Knative Services, [install the `kn` CLI](/docs/client/install-kn)
