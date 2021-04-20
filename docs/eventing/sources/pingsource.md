@@ -118,9 +118,7 @@ kn source ping create test-ping-source \
 
 ## (Optional) Create a PingSource with binary data
 
-You might sometimes want to send binary data, which cannot be directly serialized in YAML, to
-downstream. You can do so using `dataBase64` as the payload.
-As the name suggests, `dataBase64` should carry data that is base64-encoded.
+You can send binary data, that cannot be directly serialized by using YAML, to downstream, by using `dataBase64` as the payload. `dataBase64` carries data that is base64-encoded.
 
 **Note:** `data` and `dataBase64` cannot co-exist.
 
