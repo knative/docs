@@ -20,17 +20,17 @@ creating your own event source as a ContainerSource.
 
 ### Prepare the heartbeats image
 
-Knative [event-sources](https://github.com/knative/eventing-contrib) has a
+Knative [event-sources](https://github.com/knative/eventing) has a
 sample of heartbeats event source. You could clone the source code by
 
 ```
-git clone -b "{{< branch >}}" https://github.com/knative/eventing-contrib.git
+git clone -b "{{< branch >}}" https://github.com/knative/eventing.git
 ```
 
 And then build a heartbeats image and publish to your image repo with
 
 ```
-ko publish knative.dev/eventing-contrib/cmd/heartbeats
+ko publish knative.dev/eventing/cmd/heartbeats
 ```
 
 **Note**: `ko publish` requires:
@@ -54,7 +54,7 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+        - image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
 ```
 
 Use following command to create the service from `service.yaml`:
@@ -131,7 +131,7 @@ Validation: valid
 Context Attributes,
   specversion: 1.0
   type: dev.knative.eventing.samples.heartbeat
-  source: https://knative.dev/eventing-contrib/cmd/heartbeats/#event-test/mypod
+  source: https://knative.dev/eventing/cmd/heartbeats/#event-test/mypod
   id: 2b72d7bf-c38f-4a98-a433-608fbcdd2596
   time: 2019-10-18T15:23:20.809775386Z
   contenttype: application/json
@@ -167,7 +167,7 @@ any tools you like. Here are some basic guidelines:
   [CloudEvents](https://github.com/cloudevents/spec/blob/master/spec.md#design-goals)
   format is recommended.
 
-[heartbeats](https://github.com/knative/eventing-contrib/blob/main/cmd/heartbeats/main.go)
+[heartbeats](https://github.com/knative/eventing/blob/main/cmd/heartbeats/main.go)
 event source is a sample for your reference.
 
 ### Create the ContainerSource using this container image

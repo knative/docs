@@ -52,7 +52,7 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/appender
+        - image: gcr.io/knative-releases/knative.dev/eventing/cmd/appender
           env:
             - name: MESSAGE
               value: " - Handled by 0"
@@ -66,7 +66,7 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/appender
+        - image: gcr.io/knative-releases/knative.dev/eventing/cmd/appender
           env:
             - name: MESSAGE
               value: " - Handled by 1"
@@ -79,7 +79,7 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/appender
+        - image: gcr.io/knative-releases/knative.dev/eventing/cmd/appender
           env:
             - name: MESSAGE
               value: " - Handled by 2"
@@ -206,7 +206,7 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/appender
+        - image: gcr.io/knative-releases/knative.dev/eventing/cmd/appender
 ---
 apiVersion: eventing.knative.dev/v1
 kind: Trigger

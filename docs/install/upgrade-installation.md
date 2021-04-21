@@ -28,7 +28,6 @@ applications:
 
 - [Serving](https://github.com/knative/serving/releases)
 - [Eventing](https://github.com/knative/eventing/releases)
-- [Eventing-Contrib](https://github.com/knative/eventing-contrib/releases)
 
 Release notes are published with each version on the "Releases" page of their
 respective repositories in GitHub.

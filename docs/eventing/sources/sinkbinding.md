@@ -52,7 +52,7 @@ Create a Knative service:
 {{% tab name="kn" %}}
 
 ```bash
-kn service create hello --image gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display --env RESPONSE="Hello Serverless!"
+kn service create hello --image gcr.io/knative-releases/knative.dev/eventing/cmd/event_display --env RESPONSE="Hello Serverless!"
 ```
 
 {{< /tab >}}
@@ -68,7 +68,7 @@ kn service create hello --image gcr.io/knative-releases/knative.dev/eventing-con
       template:
         spec:
           containers:
-            - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+            - image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
     ```
 2. Apply the file:
     ```bash
@@ -104,7 +104,7 @@ Create a `CronJob` object:
               restartPolicy: Never
               containers:
                 - name: single-heartbeat
-                  image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/heartbeats
+                  image: gcr.io/knative-releases/knative.dev/eventing/cmd/heartbeats
                   args:
                   - --period=1
                   env:
