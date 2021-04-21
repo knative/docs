@@ -15,14 +15,10 @@ You can create a broker by using the `kn` CLI or by applying YAML files using `k
 1. You can create a broker in current namespace by entering the following command:
 
     ```shell
-    kn broker create <broker-name>
-    ```
-
-1. Optional: You can also specify an existing namespace in which to create the broker by entering the following command:
-
-    ```shell
     kn broker create <broker-name> -n <namespace>
     ```
+
+    **NOTE:** If you choose not to specify a namespace, the broker will be created in the current namespace.
 
 1. Optional: Verify that the broker was created by listing existing brokers. Enter the following command:
 
@@ -44,19 +40,15 @@ The YAML in the following example creates a broker named `default` in the curren
 1. Create a broker in the current namespace:
 
     ```yaml
-    kubectl apply -f <filename> - <<EOF
+    kubectl apply -f - <<EOF
     apiVersion: eventing.knative.dev/v1
     kind: Broker
     metadata:
      name: <broker-name>
     EOF
     ```
-
-    Where
-    - `<filename>` is the name that you want to give to the YAML file that will contain your broker. For example, `broker.yaml`.
-    <br/><br/>
-<!--Do not remove, linebreak for presentation-->
-2. Optional: Verify that the broker is working correctly, by entering the following command:
+    
+1. Optional: Verify that the broker is working correctly, by entering the following command:
 
     ```shell
     kubectl -n <namespace> get broker <broker-name>
