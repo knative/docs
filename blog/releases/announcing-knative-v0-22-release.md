@@ -40,6 +40,8 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
 
 ### Serving v0.22
 
+<!-- Original notes are here: https://github.com/knative/serving/releases/tag/v0.22.0 -->
+
 #### 💫 New Features & Changes
 
 - Added an autoscaling annotation to choose a different aggregation algorithm for the autoscaling metrics. This is experimental currently. [#10840](https://github.com/knative/serving/pull/10840)
@@ -55,6 +57,8 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
 
 
 ### Eventing v0.22
+
+<!-- Original notes are here: https://github.com/knative/eventing/releases/tag/v0.22.1 -->
 
 #### 🚨 API Changes
 
@@ -78,6 +82,8 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
 
 #### Eventing Kafka Broker v0.22
 
+<!-- Original notes are here: https://github.com/knative-sandbox/eventing-kafka-broker/releases/tag/v0.22.1 -->
+
 #### 🚨 Breaking or Notable
 
 - Kubernetes's minimum version is 1.18. [#779](https://github.com/knative-sandbox/eventing-kafka-broker/pull/779)
@@ -94,6 +100,8 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
 - Fix unable to deploy KafkaSink without Kafka Broker installed [#714](https://github.com/knative-sandbox/eventing-kafka-broker/pull/714)
 
 ### Client v0.22
+
+<!-- Original notes are here: https://github.com/knative/eventing/releases/tag/v0.22.1 and https://github.com/knative/client/blob/main/CHANGELOG.adoc#v0220-2021-04-06 -->
 
 kn 0.22.0 comes with some bug fixes and minor feature enhancements. It's mostly a polishing release. If you are using the client API, there is a breaking change that was needed to align with Kubernetes client API's
 
@@ -142,6 +150,8 @@ The plugins that are released aligned with 0.22 are:
 - Added support for namespaces for all commands that takes a `--sink` option
 
 ### Operator v0.22
+
+<!-- Original notes are here: https://github.com/knative/operator/releases/tag/v0.22.1 -->
 
 #### 🐞 Bug Fixes
 
