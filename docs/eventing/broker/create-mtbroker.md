@@ -1,6 +1,6 @@
 ---
 title: "Creating a broker"
-weight: 03
+weight: 01
 type: "docs"
 showlandingtoc: "false"
 ---
@@ -48,7 +48,7 @@ The YAML in the following example creates a broker named `default` in the curren
     apiVersion: eventing.knative.dev/v1
     kind: Broker
     metadata:
-     name: default
+     name: <broker-name>
     EOF
     ```
 

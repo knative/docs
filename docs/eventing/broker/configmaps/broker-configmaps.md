@@ -1,6 +1,6 @@
 ---
 title: "ConfigMaps"
-weight: 101
+weight: 05
 type: "docs"
 showlandingtoc: "false"
 aliases:

@@ -1,6 +1,6 @@
 ---
 title: "Apache Kafka Broker"
-weight: 30
+weight: 10
 type: "docs"
 aliases:
   - docs/eventing/broker/kafka-broker

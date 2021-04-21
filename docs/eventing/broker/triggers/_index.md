@@ -1,6 +1,6 @@
 ---
 title: "Triggers"
-weight: 70
+weight: 02
 type: "docs"
 showlandingtoc: "false"
 aliases:

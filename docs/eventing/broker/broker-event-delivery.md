@@ -1,14 +1,11 @@
 ---
 title: "Event delivery"
-weight: 04
+weight: 03
 type: "docs"
 showlandingtoc: "false"
-aliases:
-  - /docs/eventing/event-delivery/#configuring-broker-delivery
-  - /docs/eventing/event-delivery/#broker-support
 ---
 
-You can configure how events are delivered for each broker by adding a `delivery` spec to the `Broker` object, as shown in the following example:
+You can configure how events are delivered for each broker by adding a `delivery` spec, as shown in the following example:
 
 ```yaml
 apiVersion: eventing.knative.dev/v1
