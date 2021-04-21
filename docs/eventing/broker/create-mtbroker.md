@@ -47,7 +47,7 @@ The YAML in the following example creates a broker named `default` in the curren
      name: <broker-name>
     EOF
     ```
-    
+
 1. Optional: Verify that the broker is working correctly, by entering the following command:
 
     ```shell
