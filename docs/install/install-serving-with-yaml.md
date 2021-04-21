@@ -379,4 +379,4 @@ After installing Knative Serving:
 
 - To add optional enhancements to your installation, see [Installing optional extensions](./install-extensions).
 
-- To easily interact with Knative Services, [install the `kn` CLI](/docs/client/install-kn)
+- To easily interact with Knative services, [install the `kn` CLI](/docs/client/install-kn).
