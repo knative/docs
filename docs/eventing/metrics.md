@@ -49,11 +49,9 @@ By aggregating the metrics over the http code, events can be separated into two 
 **NOTE:** A number of metrics eg. controller, Go runtime and others are omitted here as they are common across most components. For more about these metrics check the [Serving metrics API section](../serving/metrics.md#controller).
 
 
-## Developer metrics
-
 ### Eventing sources
 
-Eventing sources are created by users so they can trigger their applications with events.
+Eventing sources are created by users who own the related system, so they can trigger applications with events.
 Every source exposes by default a number of metrics to help user monitor events dispatched. Use the following metrics
 to verify that events have been delivered from the source side, thus verifying that the source and any connection with the source work as expected.
 
