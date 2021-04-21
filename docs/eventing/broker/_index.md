@@ -3,11 +3,13 @@ title: "Brokers"
 weight: 60
 type: "docs"
 showlandingtoc: "false"
+aliases:
+  - docs/eventing/broker/alternate
 ---
 
 Brokers are Kubernetes [custom resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) that define an event mesh for collecting a pool of [CloudEvents](https://cloudevents.io/). Brokers provide a discoverable endpoint, `status.address`, for event ingress, and triggers for event delivery. Event producers can send events to a broker by POSTing the event to the `status.address.url` of the broker.
 
-Event delivery mechanics are an implementation detail that depend on the configured [broker class](./configuring-brokers/#configuring-the-default-broker-class). Using brokers and triggers abstracts the details of event routing from the event producer and event consumer.
+Event delivery mechanics are an implementation detail that depend on the configured [broker class](./configmaps/broker-configmaps/#broker-class-options). Using brokers and triggers abstracts the details of event routing from the event producer and event consumer.
 
 <img src="images/broker-workflow.svg" width="70%">
 
@@ -21,7 +23,32 @@ architecture. For example, separate brokers for events containing Personally
 Identifiable Information (PII) and non-PII events can simplify audit and access
 control rules.
 
+## Broker types
+
+The following broker types are available for use with Knative Eventing.
+
+### Multi-tenant channel-based broker
+
+Knative Eventing provides a multi-tenant (MT) channel-based broker implementation that uses channels for event routing.
+
+Before you can use the MT channel-based broker, you must install a [channel implementation](../channels/channel-types-defaults).
+
+### Alternative broker implementations
+
+In the Knative Eventing ecosystem, alternative broker implementations are welcome as long as they respect the [broker specifications](https://github.com/knative/specs/blob/main/specs/eventing/broker.md).
+
+The following is a list of brokers provided by the community or vendors:
+
+#### GCP broker
+
+The GCP broker is optimized for running in GCP. For more details, refer to the [documentation](https://github.com/google/knative-gcp/blob/master/docs/install/install-gcp-broker.md).
+
+#### Apache Kafka broker
+
+For information about the Apache Kafka broker, see [link](./kafka-broker).
+
 ## Next steps
 
-- Learn about [supported broker types](./broker-types).
-- Configure [default broker settings](./configuring-brokers/).
+- Create a [broker](./create-mtbroker).
+- Configure [default broker ConfigMap settings](./configmaps/broker-configmaps).
+- View the [broker specifications](https://github.com/knative/specs/blob/main/specs/eventing/broker.md).
