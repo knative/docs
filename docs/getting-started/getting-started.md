@@ -3,7 +3,7 @@
 ## Before you begin
 - You will need to have <a href= "https://kind.sigs.k8s.io/docs/user/quick-start/" target="blank_">Kind installed</a>.
 
-??? todo "Installing Kind"
+???+ todo "Installing Kind"
 
     === "Using Homebrew"
         ```bash
@@ -19,7 +19,7 @@
         See <a href= "https://kind.sigs.k8s.io/docs/user/quick-start/" target="blank_">Kind website</a> for other installation options.
 - You will need to have `kubectl` installed.
 
-??? todo "Installing the `kubectl` CLI"
+???+ todo "Installing the `kubectl` CLI"
 
     === "Using Homebrew"
         If you are on macOS and using [Homebrew](http://brew.sh) package manager, you can install kubectl with Homebrew.

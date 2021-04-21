@@ -6,9 +6,8 @@
 #### Check the Knative Pods
 Let's run our "Hello world!" Service just one more time. This time, try the Knative Service `URL` in your browser or by using `open` instead of `curl` in your CLI.
 ```bash
-open <service-url>
+open http://hello.default.127.0.0.1.nip.io
 ```
-Where `<service-url>` is the URL where your Knative Service was deployed (same as the `<service-url>` in the last step).
 
 You can watch the pods and see how they scale down to zero after http traffic stops to the url
 ```bash
