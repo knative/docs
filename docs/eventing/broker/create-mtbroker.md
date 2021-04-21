@@ -41,17 +41,35 @@ You can create a broker by using the `kn` CLI or by applying YAML files using `k
 
 The YAML in the following example creates a broker named `default` in the current namespace. For more information about configuring broker options using YAML, see the full [broker configuration example](./example-mtbroker).
 
-```yaml
-kubectl apply -f <filename> - <<EOF
-apiVersion: eventing.knative.dev/v1
-kind: Broker
-metadata:
- name: default
-EOF
-```
+1. Create a broker in the current namespace:
 
-Where
-- `<filename>` is the name that you want to give to the YAML file that will contain your broker. For example, `broker.yaml`.
+    ```yaml
+    kubectl apply -f <filename> - <<EOF
+    apiVersion: eventing.knative.dev/v1
+    kind: Broker
+    metadata:
+     name: default
+    EOF
+    ```
+
+    Where
+    - `<filename>` is the name that you want to give to the YAML file that will contain your broker. For example, `broker.yaml`.
+    <br/><br/>
+<!--Do not remove, linebreak for presentation-->
+2. Optional: Verify that the broker is working correctly, by entering the following command:
+
+    ```shell
+    kubectl -n <namespace> get broker <broker-name>
+    ```
+
+    This shows information about your broker. If the broker is working correctly, it shows a `READY` status of `True`:
+
+    ```shell
+    NAME      READY   REASON   URL                                                                                 AGE
+    default   True             http://broker-ingress.knative-eventing.svc.cluster.local/event-example/default      1m
+    ```
+
+    If the `READY` status is `False`, wait a few moments and then run the command again.
 
     {{< /tab >}}
 {{< /tabs >}}
