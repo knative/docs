@@ -12,7 +12,7 @@ This topic describes how to install Knative Eventing by applying YAML files usin
 ## Prerequisites
 
 Before installation, you must meet the prerequisites.
-See [Knative Prerequisites](./prerequisites.md).
+See [Knative Prerequisites](./prerequisites).
 
 
 ## Install the Eventing component
@@ -30,6 +30,9 @@ To install the Eventing component:
    ```bash
    kubectl apply -f {{< artifact repo="eventing" file="eventing-core.yaml" >}}
    ```
+
+For information about the YAML files in the Knative Serving and Eventing releases, see
+[Installation files](./installation-files).
 
 
 ## Verify the installation
@@ -218,6 +221,8 @@ data:
 
 After installing Knative Eventing:
 
-- If you want to add extra features to your installation, see [Installing optional extensions](./install-extensions.md).
-- If you want to install the Knative Serving component, see [Installing Serving using YAML files](./install-serving-with-yaml.md)
-- Install the [Knative CLI](./install-kn) to use `kn` commands.
+- To easily interact with Knative Eventing components, [install the `kn` CLI](/docs/client/install-kn)
+
+- To add optional enhancements to your installation, see [Installing optional extensions](./install-extensions)
+
+- [Installing Knative Serving using YAML files](./install-serving-with-yaml)

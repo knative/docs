@@ -12,7 +12,7 @@ This topic describes how to install Knative Serving by applying YAML files using
 ## Prerequisites
 
 Before installation, you must meet the prerequisites.
-See [Knative Prerequisites](./prerequisites.md).
+See [Knative Prerequisites](./prerequisites).
 
 
 ## Install the Serving component
@@ -25,11 +25,13 @@ To install the serving component:
    kubectl apply -f {{< artifact repo="serving" file="serving-crds.yaml" >}}
    ```
 
-1. Install the core components of Serving:
+1. Install the core components of Knative Serving:
 
    ```bash
    kubectl apply -f {{< artifact repo="serving" file="serving-core.yaml" >}}
    ```
+For information about the YAML files in the Knative Serving and Eventing releases, see
+[Installation files](./installation-files).
 
 
 ## Install a networking layer
@@ -373,6 +375,8 @@ Refer to the "Real DNS" method for a permanent solution.
 
 After installing Knative Serving:
 
-- If you want to add extra features to your installation, see [Installing optional extensions](./install-extensions.md).
-- If you want to install the Knative Eventing component, see [Installing Eventing using YAML files](./install-eventing-with-yaml.md)
-- Install the [Knative CLI](./install-kn) to use `kn` commands.
+- [Installing Knative Eventing using YAML files](./install-eventing-with-yaml)
+
+- To add optional enhancements to your installation, see [Installing optional extensions](./install-extensions).
+
+- To easily interact with Knative services, [install the `kn` CLI](/docs/client/install-kn).
