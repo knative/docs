@@ -98,3 +98,7 @@ resources:
 
 1. **[Sequence](./flows/sequence)** provides a way to define an in-order list of functions.
 1. **[Parallel](./flows/parallel)** provides a way to define a list of branches for events.
+
+## Observability
+
+- [Eventing Metrics API](./metrics.md)
