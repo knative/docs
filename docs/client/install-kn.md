@@ -14,7 +14,6 @@ For macOS, you can install `kn` by using <a href="https://github.com/knative/hom
 
 ```
 brew install knative/client/kn
-```
 ## Install kn using a binary
 
 You can install `kn` by downloading the executable binary for your system and placing it in the system path.
