@@ -29,4 +29,4 @@ channels:
     status: Proof of Concept
     support: None
     description: >
-      Kafka Channel implementation, contributed by SAP's Kyma project, is a Knative Eventing implementation of a Kafka backed channel which provides advanced functionality and production grade qualities as an alternative to what the eventing-contrib/kafka implementation offers.
+      Kafka Channel implementation, contributed by SAP's Kyma project, is a Knative Eventing implementation of a Kafka backed channel which provides advanced functionality and production grade qualities.
