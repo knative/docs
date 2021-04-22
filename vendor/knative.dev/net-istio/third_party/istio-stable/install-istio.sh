@@ -17,7 +17,7 @@
 source $(dirname $0)/../download-istio.sh
 
 # Download Istio
-download_istio 1.8.2
+download_istio 1.8.4
 trap cleanup_istio EXIT
 
 ${ISTIO_DIR}/bin/istioctl install -f "$(dirname $0)/$1" -y

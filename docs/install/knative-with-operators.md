@@ -1,11 +1,12 @@
 ---
 title: "Knative Operator installation"
-weight: 02
+weight: 05
 type: "docs"
 showlandingtoc: "false"
 ---
 
 Knative provides a [Kubernetes Operator](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/) to install, configure and manage Knative.
+You can install the Serving component, Eventing component, or both on your cluster.
 
 **NOTE:** The Knative Operator is still in Alpha phase. It has not been tested in a production environment, and should be used
 for development or test purposes only.
@@ -699,43 +700,6 @@ If Knative Eventing is successfully installed, you should see:
 ```
 NAME               VERSION             READY   REASON
 knative-eventing   <version number>    True
-```
-
-## Uninstall Knative
-
-### Removing the Knative Serving component
-
-Remove the Knative Serving CR:
-
-```
-kubectl delete KnativeServing knative-serving -n knative-serving
-```
-
-### Removing Knative Eventing component
-
-Remove the Knative Eventing CR:
-
-```
-kubectl delete KnativeEventing knative-eventing -n knative-eventing
-```
-
-Knative operator prevents unsafe removal of Knative resources. Even if the Knative Serving and Knative Eventing CRs are
-successfully removed, all the CRDs in Knative are still kept in the cluster. All your resources relying on Knative CRDs
-can still work.
-
-### Removing the Knative Operator:
-
-If you have installed Knative using the Release page, remove the operator using the following command:
-
-```
-kubectl delete -f {{< artifact org="knative" repo="operator" file="operator.yaml" >}}
-```
-
-If you have installed Knative from source, uninstall it using the following command while in the root directory
-for the source:
-
-```
-ko delete -f config/
 ```
 
 ## What's next

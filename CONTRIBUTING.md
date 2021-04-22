@@ -1,3 +1,8 @@
+---
+_build:
+  render: never
+  list: never
+---
 (This guide only appears on GitHub, not the website, because it
 **intentionally** does not include YAML front-matter.)
 

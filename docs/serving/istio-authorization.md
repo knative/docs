@@ -11,8 +11,10 @@ If you have configured additional security features, such as Istio's authorizati
 
 You must meet the following prerequisites to use Istio AuthorizationPolicy:
 
-- [Istio must be used for your Knative Ingress](https://knative.dev/docs/install/any-kubernetes-cluster/#installing-the-serving-component).
-- [Istio sidecar injection must be enabled](https://istio.io/latest/docs/setup/additional-setup/sidecar-injection/).
+- Istio must be used for your Knative Ingress.
+See [Install a networking layer](../install/install-serving-with-yaml.md#install-a-networking-layer).
+- Istio sidecar injection must be enabled.
+See the [Istio Documentation](https://istio.io/latest/docs/setup/additional-setup/sidecar-injection/).
 
 ## Mutual TLS in Knative
 

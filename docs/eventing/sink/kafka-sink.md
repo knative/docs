@@ -8,7 +8,7 @@ This page shows how to install and configure Apache Kafka Sink.
 
 ## Prerequisites
 
-[Knative Eventing installation](./../../install/any-kubernetes-cluster.md#installing-the-eventing-component).
+[Installing Eventing using YAML files](./../../install/install-eventing-with-yaml.md).
 
 ## Installation
 
@@ -77,7 +77,10 @@ spec:
    topic: mytopic
    bootstrapServers:
       - my-cluster-kafka-bootstrap.kafka:9092
-   auth.secret.ref.name: my_secret
+   auth:
+     secret:
+       ref:
+         name: my_secret
 ```
 
 The `Secret` `my_secret` must exist in the same namespace of the `KafkaSink`, in this case: `default`.
