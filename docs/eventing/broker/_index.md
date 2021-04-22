@@ -49,6 +49,6 @@ For information about the Apache Kafka broker, see [link](./kafka-broker).
 
 ## Next steps
 
-- Create a [broker](./create-mtbroker).
+- Create a [MT channel-based broker](./create-mtbroker).
 - Configure [default broker ConfigMap settings](./configmaps/broker-configmaps).
 - View the [broker specifications](https://github.com/knative/specs/blob/main/specs/eventing/broker.md).

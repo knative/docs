@@ -26,10 +26,10 @@ spec:
 
 Where
 
-- The `deadLetterSink` spec contains configuration settings to enable using a dead letter sink. This tells the subscription what happens to events that cannot be delivered to the subscriber. When this is configured, events that fail to be delivered are sent to the dead letter sink destination. The destination can be a Knative service or a URI. In the example, the destination is a `Service` object, or Knative service, named `example-sink`.
+- The `deadLetterSink` spec contains configuration settings to enable using a dead letter sink. This tells the subscription what happens to events that cannot be delivered to the subscriber. When this is configured, events that fail to be delivered are sent to the dead letter sink destination. The destination can be any Addressable object that conforms to the Knative Eventing sink contract, such as a Knative service, a Kubernetes service, or a URI. In the example, the destination is a `Service` object, or Knative service, named `example-sink`.
 - The `backoffDelay` delivery parameter specifies the time delay before an event delivery retry is attempted after a failure. The duration of the `backoffDelay` parameter is specified using the ISO 8601 format. For example, `PT1S` specifies a 1 second delay.
-- The `backoffPolicy` delivery parameter can be used to specify the retry back off policy. The policy can be specified as either `linear` or `exponential`. When using the `linear` back off policy, the back off delay is the time interval specified between retries. When using the `exponential` back off policy, the back off delay is equal to `backoffDelay*2^<numberOfRetries>`.
-- `retry` specifies the number of times that event delivery is retried before the event is sent to the dead letter sink.
+- The `backoffPolicy` delivery parameter can be used to specify the retry back off policy. The policy can be specified as either `linear` or `exponential`. When using the `linear` back off policy, the back off delay is the time interval specified between retries. This is a linearly increasing delay, which means that the back off delay increases by the given interval for each retry. When using the `exponential` back off policy, the back off delay increases by a multiplier of the given interval for each retry.
+- `retry` specifies the number of times that event delivery is retried before the event is sent to the dead letter sink. The initial delivery attempt is not included in the retry count, so the total number of delivery attempts is equal to the `retry` value +1.
 
 ## Broker Support
 
