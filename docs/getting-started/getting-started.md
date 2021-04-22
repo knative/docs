@@ -1,23 +1,47 @@
 # Installing Knative with KonK (Knative on Kind)
 
 ## Before you begin
-- You will need to have <a href= "https://kind.sigs.k8s.io/docs/user/quick-start/" target="blank_">Kind installed</a>.
+
+
+### Install <a href= "https://kind.sigs.k8s.io/docs/user/quick-start/" target="blank_">Kind</a>.
 
 ???+ todo "Installing Kind"
 
-    === "Using Homebrew"
+    === "macOS"
+        Use Homebrew
         ```bash
         brew install kind
         ```
+        Or
+        ```bash
+        curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.10.0/kind-darwin-amd64
+        ```
 
+    === "Linux"
+        ```bash
+        curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.10.0/kind-linux-amd64
+        chmod +x ./kind
+        mv ./kind /some-dir-in-your-PATH/kind
+        ```
+
+    === "Windows"
+        ```terminal
+        curl.exe -Lo kind-windows-amd64.exe https://kind.sigs.k8s.io/dl/v0.10.0/kind-windows-amd64
+        Move-Item .\kind-windows-amd64.exe c:\some-dir-in-your-PATH\kind.exe
+        ```
+        Use [Chocolatey](https://chocolatey.org/packages/kind)
+
+See <a href= "https://kind.sigs.k8s.io/docs/user/quick-start/" target="blank_">Kind website</a> for other installation options.
+
+??? question "Need to upgrade Kind?"
     === "Upgrade Kind using Homebrew"
         ```bash
         brew upgrade kind
         ```
+    === "Other Upgrade Options"
+        See <a href= "https://kind.sigs.k8s.io/docs/user/quick-start/" target="blank_">Kind website</a> for other upgrade options.
 
-    === "From the Kind website"
-        See <a href= "https://kind.sigs.k8s.io/docs/user/quick-start/" target="blank_">Kind website</a> for other installation options.
-- You will need to have `kubectl` installed.
+### Install `kubectl`
 
 ???+ todo "Installing the `kubectl` CLI"
 
