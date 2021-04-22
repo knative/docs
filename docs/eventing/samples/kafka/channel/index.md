@@ -216,6 +216,17 @@ $ kubectl create secret --namespace <namespace> generic <kafka-auth-secret> \
 
 *NOTE:* It is important to use the same keys; `user`, `password` and `saslType`.
 
+### SASL authentication with public CA certs
+
+If you are using SASL against public CA certs, use the `tls.enabled=true` flag, rather than the `ca.crt` argument when creating the secret:
+```
+$ kubectl create secret --namespace <namespace> generic <kafka-auth-secret> \
+    --from-literal=tls.enabled=true \
+  --from-literal=password="SecretPassword" \
+  --from-literal=saslType="SCRAM-SHA-512" \
+  --from-literal=user="my-sasl-user"
+```
+
 Reference your secret and the namespace of the secret in the `config-kafka` ConfigMap:
 ```
 apiVersion: v1
