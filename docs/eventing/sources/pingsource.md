@@ -5,7 +5,7 @@ weight: 31
 type: "docs"
 ---
 
-![version](https://img.shields.io/badge/API_Version-v1beta1-red?style=flat-square)
+![version](https://img.shields.io/badge/API_Version-v1beta2-red?style=flat-square)
 
 A PingSource produces events with a fixed payload on a specified cron schedule.
 
@@ -15,7 +15,7 @@ The PingSource source type is enabled by default when you install Knative Eventi
 
 ## Example
 
-This example shows how to send an event every second to a Event Display Service.
+This example shows how to send an event every minute to a Event Display Service.
 
 ### Creating a namespace
 
@@ -72,20 +72,21 @@ EOF
 ### Creating the PingSource
 
 You can now create the `PingSource` sending an event containing
-`{"message": "Hello world!"}` every second.
+`{"message": "Hello world!"}` every minute.
 
 {{< tabs name="create-source" default="YAML" >}}
 {{% tab name="YAML" %}}
 
 ```shell
 kubectl create -n pingsource-example -f - <<EOF
-apiVersion: sources.knative.dev/v1beta1
+apiVersion: sources.knative.dev/v1beta2
 kind: PingSource
 metadata:
   name: test-ping-source
 spec:
   schedule: "*/1 * * * *"
-  jsonData: '{"message": "Hello world!"}'
+  contentType: "application/json"
+  data: '{"message": "Hello world!"}'
   sink:
     ref:
       apiVersion: v1
@@ -97,17 +98,41 @@ EOF
 {{< /tab >}}
 
 {{% tab name="kn" %}}
-
+Notice that the namespace is specified in two places in the command in `--namespace` and the `--sink` hostname
 ```shell
 kn source ping create test-ping-source \
-  --namespace pingsource-example
+  --namespace pingsource-example \
   --schedule "*/1 * * * *" \
   --data '{"message": "Hello world!"}' \
-  --sink http://event-display.svc.cluster.local
+  --sink http://event-display.pingsource-example.svc.cluster.local
 ```
 
 {{< /tab >}}
 {{< /tabs >}}
+
+## (Optional) Create a PingSource with binary data
+
+Sometimes you may want to send binary data, which cannot be directly serialized in yaml, to downstream. This can be achieved by using `dataBase64` as the payload. As the name suggests, `dataBase64` should carry data that is base64 encoded.
+
+Please note that `data` and `dataBase64` cannot co-exist.
+
+```shell
+kubectl create -n pingsource-example -f - <<EOF
+apiVersion: sources.knative.dev/v1beta2
+kind: PingSource
+metadata:
+  name: test-ping-source-binary
+spec:
+  schedule: "*/1 * * * *"
+  contentType: "text/plain"
+  dataBase64: "ZGF0YQ=="
+  sink:
+    ref:
+      apiVersion: v1
+      kind: Service
+      name: event-display
+EOF
+```
 
 ### Verify
 
@@ -126,14 +151,30 @@ Validation: valid
 Context Attributes,
   specversion: 1.0
   type: dev.knative.sources.ping
-  source: /apis/v1/namespaces/default/pingsources/test-ping-source
-  id: d8e761eb-30c7-49a3-a421-cd5895239f2d
-  time: 2019-12-04T14:24:00.000702251Z
+  source: /apis/v1/namespaces/pingsource-example/pingsources/test-ping-source
+  id: 49f04fe2-7708-453d-ae0a-5fbaca9586a8
+  time: 2021-03-25T19:41:00.444508332Z
   datacontenttype: application/json
 Data,
   {
     "message": "Hello world!"
   }
+```
+
+If you created a PingSource with binary data, you should also see the following:
+
+```shell
+☁️  cloudevents.Event
+Validation: valid
+Context Attributes,
+  specversion: 1.0
+  type: dev.knative.sources.ping
+  source: /apis/v1/namespaces/pingsource-example/pingsources/test-ping-source-binary
+  id: ddd7bad2-9b6a-42a7-8f9b-b64494a6ce43
+  time: 2021-03-25T19:38:00.455013472Z
+  datacontenttype: text/plain
+Data,
+  data
 ```
 
 ### Cleanup
@@ -147,7 +188,7 @@ kubectl delete namespace pingsource-example
 
 ## Reference Documentation
 
-See the [PingSource specification](../../reference/api/eventing/#sources.knative.dev/v1beta1.PingSource).
+See the [PingSource specification](../../reference/api/eventing/#sources.knative.dev/v1beta2.PingSource).
 
 ## Contact
 

@@ -6,30 +6,30 @@ type: "docs"
 
 ## Overview
 
-The Event Registry maintains a catalog of the event types that can be consumed
-from the different Brokers. It introduces a new
-[EventType](../reference/eventing/) CRD in order to persist the event
-type's information in the cluster's data store.
+The event registry maintains a catalog of event types that can be consumed
+from different brokers. It introduces the EventType custom resource in order to persist the event
+type information in the cluster data store.
 
 ## Before you begin
 
-1. Read about the [Broker](./broker/) and [Trigger](./triggers/) objects.
+1. Read about the [broker](./broker/) and [trigger](./triggers/) objects.
 1. Be familiar with the
    [CloudEvents spec](https://github.com/cloudevents/spec/blob/master/spec.md),
    particularly the
    [Context Attributes](https://github.com/cloudevents/spec/blob/master/spec.md#context-attributes)
    section.
-1. Be familiar with the [Eventing sources](./sources/README.md).
+1. Be familiar with [event sources](./sources).
 
 ## Discovering events with the registry
 
-Using the registry, you can discover the different types of events you can
-consume from the Brokers' event meshes. The registry is designed for use with
-the Broker/Trigger model and aims to help you create Triggers.
+Using the registry, you can discover different types of events that can be consumed by broker event meshes. The registry is designed for use with
+the broker and trigger model, and aims to help you create triggers.
 
-To see the event types available to _subscribe_ to, enter the following command:
+To see event types in the registry that are available to subscribe to, enter the following command:
 
-`kubectl get eventtypes -n <namespace>`
+```
+kubectl get eventtypes -n <namespace>
+```
 
 Below, we show an example output of executing the above command using the
 `default` namespace in a testing cluster. We will address the question of how
@@ -46,11 +46,16 @@ dev.knative.kafka.event-tdt48                dev.knative.kafka.event            
 google.pubsub.topic.publish-hrxhh            google.pubsub.topic.publish             //pubsub.googleapis.com/knative/topics/testing                                     dev                        False     BrokerIsNotReady
 ```
 
-We can see that there are seven different EventTypes in the registry of the
-`default` namespace. Let's pick the first one and see what the EventType yaml
-looks like:
+**NOTE:** This assumes that the event sources emitting the events reference a broker as their sink.
 
-`kubectl get eventtype dev.knative.source.github.push-34cnb -o yaml`
+There are seven different EventType objects in the registry of the
+`default` namespace.
+
+Use the following command to see an example of what the YAML for an EventType object looks like:
+
+```
+kubectl get eventtype dev.knative.source.github.push-34cnb -o yaml
+```
 
 Omitting irrelevant fields:
 
@@ -60,7 +65,8 @@ kind: EventType
 metadata:
   name: dev.knative.source.github.push-34cnb
   namespace: default
-  generateName: dev.knative.source.github.push-
+  labels:
+    eventing.knative.dev/sourceName: github-sample
 spec:
   type: dev.knative.source.github.push
   source: https://github.com/knative/eventing
@@ -251,7 +257,7 @@ the next topic: How do we actually populate the registry in the first place?
      - my-cluster-kafka-bootstrap.kafka:9092
     topics:
      - knative-demo
-      - news
+     - news
     sink:
       apiVersion: eventing.knative.dev/v1
       kind: Broker

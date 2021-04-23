@@ -118,6 +118,26 @@ spec:
                 - e2e-az2
 ```
 
+## Kubernetes Host Aliases
+* **Type**: extension
+* **ConfigMap key:** `kubernetes.podspec-hostaliases`
+
+This flag controls whether [host aliases](https://kubernetes.io/docs/concepts/services-networking/add-entries-to-pod-etc-hosts-with-host-aliases/) can be specified.
+
+```yaml
+apiVersion: serving.knative.dev/v1
+kind: Service
+...
+spec:
+  template:
+    spec:
+      hostAliases:
+      - ip: "127.0.0.1"
+        hostnames:
+        - "foo.local"
+        - "bar.local"
+```
+
 ## Kubernetes Node Selector
 * **Type**: extension
 * **ConfigMap key:** `kubernetes.podspec-nodeselector`
@@ -139,7 +159,7 @@ spec:
 * **Type**: extension
 * **ConfigMap key:** `kubernetes.podspec-tolerations`
 
-This flag controls whether [node selector](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) can be specified.
+This flag controls whether [tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) can be specified.
 
 ```yaml
 apiVersion: serving.knative.dev/v1

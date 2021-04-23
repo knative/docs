@@ -98,6 +98,37 @@ function function_exists() {
   [[ "$(type -t $1)" == "function" ]]
 }
 
+# GitHub Actions aware output grouping.
+function group() {
+  # End the group is there is already a group.
+  if [ -z ${__GROUP_TRACKER+x} ]; then
+    export __GROUP_TRACKER="grouping"
+    trap end_group EXIT
+  else
+    end_group
+  fi
+  # Start a new group.
+  start_group "$@"
+}
+
+# GitHub Actions aware output grouping.
+function start_group() {
+  if [[ -n ${GITHUB_WORKFLOW:-} ]]; then
+    echo "::group::$@"
+    trap end_group EXIT
+  else
+    echo "--- $@"
+  fi
+}
+
+# GitHub Actions aware end of output grouping.
+function end_group() {
+  if [[ -n ${GITHUB_WORKFLOW:-} ]]; then
+    echo "::endgroup::"
+  fi
+}
+
+
 # Waits until the given object doesn't exist.
 # Parameters: $1 - the kind of the object.
 #             $2 - object's name.
@@ -125,6 +156,9 @@ function wait_until_object_does_not_exist() {
 }
 
 # Waits until all pods are running in the given namespace.
+# This function handles some edge cases that `kubectl wait` does not support,
+# and it provides nice debug info on the state of the pod if it failed,
+# that’s why we have this long bash function instead of using `kubectl wait`.
 # Parameters: $1 - namespace.
 function wait_until_pods_running() {
   echo -n "Waiting until all pods in namespace $1 are up"
@@ -132,7 +166,7 @@ function wait_until_pods_running() {
   for i in {1..150}; do  # timeout after 5 minutes
     # List all pods. Ignore Terminating pods as those have either been replaced through
     # a deployment or terminated on purpose (through chaosduck for example).
-    local pods="$(kubectl get pods --no-headers -n $1 2>/dev/null | grep -v Terminating)"
+    local pods="$(kubectl get pods --no-headers -n $1 | grep -v Terminating)"
     # All pods must be running (ignore ImagePull error to allow the pod to retry)
     local not_running_pods=$(echo "${pods}" | grep -v Running | grep -v Completed | grep -v ErrImagePull | grep -v ImagePullBackOff)
     if [[ -n "${pods}" ]] && [[ -z "${not_running_pods}" ]]; then
@@ -353,13 +387,9 @@ function report_go_test() {
   report="$(mktemp)"
   local xml
   xml="$(mktemp_with_extension "${ARTIFACTS}"/junit_XXXXXXXX xml)"
-  local json
-  json="$(mktemp_with_extension "${ARTIFACTS}"/json_XXXXXXXX json)"
   echo "Running go test with args: ${go_test_args[*]}"
-  # TODO(chizhg): change to `--format testname`?
-  capture_output "${report}" gotestsum --format "${GO_TEST_VERBOSITY:-standard-verbose}" \
+  capture_output "${report}" gotestsum --format "${GO_TEST_VERBOSITY:-testname}" \
     --junitfile "${xml}" --junitfile-testsuite-name relative --junitfile-testcase-classname relative \
-    --jsonfile "${json}" \
     -- "${go_test_args[@]}"
   local failed=$?
   echo "Finished run, return code is ${failed}"
@@ -512,12 +542,13 @@ function go_update_deps() {
 
   export GO111MODULE=on
   export GOFLAGS=""
-  export GOSUMDB=off   # Do not use the sum.golang.org service.
+  export GONOSUMDB="${GONOSUMDB:-},knative.dev/*"
+  export GONOPROXY="${GONOPROXY:-},knative.dev/*"
 
   echo "=== Update Deps for Golang"
 
   local UPGRADE=0
-  local VERSION="master"
+  local VERSION="v9000.1" # release v9000 is so far in the future, it will always pick the default branch.
   local DOMAIN="knative.dev"
   while [[ $# -ne 0 ]]; do
     parameter=$1
@@ -531,17 +562,7 @@ function go_update_deps() {
   done
 
   if [[ $UPGRADE == 1 ]]; then
-    echo "--- Upgrading to ${VERSION}"
-    # From shell parameter expansion:
-    # ${parameter:+word}
-    # If parameter is null or unset, nothing is substituted, otherwise the expansion of word is substituted.
-    # -z is if the length of the string, so skip setting GOPROXY if GOPROXY is already set.
-    if [[ -z ${GOPROXY:+skip} ]]; then
-      export GOPROXY=direct
-      echo "Using 'GOPROXY=direct'."
-    else
-      echo "Respecting 'GOPROXY=${GOPROXY}'."
-    fi
+    group "Upgrading to ${VERSION}"
     FLOATING_DEPS+=( $(run_go_tool knative.dev/test-infra/buoy buoy float ${REPO_ROOT_DIR}/go.mod --release ${VERSION} --domain ${DOMAIN}) )
     if [[ ${#FLOATING_DEPS[@]} > 0 ]]; then
       echo "Floating deps to ${FLOATING_DEPS[@]}"
@@ -551,13 +572,16 @@ function go_update_deps() {
     fi
   fi
 
-  echo "--- Go mod tidy and vendor"
+  group "Go mod tidy and vendor"
 
   # Prune modules.
-  go mod tidy
-  go mod vendor
+  local orig_pipefail_opt=$(shopt -p -o pipefail)
+  set -o pipefail
+  go mod tidy 2>&1 | grep -v "ignoring symlink" || true
+  go mod vendor 2>&1 |  grep -v "ignoring symlink" || true
+  eval "$orig_pipefail_opt"
 
-  echo "--- Removing unwanted vendor files"
+  group "Removing unwanted vendor files"
 
   # Remove unwanted vendor files
   find vendor/ \( -name "OWNERS" \
@@ -568,11 +592,30 @@ function go_update_deps() {
 
   export GOFLAGS=-mod=vendor
 
-  echo "--- Updating licenses"
+  group "Updating licenses"
   update_licenses third_party/VENDOR-LICENSE "./..."
 
-  echo "--- Removing broken symlinks"
+  group "Removing broken symlinks"
   remove_broken_symlinks ./vendor
+}
+
+# Return the go module name of the current module.
+# Intended to be used like:
+#   export MODULE_NAME=$(go_mod_module_name)
+function go_mod_module_name() {
+  go mod graph | cut -d' ' -f 1 | grep -v '@' | head -1
+}
+
+# Return a GOPATH to a temp directory. Works around the out-of-GOPATH issues
+# for k8s client gen mixed with go mod.
+# Intended to be used like:
+#   export GOPATH=$(go_mod_gopath_hack)
+function go_mod_gopath_hack() {
+  local TMP_DIR="$(mktemp -d)"
+  local TMP_REPO_PATH="${TMP_DIR}/src/$(go_mod_module_name)"
+  mkdir -p "$(dirname "${TMP_REPO_PATH}")" && ln -s "${REPO_ROOT_DIR}" "${TMP_REPO_PATH}"
+
+  echo "${TMP_DIR}"
 }
 
 # Run kntest tool, error out and ask users to install it if it's not currently installed.
@@ -741,6 +784,35 @@ function shellcheck_new_files() {
   done
   if [[ ${failed} -eq 1 ]]; then
     fail_script "shellcheck failures"
+  fi
+}
+
+function latest_version() {
+  # This function works "best effort" and works on Prow but not necessarily locally.
+  # The problem is finding the latest release. If a release occurs on the same commit which
+  # was branched from main, then the tag will be an ancestor to any commit derived from main.
+  # That was the original logic. Additionally in a release branch, the tag is always an ancestor.
+  # However, if the release commit ends up not the first commit from main, then the tag is not
+  # an ancestor of main, so we can't use `git describe` to find the most recent versioned tag. So
+  # we just sort all the tags and find the newest versioned one.
+  # But when running locally, we cannot(?) know if the current branch is a fork of main or a fork
+  # of a release branch. That's where this function will malfunction when the last release did not
+  # occur on the first commit -- it will try to run the upgrade tests from an older version instead
+  # of the most recent release.
+  # Workarounds include:
+  # Tag the first commit of the release branch. Say release-0.75 released v0.75.0 from the second commit
+  # Then tag the first commit in common between main and release-0.75 with `v0.75`.
+  # Always name your local fork master or main.
+  if [ $(current_branch) = "master" ] || [ $(current_branch) = "main" ]; then
+    # For main branch, simply use git tag without major version, this will work even
+    # if the release tag is not in the main
+    git tag -l "v[0-9]*" | sort -r --version-sort | head -n1
+  else
+    local semver=$(git describe --match "v[0-9]*" --abbrev=0)
+    local major_minor=$(echo "$semver" | cut -d. -f1-2)
+
+    # Get the latest patch release for the major minor
+    git tag -l "${major_minor}*" | sort -r --version-sort | head -n1
   fi
 }
 

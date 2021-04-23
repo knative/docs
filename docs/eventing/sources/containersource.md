@@ -30,7 +30,7 @@ This example shows how the heartbeats container sends events to the Event Displa
 
 ### Preparing the heartbeats image
 Knative [event-sources](https://github.com/knative/eventing-contrib) has a
-sample of heartbeats event source. You could clone the source codes by
+sample of heartbeats event source. You could clone the source code by
 
 ```
 git clone -b "{{< branch >}}" https://github.com/knative/eventing-contrib.git

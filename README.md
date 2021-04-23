@@ -1,3 +1,11 @@
+---
+_build:
+  render: never
+  list: never
+---
+(This guide only appears on GitHub, not the website, because it
+**intentionally** does not include YAML front-matter.)
+
 # Knative documentation
 
 Welcome to the source file repository for our documentation on
@@ -19,7 +27,7 @@ contributor guidelines.
 
 ### Run website locally
 
-Refer to this [doc](https://github.com/knative/website/blob/master/DEVELOPMENT.md) in the website repo.
+Refer to this [doc](https://github.com/knative/website/blob/main/DEVELOPMENT.md) in the website repo.
 
 ### Website source files
 
@@ -57,9 +65,11 @@ We're excited that you're interested in contributing to the Knative documentatio
 - [How to contribute](./CONTRIBUTING.md) -- Contains information about how
   to contribute and outlines the roles for Docs contributors.
 
-- [Template page](./new-page-template.md) -- A blank documentation page that
-  demonstrates how to format a new page and includes tips on structuring your
-  documentation.
+- New content templates:
+  - [Documentation](./template-docs-page.md) -- Instructions and a template that
+    you can use to help you add new documentation.
+  - [Blog](./template-blog-entry.md) -- Instructions and a template that
+    you can use to help you post to the Knative blog.
 
 ## Getting help
 
@@ -67,7 +77,7 @@ We're excited that you're interested in contributing to the Knative documentatio
   is the best place to go if you have questions about making changes to the
   documentation. We're happy to help!
 
-- [Documentation working group](https://github.com/knative/community/blob/master/working-groups/WORKING-GROUPS.md#documentation) -- Come join
+- [Documentation working group](https://github.com/knative/community/blob/main/working-groups/WORKING-GROUPS.md#documentation) -- Come join
   us in the working group to meet other docs contributors and ask any questions
   you might have.
 

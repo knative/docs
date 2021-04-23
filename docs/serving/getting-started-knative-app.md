@@ -14,7 +14,7 @@ using cURL requests.
 
 You need:
 
-- A Kubernetes cluster with [Knative installed](../install/README.md).
+- A Kubernetes cluster with [Knative Serving installed](../install/README.md).
 - An image of the app that you'd like to deploy available on a container registry. The image of the sample app used in this guide is available on
   Google Container Registry.
 
@@ -69,12 +69,12 @@ Now that you have deployed the service, Knative will perform the following steps
 ## Creating your Deployment with YAML
 
 Alternatively, to deploy an app using Knative, you can also create the configuration in a YAML file that defines a service. For more information about the Service object, see the
-[Resource Types documentation](https://github.com/knative/serving/blob/master/docs/spec/overview.md#service).
+[Resource Types documentation](https://github.com/knative/serving/blob/main/docs/spec/overview.md#service).
 
 This configuration file specifies metadata about the application, points to the
 hosted image of the app for deployment, and allows the deployment to be
 configured. For more information about what configuration options are available,
-see the [Serving spec documentation](https://github.com/knative/serving/blob/master/docs/spec/spec.md).
+see the [Serving spec documentation](https://github.com/knative/serving/blob/main/docs/spec/spec.md).
 
 To create the same application as in the previous `kn` example, create a new file named `service.yaml`, then copy and paste the following content into it:
 

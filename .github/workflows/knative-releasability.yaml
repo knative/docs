@@ -36,8 +36,8 @@ jobs:
     env:
       #########################################
       #   Update this section each release.   #
-      RELEASE: 'v0.19'
-      SLACK_CHANNEL: 'release-19'
+      RELEASE: 'v0.22'
+      SLACK_CHANNEL: 'release-22'
       #########################################
 
     steps:
@@ -50,6 +50,9 @@ jobs:
           if [[ "${{ github.event.inputs.slackChannel }}" != "" ]]; then
             echo "SLACK_CHANNEL=${{ github.event.inputs.slackChannel }}" >> $GITHUB_ENV
           fi
+          if [[ "${{ secrets.SLACK_WEBHOOK }}" != "" ]]; then
+            echo "SLACK_WEBHOOK=exists" >> $GITHUB_ENV
+          fi
 
       - name: Set up Go 1.15.x
         uses: actions/setup-go@v2
@@ -57,7 +60,7 @@ jobs:
           go-version: 1.15.x
 
       - name: Install Dependencies
-        run: GO111MODULE=on go get knative.dev/test-infra/buoy@master
+        run: GO111MODULE=on go get knative.dev/test-infra/buoy@main
 
       - name: Check out code
         uses: actions/checkout@v2
@@ -142,7 +145,8 @@ jobs:
           echo 'SLACK_TITLE=Releasability for ${{ github.repository }} @ ${{ env.RELEASE }} is NO-GO!' >> $GITHUB_ENV
 
       - name: Post status to Slack
-        if: steps.exists.outputs.release-branch == 'false'
+        # Note: using env.SLACK_WEBHOOK here because secrets are not allowed in the if block.
+        if: env.SLACK_WEBHOOK != '' && steps.exists.outputs.release-branch == 'false'
         uses: rtCamp/action-slack-notify@v2.1.0
         env:
           SLACK_ICON: http://github.com/knative.png?size=48
@@ -153,3 +157,11 @@ jobs:
             ${{ env.CHECK_MESSAGE }}
             ${{ env.VERIFY_MESSAGE }}
             For detailed logs: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+      - name: Fail if NO-GO
+        if: steps.exists.outputs.release-branch == 'false' && env.current == 'false'
+        run: |
+          # When we have figured out that things are NO-GO, we intentionally fail the job
+          # so that the status badge shows up red and we can use the badges to create a
+          # releasability dashboard for all of the repos.
+          exit 1

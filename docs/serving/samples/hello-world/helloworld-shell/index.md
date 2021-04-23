@@ -29,31 +29,43 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-shell
 
 ## Building
 
-1. Create a new file named `script.sh` and paste the script below. This will run netcat (`nc`) in an endless loop, returning a friendly welcome message.
+1. Create a new file named `script.sh` and paste the script below. This will run BusyBox' `http` returning a friendly welcome message as `plain/text` plus some extra information:
 
   ```shell
   #!/bin/sh
-  while true ; do
-    echo -e "HTTP/1.1 200\n\n Hello ${TARGET:=World}!\n" | nc -l -p 8080 -q 1;
-  done
+
+  # Print out CGI header
+  # See https://tools.ietf.org/html/draft-robinson-www-interface-00
+  # for the full CGI specification
+  echo -e "Content-Type: text/plain\n"
+
+  # Use environment variable TARGET or "World" if not set
+  echo "Hello ${TARGET:=World}!"
+
+  # In this script you can perform more dynamic actions, too.
+  # Like printing the date, checking CGI environment variables, ...
   ```
 
 1. Create a new file named `Dockerfile` and copy the code block below into it.
 
    ```docker
-   # Use the official Alpine image for a lean production container.
-   # https://hub.docker.com/_/alpine
-   FROM alpine:3
+   # Busybox image that contains the simple 'httpd'
+   # https://git.busybox.net/busybox/tree/networking/httpd.c
+   FROM busybox
 
-   # Update & install netcat (nc)
-   RUN apk update \
-    && apk add netcat-openbsd
+   # Serve from this directory
+   WORKDIR /var/www
 
-   # Copy over the service script
-   COPY script.sh /
+   # Prepare httpd command for being started via init
+   # This indirection is required for proper SIGTERM handling
+   RUN echo "::sysinit:httpd -vv -p 8080 -u daemon -h /var/www" > /etc/inittab
 
-   # Start up the webserver
-   CMD [ "/bin/sh", "/script.sh" ]
+   # Copy over our CGI script and make it executable
+   COPY --chown=daemon:daemon script.sh cgi-bin/index.cgi
+   RUN chmod 755 cgi-bin/index.cgi
+
+   # Startup init which in turn starts httpd
+   CMD init
    ```
 
 Once you have recreated the sample code files (or used the files in the sample

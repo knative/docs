@@ -11,7 +11,7 @@ you must upgrade to v0.15.0 before attempting to upgrade to v0.16.0. To verify t
 number you currently have installed, see
 [Checking your installation version](./check-install-version.md).
 
-If you installed Knative using the either the [eventing-operator](https://github.com/knative/eventing-operator) or [serving-operator](https://github.com/knative/serving-operator) plug-ins, the upgrade process will differ. See the [serving-operator upgrade guide](https://github.com/knative/serving-operator/blob/master/doc/upgrade_guide.md) and the [eventing-operator upgrade guide](https://github.com/knative/eventing-operator/blob/master/doc/upgrade_guide.md) to learn how to upgrade an install managed by the operators.
+If you installed Knative using the [operator](https://github.com/knative/operator), the upgrade process will differ. See the [operator upgrade guide](./upgrade-installation-with-operator.md) to learn how to upgrade an installation managed by the operators.
 
 ## Before you begin
 

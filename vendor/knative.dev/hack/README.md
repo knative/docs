@@ -1,7 +1,7 @@
 # knative.dev/hack
 
 `hack` is a collection of scripts used to bootstrap CI processes and other vital
-entrypoint functionallity.
+entrypoint functionality.
 
 ## Using the `presubmit-tests.sh` helper script
 
@@ -220,7 +220,7 @@ benchmarking jobs for each repo. To use it:
    - `SERVICE_ACCOUNT_NAME`: Service account name for controlling GKE clusters
      and interacting with [Mako](https://github.com/google/mako) server. It MUST
      have `Kubernetes Engine Admin` and `Storage Admin` role, and be
-     [whitelisted](https://github.com/google/mako/blob/master/docs/ACCESS.md) by
+     [allowed](https://github.com/google/mako/blob/master/docs/ACCESS.md) by
      Mako admin. Defaults to `mako-job`.
 
 1. [optional] Customize root path of the benchmarks. This root folder should
@@ -281,7 +281,7 @@ This is a helper script for Knative release scripts. To use it:
    - `RELEASE_VERSION`: contains the release version if `--version` was passed.
      This also overrides the value of the `TAG` variable as `v<version>`.
    - `RELEASE_BRANCH`: contains the release branch if `--branch` was passed.
-     Otherwise it's empty and `master` HEAD will be considered the release
+     Otherwise it's empty and `main` HEAD will be considered the release
      branch.
    - `RELEASE_NOTES`: contains the filename with the release notes if
      `--release-notes` was passed. The release notes is a simple markdown file.

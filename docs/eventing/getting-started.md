@@ -117,7 +117,7 @@ demonstrate how you can configure your event producers to target a specific cons
          spec:
            containers:
              - name: event-display
-               # Source code: https://github.com/knative/eventing-contrib/tree/master/cmd/event_display
+               # Source code: https://github.com/knative/eventing-contrib/tree/main/cmd/event_display
                image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
 
      ---
@@ -320,7 +320,7 @@ EOF
          -d '{"msg":"Hello Knative! Goodbye Knative!"}'
        ```
        When the broker receives your event, `hello-display` and `goodbye-display`
-       will activate and send the event to the event consumer of the same name.
+       will activate and send the event to the event consumers of the same name.
        If the event has been received, you will receive a `202 Accepted` response
        similar to the one below:
        ```
