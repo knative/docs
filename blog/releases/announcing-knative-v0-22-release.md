@@ -29,13 +29,13 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
 
 ### Highlights
 
-- Serving Domain Mapping improves multi-tenency support to avoid domain name to be claim by users that don't legitimately owns them in cluster.
+- Serving Domain Mapping improves multi-tenancy support to avoid domain name to be claim by users that don't legitimately owns them in the cluster.
 - Eventing now allows subscribers and triggers from different namespaces to be used together.
 - 1.18 is now the minimum Kubernetes version required to use the Apache Kafka broker with Knative Eventing v0.22.
-- Eventing kafka now supports the ability to choose between ordered and unordered delivery
+- Apache Kafka broker now supports the ability to choose between ordered and unordered delivery
 - The CLI `kn` v0.22.0 comes with some bug fixes and minor feature enhancements. It's mostly a polishing release. If you are using the Client API, there is a breaking change that was needed to align with Kubernetes Client API's
-- There are two new CLI plugins align with v0.22 release, [kn-plugin-admin](https://github.com/knative-sandbox/kn-plugin-admin) and [kn-plugin-source-kafka](https://github.com/knative-sandbox/kn-plugin-source-kafka)
-- The Knative Operator v0.22 release contains bug fixes, and supports version v0.22 of Knative Serving and Knative Eventing.
+- There are two new CLI plugins to align with the v0.22 release, [kn-plugin-admin](https://github.com/knative-sandbox/kn-plugin-admin) and [kn-plugin-source-kafka](https://github.com/knative-sandbox/kn-plugin-source-kafka)
+- The Knative Operator v0.22 release contains bug fixes and supports version v0.22 of Knative Serving and Eventing.
 
 
 ### Serving v0.22
