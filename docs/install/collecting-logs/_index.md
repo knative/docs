@@ -93,3 +93,100 @@ If you are using a different log collection infrastructure (Splunk, for
 example),
 [follow the directions in the FluentBit documentation](https://docs.fluentbit.io/manual/pipeline/outputs)
 on how to configure your forwarders.
+
+## Local collector
+
+**NOTE:** This describes a development environment setup, and is not appropriate
+for production.
+
+If you are using a local Kubernetes cluster for development (Kind, Docker
+Desktop, or Minikube), you can create a `hostPath` PersistentVolume to store the
+logs on your desktop OS. This will allow you to use all your normal desktop
+tools on the files without needing Kubernetes-specific tools.
+
+The PersistentVolumeClaim will look something like this, but the `hostPath` will
+vary based on your Kubernetes software and host operating system. Some example
+values are documented below.
+
+```yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: shared-logs
+  labels:
+    app: logs-collector
+spec:
+  accessModes:
+    - "ReadWriteOnce"
+  storageClassName: manual
+  claimRef:
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    name: logs-log-collector-0
+    namespace: logging
+  capacity:
+    storage: 5Gi
+  hostPath:
+    path: <see below>
+```
+
+And then you'll need to update the StatefulSet's `volumeClaimTemplates` to
+reference the `shared-logs` volume, like this fragment of yaml:
+
+```yaml
+volumeClaimTemplates:
+  metadata:
+    name: logs
+  spec:
+    accessModes: ["ReadWriteOnce"]
+    volumeName: shared-logs
+```
+
+### Kind
+
+When creating your cluster, you'll need to use a `kind-config.yaml` and specify
+`extraMounts` for each node, like so:
+
+```yaml
+apiversion: kind.x-k8s.io/v1alpha4
+kind: Cluster
+nodes:
+  - role: control-plane
+    extraMounts:
+      - hostPath: ./logs
+        containerPath: /shared/logs
+  - role: worker
+    extraMounts:
+      - hostPath: ./logs
+        containerPath: /shared/logs
+```
+
+You can then use `/shared/logs` as the `spec.hostPath.path` in your
+PersistentVolume. Note that the directory path `./logs` is relative to the
+directory that the Kind cluster was created in.
+
+### Docker Desktop
+
+Docker desktop automatically creates some shared mounts between the host and the
+guest operating systems, so you only need to know the path to your home
+directory. Here are some examples for different operating systems:
+
+| Host OS | `hostPath`                               |
+| ------- | ---------------------------------------- |
+| Mac OS  | `/Users/${USER}`                         |
+| Windows | `/run/desktop/mnt/host/c/Users/${USER}/` |
+| Linux   | `/home/${USER}`                          |
+
+### Minikube
+
+Minikube requires an explicit command to [mount a directory into the VM running
+Kubernetes](https://minikube.sigs.k8s.io/docs/handbook/mount/). This command
+mounts the `logs` directory inside the current directory onto `/mnt/logs` in the
+VM:
+
+```shell
+minikube mount ./logs:/mnt/logs
+```
+
+You would then reference `/mnt/logs` as the `hostPath.path` in the
+PersistentVolume.
