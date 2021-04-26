@@ -1,6 +1,7 @@
 # Blog template instructions
 
-An example template that you can use to start drafting an entry to post on the Knative blog.
+An example template with best-practices that you can use to start drafting an
+entry to post on the Knative blog.
 
 [**Copy a version of this template without the instructions**](#copy-the-template)
 
@@ -23,7 +24,7 @@ authorHandle: "" # Your GitHub ID
 date: "" # Publishing date
 description: "" # A short one-liner describing this blog entry
 folderWithMediaFiles: "./images/<new-feature-name>" # The relative file path (ie. new folder) to any images, etc.
-keywords: Releases, Steering committee, Demo, Events # Meta keywords for the content
+keywords: "Releases, Steering committee, Demo, Events" # Meta keywords for the content
 ---
 ```
 
@@ -105,10 +106,10 @@ title: ""
 linkTitle: ""
 author: ""
 authorHandle: ""
-date: "" # Publishing date
-description: "" # A short one-liner describing this blog entry
-folderWithMediaFiles: "./images/<new-feature-name>" # The relative file path (ie. new folder) to any images, etc.
-keywords: Releases, Steering committee, Demo, Events # Meta keywords for the content
+date: ""
+description: ""
+folderWithMediaFiles: ""
+keywords: ""
 ---
 
 <!--
@@ -117,6 +118,8 @@ keywords: Releases, Steering committee, Demo, Events # Meta keywords for the con
 | <!-- GitHub ID --> | YYYY-MM-DD | :+1:, :monocle_face:, :-1: |
 | <!-- GitHub ID --> | YYYY-MM-DD | :+1:, :monocle_face:, :-1: |
 -->
+
+<!-- The page title you set in the frontmatter renders here (don't add a duplicate title) -->
 
 ## Blog content body
 <!-- Introduce the feature you are going to explain:

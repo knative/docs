@@ -1,6 +1,11 @@
 # Documentation template instructions
 
-An example template that you can use to provide best-practices for starting a new how-to document.
+An example template with best-practices that you can use to start drafting a new
+how-to document.
+
+Use this template if you are creating a new page in an existing folder. If you
+are creating a new folder, you must also create the `_index.md`. For more
+information, see the [`_index.md` template instructions](./template-_index-page.md).
 
 [**Copy a version of this template without the instructions**](#copy-the-template)
 
@@ -15,19 +20,43 @@ page. Example formatting template:
 
 ```yaml
 ---
-# This section is called the "frontmatter" for your page
-title: "Title for your page" # Use sentence case for titles
-linkTitle: "Template: New docs page"
-# The linkTitle field (above) is optional; use it to provide a shorter link if your page title is very long
-weight: 50 # This affects the placement of the link in the sidebar on the left. Pages are ordered from top to bottom by weight, lowest to highest.
-type: "docs" # You won't need to update this.
-#aliases:
-#  - /docs/example/redirect/moved-renamed-page
-#  - /docs/another-example
-# Has the page ever moved? If yes, include the prior location above, starting with path from the site root (for example /docs/, /blog/, or /community/). The old URL will redirect to this new file. For a new pages, "aliases" are not required.
+title: ""
+#linkTitle: ""
+weight: 50
+type: "docs"
 ---
 ```
+```
+<!--
+# This section is called the "frontmatter" for your page that is defined in YAML.
 
+title: ""
+# The title of this page (renders at the top of the page). Use sentence case.
+
+linkTitle: ""
+# Optional: Use it to provide a shorter title for the page link so that it fits
+# in the left navigation menu (to prevent wrapping)
+
+weight: ""
+# This specifies the vertical the placement of the page link in the left
+#  navigation menu. Pages are ordered from top (lowest weight) to bottom (highest weight).
+
+type: "docs"
+# You won't need to update this.
+
+aliases:
+  - /docs/example/redirect/moved-renamed-page
+  - /docs/another-example
+# Optional: Specifies a URL to redirect to this page.
+# For example, has this page moved (are you replacing one or more deleted pages)?
+# If yes, include the aliases frontmatter and specify the prior location of the
+# page(s)/path(s) to redirect to this page. Specify the path and filename starting
+# from the site root (for example /docs/, /blog/, or /community/).
+-->
+```
+```
+<!-- The page title you set in the frontmatter renders here (don't add a duplicate title) -->
+```
 Learn how to do something very cool.
 
 ```
@@ -46,9 +75,11 @@ Generally, make sure you answer the questions:
 ## Before you begin
 ```
 <!--
-State all the requirements in this this section of the document.
-Define any assumptions made (avoid tripping up the user and distracting them from the Knative feature you are trying to explain).
-This is where you get past any of the non-Knative items so that you can focus on Knative-specific stuff below. For example:
+State all the requirements in this section of the document.
+Define any assumptions made (avoid tripping up the user and distracting them
+from the Knative feature you are trying to explain).
+This is where you get past any of the non-Knative items so that you can focus on
+Knative-specific stuff below. For example:
 -->
 ```
 To complete the steps in this task, you must ..... meet/have/install/create/? the following:
@@ -95,8 +126,9 @@ Introductory statement to define the goal of this sub-task and why its important
 ```
 <!--
 Put code into code blocks.
-Markdown formatting: Use spaces, not tabs to indent code blocks, and leave one blank line before and after the block.
-Examples:-->
+Markdown formatting: Use spaces, not tabs to indent code blocks, and leave one
+blank line before and after the block. Examples:
+-->
 <!--
 1. Here's a code snippet:
 
@@ -136,17 +168,39 @@ Now that you have an example running, learn how to enable .....:
 # Copy the template
 ```yaml
 ---
-# This section is called the "frontmatter" for your page
-title: "Title for your page" # Use sentence case for titles
-linkTitle: "Template: New docs page"
-# The linkTitle field (above) is optional; use it to provide a shorter link if your page title is very long
-weight: 50 # This affects the placement of the link in the sidebar on the left. Pages are ordered from top to bottom by weight, lowest to highest.
-type: "docs" # You won't need to update this.
-#aliases:
-#  - /docs/example/redirect/moved-renamed-page
-#  - /docs/another-example
-# Has the page ever moved? If yes, include the prior location above, starting with path from the site root (for example /docs/, /blog/, or /community/). The old URL will redirect to this new file. For a new pages, "aliases" are not required.
+title: ""
+#linkTitle: ""
+weight: 50
+type: "docs"
 ---
+<!--
+# This section is called the "frontmatter" for your page that is defined in YAML.
+
+title: ""
+# The title of this page (renders at the top of the page). Use sentence case.
+
+linkTitle: ""
+# Optional: Use it to provide a shorter title for the page link so that it fits
+# in the left navigation menu (to prevent wrapping)
+
+weight: ""
+# This specifies the vertical the placement of the page link in the left
+#  navigation menu. Pages are ordered from top (lowest weight) to bottom (highest weight).
+
+type: "docs"
+# You won't need to update this.
+
+aliases:
+  - /docs/example/redirect/moved-renamed-page
+  - /docs/another-example
+# Optional: Specifies a URL to redirect to this page.
+# For example, has this page moved (are you replacing one or more deleted pages)?
+# If yes, include the aliases frontmatter and specify the prior location of the
+# page(s)/path(s) to redirect to this page. Specify the path and filename starting
+# from the site root (for example /docs/, /blog/, or /community/).
+-->
+
+<!-- The page title you set in the frontmatter renders here (don't add a duplicate title) -->
 
 Learn how to do something very cool.
 
