@@ -1,3 +1,9 @@
+=======
+---
+_build:
+  render: never
+  list: never
+---
 
 All information about contributing to the Knative documentation has been moved
 into a single location:

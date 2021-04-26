@@ -17,7 +17,7 @@ For information about the YAML files in the Knative Serving and Eventing release
 
 Before you install any optional extensions, you must install Knative Serving or Eventing.
 See [Installing Serving using YAML files](./install-serving-with-yaml.md)
-and [Installing Eventing using YAML files](./install/install-eventing-with-yaml.md).
+and [Installing Eventing using YAML files](./install-eventing-with-yaml.md).
 
 
 ## Install optional Serving extensions
@@ -276,3 +276,7 @@ To learn more about the VMware sources and bindings, try
 {{< /tab >}}
 
 {{< /tabs >}}
+
+## Next steps
+
+- To easily interact with Knative Services and Eventing components, [install the `kn` CLI](/docs/client/install-kn.md)

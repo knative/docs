@@ -156,6 +156,9 @@ function wait_until_object_does_not_exist() {
 }
 
 # Waits until all pods are running in the given namespace.
+# This function handles some edge cases that `kubectl wait` does not support,
+# and it provides nice debug info on the state of the pod if it failed,
+# that’s why we have this long bash function instead of using `kubectl wait`.
 # Parameters: $1 - namespace.
 function wait_until_pods_running() {
   echo -n "Waiting until all pods in namespace $1 are up"
@@ -163,7 +166,7 @@ function wait_until_pods_running() {
   for i in {1..150}; do  # timeout after 5 minutes
     # List all pods. Ignore Terminating pods as those have either been replaced through
     # a deployment or terminated on purpose (through chaosduck for example).
-    local pods="$(kubectl get pods --no-headers -n $1 2>/dev/null | grep -v Terminating)"
+    local pods="$(kubectl get pods --no-headers -n $1 | grep -v Terminating)"
     # All pods must be running (ignore ImagePull error to allow the pod to retry)
     local not_running_pods=$(echo "${pods}" | grep -v Running | grep -v Completed | grep -v ErrImagePull | grep -v ImagePullBackOff)
     if [[ -n "${pods}" ]] && [[ -z "${not_running_pods}" ]]; then

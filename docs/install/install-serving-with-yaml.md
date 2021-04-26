@@ -25,14 +25,26 @@ To install the serving component:
    kubectl apply -f {{< artifact repo="serving" file="serving-crds.yaml" >}}
    ```
 
-1. Install the core components of Serving:
+1. Install the core components of Knative Serving:
 
    ```bash
    kubectl apply -f {{< artifact repo="serving" file="serving-core.yaml" >}}
    ```
+For information about the YAML files in the Knative Serving and Eventing releases, see
+[Installation files](./installation-files.md).
 
 
 ## Install a networking layer
+
+The networking layer in Knative Serving is responsible for incoming requests and the associated
+responses for your Knative installation.
+Knative enables you to choose a networking layer and then translates Knative’s resources
+into the specific configuration for your chosen networking solution.
+
+You can choose a networking layer based on what you are familiar with, what is
+already installed on your cluster, or what is suitable for your use case.
+For prototyping purposes, if you have no preference for a networking layer, choose Kourier.
+For production use cases, Istio is a common choice.
 
 The tabs below expand to show instructions for installing a networking layer.
 Follow the procedure for the networking layer of your choice:
@@ -373,6 +385,8 @@ Refer to the "Real DNS" method for a permanent solution.
 
 After installing Knative Serving:
 
-- If you want to add extra features to your installation, see [Installing optional extensions](./install-extensions.md).
-- If you want to install the Knative Eventing component, see [Installing Eventing using YAML files](./install-eventing-with-yaml.md)
-- Install the [Knative CLI](./install-kn) to use `kn` commands.
+- [Installing Knative Eventing using YAML files](./install-eventing-with-yaml.md)
+
+- To add optional enhancements to your installation, see [Installing optional extensions](./install-extensions.md).
+
+- To easily interact with Knative Services, [install the `kn` CLI](/docs/client/install-kn.md)

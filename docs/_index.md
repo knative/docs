@@ -51,6 +51,12 @@ These components are delivered as Kubernetes custom resource definitions (CRDs),
 - [All samples for serving](./serving/samples/)
 - [All samples for eventing](./eventing/samples/)
 
+### Observability
+
+- [Serving Metrics API](./serving/metrics/)
+- [Eventing Metrics API](./eventing/metrics/)
+- [Collecting metrics](./install/collecting-metrics)
+
 ### Debugging
 
 - [Debugging application issues](./serving/debugging-application-issues/)

@@ -17,11 +17,9 @@
 source $(dirname $0)/../vendor/knative.dev/hack/e2e-tests.sh
 
 function install_istio() {
-  ISTIO_VERSION=istio-stable
   echo ">> Bringing up Istio"
-  echo ">> Running Istio installer"
-  chmod +x ./vendor/knative.dev/net-istio/third_party/istio-stable/install-istio.sh
-  ./vendor/knative.dev/net-istio/third_party/istio-stable/install-istio.sh istio-ci-no-mesh.yaml || return 1
+  curl -sL https://istio.io/downloadIstioctl | sh -
+  $HOME/.istioctl/bin/istioctl install -y
 }
 
 function test_setup() {

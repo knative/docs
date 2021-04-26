@@ -3,6 +3,7 @@ title: "Knative Eventing"
 linkTitle: "Eventing Component"
 weight: 60
 type: "docs"
+showlandingtoc: "false"
 aliases:
     - /eventing/README
 ---
@@ -15,8 +16,6 @@ event sources and event consumers.
 
 - [Install Knative](../install)
 - [Run samples](./samples/)
-- [Default Channels](./channels/default-channels) provide a way to choose the
-  persistence strategy for Channels across the cluster.
 
 ## Functionality
 
@@ -79,31 +78,6 @@ generic interfaces that can be implemented by multiple Kubernetes resources:
    returned events may be further processed in the same way that events from an
    external event source are processed.
 
-### Event sources
-
-To learn about using event sources, see the [event sources](./sources) documentation.
-
-### Event brokers and triggers
-
-Broker and Trigger objects make it easy to filter events based on event
-attributes.
-
-A Broker provides a bucket of events which can be selected by attribute. It
-receives events and forwards them to subscribers defined by one or more matching
-Triggers. Since a Broker implements Addressable, event senders can submit events
-to the Broker by POSTing the event to the Broker's `status.address.url`.
-
-A Trigger describes a filter on event attributes which should be delivered to an
-Addressable. You can create as many Triggers as necessary.
-
-For most use cases, a single bucket (Broker) per namespace is sufficient, but
-there are serveral use cases where multiple buckets (Brokers) can simplify
-architecture. For example, separate Brokers for events containing Personally
-Identifiable Information (PII) and non-PII events can simplify audit and access
-control rules.
-
-![Broker Trigger Diagram](./images/broker-trigger-overview.svg)
-
 ### Event registry
 
 Knative Eventing defines an EventType object to make it easier for consumers to
@@ -116,20 +90,6 @@ Trigger without resorting to some other out-of-band mechanism.
 To learn how to use the registry, see the
 [Event Registry documentation](./event-registry).
 
-### Event channels and subscriptions
-
-Knative Eventing also defines an event forwarding and persistence layer, called
-a [channel](./channels/).
-Each channel is a separate Kubernetes [custom resource](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
-Events are delivered to services or forwarded to other channels
-(possibly of a different type) using
-[subscriptions](./channels/subscriptions).
-This allows message delivery in a cluster to vary based on requirements, so that
-some events might be handled by an in-memory implementation while others would
-be persisted using Apache Kafka or NATS Streaming.
-
-See the [List of Channel implementations](./channels/channels-crds).
-
 ### Higher Level eventing constructs
 
 There are cases where you may want to utilize a set of co-operating functions
@@ -138,3 +98,7 @@ resources:
 
 1. **[Sequence](./flows/sequence)** provides a way to define an in-order list of functions.
 1. **[Parallel](./flows/parallel)** provides a way to define a list of branches for events.
+
+## Observability
+
+- [Eventing Metrics API](./metrics.md)
