@@ -1,6 +1,6 @@
 ---
-title: "Creating a Mapping between a Custom Domain Name and a Knative Service (Alpha)"
-linkTitle: "Creating Domain Mappings (Alpha)"
+title: "Setting up a custom domain per Service"
+linkTitle: "Setting up a custom domain per Service"
 weight: 64
 type: "docs"
 ---
