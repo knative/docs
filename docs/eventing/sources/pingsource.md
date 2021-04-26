@@ -1,23 +1,19 @@
 ---
-title: "PingSource example"
+title: "PingSource"
 linkTitle: "PingSource"
 weight: 10
 type: "docs"
-aliases:
-  - ../cronjob-source
 ---
 
-This topic explains event-driven architecture in terms of producers and consumers, and shows how to configure PingSource as an event source targeting a Knative service.
+![version](https://img.shields.io/badge/API_Version-v1beta2-red?style=flat-square)
+
+This topic explains event-driven architecture in terms of producers and consumers, and shows how to
+configure PingSource as an event source targeting a Knative service.
 
 ## Before you begin
 
 1. Set up [Knative Serving](../../../serving).
 1. Set up [Knative Eventing](../../../eventing).
-
-## Overview
-
-In event-driven architecture the most straightforward use case is a producer creating an event and a
-consumer acting on that event.
 
 ### Producers
 
@@ -38,13 +34,14 @@ In the GitHub example above, a consumer might update a ticket in the ticketing s
 from the pull request.
 
 
-## Create a consumer (Knative service)
+## Create a consumer
 
-To verify that the PingSource is working, create a simple Knative service that receives CloudEvents and writes them to `stdout`.
+To verify that the PingSource is working, create a simple Knative service that receives CloudEvents
+and writes them to standard out.
 
 {{< tabs name="create-service" default="YAML" >}}
 {{% tab name="YAML" %}}
-Create the service from stdin by running:
+Create the service from standard input by running:
 
 ```shell
 cat <<EOF | kubectl create -f -
@@ -56,7 +53,7 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event-display
 EOF
 ```
 {{< /tab >}}
@@ -65,24 +62,23 @@ EOF
 Create a service using the `kn` CLI:
 
 ```shell
-kn service create event-display --image gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+kn service create event-display --image gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event-display
 ```
 {{< /tab >}}
 {{< /tabs >}}
 
-## Create a producer (PingSource)
+## Create a producer
 
-Create a producer (PingSource) that sends events to your consumer every two minutes.
+Create a producer that sends events to your consumer every two minutes.
 The `sink` element in the metadata describes where to send events.
 In this case, events are sent to a service with the name `event-display`.
-This is a tight connection between the producer and consumer.
 
 For each set of ping events that you want to request, create an event source in the same namespace
 as the destination.
 
 {{< tabs name="create-source" default="YAML" >}}
 {{% tab name="YAML" %}}
-Create the event source from stdin by running:
+Create the event source from standard in by running:
 
 ```shell
 cat <<EOF | kubectl create -f -
@@ -113,15 +109,14 @@ kn source ping create test-ping-source \
   --sink ksvc:event-display
 ```
 {{< /tab >}}
-{{< /tabs >}}
 
-## (Optional) Create a PingSource with binary data
-
-You can send binary data, that cannot be directly serialized by using YAML, to downstream, by using `dataBase64` as the payload. `dataBase64` carries data that is base64-encoded.
+{{% tab name="binary" %}}
+You can send binary data, that cannot be directly serialized by using YAML, to downstream, by using
+`dataBase64` as the payload. `dataBase64` carries data that is base64-encoded.
 
 **Note:** `data` and `dataBase64` cannot co-exist.
 
-Create the event source with binary data from stdin by running:
+Create the event source with binary data from standard in by running:
 
 ```shell
 cat <<EOF | kubectl create -f -
@@ -140,12 +135,15 @@ spec:
       name: event-display
 EOF
 ```
+{{< /tab >}}
+{{< /tabs >}}
+
 
 ## Verify the message was sent
 
 Verify that the message was sent to the Knative Eventing system by looking at message dumper logs.
 
-{{< tabs name="view-event" default="kubectl" >}}
+{{< tabs name="event-display" default="kubectl" >}}
 {{% tab name="kubectl" %}}
 
 View the logs of the event-display service by running:
@@ -210,7 +208,7 @@ Delete the PingSource instance:
 {{< tabs name="delete-source" default="kubectl" >}}
 {{% tab name="kubectl" %}}
 
-Delete the PingSource instance by running:
+Run:
 
 ```shell
 kubectl delete pingsources.sources.knative.dev test-ping-source
@@ -221,7 +219,7 @@ kubectl delete pingsources.sources.knative.dev test-ping-source-binary
 
 {{% tab name="kn" %}}
 
-Delete the PingSource instance by running:
+Run:
 
 ```shell
 kn source ping delete test-ping-source
@@ -237,7 +235,7 @@ Delete the service instance:
 {{< tabs name="delete-service" default="kubectl" >}}
 {{% tab name="kubectl" %}}
 
-Delete the Service instance by running:
+Run:
 
 ```shell
 kubectl delete service.serving.knative.dev event-display
@@ -247,7 +245,7 @@ kubectl delete service.serving.knative.dev event-display
 
 {{% tab name="kn" %}}
 
-Delete the service instance by running:
+Run:
 
 ```shell
 kn service delete event-display
