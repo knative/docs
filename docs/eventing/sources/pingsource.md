@@ -40,8 +40,7 @@ from the pull request.
 
 ## Create a consumer (Knative service)
 
-To create a consumer, and verify that `PingSource` is working, create a simple Knative service that
-receives CloudEvents and writes them to stdout.
+To verify that the PingSource is working, create a simple Knative service that receives CloudEvents and writes them to `stdout`.
 
 {{< tabs name="create-service" default="YAML" >}}
 {{% tab name="YAML" %}}
