@@ -63,7 +63,7 @@ EOF
 {{< /tab >}}
 
 {{% tab name="kn" %}}
-Create the service using the kn command-line interface by running:
+Create a service using the `kn` CLI:
 
 ```shell
 kn service create event-display --image gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
