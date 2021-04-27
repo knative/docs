@@ -26,7 +26,7 @@ eventing:
 
 Where
 
-- `pathLookup` specifies whether `kn` should look for [plugins](./kn-plugins) in the `PATH` environment variable. This is a boolean configuration option. The default value is `false`.
+- `path-lookup` specifies whether `kn` should look for [plugins](./kn-plugins) in the `PATH` environment variable. This is a boolean configuration option. The default value is `false`.
 - `directory` specifies the directory where `kn` will look for plugins. The default path depends on the operating system, as described above. This can be any directory that is visible to the user.
 - `sink` defines the Kubernetes Addressable resource that is used when you use the `--sink` flag with a `kn` CLI command.
     - `prefix`: The prefix you want to use to describe your sink. Service, `svc`, `channel`, and `broker` are predefined prefixes in `kn`.
