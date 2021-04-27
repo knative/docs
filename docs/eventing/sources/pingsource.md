@@ -15,6 +15,8 @@ configure PingSource as an event source targeting a Knative service.
 1. Set up [Knative Serving](../../../serving).
 1. Set up [Knative Eventing](../../../eventing).
 
+## About Producers and Consumers
+
 ### Producers
 
 Producers create events. Using GitHub as an example, the producer is the GitHub webhook that sends
