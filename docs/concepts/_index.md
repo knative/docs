@@ -1,6 +1,6 @@
 ---
 title: "Knative concepts"
-linkTitle: "concepts"
+linkTitle: "Concepts"
 weight: 100
 type: "docs"
 ---

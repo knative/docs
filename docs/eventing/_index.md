@@ -1,7 +1,6 @@
 ---
 title: "Knative Eventing"
-linkTitle: "Eventing Component"
-weight: 60
+weight: 05
 type: "docs"
 showlandingtoc: "false"
 aliases:
