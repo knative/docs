@@ -14,7 +14,7 @@ You can customize your `kn` CLI setup by creating a `config.yaml` configuration 
 
 ```yaml
 plugins:
-  pathLookup: true
+  path-lookup: true
   directory: ~/.config/kn/plugins
 eventing:
   sink:
