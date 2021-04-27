@@ -3,6 +3,8 @@ title: "Sequence terminal"
 linkTitle: "Create additional events"
 weight: 20
 type: "docs"
+aliases:
+   - /docs/eventing/samples/sequence/sequence-terminal
 ---
 
 We are going to create the following logical configuration. We create a
@@ -194,5 +196,3 @@ kubectl -n default logs -l serving.knative.dev/service=third -c user-container -
 2020/03/02 21:28:03 Transform the event to:
 2020/03/02 21:28:03 [2020-03-02T21:28:00.0010247Z] /apis/v1/namespaces/default/pingsources/ping-source dev.knative.sources.ping: &{Sequence:0 Message:Hello world! - Handled by 0 - Handled by 1 - Handled by 2}
 ```
-
-
