@@ -1,6 +1,6 @@
 ---
 title: "CLI tools"
-weight: 01
+weight: 03
 type: "docs"
 showlandingtoc: "false"
 aliases:
