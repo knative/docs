@@ -52,7 +52,7 @@ Create a Knative service:
 {{% tab name="kn" %}}
 
 ```bash
-kn service create hello --image gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display --env RESPONSE="Hello Serverless!"
+kn service create hello --image gcr.io/knative-releases/knative.dev/eventing/cmd/event_display --env RESPONSE="Hello Serverless!"
 ```
 
 {{< /tab >}}
@@ -68,7 +68,7 @@ kn service create hello --image gcr.io/knative-releases/knative.dev/eventing-con
       template:
         spec:
           containers:
-            - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+            - image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
     ```
 2. Apply the file:
     ```bash
@@ -104,7 +104,7 @@ Create a `CronJob` object:
               restartPolicy: Never
               containers:
                 - name: single-heartbeat
-                  image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/heartbeats
+                  image: gcr.io/knative-releases/knative.dev/eventing/cmd/heartbeats
                   args:
                   - --period=1
                   env:
@@ -126,7 +126,7 @@ Create a `CronJob` object:
 
 #### Cloning a sample heartbeat cron job
 
-Knative [event-contrib](https://github.com/knative/eventing-contrib) contains a
+Knative [event-contrib](https://github.com/knative/eventing) contains a
 sample heartbeats event source.
 
 ##### Prerequisites
@@ -140,11 +140,11 @@ sample heartbeats event source.
 
 1. Clone the `event-contib` repository:
     ```bash
-    $ git clone -b "{{< branch >}}" https://github.com/knative/eventing-contrib.git
+    $ git clone -b "{{< branch >}}" https://github.com/knative/eventing.git
     ```
 2. Build a heartbeats image, and publish the image to your image repository:
     ```bash
-    $ ko publish knative.dev/eventing-contrib/cmd/heartbeats
+    $ ko publish knative.dev/eventing/cmd/heartbeats
     ```
 <!-- TODO: Add tabs if there are kn commands etc to do this also-->
 
@@ -215,7 +215,7 @@ kn source binding create bind-heartbeat \
       Context Attributes,
         specversion: 1.0
         type: dev.knative.eventing.samples.heartbeat
-        source: https://knative.dev/eventing-contrib/cmd/heartbeats/#default/heartbeat-cron-1582120020-75qrz
+        source: https://knative.dev/eventing/cmd/heartbeats/#default/heartbeat-cron-1582120020-75qrz
         id: 5f4122be-ac6f-4349-a94f-4bfc6eb3f687
         time: 2020-02-19T13:47:10.41428688Z
         datacontenttype: application/json

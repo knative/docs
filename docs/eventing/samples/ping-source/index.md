@@ -34,7 +34,7 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+        - image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
 EOF
 ```
 {{< /tab >}}
@@ -43,7 +43,7 @@ EOF
 Use following command to create the service using the kn cli:
 
 ```shell
-kn service create event-display --image gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+kn service create event-display --image gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
 ```
 {{< /tab >}}
 {{< /tabs >}}

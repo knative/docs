@@ -79,7 +79,7 @@ demonstrate how you can configure your event producers to target a specific cons
          spec:
            containers:
              - name: event-display
-               image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+               image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
 
      ---
 
@@ -117,8 +117,8 @@ demonstrate how you can configure your event producers to target a specific cons
          spec:
            containers:
              - name: event-display
-               # Source code: https://github.com/knative/eventing-contrib/tree/main/cmd/event_display
-               image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+               # Source code: https://github.com/knative/eventing/tree/main/cmd/event_display
+               image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
 
      ---
 
