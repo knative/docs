@@ -1,12 +1,12 @@
 ---
-title: "Setting up kn"
-weight: 10
+title: "Installing kn"
+weight: 02
 type: "docs"
 aliases:
   - /docs/install/install-kn
 ---
 
-This guide provides details about how you can set up the Knative `kn` CLI.
+This guide provides details about how you can install the Knative `kn` CLI.
 
 ## Install kn using brew
 
@@ -15,7 +15,6 @@ For macOS, you can install `kn` by using <a href="https://github.com/knative/hom
 ```
 brew install knative/client/kn
 ```
-
 
 ## Install kn using a binary
 
