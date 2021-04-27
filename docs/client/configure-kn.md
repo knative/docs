@@ -17,7 +17,7 @@ plugins:
   path-lookup: true
   directory: ~/.config/kn/plugins
 eventing:
-  sink:
+  sink-mappings:
   - prefix: svc
     group: core
     version: v1
