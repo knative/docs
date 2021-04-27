@@ -11,11 +11,6 @@ Knative Eventing is a system that is designed to address a common need for cloud
 native development and provides composable primitives to enable late-binding
 event sources and event consumers.
 
-## Getting Started
-
-- [Install Knative](../install)
-- [Run samples](./samples/)
-
 ## Functionality
 
 Knative Eventing supports multiple modes of usage. The following scenarios are
