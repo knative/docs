@@ -67,7 +67,7 @@ kn service create event-display --image gcr.io/knative-releases/knative.dev/even
     {{% tab name="YAML" %}}
 
 ```shell
-kubectl apply -n pingsource-example -f - <<EOF
+kubectl -n pingsource-example apply -f - <<EOF
 apiVersion: sources.knative.dev/v1beta2
 kind: PingSource
 metadata:
@@ -106,7 +106,7 @@ kn source ping create test-ping-source \
     To create a PingSource that uses base64 encoded data, enter the command:
 
     ```shell
-    kubectl create -n pingsource-example -f - <<EOF
+    kubectl -n pingsource-example apply -f - <<EOF
     apiVersion: sources.knative.dev/v1beta2
     kind: PingSource
     metadata:
