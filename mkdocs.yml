@@ -16,9 +16,10 @@ nav:
           - Scaling to Zero: getting-started/first-autoscale.md
           - Traffic Splitting: getting-started/first-traffic-split.md
         - Event-Driven Applications:
-          - Background and CloudEvents: getting-started/first-cloud-event.md
-          - Examining the Broker: getting-started/first-broker.md
-          - Routing CloudEvents with Sources, Brokers and Triggers: getting-started/first-source-trigger.md
+          - Introducing Knative Eventing: getting-started/getting-started-eventing.md
+          - Sources, Brokers, Triggers, Sinks: getting-started/first-broker.md
+          - Introducing the CloudEvents Player: getting-started/first-source.md
+          - Creating your first Trigger: getting-started/first-trigger.md
         - What's Next?: getting-started/next-steps.md
     - Installing Knative:
         - Installing using YAML:
