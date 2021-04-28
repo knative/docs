@@ -12,7 +12,7 @@ nav:
     - Getting Started:
         - Before you begin: getting-started/getting-started.md
         - Serverless:
-          - Deploying your first Knative Service: getting-started/first-service.md
+          - First Knative Service: getting-started/first-service.md
           - Scaling to Zero: getting-started/first-autoscale.md
           - Traffic Splitting: getting-started/first-traffic-split.md
         - Event-Driven Applications:

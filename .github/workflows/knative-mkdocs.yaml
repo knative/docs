@@ -28,4 +28,4 @@ jobs:
 
       - name: Build docs 
         run: |
-          mike deploy dev --push
+          mike deploy dev latest -u --push

@@ -13,7 +13,7 @@ You may have noticed that when you created your Knative Service you assigned it 
 
     A new `Revision` will get created each and every time you make changes to your Knative Service, whether you assign it a name or not. When splitting traffic, Knative splits traffic between different `Revisions` of your Knative Service.
 
-Instead of "world," let's have our Knative Service "hello" greet "Knative."
+Instead of `TARGET`="World," let's update the environment variable `TARGET` on our Knative Service `hello` to greet "Knative". Lets name this new revision `hello-knative`
 === "kn"
 
     ``` bash
@@ -47,26 +47,28 @@ Instead of "world," let's have our Knative Service "hello" greet "Knative."
     kubectl apply -f hello.yaml
     ```
 
-As before, Knative spits out some helpful information to the CLI:
+As before, Knative prints. out some helpful information to the CLI.
+
+==**Expected output:**==
 ```{ .bash .no-copy }
 Service hello created to latest revision 'hello-knative' is available at URL:
 http://hello.default.127.0.0.1.nip.io
 ```
 
-Note, since we are updating an existing Knative Service, the URL doesn't change, but your new `Revision` should have the new name "hello-knative"
+Note, since we are updating an existing Knative Service `hello`, the URL doesn't change, but our new `Revision` should have the new name "hello-knative"
 
-Let's ping our Knative Service again to see the change:
-```
+Let's access our Knative Service again on the browser [http://hello.default.127.0.0.1.nip.io](http://hello.default.127.0.0.1.nip.io){target=_blank} to see the change, or use `curl` in your terminal:
+```bash
 curl http://hello.default.127.0.0.1.nip.io
 ```
 
-### Expected Output
+==**Expected output:**==
 ```{ .bash .no-copy }
 Hello Knative!
 ```
 
-## Splitting Traffic between Revisions
-You may at this point be wondering, "where did 'Hello world!' go?" `Revisions` are a stateless snapshot-in-time of application code and configuration so your "hello-world" `Revision` is still available to you.
+## Splitting Traffic
+You may at this point be wondering, "where did 'Hello World!' go?" `Revisions` are a stateless snapshot-in-time of application code and configuration so your "hello-world" `Revision` is still available to you.
 
 We can easily see a list of our existing revisions with the `kn` CLI:
 
@@ -83,7 +85,7 @@ We can easily see a list of our existing revisions with the `kn` CLI:
     kubectl get revisions
     ```
 
-### Expected Output
+==**Expected output:**==
 ```{ .bash .no-copy }
 NAME            SERVICE   TRAFFIC   TAGS   GENERATION   AGE   CONDITIONS   READY   REASON
 hello-knative   hello     100%             2            30s   3 OK / 4     True    
@@ -92,7 +94,7 @@ hello-world     hello                      1            5m    3 OK / 4     True
 
 The column most relevant for our purposes is "TRAFFIC". It looks like 100% of traffic is going to our latest `Revision` ("hello-knative") and 0% of traffic is going to the `Revision` we configured earlier ("hello-world")
 
-By default, when Knative creates a brand new `Revision` it directs 100% of traffic to the latest `Revision` of your service. **We can change this default behavior by specifying how much traffic we want each of our `Revisions` to receive.**
+By default, when Knative creates a brand new `Revision` it directs 100% of traffic to the latest `Revision` of your service. **We can change this default behavior by specifying how much traffic we want each of our `Revisions` to receive.** Lets split traffic in half, using a percentage of 50%.
 
 !!! info inline end
     `@latest` will always point to our "latest" `Revision` which, at the moment, is `hello-knative`.
@@ -100,8 +102,8 @@ By default, when Knative creates a brand new `Revision` it directs 100% of traff
 
     ```bash
     kn service update hello \
-    --traffic @latest=50 \
-    --traffic hello-world=50
+    --traffic hello-world=50 \
+    --traffic @latest=50
     ```
 
 === "YAML"
@@ -123,8 +125,35 @@ By default, when Knative creates a brand new `Revision` it directs 100% of traff
     kubectl apply -f hello.yaml
     ```
 
-### Expected Output
-Now when we curl our Knative Service URL...
+Verify traffic split configure correctly by listing the revisions again.
+=== "kn"
+
+    ```bash
+    kn revisions list
+    ```
+
+=== "kubectl"
+     Though the following example doesn't cover it, you can peak under the hood to Kubernetes to see the revisions as Kubernetes sees them.  
+    ```bash
+    kubectl get revisions
+    ```
+
+==**Expected output:**==
+```{ .bash .no-copy }
+NAME            SERVICE   TRAFFIC   TAGS   GENERATION   AGE   CONDITIONS   READY   REASON
+hello-knative   hello     50%              2            10m   3 OK / 4     True
+hello-world     hello     50%              1            36m   3 OK / 4     True 
+```
+
+Access the Knative service on the browser again [http://hello.default.127.0.0.1.nip.io](http://hello.default.127.0.0.1.nip.io){target=_blank}, and refresh multiple times to see the different output being served by each revision.
+You can use curl to access multiple times.
+```bash
+curl http://hello.default.127.0.0.1.nip.io
+```
+
+On the terminal you will see the output from the both revisions.
+
+==**Expected output:**==
 ```{ .bash .no-copy }
 curl http://hello.default.127.0.0.1.nip.io
 Hello Knative!
