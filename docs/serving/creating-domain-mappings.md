@@ -1,8 +1,11 @@
 ---
-title: "Creating a Mapping between a Custom Domain Name and a Knative Service (Alpha)"
-linkTitle: "Creating Domain Mappings (Alpha)"
+title: "Setting up a custom domain per Service"
+linkTitle: "Setting up a custom domain per Service"
 weight: 64
 type: "docs"
+aliases:
+  - /docs/serving/using-a-custom-domain-per-service
+  - /docs/serving/services/using-a-custom-domain-per-service
 ---
 
 Knative services are automatically given a default domain name based on the
@@ -42,30 +45,31 @@ multiple Domain Mappings to map multiple domains and subdomains.
 
 1. Create a new file named `domainmapping.yaml` containing the following information.
 
-    ```yaml
-    apiVersion: serving.knative.dev/v1alpha1
-    kind: DomainMapping
-    metadata:
+   ```yaml
+   apiVersion: serving.knative.dev/v1alpha1
+   kind: DomainMapping
+   metadata:
      name: example.org
      namespace: default
-    spec:
+   spec:
      ref:
        name: helloworld-go
        kind: Service
        apiVersion: serving.knative.dev/v1
-    ```
-    * `name`(metadata): The domain name you wish to map to the Knative service.
-    * `namespace`: The namespace that both domain mapping and the Knative service use.
-    * `name`(ref): The Knative service which should be used to service requests
-        for the custom domain name. You can also map to other targets as long as
-        they conform to the Addressable contract and their resolved URL is of the form `{name}.{namespace}.{clusterdomain}` where `{name}` and `{namespace}`are the name and namespace of a Kubernetes service, and `{clusterdomain}`is the cluster domain. Objects conforming to this contract include Knative services and Routes, and Kubernetes services.
+   ```
+
+   - `name`(metadata): The domain name you wish to map to the Knative service.
+   - `namespace`: The namespace that both domain mapping and the Knative service use.
+   - `name`(ref): The Knative service which should be used to service requests
+     for the custom domain name. You can also map to other targets as long as
+     they conform to the Addressable contract and their resolved URL is of the form `{name}.{namespace}.{clusterdomain}` where `{name}` and `{namespace}`are the name and namespace of a Kubernetes service, and `{clusterdomain}`is the cluster domain. Objects conforming to this contract include Knative services and Routes, and Kubernetes services.
 
 1. From the directory where the new `domainmapping.yaml` file was created,
    deploy the domain mapping by applying the `domainmapping.yaml` file.
 
-    ```
-    kubectl apply -f domainmapping.yaml
-    ```
+   ```
+   kubectl apply -f domainmapping.yaml
+   ```
 
 1. You will also need to point the `example.org` domain name at the IP
    address of your Knative cluster. Details of this step differ depending on
