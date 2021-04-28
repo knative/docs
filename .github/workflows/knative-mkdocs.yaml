@@ -28,4 +28,4 @@ jobs:
 
       - name: Build docs 
         run: |
-          mike deploy v0.23 latest --push
+          mike deploy dev --push
