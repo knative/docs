@@ -5,6 +5,7 @@ weight: 64
 type: "docs"
 aliases:
   - /docs/serving/using-a-custom-domain-per-service
+  - /docs/serving/services/using-a-custom-domain-per-service
 ---
 
 Knative services are automatically given a default domain name based on the
