@@ -41,7 +41,7 @@ metadata:
   name: config-tracing
   namespace: knative-eventing
 data:
-  enable: "true"
+  backend: "zipkin"
   zipkin-endpoint: "http://zipkin.istio-system.svc.cluster.local:9411/api/v2/spans"
   sample-rate: "0.1"
 ```
