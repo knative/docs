@@ -1,17 +1,19 @@
 # Basics of Traffic Splitting
 The last super power :rocket: of Knative Serving we'll go over in this tutorial is traffic splitting.
 
-Splitting traffic is useful for a number of very common modern infrastructure needs, such as ==**<a href= "https://martinfowler.com/bliki/BlueGreenDeployment.html" target="blank_">blue/green deployments</a> and <a href="https://martinfowler.com/bliki/CanaryRelease.html" target="blank_">canary deployments</a>.**== Bringing these industry standards to bear on Kubernetes is **as simple as a single CLI command on Knative** or YAML tweak, let's see how!
-
-You may have noticed that when your Knative Service was created, Knative returned both a URL and a 'latest revision' for your Knative Service. But what happens if you make a change to your Service?
-
-??? question "What is a `Revisions`?""
-    You can think of a `Revision` as a stateless, autoscaling snapshot-in-time of application code and configuration. A new `Revision` will get created each and every time you make changes to your Knative Service. Knative Serving splits traffic between different `Revisions` of your Knative Service.
+??? question "What are some common traffic splitting use-cases?"
+    Splitting traffic is useful for a number of very common modern infrastructure needs, such as **<a href= "https://martinfowler.com/bliki/BlueGreenDeployment.html" target="blank_">blue/green deployments</a> and <a href="https://martinfowler.com/bliki/CanaryRelease.html" target="blank_">canary deployments</a>.** Bringing these industry standards to bear on Kubernetes is **as simple as a single CLI command on Knative** or YAML tweak, let's see how!
 
 
 ## Creating a new Revision
-Instead of "world," let's have our Knative Service "hello" greet "Knative." You can accomplish this by using the `kn` CLI or by editing the YAML file you made earlier.
+You may have noticed that when you created your Knative Service you assigned it a `revision-name`, "world". When your Service was created, Knative returned both a URL and a 'latest revision' name for your Knative Service. **But what happens if you make a change to your Service?**
 
+??? question "What exactly is a `Revision`?""
+    You can think of a <a href="../../serving/#serving-resources" target ="blank_">`Revision` </a> as a stateless, autoscaling snapshot-in-time of application code and configuration.
+
+    A new `Revision` will get created each and every time you make changes to your Knative Service, whether you assign it a name or not. When splitting traffic, Knative splits traffic between different `Revisions` of your Knative Service.
+
+Instead of "world," let's have our Knative Service "hello" greet "Knative."
 === "kn"
 
     ``` bash
@@ -21,7 +23,7 @@ Instead of "world," let's have our Knative Service "hello" greet "Knative." You 
     ```
 
 === "YAML"
-    //TODO Update revision name
+
     ``` bash
     apiVersion: serving.knative.dev/v1
     kind: Service
@@ -29,6 +31,8 @@ Instead of "world," let's have our Knative Service "hello" greet "Knative." You 
       name: hello
     spec:
       template:
+        metadata:
+          name: knative
         spec:
           containers:
             - image: gcr.io/knative-samples/helloworld-go
@@ -56,7 +60,7 @@ Let's ping our Knative Service again to see the change:
 curl http://hello.default.127.0.0.1.nip.io
 ```
 
-**The output should be:**
+### Expected Output
 ```{ .bash .no-copy }
 Hello Knative!
 ```
@@ -79,7 +83,7 @@ We can easily see a list of our existing revisions with the `kn` CLI:
     kubectl get revisions
     ```
 
-**The output should be:**
+### Expected Output
 ```{ .bash .no-copy }
 NAME            SERVICE   TRAFFIC   TAGS   GENERATION   AGE   CONDITIONS   READY   REASON
 hello-knative   hello     100%             2            30s   3 OK / 4     True    
@@ -90,7 +94,7 @@ The column most relevant for our purposes is "TRAFFIC". It looks like 100% of tr
 
 By default, when Knative creates a brand new `Revision` it directs 100% of traffic to the latest `Revision` of your service. **We can change this default behavior by specifying how much traffic we want each of our `Revisions` to receive.**
 
-!!! info inline
+!!! info inline end
     `@latest` will always point to our "latest" `Revision` which, at the moment, is `hello-knative`.
 === "kn"
 
@@ -119,6 +123,7 @@ By default, when Knative creates a brand new `Revision` it directs 100% of traff
     kubectl apply -f hello.yaml
     ```
 
+### Expected Output
 Now when we curl our Knative Service URL...
 ```{ .bash .no-copy }
 curl http://hello.default.127.0.0.1.nip.io
