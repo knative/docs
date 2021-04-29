@@ -48,10 +48,12 @@ spec:
 To allow a Custom Resource to act as a sink for events, there are two things needed: 
 
 #### 1. Make the resource Addressable
-To make a Custom Resource Addresable, it needs to contain a `status.address.url`. More information about [Addressable resources](https://github.com/knative/specs/blob/main/specs/eventing/interfaces.md#addressable).
+To make a Custom Resource Addressable, it needs to contain a `status.address.url`. More information about [Addressable resources](https://github.com/knative/specs/blob/main/specs/eventing/interfaces.md#addressable).
 
 #### 2. Create an addressable-resolver ClusterRole
 An addressable-resolver ClusterRole is needed in order to obtain the necessary RBAC rules for the sink to receive events.
+
+For example, we can create a `kafkasinks-addressable-resolver` ClusterRole to allow `get`, `list`, and `watch` access to `kafkasinks` and `kafkasinks/status`
 ```yaml
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
