@@ -1,6 +1,6 @@
 ---
 title: "Knative Serving"
-weight: 04
+weight: 05
 type: "docs"
 showlandingtoc: "false"
 ---

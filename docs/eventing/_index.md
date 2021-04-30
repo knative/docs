@@ -1,6 +1,6 @@
 ---
 title: "Knative Eventing"
-weight: 05
+weight: 06
 type: "docs"
 showlandingtoc: "false"
 aliases:

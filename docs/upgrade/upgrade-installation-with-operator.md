@@ -6,42 +6,10 @@ aliases:
   - /docs/install/upgrade-installation-with-operator
 ---
 
-The Knative operator supports upgrading Knative by a single [minor](https://semver.org/) version number. For example, if you have v0.17 installed, you must upgrade to v0.18 before attempting to upgrade to v0.19.
-
 The attribute `spec.version` is the only field you need to change in the
-Serving or Eventing custom resource to perform an upgrade. You do not need to specify the version for the `patch` number, because the Knative Operator matches the latest available `patch` number, as long as you specify `major.minor` for the version. For example, you only need to specify `0.22` to upgrade to the 0.22 release, you do not need to specify the exact `patch` number.
+Serving or Eventing custom resource to perform an upgrade. You do not need to specify the version for the `patch` number, because the Knative Operator matches the latest available `patch` number, as long as you specify `major.minor` for the version. For example, you only need to specify `"0.22"` to upgrade to the 0.22 release, you do not need to specify the exact `patch` number.
 
-The Knative Operator supports up to the last three major releases. For example, if the current version of the Operator is 0.22.x, it bundles and supports the installation of Knative versions 0.19.x, 0.20.x, 0.21.x and 0.22.x.
-
-## Before you begin
-
-You need to know your current Knative version, the version of Knative that you want to upgrade to, and the namespaces for your Knative installation.
-
-- Check the installed **Knative Serving** version by entering the following command:
-
-    ```bash
-    kubectl get KnativeServing knative-serving --namespace knative-serving
-    ```
-
-    Example output:
-
-    ```bash
-    NAME              VERSION         READY   REASON
-    knative-serving   0.21.0          True
-    ```
-
-- Check the installed **Knative Eventing** version by entering the following command:
-
-    ```bash
-    kubectl get KnativeEventing knative-eventing --namespace knative-eventing
-    ```
-
-    Example output:
-
-    ```bash
-    NAME               VERSION         READY   REASON
-    knative-eventing   0.21.0          True
-    ```
+The Knative Operator supports up to the last three major releases. For example, if the current version of the Operator is 0.22, it bundles and supports the installation of Knative versions 0.19, 0.20, 0.21 and 0.22.
 
 **NOTE:** In the following examples, Knative Serving custom resources are installed in the `knative-serving` namespace, and  Knative Eventing custom resources are installed in the `knative-eventing` namespace.
 
