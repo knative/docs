@@ -115,5 +115,5 @@ metadata:
   name: knative-eventing
   namespace: knative-eventing
 spec:
-  version: "0.22"
+  version: "0.21"
 ```
