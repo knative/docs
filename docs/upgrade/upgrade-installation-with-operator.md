@@ -98,6 +98,7 @@ If the upgrade fails, you can rollback to restore your Knative to the previous v
 For Knative Serving:
 
 ```yaml
+kubectl apply -f - <<EOF
 apiVersion: operator.knative.dev/v1alpha1
 kind: KnativeServing
 metadata:
@@ -105,7 +106,7 @@ metadata:
   namespace: knative-serving
 spec:
   version: "0.21"
-```
+EOF
 
 For Knative Eventing:
 
