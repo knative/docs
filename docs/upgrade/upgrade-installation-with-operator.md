@@ -111,6 +111,7 @@ EOF
 For Knative Eventing:
 
 ```yaml
+kubectl apply -f - <<EOF
 apiVersion: operator.knative.dev/v1alpha1
 kind: KnativeEventing
 metadata:
@@ -118,4 +119,4 @@ metadata:
   namespace: knative-eventing
 spec:
   version: "0.21"
-```
+EOF
