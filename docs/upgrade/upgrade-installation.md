@@ -2,16 +2,41 @@
 title: "Upgrading your installation"
 weight: 21
 type: "docs"
+aliases:
+  - /docs/install/upgrade-installation
 ---
 
-To upgrade your Knative components and plugins, run the `kubectl apply` command
-to install the subsequent release. We support upgrading by a single
-[minor](https://semver.org/) version number. For example, if you have v0.14.0 installed,
-you must upgrade to v0.15.0 before attempting to upgrade to v0.16.0. To verify the version
-number you currently have installed, see
-[Checking your installation version](./check-install-version.md).
+You can use the `kubectl apply` command to upgrade your Knative components and plugins.
 
-If you installed Knative using the [operator](https://github.com/knative/operator), the upgrade process will differ. See the [operator upgrade guide](./upgrade-installation-with-operator.md) to learn how to upgrade an installation managed by the operators.
+Knative supports upgrading by a single [minor](https://semver.org/) version number. For example, if you have v0.20.0 installed, you must upgrade to v0.21.0 before attempting to upgrade to v0.22.0.
+
+To verify the version number you currently have installed:
+
+- Check the installed **Knative Serving** version by entering the following command:
+
+    ```bash
+    kubectl get KnativeServing knative-serving --namespace knative-serving
+    ```
+
+    Example output:
+
+    ```bash
+    NAME              VERSION         READY   REASON
+    knative-serving   0.21.0          True
+    ```
+
+- Check the installed **Knative Eventing** version by entering the following command:
+
+    ```bash
+    kubectl get KnativeEventing knative-eventing --namespace knative-eventing
+    ```
+
+    Example output:
+
+    ```bash
+    NAME               VERSION         READY   REASON
+    knative-eventing   0.21.0          True
+    ```
 
 ## Before you begin
 
