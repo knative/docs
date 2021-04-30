@@ -1,17 +1,12 @@
 ---
-title: "Upgrading your installation"
+title: "Upgrading Knative"
 weight: 21
 type: "docs"
+aliases:
+  - /docs/install/upgrade-installation
 ---
 
-To upgrade your Knative components and plugins, run the `kubectl apply` command
-to install the subsequent release. We support upgrading by a single
-[minor](https://semver.org/) version number. For example, if you have v0.14.0 installed,
-you must upgrade to v0.15.0 before attempting to upgrade to v0.16.0. To verify the version
-number you currently have installed, see
-[Checking your installation version](./check-install-version.md).
-
-If you installed Knative using the [operator](https://github.com/knative/operator), the upgrade process will differ. See the [operator upgrade guide](./upgrade-installation-with-operator.md) to learn how to upgrade an installation managed by the operators.
+You can use the `kubectl apply` command to upgrade your Knative components and plugins.
 
 ## Before you begin
 
@@ -47,58 +42,39 @@ kubectl get pods --namespace knative-serving
 kubectl get pods --namespace knative-eventing
 ```
 
-### Upgrading plug-ins
+### Upgrade plugins
 
-If you have a plug-in installed, make sure to upgrade it at the same time as
+If you have a plugin installed, make sure to upgrade it at the same time as
 you upgrade your Knative components.
 
 ### Run pre-install tools before upgrade
 
 In some upgrades there are some steps that must happen before the actual
-upgrade, and these are identified in the release notes. For example, upgrading
-from v0.15.0 to v0.16.0 for Eventing you have to run:
-
-```bash
-kubectl apply --filename {{< artifact repo="eventing" file="eventing-pre-install-jobs.yaml" >}}
-```
+upgrade, and these are identified in the release notes.
 
 ### Upgrade existing resources to the latest stored version
 
 Our custom resources are stored within Kubernetes at a particular version.
-As we introduce newer and remove older versions you'll need to migrate our resources
-to the designated stored version. This ensures removing older versions
+As we introduce newer and remove older supported versions, you must migrate the resources to the designated stored version. This ensures removing older versions
 will succeed when upgrading.
 
-For the various subprojects - we have a K8s job to help operators perform this migration.
-The release notes for each release will explicitly whether a migration is required.
-
-ie.
-```bash
-kubectl create --filename {{< artifact repo="serving" file="serving-post-install-jobs.yaml" >}}
-```
+For the various subprojects there is a K8s job to help operators perform this migration. The release notes for each release will state explicitly whether a migration is required.
 
 ## Performing the upgrade
 
-To upgrade, apply the `.yaml` files for the subsequent minor versions of all
+To upgrade, apply the YAML files for the subsequent minor versions of all
 your installed Knative components and features, remembering to only
-upgrade by one minor version at a time. For a cluster running v0.15.2 of the
-Knative Serving and Eventing components, the
-following command upgrades the installation to v0.16.0:
+upgrade by one minor version at a time. For a cluster running version 0.20 of the Knative Serving and Eventing components, the following command upgrades the installation to v0.22.0:
 
 ```bash
-kubectl apply --filename https://github.com/knative/serving/releases/download/v0.16.0/serving-core.yaml \
---filename https://github.com/knative/eventing/releases/download/v0.16.0/eventing.yaml \
+kubectl apply -f https://github.com/knative/serving/releases/download/v0.22.0/serving-core.yaml \
+-f https://github.com/knative/eventing/releases/download/v0.22.0/eventing.yaml \
 ```
 
 ### Run post-install tools after the upgrade
 
 In some upgrades there are some steps that must happen after the actual
-upgrade, and these are identified in the release notes. For example, after
-upgrading from v0.15.0 to v0.16.0 for Eventing you should run:
-
-```bash
-kubectl apply --filename {{< artifact repo="eventing" file="eventing-post-install-jobs.yaml" >}}
-```
+upgrade, and these are identified in the release notes.
 
 ## Verifying the upgrade
 
