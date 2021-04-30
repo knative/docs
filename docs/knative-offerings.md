@@ -1,7 +1,6 @@
 ---
 title: "Knative Offerings"
-linkTitle: "Knative Offerings"
-weight: 15
+weight: 07
 type: "docs"
 ---
 

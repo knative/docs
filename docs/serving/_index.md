@@ -1,7 +1,6 @@
 ---
 title: "Knative Serving"
-linkTitle: "Serving Component"
-weight: 20
+weight: 05
 type: "docs"
 ---
 
