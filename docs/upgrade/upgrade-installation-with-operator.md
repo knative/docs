@@ -18,6 +18,7 @@ The Knative Operator supports up to the last three major releases. For example, 
 To upgrade, apply the Operator custom resources, adding the `spec.version` for the Knative version that you want to upgrade to:
 
 ```yaml
+kubectl apply -f - <<EOF
 apiVersion: operator.knative.dev/v1alpha1
 kind: KnativeServing
 metadata:
@@ -25,7 +26,7 @@ metadata:
   namespace: knative-serving
 spec:
   version: "0.22"
-```
+EOF
 
 ## Verifying the upgrade
 
