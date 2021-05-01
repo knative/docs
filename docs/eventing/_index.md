@@ -1,7 +1,6 @@
 ---
 title: "Knative Eventing"
-linkTitle: "Eventing Component"
-weight: 60
+weight: 06
 type: "docs"
 aliases:
     - /eventing/README
