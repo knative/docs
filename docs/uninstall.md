@@ -1,6 +1,6 @@
 ---
 title: "Uninstalling Knative"
-weight: 85
+weight: 02
 type: "docs"
 ---
 
