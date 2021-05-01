@@ -30,11 +30,13 @@ recreate the source files from this folder.
    [package]
    name = "hellorust"
    version = "0.0.0"
+   edition = "2018"
    publish = false
 
    [dependencies]
-   hyper = "0.12.3"
-   pretty_env_logger = "0.2.3"
+   hyper = { version = "0.14.7", features = ["full"]}
+   tokio = { version = "1.5.0", features = ["macros", "rt-multi-thread"] }
+   pretty_env_logger = "0.4.0"
    ```
 
 1. Create a `src` folder, then create a new file named `main.rs` in that folder
@@ -42,50 +44,51 @@ recreate the source files from this folder.
    listens on port 8080:
 
    ```rust
-   #![deny(warnings)]
-   extern crate hyper;
-   extern crate pretty_env_logger;
-
-   use hyper::{Body, Response, Server};
-   use hyper::service::service_fn_ok;
-   use hyper::rt::{self, Future};
+   use hyper::{
+    server::conn::AddrStream,
+    service::{make_service_fn, service_fn},
+    Body, Request, Response, Server,
+   };
+   use std::convert::Infallible;
    use std::env;
 
-   fn main() {
-       pretty_env_logger::init();
+   #[tokio::main]
+   async fn main() {
+      pretty_env_logger::init();
 
-       let mut port: u16 = 8080;
-       match env::var("PORT") {
-           Ok(p) => {
+      let mut port: u16 = 8080;
+      match env::var("PORT") {
+         Ok(p) => {
                match p.parse::<u16>() {
-                   Ok(n) => {port = n;},
-                   Err(_e) => {},
+                  Ok(n) => {
+                     port = n;
+                  }
+                  Err(_e) => {}
                };
-           }
-           Err(_e) => {},
-       };
-       let addr = ([0, 0, 0, 0], port).into();
+         }
+         Err(_e) => {}
+      };
+      let addr = ([0, 0, 0, 0], port).into();
 
-       let new_service = || {
-           service_fn_ok(|_| {
-
+      let make_svc = make_service_fn(|_socket: &AddrStream| async move {
+         Ok::<_, Infallible>(service_fn(move |_: Request<Body>| async move {
                let mut hello = "Hello ".to_string();
                match env::var("TARGET") {
-                   Ok(target) => {hello.push_str(&target);},
-                   Err(_e) => {hello.push_str("World")},
+                  Ok(target) => {
+                     hello.push_str(&target);
+                  }
+                  Err(_e) => hello.push_str("World"),
                };
+               Ok::<_, Infallible>(Response::new(Body::from(hello)))
+         }))
+      });
 
-               Response::new(Body::from(hello))
-           })
-       };
+      let server = Server::bind(&addr).serve(make_svc);
 
-       let server = Server::bind(&addr)
-           .serve(new_service)
-           .map_err(|e| eprintln!("server error: {}", e));
-
-       println!("Listening on http://{}", addr);
-
-       rt::run(server);
+      println!("Listening on http://{}", addr);
+      if let Err(e) = server.await {
+         eprintln!("server error: {}", e);
+      }
    }
    ```
 
@@ -95,14 +98,14 @@ recreate the source files from this folder.
    ```docker
    # Use the official Rust image.
    # https://hub.docker.com/_/rust
-   FROM rust:1.27.0
+   FROM rust:1.51.0
 
    # Copy local code to the container image.
    WORKDIR /usr/src/app
    COPY . .
 
    # Install production dependencies and build a release artifact.
-   RUN cargo install
+   RUN cargo install --path .
 
    # Run the web service on container startup.
    CMD ["hellorust"]
@@ -163,7 +166,7 @@ folder) you're ready to build and deploy the sample app.
 
 1. To find the URL for your service, enter:
 
-   ```
+   ```shell
    kubectl get ksvc helloworld-rust  --output=custom-columns=NAME:.metadata.name,URL:.status.url
    NAME                URL
    helloworld-rust     http://helloworld-rust.default.1.2.3.4.xip.io
@@ -184,4 +187,3 @@ To remove the sample app from your cluster, delete the service record:
 ```shell
 kubectl delete --filename service.yaml
 ```
-
