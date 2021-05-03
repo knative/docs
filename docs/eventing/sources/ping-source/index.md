@@ -8,7 +8,7 @@ aliases:
   - /docs/eventing/samples/ping-source
 ---
 
-![version](https://img.shields.io/badge/API_Version-v1beta2-red?style=flat-square)
+![version](https://img.shields.io/badge/API_Version-v1-green?style=flat-square)
 
 A PingSource is an event source that produces events with a fixed payload on a specified [cron](https://en.wikipedia.org/wiki/Cron) schedule.
 
