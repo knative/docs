@@ -119,7 +119,7 @@ kn source ping create test-ping-source \
 
     ```shell
     kubectl -n pingsource-example apply -f - <<EOF
-    apiVersion: sources.knative.dev/v1beta2
+    apiVersion: sources.knative.dev/v1
     kind: PingSource
     metadata:
       name: test-ping-source-binary
