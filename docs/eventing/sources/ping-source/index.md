@@ -232,7 +232,7 @@ kn source ping delete test-ping-source-binary
     <br>
 
 
-1. Optional: Delete the `event-delivery` service:
+1. Optional: Delete the `event-display` service:
 
     {{< tabs name="delete-service" default="kubectl" >}}
     {{% tab name="kubectl" %}}
