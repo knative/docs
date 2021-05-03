@@ -2,9 +2,6 @@
 title: "Administration guide"
 weight: 10
 type: "docs"
-showlandingtoc: "false"
-aliases:
-  - /docs/add-me
 ---
 
 There are two core Knative components that can be installed and used together or independently to provide different functions:
