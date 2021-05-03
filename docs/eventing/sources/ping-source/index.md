@@ -16,9 +16,8 @@ The following example shows how you can configure a PingSource as an event sourc
 
 ## Before you begin
 
-1. To create a Knative service to use as a sink, you must install [Knative Serving](../../../install).
 1. To create a PingSource, you must install [Knative Eventing](../../../eventing). The PingSource event source type is enabled by default when you install Knative Eventing.
-1. Optional: You can use either `kubectl` or [`kn`](../../../client/install-kn) commands to create components such as a Knative service and PingSource.
+1. Optional: You can use either `kubectl` or [`kn`](../../../client/install-kn) commands to create components such as a sink and PingSource.
 1. Optional: You can use either `kubectl` or [`kail`](https://github.com/boz/kail) for logging during the verification step in this procedure.
 
 ## Procedure
@@ -31,31 +30,44 @@ The following example shows how you can configure a PingSource as an event sourc
 
     Creating a namespace for the PingSource example allows you to isolate the components created by this demo, so that it is easier for you to view changes and remove components when you are finished.
 
-1. To verify that the PingSource is working correctly, create a simple Knative service that dumps incoming messages to its log, by entering the command:
+1. To verify that the PingSource is working correctly, create an example sink in the `pingsource-example` namespace that dumps incoming messages to a log, by entering the command:
 
-    {{< tabs name="create-service" default="kn" >}}
-    {{% tab name="YAML" %}}
+    {{< tabs name="create-sink" default="kubectl" >}}
+    {{% tab name="kubectl" %}}
 
 ```shell
 kubectl -n pingsource-example apply -f - << EOF
-apiVersion: serving.knative.dev/v1
-kind: Service
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: event-display
 spec:
+  replicas: 1
+  selector:
+    matchLabels: &labels
+      app: event-display
   template:
+    metadata:
+      labels: *labels
     spec:
       containers:
         - name: event-display
-          image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
+          image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: event-display
+spec:
+  selector:
+    app: event-display
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
 EOF
-```
-
-    {{< /tab >}}
-    {{% tab name="kn" %}}
-
-```shell
-kn service create event-display --image gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
 ```
     {{< /tab >}}
     {{< /tabs >}}
@@ -67,7 +79,7 @@ kn service create event-display --image gcr.io/knative-releases/knative.dev/even
     {{% tab name="YAML" %}}
 
 ```shell
-kubectl -n pingsource-example apply -f - <<EOF
+kubectl create -n pingsource-example -f - <<EOF
 apiVersion: sources.knative.dev/v1beta2
 kind: PingSource
 metadata:
