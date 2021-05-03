@@ -2,6 +2,8 @@
 title: "Configuring high-availability components"
 weight: 50
 type: "docs"
+aliases:
+  - /docs/serving/config-ha
 ---
 
 Active/passive high availability (HA) is a standard feature of Kubernetes APIs that helps to ensure that APIs stay operational if a disruption occurs. In an HA deployment, if an active controller crashes or is deleted, another controller is available to take over processing of the APIs that were being serviced by the controller that is now unavailable.
