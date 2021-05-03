@@ -230,11 +230,11 @@ After the build has completed and the container is pushed to Docker Hub, you can
 
    > Note: Add `-v` option to get more detail if the `curl` command failed.
 
-## Removing
+## Deleting the app
 
-To remove the sample app from your cluster, delete the service record.
+To remove the sample app from your cluster, delete the service.
 
-{{< tabs name="service_url" default="kn" >}}
+{{< tabs name="delete-service" default="kn" >}}
 {{% tab name="kubectl" %}}
 ```shell
 kubectl delete --filename service.yaml
