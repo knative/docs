@@ -304,19 +304,17 @@ EOF
          -d '{"msg":"Goodbye Knative!"}'
        ```
        When the broker receives your event, `goodbye-display` will activate and
-       send the event to the event consumer of the same name.
-       If the event has been received, you will receive a `202 Accepted` response
-       similar to the one below:
-       ```
+       send the event to the event consumer of the same name. If the event has been received, you will receive a `202 Accepted` response similar to the one below:
+
+       ```shell
        < HTTP/1.1 202 Accepted
        < Content-Length: 0
        < Date: Mon, 12 Aug 2019 19:48:18 GMT
        ```
 
-    - To make the third request, which creates an event that has the `type`
-       `greeting` and the`source` `sendoff`, run the following in the SSH terminal:
+    - To make the third request, which creates an event that has the `type` `greeting` and the`source` `sendoff`, run the following in the SSH terminal:
 
-       ```
+       ```shell
        curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/event-example/default" \
          -X POST \
          -H "Ce-Id: say-hello-goodbye" \
@@ -328,7 +326,7 @@ EOF
        ```
 
        When the broker receives your event, `hello-display` and `goodbye-display` will activate and send the event to the event consumers of the same name. If the event has been received, you will receive a `202 Accepted` response similar to the one below:
-       
+
        ```
        < HTTP/1.1 202 Accepted
        < Content-Length: 0
@@ -348,12 +346,15 @@ After you send the events, verify that the events were received by the correct s
 
 1. Look at the logs for the `hello-display` event consumer by entering the
    following command:
-   ```
+
+   ```shell
    kubectl -n event-example logs -l app=hello-display --tail=100
    ```
+
    This returns the `Attributes` and `Data` of the events you sent to
    `hello-display`:
-   ```
+
+   ```shell
    ☁️  cloudevents.Event
    Validation: valid
    Context Attributes,
@@ -385,14 +386,18 @@ After you send the events, verify that the events were received by the correct s
       "msg": "Hello Knative! Goodbye Knative!"
     }
    ```
+
 1. Look at the logs for the `goodbye-display` event consumer by entering the
    following command:
-   ```
+
+   ```shell
    kubectl -n event-example logs -l app=goodbye-display --tail=100
    ```
+
    This returns the `Attributes` and `Data` of the events you sent to
    `goodbye-display`:
-   ```
+
+   ```shell
    ☁️  cloudevents.Event
    Validation: valid
    Context Attributes,
@@ -430,6 +435,7 @@ After you send the events, verify that the events were received by the correct s
 You can delete the `event-example` namespace and its associated resources from your cluster if you do not plan to use it again in the future.
 
 Delete the `event-example` namespace and all of its resources from your cluster by entering the following command:
-```
+
+```shell
 kubectl delete namespace event-example
 ```
