@@ -18,6 +18,7 @@ aliases:
   - /docs/install/knative-with-minishift
   - /docs/install/knative-with-pks
   - /docs/install/any-kubernetes-cluster
+  - /docs/install/
 showlandingtoc: "false"
 ---
 

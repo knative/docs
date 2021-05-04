@@ -2,6 +2,8 @@
 title: "Uninstalling Knative"
 weight: 02
 type: "docs"
+aliases:
+  - /docs/uninstall
 ---
 
 To uninstall an Operator-based Knative installation, follow the [Uninstall an Operator-based Knative Installation](#uninstall-an-operator-based-knative-installation) procedure below.

@@ -2,6 +2,8 @@
 title: "Upgrading Knative"
 weight: 03
 type: "docs"
+aliases:
+  - /docs/upgrade/
 ---
 
 Knative supports upgrading by a single [minor](https://semver.org/) version number. For example, if you have v0.20.0 installed, you must upgrade to v0.21.0 before attempting to upgrade to v0.22.0.

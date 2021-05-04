@@ -4,6 +4,7 @@ weight: 21
 type: "docs"
 aliases:
   - /docs/install/upgrade-installation
+  - /docs/upgrade/upgrade-installation
 ---
 
 You can use the `kubectl apply` command to upgrade your Knative components and plugins.

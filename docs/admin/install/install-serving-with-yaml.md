@@ -4,6 +4,8 @@ linkTitle: "Install Serving using YAML"
 weight: 02
 type: "docs"
 showlandingtoc: "false"
+aliases:
+  - /docs/install/install-serving-with-yaml
 ---
 
 This topic describes how to install Knative Serving by applying YAML files using the `kubectl` CLI.

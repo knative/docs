@@ -2,6 +2,8 @@
 title: "Installation files"
 weight: 20
 type: "docs"
+aliases:
+  - /docs/install/installation-files
 ---
 
 This guide provides reference information about the YAML files in the Knative

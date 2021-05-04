@@ -4,6 +4,8 @@ linkTitle: "Install Eventing using YAML"
 weight: 03
 type: "docs"
 showlandingtoc: "false"
+aliases:
+  - /docs/install/install-eventing-with-yaml
 ---
 
 This topic describes how to install Knative Eventing by applying YAML files using the `kubectl` CLI.

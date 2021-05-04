@@ -3,6 +3,8 @@ title: "Prerequisites"
 weight: 01
 type: "docs"
 showlandingtoc: "false"
+aliases:
+  - /docs/install/prerequisites
 ---
 
 Before installing Knative, you must meet the following prerequisites:

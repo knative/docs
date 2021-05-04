@@ -4,6 +4,7 @@ weight: 21
 type: "docs"
 aliases:
   - /docs/install/upgrade-installation-with-operator
+  - /docs/upgrade/upgrade-installation-with-operator
 ---
 
 The attribute `spec.version` is the only field you need to change in the

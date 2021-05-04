@@ -1,9 +1,10 @@
 ---
 title: "Installing optional extensions"
-linkTitle: "Install optional extensions"
 weight: 04
 type: "docs"
 showlandingtoc: "false"
+aliases:
+  - /docs/install/install-extensions
 ---
 
 To add extra features to your Knative Serving or Eventing installation, you can install extensions

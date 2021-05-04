@@ -3,7 +3,8 @@ title: "Configuring the Serving Operator Custom Resource"
 weight: 20
 type: "docs"
 aliases:
-- /docs/operator/configuring-serving-cr/
+  - /docs/operator/configuring-serving-cr/
+  - /docs/install/configuring-serving-cr/
 ---
 
 The Knative Serving operator can be configured with these options:

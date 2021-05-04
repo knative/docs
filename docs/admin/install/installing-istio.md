@@ -2,6 +2,8 @@
 title: "Installing Istio for Knative"
 weight: 15
 type: "docs"
+aliases:
+  - /docs/install/installing-istio
 ---
 
 This guide walks you through manually installing and customizing Istio for use

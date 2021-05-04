@@ -3,6 +3,8 @@ title: "Checking the version of your Knative components"
 linkTitle: "Checking your install version"
 weight: 20
 type: "docs"
+aliases:
+  - /docs/install/check-install-version
 ---
 
 To obtain the version of the Knative component that you have running on your cluster, you query for the
