@@ -19,7 +19,7 @@ kubectl get configmap -n knative-serving config-deployment -oyaml
 ## Configuring progress deadlines
 
 Configuring progress deadline settings allows you to specify the maximum time, either in seconds or minutes, that you will wait for your Deployment to progress before the system reports back that the Deployment has failed progressing for the Knative Revision.
-By default, this value is set to 120 seconds.
+By default, this value is set to 600 seconds.
 The value is expressed as a Go `time.Duration` string representation, but must be rounded to a second precision.
 
 The Knative Autoscaler component scales the revision to 0, and the Knative service enters a terminal `Failed` state, if the initial scale cannot be achieved within the time limit defined by this setting.
