@@ -34,96 +34,13 @@ cd knative-docs/docs/serving/samples/secrets-go
   id, and also set your project ID as default using
   `gcloud config set project $PROJECT_ID`.
 
-## Recreating the sample code
+## Prerequisite
 
-1. Create a new file named `secrets.go` and paste the following code. This code
-   creates a basic web server which listens on port 8080:
+1. Download a copy of the code:
 
-   ```go
-   package main
-
-   import (
-    "context"
-    "fmt"
-    "log"
-    "net/http"
-    "os"
-
-    "cloud.google.com/go/storage"
-   )
-
-   func main() {
-    log.Print("Secrets sample started.")
-
-    // This sets up the standard GCS storage client, which will pull
-    // credentials from GOOGLE_APPLICATION_CREDENTIALS if specified.
-    ctx := context.Background()
-    client, err := storage.NewClient(ctx)
-    if err != nil {
-      log.Fatalf("Unable to initialize storage client: %v", err)
-    }
-
-    http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-      // This GCS bucket has been configured so that any authenticated
-      // user can access it (Read Only), so any Service Account can
-      // run this sample.
-      bkt := client.Bucket("knative-secrets-sample")
-
-      // Access the attributes of this GCS bucket, and write it back to the
-      // user.  On failure, return a 500 and the error message.
-      attrs, err := bkt.Attrs(ctx)
-      if err != nil {
-        http.Error(w, err.Error(), http.StatusInternalServerError)
-        return
-      }
-      fmt.Fprintln(w,
-        fmt.Sprintf("bucket %s, created at %s, is located in %s with storage class %s\n",
-          attrs.Name, attrs.Created, attrs.Location, attrs.StorageClass))
-
-    })
-
-    port := os.Getenv("PORT")
-    if port == "" {
-      port = "8080"
-    }
-
-    log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
-   }
-   ```
-
-1. In your project directory, create a file named `Dockerfile` and copy the code
-   block below into it. For detailed instructions on dockerizing a Go app, see
-   [Deploying Go servers with Docker](https://blog.golang.org/docker).
-
-   ```docker
-   # Use the official Golang image to create a build artifact.
-   # This is based on Debian and sets the GOPATH to /go.
-   # https://hub.docker.com/_/golang
-   FROM golang as builder
-
-   # Copy local code to the container image.
-   WORKDIR /go/src/github.com/knative/docs/hellosecrets
-   COPY . .
-
-   # Build the output command inside the container.
-   RUN CGO_ENABLED=0 GOOS=linux go build -v -o hellosecrets
-
-   # Use a Docker multi-stage build to create a lean production image.
-   # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
-   FROM alpine
-
-   # Enable the use of outbound https
-   RUN apk add --no-cache ca-certificates
-
-   # Copy the binary to the production image from the builder stage.
-   COPY --from=builder /go/src/github.com/knative/docs/hellosecrets/hellosecrets /hellosecrets
-
-   # Service must listen to $PORT environment variable.
-   # This default value facilitates local development.
-   ENV PORT 8080
-
-   # Run the web service on container startup.
-   CMD ["/hellosecrets"]
+   ```shell
+   git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
+   cd knative-docs/docs/serving/samples/secrets-go
    ```
 
 1. [Create a new Google Service Account](https://cloud.google.com/iam/docs/creating-managing-service-accounts).
@@ -195,9 +112,6 @@ cd knative-docs/docs/serving/samples/secrets-go
    ```
 
 ## Building and deploying the sample
-
-Once you have recreated the sample code files (or used the files in the sample
-folder) you're ready to build and deploy the sample app.
 
 1. Use Docker to build the sample code into a container. To build and push with
    Docker Hub, run these commands replacing `{username}` with your Docker Hub
