@@ -1,5 +1,5 @@
 ---
-title: "Exclude namespaces from the Knative webhook"
+title: "Knative webhook"
 weight: 70
 type: "docs"
 aliases:

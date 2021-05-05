@@ -1,5 +1,5 @@
 ---
-title: "Configuring high-availability components"
+title: "High-availability"
 weight: 50
 type: "docs"
 aliases:
