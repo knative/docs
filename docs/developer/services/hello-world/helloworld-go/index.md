@@ -3,6 +3,8 @@ title: "Hello World - Go"
 linkTitle: "Go"
 weight: 1
 type: "docs"
+aliases:
+  - /docs/serving/samples/hello-world/helloworld-go
 ---
 
 This guide describes the steps required to to create the `helloworld-go` sample app

@@ -3,6 +3,8 @@ title: "Hello World - Python"
 linkTitle: "Python"
 weight: 1
 type: "docs"
+aliases:
+  - /docs/serving/samples/hello-world/helloworld-python
 ---
 
 This guide describes the steps required to create the `helloworld-python` sample

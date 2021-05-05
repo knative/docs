@@ -75,3 +75,8 @@ docker run --rm -v "$HOME/.kube/config:/root/.kube/config" gcr.io/knative-releas
 ## Using kn with Tekton
 
 See the <a href="http://hub.tekton.dev/tekton/task/kn" target="_blank">Tekton documentation</a>.
+
+## Next steps
+
+- Optional: [Configure your `kn` installation](../client/configure-kn).
+- Optional: [Use `kn` plugins](../client/kn-plugins).

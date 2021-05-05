@@ -3,6 +3,8 @@ title: "Hello World - Spark Java Framework"
 linkTitle: "Java (Spark)"
 weight: 1
 type: "docs"
+aliases:
+  - /docs/serving/samples/hello-world/helloworld-java-spark
 ---
 
 A simple web app written in Java using Spark Java Framework that you can use for

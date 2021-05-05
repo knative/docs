@@ -3,6 +3,8 @@ title: "Hello World - Shell"
 linkTitle: "Shell"
 weight: 1
 type: "docs"
+aliases:
+  - /docs/serving/samples/hello-world/helloworld-shell
 ---
 
 This guide describes the steps required to create the `helloworld-shell` sample app and deploy it to your

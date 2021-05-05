@@ -3,6 +3,8 @@ title: "Hello World - Spring Boot Java"
 linkTitle: "Java (Spring)"
 weight: 1
 type: "docs"
+aliases:
+  - /docs/serving/samples/hello-world/helloworld-java-spring
 ---
 
 This guide describes the steps required to create the `helloworld-java-spring` sample app and deploy it to your cluster.

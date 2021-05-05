@@ -3,6 +3,8 @@ title: "Hello World - Ruby"
 linkTitle: "Ruby"
 weight: 1
 type: "docs"
+aliases:
+  - /docs/serving/samples/hello-world/helloworld-ruby
 ---
 
 This guide describes the steps required to create the `helloworld-ruby` sample app and deploy it to your cluster.

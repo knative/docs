@@ -5,14 +5,6 @@ type: "docs"
 showlandingtoc: "false"
 ---
 
-## About Knative
-<!-- TODO: make reusable snippets-->
-There are two core Knative components that can be installed and used together or independently to provide different functions:
-
-* [Knative Serving](../serving/): Easily manage stateless services on Kubernetes by reducing the developer effort required for autoscaling, networking, and rollouts.
-
-* [Knative Eventing](../eventing/): Easily route events between on-cluster and off-cluster components by exposing event routing as configuration rather than embedded in code.
-
 ## Installing Knative
 
 To get started with a development Knative installation, you can install Knative components and Kubernetes on a local Docker Daemon by using _Knative on [`kind`](https://kind.sigs.k8s.io/docs/user/quick-start)_ (`konk`).
@@ -67,3 +59,12 @@ For more information, see the [CLI tools](../client) documentation.
 
 - [Debugging application issues](./serving/debugging-application-issues/)
 -->
+
+## Create an app
+
+Applications in Knative are represented as Knative services (`ksvc`). Services are `Service` Kubernetes custom resources. See [Creating Knative services](../developer/services/creating-services/).
+
+<!-- TODO: check if we can combine these two-->
+## Deploy an app
+
+After you have created an app, you can deploy it as a Knative service. See [Getting Started with App Deployment](../getting-started-knative-app/).

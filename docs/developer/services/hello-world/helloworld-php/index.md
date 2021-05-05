@@ -3,6 +3,8 @@ title: "Hello World - PHP"
 linkTitle: "PHP"
 weight: 1
 type: "docs"
+aliases:
+  - /docs/serving/samples/hello-world/helloworld-php
 ---
 
 A simple web app written in PHP that you can use for testing. It reads in an env

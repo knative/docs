@@ -3,6 +3,8 @@ title: "Hello World - Kotlin"
 linkTitle: "Kotlin"
 weight: 1
 type: "docs"
+aliases:
+  - /docs/serving/samples/hello-world/helloworld-kotlin
 ---
 
 A simple web app written in Kotlin using [Ktor](https://ktor.io/) that you can

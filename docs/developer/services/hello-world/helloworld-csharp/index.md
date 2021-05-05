@@ -3,6 +3,8 @@ title: "Hello world - .NET Core"
 linkTitle: ".NET"
 weight: 1
 type: "docs"
+aliases:
+  - /docs/serving/samples/hello-world/helloworld-csharp
 ---
 
 A simple web app written in C# using .NET Core 3.1 that you can use for testing.
@@ -83,7 +85,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-csharp
    # Use Microsoft's official build .NET image.
    FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
    WORKDIR /app
- 
+
    # Install production dependencies.
    # Copy csproj and restore as distinct layers.
    COPY *.csproj ./
