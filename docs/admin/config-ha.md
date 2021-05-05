@@ -21,8 +21,8 @@ For components leveraging leader election to achieve HA, this capability can be 
 
 With the exception of the `activator` component you can scale up any deployment running in `knative-serving` (or `kourier-system`) with a command like:
 
-```
-$ kubectl -n knative-serving scale deployment <deployment-name> --replicas=2
+```shell
+kubectl -n knative-serving scale deployment <deployment-name> --replicas=2
 ```
 
 - Setting `--replicas` to a value of `2` enables HA.
@@ -35,13 +35,13 @@ $ kubectl -n knative-serving scale deployment <deployment-name> --replicas=2
 
 The scale of the `activator` component is governed by the Kubernetes HPA component. You can see the current HPA scale limits and the current scale by running:
 
-```
-$ kubectl get hpa activator -n knative-serving
+```shell
+kubectl get hpa activator -n knative-serving
 ```
 
 The possible output will be something like:
 
-```
+```shell
 NAME        REFERENCE              TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
 activator   Deployment/activator   2%/100%   5         15        11         346d
 ```
