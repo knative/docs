@@ -6,6 +6,7 @@ aliases:
   - /docs/install/installing-istio
 ---
 
+<!-- TODO: add documentation on how to reuse an existing Istio installation. See comment https://github.com/knative/docs/pull/3526/files#r626716547 -->
 This guide walks you through manually installing and customizing Istio for use
 with Knative.
 
