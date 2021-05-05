@@ -5,19 +5,49 @@ type: "docs"
 showlandingtoc: "false"
 ---
 
-<!-- TODO: make this a reusable snippet-->
+## About Knative
+<!-- TODO: make reusable snippets-->
 There are two core Knative components that can be installed and used together or independently to provide different functions:
 
 * [Knative Serving](./serving/): Easily manage stateless services on Kubernetes by reducing the developer effort required for autoscaling, networking, and rollouts.
 
 * [Knative Eventing](./eventing/): Easily route events between on-cluster and off-cluster components by exposing event routing as configuration rather than embedded in code.
 
-These components are delivered as Kubernetes custom resource definitions (CRDs), which can be configured by a cluster administrator to provide default settings for developer-created applications and event workflow components.
+To get started with a development Knative installation, you can install Knative components and Kubernetes on a local Docker Daemon by using _Knative on _[`kind`](https://kind.sigs.k8s.io/docs/user/quick-start)_ (`konk`).
 
-**Note**: Earlier versions of Knative included a build component.  That component has since evolved into the separate [Tekton Pipelines](https://tekton.dev/) project.
-<!--/end-->
+`konk` is a shell script that:
+
+1. Runs a script called [`01-kind.sh`](https://github.com/csantanapr/knative-kind/blob/master/01-kind.sh), that checks if `kind` is installed, installs it if not, and then creates a Kubernetes cluster on `kind` called `knative`.
+<!--does konk install kind? Confirm-->
+
+1. Runs a script called [`02-serving.sh`](https://github.com/csantanapr/knative-kind/blob/master/02-serving.sh), that:
+
+    1. Installs Knative Serving with Kourier as the default networking layer.
+<!-- TODO: Add links for serving and kourier/networking docs sections-->
+
+    1. Installs nip.io as the DNS, and provides a default port-forwarding configuration for the `knative` cluster.
+
+1. Runs a script called [`04-eventing.sh`](https://github.com/csantanapr/knative-kind/blob/master/04-eventing.sh), that installs Knative Eventing, and creates a default InMemoryChannel resource and channel-based broker on the `knative` cluster.
+<!--TODO: Add links for channel and broker resources and Knative Eventing docs-->
+
+# Installing Knative using `konk`
+
+To install `konk`, enter the following command:
+
+```
+curl -sL install.konk.dev | bash
+```
+
+# Install CLI tools
+
+You can interact with your Knative on your cluster by using the `kubectl` and `kn` CLI tools.
+
+- `kubectl` is used primarily to complete Kubernetes cluster administrator tasks.
+<!-- TODO: Add link to admin guide-->
+- `kn` is used primarily by developers to create Knative components and set up workflows.
+
+For more information, see the [CLI tools](../client) documentation.
 <!--
-- [Installing Knative](./install/)
 - [Getting started with app deployment](./serving/getting-started-knative-app/)
 - [Getting started with serving](./serving/)
 - [Getting started with eventing](./eventing/)
@@ -34,36 +64,3 @@ These components are delivered as Kubernetes custom resource definitions (CRDs),
 
 - [Debugging application issues](./serving/debugging-application-issues/)
 -->
-# Prerequisites
-
-## Install `kind`
-
-You can use `kind` (Kubernetes in Docker) to run a local Knative development cluster on a Docker container. See the [`kind`](https://kind.sigs.k8s.io/docs/user/quick-start) documentation for installation options.
-
-## Install `kubectl`
-
-You can run commands against a Kubernetes cluster by using the Kubernetes CLI (`kubectl`). See the [Kubernetes](https://kubernetes.io/docs/tasks/tools/install-kubectl) documentation for installation options.
-
-### Install `kn`
-
-The Knative CLI (`kn`) provides a quick and easy interface for creating Knative resources such as Knative services and event sources, without the need to create or modify YAML files directly. `kn` also simplifies complex procedures such as autoscaling and traffic splitting.
-
-See [Installing `kn`](../client/install-kn) for installation options.
-
-## Installing Knative (sandbox)
-
-The fastest way to get started with Knative locally** is to use _Knative on `kind`_ (`konk`).
-
-!!! todo "Install Knative and Kubernetes on a local Docker Daemon using Konk"
-    ```
-    curl -sL install.konk.dev | bash
-    ```
-
-??? question "What does the KonK script actually do?"
-    Knative on Kind (KonK) is a shell script which:
-
-      1. Checks to see that you have Kind installed and creates a Cluster called "knative" via **[`01-kind.sh`](https://github.com/csantanapr/knative-kind/blob/master/01-kind.sh)**
-
-      2. Installs **Knative Serving** with **Kourier** as the networking layer and **nip.io** as the DNS + some port-forwarding magic on the "knative" Cluster via **[`02-serving.sh`](https://github.com/csantanapr/knative-kind/blob/master/02-serving.sh)**
-
-      3. Installs **Knative Eventing** with an In-Memory **Channels** and In-Memory **Broker** on the "knative" Cluster via **[`04-eventing.sh`](https://github.com/csantanapr/knative-kind/blob/master/04-eventing.sh)**
