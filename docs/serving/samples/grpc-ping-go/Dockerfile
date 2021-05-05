@@ -15,10 +15,7 @@
 # Use the official Golang image to create a build artifact.
 # This is based on Debian and sets the GOPATH to /go.
 # https://hub.docker.com/_/golang
-FROM golang:1.12 as builder
-
-# Retrieve the dependencies.
-RUN go get google.golang.org/grpc
+FROM golang:1.15 as builder
 
 # Copy local code to the container image.
 WORKDIR /go/src/github.com/knative/docs/docs/serving/samples/grpc-ping-go
