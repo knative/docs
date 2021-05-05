@@ -1,6 +1,6 @@
 ---
 title: "Staging and publishing Knative documentation"
-linkTitle: "Website help"
+linkTitle: "Preview Website"
 weight: "60"
 type: "docs"
 ---
