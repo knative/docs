@@ -6,13 +6,13 @@ aliases:
   - /docs/eventing/metrics
 ---
 
-Administrators can monitor the Knative Eventing control plane by looking at the metrics exposed by each Knative Eventing component.
+Administrators can monitor the Knative Eventing data plane and control plane by looking at the metrics exposed by each Knative Eventing component.
 
 ## Broker
 
 ### Ingress metrics
 
-Use the following metrics to debug how broker ingress performs and what events are dispacthed via the ingress component.
+Use the following metrics to debug how broker ingress performs and what events are dispatched via the ingress component.
 By aggregating the metrics over the http code, events can be separated into two classes, successful (2xx) and failed events (5xx).
 
 | Metric Name | Description | Type | Tags | Unit | Status |

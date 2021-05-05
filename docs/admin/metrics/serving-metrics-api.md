@@ -6,7 +6,7 @@ aliases:
   - /docs/serving/metrics/#admin
 ---
 
-Administrators can monitor the Knative Serving control plane by looking at the metrics exposed by each Knative Serving component.
+Administrators can monitor the Knative Serving data plane and control plane by looking at the metrics exposed by each Knative Serving component.
 
 ## Activator metrics
 
