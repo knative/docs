@@ -16,21 +16,16 @@ There are two core Knative components that can be installed and used together or
 To get started with a development Knative installation, you can install Knative components and Kubernetes on a local Docker Daemon by using _Knative on _[`kind`](https://kind.sigs.k8s.io/docs/user/quick-start)_ (`konk`).
 
 `konk` is a shell script that:
-
-1. Runs a script called [`01-kind.sh`](https://github.com/csantanapr/knative-kind/blob/master/01-kind.sh), that checks if `kind` is installed, installs it if not, and then creates a Kubernetes cluster on `kind` called `knative`.
 <!--does konk install kind? Confirm-->
-
+1. Runs a script called [`01-kind.sh`](https://github.com/csantanapr/knative-kind/blob/master/01-kind.sh), that checks if `kind` is installed, installs it if not, and then creates a Kubernetes cluster on `kind` called `knative`.
 1. Runs a script called [`02-serving.sh`](https://github.com/csantanapr/knative-kind/blob/master/02-serving.sh), that:
-
-    1. Installs Knative Serving with Kourier as the default networking layer.
-<!-- TODO: Add links for serving and kourier/networking docs sections-->
-
-    1. Installs nip.io as the DNS, and provides a default port-forwarding configuration for the `knative` cluster.
-
+    - Installs Knative Serving with Kourier as the default networking layer.
+    - Installs nip.io as the DNS, and provides a default port-forwarding configuration for the `knative` cluster.
 1. Runs a script called [`04-eventing.sh`](https://github.com/csantanapr/knative-kind/blob/master/04-eventing.sh), that installs Knative Eventing, and creates a default InMemoryChannel resource and channel-based broker on the `knative` cluster.
+<!-- TODO: Add links for serving and kourier/networking docs sections-->
 <!--TODO: Add links for channel and broker resources and Knative Eventing docs-->
 
-# Installing Knative using `konk`
+## Installing Knative using `konk`
 
 To install `konk`, enter the following command:
 
@@ -38,7 +33,7 @@ To install `konk`, enter the following command:
 curl -sL install.konk.dev | bash
 ```
 
-# Install CLI tools
+## Install CLI tools
 
 You can interact with your Knative on your cluster by using the `kubectl` and `kn` CLI tools.
 
