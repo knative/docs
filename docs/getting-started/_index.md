@@ -9,15 +9,23 @@ showlandingtoc: "false"
 <!-- TODO: make reusable snippets-->
 There are two core Knative components that can be installed and used together or independently to provide different functions:
 
-* [Knative Serving](./serving/): Easily manage stateless services on Kubernetes by reducing the developer effort required for autoscaling, networking, and rollouts.
+* [Knative Serving](../serving/): Easily manage stateless services on Kubernetes by reducing the developer effort required for autoscaling, networking, and rollouts.
 
-* [Knative Eventing](./eventing/): Easily route events between on-cluster and off-cluster components by exposing event routing as configuration rather than embedded in code.
+* [Knative Eventing](../eventing/): Easily route events between on-cluster and off-cluster components by exposing event routing as configuration rather than embedded in code.
 
-To get started with a development Knative installation, you can install Knative components and Kubernetes on a local Docker Daemon by using _Knative on _[`kind`](https://kind.sigs.k8s.io/docs/user/quick-start)_ (`konk`).
+## Installing Knative
+
+To get started with a development Knative installation, you can install Knative components and Kubernetes on a local Docker Daemon by using _Knative on [`kind`](https://kind.sigs.k8s.io/docs/user/quick-start)_ (`konk`).
+
+## Prerequisites
+
+- Install [`kind`](https://kind.sigs.k8s.io/docs/user/quick-start) before you use `konk`.
+
+## About `konk`
 
 `konk` is a shell script that:
 <!--does konk install kind? Confirm-->
-1. Runs a script called [`01-kind.sh`](https://github.com/csantanapr/knative-kind/blob/master/01-kind.sh), that checks if `kind` is installed, installs it if not, and then creates a Kubernetes cluster on `kind` called `knative`.
+1. Runs a script called [`01-kind.sh`](https://github.com/csantanapr/knative-kind/blob/master/01-kind.sh), that checks if `kind` is installed. If `kind` is installed, the script creates a Kubernetes cluster on `kind` called `knative`.
 1. Runs a script called [`02-serving.sh`](https://github.com/csantanapr/knative-kind/blob/master/02-serving.sh), that:
     - Installs Knative Serving with Kourier as the default networking layer.
     - Installs nip.io as the DNS, and provides a default port-forwarding configuration for the `knative` cluster.
