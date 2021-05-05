@@ -24,7 +24,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-scala
 
 ## Before you begin
 
-- A Kubernetes cluster [installation](../../../../install/README.md) with
+- A Kubernetes cluster [installation](../../../../install) with
   Knative Serving up and running.
 - [Docker](https://www.docker.com) installed locally, and running, optionally a
   Docker Hub account configured or some other Docker Repository installed

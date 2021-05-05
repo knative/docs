@@ -21,7 +21,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
 ## Prerequisites
 
 - A Kubernetes cluster with Knative installed and DNS configured. Follow the
-  [installation instructions](../../../../install/README.md).
+  [installation instructions](../../../../install).
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured.
 - (optional) The Knative CLI client [kn](https://github.com/knative/client/releases) can be used to simplify the deployment. Alternatively, you can use `kubectl`, and apply resource files directly.
