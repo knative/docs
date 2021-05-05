@@ -20,9 +20,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-r
 
 ## Before you begin
 
-- A Kubernetes cluster with Knative installed. Follow the
-  [installation instructions](../../../../docs/install/) if you need to
-  create one.
+- A Kubernetes cluster with [Knative installed](../../../../docs/install).
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
 
