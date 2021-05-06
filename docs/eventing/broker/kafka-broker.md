@@ -6,10 +6,6 @@ type: "docs"
 
 # Apache Kafka Broker
 
-{% macro artifact(repo, file='', org='knative') -%}
-    http://github.com/{{org}}/{{repo}}/releases/download/{{knative_version}}/{{file}}
-{%- endmacro %}
-
 The Apache Kafka Broker is a native Broker implementation, that reduces
 network hops, supports any Kafka version, and has a better integration
 with Apache Kafka for the Knative Broker and Trigger model.

@@ -6,10 +6,6 @@ type: "docs"
 
 # Upgrading your installation
 
-{% macro artifact(repo, file='', org='knative') -%}
-    http://github.com/{{org}}/{{repo}}/releases/download/{{knative_version}}/{{file}}
-{%- endmacro %}
-
 To upgrade your Knative components and plugins, run the `kubectl apply` command
 to install the subsequent release. We support upgrading by a single
 [minor](https://semver.org/) version number. For example, if you have v0.14.0 installed,

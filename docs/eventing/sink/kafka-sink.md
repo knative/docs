@@ -6,10 +6,6 @@ type: "docs"
 
 # Apache Kafka Sink
 
-{% macro artifact(repo, file='', org='knative') -%}
-    http://github.com/{{org}}/{{repo}}/releases/download/{{knative_version}}/{{file}}
-{%- endmacro %}
-
 This page shows how to install and configure Apache Kafka Sink.
 
 ## Prerequisites

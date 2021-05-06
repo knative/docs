@@ -7,10 +7,6 @@ showlandingtoc: "false"
 
 # Knative Operator installation
 
-{% macro artifact(repo, file='', org='knative') -%}
-    http://github.com/{{org}}/{{repo}}/releases/download/{{version}}/{{file}}
-{%- endmacro %}
-
 Knative provides a [Kubernetes Operator](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/) to install, configure and manage Knative.
 You can install the Serving component, Eventing component, or both on your cluster.
 

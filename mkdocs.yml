@@ -174,7 +174,8 @@ theme:
 
 plugins:
   - search
-  - macros
+  - macros:
+      module_name: hack/macros
   - exclude:
       glob:
         # Exclude files that contain hugo specific shortcodes
@@ -229,7 +230,6 @@ markdown_extensions:
 copyright: "Copyright © 2021 The Knative Authors"
 
 extra:
-  knative_version: v0.21.0
   social:
     - icon: fontawesome/brands/twitter
       link: https://twitter.com/KnativeProject

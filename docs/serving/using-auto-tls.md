@@ -7,10 +7,6 @@ type: "docs"
 
 # Enabling automatic TLS certificate provisioning
 
-{% macro artifact(repo, file='', org='knative') -%}
-    http://github.com/{{org}}/{{repo}}/releases/download/{{version}}/{{file}}
-{%- endmacro %}
-
 If you install and configure cert-manager, you can configure Knative to
 automatically obtain new TLS certificates and renew existing ones for Knative
 Services.

@@ -8,10 +8,6 @@ showlandingtoc: "false"
 
 # Installing optional extensions
 
-{% macro artifact(repo, file='', org='knative') -%}
-    http://github.com/{{org}}/{{repo}}/releases/download/{{knative_version}}/{{file}}
-{%- endmacro %}
-
 To add extra features to your Knative Serving or Eventing installation, you can install extensions
 by applying YAML files using the `kubectl` CLI.
 
