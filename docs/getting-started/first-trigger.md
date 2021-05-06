@@ -1,4 +1,6 @@
 ## Creating your first `Trigger`
+Earlier you read that Triggers ":material-magnet-on: act as a filter for events entering the broker and can be configured with desired event attributes," now you'll get to see one in action!
+
 === "kn"
 
     ```bash
@@ -14,8 +16,11 @@
 Trigger 'cloudevents-player' successfully created in namespace 'default'.
 ```
 
-??? question "What CloudEvents is my `Trigger` listening for?"
-    Since we didn't specify a `--filter` in our `kn` command, our Trigger is listening for any CloudEvents coming into the `Broker`.
+Notice that we specified a `--sink` (:material-download: A destination for events) and passed in the name of our Knative Service. Now, CloudEvents which enter the broker will be sent to the `cloudevents-player` Service.
+
+??? question "Weren't `Triggers` supposed to filter CloudEvents?"
+    Since we didn't specify a `--filter` in our `kn` command, our Trigger is listening for any CloudEvents coming into the `Broker`, regardless of their shape.
+
 
 Now, when we go back to the CloudEvents Player and send an Event, we see that CloudEvents are both sent and received by the CloudEvents Player:
 
@@ -41,4 +46,4 @@ Now, when we go back to the CloudEvents Player and send an Event, we see that Cl
     You can filter on any aspect of the CloudEvent you would like to.
 
 
-Some people call this **"Event-Driven Architecture"** which can be used to create your own **"Functions as a Service"** on Kubernetes :tada: :taco: :fire:
+You've just created an example of **"Event-Driven Architecture"** which can be used to create your own **"Functions as a Service"** on Kubernetes :tada: :taco: :fire:

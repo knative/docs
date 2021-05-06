@@ -5,7 +5,7 @@
 ### Install `kind`.
 `kind` (Kubernetes in Docker) is a tool for running local Kubernetes clusters using Docker container “nodes”. `kind` was primarily designed for testing Kubernetes itself, but may be used for local development.
 
-See [Kind website](https://kind.sigs.k8s.io/docs/user/quick-start){target=_blank} for installation options.
+See [Kind website](https://kind.sigs.k8s.io/docs/user/quick-start#installation){target=_blank} for installation options.
 
 
 ### Install `kubectl`
@@ -61,7 +61,6 @@ See [the Kubernetes docs](https://kubernetes.io/docs/tasks/tools/install-kubectl
         Links to images are available here:
 
         - <a href="https://gcr.io/knative-releases/knative.dev/client/cmd/kn" target="_blank">Latest release</a>
-        - <a href="https://gcr.io/knative-nightly/knative.dev/client/cmd/kn" target="_blank">Nightly container image</a>
 
         You can run `kn` from a container image. For example:
 
@@ -73,21 +72,22 @@ See [the Kubernetes docs](https://kubernetes.io/docs/tasks/tools/install-kubectl
     For more complex installations, such as nightly releases, see [Install `kn`](../client/install-kn.md)
 
 
-## Installing Knative (sandbox)
-==**The fastest way to get started with Knative locally** is to use a Knative on Kind (konk)==
+## Installing the Knative Sandbox
+==**The fastest way to get started with Knative locally** is to use the Knative on Kind (konk) script.== We call this the "Knative Sandbox" and it's perfect for local deployments and general hacking.
 
-!!! todo "Install Knative and Kubernetes on a local Docker Daemon using Konk"
+!!! todo "Install the Knative Sandbox"
     ```
     curl -sL install.konk.dev | bash
     ```
 
-??? question "What does the KonK script actually do?"
-    Knative on Kind (KonK) is a shell script which:
+??? question "What does the Knative Sandbox script do?"
+    **Below is a description of each of the scripts which are run by the Knative Sandbox**, we've also provided each script as an independent `curl` command.
 
-      1. Checks to see that you have Kind installed and creates a Cluster called "knative" via **[`01-kind.sh`](https://github.com/csantanapr/knative-kind/blob/master/01-kind.sh)**
+      1. Checks to see that you have Kind installed and creates a Cluster called "knative" + some port-forwarding magic to simplify local DNS via **[`01-kind.sh`](https://github.com/csantanapr/knative-kind/blob/master/01-kind.sh)**
+      <br>`curl -sL https://raw.githubusercontent.com/csantanapr/knative-kind/master/01-kind.sh | sh`
 
-      2. Installs **Knative Serving** with **Kourier** as the networking layer and **nip.io** as the DNS + some port-forwarding magic on the "knative" Cluster via **[`02-serving.sh`](https://github.com/csantanapr/knative-kind/blob/master/02-serving.sh)**
+      2. Installs **Knative Serving** with **Kourier** as the networking layer and **nip.io** as the DNS **[`02-serving.sh`](https://github.com/csantanapr/knative-kind/blob/master/02-serving.sh)**
+      <br>`curl -sL https://raw.githubusercontent.com/csantanapr/knative-kind/master/02-serving.sh | sh`
 
       3. Installs **Knative Eventing** with an In-Memory **Channels** and In-Memory **Broker** on the "knative" Cluster via **[`04-eventing.sh`](https://github.com/csantanapr/knative-kind/blob/master/04-eventing.sh)**
-
-
+      <br>`curl -sL https://raw.githubusercontent.com/csantanapr/knative-kind/master/03-eventing.sh | sh`

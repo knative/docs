@@ -1,5 +1,7 @@
 ## Sources, Brokers, Triggers, Sinks, oh my!
-For the purposes of this tutorial, let's keep it simple. You will focus on four powerful Eventing components: `Source`, `Trigger`, `Broker`, and `Sink`.
+
+For the purposes of this tutorial, let's keep it simple. You will focus on three powerful Eventing components: `Source`, `Trigger` and `Broker`. We'll then bring this all together by using a Knative Service as a `Sink` for our CloudEvents.
+
 
 Let's take a look at how these components interact:
 <figure>
@@ -16,18 +18,6 @@ Let's take a look at how these components interact:
 
 !!! note "A note on `Sources` and `Sinks`"
     A Knative Service can act as both a `Source` and a `Sink` for events, and for good reason. You may want to consume events from the `Broker` and send modified events back to the `Broker`, as you would in any pipeline use-case.
-
-### CloudEvents
-Knative Eventing uses <a href="https://github.com/cloudevents/spec/blob/master/primer.md" target="blank_">CloudEvents</a> send information back and forth between your Services and these components.
-
-??? question "What are CloudEvents?"
-    For our purposes, the only thing you need to know about CloudEvents are:
-
-    1. CloudEvents follow the <a href = "https://github.com/cloudevents/spec" target="_blank">CloudEvents 1.0 Specification</a>, with required and optional attributes.
-    1. CloudEvents can be "emitted" by almost anything and can be transported to anywhere in your deployment.  
-    1. CloudEvents can carry some attributes (things like `id`, `source`, `type`, etc) as well as data payloads (JSON, plaintext, reference to data that lives elsewhere, etc).
-
-    To find out more about CloudEvents, check out the [CloudEvents website](https://cloudevents.io/)!
 
 
 ## Examining the Broker

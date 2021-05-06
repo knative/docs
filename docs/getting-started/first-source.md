@@ -8,7 +8,8 @@ Here, the CloudEvents Player is acting as both a <code>Source</code> and a <code
 </figure>
 
 ## Creating your first Source
-The CloudEvents Player acts as a `Source` for CloudEvents by intaking the URL of our `Broker` as an environment variable (`BROKER_URL`) and sending CloudEvents via the UI.
+The CloudEvents Player acts as a `Source` for CloudEvents by intaking the URL of our `Broker` as an environment variable and sending CloudEvents via the UI. In the previous step, you used  `kn broker list` to get the URL of your `Broker`, you'll now pass that URL to a Knative `Service` called the "CloudEvents Player."
+
 
 Create the CloudEvents Player Service:
 === "kn"
