@@ -273,15 +273,6 @@ spec:
         ...
 ```
 
-## Responsive Revision Garbage Collector
-* **Type**: extension
-* **ConfigMap key:** `responsive-revision-gc`
-
-This flag controls whether new responsive garbage collection is enabled. This
-feature labels revisions in real-time as they become referenced and
-dereferenced by Routes. This allows us to reap revisions shortly after
-they are no longer active.
-
 ## Tag Header Based Routing
 * **Type**: extension
 * **ConfigMap key:** `tag-header-based-routing`
