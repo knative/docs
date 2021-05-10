@@ -1,0 +1,13 @@
+:root {
+  --md-primary-fg-color:       #1a7dc9;
+  --home-color:                #0071c7;
+}
+.md-clipboard {
+  color: var(--md-primary-fg-color);
+}
+.highlight.no-copy .md-clipboard { display: none; }
+
+.md-header__button.md-logo img {
+  width: 3rem;
+  height: 2.4rem;
+}

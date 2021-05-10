@@ -1,0 +1,243 @@
+site_name: Knative
+site_url: https://knative.dev/docs
+site_description: Knative Documentation
+extra_css:
+  - stylesheets/extra.css
+
+repo_url: https://github.com/knative/docs
+edit_uri: edit/main/docs
+
+nav:
+    - Home: index.md
+    - Getting Started:
+        - Before you begin: getting-started/getting-started.md
+        - Serverless:
+          - First Knative Service: getting-started/first-service.md
+          - Scaling to Zero: getting-started/first-autoscale.md
+          - Traffic Splitting: getting-started/first-traffic-split.md
+        - Event-Driven Applications:
+          - Introducing Knative Eventing: getting-started/getting-started-eventing.md
+          - Sources, Brokers, Triggers, Sinks: getting-started/first-broker.md
+          - Introducing the CloudEvents Player: getting-started/first-source.md
+          - Creating your first Trigger: getting-started/first-trigger.md
+        - What's Next?: getting-started/next-steps.md
+    - Installing Knative:
+        - Installing using YAML:
+          - Prerequisites: install/prerequisites.md
+          - Install Serving with YAML: install/install-serving-with-yaml.md
+          - Install Eventing with YAML: install/install-eventing-with-yaml.md
+          - Install optional extensions: install/install-extensions.md
+          - Installation Files: install/installation-files.md
+        - Installing with the Operator: install/knative-with-operators.md
+        - Using a Knative-based Offering: install/knative-offerings.md
+    - Serving Component:
+        - Overview: serving/README.md
+        - Developer Topics:
+          - Creating Knative Services: serving/services/creating-services.md
+          - Creating and Using Sub-Routes: serving/using-subroutes.md
+          - Using a Private Registry: serving/deploying/private-registry.md
+          - Debugging Issues with your Application: serving/debugging-application-issues.md
+          - Gradually Rolling out Revisions: serving/rolling-out-latest-revision.md
+          - Custom Domains:
+            - Setting up a Custom Domain: serving/using-a-custom-domain.md
+            - Setting up a Custom Domain per Service: serving/using-a-custom-domain-per-service.md
+            - Creating Domain Mappings: serving/creating-domain-mappings.md
+          - Using Knative Load Balancing:
+            - Overview: serving/load-balancing/index.md
+            - Target Burst Capacity: serving/load-balancing/target-burst-capacity.md
+        - Administrator Topics:
+          - Configuring the Knative Deployment: serving/services/deployment.md
+          - Accessing Request Traces: serving/accessing-traces.md
+          - Knative Kubernetes Components: serving/knative-kubernetes-services.md
+          - Enabling tag to digest resolution: serving/tag-resolution.md
+          - Configuing Cluster-Local Services: serving/cluster-local-route.md
+          - Configuring high-availability components: serving/config-ha.md
+          - Feature Flags: serving/feature-flags.md
+          - Exclude namespaces from the Knative webhook: serving/webhook-customizations.md
+          - Configuring HTTPS Connections: serving/using-a-tls-cert.md
+          - Setting up Cert-Manager:
+            - Installing cert-manager for TLS Certificates: serving/installing-cert-manager.md
+            - Configuring HTTPS with cert-manager and Google Cloud DNS: serving//using-cert-manager-on-gcp.md
+            - Enabling automatic TLS certificate provisioning: serving/using-auto-tls.md
+        - Autoscaling:
+          - Overview: serving/autoscaling/README.md
+          - Concepts: serving/autoscaling/autoscaling-concepts.md
+          - Metrics: serving/autoscaling/autoscaling-metrics.md
+          - Targets: serving/autoscaling/autoscaling-targets.md
+          - Configuring Scale-to-zero: serving/autoscaling/scale-to-zero.md
+          - Configuring Concurrency: serving/autoscaling/concurrency.md
+          - Configuring Scale Bounds: serving/autoscaling/scale-bounds.md
+          - Configuring RPS Target: serving/autoscaling/rps-target.md
+          - KPA-Specific Configuration: serving/autoscaling/kpa-specific.md
+          - Autoscaling Sample App: serving/autoscaling/autoscale-go/README.md
+        - GKE-Specific Customization:
+          - Assigning Static IPs in GKE: serving/gke-assigning-static-ip-address.md
+          - Using ExternalDNS on Google Cloud Platform to automate DNS setup: serving/using-external-dns-on-gcp.md
+        - Istio-Specific Configuration:
+          - Setting up custom ingress gateway: serving/setting-up-custom-ingress-gateway.md
+          - Enabling requests to Knative services when additional authorization policies are enabled: serving/istio-authorization.md
+        - Samples:
+          - Overview: serving/samples/README.md
+          - Hello World:
+            - Hello World Go: serving/samples/hello-world/helloworld-go/index.md
+          - Rest API: serving/samples/rest-api-go/README.md
+          - Cloud Events:
+            - NodeJS: serving/samples/cloudevents/cloudevents-nodejs/README.md
+            - Java (Vert.x): serving/samples/cloudevents/cloudevents-vertx/README.md
+            - Rust: serving/samples/cloudevents/cloudevents-rust/index.md
+          - Blue Green Deployment: serving/samples/blue-green-deployment.md
+    - Eventing Component:
+        - Overview: eventing/README.md
+        - Event Sources:
+          - Overview: eventing/sources/index.md
+          - Writing an Event Source: eventing/sources/creating-event-sources/writing-event-source/README.md
+          - Writing an Event Source - Easy Way: eventing/sources/creating-event-sources/writing-event-source-easy-way/README.md
+          - APIServerSource: eventing/sources/apiserversource.md
+          - ContainerSource: eventing/sources/containersource.md
+          - PingSource: eventing/sources/pingsource.md
+          - Sink Binding: eventing/sources/sinkbinding.md
+        - Event Registry: eventing/event-registry.md
+        - Flows:
+          - Overview: eventing/flows/README.md
+          - Sequence: eventing/flows/sequence.md
+          - Parallel: eventing/flows/parallel.md
+        - Channels:
+          - Overview: eventing/channels/index.md
+          - Channel Types and Defaults: eventing/channels/channel-types-defaults.md
+          - Creating Channels: eventing/channels/create-default-channel.md
+          - Available Channels: eventing/channels/channels-crds.md
+        - Sugar: eventing/sugar/README.md
+        - Event Delivery: eventing/event-delivery.md
+        - Broker:
+          - Overview: eventing/broker/README.md
+          - Kafka Broker: eventing/broker/kafka-broker.md
+          - Default Broker ConfigMap: eventing/broker/config-br-defaults.md
+          - Kafka Channel ConfigMap: eventing/broker/kafka-configmap.md
+          - Alternate Brokers: eventing/broker/alternate/README.md
+        - Sink:
+          - Overview: eventing/sink/README.md
+          - Apache Kafka Sink: eventing/sink/kafka-sink.md
+        - Triggers: eventing/triggers/index.md
+        - Debugging: eventing/debugging/README.md
+        - Accessing CloudEvent Traces: eventing/accessing-traces.md
+        - Samples:
+          - Apache Camel Source: eventing/samples/apache-camel-source/README.md
+          - Kafka:
+            - Overview: eventing/samples/kafka/README.md
+            - Binding Example: eventing/samples/kafka/binding/README.md
+            - Channel Example: eventing/samples/kafka/channel/README.md
+            - Source Example: eventing/samples/kafka/source/README.md
+          - Container Source: eventing/samples/container-source/README.md
+          - Hello World:
+            - Overview: eventing/samples/helloworld/README.md
+            - Go: eventing/samples/helloworld/helloworld-go/README.md
+            - Python: eventing/samples/helloworld/helloworld-python/README.md
+          - Sequences:
+            - Create Additional Events: eventing/samples/sequence/sequence-terminal/README.md
+            - Displaying Sequence Output: eventing/samples/sequence/sequence-reply-to-event-display/README.md
+            - Using Sequences in Series: eventing/samples/sequence/sequence-reply-to-sequence/README.md
+            - Using Broker and Trigger: eventing/samples/sequence/sequence-with-broker-trigger/README.md
+          - Parallel:
+            - Overview: eventing/samples/parallel/README.md
+            - Multiple Cases: eventing/samples/parallel/multiple-branches/README.md
+            - Mutual Exclusivity: eventing/samples/parallel/mutual-exclusivity/README.md
+          - Ping Source: eventing/samples/ping-source/index.md
+          - GCP Sources:
+            - CloudAuditLogsSource: eventing/samples/cloud-audit-logs-source/README.md
+            - CloudPubSubSource: eventing/samples/cloud-pubsub-source/README.md
+            - CloudSchedulerSource: eventing/samples/cloud-scheduler-source/README.md
+            - CloudStorageSource: eventing/samples/cloud-storage-source/README.md
+          - Github Source: eventing/samples/github-source/README.md
+          - Gitlab Source: eventing/samples/gitlab-source/README.md
+          - IoT Core: eventing/samples/iot-core/README.md
+          - Kubernetes Event Source: eventing/samples/kubernetes-event-source/README.md
+    - Reference:
+      - Serving: reference/api/serving.md
+      - Eventing: reference/api/eventing/eventing.md
+    - Client:
+        - CLI tools: client/index.md
+        - Install kn: client/install-kn.md
+    - Community: todo
+
+theme:
+  name: material
+  logo: images/logo/rgb/knative-logo-rgb.png
+  favicon: images/knative-sm.png
+  custom_dir: overrides
+  features:
+    - navigation.tabs
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs.sticky
+    - navigation.indexes
+    - navigation.top
+
+plugins:
+  - search
+  - macros:
+      module_name: hack/macros
+  - exclude:
+      glob:
+        # Exclude files that contain hugo specific shortcodes
+        # (either the include shortcode or not-converted-yet tabs).
+        - smoketest.md
+        - "*/serving-api.md" # shortcode to serving.md
+        - "*/_index.md" # pretty much all shortcodes
+        - "*/traffic-splitting/index.md" # shortcode to README
+        - "*/secrets-go/index.md" # shortcode to README
+        - "*/tag-header-based-routing/index.md" # shortcode to README
+        - "*/knative-routing-go/index.md" # shortcode to README
+        - "*/helloworld-scala/index.md" # shortcode to README
+        - "*/helloworld-python/index.md" # shortcode to README
+        - "*/helloworld-php/index.md" # shortcode to README
+        - "*/helloworld-nodejs/index.md" # shortcode to README
+        - "*/helloworld-csharp/index.md" # shortcode to README
+        - "*/helloworld-kotlin/index.md" # shortcode to README
+        - "*/cloudevents-dotnet/index.md" # shortcode to README
+        - "*/grpc-ping-go/index.md" # shortcode to README
+        - "*/gitwebhook-go/index.md" # shortcode to README
+        - "*/multi-container/index.md" # shortcode to README
+        - "*/helloworld-java-spring/index.md" # tabs need converting
+        - "*/hello-world-scala/index.md" # tabs need converting
+        - "*/hello-world-python/index.md" # tabs need converting
+        - "*/helloworld-shell/index.md" # tabs need converting
+        - "*/helloworld-ruby/index.md" # tabs need converting
+        - "*/helloworld-java-spark/index.md" # tabs need converting
+        - "*/cloudevents-spring/index.md" # tabs need converting
+        - "*/cloudevents-go/index.md" # tabs need converting
+
+markdown_extensions:
+  # - mdx_include:
+  #     base_path: docs
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - attr_list
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - pymdownx.details
+  - pymdownx.keys
+  - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - admonition
+  - toc:
+      permalink: true
+
+
+copyright: "Copyright © 2021 The Knative Authors"
+
+extra:
+  social:
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/KnativeProject
+    - icon: fontawesome/brands/github
+      link: https://github.com/knative/community
+      name: Knative Community on Github
+    - icon: fontawesome/brands/slack
+      link: https://slack.knative.dev
+      name: Slack
+  version:
+    provider: mike
