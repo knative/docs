@@ -87,70 +87,86 @@ nav:
             - Rust: serving/samples/cloudevents/cloudevents-rust/index.md
           - Blue Green Deployment: serving/samples/blue-green-deployment.md
     - Eventing Component:
-        - Overview: eventing/README.md
-        - Event Sources:
-          - Overview: eventing/sources/README.md
-          - Writing an Event Source: eventing/sources/creating-event-sources/writing-event-source/README.md
-          - Writing an Event Source - Easy Way: eventing/sources/creating-event-sources/writing-event-source-easy-way/README.md
-          - APIServerSource: eventing/sources/apiserversource.md
-          - ContainerSource: eventing/sources/containersource.md
-          - PingSource: eventing/sources/pingsource.md
-          - Sink Binding: eventing/sources/sinkbinding.md
-        - Event Registry: eventing/event-registry.md
-        - Flows:
-          - Overview: eventing/flows/README.md
-          - Sequence: eventing/flows/sequence.md
-          - Parallel: eventing/flows/parallel.md
-        - Channels:
-          - Overview: eventing/channels/index.md
-          - Channel Types and Defaults: eventing/channels/channel-types-defaults.md
-          - Creating Channels: eventing/channels/create-default-channel.md
-          - Available Channels: eventing/channels/channels-crds.md
-        - Sugar: eventing/sugar/README.md
-        - Event Delivery: eventing/event-delivery.md
-        - Broker:
-          - Overview: eventing/broker/README.md
-          - Kafka Broker: eventing/broker/kafka-broker.md
-          - Default Broker ConfigMap: eventing/broker/config-br-defaults.md
-          - Kafka Channel ConfigMap: eventing/broker/kafka-configmap.md
-          - Alternate Brokers: eventing/broker/alternate/README.md
-        - Sink:
-          - Overview: eventing/sink/README.md
-          - Apache Kafka Sink: eventing/sink/kafka-sink.md
-        - Triggers: eventing/triggers/index.md
-        - Debugging: eventing/debugging/README.md
-        - Accessing CloudEvent Traces: eventing/accessing-traces.md
-        - Samples:
-          - Apache Camel Source: eventing/samples/apache-camel-source/README.md
-          - Kafka:
-            - Overview: eventing/samples/kafka/README.md
-            - Binding Example: eventing/samples/kafka/binding/README.md
-            - Channel Example: eventing/samples/kafka/channel/README.md
-            - Source Example: eventing/samples/kafka/source/README.md
-          - Container Source: eventing/samples/container-source/README.md
-          - Hello World:
-            - Overview: eventing/samples/helloworld/README.md
-            - Go: eventing/samples/helloworld/helloworld-go/README.md
-            - Python: eventing/samples/helloworld/helloworld-python/README.md
-          - Sequences:
-            - Create Additional Events: eventing/samples/sequence/sequence-terminal/README.md
-            - Displaying Sequence Output: eventing/samples/sequence/sequence-reply-to-event-display/README.md
-            - Using Sequences in Series: eventing/samples/sequence/sequence-reply-to-sequence/README.md
-            - Using Broker and Trigger: eventing/samples/sequence/sequence-with-broker-trigger/README.md
-          - Parallel:
-            - Overview: eventing/samples/parallel/README.md
-            - Multiple Cases: eventing/samples/parallel/multiple-branches/README.md
-            - Mutual Exclusivity: eventing/samples/parallel/mutual-exclusivity/README.md
-          - Ping Source: eventing/samples/ping-source/index.md
-          - GCP Sources:
-            - CloudAuditLogsSource: eventing/samples/cloud-audit-logs-source/README.md
-            - CloudPubSubSource: eventing/samples/cloud-pubsub-source/README.md
-            - CloudSchedulerSource: eventing/samples/cloud-scheduler-source/README.md
-            - CloudStorageSource: eventing/samples/cloud-storage-source/README.md
-          - Github Source: eventing/samples/github-source/README.md
-          - Gitlab Source: eventing/samples/gitlab-source/README.md
-          - IoT Core: eventing/samples/iot-core/README.md
-          - Kubernetes Event Source: eventing/samples/kubernetes-event-source/README.md
+      - Overview: eventing/README.md
+      - Getting started: eventing/getting-started.md
+      - Event sources:
+        - Overview: eventing/sources/README.md
+        - API server source:
+          - Overview: eventing/sources/apiserversource/README.md
+          - Getting started: eventing/sources/apiserversource/getting-started/README.md
+        - ContainerSource: eventing/sources/containersource.md
+        - PingSource: eventing/sources/ping-source/index.md
+        - Sink binding: eventing/sources/sinkbinding.md
+        - Camel source: eventing/sources/apache-camel-source/index.md
+      - Creating an event source:
+        - Overview: eventing/sources/creating-event-sources/README.md
+        - Writing an event source using Javascript: eventing/sources/creating-event-sources/writing-event-source-easy-way/README.md
+        - Using the sample event source:
+          - Overview: eventing/sources/creating-event-sources/writing-event-source/README.md
+          - Design of an Event Source: eventing/sources/creating-event-sources/writing-event-source/01-theory.md
+          - Lifecycle and Types: eventing/sources/creating-event-sources/writing-event-source/02-lifecycle-and-types.md
+          - Controller Implemetation: eventing/sources/creating-event-sources/writing-event-source/03-controller.md
+          - Reconciler Implementation: eventing/sources/creating-event-sources/writing-event-source/04-reconciler.md
+          - Receive Adapter Implementation: eventing/sources/creating-event-sources/writing-event-source/05-receive-adapter.md
+          - Publishing to your cluster: eventing/sources/creating-event-sources/writing-event-source/06-yaml.md
+          - Moving to knative-sandbox: eventing/sources/creating-event-sources/writing-event-source/07-knative-sandbox.md
+      - Event registry: eventing/event-registry.md
+      - Flows:
+        - Overview: eventing/flows/README.md
+        - Parallel: eventing/flows/parallel.md
+        - Sequence:
+          - Overview: eventing/flows/sequence/README.md
+          - Displaying sequence output: eventing/flows/sequence/sequence-reply-to-event-display/index.md
+          - Using Sequences in series: eventing/flows/sequence/sequence-reply-to-sequence/index.md
+          - Create additional events: eventing/flows/sequence/sequence-terminal/index.md
+          - Using with Broker and Trigger: eventing/flows/sequence/sequence-with-broker-trigger/index.md
+      - Channels:
+        - Overview: eventing/channels/README.md
+        - Channel types and defaults: eventing/channels/channel-types-defaults.md
+        - Creating a channel using cluster or namespace defaults: eventing/channels/create-default-channel.md
+        - Available Channels: eventing/channels/channels-crds.md
+        - Subscriptions: eventing/channels/subscriptions.md
+      - Sugar Controller: eventing/sugar/README.md
+      - Event delivery: eventing/event-delivery.md
+      - Brokers:
+        - Overview: eventing/broker/README.md
+        - Creating a broker: eventing/broker/create-mtbroker.md
+        - Triggers: eventing/broker/triggers/README.md
+        - Event delivery: eventing/broker/broker-event-delivery.md
+        - Broker configuration example: eventing/broker/example-mtbroker.md
+        - ConfigMaps: eventing/broker/configmaps/README.md
+        - Apache Kafka Broker:
+          - Overview: eventing/broker/kafka-broker/README.md
+          - Kafka Channel ConfigMap: eventing/broker/kafka-broker/kafka-configmap.md
+      - Sink:
+        - Overview: eventing/sink/README.md
+        - Apache Kafka Sink: eventing/sink/kafka-sink.md
+      - Debugging: eventing/debugging/index.md
+      - Accessing CloudEvent traces: eventing/accessing-traces.md
+      - Metrics API: eventing/metrics.md
+      - Code samples:
+        - Overview: eventing/samples/README.md
+        - Container source: eventing/samples/container-source/index.md
+        - Hello World:
+          - Overview: eventing/samples/helloworld/README.md
+          - GO: eventing/samples/helloworld/helloworld-go/README.md
+          - Python: eventing/samples/helloworld/helloworld-python/README.md
+        - Apache Kafka:
+          - Overview: eventing/samples/kafka/README.md
+          - Binding Example: eventing/samples/kafka/binding/index.md
+          - Channel Example: eventing/samples/kafka/channel/index.md
+          - Source Example: eventing/samples/kafka/source/index.md
+        - Parallel:
+          - Overview: eventing/samples/parallel/README.md
+          - Multiple Cases: eventing/samples/parallel/multiple-branches/README.md
+          - Mutual Exclusivity: eventing/samples/parallel/mutual-exclusivity/README.md
+        - CloudAuditLogsSource: eventing/samples/cloud-audit-logs-source/index.md
+        - CloudPubSubSource: eventing/samples/cloud-pubsub-source/index.md
+        - CloudSchedulerSource: eventing/samples/cloud-scheduler-source/index.md
+        - CloudStorageSource: eventing/samples/cloud-storage-source/index.md
+        - GitHub source: eventing/samples/github-source/index.md
+        - GitLab source: eventing/samples/gitlab-source/index.md
+        - IoT core: eventing/samples/iot-core/index.md
     - Reference:
       - Serving: reference/api/serving.md
       - Eventing: reference/api/eventing/eventing.md
