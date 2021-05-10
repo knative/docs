@@ -197,14 +197,6 @@ plugins:
         - "*/grpc-ping-go/index.md" # shortcode to README
         - "*/gitwebhook-go/index.md" # shortcode to README
         - "*/multi-container/index.md" # shortcode to README
-        - "*/helloworld-java-spring/index.md" # tabs need converting
-        - "*/hello-world-scala/index.md" # tabs need converting
-        - "*/hello-world-python/index.md" # tabs need converting
-        - "*/helloworld-shell/index.md" # tabs need converting
-        - "*/helloworld-ruby/index.md" # tabs need converting
-        - "*/helloworld-java-spark/index.md" # tabs need converting
-        - "*/cloudevents-spring/index.md" # tabs need converting
-        - "*/cloudevents-go/index.md" # tabs need converting
 
 markdown_extensions:
   # - mdx_include:
