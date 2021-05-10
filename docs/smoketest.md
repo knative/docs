@@ -62,10 +62,10 @@ added in-line with the
    `kubectl apply this-is-a-point-release/{{< version patch=".20" >}}/filename.yaml`
 
 1. Shortcode: <code>{<code>{< branch >}</code>}</code>
-    renders as: {{< branch >}}
+    renders as: {{ branch }}
 
    Example:
-   `git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs`
+   `git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs`
 
 1. Shortcode: <code>{<code>{< branch override="release-0.NEXT" >}</code>}</code>
     renders as: {{< branch override="release-0.NEXT" >}}
@@ -77,12 +77,13 @@ added in-line with the
 
 How to include tabbed content in your page. Note that you can set a default tab.
 
-{{< tabs name="tabs_example" default="Include example" >}}
-{{< tab name="Regular example" >}}
-This is a regular example tab.
-{{< /tab >}}
 
-{{< tab name="Include example" >}}
-{{% readfile file="./serving/samples/multi-container/service.yaml" code="true" lang="yaml" %}}
-{{< /tab >}}
-{{< /tabs >}}
+    {{< tab name="Regular example" >}}
+    This is a regular example tab.
+
+
+    {{< tab name="Include example" >}}
+    {{% readfile file="./serving/samples/multi-container/service.yaml" code="true" lang="yaml" %}}
+
+
+

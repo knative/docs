@@ -25,7 +25,7 @@ You can also download a working copy of the sample, by running the
 following commands:
 
 ```shell
-git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
+git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
 cd knative-docs/docs/serving/samples/hello-world/helloworld-java
 ```
 
@@ -78,48 +78,49 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java
 1. After the build has completed and the container is pushed to Docker Hub, you
    can deploy the app into your cluster. Choose one of the following methods:
 
-   {{< tabs name="helloworld_java_spring" default="kn" >}}
-   {{% tab name="kn" %}}
+   
+=== "kn"
 
-   Use `kn` to deploy the service, make sure to replace `{username}` with your Docker Hub username:
+       Use `kn` to deploy the service, make sure to replace `{username}` with your Docker Hub username:
 
-   ```shell
-   kn service create helloworld-java --image=docker.io/{username}/helloworld-java --env TARGET="SparkJava Sample v1"
-   ```
+       ```shell
+       kn service create helloworld-java --image=docker.io/{username}/helloworld-java --env TARGET="SparkJava Sample v1"
+       ```
 
-   This will wait until your service is deployed and ready, and ultimately it will print the URL through which you can access the service.
+       This will wait until your service is deployed and ready, and ultimately it will print the URL through which you can access the service.
 
-   {{< /tab >}}
-   {{% tab name="kubectl" %}}
 
-   1. Create a new file, `service.yaml` and copy the following service definition
-      into the file. Make sure to replace `{username}` with your Docker Hub
-      username.
+=== "kubectl"
 
-      ```yaml
-      apiVersion: serving.knative.dev/v1
-      kind: Service
-      metadata:
-        name: helloworld-java
-        namespace: default
-      spec:
-        template:
+       1. Create a new file, `service.yaml` and copy the following service definition
+          into the file. Make sure to replace `{username}` with your Docker Hub
+          username.
+
+          ```yaml
+          apiVersion: serving.knative.dev/v1
+          kind: Service
+          metadata:
+            name: helloworld-java
+            namespace: default
           spec:
-            containers:
-              - image: docker.io/{username}/helloworld-java
-                env:
-                  - name: TARGET
-                    value: "SparkJava Sample v1"
-      ```
+            template:
+              spec:
+                containers:
+                  - image: docker.io/{username}/helloworld-java
+                    env:
+                      - name: TARGET
+                        value: "SparkJava Sample v1"
+          ```
 
-   1. Ensure that the container image value in `service.yaml` matches the container you built in the previous step. Apply the configuration using `kubectl`:
+       1. Ensure that the container image value in `service.yaml` matches the container you built in the previous step. Apply the configuration using `kubectl`:
 
-   ```shell
-   kubectl apply --filename service.yaml
-   ```
+       ```shell
+       kubectl apply --filename service.yaml
+       ```
 
-   {{< /tab >}}
-   {{< /tabs >}}
+
+
+
 
    After your service is created, Knative will perform the following steps:
 
@@ -132,33 +133,34 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java
 
 1. Run one of the followings commands to find the domain URL for your service.
 
-   {{< tabs name="service_url" default="kn" >}}
-   {{% tab name="kn" %}}
+   
+=== "kn"
 
-   ```shell
-   kn service describe helloworld-java -o url
-   ```
+       ```shell
+       kn service describe helloworld-java -o url
+       ```
 
-   Example:
+       Example:
 
-   ```shell
-   http://helloworld-java.default.1.2.3.4.xip.io
-   ```
-   {{< /tab >}}
-   {{% tab name="kubectl" %}}
-   ```shell
-   kubectl get ksvc helloworld-java  --output=custom-columns=NAME:.metadata.name,URL:.status.url
-   ```
+       ```shell
+       http://helloworld-java.default.1.2.3.4.xip.io
+       ```
 
-   Example:
+=== "kubectl"
+       ```shell
+       kubectl get ksvc helloworld-java  --output=custom-columns=NAME:.metadata.name,URL:.status.url
+       ```
 
-   ```shell
-   NAME                      URL
-   helloworld-java    http://helloworld-java.default.1.2.3.4.xip.io
-   ```
+       Example:
 
-   {{< /tab >}}
-   {{< /tabs >}}
+       ```shell
+       NAME                      URL
+       helloworld-java    http://helloworld-java.default.1.2.3.4.xip.io
+       ```
+
+
+
+
 
 1. Now you can make a request to your app and see the result. Replace
    the URL below with the URL returned in the previous command.
@@ -178,15 +180,16 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java
 
 To remove the sample app from your cluster, delete the service record.
 
-{{< tabs name="delete_service" default="kn" >}}
-{{% tab name="kn" %}}
-```shell
-kn service delete helloworld-java
-```
-{{< /tab >}}
-{{% tab name="kubectl" %}}
-```shell
-kubectl delete --filename service.yaml
-```
-{{< /tab >}}
-{{< /tabs >}}
+
+=== "kn"
+    ```shell
+    kn service delete helloworld-java
+    ```
+
+=== "kubectl"
+    ```shell
+    kubectl delete --filename service.yaml
+    ```
+
+
+

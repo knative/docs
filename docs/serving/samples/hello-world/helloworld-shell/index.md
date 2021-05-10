@@ -15,7 +15,7 @@ You can also download a working copy of the sample, by running the
 following commands:
 
 ```shell
-git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
+git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
 cd knative-docs/docs/serving/samples/hello-world/helloworld-shell
 ```
 
@@ -88,67 +88,68 @@ folder) you're ready to build and deploy the sample app.
 1. After the build has completed and the container is pushed to Docker Hub, you
    can deploy the app into your cluster.
 
-   {{< tabs name="helloworld_shell" default="kn" >}}
-   {{% tab name="yaml" %}}
+   
+=== "yaml"
 
-   1. Create a new file, `service.yaml` and copy the following service definition
-      into the file. Make sure to replace `{username}` with your Docker Hub
-      username.
+       1. Create a new file, `service.yaml` and copy the following service definition
+          into the file. Make sure to replace `{username}` with your Docker Hub
+          username.
 
-      ```yaml
-      apiVersion: serving.knative.dev/v1
-      kind: Service
-      metadata:
-        name: helloworld-shell
-        namespace: default
-      spec:
-        template:
+          ```yaml
+          apiVersion: serving.knative.dev/v1
+          kind: Service
+          metadata:
+            name: helloworld-shell
+            namespace: default
           spec:
-            containers:
-              - image: docker.io/{username}/helloworld-shell
-                env:
-                  - name: TARGET
-                    value: "Shell Sample v1"
+            template:
+              spec:
+                containers:
+                  - image: docker.io/{username}/helloworld-shell
+                    env:
+                      - name: TARGET
+                        value: "Shell Sample v1"
+          ```
+
+       Ensure that the container image value
+       in `service.yaml` matches the container you built in the previous step. Apply
+       the configuration using `kubectl`:
+
+       ```shell
+       kubectl apply --filename service.yaml
+       ```
+
+
+=== "kn"
+
+       With `kn` you can deploy the service with
+
+       ```shell
+       kn service create helloworld-shell --image=docker.io/{username}/helloworld-shell --env TARGET="Shell Sample v1"
+       ```
+
+       This will wait until your service is deployed and ready, and ultimately it will print the URL through which you can access the service.
+
+       The output will look like:
+
+       ```
+       Creating service 'helloworld-shell' in namespace 'default':
+
+        0.035s The Configuration is still working to reflect the latest desired specification.
+        0.139s The Route is still working to reflect the latest desired specification.
+        0.250s Configuration "helloworld-shell" is waiting for a Revision to become ready.
+        8.040s ...
+        8.136s Ingress has not yet been reconciled.
+        8.277s unsuccessfully observed a new generation
+        8.398s Ready to serve.
+
+      Service 'helloworld-shell' created to latest revision 'helloworld-shell-kwdpt-1' is available at URL:
+      http://helloworld-shell.default.1.2.3.4.xip.io
       ```
 
-   Ensure that the container image value
-   in `service.yaml` matches the container you built in the previous step. Apply
-   the configuration using `kubectl`:
 
-   ```shell
-   kubectl apply --filename service.yaml
-   ```
 
-   {{< /tab >}}
-   {{% tab name="kn" %}}
 
-   With `kn` you can deploy the service with
-
-   ```shell
-   kn service create helloworld-shell --image=docker.io/{username}/helloworld-shell --env TARGET="Shell Sample v1"
-   ```
-
-   This will wait until your service is deployed and ready, and ultimately it will print the URL through which you can access the service.
-
-   The output will look like:
-
-   ```
-   Creating service 'helloworld-shell' in namespace 'default':
-
-    0.035s The Configuration is still working to reflect the latest desired specification.
-    0.139s The Route is still working to reflect the latest desired specification.
-    0.250s Configuration "helloworld-shell" is waiting for a Revision to become ready.
-    8.040s ...
-    8.136s Ingress has not yet been reconciled.
-    8.277s unsuccessfully observed a new generation
-    8.398s Ready to serve.
-
-  Service 'helloworld-shell' created to latest revision 'helloworld-shell-kwdpt-1' is available at URL:
-  http://helloworld-shell.default.1.2.3.4.xip.io
-  ```
-
-   {{< /tab >}}
-   {{< /tabs >}}
 
    During the creation of your service, Knative performs the following steps:
 
@@ -161,33 +162,34 @@ folder) you're ready to build and deploy the sample app.
 
 1. Run one of the followings commands to find the domain URL for your service.
 
-   {{< tabs name="service_url" default="kn" >}}
-   {{% tab name="kubectl" %}}
-   ```shell
-   kubectl get ksvc helloworld-shell  --output=custom-columns=NAME:.metadata.name,URL:.status.url
-   ```
+   
+=== "kubectl"
+       ```shell
+       kubectl get ksvc helloworld-shell  --output=custom-columns=NAME:.metadata.name,URL:.status.url
+       ```
 
-   Example:
+       Example:
 
-   ```shell
-   NAME                URL
-   helloworld-shell    http://helloworld-shell.default.1.2.3.4.xip.io
-   ```
+       ```shell
+       NAME                URL
+       helloworld-shell    http://helloworld-shell.default.1.2.3.4.xip.io
+       ```
 
-   {{< /tab >}}
-   {{% tab name="kn" %}}
 
-   ```shell
-   kn service describe helloworld-shell -o url
-   ```
+=== "kn"
 
-   Example:
+       ```shell
+       kn service describe helloworld-shell -o url
+       ```
 
-   ```shell
-   http://helloworld-shell.default.1.2.3.4.xip.io
-   ```
-   {{< /tab >}}
-   {{< /tabs >}}
+       Example:
+
+       ```shell
+       http://helloworld-shell.default.1.2.3.4.xip.io
+       ```
+
+
+
 
 1. Now you can make a request to your app and see the result. Replace
    the URL below with the URL returned in the previous command.
@@ -208,15 +210,16 @@ folder) you're ready to build and deploy the sample app.
 
 To remove the sample app from your cluster, delete the service record.
 
-{{< tabs name="service_url" default="kn" >}}
-{{% tab name="kubectl" %}}
-```shell
-kubectl delete --filename service.yaml
-```
-{{< /tab >}}
-{{% tab name="kn" %}}
-```shell
-kn service delete helloworld-shell
-```
-{{< /tab >}}
-{{< /tabs >}}
+
+=== "kubectl"
+    ```shell
+    kubectl delete --filename service.yaml
+    ```
+
+=== "kn"
+    ```shell
+    kn service delete helloworld-shell
+    ```
+
+
+

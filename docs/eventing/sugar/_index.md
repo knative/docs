@@ -17,7 +17,7 @@ longer needed.
 The following command installs the Eventing Sugar Controller:
 
 ```bash
-kubectl apply --filename {{< artifact repo="eventing" file="eventing-sugar-controller.yaml" >}}
+kubectl apply --filename {{ artifact( repo="eventing", file="eventing-sugar-controller.yaml") }}
 ```
 
 ## Automatic Broker Creation

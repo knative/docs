@@ -27,7 +27,7 @@ for production containers.
 1. Download a copy of the code:
 
   ```shell
-  git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
+  git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
   cd knative-docs/docs/serving/samples/grpc-ping-go
   ```
 

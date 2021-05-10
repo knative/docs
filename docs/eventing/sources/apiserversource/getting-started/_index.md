@@ -88,54 +88,55 @@ Before you can create an API server source, you must install Knative Eventing an
 
 1. Create an ApiServerSource object:
 
-    {{< tabs name="create-source" default="YAML" >}}
-    {{% tab name="YAML" %}}
+    
+=== "YAML"
 
-```yaml
-kubectl create -f - <<EOF
-apiVersion: sources.knative.dev/v1
-kind: ApiServerSource
-metadata:
- name: <apiserversource>
- namespace: <namespace>
-spec:
- serviceAccountName: <service-account>
- mode: Resource
- resources:
-   - apiVersion: v1
-     kind: Event
- sink:
-   ref:
-     apiVersion: v1
-     kind: Service
-     name: <sink>
-EOF
-```
-where;
-- `<apiserversource>` is the name of the source that you want to create.
-- `<namespace>` is the name of the namespace that you created in step 1 above.
-- `<service-account>` is the name of the service account that you created in step 2 above.
-- `<sink>` is the name of the Knative service that you want to use as a sink. A service is used here as an example, however you can use any supported PodSpecable object by updating the `kind` from `Service` to another object type.
+    ```yaml
+    kubectl create -f - <<EOF
+    apiVersion: sources.knative.dev/v1
+    kind: ApiServerSource
+    metadata:
+     name: <apiserversource>
+     namespace: <namespace>
+    spec:
+     serviceAccountName: <service-account>
+     mode: Resource
+     resources:
+       - apiVersion: v1
+         kind: Event
+     sink:
+       ref:
+         apiVersion: v1
+         kind: Service
+         name: <sink>
+    EOF
+    ```
+    where;
+    - `<apiserversource>` is the name of the source that you want to create.
+    - `<namespace>` is the name of the namespace that you created in step 1 above.
+    - `<service-account>` is the name of the service account that you created in step 2 above.
+    - `<sink>` is the name of the Knative service that you want to use as a sink. A service is used here as an example, however you can use any supported PodSpecable object by updating the `kind` from `Service` to another object type.
 
-    {{< /tab >}}
-    {{% tab name="kn" %}}
 
-```shell
-kn source apiserver create <apiserversource> \
-  --namespace <namespace> \
-  --mode "Resource" \
-  --resource "Event:v1" \
-  --service-account <service-account> \
-  --sink <sink>
-```
-where;
-- `<apiserversource>` is the name of the source that you want to create.
-- `<namespace>` is the name of the namespace that you created in step 1 above.
-- `<service-account>` is the name of the service account that you created in step 2 above.
-- `<sink>` is the name of the PodSpecable object that you want to use as a sink.
+=== "kn"
 
-    {{< /tab >}}
-    {{< /tabs >}}
+    ```shell
+    kn source apiserver create <apiserversource> \
+      --namespace <namespace> \
+      --mode "Resource" \
+      --resource "Event:v1" \
+      --service-account <service-account> \
+      --sink <sink>
+    ```
+    where;
+    - `<apiserversource>` is the name of the source that you want to create.
+    - `<namespace>` is the name of the namespace that you created in step 1 above.
+    - `<service-account>` is the name of the service account that you created in step 2 above.
+    - `<sink>` is the name of the PodSpecable object that you want to use as a sink.
+
+
+
+
 
 6. Create events by launching a test pod in your namespace:
 

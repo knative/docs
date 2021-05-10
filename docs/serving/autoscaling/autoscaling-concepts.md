@@ -37,48 +37,49 @@ The type of Autoscaler implementation (KPA or HPA) can be configured by using th
 * **Default:** `"kpa.autoscaling.knative.dev"`
 
 **Example:**
-{{< tabs name="class" default="Per Revision" >}}
-{{% tab name="Per Revision" %}}
-```yaml
-apiVersion: serving.knative.dev/v1
-kind: Service
-metadata:
-  name: helloworld-go
-  namespace: default
-spec:
-  template:
+
+=== "Per Revision"
+    ```yaml
+    apiVersion: serving.knative.dev/v1
+    kind: Service
     metadata:
-      annotations:
-        autoscaling.knative.dev/class: "kpa.autoscaling.knative.dev"
+      name: helloworld-go
+      namespace: default
     spec:
-      containers:
-        - image: gcr.io/knative-samples/helloworld-go
-```
-{{< /tab >}}
-{{% tab name="Global (ConfigMap)" %}}
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
- name: config-autoscaler
- namespace: knative-serving
-data:
- pod-autoscaler-class: "kpa.autoscaling.knative.dev"
-```
-{{< /tab >}}
-{{% tab name="Global (Operator)" %}}
-```yaml
-apiVersion: operator.knative.dev/v1alpha1
-kind: KnativeServing
-metadata:
-  name: knative-serving
-spec:
-  config:
-    autoscaler:
-      pod-autoscaler-class: "kpa.autoscaling.knative.dev"
-```
-{{< /tab >}}
-{{< /tabs >}}
+      template:
+        metadata:
+          annotations:
+            autoscaling.knative.dev/class: "kpa.autoscaling.knative.dev"
+        spec:
+          containers:
+            - image: gcr.io/knative-samples/helloworld-go
+    ```
+
+=== "Global (ConfigMap)"
+    ```yaml
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+     name: config-autoscaler
+     namespace: knative-serving
+    data:
+     pod-autoscaler-class: "kpa.autoscaling.knative.dev"
+    ```
+
+=== "Global (Operator)"
+    ```yaml
+    apiVersion: operator.knative.dev/v1alpha1
+    kind: KnativeServing
+    metadata:
+      name: knative-serving
+    spec:
+      config:
+        autoscaler:
+          pod-autoscaler-class: "kpa.autoscaling.knative.dev"
+    ```
+
+
+
 
 ## Global versus per-revision settings
 

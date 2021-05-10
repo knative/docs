@@ -19,43 +19,44 @@ This feature is available to untagged and tagged traffic targets configured for 
 
 This value currently can be configured on the cluster level (starting v0.20) via a setting in the `config-network` ConfigMap or per Kservice or Route using an annotation (staring v.0.21).
 
-{{< tabs name="Rollout Duration" default="Per-revision" >}}
-{{% tab name="Per-revision" %}}
-```yaml
-apiVersion: serving.knative.dev/v1
-kind: Service
-metadata:
-  name: helloworld-go
-  namespace: default
-  annotations:
-    serving.knative.dev/rolloutDuration: "380s"
-...
-```
-{{< /tab >}}
-{{% tab name="Global (ConfigMap)" %}}
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
- name: config-network
- namespace: knative-serving
-data:
-  rolloutDuration: "380s"  # Value in seconds.
-```
-{{< /tab >}}
-{{% tab name="Global (Operator)" %}}
-```yaml
-apiVersion: operator.knative.dev/v1alpha1
-kind: KnativeServing
-metadata:
-  name: knative-serving
-spec:
-  config:
-    network:
-       rolloutDuration: "380s"
-```
-{{< /tab >}}
-{{< /tabs >}}
+
+=== "Per-revision"
+    ```yaml
+    apiVersion: serving.knative.dev/v1
+    kind: Service
+    metadata:
+      name: helloworld-go
+      namespace: default
+      annotations:
+        serving.knative.dev/rolloutDuration: "380s"
+    ...
+    ```
+
+=== "Global (ConfigMap)"
+    ```yaml
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+     name: config-network
+     namespace: knative-serving
+    data:
+      rolloutDuration: "380s"  # Value in seconds.
+    ```
+
+=== "Global (Operator)"
+    ```yaml
+    apiVersion: operator.knative.dev/v1alpha1
+    kind: KnativeServing
+    metadata:
+      name: knative-serving
+    spec:
+      config:
+        network:
+           rolloutDuration: "380s"
+    ```
+
+
+
 
 
 

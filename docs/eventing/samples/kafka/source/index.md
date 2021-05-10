@@ -58,7 +58,7 @@ Tutorial on how to build and deploy a `KafkaSource` [Eventing source](../../../s
 1. Download a copy of the code:
 
    ```shell
-   git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
+   git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
    cd knative-docs/docs/eventing/samples/kafka/source
    ```
 

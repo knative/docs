@@ -27,7 +27,7 @@ cluster. You can also download a working copy of the sample, by running the
 following commands:
 
 ```shell
-git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
+git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
 cd knative-docs/docs/serving/samples/cloudevents/cloudevents-spring
 ```
 
@@ -131,22 +131,23 @@ kubectl delete --filename service.yaml
 
 To remove the sample app from your cluster, delete the service:
 
-{{< tabs name="cloudevents_spring_delete" default="kn" >}}
-{{% tab name="yaml" %}}
 
-Run:
+=== "yaml"
 
-```shell
-kubectl delete --filename service.yaml
-```
+    Run:
 
-{{< /tab >}}
-{{% tab name="kn" %}}
+    ```shell
+    kubectl delete --filename service.yaml
+    ```
 
-Run:
 
-```shell
-kn service delete cloudevents-spring
-```
+=== "kn"
 
-{{< /tab >}}
+    Run:
+
+    ```shell
+    kn service delete cloudevents-spring
+    ```
+
+
+

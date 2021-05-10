@@ -16,7 +16,7 @@ cluster. You can also download a working copy of the sample, by running the
 following commands:
 
 ```shell
-git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
+git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
 cd knative-docs/docs/serving/samples/hello-world/helloworld-scala
 ```
 
@@ -106,108 +106,111 @@ local Docker Repository.
 
 ## Deploying to Knative Serving
 
-{{< tabs name="helloworld_ruby" default="kn" >}}
-{{% tab name="yaml" %}}
 
-Apply the [Service yaml definition](./helloworld-scala.yaml):
+=== "yaml"
 
-```shell
-kubectl apply --filename helloworld-scala.yaml
-```
+    Apply the [Service yaml definition](./helloworld-scala.yaml):
 
- {{< /tab >}}
- {{% tab name="kn" %}}
+    ```shell
+    kubectl apply --filename helloworld-scala.yaml
+    ```
 
- With `kn` you can deploy the service with
 
-   ```shell
-   kn service create helloworld-scala --image=docker.io/{username}/helloworld-scala --env TARGET="Scala Sample v1"
-   ```
+=== "kn"
 
-   This will wait until your service is deployed and ready, and ultimately it will print the URL through which you can access the service.
+     With `kn` you can deploy the service with
 
-   The output will look like:
+       ```shell
+       kn service create helloworld-scala --image=docker.io/{username}/helloworld-scala --env TARGET="Scala Sample v1"
+       ```
 
-   ```
-   Creating service 'helloworld-scala' in namespace 'default':
+       This will wait until your service is deployed and ready, and ultimately it will print the URL through which you can access the service.
 
-    0.035s The Configuration is still working to reflect the latest desired specification.
-    0.139s The Route is still working to reflect the latest desired specification.
-    0.250s Configuration "helloworld-scala" is waiting for a Revision to become ready.
-    8.040s ...
-    8.136s Ingress has not yet been reconciled.
-    8.277s unsuccessfully observed a new generation
-    8.398s Ready to serve.
+       The output will look like:
 
-  Service 'helloworld-scala' created to latest revision 'helloworld-scala-abcd-1' is available at URL:
-  http://helloworld-scala.default.1.2.3.4.xip.io
-  ```
+       ```
+       Creating service 'helloworld-scala' in namespace 'default':
 
-{{< /tab >}}
-{{< /tabs >}}
+        0.035s The Configuration is still working to reflect the latest desired specification.
+        0.139s The Route is still working to reflect the latest desired specification.
+        0.250s Configuration "helloworld-scala" is waiting for a Revision to become ready.
+        8.040s ...
+        8.136s Ingress has not yet been reconciled.
+        8.277s unsuccessfully observed a new generation
+        8.398s Ready to serve.
 
-{{< tabs name="service_url" default="kn" >}}
-{{% tab name="kubectl" %}}
+      Service 'helloworld-scala' created to latest revision 'helloworld-scala-abcd-1' is available at URL:
+      http://helloworld-scala.default.1.2.3.4.xip.io
+      ```
 
-Then find the service host:
 
-```shell
-kubectl get ksvc helloworld-scala \
-    --output=custom-columns=NAME:.metadata.name,URL:.status.url
 
-# It will print something like this, the URL is what you're looking for.
-# NAME                URL
-# helloworld-scala    http://helloworld-scala.default.1.2.3.4.xip.io
-```
 
-Finally, to try your service, use the obtained URL:
 
-```shell
-curl -v http://helloworld-scala.default.1.2.3.4.xip.io
-```
 
-{{< /tab >}}
-{{% tab name="kn" %}}
+=== "kubectl"
 
-   ```shell
-   kn service describe helloworld-scala -o url
-   ```
+    Then find the service host:
 
-   Example:
+    ```shell
+    kubectl get ksvc helloworld-scala \
+        --output=custom-columns=NAME:.metadata.name,URL:.status.url
 
-   ```shell
-   http://helloworld-scala.default.1.2.3.4.xip.io
-   ```
+    # It will print something like this, the URL is what you're looking for.
+    # NAME                URL
+    # helloworld-scala    http://helloworld-scala.default.1.2.3.4.xip.io
+    ```
 
-Finally, to try your service, use the obtained URL:
+    Finally, to try your service, use the obtained URL:
 
-```shell
-curl -v http://helloworld-scala.default.1.2.3.4.xip.io
-```
+    ```shell
+    curl -v http://helloworld-scala.default.1.2.3.4.xip.io
+    ```
 
-{{< /tab >}}
-{{< /tabs >}}
+
+=== "kn"
+
+       ```shell
+       kn service describe helloworld-scala -o url
+       ```
+
+       Example:
+
+       ```shell
+       http://helloworld-scala.default.1.2.3.4.xip.io
+       ```
+
+    Finally, to try your service, use the obtained URL:
+
+    ```shell
+    curl -v http://helloworld-scala.default.1.2.3.4.xip.io
+    ```
+
+
+
+
 
 ## Cleanup
 
-{{< tabs name="service_url" default="kn" >}}
-{{% tab name="kubectl" %}}
 
-```shell
-kubectl delete --filename helloworld-scala.yaml
-```
+=== "kubectl"
 
-```
-kubetl delete --filename helloworld-scala.yaml
-```
-{{< /tab >}}
+    ```shell
+    kubectl delete --filename helloworld-scala.yaml
+    ```
 
-{{% tab name="kn" %}}
+    ```
+    kubetl delete --filename helloworld-scala.yaml
+    ```
 
-```shell
-kn service delete helloworld-scala
-```
 
-{{< /tab >}}
+=== "kn"
 
-{{< /tabs >}}
+    ```shell
+    kn service delete helloworld-scala
+    ```
+
+
+
+
+

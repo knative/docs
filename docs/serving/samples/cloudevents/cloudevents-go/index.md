@@ -25,7 +25,7 @@ cluster. You can also download a working copy of the sample, by running the
 following commands:
 
 ```shell
-git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
+git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
 cd knative-docs/docs/serving/samples/cloudevents/cloudevents-go
 ```
 
@@ -56,73 +56,75 @@ cd knative-docs/docs/serving/samples/cloudevents/cloudevents-go
 
 1. Choose how you would like to build the application:
 
-   {{< tabs name="cloudevents_go_build" default="Dockerfile" >}}
-   {{% tab name="Dockerfile" %}}
+   
+=== "Dockerfile"
 
-   If you look in `Dockerfile`, you will see a method for pulling in the
-   dependencies and building a small Go container based on Alpine. You can build
-   and push this to your registry of choice via:
+       If you look in `Dockerfile`, you will see a method for pulling in the
+       dependencies and building a small Go container based on Alpine. You can build
+       and push this to your registry of choice via:
 
-   ```shell
-   docker build -t <image> .
-   docker push <image>
-   ```
+       ```shell
+       docker build -t <image> .
+       docker push <image>
+       ```
 
-   {{< /tab >}}
-   {{% tab name="ko" %}}
 
-   You can use [`ko`](https://github.com/google/ko) to build and push just the image with:
+=== "ko"
 
-   ```shell
-   ko publish github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-go
-   ```
+       You can use [`ko`](https://github.com/google/ko) to build and push just the image with:
 
-   However, if you use `ko` for the next step, this is not necessary.
+       ```shell
+       ko publish github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-go
+       ```
 
-   {{< /tab >}}
-   {{< /tabs >}}
+       However, if you use `ko` for the next step, this is not necessary.
+
+
+
+
 
 1. Choose how you would like to deploy the application:
 
-   {{< tabs name="cloudevents_go_deploy" default="kn (with Dockerfile)" >}}
-   {{% tab name="yaml (with Dockerfile)" %}}
+   
+=== "yaml (with Dockerfile)"
 
-   If you look in `service.yaml`, take the `<image>` name above and insert it
-   into the `image:` field, then run:
+       If you look in `service.yaml`, take the `<image>` name above and insert it
+       into the `image:` field, then run:
 
-   ```shell
-   kubectl apply -f service.yaml
-   ```
+       ```shell
+       kubectl apply -f service.yaml
+       ```
 
-   {{< /tab >}}
-   {{% tab name="yaml (with ko)" %}}
 
-   If using `ko` to build and push:
+=== "yaml (with ko)"
 
-   ```shell
-   ko apply -f service.yaml
-   ```
+       If using `ko` to build and push:
 
-   {{< /tab >}}
-   {{% tab name="kn (with Dockerfile)" %}}
+       ```shell
+       ko apply -f service.yaml
+       ```
 
-   If using `kn` to deploy:
 
-   ```shell
-   kn service create cloudevents-go --image=<IMAGE>
-   ```
+=== "kn (with Dockerfile)"
 
-   {{< /tab >}}
-   {{% tab name="kn (with ko)" %}}
+       If using `kn` to deploy:
 
-   You can compose `kn` and `ko` to build and deploy with a single step using:
+       ```shell
+       kn service create cloudevents-go --image=<IMAGE>
+       ```
 
-   ```shell
-   kn service create cloudevents-go --image=$(ko publish github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-go)
-   ```
 
-   {{< /tab >}}
-   {{< /tabs >}}
+=== "kn (with ko)"
+
+       You can compose `kn` and `ko` to build and deploy with a single step using:
+
+       ```shell
+       kn service create cloudevents-go --image=$(ko publish github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-go)
+       ```
+
+
+
+
 
 
 ## Testing the sample

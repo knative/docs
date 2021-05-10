@@ -17,42 +17,43 @@ The `target` annotation, used to configure per-revision targets,  is _metric agn
 * **Possible values:** An integer (metric agnostic).
 * **Default:** `"100"` for `container-concurrency-target-default`. There is no default value set for the `target` annotation.
 
-{{< tabs name="Configuring targets" default="Target annotation - Per-revision" >}}
-{{% tab name="Target annotation - Per-revision" %}}
-```yaml
-apiVersion: serving.knative.dev/v1
-kind: Service
-metadata:
-  name: helloworld-go
-  namespace: default
-spec:
-  template:
+
+=== "Target annotation - Per-revision"
+    ```yaml
+    apiVersion: serving.knative.dev/v1
+    kind: Service
     metadata:
-      annotations:
-        autoscaling.knative.dev/target: "50"
-```
-{{< /tab >}}
-{{% tab name="Concurrency target - Global (ConfigMap)" %}}
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
- name: config-autoscaler
- namespace: knative-serving
-data:
- container-concurrency-target-default: "200"
-```
-{{< /tab >}}
-{{% tab name="Concurrency target - Container Global (Operator)" %}}
-```yaml
-apiVersion: operator.knative.dev/v1alpha1
-kind: KnativeServing
-metadata:
-  name: knative-serving
-spec:
-  config:
-    autoscaler:
-      container-concurrency-target-default: "200"
-```
-{{< /tab >}}
-{{< /tabs >}}
+      name: helloworld-go
+      namespace: default
+    spec:
+      template:
+        metadata:
+          annotations:
+            autoscaling.knative.dev/target: "50"
+    ```
+
+=== "Concurrency target - Global (ConfigMap)"
+    ```yaml
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+     name: config-autoscaler
+     namespace: knative-serving
+    data:
+     container-concurrency-target-default: "200"
+    ```
+
+=== "Concurrency target - Container Global (Operator)"
+    ```yaml
+    apiVersion: operator.knative.dev/v1alpha1
+    kind: KnativeServing
+    metadata:
+      name: knative-serving
+    spec:
+      config:
+        autoscaler:
+          container-concurrency-target-default: "200"
+    ```
+
+
+
