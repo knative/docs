@@ -5,6 +5,8 @@ weight: 85
 type: "docs"
 ---
 
+# Accessing CloudEvent traces
+
 Depending on the request tracing tool that you have installed on your Knative
 Eventing cluster, see the corresponding section for details about how to
 visualize and trace your requests.

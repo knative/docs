@@ -5,6 +5,8 @@ weight: 1
 type: "docs"
 ---
 
+# Hello World - Shell
+
 This guide describes the steps required to create the `helloworld-shell` sample app and deploy it to your
 cluster.
 

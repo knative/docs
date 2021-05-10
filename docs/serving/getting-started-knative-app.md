@@ -7,6 +7,8 @@ aliases:
   - /docs/install/getting-started-knative-app/
 ---
 
+# Getting Started with App Deployment
+
 This guide shows you how to deploy an app using Knative, then interact with it
 using cURL requests.
 

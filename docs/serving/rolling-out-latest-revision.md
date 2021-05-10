@@ -4,6 +4,8 @@ weight: 20
 type: "docs"
 ---
 
+# Gradually rolling out latest Revisions
+
 If your traffic configuration points to a Configuration target, rather than revision target, it means that when a new Revision is created and ready 100% of that target's traffic will be immediately shifted to the new revision, which might not be ready to accept that scale with a single pod and with cold starts taking some time it is possible to end up in a situation where a lot of requests are backed up either at QP or Activator and after a while they might expire or QP might outright reject the requests.
 
 To mitigate this problem Knative as of 0.20 release Knative provides users with a possibility to gradually shift the traffic to the latest revision.

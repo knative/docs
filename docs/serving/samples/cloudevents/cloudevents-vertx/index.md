@@ -5,6 +5,8 @@ weight: 1
 type: "docs"
 ---
 
+# Cloud Events - Java and Vert.x
+
 A simple web app written in Java using Vert.x that can receive CloudEvents. It
 supports running in two modes:
 

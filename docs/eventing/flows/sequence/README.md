@@ -8,6 +8,8 @@ aliases:
 showlandingtoc: "false"
 ---
 
+# Sequence
+
 Sequence CRD provides a way to define an in-order list of functions that will be
 invoked. Each step can modify, filter or create a new kind of an event. Sequence
 creates `Channel`s and `Subscription`s under the hood.

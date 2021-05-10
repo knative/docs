@@ -5,6 +5,8 @@ weight: 50
 type: "docs"
 ---
 
+# Configuring scale bounds
+
 You can configure upper and lower bounds to control autoscaling behavior.
 
 You can also specify the initial scale that a Revision is scaled to immediately after creation.

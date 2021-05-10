@@ -5,6 +5,8 @@ weight: 40
 type: "docs"
 ---
 
+# Configuring concurrency
+
 Concurrency determines the number of simultaneous requests that can be processed by each replica of an application at any given time.
 <!-- this is where including files would be useful. We could create a concurrency global config module and insert it here, in the docs for metrics, and in the docs for targets. Showing the correct information each time instead of having it in one place with the per revision config jumbled in with it makes it easier to understand IMHO, and would mean users don't need to visit different pages or hunt for the same information for similar user stories @abrennan89.-->
 For per-revision concurrency, you must configure both `autoscaling.knative.dev/metric`and `autoscaling.knative.dev/target` for a [soft limit](#soft-limit), or `containerConcurrency` for a [hard limit](#hard-limit).

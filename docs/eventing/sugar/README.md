@@ -6,6 +6,8 @@ type: "docs"
 showlandingtoc: "true"
 ---
 
+# Knative Eventing Sugar Controller
+
 Knative Eventing Sugar Controller will react to special labels and annotations
 to produce or control eventing resources in a cluster or namespace. This allows
 cluster operators and developers to focus on creating fewer resources, and the

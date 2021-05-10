@@ -5,6 +5,8 @@ weight: 20
 type: "docs"
 ---
 
+# Hello World - Golang
+
 A simple web app written in Go that you can use to test knative eventing. It
 shows how to consume a [CloudEvent](https://cloudevents.io/) in Knative
 eventing, and optionally how to respond back with another CloudEvent in the http

@@ -6,6 +6,8 @@ aliases:
   - docs/eventing/broker/kafka-broker
 ---
 
+# Apache Kafka Broker
+
 The Apache Kafka Broker is a native Broker implementation, that reduces
 network hops, supports any Kafka version, and has a better integration
 with Apache Kafka for the Knative Broker and Trigger model.

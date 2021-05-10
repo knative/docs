@@ -7,6 +7,8 @@ aliases:
   - docs/eventing/triggers
 ---
 
+# Triggers
+
 A trigger represents a desire to subscribe to events from a specific broker.
 
 The `subscriber` value must be a [Destination](https://pkg.go.dev/knative.dev/pkg/apis/duck/v1#Destination).

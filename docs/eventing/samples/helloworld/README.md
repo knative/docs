@@ -5,6 +5,8 @@ weight: 10
 type: "docs"
 ---
 
+# Knative Eventing - Hello World app
+
 Following examples include a simple web app written in the language of your choice that you can
 use to test knative eventing. It shows how to consume a [CloudEvent](https://cloudevents.io/)
 in Knative eventing, and optionally how to respond back with another CloudEvent in the HTTP response.

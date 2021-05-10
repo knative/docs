@@ -5,6 +5,8 @@ weight: 01
 type: "docs"
 ---
 
+# Autoscaling concepts
+
 This section covers conceptual information about which Autoscaler types are supported, as well as fundamental information about how autoscaling is configured.
 
 ## Supported Autoscaler types

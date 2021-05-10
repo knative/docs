@@ -21,6 +21,8 @@ aliases:
 showlandingtoc: "false"
 ---
 
+# Installing Knative
+
 You can install the Serving component, Eventing component, or both on your cluster by using one of the following deployment options:
 
 - Using a [YAML-based installation](./prerequisites)

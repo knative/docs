@@ -7,6 +7,8 @@ aliases:
     - /docs/eventing/samples/sinkbinding/README
 ---
 
+# Sink binding
+
 ![version](https://img.shields.io/badge/API_Version-v1-red?style=flat-square)
 
 The `SinkBinding` custom object supports decoupling event production from delivery addressing.

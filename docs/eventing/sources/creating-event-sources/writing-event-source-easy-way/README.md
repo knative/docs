@@ -7,6 +7,8 @@ aliases:
   - /docs/eventing/samples/writing-event-source-easy-way
 ---
 
+# Writing an event source using Javascript
+
 This tutorial provides instructions to build an event source in Javascript and implement it with a ContainerSource or SinkBinding.
 
 - Using a [ContainerSource](../../containersource) is a simple way to turn any dispatcher container into a Knative event source.

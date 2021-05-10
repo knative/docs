@@ -6,6 +6,8 @@ aliases:
   - /docs/eventing/sources/apiserversource
 ---
 
+# API server source
+
 ![version](https://img.shields.io/badge/API_Version-v1-red?style=flat-square)
 
 The API server source is a Knative Eventing Kubernetes custom resource that listens for Kubernetes events and forwards received events to a sink.

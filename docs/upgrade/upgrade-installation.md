@@ -6,6 +6,8 @@ aliases:
   - /docs/install/upgrade-installation
 ---
 
+# Upgrading Knative
+
 You can use the `kubectl apply` command to upgrade your Knative components and plugins.
 
 ## Before you begin

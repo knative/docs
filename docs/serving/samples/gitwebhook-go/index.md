@@ -5,6 +5,8 @@ weight: 1
 type: "docs"
 ---
 
+# GitHub webhook sample - Go
+
 A handler written in Go that demonstrates interacting with GitHub through a
 webhook.
 

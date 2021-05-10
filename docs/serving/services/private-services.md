@@ -7,6 +7,8 @@ aliases:
   - /docs/serving/cluster-local-route
 ---
 
+# Creating a private service
+
 By default services deployed through Knative are published to an external IP
 address, making them public services on a public IP address and with a public URL.
 

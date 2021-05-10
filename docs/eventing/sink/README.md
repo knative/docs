@@ -4,6 +4,8 @@ weight: 60
 type: "docs"
 ---
 
+# Sink
+
 A sink is an Addressable resource that acts as a link
 between the Eventing mesh and an entity or system.
 

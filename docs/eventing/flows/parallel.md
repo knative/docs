@@ -6,6 +6,8 @@ aliases:
    - /docs/eventing/parallel.md
 ---
 
+# Parallel
+
 Parallel CRD provides a way to easily define a list of branches, each receiving
 the same CloudEvent sent to the Parallel ingress channel. Typically, each branch
 consists of a filter function guarding the execution of the branch.

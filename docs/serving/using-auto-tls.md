@@ -5,6 +5,8 @@ weight: 64
 type: "docs"
 ---
 
+# Enabling automatic TLS certificate provisioning
+
 If you install and configure cert-manager, you can configure Knative to
 automatically obtain new TLS certificates and renew existing ones for Knative
 Services.

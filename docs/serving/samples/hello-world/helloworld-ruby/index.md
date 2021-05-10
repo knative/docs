@@ -5,6 +5,8 @@ weight: 1
 type: "docs"
 ---
 
+# Hello World - Ruby
+
 This guide describes the steps required to create the `helloworld-ruby` sample app and deploy it to your cluster.
 
 The sample app reads a `TARGET` environment variable, and prints `Hello ${TARGET}!`.

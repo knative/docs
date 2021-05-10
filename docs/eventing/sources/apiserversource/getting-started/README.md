@@ -7,6 +7,8 @@ aliases:
   - /docs/eventing/samples/kubernetes-event-source
 ---
 
+# Getting started
+
 ## Prerequisites
 
 Before you can create an API server source, you must install Knative Eventing and the `kubectl` CLI tool.

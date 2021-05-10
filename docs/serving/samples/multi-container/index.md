@@ -5,6 +5,8 @@ weight: 1
 type: "docs"
 ---
 
+# Knative multi-container samples
+
 A simple web app written in Go that you can use for multi container testing.
 
 ## Prerequisites

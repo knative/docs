@@ -5,6 +5,8 @@ weight: 25
 type: "docs"
 ---
 
+# Debugging issues with your application
+
 You deployed your app to Knative Serving, but it isn't working as expected. Go
 through this step-by-step guide to understand what failed.
 

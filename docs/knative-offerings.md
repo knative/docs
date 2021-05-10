@@ -5,6 +5,8 @@ weight: 07
 type: "docs"
 ---
 
+# Knative Offerings
+
 Knative has a rich community with many vendors participating, and many of those
 vendors offer commercial Knative products.  Please check with each of these
 vendors for what is or is not supported.

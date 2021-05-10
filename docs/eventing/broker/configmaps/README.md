@@ -7,6 +7,8 @@ aliases:
   - /docs/eventing/broker/config-br-defaults
 ---
 
+# ConfigMaps
+
 Knative Eventing provides a `config-br-defaults` ConfigMap that contains the configuration settings that govern default broker creation.
 <!--TODO: Create a version of this doc for the channels doc section-->
 The default `config-br-defaults` ConfigMap is as follows:

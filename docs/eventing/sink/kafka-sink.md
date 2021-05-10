@@ -4,6 +4,8 @@ weight: 30
 type: "docs"
 ---
 
+# Apache Kafka Sink
+
 This page shows how to install and configure Apache Kafka Sink.
 
 ## Prerequisites

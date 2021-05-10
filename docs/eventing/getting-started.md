@@ -5,6 +5,8 @@ weight: 9
 type: "docs"
 ---
 
+# Getting Started with Knative Eventing
+
 After you install Knative Eventing, you can create, send, and verify events.
 This guide shows how you can use a basic workflow for managing events.
 

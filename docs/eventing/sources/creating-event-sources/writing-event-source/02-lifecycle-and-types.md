@@ -7,6 +7,8 @@ aliases:
   - /docs/eventing/samples/writing-event-source/02-lifecycle-and-types
 ---
 
+# Sample Source Lifecycle and Types
+
 ## API Definition
 1. Define the types required in the resource’s schema in
 `pkg/apis/samples/v1alpha1/samplesource_types.go`

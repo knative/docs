@@ -7,6 +7,8 @@ aliases:
   - /docs/serving/using-an-ssl-cert/
 ---
 
+# Configuring HTTPS with TLS certificates
+
 Learn how to configure secure HTTPS connections in Knative using TLS
 certificates
 ([TLS replaces SSL](https://en.wikipedia.org/wiki/Transport_Layer_Security)).

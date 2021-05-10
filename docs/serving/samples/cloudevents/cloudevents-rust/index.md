@@ -5,6 +5,8 @@ weight: 1
 type: "docs"
 ---
 
+# Cloud Events - Rust
+
 A simple web app written in Rust using [Actix web](https://github.com/actix/actix-web)
 that can receive CloudEvents. It supports running in two modes:
 

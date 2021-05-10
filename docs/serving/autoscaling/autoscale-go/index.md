@@ -7,6 +7,8 @@ aliases:
     - /docs/serving/samples/autoscale-go
 ---
 
+# Autoscale Sample App - Go
+
 A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 
 ## Prerequisites

@@ -5,6 +5,8 @@ weight: 1
 type: "docs"
 ---
 
+# Cloud Events - .NET Core
+
 A simple web app written in ASP.NET and C# that can receive and send Cloud Events that you
 can use for testing. It supports running in two modes:
 

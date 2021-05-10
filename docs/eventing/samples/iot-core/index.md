@@ -5,6 +5,8 @@ weight: 40
 type: "docs"
 ---
 
+# Binding running services to an IoT core
+
 This sample shows how to bind a running service to an
 [IoT core](https://cloud.google.com/iot-core/) using
 [GCP PubSub](https://cloud.google.com/pubsub/) as the event source. With minor
