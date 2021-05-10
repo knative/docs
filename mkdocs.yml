@@ -192,7 +192,7 @@ nav:
       - Serving: reference/api/serving.md
       - Eventing: reference/api/eventing/eventing.md
     - Client:
-        - CLI tools: client/index.md
+        - CLI tools: client/README.md
         - Install kn: client/install-kn.md
     - Community: todo
 
