@@ -89,7 +89,7 @@ nav:
     - Eventing Component:
         - Overview: eventing/README.md
         - Event Sources:
-          - Overview: eventing/sources/index.md
+          - Overview: eventing/sources/README.md
           - Writing an Event Source: eventing/sources/creating-event-sources/writing-event-source/README.md
           - Writing an Event Source - Easy Way: eventing/sources/creating-event-sources/writing-event-source-easy-way/README.md
           - APIServerSource: eventing/sources/apiserversource.md
