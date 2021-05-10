@@ -220,20 +220,6 @@ plugins:
         - smoketest.md
         - "*/serving-api.md" # shortcode to serving.md
         - "*/_index.md" # pretty much all shortcodes
-        - "*/traffic-splitting/index.md" # shortcode to README
-        - "*/secrets-go/index.md" # shortcode to README
-        - "*/tag-header-based-routing/index.md" # shortcode to README
-        - "*/knative-routing-go/index.md" # shortcode to README
-        - "*/helloworld-scala/index.md" # shortcode to README
-        - "*/helloworld-python/index.md" # shortcode to README
-        - "*/helloworld-php/index.md" # shortcode to README
-        - "*/helloworld-nodejs/index.md" # shortcode to README
-        - "*/helloworld-csharp/index.md" # shortcode to README
-        - "*/helloworld-kotlin/index.md" # shortcode to README
-        - "*/cloudevents-dotnet/index.md" # shortcode to README
-        - "*/grpc-ping-go/index.md" # shortcode to README
-        - "*/gitwebhook-go/index.md" # shortcode to README
-        - "*/multi-container/index.md" # shortcode to README
 
 markdown_extensions:
   # - mdx_include:

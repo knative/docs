@@ -188,20 +188,24 @@ If you have configured a custom domain name for your service, please replace all
 mentions of "example.com" in `routing.yaml` with "<YOUR_DOMAIN_NAME>" for
 spec.hosts and spec.http.rewrite.authority.
 
+{% raw %}
 In addition, you need to verify how your domain template is defined. By default,
 we use the format of {{.Name}}.{{.Namespace}}, like search-service.default and
 login-service.default. However, some Knative environments may use other format
 like {{.Name}}-{{.Namespace}}. You can find out the format by running the
 command:
+{% endraw %}
 
 ```
 kubectl get cm  -n knative-serving config-network -o yaml
 ```
 
+{% raw %}
 Then look for the value for `domainTemplate`. If it is
 `{{.Name}}-{{.Namespace}}.{{.Domain}}`, you need to change
 `search-service.default` into `search-service-default` and
 `login-service.default` into `login-service-default` as well in `routing.yaml`.
+{% endraw %}
 
 2. The `routing.yaml` file will generate a new VirtualService `entry-route` for
    domain `example.com` or your own domain name. View the VirtualService:
