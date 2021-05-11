@@ -4,7 +4,7 @@
 .history/
 __pycache__
 hack/__pycache__
-site/
+/site/
 
 
 .settings/

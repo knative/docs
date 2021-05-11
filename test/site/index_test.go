@@ -31,6 +31,8 @@ import (
 // details on branch and leaf bundles.
 
 func TestHugoBundles(t *testing.T) {
+	t.Skip("Mkdocs mode - _index.md not needed!")
+
 	// We walk the tree relative to the root, not the directory of the test.
 	// TODO(evankanderson): find a better way than hard-coding the directory depth.
 	err := os.Chdir(filepath.Join("..", ".."))
