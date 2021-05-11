@@ -4,15 +4,45 @@
   {{ super() }}
   <style>.md-header{position:initial}.md-main__inner{margin:0}.md-content{display:none}@media screen and (min-width:60em){.md-sidebar--secondary{display:none}}@media screen and (min-width:76.25em){.md-sidebar--primary{display:none}}</style>
   <style>
-    .home-container {
-        padding-top: 4em;
-        background: linear-gradient(to bottom, var(--md-primary-fg-color), #3A8BD6 84%, #3A8BD6 94%, #fff 100%);
-        background: linear-gradient(to bottom, var(--md-primary-fg-color), #5063D0 84%, #5063D0 94%, #fff 100%);
-        background: linear-gradient(to bottom, var(--md-primary-fg-color), #0071c7 24%, #0071c7 94%, #fff 100%);
-        background: linear-gradient(to bottom, var(--md-primary-fg-color), var(--home-color) 20%, var(--home-color) 99%, #fff 100%);
-        min-height: 300px;
-        justify-content: center;
-        color: #fff;
+    @keyframes continuousgradient {
+      from {
+        background-position: 0% 50%;
+      }
+      to {
+        background-position: 100% 50%;
+      }
+    }
+
+    .animated-gradient {
+      animation-name: continuousgradient;
+      background: linear-gradient(-45deg,  #6593c8, #0366ad, #000, #6593c8, #0366ad, #000);
+      animation-duration: 6s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      background-repeat: no-repeat;
+      background-size: 300% 100%;
+      opacity: 0.4;
+      z-index: -1;
+    }
+
+    section.home-container {
+      height: 435px;
+      justify-content: center;
+      color: #fff;
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding-bottom: 0;
+    }
+
+    .home-container > .md-typeset {
+      flex-grow: 2;
     }
 
     body {
@@ -24,7 +54,6 @@
     }
 
     .calltoaction-container, .usedby-container, .home-container, .features-container, .intro-container {
-      padding-botom: 1em;
       margin: 0;
       border: 0;
       padding-bottom: 4em;
@@ -124,7 +153,10 @@
   </style>
 
   <section class="home-container">
-    <div class="md-grid md-typeset">
+    <div class="animated-gradient">
+      <img src="images/logo/rgb/knative-logo-rgb.png">
+    </div>
+    <div class="md-grid md-typeset" style="filter: none;">
       <div class="mdx-hero">
         <div>
           <h1>Enterprise-grade Serverless on your own terms.</h1>
