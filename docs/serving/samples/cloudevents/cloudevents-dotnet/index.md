@@ -5,6 +5,8 @@ weight: 1
 type: "docs"
 ---
 
+# Cloud Events - .NET Core
+
 A simple web app written in ASP.NET and C# that can receive and send Cloud Events that you
 can use for testing. It supports running in two modes:
 
@@ -25,7 +27,7 @@ cluster. You can also download a working copy of the sample, by running the
 following commands:
 
 ```shell
-git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
+git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
 cd knative-docs/docs/serving/samples/cloudevents/cloudevents-dotnet
 ```
 

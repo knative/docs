@@ -4,6 +4,8 @@ weight: 02
 type: "docs"
 ---
 
+# Uninstalling Knative
+
 To uninstall an Operator-based Knative installation, follow the [Uninstall an Operator-based Knative Installation](#uninstall-an-operator-based-knative-installation) procedure below.
 To uninstall a YAML-based Knative installation, follow the [Uninstall a YAML-based Knative Installation](#uninstall-a-yaml-based-knative-installation) procedure below.
 
@@ -17,63 +19,64 @@ To uninstall a YAML-based Knative installation:
 
 Uninstall any Serving extensions you have installed by following the relevant steps below:
 
-{{< tabs name="serving_extensions" >}}
 
-{{% tab name="HPA autoscaling" %}}
 
-Knative also supports the use of the Kubernetes Horizontal Pod Autoscaler (HPA) for driving
-autoscaling decisions.
-The following command will uninstall the components needed to support HPA-class autoscaling:
+=== "HPA autoscaling"
 
-```bash
-kubectl delete -f {{< artifact repo="serving" file="serving-hpa.yaml" >}}
-```
+    Knative also supports the use of the Kubernetes Horizontal Pod Autoscaler (HPA) for driving
+    autoscaling decisions.
+    The following command will uninstall the components needed to support HPA-class autoscaling:
 
-{{< /tab >}}
+    ```bash
+    kubectl delete -f {{ artifact( repo="serving", file="serving-hpa.yaml") }}
+    ```
 
-{{% tab name="TLS with cert-manager" %}}
 
-1. Uninstall the component that integrates Knative with cert-manager:
 
-   ```bash
-   kubectl delete -f {{< artifact repo="net-certmanager" file="release.yaml" >}}
-   ```
+=== "TLS with cert-manager"
 
-1. Optional: if you no longer need cert-manager, uninstall it by following the steps in the
-[cert-manager documentation](https://cert-manager.io/docs/installation/uninstall/kubernetes/).
+    1. Uninstall the component that integrates Knative with cert-manager:
 
-   {{< /tab >}}
+       ```bash
+       kubectl delete -f {{ artifact( repo="net-certmanager", file="release.yaml") }}
+       ```
 
-{{% tab name="TLS via HTTP01" %}}
+    1. Optional: if you no longer need cert-manager, uninstall it by following the steps in the
+    [cert-manager documentation](https://cert-manager.io/docs/installation/uninstall/kubernetes/).
 
-Uninstall the `net-http01` controller by running:
 
-```bash
-kubectl delete -f {{< artifact repo="net-http01" file="release.yaml" >}}
-```
 
-{{< /tab >}}
+=== "TLS via HTTP01"
 
-{{% tab name="TLS wildcard support" %}}
+    Uninstall the `net-http01` controller by running:
 
-Uninstall the components needed to provision wildcard certificates in each namespace by running:
+    ```bash
+    kubectl delete -f {{ artifact( repo="net-http01", file="release.yaml") }}
+    ```
 
-```bash
-kubectl delete -f {{< artifact repo="serving" file="serving-nscert.yaml" >}}
-```
 
-{{< /tab >}}
 
-{{% tab name="DomainMapping CRD" %}}
+=== "TLS wildcard support"
 
-To uninstall the `DomainMapping` components run:
+    Uninstall the components needed to provision wildcard certificates in each namespace by running:
 
-```bash
-kubectl delete -f {{< artifact repo="serving" file="serving-domainmapping.yaml" >}}
-kubectl delete -f {{< artifact repo="serving" file="serving-domainmapping-crds.yaml" >}}
-```
+    ```bash
+    kubectl delete -f {{ artifact( repo="serving", file="serving-nscert.yaml") }}
+    ```
 
-{{< /tab >}} {{< /tabs >}}
+
+
+=== "DomainMapping CRD"
+
+    To uninstall the `DomainMapping` components run:
+
+    ```bash
+    kubectl delete -f {{ artifact( repo="serving", file="serving-domainmapping.yaml") }}
+    kubectl delete -f {{ artifact( repo="serving", file="serving-domainmapping-crds.yaml") }}
+    ```
+
+
+
 
 
 ### Uninstalling a networking layer
@@ -83,93 +86,94 @@ Follow the relevant procedure to uninstall the networking layer you installed:
 <!-- TODO: Link to document/diagram describing what is a networking layer.  -->
 <!-- This indentation is important for things to render properly. -->
 
-   {{< tabs name="serving_networking" default="Kourier" >}}
-   {{% tab name="Ambassador" %}}
+   
+=== "Ambassador"
 
-The following commands uninstall Ambassador and enable its Knative integration.
+    The following commands uninstall Ambassador and enable its Knative integration.
 
-1. Uninstall Ambassador by running:
+    1. Uninstall Ambassador by running:
 
-   ```bash
-   kubectl delete --namespace ambassador \
-    -f https://getambassador.io/yaml/ambassador/ambassador-crds.yaml \
-    -f https://getambassador.io/yaml/ambassador/ambassador-rbac.yaml \
-    -f https://getambassador.io/yaml/ambassador/ambassador-service.yaml
-   ```
+       ```bash
+       kubectl delete --namespace ambassador \
+        -f https://getambassador.io/yaml/ambassador/ambassador-crds.yaml \
+        -f https://getambassador.io/yaml/ambassador/ambassador-rbac.yaml \
+        -f https://getambassador.io/yaml/ambassador/ambassador-service.yaml
+       ```
 
-1. Delete the Ambassador namespace:
+    1. Delete the Ambassador namespace:
 
-   ```bash
-   kubectl delete namespace ambassador
-   ```
+       ```bash
+       kubectl delete namespace ambassador
+       ```
 
-{{< /tab >}}
 
-{{% tab name="Contour" %}}
 
-The following commands uninstall Contour and enable its Knative integration.
+=== "Contour"
 
-1. Uninstall the Knative Contour controller by running:
+    The following commands uninstall Contour and enable its Knative integration.
 
-    ```bash
-    kubectl delete -f {{< artifact repo="net-contour" file="net-contour.yaml" >}}
-    ```
+    1. Uninstall the Knative Contour controller by running:
 
-1. Uninstall Contour:
+        ```bash
+        kubectl delete -f {{ artifact( repo="net-contour", file="net-contour.yaml") }}
+        ```
 
-    ```bash
-    kubectl delete -f {{< artifact repo="net-contour" file="contour.yaml" >}}
-    ```
+    1. Uninstall Contour:
 
-{{< /tab >}}
+        ```bash
+        kubectl delete -f {{ artifact( repo="net-contour", file="contour.yaml") }}
+        ```
 
-{{% tab name="Gloo" %}}
 
-Uninstall Gloo and the Knative integration by running:
 
-   ```bash
-   glooctl uninstall knative
-   ```
+=== "Gloo"
 
-{{< /tab >}}
+    Uninstall Gloo and the Knative integration by running:
 
-{{% tab name="Istio" %}}
+       ```bash
+       glooctl uninstall knative
+       ```
 
-The following commands uninstall Istio and enable its Knative integration.
 
-1. Uninstall the Knative Istio controller by running:
 
-    ```bash
-    kubectl delete -f {{< artifact repo="net-istio" file="net-istio.yaml" >}}
-    ```
+=== "Istio"
 
-1. Optional: if you no longer need Istio, uninstall it by running:
+    The following commands uninstall Istio and enable its Knative integration.
 
-    ```bash
-    kubectl delete -f {{< artifact repo="net-istio" file="istio.yaml" >}}
-    ```
+    1. Uninstall the Knative Istio controller by running:
 
-{{< /tab >}}
+        ```bash
+        kubectl delete -f {{ artifact( repo="net-istio", file="net-istio.yaml") }}
+        ```
 
-{{% tab name="Kong" %}}
+    1. Optional: if you no longer need Istio, uninstall it by running:
 
-Uninstall Kong Ingress Controller by running:
+        ```bash
+        kubectl delete -f {{ artifact( repo="net-istio", file="istio.yaml") }}
+        ```
 
-   ```bash
-   kubectl delete -f https://raw.githubusercontent.com/Kong/kubernetes-ingress-controller/0.9.x/deploy/single/all-in-one-dbless.yaml
-   ```
 
-{{< /tab >}}
 
-{{% tab name="Kourier" %}}
+=== "Kong"
 
-Uninstall the Knative Kourier controller by running:
+    Uninstall Kong Ingress Controller by running:
 
-   ```bash
-   kubectl delete -f {{< artifact repo="net-kourier" file="kourier.yaml" >}}
-   ```
+       ```bash
+       kubectl delete -f https://raw.githubusercontent.com/Kong/kubernetes-ingress-controller/0.9.x/deploy/single/all-in-one-dbless.yaml
+       ```
 
-{{< /tab >}} {{< /tabs >}}
+
+
+=== "Kourier"
+
+    Uninstall the Knative Kourier controller by running:
+
+       ```bash
+       kubectl delete -f {{ artifact( repo="net-kourier", file="kourier.yaml") }}
+       ```
+
+
+
 
 
 ### Uninstalling the Serving component
@@ -191,101 +195,102 @@ Uninstall the Knative Kourier controller by running:
 
 Uninstall any Eventing extensions you have installed by following the relevant procedure below:
 
-{{< tabs name="eventing_extensions" >}}
 
-{{% tab name="Apache Kafka Sink" %}}
 
-1. Uninstall the Kafka Sink data plane:
+=== "Apache Kafka Sink"
 
-   ```bash
-   kubectl delete -f {{< artifact org="knative-sandbox" repo="eventing-kafka-broker" file="eventing-kafka-sink.yaml" >}}
-   ```
+    1. Uninstall the Kafka Sink data plane:
 
-1. Uninstall the Kafka controller:
+       ```bash
+       kubectl delete -f {{ artifact(org="knative-sandbox", repo="eventing-kafka-broker", file="eventing-kafka-sink.yaml") }}
+       ```
 
-   ```bash
-   kubectl delete -f {{< artifact org="knative-sandbox" repo="eventing-kafka-broker" file="eventing-kafka-controller.yaml" >}}
-   ```
+    1. Uninstall the Kafka controller:
 
-{{< /tab >}}
+       ```bash
+       kubectl delete -f {{ artifact(org="knative-sandbox", repo="eventing-kafka-broker", file="eventing-kafka-controller.yaml") }}
+       ```
 
-{{% tab name="Sugar Controller" %}}
 
-Uninstall the Eventing Sugar Controller by running:
 
-```bash
-kubectl delete -f {{< artifact repo="eventing" file="eventing-sugar-controller.yaml" >}}
-```
+=== "Sugar Controller"
 
-{{< /tab >}}
+    Uninstall the Eventing Sugar Controller by running:
 
-{{% tab name="GitHub Source" %}}
+    ```bash
+    kubectl delete -f {{ artifact( repo="eventing", file="eventing-sugar-controller.yaml") }}
+    ```
 
-Uninstall a single-tenant GitHub source by running:
 
-```bash
-kubectl delete -f {{< artifact org="knative-sandbox" repo="eventing-github" file="github.yaml" >}}
-```
 
-Uninstall a multi-tenant GitHub source by running:
+=== "GitHub Source"
 
-```bash
-kubectl delete -f {{< artifact org="knative-sandbox" repo="eventing-github" file="mt-github.yaml" >}}
-```
+    Uninstall a single-tenant GitHub source by running:
 
-{{< /tab >}}
+    ```bash
+    kubectl delete -f {{ artifact(org="knative-sandbox", repo="eventing-github", file="github.yaml") }}
+    ```
 
-{{% tab name="Apache Camel-K Source" %}}
+    Uninstall a multi-tenant GitHub source by running:
 
-Uninstall the Apache Camel-K Source by running:
+    ```bash
+    kubectl delete -f {{ artifact(org="knative-sandbox", repo="eventing-github", file="mt-github.yaml") }}
+    ```
 
-```bash
-kubectl delete -f {{< artifact org="knative-sandbox" repo="eventing-camel" file="camel.yaml" >}}
-```
 
-{{< /tab >}}
 
-{{% tab name="Apache Kafka Source" %}}
+=== "Apache Camel-K Source"
 
-Uninstall the Apache Kafka source by running:
+    Uninstall the Apache Camel-K Source by running:
 
-```bash
-kubectl delete -f {{< artifact org="knative-sandbox" repo="eventing-kafka" file="source.yaml" >}}
-```
+    ```bash
+    kubectl delete -f {{ artifact(org="knative-sandbox", repo="eventing-camel", file="camel.yaml") }}
+    ```
 
-{{< /tab >}}
 
-{{% tab name="GCP Sources" %}}
 
-Uninstall the GCP sources by running:
+=== "Apache Kafka Source"
 
-```bash
-kubectl delete -f {{< artifact org="google" repo="knative-gcp" file="cloud-run-events.yaml" >}}
-```
+    Uninstall the Apache Kafka source by running:
 
-{{< /tab >}}
+    ```bash
+    kubectl delete -f {{ artifact(org="knative-sandbox", repo="eventing-kafka", file="source.yaml") }}
+    ```
 
-{{% tab name="Apache CouchDB Source" %}}
 
-Uninstall the Apache CouchDB source by running:
 
-```bash
-kubectl delete -f {{< artifact org="knative-sandbox" repo="eventing-couchdb" file="couchdb.yaml" >}}
-```
+=== "GCP Sources"
 
-{{< /tab >}}
+    Uninstall the GCP sources by running:
 
-{{% tab name="VMware Sources and Bindings" %}}
+    ```bash
+    kubectl delete -f {{ artifact(org="google", repo="knative-gcp", file="cloud-run-events.yaml") }}
+    ```
 
-Uninstall the VMware sources and bindings by running:
 
-```bash
-kubectl delete -f {{< artifact org="vmware-tanzu" repo="sources-for-knative" file="release.yaml" >}}
-```
 
-{{< /tab >}}
+=== "Apache CouchDB Source"
 
-{{< /tabs >}}
+    Uninstall the Apache CouchDB source by running:
+
+    ```bash
+    kubectl delete -f {{ artifact(org="knative-sandbox", repo="eventing-couchdb", file="couchdb.yaml") }}
+    ```
+
+
+
+=== "VMware Sources and Bindings"
+
+    Uninstall the VMware sources and bindings by running:
+
+    ```bash
+    kubectl delete -f {{ artifact(org="vmware-tanzu", repo="sources-for-knative", file="release.yaml") }}
+    ```
+
+
+
+
+
 
 
 ### Uninstalling an optional Broker (Eventing) layer
@@ -293,34 +298,35 @@ kubectl delete -f {{< artifact org="vmware-tanzu" repo="sources-for-knative" fil
 Uninstall a Broker (Eventing) layer, if you installed one:
 
 <!-- This indentation is important for things to render properly. -->
-{{< tabs name="eventing_brokers" default="MT-Channel-based" >}}
-{{% tab name="Apache Kafka Broker" %}}
 
-1. Uninstall the Kafka Broker data plane by running the following command:
+=== "Apache Kafka Broker"
+
+    1. Uninstall the Kafka Broker data plane by running the following command:
+
+        ```bash
+        kubectl delete -f {{ artifact(org="knative-sandbox", repo="eventing-kafka-broker", file="eventing-kafka-broker.yaml") }}
+        ```
+
+    1. Uninstall the Kafka controller by running the following command:
+
+        ```bash
+        kubectl delete -f {{ artifact(org="knative-sandbox", repo="eventing-kafka-broker", file="eventing-kafka-controller.yaml") }}
+        ```
+
+
+
+=== "MT-Channel-based"
+
+    Uninstall the broker by running:
 
     ```bash
-    kubectl delete -f {{< artifact org="knative-sandbox" repo="eventing-kafka-broker" file="eventing-kafka-broker.yaml" >}}
+    kubectl delete -f {{ artifact( repo="eventing", file="mt-channel-broker.yaml") }}
     ```
 
-1. Uninstall the Kafka controller by running the following command:
 
-    ```bash
-    kubectl delete -f {{< artifact org="knative-sandbox" repo="eventing-kafka-broker" file="eventing-kafka-controller.yaml" >}}
-    ```
 
-{{< /tab >}}
 
-{{% tab name="MT-Channel-based" %}}
 
-Uninstall the broker by running:
-
-```bash
-kubectl delete -f {{< artifact repo="eventing" file="mt-channel-broker.yaml" >}}
-```
-
-{{< /tab >}}
-
-{{< /tabs >}}
 
 
 ### Uninstalling optional channel (messaging) layers
@@ -329,56 +335,57 @@ Uninstall each channel layer you have installed:
 
 <!-- This indentation is important for things to render properly. -->
 
-   {{< tabs name="eventing_channels" default="In-Memory (standalone)" >}}
-   {{% tab name="Apache Kafka Channel" %}}
+   
+=== "Apache Kafka Channel"
 
-Uninstall the Apache Kafka Channel by running:
+    Uninstall the Apache Kafka Channel by running:
 
-   ```bash
-   curl -L "{{< artifact org="knative-sandbox" repo="eventing-kafka" file="channel-consolidated.yaml" >}}" \
-    | sed 's/REPLACE_WITH_CLUSTER_URL/my-cluster-kafka-bootstrap.kafka:9092/' \
-    | kubectl delete -f -
-   ```
+       ```bash
+       curl -L "{{ artifact(org="knative-sandbox", repo="eventing-kafka", file="channel-consolidated.yaml") }}" \
+        | sed 's/REPLACE_WITH_CLUSTER_URL/my-cluster-kafka-bootstrap.kafka:9092/' \
+        | kubectl delete -f -
+       ```
 
-   <!-- Ideally write steps for uninstalling Apache Kafka for Kubernetes here. -->
+       <!-- Ideally write steps for uninstalling Apache Kafka for Kubernetes here. -->
 
-{{< /tab >}}
 
-{{% tab name="Google Cloud Pub/Sub Channel" %}}
 
-Uninstall the Google Cloud Pub/Sub Channel by running:
+=== "Google Cloud Pub/Sub Channel"
 
-   ```bash
-   kubectl delete -f {{< artifact org="google" repo="knative-gcp" file="cloud-run-events.yaml" >}}
-   ```
+    Uninstall the Google Cloud Pub/Sub Channel by running:
 
-{{< /tab >}}
+       ```bash
+       kubectl delete -f {{ artifact(org="google", repo="knative-gcp", file="cloud-run-events.yaml") }}
+       ```
 
-{{% tab name="In-Memory (standalone)" %}}
 
-Uninstall the in-memory channel implementation by running:
 
-```bash
-kubectl delete -f {{< artifact repo="eventing" file="in-memory-channel.yaml" >}}
-```
+=== "In-Memory (standalone)"
 
-{{< /tab >}}
-
-{{% tab name="NATS Channel" %}}
-
-1. Uninstall the NATS Streaming channel by running:
+    Uninstall the in-memory channel implementation by running:
 
     ```bash
-    kubectl delete -f {{< artifact org="knative-sandbox" repo="eventing-natss" file="300-natss-channel.yaml" >}}
+    kubectl delete -f {{ artifact( repo="eventing", file="in-memory-channel.yaml") }}
     ```
 
-1. Uninstall NATS Streaming for Kubernetes. For more information, see the [eventing-natss](https://github.com/knative-sandbox/eventing-natss/tree/main/config) repository in GitHub.
 
-{{< /tab >}}
 
-<!-- TODO(https://github.com/knative/docs/issues/2153): Add more Channels here -->
+=== "NATS Channel"
 
-{{< /tabs >}}
+    1. Uninstall the NATS Streaming channel by running:
+
+        ```bash
+        kubectl delete -f {{ artifact(org="knative-sandbox", repo="eventing-natss", file="300-natss-channel.yaml") }}
+        ```
+
+    1. Uninstall NATS Streaming for Kubernetes. For more information, see the [eventing-natss](https://github.com/knative-sandbox/eventing-natss/tree/main/config) repository in GitHub.
+
+
+
+    <!-- TODO(https://github.com/knative/docs/issues/2153): Add more Channels here -->
+
+
+
 
 
 ### Uninstalling the Eventing component
@@ -428,7 +435,7 @@ Knative are still kept in the cluster. All your resources relying on Knative CRD
 If you have installed Knative using the Release page, remove the operator using the following command:
 
 ```
-kubectl delete -f {{< artifact org="knative" repo="operator" file="operator.yaml" >}}
+kubectl delete -f {{ artifact(org="knative", repo="operator", file="operator.yaml") }}
 ```
 
 If you have installed Knative from source, uninstall it using the following command while in the root

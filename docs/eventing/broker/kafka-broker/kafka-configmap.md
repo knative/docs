@@ -6,6 +6,8 @@ aliases:
   - docs/eventing/broker/kafka-configmap
 ---
 
+# Kafka Channel ConfigMap
+
 **NOTE:** This guide assumes Knative Eventing is installed in the `knative-eventing`
 namespace. If you have installed Knative Eventing in a different namespace, replace
 `knative-eventing` with the name of that namespace.

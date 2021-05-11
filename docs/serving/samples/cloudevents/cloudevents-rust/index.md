@@ -5,6 +5,8 @@ weight: 1
 type: "docs"
 ---
 
+# Cloud Events - Rust
+
 A simple web app written in Rust using [Actix web](https://github.com/actix/actix-web)
 that can receive CloudEvents. It supports running in two modes:
 
@@ -27,7 +29,7 @@ cluster. You can also download a working copy of the sample by running the
 following commands:
 
 ```shell
-git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
+git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
 cd knative-docs/docs/serving/samples/cloudevents/cloudevents-rust
 ```
 
@@ -56,26 +58,27 @@ This will build a statically linked binary, in order to create an image from scr
 docker build -t <image> .
 ```
 
-{{< tabs name="cloudevents_rust_deploy" default="kn" >}}
-{{% tab name="yaml" %}}
 
-To deploy the Knative Service, look in the `service.yaml` and replace `<image>` with the deployed image name. Then run:
+=== "yaml"
 
-```shell
-kubectl apply -f service.yaml
-```
+    To deploy the Knative Service, look in the `service.yaml` and replace `<image>` with the deployed image name. Then run:
 
-{{< /tab >}}
-{{% tab name="kn" %}}
+    ```shell
+    kubectl apply -f service.yaml
+    ```
 
-If using `kn` to deploy:
 
-```shell
-kn service create cloudevents-rust --image=<image>
-```
+=== "kn"
 
-{{< /tab >}}
-{{< /tabs >}}
+    If using `kn` to deploy:
+
+    ```shell
+    kn service create cloudevents-rust --image=<image>
+    ```
+
+
+
+
 
 ## Testing the sample
 
@@ -146,22 +149,23 @@ You'll get as result:
 
 To remove the sample app from your cluster, delete the service.
 
-{{< tabs name="cloudevents_rust_delete" default="kn" >}}
-{{% tab name="yaml" %}}
 
-Run:
+=== "yaml"
 
-```shell
-kubectl delete --filename service.yaml
-```
+    Run:
 
-{{< /tab >}}
-{{% tab name="kn" %}}
+    ```shell
+    kubectl delete --filename service.yaml
+    ```
 
-Run:
 
-```shell
-kn service delete cloudevents-rust
-```
+=== "kn"
 
-{{< /tab >}}
+    Run:
+
+    ```shell
+    kn service delete cloudevents-rust
+    ```
+
+
+

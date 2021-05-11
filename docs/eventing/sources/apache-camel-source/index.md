@@ -7,6 +7,8 @@ aliases:
   - /docs/eventing/samples/apache-camel-source
 ---
 
+# Apache Camel source
+
 These samples show how to configure Camel Sources. These event sources are highly dynamic and allow you to
 generate events from a variety of systems (cloud platforms, social networks, datastores, message brokers, legacy systems, etc.),
 leveraging all the [300+ components provided by Apache Camel](https://camel.apache.org/components/latest/).

@@ -5,6 +5,8 @@ weight: 30
 type: "docs"
 ---
 
+# GitHub source
+
 GitHub Source example shows how to wire GitHub events for consumption
 by a Knative Service.
 

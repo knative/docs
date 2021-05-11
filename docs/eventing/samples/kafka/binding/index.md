@@ -5,6 +5,8 @@ weight: 20
 type: "docs"
 ---
 
+# Apache Kafka Binding Example
+
 KafkaBinding is responsible for injecting Kafka bootstrap connection information
 into a Kubernetes resource that embed a PodSpec (as `spec.template.spec`). This
 enables easy bootstrapping of a Kafka client.

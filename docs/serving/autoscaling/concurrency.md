@@ -5,6 +5,8 @@ weight: 40
 type: "docs"
 ---
 
+# Configuring concurrency
+
 Concurrency determines the number of simultaneous requests that can be processed by each replica of an application at any given time.
 <!-- this is where including files would be useful. We could create a concurrency global config module and insert it here, in the docs for metrics, and in the docs for targets. Showing the correct information each time instead of having it in one place with the per revision config jumbled in with it makes it easier to understand IMHO, and would mean users don't need to visit different pages or hunt for the same information for similar user stories @abrennan89.-->
 For per-revision concurrency, you must configure both `autoscaling.knative.dev/metric`and `autoscaling.knative.dev/target` for a [soft limit](#soft-limit), or `containerConcurrency` for a [hard limit](#hard-limit).
@@ -32,45 +34,46 @@ If concurrency reaches the hard limit, surplus requests will be buffered and mus
 * **Default:** `"100"`
 
 **Example:**
-{{< tabs name="target-concurrency" default="Per Revision" >}}
-{{% tab name="Per Revision" %}}
-```yaml
-apiVersion: serving.knative.dev/v1
-kind: Service
-metadata:
-  name: helloworld-go
-  namespace: default
-spec:
-  template:
+
+=== "Per Revision"
+    ```yaml
+    apiVersion: serving.knative.dev/v1
+    kind: Service
     metadata:
-      annotations:
-        autoscaling.knative.dev/target: "200"
-```
-{{< /tab >}}
-{{% tab name="Global (ConfigMap)" %}}
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
- name: config-autoscaler
- namespace: knative-serving
-data:
- container-concurrency-target-default: "200"
-```
-{{< /tab >}}
-{{% tab name="Global (Operator)" %}}
-```yaml
-apiVersion: operator.knative.dev/v1alpha1
-kind: KnativeServing
-metadata:
-  name: knative-serving
-spec:
-  config:
-    autoscaler:
-      container-concurrency-target-default: "200"
-```
-{{< /tab >}}
-{{< /tabs >}}
+      name: helloworld-go
+      namespace: default
+    spec:
+      template:
+        metadata:
+          annotations:
+            autoscaling.knative.dev/target: "200"
+    ```
+
+=== "Global (ConfigMap)"
+    ```yaml
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+     name: config-autoscaler
+     namespace: knative-serving
+    data:
+     container-concurrency-target-default: "200"
+    ```
+
+=== "Global (Operator)"
+    ```yaml
+    apiVersion: operator.knative.dev/v1alpha1
+    kind: KnativeServing
+    metadata:
+      name: knative-serving
+    spec:
+      config:
+        autoscaler:
+          container-concurrency-target-default: "200"
+    ```
+
+
+
 
 ### Hard limit
 
@@ -86,45 +89,46 @@ There is no global setting for the hard limit in the autoscaling ConfigMap, beca
 * **Possible values:** integer
 * **Default:** `0`, meaning no limit
 
-{{< tabs name="container-concurrency" default="Per Revision" >}}
-{{% tab name="Per Revision" %}}
-**Example:**
-```yaml
-apiVersion: serving.knative.dev/v1
-kind: Service
-metadata:
-  name: helloworld-go
-  namespace: default
-spec:
-  template:
+
+=== "Per Revision"
+    **Example:**
+    ```yaml
+    apiVersion: serving.knative.dev/v1
+    kind: Service
+    metadata:
+      name: helloworld-go
+      namespace: default
     spec:
-      containerConcurrency: 50
-```
-{{< /tab >}}
-{{% tab name="Global (Defaults ConfigMap)" %}}
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
- name: config-defaults
- namespace: knative-serving
-data:
- container-concurrency: "50"
-```
-{{< /tab >}}
-{{% tab name="Global (Operator)" %}}
-```yaml
-apiVersion: operator.knative.dev/v1alpha1
-kind: KnativeServing
-metadata:
-  name: knative-serving
-spec:
-  config:
-    defaults:
-      container-concurrency: "50"
-```
-{{< /tab >}}
-{{< /tabs >}}
+      template:
+        spec:
+          containerConcurrency: 50
+    ```
+
+=== "Global (Defaults ConfigMap)"
+    ```yaml
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+     name: config-defaults
+     namespace: knative-serving
+    data:
+     container-concurrency: "50"
+    ```
+
+=== "Global (Operator)"
+    ```yaml
+    apiVersion: operator.knative.dev/v1alpha1
+    kind: KnativeServing
+    metadata:
+      name: knative-serving
+    spec:
+      config:
+        defaults:
+          container-concurrency: "50"
+    ```
+
+
+
 
 ## Target utilization
 
@@ -142,45 +146,46 @@ Requests numbered 7 to 10 will still be sent to the existing replicas, but this 
 * **Default:** `70`
 
 **Example:**
-{{< tabs name="target-utilization" default="Per Revision" >}}
-{{% tab name="Per Revision" %}}
-```yaml
-apiVersion: serving.knative.dev/v1
-kind: Service
-metadata:
-  name: helloworld-go
-  namespace: default
-spec:
-  template:
+
+=== "Per Revision"
+    ```yaml
+    apiVersion: serving.knative.dev/v1
+    kind: Service
     metadata:
-      annotations:
-        autoscaling.knative.dev/targetUtilizationPercentage: "80"
+      name: helloworld-go
+      namespace: default
     spec:
-      containers:
-        - image: gcr.io/knative-samples/helloworld-go
-```
-{{< /tab >}}
-{{% tab name="Global (ConfigMap)" %}}
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
- name: config-autoscaler
- namespace: knative-serving
-data:
- container-concurrency-target-percentage: "80"
-```
-{{< /tab >}}
-{{% tab name="Global (Operator)" %}}
-```yaml
-apiVersion: operator.knative.dev/v1alpha1
-kind: KnativeServing
-metadata:
-  name: knative-serving
-spec:
-  config:
-    autoscaler:
-      container-concurrency-target-percentage: "80"
-```
-{{< /tab >}}
-{{< /tabs >}}
+      template:
+        metadata:
+          annotations:
+            autoscaling.knative.dev/targetUtilizationPercentage: "80"
+        spec:
+          containers:
+            - image: gcr.io/knative-samples/helloworld-go
+    ```
+
+=== "Global (ConfigMap)"
+    ```yaml
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+     name: config-autoscaler
+     namespace: knative-serving
+    data:
+     container-concurrency-target-percentage: "80"
+    ```
+
+=== "Global (Operator)"
+    ```yaml
+    apiVersion: operator.knative.dev/v1alpha1
+    kind: KnativeServing
+    metadata:
+      name: knative-serving
+    spec:
+      config:
+        autoscaler:
+          container-concurrency-target-percentage: "80"
+    ```
+
+
+

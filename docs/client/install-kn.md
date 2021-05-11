@@ -6,6 +6,8 @@ aliases:
   - /docs/install/install-kn
 ---
 
+# Installing kn
+
 This guide provides details about how you can install the Knative `kn` CLI.
 
 ## Install kn using brew

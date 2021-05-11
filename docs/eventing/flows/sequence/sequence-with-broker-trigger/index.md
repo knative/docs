@@ -7,6 +7,8 @@ aliases:
    - /docs/eventing/samples/sequence/sequence-with-broker-trigger
 ---
 
+# Using Sequence with Broker and Trigger
+
 We are going to create the following logical configuration. We create a
 PingSource, feeding events into the Broker, then we create a `Filter` that wires
 those events into a [`Sequence`](../../../flows/sequence.md) consisting of 3

@@ -7,6 +7,8 @@ aliases:
    - /docs/eventing/samples/sequence/sequence-terminal
 ---
 
+# Sequence terminal
+
 We are going to create the following logical configuration. We create a
 PingSource, feeding events to a [`Sequence`](../../../flows/sequence.md).
 Sequence can then do either external work, or out of band create additional

@@ -7,6 +7,8 @@ aliases:
   - /docs/install/getting-started-knative-app/
 ---
 
+# Getting Started with App Deployment
+
 This guide shows you how to deploy an app using Knative, then interact with it
 using cURL requests.
 
@@ -118,48 +120,49 @@ To see if your app has been deployed successfully, you need the URL created by K
 
 1. To find the URL for your service, use either `kn` or `kubectl`
 
-  {{< tabs name="create" default="kn">}}
-  {{% tab name="kn" %}}
+  
+=== "kn"
 
-   ```shell
-   kn service describe helloworld-go
-   ```
+       ```shell
+       kn service describe helloworld-go
+       ```
 
-   This will return something like
+       This will return something like
 
-   ```
-   Name        helloworld-go
-   Namespace   default
-   Age         12m
-   URL         http://helloworld-go.default.34.83.80.117.xip.io
+       ```
+       Name        helloworld-go
+       Namespace   default
+       Age         12m
+       URL         http://helloworld-go.default.34.83.80.117.xip.io
 
-   Revisions:
-     100%  @latest (helloworld-go-dyqsj-1) [1] (39s)
-           Image:  gcr.io/knative-samples/helloworld-go (pinned to 946b7c)
+       Revisions:
+         100%  @latest (helloworld-go-dyqsj-1) [1] (39s)
+               Image:  gcr.io/knative-samples/helloworld-go (pinned to 946b7c)
 
-   Conditions:
-     OK TYPE                   AGE REASON
-     ++ Ready                  25s
-     ++ ConfigurationsReady    26s
-     ++ RoutesReady            25s
-   ```
+       Conditions:
+         OK TYPE                   AGE REASON
+         ++ Ready                  25s
+         ++ ConfigurationsReady    26s
+         ++ RoutesReady            25s
+       ```
 
-  {{< /tab >}}
-  {{% tab name="kubectl" %}}
 
-   ```shell
-   kubectl get ksvc helloworld-go
-   ```
+=== "kubectl"
 
-   The command will return the following:
+       ```shell
+       kubectl get ksvc helloworld-go
+       ```
 
-   ```shell
-   NAME            URL                                                LATESTCREATED         LATESTREADY           READY   REASON
-   helloworld-go   http://helloworld-go.default.34.83.80.117.xip.io   helloworld-go-96dtk   helloworld-go-96dtk   True
-   ```
+       The command will return the following:
 
-  {{< /tab >}}
-  {{< /tabs >}}
+       ```shell
+       NAME            URL                                                LATESTCREATED         LATESTREADY           READY   REASON
+       helloworld-go   http://helloworld-go.default.34.83.80.117.xip.io   helloworld-go-96dtk   helloworld-go-96dtk   True
+       ```
+
+
+
+
 
    > Note: If your URL includes `example.com` then consult the setup instructions for
    > configuring DNS (e.g. with `xip.io`), or [using a Custom Domain](../serving/using-a-custom-domain.md).

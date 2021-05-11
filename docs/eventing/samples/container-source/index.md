@@ -5,6 +5,8 @@ weight: 10
 type: "docs"
 ---
 
+# Container Source Example
+
 ContainerSource will start a container image which will generate events under
 certain situations and send messages to a sink URI. It also can be an easy way
 to support your own event sources in Knative. This guide shows how to configure
@@ -24,7 +26,7 @@ Knative [event-sources](https://github.com/knative/eventing) has a
 sample of heartbeats event source. You could clone the source code by
 
 ```
-git clone -b "{{< branch >}}" https://github.com/knative/eventing.git
+git clone -b "{{ branch }}" https://github.com/knative/eventing.git
 ```
 
 And then build a heartbeats image and publish to your image repo with

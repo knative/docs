@@ -7,6 +7,8 @@ aliases:
    - /docs/eventing/samples/sequence/sequence-replay-to-event-display
 ---
 
+# Sequence wired to event-display
+
 We are going to create the following logical configuration. We create a
 PingSource, feeding events to a [`Sequence`](../../../flows/sequence.md), then
 taking the output of that `Sequence` and displaying the resulting output.

@@ -4,6 +4,8 @@ weight: 25
 type: "docs"
 ---
 
+# Enabling requests to Knative services when additional authorization policies are enabled
+
 Knative Serving system pods, such as the activator and autoscaler components, require access to your deployed Knative services.
 If you have configured additional security features, such as Istio's authorization policy, you must enable access to your Knative service for these system pods.
 

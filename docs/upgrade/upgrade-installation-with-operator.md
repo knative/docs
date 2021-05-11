@@ -6,6 +6,8 @@ aliases:
   - /docs/install/upgrade-installation-with-operator
 ---
 
+# Upgrading using the Knative Operator
+
 The attribute `spec.version` is the only field you need to change in the
 Serving or Eventing custom resource to perform an upgrade. You do not need to specify the version for the `patch` number, because the Knative Operator matches the latest available `patch` number, as long as you specify `major.minor` for the version. For example, you only need to specify `"0.22"` to upgrade to the 0.22 release, you do not need to specify the exact `patch` number.
 

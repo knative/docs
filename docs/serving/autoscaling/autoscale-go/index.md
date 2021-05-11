@@ -7,6 +7,8 @@ aliases:
     - /docs/serving/samples/autoscale-go
 ---
 
+# Autoscale Sample App - Go
+
 A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 
 ## Prerequisites
@@ -17,7 +19,7 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 1. Clone this repository, and move into the sample directory:
 
    ```shell
-   git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
+   git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
    cd knative-docs
    ```
 

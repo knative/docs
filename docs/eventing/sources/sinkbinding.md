@@ -7,6 +7,8 @@ aliases:
     - /docs/eventing/samples/sinkbinding/README
 ---
 
+# Sink binding
+
 ![version](https://img.shields.io/badge/API_Version-v1-red?style=flat-square)
 
 The `SinkBinding` custom object supports decoupling event production from delivery addressing.
@@ -48,35 +50,36 @@ Create a Knative service if you do not have an existing event sink that you want
 #### Procedure
 Create a Knative service:
 
-{{< tabs name="knative_service" default="kn" >}}
-{{% tab name="kn" %}}
 
-```bash
-kn service create hello --image gcr.io/knative-releases/knative.dev/eventing/cmd/event_display --env RESPONSE="Hello Serverless!"
-```
+=== "kn"
 
-{{< /tab >}}
-{{% tab name="yaml" %}}
-
-1. Copy the sample YAML into a `service.yaml` file:
-    ```yaml
-    apiVersion: serving.knative.dev/v1
-    kind: Service
-    metadata:
-      name: event-display
-    spec:
-      template:
-        spec:
-          containers:
-            - image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
-    ```
-2. Apply the file:
     ```bash
-    kubectl apply --filename service.yaml
+    kn service create hello --image gcr.io/knative-releases/knative.dev/eventing/cmd/event_display --env RESPONSE="Hello Serverless!"
     ```
 
-{{< /tab >}}
-{{< /tabs >}}
+
+=== "yaml"
+
+    1. Copy the sample YAML into a `service.yaml` file:
+        ```yaml
+        apiVersion: serving.knative.dev/v1
+        kind: Service
+        metadata:
+          name: event-display
+        spec:
+          template:
+            spec:
+              containers:
+                - image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
+        ```
+    2. Apply the file:
+        ```bash
+        kubectl apply --filename service.yaml
+        ```
+
+
+
+
 
 ### Creating a cron job
 
@@ -140,7 +143,7 @@ sample heartbeats event source.
 
 1. Clone the `event-contib` repository:
     ```bash
-    $ git clone -b "{{< branch >}}" https://github.com/knative/eventing.git
+    $ git clone -b "{{ branch }}" https://github.com/knative/eventing.git
     ```
 2. Build a heartbeats image, and publish the image to your image repository:
     ```bash
@@ -161,46 +164,47 @@ Create a `SinkBinding` object that directs events from your cron job to the even
 
 Create a sink binding:
 
-{{< tabs name="sinkbinding" default="kn" >}}
-{{% tab name="kn" %}}
 
-```bash
-kn source binding create bind-heartbeat \
-  --namespace sinkbinding-example \
-  --subject "Job:batch/v1:app=heartbeat-cron" \
-  --sink http://event-display.svc.cluster.local \
-  --ce-override "sink=bound"
-```
+=== "kn"
 
-{{< /tab >}}
-{{% tab name="yaml" %}}
-
-1. Copy the sample YAML into a `cronjob.yaml` file:
-    ```yaml
-    apiVersion: sources.knative.dev/v1alpha1
-    kind: SinkBinding
-    metadata:
-      name: bind-heartbeat
-    spec:
-      subject:
-        apiVersion: batch/v1
-        kind: Job
-        selector:
-          matchLabels:
-            app: heartbeat-cron
-        sink:
-          ref:
-            apiVersion: serving.knative.dev/v1
-            kind: Service
-            name: event-display
-    ```
-2. Apply the file:
     ```bash
-    kubectl apply --filename heartbeats-source.yaml
+    kn source binding create bind-heartbeat \
+      --namespace sinkbinding-example \
+      --subject "Job:batch/v1:app=heartbeat-cron" \
+      --sink http://event-display.svc.cluster.local \
+      --ce-override "sink=bound"
     ```
 
-{{< /tab >}}
-{{< /tabs >}}
+
+=== "yaml"
+
+    1. Copy the sample YAML into a `cronjob.yaml` file:
+        ```yaml
+        apiVersion: sources.knative.dev/v1alpha1
+        kind: SinkBinding
+        metadata:
+          name: bind-heartbeat
+        spec:
+          subject:
+            apiVersion: batch/v1
+            kind: Job
+            selector:
+              matchLabels:
+                app: heartbeat-cron
+            sink:
+              ref:
+                apiVersion: serving.knative.dev/v1
+                kind: Service
+                name: event-display
+        ```
+    2. Apply the file:
+        ```bash
+        kubectl apply --filename heartbeats-source.yaml
+        ```
+
+
+
+
 
 ## Verification steps
 

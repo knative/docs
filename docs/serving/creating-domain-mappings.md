@@ -8,6 +8,8 @@ aliases:
   - /docs/serving/services/using-a-custom-domain-per-service
 ---
 
+# Setting up a custom domain per Service
+
 Knative services are automatically given a default domain name based on the
 cluster configuration, e.g. "mysvc.mynamespace.mydomain". You can also map a
 single custom domain name that you own to a specific Knative service using the

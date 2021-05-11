@@ -7,6 +7,8 @@ aliases:
   - /docs/eventing/samples/writing-event-source/05-receive-adapter
 ---
 
+# Receive Adapter Implementation and Design
+
 ## Receive Adapter cmd
 Similar to the controller, we'll need an injection based `main.go` similar to the controller under `cmd/receiver_adapter/main.go`
 ```go

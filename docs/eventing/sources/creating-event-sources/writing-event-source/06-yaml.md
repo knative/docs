@@ -7,6 +7,8 @@ aliases:
   - /docs/eventing/samples/writing-event-source/06-yaml
 ---
 
+# Publishing to your Kubernetes cluster
+
 ## Run the sample source locally
 
 Start a minikube cluster.

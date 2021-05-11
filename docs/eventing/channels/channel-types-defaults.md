@@ -5,6 +5,8 @@ type: "docs"
 showlandingtoc: "true"
 ---
 
+# Channel types and defaults
+
 Knative provides the InMemoryChannel channel implementation by default. This default implementation is useful for developers who do not want to configure a specific implementation type, such as Apache Kafka or NATSS channels.
 
 **NOTE:** InMemoryChannel channels should not be used in production environments.

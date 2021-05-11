@@ -5,6 +5,8 @@ weight: 64
 type: "docs"
 ---
 
+# Enabling automatic TLS certificate provisioning
+
 If you install and configure cert-manager, you can configure Knative to
 automatically obtain new TLS certificates and renew existing ones for Knative
 Services.
@@ -161,7 +163,7 @@ See how the Google Cloud DNS is defined as the provider:
 1.  If `networking-certmanager` is not found, run the following command:
 
     ```shell
-    kubectl apply --filename {{< artifact repo="net-certmanager" file="release.yaml" >}}
+    kubectl apply --filename {{ artifact( repo="net-certmanager", file="release.yaml") }}
     ```
 
 ### Install networking-ns-cert component
@@ -181,7 +183,7 @@ running the following command:
 1. If `networking-ns-cert` deployment is not found, run the following command:
 
     ```shell
-    kubectl apply --filename {{< artifact repo="serving" file="serving-nscert.yaml" >}}
+    kubectl apply --filename {{ artifact( repo="serving", file="serving-nscert.yaml") }}
     ```
 
 ### Configure config-certmanager ConfigMap

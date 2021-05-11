@@ -2,6 +2,9 @@
 .idea/
 .vscode/
 .history/
+__pycache__
+hack/__pycache__
+/site/
 
 
 .settings/
