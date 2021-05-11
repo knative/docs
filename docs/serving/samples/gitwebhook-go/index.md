@@ -5,6 +5,8 @@ weight: 1
 type: "docs"
 ---
 
+# GitHub webhook sample - Go
+
 A handler written in Go that demonstrates interacting with GitHub through a
 webhook.
 
@@ -32,7 +34,7 @@ You must meet the following requirements to run this sample:
 1. Download a copy of the code:
 
    ```shell
-   git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
+   git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
    cd knative-docs/docs/serving/samples/gitwebhook-go
    ```
 

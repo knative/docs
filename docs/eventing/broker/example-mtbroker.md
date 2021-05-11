@@ -5,6 +5,8 @@ type: "docs"
 showlandingtoc: "false"
 ---
 
+# Broker configuration example
+
 The following is a full example of a multi-tenant (MT) channel-based Broker object which shows the possible configuration options that you can modify:
 
 ```yaml

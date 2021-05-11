@@ -5,6 +5,8 @@ weight: 1
 type: "docs"
 ---
 
+# Cloud Events - Java and Vert.x
+
 A simple web app written in Java using Vert.x that can receive CloudEvents. It
 supports running in two modes:
 
@@ -27,7 +29,7 @@ cluster. You can also download a working copy of the sample, by running the
 following commands:
 
 ```shell
-git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
+git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
 cd knative-docs/docs/serving/samples/cloudevents/cloudevents-vertx
 ```
 
@@ -47,26 +49,27 @@ To build the image, run:
 mvn compile jib:build -Dimage=<image_name>
 ```
 
-{{< tabs name="cloudevents_vertx_deploy" default="kn" >}}
-{{% tab name="yaml" %}}
 
-To deploy the Knative Service, look in the `service.yaml` and replace `<image>` with the deployed image name. Then run:
+=== "yaml"
 
-```shell
-kubectl apply -f service.yaml
-```
+    To deploy the Knative Service, look in the `service.yaml` and replace `<image>` with the deployed image name. Then run:
 
-{{< /tab >}}
-{{% tab name="kn" %}}
+    ```shell
+    kubectl apply -f service.yaml
+    ```
 
-If using `kn` to deploy:
 
-```shell
-kn service create cloudevents-vertx --image=<image>
-```
+=== "kn"
 
-{{< /tab >}}
-{{< /tabs >}}
+    If using `kn` to deploy:
+
+    ```shell
+    kn service create cloudevents-vertx --image=<image>
+    ```
+
+
+
+
 
 ## Testing the sample
 
@@ -137,23 +140,24 @@ You'll see on the console:
 
 To remove the sample app from your cluster, delete the service:
 
-{{< tabs name="cloudevents_vertx_delete" default="kn" >}}
-{{% tab name="yaml" %}}
 
-Run:
+=== "yaml"
 
-```shell
-kubectl delete --filename service.yaml
-```
+    Run:
 
-{{< /tab >}}
-{{% tab name="kn" %}}
+    ```shell
+    kubectl delete --filename service.yaml
+    ```
 
-Run:
 
-```shell
-kn service delete cloudevents-vertx
-```
+=== "kn"
 
-{{< /tab >}}
+    Run:
+
+    ```shell
+    kn service delete cloudevents-vertx
+    ```
+
+
+
 

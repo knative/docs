@@ -4,6 +4,8 @@ weight: 50
 type: "docs"
 ---
 
+# Feature/Extension Flags
+
 Knative is deliberate about the concepts it incorporates into its core API. The API aims to be portable and abstracts away the specificities of each users' implementation. That being said, the Knative API should empower users to surface extra features and extensions possible within their platform of choice.
 
 This document introduces two concepts:

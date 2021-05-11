@@ -5,6 +5,8 @@ weight: 1
 type: "docs"
 ---
 
+# gRPC Server - Go
+
 A [gRPC](https://grpc.io) server written in Go.
 
 This sample can be used to try out gRPC, HTTP/2, and custom port configuration
@@ -27,7 +29,7 @@ for production containers.
 1. Download a copy of the code:
 
   ```shell
-  git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
+  git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
   cd knative-docs/docs/serving/samples/grpc-ping-go
   ```
 

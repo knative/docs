@@ -5,6 +5,8 @@ weight: 50
 type: "docs"
 ---
 
+# Collecting Metrics with OpenTelemetry
+
 This document describes how to set up the
 [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/) to receive
 metrics from the Knative infrastructure components and distribute them to

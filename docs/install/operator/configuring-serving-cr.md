@@ -6,6 +6,8 @@ aliases:
 - /docs/operator/configuring-serving-cr/
 ---
 
+# Configuring the Serving Operator Custom Resource
+
 The Knative Serving operator can be configured with these options:
 
 - [Version Configuration](#version-configuration)

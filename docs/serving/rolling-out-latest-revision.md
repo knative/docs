@@ -4,6 +4,8 @@ weight: 20
 type: "docs"
 ---
 
+# Gradually rolling out latest Revisions
+
 If your traffic configuration points to a Configuration target, rather than revision target, it means that when a new Revision is created and ready 100% of that target's traffic will be immediately shifted to the new revision, which might not be ready to accept that scale with a single pod and with cold starts taking some time it is possible to end up in a situation where a lot of requests are backed up either at QP or Activator and after a while they might expire or QP might outright reject the requests.
 
 To mitigate this problem Knative as of 0.20 release Knative provides users with a possibility to gradually shift the traffic to the latest revision.
@@ -19,43 +21,44 @@ This feature is available to untagged and tagged traffic targets configured for 
 
 This value currently can be configured on the cluster level (starting v0.20) via a setting in the `config-network` ConfigMap or per Kservice or Route using an annotation (staring v.0.21).
 
-{{< tabs name="Rollout Duration" default="Per-revision" >}}
-{{% tab name="Per-revision" %}}
-```yaml
-apiVersion: serving.knative.dev/v1
-kind: Service
-metadata:
-  name: helloworld-go
-  namespace: default
-  annotations:
-    serving.knative.dev/rolloutDuration: "380s"
-...
-```
-{{< /tab >}}
-{{% tab name="Global (ConfigMap)" %}}
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
- name: config-network
- namespace: knative-serving
-data:
-  rolloutDuration: "380s"  # Value in seconds.
-```
-{{< /tab >}}
-{{% tab name="Global (Operator)" %}}
-```yaml
-apiVersion: operator.knative.dev/v1alpha1
-kind: KnativeServing
-metadata:
-  name: knative-serving
-spec:
-  config:
-    network:
-       rolloutDuration: "380s"
-```
-{{< /tab >}}
-{{< /tabs >}}
+
+=== "Per-revision"
+    ```yaml
+    apiVersion: serving.knative.dev/v1
+    kind: Service
+    metadata:
+      name: helloworld-go
+      namespace: default
+      annotations:
+        serving.knative.dev/rolloutDuration: "380s"
+    ...
+    ```
+
+=== "Global (ConfigMap)"
+    ```yaml
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+     name: config-network
+     namespace: knative-serving
+    data:
+      rolloutDuration: "380s"  # Value in seconds.
+    ```
+
+=== "Global (Operator)"
+    ```yaml
+    apiVersion: operator.knative.dev/v1alpha1
+    kind: KnativeServing
+    metadata:
+      name: knative-serving
+    spec:
+      config:
+        network:
+           rolloutDuration: "380s"
+    ```
+
+
+
 
 
 

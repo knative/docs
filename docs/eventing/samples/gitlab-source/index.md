@@ -5,6 +5,8 @@ weight: 30
 type: "docs"
 ---
 
+# GitLab source
+
 GitLab Source example shows how to wire GitLab events for consumption by a
 Knative Service.
 

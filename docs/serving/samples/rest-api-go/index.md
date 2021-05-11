@@ -5,6 +5,8 @@ weight: 1
 type: "docs"
 ---
 
+# Creating a RESTful Service - Go
+
 This "stock ticker" sample demonstrates how to create and run a simple RESTful
 service on Knative Serving. The exposed endpoint outputs the stock price for a
 given "[stock symbol](https://www.marketwatch.com/tools/quotes/lookup.asp)",
@@ -22,7 +24,7 @@ like `AAPL`,`AMZN`, `GOOG`, `MSFT`, etc.
 1. Download a copy of the code:
 
    ```shell
-   git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
+   git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
    cd knative-docs
    ```
 

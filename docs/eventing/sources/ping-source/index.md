@@ -8,6 +8,8 @@ aliases:
   - /docs/eventing/samples/ping-source
 ---
 
+# PingSource
+
 ![version](https://img.shields.io/badge/API_Version-v1-green?style=flat-square)
 
 A PingSource is an event source that produces events with a fixed payload on a specified [cron](https://en.wikipedia.org/wiki/Cron) schedule.
@@ -32,83 +34,85 @@ The following example shows how you can configure a PingSource as an event sourc
 
 1. To verify that the PingSource is working correctly, create an example sink in the `pingsource-example` namespace that dumps incoming messages to a log, by entering the command:
 
-    {{< tabs name="create-sink" default="kubectl" >}}
-    {{% tab name="kubectl" %}}
+    
+=== "kubectl"
 
-```shell
-kubectl -n pingsource-example apply -f - << EOF
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: event-display
-spec:
-  replicas: 1
-  selector:
-    matchLabels: &labels
-      app: event-display
-  template:
+    ```shell
+    kubectl -n pingsource-example apply -f - << EOF
+    apiVersion: apps/v1
+    kind: Deployment
     metadata:
-      labels: *labels
+      name: event-display
     spec:
-      containers:
-        - name: event-display
-          image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+      replicas: 1
+      selector:
+        matchLabels: &labels
+          app: event-display
+      template:
+        metadata:
+          labels: *labels
+        spec:
+          containers:
+            - name: event-display
+              image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
 
----
+    ---
 
-kind: Service
-apiVersion: v1
-metadata:
-  name: event-display
-spec:
-  selector:
-    app: event-display
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 8080
-EOF
-```
-    {{< /tab >}}
-    {{< /tabs >}}
+    kind: Service
+    apiVersion: v1
+    metadata:
+      name: event-display
+    spec:
+      selector:
+        app: event-display
+      ports:
+      - protocol: TCP
+        port: 80
+        targetPort: 8080
+    EOF
+    ```
+
+
+
     <br>
 
 1. Create a PingSource that sends an event containing `{"message": "Hello world!"}` every minute, by entering the command:
 
-    {{< tabs name="create-source" default="kn" >}}
-    {{% tab name="YAML" %}}
+    
+=== "YAML"
 
-```shell
-kubectl create -n pingsource-example -f - <<EOF
-apiVersion: sources.knative.dev/v1
-kind: PingSource
-metadata:
-  name: test-ping-source
-spec:
-  schedule: "*/1 * * * *"
-  contentType: "application/json"
-  data: '{"message": "Hello world!"}'
-  sink:
-    ref:
-      apiVersion: v1
-      kind: Service
-      name: event-display
-EOF
-```
+    ```shell
+    kubectl create -n pingsource-example -f - <<EOF
+    apiVersion: sources.knative.dev/v1
+    kind: PingSource
+    metadata:
+      name: test-ping-source
+    spec:
+      schedule: "*/1 * * * *"
+      contentType: "application/json"
+      data: '{"message": "Hello world!"}'
+      sink:
+        ref:
+          apiVersion: v1
+          kind: Service
+          name: event-display
+    EOF
+    ```
 
-    {{< /tab >}}
-    {{% tab name="kn" %}}
 
-```shell
-kn source ping create test-ping-source \
-  --namespace pingsource-example \
-  --schedule "*/1 * * * *" \
-  --data '{"message": "Hello world!"}' \
-  --sink http://event-display.pingsource-example.svc.cluster.local
-```
+=== "kn"
 
-    {{< /tab >}}
-    {{< /tabs >}}
+    ```shell
+    kn source ping create test-ping-source \
+      --namespace pingsource-example \
+      --schedule "*/1 * * * *" \
+      --data '{"message": "Hello world!"}' \
+      --sink http://event-display.pingsource-example.svc.cluster.local
+    ```
+
+
+
+
     <br>
 
 1. Optional: Create a PingSource that sends binary data.
@@ -138,22 +142,23 @@ kn source ping create test-ping-source \
 1. View the logs for the `event-display` event consumer by
 entering the following command:
 
-    {{< tabs name="View logs" default="kubectl" >}}
-    {{% tab name="kubectl" %}}
+    
+=== "kubectl"
 
-```shell
-kubectl -n pingsource-example logs -l app=event-display --tail=100
-```
+    ```shell
+    kubectl -n pingsource-example logs -l app=event-display --tail=100
+    ```
 
-    {{< /tab >}}
-    {{% tab name="kail" %}}
 
-```shell
-kail -l serving.knative.dev/service=event-display -c user-container --since=10m
-```
+=== "kail"
 
-    {{< /tab >}}
-    {{< /tabs >}}
+    ```shell
+    kail -l serving.knative.dev/service=event-display -c user-container --since=10m
+    ```
+
+
+
+
     <br>
 
     This returns the `Attributes` and `Data` of the events that the PingSource sent to the `event-display` service:
@@ -199,54 +204,56 @@ kail -l serving.knative.dev/service=event-display -c user-container --since=10m
 
 1. Optional: You can also delete the PingSource instance only by entering the following command:
 
-    {{< tabs name="delete-source" default="kubectl" >}}
-    {{% tab name="kubectl" %}}
+    
+=== "kubectl"
 
-```shell
-kubectl delete pingsources.sources.knative.dev test-ping-source
-```
+    ```shell
+    kubectl delete pingsources.sources.knative.dev test-ping-source
+    ```
 
-    {{< /tab >}}
-    {{% tab name="kn" %}}
 
-```shell
-kn source ping delete test-ping-source
-```
+=== "kn"
 
-    {{< /tab >}}
-    {{% tab name="kubectl: binary data PingSource" %}}
+    ```shell
+    kn source ping delete test-ping-source
+    ```
 
-```shell
-kubectl delete pingsources.sources.knative.dev test-ping-source-binary
-```
 
-    {{< /tab >}}
-    {{% tab name="kn: binary data PingSource" %}}
+=== "kubectl: binary data PingSource"
 
-```shell
-kn source ping delete test-ping-source-binary
-```
+    ```shell
+    kubectl delete pingsources.sources.knative.dev test-ping-source-binary
+    ```
 
-    {{< /tab >}}
-    {{< /tabs >}}
+
+=== "kn: binary data PingSource"
+
+    ```shell
+    kn source ping delete test-ping-source-binary
+    ```
+
+
+
+
     <br>
 
 
 1. Optional: Delete the `event-display` service:
 
-    {{< tabs name="delete-service" default="kubectl" >}}
-    {{% tab name="kubectl" %}}
+    
+=== "kubectl"
 
-```shell
-kubectl delete service.serving.knative.dev event-display
-```
+    ```shell
+    kubectl delete service.serving.knative.dev event-display
+    ```
 
-    {{< /tab >}}
-    {{% tab name="kn" %}}
 
-```shell
-kn service delete event-display
-```
+=== "kn"
 
-    {{< /tab >}}
-    {{< /tabs >}}
+    ```shell
+    kn service delete event-display
+    ```
+
+
+
+

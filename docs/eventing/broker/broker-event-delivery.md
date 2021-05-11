@@ -5,6 +5,8 @@ type: "docs"
 showlandingtoc: "false"
 ---
 
+# Event delivery
+
 You can configure how events are delivered for each broker by adding a `delivery` spec, as shown in the following example:
 
 ```yaml

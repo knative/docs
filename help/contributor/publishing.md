@@ -1,8 +1,8 @@
 ---
-title: "Staging and publishing Knative documentation"
-linkTitle: "Website help"
-weight: "60"
-type: "docs"
+title: 'Staging and publishing Knative documentation'
+linkTitle: 'Website help'
+weight: '60'
+type: 'docs'
 ---
 
 ## Testing your documentation
@@ -89,7 +89,7 @@ specific file scripts that enables optimal user experience in GitHub
 (not
 [`rel` or `relref`](https://gohugo.io/content-management/cross-references/#use-ref-and-relref)),
 etc.) and also meets Hugo/Docsy static site generator
-and template requirements (ie. _index.hmtl files, etc.)
+and template requirements (ie. \_index.hmtl files, etc.)
 
 The two local docs build options:
 
@@ -146,6 +146,7 @@ The two local docs build options:
     Alternatively, if you want to use Hugo's live-reload feature, you can make temporary
     changes to the copied files within the `content/en/` folder, and then when satisfied, you must
     copy those changes into the corresponding files of your knative/docs clone.
+
   - Files in `content/en/` are overwritten with a new copy of your local files in your knative/docs
     clone folder each time that you run this script. Note that the last set of built files remain
     in `content/en/` for you to run local tools against but are overwritten each time that you rerun the script.

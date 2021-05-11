@@ -4,6 +4,8 @@ weight: 99
 type: "docs"
 ---
 
+# Metrics API
+
 <br>
 
 **NOTE:** The metrics API may change in the future, this serves as a snapshot of the current metrics.

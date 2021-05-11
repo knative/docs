@@ -5,6 +5,8 @@ weight: 1
 type: "docs"
 ---
 
+# Knative multi-container samples
+
 A simple web app written in Go that you can use for multi container testing.
 
 ## Prerequisites
@@ -23,7 +25,7 @@ You can download a working copy of the sample, by entering the
 following command:
 
 ```shell
-git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
+git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
 ```
 
 ## Using the sample code

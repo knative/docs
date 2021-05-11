@@ -5,6 +5,8 @@ weight: 1
 type: "docs"
 ---
 
+# Hello World - PHP
+
 A simple web app written in PHP that you can use for testing. It reads in an env
 variable `TARGET` and prints `Hello ${TARGET}!`. If `TARGET` is not specified,
 it will use `World` as the `TARGET`.
@@ -14,7 +16,7 @@ cluster. You can also download a working copy of the sample, by running the
 following commands:
 
 ```shell
-git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
+git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
 cd knative-docs/docs/serving/samples/hello-world/helloworld-php
 ```
 
@@ -97,60 +99,61 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-php
 Once you have recreated the sample code files (or used the files in the sample
 folder) you're ready to build and deploy the sample app.
 
-{{< tabs name="helloworld_ruby" default="kn" >}}
-{{% tab name="yaml" %}}
 
-1. Use Docker to build the sample code into a container. To build and push with
-   Docker Hub, run these commands replacing `{username}` with your Docker Hub
-   username:
+=== "yaml"
 
-   ```shell
-   # Build the container on your local machine
-   docker build -t {username}/helloworld-php .
+    1. Use Docker to build the sample code into a container. To build and push with
+       Docker Hub, run these commands replacing `{username}` with your Docker Hub
+       username:
 
-   # Push the container to docker registry
-   docker push {username}/helloworld-php
-   ```
+       ```shell
+       # Build the container on your local machine
+       docker build -t {username}/helloworld-php .
 
-1. After the build has completed and the container is pushed to docker hub, you
-   can deploy the app into your cluster. Ensure that the container image value
-   in `service.yaml` matches the container you built in the previous step. Apply
-   the configuration using `kubectl`:
+       # Push the container to docker registry
+       docker push {username}/helloworld-php
+       ```
 
-   ```shell
-   kubectl apply --filename service.yaml
-   ```
+    1. After the build has completed and the container is pushed to docker hub, you
+       can deploy the app into your cluster. Ensure that the container image value
+       in `service.yaml` matches the container you built in the previous step. Apply
+       the configuration using `kubectl`:
 
-{{< /tab >}}
-{{% tab name="kn" %}}
+       ```shell
+       kubectl apply --filename service.yaml
+       ```
 
-   With `kn` you can deploy the service with
 
-   ```shell
-   kn service create helloworld-php --image=docker.io/{username}/helloworld-php --env TARGET="Ruby Sample v1"
-   ```
+=== "kn"
 
-   This will wait until your service is deployed and ready, and ultimately it will print the URL through which you can access the service.
+       With `kn` you can deploy the service with
 
-   The output will look like:
+       ```shell
+       kn service create helloworld-php --image=docker.io/{username}/helloworld-php --env TARGET="Ruby Sample v1"
+       ```
 
-   ```
-   Creating service 'helloworld-php' in namespace 'default':
+       This will wait until your service is deployed and ready, and ultimately it will print the URL through which you can access the service.
 
-    0.035s The Configuration is still working to reflect the latest desired specification.
-    0.139s The Route is still working to reflect the latest desired specification.
-    0.250s Configuration "helloworld-php" is waiting for a Revision to become ready.
-    8.040s ...
-    8.136s Ingress has not yet been reconciled.
-    8.277s unsuccessfully observed a new generation
-    8.398s Ready to serve.
+       The output will look like:
 
-  Service 'helloworld-php' created to latest revision 'helloworld-php-akhft-1' is available at URL:
-  http://helloworld-php.default.1.2.3.4.xip.io
-  ```
+       ```
+       Creating service 'helloworld-php' in namespace 'default':
 
-   {{< /tab >}}
-   {{< /tabs >}}
+        0.035s The Configuration is still working to reflect the latest desired specification.
+        0.139s The Route is still working to reflect the latest desired specification.
+        0.250s Configuration "helloworld-php" is waiting for a Revision to become ready.
+        8.040s ...
+        8.136s Ingress has not yet been reconciled.
+        8.277s unsuccessfully observed a new generation
+        8.398s Ready to serve.
+
+      Service 'helloworld-php' created to latest revision 'helloworld-php-akhft-1' is available at URL:
+      http://helloworld-php.default.1.2.3.4.xip.io
+      ```
+
+
+
+
 
 1. Now that your service is created, Knative will perform the following steps:
 
@@ -161,29 +164,30 @@ folder) you're ready to build and deploy the sample app.
 
 1. To find the URL for your service, use
 
-{{< tabs name="service_url" default="kn" >}}
-{{% tab name="kubectl" %}}
 
-   ```
-   kubectl get ksvc helloworld-php  --output=custom-columns=NAME:.metadata.name,URL:.status.url
-   NAME                URL
-   helloworld-php      http://helloworld-php.default.1.2.3.4.xip.io
-   ```
+=== "kubectl"
 
-{{< /tab >}}
-{{% tab name="kn" %}}
+       ```
+       kubectl get ksvc helloworld-php  --output=custom-columns=NAME:.metadata.name,URL:.status.url
+       NAME                URL
+       helloworld-php      http://helloworld-php.default.1.2.3.4.xip.io
+       ```
 
-   ```shell
-   kn service describe helloworld-php -o url
-   ```
 
-   Example:
+=== "kn"
 
-   ```shell
-   http://helloworld-php.default.1.2.3.4.xip.io
-   ```
-{{< /tab >}}
-{{< /tabs >}}
+       ```shell
+       kn service describe helloworld-php -o url
+       ```
+
+       Example:
+
+       ```shell
+       http://helloworld-php.default.1.2.3.4.xip.io
+       ```
+
+
+
 
 1. Now you can make a request to your app and see the result. Replace
    the URL below with the URL returned in the previous command.
@@ -197,16 +201,17 @@ folder) you're ready to build and deploy the sample app.
 
 To remove the sample app from your cluster, delete the service record.
 
-{{< tabs name="service_url" default="kn" >}}
-{{% tab name="kubectl" %}}
-```shell
-kubectl delete --filename service.yaml
-```
-{{< /tab >}}
-{{% tab name="kn" %}}
 
-```shell
-kn service delete helloworld-php
-```
-{{< /tab >}}
-{{< /tabs >}}
+=== "kubectl"
+    ```shell
+    kubectl delete --filename service.yaml
+    ```
+
+=== "kn"
+
+    ```shell
+    kn service delete helloworld-php
+    ```
+
+
+
