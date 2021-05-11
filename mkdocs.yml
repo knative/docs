@@ -194,7 +194,8 @@ nav:
     - Client:
         - CLI tools: client/README.md
         - Install kn: client/install-kn.md
-    - Community: todo
+    - "Join the Community ➠": /community/
+    - "Read the Blog ➠": /blog/
 
 theme:
   name: material
