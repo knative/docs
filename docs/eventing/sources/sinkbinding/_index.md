@@ -35,7 +35,8 @@ directly with the Kubernetes API to locate the event destination.
 These environment variables as as follows:
 
 - `K_SINK` - The url of the resolved event consumer.
-- `K_CE_OVERRIDES` - A json object that specifies overrides to the outbound event.
+- `K_CE_OVERRIDES` - A json object that specifies overrides to the outbound
+  event.
 
 ## Configuring a `SinkBinding`
 
@@ -94,7 +95,8 @@ If `ref` resolves into `"http://mysink.default.svc.cluster.local"`, then `uri`
 is added to this resulting in
 `"http://mysink.default.svc.cluster.local/extra/path"`.
 
-This will result in the `K_SINK` environment variable to be set on the `subject` as `"http://mysink.default.svc.cluster.local/extra/path"`.
+This will result in the `K_SINK` environment variable to be set on the `subject`
+as `"http://mysink.default.svc.cluster.local/extra/path"`.
 
 <!-- TODO we should have a page to point to describing the ref+uri destinations and the rules we use to resolve those and reuse the page. -->
 
@@ -123,53 +125,49 @@ A `subject` definition supports the following fields:
   - `matchLabels` - A map of `{key,value}` pairs. A single `{key,value}` in the
     matchLabels map is equivalent to an element of matchExpressions, whose key
     field is "key", the operator is "In", and the values array contains only
-    "value". The requirements are ANDed. Examples,
+    "value". The requirements are ANDed.
 
-1. Given:
+Examples,
 
-   ```yaml
-   subject:
-     apiVersion: apps/v1
-     kind: Deployment
-     namespace: default
-     name: mysubject
-   ```
+- The `Deployment` named `mysubject` in `default` namespace will be selected:
 
-   The `Deployment` named `mysubject` in `default` namespace will be selected.
+  ```yaml
+  subject:
+    apiVersion: apps/v1
+    kind: Deployment
+    namespace: default
+    name: mysubject
+  ```
 
-1. Given:
+- Any `Job` with the label `working=example` in the` default` namespace will be
+  selected:
 
-   ```yaml
-   subject:
-     apiVersion: batch/v1beta1
-     kind: Job
-     namespace: default
-     selector:
-       matchLabels:
-         working: example
-   ```
+  ```yaml
+  subject:
+    apiVersion: batch/v1beta1
+    kind: Job
+    namespace: default
+    selector:
+      matchLabels:
+        working: example
+  ```
 
-   Any `Job` with the label `working=example` in the` default` namespace will be
-   selected.
+- Any `Pod` with the label `working=example` OR `working=sample` in
+  the` default` namespace will be selected.:
 
-1. Given:
-
-   ```yaml
-   subject:
-     apiVersion: v1
-     kind: Pod
-     namespace: default
-     selector:
-       - matchExpression:
-         key: working
-         operator: In
-         values:
-           - example
-           - sample
-   ```
-
-   Any `Pod` with the label `working=example` OR `working=sample` in
-   the` default` namespace will be selected.
+  ```yaml
+  subject:
+    apiVersion: v1
+    kind: Pod
+    namespace: default
+    selector:
+      - matchExpression:
+        key: working
+        operator: In
+        values:
+          - example
+          - sample
+  ```
 
 ### Using CloudEvent Overrides
 
@@ -194,10 +192,11 @@ ceOverrides:
     additional: 42
 ```
 
-This will result in the `K_CE_OVERRIDES` environment variable to be set on the `subject` as follows:
+This will result in the `K_CE_OVERRIDES` environment variable to be set on the
+`subject` as follows:
 
 ```json
-{"extensions":{"extra":"this is an extra attribute","additional":"42"}}
+{ "extensions": { "extra": "this is an extra attribute", "additional": "42" } }
 ```
 
 [kubernetes-overview]:
