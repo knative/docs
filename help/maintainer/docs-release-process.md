@@ -11,22 +11,12 @@ branch and corresponding section knative.dev.
 
 ## Before you begin
 
-* For updating and building website on knative.dev
-   *  Be granted access to Netlify for staging
-        * Contact Caroline Lee or Richie Escarez
-
 * For GitHub
    * [Set up keys for SSH access](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh)
    * [Configure two remote repos](https://articles.assembla.com/en/articles/1136998-how-to-add-a-new-remote-to-your-git-repo) for your local /docs and /website clones:
       * "origin" - pointed at main repo (git@github.com:knative/docs.git)
       * "upstream" - pointed at your fork of main repo (git@github.com:<your fork>/docs.git)
 
-* For building website locally:
-   * [Install Hugo](https://www.docsy.dev/docs/getting-started/#install-hugo)
-   * (for Mac) Install gnu-sed using brew:  brew install gnu-sed
-      * Update path to gnu-sed: `PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"`
-   * [Go version 1.11+](https://golang.org/dl/)
-   * Clone git@github.com:knative/website.git (has build script)
 * To create combined PRs.
    Make your first pull request, choose Create a new branch.  Give it a name you will remember.
    Then when you make your subsequent updates, make sure you select the branch you just created so you can add all your
