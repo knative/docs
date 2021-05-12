@@ -13,7 +13,7 @@ If `TARGET` is not specified, `World` is used as the default value.
 ## Prerequisites
 
 You will need:
-- A Kubernetes cluster with [Knative installed and DNS configured](../../../../install/README.md).
+- A Kubernetes cluster with [Knative installed and DNS configured](../../../../install/).
 - [Docker](https://www.docker.com) installed and running on your local machine, and a Docker Hub account configured.
 - Optional: You can use the Knative CLI client [`kn`](https://github.com/knative/client/releases) to simplify resource creation and deployment. Alternatively, you can use `kubectl` to apply resource files directly.
 

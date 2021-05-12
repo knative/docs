@@ -18,7 +18,7 @@ You must meet the following requirements to run this sample:
 
 - Have a Kubernetes cluster running with the Knative Serving component
   installed. For more information, see the
-  [Knative instruction guides](https://github.com/knative/docs/blob/main/docs/install/README.md).
+  [Knative instruction guides](https://github.com/knative/docs/blob/main/docs/install/).
 - An installed version of the following tools:
   - [Docker](https://www.docker.com)
   - [Java SE 8 or later JDK](https://www.eclipse.org/openj9/)
