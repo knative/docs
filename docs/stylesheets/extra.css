@@ -1,11 +1,13 @@
 :root {
-  --md-primary-fg-color:       #1a7dc9;
-  --home-color:                #0071c7;
+  --md-primary-fg-color: #1a7dc9;
+  --home-color: #0071c7;
 }
 .md-clipboard {
   color: var(--md-primary-fg-color);
 }
-.highlight.no-copy .md-clipboard { display: none; }
+.highlight.no-copy .md-clipboard {
+  display: none;
+}
 
 .md-header__button.md-logo img {
   width: 3rem;
@@ -19,4 +21,14 @@
 .md-tabs__list li:nth-last-child(2) {
   background: var(--home-color);
   float: right;
+}
+
+.md-nav__item--nested > .md-nav__link,
+.md-nav__item--nested a.md-nav__link {
+  color: black;
+}
+
+.md-nav__title .md-nav__button.md-logo img,
+.md-nav__title .md-nav__button.md-logo svg {
+  width: auto;
 }
