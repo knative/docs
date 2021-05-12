@@ -2,7 +2,7 @@
 
 # Builds blog and community into the site by cloning the website repo, copying blog/community dirs in, running hugo.
 # - Results are written to site/ as normal.
-# - Run as "./hack/build-with-blog.sh serve" to run a local preview server on site/ afterwards (requires `npm install -g serve`).
+# - Run as "./hack/build-with-blog.sh serve" to run a local preview server on site/ afterwards (requires `npm install -g http-server`).
 
 # Quit on error
 set -e
@@ -38,7 +38,6 @@ hugo
 popd
 
 # Hugo builds to public/, just copy over to site/ to match up with mkdocs
-# This means you can run `mkdocs build` and then `build-blog.sh` and get a combined site/.
 mv temp/website/public/blog site/
 mv temp/website/public/community site/
 mv temp/website/public/css site/
@@ -73,6 +72,6 @@ rm -rf temp
 
 if [ "$1" = "serve" ]; then
   pushd site
-  serve
+  http-server
   popd
 fi
