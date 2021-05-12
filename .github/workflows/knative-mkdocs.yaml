@@ -1,0 +1,31 @@
+name: Publish MkDocs
+
+on:
+  push:
+    branches: [ mkdocs ]
+
+jobs:
+  mkdocs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.9"
+
+      - name: Install dependencies
+        run: |
+          pip install mkdocs mkdocs-macros-plugin mkdocs-exclude mike
+
+      - name: Setup doc deploy
+        run: |
+          git config --global user.name Docs deploy
+          git config --global user.email docs@dummy.bot.com
+
+      - name: Build docs 
+        run: |
+          mike deploy dev --push
