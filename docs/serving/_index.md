@@ -5,16 +5,14 @@ type: "docs"
 showlandingtoc: "false"
 ---
 
-Knative Serving builds on Kubernetes and Istio to support deploying and serving
-of serverless applications and functions. Serving is easy to get started with
-and scales to support advanced scenarios.
+Knative Serving builds on Kubernetes to support deploying and serving serverless applications and functions. Knative Serving is easy to get started with and scales to support advanced scenarios.
 
-The Knative Serving project provides middleware primitives that enable:
+The Knative Serving project provides middleware components that enable:
 
-- Rapid deployment of serverless containers
-- [Automatic scaling up and down to zero](./autoscaling/)
-- Routing and network programming for Istio components
-- Point-in-time snapshots of deployed code and configurations
+- Rapid deployment of serverless containers.
+- Autoscaling including scaling pods down to zero.
+- Support for multiple networking layers such as Ambassador, Courier, Gloo, Istio, and Kong, for integration into existing environments.
+- Point-in-time snapshots of deployed code and configurations.
 
 ## Serving resources
 
@@ -22,22 +20,22 @@ Knative Serving defines a set of objects as Kubernetes Custom Resource
 Definitions (CRDs). These objects are used to define and control how your
 serverless workload behaves on the cluster:
 
-- [Service](https://github.com/knative/docs/blob/main/docs/serving/spec/knative-api-specification-1.0#service):
+- [Service](https://github.com/knative/specs/blob/main/specs/serving/knative-api-specification-1.0.md#service):
   The `service.serving.knative.dev` resource automatically manages the whole
   lifecycle of your workload. It controls the creation of other objects to
   ensure that your app has a route, a configuration, and a new revision for each
   update of the service. Service can be defined to always route traffic to the
   latest revision or to a pinned revision.
-- [Route](https://github.com/knative/docs/blob/main/docs/serving/spec/knative-api-specification-1.0#route):
+- [Route](https://github.com/knative/specs/blob/main/specs/serving/knative-api-specification-1.0.md#route):
   The `route.serving.knative.dev` resource maps a network endpoint to one or
   more revisions. You can manage the traffic in several ways, including
   fractional traffic and named routes.
-- [Configuration](https://github.com/knative/docs/blob/main/docs/serving/spec/knative-api-specification-1.0#configuration):
+- [Configuration](https://github.com/knative/specs/blob/main/specs/serving/knative-api-specification-1.0.md#configuration):
   The `configuration.serving.knative.dev` resource maintains the desired state
   for your deployment. It provides a clean separation between code and
   configuration and follows the Twelve-Factor App methodology. Modifying a
   configuration creates a new revision.
-- [Revision](https://github.com/knative/docs/blob/main/docs/serving/spec/knative-api-specification-1.0#revision):
+- [Revision](https://github.com/knative/specs/blob/main/specs/serving/knative-api-specification-1.0.md#revision):
   The `revision.serving.knative.dev` resource is a point-in-time snapshot of the
   code and configuration for each modification made to the workload. Revisions
   are immutable objects and can be retained for as long as useful. Knative
@@ -46,7 +44,7 @@ serverless workload behaves on the cluster:
   [Configuring the Autoscaler](./autoscaling) for more
   information.
 
-![Diagram that displays how the Serving resources coordinate with each other.](https://github.com/knative/serving/raw/main/docs/spec/images/object_model.png)
+![Diagram that displays how the Serving resources coordinate with each other.](../images/object_model.png)
 
 ## Getting Started
 
