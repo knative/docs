@@ -32,6 +32,11 @@ The SinkBinding injects environment variables into the `PodTemplateSpec` of the
 event sink. Because of this, the application code does not need to interact
 directly with the Kubernetes API to locate the event destination.
 
+These environment variables as as follows:
+
+- `K_SINK` - The url of the resolved event consumer.
+- `K_CE_OVERRIDES` - A json object that specifies overrides to the outbound event.
+
 ## Configuring a `SinkBinding`
 
 A `SinkBinding` definition supports the following fields:
@@ -63,7 +68,7 @@ A `sink` definition supports the following fields:
 - `ref` - Ref points to an Addressable.
   - `apiVersion` API version of the referent.
   - [`kind`][kubernetes-kinds] - Kind of the referent.
-  - [`namespace`][kuberntes-namespaces] - Namespace of the referent. This is
+  - [`namespace`][kubernetes-namespaces] - Namespace of the referent. This is
     optional field, it gets defaulted to the object holding it if leftout.
   - [`name`][kubernetes-names] - Name of the referent.
 - `uri` - URI can be an absolute URL(non-empty scheme and non-empty host)
@@ -89,6 +94,8 @@ If `ref` resolves into `"http://mysink.default.svc.cluster.local"`, then `uri`
 is added to this resulting in
 `"http://mysink.default.svc.cluster.local/extra/path"`.
 
+This will result in the `K_SINK` environment variable to be set on the `subject` as `"http://mysink.default.svc.cluster.local/extra/path"`.
+
 <!-- TODO we should have a page to point to describing the ref+uri destinations and the rules we use to resolve those and reuse the page. -->
 
 ### Using the Subject parameter
@@ -100,7 +107,7 @@ A `subject` definition supports the following fields:
 
 - `apiVersion` API version of the referent.
 - [`kind`][kubernetes-kinds] - Kind of the referent.
-- [`namespace`][kuberntes-namespaces] - Namespace of the referent. This is
+- [`namespace`][kubernetes-namespaces] - Namespace of the referent. This is
   optional field, it gets defaulted to the object holding it if leftout.
 - [`name`][kubernetes-names] - Name of the referent.
 - `selector` - Selector of the referents. Mutually exclusive with Name.
@@ -183,7 +190,14 @@ attribute.
 ```yaml
 ceOverrides:
   extensions:
-    extra: This is an extra attribute
+    extra: this is an extra attribute
+    additional: 42
+```
+
+This will result in the `K_CE_OVERRIDES` environment variable to be set on the `subject` as follows:
+
+```json
+{"extensions":{"extra":"this is an extra attribute","additional":"42"}}
 ```
 
 [kubernetes-overview]:
