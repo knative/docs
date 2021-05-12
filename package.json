@@ -1,0 +1,27 @@
+{
+  "name": "knative",
+  "version": "0.1.0",
+  "description": "Knative docs",
+  "main": "index.js",
+  "devDependencies": {
+    "autoprefixer": "^9.8.6",
+    "http-server": "^0.12.3",
+    "postcss-cli": "^6.1.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/knative/docs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/knative/docs/issues"
+  },
+  "homepage": "https://knative.dev",
+  "engines": {
+    "node": ">12.0"
+  }
+}

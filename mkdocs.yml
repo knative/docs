@@ -196,7 +196,8 @@ nav:
       - Installing kn: client/install-kn.md
       - Customizing kn: client/configure-kn.md
       - kn plugins: client/kn-plugins.md
-    - Community: todo
+    - "Join the Community ➠": /community/
+    - "Read the Blog ➠": /blog/
 
 theme:
   name: material
@@ -233,6 +234,7 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.tabbed
   - pymdownx.details
+  - pymdownx.snippets
   - pymdownx.keys
   - pymdownx.caret
   - pymdownx.mark
