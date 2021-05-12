@@ -50,7 +50,9 @@ A `SinkBinding` definition supports the following fields:
     - [`subject`](#using-the-subject-parameter) - A reference to the resource(s)
       whose "runtime contract" should be augmented by Binding implementations.
 - Optional:
-  - [`ceOverrides`](#using-cloudevent-overrides)
+  - `spec`
+    - [`ceOverrides`](#using-cloudevent-overrides) - defines overrides to
+      control the output format and modifications of the event sent to the sink.
 
 ### Using the Sink parameter
 
@@ -118,49 +120,49 @@ A `subject` definition supports the following fields:
 
 1. Given:
 
-```yaml
-subject:
-  apiVersion: apps/v1
-  kind: Deployment
-  namespace: default
-  name: mysubject
-```
+   ```yaml
+   subject:
+     apiVersion: apps/v1
+     kind: Deployment
+     namespace: default
+     name: mysubject
+   ```
 
-The `Deployment` named `mysubject` in `default` namespace will be selected.
-
-1. Given:
-
-```yaml
-subject:
-  apiVersion: batch/v1beta1
-  kind: Job
-  namespace: default
-  selector:
-    matchLabels:
-      working: example
-```
-
-Any `Job` with the label `working=example` in the` default` namespace will be
-selected.
+   The `Deployment` named `mysubject` in `default` namespace will be selected.
 
 1. Given:
 
-```yaml
-subject:
-  apiVersion: v1
-  kind: Pod
-  namespace: default
-  selector:
-    - matchExpression:
-      key: working
-      operator: In
-      values:
-        - example
-        - sample
-```
+   ```yaml
+   subject:
+     apiVersion: batch/v1beta1
+     kind: Job
+     namespace: default
+     selector:
+       matchLabels:
+         working: example
+   ```
 
-Any `Pod` with the label `working=example` OR `working=sample` in the` default`
-namespace will be selected.
+   Any `Job` with the label `working=example` in the` default` namespace will be
+   selected.
+
+1. Given:
+
+   ```yaml
+   subject:
+     apiVersion: v1
+     kind: Pod
+     namespace: default
+     selector:
+       - matchExpression:
+         key: working
+         operator: In
+         values:
+           - example
+           - sample
+   ```
+
+   Any `Pod` with the label `working=example` OR `working=sample` in
+   the` default` namespace will be selected.
 
 ### Using CloudEvent Overrides
 
