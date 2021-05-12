@@ -11,3 +11,12 @@
   width: 3rem;
   height: 2.4rem;
 }
+
+.md-tabs {
+  border-bottom: 1px solid var(--home-color);
+}
+.md-tabs__list li:nth-last-child(1),
+.md-tabs__list li:nth-last-child(2) {
+  background: var(--home-color);
+  float: right;
+}
