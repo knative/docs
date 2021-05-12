@@ -194,7 +194,8 @@ nav:
     - Client:
         - CLI tools: client/README.md
         - Install kn: client/install-kn.md
-    - Community: todo
+    - "Join the Community ➠": /community/
+    - "Read the Blog ➠": /blog/
 
 theme:
   name: material
@@ -231,6 +232,7 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.tabbed
   - pymdownx.details
+  - pymdownx.snippets
   - pymdownx.keys
   - pymdownx.caret
   - pymdownx.mark

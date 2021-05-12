@@ -5,6 +5,8 @@
 __pycache__
 hack/__pycache__
 /site/
+/temp/
+/node_modules/
 
 
 .settings/
