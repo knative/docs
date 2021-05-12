@@ -56,13 +56,7 @@ With the `Service` resource, a deployed service will automatically have a
 matching route and configuration created. Each time the `Service` is updated, a
 new revision is created.
 
-<<<<<<< HEAD
-For more information on the resources and their interactions, see the
-[Resource Types Overview](https://github.com/knative/specs/blob/main/specs/serving/overview.md)
-in the Knative Serving repository.
-=======
 For more information on the resources and their interactions, see the [Resource Types Overview](https://github.com/knative/specs/blob/main/specs/serving/overview.md) in the Knative Serving repository.
->>>>>>> 7c1c16ac... Fix #3117 and broken links
 
 ## More samples and demos
 

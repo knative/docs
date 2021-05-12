@@ -76,7 +76,11 @@ You need:
     Note: By default, the `default` service account in each of the
     [namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
     of your Knative cluster are use by your revisions unless
+<<<<<<< HEAD
     [`serviceAccountName`](../spec/knative-api-specification-1.0) is specified.
+=======
+    [`serviceAccountName`](https://github.com/knative/specs/blob/main/specs/serving/knative-api-specification-1.0.md#revision-2) is specified.
+>>>>>>> d9d0c7e4... remove spec folder and redirect page and update links
 
    Run the following command to modify your `default` service account, assuming
    you named your secrets `container-registry`:
@@ -91,4 +95,8 @@ your credentials and have access to your container images in the private registr
 ## What's next
 
 You can now create a service that uses your container images from the private registry.
+<<<<<<< HEAD
 [Learn how to create a Knative service](../getting-started-knative-app).
+=======
+[Learn how to create a Knative service](../getting-started-knative-app.md).
+>>>>>>> d9d0c7e4... remove spec folder and redirect page and update links
