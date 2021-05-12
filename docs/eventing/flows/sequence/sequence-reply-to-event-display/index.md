@@ -3,6 +3,8 @@ title: "Sequence wired to event-display"
 linkTitle: "Displaying sequence output"
 weight: 20
 type: "docs"
+aliases:
+   - /docs/eventing/samples/sequence/sequence-replay-to-event-display
 ---
 
 We are going to create the following logical configuration. We create a
@@ -12,7 +14,7 @@ taking the output of that `Sequence` and displaying the resulting output.
 ![Logical Configuration](./sequence-reply-to-event-display.png)
 
 The functions used in these examples live in
-[https://github.com/knative/eventing-contrib/blob/main/cmd/appender/main.go](https://github.com/knative/eventing-contrib/blob/main/cmd/appender/main.go).
+[https://github.com/knative/eventing/blob/main/cmd/appender/main.go](https://github.com/knative/eventing/blob/main/cmd/appender/main.go).
 
 ## Prerequisites
 
@@ -40,7 +42,7 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/appender
+        - image: gcr.io/knative-releases/knative.dev/eventing/cmd/appender
           env:
             - name: MESSAGE
               value: " - Handled by 0"
@@ -54,7 +56,7 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/appender
+        - image: gcr.io/knative-releases/knative.dev/eventing/cmd/appender
           env:
             - name: MESSAGE
               value: " - Handled by 1"
@@ -67,7 +69,7 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/appender
+        - image: gcr.io/knative-releases/knative.dev/eventing/cmd/appender
           env:
             - name: MESSAGE
               value: " - Handled by 2"
@@ -132,7 +134,7 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+        - image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
 ```
 
 Change `default` below to create the `Sequence` in the Namespace where you want

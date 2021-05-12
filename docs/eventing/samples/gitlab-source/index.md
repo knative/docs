@@ -26,11 +26,11 @@ You will need:
 
 ### Install GitLab Event Source
 
-GitLab Event source lives in the [knative/eventing-contrib](https://github.com/knative/eventing-contrib). Head to the releases page, find the latest release with `gitlab.yaml`
+GitLab Event source lives in the [knative-sandbox/eventing-gitlab](https://github.com/knative-sandbox/eventing-gitlab). Head to the releases page, find the latest release with `gitlab.yaml`
 artifact and replace the `<RELEASE>` with version tag:
 
 ```shell
-kubectl apply -f https://github.com/knative/eventing-contrib/releases/download/<RELEASE>/gitlab.yaml
+kubectl apply -f https://github.com/knative-sandbox/eventing-gitlab/releases/download/<RELEASE>/gitlab.yaml
 ```
 
 Check that the manager is running:
@@ -71,7 +71,7 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+        - image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
 ```
 
 Create the service:

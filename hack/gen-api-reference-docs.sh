@@ -35,11 +35,6 @@ KNATIVE_EVENTING_IMPORT_PATH="knative.dev/eventing"
 KNATIVE_EVENTING_COMMIT="${KNATIVE_EVENTING_COMMIT:?specify the \$KNATIVE_EVENTING_COMMIT variable}"
 KNATIVE_EVENTING_OUT_FILE="eventing/eventing.md"
 
-# KNATIVE_EVENTING_CONTRIB_REPO="github.com/knative/eventing-contrib"
-# KNATIVE_EVENTING_CONTRIB_IMPORT_PATH="knative.dev/eventing-contrib"
-# KNATIVE_EVENTING_CONTRIB_COMMIT="${KNATIVE_EVENTING_CONTRIB_COMMIT:?specify the \$KNATIVE_EVENTING_CONTRIB_COMMIT variable}"
-# KNATIVE_EVENTING_CONTRIB_OUT_FILE="eventing/eventing-contrib.md"
-
 cleanup_refdocs_root=
 cleanup_repo_clone_root=
 trap cleanup EXIT

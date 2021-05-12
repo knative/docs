@@ -1,7 +1,6 @@
 ---
 title: "Knative Eventing"
-linkTitle: "Eventing Component"
-weight: 60
+weight: 06
 type: "docs"
 showlandingtoc: "false"
 aliases:
@@ -11,11 +10,6 @@ aliases:
 Knative Eventing is a system that is designed to address a common need for cloud
 native development and provides composable primitives to enable late-binding
 event sources and event consumers.
-
-## Getting Started
-
-- [Install Knative](../install)
-- [Run samples](./samples/)
 
 ## Functionality
 

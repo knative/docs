@@ -3,6 +3,8 @@ title: "Sequence terminal"
 linkTitle: "Create additional events"
 weight: 20
 type: "docs"
+aliases:
+   - /docs/eventing/samples/sequence/sequence-terminal
 ---
 
 We are going to create the following logical configuration. We create a
@@ -13,7 +15,7 @@ events.
 ![Logical Configuration](./sequence-terminal.png)
 
 The functions used in these examples live in
-[https://github.com/knative/eventing-contrib/blob/main/cmd/appender/main.go](https://github.com/knative/eventing-contrib/blob/main/cmd/appender/main.go).
+[https://github.com/knative/eventing/blob/main/cmd/appender/main.go](https://github.com/knative/eventing/blob/main/cmd/appender/main.go).
 
 ## Prerequisites
 
@@ -40,7 +42,7 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/appender
+        - image: gcr.io/knative-releases/knative.dev/eventing/cmd/appender
           env:
             - name: MESSAGE
               value: " - Handled by 0"
@@ -54,7 +56,7 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/appender
+        - image: gcr.io/knative-releases/knative.dev/eventing/cmd/appender
           env:
             - name: MESSAGE
               value: " - Handled by 1"
@@ -67,7 +69,7 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/appender
+        - image: gcr.io/knative-releases/knative.dev/eventing/cmd/appender
           env:
             - name: MESSAGE
               value: " - Handled by 2"
@@ -194,5 +196,3 @@ kubectl -n default logs -l serving.knative.dev/service=third -c user-container -
 2020/03/02 21:28:03 Transform the event to:
 2020/03/02 21:28:03 [2020-03-02T21:28:00.0010247Z] /apis/v1/namespaces/default/pingsources/ping-source dev.knative.sources.ping: &{Sequence:0 Message:Hello world! - Handled by 0 - Handled by 1 - Handled by 2}
 ```
-
-

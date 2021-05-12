@@ -1,8 +1,8 @@
 ---
 title: "Knative Serving"
-linkTitle: "Serving Component"
-weight: 20
+weight: 05
 type: "docs"
+showlandingtoc: "false"
 ---
 
 Knative Serving builds on Kubernetes and Istio to support deploying and serving

@@ -1,6 +1,6 @@
 ---
 title: "Installing Knative"
-weight: 05
+weight: 01
 type: "docs"
 aliases:
   - /docs/install/knative-with-any-k8s

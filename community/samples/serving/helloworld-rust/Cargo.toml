@@ -1,8 +1,10 @@
 [package]
 name = "hellorust"
 version = "0.0.0"
+edition = "2018"
 publish = false
 
 [dependencies]
-hyper = "0.12.3"
-pretty_env_logger = "0.2.3"
+hyper = { version = "0.14.7", features = ["full"]}
+tokio = { version = "1.5.0", features = ["macros", "rt-multi-thread"] }
+pretty_env_logger = "0.4.0"

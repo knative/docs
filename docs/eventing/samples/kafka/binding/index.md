@@ -42,7 +42,7 @@ via Kafka Source
 1. (Optional) Source code for Event Display service
 
    Get the source code of Event Display container image from
-   [here](https://github.com/knative/eventing-contrib/blob/main/cmd/event_display/main.go)
+   [here](https://github.com/knative/eventing/blob/main/cmd/event_display/main.go)
 
 1. Deploy the Event Display Service via kubectl:
 
@@ -55,7 +55,7 @@ via Kafka Source
      template:
        spec:
          containers:
-           - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+           - image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
    ```
 
    ```
@@ -70,7 +70,7 @@ via Kafka Source
    below
 
    ```
-   kn service create event-display --image=gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+   kn service create event-display --image=gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
    ```
 
 1. Ensure that the Service pod is running. The pod name will be prefixed with

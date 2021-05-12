@@ -3,6 +3,8 @@ title: "Sequence wired to another Sequence"
 linkTitle: "Using Sequences in series"
 weight: 20
 type: "docs"
+aliases:
+   - /docs/eventing/samples/sequence/sequence-reply-to-sequence
 ---
 
 We are going to create the following logical configuration. We create a
@@ -13,7 +15,7 @@ finally displaying the resulting output.
 ![Logical Configuration](./sequence-reply-to-sequence.png)
 
 The functions used in these examples live in
-[https://github.com/knative/eventing-contrib/blob/main/cmd/appender/main.go](https://github.com/knative/eventing-contrib/blob/main/cmd/appender/main.go).
+[https://github.com/knative/eventing/blob/main/cmd/appender/main.go](https://github.com/knative/eventing/blob/main/cmd/appender/main.go).
 
 ## Prerequisites
 
@@ -41,7 +43,7 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/appender
+        - image: gcr.io/knative-releases/knative.dev/eventing/cmd/appender
           env:
             - name: MESSAGE
               value: " - Handled by 0"
@@ -55,7 +57,7 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/appender
+        - image: gcr.io/knative-releases/knative.dev/eventing/cmd/appender
           env:
             - name: MESSAGE
               value: " - Handled by 1"
@@ -68,7 +70,7 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/appender
+        - image: gcr.io/knative-releases/knative.dev/eventing/cmd/appender
           env:
             - name: MESSAGE
               value: " - Handled by 2"
@@ -81,7 +83,7 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/appender
+        - image: gcr.io/knative-releases/knative.dev/eventing/cmd/appender
           env:
             - name: MESSAGE
               value: " - Handled by 3"
@@ -95,7 +97,7 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/appender
+        - image: gcr.io/knative-releases/knative.dev/eventing/cmd/appender
           env:
             - name: MESSAGE
               value: " - Handled by 4"
@@ -108,7 +110,7 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/appender
+        - image: gcr.io/knative-releases/knative.dev/eventing/cmd/appender
           env:
             - name: MESSAGE
               value: " - Handled by 5"
@@ -212,7 +214,7 @@ spec:
   template:
     spec:
       containerers:
-        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+        - image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
 ```
 
 Change `default` below to create the `Sequence` in the Namespace where you want
