@@ -72,6 +72,6 @@ rm -rf temp
 
 if [ "$1" = "serve" ]; then
   pushd site
-  http-server
+  npx http-server
   popd
 fi

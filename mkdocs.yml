@@ -232,6 +232,7 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.tabbed
   - pymdownx.details
+  - pymdownx.snippets
   - pymdownx.keys
   - pymdownx.caret
   - pymdownx.mark
