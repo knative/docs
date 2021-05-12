@@ -95,7 +95,7 @@ If `ref` resolves into `"http://mysink.default.svc.cluster.local"`, then `uri`
 is added to this resulting in
 `"http://mysink.default.svc.cluster.local/extra/path"`.
 
-This will result in the `K_SINK` environment variable to be set on the `subject`
+**Contract:** This will result in the `K_SINK` environment variable to be set on the `subject`
 as `"http://mysink.default.svc.cluster.local/extra/path"`.
 
 <!-- TODO we should have a page to point to describing the ref+uri destinations and the rules we use to resolve those and reuse the page. -->
@@ -153,7 +153,7 @@ Examples,
   ```
 
 - Any `Pod` with the label `working=example` OR `working=sample` in
-  the` default` namespace will be selected.:
+  the` default` namespace will be selected:
 
   ```yaml
   subject:
@@ -192,7 +192,7 @@ ceOverrides:
     additional: 42
 ```
 
-This will result in the `K_CE_OVERRIDES` environment variable to be set on the
+**Contract:** This will result in the `K_CE_OVERRIDES` environment variable to be set on the
 `subject` as follows:
 
 ```json
