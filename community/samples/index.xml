@@ -1,0 +1,31 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Knative – Community code samples</title>
+    <link>https://knative.dev/community/samples/</link>
+    <description>Recent content in Community code samples on Knative</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="https://knative.dev/community/samples/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Community: Knative Serving code samples</title>
+      <link>https://knative.dev/community/samples/serving/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/community/samples/serving/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Community contributed and maintained code samples for Knative Serving.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

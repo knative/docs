@@ -1,0 +1,13 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: helloworld-haskell
+  namespace: default
+spec:
+  template:
+    spec:
+      containers:
+        - image: docker.io/{username}/helloworld-haskell
+          env:
+          - name: TARGET
+            value: "Haskell Sample v1"

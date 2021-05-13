@@ -1,0 +1,1078 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Knative – Join the Knative community</title>
+    <link>https://knative.dev/community/</link>
+    <description>Recent content in Join the Knative community on Knative</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="https://knative.dev/community/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Community: </title>
+      <link>https://knative.dev/community/contributing/consensus/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/community/contributing/consensus/</guid>
+      <description>
+        
+        
+        &lt;p&gt;As a community, Knative values lazy consensus as a decision-making tool. Having discussions about larger changes or contentious issues mainly over synchronous meetings makes it difficult for contributors in differing time zones to participate. Compounding the problem is the fact that there are also Slack conversations on various channels, emails, etc. that make it difficult to decipher what led to various decisions and what alternatives were considered and so forth. We use &amp;ldquo;lazy consensus&amp;rdquo; as a mode of operation towards asynchronous communication will help get to a healthier and more inclusive community.&lt;/p&gt;
+&lt;h1 id=&#34;when&#34;&gt;When&lt;/h1&gt;
+&lt;p&gt;Lazy consensus is about decisions of consequence. This is a somewhat fuzzy concept, and we will not attempt to make a specific definition to be followed. Instead, this can be thought of as a judgement call to make.&lt;/p&gt;
+&lt;p&gt;A decision of consequence is something that as a contributor, you or one of your open source colleagues would feel that they have a stake in. It might be something as specific as a polarizing pull request. It might be the direction a feature track will go in. It might be a plan within a working group for a refactoring. It may or may not have representation in github or a document.&lt;/p&gt;
+&lt;p&gt;When deciding whether lazy consensus is required, you and your peers must think about the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;How would you feel if the decision was made without your input?&lt;/li&gt;
+&lt;li&gt;How would your peers not present in the discussion feel if the decision was made without their input?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If you think about these questions and feel like your feelings or your colleagues&#39; feelings would be hurt if you or they were not given a stake in the decision, it’s time to use lazy consensus. If the answer isn’t clear, it’s time to use lazy consensus to err on the side of inclusion.&lt;/p&gt;
+&lt;h1 id=&#34;how&#34;&gt;How&lt;/h1&gt;
+&lt;p&gt;To avoid debates about communication channels, we will have a process where one’s preferences of communication channels don’t matter.&lt;/p&gt;
+&lt;p&gt;When lazy consensus is used, you should:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Communicate:
+&lt;ul&gt;
+&lt;li&gt;Mail the dev list&lt;/li&gt;
+&lt;li&gt;Post a message in slack&lt;/li&gt;
+&lt;li&gt;Post a comment on relevant github issues/PRs&lt;/li&gt;
+&lt;li&gt;The message content should clearly reference via link any PR, issue, or document related to the decision, and let the reader know where to engage in the discussion&lt;/li&gt;
+&lt;li&gt;If you think someone may be particularly interested, sending a message of some kind with a pointer to the public issue discussion may be appropriate. It is not appropriate to hash out all the details in a private discussion.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Allow time for your colleagues to read and think about the message
+&lt;ul&gt;
+&lt;li&gt;Please allow an appropriate amount of time, at least 3 business days&lt;/li&gt;
+&lt;li&gt;Give healthy consideration to reasonable objections&lt;/li&gt;
+&lt;li&gt;If consensus cannot be achieved within the discussion, you should attempt to resolve it within the appropriate working group, then engage the TOC or Steering as appropriate if that fails&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Record the decision in writing
+&lt;ul&gt;
+&lt;li&gt;In increasing order of durability: decision announced in meeting minutes, send a mail to the mailing list, approval in Google Doc by WG lead, GitHub PR (possibly in “docs” directory or the like)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Community: </title>
+      <link>https://knative.dev/community/contributing/mechanics/gdrive/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/community/contributing/mechanics/gdrive/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;gsuite-configuration-for-knativeteam&#34;&gt;GSuite configuration for Knative.team&lt;/h1&gt;
+&lt;h2 id=&#34;historical-context&#34;&gt;Historical Context&lt;/h2&gt;
+&lt;p&gt;The Knative Community GSuite tools used the google.com domain up until January 4th, 2021. With the GSuite org being under the google.com domain, this affected the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;GDrive - Folks outside of Google can’t control the ownership of the community drive. Documents can&amp;rsquo;t be shared with &amp;ldquo;everyone on the internet&amp;rdquo;, only &amp;ldquo;with Google.com&amp;rdquo;. This makes it hard to provide read view outside the Knative community.&lt;/li&gt;
+&lt;li&gt;Knative Community Calendar - Folks outside of Google have read/write access but don’t have admin privileges&lt;/li&gt;
+&lt;li&gt;Hangouts - Hangouts for WG meetings required someone from Google to let folks into the meeting&lt;/li&gt;
+&lt;li&gt;Mailing lists are all @googlegroups.com, rather than associated with Knative (branding/authentication challenge).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Due to the challenges of managing community artifacts, we now have a knative.team GSuite org.&lt;/p&gt;
+&lt;h4 id=&#34;gsuite-gotchas&#34;&gt;GSuite gotchas&lt;/h4&gt;
+&lt;p&gt;Google.com accounts have a corporate policy that prevents them from creating new drive documents outside the domain. Googlers should use a consumer (@gmail.com) or @knative.team account to create documents on the team drive (including uploading recordings). Googlers &lt;em&gt;can&lt;/em&gt; comment or edit existing documents without problems.&lt;/p&gt;
+&lt;h2 id=&#34;knativeteam-gsuite-setup&#34;&gt;Knative.team GSuite Setup&lt;/h2&gt;
+&lt;h3 id=&#34;accessprivileges&#34;&gt;Access/Privileges&lt;/h3&gt;
+&lt;h4 id=&#34;steering-committee&#34;&gt;Steering Committee&lt;/h4&gt;
+&lt;p&gt;All steering committee members have “Super Admin” &lt;a href=&#34;https://support.google.com/a/answer/33325?hl=en&#34;&gt;privileges&lt;/a&gt; on the Knative.team GSuite account. This allows steering members to create new groups, manage Google Meet settings etc. In order to access the GSuite admin console, navigate to admin.google.com.&lt;/p&gt;
+&lt;h4 id=&#34;technical-oversight-committee&#34;&gt;Technical Oversight Committee&lt;/h4&gt;
+&lt;p&gt;The technical oversight committee members each have a knative.team GSuite account. This is to allow TOC members to assist with some of the GSuite automation and GDrive migration. In addition to this, TOC members will need a knative.team account to allow people without a knative.team account into public meetings hosted on Google Hangouts.&lt;/p&gt;
+&lt;h4 id=&#34;working-group-leads&#34;&gt;Working Group Leads&lt;/h4&gt;
+&lt;p&gt;Each WG lead has a knative.team GSuite account. This is to allow WG leads to let people without a knative.team account into the public WG meetings hosted on Google Hangouts.&lt;/p&gt;
+&lt;p&gt;When each WG lead steps down, a GSuite admin will have to remove their account as there currently is no automation set up.&lt;/p&gt;
+&lt;h3 id=&#34;mailing-lists&#34;&gt;Mailing lists&lt;/h3&gt;
+&lt;p&gt;There are several mailing lists set up to manage permission groups (some could also be used for communication, but that is not the current usage). There is currently no automation to manage these lists.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;wg-leads – all working group leads, gives update permission on the Knative official events calendar&lt;/li&gt;
+&lt;li&gt;steering – steering committee members&lt;/li&gt;
+&lt;li&gt;trademark – trademark committee members&lt;/li&gt;
+&lt;li&gt;(TODO) toc – tech oversight committee members&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;payment-and-package&#34;&gt;Payment and Package&lt;/h3&gt;
+&lt;p&gt;The Knative.team GSuite is a &lt;a href=&#34;https://workspace.google.com/intl/en/pricing.html&#34;&gt;Business Standard&lt;/a&gt; GSuite Plan. This is required so that WG meetings have the ability to record meetings. If we need changes made to the GSuite package-type on this account, &lt;a href=&#34;mailto:anassi@google.com&#34;&gt;April Nassi&lt;/a&gt; can help with this.&lt;/p&gt;
+&lt;p&gt;The GSuite org is currently paid by Google. &lt;a href=&#34;mailto:maryr@google.com&#34;&gt;Mary Radomile&lt;/a&gt; is the point of contact if we need help re: billing.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Community: </title>
+      <link>https://knative.dev/community/contributing/mechanics/maturity-levels/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/community/contributing/mechanics/maturity-levels/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;knative-migration-to-core-process&#34;&gt;Knative Migration-To-Core Process&lt;/h1&gt;
+&lt;p&gt;This document provides a maturity model for projects in the Knative community.
+This includes projects in knative-sandbox (broader community) or as well as
+projects in other GitHub organizations which wish to participate in the
+community process. It also defines a process for
+&lt;a href=&#34;#migration-to-core&#34;&gt;migrating community projects into the Knative core&lt;/a&gt;, if
+appropriate. Note that projects may not map 1:1 with repos, and projects may
+even be hierarchical (for example, the &amp;ldquo;eventing&amp;rdquo; project includes &amp;ldquo;eventing
+API&amp;rdquo;, &amp;ldquo;eventing delivery&amp;rdquo; and &amp;ldquo;eventing sources&amp;rdquo;, each of which has artifacts in
+multiple repositories).&lt;/p&gt;
+&lt;p&gt;Note that this document intentionally refers to the process of selecting
+implemented interfaces from sandbox which should be part of core as
+&amp;ldquo;migration-to-core&amp;rdquo; rather than &amp;ldquo;incubation&amp;rdquo; or &amp;ldquo;promotion&amp;rdquo; – while it may be
+personally satisfying to have a component be part of the core, components which
+are not in the core may be equally valuable and production-worthy.&lt;/p&gt;
+&lt;h1 id=&#34;maturity-phases&#34;&gt;Maturity phases&lt;/h1&gt;
+&lt;h2 id=&#34;initiating&#34;&gt;Initiating&lt;/h2&gt;
+&lt;p&gt;In the initiating phase, a project is starting up, and may have minimal
+additional artifacts around the code itself. The minimum bar for an initiating
+project in the knative-sandbox org is:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/knative/community/blob/master/mechanics/CREATING-A-SANDBOX-REPO.md#technical-requirements&#34;&gt;Adopted the CLA bot and OWNERS file / Tide merge process&lt;/a&gt;,
+to ensure IP ownership&lt;/li&gt;
+&lt;li&gt;Adopt the
+&lt;a href=&#34;https://github.com/knative/community/blob/master/CODE-OF-CONDUCT.md&#34;&gt;Knative Code of Conduct&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/knative/community/blob/master/mechanics/CREATING-A-SANDBOX-REPO.md#criteria&#34;&gt;Sponsored by a WG lead&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Have a README.md that describes the repo(s)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Projects which do not declare otherwise are assumed to be in the &amp;ldquo;Initiating&amp;rdquo;
+phase, regardless of release process, users, etc.&lt;/p&gt;
+&lt;p&gt;This phase is suitable for:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Experiments&lt;/li&gt;
+&lt;li&gt;Proofs-of-Concept&lt;/li&gt;
+&lt;li&gt;Examples&lt;/li&gt;
+&lt;li&gt;Templates&lt;/li&gt;
+&lt;li&gt;etc&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Note that Initiating projects do not need to be hosted in knative-sandbox, and
+can be hosted under either individual accounts or in other orgs. For projects in
+knative-sandbox, review requirements and cadence are at the discretion of the
+sponsoring WG lead.&lt;/p&gt;
+&lt;h2 id=&#34;usable&#34;&gt;Usable&lt;/h2&gt;
+&lt;p&gt;A usable project has reached the point where it is releasing executable
+artifacts which are in use by at least two end users (preferably different
+companies, rather than installations within the same company). Additionally, a
+usable project meets certain other criteria (defined below) which allows the
+Knative community to have confidence in the project and willingness to invest
+further.&lt;/p&gt;
+&lt;p&gt;Additional requirements beyond &amp;ldquo;initiating&amp;rdquo;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A published release schedule, with at least two successful minor releases.
+&lt;ul&gt;
+&lt;li&gt;At least two end users (preferably different companies) who are consuming
+the release artifacts. Commercial products with production usage count
+towards this target. This can be documented in something
+&lt;a href=&#34;https://www.google.com/url?q=https://github.com/cncf/toc/blob/master/process/graduation_criteria.adoc&amp;amp;sa=D&amp;amp;ust=1597952611892000&amp;amp;usg=AFQjCNFymwghRnNGVqbD0O_01TsfEeto5w&#34;&gt;like an ADOPTERS.md file&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Unit test automation meeting the Knative standards with respect to coverage
+and flakiness / test failures.&lt;/li&gt;
+&lt;li&gt;Provide at least monthly progress reports at the appropriate WG(s). WGs should
+roll these reports up into their TOC reports.&lt;/li&gt;
+&lt;li&gt;User-facing documentation for the following areas: install, usage&lt;/li&gt;
+&lt;li&gt;Contributor facing documentation for: development setup&lt;/li&gt;
+&lt;li&gt;Ongoing contributions from multiple contributors and management of user
+issues, etc.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Usable projects which meet the criteria for core (i.e. developer-facing
+abstractions with wide utility, beta+ APIs) may apply to the TOC and SC for
+&lt;a href=&#34;#migration-to-core&#34;&gt;migration to core&lt;/a&gt;, but approval is more likely for
+projects in the &amp;ldquo;Stable&amp;rdquo; category.&lt;/p&gt;
+&lt;h2 id=&#34;stable&#34;&gt;Stable&lt;/h2&gt;
+&lt;p&gt;A stable project has graduated beyond the bar in &amp;ldquo;usable&amp;rdquo; and is widely-adopted
+with a stable API and well-understood operational characteristics. This would be
+similar to a &amp;ldquo;GA&amp;rdquo; level of support for a commercial product in terms of
+maturity.&lt;/p&gt;
+&lt;p&gt;Additional requirements beyond &amp;ldquo;usable&amp;rdquo;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A stable v1 API following documented release and deprecation principles (ref
+&lt;a href=&#34;https://github.com/knative/community/blob/master/mechanics/RELEASE-VERSIONING-PRINCIPLES.md&#34;&gt;core Knative principles&lt;/a&gt;).
+Depending on the project, the API may include library methods, Kubernetes
+CRDs, network data-plane protocols, container contracts, or some combination.
+The API contract should be explicitly documented in the repo.&lt;/li&gt;
+&lt;li&gt;Identified and named set of project leads managing both development roadmap
+and overall project success.&lt;/li&gt;
+&lt;li&gt;Release schedule aligned with the core Knative release schedule.&lt;/li&gt;
+&lt;li&gt;At least 5 end-users consuming the release artifacts in installations of
+sufficient quality and scope.
+&lt;ul&gt;
+&lt;li&gt;Commercial products with production usage count towards this target, though
+there must be multiple commercial products or direct upstream users to
+quality (i.e. 5 users of a single-vendor product and no other users may be
+&amp;ldquo;usable&amp;rdquo;, but would not be accepted for &amp;ldquo;stable&amp;rdquo;).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Upgrade and e2e test automation.&lt;/li&gt;
+&lt;li&gt;(Reports as for usable projects)&lt;/li&gt;
+&lt;li&gt;User-facing documentation for debugging.&lt;/li&gt;
+&lt;li&gt;Contributor facing documentation for issue triage and project engagement.&lt;/li&gt;
+&lt;li&gt;Members of the development team is varied. Ideally from multiple
+organizations.&lt;/li&gt;
+&lt;li&gt;There must be a &amp;ldquo;stable&amp;rdquo; set of installation-time dependencies for the
+project. (i.e. for Eventing, the &amp;ldquo;Kafka&amp;rdquo; channel implementation could be
+counted as a &amp;ldquo;stable&amp;rdquo; dependency)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Projects are generally encouraged to reach stable maturity before considering
+&lt;a href=&#34;#migration-to-core&#34;&gt;migration to core&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;sunsetting&#34;&gt;Sunsetting&lt;/h2&gt;
+&lt;p&gt;At any time, a project may move into the &amp;ldquo;sunsetting&amp;rdquo; phase. This is a
+declaration that the project will no longer managed or maintained. For a project
+which is currently in the &amp;ldquo;stable&amp;rdquo; phase, there should be a clear commitment to
+support the project with bug and security fixes as applicable
+&lt;a href=&#34;https://github.com/knative/community/blob/master/mechanics/RELEASE-VERSIONING-PRINCIPLES.md&#34;&gt;based on the Knative release principles&lt;/a&gt;
+(4 versions of Knative).&lt;/p&gt;
+&lt;h1 id=&#34;migration-to-core&#34;&gt;Migration to Core&lt;/h1&gt;
+&lt;p&gt;A stable project may apply to the SC and TOC to be admitted to the Knative core.
+Not all stable projects are suitable for &amp;ldquo;core&amp;rdquo;; this is a judgement as to the
+degree to which the project should be considered a part of a &amp;ldquo;expected developer
+experience&amp;rdquo; across Knative installations. Projects may be graded on the
+following criteria (to be updated based on experience):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Presence of developer-facing or operator-facing capability abstractions&lt;/li&gt;
+&lt;li&gt;Independent usability / abstraction interfaces – how much does this require /
+complement existing Knative components (modular at the top)&lt;/li&gt;
+&lt;li&gt;Ability to abstract over multiple underlying implementations (pluggable on the
+bottom)&lt;/li&gt;
+&lt;li&gt;Number / diversity of installations and adoption as a fraction of total
+Knative usage&lt;/li&gt;
+&lt;li&gt;Quality of technical implementation – ability to scale and reach&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Community: </title>
+      <link>https://knative.dev/community/contributing/security/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/community/contributing/security/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;knative-security-policy&#34;&gt;Knative security policy&lt;/h1&gt;
+&lt;p&gt;To report a security issue, please email &lt;a href=&#34;mailto:security@knative.team&#34;&gt;security@knative.team&lt;/a&gt; with a description of the issue, the steps you took to create the issue, affected versions, and, if known, mitigations for the issue. Our vulnerability management team will respond within 3 working days of your email. If the issue is confirmed as a vulnerability, we will open a Security Advisory. This project follows a 90 day disclosure timeline.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Community: </title>
+      <link>https://knative.dev/community/contributing/working-groups/client/charter/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/community/contributing/working-groups/client/charter/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;knative-client-working-group-charter&#34;&gt;Knative Client Working Group Charter&lt;/h1&gt;
+&lt;h2 id=&#34;mission&#34;&gt;Mission&lt;/h2&gt;
+&lt;p&gt;The Knative Client Working Group maintains a delightful baseline operator-neutral Knative client developer experience, including documentation about what normative clients do, and a reference implementation of a normative client.&lt;/p&gt;
+&lt;h2 id=&#34;goals&#34;&gt;Goals&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Provide a portable reference command-line client for Knative with a normative workflow.&lt;/li&gt;
+&lt;li&gt;Provide guidance about normative uses of the Knative APIs to client developers.&lt;/li&gt;
+&lt;li&gt;Provide reference implementations of Knative developer workflows as a library to be incorporated into other clients.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;scope&#34;&gt;Scope&lt;/h2&gt;
+&lt;p&gt;In a new repo in the knative org:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Maintain documentation around how the API can be used to create a delightful user experience for core Developer journeys, and client conventions for Knative as a whole and each Knative building block.&lt;/li&gt;
+&lt;li&gt;Create and maintain a golang library for implementing the normative client flows for the Developer persona, for general Knative-wide conventions as well as workflows specific to each building block and their interactions. This library should support workflows for both graphical and command-line client tooling, though the group will only maintain an implementation of a command-line client.&lt;/li&gt;
+&lt;li&gt;Create and maintain a standalone command-line client, &lt;code&gt;kn&lt;/code&gt;, using the aforementioned library, that implements a developer experience for Knative that is portable across operators.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In working group meetings:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Provide a forum to discuss non-CLI user tooling as well (web, etc.), and how the client libraries can support those too.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;non-scope&#34;&gt;Non-scope:&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Implementation of other experimental interfaces for Knative.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;preliminary-3-month-roadmap&#34;&gt;Preliminary 3-Month Roadmap&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Month 1 (December. December barely exists.)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Get repo structure set up&lt;/li&gt;
+&lt;li&gt;Start library for Serving&lt;/li&gt;
+&lt;li&gt;Pick tech stack for CLI (set of libs to use for terminal manipulation &amp;amp; display etc)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Month 2&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Start CLI, using library for Serving&lt;/li&gt;
+&lt;li&gt;One major user journey complete for Serving, ex &amp;ldquo;deploy a new image to a Service&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;With Build: Settle on supported path for deploy-from-source-dir&lt;/li&gt;
+&lt;li&gt;With Eventing: Discuss user support for discovery story&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Month 3&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Have at least two major user journeys completed e2e for Serving&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;details&#34;&gt;Details&lt;/h2&gt;
+&lt;h3 id=&#34;documentation-details&#34;&gt;Documentation details&lt;/h3&gt;
+&lt;p&gt;New WG will own &lt;code&gt;&lt;a href=&#34;https://github.com/knative/serving/blob/master/docs/spec/normative_examples.md&#34;&gt;normative-examples.md&lt;/a&gt;&lt;/code&gt; and &lt;code&gt;&lt;a href=&#34;https://github.com/knative/serving/blob/master/docs/client-conventions.md&#34;&gt;client-conventions.md&lt;/a&gt;&lt;/code&gt; from Serving; similar docs can start here, concerning any of Serving, Eventing, Build.&lt;/p&gt;
+&lt;h3 id=&#34;library-details&#34;&gt;Library details&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;A Go library implementing core Knative functionality for the Developer persona, including:
+&lt;ul&gt;
+&lt;li&gt;General Knative-wide functionality
+&lt;ul&gt;
+&lt;li&gt;Library for reading and dealing with ready conditions and terminal conditions.
+&lt;ul&gt;
+&lt;li&gt;Watching or polling them for completeness&lt;/li&gt;
+&lt;li&gt;Reporting on partial completeness&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Support for the core user journeys across Knative projects, including cross-project integrations. Examples:
+&lt;ul&gt;
+&lt;li&gt;Serving
+&lt;ul&gt;
+&lt;li&gt;Creating Services&lt;/li&gt;
+&lt;li&gt;Deploying software to Services
+&lt;ul&gt;
+&lt;li&gt;Deploying from source: integrated with Build&lt;/li&gt;
+&lt;li&gt;Deploying an image&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Managing the configurations of services
+&lt;ul&gt;
+&lt;li&gt;Resource limits&lt;/li&gt;
+&lt;li&gt;Concurrency&lt;/li&gt;
+&lt;li&gt;Environment&lt;/li&gt;
+&lt;li&gt;(etc)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Rolling out traffic to revisions&lt;/li&gt;
+&lt;li&gt;Rolling back&lt;/li&gt;
+&lt;li&gt;Fetching and watching all Knative Serving objects&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Build/Pipeline
+&lt;ul&gt;
+&lt;li&gt;Fetching build templates&lt;/li&gt;
+&lt;li&gt;Creating builds using build templates
+&lt;ul&gt;
+&lt;li&gt;From a source repository version&lt;/li&gt;
+&lt;li&gt;From a directory of source (possibly using a technique similar to &lt;a href=&#34;https://github.com/mattmoor/kontext#kontext&#34;&gt;Matt&amp;rsquo;s proof-of-concept&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Creating builds not using build templates (NB: Probably not part of most mainline developer experiences, but included for completeness)&lt;/li&gt;
+&lt;li&gt;Creating namespace-scoped build templates&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Eventing
+&lt;ul&gt;
+&lt;li&gt;Creating bindings from events to endpoints in services&lt;/li&gt;
+&lt;li&gt;Listing available event sources&lt;/li&gt;
+&lt;li&gt;Describing source capabilities and configuration options&lt;/li&gt;
+&lt;li&gt;Creating event source instances (diff between CRD defining the source and an actual instance of a source) in a generic way, these vary wildly&lt;/li&gt;
+&lt;li&gt;CRUD on Channels&lt;/li&gt;
+&lt;li&gt;A way to find unused channels&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Any future Knative building blocks&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;cli-details&#34;&gt;CLI details&lt;/h3&gt;
+&lt;p&gt;A basic command-line client (or plugin to kubectl, chosen based on overall developer experience), built on the Go library, that provides a command-line interface for all the tasks.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;We like short command names. &lt;code&gt;kn&lt;/code&gt;?&lt;/li&gt;
+&lt;li&gt;Authentication using kubeconfig&lt;/li&gt;
+&lt;li&gt;Output formatting and filtering similar to kubectl (tabular, json, yaml formats, templating)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;responsibility-also-includes&#34;&gt;Responsibility also includes&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Tests for all of the above.&lt;/li&gt;
+&lt;li&gt;Code coverage for all the above&lt;/li&gt;
+&lt;li&gt;Any extra github automation for the repo&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;possible-future-scope&#34;&gt;Possible future scope:&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Client libs in other languages. (interest in py from google, at least)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;out-of-scope&#34;&gt;Out of scope:&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Operator concerns (Focusing the interface on the role of developer will lead to a better developer experience, and operator concerns are irrelevant to most developers. Also, operator concerns are more likely to involve non-Knative APIs, like RBAC)
+&lt;ul&gt;
+&lt;li&gt;Installing cluster-scoped build templates&lt;/li&gt;
+&lt;li&gt;Installing Knative&lt;/li&gt;
+&lt;li&gt;Making cluster-scoped configuration choices&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Any functionality that relies on non-Knative APIs (Knative clusters are built using a variety of features, due to the &amp;ldquo;pluggable backends&amp;rdquo; and &amp;ldquo;duck typing&amp;rdquo; work we&amp;rsquo;ve been doing, and so if an API hasn&amp;rsquo;t been standardized into Knative we can&amp;rsquo;t assume a Knative cluster has it)
+&lt;ul&gt;
+&lt;li&gt;(Currently) exposing a service outside the cluster&lt;/li&gt;
+&lt;li&gt;RBAC management&lt;/li&gt;
+&lt;li&gt;Binding a service to a domain name&lt;/li&gt;
+&lt;li&gt;Installing Knative&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Any functionality that relies on a particular implementation of Knative. (Client libs should work the same against any implementation of Knative)
+&lt;ul&gt;
+&lt;li&gt;Vendor extensions (aside from codifying where in the API they can go)&lt;/li&gt;
+&lt;li&gt;Any particular happenstance/subtleties that aren&amp;rsquo;t codified, for example in exact ordering of conditions becoming True for a happy-path operation.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Conformance tests for Knative. These can and should &lt;strong&gt;use&lt;/strong&gt; the client libraries we&amp;rsquo;re working on, but deserve their own home.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;working-group&#34;&gt;Working Group&lt;/h2&gt;
+&lt;p&gt;To be a peer of the other Knative working groups, run weekly (to start), cancelled when we don&amp;rsquo;t have enough to talk about.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Community: </title>
+      <link>https://knative.dev/community/contributing/working-groups/delivery/charter/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/community/contributing/working-groups/delivery/charter/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;knative-event-delivery-working-group-charter&#34;&gt;Knative Event Delivery Working Group Charter&lt;/h1&gt;
+&lt;p&gt;Last Updated: Nov 15, 2019&lt;/p&gt;
+&lt;p&gt;Note: the original document was written to focus on Knative Channels, but the TOC recommended refocusing on consistent data-plane behavior and the group renamed. The charter still contains many references to Channels.&lt;/p&gt;
+&lt;h2 id=&#34;mission&#34;&gt;Mission&lt;/h2&gt;
+&lt;p&gt;The Knative Event Delivery Working Group will reduce the friction of finding, implementing, and using Knative compliant Channels. We will specify the interface for event delivery such that multiple implementations can be used by higher level pieces. As well as create conformance tests to verify a given implementation implements the interface correctly and make that information available for operators and developers.&lt;/p&gt;
+&lt;p&gt;Event Delivery is the fundamental data-plane building block for most of the Eventing working group&amp;rsquo;s APIs, including: Broker, Parallel, and Sequence. The stability and reliability of event delivery is thus critical for the majority of Eventing API&amp;rsquo;s surface area. Due to the importance of event delivery, this newly proposed Working Group will lead the Spec, API, documentation as well as conformance test in a focused way, helping implementers of eventing components and other APIs depending on event delivery, to guarantee a consistent and efficient data tranfer API.&lt;/p&gt;
+&lt;p&gt;We expect that other working groups will focus on how channels are used and in particular creating working group for Broker, Parallel, and Sequence (and similar higher level constructs) if needed.&lt;/p&gt;
+&lt;h2 id=&#34;goals&#34;&gt;Goals&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;As an &lt;a href=&#34;https://github.com/knative/eventing/blob/master/docs/personas.md#event-consumer-developer&#34;&gt;Event Consumer&lt;/a&gt;, the choice of Channel implementation with identical defined characteristics (e.g. persistence or in-order delivery) has no affect on me.&lt;/li&gt;
+&lt;li&gt;As an &lt;a href=&#34;https://github.com/knative/eventing/blob/master/docs/personas.md#event-producer&#34;&gt;Event Producer&lt;/a&gt;, the choice of Channel implementation has no affect on me.&lt;/li&gt;
+&lt;li&gt;As a &lt;a href=&#34;https://github.com/knative/eventing/blob/master/docs/personas.md#system-integrator&#34;&gt;System Integrator&lt;/a&gt;, I can create a new Channel implementation and use the conformance tests to verify that it meets all the requirements of a Channel implementation.&lt;/li&gt;
+&lt;li&gt;As an Operator, I can find conforming Channel implementations and control which are available within the cluster.&lt;/li&gt;
+&lt;li&gt;As an Operator, I can choose Channels based on additional, well defined characteristics, such as persistence or in-order delivery.&lt;/li&gt;
+&lt;li&gt;As an Operator, I can understand Channel usage and locate errors.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;scope&#34;&gt;Scope&lt;/h2&gt;
+&lt;p&gt;In the existing Eventing repo inside the knative org:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Continue to evolve the &lt;a href=&#34;https://github.com/knative/eventing/blob/master/docs/spec/channel.md&#34;&gt;Channel Spec&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Continue to increase the coverage of the &lt;a href=&#34;https://github.com/knative/eventing/tree/master/test/conformance&#34;&gt;Channel conformance tests&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Explore &lt;a href=&#34;https://github.com/knative/eventing/tree/master/docs/delivery&#34;&gt;Channel error handling&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Maintain libraries to make Channels more consistent, such as &lt;a href=&#34;https://github.com/knative/eventing/blob/master/pkg/channel/event_receiver.go&#34;&gt;EventReceiver&lt;/a&gt; and &lt;a href=&#34;https://github.com/knative/eventing/blob/master/pkg/channel/event_dispatcher.go&#34;&gt;EventDispatcher&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Maintain OWNERS files within both the eventing and eventing-contrib repo for folders owned by the Channels WG. So that it is easier to track who is on track PRs and who is on track to become an approver or lead.&lt;/li&gt;
+&lt;li&gt;Document and evolve the event delivery contract between all Knative pieces dealing with events, and manifest this contract in a “Knative Event Delivery Spec”.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Documentation:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Explore different styles of Channel implementations, giving nuanced recommendations on the trade-offs between different designs (e.g. Job based vs singleton dispatchers).&lt;/li&gt;
+&lt;li&gt;Maintain a list of conforming &lt;a href=&#34;https://knative.dev/docs/eventing/channels/channels-crds/&#34;&gt;Channel implementations&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In working group meetings:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Provide a forum to discuss and align work items related to the working group, status updates.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;preliminary-3-month-roadmap&#34;&gt;Preliminary 3-Month Roadmap&lt;/h2&gt;
+&lt;p&gt;Month 1&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Start to define the Event Delivery Spec.&lt;/li&gt;
+&lt;li&gt;Verify the Channel Spec and reflect content from Event Delivery Spec.&lt;/li&gt;
+&lt;li&gt;InMemoryChannel has error handling (dead letter queue).&lt;/li&gt;
+&lt;li&gt;Document the different styles of Channels that currently exist and their trade offs.&lt;/li&gt;
+&lt;li&gt;Increase the amount of the specification covered by the conformance tests.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Month 2&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;At least one Channel implementation other than InMemoryChannel has error handling.&lt;/li&gt;
+&lt;li&gt;Increase the amount of the specification covered by the conformance tests.&lt;/li&gt;
+&lt;li&gt;Add observability to the Channel specification.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Month 3&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;At least one Channel uses native error handling (e.g. RabbitMQ&amp;rsquo;s dead letter exchange).&lt;/li&gt;
+&lt;li&gt;100% coverage of all MUST and MUST NOT directives in the specification covered by the conformance tests.&lt;/li&gt;
+&lt;li&gt;Framework for the conformance tests to test optional Channel attributes, such as guaranteed delivery and in-order delivery.&lt;/li&gt;
+&lt;li&gt;At least two Channel implementations that pass all conformance tests.&lt;/li&gt;
+&lt;li&gt;Document which Channel implementations are available, whether they pass conformance tests, and any optional properties they guarantee (e.g. persistence, in order delivery, etc.).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;working-group&#34;&gt;Working Group&lt;/h2&gt;
+&lt;p&gt;We will operate as a partner group to Eventing, giving a brief update in the weekly Eventing working group meeting. We will additionally meet on a weekly basis, cancelled when there is a lack of agenda.&lt;/p&gt;
+&lt;h2 id=&#34;proposed-leads&#34;&gt;Proposed Leads&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/Harwayne&#34;&gt;Harwayne&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/matzew&#34;&gt;matzew&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;history&#34;&gt;History&lt;/h2&gt;
+&lt;p&gt;The Eventing WG created a &lt;a href=&#34;https://docs.google.com/document/d/1uxlulaAf2m_yZUqCIeI-inul2gsqP69PElnZdO0FHUo/edit#&#34;&gt;Channel Task Force&lt;/a&gt; in May 2019, lead by &lt;a href=&#34;https://github.com/Harwayne&#34;&gt;Harwayne&lt;/a&gt; and &lt;a href=&#34;https://github.com/matzew&#34;&gt;matzew&lt;/a&gt;. It has been meeting on a weekly basis and has made progress on many of the issues above. As the scope of the task force has increased, it no longer has a clear exit condition. Therefore it feels more appropriate for it to be a working group, rather than a task force.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Community: </title>
+      <link>https://knative.dev/community/contributing/working-groups/docs/charter/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/community/contributing/working-groups/docs/charter/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;knative-documentation-working-group-charter&#34;&gt;Knative Documentation Working Group Charter&lt;/h1&gt;
+&lt;p&gt;Authors: Sam O’Dell, (&lt;a href=&#34;mailto:odells@google.com&#34;&gt;odells@google.com&lt;/a&gt;), Richie Escarez (&lt;a href=&#34;mailto:rescarez@google.com&#34;&gt;rescarez@google.com&lt;/a&gt;), Ivan Nikittin (&lt;a href=&#34;mailto:ifnikitt@google.com&#34;&gt;ifnikitt@google.com&lt;/a&gt;)&lt;/p&gt;
+&lt;h2 id=&#34;mission&#34;&gt;Mission&lt;/h2&gt;
+&lt;p&gt;To write, edit, review, organize, and maintain contributions to the Knative open source documentation.&lt;/p&gt;
+&lt;h2 id=&#34;goals&#34;&gt;Goals&lt;/h2&gt;
+&lt;p&gt;Create a first-class documentation experience for Knative users by:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Establishing a documentation strategy and aligning new contributions with it&lt;/li&gt;
+&lt;li&gt;Defining style guidelines and terminology for the doc set&lt;/li&gt;
+&lt;li&gt;Coordinating the efforts of documentation contributors and encouraging new contributions&lt;/li&gt;
+&lt;li&gt;Adopting appropriate tooling to help with automation&lt;/li&gt;
+&lt;li&gt;Creating processes that:
+&lt;ul&gt;
+&lt;li&gt;Lower the time to address PRs and issues&lt;/li&gt;
+&lt;li&gt;Protect the quality of the documentation, especially over time&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Contributing to overall product direction through our experience as the earliest Knative users&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;scope&#34;&gt;Scope&lt;/h2&gt;
+&lt;p&gt;This group will primarily concern itself with the content of the &lt;a href=&#34;https://github.com/knative/docs&#34;&gt;Knative Docs repo&lt;/a&gt;, but may also contribute to the documentation in other &lt;a href=&#34;https://github.com/knative&#34;&gt;Knative&lt;/a&gt; repos.&lt;/p&gt;
+&lt;h2 id=&#34;documentation-working-group-roadmap&#34;&gt;Documentation Working Group Roadmap&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://docs.google.com/document/d/1A0H2lpH8FQ0RQxkdXbLz-tbFsM4qtUByARPHkLuDOdw/edit#&#34;&gt;Link to Roadmap&lt;/a&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Community: </title>
+      <link>https://knative.dev/community/contributing/working-groups/operations/charter/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/community/contributing/working-groups/operations/charter/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;knative-operations-working-group-charter&#34;&gt;Knative Operations Working Group Charter&lt;/h1&gt;
+&lt;p&gt;Created: 2019-04-26 / Last Updated: 2019-05-06&lt;/p&gt;
+&lt;h2 id=&#34;charter&#34;&gt;Charter&lt;/h2&gt;
+&lt;h3 id=&#34;mission&#34;&gt;Mission&lt;/h3&gt;
+&lt;p&gt;The Knative Operation Working Group provides best practices for managing, assessing system health and maintaining Knative clusters. The initial focus will be on how Knative is installed, removed, and upgraded.&lt;/p&gt;
+&lt;h3 id=&#34;goals&#34;&gt;Goals&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Provide a means to install Knative [Serving/Build/Eventing] with operator(s) specified options
+&lt;ul&gt;
+&lt;li&gt;Operator specified defaults such as timeouts and concurrency&lt;/li&gt;
+&lt;li&gt;Network preferences, Istio / Gloo / others&lt;/li&gt;
+&lt;li&gt;Build Template selection&lt;/li&gt;
+&lt;li&gt;Eventing component selection&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Provide a means to install Knative with limited/no internet access&lt;/li&gt;
+&lt;li&gt;Provide a means to upgrade/downgrade Knative with limited/no user visible impact to their service&lt;/li&gt;
+&lt;li&gt;Provide guidelines on determining the overall health of Knative&lt;/li&gt;
+&lt;li&gt;Provide cluster sizing and lifecycle recommendations&lt;/li&gt;
+&lt;li&gt;An entrypoint and forum for dogfooders to give feedback&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;non-goals&#34;&gt;Non-Goals&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;The knative operator does not manage or install Istio, or other dependents.
+&lt;ul&gt;
+&lt;li&gt;But we might want to have the option to recommend other operators for this task. Like &lt;code&gt;knative.spec.istioOperator = yes&lt;/code&gt; please.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;scope&#34;&gt;Scope&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Tooling for installation/removal/upgrades/downgrades&lt;/li&gt;
+&lt;li&gt;Management mechanisms for:
+&lt;ul&gt;
+&lt;li&gt;namespace setup (if needed)&lt;/li&gt;
+&lt;li&gt;Quota and RBAC management&lt;/li&gt;
+&lt;li&gt;Build and registry configuration&lt;/li&gt;
+&lt;li&gt;integration with existing cluster o11y&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Debugging tools for operator personas.&lt;/li&gt;
+&lt;li&gt;Define more specific &amp;ldquo;operator&amp;rdquo; sub-personas within the Knative &amp;ldquo;operator&amp;rdquo; persona (e.g. auditor, cloud provider, IT provider, etc)
+&lt;ul&gt;
+&lt;li&gt;Collect feedback from operators on the usability of Knative&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Collaborate w/ Documentation Working Group on documentation for installation/removal/upgrades/downgrades&lt;/li&gt;
+&lt;li&gt;Collaborate w/ Observability Working Group on metrics for health of Knative&lt;/li&gt;
+&lt;li&gt;Collaborate w/ Productivity Working Group on using best-practice installation for testing&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;lead-nomination&#34;&gt;Lead Nomination&lt;/h2&gt;
+&lt;p&gt;Ben Browning (bbrowning), Gregory Haynes (greghaynes), Kenny Leung (k4leung4)&lt;/p&gt;
+&lt;h2 id=&#34;roadmap&#34;&gt;Roadmap*&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Month 1 ~ Knative 0.7&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Implement all tasks under &lt;a href=&#34;https://github.com/knative/community/blob/master/WORKING-GROUP-PROCESSES.md#setting-up-a-working-group&#34;&gt;Setting Up A Working Group&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Set up separate repo for each of Knative serving/eventing&lt;/li&gt;
+&lt;li&gt;Enable operator installs for current version of Knative Serving&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Month 2 ~ Knative 0.8&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Adopt operator installation usage for automated Knative Serving&lt;/li&gt;
+&lt;li&gt;Decide on parameters for customization for Knative Serving&lt;/li&gt;
+&lt;li&gt;Enable operator installs for Knative Build/Eventing&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Month 3 ~ Knative 0.9&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Investigate using operator for test execution&lt;/li&gt;
+&lt;li&gt;Explore upgrade scenarios for Knative Serving using operator&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Assumes adoption of operators&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;previous-efforts&#34;&gt;Previous Efforts&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://drive.google.com/open?id=11cenPfZrEU04OFQYTE_6e_LrOw07HPOkeT1_Gigmy7U&#34;&gt;Knative Operator Working Group Proposal&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Community: </title>
+      <link>https://knative.dev/community/contributing/working-groups/productivity/charter/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/community/contributing/working-groups/productivity/charter/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;contributor-productivity-working-group-charter&#34;&gt;Contributor Productivity Working Group Charter&lt;/h1&gt;
+&lt;p&gt;This is the proposal of creating contributor productivity working group for Knative.&lt;/p&gt;
+&lt;h1 id=&#34;mission&#34;&gt;Mission&lt;/h1&gt;
+&lt;p&gt;The mission of Contributor Productivity working group is to develop engineering guidelines, tools and infrastructure for Knative open source community to enable high quality and high velocity deliverables, to drive measurable and predictable releases, and to achieve high community collaboration and overall productivity.&lt;/p&gt;
+&lt;h1 id=&#34;goals&#34;&gt;Goals&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Foster collaboration among contributors for common needs&lt;/li&gt;
+&lt;li&gt;Identify top priorities or pain points&lt;/li&gt;
+&lt;li&gt;Formulate guidelines and processes around testing, continuous integration, code velocity, and release packaging.&lt;/li&gt;
+&lt;li&gt;Develop/Evangelize reusable tools and infrastructure to be utilized by contributors across repos for various purposes such as E2E testing, conformance testing, performance/scalability testing, project health reporting, product troubleshooting/diagnostics and etc. More specifically we’d graduate reusable tools to kubernetes/test-infra.&lt;/li&gt;
+&lt;li&gt;Drive up contributor experience with ongoing improvements to automations around code life cycle such as issue creation, triage, code review, test and release. The goal is to reduce contributor overhead, minimize product defects and improve overall efficiency. In turn, it shall help developer and operator experience with better product quality and more efficient releases.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;scope&#34;&gt;Scope&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Project health
+&lt;ul&gt;
+&lt;li&gt;Define metrics (such as listed below) to measure project health, and deliver automation for improving project health.
+&lt;ul&gt;
+&lt;li&gt;Code coverage&lt;/li&gt;
+&lt;li&gt;API coverage&lt;/li&gt;
+&lt;li&gt;Release churns&lt;/li&gt;
+&lt;li&gt;PR latency (time to merge)&lt;/li&gt;
+&lt;li&gt;Onboarding velocity (time to PR)&lt;/li&gt;
+&lt;li&gt;Issue Triage velocity&lt;/li&gt;
+&lt;li&gt;Issue Resolving Velocity&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Have automation in place to help drive up project health metrics with opt-in (default off) vs. opt-out (default on) options; and each WG can decide whether they are in or out.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Test framework
+&lt;ul&gt;
+&lt;li&gt;Ensure there is common test infrastructure in place to run unit, build, E2E and conformance tests, to output logs and metrics from tests, and to visualize logs/metrics.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;CI/CD workflows
+&lt;ul&gt;
+&lt;li&gt;Maintain presubmit and postsubmit workflows to gate the quality of code checkin and quality of release&lt;/li&gt;
+&lt;li&gt;Ensure there is sufficient monitoring in place to monitor the health of workflow and infrastructure themselves&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Release criteria/process
+&lt;ul&gt;
+&lt;li&gt;Define and implement release criteria and process&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.google.com/document/d/1_LXxZc_dlmFexILC27TnitFSFxP3l9mUkmGf_uTRYHc/edit&#34;&gt;Performance/Scalability/Load testing&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;Working with individual feature WG (serving, scaling, build, control plane, eventing) to identify common requirements and provide a shared framework for each WG to consume. Initial thinking of common need includes cluster creation/setup, load profiles, test orchestration, result collection, metric visualization and etc. The corresponding framework code will exist at test-infra repo.&lt;/li&gt;
+&lt;li&gt;Individual feature WG will be responsible for designing and implementing the actual testing, the corresponding test code will exist at individual repo.&lt;/li&gt;
+&lt;li&gt;Collaborate with partner teams to reuse existing performance/load testing infrastructure as well as environment whenever possible&lt;/li&gt;
+&lt;li&gt;Link above has more detailed proposals&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Troubleshooting experience
+&lt;ul&gt;
+&lt;li&gt;Ensure sufficient automation and documentation is in place for self-service Knative troubleshooting&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Will use Knative/test-infra repo for code, maybe a good idea to rename it for broader purpose as outlined in this doc&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;initial-set-of-leads&#34;&gt;Initial set of leads:&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Adriano Cunha (adrcunha on github)&lt;/li&gt;
+&lt;li&gt;Jessie Zhu (jessiezcc on github)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;proposed-3-month-roadmap&#34;&gt;Proposed 3 Month Roadmap&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;M8:
+&lt;ul&gt;
+&lt;li&gt;Set up regular WG meetings and establish forms of communication&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;M9:
+&lt;ul&gt;
+&lt;li&gt;Document existing development/release workflows to form a common understanding within the community&lt;/li&gt;
+&lt;li&gt;Collect feedback on onboarding/development experience from the community from various sources such as meetings, slack, social media&lt;/li&gt;
+&lt;li&gt;Define performance/load testing goals for different scenarios (contributor vs. developer)&lt;/li&gt;
+&lt;li&gt;Finalize methodologies for perf/load testing&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;M10:
+&lt;ul&gt;
+&lt;li&gt;Build tools to measure community satisfaction around onboarding, developer, test, troubleshoot experience.&lt;/li&gt;
+&lt;li&gt;Contributor friendly onboarding &amp;amp; troubleshooting experience based on feedbacks from M8&lt;/li&gt;
+&lt;li&gt;At least one WG adopting perf/load test infra (scaling)&lt;/li&gt;
+&lt;li&gt;Project health dashboard open to community&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;M11
+&lt;ul&gt;
+&lt;li&gt;Shareable performance/load test toolset&lt;/li&gt;
+&lt;li&gt;Build tools to gather and track structured community feedback&lt;/li&gt;
+&lt;li&gt;Drive up community satisfaction based on measurements from M9&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Community: </title>
+      <link>https://knative.dev/community/contributing/working-groups/security/charter/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/community/contributing/working-groups/security/charter/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;security-working-group-charter&#34;&gt;Security Working Group Charter&lt;/h1&gt;
+&lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;
+&lt;p&gt;The “aaS” in FaaS stands for “as-a-service”. Many users would like to use Knative as the basis of a multi-tenant FaaS or PaaS-style platform. Even users who do not need hard multi-tenancy will wish to be confident of Knative’s security in single-tenant and soft multi-tenant scenarios. Currently the project provides limited guidance for how to configure and deploy itself successfully in these environments. The Security Working Group’s mission will be to fix this, by improving documentation, code, and process as needed to harden Knative for these use cases.&lt;/p&gt;
+&lt;h2 id=&#34;mission&#34;&gt;Mission&lt;/h2&gt;
+&lt;p&gt;The Security Working Group is responsible for helping users successfully run Knative in security sensitive environments. This mission will involve documentation, proactive exploratory testing, fixing of gaps, and production of necessary manifests and example security policies for various use cases.&lt;/p&gt;
+&lt;p&gt;The Working Group will evaluate new and existing features for their security impact, and where necessary will work with other Working Groups to add features and close gaps in order to support security-sensitive and multi-tenant use cases. The overarching goal is to, as well as to promote a security-conscious mindset throughout the project.&lt;/p&gt;
+&lt;p&gt;Example features and tasks which could fit within this mission (see also “Goals”, below):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Documented recommendations and example manifests for setting up NetworkPolicy to prevent access between namespaces and for enabling mTLS.&lt;/li&gt;
+&lt;li&gt;Documented recommendations and example manifests for securing traffic between Eventing and Serving workloads.&lt;/li&gt;
+&lt;li&gt;Filling gaps in the security story for integrating eventing and serving. .&lt;/li&gt;
+&lt;li&gt;Document how to expose Knative as a multi-tenant service. For example configuring a secure runtime (gVisor, Kata containers, firecracker etc), adding the AlwaysPullImages admission controller and appropriate security policies, setting up appropriate NetworkPolicy.&lt;/li&gt;
+&lt;li&gt;Documenting and improving the current security posture of Knative for various specific use cases, such as multi-tenant environments, air-gapped environments, and security-sensitive single tenant environments.&lt;/li&gt;
+&lt;li&gt;A suggested PodSecurityPolicy (or OPA policy etc) to be used with Knative.&lt;/li&gt;
+&lt;li&gt;Tests and configuration to run Knative with gVisor, ClearContainers, and other isolation technologies.&lt;/li&gt;
+&lt;li&gt;Integration with open source security tools, eg. Falco.&lt;/li&gt;
+&lt;li&gt;Setting up and maintaining Security Scanners, Linters and other automated tools (and initially fixing any found problems).&lt;/li&gt;
+&lt;li&gt;Defining processes for reporting, handling and pro-actively auditing the system for vulnerabilities; for example organising exploratory testing sessions.&lt;/li&gt;
+&lt;li&gt;Defining and owning the process for handling reported security vulnerabilities (but see “non-goals” section w.r.t.not directly handling vulnerability reports, since this likely would mandate a restricted membership group).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;working-group&#34;&gt;Working Group&lt;/h2&gt;
+&lt;p&gt;Since this work cross-cuts Serving, Eventing, and Documentation, and since Security and Multi-tenancy are on-going considerations for the project, this will be a top-level working group which will work closely with other working groups.&lt;/p&gt;
+&lt;h2 id=&#34;goals&#34;&gt;Goals&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Ensure that documentation and sample configs exist which permit Knative to be deployed securely (to the extent possible) in security-sensitive and multi-tenant environments. Close gaps (working with other WGs) and add features as needed to make this possible.&lt;/li&gt;
+&lt;li&gt;Share and document best practices between those using Knative for security-sensitive use cases.&lt;/li&gt;
+&lt;li&gt;Provide example configurations that lock down the upstream cluster to maximize security (i.e. to configure the system so that only the Knative APIs are available, and security-sensitive fields such as securityContext and serviceAccountTokens are blocked).&lt;/li&gt;
+&lt;li&gt;Validate new feature proposals for their ability to be implemented in secure and multi-tenant environments.&lt;/li&gt;
+&lt;li&gt;Consider the API surface of Knative to identify and fix potential DOS attacks and other security vulnerabilities, and to ensure Knative can be successfully used in multi-tenant environments, and for security-sensitive use cases.&lt;/li&gt;
+&lt;li&gt;Publish design docs on Knative Threat Model, Security Analysis docs etc.&lt;/li&gt;
+&lt;li&gt;Set up processes to ensure ongoing security of the platform. For example security linters, scanners, fuzzers, patch managers, and at a higher level through ensuring security is considered holistically and pro-actively by the project as a whole.&lt;/li&gt;
+&lt;li&gt;Run a (ideally regular) brainstorming/exploratory session where we proactively brainstorm, investigate and mitigate potential attack vectors against the platform.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;non-goals&#34;&gt;Non-Goals&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Hard multi-tenancy in the unrestricted upstream platform. We will seek to upstream features as needed, but we assume achieving the goal for Knative in the short term may imply blocking access to some features in the underlying platform.&lt;/li&gt;
+&lt;li&gt;Guaranteeing the security of the platform - this is ultimately up to vendors, administrators and operators; the WG mission is to provide guidance and share best practices to enable these people to be successful.&lt;/li&gt;
+&lt;li&gt;Responsibility for specific vulnerabilities (though the WG may be a good place to define and steward a general process for handling vulnerabilities, security scanning etc, actively being responsible for managing specific reported vulnerabilities would likely require a closed WG).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;scope&#34;&gt;Scope&lt;/h2&gt;
+&lt;h3 id=&#34;in-the-existing-repos&#34;&gt;In the existing repos:&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Provide cross-cutting input on security and multi-tenancy concerns.&lt;/li&gt;
+&lt;li&gt;Provide documentation and example configurations for deploying Knative in multi-tenant environments, for example PodSecurityPolicies, NetworkPolicies, Secure Runtimes (some of this might end up being in a different repo).&lt;/li&gt;
+&lt;li&gt;Fill gaps needed to use securely, as appropriate. For example rate limiting for DOS attack mitigation, network policy, podsecuritypolicy (or related new hotness as it’s deprecated :)).&lt;/li&gt;
+&lt;li&gt;Set up &amp;amp; own automation and security scanning tools, linters.&lt;/li&gt;
+&lt;li&gt;Set up &amp;amp; own test infrastructure for deploying and testing against an environment with limited RBAC rules.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;in-working-group-meetings&#34;&gt;In working group meetings:&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Provide a forum to discuss and document security-sensitive use cases, experiences and requirements, and to surface gaps and needed features.&lt;/li&gt;
+&lt;li&gt;Provide a forum to discuss potential new feature proposals WRT security and multi-tenant/security-sensitive-single-tenant use cases.&lt;/li&gt;
+&lt;li&gt;Perform pro-active exploratory testing for vulnerabilities, DOS vectors etc.&lt;/li&gt;
+&lt;li&gt;Discuss, prioritise and document the current and desired security posture of the project with regard to various scenarios (e.g. security-sensitive single tenant, air-gapped, multi-tenant etc).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;preliminary-3-month-roadmap&#34;&gt;Preliminary 3-month Roadmap&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Document, with appropriate warnings about limitations, the current security recommendations for deploying Knative in various environments, for example hosted multi-tenant, private/trusted multi-tenant, secure single tenant.&lt;/li&gt;
+&lt;li&gt;Provide and document an optional set of RBAC rules, PodSecurityPolicies etc which give access only to public Knative APIs, and block access to insecure features (securityContext, service tokens etc).&lt;/li&gt;
+&lt;li&gt;Define and document a process for reporting and handling vulnerabilities (see discussion in &lt;a href=&#34;https://github.com/knative/community/pull/258&#34;&gt;https://github.com/knative/community/pull/258&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Set up infrastructure and CI automation to test changes against a restricted-RBAC, restricted PodSecurityPolicy environment. Close any found gaps.&lt;/li&gt;
+&lt;li&gt;Define and add a security section to the Project Proposal Template to ensure we explicitly consider security implications of new features.&lt;/li&gt;
+&lt;li&gt;Working with Networking WG, create NetworkPolicies to secure access between namespaces and between the knative-serving namespace and container namespaces.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;potential-future-6-12-month-items&#34;&gt;Potential Future (6-12 month) Items&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Work with Eventing and Serving WG to provide secure communication between Events and Services in as networking-provider agnostic a way as possible.&lt;/li&gt;
+&lt;li&gt;Working with Documentation WG, provide deployment instructions for configuring Knative with a secure container runtime (e.g., gVisor, Kata Containers)&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;proposed-leads&#34;&gt;Proposed Leads&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Julian Friedman (IBM)&lt;/li&gt;
+&lt;li&gt;Evan Anderson (VMware)&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Community: </title>
+      <link>https://knative.dev/community/contributing/working-groups/security/responding/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/community/contributing/working-groups/security/responding/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;vulnerability-disclosure-response-policy&#34;&gt;Vulnerability Disclosure Response Policy&lt;/h1&gt;
+&lt;p&gt;The project follows the following process when responding to vulnerabilities
+raised via the Security Disclosure Process.&lt;/p&gt;
+&lt;h2 id=&#34;product-security-taskforce-membership&#34;&gt;Product Security Taskforce Membership&lt;/h2&gt;
+&lt;p&gt;The subset of maintainers who are subscribed to the &lt;a href=&#34;mailto:security@knative.team&#34;&gt;security@knative.team&lt;/a&gt; email
+address form the Product Security Taskforce.
+This group will be responsible for fixing vulnerabilities and managing the
+disclosure process.&lt;/p&gt;
+&lt;p&gt;The Product Security Taskforce is distinct from the embargo list: it is not
+necessary (or helpful) to join the PST in order to receive early notice of
+vulnerabilities. The PST is intentionally small to avoid inadvertent
+disclosures of vulnerabilities (while being large enough to spread the work of
+responding to vulnerabilities) and should be composed of those who will
+actively work on the fix and disclosure process.&lt;/p&gt;
+&lt;p&gt;Anyone who is an Approver, Lead or TOC Member in a Knative Project, or who is
+an employee of a member of the Embargo list working in a security role may
+apply to be a member of this group.
+The application is approved or rejected by the TOC.&lt;/p&gt;
+&lt;h2 id=&#34;identifying-a-fix-lead&#34;&gt;Identifying a Fix Lead&lt;/h2&gt;
+&lt;p&gt;The PST Fix Lead Role is responsible for initially responding to
+vulnerabilities sent to &lt;a href=&#34;mailto:security@knative.team&#34;&gt;security@knative.team&lt;/a&gt;, and for coordinating and
+managing the response with the rest of the PST.&lt;/p&gt;
+&lt;p&gt;We use a rota system to assign the default PST Lead role.
+All members of the PST are expected to sign up to the rota.
+Regardless of the rota, another member of the PST may volunteer to be the PST
+lead for a particular vulnerability.
+This may be appropriate, for example, when the vulnerability is in a particular
+area of the code that PST member is familiar with, or when the rota-ed PST lead
+is already handing another vulnerability.
+&lt;strong&gt;To avoid any confusion, if the PST Lead role is transferred, &lt;a href=&#34;https://www.faasafety.gov/gslac/ALC/course_content.aspx?cID=36&amp;amp;sID=196&amp;amp;preview=true&#34;&gt;positive hand-off&lt;/a&gt;
+should be performed (&amp;ldquo;you are the PST Lead for X&amp;rdquo;, &amp;ldquo;Ok, I am the PST Lead for X&amp;rdquo;, &amp;ldquo;Great, you are the PST lead for X!&amp;quot;)&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;organising-the-fix-team&#34;&gt;Organising the Fix Team&lt;/h2&gt;
+&lt;p&gt;The Fix Lead will quickly identify relevant engineers from the affected
+projects/areas/working groups and the PST and add those engineers to the
+security disclosure / email thread. This group becomes the Fix Team for the
+vulnerability. To prevent accidental disclosure and to maximize efficiency of
+response, the Fix Team should be the minimal size required for efficient
+response.&lt;/p&gt;
+&lt;p&gt;Note: Given the current size of the project it is likely that in many cases the
+Fix Team will be the entire PST, possibly with an additional engineer or
+engineers for the affected area if the PST does not have relevant expertise
+itself.&lt;/p&gt;
+&lt;p&gt;If the Fix Team decides the disclosure is in fact a vulnerability which should
+be fixed, the Fix Lead will create a Github Security Advisory and provide the
+Fix Team access to a private branch to develop the fix.&lt;/p&gt;
+&lt;h2 id=&#34;developing-a-fix-and-managing-disclosures&#34;&gt;Developing a Fix and Managing Disclosures&lt;/h2&gt;
+&lt;h3 id=&#34;within-1-7-days-of-disclosure&#34;&gt;Within 1-7 Days of Disclosure&lt;/h3&gt;
+&lt;p&gt;Vulnerabilities are evaluated based on the Knative Threat Model.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;The Fix Team will create a CVSS using the &lt;a href=&#34;https://www.first.org/cvss/calculator/3.0&#34;&gt;CVSS calculator&lt;/a&gt;.
+The Fix Lead makes the final call on the calculated CVSS; it is better to
+move quickly than making the CVSS perfect.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;If the Fix Team determines this is not a vulnerability based on the Knative
+Threat Model, the discloser is notified and the process ends.&lt;/strong&gt;
+(Note that in all cases it is important to inform the reporter that
+the disclosure has been seen and is being addressed as quickly as possible).&lt;/li&gt;
+&lt;li&gt;Otherwise, the Fix Lead creates a private branch for development of the Fix,
+and a Github Security Advisory to coordinate the disclosure.&lt;/li&gt;
+&lt;li&gt;The Fix Lead responds to the reporter to let them know the work has begun to
+address the vulnerability. &lt;strong&gt;If appropriate, and if the reporter is willing,
+the reporter is added to the Security Advisory and can help to develop the
+fix. The reporter may also wish to help with writing the CVE entry. They
+should in all cases be asked if they would like credit for identifying the
+vulnerability in the CVE and disclosure&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;The Fix Team urgently develops a fix or mitigation so that a realistic
+timeline can be communicated to users.&lt;/li&gt;
+&lt;li&gt;The Fix Lead completes the Github Security Advisory and requests a CVE from Github.&lt;/li&gt;
+&lt;li&gt;If the CVSS score is below 4.0, the Fix Team may - after appropriate
+discussion and based on developer bandwidth, public holidays etc - decide to
+slow down the release process.&lt;/li&gt;
+&lt;li&gt;The fact that a vulnerability has been disclosed and a fix will be released
+is communicated by the Fix Lead (working with the Fix Team) to the
+knative-security-announce mailing list with an exact date and time planned
+for the disclosure. If the optional embargoed disclosure step will be
+followed (see next section), this date must be three weeks from when the
+disclosure is released to the embargo list.&lt;/li&gt;
+&lt;li&gt;This email should be actionable: it should be clear when users
+should block time to apply patches, what mitigations are available (if
+appropriate), etc.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;optional-within-1-14-days-of-disclosure-private-embargoed-disclosure&#34;&gt;Optional, Within 1-14 Days of Disclosure (Private, Embargoed Disclosure)&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;If, in the judgement of the Fix Lead, a private disclosure is warranted, the
+Embargo List is emailed with details of the fix (including any proposed
+patch/mitigation and actionable instructions) and the date it will be
+publicly disclosed and released.&lt;/li&gt;
+&lt;li&gt;If this is the case, the Public Disclosure should not be
+released until at least three weeks after this notification is sent, to give
+vendors time to prepare to release the patch. In exceptional circumstances
+this may be extended to four weeks to account for significant public
+holidays etc.&lt;/li&gt;
+&lt;li&gt;Note: This step is optional and should be reserved for significant
+vulnerabilities that warrant this treatment. In general these are
+vulnerabilities that could lead to remotely exploitable or privilege
+escalation issues.&lt;/li&gt;
+&lt;li&gt;In the unlikely event that a member of the PST list breaks embargo, or if
+the exploit otherwise becomes public early, the PST Lead will decide whether
+to accelerate the schedule for public disclosure and release of the fix.
+When in doubt push forward and go public ASAP.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;within-1-28-days-of-disclosure-fix-release-day&#34;&gt;Within 1-28 Days of Disclosure (Fix Release Day)&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;The Fix Lead cherry-picks the fix on to the main branch and all relevant
+release branches and creates PRs.&lt;/li&gt;
+&lt;li&gt;Maintainers should approve this PR as quickly as possible (it should already
+have been reviewed on the private branch).&lt;/li&gt;
+&lt;li&gt;If necessary, Release jobs should be manually triggered to ensure
+a release is available as quickly as possible.&lt;/li&gt;
+&lt;li&gt;The Issue should be disclosed to the knative-security-annnounce mailing
+list, the knative-users mailing list, the knative-dev mailing list
+and the embargo list including relevant PRs, mitigations and the release
+numbers containing the fix.&lt;/li&gt;
+&lt;li&gt;The Fix Lead removes any permissions from private branches granted for the
+purposes of the Fix.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;retrospective&#34;&gt;Retrospective&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;A &lt;a href=&#34;https://landing.google.com/sre/book/chapters/postmortem-culture.html&#34;&gt;blameless retrospective&lt;/a&gt;
+should be conducted 1-3 days after the release.&lt;/li&gt;
+&lt;li&gt;The Fix Lead will send a retrospective of the process to knative-dev
+including details on everyone involved, the timeline of the process, links
+to relevant PRs that introduced the issue, if relevant, and any critiques of
+the response and release process.&lt;/li&gt;
+&lt;li&gt;Maintainers and Fix Team are also encouraged to send their own feedback on
+the process to knative-dev. Honest critique is the only way we are going to
+get good at this as a community.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
+&lt;p&gt;This document borrows heavily and gratefully from the &lt;a href=&#34;https://github.com/envoyproxy/envoy/blob/main/SECURITY.md&#34;&gt;Envoy Vulnerability
+Response Process&lt;/a&gt;
+and the &lt;a href=&#34;https://github.com/google/oss-vulnerability-guide/blob/main/guide.md&#34;&gt;Google OSS Vulnerability Guide&lt;/a&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Community: </title>
+      <link>https://knative.dev/community/contributing/working-groups/sources/charter/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/community/contributing/working-groups/sources/charter/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;knative-sources-working-group-charter&#34;&gt;Knative Sources Working Group Charter&lt;/h1&gt;
+&lt;p&gt;Author(s): Scott Nichols&lt;/p&gt;
+&lt;p&gt;Last Updated: Oct 30, 2019&lt;/p&gt;
+&lt;h2 id=&#34;mission&#34;&gt;Mission&lt;/h2&gt;
+&lt;p&gt;The Knative Sources Working Group will reduce the friction of creating, finding, and implementing Knative compliant Sources. We will enable new ways to create, test, install, deploy and observe applications that produce or bridge events onto a cluster for consumption.&lt;/p&gt;
+&lt;h2 id=&#34;goals&#34;&gt;Goals&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;As a Developer Persona, enabling the creation of custom sources from new or existing code/containers with little to no changes.&lt;/li&gt;
+&lt;li&gt;As a Developer Persona, allow for easy understanding of existing and potential sources installed in a cluster.&lt;/li&gt;
+&lt;li&gt;As an Operator, installing new sources is trivial, and not a burden on the overall health of the cluster.&lt;/li&gt;
+&lt;li&gt;As a Contributor, enable new methods for allowing new sources to be created allowing for user provided code and containers to adhere to the source specification defined by Knative Eventing.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;scope&#34;&gt;Scope&lt;/h2&gt;
+&lt;p&gt;In the existing Eventing repo inside the knative org:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Continue to evolve the &lt;a href=&#34;https://github.com/knative/eventing/blob/master/docs/spec/sources.md&#34;&gt;Source Spec&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Expand on the Pod-Specible Sources work &lt;a href=&#34;https://docs.google.com/document/d/159-xjBwougBWHOigWUk42tHSB_T1As6zdPwb_9zK38s/edit#heading=h.n8a530nnrb&#34;&gt;outlined&lt;/a&gt;, and POC &lt;a href=&#34;https://github.com/n3wscott/sources&#34;&gt;implemented&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Explore the concept of sidecars that enable and extend existing pods to emit CloudEvents, implement overrides, and possibly dynamically update the sink target based on configuration.&lt;/li&gt;
+&lt;li&gt;Leverage the POC from &lt;a href=&#34;https://github.com/Harwayne/auto-container-source&#34;&gt;Auto-Container-Source&lt;/a&gt; and expand it to include all implemented Pod-Specable sources.&lt;/li&gt;
+&lt;li&gt;Provide examples of custom sources implemented in several languages (Go, Java, Javascript, Python).&lt;/li&gt;
+&lt;li&gt;Provide SDK and test suite for event sources&lt;/li&gt;
+&lt;li&gt;Provide test conformance suite to verify existing and knative sources are &lt;a href=&#34;https://github.com/knative/eventing/blob/master/docs/spec/sources.md&#34;&gt;Source Spec&lt;/a&gt; compatible (and versioned). Run automatic tests and publish results for official and nonofficial knative sources.&lt;/li&gt;
+&lt;li&gt;Collaborate with CLI for good UX on creating and discovery of Sources installed and/or running.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In working group meetings:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Provide a forum to discuss and align work items related to the working group, status updates.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Sources WG Overall responsibility:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Maintaining Sources inside of knative/eventing.&lt;/li&gt;
+&lt;li&gt;Advising compatibility with Source contracts contributed to Knative inside of knative/eventing-contrib.&lt;/li&gt;
+&lt;li&gt;Ensuring that there are high-quality Sources for the most important (as decided by the WG) event-producing systems.&lt;/li&gt;
+&lt;li&gt;Managing and directing the larger Source-authoring ecosystem.&lt;/li&gt;
+&lt;li&gt;Tracking long-term efforts around improving the efficiency of Sources when working in coordination with other Knative Eventing components (e.g. upstream filter propagation, batching, or other optimizations).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;preliminary-3-month-roadmap&#34;&gt;Preliminary 3-Month Roadmap&lt;/h2&gt;
+&lt;p&gt;Month 1&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Establish principles of Sources (as both Developer and Operator Personas).&lt;/li&gt;
+&lt;li&gt;Define Pod-Specable Run Time Contract (Ref: &lt;a href=&#34;https://github.com/n3wscott/sources/blob/master/docs/runtime-contract.md&#34;&gt;work in progress&lt;/a&gt;).&lt;/li&gt;
+&lt;li&gt;Implement 3 Pod-Specable (TBD: DeploymentSource, JobSource, CronJobSource) sources in the sources.knative.dev API group inside of Eventing.&lt;/li&gt;
+&lt;li&gt;Deprecate ContainerSource and CronJobSource in sources.eventing.knative.dev.&lt;/li&gt;
+&lt;li&gt;Migrate to new api group: ‘sources.knative.dev’&lt;/li&gt;
+&lt;li&gt;Engage with CLI to develop a long term UX plan for creation of sources.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Month 2&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Implement 3 more Pod-Specable Sources (TBD: DaemonSource, StatefulSetSource, ServiceSource)&lt;/li&gt;
+&lt;li&gt;Enable Auto*Source for 2-3 sources (TBD: DeploymentSource, ServiceSource).&lt;/li&gt;
+&lt;li&gt;Implement Conformance Test for runtime contract of Pod-Specable Sources.&lt;/li&gt;
+&lt;li&gt;Engage with Operator to see path forward for additional source installations.&lt;/li&gt;
+&lt;li&gt;Began implementing example sources for 1-2 languages for 1-2 Source types.&lt;/li&gt;
+&lt;li&gt;CLI is able to discover and create Sources.&lt;/li&gt;
+&lt;li&gt;Start Sidecar and usability research for Advanced Lazy Sources..&lt;/li&gt;
+&lt;li&gt;Create&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Month 3&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;CLI can create and discover Sources from labeled CRDs.&lt;/li&gt;
+&lt;li&gt;Implement remaining Pod-Specable resources (TBD: ReplicaSet, Pod)&lt;/li&gt;
+&lt;li&gt;Enable Auto*Source for remaining Sources.&lt;/li&gt;
+&lt;li&gt;Implement Examples for remaining languages as needed.&lt;/li&gt;
+&lt;li&gt;Operator integration has been determined and work is ongoing.&lt;/li&gt;
+&lt;li&gt;TBD: Additional Sidecar work per results of Advanced Lazy Sources research.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;working-group&#34;&gt;Working Group&lt;/h2&gt;
+&lt;p&gt;We will operate as a partner group to Eventing, giving a brief update in the weekly Eventing working group meeting. We may additionally meet on a weekly basis, cancelled when there is a lack of agenda.&lt;/p&gt;
+&lt;h3 id=&#34;nominated-leads&#34;&gt;Nominated Leads:&lt;/h3&gt;
+&lt;p&gt;Nacho Cano, Scott Nichols, Ville Aikas, Lionel Villard&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

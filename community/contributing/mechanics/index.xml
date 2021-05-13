@@ -1,0 +1,1919 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Knative – Knative processes and guidelines</title>
+    <link>https://knative.dev/community/contributing/mechanics/</link>
+    <description>Recent content in Knative processes and guidelines on Knative</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="https://knative.dev/community/contributing/mechanics/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Community: Creating a sandbox repo</title>
+      <link>https://knative.dev/community/contributing/mechanics/creating-a-sandbox-repo/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/community/contributing/mechanics/creating-a-sandbox-repo/</guid>
+      <description>
+        
+        
+        &lt;!-- NOTE: some portion of this document is also reproduced in
+/.github/ISSUE_TEMPLATES/new-repo.md. If you are updating the steps here, you
+may need to look there, too. --&gt;
+&lt;h1 id=&#34;background&#34;&gt;Background&lt;/h1&gt;
+&lt;p&gt;The &lt;a href=&#34;https://github.com/knative-sandbox&#34;&gt;&lt;code&gt;knative-sandbox&lt;/code&gt;&lt;/a&gt; GitHub org exists to
+hold &amp;ldquo;non-core&amp;rdquo; Knative components which are owned and sponsored by a Working
+Group. See the &lt;a href=&#34;../REPOSITORY-GUIDELINES.md&#34;&gt;Knative Repository Guidelines&lt;/a&gt; for
+more details on the requirements for the &lt;code&gt;knative-sandbox&lt;/code&gt; org.&lt;/p&gt;
+&lt;h2 id=&#34;criteria&#34;&gt;Criteria&lt;/h2&gt;
+&lt;p&gt;A Working Group Lead (either
+&lt;a href=&#34;../ROLES.md#working-group-technical-lead&#34;&gt;technical&lt;/a&gt; or
+&lt;a href=&#34;../ROLES.md#working-group-execution-lead&#34;&gt;execution&lt;/a&gt;) may request a new repo in
+&lt;code&gt;knative-sandbox&lt;/code&gt; by filing an issue in the
+&lt;a href=&#34;https://github.com/knative/community/issues/new?template=new-repo.md&#34;&gt;knative/community&lt;/a&gt;
+repo. Once filed, the TOC should handle these promptly, though it should also be
+considered fine to ping members or the group on Slack if it hasn&amp;rsquo;t been acted on
+in a few days. Generally, the request will be granted, though the TOC may have
+additional questions or suggest an alternate mechanism in some cases.&lt;/p&gt;
+&lt;p&gt;Some of the following steps may require permissions that are only available to
+the TOC or Steering Committee, though others are largely self-service or require
+other WGs to review and approve impacting changes.&lt;/p&gt;
+&lt;h3 id=&#34;technical-requirements&#34;&gt;Technical requirements&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Any contributed code should be contributed by the original authors or
+copyright holders under an Apache 2.0 license. See also
+&lt;a href=&#34;../REPOSITORY-GUIDELINES.md#creation&#34;&gt;this section of the repository guidelines&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Names between &lt;code&gt;knative-sandbox&lt;/code&gt; and the main &lt;code&gt;knative&lt;/code&gt; repo should not
+overlap. This simplifies promoting repos between the two orgs and setting up
+&lt;code&gt;knative.dev&lt;/code&gt; import paths for golang.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Prow automation for tests is encouraged but not required for
+&lt;code&gt;knative-sandbox&lt;/code&gt;, but the Google CLA bot and OWNERS files/tide merge should
+be enforced.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;process-to-be-executed-by-toc-or-steering-member&#34;&gt;Process (to be executed by TOC or Steering member)&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;(Requires Org owner) Create the new repo in
+&lt;a href=&#34;https://github.com/knative-sandbox&#34;&gt;https://github.com/knative-sandbox&lt;/a&gt; using the &amp;ldquo;New&amp;rdquo; button. Set the repo to
+public and include an &amp;ldquo;Apache License 2.0&amp;rdquo; but no &lt;code&gt;.gitignore&lt;/code&gt; or &lt;code&gt;README&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;(Requires repo write/org owner) Create:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;OWNERS&lt;/code&gt; file listing TOC and WG members as approvers, and WG members as
+reviewers&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;CODE-OF-CONDUCT.md&lt;/code&gt; (that links to
+&lt;a href=&#34;https://github.com/knative/community/blob/main/CODE-OF-CONDUCT.md&#34;&gt;https://github.com/knative/community/blob/main/CODE-OF-CONDUCT.md&lt;/a&gt;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;README.md&lt;/code&gt; for the repo by cloning it and pushing directly to the repo.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;At the end of this step, you should have 4 files: &lt;code&gt;LICENSE&lt;/code&gt;, &lt;code&gt;OWNERS&lt;/code&gt;,
+&lt;code&gt;CODE-OF-CONDUCT.md&lt;/code&gt;, and &lt;code&gt;README.md&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Add entries for the repo to
+&lt;a href=&#34;https://github.com/knative/community/peribolos/knative-sandbox.yaml&#34;&gt;&lt;code&gt;../peribolos/knative-sandbox.yaml&lt;/code&gt; in knative/community&lt;/a&gt;.
+As part of this, grant one or more sponsoring WGs the &amp;ldquo;write&amp;rdquo; permission on
+the repo (&lt;a href=&#34;https://github.com/knative/community/pull/170&#34;&gt;sample PR&lt;/a&gt;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;(For golang repos) Set up an alias under &lt;code&gt;knative.dev&lt;/code&gt; to enable
+&lt;code&gt;knative.dev/&lt;/code&gt; golang imports by adding a file for the repo to
+&lt;a href=&#34;https://github.com/knative/website/tree/main/static/golang&#34;&gt;https://github.com/knative/website/tree/main/static/golang&lt;/a&gt; and updating the
+&lt;a href=&#34;https://github.com/knative/website/blob/main/static/_redirects&#34;&gt;&lt;code&gt;_redirects&lt;/code&gt;&lt;/a&gt;
+file.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Set up
+&lt;a href=&#34;https://github.com/knative/test-infra/blob/main/guides/prow_setup.md#setting-up-prow-for-a-new-repo-reviewers-assignment-and-auto-merge&#34;&gt;test-infra using the automation&lt;/a&gt;,
+which probably involves updating &lt;code&gt;config/prod/prow/config_knative.yaml&lt;/code&gt; and
+then running &lt;code&gt;./hack/generate-configs.sh&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Ensure that Prow is working correctly by creating a PR against the repo. One
+good way to do this is to
+&lt;a href=&#34;https://github.com/knative-sandbox/discovery/pull/1&#34;&gt;add a &lt;code&gt;test/presubmit-tests.sh&lt;/code&gt;&lt;/a&gt;
+via either the web UI or using a fork.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Once at least one PR has been created, you&amp;rsquo;ll be able to select the branch
+protection checks which are required in the &amp;ldquo;Settings&amp;rdquo; &amp;gt; &amp;ldquo;Branches&amp;rdquo; branch
+protection rule:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Under &amp;ldquo;Branches&amp;rdquo; add a branch protection rule for &lt;code&gt;main&lt;/code&gt;:
+&lt;ul&gt;
+&lt;li&gt;Require status checks to pass (except &lt;code&gt;...-go-coverage&lt;/code&gt; checks)&lt;/li&gt;
+&lt;li&gt;Include administrators&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Community: Knative Steering Committee election process</title>
+      <link>https://knative.dev/community/contributing/mechanics/sc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/community/contributing/mechanics/sc/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;guiding-principles&#34;&gt;Guiding Principles&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;The SC seat should be earned by individuals and not company participation&lt;/li&gt;
+&lt;li&gt;Members of the SC should be exemplary members of the community who have
+demonstrated our community values&lt;/li&gt;
+&lt;li&gt;The SC should be made up of individuals from different working groups and
+vendors so that we have a diverse group of thought and input&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;composition&#34;&gt;Composition&lt;/h1&gt;
+&lt;p&gt;The SC will have five seats with a 2 year term, with a maximum of 2 seats being
+held by employees from the same vendor.&lt;/p&gt;
+&lt;p&gt;There will be an annual election to determine the composition of the SC for the
+following year. Two seats will be up for election in one year and three will be
+up for election the following year.&lt;/p&gt;
+&lt;h1 id=&#34;candidate-eligibility&#34;&gt;Candidate Eligibility&lt;/h1&gt;
+&lt;p&gt;Community members must be eligible to vote in order to stand for election (this
+includes voters who qualify for an exception). Candidates may self-nominate or
+be nominated by another eligible member.  There are no term limits for KSC
+members. Nothing prevents a qualified member from serving on both the TOC and SC
+simultaneously.&lt;/p&gt;
+&lt;p&gt;To run for a Contributing seat, a candidate must additionally be at least a
+project Member as defined in
+&lt;a href=&#34;https://github.com/knative/community/blob/main/ROLES.md&#34;&gt;ROLES.md&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;End-user seats are planned to enable employees of organizations which use but do
+not sell Knative-derived products. The mechanics of eligibility for end-user
+seats are still in progress; it is expected that end-user seats will add to the
+current Steering options to specific include end-user perspectives in the
+decision-making process.&lt;/p&gt;
+&lt;h1 id=&#34;voter-eligibility&#34;&gt;Voter Eligibility&lt;/h1&gt;
+&lt;p&gt;Anyone who has at least 50 contributions in the last 12 months is eligible to
+vote in the TOC election. Contributions are defined as opening PRs, reviewing
+and commenting on PRs, opening and commenting on issues, writing documentation,
+commenting on docs, helping people on slack, participating in working
+groups, actively promoting the Knative project, running project events, and
+anything else that helps the Knative project succeed and grow.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://knative.teststats.cncf.io/d/9/developer-activity-counts-by-repository-group-table?orgId=1&amp;amp;var-period_name=Last%20year&#34;&gt;This dashboard&lt;/a&gt;
+shows only GitHub based contributions and does not capture all the contributions
+we value. &lt;em&gt;We expect this metric not to capture everyone who should be eligible
+to vote.&lt;/em&gt; If a community member has had significant contributions over the past
+year but is not captured in the stats.knative.dev dashboard, they will be able
+to submit an exception form to the steering committee who will then review and
+determine whether this member should be marked as an exception.&lt;/p&gt;
+&lt;p&gt;All eligible voters will be captured at
+&lt;code&gt;knative/community/elections/$YEAR/SC/voters.md&lt;/code&gt; and the voters’ guide
+will be captured at &lt;code&gt;knative/community/elections/$YEAR/SC/README.md&lt;/code&gt;
+similar to the kubernetes election process.&lt;/p&gt;
+&lt;p&gt;We are committed to an inclusive process and will adapt future eligibility
+requirements based on community feedback.&lt;/p&gt;
+&lt;h1 id=&#34;election-process&#34;&gt;Election Process&lt;/h1&gt;
+&lt;p&gt;Elections will be held using a time-limited
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Condorcet_method&#34;&gt;Condorcet&lt;/a&gt; ranking on
+&lt;a href=&#34;http://civs.cs.cornell.edu/&#34;&gt;CIVS&lt;/a&gt; using the
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Schulze_method&#34;&gt;Schulze&lt;/a&gt; method. The top
+vote-getters will be elected to the open seats. This is the same process used
+for TOC elections.&lt;/p&gt;
+&lt;h2 id=&#34;election-officers&#34;&gt;Election Officers&lt;/h2&gt;
+&lt;p&gt;The Steering Committee will appoint
+between one and three Election Officer(s) to administer the election. Elections
+Officers will be Knative community members in good standing who are eligible to
+vote, are not running for Steering in that election, who are not currently part
+of the Steering Committee and can make a public promise of impartiality. They
+will be responsible for:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Making all announcements associated with the election&lt;/li&gt;
+&lt;li&gt;Preparing and distributing electronic ballots&lt;/li&gt;
+&lt;li&gt;Judging exception requests&lt;/li&gt;
+&lt;li&gt;Assisting candidates in preparing and sharing statements&lt;/li&gt;
+&lt;li&gt;Tallying voting results according to the rules&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;limitations-on-company-representation&#34;&gt;Limitations on Company Representation&lt;/h2&gt;
+&lt;p&gt;No more than two seats may be held by employees of the same organization (or
+conglomerate, in the case of companies owning each other). Additionally, each
+End-User seat (when available) must belong to an employee from a different
+organization. If the results of an election result in greater than two employees
+of the same organization, the lowest vote getters from any particular employer
+will be removed until representation on the committee is down to two.&lt;/p&gt;
+&lt;p&gt;If employers change because of job changes, acquisitions, or other events, in a
+way that would yield more than 2 seats being held by employees of the same
+organization, sufficient members of the committee must resign until only two
+employees of the same employer are left. If it is impossible to find sufficient
+members to resign, all employees of that organization will be removed and new
+special elections held. In the event of a question of company membership (for
+example evaluating independence of corporate subsidiaries) a majority of all
+non-involved Steering Committee members will decide.&lt;/p&gt;
+&lt;h2 id=&#34;vacancies&#34;&gt;Vacancies&lt;/h2&gt;
+&lt;p&gt;In the event of a resignation or other loss of an elected SC member, the
+candidate with the next most votes from the previous election will be offered
+the seat, provided that person otherwise qualifies to join the SC. This process
+will continue until the seat is filled.&lt;/p&gt;
+&lt;p&gt;In case this fails to fill the seat, a special election for that position will
+be held as soon as possible, unless the regular SC election is less than 7 weeks
+away. Eligible voters from the most recent election will vote in the special
+election. Eligibility will not be redetermined at the time of the special
+election. Any replacement SC member will serve out the remainder of the term for
+the person they are replacing, regardless of the length of that remainder.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Except as otherwise noted, the content of this page is licensed under the
+&lt;a href=&#34;https://creativecommons.org/licenses/by/4.0/&#34;&gt;Creative Commons Attribution 4.0 License&lt;/a&gt;,
+and code samples are licensed under the
+&lt;a href=&#34;https://www.apache.org/licenses/LICENSE-2.0&#34;&gt;Apache 2.0 License&lt;/a&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Community: Knative TOC election process</title>
+      <link>https://knative.dev/community/contributing/mechanics/toc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/community/contributing/mechanics/toc/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;guiding-principles&#34;&gt;Guiding Principles&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;The TOC seat should be earned by individuals and not company participation&lt;/li&gt;
+&lt;li&gt;Members of the TOC should be exemplary members of the community who have
+demonstrated our community values&lt;/li&gt;
+&lt;li&gt;The TOC should be made up of individuals from different working groups and
+vendors so that we have a diverse group of thought and input&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;composition&#34;&gt;Composition&lt;/h1&gt;
+&lt;p&gt;The TOC will have five seats with a 2 year term, with a maximum of 2 seats being
+held by employees from the same organization (or conglomerate, in the case of companies owning each other).&lt;/p&gt;
+&lt;p&gt;There will be an annual election to determine the composition of the TOC for the
+following year. Three seats will be up for election in one year and two will be
+up for election the following year.&lt;/p&gt;
+&lt;h1 id=&#34;candidate-eligibility&#34;&gt;Candidate Eligibility&lt;/h1&gt;
+&lt;p&gt;Current TOC members and
+&lt;a href=&#34;https://github.com/knative/community/blob/main/ROLES.md#approver&#34;&gt;Approvers&lt;/a&gt;
+with at least 3 months tenure are eligible to stand for election. Candidates may
+self-nominate or be nominated by another eligible member. The approximate time
+commitment of a TOC member is around 8 hours per week.&lt;/p&gt;
+&lt;p&gt;Please note that vendor or organization limits do not restrict candidate eligibility.
+We encourage all interested candidates in running as there may be occurrences where a TOC member
+steps down and is back-filled by the candidate with the next most votes from the previous election.&lt;/p&gt;
+&lt;h1 id=&#34;voter-eligibility&#34;&gt;Voter Eligibility&lt;/h1&gt;
+&lt;p&gt;Anyone who has at least 50 contributions in the last 12 months is eligible to
+vote in the TOC election. Contributions are defined as opening PRs, reviewing
+and commenting on PRs, opening and commenting on issues, writing design docs,
+commenting on design docs, helping people on slack, participating in working
+groups and etc.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://knative.teststats.cncf.io/d/9/developer-activity-counts-by-repository-group-table?orgId=1&amp;amp;var-period_name=Last%20year&#34;&gt;This dashboard&lt;/a&gt;
+shows only GitHub based contributions and does not capture all the contributions
+we value. &lt;em&gt;We expect this metric not to capture everyone who should be eligible
+to vote.&lt;/em&gt; If a community member has had significant contributions over the past
+year but is not captured in the stats.knative.dev dashboard, they will be able
+to submit an exception form to the steering committee who will then review and
+determine whether this member should be marked as an exception.&lt;/p&gt;
+&lt;p&gt;All eligible voters will be captured at
+&lt;code&gt;knative/community/elections/$YEAR/TOC/voters.md&lt;/code&gt; and the voters’ guide
+will be captured at &lt;code&gt;knative/community/elections/$YEAR/TOC/README.md&lt;/code&gt;
+similar to the kubernetes election process.&lt;/p&gt;
+&lt;p&gt;We are committed to an inclusive process and will adapt future eligibility
+requirements based on community feedback.&lt;/p&gt;
+&lt;h1 id=&#34;election-process&#34;&gt;Election Process&lt;/h1&gt;
+&lt;p&gt;Elections will be held using a time-limited
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Condorcet_method&#34;&gt;Condorcet&lt;/a&gt; ranking on
+&lt;a href=&#34;https://elekto.io/&#34;&gt;Elekto&lt;/a&gt;. The top vote-getters will be elected to
+the open seats.&lt;/p&gt;
+&lt;h2 id=&#34;election-officers&#34;&gt;Election Officers&lt;/h2&gt;
+&lt;p&gt;The steering committee will be the election officers for the technical oversight
+committee elections.&lt;/p&gt;
+&lt;h2 id=&#34;vacancies&#34;&gt;Vacancies&lt;/h2&gt;
+&lt;p&gt;In the event of a resignation or other loss of an elected TOC member, the
+candidate with the next most votes from the previous election will be offered
+the seat. This process will continue until the seat is filled.&lt;/p&gt;
+&lt;p&gt;In case this fails to fill the seat, a special election for that position will
+be held as soon as possible. Eligible voters from the most recent election will
+vote in the special election (ie: eligibility will not be redetermined at the
+time of the special election). Any replacement TOC member will serve out the
+remainder of the term for the person they are replacing, regardless of the
+length of that remainder.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Except as otherwise noted, the content of this page is licensed under the
+&lt;a href=&#34;https://creativecommons.org/licenses/by/4.0/&#34;&gt;Creative Commons Attribution 4.0 License&lt;/a&gt;,
+and code samples are licensed under the
+&lt;a href=&#34;https://www.apache.org/licenses/LICENSE-2.0&#34;&gt;Apache 2.0 License&lt;/a&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Community: Knative working group processes and guidelines</title>
+      <link>https://knative.dev/community/contributing/mechanics/working-group-processes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/community/contributing/mechanics/working-group-processes/</guid>
+      <description>
+        
+        
+        &lt;p&gt;This document describes the processes we use to manage the Knative working
+groups. This includes how they are formed, how leads are established, how they
+are run, etc.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#why-working-groups&#34;&gt;Why working groups?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#proposing-a-new-working-group&#34;&gt;Proposing a new working group&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#setting-up-a-working-group&#34;&gt;Setting up a working group&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#dissolving-a-working-group&#34;&gt;Dissolving a working group&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#running-a-working-group&#34;&gt;Running a working group&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#be-open&#34;&gt;Be open&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#making-decisions&#34;&gt;Making decisions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#subgroups&#34;&gt;Subgroups&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#escalations&#34;&gt;Escalations&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;why-working-groups&#34;&gt;Why working groups?&lt;/h2&gt;
+&lt;p&gt;Knative working groups are organizations responsible for the design and
+implementation of large architectural aspects of the overall Knative project.
+Working groups operate with a fair amount of autonomy within the broader scope
+of the project. They tend to be long-lived, representing major initiatives over
+Knative’s lifetime.&lt;/p&gt;
+&lt;p&gt;Some working groups focus on specific technologies. Other working groups are
+cross-cutting in nature.&lt;/p&gt;
+&lt;p&gt;The technical oversight committee is responsible for the Knative project as a
+whole. It sets the overall direction of the project, helps make crosscutting
+architectural decisions, helps establish and dissolve working groups, and helps
+ensure all working groups are generally rowing in the same direction&lt;/p&gt;
+&lt;p&gt;Although working groups are relatively lightweight structures, we want to keep
+the number of working groups low in order to keep things manageable.&lt;/p&gt;
+&lt;h2 id=&#34;proposing-a-new-working-group&#34;&gt;Proposing a new working group&lt;/h2&gt;
+&lt;p&gt;Generally, working groups should be founded once sufficient community interest
+and discussion has occurred that there is general agreement that:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;The problem space is interesting and is worth long-term investment by Knative&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The problem is not well-covered by any of the existing chartered WGs&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Note that &amp;ldquo;code dumps&amp;rdquo; are unlikely to be accepted as the beginning of a working
+group, though they can be useful to start a conversation. For most topics that
+meet the bar for a new WG, it&amp;rsquo;s likely that other participants in the community
+have ideas and opinions, and up-front conversations can help to focus the shape
+and scope of the solution space.&lt;/p&gt;
+&lt;p&gt;The TOC and existing WGs should enable these conversations (e.g. setting up
+one-off meetings, creating slack channels, etc). Once the community has
+identified a substantial architectural area which would benefit from long-lived,
+concerted and focused design, then you should consider creating a new working
+group. To do so, you need to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Create a charter&lt;/strong&gt;. This should be a few paragraphs explaining:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The mission of the working group&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The goals of the working group (problems being solved)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The scope of the working group (topics, subsystems, code repos, areas of
+responsibility). Also include items which are out of scope. The TOC will be
+looking at this to make sure that there are appropriate touch-points and
+contracts between WGs when considering larger problems.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Here are some example charters to help indicate the expected size of the
+document. The main things that the TOC will be looking for are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.google.com/document/d/11SPnDRIJ6CGo5ElPGMWc25tX2iQfJfaiZwzBhruUZQw/edit&#34;&gt;Event Delivery WG&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.google.com/document/d/1XQo9DUbNdOIxf37eKSG1ULEyxydcG0YGeO13wBjQpEE/edit&#34;&gt;Eventing Sources WG&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.google.com/document/d/1VtzDsWSTymHlG7boLUeaLg_0pSQvKibWK7xQxE3ihKs/edit&#34;&gt;Client WG&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.google.com/document/d/1K_LGymgqedAzRS0ACdVtJH1ktQxrf1OatfxzIb6LjU0/edit?usp=sharing&#34;&gt;User Experience&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;A typical WG charter is around 3 pages using and bulleted lists for goals,
+scope, and roadmap.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Nominate an initial set of leads&lt;/strong&gt;. The leads set the agenda for the working
+group and serve as final arbiters on any technical decision. See
+&lt;a href=&#34;#leads&#34;&gt;below&lt;/a&gt; for information on the responsibilities of leads and
+requirements for nominating them.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Prepare a Roadmap&lt;/strong&gt;. Create a preliminary 3 month roadmap for what the
+working group would focus on.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Send an Email&lt;/strong&gt;. Write up an email with your charter, nominated leads, and
+roadmap, and send it to
+&lt;a href=&#34;mailto:knative-tech-oversight@googlegroups.com&#34;&gt;knative-tech-oversight@&lt;/a&gt;. The
+technical oversight committee will evaluate the request and decide whether the
+working group should be formed, whether it should be merely a subgroup of an
+existing working group, or whether it should be subsumed by an existing
+working group.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;setting-up-a-working-group&#34;&gt;Setting up a working group&lt;/h2&gt;
+&lt;p&gt;Once approval has been granted by the technical oversight committee to form a
+working group, the working group leads need to take a few steps to establish the
+working group. &lt;em&gt;For an example of working group creation, see
+&lt;a href=&#34;https://github.com/knative/community/issues/466&#34;&gt;this issue&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Create a Google Drive Folder&lt;/strong&gt;. Create a folder to hold your working group
+documents within this parent
+&lt;a href=&#34;https://drive.google.com/drive/folders/0AM-QGZJ-HUA8Uk9PVA&#34;&gt;folder&lt;/a&gt;.
+Call your folder &amp;ldquo;GROUP_NAME&amp;rdquo;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Create a Meeting Notes Document&lt;/strong&gt;. Create a blank document in the above
+folder and call it &amp;ldquo;GROUP_NAME Group Meeting Notes&amp;rdquo;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Create a Roadmap Document&lt;/strong&gt;. Create a document in the above folder and call
+it &amp;ldquo;GROUP_NAME Group Roadmap&amp;rdquo;. Put your initial roadmap in the document.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Schedule a Recurring Meeting&lt;/strong&gt;. Create a recurring meeting (weekly or
+bi-weekly, 30 or 60 minutes) on the
+&lt;a href=&#34;https://calendar.google.com/calendar/u/0/embed?src=knative.team_9q83bg07qs5b9rrslp5jor4l6s@group.calendar.google.com&#34;&gt;shared calendar&lt;/a&gt;
+and call the meeting &amp;ldquo;$GROUP_NAME WG&amp;rdquo;. Attach the meeting notes document to
+the calendar event. Generally schedule these meetings between 9:00AM to 2:59PM
+Pacific Time. Invite &lt;code&gt;knative-dev@googlegroups.com&lt;/code&gt; Google group to the
+meeting, as well as necessary individual participants.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Register the Working Group&lt;/strong&gt;. Go to
+&lt;a href=&#34;../working-groups/WORKING-GROUPS.md&#34;&gt;WORKING-GROUPS.md&lt;/a&gt; and add your working
+group name, the names of the leads, the working group charter, and a link to
+the meeting you created.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Create Github Team using Peribolos&lt;/strong&gt;. Go to
+&lt;a href=&#34;../peribolos/knative.md&#34;&gt;peribolos/knative.md&lt;/a&gt;, add your working
+group name under teams, and members. Grant access to relevant repositories for the working group.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Announce your Working Group&lt;/strong&gt;. Send a note to
+&lt;a href=&#34;mailto:knative-dev@googlegroups.com&#34;&gt;knative-dev@&lt;/a&gt;,
+&lt;a href=&#34;mailto:knative-tech-oversight@googlegroups.com&#34;&gt;knative-tech-oversight@&lt;/a&gt;, and
+&lt;a href=&#34;mailto:steering@knative.team&#34;&gt;steering@&lt;/a&gt; to
+announce your new working group. Include your charter in the email and provide
+links to the meeting invitation.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Congratulations, you now have a fully formed working group!&lt;/p&gt;
+&lt;h3 id=&#34;dissolving-a-working-group&#34;&gt;Dissolving a working group&lt;/h3&gt;
+&lt;p&gt;Some working groups are ephemeral or naturally reach the end of their useful
+life. Working group leads can petition to dissolve their working groups by
+emailing
+&lt;a href=&#34;mailto:knative-tech-oversight@googlegroups.com&#34;&gt;knative-tech-oversight@googlegroups.com&lt;/a&gt;.
+The technical oversight committee takes ownership of any artifacts created or
+owned by the dissolved working group. The technical oversight committee also
+reserves the right to dissolve or recharter working groups over time as
+necessary, though they will strive to first discuss this in committee meetings
+and open community discussion.&lt;/p&gt;
+&lt;h2 id=&#34;leads&#34;&gt;Leads&lt;/h2&gt;
+&lt;p&gt;Each working group should have at least 2 leads, ideally 3, though young working
+groups may have only 1 lead initially. Working groups should strive to include
+representatives from multiple organizations as both leads and members. Working
+group leads must be Members of the Knative project (that is, have made multiple
+contributions to the project in the form of code, design, or documentation).&lt;/p&gt;
+&lt;p&gt;Please see the &lt;a href=&#34;../ROLES.md&#34;&gt;Community Roles&lt;/a&gt; document for a description of a
+lead’s role and requirements.&lt;/p&gt;
+&lt;h2 id=&#34;running-a-working-group&#34;&gt;Running a working group&lt;/h2&gt;
+&lt;p&gt;Leads are responsible for running a working group. Running the group involves a
+few activities:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Meetings&lt;/strong&gt;. Prepare the agenda and run the regular working group meetings.
+Ensure the meetings are recorded, and properly archived.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Notes&lt;/strong&gt;. Ensure that meeting notes are kept up to date. Provide a link to
+the recorded meeting in the notes. The lead may delegate note-taking duties.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Decision Log&lt;/strong&gt;. Ensure that significant design decisions are captured in
+GitHub issues, Google Docs, or markdown files in the repo. It is recommended
+that Working Groups follow the &lt;a href=&#34;./FEATURE-TRACKS.md&#34;&gt;Feature Tracks&lt;/a&gt; process
+for design proposals. It&amp;rsquo;s particularly important to focus on making it
+possible for new participants can find the history of decisions.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Roadmap&lt;/strong&gt;. Establish &lt;strong&gt;and maintain&lt;/strong&gt; a roadmap for the working group
+outlining the areas of focus for the working group over the next 3 months.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Report&lt;/strong&gt;. Report current status to the main community meeting every 6 weeks.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;be-open&#34;&gt;Be open&lt;/h3&gt;
+&lt;p&gt;The community design process is done in the open. Working groups should
+communicate primarily through the public working group meetings, through design
+documents in the working group’s folder, through GitHub issues, and GitHub PRs.
+Avoid private emails and/or meeting when possible.&lt;/p&gt;
+&lt;h3 id=&#34;making-decisions&#34;&gt;Making decisions&lt;/h3&gt;
+&lt;p&gt;In general, working groups operate in a highly cooperative environment. Working
+groups discuss designs in the open and take input from the community at large
+when making technical choices. The working group leads are ultimately
+responsible for setting the direction of the working group and making the tough
+technical choices affecting the working group.&lt;/p&gt;
+&lt;h3 id=&#34;subgroups&#34;&gt;Subgroups&lt;/h3&gt;
+&lt;p&gt;Subgroups are ad hoc subteams within a working group with a special focus on a
+set of problems or technologies. We don’t formalize processes for subgroups,
+each working group can decide when subgroups are needed and how they operate.&lt;/p&gt;
+&lt;h3 id=&#34;escalations&#34;&gt;Escalations&lt;/h3&gt;
+&lt;p&gt;Working groups can get blocked on specific technical disagreements. Leads are
+expected to generally resolve such issues and allow work to progress.&lt;/p&gt;
+&lt;p&gt;Sometimes, different working groups can have conflicting goals or requirements.
+Leads from all affected working groups generally work together and come to an
+agreeable conclusion.&lt;/p&gt;
+&lt;p&gt;In all cases, remaining blocking issues can be raised to the
+&lt;a href=&#34;./TECH-OVERSIGHT-COMMITTEE.md&#34;&gt;technical oversight committee&lt;/a&gt; to help resolve
+the situation. To trigger an escalation, create an issue in the project&amp;rsquo;s repo
+and assign it to the &lt;strong&gt;@knative/tech-oversight-committee&lt;/strong&gt; team.&lt;/p&gt;
+&lt;p&gt;The Steering Committee, as a last resort, provides the final escalation path for
+any repository or working group issue that cannot be resolved by the TOC.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Except as otherwise noted, the content of this page is licensed under the
+&lt;a href=&#34;https://creativecommons.org/licenses/by/4.0/&#34;&gt;Creative Commons Attribution 4.0 License&lt;/a&gt;,
+and code samples are licensed under the
+&lt;a href=&#34;https://www.apache.org/licenses/LICENSE-2.0&#34;&gt;Apache 2.0 License&lt;/a&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Community: Knative feature tracks</title>
+      <link>https://knative.dev/community/contributing/mechanics/feature-tracks/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/community/contributing/mechanics/feature-tracks/</guid>
+      <description>
+        
+        
+        &lt;p&gt;This document outlines the Knative process for adding non-trivial features.  The
+intent of this process is to articulate the best practices many successful
+features have followed across a variety of working groups.  This process may be
+elided at the discretion of working group leads, but its application is strongly
+encouraged for any feature that may have subtleties or contentious elements to
+front-load their consideration.&lt;/p&gt;
+&lt;p&gt;It is notable that just by adhering to this process there is no guarantee that
+your feature will land, for several reasons.  Reviewing the artifacts enumerated
+here takes time and the bandwidth of leads and approvers is limited.  Every
+feature that lands increases our support burden and spreads us more thinly, and
+so leads must be careful about prioritizing scope creep.&lt;/p&gt;
+&lt;h2 id=&#34;step-1-the-problem-statement&#34;&gt;Step 1: The Problem Statement&lt;/h2&gt;
+&lt;p&gt;Every feature exists to solve a problem.  The process starts by articulating
+that problem in the form of a &lt;strong&gt;Github issue&lt;/strong&gt;
+(&lt;a href=&#34;https://docs.google.com/document/d/1wcQj6SBvIegfoeBT6Q7Wa_snNdsGy5j-bwwSOcTcejY/edit#heading=h.n8a530nnrb&#34;&gt;template&lt;/a&gt;).
+Be sure that a particular issue is tagged with the appropriate areas to bring
+it to the attention of the pertinent working group leads for triage.  In Prow,
+this can be done via:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# Assigns the label &amp;quot;area/networking&amp;quot;
+/area networking
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Contributors are encouraged to engage early/often at this stage, and ask
+clarifying questions.  Ultimately the leads are responsible for making a
+determination of how a given problem weighs against the broader working group&amp;rsquo;s
+priorities.&lt;/p&gt;
+&lt;p&gt;Features may span working groups, but often have a &amp;ldquo;primary&amp;rdquo; working group
+focus.  If there is substantial work involved in multiple work groups, then the
+leads for all involved working groups should be involved throughout the process.&lt;/p&gt;
+&lt;h2 id=&#34;step-2-the-proposal&#34;&gt;Step 2: The Proposal&lt;/h2&gt;
+&lt;p&gt;All non-trivial&lt;sup&gt;&lt;a href=&#34;#2.1&#34;&gt;2.1&lt;/a&gt;&lt;/sup&gt; features deserve a design for
+articulating the solution to their problem statement. This should be done in a
+&lt;strong&gt;Google doc&lt;/strong&gt;
+(&lt;a href=&#34;https://docs.google.com/document/d/1s6IIU98bi5FlRNmmBaLAn1rgoleK_ovcL746L7NHq0c/edit&#34;&gt;template&lt;/a&gt; &amp;ndash; make a copy!)
+under the appropriate folder in the &lt;a href=&#34;https://drive.google.com/drive/folders/0AM-QGZJ-HUA8Uk9PVA&#34;&gt;Team
+Drive&lt;/a&gt;&lt;sup&gt;&lt;a href=&#34;#2.2&#34;&gt;2.2&lt;/a&gt;&lt;/sup&gt;.
+If the solution is clear and non-contentious, then the doc may be very short!
+For major&lt;sup&gt;&lt;a href=&#34;#2.3&#34;&gt;2.3&lt;/a&gt;&lt;/sup&gt; designs, once the proposal is accepted it should be converted to
+markdown and committed to the appropriate GitHub repo.&lt;/p&gt;
+&lt;p&gt;However, the bigger the feature the less likely this is to be true.  Designs
+help us call out nuance early, and the best designs are often informed by
+prototypes that help surface these nuances.  &lt;strong&gt;Do not expect to check in the
+prototype&lt;/strong&gt;; enter into these prototypes with the expectation that ALL of it
+will be thrown out.&lt;/p&gt;
+&lt;p&gt;The design should summarize the problem statement but the core focus should be
+on the end state (the &lt;strong&gt;&amp;ldquo;what&amp;rdquo;&lt;/strong&gt;); think about how we might document the feature
+in the end state and give us a preview of what that might look like.  For some
+features there is complexity in getting from where we are to that end state.&lt;br&gt;
+Such features will also need a detailed migration plan (the &lt;strong&gt;&amp;ldquo;how&amp;rdquo;&lt;/strong&gt;&lt;sup&gt;&lt;a href=&#34;#2.4&#34;&gt;2.4&lt;/a&gt;&lt;/sup&gt;).
+Designs should also list reviewers that they expect to sign-off (the &lt;strong&gt;&amp;ldquo;who&amp;rdquo;&lt;/strong&gt;),
+this should be the WG leads (or their delegate).&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a name=&#34;2.1&#34;&gt;&lt;sup&gt;2.1&lt;/sup&gt;&lt;/a&gt; - For the moment, this is at the discretion of the Working Group Lead.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a name=&#34;2.2&#34;&gt;&lt;sup&gt;2.2&lt;/sup&gt;&lt;/a&gt; - For read/write access join the &lt;a href=&#34;https://groups.google.com/forum/#!forum/knative-dev&#34;&gt;knative-dev&lt;/a&gt; Google group.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a name=&#34;2.3&#34;&gt;&lt;sup&gt;2.3&lt;/sup&gt;&lt;/a&gt; - This is at the discretion of WG leads, since doing this for every change will quickly flood the repo and make things &lt;em&gt;less&lt;/em&gt; discoverable.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a name=&#34;2.4&#34;&gt;&lt;sup&gt;2.4&lt;/sup&gt;&lt;/a&gt; - For a detailed outline of how to stage component changes, please &lt;a href=&#34;https://github.com/knative/serving/issues/2639&#34;&gt;read this&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;step-3-the-review&#34;&gt;Step 3: The Review&lt;/h2&gt;
+&lt;p&gt;Each proposal, however non-contentious, should be called out during the working
+group meeting / slack for broader consideration and commentary.  The contributor
+driving this process should work with a lead for the appropriate area to get it
+onto the WG&amp;rsquo;s agenda.  For particularly active WGs, this may take time, and
+lower priority features may get bumped by higher priority features at the lead&amp;rsquo;s
+discretion.&lt;/p&gt;
+&lt;p&gt;The review need not follow any prescribed process, but the lead should make sure
+things stay constructive and on-topic.  Leads should be up-front about how a
+decision will be made (e.g. eventing often uses the &lt;a href=&#34;https://medium.com/@barmstrong/how-we-make-decisions-at-coinbase-cd6c630322e9&#34;&gt;Coinbase decision
+making&lt;/a&gt;
+guide); by default a majority of the WG leads shall decide.  The outcome of a
+review may not be an immediate decision, and the contributor may get sent back
+to gather more information and iterate.&lt;/p&gt;
+&lt;p&gt;When a proposal is accepted, the leads should designate one or more
+reviewers&lt;sup&gt;&lt;a href=&#34;#3.1&#34;&gt;3.1&lt;/a&gt;&lt;/sup&gt; within the WG as &amp;ldquo;sponsors&amp;rdquo; for the
+feature to help shepherd it through the process.  It is recommended that at
+least one sponsor be an &amp;ldquo;approver&amp;rdquo; (someone listed under an
+&lt;a href=&#34;https://github.com/knative/serving/blob/main/OWNERS_ALIASES&#34;&gt;&lt;code&gt;*-approvers&lt;/code&gt;&lt;/a&gt; list).
+If that sponsor is not an approver (for example, someone listed under an
+&lt;a href=&#34;https://github.com/knative/serving/blob/main/OWNERS_ALIASES&#34;&gt;&lt;code&gt;*-reviewers&lt;/code&gt;&lt;/a&gt; list),
+they should initially become the primary reviewer(s) so that they can hone their review skills
+and work towards the approver role.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a name=&#34;3.1&#34;&gt;&lt;sup&gt;3.1&lt;/sup&gt;&lt;/a&gt; - Leads should try to be sensitive to the relative timezone of contributors with their sponsors to reduce cycle times on reviews.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;step-4-the-breakdown&#34;&gt;Step 4: The Breakdown&lt;/h2&gt;
+&lt;p&gt;At a minimum, large features should be broken down into reasonably sized Pull
+Requests.  However, large features (e.g. multi-milestone) may need to be broken
+down into a number of smaller issues (no bigger than a milestone).  For these
+large features, the design document should eventually&lt;sup&gt;&lt;a href=&#34;#4.1&#34;&gt;4.1&lt;/a&gt;&lt;/sup&gt; include, and the
+broad strokes of how the work will be broken down. For these very large features,
+the sponsor would then help set up a Github project containing issues for all of
+the pertinent items.  Until all of this completes, the feature is not done.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a name=&#34;4.1&#34;&gt;&lt;sup&gt;4.1&lt;/sup&gt;&lt;/a&gt; - WG Leads can decide how much of the work breakdown to front-load, but what is important is that all parties (feature owner, lead, and sponsors) understand the full-scope of the work to be done.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;step-5-the-planning-process&#34;&gt;Step 5: The Planning Process&lt;/h2&gt;
+&lt;p&gt;As leads are planning each milestone, they should draw issues from the Github
+Projects for in-flight features by working with feature owners and sponsors.&lt;/p&gt;
+&lt;h2 id=&#34;step-6-the-prestige&#34;&gt;Step 6: The Prestige&lt;/h2&gt;
+&lt;p&gt;When all of the associated issues close, your feature is GA!&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Community: Knative Golang policy</title>
+      <link>https://knative.dev/community/contributing/mechanics/golang-policy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/community/contributing/mechanics/golang-policy/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Knative&amp;rsquo;s components are mostly written in Golang. As such the project has to deal with
+major and minor upgrades of the Go language itself. The following principles are applied
+regarding the Golang version Knative tests and releases with.&lt;/p&gt;
+&lt;h2 id=&#34;recency&#34;&gt;Recency&lt;/h2&gt;
+&lt;p&gt;Knative generally strives to always use the most recent Golang version available, to
+ensure future compatibility and to benefit from the ongoing optimization to the Golang
+runtime.&lt;/p&gt;
+&lt;p&gt;CI systems (Prow and Github Actions) should try to always be on the most recent patch
+level.&lt;/p&gt;
+&lt;h2 id=&#34;consistency&#34;&gt;Consistency&lt;/h2&gt;
+&lt;p&gt;All repositories should depend on the same Golang version, evidenced in their respective
+&lt;code&gt;go.mod&lt;/code&gt; file.&lt;/p&gt;
+&lt;h2 id=&#34;caution&#34;&gt;Caution&lt;/h2&gt;
+&lt;p&gt;Major Golang version bumps (i.e. 1.14 to 1.15) should be made deliberately and should not
+be taken too lightly. Such a change should not happen too closely to a release of
+Knative. If the bump would be within two weeks of the Knative release cycle, it should be
+postponed until the next release to allow for thorough testing and hardening. Exceptions
+to this should be discussed and agreed upon through the TOC.&lt;/p&gt;
+&lt;p&gt;Since such a version bump can potentially be breaking to some repositories, the change
+should be announced and discussed and agreed upon between the impacted working groups.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Community: Knative release principles</title>
+      <link>https://knative.dev/community/contributing/mechanics/release-versioning-principles/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/community/contributing/mechanics/release-versioning-principles/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;knative-release-principles&#34;&gt;Knative Release Principles&lt;/h1&gt;
+&lt;h2 id=&#34;principles&#34;&gt;Principles&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;These principles are forward looking from release 0.13.x onward. There are
+plenty of examples where some or all of these principles have not been followed
+in the past. We are not looking to change past behavior, but to help define
+future behavior for the project.&lt;/em&gt;&lt;/p&gt;
+&lt;h3 id=&#34;overarching-principle&#34;&gt;Overarching principle:&lt;/h3&gt;
+&lt;p&gt;Wherever possible† follow the principles that are widely adopted by Kubernetes
+for
+&lt;a href=&#34;https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api_changes.md&#34;&gt;API changes&lt;/a&gt;
+and
+&lt;a href=&#34;https://kubernetes.io/docs/reference/using-api/deprecation-policy/&#34;&gt;API deprecation&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;† - Some things may not be possible due to either the maturity of CRDs or the
+mechanism by which they are implemented (e.g. not an API Server, no conversion
+webhooks, bugs).&lt;/em&gt;&lt;/p&gt;
+&lt;h3 id=&#34;k8s-minimum-version-principle&#34;&gt;K8s minimum version principle:&lt;/h3&gt;
+&lt;p&gt;We (the community) support the range of upstream minor Kubernetes versions that
+are Kubernetes community supported at the time of the cut. Only the latest patch
+release of the minor version is tested for support. Support for versions prior
+to that are best effort, or by vendors.&lt;/p&gt;
+&lt;p&gt;Adoption of newer K8s minimum versions will also be on a best-effort basis. When a
+Kubernetes version is released it&amp;rsquo;s availability in downstream distributions is
+often lagging. When these delays affect our planned min K8s version we&amp;rsquo;ll update
+the version table below and make it known in the release&amp;rsquo;s notes.&lt;/p&gt;
+&lt;p&gt;This principle will be revisited when changes to upstream Kubernetes support
+policy occur.&lt;/p&gt;
+&lt;h3 id=&#34;knative-community-support-window-principle&#34;&gt;Knative community support window principle:&lt;/h3&gt;
+&lt;p&gt;We (the community) support the most recent 4 versions of Knative. The term
+support as used here means that we will maintain release branches for these
+releases. We will consider backporting applicable fixes to these release
+branches depending on severity and feasibility.&lt;/p&gt;
+&lt;h3 id=&#34;default-and-optional-api-versions-principle&#34;&gt;Default and optional API versions principle:&lt;/h3&gt;
+&lt;p&gt;There will be at least one common API version available across all community
+supported versions (See
+&lt;a href=&#34;#knative-community-support-window-principle&#34;&gt;Community support window principle&lt;/a&gt;)
+at any given time. At least one of these common API versions will be enabled by
+default from the open source installation path. The open source installation
+process may allow optional API versions at the discretion of the installing
+user.&lt;/p&gt;
+&lt;h3 id=&#34;api-support-principle&#34;&gt;API Support Principle:&lt;/h3&gt;
+&lt;p&gt;We (the community) support all API versions (both default and optional)
+available from current community supported Knative releases. We will keep Beta
+API versions available in releases for at least 9 months and GA API versions in
+releases for at least 12 months after deprecation is announced. Earlier API
+versions are best effort, or by vendors. See FAQ for v1alpha1.&lt;/p&gt;
+&lt;h3 id=&#34;recommended-api-version-principle&#34;&gt;Recommended API version principle:&lt;/h3&gt;
+&lt;p&gt;We (the community) recommend that clients developing to a static API version
+(including non-versioned tests) develop to the highest common API version
+offered across supported community releases at the time of development. Where
+feasible a dynamic client should be preferred.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt; If 0.8.x through 0.11.x are the current community supported
+versions then v1alpha1 would be the recommended client version as 0.8.x does
+not support v1beta1 nor v1 by default. This makes v1alpha1 the common version.
+(Note: This would mean 0.11.x must support v1alpha1 by default otherwise we do
+not have any minimum overlapping version).&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;runtime-conformance-principle&#34;&gt;Runtime Conformance Principle:&lt;/h3&gt;
+&lt;p&gt;In order to be runtime conformant for a given release, an installation must pass
+the runtime conformance tests for the installed version and 3 prior versions (as
+determined by the supported version principle). This means runtime tests for a
+given version should follow the recommended API version principle to be forwards
+compatible when run against one of the 3 subsequent versions.&lt;/p&gt;
+&lt;h3 id=&#34;api-conformance-principle&#34;&gt;API Conformance Principle:&lt;/h3&gt;
+&lt;p&gt;In order to be API conformant for a given release, an installation must pass
+conformance for the installed version and 3 prior versions for common API
+versions. There will always be at least one such version due to the principles
+above.&lt;/p&gt;
+&lt;h3 id=&#34;project-feature-and-sub-feature-phase-principle&#34;&gt;Project, Feature, and Sub-Feature Phase Principle:&lt;/h3&gt;
+&lt;p&gt;There will be a phase identified for each project, feature, and sub-feature for
+each release. Each of the phases: Alpha, Beta, and Stable will have clear
+definitions related to performance, deprecation and maintenance.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;Alpha&lt;/th&gt;
+&lt;th&gt;Beta&lt;/th&gt;
+&lt;th&gt;Stable&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;em&gt;Purpose&lt;/em&gt;&lt;/td&gt;
+&lt;td&gt;Works with possible limitations&lt;/td&gt;
+&lt;td&gt;Works end to end&lt;/td&gt;
+&lt;td&gt;Production Ready&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;em&gt;API&lt;/em&gt;&lt;/td&gt;
+&lt;td&gt;May not be backward compatible&lt;/td&gt;
+&lt;td&gt;Versioned, may not be backward compatible&lt;/td&gt;
+&lt;td&gt;Versioned / Backward Compatible&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;em&gt;Performance&lt;/em&gt;&lt;/td&gt;
+&lt;td&gt;No guarantee&lt;/td&gt;
+&lt;td&gt;No guarantee - Baseline&lt;/td&gt;
+&lt;td&gt;Performance is quantified, documented, and guarantees against regression&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;em&gt;Deprecation Notice&lt;/em&gt;&lt;/td&gt;
+&lt;td&gt;none&lt;/td&gt;
+&lt;td&gt;9 months&lt;/td&gt;
+&lt;td&gt;12 months&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;faq&#34;&gt;FAQ&lt;/h2&gt;
+&lt;h3 id=&#34;what-happens-during-upgrades-of-knative&#34;&gt;What happens during upgrades of Knative?&lt;/h3&gt;
+&lt;p&gt;We support upgrading versions of Knative from any community supported version of
+Knative to a minor version one higher. Upgrade steps larger than one minor
+version must go through an intermediate version first. As an example, if the
+current community versions are 0.9.x through 0.12.x the upgrade matrix will look
+like below:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Knative Version&lt;/th&gt;
+&lt;th&gt;Upgrades to&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;0.9.x&lt;/td&gt;
+&lt;td&gt;0.10.x&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;0.10.x&lt;/td&gt;
+&lt;td&gt;0.11.x&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;0.11.x&lt;/td&gt;
+&lt;td&gt;0.12.x&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;0.12.x&lt;/td&gt;
+&lt;td&gt;N/A&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;what-happens-during-downgrades-of-knative&#34;&gt;What happens during downgrades of Knative?&lt;/h3&gt;
+&lt;p&gt;Knative downgrades are a harder story than upgrades as the purpose of the
+upgrades are to fix bugs and add features. That said there are many cases where
+a downgrade or rollback is appropriate. As downgrades are more difficult to get
+right Knative will make a best effort to support downgrade of a single minor
+version and only if users have not already taken advantage of new features or
+fields.&lt;/p&gt;
+&lt;p&gt;This means that we need to support the downgrade tests case within our project
+to ensure that downgrade is indeed possible before code checked in and releases
+are cut.&lt;/p&gt;
+&lt;h3 id=&#34;what-happens-during-upgrades-of-kubernetes&#34;&gt;What happens during upgrades of Kubernetes?&lt;/h3&gt;
+&lt;p&gt;Strawman: Upgrading Kubernetes may move you from a Kubernetes version for which
+a release was intended to a newer version that may have not been originally
+qualified. We expect this to work given Kubernetes backwards compatibility
+support. We intend for these upgrades to be a non-issue. If particular versions
+are found to be incompatible and the Knative version is still community
+supported we will either:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;work with the Kubernetes community on a fix or&lt;/li&gt;
+&lt;li&gt;develop a patch release to workaround the issue. We will publish guidance on
+potential incompatibility on knative.dev&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;which-api-endpoints-should-i-enable-when-i-vendhost-knative-serving&#34;&gt;Which API endpoints should I enable when I vend/host Knative Serving?&lt;/h3&gt;
+&lt;p&gt;Vendors may make their decisions about supporting API versions. They may decide
+to support optional API versions by default or may support API versions that are
+EOL in the open source community. The recommendation of the community is to
+offer all APIs versions that the Open Source project makes available by default
+for a given release version. This offers clients the best interoperability and
+users the best portability.&lt;/p&gt;
+&lt;h3 id=&#34;what-about-serving-v1alpha1-api-support&#34;&gt;What about Serving v1alpha1 API support?&lt;/h3&gt;
+&lt;p&gt;Due to the length of time we have supported v1alpha1, the ubiquity of
+availability across released Knative Serving versions, and the presence of
+clients statically developed against this version we will treat the current set
+of v1alpha1 Serving APIs as &amp;lsquo;Beta&amp;rsquo; APIs. This means that we will keep v1alpha1
+available in releases for at least 9 months after deprecated is announced.
+During that period of time of availability, we will evaluate whether the API is
+available through the default Open Source installation by following the
+&lt;a href=&#34;#default-and-optional-api-versions-principle&#34;&gt;Default and optional API versions principle&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;what-happens-when-the-minimum-kubernetes-version-for-a-supported-knative-release-is-no-longer-supported-by-kubernetes&#34;&gt;What happens when the minimum Kubernetes version for a supported Knative release is no longer supported by Kubernetes?&lt;/h3&gt;
+&lt;p&gt;We will explicitly avoid introducing changes into a Knative Serving release
+branch that would raise the minimum version. We will not keep around test
+clusters for unsupported Kubernetes versions, but we will attempt to solve user
+reported bugs to the best of our ability.&lt;/p&gt;
+&lt;h3 id=&#34;can-we-have-the-table-below-on-knativedev&#34;&gt;Can we have the table below on knative.dev?&lt;/h3&gt;
+&lt;p&gt;Yes. We will publish a table similar to below once we have agreement on the
+principles so that users can easily determine versions and endpoints available
+for a given release.&lt;/p&gt;
+&lt;h2 id=&#34;knative-version-tables&#34;&gt;Knative Version Tables&lt;/h2&gt;
+&lt;p&gt;Storage Type = The type that is stored in etcd by the Kubernetes API Server&lt;/p&gt;
+&lt;p&gt;API Endpoints = The rest endpoints that are made available to clients&lt;/p&gt;
+&lt;p&gt;API Types = The API types that the endpoint understands&lt;/p&gt;
+&lt;p&gt;Lemonade = v1alpha1 + v1beta1 super-set type (Serving only)&lt;/p&gt;
+&lt;p&gt;Force Upgrade = Automatically convert v1alpha1 to v1beta1 syntax via Lemonade&lt;/p&gt;
+&lt;p&gt;Availability =&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Default means installed through typical open source release.&lt;/li&gt;
+&lt;li&gt;Optional means available in the open source, but will not be installed by
+default.&lt;/li&gt;
+&lt;li&gt;Removed means support no longer exists within the open source release&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: subject to change based on verification of (knative, kube) version
+tuple&lt;/p&gt;
+&lt;h3 id=&#34;knative-serving-version-table&#34;&gt;Knative Serving Version Table&lt;/h3&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;Knative Version&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Release Date&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;End of Life Date&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Min K8s Version&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Storage Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;API Endpoints&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;API Type Served&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Availability&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+   &lt;tr&gt;
+   &lt;td&gt;0.23.x
+   &lt;/td&gt;
+   &lt;td&gt;2021-05-18
+   &lt;/td&gt;
+   &lt;td&gt;2021-11-02
+   &lt;/td&gt;
+   &lt;td&gt;v1.19.x
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;default
+   &lt;/td&gt;
+  &lt;/tr&gt;
+   &lt;tr&gt;
+   &lt;td&gt;0.22.x
+   &lt;/td&gt;
+   &lt;td&gt;2021-04-06
+   &lt;/td&gt;
+   &lt;td&gt;2021-09-21
+   &lt;/td&gt;
+   &lt;td&gt;v1.18.x
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;default
+   &lt;/td&gt;
+  &lt;/tr&gt;
+   &lt;tr&gt;
+   &lt;td&gt;0.21.x
+   &lt;/td&gt;
+   &lt;td&gt;2021-02-23
+   &lt;/td&gt;
+   &lt;td&gt;2021-08-10
+   &lt;/td&gt;
+   &lt;td&gt;v1.18.x
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;default
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;0.20.x
+   &lt;/td&gt;
+   &lt;td&gt;2021-01-12
+   &lt;/td&gt;
+   &lt;td&gt;2021-06-29
+   &lt;/td&gt;
+   &lt;td&gt;v1.17.x
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;default
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;0.19.x
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;2020-11-10
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;2021-05-18
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;v1.17.x
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;default
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;v1beta1
+   &lt;/td&gt;
+   &lt;td&gt;v1beta1
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;removed&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;v1alpha1
+   &lt;/td&gt;
+   &lt;td&gt;Lemonade
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;removed&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;0.18.x
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;2020-09-29
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;2021-03-16
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;v1.17.x
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;default
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;v1beta1
+   &lt;/td&gt;
+   &lt;td&gt;v1beta1
+   &lt;/td&gt;
+   &lt;td&gt;optional (deprecated)
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;v1alpha1
+   &lt;/td&gt;
+   &lt;td&gt;Lemonade
+   &lt;/td&gt;
+   &lt;td&gt;optional (deprecated)
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;0.17.x
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;2020-08-18
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;2021-02-02
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;1.16.x
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;default
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;v1beta1
+   &lt;/td&gt;
+   &lt;td&gt;v1beta1
+   &lt;/td&gt;
+   &lt;td&gt;default (deprecated)
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;v1alpha1
+   &lt;/td&gt;
+   &lt;td&gt;Lemonade
+   &lt;/td&gt;
+   &lt;td&gt;default (deprecated)
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;0.16.x
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;2020-07-07
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;2020-12-22
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;1.16.x
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;default
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;v1beta1
+   &lt;/td&gt;
+   &lt;td&gt;v1beta1
+   &lt;/td&gt;
+   &lt;td&gt;default (deprecated)
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;v1alpha1
+   &lt;/td&gt;
+   &lt;td&gt;Lemonade
+   &lt;/td&gt;
+   &lt;td&gt;default (deprecated)
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;0.15.x
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;2020-05-26
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;2020-11-10
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;1.16.x
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;default
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;v1beta1
+   &lt;/td&gt;
+   &lt;td&gt;v1beta1
+   &lt;/td&gt;
+   &lt;td&gt;default (deprecated)
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;v1alpha1
+   &lt;/td&gt;
+   &lt;td&gt;Lemonade
+   &lt;/td&gt;
+   &lt;td&gt;default (deprecated)
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;0.14.x
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;2020-04-14
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;2020-09-29
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;1.15.x
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;default
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;v1beta1
+   &lt;/td&gt;
+   &lt;td&gt;v1beta1
+   &lt;/td&gt;
+   &lt;td&gt;default (deprecated)
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;v1alpha1
+   &lt;/td&gt;
+   &lt;td&gt;Lemonade
+   &lt;/td&gt;
+   &lt;td&gt;default (deprecated)
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;0.13.x
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;2020-03-03
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;2020-08-18
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;1.15.x
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;v1alpha1
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;default
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;v1beta1
+   &lt;/td&gt;
+   &lt;td&gt;v1beta1
+   &lt;/td&gt;
+   &lt;td&gt;default (deprecated)
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;v1alpha1
+   &lt;/td&gt;
+   &lt;td&gt;Lemonade
+   &lt;/td&gt;
+   &lt;td&gt;default (deprecated)
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;knative-eventing-version-table&#34;&gt;Knative Eventing Version Table&lt;/h3&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;Knative Version&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Release Date&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;End of Life Date&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Min K8s Version&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Storage Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Force Upgrade&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;API Endpoints&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;API Type Served&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Availability&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;0.23.x
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;2021-05-18
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;2021-11-02
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;v1.19.x
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;v1
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;N/A
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;default
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;v1beta1
+   &lt;/td&gt;
+   &lt;td&gt;v1beta1
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;removed&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;0.22.x
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;2021-04-06
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;2021-09-21
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;v1.18.x
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;v1
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;N/A
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;default
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;v1beta1
+   &lt;/td&gt;
+   &lt;td&gt;v1beta1
+   &lt;/td&gt;
+   &lt;td&gt;optional (deprecated)
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;0.21.x
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;2021-02-23
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;2021-08-10
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;v1.18.x
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;v1
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;N/A
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;default
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;v1beta1
+   &lt;/td&gt;
+   &lt;td&gt;v1beta1
+   &lt;/td&gt;
+   &lt;td&gt;optional (deprecated)
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;0.20.x
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;2021-01-12
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;2021-06-29
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;v1.17.x
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;v1
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;N/A
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;default
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;v1beta1
+   &lt;/td&gt;
+   &lt;td&gt;v1beta1
+   &lt;/td&gt;
+   &lt;td&gt;optional (deprecated)
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;0.19.x
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;2020-11-10
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;2021-05-18
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;v1.17.x
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;v1
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;N/A
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;default
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;v1beta1
+   &lt;/td&gt;
+   &lt;td&gt;v1beta1
+   &lt;/td&gt;
+   &lt;td&gt;optional (deprecated)
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;0.18.x
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;2020-09-29
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;2021-03-16
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;v1.17.x
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;v1
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;N/A
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;default
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;v1beta1
+   &lt;/td&gt;
+   &lt;td&gt;v1beta1
+   &lt;/td&gt;
+   &lt;td&gt;optional (deprecated)
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;0.17.x
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;2020-08-18
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;2021-02-02
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;1.16.x
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;v1
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;Yes
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;default
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;v1beta1
+   &lt;/td&gt;
+   &lt;td&gt;v1beta1
+   &lt;/td&gt;
+   &lt;td&gt;optional (deprecated)
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;v1alpha1
+   &lt;/td&gt;
+   &lt;td&gt;v1alpha1
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;removed&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;0.16.x
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;2020-07-07
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;2020-12-22
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;1.16.x
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;v1beta1
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;3&#34; &gt;N/A
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;v1
+   &lt;/td&gt;
+   &lt;td&gt;optional
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;v1beta1
+   &lt;/td&gt;
+   &lt;td&gt;v1beta1
+   &lt;/td&gt;
+   &lt;td&gt;default
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;v1alpha1
+   &lt;/td&gt;
+   &lt;td&gt;v1alpha1
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;not served&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;0.15.x
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;2020-05-26
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;2020-11-10
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;1.16.x
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;v1beta1
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;Yes
+   &lt;/td&gt;
+   &lt;td&gt;v1beta1
+   &lt;/td&gt;
+   &lt;td&gt;v1beta1
+   &lt;/td&gt;
+   &lt;td&gt;default
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;v1alpha1
+   &lt;/td&gt;
+   &lt;td&gt;v1alpha1
+   &lt;/td&gt;
+   &lt;td&gt;optional (deprecated)
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;0.14.x
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;2020-04-14
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;2020-09-29
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;1.15.x
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;v1alpha1
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;N/A
+   &lt;/td&gt;
+   &lt;td&gt;v1beta1
+   &lt;/td&gt;
+   &lt;td&gt;v1beta1
+   &lt;/td&gt;
+   &lt;td&gt;default
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;v1alpha1
+   &lt;/td&gt;
+   &lt;td&gt;v1alpha1
+   &lt;/td&gt;
+   &lt;td&gt;optional (deprecated)
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;0.13.x
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;2020-03-03
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;2020-08-18
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;1.15.x
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;v1alpha1
+   &lt;/td&gt;
+   &lt;td rowspan=&#34;2&#34; &gt;N/A
+   &lt;/td&gt;
+   &lt;td&gt;v1beta1
+   &lt;/td&gt;
+   &lt;td&gt;v1beta1
+   &lt;/td&gt;
+   &lt;td&gt;optional
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;v1alpha1
+   &lt;/td&gt;
+   &lt;td&gt;v1alpha1
+   &lt;/td&gt;
+   &lt;td&gt;default
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Community: Knative Release Schedule</title>
+      <link>https://knative.dev/community/contributing/mechanics/release-schedule/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/community/contributing/mechanics/release-schedule/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Knative releases every 6 weeks. As much as possible, releases should be driven by automation, and repos should be ready to release at any point. It should also be possible to produce and consume nightly artifacts.&lt;/p&gt;
+&lt;p&gt;With that said, it can be useful to have a list of when future releases will happen, so this document provides a schedule for the next 6+ months of releases.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Release&lt;/th&gt;
+&lt;th&gt;Date&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;0.17&lt;/td&gt;
+&lt;td&gt;2020-08-18&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;0.18&lt;/td&gt;
+&lt;td&gt;2020-09-29&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;0.19&lt;/td&gt;
+&lt;td&gt;2020-11-10&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;0.20&lt;/td&gt;
+&lt;td&gt;2021-01-12 ** Moved by 3 weeks for end of year holidays**&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;0.21&lt;/td&gt;
+&lt;td&gt;2021-02-23&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;0.22&lt;/td&gt;
+&lt;td&gt;2021-04-06&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;0.23&lt;/td&gt;
+&lt;td&gt;2021-05-18&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;0.24&lt;/td&gt;
+&lt;td&gt;2021-06-29&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Community: Knative feature sunsetting</title>
+      <link>https://knative.dev/community/contributing/mechanics/sunsetting-features/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/community/contributing/mechanics/sunsetting-features/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;knative-feature-sunsetting&#34;&gt;Knative Feature Sunsetting&lt;/h1&gt;
+&lt;p&gt;If a feature (especially in alpha stage) is getting no apparent usage and is
+creating mostly busy-work for the community to maintain, the respective working
+group should consider to sunset the respective feature. Other cost-benefit-ratio
+considerations can lead to sunsetting of features/APIs too, for example if a
+beta feature turns out to be a serious scalability issue.&lt;/p&gt;
+&lt;p&gt;This needs to be in accordance to the
+&lt;a href=&#34;RELEASE-VERSIONING-PRINCIPLES.md#api-support-principle&#34;&gt;Knative release principles&lt;/a&gt;
+so the duration of the following process might vary depending on the state of
+the respective feature.&lt;/p&gt;
+&lt;h2 id=&#34;1-working-group-decision&#34;&gt;1. Working Group decision&lt;/h2&gt;
+&lt;p&gt;First of all, there should be a decision at the working group level that there
+is a desire to remove the respective feature. This decision should also contain
+an explanation, stating why the feature can and should be dropped from Knative.&lt;/p&gt;
+&lt;h2 id=&#34;2-gauge-usage&#34;&gt;2. Gauge usage&lt;/h2&gt;
+&lt;p&gt;While the working group itself might think there is no usage, that feeling
+should be verified by gathering hard data.&lt;/p&gt;
+&lt;h3 id=&#34;ask-vendors-if-they-explicitly-ship-the-feature&#34;&gt;Ask vendors if they explicitly ship the feature&lt;/h3&gt;
+&lt;p&gt;The quickest way of gauging the potential impact of the sunset is to ask vendors
+that productize and ship Knative in downstream products if they are shipping the
+respective feature explicitly. Explicitly here means that they specifically
+chose to enable the respective feature. A good overview of existing downstream
+products and projects can been in the
+&lt;a href=&#34;https://knative.dev/docs/knative-offerings/&#34;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;A post should be sent to
+&lt;a href=&#34;https://groups.google.com/forum/#!forum/knative-dev&#34;&gt;knative-dev@&lt;/a&gt;, explaining
+which feature is supposed to be removed and why it is supposed to be removed.
+Lazy consensus can be applied over a period of two weeks.&lt;/p&gt;
+&lt;h3 id=&#34;ask-users-if-they-are-using-the-feature&#34;&gt;Ask users if they are using the feature&lt;/h3&gt;
+&lt;p&gt;In the same way, it is very important to get to know if any user is actually
+using the feature. A post should be sent to
+&lt;a href=&#34;https://groups.google.com/forum/#!forum/knative-users&#34;&gt;knative-users@&lt;/a&gt;, with
+essentially the same contents as the post to
+&lt;a href=&#34;https://groups.google.com/forum/#!forum/knative-dev&#34;&gt;knative-dev@&lt;/a&gt;. Again, lazy
+consensus can be applied over a period of two weeks.&lt;/p&gt;
+&lt;h2 id=&#34;3-reevaluate-the-decision&#34;&gt;3. Reevaluate the decision&lt;/h2&gt;
+&lt;p&gt;Once the data has been gathered, the working group should reconsider the
+decision with the collected data in mind.&lt;/p&gt;
+&lt;h2 id=&#34;4-sunset&#34;&gt;4. Sunset&lt;/h2&gt;
+&lt;p&gt;If the decision to remove the feature remains, it can now actually be removed.
+This might either be a deprecation notice for Beta and GA feature or a straight
+up deletion of the respective feature for alpha features. The deprecation notice
+should be visible to both operators and users of the system. For example,
+Knative could add a warning notice to the status of entities that use deprecated
+features.&lt;/p&gt;
+&lt;p&gt;Likewise, the documentation should be updated. Deprecation notices should be put
+up to the respective features and the deletion of a feature should be
+accompanied with a deletion of the relevant documentation.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Community: </title>
+      <link>https://knative.dev/community/contributing/mechanics/gdrive/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/community/contributing/mechanics/gdrive/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;gsuite-configuration-for-knativeteam&#34;&gt;GSuite configuration for Knative.team&lt;/h1&gt;
+&lt;h2 id=&#34;historical-context&#34;&gt;Historical Context&lt;/h2&gt;
+&lt;p&gt;The Knative Community GSuite tools used the google.com domain up until January 4th, 2021. With the GSuite org being under the google.com domain, this affected the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;GDrive - Folks outside of Google can’t control the ownership of the community drive. Documents can&amp;rsquo;t be shared with &amp;ldquo;everyone on the internet&amp;rdquo;, only &amp;ldquo;with Google.com&amp;rdquo;. This makes it hard to provide read view outside the Knative community.&lt;/li&gt;
+&lt;li&gt;Knative Community Calendar - Folks outside of Google have read/write access but don’t have admin privileges&lt;/li&gt;
+&lt;li&gt;Hangouts - Hangouts for WG meetings required someone from Google to let folks into the meeting&lt;/li&gt;
+&lt;li&gt;Mailing lists are all @googlegroups.com, rather than associated with Knative (branding/authentication challenge).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Due to the challenges of managing community artifacts, we now have a knative.team GSuite org.&lt;/p&gt;
+&lt;h4 id=&#34;gsuite-gotchas&#34;&gt;GSuite gotchas&lt;/h4&gt;
+&lt;p&gt;Google.com accounts have a corporate policy that prevents them from creating new drive documents outside the domain. Googlers should use a consumer (@gmail.com) or @knative.team account to create documents on the team drive (including uploading recordings). Googlers &lt;em&gt;can&lt;/em&gt; comment or edit existing documents without problems.&lt;/p&gt;
+&lt;h2 id=&#34;knativeteam-gsuite-setup&#34;&gt;Knative.team GSuite Setup&lt;/h2&gt;
+&lt;h3 id=&#34;accessprivileges&#34;&gt;Access/Privileges&lt;/h3&gt;
+&lt;h4 id=&#34;steering-committee&#34;&gt;Steering Committee&lt;/h4&gt;
+&lt;p&gt;All steering committee members have “Super Admin” &lt;a href=&#34;https://support.google.com/a/answer/33325?hl=en&#34;&gt;privileges&lt;/a&gt; on the Knative.team GSuite account. This allows steering members to create new groups, manage Google Meet settings etc. In order to access the GSuite admin console, navigate to admin.google.com.&lt;/p&gt;
+&lt;h4 id=&#34;technical-oversight-committee&#34;&gt;Technical Oversight Committee&lt;/h4&gt;
+&lt;p&gt;The technical oversight committee members each have a knative.team GSuite account. This is to allow TOC members to assist with some of the GSuite automation and GDrive migration. In addition to this, TOC members will need a knative.team account to allow people without a knative.team account into public meetings hosted on Google Hangouts.&lt;/p&gt;
+&lt;h4 id=&#34;working-group-leads&#34;&gt;Working Group Leads&lt;/h4&gt;
+&lt;p&gt;Each WG lead has a knative.team GSuite account. This is to allow WG leads to let people without a knative.team account into the public WG meetings hosted on Google Hangouts.&lt;/p&gt;
+&lt;p&gt;When each WG lead steps down, a GSuite admin will have to remove their account as there currently is no automation set up.&lt;/p&gt;
+&lt;h3 id=&#34;mailing-lists&#34;&gt;Mailing lists&lt;/h3&gt;
+&lt;p&gt;There are several mailing lists set up to manage permission groups (some could also be used for communication, but that is not the current usage). There is currently no automation to manage these lists.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;wg-leads – all working group leads, gives update permission on the Knative official events calendar&lt;/li&gt;
+&lt;li&gt;steering – steering committee members&lt;/li&gt;
+&lt;li&gt;trademark – trademark committee members&lt;/li&gt;
+&lt;li&gt;(TODO) toc – tech oversight committee members&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;payment-and-package&#34;&gt;Payment and Package&lt;/h3&gt;
+&lt;p&gt;The Knative.team GSuite is a &lt;a href=&#34;https://workspace.google.com/intl/en/pricing.html&#34;&gt;Business Standard&lt;/a&gt; GSuite Plan. This is required so that WG meetings have the ability to record meetings. If we need changes made to the GSuite package-type on this account, &lt;a href=&#34;mailto:anassi@google.com&#34;&gt;April Nassi&lt;/a&gt; can help with this.&lt;/p&gt;
+&lt;p&gt;The GSuite org is currently paid by Google. &lt;a href=&#34;mailto:maryr@google.com&#34;&gt;Mary Radomile&lt;/a&gt; is the point of contact if we need help re: billing.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Community: </title>
+      <link>https://knative.dev/community/contributing/mechanics/maturity-levels/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/community/contributing/mechanics/maturity-levels/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;knative-migration-to-core-process&#34;&gt;Knative Migration-To-Core Process&lt;/h1&gt;
+&lt;p&gt;This document provides a maturity model for projects in the Knative community.
+This includes projects in knative-sandbox (broader community) or as well as
+projects in other GitHub organizations which wish to participate in the
+community process. It also defines a process for
+&lt;a href=&#34;#migration-to-core&#34;&gt;migrating community projects into the Knative core&lt;/a&gt;, if
+appropriate. Note that projects may not map 1:1 with repos, and projects may
+even be hierarchical (for example, the &amp;ldquo;eventing&amp;rdquo; project includes &amp;ldquo;eventing
+API&amp;rdquo;, &amp;ldquo;eventing delivery&amp;rdquo; and &amp;ldquo;eventing sources&amp;rdquo;, each of which has artifacts in
+multiple repositories).&lt;/p&gt;
+&lt;p&gt;Note that this document intentionally refers to the process of selecting
+implemented interfaces from sandbox which should be part of core as
+&amp;ldquo;migration-to-core&amp;rdquo; rather than &amp;ldquo;incubation&amp;rdquo; or &amp;ldquo;promotion&amp;rdquo; – while it may be
+personally satisfying to have a component be part of the core, components which
+are not in the core may be equally valuable and production-worthy.&lt;/p&gt;
+&lt;h1 id=&#34;maturity-phases&#34;&gt;Maturity phases&lt;/h1&gt;
+&lt;h2 id=&#34;initiating&#34;&gt;Initiating&lt;/h2&gt;
+&lt;p&gt;In the initiating phase, a project is starting up, and may have minimal
+additional artifacts around the code itself. The minimum bar for an initiating
+project in the knative-sandbox org is:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/knative/community/blob/master/mechanics/CREATING-A-SANDBOX-REPO.md#technical-requirements&#34;&gt;Adopted the CLA bot and OWNERS file / Tide merge process&lt;/a&gt;,
+to ensure IP ownership&lt;/li&gt;
+&lt;li&gt;Adopt the
+&lt;a href=&#34;https://github.com/knative/community/blob/master/CODE-OF-CONDUCT.md&#34;&gt;Knative Code of Conduct&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/knative/community/blob/master/mechanics/CREATING-A-SANDBOX-REPO.md#criteria&#34;&gt;Sponsored by a WG lead&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Have a README.md that describes the repo(s)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Projects which do not declare otherwise are assumed to be in the &amp;ldquo;Initiating&amp;rdquo;
+phase, regardless of release process, users, etc.&lt;/p&gt;
+&lt;p&gt;This phase is suitable for:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Experiments&lt;/li&gt;
+&lt;li&gt;Proofs-of-Concept&lt;/li&gt;
+&lt;li&gt;Examples&lt;/li&gt;
+&lt;li&gt;Templates&lt;/li&gt;
+&lt;li&gt;etc&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Note that Initiating projects do not need to be hosted in knative-sandbox, and
+can be hosted under either individual accounts or in other orgs. For projects in
+knative-sandbox, review requirements and cadence are at the discretion of the
+sponsoring WG lead.&lt;/p&gt;
+&lt;h2 id=&#34;usable&#34;&gt;Usable&lt;/h2&gt;
+&lt;p&gt;A usable project has reached the point where it is releasing executable
+artifacts which are in use by at least two end users (preferably different
+companies, rather than installations within the same company). Additionally, a
+usable project meets certain other criteria (defined below) which allows the
+Knative community to have confidence in the project and willingness to invest
+further.&lt;/p&gt;
+&lt;p&gt;Additional requirements beyond &amp;ldquo;initiating&amp;rdquo;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A published release schedule, with at least two successful minor releases.
+&lt;ul&gt;
+&lt;li&gt;At least two end users (preferably different companies) who are consuming
+the release artifacts. Commercial products with production usage count
+towards this target. This can be documented in something
+&lt;a href=&#34;https://www.google.com/url?q=https://github.com/cncf/toc/blob/master/process/graduation_criteria.adoc&amp;amp;sa=D&amp;amp;ust=1597952611892000&amp;amp;usg=AFQjCNFymwghRnNGVqbD0O_01TsfEeto5w&#34;&gt;like an ADOPTERS.md file&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Unit test automation meeting the Knative standards with respect to coverage
+and flakiness / test failures.&lt;/li&gt;
+&lt;li&gt;Provide at least monthly progress reports at the appropriate WG(s). WGs should
+roll these reports up into their TOC reports.&lt;/li&gt;
+&lt;li&gt;User-facing documentation for the following areas: install, usage&lt;/li&gt;
+&lt;li&gt;Contributor facing documentation for: development setup&lt;/li&gt;
+&lt;li&gt;Ongoing contributions from multiple contributors and management of user
+issues, etc.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Usable projects which meet the criteria for core (i.e. developer-facing
+abstractions with wide utility, beta+ APIs) may apply to the TOC and SC for
+&lt;a href=&#34;#migration-to-core&#34;&gt;migration to core&lt;/a&gt;, but approval is more likely for
+projects in the &amp;ldquo;Stable&amp;rdquo; category.&lt;/p&gt;
+&lt;h2 id=&#34;stable&#34;&gt;Stable&lt;/h2&gt;
+&lt;p&gt;A stable project has graduated beyond the bar in &amp;ldquo;usable&amp;rdquo; and is widely-adopted
+with a stable API and well-understood operational characteristics. This would be
+similar to a &amp;ldquo;GA&amp;rdquo; level of support for a commercial product in terms of
+maturity.&lt;/p&gt;
+&lt;p&gt;Additional requirements beyond &amp;ldquo;usable&amp;rdquo;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A stable v1 API following documented release and deprecation principles (ref
+&lt;a href=&#34;https://github.com/knative/community/blob/master/mechanics/RELEASE-VERSIONING-PRINCIPLES.md&#34;&gt;core Knative principles&lt;/a&gt;).
+Depending on the project, the API may include library methods, Kubernetes
+CRDs, network data-plane protocols, container contracts, or some combination.
+The API contract should be explicitly documented in the repo.&lt;/li&gt;
+&lt;li&gt;Identified and named set of project leads managing both development roadmap
+and overall project success.&lt;/li&gt;
+&lt;li&gt;Release schedule aligned with the core Knative release schedule.&lt;/li&gt;
+&lt;li&gt;At least 5 end-users consuming the release artifacts in installations of
+sufficient quality and scope.
+&lt;ul&gt;
+&lt;li&gt;Commercial products with production usage count towards this target, though
+there must be multiple commercial products or direct upstream users to
+quality (i.e. 5 users of a single-vendor product and no other users may be
+&amp;ldquo;usable&amp;rdquo;, but would not be accepted for &amp;ldquo;stable&amp;rdquo;).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Upgrade and e2e test automation.&lt;/li&gt;
+&lt;li&gt;(Reports as for usable projects)&lt;/li&gt;
+&lt;li&gt;User-facing documentation for debugging.&lt;/li&gt;
+&lt;li&gt;Contributor facing documentation for issue triage and project engagement.&lt;/li&gt;
+&lt;li&gt;Members of the development team is varied. Ideally from multiple
+organizations.&lt;/li&gt;
+&lt;li&gt;There must be a &amp;ldquo;stable&amp;rdquo; set of installation-time dependencies for the
+project. (i.e. for Eventing, the &amp;ldquo;Kafka&amp;rdquo; channel implementation could be
+counted as a &amp;ldquo;stable&amp;rdquo; dependency)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Projects are generally encouraged to reach stable maturity before considering
+&lt;a href=&#34;#migration-to-core&#34;&gt;migration to core&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;sunsetting&#34;&gt;Sunsetting&lt;/h2&gt;
+&lt;p&gt;At any time, a project may move into the &amp;ldquo;sunsetting&amp;rdquo; phase. This is a
+declaration that the project will no longer managed or maintained. For a project
+which is currently in the &amp;ldquo;stable&amp;rdquo; phase, there should be a clear commitment to
+support the project with bug and security fixes as applicable
+&lt;a href=&#34;https://github.com/knative/community/blob/master/mechanics/RELEASE-VERSIONING-PRINCIPLES.md&#34;&gt;based on the Knative release principles&lt;/a&gt;
+(4 versions of Knative).&lt;/p&gt;
+&lt;h1 id=&#34;migration-to-core&#34;&gt;Migration to Core&lt;/h1&gt;
+&lt;p&gt;A stable project may apply to the SC and TOC to be admitted to the Knative core.
+Not all stable projects are suitable for &amp;ldquo;core&amp;rdquo;; this is a judgement as to the
+degree to which the project should be considered a part of a &amp;ldquo;expected developer
+experience&amp;rdquo; across Knative installations. Projects may be graded on the
+following criteria (to be updated based on experience):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Presence of developer-facing or operator-facing capability abstractions&lt;/li&gt;
+&lt;li&gt;Independent usability / abstraction interfaces – how much does this require /
+complement existing Knative components (modular at the top)&lt;/li&gt;
+&lt;li&gt;Ability to abstract over multiple underlying implementations (pluggable on the
+bottom)&lt;/li&gt;
+&lt;li&gt;Number / diversity of installations and adoption as a fraction of total
+Knative usage&lt;/li&gt;
+&lt;li&gt;Quality of technical implementation – ability to scale and reach&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

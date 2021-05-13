@@ -1,0 +1,190 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Knative – Knative social events</title>
+    <link>https://knative.dev/blog/events/</link>
+    <description>Recent content in Knative social events on Knative</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 13 May 2019 00:00:00 +0000</lastBuildDate>
+    
+	  <atom:link href="https://knative.dev/blog/events/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Blog: Knative at KubeCon’19 Europe</title>
+      <link>https://knative.dev/blog/2019/05/13/knative-at-kubecon19-europe/</link>
+      <pubDate>Mon, 13 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/blog/2019/05/13/knative-at-kubecon19-europe/</guid>
+      <description>
+        
+        
+        &lt;p&gt;There&amp;rsquo;s only a week until
+&lt;a href=&#34;https://events.linuxfoundation.org/events/kubecon-cloudnativecon-europe-2019/&#34;&gt;KubeCon + CloudNativeCon Europe 2019&lt;/a&gt;
+kicks off in Barcelona, Spain. We wanted to share with you a few of the Knative
+talks you can attend at the conference to learn more about the Knative project,
+its progress in the past year and momentum.&lt;/p&gt;
+&lt;h2 id=&#34;monday-may-20-pre-conference&#34;&gt;Monday, May 20 (Pre-conference)&lt;/h2&gt;
+&lt;p&gt;Join us for the day-long
+&lt;a href=&#34;https://kccnceu19.sched.com/event/MQfW/serverless-practitioners-summit-hosted-by-cncf-additional-registration-fee-required&#34;&gt;Serverless Practitioners Summit&lt;/a&gt;
+pre-conference event.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; This event
+&lt;a href=&#34;https://www.cvent.com/events/kubecon-cloudnativecon-europe-2019/registration-0260af87ce634c2a8bf0aa2e3b32347f.aspx&#34;&gt;requires pre-registration&lt;/a&gt;,
+and if you have already registered to KubeCon, you can modify your registration
+to participate in this pre-conference event.&lt;/p&gt;
+&lt;p&gt;In the morning, Mark Chmarny (&lt;a href=&#34;https://twitter.com/mchmarny&#34;&gt;mchmarny@&lt;/a&gt;) will
+cover the momentum and growth of the Knative project since its launch a year
+ago.&lt;/p&gt;
+&lt;p&gt;In the afternoon, we have a 3-hour Knative track (&lt;strong&gt;2-5pm&lt;/strong&gt;) full of demos
+illustrating how Knative helps developers and operators in building, deploying,
+and managing modern applications on Kubernetes.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Introduction to Knative Serving:&lt;/strong&gt; What the serving stack of Knative offers
+on top of Kubernetes and how it provides the building blocks for modern
+development platform&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Knative the Easy Way:&lt;/strong&gt; How Google uses Knative and Knative API to build and
+offer Cloud Run and Cloud Run on GKE products.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Knative Eventing:&lt;/strong&gt; How the eventing API helps routing events from various
+configurable sources to the serving stack, and an overview of what&amp;rsquo;s involved
+in creating new Event Sources.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Knative Pluggability:&lt;/strong&gt; How can the operators customize and extend Knative
+to provide their developers and infrastructure tailored to their needs.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;wednesday-may-22&#34;&gt;Wednesday, May 22&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;4:45-5:20pm:
+&lt;a href=&#34;https://kccnceu19.sched.com/event/MPaK/extending-knative-for-fun-and-profit-matt-moore-ville-aikas-google&#34;&gt;Extending Knative for Fun and Profit&lt;/a&gt;
+– Matt Moore (&lt;a href=&#34;https://twitter.com/mattomata&#34;&gt;@mattomata&lt;/a&gt;) &amp;amp; Ville Aikas
+(&lt;a href=&#34;https://twitter.com/aikasville?lang=en&#34;&gt;@AikasVille&lt;/a&gt;), Google&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;thursday-may-23&#34;&gt;Thursday, May 23&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;3:55-4:30pm:
+&lt;a href=&#34;https://kccnceu19.sched.com/event/MPeL/istio-on-knative-lessons-learned-how-istio-is-fit-for-serverless-platform-ying-chun-guo-iris-ding-ibm&#34;&gt;Istio on Knative Lessons Learned: How Istio is Fit for Serverless Platform&lt;/a&gt;
+– Ying Chun Guo &amp;amp; Iris Ding, IBM&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We are looking forward to seeing you in Barcelona next week, hope you enjoy
+delicious tapas and some educational and entertaining Knative talks. Please join
+us in our &lt;a href=&#34;../../community/&#34;&gt;community channels&lt;/a&gt; if you&amp;rsquo;re not able to attend
+KubeCon&#39;19 EU.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Blog: Knative at KubeCon Seattle</title>
+      <link>https://knative.dev/blog/2018/12/04/knative-at-kubecon-seattle/</link>
+      <pubDate>Tue, 04 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/blog/2018/12/04/knative-at-kubecon-seattle/</guid>
+      <description>
+        
+        
+        
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta http-equiv=&#34;Content-Type&#34; content=&#34;text/html; charset=utf-8&#34;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;article class=&#34;h-entry&#34;&gt;
+    &lt;section data-field=&#34;subtitle&#34; class=&#34;p-summary&#34;&gt;
+      As we approach KubeCon and CloudNativeCon in Seattle (Dec. 11–13), we wanted to share the different Knative-related sessions that will be…
+    &lt;/section&gt;
+    &lt;section data-field=&#34;body&#34; class=&#34;e-content&#34;&gt;
+      &lt;section name=&#34;c846&#34; class=&#34;section section--body section--first section--last&#34;&gt;
+        &lt;div class=&#34;section-divider&#34;&gt;
+          &lt;hr class=&#34;section-divider&#34;&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;section-content&#34;&gt;
+          &lt;div class=&#34;section-inner sectionLayout--insetColumn&#34;&gt;
+            &lt;h3 name=&#34;aba2&#34; id=&#34;aba2&#34; class=&#34;graf graf--h3 graf--leading graf--title&#34;&gt;Knative at KubeCon Seattle&lt;/h3&gt;
+            &lt;p name=&#34;a5d8&#34; id=&#34;a5d8&#34; class=&#34;graf graf--p graf-after--h3&#34;&gt;
+              &lt;strong class=&#34;markup--strong markup--p-strong&#34;&gt;Update (2018–12–19)&lt;/strong&gt;: Added sessions/keynotes/interviews links to videos&lt;/p&gt;
+              &lt;figure name=&#34;3f6a&#34; id=&#34;3f6a&#34; class=&#34;graf graf--figure graf--layoutOutsetLeft graf-after--p&#34;&gt;
+                &lt;div class=&#34;aspectRatioPlaceholder is-locked&#34; style=&#34;max-width: 400px; max-height: 400px;&#34;&gt;
+                  &lt;div class=&#34;aspectRatioPlaceholder-fill&#34;&gt;
+                  &lt;/div&gt;
+                  &lt;img class=&#34;graf-image&#34; data-image-id=&#34;kubecon.jpg&#34; data-width=&#34;400&#34; data-height=&#34;400&#34; data-is-featured=&#34;true&#34; src=&#34;../../../../events/images/kubecon.jpg&#34;&gt;
+                &lt;/div&gt;
+                &lt;figcaption class=&#34;imageCaption&#34;&gt;
+                  &lt;a href=&#34;https://kccna18.sched.com/&#34; data-href=&#34;https://kccna18.sched.com/&#34; class=&#34;markup--anchor markup--figure-anchor&#34; rel=&#34;noopener&#34; target=&#34;_blank&#34;&gt;KubeCon&lt;/a&gt; SEA 2018&lt;/figcaption&gt;
+                &lt;/figure&gt;
+                &lt;p name=&#34;d60c&#34; id=&#34;d60c&#34; class=&#34;graf graf--p graf-after--figure&#34;&gt;As we approach&lt;a href=&#34;https://kccna18.sched.com/&#34; data-href=&#34;https://kccna18.sched.com/&#34; class=&#34;markup--anchor markup--p-anchor&#34; rel=&#34;noopener&#34; target=&#34;_blank&#34;&gt; KubeCon and CloudNativeCon&lt;/a&gt; in Seattle (Dec. 11–13), we wanted to share the different &lt;a href=&#34;https://github.com/knative&#34; data-href=&#34;https://github.com/knative&#34; class=&#34;markup--anchor markup--p-anchor&#34; rel=&#34;noopener&#34; target=&#34;_blank&#34;&gt;Knative&lt;/a&gt;-related sessions that will be offered next week.&lt;/p&gt;
+                &lt;p name=&#34;2f47&#34; id=&#34;2f47&#34; class=&#34;graf graf--p graf-after--p&#34;&gt;We are proud of the project’s progress so far. The number of sessions, variety of topics, and number of different companies represented by the speakers, truly represent the breadth of the growing community behind Knative.&lt;/p&gt;
+                &lt;h4 name=&#34;b1bc&#34; id=&#34;b1bc&#34; class=&#34;graf graf--h4 graf-after--p&#34;&gt;
+                  &lt;strong class=&#34;markup--strong markup--h4-strong&#34;&gt;Monday, Dec 10&lt;/strong&gt;
+                &lt;/h4&gt;
+                &lt;ul class=&#34;postList&#34;&gt;
+                  &lt;li name=&#34;c2a3&#34; id=&#34;c2a3&#34; class=&#34;graf graf--li graf-after--h4&#34;&gt;
+                    &lt;strong class=&#34;markup--strong markup--li-strong&#34;&gt;9:00am-1:00pm:&lt;/strong&gt; &lt;a href=&#34;https://kccna18.sched.com/event/IRr7/deploying-serverless-apps-to-kubernetes-with-knative-additional-registration-fee-required&#34; data-href=&#34;https://kccna18.sched.com/event/IRr7/deploying-serverless-apps-to-kubernetes-with-knative-additional-registration-fee-required&#34; class=&#34;markup--anchor markup--li-anchor&#34; rel=&#34;nofollow noopener noopener noopener&#34; target=&#34;_blank&#34;&gt;Deploying serverless apps to Kubernetes with Knative&lt;/a&gt; (Skagit 4/5 @ TCC The Conference Center, Separate from WSCC building. This is a co-located event, $20 donation to CNCF diversity scholarship)&lt;/li&gt;
+                    &lt;li name=&#34;67da&#34; id=&#34;67da&#34; class=&#34;graf graf--li graf-after--li&#34;&gt;
+                      &lt;strong class=&#34;markup--strong markup--li-strong&#34;&gt;11:50am-12:30pm:&lt;/strong&gt; &lt;a href=&#34;https://commons.openshift.org/gatherings/Seattle_2018.html#gathering-schedule&#34; data-href=&#34;https://commons.openshift.org/gatherings/Seattle_2018.html#gathering-schedule&#34; class=&#34;markup--anchor markup--li-anchor&#34; rel=&#34;noopener&#34; target=&#34;_blank&#34;&gt;Panel: Knative, Kubernetes, Istio: A New Cloud Stack?&lt;/a&gt;
+                    &lt;/li&gt;
+                  &lt;/ul&gt;
+                  &lt;h4 name=&#34;6ec8&#34; id=&#34;6ec8&#34; class=&#34;graf graf--h4 graf-after--li&#34;&gt;
+                    &lt;strong class=&#34;markup--strong markup--h4-strong&#34;&gt;Tuesday, &lt;/strong&gt;Dec&lt;strong class=&#34;markup--strong markup--h4-strong&#34;&gt; 11&lt;/strong&gt;
+                  &lt;/h4&gt;
+                  &lt;ul class=&#34;postList&#34;&gt;
+                    &lt;li name=&#34;d566&#34; id=&#34;d566&#34; class=&#34;graf graf--li graf-after--h4&#34;&gt;
+                      &lt;strong class=&#34;markup--strong markup--li-strong&#34;&gt;Keynote:&lt;/strong&gt; Kubernetes, Istio, Knative: The New Open Cloud Stack — Aparna Sinha (&lt;a href=&#34;https://www.youtube.com/watch?v=OxJEUCmkixs&amp;amp;feature=youtu.be&#34; data-href=&#34;https://www.youtube.com/watch?v=OxJEUCmkixs&amp;amp;feature=youtu.be&#34; class=&#34;markup--anchor markup--li-anchor&#34; rel=&#34;noopener&#34; target=&#34;_blank&#34;&gt;Video&lt;/a&gt;)&lt;/li&gt;
+                      &lt;li name=&#34;ef50&#34; id=&#34;ef50&#34; class=&#34;graf graf--li graf-after--li&#34;&gt;
+                        &lt;strong class=&#34;markup--strong markup--li-strong&#34;&gt;Interview&lt;/strong&gt; with Ville Aikas, Knative TL, Google (&lt;a href=&#34;https://www.youtube.com/watch?v=DvE_DTDysns&#34; data-href=&#34;https://www.youtube.com/watch?v=DvE_DTDysns&#34; class=&#34;markup--anchor markup--li-anchor&#34; rel=&#34;noopener&#34; target=&#34;_blank&#34;&gt;Video&lt;/a&gt;)&lt;/li&gt;
+                        &lt;li name=&#34;8f69&#34; id=&#34;8f69&#34; class=&#34;graf graf--li graf-after--li&#34;&gt;
+                          &lt;strong class=&#34;markup--strong markup--li-strong&#34;&gt;2:35-3:10pm:&lt;/strong&gt; &lt;a href=&#34;https://kccna18.sched.com/event/Grbz/intro-knative-productivity-bof-srinivas-v-hegde-adriano-cunha-google&#34; data-href=&#34;https://kccna18.sched.com/event/Grbz/intro-knative-productivity-bof-srinivas-v-hegde-adriano-cunha-google&#34; class=&#34;markup--anchor markup--li-anchor&#34; rel=&#34;nofollow noopener noopener noopener&#34; target=&#34;_blank&#34;&gt;Intro: Knative Productivity BoF&lt;/a&gt; (&lt;a href=&#34;https://www.youtube.com/watch?v=TqcOFjdF144&#34; data-href=&#34;https://www.youtube.com/watch?v=TqcOFjdF144&#34; class=&#34;markup--anchor markup--li-anchor&#34; rel=&#34;noopener&#34; target=&#34;_blank&#34;&gt;Video&lt;/a&gt;)&lt;/li&gt;
+                          &lt;li name=&#34;8f21&#34; id=&#34;8f21&#34; class=&#34;graf graf--li graf-after--li&#34;&gt;
+                            &lt;strong class=&#34;markup--strong markup--li-strong&#34;&gt;2:35-3:10pm:&lt;/strong&gt; &lt;a href=&#34;https://kccna18.sched.com/event/GrVt/machine-learning-model-serving-and-pipeline-using-knative-animesh-singh-ibm&#34; data-href=&#34;https://kccna18.sched.com/event/GrVt/machine-learning-model-serving-and-pipeline-using-knative-animesh-singh-ibm&#34; class=&#34;markup--anchor markup--li-anchor&#34; rel=&#34;nofollow noopener noopener noopener noopener&#34; target=&#34;_blank&#34;&gt;Machine Learning Model Serving and Pipeline Using Knative&lt;/a&gt; (&lt;a href=&#34;https://www.youtube.com/watch?v=YpiPG8emKgg&#34; data-href=&#34;https://www.youtube.com/watch?v=YpiPG8emKgg&#34; class=&#34;markup--anchor markup--li-anchor&#34; rel=&#34;noopener&#34; target=&#34;_blank&#34;&gt;Video&lt;/a&gt;)&lt;/li&gt;
+                            &lt;li name=&#34;eca8&#34; id=&#34;eca8&#34; class=&#34;graf graf--li graf-after--li&#34;&gt;
+                              &lt;strong class=&#34;markup--strong markup--li-strong&#34;&gt;3:40pm-5:05pm:&lt;/strong&gt; &lt;a href=&#34;https://kccna18.sched.com/event/GraR&#34; data-href=&#34;https://kccna18.sched.com/event/GraR&#34; class=&#34;markup--anchor markup--li-anchor&#34; rel=&#34;noopener&#34; target=&#34;_blank&#34;&gt;Tutorial: Getting Your Hands Dirty with Knative&lt;/a&gt; (&lt;a href=&#34;https://www.youtube.com/watch?v=Xi9oYTR710E&#34; data-href=&#34;https://www.youtube.com/watch?v=Xi9oYTR710E&#34; class=&#34;markup--anchor markup--li-anchor&#34; rel=&#34;noopener&#34; target=&#34;_blank&#34;&gt;Video&lt;/a&gt;)&lt;/li&gt;
+                            &lt;/ul&gt;
+                            &lt;h4 name=&#34;799d&#34; id=&#34;799d&#34; class=&#34;graf graf--h4 graf-after--li&#34;&gt;
+                              &lt;strong class=&#34;markup--strong markup--h4-strong&#34;&gt;Wednesday, &lt;/strong&gt;Dec&lt;strong class=&#34;markup--strong markup--h4-strong&#34;&gt; 12&lt;/strong&gt;
+                            &lt;/h4&gt;
+                            &lt;ul class=&#34;postList&#34;&gt;
+                              &lt;li name=&#34;5172&#34; id=&#34;5172&#34; class=&#34;graf graf--li graf-after--h4&#34;&gt;
+                                &lt;strong class=&#34;markup--strong markup--li-strong&#34;&gt;10:50–11:25am:&lt;/strong&gt; &lt;a href=&#34;https://kccna18.sched.com/event/GrSt/building-container-images-on-your-kubernetes-cluster-with-knative-build-gareth-rushgrove-docker&#34; data-href=&#34;https://kccna18.sched.com/event/GrSt/building-container-images-on-your-kubernetes-cluster-with-knative-build-gareth-rushgrove-docker&#34; class=&#34;markup--anchor markup--li-anchor&#34; rel=&#34;nofollow noopener noopener noopener noopener&#34; target=&#34;_blank&#34;&gt;Building Container Images on Your Kubernetes Cluster with Knative Build&lt;/a&gt; (&lt;a href=&#34;https://www.youtube.com/watch?v=KDWvN8q2FEU&#34; data-href=&#34;https://www.youtube.com/watch?v=KDWvN8q2FEU&#34; class=&#34;markup--anchor markup--li-anchor&#34; rel=&#34;noopener&#34; target=&#34;_blank&#34;&gt;Video&lt;/a&gt;)&lt;/li&gt;
+                                &lt;li name=&#34;29b1&#34; id=&#34;29b1&#34; class=&#34;graf graf--li graf-after--li&#34;&gt;
+                                  &lt;strong class=&#34;markup--strong markup--li-strong&#34;&gt;3:40–5:05pm:&lt;/strong&gt; &lt;a href=&#34;https://kccna18.sched.com/event/GraR/tutorial-getting-your-hands-dirty-with-knative-bas-tichelaar-ade-mochtar-instruqt&#34; data-href=&#34;https://kccna18.sched.com/event/GraR/tutorial-getting-your-hands-dirty-with-knative-bas-tichelaar-ade-mochtar-instruqt&#34; class=&#34;markup--anchor markup--li-anchor&#34; rel=&#34;nofollow noopener noopener noopener noopener noopener&#34; target=&#34;_blank&#34;&gt;Tutorial: Getting Your Hands Dirty with Knative&lt;/a&gt; (&lt;a href=&#34;https://www.youtube.com/watch?v=Xi9oYTR710E&#34; data-href=&#34;https://www.youtube.com/watch?v=Xi9oYTR710E&#34; class=&#34;markup--anchor markup--li-anchor&#34; rel=&#34;noopener&#34; target=&#34;_blank&#34;&gt;Video&lt;/a&gt;)&lt;/li&gt;
+                                &lt;/ul&gt;
+                                &lt;h4 name=&#34;20b7&#34; id=&#34;20b7&#34; class=&#34;graf graf--h4 graf-after--li&#34;&gt;
+                                  &lt;strong class=&#34;markup--strong markup--h4-strong&#34;&gt;Thursday, &lt;/strong&gt;Dec&lt;strong class=&#34;markup--strong markup--h4-strong&#34;&gt; 13&lt;/strong&gt;
+                                &lt;/h4&gt;
+                                &lt;ul class=&#34;postList&#34;&gt;
+                                  &lt;li name=&#34;1b05&#34; id=&#34;1b05&#34; class=&#34;graf graf--li graf-after--h4&#34;&gt;
+                                    &lt;strong class=&#34;markup--strong markup--li-strong&#34;&gt;10:50–11:25am:&lt;/strong&gt; &lt;a href=&#34;https://kccna18.sched.com/event/GraI/how-to-build-deep-learning-inference-through-knative-serverless-framework-huamin-chen-yehuda-sadeh-weinraub-red-hat&#34; data-href=&#34;https://kccna18.sched.com/event/GraI/how-to-build-deep-learning-inference-through-knative-serverless-framework-huamin-chen-yehuda-sadeh-weinraub-red-hat&#34; class=&#34;markup--anchor markup--li-anchor&#34; rel=&#34;nofollow noopener noopener noopener noopener&#34; target=&#34;_blank&#34;&gt;How to Build Deep Learning Inference Through Knative Serverless Framework&lt;/a&gt; (&lt;a href=&#34;https://www.youtube.com/watch?v=-zUqmKb-BVk&#34; data-href=&#34;https://www.youtube.com/watch?v=-zUqmKb-BVk&#34; class=&#34;markup--anchor markup--li-anchor&#34; rel=&#34;noopener&#34; target=&#34;_blank&#34;&gt;Video&lt;/a&gt;)&lt;/li&gt;
+                                    &lt;li name=&#34;8ace&#34; id=&#34;8ace&#34; class=&#34;graf graf--li graf-after--li&#34;&gt;
+                                      &lt;strong class=&#34;markup--strong markup--li-strong&#34;&gt;1:45-2:20pm:&lt;/strong&gt; &lt;a href=&#34;https://kccna18.sched.com/event/GraC/t-mobile-store-locator-serverless-journey-with-knative-and-kubernetes-ram-gopinathan-t-mobile&#34; data-href=&#34;https://kccna18.sched.com/event/GraC/t-mobile-store-locator-serverless-journey-with-knative-and-kubernetes-ram-gopinathan-t-mobile&#34; class=&#34;markup--anchor markup--li-anchor&#34; rel=&#34;nofollow noopener noopener noopener noopener&#34; target=&#34;_blank&#34;&gt;T-Mobile Store Locator Serverless Journey with Knative and Kubernetes&lt;/a&gt; (&lt;a href=&#34;https://www.youtube.com/watch?v=qzPG4O-DhYw&#34; data-href=&#34;https://www.youtube.com/watch?v=qzPG4O-DhYw&#34; class=&#34;markup--anchor markup--li-anchor&#34; rel=&#34;noopener&#34; target=&#34;_blank&#34;&gt;Video&lt;/a&gt;)&lt;/li&gt;
+                                      &lt;li name=&#34;25e8&#34; id=&#34;25e8&#34; class=&#34;graf graf--li graf-after--li&#34;&gt;
+                                        &lt;strong class=&#34;markup--strong markup--li-strong&#34;&gt;2:35-3:10pm:&lt;/strong&gt; &lt;a href=&#34;https://kccna18.sched.com/event/Gra9/knative-scaling-from-0-to-infinity-joseph-burnett-mark-chmarny-google&#34; data-href=&#34;https://kccna18.sched.com/event/Gra9/knative-scaling-from-0-to-infinity-joseph-burnett-mark-chmarny-google&#34; class=&#34;markup--anchor markup--li-anchor&#34; rel=&#34;nofollow noopener noopener noopener&#34; target=&#34;_blank&#34;&gt;Knative: Scaling From 0 to Infinity&lt;/a&gt; (&lt;a href=&#34;https://www.youtube.com/watch?v=OPSIPr-Cybs&#34; data-href=&#34;https://www.youtube.com/watch?v=OPSIPr-Cybs&#34; class=&#34;markup--anchor markup--li-anchor&#34; rel=&#34;noopener&#34; target=&#34;_blank&#34;&gt;Video&lt;/a&gt;)&lt;/li&gt;
+                                        &lt;li name=&#34;83cf&#34; id=&#34;83cf&#34; class=&#34;graf graf--li graf-after--li&#34;&gt;
+                                          &lt;strong class=&#34;markup--strong markup--li-strong&#34;&gt;4:30-5:05pm:&lt;/strong&gt; &lt;a href=&#34;https://kccna18.sched.com/event/GraF/birds-of-a-feather-knative-jessie-zhu-google&#34; data-href=&#34;https://kccna18.sched.com/event/GraF/birds-of-a-feather-knative-jessie-zhu-google&#34; class=&#34;markup--anchor markup--li-anchor&#34; rel=&#34;nofollow noopener noopener noopener&#34; target=&#34;_blank&#34;&gt;Birds of a Feather: Knative&lt;/a&gt; (&lt;a href=&#34;https://www.youtube.com/watch?v=UdXuKu6SWoA&#34; data-href=&#34;https://www.youtube.com/watch?v=UdXuKu6SWoA&#34; class=&#34;markup--anchor markup--li-anchor&#34; rel=&#34;noopener&#34; target=&#34;_blank&#34;&gt;Video&lt;/a&gt;)&lt;/li&gt;
+                                          &lt;li name=&#34;e022&#34; id=&#34;e022&#34; class=&#34;graf graf--li graf-after--li&#34;&gt;
+                                            &lt;strong class=&#34;markup--strong markup--li-strong&#34;&gt;4:30-5:05pm:&lt;/strong&gt; &lt;a href=&#34;https://kccna18.sched.com/event/Grdv/deep-dive-knative-productivity-bof-jessie-zhu-adriano-cunha-google&#34; data-href=&#34;https://kccna18.sched.com/event/Grdv/deep-dive-knative-productivity-bof-jessie-zhu-adriano-cunha-google&#34; class=&#34;markup--anchor markup--li-anchor&#34; rel=&#34;nofollow noopener noopener noopener&#34; target=&#34;_blank&#34;&gt;Deep Dive: Knative Productivity BoF&lt;/a&gt; (&lt;a href=&#34;https://www.youtube.com/watch?v=pAWhIiNbkOc&#34; data-href=&#34;https://www.youtube.com/watch?v=pAWhIiNbkOc&#34; class=&#34;markup--anchor markup--li-anchor&#34; rel=&#34;noopener&#34; target=&#34;_blank&#34;&gt;Video&lt;/a&gt;)&lt;/li&gt;
+                                          &lt;/ul&gt;
+                                          &lt;p name=&#34;337d&#34; id=&#34;337d&#34; class=&#34;graf graf--p graf-after--li graf--trailing&#34;&gt;Looking forward to seeing you in Seattle next week. Remember, if you can’t attend, there will be a live video broadcast from the keynotes, and the break-out sessions should also be available shortly after the conference.&lt;/p&gt;
+                                        &lt;/div&gt;
+                                      &lt;/div&gt;
+                                    &lt;/section&gt;
+                                  &lt;/section&gt;
+                                  &lt;footer&gt;
+                                    &lt;p&gt;By &lt;a href=&#34;https://medium.com/@mchmarny_google&#34; class=&#34;p-author h-card&#34;&gt;Mark Chmarny&lt;/a&gt; on &lt;a href=&#34;https://medium.com/p/5dd2479a3474&#34;&gt;
+                                      &lt;time class=&#34;dt-published&#34; datetime=&#34;2018-12-04T21:04:38.092Z&#34;&gt;December 4, 2018&lt;/time&gt;
+                                    &lt;/a&gt;.&lt;/p&gt;
+                                    &lt;p&gt;
+                                      &lt;a href=&#34;https://medium.com/@mchmarny_google/knative-at-kubecon-seattle-5dd2479a3474&#34; class=&#34;p-canonical&#34;&gt;Canonical link&lt;/a&gt;
+                                    &lt;/p&gt;
+                                    &lt;p&gt;Exported from &lt;a href=&#34;https://medium.com&#34;&gt;Medium&lt;/a&gt; on January 8, 2019.&lt;/p&gt;
+                                  &lt;/footer&gt;
+                                &lt;/article&gt;
+                              &lt;/body&gt;
+                              &lt;/html&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

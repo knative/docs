@@ -1,0 +1,235 @@
+# This file is auto-generated from peribolos
+
+aliases:
+  api-core-wg-leads:
+  - dprotaso
+  async-component-approvers:
+  - beemarie
+  - julz
+  - maximilien
+  autoscaling-wg-leads:
+  - markusthoemmes
+  - vagababov
+  client-wg-leads:
+  - navidshaikh
+  - rhuss
+  client-writers:
+  - navidshaikh
+  - rhuss
+  control-protocol-approvers:
+  - devguyio
+  - lionelvillard
+  - matzew
+  - slinkydeveloper
+  - vaikas
+  delivery-wg-leads:
+  - matzew
+  - slinkydeveloper
+  discovery-approvers:
+  - lberk
+  - n3wscott
+  docs-wg-leads:
+  - abrennan89
+  docs-writers:
+  - abrennan89
+  eventing-autoscaler-keda-approvers:
+  - zroubalik
+  eventing-awssqs-approvers:
+  - lberk
+  eventing-camel-approvers:
+  - nicolaferraro
+  eventing-ceph-approvers:
+  - lberk
+  eventing-couchdb-approvers:
+  - lberk
+  - lionelvillard
+  eventing-github-approvers:
+  - lberk
+  eventing-gitlab-approvers:
+  - antoineco
+  - lberk
+  - sebgoa
+  - tzununbekov
+  eventing-kafka-approvers:
+  - aliok
+  - davyodom
+  - devguyio
+  - lberk
+  - matzew
+  - phamilton
+  - steven0711dong
+  - travis-minke-sap
+  eventing-kafka-broker-approvers:
+  - pierDipi
+  - slinkydeveloper
+  eventing-kafka-mtsource-approvers:
+  - steven0711dong
+  eventing-natss-approvers:
+  - devguyio
+  - zhaojizhuang
+  eventing-prometheus-approvers:
+  - lberk
+  eventing-rabbitmq-approvers:
+  - n3wscott
+  - sbawaska
+  - vaikas
+  eventing-redis-approvers:
+  - aavarghese
+  - lionelvillard
+  eventing-wg-leads:
+  - devguyio
+  - lionelvillard
+  - vaikas
+  eventing-writers:
+  - devguyio
+  - lionelvillard
+  - matzew
+  - n3wscott
+  - slinkydeveloper
+  - vaikas
+  homebrew-kn-plugins-approvers:
+  - dsimansk
+  - maximilien
+  - rhuss
+  kn-plugin-admin-approvers:
+  - maximilien
+  - navidshaikh
+  - rhuss
+  - zhanggbj
+  kn-plugin-diag-approvers:
+  - cdlliuy
+  - maximilien
+  - navidshaikh
+  kn-plugin-event-approvers:
+  - cardil
+  - rhuss
+  kn-plugin-migration-approvers:
+  - maximilien
+  - zhangtbj
+  kn-plugin-sample-approvers:
+  - maximilien
+  - navidshaikh
+  - rhuss
+  kn-plugin-service-log-approvers:
+  - rhuss
+  kn-plugin-source-kafka-approvers:
+  - daisy-ycguo
+  - dsimansk
+  - maximilien
+  - navidshaikh
+  - rhuss
+  kn-plugin-source-kamelet-approvers:
+  - christophd
+  - nicolaferraro
+  - rhuss
+  knative-admin:
+  - bsnchan
+  - evankanderson
+  - fallback-notification-blocker
+  - knative-prow-releaser-robot
+  - knative-prow-robot
+  - knative-prow-updater-robot
+  - knative-test-reporter-robot
+  - markusthoemmes
+  - mbehrendt
+  - pmorie
+  - rhuss
+  - tcnghia
+  - thisisnotapril
+  - vaikas
+  knative-milestone-maintainers:
+  - ZhiminXiang
+  - akashrv
+  - aslom
+  - chaodaiG
+  - csantanapr
+  - evankanderson
+  - josephburnett
+  - k4leung4
+  - lionelvillard
+  - markusthoemmes
+  - mikehelmick
+  - n3wscott
+  - nak3
+  - navidshaikh
+  - rhuss
+  - slinkydeveloper
+  - tcnghia
+  - vagababov
+  - vaikas
+  knative-release-leads:
+  - fallback-notification-blocker
+  - tcnghia
+  - vaikas
+  knative-robots:
+  - knative-prow-releaser-robot
+  - knative-prow-robot
+  - knative-prow-updater-robot
+  - knative-test-reporter-robot
+  kperf-approvers:
+  - maximilien
+  - zhanggbj
+  net-certmanager-approvers:
+  - ZhiminXiang
+  net-contour-approvers:
+  - dprotaso
+  net-http---approvers:
+  - tcnghia
+  net-ingressv--approvers:
+  - markusthoemmes
+  - nak3
+  net-istio-approvers:
+  - JRBANCEL
+  - ZhiminXiang
+  - nak3
+  - vagababov
+  net-kourier-approvers:
+  - davidor
+  - jmprusi
+  networking-wg-leads:
+  - ZhiminXiang
+  - nak3
+  - tcnghia
+  operations-wg-leads:
+  - houshengbo
+  operations-writers:
+  - houshengbo
+  productivity-wg-leads:
+  - chizhg
+  - n3wscott
+  productivity-writers:
+  - chizhg
+  - n3wscott
+  security-wg-leads:
+  - evankanderson
+  - julz
+  security-writers:
+  - evankanderson
+  - julz
+  serving-writers:
+  - ZhiminXiang
+  - dprotaso
+  - markusthoemmes
+  - nak3
+  - tcnghia
+  - vagababov
+  source-wg-leads:
+  - lionelvillard
+  - n3wscott
+  steering-committee:
+  - bsnchan
+  - mbehrendt
+  - pmorie
+  - thisisnotapril
+  - vaikas
+  technical-oversight-committee:
+  - evankanderson
+  - fallback-notification-blocker
+  - markusthoemmes
+  - rhuss
+  ux-wg-leads:
+  - csantanapr
+  - omerbensaadon
+  ux-writers:
+  - csantanapr
+  - omerbensaadon

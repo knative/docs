@@ -1,0 +1,13 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: helloworld-r
+  namespace: default
+spec:
+  template:
+    spec:
+      containers:
+      - image: docker.io/{username}/helloworld-r
+        env:
+        - name: TARGET
+          value: "R Sample v1"

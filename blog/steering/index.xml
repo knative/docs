@@ -1,0 +1,331 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Knative – Knative articles</title>
+    <link>https://knative.dev/blog/steering/</link>
+    <description>Recent content in Knative articles on Knative</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Fri, 06 Nov 2020 00:00:00 +0000</lastBuildDate>
+    
+	  <atom:link href="https://knative.dev/blog/steering/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Blog: Democracy is a beautiful thing</title>
+      <link>https://knative.dev/blog/2020/11/06/democracy-is-a-beautiful-thing/</link>
+      <pubDate>Fri, 06 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/blog/2020/11/06/democracy-is-a-beautiful-thing/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Democracy is a beautiful thing, those that want to dedicate their own time to improve a community can step up and those that have the right to vote can freely speak their mind to elect the candidate they think will be a net positive to the community.&lt;/p&gt;
+&lt;p&gt;We are running an election to fill out the two (2) seats due for election
+this year on the &lt;a href=&#34;https://knative.dev/community/contributing/steering-committee/&#34;&gt;Knative Steering Committee&lt;/a&gt;. Each elected member will serve
+a two (2) year term.&lt;/p&gt;
+&lt;p&gt;This election will shape the future of Knative as a community and project.
+The Knative Steering Committee (KSC) is
+responsible for the general health of the Knative community, and this is the first general election for that body.&lt;/p&gt;
+&lt;p&gt;The process already started on October 27th with the announcement of the elections to the mailing list.
+The next milestone is to have a complete list of candidates, and nominations close on November 9th at 0000 UTC (5pm Pacific).&lt;/p&gt;
+&lt;p&gt;If you are eligible and want to stand for election, the process is simple just open a PR against the
+&lt;a href=&#34;https://github.com/knative/community&#34;&gt;knative/community repository&lt;/a&gt; to include
+your candidate profile in the &lt;code&gt;/elections/2020/SC&lt;/code&gt; folder, with your name as the
+filename.  This profile should include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Your name&lt;/li&gt;
+&lt;li&gt;Your company affiliation (employer or otherwise)&lt;/li&gt;
+&lt;li&gt;Your contributions to Knative&lt;/li&gt;
+&lt;li&gt;Why you are running&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You can find &lt;a href=&#34;https://github.com/knative/community/blob/main/elections/2020/SC/candidate-template.md&#34;&gt;a sample template in the folder&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This is the schedule for the elections if you want to follow along.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Date&lt;/th&gt;
+&lt;th&gt;Event&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;October 27&lt;/td&gt;
+&lt;td&gt;Announcement of Election, call for nominations&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;November 9&lt;/td&gt;
+&lt;td&gt;All candidate nominations due by 0000 UTC (5pm Pacific)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;November 12&lt;/td&gt;
+&lt;td&gt;Election Begins via email ballots&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;November 22&lt;/td&gt;
+&lt;td&gt;Last call for exception &amp;amp; replacement ballots&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;November 29&lt;/td&gt;
+&lt;td&gt;Election Closes by 0000 UTC (5pm Pacific)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;December 3&lt;/td&gt;
+&lt;td&gt;Announcement of Results at Knative Steering Meeting&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;You can read the current &lt;a href=&#34;https://github.com/knative/community/blob/main/elections/2020/SC/README.md&#34;&gt;Knative Steering Committee Election - 2020 Voters Guide&lt;/a&gt; for all the details.&lt;/p&gt;
+&lt;p&gt;And remember if you have the right to vote, then speak your mind by voting because every vote counts!&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Blog: Changes to the Knative Project Governance</title>
+      <link>https://knative.dev/blog/2020/09/30/changes-to-the-knative-project-governance/</link>
+      <pubDate>Wed, 30 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/blog/2020/09/30/changes-to-the-knative-project-governance/</guid>
+      <description>
+        
+        
+        &lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Reviewer&lt;/th&gt;
+&lt;th&gt;Date&lt;/th&gt;
+&lt;th&gt;Approval&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;!-- Your Github handle here --&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;One of the long-standing &lt;a href=&#34;https://github.com/knative/community/issues/33&#34;&gt;asks&lt;/a&gt;
+within the Knative community has been for the Steering Committee to clarify its
+charter and how the committee is composed. I&amp;rsquo;m happy to be able to say that we
+now have a new &lt;a href=&#34;https://github.com/knative/community/pull/277&#34;&gt;Steering Committee
+charter&lt;/a&gt; which, in my opinion,
+delivers on this ask. Community participation was central to working through the
+process to get to this new charter, and I first and foremost want to say a
+sincere THANK YOU to everyone in our community that participated in our public
+discussions on this topic. The community participation, which included
+individual code and non-code contributors, as well as working group leads,
+helped to influence the direction the discussions went.&lt;/p&gt;
+&lt;p&gt;Let me summarize the meaning of the changes, and then go into some detail:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;There will be elections for Steering Committee members&lt;/li&gt;
+&lt;li&gt;Steering committee members serve as individuals rather than representing their employer&lt;/li&gt;
+&lt;li&gt;No vendor will be allowed to have a majority of seats in the Steering Committee&lt;/li&gt;
+&lt;li&gt;We added the new Knative Trademark Committee (KTC) to handle matters related to the trademark&lt;/li&gt;
+&lt;li&gt;There is a transition plan from the current bootstrap scheme to the new governance scheme&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Those of you who love committees will be pleased that we have increased the
+committee count within the project by one. Those of you who don&amp;rsquo;t love
+committees for their own sake may be asking what the purpose of such a committee
+is; luckily, there is a clear and sensible answer. During the discussions around
+new governance, it became apparent that there was a clear separation of concerns
+between the specific vendor needs around trademark, &amp;ldquo;core&amp;rdquo; scope (for lack of a
+better term) and conformance, and the broader community needs around everything
+else Steering does. While we could have created a hybrid structure for Steering,
+we decided it was simpler to just have a vendor committee that focused only on
+scope and conformance, with the Steering committee focusing on the other aspects
+of community growth and project governance.&lt;/p&gt;
+&lt;p&gt;The KTC will initially include representatives from Google, Red Hat/IBM, and
+VMware. They will need to figure out how new components and features &amp;ldquo;plug in&amp;rdquo;
+to the Knative ecosystem in a non-technical sense. They will also help Steering
+settle questions around derivative trademarks and logos, Knative &amp;ldquo;extensions&amp;rdquo;,
+and other questions about being part of our larger project. Membership to the KTC
+is renewed on an annual basis, at the same time that the 2021 steering elections happen.
+When the committee is renewed, new vendors may receive a seat on the KTC, by
+virtue of their contributions in the previous year. Since we know that not all
+contributions are easy to quantify, any vendor may frame their contributions,
+and request consideration for membership on the KTC.&lt;/p&gt;
+&lt;p&gt;With regard to the Steering Committee, the five members will be elected by the
+contributors to Knative, the same way that TOC members are. The difference
+between Steering and TOC will be that TOC members need to be code reviewers,
+whereas Steering members might contribute in other areas and will lead the
+project in non-code areas. To ensure fairness, no more than two Steering members
+may work for the same employer. As the project grows, it&amp;rsquo;s possible that we may
+expand the committee to 7 seats in the future.&lt;/p&gt;
+&lt;p&gt;The election date isn&amp;rsquo;t set yet, but expect to see a call for nominations
+shortly.&lt;/p&gt;
+&lt;p&gt;The goal of these changes is to give new contributors and contributing
+organizations a clearer path on how they can participate in project governance.
+Anyone can run for steering, and the KTC will add new members from any new
+sponsoring organizations every year.&lt;/p&gt;
+&lt;p&gt;It was an inspiration and an honor to participate in this revision process.
+Practically the whole Knative community was involved, and almost everyone had a
+discussion item or a comment that got considered. The eventual charter we ended
+up with looks very different than what we started with because of community
+participation. This is a victory for open governance &amp;ndash; even more so because
+it&amp;rsquo;s not done! We need you to keep participating so that the Knative project can
+keep evolving as our technology grows.&lt;/p&gt;
+&lt;p&gt;And in the short term, you&amp;rsquo;ll need to vote for the new Steering Committee! Stay tuned for announcements.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Blog: Knative welcomes new TOC members</title>
+      <link>https://knative.dev/blog/2020/05/12/knative-welcomes-new-toc-members/</link>
+      <pubDate>Tue, 12 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/blog/2020/05/12/knative-welcomes-new-toc-members/</guid>
+      <description>
+        
+        
+        &lt;p&gt;This week, the Knative project successfully held its first TOC elections. The event constituted a milestone for the project’s governance, with 70% of voter turnout: 83 of the most active contributors to the project, representing companies like IBM, Pivotal, SAP, Google, VMWare, RedHat, and others participated in this election process.&lt;/p&gt;
+&lt;p&gt;The new &lt;a href=&#34;https://knative.dev/community/contributing/tech-oversight-committee/&#34;&gt;technical stewardship&lt;/a&gt; for Knative now has more vendor diversity, with members representing RedHat, VMWare, and Google, as follows:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Nghia Tran (Google) &lt;em&gt;- new member&lt;/em&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Markus Thömmes (Red Hat) - &lt;em&gt;new member&lt;/em&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Grant Rodgers (Google) - &lt;em&gt;new member&lt;/em&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Matt Moore (VMWare) - &lt;em&gt;existing member&lt;/em&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Evan Anderson (VMWare) - &lt;em&gt;existing member&lt;/em&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Congratulations to the newly elected members!&lt;/p&gt;
+&lt;p&gt;Here is a brief introduction from the new members of the TOC:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Nghia Tran:&lt;/strong&gt;
+&lt;br&gt; &lt;em&gt;I have been involved with Knative in the very early days, and in the past two years I have been leading the Networking Working Group.  I am honored to receive much support in the election.  My hope is that I can help increase collaboration in the project, as well as help improve Knative users experience.  Hopefully that would lead to even wider adoption than the early success that we currently enjoy.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Markus Thömmes:&lt;/strong&gt;
+&lt;br&gt; &lt;em&gt;I&amp;rsquo;ve been working full-time on Knative since back when it was non-public and still called &lt;em&gt;Elafros&lt;/em&gt;. Before that, I worked on the open-source FaaS platform Apache Openwhisk, where I was one of the founding members of the project.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Open-source is very dear to my heart so first and foremost I want to ensure that the Knative community stays the well-oiled machine it is today. Ensuring a healthy community, enabling innovative approaches and making room for constructive discussion are my top priorities.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Grant Rodgers:&lt;/strong&gt;
+&lt;br&gt; &lt;em&gt;Before I started at Google, I worked at GitHub where one of my projects was building an event processing platform to run on Kubernetes, and in retrospect, it was a perfect use case for Knative. I think my experience of needing this set of tools we&amp;rsquo;re building gives me some insight into how those tools could best serve the needs of our users. I hope to leverage it to build the right tools for them.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Watch the presentation of the new members at the &lt;a href=&#34;https://youtu.be/24owwOKj86E&#34;&gt;last community meetup.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The new &lt;a href=&#34;https://knative.dev/community/contributing/mechanics/toc/&#34;&gt;election process&lt;/a&gt; proved to be solid, and it will be repeated annually for this project. Thank you to everyone who participated in this process, and we look forward to more collaborations in the future!&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Blog: 2019 Annual Report</title>
+      <link>https://knative.dev/blog/2020/02/03/2019-annual-report/</link>
+      <pubDate>Mon, 03 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/blog/2020/02/03/2019-annual-report/</guid>
+      <description>
+        
+        
+        &lt;p&gt;We have created a 2019 Knative annual report for the community. The report can
+be viewed &lt;a href=&#34;https://github.com/knative/community/tree/main/annual_reports/Knative%202019%20Annual%20Report.pdf&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;We just want to say &lt;em&gt;thank you&lt;/em&gt; to all our community members for contributing and
+helping us grow our community. We definitely could not have done it without you!&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Blog: Update from the Steering Committee for December 2019</title>
+      <link>https://knative.dev/blog/2019/12/18/update-from-the-steering-committee-for-december-2019/</link>
+      <pubDate>Wed, 18 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/blog/2019/12/18/update-from-the-steering-committee-for-december-2019/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Early last week, the Knative Steering Committee met in person for an all-day
+working session to deliver on our promise to restructure project governance.
+While there was plenty of healthy debate, the result was consensus that all
+committee members felt positive about. It will take some time to work
+through all the details, but we wanted to share the broad strokes of our
+discussions with the community. Feedback is not just welcome, but required,
+as we will be iterating on these topics in the coming months and your voice
+is critical to our collective success.&lt;/p&gt;
+&lt;p&gt;Key takeaways from the steering meeting are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;We have defined the project’s values that we want the community to uphold, and used these values as we adjusted governance of the project:
+&lt;ul&gt;
+&lt;li&gt;We welcome all skills&lt;/li&gt;
+&lt;li&gt;We recognize all contributions&lt;/li&gt;
+&lt;li&gt;We value transparency and visibility&lt;/li&gt;
+&lt;li&gt;We focus on what is right for our users&lt;/li&gt;
+&lt;li&gt;We value feedback&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;The Steering Committee will make adjustments to provide the &lt;strong&gt;opportunity for wider inclusion&lt;/strong&gt;. This concretely translates to opening additional seats providing end-user and community voices a place in the discussion. The details will be shaped over the coming weeks.&lt;/li&gt;
+&lt;li&gt;We will be creating a comprehensive contribution ladder that defines how contributors can become eligible for every role in the project.
+&lt;ul&gt;
+&lt;li&gt;The community needs many kinds of contributions to be successful. We will recognize contributors with defined roles. With that in mind we will update our project roles as follows:
+&lt;ul&gt;
+&lt;li&gt;Create an opportunity for &lt;strong&gt;workgroup leadership by both technical and non-technical individuals&lt;/strong&gt;, who can focus on different elements of running a workgroup (technical specialization and organizational specialization).&lt;/li&gt;
+&lt;li&gt;Create a &lt;strong&gt;scribe role&lt;/strong&gt;, which recognizes individuals who write notes from WGs. This is in line with our transparency value and recognizing non-technical contributions.&lt;/li&gt;
+&lt;li&gt;Create a &lt;strong&gt;mentor/sponsor role&lt;/strong&gt; which is open to any approver or lead interested in mentoring new members in the community. Mentorship is open to anyone and we especially wish to encourage participation from underrepresented groups. This is in line with our Welcoming value.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;We will write up answers to the questions asked in the December 9th Steering Committee AMA to over time build up a FAQ we can refer to in the future.&lt;/li&gt;
+&lt;li&gt;Finally, we discussed having a one-day event for the community and our users. For this to be successful we will need the community to submit presentations so we would like to gauge interest for something like that this winter.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We will be working to finalize the details of these topics in the coming weeks and will provide updates and PRs as we make progress. Even though the details are not yet finalized, the Steering Committee members all felt that it was important to share the broad strokes with the community as soon as possible.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Blog: </title>
+      <link>https://knative.dev/blog/1/01/01/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/blog/1/01/01/</guid>
+      <description>
+        
+        
+        &lt;p&gt;It’s time to kick off the Knative &lt;a href=&#34;https://github.com/knative/community/blob/main/TECH-OVERSIGHT-COMMITTEE.md&#34;&gt;Technical Oversight Committee&lt;/a&gt; (TOC) elections
+again for 2021, and we are ready to accept nominations!&lt;/p&gt;
+&lt;p&gt;This election will shape the future of Knative as a community and project. While
+WGs help shape the individual direction of the project, the &lt;a href=&#34;https://github.com/knative/community/blob/main/TECH-OVERSIGHT-COMMITTEE.md#charter&#34;&gt;TOC&lt;/a&gt; covers the
+technical direction, health of the project and community as a whole. There are 2
+seats up for election and each of those seats will be held for two year terms.&lt;/p&gt;
+&lt;p&gt;Right now, there are 2 things we need each Knative community member to do:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;If you want to stand for election, we have &lt;a href=&#34;https://github.com/knative/community/tree/main/elections/2021-TOC#candidacy-process&#34;&gt;detailed instructions for the
+nomination
+process&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;If
+you want to vote in the election, please read the &lt;a href=&#34;https://github.com/knative/community/blob/main/mechanics/TOC.md#voter-eligibility&#34;&gt;eligibility
+criteria&lt;/a&gt;. If you think you are eligible to vote, please check the Elekto application to see if you are eligible, and if not, &lt;a href=&#34;https://test.elekto.io/app/elections/2021-TOC/exception&#34;&gt;request a voter exception&lt;/a&gt;.  See the &lt;a href=&#34;https://github.com/knative/community/tree/main/elections/2021-TOC&#34;&gt;voter guide&lt;/a&gt; for more information on how voting works.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Here are a few important deadlines to keep in mind:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;April 23: All candidate nominations&lt;/li&gt;
+&lt;li&gt;April 27: Election Begins&lt;/li&gt;
+&lt;li&gt;May 9: Voter exception requests due&lt;/li&gt;
+&lt;li&gt;May 11: Election Closes&lt;/li&gt;
+&lt;li&gt;May 13: Announcement of Results&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For this election, we will be trying a new voting tool called &lt;a href=&#34;https://github.com/elekto-io/elekto&#34;&gt;Elekto&lt;/a&gt;.
+Commissioned by the CNCF for the Kubernetes project, Elekto has the advantage of
+not requiring any email for voting, just your Github login.  However, this will
+be the first time a project other than Kubernetes is using Elekto, so please be
+prepared for some hiccups.&lt;/p&gt;
+&lt;p&gt;For more details, please visit the &lt;a href=&#34;https://github.com/knative/community/tree/main/elections/2021-TOC&#34;&gt;TOC election&lt;/a&gt; document in
+our GitHub repository, and if you have questions for us, please reach out
+by emailing &lt;a href=&#34;mailto:elections@knative.team&#34;&gt;elections@knative.team&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Dawn Foster and Josh Berkus, TOC Election Officers&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

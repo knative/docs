@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="50mm"
+   height="50mm"
+   viewBox="0 0 50 50"
+   version="1.1"
+   id="svg855"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
+   sodipodi:docname="subscription.svg">
+  <defs
+     id="defs849" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.196421"
+     inkscape:cx="94.620509"
+     inkscape:cy="91.557514"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:window-width="1531"
+     inkscape:window-height="1048"
+     inkscape:window-x="2863"
+     inkscape:window-y="244"
+     inkscape:window-maximized="0"
+     units="mm"
+     inkscape:pagecheckerboard="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2210" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata852">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/by/4.0/" />
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/by/4.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Notice" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Attribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Layer 2"
+     style="display:none">
+    <rect
+       style="display:inline;opacity:1;fill:#3d8037;fill-opacity:0.400538;stroke-width:0.2732;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect2212"
+       width="75"
+       height="75"
+       x="0.059107598"
+       y="0.091476537"
+       ry="5.9678059e-14" />
+    <rect
+       style="display:inline;opacity:1;fill:#3d5238;fill-opacity:0.400538;stroke-width:0.273201;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect2212-9"
+       width="75"
+       height="75"
+       x="75.059105"
+       y="0.091476537"
+       ry="5.9678059e-14" />
+    <rect
+       style="display:inline;opacity:1;fill:#905238;fill-opacity:0.400538;stroke-width:0.273201;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect2212-9-3"
+       width="75"
+       height="75"
+       x="75.059105"
+       y="75.091476"
+       ry="5.9678059e-14" />
+    <rect
+       style="display:inline;opacity:1;fill:#9052ac;fill-opacity:0.400538;stroke-width:0.273201;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect2212-9-3-6"
+       width="75"
+       height="75"
+       x="0.059107598"
+       y="75.091476"
+       ry="5.9678059e-14" />
+  </g>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="display:inline">
+    <path
+       id="path7082"
+       style="fill:#2592b0;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 25.008366,0.00485703 a 24.996796,24.996796 0 0 0 -5.097227,0.5254821 l 1.167736,4.86419637 a 19.997437,19.997437 0 0 1 3.850436,-0.390107 19.997437,19.997437 0 0 1 0.07904,0 A 19.997437,19.997437 0 0 1 45.005605,25.00168 19.997437,19.997437 0 0 1 39.6986,38.56914 l 2.592789,4.491655 A 24.996796,24.996796 0 0 0 50.005189,25.00168 24.996796,24.996796 0 0 0 25.008366,0.00485703 Z M 7.863288,6.8118385 A 24.996796,24.996796 0 0 0 0.01154278,25.00168 24.996796,24.996796 0 0 0 25.008366,49.998502 24.996796,24.996796 0 0 0 30.194467,49.454418 L 29.026726,44.59074 A 19.997437,19.997437 0 0 1 25.008366,44.998929 19.997437,19.997437 0 0 1 5.0111143,25.00168 19.997437,19.997437 0 0 1 10.449877,11.292645 Z" />
+    <path
+       id="rect7139"
+       style="fill:#2592b0;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 16.06572,4.4878315 1.2390195,2.2271466 13.805344,19.314948 Z" />
+    <path
+       id="rect7139-0"
+       style="display:inline;fill:#2592b0;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 34.506816,44.681855 49.328546,46.974916 36.799573,29.85971 Z" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:35.586px;line-height:1.25;font-family:Montserrat;-inkscape-font-specification:'Montserrat, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;display:inline;fill:#2592b0;fill-opacity:1;stroke:none;stroke-width:0.889647"
+       x="13.393329"
+       y="35.537487"
+       id="text7472"><tspan
+         sodipodi:role="line"
+         id="tspan7470"
+         x="13.393329"
+         y="35.537487"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:35.586px;font-family:Montserrat;-inkscape-font-specification:'Montserrat, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#2592b0;fill-opacity:1;stroke-width:0.889647">e</tspan></text>
+  </g>
+</svg>
