@@ -192,8 +192,10 @@ nav:
       - Serving: reference/api/serving.md
       - Eventing: reference/api/eventing/eventing.md
     - Client:
-        - CLI tools: client/README.md
-        - Install kn: client/install-kn.md
+      - Overview: client/README.md
+      - Installing kn: client/install-kn.md
+      - Customizing kn: client/configure-kn.md
+      - kn plugins: client/kn-plugins.md
     - "Join the Community ➠": /community/
     - "Read the Blog ➠": /blog/
 
