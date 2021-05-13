@@ -58,14 +58,14 @@ cat << EOF > site/index.html
   <meta charset="utf-8">
   <title>Redirecting</title>
   <noscript>
-    <meta http-equiv="refresh" content="1; url=../dev/" />
+    <meta http-equiv="refresh" content="1; url=docs/" />
   </noscript>
   <script>
-    window.location.replace("/docs/");
+   window.location.replace(window.location.href+"docs/");
   </script>
 </head>
 <body>
-  Redirecting to <a href="/docs/">/docs/</a>...
+  Redirecting to <a href="docs/">docs/</a>...
 </body>
 </html>
 EOF
