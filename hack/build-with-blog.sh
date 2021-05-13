@@ -1,23 +1,81 @@
 #!/bin/bash
 
 # Builds blog and community into the site by cloning the website repo, copying blog/community dirs in, running hugo.
+# Also builds previous versions if BUILD_VERSIONS=yes (see below).
 # - Results are written to site/ as normal.
 # - Run as "./hack/build-with-blog.sh serve" to run a local preview server on site/ afterwards (requires `npm install -g http-server`).
+
+
+# Versioning:
+# To release (1) make a release branch as normal (2) change the
+# `knative_version` and `branch` variables in the release branch version
+# of mkdocs.yml so {{ artifact }} and {{ branch }} links point to the
+# right versions of things (3) Update variables below.
+BUILD_VERSIONS="yes"         # TODO(jz) - detect if this is a pr preview/local and turn this off?
+LATEST="0.23"                # release-$latest to /docs (HEAD builds to /development)
+PREVIOUS=("0.22" "0.21")     # each release-$previous to /$previous-docs
+
+# TODO: drop this when all the versions are in release-$version branches (in mkdocs format).
+function branch_for_version() {
+  if [ "$1" == "0.23" ]; then echo "mkdocs"
+  elif [ "$1" == "0.22" ]; then echo "mkdocs"
+  elif [ "$1" == "0.21" ]; then echo "mkdocs"
+  else
+    echo "No branch for version $1. Update branch_for_version function"
+    exit 1
+  fi
+}
 
 # Quit on error
 set -e
 # Echo each line
 set -x
 
-# First, build the main site with mkdocs
-rm -rf site/
-mkdocs build -d site/docs
-
-# Re-Clone
-# TODO(jz) Cache this and just do a pull/update for local dev flow.
-# Maybe also support local checkout in siblings?
 rm -rf temp
 mkdir temp
+rm -rf site/
+
+if [ "$BUILD_VERSIONS" != "yes" ]; then
+  # HEAD to /docs if we're not doing versioning.
+  mkdocs build -f mkdocs.yml -d site/docs
+else
+  # Versioning: pre-release (HEAD): docs => development/
+  mkdocs build -f mkdocs.yml -d site/development
+
+  # Latest release branch to /docs
+  git clone -b $(branch_for_version $LATEST) https://github.com/knative/docs "temp/docs-$LATEST" # TODO this should use the actual branch but there isnt one yet!
+  pushd "temp/docs-$LATEST"
+  mkdocs build -d ../../site/docs     # latest version: docs => docs/
+  popd
+
+  # Previous release branches release-$version to /$version-docs
+  for version in "${PREVIOUS[@]}"
+  do
+    pushd "temp/docs-$LATEST"
+    git checkout $(branch_for_version $version)
+    mkdocs build -d "../../site/v$version-docs"   # old releases: docs => vN-docs/
+    popd
+  done
+
+  # Set up the version file to point to the built docs.
+  cat << EOF > site/versions.json
+  [
+    {"version": "docs", "title": "v$LATEST", "aliases": [""]},
+EOF
+  for version in "${PREVIOUS[@]}"
+  do
+  cat << EOF >> site/versions.json
+    {"version": "v$version-docs", "title": "v$version", "aliases": [""]},
+EOF
+  done
+  cat << EOF >> site/versions.json
+    {"version": "development", "title": "(Pre-release)", "aliases": [""]}
+  ]
+EOF
+fi
+
+# Clone out the website and community repos for the hugo bits.
+# TODO(jz) Cache this and just do a pull/update/use siblings for local dev flow.
 git clone --recurse-submodules https://github.com/knative/website temp/website
 git clone https://github.com/knative/community temp/community
 
