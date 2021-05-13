@@ -1,261 +1,145 @@
-{% extends "main.html" %}
+{% extends "main.html" %} {% block content %}
+<link rel="stylesheet" href="{{ 'assets/stylesheets/home.css' | url }}" />
 
-{% block tabs %}
-  {{ super() }}
-  <style>.md-header{position:initial}.md-main__inner{margin:0}.md-content{display:none}@media screen and (min-width:60em){.md-sidebar--secondary{display:none}}@media screen and (min-width:76.25em){.md-sidebar--primary{display:none}}</style>
-  <style>
-    @keyframes continuousgradient {
-      from {
-        background-position: 0% 50%;
-      }
-      to {
-        background-position: 100% 50%;
-      }
-    }
-
-    .animated-gradient {
-      animation-name: continuousgradient;
-      background: linear-gradient(-45deg,  #6593c8, #0366ad, #000, #6593c8, #0366ad, #000);
-      animation-duration: 6s;
-      animation-iteration-count: infinite;
-      animation-timing-function: linear;
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-end;
-      background-repeat: no-repeat;
-      background-size: 300% 100%;
-      opacity: 0.4;
-      z-index: -1;
-    }
-
-    section.home-container {
-      height: 435px;
-      justify-content: center;
-      color: #fff;
-      position: relative;
-      display: flex;
-      align-items: center;
-      padding-bottom: 0;
-    }
-
-    .home-container > .md-typeset {
-      flex-grow: 2;
-    }
-
-    body {
-      color: #fff;
-      background: var(--md-primary-fg-color);
-      background: #5063D0;
-      background: #0071c7;
-      background: var(--home-color);
-    }
-
-    .calltoaction-container, .usedby-container, .home-container, .features-container, .intro-container {
-      margin: 0;
-      border: 0;
-      padding-bottom: 4em;
-    }
-
-    @media only screen and (max-width: 1240px) {
-      .components-container, .calltoaction-container, .usedby-container, .home-container, .features-container, .intro-container {
-        padding: 40px;
-      }
-
-      .rocket {
-        left: -190px;
-      }
-
-      .intro-container {
-        padding-left: 180px;
-      }
-    }
-
-    @media only screen and (max-width: 800px) {
-      .component-flex {
-        flex-wrap: wrap;
-      }
-
-      .col {
-        min-width: 100%;
-      }
-    }
-
-    .home-container .md-button {
-        margin-top: .5rem;
-        margin-right: .5rem;
-        color: var(--md-primary-bg-color)
-    }
-
-    .home-container .md-button--primary {
-        background-color: var(--md-primary-bg-color);
-        color: hsla(280deg, 37%, 48%, 1);
-        border-color: var(--md-primary-bg-color)
-    }
-
-    .home-container h1 {
-      color: #fff;
-      font-weight: bolder;
-      margin-top: 1em;
-      margin-bottom: 0;
-    }
-
-    .home-container h2 {
-      margin: 0;
-    }
-
-    .calltoaction-container {
-      color: #fff;
-      background: #1B2F52;
-    }
-
-    .usedby-container {
-      background: #fff;
-      color: #000;
-      display: flex;
-      justify-content: center;
-      padding-bottom: 6em;
-      padding-top: 2em;
-    }
-
-    .components-container {
-      padding-bottom: 6em;
-      padding-top: 4em;
-    }
-
-    .features-container {
-      color: #000;
-      background: #114678;
-      background: #28477A;
-      background: #1B2F52;
-      background: #fff;
-      padding-bottom: 6em;
-      padding-top: 2em;
-    }
-
-    .col {
-      width: 25%;
-      margin: 2em;
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-    }
-
-    .logo {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 1.2em;
-    }
-
-  </style>
-
+<div class="md-container">
   <section class="home-container">
     <div class="animated-gradient">
-      <img src="images/logo/rgb/knative-logo-rgb.png">
+      <img src="images/logo/rgb/knative-logo-rgb.png" />
     </div>
     <div class="md-grid md-typeset">
       <div class="mdx-hero">
         <div>
           <h1>Enterprise-grade Serverless on your own terms.</h1>
           <h2>Kubernetes-based platform to deploy and manage modern serverless workloads.</h2>
-
           <p style="display: block">
-          <a href="{{ 'getting-started/getting-started/' | url }}" class="md-button md-button--primary">
-            Get Started
-          </a>
-          <a href="{{ 'install/prerequisites/' | url }}" class="md-button">
-            Custom YAML-Based Install
-          </a>
-          <a href="https://katacoda.com/knative-tutorials/scenarios/2-serving-intro-yaml" class="md-button" style="border: none">
-            💻 &nbsp Try in your Browser ›
-          </a>
+            <a href="{{ 'getting-started/getting-started/' | url }}" class="md-button md-button--primary">
+              Get Started
+            </a>
+            <a href="{{ 'install/prerequisites/' | url }}" class="md-button"> Custom YAML-Based Install </a>
+            <a
+              href="https://katacoda.com/knative-tutorials/scenarios/2-serving-intro-yaml"
+              class="md-button"
+              style="border: none"
+            >
+              💻 &nbsp Try in your Browser ›
+            </a>
+          </p>
         </div>
       </div>
     </div>
   </section>
+
   <section class="features-container">
     <div class="md-grid md-typeset">
-    <h2>Highlights</h2>
-    <ul class="task-list-control" style="columns: 2">
-      <li class="task-list-item">
-        <input type="checkbox" checked disabled />
-        <span class="task-list-indicator"></span>
-        <b>Stand up a scalable, secure, stateless services in seconds.</b>
-      </li>
-      <li class="task-list-item"><input type="checkbox" checked disabled /><span class="task-list-indicator"></span><b>Focused API</b> with higher level abstractions for common app use-cases.</li>
-      <li class="task-list-item"><input type="checkbox" checked disabled /><span class="task-list-indicator"></span><b>Pluggable components</b> let you bring your own logging and monitoring, networking, and service mesh.</li>
-      <li class="task-list-item"><input type="checkbox" checked disabled /><span class="task-list-indicator"></span>Run Knative anywhere Kubernetes runs, <b>never worry about vendor lock-in.</b></li>
-      <li class="task-list-item"><input type="checkbox" checked disabled /><span class="task-list-indicator"></span><b>Seamless developer experience</b>, supports GitOps, DockerOps, ManualOps, etc..</li>
-      <li class="task-list-item"><input type="checkbox" checked disabled /><span class="task-list-indicator"></span><b>Supports many common tools and
-        frameworks</b> such as Django, Ruby on Rails, Spring, and many more.</li>
-    </ul>
+      <h2>Highlights</h2>
+      <ul class="task-list-control" style="columns: 2">
+        <li class="task-list-item">
+          <input type="checkbox" checked disabled />
+          <span class="task-list-indicator"></span>
+          <b>Stand up a scalable, secure, stateless services in seconds.</b>
+        </li>
+        <li class="task-list-item">
+          <input type="checkbox" checked disabled /><span class="task-list-indicator"></span><b>Focused API</b> with
+          higher level abstractions for common app use-cases.
+        </li>
+        <li class="task-list-item">
+          <input type="checkbox" checked disabled /><span class="task-list-indicator"></span
+          ><b>Pluggable components</b> let you bring your own logging and monitoring, networking, and service mesh.
+        </li>
+        <li class="task-list-item">
+          <input type="checkbox" checked disabled /><span class="task-list-indicator"></span>Run Knative anywhere
+          Kubernetes runs, <b>never worry about vendor lock-in.</b>
+        </li>
+        <li class="task-list-item">
+          <input type="checkbox" checked disabled /><span class="task-list-indicator"></span
+          ><b>Seamless developer experience</b>, supports GitOps, DockerOps, ManualOps, etc..
+        </li>
+        <li class="task-list-item">
+          <input type="checkbox" checked disabled /><span class="task-list-indicator"></span
+          ><b>Supports many common tools and frameworks</b> such as Django, Ruby on Rails, Spring, and many more.
+        </li>
+      </ul>
     </div>
   </section>
+
   <section class="intro-container">
     <div class="md-grid md-typeset">
-    <div style="display: flex; align-items: center; min-height: 260px; position: relative">
-    <img src="images/rocket.svg" class="rocket" alt="" width="140" draggable="false" style="position: absolute; right: 200px">
-    <div>
-    <h2 style="font-size: larger; font-weight: bolder">Make your developers more productive</h2>
-    <p style="max-width: 700px">Knative components build on top of Kubernetes, <b>abstracting away
-      the complex details and enabling developers to focus on what matters</b>.
-    Built by codifying the best practices shared by successful real-world
-    implementations, Knative solves the "boring but difficult" parts of
-    deploying and managing cloud native services so you don't have to.
-    </p>
-    </div>
-    </div>
+      <div style="display: flex; align-items: center; min-height: 260px; position: relative">
+        <img
+          src="images/rocket.svg"
+          class="rocket"
+          alt=""
+          width="140"
+          draggable="false"
+          style="position: absolute; right: 200px"
+        />
+        <div>
+          <h2 style="font-size: larger; font-weight: bolder">Make your developers more productive</h2>
+          <p style="max-width: 700px">
+            Knative components build on top of Kubernetes,
+            <b>abstracting away the complex details and enabling developers to focus on what matters</b>. Built by
+            codifying the best practices shared by successful real-world implementations, Knative solves the "boring but
+            difficult" parts of deploying and managing cloud native services so you don't have to.
+          </p>
+        </div>
+      </div>
     </div>
   </section>
+
   <section class="usedby-container">
     <div class="md-grid md-typeset" style="width: 100%">
       <div style="display: flex; justify-content: center">
-      <h3 style="margin-bottom: 0">Trusted by:</h3>
+        <h3 style="margin-bottom: 0">Trusted by:</h3>
       </div>
       <div style="display: inline-flex; justify-content: center; flex-gap: 2em; flex-wrap: wrap">
         <div class="logo">
-        <img src="images/Google.png" alt="" width="220" draggable="false">
+          <img src="images/Google.png" alt="" width="220" draggable="false" />
         </div>
         <div class="logo">
-        <img src="images/Tanzu.png" alt="" width="220" draggable="false">
+          <img src="images/Tanzu.png" alt="" width="220" draggable="false" />
         </div>
         <div class="logo">
-        <img src="images/IBM.png" alt="" width="150" draggable="false">
+          <img src="images/IBM.png" alt="" width="150" draggable="false" />
         </div>
         <div class="logo">
-        <img src="images/Redhat.png" alt="" width="150" draggable="false">
+          <img src="images/Redhat.png" alt="" width="150" draggable="false" />
         </div>
         <div class="logo">
-        <img src="images/Triggermesh.png" alt="" width="100" draggable="false">
+          <img src="images/Triggermesh.png" alt="" width="100" draggable="false" />
         </div>
-        <div class="logo" style="font-style: italic; font-size: smaller; color: #999">
-          ..and more!
-        </div>
+        <div class="logo" style="font-style: italic; font-size: smaller; color: #999">..and more!</div>
       </div>
     </div>
   </section>
+
   <section class="components-container">
     <div class="md-grid md-typeset">
       <div>
         <h2 style="font-size: larger; font-weight: bolder">Knative Components</h2>
       </div>
-			<div style="display: flex" class="component-flex">
-				<div style="margin: 2em; margin-top: 0">
-            <div><h4><a style="color: white" href="{{ 'serving' | url }}">Serving ›</a></h4></div>
-						<p>Run serverless containers on Kubernetes with ease, Knative takes care of the details of networking, autoscaling (even to zero), and revision tracking. You just have to focus on your core logic.</p>
-				</div>
-				<div style="margin: 2em; margin-top: 0">
-          <div><h4><a style="color: white" href="{{ 'eventing' | url }}">Eventing ›</a></h4></div>
-						<p>Universal subscription, delivery, and management of events. Build
-							modern apps by attaching compute to a data stream with declarative event
-						connectivity and developer-friendly object model. </p>
-				</div>
-			</div>
+      <div style="display: flex" class="component-flex">
+        <div style="margin: 2em; margin-top: 0">
+          <div>
+            <h4><a style="color: white" href="{{ 'serving' | url }}">Serving ›</a></h4>
+          </div>
+          <p>
+            Run serverless containers on Kubernetes with ease, Knative takes care of the details of networking,
+            autoscaling (even to zero), and revision tracking. You just have to focus on your core logic.
+          </p>
+        </div>
+        <div style="margin: 2em; margin-top: 0">
+          <div>
+            <h4><a style="color: white" href="{{ 'eventing' | url }}">Eventing ›</a></h4>
+          </div>
+          <p>
+            Universal subscription, delivery, and management of events. Build modern apps by attaching compute to a data
+            stream with declarative event connectivity and developer-friendly object model.
+          </p>
+        </div>
+      </div>
     </div>
   </section>
+
   <section class="calltoaction-container" style="padding: 2em">
     <div class="md-grid md-typeset">
       <h2>What's Next?</h2>
@@ -278,11 +162,8 @@
       </div>
     </div>
   </section>
-
-  {% endblock %}
-
-<!-- Content -->
-{% block content %}{% endblock %}
+</div>
+{% endblock %}
 
 <!-- Application footer -->
 {% block footer %}{% endblock %}
