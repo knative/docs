@@ -10,14 +10,14 @@ To add extra features to your Knative Serving or Eventing installation, you can 
 by applying YAML files using the `kubectl` CLI.
 
 For information about the YAML files in the Knative Serving and Eventing releases, see
-[Installation files](./installation-files.md).
+[Installation files](./installation-files).
 
 
 # Prerequisites
 
 Before you install any optional extensions, you must install Knative Serving or Eventing.
-See [Installing Serving using YAML files](./install-serving-with-yaml.md)
-and [Installing Eventing using YAML files](./install-eventing-with-yaml.md).
+See [Installing Serving using YAML files](./install-serving-with-yaml)
+and [Installing Eventing using YAML files](./install-eventing-with-yaml).
 
 
 ## Install optional Serving extensions
@@ -48,7 +48,7 @@ install the components needed to support the provisioning of TLS certificates
 via cert-manager.
 
 1. First, install
-   [cert-manager version `0.12.0` or higher](../serving/installing-cert-manager.md)
+   [cert-manager version `0.12.0` or higher](../serving/installing-cert-manager)
 
 2. Next, install the component that integrates Knative with cert-manager:
 
@@ -57,7 +57,7 @@ via cert-manager.
    ```
 
 3. Now configure Knative to
-   [automatically configure TLS certificates](../serving/using-auto-tls.md).
+   [automatically configure TLS certificates](../serving/using-auto-tls).
    {{< /tab >}}
 
 {{% tab name="TLS via HTTP01" %}}
@@ -144,7 +144,7 @@ The tabs below expand to show instructions for installing each Eventing extensio
     kubectl apply -f {{< artifact org="knative-sandbox" repo="eventing-kafka-broker" file="eventing-kafka-sink.yaml" >}}
     ```
 
-For more information, see the [Kafka Sink](./../eventing/sink/kafka-sink.md) documentation.
+For more information, see the [Kafka Sink](./../eventing/sink/kafka-sink) documentation.
 
 {{< /tab >}}
 
@@ -197,7 +197,7 @@ GitHub sources in the cluster. This source does not support logging or tracing
 configuration yet.
 
 To learn more about the Github source, try
-[our sample](../eventing/samples/github-source/README.md)
+[our sample](../eventing/samples/github-source/)
 
 {{< /tab >}}
 
@@ -210,7 +210,7 @@ kubectl apply -f {{< artifact org="knative-sandbox" repo="eventing-camel" file="
 ```
 
 To learn more about the Apache Camel-K source, try
-[our sample](../eventing/samples/apache-camel-source/README.md)
+[our sample](../eventing/samples/apache-camel-source/)
 
 {{< /tab >}}
 
@@ -223,7 +223,7 @@ kubectl apply -f {{< artifact org="knative-sandbox" repo="eventing-kafka" file="
 ```
 
 To learn more about the Apache Kafka source, try
-[our sample](../eventing/samples/kafka/source/README.md)
+[our sample](../eventing/samples/kafka/source/)
 
 {{< /tab >}}
 
@@ -237,16 +237,16 @@ kubectl apply -f {{< artifact org="google" repo="knative-gcp" file="cloud-run-ev
 ```
 
 To learn more about the Cloud Pub/Sub source, try
-[our sample](../eventing/samples/cloud-pubsub-source/README.md).
+[our sample](../eventing/samples/cloud-pubsub-source/).
 
 To learn more about the Cloud Storage source, try
-[our sample](../eventing/samples/cloud-storage-source/README.md).
+[our sample](../eventing/samples/cloud-storage-source/).
 
 To learn more about the Cloud Scheduler source, try
-[our sample](../eventing/samples/cloud-scheduler-source/README.md).
+[our sample](../eventing/samples/cloud-scheduler-source/).
 
 To learn more about the Cloud Audit Logs source, try
-[our sample](../eventing/samples/cloud-audit-logs-source/README.md).
+[our sample](../eventing/samples/cloud-audit-logs-source/).
 
 {{< /tab >}}
 
@@ -258,7 +258,7 @@ The following command installs the Apache CouchDB Source:
 kubectl apply -f {{< artifact org="knative-sandbox" repo="eventing-couchdb" file="couchdb.yaml" >}}
 ```
 
-To learn more about the Apache CouchDB source, read the [documentation](https://github.com/knative-sandbox/eventing-couchdb/blob/main/source/README.md).
+To learn more about the Apache CouchDB source, read the [documentation](https://github.com/knative-sandbox/eventing-couchdb/blob/main/source/).
 
 {{< /tab >}}
 
@@ -271,7 +271,7 @@ kubectl apply -f {{< artifact org="vmware-tanzu" repo="sources-for-knative" file
 ```
 
 To learn more about the VMware sources and bindings, try
-[our samples](https://github.com/vmware-tanzu/sources-for-knative/tree/master/samples/README.md).
+[our samples](https://github.com/vmware-tanzu/sources-for-knative/tree/master/samples/).
 
 {{< /tab >}}
 
@@ -279,4 +279,4 @@ To learn more about the VMware sources and bindings, try
 
 ## Next steps
 
-- To easily interact with Knative Services and Eventing components, [install the `kn` CLI](/docs/client/install-kn.md)
+- To easily interact with Knative Services and Eventing components, [install the `kn` CLI](/docs/client/install-kn)

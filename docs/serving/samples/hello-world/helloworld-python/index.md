@@ -23,7 +23,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-python
 ## Prerequisites
 
 - A Kubernetes cluster with Knative installed and DNS configured. Follow the
-  [installation instructions](../../../../install/README.md).
+  [installation instructions](../../../../install/).
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured.
 - (optional) The Knative CLI client
@@ -172,7 +172,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-python
 
 1. Run one of the followings commands to find the domain URL for your service.
    > Note: If your URL includes `example.com` then consult the setup instructions for
-   > configuring DNS (e.g. with `xip.io`), or [using a Custom Domain](../serving/using-a-custom-domain.md).
+   > configuring DNS (e.g. with `xip.io`), or [using a Custom Domain](../serving/using-a-custom-domain).
 
    {{< tabs name="service_url" default="kn" >}} {{% tab name="kubectl" %}}
 
