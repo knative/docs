@@ -187,7 +187,7 @@ Where:
 - `<event-sink>` is the event sink to connect. For example `http://event-display.svc.cluster.local`.
 - Optional: `<cloudevent-overrides>` in the form `key=value`.
 Cloud Event overrides control the output format and modifications of the event
-sent to the sink and are applied before sending the event.  
+sent to the sink and are applied before sending the event.
 You can provide this flag multiple times.
 
 For example:
