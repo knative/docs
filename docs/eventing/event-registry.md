@@ -12,7 +12,7 @@ type information in the cluster data store.
 
 ## Before you begin
 
-1. Read about the [broker](./broker/) and [trigger](./triggers/) objects.
+1. Read about the [broker](./broker/) and [trigger](./broker/triggers/) objects.
 1. Be familiar with the
    [CloudEvents spec](https://github.com/cloudevents/spec/blob/master/spec.md),
    particularly the
@@ -279,14 +279,9 @@ the next topic: How do we actually populate the registry in the first place?
   are two topics). You can see that in the registry example output from the
   previous sections.
 
-## What's next
+## Next steps
 
-To get started, install Knative Eventing if you haven't yet, and try
-experimenting with different Event Sources in your Knative cluster.
-
-1. [Installing Knative](../install/README.md) in case you haven't already done
-   so.
-1. [Getting started with eventing](./README.md) in case you haven't read it.
+1. [Installing Knative](../install/).
 1. [Knative code samples](./samples/) is a useful resource to better understand
    some of the Event Sources (remember to point them to a Broker if you want
    automatic registration of EventTypes in the registry).

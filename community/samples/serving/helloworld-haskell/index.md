@@ -12,7 +12,7 @@ specified, it will use "World" as the TARGET.
 ## Prerequisites
 
 - A Kubernetes cluster with Knative installed and DNS configured. Follow the
-  [installation instructions](../../../../docs/install/README.md) if you need to create
+  [installation instructions](../../../../docs/install/) if you need to create
   one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
@@ -186,4 +186,3 @@ To remove the sample app from your cluster, delete the service record:
 ```shell
 kubectl delete --filename service.yaml
 ```
-

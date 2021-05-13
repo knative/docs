@@ -12,7 +12,7 @@ This topic describes how to install Knative Eventing by applying YAML files usin
 ## Prerequisites
 
 Before installation, you must meet the prerequisites.
-See [Knative Prerequisites](./prerequisites.md).
+See [Knative Prerequisites](./prerequisites).
 
 
 ## Install the Eventing component
@@ -32,7 +32,7 @@ To install the Eventing component:
    ```
 
 For information about the YAML files in the Knative Serving and Eventing releases, see
-[Installation files](./installation-files.md).
+[Installation files](./installation-files).
 
 
 ## Verify the installation
@@ -55,7 +55,7 @@ Follow the procedure for the channel of your choice:
    {{% tab name="Apache Kafka Channel" %}}
 
 1. First,
-   [Install Apache Kafka for Kubernetes](../eventing/samples/kafka/README.md)
+   [Install Apache Kafka for Kubernetes](../eventing/samples/kafka/)
 
 1. Then install the Apache Kafka channel:
 
@@ -66,7 +66,7 @@ Follow the procedure for the channel of your choice:
    ```
 
 To learn more about the Apache Kafka channel, try
-[our sample](../eventing/samples/kafka/channel/README.md)
+[our sample](../eventing/samples/kafka/channel/)
 
 {{< /tab >}}
 
@@ -80,7 +80,7 @@ To learn more about the Apache Kafka channel, try
    ```
 
 To learn more about the Google Cloud Pub/Sub channel, try
-[our sample](https://github.com/google/knative-gcp/blob/master/docs/examples/channel/README.md)
+[our sample](https://github.com/google/knative-gcp/blob/master/docs/examples/channel/)
 
 {{< /tab >}}
 
@@ -138,7 +138,7 @@ The following commands install the Apache Kafka broker, and run event routing in
     kubectl apply -f {{< artifact org="knative-sandbox" repo="eventing-kafka-broker" file="eventing-kafka-broker.yaml" >}}
     ```
 
-For more information, see the [Kafka broker](./../eventing/broker/kafka-broker.md) documentation.
+For more information, see the [Kafka broker](./../eventing/broker/kafka-broker) documentation.
 {{< /tab >}}
 
    {{% tab name="MT-Channel-based" %}}
@@ -221,8 +221,8 @@ data:
 
 After installing Knative Eventing:
 
-- To easily interact with Knative Eventing components, [install the `kn` CLI](/docs/client/install-kn.md)
+- To easily interact with Knative Eventing components, [install the `kn` CLI](/docs/client/install-kn)
 
-- To add optional enhancements to your installation, see [Installing optional extensions](./install-extensions.md)
+- To add optional enhancements to your installation, see [Installing optional extensions](./install-extensions)
 
-- [Installing Knative Serving using YAML files](./install-serving-with-yaml.md)
+- [Installing Knative Serving using YAML files](./install-serving-with-yaml)

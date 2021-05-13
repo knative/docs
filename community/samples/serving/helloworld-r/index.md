@@ -21,7 +21,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-r
 ## Before you begin
 
 - A Kubernetes cluster with Knative installed. Follow the
-  [installation instructions](../../../../docs/install/README.md) if you need to
+  [installation instructions](../../../../docs/install/) if you need to
   create one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
@@ -195,4 +195,3 @@ To remove the sample app from your cluster, delete the service record:
 ```shell
 kubectl delete --filename service.yaml
 ```
-
