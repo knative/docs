@@ -33,6 +33,9 @@ cp -r temp/community/* temp/website/content/en/community/contributing/
 rm -r temp/website/content/en/community/contributing/elections/2021-TOC # Temp fix for markdown that confuses hugo.
 
 # Run the hugo build as normal!
+
+# need postcss cli in PATH
+PATH=${PATH}:${PWD}/node_modules/.bin
 pushd temp/website
 hugo
 popd
@@ -55,14 +58,14 @@ cat << EOF > site/index.html
   <meta charset="utf-8">
   <title>Redirecting</title>
   <noscript>
-    <meta http-equiv="refresh" content="1; url=../dev/" />
+    <meta http-equiv="refresh" content="1; url=docs/" />
   </noscript>
   <script>
-    window.location.replace("/docs/");
+   window.location.replace(window.location.href+"docs/");
   </script>
 </head>
 <body>
-  Redirecting to <a href="/docs/">/docs/</a>...
+  Redirecting to <a href="docs/">docs/</a>...
 </body>
 </html>
 EOF
