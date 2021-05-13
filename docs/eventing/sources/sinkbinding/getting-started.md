@@ -1,15 +1,13 @@
 ---
-title: "Getting Started"
+title: "Create a Sink Binding"
 weight: 02
 type: "docs"
-aliases:
-    - /docs/eventing/samples/sinkbinding/index
-    - /docs/eventing/samples/sinkbinding/README
 ---
 
 ![API version v1](https://img.shields.io/badge/API_Version-v1-red?style=flat-square)
 
 This topic describes how to create a SinkBinding and connect it to a subject in your cluster.
+
 
 ## Before you begin
 
@@ -17,6 +15,7 @@ Before you can create a SinkBinding, you must:
 
 - Have Knative Serving installed on your cluster.
 - Optional: If you want to use `kn` commands with a SinkBinding, install the `kn` CLI.
+
 
 ## Optional: Choose SinkBinding namespace selection behavior
 
@@ -33,25 +32,22 @@ explicitly include it using the label `bindings.knative.dev/include: true`.
 
 ### Set to inclusion mode
 
-To set to inclusion mode, edit the `eventing-webhook` deployment.
-Set `SINK_BINDING_SELECTION_MODE` to `inclusion`.
+To set to inclusion mode, edit the `eventing-webhook` deployment to set
+`SINK_BINDING_SELECTION_MODE` to `inclusion`.
 The mode determines the default scope of the webhook.
+
 
 ## Create a namespace
 
 If you do not have an existing namespace, create a namespace for the SinkBinding:
 
-    ```bash
-    kubectl create namespace <namespace>
-    ```
-    Where `<namespace>` is the namespace that you want your SinkBinding to use.
+```bash
+kubectl create namespace <namespace>
+```
+Where `<namespace>` is the namespace that you want your SinkBinding to use.
+For example, `sinkbinding-example`.
 
-    For example:
-    ```bash
-    kubectl create namespace sinkbinding-example
-    ```
-
-**NOTE:** if you have selected inclusion mode, you must add the
+**Note:** if you have selected inclusion mode, you must add the
 `bindings.knative.dev/include: true` label to the namespace to enable SinkBinding behavior.
 
 
@@ -59,23 +55,25 @@ If you do not have an existing namespace, create a namespace for the SinkBinding
 
 The event sink can be any addressable Kubernetes object that can receive events.
 
-If you do not have an existing event sink that you want to connect to the sink
-binding, create a Knative service:
+If you do not have an existing event sink that you want to connect to the SinkBinding,
+create a Knative service.
 
   {{< tabs name="knative_service" default="kn" >}}
   {{% tab name="kn" %}}
+
+  Create a Knative service by running:
 
   ```bash
   kn service create <app-name> --image <image-url>
   ```
   Where:
-  - `<app-name>` is the name of the application
-  - `<image-url>` is the URL of the image container
+  - `<app-name>` is the name of the application.
+  - `<image-url>` is the URL of the image container.
 
   For example:
 
   ```bash
-  kn service create hello --image gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+  $ kn service create hello --image gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
   ```
   {{< /tab >}}
   {{% tab name="yaml" %}}
@@ -96,14 +94,15 @@ binding, create a Knative service:
       - `<app-name>` is the name of the application. For example, `event-display`.
       - `<image-url>` is the URL of the image container.
       For example, `gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display`
-
-  2. Apply the file:
+ </br></br>
+  2. Apply the YAML file by running:
       ```bash
       kubectl apply --filename service.yaml
       ```
 
   {{< /tab >}}
   {{< /tabs >}}
+
 
 ## Create a subject
 
@@ -116,10 +115,8 @@ You can use any PodSpecable resource in your cluster, for example:
 - `StatefulSet`
 - `Service.serving.knative.dev`
 
-For instructions on how to create a subject, see (LINK). <!-- do we want to provide a link to guidance on creating a subject? -->
-
 If you do not have an existing PodSpecable subject that you want to use for the
-SinkBinding, you can use the following sample to create a `CronJob` object as the subject:
+SinkBinding, you can use the following sample to create a `CronJob` object as the subject.
 
 1. Copy the sample YAML below into a `cronjob.yaml` file:
 
@@ -157,42 +154,52 @@ SinkBinding, you can use the following sample to create a `CronJob` object as th
                           fieldPath: metadata.namespace
     ```
 
-2. Apply the subject's YAML file:
+2. Apply the YAML file by running:
+
     ```bash
     kubectl apply --filename cronjob.yaml
     ```
 
+
 ## Create a SinkBinding object
 
-Create a `SinkBinding` object that directs events from your subject to the event sink:
+Create a `SinkBinding` object that directs events from your subject to the event sink.
 
 {{< tabs name="sinkbinding" default="kn" >}}
 {{% tab name="kn" %}}
 
+Create a `SinkBinding` object by running:
+
 ```bash
 kn source binding create <name> \
   --namespace <namespace> \
-  --subject <subject> \
+  --subject "<subject>" \
   --sink <event-sink> \
-  --ce-override "sink=bound"
+  --ce-override "<cloudevent-overrides>"
 ```
 Where:
 - `<name>` is the name of the SinkBinding object you want to create.
 - `<namespace>` is the namespace you created for your SinkBinding to use.
-- `<subject>` is the subject to connect. Examples of subjects:
-  - `"Job:batch/v1:app=heartbeat-cron"` matches all jobs in namespace with label `app=heartbeat-cron`.
-  - `Deployment:apps/v1:myapp` matches deployment called myapp in the namespace.
-  - `Service:serving.knative.dev/v1:hello` match the service called hello.
+- `<subject>` is the subject to connect. Examples:
+  - `Job:batch/v1:app=heartbeat-cron` matches all jobs in namespace with label `app=heartbeat-cron`.
+  - `Deployment:apps/v1:myapp` matches a deployment called `myapp` in the namespace.
+  - `Service:serving.knative.dev/v1:hello` matches the service called `hello`.
 - `<event-sink>` is the event sink to connect. For example `http://event-display.svc.cluster.local`.
+- Optional: `<cloudevent-overrides>` in the form `key=value`.
+Cloud Event overrides control the output format and modifications of the event
+sent to the sink and are applied before sending the event.  
+You can provide this flag multiple times.
 
 For example:
 ```bash
-kn source binding create bind-heartbeat \
+$ kn source binding create bind-heartbeat \
   --namespace sinkbinding-example \
   --subject "Job:batch/v1:app=heartbeat-cron" \
   --sink http://event-display.svc.cluster.local \
   --ce-override "sink=bound"
 ```
+
+<!-- TODO provide link to information about the flags for the kn command -->
 
 {{< /tab >}}
 {{% tab name="yaml" %}}
@@ -210,34 +217,34 @@ kn source binding create bind-heartbeat \
         kind: <kind>
         selector:
           matchLabels:
-            app: <app-name>
+            <label-key>: <label-value>
         sink:
           ref:
             apiVersion: serving.knative.dev/v1
             kind: Service
-            name: <event-name>
+            name: <event-sink>
     ```
     Where:
     - `<name>` is the name of the SinkBinding object you want to create. For example, `bind-heartbeat`.
-    - `<kind>` is the Kind of your subject. For example `Job`.
     - `<api-version>` is the API version of the subject. For example `batch/v1`.
-    - `<app-name>` is the name of the subject to connect. For example, `heartbeat-cron`. <!-- is this right? -->
+    - `<kind>` is the Kind of your subject. For example `Job`.
+    - `<label-key>: <label-value>` is a map of key-value pairs to select subjects
+    that have a matching label. For example, `app: heartbeat-cron` selects any subject
+    with the label `app=heartbeat-cron`.
     - `<event-sink>` is the event sink to connect. For example `event-display`.
 
-2. Apply the file:
+    For more information about the fields you can configure for the SinkBinding
+    object, see [Sink Binding Reference](reference.md).
+2. Apply the YAML file by running:
     ```bash
     kubectl apply --filename <filename>.yaml
     ```
     Where `filename` is the name of the YAML file for your subject.
-
-    For example:
-
-    ```bash
-    kubectl apply --filename cronjob.yaml
-    ```
+    For example, `cronjob.yaml`.
 
 {{< /tab >}}
 {{< /tabs >}}
+
 
 ## Verify the SinkBinding
 
@@ -248,12 +255,12 @@ service logs for your event sink:
     kubectl logs -l <event-sink> -c <container> --since=10m
     ```
     Where:
-    - `<event-sink>` is the name of the event sink you created.
+    - `<event-sink>` is the name of your event sink.
     - `<container>` is the name of the container your event sink is running in.
 
     For example:
     ```bash
-    kubectl logs -l serving.knative.dev/service=event-display -c user-container --since=10m
+    $ kubectl logs -l serving.knative.dev/service=event-display -c user-container --since=10m
     ```
 2. From the output, observe the lines showing the request headers and body of the event message,
 sent by the source to the display function. For example:
@@ -279,6 +286,7 @@ sent by the source to the display function. For example:
         }
     ```
 
+
 ## Cleanup
 
 To delete the SinkBinding and all of the related resources in the namespace,
@@ -287,4 +295,4 @@ delete the namespace by running:
 ```shell
 kubectl delete namespace <namespace>
 ```
-Where `<namespace>` is the name of the namespace that contains the SinkBinding object
+Where `<namespace>` is the name of the namespace that contains the SinkBinding object.
