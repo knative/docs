@@ -26,6 +26,7 @@ jobs:
         uses: peaceiris/actions-hugo@v2
         with:
           hugo-version: '0.83.1'
+          extended: true
 
       - name: Install dependencies
         run: |
