@@ -2,7 +2,7 @@ name: Publish MkDocs
 
 on:
   push:
-    branches: [ mkdocs ]
+    branches: [ gh-pages-blog ]
 
 jobs:
   mkdocs:
@@ -15,17 +15,26 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: "3.9"
+          python-version: '3.9'
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
 
       - name: Install dependencies
         run: |
           pip install mkdocs mkdocs-macros-plugin mkdocs-exclude mike
-
-      - name: Setup doc deploy
-        run: |
-          git config --global user.name "Knative Automation"
-          git config --global user.email automation@knative.team
-
+          npm install
+      
       - name: Build docs 
         run: |
-          mike deploy dev --push
+          ./hack/build-with-blog.sh 
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
+          user_name: Knative Automation'
+          user_email: automation@knative.team
+
