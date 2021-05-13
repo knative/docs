@@ -166,14 +166,14 @@ above.
     kubectl get ksvc helloworld-elixir --output=custom-columns=NAME:.metadata.name,URL:.status.url
 
     NAME                URL
-    helloworld-elixir   http://helloworld-elixir.default.1.2.3.4.xip.io
+    helloworld-elixir   http://helloworld-elixir.default.1.2.3.4.sslip.io
     ```
 
 1.  Now you can make a request to your app to see the results. Replace
     `{IP_ADDRESS}` with the address you see returned in the previous step.
 
         ```shell
-        curl http://helloworld-elixir.default.1.2.3.4.xip.io
+        curl http://helloworld-elixir.default.1.2.3.4.sslip.io
 
         ...
         # HTML from your application is returned.

@@ -197,7 +197,7 @@ After the build has completed and the container is pushed to Docker Hub, you can
 
    ```shell
    NAME                      URL
-   helloworld-java-spring    http://helloworld-java-spring.default.1.2.3.4.xip.io
+   helloworld-java-spring    http://helloworld-java-spring.default.1.2.3.4.sslip.io
    ```
 
    {{< /tab >}}
@@ -210,7 +210,7 @@ After the build has completed and the container is pushed to Docker Hub, you can
    Example:
 
    ```shell
-   http://helloworld-java-spring.default.1.2.3.4.xip.io
+   http://helloworld-java-spring.default.1.2.3.4.sslip.io
    ```
    {{< /tab >}}
    {{< /tabs >}}
@@ -221,7 +221,7 @@ After the build has completed and the container is pushed to Docker Hub, you can
    Example:
 
    ```shell
-   curl http://helloworld-java-spring.default.1.2.3.4.xip.io
+   curl http://helloworld-java-spring.default.1.2.3.4.sslip.io
    Hello Java Spring Sample v1!
 
    # Even easier with kn:

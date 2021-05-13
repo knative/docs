@@ -140,14 +140,14 @@ folder) you're ready to build and deploy the sample app.
    ```
    kubectl get ksvc helloworld-dart  --output=custom-columns=NAME:.metadata.name,URL:.status.url
    NAME             URL
-   helloworld-dart  http://helloworld-dart.default.1.2.3.4.xip.io
+   helloworld-dart  http://helloworld-dart.default.1.2.3.4.sslip.io
    ```
 
 1. Now you can make a request to your app and see the result. Replace
    the URL below with the URL returned in the previous command.
 
    ```shell
-   curl http://helloworld-dart.default.1.2.3.4.xip.io
+   curl http://helloworld-dart.default.1.2.3.4.sslip.io
    Hello Dart Sample v1
    ```
 
