@@ -131,7 +131,7 @@ To see if your app has been deployed successfully, you need the URL created by K
    Name        helloworld-go
    Namespace   default
    Age         12m
-   URL         http://helloworld-go.default.34.83.80.117.xip.io
+   URL         http://helloworld-go.default.34.83.80.117.sslip.io
 
    Revisions:
      100%  @latest (helloworld-go-dyqsj-1) [1] (39s)
@@ -155,14 +155,14 @@ To see if your app has been deployed successfully, you need the URL created by K
 
    ```shell
    NAME            URL                                                LATESTCREATED         LATESTREADY           READY   REASON
-   helloworld-go   http://helloworld-go.default.34.83.80.117.xip.io   helloworld-go-96dtk   helloworld-go-96dtk   True
+   helloworld-go   http://helloworld-go.default.34.83.80.117.sslip.io   helloworld-go-96dtk   helloworld-go-96dtk   True
    ```
 
   {{< /tab >}}
   {{< /tabs >}}
 
    > Note: If your URL includes `example.com` then consult the setup instructions for
-   > configuring DNS (e.g. with `xip.io`), or [using a Custom Domain](../serving/using-a-custom-domain).
+   > configuring DNS (e.g. with `sslip.io`), or [using a Custom Domain](../serving/using-a-custom-domain).
 
    If you changed the name from `helloworld-go` to something else when creating
    the `.yaml` file, replace `helloworld-go` in the above commands with the name you entered.
@@ -171,7 +171,7 @@ To see if your app has been deployed successfully, you need the URL created by K
    the URL with the one returned by the command in the previous step.
 
    ```shell
-   # curl http://helloworld-go.default.34.83.80.117.xip.io
+   # curl http://helloworld-go.default.34.83.80.117.sslip.io
    Hello World: Go Sample v1!
    ```
 

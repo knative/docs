@@ -146,7 +146,7 @@ folder) you're ready to build and deploy the sample app.
     8.398s Ready to serve.
 
   Service 'helloworld-php' created to latest revision 'helloworld-php-akhft-1' is available at URL:
-  http://helloworld-php.default.1.2.3.4.xip.io
+  http://helloworld-php.default.1.2.3.4.sslip.io
   ```
 
    {{< /tab >}}
@@ -167,7 +167,7 @@ folder) you're ready to build and deploy the sample app.
    ```
    kubectl get ksvc helloworld-php  --output=custom-columns=NAME:.metadata.name,URL:.status.url
    NAME                URL
-   helloworld-php      http://helloworld-php.default.1.2.3.4.xip.io
+   helloworld-php      http://helloworld-php.default.1.2.3.4.sslip.io
    ```
 
 {{< /tab >}}
@@ -180,7 +180,7 @@ folder) you're ready to build and deploy the sample app.
    Example:
 
    ```shell
-   http://helloworld-php.default.1.2.3.4.xip.io
+   http://helloworld-php.default.1.2.3.4.sslip.io
    ```
 {{< /tab >}}
 {{< /tabs >}}
@@ -189,7 +189,7 @@ folder) you're ready to build and deploy the sample app.
    the URL below with the URL returned in the previous command.
 
    ```shell
-   curl http://helloworld-php.default.1.2.3.4.xip.io
+   curl http://helloworld-php.default.1.2.3.4.sslip.io
    Hello PHP Sample v1!
    ```
 

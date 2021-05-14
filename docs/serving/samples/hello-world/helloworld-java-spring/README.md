@@ -174,14 +174,14 @@ folder) you're ready to build and deploy the sample app.
       --output=custom-columns=NAME:.metadata.name,URL:.status.url
 
    NAME                       URL
-   helloworld-java-spring     http://helloworld-java-spring.default.1.2.3.4.xip.io
+   helloworld-java-spring     http://helloworld-java-spring.default.1.2.3.4.sslip.io
    ```
 
 1. Now you can make a request to your app and see the result. Replace
    the URL below with the URL returned in the previous command.
 
    ```shell
-   curl http://helloworld-java-spring.default.1.2.3.4.xip.io
+   curl http://helloworld-java-spring.default.1.2.3.4.sslip.io
    Hello Spring Boot Sample v1!
    ```
 

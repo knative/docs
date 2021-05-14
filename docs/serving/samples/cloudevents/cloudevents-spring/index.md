@@ -61,7 +61,7 @@ Get the URL for your Service with:
 ```shell
 $ kubectl get ksvc
 NAME                URL                                            LATESTCREATED             LATESTREADY               READY   REASON
-cloudevents-spring   http://cloudevents-java.xip.io                 cloudevents-spring-86h28   cloudevents-spring-86h28   True
+cloudevents-spring   http://cloudevents-java.sslip.io                 cloudevents-spring-86h28   cloudevents-spring-86h28   True
 ```
 
 Then send a CloudEvent to it with:
@@ -75,7 +75,7 @@ $ curl \
     -H "ce-type: curl.demo"  \
     -H "ce-id: 123-abc"  \
     -d '{"name":"Dave"}' \
-    http://cloudevents-java.xip.io
+    http://cloudevents-java.sslip.io
 ```
 
 You can also send CloudEvents spawning a temporary curl pod in your cluster

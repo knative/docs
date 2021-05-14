@@ -144,7 +144,7 @@ folder) you're ready to build and deploy the sample app.
     8.398s Ready to serve.
 
   Service 'helloworld-shell' created to latest revision 'helloworld-shell-kwdpt-1' is available at URL:
-  http://helloworld-shell.default.1.2.3.4.xip.io
+  http://helloworld-shell.default.1.2.3.4.sslip.io
   ```
 
    {{< /tab >}}
@@ -171,7 +171,7 @@ folder) you're ready to build and deploy the sample app.
 
    ```shell
    NAME                URL
-   helloworld-shell    http://helloworld-shell.default.1.2.3.4.xip.io
+   helloworld-shell    http://helloworld-shell.default.1.2.3.4.sslip.io
    ```
 
    {{< /tab >}}
@@ -184,7 +184,7 @@ folder) you're ready to build and deploy the sample app.
    Example:
 
    ```shell
-   http://helloworld-shell.default.1.2.3.4.xip.io
+   http://helloworld-shell.default.1.2.3.4.sslip.io
    ```
    {{< /tab >}}
    {{< /tabs >}}
@@ -195,7 +195,7 @@ folder) you're ready to build and deploy the sample app.
    Example:
 
    ```shell
-   curl http://helloworld-shell.default.1.2.3.4.xip.io
+   curl http://helloworld-shell.default.1.2.3.4.sslip.io
    Hello Shell Sample v1!
 
    # Even easier with kn:

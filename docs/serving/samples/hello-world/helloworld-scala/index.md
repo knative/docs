@@ -140,7 +140,7 @@ kubectl apply --filename helloworld-scala.yaml
     8.398s Ready to serve.
 
   Service 'helloworld-scala' created to latest revision 'helloworld-scala-abcd-1' is available at URL:
-  http://helloworld-scala.default.1.2.3.4.xip.io
+  http://helloworld-scala.default.1.2.3.4.sslip.io
   ```
 
 {{< /tab >}}
@@ -157,13 +157,13 @@ kubectl get ksvc helloworld-scala \
 
 # It will print something like this, the URL is what you're looking for.
 # NAME                URL
-# helloworld-scala    http://helloworld-scala.default.1.2.3.4.xip.io
+# helloworld-scala    http://helloworld-scala.default.1.2.3.4.sslip.io
 ```
 
 Finally, to try your service, use the obtained URL:
 
 ```shell
-curl -v http://helloworld-scala.default.1.2.3.4.xip.io
+curl -v http://helloworld-scala.default.1.2.3.4.sslip.io
 ```
 
 {{< /tab >}}
@@ -176,13 +176,13 @@ curl -v http://helloworld-scala.default.1.2.3.4.xip.io
    Example:
 
    ```shell
-   http://helloworld-scala.default.1.2.3.4.xip.io
+   http://helloworld-scala.default.1.2.3.4.sslip.io
    ```
 
 Finally, to try your service, use the obtained URL:
 
 ```shell
-curl -v http://helloworld-scala.default.1.2.3.4.xip.io
+curl -v http://helloworld-scala.default.1.2.3.4.sslip.io
 ```
 
 {{< /tab >}}
