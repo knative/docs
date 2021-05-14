@@ -1,5 +1,5 @@
 ---
-title: "Sink Binding Reference"
+title: "SinkBinding Reference"
 linkTitle: "Reference"
 weight: 03
 type: "docs"
