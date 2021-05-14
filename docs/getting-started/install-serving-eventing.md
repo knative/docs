@@ -73,4 +73,5 @@ The Knative CLI (`kn`) provides a quick and easy interface for creating Knative 
 
         **NOTE:** Running `kn` from a container image does not place the binary on a permanent path. This procedure must be repeated each time you want to use `kn`.
 
-    For more complex installations, such as nightly releases, see [Install `kn`](../client/install-kn.md)
+    !!! note
+    For more complex installations, such as nightly releases, see [Install `kn`](../../client/install-kn)
