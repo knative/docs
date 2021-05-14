@@ -1,5 +1,5 @@
 ---
-title: "Sink binding"
+title: "SinkBinding"
 weight: 01
 type: "docs"
 aliases:

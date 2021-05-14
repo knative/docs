@@ -1,5 +1,5 @@
 ---
-title: "Create a Sink Binding"
+title: "Create a SinkBinding"
 weight: 02
 type: "docs"
 ---
