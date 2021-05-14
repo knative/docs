@@ -58,7 +58,8 @@ The Knative CLI (`kn`) provides a quick and easy interface for creating Knative 
 
     === "Using a container image"
 
-        **WARNING:** Nightly container images include features which may not be included in the latest Knative release and are not considered to be stable.
+        !!! warning
+        Nightly container images include features which may not be included in the latest Knative release and are not considered to be stable.
 
         Links to images are available here:
 
@@ -71,7 +72,8 @@ The Knative CLI (`kn`) provides a quick and easy interface for creating Knative 
         docker run --rm -v "$HOME/.kube/config:/root/.kube/config" gcr.io/knative-releases/knative.dev/client/cmd/kn:latest service list
         ```
 
-        **NOTE:** Running `kn` from a container image does not place the binary on a permanent path. This procedure must be repeated each time you want to use `kn`.
+        !!! note
+        Running `kn` from a container image does not place the binary on a permanent path. This procedure must be repeated each time you want to use `kn`.
 
     !!! note
     For more complex installations, such as nightly releases, see [Install `kn`](../../client/install-kn)
