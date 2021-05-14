@@ -32,3 +32,11 @@
 .md-nav__title .md-nav__button.md-logo svg {
   width: auto;
 }
+
+/**Modify H1**/
+.md-typeset h1 {
+  margin: 1em 0 0.75em;
+}
+.md-typeset > h1:first-of-type {
+  margin: 0 0 0.75em;
+}
