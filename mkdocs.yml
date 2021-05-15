@@ -250,8 +250,6 @@ copyright: "Copyright © 2021 The Knative Authors"
 
 extra:
   branch: v0.23.0 # Branch to use for examples
-  # version for download links, empty or "dev" to use googlestorage nightlies.
-  # version: v0.23.0
   social:
     - icon: fontawesome/brands/twitter
       link: https://twitter.com/KnativeProject
@@ -261,5 +259,8 @@ extra:
     - icon: fontawesome/brands/slack
       link: https://slack.knative.dev
       name: Slack
+  # TODO: Replace with https://github.com/mkdocs/mkdocs/pull/2267 once mkdocs 1.2 is out.
+  version_warning: !!python/object/apply:os.getenv ["VERSION_WARNING"]
+  knative_version: !!python/object/apply:os.getenv ["KNATIVE_VERSION"]
   version:
     provider: mike

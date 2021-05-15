@@ -36,3 +36,9 @@
 .md-version__list li:nth-last-child(1) a {
   color: gray;
 }
+
+/* bit of a hack to stop the banner taking space when empty */
+.md-announce .md-announce__inner {
+  margin: 0;
+  padding: 0;
+}
