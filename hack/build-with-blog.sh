@@ -90,10 +90,24 @@ if [ -z "$SKIP_BLOG" ]; then
   cp -r temp/community/* temp/website/content/en/community/contributing/
   rm -r temp/website/content/en/community/contributing/elections/2021-TOC # Temp fix for markdown that confuses hugo.
 
-  # Run the hugo build as normal!
-
-  # need postcss cli in PATH
+  # See https://github.com/knative/website/blob/main/scripts/processsourcefiles.sh#L125
+  # For the reasoning behind all this.
+  echo 'Converting all links in GitHub source files to Hugo supported relative links...'
   pushd temp/website
+  # Convert relative links to support Hugo
+  find . -type f -path '*/content/*.md' ! -name '*_index.md' ! -name '*index.md' ! -name '*README.md' \
+    ! -name '*serving-api.md' ! -name '*eventing-contrib-api.md' ! -name '*eventing-api.md' \
+    ! -name '*build-api.md' ! -name '*.git*' ! -path '*/.github/*' ! -path '*/hack/*' \
+    ! -path '*/node_modules/*' ! -path '*/test/*' ! -path '*/themes/*' ! -path '*/vendor/*' \
+    -exec sed -i '/](/ { s#(\.\.\/#(../../#g; s#(\.\/#(../#g; }' {} +
+  # Convert all relative links from README.md to index.html
+  find . -type f -path '*/content/*.md' ! -name '_index.md' \
+      -exec sed -i '/](/ { /http/ !{s#README\.md#index.html#g} }' {} +
+  # Convert all Markdown links to HTML
+  find . -type f -path '*/content/*.md' \
+      -exec sed -i '/](/ { /http/ !{s#\.md##g} }' {} +
+
+  # Run the hugo build as normal!
   npx hugo
   popd
 
