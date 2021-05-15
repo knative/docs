@@ -75,7 +75,8 @@ fi
 if [ -z "$SKIP_BLOG" ]; then
   # Clone out the website and community repos for the hugo bits.
   # TODO(jz) Cache this and just do a pull/update/use siblings for local dev flow.
-  git clone --depth 1 --recurse-submodules https://github.com/knative/website temp/website
+  git clone --depth 1 https://github.com/knative/website temp/website
+  pushd temp/website; git submodule update --init --recursive --depth 1; popd
   git clone --depth 1 https://github.com/knative/community temp/community
 
   # Move blog files into position
@@ -97,13 +98,9 @@ if [ -z "$SKIP_BLOG" ]; then
   popd
 
   # Hugo builds to public/, just copy over to site/ to match up with mkdocs
-  mv temp/website/public/blog site/
-  mv temp/website/public/community site/
-  mv temp/website/public/css site/
-  mv temp/website/public/scss site/
-  mv temp/website/public/webfonts site/
-  mv temp/website/public/images site/
-  mv temp/website/public/js site/
+  for d in blog community css scss webfonts images js; do
+    mv temp/website/public/$d site/
+  done
 fi
 
 # Home page is served from docs, so add a redirect.
