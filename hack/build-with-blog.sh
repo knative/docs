@@ -11,16 +11,16 @@ set -x
 # Releasing a new version:
 # 1) Make a release-NN branch as normal.
 # 2) Update VERSIONS (on main) to include the new version.
-VERSIONS=("0.23" "0.22" "0.21")
+VERSIONS=("0.23" "0.22")
 
 # 3) For now, update the function below to map version to branch.
 # This is temporary so we can use non release-N branches while we transition
 # (since we'll want mkdocs versions of the last 2 releases). TODO: Drop this
 # when all the versions are in release-$version branches (in mkdocs format).
 function branch_for_version() {
-  if [ "$1" == "0.23" ]; then echo "mkdocs"
-  elif [ "$1" == "0.22" ]; then echo "mkdocs"
-  elif [ "$1" == "0.21" ]; then echo "mkdocs"
+  if [ "$1" == "0.23" ]; then echo "mkrelease-0.23"
+  elif [ "$1" == "0.22" ]; then echo "mkrelease-0.22"
+  elif [ "$1" == "0.21" ]; then echo "mkversion2"
   else
     echo "No branch for version $1. Update branch_for_version function"
     exit 1
