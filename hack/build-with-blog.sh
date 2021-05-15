@@ -92,9 +92,8 @@ if [ -z "$SKIP_BLOG" ]; then
   # Run the hugo build as normal!
 
   # need postcss cli in PATH
-  PATH=${PATH}:${PWD}/node_modules/.bin
   pushd temp/website
-  hugo
+  npx hugo
   popd
 
   # Hugo builds to public/, just copy over to site/ to match up with mkdocs
