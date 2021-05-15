@@ -10,23 +10,11 @@ set -x
 
 # Releasing a new version:
 # 1) Make a release-NN branch as normal.
-# 2) Update VERSIONS (on main) to include the new version.
-VERSIONS=("0.23" "0.22")
-
-# 3) For now, update the function below to map version to branch.
-# This is temporary so we can use non release-N branches while we transition
-# (since we'll want mkdocs versions of the last 2 releases). TODO: Drop this
-# when all the versions are in release-$version branches (in mkdocs format).
-function branch_for_version() {
-  if [ "$1" == "0.23" ]; then echo "mkrelease-0.23"
-  elif [ "$1" == "0.22" ]; then echo "mkrelease-0.22"
-  elif [ "$1" == "0.21" ]; then echo "mkversion2"
-  else
-    echo "No branch for version $1. Update branch_for_version function"
-    exit 1
-  fi
-}
-
+# 2) Update VERSIONS below (on main) to include the new version.
+#    Order matters :-), Most recent first.
+VERSIONS=("0.23" "0.22" "0.21")
+# 3) For now, set branches too. (This will go away when all branches are release-NN).
+BRANCHES=("mkrelease-0.23" "mkrelease-0.22" "mkrelease-0.22")
 # 4) PR the result to main.
 # 5) Party.
 
@@ -46,18 +34,18 @@ else
   mkdocs build -f mkdocs.yml -d site/development
 
   # Latest release branch to /docs
-  git clone --depth 1 -b $(branch_for_version $latest) https://github.com/$repo/docs "temp/docs-$latest"
+  git clone --depth 1 -b ${BRANCHES[0]} https://github.com/$repo/docs "temp/docs-$latest"
   pushd "temp/docs-$latest"
   KNATIVE_VERSION=$latest mkdocs build -d ../../site/docs
   popd
 
   # Previous release branches release-$version to /v$version-docs
   versionjson=""
-  for version in "${previous[@]}"
-  do
-    git clone --depth 1 -b $(branch_for_version $version) https://github.com/$repo/docs "temp/docs-$version"
-    pushd "temp/docs-$version"
+  for i in "${!previous[@]}"; do
+    version=${previous[$i]}
     versionjson+="{\"version\": \"v$version-docs\", \"title\": \"v$version\", \"aliases\": [\"\"]},"
+    git clone --depth 1 -b ${BRANCHES[$i+1]} https://github.com/$repo/docs "temp/docs-$version"
+    pushd "temp/docs-$version"
     KNATIVE_VERSION=$version VERSION_WARNING=true mkdocs build -d "../../site/v$version-docs"
     popd
   done
