@@ -18,6 +18,8 @@ BRANCHES=("mkrelease-0.23" "mkrelease-0.22" "mkrelease-0.22")
 # 4) PR the result to main.
 # 5) Party.
 
+community_branch=${COMMUNITY_BRANCH:-main}
+community_repo=${COMMUNITY_REPO:-knative}
 repo=${DOCS_REPO:-knative}
 latest=${VERSIONS[0]}
 previous=("${VERSIONS[@]:1}")
@@ -65,7 +67,7 @@ if [ -z "$SKIP_BLOG" ]; then
   # TODO(jz) Cache this and just do a pull/update/use siblings for local dev flow.
   git clone --depth 1 https://github.com/knative/website temp/website
   pushd temp/website; git submodule update --init --recursive --depth 1; popd
-  git clone --depth 1 https://github.com/knative/community temp/community
+  git clone -b ${community_branch} --depth 1 https://github.com/${community_repo}/community temp/community
 
   # Move blog files into position
   mkdir -p temp/website/content/en
