@@ -15,12 +15,12 @@ set -x
 VERSIONS=("0.23" "0.22" "0.21")
 # 3) For now, set branches too. (This will go away when all branches are release-NN).
 BRANCHES=("mkrelease-0.23" "mkrelease-0.22" "mkrelease-0.22")
+REPOS=("julz" "julz" "julz")
 # 4) PR the result to main.
 # 5) Party.
 
 community_branch=${COMMUNITY_BRANCH:-main}
 community_repo=${COMMUNITY_REPO:-knative}
-repo=${DOCS_REPO:-knative}
 latest=${VERSIONS[0]}
 previous=("${VERSIONS[@]:1}")
 
@@ -36,7 +36,7 @@ else
   mkdocs build -f mkdocs.yml -d site/development
 
   # Latest release branch to /docs
-  git clone --depth 1 -b ${BRANCHES[0]} https://github.com/$repo/docs "temp/docs-$latest"
+  git clone --depth 1 -b ${BRANCHES[0]} https://github.com/${REPOS[0]}/docs "temp/docs-$latest"
   pushd "temp/docs-$latest"
   KNATIVE_VERSION=$latest mkdocs build -d ../../site/docs
   popd
@@ -46,7 +46,7 @@ else
   for i in "${!previous[@]}"; do
     version=${previous[$i]}
     versionjson+="{\"version\": \"v$version-docs\", \"title\": \"v$version\", \"aliases\": [\"\"]},"
-    git clone --depth 1 -b ${BRANCHES[$i+1]} https://github.com/$repo/docs "temp/docs-$version"
+    git clone --depth 1 -b ${BRANCHES[$i+1]} https://github.com/${REPOS[i+1]}/docs "temp/docs-$version"
     pushd "temp/docs-$version"
     KNATIVE_VERSION=$version VERSION_WARNING=true mkdocs build -d "../../site/v$version-docs"
     popd
