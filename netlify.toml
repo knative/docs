@@ -13,8 +13,3 @@
 # inherit these settings.
 [context.deploy-preview]
   publish = "site"
-
-[context.deploy-preview.environment]
-  HUGO_VERSION = "0.83.1"
-  NODE_VERSION= "14"
-  PYTHON_VERSION = "3.9"
