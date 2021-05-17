@@ -1,0 +1,4 @@
+[build]
+publish = "site"
+command = "./hack/build-with-blog.sh"
+environment = { PYTHON_VERSION = "3.7" }
