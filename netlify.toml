@@ -1,0 +1,20 @@
+# Settings in the [build] context are global and are applied to all contexts
+# unless otherwise overridden by more specific contexts.
+[build]
+  command = "./hack/build-with-blog.sh"
+  publish = "site"
+
+[build.environment]
+  HUGO_VERSION = "0.83.1"
+  NODE_VERSION= "14"
+  PYTHON_VERSION = "3.9"
+
+# Deploy Preview context: all deploys generated from a pull/merge request will
+# inherit these settings.
+[context.deploy-preview]
+  publish = "site"
+
+[context.deploy-preview.environment]
+  HUGO_VERSION = "0.83.1"
+  NODE_VERSION= "14"
+  PYTHON_VERSION = "3.9"
