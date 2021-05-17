@@ -90,6 +90,8 @@ if [ -z "$SKIP_BLOG" ]; then
   # See https://github.com/knative/website/blob/main/scripts/processsourcefiles.sh#L125
   # For the reasoning behind all this.
   echo 'Converting all links in GitHub source files to Hugo supported relative links...'
+  # Setup postcss to be in the PATH
+  PATH=${PATH}:${PWD}/node_modules/.bin
   pushd temp/website
   # Convert relative links to support Hugo
   find . -type f -path '*/content/*.md' ! -name '*_index.md' ! -name '*index.md' ! -name '*README.md' \
@@ -105,7 +107,7 @@ if [ -z "$SKIP_BLOG" ]; then
       -exec sed -i '/](/ { /http/ !{s#\.md##g} }' {} +
 
   # Run the hugo build as normal!
-  PATH=${PATH}:${PWD}/node_modules/.bin hugo
+  hugo
   popd
 
   # Hugo builds to public/, just copy over to site/ to match up with mkdocs
