@@ -7,6 +7,13 @@ set -x
 # Also builds previous versions unless BUILD_VERSIONS=no.
 # - Results are written to site/ as normal.
 # - Run as "./hack/build-with-blog.sh serve" to run a local preview server on site/ afterwards (requires `npm install -g http-server`).
+#
+# PREREQS (Unless BUILD_BLOG=no is set):
+# 1. Install Hugo: https://www.docsy.dev/docs/getting-started/#install-hugo
+# 2. For Mac OSX: The script uses the `gnu` version of `sed`. To install `gnu-sed`, you use brew:
+#    1. Run `brew install gnu-sed`
+#    2. Add it to your `PATH`. For example, add the following line to your `~/.bash_profile`:
+#      `PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"`
 
 # Releasing a new version:
 # 1) Make a release-NN branch as normal.
