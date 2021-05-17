@@ -1,0 +1,4 @@
+mkdocs-material>=7.1
+mkdocs-exclude>=1.0
+mkdocs-macros-plugin>=0.5
+
