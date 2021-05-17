@@ -105,7 +105,7 @@ if [ -z "$SKIP_BLOG" ]; then
       -exec sed -i '/](/ { /http/ !{s#\.md##g} }' {} +
 
   # Run the hugo build as normal!
-  npx hugo
+  PATH=${PATH}:${PWD}/node_modules/.bin hugo
   popd
 
   # Hugo builds to public/, just copy over to site/ to match up with mkdocs
