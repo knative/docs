@@ -97,6 +97,6 @@ $ ./kafka_setup.sh
 A number of different examples, showing the `KafkaSource`, `KafkaChannel` and
 `KafkaBinding` can be found here:
 
-- [`KafkaSource` to `Service`](./source/README.md)
-- [`KafkaChannel` and Broker](./channel/README.md)
-- [`KafkaBinding`](./binding/README.md)
+- [`KafkaSource` to `Service`](./source/)
+- [`KafkaChannel` and Broker](./channel/)
+- [`KafkaBinding`](./binding/)

@@ -16,7 +16,7 @@ for production containers.
 
 ## Prerequisites
 
-- [Install the latest version of Knative Serving](../../../install/README.md).
+- [Install the latest version of Knative Serving](../../../install/).
 
 - Install [docker](https://www.docker.com/).
 

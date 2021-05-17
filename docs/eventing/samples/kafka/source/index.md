@@ -9,8 +9,8 @@ Tutorial on how to build and deploy a `KafkaSource` [Eventing source](../../../s
 
 ## Prerequisites
 
-- Ensure that you meet the [prerequisites listed in the Apache Kafka overview](../README.md).
-- A Kubernetes cluster with [Knative Kafka Source installed](../../../../install/README.md).
+- Ensure that you meet the [prerequisites listed in the Apache Kafka overview](../).
+- A Kubernetes cluster with [Knative Kafka Source installed](../../../../install/).
 
 ## Apache Kafka Topic (Optional)
 
