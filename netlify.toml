@@ -7,7 +7,7 @@
 [build.environment]
   HUGO_VERSION = "0.83.1"
   NODE_VERSION= "14"
-  PYTHON_VERSION = "3.9"
+  PYTHON_VERSION = "3.8"
 
 # Deploy Preview context: all deploys generated from a pull/merge request will
 # inherit these settings.
