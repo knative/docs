@@ -4,6 +4,7 @@ approvers:
 - docs-writers
 - technical-oversight-committee
 - steering-committee
+- knative-release-leads
 reviewers:
 - docs-writers
 - docs-reviewers
