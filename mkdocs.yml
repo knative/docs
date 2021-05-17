@@ -12,6 +12,7 @@ nav:
     - Getting Started:
         - Before you begin: getting-started/README.md
         - Install Knative: getting-started/install-serving-eventing.md
+        - Checking your Knative version: check-install-version.md
         - Serverless:
           - First Knative Service: getting-started/first-service.md
           - Scaling to Zero: getting-started/first-autoscale.md
@@ -22,28 +23,28 @@ nav:
           - Introducing the CloudEvents Player: getting-started/first-source.md
           - Creating your first Trigger: getting-started/first-trigger.md
         - What's Next?: getting-started/next-steps.md
-    - Administration guide:
-        - Installing Knative: install/README.md
+    - Administration guide: admin/README.md
+        - Installing Knative: admin/install/README.md
           - Installing using YAML:
-            - Prerequisites: install/prerequisites.md
-            - Install Serving with YAML: install/install-serving-with-yaml.md
-            - Install Eventing with YAML: install/install-eventing-with-yaml.md
-            - Install optional extensions: install/install-extensions.md
-            - Description Tables for YAML Files: install/installation-files.md
+            - Prerequisites: admin/install/prerequisites.md
+            - Install Serving with YAML: admin/install/install-serving-with-yaml.md
+            - Install Eventing with YAML: admin/install/install-eventing-with-yaml.md
+            - Install optional extensions: admin/install/install-extensions.md
+            - Description Tables for YAML Files: admin/install/installation-files.md
           - Knative Operator:
-            - Installing with the Operator: install/knative-with-operators.md
-            - Configuring Knative Eventing CRDs: install/operator/configuring-eventing-cr.md
-            - Configuring Knative Serving CRDs: install/operator/configuring-serving-cr.md
-          - Installing Istio for Knative: install/installing-istio.md
-          - Upgrading your installation:
-            - Checking your Knative version: install/check-install-version.md
-            - Upgrading with the Knative Operator: install/upgrade-installation-with-operator.md
-            - Upgrading with kubectl: install/upgrade-installation.md
-          - Collecting Logs with Fluentbit: install/collecting-logs/_index.md
-          - Collecting Metrics with OpenTelemetry: install/collecting-metrics/_index.md
-          - Using a Knative-based Offering: install/knative-offerings.md
+            - Installing with the Operator: admin/install/knative-with-operators.md
+            - Configuring Knative Eventing CRDs: admin/install/operator/configuring-eventing-cr.md
+            - Configuring Knative Serving CRDs: admin/install/operator/configuring-serving-cr.md
+          - Installing Istio for Knative: admin/install/installing-istio.md
+          - Collecting Logs with Fluentbit: admin/install/collecting-logs/_index.md
+          - Collecting Metrics with OpenTelemetry: admin/install/collecting-metrics/_index.md
+          - Using a Knative-based Offering: admin/install/knative-offerings.md
           - ... | install/*
-
+        - Upgrading your installation: admin/install/upgrade.md
+          - Upgrading with the Knative Operator: admin/install/upgrade/upgrade-installation-with-operator.md
+          - Upgrading with kubectl: admin/install/upgrade/upgrade-installation.md
+        - Logging: admin/collecting-logs/README.md
+        - Uninstalling Knative: admin/install/uninstall.md
     - Serving Component:
       - Overview: serving/README.md
       - Developer Topics:
