@@ -38,11 +38,12 @@ To install the Eventing component:
 
 ## Verify the installation
 
-Monitor the Knative components until all of the components show a `STATUS` of `Running`:
 
-```bash
-kubectl get pods --namespace knative-eventing
-```
+!!! success "Monitor the Knative components until all of the components show a `STATUS` of `Running` or `Completed`:"
+
+    ```{ .bash .no-copy }
+    kubectl get pods --namespace knative-eventing
+    ```
 
 
 ## Optional: Install a default channel (messaging) layer

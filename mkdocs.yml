@@ -28,11 +28,11 @@ nav:
         - Install Serving with YAML: install/install-serving-with-yaml.md
         - Install Eventing with YAML: install/install-eventing-with-yaml.md
         - Install optional extensions: install/install-extensions.md
-        - Description Table for YAML Files: install/installation-files.md
+        - Description Tables for YAML Files: install/installation-files.md
       - Knative Operator:
         - Installing with the Operator: install/knative-with-operators.md
-        - Configuring Knative Eventing CRs: install/operator/configuring-eventing-cr.md
-        - Configureing Knative Serving CRs: install/operator/configuring-serving-cr.md
+        - Configuring Knative Eventing CRDs: install/operator/configuring-eventing-cr.md
+        - Configureing Knative Serving CRDs: install/operator/configuring-serving-cr.md
       - Installing Istio for Knative: install/installing-istio.md
       - Upgrading your installation:
         - Checking your Knative version: install/check-install-version.md
@@ -40,9 +40,8 @@ nav:
         - Upgrading with kubectl: install/upgrade-installation.md
       - Collecting Logs with Fluentbit: install/collecting-logs/_index.md
       - Collecting Metrics with OpenTelemetry: install/collecting-metrics/_index.md
-      - ... | install/*
-      - ... | install/*/*
       - Using a Knative-based Offering: install/knative-offerings.md
+      - ... | install/*
 
     - Serving Component:
       - Overview: serving/README.md
