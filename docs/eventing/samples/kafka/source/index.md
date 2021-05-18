@@ -9,7 +9,7 @@ Tutorial on how to build and deploy a `KafkaSource` [Eventing source](../../../s
 
 ## Background
 
-The `KafkaSource` reads all the messages, from all partitions, and converts these Kafka Records to a CloudEvent and distributes those via HTTP to its configured `sink`.
+The `KafkaSource` reads all the messages, from all partitions, and sends those messages as CloudEvents via HTTP to its configured `sink`.
 
 *NOTE:* In case you need a more sophisticated Kafka Consumer, with direct access to specific partitions or offsets you might want to implement a _Kafka Consumer_, using one of the available Apache Kafka SDKs, to handle the messages yourself, rather than using the Knative `KafkaSource`.
 
