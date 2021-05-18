@@ -186,7 +186,7 @@ The tabs below expand to show instructions for installing each Eventing extensio
     configuration yet.
 
     To learn more about the Github source, try
-    [our sample](../eventing/sources/github-source/)
+    [our sample](../eventing/sources/github-source/README.md)
 
 
 === "Apache Camel-K Source"
@@ -198,7 +198,7 @@ The tabs below expand to show instructions for installing each Eventing extensio
     ```
 
     To learn more about the Apache Camel-K source, try
-    [our sample](../eventing/sources/apache-camel-source/)
+    [our sample](../eventing/sources/apache-camel-source/README.md)
 
 
 === "Apache Kafka Source"
@@ -210,7 +210,7 @@ The tabs below expand to show instructions for installing each Eventing extensio
     ```
 
     To learn more about the Apache Kafka source, try
-    [our sample](../eventing/sources/kafka-source/)
+    [our sample](../eventing/sources/kafka-source/README.md)
 
 
 === "GCP Sources"
@@ -223,16 +223,16 @@ The tabs below expand to show instructions for installing each Eventing extensio
     ```
 
     To learn more about the Cloud Pub/Sub source, try
-    [our sample](../eventing/sources/cloud-pubsub-source/).
+    [our sample](../eventing/sources/cloud-pubsub-source/README.md).
 
     To learn more about the Cloud Storage source, try
-    [our sample](../eventing/sources/cloud-storage-source/).
+    [our sample](../eventing/sources/cloud-storage-source/README.md).
 
     To learn more about the Cloud Scheduler source, try
-    [our sample](../eventing/sources/cloud-scheduler-source/).
+    [our sample](../eventing/sources/cloud-scheduler-source/README.md).
 
     To learn more about the Cloud Audit Logs source, try
-    [our sample](../eventing/sources/cloud-audit-logs-source/).
+    [our sample](../eventing/sources/cloud-audit-logs-source/README.md).
 
 
 === "Apache CouchDB Source"
@@ -243,7 +243,7 @@ The tabs below expand to show instructions for installing each Eventing extensio
     kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-couchdb",file="couchdb.yaml")}}
     ```
 
-    To learn more about the Apache CouchDB source, read the [documentation](https://github.com/knative-sandbox/eventing-couchdb/blob/main/source/).
+    To learn more about the Apache CouchDB source, read the [documentation](https://github.com/knative-sandbox/eventing-couchdb/blob/main/source/README.md).
 
 
 === "VMware Sources and Bindings"
@@ -255,7 +255,7 @@ The tabs below expand to show instructions for installing each Eventing extensio
     ```
 
     To learn more about the VMware sources and bindings, try
-    [our samples](https://github.com/vmware-tanzu/sources-for-knative/tree/master/samples/).
+    [our samples](https://github.com/vmware-tanzu/sources-for-knative/tree/master/samples/README.md).
 
 
 ## Next steps
