@@ -36,7 +36,6 @@ nav:
             - Configuring Knative Eventing CRDs: admin/install/operator/configuring-eventing-cr.md
             - Configuring Knative Serving CRDs: admin/install/operator/configuring-serving-cr.md
           - Installing Istio for Knative: admin/install/installing-istio.md
-          - Collecting Logs with Fluentbit: admin/install/collecting-logs/_index.md
           - Collecting Metrics with OpenTelemetry: admin/install/collecting-metrics/_index.md
           - Using a Knative-based Offering: admin/install/knative-offerings.md
           - ... | install/*
