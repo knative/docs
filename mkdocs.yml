@@ -1,5 +1,5 @@
 site_name: Knative
-site_url: https://knative.dev/docs
+site_url: https://beta-knative.netlify.app/docs
 site_description: Knative Documentation
 extra_css:
   - stylesheets/extra.css
