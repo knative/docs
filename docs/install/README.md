@@ -24,7 +24,7 @@ showlandingtoc: "false"
 # Installing Knative
 
 !!! tip
-    If you're looking for an easy way to install a local distribution of Knative for prototyping, check out our [Getting Started guide](../getting-started/getting-started.md){_blank}
+    You can install a local distribution of Knative for development use, by following the [Getting started guide](../getting-started/getting-started.md){_blank}.
 
 You can install the Serving component, Eventing component, or both on your cluster by using one of the following deployment options:
 
