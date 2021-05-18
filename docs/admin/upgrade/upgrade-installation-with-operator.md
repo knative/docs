@@ -1,19 +1,12 @@
----
-title: "Upgrading using the Knative Operator"
-weight: 21
-type: "docs"
-aliases:
-  - /docs/install/upgrade-installation-with-operator
----
-
 # Upgrading using the Knative Operator
 
 The attribute `spec.version` is the only field you need to change in the
-Serving or Eventing custom resource to perform an upgrade. You do not need to specify the version for the `patch` number, because the Knative Operator matches the latest available `patch` number, as long as you specify `major.minor` for the version. For example, you only need to specify `"0.22"` to upgrade to the 0.22 release, you do not need to specify the exact `patch` number.
+Serving or Eventing custom resource to perform an upgrade. You do not need to specify the version for the `patch` number, because the Knative Operator matches the latest available `patch` number, as long as you specify `major.minor` for the version. For example, you only need to specify `"0.23"` to upgrade to the 0.23 release, you do not need to specify the exact `patch` number.
 
-The Knative Operator supports up to the last three major releases. For example, if the current version of the Operator is 0.22, it bundles and supports the installation of Knative versions 0.19, 0.20, 0.21 and 0.22.
+The Knative Operator supports up to the last three major releases. For example, if the current version of the Operator is 0.23, it bundles and supports the installation of Knative versions 0.20, 0.21, 0.22 and 0.23.
 
-**NOTE:** In the following examples, Knative Serving custom resources are installed in the `knative-serving` namespace, and  Knative Eventing custom resources are installed in the `knative-eventing` namespace.
+!!! note
+    In the following examples, Knative Serving custom resources are installed in the `knative-serving` namespace, and  Knative Eventing custom resources are installed in the `knative-eventing` namespace.
 
 ## Performing the upgrade
 
@@ -27,24 +20,26 @@ metadata:
   name: knative-serving
   namespace: knative-serving
 spec:
-  version: "0.22"
+  version: "0.23"
 EOF
+```
 
-## Verifying the upgrade
+## Verifying an upgrade by viewing pods
 
-To confirm that your Knative components have successfully upgraded, view the status of their pods in the relevant namespaces.
-All pods will restart during the upgrade and their age will reset.
-If you upgraded Knative Serving and Eventing, enter the following commands to get information about the pods for each namespace:
+You can confirm that your Knative components have upgraded successfully, by viewing the status of the pods for the components in the relevant namespace.
+
+!!! note
+    All pods will restart during the upgrade and their age will reset.
+
+### Knative Serving
+
+Enter the following command to view information about pods in the `knative-serving` namespace:
 
 ```bash
 kubectl get pods --namespace knative-serving
 ```
 
-```bash
-kubectl get pods --namespace knative-eventing
-```
-
-These commands return something similar to:
+The command returns an output similar to the following:
 
 ```bash
 NAME                                                     READY   STATUS      RESTARTS   AGE
@@ -57,6 +52,16 @@ networking-istio-6dcbd4b5f4-mxm8q                        1/1     Running     0  
 storage-version-migration-serving-serving-0.20.0-82hjt   0/1     Completed   0          50s
 webhook-75f5d4845d-zkrdt                                 1/1     Running     0          56s
 ```
+
+### Knative Eventing
+
+Enter the following command to view information about pods in the `knative-eventing` namespace:
+
+```bash
+kubectl get pods --namespace knative-eventing
+```
+
+The command returns an output similar to the following:
 
 ```bash
 NAME                                              READY   STATUS      RESTARTS   AGE
@@ -71,31 +76,41 @@ storage-version-migration-eventing-0.20.0-fvgqf   0/1     Completed   0         
 sugar-controller-684d5cfdbb-67vsv                 1/1     Running     0          31s
 ```
 
-You can also verify the status of Knative by checking the custom resources:
+<!-- TODO: Make this a snippet for verifying all installations-->
+## Verifying an upgrade by viewing custom resources
+
+You can verify the status of a Knative component by checking that the custom resource `READY` status is `True`.
+
+### Knative Serving
 
 ```bash
 kubectl get KnativeServing knative-serving --namespace knative-serving
 ```
 
-```bash
-kubectl get KnativeEventing knative-eventing --namespace knative-eventing
-```
-
-These commands return something similar to:
+This command returns an output similar to the following:
 
 ```bash
 NAME              VERSION         READY   REASON
 knative-serving   0.20.0          True
 ```
 
+### Knative Eventing
+
+```bash
+kubectl get KnativeEventing knative-eventing --namespace knative-eventing
+```
+
+This command returns an output similar to the following:
+
 ```bash
 NAME               VERSION        READY   REASON
 knative-eventing   0.20.0         True
 ```
+<!--- END snippet-->
 
-## Rollback
+## Rollback to an earlier version
 
-If the upgrade fails, you can rollback to restore your Knative to the previous version. For example, if something goes wrong with an upgrade to 0.22, and your previous version is 0.21, you can apply the following custom resources to restore Knative Serving and Eventing to version 0.21.
+If the upgrade fails, you can rollback to restore your Knative to the previous version. For example, if something goes wrong with an upgrade to 0.23, and your previous version is 0.22, you can apply the following custom resources to restore Knative Serving and Knative Eventing to version 0.22.
 
 For Knative Serving:
 
@@ -107,8 +122,9 @@ metadata:
   name: knative-serving
   namespace: knative-serving
 spec:
-  version: "0.21"
+  version: "0.22"
 EOF
+```
 
 For Knative Eventing:
 
@@ -120,5 +136,6 @@ metadata:
   name: knative-eventing
   namespace: knative-eventing
 spec:
-  version: "0.21"
+  version: "0.22"
 EOF
+```
