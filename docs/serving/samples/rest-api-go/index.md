@@ -12,7 +12,7 @@ like `AAPL`,`AMZN`, `GOOG`, `MSFT`, etc.
 
 ## Prerequisites
 
-1. A Kubernetes cluster with [Knative Serving](../../../install/README.md) installed
+1. A Kubernetes cluster with [Knative Serving](../../../install/) installed
    and DNS configured.
 1. [Docker](https://docs.docker.com/get-started/#prepare-your-docker-environment)
    installed locally.
@@ -202,7 +202,7 @@ and then you run `curl` commands to send request with your stock symbol.
 
 ## Next Steps
 
-The [traffic splitting example](../traffic-splitting/README.md) continues from
+The [traffic splitting example](../traffic-splitting/) continues from
 here to walk you through how to create new Revisions and then use traffic
 splitting between those Revisions.
 

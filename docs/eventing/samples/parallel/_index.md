@@ -17,7 +17,7 @@ All examples require:
   - Knative Serving
 
 All examples are using the
-[default channel template](../../channels/default-channels.md).
+[default channel template](../../channels/create-default-channel.md).
 
 ## Examples
 
@@ -30,5 +30,5 @@ trivial filtering, transformation and routing of the incoming events.
 
 The examples are:
 
-- [Parallel with multiple branches and global reply](./multiple-branches/README.md)
-- [Parallel with mutually exclusive cases](./mutual-exclusivity/README.md)
+- [Parallel with multiple branches and global reply](./multiple-branches/)
+- [Parallel with mutually exclusive cases](./mutual-exclusivity/)

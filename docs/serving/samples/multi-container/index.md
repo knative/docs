@@ -10,7 +10,7 @@ A simple web app written in Go that you can use for multi container testing.
 ## Prerequisites
 
 - A Kubernetes cluster with Knative installed and DNS configured. Follow the
-  [installation instructions](../../../install/README.md) if you need to
+  [installation instructions](../../../install/) if you need to
   create one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
