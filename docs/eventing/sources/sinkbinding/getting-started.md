@@ -1,12 +1,13 @@
 ---
-title: "Create a SinkBinding"
+title: "Create a SinkBinding object"
 weight: 02
 type: "docs"
 ---
 
 ![API version v1](https://img.shields.io/badge/API_Version-v1-red?style=flat-square)
 
-This topic describes how to create a SinkBinding and connect it to a subject in your cluster.
+This topic describes how to create a SinkBinding object and connect it to a
+subject in your cluster.
 
 If you follow the examples in this topic, you will have a SinkBinding object
 that resolves a Knative Service (the sink) into a URI, and sets that URI in the
@@ -18,10 +19,10 @@ own values.
 
 ## Before you begin
 
-Before you can create a SinkBinding, you must:
+Before you can create a SinkBinding object, you must:
 
 - Have Knative Serving installed on your cluster.
-- Optional: If you want to use `kn` commands with a SinkBinding, install the `kn` CLI.
+- Optional: If you want to use `kn` commands with SinkBinding, install the `kn` CLI.
 
 
 ## Optional: Choose SinkBinding namespace selection behavior
