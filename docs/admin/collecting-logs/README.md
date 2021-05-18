@@ -37,7 +37,7 @@ The `fluent-bit-collector.yaml` file defines a StatefulSet, as well as a Kuberne
 1. Apply the configuration by entering the command:
 
     ```shell
-    kubectl apply -f https://github.com/knative/docs/raw/main/docs/install/collecting-logs/fluent-bit-collector.yaml
+    kubectl apply -f https://github.com/knative/docs/raw/main/docs/admin/install/collecting-logs/fluent-bit-collector.yaml
     ```
     The default configuration will classify logs into:
 
