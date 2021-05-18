@@ -12,7 +12,6 @@ nav:
     - Getting Started:
         - Before you begin: getting-started/README.md
         - Install Knative: getting-started/install-serving-eventing.md
-        - Checking your Knative version: check-install-version.md
         - Serverless:
           - First Knative Service: getting-started/first-service.md
           - Scaling to Zero: getting-started/first-autoscale.md
@@ -23,8 +22,10 @@ nav:
           - Introducing the CloudEvents Player: getting-started/first-source.md
           - Creating your first Trigger: getting-started/first-trigger.md
         - What's Next?: getting-started/next-steps.md
-    - Administration guide: admin/README.md
-        - Installing Knative: admin/install/README.md
+    - Administration guide:
+        - Overview: admin/README.md
+        - Installing Knative:
+          - Overview: admin/install/README.md
           - Installing using YAML:
             - Prerequisites: admin/install/prerequisites.md
             - Install Serving with YAML: admin/install/install-serving-with-yaml.md
@@ -39,7 +40,9 @@ nav:
           - Collecting Metrics with OpenTelemetry: admin/install/collecting-metrics/_index.md
           - Using a Knative-based Offering: admin/install/knative-offerings.md
           - ... | install/*
-        - Upgrading your installation: admin/install/upgrade.md
+        - Checking your Knative version: check-install-version.md
+        - Upgrading your installation:
+          - Overview: admin/install/upgrade.md
           - Upgrading with the Knative Operator: admin/install/upgrade/upgrade-installation-with-operator.md
           - Upgrading with kubectl: admin/install/upgrade/upgrade-installation.md
         - Logging: admin/collecting-logs/README.md
