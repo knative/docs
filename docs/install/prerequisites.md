@@ -8,7 +8,7 @@ showlandingtoc: "false"
 # Prerequisites
 
 !!! tip
-    If you're installing Knative for the first time, a better place to start may be [Getting Started](../getting-started/getting-started.md).
+    If you're installing Knative for the first time, a better place to start may be [Getting Started](../getting-started/).
 
 
 Before installing Knative, you must meet the following prerequisites:
