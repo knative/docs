@@ -42,7 +42,7 @@ nav:
           - ... | install/*
         - Checking your Knative version: check-install-version.md
         - Upgrading your installation:
-          - Overview: admin/install/_index.md
+          - Overview: admin/upgrade/README.md
           - Upgrading with the Knative Operator: admin/upgrade/upgrade-installation-with-operator.md
           - Upgrading with kubectl: admin/upgrade/upgrade-installation.md
         - Logging: admin/collecting-logs/README.md
