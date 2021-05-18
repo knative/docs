@@ -142,7 +142,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java
    Example:
 
    ```shell
-   http://helloworld-java.default.1.2.3.4.xip.io
+   http://helloworld-java.default.1.2.3.4.sslip.io
    ```
    {{< /tab >}}
    {{% tab name="kubectl" %}}
@@ -154,7 +154,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java
 
    ```shell
    NAME                      URL
-   helloworld-java    http://helloworld-java.default.1.2.3.4.xip.io
+   helloworld-java    http://helloworld-java.default.1.2.3.4.sslip.io
    ```
 
    {{< /tab >}}
@@ -166,7 +166,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java
    Example:
 
    ```shell
-   curl http://helloworld-java.default.1.2.3.4.xip.io
+   curl http://helloworld-java.default.1.2.3.4.sslip.io
    Hello SparkJava Sample v1!
    # Even easier with kn:
    curl $(kn service describe helloworld-java -o url)

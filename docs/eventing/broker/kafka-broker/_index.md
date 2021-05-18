@@ -319,8 +319,8 @@ spec:
 
 The supported consumer delivery guarantees are:
 
-* `unordered`: Unordered consumer is a non-blocking consumer that potentially delivers messages unordered, while preserving proper offset management.
-* `ordered`: Ordered consumer is a per-partition blocking consumer that delivers messages in order.
+* `unordered`:  An unordered consumer is a non-blocking consumer that delivers messages unordered, while preserving proper offset management.
+* `ordered`: An ordered consumer is a per-partition blocking consumer that waits for a successful response from the CloudEvent subscriber before it delivers the next message of the partition.
 
 `unordered` is the default ordering guarantee, while **`ordered` is considered unstable, use with caution**.
 

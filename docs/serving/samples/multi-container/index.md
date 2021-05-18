@@ -244,14 +244,14 @@ After you have modified the sample code files you can build and deploy the sampl
 
    ```shell
     NAME                URL
-    multi-container       http://multi-container.default.1.2.3.4.xip.io
+    multi-container       http://multi-container.default.1.2.3.4.sslip.io
    ```
 
 1. Now you can make a request to your app and see the result. Replace
    the URL below with the URL returned in the previous command.
 
    ```shell
-   curl http://multi-container.default.1.2.3.4.xip.io
+   curl http://multi-container.default.1.2.3.4.sslip.io
    Yay!! multi-container works
    ```
 

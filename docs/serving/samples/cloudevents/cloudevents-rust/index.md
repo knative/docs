@@ -84,7 +84,7 @@ Get the URL for your Service with:
 ```shell
 $ kubectl get ksvc
 NAME                URL                                            LATESTCREATED             LATESTREADY               READY   REASON
-cloudevents-rust    http://cloudevents-rust.xip.io                 cloudevents-rust-vl8fq    cloudevents-rust-vl8fq    True
+cloudevents-rust    http://cloudevents-rust.sslip.io                 cloudevents-rust-vl8fq    cloudevents-rust-vl8fq    True
 ```
 
 Then send a CloudEvent to it with:
@@ -98,7 +98,7 @@ $ curl \
     -H "ce-type: curl.demo"  \
     -H "ce-id: 123-abc"  \
     -d '{"name":"Dave"}' \
-    http://cloudevents-rust.xip.io
+    http://cloudevents-rust.sslip.io
 ```
 
 You can also send CloudEvents spawning a temporary curl pod in your cluster with:

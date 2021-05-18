@@ -108,7 +108,7 @@ Replace `{username}` with your Docker Hub user name and run the command:
 ```shell
 docker run --rm {username}/grpc-ping-go \
   /client \
-  -server_addr="grpc-ping.default.1.2.3.4.xip.io:80" \
+  -server_addr="grpc-ping.default.1.2.3.4.sslip.io:80" \
   -insecure
 ```
 

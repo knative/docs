@@ -261,14 +261,14 @@ To verify that your sample app has been successfully deployed:
 
    ```shell
    NAME                          URL
-   helloworld-java-micronaut     http://helloworld-java-micronaut.default.1.2.3.4.xip.io
+   helloworld-java-micronaut     http://helloworld-java-micronaut.default.1.2.3.4.sslip.io
    ```
 
 1. Now you can make a request to your app and see the result. Replace
    the URL below with the URL returned in the previous command.
 
    ```shell
-   curl http://helloworld-java-micronaut.default.1.2.3.4.xip.io
+   curl http://helloworld-java-micronaut.default.1.2.3.4.sslip.io
    ```
 
    Example result:

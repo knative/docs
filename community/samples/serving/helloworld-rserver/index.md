@@ -140,20 +140,20 @@ folder) you're ready to build and deploy the sample app.
 
    ```shell
    NAME                URL
-   helloworld-r    http://helloworld-r.default.1.2.3.4.xip.io
+   helloworld-r    http://helloworld-r.default.1.2.3.4.sslip.io
    ```
 
 1. Now you can make a request to your app and see the result. Replace
    the URL below with the URL returned in the previous command.
 
    ```shell
-   curl http://helloworld-rserver.default.1.2.3.4.xip.io
+   curl http://helloworld-rserver.default.1.2.3.4.sslip.io
    ```
 
    Example:
 
    ```shell
-   curl http://helloworld-rserver.default.1.2.3.4.xip.io
+   curl http://helloworld-rserver.default.1.2.3.4.sslip.io
    [1] "Hello R Sample v1!"
    ```
 

@@ -90,7 +90,7 @@ Get the URL for your Service with:
 ```shell
 $ kubectl get ksvc
 NAME                 URL                                                LATESTCREATED              LATESTREADY                READY   REASON
-cloudevents-nodejs   http://cloudevents-nodejs.default.1.2.3.4.xip.io   cloudevents-nodejs-ss5pj   cloudevents-nodejs-ss5pj   True
+cloudevents-nodejs   http://cloudevents-nodejs.default.1.2.3.4.sslip.io   cloudevents-nodejs-ss5pj   cloudevents-nodejs-ss5pj   True
 ```
 
 Then send a cloud event to it with:
@@ -103,7 +103,7 @@ $ curl -X POST \
     -H "ce-type: curl.demo"  \
     -H "ce-id: 123-abc"  \
     -d '{"name":"Dave"}' \
-    http://cloudevents-nodejs.default.1.2.3.4.xip.io
+    http://cloudevents-nodejs.default.1.2.3.4.sslip.io
 ```
 
 You will get back:

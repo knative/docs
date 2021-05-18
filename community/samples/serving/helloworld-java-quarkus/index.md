@@ -255,14 +255,14 @@ folder) you're ready to build and deploy the sample app.
    kubectl get ksvc helloworld-java-quarkus
 
    NAME                     URL
-   helloworld-java-quarkus  http://helloworld-java-quarkus.default.1.2.3.4.xip.io
+   helloworld-java-quarkus  http://helloworld-java-quarkus.default.1.2.3.4.sslip.io
    ```
 
 1. Now you can make a request to your app and see the result. Replace
    the URL below with the URL returned in the previous command.
 
    ```shell
-   curl http://helloworld-java-quarkus.default.1.2.3.4.xip.io
+   curl http://helloworld-java-quarkus.default.1.2.3.4.sslip.io
 
    Namaste Knative World!
    ```

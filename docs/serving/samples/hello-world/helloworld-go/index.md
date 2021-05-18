@@ -170,7 +170,7 @@ You will need:
 
       ```shell
        NAME                URL
-       helloworld-go       http://helloworld-go.default.1.2.3.4.xip.io
+       helloworld-go       http://helloworld-go.default.1.2.3.4.sslip.io
       ```
 
    {{< /tab >}}
@@ -196,7 +196,7 @@ You will need:
     16.237s Ready to serve.
 
    Service 'helloworld-go' created to latest revision 'helloworld-go-jjzgd-1' is available at URL:
-   http://helloworld-go.default.1.2.3.4.xip.io
+   http://helloworld-go.default.1.2.3.4.sslip.io
    ```
 
    You can then access your service through the resulting URL.
@@ -211,7 +211,7 @@ You will need:
    the URL below with the URL returned in the previous command.
 
    ```shell
-   curl http://helloworld-go.default.1.2.3.4.xip.io
+   curl http://helloworld-go.default.1.2.3.4.sslip.io
    Hello Go Sample v1!
    ```
 

@@ -443,9 +443,9 @@ The following commands install Kourier and enable its Knative integration.
 
       <!-- This indentation is important for things to render properly. -->
 
-   {{< tabs name="serving_dns" >}} {{% tab name="Magic DNS (xip.io)" %}} We ship
+   {{< tabs name="serving_dns" >}} {{% tab name="Magic DNS (sslip.io)" %}} We ship
    a simple Kubernetes Job called "default domain" that will (see caveats)
-   configure Knative Serving to use <a href="http://xip.io">xip.io</a> as the
+   configure Knative Serving to use <a href="http://sslip.io">sslip.io</a> as the
    default DNS suffix.
 
 ```bash
@@ -496,7 +496,7 @@ spec:
 
 {{% tab name="Temporary DNS" %}} If you are using `curl` to access the sample
 applications, or your own Knative app, and are unable to use the "Magic DNS
-(xip.io)" or "Real DNS" methods, there is a temporary approach. This is useful
+(sslip.io)" or "Real DNS" methods, there is a temporary approach. This is useful
 for those who wish to evaluate Knative without altering their DNS configuration,
 as per the "Real DNS" method, or cannot use the "Magic DNS" method due to using,
 for example, minikube locally or IPv6 clusters.
