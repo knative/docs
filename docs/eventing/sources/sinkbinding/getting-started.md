@@ -8,6 +8,13 @@ type: "docs"
 
 This topic describes how to create a SinkBinding and connect it to a subject in your cluster.
 
+If you follow the examples in this topic, you will have a SinkBinding object
+that resolves a Knative Service (the sink) into a URI, and sets that URI in the
+environment variable `K_SINK` in new jobs from a cron job (the subject).
+The SinkBinding updates `K_SINK` if the URI changes.
+
+If you have an existing subject and sink, you can replace the examples with your
+own values.
 
 ## Before you begin
 
@@ -115,8 +122,10 @@ You can use any PodSpecable resource in your cluster, for example:
 - `StatefulSet`
 - `Service.serving.knative.dev`
 
-If you do not have an existing PodSpecable subject that you want to use for the
-SinkBinding, you can use the following sample to create a `CronJob` object as the subject.
+If you do not have an existing PodSpecable subject that you want to use, you can
+use the following sample to create a `CronJob` object as the subject.
+The following cron job makes a single cloud event that targets `K_SINK` and adds
+any extra overrides given by `CE_OVERRIDES`.
 
 1. Copy the sample YAML below into a `cronjob.yaml` file:
 
