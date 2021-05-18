@@ -26,8 +26,8 @@ nav:
         - Overview: admin/README.md
         - Installing Knative:
           - Overview: admin/install/README.md
+          - Prerequisites: admin/install/prerequisites.md
           - Installing using YAML:
-            - Prerequisites: admin/install/prerequisites.md
             - Install Serving with YAML: admin/install/install-serving-with-yaml.md
             - Install Eventing with YAML: admin/install/install-eventing-with-yaml.md
             - Install optional extensions: admin/install/install-extensions.md
