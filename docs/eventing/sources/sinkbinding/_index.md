@@ -3,9 +3,8 @@ title: "SinkBinding"
 weight: 01
 type: "docs"
 aliases:
-  - /docs/eventing/samples/sinkbinding/index
-  - /docs/eventing/samples/sinkbinding/README
-  - /docs/eventing/sources/sinkbinding.md
+  - /docs/eventing/samples/sinkbinding/
+  - /docs/eventing/sources/sinkbinding
 ---
 
 ![API version v1](https://img.shields.io/badge/API_Version-v1-red?style=flat-square)
