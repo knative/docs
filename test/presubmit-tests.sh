@@ -24,7 +24,7 @@ DISABLE_MD_LINK_CHECK=1
 
 source $(dirname $0)/../vendor/knative.dev/hack/presubmit-tests.sh
 
-function build_test() {
+function build_tests() {
   local failed=0
   # Run verify-codegen check
   if [[ -f ./hack/verify-codegen.sh ]]; then
