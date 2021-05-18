@@ -33,6 +33,6 @@ event sink. Because of this, the application code does not need to interact
 directly with the Kubernetes API to locate the event destination.
 These environment variables are as follows:
 
-- `K_SINK` - The url of the resolved event consumer.
-- `K_CE_OVERRIDES` - A json object that specifies overrides to the outbound
+- `K_SINK` - The URL of the resolved event consumer. <!--could this say sink? -->
+- `K_CE_OVERRIDES` - A JSON object that specifies overrides to the outbound
   event.
