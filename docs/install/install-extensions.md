@@ -186,7 +186,7 @@ The tabs below expand to show instructions for installing each Eventing extensio
     configuration yet.
 
     To learn more about the Github source, try
-    [our sample](../eventing/samples/github-source/README.md)
+    [our sample](../eventing/sources/github-source/README.md)
 
 
 === "Apache Camel-K Source"
@@ -198,7 +198,7 @@ The tabs below expand to show instructions for installing each Eventing extensio
     ```
 
     To learn more about the Apache Camel-K source, try
-    [our sample](../eventing/samples/apache-camel-source/README.md)
+    [our sample](../eventing/sources/apache-camel-source/README.md)
 
 
 === "Apache Kafka Source"
@@ -210,7 +210,7 @@ The tabs below expand to show instructions for installing each Eventing extensio
     ```
 
     To learn more about the Apache Kafka source, try
-    [our sample](../eventing/samples/kafka/source/README.md)
+    [our sample](../eventing/sources/kafka-source/README.md)
 
 
 === "GCP Sources"
@@ -223,16 +223,16 @@ The tabs below expand to show instructions for installing each Eventing extensio
     ```
 
     To learn more about the Cloud Pub/Sub source, try
-    [our sample](../eventing/samples/cloud-pubsub-source/README.md).
+    [our sample](../eventing/sources/cloud-pubsub-source/README.md).
 
     To learn more about the Cloud Storage source, try
-    [our sample](../eventing/samples/cloud-storage-source/README.md).
+    [our sample](../eventing/sources/cloud-storage-source/README.md).
 
     To learn more about the Cloud Scheduler source, try
-    [our sample](../eventing/samples/cloud-scheduler-source/README.md).
+    [our sample](../eventing/sources/cloud-scheduler-source/README.md).
 
     To learn more about the Cloud Audit Logs source, try
-    [our sample](../eventing/samples/cloud-audit-logs-source/README.md).
+    [our sample](../eventing/sources/cloud-audit-logs-source/README.md).
 
 
 === "Apache CouchDB Source"

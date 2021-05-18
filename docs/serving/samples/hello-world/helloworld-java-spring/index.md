@@ -133,7 +133,7 @@ For additional information on multi-stage docker builds for Java see [Creating S
 
 After the build has completed and the container is pushed to Docker Hub, you can deploy the app into your cluster.
 
-   
+
 === "yaml"
 
        1. Create a new file, `service.yaml` and copy the following service definition
@@ -190,7 +190,7 @@ After the build has completed and the container is pushed to Docker Hub, you can
 
 1. Find the domain URL for your service:
 
-   
+
 === "kubectl"
        ```shell
        kubectl get ksvc helloworld-java-spring  --output=custom-columns=NAME:.metadata.name,URL:.status.url
@@ -248,6 +248,3 @@ To remove the sample app from your cluster, delete the service.
     ```shell
     kn service delete helloworld-java-spring
     ```
-
-
-

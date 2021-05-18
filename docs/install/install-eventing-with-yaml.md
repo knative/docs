@@ -38,11 +38,12 @@ To install the Eventing component:
 
 ## Verify the installation
 
-Monitor the Knative components until all of the components show a `STATUS` of `Running`:
 
-```bash
-kubectl get pods --namespace knative-eventing
-```
+!!! success "Monitor the Knative components until all of the components show a `STATUS` of `Running` or `Completed`:"
+
+    ```{ .bash .no-copy }
+    kubectl get pods --namespace knative-eventing
+    ```
 
 
 ## Optional: Install a default channel (messaging) layer
@@ -131,7 +132,7 @@ Follow the procedure for the broker of your choice:
         kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-kafka-broker",file="eventing-kafka-broker.yaml")}}
         ```
 
-    For more information, see the [Kafka broker](./../eventing/broker/kafka-broker.md) documentation.
+    For more information, see the [Kafka broker](./../eventing/broker/kafka-broker/) documentation.
 
 === "MT-Channel-based"
 

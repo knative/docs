@@ -33,7 +33,7 @@ To install the serving component:
 
     !!! info
         For information about the YAML files in the Knative Serving and Eventing releases, see
-        [Installation files](./installation-files.md).
+        [Description Tables for YAML Files](./installation-files.md).
 
 
 ## Install a networking layer
@@ -253,7 +253,7 @@ Follow the procedure for the networking layer of your choice:
 
 !!! success "Monitor the Knative components until all of the components show a `STATUS` of `Running` or `Completed`:"
 
-    ```bash
+    ```{ .bash .no-copy }
     kubectl get pods --namespace knative-serving
     ```
 

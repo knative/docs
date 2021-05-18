@@ -123,7 +123,7 @@ location. This section is only needed when the registry images do not match the 
 
 - `imagePullSecrets`: a list of Secret names used when pulling Knative container images. The Secrets
 must be created in the same namespace as the Knative Serving Deployments. See [deploying images
-from a private container registry](./../../serving/deploying/private-registry.md) for configuration details.
+from a private container registry](./../../serving/deploying-from-private-registry/README.md) for configuration details.
 
 
 ### Download images in a predefined format without secrets:

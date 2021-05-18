@@ -23,14 +23,27 @@ nav:
           - Creating your first Trigger: getting-started/first-trigger.md
         - What's Next?: getting-started/next-steps.md
     - Installing Knative:
-        - Installing using YAML:
-          - Prerequisites: install/prerequisites.md
-          - Install Serving with YAML: install/install-serving-with-yaml.md
-          - Install Eventing with YAML: install/install-eventing-with-yaml.md
-          - Install optional extensions: install/install-extensions.md
-          - Installation Files: install/installation-files.md
+      - Overview: install/README.md
+      - Installing using YAML:
+        - Prerequisites: install/prerequisites.md
+        - Install Serving with YAML: install/install-serving-with-yaml.md
+        - Install Eventing with YAML: install/install-eventing-with-yaml.md
+        - Install optional extensions: install/install-extensions.md
+        - Description Tables for YAML Files: install/installation-files.md
+      - Knative Operator:
         - Installing with the Operator: install/knative-with-operators.md
-        - Using a Knative-based Offering: install/knative-offerings.md
+        - Configuring Knative Eventing CRDs: install/operator/configuring-eventing-cr.md
+        - Configureing Knative Serving CRDs: install/operator/configuring-serving-cr.md
+      - Installing Istio for Knative: install/installing-istio.md
+      - Upgrading your installation:
+        - Checking your Knative version: install/check-install-version.md
+        - Upgrading with the Knative Operator: install/upgrade-installation-with-operator.md
+        - Upgrading with kubectl: install/upgrade-installation.md
+      - Collecting Logs with Fluentbit: install/collecting-logs/_index.md
+      - Collecting Metrics with OpenTelemetry: install/collecting-metrics/_index.md
+      - Using a Knative-based Offering: install/knative-offerings.md
+      - ... | install/*
+
     - Serving Component:
       - Overview: serving/README.md
       - Developer Topics:
@@ -38,7 +51,7 @@ nav:
           - Overview: serving/services/README.md
           - Creating a service: serving/services/creating-services.md
           - Configuring private services: serving/services/private-services.md
-        - Deploying from private registries: serving/deploying/README.md
+        - Deploying from private registries: serving/deploying-from-private-registry/README.md
         - Tag resolution: serving/tag-resolution.md
         - Gradually rolling out latest Revisions: serving/rolling-out-latest-revision.md
         - Creating and using Subroutes: serving/using-subroutes.md
@@ -108,6 +121,7 @@ nav:
         - Secrets - Go: serving/samples/secrets-go/index.md
         - Tag Header Based Routing: serving/samples/tag-header-based-routing/index.md
         - Traffic splitting: serving/samples/traffic-splitting/index.md
+        - ... | *.md
     - Eventing Component:
       - Overview: eventing/README.md
       - Getting started: eventing/getting-started.md
@@ -119,7 +133,7 @@ nav:
         - ContainerSource: eventing/sources/containersource.md
         - PingSource: eventing/sources/ping-source/index.md
         - Sink binding: eventing/sources/sinkbinding.md
-        - Camel source: eventing/sources/apache-camel-source/index.md
+        - Camel source: eventing/sources/apache-camel-source/README.md
       - Creating an event source:
         - Overview: eventing/sources/creating-event-sources/README.md
         - Writing an event source using Javascript: eventing/sources/creating-event-sources/writing-event-source-easy-way/README.md
@@ -168,7 +182,7 @@ nav:
       - Metrics API: eventing/metrics.md
       - Code samples:
         - Overview: eventing/samples/README.md
-        - Container source: eventing/samples/container-source/index.md
+        - Container source: eventing/sources/container-source/README.md
         - Hello World:
           - Overview: eventing/samples/helloworld/README.md
           - GO: eventing/samples/helloworld/helloworld-go/README.md
@@ -176,19 +190,20 @@ nav:
         - Apache Kafka:
           - Overview: eventing/samples/kafka/README.md
           - Binding Example: eventing/samples/kafka/binding/index.md
-          - Channel Example: eventing/samples/kafka/channel/index.md
-          - Source Example: eventing/samples/kafka/source/index.md
+          - Channel Example: eventing/samples/kafka/channel/README.md
+          - Source Example: eventing/sources/kafka-source/README.md
         - Parallel:
           - Overview: eventing/samples/parallel/README.md
           - Multiple Cases: eventing/samples/parallel/multiple-branches/README.md
           - Mutual Exclusivity: eventing/samples/parallel/mutual-exclusivity/README.md
-        - CloudAuditLogsSource: eventing/samples/cloud-audit-logs-source/index.md
-        - CloudPubSubSource: eventing/samples/cloud-pubsub-source/index.md
-        - CloudSchedulerSource: eventing/samples/cloud-scheduler-source/index.md
-        - CloudStorageSource: eventing/samples/cloud-storage-source/index.md
-        - GitHub source: eventing/samples/github-source/index.md
-        - GitLab source: eventing/samples/gitlab-source/index.md
+        - CloudAuditLogsSource: eventing/sources/cloud-audit-logs-source/README.md
+        - CloudPubSubSource: eventing/sources/cloud-pubsub-source/README.md
+        - CloudSchedulerSource: eventing/sources/cloud-scheduler-source/README.md
+        - CloudStorageSource: eventing/sources/cloud-storage-source/README.md
+        - GitHub source: eventing/sources/github-source/README.md
+        - GitLab source: eventing/sources/gitlab-source/README.md
         - IoT core: eventing/samples/iot-core/index.md
+        - ... | *
     - Reference:
       - Serving: reference/api/serving.md
       - Eventing: reference/api/eventing/eventing.md
@@ -247,6 +262,11 @@ markdown_extensions:
   - toc:
       permalink: true
 
+plugins:
+    - awesome-pages:
+        filename: .index
+        collapse_single_pages: true
+        strict: false
 
 copyright: "Copyright © 2021 The Knative Authors"
 
