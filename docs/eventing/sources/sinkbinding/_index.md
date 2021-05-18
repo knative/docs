@@ -12,9 +12,7 @@ aliases:
 The `SinkBinding` custom object supports decoupling event production from
 delivery addressing.
 
-You can use a SinkBinding to direct a subject to an event sink. The _subject_
-is a Kubernetes resource that embeds a `PodSpec` template and produces events.
-The _event sink_ is an addressable Kubernetes object that can receive events.
+You can use sink binding to direct a subject to an event sink. A _subject_ is a Kubernetes resource that embeds a `PodSpec` template and produces events. An _event sink_ is an addressable Kubernetes object that can receive events.
 
 To create new subjects you can use any addressable Kubernetes resource, such as:
 
