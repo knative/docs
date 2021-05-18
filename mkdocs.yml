@@ -10,7 +10,8 @@ edit_uri: edit/main/docs
 nav:
     - Home: index.md
     - Getting Started:
-        - Before you begin: getting-started/getting-started.md
+        - Before you begin: getting-started/README.md
+        - Install Knative: getting-started/install-serving-eventing.md
         - Serverless:
           - First Knative Service: getting-started/first-service.md
           - Scaling to Zero: getting-started/first-autoscale.md
