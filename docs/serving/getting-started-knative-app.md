@@ -16,7 +16,7 @@ using cURL requests.
 
 You need:
 
-- A Kubernetes cluster with [Knative Serving installed](../install/README.md).
+- A Kubernetes cluster with [Knative Serving installed](../install/).
 - An image of the app that you'd like to deploy available on a container registry. The image of the sample app used in this guide is available on
   Google Container Registry.
 
@@ -35,7 +35,7 @@ To deploy a local container image, you need to disable image tag resolution by r
 docker tag local-image dev.local/local-image
 ```
 
-[Learn more about image tag resolution.](./tag-resolution.md)
+[Learn more about image tag resolution.](./tag-resolution)
 
 The Hello World sample app reads in an `env` variable, `TARGET`, then prints "Hello World: \${TARGET}!". If `TARGET` isn't defined, it will print "NOT SPECIFIED".
 
@@ -43,7 +43,7 @@ The Hello World sample app reads in an `env` variable, `TARGET`, then prints "He
 
 The easiest way to deploy a Knative Service is by using the Knative CLI [kn](https://github.com/knative/client).
 
-**Prerequisite:** Install the `kn` binary as described in [Installing the Knative CLI](../install/install-kn.md)
+**Prerequisite:** Install the `kn` binary as described in [Installing the Knative CLI](../install/install-kn)
 
 It will create a corresponding resource description internally as when using a YAML file directly.
 `kn` provides a command-line mechanism for managing Services.
@@ -71,12 +71,12 @@ Now that you have deployed the service, Knative will perform the following steps
 ## Creating your Deployment with YAML
 
 Alternatively, to deploy an app using Knative, you can also create the configuration in a YAML file that defines a service. For more information about the Service object, see the
-[Resource Types documentation](https://github.com/knative/serving/blob/main/docs/spec/overview.md#service).
+[Resource Types documentation](https://github.com/knative/serving/blob/main/docs/spec/overview#service).
 
 This configuration file specifies metadata about the application, points to the
 hosted image of the app for deployment, and allows the deployment to be
 configured. For more information about what configuration options are available,
-see the [Serving spec documentation](https://github.com/knative/serving/blob/main/docs/spec/spec.md).
+see the [Serving spec documentation](https://github.com/knative/serving/blob/main/docs/spec/spec).
 
 To create the same application as in the previous `kn` example, create a new file named `service.yaml`, then copy and paste the following content into it:
 
@@ -120,7 +120,7 @@ To see if your app has been deployed successfully, you need the URL created by K
 
 1. To find the URL for your service, use either `kn` or `kubectl`
 
-  
+
 === "kn"
 
        ```shell
@@ -133,7 +133,7 @@ To see if your app has been deployed successfully, you need the URL created by K
        Name        helloworld-go
        Namespace   default
        Age         12m
-       URL         http://helloworld-go.default.34.83.80.117.xip.io
+       URL         http://helloworld-go.default.34.83.80.117.sslip.io
 
        Revisions:
          100%  @latest (helloworld-go-dyqsj-1) [1] (39s)
@@ -157,7 +157,7 @@ To see if your app has been deployed successfully, you need the URL created by K
 
        ```shell
        NAME            URL                                                LATESTCREATED         LATESTREADY           READY   REASON
-       helloworld-go   http://helloworld-go.default.34.83.80.117.xip.io   helloworld-go-96dtk   helloworld-go-96dtk   True
+       helloworld-go   http://helloworld-go.default.34.83.80.117.sslip.io   helloworld-go-96dtk   helloworld-go-96dtk   True
        ```
 
 
@@ -165,7 +165,7 @@ To see if your app has been deployed successfully, you need the URL created by K
 
 
    > Note: If your URL includes `example.com` then consult the setup instructions for
-   > configuring DNS (e.g. with `xip.io`), or [using a Custom Domain](../serving/using-a-custom-domain.md).
+   > configuring DNS (e.g. with `sslip.io`), or [using a Custom Domain](../serving/using-a-custom-domain).
 
    If you changed the name from `helloworld-go` to something else when creating
    the `.yaml` file, replace `helloworld-go` in the above commands with the name you entered.
@@ -174,7 +174,7 @@ To see if your app has been deployed successfully, you need the URL created by K
    the URL with the one returned by the command in the previous step.
 
    ```shell
-   # curl http://helloworld-go.default.34.83.80.117.xip.io
+   # curl http://helloworld-go.default.34.83.80.117.sslip.io
    Hello World: Go Sample v1!
    ```
 

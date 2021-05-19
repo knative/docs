@@ -23,7 +23,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-php
 ## Before you begin
 
 - A Kubernetes cluster with Knative installed and DNS configured. Follow the
-  [installation instructions](../../../../install/README.md) if you need to
+  [installation instructions](../../../../install/) if you need to
   create one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
@@ -193,7 +193,7 @@ folder) you're ready to build and deploy the sample app.
    the URL below with the URL returned in the previous command.
 
    ```shell
-   curl http://helloworld-php.default.1.2.3.4.xip.io
+   curl http://helloworld-php.default.1.2.3.4.sslip.io
    Hello PHP Sample v1!
    ```
 
@@ -212,6 +212,3 @@ To remove the sample app from your cluster, delete the service record.
     ```shell
     kn service delete helloworld-php
     ```
-
-
-

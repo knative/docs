@@ -26,7 +26,7 @@ kubectl create namespace event-example
 
 ## Adding a broker to the namespace
 
-The [broker](./broker/README.md#broker) allows you to route events to different event sinks or consumers.
+The [broker](./broker) allows you to route events to different event sinks or consumers.
 
 1. Add a broker named `default` to your namespace by entering the following command:
 
@@ -54,7 +54,7 @@ The [broker](./broker/README.md#broker) allows you to route events to different 
     ```
 
     If `READY` is `False`, wait a few moments and then run the command again.
-    If you continue to receive the `False` status, see the [Debugging Guide](./debugging/README.md) to troubleshoot the issue.
+    If you continue to receive the `False` status, see the [Debugging Guide](./debugging/) to troubleshoot the issue.
 
 ## Creating event consumers
 
@@ -150,11 +150,11 @@ demonstrate how you can configure your event producers to target a specific cons
      goodbye-display   1/1     1            1           16s
      ```
    The number of replicas in the **READY** column should match the number of replicas in the **AVAILABLE** column.
-   If the numbers do not match, see the [Debugging Guide](./debugging/README.md) to troubleshoot the issue.
+   If the numbers do not match, see the [Debugging Guide](./debugging/) to troubleshoot the issue.
 
 ## Creating triggers
 
-A [trigger](./broker/README.md#trigger) defines the events that each event consumer receives.
+A [trigger](./broker/triggers) defines the events that each event consumer receives.
 Brokers use triggers to forward events to the correct consumers.
 Each trigger can specify a filter that enables selection of relevant events based on the Cloud Event context attributes.
 
@@ -218,7 +218,7 @@ Each trigger can specify a filter that enables selection of relevant events base
 
     The `SUBSCRIBER_URI` has a value similar to `triggerName.namespaceName.svc.cluster.local`.
     The exact value depends on the broker implementation.
-    If this value looks incorrect, see the [Debugging Guide](./debugging/README.md) to troubleshoot the issue.
+    If this value looks incorrect, see the [Debugging Guide](./debugging/) to troubleshoot the issue.
 
 ## Creating a pod as an event producer
 

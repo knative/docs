@@ -18,7 +18,7 @@ for production containers.
 
 ## Prerequisites
 
-- [Install the latest version of Knative Serving](../../../install/README.md).
+- [Install the latest version of Knative Serving](../../../install/).
 
 - Install [docker](https://www.docker.com/).
 
@@ -110,7 +110,7 @@ Replace `{username}` with your Docker Hub user name and run the command:
 ```shell
 docker run --rm {username}/grpc-ping-go \
   /client \
-  -server_addr="grpc-ping.default.1.2.3.4.xip.io:80" \
+  -server_addr="grpc-ping.default.1.2.3.4.sslip.io:80" \
   -insecure
 ```
 

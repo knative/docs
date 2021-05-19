@@ -13,9 +13,9 @@ default channel configuration in Knative Eventing.
 ## Prerequisites
 
 - Ensure that you meet the
-  [prerequisites listed in the Apache Kafka overview](../README.md).
+  [prerequisites listed in the Apache Kafka overview](../).
 - A Kubernetes cluster with
-  [Knative Kafka Channel installed](../../../../install/README.md).
+  [Knative Kafka Channel installed](../../../../install/).
 
 ## Creating a `KafkaChannel` channel CRD
 

@@ -10,7 +10,7 @@ type: "docs"
 A simple web app written in Python that you can use to test knative eventing. It shows how to consume a [CloudEvent](https://cloudevents.io/) in Knative eventing, and optionally how to respond back with another CloudEvent in the http response, by adding the Cloud Eventing headers outlined in the Cloud Events standard definition.
 
 We will deploy the app as a [Kubernetes Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) along with a [Kubernetes Service](https://kubernetes.io/docs/concepts/services-networking/service/).
-However, you can also deploy the app as a [Knative Serving Service](../../../../serving/README.md).
+However, you can also deploy the app as a [Knative Serving Service](../../../../serving/).
 
 Follow the steps below to create the sample code and then deploy the app to your
 cluster. You can also download a working copy of the sample, by running the

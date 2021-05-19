@@ -20,7 +20,7 @@ deploying your app to your Knative cluster.
 You must meet the following requirements to complete this sample:
 
 - A version of the Knative Serving component installed and DNS configured. Follow the
-  [Knative installation instructions](../../../../docs/install/README.md) if you need
+  [Knative installation instructions](../../../../docs/install/) if you need
   to create a Knative cluster.
 - The following software downloaded and install on your loacal machine:
   - [Java SE 8 or later JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
@@ -261,14 +261,14 @@ To verify that your sample app has been successfully deployed:
 
    ```shell
    NAME                          URL
-   helloworld-java-micronaut     http://helloworld-java-micronaut.default.1.2.3.4.xip.io
+   helloworld-java-micronaut     http://helloworld-java-micronaut.default.1.2.3.4.sslip.io
    ```
 
 1. Now you can make a request to your app and see the result. Replace
    the URL below with the URL returned in the previous command.
 
    ```shell
-   curl http://helloworld-java-micronaut.default.1.2.3.4.xip.io
+   curl http://helloworld-java-micronaut.default.1.2.3.4.sslip.io
    ```
 
    Example result:

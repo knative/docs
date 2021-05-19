@@ -14,7 +14,7 @@ This guide describes the steps required to to create the `helloworld-java` sampl
 ## Prerequisites
 
 You will need:
-- A Kubernetes cluster with [Knative installed and DNS configured](../../../../install/README.md).
+- A Kubernetes cluster with [Knative installed and DNS configured](../../../../install/).
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured.
 - [Java SE 8 or later JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
@@ -80,7 +80,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java
 1. After the build has completed and the container is pushed to Docker Hub, you
    can deploy the app into your cluster. Choose one of the following methods:
 
-   
+
 === "kn"
 
        Use `kn` to deploy the service, make sure to replace `{username}` with your Docker Hub username:
@@ -135,7 +135,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java
 
 1. Run one of the followings commands to find the domain URL for your service.
 
-   
+
 === "kn"
 
        ```shell
@@ -170,7 +170,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java
    Example:
 
    ```shell
-   curl http://helloworld-java.default.1.2.3.4.xip.io
+   curl http://helloworld-java.default.1.2.3.4.sslip.io
    Hello SparkJava Sample v1!
    # Even easier with kn:
    curl $(kn service describe helloworld-java -o url)
@@ -192,6 +192,3 @@ To remove the sample app from your cluster, delete the service record.
     ```shell
     kubectl delete --filename service.yaml
     ```
-
-
-

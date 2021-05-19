@@ -18,7 +18,7 @@ You must meet the following requirements to run this sample:
 
 - Have a Kubernetes cluster running with the Knative Serving component
   installed. For more information, see the
-  [Knative instruction guides](https://github.com/knative/docs/blob/main/docs/install/README.md).
+  [Knative instruction guides](https://github.com/knative/docs/blob/main/docs/install/).
 - An installed version of the following tools:
   - [Docker](https://www.docker.com)
   - [Java SE 8 or later JDK](https://www.eclipse.org/openj9/)
@@ -255,14 +255,14 @@ folder) you're ready to build and deploy the sample app.
    kubectl get ksvc helloworld-java-quarkus
 
    NAME                     URL
-   helloworld-java-quarkus  http://helloworld-java-quarkus.default.1.2.3.4.xip.io
+   helloworld-java-quarkus  http://helloworld-java-quarkus.default.1.2.3.4.sslip.io
    ```
 
 1. Now you can make a request to your app and see the result. Replace
    the URL below with the URL returned in the previous command.
 
    ```shell
-   curl http://helloworld-java-quarkus.default.1.2.3.4.xip.io
+   curl http://helloworld-java-quarkus.default.1.2.3.4.sslip.io
 
    Namaste Knative World!
    ```

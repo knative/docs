@@ -36,7 +36,7 @@ cd knative-docs/docs/serving/samples/cloudevents/cloudevents-rust
 ## Before you begin
 
 - A Kubernetes cluster with Knative installed and DNS configured. Follow the
-  [installation instructions](../../../../install/README.md) if you need to
+  [installation instructions](../../../../install/) if you need to
   create one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
@@ -87,7 +87,7 @@ Get the URL for your Service with:
 ```shell
 $ kubectl get ksvc
 NAME                URL                                            LATESTCREATED             LATESTREADY               READY   REASON
-cloudevents-rust    http://cloudevents-rust.xip.io                 cloudevents-rust-vl8fq    cloudevents-rust-vl8fq    True
+cloudevents-rust    http://cloudevents-rust.sslip.io                 cloudevents-rust-vl8fq    cloudevents-rust-vl8fq    True
 ```
 
 Then send a CloudEvent to it with:
@@ -101,7 +101,7 @@ $ curl \
     -H "ce-type: curl.demo"  \
     -H "ce-id: 123-abc"  \
     -d '{"name":"Dave"}' \
-    http://cloudevents-rust.xip.io
+    http://cloudevents-rust.sslip.io
 ```
 
 You can also send CloudEvents spawning a temporary curl pod in your cluster with:

@@ -25,7 +25,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-python
 ## Prerequisites
 
 - A Kubernetes cluster with Knative installed and DNS configured. Follow the
-  [installation instructions](../../../../install/README.md).
+  [installation instructions](../../../../install/).
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured.
 - (optional) The Knative CLI client
@@ -175,7 +175,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-python
 
 1. Run one of the followings commands to find the domain URL for your service.
    > Note: If your URL includes `example.com` then consult the setup instructions for
-   > configuring DNS (e.g. with `xip.io`), or [using a Custom Domain](../serving/using-a-custom-domain.md).
+   > configuring DNS (e.g. with `sslip.io`), or [using a Custom Domain](../serving/using-a-custom-domain).
 
    === "kubectl"
 
@@ -187,7 +187,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-python
 
        ```shell
        NAME                      URL
-       helloworld-python    http://helloworld-python.default.1.2.3.4.xip.io
+       helloworld-python    http://helloworld-python.default.1.2.3.4.sslip.io
        ```
 
 === "kn"
@@ -199,7 +199,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-python
        Example:
 
        ```shell
-       http://helloworld-python.default.1.2.3.4.xip.io
+       http://helloworld-python.default.1.2.3.4.sslip.io
        ```
 
 
@@ -211,7 +211,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-python
    Example:
 
    ```shell
-   curl http://helloworld-python.default.1.2.3.4.xip.io
+   curl http://helloworld-python.default.1.2.3.4.sslip.io
    Hello Python Sample v1!
 
    # Even easier with kn:
@@ -235,6 +235,3 @@ To remove the sample app from your cluster, delete the service record.
     ```shell
     kn service delete helloworld-python
     ```
-
-
-

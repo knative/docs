@@ -40,7 +40,7 @@ kubectl get route <route-name> --output yaml
 
 The `conditions` in `status` provide the reason if there is any failure. For
 details, see Knative
-[Error Conditions and Reporting](https://github.com/knative/docs/blob/main/docs/serving/spec/knative-api-specification-1.0.md#error-signalling).
+[Error Conditions and Reporting](https://github.com/knative/specs/blob/main/specs/serving/knative-api-specification-1.0.md#error-signalling).
 
 ### Check Ingress/Istio routing
 

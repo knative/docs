@@ -15,7 +15,7 @@ If `TARGET` is not specified, `World` is used as the default value.
 ## Prerequisites
 
 You will need:
-- A Kubernetes cluster with [Knative installed and DNS configured](../../../../install/README.md).
+- A Kubernetes cluster with [Knative installed and DNS configured](../../../../install/).
 - [Docker](https://www.docker.com) installed and running on your local machine, and a Docker Hub account configured.
 - Optional: You can use the Knative CLI client [`kn`](https://github.com/knative/client/releases) to simplify resource creation and deployment. Alternatively, you can use `kubectl` to apply resource files directly.
 
@@ -124,7 +124,7 @@ You will need:
    can deploy the app into your cluster.  Choose one of the following methods:
 
 
-   
+
 === "yaml"
 
        1. Create a new file, `service.yaml` and copy the following service definition
@@ -214,7 +214,7 @@ You will need:
    the URL below with the URL returned in the previous command.
 
    ```shell
-   curl http://helloworld-go.default.1.2.3.4.xip.io
+   curl http://helloworld-go.default.1.2.3.4.sslip.io
    Hello Go Sample v1!
    ```
 
@@ -234,6 +234,3 @@ To remove the sample app from your cluster, delete the service record:
     ```shell
     kn service delete helloworld-go
     ```
-
-
-

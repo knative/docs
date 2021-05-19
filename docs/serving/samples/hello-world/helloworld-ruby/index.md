@@ -23,7 +23,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-ruby
 ## Prerequisites
 
 - A Kubernetes cluster with Knative installed and DNS configured. Follow the
-  [installation instructions](../../../../install/README.md).
+  [installation instructions](../../../../install/).
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured.
 - (optional) The Knative CLI client [kn](https://github.com/knative/client/releases) that simplifies the deployment. Alternative you can also use [`kubectl`](https://kubernetes.io/docs/tasks/tools/install-kubectl/) and apply resource files directly.
@@ -169,7 +169,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-ruby
         8.398s Ready to serve.
 
       Service 'helloworld-ruby' created to latest revision 'helloworld-ruby-akhft-1' is available at URL:
-      http://helloworld-ruby.default.1.2.3.4.xip.io
+      http://helloworld-ruby.default.1.2.3.4.sslip.io
       ```
 
 
@@ -197,7 +197,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-ruby
 
        ```shell
        NAME                URL
-       helloworld-ruby    http://helloworld-ruby.default.1.2.3.4.xip.io
+       helloworld-ruby    http://helloworld-ruby.default.1.2.3.4.sslip.io
        ```
 
 
@@ -210,7 +210,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-ruby
        Example:
 
        ```shell
-       http://helloworld-ruby.default.1.2.3.4.xip.io
+       http://helloworld-ruby.default.1.2.3.4.sslip.io
        ```
 
 
@@ -222,7 +222,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-ruby
    Example:
 
    ```shell
-   curl http://helloworld-ruby.default.1.2.3.4.xip.io
+   curl http://helloworld-ruby.default.1.2.3.4.sslip.io
    Hello Ruby Sample v1!
 
    # Even easier with kn:
@@ -247,6 +247,3 @@ To remove the sample app from your cluster, delete the service record.
       ```shell
       kn service delete helloworld-ruby
       ```
-
-
-
