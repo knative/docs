@@ -29,7 +29,7 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
 - Replicas
 
   ```yaml
-  apiVersion: kafka.strimzi.io/v1beta1
+  apiVersion: kafka.strimzi.io/v1beta2
   kind: KafkaTopic
   metadata:
     name: knative-demo-topic
