@@ -37,25 +37,26 @@ In the following example, you can configure a single collector instance using a 
        kubectl create namespace <namespace>
        ```
     Where
+
     - `<namespace>` is the name of the namespace that you want to create for the collector.
 
 1. Create a Deployment, Service, and ConfigMap for the collector by entering the following command:
 
-   ```shell
-   kubectl apply --filename https://raw.githubusercontent.com/knative/docs/master/docs/install/collecting-metrics/collector.yaml
-   ```
+       ```shell
+       kubectl apply -f https://raw.githubusercontent.com/knative/docs/master/docs/install/collecting-metrics/collector.yaml
+       ```
 
 1. Update the `config-observability` ConfigMaps in the Knative Serving and
    Eventing namespaces, by entering the follow command:
 
-   ```shell
-   kubectl patch --namespace knative-serving configmap/config-observability \
-     --type merge \
-     --patch '{"data":{"metrics.backend-destination":"opencensus","request-metrics-backend-destination":"opencensus","metrics.opencensus-address":"otel-collector.metrics:55678"}}'
-   kubectl patch --namespace knative-eventing configmap/config-observability \
-     --type merge \
-     --patch '{"data":{"metrics.backend-destination":"opencensus","metrics.opencensus-address":"otel-collector.metrics:55678"}}'
-   ```
+       ```shell
+       kubectl patch --namespace knative-serving configmap/config-observability \
+         --type merge \
+         --patch '{"data":{"metrics.backend-destination":"opencensus","request-metrics-backend-destination":"opencensus","metrics.opencensus-address":"otel-collector.metrics:55678"}}'
+       kubectl patch --namespace knative-eventing configmap/config-observability \
+         --type merge \
+         --patch '{"data":{"metrics.backend-destination":"opencensus","metrics.opencensus-address":"otel-collector.metrics:55678"}}'
+       ```
 
 ## Verify the collector setup
 
@@ -65,7 +66,7 @@ In the following example, you can configure a single collector instance using a 
     kubectl port-forward --namespace metrics deployment/otel-collector 8889
     ```
 
-1. Fetch http://localhost:8889/metrics to see the exported metrics.
+1. Fetch `http://localhost:8889/metrics` to see the exported metrics.
 
 ## About Prometheus
 
@@ -76,23 +77,21 @@ aggregating timeseries metrics. It can be used to scrape the OpenTelemetry colle
 
 1. Install the [Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator) by entering the following command:
 
-   ```shell
-   kubectl apply -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/master/bundle.yaml
-   ```
+       ```shell
+       kubectl apply -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/master/bundle.yaml
+       ```
 
-   !!! note
-   The manifest provided installs the Prometheus Operator into the `default` namespace. If you want to install the Operator in a different namespace, you must download the [YAML manifest](https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/master/bundle.yaml) and update any namespace references to your target namespace.
+    !!! caution
+        The manifest provided installs the Prometheus Operator into the `default` namespace. If you want to install the Operator in a different namespace, you must download the [YAML manifest](https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/master/bundle.yaml) and update any namespace references to your target namespace.
 
 1. Create a `ServiceMonitor` object to track the OpenTelemetry collector.
-
 1. Create a `ServiceAccount` object with the ability to read Kubernetes services and pods, so that Prometheus can track the resource endpoints.
-<!--TODO: Add links / commands for the two steps above?-->
-
 1. Apply the `prometheus.yaml` file to create a Prometheus instance, by entering the following command:
 
-   ```shell
-   kubectl apply -f prometheus.yaml
-   ```
+       ```shell
+       kubectl apply -f prometheus.yaml
+       ```
+<!--TODO: Add links / commands for the two steps above?-->
 
 ### Make the Prometheus instance public
 
@@ -102,7 +101,8 @@ To access the console in your web browser:
 
 1. Enter the command:
 
-    ```shell
-    kubectl port-forward --namespace metrics service/prometheus-operated 9090
-    ```
+        ```shell
+        kubectl port-forward --namespace metrics service/prometheus-operated 9090
+        ```
+
 1. Access the console in your browser via http://localhost:9090.
