@@ -13,7 +13,7 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 
 ## Prerequisites
 
-1. A Kubernetes cluster with [Knative Serving](../../../install/README.md)
+1. A Kubernetes cluster with [Knative Serving](../../../install/)
    installed.
 1. The `hey` load generator installed (`go get -u github.com/rakyll/hey`).
 1. Clone this repository, and move into the sample directory:
@@ -36,7 +36,7 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
    ```
    $ kubectl get ksvc autoscale-go
    NAME            URL                                                LATESTCREATED         LATESTREADY           READY   REASON
-   autoscale-go    http://autoscale-go.default.1.2.3.4.xip.io    autoscale-go-96dtk    autoscale-go-96dtk    True
+   autoscale-go    http://autoscale-go.default.1.2.3.4.sslip.io    autoscale-go-96dtk    autoscale-go-96dtk    True
    ```
 
 ## Load the Service
@@ -44,7 +44,7 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 1. Make a request to the autoscale app to see it consume some resources.
 
    ```shell
-   curl "http://autoscale-go.default.1.2.3.4.xip.io?sleep=100&prime=10000&bloat=5"
+   curl "http://autoscale-go.default.1.2.3.4.sslip.io?sleep=100&prime=10000&bloat=5"
    ```
 
    ```
@@ -57,7 +57,7 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 
    ```shell
    hey -z 30s -c 50 \
-     "http://autoscale-go.default.1.2.3.4.xip.io?sleep=100&prime=10000&bloat=5" \
+     "http://autoscale-go.default.1.2.3.4.sslip.io?sleep=100&prime=10000&bloat=5" \
      && kubectl get pods
    ```
 
@@ -222,21 +222,21 @@ customization (32 minutes).
 
    ```shell
    hey -z 60s -c 100 \
-     "http://autoscale-go.default.1.2.3.4.xip.io?sleep=100&prime=10000&bloat=5"
+     "http://autoscale-go.default.1.2.3.4.sslip.io?sleep=100&prime=10000&bloat=5"
    ```
 
 1. Send 60 seconds of traffic maintaining 100 qps with short requests (10 ms).
 
    ```shell
    hey -z 60s -q 100 \
-     "http://autoscale-go.default.1.2.3.4.xip.io?sleep=10"
+     "http://autoscale-go.default.1.2.3.4.sslip.io?sleep=10"
    ```
 
 1. Send 60 seconds of traffic maintaining 100 qps with long requests (1 sec).
 
    ```shell
    hey -z 60s -q 100 \
-     "http://autoscale-go.default.1.2.3.4.xip.io?sleep=1000"
+     "http://autoscale-go.default.1.2.3.4.sslip.io?sleep=1000"
    ```
 
 1. Send 60 seconds of traffic with heavy CPU usage (~1 cpu/sec/request, total
@@ -244,7 +244,7 @@ customization (32 minutes).
 
    ```shell
    hey -z 60s -q 100 \
-     "http://autoscale-go.default.1.2.3.4.xip.io?prime=40000000"
+     "http://autoscale-go.default.1.2.3.4.sslip.io?prime=40000000"
    ```
 
 1. Send 60 seconds of traffic with heavy memory usage (1 gb/request, total 5
@@ -252,7 +252,7 @@ customization (32 minutes).
 
    ```shell
    hey -z 60s -c 5 \
-     "http://autoscale-go.default.1.2.3.4.xip.io?bloat=1000"
+     "http://autoscale-go.default.1.2.3.4.sslip.io?bloat=1000"
    ```
 
 ## Cleanup

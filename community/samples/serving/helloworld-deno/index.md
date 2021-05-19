@@ -19,7 +19,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-deno
 ## Before you begin
 
 - A Kubernetes cluster with Knative installed. Follow the
-  [installation instructions](../../../../docs/install/README.md) if you need to
+  [installation instructions](../../../../docs/install/) if you need to
   create one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
@@ -121,20 +121,20 @@ folder) you're ready to build and deploy the sample app.
 
    ```shell
    NAME                URL
-   helloworld-deno        http://helloworld-deno.default.1.2.3.4.xip.io
+   helloworld-deno        http://helloworld-deno.default.1.2.3.4.sslip.io
    ```
 
 1. Now you can make a request to your app and see the result. Replace
    the URL below with the URL returned in the previous command.
 
    ```shell
-   curl http://helloworld-deno.default.1.2.3.4.xip.io
+   curl http://helloworld-deno.default.1.2.3.4.sslip.io
    ```
 
    Example:
 
    ```shell
-   curl http://helloworld-deno.default.1.2.3.4.xip.io
+   curl http://helloworld-deno.default.1.2.3.4.sslip.io
    [1] "Hello R Sample v1!"
    ```
 
@@ -147,4 +147,3 @@ To remove the sample app from your cluster, delete the service record:
 ```shell
 kubectl delete --filename service.yaml
 ```
-

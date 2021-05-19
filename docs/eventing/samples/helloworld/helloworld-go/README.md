@@ -18,7 +18,7 @@ We will deploy the app as a
 along with a
 [Kubernetes Service](https://kubernetes.io/docs/concepts/services-networking/service/).
 However, you can also deploy the app as a
-[Knative Serving Service](../../../../serving/README.md).
+[Knative Serving Service](../../../../serving/).
 
 Follow the steps below to create the sample code and then deploy the app to your
 cluster. You can also download a working copy of the sample, by running the
@@ -282,7 +282,7 @@ application and trigger are ready, let's send a CloudEvent.
 
 ### Send CloudEvent to the Broker
 
-We can send an http request directly to the [Broker](../../../broker/README.md)
+We can send an http request directly to the [Broker](../../../broker/)
 with correct CloudEvent headers set.
 
 1. Deploy a curl pod and SSH into it

@@ -24,7 +24,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-shell
 ## Prerequisites
 
 - A Kubernetes cluster with Knative installed and DNS configured. Follow the
-  [installation instructions](../../../../install/README.md).
+  [installation instructions](../../../../install/).
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured.
 - Optional: You can use the Knative CLI client [`kn`](https://github.com/knative/client/releases) to simplify resource creation and deployment. Alternatively, you can use `kubectl` to apply resource files directly.
@@ -90,7 +90,7 @@ folder) you're ready to build and deploy the sample app.
 1. After the build has completed and the container is pushed to Docker Hub, you
    can deploy the app into your cluster.
 
-   
+
 === "yaml"
 
        1. Create a new file, `service.yaml` and copy the following service definition
@@ -146,7 +146,7 @@ folder) you're ready to build and deploy the sample app.
         8.398s Ready to serve.
 
       Service 'helloworld-shell' created to latest revision 'helloworld-shell-kwdpt-1' is available at URL:
-      http://helloworld-shell.default.1.2.3.4.xip.io
+      http://helloworld-shell.default.1.2.3.4.sslip.io
       ```
 
 
@@ -164,7 +164,7 @@ folder) you're ready to build and deploy the sample app.
 
 1. Run one of the followings commands to find the domain URL for your service.
 
-   
+
 === "kubectl"
        ```shell
        kubectl get ksvc helloworld-shell  --output=custom-columns=NAME:.metadata.name,URL:.status.url
@@ -174,7 +174,7 @@ folder) you're ready to build and deploy the sample app.
 
        ```shell
        NAME                URL
-       helloworld-shell    http://helloworld-shell.default.1.2.3.4.xip.io
+       helloworld-shell    http://helloworld-shell.default.1.2.3.4.sslip.io
        ```
 
 
@@ -187,7 +187,7 @@ folder) you're ready to build and deploy the sample app.
        Example:
 
        ```shell
-       http://helloworld-shell.default.1.2.3.4.xip.io
+       http://helloworld-shell.default.1.2.3.4.sslip.io
        ```
 
 
@@ -199,7 +199,7 @@ folder) you're ready to build and deploy the sample app.
    Example:
 
    ```shell
-   curl http://helloworld-shell.default.1.2.3.4.xip.io
+   curl http://helloworld-shell.default.1.2.3.4.sslip.io
    Hello Shell Sample v1!
 
    # Even easier with kn:
@@ -222,6 +222,3 @@ To remove the sample app from your cluster, delete the service record.
     ```shell
     kn service delete helloworld-shell
     ```
-
-
-

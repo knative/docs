@@ -84,7 +84,7 @@ Knative-specific stuff below. For example:
 ```
 To complete the steps in this task, you must ..... meet/have/install/create/? the following:
 
-- A Kubernetes cluster with [Knative installed](./docs/install/README.md).
+- A Kubernetes cluster with [Knative installed](./docs/install/).
   <!-- Make sue to use relative links. -->
 - The latest version of ... running?
 - Privileges to .....
@@ -225,7 +225,7 @@ This is where you get past any of the non-Knative items so that you can focus on
 
 To complete the steps in this task, you must ..... meet/have/install/create/? the following:
 
-- A Kubernetes cluster with [Knative installed](./docs/install/README.md).
+- A Kubernetes cluster with [Knative installed](./docs/install/).
   <!-- Make sue to use relative links. -->
 - The latest version of ... running?
 - Privileges to .....

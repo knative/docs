@@ -24,7 +24,7 @@ cd knative-docs/docs/serving/samples/secrets-go
 ## Before you begin
 
 - A Kubernetes cluster with Knative installed. Follow the
-  [installation instructions](../../../install/README.md) if you need to create
+  [installation instructions](../../../install/) if you need to create
   one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
@@ -239,14 +239,14 @@ folder) you're ready to build and deploy the sample app.
 
    ```shell
    NAME             URL
-   secrets-go       http://secrets-go.default.1.2.3.4.xip.io
+   secrets-go       http://secrets-go.default.1.2.3.4.sslip.io
    ```
 
 1. Now you can make a request to your app and see the result. Replace
    the URL below with the URL returned in the previous command.
 
    ```shell
-   curl http://secrets-go.default.1.2.3.4.xip.io
+   curl http://secrets-go.default.1.2.3.4.sslip.io
    bucket knative-secrets-sample, created at 2019-02-01 14:44:05.804 +0000 UTC, is located in US with storage class MULTI_REGIONAL
    ```
 

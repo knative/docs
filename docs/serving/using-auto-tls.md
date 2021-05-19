@@ -200,12 +200,10 @@ in the `knative-serving` namespace to reference your new `ClusterIssuer`.
 1.  Add the `issuerRef` within the `data` section:
 
     ```shell
-    ...
     data:
-    ...
       issuerRef: |
         kind: ClusterIssuer
-        name: letsencrypt-issuer
+        name: letsencrypt-http01-issuer
     ```
 
     Example:
@@ -249,11 +247,8 @@ requests are handled:
 1.  Add the `autoTLS: Enabled` attribute under the `data` section:
 
     ```shell
-    ...
     data:
-    ...
       autoTLS: Enabled
-    ...
     ```
 
     Example:
@@ -287,11 +282,8 @@ requests are handled:
       clients to use HTTPS.
 
      ```shell
-     ...
      data:
-     ...
-       autoTLS: Enabled
-     ...
+       httpProtocol: Redirected
      ```
 
      Example:
@@ -305,7 +297,6 @@ requests are handled:
      data:
        ...
        autoTLS: Enabled
-       ...
        httpProtocol: Redirected
        ...
      ```

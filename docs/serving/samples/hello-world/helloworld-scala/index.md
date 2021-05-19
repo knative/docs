@@ -24,7 +24,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-scala
 
 ## Before you begin
 
-- A Kubernetes cluster [installation](../../../../install/README.md) with
+- A Kubernetes cluster [installation](../../../../install/) with
   Knative Serving up and running.
 - [Docker](https://www.docker.com) installed locally, and running, optionally a
   Docker Hub account configured or some other Docker Repository installed
@@ -142,7 +142,7 @@ local Docker Repository.
         8.398s Ready to serve.
 
       Service 'helloworld-scala' created to latest revision 'helloworld-scala-abcd-1' is available at URL:
-      http://helloworld-scala.default.1.2.3.4.xip.io
+      http://helloworld-scala.default.1.2.3.4.sslip.io
       ```
 
 
@@ -160,13 +160,13 @@ local Docker Repository.
 
     # It will print something like this, the URL is what you're looking for.
     # NAME                URL
-    # helloworld-scala    http://helloworld-scala.default.1.2.3.4.xip.io
+    # helloworld-scala    http://helloworld-scala.default.1.2.3.4.sslip.io
     ```
 
     Finally, to try your service, use the obtained URL:
 
     ```shell
-    curl -v http://helloworld-scala.default.1.2.3.4.xip.io
+    curl -v http://helloworld-scala.default.1.2.3.4.sslip.io
     ```
 
 
@@ -179,13 +179,13 @@ local Docker Repository.
        Example:
 
        ```shell
-       http://helloworld-scala.default.1.2.3.4.xip.io
+       http://helloworld-scala.default.1.2.3.4.sslip.io
        ```
 
     Finally, to try your service, use the obtained URL:
 
     ```shell
-    curl -v http://helloworld-scala.default.1.2.3.4.xip.io
+    curl -v http://helloworld-scala.default.1.2.3.4.sslip.io
     ```
 
 
@@ -211,8 +211,3 @@ local Docker Repository.
     ```shell
     kn service delete helloworld-scala
     ```
-
-
-
-
-

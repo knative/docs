@@ -12,7 +12,7 @@ A simple web app written in Go that you can use for multi container testing.
 ## Prerequisites
 
 - A Kubernetes cluster with Knative installed and DNS configured. Follow the
-  [installation instructions](../../../install/README.md) if you need to
+  [installation instructions](../../../install/) if you need to
   create one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
@@ -246,14 +246,14 @@ After you have modified the sample code files you can build and deploy the sampl
 
    ```shell
     NAME                URL
-    multi-container       http://multi-container.default.1.2.3.4.xip.io
+    multi-container       http://multi-container.default.1.2.3.4.sslip.io
    ```
 
 1. Now you can make a request to your app and see the result. Replace
    the URL below with the URL returned in the previous command.
 
    ```shell
-   curl http://multi-container.default.1.2.3.4.xip.io
+   curl http://multi-container.default.1.2.3.4.sslip.io
    Yay!! multi-container works
    ```
 

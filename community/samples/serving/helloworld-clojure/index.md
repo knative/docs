@@ -12,7 +12,7 @@ specified, it will use "World" as the TARGET.
 ## Prerequisites
 
 - A Kubernetes cluster with Knative installed and DNS configured. Follow the
-  [installation instructions](../../../../docs/install/README.md) if you need to create
+  [installation instructions](../../../../docs/install/) if you need to create
   one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
@@ -142,14 +142,14 @@ folder) you're ready to build and deploy the sample app.
    ```
    kubectl get ksvc helloworld-clojure --output=custom-columns=NAME:.metadata.name,URL:.status.url
    NAME                URL
-   helloworld-clojure  http://helloworld-clojure.default.1.2.3.4.xip.io
+   helloworld-clojure  http://helloworld-clojure.default.1.2.3.4.sslip.io
    ```
 
 1. Now you can make a request to your app and see the result. Replace
    the URL below with the URL returned in the previous command.
 
    ```shell
-   curl http://helloworld-clojure.default.1.2.3.4.xip.io
+   curl http://helloworld-clojure.default.1.2.3.4.sslip.io
    Hello World!
    ```
 
@@ -160,4 +160,3 @@ To remove the sample app from your cluster, delete the service record:
 ```shell
 kubectl delete --filename service.yaml
 ```
-

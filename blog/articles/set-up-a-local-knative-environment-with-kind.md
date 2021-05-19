@@ -218,15 +218,15 @@ kourier.ingress.networking.knative.dev
 
 To get the same experience that you would when using a cluster that has DNS names set up, you can add a “magic” DNS provider.
 
-_nip.io_ provides a wildcard DNS setup that will automatically resolve to the IP address you put in front of nip.io.
+_sslip.io_ provides a wildcard DNS setup that will automatically resolve to the IP address you put in front of sslip.io.
 
-To patch the domain configuration for Knative Serving using nip.io, enter the command:
+To patch the domain configuration for Knative Serving using sslip.io, enter the command:
 
 ```bash
 $ kubectl patch configmap/config-domain \
   --namespace knative-serving \
   --type merge \
-  --patch '{"data":{"127.0.0.1.nip.io":""}}'
+  --patch '{"data":{"127.0.0.1.sslip.io":""}}'
 ```
 
 If you want to validate that the patch command was successful, run the command:
@@ -239,7 +239,7 @@ $ kubectl describe configmap/config-domain --namespace knative-serving
 ... (abbreviated for readability)
 Data
 ====
-127.0.0.1.nip.io:
+127.0.0.1.sslip.io:
 ----
 ...
 ```
@@ -329,12 +329,12 @@ $ kubectl get ksvc
 
 ```bash
 NAME            URL                                             LATESTCREATED         LATESTREADY   READY     REASON
-helloworld-go   http://helloworld-go.default.127.0.0.1.nip.io   helloworld-go-fqqs6                 Unknown   RevisionMissing
+helloworld-go   http://helloworld-go.default.127.0.0.1.sslip.io   helloworld-go-fqqs6                 Unknown   RevisionMissing
 ```
 
 ```bash
 NAME            URL                                             LATESTCREATED         LATESTREADY           READY   REASON
-helloworld-go   http://helloworld-go.default.127.0.0.1.nip.io   helloworld-go-fqqs6   helloworld-go-fqqs6   True
+helloworld-go   http://helloworld-go.default.127.0.0.1.sslip.io   helloworld-go-fqqs6   helloworld-go-fqqs6   True
 ```
 
 The final step is to test your application, by checking that the code returns what you expect. You can do this by sending a cURL request to the URL listed above.
@@ -342,7 +342,7 @@ The final step is to test your application, by checking that the code returns wh
 Because this example mapped port 80 of the host to be forwarded to the cluster and set the DNS, you can use the exact URL.
 
 ```bash
-$ curl -v http://helloworld-go.default.127.0.0.1.nip.io
+$ curl -v http://helloworld-go.default.127.0.0.1.sslip.io
 ```
 
 ```bash

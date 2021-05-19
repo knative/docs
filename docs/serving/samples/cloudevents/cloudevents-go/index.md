@@ -34,7 +34,7 @@ cd knative-docs/docs/serving/samples/cloudevents/cloudevents-go
 ## Before you begin
 
 - A Kubernetes cluster with Knative installed and DNS configured. Follow the
-  [installation instructions](../../../../install/README.md) if you need to
+  [installation instructions](../../../../install/) if you need to
   create one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
@@ -136,7 +136,7 @@ Get the URL for your Service with:
 ```shell
 $ kubectl get ksvc
 NAME             URL                                            LATESTCREATED          LATESTREADY            READY   REASON
-cloudevents-go   http://cloudevents-go.default.1.2.3.4.xip.io   cloudevents-go-ss5pj   cloudevents-go-ss5pj   True
+cloudevents-go   http://cloudevents-go.default.1.2.3.4.sslip.io   cloudevents-go-ss5pj   cloudevents-go-ss5pj   True
 ```
 
 Then send a cloud event to it with:
@@ -149,7 +149,7 @@ $ curl -X POST \
     -H "ce-type: curl.demo"  \
     -H "ce-id: 123-abc"  \
     -d '{"name":"Dave"}' \
-    http://cloudevents-go.default.1.2.3.4.xip.io
+    http://cloudevents-go.default.1.2.3.4.sslip.io
 ```
 
 You will get back:

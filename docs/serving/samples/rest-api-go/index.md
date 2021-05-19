@@ -14,7 +14,7 @@ like `AAPL`,`AMZN`, `GOOG`, `MSFT`, etc.
 
 ## Prerequisites
 
-1. A Kubernetes cluster with [Knative Serving](../../../install/README.md) installed
+1. A Kubernetes cluster with [Knative Serving](../../../install/) installed
    and DNS configured.
 1. [Docker](https://docs.docker.com/get-started/#prepare-your-docker-environment)
    installed locally.
@@ -160,7 +160,7 @@ and then you run `curl` commands to send request with your stock symbol.
    ```shell
    kubectl get ksvc stock-service-example  --output=custom-columns=NAME:.metadata.name,URL:.status.url
    NAME                    URL
-   stock-service-example   http://stock-service-example.default.1.2.3.4.xip.io
+   stock-service-example   http://stock-service-example.default.1.2.3.4.sslip.io
    ```
 
 2. Send requests to the service using `curl`:
@@ -168,7 +168,7 @@ and then you run `curl` commands to send request with your stock symbol.
    1. Send a request to the index endpoint:
 
       ```shell
-      curl http://stock-service-example.default.1.2.3.4.xip.io
+      curl http://stock-service-example.default.1.2.3.4.sslip.io
       ```
 
       Response body: `Welcome to the stock app!`
@@ -176,7 +176,7 @@ and then you run `curl` commands to send request with your stock symbol.
    2. Send a request to the `/stock` endpoint:
 
       ```shell
-      curl http://stock-service-example.default.1.2.3.4.xip.io/stock
+      curl http://stock-service-example.default.1.2.3.4.sslip.io/stock
       ```
 
       Response body: `stock ticker not found!, require /stock/{ticker}`
@@ -185,7 +185,7 @@ and then you run `curl` commands to send request with your stock symbol.
       "[stock symbol](https://www.marketwatch.com/tools/quotes/lookup.asp)":
 
       ```shell
-      curl http://stock-service-example.default.1.2.3.4.xip.io/stock/<SYMBOL>
+      curl http://stock-service-example.default.1.2.3.4.sslip.io/stock/<SYMBOL>
       ```
 
       where `<SYMBOL>` is your "stock symbol".
@@ -197,14 +197,14 @@ and then you run `curl` commands to send request with your stock symbol.
       Request:
 
       ```shell
-      curl http://stock-service-example.default.1.2.3.4.xip.io/stock/FAKE
+      curl http://stock-service-example.default.1.2.3.4.sslip.io/stock/FAKE
       ```
 
       Response: `stock price for ticker FAKE is 0.00`
 
 ## Next Steps
 
-The [traffic splitting example](../traffic-splitting/README.md) continues from
+The [traffic splitting example](../traffic-splitting/) continues from
 here to walk you through how to create new Revisions and then use traffic
 splitting between those Revisions.
 

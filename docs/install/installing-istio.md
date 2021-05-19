@@ -199,7 +199,7 @@ istio-pilot             ClusterIP      10.0.3.27    <none>         15010/TCP,150
 ```
 
 This external IP can be used with your DNS provider with a wildcard `A` record. However, for a basic non-production set
-up, this external IP address can be used with `xip.io` in the `config-domain` ConfigMap in `knative-serving`.
+up, this external IP address can be used with `sslip.io` in the `config-domain` ConfigMap in `knative-serving`.
 
 You can edit this by using the following command:
 
@@ -216,9 +216,9 @@ metadata:
   name: config-domain
   namespace: knative-serving
 data:
-  # xip.io is a "magic" DNS provider, which resolves all DNS lookups for:
-  # *.{ip}.xip.io to {ip}.
-  34.83.80.117.xip.io: ""
+  # sslip.io is a "magic" DNS provider, which resolves all DNS lookups for:
+  # *.{ip}.sslip.io to {ip}.
+  34.83.80.117.sslip.io: ""
 ```
 
 ## Istio resources
@@ -236,10 +236,7 @@ See the [Uninstall Istio](https://istio.io/docs/setup/install/istioctl/#uninstal
 
 ## What's next
 
-- [Install Knative](./README.md).
-- Try the
-  [Getting Started with App Deployment guide](../serving/getting-started-knative-app.md)
-  for Knative serving.
+- Try the [Getting Started with App Deployment guide](../serving/getting-started-knative-app) for Knative serving.
 
 [1]:
   https://istio.io/docs/setup/kubernetes/additional-setup/sidecar-injection/#manual-sidecar-injection

@@ -13,7 +13,7 @@ specified, the app uses "World" as the TARGET.
 
 - You must have a Kubernetes cluster with Knative installed and DNS configured.
   If you need to create a cluster, follow the
-  [installation instructions](../../../../docs/install/README.md).
+  [installation instructions](../../../../docs/install/).
 - You must have [Docker](https://www.docker.com) installed and running on your
   local machine, and a Docker Hub account configured (used for container
   registry).
@@ -149,14 +149,14 @@ folder) you're ready to build and deploy the sample app.
    ```
    kubectl get ksvc helloworld-swift  --output=custom-columns=NAME:.metadata.name,URL:.status.url
    NAME               URL
-   helloworld-swift   http://helloworld-swift.default.1.2.3.4.xip.io
+   helloworld-swift   http://helloworld-swift.default.1.2.3.4.sslip.io
    ```
 
 1. Now you can make a request to your app and see the result. Replace
    the URL below with the URL returned in the previous command.
 
    ```shell
-   curl http://helloworld-swift.default.1.2.3.4.xip.io
+   curl http://helloworld-swift.default.1.2.3.4.sslip.io
    Hello Swift
    ```
 
