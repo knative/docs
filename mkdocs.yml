@@ -274,6 +274,23 @@ plugins:
     - redirects:
         redirect_maps:
             'install/collecting-logs/index.md': 'admin/collecting-logs/README.md'
+            'install/README.md': 'admin/install/README.md'
+            'install/collecting-metrics/index.md': 'admin/collecting-metrics/README.md'
+            'install/install-eventing-with-yaml.md': 'admin/install/install-eventing-with-yaml.md'
+            'install/install-extensions.md': 'admin/install/install-extensions.md'
+            'install/install-serving-with-yaml.md': 'admin/install/install-serving-with-yaml.md'
+            'install/installation-files.md': 'admin/install/installation-files.md'
+            'install/installing-istio.md': 'admin/install/installing-istio.md'
+            'install/knative-offerings.md': 'admin/install/knative-offerings.md'
+            'install/knative-with-operators.md': 'admin/install/knative-with-operators.md'
+            'install/operator/configuring-eventing-cr.md': 'admin/install/operator/configuring-eventing-cr.md'
+            'install/operator/configuring-serving-cr.md': 'admin/install/operator/configuring-serving-cr.md'
+            'install/prerequisites.md': 'admin/install/prerequisites.md'
+            'uninstall.md': 'admin/install/uninstall.md'
+            'upgrade/index.md': 'admin/upgrade/README.md'
+            'upgrade/upgrade-installation-with-operator.md': 'admin/upgrade/upgrade-installation-with-operator.md'
+            'upgrade/upgrade-installation.md': 'admin/upgrade/upgrade-installation.md'
+            'install/check-install-version.md': 'check-install-version.md'
 
 copyright: "Copyright © 2021 The Knative Authors"
 

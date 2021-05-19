@@ -1,10 +1,3 @@
----
-title: "Collecting Metrics with OpenTelemetry"
-linkTitle: "Collecting metrics"
-weight: 50
-type: "docs"
----
-
 # Collecting Metrics with OpenTelemetry
 
 This document describes how to set up the
