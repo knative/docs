@@ -94,6 +94,8 @@ with `knative-messaging-kafka`. This indicates it is an Apache Kafka channel
 from Knative. It contains the name of the namespace, `default` in this example,
 followed by the actual name of the channel.
 
+**NOTE:** The topic of a Kafka channel is an implementation detail and records from it should not be consumed from different applications.
+
 ## Configuring the Knative broker for Apache Kafka channels
 
 To setup a broker that will use the new default Kafka channels, you must create
@@ -124,6 +126,8 @@ knative-messaging-kafka.default.default-kn2-ingress
 knative-messaging-kafka.default.default-kn2-trigger
 ...
 ```
+
+**NOTE:** The topic of a Kafka channel is an implementation detail and records from it should not be consumed from different applications.
 
 ## Creating a service and trigger to use the Apache Kafka broker
 
