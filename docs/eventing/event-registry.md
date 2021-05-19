@@ -14,7 +14,7 @@ type information in the cluster data store.
 
 ## Before you begin
 
-1. Read about the [broker](./broker/) and [trigger](./broker/triggers/) objects.
+1. Read about the [broker](../broker/) and [trigger](../broker/triggers/) objects.
 1. Be familiar with the
    [CloudEvents spec](https://github.com/cloudevents/spec/blob/master/spec.md),
    particularly the
