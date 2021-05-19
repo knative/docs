@@ -28,7 +28,7 @@ As part of the Serverless Workflow implementation, Kogito offers a Kubernetes Op
 
 To demonstrate how the Kogito workflow implementation works on Knative's event-driven architecture, we will use the [patient onboarding example](https://github.com/kiegroup/kogito-examples/tree/master/serverless-workflow-functions-events-quarkus). In this example, we simulate a workflow used in hospitals to onboard new patients and assign them to the correct doctor.
 
-The following image taken from the [specification examples page](https://github.com/serverlessworkflow/specification/blob/master/examples/examples.md#New-Patient-Onboarding) illustrates this workflow:
+The following image taken from the [specification examples page](https://github.com/serverlessworkflow/specification/tree/main/examples#New-Patient-Onboarding) illustrates this workflow:
 
 ![Patient onboarding workflow representation](/blog/articles/images/kogito-example-patientonboarding.png)
 *Patient Onboarding workflow representation*

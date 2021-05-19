@@ -266,6 +266,41 @@ The Gateway proxy checks the updated host, and forwards it to `Search` or
 
 ![Object model](./images/knative-routing-sample-flow.png)
 
+## Using internal services and `"httpProtocol": "Redirected"`
+
+Using the above approach, services will be available using two entrypoints into the cluster:
+The original ones provided by Knative Serving (`search-service.default.example.com` and `login-service.default.example.com`),
+as well as the additional entrypoints `example.com/search` and `example.com/login`
+provided by the manually added VirtualService (`entry-route`).
+
+To make sure your service can only be reached via the manually created
+VirtualService, you can add the label `networking.knative.dev/visibility: cluster-local`
+to the Knative Service definitions, and route traffic over
+`knative-local-gateway.istio-system.svc.cluster.local` with a destination address of an internal service,
+instead of the public ingress one at `istio-ingressgateway.istio-system.svc.cluster.local`
+with a destination address of an externally available service.
+
+Using
+
+```
+kubectl label kservice search-service login-service networking.knative.dev/visibility=cluster-local
+```
+
+you label the services as an cluster-local services, removing access via `search-service.default.example.com`
+and `login-service.default.example.com`. After doing so, your previous routing rule will not be routable anymore.
+Running
+
+```
+kubectl apply --filename docs/serving/samples/knative-routing-go/routing-internal.yaml
+```
+
+will replace the custom routing rule with one that uses the `knative-local-gateway`, enabling access
+via `example.com/search` and `example.com/login` again.
+
+With these changes, you can also use [the `autoTLS` feature](../../using-auto-tls.md) in combination with the global setting
+`"httpProtocol": "Redirected"`, which would otherwise try to redirect the `entry-route`
+VirtualService requests from HTTP to HTTPS, failing the request.
+
 ## Clean Up
 
 To clean up the sample resources:
