@@ -37,7 +37,6 @@ nav:
             - Configuring Knative Eventing CRDs: admin/install/operator/configuring-eventing-cr.md
             - Configuring Knative Serving CRDs: admin/install/operator/configuring-serving-cr.md
           - Installing Istio for Knative: admin/install/installing-istio.md
-          - Collecting Metrics with OpenTelemetry: admin/install/collecting-metrics/_index.md
           - Using a Knative-based Offering: admin/install/knative-offerings.md
           - ... | install/*
         - Checking your Knative version: check-install-version.md
@@ -46,6 +45,7 @@ nav:
           - Upgrading with the Knative Operator: admin/upgrade/upgrade-installation-with-operator.md
           - Upgrading with kubectl: admin/upgrade/upgrade-installation.md
         - Logging: admin/collecting-logs/README.md
+        - Metrics: admin/collecting-metrics/README.md
         - Uninstalling Knative: admin/install/uninstall.md
     - Serving Component:
       - Overview: serving/README.md
