@@ -44,7 +44,7 @@ Once you have installed Material for MkDocs and all of the extensions, head over
 --8<-- "docs/snippets/links/main-docs-branch-link.md"
 and clone the repo.
 
-In your terminal, find your way over to the location of the cloned repo. Once you are in the main folder (.../docs) and run:
+In your terminal, find your way over to the location of the cloned repo. Once you are in the main folder and run:
 
 === "Local Preview"
     ```
