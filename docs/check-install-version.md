@@ -12,11 +12,11 @@ To obtain the version of the Knative component that you have running on your clu
 
 === "Knative Serving"
 
-      ```{ .bash .no-copy }
+      ```
       kubectl get namespace knative-serving -o 'go-template={{index .metadata.labels "serving.knative.dev/release"}}'
       ```
 === "Knative Eventing"
 
-      ```{ .bash .no-copy }
+      ```
       kubectl get namespace knative-eventing -o 'go-template={{index .metadata.labels "eventing.knative.dev/release"}}'
       ```

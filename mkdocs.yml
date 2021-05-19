@@ -22,28 +22,31 @@ nav:
           - Introducing the CloudEvents Player: getting-started/first-source.md
           - Creating your first Trigger: getting-started/first-trigger.md
         - What's Next?: getting-started/next-steps.md
-    - Installing Knative:
-      - Overview: install/README.md
-      - Installing using YAML:
-        - Prerequisites: install/prerequisites.md
-        - Install Serving with YAML: install/install-serving-with-yaml.md
-        - Install Eventing with YAML: install/install-eventing-with-yaml.md
-        - Install optional extensions: install/install-extensions.md
-        - Description Tables for YAML Files: install/installation-files.md
-      - Knative Operator:
-        - Installing with the Operator: install/knative-with-operators.md
-        - Configuring Knative Eventing CRDs: install/operator/configuring-eventing-cr.md
-        - Configureing Knative Serving CRDs: install/operator/configuring-serving-cr.md
-      - Installing Istio for Knative: install/installing-istio.md
-      - Upgrading your installation:
-        - Checking your Knative version: install/check-install-version.md
-        - Upgrading with the Knative Operator: install/upgrade-installation-with-operator.md
-        - Upgrading with kubectl: install/upgrade-installation.md
-      - Collecting Logs with Fluentbit: install/collecting-logs/_index.md
-      - Collecting Metrics with OpenTelemetry: install/collecting-metrics/_index.md
-      - Using a Knative-based Offering: install/knative-offerings.md
-      - ... | install/*
-
+    - Administration guide:
+        - Overview: admin/README.md
+        - Installing Knative:
+          - Overview: admin/install/README.md
+          - Prerequisites: admin/install/prerequisites.md
+          - Installing using YAML:
+            - Install Serving with YAML: admin/install/install-serving-with-yaml.md
+            - Install Eventing with YAML: admin/install/install-eventing-with-yaml.md
+            - Install optional extensions: admin/install/install-extensions.md
+            - Description Tables for YAML Files: admin/install/installation-files.md
+          - Knative Operator:
+            - Installing with the Operator: admin/install/knative-with-operators.md
+            - Configuring Knative Eventing CRDs: admin/install/operator/configuring-eventing-cr.md
+            - Configuring Knative Serving CRDs: admin/install/operator/configuring-serving-cr.md
+          - Installing Istio for Knative: admin/install/installing-istio.md
+          - Using a Knative-based Offering: admin/install/knative-offerings.md
+          - ... | install/*
+        - Checking your Knative version: check-install-version.md
+        - Upgrading your installation:
+          - Overview: admin/upgrade/README.md
+          - Upgrading with the Knative Operator: admin/upgrade/upgrade-installation-with-operator.md
+          - Upgrading with kubectl: admin/upgrade/upgrade-installation.md
+        - Logging: admin/collecting-logs/README.md
+        - Metrics: admin/collecting-metrics/README.md
+        - Uninstalling Knative: admin/install/uninstall.md
     - Serving Component:
       - Overview: serving/README.md
       - Developer Topics:
@@ -268,6 +271,26 @@ plugins:
         filename: .index
         collapse_single_pages: true
         strict: false
+    - redirects:
+        redirect_maps:
+            'install/collecting-logs/index.md': 'admin/collecting-logs/README.md'
+            'install/README.md': 'admin/install/README.md'
+            'install/collecting-metrics/index.md': 'admin/collecting-metrics/README.md'
+            'install/install-eventing-with-yaml.md': 'admin/install/install-eventing-with-yaml.md'
+            'install/install-extensions.md': 'admin/install/install-extensions.md'
+            'install/install-serving-with-yaml.md': 'admin/install/install-serving-with-yaml.md'
+            'install/installation-files.md': 'admin/install/installation-files.md'
+            'install/installing-istio.md': 'admin/install/installing-istio.md'
+            'install/knative-offerings.md': 'admin/install/knative-offerings.md'
+            'install/knative-with-operators.md': 'admin/install/knative-with-operators.md'
+            'install/operator/configuring-eventing-cr.md': 'admin/install/operator/configuring-eventing-cr.md'
+            'install/operator/configuring-serving-cr.md': 'admin/install/operator/configuring-serving-cr.md'
+            'install/prerequisites.md': 'admin/install/prerequisites.md'
+            'uninstall.md': 'admin/install/uninstall.md'
+            'upgrade/index.md': 'admin/upgrade/README.md'
+            'upgrade/upgrade-installation-with-operator.md': 'admin/upgrade/upgrade-installation-with-operator.md'
+            'upgrade/upgrade-installation.md': 'admin/upgrade/upgrade-installation.md'
+            'install/check-install-version.md': 'check-install-version.md'
 
 copyright: "Copyright © 2021 The Knative Authors"
 
