@@ -271,6 +271,9 @@ plugins:
         filename: .index
         collapse_single_pages: true
         strict: false
+    - redirects:
+        redirect_maps:
+            'install/collecting-logs/index.md': 'admin/collecting-logs/README.md'
 
 copyright: "Copyright © 2021 The Knative Authors"
 
