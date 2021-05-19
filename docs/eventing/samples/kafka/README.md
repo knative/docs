@@ -36,7 +36,7 @@ is to install it by using [Strimzi](https://strimzi.io).
    ```
 1. Describe the size of your Apache Kafka installation in `kafka.yaml`, like:
    ```yaml
-   apiVersion: kafka.strimzi.io/v1beta1
+   apiVersion: kafka.strimzi.io/v1beta2
    kind: Kafka
    metadata:
      name: my-cluster
