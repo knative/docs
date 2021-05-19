@@ -31,111 +31,109 @@ You can confirm that your Knative components have upgraded successfully, by view
 !!! note
     All pods will restart during the upgrade and their age will reset.
 
-### Knative Serving
+=== "Knative Serving"
+    Enter the following command to view information about pods in the `knative-serving` namespace:
 
-Enter the following command to view information about pods in the `knative-serving` namespace:
+    ```bash
+    kubectl get pods --namespace knative-serving
+    ```
 
-```bash
-kubectl get pods --namespace knative-serving
-```
+    The command returns an output similar to the following:
 
-The command returns an output similar to the following:
+    ```{ .bash .no-copy }
+    NAME                                                     READY   STATUS      RESTARTS   AGE
+    activator-6875896748-gdjgs                               1/1     Running     0          58s
+    autoscaler-6bbc885cfd-vkrgg                              1/1     Running     0          57s
+    autoscaler-hpa-5cdd7c6b69-hxzv4                          1/1     Running     0          55s
+    controller-64dd4bd56-wzb2k                               1/1     Running     0          57s
+    istio-webhook-75cc84fbd4-dkcgt                           1/1     Running     0          50s
+    networking-istio-6dcbd4b5f4-mxm8q                        1/1     Running     0          51s
+    storage-version-migration-serving-serving-0.20.0-82hjt   0/1     Completed   0          50s
+    webhook-75f5d4845d-zkrdt                                 1/1     Running     0          56s
+    ```
 
-```bash
-NAME                                                     READY   STATUS      RESTARTS   AGE
-activator-6875896748-gdjgs                               1/1     Running     0          58s
-autoscaler-6bbc885cfd-vkrgg                              1/1     Running     0          57s
-autoscaler-hpa-5cdd7c6b69-hxzv4                          1/1     Running     0          55s
-controller-64dd4bd56-wzb2k                               1/1     Running     0          57s
-istio-webhook-75cc84fbd4-dkcgt                           1/1     Running     0          50s
-networking-istio-6dcbd4b5f4-mxm8q                        1/1     Running     0          51s
-storage-version-migration-serving-serving-0.20.0-82hjt   0/1     Completed   0          50s
-webhook-75f5d4845d-zkrdt                                 1/1     Running     0          56s
-```
+=== "Knative Eventing"
+    Enter the following command to view information about pods in the `knative-eventing` namespace:
 
-### Knative Eventing
+    ```bash
+    kubectl get pods --namespace knative-eventing
+    ```
 
-Enter the following command to view information about pods in the `knative-eventing` namespace:
+    The command returns an output similar to the following:
 
-```bash
-kubectl get pods --namespace knative-eventing
-```
-
-The command returns an output similar to the following:
-
-```bash
-NAME                                              READY   STATUS      RESTARTS   AGE
-eventing-controller-6bc59c9fd7-6svbm              1/1     Running     0          38s
-eventing-webhook-85cd479f87-4dwxh                 1/1     Running     0          38s
-imc-controller-97c4fd87c-t9mnm                    1/1     Running     0          33s
-imc-dispatcher-c6db95ffd-ln4mc                    1/1     Running     0          33s
-mt-broker-controller-5f87fbd5d9-m69cd             1/1     Running     0          32s
-mt-broker-filter-5b9c64cbd5-d27p4                 1/1     Running     0          32s
-mt-broker-ingress-55c66fdfdf-gn56g                1/1     Running     0          32s
-storage-version-migration-eventing-0.20.0-fvgqf   0/1     Completed   0          31s
-sugar-controller-684d5cfdbb-67vsv                 1/1     Running     0          31s
-```
+    ```{ .bash .no-copy }
+    NAME                                              READY   STATUS      RESTARTS   AGE
+    eventing-controller-6bc59c9fd7-6svbm              1/1     Running     0          38s
+    eventing-webhook-85cd479f87-4dwxh                 1/1     Running     0          38s
+    imc-controller-97c4fd87c-t9mnm                    1/1     Running     0          33s
+    imc-dispatcher-c6db95ffd-ln4mc                    1/1     Running     0          33s
+    mt-broker-controller-5f87fbd5d9-m69cd             1/1     Running     0          32s
+    mt-broker-filter-5b9c64cbd5-d27p4                 1/1     Running     0          32s
+    mt-broker-ingress-55c66fdfdf-gn56g                1/1     Running     0          32s
+    storage-version-migration-eventing-0.20.0-fvgqf   0/1     Completed   0          31s
+    sugar-controller-684d5cfdbb-67vsv                 1/1     Running     0          31s
+    ```
 
 <!-- TODO: Make this a snippet for verifying all installations-->
 ## Verifying an upgrade by viewing custom resources
 
 You can verify the status of a Knative component by checking that the custom resource `READY` status is `True`.
 
-### Knative Serving
+=== "Knative Serving"
 
-```bash
-kubectl get KnativeServing knative-serving --namespace knative-serving
-```
+    ```bash
+    kubectl get KnativeServing knative-serving --namespace knative-serving
+    ```
 
-This command returns an output similar to the following:
+    This command returns an output similar to the following:
 
-```bash
-NAME              VERSION         READY   REASON
-knative-serving   0.20.0          True
-```
+    ```{ .bash .no-copy }
+    NAME              VERSION         READY   REASON
+    knative-serving   0.20.0          True
+    ```
 
-### Knative Eventing
+=== "Knative Eventing"
 
-```bash
-kubectl get KnativeEventing knative-eventing --namespace knative-eventing
-```
+    ```bash
+    kubectl get KnativeEventing knative-eventing --namespace knative-eventing
+    ```
 
-This command returns an output similar to the following:
+    This command returns an output similar to the following:
 
-```bash
-NAME               VERSION        READY   REASON
-knative-eventing   0.20.0         True
-```
-<!--- END snippet-->
+    ```{ .bash .no-copy }
+    NAME               VERSION        READY   REASON
+    knative-eventing   0.20.0         True
+    ```
+    <!--- END snippet-->
 
 ## Rollback to an earlier version
 
 If the upgrade fails, you can rollback to restore your Knative to the previous version. For example, if something goes wrong with an upgrade to 0.23, and your previous version is 0.22, you can apply the following custom resources to restore Knative Serving and Knative Eventing to version 0.22.
 
-For Knative Serving:
+=== "Knative Serving"
 
-```yaml
-kubectl apply -f - <<EOF
-apiVersion: operator.knative.dev/v1alpha1
-kind: KnativeServing
-metadata:
-  name: knative-serving
-  namespace: knative-serving
-spec:
-  version: "0.22"
-EOF
-```
+    ```yaml
+    kubectl apply -f - <<EOF
+    apiVersion: operator.knative.dev/v1alpha1
+    kind: KnativeServing
+    metadata:
+      name: knative-serving
+      namespace: knative-serving
+    spec:
+      version: "0.22"
+    EOF
+    ```
 
-For Knative Eventing:
+=== "Knative Eventing"
 
-```yaml
-kubectl apply -f - <<EOF
-apiVersion: operator.knative.dev/v1alpha1
-kind: KnativeEventing
-metadata:
-  name: knative-eventing
-  namespace: knative-eventing
-spec:
-  version: "0.22"
-EOF
-```
+    ```yaml
+    kubectl apply -f - <<EOF
+    apiVersion: operator.knative.dev/v1alpha1
+    kind: KnativeEventing
+    metadata:
+      name: knative-eventing
+      namespace: knative-eventing
+    spec:
+      version: "0.22"
+    EOF
+    ```

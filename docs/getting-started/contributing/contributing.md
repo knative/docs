@@ -28,12 +28,12 @@ Knative uses a number of extensions to MkDocs which can also be installed using 
 
 === "pip"
     ```
-    pip install mkdocs-material-extensions mkdocs-macros-plugin mkdocs-exclude mkdocs-awesome-pages-plugin
+    pip install mkdocs-material-extensions mkdocs-macros-plugin mkdocs-exclude mkdocs-awesome-pages-plugin mkdocs-redirects
     ```
 
 === "pip3"
     ```
-    pip3 install mkdocs-material-extensions mkdocs-macros-plugin mkdocs-exclude mkdocs-awesome-pages-plugin
+    pip3 install mkdocs-material-extensions mkdocs-macros-plugin mkdocs-exclude mkdocs-awesome-pages-plugin mkdocs-redirects
     ```
 
 ## Use the Docker Container
