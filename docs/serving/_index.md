@@ -11,7 +11,7 @@ The Knative Serving project provides middleware components that enable:
 
 - Rapid deployment of serverless containers.
 - Autoscaling including scaling pods down to zero.
-- Support for multiple networking layers such as Ambassador, Contour, Courier, Gloo, Istio, and Kong, for integration into existing environments.
+- Support for multiple networking layers such as Ambassador, Contour, Kourier, Gloo, Istio, and Kong, for integration into existing environments.
 - Point-in-time snapshots of deployed code and configurations.
 
 ## Serving resources
