@@ -5,8 +5,6 @@
 ## Install Material for MkDocs
 Knative.dev uses [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) to render documentation. Material for MkDocs is Python based and uses pip to install most of it's required packages as well as optional add-ons (which we use).
 
-You can choose to install MkDocs locally or using a Docker image. pip actually comes pre-installed with Python so it is included in many operating systems (like MacOSx or Ubuntu) but if you don’t have python, you can install it here: https://www.python.org
-
 For some (e.g. folks using RHEL), you may have to use pip3.
 
 
