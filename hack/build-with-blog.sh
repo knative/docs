@@ -53,10 +53,12 @@ else
   for i in "${!previous[@]}"; do
     version=${previous[$i]}
     versionjson+="{\"version\": \"v$version-docs\", \"title\": \"v$version\", \"aliases\": [\"\"]},"
-    git clone --depth 1 -b ${BRANCHES[$i+1]} https://github.com/${REPOS[i+1]}/docs "temp/docs-$version"
-    pushd "temp/docs-$version"
-    KNATIVE_VERSION=$version VERSION_WARNING=true mkdocs build -d "../../site/v$version-docs"
-    popd
+    
+    # This is a hack to make old sites links be handle by netlify redirects, we want the drop down but not the content yet
+    #git clone --depth 1 -b ${BRANCHES[$i+1]} https://github.com/${REPOS[i+1]}/docs "temp/docs-$version"
+    #pushd "temp/docs-$version"
+    #KNATIVE_VERSION=$version VERSION_WARNING=true mkdocs build -d "../../site/v$version-docs"
+    #popd
   done
 
   # Set up the version file to point to the built docs.
