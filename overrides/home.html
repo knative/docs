@@ -64,24 +64,22 @@
 
   <section class="intro-container">
     <div class="md-grid md-typeset">
-      <div style="display: flex; align-items: center; min-height: 260px; position: relative">
-        <img
-          src="images/rocket.svg"
-          class="rocket"
-          alt=""
-          width="140"
-          draggable="false"
-          style="position: absolute; right: 200px"
-        />
-        <div>
-          <h2 style="font-size: larger; font-weight: bolder">Make your developers more productive</h2>
-          <p style="max-width: 700px">
-            Knative components build on top of Kubernetes,
-            <b>abstracting away the complex details and enabling developers to focus on what matters</b>. Built by
-            codifying the best practices shared by successful real-world implementations, Knative solves the "boring but
-            difficult" parts of deploying and managing cloud native services so you don't have to.
-          </p>
-        </div>
+      <img
+        src="images/rocket.svg"
+        class="rocket"
+        alt=""
+        width="140"
+        draggable="false"
+        style="position: absolute; right: 200px"
+      />
+      <div>
+        <h2>Make your developers more productive</h2>
+        <p style="max-width: 700px">
+          Knative components build on top of Kubernetes,
+          <b>abstracting away the complex details and enabling developers to focus on what matters</b>. Built by
+          codifying the best practices shared by successful real-world implementations, Knative solves the "boring but
+          difficult" parts of deploying and managing cloud native services so you don't have to.
+        </p>
       </div>
     </div>
   </section>
@@ -115,10 +113,10 @@
   <section class="components-container">
     <div class="md-grid md-typeset">
       <div>
-        <h2 style="font-size: larger; font-weight: bolder">Knative Components</h2>
+        <h2>Knative Components</h2>
       </div>
-      <div style="display: flex" class="component-flex">
-        <div style="margin: 2em; margin-top: 0">
+      <div style="display: flex; gap: 4em;" class="component-flex">
+        <div>
           <div>
             <h4><a style="color: white" href="{{ 'serving' | url }}">Serving ›</a></h4>
           </div>
@@ -127,7 +125,7 @@
             autoscaling (even to zero), and revision tracking. You just have to focus on your core logic.
           </p>
         </div>
-        <div style="margin: 2em; margin-top: 0">
+        <div>
           <div>
             <h4><a style="color: white" href="{{ 'eventing' | url }}">Eventing ›</a></h4>
           </div>
@@ -140,21 +138,21 @@
     </div>
   </section>
 
-  <section class="calltoaction-container" style="padding: 2em">
+  <section class="calltoaction-container">
     <div class="md-grid md-typeset">
       <h2>What's Next?</h2>
-      <div style="display: flex; justify-content: center; width: 100%; flex-wrap: wrap">
-        <div class="col">
+      <div style="display: flex; gap: 2em;" class="component-flex">
+        <div>
           <h4>Talk to us on Slack</h4>
           <a href="https://slack.knative.dev" title="Slack Link" class="md-button">Talk</a>
           <p>Interested in learning more, speaking to other contributors, or finding answers?</p>
         </div>
-        <div class="col">
+        <div>
           <h4>Contributions Welcome</h4>
           <a href="./contributing/" title="Contributing Link" class="md-button">Contribute</a>
           <p>Want to join the fun on Github? New users are always welcome!</p>
         </div>
-        <div class="col">
+        <div>
           <h4>Follow us on Twitter</h4>
           <a href="https://twitter.com/KnativeProject" title="Twitter Link" class="md-button">Follow</a>
           <p>For features announcements, interesting Knative news, and other great things.</p>

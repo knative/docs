@@ -84,10 +84,12 @@ body {
 .usedby-container,
 .home-container,
 .features-container,
-.intro-container {
+.intro-container,
+.components-container {
   margin: 0;
   border: 0;
-  padding-bottom: 4em;
+  padding-top: 2em;
+  padding-bottom: 5em;
 }
 
 @media only screen and (max-width: 1240px) {
@@ -112,10 +114,6 @@ body {
 @media only screen and (max-width: 800px) {
   .component-flex {
     flex-wrap: wrap;
-  }
-
-  .col {
-    min-width: 100%;
   }
 }
 
@@ -147,36 +145,20 @@ body {
   background: #1b2f52;
 }
 
+.calltoaction-container .md-button {
+  display: block;
+}
+
 .usedby-container {
   background: #fff;
   color: #000;
   display: flex;
   justify-content: center;
-  padding-bottom: 6em;
-  padding-top: 2em;
-}
-
-.components-container {
-  padding-bottom: 6em;
-  padding-top: 4em;
 }
 
 .features-container {
   color: #000;
-  background: #114678;
-  background: #28477a;
-  background: #1b2f52;
   background: #fff;
-  padding-bottom: 6em;
-  padding-top: 2em;
-}
-
-.col {
-  width: 25%;
-  margin: 2em;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
 }
 
 .logo {
