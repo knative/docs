@@ -25,20 +25,17 @@
 }
 
 @keyframes continuousgradient {
-  from {
-    background-position: 0% 50%;
-  }
-  to {
-    background-position: 100% 50%;
-  }
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
 }
 
 .animated-gradient {
   animation-name: continuousgradient;
-  background: linear-gradient(-45deg, #6593c8, #0366ad, #000, #6593c8, #0366ad, #000);
-  animation-duration: 6s;
+  background: linear-gradient(-45deg, #1d6ba6, #000);
+  animation-duration: 12s;
   animation-iteration-count: infinite;
-  animation-timing-function: linear;
+  animation-timing-function: ease-in-out;
   position: absolute;
   top: 0;
   width: 100%;
