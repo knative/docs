@@ -115,10 +115,6 @@ body {
   .component-flex {
     flex-wrap: wrap;
   }
-
-  .col {
-    min-width: 100%;
-  }
 }
 
 .home-container .md-button {
@@ -149,6 +145,10 @@ body {
   background: #1b2f52;
 }
 
+.calltoaction-container .md-button {
+  display: block;
+}
+
 .usedby-container {
   background: #fff;
   color: #000;
@@ -159,14 +159,6 @@ body {
 .features-container {
   color: #000;
   background: #fff;
-}
-
-.col {
-  width: 25%;
-  margin: 2em;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
 }
 
 .logo {
