@@ -51,7 +51,7 @@ Sequence has four parts for the Status:
 
 For each of these examples below, You will use a [`PingSource`](../../samples/ping-source/) as the source of events.
 
-We also use a very simple [transformer](https://github.com/vaikas-google/transformer) which performs very trivial transformation of the incoming events to demonstrate they have passed through each stage.
+We also use a very simple [transformer](https://github.com/knative/eventing/blob/main/cmd/appender/main.go) which performs very trivial transformation of the incoming events to demonstrate they have passed through each stage.
 
 ### [Sequence with no reply (terminal last Step)](../sequence/sequence-terminal/)
 
