@@ -84,7 +84,8 @@ body {
 .usedby-container,
 .home-container,
 .features-container,
-.intro-container {
+.intro-container,
+.components-container {
   margin: 0;
   border: 0;
   padding-top: 2em;
@@ -153,23 +154,11 @@ body {
   color: #000;
   display: flex;
   justify-content: center;
-  padding-bottom: 6em;
-  padding-top: 2em;
-}
-
-.components-container {
-  padding-bottom: 6em;
-  padding-top: 4em;
 }
 
 .features-container {
   color: #000;
-  background: #114678;
-  background: #28477a;
-  background: #1b2f52;
   background: #fff;
-  padding-bottom: 6em;
-  padding-top: 2em;
 }
 
 .col {
