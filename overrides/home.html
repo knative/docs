@@ -64,24 +64,22 @@
 
   <section class="intro-container">
     <div class="md-grid md-typeset">
-      <div style="display: flex; align-items: center; min-height: 260px; position: relative">
-        <img
-          src="images/rocket.svg"
-          class="rocket"
-          alt=""
-          width="140"
-          draggable="false"
-          style="position: absolute; right: 200px"
-        />
-        <div>
-          <h2 style="font-size: larger; font-weight: bolder">Make your developers more productive</h2>
-          <p style="max-width: 700px">
-            Knative components build on top of Kubernetes,
-            <b>abstracting away the complex details and enabling developers to focus on what matters</b>. Built by
-            codifying the best practices shared by successful real-world implementations, Knative solves the "boring but
-            difficult" parts of deploying and managing cloud native services so you don't have to.
-          </p>
-        </div>
+      <img
+        src="images/rocket.svg"
+        class="rocket"
+        alt=""
+        width="140"
+        draggable="false"
+        style="position: absolute; right: 200px"
+      />
+      <div>
+        <h2>Make your developers more productive</h2>
+        <p style="max-width: 700px">
+          Knative components build on top of Kubernetes,
+          <b>abstracting away the complex details and enabling developers to focus on what matters</b>. Built by
+          codifying the best practices shared by successful real-world implementations, Knative solves the "boring but
+          difficult" parts of deploying and managing cloud native services so you don't have to.
+        </p>
       </div>
     </div>
   </section>
@@ -115,10 +113,10 @@
   <section class="components-container">
     <div class="md-grid md-typeset">
       <div>
-        <h2 style="font-size: larger; font-weight: bolder">Knative Components</h2>
+        <h2>Knative Components</h2>
       </div>
-      <div style="display: flex" class="component-flex">
-        <div style="margin: 2em; margin-top: 0">
+      <div style="display: flex; gap: 4em;" class="component-flex">
+        <div>
           <div>
             <h4><a style="color: white" href="{{ 'serving' | url }}">Serving ›</a></h4>
           </div>
@@ -127,7 +125,7 @@
             autoscaling (even to zero), and revision tracking. You just have to focus on your core logic.
           </p>
         </div>
-        <div style="margin: 2em; margin-top: 0">
+        <div>
           <div>
             <h4><a style="color: white" href="{{ 'eventing' | url }}">Eventing ›</a></h4>
           </div>

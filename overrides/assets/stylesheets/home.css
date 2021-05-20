@@ -87,7 +87,8 @@ body {
 .intro-container {
   margin: 0;
   border: 0;
-  padding-bottom: 4em;
+  padding-top: 2em;
+  padding-bottom: 5em;
 }
 
 @media only screen and (max-width: 1240px) {
