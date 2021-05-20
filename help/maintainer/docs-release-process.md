@@ -22,13 +22,16 @@ branch and corresponding section knative.dev.
    Then when you make your subsequent updates, make sure you select the branch you just created so you can add all your
    changes to the same PR.
 
-## Check Eventing and Serving
+## Check Eventing, Serving, Client, and Operator
 
 Have they created related release branches?
-https://github.com/knative/<repo-name>/releases/
+[client](https://github.com/knative/client/releases/)
+[eventing](https://github.com/knative/eventing/releases/)
+[operator](https://github.com/knative/operator/releases/)
+[serving](https://github.com/knative/serving/releases/)
 
 ## Create matching branch for Knative docs
-Once there are release branches for the three code repos, make a matching doc repo release.
+Once there are release branches for the four repos listed above, make a matching doc repo release.
 
 ### Prepare the 'main' branch
 Make sure main is in correct state:
