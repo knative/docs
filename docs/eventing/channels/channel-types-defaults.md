@@ -7,6 +7,8 @@ showlandingtoc: "true"
 
 # Channel types and defaults
 Knative uses two types of channels:
+
+
 * The generic Channel object
 * Channel implementations that each have their own custom resource definitions (CRDs), such as
 `InMemoryChannel` and `KafkaChannel`.
