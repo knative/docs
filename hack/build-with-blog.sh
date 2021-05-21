@@ -64,7 +64,7 @@ else
   # Set up the version file to point to the built docs.
   cat << EOF > site/versions.json
   [
-    {"version": "v$version-docs", "title": "v$latest", "aliases": [""]},
+    {"version": "v$latest-docs", "title": "v$latest", "aliases": [""]},
     $versionjson
     {"version": "development", "title": "(Pre-release)", "aliases": [""]}
   ]
