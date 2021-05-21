@@ -63,48 +63,45 @@ named `mychannel` to a Knative service named `myservice`.
 **NOTE:** The sink prefix is optional. You can also specify the service for `--sink` as just
 `--sink <service_name>` and omit the `ksvc` prefix.
 
-{{< /tab >}}
+=== "YAML"
 
-{{% tab name="YAML" %}}
+    1. Create a Subscription object in a YAML file:
 
-1. Create a Subscription object in a YAML file:
+        ```yaml
+        apiVersion: messaging.knative.dev/v1beta1
+        kind: Subscription
+        metadata:
+          name: <subscription_name> # Name of the subscription.
+          namespace: default
+        spec:
+          channel:
+            apiVersion: messaging.knative.dev/v1
+            kind: Channel
+            name: <channel_name> # Configuration settings for the channel that the subscription connects to.
+          delivery:
+            deadLetterSink:
+              ref:
+                apiVersion: serving.knative.dev/v1
+                kind: Service
+                name: <service_name>
+                # Configuration settings for event delivery.
+                # This tells the subscription what happens to events that cannot be delivered to the subscriber.
+                # When this is configured, events that failed to be consumed are sent to the deadLetterSink.
+                # The event is dropped, no re-delivery of the event is attempted, and an error is logged in the system.
+                # The deadLetterSink value must be a Destination.
+          subscriber:
+            ref:
+              apiVersion: serving.knative.dev/v1
+              kind: Service
+              name: <service_name> # Configuration settings for the subscriber. This is the event sink that events are delivered to from the channel.
+        ```
 
-    ```yaml
-    apiVersion: messaging.knative.dev/v1beta1
-    kind: Subscription
-    metadata:
-      name: <subscription_name> # Name of the subscription.
-      namespace: default
-    spec:
-      channel:
-        apiVersion: messaging.knative.dev/v1
-        kind: Channel
-        name: <channel_name> # Configuration settings for the channel that the subscription connects to.
-      delivery:
-        deadLetterSink:
-          ref:
-            apiVersion: serving.knative.dev/v1
-            kind: Service
-            name: <service_name>
-            # Configuration settings for event delivery.
-            # This tells the subscription what happens to events that cannot be delivered to the subscriber.
-            # When this is configured, events that failed to be consumed are sent to the deadLetterSink.
-            # The event is dropped, no re-delivery of the event is attempted, and an error is logged in the system.
-            # The deadLetterSink value must be a Destination.
-      subscriber:
-        ref:
-          apiVersion: serving.knative.dev/v1
-          kind: Service
-          name: <service_name> # Configuration settings for the subscriber. This is the event sink that events are delivered to from the channel.
-    ```
+    1. Apply the YAML file:
 
-1. Apply the YAML file:
+        ```
+        kubectl apply -f <filename>
+        ```
 
-    ```
-    kubectl apply -f <filename>
-    ```
-
-{{< /tab >}} {{< /tabs >}}
 
 ## Listing subscriptions
 
@@ -135,21 +132,15 @@ kn subscription describe <subscription_name>
 
 You can delete a subscription by using the `kn` or `kubectl` CLI tools.
 
-{{< tabs name="Deleting a subscription" default="kn" >}}
-{{% tab name="kn" %}}
+=== "kn"
+    ```
+    kn subscription delete <subscription_name>
+    ```
 
-```
-kn subscription delete <subscription_name>
-```
 
-{{< /tab >}}
-
-{{% tab name="kubectl" %}}
-
-```
-kubectl subscription delete <subscription_name>
-```
-
-{{< /tab >}} {{< /tabs >}}
+=== "kubectl"
+    ```
+    kubectl subscription delete <subscription_name>
+    ```
 
 <!-- Insert ## Next steps with a link to a new topic on creating channel implementations. -->

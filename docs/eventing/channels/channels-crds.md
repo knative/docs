@@ -5,7 +5,7 @@ weight: 100
 type: "docs"
 ---
 
-<!-- Move this content out to the _index.md so that it's part of a conceptual overview of Channels.
+<!-- Move this content out to the README.md so that it's part of a conceptual overview of Channels.
 It's not helpful for content this brief and this specific to have its own page. -->
 
 <!--
