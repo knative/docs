@@ -66,50 +66,47 @@ The event sink can be any addressable Kubernetes object that can receive events.
 If you do not have an existing event sink that you want to connect to the SinkBinding,
 create a Knative service.
 
-  {{< tabs name="knative_service" default="kn" >}}
-  {{% tab name="kn" %}}
+=== "kn"
 
-  Create a Knative service by running:
+    Create a Knative service by running:
 
-  ```bash
-  kn service create <app-name> --image <image-url>
-  ```
-  Where:
-  - `<app-name>` is the name of the application.
-  - `<image-url>` is the URL of the image container.
+    ```bash
+    kn service create <app-name> --image <image-url>
+    ```
+    Where:
+    - `<app-name>` is the name of the application.
+    - `<image-url>` is the URL of the image container.
 
-  For example:
+    For example:
 
-  ```bash
-  $ kn service create hello --image gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
-  ```
-  {{< /tab >}}
-  {{% tab name="yaml" %}}
+    ```bash
+    $ kn service create hello --image gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+    ```
 
-  1. Copy the following YAML into a `service.yaml` file:
-      ```yaml
-      apiVersion: serving.knative.dev/v1
-      kind: Service
-      metadata:
-        name: <app-name>
-      spec:
-        template:
-          spec:
-            containers:
-              - image: <image-url>
-      ```
-      Where:
-      - `<app-name>` is the name of the application. For example, `event-display`.
-      - `<image-url>` is the URL of the image container.
-      For example, `gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display`
- </br></br>
-  2. Apply the YAML file by running:
-      ```bash
-      kubectl apply --filename service.yaml
+=== "YAML"
+    1. Copy the following YAML into a `service.yaml` file:
+        ```yaml
+        apiVersion: serving.knative.dev/v1
+        kind: Service
+        metadata:
+          name: <app-name>
+        spec:
+          template:
+            spec:
+              containers:
+                - image: <image-url>
+        ```
+        Where:
+        - `<app-name>` is the name of the application. For example, `event-display`.
+        - `<image-url>` is the URL of the image container.
+        For example, `gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display`
+   </br></br>
+    2. Apply the YAML file by running:
+        ```bash
+        kubectl apply --filename service.yaml
       ```
 
-  {{< /tab >}}
-  {{< /tabs >}}
+
 
 
 ## Create a subject
@@ -175,85 +172,80 @@ any extra overrides given by `CE_OVERRIDES`.
 
 Create a `SinkBinding` object that directs events from your subject to the event sink.
 
-{{< tabs name="sinkbinding" default="kn" >}}
-{{% tab name="kn" %}}
+=== "kn"
 
-Create a `SinkBinding` object by running:
+    Create a `SinkBinding` object by running:
 
-```bash
-kn source binding create <name> \
-  --namespace <namespace> \
-  --subject "<subject>" \
-  --sink <event-sink> \
-  --ce-override "<cloudevent-overrides>"
-```
-Where:
-- `<name>` is the name of the SinkBinding object you want to create.
-- `<namespace>` is the namespace you created for your SinkBinding to use.
-- `<subject>` is the subject to connect. Examples:
-  - `Job:batch/v1:app=heartbeat-cron` matches all jobs in namespace with label `app=heartbeat-cron`.
-  - `Deployment:apps/v1:myapp` matches a deployment called `myapp` in the namespace.
-  - `Service:serving.knative.dev/v1:hello` matches the service called `hello`.
-- `<event-sink>` is the event sink to connect. For example `http://event-display.svc.cluster.local`.
-- Optional: `<cloudevent-overrides>` in the form `key=value`.
-Cloud Event overrides control the output format and modifications of the event
-sent to the sink and are applied before sending the event.
-You can provide this flag multiple times.
+    ```bash
+    kn source binding create <name> \
+      --namespace <namespace> \
+      --subject "<subject>" \
+      --sink <event-sink> \
+      --ce-override "<cloudevent-overrides>"
+    ```
+    Where:
+    - `<name>` is the name of the SinkBinding object you want to create.
+    - `<namespace>` is the namespace you created for your SinkBinding to use.
+    - `<subject>` is the subject to connect. Examples:
+      - `Job:batch/v1:app=heartbeat-cron` matches all jobs in namespace with label `app=heartbeat-cron`.
+      - `Deployment:apps/v1:myapp` matches a deployment called `myapp` in the namespace.
+      - `Service:serving.knative.dev/v1:hello` matches the service called `hello`.
+    - `<event-sink>` is the event sink to connect. For example `http://event-display.svc.cluster.local`.
+    - Optional: `<cloudevent-overrides>` in the form `key=value`.
+    Cloud Event overrides control the output format and modifications of the event
+    sent to the sink and are applied before sending the event.
+    You can provide this flag multiple times.
 
-For example:
-```bash
-$ kn source binding create bind-heartbeat \
-  --namespace sinkbinding-example \
-  --subject "Job:batch/v1:app=heartbeat-cron" \
-  --sink http://event-display.svc.cluster.local \
-  --ce-override "sink=bound"
-```
+    For example:
+    ```bash
+    $ kn source binding create bind-heartbeat \
+      --namespace sinkbinding-example \
+      --subject "Job:batch/v1:app=heartbeat-cron" \
+      --sink http://event-display.svc.cluster.local \
+      --ce-override "sink=bound"
+    ```
 
 <!-- TODO provide link to information about the flags for the kn command -->
 
-{{< /tab >}}
-{{% tab name="yaml" %}}
+=== "YAML"
+    1. Copy the following to a your subject's YAML file:
 
-1. Copy the following to a your subject's YAML file:
+        ```yaml
+        apiVersion: sources.knative.dev/v1alpha1
+        kind: SinkBinding
+        metadata:
+          name: <name>
+        spec:
+          subject:
+            apiVersion: <api-version>
+            kind: <kind>
+            selector:
+              matchLabels:
+                <label-key>: <label-value>
+            sink:
+              ref:
+                apiVersion: serving.knative.dev/v1
+                kind: Service
+                name: <event-sink>
+        ```
+        Where:
+        - `<name>` is the name of the SinkBinding object you want to create. For example, `bind-heartbeat`.
+        - `<api-version>` is the API version of the subject. For example `batch/v1`.
+        - `<kind>` is the Kind of your subject. For example `Job`.
+        - `<label-key>: <label-value>` is a map of key-value pairs to select subjects
+        that have a matching label. For example, `app: heartbeat-cron` selects any subject
+        with the label `app=heartbeat-cron`.
+        - `<event-sink>` is the event sink to connect. For example `event-display`.
 
-    ```yaml
-    apiVersion: sources.knative.dev/v1alpha1
-    kind: SinkBinding
-    metadata:
-      name: <name>
-    spec:
-      subject:
-        apiVersion: <api-version>
-        kind: <kind>
-        selector:
-          matchLabels:
-            <label-key>: <label-value>
-        sink:
-          ref:
-            apiVersion: serving.knative.dev/v1
-            kind: Service
-            name: <event-sink>
-    ```
-    Where:
-    - `<name>` is the name of the SinkBinding object you want to create. For example, `bind-heartbeat`.
-    - `<api-version>` is the API version of the subject. For example `batch/v1`.
-    - `<kind>` is the Kind of your subject. For example `Job`.
-    - `<label-key>: <label-value>` is a map of key-value pairs to select subjects
-    that have a matching label. For example, `app: heartbeat-cron` selects any subject
-    with the label `app=heartbeat-cron`.
-    - `<event-sink>` is the event sink to connect. For example `event-display`.
+        For more information about the fields you can configure for the SinkBinding
+        object, see [Sink Binding Reference](reference.md).
+    2. Apply the YAML file by running:
+        ```bash
+        kubectl apply --filename <filename>.yaml
+        ```
+        Where `filename` is the name of the YAML file for your subject.
+        For example, `cronjob.yaml`.
 
-    For more information about the fields you can configure for the SinkBinding
-    object, see [Sink Binding Reference](reference.md).
-2. Apply the YAML file by running:
-    ```bash
-    kubectl apply --filename <filename>.yaml
-    ```
-    Where `filename` is the name of the YAML file for your subject.
-    For example, `cronjob.yaml`.
-
-{{< /tab >}}
-{{< /tabs >}}
 
 
 ## Verify the SinkBinding
