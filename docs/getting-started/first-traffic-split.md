@@ -113,11 +113,10 @@ By default, when Knative creates a brand new `Revision` it directs 100% of traff
     apiVersion: serving.knative.dev/v1
     kind: Route
     metadata:
-      name: route-hello
+      name: hello
     spec:
-    # Unfortunately, @latest is a handy pointer which is only supported in the kn CLI
       traffic:
-        - revisionName: hello-knative
+        - revisionName: latest
           percent: 50
         - revisionName: hello-world
           percent: 50
