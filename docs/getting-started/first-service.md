@@ -28,7 +28,7 @@ For those of you familiar with other **source-to-url** tools, this may seem fami
     spec:
       template:
         metadata:
-# This is the name of our new "Revision," see "?" box below for
+# This is the name of our new "Revision," see "?" box below for more details
           name: hello-world
         spec:
           containers:
