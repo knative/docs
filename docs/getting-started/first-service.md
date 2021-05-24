@@ -28,6 +28,7 @@ For those of you familiar with other **source-to-url** tools, this may seem fami
     spec:
       template:
         metadata:
+# This is the name of our new "Revision," see "?" box below for
           name: hello-world
         spec:
           containers:
@@ -50,7 +51,7 @@ http://hello.default.127.0.0.1.nip.io
 ```
 
 ??? question "Why did I pass in `revision-name`?"
-    Note that the name "world" which you passed in as "revision-name" is being used to create the `Revision`'s name (`latest revision "hello-world"...`). This will help you to more easily identify this particular `Revision`, but don't worry, we'll talk more about `Revisions` later.
+    Note that the name "world" which you passed in as "revision-name" (or under "metadata" in your YAML file) is being used to create the `Revision`'s name (`latest revision "hello-world"...`). This will help you to more easily identify this particular `Revision`, but don't worry, we'll talk more about `Revisions` later.
 
 ## Run your Knative Service
 ```
