@@ -1,6 +1,7 @@
-# Before you begin
+# Getting Started with a Knative Sandbox
 
-Before you can get started with Knative you must set up a development environment.
+## Before you begin
+Before you can get started with a Knative Sandbox deployment you must set up a development environment.
 
 ## Set up a development cluster
 
