@@ -1,0 +1,33 @@
+## Description: 
+
+---
+
+## Story
+```
+As {PERSONA} 
+I want to {USER NEED}
+So that {IMPACT}
+```
+
+## Acceptance Criteria
+`Name #1`
+```
+GIVEN 
+WHEN
+THEN
+```
+
+`(If needed) Name #2`
+```
+GIVEN 
+WHEN 
+THEN 
+```
+
+## Known Issues and Considerations: 
+
+
+
+## Who should probably pick up this issue? 
+- [ ] Existing Contributors 
+- [ ] New Contributors
