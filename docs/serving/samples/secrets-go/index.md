@@ -39,10 +39,10 @@ cd knative-docs/docs/serving/samples/secrets-go
 1. Create a new file named `secrets.go` and paste the following code. This code
    creates a basic web server which listens on port 8080:
 
-  ```go
-  package main
+   ```go
+   package main
 
-  import (
+   import (
     "context"
     "fmt"
     "log"
@@ -50,13 +50,13 @@ cd knative-docs/docs/serving/samples/secrets-go
     "os"
 
     "cloud.google.com/go/storage"
-  )
+   )
 
-  func main() {
+   func main() {
     log.Print("Secrets sample started.")
 
     // This sets up the standard GCS storage client, which will pull
-    // credentials from GOOGLE_APPLICATION_DEFAULT if specified.
+    // credentials from GOOGLE_APPLICATION_CREDENTIALS if specified.
     ctx := context.Background()
     client, err := storage.NewClient(ctx)
     if err != nil {
@@ -88,8 +88,8 @@ cd knative-docs/docs/serving/samples/secrets-go
     }
 
     log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
-  }
-  ```
+   }
+   ```
 
 1. Create a new file named `go.mod` and paste the following code. This code is Golang module that
    specifies a module name, dependencies, and the minimal versions.
