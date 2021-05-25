@@ -39,7 +39,7 @@ kn broker list
 ==**Expected Output**==
 ```{ .bash .no-copy }
 NAME             URL                                                                                AGE   CONDITIONS   READY   REASON
-example-broker   http://broker-ingress.knative-eventing.svc.cluster.local/default/example-broker     5m    5 OK / 5     True    
+example-broker   http://broker-ingress.knative-eventing.svc.cluster.local/default/example-broker     5m    5 OK / 5    True
 ```
 !!! warning
     In-Memory Brokers are for development use only and must not be used in a production deployment.
