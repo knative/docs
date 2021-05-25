@@ -1,5 +1,3 @@
-// +build grpcping
-
 package main
 
 import (
