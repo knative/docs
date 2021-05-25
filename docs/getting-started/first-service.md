@@ -1,8 +1,8 @@
 # Deploying your first Knative Service
 !!! tip
     Hit ++"n"++ / ++"."++ on your keyboard to move forward in the tutorial. Use ++"p"++ / ++","++ to go back at any time.
-    
-==**In this tutorial, we are going to deploy a "Hello world" Service!**== 
+
+==**In this tutorial, you will deploy a "Hello world" service.**==
 This service will accept an environment variable, `TARGET`, and print "`Hello ${TARGET}!`."
 
 For those of you familiar with other **source-to-url** tools, this may seem familiar. However, since our "Hello world" Service is being deployed as a Knative Service, it gets some **super powers (scale-to-zero, traffic-splitting) out of the box** :rocket:.
@@ -28,7 +28,8 @@ For those of you familiar with other **source-to-url** tools, this may seem fami
     spec:
       template:
         metadata:
-          name: world
+# This is the name of our new "Revision," see "?" box below for more details
+          name: hello-world
         spec:
           containers:
             - image: gcr.io/knative-samples/helloworld-go
@@ -50,7 +51,7 @@ http://hello.default.127.0.0.1.nip.io
 ```
 
 ??? question "Why did I pass in `revision-name`?"
-    Note that the name "world" which you passed in as "revision-name" is being used to create the `Revision`'s name (`latest revision "hello-world"...`). This will help you to more easily identify this particular `Revision`, but don't worry, we'll talk more about `Revisions` later.
+    Note that the name "world" which you passed in as "revision-name" (or under "metadata" in your YAML file) is being used to create the `Revision`'s name (`latest revision "hello-world"...`). This will help you to more easily identify this particular `Revision`, but don't worry, we'll talk more about `Revisions` later.
 
 ## Run your Knative Service
 ```
