@@ -93,13 +93,13 @@ cd knative-docs/docs/serving/samples/secrets-go
 
 1. Create a new file named `go.mod` and paste the following code. This code is Golang module that
    specifies a module name, dependencies, and the minimal versions.
-  ```go
-  module github.com/knative/docs/docs/serving/samples/secrets-go
+   ```go
+   module github.com/knative/docs/docs/serving/samples/secrets-go
 
-  go 1.15
+   go 1.15
 
-  require cloud.google.com/go/storage v1.15.0
-  ```
+   require cloud.google.com/go/storage v1.15.0
+   ```
 
 1. In your project directory, create a file named `Dockerfile` and copy the code
    block below into it. For detailed instructions on dockerizing a Go app, see
@@ -127,6 +127,10 @@ cd knative-docs/docs/serving/samples/secrets-go
 
    # Copy the binary to the production image from the builder stage.
    COPY --from=builder /go/src/github.com/knative/docs/hellosecrets/hellosecrets /hellosecrets
+
+   # Service must listen to $PORT environment variable.
+   # This default value facilitates local development.
+   ENV PORT 8080
 
    # Run the web service on container startup.
    CMD ["/hellosecrets"]
