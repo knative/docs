@@ -16,7 +16,7 @@ Create the CloudEvents Player Service:
     ```bash
     kn service create cloudevents-player \
     --image ruromero/cloudevents-player:latest \
-    --env BROKER_URL=http://broker-ingress.knative-eventing.svc.cluster.local/default/default
+    --env BROKER_URL=http://broker-ingress.knative-eventing.svc.cluster.local/default/example-broker
     ```
 
 === "YAML"
@@ -52,12 +52,11 @@ We can use the CloudEvents Player to send and receive CloudEvents. If you open t
 
     For more information on the CloudEvents Specification, check out the [CloudEvents Spec](https://github.com/cloudevents/spec/blob/v1.0.1/spec.md){target=_blank}.
 
-Fill out the form with whatever you data you would like to and hit the "SEND EVENT" button.
+Fill out the form with whatever you data you would like to (make sure your Event Source does not contain any spaces) and hit the "SEND EVENT" button.
 
-<figure>
-  <img src="https://user-images.githubusercontent.com/16281246/116407683-04448d80-a800-11eb-9283-ba86fb259053.png" draggable="false">
-  <figcaption>Make sure your Event Source does not contain any spaces! </figcaption>
-</figure>
+
+![CloudEvents Player Send](https://user-images.githubusercontent.com/16281246/116407683-04448d80-a800-11eb-9283-ba86fb259053.png)
+
 
 !!! tip "Tip: Clicking the :fontawesome-solid-envelope: will show you the CloudEvent as the `Broker` sees it."
 
