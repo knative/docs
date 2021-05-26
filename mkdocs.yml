@@ -47,13 +47,17 @@ nav:
         - Logging: admin/collecting-logs/README.md
         - Metrics: admin/collecting-metrics/README.md
         - Uninstalling Knative: admin/install/uninstall.md
+    - Developer guide:
+        - Overview: developer/README.md
+        - Knative Serving:
+          - Services:
+            - About Knative Services: developer/serving/services/README.md
+            - Creating a Service: developer/serving/services/creating-services.md
+            - Configure resource requests and limits: developer/serving/services/configure-requests-limits-services.md
+            - Configuring private Services: developer/serving/services/private-services.md
     - Serving Component:
       - Overview: serving/README.md
       - Developer Topics:
-        - Knative services:
-          - Overview: serving/services/README.md
-          - Creating a service: serving/services/creating-services.md
-          - Configuring private services: serving/services/private-services.md
         - Deploying from private registries: serving/deploying-from-private-registry/README.md
         - Tag resolution: serving/tag-resolution.md
         - Gradually rolling out latest Revisions: serving/rolling-out-latest-revision.md
@@ -289,6 +293,9 @@ plugins:
         'upgrade/upgrade-installation-with-operator.md': 'admin/upgrade/upgrade-installation-with-operator.md'
         'upgrade/upgrade-installation.md': 'admin/upgrade/upgrade-installation.md'
         'install/check-install-version.md': 'check-install-version.md'
+        'serving/services/private-services.md': 'developer/serving/services/private-services.md'
+        'serving/services/creating-services.md': 'developer/serving/services/creating-services.md'
+        'serving/services/README.md': 'developer/serving/services/README.md'
 
 copyright: "Copyright © 2021 The Knative Authors"
 
