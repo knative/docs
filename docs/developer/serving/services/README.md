@@ -1,4 +1,4 @@
-# Knative services
+# About Knative Services
 
 Knative Services are used to deploy an application. To create an application using Knative, you must create a YAML file that defines a Service. This YAML file specifies metadata about the application, points to the hosted image of the app, and allows the Service to be configured.
 

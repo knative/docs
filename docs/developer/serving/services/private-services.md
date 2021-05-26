@@ -1,55 +1,38 @@
----
-title: "Creating a private service"
-linkTitle: "Configuring private services"
-weight: 03
-type: "docs"
-aliases:
-  - /docs/serving/cluster-local-route
----
+# Creating a private Service
 
-# Creating a private service
-
-By default services deployed through Knative are published to an external IP
-address, making them public services on a public IP address and with a public URL.
-
-While this is useful for services that need to be accessible from outside of the
-cluster, frequently you may be building a back-end service which should not be
-available from outside of the cluster.
+By default, Services deployed through Knative are published to an external IP
+address, making them public Services on a public IP address and with a public URL.
 
 Knative provides three ways to enable private services which are only available
 inside the cluster:
 
-1. To make all services private, change the default domain to
-   `svc.cluster.local` by
-   [editing the `config-domain` ConfigMap](../using-a-custom-domain.md). This
-   changes all services deployed through Knative to only be published to the
-   cluster.
-1. To make an individual service private, the service or route can be
-   labelled so that it is not published to the external gateway.
-1. Use [custom domain mappings](../creating-domain-mappings).
+1. To make all Knative Services private, change the default domain to
+   `svc.cluster.local` by [editing the `config-domain` ConfigMap](../../../../serving/using-a-custom-domain). This changes all Services deployed through Knative to only be published to the cluster.
+1. To make an individual Service private, the Service or Route can be
+   labelled with `networking.knative.dev/visibility=cluster-local` so that it is not published to the external gateway.
+1. Use [custom domain mappings](../../../../serving/creating-domain-mappings).
 
-## Label a service to be cluster-local only
+## Using the cluster-local label
 
-To configure a Knative service to only be available on the cluster-local network, and not on the public internet, you can apply the
-`networking.knative.dev/visibility=cluster-local` label to a Knative service, a route or a Kubernetes service object.
+To configure a Knative Service so that it is only available on the cluster-local network, and not on the public internet, you can apply the
+`networking.knative.dev/visibility=cluster-local` label to a Knative Service, a route or a Kubernetes Service object.
 
-- To label a Knative service:
+- To label a Knative Service:
 
     ```shell
     kubectl label kservice ${KSVC_NAME} networking.knative.dev/visibility=cluster-local
     ```
 
-    By labeling the Kubernetes service you can restrict visibility in a more
-    fine-grained way. See [subroutes](../using-subroutes.md) for information about
-    tagged routes.
+    By labeling the Kubernetes Service you can restrict visibility in a more
+    fine-grained way. See [subroutes](../../../../serving/using-subroutes) for information about tagged routes.
 
-- To label a route when the route is used directly without a Knative service:
+- To label a Route when the Route is used directly without a Knative Service:
 
     ```shell
     kubectl label route ${ROUTE_NAME} networking.knative.dev/visibility=cluster-local
     ```
 
-- To label a Kubernetes service:
+- To label a Kubernetes Service:
 
     ```shell
     kubectl label service ${SERVICE_NAME} networking.knative.dev/visibility=cluster-local
@@ -57,14 +40,14 @@ To configure a Knative service to only be available on the cluster-local network
 
 ### Example
 
-You can deploy the [Hello World sample](../samples/hello-world/helloworld-go/) and then convert it to be an cluster-local service by labelling the service:
+You can deploy the [Hello World sample](../../../../serving/samples/hello-world/helloworld-go/) and then convert it to be an cluster-local Service by labelling the Service:
 
 ```shell
 kubectl label kservice helloworld-go networking.knative.dev/visibility=cluster-local
 ```
 
 You can then verify that the change has been made by verifying the URL for the
-`helloworld-go` service:
+`helloworld-go` Service:
 
 ```shell
 kubectl get kservice helloworld-go
@@ -73,5 +56,5 @@ NAME            URL                                              LATESTCREATED  
 helloworld-go   http://helloworld-go.default.svc.cluster.local   helloworld-go-2bz5l   helloworld-go-2bz5l   True
 ```
 
-The service returns the a URL with the `svc.cluster.local` domain, indicating
-the service is only available in the cluster local network.
+The Service returns the a URL with the `svc.cluster.local` domain, indicating
+the Service is only available in the cluster-local network.

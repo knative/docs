@@ -1,4 +1,4 @@
-# Creating a Knative service
+# Creating a Service
 
 You can create a Knative service by applying a YAML file or using the `kn service create` CLI command.
 

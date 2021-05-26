@@ -51,10 +51,10 @@ nav:
         - Overview: developer/README.md
         - Knative Serving:
           - Services:
-            - About services: developer/serving/services/README.md
-            - Creating a service: developer/serving/services/creating-services.md
+            - About Knative Services: developer/serving/services/README.md
+            - Creating a Service: developer/serving/services/creating-services.md
             - Configure resource requests and limits: developer/serving/services/configure-requests-limits-services.md
-            - Configuring private services: developer/serving/services/private-services.md
+            - Configuring private Services: developer/serving/services/private-services.md
     - Serving Component:
       - Overview: serving/README.md
       - Developer Topics:
