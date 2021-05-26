@@ -91,6 +91,16 @@ cd knative-docs/docs/serving/samples/secrets-go
    }
    ```
 
+1. Create a new file named `go.mod` and paste the following code. This code is Golang module that
+   specifies a module name, dependencies, and the minimal versions.
+   ```go
+   module github.com/knative/docs/docs/serving/samples/secrets-go
+
+   go 1.15
+
+   require cloud.google.com/go/storage v1.15.0
+   ```
+
 1. In your project directory, create a file named `Dockerfile` and copy the code
    block below into it. For detailed instructions on dockerizing a Go app, see
    [Deploying Go servers with Docker](https://blog.golang.org/docker).
@@ -99,7 +109,7 @@ cd knative-docs/docs/serving/samples/secrets-go
    # Use the official Golang image to create a build artifact.
    # This is based on Debian and sets the GOPATH to /go.
    # https://hub.docker.com/_/golang
-   FROM golang as builder
+   FROM golang:1.15 as builder
 
    # Copy local code to the container image.
    WORKDIR /go/src/github.com/knative/docs/hellosecrets
