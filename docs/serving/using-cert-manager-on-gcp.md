@@ -38,7 +38,7 @@ and Cloud DNS:
     [Knative installation guides](../install/).
   - Your Knative cluster must be configured to use a
     [custom domain](./using-a-custom-domain.md).
-  - [cert-manager v0.6.1 or higher installed](./installing-cert-manager.md)
+  - [cert-manager v1.0.0 or higher installed](./installing-cert-manager.md)
 - Your DNS provider must be setup and configured to your domain.
 
 ## Creating a service account and using a Kubernetes secret
