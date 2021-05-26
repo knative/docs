@@ -113,6 +113,10 @@ body {
   .component-flex {
     flex-wrap: wrap;
   }
+
+  .intro-container img {
+    display: block;
+  }
 }
 
 .home-container .md-button {
@@ -145,6 +149,12 @@ body {
 
 .calltoaction-container .md-button {
   display: block;
+}
+
+.intro-container img {
+  height: 10em;
+  float: right;
+  margin-left: 2em;
 }
 
 .usedby-container {
