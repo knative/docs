@@ -1,4 +1,4 @@
-# Creating a private Service
+# Configuring private Services
 
 By default, Services deployed through Knative are published to an external IP
 address, making them public Services on a public IP address and with a public URL.
