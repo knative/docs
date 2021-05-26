@@ -59,11 +59,11 @@ For example, `sinkbinding-example`.
 `bindings.knative.dev/include: true` label to the namespace to enable SinkBinding behavior.
 
 
-## Create an event sink
+## Create a sink
 
-The event sink can be any addressable Kubernetes object that can receive events.
+The sink can be any addressable Kubernetes object that can receive events.
 
-If you do not have an existing event sink that you want to connect to the SinkBinding,
+If you do not have an existing sink that you want to connect to the SinkBinding,
 create a Knative service.
 
 === "kn"
@@ -170,7 +170,7 @@ any extra overrides given by `CE_OVERRIDES`.
 
 ## Create a SinkBinding object
 
-Create a `SinkBinding` object that directs events from your subject to the event sink.
+Create a `SinkBinding` object that directs events from your subject to the sink.
 
 === "kn"
 
@@ -180,7 +180,7 @@ Create a `SinkBinding` object that directs events from your subject to the event
     kn source binding create <name> \
       --namespace <namespace> \
       --subject "<subject>" \
-      --sink <event-sink> \
+      --sink <sink> \
       --ce-override "<cloudevent-overrides>"
     ```
     Where:
@@ -190,7 +190,7 @@ Create a `SinkBinding` object that directs events from your subject to the event
       - `Job:batch/v1:app=heartbeat-cron` matches all jobs in namespace with label `app=heartbeat-cron`.
       - `Deployment:apps/v1:myapp` matches a deployment called `myapp` in the namespace.
       - `Service:serving.knative.dev/v1:hello` matches the service called `hello`.
-    - `<event-sink>` is the event sink to connect. For example `http://event-display.svc.cluster.local`.
+    - `<sink>` is the sink to connect. For example `http://event-display.svc.cluster.local`.
     - Optional: `<cloudevent-overrides>` in the form `key=value`.
     Cloud Event overrides control the output format and modifications of the event
     sent to the sink and are applied before sending the event.
@@ -226,7 +226,7 @@ Create a `SinkBinding` object that directs events from your subject to the event
               ref:
                 apiVersion: serving.knative.dev/v1
                 kind: Service
-                name: <event-sink>
+                name: <sink>
         ```
         Where:
         - `<name>` is the name of the SinkBinding object you want to create. For example, `bind-heartbeat`.
@@ -235,7 +235,7 @@ Create a `SinkBinding` object that directs events from your subject to the event
         - `<label-key>: <label-value>` is a map of key-value pairs to select subjects
         that have a matching label. For example, `app: heartbeat-cron` selects any subject
         with the label `app=heartbeat-cron`.
-        - `<event-sink>` is the event sink to connect. For example `event-display`.
+        - `<sink>` is the sink to connect. For example `event-display`.
 
         For more information about the fields you can configure for the SinkBinding
         object, see [Sink Binding Reference](reference.md).
@@ -251,14 +251,14 @@ Create a `SinkBinding` object that directs events from your subject to the event
 ## Verify the SinkBinding
 
 1. Verify that a message was sent to the Knative eventing system by looking at the
-service logs for your event sink:
+service logs for your sink:
 
     ```bash
-    kubectl logs -l <event-sink> -c <container> --since=10m
+    kubectl logs -l <sink> -c <container> --since=10m
     ```
     Where:
-    - `<event-sink>` is the name of your event sink.
-    - `<container>` is the name of the container your event sink is running in.
+    - `<sink>` is the name of your sink.
+    - `<container>` is the name of the container your sink is running in.
 
     For example:
     ```bash
