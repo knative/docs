@@ -108,7 +108,7 @@ TLS certificates and how the requests are validated with Cloud DNS.
 
    ```shell
    kubectl apply --filename - <<EOF
-   apiVersion: cert-manager.io/v1alpha2
+   apiVersion: cert-manager.io/v1
    kind: ClusterIssuer
    metadata:
      name: letsencrypt-issuer
@@ -171,7 +171,7 @@ exists.
    export DOMAIN=<your-domain.com>
 
    kubectl apply --filename - <<EOF
-   apiVersion: cert-manager.io/v1alpha2
+   apiVersion: cert-manager.io/v1
    kind: Certificate
    metadata:
      name: my-certificate
