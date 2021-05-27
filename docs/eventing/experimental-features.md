@@ -1,9 +1,3 @@
----
-title: "Experimental features"
-weight: 99
-type: "docs"
----
-
 # Experimental features
 
 In Knative we want to keep the innovation alive, experimenting and delivering new features without affecting the stability of the project.
