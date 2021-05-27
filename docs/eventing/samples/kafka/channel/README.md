@@ -307,11 +307,11 @@ data:
 namespace, be sure your roles and bindings are configured so that the
 knative-eventing pods can access it.
 
-## Channel Configuration
+## Channel configuration
 
 The `config-kafka` ConfigMap allows for a variety of channel options such as:
 - CPU and Memory requests and limits for the dispatcher (and receiver for
-   the distributed channel type) deployments created by the controller
+  the distributed channel type) deployments created by the controller
 - Kafka topic default values (number of partitions, replication factor, and
   retention time)
 - Maximum idle connections/connections per host for Knative cloudevents
