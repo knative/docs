@@ -40,7 +40,7 @@ To set the SinkBinding object to inclusion mode:
     kubectl -n knative-eventing set env deployments eventing-webhook --containers="eventing-webhook" SINK_BINDING_SELECTION_MODE=inclusion
     ```
 
-2. To verify that the value is set as desired, run:
+2. To verify that `SINK_BINDING_SELECTION_MODE` is set as desired, run:
 
     ```bash
     kubectl -n knative-eventing set env deployments eventing-webhook --containers="eventing-webhook" --list | grep SINK_BINDING
