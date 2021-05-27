@@ -206,6 +206,11 @@ Follow the procedure for the broker of your choice:
     !!! warning
         In order to use the KafkaChannel make sure it is installed on the cluster as discussed above.
 
+=== "RabbitMQ Broker"
+
+    You can install RabbitMQ broker by following instructions [here](https://github.com/knative-sandbox/eventing-rabbitmq/tree/main/broker).
+
+    For more information, see the [RabbitMQ broker](https://github.com/knative-sandbox/eventing-rabbitmq).
 
 ## Next steps
 
