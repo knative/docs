@@ -97,6 +97,13 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-python
       labels:
            eventing.knative.dev/injection: enabled
     ---
+    # A default broker
+    apiVersion: eventing.knative.dev/v1
+    kind: Broker
+    metadata:
+      name: default
+      namespace: knative-samples
+    ---
     # Helloworld-python app deploment
     apiVersion: apps/v1
     kind: Deployment
@@ -119,18 +126,18 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-python
     ---
     # Service that exposes helloworld-python app.
     # This will be the subscriber for the Trigger
-      kind: Service
-      apiVersion: v1
-      metadata:
-        name: helloworld-python
-        namespace: knative-samples
-      spec:
-        selector:
-          app: helloworld-python
-        ports:
-        - protocol: TCP
-          port: 80
-          targetPort: 8080
+    kind: Service
+    apiVersion: v1
+    metadata:
+      name: helloworld-python
+      namespace: knative-samples
+    spec:
+      selector:
+        app: helloworld-python
+      ports:
+      - protocol: TCP
+        port: 80
+        targetPort: 8080
     ---
     # Knative Eventing Trigger to trigger the helloworld-python service
     apiVersion: eventing.knative.dev/v1
